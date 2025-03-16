@@ -79,6 +79,12 @@ static void pp(int pre) {
     while (pre-- > 0) Rprintf(" ");
 }
 
+/** @brief Translate RObject's SEXPTYPE enum to a character string
+ * 
+ * @param v examined RObject
+ * 
+ * @return name of RObject's type
+ */
 const char *R::typeName(SEXP v) {
     if(TYPEOF(v) == OBJSXP && IS_S4_OBJECT(v))
 	return "S4SXP";

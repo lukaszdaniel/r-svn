@@ -39,6 +39,7 @@
 #include <cfloat>  /* for DBL_EPSILON */
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -48,6 +49,7 @@
 #include "RBufferUtils.h"
 
 using namespace R;
+using namespace CXXR;
 
 static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
 
@@ -658,9 +660,11 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
    rep(1:3,,8) matches length.out */
 
 /* This is a primitive SPECIALSXP with internal argument matching */
-attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args_, SEXP rho)
 {
-    SEXP ans, x, times = R_NilValue;
+    GCStackRoot<> args(args_);
+    GCStackRoot<> times(R_NilValue);
+    SEXP ans, x;
     R_xlen_t i, lx, len = NA_INTEGER, each = 1, nt;
     static SEXP do_rep_formals = NULL;
 
@@ -670,7 +674,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return ans;
 
     /* This has evaluated all the non-missing arguments into ans */
-    PROTECT(args = ans);
+    args = ans;
 
     /* This is a primitive, and we have not dispatched to a method
        so we manage the argument matching ourselves.  We pretend this is
@@ -680,7 +684,7 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
 	do_rep_formals = allocFormalsList5(install("x"), install("times"),
 					   install("length.out"),
 					   install("each"), R_DotsSymbol);
-    PROTECT(args = matchArgs_NR(do_rep_formals, args, call));
+    args = matchArgs_NR(do_rep_formals, args, call);
 
     x = CAR(args);
     /* supported in R 2.15.x */
@@ -725,11 +729,11 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(lx == 0) {
 	if(len > 0 && x == R_NilValue)
 	    warningcall(call, "%s", _("'x' is NULL so the result will be NULL"));
-	SEXP a;
-	PROTECT(a = duplicate(x));
+	GCStackRoot<> a;
+	a = duplicate(x);
 	if(len != NA_INTEGER && len > 0 && x != R_NilValue)
 	    a = xlengthgets(a, len);
-	UNPROTECT(3);
+
 	return a;
     }
     if (!isVector(x))
@@ -739,22 +743,21 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* So now we know x is a vector of positive length.  We need to
        replicate it, and its names if it has them. */
 
-    int nprotect = 2;
     /* First find the final length using 'times' and 'each' */
     if(len != NA_INTEGER) { /* takes precedence over times */
 	nt = 1;
     } else {
 	double sum = 0;
 	if(CADR(args) == R_MissingArg)
-	    PROTECT(times = ScalarInteger(1));
+	    times = ScalarInteger(1);
 #ifdef LONG_VECTOR_SUPPORT
 	else if(TYPEOF(CADR(args)) != INTSXP)
 #else
 	else if(TYPEOF(CADR(args)) == REALSXP)
 #endif
-	    PROTECT(times = coerceVector(CADR(args), REALSXP));
-	else PROTECT(times = coerceVector(CADR(args), INTSXP));
-	nprotect++;
+	    times = coerceVector(CADR(args), REALSXP);
+	else times = coerceVector(CADR(args), INTSXP);
+
 	nt = XLENGTH(times);
 	if(nt == 1) {
 	    R_xlen_t it;
@@ -797,20 +800,21 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(len > 0 && each == 0)
 	errorcall(call, _("invalid '%s' argument"), "each");
 
-    SEXP xn = PROTECT(getAttrib(x, R_NamesSymbol));  nprotect++;
-    PROTECT(ans = rep4(x, times, len, each, nt));    nprotect++;
+    GCStackRoot<> xn, res;
+    xn = getAttrib(x, R_NamesSymbol);
+    res = rep4(x, times, len, each, nt);
 
     if (xlength(xn) > 0)
-	setAttrib(ans, R_NamesSymbol, rep4(xn, times, len, each, nt));
+	setAttrib(res, R_NamesSymbol, rep4(xn, times, len, each, nt));
 
 #ifdef _S4_rep_keepClass
     if(IS_S4_OBJECT(x)) { /* e.g. contains = "list" */
-	setAttrib(ans, R_ClassSymbol, getAttrib(x, R_ClassSymbol));
-	SET_S4_OBJECT(ans);
+	setAttrib(res, R_ClassSymbol, getAttrib(x, R_ClassSymbol));
+	SET_S4_OBJECT(res);
     }
 #endif
-    UNPROTECT(nprotect);
-    return ans;
+
+    return res;
 }
 
 

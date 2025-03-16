@@ -257,11 +257,11 @@ extern "C"
      * suspended, this is set non-zero.  The interrupt is then
      * services when the period of suspension ends.
      */
-    // extern Rboolean R_interrupts_pending;
+    // extern bool R_interrupts_pending;
 
     /** @brief Are interrupts currently suspended?
      */
-    // extern Rboolean R_interrupts_suspended;
+    // extern bool R_interrupts_suspended;
 
     /** @brief Evaluate an object in a specified Environment.
      *
