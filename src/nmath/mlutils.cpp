@@ -109,9 +109,9 @@ double R_pow_di(double x, int n)
     return pow;
 }
 
-double NA_REAL = ML_NAN; // Intel icx will not compile this.
-                         // In R it is computed at runtime.
-double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
+constexpr double NA_REAL = ML_NAN; // Intel icx will not compile this.
+                                   // In R it is computed at compiletime.
+constexpr double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
 attribute_hidden void REprintf(const char *format, ...)
 {

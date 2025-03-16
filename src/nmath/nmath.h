@@ -146,9 +146,9 @@ double	Rf_gamma_cody(double);
 #endif
 int R_finite(double);
 
-#define ML_POSINF	(1.0 / 0.0)
-#define ML_NEGINF	((-1.0) / 0.0)
-#define ML_NAN		(0.0 / 0.0)
+#define ML_POSINF	(std::numeric_limits<double>::infinity())
+#define ML_NEGINF	(-ML_POSINF)
+#define ML_NAN		(std::numeric_limits<double>::quiet_NaN())
 
 #define _(String) String
 #endif /* standalone */
