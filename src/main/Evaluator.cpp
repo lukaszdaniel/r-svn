@@ -93,6 +93,33 @@ namespace CXXR
     {
         R_interrupts_pending = on;
     }
+
+    bool Evaluator::isSelfEvaluated(SEXP e)
+    {
+        switch (TYPEOF(e))
+        {
+        case NILSXP:
+        case LISTSXP:
+        case LGLSXP:
+        case INTSXP:
+        case REALSXP:
+        case STRSXP:
+        case CPLXSXP:
+        case RAWSXP:
+        case OBJSXP:
+        case SPECIALSXP:
+        case BUILTINSXP:
+        case ENVSXP:
+        case CLOSXP:
+        case VECSXP:
+        case EXTPTRSXP:
+        case WEAKREFSXP:
+        case EXPRSXP:
+            return true;
+        default:
+            return false;
+        }
+    }
 } // namespace CXXR
 
 namespace R
