@@ -1418,12 +1418,12 @@ toolchains, makefiles of @R{} and packages may need to be adapted.
 
 The binary distribution of @R{} is currently built with tools
 from
-@uref{https://CRAN.R-project.org/bin/windows/Rtools/rtools44/rtools.html,Rtools44
+@uref{https://CRAN.R-project.org/bin/windows/Rtools/rtools45/rtools.html,Rtools45
 for Windows}. See 
 @uref{https://CRAN.R-project.org/bin/windows/base/howto-@value{RWTVERSION}.html,
 Building @value{RWTVERSION} and packages on Windows} for more details on how to use it.
 
-The toolset includes compilers (currently GCC version 13.2.0 with
+The toolset includes compilers (currently GCC version 14.2.0 with
 selected additional patches) and runtime libraries from
 @uref{http://mingw-w64.org/,the `@I{MinGW-w64}' project} and a number of
 pre-compiled static libraries and headers used by @R{} and @R{}
@@ -1433,8 +1433,8 @@ includes build tools from the @uref{https://www.msys2.org/, the 'MSYS2'
 project}.  Additional build tools packaged by 'MSYS2' may be installed
 via a package manager (@samp{pacman}).
 
-There is also an experimental variant of @I{Rtools44} with support for
-64-bit ARM CPUs (@I{aarch64}) via @I{LLVM} 17 toolchain using
+There is also an experimental variant of @I{Rtools45} with support for
+64-bit ARM CPUs (@I{aarch64}) via @I{LLVM} 19 toolchain using
 @command{clang}/@command{flang} compilers, @command{lld} linker, and
 @I{libc++}.
 
@@ -4999,7 +4999,7 @@ Standalone installers (which are free-of-charge) are available from
 @uref{https://www.intel.com/content/www/us/en/developer/articles/tool/oneapi-standalone-components.html}:
 they are also part of the @I{oneAPI} Base and HPC (for Fortran) toolkits.
 
-We tried the compilers in @I{oneAPI} 2025.0.2, 2024.2.1 and 2023.x.y
+We tried the compilers in @I{oneAPI} 2025.0.4, 2024.2.1 and 2023.x.y
 using (the paths do differ by compiler version)
 @example
 IP=/path/to/compilers/bin/
@@ -5051,9 +5051,9 @@ version of @command{clang}: the Intel manual suggests checking
 @abbr{LTO}: it is not clear if the Fortran one does.
 
 @c https://community.intel.com/t5/Intel-C-Compiler/Troubles-with-getrusage-when-using-icx/m-p/1509374#M41116
-For some earlier versions (including 2023.2.0) all CPU times in e.g.@:
-@code{proc.time()} are reported as zero.  If you see this, uncomment the
-@samp{INTEL_ICX_FIX} setting in @file{config.site} and re-build.
+@c For some earlier versions (including 2023.2.0) all CPU times in e.g.@:
+@c @code{proc.time()} are reported as zero.  If you see this, uncomment the
+@c @samp{INTEL_ICX_FIX} setting in @file{config.site} and re-build.
 
 @c https://www.intel.com/content/www/us/en/docs/fortran-compiler/developer-guide-reference/2023-2/stand.html
 The preferred Fortran standard for @command{ifx} can be set by one of

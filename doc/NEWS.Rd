@@ -236,6 +236,10 @@
 
       \item New datasets \code{penguins} and \code{penguins_raw} thanks to
       \I{Ella Kaye}, \I{Heather Turner}, and \I{Kristen Gorman}.
+
+      \item \code{isSymmetric(<matrix>)} gains a new option \code{trans = "C"};
+      when set to non-default, it tests for \dQuote{simple} symmetry of
+      complex matrices.
     }
   }
 
@@ -243,7 +247,7 @@
     \itemize{
       \item The bundled BLAS and LAPACK sources have been updated to
       those shipped as part of January 2025's LAPACK 3.12.1.
-      
+
       \item It is intended that this will be the last update to BLAS and
       LAPACK in the \R sources.  Those building \R from source are
       encouraged to use external BLAS and LAPACK and this will be required in
@@ -270,7 +274,7 @@
       \item Windows builds currently use the internal LAPACK and by
       default the internal BLAS: notes on how to swap the latter
       \emph{via} \file{Rblas.dll} are in file
-      \file{src/extra/blas/Makefile.win}. 
+      \file{src/extra/blas/Makefile.win}.
     }
   }
 
@@ -322,6 +326,18 @@
     \itemize{
       \item Both building \R and installing packages use the C compiler
       in C23 mode.
+
+      \item R on Windows by default uses pkg-config for linking against
+      external libraries.  This makes it easier to test R and packages with
+      alternative toolchains (such as from Msys2, e.g.  testing with LLVM
+      and possibly with sanitizers). It also allows more significant Rtools
+      updates within a single R minor release.
+
+      \item The installer scripts for Windows have been tailored to
+      \I{Rtools45}, an update of the \I{Rtools44} toolchain.  It is based on
+      GCC 14.  The experimental support for 64-bit ARM (aarch64) CPUs is
+      based on LLVM 19.  R-devel is no longer maintained to be buildable
+      using \I{Rtools44} and it is advised to switch to Rtools45.
     }
   }
 
@@ -453,7 +469,7 @@
       attribute when used from C++ under all compilers.
 
       \item Header \file{R_exts/Utils.h} no longer contains a
-      declaration for \code{77_SUB(interv)}.  This is intended to be
+      declaration for \code{F77_SUB(interv)}.  This is intended to be
       called from Fortran and was wrongly declared: \code{LOGICAL} in
       Fortran corresponds to \code{int *} not \code{Rboolean *}.
     }
