@@ -240,6 +240,10 @@
       \item \code{isSymmetric(<matrix>)} gains a new option \code{trans = "C"};
       when set to non-default, it tests for \dQuote{simple} symmetry of
       complex matrices.
+
+      \item \code{model.frame()} produces more informative error messages
+      in some cases when variables in the formula are not found, thanks to
+      \I{Ben Bolker}'s \PR{18860}.
     }
   }
 
@@ -329,15 +333,15 @@
 
       \item R on Windows by default uses pkg-config for linking against
       external libraries.  This makes it easier to test R and packages with
-      alternative toolchains (such as from Msys2, e.g.  testing with LLVM
-      and possibly with sanitizers). It also allows more significant Rtools
+      alternative toolchains (such as from \I{Msys2}, e.g., testing with \I{LLVM}
+      and possibly with sanitizers). It also allows more significant \I{Rtools}
       updates within a single R minor release.
 
       \item The installer scripts for Windows have been tailored to
       \I{Rtools45}, an update of the \I{Rtools44} toolchain.  It is based on
-      GCC 14.  The experimental support for 64-bit ARM (aarch64) CPUs is
-      based on LLVM 19.  R-devel is no longer maintained to be buildable
-      using \I{Rtools44} and it is advised to switch to Rtools45.
+      GCC 14.  The experimental support for 64-bit ARM (\code{aarch64}) CPUs is
+      based on \I{LLVM} 19.  R-devel is no longer maintained to be \I{buildable}
+      using \I{Rtools44} and it is advised to switch to \I{Rtools45}.
     }
   }
 
@@ -777,6 +781,10 @@
 
       \item \code{trace(coerce, ..)} now works correctly, fixing \PR{18823}
       thanks to \I{Mikael Jagan}.
+      
+      \item \command{R CMD check} now also reports bad symbols in
+      package shared objects linked in from local static libraries
+      (\PR{18789}).
     }
   }
 }

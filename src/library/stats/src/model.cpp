@@ -81,7 +81,7 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP terms, data, names, variables, varnames, dots, dotnames, na_action;
     SEXP ans, row_names, subset, tmp;
     char buf[256];
-    int i, j, nr, nc;
+    int nr, nc;
     int nvars, ndots, nactualdots;
     CXXR::RAllocStack::Scope rscope;
 
@@ -114,7 +114,7 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
     /*  check for NULL extra arguments -- moved from interpreted code */
 
     nactualdots = 0;
-    for (i = 0; i < ndots; i++)
+    for (int i = 0; i < ndots; i++)
 	if (VECTOR_ELT(dots, i) != R_NilValue) nactualdots++;
 
     /* Assemble the base data frame. */
@@ -122,11 +122,11 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
     PROTECT(data = allocVector(VECSXP, nvars + nactualdots));
     PROTECT(names = allocVector(STRSXP, nvars + nactualdots));
 
-    for (i = 0; i < nvars; i++) {
+    for (int i = 0; i < nvars; i++) {
 	SET_VECTOR_ELT(data, i, VECTOR_ELT(variables, i));
 	SET_STRING_ELT(names, i, STRING_ELT(varnames, i));
     }
-    for (i = 0,j = 0; i < ndots; i++) {
+    for (int i = 0,j = 0; i < ndots; i++) {
 	const char *ss;
 	if (VECTOR_ELT(dots, i) == R_NilValue) continue;
 	ss = translateChar(STRING_ELT(dotnames, i));
@@ -145,8 +145,7 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
     nc = length(data);
     nr = 0;			/* -Wall */
     if (nc > 0) {
-	nr = nrows(VECTOR_ELT(data, 0));
-	for (i = 0; i < nc; i++) {
+	for (int i = 0; i < nc; i++) {
 	    ans = VECTOR_ELT(data, i);
 	    switch(TYPEOF(ans)) {
 	    case LGLSXP:
@@ -161,6 +160,7 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 		      R_typeToChar(ans),
 		      translateChar(STRING_ELT(names, i)));
 	    }
+	    nr = nrows(VECTOR_ELT(data, 0));
 	    if (nrows(ans) != nr)
 		error(_("variable lengths differ (found for '%s')"),
 		      translateChar(STRING_ELT(names, i)));
@@ -224,7 +224,7 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   by subsetting in na.action. */
 	/* But if data is unchanged, don't mess with it (PR#16436) */
 
-	for ( i = length(ans) ; i-- ; )
+	for (int i = length(ans) ; i-- ; )
 	    if (VECTOR_ELT(data, i) != VECTOR_ELT(ans, i)) {
 		if (MAYBE_REFERENCED(VECTOR_ELT(ans, i)))
 		    SET_VECTOR_ELT(ans, i,
