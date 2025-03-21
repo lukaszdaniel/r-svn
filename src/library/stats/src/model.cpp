@@ -27,6 +27,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
 
@@ -78,8 +79,9 @@ static R_INLINE bool isOrdered_int(SEXP s)
 
 SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP terms, data, names, variables, varnames, dots, dotnames, na_action;
-    SEXP ans, row_names, subset, tmp;
+    SEXP terms, variables, varnames, dots, dotnames;
+    GCStackRoot<> data, names, na_action;
+    GCStackRoot<> ans, row_names, subset, tmp;
     char buf[256];
     int nr, nc;
     int nvars, ndots, nactualdots;
@@ -119,8 +121,8 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* Assemble the base data frame. */
 
-    PROTECT(data = allocVector(VECSXP, nvars + nactualdots));
-    PROTECT(names = allocVector(STRSXP, nvars + nactualdots));
+    data = allocVector(VECSXP, nvars + nactualdots);
+    names = allocVector(STRSXP, nvars + nactualdots);
 
     for (int i = 0; i < nvars; i++) {
 	SET_VECTOR_ELT(data, i, VECTOR_ELT(variables, i));
@@ -137,7 +139,6 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 	j++;
     }
     setAttrib(data, R_NamesSymbol, names);
-    UNPROTECT(2);
 
     /* Sanity checks to ensure that the the answer can become */
     /* a data frame.  Be deeply suspicious here! */
@@ -167,41 +168,34 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     } else nr = length(row_names);
 
-    PROTECT(data);
-    PROTECT(subset);
 
     /* Turn the data "list" into a "data.frame" */
     /* so that subsetting methods will work. */
     /* To do this we must attach "class"  and */
     /* "row.names" attributes */
 
-    PROTECT(tmp = mkString("data.frame"));
+    tmp = mkString("data.frame");
     setAttrib(data, R_ClassSymbol, tmp);
-    UNPROTECT(1);
     if (length(row_names) == nr) {
 	setAttrib(data, R_RowNamesSymbol, row_names);
     } else {
 	/*
 	PROTECT(row_names = allocVector(INTSXP, nr));
 	for (i = 0; i < nr; i++) INTEGER(row_names)[i] = i+1; */
-	PROTECT(row_names = allocVector(INTSXP, 2));
+	row_names = allocVector(INTSXP, 2);
 	INTEGER(row_names)[0] = NA_INTEGER;
 	INTEGER(row_names)[1] = nr;
 	setAttrib(data, R_RowNamesSymbol, row_names);
-	UNPROTECT(1);
     }
 
     /* Do the subsetting, if required. */
     /* Need to save and restore 'most' attributes */
 
     if (subset != R_NilValue) {
-	PROTECT(tmp=install("[.data.frame"));
-	PROTECT(tmp=LCONS(tmp,list4(data,subset,R_MissingArg,mkFalse())));
+	tmp = install("[.data.frame");
+	tmp = LCONS(tmp,list4(data,subset,R_MissingArg,mkFalse()));
 	data = eval(tmp, rho);
-	UNPROTECT(2);
     }
-    UNPROTECT(2);
-    PROTECT(data);
 
     /* finally, we run na.action on the data frame */
     /* usually, this will be na.omit */
@@ -212,12 +206,10 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 	setAttrib(data, install("terms"), terms);
 	if (isString(na_action) && length(na_action) > 0)
 	    na_action = installTrChar(STRING_ELT(na_action, 0));
-	PROTECT(na_action);
-	PROTECT(tmp = lang2(na_action, data));
+	tmp = lang2(na_action, data);
 	ans = eval(tmp, rho);
 	if (MAYBE_REFERENCED(ans))
 	    ans = shallow_duplicate(ans);
-	PROTECT(ans);
 	if (!isNewList(ans) || length(ans) != length(data))
 	    error("%s", _("invalid result from na.action"));
 	/* need to transfer _all but tsp and dim_ attributes, possibly lost
@@ -232,16 +224,13 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 		copyMostAttribNoTs(VECTOR_ELT(data, i),VECTOR_ELT(ans, i));
 	    }
 
-	UNPROTECT(3);
     }
     else ans = data;
-    UNPROTECT(1);
-    PROTECT(ans);
 
     /* Finally, tack on a terms attribute
        Now done at R level.
        setAttrib(ans, install("terms"), terms); */
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -1171,12 +1160,12 @@ static void ExtractVars(SEXP formula)
 		error("%s", _("invalid model formula")); // more than one '~'
 	    if (isNull(CDDR(formula))) {
 		Prt_xtrVars("isLanguage, tilde, *not* response");
-		response = 0;
+		response = false;
 		ExtractVars(CADR(formula));
 	    }
 	    else {
 		Prt_xtrVars("isLanguage, tilde, *response*");
-		response = 1;
+		response = true;
 		InstallVar(CADR(formula));
 		ExtractVars(CADDR(formula));
 	    }
@@ -1381,7 +1370,7 @@ static SEXP StripTerm(SEXP term, SEXP list)
 {
     SEXP root = R_NilValue, prev = R_NilValue;
     if (TermZero(term))
-	intercept = 0;
+	intercept = false;
     while (list != R_NilValue) {
 	if (TermEqual(term, CAR(list))) {
 	    if (prev != R_NilValue)
@@ -1582,8 +1571,8 @@ static SEXP NestTerms(SEXP left, SEXP right)
 
 static SEXP DeleteTerms(SEXP left, SEXP right)
 {
-    PROTECT(left  = EncodeVars(left));	parity = 1-parity;
-    PROTECT(right = EncodeVars(right)); parity = 1-parity;
+    PROTECT(left  = EncodeVars(left));	parity = !parity;
+    PROTECT(right = EncodeVars(right)); parity = !parity;
     for (SEXP t = right; t != R_NilValue; t = CDR(t))
 	left = StripTerm(CAR(t), left);
     UNPROTECT(2);
@@ -1600,10 +1589,10 @@ static SEXP EncodeVars(SEXP formula)
 {
     if (isNull(formula))		return R_NilValue;
     else if (isOne(formula)) {
-	intercept = (parity) ? 1 : 0;	return R_NilValue;
+	intercept = (parity);	return R_NilValue;
     }
     else if (isZero(formula)) {
-	intercept = (parity) ? 0 : 1;	return R_NilValue;
+	intercept = (!parity);	return R_NilValue;
     }
     // else :
     SEXP term;
@@ -1709,10 +1698,10 @@ static int TermCode(SEXP termlist, SEXP thisterm, int whichbit, SEXP term)
     /* Search preceding terms for a match */
     /* Zero is a possibility - it is a special case */
 
-    int allzero = 1;
+    bool allzero = true;
     for (int i = 0; i < nwords; i++) {
 	if (term_[i]) {
-	    allzero = 0;
+	    allzero = false;
 	    break;
 	}
     }
@@ -1720,11 +1709,11 @@ static int TermCode(SEXP termlist, SEXP thisterm, int whichbit, SEXP term)
 	return 1;
 
     for (SEXP t = termlist; t != thisterm; t = CDR(t)) {
-	allzero = 1;
+	allzero = true;
 	int *ct = INTEGER(CAR(t));
 	for (int i = 0; i < nwords; i++)
 	    if (term_[i] & ~ct[i]) {
-		allzero = 0; break;
+		allzero = false; break;
 	    }
 	if (allzero)
 	    return 1;
@@ -1806,9 +1795,9 @@ SEXP termsform(SEXP args)
      * You can evaluate it to get the model variables or use substitute
      * and then pull the result apart to get the variable names. */
 
-    intercept = 1;
-    parity = 1;
-    response = 0;
+    intercept = true;
+    parity = true;
+    response = false;
     PROTECT(varlist = LCONS(install("list"), R_NilValue));
 #ifdef DEBUG_terms
     n_xVars = 0; // the nesting level of ExtractVars()
@@ -2119,7 +2108,7 @@ SEXP termsform(SEXP args)
 
     if (haveDot) {
 	if(length(framenames)) {
-	    GCRoot<> rhs;
+	    GCStackRoot<> rhs;
 	    rhs = installTrChar(STRING_ELT(framenames, 0));
 	    for (R_xlen_t i = 1; i < LENGTH(framenames); i++) {
 		rhs = lang3(plusSymbol, rhs,
