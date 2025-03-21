@@ -2307,10 +2307,7 @@ attribute_hidden void R::InitMemory(void)
 */
 
 #define R_BCNODESTACKSIZE 300000
-    R_BCNodeStackBase =
-	(R_bcstack_t *) malloc(R_BCNODESTACKSIZE * sizeof(R_bcstack_t));
-    if (R_BCNodeStackBase == NULL)
-	R_Suicide(_("couldn't allocate node stack"));
+    CXXR::NodeStack::s_R_BCNodeStackBase = std::make_unique<R_bcstack_t[]>(R_BCNODESTACKSIZE);
     R_BCNodeStackTop = R_BCNodeStackBase;
     R_BCNodeStackEnd = R_BCNodeStackBase + R_BCNODESTACKSIZE;
     R_BCProtTop = R_BCNodeStackTop;

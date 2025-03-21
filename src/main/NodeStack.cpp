@@ -31,7 +31,7 @@
 
 namespace CXXR
 {
-    R_bcstack_t *NodeStack::s_R_BCNodeStackBase = nullptr;
+    std::unique_ptr<NodeStack::node_t[]> NodeStack::s_R_BCNodeStackBase;
     R_bcstack_t *NodeStack::s_R_BCProtTop = nullptr;
     R_bcstack_t *NodeStack::s_R_BCNodeStackTop = nullptr;
     R_bcstack_t *NodeStack::s_R_BCNodeStackEnd = nullptr;

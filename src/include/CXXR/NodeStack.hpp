@@ -30,6 +30,7 @@
 #ifndef NODESTACK_HPP
 #define NODESTACK_HPP
 
+#include <memory>
 #include <CXXR/RTypes.hpp>
 
 namespace CXXR
@@ -91,12 +92,12 @@ namespace CXXR
             }
         };
 
-        static node_t *s_R_BCNodeStackBase;
+        static std::unique_ptr<node_t[]> s_R_BCNodeStackBase;
         static node_t *s_R_BCProtTop;
         static node_t *s_R_BCNodeStackTop;
         static node_t *s_R_BCNodeStackEnd;
         static node_t *s_R_BCProtCommitted;
-#define R_BCNodeStackBase CXXR::NodeStack::s_R_BCNodeStackBase
+#define R_BCNodeStackBase CXXR::NodeStack::s_R_BCNodeStackBase.get()
 #define R_BCProtTop CXXR::NodeStack::s_R_BCProtTop
 #define R_BCNodeStackTop CXXR::NodeStack::s_R_BCNodeStackTop
 #define R_BCNodeStackEnd CXXR::NodeStack::s_R_BCNodeStackEnd
