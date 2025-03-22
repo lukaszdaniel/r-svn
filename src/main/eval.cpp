@@ -5657,7 +5657,7 @@ static struct { void *addr; int argc; const char *instname; } opinfo[OPCOUNT];
 	}					\
     } while (0)
 
-#define NEXT() (__extension__ ({currentpc = pc; goto *(*pc++).v;}))
+#define NEXT() (__extension__ ({R_BCpc = currentpc = pc; goto *(*pc++).v;}))
 #define GETOP() (*pc++).i
 #define SKIP_OP() (pc++)
 
@@ -5668,9 +5668,9 @@ typedef int BCODE;
 #define OP(name,argc) case name##_OP
 
 #ifdef BC_PROFILING
-#define BEGIN_MACHINE  loop: currentpc = pc; s_current_opcode = *pc; switch(*pc++)
+#define BEGIN_MACHINE  loop: R_BCpc = currentpc = pc; s_current_opcode = *pc; switch(*pc++)
 #else
-#define BEGIN_MACHINE  loop: currentpc = pc; switch(*pc++)
+#define BEGIN_MACHINE  loop: R_BCpc = currentpc = pc; switch(*pc++)
 #endif
 #define LASTOP  default: error("%s", _("bad opcode"))
 #define INITIALIZE_MACHINE()
@@ -7062,16 +7062,16 @@ static SEXP getLocTableElt(ptrdiff_t relpc, SEXP table, SEXP constants)
 ptrdiff_t ByteCode::codeDistane(SEXP body, void *bcpc)
 {
     BCODE *codebase = BCCODE(body);
-    BCODE *target = (*static_cast<BCODE **>(bcpc));
+    BCODE *target = static_cast<BCODE *>(bcpc);
     return std::distance(codebase, target);
 }
 
-attribute_hidden ptrdiff_t R::R_BCRelPC(SEXP body, void *currentpc)
+attribute_hidden ptrdiff_t R::R_BCRelPC(SEXP body, void *current_pc)
 {
     /* used to capture the pc offset from its codebase at the time a
        context is created */
-    if (body && currentpc)
-	return ByteCode::codeDistane(body, currentpc);
+    if (body && current_pc)
+	return ByteCode::codeDistane(body, current_pc);
     else
 	return -1;
 }
@@ -7515,7 +7515,6 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 
   currentpc = NULL;
   oldbcpc = R_BCpc;
-  R_BCpc = &currentpc;
 
   static int s_evalcount = 0;
   BC_CHECK_SIGINT();
