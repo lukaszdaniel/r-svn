@@ -31,6 +31,7 @@
 #define NODESTACK_HPP
 
 #include <memory>
+#include <iterator> // for std::distance
 #include <CXXR/RTypes.hpp>
 
 namespace CXXR
@@ -92,16 +93,38 @@ namespace CXXR
             }
         };
 
-        static std::unique_ptr<node_t[]> s_R_BCNodeStackBase;
-        static node_t *s_R_BCProtTop;
-        static node_t *s_R_BCNodeStackTop;
-        static node_t *s_R_BCNodeStackEnd;
-        static node_t *s_R_BCProtCommitted;
-#define R_BCNodeStackBase CXXR::NodeStack::s_R_BCNodeStackBase.get()
-#define R_BCProtTop CXXR::NodeStack::s_R_BCProtTop
-#define R_BCNodeStackTop CXXR::NodeStack::s_R_BCNodeStackTop
-#define R_BCNodeStackEnd CXXR::NodeStack::s_R_BCNodeStackEnd
-#define R_BCProtCommitted CXXR::NodeStack::s_R_BCProtCommitted
+        /** @brief Constructor.
+         *
+         * @param initial_capacity The initial capacity of the
+         *          NodeStack to be created.  The capacity will be
+         *          increased as necessary, so the value of this
+         *          parameter is not critical.
+         */
+        NodeStack(size_t initial_capacity);
+
+        ~NodeStack()
+        {
+        }
+
+        /** @brief Current size of NodeStack.
+         *
+         * @return the number of pointers currently on the NodeStack.
+         */
+        size_t size() const
+        {
+            return std::distance(m_R_BCNodeStackBase.get(), m_R_BCNodeStackTop);
+        }
+
+        std::unique_ptr<node_t[]> m_R_BCNodeStackBase;
+        node_t *m_R_BCProtTop;
+        node_t *m_R_BCNodeStackTop;
+        node_t *m_R_BCNodeStackEnd;
+        node_t *m_R_BCProtCommitted;
+#define R_BCNodeStackBase ByteCode::s_nodestack->m_R_BCNodeStackBase.get()
+#define R_BCProtTop ByteCode::s_nodestack->m_R_BCProtTop
+#define R_BCNodeStackTop ByteCode::s_nodestack->m_R_BCNodeStackTop
+#define R_BCNodeStackEnd ByteCode::s_nodestack->m_R_BCNodeStackEnd
+#define R_BCProtCommitted ByteCode::s_nodestack->m_R_BCProtCommitted
     };
 
     using R_bcstack_t = NodeStack::node_t;

@@ -31,9 +31,11 @@
 
 namespace CXXR
 {
-    std::unique_ptr<NodeStack::node_t[]> NodeStack::s_R_BCNodeStackBase;
-    R_bcstack_t *NodeStack::s_R_BCProtTop = nullptr;
-    R_bcstack_t *NodeStack::s_R_BCNodeStackTop = nullptr;
-    R_bcstack_t *NodeStack::s_R_BCNodeStackEnd = nullptr;
-    R_bcstack_t *NodeStack::s_R_BCProtCommitted = nullptr;
+    NodeStack::NodeStack(size_t initial_capacity)
+    {
+        CXXR::NodeStack::m_R_BCNodeStackBase = std::make_unique<R_bcstack_t[]>(initial_capacity);
+        m_R_BCNodeStackTop = m_R_BCNodeStackBase.get();
+        m_R_BCNodeStackEnd = m_R_BCNodeStackBase.get() + initial_capacity;
+        m_R_BCProtTop = m_R_BCNodeStackTop;
+    }
 }

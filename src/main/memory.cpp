@@ -2306,11 +2306,7 @@ attribute_hidden void R::InitMemory(void)
 #endif
 */
 
-#define R_BCNODESTACKSIZE 300000
-    CXXR::NodeStack::s_R_BCNodeStackBase = std::make_unique<R_bcstack_t[]>(R_BCNODESTACKSIZE);
-    R_BCNodeStackTop = R_BCNodeStackBase;
-    R_BCNodeStackEnd = R_BCNodeStackBase + R_BCNODESTACKSIZE;
-    R_BCProtTop = R_BCNodeStackTop;
+    ByteCode::initialize();
 
     s_R_weak_refs.clear();
 

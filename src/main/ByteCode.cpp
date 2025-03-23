@@ -27,6 +27,7 @@
  * @brief Class CXXR::ByteCode.
  */
 
+#include <stdexcept>
 #include <CXXR/ByteCode.hpp>
 
 namespace CXXR
@@ -36,6 +37,17 @@ namespace CXXR
     R_bcFrame_type *ByteCode::s_BCFrame = nullptr;
     bool ByteCode::s_BCIntActive = false;
     bool ByteCode::s_bytecode_disabled = false; // R_disable_bytecode
+    std::unique_ptr<NodeStack> ByteCode::s_nodestack;
+
+    void ByteCode::initialize()
+    {
+        if (s_nodestack)
+        {
+            throw std::runtime_error("ByteCode nodestack is already initialized.");
+        }
+
+        s_nodestack = std::make_unique<NodeStack>(300000);
+    }
 
     void ByteCode::initInterpreter()
     {

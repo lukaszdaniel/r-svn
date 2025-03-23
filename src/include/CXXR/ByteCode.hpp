@@ -35,8 +35,10 @@
 # define THREADED_CODE
 #endif
 
-#include <CXXR/RObject.hpp>
+#include <memory>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/RObject.hpp>
+#include <CXXR/NodeStack.hpp>
 
 namespace CXXR
 {
@@ -103,6 +105,17 @@ namespace CXXR
         }
 
         static ptrdiff_t codeDistane(SEXP body, void *bcpc);
+
+        static size_t nodeStackSize()
+        {
+            return s_nodestack->size();
+        }
+
+        // Initialize static data (called by InitMemory()):
+        static void initialize();
+
+
+        static std::unique_ptr<NodeStack> s_nodestack;
 
         static void *s_BCpc; /* current byte code instruction */
 #define R_BCpc CXXR::ByteCode::s_BCpc
