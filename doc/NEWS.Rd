@@ -35,6 +35,27 @@
       \item .
     }
   }
+
+  \subsection{UTILITIES}{
+    \itemize{
+      % this will not be ported to R 4.5.0.
+      \item \command{R CMD check} now reports further \command{clang} warnings
+      including \code{-Wkeyword-macro}.  This is most commonly seen for
+      the C23 keywords \code{bool}, \code{true} and \code{false}, but is
+      also seen for \code{nullptr} (C23 and C++11). Masking these by
+      macros \emph{may} generate correct code (but not always) and always
+      results in confusing-to-read code.
+    }
+  }
+  
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item Setting \code{\link{attributes}} on primitive functions is an
+      error now; previously, it modified without copying, as noticed by
+      \I{Henrik Bengtsson} on the R-devel mailing list.
+    }
+  }
+
 }
 \section{\Rlogo CHANGES IN R 4.5.0}{
   %% \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
@@ -244,6 +265,10 @@
       \item \code{model.frame()} produces more informative error messages
       in some cases when variables in the formula are not found, thanks to
       \I{Ben Bolker}'s \PR{18860}.
+
+      \item \code{selectMethod(f, ..)} now keeps the function name if the
+      function belongs to a group generic and the method is for the
+      generic.
     }
   }
 
@@ -781,7 +806,7 @@
 
       \item \code{trace(coerce, ..)} now works correctly, fixing \PR{18823}
       thanks to \I{Mikael Jagan}.
-      
+
       \item \command{R CMD check} now also reports bad symbols in
       package shared objects linked in from local static libraries
       (\PR{18789}).

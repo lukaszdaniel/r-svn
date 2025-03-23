@@ -1093,14 +1093,13 @@ static SEXP as_char_simpl(SEXP val1)
 
     if (inherits(val1, "factor"))  /* mimic as.character.factor */
 	return asCharacterFactor(val1);
-
-    if (!isString(val1)) { /* mimic as.character.default */
-	GCStackRoot<> this2;
-	this2 = coerceVector(val1, STRSXP);
-	this2->clearAttributes();
-	return this2;
-    }
-    return val1;
+    if (isString(val1))
+	return val1;
+    // else  mimic as.character.default :
+    GCStackRoot<> this2;
+    this2 = coerceVector(val1, STRSXP);
+    this2->clearAttributes();
+    return this2;
 }
 
 
@@ -1362,6 +1361,8 @@ attribute_hidden SEXP do_attributesgets(SEXP call, SEXP op, SEXP args, SEXP env)
     /* Do checks before duplication */
     if (!isNewList(attrs))
 	error("%s", _("attributes must be a list or NULL"));
+    if (isPrimitive(object))
+	error("%s", _("Cannot modify attributes on primitive functions"));
     int i, nattrs = length(attrs);
     if (nattrs > 0) {
 	names = getAttrib(attrs, R_NamesSymbol);
