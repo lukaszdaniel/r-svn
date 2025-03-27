@@ -30,6 +30,7 @@
 
 #ifndef R_EXT_BOOLEAN_H_
 #define R_EXT_BOOLEAN_H_
+#if !defined(R_INCLUDE_BOOLEAN_H) || R_INCLUDE_BOOLEAN_H
 
 // NB: there is a version of this in Rmath.h0[.in]
 
@@ -77,6 +78,15 @@ extern "C" {
 #ifdef  __cplusplus
 } //extern "C"
 #endif
+
+#else
+/* The Rbolean type is used in too many R headers to condition them
+ * all.  However, people defining R_INCLUDE_BOOLEAN_H=0 should not be
+ * using it in their own code, and its base type is expected to be int
+ * (and guaranteed to be on most platforms as from R 4.5.0). */
+
+    typedef Rboolean int;
+#endif /* R_INCLUDE_BOOLEAN_H = 0 */
 
 #define false_ 0
 #define true_ 1

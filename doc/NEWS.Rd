@@ -14,7 +14,7 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
-      \item .
+      \item \code{str()} now shows more via \code{format()} for external pointers.
     }
   }
 
@@ -45,9 +45,10 @@
       also seen for \code{nullptr} (C23 and C++11). Masking these by
       macros \emph{may} generate correct code (but not always) and always
       results in confusing-to-read code.
+      %% Someone defined 'true' as -1, for example.
     }
   }
-  
+
   \subsection{BUG FIXES}{
     \itemize{
       \item Setting \code{\link{attributes}} on primitive functions is an
@@ -504,6 +505,17 @@
       declaration for \code{F77_SUB(interv)}.  This is intended to be
       called from Fortran and was wrongly declared: \code{LOGICAL} in
       Fortran corresponds to \code{int *} not \code{Rboolean *}.
+
+      \item Defining \code{R_INCLUDE_BOOLEAN_H} to \code{0} before
+      including headers \file{R.h} or \file{Rinternals.h} (or any other
+      header which includes \file{R_ext/Boolean.h}) stops the inclusion
+      of header \code{R_ext/Boolean.h} which `defines' constants
+      \code{TRUE}, \code{FALSE}, \code{true}, \code{false} and the type
+      \code{bool} which some package maintainers wish to avoid.
+
+      Note that the last three are keywords in C23 and C++11 so cannot be
+      avoided entirely.  However, with commonly-used compilers they can be
+      masked by a macro of the same name, often with a warning.
     }
   }
 
@@ -810,6 +822,10 @@
       \item \command{R CMD check} now also reports bad symbols in
       package shared objects linked in from local static libraries
       (\PR{18789}).
+
+      \item \code{factanal()} now works correctly also, e.g., for
+      \pkg{GPArotation}, \code{oblimin()} rotations, fixing \PR{18417},
+      thanks to \I{Coen Bernaards} and others.
     }
   }
 }

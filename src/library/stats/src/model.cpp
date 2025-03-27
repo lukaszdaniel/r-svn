@@ -976,10 +976,10 @@ static int n_xVars; // nesting level: use for indentation
 //  Global "State" Variables for terms() computation :
 //  -------------------------------------------------
 
-static bool // 0/1 (Boolean) :
-    intercept,		//  1: have intercept term in the model
-    parity,		//  +/- parity
-    response;		//  1: response term in the model
+static bool
+    intercept,		//  have intercept term in the model
+    parity,		//  true if "positive parity"
+    response;		//  response term in the model
 static int nwords;		/* # of words (ints) to code a term */
 static SEXP varlist;		/* variables in the model */
 static GCRoot<> framenames;		/* variables names for specified frame */
@@ -1587,12 +1587,12 @@ static SEXP DeleteTerms(SEXP left, SEXP right)
  */
 static SEXP EncodeVars(SEXP formula)
 {
-    if (isNull(formula))		return R_NilValue;
+    if (isNull(formula))	return R_NilValue;
     else if (isOne(formula)) {
-	intercept = (parity);	return R_NilValue;
+	intercept = parity;	return R_NilValue;
     }
     else if (isZero(formula)) {
-	intercept = (!parity);	return R_NilValue;
+	intercept = !parity;	return R_NilValue;
     }
     // else :
     SEXP term;
@@ -1701,8 +1701,7 @@ static int TermCode(SEXP termlist, SEXP thisterm, int whichbit, SEXP term)
     bool allzero = true;
     for (int i = 0; i < nwords; i++) {
 	if (term_[i]) {
-	    allzero = false;
-	    break;
+	    allzero = false; break;
 	}
     }
     if (allzero)
@@ -1866,7 +1865,7 @@ SEXP termsform(SEXP args)
 
     /* first see if any of the variables are offsets */
     R_xlen_t k = 0;
-    for (R_xlen_t l = response; l < nvar; l++)
+    for (R_xlen_t l = (R_xlen_t)response; l < nvar; l++)
 	if (streqln(CHAR(STRING_ELT(varnames, l)), "offset(", 7)) k++;
     if (k > 0) {
 #ifdef DEBUG_terms
@@ -1875,6 +1874,7 @@ SEXP termsform(SEXP args)
 	bool foundOne = false; /* has there been a non-offset term? */
 	/* allocate the "offsets" attribute */
 	SETCAR(a, v = allocVector(INTSXP, k));
+	// FIXME: using R_xlen_t above but int here, as we assign to INTEGER(v)
 	for (int l = response, k = 0; l < nvar; l++)
 	    if (streqln(CHAR(STRING_ELT(varnames, l)), "offset(", 7))
 		INTEGER(v)[k++] = l + 1;
@@ -2134,11 +2134,11 @@ SEXP termsform(SEXP args)
     SET_TAG(a, install("order"));
     a = CDR(a);
 
-    SETCAR(a, ScalarInteger(intercept != 0));
+    SETCAR(a, ScalarInteger((int)intercept));
     SET_TAG(a, install("intercept"));
     a = CDR(a);
 
-    SETCAR(a, ScalarInteger(response != 0));
+    SETCAR(a, ScalarInteger((int)response));
     SET_TAG(a, install("response"));
     a = CDR(a);
 
