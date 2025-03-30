@@ -287,6 +287,7 @@ attribute_hidden SEXP do_bodyCode(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else return R_NilValue;
 }
 
+// environment(fun)
 attribute_hidden SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
@@ -297,16 +298,15 @@ attribute_hidden SEXP do_envir(SEXP call, SEXP op, SEXP args, SEXP rho)
     else return getAttrib(CAR(args), R_DotEnvSymbol);
 }
 
+// environment(fun) <-  <env>
 attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP env, s = CAR(args);
-
     checkArity(op, args);
-    check1arg(args, call, "x");
+    /* check1arg(args, call, "x"); as it had no effect: should be "fun" */
+    SEXP s  = CAR(args),
+	env = CADR(args);
 
-    env = CADR(args);
-
-    if (TYPEOF(CAR(args)) == CLOSXP
+    if (TYPEOF(s) == CLOSXP
 	&& (isEnvironment(env) ||
 	    isEnvironment(env = simple_as_environment(env, false)) ||
 	    isNull(env))) {
@@ -318,12 +318,17 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    s = duplicate(s);
 	if (TYPEOF(BODY(s)) == BCODESXP)
 	    /* switch to interpreted version if compiled */
-	    SET_BODY(s, R_ClosureExpr(CAR(args)));
+	    SET_BODY(s, R_ClosureExpr(s));
 	SET_CLOENV(s, env);
     }
     else if (isNull(env) || isEnvironment(env) ||
 	isEnvironment(env = simple_as_environment(env)))
-	setAttrib(s, R_DotEnvSymbol, env);
+    {
+	if(!isNull(env) && isPrimitive(s)) // temporary, to become error()
+	    warning("%s", _("setting environment(<primitive function>) is not possible and trying it is deprecated"));
+	else
+	    setAttrib(s, R_DotEnvSymbol, env);
+    }
     else
 	error("%s", _("replacement object is not an environment"));
     return s;

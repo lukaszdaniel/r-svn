@@ -2071,32 +2071,33 @@ SEXP termsform(SEXP args)
 	R_xlen_t j;
 	CXXR::RAllocStack::Scope rscope;
 	int i = length(specials);
-	SEXP t;
-	PROTECT(v = allocList(i));
-	for (j = 0, t = v; j < i; j++, t = CDR(t)) {
+	SEXP t, t_ = PROTECT(allocList(i));
+	for (j = 0, t = t_; j < i; j++, t = CDR(t)) {
 	    const char *ss = translateChar(STRING_ELT(specials, j));
 	    SET_TAG(t, install(ss));
-	    R_xlen_t n = (int) strlen(ss);
 	    SETCAR(t, allocVector(INTSXP, 0));
 	    R_xlen_t k = 0;
-	    for (R_xlen_t l = 0; l < nvar; l++) {
-		if (streqln(CHAR(STRING_ELT(varnames, l)), ss, n))
-		    if (CHAR(STRING_ELT(varnames, l))[n] == '(')
-			k++;
+	    for (v = CDR(varlist); v != R_NilValue; v = CDR(v)) {
+		call = CAR(v);
+		if (TYPEOF(call) == LANGSXP && TYPEOF(CAR(call)) == SYMSXP &&
+		    streql(CHAR(PRINTNAME(CAR(call))), ss))
+		    k++;
 	    }
 	    if (k > 0) {
 		SETCAR(t, allocVector(INTSXP, k));
 		k = 0;
-		for (int l = 0; l < nvar; l++) {
-		    if (streqln(CHAR(STRING_ELT(varnames, l)), ss, n))
-			if (CHAR(STRING_ELT(varnames, l))[n] == '('){
-			    INTEGER(CAR(t))[k++] = l+1;
-			}
+		int l = 1;
+		for (v = CDR(varlist); v != R_NilValue; v = CDR(v)) {
+			call = CAR(v);
+			if (TYPEOF(call) == LANGSXP && TYPEOF(CAR(call)) == SYMSXP &&
+			    streql(CHAR(PRINTNAME(CAR(call))), ss))
+				INTEGER(CAR(t))[k++] = l;
+			l++;
 		}
 	    }
 	    else SETCAR(t, R_NilValue);
 	}
-	SETCAR(a, v);
+	SETCAR(a, t_);
 	SET_TAG(a, install("specials"));
 	a = CDR(a);
 	UNPROTECT(1);
