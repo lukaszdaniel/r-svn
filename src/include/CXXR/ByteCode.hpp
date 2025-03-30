@@ -56,6 +56,29 @@ namespace CXXR
             return new ByteCode(code, constants);
         }
 
+        // Interim accessor functions.  Try to get rid of these:
+
+        /** @brief Not for general use.
+         */
+        RObject *code() const
+        {
+            return u.bytecode.m_code;
+        }
+
+        /** @brief Not for general use.
+         */
+        RObject *constants() const
+        {
+            return u.bytecode.m_constants;
+        }
+
+        /** @brief Not for general use.
+         */
+        RObject *expression() const
+        {
+            return u.bytecode.m_expression;
+        }
+
         // Normally this implements evaluate() by evaluating bcode in
         // the environment env.  However, if called with a null
         // pointer for bcode, it initialises the opcode despatch
