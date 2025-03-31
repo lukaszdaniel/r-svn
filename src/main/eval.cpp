@@ -37,6 +37,7 @@
 #include <string>
 #include <cmath>
 #include <cerrno>
+#include <array>
 #include <Rdynpriv.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
@@ -46,6 +47,7 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/PairList.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>
@@ -775,8 +777,8 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 	size_t len1 = R_Srcfile_bufcount*sizeof(char *), len2 = bufsize;
 	R_PreserveObject( R_Srcfiles_buffer = Rf_allocVector(RAWSXP, len1 + len2) );
  //	memset(RAW(R_Srcfiles_buffer), 0, len1+len2);
-	R_Srcfiles = (char **) RAW(R_Srcfiles_buffer);
-	R_Srcfiles[0] = (char *)RAW(R_Srcfiles_buffer) + len1;
+	R_Srcfiles = reinterpret_cast<char **>(RAW(R_Srcfiles_buffer));
+	R_Srcfiles[0] = reinterpret_cast<char *>(RAW(R_Srcfiles_buffer)) + len1;
 	*(R_Srcfiles[0]) = '\0';
     }
 
@@ -956,7 +958,7 @@ SEXP do_Rprof(SEXP args)
 
 attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
 {
-    if(save == R_PPStackTop) return;
+    if (save == R_PPStackTop) return;
     REprintf(_("Warning: stack imbalance in '%s', %td then %td\n"),
 	     PRIMNAME(op), save, R_PPStackTop);
 }
@@ -1117,7 +1119,7 @@ namespace
 
 	if (e == R_DotsSymbol)
 	    error("%s", _("'...' used in an incorrect context"));
-	if( DDVAL(e) )
+	if (DDVAL(e))
 	    tmp = ddfindVar(e,rho);
 	else
 	    tmp = R_findVar(e, rho);
@@ -1160,7 +1162,7 @@ namespace
 
     SEXP Expression_evaluate(SEXP e, SEXP rho)
     {
-        SEXP tmp = R_NilValue;
+	SEXP tmp = R_NilValue;
 	SEXP op;
 	if (TYPEOF(CAR(e)) == SYMSXP) {
 	    /* This will throw an error if the function is not found */
@@ -1175,7 +1177,7 @@ namespace
 	} else
 	    PROTECT(op = Evaluator::evaluate(CAR(e), rho));
 
-	if(RTRACE(op) && R_current_trace_state()) {
+	if (RTRACE(op) && R_current_trace_state()) {
 	    Rprintf("trace: ");
 	    PrintValue(e);
 	}
@@ -1299,7 +1301,7 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
 
     SEXP tmp = R_NilValue;		/* -Wall */
 #ifdef Win32
-    /* This is an inlined version of Rwin_fpreset (src/gnuwin/extra.c)
+    /* This is an inlined version of Rwin_fpset (src/gnuwin/extra.c)
        and resets the precision, rounding and exception modes of a ix86
        fpu.
      */
@@ -1767,9 +1769,8 @@ static R_INLINE void set_jit_cache_entry(R_exprhash_t hash, SEXP val)
     int hashidx = hash % JIT_CACHE_SIZE;
 
     PROTECT(val);
-    SEXP entry = CONS(BODY(val), make_cached_cmpenv(val));
+    SEXP entry = CXXR_cons(BODY(val), make_cached_cmpenv(val), getAttrib(val, R_SrcrefSymbol));
     SET_VECTOR_ELT(JIT_cache, hashidx, entry);
-    SET_TAG(entry, getAttrib(val, R_SrcrefSymbol));
     UNPROTECT(1); /* val */
 
     JIT_cache_hashes[hashidx] = hash;
@@ -3079,22 +3080,19 @@ attribute_hidden SEXP do_begin(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP s = R_NilValue;
     if (args != R_NilValue) {
-	SEXP srcrefs = getBlockSrcrefs(call);
-	PROTECT(srcrefs);
+	GCStackRoot<> srcrefs(getBlockSrcrefs(call));
 	int i = 1;
 	while (args != R_NilValue) {
-	    PROTECT(R_Srcref = getSrcref(srcrefs, i++));
+	    R_Srcref = getSrcref(srcrefs, i++);
 	    if (ENV_RDEBUG(rho) && !R_GlobalContext->browserfinish) {
 		SrcrefPrompt("debug", R_Srcref);
 		PrintValue(CAR(args));
 		do_browser(call, op, R_NilValue, rho);
 	    }
 	    s = eval(CAR(args), rho);
-	    UNPROTECT(1);
 	    args = CDR(args);
 	}
 	R_Srcref = R_NilValue;
-	UNPROTECT(1); /* srcrefs */
     }
     return s;
 }
@@ -3263,22 +3261,20 @@ attribute_hidden SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
   nonlocal.
 */
 
-static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
+static SEXP evalseq(SEXP expr_, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 		    R_varloc_t *ploc)
 {
-    SEXP val, nval, nexpr;
+    GCStackRoot<> val, nval, nexpr;
+    GCStackRoot<> expr(expr_);
     if (isNull(expr))
 	error("%s", _("invalid (NULL) left side of assignment"));
     if (isSymbol(expr)) { /* now we are down to the target symbol */
-	PROTECT(expr);
 	if(forcelocal) {
 	    nval = EnsureLocal(expr, rho, ploc);
 	}
 	else {
 	    nval = eval(expr, ENCLOS(rho));
-	    PROTECT(nval); /* R_findVarLoc allocates for user databases */
 	    *ploc = R_findVarLoc(expr, ENCLOS(rho));
-	    UNPROTECT(1);
 	}
 	int maybe_in_assign = ploc->cell ?
 	    ASSIGNMENT_PENDING(ploc->cell) : false;
@@ -3286,15 +3282,13 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	    SET_ASSIGNMENT_PENDING(ploc->cell, true);
 	if (maybe_in_assign || MAYBE_SHARED(nval))
 	    nval = shallow_duplicate(nval);
-	UNPROTECT(1);
 	return CONS_NR(nval, expr);
     }
     else if (isLanguage(expr)) {
-	PROTECT(expr);
-	PROTECT(val = evalseq(CADR(expr), rho, forcelocal, tmploc, ploc));
+	val = evalseq(CADR(expr), rho, forcelocal, tmploc, ploc);
 	R_SetVarLocValue(tmploc, CAR(val));
-	PROTECT(nexpr = LCONS(R_GetVarLocSymbol(tmploc), CDDR(expr)));
-	PROTECT(nexpr = LCONS(CAR(expr), nexpr));
+	nexpr = LCONS(R_GetVarLocSymbol(tmploc), CDDR(expr));
+	nexpr = LCONS(CAR(expr), nexpr);
 	nval = eval(nexpr, rho);
 	/* duplicate nval if it might be shared _or_ if the container,
 	   CAR(val), has become possibly shared by going through a
@@ -3306,7 +3300,7 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	if (MAYBE_REFERENCED(nval) &&
 	    (MAYBE_SHARED(nval) || MAYBE_SHARED(CAR(val))))
 	    nval = shallow_duplicate(nval);
-	UNPROTECT(4);
+
 	return CONS_NR(nval, val);
     }
     else error("%s", _("target of assignment expands to non-language object"));
@@ -3316,9 +3310,9 @@ static SEXP evalseq(SEXP expr, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 /* Main entry point for complex assignments */
 /* We have checked to see that CAR(args) is a LANGSXP */
 
-static const char * const asym[] = {":=", "<-", "<<-", "="};
-#define NUM_ASYM (sizeof(asym) / sizeof(char *))
-static SEXP asymSymbol[NUM_ASYM];
+#define NUM_ASYM 4
+static constexpr std::array<const char *, NUM_ASYM> asym = {":=", "<-", "<<-", "="};
+static std::array<SEXP, NUM_ASYM> asymSymbol;
 
 static SEXP R_ReplaceFunsTable = NULL;
 static SEXP R_SubsetSym = NULL;
@@ -3330,7 +3324,7 @@ static SEXP R_AssignSym = NULL;
 
 attribute_hidden void R::R_initEvalSymbols(void)
 {
-    for (unsigned int i = 0; i < NUM_ASYM; i++)
+    for (unsigned int i = 0; i < asymSymbol.size(); i++)
 	asymSymbol[i] = install(asym[i]);
 
     R_ReplaceFunsTable = R_NewHashedEnv(R_EmptyEnv, 1099);
@@ -4123,10 +4117,9 @@ attribute_hidden SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static SEXP evalArgs(SEXP el, SEXP rho, int dropmissing, SEXP call, int n)
 {
-    if(dropmissing) return evalList(el, rho, call, n);
+    if (dropmissing) return evalList(el, rho, call, n);
     else return evalListKeepMissing(el, rho);
 }
-
 
 /* A version of DispatchOrEval that checks for possible S4 methods for
  * any argument, not just the first.  Used in the code for `c()` in do_c()
@@ -4148,19 +4141,19 @@ attribute_hidden
 std::pair<bool, RObject *> R::DispatchAnyOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		      SEXP rho, bool dropmissing, bool argsevald)
 {
-    if(R_has_methods(op)) {
+    if (R_has_methods(op)) {
 	GCStackRoot<> argValue;
 
 	/* Rboolean hasS4 = FALSE; */
-	if(!argsevald) {
+	if (!argsevald) {
 	    argValue = evalArgs(args, rho, dropmissing, call, 0);
 	    argsevald = TRUE;
 	}
 	else argValue = args;
 	for (SEXP el = argValue; el != R_NilValue; el = CDR(el)) {
-	    if(IS_S4_OBJECT(CAR(el))) {
+	    if (IS_S4_OBJECT(CAR(el))) {
 		auto value = R_possible_dispatch(call, op, argValue, rho, true);
-		if(value.first) {
+		if (value.first) {
 		    return value;
 		}
 		else break;
@@ -4414,7 +4407,8 @@ static bool R_chooseOpsMethod(SEXP x, SEXP y, SEXP mx, SEXP my,
 	R_PreserveObject(expr);
     }
     
-    SEXP newrho = PROTECT(R_NewEnv(rho, FALSE, 0));
+    GCStackRoot<> newrho;
+    newrho = R_NewEnv(rho, FALSE, 0);
     defineVar(xSym, x, newrho); INCREMENT_NAMED(x);
     defineVar(ySym, y, newrho); INCREMENT_NAMED(y);
     defineVar(mxSym, mx, newrho); INCREMENT_NAMED(mx);
@@ -4426,7 +4420,6 @@ static bool R_chooseOpsMethod(SEXP x, SEXP y, SEXP mx, SEXP my,
 #ifdef ADJUST_ENVIR_REFCNTS
     R_CleanupEnvir(newrho, R_NilValue);
 #endif
-    UNPROTECT(1); /* newrho */
 
     return ans == R_NilValue ? false : asRbool(ans, call);
 }
@@ -4458,26 +4451,26 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
     bool isOps = (streql(group, "Ops") || streql(group, "matrixOps"));
 
     /* try for formal method */
-    if(length(args) == 1 && !IS_S4_OBJECT(CAR(args))) {
+    if (length(args) == 1 && !IS_S4_OBJECT(CAR(args))) {
 	// no S4
     } else if(length(args) == 2 && !IS_S4_OBJECT(CAR(args)) && !IS_S4_OBJECT(CADR(args))) {
 	// no S4
     } else { // try to use S4 :
 	/* Remove argument names to ensure positional matching */
-	if(isOps)
+	if (isOps)
 	    for (SEXP s = args; s != R_NilValue; s = CDR(s)) SET_TAG(s, R_NilValue);
 
-	if(R_has_methods(op)) {
-	   auto value = R_possible_dispatch(call, op, args, rho, false);
-	   if (value.first) {
-	       return value;
+	if (R_has_methods(op)) {
+	   auto dispatched = R_possible_dispatch(call, op, args, rho, false);
+	   if (dispatched.first) {
+	       return dispatched;
 	   }
 	}
 	/* else go on to look for S3 methods */
     }
 
     /* check whether we are processing the default method */
-    if ( isSymbol(CAR(call)) ) {
+    if (isSymbol(CAR(call))) {
 	const char *cstr = strchr(CHAR(PRINTNAME(CAR(call))), '.');
 	if (cstr && streql(cstr + 1, "default"))
 	    return std::pair<bool, RObject *>(false, nullptr);
@@ -4485,7 +4478,7 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
 
     int nargs = isOps ? length(args) : 1;
 
-    if( nargs == 1 && !isObject(CAR(args)) )
+    if (nargs == 1 && !isObject(CAR(args)))
 	return std::pair<bool, RObject *>(false, nullptr);
 
     const char *generic = PRIMNAME(op);
@@ -4503,19 +4496,19 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
 	       &lsxp, &lgr, &lmeth, &lwhich, args, rho);
     PROTECT(lgr);
 
-    if( nargs == 2 )
+    if (nargs == 2)
 	findmethod(rclass, group, generic, &rsxp, &rgr, &rmeth,
 		   &rwhich, CDR(args), rho);
     else
 	rwhich = 0;
     PROTECT(rgr);
 
-    if( !isFunction(lsxp) && !isFunction(rsxp) ) {
+    if (!isFunction(lsxp) && !isFunction(rsxp)) {
 	UNPROTECT(4);
 	return std::pair<bool, RObject *>(false, nullptr); /* no generic or group method so use default */
     }
 
-    if( lsxp != rsxp ) {
+    if (lsxp != rsxp) {
 	if ( isFunction(lsxp) && isFunction(rsxp) ) {
 	    /* special-case some methods involving difftime */
 	    const char *lname = CHAR(PRINTNAME(lmeth)),
@@ -4552,7 +4545,7 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
 	    }
 	}
 	/* if the right hand side is the one */
-	if( !isFunction(lsxp) ) { /* copy over the righthand stuff */
+	if (!isFunction(lsxp)) { /* copy over the righthand stuff */
 	    lsxp = rsxp;
 	    lmeth = rmeth;
 	    lgr = rgr;
@@ -8970,13 +8963,14 @@ attribute_hidden SEXP do_is_builtin_internal(SEXP call, SEXP op, SEXP args, SEXP
 
 static SEXP disassemble(SEXP bc)
 {
-  SEXP ans, dconsts;
+  GCStackRoot<> ans;
+  SEXP dconsts;
   SEXP code = BCODE_CODE(bc);
   SEXP consts = BCODE_CONSTS(bc);
   SEXP expr = BCODE_EXPR(bc);
   int nc = LENGTH(consts);
 
-  PROTECT(ans = allocVector(VECSXP, expr != R_NilValue ? 4 : 3));
+  ans = allocVector(VECSXP, expr != R_NilValue ? 4 : 3);
   SET_VECTOR_ELT(ans, 0, install(".Code"));
   SET_VECTOR_ELT(ans, 1, R_bcDecode(code));
   SET_VECTOR_ELT(ans, 2, allocVector(VECSXP, nc));
@@ -8992,7 +8986,6 @@ static SEXP disassemble(SEXP bc)
       SET_VECTOR_ELT(dconsts, i, duplicate(c));
   }
 
-  UNPROTECT(1);
   return ans;
 }
 
