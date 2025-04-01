@@ -2551,10 +2551,6 @@ msgstr[1] "els arguments formals de la funció genèrica per a %s (%s) difereixe
 #~ msgstr "(i mètodes)"
 
 #, fuzzy
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "La funció ha de ser un genèric S4"
-
-#, fuzzy
 #~ msgid "invalid method sublist"
 #~ msgstr "subllista de mètode no vàlida"
 

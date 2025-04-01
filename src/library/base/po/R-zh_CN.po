@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 14:04\n"
+"POT-Creation-Date: 2025-04-01 16:28\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -637,6 +637,17 @@ msgstr "'qr'和'y'必需有相同的行数"
 msgid "'receive.console.signals' must be TRUE or FALSE"
 msgstr "'intern'的值必需是'TRUE'或'FALSE'值"
 
+#. R/unlist.R: stop("'recursive' is NA")
+#: R/unlist.R:0
+msgid "'recursive' is NA"
+msgstr ""
+
+#. R/unlist.R: stop("'recursive' must be a length-1 vector")
+#: R/unlist.R:0
+#, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "'origin'的长度必需为一"
+
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
 msgid "'recursive' will be ignored as 'to' is not a single existing directory"
@@ -1010,13 +1021,6 @@ msgstr "载入程序包：%s"
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
 msgstr "试图载入%s环境"
-
-#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
-#: R/structure.R:0
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
@@ -1481,6 +1485,11 @@ msgstr "不能给维度小于二的对象设'colnames'"
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
 msgstr "不能给没有维度的对象设'rownames'"
+
+#. R/structure.R: stop("attempt to set an attribute on NULL")
+#: R/structure.R:0
+msgid "attempt to set an attribute on NULL"
+msgstr ""
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
 #: R/autoload.R:0
@@ -3356,9 +3365,6 @@ msgstr[0] "不存在叫这个名称的程序包"
 #~ msgid "'name' must be a single character string"
 #~ msgstr "“name”必须是单个字符串"
 
-#~ msgid "'origin' must be of length one"
-#~ msgstr "'origin'的长度必需为一"
-
 #~ msgid "'package' must be of length 1"
 #~ msgstr "'package'的长度必需为一"
 
@@ -3378,43 +3384,6 @@ msgstr[0] "不存在叫这个名称的程序包"
 #, fuzzy
 #~ msgid "'%s' must be a non-empty string"
 #~ msgstr "'file'的值必需是长度大于零的字符串"
-
-#~ msgid "'name' must be a single character string"
-#~ msgstr "“name”必须是单个字符串"
-
-#~ msgid "'from' must be specified"
-#~ msgstr "'from'一定得给值"
-
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from'一定得是\"Date\"对象"
-
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from'的长度必需为一"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out'的长度必需为一"
-
-#~ msgid "'by' must be of length 1"
-#~ msgstr "'by'的长度必需为一"
-
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from'一定得是\"POSIXt\"对象"
-
-#~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "'to'一定得是\"POSIXt\"对象"
-
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'package'的长度必需为一"
-
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg'的长度必需为一"
-
-#~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "'length.out'参数的长度必需为一"
-
-#, fuzzy
-#~ msgid "'which' must be of length 1"
-#~ msgstr "'to'的长度必需为一"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "“normal.kind”必须是长度为 1 的字符串"

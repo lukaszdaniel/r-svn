@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 14:04\n"
+"POT-Creation-Date: 2025-04-01 16:28\n"
 "PO-Revision-Date: 2021-01-27 10:34+0100\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -641,6 +641,17 @@ msgstr "'qr' 和 'y' 必須有相同的列數"
 msgid "'receive.console.signals' must be TRUE or FALSE"
 msgstr "'intern' 的值必須是 'TRUE' 或 'FALSE' 值"
 
+#. R/unlist.R: stop("'recursive' is NA")
+#: R/unlist.R:0
+msgid "'recursive' is NA"
+msgstr ""
+
+#. R/unlist.R: stop("'recursive' must be a length-1 vector")
+#: R/unlist.R:0
+#, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "'origin' 的長度必須為一"
+
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
 msgid "'recursive' will be ignored as 'to' is not a single existing directory"
@@ -1012,15 +1023,6 @@ msgstr "載入套件：%s"
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
 msgstr "試圖載入 %s 環境"
-
-#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
-#: R/structure.R:0
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
-"呼叫 'structure(NULL, *)' 已過時，因為空值無法具有屬性。\n"
-"  考慮以 'structure(list(), *)' 做為替代。"
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
@@ -1489,6 +1491,11 @@ msgstr "不能給維度小於二的物件設 'colnames'"
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
 msgstr "不能給沒有維度的物件設 'rownames'"
+
+#. R/structure.R: stop("attempt to set an attribute on NULL")
+#: R/structure.R:0
+msgid "attempt to set an attribute on NULL"
+msgstr ""
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
 #: R/autoload.R:0
@@ -3337,6 +3344,13 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "不存在叫這個名稱的套件"
 
+#~ msgid ""
+#~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+#~ "  Consider 'structure(list(), *)' instead."
+#~ msgstr ""
+#~ "呼叫 'structure(NULL, *)' 已過時，因為空值無法具有屬性。\n"
+#~ "  考慮以 'structure(list(), *)' 做為替代。"
+
 #, fuzzy
 #~ msgid "connections left open:"
 #~ msgstr "'connection' 必須是個鏈結"
@@ -3362,9 +3376,6 @@ msgstr[0] "不存在叫這個名稱的套件"
 #, fuzzy
 #~ msgid "'name' must be a single character string"
 #~ msgstr "引數 'object' 必須解析成單一個字串"
-
-#~ msgid "'origin' must be of length one"
-#~ msgstr "'origin' 的長度必須為一"
 
 #~ msgid "'package' must be of length 1"
 #~ msgstr "'package' 的長度必須為一"

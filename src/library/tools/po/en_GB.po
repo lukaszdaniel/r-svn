@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2023-12-20 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -42,44 +42,44 @@ msgstr "md5 failed on file '%ls'"
 msgid "sha256 failed on file '%s'"
 msgstr "md5 failed on file '%s'"
 
-#: getfmts.cpp:57
+#: getfmts.cpp:56
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr "only %d arguments are allowed"
 
-#: getfmts.cpp:62
+#: getfmts.cpp:61
 msgid "'fmt' is not a character vector"
 msgstr "'fmt' is not a character vector"
 
-#: getfmts.cpp:65
+#: getfmts.cpp:64
 msgid "'fmt' must be length 1"
 msgstr "'fmt' must be length 1"
 
-#: getfmts.cpp:71
+#: getfmts.cpp:70
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "'fmt' length exceeds maximal format length %d"
 
-#: getfmts.cpp:92
+#: getfmts.cpp:91
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "unrecognised format specification '%s'"
 
-#: getfmts.cpp:132
+#: getfmts.cpp:131
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "at most one asterisk '*' is supported in each conversion specification"
 
-#: gramLatex.cpp:2584 gramRd.cpp:3965
+#: gramLatex.cpp:2757 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "unable to allocate buffer for long string at line %d"
 
-#: gramLatex.cpp:2818 gramRd.cpp:4460
+#: gramLatex.cpp:3014 gramRd.cpp:4460
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "unable to allocate buffer for long string at line %d"
 
-#: gramLatex.cpp:2861 gramRd.cpp:4511
+#: gramLatex.cpp:3056 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "invalid '%s' value"
@@ -152,15 +152,15 @@ msgstr "cannot read from this connection"
 msgid "invalid Rd file"
 msgstr "invalid Rd file"
 
-#: gramRd.cpp:4556
+#: gramRd.cpp:4557
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "'deparseRd' only supports deparsing character elements"
 
-#: gramRd.cpp:4559
+#: gramRd.cpp:4560
 msgid "bad state"
 msgstr "bad state"
 
-#: gramRd.cpp:4572
+#: gramRd.cpp:4573
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "bad text mode %d in 'deparseRd'"
@@ -187,11 +187,11 @@ msgstr "invalid '%s' argument"
 msgid "write error during file append"
 msgstr "write error during file append"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:75
 msgid "too many items"
 msgstr "too many items"
 
-#: pdscan.cpp:116
+#: pdscan.cpp:122
 msgid "non-character argument"
 msgstr "non-character argument"
 
@@ -203,19 +203,19 @@ msgstr "pskill() is not supported on this platform"
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() is not supported on this platform"
 
-#: text.cpp:80
+#: text.cpp:79
 msgid "invalid argument type"
 msgstr "invalid argument type"
 
-#: text.cpp:169 text.cpp:205 text.cpp:329
+#: text.cpp:168 text.cpp:204 text.cpp:328
 #, fuzzy
 msgid "invalid input"
 msgstr "invalid Rd file"
 
-#: text.cpp:236 text.cpp:258
+#: text.cpp:235 text.cpp:257
 msgid "out of memory"
 msgstr "out of memory"
 
-#: text.cpp:278 text.cpp:280
+#: text.cpp:277 text.cpp:279
 msgid "first arg must be a single character string"
 msgstr ""

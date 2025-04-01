@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -415,9 +415,9 @@ msgstr ""
 
 
 #: R/coords.R: 0
-#. R/coords.R: stop("Closed must not be a missing value")
+#. R/coords.R: stop("Closed must be length 1 and must not be a missing value")
 
-msgid "Closed must not be a missing value"
+msgid "Closed must be length 1 and must not be a missing value"
 msgstr ""
 
 
@@ -1238,16 +1238,16 @@ msgstr ""
 
 
 #: R/viewport.R: 0
-#. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
+#. R/viewport.R: stop("must specify at least one of 'xData' or 'xscale'")
 
-msgid "must specify at least one of 'x' or 'xscale'"
+msgid "must specify at least one of 'xData' or 'xscale'"
 msgstr ""
 
 
 #: R/viewport.R: 0
-#. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
+#. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 
-msgid "must specify at least one of 'y' or 'yscale'"
+msgid "must specify at least one of 'yData' or 'yscale'"
 msgstr ""
 
 

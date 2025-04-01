@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: 2022-04-13 14:32+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -315,9 +315,9 @@ msgstr "'x1', 'y1', 'x2' und 'y2' müssen Einheiten sein"
 msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr "Kann keinen Einheitsvektor mit Länge 0 erzeugen (\"unit\" Teilmengenbildung)"
 
-#. R/coords.R: stop("Closed must not be a missing value")
+#. R/coords.R: stop("Closed must be length 1 and must not be a missing value")
 #: R/coords.R:0
-msgid "Closed must not be a missing value"
+msgid "Closed must be length 1 and must not be a missing value"
 msgstr ""
 
 #. R/grid.R: stop("Down viewport failed to record on display list")
@@ -927,14 +927,16 @@ msgstr "es muss mindestens ein Viewport nach oben navigiert werden"
 msgid "must pop at least one viewport"
 msgstr "es muss zumindest ein Viewport vom Stack geholt werden"
 
-#. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
+#. R/viewport.R: stop("must specify at least one of 'xData' or 'xscale'")
 #: R/viewport.R:0
-msgid "must specify at least one of 'x' or 'xscale'"
+#, fuzzy
+msgid "must specify at least one of 'xData' or 'xscale'"
 msgstr "mindestens 'x' oder 'xscale' muss angegeben werden"
 
-#. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
+#. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
-msgid "must specify at least one of 'y' or 'yscale'"
+#, fuzzy
+msgid "must specify at least one of 'yData' or 'yscale'"
 msgstr "mindestens 'y' oder 'yscale' muss angegeben werden"
 
 #. R/grid.R: stop("must specify at least one viewport")

@@ -2161,9 +2161,6 @@ msgstr[1] "les arguments formels de la fonction générique pour %s (%s) diffèr
 #~ msgid "(and methods)"
 #~ msgstr "(et des méthodes)"
 
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "La fonction doit être un générique S4"
-
 #~ msgid "invalid method sublist"
 #~ msgstr "liste de méthodes incorrecte"
 

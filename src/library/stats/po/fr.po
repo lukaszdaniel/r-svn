@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2021-02-10 18:07+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -82,16 +82,16 @@ msgstr "valeurs infinies x[%d] dans le calcul de largeur de bande"
 msgid "data are constant in bandwidth calculation"
 msgstr "valeurs infinies x[%d] dans le calcul de largeur de bande"
 
-#: complete_cases.cpp:30
+#: complete_cases.cpp:26
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type' (%s) de l'argument incorrect"
 
-#: complete_cases.cpp:116
+#: complete_cases.cpp:112
 msgid "no input has determined the number of cases"
 msgstr "aucune entrée n'a déterminé le nombre de cas"
 
-#: complete_cases.cpp:228
+#: complete_cases.cpp:224
 msgid "not all arguments have the same length"
 msgstr "les arguments n'ont pas tous la même taille"
 
@@ -173,7 +173,7 @@ msgstr "expression incorrecte dans '%s'"
 msgid "too many variables"
 msgstr "trop de facteurs"
 
-#: deriv.cpp:1077 model.cpp:102
+#: deriv.cpp:1077 model.cpp:105
 msgid "invalid variable names"
 msgstr "noms des variables incorrects"
 
@@ -193,11 +193,11 @@ msgstr "distance() : p incorrect"
 msgid "distance(): invalid distance"
 msgstr "distance() : distance incorrecte"
 
-#: distn.cpp:44
+#: distn.cpp:40
 msgid "NaNs produced"
 msgstr "Production de NaN"
 
-#: distn.cpp:45
+#: distn.cpp:41
 msgid "Non-numeric argument to mathematical function"
 msgstr "Argument non numérique pour une fonction mathématique"
 
@@ -292,55 +292,55 @@ msgid ""
 "%s"
 msgstr ""
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:377
-#: model.cpp:385 optim.cpp:216
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:367
+#: model.cpp:375 optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
 
-#: fourier.cpp:64 fourier.cpp:159
+#: fourier.cpp:56 fourier.cpp:151
 msgid "non-numeric argument"
 msgstr "argument non numérique"
 
-#: fourier.cpp:82 fourier.cpp:100 fourier.cpp:173
+#: fourier.cpp:74 fourier.cpp:92 fourier.cpp:165
 msgid "fft factorization error"
 msgstr "erreur de factorisation fft"
 
-#: fourier.cpp:85 fourier.cpp:109 fourier.cpp:176
+#: fourier.cpp:77 fourier.cpp:101 fourier.cpp:168
 msgid "fft too large"
 msgstr ""
 
-#: fourier.cpp:145
+#: fourier.cpp:137
 msgid "vector-valued (multivariate) series required"
 msgstr "série multivariée requise"
 
-#: fourier.cpp:215
+#: fourier.cpp:207
 #, c-format
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr "nextn() n’a pas trouvé de solution < %d = INT_MAX (le plus grand entier) ; passer '0 + n' à la place de 'n'"
 
-#: fourier.cpp:226
+#: fourier.cpp:218
 #, fuzzy, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr "nextn<64>() n’a pas trouvé de solution < %llu = UINT64_MAX (le plus grand entier)"
 
-#: fourier.cpp:242
+#: fourier.cpp:234
 msgid "no factors"
 msgstr "pas de variables facteur"
 
-#: fourier.cpp:243
+#: fourier.cpp:235
 msgid "too many factors"
 msgstr "trop de facteurs"
 
-#: fourier.cpp:246
+#: fourier.cpp:238
 msgid "invalid factors"
 msgstr "variables facteur incorrectes"
 
-#: fourier.cpp:250
+#: fourier.cpp:242
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr "'n' doit avoir typeof(.) \"integer\" ou \"double\""
 
-#: fourier.cpp:291
+#: fourier.cpp:283
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> > 2^53 peut ne pas être représentable exactement en R (comme \"double\")"
@@ -468,148 +468,148 @@ msgstr "La vmethod est incorrecte"
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "L’algorithme de Burg n'a pas trouvé la corrélation partielle"
 
-#: model.cpp:100
+#: model.cpp:103
 msgid "invalid variables"
 msgstr "variables incorrectes"
 
-#: model.cpp:104 model.cpp:109
+#: model.cpp:107 model.cpp:112
 msgid "number of variables != number of variable names"
 msgstr "le nombre de variables n'est pas égal au nombre de noms de variables"
 
-#: model.cpp:107
+#: model.cpp:110
 msgid "invalid extra variables"
 msgstr "variables supplémentaires incorrectes"
 
-#: model.cpp:111
+#: model.cpp:114
 msgid "invalid extra variable names"
 msgstr "noms de variables supplémentaires incorrects"
 
-#: model.cpp:132
+#: model.cpp:135
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "noms trop longs dans '%s'"
 
-#: model.cpp:159
+#: model.cpp:160
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "type (%s) incorrect pour la variable '%s'"
 
-#: model.cpp:164
+#: model.cpp:166
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "les longueurs des variables diffèrent (trouvé pour '%s')"
 
-#: model.cpp:221
+#: model.cpp:214
 msgid "invalid result from na.action"
 msgstr "résultat incorrect de na.action"
 
-#: model.cpp:396
+#: model.cpp:386
 msgid "invalid model frame"
 msgstr "trame de modèle incorrecte"
 
-#: model.cpp:398
+#: model.cpp:388
 msgid "do not know how many cases"
 msgstr "nombre de cas inconnu"
 
-#: model.cpp:422
+#: model.cpp:412
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "les longueurs des variables diffèrent (trouvé pour la variable %d)"
 
-#: model.cpp:426 model.cpp:433
+#: model.cpp:416 model.cpp:423
 #, c-format
 msgid "variable %d has no levels"
 msgstr "la variable %d n'a pas de niveaux"
 
-#: model.cpp:544
+#: model.cpp:534
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "la réponse est apparue dans le membre de droite et y a été éliminée"
 
-#: model.cpp:564
+#: model.cpp:554
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "le terme %d nécessite %.0g colonnes"
 
-#: model.cpp:568
+#: model.cpp:558
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "la matrice nécessite %.0g colonnes"
 
-#: model.cpp:579
+#: model.cpp:569
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "problème avec le terme %d dans model.matrix : aucune colonne n'est assignée"
 
-#: model.cpp:628 model.cpp:633 model.cpp:639 model.cpp:650 model.cpp:656
-#: model.cpp:662
+#: model.cpp:618 model.cpp:623 model.cpp:629 model.cpp:640 model.cpp:646
+#: model.cpp:652
 msgid "term names will be truncated"
 msgstr "les noms des termes seront tronqués"
 
-#: model.cpp:642
+#: model.cpp:632
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "les variables complexes ne sont pas encore acceptées dans les matrices de modèle"
 
-#: model.cpp:666
+#: model.cpp:656
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "les variables de type '%s' ne sont pas autorisées dans des matrices de modèle"
 
-#: model.cpp:881
+#: model.cpp:871
 msgid "invalid formula in 'update'"
 msgstr "formule incorrecte dans 'update'"
 
-#: model.cpp:915
+#: model.cpp:905
 msgid "formula expected"
 msgstr "formule attendue"
 
-#: model.cpp:1079
+#: model.cpp:1069
 msgid "invalid term in model formula"
 msgstr "terme incorrect dans la formule de modèle"
 
-#: model.cpp:1170
+#: model.cpp:1160
 msgid "invalid model formula"
 msgstr "formule de modèle incorrecte"
 
-#: model.cpp:1202 model.cpp:1509
+#: model.cpp:1192 model.cpp:1499
 msgid "invalid power in formula"
 msgstr "puissance incorrecte dans la formule"
 
-#: model.cpp:1251
+#: model.cpp:1241
 msgid "invalid model formula in ExtractVars"
 msgstr "formule de modèle incorrecte dans ExtractVars"
 
-#: model.cpp:1294
+#: model.cpp:1284
 #, c-format
 msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
 msgstr ""
 
-#: model.cpp:1620
+#: model.cpp:1610
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "nom dupliqué '%s' dans le data frame utilisant '.'"
 
-#: model.cpp:1686
+#: model.cpp:1676
 msgid "invalid model formula in EncodeVars"
 msgstr "formule de modèle incorrecte dans EncodeVars"
 
-#: model.cpp:1763
+#: model.cpp:1752
 msgid "argument is not a valid model"
 msgstr "l'argument n'est pas un modèle valide"
 
-#: model.cpp:1773
+#: model.cpp:1762
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' doit être NULL ou un vecteur de chaîne de caractères"
 
-#: model.cpp:1784
+#: model.cpp:1773
 msgid "'data' argument is of the wrong type"
 msgstr "l'argument 'data' est d'un mauvais type"
 
-#: model.cpp:1852
+#: model.cpp:1841
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr "'varlist' a changé (de nvar=%d) à %d après EncodeVars() -- ceci ne devrait plus se produire !"
 
-#: model.cpp:2132
+#: model.cpp:2123
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' dans la formule et pas d'argument 'data'"
 
@@ -1036,32 +1036,32 @@ msgstr "'scal' doit être une matrice carrée de réels"
 msgid "'scal' matrix is not positive-definite"
 msgstr "la matrice 'scal' n'est pas définie et positive"
 
-#: random.cpp:58 random.cpp:142 random.cpp:222 random.cpp:312
+#: random.cpp:54 random.cpp:138 random.cpp:218 random.cpp:308
 msgid "NAs produced"
 msgstr "Production de NAs"
 
-#: random.cpp:65 random.cpp:71 random.cpp:77 random.cpp:92 random.cpp:172
-#: random.cpp:261 random.cpp:399
+#: random.cpp:61 random.cpp:67 random.cpp:73 random.cpp:88 random.cpp:168
+#: random.cpp:257 random.cpp:395
 msgid "invalid arguments"
 msgstr "arguments incorrects"
 
-#: random.cpp:338
+#: random.cpp:334
 msgid "NA in probability vector"
 msgstr "NA dans un vecteur de probabilités"
 
-#: random.cpp:340
+#: random.cpp:336
 msgid "negative probability"
 msgstr "probabilité négative"
 
-#: random.cpp:346
+#: random.cpp:342
 msgid "no positive probabilities"
 msgstr "pas de probabilités positives"
 
-#: random.cpp:358
+#: random.cpp:354
 msgid "invalid first argument 'n'"
 msgstr "premier argument 'n' incorrect"
 
-#: random.cpp:360
+#: random.cpp:356
 msgid "invalid second argument 'size'"
 msgstr "second argument 'size' incorrect"
 

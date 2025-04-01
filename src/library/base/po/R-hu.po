@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 14:04\n"
+"POT-Creation-Date: 2025-04-01 16:28\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -630,6 +630,17 @@ msgstr "'qr' és 'y' ugyanannyi sort kell tartalmazzon"
 msgid "'receive.console.signals' must be TRUE or FALSE"
 msgstr "'intern' vagy TRUE vagy FALSE kell legyen"
 
+#. R/unlist.R: stop("'recursive' is NA")
+#: R/unlist.R:0
+msgid "'recursive' is NA"
+msgstr ""
+
+#. R/unlist.R: stop("'recursive' must be a length-1 vector")
+#: R/unlist.R:0
+#, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "'origin' hossza 1 kell hogy legyen"
+
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
 msgid "'recursive' will be ignored as 'to' is not a single existing directory"
@@ -995,13 +1006,6 @@ msgstr "Kapcsolódás csomaghoz: %s"
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
 msgstr "A(z) %s környezet betöltésével próbálkozik"
-
-#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
-#: R/structure.R:0
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
@@ -1464,6 +1468,11 @@ msgstr ""
 #. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
+msgstr ""
+
+#. R/structure.R: stop("attempt to set an attribute on NULL")
+#: R/structure.R:0
+msgid "attempt to set an attribute on NULL"
 msgstr ""
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
@@ -3339,9 +3348,6 @@ msgstr[1] "nincsenek ilyen csomagok"
 
 #~ msgid "'length.out' must be of length 1"
 #~ msgstr "'length.out' hosszúsága 1 kell hogy legyen"
-
-#~ msgid "'origin' must be of length one"
-#~ msgstr "'origin' hossza 1 kell hogy legyen"
 
 #~ msgid "'package' must be of length 1"
 #~ msgstr "'package' hossza 1 kell hogy legyen"

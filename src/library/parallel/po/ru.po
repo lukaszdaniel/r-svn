@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2011 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -8,16 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
-"PO-Revision-Date: 2020-08-27 19:52+0900\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"PO-Revision-Date: 2025-04-01 17:00+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: fork.cpp:211
 msgid "cannot close internal file descriptor"
@@ -26,34 +27,34 @@ msgstr ""
 #: fork.cpp:226
 #, c-format
 msgid "unable to terminate child process: %s"
-msgstr "не могу завершить дочерний процесс: %s"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╥п╟п╡п╣я─я┬п╦я┌я▄ п╢п╬я┤п╣я─п╫п╦п╧ п©я─п╬я├п╣я│я│: %s"
 
 #: fork.cpp:253
 #, c-format
 msgid "unable to terminate child: %s"
-msgstr "не могу завершить дочерний процесс: %s"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╥п╟п╡п╣я─я┬п╦я┌я▄ п╢п╬я┤п╣я─п╫п╦п╧ п©я─п╬я├п╣я│я│: %s"
 
 #: fork.cpp:332 fork.cpp:618 ncpus.cpp:90 ncpus.cpp:126 ncpus.cpp:181
 msgid "memory allocation error"
-msgstr "ошибка распределения памяти"
+msgstr "п╬я┬п╦п╠п╨п╟ я─п╟я│п©я─п╣п╢п╣п╩п╣п╫п╦я▐ п©п╟п╪я▐я┌п╦"
 
 #: fork.cpp:388
 #, c-format
 msgid "invalid '%s' argument"
-msgstr "неправильный аргумент '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ '%s'"
 
 #: fork.cpp:449
 msgid "Error while shutting down parallel: unable to terminate some child processes\n"
-msgstr "Ошибка при завершении parallel: не могу завершить некоторые дочерние процессы\n"
+msgstr "п·я┬п╦п╠п╨п╟ п©я─п╦ п╥п╟п╡п╣я─я┬п╣п╫п╦п╦ parallel: п╫п╣ п╪п╬пЁя┐ п╥п╟п╡п╣я─я┬п╦я┌я▄ п╫п╣п╨п╬я┌п╬я─я▀п╣ п╢п╬я┤п╣я─п╫п╦п╣ п©я─п╬я├п╣я│я│я▀\n"
 
 #: fork.cpp:542 fork.cpp:545
 msgid "unable to create a pipe"
-msgstr "не могу создать трубу"
+msgstr "п╫п╣ п╪п╬пЁя┐ я│п╬п╥п╢п╟я┌я▄ я┌я─я┐п╠я┐"
 
 #: fork.cpp:567
 #, c-format
 msgid "unable to fork, possible reason: %s"
-msgstr "не могу разветвить, возможная причина: %s"
+msgstr "п╫п╣ п╪п╬пЁя┐ я─п╟п╥п╡п╣я┌п╡п╦я┌я▄, п╡п╬п╥п╪п╬п╤п╫п╟я▐ п©я─п╦я┤п╦п╫п╟: %s"
 
 #: fork.cpp:575
 msgid "detected re-use of valid pipe ends\n"
@@ -65,23 +66,23 @@ msgstr ""
 
 #: fork.cpp:759
 msgid "only children can send data to the master process"
-msgstr "только дочерние процессы могут посылать данные мастер-процессу"
+msgstr "я┌п╬п╩я▄п╨п╬ п╢п╬я┤п╣я─п╫п╦п╣ п©я─п╬я├п╣я│я│я▀ п╪п╬пЁя┐я┌ п©п╬я│я▀п╩п╟я┌я▄ п╢п╟п╫п╫я▀п╣ п╪п╟я│я┌п╣я─-п©я─п╬я├п╣я│я│я┐"
 
 #: fork.cpp:761
 msgid "there is no pipe to the master process"
-msgstr "нет трубы к мастер-процессу"
+msgstr "п╫п╣я┌ я┌я─я┐п╠я▀ п╨ п╪п╟я│я┌п╣я─-п©я─п╬я├п╣я│я│я┐"
 
 #: fork.cpp:763
 msgid "content to send must be RAW, use serialize() if needed"
-msgstr "посылаемый контент должен быть RAW, используйте serialize(), если надо"
+msgstr "п©п╬я│я▀п╩п╟п╣п╪я▀п╧ п╨п╬п╫я┌п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ RAW, п╦я│п©п╬п╩я▄п╥я┐п╧я┌п╣ serialize(), п╣я│п╩п╦ п╫п╟п╢п╬"
 
 #: fork.cpp:772 fork.cpp:783 fork.cpp:1202
 msgid "write error, closing pipe to the master"
-msgstr "ошибка записи, закрываю трубу к мастеру"
+msgstr "п╬я┬п╦п╠п╨п╟ п╥п╟п©п╦я│п╦, п╥п╟п╨я─я▀п╡п╟я▌ я┌я─я┐п╠я┐ п╨ п╪п╟я│я┌п╣я─я┐"
 
 #: fork.cpp:793
 msgid "only the master process can send data to a child process"
-msgstr "только мастер-процесс может посылать данные дочернему процессу"
+msgstr "я┌п╬п╩я▄п╨п╬ п╪п╟я│я┌п╣я─-п©я─п╬я├п╣я│я│ п╪п╬п╤п╣я┌ п©п╬я│я▀п╩п╟я┌я▄ п╢п╟п╫п╫я▀п╣ п╢п╬я┤п╣я─п╫п╣п╪я┐ п©я─п╬я├п╣я│я│я┐"
 
 #: fork.cpp:794
 msgid "what must be a raw vector"
@@ -90,11 +91,11 @@ msgstr ""
 #: fork.cpp:801
 #, c-format
 msgid "child %d does not exist"
-msgstr "дочерний процесс %d не существует"
+msgstr "п╢п╬я┤п╣я─п╫п╦п╧ п©я─п╬я├п╣я│я│ %d п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌"
 
 #: fork.cpp:807
 msgid "write error"
-msgstr "ошибка записи"
+msgstr "п╬я┬п╦п╠п╨п╟ п╥п╟п©п╦я│п╦"
 
 #: fork.cpp:818 fork.cpp:851 fork.cpp:864 fork.cpp:1066
 msgid "file descriptor is too large for select()"
@@ -103,36 +104,36 @@ msgstr ""
 #: fork.cpp:895
 #, c-format
 msgid "cannot wait for child %d as it does not exist"
-msgstr "не могу дождаться дочернего процесса %d , потому что его нет"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╢п╬п╤п╢п╟я┌я▄я│я▐ п╢п╬я┤п╣я─п╫п╣пЁп╬ п©я─п╬я├п╣я│я│п╟ %d , п©п╬я┌п╬п╪я┐ я┤я┌п╬ п╣пЁп╬ п╫п╣я┌"
 
 #: fork.cpp:954 fork.cpp:1081
 #, c-format
 msgid "error '%s' in select"
-msgstr "ошибка '%s' в выборе"
+msgstr "п╬я┬п╦п╠п╨п╟ '%s' п╡ п╡я▀п╠п╬я─п╣"
 
 #: fork.cpp:1171
 msgid "'mckill' failed"
-msgstr "'mckill' не удался"
+msgstr "'mckill' п╫п╣ я┐п╢п╟п╩я│я▐"
 
 #: fork.cpp:1184
 msgid "'mcexit' can only be used in a child process"
-msgstr "'mcexit' может быть использован только в дочернем процессе"
+msgstr "'mcexit' п╪п╬п╤п╣я┌ п╠я▀я┌я▄ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ я┌п╬п╩я▄п╨п╬ п╡ п╢п╬я┤п╣я─п╫п╣п╪ п©я─п╬я├п╣я│я│п╣"
 
 #: fork.cpp:1216
 msgid "'mcexit' failed"
-msgstr "'mcexit' не удался"
+msgstr "'mcexit' п╫п╣ я┐п╢п╟п╩я│я▐"
 
-#: fork.cpp:1245 fork.cpp:1254
+#: fork.cpp:1246 fork.cpp:1255
 msgid "invalid CPU affinity specification"
-msgstr "неправильное описание привязки CPU"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╬п©п╦я│п╟п╫п╦п╣ п©я─п╦п╡я▐п╥п╨п╦ CPU"
 
-#: fork.cpp:1265
+#: fork.cpp:1266
 msgid "requested CPU set is too large for this system"
-msgstr "запрошенная установка CPU слишком велика для этой системы"
+msgstr "п╥п╟п©я─п╬я┬п╣п╫п╫п╟я▐ я┐я│я┌п╟п╫п╬п╡п╨п╟ CPU я│п╩п╦я┬п╨п╬п╪ п╡п╣п╩п╦п╨п╟ п╢п╩я▐ я█я┌п╬п╧ я│п╦я│я┌п╣п╪я▀"
 
-#: fork.cpp:1288
+#: fork.cpp:1289
 msgid "retrieving CPU affinity set failed"
-msgstr "загрузка привязки установки CPU не удалась"
+msgstr "п╥п╟пЁя─я┐п╥п╨п╟ п©я─п╦п╡я▐п╥п╨п╦ я┐я│я┌п╟п╫п╬п╡п╨п╦ CPU п╫п╣ я┐п╢п╟п╩п╟я│я▄"
 
 #: ncpus.cpp:93 ncpus.cpp:128 ncpus.cpp:183
 #, c-format

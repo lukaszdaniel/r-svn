@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -318,9 +318,9 @@ msgstr ""
 msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr ""
 
-#. R/coords.R: stop("Closed must not be a missing value")
+#. R/coords.R: stop("Closed must be length 1 and must not be a missing value")
 #: R/coords.R:0
-msgid "Closed must not be a missing value"
+msgid "Closed must be length 1 and must not be a missing value"
 msgstr ""
 
 #. R/grid.R: stop("Down viewport failed to record on display list")
@@ -933,14 +933,16 @@ msgstr "적어도 하나의 뷰포트를 찾아야만 합니다"
 msgid "must pop at least one viewport"
 msgstr "적어도 하나의 뷰포트를 띄어줘야 합니다"
 
-#. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
+#. R/viewport.R: stop("must specify at least one of 'xData' or 'xscale'")
 #: R/viewport.R:0
-msgid "must specify at least one of 'x' or 'xscale'"
+#, fuzzy
+msgid "must specify at least one of 'xData' or 'xscale'"
 msgstr "'x' 또는 'xscale' 중 적어도 하나는 지정해야 합니다"
 
-#. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
+#. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
-msgid "must specify at least one of 'y' or 'yscale'"
+#, fuzzy
+msgid "must specify at least one of 'yData' or 'yscale'"
 msgstr "'y' 또는 'yscale' 중 적어도 하나는 지정해야 합니다"
 
 #. R/grid.R: stop("must specify at least one viewport")

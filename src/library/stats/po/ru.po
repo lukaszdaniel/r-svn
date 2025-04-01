@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2008 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -10,29 +10,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
-"PO-Revision-Date: 2024-03-25 14:52+0300\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"PO-Revision-Date: 2025-04-01 17:02+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: Srunmed.cpp:65
 msgid "bandwidth/span of running medians is larger than n"
-msgstr "диапазон/пересечение скользящих медиан больше чем n"
+msgstr "п╢п╦п╟п©п╟п╥п╬п╫/п©п╣я─п╣я│п╣я┤п╣п╫п╦п╣ я│п╨п╬п╩я▄п╥я▐я┴п╦я┘ п╪п╣п╢п╦п╟п╫ п╠п╬п╩я▄я┬п╣ я┤п╣п╪ n"
 
 #: Srunmed.cpp:265
 #, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
-msgstr "runmed(x, .., na.action=\"na.fail\"): есть NAs начиная с x[%lld]"
+msgstr "runmed(x, .., na.action=\"na.fail\"): п╣я│я┌я▄ NAs п╫п╟я┤п╦п╫п╟я▐ я│ x[%lld]"
 
 #: Srunmed.cpp:268
 msgid "runmed(): invalid 'na.action'"
-msgstr "runmed(): неправильная 'na.action'"
+msgstr "runmed(): п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ 'na.action'"
 
 #: Srunmed.cpp:279
 msgid "long vectors are not supported for algorithm = \"Turlach\""
@@ -41,66 +42,66 @@ msgstr ""
 #: Srunmed.cpp:318
 #, c-format
 msgid "na_action logic error (%d), please report!"
-msgstr "логическая ошибка в na_action (%d), пожалуйста, сообщите!"
+msgstr "п╩п╬пЁп╦я┤п╣я│п╨п╟я▐ п╬я┬п╦п╠п╨п╟ п╡ na_action (%d), п©п╬п╤п╟п╩я┐п╧я│я┌п╟, я│п╬п╬п╠я┴п╦я┌п╣!"
 
 #: ansari.cpp:120
 msgid "probabilities outside [0,1] in qansari()"
-msgstr "вероятности вне [0,1] в qansari()"
+msgstr "п╡п╣я─п╬я▐я┌п╫п╬я│я┌п╦ п╡п╫п╣ [0,1] п╡ qansari()"
 
 #: approx.cpp:111
 msgid "approx(): invalid f value"
-msgstr "approx(): неправильное значение f"
+msgstr "approx(): п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ f"
 
 #: approx.cpp:114
 msgid "approx(): invalid interpolation method"
-msgstr "approx(): неправильный метод интерполяции"
+msgstr "approx(): п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╪п╣я┌п╬п╢ п╦п╫я┌п╣я─п©п╬п╩я▐я├п╦п╦"
 
 #: approx.cpp:121
 msgid "approx(): attempted to interpolate NA values"
-msgstr "approx(): попытка интерполировать пропущенные значения"
+msgstr "approx(): п©п╬п©я▀я┌п╨п╟ п╦п╫я┌п╣я─п©п╬п╩п╦я─п╬п╡п╟я┌я▄ п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐"
 
 #: approx.cpp:125
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
-msgstr "approx(x,y, .., na.rm=FALSE): пропущенные значения в x не разрешены"
+msgstr "approx(x,y, .., na.rm=FALSE): п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╡ x п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
 #: arima.cpp:77 arima.cpp:187 arima.cpp:371 arima.cpp:602 optim.cpp:40
 msgid "invalid argument type"
-msgstr "неправильный тип аргумента"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╦п© п╟я─пЁя┐п╪п╣п╫я┌п╟"
 
 #: arima.cpp:438 arima.cpp:525 pacf.cpp:319 pacf.cpp:358
 msgid "can only transform 100 pars in arima0"
-msgstr "могу трансформировать только 100 пар в arima0"
+msgstr "п╪п╬пЁя┐ я┌я─п╟п╫я│я└п╬я─п╪п╦я─п╬п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ 100 п©п╟я─ п╡ arima0"
 
 #: arima.cpp:1008
 msgid "maximum supported lag is 350"
-msgstr "максимальный поддерживаемый лаг -- 350"
+msgstr "п╪п╟п╨я│п╦п╪п╟п╩я▄п╫я▀п╧ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪я▀п╧ п╩п╟пЁ -- 350"
 
 #: bandwidths.cpp:122
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
-msgstr "не конечное x[%d] при вычислении диапазона"
+msgstr "п╫п╣ п╨п╬п╫п╣я┤п╫п╬п╣ x[%d] п©я─п╦ п╡я▀я┤п╦я│п╩п╣п╫п╦п╦ п╢п╦п╟п©п╟п╥п╬п╫п╟"
 
 #: bandwidths.cpp:128
 #, fuzzy
 msgid "data are constant in bandwidth calculation"
-msgstr "не конечное x[%d] при вычислении диапазона"
+msgstr "п╫п╣ п╨п╬п╫п╣я┤п╫п╬п╣ x[%d] п©я─п╦ п╡я▀я┤п╦я│п╩п╣п╫п╦п╦ п╢п╦п╟п©п╟п╥п╬п╫п╟"
 
-#: complete_cases.cpp:30
+#: complete_cases.cpp:26
 #, c-format
 msgid "invalid 'type' (%s) of argument"
-msgstr "неправильный 'type' (%s) аргумента"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ 'type' (%s) п╟я─пЁя┐п╪п╣п╫я┌п╟"
 
-#: complete_cases.cpp:116
+#: complete_cases.cpp:112
 msgid "no input has determined the number of cases"
-msgstr "ввод не определил количество классов"
+msgstr "п╡п╡п╬п╢ п╫п╣ п╬п©я─п╣п╢п╣п╩п╦п╩ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п╨п╩п╟я│я│п╬п╡"
 
-#: complete_cases.cpp:228
+#: complete_cases.cpp:224
 msgid "not all arguments have the same length"
-msgstr "не все аргументы имеют одинаковую длину"
+msgstr "п╫п╣ п╡я│п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╦п╪п╣я▌я┌ п╬п╢п╦п╫п╟п╨п╬п╡я┐я▌ п╢п╩п╦п╫я┐"
 
 #: cov.cpp:564
 msgid "missing observations in cov/cor"
-msgstr "пропущенные наблюдения в cov/cor"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╫п╟п╠п╩я▌п╢п╣п╫п╦я▐ п╡ cov/cor"
 
 #: cov.cpp:636
 msgid ""
@@ -116,31 +117,31 @@ msgstr ""
 
 #: cov.cpp:643
 msgid "'x' is NULL"
-msgstr "'x' -- это NULL"
+msgstr "'x' -- я█я┌п╬ NULL"
 
 #: cov.cpp:675 cov.cpp:681
 msgid "incompatible dimensions"
-msgstr "несовместимые размерности"
+msgstr "п╫п╣я│п╬п╡п╪п╣я│я┌п╦п╪я▀п╣ я─п╟п╥п╪п╣я─п╫п╬я│я┌п╦"
 
 #: cov.cpp:700 cov.cpp:741 cov.cpp:774
 msgid "no complete element pairs"
-msgstr "нет полных пар элементов"
+msgstr "п╫п╣я┌ п©п╬п╩п╫я▀я┘ п©п╟я─ я█п╩п╣п╪п╣п╫я┌п╬п╡"
 
 #: cov.cpp:713
 msgid "invalid 'use' (computational method)"
-msgstr "неправильный 'use' (метод вычисления)"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ 'use' (п╪п╣я┌п╬п╢ п╡я▀я┤п╦я│п╩п╣п╫п╦я▐)"
 
 #: cov.cpp:716
 msgid "'x' is empty"
-msgstr "'x' пусто"
+msgstr "'x' п©я┐я│я┌п╬"
 
 #: cov.cpp:810
 msgid "the standard deviation is zero"
-msgstr "стандартное отклонение нулевое"
+msgstr "я│я┌п╟п╫п╢п╟я─я┌п╫п╬п╣ п╬я┌п╨п╩п╬п╫п╣п╫п╦п╣ п╫я┐п╩п╣п╡п╬п╣"
 
 #: deriv.cpp:155
 msgid "invalid form in unary minus check"
-msgstr "неправильная форма при проверке унарного минуса"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я└п╬я─п╪п╟ п©я─п╦ п©я─п╬п╡п╣я─п╨п╣ я┐п╫п╟я─п╫п╬пЁп╬ п╪п╦п╫я┐я│п╟"
 
 #: deriv.cpp:439
 msgid ""
@@ -151,77 +152,77 @@ msgstr ""
 #: deriv.cpp:677
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
-msgstr "Функция '%s' отсутствует в таблице производных"
+msgstr "п╓я┐п╫п╨я├п╦я▐ '%s' п╬я┌я│я┐я┌я│я┌п╡я┐п╣я┌ п╡ я┌п╟п╠п╩п╦я├п╣ п©я─п╬п╦п╥п╡п╬п╢п╫я▀я┘"
 
 #: deriv.cpp:784
 #, c-format
 msgid "expression must not be type '%s'"
-msgstr "выражение не должно быть типа '%s'"
+msgstr "п╡я▀я─п╟п╤п╣п╫п╦п╣ п╫п╣ п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ я┌п╦п©п╟ '%s'"
 
 #: deriv.cpp:787
 msgid "variable must be a character string"
-msgstr "переменная должна быть текстовой строкой"
+msgstr "п©п╣я─п╣п╪п╣п╫п╫п╟я▐ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: deriv.cpp:789
 msgid "only the first element is used as variable name"
-msgstr "только первый элемент использован как имя переменной"
+msgstr "я┌п╬п╩я▄п╨п╬ п©п╣я─п╡я▀п╧ я█п╩п╣п╪п╣п╫я┌ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫ п╨п╟п╨ п╦п╪я▐ п©п╣я─п╣п╪п╣п╫п╫п╬п╧"
 
 #: deriv.cpp:802
 #, c-format
 msgid "invalid expression in '%s'"
-msgstr "неправильное выражение в '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╡я▀я─п╟п╤п╣п╫п╦п╣ п╡ '%s'"
 
 #: deriv.cpp:864
 msgid "too many variables"
-msgstr "слишком много переменных"
+msgstr "я│п╩п╦я┬п╨п╬п╪ п╪п╫п╬пЁп╬ п©п╣я─п╣п╪п╣п╫п╫я▀я┘"
 
-#: deriv.cpp:1077 model.cpp:102
+#: deriv.cpp:1077 model.cpp:105
 msgid "invalid variable names"
-msgstr "неправильные имена переменных"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╦п╪п╣п╫п╟ п©п╣я─п╣п╪п╣п╫п╫я▀я┘"
 
 #: deriv.cpp:1085 deriv.cpp:1087
 msgid "invalid tag"
-msgstr "неправильный тег"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╣пЁ"
 
 #: distance.cpp:153
 msgid "treating non-finite values as NA"
-msgstr "обрабатываю не-конечные значения как NA"
+msgstr "п╬п╠я─п╟п╠п╟я┌я▀п╡п╟я▌ п╫п╣-п╨п╬п╫п╣я┤п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╨п╟п╨ NA"
 
 #: distance.cpp:226
 msgid "distance(): invalid p"
-msgstr "distance(): неправильный p"
+msgstr "distance(): п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ p"
 
 #: distance.cpp:230
 msgid "distance(): invalid distance"
-msgstr "distance(): неправильное расстояние"
+msgstr "distance(): п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ я─п╟я│я│я┌п╬я▐п╫п╦п╣"
 
-#: distn.cpp:44
+#: distn.cpp:40
 msgid "NaNs produced"
-msgstr "созданы NaN"
+msgstr "я│п╬п╥п╢п╟п╫я▀ NaN"
 
-#: distn.cpp:45
+#: distn.cpp:41
 msgid "Non-numeric argument to mathematical function"
-msgstr "Нечисловой аргумент для математической функции"
+msgstr "п²п╣я┤п╦я│п╩п╬п╡п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╩я▐ п╪п╟я┌п╣п╪п╟я┌п╦я┤п╣я│п╨п╬п╧ я└я┐п╫п╨я├п╦п╦"
 
 #: family.cpp:47
 #, c-format
 msgid "Value %g out of range (0, 1)"
-msgstr "Значение %g вне промежутка (0, 1)"
+msgstr "п≈п╫п╟я┤п╣п╫п╦п╣ %g п╡п╫п╣ п©я─п╬п╪п╣п╤я┐я┌п╨п╟ (0, 1)"
 
 #: family.cpp:65 family.cpp:79 family.cpp:98
 #, c-format
 msgid "Argument %s must be a nonempty numeric vector"
-msgstr "Аргумент %s должен быть непустым числовым вектором"
+msgstr "п░я─пЁя┐п╪п╣п╫я┌ %s п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п©я┐я│я┌я▀п╪ я┤п╦я│п╩п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪"
 
 #: family.cpp:131 family.cpp:134
 #, c-format
 msgid "argument %s must be a numeric vector of length 1 or length %d"
-msgstr "аргумент %s должен быть числовым вектором длины 1 или %d"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ %s п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╢п╩п╦п╫я▀ 1 п╦п╩п╦ %d"
 
 #: fexact.cpp:277
 #, c-format
 msgid "integer overflow would happen in 'mult * ldkey' = %g"
-msgstr "может произойти  целочисленное переполнение в 'mult * ldkey' = %g"
+msgstr "п╪п╬п╤п╣я┌ п©я─п╬п╦п╥п╬п╧я┌п╦  я├п╣п╩п╬я┤п╦я│п╩п╣п╫п╫п╬п╣ п©п╣я─п╣п©п╬п╩п╫п╣п╫п╦п╣ п╡ 'mult * ldkey' = %g"
 
 #: fexact.cpp:656
 #, c-format
@@ -230,9 +231,9 @@ msgid ""
 "  (ii := key2[itp=%d] = %d, ldstp=%d)\n"
 "Try increasing the size of the workspace and possibly 'mult'"
 msgstr ""
-"FEXACT ошибка 6.  LDKEY=%d слишком мал для этой проблемы,\n"
+"FEXACT п╬я┬п╦п╠п╨п╟ 6.  LDKEY=%d я│п╩п╦я┬п╨п╬п╪ п╪п╟п╩ п╢п╩я▐ я█я┌п╬п╧ п©я─п╬п╠п╩п╣п╪я▀,\n"
 "  (ii := key2[itp=%d] = %d, ldstp=%d)\n"
-"Попробуйте увеличить размер рабочего пространства и, возможно, 'mult'"
+"п÷п╬п©я─п╬п╠я┐п╧я┌п╣ я┐п╡п╣п╩п╦я┤п╦я┌я▄ я─п╟п╥п╪п╣я─ я─п╟п╠п╬я┤п╣пЁп╬ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟ п╦, п╡п╬п╥п╪п╬п╤п╫п╬, 'mult'"
 
 #: fexact.cpp:1041
 #, c-format
@@ -240,8 +241,8 @@ msgid ""
 "FEXACT[f3xact()] error: hash key %.0g > INT_MAX, kyy=%d, it[i (= nco = %d)]= %d.\n"
 "Rather set 'simulate.p.value=TRUE'\n"
 msgstr ""
-"ошибка FEXACT[f3xact()]: ключ %.0g > INT_MAX, kyy=%d, it[i (= nco = %d)]= %d.\n"
-"Пожалуйста, задайте 'simulate.p.value=TRUE'\n"
+"п╬я┬п╦п╠п╨п╟ FEXACT[f3xact()]: п╨п╩я▌я┤ %.0g > INT_MAX, kyy=%d, it[i (= nco = %d)]= %d.\n"
+"п÷п╬п╤п╟п╩я┐п╧я│я┌п╟, п╥п╟п╢п╟п╧я┌п╣ 'simulate.p.value=TRUE'\n"
 
 #: fexact.cpp:1074
 #, c-format
@@ -250,9 +251,9 @@ msgid ""
 "  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
-"FEXACT ошибка 30.  Превышена длина стека в f3xact,\n"
+"FEXACT п╬я┬п╦п╠п╨п╟ 30.  п÷я─п╣п╡я▀я┬п╣п╫п╟ п╢п╩п╦п╫п╟ я│я┌п╣п╨п╟ п╡ f3xact,\n"
 "  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
-"Увеличьте рабочее пространство или попробуйте использовать 'simulate.p.value=TRUE'"
+"пёп╡п╣п╩п╦я┤я▄я┌п╣ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╩п╦ п©п╬п©я─п╬п╠я┐п╧я┌п╣ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ 'simulate.p.value=TRUE'"
 
 #: fexact.cpp:1407
 #, c-format
@@ -260,8 +261,8 @@ msgid ""
 "FEXACT error 6 (f5xact).  LDKEY=%d is too small for this problem: kval=%d.\n"
 "Try increasing the size of the workspace."
 msgstr ""
-"FEXACT ошибка 6 (f5xact).  LDKEY=%d слишком мал для этой проблемы: kval=%d.\n"
-"Попробуйте увеличить размер рабочего пространства."
+"FEXACT п╬я┬п╦п╠п╨п╟ 6 (f5xact).  LDKEY=%d я│п╩п╦я┬п╨п╬п╪ п╪п╟п╩ п╢п╩я▐ я█я┌п╬п╧ п©я─п╬п╠п╩п╣п╪я▀: kval=%d.\n"
+"п÷п╬п©я─п╬п╠я┐п╧я┌п╣ я┐п╡п╣п╩п╦я┤п╦я┌я▄ я─п╟п╥п╪п╣я─ я─п╟п╠п╬я┤п╣пЁп╬ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╟."
 
 #: fexact.cpp:1420
 #, c-format
@@ -270,9 +271,9 @@ msgid ""
 "  (kval=%d, itop-ldstp=%d).\n"
 "Increase workspace or consider using 'simulate.p.value=TRUE'."
 msgstr ""
-"FEXACT ошибка 7(%s). LDSTP=%d слишком маленький для этой проблемы,\n"
+"FEXACT п╬я┬п╦п╠п╨п╟ 7(%s). LDSTP=%d я│п╩п╦я┬п╨п╬п╪ п╪п╟п╩п╣п╫я▄п╨п╦п╧ п╢п╩я▐ я█я┌п╬п╧ п©я─п╬п╠п╩п╣п╪я▀,\n"
 "  (kval=%d, itop-ldstp=%d).\n"
-"Увеличьте рабочее пространство или попробуйте использовать 'simulate.p.value=TRUE'."
+"пёп╡п╣п╩п╦я┤я▄я┌п╣ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╩п╦ п©п╬п©я─п╬п╠я┐п╧я┌п╣ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ 'simulate.p.value=TRUE'."
 
 #: fexact.cpp:1448
 msgid "integer overflow in exact computation"
@@ -285,9 +286,9 @@ msgid ""
 "  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
 "Increase workspace or consider using 'simulate.p.value=TRUE'"
 msgstr ""
-"FEXACT ошибка 7(%s). LDSTP=%d слишком маленький для этой проблемы,\n"
+"FEXACT п╬я┬п╦п╠п╨п╟ 7(%s). LDSTP=%d я│п╩п╦я┬п╨п╬п╪ п╪п╟п╩п╣п╫я▄п╨п╦п╧ п╢п╩я▐ я█я┌п╬п╧ п©я─п╬п╠п╩п╣п╪я▀,\n"
 "  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
-"Увеличьте рабочее пространство или попробуйте использовать 'simulate.p.value=TRUE'"
+"пёп╡п╣п╩п╦я┤я▄я┌п╣ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ п╦п╩п╦ п©п╬п©я─п╬п╠я┐п╧я┌п╣ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ 'simulate.p.value=TRUE'"
 
 #: fexact.cpp:1809
 #, c-format
@@ -296,58 +297,58 @@ msgid ""
 "%s"
 msgstr ""
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:377
-#: model.cpp:385 optim.cpp:216
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:367
+#: model.cpp:375 optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
-msgstr "неправильный аргумент '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ '%s'"
 
-#: fourier.cpp:64 fourier.cpp:159
+#: fourier.cpp:56 fourier.cpp:151
 msgid "non-numeric argument"
-msgstr "нечисловой аргумент"
+msgstr "п╫п╣я┤п╦я│п╩п╬п╡п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌"
 
-#: fourier.cpp:82 fourier.cpp:100 fourier.cpp:173
+#: fourier.cpp:74 fourier.cpp:92 fourier.cpp:165
 msgid "fft factorization error"
-msgstr "ошибка факторизации в fft"
+msgstr "п╬я┬п╦п╠п╨п╟ я└п╟п╨я┌п╬я─п╦п╥п╟я├п╦п╦ п╡ fft"
 
-#: fourier.cpp:85 fourier.cpp:109 fourier.cpp:176
+#: fourier.cpp:77 fourier.cpp:101 fourier.cpp:168
 msgid "fft too large"
 msgstr ""
 
-#: fourier.cpp:145
+#: fourier.cpp:137
 msgid "vector-valued (multivariate) series required"
-msgstr "требуются векторнозначные серии (многомерные)"
+msgstr "я┌я─п╣п╠я┐я▌я┌я│я▐ п╡п╣п╨я┌п╬я─п╫п╬п╥п╫п╟я┤п╫я▀п╣ я│п╣я─п╦п╦ (п╪п╫п╬пЁп╬п╪п╣я─п╫я▀п╣)"
 
-#: fourier.cpp:215
+#: fourier.cpp:207
 #, c-format
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
-msgstr "nextn() не нашла решения < %d = INT_MAX (максимальное целое число); дайте ей '0+ n' вместо 'n'"
+msgstr "nextn() п╫п╣ п╫п╟я┬п╩п╟ я─п╣я┬п╣п╫п╦я▐ < %d = INT_MAX (п╪п╟п╨я│п╦п╪п╟п╩я▄п╫п╬п╣ я├п╣п╩п╬п╣ я┤п╦я│п╩п╬); п╢п╟п╧я┌п╣ п╣п╧ '0+ n' п╡п╪п╣я│я┌п╬ 'n'"
 
-#: fourier.cpp:226
+#: fourier.cpp:218
 #, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
-msgstr "nextn<64>() не нашла решения < %llu = UINT64_MAX (максимальное целое число)"
+msgstr "nextn<64>() п╫п╣ п╫п╟я┬п╩п╟ я─п╣я┬п╣п╫п╦я▐ < %llu = UINT64_MAX (п╪п╟п╨я│п╦п╪п╟п╩я▄п╫п╬п╣ я├п╣п╩п╬п╣ я┤п╦я│п╩п╬)"
+
+#: fourier.cpp:234
+msgid "no factors"
+msgstr "п╫п╣я┌ я└п╟п╨я┌п╬я─п╬п╡"
+
+#: fourier.cpp:235
+msgid "too many factors"
+msgstr "я│п╩п╦я┬п╨п╬п╪ п╪п╫п╬пЁп╬ я└п╟п╨я┌п╬я─п╬п╡"
+
+#: fourier.cpp:238
+msgid "invalid factors"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ я└п╟п╨я┌п╬я─я▀"
 
 #: fourier.cpp:242
-msgid "no factors"
-msgstr "нет факторов"
-
-#: fourier.cpp:243
-msgid "too many factors"
-msgstr "слишком много факторов"
-
-#: fourier.cpp:246
-msgid "invalid factors"
-msgstr "неправильные факторы"
-
-#: fourier.cpp:250
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
-msgstr "'n' должен иметь typeof(.) \"integer\" или \"double\""
+msgstr "'n' п╢п╬п╩п╤п╣п╫ п╦п╪п╣я┌я▄ typeof(.) \"integer\" п╦п╩п╦ \"double\""
 
-#: fourier.cpp:291
+#: fourier.cpp:283
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
-msgstr "nextn() = %<PRIu64> > 2^53 возможно, не удастся отобразать в R (как \"double\")"
+msgstr "nextn() = %<PRIu64> > 2^53 п╡п╬п╥п╪п╬п╤п╫п╬, п╫п╣ я┐п╢п╟я│я┌я│я▐ п╬я┌п╬п╠я─п╟п╥п╟я┌я▄ п╡ R (п╨п╟п╨ \"double\")"
 
 #: integrate.cpp:55
 msgid "evaluation of function gave a result of wrong length"
@@ -360,17 +361,17 @@ msgstr ""
 #: integrate.cpp:63
 #, fuzzy
 msgid "non-finite function value"
-msgstr "не-конечное конечно-разностное значение [%d]"
+msgstr "п╫п╣-п╨п╬п╫п╣я┤п╫п╬п╣ п╨п╬п╫п╣я┤п╫п╬-я─п╟п╥п╫п╬я│я┌п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
 msgid "'%s' must be of length one"
-msgstr "'%s' должен быть единичной длины"
+msgstr "'%s' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╣п╢п╦п╫п╦я┤п╫п╬п╧ п╢п╩п╦п╫я▀"
 
 #: isoreg.cpp:57
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
-msgstr "sum(y) == %g, а должна быть конечной"
+msgstr "sum(y) == %g, п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п╨п╬п╫п╣я┤п╫п╬п╧"
 
 #: ks.cpp:516
 msgid "Smirnov statistic only defined for two groups"
@@ -382,477 +383,477 @@ msgstr ""
 
 #: ksmooth.cpp:69
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
-msgstr "только 2500 строк разрешается для sm.method=\"spline\""
+msgstr "я┌п╬п╩я▄п╨п╬ 2500 я│я┌я─п╬п╨ я─п╟п╥я─п╣я┬п╟п╣я┌я│я▐ п╢п╩я▐ sm.method=\"spline\""
 
 #: line.cpp:149
 #, fuzzy
 msgid "insufficient observations"
-msgstr "пропущенное значение в последних %d наблюдениях"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╡ п©п╬я│п╩п╣п╢п╫п╦я┘ %d п╫п╟п╠п╩я▌п╢п╣п╫п╦я▐я┘"
 
 #: lm.cpp:55
 msgid "'x' is not a matrix"
-msgstr "'x' -- не матрица"
+msgstr "'x' -- п╫п╣ п╪п╟я┌я─п╦я├п╟"
 
 #: lm.cpp:60
 #, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%lld) do not match"
-msgstr "измерения 'x' (%d,%d) и 'y' (%lld) не соответствуют друг другу"
+msgstr "п╦п╥п╪п╣я─п╣п╫п╦я▐ 'x' (%d,%d) п╦ 'y' (%lld) п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐я▌я┌ п╢я─я┐пЁ п╢я─я┐пЁя┐"
 
 #: lm.cpp:75 lm.cpp:79
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
-msgstr "NA/NaN/Inf в '%s'"
+msgstr "NA/NaN/Inf п╡ '%s'"
 
 #: loessc.cpp:240
 msgid "span is too small"
-msgstr "перекрытие слишком мало"
+msgstr "п©п╣я─п╣п╨я─я▀я┌п╦п╣ я│п╩п╦я┬п╨п╬п╪ п╪п╟п╩п╬"
 
 #: loessc.cpp:255
 #, fuzzy, c-format
 msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
-msgstr " возможно, потому что 'se = TRUE'"
+msgstr " п╡п╬п╥п╪п╬п╤п╫п╬, п©п╬я┌п╬п╪я┐ я┤я┌п╬ 'se = TRUE'"
 
 #: loessc.cpp:256
 #, fuzzy, c-format
 msgid "workspace required (%.0f) is too large."
-msgstr "требуемое рабочее пространство (%.0f) слишком велико%s."
+msgstr "я┌я─п╣п╠я┐п╣п╪п╬п╣ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬ (%.0f) я│п╩п╦я┬п╨п╬п╪ п╡п╣п╩п╦п╨п╬%s."
 
 #: loglin.cpp:43
 #, fuzzy
 msgid "no variables"
-msgstr "неправильные переменные"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п©п╣я─п╣п╪п╣п╫п╫я▀п╣"
 
 #: loglin.cpp:376
 msgid "this should not happen"
-msgstr "быть такого не может"
+msgstr "п╠я▀я┌я▄ я┌п╟п╨п╬пЁп╬ п╫п╣ п╪п╬п╤п╣я┌"
 
 #: loglin.cpp:378
 msgid "algorithm did not converge"
-msgstr "алгоритм не сошелся"
+msgstr "п╟п╩пЁп╬я─п╦я┌п╪ п╫п╣ я│п╬я┬п╣п╩я│я▐"
 
 #: loglin.cpp:380
 msgid "incorrect specification of 'table' or 'start'"
-msgstr "неправильное описание 'table' или 'start'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╬п©п╦я│п╟п╫п╦п╣ 'table' п╦п╩п╦ 'start'"
 
 #: lowess.cpp:286 lowess.cpp:288
 #, fuzzy
 msgid "invalid input"
-msgstr "неправильный тег"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╣пЁ"
 
 #: lowess.cpp:290
 msgid "'f' must be finite and > 0"
-msgstr "'f' должно быть конечным и > 0"
+msgstr "'f' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╨п╬п╫п╣я┤п╫я▀п╪ п╦ > 0"
 
 #: lowess.cpp:293
 msgid "'iter' must be finite and >= 0"
-msgstr "'iter' должен быть конечен и неотрицателен"
+msgstr "'iter' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╨п╬п╫п╣я┤п╣п╫ п╦ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩п╣п╫"
 
 #: lowess.cpp:296
 msgid "'delta' must be finite and > 0"
-msgstr "'delta' должно быть конечным и > 0"
+msgstr "'delta' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╨п╬п╫п╣я┤п╫я▀п╪ п╦ > 0"
 
 #: mAR.cpp:88
 #, fuzzy
 msgid "assert failed in src/library/stats/src/mAR.cpp"
-msgstr "высказывание не получилось в src/library/ts/src/carray.c"
+msgstr "п╡я▀я│п╨п╟п╥я▀п╡п╟п╫п╦п╣ п╫п╣ п©п╬п╩я┐я┤п╦п╩п╬я│я▄ п╡ src/library/ts/src/carray.c"
 
 #: mAR.cpp:464
 msgid "Singular matrix in qr_solve"
-msgstr "Сингулярная матрица в qr_solve"
+msgstr "п║п╦п╫пЁя┐п╩я▐я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╡ qr_solve"
 
 #: mAR.cpp:504
 msgid "Singular matrix in ldet"
-msgstr "Сингулярная матрица в ldet"
+msgstr "п║п╦п╫пЁя┐п╩я▐я─п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ п╡ ldet"
 
 #: mAR.cpp:689
 msgid "Invalid vmethod"
-msgstr "Неправильный vmethod"
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ vmethod"
 
 #: mAR.cpp:825
 msgid "Burg's algorithm failed to find partial correlation"
-msgstr "Алгоритм Бурга не смог найти частную корреляцию"
+msgstr "п░п╩пЁп╬я─п╦я┌п╪ п▒я┐я─пЁп╟ п╫п╣ я│п╪п╬пЁ п╫п╟п╧я┌п╦ я┤п╟я│я┌п╫я┐я▌ п╨п╬я─я─п╣п╩я▐я├п╦я▌"
 
-#: model.cpp:100
+#: model.cpp:103
 msgid "invalid variables"
-msgstr "неправильные переменные"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п©п╣я─п╣п╪п╣п╫п╫я▀п╣"
 
-#: model.cpp:104 model.cpp:109
+#: model.cpp:107 model.cpp:112
 msgid "number of variables != number of variable names"
-msgstr "количество переменных != количеству имен переменных"
+msgstr "п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п©п╣я─п╣п╪п╣п╫п╫я▀я┘ != п╨п╬п╩п╦я┤п╣я│я┌п╡я┐ п╦п╪п╣п╫ п©п╣я─п╣п╪п╣п╫п╫я▀я┘"
 
-#: model.cpp:107
+#: model.cpp:110
 msgid "invalid extra variables"
-msgstr "неправильные добавочные переменные"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╢п╬п╠п╟п╡п╬я┤п╫я▀п╣ п©п╣я─п╣п╪п╣п╫п╫я▀п╣"
 
-#: model.cpp:111
+#: model.cpp:114
 msgid "invalid extra variable names"
-msgstr "неправильное имя добавочной переменной"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╦п╪я▐ п╢п╬п╠п╟п╡п╬я┤п╫п╬п╧ п©п╣я─п╣п╪п╣п╫п╫п╬п╧"
 
-#: model.cpp:132
+#: model.cpp:135
 #, c-format
 msgid "overlong names in '%s'"
-msgstr "слишком длинное имя в '%s'"
+msgstr "я│п╩п╦я┬п╨п╬п╪ п╢п╩п╦п╫п╫п╬п╣ п╦п╪я▐ п╡ '%s'"
 
-#: model.cpp:159
+#: model.cpp:160
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
-msgstr "неправильный (%s) тип переменной '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ (%s) я┌п╦п© п©п╣я─п╣п╪п╣п╫п╫п╬п╧ '%s'"
 
-#: model.cpp:164
+#: model.cpp:166
 #, c-format
 msgid "variable lengths differ (found for '%s')"
-msgstr "длины переменных различаются (найдено в '%s')"
+msgstr "п╢п╩п╦п╫я▀ п©п╣я─п╣п╪п╣п╫п╫я▀я┘ я─п╟п╥п╩п╦я┤п╟я▌я┌я│я▐ (п╫п╟п╧п╢п╣п╫п╬ п╡ '%s')"
 
-#: model.cpp:221
+#: model.cpp:214
 msgid "invalid result from na.action"
-msgstr "неправильный результат 'na.action'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я─п╣п╥я┐п╩я▄я┌п╟я┌ 'na.action'"
 
-#: model.cpp:396
+#: model.cpp:386
 msgid "invalid model frame"
-msgstr "неправильный модельный фрейм"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╪п╬п╢п╣п╩я▄п╫я▀п╧ я└я─п╣п╧п╪"
 
-#: model.cpp:398
+#: model.cpp:388
 msgid "do not know how many cases"
-msgstr "не знаю, сколько строк"
+msgstr "п╫п╣ п╥п╫п╟я▌, я│п╨п╬п╩я▄п╨п╬ я│я┌я─п╬п╨"
 
-#: model.cpp:422
+#: model.cpp:412
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
-msgstr "длины переменных различаются (найдено для переменной %d)"
+msgstr "п╢п╩п╦п╫я▀ п©п╣я─п╣п╪п╣п╫п╫я▀я┘ я─п╟п╥п╩п╦я┤п╟я▌я┌я│я▐ (п╫п╟п╧п╢п╣п╫п╬ п╢п╩я▐ п©п╣я─п╣п╪п╣п╫п╫п╬п╧ %d)"
 
-#: model.cpp:426 model.cpp:433
+#: model.cpp:416 model.cpp:423
 #, c-format
 msgid "variable %d has no levels"
-msgstr "у переменной %d нет уровней"
+msgstr "я┐ п©п╣я─п╣п╪п╣п╫п╫п╬п╧ %d п╫п╣я┌ я┐я─п╬п╡п╫п╣п╧"
 
-#: model.cpp:544
+#: model.cpp:534
 msgid "the response appeared on the right-hand side and was dropped"
-msgstr "отклик появился справа и поэтому был удален"
+msgstr "п╬я┌п╨п╩п╦п╨ п©п╬я▐п╡п╦п╩я│я▐ я│п©я─п╟п╡п╟ п╦ п©п╬я█я┌п╬п╪я┐ п╠я▀п╩ я┐п╢п╟п╩п╣п╫"
 
-#: model.cpp:564
+#: model.cpp:554
 #, c-format
 msgid "term %d would require %.0g columns"
-msgstr "ермин %d требует %.0g колонок"
+msgstr "п╣я─п╪п╦п╫ %d я┌я─п╣п╠я┐п╣я┌ %.0g п╨п╬п╩п╬п╫п╬п╨"
 
-#: model.cpp:568
+#: model.cpp:558
 #, c-format
 msgid "matrix would require %.0g columns"
-msgstr "матрица требует %.0g колонок"
+msgstr "п╪п╟я┌я─п╦я├п╟ я┌я─п╣п╠я┐п╣я┌ %.0g п╨п╬п╩п╬п╫п╬п╨"
 
-#: model.cpp:579
+#: model.cpp:569
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
-msgstr "проблема с термом %d в 'model.matrix': не присвоены колонки"
+msgstr "п©я─п╬п╠п╩п╣п╪п╟ я│ я┌п╣я─п╪п╬п╪ %d п╡ 'model.matrix': п╫п╣ п©я─п╦я│п╡п╬п╣п╫я▀ п╨п╬п╩п╬п╫п╨п╦"
 
-#: model.cpp:628 model.cpp:633 model.cpp:639 model.cpp:650 model.cpp:656
-#: model.cpp:662
+#: model.cpp:618 model.cpp:623 model.cpp:629 model.cpp:640 model.cpp:646
+#: model.cpp:652
 msgid "term names will be truncated"
-msgstr "имена термов будут укорочены"
+msgstr "п╦п╪п╣п╫п╟ я┌п╣я─п╪п╬п╡ п╠я┐п╢я┐я┌ я┐п╨п╬я─п╬я┤п╣п╫я▀"
 
-#: model.cpp:642
+#: model.cpp:632
 msgid "complex variables are not currently allowed in model matrices"
-msgstr "комплексные переменные в модельных матрицах сейчас не разрешены"
+msgstr "п╨п╬п╪п©п╩п╣п╨я│п╫я▀п╣ п©п╣я─п╣п╪п╣п╫п╫я▀п╣ п╡ п╪п╬п╢п╣п╩я▄п╫я▀я┘ п╪п╟я┌я─п╦я├п╟я┘ я│п╣п╧я┤п╟я│ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
-#: model.cpp:666
+#: model.cpp:656
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
-msgstr "переменные типа '%s' в модельных матрицах не разрешены"
+msgstr "п©п╣я─п╣п╪п╣п╫п╫я▀п╣ я┌п╦п©п╟ '%s' п╡ п╪п╬п╢п╣п╩я▄п╫я▀я┘ п╪п╟я┌я─п╦я├п╟я┘ п╫п╣ я─п╟п╥я─п╣я┬п╣п╫я▀"
 
-#: model.cpp:881
+#: model.cpp:871
 msgid "invalid formula in 'update'"
-msgstr "неправильная формула в 'update'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я└п╬я─п╪я┐п╩п╟ п╡ 'update'"
 
-#: model.cpp:915
+#: model.cpp:905
 msgid "formula expected"
-msgstr "ожидается формула"
+msgstr "п╬п╤п╦п╢п╟п╣я┌я│я▐ я└п╬я─п╪я┐п╩п╟"
 
-#: model.cpp:1079
+#: model.cpp:1069
 msgid "invalid term in model formula"
-msgstr "неправильный терм в модельной формуле"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╣я─п╪ п╡ п╪п╬п╢п╣п╩я▄п╫п╬п╧ я└п╬я─п╪я┐п╩п╣"
 
-#: model.cpp:1170
+#: model.cpp:1160
 msgid "invalid model formula"
-msgstr "неправильная модельная формула"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╪п╬п╢п╣п╩я▄п╫п╟я▐ я└п╬я─п╪я┐п╩п╟"
 
-#: model.cpp:1202 model.cpp:1509
+#: model.cpp:1192 model.cpp:1499
 msgid "invalid power in formula"
-msgstr "неправильная степень в формуле"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌п╣п©п╣п╫я▄ п╡ я└п╬я─п╪я┐п╩п╣"
 
-#: model.cpp:1251
+#: model.cpp:1241
 msgid "invalid model formula in ExtractVars"
-msgstr "неправильная модельная формула в ExtractVars"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╪п╬п╢п╣п╩я▄п╫п╟я▐ я└п╬я─п╪я┐п╩п╟ п╡ ExtractVars"
 
-#: model.cpp:1294
+#: model.cpp:1284
 #, c-format
 msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
 msgstr ""
 
-#: model.cpp:1620
+#: model.cpp:1610
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
-msgstr "повторяющееся имя '%s' в таблице данных, использую '.'"
+msgstr "п©п╬п╡я┌п╬я─я▐я▌я┴п╣п╣я│я▐ п╦п╪я▐ '%s' п╡ я┌п╟п╠п╩п╦я├п╣ п╢п╟п╫п╫я▀я┘, п╦я│п©п╬п╩я▄п╥я┐я▌ '.'"
 
-#: model.cpp:1686
+#: model.cpp:1676
 msgid "invalid model formula in EncodeVars"
-msgstr "неправильная модельная формула в EncodeVars"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╪п╬п╢п╣п╩я▄п╫п╟я▐ я└п╬я─п╪я┐п╩п╟ п╡ EncodeVars"
 
-#: model.cpp:1763
+#: model.cpp:1752
 msgid "argument is not a valid model"
-msgstr "аргумент не является правильной моделью"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╪п╬п╢п╣п╩я▄я▌"
+
+#: model.cpp:1762
+msgid "'specials' must be NULL or a character vector"
+msgstr "'specials' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ NULL п╦п╩п╦ я┌п╣п╨я│я┌п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪"
 
 #: model.cpp:1773
-msgid "'specials' must be NULL or a character vector"
-msgstr "'specials' должен быть NULL или текстовым вектором"
-
-#: model.cpp:1784
 msgid "'data' argument is of the wrong type"
-msgstr "аргумент 'data' неправильного типа"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'data' п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬пЁп╬ я┌п╦п©п╟"
 
-#: model.cpp:1852
+#: model.cpp:1841
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
-msgstr "'varlist' изменился (из nvar=%d) в новый %d в результате EncodeVars() -- такое больше не должно случаться!"
+msgstr "'varlist' п╦п╥п╪п╣п╫п╦п╩я│я▐ (п╦п╥ nvar=%d) п╡ п╫п╬п╡я▀п╧ %d п╡ я─п╣п╥я┐п╩я▄я┌п╟я┌п╣ EncodeVars() -- я┌п╟п╨п╬п╣ п╠п╬п╩я▄я┬п╣ п╫п╣ п╢п╬п╩п╤п╫п╬ я│п╩я┐я┤п╟я┌я▄я│я▐!"
 
-#: model.cpp:2132
+#: model.cpp:2123
 msgid "'.' in formula and no 'data' argument"
-msgstr "'.' в формуле и нет аргумента 'data'"
+msgstr "'.' п╡ я└п╬я─п╪я┐п╩п╣ п╦ п╫п╣я┌ п╟я─пЁя┐п╪п╣п╫я┌п╟ 'data'"
 
 #: monoSpl.cpp:38
 msgid "n must be at least two"
-msgstr "m должен быть по крайней мере 2"
+msgstr "m п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п©п╬ п╨я─п╟п╧п╫п╣п╧ п╪п╣я─п╣ 2"
 
 #: monoSpl.cpp:71
 msgid "Argument m must be numeric"
-msgstr "Аргумент m должен быть числовым"
+msgstr "п░я─пЁя┐п╪п╣п╫я┌ m п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡я▀п╪"
 
 #: monoSpl.cpp:74
 msgid "length(m) must be at least two"
-msgstr "length(m) должна быть по меньшей мере 2"
+msgstr "length(m) п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ п©п╬ п╪п╣п╫я▄я┬п╣п╧ п╪п╣я─п╣ 2"
 
 #: monoSpl.cpp:76
 msgid "Argument Sx must be numeric vector one shorter than m[]"
-msgstr "Аргумент Sx должен быть числовым вектором короче m[]"
+msgstr "п░я─пЁя┐п╪п╣п╫я┌ Sx п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╨п╬я─п╬я┤п╣ m[]"
 
 #: nls.cpp:101
 msgid "'control' must be a list"
-msgstr "'control' должен быть списком"
+msgstr "'control' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #: nls.cpp:103
 msgid "'m' must be a list"
-msgstr "'m' должен быть списком"
+msgstr "'m' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
 #: nls.cpp:143 nls.cpp:148 nls.cpp:153 nls.cpp:158 nls.cpp:163
 #, c-format
 msgid "'%s' absent"
-msgstr "'%s' отсутствует"
+msgstr "'%s' п╬я┌я│я┐я┌я│я┌п╡я┐п╣я┌"
 
 #: nls.cpp:239
 msgid "singular gradient"
-msgstr "сингулярный градиент"
+msgstr "я│п╦п╫пЁя┐п╩я▐я─п╫я▀п╧ пЁя─п╟п╢п╦п╣п╫я┌"
 
 #: nls.cpp:261
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
-msgstr "фактор шага %g стал меньше 'minFactor' %g"
+msgstr "я└п╟п╨я┌п╬я─ я┬п╟пЁп╟ %g я│я┌п╟п╩ п╪п╣п╫я▄я┬п╣ 'minFactor' %g"
 
 #: nls.cpp:269
 #, c-format
 msgid "number of iterations exceeded maximum of %d"
-msgstr "число итераций превысило максимум = %d"
+msgstr "я┤п╦я│п╩п╬ п╦я┌п╣я─п╟я├п╦п╧ п©я─п╣п╡я▀я│п╦п╩п╬ п╪п╟п╨я│п╦п╪я┐п╪ = %d"
 
 #: nls.cpp:273
 msgid "converged"
-msgstr "сошлось"
+msgstr "я│п╬я┬п╩п╬я│я▄"
 
 #: nls.cpp:289
 msgid "'theta' should be of type character"
-msgstr "'theta' должна быть текстового типа"
+msgstr "'theta' п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬пЁп╬ я┌п╦п©п╟"
 
 #: nls.cpp:291 port.cpp:402
 msgid "use of NULL environment is defunct"
-msgstr "использование окружения NULL больше не работает"
+msgstr "п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣ п╬п╨я─я┐п╤п╣п╫п╦я▐ NULL п╠п╬п╩я▄я┬п╣ п╫п╣ я─п╟п╠п╬я┌п╟п╣я┌"
 
 #: nls.cpp:295
 msgid "'rho' should be an environment"
-msgstr "'rho' должно быть окружением"
+msgstr "'rho' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╬п╨я─я┐п╤п╣п╫п╦п╣п╪"
 
 #: nls.cpp:301
 msgid "'dir' is not a numeric vector of the correct length"
-msgstr "'dir' не является числовым вектором вектор правильной длины длина"
+msgstr "'dir' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я┤п╦я│п╩п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╡п╣п╨я┌п╬я─ п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╢п╩п╦п╫я▀ п╢п╩п╦п╫п╟"
 
 #: nls.cpp:318
 msgid "Missing value or an infinity produced when evaluating the model"
-msgstr "Пропущенное значение или неопределенность получено при вычислении модели"
+msgstr "п÷я─п╬п©я┐я┴п╣п╫п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╦п╩п╦ п╫п╣п╬п©я─п╣п╢п╣п╩п╣п╫п╫п╬я│я┌я▄ п©п╬п╩я┐я┤п╣п╫п╬ п©я─п╦ п╡я▀я┤п╦я│п╩п╣п╫п╦п╦ п╪п╬п╢п╣п╩п╦"
 
 #: nls.cpp:331
 #, c-format
 msgid "variable '%s' is integer, not numeric"
-msgstr "переменная '%s' -- целое число, не 'numeric'"
+msgstr "п©п╣я─п╣п╪п╣п╫п╫п╟я▐ '%s' -- я├п╣п╩п╬п╣ я┤п╦я│п╩п╬, п╫п╣ 'numeric'"
 
 #: nls.cpp:333
 #, c-format
 msgid "variable '%s' is not numeric"
-msgstr "переменная '%s' не является числовой"
+msgstr "п©п╣я─п╣п╪п╣п╫п╫п╟я▐ '%s' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я┤п╦я│п╩п╬п╡п╬п╧"
 
 #: optim.cpp:79 optim.cpp:103
 msgid "non-finite value supplied by optim"
-msgstr "бесконечное значение передано из 'optim'"
+msgstr "п╠п╣я│п╨п╬п╫п╣я┤п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п©п╣я─п╣п╢п╟п╫п╬ п╦п╥ 'optim'"
 
 #: optim.cpp:86
 #, c-format
 msgid "objective function in optim evaluates to length %d not 1"
-msgstr "целевая функция в 'optim' возвращает объект длины %d, а не 1"
+msgstr "я├п╣п╩п╣п╡п╟я▐ я└я┐п╫п╨я├п╦я▐ п╡ 'optim' п╡п╬п╥п╡я─п╟я┴п╟п╣я┌ п╬п╠я┼п╣п╨я┌ п╢п╩п╦п╫я▀ %d, п╟ п╫п╣ 1"
 
 #: optim.cpp:110
 #, c-format
 msgid "gradient in optim evaluated to length %d not %d"
-msgstr "полученная длина градиента в 'optim' -- %d, а не %d"
+msgstr "п©п╬п╩я┐я┤п╣п╫п╫п╟я▐ п╢п╩п╦п╫п╟ пЁя─п╟п╢п╦п╣п╫я┌п╟ п╡ 'optim' -- %d, п╟ п╫п╣ %d"
 
 #: optim.cpp:145 optim.cpp:183
 #, c-format
 msgid "non-finite finite-difference value [%d]"
-msgstr "не-конечное конечно-разностное значение [%d]"
+msgstr "п╫п╣-п╨п╬п╫п╣я┤п╫п╬п╣ п╨п╬п╫п╣я┤п╫п╬-я─п╟п╥п╫п╬я│я┌п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ [%d]"
 
 #: optim.cpp:212 optim.cpp:418
 msgid "'fn' is not a function"
-msgstr "'fn' не является функцией"
+msgstr "'fn' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я└я┐п╫п╨я├п╦п╣п╧"
 
 #: optim.cpp:230 optim.cpp:424
 msgid "'parscale' is of the wrong length"
-msgstr "'parscale' неправильной длины"
+msgstr "'parscale' п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╢п╩п╦п╫я▀"
 
 #: optim.cpp:259
 msgid "'maxit' is not an integer"
-msgstr "'maxit' не является целым числом"
+msgstr "'maxit' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я├п╣п╩я▀п╪ я┤п╦я│п╩п╬п╪"
 
 #: optim.cpp:279
 msgid "'tmax' is not a positive integer"
-msgstr "'tmax' не является положительным целым числом"
+msgstr "'tmax' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀п╪ я├п╣п╩я▀п╪ я┤п╦я│п╩п╬п╪"
 
 #: optim.cpp:281 optim.cpp:298 optim.cpp:323 optim.cpp:353 optim.cpp:432
 msgid "'gr' is not a function"
-msgstr "'gr' не является функцией"
+msgstr "'gr' п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ я└я┐п╫п╨я├п╦п╣п╧"
 
 #: optim.cpp:304 optim.cpp:329 optim.cpp:359 optim.cpp:438
 msgid "'ndeps' is of the wrong length"
-msgstr "'ndeps' неправильной длины"
+msgstr "'ndeps' п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╢п╩п╦п╫я▀"
 
 #: optim.cpp:389
 msgid "unknown 'method'"
-msgstr "неизвестный 'method'"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ 'method'"
 
 #: optimize.cpp:215 optimize.cpp:305 optimize.cpp:527
 msgid "NA replaced by maximum positive value"
-msgstr "NA заменены максимальным положительным значением"
+msgstr "NA п╥п╟п╪п╣п╫п╣п╫я▀ п╪п╟п╨я│п╦п╪п╟п╩я▄п╫я▀п╪ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀п╪ п╥п╫п╟я┤п╣п╫п╦п╣п╪"
 
 #: optimize.cpp:224 optimize.cpp:314 optimize.cpp:536
 msgid "-Inf replaced by maximally negative value"
-msgstr "-Inf заменены максимальным отрицательным значением"
+msgstr "-Inf п╥п╟п╪п╣п╫п╣п╫я▀ п╪п╟п╨я│п╦п╪п╟п╩я▄п╫я▀п╪ п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪ п╥п╫п╟я┤п╣п╫п╦п╣п╪"
 
 #: optimize.cpp:227 optimize.cpp:317 optimize.cpp:539
 #, fuzzy, c-format
 msgid "%s replaced by maximum positive value"
-msgstr "NA заменены максимальным положительным значением"
+msgstr "NA п╥п╟п╪п╣п╫п╣п╫я▀ п╪п╟п╨я│п╦п╪п╟п╩я▄п╫я▀п╪ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀п╪ п╥п╫п╟я┤п╣п╫п╦п╣п╪"
 
 #: optimize.cpp:237
 msgid "invalid function value in 'optimize'"
-msgstr "неправильное значение функции в 'optimize'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ я└я┐п╫п╨я├п╦п╦ п╡ 'optimize'"
 
 #: optimize.cpp:253 optimize.cpp:346 optimize.cpp:732
 msgid "attempt to minimize non-function"
-msgstr "попытка минимизировать не-функцию"
+msgstr "п©п╬п©я▀я┌п╨п╟ п╪п╦п╫п╦п╪п╦п╥п╦я─п╬п╡п╟я┌я▄ п╫п╣-я└я┐п╫п╨я├п╦я▌"
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
 #: optimize.cpp:356 optimize.cpp:372
 #, c-format
 msgid "invalid '%s' value"
-msgstr "неправильное значение '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ '%s'"
 
 #: optimize.cpp:269 optimize.cpp:357
 msgid "'xmin' not less than 'xmax'"
-msgstr "'xmin' не меньше чем 'xmax'"
+msgstr "'xmin' п╫п╣ п╪п╣п╫я▄я┬п╣ я┤п╣п╪ 'xmax'"
 
 #: optimize.cpp:327
 msgid "invalid function value in 'zeroin'"
-msgstr "неправильное значение функции в 'zeroin'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ я└я┐п╫п╨я├п╦п╦ п╡ 'zeroin'"
 
 #: optimize.cpp:362 optimize.cpp:367
 #, c-format
 msgid "NA value for '%s' is not allowed"
-msgstr "NA в '%s' не разрешается"
+msgstr "NA п╡ '%s' п╫п╣ я─п╟п╥я─п╣я┬п╟п╣я┌я│я▐"
 
 #: optimize.cpp:377
 msgid "'maxiter' must be positive"
-msgstr "'maxiter' должен быть положителен"
+msgstr "'maxiter' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩п╣п╫"
 
 #: optimize.cpp:519
 msgid "non-finite value supplied by 'nlm'"
-msgstr "для 'nlm' установлено не конечное значение"
+msgstr "п╢п╩я▐ 'nlm' я┐я│я┌п╟п╫п╬п╡п╩п╣п╫п╬ п╫п╣ п╨п╬п╫п╣я┤п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #: optimize.cpp:559
 msgid "invalid function value in 'nlm' optimizer"
-msgstr "неправильное значение функции в оптимизаторе 'nlm'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ я└я┐п╫п╨я├п╦п╦ п╡ п╬п©я┌п╦п╪п╦п╥п╟я┌п╬я─п╣ 'nlm'"
 
 #: optimize.cpp:571 optimize.cpp:586
 msgid "function value caching for optimization is seriously confused"
-msgstr "не удалось получить предвычисленное значение функции"
+msgstr "п╫п╣ я┐п╢п╟п╩п╬я│я▄ п©п╬п╩я┐я┤п╦я┌я▄ п©я─п╣п╢п╡я▀я┤п╦я│п╩п╣п╫п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ я└я┐п╫п╨я├п╦п╦"
 
 #: optimize.cpp:601
 msgid "numeric parameter expected"
-msgstr "ожидается числовой параметр"
+msgstr "п╬п╤п╦п╢п╟п╣я┌я│я▐ я┤п╦я│п╩п╬п╡п╬п╧ п©п╟я─п╟п╪п╣я┌я─"
 
 #: optimize.cpp:605
 msgid "conflicting parameter lengths"
-msgstr "конфликтующие длины параметров"
+msgstr "п╨п╬п╫я└п╩п╦п╨я┌я┐я▌я┴п╦п╣ п╢п╩п╦п╫я▀ п©п╟я─п╟п╪п╣я┌я─п╬п╡"
 
 #: optimize.cpp:609
 msgid "invalid parameter length"
-msgstr "неправильный параметр длины"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п©п╟я─п╟п╪п╣я┌я─ п╢п╩п╦п╫я▀"
 
 #: optimize.cpp:618 optimize.cpp:625 optimize.cpp:632
 msgid "missing value in parameter"
-msgstr "пропущенное значение в параметре"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╡ п©п╟я─п╟п╪п╣я┌я─п╣"
 
 #: optimize.cpp:637
 msgid "invalid parameter type"
-msgstr "неправильный параметр типа"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п©п╟я─п╟п╪п╣я┌я─ я┌п╦п©п╟"
 
 #: optimize.cpp:648
 msgid "non-positive number of parameters in nlm"
-msgstr "не положительное количество параметров в nlm"
+msgstr "п╫п╣ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫п╬п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ п©п╟я─п╟п╪п╣я┌я─п╬п╡ п╡ nlm"
 
 #: optimize.cpp:650
 msgid "nlm is inefficient for 1-d problems"
-msgstr "'nlm' неэффективен для одномерных проблем"
+msgstr "'nlm' п╫п╣я█я└я└п╣п╨я┌п╦п╡п╣п╫ п╢п╩я▐ п╬п╢п╫п╬п╪п╣я─п╫я▀я┘ п©я─п╬п╠п╩п╣п╪"
 
 #: optimize.cpp:652
 msgid "invalid gradient tolerance in nlm"
-msgstr "неправильный допуск градиента в nlm"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╢п╬п©я┐я│п╨ пЁя─п╟п╢п╦п╣п╫я┌п╟ п╡ nlm"
 
 #: optimize.cpp:654
 msgid "invalid iteration limit in nlm"
-msgstr "неправильный лимит итераций в nlm"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╩п╦п╪п╦я┌ п╦я┌п╣я─п╟я├п╦п╧ п╡ nlm"
 
 #: optimize.cpp:656
 msgid "minimization function has no good digits in nlm"
-msgstr "у функции минимизации в nlm нет хороших чисел"
+msgstr "я┐ я└я┐п╫п╨я├п╦п╦ п╪п╦п╫п╦п╪п╦п╥п╟я├п╦п╦ п╡ nlm п╫п╣я┌ я┘п╬я─п╬я┬п╦я┘ я┤п╦я│п╣п╩"
 
 #: optimize.cpp:658
 msgid "no analytic gradient to check in nlm!"
-msgstr "в nlm нет аналитического градиента для проверки!"
+msgstr "п╡ nlm п╫п╣я┌ п╟п╫п╟п╩п╦я┌п╦я┤п╣я│п╨п╬пЁп╬ пЁя─п╟п╢п╦п╣п╫я┌п╟ п╢п╩я▐ п©я─п╬п╡п╣я─п╨п╦!"
 
 #: optimize.cpp:660
 msgid "no analytic Hessian to check in nlm!"
-msgstr "в nlm нет аналитического гессиана для проверки!"
+msgstr "п╡ nlm п╫п╣я┌ п╟п╫п╟п╩п╦я┌п╦я┤п╣я│п╨п╬пЁп╬ пЁп╣я│я│п╦п╟п╫п╟ п╢п╩я▐ п©я─п╬п╡п╣я─п╨п╦!"
 
 #: optimize.cpp:662
 msgid "probable coding error in analytic gradient"
-msgstr "возможно, ошибка кодирования в аналитическом градиенте"
+msgstr "п╡п╬п╥п╪п╬п╤п╫п╬, п╬я┬п╦п╠п╨п╟ п╨п╬п╢п╦я─п╬п╡п╟п╫п╦я▐ п╡ п╟п╫п╟п╩п╦я┌п╦я┤п╣я│п╨п╬п╪ пЁя─п╟п╢п╦п╣п╫я┌п╣"
 
 #: optimize.cpp:664
 msgid "probable coding error in analytic Hessian"
-msgstr "возможно, ошибка кодирования в аналитическом гессиане"
+msgstr "п╡п╬п╥п╪п╬п╤п╫п╬, п╬я┬п╦п╠п╨п╟ п╨п╬п╢п╦я─п╬п╡п╟п╫п╦я▐ п╡ п╟п╫п╟п╩п╦я┌п╦я┤п╣я│п╨п╬п╪ пЁп╣я│я│п╦п╟п╫п╣"
 
 #: optimize.cpp:666
 #, c-format
@@ -860,24 +861,24 @@ msgid ""
 "*** unknown error message (msg = %d) in nlm()\n"
 "*** should not happen!"
 msgstr ""
-"*** неизвестное сообщение об ошибке (msg = %d) в nlm()\n"
-"*** не должно происходить!"
+"*** п╫п╣п╦п╥п╡п╣я│я┌п╫п╬п╣ я│п╬п╬п╠я┴п╣п╫п╦п╣ п╬п╠ п╬я┬п╦п╠п╨п╣ (msg = %d) п╡ nlm()\n"
+"*** п╫п╣ п╢п╬п╩п╤п╫п╬ п©я─п╬п╦я│я┘п╬п╢п╦я┌я▄!"
 
 #: optimize.cpp:677
 msgid "Relative gradient close to zero.\n"
-msgstr "Относительный градиент близок к 0.\n"
+msgstr "п·я┌п╫п╬я│п╦я┌п╣п╩я▄п╫я▀п╧ пЁя─п╟п╢п╦п╣п╫я┌ п╠п╩п╦п╥п╬п╨ п╨ 0.\n"
 
 #: optimize.cpp:678 optimize.cpp:682
 msgid "Current iterate is probably solution.\n"
-msgstr "Текущая итерация, возможно, является решением.\n"
+msgstr "п╒п╣п╨я┐я┴п╟я▐ п╦я┌п╣я─п╟я├п╦я▐, п╡п╬п╥п╪п╬п╤п╫п╬, я▐п╡п╩я▐п╣я┌я│я▐ я─п╣я┬п╣п╫п╦п╣п╪.\n"
 
 #: optimize.cpp:681
 msgid "Successive iterates within tolerance.\n"
-msgstr "Последовательные итерации внутри допуска.\n"
+msgstr "п÷п╬я│п╩п╣п╢п╬п╡п╟я┌п╣п╩я▄п╫я▀п╣ п╦я┌п╣я─п╟я├п╦п╦ п╡п╫я┐я┌я─п╦ п╢п╬п©я┐я│п╨п╟.\n"
 
 #: optimize.cpp:685
 msgid "Last global step failed to locate a point lower than x.\n"
-msgstr "Последнему глобальному шагу не удалось определить точку, меньшую чем x.\n"
+msgstr "п÷п╬я│п╩п╣п╢п╫п╣п╪я┐ пЁп╩п╬п╠п╟п╩я▄п╫п╬п╪я┐ я┬п╟пЁя┐ п╫п╣ я┐п╢п╟п╩п╬я│я▄ п╬п©я─п╣п╢п╣п╩п╦я┌я▄ я┌п╬я┤п╨я┐, п╪п╣п╫я▄я┬я┐я▌ я┤п╣п╪ x.\n"
 
 #: optimize.cpp:686
 msgid ""
@@ -885,13 +886,13 @@ msgid ""
 "the function is too non-linear for this algorithm,\n"
 "or steptol is too large.\n"
 msgstr ""
-"Либо x является приближенным локальным минимумом функции,\n"
-"либо функция для этого алгоритма слишкомнелинейна,\n"
-"либо 'steptol' слишком велико.\n"
+"п⌡п╦п╠п╬ x я▐п╡п╩я▐п╣я┌я│я▐ п©я─п╦п╠п╩п╦п╤п╣п╫п╫я▀п╪ п╩п╬п╨п╟п╩я▄п╫я▀п╪ п╪п╦п╫п╦п╪я┐п╪п╬п╪ я└я┐п╫п╨я├п╦п╦,\n"
+"п╩п╦п╠п╬ я└я┐п╫п╨я├п╦я▐ п╢п╩я▐ я█я┌п╬пЁп╬ п╟п╩пЁп╬я─п╦я┌п╪п╟ я│п╩п╦я┬п╨п╬п╪п╫п╣п╩п╦п╫п╣п╧п╫п╟,\n"
+"п╩п╦п╠п╬ 'steptol' я│п╩п╦я┬п╨п╬п╪ п╡п╣п╩п╦п╨п╬.\n"
 
 #: optimize.cpp:691
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
-msgstr "Лимит итераций превышен. Алгоритм завершился ошибкой.\n"
+msgstr "п⌡п╦п╪п╦я┌ п╦я┌п╣я─п╟я├п╦п╧ п©я─п╣п╡я▀я┬п╣п╫. п░п╩пЁп╬я─п╦я┌п╪ п╥п╟п╡п╣я─я┬п╦п╩я│я▐ п╬я┬п╦п╠п╨п╬п╧.\n"
 
 #: optimize.cpp:694
 msgid ""
@@ -901,56 +902,56 @@ msgid ""
 "from above in some direction,\n"
 "or stepmx is too small.\n"
 msgstr ""
-"Максимальный размер шага превышен 5 раз подряд.\n"
-"Либо функция неограничена снизу,\n"
-"либо стремится асимптотически к конечному значению\n"
-"сверху в том же направлении,\n"
-"либо 'stepmx' слишком мало.\n"
+"п°п╟п╨я│п╦п╪п╟п╩я▄п╫я▀п╧ я─п╟п╥п╪п╣я─ я┬п╟пЁп╟ п©я─п╣п╡я▀я┬п╣п╫ 5 я─п╟п╥ п©п╬п╢я─я▐п╢.\n"
+"п⌡п╦п╠п╬ я└я┐п╫п╨я├п╦я▐ п╫п╣п╬пЁя─п╟п╫п╦я┤п╣п╫п╟ я│п╫п╦п╥я┐,\n"
+"п╩п╦п╠п╬ я│я┌я─п╣п╪п╦я┌я│я▐ п╟я│п╦п╪п©я┌п╬я┌п╦я┤п╣я│п╨п╦ п╨ п╨п╬п╫п╣я┤п╫п╬п╪я┐ п╥п╫п╟я┤п╣п╫п╦я▌\n"
+"я│п╡п╣я─я┘я┐ п╡ я┌п╬п╪ п╤п╣ п╫п╟п©я─п╟п╡п╩п╣п╫п╦п╦,\n"
+"п╩п╦п╠п╬ 'stepmx' я│п╩п╦я┬п╨п╬п╪ п╪п╟п╩п╬.\n"
 
 #: optimize.cpp:755 optimize.cpp:760 optimize.cpp:764 optimize.cpp:768
 #: optimize.cpp:772 optimize.cpp:776 optimize.cpp:781
 msgid "invalid NA value in parameter"
-msgstr "неправильное NA-значение в параметре"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ NA-п╥п╫п╟я┤п╣п╫п╦п╣ п╡ п©п╟я─п╟п╪п╣я┌я─п╣"
 
 #: optimize.cpp:810
 msgid "hessian supplied is of the wrong length or mode, so ignored"
-msgstr "переданный гессиан неправильной длины или типа, и поэтому пропущен"
+msgstr "п©п╣я─п╣п╢п╟п╫п╫я▀п╧ пЁп╣я│я│п╦п╟п╫ п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╢п╩п╦п╫я▀ п╦п╩п╦ я┌п╦п©п╟, п╦ п©п╬я█я┌п╬п╪я┐ п©я─п╬п©я┐я┴п╣п╫"
 
 #: optimize.cpp:814
 msgid "gradient supplied is of the wrong length or mode, so ignored"
-msgstr "переданный градиент неправильной длины или типа, и поэтому пропущен"
+msgstr "п©п╣я─п╣п╢п╟п╫п╫я▀п╧ пЁя─п╟п╢п╦п╣п╫я┌ п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╧ п╢п╩п╦п╫я▀ п╦п╩п╦ я┌п╦п©п╟, п╦ п©п╬я█я┌п╬п╪я┐ п©я─п╬п©я┐я┴п╣п╫"
 
 #: pacf.cpp:82
 msgid "bad Starma struct"
-msgstr "неправильная структура 'Starma'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌я─я┐п╨я┌я┐я─п╟ 'Starma'"
 
 #: pacf.cpp:228
 #, c-format
 msgid "starma error code %d"
-msgstr "ошибка 'starma' с кодом %d"
+msgstr "п╬я┬п╦п╠п╨п╟ 'starma' я│ п╨п╬п╢п╬п╪ %d"
 
 #: pacf.cpp:288
 #, c-format
 msgid "forkal error code %d"
-msgstr "ошибка 'forkal' с кодом %d"
+msgstr "п╬я┬п╦п╠п╨п╟ 'forkal' я│ п╨п╬п╢п╬п╪ %d"
 
 #: pacf.cpp:460
 msgid "invalid value of lag.max"
-msgstr "неправильное значение 'lag.max'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ 'lag.max'"
 
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
-msgstr "Rf_divset: alg = %d должен быть 1, 2, 3 или 4"
+msgstr "Rf_divset: alg = %d п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ 1, 2, 3 п╦п╩п╦ 4"
 
 #: port.cpp:165
 msgid "port algorithms 3 or higher are not supported"
-msgstr "алгоритмы портов 3 или выше не поддерживаются"
+msgstr "п╟п╩пЁп╬я─п╦я┌п╪я▀ п©п╬я─я┌п╬п╡ 3 п╦п╩п╦ п╡я▀я┬п╣ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟я▌я┌я│я▐"
 
 #: port.cpp:339
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
-msgstr "градиентная функция должна возвращать числовой вектор длины %d"
+msgstr "пЁя─п╟п╢п╦п╣п╫я┌п╫п╟я▐ я└я┐п╫п╨я├п╦я▐ п╢п╬п╩п╤п╫п╟ п╡п╬п╥п╡я─п╟я┴п╟я┌я▄ я┤п╦я│п╩п╬п╡п╬п╧ п╡п╣п╨я┌п╬я─ п╢п╩п╦п╫я▀ %d"
 
 #: port.cpp:342
 msgid "NA/NaN gradient evaluation"
@@ -959,7 +960,7 @@ msgstr ""
 #: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
-msgstr "Функция гессиана должна возвращать квадратную числовую матрицу порядка %d"
+msgstr "п╓я┐п╫п╨я├п╦я▐ пЁп╣я│я│п╦п╟п╫п╟ п╢п╬п╩п╤п╫п╟ п╡п╬п╥п╡я─п╟я┴п╟я┌я▄ п╨п╡п╟п╢я─п╟я┌п╫я┐я▌ я┤п╦я│п╩п╬п╡я┐я▌ п╪п╟я┌я─п╦я├я┐ п©п╬я─я▐п╢п╨п╟ %d"
 
 #: port.cpp:355
 msgid "NA/NaN Hessian evaluation"
@@ -967,62 +968,62 @@ msgstr ""
 
 #: port.cpp:405
 msgid "'rho' must be an environment"
-msgstr "'rho' должно быть окружением"
+msgstr "'rho' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╬п╨я─я┐п╤п╣п╫п╦п╣п╪"
 
 #: port.cpp:407 port.cpp:575
 #, fuzzy
 msgid "'d' must be a nonempty numeric (double) vector"
-msgstr "'d' должен быть непустым числовым вектором"
+msgstr "'d' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п©я┐я│я┌я▀п╪ я┤п╦я│п╩п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪"
 
 #: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
-msgstr "Когда определяется функция, вычисляющая гессиан, должен быть определен и градиент"
+msgstr "п п╬пЁп╢п╟ п╬п©я─п╣п╢п╣п╩я▐п╣я┌я│я▐ я└я┐п╫п╨я├п╦я▐, п╡я▀я┤п╦я│п╩я▐я▌я┴п╟я▐ пЁп╣я│я│п╦п╟п╫, п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п©я─п╣п╢п╣п╩п╣п╫ п╦ пЁя─п╟п╢п╦п╣п╫я┌"
 
 #: port.cpp:412
 #, fuzzy, c-format
 msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
-msgstr "окружение 'rho' должно содержать числовой вектор '.par' длины %d"
+msgstr "п╬п╨я─я┐п╤п╣п╫п╦п╣ 'rho' п╢п╬п╩п╤п╫п╬ я│п╬п╢п╣я─п╤п╟я┌я▄ я┤п╦я│п╩п╬п╡п╬п╧ п╡п╣п╨я┌п╬я─ '.par' п╢п╩п╦п╫я▀ %d"
 
 #: port.cpp:426
 #, fuzzy
 msgid "'lower' and 'upper' must be numeric (double) vectors"
-msgstr "'lower' и 'upper' должны быть числовыми векторами"
+msgstr "'lower' п╦ 'upper' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡я▀п╪п╦ п╡п╣п╨я┌п╬я─п╟п╪п╦"
 
 #: port.cpp:441
 #, fuzzy
 msgid "NA/NaN function evaluation"
-msgstr "неправильное значение функции в 'zeroin'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ я└я┐п╫п╨я├п╦п╦ п╡ 'zeroin'"
 
 #: port.cpp:484
 msgid "'getElement' applies only to named lists"
-msgstr "'getElement' применяется лишь к именованным спискам"
+msgstr "'getElement' п©я─п╦п╪п╣п╫я▐п╣я┌я│я▐ п╩п╦я┬я▄ п╨ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╪ я│п©п╦я│п╨п╟п╪"
 
 #: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
-msgstr "%s$%s() не найден"
+msgstr "%s$%s() п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
-msgstr "'gradient' должен быть числовой матрицей матрицей с измерениями (%d,%d)"
+msgstr "'gradient' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡п╬п╧ п╪п╟я┌я─п╦я├п╣п╧ п╪п╟я┌я─п╦я├п╣п╧ я│ п╦п╥п╪п╣я─п╣п╫п╦я▐п╪п╦ (%d,%d)"
 
 #: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
-msgstr "fcn выдала тип %d, длину %d - нужен тип %d, длина %d"
+msgstr "fcn п╡я▀п╢п╟п╩п╟ я┌п╦п© %d, п╢п╩п╦п╫я┐ %d - п╫я┐п╤п╣п╫ я┌п╦п© %d, п╢п╩п╦п╫п╟ %d"
 
 #: port.cpp:555
 msgid "invalid type for eval_check_store"
-msgstr "неправильный тип 'eval_check_store'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╦п© 'eval_check_store'"
 
 #: port.cpp:576
 msgid "m must be a list"
-msgstr "m должен быть списком"
+msgstr "m п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
-msgstr "'lowerb' и 'upperb' должны быть числовыми векторами"
+msgstr "'lowerb' п╦ 'upperb' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ я┤п╦я│п╩п╬п╡я▀п╪п╦ п╡п╣п╨я┌п╬я─п╟п╪п╦"
 
 #: prho.cpp:158
 msgid "invalid sample size 'n' in C routine prho(n,s,*)"
@@ -1030,54 +1031,54 @@ msgstr ""
 
 #: rWishart.cpp:53
 msgid "inconsistent degrees of freedom and dimension"
-msgstr "несвязанные степени свободы и размерность"
+msgstr "п╫п╣я│п╡я▐п╥п╟п╫п╫я▀п╣ я│я┌п╣п©п╣п╫п╦ я│п╡п╬п╠п╬п╢я▀ п╦ я─п╟п╥п╪п╣я─п╫п╬я│я┌я▄"
 
 #: rWishart.cpp:86
 msgid "'scal' must be a square, real matrix"
-msgstr "'scal' должен быть настоящей квадратной матрицей"
+msgstr "'scal' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╟я│я┌п╬я▐я┴п╣п╧ п╨п╡п╟п╢я─п╟я┌п╫п╬п╧ п╪п╟я┌я─п╦я├п╣п╧"
 
 #: rWishart.cpp:99
 msgid "'scal' matrix is not positive-definite"
-msgstr "матрица 'scal' не положительно-определенная"
+msgstr "п╪п╟я┌я─п╦я├п╟ 'scal' п╫п╣ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫п╬-п╬п©я─п╣п╢п╣п╩п╣п╫п╫п╟я▐"
 
-#: random.cpp:58 random.cpp:142 random.cpp:222 random.cpp:312
+#: random.cpp:54 random.cpp:138 random.cpp:218 random.cpp:308
 msgid "NAs produced"
-msgstr "получились NA"
+msgstr "п©п╬п╩я┐я┤п╦п╩п╦я│я▄ NA"
 
-#: random.cpp:65 random.cpp:71 random.cpp:77 random.cpp:92 random.cpp:172
-#: random.cpp:261 random.cpp:399
+#: random.cpp:61 random.cpp:67 random.cpp:73 random.cpp:88 random.cpp:168
+#: random.cpp:257 random.cpp:395
 msgid "invalid arguments"
-msgstr "неправильные аргументы"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀"
 
-#: random.cpp:338
+#: random.cpp:334
 msgid "NA in probability vector"
-msgstr "NA в векторе вероятности"
+msgstr "NA п╡ п╡п╣п╨я┌п╬я─п╣ п╡п╣я─п╬я▐я┌п╫п╬я│я┌п╦"
 
-#: random.cpp:340
+#: random.cpp:336
 msgid "negative probability"
-msgstr "отрицательная вероятность"
+msgstr "п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫п╟я▐ п╡п╣я─п╬я▐я┌п╫п╬я│я┌я▄"
 
-#: random.cpp:346
+#: random.cpp:342
 msgid "no positive probabilities"
-msgstr "нет возможных вероятностей"
+msgstr "п╫п╣я┌ п╡п╬п╥п╪п╬п╤п╫я▀я┘ п╡п╣я─п╬я▐я┌п╫п╬я│я┌п╣п╧"
 
-#: random.cpp:358
+#: random.cpp:354
 msgid "invalid first argument 'n'"
-msgstr "неправильный первый аргумент 'n'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п©п╣я─п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'n'"
 
-#: random.cpp:360
+#: random.cpp:356
 msgid "invalid second argument 'size'"
-msgstr "неправильный второй аргумент 'size'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╡я┌п╬я─п╬п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'size'"
 
 #: rcont.cpp:80
 #, c-format
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
-msgstr "rcont2 [%d,%d]: exp недозаполнен в 0; ошибка алгоритма"
+msgstr "rcont2 [%d,%d]: exp п╫п╣п╢п╬п╥п╟п©п╬п╩п╫п╣п╫ п╡ 0; п╬я┬п╦п╠п╨п╟ п╟п╩пЁп╬я─п╦я┌п╪п╟"
 
 #: smooth.cpp:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
-msgstr "неправильное конечное правило для бегущей медианы 3: %d"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╨п╬п╫п╣я┤п╫п╬п╣ п©я─п╟п╡п╦п╩п╬ п╢п╩я▐ п╠п╣пЁя┐я┴п╣п╧ п╪п╣п╢п╦п╟п╫я▀ 3: %d"
 
 #: splines.cpp:368
 msgid "inputs of different lengths"
@@ -1086,36 +1087,36 @@ msgstr ""
 #: starma.cpp:357
 #, c-format
 msgid "missing value in last %d observations"
-msgstr "пропущенное значение в последних %d наблюдениях"
+msgstr "п©я─п╬п©я┐я┴п╣п╫п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ п╡ п©п╬я│п╩п╣п╢п╫п╦я┘ %d п╫п╟п╠п╩я▌п╢п╣п╫п╦я▐я┘"
 
 #: swilk.cpp:209
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
-msgstr "быть такого не может"
+msgstr "п╠я▀я┌я▄ я┌п╟п╨п╬пЁп╬ п╫п╣ п╪п╬п╤п╣я┌"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
-#~ msgstr "NA/Inf заменены максимальным положительным значением"
+#~ msgstr "NA/Inf п╥п╟п╪п╣п╫п╣п╫я▀ п╪п╟п╨я│п╦п╪п╟п╩я▄п╫я▀п╪ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀п╪ п╥п╫п╟я┤п╣п╫п╦п╣п╪"
 
 #~ msgid "'central' is NA, but must be TRUE or FALSE"
-#~ msgstr "'central' является NA, а должна быть TRUE или FALSE"
+#~ msgstr "'central' я▐п╡п╩я▐п╣я┌я│я▐ NA, п╟ п╢п╬п╩п╤п╫п╟ п╠я▀я┌я▄ TRUE п╦п╩п╦ FALSE"
 
 #~ msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"
-#~ msgstr "Ошибка в fexact3, it[i=%d]=%d: отрицательный ключ %d (kyy=%d)\n"
+#~ msgstr "п·я┬п╦п╠п╨п╟ п╡ fexact3, it[i=%d]=%d: п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╧ п╨п╩я▌я┤ %d (kyy=%d)\n"
 
 #~ msgid "'x' is a factor"
-#~ msgstr "'x' -- это фактор"
+#~ msgstr "'x' -- я█я┌п╬ я└п╟п╨я┌п╬я─"
 
 #~ msgid "'y' is a factor"
-#~ msgstr "'y' -- это фактор"
+#~ msgstr "'y' -- я█я┌п╬ я└п╟п╨я┌п╬я─"
 
 #~ msgid "'expr' must be an expression or call"
-#~ msgstr "'expr' должно быть выражением или вызовом"
+#~ msgstr "'expr' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ п╡я▀я─п╟п╤п╣п╫п╦п╣п╪ п╦п╩п╦ п╡я▀п╥п╬п╡п╬п╪"
 
 #~ msgid "allocation error in smooth(*, '3RSR')."
-#~ msgstr "ошибка выделения памяти в smooth(*, '3RSR')."
+#~ msgstr "п╬я┬п╦п╠п╨п╟ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п©п╟п╪я▐я┌п╦ п╡ smooth(*, '3RSR')."
 
 #~ msgid "allocation error in smooth(*, '3RSS')."
-#~ msgstr "ошибка выделения памяти в smooth(*, '3RSS')."
+#~ msgstr "п╬я┬п╦п╠п╨п╟ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п©п╟п╪я▐я┌п╦ п╡ smooth(*, '3RSS')."
 
 #~ msgid "allocation error in smooth(*, '3R')."
-#~ msgstr "ошибка выделения памяти в smooth(*, '3R')."
+#~ msgstr "п╬я┬п╦п╠п╨п╟ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п©п╟п╪я▐я┌п╦ п╡ smooth(*, '3R')."

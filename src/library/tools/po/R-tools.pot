@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2844,6 +2844,7 @@ msgstr ""
 #: R/urltools.R: 0
 #: R/utils.R: 0
 #: R/utils.R: 0
+#: R/utils.R: 0
 #. R/admin.R: gettextf("processing %s", sQuote(basename(file)))
 #. R/doitools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
@@ -2853,6 +2854,7 @@ msgstr ""
 #. R/urltools.R: sprintf("processing %s", u)
 #. R/utils.R: sprintf("processing %s", p)
 #. R/utils.R: sprintf("processing %s", basename(p))
+#. R/utils.R: sprintf("processing %s", f)
 
 msgid "processing %s"
 msgstr ""

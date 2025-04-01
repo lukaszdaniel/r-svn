@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:46\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -14,8 +14,7 @@ msgstr ""
 "X-Generator: Weblate 4.16.4\n"
 
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
-#. R/postscript.R: gettextf("'%s' is deprecated.\n", "xfig")
-#: R/pictex.R:0 R/postscript.R:0
+#: R/pictex.R:0
 msgid "'%s' is deprecated."
 msgstr ""
 
@@ -25,6 +24,11 @@ msgstr ""
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
 msgstr "«%s» ha de ser una cadena de caràcters no buida"
+
+#. R/grDevices-defunct.R: gettextf("'%s' was removed in R 4.5.0.\n", "xfig")
+#: R/grDevices-defunct.R:0
+msgid "'%s' was removed in R 4.5.0."
+msgstr ""
 
 #. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
 #: R/colorRamp.R:0
@@ -695,7 +699,6 @@ msgstr "argument «family» no vàlid"
 msgid "invalid 'file'"
 msgstr "'fitxer' no vàlid"
 
-#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0

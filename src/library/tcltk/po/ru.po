@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2007 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -10,56 +10,57 @@ msgstr ""
 "Project-Id-Version: R 2.10.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-02 12:23+0100\n"
-"PO-Revision-Date: 2020-08-27 19:23+0900\n"
+"PO-Revision-Date: 2025-04-01 17:05+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: tcltk.cpp:68
 msgid "parse error in R expression"
-msgstr "ошибка разбора выражения R"
+msgstr "п╬я┬п╦п╠п╨п╟ я─п╟п╥п╠п╬я─п╟ п╡я▀я─п╟п╤п╣п╫п╦я▐ R"
 
 #: tcltk.cpp:177 tcltk.cpp:254
 msgid "tcl error.\n"
-msgstr "ошибка tcl.\n"
+msgstr "п╬я┬п╦п╠п╨п╟ tcl.\n"
 
 #: tcltk.cpp:206 tcltk.cpp:278 tcltk.cpp:294 tcltk.cpp:314 tcltk.cpp:334
 #: tcltk.cpp:407 tcltk.cpp:472 tcltk.cpp:526 tcltk.cpp:762
 msgid "invalid argument"
-msgstr "неправильный аргумент"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌"
 
 #: tcltk.cpp:285
 msgid "no such variable"
-msgstr "нет такой переменной"
+msgstr "п╫п╣я┌ я┌п╟п╨п╬п╧ п©п╣я─п╣п╪п╣п╫п╫п╬п╧"
 
 #: tcltk.cpp:316 tcltk.cpp:336 tcltk.cpp:409 tcltk.cpp:474 tcltk.cpp:528
 msgid "invalid tclObj -- perhaps saved from another session?"
-msgstr "неправильный tclObj -- может быть, сохраненный в другой сессии?"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ tclObj -- п╪п╬п╤п╣я┌ п╠я▀я┌я▄, я│п╬я┘я─п╟п╫п╣п╫п╫я▀п╧ п╡ п╢я─я┐пЁп╬п╧ я│п╣я│я│п╦п╦?"
 
 #: tcltk.cpp:635
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
-msgstr "список аргументов слишком длинен во внутренней функции tcltk 'callback_closure'"
+msgstr "я│п©п╦я│п╬п╨ п╟я─пЁя┐п╪п╣п╫я┌п╬п╡ я│п╩п╦я┬п╨п╬п╪ п╢п╩п╦п╫п╣п╫ п╡п╬ п╡п╫я┐я┌я─п╣п╫п╫п╣п╧ я└я┐п╫п╨я├п╦п╦ tcltk 'callback_closure'"
 
 #: tcltk.cpp:668
 msgid "argument is not of correct type"
-msgstr "аргументы неправильного типа"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌я▀ п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬пЁп╬ я┌п╦п©п╟"
 
 #: tcltk.cpp:720
 msgid "no DISPLAY variable so Tk is not available"
-msgstr "нет переменной DISPLAY, поэтому Tk недоступен"
+msgstr "п╫п╣я┌ п©п╣я─п╣п╪п╣п╫п╫п╬п╧ DISPLAY, п©п╬я█я┌п╬п╪я┐ Tk п╫п╣п╢п╬я│я┌я┐п©п╣п╫"
 
 #: tcltk_unix.cpp:109
 msgid "Tcl is not loaded"
-msgstr "Tcl не загружен"
+msgstr "Tcl п╫п╣ п╥п╟пЁя─я┐п╤п╣п╫"
 
 #: tcltk_unix.cpp:113
 msgid "Tcl is not last loaded handler"
-msgstr "Tcl не является последней загруженной инструкцией"
+msgstr "Tcl п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п©п╬я│п╩п╣п╢п╫п╣п╧ п╥п╟пЁя─я┐п╤п╣п╫п╫п╬п╧ п╦п╫я│я┌я─я┐п╨я├п╦п╣п╧"
 
 #~ msgid "Tcl already loaded"
-#~ msgstr "Tcl уже загружен"
+#~ msgstr "Tcl я┐п╤п╣ п╥п╟пЁя─я┐п╤п╣п╫"

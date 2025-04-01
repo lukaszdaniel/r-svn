@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 14:04\n"
+"POT-Creation-Date: 2025-04-01 16:28\n"
 "PO-Revision-Date: 2018-04-09 12:05-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -641,6 +641,17 @@ msgstr "'qr'과 'y'는 반드시 같은 수의 행을 가지고 있어야 합니
 msgid "'receive.console.signals' must be TRUE or FALSE"
 msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
 
+#. R/unlist.R: stop("'recursive' is NA")
+#: R/unlist.R:0
+msgid "'recursive' is NA"
+msgstr ""
+
+#. R/unlist.R: stop("'recursive' must be a length-1 vector")
+#: R/unlist.R:0
+#, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "'origin'의 길이는 반드시 1이어야 합니다"
+
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
 msgid "'recursive' will be ignored as 'to' is not a single existing directory"
@@ -1009,13 +1020,6 @@ msgstr "다음의 패키지를 부착합니다: %s"
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
 msgstr "environment %s를 로드하려고 시도합니다"
-
-#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
-#: R/structure.R:0
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
@@ -1472,6 +1476,11 @@ msgstr ""
 #. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
+msgstr ""
+
+#. R/structure.R: stop("attempt to set an attribute on NULL")
+#: R/structure.R:0
+msgid "attempt to set an attribute on NULL"
 msgstr ""
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
@@ -2088,13 +2097,6 @@ msgstr "유효하지 않은 ncol(y)입니다"
 
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
-#, fuzzy
-msgid "'recursive' must be a length-1 vector"
-msgstr "'origin'의 길이는 반드시 1이어야 합니다"
-
-msgid "'recursive' is NA"
-msgstr ""
-
 #, fuzzy
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "유효하지 않은 버전지정 %s입니다"

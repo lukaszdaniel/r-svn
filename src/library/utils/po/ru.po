@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2015 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -9,16 +9,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
-"PO-Revision-Date: 2024-03-25 15:00+0300\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: hashtab.cpp:38
 msgid "wrong argument count"
@@ -27,7 +28,7 @@ msgstr ""
 #: hashtab.cpp:45
 #, fuzzy
 msgid "hash table type must be a scalar string"
-msgstr "'text' должен быть текстовой строкой"
+msgstr "'text' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: hashtab.cpp:52
 #, c-format
@@ -38,134 +39,136 @@ msgstr ""
 msgid "bad hash table type"
 msgstr ""
 
-#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:772 io.cpp:827 io.cpp:840
-#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
-#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:47 stubs.cpp:67
-#: windows/dialogs.cpp:147 windows/dialogs.cpp:155 windows/dialogs.cpp:175
-#: windows/dialogs.cpp:200 windows/dialogs.cpp:203 windows/dialogs.cpp:245
-#: windows/dialogs.cpp:282 windows/dialogs.cpp:293 windows/dialogs.cpp:317
-#: windows/dialogs.cpp:325 windows/util.cpp:138 windows/widgets.cpp:90
-#: windows/widgets.cpp:93 windows/widgets.cpp:97
+#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:771 io.cpp:826 io.cpp:839
+#: io.cpp:843 io.cpp:849 io.cpp:1088 io.cpp:1089 io.cpp:1091 io.cpp:1092
+#: io.cpp:1093 io.cpp:1094 io.cpp:1095 stubs.cpp:47 stubs.cpp:67
+#: windows/dialogs.cpp:84 windows/dialogs.cpp:88 windows/dialogs.cpp:92
+#: windows/dialogs.cpp:95 windows/dialogs.cpp:98 windows/dialogs.cpp:147
+#: windows/dialogs.cpp:155 windows/dialogs.cpp:175 windows/dialogs.cpp:200
+#: windows/dialogs.cpp:203 windows/dialogs.cpp:245 windows/dialogs.cpp:282
+#: windows/dialogs.cpp:293 windows/dialogs.cpp:317 windows/dialogs.cpp:325
+#: windows/util.cpp:138 windows/widgets.cpp:90 windows/widgets.cpp:93
+#: windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
-msgstr "неправильный аргумент '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ '%s'"
 
-#: io.cpp:347 io.cpp:837
+#: io.cpp:347 io.cpp:836
 msgid "invalid quote symbol set"
-msgstr "неправильная установка символа кавычек"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я┐я│я┌п╟п╫п╬п╡п╨п╟ я│п╦п╪п╡п╬п╩п╟ п╨п╟п╡я▀я┤п╣п╨"
 
-#: io.cpp:359 io.cpp:859 io.cpp:1077
+#: io.cpp:359 io.cpp:858 io.cpp:1076
 msgid "cannot open the connection"
-msgstr "не могу открыть соединение"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
 
 #: io.cpp:362 io.cpp:366
 msgid "cannot read from this connection"
-msgstr "не могу прочитать из соединения"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©я─п╬я┤п╦я┌п╟я┌я▄ п╦п╥ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐"
 
 #: io.cpp:413 io.cpp:431
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
-msgstr "закавыченная подстрока строки %d заканчивается EOF"
+msgstr "п╥п╟п╨п╟п╡я▀я┤п╣п╫п╫п╟я▐ п©п╬п╢я│я┌я─п╬п╨п╟ я│я┌я─п╬п╨п╦ %d п╥п╟п╨п╟п╫я┤п╦п╡п╟п╣я┌я│я▐ EOF"
 
 #: io.cpp:566
 msgid "the first argument must be of mode character"
-msgstr "первый аргумент должен быть текстовым"
+msgstr "п©п╣я─п╡я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪"
 
 #: io.cpp:595
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
-msgstr "неправильная строка 'numerals': \"%s\""
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ я│я┌я─п╬п╨п╟ 'numerals': \"%s\""
 
-#: io.cpp:774
+#: io.cpp:773
 msgid "Selection: "
-msgstr "Выбор: "
+msgstr "п▓я▀п╠п╬я─: "
 
-#: io.cpp:869 io.cpp:884
+#: io.cpp:868 io.cpp:883
 msgid "cannot allocate buffer in 'readTableHead'"
-msgstr "не могу разместить буфер в 'readTableHead'"
+msgstr "п╫п╣ п╪п╬пЁя┐ я─п╟п╥п╪п╣я│я┌п╦я┌я▄ п╠я┐я└п╣я─ п╡ 'readTableHead'"
 
-#: io.cpp:897
+#: io.cpp:896
 msgid "\\ followed by EOF"
-msgstr "за \\ следует EOF"
+msgstr "п╥п╟ \\ я│п╩п╣п╢я┐п╣я┌ EOF"
 
-#: io.cpp:936
+#: io.cpp:935
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:949 io.cpp:953
+#: io.cpp:948 io.cpp:952
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
-msgstr "readTableHeader нашел неполную последнюю строку в '%s'"
+msgstr "readTableHeader п╫п╟я┬п╣п╩ п╫п╣п©п╬п╩п╫я┐я▌ п©п╬я│п╩п╣п╢п╫я▌я▌ я│я┌я─п╬п╨я┐ п╡ '%s'"
 
-#: io.cpp:1010
+#: io.cpp:1009
 msgid "index out of range"
-msgstr "индекс вне пределов"
+msgstr "п╦п╫п╢п╣п╨я│ п╡п╫п╣ п©я─п╣п╢п╣п╩п╬п╡"
 
-#: io.cpp:1046
+#: io.cpp:1045
 #, c-format
 msgid "Problem closing connection:  %s"
-msgstr "Проблема с закрытием соединения: %s"
+msgstr "п÷я─п╬п╠п╩п╣п╪п╟ я│ п╥п╟п╨я─я▀я┌п╦п╣п╪ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐: %s"
 
-#: io.cpp:1048
+#: io.cpp:1047
 msgid "Problem closing connection"
-msgstr "Проблема с закрытием соединения"
+msgstr "п÷я─п╬п╠п╩п╣п╪п╟ я│ п╥п╟п╨я─я▀я┌п╦п╣п╪ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐"
 
-#: io.cpp:1070
+#: io.cpp:1069
 msgid "'file' is not a connection"
-msgstr "'file' -- это не соединение"
+msgstr "'file' -- я█я┌п╬ п╫п╣ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
 
-#: io.cpp:1073
+#: io.cpp:1072
 msgid "cannot write to this connection"
-msgstr "не могу писать в это соединение"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╦я│п╟я┌я▄ п╡ я█я┌п╬ я│п╬п╣п╢п╦п╫п╣п╫п╦п╣"
 
-#: io.cpp:1102
+#: io.cpp:1101
 msgid "'dec' must be a single character"
-msgstr "'dec' должен быть одним символом"
+msgstr "'dec' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╬п╢п╫п╦п╪ я│п╦п╪п╡п╬п╩п╬п╪"
 
-#: io.cpp:1126
+#: io.cpp:1125
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
-msgstr "поврежденная таблица данных -- длина колонки %d не соответствует строкам"
+msgstr "п©п╬п╡я─п╣п╤п╢п╣п╫п╫п╟я▐ я┌п╟п╠п╩п╦я├п╟ п╢п╟п╫п╫я▀я┘ -- п╢п╩п╦п╫п╟ п╨п╬п╩п╬п╫п╨п╦ %d п╫п╣ я│п╬п╬я┌п╡п╣я┌я│я┌п╡я┐п╣я┌ я│я┌я─п╬п╨п╟п╪"
 
-#: io.cpp:1160
+#: io.cpp:1159
 #, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
-msgstr "колонка %d считает себя фактором, но у нее нет числовых кодов"
+msgstr "п╨п╬п╩п╬п╫п╨п╟ %d я│я┤п╦я┌п╟п╣я┌ я│п╣п╠я▐ я└п╟п╨я┌п╬я─п╬п╪, п╫п╬ я┐ п╫п╣п╣ п╫п╣я┌ я┤п╦я│п╩п╬п╡я▀я┘ п╨п╬п╢п╬п╡"
 
-#: io.cpp:1178
+#: io.cpp:1177
 msgid "corrupt matrix -- dims do not match length"
-msgstr "поврежденная матрица -- длины измерений не сходятся"
+msgstr "п©п╬п╡я─п╣п╤п╢п╣п╫п╫п╟я▐ п╪п╟я┌я─п╦я├п╟ -- п╢п╩п╦п╫я▀ п╦п╥п╪п╣я─п╣п╫п╦п╧ п╫п╣ я│я┘п╬п╢я▐я┌я│я▐"
 
 #: stubs.cpp:56
 msgid "'savehistory' can only be used in Rgui and Rterm"
-msgstr "'savehistory' можно использовать только в Rgui и Rterm"
+msgstr "'savehistory' п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п╡ Rgui п╦ Rterm"
 
 #: stubs.cpp:73
 msgid "'loadhistory' can only be used in Rgui and Rterm"
-msgstr "'loadhistory' можно использовать только Rgui и Rterm"
+msgstr "'loadhistory' п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ Rgui п╦ Rterm"
 
 #: stubs.cpp:85
 msgid "invalid timestamp"
-msgstr "неправильная дата и время"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╢п╟я┌п╟ п╦ п╡я─п╣п╪я▐"
 
 #: stubs.cpp:150 stubs.cpp:158
 msgid "X11 dataentry cannot be loaded"
-msgstr "таблицу X11 нельзя загрузить"
+msgstr "я┌п╟п╠п╩п╦я├я┐ X11 п╫п╣п╩я▄п╥я▐ п╥п╟пЁя─я┐п╥п╦я┌я▄"
 
 #: stubs.cpp:154 stubs.cpp:183 stubs.cpp:189
 msgid "X11 is not available"
-msgstr "X11 недоступна"
+msgstr "X11 п╫п╣п╢п╬я│я┌я┐п©п╫п╟"
 
 #: stubs.cpp:247 stubs.cpp:250
 #, c-format
 msgid "invalid '%s' specification"
-msgstr "неправильное определение '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╣ '%s'"
 
 #: stubs.cpp:253
 #, c-format
 msgid "'%s' contains missing values"
-msgstr "'%s' содержит пропущенные значения"
+msgstr "'%s' я│п╬п╢п╣я─п╤п╦я┌ п©я─п╬п©я┐я┴п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐"
 
 #: stubs.cpp:313
 msgid "size must be finite and >= 0"
@@ -173,7 +176,7 @@ msgstr ""
 
 #: utils.cpp:75
 msgid "argument 'class' must be a character string"
-msgstr "аргумент 'class' должен быть текстовой строкой"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'class' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: utils.cpp:79
 #, c-format
@@ -182,43 +185,43 @@ msgstr ""
 
 #: utils.cpp:85
 msgid "argument 'x' must be a length-1 character vector"
-msgstr "аргумент 'x' должен быть текстовой строкой"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: utils.cpp:88
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
-msgstr "аргумент 'x' должен быть в UTF-8 (включая ASCII)"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ 'x' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╡ UTF-8 (п╡п╨п╩я▌я┤п╟я▐ ASCII)"
 
 #: utils.cpp:119
 #, fuzzy
 msgid "'charClass' is not available on this platform"
-msgstr "nsl() не поддерживается на этой платформе"
+msgstr "nsl() п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐ п╫п╟ я█я┌п╬п╧ п©п╩п╟я┌я└п╬я─п╪п╣"
 
 #: utils.cpp:131
 #, fuzzy
 msgid "input must be a character string"
-msgstr "'title' должен быть текстовой строкой"
+msgstr "'title' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: utils.cpp:154
 msgid "'hostname' must be a character vector of length 1"
-msgstr "'hostname' должно быть текстовым вектором длиной 1"
+msgstr "'hostname' п╢п╬п╩п╤п╫п╬ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╢п╩п╦п╫п╬п╧ 1"
 
 #: utils.cpp:160
 #, c-format
 msgid "nsl() was unable to resolve host '%s'"
-msgstr "nsl() не смог разрешить хост '%s'"
+msgstr "nsl() п╫п╣ я│п╪п╬пЁ я─п╟п╥я─п╣я┬п╦я┌я▄ я┘п╬я│я┌ '%s'"
 
 #: utils.cpp:167
 msgid "unknown format returned by 'gethostbyname'"
-msgstr "'gethostbyname' вернула неправильный формат"
+msgstr "'gethostbyname' п╡п╣я─п╫я┐п╩п╟ п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я└п╬я─п╪п╟я┌"
 
 #: utils.cpp:176
 msgid "nsl() is not supported on this platform"
-msgstr "nsl() не поддерживается на этой платформе"
+msgstr "nsl() п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐ п╫п╟ я█я┌п╬п╧ п©п╩п╟я┌я└п╬я─п╪п╣"
 
 #: windows/dataentry.cpp:304
 #, fuzzy
 msgid "unable to start data editor"
-msgstr "не могу писать в буфер обмена"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╦я│п╟я┌я▄ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #: windows/dialogs.cpp:133
 msgid "invalid progressbar -- has it been closed?"
@@ -226,42 +229,42 @@ msgstr ""
 
 #: windows/dialogs.cpp:187
 msgid "unknown type"
-msgstr "неизвестный тип"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ я┌п╦п©"
 
 #: windows/dialogs.cpp:218 windows/dialogs.cpp:241 windows/dialogs.cpp:279
 #: windows/dialogs.cpp:314
 msgid "menu functions can only be used in the GUI"
-msgstr "функции меню можно использовать только в GUI"
+msgstr "я└я┐п╫п╨я├п╦п╦ п╪п╣п╫я▌ п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п╡ GUI"
 
 #: windows/dialogs.cpp:249
 #, c-format
 msgid "unable to retrieve items for %s (%s)"
-msgstr "не могу получить элементы для %s (%s)"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╬п╩я┐я┤п╦я┌я▄ я█п╩п╣п╪п╣п╫я┌я▀ п╢п╩я▐ %s (%s)"
 
 #: windows/dialogs.cpp:287
 #, c-format
 msgid "unable to add menu (%s)"
-msgstr "не могу добавить меню (%s)"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╢п╬п╠п╟п╡п╦я┌я▄ п╪п╣п╫я▌ (%s)"
 
 #: windows/dialogs.cpp:299
 #, c-format
 msgid "unable to add menu item (%s)"
-msgstr "не могу добавить элемент меню (%s)"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╢п╬п╠п╟п╡п╦я┌я▄ я█п╩п╣п╪п╣п╫я┌ п╪п╣п╫я▌ (%s)"
 
 #: windows/dialogs.cpp:322
 msgid "menu does not exist"
-msgstr "меню не существует"
+msgstr "п╪п╣п╫я▌ п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌"
 
 #: windows/dialogs.cpp:329
 #, c-format
 msgid "unable to delete menu item (%s)"
-msgstr "не могу удалить элемент меню (%s)"
+msgstr "п╫п╣ п╪п╬пЁя┐ я┐п╢п╟п╩п╦я┌я▄ я█п╩п╣п╪п╣п╫я┌ п╪п╣п╫я▌ (%s)"
 
 #: windows/registry.cpp:71 windows/registry.cpp:246 windows/registry.cpp:249
 #: windows/registry.cpp:252
 #, c-format
 msgid "invalid '%s' value"
-msgstr "неправильное значение '%s'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ '%s'"
 
 #: windows/registry.cpp:144 windows/registry.cpp:148
 #, c-format
@@ -281,7 +284,7 @@ msgstr ""
 #: windows/registry.cpp:264
 #, c-format
 msgid "Registry key '%ls' not found"
-msgstr "Ключ реестра '%ls' не найден"
+msgstr "п п╩я▌я┤ я─п╣п╣я│я┌я─п╟ '%ls' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: windows/registry.cpp:266
 #, c-format
@@ -290,7 +293,7 @@ msgstr ""
 
 #: windows/util.cpp:56
 msgid "unsupported version of Windows"
-msgstr "неподдерживаемая версия Windows"
+msgstr "п╫п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪п╟я▐ п╡п╣я─я│п╦я▐ Windows"
 
 #: windows/util.cpp:281
 msgid "'raw = FALSE' and format is a not a known text format"
@@ -298,62 +301,62 @@ msgstr ""
 
 #: windows/util.cpp:302
 msgid "argument must be a character vector or a raw vector"
-msgstr "аргумент должен быть текстовым вектором или простым вектором"
+msgstr "п╟я─пЁя┐п╪п╣п╫я┌ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪ п╦п╩п╦ п©я─п╬я│я┌я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪"
 
 #: windows/util.cpp:343
 msgid "unable to open the clipboard"
-msgstr "не могу открыть буфер обмена"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #: windows/util.cpp:348
 msgid "unable to write to the clipboard"
-msgstr "не могу писать в буфер обмена"
+msgstr "п╫п╣ п╪п╬пЁя┐ п©п╦я│п╟я┌я▄ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #: windows/util.cpp:428
 msgid "'title' must be a character string"
-msgstr "'title' должен быть текстовой строкой"
+msgstr "'title' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: windows/util.cpp:437
 msgid "'text' must be a character string"
-msgstr "'text' должен быть текстовой строкой"
+msgstr "'text' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: windows/util.cpp:476
 #, c-format
 msgid "'%s' must be length 1"
-msgstr "'%s' должен быть длиной 1"
+msgstr "'%s' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ 1"
 
 #: windows/util.cpp:586
 #, c-format
 msgid "'%s' must be a list"
-msgstr "'%s' должен быть списком"
+msgstr "'%s' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪"
 
 #: windows/util.cpp:590
 #, c-format
 msgid "'%s' element %d is not a window handle"
-msgstr "'%s' элемент из %d -- не дескриптор окна"
+msgstr "'%s' я█п╩п╣п╪п╣п╫я┌ п╦п╥ %d -- п╫п╣ п╢п╣я│п╨я─п╦п©я┌п╬я─ п╬п╨п╫п╟"
 
 #: windows/widgets.cpp:119
 msgid "Select one or more"
-msgstr "Выберите один или больше"
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ п╬п╢п╦п╫ п╦п╩п╦ п╠п╬п╩я▄я┬п╣"
 
 #: windows/widgets.cpp:119
 msgid "Select one"
-msgstr "Выберите один"
+msgstr "п▓я▀п╠п╣я─п╦я┌п╣ п╬п╢п╦п╫"
 
 #: windows/widgets.cpp:203 windows/widgets.cpp:270
 msgid "'default' must be a character string"
-msgstr "'default' должен быть текстовой строкой"
+msgstr "'default' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: windows/widgets.cpp:205
 msgid "'default' is overlong"
-msgstr "'default' слишком длинный"
+msgstr "'default' я│п╩п╦я┬п╨п╬п╪ п╢п╩п╦п╫п╫я▀п╧"
 
 #: windows/widgets.cpp:209 windows/widgets.cpp:276
 msgid "'caption' must be a character string"
-msgstr "'caption' должен быть текстовой строкой"
+msgstr "'caption' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡п╬п╧ я│я┌я─п╬п╨п╬п╧"
 
 #: windows/widgets.cpp:211
 msgid "'filterindex' must be an integer value"
-msgstr "'filterindex' должен быть целочисленным"
+msgstr "'filterindex' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я├п╣п╩п╬я┤п╦я│п╩п╣п╫п╫я▀п╪"
 
 #~ msgid "'multi' must be a logical value"
-#~ msgstr "'multi' должен быть логическим"
+#~ msgstr "'multi' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪"

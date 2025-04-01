@@ -35,8 +35,11 @@ src/gnuwin32/sys-win32.cpp
 src/gnuwin32/front-ends/rcmdfn.cpp
 src/gnuwin32/getline/getline.cpp
 src/gnuwin32/getline/wc_history.cpp
+src/include/Defn.h
 src/include/Errormsg.h
 src/include/Localization.h
+src/include/Rdefines.h
+src/include/Rinlinedfuns.h
 src/main/agrep.cpp
 src/main/altclasses.cpp
 src/main/altrep.cpp
@@ -49,9 +52,11 @@ src/main/builtin.cpp
 src/main/character.cpp
 src/main/Closure.cpp
 src/main/coerce.cpp
+src/main/colors.cpp
 src/main/CommandLineArgs.cpp
 src/main/complex.cpp
 src/main/connections.cpp
+src/main/ConsCell.cpp
 src/main/context.cpp
 src/main/contour-common.h
 src/main/cum.cpp
@@ -63,6 +68,7 @@ src/main/devices.cpp
 src/main/dotcode.cpp
 src/main/dounzip.cpp
 src/main/dstruct.cpp
+src/main/duplicate.cpp
 src/main/edit.cpp
 src/main/engine.cpp
 src/main/envir.cpp
@@ -76,6 +82,7 @@ src/main/graphics.cpp
 src/main/grep.cpp
 src/main/gzio.h
 src/main/identical.cpp
+src/main/inspect.cpp
 src/main/internet.cpp
 src/main/lapack.cpp
 src/main/logic.cpp
@@ -90,6 +97,7 @@ src/main/paste.cpp
 src/main/patterns.cpp
 src/main/platform.cpp
 src/main/plot3d.cpp
+src/main/plot.cpp
 src/main/plotmath.cpp
 src/main/printarray.cpp
 src/main/print.cpp
@@ -149,6 +157,7 @@ src/nmath/pnbinom.cpp
 src/nmath/pnchisq.cpp
 src/nmath/polygamma.cpp
 src/nmath/qgamma.cpp
+src/nmath/rhyper.cpp
 src/nmath/rmultinom.cpp
 src/nmath/signrank.cpp
 src/nmath/snorm.cpp

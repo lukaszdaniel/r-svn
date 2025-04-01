@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 14:04\n"
+"POT-Creation-Date: 2025-04-01 16:28\n"
 "PO-Revision-Date: 2021-01-27 10:37+0100\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -639,6 +639,17 @@ msgstr "'qr' ir 'y' turi turėti tą patį eilučių skaičių"
 msgid "'receive.console.signals' must be TRUE or FALSE"
 msgstr "'intern' turi būti TRUE arba FALSE"
 
+#. R/unlist.R: stop("'recursive' is NA")
+#: R/unlist.R:0
+msgid "'recursive' is NA"
+msgstr ""
+
+#. R/unlist.R: stop("'recursive' must be a length-1 vector")
+#: R/unlist.R:0
+#, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "'origin' ilgis turi būti 1"
+
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
 msgid "'recursive' will be ignored as 'to' is not a single existing directory"
@@ -1007,15 +1018,6 @@ msgstr "Pridedamas paketas: %s"
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
 msgstr "Bandymas įkelti aplinką %s"
-
-#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
-#: R/structure.R:0
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
-"Iškvietimas 'structure(NULL, *)' yra nebenaudojamas, nes NULL negali turėti atributų.\n"
-"  Vietoj to apsvarstykite 'structure(list(), *)'."
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
@@ -1486,6 +1488,11 @@ msgstr "bandymas nustatyti 'colnames' objekte su mažiau negu dviejų matavimų 
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
 msgstr "bandymas nustatyti 'rownames' objekte su nuliniu matavimo skaičiumi"
+
+#. R/structure.R: stop("attempt to set an attribute on NULL")
+#: R/structure.R:0
+msgid "attempt to set an attribute on NULL"
+msgstr ""
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
 #: R/autoload.R:0
@@ -3397,6 +3404,13 @@ msgstr[0] "nėra paketo, vadinamo"
 msgstr[1] "nėra paketų, vadinamų"
 msgstr[2] "nėra paketų, vadinamų"
 
+#~ msgid ""
+#~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+#~ "  Consider 'structure(list(), *)' instead."
+#~ msgstr ""
+#~ "Iškvietimas 'structure(NULL, *)' yra nebenaudojamas, nes NULL negali turėti atributų.\n"
+#~ "  Vietoj to apsvarstykite 'structure(list(), *)'."
+
 #, fuzzy
 #~ msgid "connections left open:"
 #~ msgstr "'connection' turi būti ryšys"
@@ -3422,9 +3436,6 @@ msgstr[2] "nėra paketų, vadinamų"
 #, fuzzy
 #~ msgid "'name' must be a single character string"
 #~ msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
-
-#~ msgid "'origin' must be of length one"
-#~ msgstr "'origin' ilgis turi būti 1"
 
 #~ msgid "'package' must be of length 1"
 #~ msgstr "'package' ilgis turi būti 1"

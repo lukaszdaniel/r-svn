@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -310,9 +310,10 @@ msgstr "argumenty Wielkości 'x1', 'y1', 'x2', oraz 'y2' muszą być jednostkami
 msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr "Nie można utworzyć wektora jednostkowego o zerowej długości (podzbiór 'unit')"
 
-#. R/coords.R: stop("Closed must not be a missing value")
+#. R/coords.R: stop("Closed must be length 1 and must not be a missing value")
 #: R/coords.R:0
-msgid "Closed must not be a missing value"
+#, fuzzy
+msgid "Closed must be length 1 and must not be a missing value"
 msgstr "argument 'closed' nie może być brakującą wartością"
 
 #. R/grid.R: stop("Down viewport failed to record on display list")
@@ -915,14 +916,16 @@ msgstr "potrzeba przenieść w górę przynajmniej jedno okno ekranu"
 msgid "must pop at least one viewport"
 msgstr "potrzeba wyświetlić przynajmniej jedno okno ekranu"
 
-#. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
+#. R/viewport.R: stop("must specify at least one of 'xData' or 'xscale'")
 #: R/viewport.R:0
-msgid "must specify at least one of 'x' or 'xscale'"
+#, fuzzy
+msgid "must specify at least one of 'xData' or 'xscale'"
 msgstr "przynajmniej jeden z 'x' oraz 'xscale' musi być określony"
 
-#. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
+#. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
-msgid "must specify at least one of 'y' or 'yscale'"
+#, fuzzy
+msgid "must specify at least one of 'yData' or 'yscale'"
 msgstr "tylko jeden z 'font' oraz 'fontface' może być określony"
 
 #. R/grid.R: stop("must specify at least one viewport")

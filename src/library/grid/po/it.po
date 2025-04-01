@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:44+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2022-10-14 10:25+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -71,37 +71,37 @@ msgstr "richiedono almeno due punti per disegnare la freccia"
 msgid "non-finite control point in Xspline"
 msgstr "punto di controllo non finito in Xspline"
 
-#: grid.cpp:3430
+#: grid.cpp:3431
 msgid "non-finite x or y in graphics path"
 msgstr "x o y non finiti nel percorso grafico"
 
-#: grid.cpp:3479
+#: grid.cpp:3480
 msgid "Empty raster"
 msgstr "Raster vuoto"
 
-#: grid.cpp:4021
+#: grid.cpp:4022
 msgid "use of negative pch with symbol font is invalid"
 msgstr ""
 
-#: grid.cpp:4027 grid.cpp:4083
+#: grid.cpp:4028 grid.cpp:4084
 msgid "Coordinates for text pch not yet supported"
 msgstr "Cordinate per pch testo non ancora supportate"
 
-#: grid.cpp:4088
+#: grid.cpp:4089
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr "valore pch '%d' non è valido per questa localizzazione"
 
-#: grid.cpp:4909
+#: grid.cpp:4910
 #, c-format
 msgid "unimplemented pch value '%d'"
 msgstr "valore pch '%d' non implementato"
 
-#: grid.cpp:5067
+#: grid.cpp:5068
 msgid "invalid plotting symbol"
 msgstr "simbolo di plotting non valido"
 
-#: grid.cpp:5184
+#: grid.cpp:5186
 msgid "unable to clip to rotated rectangle"
 msgstr "non è possibile tagliare su un rettangolo ruotato"
 
@@ -193,10 +193,10 @@ msgstr "Non è possibile calcolare la larghezza/altezza del testo (usando zero)"
 msgid "grid grob object is empty"
 msgstr ""
 
-#: viewport.cpp:58
+#: viewport.cpp:59
 msgid "Mask is not logical value ('none' or 'inherit')"
 msgstr "Mask non è un valore logico ('none' o 'inherit')"
 
-#: viewport.cpp:332
+#: viewport.cpp:333
 msgid "non-finite location and/or size for viewport"
 msgstr "posizione e/o dimensione della viewport non finita"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -50,158 +50,158 @@ msgstr "wybór metody języka S nie zwrócił wyniku normalnie podczas wywoływa
 msgid "Function name for method selection called internally"
 msgstr "Nazwa funkcji dla wyboru metody wywołana wewnętrznie"
 
-#: methods_list_dispatch.cpp:465 methods_list_dispatch.cpp:486
+#: methods_list_dispatch.cpp:467 methods_list_dispatch.cpp:488
 msgid "The \"package\" slot in generic function object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:498
+#: methods_list_dispatch.cpp:500
 msgid "The argument \"f\" to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:499
+#: methods_list_dispatch.cpp:501
 msgid "The argument \"package\" to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:504
+#: methods_list_dispatch.cpp:506
 #, c-format
 msgid "no generic function definition found for '%s'"
 msgstr "nie znaleziono definicji ogólnej funkcji dla '%s'"
 
-#: methods_list_dispatch.cpp:505
+#: methods_list_dispatch.cpp:507
 #, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
 msgstr "nie znaleziono definicji ogólnej funkcji dla '%s' w dostarczonym środowisku"
 
-#: methods_list_dispatch.cpp:526
+#: methods_list_dispatch.cpp:528
 msgid "The function name in the call to standardGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:540
+#: methods_list_dispatch.cpp:542
 #, c-format
 msgid "invalid generic function object for method selection for function '%s': expected a function or a primitive, got an object of class \"%s\""
 msgstr "niepoprawny obiekt ogólnej funkcji dla wyboru metody dla funkcji '%s': oczekiwano funkcji lub typu prymitywnego, otrzymano obiekt klasy '%s'"
 
-#: methods_list_dispatch.cpp:555
+#: methods_list_dispatch.cpp:557
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "Brak bezpośredniej lub dziedziczonej metody dla funkcji '%s' dla tego wywołania"
 
-#: methods_list_dispatch.cpp:584 methods_list_dispatch.cpp:1158
+#: methods_list_dispatch.cpp:586 methods_list_dispatch.cpp:1160
 msgid "invalid object (non-function) used as method"
 msgstr "niepoprawny obiekt (nie-funkcja) użyty jako metoda"
 
-#: methods_list_dispatch.cpp:600
+#: methods_list_dispatch.cpp:602
 msgid "'symbol' must be a SYMSXP"
 msgstr ""
 
-#: methods_list_dispatch.cpp:603
+#: methods_list_dispatch.cpp:605
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
 msgstr "nie można było znaleźć symbolu '%s' w strukturze wywołania"
 
-#: methods_list_dispatch.cpp:611
+#: methods_list_dispatch.cpp:613
 #, c-format
 msgid "invalid symbol in checking for missing argument in method dispatch: expected a name, got an object of class \"%s\""
 msgstr "niepoprawny symbol w sprawdzaniu brakującego argumentu w wysyłaniu metody: oczekiwano nazwy, otrzymano obiekt klasy '%s'"
 
-#: methods_list_dispatch.cpp:614
+#: methods_list_dispatch.cpp:616
 msgid "use of NULL environment is defunct"
 msgstr "użycie środowiska NULL jest przestarzałe"
 
-#: methods_list_dispatch.cpp:618
+#: methods_list_dispatch.cpp:620
 #, c-format
 msgid "invalid environment in checking for missing argument, '%s', in methods dispatch: got an object of class \"%s\""
 msgstr "niepoprawne środowisko w sprawdzaniu brakującego argumentu '%s' w wysyłaniu metod: otrzymano obiekt klasy '%s'"
 
-#: methods_list_dispatch.cpp:641
+#: methods_list_dispatch.cpp:643
 #, c-format
 msgid "error in evaluating the argument '%s' in selecting a method for function '%s': %s"
 msgstr "błąd podczas obliczania argumentu '%s' przy wybieraniu metody dla funkcji '%s': %s"
 
-#: methods_list_dispatch.cpp:658
+#: methods_list_dispatch.cpp:660
 #, c-format
 msgid "object of class \"%s\" used as methods list for function '%s' ( no 'argument' slot)"
 msgstr "obiekt klasy '%s' został użyty jako lista metod dla funkcji '%s' ( brak gniazda 'argument')"
 
-#: methods_list_dispatch.cpp:669
+#: methods_list_dispatch.cpp:671
 #, c-format
 msgid "(in selecting a method for function '%s') '...' and related variables cannot be used for methods dispatch"
 msgstr "(przy wybieraniu metody dla funkcji '%s') '...' oraz powiązane zmienne nie mogą być użyte dla wysyłania metod"
 
-#: methods_list_dispatch.cpp:672
+#: methods_list_dispatch.cpp:674
 #, c-format
 msgid "(in selecting a method for function '%s') the 'environment' argument for dispatch must be an R environment; got an object of class \"%s\""
 msgstr "(przy wybieraniu metody dla funkcji '%s') argument 'environment' dla wysyłania musi być środowiskiem R; otrzymano obiekt klasy '%s'"
 
-#: methods_list_dispatch.cpp:703
+#: methods_list_dispatch.cpp:705
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr "brak pasującej metody dla funkcji '%s' (argument '%s', z klasą '%s')"
 
-#: methods_list_dispatch.cpp:710
+#: methods_list_dispatch.cpp:712
 #, c-format
 msgid "recursive use of function '%s' in method selection, with no default method"
 msgstr "rekursywne użycie funkcji '%s' w wyborze metody, z brakiem określonej metody domyślnej"
 
-#: methods_list_dispatch.cpp:735
+#: methods_list_dispatch.cpp:737
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "błąd w trakcie obliczania 'primitive' następnej metody: %s"
 
-#: methods_list_dispatch.cpp:758
+#: methods_list_dispatch.cpp:760
 msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:765
+#: methods_list_dispatch.cpp:767
 msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:890
+#: methods_list_dispatch.cpp:892
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
 msgstr "'%s' musi być pojedynczym ciągiem znaków (otrzymano wektor tekstowy o długości %d)"
 
-#: methods_list_dispatch.cpp:894
+#: methods_list_dispatch.cpp:896
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
 msgstr "'%s' musi być niepustym ciągiem znaków; otrzymano pusty ciąg"
 
-#: methods_list_dispatch.cpp:898
+#: methods_list_dispatch.cpp:900
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
 msgstr "'%s' musi być pojedynczym ciągiem znaków (otrzymano obiekt klasy '%s')"
 
-#: methods_list_dispatch.cpp:932
+#: methods_list_dispatch.cpp:934
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:934
+#: methods_list_dispatch.cpp:936
 msgid "The name of the object (e.g,. a class or generic function) to find in the meta-data"
 msgstr ""
 
-#: methods_list_dispatch.cpp:936
+#: methods_list_dispatch.cpp:938
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:983
+#: methods_list_dispatch.cpp:985
 msgid "class should be either a character-string name or a class definition"
 msgstr "klasa powinna być albo nazwą tekstową albo definicją klasy"
 
-#: methods_list_dispatch.cpp:1069
+#: methods_list_dispatch.cpp:1071
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "nie udało się uzyskać ogólnej funkcji dla typu prymitywnego \"%s\""
 
-#: methods_list_dispatch.cpp:1076
+#: methods_list_dispatch.cpp:1078
 #, c-format
 msgid "expected a generic function or a primitive for dispatch, got an object of class \"%s\""
 msgstr "oczekiwano ogólnej funkcji lub typu prymitywnego dla wysyłania, otrzymano obiekt klasy \"%s\""
 
-#: methods_list_dispatch.cpp:1088
+#: methods_list_dispatch.cpp:1090
 msgid "generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.cpp:1092
+#: methods_list_dispatch.cpp:1094
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

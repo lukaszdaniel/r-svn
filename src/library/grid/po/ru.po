@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2008 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -9,202 +9,203 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:44+0100\n"
-"PO-Revision-Date: 2024-03-25 14:44+0300\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"PO-Revision-Date: 2025-04-01 16:58+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: gpar.cpp:634
 msgid "updateGContext must only be called after initGContext"
-msgstr "updateGContext можно вызывать только после initGContext"
+msgstr "updateGContext п╪п╬п╤п╫п╬ п╡я▀п╥я▀п╡п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п©п╬я│п╩п╣ initGContext"
 
 #: grid.cpp:202
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
-msgstr "Включение или выключение отсечения внутри контура отсечения игнорируется"
+msgstr "п▓п╨п╩я▌я┤п╣п╫п╦п╣ п╦п╩п╦ п╡я▀п╨п╩я▌я┤п╣п╫п╦п╣ п╬я┌я│п╣я┤п╣п╫п╦я▐ п╡п╫я┐я┌я─п╦ п╨п╬п╫я┌я┐я─п╟ п╬я┌я│п╣я┤п╣п╫п╦я▐ п╦пЁп╫п╬я─п╦я─я┐п╣я┌я│я▐"
 
 #: grid.cpp:244
 msgid "cannot clip to rotated viewport"
-msgstr "не могу обрезать до повернутой оконницы"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╬п╠я─п╣п╥п╟я┌я▄ п╢п╬ п©п╬п╡п╣я─п╫я┐я┌п╬п╧ п╬п╨п╬п╫п╫п╦я├я▀"
 
 #: grid.cpp:459
 msgid "Clipping paths within a (clipping) path are not honoured"
-msgstr "Контуры отсечения внутри других контуров отсечения игнорируются"
+msgstr "п п╬п╫я┌я┐я─я▀ п╬я┌я│п╣я┤п╣п╫п╦я▐ п╡п╫я┐я┌я─п╦ п╢я─я┐пЁп╦я┘ п╨п╬п╫я┌я┐я─п╬п╡ п╬я┌я│п╣я┤п╣п╫п╦я▐ п╦пЁп╫п╬я─п╦я─я┐я▌я┌я│я▐"
 
 #: grid.cpp:478
 msgid "Masks within a (clipping) path are not honoured"
-msgstr "Маски внутри контуров отсечения игнорируются"
+msgstr "п°п╟я│п╨п╦ п╡п╫я┐я┌я─п╦ п╨п╬п╫я┌я┐я─п╬п╡ п╬я┌я│п╣я┤п╣п╫п╦я▐ п╦пЁп╫п╬я─п╦я─я┐я▌я┌я│я▐"
 
 #: grid.cpp:702 grid.cpp:880
 #, c-format
 msgid "Viewport '%s' was not found"
-msgstr "Не могу найти оконницу '%s'"
+msgstr "п²п╣ п╪п╬пЁя┐ п╫п╟п╧я┌п╦ п╬п╨п╬п╫п╫п╦я├я┐ '%s'"
 
 #: grid.cpp:912 grid.cpp:917 grid.cpp:1038 grid.cpp:1043
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
-msgstr "не могу извлечь оконницу верхнего уровня (выводы 'grid' и 'graphics' смешались?)"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╦п╥п╡п╩п╣я┤я▄ п╬п╨п╬п╫п╫п╦я├я┐ п╡п╣я─я┘п╫п╣пЁп╬ я┐я─п╬п╡п╫я▐ (п╡я▀п╡п╬п╢я▀ 'grid' п╦ 'graphics' я│п╪п╣я┬п╟п╩п╦я│я▄?)"
 
 #: grid.cpp:1244
 msgid "attempt to plot on null device"
-msgstr "попытка чертить на нулевом устройстве"
+msgstr "п©п╬п©я▀я┌п╨п╟ я┤п╣я─я┌п╦я┌я▄ п╫п╟ п╫я┐п╩п╣п╡п╬п╪ я┐я│я┌я─п╬п╧я│я┌п╡п╣"
 
 #: grid.cpp:1714
 msgid "there is no layout defined"
-msgstr "нет заданного эскиза"
+msgstr "п╫п╣я┌ п╥п╟п╢п╟п╫п╫п╬пЁп╬ я█я│п╨п╦п╥п╟"
 
 #: grid.cpp:1936
 msgid "polygon edge not found (zero-width or zero-height?)"
-msgstr "край многоугольника не найден (нулевая ширина или высота?)"
+msgstr "п╨я─п╟п╧ п╪п╫п╬пЁп╬я┐пЁп╬п╩я▄п╫п╦п╨п╟ п╫п╣ п╫п╟п╧п╢п╣п╫ (п╫я┐п╩п╣п╡п╟я▐ я┬п╦я─п╦п╫п╟ п╦п╩п╦ п╡я▀я│п╬я┌п╟?)"
 
 #: grid.cpp:1945
 msgid "polygon edge not found"
-msgstr "край многоугольника не найден"
+msgstr "п╨я─п╟п╧ п╪п╫п╬пЁп╬я┐пЁп╬п╩я▄п╫п╦п╨п╟ п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: grid.cpp:2097
 msgid "require at least two points to draw arrow"
-msgstr "надо как минимум две точки, чтобы нарисовать стрелку"
+msgstr "п╫п╟п╢п╬ п╨п╟п╨ п╪п╦п╫п╦п╪я┐п╪ п╢п╡п╣ я┌п╬я┤п╨п╦, я┤я┌п╬п╠я▀ п╫п╟я─п╦я│п╬п╡п╟я┌я▄ я│я┌я─п╣п╩п╨я┐"
 
 #: grid.cpp:2465
 msgid "non-finite control point in Xspline"
-msgstr "не-конечная контрольная точка в Xspline"
+msgstr "п╫п╣-п╨п╬п╫п╣я┤п╫п╟я▐ п╨п╬п╫я┌я─п╬п╩я▄п╫п╟я▐ я┌п╬я┤п╨п╟ п╡ Xspline"
 
-#: grid.cpp:3430
+#: grid.cpp:3431
 msgid "non-finite x or y in graphics path"
-msgstr "бесконечный x или y в кривой крафика"
+msgstr "п╠п╣я│п╨п╬п╫п╣я┤п╫я▀п╧ x п╦п╩п╦ y п╡ п╨я─п╦п╡п╬п╧ п╨я─п╟я└п╦п╨п╟"
 
-#: grid.cpp:3479
+#: grid.cpp:3480
 msgid "Empty raster"
-msgstr "Пустой растр"
+msgstr "п÷я┐я│я┌п╬п╧ я─п╟я│я┌я─"
 
-#: grid.cpp:4021
+#: grid.cpp:4022
 msgid "use of negative pch with symbol font is invalid"
 msgstr ""
 
-#: grid.cpp:4027 grid.cpp:4083
+#: grid.cpp:4028 grid.cpp:4084
 msgid "Coordinates for text pch not yet supported"
-msgstr "Эта версия не может задать координаты для текстового 'pch'"
+msgstr "п╜я┌п╟ п╡п╣я─я│п╦я▐ п╫п╣ п╪п╬п╤п╣я┌ п╥п╟п╢п╟я┌я▄ п╨п╬п╬я─п╢п╦п╫п╟я┌я▀ п╢п╩я▐ я┌п╣п╨я│я┌п╬п╡п╬пЁп╬ 'pch'"
 
-#: grid.cpp:4088
+#: grid.cpp:4089
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
-msgstr "значение 'pch' = '%d' некорректно в текущей локали"
+msgstr "п╥п╫п╟я┤п╣п╫п╦п╣ 'pch' = '%d' п╫п╣п╨п╬я─я─п╣п╨я┌п╫п╬ п╡ я┌п╣п╨я┐я┴п╣п╧ п╩п╬п╨п╟п╩п╦"
 
-#: grid.cpp:4909
+#: grid.cpp:4910
 #, c-format
 msgid "unimplemented pch value '%d'"
-msgstr "значение 'pch' = '%d' не реализовано"
+msgstr "п╥п╫п╟я┤п╣п╫п╦п╣ 'pch' = '%d' п╫п╣ я─п╣п╟п╩п╦п╥п╬п╡п╟п╫п╬"
 
-#: grid.cpp:5067
+#: grid.cpp:5068
 msgid "invalid plotting symbol"
-msgstr "неправильный символ графика"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я│п╦п╪п╡п╬п╩ пЁя─п╟я└п╦п╨п╟"
 
-#: grid.cpp:5184
+#: grid.cpp:5186
 msgid "unable to clip to rotated rectangle"
-msgstr "не могу обрезать до повернутого четырехугольника"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╬п╠я─п╣п╥п╟я┌я▄ п╢п╬ п©п╬п╡п╣я─п╫я┐я┌п╬пЁп╬ я┤п╣я┌я▀я─п╣я┘я┐пЁп╬п╩я▄п╫п╦п╨п╟"
 
 #: layout.cpp:602
 msgid "invalid 'layout.pos.row'"
-msgstr "неправильный 'layout.pos.row'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ 'layout.pos.row'"
 
 #: layout.cpp:606
 msgid "invalid 'layout.pos.col'"
-msgstr "неправильный 'layout.pos.col'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ 'layout.pos.col'"
 
 #: matrix.cpp:50
 msgid "singular transformation matrix"
-msgstr "сингулярная трансформационная матрица"
+msgstr "я│п╦п╫пЁя┐п╩я▐я─п╫п╟я▐ я┌я─п╟п╫я│я└п╬я─п╪п╟я├п╦п╬п╫п╫п╟я▐ п╪п╟я┌я─п╦я├п╟"
 
 #: state.cpp:196
 msgid "unable to store 'grid' state.  Too many devices open?"
-msgstr "не могу сохранить состояние 'grid'. Открыто слишком много устройств?"
+msgstr "п╫п╣ п╪п╬пЁя┐ я│п╬я┘я─п╟п╫п╦я┌я▄ я│п╬я│я┌п╬я▐п╫п╦п╣ 'grid'. п·я┌п╨я─я▀я┌п╬ я│п╩п╦я┬п╨п╬п╪ п╪п╫п╬пЁп╬ я┐я│я┌я─п╬п╧я│я┌п╡?"
 
 #: unit.cpp:75
 msgid "Cannot create unit scalar from 0-length unit vector"
-msgstr "Не могу создать единичный скаляр из нулевого единичного вектора"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬п╥п╢п╟я┌я▄ п╣п╢п╦п╫п╦я┤п╫я▀п╧ я│п╨п╟п╩я▐я─ п╦п╥ п╫я┐п╩п╣п╡п╬пЁп╬ п╣п╢п╦п╫п╦я┤п╫п╬пЁп╬ п╡п╣п╨я┌п╬я─п╟"
 
 #: unit.cpp:809 unit.cpp:1308
 msgid "invalid unit or unit not yet implemented"
-msgstr "неправильная или не разработанная единица"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╦п╩п╦ п╫п╣ я─п╟п╥я─п╟п╠п╬я┌п╟п╫п╫п╟я▐ п╣п╢п╦п╫п╦я├п╟"
 
 #: unit.cpp:1365 unit.cpp:1396
 msgid "Viewport has zero dimension(s)"
-msgstr "Оконница имеет ноль измерений"
+msgstr "п·п╨п╬п╫п╫п╦я├п╟ п╦п╪п╣п╣я┌ п╫п╬п╩я▄ п╦п╥п╪п╣я─п╣п╫п╦п╧"
 
 #: unit.cpp:1428 unit.cpp:1443 unit.cpp:1458 unit.cpp:1473
 msgid "Unsupported unit conversion"
-msgstr "Неподдерживаемая конверсия единиц измерения"
+msgstr "п²п╣п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣п╪п╟я▐ п╨п╬п╫п╡п╣я─я│п╦я▐ п╣п╢п╦п╫п╦я├ п╦п╥п╪п╣я─п╣п╫п╦я▐"
 
 #: unit.cpp:1565
 msgid "Invalid unit"
-msgstr "Неправильная единица"
+msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫п╟я▐ п╣п╢п╦п╫п╦я├п╟"
 
 #: unit.cpp:1580
 msgid "'units' must be character"
-msgstr "единицы должен быть буквами"
+msgstr "п╣п╢п╦п╫п╦я├я▀ п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╠я┐п╨п╡п╟п╪п╦"
 
 #: unit.cpp:1583
 msgid "'units' must be of length > 0"
-msgstr "единицы должны быть длиной > 0"
+msgstr "п╣п╢п╦п╫п╦я├я▀ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╢п╩п╦п╫п╬п╧ > 0"
 
 #: unit.cpp:1594
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
-msgstr "данные должны быть или NULL, или длиной 1, или соответствовать длине окончательного единичного вектора"
+msgstr "п╢п╟п╫п╫я▀п╣ п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╦п╩п╦ NULL, п╦п╩п╦ п╢п╩п╦п╫п╬п╧ 1, п╦п╩п╦ я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╬п╡п╟я┌я▄ п╢п╩п╦п╫п╣ п╬п╨п╬п╫я┤п╟я┌п╣п╩я▄п╫п╬пЁп╬ п╣п╢п╦п╫п╦я┤п╫п╬пЁп╬ п╡п╣п╨я┌п╬я─п╟"
 
 #: unit.cpp:1606
 msgid "no string supplied for 'strwidth/height' unit"
-msgstr "нет сроки для единицы 'strwidth/height'"
+msgstr "п╫п╣я┌ я│я─п╬п╨п╦ п╢п╩я▐ п╣п╢п╦п╫п╦я├я▀ 'strwidth/height'"
 
 #: unit.cpp:1610
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
-msgstr "нет 'grob' для единицы 'grobwidth/height'"
+msgstr "п╫п╣я┌ 'grob' п╢п╩я▐ п╣п╢п╦п╫п╦я├я▀ 'grobwidth/height'"
 
 #: unit.cpp:1628
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr "'gPath' должен быть единичной грубины в единицах 'grobwidth/height'"
+msgstr "'gPath' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╣п╢п╦п╫п╦я┤п╫п╬п╧ пЁя─я┐п╠п╦п╫я▀ п╡ п╣п╢п╦п╫п╦я├п╟я┘ 'grobwidth/height'"
 
 #: unit.cpp:1633
 msgid "non-NULL value supplied for plain unit"
-msgstr "для plain единицы указано не-NULL значение"
+msgstr "п╢п╩я▐ plain п╣п╢п╦п╫п╦я├я▀ я┐п╨п╟п╥п╟п╫п╬ п╫п╣-NULL п╥п╫п╟я┤п╣п╫п╦п╣"
 
 #: unit.cpp:1686 unit.cpp:1720 unit.cpp:1769
 msgid "old version of unit class is no longer allowed"
-msgstr "старая версия единичного класса больше не разрешается"
+msgstr "я│я┌п╟я─п╟я▐ п╡п╣я─я│п╦я▐ п╣п╢п╦п╫п╦я┤п╫п╬пЁп╬ п╨п╩п╟я│я│п╟ п╠п╬п╩я▄я┬п╣ п╫п╣ я─п╟п╥я─п╣я┬п╟п╣я┌я│я▐"
 
 #: unit.cpp:1692
 msgid "object is not coercible to a unit"
-msgstr "объект не конвертируется в вдиницу"
+msgstr "п╬п╠я┼п╣п╨я┌ п╫п╣ п╨п╬п╫п╡п╣я─я┌п╦я─я┐п╣я┌я│я▐ п╡ п╡п╢п╦п╫п╦я├я┐"
 
 #: unit.cpp:1718
 msgid "object is not a unit"
-msgstr "объект не является единицей"
+msgstr "п╬п╠я┼п╣п╨я┌ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╣п╢п╦п╫п╦я├п╣п╧"
 
 #: unit.cpp:1853
 msgid "units can only be multiplied with numerics and integers"
-msgstr "единицы можно умножать только на целые или десятичные числа"
+msgstr "п╣п╢п╦п╫п╦я├я▀ п╪п╬п╤п╫п╬ я┐п╪п╫п╬п╤п╟я┌я▄ я┌п╬п╩я▄п╨п╬ п╫п╟ я├п╣п╩я▀п╣ п╦п╩п╦ п╢п╣я│я▐я┌п╦я┤п╫я▀п╣ я┤п╦я│п╩п╟"
 
 #: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
-msgstr "Не могу посчитать ширину/высоту текста (использую 0)"
+msgstr "п²п╣ п╪п╬пЁя┐ п©п╬я│я┤п╦я┌п╟я┌я▄ я┬п╦я─п╦п╫я┐/п╡я▀я│п╬я┌я┐ я┌п╣п╨я│я┌п╟ (п╦я│п©п╬п╩я▄п╥я┐я▌ 0)"
 
 #: util.cpp:308 util.cpp:320
 msgid "grid grob object is empty"
 msgstr ""
 
-#: viewport.cpp:58
+#: viewport.cpp:59
 msgid "Mask is not logical value ('none' or 'inherit')"
-msgstr "Маска не является логическим значением ('none' или 'inherit')"
+msgstr "п°п╟я│п╨п╟ п╫п╣ я▐п╡п╩я▐п╣я┌я│я▐ п╩п╬пЁп╦я┤п╣я│п╨п╦п╪ п╥п╫п╟я┤п╣п╫п╦п╣п╪ ('none' п╦п╩п╦ 'inherit')"
 
-#: viewport.cpp:332
+#: viewport.cpp:333
 msgid "non-finite location and/or size for viewport"
-msgstr "не-конечное положение и/или размер оконницы"
+msgstr "п╫п╣-п╨п╬п╫п╣я┤п╫п╬п╣ п©п╬п╩п╬п╤п╣п╫п╦п╣ п╦/п╦п╩п╦ я─п╟п╥п╪п╣я─ п╬п╨п╬п╫п╫п╦я├я▀"
 
 #~ msgid "unimplemented unit function"
-#~ msgstr "не разработанная единичная функция"
+#~ msgstr "п╫п╣ я─п╟п╥я─п╟п╠п╬я┌п╟п╫п╫п╟я▐ п╣п╢п╦п╫п╦я┤п╫п╟я▐ я└я┐п╫п╨я├п╦я▐"
 
 #~ msgid "Invalid circle radius (must be non-negative)"
-#~ msgstr "Неправильный радиус круга (должен быть неотрицательным)"
+#~ msgstr "п²п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я─п╟п╢п╦я┐я│ п╨я─я┐пЁп╟ (п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╫п╣п╬я┌я─п╦я├п╟я┌п╣п╩я▄п╫я▀п╪)"

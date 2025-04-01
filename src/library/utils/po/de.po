@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2023-02-22 13:05+0000\n"
 "Last-Translator: Martin Mächler <maechler@stat.math.ethz.ch>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -35,24 +35,26 @@ msgstr ""
 msgid "bad hash table type"
 msgstr ""
 
-#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:772 io.cpp:827 io.cpp:840
-#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
-#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:47 stubs.cpp:67
-#: windows/dialogs.cpp:147 windows/dialogs.cpp:155 windows/dialogs.cpp:175
-#: windows/dialogs.cpp:200 windows/dialogs.cpp:203 windows/dialogs.cpp:245
-#: windows/dialogs.cpp:282 windows/dialogs.cpp:293 windows/dialogs.cpp:317
-#: windows/dialogs.cpp:325 windows/util.cpp:138 windows/widgets.cpp:90
-#: windows/widgets.cpp:93 windows/widgets.cpp:97
+#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:771 io.cpp:826 io.cpp:839
+#: io.cpp:843 io.cpp:849 io.cpp:1088 io.cpp:1089 io.cpp:1091 io.cpp:1092
+#: io.cpp:1093 io.cpp:1094 io.cpp:1095 stubs.cpp:47 stubs.cpp:67
+#: windows/dialogs.cpp:84 windows/dialogs.cpp:88 windows/dialogs.cpp:92
+#: windows/dialogs.cpp:95 windows/dialogs.cpp:98 windows/dialogs.cpp:147
+#: windows/dialogs.cpp:155 windows/dialogs.cpp:175 windows/dialogs.cpp:200
+#: windows/dialogs.cpp:203 windows/dialogs.cpp:245 windows/dialogs.cpp:282
+#: windows/dialogs.cpp:293 windows/dialogs.cpp:317 windows/dialogs.cpp:325
+#: windows/util.cpp:138 windows/widgets.cpp:90 windows/widgets.cpp:93
+#: windows/widgets.cpp:97
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
 msgstr "ungültiges '%s' Argument"
 
-#: io.cpp:347 io.cpp:837
+#: io.cpp:347 io.cpp:836
 #, fuzzy
 msgid "invalid quote symbol set"
 msgstr "ungültige Menge von quote Symbolen"
 
-#: io.cpp:359 io.cpp:859 io.cpp:1077
+#: io.cpp:359 io.cpp:858 io.cpp:1076
 msgid "cannot open the connection"
 msgstr "kann die Verbindung nicht öffnen"
 
@@ -75,66 +77,66 @@ msgstr "das erste Argument muss vom Modus character sein"
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "unzulässige 'numerals' Zeichenkette \"%s\""
 
-#: io.cpp:774
+#: io.cpp:773
 msgid "Selection: "
 msgstr "Auswahl: "
 
-#: io.cpp:869 io.cpp:884
+#: io.cpp:868 io.cpp:883
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "kann Buffer in 'readTableHead' nicht allokieren"
 
-#: io.cpp:897
+#: io.cpp:896
 msgid "\\ followed by EOF"
 msgstr "\\\\ gefolgt von EOF"
 
-#: io.cpp:936
+#: io.cpp:935
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:949 io.cpp:953
+#: io.cpp:948 io.cpp:952
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "unvollständige letzte Zeile von readTableHeader in '%s' gefunden"
 
-#: io.cpp:1010
+#: io.cpp:1009
 msgid "index out of range"
 msgstr "Index außerhalb der Grenzen"
 
-#: io.cpp:1046
+#: io.cpp:1045
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr "Problem beim Schließen der Verbindung: %s"
 
-#: io.cpp:1048
+#: io.cpp:1047
 msgid "Problem closing connection"
 msgstr "Problem beim Schließen der Verbindung"
 
-#: io.cpp:1070
+#: io.cpp:1069
 #, fuzzy
 msgid "'file' is not a connection"
 msgstr "'file' ist keine Verbindung"
 
-#: io.cpp:1073
+#: io.cpp:1072
 msgid "cannot write to this connection"
 msgstr "kann in diese Verbindung nicht schreiben"
 
-#: io.cpp:1102
+#: io.cpp:1101
 #, fuzzy
 msgid "'dec' must be a single character"
 msgstr "'dec' muss ein einzelnes Zeichen sein"
 
-#: io.cpp:1126
+#: io.cpp:1125
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "beschädigter Dataframe -- Länge der Spalte %d entspricht nicht der Anzahl Zeilen"
 
-#: io.cpp:1160
+#: io.cpp:1159
 #, fuzzy, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr "Spalte %d behauptet ein Faktor zu sein, hat aber keine numerischen Kodes"
 
-#: io.cpp:1178
+#: io.cpp:1177
 msgid "corrupt matrix -- dims do not match length"
 msgstr "beschädigte Matrix -- Dimensionen entsprechen nicht der Länge"
 

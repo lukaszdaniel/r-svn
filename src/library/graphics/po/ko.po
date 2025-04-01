@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 18:57+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -387,8 +387,8 @@ msgstr "'a'와 'b'는 반드시 유한해야 합니다"
 #: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
 #: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
 #: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
-#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:167 stem.cpp:168
-#: stem.cpp:170 stem.cpp:171
+#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
+#: stem.cpp:171 stem.cpp:172
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "유효하지 않은 '%s' 인자입니다"
@@ -605,13 +605,13 @@ msgstr "모든 z 값들이 동일합니다"
 msgid "all z values are NA"
 msgstr "모든 z 값들이 NA입니다"
 
-#: stem.cpp:118
+#: stem.cpp:119
 msgid ""
 "  The decimal point is at the |\n"
 "\n"
 msgstr ""
 
-#: stem.cpp:122
+#: stem.cpp:123
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the right of the |\n"
@@ -621,7 +621,7 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
-#: stem.cpp:124
+#: stem.cpp:125
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
@@ -631,17 +631,17 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
-#: stem.cpp:161
+#: stem.cpp:162
 #, fuzzy
 msgid "invalid input"
 msgstr "유효하지 않은 덴드로이드그램 입력입니다"
 
-#: stem.cpp:164
+#: stem.cpp:165
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "벡터 '%s'는 지원되지 않는 길이를 가지고 있습니다"
 
-#: stem.cpp:200
+#: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -853,9 +853,10 @@ msgstr "'start'는 'end' 뒤에 올 수 없습니다."
 msgid "'start' value not changed"
 msgstr "변경되지 않은 'start'값입니다."
 
-#. R/models.R: stop("'termlabels' must be a character vector of length at least one")
+#. R/models.R: stop("'termlabels' must be a character vector")
 #: R/models.R:0
-msgid "'termlabels' must be a character vector of length at least one"
+#, fuzzy
+msgid "'termlabels' must be a character vector"
 msgstr "'termlabels'는 반드시 적어도 길이가 1인 문자형 벡터이어야 합니다"
 
 #. R/models.R: gettextf("'termobj' must be a object of class %s", dQuote("terms"))
@@ -887,6 +888,12 @@ msgstr "'ts' 객체는 반드시 하나 또는 그 이상의 관찰값들을 가
 #: R/quantile.R:0
 msgid "'type' must be 1 or 3 for ordered factors"
 msgstr ""
+
+#. R/quantile.R: stop("'type' must be an integer in 1..9")
+#: R/quantile.R:0
+#, fuzzy
+msgid "'type' must be an integer in 1..9"
+msgstr "'y'는 반드시 'x'보다 길어야 합니다."
 
 #. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     vtemp)
 #: R/family.R:0

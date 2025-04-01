@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -848,9 +848,10 @@ msgstr "'start' kann nicht nach 'end' sein"
 msgid "'start' value not changed"
 msgstr "'start' Wert nicht geändert"
 
-#. R/models.R: stop("'termlabels' must be a character vector of length at least one")
+#. R/models.R: stop("'termlabels' must be a character vector")
 #: R/models.R:0
-msgid "'termlabels' must be a character vector of length at least one"
+#, fuzzy
+msgid "'termlabels' must be a character vector"
 msgstr "'termlabels' muss ein Zeichenkettenvektor mit Länge >= 1 sein"
 
 #. R/models.R: gettextf("'termobj' must be a object of class %s", dQuote("terms"))
@@ -882,6 +883,12 @@ msgstr "'ts' Objekt muss eine oder mehrere Beobachtungen enthalten"
 #: R/quantile.R:0
 msgid "'type' must be 1 or 3 for ordered factors"
 msgstr "'type' muss für geordnete Faktoren 1 oder 3 sein"
+
+#. R/quantile.R: stop("'type' must be an integer in 1..9")
+#: R/quantile.R:0
+#, fuzzy
+msgid "'type' must be an integer in 1..9"
+msgstr "'y' muss einen länger sein als 'x'"
 
 #. R/family.R: gettextf("'variance' \"%s\" is invalid: possible values are \"mu(1-mu)\", \"mu\", \"mu^2\", \"mu^3\" and \"constant\"",     vtemp)
 #: R/family.R:0

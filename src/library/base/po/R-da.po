@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 14:04\n"
+"POT-Creation-Date: 2025-04-01 16:28\n"
 "PO-Revision-Date: 2015-03-25 14:20+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -654,6 +654,17 @@ msgstr "'qr' og 'y' skal have det samme antal rækker"
 msgid "'receive.console.signals' must be TRUE or FALSE"
 msgstr "'intern' skal være TRUE eller FALSE"
 
+#. R/unlist.R: stop("'recursive' is NA")
+#: R/unlist.R:0
+msgid "'recursive' is NA"
+msgstr ""
+
+#. R/unlist.R: stop("'recursive' must be a length-1 vector")
+#: R/unlist.R:0
+#, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "'origin' skal være af længde en"
+
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
 msgid "'recursive' will be ignored as 'to' is not a single existing directory"
@@ -1029,13 +1040,6 @@ msgstr "Vedhæfter pakke: %s"
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
 msgstr "Forsøger at indlæse miljøet %s"
-
-#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
-#: R/structure.R:0
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
@@ -1504,6 +1508,11 @@ msgstr "forsøger at angive 'colnames' på et objekt med mindre end to dimension
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
 msgstr "forsøger at angive 'rownames' på et objekt uden dimensioner"
+
+#. R/structure.R: stop("attempt to set an attribute on NULL")
+#: R/structure.R:0
+msgid "attempt to set an attribute on NULL"
+msgstr ""
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
 #: R/autoload.R:0
@@ -3418,9 +3427,6 @@ msgstr[1] "der er ingen pakker rmed navnet"
 #~ msgid "'name' must be a single character string"
 #~ msgstr "argument 'object' skal deparse til en enkel tegnstreng"
 
-#~ msgid "'origin' must be of length one"
-#~ msgstr "'origin' skal være af længde en"
-
 #~ msgid "'package' must be of length 1"
 #~ msgstr "'package' skal være på længde 1"
 
@@ -3440,44 +3446,6 @@ msgstr[1] "der er ingen pakker rmed navnet"
 #, fuzzy
 #~ msgid "'%s' must be a non-empty string"
 #~ msgstr "'file' skal være en streng der ikke er tom"
-
-#, fuzzy
-#~ msgid "'name' must be a single character string"
-#~ msgstr "argument 'object' skal deparse til en enkel tegnstreng"
-
-#~ msgid "'from' must be specified"
-#~ msgstr "'from' skal angives"
-
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from' skal være et »Date«-objekt"
-
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from' skal være af længde 1"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out' skal være af længde 1"
-
-#~ msgid "'by' must be of length 1"
-#~ msgstr "'by' skal være af længde 1"
-
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from' skal være et »POSIXt«-objekt"
-
-#~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "'to' skal være et »POSIXt«-objekt"
-
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'package' skal være på længde 1"
-
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg' skal have længden 1"
-
-#~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "argument 'length.out' skal have længden 1"
-
-#, fuzzy
-#~ msgid "'which' must be of length 1"
-#~ msgstr "'to' skal være af længde 1"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' skal være en tegnstreng af længde 1"

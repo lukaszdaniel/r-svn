@@ -2170,9 +2170,6 @@ msgstr[2] "bendrinės funkcijos %s (%s) formaliųjų argumentų skiriasi nuo neb
 #~ msgid "E := environment(): %s; parent.env(E): %s"
 #~ msgstr "E := environment(): %s; parent.env(E): %s"
 
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "Funkcija turi būti S4 bendrinė"
-
 #~ msgid "invalid method sublist"
 #~ msgstr "neteisingas metodo posąrašis"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2024-03-18 06:08+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -42,46 +42,46 @@ msgstr "md5 ha fallat al fitxer «%ls»"
 msgid "sha256 failed on file '%s'"
 msgstr "md5 ha fallat al fitxer «%s»"
 
-#: getfmts.cpp:57
+#: getfmts.cpp:56
 #, fuzzy, c-format
 msgid "only %d arguments are allowed"
 msgstr "només es permeten %d arguments"
 
-#: getfmts.cpp:62
+#: getfmts.cpp:61
 #, fuzzy
 msgid "'fmt' is not a character vector"
 msgstr "«fmt» no és un vector de caràcters"
 
-#: getfmts.cpp:65
+#: getfmts.cpp:64
 msgid "'fmt' must be length 1"
 msgstr "«fmt» ha de ser de longitud 1"
 
-#: getfmts.cpp:71
+#: getfmts.cpp:70
 #, fuzzy, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "la longitud «fmt» excedeix la longitud màxima de format %d"
 
-#: getfmts.cpp:92
+#: getfmts.cpp:91
 #, fuzzy, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "especificació de format no reconeguda «%s»"
 
-#: getfmts.cpp:132
+#: getfmts.cpp:131
 #, fuzzy
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "com a màxim s'admet un asterisc '*' a cada especificació de conversió"
 
-#: gramLatex.cpp:2584 gramRd.cpp:3965
+#: gramLatex.cpp:2757 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "no s'ha pogut assignar memòria intermèdia per a la cadena llarga a la línia %d"
 
-#: gramLatex.cpp:2818 gramRd.cpp:4460
+#: gramLatex.cpp:3014 gramRd.cpp:4460
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "no s'ha pogut assignar memòria intermèdia per a la cadena llarga a la línia %d"
 
-#: gramLatex.cpp:2861 gramRd.cpp:4511
+#: gramLatex.cpp:3056 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
@@ -156,15 +156,15 @@ msgstr "no es pot llegir des d'aquesta connexió"
 msgid "invalid Rd file"
 msgstr "el fitxer Rd no és vàlid"
 
-#: gramRd.cpp:4556
+#: gramRd.cpp:4557
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "«deparseRd» només permet analitzar elements de tipus caràcter"
 
-#: gramRd.cpp:4559
+#: gramRd.cpp:4560
 msgid "bad state"
 msgstr "«state» dolent"
 
-#: gramRd.cpp:4572
+#: gramRd.cpp:4573
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "mode de text %d incorrecte a 'deparseRd'"
@@ -193,12 +193,12 @@ msgstr "argument «%s» no vàlid"
 msgid "write error during file append"
 msgstr "error d'escriptura durant l'annex de fitxer"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:75
 #, fuzzy
 msgid "too many items"
 msgstr "massa elements"
 
-#: pdscan.cpp:116
+#: pdscan.cpp:122
 #, fuzzy
 msgid "non-character argument"
 msgstr "argument de no caràcter"
@@ -211,21 +211,21 @@ msgstr "pskill() no és compatible amb aquesta plataforma"
 msgid "psnice() is not supported on this platform"
 msgstr "psnice() no és compatible amb aquesta plataforma"
 
-#: text.cpp:80
+#: text.cpp:79
 #, fuzzy
 msgid "invalid argument type"
 msgstr "tipus d'argument no vàlid"
 
-#: text.cpp:169 text.cpp:205 text.cpp:329
+#: text.cpp:168 text.cpp:204 text.cpp:328
 #, fuzzy
 msgid "invalid input"
 msgstr "el fitxer Rd no és vàlid"
 
-#: text.cpp:236 text.cpp:258
+#: text.cpp:235 text.cpp:257
 #, fuzzy
 msgid "out of memory"
 msgstr "fora de memòria"
 
-#: text.cpp:278 text.cpp:280
+#: text.cpp:277 text.cpp:279
 msgid "first arg must be a single character string"
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-08 17:33+0100\n"
+"POT-Creation-Date: 2025-04-01 16:28+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -134,19 +134,19 @@ msgstr "'%ls' の表示に問題があります"
 #: src/gnuwin32/extra.cpp:965 src/gnuwin32/sys-win32.cpp:285
 #: src/gnuwin32/sys-win32.cpp:335 src/main/agrep.cpp:140 src/main/agrep.cpp:144
 #: src/main/agrep.cpp:773 src/main/agrep.cpp:778 src/main/altclasses.cpp:1381
-#: src/main/apply.cpp:364 src/main/apply.cpp:366 src/main/apply.cpp:369
+#: src/main/apply.cpp:365 src/main/apply.cpp:367 src/main/apply.cpp:370
 #: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
 #: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
-#: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:575
-#: src/main/builtin.cpp:593 src/main/builtin.cpp:774 src/main/builtin.cpp:776
-#: src/main/builtin.cpp:778 src/main/character.cpp:338
-#: src/main/character.cpp:341 src/main/character.cpp:346
-#: src/main/character.cpp:943 src/main/character.cpp:1463
-#: src/main/character.cpp:1467 src/main/character.cpp:1470
-#: src/main/character.cpp:1717 src/main/character.cpp:1721
-#: src/main/character.cpp:1788 src/main/character.cpp:1791
-#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2120
+#: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:580
+#: src/main/builtin.cpp:598 src/main/builtin.cpp:779 src/main/builtin.cpp:781
+#: src/main/builtin.cpp:783 src/main/character.cpp:339
+#: src/main/character.cpp:342 src/main/character.cpp:347
+#: src/main/character.cpp:946 src/main/character.cpp:1466
+#: src/main/character.cpp:1470 src/main/character.cpp:1473
+#: src/main/character.cpp:1720 src/main/character.cpp:1724
+#: src/main/character.cpp:1791 src/main/character.cpp:1794
+#: src/main/coerce.cpp:1484 src/main/coerce.cpp:1548 src/main/coerce.cpp:2154
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -173,20 +173,20 @@ msgstr "'%ls' の表示に問題があります"
 #: src/main/connections.cpp:6793 src/main/context.cpp:696
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
-#: src/main/deparse.cpp:462 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
+#: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
 #: src/main/dotcode.cpp:515 src/main/dounzip.cpp:356 src/main/dounzip.cpp:363
-#: src/main/envir.cpp:1903 src/main/envir.cpp:2012 src/main/envir.cpp:2123
-#: src/main/envir.cpp:2137 src/main/envir.cpp:2253 src/main/envir.cpp:2261
-#: src/main/envir.cpp:2540 src/main/envir.cpp:2660 src/main/envir.cpp:2932
-#: src/main/envir.cpp:3194 src/main/envir.cpp:3208 src/main/envir.cpp:3215
-#: src/main/envir.cpp:3231 src/main/envir.cpp:3972 src/main/errors.cpp:1283
-#: src/main/eval.cpp:891 src/main/eval.cpp:901 src/main/eval.cpp:904
-#: src/main/eval.cpp:907 src/main/eval.cpp:915 src/main/eval.cpp:922
+#: src/main/envir.cpp:1904 src/main/envir.cpp:2013 src/main/envir.cpp:2124
+#: src/main/envir.cpp:2138 src/main/envir.cpp:2254 src/main/envir.cpp:2262
+#: src/main/envir.cpp:2543 src/main/envir.cpp:2663 src/main/envir.cpp:2936
+#: src/main/envir.cpp:3199 src/main/envir.cpp:3213 src/main/envir.cpp:3220
+#: src/main/envir.cpp:3236 src/main/envir.cpp:3978 src/main/errors.cpp:1284
+#: src/main/eval.cpp:893 src/main/eval.cpp:903 src/main/eval.cpp:906
+#: src/main/eval.cpp:909 src/main/eval.cpp:917 src/main/eval.cpp:924
 #: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
-#: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2130
-#: src/main/grep.cpp:2134 src/main/grep.cpp:2139 src/main/grep.cpp:2972
-#: src/main/grep.cpp:2977 src/main/grep.cpp:3314 src/main/grep.cpp:3319
-#: src/main/memory.cpp:4567 src/main/objects.cpp:1807 src/main/objects.cpp:1809
+#: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2131
+#: src/main/grep.cpp:2135 src/main/grep.cpp:2140 src/main/grep.cpp:2973
+#: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321
+#: src/main/memory.cpp:4560 src/main/objects.cpp:1807 src/main/objects.cpp:1809
 #: src/main/paste.cpp:152 src/main/paste.cpp:496 src/main/paste.cpp:501
 #: src/main/paste.cpp:506 src/main/paste.cpp:512 src/main/paste.cpp:521
 #: src/main/paste.cpp:526 src/main/paste.cpp:710 src/main/paste.cpp:715
@@ -208,27 +208,27 @@ msgstr "'%ls' の表示に問題があります"
 #: src/main/platform.cpp:3259 src/main/platform.cpp:3301
 #: src/main/platform.cpp:3345 src/main/platform.cpp:3434 src/main/print.cpp:304
 #: src/main/random.cpp:482 src/main/random.cpp:485 src/main/random.cpp:494
-#: src/main/random.cpp:522 src/main/Rdynload.cpp:1426
+#: src/main/random.cpp:522 src/main/Rdynload.cpp:1428
 #: src/main/saveload.cpp:2066 src/main/saveload.cpp:2101
 #: src/main/saveload.cpp:2104 src/main/saveload.cpp:2214
 #: src/main/saveload.cpp:2382 src/main/saveload.cpp:2387
 #: src/main/saveload.cpp:2489 src/main/scan.cpp:708 src/main/scan.cpp:887
 #: src/main/scan.cpp:900 src/main/scan.cpp:904 src/main/scan.cpp:906
 #: src/main/scan.cpp:917 src/main/scan.cpp:947 src/main/scan.cpp:1007
-#: src/main/seq.cpp:696 src/main/seq.cpp:703 src/main/seq.cpp:713
-#: src/main/seq.cpp:719 src/main/seq.cpp:764 src/main/seq.cpp:769
-#: src/main/seq.cpp:772 src/main/seq.cpp:776 src/main/seq.cpp:781
-#: src/main/seq.cpp:788 src/main/seq.cpp:792 src/main/seq.cpp:798
-#: src/main/sysutils.cpp:639 src/main/sysutils.cpp:643
-#: src/main/sysutils.cpp:647 src/main/sysutils.cpp:2959
-#: src/main/unique.cpp:1883 src/main/unique.cpp:1887 src/main/unique.cpp:2282
-#: src/main/unique.cpp:2287 src/main/util.cpp:710 src/main/util.cpp:713
-#: src/main/util.cpp:1696 src/main/util.cpp:1710 src/main/util.cpp:2527
-#: src/main/util.cpp:2785 src/main/util.cpp:2802 src/main/util.cpp:2845
-#: src/main/util.cpp:2883 src/main/util.cpp:2885 src/main/util.cpp:2887
-#: src/main/util.cpp:2890 src/main/util.cpp:2893 src/main/util.cpp:2897
-#: src/main/util.cpp:2899 src/main/util.cpp:2901 src/main/util.cpp:3196
-#: src/main/util.cpp:3198 src/main/util.cpp:3238 src/main/util.cpp:3240
+#: src/main/seq.cpp:700 src/main/seq.cpp:707 src/main/seq.cpp:717
+#: src/main/seq.cpp:723 src/main/seq.cpp:767 src/main/seq.cpp:772
+#: src/main/seq.cpp:775 src/main/seq.cpp:779 src/main/seq.cpp:784
+#: src/main/seq.cpp:791 src/main/seq.cpp:795 src/main/seq.cpp:801
+#: src/main/sysutils.cpp:640 src/main/sysutils.cpp:644
+#: src/main/sysutils.cpp:648 src/main/sysutils.cpp:2965
+#: src/main/unique.cpp:1886 src/main/unique.cpp:1890 src/main/unique.cpp:2285
+#: src/main/unique.cpp:2290 src/main/util.cpp:716 src/main/util.cpp:719
+#: src/main/util.cpp:1705 src/main/util.cpp:1719 src/main/util.cpp:2536
+#: src/main/util.cpp:2794 src/main/util.cpp:2811 src/main/util.cpp:2854
+#: src/main/util.cpp:2896 src/main/util.cpp:2898 src/main/util.cpp:2900
+#: src/main/util.cpp:2903 src/main/util.cpp:2906 src/main/util.cpp:2910
+#: src/main/util.cpp:2912 src/main/util.cpp:2914 src/main/util.cpp:3209
+#: src/main/util.cpp:3211 src/main/util.cpp:3251 src/main/util.cpp:3253
 #: src/modules/internet/internet.cpp:340 src/modules/internet/internet.cpp:346
 #: src/modules/internet/internet.cpp:354 src/modules/internet/internet.cpp:362
 #: src/modules/internet/libcurl.cpp:364 src/modules/internet/libcurl.cpp:371
@@ -252,7 +252,7 @@ msgstr "このバージョンの Windows はサポートされていません"
 msgid "cannot resolve current user or domain: '%s'"
 msgstr "ファイル '%ls' を開くことができません: %s"
 
-#: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879 src/main/util.cpp:1076
+#: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879 src/main/util.cpp:1082
 msgid "'path' must be a character vector"
 msgstr "'path' は文字ベクトルでなくてはなりません"
 
@@ -354,19 +354,19 @@ msgstr ""
 msgid "Thief about! Something other than package tcltk has set or is attempting to unset R_Tcl_do"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:141 src/main/sysutils.cpp:2918
+#: src/gnuwin32/system.cpp:141 src/main/sysutils.cpp:2923
 msgid "reached session elapsed time limit"
 msgstr "セッション時間が経過して上限に達しました"
 
-#: src/gnuwin32/system.cpp:143 src/main/sysutils.cpp:2920
+#: src/gnuwin32/system.cpp:143 src/main/sysutils.cpp:2925
 msgid "reached elapsed time limit"
 msgstr "時間が経過して上限に達しました"
 
-#: src/gnuwin32/system.cpp:149 src/main/sysutils.cpp:2926
+#: src/gnuwin32/system.cpp:149 src/main/sysutils.cpp:2931
 msgid "reached session CPU time limit"
 msgstr "セッション CPU 時間が経過して上限に達しました"
 
-#: src/gnuwin32/system.cpp:151 src/main/sysutils.cpp:2928
+#: src/gnuwin32/system.cpp:151 src/main/sysutils.cpp:2933
 msgid "reached CPU time limit"
 msgstr "CPU 時間が経過して上限に達しました"
 
@@ -413,6 +413,16 @@ msgstr ""
 #, fuzzy
 msgid "Allocation error"
 msgstr "bessel_i で割り当てエラーがありました"
+
+#: src/gnuwin32/system.cpp:972
+#, fuzzy
+msgid "allocation failure in reading Renviron"
+msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
+
+#: src/gnuwin32/system.cpp:1046 src/unix/system.cpp:131
+#, fuzzy
+msgid "WARNING: invalid R_HISTSIZE ignored;"
+msgstr "警告: '%s' 値が不正なので無視されました"
 
 #: src/gnuwin32/system.cpp:1058
 #, c-format
@@ -562,6 +572,12 @@ msgid ""
 "*** Error: hist_save() failed on malloc\n"
 msgstr ""
 
+#: src/gnuwin32/getline/getline.cpp:1553
+#: src/gnuwin32/getline/wc_history.cpp:138
+#, fuzzy, c-format
+msgid "Unable to open %s"
+msgstr "ファイルを開くことができません"
+
 #: src/gnuwin32/getline/wc_history.cpp:51
 msgid "*** Error: hist_save() failed on malloc"
 msgstr ""
@@ -576,7 +592,16 @@ msgstr ""
 msgid "*** Error: wgl_histadd() failed on realloc"
 msgstr ""
 
-#: src/include/Errormsg.h:31
+#: src/gnuwin32/getline/wc_history.cpp:170
+#, fuzzy, c-format
+msgid "Unable to open %ls"
+msgstr "ファイルを開くことができません"
+
+#: src/include/Defn.h:320
+msgid "can't set ALTREP truelength"
+msgstr ""
+
+#: src/include/Errormsg.h:31 src/include/Rinlinedfuns.h:267
 msgid "subscript out of bounds"
 msgstr "添え字が許される範囲外です"
 
@@ -590,9 +615,90 @@ msgstr "'%s' 型のオブジェクトは部分代入可能ではありません"
 msgid "missing subscript"
 msgstr "[[ ]] の添え字がありません"
 
-#: src/main/agrep.cpp:142 src/main/agrep.cpp:775 src/main/character.cpp:1465
-#: src/main/character.cpp:1469 src/main/grep.cpp:1294 src/main/grep.cpp:2132
-#: src/main/grep.cpp:2136 src/main/grep.cpp:2974 src/main/grep.cpp:3316
+#: src/include/Rdefines.h:128
+msgid "the 'value' of a list object is not defined"
+msgstr ""
+
+#: src/include/Rdefines.h:129
+msgid "the 'value' of a raw object is not defined"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:81
+msgid "bad binding access"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:109
+#, fuzzy, c-format
+msgid "cannot get data pointer of '%s' objects"
+msgstr "ディレクトリ '%ls' を作成できません、理由は '%s' です"
+
+#: src/include/Rinlinedfuns.h:152
+msgid "bad LGLSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:156
+msgid "bad INTSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:159
+msgid "bad REALSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:162
+msgid "bad CPLXSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:165
+msgid "bad RAWSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:225
+msgid "bad standard LGLSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:229
+msgid "bad standard INTSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:233
+msgid "bad standard REALSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:237
+msgid "bad standard CPLXSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:241
+msgid "bad standard RAWSXP vector"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:246
+msgid "bad LGLSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:250
+msgid "bad INTSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:254
+msgid "bad REALSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:258
+msgid "bad CPLXSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:262
+msgid "bad RAWSXP scalar"
+msgstr ""
+
+#: src/include/Rinlinedfuns.h:1098
+msgid "cycle detected"
+msgstr ""
+
+#: src/main/agrep.cpp:142 src/main/agrep.cpp:775 src/main/character.cpp:1468
+#: src/main/character.cpp:1472 src/main/grep.cpp:1294 src/main/grep.cpp:2133
+#: src/main/grep.cpp:2137 src/main/grep.cpp:2975 src/main/grep.cpp:3318
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "引数 '%s' は 1 を超える長さなので、最初の要素だけが使われます"
@@ -602,30 +708,30 @@ msgid "'pattern' must be a non-empty character string"
 msgstr "'pattern' は空でない文字列でなければなりません"
 
 #: src/main/agrep.cpp:210 src/main/agrep.cpp:826 src/main/grep.cpp:1346
-#: src/main/grep.cpp:3012 src/main/grep.cpp:3348
+#: src/main/grep.cpp:3013 src/main/grep.cpp:3350
 msgid "regular expression is invalid in this locale"
 msgstr "このロケールでは、正規表現は無効です"
 
 #: src/main/agrep.cpp:216 src/main/agrep.cpp:626 src/main/agrep.cpp:832
-#: src/main/grep.cpp:3354
+#: src/main/grep.cpp:3356
 #, c-format
 msgid "regcomp error: '%s'"
 msgstr "regcomp のエラー: '%s'"
 
 #: src/main/agrep.cpp:248 src/main/agrep.cpp:872 src/main/grep.cpp:633
 #: src/main/grep.cpp:735 src/main/grep.cpp:851 src/main/grep.cpp:1059
-#: src/main/grep.cpp:1399 src/main/grep.cpp:2248 src/main/grep.cpp:2537
-#: src/main/grep.cpp:3132 src/main/grep.cpp:3220 src/main/grep.cpp:3380
-#: src/main/grep.cpp:3387
+#: src/main/grep.cpp:1399 src/main/grep.cpp:2249 src/main/grep.cpp:2538
+#: src/main/grep.cpp:3133 src/main/grep.cpp:3222 src/main/grep.cpp:3382
+#: src/main/grep.cpp:3389
 #, fuzzy, c-format
 msgid "input string %lld is invalid in this locale"
 msgstr "入力文字列 %lld はこのロケールでは不適切です"
 
 #: src/main/agrep.cpp:527 src/main/agrep.cpp:763 src/main/connections.cpp:2886
 #: src/main/grep.cpp:569 src/main/grep.cpp:1285 src/main/grep.cpp:1287
-#: src/main/grep.cpp:1580 src/main/grep.cpp:1588 src/main/grep.cpp:2123
-#: src/main/grep.cpp:2125 src/main/grep.cpp:2964 src/main/grep.cpp:2966
-#: src/main/grep.cpp:3304
+#: src/main/grep.cpp:1580 src/main/grep.cpp:1588 src/main/grep.cpp:2124
+#: src/main/grep.cpp:2126 src/main/grep.cpp:2965 src/main/grep.cpp:2967
+#: src/main/grep.cpp:3306
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "引数 '%s' は無視されます"
@@ -668,8 +774,8 @@ msgstr ""
 msgid "compact sequences with increment %f not supported yet"
 msgstr ""
 
-#: src/main/altclasses.cpp:586 src/main/seq.cpp:117 src/main/seq.cpp:887
-#: src/main/seq.cpp:1135
+#: src/main/altclasses.cpp:586 src/main/seq.cpp:119 src/main/seq.cpp:891
+#: src/main/seq.cpp:1139
 msgid "result would be too long a vector"
 msgstr "結果のベクトルが長すぎます"
 
@@ -720,7 +826,7 @@ msgstr ""
 msgid "mmap: %s"
 msgstr ""
 
-#: src/main/altclasses.cpp:1373 src/main/apply.cpp:147
+#: src/main/altclasses.cpp:1373 src/main/apply.cpp:148
 #, c-format
 msgid "type '%s' is not supported"
 msgstr "'%s' という型はサポートされていません"
@@ -734,7 +840,7 @@ msgstr ""
 msgid "munmap: %s"
 msgstr ""
 
-#: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:447
+#: src/main/altclasses.cpp:1922 src/main/sprintf.cpp:448
 msgid "unsupported type"
 msgstr "サポートされていないタイプです"
 
@@ -747,45 +853,45 @@ msgstr ""
 msgid "no_na must be 0 or +1"
 msgstr "'onOff' は TRUE または FALSE でなければなりません"
 
-#: src/main/altrep.cpp:358
+#: src/main/altrep.cpp:357
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
 msgstr ""
 
-#: src/main/altrep.cpp:362
+#: src/main/altrep.cpp:361
 msgid "cannot unserialize this ALTREP object"
 msgstr ""
 
-#: src/main/altrep.cpp:369
+#: src/main/altrep.cpp:368
 #, c-format
 msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
 msgstr ""
 
-#: src/main/altrep.cpp:402
+#: src/main/altrep.cpp:401
 msgid "cannot get ALTVEC DATAPTR during GC"
 msgstr ""
 
-#: src/main/altrep.cpp:557
+#: src/main/altrep.cpp:556
 msgid "cannot get ALTSTRING_ELT during GC"
 msgstr ""
 
-#: src/main/altrep.cpp:568
+#: src/main/altrep.cpp:567
 msgid "cannot set ALTSTRING_ELT during GC"
 msgstr ""
 
-#: src/main/altrep.cpp:589
+#: src/main/altrep.cpp:588
 msgid "cannot get ALTLIST_ELT during GC"
 msgstr ""
 
-#: src/main/altrep.cpp:600
+#: src/main/altrep.cpp:599
 msgid "cannot set ALTLIST_ELT during GC"
 msgstr ""
 
-#: src/main/altrep.cpp:709
+#: src/main/altrep.cpp:708
 msgid "cannot unserialize this ALTREP object yet"
 msgstr ""
 
-#: src/main/altrep.cpp:1008 src/main/altrep.cpp:1043
+#: src/main/altrep.cpp:1006 src/main/altrep.cpp:1041
 #, fuzzy
 msgid "unsupported ALTREP class"
 msgstr " サポートされていないURLスキームです "
@@ -799,16 +905,16 @@ msgstr "引数はシンボルでなくてはいけません"
 msgid "'FUN.VALUE' must be a vector"
 msgstr "'FUN.VALUE' はベクトルでなければなりません"
 
-#: src/main/apply.cpp:135 src/main/complex.cpp:818 src/main/serialize.cpp:2022
+#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2022
 #: src/main/serialize.cpp:2040
 msgid "invalid length"
 msgstr "長さが不正です"
 
-#: src/main/apply.cpp:140
+#: src/main/apply.cpp:141
 msgid "long vectors are not supported for matrix/array results"
 msgstr "long vector は matrix/array の結果に対してサポートされていません"
 
-#: src/main/apply.cpp:192
+#: src/main/apply.cpp:193
 #, fuzzy, c-format
 msgid ""
 "values must be length %d,\n"
@@ -817,11 +923,11 @@ msgstr ""
 "値の長さは %d でなければなりません、\n"
 " しかし、FUN(X[[%lld]]) の結果の長さが %d です"
 
-#: src/main/apply.cpp:203
+#: src/main/apply.cpp:204
 msgid "Internal error: unexpected SEXPTYPE"
 msgstr ""
 
-#: src/main/apply.cpp:206
+#: src/main/apply.cpp:207
 #, fuzzy, c-format
 msgid ""
 "values must be type '%s',\n"
@@ -830,23 +936,23 @@ msgstr ""
 "値の型は '%s' でなければなりません、\n"
 " しかし、FUN(X[[%lld]]) の結果の型が '%s' です"
 
-#: src/main/apply.cpp:225 src/main/apply.cpp:253 src/main/sort.cpp:1228
-#: src/main/sort.cpp:1369 src/main/unique.cpp:1459
+#: src/main/apply.cpp:226 src/main/apply.cpp:254 src/main/sort.cpp:1233
+#: src/main/sort.cpp:1374 src/main/unique.cpp:1462
 #, fuzzy
 msgid "invalid type"
 msgstr "行のタイプが不正です"
 
-#: src/main/apply.cpp:285
+#: src/main/apply.cpp:286
 #, c-format
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr "dimnames(<value>) は NULL でも長さ %d のリストでもありません"
 
-#: src/main/apply.cpp:362 src/main/coerce.cpp:2693
+#: src/main/apply.cpp:363 src/main/coerce.cpp:2728
 #, fuzzy, c-format
 msgid "'%s' must be a list or expression"
 msgstr "'args' はリストまたはexpressionでなければなりません"
 
-#: src/main/arithmetic.cpp:70 src/main/eval.cpp:5192
+#: src/main/arithmetic.cpp:70 src/main/eval.cpp:5158
 msgid "NaNs produced"
 msgstr "計算結果が NaN になりました"
 
@@ -882,11 +988,11 @@ msgid ""
 "  Use c() or as.vector() instead."
 msgstr ""
 
-#: src/main/arithmetic.cpp:575 src/main/logic.cpp:113 src/main/relop.cpp:329
+#: src/main/arithmetic.cpp:575 src/main/logic.cpp:114 src/main/relop.cpp:329
 msgid "non-conformable arrays"
 msgstr "適切な配列ではありません"
 
-#: src/main/arithmetic.cpp:619 src/main/logic.cpp:157 src/main/relop.cpp:373
+#: src/main/arithmetic.cpp:619 src/main/logic.cpp:158 src/main/relop.cpp:373
 msgid "longer object length is not a multiple of shorter object length"
 msgstr "長いオブジェクトの長さが短いオブジェクトの長さの倍数になっていません"
 
@@ -1010,7 +1116,7 @@ msgstr "'allocArray': 'dims' によって指定された要素数が多すぎま
 msgid "'%s' must be a list or atomic vector"
 msgstr "'x' は NULL または raw vector からなるリストでなくてはなりません"
 
-#: src/main/array.cpp:622
+#: src/main/array.cpp:623
 #, c-format
 msgid "a matrix-like object is required as argument to '%s'"
 msgstr "'%s' の引数は行列のようなオブジェクトでなければなりません"
@@ -1039,7 +1145,7 @@ msgstr "適切な引数ではありません"
 msgid "'%s' argument is not a matrix"
 msgstr "引数が行列ではありません"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1242
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1244
 #, fuzzy, c-format
 msgid "invalid first argument, must be %s"
 msgstr "一番目の引数が不正です。配列でなくてはなりません"
@@ -1085,8 +1191,8 @@ msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "'backsolve' 中に特異行列がありました。[%d] 番目の対角要素に最初の 0 があります。"
 
 #: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:308
-#: src/main/attrib.cpp:332 src/main/attrib.cpp:458 src/main/attrib.cpp:505
-#: src/main/attrib.cpp:559 src/main/RObject.cpp:116
+#: src/main/attrib.cpp:332 src/main/attrib.cpp:466 src/main/attrib.cpp:513
+#: src/main/attrib.cpp:567 src/main/RObject.cpp:116
 msgid "attempt to set an attribute on NULL"
 msgstr "NULL に対して属性を設定しようとしました"
 
@@ -1109,106 +1215,106 @@ msgstr ""
 msgid "cannot have attributes on a CHARSXP"
 msgstr "このシステムではタイムゾーンは設定できません"
 
-#: src/main/attrib.cpp:380 src/main/attrib.cpp:411
+#: src/main/attrib.cpp:380 src/main/attrib.cpp:419
 #, fuzzy
 msgid "cannot set attribute on a CHARSXP"
 msgstr "このシステムではタイムゾーンは設定できません"
 
-#: src/main/attrib.cpp:382 src/main/RObject.cpp:120
-#, fuzzy
-msgid "cannot set attribute on a symbol"
+#: src/main/attrib.cpp:385
+#, fuzzy, c-format
+msgid "cannot set attribute on a '%s'"
 msgstr "このシステムではタイムゾーンは設定できません"
 
-#: src/main/attrib.cpp:431
+#: src/main/attrib.cpp:439
 #, fuzzy, c-format
 msgid "invalid type (%s) for 'names': must be vector or NULL"
 msgstr "'names' の型 (%s) が不正です; ベクトルでなければなりません"
 
-#: src/main/attrib.cpp:434
+#: src/main/attrib.cpp:442
 #, fuzzy, c-format
 msgid "'names' attribute [%lld] must be the same length as the vector [%lld]"
 msgstr "'names' 属性 [%lld] はベクトル [%lld] の長さと同じでなければなりません"
 
-#: src/main/attrib.cpp:440
+#: src/main/attrib.cpp:448
 msgid "names() applied to a non-vector"
 msgstr "names() 関数がベクトルでないものに適用されました"
 
-#: src/main/attrib.cpp:448
+#: src/main/attrib.cpp:456
 msgid "invalid time series parameters specified"
 msgstr "不正な時系列パラメータが指定されました"
 
-#: src/main/attrib.cpp:462
+#: src/main/attrib.cpp:470
 msgid "'tsp' attribute must be numeric"
 msgstr "'tsp' 属性は数値でなくてはなりません"
 
-#: src/main/attrib.cpp:468
+#: src/main/attrib.cpp:476
 msgid "'tsp' attribute must be numeric of length three"
 msgstr "'tsp' 属性は長さ 3 の数値でなくてはなりません"
 
-#: src/main/attrib.cpp:485
+#: src/main/attrib.cpp:493
 msgid "cannot assign 'tsp' to zero-length vector"
 msgstr "長さ 0 のベクトルには属性 'tsp' を与えられません"
 
-#: src/main/attrib.cpp:516
+#: src/main/attrib.cpp:524
 msgid "attempt to set invalid 'comment' attribute"
 msgstr "不正な 'comment' 属性を設定しようとしました"
 
-#: src/main/attrib.cpp:568
+#: src/main/attrib.cpp:576
 msgid "adding class \"factor\" to an invalid object"
 msgstr "無効のオブジェクトにクラス \"factor\" を追加"
 
-#: src/main/attrib.cpp:599
+#: src/main/attrib.cpp:607
 msgid "attempt to set invalid 'class' attribute"
 msgstr "不正な 'class' 属性を設定しようとしました"
 
-#: src/main/attrib.cpp:885
+#: src/main/attrib.cpp:893
 msgid "type must be LANGSXP at this point"
 msgstr ""
 
-#: src/main/attrib.cpp:916
+#: src/main/attrib.cpp:924
 #, fuzzy
 msgid "invalid class argument to internal .class_cache"
 msgstr " call_R の引数の個数が不正です "
 
-#: src/main/attrib.cpp:948
+#: src/main/attrib.cpp:956
 #, fuzzy, c-format
 msgid "invalid to use names()<- on an S4 object of class '%s'"
 msgstr "ベクタでないクラス ('%s') の 'names' スロットに値をセットするために names()<- を使うことはできません"
 
-#: src/main/attrib.cpp:989
+#: src/main/attrib.cpp:997
 msgid "incompatible 'names' argument"
 msgstr "'names' 引数に互換性がありません"
 
-#: src/main/attrib.cpp:1040
+#: src/main/attrib.cpp:1048
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "'names' 属性として設定するには不正な型 (%s) です"
 
-#: src/main/attrib.cpp:1113
+#: src/main/attrib.cpp:1120
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' が配列以外に適用されました"
 
-#: src/main/attrib.cpp:1118 src/main/coerce.cpp:2696
+#: src/main/attrib.cpp:1125 src/main/coerce.cpp:2731
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' はリストでなければなりません"
 
-#: src/main/attrib.cpp:1122 src/main/attrib.cpp:1151
+#: src/main/attrib.cpp:1129 src/main/attrib.cpp:1154
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "'dimnames' の長さ [%d] は 'dims' の長さ [%d] と同じでなくてはなりません"
 
-#: src/main/attrib.cpp:1157
+#: src/main/attrib.cpp:1160
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "'dimnames' の型 (%s) が不正です (ベクトルでなければなりません)"
 
-#: src/main/attrib.cpp:1160
+#: src/main/attrib.cpp:1163
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "'dimnames' の長さ [%d] が配列の大きさと違っています"
 
-#: src/main/attrib.cpp:1244
+#: src/main/attrib.cpp:1246
 #, fuzzy, c-format
 msgid "invalid second argument, must be %s"
 msgstr "二番目の引数が不正です"
@@ -1230,69 +1336,74 @@ msgstr "dims 変数は負の値を含みます"
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "dims [product %lld] はオブジェクト [%lld] の長さに整合しません"
 
-#: src/main/attrib.cpp:1344
+#: src/main/attrib.cpp:1343
 #, c-format
 msgid "factor level [%lld] is duplicated"
 msgstr ""
 
-#: src/main/attrib.cpp:1372
+#: src/main/attrib.cpp:1371
 msgid "attributes must be a list or NULL"
 msgstr "属性はリストもしくは NULL でなければなりません"
 
-#: src/main/attrib.cpp:1377
+#: src/main/attrib.cpp:1376
 msgid "attributes must be named"
 msgstr "属性は名前が付けられていなければなりません"
 
-#: src/main/attrib.cpp:1381
+#: src/main/attrib.cpp:1380
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "全ての属性は名前を持っていなければなりません [%d が持っていません]"
 
-#: src/main/attrib.cpp:1486
+#: src/main/attrib.cpp:1478 src/main/errors.cpp:1192
+#, fuzzy
+msgid "either 2 or 3 arguments are required"
+msgstr "文字列引数が要求されています"
+
+#: src/main/attrib.cpp:1485
 msgid "'which' must be of mode character"
 msgstr "'which' は文字列モードでなくてはなりません"
 
-#: src/main/attrib.cpp:1488
+#: src/main/attrib.cpp:1487
 msgid "exactly one attribute 'which' must be given"
 msgstr "性格に一つの属性 'which' が与えらなければなりません"
 
-#: src/main/attrib.cpp:1624
+#: src/main/attrib.cpp:1623
 #, fuzzy
 msgid "invalid slot name length"
 msgstr "長さが不正です"
 
-#: src/main/attrib.cpp:1628
+#: src/main/attrib.cpp:1627
 #, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "スロット名に対する不正な型 '%s' です"
 
-#: src/main/attrib.cpp:1675
+#: src/main/attrib.cpp:1674
 msgid "'name' must be non-null character string"
 msgstr "'name' は NULL でない文字列でなければなりません"
 
-#: src/main/attrib.cpp:1801 src/main/attrib.cpp:1872 src/main/attrib.cpp:1924
+#: src/main/attrib.cpp:1800 src/main/attrib.cpp:1871 src/main/attrib.cpp:1923
 msgid "invalid type or length for slot name"
 msgstr "スロット名の型または長さが不正です"
 
-#: src/main/attrib.cpp:1835
+#: src/main/attrib.cpp:1834
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "型 \"%s\" のオブジェクトからはスロット (\"%s\") を得ることは出来ません"
 
-#: src/main/attrib.cpp:1846
+#: src/main/attrib.cpp:1845
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "名前 \"%s\" というスロットが、クラス \"%s\" のこのオブジェクトには存在しません"
 
-#: src/main/attrib.cpp:1863
+#: src/main/attrib.cpp:1862
 msgid "attempt to set slot on NULL object"
 msgstr "NULL オブジェクトに対して スロットを設定しようとしました"
 
-#: src/main/attrib.cpp:1919
+#: src/main/attrib.cpp:1918
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "'methods' パッケージなしにフォーマルクラス (formal class) は使用できません"
 
-#: src/main/attrib.cpp:1929
+#: src/main/attrib.cpp:1928
 #, fuzzy, c-format
 msgid "no applicable method for `@` applied to an object of class \"%s\""
 msgstr "'%s' をクラス \"%s\" のオブジェクトに適用できるようなメソッドがありません"
@@ -1359,33 +1470,33 @@ msgstr "置き換えるべき項目数が、置き換える数の倍数ではあ
 msgid "vector size cannot be NA"
 msgstr "ベクトルのサイズは NA ではありえません"
 
-#: src/main/builtin.cpp:68 src/main/builtin.cpp:76 src/main/sort.cpp:1523
+#: src/main/builtin.cpp:68 src/main/builtin.cpp:76 src/main/sort.cpp:1528
 msgid "vector size cannot be NA/NaN"
 msgstr "ベクトルのサイズは NA や NaN ではありえません"
 
-#: src/main/builtin.cpp:69 src/main/builtin.cpp:77 src/main/sort.cpp:1524
+#: src/main/builtin.cpp:69 src/main/builtin.cpp:77 src/main/sort.cpp:1529
 msgid "vector size cannot be infinite"
 msgstr "ベクトルのサイズは∞ではありえません"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:953
-#: src/main/sort.cpp:1525
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:958
+#: src/main/sort.cpp:1530
 msgid "vector size specified is too large"
 msgstr "指定されたベクトルのサイズが長すぎます"
 
-#: src/main/builtin.cpp:94 src/main/builtin.cpp:130 src/main/envir.cpp:1893
-#: src/main/envir.cpp:2007 src/main/envir.cpp:2108 src/main/envir.cpp:2239
+#: src/main/builtin.cpp:94 src/main/builtin.cpp:130 src/main/envir.cpp:1894
+#: src/main/envir.cpp:2008 src/main/envir.cpp:2109 src/main/envir.cpp:2240
 #: src/main/paste.cpp:121 src/main/paste.cpp:363 src/main/random.cpp:492
-#: src/main/random.cpp:521 src/main/unique.cpp:2286
+#: src/main/random.cpp:521 src/main/unique.cpp:2289
 msgid "invalid first argument"
 msgstr "一番目の引数が不正です"
 
 #: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:314
-#: src/main/builtin.cpp:348 src/main/builtin.cpp:398 src/main/builtin.cpp:412
+#: src/main/builtin.cpp:353 src/main/builtin.cpp:403 src/main/builtin.cpp:417
 #: src/main/coerce.cpp:1578 src/main/connections.cpp:3894
-#: src/main/engine.cpp:3221 src/main/envir.cpp:1009 src/main/envir.cpp:1060
-#: src/main/envir.cpp:1231 src/main/envir.cpp:1269 src/main/envir.cpp:2043
-#: src/main/envir.cpp:2117 src/main/envir.cpp:2246 src/main/envir.cpp:2968
-#: src/main/envir.cpp:3052 src/main/Environment.cpp:112 src/main/eval.cpp:8978
+#: src/main/engine.cpp:3221 src/main/envir.cpp:1010 src/main/envir.cpp:1061
+#: src/main/envir.cpp:1232 src/main/envir.cpp:1270 src/main/envir.cpp:2044
+#: src/main/envir.cpp:2118 src/main/envir.cpp:2247 src/main/envir.cpp:2973
+#: src/main/envir.cpp:3057 src/main/Environment.cpp:112 src/main/eval.cpp:8918
 #: src/main/objects.cpp:258 src/main/objects.cpp:266 src/main/saveload.cpp:2212
 #: src/main/saveload.cpp:2487 src/main/serialize.cpp:3235
 msgid "use of NULL environment is defunct"
@@ -1397,262 +1508,266 @@ msgid "argument is not a function"
 msgstr "引数は関数であってはなりません"
 
 #: src/main/builtin.cpp:328
+msgid "setting environment(<primitive function>) is not possible and trying it is deprecated"
+msgstr ""
+
+#: src/main/builtin.cpp:333
 msgid "replacement object is not an environment"
 msgstr "置き換えるオブジェクトが環境ではありません"
 
-#: src/main/builtin.cpp:352
+#: src/main/builtin.cpp:357
 msgid "'enclos' must be an environment"
 msgstr "'enclos' は環境でなくてはなりません"
 
-#: src/main/builtin.cpp:370 src/main/builtin.cpp:403
+#: src/main/builtin.cpp:375 src/main/builtin.cpp:408
 msgid "argument is not an environment"
 msgstr "引数が環境ではありません"
 
-#: src/main/builtin.cpp:372
+#: src/main/builtin.cpp:377
 msgid "the empty environment has no parent"
 msgstr "空の環境は親を持ちません"
 
-#: src/main/builtin.cpp:405
+#: src/main/builtin.cpp:410
 msgid "can not set parent of the empty environment"
 msgstr "空の環境の親は配置できません"
 
-#: src/main/builtin.cpp:407
+#: src/main/builtin.cpp:412
 msgid "can not set the parent environment of a namespace"
 msgstr "名前空間の親の環境は設定できません"
 
-#: src/main/builtin.cpp:409
+#: src/main/builtin.cpp:414
 msgid "can not set the parent environment of package imports"
 msgstr "パッケージのインポートの親の環境は設定できません"
 
-#: src/main/builtin.cpp:417 src/main/memory.cpp:4370
+#: src/main/builtin.cpp:422 src/main/memory.cpp:4363
 msgid "'parent' is not an environment"
 msgstr "'parent' は環境ではありません"
 
-#: src/main/builtin.cpp:562 src/main/connections.cpp:4560
+#: src/main/builtin.cpp:567 src/main/connections.cpp:4560
 #: src/main/connections.cpp:4945 src/main/connections.cpp:4972
 #: src/main/connections.cpp:5353 src/main/connections.cpp:5416
 #: src/main/connections.cpp:5641 src/main/connections.cpp:5645
-#: src/main/connections.cpp:6098 src/main/deparse.cpp:421
-#: src/main/deparse.cpp:507 src/main/serialize.cpp:2509
+#: src/main/connections.cpp:6098 src/main/deparse.cpp:422
+#: src/main/deparse.cpp:508 src/main/serialize.cpp:2509
 msgid "cannot write to this connection"
 msgstr "このコネクションには書き出せません"
 
-#: src/main/builtin.cpp:567
+#: src/main/builtin.cpp:572
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "'%s' の指定が不正です"
 
-#: src/main/builtin.cpp:584
+#: src/main/builtin.cpp:589
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "正でない 'fill' 引数は無視されます"
 
-#: src/main/builtin.cpp:655
+#: src/main/builtin.cpp:660
 #, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "引数 %d (タイプ '%s') は 'cat' で取り扱えません"
 
-#: src/main/builtin.cpp:794
+#: src/main/builtin.cpp:799
 #, fuzzy
 msgid "too long for a pairlist"
 msgstr "... はペアリストではありません"
 
-#: src/main/builtin.cpp:798
+#: src/main/builtin.cpp:803
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
 msgstr "ベクトル: モード '%s' のベクトルを作ることはできません。"
 
-#: src/main/builtin.cpp:826
+#: src/main/builtin.cpp:831
 #, fuzzy
 msgid "cannot set length of non-(vector or list)"
 msgstr "ベクトルでないものの長さは設定できません"
 
-#: src/main/builtin.cpp:827 src/main/character.cpp:676 src/main/coerce.cpp:3062
+#: src/main/builtin.cpp:832 src/main/character.cpp:679 src/main/coerce.cpp:3097
 msgid "invalid value"
 msgstr "値が不正です"
 
-#: src/main/builtin.cpp:829
+#: src/main/builtin.cpp:834
 msgid "length of NULL cannot be changed"
 msgstr ""
 
-#: src/main/builtin.cpp:949 src/main/envir.cpp:2256 src/main/envir.cpp:2264
+#: src/main/builtin.cpp:954 src/main/envir.cpp:2257 src/main/envir.cpp:2265
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "'%s' 引数の長さが不正です"
 
-#: src/main/builtin.cpp:979 src/main/coerce.cpp:2765 src/main/coerce.cpp:2808
-#: src/main/eval.cpp:1146 src/main/eval.cpp:1270 src/main/eval.cpp:3756
-#: src/main/eval.cpp:3845 src/main/eval.cpp:3916 src/main/eval.cpp:4265
-#: src/main/eval.cpp:8007 src/main/eval.cpp:8150
+#: src/main/builtin.cpp:984 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
+#: src/main/eval.cpp:1078 src/main/eval.cpp:1240 src/main/eval.cpp:3715
+#: src/main/eval.cpp:3804 src/main/eval.cpp:3875 src/main/eval.cpp:4222
+#: src/main/eval.cpp:7947 src/main/eval.cpp:8090
 msgid "'...' used in an incorrect context"
 msgstr "'...' が不適切な文脈で使われました"
 
-#: src/main/builtin.cpp:1001
+#: src/main/builtin.cpp:1006
 #, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "重複する 'switch' 既定値: '%s' と '%s'"
 
-#: src/main/builtin.cpp:1034 src/main/coerce.cpp:2650 src/main/dotcode.cpp:564
-#: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3775
+#: src/main/builtin.cpp:1039 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
+#: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3734
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s' が見つかりません"
 
-#: src/main/builtin.cpp:1038 src/main/eval.cpp:8560
+#: src/main/builtin.cpp:1043 src/main/eval.cpp:8500
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR は長さ 1 のベクトルでなければなりません"
 
-#: src/main/builtin.cpp:1041 src/main/eval.cpp:8563
+#: src/main/builtin.cpp:1046 src/main/eval.cpp:8503
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr "EXPRはfactorで、整数として扱われます。代わりに'%s'の使用を検討してください"
 
-#: src/main/builtin.cpp:1088
+#: src/main/builtin.cpp:1093
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1097 src/main/eval.cpp:8572 src/main/eval.cpp:8600
+#: src/main/builtin.cpp:1102 src/main/eval.cpp:8512 src/main/eval.cpp:8540
 #, fuzzy
 msgid "'switch' with no alternatives"
 msgstr "名前付きの代替値が無い 'switch' 関数には数値の EXPR が必要です"
 
-#: src/main/character.cpp:136 src/main/character.cpp:322
+#: src/main/character.cpp:136 src/main/character.cpp:323
 #, c-format
 msgid "%d argument passed to '%s' which requires %d to %d"
 msgid_plural "%d arguments passed to '%s' which requires %d to %d"
 msgstr[0] "%d 個の引数が '%s' に渡されましたが、%d から%dが必要とされています"
 
 #: src/main/character.cpp:143 src/main/character.cpp:146
-#: src/main/character.cpp:331 src/main/character.cpp:334
+#: src/main/character.cpp:332 src/main/character.cpp:335
 #, c-format
 msgid "'%s' requires a character vector"
 msgstr "'%s' は文字ベクトルを要求します"
 
-#: src/main/character.cpp:194 src/main/character.cpp:220
-#: src/main/character.cpp:234 src/main/character.cpp:298
-#: src/main/character.cpp:404 src/main/character.cpp:606
-#: src/main/character.cpp:611
+#: src/main/character.cpp:195 src/main/character.cpp:221
+#: src/main/character.cpp:235 src/main/character.cpp:299
+#: src/main/character.cpp:407 src/main/character.cpp:609
+#: src/main/character.cpp:614
 #, fuzzy, c-format
 msgid "invalid multibyte string, %s"
 msgstr "%d は不正なマルチバイト文字です"
 
-#: src/main/character.cpp:210
+#: src/main/character.cpp:211
 #, fuzzy, c-format
 msgid "number of characters is not computable in \"bytes\" encoding, %s"
 msgstr "\"bytes\"でエンコードされた要素 %d の文字数が計算できません"
 
-#: src/main/character.cpp:263
+#: src/main/character.cpp:264
 #, fuzzy, c-format
 msgid "width is not computable for %s in \"bytes\" encoding"
 msgstr "\"bytes\"でエンコードされた要素 %d の幅が計算できません"
 
-#: src/main/character.cpp:361
+#: src/main/character.cpp:364
 #, fuzzy, c-format
 msgid "invalid multibyte string, element %ld"
 msgstr "%d は不正なマルチバイト文字です"
 
-#: src/main/character.cpp:364
+#: src/main/character.cpp:367
 #, fuzzy, c-format
 msgid "number of characters is not computable in \"bytes\" encoding, element %ld"
 msgstr "\"bytes\"でエンコードされた要素 %d の文字数が計算できません"
 
-#: src/main/character.cpp:367
+#: src/main/character.cpp:370
 #, fuzzy, c-format
 msgid "width is not computable in \"bytes\" encoding, element %ld"
 msgstr "\"bytes\"でエンコードされた要素 %d の幅が計算できません"
 
-#: src/main/character.cpp:444
+#: src/main/character.cpp:447
 msgid "extracting substrings from a non-character object"
 msgstr "文字列でないオブジェクトから部分文字列を抽出しようとしました"
 
-#: src/main/character.cpp:455 src/main/character.cpp:673
+#: src/main/character.cpp:458 src/main/character.cpp:676
 msgid "invalid substring arguments"
 msgstr "部分文字列引数が不正です"
 
-#: src/main/character.cpp:499
+#: src/main/character.cpp:502
 #, fuzzy
 msgid "non-character object(s)"
 msgstr "名前が文字列ではありません"
 
-#: src/main/character.cpp:668
+#: src/main/character.cpp:671
 msgid "replacing substrings in a non-character object"
 msgstr "文字列でないオブジェクトの部分文字列の置き換えです"
 
-#: src/main/character.cpp:940
+#: src/main/character.cpp:943
 msgid "the first argument must be a character vector"
 msgstr "最初の引数は文字ベクトルでなくてはなりません"
 
-#: src/main/character.cpp:975
+#: src/main/character.cpp:978
 msgid "abbreviate used with non-ASCII chars"
 msgstr "ASCII 文字でないものが省略名として使われました"
 
-#: src/main/character.cpp:996
+#: src/main/character.cpp:999
 msgid "non-character names"
 msgstr "名前が文字列ではありません"
 
-#: src/main/character.cpp:1047 src/main/character.cpp:1176
+#: src/main/character.cpp:1050 src/main/character.cpp:1179
 #, fuzzy, c-format
 msgid "invalid multibyte string %lld"
 msgstr "%lld は不正なマルチバイト文字です"
 
-#: src/main/character.cpp:1089 src/main/grep.cpp:573
+#: src/main/character.cpp:1092 src/main/grep.cpp:573
 msgid "non-character argument"
 msgstr "文字列でない引数です"
 
-#: src/main/character.cpp:1231
+#: src/main/character.cpp:1234
 #, c-format
 msgid "decreasing range specification ('%lc-%lc')"
 msgstr "範囲指定を縮小します ('%lc-%lc')"
 
-#: src/main/character.cpp:1314
+#: src/main/character.cpp:1317
 #, c-format
 msgid "decreasing range specification ('%c-%c')"
 msgstr "範囲指定を縮小します ('%c-%c')"
 
-#: src/main/character.cpp:1507 src/main/character.cpp:1513
+#: src/main/character.cpp:1510 src/main/character.cpp:1516
 msgid "invalid UTF-8 string 'old'"
 msgstr "'old' は不正な UTF-8 文字です"
 
-#: src/main/character.cpp:1519
+#: src/main/character.cpp:1522
 msgid "invalid multibyte string 'old'"
 msgstr "'old' は不正なマルチバイト文字です"
 
-#: src/main/character.cpp:1532 src/main/character.cpp:1538
+#: src/main/character.cpp:1535 src/main/character.cpp:1541
 msgid "invalid UTF-8 string 'new'"
 msgstr "'new' は不正な UTF-8 文字列です"
 
-#: src/main/character.cpp:1544
+#: src/main/character.cpp:1547
 msgid "invalid multibyte string 'new'"
 msgstr "'new' は不正なマルチバイト文字です"
 
-#: src/main/character.cpp:1572 src/main/character.cpp:1661
+#: src/main/character.cpp:1575 src/main/character.cpp:1664
 msgid "'old' is longer than 'new'"
 msgstr "'old' が 'new' より長いです"
 
-#: src/main/character.cpp:1604
+#: src/main/character.cpp:1607
 #, fuzzy, c-format
 msgid "invalid input multibyte string %lld"
 msgstr "不正なマルチバイト文字列入力 %lld です"
 
-#: src/main/character.cpp:1710
+#: src/main/character.cpp:1713
 msgid "strtrim() requires a character vector"
 msgstr "strtrim() 関数は文字ベクトルを要求します"
 
-#: src/main/character.cpp:1849 src/main/connections.cpp:4425
+#: src/main/character.cpp:1852 src/main/connections.cpp:4425
 #: src/main/context.cpp:747 src/main/context.cpp:761 src/main/datetime.cpp:1020
 #: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
 #: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
-#: src/main/dotcode.cpp:235 src/main/errors.cpp:1177 src/main/errors.cpp:1199
-#: src/main/errors.cpp:1317 src/main/errors.cpp:1324 src/main/errors.cpp:1587
-#: src/main/platform.cpp:3859 src/main/seq.cpp:266 src/main/seq.cpp:273
-#: src/main/seq.cpp:277 src/main/seq.cpp:387 src/main/seq.cpp:394
-#: src/main/seq.cpp:397 src/main/seq.cpp:399 src/main/seq.cpp:456
-#: src/main/seq.cpp:460 src/main/seq.cpp:464 src/main/sort.cpp:1527
-#: src/main/sort.cpp:1531 src/main/sort.cpp:1538 src/main/source.cpp:230
-#: src/main/sysutils.cpp:281 src/main/util.cpp:1203 src/main/util.cpp:1208
-#: src/main/util.cpp:1215 src/main/util.cpp:2596
+#: src/main/dotcode.cpp:235 src/main/errors.cpp:1178 src/main/errors.cpp:1200
+#: src/main/errors.cpp:1318 src/main/errors.cpp:1325 src/main/errors.cpp:1588
+#: src/main/platform.cpp:3859 src/main/seq.cpp:268 src/main/seq.cpp:275
+#: src/main/seq.cpp:279 src/main/seq.cpp:389 src/main/seq.cpp:396
+#: src/main/seq.cpp:399 src/main/seq.cpp:401 src/main/seq.cpp:458
+#: src/main/seq.cpp:462 src/main/seq.cpp:466 src/main/sort.cpp:1532
+#: src/main/sort.cpp:1536 src/main/sort.cpp:1543 src/main/source.cpp:230
+#: src/main/sysutils.cpp:282 src/main/util.cpp:1209 src/main/util.cpp:1214
+#: src/main/util.cpp:1221 src/main/util.cpp:2605
 #: src/modules/lapack/Lapack.cpp:1093 src/modules/X11/devX11.cpp:3245
 #: src/modules/X11/devX11.cpp:3272 src/modules/X11/devX11.cpp:3277
 #: src/modules/X11/devX11.cpp:3282 src/modules/X11/devX11.cpp:3292
@@ -1662,8 +1777,8 @@ msgstr "strtrim() 関数は文字ベクトルを要求します"
 msgid "invalid '%s' value"
 msgstr "'%s' の値が不正です"
 
-#: src/main/character.cpp:1857 src/main/envir.cpp:4038 src/main/envir.cpp:4052
-#: src/main/envir.cpp:4061 src/main/grep.cpp:203
+#: src/main/character.cpp:1860 src/main/envir.cpp:4044 src/main/envir.cpp:4066
+#: src/main/envir.cpp:4075 src/main/grep.cpp:203
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "変数名は %d バイトが上限です"
@@ -1677,7 +1792,7 @@ msgstr "'function' の本体引数 (body argument) が不正です"
 msgid "applies only to lists and vectors"
 msgstr "リストとベクトルのみに適用できます"
 
-#: src/main/coerce.cpp:103 src/main/errors.cpp:1438
+#: src/main/coerce.cpp:103 src/main/errors.cpp:1439
 msgid "NAs introduced by coercion"
 msgstr "強制変換により NA が生成されました"
 
@@ -1686,7 +1801,7 @@ msgstr "強制変換により NA が生成されました"
 msgid "NAs introduced by coercion to integer range"
 msgstr "強制変換により NA が生成されました"
 
-#: src/main/coerce.cpp:107 src/main/errors.cpp:1440
+#: src/main/coerce.cpp:107 src/main/errors.cpp:1441
 msgid "imaginary parts discarded in coercion"
 msgstr "複素数の虚部は、コネクションで捨てられました"
 
@@ -1729,7 +1844,7 @@ msgstr ""
 msgid "list argument expected"
 msgstr "リスト引数が期待されています"
 
-#: src/main/coerce.cpp:1581 src/main/dstruct.cpp:104 src/main/eval.cpp:8982
+#: src/main/coerce.cpp:1581 src/main/dstruct.cpp:104 src/main/eval.cpp:8922
 msgid "invalid environment"
 msgstr "不正な環境です"
 
@@ -1778,159 +1893,176 @@ msgstr ""
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "三番目の引数は 'TRUE' か 'FALSE' でなくてはなりません"
 
-#: src/main/coerce.cpp:2101
+#: src/main/coerce.cpp:1790 src/main/coerce.cpp:1798 src/main/coerce.cpp:1807
+#: src/main/coerce.cpp:1815
+#, fuzzy
+msgid "NA in coercion to boolean"
+msgstr "強制変換により NA が生成されました"
+
+#: src/main/coerce.cpp:2135
 msgid "type \"single\" unimplemented in R"
 msgstr "\"single\" 型は R には実装されていません"
 
-#: src/main/coerce.cpp:2103
+#: src/main/coerce.cpp:2137
 msgid "unimplemented predicate"
 msgstr "未実装の「述語」です"
 
-#: src/main/coerce.cpp:2294
+#: src/main/coerce.cpp:2328
 #, c-format
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "%s() は型 '%s' のベクトル、リスト以外に適用されます"
 
-#: src/main/coerce.cpp:2412
+#: src/main/coerce.cpp:2447
 #, fuzzy, c-format
 msgid "anyNA() applied to non-(list or vector) of type '%s'"
 msgstr "%s() は型 '%s' のベクトル、リスト以外に適用されます"
 
-#: src/main/coerce.cpp:2490 src/main/coerce.cpp:2554 src/main/coerce.cpp:2630
+#: src/main/coerce.cpp:2459
+#, fuzzy
+msgid "anyNA takes 1 or 2 arguments"
+msgstr "引数の型が不正です"
+
+#: src/main/coerce.cpp:2525 src/main/coerce.cpp:2589 src/main/coerce.cpp:2665
 #, c-format
 msgid "default method not implemented for type '%s'"
 msgstr "型 '%s' のデフォルトメソッドは実装されていません"
 
-#: src/main/coerce.cpp:2657
+#: src/main/coerce.cpp:2692
 msgid "first argument must be a character string"
 msgstr "最初の引数は文字列でなくてはなりません"
 
-#: src/main/coerce.cpp:2659 src/main/coerce.cpp:2708 src/main/coerce.cpp:2712
+#: src/main/coerce.cpp:2694 src/main/coerce.cpp:2743 src/main/coerce.cpp:2747
 msgid "illegal usage"
 msgstr ""
 
-#: src/main/coerce.cpp:2689
+#: src/main/coerce.cpp:2724
 #, fuzzy
 msgid "'what' must be a function or character string"
 msgstr "'text' は文字列でなければなりません"
 
-#: src/main/coerce.cpp:2700 src/main/unique.cpp:1891
+#: src/main/coerce.cpp:2735 src/main/unique.cpp:1894
 msgid "'envir' must be an environment"
 msgstr "'envir' は環境でなくてはなりません"
 
-#: src/main/coerce.cpp:2859
+#: src/main/coerce.cpp:2894
 msgid "invalid environment specified"
 msgstr "不正な環境指定です"
 
-#: src/main/coerce.cpp:2928
+#: src/main/coerce.cpp:2963
 msgid "Setting class(x) to NULL;   result will no longer be an S4 object"
 msgstr "class(x) を NULL に設定しようとしています; 結果はもはや S4 オブジェクトではなくなります"
 
-#: src/main/coerce.cpp:2931
+#: src/main/coerce.cpp:2966
 #, c-format
 msgid "Setting class(x) to multiple strings (\"%s\", \"%s\", ...); result will no longer be an S4 object"
 msgstr "class(x) を多重文字列 (\"%s\", \"%s\", ...) に設定しようとしています; 結果はもはや S4 オブジェクトではなくなります"
 
-#: src/main/coerce.cpp:2935
+#: src/main/coerce.cpp:2970
 #, c-format
 msgid "Setting class(x) to \"%s\" sets attribute to NULL; result will no longer be an S4 object"
 msgstr "class(x) を \"%s\" に設定すると属性は NULL に設定されます; 結果はもはや S4 オブジェクトではなくなります"
 
-#: src/main/coerce.cpp:2960
+#: src/main/coerce.cpp:2995
 msgid "invalid replacement object to be a class string"
 msgstr "クラス文字列とするには不正な置き換えオブジェクトです"
 
-#: src/main/coerce.cpp:2966
+#: src/main/coerce.cpp:3001
 #, c-format
 msgid "invalid to set the class to matrix unless the dimension attribute is of length 2 (was %d)"
 msgstr "次元属性が長さ 2 でないかぎり (%d でした)、行列にクラスを設定するのは不正です"
 
-#: src/main/coerce.cpp:2998
+#: src/main/coerce.cpp:3033
 #, c-format
 msgid "\"%s\" can only be set as the class if the object has this type; found \"%s\""
 msgstr "\"%s\" はオブジェクトがこの型を持つ時だけクラスとして設定できます。\"%s\" が見つかりました"
 
-#: src/main/coerce.cpp:3016
+#: src/main/coerce.cpp:3051
 msgid "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr "次元属性が長さ > 0 でないかぎり、配列にクラスを設定できません"
 
-#: src/main/coerce.cpp:3054
+#: src/main/coerce.cpp:3089
 msgid "'value' must be non-null character string"
 msgstr "'value' は NULL でない文字列でなければなりません"
 
-#: src/main/coerce.cpp:3058
+#: src/main/coerce.cpp:3093
 msgid "use of 'real' is defunct: use 'double' instead"
 msgstr ""
 
-#: src/main/coerce.cpp:3060
+#: src/main/coerce.cpp:3095
 msgid "use of 'single' is defunct: use mode<- instead"
 msgstr ""
 
-#: src/main/coerce.cpp:3066
+#: src/main/coerce.cpp:3101
 msgid "invalid to change the storage mode of a factor"
 msgstr "因子保管モードを変更するのは不正です"
+
+#: src/main/colors.cpp:65 src/main/colors.cpp:79 src/main/colors.cpp:87
+#: src/main/colors.cpp:95
+#, fuzzy
+msgid "package grDevices must be loaded"
+msgstr " LAPACK ルーチンはロードできませんでした "
 
 #: src/main/CommandLineArgs.cpp:75 src/main/CommandLineArgs.cpp:80
 #, fuzzy
 msgid "allocation failure in R_set_command_line_arguments"
 msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
-#: src/main/CommandLineArgs.cpp:188
+#: src/main/CommandLineArgs.cpp:189
 msgid "WARNING: no value given for --encoding"
 msgstr "警告: --encoding の値が与えられていません"
 
-#: src/main/CommandLineArgs.cpp:213
+#: src/main/CommandLineArgs.cpp:214
 #, c-format
 msgid "WARNING: option '%s' no longer supported"
 msgstr "警告: '%s' オプションはもやはサポートされていません"
 
-#: src/main/CommandLineArgs.cpp:224
+#: src/main/CommandLineArgs.cpp:225
 #, c-format
 msgid "WARNING: no value given for '%s'"
 msgstr "警告: '%s' の値が与えられていません"
 
-#: src/main/CommandLineArgs.cpp:234
+#: src/main/CommandLineArgs.cpp:235
 #, c-format
 msgid "WARNING: '%s' value is invalid: ignored"
 msgstr "警告: '%s' 値が不正なので無視されました"
 
-#: src/main/CommandLineArgs.cpp:238
+#: src/main/CommandLineArgs.cpp:239
 #, c-format
 msgid "WARNING: %s: too large and ignored"
 msgstr "警告: %s: 大きすぎるので無視されました"
 
-#: src/main/CommandLineArgs.cpp:252
+#: src/main/CommandLineArgs.cpp:253
 msgid "WARNING: no value given for '--max-ppsize'"
 msgstr "警告: '--max-ppsize' の値が与えられていません"
 
-#: src/main/CommandLineArgs.cpp:257
+#: src/main/CommandLineArgs.cpp:258
 msgid "WARNING: '--max-ppsize' value is negative: ignored"
 msgstr "警告: '--max-ppsize' 値が負なので無視されました"
 
-#: src/main/CommandLineArgs.cpp:259
+#: src/main/CommandLineArgs.cpp:260
 msgid "WARNING: '--max-ppsize' value is too small: ignored"
 msgstr "警告: '--max-ppsize' 値が小さすぎるので無視されました"
 
-#: src/main/CommandLineArgs.cpp:261
+#: src/main/CommandLineArgs.cpp:262
 msgid "WARNING: '--max-ppsize' value is too large: ignored"
 msgstr "警告: '--max-ppsize' 値が大きすぎるので無視されました"
 
-#: src/main/CommandLineArgs.cpp:269
+#: src/main/CommandLineArgs.cpp:270
 #, fuzzy
 msgid "WARNING: no value given for '--max-connections'"
 msgstr "警告: '--max-ppsize' の値が与えられていません"
 
-#: src/main/CommandLineArgs.cpp:274
+#: src/main/CommandLineArgs.cpp:275
 #, fuzzy
 msgid "WARNING: '--max-connections' value is negative: ignored"
 msgstr "警告: '--max-ppsize' 値が負なので無視されました"
 
-#: src/main/CommandLineArgs.cpp:276
+#: src/main/CommandLineArgs.cpp:277
 #, fuzzy
 msgid "WARNING: '--max-connections' value is too small: ignored"
 msgstr "警告: '--max-ppsize' 値が小さすぎるので無視されました"
 
-#: src/main/CommandLineArgs.cpp:278
+#: src/main/CommandLineArgs.cpp:279
 #, fuzzy
 msgid "WARNING: '--max-connections' value is too large: ignored"
 msgstr "警告: '--max-ppsize' 値が大きすぎるので無視されました"
@@ -1984,12 +2116,12 @@ msgid "closing unused connection %d (%s)\n"
 msgstr "使われていないコネクション %d (%s) を閉じます \n"
 
 #: src/main/connections.cpp:313 src/main/serialize.cpp:1757
-#: src/main/serialize.cpp:1778 src/main/sysutils.cpp:731
-#: src/main/sysutils.cpp:753 src/main/sysutils.cpp:774
-#: src/main/sysutils.cpp:1718 src/main/sysutils.cpp:1733
-#: src/main/sysutils.cpp:1947 src/main/sysutils.cpp:2115
-#: src/main/sysutils.cpp:2124 src/main/sysutils.cpp:2136
-#: src/main/sysutils.cpp:2547
+#: src/main/serialize.cpp:1778 src/main/sysutils.cpp:733
+#: src/main/sysutils.cpp:755 src/main/sysutils.cpp:776
+#: src/main/sysutils.cpp:1723 src/main/sysutils.cpp:1738
+#: src/main/sysutils.cpp:1952 src/main/sysutils.cpp:2120
+#: src/main/sysutils.cpp:2129 src/main/sysutils.cpp:2141
+#: src/main/sysutils.cpp:2552
 #, c-format
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "'%s' から '%s' へのサポートされていない変換です"
@@ -2122,8 +2254,8 @@ msgstr "fifo 接続の割り当てに失敗しました"
 #: src/main/connections.cpp:4436 src/main/connections.cpp:4557
 #: src/main/connections.cpp:4716 src/main/connections.cpp:4970
 #: src/main/connections.cpp:5290 src/main/connections.cpp:5414
-#: src/main/connections.cpp:5637 src/main/dcf.cpp:105 src/main/deparse.cpp:418
-#: src/main/deparse.cpp:504 src/main/saveload.cpp:2395
+#: src/main/connections.cpp:5637 src/main/dcf.cpp:105 src/main/deparse.cpp:419
+#: src/main/deparse.cpp:505 src/main/saveload.cpp:2395
 #: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2673
 #: src/main/serialize.cpp:2728 src/main/source.cpp:293
 msgid "cannot open the connection"
@@ -2912,6 +3044,11 @@ msgstr "'do_sys' で内部エラーが起きました"
 msgid "allocation of %s connection failed"
 msgstr "%s コネクションの割り当てに失敗しました"
 
+#: src/main/ConsCell.cpp:59
+#, c-format
+msgid "bad binding access: %d"
+msgstr ""
+
 #: src/main/context.cpp:201
 #, fuzzy
 msgid "bad target context--should NEVER happen if R was called correctly"
@@ -2986,7 +3123,7 @@ msgstr "複素数に対しては 'cummax' 関数は定義されていません"
 msgid "'cummin' not defined for complex numbers"
 msgstr "複素数に対しては 'cummin' 関数は定義されていません"
 
-#: src/main/cum.cpp:271 src/main/cum.cpp:298
+#: src/main/cum.cpp:247 src/main/cum.cpp:271 src/main/cum.cpp:298
 msgid "unknown cumxxx function"
 msgstr "未知の cumxxx 関数です"
 
@@ -2995,7 +3132,7 @@ msgstr "未知の cumxxx 関数です"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
-#: src/main/datetime.cpp:788 src/main/datetime.cpp:804 src/main/util.cpp:1169
+#: src/main/datetime.cpp:788 src/main/datetime.cpp:804 src/main/util.cpp:1175
 #, fuzzy
 msgid "time zone specification is too long"
 msgstr "入力文字列が長すぎます"
@@ -3115,40 +3252,40 @@ msgstr "式の文字列化 (deparse) が不完全かも知れません"
 msgid "deparse may be not be source()able in R < 2.7.0"
 msgstr "R 2.7.0 より以前のバージョンで文字列化 (deparse) された式は source() できないかもしれません"
 
-#: src/main/deparse.cpp:409 src/main/source.cpp:211
+#: src/main/deparse.cpp:410 src/main/source.cpp:211
 msgid "'file' must be a character string or connection"
 msgstr "'file' は文字列またはコネクションでなければなりません"
 
-#: src/main/deparse.cpp:429 src/main/deparse.cpp:525 src/main/deparse.cpp:532
+#: src/main/deparse.cpp:430 src/main/deparse.cpp:526 src/main/deparse.cpp:533
 msgid "wrote too few characters"
 msgstr "書かれた文字が短すぎます"
 
-#: src/main/deparse.cpp:454
+#: src/main/deparse.cpp:455
 #, fuzzy, c-format
 msgid "'%s' must be a character string or connection"
 msgstr "'file' は文字列またはコネクションでなければなりません"
 
-#: src/main/deparse.cpp:456
+#: src/main/deparse.cpp:457
 msgid "character arguments expected"
 msgstr "文字引数 (複数) が期待されています"
 
-#: src/main/deparse.cpp:459
+#: src/main/deparse.cpp:460
 msgid "zero-length argument"
 msgstr "長さゼロの引数です"
 
-#: src/main/deparse.cpp:466
+#: src/main/deparse.cpp:467
 msgid "'opts' should be small non-negative integer"
 msgstr "'opts' は、小さな非負の整数でなくてはなりません"
 
-#: src/main/deparse.cpp:476 src/main/envir.cpp:2033 src/main/envir.cpp:2157
-#: src/main/envir.cpp:2309 src/main/envir.cpp:3820 src/main/eval.cpp:1153
-#: src/main/eval.cpp:2693 src/main/eval.cpp:5865 src/main/saveload.cpp:2123
+#: src/main/deparse.cpp:477 src/main/envir.cpp:2034 src/main/envir.cpp:2158
+#: src/main/envir.cpp:2312 src/main/envir.cpp:3826 src/main/eval.cpp:1085
+#: src/main/eval.cpp:2662 src/main/eval.cpp:5806 src/main/saveload.cpp:2123
 #: src/main/saveload.cpp:2437 src/main/serialize.cpp:3253
 #, c-format
 msgid "object '%s' not found"
 msgstr "オブジェクト '%s' がありません"
 
-#: src/main/deparse.cpp:1913
+#: src/main/deparse.cpp:1914
 msgid "badly formed function expression"
 msgstr "関数の構文が不適切です"
 
@@ -3181,6 +3318,11 @@ msgstr "(GEcreateDevDesc 内で) デバイス割り当てに十分なメモリ�
 msgid "Hit <Return> to see next plot: "
 msgstr "次の図を見るためには <Return> キーを押して下さい: "
 
+#: src/main/dotcode.cpp:62
+#, fuzzy
+msgid "the first argument should not be named"
+msgstr "最初の引数は名前付きリストでなくてはなりません"
+
 #: src/main/dotcode.cpp:141 src/main/dotcode.cpp:171
 msgid "NULL value passed as symbol address"
 msgstr "シンボルのアドレスに対して NULL 値が渡されました"
@@ -3206,6 +3348,16 @@ msgstr "外部関数の呼び出しで引数が多すぎます"
 #: src/main/dotcode.cpp:249
 msgid "PACKAGE = \"\" is invalid"
 msgstr "PACKAGE = \"\" は不正です"
+
+#: src/main/dotcode.cpp:263
+#, c-format
+msgid "using PACKAGE = \"%s\" from namespace '%s'"
+msgstr ""
+
+#: src/main/dotcode.cpp:287
+#, c-format
+msgid "\"%s\" not resolved from current namespace (%s)"
+msgstr ""
 
 #: src/main/dotcode.cpp:304 src/main/dotcode.cpp:309 src/main/dotcode.cpp:314
 #: src/main/dotcode.cpp:319
@@ -3254,9 +3406,18 @@ msgstr ""
 msgid "no arguments supplied"
 msgstr "引数が与えられていません"
 
-#: src/main/dotcode.cpp:503 src/main/seq.cpp:1077
+#: src/main/dotcode.cpp:503 src/main/seq.cpp:1081
 msgid "too many arguments"
 msgstr "引数の数が多すぎます"
+
+#: src/main/dotcode.cpp:546
+#, c-format
+msgid "WEIRD RETURN VALUE: %p"
+msgstr ""
+
+#: src/main/dotcode.cpp:549
+msgid "converting NULL pointer to R NULL"
+msgstr ""
 
 #: src/main/dotcode.cpp:573 src/main/dotcode.cpp:1441 src/main/dotcode.cpp:1698
 #, c-format
@@ -3472,6 +3633,10 @@ msgstr ""
 
 #: src/main/dstruct.cpp:81
 msgid "requested primitive type is not consistent with cached value"
+msgstr ""
+
+#: src/main/duplicate.cpp:385
+msgid "vector types do not match in copyVector"
 msgstr ""
 
 #: src/main/edit.cpp:125
@@ -3691,7 +3856,7 @@ msgstr ""
 msgid "cannot change value of locked binding for '%s'"
 msgstr "'%s' に対するロックされたバインディングの値は変更できません"
 
-#: src/main/envir.cpp:286 src/main/envir.cpp:1668
+#: src/main/envir.cpp:286 src/main/envir.cpp:1669
 msgid "cannot add bindings to a locked environment"
 msgstr "ロックされた環境にバインディングを追加することはできません"
 
@@ -3715,311 +3880,325 @@ msgstr "基本名前空間の中では切り離しはできません"
 msgid "unbind in the base environment is unimplemented"
 msgstr "基本環境中の unbind は未実装です"
 
-#: src/main/envir.cpp:852 src/main/envir.cpp:1968 src/main/envir.cpp:3597
+#: src/main/envir.cpp:852 src/main/envir.cpp:1969 src/main/envir.cpp:3602
 msgid "cannot remove bindings from a locked environment"
 msgstr "ロックされた環境からはバインディングを取り除くことはできません"
 
-#: src/main/envir.cpp:1234 src/main/envir.cpp:1272 src/main/envir.cpp:2046
+#: src/main/envir.cpp:1235 src/main/envir.cpp:1273 src/main/envir.cpp:2047
 #, c-format
 msgid "argument to '%s' is not an environment"
 msgstr "'%s' に対する引数は環境ではありません"
 
-#: src/main/envir.cpp:1432
+#: src/main/envir.cpp:1433
 #, c-format
 msgid "indexing '...' with non-positive index %d"
 msgstr ""
 
-#: src/main/envir.cpp:1441
+#: src/main/envir.cpp:1442
 #, c-format
 msgid "the ... list contains fewer than %d element"
 msgid_plural "the ... list contains fewer than %d elements"
 msgstr[0] "... リストは %d 個の要素を含んでいません"
 
-#: src/main/envir.cpp:1445
+#: src/main/envir.cpp:1446
 #, c-format
 msgid "..%d used in an incorrect context, no ... to look in"
 msgstr "..%d は正しくない文脈で使われています、参照すべき ... がありません"
 
-#: src/main/envir.cpp:1464
+#: src/main/envir.cpp:1465
 msgid "indexing '...' with an invalid index"
 msgstr ""
 
-#: src/main/envir.cpp:1474 src/main/envir.cpp:1485
+#: src/main/envir.cpp:1475 src/main/envir.cpp:1486
 #, fuzzy
 msgid "incorrect context: the current call has no '...' to look in"
 msgstr "..%d は正しくない文脈で使われています、参照すべき ... がありません"
 
-#: src/main/envir.cpp:1600
+#: src/main/envir.cpp:1601
 #, c-format
 msgid "could not find function \"%s\""
 msgstr "関数 \"%s\" を見つけることができませんでした"
 
-#: src/main/envir.cpp:1625
+#: src/main/envir.cpp:1626
 msgid "attempt to bind a variable to R_UnboundValue"
 msgstr ""
 
-#: src/main/envir.cpp:1630
+#: src/main/envir.cpp:1631
 msgid "cannot assign values in the empty environment"
 msgstr "空の環境中における値を割り当てることができません"
 
-#: src/main/envir.cpp:1636 src/main/envir.cpp:1764
+#: src/main/envir.cpp:1637 src/main/envir.cpp:1765
 msgid "cannot assign variables to this database"
 msgstr "このデータベースに変数を代入できません"
 
-#: src/main/envir.cpp:1708
+#: src/main/envir.cpp:1709
 msgid "additional variables should now be passed as a list, not in an environment"
 msgstr ""
 
-#: src/main/envir.cpp:1848
+#: src/main/envir.cpp:1849
 #, c-format
 msgid "cannot add binding of '%s' to the base environment"
 msgstr "ロックされた環境にバインディング '%s' を追加することはできません"
 
-#: src/main/envir.cpp:1896
+#: src/main/envir.cpp:1897
 msgid "only the first element is used as variable name"
 msgstr "最初の要素だけが変数名として使われました"
 
-#: src/main/envir.cpp:1923
+#: src/main/envir.cpp:1924
 msgid "first argument must be a named list"
 msgstr "最初の引数は名前付きリストでなくてはなりません"
 
-#: src/main/envir.cpp:1929
+#: src/main/envir.cpp:1930
 msgid "names(x) must be a character vector of the same length as x"
 msgstr "names(x) は x と同じ長さの文字ベクトルでなくてはなりません"
 
-#: src/main/envir.cpp:1932
+#: src/main/envir.cpp:1933
 msgid "'envir' argument must be an environment"
 msgstr "'envir' 引数は環境でなくてはなりません"
 
-#: src/main/envir.cpp:1962
+#: src/main/envir.cpp:1963
 msgid "cannot remove variables from base namespace"
 msgstr "base 名前空間からは変数を取り除くことはできません"
 
-#: src/main/envir.cpp:1964
+#: src/main/envir.cpp:1965
 msgid "cannot remove variables from the base environment"
 msgstr "空の環境中から変数を除去することができません"
 
-#: src/main/envir.cpp:1966
+#: src/main/envir.cpp:1967
 msgid "cannot remove variables from the empty environment"
 msgstr "空の環境中から変数を除去することができません"
 
-#: src/main/envir.cpp:1974
+#: src/main/envir.cpp:1975
 msgid "cannot remove variables from this database"
 msgstr "このデータベースから変数を除去することができません"
 
-#: src/main/envir.cpp:2049 src/main/envir.cpp:3373 src/main/envir.cpp:3392
-#: src/main/envir.cpp:3411 src/main/envir.cpp:3446 src/main/envir.cpp:3465
-#: src/main/envir.cpp:3505 src/main/envir.cpp:3593
+#: src/main/envir.cpp:2050 src/main/envir.cpp:3378 src/main/envir.cpp:3397
+#: src/main/envir.cpp:3416 src/main/envir.cpp:3451 src/main/envir.cpp:3470
+#: src/main/envir.cpp:3510 src/main/envir.cpp:3598
 msgid "not a symbol"
 msgstr "シンボルではありません"
 
-#: src/main/envir.cpp:2086
+#: src/main/envir.cpp:2087
 #, fuzzy, c-format
 msgid "invalid '%s' argument '%s'"
 msgstr "'%s' 引数が不正です"
 
-#: src/main/envir.cpp:2104
+#: src/main/envir.cpp:2105
 #, fuzzy
 msgid "first argument has length > 1"
 msgstr "引数の長さが 0 です"
 
-#: src/main/envir.cpp:2159
+#: src/main/envir.cpp:2160
 #, c-format
 msgid "object '%s' of mode '%s' was not found"
 msgstr "変数 '%s' （モード '%s'）は見つかりません"
 
-#: src/main/envir.cpp:2242
+#: src/main/envir.cpp:2243
 #, c-format
 msgid "invalid name in position %d"
 msgstr "位置 %d に不正な名前があります"
 
-#: src/main/envir.cpp:2248
+#: src/main/envir.cpp:2249
 msgid "second argument must be an environment"
 msgstr "二番目の引数は環境でなければなりません"
 
-#: src/main/envir.cpp:2288
+#: src/main/envir.cpp:2290
 #, fuzzy, c-format
 msgid "first argument to '%s' must be a symbol"
 msgstr "最初の引数はベクトルでなくてはなりません"
 
-#: src/main/envir.cpp:2290
+#: src/main/envir.cpp:2292
 #, fuzzy, c-format
 msgid "second argument to '%s' must be an environment"
 msgstr "二番目の引数は環境でなければなりません"
 
-#: src/main/envir.cpp:2437
+#: src/main/envir.cpp:2440
 #, fuzzy, c-format
 msgid "'missing(%s)' did not find an argument"
 msgstr "'missing' は引数に対してだけ使えます"
 
-#: src/main/envir.cpp:2461
+#: src/main/envir.cpp:2464
 msgid "invalid use of 'missing'"
 msgstr "'missing' の不正な使用です"
 
-#: src/main/envir.cpp:2536
+#: src/main/envir.cpp:2539
 msgid "'pos' must be an integer"
 msgstr "'pos' は整数でなければなりません"
 
-#: src/main/envir.cpp:2550
+#: src/main/envir.cpp:2553
 msgid "all elements of a list must be named"
 msgstr "リスト中の全ての要素には名前が必要です"
 
-#: src/main/envir.cpp:2573
+#: src/main/envir.cpp:2576
 msgid "'attach' only works for lists, data frames and environments"
 msgstr "'attach' はリスト、データフレーム、もしくは環境にのみ有効です"
 
-#: src/main/envir.cpp:2655
+#: src/main/envir.cpp:2658
 msgid "detaching \"package:base\" is not allowed"
 msgstr "\"package:base\" は切り離すことができません"
 
-#: src/main/envir.cpp:2803
+#: src/main/envir.cpp:2806
 #, fuzzy
 msgid "bad hash table contents"
 msgstr "不適切な変数名です"
 
-#: src/main/envir.cpp:2975 src/main/envir.cpp:3054
+#: src/main/envir.cpp:2980 src/main/envir.cpp:3059
 msgid "argument must be an environment"
 msgstr "引数は環境でなければなりません"
 
-#: src/main/envir.cpp:3058
+#: src/main/envir.cpp:3063
 msgid "arguments must be symbolic"
 msgstr "引数はシンボルでなくてはいけません"
 
-#: src/main/envir.cpp:3204
+#: src/main/envir.cpp:3209
 msgid "no enclosing environment"
 msgstr "上位 (enclosing) 環境がありません"
 
-#: src/main/envir.cpp:3260
+#: src/main/envir.cpp:3265
 #, c-format
 msgid "no item called \"%s\" on the search list"
 msgstr "検索リストに \"%s\" という項目はありません"
 
-#: src/main/envir.cpp:3284
+#: src/main/envir.cpp:3289
 msgid "using 'as.environment(NULL)' is defunct"
 msgstr "'as.environment(NULL)' の利用は廃止されました"
 
-#: src/main/envir.cpp:3290
+#: src/main/envir.cpp:3295
 msgid "S4 object does not extend class \"environment\""
 msgstr "S4 オブジェクトはクラス \"environment\" に拡張されません"
 
-#: src/main/envir.cpp:3305
+#: src/main/envir.cpp:3310
 msgid "invalid object for 'as.environment'"
 msgstr "'as.environment' に対する不正なオブジェクトです"
 
-#: src/main/envir.cpp:3328 src/main/envir.cpp:3351 src/main/envir.cpp:3376
-#: src/main/envir.cpp:3395 src/main/envir.cpp:3416 src/main/envir.cpp:3449
-#: src/main/envir.cpp:3468 src/main/envir.cpp:3508
+#: src/main/envir.cpp:3333 src/main/envir.cpp:3356 src/main/envir.cpp:3381
+#: src/main/envir.cpp:3400 src/main/envir.cpp:3421 src/main/envir.cpp:3454
+#: src/main/envir.cpp:3473 src/main/envir.cpp:3513
 msgid "not an environment"
 msgstr "環境ではありません"
 
-#: src/main/envir.cpp:3384 src/main/envir.cpp:3403 src/main/envir.cpp:3457
-#: src/main/envir.cpp:3476 src/main/envir.cpp:3512 src/main/envir.cpp:3521
+#: src/main/envir.cpp:3389 src/main/envir.cpp:3408 src/main/envir.cpp:3462
+#: src/main/envir.cpp:3481 src/main/envir.cpp:3517 src/main/envir.cpp:3526
 #, c-format
 msgid "no binding for \"%s\""
 msgstr "\"%s\" にバインドされているものがありません。"
 
-#: src/main/envir.cpp:3413
+#: src/main/envir.cpp:3418
 msgid "not a function"
 msgstr "関数でありません"
 
-#: src/main/envir.cpp:3419 src/main/envir.cpp:3435
+#: src/main/envir.cpp:3424 src/main/envir.cpp:3440
 msgid "symbol already has a regular binding"
 msgstr "シンボルは既に regular binding を持っています"
 
-#: src/main/envir.cpp:3421 src/main/envir.cpp:3437
+#: src/main/envir.cpp:3426 src/main/envir.cpp:3442
 msgid "cannot change active binding if binding is locked"
 msgstr "バインディングがロックされているならば、アクティブなバインディングを変更することはできません"
 
-#: src/main/envir.cpp:3514 src/main/envir.cpp:3523
+#: src/main/envir.cpp:3519 src/main/envir.cpp:3528
 #, fuzzy, c-format
 msgid "no active binding for \"%s\""
 msgstr "\"%s\" にバインドされているものがありません。"
 
-#: src/main/envir.cpp:3543 src/main/envir.cpp:3805
+#: src/main/envir.cpp:3548 src/main/envir.cpp:3810
 msgid "unknown op"
 msgstr "未知の演算子です"
 
-#: src/main/envir.cpp:3599
+#: src/main/envir.cpp:3604
 msgid "cannot unbind a locked binding"
 msgstr "ロックされたバインディングを切り離せません"
 
-#: src/main/envir.cpp:3601
+#: src/main/envir.cpp:3606
 msgid "cannot unbind an active binding"
 msgstr "現在使用中のバインディングを切り離すことはできません"
 
-#: src/main/envir.cpp:3751
+#: src/main/envir.cpp:3756
 msgid "bad namespace name"
 msgstr "不正な名前空間名です"
 
-#: src/main/envir.cpp:3764
+#: src/main/envir.cpp:3769
 msgid "namespace already registered"
 msgstr "ネームスペースはすでに登録されています"
 
-#: src/main/envir.cpp:3777
+#: src/main/envir.cpp:3782
 msgid "namespace not registered"
 msgstr "ネームスペースは登録されていません"
 
-#: src/main/envir.cpp:3840
+#: src/main/envir.cpp:3846
 #, fuzzy
 msgid "bad variable name"
 msgstr "不適切な変数名です"
 
-#: src/main/envir.cpp:3882
+#: src/main/envir.cpp:3888
 #, fuzzy
 msgid "bad namespace"
 msgstr "不正な名前空間名です"
 
-#: src/main/envir.cpp:3918
+#: src/main/envir.cpp:3922
+msgid "bad value returned by `getNamespaceName'"
+msgstr ""
+
+#: src/main/envir.cpp:3924
 #, c-format
 msgid "'%s' is not an exported object from 'namespace:%s'"
 msgstr ""
 
-#: src/main/envir.cpp:3967
+#: src/main/envir.cpp:3973
 msgid "bad import environment argument"
 msgstr "インポートしようとしている環境引数が不正です"
 
-#: src/main/envir.cpp:3970
+#: src/main/envir.cpp:3976
 msgid "bad export environment argument"
 msgstr "エクスポートしようとしている環境引数が不正です"
 
-#: src/main/envir.cpp:3974
+#: src/main/envir.cpp:3980
 msgid "length of import and export names must match"
 msgstr "インポートとエクスポート名の長さは一致しなければなりません"
 
-#: src/main/envir.cpp:3997
+#: src/main/envir.cpp:4003
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "エクスポートされたシンボル '%s' が値を持っていません"
 
-#: src/main/envir.cpp:4030
+#: src/main/envir.cpp:4036
 #, fuzzy
 msgid "argument must be a hashed environment"
 msgstr "引数は環境でなければなりません"
 
-#: src/main/envir.cpp:4122
+#: src/main/envir.cpp:4136
 #, fuzzy
 msgid "invalid string was created"
 msgstr "部分文字列引数が不正です"
 
-#: src/main/envir.cpp:4135 src/main/envir.cpp:4137
+#: src/main/envir.cpp:4149 src/main/envir.cpp:4151
 #, fuzzy, c-format
 msgid "invalid string %s"
 msgstr " stop() 関数の引数が不正な文字列です"
 
-#: src/main/envir.cpp:4149
+#: src/main/envir.cpp:4163
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr "文字列の中に nul が埋め込まれています: '%s'"
 
-#: src/main/envir.cpp:4235
+#: src/main/envir.cpp:4249
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "未知のエンコーディングです: %d"
 
-#: src/main/envir.cpp:4378
+#: src/main/envir.cpp:4392
 #, fuzzy
 msgid "argument 'nsenv' is not a namespace"
 msgstr "引数 'editor' が設定されていません"
+
+#: src/main/envir.cpp:4408
+#, c-format
+msgid "Function %s in namespace %s has this body.\n"
+msgstr ""
+
+#: src/main/envir.cpp:4426
+#, c-format
+msgid "S4 Method %s defined in namespace %s with signature %s has this body.\n"
+msgstr ""
 
 #: src/main/errors.cpp:238 src/main/errors.cpp:275
 msgid "interrupts suspended; signal ignored"
@@ -4102,23 +4281,18 @@ msgstr "%s でエラー: "
 msgid "Error: "
 msgstr "エラー: "
 
-#: src/main/errors.cpp:883 src/main/errors.cpp:1498
+#: src/main/errors.cpp:883 src/main/errors.cpp:1499
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "警告メッセージ:"
 
-#: src/main/errors.cpp:1008
+#: src/main/errors.cpp:1009
 msgid "invalid option \"error\"\n"
 msgstr "オプション \"error\" は不正です \n"
 
-#: src/main/errors.cpp:1191
-#, fuzzy
-msgid "either 2 or 3 arguments are required"
-msgstr "文字列引数が要求されています"
-
-#: src/main/errors.cpp:1285 src/main/errors.cpp:1287 src/main/options.cpp:484
-#: src/main/unique.cpp:2184 src/modules/lapack/Lapack.cpp:118
+#: src/main/errors.cpp:1286 src/main/errors.cpp:1288 src/main/options.cpp:484
+#: src/main/unique.cpp:2187 src/modules/lapack/Lapack.cpp:118
 #: src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383
 #: src/modules/lapack/Lapack.cpp:434 src/modules/lapack/Lapack.cpp:435
 #: src/modules/lapack/Lapack.cpp:471 src/modules/lapack/Lapack.cpp:509
@@ -4129,476 +4303,515 @@ msgstr "文字列引数が要求されています"
 msgid "'%s' must be a character string"
 msgstr "'%s' は文字列でなければなりません"
 
-#: src/main/errors.cpp:1360 src/main/errors.cpp:1392
+#: src/main/errors.cpp:1361 src/main/errors.cpp:1393
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " stop() 関数の引数が不正な文字列です"
 
-#: src/main/errors.cpp:1408
+#: src/main/errors.cpp:1409
 #, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr "\"%s\" への引数の個数が正しくありません"
 
-#: src/main/errors.cpp:1414 src/main/errors.cpp:1429
+#: src/main/errors.cpp:1415 src/main/errors.cpp:1430
 #, c-format
 msgid "unimplemented feature in %s"
 msgstr "%s 中の未実装の機能です"
 
-#: src/main/errors.cpp:1423
+#: src/main/errors.cpp:1424
 msgid "invalid number of arguments"
 msgstr "引数の個数が不正です"
 
-#: src/main/errors.cpp:1424 src/main/logic.cpp:212
+#: src/main/errors.cpp:1425 src/main/logic.cpp:213
 msgid "invalid argument type"
 msgstr "引数の型が不正です"
 
-#: src/main/errors.cpp:1426
+#: src/main/errors.cpp:1427
 msgid "time-series/vector length mismatch"
 msgstr "時系列またはベクトル の長さが合致しません"
 
-#: src/main/errors.cpp:1427
+#: src/main/errors.cpp:1428
 msgid "incompatible arguments"
 msgstr "互換性のない引数です"
 
-#: src/main/errors.cpp:1430
+#: src/main/errors.cpp:1431
 msgid "unknown error (report this!)"
 msgstr "未知のエラーです (報告してください！)"
 
-#: src/main/errors.cpp:1439
+#: src/main/errors.cpp:1440
 msgid "inaccurate integer conversion in coercion"
 msgstr "強制変換中に不正確な整数変換が行われました"
 
-#: src/main/errors.cpp:1442
+#: src/main/errors.cpp:1443
 msgid "unknown warning (report this!)"
 msgstr "未知の警告です (報告してください！)"
 
-#: src/main/errors.cpp:1747
+#: src/main/errors.cpp:1748
 msgid "bad handler data"
 msgstr "ハンドラーデータ (handler data) が不正です"
 
-#: src/main/errors.cpp:1900
+#: src/main/errors.cpp:1901
 msgid "error message not a string"
 msgstr "エラーメッセージが文字列ではありません"
 
-#: src/main/errors.cpp:1979
+#: src/main/errors.cpp:1980
 msgid "handler or restart stack mismatch in old restart"
 msgstr "handler stack か restart stack が、古い restart と一致しません"
 
-#: src/main/errors.cpp:2020 src/main/errors.cpp:2033
+#: src/main/errors.cpp:2021 src/main/errors.cpp:2034
 msgid "bad error message"
 msgstr "不正なエラーメッセージです"
 
-#: src/main/errors.cpp:2074
+#: src/main/errors.cpp:2075
 msgid "bad restart"
 msgstr "不正な再起動です"
 
-#: src/main/errors.cpp:2106
+#: src/main/errors.cpp:2107
 msgid "restart not on stack"
 msgstr "スタックからではない再実行です"
 
-#: src/main/errors.cpp:2123
+#: src/main/errors.cpp:2124
 msgid "not in a try context"
 msgstr "トライ (try) 文脈ではありません"
 
-#: src/main/errors.cpp:2136
+#: src/main/errors.cpp:2137
 msgid "error message must be a character string"
 msgstr "エラーメッセージは文字列であるに違いありません"
 
-#: src/main/errors.cpp:2271
+#: src/main/errors.cpp:2272
 #, fuzzy, c-format
 msgid "invalid value of %s"
 msgstr "'%s' の値が不正です"
 
-#: src/main/errors.cpp:2456 src/main/errors.cpp:2551
+#: src/main/errors.cpp:2457 src/main/errors.cpp:2552
 #, fuzzy
 msgid "body function is required"
 msgstr " 再実行のための関数がありません "
 
-#: src/main/errors.cpp:2499
+#: src/main/errors.cpp:2500
 #, fuzzy
 msgid "not an external pointer"
 msgstr "外部ポインターのクラス属性は取り除けません"
 
-#: src/main/errors.cpp:2609 src/main/errors.cpp:2624
+#: src/main/errors.cpp:2610 src/main/errors.cpp:2625
 #, fuzzy
 msgid "should not be called with handlers on the stack"
 msgstr "それはスタック上の多くのフレームではありません"
 
-#: src/main/errors.cpp:2675
+#: src/main/errors.cpp:2676
 #, fuzzy
 msgid "condition object must be a VECSXP of length at least one"
 msgstr "'mode' の長さは 1 以上でなくてはなりません"
 
-#: src/main/errors.cpp:2678
+#: src/main/errors.cpp:2679
 #, fuzzy
 msgid "first element of condition object must be a scalar string"
 msgstr "クラス文字列とするには不正な置き換えオブジェクトです"
 
-#: src/main/errors.cpp:2773
+#: src/main/errors.cpp:2774
 #, c-format
 msgid "argument \"%s\" is missing, with no default"
 msgstr "引数 \"%s\" がありませんし、省略時既定値もありません"
 
-#: src/main/errors.cpp:2776
+#: src/main/errors.cpp:2777
 msgid "argument is missing, with no default"
 msgstr "引数がありませんし、省略時既定値もありません"
 
-#: src/main/errors.cpp:2797
+#: src/main/errors.cpp:2798
 #, fuzzy
 msgid "bad condition argument"
 msgstr "インポートしようとしている環境引数が不正です"
 
-#: src/main/errors.cpp:2799
+#: src/main/errors.cpp:2800
 #, fuzzy
 msgid "bad field index"
 msgstr "不正なファイル名です"
 
-#: src/main/errors.cpp:2802
+#: src/main/errors.cpp:2803
 #, fuzzy
 msgid "bad names attribute on condition object"
 msgstr "不正な名前空間名です"
 
-#: src/main/errors.cpp:2958
+#: src/main/errors.cpp:2957
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "'%s' の '%s' への部分的な引数のマッチング"
 
-#: src/main/errors.cpp:2970
+#: src/main/errors.cpp:2969
 msgid "protect(): protection stack overflow"
 msgstr "protect(): プロテクションスタックが溢れました"
 
-#: src/main/errors.cpp:2971
+#: src/main/errors.cpp:2970
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "評価があまりに深く入れ子になっています。無限の再帰か options(expressions=)？"
 
-#: src/main/errors.cpp:2972
+#: src/main/errors.cpp:2971
 msgid "node stack overflow"
 msgstr "ノードスタックが溢れました"
 
-#: src/main/eval.cpp:711
+#: src/main/eval.cpp:713
 msgid "samples too large for I/O buffer skipped by Rprof"
 msgstr ""
 
-#: src/main/eval.cpp:713
+#: src/main/eval.cpp:715
 #, c-format
 msgid "source files skipped by Rprof; please increase '%s'"
 msgstr "ソースファイルは Rprof によりスキップされました; '%s' を増やしてください"
 
-#: src/main/eval.cpp:737 src/main/eval.cpp:746
+#: src/main/eval.cpp:739 src/main/eval.cpp:748
 #, c-format
 msgid "Rprof: cannot open profile file '%s'"
 msgstr "Rprof: プロファイル・ファイル '%s' を開くことができません"
 
-#: src/main/eval.cpp:792 src/main/eval.cpp:825
+#: src/main/eval.cpp:794 src/main/eval.cpp:827
 #, fuzzy
 msgid "unable to create profiling thread"
 msgstr "pixmap を作れません"
 
-#: src/main/eval.cpp:799
+#: src/main/eval.cpp:801
 msgid "profiling requires 'pthread' support"
 msgstr ""
 
-#: src/main/eval.cpp:868 src/main/eval.cpp:9211
+#: src/main/eval.cpp:870 src/main/eval.cpp:9151
 msgid "setting profile timer failed"
 msgstr "プロファイルタイマーの設定に失敗しました"
 
-#: src/main/eval.cpp:886
+#: src/main/eval.cpp:888
 #, fuzzy
 msgid "cannot use R profiling while byte code profiling"
 msgstr " バイトコードのプロファイリング中では R のプロファイル機能は使えません "
 
-#: src/main/eval.cpp:913
+#: src/main/eval.cpp:915
 #, fuzzy, c-format
 msgid "event type '%s' not supported on this platform"
 msgstr "このプラットフォームでは curlGetHeaders はサポートされていません"
 
-#: src/main/eval.cpp:928
+#: src/main/eval.cpp:930
 #, c-format
 msgid "interval too short for this platform, using '%f'"
 msgstr ""
 
-#: src/main/eval.cpp:933
+#: src/main/eval.cpp:935
 #, c-format
 msgid "interval too short, using '%f'"
 msgstr ""
 
-#: src/main/eval.cpp:949
+#: src/main/eval.cpp:951
 msgid "R profiling is not available on this system"
 msgstr "R プロファイルはこのシステムでは使えません"
 
-#: src/main/eval.cpp:973
+#: src/main/eval.cpp:962
+#, c-format
+msgid "Warning: stack imbalance in '%s', %td then %td\n"
+msgstr ""
+
+#: src/main/eval.cpp:1108
 msgid "promise already under evaluation: recursive default argument reference or earlier problems?"
 msgstr "プロミスは既に評価されています: 再帰的な引数既定値の参照か以前の問題？"
 
-#: src/main/eval.cpp:979
+#: src/main/eval.cpp:1114
 msgid "restarting interrupted promise evaluation"
 msgstr "中断されたプロミス評価を再開します"
 
-#: src/main/eval.cpp:1263 src/main/eval.cpp:2562 src/main/eval.cpp:7945
+#: src/main/eval.cpp:1233 src/main/eval.cpp:2531 src/main/eval.cpp:7885
 msgid "attempt to apply non-function"
 msgstr "関数でないものを適用しようとしました"
 
-#: src/main/eval.cpp:1392
+#: src/main/eval.cpp:1362
 #, c-format
 msgid "%s at %s#%d: "
 msgstr "%2$s#%3$d の %1$s: "
 
-#: src/main/eval.cpp:2554 src/main/eval.cpp:3761 src/main/eval.cpp:6930
+#: src/main/eval.cpp:2291
+msgid "'rho' cannot be C NULL: detected in C-level applyClosure"
+msgstr ""
+
+#: src/main/eval.cpp:2293
+#, c-format
+msgid "'rho' must be an environment not %s: detected in C-level applyClosure"
+msgstr ""
+
+#: src/main/eval.cpp:2523 src/main/eval.cpp:3720 src/main/eval.cpp:6871
 #, c-format
 msgid "argument %d is empty"
 msgstr "引数 %d が空です"
 
-#: src/main/eval.cpp:2555
+#: src/main/eval.cpp:2524
 #, fuzzy
 msgid "something weird happened"
 msgstr "付け足す (append) べきものがありません"
 
-#: src/main/eval.cpp:2603
+#: src/main/eval.cpp:2572
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr "ジエネリック関数の環境中に \"%s\" というシンボルが見つかりませんでした"
 
-#: src/main/eval.cpp:2621
+#: src/main/eval.cpp:2590
 #, c-format
 msgid "symbol \"%s\" not in environment of method"
 msgstr "シンボル \"%s\" がメソッドの環境の中にありません"
 
-#: src/main/eval.cpp:2755
+#: src/main/eval.cpp:2721
 msgid "the condition has length > 1"
 msgstr ""
 
-#: src/main/eval.cpp:2772
+#: src/main/eval.cpp:2738
 msgid "missing value where TRUE/FALSE needed"
 msgstr "TRUE/FALSE が必要なところが欠損値です"
 
-#: src/main/eval.cpp:2773
+#: src/main/eval.cpp:2739
 msgid "argument is not interpretable as logical"
 msgstr "引数が論理変数として解釈することができません"
 
-#: src/main/eval.cpp:2774
+#: src/main/eval.cpp:2740
 msgid "argument is of length zero"
 msgstr "引数の長さが 0 です"
 
-#: src/main/eval.cpp:2875
+#: src/main/eval.cpp:2841
 msgid "non-symbol loop variable"
 msgstr "ループ変数がシンボルではありません"
 
-#: src/main/eval.cpp:2968 src/main/eval.cpp:7642
+#: src/main/eval.cpp:2934 src/main/eval.cpp:7582
 msgid "invalid for() loop sequence"
 msgstr "for() ループが不正です"
 
-#: src/main/eval.cpp:3143
+#: src/main/eval.cpp:3106
 msgid "multi-argument returns are not permitted"
 msgstr "複数の結果を返す return は許されません"
 
-#: src/main/eval.cpp:3195
+#: src/main/eval.cpp:3158
 #, fuzzy
 msgid "\"expr\" must be a call expression"
 msgstr "'expr' 引数は式でなくてはなりません"
 
-#: src/main/eval.cpp:3256
+#: src/main/eval.cpp:3219
 msgid "recompile eval.c with -DSUPPORT_TAILCALL to enable Exec and Tailcall"
 msgstr ""
 
-#: src/main/eval.cpp:3301
+#: src/main/eval.cpp:3265
 msgid "invalid (NULL) left side of assignment"
 msgstr "代入の左辺が不正 (NULL) です"
 
-#: src/main/eval.cpp:3342
+#: src/main/eval.cpp:3301
 msgid "target of assignment expands to non-language object"
 msgstr "付値対象は非言語オブジェクトに展開されます"
 
-#: src/main/eval.cpp:3427
+#: src/main/eval.cpp:3386
 #, c-format
 msgid "overlong name in '%s'"
 msgstr "'%s' の名前が長すぎます"
 
-#: src/main/eval.cpp:3551
+#: src/main/eval.cpp:3510
 msgid "cannot do complex assignments in base namespace"
 msgstr "base 名前空間においては複素数の代入はできません"
 
-#: src/main/eval.cpp:3553
+#: src/main/eval.cpp:3512
 msgid "cannot do complex assignments in base environment"
 msgstr "基本環境においては複素数の代入はできません"
 
-#: src/main/eval.cpp:3593 src/main/eval.cpp:3618
+#: src/main/eval.cpp:3552 src/main/eval.cpp:3577
 msgid "invalid function in complex assignment"
 msgstr "複素数の代入で、関数が不正です"
 
-#: src/main/eval.cpp:3693
+#: src/main/eval.cpp:3652
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr "代入の左辺が不正 (do_set) です"
 
-#: src/main/eval.cpp:3946 src/main/eval.cpp:3949
+#: src/main/eval.cpp:3905 src/main/eval.cpp:3908
 #, fuzzy, c-format
 msgid "invalid formal argument list for \"%s\""
 msgstr "\"function\" の仮引数リストが不正です"
 
-#: src/main/eval.cpp:4005 src/main/eval.cpp:4033 src/main/eval.cpp:4038
+#: src/main/eval.cpp:3964 src/main/eval.cpp:3992 src/main/eval.cpp:3997
 #, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr "'%s' 引数 (型 '%s') が不正です"
 
-#: src/main/eval.cpp:4030
+#: src/main/eval.cpp:3989
 msgid "numeric 'envir' arg not of length one"
 msgstr "数値の 'envir' 引数の長さが 1 ではありません"
 
-#: src/main/eval.cpp:4135 src/main/eval.cpp:4148
+#: src/main/eval.cpp:4093 src/main/eval.cpp:4106
 msgid "'Recall' called from outside a closure"
 msgstr "クロージャの外部から 'Recall' が呼び出されました。"
 
-#: src/main/eval.cpp:4258
+#: src/main/eval.cpp:4215
 msgid "value in '...' is not a promise"
 msgstr "'...' の中の値は promise ではありません"
 
-#: src/main/eval.cpp:4578
+#: src/main/eval.cpp:4535
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr "メソッド (\"%s\", \"%s\") は \"%s\" に対しては矛盾しています"
 
-#: src/main/eval.cpp:4628
+#: src/main/eval.cpp:4585
 msgid "dispatch error in group dispatch"
 msgstr "グループディスパッチにディスパッチエラーがあります"
 
-#: src/main/eval.cpp:4926
+#: src/main/eval.cpp:4894
 msgid "changing stack value below R_BCProt pointer"
 msgstr ""
 
-#: src/main/eval.cpp:5097
+#: src/main/eval.cpp:5063
 #, c-format
 msgid "\"%s\" is not a %s function"
 msgstr "\"%s\" は %s 関数ではありません"
 
-#: src/main/eval.cpp:5387
+#: src/main/eval.cpp:5353
 msgid "math1 compiler/interpreter mismatch"
 msgstr ""
 
-#: src/main/eval.cpp:5706
+#: src/main/eval.cpp:5647
 msgid "bad opcode"
 msgstr "opcode が不適当です"
 
-#: src/main/eval.cpp:6911
+#: src/main/eval.cpp:6852
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "'x %s y' の %s の型が不正です"
 
-#: src/main/eval.cpp:6944
+#: src/main/eval.cpp:6885
 #, fuzzy, c-format
 msgid "argument %d is missing"
 msgstr "引数 %d が空です"
 
-#: src/main/eval.cpp:7555
+#: src/main/eval.cpp:7495
 msgid "byte code version mismatch"
 msgstr "バイトコードのバージョンが不一致です"
 
-#: src/main/eval.cpp:7778
+#: src/main/eval.cpp:7718
 msgid "invalid sequence argument in for loop"
 msgstr "for ループの範囲引数が不正です"
 
-#: src/main/eval.cpp:7935 src/main/names.cpp:1366
+#: src/main/eval.cpp:7875 src/main/names.cpp:1366
 #, c-format
 msgid "there is no .Internal function '%s'"
 msgstr ".Internal 関数 '%s' がありません"
 
-#: src/main/eval.cpp:8050 src/main/eval.cpp:8471 src/main/eval.cpp:8512
+#: src/main/eval.cpp:7990 src/main/eval.cpp:8411 src/main/eval.cpp:8452
 msgid "bad function"
 msgstr "不正な関数です"
 
-#: src/main/eval.cpp:8063
+#: src/main/eval.cpp:8003
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "\"%s\" は %s 関数ではありません"
 
-#: src/main/eval.cpp:8569 src/main/eval.cpp:8594
+#: src/main/eval.cpp:8509 src/main/eval.cpp:8534
 #, fuzzy
 msgid "bad numeric 'switch' offsets"
 msgstr "不正な数値スィッチオフセットです"
 
-#: src/main/eval.cpp:8575
+#: src/main/eval.cpp:8515
 msgid "numeric EXPR required for 'switch' without named alternatives"
 msgstr "名前付きの代替値が無い 'switch' 関数には数値の EXPR が必要です"
 
-#: src/main/eval.cpp:8578
+#: src/main/eval.cpp:8518
 #, fuzzy
 msgid "bad character 'switch' offsets"
 msgstr "不正なな文字スィッチオフセットです"
 
-#: src/main/eval.cpp:8580
+#: src/main/eval.cpp:8520
 #, fuzzy
 msgid "bad 'switch' names"
 msgstr " 不正なスィッチ名です "
 
-#: src/main/eval.cpp:8707
+#: src/main/eval.cpp:8647
 #, fuzzy
 msgid "unknown instruction code"
 msgstr "未知の入力書式です"
 
-#: src/main/eval.cpp:8721
+#: src/main/eval.cpp:8661
 msgid "cannot find index for threaded code address"
 msgstr "スレッデッド・コード・アドレス (threaded code address) のインデックスを見つけることができません"
 
-#: src/main/eval.cpp:8762
+#: src/main/eval.cpp:8702
 msgid "registerBC requires integer vector as bcBytes"
 msgstr ""
 
-#: src/main/eval.cpp:8764
+#: src/main/eval.cpp:8704
 msgid "registerBC requires BCODESXP object as bcode"
 msgstr ""
 
-#: src/main/eval.cpp:8882 src/main/eval.cpp:8891
+#: src/main/eval.cpp:8783
+msgid "ERROR: the modified value of the constant is:\n"
+msgstr ""
+
+#: src/main/eval.cpp:8785
+msgid "ERROR: the original value of the constant is:\n"
+msgstr ""
+
+#: src/main/eval.cpp:8787
+#, c-format
+msgid "ERROR: the modified constant is at index %d\n"
+msgstr ""
+
+#: src/main/eval.cpp:8788
+msgid "ERROR: the modified constant is in this function body:\n"
+msgstr ""
+
+#: src/main/eval.cpp:8791
+msgid "ERROR: the modified constant is function body:\n"
+msgstr ""
+
+#: src/main/eval.cpp:8793
+msgid "ERROR: the body was originally:\n"
+msgstr ""
+
+#: src/main/eval.cpp:8822 src/main/eval.cpp:8831
 #, c-format
 msgid "ERROR: modification of compiler constant of type %s, length %d\n"
 msgstr ""
 
-#: src/main/eval.cpp:8905
+#: src/main/eval.cpp:8845
 msgid "compiler constants were modified!\n"
 msgstr ""
 
-#: src/main/eval.cpp:8975
+#: src/main/eval.cpp:8915
 msgid "invalid body"
 msgstr "本体 (body) が不正です"
 
-#: src/main/eval.cpp:8995
+#: src/main/eval.cpp:8935
 msgid "invalid symbol"
 msgstr "シンボル記号が不正です"
 
-#: src/main/eval.cpp:9036
+#: src/main/eval.cpp:8976
 msgid "argument is not a byte code object"
 msgstr "引数がバイトコードオブジェクトではありません"
 
-#: src/main/eval.cpp:9064 src/main/eval.cpp:9071
+#: src/main/eval.cpp:9004 src/main/eval.cpp:9011
 msgid "R_CompiledFileName: buffer too small"
 msgstr " R_CompiledFileName: バッファが小さすぎます "
 
-#: src/main/eval.cpp:9102 src/main/eval.cpp:9118 src/main/eval.cpp:9151
+#: src/main/eval.cpp:9042 src/main/eval.cpp:9058 src/main/eval.cpp:9091
 msgid "constant buffer must be a generic vector"
 msgstr "定数値バッファーは総称的なベクトルでなければなりません"
 
-#: src/main/eval.cpp:9122
+#: src/main/eval.cpp:9062
 msgid "bad constCount value"
 msgstr " 不正な constCount 値です "
 
-#: src/main/eval.cpp:9153
+#: src/main/eval.cpp:9093
 msgid "bad constant count"
 msgstr "不正な定数値カウントです"
 
-#: src/main/eval.cpp:9189
+#: src/main/eval.cpp:9129
 msgid "profile timer in use"
 msgstr "プロファイルタイマーは使用中です"
 
-#: src/main/eval.cpp:9191
+#: src/main/eval.cpp:9131
 msgid "already byte code profiling"
 msgstr "既にバイトコードは分析されています"
 
-#: src/main/eval.cpp:9230
+#: src/main/eval.cpp:9170
 msgid "not byte code profiling"
 msgstr "バイトコードのプロファイリングではありません"
 
-#: src/main/eval.cpp:9247 src/main/eval.cpp:9252 src/main/eval.cpp:9257
+#: src/main/eval.cpp:9187 src/main/eval.cpp:9192 src/main/eval.cpp:9197
 msgid "byte code profiling is not supported in this build"
 msgstr "このビルドではバイトコードプロファイリングはサポートされていません"
 
-#: src/main/eval.cpp:9307
+#: src/main/eval.cpp:9247
 #, fuzzy
 msgid "parse error"
 msgstr "読み込みエラーです"
@@ -4628,224 +4841,224 @@ msgstr "'getGrapshicsEvent' の再帰的使用はサポートされていませ�
 msgid "no graphics event handlers set"
 msgstr "設定されたグラフィックス event handler がありません"
 
-#: src/main/gram.cpp:415 src/main/gram.cpp:424 src/main/gram.cpp:2991
-#: src/main/gram.cpp:2998 src/main/gram.cpp:3076 src/main/gram.y:347
-#: src/main/gram.y:356 src/main/gram.y:682 src/main/gram.y:689
-#: src/main/gram.y:767
+#: src/main/gram.cpp:417 src/main/gram.cpp:426 src/main/gram.cpp:2993
+#: src/main/gram.cpp:3000 src/main/gram.cpp:3078 src/main/gram.y:349
+#: src/main/gram.y:358 src/main/gram.y:684 src/main/gram.y:691
+#: src/main/gram.y:769
 #, fuzzy, c-format
 msgid "invalid multibyte character in parser (%s:%d:%d)"
 msgstr "構文解析中に不正なマルチバイト文字列がありました (%d 行)"
 
-#: src/main/gram.cpp:2909 src/main/gram.y:600
+#: src/main/gram.cpp:2911 src/main/gram.y:602
 #, fuzzy, c-format
 msgid "input buffer overflow (%s:%d:%d)"
 msgstr "入力バッファが溢れました (%d 行)"
 
-#: src/main/gram.cpp:3545 src/main/gram.y:1236
+#: src/main/gram.cpp:3546 src/main/gram.y:1237
 #, c-format
 msgid "function '%s' not supported in RHS call of a pipe (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:3553 src/main/gram.cpp:3585 src/main/gram.y:1244
-#: src/main/gram.y:1276
+#: src/main/gram.cpp:3554 src/main/gram.cpp:3586 src/main/gram.y:1245
+#: src/main/gram.y:1277
 #, c-format
 msgid "pipe placeholder may only appear once (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:3597 src/main/gram.y:1288
+#: src/main/gram.cpp:3598 src/main/gram.y:1289
 #, c-format
 msgid "The pipe operator requires a function call as RHS (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:3605 src/main/gram.y:1296
+#: src/main/gram.cpp:3606 src/main/gram.y:1297
 #, fuzzy, c-format
 msgid "RHS variable must be a symbol (%s:%d:%d)"
 msgstr "引数はシンボルでなくてはいけません"
 
-#: src/main/gram.cpp:3616 src/main/gram.y:1307
+#: src/main/gram.cpp:3617 src/main/gram.y:1308
 #, c-format
 msgid "pipe placeholder cannot be used in the RHS function (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:3632 src/main/gram.y:1323
+#: src/main/gram.cpp:3633 src/main/gram.y:1324
 #, c-format
 msgid "pipe placeholder can only be used as a named argument (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:3665 src/main/gram.y:1356
+#: src/main/gram.cpp:3666 src/main/gram.y:1357
 #, c-format
 msgid "'=>' is disabled; set '_R_USE_PIPEBIND_' envvar to a true value to enable it (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:3741 src/main/gram.y:1432
+#: src/main/gram.cpp:3742 src/main/gram.y:1433
 #, fuzzy, c-format
 msgid "incorrect tag type (%s:%d:%d)"
 msgstr "tag の型が正しくありません (%d 行)"
 
-#: src/main/gram.cpp:3915 src/main/gram.y:1606
+#: src/main/gram.cpp:3914 src/main/gram.y:1605
 #, fuzzy
 msgid "allocation of source reference state failed"
 msgstr "ソケット接続の割り当てに失敗しました"
 
-#: src/main/gram.cpp:4077 src/main/gram.y:1768
+#: src/main/gram.cpp:4076 src/main/gram.y:1767
 #, c-format
 msgid "invalid use of pipe placeholder (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:4086 src/main/gram.y:1777
+#: src/main/gram.cpp:4085 src/main/gram.y:1776
 #, fuzzy, c-format
 msgid "invalid use of pipe bind symbol (%s:%d:%d)"
 msgstr "引用符が不正です"
 
-#: src/main/gram.cpp:4097 src/main/gram.y:1788
+#: src/main/gram.cpp:4096 src/main/gram.y:1787
 #, fuzzy
 msgid "out of memory while parsing"
 msgstr "polyline をクリッピングしている間にメモリが尽きました"
 
-#: src/main/gram.cpp:4456 src/main/gram.cpp:6312 src/main/gram.cpp:6320
-#: src/main/gram.cpp:6327 src/main/gram.cpp:6335 src/main/gram.y:2147
-#: src/main/gram.y:4003 src/main/gram.y:4011 src/main/gram.y:4018
-#: src/main/gram.y:4026
+#: src/main/gram.cpp:4442 src/main/gram.cpp:6290 src/main/gram.cpp:6298
+#: src/main/gram.cpp:6305 src/main/gram.cpp:6313 src/main/gram.y:2133
+#: src/main/gram.y:3981 src/main/gram.y:3989 src/main/gram.y:3996
+#: src/main/gram.y:4004
 #, fuzzy, c-format
 msgid "contextstack overflow (%s:%d:%d)"
 msgstr "コンテクストスタックが溢れました"
 
-#: src/main/gram.cpp:4710 src/main/gram.cpp:4716 src/main/gram.cpp:4738
-#: src/main/gram.y:2401 src/main/gram.y:2407 src/main/gram.y:2429
+#: src/main/gram.cpp:4696 src/main/gram.cpp:4702 src/main/gram.cpp:4724
+#: src/main/gram.y:2387 src/main/gram.y:2393 src/main/gram.y:2415
 msgid "unexpected input"
 msgstr "想定外の入力です"
 
-#: src/main/gram.cpp:4713 src/main/gram.y:2404 src/main/main.cpp:350
+#: src/main/gram.cpp:4699 src/main/gram.y:2390 src/main/main.cpp:350
 msgid "unexpected end of input"
 msgstr "想定外の入力の終端です"
 
-#: src/main/gram.cpp:4719 src/main/gram.y:2410
+#: src/main/gram.cpp:4705 src/main/gram.y:2396
 msgid "unexpected string constant"
 msgstr "想定外の文字列定数です"
 
-#: src/main/gram.cpp:4722 src/main/gram.y:2413
+#: src/main/gram.cpp:4708 src/main/gram.y:2399
 msgid "unexpected numeric constant"
 msgstr "想定外の数値定数です"
 
-#: src/main/gram.cpp:4725 src/main/gram.y:2416
+#: src/main/gram.cpp:4711 src/main/gram.y:2402
 msgid "unexpected symbol"
 msgstr "想定外のシンボルです"
 
-#: src/main/gram.cpp:4728 src/main/gram.y:2419
+#: src/main/gram.cpp:4714 src/main/gram.y:2405
 msgid "unexpected assignment"
 msgstr "想定外の付値です"
 
-#: src/main/gram.cpp:4731 src/main/gram.y:2422
+#: src/main/gram.cpp:4717 src/main/gram.y:2408
 msgid "unexpected end of line"
 msgstr "想定外の行末です"
 
-#: src/main/gram.cpp:4741 src/main/gram.cpp:4749 src/main/gram.y:2432
-#: src/main/gram.y:2440
+#: src/main/gram.cpp:4727 src/main/gram.cpp:4735 src/main/gram.y:2418
+#: src/main/gram.y:2426
 #, c-format
 msgid "unexpected %s"
 msgstr "予想外の %s です"
 
-#: src/main/gram.cpp:4763 src/main/gram.y:2454
+#: src/main/gram.cpp:4749 src/main/gram.y:2440
 #, fuzzy, c-format
 msgid "repeated formal argument '%s' (%s:%d:%d)"
 msgstr "形式的引数 '%s' が繰り返されています (%d 行において)"
 
-#: src/main/gram.cpp:5000 src/main/gram.y:2691
+#: src/main/gram.cpp:4986 src/main/gram.y:2677
 #, c-format
 msgid "integer literal %s contains decimal; using numeric value"
 msgstr "整数リテラル %s は小数を含んでいます; 実数値を使用します"
 
-#: src/main/gram.cpp:5003 src/main/gram.y:2694
+#: src/main/gram.cpp:4989 src/main/gram.y:2680
 #, c-format
 msgid "non-integer value %s qualified with L; using numeric value"
 msgstr "非整数値 %s に L がついています; 実数値を使用します"
 
-#: src/main/gram.cpp:5015 src/main/gram.y:2706
+#: src/main/gram.cpp:5001 src/main/gram.y:2692
 #, c-format
 msgid "integer literal %s contains unnecessary decimal point"
 msgstr "整数リテラル %s は不要な小数点を含んでいます"
 
-#: src/main/gram.cpp:5099 src/main/gram.cpp:5107 src/main/gram.y:2790
-#: src/main/gram.y:2798
+#: src/main/gram.cpp:5084 src/main/gram.cpp:5092 src/main/gram.y:2775
+#: src/main/gram.y:2783
 #, fuzzy, c-format
 msgid "invalid multibyte character (%s:%d:%d)"
 msgstr "構文解析中に不正なマルチバイト文字列がありました (%d 行)"
 
-#: src/main/gram.cpp:5198 src/main/gram.y:2889
+#: src/main/gram.cpp:5183 src/main/gram.y:2874
 #, c-format
 msgid "bidi formatting not allowed, use escapes instead (\\u%04x) (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:5250 src/main/gram.cpp:5281 src/main/gram.cpp:5328
-#: src/main/gram.cpp:5375 src/main/gram.y:2941 src/main/gram.y:2972
-#: src/main/gram.y:3019 src/main/gram.y:3066
+#: src/main/gram.cpp:5235 src/main/gram.cpp:5266 src/main/gram.cpp:5313
+#: src/main/gram.cpp:5360 src/main/gram.y:2926 src/main/gram.y:2957
+#: src/main/gram.y:3004 src/main/gram.y:3051
 #, fuzzy, c-format
 msgid "nul character not allowed (%s:%d:%d)"
 msgstr "ヌル文字は許されません (%d 行)"
 
-#: src/main/gram.cpp:5253 src/main/gram.y:2944
+#: src/main/gram.cpp:5238 src/main/gram.y:2929
 #, c-format
 msgid "\\%o exceeds maximum allowed octal value \\377 (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:5272 src/main/gram.y:2963
+#: src/main/gram.cpp:5257 src/main/gram.y:2948
 #, fuzzy, c-format
 msgid "'\\x' used without hex digits in character string (%s:%d:%d)"
 msgstr "\"%s\" で始まる文字列の中で 8 進文字なしに '\\x' が使われています"
 
-#: src/main/gram.cpp:5291 src/main/gram.y:2982
+#: src/main/gram.cpp:5276 src/main/gram.y:2967
 #, fuzzy, c-format
 msgid "\\uxxxx sequences not supported inside backticks (%s:%d:%d)"
 msgstr "\\uxxxx シーケンスはバックチック内ではサポートされません (%d 行)"
 
-#: src/main/gram.cpp:5311 src/main/gram.y:3002
+#: src/main/gram.cpp:5296 src/main/gram.y:2987
 #, fuzzy, c-format
 msgid "'\\u' used without hex digits in character string (%s:%d:%d)"
 msgstr "\"%s\" で始まる文字列の中で 8 進文字なしに '\\u' が使われています"
 
-#: src/main/gram.cpp:5323 src/main/gram.y:3014
+#: src/main/gram.cpp:5308 src/main/gram.y:2999
 #, c-format
 msgid "invalid \\u{xxxx} sequence (line %d)"
 msgstr "不正な \\u{xxxx} 系列です (%d 行)"
 
-#: src/main/gram.cpp:5338 src/main/gram.y:3029
+#: src/main/gram.cpp:5323 src/main/gram.y:3014
 #, fuzzy, c-format
 msgid "\\Uxxxxxxxx sequences not supported inside backticks (%s:%d:%d)"
 msgstr "\\Uxxxxxxxx シーケンスはバックチック内ではサポートされません (%d 行)"
 
-#: src/main/gram.cpp:5358 src/main/gram.y:3049
+#: src/main/gram.cpp:5343 src/main/gram.y:3034
 #, fuzzy, c-format
 msgid "'\\U' used without hex digits in character string (%s:%d:%d)"
 msgstr "\"%s\" で始まる文字列の中で 8 進文字なしに '\\U' が使われています"
 
-#: src/main/gram.cpp:5370 src/main/gram.y:3061
+#: src/main/gram.cpp:5355 src/main/gram.y:3046
 #, fuzzy, c-format
 msgid "invalid \\U{xxxxxxxx} sequence (%s:%d:%d)"
 msgstr "不正な \\U{xxxxxxxx} 系列です (%d 行)"
 
-#: src/main/gram.cpp:5379 src/main/gram.y:3070
+#: src/main/gram.cpp:5364 src/main/gram.y:3055
 #, fuzzy, c-format
 msgid "invalid \\U{xxxxxxxx} value %6x (%s:%d:%d)"
 msgstr "不正な \\U{xxxxxxxx} 系列です (%d 行)"
 
-#: src/main/gram.cpp:5382 src/main/gram.y:3073
+#: src/main/gram.cpp:5367 src/main/gram.y:3058
 #, fuzzy, c-format
 msgid "invalid \\Uxxxxxxxx value %6x (%s:%d:%d)"
 msgstr "不正な \\U{xxxxxxxx} 系列です (%d 行)"
 
-#: src/main/gram.cpp:5430 src/main/gram.y:3121
+#: src/main/gram.cpp:5415 src/main/gram.y:3106
 #, fuzzy, c-format
 msgid "'\\%s' is an unrecognized escape in character string (%s:%d:%d)"
 msgstr "\"%2$s\" で始まる文字列の中で '\\%1$c' は文字列で認識されないエスケープです"
 
-#: src/main/gram.cpp:5511 src/main/gram.cpp:5651 src/main/gram.y:3202
-#: src/main/gram.y:3342
+#: src/main/gram.cpp:5494 src/main/gram.cpp:5632 src/main/gram.y:3185
+#: src/main/gram.y:3323
 #, fuzzy, c-format
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed (%s:%d:%d)"
 msgstr "文字列中にユニコードや 8 進・16 進エスケープ文字は許されません"
 
-#: src/main/gram.cpp:5516 src/main/gram.cpp:5656 src/main/gram.y:3207
-#: src/main/gram.y:3347
+#: src/main/gram.cpp:5499 src/main/gram.cpp:5637 src/main/gram.y:3190
+#: src/main/gram.y:3328
 #, fuzzy, c-format
 msgid ""
 "string containing Unicode escapes not in this locale\n"
@@ -4854,12 +5067,12 @@ msgstr ""
 "このロケールにはない Unicode エスケープを含む %d 行の文字列は\n"
 "長すぎます (最大 10000 文字です)"
 
-#: src/main/gram.cpp:5554 src/main/gram.y:3245
+#: src/main/gram.cpp:5536 src/main/gram.y:3227
 #, c-format
 msgid "malformed raw string literal (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:6425 src/main/gram.y:4116
+#: src/main/gram.cpp:6403 src/main/gram.y:4094
 #, fuzzy, c-format
 msgid "internal parser error (%s:%d:%d)"
 msgstr "内部パーサーエラー (%d 行)"
@@ -4959,8 +5172,8 @@ msgstr ""
 "\t'%s'\n"
 
 #: src/main/grep.cpp:624 src/main/grep.cpp:726 src/main/grep.cpp:842
-#: src/main/grep.cpp:1391 src/main/grep.cpp:2243 src/main/grep.cpp:3123
-#: src/main/grep.cpp:3212
+#: src/main/grep.cpp:1391 src/main/grep.cpp:2244 src/main/grep.cpp:3124
+#: src/main/grep.cpp:3214
 #, fuzzy, c-format
 msgid "input string %lld is invalid UTF-8"
 msgstr "入力文字列 %lld は不正な UTF-8 文字列です"
@@ -4980,25 +5193,25 @@ msgstr "'分割された' 文字列 %lld はこのロケールでは不適切で
 msgid "'split' string %lld is invalid"
 msgstr "'分割された' 文字列 %lld は不正な UTF-8 文字列です"
 
-#: src/main/grep.cpp:969 src/main/grep.cpp:1383 src/main/grep.cpp:2239
-#: src/main/grep.cpp:2546 src/main/grep.cpp:3114
+#: src/main/grep.cpp:969 src/main/grep.cpp:1383 src/main/grep.cpp:2240
+#: src/main/grep.cpp:2547 src/main/grep.cpp:3115
 #, fuzzy, c-format
 msgid "input string %lld is invalid"
 msgstr "入力文字列 %lld は不正な UTF-8 文字列です"
 
 #: src/main/grep.cpp:1089 src/main/grep.cpp:1104 src/main/grep.cpp:1431
-#: src/main/grep.cpp:2412 src/main/grep.cpp:2597 src/main/grep.cpp:3190
-#: src/main/grep.cpp:3414
+#: src/main/grep.cpp:2413 src/main/grep.cpp:2598 src/main/grep.cpp:3192
+#: src/main/grep.cpp:3416
 #, c-format
 msgid "Out-of-memory error in regexp matching for element %d"
 msgstr ""
 
-#: src/main/grep.cpp:1339 src/main/grep.cpp:3005 src/main/grep.cpp:3343
+#: src/main/grep.cpp:1339 src/main/grep.cpp:3006 src/main/grep.cpp:3345
 #, fuzzy
 msgid "regular expression is invalid"
 msgstr "正規表現は不正な UTF-8 文字列です"
 
-#: src/main/grep.cpp:1342 src/main/grep.cpp:3008
+#: src/main/grep.cpp:1342 src/main/grep.cpp:3009
 msgid "regular expression is invalid UTF-8"
 msgstr "正規表現は不正な UTF-8 文字列です"
 
@@ -5010,47 +5223,47 @@ msgstr "パターンは空の文字列に何回でもマッチします、最初
 msgid "result string is too long"
 msgstr "結果の文字列が長すぎます"
 
-#: src/main/grep.cpp:2177
+#: src/main/grep.cpp:2178
 #, fuzzy
 msgid "'pattern' is invalid"
 msgstr "'pattern' は不正な UTF-8 文字列です"
 
-#: src/main/grep.cpp:2179
+#: src/main/grep.cpp:2180
 #, fuzzy
 msgid "'replacement' is invalid"
 msgstr "'replacement' は不正な UTF-8 文字列です"
 
-#: src/main/grep.cpp:2184
+#: src/main/grep.cpp:2185
 msgid "'pattern' is invalid UTF-8"
 msgstr "'pattern' は不正な UTF-8 文字列です"
 
-#: src/main/grep.cpp:2186
+#: src/main/grep.cpp:2187
 msgid "'replacement' is invalid UTF-8"
 msgstr "'replacement' は不正な UTF-8 文字列です"
 
-#: src/main/grep.cpp:2190
+#: src/main/grep.cpp:2191
 msgid "'pattern' is invalid in this locale"
 msgstr "'pattern' は現在のロケールでは不正です"
 
-#: src/main/grep.cpp:2193
+#: src/main/grep.cpp:2194
 msgid "'replacement' is invalid in this locale"
 msgstr "'replacement' は現在のロケールでは不正です"
 
-#: src/main/grep.cpp:2198
+#: src/main/grep.cpp:2199
 msgid "zero-length pattern"
 msgstr "長さゼロのパターン"
 
-#: src/main/grep.cpp:3029
+#: src/main/grep.cpp:3030
 #, c-format
 msgid "'pcre2_patterninfo' returned '%d' "
 msgstr "'pcre_fullinfo' が '%d' を返しました "
 
-#: src/main/grep.cpp:3046
+#: src/main/grep.cpp:3047
 #, c-format
 msgid "'pcre_fullinfo' returned '%d' "
 msgstr "'pcre_fullinfo' が '%d' を返しました "
 
-#: src/main/grep.cpp:3083
+#: src/main/grep.cpp:3084
 #, fuzzy
 msgid "too long a vector"
 msgstr "結果のベクトルが長すぎます"
@@ -5065,7 +5278,7 @@ msgstr "複素数の代入で、関数が不正です"
 msgid "error reading the file"
 msgstr "zip ファイルに CRC エラーがありました"
 
-#: src/main/identical.cpp:75 src/main/paste.cpp:106 src/main/util.cpp:520
+#: src/main/identical.cpp:75 src/main/paste.cpp:106 src/main/util.cpp:526
 #, c-format
 msgid "%d argument passed to .Internal(%s) which requires %d"
 msgid_plural "%d arguments passed to .Internal(%s) which requires %d"
@@ -5080,48 +5293,53 @@ msgstr "ペアリストでない属性を無視します"
 msgid "Unknown Type in identical(): %s (%x)\n"
 msgstr ""
 
-#: src/main/internet.cpp:80
+#: src/main/inspect.cpp:301
+#, fuzzy
+msgid "unknown immediate binding type"
+msgstr "未知のエンコーディングです: %d"
+
+#: src/main/internet.cpp:82
 msgid "internet routines cannot be accessed in module"
 msgstr "モジュール中でインターネットルーチンがアクセスできません"
 
-#: src/main/internet.cpp:91 src/main/internet.cpp:103 src/main/internet.cpp:115
-#: src/main/internet.cpp:126 src/main/internet.cpp:137
-#: src/main/internet.cpp:147 src/main/internet.cpp:269
-#: src/main/internet.cpp:281 src/main/internet.cpp:293
-#: src/main/internet.cpp:304
+#: src/main/internet.cpp:93 src/main/internet.cpp:105 src/main/internet.cpp:117
+#: src/main/internet.cpp:128 src/main/internet.cpp:139
+#: src/main/internet.cpp:149 src/main/internet.cpp:273
+#: src/main/internet.cpp:285 src/main/internet.cpp:297
+#: src/main/internet.cpp:308
 msgid "internet routines cannot be loaded"
 msgstr "インターネットルーチンがロードできません"
 
-#: src/main/internet.cpp:153 src/main/internet.cpp:167
-#: src/main/internet.cpp:191 src/main/internet.cpp:216
-#: src/main/internet.cpp:235
+#: src/main/internet.cpp:155 src/main/internet.cpp:169
+#: src/main/internet.cpp:194 src/main/internet.cpp:219
+#: src/main/internet.cpp:239
 #, fuzzy
 msgid "invalid 'socket' argument"
 msgstr "'mode' 引数が不正です"
 
-#: src/main/internet.cpp:161 src/main/internet.cpp:180
-#: src/main/internet.cpp:198 src/main/internet.cpp:210
-#: src/main/internet.cpp:224 src/main/internet.cpp:244
-#: src/main/internet.cpp:257
+#: src/main/internet.cpp:163 src/main/internet.cpp:182
+#: src/main/internet.cpp:201 src/main/internet.cpp:213
+#: src/main/internet.cpp:227 src/main/internet.cpp:248
+#: src/main/internet.cpp:261
 msgid "socket routines cannot be loaded"
 msgstr "ソケットルーチンがロードできません"
 
-#: src/main/internet.cpp:171
+#: src/main/internet.cpp:173
 #, fuzzy
 msgid "maxlen must be non-negative"
 msgstr "'gap' は，非負の整数でなくてはなりません"
 
-#: src/main/internet.cpp:182
+#: src/main/internet.cpp:184
 #, fuzzy
 msgid "Error reading data in Rsockread"
 msgstr "zip ファイルに CRC エラーがありました"
 
-#: src/main/internet.cpp:193
+#: src/main/internet.cpp:196
 #, fuzzy
 msgid "attempt to close invalid socket"
 msgstr "不正な 'comment' 属性を設定しようとしました"
 
-#: src/main/internet.cpp:204
+#: src/main/internet.cpp:207
 #, fuzzy
 msgid "invalid 'port' argument"
 msgstr "'mode' 引数が不正です"
@@ -5134,34 +5352,34 @@ msgstr "LAPACK ルーチンはこのモジュールではアクセスできま�
 msgid "LAPACK routines cannot be loaded"
 msgstr "LAPCK ルーチンがロードできません"
 
-#: src/main/logic.cpp:97
+#: src/main/logic.cpp:98
 msgid "operations are possible only for numeric, logical or complex types"
 msgstr "演算が可能なのは数値、論理値、そして複素数型のみです"
 
-#: src/main/logic.cpp:299
+#: src/main/logic.cpp:300
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "'%s' 演算子には 2 つの引数が必要です"
 
-#: src/main/logic.cpp:306
+#: src/main/logic.cpp:307
 #, c-format
 msgid "invalid 'x' type in 'x %s y'"
 msgstr "'x %s y' の 'x' の型が不正です"
 
-#: src/main/logic.cpp:315
+#: src/main/logic.cpp:316
 #, c-format
 msgid "invalid 'y' type in 'x %s y'"
 msgstr "'x %s y' の 'y' の型が不正です"
 
-#: src/main/logic.cpp:393
+#: src/main/logic.cpp:394
 msgid "Unary operator `!' called with two arguments"
 msgstr "単項演算子 '!' が 2 つの引数で呼び出されました"
 
-#: src/main/logic.cpp:459
+#: src/main/logic.cpp:460
 msgid "bad op value for do_logic3"
 msgstr ""
 
-#: src/main/logic.cpp:509
+#: src/main/logic.cpp:510
 #, c-format
 msgid "coercing argument of type '%s' to logical"
 msgstr "'%s' 型の引数を論理型に変換します"
@@ -5208,76 +5426,129 @@ msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 msgid "invalid parameter passed to a C runtime function"
 msgstr "不正なオブジェクトです: プリミティブな関数でなくてはなりません"
 
-#: src/main/main.cpp:1059
+#: src/main/main.cpp:943
+#, c-format
+msgid "Setting LC_COLLATE=%.200s failed\n"
+msgstr ""
+
+#: src/main/main.cpp:948
+#, c-format
+msgid "Setting LC_CTYPE=%.200s failed\n"
+msgstr ""
+
+#: src/main/main.cpp:953
+#, c-format
+msgid "Setting LC_MONETARY=%.200s failed\n"
+msgstr ""
+
+#: src/main/main.cpp:958
+#, c-format
+msgid "Setting LC_TIME=%.200s failed\n"
+msgstr ""
+
+#: src/main/main.cpp:988
+msgid "Setting LC_CTYPE failed, using \"C\"\n"
+msgstr ""
+
+#: src/main/main.cpp:991
+msgid "Setting LC_COLLATE failed, using \"C\"\n"
+msgstr ""
+
+#: src/main/main.cpp:994
+msgid "Setting LC_TIME failed, using \"C\"\n"
+msgstr ""
+
+#: src/main/main.cpp:998
+msgid "Setting LC_MESSAGES failed, using \"C\"\n"
+msgstr ""
+
+#: src/main/main.cpp:1004
+msgid "Setting LC_MONETARY failed, using \"C\"\n"
+msgstr ""
+
+#: src/main/main.cpp:1009
+msgid "Setting LC_PAPER failed, using \"C\"\n"
+msgstr ""
+
+#: src/main/main.cpp:1014
+msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
+msgstr ""
+
+#: src/main/main.cpp:1047
+#, c-format
+msgid "Using locale code page other than %d%s may cause problems."
+msgstr ""
+
+#: src/main/main.cpp:1074
 msgid "unable to open the base package\n"
 msgstr "base パッケージを開くことができません \n"
 
-#: src/main/main.cpp:1117
+#: src/main/main.cpp:1132
 #, fuzzy
 msgid "allocation failure in setup_Rmainloop"
 msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
-#: src/main/main.cpp:1151
+#: src/main/main.cpp:1166
 #, c-format
 msgid "unable to restore saved data in %s\n"
 msgstr "%s に保存されたデータを復帰できません \n"
 
-#: src/main/main.cpp:1205
+#: src/main/main.cpp:1220
 #, fuzzy
 msgid "Warning message during startup:"
 msgid_plural "Warning messages during startup:"
 msgstr[0] "警告メッセージ:"
 
-#: src/main/main.cpp:1223
+#: src/main/main.cpp:1238
 msgid "unable to initialize the JIT\n"
 msgstr "読み込みのためにファイルを開くことができません\n"
 
-#: src/main/main.cpp:1464
+#: src/main/main.cpp:1479
 msgid "non-interactive browser() -- left over from debugging?"
 msgstr ""
 
-#: src/main/main.cpp:1596
+#: src/main/main.cpp:1611
 msgid "cannot quit from browser"
 msgstr "ブラウザを終了できません"
 
-#: src/main/main.cpp:1600
+#: src/main/main.cpp:1615
 msgid "one of \"yes\", \"no\", \"ask\" or \"default\" expected."
 msgstr "\"yes\", \"no\", \"ask\" または \"default\" のどれかが期待されています"
 
-#: src/main/main.cpp:1605
+#: src/main/main.cpp:1620
 msgid "save=\"ask\" in non-interactive use: command-line default will be used"
 msgstr "非対話的な使用での save=\"ask\": コマンドラインでの既定動作が使用されます"
 
-#: src/main/main.cpp:1613
+#: src/main/main.cpp:1628
 msgid "unrecognized value of 'save'"
 msgstr "'save' の値が認識できません"
 
-#: src/main/main.cpp:1616
+#: src/main/main.cpp:1631
 msgid "invalid 'status', 0 assumed"
 msgstr "'status' が不正です。0 が仮定されました"
 
-#: src/main/main.cpp:1621
+#: src/main/main.cpp:1636
 msgid "invalid 'runLast', FALSE assumed"
 msgstr "'runLast' が不正です。FALSE が仮定されました"
 
-#: src/main/main.cpp:1665
+#: src/main/main.cpp:1680
 msgid "cannot allocate space for toplevel callback element"
 msgstr "トップレベルの callback 要素に作業空間を割り当てることができません"
 
-#: src/main/main.cpp:1751
+#: src/main/main.cpp:1766
 msgid "negative index passed to R_removeTaskCallbackByIndex"
 msgstr "R_removeTaskCallbackByIndex に負の添字が渡されました"
 
-#: src/main/main.cpp:1870
+#: src/main/main.cpp:1885
 msgid "list of toplevel callbacks was corrupted"
 msgstr ""
 
-#: src/main/main.cpp:1875
+#: src/main/main.cpp:1890
 #, c-format
 msgid "warning messages from top-level task callback '%s'\n"
 msgstr "トップレベルの task callback '%s' からの警告メッセージ \n"
 
-#: src/main/main.cpp:1965
+#: src/main/main.cpp:1980
 msgid "top-level task callback did not return a logical value"
 msgstr "トップレベルの task callback が論理値を返していません"
 
@@ -5290,22 +5561,22 @@ msgstr "'mapply' の引数 'MoreArgs' がリストになっていません"
 msgid "longer argument not a multiple of length of shorter"
 msgstr "長い引数の長さが短いほうの長さの倍数になっていません"
 
-#: src/main/match.cpp:104
+#: src/main/match.cpp:108
 msgid "invalid partial string match"
 msgstr "文字列の部分的マッチが不正です"
 
-#: src/main/match.cpp:241 src/main/match.cpp:284 src/main/objects.cpp:70
+#: src/main/match.cpp:245 src/main/match.cpp:288 src/main/objects.cpp:70
 #: src/main/objects.cpp:81 src/main/summary.cpp:434
 #, c-format
 msgid "formal argument \"%s\" matched by multiple actual arguments"
 msgstr "仮引数 \"%s\" が複数の実引数にマッチしました"
 
-#: src/main/match.cpp:245 src/main/match.cpp:281
+#: src/main/match.cpp:249 src/main/match.cpp:285
 #, c-format
 msgid "argument %d matches multiple formal arguments"
 msgstr "引数 %d が複数の仮引数に一致します"
 
-#: src/main/match.cpp:388
+#: src/main/match.cpp:391
 #, c-format
 msgid "unused argument %s"
 msgid_plural "unused arguments %s"
@@ -5364,264 +5635,259 @@ msgstr "二番目の引数は関数でなければなりません"
 msgid "unexpected type %d in %s"
 msgstr "型 %d（'%s' における）は未実装です \n"
 
-#: src/main/memory.cpp:2316
-#, fuzzy
-msgid "couldn't allocate node stack"
-msgstr "pushｂack のための領域を割り当てられませんでした"
-
-#: src/main/memory.cpp:2355
+#: src/main/memory.cpp:2345
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f %s"
 msgstr "サイズ %0.f Tb のメモリブロックを割り当てることができません"
 
-#: src/main/memory.cpp:2359
+#: src/main/memory.cpp:2349
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.1f %s"
 msgstr "サイズ %0.1f Gb のメモリブロックを割り当てることができません"
 
-#: src/main/memory.cpp:2690 src/main/memory.cpp:2754
+#: src/main/memory.cpp:2683 src/main/memory.cpp:2747
 msgid "vector is too large"
 msgstr "ベクトルのサイズが大き過ぎます"
 
-#: src/main/memory.cpp:2692 src/main/memory.cpp:2756
+#: src/main/memory.cpp:2685 src/main/memory.cpp:2749
 msgid "negative length vectors are not allowed"
 msgstr "負の長さのベクトルは許されません"
 
-#: src/main/memory.cpp:2701
+#: src/main/memory.cpp:2694
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.cpp:2705 src/main/memory.cpp:2710 src/main/memory.cpp:2715
-#: src/main/memory.cpp:2720 src/main/memory.cpp:2727
+#: src/main/memory.cpp:2698 src/main/memory.cpp:2703 src/main/memory.cpp:2708
+#: src/main/memory.cpp:2713 src/main/memory.cpp:2720
 #, fuzzy, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr "長さ %lld のベクトルを割り当てることができません"
 
-#: src/main/memory.cpp:2732 src/main/memory.cpp:2737
+#: src/main/memory.cpp:2725 src/main/memory.cpp:2730
 #, fuzzy
 msgid "invalid length for pairlist"
 msgstr "リストへの付値の添字が不正です"
 
-#: src/main/memory.cpp:2741
+#: src/main/memory.cpp:2734
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "ベクトル割り当てにおいて、型か長さ (%s か %lld) が不正です"
 
-#: src/main/memory.cpp:2995
+#: src/main/memory.cpp:2988
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:2999
+#: src/main/memory.cpp:2992
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:3004
+#: src/main/memory.cpp:2997
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:3055
+#: src/main/memory.cpp:3048
 msgid "R_signal_protect_error() is no-op in CXXR"
 msgstr ""
 
-#: src/main/memory.cpp:3060
+#: src/main/memory.cpp:3053
 #, fuzzy, c-format
 msgid "unprotect(): only %td protected item"
 msgid_plural "unprotect(): only %td protected items"
 msgstr[0] "unprotect(): %d 個だけの保護された項目"
 
-#: src/main/memory.cpp:3099
+#: src/main/memory.cpp:3092
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr: ポインターがありません"
 
-#: src/main/memory.cpp:3121
+#: src/main/memory.cpp:3114
 #, fuzzy, c-format
 msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
 msgstr[0] "R_Reprotect: %d 個だけの保護された項目です、インデックス %d を再プロテクトできません"
 
-#: src/main/memory.cpp:3173
+#: src/main/memory.cpp:3166
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
 msgstr "'R_Calloc' がメモリー (%llu バイト、%llu バイト中) を割りあてられませんでした"
 
-#: src/main/memory.cpp:3184
+#: src/main/memory.cpp:3177
 #, fuzzy, c-format
 msgid "'R_Realloc' could not re-allocate memory (%llu bytes)"
 msgstr "'R_Realloc' がメモリーを再確保できません (%llu バイト)"
 
-#: src/main/memory.cpp:3200 src/main/memory.cpp:3207
+#: src/main/memory.cpp:3193 src/main/memory.cpp:3200
 #, fuzzy, c-format
 msgid "object is too large (%llu byte)"
 msgid_plural "object is too large (%llu bytes)"
 msgstr[0] "ベクトルのサイズが大き過ぎます"
 
-#: src/main/memory.cpp:3288
+#: src/main/memory.cpp:3281
 #, fuzzy
 msgid "'initialSize' must be non-negative"
 msgstr "'gap' は，非負の整数でなくてはなりません"
 
-#: src/main/memory.cpp:3307
+#: src/main/memory.cpp:3300
 #, fuzzy
 msgid "Invalid mset"
 msgstr "コネクションが不正です"
 
-#: src/main/memory.cpp:3331
+#: src/main/memory.cpp:3324
 #, fuzzy
 msgid "Multi-set overflow"
 msgstr " 'default' が長すぎます "
 
-#: src/main/memory.cpp:3397
+#: src/main/memory.cpp:3390
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "最初の引数は環境か外部ポインタでなくてはなりません"
 
-#: src/main/memory.cpp:3523
+#: src/main/memory.cpp:3516
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3560
+#: src/main/memory.cpp:3553
 #, c-format
 msgid "can't change type from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3568
+#: src/main/memory.cpp:3561
 #, c-format
 msgid "can't change the type of an ALTREP object from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3575
+#: src/main/memory.cpp:3568
 #, fuzzy
 msgid "can't change the type of a binding cell"
 msgstr "バインディングがロックされているならば、アクティブなバインディングを変更することはできません"
 
-#: src/main/memory.cpp:3678
+#: src/main/memory.cpp:3671
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.cpp:3691
+#: src/main/memory.cpp:3684
 msgid "SETLENGTH() cannot be applied to an ALTVEC object."
 msgstr ""
 
-#: src/main/memory.cpp:3693
+#: src/main/memory.cpp:3686
 #, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3711 src/main/memory.cpp:3719 src/main/memory.cpp:3736
-#: src/main/memory.cpp:3753 src/main/memory.cpp:3799 src/main/memory.cpp:3808
-#: src/main/memory.cpp:3818 src/main/memory.cpp:3827 src/main/memory.cpp:3836
-#: src/main/memory.cpp:3845 src/main/memory.cpp:3853 src/main/memory.cpp:3862
-#: src/main/memory.cpp:3871 src/main/memory.cpp:3879 src/main/memory.cpp:3887
-#: src/main/memory.cpp:3895 src/main/memory.cpp:3903 src/main/memory.cpp:3916
-#: src/main/memory.cpp:3925 src/main/memory.cpp:3950 src/main/memory.cpp:3969
+#: src/main/memory.cpp:3704 src/main/memory.cpp:3712 src/main/memory.cpp:3729
+#: src/main/memory.cpp:3746 src/main/memory.cpp:3792 src/main/memory.cpp:3801
+#: src/main/memory.cpp:3811 src/main/memory.cpp:3820 src/main/memory.cpp:3829
+#: src/main/memory.cpp:3838 src/main/memory.cpp:3846 src/main/memory.cpp:3855
+#: src/main/memory.cpp:3864 src/main/memory.cpp:3872 src/main/memory.cpp:3880
+#: src/main/memory.cpp:3888 src/main/memory.cpp:3896 src/main/memory.cpp:3909
+#: src/main/memory.cpp:3918 src/main/memory.cpp:3943 src/main/memory.cpp:3962
 #, fuzzy, c-format
 msgid "%s() can only be applied to a '%s', not a '%s'"
 msgstr "scan() 関数は '%s' を期待したのに、得られたのは '%s' でした"
 
-#: src/main/memory.cpp:3788
+#: src/main/memory.cpp:3781
 msgid "cannot get STDVEC_DATAPTR from ALTREP object"
 msgstr ""
 
-#: src/main/memory.cpp:3790
+#: src/main/memory.cpp:3783
 #, c-format
 msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3911
+#: src/main/memory.cpp:3904
 msgid "not safe to return vector pointer"
 msgstr "ベクトルのポインタを返すのは安全ではありません"
 
-#: src/main/memory.cpp:3928
+#: src/main/memory.cpp:3921
 #, c-format
 msgid "Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3931
+#: src/main/memory.cpp:3924
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_STRING_ELT"
 msgstr "SET_STRING_ELT 中で インデックス %lld/%lld を設定しようとしました"
 
-#: src/main/memory.cpp:3954
+#: src/main/memory.cpp:3947
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_VECTOR_ELT"
 msgstr "SET_VECTOR_ELT中で インデックス %lld/%lld を設定しようとしました"
 
-#: src/main/memory.cpp:3973
+#: src/main/memory.cpp:3966
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr "SET_VECTOR_ELT中で インデックス %lld/%lld を設定しようとしました"
 
-#: src/main/memory.cpp:4003
+#: src/main/memory.cpp:3996
 #, c-format
 msgid "CAR/CDR/TAG or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.cpp:4117
+#: src/main/memory.cpp:4110
 #, fuzzy
 msgid "argument not tracking references"
 msgstr "引数が環境ではありません"
 
-#: src/main/memory.cpp:4185 src/main/memory.cpp:4194 src/main/memory.cpp:4205
-#: src/main/memory.cpp:4221 src/main/memory.cpp:4235 src/main/memory.cpp:4250
-#: src/main/memory.cpp:4266
+#: src/main/memory.cpp:4178 src/main/memory.cpp:4187 src/main/memory.cpp:4198
+#: src/main/memory.cpp:4214 src/main/memory.cpp:4228 src/main/memory.cpp:4243
+#: src/main/memory.cpp:4259
 msgid "bad value"
 msgstr "不適切な値です"
 
-#: src/main/memory.cpp:4210
+#: src/main/memory.cpp:4203
 msgid "inserting non-tracking CDR in tracking cell"
 msgstr ""
 
-#: src/main/memory.cpp:4286
+#: src/main/memory.cpp:4279
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not a closure"
 msgstr "引数 %d がベクトルではありません"
 
-#: src/main/memory.cpp:4318
+#: src/main/memory.cpp:4311
 #, c-format
 msgid "%s: argument of type %s is not a symbol or NULL"
 msgstr ""
 
-#: src/main/memory.cpp:4352
+#: src/main/memory.cpp:4345
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an environment or NULL"
 msgstr "'%s' に対する引数は環境ではありません"
 
-#: src/main/memory.cpp:4373
+#: src/main/memory.cpp:4366
 #, fuzzy
 msgid "cycles in parent chains are not allowed"
 msgstr "負の長さのベクトルは許されません"
 
-#: src/main/memory.cpp:4403
+#: src/main/memory.cpp:4396
 #, c-format
 msgid "expecting a 'PROMSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4435
+#: src/main/memory.cpp:4428
 #, c-format
 msgid "value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4513
+#: src/main/memory.cpp:4506
 msgid "memory profiling is not available on this system"
 msgstr "メモリプロファリングはこのシステムでは使えません"
 
-#: src/main/memory.cpp:4556
+#: src/main/memory.cpp:4549
 #, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr "Rprofmem: ファイル '%s' を開くことができません"
 
-#: src/main/memory.cpp:4596
+#: src/main/memory.cpp:4589
 msgid "R_AllocStringBuffer( (size_t)-1 ) is no longer allowed"
 msgstr ""
 
-#: src/main/memory.cpp:4615
+#: src/main/memory.cpp:4608
 #, fuzzy, c-format
 msgid "could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'"
 msgstr "'read.dcf' のためのメモリを割り当てられませんでした"
 
-#: src/main/memory.cpp:4670
+#: src/main/memory.cpp:4663
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr "長いベクトルはまだサポートされていません: %s:%d"
@@ -5858,7 +6124,7 @@ msgstr "仮想クラス (\"%s\") からオブジェクトを生成しようと�
 msgid "'R_get_primname' called on a non-primitive"
 msgstr " 'R_get_primname' がプリミティブでないものに対して呼び出されました "
 
-#: src/main/objects.cpp:1857
+#: src/main/objects.cpp:1858
 #, c-format
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "クラス \"%s\" のオブジェクトは適正な S3 オブジェクトに対応していません"
@@ -6110,7 +6376,7 @@ msgstr "'%s' を '%s' にリンクできません、理由は '%s' です"
 msgid "(hard) links are not supported on this platform"
 msgstr "このプラットフォームでは (ハード) リンクはサポートされていません"
 
-#: src/main/platform.cpp:754 src/main/sysutils.cpp:489
+#: src/main/platform.cpp:754 src/main/sysutils.cpp:490
 #, fuzzy, c-format
 msgid "'%s' and '%s' are of different lengths"
 msgstr "'from' と 'to' は異なった長さです"
@@ -6171,17 +6437,17 @@ msgstr "目標ファイル '%s' を開くことができません、理由は '%
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "ディレクトリ '%ls' を作成できません、理由は '%s' です"
 
-#: src/main/platform.cpp:1993 src/main/Rdynload.cpp:1179 src/main/util.cpp:920
-#: src/main/util.cpp:1030
+#: src/main/platform.cpp:1993 src/main/Rdynload.cpp:1181 src/main/util.cpp:926
+#: src/main/util.cpp:1036
 msgid "path too long"
 msgstr "パスが長すぎます"
 
 #: src/main/platform.cpp:2081 src/main/platform.cpp:2138
-#: src/main/sysutils.cpp:2976 src/main/sysutils.cpp:2990
+#: src/main/sysutils.cpp:2982 src/main/sysutils.cpp:2996
 msgid "internal out-of-memory condition"
 msgstr "内部でアウトオブメモリーが発生しています"
 
-#: src/main/platform.cpp:2134 src/main/sysutils.cpp:2986
+#: src/main/platform.cpp:2134 src/main/sysutils.cpp:2992
 #, c-format
 msgid "read error on '%s'"
 msgstr "'%s' の読み込みエラーです"
@@ -6312,6 +6578,47 @@ msgstr "z 変数の値が全部同じ値です"
 msgid "all 'z' values are NA"
 msgstr "z 変数の値が全部 NA です"
 
+#: src/main/plot.cpp:123
+#, c-format
+msgid "CreateAtVector \"log\"(from axis()): usr[0] = %g > %g = usr[1] !"
+msgstr ""
+
+#: src/main/plot.cpp:134
+#, c-format
+msgid "CreateAtVector [log-axis()]: axp[0] = %g < 0!"
+msgstr ""
+
+#: src/main/plot.cpp:136
+#, c-format
+msgid "CreateAtVector [log-axis()]: small axp[0] = %g"
+msgstr ""
+
+#: src/main/plot.cpp:208
+#, c-format
+msgid ""
+"log - axis(), 'at' creation, _LARGE_ range: invalid {xy}axp or par; nint=%d\n"
+"\t axp[0:1]=(%g,%g), usr[0:1]=(%g,%g); i=%d, ni=%d"
+msgstr ""
+
+#: src/main/plot.cpp:234
+#, c-format
+msgid ""
+"log - axis(), 'at' creation, _MEDIUM_ range: invalid {xy}axp or par;\n"
+"\t axp[0]= %g, usr[0:1]=(%g,%g)"
+msgstr ""
+
+#: src/main/plot.cpp:269
+#, c-format
+msgid ""
+"log - axis(), 'at' creation, _SMALL_ range: invalid {xy}axp or par;\n"
+"\t axp[0]= %g, usr[0:1]=(%g,%g)"
+msgstr ""
+
+#: src/main/plot.cpp:287
+#, c-format
+msgid "log - axis(), 'at' creation: INVALID {xy}axp[3] = %g"
+msgstr ""
+
 #: src/main/plotmath.cpp:321
 #, fuzzy
 msgid "invalid `which' in C function TeX"
@@ -6361,28 +6668,34 @@ msgstr "グループが不完全です"
 msgid "Metric information not available for this family/device"
 msgstr "この family/device に対してメトリック情報は利用できません"
 
-#: src/main/printarray.cpp:351
+#: src/main/printarray.cpp:353
 msgid "too few row labels"
 msgstr "行ラベルの数が少なすぎます"
 
-#: src/main/printarray.cpp:353
+#: src/main/printarray.cpp:355
 msgid "too few column labels"
 msgstr "列ラベルの数が少なすぎます"
 
-#: src/main/printarray.cpp:395
+#: src/main/printarray.cpp:397 src/main/printarray.cpp:528
 #, c-format
 msgid " %d row"
 msgid_plural " %d rows"
 msgstr[0] ""
 
-#: src/main/printarray.cpp:398
+#: src/main/printarray.cpp:400
 msgid " and"
 msgstr ""
 
-#: src/main/printarray.cpp:399
+#: src/main/printarray.cpp:401 src/main/printarray.cpp:529
 #, c-format
 msgid " %d column"
 msgid_plural " %d columns"
+msgstr[0] ""
+
+#: src/main/printarray.cpp:526
+#, c-format
+msgid " %d slice"
+msgid_plural " %d slices"
 msgstr[0] ""
 
 #: src/main/print.cpp:172 src/main/print.cpp:276
@@ -6419,6 +6732,16 @@ msgstr ""
 #, fuzzy
 msgid "tagbuf overflow"
 msgstr "入力バッファが溢れました (%d 行)"
+
+#: src/main/print.cpp:851
+#, c-format
+msgid "<S4 object of class \"%s\">\n"
+msgstr ""
+
+#: src/main/print.cpp:854
+#, c-format
+msgid "<S4 object of class \"%s\" from package '%s'>\n"
+msgstr ""
 
 #: src/main/print.cpp:1011
 #, fuzzy
@@ -6469,61 +6792,61 @@ msgstr "このプラットフォームでは wchar_t が Unicode であること
 msgid "argument is not a numeric vector"
 msgstr "引数が数値ベクトルではありません"
 
-#: src/main/radixsort.cpp:83
+#: src/main/radixsort.cpp:85
 #, c-format
 msgid "Internal error: savetl_init checks failed (%d %d %p %p)."
 msgstr ""
 
-#: src/main/radixsort.cpp:89 src/main/radixsort.cpp:93
+#: src/main/radixsort.cpp:91 src/main/radixsort.cpp:95
 #, fuzzy
 msgid "Could not allocate saveds in savetl_init"
 msgstr "'path' のための領域を割り当てられませんでした"
 
-#: src/main/radixsort.cpp:121
+#: src/main/radixsort.cpp:123
 #, fuzzy
 msgid "Could not realloc saveds in savetl"
 msgstr "'path' のための領域を割り当てられませんでした"
 
-#: src/main/radixsort.cpp:127
+#: src/main/radixsort.cpp:129
 #, fuzzy
 msgid "Could not realloc savedtl in savetl"
 msgstr "'path' のための領域を割り当てられませんでした"
 
-#: src/main/radixsort.cpp:776 src/main/radixsort.cpp:864
+#: src/main/radixsort.cpp:778 src/main/radixsort.cpp:866
 msgid "Not yet used, still using iradix instead"
 msgstr ""
 
-#: src/main/radixsort.cpp:953
+#: src/main/radixsort.cpp:955
 msgid "Character encoding must be UTF-8, Latin-1 or bytes"
 msgstr ""
 
-#: src/main/radixsort.cpp:1566
+#: src/main/radixsort.cpp:1568
 msgid "radix sort assumes sizeof(int) == 4"
 msgstr ""
 
-#: src/main/radixsort.cpp:1569
+#: src/main/radixsort.cpp:1571
 msgid "radix sort assumes sizeof(double) == 8"
 msgstr ""
 
-#: src/main/radixsort.cpp:1598 src/main/sort.cpp:1456
+#: src/main/radixsort.cpp:1600 src/main/sort.cpp:1461
 #, c-format
 msgid "argument %d is not a vector"
 msgstr "引数 %d がベクトルではありません"
 
-#: src/main/radixsort.cpp:1601 src/main/sort.cpp:1458
+#: src/main/radixsort.cpp:1603 src/main/sort.cpp:1463
 msgid "argument lengths differ"
 msgstr "引数の長さが異なります"
 
-#: src/main/radixsort.cpp:1605
+#: src/main/radixsort.cpp:1607
 msgid "length(decreasing) must match the number of order arguments"
 msgstr ""
 
-#: src/main/radixsort.cpp:1608
+#: src/main/radixsort.cpp:1610
 #, fuzzy
 msgid "'decreasing' elements must be TRUE or FALSE"
 msgstr "'decreasing' は TRUE か FALSE でなければなりません"
 
-#: src/main/radixsort.cpp:1617
+#: src/main/radixsort.cpp:1619
 #, fuzzy
 msgid "long vectors not supported"
 msgstr "long vector '%s' はサポートされていません"
@@ -6613,7 +6936,7 @@ msgstr "引数 'x' は %d 長の倍数でなければなりません"
 msgid "argument 'x' must not contain NAs"
 msgstr "引数 'x' は NA を含んではいけません"
 
-#: src/main/raw.cpp:352 src/main/util.cpp:2010
+#: src/main/raw.cpp:352 src/main/util.cpp:2019
 msgid "invalid UTF-8 string"
 msgstr "不正な UTF-8 文字列です"
 
@@ -6654,99 +6977,99 @@ msgstr ""
 msgid "could not allocate space for DLL table"
 msgstr "'name' のための領域を割り当てられませんでした"
 
-#: src/main/Rdynload.cpp:362
+#: src/main/Rdynload.cpp:364
 msgid "R_RegisterRoutines called with invalid DllInfo object."
 msgstr "R_RegisterRoutines が不正な DllInfo オブジェクトで呼ばれました"
 
-#: src/main/Rdynload.cpp:422
+#: src/main/Rdynload.cpp:424
 #, fuzzy
 msgid "Invalid object."
 msgstr "コネクションが不正です"
 
-#: src/main/Rdynload.cpp:428 src/main/Rdynload.cpp:431
+#: src/main/Rdynload.cpp:430 src/main/Rdynload.cpp:433
 #, c-format
 msgid "Invalid entry '%s' in native symbol object."
 msgstr ""
 
-#: src/main/Rdynload.cpp:437
+#: src/main/Rdynload.cpp:439
 #, c-format
 msgid "Component '%s' missing in symbol object."
 msgstr ""
 
-#: src/main/Rdynload.cpp:449
+#: src/main/Rdynload.cpp:451
 #, fuzzy
 msgid "Invalid symbol list."
 msgstr "シンボル記号が不正です"
 
-#: src/main/Rdynload.cpp:463
+#: src/main/Rdynload.cpp:465
 #, c-format
 msgid "Symbol at %d does not have registration information."
 msgstr ""
 
-#: src/main/Rdynload.cpp:499
+#: src/main/Rdynload.cpp:501
 #, fuzzy
 msgid "Invalid symbol name."
 msgstr "シンボル記号が不正です"
 
-#: src/main/Rdynload.cpp:502
+#: src/main/Rdynload.cpp:504
 #, fuzzy, c-format
 msgid "Cannot register already registered native symbol '%s'."
 msgstr "登録されたネイティブのシンボルのためのメモリを割り当てることができません。(%d バイト)"
 
-#: src/main/Rdynload.cpp:504
+#: src/main/Rdynload.cpp:506
 #, fuzzy, c-format
 msgid "Symbol '%s' does not have a valid native address."
 msgstr "ファイルストリームは適正な gzip ヘッダを持っていません"
 
-#: src/main/Rdynload.cpp:506
+#: src/main/Rdynload.cpp:508
 #, c-format
 msgid "Symbol '%s' does not have a valid DllInfo reference."
 msgstr ""
 
-#: src/main/Rdynload.cpp:511
+#: src/main/Rdynload.cpp:513
 #, c-format
 msgid "Symbol '%s' comes from a different shared object."
 msgstr ""
 
-#: src/main/Rdynload.cpp:514
+#: src/main/Rdynload.cpp:516
 #, c-format
 msgid "Symbol '%s' is missing parameter specification."
 msgstr ""
 
-#: src/main/Rdynload.cpp:570
+#: src/main/Rdynload.cpp:572
 #, fuzzy
 msgid "allocation failure in R_setPrimitiveArgTypes"
 msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
-#: src/main/Rdynload.cpp:839
+#: src/main/Rdynload.cpp:841
 #, fuzzy
 msgid "maximal number of DLLs reached..."
 msgstr "DLL の数が限界に達しました..."
 
-#: src/main/Rdynload.cpp:890
+#: src/main/Rdynload.cpp:892
 msgid "could not allocate space for 'path'"
 msgstr "'path' のための領域を割り当てられませんでした"
 
-#: src/main/Rdynload.cpp:902
+#: src/main/Rdynload.cpp:904
 #, c-format
 msgid "DLLname '%s' is too long"
 msgstr "DLL の名前 '%s' が長すぎます"
 
-#: src/main/Rdynload.cpp:930
+#: src/main/Rdynload.cpp:932
 msgid "could not allocate space for 'name'"
 msgstr "'name' のための領域を割り当てられませんでした"
 
-#: src/main/Rdynload.cpp:940
+#: src/main/Rdynload.cpp:942
 #, fuzzy
 msgid "could not allocate space for 'DllInfo'"
 msgstr "'name' のための領域を割り当てられませんでした"
 
-#: src/main/Rdynload.cpp:1207 src/main/Rdynload.cpp:1224 src/main/util.cpp:844
+#: src/main/Rdynload.cpp:1209 src/main/Rdynload.cpp:1226 src/main/util.cpp:850
 msgid "character argument expected"
 msgstr "文字引数が期待されています"
 
-#: src/main/Rdynload.cpp:1214 src/main/Rdynload.cpp:1247
-#: src/main/Rdynload.cpp:1268
+#: src/main/Rdynload.cpp:1216 src/main/Rdynload.cpp:1249
+#: src/main/Rdynload.cpp:1270
 #, c-format
 msgid ""
 "unable to load shared object '%s':\n"
@@ -6755,40 +7078,40 @@ msgstr ""
 "共有ライブラリ '%s' を読み込めません:\n"
 "  %s"
 
-#: src/main/Rdynload.cpp:1228
+#: src/main/Rdynload.cpp:1230
 #, c-format
 msgid "shared object '%s' was not loaded"
 msgstr "共有ライブラリ '%s' はロードされていません"
 
-#: src/main/Rdynload.cpp:1305
+#: src/main/Rdynload.cpp:1307
 #, c-format
 msgid "cannot allocate memory for registered native symbol (%d byte)"
 msgid_plural "cannot allocate memory for registered native symbol (%d bytes)"
 msgstr[0] "登録されたネイティブのシンボルのためのメモリを割り当てることができません。(%d バイト)"
 
-#: src/main/Rdynload.cpp:1436 src/main/Rdynload.cpp:1628
+#: src/main/Rdynload.cpp:1438 src/main/Rdynload.cpp:1630
 msgid "NULL value passed for DllInfo"
 msgstr "DlInfo に NULL 値が渡されました"
 
-#: src/main/Rdynload.cpp:1440
+#: src/main/Rdynload.cpp:1442
 msgid "must pass package name or DllInfo reference"
 msgstr "パッケージ名か DllInfo の参照を渡すべきです"
 
-#: src/main/Rdynload.cpp:1546
+#: src/main/Rdynload.cpp:1548
 #, c-format
 msgid "unimplemented type %d in 'createRSymbolObject'"
 msgstr "'createRSymbolObject' の型 %d は未実装です"
 
-#: src/main/Rdynload.cpp:1625
+#: src/main/Rdynload.cpp:1627
 msgid "R_getRegisteredRoutines() expects a DllInfo reference"
 msgstr "R_getRegisteredRoutines() はある DllInfo の参照が期待されます"
 
-#: src/main/Rdynload.cpp:1711
+#: src/main/Rdynload.cpp:1713
 #, c-format
 msgid "function '%s' not provided by package '%s'"
 msgstr "関数 '%s' はパッケージ '%s' では提供されていません"
 
-#: src/main/Rdynload.cpp:1713
+#: src/main/Rdynload.cpp:1715
 msgid "table entry must be an external pointer"
 msgstr "テーブルエントリは外部ポインタでなければなりません"
 
@@ -6838,11 +7161,6 @@ msgstr "不正な複素値との比較です"
 #: src/main/relop.cpp:784 src/main/relop.cpp:829 src/main/relop.cpp:863
 msgid "'a' and 'b' must have the same type"
 msgstr "'a' と 'b' は同一の型でなくてはなりません"
-
-#: src/main/Renviron.cpp:123
-#, fuzzy
-msgid "allocation failure in reading Renviron"
-msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
 #: src/main/Renviron.cpp:279
 #, c-format
@@ -6980,6 +7298,11 @@ msgstr ""
 #: src/main/RObject.cpp:118
 #, fuzzy
 msgid "cannot set attribute on a 'CHARSXP'"
+msgstr "このシステムではタイムゾーンは設定できません"
+
+#: src/main/RObject.cpp:120
+#, fuzzy
+msgid "cannot set attribute on a symbol"
 msgstr "このシステムではタイムゾーンは設定できません"
 
 #: src/main/Rstrptime.h:523 src/main/Rstrptime.h:1011
@@ -7207,7 +7530,6 @@ msgid "'file' must be non-empty string"
 msgstr "'file' は空でない文字列でなければいけません"
 
 #: src/main/saveload.cpp:2060 src/main/saveload.cpp:2095
-#: src/main/saveload.cpp:2374 src/main/serialize.cpp:2646
 msgid "'ascii' must be logical"
 msgstr "'ascii' は論理値でなければなりません"
 
@@ -7330,126 +7652,134 @@ msgstr "引用符が不正です"
 msgid "embedded nul(s) found in input"
 msgstr "入力文字列の中に nul が埋め込まれています"
 
-#: src/main/seq.cpp:65
+#: src/main/seq.cpp:67
 msgid "unequal factor lengths"
 msgstr "因子の長さが異なります"
 
-#: src/main/seq.cpp:169
+#: src/main/seq.cpp:171
 msgid "argument of length 0"
 msgstr "引数の長さが 0 です"
 
-#: src/main/seq.cpp:172
+#: src/main/seq.cpp:174
 #, fuzzy
 msgid "numerical expression has length > 1"
 msgstr "数値式は %d 個の要素を持っています: 最初の要素だけが使われました"
 
-#: src/main/seq.cpp:174
+#: src/main/seq.cpp:176
 #, fuzzy, c-format
 msgid "numerical expression has %d element: only the first used"
 msgid_plural "numerical expression has %d elements: only the first used"
 msgstr[0] "数値式は %d 個の要素を持っています: 最初の要素だけが使われました"
 
-#: src/main/seq.cpp:183
+#: src/main/seq.cpp:185
 msgid "NA/NaN argument"
 msgstr "引数が NA/NaN です"
 
-#: src/main/seq.cpp:376
+#: src/main/seq.cpp:378
 #, fuzzy, c-format
 msgid "invalid type (%s) for '%s' (must be a vector)"
 msgstr "'dimnames' の型 (%s) が不正です (ベクトルでなければなりません)"
 
-#: src/main/seq.cpp:380
+#: src/main/seq.cpp:382 src/main/seq.cpp:740
 #, c-format
 msgid "attempt to replicate an object of type '%s'"
 msgstr "型 '%s' のオブジェクトを複製しようとしました"
 
-#: src/main/seq.cpp:452
+#: src/main/seq.cpp:454
 msgid "attempt to replicate non-vector"
 msgstr "ベクトルでないものを複製しようとしました"
 
-#: src/main/seq.cpp:467
+#: src/main/seq.cpp:469
 msgid "cannot replicate NULL to a non-zero length"
 msgstr "NULL をゼロ長でないものに複製できません"
 
-#: src/main/seq.cpp:706 src/main/seq.cpp:722 src/main/seq.cpp:883
-#: src/main/seq.cpp:1127
+#: src/main/seq.cpp:692
+msgid "replication of pairlists is defunct"
+msgstr ""
+
+#: src/main/seq.cpp:710 src/main/seq.cpp:726 src/main/seq.cpp:887
+#: src/main/seq.cpp:1131
 #, c-format
 msgid "first element used of '%s' argument"
 msgstr "'%s' 引数の最初の要素だけが使われました"
 
-#: src/main/seq.cpp:861 src/main/seq.cpp:879 src/main/seq.cpp:898
-#: src/main/seq.cpp:905 src/main/seq.cpp:991 src/main/seq.cpp:992
-#: src/main/seq.cpp:1037 src/main/seq.cpp:1038 src/main/seq.cpp:1059
-#: src/main/seq.cpp:1060
+#: src/main/seq.cpp:731
+msgid "'x' is NULL so the result will be NULL"
+msgstr ""
+
+#: src/main/seq.cpp:865 src/main/seq.cpp:883 src/main/seq.cpp:902
+#: src/main/seq.cpp:909 src/main/seq.cpp:995 src/main/seq.cpp:996
+#: src/main/seq.cpp:1041 src/main/seq.cpp:1042 src/main/seq.cpp:1063
+#: src/main/seq.cpp:1064
 #, fuzzy, c-format
 msgid "'%s' must be a finite number"
 msgstr "'pos' は整数でなければなりません"
 
-#: src/main/seq.cpp:881
+#: src/main/seq.cpp:885
 msgid "'length.out' must be a non-negative number"
 msgstr "'length.out' は非負の数値でなくてはなりません"
 
-#: src/main/seq.cpp:895 src/main/seq.cpp:902 src/main/seq.cpp:910
+#: src/main/seq.cpp:899 src/main/seq.cpp:906 src/main/seq.cpp:914
 #, fuzzy, c-format
 msgid "'%s' must be of length 1"
 msgstr "'%s' は長さ1でなければなりません"
 
-#: src/main/seq.cpp:931
+#: src/main/seq.cpp:935
 #, fuzzy
 msgid "invalid '(to - from)/by'"
 msgstr "'seq' 中に不正な '(to - from)/by'"
 
-#: src/main/seq.cpp:943
+#: src/main/seq.cpp:947
 msgid "'by' argument is much too small"
 msgstr "'by' 引数があまりに小さすぎます"
 
-#: src/main/seq.cpp:945
+#: src/main/seq.cpp:949
 msgid "wrong sign in 'by' argument"
 msgstr "'by' 引数中に誤った符号"
 
-#: src/main/seq.cpp:1096
+#: src/main/seq.cpp:1100
 msgid "'length' is not a BUILTIN"
 msgstr ""
 
-#: src/main/seq.cpp:1133 src/main/seq.cpp:1140
+#: src/main/seq.cpp:1137 src/main/seq.cpp:1144
 msgid "argument must be coercible to non-negative integer"
 msgstr "引数は非負の整数に変換できなければなりません"
 
-#: src/main/seq.cpp:1160
+#: src/main/seq.cpp:1164
 #, fuzzy
 msgid "'lengths' is not of mode integer"
 msgstr "引数がモードを表す文字列ではありません"
 
-#: src/main/seq.cpp:1163
+#: src/main/seq.cpp:1167
 #, fuzzy
 msgid "'from' is not of mode integer"
 msgstr "引数がモードを表す文字列ではありません"
 
-#: src/main/seq.cpp:1166
+#: src/main/seq.cpp:1170
 #, fuzzy
 msgid "'by' is not of mode integer"
 msgstr "引数がモードを表す文字列ではありません"
 
-#: src/main/seq.cpp:1173
+#: src/main/seq.cpp:1177
 #, fuzzy
 msgid "'from' has length 0, but not 'lengths'"
 msgstr "グループ長が 0 ですが、データ長は > 0 です"
 
-#: src/main/seq.cpp:1175
+#: src/main/seq.cpp:1179
 #, fuzzy
 msgid "'by' has length 0, but not 'lengths'"
 msgstr "グループ長が 0 ですが、データ長は > 0 です"
 
-#: src/main/seq.cpp:1182
+#: src/main/seq.cpp:1186
 #, fuzzy
 msgid "'lengths' must be a vector of non-negative integers"
 msgstr "'gap' は，非負の整数でなくてはなりません"
 
-#: src/main/seq.cpp:1197
+#: src/main/seq.cpp:1201
 msgid "'from' contains NAs"
 msgstr ""
 
-#: src/main/seq.cpp:1202
+#: src/main/seq.cpp:1206
 msgid "'by' contains NAs"
 msgstr ""
 
@@ -7673,42 +8003,42 @@ msgstr "不適切な変数名です"
 msgid "lazy-load database '%s' is corrupt"
 msgstr ""
 
-#: src/main/sort.cpp:119
+#: src/main/sort.cpp:120
 msgid "only atomic vectors can be tested to be sorted"
 msgstr "並べ替えできるか検査できるのはアトミックベクトルだけです"
 
-#: src/main/sort.cpp:442 src/main/sort.cpp:801
+#: src/main/sort.cpp:443 src/main/sort.cpp:803
 msgid "only atomic vectors can be sorted"
 msgstr "並べ替えできるのはアトミックベクトルだけです"
 
-#: src/main/sort.cpp:444 src/main/sort.cpp:803 src/main/sort.cpp:1516
+#: src/main/sort.cpp:445 src/main/sort.cpp:805 src/main/sort.cpp:1521
 msgid "raw vectors cannot be sorted"
 msgstr "raw 型オブジェクトのベクトルはソートできません"
 
-#: src/main/sort.cpp:576 src/main/sort.cpp:593 src/main/sort.cpp:610
-#: src/main/sort.cpp:633
+#: src/main/sort.cpp:577 src/main/sort.cpp:594 src/main/sort.cpp:611
+#: src/main/sort.cpp:634
 msgid "'n >= 2' is required"
 msgstr ""
 
-#: src/main/sort.cpp:814
+#: src/main/sort.cpp:816
 msgid "NA or infinite index"
 msgstr "添え字が NA または無限大です"
 
-#: src/main/sort.cpp:817
+#: src/main/sort.cpp:819
 #, fuzzy, c-format
-msgid "index %lld outside bounds"
+msgid "'partial' index %lld outside bounds"
 msgstr "添え字 %lld は範囲外です"
 
-#: src/main/sort.cpp:822 src/main/sort.cpp:835
+#: src/main/sort.cpp:824 src/main/sort.cpp:837
 msgid "NA index"
 msgstr "添え字が NA です"
 
-#: src/main/sort.cpp:824 src/main/sort.cpp:837
-#, c-format
-msgid "index %d outside bounds"
+#: src/main/sort.cpp:826 src/main/sort.cpp:839
+#, fuzzy, c-format
+msgid "'partial' index %d outside bounds"
 msgstr "添え字 %d が範囲外です"
 
-#: src/main/sort.cpp:1544
+#: src/main/sort.cpp:1549
 msgid "invalid ties.method for rank() [should never happen]"
 msgstr "rank() 関数の ties.method が不正です [このようなことは決して起こらないはずです]"
 
@@ -7820,53 +8150,53 @@ msgstr "'*' 変換指定に対する引数は数値でなければなりませ�
 msgid "coercion has changed vector length to 0"
 msgstr "変換によりベクトルの長さが 0 になりました"
 
-#: src/main/sprintf.cpp:369 src/main/sprintf.cpp:383 src/main/sprintf.cpp:397
-#: src/main/sprintf.cpp:432
+#: src/main/sprintf.cpp:370 src/main/sprintf.cpp:384 src/main/sprintf.cpp:398
+#: src/main/sprintf.cpp:433
 #, c-format
 msgid "invalid format '%s'; %s"
 msgstr "不正な書式 '%s'; %s"
 
-#: src/main/sprintf.cpp:370
+#: src/main/sprintf.cpp:371
 #, c-format
 msgid "use format %d or %i for logical objects"
 msgstr "論理オブジェクトには %d か %i 書式を使ってください"
 
-#: src/main/sprintf.cpp:384
+#: src/main/sprintf.cpp:385
 #, c-format
 msgid "use format %d, %i, %o, %x or %X for integer objects"
 msgstr "整数オブジェクトには %d, %i, %o, %x または %X 書式を使ってください"
 
-#: src/main/sprintf.cpp:398
+#: src/main/sprintf.cpp:399
 #, c-format
 msgid "use format %f, %e, %g or %a for numeric objects"
 msgstr "数値オブジェクトには %f, %e, %g または %a 書式を使ってください"
 
-#: src/main/sprintf.cpp:433
+#: src/main/sprintf.cpp:434
 #, c-format
 msgid "use format %s for character objects"
 msgstr "文字オブジェクトには %s 書式を使ってください"
 
-#: src/main/sprintf.cpp:438
+#: src/main/sprintf.cpp:439
 #, c-format
 msgid "likely truncation of character string to %d characters"
 msgstr "文字列は %d 文字に丸められた可能性があります"
 
-#: src/main/sprintf.cpp:489
+#: src/main/sprintf.cpp:490
 #, c-format
 msgid "one argument not used by format '%s'"
 msgstr "'%s' の中で引数が範囲外です"
 
-#: src/main/sprintf.cpp:491
+#: src/main/sprintf.cpp:492
 #, c-format
 msgid "%d arguments not used by format '%s'"
 msgstr "'%2$s' の中で %1$d 引数が範囲外です"
 
-#: src/main/sprintf.cpp:494
+#: src/main/sprintf.cpp:495
 #, fuzzy
 msgid "one argument not used by format"
 msgstr "二番目の引数は因子でなければなりません"
 
-#: src/main/sprintf.cpp:496
+#: src/main/sprintf.cpp:497
 #, fuzzy, c-format
 msgid "%d arguments not used by format"
 msgstr "引数が行列ではありません"
@@ -7876,9 +8206,78 @@ msgstr "引数が行列ではありません"
 msgid "'expressions' parameter invalid, allowed %d...%d"
 msgstr " 'expression' パラメータが不正です: %d...%d が認められています "
 
-#: src/main/startup.cpp:91
+#: src/main/startup.cpp:92
 msgid "R_LibraryFileName: buffer too small"
 msgstr "R_LibraryFileName: バッファーが小さすぎます"
+
+#: src/main/startup.cpp:251
+#, fuzzy
+msgid "WARNING: invalid R_MAX_VSIZE ignored\n"
+msgstr "警告: '%s' 値が不正なので無視されました"
+
+#: src/main/startup.cpp:254
+#, fuzzy, c-format
+msgid "WARNING: R_MAX_VSIZE smaller than Min_Vsize = %lu is ignored\n"
+msgstr " 警告: R_MAX_MEM_SIZE 値が不正なので無視されました \n"
+
+#: src/main/startup.cpp:289
+#, fuzzy
+msgid "WARNING: invalid R_VSIZE ignored\n"
+msgstr "警告: '%s' 値が不正なので無視されました"
+
+#: src/main/startup.cpp:292
+#, fuzzy, c-format
+msgid "WARNING: R_VSIZE smaller than Min_Vsize = %lu is ignored\n"
+msgstr " 警告: R_MAX_MEM_SIZE 値が不正なので無視されました \n"
+
+#: src/main/startup.cpp:302
+#, fuzzy
+msgid "WARNING: invalid R_NSIZE ignored\n"
+msgstr "警告: '%s' 値が不正なので無視されました"
+
+#: src/main/startup.cpp:305
+#, fuzzy, c-format
+msgid "WARNING: R_NSIZE smaller than Min_Nsize = %lu is ignored\n"
+msgstr " 警告: R_MAX_MEM_SIZE 値が不正なので無視されました \n"
+
+#: src/main/startup.cpp:320
+msgid "WARNING: vsize ridiculously low, Megabytes assumed\n"
+msgstr ""
+
+#: src/main/startup.cpp:326
+#, c-format
+msgid "WARNING: too small v(ector heap)size '%lu' ignored, using default = %gM\n"
+msgstr ""
+
+#: src/main/startup.cpp:331
+#, c-format
+msgid "WARNING: too large v(ector heap)size '%lu' ignored, using default = %gM\n"
+msgstr ""
+
+#: src/main/startup.cpp:340
+#, c-format
+msgid "WARNING: too small language heap (n)size '%lu' ignored, using default = %ld\n"
+msgstr ""
+
+#: src/main/startup.cpp:345
+#, c-format
+msgid "WARNING: too large language heap (n)size '%lu' ignored, using default = %ld\n"
+msgstr ""
+
+#: src/main/startup.cpp:360
+#, c-format
+msgid "WARNING: too small maximum for v(ector heap)size '%lu' ignored, \t\t the current usage %gM is already larger\n"
+msgstr ""
+
+#: src/main/startup.cpp:368
+#, c-format
+msgid "WARNING: too small maximum for language heap (n)size '%lu' ignored, \t\t the current usage '%lu' is already larger\n"
+msgstr ""
+
+#: src/main/startup.cpp:378
+#, c-format
+msgid "At startup: value %d of Rp->%s taken as true"
+msgstr ""
 
 #: src/main/String.cpp:122
 #, fuzzy, c-format
@@ -7904,96 +8303,116 @@ msgstr "不適切なバージョン値です"
 msgid "bad names attribute"
 msgstr "不正な名前空間名です"
 
+#: src/main/subassign.cpp:318
+msgid "implicit list embedding of S4 objects is deprecated"
+msgstr ""
+
+#: src/main/subassign.cpp:321
+msgid "implicit list embedding of \"object\" is not possible"
+msgstr ""
+
 #: src/main/subassign.cpp:516
 #, c-format
 msgid "incompatible types (from %s to %s) in subassignment type fix"
 msgstr "部分代入における型のフィックスにおいて，両立しない型です (%s から %s)"
 
-#: src/main/subassign.cpp:692 src/main/subassign.cpp:1006
-#: src/main/subassign.cpp:1249
+#: src/main/subassign.cpp:598
+msgid "Internal error: unexpected type in DeleteListElements"
+msgstr ""
+
+#: src/main/subassign.cpp:706 src/main/subassign.cpp:1020
+#: src/main/subassign.cpp:1263
 msgid "NAs are not allowed in subscripted assignments"
 msgstr "添え字付きの付値で NA は許されていません"
 
-#: src/main/subassign.cpp:713 src/main/subassign.cpp:1016
-#: src/main/subassign.cpp:1241 src/main/subassign.cpp:1884
+#: src/main/subassign.cpp:727 src/main/subassign.cpp:1030
+#: src/main/subassign.cpp:1255 src/main/subassign.cpp:1910
 msgid "replacement has length zero"
 msgstr "replacement (置き換え) の長さが 0 です"
 
-#: src/main/subassign.cpp:715 src/main/subassign.cpp:1018
-#: src/main/subassign.cpp:1243
+#: src/main/subassign.cpp:729 src/main/subassign.cpp:1032
+#: src/main/subassign.cpp:1257
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr "置き換えるべき項目数が、置き換える数の倍数ではありませんでした"
 
-#: src/main/subassign.cpp:978
+#: src/main/subassign.cpp:909
+msgid "sub assignment (*[*] <- *) not done; __bug?__"
+msgstr ""
+
+#: src/main/subassign.cpp:992
 msgid "incorrect number of subscripts on matrix"
 msgstr "行列への添え字の数が正しくありません"
 
-#: src/main/subassign.cpp:1170
+#: src/main/subassign.cpp:1184
 #, c-format
 msgid "incompatible types (from %s to %s) in matrix subset assignment"
 msgstr "行列への部分代入で両立しない型です (%s から %s)"
 
-#: src/main/subassign.cpp:1211 src/main/subset.cpp:1051
+#: src/main/subassign.cpp:1225 src/main/subset.cpp:1051
 msgid "incorrect number of subscripts"
 msgstr "添え字の数が正しくありません"
 
-#: src/main/subassign.cpp:1404
+#: src/main/subassign.cpp:1418
 #, c-format
 msgid "incompatible types (from %s to %s) in array subset assignment"
 msgstr "配列の部分代入に両立しない型があります (%s から %s)"
 
-#: src/main/subassign.cpp:1417
+#: src/main/subassign.cpp:1431
 #, fuzzy, c-format
 msgid "internal error: index %d from length %d"
 msgstr " do_random2 で内部エラーが起きました "
 
-#: src/main/subassign.cpp:1430 src/main/subassign.cpp:1452
+#: src/main/subassign.cpp:1444 src/main/subassign.cpp:1466
 msgid "invalid subscript in list assign"
 msgstr "リストへの付値の添字が不正です"
 
-#: src/main/subassign.cpp:1445
+#: src/main/subassign.cpp:1459
 msgid "invalid number of subscripts to list assign"
 msgstr "リストへの付値の添字の個数が不正です"
 
-#: src/main/subassign.cpp:1546
+#: src/main/subassign.cpp:1560
 msgid "SubAssignArgs: invalid number of arguments"
 msgstr "SubAssignArgs: 引数の個数が違います"
 
-#: src/main/subassign.cpp:1723
+#: src/main/subassign.cpp:1737
 msgid "result is zero-length and so cannot be a language object"
 msgstr "結果は、ゼロ長であり、言語オブジェクトではありません"
 
-#: src/main/subassign.cpp:1835
+#: src/main/subassign.cpp:1775
+msgid "Internal error: unexpected type in DeleteOneVectorListItem"
+msgstr ""
+
+#: src/main/subassign.cpp:1861
 msgid "[[<- defined for objects of type \"S4\" only for subclasses of environment"
 msgstr "環境のサブクラスに対する [[<- は、\"S4\" 型のオブジェクトに対してのみ定義されています"
 
-#: src/main/subassign.cpp:1849
+#: src/main/subassign.cpp:1875
 #, fuzzy
 msgid "improper dimensions"
 msgstr "次元数が正しくありません"
 
-#: src/main/subassign.cpp:1855
+#: src/main/subassign.cpp:1881
 msgid "wrong args for environment subassignment"
 msgstr "subassignment 環境に対する誤った引数です"
 
-#: src/main/subassign.cpp:1886
+#: src/main/subassign.cpp:1912
 msgid "more elements supplied than there are to replace"
 msgstr "置き換えられる個数よりも多くの要素が与えられました"
 
-#: src/main/subassign.cpp:1918 src/main/subassign.cpp:2106
+#: src/main/subassign.cpp:1944 src/main/subassign.cpp:2138
 msgid "[[ ]] improper number of subscripts"
 msgstr "[[ ]] の添え字の個数が不適切です"
 
-#: src/main/subassign.cpp:2069
+#: src/main/subassign.cpp:2101
 #, c-format
 msgid "incompatible types (from %s to %s) in [[ assignment"
 msgstr "[[ による代入に両立しない型があります(%s から %s)"
 
-#: src/main/subassign.cpp:2200
+#: src/main/subassign.cpp:2232
 msgid "no method for assigning subsets of this S4 class"
 msgstr "この S4 クラスのサブセットを付値するメソッドはありません"
 
-#: src/main/subassign.cpp:2267
+#: src/main/subassign.cpp:2299
 msgid "Coercing LHS to a list"
 msgstr "左辺をリストに変換しました"
 
@@ -8012,7 +8431,7 @@ msgid "attempt to select more than one element in %s"
 msgstr "二つ以上の要素を選択しようとしました"
 
 #: src/main/subscript.cpp:220 src/main/subscript.cpp:358
-#: src/main/subscript.cpp:1038 src/main/subscript.cpp:1120
+#: src/main/subscript.cpp:1037 src/main/subscript.cpp:1119
 #: src/main/subset.cpp:1288
 #, c-format
 msgid "invalid subscript type '%s'"
@@ -8066,7 +8485,7 @@ msgstr "添え字の数が正しくありません"
 msgid "negative values are not allowed in a matrix subscript"
 msgstr "負の長さのベクトルは許されません"
 
-#: src/main/subscript.cpp:545 src/main/subscript.cpp:1029
+#: src/main/subscript.cpp:545 src/main/subscript.cpp:1028
 msgid "no 'dimnames' attribute for array"
 msgstr "配列に 'dimnames' 属性がありません"
 
@@ -8084,15 +8503,15 @@ msgstr ""
 msgid "(subscript) logical subscript too long"
 msgstr "(subscript) 論理値添え字が長すぎます"
 
-#: src/main/subscript.cpp:796 src/main/subscript.cpp:846
+#: src/main/subscript.cpp:795 src/main/subscript.cpp:845
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "負の添字と混在できるのは 0 という添字だけです"
 
-#: src/main/subscript.cpp:821
+#: src/main/subscript.cpp:820
 msgid "subscript too large for 32-bit R"
 msgstr "添え字が 32-bit R に対しては大きすぎます"
 
-#: src/main/subscript.cpp:1064
+#: src/main/subscript.cpp:1063
 msgid "subscripting on non-vector"
 msgstr "ベクトルでないものへの添え字操作"
 
@@ -8134,6 +8553,15 @@ msgstr "環境の subsetting に対する誤った引数です"
 #, fuzzy
 msgid "invalid subscript length"
 msgstr "'strip.white' の長さが不正です"
+
+#: src/main/subset.cpp:1348
+msgid "$ operator not defined for this S4 class"
+msgstr ""
+
+#: src/main/subset.cpp:1480
+#, fuzzy
+msgid "$ operator is invalid for atomic vectors"
+msgstr "'x' は NULL または raw vector からなるリストでなくてはなりません"
 
 #: src/main/summary.cpp:53
 #, c-format
@@ -8190,286 +8618,286 @@ msgstr "'%s' のクラス名が長すぎます"
 msgid "..n symbol name for a negative n is not permitted"
 msgstr ""
 
-#: src/main/sysutils.cpp:89 src/main/sysutils.cpp:103
+#: src/main/sysutils.cpp:89 src/main/sysutils.cpp:104
 #, c-format
 msgid "cannot determine file modification time of '%s'"
 msgstr "'%s' のファイル変更時刻を確定できません"
 
-#: src/main/sysutils.cpp:192
+#: src/main/sysutils.cpp:193
 msgid "encoding of a filename cannot be 'bytes'"
 msgstr "ファイル名のエンコーディングは 'bytes' は許されません"
 
-#: src/main/sysutils.cpp:195 src/main/sysutils.cpp:1715
-#: src/main/sysutils.cpp:1730 src/main/sysutils.cpp:1944
+#: src/main/sysutils.cpp:196 src/main/sysutils.cpp:1720
+#: src/main/sysutils.cpp:1735 src/main/sysutils.cpp:1949
 #, c-format
 msgid "unsupported conversion from '%s' in codepage %d"
 msgstr "'%s' からのサポートされていない変換がコードページ %d にあります"
 
-#: src/main/sysutils.cpp:204
+#: src/main/sysutils.cpp:205
 msgid "file name conversion problem -- name too long?"
 msgstr "ファイル名変換に問題があります -- 名前が長すぎませんか?"
 
-#: src/main/sysutils.cpp:205
+#: src/main/sysutils.cpp:206
 msgid "file name conversion problem"
 msgstr "ファイル名変換に問題があります"
 
-#: src/main/sysutils.cpp:279
+#: src/main/sysutils.cpp:280
 msgid "invalid filename pattern"
 msgstr "ファイル名のパターンが不正です"
 
-#: src/main/sysutils.cpp:283
+#: src/main/sysutils.cpp:284
 msgid "invalid file extension"
 msgstr "ファイルの拡張子が不正です"
 
-#: src/main/sysutils.cpp:285
+#: src/main/sysutils.cpp:286
 msgid "no 'pattern'"
 msgstr "'pattern' がありません"
 
-#: src/main/sysutils.cpp:287
+#: src/main/sysutils.cpp:288
 msgid "no 'tempdir'"
 msgstr "'tempdir' がありません"
 
-#: src/main/sysutils.cpp:289
+#: src/main/sysutils.cpp:290
 msgid "no 'fileext'"
 msgstr "'fileext' がありません"
 
-#: src/main/sysutils.cpp:359 src/unix/sys-unix.cpp:699
+#: src/main/sysutils.cpp:360 src/unix/sys-unix.cpp:699
 #, c-format
 msgid "system call failed: %s"
 msgstr "システムコールが失敗しました: %s"
 
-#: src/main/sysutils.cpp:387 src/main/sysutils.cpp:390
-#: src/main/sysutils.cpp:484 src/main/sysutils.cpp:487
-#: src/main/sysutils.cpp:522
+#: src/main/sysutils.cpp:388 src/main/sysutils.cpp:391
+#: src/main/sysutils.cpp:485 src/main/sysutils.cpp:488
+#: src/main/sysutils.cpp:523
 msgid "wrong type for argument"
 msgstr "引数の型が不正です"
 
-#: src/main/sysutils.cpp:510
+#: src/main/sysutils.cpp:511
 msgid "'Sys.setenv' is not available on this system"
 msgstr "'Sys.setenv' はこのシステムでは使えません"
 
-#: src/main/sysutils.cpp:554
+#: src/main/sysutils.cpp:555
 msgid "this system cannot unset environment variables: setting to \"\""
 msgstr "このシステムは、\"\" とセットすることで、環境変数をセットしない状態にすることができません"
 
-#: src/main/sysutils.cpp:565
+#: src/main/sysutils.cpp:566
 msgid "'Sys.unsetenv' is not available on this system"
 msgstr "'Sys.unsetenv' はこのシステムでは使えません"
 
-#: src/main/sysutils.cpp:682
+#: src/main/sysutils.cpp:684
 msgid "'x' must be a character vector"
 msgstr "'x' は文字ベクトルでなくてはなりません"
 
-#: src/main/sysutils.cpp:697
+#: src/main/sysutils.cpp:699
 #, fuzzy
 msgid "'x' must be a character vector or a list of NULL or raw vectors"
 msgstr "'x' は NULL または raw vector からなるリストでなくてはなりません"
 
-#: src/main/sysutils.cpp:718 src/main/sysutils.cpp:743
-#: src/main/sysutils.cpp:764
+#: src/main/sysutils.cpp:720 src/main/sysutils.cpp:745
+#: src/main/sysutils.cpp:766
 #, c-format
 msgid "unsupported conversion from '%s' to '%s' in codepage %d"
 msgstr "'%s' から '%s' へのサポートされていない変換がコードページ %d 中にあります"
 
-#: src/main/sysutils.cpp:947
+#: src/main/sysutils.cpp:949
 #, fuzzy, c-format
 msgid "'%s' must be called on a CHARSXP, but got '%s'"
 msgstr "'%s' は CHARSXP 上で呼び出されなければなりません"
 
-#: src/main/sysutils.cpp:1683 src/main/sysutils.cpp:1914
-#: src/main/sysutils.cpp:2052
+#: src/main/sysutils.cpp:1688 src/main/sysutils.cpp:1919
+#: src/main/sysutils.cpp:2057
 msgid "translating strings with \"bytes\" encoding is not allowed"
 msgstr "エンコーディングが \"bytes\" の文字列の翻訳は許されません"
 
-#: src/main/sysutils.cpp:1696 src/main/sysutils.cpp:1926
+#: src/main/sysutils.cpp:1701 src/main/sysutils.cpp:1931
 msgid "internal error: no translation needed"
 msgstr "internal error: no translation needed"
 
-#: src/main/sysutils.cpp:1806 src/main/sysutils.cpp:1811
+#: src/main/sysutils.cpp:1811 src/main/sysutils.cpp:1816
 #, fuzzy, c-format
 msgid "unable to translate '%s' to native encoding"
 msgstr "クリップボードに書き込めません"
 
-#: src/main/sysutils.cpp:1991 src/main/sysutils.cpp:1996
+#: src/main/sysutils.cpp:1996 src/main/sysutils.cpp:2001
 #, fuzzy, c-format
 msgid "unable to translate '%s' to UTF-8"
 msgstr "'%s' を解決することができません"
 
-#: src/main/sysutils.cpp:2133
+#: src/main/sysutils.cpp:2138
 #, c-format
 msgid "unsupported conversion to '%s' from codepage %d"
 msgstr "'%s' へのサポートされていない変換がコードページ %d にあります"
 
-#: src/main/sysutils.cpp:2182 src/main/sysutils.cpp:2187
+#: src/main/sysutils.cpp:2187 src/main/sysutils.cpp:2192
 #, fuzzy, c-format
 msgid "unable to translate '%s' to a wide string"
 msgstr "クリップボードに書き込めません"
 
-#: src/main/sysutils.cpp:2380
+#: src/main/sysutils.cpp:2385
 #, fuzzy
 msgid "converted string too long for buffer"
 msgstr "'destination' が長すぎます"
 
-#: src/main/sysutils.cpp:2561
+#: src/main/sysutils.cpp:2566
 #, c-format
 msgid "invalid Unicode point %u"
 msgstr "不正なユニコードポイント %u"
 
-#: src/main/sysutils.cpp:2651
+#: src/main/sysutils.cpp:2656
 #, fuzzy
 msgid "'R_USER' not set"
 msgstr "R_HOME が設定されていません"
 
-#: src/main/sysutils.cpp:2671 src/main/sysutils.cpp:2699
+#: src/main/sysutils.cpp:2676 src/main/sysutils.cpp:2704
 msgid "cannot allocate 'R_TempDir'"
 msgstr "'R_TempDir' を割り当てることができません"
 
-#: src/main/sysutils.cpp:2693
+#: src/main/sysutils.cpp:2698
 msgid "'R_TempDir' contains space"
 msgstr ""
 
-#: src/main/sysutils.cpp:2705
+#: src/main/sysutils.cpp:2710
 msgid "cannot create 'R_TempDir'"
 msgstr "'R_TempDir' を作成することができません"
 
-#: src/main/sysutils.cpp:2711 src/main/sysutils.cpp:2722
-#: src/main/sysutils.cpp:2727
+#: src/main/sysutils.cpp:2716 src/main/sysutils.cpp:2727
+#: src/main/sysutils.cpp:2732
 msgid "unable to set R_SESSION_TMPDIR"
 msgstr "R_SESSION_TMPDIR を設定することが出来ません"
 
-#: src/main/sysutils.cpp:2777
+#: src/main/sysutils.cpp:2782
 msgid "temporary name too long"
 msgstr "一時名が長すぎます"
 
-#: src/main/sysutils.cpp:2781
+#: src/main/sysutils.cpp:2786
 msgid "allocation failed in R_tmpnam2"
 msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
-#: src/main/sysutils.cpp:2787
+#: src/main/sysutils.cpp:2792
 msgid "cannot find unused tempfile name"
 msgstr "未使用の一時ファイル名を探すことができません"
 
-#: src/main/sysutils.cpp:2964
+#: src/main/sysutils.cpp:2970
 msgid "'dirmark = TRUE' is not supported on this platform"
 msgstr "'dirmark = TRUE' はこのプラットフォームではサポートされていません"
 
-#: src/main/unique.cpp:466 src/main/unique.cpp:469
+#: src/main/unique.cpp:467 src/main/unique.cpp:470
 #, fuzzy, c-format
 msgid "length %lld is too large for hashing"
 msgstr "長さ %lld は大きすぎてハッシュできません"
 
-#: src/main/unique.cpp:566 src/main/unique.cpp:578
+#: src/main/unique.cpp:567 src/main/unique.cpp:579
 #, fuzzy
 msgid "hash table is full"
 msgstr "sink のスタックが溢れました"
 
-#: src/main/unique.cpp:674 src/main/unique.cpp:859 src/main/unique.cpp:1014
-#: src/main/unique.cpp:1044 src/main/unique.cpp:1083
+#: src/main/unique.cpp:675 src/main/unique.cpp:860 src/main/unique.cpp:1017
+#: src/main/unique.cpp:1047 src/main/unique.cpp:1086
 msgid "'duplicated' applies only to vectors"
 msgstr "'duplicated' はベクトルに対してだけ適用できます"
 
-#: src/main/unique.cpp:707
+#: src/main/unique.cpp:708
 msgid "sorted_real_count_NANs got unsorted vector: this should not happen"
 msgstr ""
 
-#: src/main/unique.cpp:814 src/main/unique.cpp:820
+#: src/main/unique.cpp:815 src/main/unique.cpp:821
 #, fuzzy
 msgid "sorted_Duplicated got unsorted vector: this should not happen"
 msgstr "rank() 関数の ties.method が不正です [このようなことは決して起こらないはずです]"
 
-#: src/main/unique.cpp:839 src/main/unique.cpp:999
+#: src/main/unique.cpp:840 src/main/unique.cpp:1001
 #, c-format
 msgid "sorted_Duplicated got unsupported type %d: this should not happen"
 msgstr ""
 
-#: src/main/unique.cpp:959 src/main/unique.cpp:970
+#: src/main/unique.cpp:961 src/main/unique.cpp:972
 msgid "sorted_any_duplicated got unsorted vector: this should not happen"
 msgstr ""
 
-#: src/main/unique.cpp:1088
+#: src/main/unique.cpp:1091
 msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "any_duplicated3(., <0-length incomp>)"
 
-#: src/main/unique.cpp:1134
+#: src/main/unique.cpp:1137
 msgid "'fromLast' must be length 1"
 msgstr "'fromLast' は長さ 1 でなければなりません"
 
-#: src/main/unique.cpp:1145
+#: src/main/unique.cpp:1148
 #, c-format
 msgid "%s() applies only to vectors"
 msgstr "%s() はベクトルにのみ使用できます"
 
-#: src/main/unique.cpp:1153
+#: src/main/unique.cpp:1156
 msgid "'nmax' must be positive"
 msgstr "'nmax' は正でなければなりません"
 
-#: src/main/unique.cpp:1539
+#: src/main/unique.cpp:1542
 msgid "'match' requires vector arguments"
 msgstr "'match' はベクトル引数を必要とします"
 
-#: src/main/unique.cpp:1580 src/main/unique.cpp:1722
+#: src/main/unique.cpp:1583 src/main/unique.cpp:1725
 msgid "argument is not of mode character"
 msgstr "引数がモードを表す文字列ではありません"
 
-#: src/main/unique.cpp:1844
+#: src/main/unique.cpp:1847
 msgid "... used in a situation where it does not exist"
 msgstr "... がそれが存在しない状況で使われました"
 
-#: src/main/unique.cpp:1850
+#: src/main/unique.cpp:1853
 msgid "... is not a pairlist"
 msgstr "... はペアリストではありません"
 
-#: src/main/unique.cpp:2037
+#: src/main/unique.cpp:2040
 #, fuzzy
 msgid "non-numeric matrix in rowsum(): this should not happen"
 msgstr " rowsum() 関数中に非数値行列：これはあり得ません "
 
-#: src/main/unique.cpp:2039 src/main/unique.cpp:2113
+#: src/main/unique.cpp:2042 src/main/unique.cpp:2116
 #, fuzzy
 msgid "row names are not character"
 msgstr "'names' は文字ベクトルではありません"
 
-#: src/main/unique.cpp:2074
+#: src/main/unique.cpp:2077
 msgid "non-numeric data frame in rowsum"
 msgstr "rowsum の引数が数値データフレームではありません"
 
-#: src/main/unique.cpp:2109
+#: src/main/unique.cpp:2112
 msgid "this cannot happen"
 msgstr "このようなことは起き得ないはずです"
 
-#: src/main/unique.cpp:2180
+#: src/main/unique.cpp:2183
 msgid "'names' must be a character vector"
 msgstr "'names' は文字ベクトルでなければなりません"
 
-#: src/main/unique.cpp:2258
+#: src/main/unique.cpp:2261
 #, fuzzy
 msgid "C function 'csduplicated' not called on a STRSXP"
 msgstr " csduplicated は STRSXP に対して呼び出されていません "
 
-#: src/main/unique.cpp:2288
+#: src/main/unique.cpp:2291
 msgid "This algorithm is for size <= n/2"
 msgstr ""
 
-#: src/main/unique.cpp:2390 src/main/unique.cpp:2408 src/main/unique.cpp:2479
+#: src/main/unique.cpp:2393 src/main/unique.cpp:2411 src/main/unique.cpp:2482
 #, fuzzy
 msgid "bad hash table type"
 msgstr "不適切な変数名です"
 
-#: src/main/unique.cpp:2419
+#: src/main/unique.cpp:2422
 #, fuzzy
 msgid "invalid hash table meta data"
 msgstr "数式スタイルが不正です"
 
-#: src/main/unique.cpp:2426
+#: src/main/unique.cpp:2429
 msgid "hash size would exceed limit"
 msgstr ""
 
-#: src/main/unique.cpp:2644
+#: src/main/unique.cpp:2647
 #, fuzzy
 msgid "not a proper hash table object"
 msgstr "適正な raw ベクトルではありません"
 
-#: src/main/unique.cpp:2647
+#: src/main/unique.cpp:2650
 #, fuzzy
 msgid "hash table object is corrupted"
 msgstr "これらの型の比較は未実装です"
@@ -8478,217 +8906,227 @@ msgstr "これらの型の比較は未実装です"
 msgid "object is not a matrix"
 msgstr "オブジェクトが行列ではありません"
 
-#: src/main/util.cpp:324 src/main/util.cpp:336 src/main/util.cpp:347
-#: src/main/util.cpp:376
+#: src/main/util.cpp:135
+#, fuzzy
+msgid "invalid type passed to internal function\n"
+msgstr "不正なオブジェクトです: プリミティブな関数でなくてはなりません"
+
+#: src/main/util.cpp:327 src/main/util.cpp:339 src/main/util.cpp:350
+#: src/main/util.cpp:379
 #, c-format
 msgid "type %d is unimplemented in '%s'"
 msgstr "型 %d は '%s' では未実装です"
 
-#: src/main/util.cpp:385
+#: src/main/util.cpp:388
 #, c-format
 msgid "unimplemented type '%s' in '%s'\n"
 msgstr "型 '%s'（'%s' における）は未実装です \n"
 
-#: src/main/util.cpp:387
+#: src/main/util.cpp:390
 #, c-format
 msgid "unimplemented type (%d) in '%s'\n"
 msgstr "型 %d（'%s' における）は未実装です \n"
 
-#: src/main/util.cpp:509
+#: src/main/util.cpp:515
 msgid "invalid tag in name extraction"
 msgstr "名前の抽出においてタグが不正です"
 
-#: src/main/util.cpp:526
+#: src/main/util.cpp:532
 #, c-format
 msgid "%d argument passed to '%s' which requires %d"
 msgid_plural "%d arguments passed to '%s' which requires %d"
 msgstr[0] "%d 個の引数が '%s' に渡されましたが、%d が必要とされています"
 
-#: src/main/util.cpp:540
+#: src/main/util.cpp:546
 #, c-format
 msgid "supplied argument name '%s' does not match '%s'"
 msgstr "使われた引数名 '%s' が '%s' と一致しません"
 
-#: src/main/util.cpp:550
+#: src/main/util.cpp:556
 #, c-format
 msgid "'nthcdr' list shorter than %d"
 msgstr "'nthcdr' リストが %d より短いです"
 
-#: src/main/util.cpp:555
+#: src/main/util.cpp:561
 msgid "'nthcdr' needs a list to CDR down"
 msgstr "'nthcdr' は CDR down へのリストを必要とします"
 
-#: src/main/util.cpp:715
+#: src/main/util.cpp:721
 msgid "'all.x' must be TRUE or FALSE"
 msgstr "'all.x' は TRUE または FALSE でなければなりません"
 
-#: src/main/util.cpp:718
+#: src/main/util.cpp:724
 msgid "'all.y' must be TRUE or FALSE"
 msgstr "'all.y' は TRUEまたは FALSE でなければなりません"
 
-#: src/main/util.cpp:748
+#: src/main/util.cpp:754
 msgid "number of rows in the result exceeds maximum vector length"
 msgstr "結果に含まれる行数がベクタの最大長を超えました"
 
-#: src/main/util.cpp:846
+#: src/main/util.cpp:852
 msgid "missing value is invalid"
 msgstr "欠損値は不正です"
 
-#: src/main/util.cpp:855 src/main/util.cpp:862
+#: src/main/util.cpp:861 src/main/util.cpp:868
 msgid "cannot change working directory"
 msgstr "作業ディレクトリを変更できません"
 
-#: src/main/util.cpp:881 src/main/util.cpp:911 src/main/util.cpp:959
-#: src/main/util.cpp:1021 src/main/util.cpp:1198 src/main/util.cpp:1275
-#: src/main/util.cpp:1299
+#: src/main/util.cpp:887 src/main/util.cpp:917 src/main/util.cpp:965
+#: src/main/util.cpp:1027 src/main/util.cpp:1204 src/main/util.cpp:1282
+#: src/main/util.cpp:1306
 msgid "a character vector argument expected"
 msgstr "文字ベクトルの引数が期待されています"
 
-#: src/main/util.cpp:1107
+#: src/main/util.cpp:1113
 #, fuzzy
 msgid "fatal translation error"
 msgstr "bessel_i で割り当てエラーがありました"
 
-#: src/main/util.cpp:1112
+#: src/main/util.cpp:1118
 msgid "this platform does not have realpath so the results may not be canonical"
 msgstr ""
 
-#: src/main/util.cpp:1177
+#: src/main/util.cpp:1183
 #, fuzzy
 msgid "system timezone name is unknown: set environment variable TZ"
 msgstr "このシステムは、\"\" とセットすることで、環境変数をセットしない状態にすることができません"
 
-#: src/main/util.cpp:1212
+#: src/main/util.cpp:1218
 msgid "only the first character of 'quote' will be used"
 msgstr "'quote' の最初の文字だけが使われます"
 
-#: src/main/util.cpp:1302
+#: src/main/util.cpp:1309
 msgid "a character vector 'value' expected"
 msgstr "文字ベクトルの 'value' が期待されています"
 
-#: src/main/util.cpp:1305
+#: src/main/util.cpp:1312
 msgid "'value' must be of positive length"
 msgstr "'value' は正の長さを持たないといけません"
 
-#: src/main/util.cpp:1461 src/main/util.cpp:1474
+#: src/main/util.cpp:1468 src/main/util.cpp:1481
 #, c-format
 msgid "invalid input '%s' in 'utf8towcs'"
 msgstr "'utf8towcs' 中に不正な入力 '%s' があります"
 
-#: src/main/util.cpp:1497 src/main/util.cpp:1507
+#: src/main/util.cpp:1504 src/main/util.cpp:1514
 #, fuzzy, c-format
 msgid "invalid input '%s' in 'utf8towcs32'"
 msgstr "'utf8towcs' 中に不正な入力 '%s' があります"
 
-#: src/main/util.cpp:1568
+#: src/main/util.cpp:1575
 #, fuzzy, c-format
 msgid "unpaired surrogate Unicode point %x"
 msgstr "不正なユニコードポイント %u"
 
-#: src/main/util.cpp:1630
+#: src/main/util.cpp:1639
 #, c-format
 msgid "invalid multibyte string at '%s'"
 msgstr "'%s' に不正なマルチバイト文字があります"
 
-#: src/main/util.cpp:1826
+#: src/main/util.cpp:1835
 msgid "error message truncated to 255 chars"
 msgstr "エラーメッセージは 255 文字に切りつめられました"
 
-#: src/main/util.cpp:1847
+#: src/main/util.cpp:1856
 msgid "warning message truncated to 255 chars"
 msgstr "警告メッセージは 255 文字に切り詰められました"
 
-#: src/main/util.cpp:2022
+#: src/main/util.cpp:2031
 #, fuzzy
 msgid "Conversion failed"
 msgstr "不適切なバージョン値です"
 
-#: src/main/util.cpp:2169
+#: src/main/util.cpp:2178
 #, c-format
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr "\"%s\" を数値に変換する際に精度が損なわれました"
 
-#: src/main/util.cpp:2521
+#: src/main/util.cpp:2331
+#, fuzzy
+msgid "argument is not a character vector"
+msgstr "'names' は文字ベクトルではありません"
+
+#: src/main/util.cpp:2530
 msgid "all arguments must be named"
 msgstr "全ての引数は名前が付けられていなければなりません"
 
-#: src/main/util.cpp:2543 src/main/util.cpp:2641
+#: src/main/util.cpp:2552 src/main/util.cpp:2650
 #, fuzzy
 msgid "cannot use ICU on this system"
 msgstr "このシステムではタイムゾーンは設定できません"
 
-#: src/main/util.cpp:2551
+#: src/main/util.cpp:2560
 #, c-format
 msgid "failed to set ICU locale %s (%d)"
 msgstr ""
 
-#: src/main/util.cpp:2555 src/main/util.cpp:2652
+#: src/main/util.cpp:2564 src/main/util.cpp:2661
 #, fuzzy, c-format
 msgid "failed to open ICU collator (%d)"
 msgstr "クリップボードを開くことができません"
 
-#: src/main/util.cpp:2577
+#: src/main/util.cpp:2586
 #, fuzzy
 msgid "failed to set ICU collator attribute"
 msgstr "不正な 'class' 属性を設定しようとしました"
 
-#: src/main/util.cpp:2648
+#: src/main/util.cpp:2657
 #, c-format
 msgid "failed to set ICU locale (%d)"
 msgstr ""
 
-#: src/main/util.cpp:2670
+#: src/main/util.cpp:2679
 #, fuzzy
 msgid "could not collate using ICU"
 msgstr "'name' のための領域を割り当てられませんでした"
 
-#: src/main/util.cpp:2678
+#: src/main/util.cpp:2687
 msgid "ICU is not supported on this build"
 msgstr "このビルドでは ICU はサポートされていません"
 
-#: src/main/util.cpp:2727
+#: src/main/util.cpp:2736
 #, fuzzy
 msgid "input must be a character string"
 msgstr " 'title' は文字列でなければなりません "
 
-#: src/main/util.cpp:2744
+#: src/main/util.cpp:2753
 msgid "'breaks' is not sorted"
 msgstr "'breaks' がソートされていません"
 
-#: src/main/util.cpp:2778 src/main/util.cpp:2842
+#: src/main/util.cpp:2787 src/main/util.cpp:2851
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "long vector '%s' はサポートされていません"
 
-#: src/main/util.cpp:2798 src/main/util.cpp:2839
+#: src/main/util.cpp:2807 src/main/util.cpp:2848
 #, fuzzy
 msgid "invalid input"
 msgstr "入力のタイプが不正です"
 
-#: src/main/util.cpp:2904
+#: src/main/util.cpp:2917
 msgid "'eps.correct' must be 0, 1, or 2"
 msgstr "'eps.correct' は 0, 1, または 2 でなければなりません"
 
-#: src/main/util.cpp:2944
+#: src/main/util.cpp:2957
 msgid "'x' must be a vector"
 msgstr "'x' はベクトルでなくてはなりません"
 
-#: src/main/util.cpp:3048
+#: src/main/util.cpp:3060
 #, fuzzy
 msgid "width cannot be zero"
 msgstr " .C(..): 幅(Width)は0ではいけません "
 
-#: src/main/util.cpp:3063
+#: src/main/util.cpp:3075
 #, fuzzy
 msgid "'type' must be \"integer\" for  \"d\"-format"
 msgstr " .C(..): 'type' は \"d\"-書式においては \"integer\" でなくてはなりません "
 
-#: src/main/util.cpp:3175
+#: src/main/util.cpp:3188
 #, fuzzy
 msgid "unsupported type "
 msgstr "サポートされていないタイプです"
 
-#: src/main/util.cpp:3187
+#: src/main/util.cpp:3200
 #, fuzzy
 msgid "allocation error in Rstrdup"
 msgstr "'realpr' 中でメモリ確保に失敗しました"
@@ -8703,7 +9141,7 @@ msgstr "サイズ %0.1f Gb のベクトルを割り当てることができま�
 msgid "cannot allocate vector of size %0.f %s"
 msgstr "サイズ %0.f Kb のベクトルを割り当てることができません"
 
-#: src/main/version.cpp:52
+#: src/main/version.cpp:54
 msgid ""
 "R is free software and comes with ABSOLUTELY NO WARRANTY.\n"
 "You are welcome to redistribute it under certain conditions.\n"
@@ -8715,7 +9153,7 @@ msgstr ""
 "配布条件の詳細に関しては、'license()' あるいは 'licence()' と入力してください。 \n"
 "\n"
 
-#: src/main/version.cpp:55
+#: src/main/version.cpp:57
 msgid ""
 "R is a collaborative project with many contributors.\n"
 "Type 'contributors()' for more information and\n"
@@ -8728,7 +9166,7 @@ msgstr ""
 "'citation()' と入力してください。 \n"
 "\n"
 
-#: src/main/version.cpp:58
+#: src/main/version.cpp:60
 msgid ""
 "Type 'demo()' for some demos, 'help()' for on-line help, or\n"
 "'help.start()' for an HTML browser interface to help.\n"
@@ -8741,24 +9179,24 @@ msgstr ""
 "'q()' と入力すれば R を終了します。 \n"
 "\n"
 
-#: src/main/xspline.cpp:59
+#: src/main/xspline.cpp:60
 #, c-format
 msgid "add_point - reached MAXNUMPTS (%d)"
 msgstr "add_point - MAXNUMPTS (%d) に到達しました"
 
-#: src/main/xspline.cpp:73
+#: src/main/xspline.cpp:74
 msgid "insufficient memory to allocate point array"
 msgstr "点配列に対して十分なメモリを割り当てられません"
 
-#: src/main/xspline.cpp:458
+#: src/main/xspline.cpp:461
 msgid "there must be at least two control points"
 msgstr "少なくとも二つの制御点が必要です"
 
-#: src/main/xspline.cpp:460
+#: src/main/xspline.cpp:463
 msgid "there must be at least four control points"
 msgstr "少なくとも四つの制御点が必要です"
 
-#: src/main/xspline.cpp:518
+#: src/main/xspline.cpp:522
 msgid "There must be at least three control points"
 msgstr "少なくとも三つの制御点が必要です"
 
@@ -9763,7 +10201,7 @@ msgstr ""
 msgid "pnbinom_mu() -> bratio() gave error code %d"
 msgstr "pnbinom_mu() -> bratio() がエラーコード %d を返しました"
 
-#: src/nmath/pnchisq.cpp:303
+#: src/nmath/pnchisq.cpp:305
 #, fuzzy, c-format
 msgid "pnchisq(x=%g, f=%g, theta=%g, ..): not converged in %d iter."
 msgstr "pnchisq(x=%g, ..): %d 回の繰り返し計算で収束しませんでした"
@@ -9776,6 +10214,11 @@ msgstr "deriv = %d > %d (= n_max) \n"
 #: src/nmath/qgamma.cpp:153
 #, c-format
 msgid "value of shape (%g) is extremely small: results may be unreliable"
+msgstr ""
+
+#: src/nmath/rhyper.cpp:200
+#, c-format
+msgid "w = %g <= 0: Underflow in rhyper()  SHOULD NOT HAPPEN!"
 msgstr ""
 
 #: src/nmath/rmultinom.cpp:78
@@ -9868,11 +10311,6 @@ msgstr "保存すべき履歴がありません"
 msgid "invalid timestamp"
 msgstr "タイムスタンプが不正です"
 
-#: src/unix/system.cpp:131
-#, fuzzy
-msgid "WARNING: invalid R_HISTSIZE ignored;"
-msgstr "警告: '%s' 値が不正なので無視されました"
-
 #: src/unix/system.cpp:204
 #, fuzzy
 msgid "R is already initialized\n"
@@ -9960,11 +10398,11 @@ msgstr "以下の命令の実行中にエラーが起きました: '%s'"
 msgid "Sys.info() is not implemented on this system"
 msgstr "Sys.info() はこのシステムでは実装されていません"
 
-#: src/unix/X11.cpp:58
+#: src/unix/X11.cpp:57
 msgid "X11 module is not available under this GUI"
 msgstr "この GUI のもとでは、X11 モジュールは利用できません"
 
-#: src/unix/X11.cpp:64
+#: src/unix/X11.cpp:63
 msgid "X11 routines cannot be accessed in module"
 msgstr "X11 ルーチンはこのモジュールではアクセスできません"
 
@@ -9973,10 +10411,14 @@ msgstr "X11 ルーチンはこのモジュールではアクセスできませ�
 msgid "X11 module cannot be loaded"
 msgstr "X11 モジュールをロードできません"
 
-#: src/unix/X11.cpp:148 src/unix/X11.cpp:154 src/unix/X11.cpp:160
-#: src/unix/X11.cpp:166
+#: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161
+#: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 が利用できません"
+
+#, fuzzy
+#~ msgid "couldn't allocate node stack"
+#~ msgstr "pushｂack のための領域を割り当てられませんでした"
 
 #~ msgid "not a BUILTIN function"
 #~ msgstr "BUILTIN 関数ではありません"
@@ -10266,10 +10708,6 @@ msgstr "X11 が利用できません"
 
 #~ msgid "invalid input in 'Rmbstowcs'"
 #~ msgstr " 'Rmbstowcs' への入力が不正です "
-
-#, c-format
-#~ msgid "WARNING: R_MAX_MEM_SIZE value is invalid: ignored\n"
-#~ msgstr " 警告: R_MAX_MEM_SIZE 値が不正なので無視されました \n"
 
 #~ msgid "WARNING: no max-mem-size given\n"
 #~ msgstr " 警告: max-mem-size が与えられていません \n"
@@ -10647,9 +11085,6 @@ msgstr "X11 が利用できません"
 
 #~ msgid "lapack routines cannot be accessed in module"
 #~ msgstr " LAPACKルーチンがモジュールにアクセスすることができません "
-
-#~ msgid "lapack routines cannot be loaded"
-#~ msgstr " LAPACK ルーチンはロードできませんでした "
 
 #~ msgid "'UseMethod' called from outside a closure"
 #~ msgstr " クロージャの外部から 'UseMethod' が呼び出されました "

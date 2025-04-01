@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-03 17:44+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2024-05-23 03:05+0000\n"
 "Last-Translator: Nichole Haines <NicholeHaines54@gmail.com>\n"
 "Language-Team: none\n"
@@ -71,37 +71,37 @@ msgstr "se requieren al menos dos puntos para dibujar la flecha"
 msgid "non-finite control point in Xspline"
 msgstr "punto de control no finito en Xspline"
 
-#: grid.cpp:3430
+#: grid.cpp:3431
 msgid "non-finite x or y in graphics path"
 msgstr "X o Y no finitos en trayecto"
 
-#: grid.cpp:3479
+#: grid.cpp:3480
 msgid "Empty raster"
 msgstr "ráster vacío"
 
-#: grid.cpp:4021
+#: grid.cpp:4022
 msgid "use of negative pch with symbol font is invalid"
 msgstr ""
 
-#: grid.cpp:4027 grid.cpp:4083
+#: grid.cpp:4028 grid.cpp:4084
 msgid "Coordinates for text pch not yet supported"
 msgstr "Coordenadas para 'pch' de texto no se soporta"
 
-#: grid.cpp:4088
+#: grid.cpp:4089
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr "valor pch '%d' no es válido para esta configuración local"
 
-#: grid.cpp:4909
+#: grid.cpp:4910
 #, c-format
 msgid "unimplemented pch value '%d'"
 msgstr "valor pch '%d' no implementado"
 
-#: grid.cpp:5067
+#: grid.cpp:5068
 msgid "invalid plotting symbol"
 msgstr "símbolo de gráfico no válido"
 
-#: grid.cpp:5184
+#: grid.cpp:5186
 msgid "unable to clip to rotated rectangle"
 msgstr "No se puede recortar a un rectángulo girado"
 
@@ -193,10 +193,10 @@ msgstr "No se puede calcular la anchura/altura del texto (se usa cero)"
 msgid "grid grob object is empty"
 msgstr ""
 
-#: viewport.cpp:58
+#: viewport.cpp:59
 msgid "Mask is not logical value ('none' or 'inherit')"
 msgstr "Máscara no es un valor lógico ('none' o 'inherit')"
 
-#: viewport.cpp:332
+#: viewport.cpp:333
 msgid "non-finite location and/or size for viewport"
 msgstr "ubicación y/o tamaño no finitos para la ventana gráfica"

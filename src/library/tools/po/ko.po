@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -42,44 +42,44 @@ msgstr "파일 '%s'에서 md5가 작동하지 않습니다"
 msgid "sha256 failed on file '%s'"
 msgstr "파일 '%s'에서 md5가 작동하지 않습니다"
 
-#: getfmts.cpp:57
+#: getfmts.cpp:56
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr "오로지 %d 인자들만이 허용됩니다"
 
-#: getfmts.cpp:62
+#: getfmts.cpp:61
 msgid "'fmt' is not a character vector"
 msgstr "'fmt'는 문자형 벡터가 아닙니다"
 
-#: getfmts.cpp:65
+#: getfmts.cpp:64
 msgid "'fmt' must be length 1"
 msgstr "'fmt'는 반드시 길이가 1이어야 합니다"
 
-#: getfmts.cpp:71
+#: getfmts.cpp:70
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "'fmt' 길이가 최대 포맷길이 %d를 초과합니다"
 
-#: getfmts.cpp:92
+#: getfmts.cpp:91
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "알 수 없는 포맷 지정 '%s'입니다"
 
-#: getfmts.cpp:132
+#: getfmts.cpp:131
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2584 gramRd.cpp:3965
+#: gramLatex.cpp:2757 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "라인 %d에 있는 긴 문자열에 대한 버퍼를 할당할 수 없습니다"
 
-#: gramLatex.cpp:2818 gramRd.cpp:4460
+#: gramLatex.cpp:3014 gramRd.cpp:4460
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "라인 %d에 있는 긴 문자열에 대한 버퍼를 할당할 수 없습니다"
 
-#: gramLatex.cpp:2861 gramRd.cpp:4511
+#: gramLatex.cpp:3056 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "유효하지 않은 '%s' 값입니다"
@@ -152,15 +152,15 @@ msgstr "이 커넥션으로부터 읽을 수 없습니다"
 msgid "invalid Rd file"
 msgstr "유효한 Rd 파일이 아닙니다"
 
-#: gramRd.cpp:4556
+#: gramRd.cpp:4557
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4559
+#: gramRd.cpp:4560
 msgid "bad state"
 msgstr "잘못된 상태입니다"
 
-#: gramRd.cpp:4572
+#: gramRd.cpp:4573
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "'deparseRd'에 잘못된 텍스트 모드 %d가 있습니다"
@@ -187,11 +187,11 @@ msgstr "유효하지 않은 '%s' 인자입니다"
 msgid "write error during file append"
 msgstr "파일병합을 하는 동안 쓰기 에러가 발생했습니다"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:75
 msgid "too many items"
 msgstr ""
 
-#: pdscan.cpp:116
+#: pdscan.cpp:122
 msgid "non-character argument"
 msgstr ""
 
@@ -203,19 +203,19 @@ msgstr "이 플랫폼에서 pskill()은 지원되지 않습니다"
 msgid "psnice() is not supported on this platform"
 msgstr "이 플랫폼에서 psnice()은 지원되지 않습니다"
 
-#: text.cpp:80
+#: text.cpp:79
 msgid "invalid argument type"
 msgstr "유효하지 않은 인자 타입입니다"
 
-#: text.cpp:169 text.cpp:205 text.cpp:329
+#: text.cpp:168 text.cpp:204 text.cpp:328
 #, fuzzy
 msgid "invalid input"
 msgstr "유효한 Rd 파일이 아닙니다"
 
-#: text.cpp:236 text.cpp:258
+#: text.cpp:235 text.cpp:257
 msgid "out of memory"
 msgstr "메모리가 부족합니다"
 
-#: text.cpp:278 text.cpp:280
+#: text.cpp:277 text.cpp:279
 msgid "first arg must be a single character string"
 msgstr ""

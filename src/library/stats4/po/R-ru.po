@@ -1,5 +1,5 @@
 # Russian translations for R package
-# Русский перевод для пакета R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ п©п╟п╨п╣я┌п╟ R
 #
 # Copyright (C) 2007 The R Foundation
 # Copyright (C) 2005 Dmitri I GOULIAEV <dmitri.gouliaev@telkel.net>
@@ -11,59 +11,60 @@ msgstr ""
 "Project-Id-Version: R 2.9.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2024-08-31 23:44\n"
-"PO-Revision-Date: 2020-08-27 20:04+0900\n"
+"PO-Revision-Date: 2025-04-01 17:04+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=KOI8-R\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"First-Translator: Dmitri I GOULIAEV <dmitri.gouliaev@telkel.net\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"First-Translator: Dmitri I GOULIAEV <dmitri.gouliaev@telkel.net\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/mle.R: stop("Mismatch in length of start values")
 #: R/mle.R:0
 msgid "Mismatch in length of start values"
-msgstr "Несоответствие длины стартовых значений"
+msgstr "п²п╣я│п╬п╬я┌п╡п╣я┌я│я┌п╡п╦п╣ п╢п╩п╦п╫я▀ я│я┌п╟я─я┌п╬п╡я▀я┘ п╥п╫п╟я┤п╣п╫п╦п╧"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
 msgid "extra arguments discarded"
-msgstr "дополнительные аргументы отброшены"
+msgstr "п╢п╬п©п╬п╩п╫п╦я┌п╣п╩я▄п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╬я┌п╠я─п╬я┬п╣п╫я▀"
 
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
 msgid "fixed values violate constraints"
-msgstr "закрепленные значения нарушают ограничения"
+msgstr "п╥п╟п╨я─п╣п©п╩п╣п╫п╫я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╫п╟я─я┐я┬п╟я▌я┌ п╬пЁя─п╟п╫п╦я┤п╣п╫п╦я▐"
 
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
-msgstr "уровни укорочены до только положительных значений"
+msgstr "я┐я─п╬п╡п╫п╦ я┐п╨п╬я─п╬я┤п╣п╫я▀ п╢п╬ я┌п╬п╩я▄п╨п╬ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я▀я┘ п╥п╫п╟я┤п╣п╫п╦п╧"
 
 #. R/mle.R: stop("named list expected")
 #: R/mle.R:0
 msgid "named list expected"
-msgstr "ожидается именованный список"
+msgstr "п╬п╤п╦п╢п╟п╣я┌я│я▐ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╧ я│п©п╦я│п╬п╨"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
 msgid "profiling has found a better solution, so original fit had not converged"
-msgstr "профилирование нашло лучшее решение, и поэтому исходная подгонка не сошлась"
+msgstr "п©я─п╬я└п╦п╩п╦я─п╬п╡п╟п╫п╦п╣ п╫п╟я┬п╩п╬ п╩я┐я┤я┬п╣п╣ я─п╣я┬п╣п╫п╦п╣, п╦ п©п╬я█я┌п╬п╪я┐ п╦я│я┘п╬п╢п╫п╟я▐ п©п╬п╢пЁп╬п╫п╨п╟ п╫п╣ я│п╬я┬п╩п╟я│я▄"
 
 #. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
 msgid "some named values are not arguments to the supplied log-likelihood"
-msgstr "некоторые именованные аргументы не являются аргументами переданного логарифма функции правдоподобия"
+msgstr "п╫п╣п╨п╬я┌п╬я─я▀п╣ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╫п╣ я▐п╡п╩я▐я▌я┌я│я▐ п╟я─пЁя┐п╪п╣п╫я┌п╟п╪п╦ п©п╣я─п╣п╢п╟п╫п╫п╬пЁп╬ п╩п╬пЁп╟я─п╦я└п╪п╟ я└я┐п╫п╨я├п╦п╦ п©я─п╟п╡п╢п╬п©п╬п╢п╬п╠п╦я▐"
 
 #. R/mle.R: warning("start values do not satisfy constraints")
 #: R/mle.R:0
 msgid "start values do not satisfy constraints"
-msgstr "стартовые значения не удовлетворяют ограничениям"
+msgstr "я│я┌п╟я─я┌п╬п╡я▀п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╫п╣ я┐п╢п╬п╡п╩п╣я┌п╡п╬я─я▐я▌я┌ п╬пЁя─п╟п╫п╦я┤п╣п╫п╦я▐п╪"
 
 #~ msgid "'start' must be a named list"
-#~ msgstr "'start' должен быть именованым списком"
+#~ msgstr "'start' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╦п╪п╣п╫п╬п╡п╟п╫я▀п╪ я│п©п╦я│п╨п╬п╪"
 
 #~ msgid "some named arguments in 'start' are not arguments to the supplied log-likelihood"
-#~ msgstr "некоторые именованные аргументы в 'start'  не являются аргументами переданного логарифма функции правдоподобия"
+#~ msgstr "п╫п╣п╨п╬я┌п╬я─я▀п╣ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ п╟я─пЁя┐п╪п╣п╫я┌я▀ п╡ 'start'  п╫п╣ я▐п╡п╩я▐я▌я┌я│я▐ п╟я─пЁя┐п╪п╣п╫я┌п╟п╪п╦ п©п╣я─п╣п╢п╟п╫п╫п╬пЁп╬ п╩п╬пЁп╟я─п╦я└п╪п╟ я└я┐п╫п╨я├п╦п╦ п©я─п╟п╡п╢п╬п©п╬п╢п╬п╠п╦я▐"

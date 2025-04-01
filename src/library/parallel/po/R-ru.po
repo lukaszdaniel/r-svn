@@ -1,5 +1,5 @@
 # Russian translations for R
-# Русский перевод для R
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R
 #
 # Copyright (C) 2011 The R Foundation
 # This file is distributed under the same license as the R package.
@@ -9,43 +9,44 @@ msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2024-08-31 23:44\n"
-"PO-Revision-Date: 2024-03-25 14:48+0300\n"
+"PO-Revision-Date: 2025-04-01 17:01+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/unix/mclapply.R: gettextf("%d function calls resulted in an error", has.errors)
 #: R/unix/mclapply.R:0
 msgid "%d function calls resulted in an error"
-msgstr "вызовы функции %d привели к ошибке"
+msgstr "п╡я▀п╥п╬п╡я▀ я└я┐п╫п╨я├п╦п╦ %d п©я─п╦п╡п╣п╩п╦ п╨ п╬я┬п╦п╠п╨п╣"
 
 #. R/clusterApply.R: stop("'X' must have named dimnames")
 #: R/clusterApply.R:0
 msgid "'X' must have named dimnames"
-msgstr "'X' должен иметь именованные dimnames"
+msgstr "'X' п╢п╬п╩п╤п╣п╫ п╦п╪п╣я┌я▄ п╦п╪п╣п╫п╬п╡п╟п╫п╫я▀п╣ dimnames"
 
 #. R/unix/mcfork.R: stop("'child' must be a valid child process")
 #: R/unix/mcfork.R:0
 msgid "'child' must be a valid child process"
-msgstr "'child' должен быть правильным дочерним процессом"
+msgstr "'child' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п©я─п╟п╡п╦п╩я▄п╫я▀п╪ п╢п╬я┤п╣я─п╫п╦п╪ п©я─п╬я├п╣я│я│п╬п╪"
 
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 #: R/unix/mcfork.R:0
 msgid "'children' must be a list of processes or a single process"
-msgstr "'children' должен быть списком процессов или одним процессом"
+msgstr "'children' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я│п©п╦я│п╨п╬п╪ п©я─п╬я├п╣я│я│п╬п╡ п╦п╩п╦ п╬п╢п╫п╦п╪ п©я─п╬я├п╣я│я│п╬п╪"
 
 #. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #: R/windows/mcdummies.R:0
 msgid "'mc.cores' > 1 is not supported on Windows"
-msgstr "'mc.cores' > 1 не поддерживается под Windows"
+msgstr "'mc.cores' > 1 п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌я│я▐ п©п╬п╢ Windows"
 
 #. R/unix/mclapply.R: stop("'mc.cores' must be >= 1")
 #. R/unix/pvec.R: stop("'mc.cores' must be >= 1")
@@ -54,120 +55,120 @@ msgstr "'mc.cores' > 1 не поддерживается под Windows"
 #. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 #: R/unix/mclapply.R:0 R/unix/pvec.R:0 R/windows/mcdummies.R:0
 msgid "'mc.cores' must be >= 1"
-msgstr "'mc.cores' должны быть >= 1"
+msgstr "'mc.cores' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ >= 1"
 
 #. R/unix/mclapply.R: warning("'mc.preschedule' must be false if 'affinity.list' is used")
 #: R/unix/mclapply.R:0
 msgid "'mc.preschedule' must be false if 'affinity.list' is used"
-msgstr "'mc.preschedule' должен быть fasle в том случае, когда используется 'affinity.list'"
+msgstr "'mc.preschedule' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ fasle п╡ я┌п╬п╪ я│п╩я┐я┤п╟п╣, п╨п╬пЁп╢п╟ п╦я│п©п╬п╩я▄п╥я┐п╣я┌я│я▐ 'affinity.list'"
 
 #. R/unix/forkCluster.R: stop("'nnodes' must be >= 1")
 #: R/unix/forkCluster.R:0
 msgid "'nnodes' must be >= 1"
-msgstr "'nnodes' должны быть >= 1"
+msgstr "'nnodes' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ >= 1"
 
 #. R/unix/mcfork.R: gettextf("'process' must be of class %s", dQuote("process"))
 #: R/unix/mcfork.R:0
 msgid "'process' must be of class %s"
-msgstr "'process' должен быть класса %s"
+msgstr "'process' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╨п╩п╟я│я│п╟ %s"
 
 #. R/unix/pvec.R: stop("'v' must be a vector")
 #. R/windows/mcdummies.R: stop("'v' must be a vector")
 #: R/unix/pvec.R:0 R/windows/mcdummies.R:0
 msgid "'v' must be a vector"
-msgstr "'v' должен быть вектором"
+msgstr "'v' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ п╡п╣п╨я┌п╬я─п╬п╪"
 
 #. R/unix/mcfork.R: stop("'what' must be a character or raw vector")
 #: R/unix/mcfork.R:0
 msgid "'what' must be a character or raw vector"
-msgstr "'what' должен быть текстовым или простым вектором"
+msgstr "'what' п╢п╬п╩п╤п╣п╫ п╠я▀я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╪ п╦п╩п╦ п©я─п╬я│я┌я▀п╪ п╡п╣п╨я┌п╬я─п╬п╪"
 
 #. R/unix/forkCluster.R: stop("Cluster setup failed.")
 #: R/unix/forkCluster.R:0
 msgid "Cluster setup failed."
-msgstr "Создание кластера не удалось."
+msgstr "п║п╬п╥п╢п╟п╫п╦п╣ п╨п╩п╟я│я┌п╣я─п╟ п╫п╣ я┐п╢п╟п╩п╬я│я▄."
 
 #. R/snowSOCK.R: stop("Connection setup failed or timed out.")
 #: R/snowSOCK.R:0
 msgid "Connection setup failed or timed out."
-msgstr "Установление соединения не удалось или превысило лимит ожидания."
+msgstr "пёя│я┌п╟п╫п╬п╡п╩п╣п╫п╦п╣ я│п╬п╣п╢п╦п╫п╣п╫п╦я▐ п╫п╣ я┐п╢п╟п╩п╬я│я▄ п╦п╩п╦ п©я─п╣п╡я▀я│п╦п╩п╬ п╩п╦п╪п╦я┌ п╬п╤п╦п╢п╟п╫п╦я▐."
 
 #. R/snowSOCK.R: stop("PORT must be specified")
 #: R/snowSOCK.R:0
 msgid "PORT must be specified"
-msgstr "надо определить PORT"
+msgstr "п╫п╟п╢п╬ п╬п©я─п╣п╢п╣п╩п╦я┌я▄ PORT"
 
 #. R/unix/mcmapply.R: stop("Zero-length inputs cannot be mixed with those of non-zero length")
 #: R/unix/mcmapply.R:0
 msgid "Zero-length inputs cannot be mixed with those of non-zero length"
-msgstr "Нулевой ввод нельзя смешивать с ненулевым"
+msgstr "п²я┐п╩п╣п╡п╬п╧ п╡п╡п╬п╢ п╫п╣п╩я▄п╥я▐ я│п╪п╣я┬п╦п╡п╟я┌я▄ я│ п╫п╣п╫я┐п╩п╣п╡я▀п╪"
 
 #. R/unix/mclapply.R: stop("affinity.list and X must have the same length")
 #: R/unix/mclapply.R:0
 msgid "affinity.list and X must have the same length"
-msgstr "affinity.list и X должны быть одинаковой длины"
+msgstr "affinity.list п╦ X п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ п╬п╢п╦п╫п╟п╨п╬п╡п╬п╧ п╢п╩п╦п╫я▀"
 
 #. R/unix/mclapply.R: warning("all scheduled cores encountered errors in user code")
 #: R/unix/mclapply.R:0
 msgid "all scheduled cores encountered errors in user code"
-msgstr "все запланированные ядра столкнулись с ошибкой в пользовательском коде"
+msgstr "п╡я│п╣ п╥п╟п©п╩п╟п╫п╦я─п╬п╡п╟п╫п╫я▀п╣ я▐п╢я─п╟ я│я┌п╬п╩п╨п╫я┐п╩п╦я│я▄ я│ п╬я┬п╦п╠п╨п╬п╧ п╡ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬п╪ п╨п╬п╢п╣"
 
 #. R/clusterApply.R: stop("dim(X) must have a positive length")
 #: R/clusterApply.R:0
 msgid "dim(X) must have a positive length"
-msgstr "dim(X) должен иметь положительную длину"
+msgstr "dim(X) п╢п╬п╩п╤п╣п╫ п╦п╪п╣я┌я▄ п©п╬п╩п╬п╤п╦я┌п╣п╩я▄п╫я┐я▌ п╢п╩п╦п╫я┐"
 
 #. R/windows/forkCluster.R: stop("fork clusters are not supported on Windows")
 #: R/windows/forkCluster.R:0
 msgid "fork clusters are not supported on Windows"
-msgstr "разветвленные кластеры под винды не поддерживаются"
+msgstr "я─п╟п╥п╡п╣я┌п╡п╩п╣п╫п╫я▀п╣ п╨п╩п╟я│я┌п╣я─я▀ п©п╬п╢ п╡п╦п╫п╢я▀ п╫п╣ п©п╬п╢п╢п╣я─п╤п╦п╡п╟я▌я┌я│я▐"
 
 #. R/unix/mcfork.R: stop("invalid 'child' argument")
 #. R/unix/mcfork.R: stop("invalid 'child' argument")
 #: R/unix/mcfork.R:0
 msgid "invalid 'child' argument"
-msgstr "неправильный аргумент 'child'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'child'"
 
 #. R/unix/mcparallel.R: stop("invalid 'jobs' argument")
 #: R/unix/mcparallel.R:0
 msgid "invalid 'jobs' argument"
-msgstr "неправильный аргумент 'jobs'"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌ 'jobs'"
 
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #: R/RngStream.R:0
 msgid "invalid value of %s"
-msgstr "неправильное значение %s"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ п╥п╫п╟я┤п╣п╫п╦п╣ %s"
 
 #. R/clusterApply.R: stop("need at least one argument")
 #: R/clusterApply.R:0
 msgid "need at least one argument"
-msgstr "нужен хотя бы один аргумент"
+msgstr "п╫я┐п╤п╣п╫ я┘п╬я┌я▐ п╠я▀ п╬п╢п╦п╫ п╟я─пЁя┐п╪п╣п╫я┌"
 
 #. R/snow.R: stop("no cluster 'cl' supplied and none is registered")
 #: R/snow.R:0
 msgid "no cluster 'cl' supplied and none is registered"
-msgstr "кластера 'cl' нет и ничего не зарегистрировано"
+msgstr "п╨п╩п╟я│я┌п╣я─п╟ 'cl' п╫п╣я┌ п╦ п╫п╦я┤п╣пЁп╬ п╫п╣ п╥п╟я─п╣пЁп╦я│я┌я─п╦я─п╬п╡п╟п╫п╬"
 
 #. R/snowSOCK.R: gettextf("node of a socket cluster on host %s with pid %d", sQuote(x[["host"]]),     pid)
 #: R/snowSOCK.R:0
 msgid "node of a socket cluster on host %s with pid %d"
-msgstr "узел на кластере-приемнике на хосте %s с pid %d"
+msgstr "я┐п╥п╣п╩ п╫п╟ п╨п╩п╟я│я┌п╣я─п╣-п©я─п╦п╣п╪п╫п╦п╨п╣ п╫п╟ я┘п╬я│я┌п╣ %s я│ pid %d"
 
 #. R/snow.R: stop("not a valid cluster")
 #: R/snow.R:0
 msgid "not a valid cluster"
-msgstr "неправильный кластер"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╨п╩п╟я│я┌п╣я─"
 
 #. R/clusterApply.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/clusterApply.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
-msgstr "не все элементы 'MARGIN' -- имена измерений"
+msgstr "п╫п╣ п╡я│п╣ я█п╩п╣п╪п╣п╫я┌я▀ 'MARGIN' -- п╦п╪п╣п╫п╟ п╦п╥п╪п╣я─п╣п╫п╦п╧"
 
 #. R/snowSOCK.R: stop("numeric 'names' must be >= 1")
 #: R/snowSOCK.R:0
 msgid "numeric 'names' must be >= 1"
-msgstr "числовые 'names' должны быть >= 1"
+msgstr "я┤п╦я│п╩п╬п╡я▀п╣ 'names' п╢п╬п╩п╤п╫я▀ п╠я▀я┌я▄ >= 1"
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
@@ -177,72 +178,72 @@ msgstr ""
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0
 msgid "some results may be missing, folded or caused an error"
-msgstr "некоторые результаты могут быть пропущены, схлопнуты или привели к ошибке"
+msgstr "п╫п╣п╨п╬я┌п╬я─я▀п╣ я─п╣п╥я┐п╩я▄я┌п╟я┌я▀ п╪п╬пЁя┐я┌ п╠я▀я┌я▄ п©я─п╬п©я┐я┴п╣п╫я▀, я│я┘п╩п╬п©п╫я┐я┌я▀ п╦п╩п╦ п©я─п╦п╡п╣п╩п╦ п╨ п╬я┬п╦п╠п╨п╣"
 
 #. R/snow.R: sprintf("unknown cluster type: '%s'", type)
 #: R/snow.R:0
 #, fuzzy
 msgid "unknown cluster type: '%s'"
-msgstr "неизвестный тип кластера"
+msgstr "п╫п╣п╦п╥п╡п╣я│я┌п╫я▀п╧ я┌п╦п© п╨п╩п╟я│я┌п╣я─п╟"
 
 #. R/clusterApply.R: stop("zero-length inputs cannot be mixed with those of non-zero length")
 #: R/clusterApply.R:0
 msgid "zero-length inputs cannot be mixed with those of non-zero length"
-msgstr "нулевой ввод нельзя смешивать с ненулевым"
+msgstr "п╫я┐п╩п╣п╡п╬п╧ п╡п╡п╬п╢ п╫п╣п╩я▄п╥я▐ я│п╪п╣я┬п╦п╡п╟я┌я▄ я│ п╫п╣п╫я┐п╩п╣п╡я▀п╪"
 
 #. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results")
 #: R/unix/mclapply.R:0
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"
-msgstr[0] "%d вызов параллельной функции не выдали результат"
-msgstr[1] "%d вызова параллельной функции не выдали результат"
-msgstr[2] "%d вызовов параллельной функции не выдали результат"
+msgstr[0] "%d п╡я▀п╥п╬п╡ п©п╟я─п╟п╩п╩п╣п╩я▄п╫п╬п╧ я└я┐п╫п╨я├п╦п╦ п╫п╣ п╡я▀п╢п╟п╩п╦ я─п╣п╥я┐п╩я▄я┌п╟я┌"
+msgstr[1] "%d п╡я▀п╥п╬п╡п╟ п©п╟я─п╟п╩п╩п╣п╩я▄п╫п╬п╧ я└я┐п╫п╨я├п╦п╦ п╫п╣ п╡я▀п╢п╟п╩п╦ я─п╣п╥я┐п╩я▄я┌п╟я┌"
+msgstr[2] "%d п╡я▀п╥п╬п╡п╬п╡ п©п╟я─п╟п╩п╩п╣п╩я▄п╫п╬п╧ я└я┐п╫п╨я├п╦п╦ п╫п╣ п╡я▀п╢п╟п╩п╦ я─п╣п╥я┐п╩я▄я┌п╟я┌"
 
 #. R/unix/mcparallel.R: ngettext(nores, "%d parallel job did not deliver a result", "%d parallel jobs did not deliver results")
 #: R/unix/mcparallel.R:0
 msgid "%d parallel job did not deliver a result"
 msgid_plural "%d parallel jobs did not deliver results"
-msgstr[0] "%d параллельное задание не выдало результат"
-msgstr[1] "%d параллельных задания не выдали результат"
-msgstr[2] "%d параллельных заданий не выдали результат"
+msgstr[0] "%d п©п╟я─п╟п╩п╩п╣п╩я▄п╫п╬п╣ п╥п╟п╢п╟п╫п╦п╣ п╫п╣ п╡я▀п╢п╟п╩п╬ я─п╣п╥я┐п╩я▄я┌п╟я┌"
+msgstr[1] "%d п©п╟я─п╟п╩п╩п╣п╩я▄п╫я▀я┘ п╥п╟п╢п╟п╫п╦я▐ п╫п╣ п╡я▀п╢п╟п╩п╦ я─п╣п╥я┐п╩я▄я┌п╟я┌"
+msgstr[2] "%d п©п╟я─п╟п╩п╩п╣п╩я▄п╫я▀я┘ п╥п╟п╢п╟п╫п╦п╧ п╫п╣ п╡я▀п╢п╟п╩п╦ я─п╣п╥я┐п╩я▄я┌п╟я┌"
 
 #. R/snowSOCK.R: ngettext(failed, "Cluster setup failed. %d worker of %d failed to connect.",     "Cluster setup failed. %d of %d workers failed to connect.")
 #: R/snowSOCK.R:0
 msgid "Cluster setup failed. %d worker of %d failed to connect."
 msgid_plural "Cluster setup failed. %d of %d workers failed to connect."
-msgstr[0] "Создание кластера не удалось. %d процесс из %d не смогли подсоединиться."
-msgstr[1] "Создание кластера не удалось. %d процесса из %d не смогли подсоединиться."
-msgstr[2] "Создание кластера не удалось. %d процессов из %d не смогли подсоединиться."
+msgstr[0] "п║п╬п╥п╢п╟п╫п╦п╣ п╨п╩п╟я│я┌п╣я─п╟ п╫п╣ я┐п╢п╟п╩п╬я│я▄. %d п©я─п╬я├п╣я│я│ п╦п╥ %d п╫п╣ я│п╪п╬пЁп╩п╦ п©п╬п╢я│п╬п╣п╢п╦п╫п╦я┌я▄я│я▐."
+msgstr[1] "п║п╬п╥п╢п╟п╫п╦п╣ п╨п╩п╟я│я┌п╣я─п╟ п╫п╣ я┐п╢п╟п╩п╬я│я▄. %d п©я─п╬я├п╣я│я│п╟ п╦п╥ %d п╫п╣ я│п╪п╬пЁп╩п╦ п©п╬п╢я│п╬п╣п╢п╦п╫п╦я┌я▄я│я▐."
+msgstr[2] "п║п╬п╥п╢п╟п╫п╦п╣ п╨п╩п╟я│я┌п╣я─п╟ п╫п╣ я┐п╢п╟п╩п╬я│я▄. %d п©я─п╬я├п╣я│я│п╬п╡ п╦п╥ %d п╫п╣ я│п╪п╬пЁп╩п╦ п©п╬п╢я│п╬п╣п╢п╦п╫п╦я┌я▄я│я▐."
 
 #. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0
 msgid "scheduled core %s did not deliver a result, all values of the job will be affected"
 msgid_plural "scheduled cores %s did not deliver results, all values of the jobs will be affected"
-msgstr[0] "%s запланированное ядро столкнулось с ошибкой в пользовательском коде, будут затронуты все значения задач"
-msgstr[1] " %s запланированных ядра столкнулись с ошибкой в пользовательском коде, будут затронуты все значения задач"
-msgstr[2] " %s запланированных ядер столкнулись с ошибкой в пользовательском коде, будут затронуты все значения задач"
+msgstr[0] "%s п╥п╟п©п╩п╟п╫п╦я─п╬п╡п╟п╫п╫п╬п╣ я▐п╢я─п╬ я│я┌п╬п╩п╨п╫я┐п╩п╬я│я▄ я│ п╬я┬п╦п╠п╨п╬п╧ п╡ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬п╪ п╨п╬п╢п╣, п╠я┐п╢я┐я┌ п╥п╟я┌я─п╬п╫я┐я┌я▀ п╡я│п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╥п╟п╢п╟я┤"
+msgstr[1] " %s п╥п╟п©п╩п╟п╫п╦я─п╬п╡п╟п╫п╫я▀я┘ я▐п╢я─п╟ я│я┌п╬п╩п╨п╫я┐п╩п╦я│я▄ я│ п╬я┬п╦п╠п╨п╬п╧ п╡ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬п╪ п╨п╬п╢п╣, п╠я┐п╢я┐я┌ п╥п╟я┌я─п╬п╫я┐я┌я▀ п╡я│п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╥п╟п╢п╟я┤"
+msgstr[2] " %s п╥п╟п©п╩п╟п╫п╦я─п╬п╡п╟п╫п╫я▀я┘ я▐п╢п╣я─ я│я┌п╬п╩п╨п╫я┐п╩п╦я│я▄ я│ п╬я┬п╦п╠п╨п╬п╧ п╡ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬п╪ п╨п╬п╢п╣, п╠я┐п╢я┐я┌ п╥п╟я┌я─п╬п╫я┐я┌я▀ п╡я│п╣ п╥п╫п╟я┤п╣п╫п╦я▐ п╥п╟п╢п╟я┤"
 
 #. R/unix/mclapply.R: ngettext(length(has.errors), "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0
 msgid "scheduled core %s encountered error in user code, all values of the job will be affected"
 msgid_plural "scheduled cores %s encountered errors in user code, all values of the jobs will be affected"
-msgstr[0] "запланированное ядро %s столкнулось с ошибкой в пользовательском коде, будут затронуты все значения работ"
-msgstr[1] "запланированные ядра %s столкнулись с ошибкой в пользовательском коде, будут затронуты все значения работ"
-msgstr[2] "запланированные ядра %s столкнулись с ошибкой в пользовательском коде, будут затронуты все значения работ"
+msgstr[0] "п╥п╟п©п╩п╟п╫п╦я─п╬п╡п╟п╫п╫п╬п╣ я▐п╢я─п╬ %s я│я┌п╬п╩п╨п╫я┐п╩п╬я│я▄ я│ п╬я┬п╦п╠п╨п╬п╧ п╡ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬п╪ п╨п╬п╢п╣, п╠я┐п╢я┐я┌ п╥п╟я┌я─п╬п╫я┐я┌я▀ п╡я│п╣ п╥п╫п╟я┤п╣п╫п╦я▐ я─п╟п╠п╬я┌"
+msgstr[1] "п╥п╟п©п╩п╟п╫п╦я─п╬п╡п╟п╫п╫я▀п╣ я▐п╢я─п╟ %s я│я┌п╬п╩п╨п╫я┐п╩п╦я│я▄ я│ п╬я┬п╦п╠п╨п╬п╧ п╡ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬п╪ п╨п╬п╢п╣, п╠я┐п╢я┐я┌ п╥п╟я┌я─п╬п╫я┐я┌я▀ п╡я│п╣ п╥п╫п╟я┤п╣п╫п╦я▐ я─п╟п╠п╬я┌"
+msgstr[2] "п╥п╟п©п╩п╟п╫п╦я─п╬п╡п╟п╫п╫я▀п╣ я▐п╢я─п╟ %s я│я┌п╬п╩п╨п╫я┐п╩п╦я│я▄ я│ п╬я┬п╦п╠п╨п╬п╧ п╡ п©п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄я│п╨п╬п╪ п╨п╬п╢п╣, п╠я┐п╢я┐я┌ п╥п╟я┌я─п╬п╫я┐я┌я▀ п╡я│п╣ п╥п╫п╟я┤п╣п╫п╦я▐ я─п╟п╠п╬я┌"
 
 #. R/snowSOCK.R: ngettext(length(hosts), "socket cluster with %d nodes on host %s",     "socket cluster with %d nodes on hosts %s")
 #: R/snowSOCK.R:0
 msgid "socket cluster with %d nodes on host %s"
 msgid_plural "socket cluster with %d nodes on hosts %s"
-msgstr[0] "кластер-приемник с %d узлами на хосте %s"
-msgstr[1] "кластер-приемник с %d узлами на хостах %s"
-msgstr[2] "кластер-приемник с %d узлами на хостах %s"
+msgstr[0] "п╨п╩п╟я│я┌п╣я─-п©я─п╦п╣п╪п╫п╦п╨ я│ %d я┐п╥п╩п╟п╪п╦ п╫п╟ я┘п╬я│я┌п╣ %s"
+msgstr[1] "п╨п╩п╟я│я┌п╣я─-п©я─п╦п╣п╪п╫п╦п╨ я│ %d я┐п╥п╩п╟п╪п╦ п╫п╟ я┘п╬я│я┌п╟я┘ %s"
+msgstr[2] "п╨п╩п╟я│я┌п╣я─-п©я─п╦п╣п╪п╫п╦п╨ я│ %d я┐п╥п╩п╟п╪п╦ п╫п╟ я┘п╬я│я┌п╟я┘ %s"
 
 #~ msgid "socket cluster with %d nodes on hosts %s"
-#~ msgstr "кластер-приемник с %d узлами на хосте %s"
+#~ msgstr "п╨п╩п╟я│я┌п╣я─-п©я─п╦п╣п╪п╫п╦п╨ я│ %d я┐п╥п╩п╟п╪п╦ п╫п╟ я┘п╬я│я┌п╣ %s"
 
 #~ msgid ","
 #~ msgstr ","
 
 #~ msgid "host"
-#~ msgstr "хост"
+#~ msgstr "я┘п╬я│я┌"

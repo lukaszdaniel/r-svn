@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -36,23 +36,25 @@ msgstr ""
 msgid "bad hash table type"
 msgstr ""
 
-#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:772 io.cpp:827 io.cpp:840
-#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
-#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:47 stubs.cpp:67
-#: windows/dialogs.cpp:147 windows/dialogs.cpp:155 windows/dialogs.cpp:175
-#: windows/dialogs.cpp:200 windows/dialogs.cpp:203 windows/dialogs.cpp:245
-#: windows/dialogs.cpp:282 windows/dialogs.cpp:293 windows/dialogs.cpp:317
-#: windows/dialogs.cpp:325 windows/util.cpp:138 windows/widgets.cpp:90
-#: windows/widgets.cpp:93 windows/widgets.cpp:97
+#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:771 io.cpp:826 io.cpp:839
+#: io.cpp:843 io.cpp:849 io.cpp:1088 io.cpp:1089 io.cpp:1091 io.cpp:1092
+#: io.cpp:1093 io.cpp:1094 io.cpp:1095 stubs.cpp:47 stubs.cpp:67
+#: windows/dialogs.cpp:84 windows/dialogs.cpp:88 windows/dialogs.cpp:92
+#: windows/dialogs.cpp:95 windows/dialogs.cpp:98 windows/dialogs.cpp:147
+#: windows/dialogs.cpp:155 windows/dialogs.cpp:175 windows/dialogs.cpp:200
+#: windows/dialogs.cpp:203 windows/dialogs.cpp:245 windows/dialogs.cpp:282
+#: windows/dialogs.cpp:293 windows/dialogs.cpp:317 windows/dialogs.cpp:325
+#: windows/util.cpp:138 windows/widgets.cpp:90 windows/widgets.cpp:93
+#: windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "인자 '%s'의 값이 올바르지 않습니다."
 
-#: io.cpp:347 io.cpp:837
+#: io.cpp:347 io.cpp:836
 msgid "invalid quote symbol set"
 msgstr "올바르지 않은 인용부호셋 입니다."
 
-#: io.cpp:359 io.cpp:859 io.cpp:1077
+#: io.cpp:359 io.cpp:858 io.cpp:1076
 msgid "cannot open the connection"
 msgstr "커넥션을 열 수 없습니다"
 
@@ -74,64 +76,64 @@ msgstr "첫번째 인자는 반드시 문자형이어야 합니다."
 msgid "invalid 'numerals' string: \"%s\""
 msgstr ""
 
-#: io.cpp:774
+#: io.cpp:773
 msgid "Selection: "
 msgstr "선택: "
 
-#: io.cpp:869 io.cpp:884
+#: io.cpp:868 io.cpp:883
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "'readTableHead' 내에서 버퍼를 할당할 수 없습니다"
 
-#: io.cpp:897
+#: io.cpp:896
 msgid "\\ followed by EOF"
 msgstr "\\ 가 EOF 뒤에 놓였습니다"
 
-#: io.cpp:936
+#: io.cpp:935
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:949 io.cpp:953
+#: io.cpp:948 io.cpp:952
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "'%s'에서 readTableHeader에 의하여 발견된 완성되지 않은 마지막 라인입니다"
 
-#: io.cpp:1010
+#: io.cpp:1009
 msgid "index out of range"
 msgstr "범위밖의 인덱스입니다"
 
-#: io.cpp:1046
+#: io.cpp:1045
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr ""
 
-#: io.cpp:1048
+#: io.cpp:1047
 msgid "Problem closing connection"
 msgstr "커넥션을 닫는 도중 문제가 발생했습니다."
 
-#: io.cpp:1070
+#: io.cpp:1069
 msgid "'file' is not a connection"
 msgstr "'file'은 커넥션이 아닙니다."
 
-#: io.cpp:1073
+#: io.cpp:1072
 msgid "cannot write to this connection"
 msgstr "이 커넥션에 쓰기를 할 수 없습니다."
 
-#: io.cpp:1102
+#: io.cpp:1101
 msgid "'dec' must be a single character"
 msgstr "'dec'는 반드시 한개의 문자이어야 합니다"
 
-#: io.cpp:1126
+#: io.cpp:1125
 #, fuzzy, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "데이터 프레임이 손상되었습니다 -- 열의 길이 %d가 행의 개수와 일치하지 않습니다"
 
-#: io.cpp:1160
+#: io.cpp:1159
 #, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr ""
 
-#: io.cpp:1178
+#: io.cpp:1177
 #, fuzzy
 msgid "corrupt matrix -- dims do not match length"
 msgstr "올바른 행렬이 아닙니다 -- dims 가 길이가 일치하지 않습니다"

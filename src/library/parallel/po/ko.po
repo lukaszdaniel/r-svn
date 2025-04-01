@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2018-04-09 12:09-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -121,15 +121,15 @@ msgstr "'mcexit'는 오로지 자식 프로세스에서만 사용됩니다"
 msgid "'mcexit' failed"
 msgstr "'mcexit' 실패했습니다"
 
-#: fork.cpp:1245 fork.cpp:1254
+#: fork.cpp:1246 fork.cpp:1255
 msgid "invalid CPU affinity specification"
 msgstr "유효하지 않은 CPU affinity 지정입니다"
 
-#: fork.cpp:1265
+#: fork.cpp:1266
 msgid "requested CPU set is too large for this system"
 msgstr "요청된 CPU 셋은 이 시스템에 너무 큽니다"
 
-#: fork.cpp:1288
+#: fork.cpp:1289
 msgid "retrieving CPU affinity set failed"
 msgstr "CPU affiniy 셋을 검색하는데 실패했습니다"
 

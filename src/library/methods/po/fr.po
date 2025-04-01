@@ -7,20 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
-"PO-Revision-Date: 2021-02-10 17:45+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"PO-Revision-Date: 2025-04-01 17:00+0200\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: class_support.cpp:30
 msgid "calling the C routine used as an initializer for 'externalptr' objects"
-msgstr "appel de la routine C utilis�e comme initialisation pour des objets 'externalptr'"
+msgstr "appel de la routine C utilisï¿½e comme initialisation pour des objets 'externalptr'"
 
 #: do_substitute_direct.cpp:44
 msgid "invalid list for substitution"
@@ -33,180 +34,180 @@ msgstr "type inattendu '%s' pour le message de condition"
 
 #: methods_list_dispatch.cpp:138
 msgid "condition message must be length 1"
-msgstr "le message de condition doit �tre de longueur unitaire"
+msgstr "le message de condition doit ï¿½tre de longueur unitaire"
 
 #: methods_list_dispatch.cpp:219
 msgid "could not find the skeleton calls for 'methods' (package detached?): expect very bad things to happen"
-msgstr "impossible de trouver le squelette des appels pour 'methods' (package d�tach� ?) : attendez-vous � ce que des erreurs graves se produisent"
+msgstr "impossible de trouver le squelette des appels pour 'methods' (package dï¿½tachï¿½ ?) : attendez-vous ï¿½ ce que des erreurs graves se produisent"
 
 #: methods_list_dispatch.cpp:280
 #, c-format
 msgid "no \"allMethods\" slot found in object of class \"%s\" used as methods list for function '%s'"
-msgstr "pas de \"allMethods\" slot trouv� dans l'objet de classe \"%s\" utilis� comme liste de m�thodes pour la fonction '%s'"
+msgstr "pas de \"allMethods\" slot trouvï¿½ dans l'objet de classe \"%s\" utilisï¿½ comme liste de mï¿½thodes pour la fonction '%s'"
 
 #: methods_list_dispatch.cpp:408
 #, c-format
 msgid "S language method selection did not return normally when called from internal dispatch for function '%s'"
-msgstr "La m�thode de s�lection du langage S a g�n�r� une erreur lors de l'appel du dispatcheur interne pour la fonction '%s'"
+msgstr "La mï¿½thode de sï¿½lection du langage S a gï¿½nï¿½rï¿½ une erreur lors de l'appel du dispatcheur interne pour la fonction '%s'"
 
 #: methods_list_dispatch.cpp:410
 msgid "Function name for method selection called internally"
-msgstr "Nom de fonction pour la s�lection de m�thode appel� en interne"
+msgstr "Nom de fonction pour la sï¿½lection de mï¿½thode appelï¿½ en interne"
 
-#: methods_list_dispatch.cpp:465 methods_list_dispatch.cpp:486
+#: methods_list_dispatch.cpp:467 methods_list_dispatch.cpp:488
 msgid "The \"package\" slot in generic function object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:498
+#: methods_list_dispatch.cpp:500
 msgid "The argument \"f\" to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:499
+#: methods_list_dispatch.cpp:501
 msgid "The argument \"package\" to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:504
+#: methods_list_dispatch.cpp:506
 #, c-format
 msgid "no generic function definition found for '%s'"
-msgstr "pas de d�finition de fonction g�n�rique trouv�e pour '%s'"
+msgstr "pas de dï¿½finition de fonction gï¿½nï¿½rique trouvï¿½e pour '%s'"
 
-#: methods_list_dispatch.cpp:505
+#: methods_list_dispatch.cpp:507
 #, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
-msgstr "pas de d�finition de fonction g�n�rique trouv�e pour '%s' dans l'environnement fourni"
+msgstr "pas de dï¿½finition de fonction gï¿½nï¿½rique trouvï¿½e pour '%s' dans l'environnement fourni"
 
-#: methods_list_dispatch.cpp:526
+#: methods_list_dispatch.cpp:528
 msgid "The function name in the call to standardGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:540
+#: methods_list_dispatch.cpp:542
 #, c-format
 msgid "invalid generic function object for method selection for function '%s': expected a function or a primitive, got an object of class \"%s\""
-msgstr "objet de fonction g�n�rique incorrect pour la s�lection de m�thode de la fonction '%s' : une fonction ou une primitive �tait attendue et un objet de classe \"%s\" est renvoy�"
+msgstr "objet de fonction gï¿½nï¿½rique incorrect pour la sï¿½lection de mï¿½thode de la fonction '%s' : une fonction ou une primitive ï¿½tait attendue et un objet de classe \"%s\" est renvoyï¿½"
 
-#: methods_list_dispatch.cpp:555
+#: methods_list_dispatch.cpp:557
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
-msgstr "pas de m�thode directe ou h�rit�e pour la fonction '%s' dans cet appel"
+msgstr "pas de mï¿½thode directe ou hï¿½ritï¿½e pour la fonction '%s' dans cet appel"
 
-#: methods_list_dispatch.cpp:584 methods_list_dispatch.cpp:1158
+#: methods_list_dispatch.cpp:586 methods_list_dispatch.cpp:1160
 msgid "invalid object (non-function) used as method"
-msgstr "objet incorrect (autre chose qu'une fonction) utilis� dans cette m�thode"
+msgstr "objet incorrect (autre chose qu'une fonction) utilisï¿½ dans cette mï¿½thode"
 
-#: methods_list_dispatch.cpp:600
+#: methods_list_dispatch.cpp:602
 msgid "'symbol' must be a SYMSXP"
 msgstr ""
 
-#: methods_list_dispatch.cpp:603
+#: methods_list_dispatch.cpp:605
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
 msgstr "impossible de trouver le symbole '%s' dans le cadre de l'appel"
 
-#: methods_list_dispatch.cpp:611
+#: methods_list_dispatch.cpp:613
 #, c-format
 msgid "invalid symbol in checking for missing argument in method dispatch: expected a name, got an object of class \"%s\""
-msgstr "symbole incorrect dans la v�rification des arguments manquants dans le dispatcheur de m�thode : un nom est attendu et un objet de classe \"%s\" est renvoy�"
+msgstr "symbole incorrect dans la vï¿½rification des arguments manquants dans le dispatcheur de mï¿½thode : un nom est attendu et un objet de classe \"%s\" est renvoyï¿½"
 
-#: methods_list_dispatch.cpp:614
+#: methods_list_dispatch.cpp:616
 msgid "use of NULL environment is defunct"
-msgstr "l'utilisation de l'environnement NULL n'est plus autoris�e"
+msgstr "l'utilisation de l'environnement NULL n'est plus autorisï¿½e"
 
-#: methods_list_dispatch.cpp:618
+#: methods_list_dispatch.cpp:620
 #, c-format
 msgid "invalid environment in checking for missing argument, '%s', in methods dispatch: got an object of class \"%s\""
-msgstr "environnmenet incorrect lors de la v�rification de l'argument manquant, '%s', dans le dispatcheur de m�thodes : un objet de classe \"%s\" est renvoy�"
+msgstr "environnmenet incorrect lors de la vï¿½rification de l'argument manquant, '%s', dans le dispatcheur de mï¿½thodes : un objet de classe \"%s\" est renvoyï¿½"
 
-#: methods_list_dispatch.cpp:641
+#: methods_list_dispatch.cpp:643
 #, c-format
 msgid "error in evaluating the argument '%s' in selecting a method for function '%s': %s"
-msgstr "erreur d'�valuation de l'argument '%s' lors de la s�lection d'une m�thode pour la fonction '%s' : %s"
+msgstr "erreur d'ï¿½valuation de l'argument '%s' lors de la sï¿½lection d'une mï¿½thode pour la fonction '%s' : %s"
 
-#: methods_list_dispatch.cpp:658
+#: methods_list_dispatch.cpp:660
 #, c-format
 msgid "object of class \"%s\" used as methods list for function '%s' ( no 'argument' slot)"
-msgstr "l'objet de classe \"%s\" utilis� comme m�thode pour la fonction '%s' (pas de slot 'argument')"
+msgstr "l'objet de classe \"%s\" utilisï¿½ comme mï¿½thode pour la fonction '%s' (pas de slot 'argument')"
 
-#: methods_list_dispatch.cpp:669
+#: methods_list_dispatch.cpp:671
 #, c-format
 msgid "(in selecting a method for function '%s') '...' and related variables cannot be used for methods dispatch"
-msgstr "(lors de la s�lection d'une m�thode pour la fonction '%s') '...' et les variables correspondantes ne peuvent  �tre utilis�s pour le dispatching des m�thodes"
+msgstr "(lors de la sï¿½lection d'une mï¿½thode pour la fonction '%s') '...' et les variables correspondantes ne peuvent  ï¿½tre utilisï¿½s pour le dispatching des mï¿½thodes"
 
-#: methods_list_dispatch.cpp:672
+#: methods_list_dispatch.cpp:674
 #, c-format
 msgid "(in selecting a method for function '%s') the 'environment' argument for dispatch must be an R environment; got an object of class \"%s\""
-msgstr "(lors de la s�lection d'une m�thode pour la fonction '%s') l'argument 'environnement' pour le dispatching doit �tre un environnement R ; Un objet de classe \"%s\" est renvoy�"
+msgstr "(lors de la sï¿½lection d'une mï¿½thode pour la fonction '%s') l'argument 'environnement' pour le dispatching doit ï¿½tre un environnement R ; Un objet de classe \"%s\" est renvoyï¿½"
 
-#: methods_list_dispatch.cpp:703
+#: methods_list_dispatch.cpp:705
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
-msgstr "pas de m�thode correspondante pour la fonction '%s' (argument '%s', avec la classe \"%s\")"
+msgstr "pas de mï¿½thode correspondante pour la fonction '%s' (argument '%s', avec la classe \"%s\")"
 
-#: methods_list_dispatch.cpp:710
+#: methods_list_dispatch.cpp:712
 #, c-format
 msgid "recursive use of function '%s' in method selection, with no default method"
-msgstr "utilisation r�cursive de la fonction '%s' dans la s�lection de m�thode, avec aucune m�thode d�finie par d�faut"
+msgstr "utilisation rï¿½cursive de la fonction '%s' dans la sï¿½lection de mï¿½thode, avec aucune mï¿½thode dï¿½finie par dï¿½faut"
 
-#: methods_list_dispatch.cpp:735
+#: methods_list_dispatch.cpp:737
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
-msgstr "erreur lors de l'�valuation d'une 'primitive' comme m�thode suivante : %s"
+msgstr "erreur lors de l'ï¿½valuation d'une 'primitive' comme mï¿½thode suivante : %s"
 
-#: methods_list_dispatch.cpp:758
+#: methods_list_dispatch.cpp:760
 msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
-msgstr "erreur interne dans 'callNextMethod' : '.nextMethod' n'a pas �t� assign� dans le cadre de la m�thode d'appel"
+msgstr "erreur interne dans 'callNextMethod' : '.nextMethod' n'a pas ï¿½tï¿½ assignï¿½ dans le cadre de la mï¿½thode d'appel"
 
-#: methods_list_dispatch.cpp:765
+#: methods_list_dispatch.cpp:767
 #, fuzzy
 msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call"
-msgstr "erreur interne dans 'callNextMethod' : '.nextMethod' n'a pas �t� assign� dans le cadre de la m�thode d'appel"
+msgstr "erreur interne dans 'callNextMethod' : '.nextMethod' n'a pas ï¿½tï¿½ assignï¿½ dans le cadre de la mï¿½thode d'appel"
 
-#: methods_list_dispatch.cpp:890
+#: methods_list_dispatch.cpp:892
 #, c-format
 msgid "'%s' must be a single string (got a character vector of length %d)"
-msgstr "'%s' doit �tre une cha�ne de caract�res unique (un vecteur de caract�res de longueur %d est renvoy�)"
+msgstr "'%s' doit ï¿½tre une chaï¿½ne de caractï¿½res unique (un vecteur de caractï¿½res de longueur %d est renvoyï¿½)"
 
-#: methods_list_dispatch.cpp:894
+#: methods_list_dispatch.cpp:896
 #, c-format
 msgid "'%s' must be a non-empty string; got an empty string"
-msgstr "'%s' doit �tre une cha�ne de caract�res non vide ; Une cha�ne de caract�res vide est renvoy�e"
+msgstr "'%s' doit ï¿½tre une chaï¿½ne de caractï¿½res non vide ; Une chaï¿½ne de caractï¿½res vide est renvoyï¿½e"
 
-#: methods_list_dispatch.cpp:898
+#: methods_list_dispatch.cpp:900
 #, c-format
 msgid "'%s' must be a single string (got an object of class \"%s\")"
-msgstr "'%s' doit �tre une cha�ne de caract�res unique (un objet de classe \"%s\" est renvoy�)"
+msgstr "'%s' doit ï¿½tre une chaï¿½ne de caractï¿½res unique (un objet de classe \"%s\" est renvoyï¿½)"
 
-#: methods_list_dispatch.cpp:932
+#: methods_list_dispatch.cpp:934
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:934
+#: methods_list_dispatch.cpp:936
 msgid "The name of the object (e.g,. a class or generic function) to find in the meta-data"
 msgstr ""
 
-#: methods_list_dispatch.cpp:936
+#: methods_list_dispatch.cpp:938
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:983
+#: methods_list_dispatch.cpp:985
 msgid "class should be either a character-string name or a class definition"
-msgstr "class doit �tre soit un nom sous forme de cha�ne de caract�res, soit une d�finition de classe"
+msgstr "class doit ï¿½tre soit un nom sous forme de chaï¿½ne de caractï¿½res, soit une dï¿½finition de classe"
 
-#: methods_list_dispatch.cpp:1069
+#: methods_list_dispatch.cpp:1071
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
-msgstr "impossible de trouver la fonction g�n�rique pour la primitive \"%s\""
+msgstr "impossible de trouver la fonction gï¿½nï¿½rique pour la primitive \"%s\""
 
-#: methods_list_dispatch.cpp:1076
+#: methods_list_dispatch.cpp:1078
 #, c-format
 msgid "expected a generic function or a primitive for dispatch, got an object of class \"%s\""
-msgstr "une fonction g�n�rique ou une primitive �tait attendue pour le dispatching, un objet de classe \"%s\" est renvoy� � la place"
+msgstr "une fonction gï¿½nï¿½rique ou une primitive ï¿½tait attendue pour le dispatching, un objet de classe \"%s\" est renvoyï¿½ ï¿½ la place"
 
-#: methods_list_dispatch.cpp:1088
+#: methods_list_dispatch.cpp:1090
 #, fuzzy
 msgid "generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"
-msgstr "La fonction g�n�rique \"%s\" ne semble pas avoir �t� initialis�e pour la table de dispatching--.SigArgs et .AllMtable doivent �tre assign�s dans son environnement"
+msgstr "La fonction gï¿½nï¿½rique \"%s\" ne semble pas avoir ï¿½tï¿½ initialisï¿½e pour la table de dispatching--.SigArgs et .AllMtable doivent ï¿½tre assignï¿½s dans son environnement"
 
-#: methods_list_dispatch.cpp:1092
+#: methods_list_dispatch.cpp:1094
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 
@@ -215,7 +216,7 @@ msgid "'R_get_primname' called on a non-primitive"
 msgstr ""
 
 #~ msgid "in processing 'callNextMethod', found a '...' in the matched call, but no corresponding '...' argument"
-#~ msgstr "lors du calcul de 'callNextMethod', un '...' est trouv� dans l'appel correspondant, mais aucun '...' n'est trouv� dans l'argument en question"
+#~ msgstr "lors du calcul de 'callNextMethod', un '...' est trouvï¿½ dans l'appel correspondant, mais aucun '...' n'est trouvï¿½ dans l'argument en question"
 
 #~ msgid "no '%s' object in environment of function '%s'"
 #~ msgstr "pas d'objet '%s' dans l'environnement de la fonction '%s'"

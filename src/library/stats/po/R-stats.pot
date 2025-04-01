@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1182,9 +1182,9 @@ msgstr ""
 
 
 #: R/models.R: 0
-#. R/models.R: stop("'termlabels' must be a character vector of length at least one")
+#. R/models.R: stop("'termlabels' must be a character vector")
 
-msgid "'termlabels' must be a character vector of length at least one"
+msgid "'termlabels' must be a character vector"
 msgstr ""
 
 
@@ -1227,6 +1227,13 @@ msgstr ""
 #. R/quantile.R: stop("'type' must be 1 or 3 for ordered factors")
 
 msgid "'type' must be 1 or 3 for ordered factors"
+msgstr ""
+
+
+#: R/quantile.R: 0
+#. R/quantile.R: stop("'type' must be an integer in 1..9")
+
+msgid "'type' must be an integer in 1..9"
 msgstr ""
 
 

@@ -2143,10 +2143,6 @@ msgstr[0] "%s (%s) に対する総称的関数の形式的引数は、既定 (%s
 #~ msgid "(and methods)"
 #~ msgstr "メソッド %s()　用"
 
-#, fuzzy
-#~ msgid "Function must be an S4 generic"
-#~ msgstr ".getGeneric の中に空の関数名"
-
 #~ msgid "invalid method sublist"
 #~ msgstr "不正なメソッドサブリスト"
 

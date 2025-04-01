@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 14:04\n"
+"POT-Creation-Date: 2025-04-01 16:28\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -643,6 +643,17 @@ msgstr "'qr' そして 'y' は同じ行数を持たなければなりません"
 msgid "'receive.console.signals' must be TRUE or FALSE"
 msgstr "'intern' は TRUE か FALSE でなければなりません"
 
+#. R/unlist.R: stop("'recursive' is NA")
+#: R/unlist.R:0
+msgid "'recursive' is NA"
+msgstr ""
+
+#. R/unlist.R: stop("'recursive' must be a length-1 vector")
+#: R/unlist.R:0
+#, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "'origin' は長さ 1 でなければなりません"
+
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
 msgid "'recursive' will be ignored as 'to' is not a single existing directory"
@@ -1018,13 +1029,6 @@ msgstr "次のパッケージを付け加えます: %s"
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
 msgstr "環境 %s をロードしようとしています"
-
-#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
-#: R/structure.R:0
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
@@ -1491,6 +1495,11 @@ msgstr "次元が 2 未満のオブジェクトに 'colnames' を設定しよう
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
 msgstr "次元の無いオブジェクトに 'rownames' を設定しようとしました"
+
+#. R/structure.R: stop("attempt to set an attribute on NULL")
+#: R/structure.R:0
+msgid "attempt to set an attribute on NULL"
+msgstr ""
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
 #: R/autoload.R:0
@@ -3370,9 +3379,6 @@ msgstr[0] "呼び出されたパッケージがありません"
 #, fuzzy
 #~ msgid "'name' must be a single character string"
 #~ msgstr "引数 'object' は空でない単一の文字列でなければなりません"
-
-#~ msgid "'origin' must be of length one"
-#~ msgstr "'origin' は長さ 1 でなければなりません"
 
 #~ msgid "'package' must be of length 1"
 #~ msgstr "'package' は長さ 1 でなければなりません"

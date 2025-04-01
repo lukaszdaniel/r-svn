@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -76,16 +76,16 @@ msgstr "nebaigtinis x[%d] pralaidumo skaičiavime"
 msgid "data are constant in bandwidth calculation"
 msgstr "nebaigtinis x[%d] pralaidumo skaičiavime"
 
-#: complete_cases.cpp:30
+#: complete_cases.cpp:26
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "neleistinas 'type' (%s) argumento"
 
-#: complete_cases.cpp:116
+#: complete_cases.cpp:112
 msgid "no input has determined the number of cases"
 msgstr "jokia įvestis nenustatė atvejų skaičiaus"
 
-#: complete_cases.cpp:228
+#: complete_cases.cpp:224
 msgid "not all arguments have the same length"
 msgstr "ne visi argumentai turi tą patį ilgį"
 
@@ -167,7 +167,7 @@ msgstr "neleistina išraiška, esanti '%s'"
 msgid "too many variables"
 msgstr "per daug faktorių"
 
-#: deriv.cpp:1077 model.cpp:102
+#: deriv.cpp:1077 model.cpp:105
 msgid "invalid variable names"
 msgstr "neleistini kintamųjų pavadinimai"
 
@@ -187,11 +187,11 @@ msgstr "distance(): neleistinas p"
 msgid "distance(): invalid distance"
 msgstr "distance(): netinkamas atstumas"
 
-#: distn.cpp:44
+#: distn.cpp:40
 msgid "NaNs produced"
 msgstr "NaN sukurti"
 
-#: distn.cpp:45
+#: distn.cpp:41
 msgid "Non-numeric argument to mathematical function"
 msgstr "Neskaitinis matematinės funkcijos argumentas"
 
@@ -286,55 +286,55 @@ msgid ""
 "%s"
 msgstr ""
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:377
-#: model.cpp:385 optim.cpp:216
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:367
+#: model.cpp:375 optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "neleistinas argumentas '%s'"
 
-#: fourier.cpp:64 fourier.cpp:159
+#: fourier.cpp:56 fourier.cpp:151
 msgid "non-numeric argument"
 msgstr "neskaitinis argumentas"
 
-#: fourier.cpp:82 fourier.cpp:100 fourier.cpp:173
+#: fourier.cpp:74 fourier.cpp:92 fourier.cpp:165
 msgid "fft factorization error"
 msgstr "fft faktorizacijos klaida"
 
-#: fourier.cpp:85 fourier.cpp:109 fourier.cpp:176
+#: fourier.cpp:77 fourier.cpp:101 fourier.cpp:168
 msgid "fft too large"
 msgstr ""
 
-#: fourier.cpp:145
+#: fourier.cpp:137
 msgid "vector-valued (multivariate) series required"
 msgstr "reikalinga vektorinės reikšmės (daugiamatė) eilutė"
 
-#: fourier.cpp:215
+#: fourier.cpp:207
 #, c-format
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr "nextn() nerado sprendimo < %d = INT_MAX (maksimalus sveikasis skaičius); naudoti '0+ n' vietoj 'n'"
 
-#: fourier.cpp:226
+#: fourier.cpp:218
 #, fuzzy, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr "nextn<64>() nerado sprendimo < %llu = UINT64_MAX (maksimalus sveikasis skaičius)"
 
-#: fourier.cpp:242
+#: fourier.cpp:234
 msgid "no factors"
 msgstr "jokių faktorių"
 
-#: fourier.cpp:243
+#: fourier.cpp:235
 msgid "too many factors"
 msgstr "per daug faktorių"
 
-#: fourier.cpp:246
+#: fourier.cpp:238
 msgid "invalid factors"
 msgstr "netinkami faktoriai"
 
-#: fourier.cpp:250
+#: fourier.cpp:242
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr "'n' privalo turėti typeof(.) \"integer\" arba \"double\""
 
-#: fourier.cpp:291
+#: fourier.cpp:283
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> > 2^53 gali būti tiksliai atvaizduojamas R (kaip \"double\")"
@@ -463,148 +463,148 @@ msgstr "Neteisingas vmethod"
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Burgo algoritmui nepavyko rasti dalinės koreliacijos"
 
-#: model.cpp:100
+#: model.cpp:103
 msgid "invalid variables"
 msgstr "neleistini kintamieji"
 
-#: model.cpp:104 model.cpp:109
+#: model.cpp:107 model.cpp:112
 msgid "number of variables != number of variable names"
 msgstr "kintamųjų skaičius != kintamųjų pavadinimų skaičius"
 
-#: model.cpp:107
+#: model.cpp:110
 msgid "invalid extra variables"
 msgstr "netinkami papildomi kintamieji"
 
-#: model.cpp:111
+#: model.cpp:114
 msgid "invalid extra variable names"
 msgstr "neleistini papildomi kintamųjų pavadinimai"
 
-#: model.cpp:132
+#: model.cpp:135
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "per ilgi vardai, esantys '%s'"
 
-#: model.cpp:159
+#: model.cpp:160
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "neleistinas tipas (%s) kintamajam '%s'"
 
-#: model.cpp:164
+#: model.cpp:166
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "kintamojo ilgiai skiriasi (rasta '%s')"
 
-#: model.cpp:221
+#: model.cpp:214
 msgid "invalid result from na.action"
 msgstr "neteisingas rezultatas iš na.action"
 
-#: model.cpp:396
+#: model.cpp:386
 msgid "invalid model frame"
 msgstr "neleistina modelio sistema"
 
-#: model.cpp:398
+#: model.cpp:388
 msgid "do not know how many cases"
 msgstr "nežino, kiek atvejų"
 
-#: model.cpp:422
+#: model.cpp:412
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "kintamojo ilgiai skiriasi (randama kintamajam %d)"
 
-#: model.cpp:426 model.cpp:433
+#: model.cpp:416 model.cpp:423
 #, c-format
 msgid "variable %d has no levels"
 msgstr "kintamasis %d neturi lygių"
 
-#: model.cpp:544
+#: model.cpp:534
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "atsakymas pasirodė dešinėje pusėje ir buvo numestas"
 
-#: model.cpp:564
+#: model.cpp:554
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "nariui %d reikės %.0g stulpelių"
 
-#: model.cpp:568
+#: model.cpp:558
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "matricai reikės %.0g stulpelių"
 
-#: model.cpp:579
+#: model.cpp:569
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "problema dėl nario %d, esančio model.matrix: stulpeliai nepriskirti"
 
-#: model.cpp:628 model.cpp:633 model.cpp:639 model.cpp:650 model.cpp:656
-#: model.cpp:662
+#: model.cpp:618 model.cpp:623 model.cpp:629 model.cpp:640 model.cpp:646
+#: model.cpp:652
 msgid "term names will be truncated"
 msgstr "nario pavadinimai bus sutrumpinti"
 
-#: model.cpp:642
+#: model.cpp:632
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "kompleksiniai kintamieji šiuo metu neleidžiami modelių matricose"
 
-#: model.cpp:666
+#: model.cpp:656
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "modelio matricose neleidžiama naudoti '%s' tipo kintamųjų"
 
-#: model.cpp:881
+#: model.cpp:871
 msgid "invalid formula in 'update'"
 msgstr "neleistina formulė, esanti ‘update’"
 
-#: model.cpp:915
+#: model.cpp:905
 msgid "formula expected"
 msgstr "laukta formulė"
 
-#: model.cpp:1079
+#: model.cpp:1069
 msgid "invalid term in model formula"
 msgstr "netinkamas narys modelio formulėje"
 
-#: model.cpp:1170
+#: model.cpp:1160
 msgid "invalid model formula"
 msgstr "netinkama modelio formulė"
 
-#: model.cpp:1202 model.cpp:1509
+#: model.cpp:1192 model.cpp:1499
 msgid "invalid power in formula"
 msgstr "neteisinga galia formulėje"
 
-#: model.cpp:1251
+#: model.cpp:1241
 msgid "invalid model formula in ExtractVars"
 msgstr "netinkama modelio formulė, esanti ExtractVars"
 
-#: model.cpp:1294
+#: model.cpp:1284
 #, c-format
 msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
 msgstr ""
 
-#: model.cpp:1620
+#: model.cpp:1610
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "dubliuotas pavadinimas '%s' duomenų sistemoje naudojant '.'"
 
-#: model.cpp:1686
+#: model.cpp:1676
 msgid "invalid model formula in EncodeVars"
 msgstr "netinkama modelio formulė, esanti EncodeVars"
 
-#: model.cpp:1763
+#: model.cpp:1752
 msgid "argument is not a valid model"
 msgstr "argumentas nėra tinkamas modelis"
 
-#: model.cpp:1773
+#: model.cpp:1762
 msgid "'specials' must be NULL or a character vector"
 msgstr "specials' turi būti NULL arba tekstinis vektorius"
 
-#: model.cpp:1784
+#: model.cpp:1773
 msgid "'data' argument is of the wrong type"
 msgstr "argumentas 'data' yra netinkamo tipo"
 
-#: model.cpp:1852
+#: model.cpp:1841
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr "'varlist' pasikeitė (iš nvar=%d) į naują %d po EncodeVars() -- nebeturėtų įvykti!"
 
-#: model.cpp:2132
+#: model.cpp:2123
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' formulėje ir nėra argumento 'data'"
 
@@ -1031,32 +1031,32 @@ msgstr "'scal' turi būti kvadratinė, realioji matrica"
 msgid "'scal' matrix is not positive-definite"
 msgstr "'scal' matrica nėra teigiama"
 
-#: random.cpp:58 random.cpp:142 random.cpp:222 random.cpp:312
+#: random.cpp:54 random.cpp:138 random.cpp:218 random.cpp:308
 msgid "NAs produced"
 msgstr "NA sukurtas"
 
-#: random.cpp:65 random.cpp:71 random.cpp:77 random.cpp:92 random.cpp:172
-#: random.cpp:261 random.cpp:399
+#: random.cpp:61 random.cpp:67 random.cpp:73 random.cpp:88 random.cpp:168
+#: random.cpp:257 random.cpp:395
 msgid "invalid arguments"
 msgstr "neleistini argumentai"
 
-#: random.cpp:338
+#: random.cpp:334
 msgid "NA in probability vector"
 msgstr "NA tikimybės vektoriuje"
 
-#: random.cpp:340
+#: random.cpp:336
 msgid "negative probability"
 msgstr "neigiama tikimybė"
 
-#: random.cpp:346
+#: random.cpp:342
 msgid "no positive probabilities"
 msgstr "nėra teigiamų tikimybių"
 
-#: random.cpp:358
+#: random.cpp:354
 msgid "invalid first argument 'n'"
 msgstr "neteisingas pirmasis argumentas 'n'"
 
-#: random.cpp:360
+#: random.cpp:356
 msgid "invalid second argument 'size'"
 msgstr "neleistinas antrasis argumentas 'size'"
 

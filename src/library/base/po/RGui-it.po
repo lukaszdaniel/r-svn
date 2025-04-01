@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: R-4-2-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-07 19:22+0100\n"
-"PO-Revision-Date: 2024-03-18 21:18+0000\n"
+"PO-Revision-Date: 2025-04-01 16:50+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: src/gnuwin32/console.cpp:1195 src/gnuwin32/console.cpp:1237
 #: src/gnuwin32/console.cpp:1767
@@ -25,12 +26,12 @@ msgstr "Memoria insufficiente"
 
 #: src/gnuwin32/console.cpp:1284 src/gnuwin32/console.cpp:1288
 msgid "Insufficient memory: text not copied to the clipboard"
-msgstr "Memoria insufficiente: il testo non puÚ essere copiato negli appunti"
+msgstr "Memoria insufficiente: il testo non pu√≤ essere copiato negli appunti"
 
 #: src/gnuwin32/console.cpp:1326 src/extra/graphapp/clipboard.c:53
 #: src/extra/graphapp/clipboard.c:79
 msgid "Unable to open the clipboard"
-msgstr "Non Ë possibile aprire gli appunti"
+msgstr "Non √® possibile aprire gli appunti"
 
 #: src/gnuwin32/console.cpp:2131
 msgid "Insufficient memory. Please close the console"
@@ -148,7 +149,7 @@ msgstr "     Ctrl+L: pulisci console.\n"
 
 #: src/gnuwin32/console.cpp:2474
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
-msgstr "     Ctrl+O o INS: attiva/disattiva modalit‡ sovrascrittura: inizialmente inattiva.\n"
+msgstr "     Ctrl+O o INS: attiva/disattiva modalit√† sovrascrittura: inizialmente inattiva.\n"
 
 #: src/gnuwin32/console.cpp:2475
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
@@ -201,17 +202,17 @@ msgstr "Editor di R"
 #: src/gnuwin32/editor.cpp:164
 #, c-format
 msgid "unable to open file %s for reading"
-msgstr "non Ë possibile aprire il file %s in lettura"
+msgstr "non √® possibile aprire il file %s in lettura"
 
 #: src/gnuwin32/editor.cpp:189
 #, c-format
 msgid "Could not read from file '%s'"
-msgstr "Non si puÚ leggere dal file '%s'"
+msgstr "Non si pu√≤ leggere dal file '%s'"
 
 #: src/gnuwin32/editor.cpp:222
 #, c-format
 msgid "Could not save file '%s'"
-msgstr "Non Ë possibile salvare il file '%s'"
+msgstr "Non √® possibile salvare il file '%s'"
 
 #: src/gnuwin32/editor.cpp:242
 msgid "Save script as"
@@ -257,11 +258,11 @@ msgstr "     Premi l'icona \"Esegui linea o selezione\" sulla barra degli strume
 
 #: src/gnuwin32/editor.cpp:683
 msgid "This will copy the selected commands to the console and evaluate them.\n"
-msgstr "Questo copier‡ i comandi selezionati nella console e li valuter‡.\n"
+msgstr "Questo copier√† i comandi selezionati nella console e li valuter√†.\n"
 
 #: src/gnuwin32/editor.cpp:684
 msgid "If there is no selection, this will just run the current line and advance\n"
-msgstr "Se non c'Ë selezione, questo eseguir‡ la linea attuale e avanzer‡\n"
+msgstr "Se non c'√® selezione, questo eseguir√† la linea attuale e avanzer√†\n"
 
 #: src/gnuwin32/editor.cpp:685
 msgid "the cursor by one line.\n"
@@ -394,7 +395,7 @@ msgstr "Numero massimo di editor trovati"
 
 #: src/gnuwin32/editor.cpp:917
 msgid "Unable to create editor window"
-msgstr "Non Ë possibile creare una finestra per l'editor"
+msgstr "Non √® possibile creare una finestra per l'editor"
 
 #: src/gnuwin32/editor.cpp:925
 msgid "Untitled"
@@ -449,7 +450,7 @@ msgstr "Visualizza"
 
 #: src/gnuwin32/pager.cpp:526
 msgid "Unable to create pager window"
-msgstr "Non Ë possibile creare una finestra pager"
+msgstr "Non √® possibile creare una finestra pager"
 
 #: src/gnuwin32/preferences.cpp:312
 msgid ""
@@ -458,7 +459,7 @@ msgid ""
 "\n"
 "Save the preferences and restart Rgui to apply them.\n"
 msgstr ""
-"Le propriet‡ generali della console non si possono cambiare\n"
+"Le propriet√† generali della console non si possono cambiare\n"
 "durante l'esecuzione di una console.\n"
 "\n"
 "Salva le preferenze e riavvia Rgui per applicarle.\n"
@@ -470,7 +471,7 @@ msgid ""
 "\n"
 "Save the preferences and restart Rgui to apply to menus.\n"
 msgstr ""
-"La lingua per i menu non puÚ essere cambiata su una\n"
+"La lingua per i menu non pu√≤ essere cambiata su una\n"
 " console in esecuzione.\n"
 "\n"
 "Salva le preferenze e riavvia Rgui per applicarle ai menu.\n"
@@ -535,7 +536,7 @@ msgstr "Nome per il data frame o matrice"
 #: src/gnuwin32/rui.cpp:365
 #, c-format
 msgid "'%s' cannot be found"
-msgstr "'%s' non Ë stato trovato"
+msgstr "'%s' non √® stato trovato"
 
 #: src/gnuwin32/rui.cpp:510
 msgid "Are you sure?"
@@ -559,7 +560,7 @@ msgstr "Apropos"
 
 #: src/gnuwin32/rui.cpp:917
 msgid "Can only drag-and-drop .R, .RData and .rda files"
-msgstr "Non Ë possibile trascinare file .R, .RData e .rda"
+msgstr "Non √® possibile trascinare file .R, .RData e .rda"
 
 #: src/gnuwin32/rui.cpp:923 src/gnuwin32/rui.cpp:1220
 msgid "Paste commands only"
@@ -771,7 +772,7 @@ msgstr "Console"
 
 #: src/gnuwin32/rui.cpp:1322
 msgid "'mname' is limited to 1000 bytes"
-msgstr "'mname' Ë limitato a 1000 caratteri"
+msgstr "'mname' √® limitato a 1000 caratteri"
 
 #: src/gnuwin32/rui.cpp:1367
 #, c-format
@@ -780,7 +781,7 @@ msgstr "il menu %s non esiste"
 
 #: src/gnuwin32/rui.cpp:1419
 msgid "'menu' is limited to 500 bytes"
-msgstr "'menu' Ë limitato a 500 caratteri"
+msgstr "'menu' √® limitato a 500 caratteri"
 
 #: src/gnuwin32/rui.cpp:1429
 msgid "base menu does not exist"
@@ -821,7 +822,7 @@ msgstr "Salva area di lavoro?"
 
 #: src/extra/graphapp/clipboard.c:69 src/extra/graphapp/clipboard.c:73
 msgid "Insufficient memory: cell not copied to the clipboard"
-msgstr "Memoria insufficiente: il testo non puÚ essere copiato negli appunti"
+msgstr "Memoria insufficiente: il testo non pu√≤ essere copiato negli appunti"
 
 #: src/extra/graphapp/dialogs.c:144 src/extra/graphapp/dialogs.c:161
 #: src/extra/graphapp/dialogs.c:178
@@ -868,11 +869,11 @@ msgstr "Allinea icone"
 
 #: src/extra/graphapp/metafile.c:55
 msgid "Unable to save metafile to the clipboard"
-msgstr "Non Ë possibile salvare metafile negli appunti"
+msgstr "Non √® possibile salvare metafile negli appunti"
 
 #: src/extra/graphapp/metafile.c:117
 msgid "Unable to create metafile"
-msgstr "Non Ë possibile creare metafile"
+msgstr "Non √® possibile creare metafile"
 
 #: src/extra/graphapp/metafile.c:122
 msgid "Insufficient memory to create metafile"
@@ -880,7 +881,7 @@ msgstr "Memoria insufficiente per creare metafile"
 
 #: src/extra/graphapp/printer.c:111
 msgid "Unable to choose printer"
-msgstr "Non Ë possibile selezionare una stampante"
+msgstr "Non √® possibile selezionare una stampante"
 
 #: src/extra/graphapp/printer.c:139
 msgid "Insufficient memory for new printer"
@@ -888,7 +889,7 @@ msgstr "Memoria insufficiente per una nuova stampante"
 
 #: src/extra/graphapp/printer.c:175
 msgid "Unable to start the print job"
-msgstr "Non Ë possibile avviare un processo di stampa"
+msgstr "Non √® possibile avviare un processo di stampa"
 
 #: src/library/utils/src/windows/dataentry.cpp:248
 #: src/library/utils/src/windows/dataentry.cpp:1879
@@ -981,7 +982,7 @@ msgstr ""
 "Navigazione.\n"
 "  Tastiera: i tasti cursore muovono la selezione\n"
 "\tIl tasto tabulatore muove a destra, Shift+Tabulatore muove a sinistra\n"
-"\tPgDn o Ctrl+F: muovono una schermata gi˘\n"
+"\tPgDn o Ctrl+F: muovono una schermata gi√π\n"
 "\tPgUp o Ctrl+B: muovono una schermata su\n"
 "\tHome: muove nella cella (1,1)\n"
 "\tEnd: mostra l'ultima riga dell'ultima colonna.\n"
@@ -1033,7 +1034,7 @@ msgstr "Editor dei dati"
 #: src/library/utils/src/windows/dataentry.cpp:1919
 #, fuzzy
 msgid "unable to start data viewer"
-msgstr "Non Ë possibile avviare un processo di stampa"
+msgstr "Non √® possibile avviare un processo di stampa"
 
 #: src/library/grDevices/src/devWindows.cpp:937
 msgid "Portable network graphics file"
@@ -1066,7 +1067,7 @@ msgstr "Metafile avanzati"
 #: src/library/grDevices/src/devWindows.cpp:993
 #: src/library/grDevices/src/devWindows.cpp:3528
 msgid "file path selected is too long: only 512 bytes are allowed"
-msgstr "il percorso file scelto Ë troppo lungo: sono ammessi solo 512 caratteri"
+msgstr "il percorso file scelto √® troppo lungo: sono ammessi solo 512 caratteri"
 
 #: src/library/grDevices/src/devWindows.cpp:1203
 msgid "No plot to replace!"
@@ -1119,7 +1120,7 @@ msgstr "Salva con nome"
 #: src/library/grDevices/src/devWindows.cpp:1639
 #, c-format
 msgid "%s quality..."
-msgstr "qualit‡ %s..."
+msgstr "qualit√† %s..."
 
 #: src/library/grDevices/src/devWindows.cpp:1641
 msgid "Copy to the clipboard"
@@ -1179,7 +1180,7 @@ msgstr "Ridimensiona"
 
 #: src/library/grDevices/src/devWindows.cpp:1664
 msgid "R mode"
-msgstr "Modalit‡ R"
+msgstr "Modalit√† R"
 
 #: src/library/grDevices/src/devWindows.cpp:1666
 msgid "Fit to window"
@@ -1207,7 +1208,7 @@ msgstr "Salva su postscript..."
 
 #: src/library/grDevices/src/devWindows.cpp:3190
 msgid "Locator is active"
-msgstr "Locator Ë attivo"
+msgstr "Locator √® attivo"
 
 #: src/library/grDevices/src/devWindows.cpp:3846
 msgid "Waiting to confirm page change..."

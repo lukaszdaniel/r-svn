@@ -1,4 +1,4 @@
-# Русский перевод для R GUI
+# п═я┐я│я│п╨п╦п╧ п©п╣я─п╣п╡п╬п╢ п╢п╩я▐ R GUI
 #
 # This file is distributed under the same license as the R package.
 # Copyright (C) 2009 Alexey Shipunov <dactylorhiza at gmail>
@@ -9,33 +9,34 @@ msgstr ""
 "Project-Id-Version: R 2.10.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-07 19:22+0100\n"
-"PO-Revision-Date: 2024-03-25 14:26+0300\n"
+"PO-Revision-Date: 2025-04-01 16:49+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian <dactylorhiza at gmail>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=koi8-r\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: src/gnuwin32/console.cpp:1195 src/gnuwin32/console.cpp:1237
 #: src/gnuwin32/console.cpp:1767
 msgid "Not enough memory"
-msgstr "Недостаточно памяти"
+msgstr "п²п╣п╢п╬я│я┌п╟я┌п╬я┤п╫п╬ п©п╟п╪я▐я┌п╦"
 
 #: src/gnuwin32/console.cpp:1284 src/gnuwin32/console.cpp:1288
 msgid "Insufficient memory: text not copied to the clipboard"
-msgstr "Недостаточно памяти: текст не скопирован в буфер обмена"
+msgstr "п²п╣п╢п╬я│я┌п╟я┌п╬я┤п╫п╬ п©п╟п╪я▐я┌п╦: я┌п╣п╨я│я┌ п╫п╣ я│п╨п╬п©п╦я─п╬п╡п╟п╫ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #: src/gnuwin32/console.cpp:1326 src/extra/graphapp/clipboard.c:53
 #: src/extra/graphapp/clipboard.c:79
 msgid "Unable to open the clipboard"
-msgstr "Не могу открыть буфер обмена"
+msgstr "п²п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #: src/gnuwin32/console.cpp:2131
 msgid "Insufficient memory. Please close the console"
-msgstr "Недостаточно памяти. Пожалуйста, закройте консоль"
+msgstr "п²п╣п╢п╬я│я┌п╟я┌п╬я┤п╫п╬ п©п╟п╪я▐я┌п╦. п÷п╬п╤п╟п╩я┐п╧я│я┌п╟, п╥п╟п╨я─п╬п╧я┌п╣ п╨п╬п╫я│п╬п╩я▄"
 
 #: src/gnuwin32/console.cpp:2186 src/gnuwin32/console.cpp:2240
 #: src/gnuwin32/preferences.cpp:347
@@ -44,116 +45,116 @@ msgid ""
 "Font %s-%d-%d  not found.\n"
 "Using system fixed font"
 msgstr ""
-"Шрифт %s-%d-%d  не найден.\n"
-"Используется системный шрифт"
+"п╗я─п╦я└я┌ %s-%d-%d  п╫п╣ п╫п╟п╧п╢п╣п╫.\n"
+"п≤я│п©п╬п╩я▄п╥я┐п╣я┌я│я▐ я│п╦я│я┌п╣п╪п╫я▀п╧ я┬я─п╦я└я┌"
 
 #: src/gnuwin32/console.cpp:2343
 msgid "Save selection to"
-msgstr "Сохранить выделение в"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╦п╣ п╡"
 
 #: src/gnuwin32/console.cpp:2345
 msgid "Save console contents to"
-msgstr "Сохранить содержимое консоли в"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я│п╬п╢п╣я─п╤п╦п╪п╬п╣ п╨п╬п╫я│п╬п╩п╦ п╡"
 
 #: src/gnuwin32/console.cpp:2452
 msgid "Scrolling.\n"
-msgstr "Прокрутка.\n"
+msgstr "п÷я─п╬п╨я─я┐я┌п╨п╟.\n"
 
 #: src/gnuwin32/console.cpp:2453
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
-msgstr "  Клавиатура: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
+msgstr "  п п╩п╟п╡п╦п╟я┌я┐я─п╟: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 
 #: src/gnuwin32/console.cpp:2454
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
 msgstr ""
-"  Мышь: использовать полос(ы) прокрутки.\n"
+"  п°я▀я┬я▄: п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п©п╬п╩п╬я│(я▀) п©я─п╬п╨я─я┐я┌п╨п╦.\n"
 "\n"
 
 #: src/gnuwin32/console.cpp:2455
 msgid "Editing.\n"
-msgstr "Редактирование.\n"
+msgstr "п═п╣п╢п╟п╨я┌п╦я─п╬п╡п╟п╫п╦п╣.\n"
 
 #: src/gnuwin32/console.cpp:2456
 msgid "  Moving the cursor: \n"
-msgstr "  Перемещение курсора: \n"
+msgstr "  п÷п╣я─п╣п╪п╣я┴п╣п╫п╦п╣ п╨я┐я─я│п╬я─п╟: \n"
 
 #: src/gnuwin32/console.cpp:2457
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
-msgstr "     Левая стрелка или Ctrl+B: назад на один символ;\n"
+msgstr "     п⌡п╣п╡п╟я▐ я│я┌я─п╣п╩п╨п╟ п╦п╩п╦ Ctrl+B: п╫п╟п╥п╟п╢ п╫п╟ п╬п╢п╦п╫ я│п╦п╪п╡п╬п╩;\n"
 
 #: src/gnuwin32/console.cpp:2458
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
-msgstr "     Стрелка вправо или Ctrl+F: вперед на один символ;\n"
+msgstr "     п║я┌я─п╣п╩п╨п╟ п╡п©я─п╟п╡п╬ п╦п╩п╦ Ctrl+F: п╡п©п╣я─п╣п╢ п╫п╟ п╬п╢п╦п╫ я│п╦п╪п╡п╬п╩;\n"
 
 #: src/gnuwin32/console.cpp:2459
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
-msgstr "     Home или Ctrl+A: к началу строки;\n"
+msgstr "     Home п╦п╩п╦ Ctrl+A: п╨ п╫п╟я┤п╟п╩я┐ я│я┌я─п╬п╨п╦;\n"
 
 #: src/gnuwin32/console.cpp:2460
 msgid "     End or Ctrl+E: go to end of line;\n"
-msgstr "     End или Ctrl+E: в конец строки;\n"
+msgstr "     End п╦п╩п╦ Ctrl+E: п╡ п╨п╬п╫п╣я├ я│я┌я─п╬п╨п╦;\n"
 
 #: src/gnuwin32/console.cpp:2461
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
-msgstr "  История: стрелки вверх и вниз, Ctrl+P, Ctrl+N\n"
+msgstr "  п≤я│я┌п╬я─п╦я▐: я│я┌я─п╣п╩п╨п╦ п╡п╡п╣я─я┘ п╦ п╡п╫п╦п╥, Ctrl+P, Ctrl+N\n"
 
 #: src/gnuwin32/console.cpp:2462
 msgid "  Deleting:\n"
-msgstr "  Удаление:\n"
+msgstr "  пёп╢п╟п╩п╣п╫п╦п╣:\n"
 
 #: src/gnuwin32/console.cpp:2463
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
-msgstr "     Del или Ctrl+D: удалить текущий символ или выделение;\n"
+msgstr "     Del п╦п╩п╦ Ctrl+D: я┐п╢п╟п╩п╦я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я│п╦п╪п╡п╬п╩ п╦п╩п╦ п╡я▀п╢п╣п╩п╣п╫п╦п╣;\n"
 
 #: src/gnuwin32/console.cpp:2464
 msgid "     Backspace: delete preceding character;\n"
-msgstr "     Backspace: удалить предыдущий символ;\n"
+msgstr "     Backspace: я┐п╢п╟п╩п╦я┌я▄ п©я─п╣п╢я▀п╢я┐я┴п╦п╧ я│п╦п╪п╡п╬п╩;\n"
 
 #: src/gnuwin32/console.cpp:2465
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
-msgstr "     Ctrl+Del или Ctrl+K: удалить текст от текущего символа до конца строки.\n"
+msgstr "     Ctrl+Del п╦п╩п╦ Ctrl+K: я┐п╢п╟п╩п╦я┌я▄ я┌п╣п╨я│я┌ п╬я┌ я┌п╣п╨я┐я┴п╣пЁп╬ я│п╦п╪п╡п╬п╩п╟ п╢п╬ п╨п╬п╫я├п╟ я│я┌я─п╬п╨п╦.\n"
 
 #: src/gnuwin32/console.cpp:2466
 msgid "     Ctrl+U: delete all text from current line.\n"
-msgstr "     Ctrl+U: удалить весь текст текущей строки.\n"
+msgstr "     Ctrl+U: я┐п╢п╟п╩п╦я┌я▄ п╡п╣я│я▄ я┌п╣п╨я│я┌ я┌п╣п╨я┐я┴п╣п╧ я│я┌я─п╬п╨п╦.\n"
 
 #: src/gnuwin32/console.cpp:2467
 msgid "  Copy and paste.\n"
-msgstr "  Копирование и вставка:\n"
+msgstr "  п п╬п©п╦я─п╬п╡п╟п╫п╦п╣ п╦ п╡я│я┌п╟п╡п╨п╟:\n"
 
 #: src/gnuwin32/console.cpp:2468
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
-msgstr "     Использовать мышь (с нажатой левой кнопкой) для выделения текста.\n"
+msgstr "     п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╪я▀я┬я▄ (я│ п╫п╟п╤п╟я┌п╬п╧ п╩п╣п╡п╬п╧ п╨п╫п╬п©п╨п╬п╧) п╢п╩я▐ п╡я▀п╢п╣п╩п╣п╫п╦я▐ я┌п╣п╨я│я┌п╟.\n"
 
 #: src/gnuwin32/console.cpp:2469
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
-msgstr "     Использовать Shift+Del (или Ctrl+C) для копирования выделения в буфер\n"
+msgstr "     п≤я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ Shift+Del (п╦п╩п╦ Ctrl+C) п╢п╩я▐ п╨п╬п©п╦я─п╬п╡п╟п╫п╦я▐ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╡ п╠я┐я└п╣я─\n"
 
 #: src/gnuwin32/console.cpp:2470
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
-msgstr "     Shift+Ins (или Ctrl+V или Ctrl+Y) для вставки содержимого буфера (если есть)  \n"
+msgstr "     Shift+Ins (п╦п╩п╦ Ctrl+V п╦п╩п╦ Ctrl+Y) п╢п╩я▐ п╡я│я┌п╟п╡п╨п╦ я│п╬п╢п╣я─п╤п╦п╪п╬пЁп╬ п╠я┐я└п╣я─п╟ (п╣я│п╩п╦ п╣я│я┌я▄)  \n"
 
 #: src/gnuwin32/console.cpp:2471
 msgid "     to the console, Ctrl+X first copy then paste\n"
-msgstr "     на консоль, Ctrl+X сначала копирует, потом вставляет.\n"
+msgstr "     п╫п╟ п╨п╬п╫я│п╬п╩я▄, Ctrl+X я│п╫п╟я┤п╟п╩п╟ п╨п╬п©п╦я─я┐п╣я┌, п©п╬я┌п╬п╪ п╡я│я┌п╟п╡п╩я▐п╣я┌.\n"
 
 #: src/gnuwin32/console.cpp:2472
 msgid "  Misc:\n"
-msgstr "  Разное:\n"
+msgstr "  п═п╟п╥п╫п╬п╣:\n"
 
 #: src/gnuwin32/console.cpp:2473
 msgid "     Ctrl+L: Clear the console.\n"
-msgstr "     Ctrl+L: Очистить консоль.\n"
+msgstr "     Ctrl+L: п·я┤п╦я│я┌п╦я┌я▄ п╨п╬п╫я│п╬п╩я▄.\n"
 
 #: src/gnuwin32/console.cpp:2474
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
-msgstr "     Ctrl+O: Переключить замену/вставку символов: вначале отключена.\n"
+msgstr "     Ctrl+O: п÷п╣я─п╣п╨п╩я▌я┤п╦я┌я▄ п╥п╟п╪п╣п╫я┐/п╡я│я┌п╟п╡п╨я┐ я│п╦п╪п╡п╬п╩п╬п╡: п╡п╫п╟я┤п╟п╩п╣ п╬я┌п╨п╩я▌я┤п╣п╫п╟.\n"
 
 #: src/gnuwin32/console.cpp:2475
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
-msgstr "     Ctrl+T: Поменять текущий символ с предыдущим.\n"
+msgstr "     Ctrl+T: п÷п╬п╪п╣п╫я▐я┌я▄ я┌п╣п╨я┐я┴п╦п╧ я│п╦п╪п╡п╬п╩ я│ п©я─п╣п╢я▀п╢я┐я┴п╦п╪.\n"
 
 #: src/gnuwin32/console.cpp:2476
 msgid ""
@@ -161,14 +162,14 @@ msgid ""
 "Note: Console is updated only when some input is required.\n"
 msgstr ""
 "\n"
-"Внимание: Консоль обновляется только когда нужен ввод.\n"
+"п▓п╫п╦п╪п╟п╫п╦п╣: п п╬п╫я│п╬п╩я▄ п╬п╠п╫п╬п╡п╩я▐п╣я┌я│я▐ я┌п╬п╩я▄п╨п╬ п╨п╬пЁп╢п╟ п╫я┐п╤п╣п╫ п╡п╡п╬п╢.\n"
 
 #: src/gnuwin32/console.cpp:2477
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
 msgstr ""
-"  Используйте Ctrl+W для включения/выключения этого свойства.\n"
+"  п≤я│п©п╬п╩я▄п╥я┐п╧я┌п╣ Ctrl+W п╢п╩я▐ п╡п╨п╩я▌я┤п╣п╫п╦я▐/п╡я▀п╨п╩я▌я┤п╣п╫п╦я▐ я█я┌п╬пЁп╬ я│п╡п╬п╧я│я┌п╡п╟.\n"
 "\n"
 
 #: src/gnuwin32/console.cpp:2478
@@ -176,7 +177,7 @@ msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
 msgstr ""
-"Используйте Esc для остановки интерпретатора.\n"
+"п≤я│п©п╬п╩я▄п╥я┐п╧я┌п╣ Esc п╢п╩я▐ п╬я│я┌п╟п╫п╬п╡п╨п╦ п╦п╫я┌п╣я─п©я─п╣я┌п╟я┌п╬я─п╟.\n"
 "\n"
 
 #: src/gnuwin32/console.cpp:2479
@@ -184,273 +185,273 @@ msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
 msgstr ""
-"TAB осуществляет дополнение текущего слова.\n"
+"TAB п╬я│я┐я┴п╣я│я┌п╡п╩я▐п╣я┌ п╢п╬п©п╬п╩п╫п╣п╫п╦п╣ я┌п╣п╨я┐я┴п╣пЁп╬ я│п╩п╬п╡п╟.\n"
 "\n"
 
 #: src/gnuwin32/console.cpp:2480
 msgid "Standard Windows hotkeys can be used to switch to the\n"
-msgstr "Стандартные клавиши Windows можно использовать для перехода к\n"
+msgstr "п║я┌п╟п╫п╢п╟я─я┌п╫я▀п╣ п╨п╩п╟п╡п╦я┬п╦ Windows п╪п╬п╤п╫п╬ п╦я│п©п╬п╩я▄п╥п╬п╡п╟я┌я▄ п╢п╩я▐ п©п╣я─п╣я┘п╬п╢п╟ п╨\n"
 
 #: src/gnuwin32/console.cpp:2481
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
-msgstr "окну графики (Ctrl+Tab или Ctrl+F6 в MDI, Alt+Tab в SDI)"
+msgstr "п╬п╨п╫я┐ пЁя─п╟я└п╦п╨п╦ (Ctrl+Tab п╦п╩п╦ Ctrl+F6 п╡ MDI, Alt+Tab п╡ SDI)"
 
 #: src/gnuwin32/editor.cpp:93 src/gnuwin32/editor.cpp:95
 msgid "R Editor"
-msgstr "Редактор R"
+msgstr "п═п╣п╢п╟п╨я┌п╬я─ R"
 
 #: src/gnuwin32/editor.cpp:164
 #, c-format
 msgid "unable to open file %s for reading"
-msgstr "не могу открыть файл %s для чтения"
+msgstr "п╫п╣ п╪п╬пЁя┐ п╬я┌п╨я─я▀я┌я▄ я└п╟п╧п╩ %s п╢п╩я▐ я┤я┌п╣п╫п╦я▐"
 
 #: src/gnuwin32/editor.cpp:189
 #, c-format
 msgid "Could not read from file '%s'"
-msgstr "Не могу прочитать из файла '%s'"
+msgstr "п²п╣ п╪п╬пЁя┐ п©я─п╬я┤п╦я┌п╟я┌я▄ п╦п╥ я└п╟п╧п╩п╟ '%s'"
 
 #: src/gnuwin32/editor.cpp:222
 #, c-format
 msgid "Could not save file '%s'"
-msgstr "Не могу сохранить файл '%s'"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬я┘я─п╟п╫п╦я┌я▄ я└п╟п╧п╩ '%s'"
 
 #: src/gnuwin32/editor.cpp:242
 msgid "Save script as"
-msgstr "Сохранить скрипт как"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я│п╨я─п╦п©я┌ п╨п╟п╨"
 
 #: src/gnuwin32/editor.cpp:440 src/gnuwin32/editor.cpp:766
 #: src/gnuwin32/pager.cpp:438 src/gnuwin32/rui.cpp:1150
 msgid "Open script"
-msgstr "Открыть скрипт"
+msgstr "п·я┌п╨я─я▀я┌я▄ я│п╨я─п╦п©я┌"
 
 #: src/gnuwin32/editor.cpp:572 src/gnuwin32/pager.cpp:192
 #: src/gnuwin32/pager.cpp:212
 msgid "No RGui console to paste to"
-msgstr "Нет графической консоли для вставки"
+msgstr "п²п╣я┌ пЁя─п╟я└п╦я┤п╣я│п╨п╬п╧ п╨п╬п╫я│п╬п╩п╦ п╢п╩я▐ п╡я│я┌п╟п╡п╨п╦"
 
 #: src/gnuwin32/editor.cpp:674
 msgid "R EDITOR\n"
-msgstr "РЕДАКТОР R\n"
+msgstr "п═п∙п■п░п п╒п·п═ R\n"
 
 #: src/gnuwin32/editor.cpp:676
 msgid "A standard text editor for editing and running R code.\n"
-msgstr "Простой текстовый редактор для правки и запуска кода R.\n"
+msgstr "п÷я─п╬я│я┌п╬п╧ я┌п╣п╨я│я┌п╬п╡я▀п╧ я─п╣п╢п╟п╨я┌п╬я─ п╢п╩я▐ п©я─п╟п╡п╨п╦ п╦ п╥п╟п©я┐я│п╨п╟ п╨п╬п╢п╟ R.\n"
 
 #: src/gnuwin32/editor.cpp:678
 msgid "RUNNING COMMANDS\n"
-msgstr "КОМАНДЫ ЗАПУСКА\n"
+msgstr "п п·п°п░п²п■п╚ п≈п░п÷пёп║п п░\n"
 
 #: src/gnuwin32/editor.cpp:679
 msgid "To run a line or section of R code, select the code and either\n"
-msgstr "Чтобы запустить строку или блок кода R, выделите текст и или\n"
+msgstr "п╖я┌п╬п╠я▀ п╥п╟п©я┐я│я┌п╦я┌я▄ я│я┌я─п╬п╨я┐ п╦п╩п╦ п╠п╩п╬п╨ п╨п╬п╢п╟ R, п╡я▀п╢п╣п╩п╦я┌п╣ я┌п╣п╨я│я┌ п╦ п╦п╩п╦\n"
 
 #: src/gnuwin32/editor.cpp:680
 msgid "     Press Ctrl-R\n"
-msgstr "     Нажмите Ctrl-R\n"
+msgstr "     п²п╟п╤п╪п╦я┌п╣ Ctrl-R\n"
 
 #: src/gnuwin32/editor.cpp:681
 msgid "     Select \"Run line or selection\" from the \"Edit\" menu\n"
-msgstr "     Выберите \"Запустить строку или блок\" из меню \"Правка\"\n"
+msgstr "     п▓я▀п╠п╣я─п╦я┌п╣ \"п≈п╟п©я┐я│я┌п╦я┌я▄ я│я┌я─п╬п╨я┐ п╦п╩п╦ п╠п╩п╬п╨\" п╦п╥ п╪п╣п╫я▌ \"п÷я─п╟п╡п╨п╟\"\n"
 
 #: src/gnuwin32/editor.cpp:682
 msgid "     Press the \"Run line or selection\" icon on the toolbar\n"
-msgstr "     Нажмите на панели кнопку \"Запустить строку или блок\"\n"
+msgstr "     п²п╟п╤п╪п╦я┌п╣ п╫п╟ п©п╟п╫п╣п╩п╦ п╨п╫п╬п©п╨я┐ \"п≈п╟п©я┐я│я┌п╦я┌я▄ я│я┌я─п╬п╨я┐ п╦п╩п╦ п╠п╩п╬п╨\"\n"
 
 #: src/gnuwin32/editor.cpp:683
 msgid "This will copy the selected commands to the console and evaluate them.\n"
-msgstr "В результате выбранные команды скопируются на консоль и запустятся там.\n"
+msgstr "п▓ я─п╣п╥я┐п╩я▄я┌п╟я┌п╣ п╡я▀п╠я─п╟п╫п╫я▀п╣ п╨п╬п╪п╟п╫п╢я▀ я│п╨п╬п©п╦я─я┐я▌я┌я│я▐ п╫п╟ п╨п╬п╫я│п╬п╩я▄ п╦ п╥п╟п©я┐я│я┌я▐я┌я│я▐ я┌п╟п╪.\n"
 
 #: src/gnuwin32/editor.cpp:684
 msgid "If there is no selection, this will just run the current line and advance\n"
-msgstr "Если выделения нет, будет запущена текущая строка, а курсор\n"
+msgstr "п∙я│п╩п╦ п╡я▀п╢п╣п╩п╣п╫п╦я▐ п╫п╣я┌, п╠я┐п╢п╣я┌ п╥п╟п©я┐я┴п╣п╫п╟ я┌п╣п╨я┐я┴п╟я▐ я│я┌я─п╬п╨п╟, п╟ п╨я┐я─я│п╬я─\n"
 
 #: src/gnuwin32/editor.cpp:685
 msgid "the cursor by one line.\n"
-msgstr "переместится на строку вниз.\n"
+msgstr "п©п╣я─п╣п╪п╣я│я┌п╦я┌я│я▐ п╫п╟ я│я┌я─п╬п╨я┐ п╡п╫п╦п╥.\n"
 
 #: src/gnuwin32/editor.cpp:697 src/gnuwin32/editor.cpp:774
 #: src/gnuwin32/editor.cpp:832
 msgid "Run line or selection"
-msgstr "Запустить строку или блок"
+msgstr "п≈п╟п©я┐я│я┌п╦я┌я▄ я│я┌я─п╬п╨я┐ п╦п╩п╦ п╠п╩п╬п╨"
 
 #: src/gnuwin32/editor.cpp:699 src/gnuwin32/editor.cpp:817
 msgid "Undo"
-msgstr "Отменить"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄"
 
 #: src/gnuwin32/editor.cpp:701 src/gnuwin32/editor.cpp:820
 msgid "Cut"
-msgstr "Вырезать"
+msgstr "п▓я▀я─п╣п╥п╟я┌я▄"
 
 #: src/gnuwin32/editor.cpp:702 src/gnuwin32/editor.cpp:822
 #: src/gnuwin32/pager.cpp:312 src/gnuwin32/pager.cpp:485
 #: src/gnuwin32/rui.cpp:921 src/gnuwin32/rui.cpp:1162 src/gnuwin32/rui.cpp:1218
 msgid "Copy"
-msgstr "Копировать"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄"
 
 #: src/gnuwin32/editor.cpp:703 src/gnuwin32/editor.cpp:824
 #: src/gnuwin32/rui.cpp:922 src/gnuwin32/rui.cpp:1166 src/gnuwin32/rui.cpp:1219
 msgid "Paste"
-msgstr "Вставить"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄"
 
 #: src/gnuwin32/editor.cpp:704 src/gnuwin32/editor.cpp:826
 msgid "Delete"
-msgstr "Удалить"
+msgstr "пёп╢п╟п╩п╦я┌я▄"
 
 #: src/gnuwin32/editor.cpp:706 src/gnuwin32/editor.cpp:828
 #: src/gnuwin32/pager.cpp:315 src/gnuwin32/pager.cpp:491
 #: src/gnuwin32/rui.cpp:928 src/gnuwin32/rui.cpp:1223
 msgid "Select all"
-msgstr "Выделить все"
+msgstr "п▓я▀п╢п╣п╩п╦я┌я▄ п╡я│п╣"
 
 #: src/gnuwin32/editor.cpp:770
 msgid "Save script"
-msgstr "Сохранить скрипт"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я│п╨я─п╦п©я┌"
 
 #: src/gnuwin32/editor.cpp:778 src/gnuwin32/pager.cpp:458
 #: src/library/grDevices/src/devWindows.cpp:1593
 msgid "Return focus to Console"
-msgstr "Вернуть фокус в консоль"
+msgstr "п▓п╣я─п╫я┐я┌я▄ я└п╬п╨я┐я│ п╡ п╨п╬п╫я│п╬п╩я▄"
 
 #: src/gnuwin32/editor.cpp:781
 msgid "Print script"
-msgstr "Печатать скрипт"
+msgstr "п÷п╣я┤п╟я┌п╟я┌я▄ я│п╨я─п╦п©я┌"
 
 #: src/gnuwin32/editor.cpp:783 src/gnuwin32/pager.cpp:453
 #: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1587
 msgid "Print"
-msgstr "Печать"
+msgstr "п÷п╣я┤п╟я┌я▄"
 
 #: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:474
 #: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1828
 #: src/library/grDevices/src/devWindows.cpp:1625
 msgid "File"
-msgstr "Файл"
+msgstr "п╓п╟п╧п╩"
 
 #: src/gnuwin32/editor.cpp:802 src/gnuwin32/pager.cpp:475
 #: src/gnuwin32/rui.cpp:1198
 msgid "New script"
-msgstr "Новый скрипт"
+msgstr "п²п╬п╡я▀п╧ я│п╨я─п╦п©я┌"
 
 #: src/gnuwin32/editor.cpp:804 src/gnuwin32/pager.cpp:476
 #: src/gnuwin32/rui.cpp:1199
 msgid "Open script..."
-msgstr "Открыть скрипт..."
+msgstr "п·я┌п╨я─я▀я┌я▄ я│п╨я─п╦п©я┌..."
 
 #: src/gnuwin32/editor.cpp:806
 msgid "Save"
-msgstr "Сохранить"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄"
 
 #: src/gnuwin32/editor.cpp:808
 msgid "Save as..."
-msgstr "Сохранить как..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╨п╟п╨..."
 
 #: src/gnuwin32/editor.cpp:811 src/gnuwin32/pager.cpp:477
 #: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1646
 #: src/library/grDevices/src/devWindows.cpp:1688
 msgid "Print..."
-msgstr "Печать..."
+msgstr "п÷п╣я┤п╟я┌я▄..."
 
 #: src/gnuwin32/editor.cpp:814
 msgid "Close script"
-msgstr "Закрыть скрипт"
+msgstr "п≈п╟п╨я─я▀я┌я▄ я│п╨я─п╦п©я┌"
 
 #: src/gnuwin32/editor.cpp:816 src/gnuwin32/pager.cpp:484
 #: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1834
 msgid "Edit"
-msgstr "Правка"
+msgstr "п÷я─п╟п╡п╨п╟"
 
 #: src/gnuwin32/editor.cpp:830 src/gnuwin32/rui.cpp:1224
 msgid "Clear console"
-msgstr "Очистить консоль"
+msgstr "п·я┤п╦я│я┌п╦я┌я▄ п╨п╬п╫я│п╬п╩я▄"
 
 #: src/gnuwin32/editor.cpp:834
 msgid "Run all"
-msgstr "Запустить все"
+msgstr "п≈п╟п©я┐я│я┌п╦я┌я▄ п╡я│п╣"
 
 #: src/gnuwin32/editor.cpp:837
 msgid "Find..."
-msgstr "Найти..."
+msgstr "п²п╟п╧я┌п╦..."
 
 #: src/gnuwin32/editor.cpp:839
 msgid "Replace..."
-msgstr "Заменить..."
+msgstr "п≈п╟п╪п╣п╫п╦я┌я▄..."
 
 #: src/gnuwin32/editor.cpp:842 src/gnuwin32/rui.cpp:1228
 msgid "GUI preferences..."
-msgstr "Настройки интерфейса..."
+msgstr "п²п╟я│я┌я─п╬п╧п╨п╦ п╦п╫я┌п╣я─я└п╣п╧я│п╟..."
 
 #: src/gnuwin32/editor.cpp:852 src/gnuwin32/rui.cpp:1260
 #: src/library/utils/src/windows/dataentry.cpp:1735
 #: src/library/utils/src/windows/dataentry.cpp:1845
 msgid "Help"
-msgstr "Справка"
+msgstr "п║п©я─п╟п╡п╨п╟"
 
 #: src/gnuwin32/editor.cpp:853
 msgid "Editor"
-msgstr "Редактор"
+msgstr "п═п╣п╢п╟п╨я┌п╬я─"
 
 #: src/gnuwin32/editor.cpp:912
 msgid "Maximum number of editors reached"
-msgstr "Достигнуто максимальное количество редакторов"
+msgstr "п■п╬я│я┌п╦пЁп╫я┐я┌п╬ п╪п╟п╨я│п╦п╪п╟п╩я▄п╫п╬п╣ п╨п╬п╩п╦я┤п╣я│я┌п╡п╬ я─п╣п╢п╟п╨я┌п╬я─п╬п╡"
 
 #: src/gnuwin32/editor.cpp:917
 msgid "Unable to create editor window"
-msgstr "Не могу создать окно редактора"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬п╥п╢п╟я┌я▄ п╬п╨п╫п╬ я─п╣п╢п╟п╨я┌п╬я─п╟"
 
 #: src/gnuwin32/editor.cpp:925
 msgid "Untitled"
-msgstr "Безымянный"
+msgstr "п▒п╣п╥я▀п╪я▐п╫п╫я▀п╧"
 
 #: src/gnuwin32/extra.cpp:1131
 msgid "Select file"
-msgstr "Выбрать файл"
+msgstr "п▓я▀п╠я─п╟я┌я▄ я└п╟п╧п╩"
 
 #: src/gnuwin32/pager.cpp:80 src/gnuwin32/pager.cpp:96
 msgid "Error opening file"
-msgstr "Ошибка открытия файла"
+msgstr "п·я┬п╦п╠п╨п╟ п╬я┌п╨я─я▀я┌п╦я▐ я└п╟п╧п╩п╟"
 
 #: src/gnuwin32/pager.cpp:85 src/gnuwin32/pager.cpp:103
 msgid "Insufficient memory to display file in internal pager"
-msgstr "Не хватает памяти для отражения файла во внутреннем просмотрщике"
+msgstr "п²п╣ я┘п╡п╟я┌п╟п╣я┌ п©п╟п╪я▐я┌п╦ п╢п╩я▐ п╬я┌я─п╟п╤п╣п╫п╦я▐ я└п╟п╧п╩п╟ п╡п╬ п╡п╫я┐я┌я─п╣п╫п╫п╣п╪ п©я─п╬я│п╪п╬я┌я─я┴п╦п╨п╣"
 
 #: src/gnuwin32/pager.cpp:184 src/gnuwin32/pager.cpp:196
 #: src/gnuwin32/pager.cpp:216 src/gnuwin32/rui.cpp:294 src/gnuwin32/rui.cpp:321
 msgid "No selection"
-msgstr "Нет выделения"
+msgstr "п²п╣я┌ п╡я▀п╢п╣п╩п╣п╫п╦я▐"
 
 #: src/gnuwin32/pager.cpp:313 src/gnuwin32/pager.cpp:443
 #: src/gnuwin32/pager.cpp:487
 msgid "Paste to console"
-msgstr "Вставить на консоль"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╫п╟ п╨п╬п╫я│п╬п╩я▄"
 
 #: src/gnuwin32/pager.cpp:314 src/gnuwin32/pager.cpp:448
 #: src/gnuwin32/pager.cpp:489
 msgid "Paste commands to console"
-msgstr "Вставить команды на консоль"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╨п╬п╪п╟п╫п╢я▀ п╫п╟ п╨п╬п╫я│п╬п╩я▄"
 
 #: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:931
 #: src/library/utils/src/windows/dataentry.cpp:1741
 #: src/library/grDevices/src/devWindows.cpp:1685
 msgid "Stay on top"
-msgstr "Расположить сверху"
+msgstr "п═п╟я│п©п╬п╩п╬п╤п╦я┌я▄ я│п╡п╣я─я┘я┐"
 
 #: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:482
 #: src/library/utils/src/windows/dataentry.cpp:1743
 #: src/library/utils/src/windows/dataentry.cpp:1830
 msgid "Close"
-msgstr "Закрыть"
+msgstr "п≈п╟п╨я─я▀я┌я▄"
 
 #: src/gnuwin32/pager.cpp:479 src/gnuwin32/rui.cpp:1213
 msgid "Save to File..."
-msgstr "Сохранить в файл..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╡ я└п╟п╧п╩..."
 
 #: src/gnuwin32/pager.cpp:494 src/gnuwin32/rui.cpp:1230
 msgid "View"
-msgstr "Вид"
+msgstr "п▓п╦п╢"
 
 #: src/gnuwin32/pager.cpp:526
 msgid "Unable to create pager window"
-msgstr "Не могу создать окно просмотрщика"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬п╥п╢п╟я┌я▄ п╬п╨п╫п╬ п©я─п╬я│п╪п╬я┌я─я┴п╦п╨п╟"
 
 #: src/gnuwin32/preferences.cpp:312
 msgid ""
@@ -459,10 +460,10 @@ msgid ""
 "\n"
 "Save the preferences and restart Rgui to apply them.\n"
 msgstr ""
-"Общие настройки консоли нельзя изменить\n"
-"во время её работы.\n"
+"п·п╠я┴п╦п╣ п╫п╟я│я┌я─п╬п╧п╨п╦ п╨п╬п╫я│п╬п╩п╦ п╫п╣п╩я▄п╥я▐ п╦п╥п╪п╣п╫п╦я┌я▄\n"
+"п╡п╬ п╡я─п╣п╪я▐ п╣я▒ я─п╟п╠п╬я┌я▀.\n"
 "\n"
-"Сохраните настройки и перезапустите Rgui для их применения.\n"
+"п║п╬я┘я─п╟п╫п╦я┌п╣ п╫п╟я│я┌я─п╬п╧п╨п╦ п╦ п©п╣я─п╣п╥п╟п©я┐я│я┌п╦я┌п╣ Rgui п╢п╩я▐ п╦я┘ п©я─п╦п╪п╣п╫п╣п╫п╦я▐.\n"
 
 #: src/gnuwin32/preferences.cpp:316
 msgid ""
@@ -471,379 +472,379 @@ msgid ""
 "\n"
 "Save the preferences and restart Rgui to apply to menus.\n"
 msgstr ""
-"Язык меню нельзя изменить\n"
-"во время работы консоли.\n"
+"п╞п╥я▀п╨ п╪п╣п╫я▌ п╫п╣п╩я▄п╥я▐ п╦п╥п╪п╣п╫п╦я┌я▄\n"
+"п╡п╬ п╡я─п╣п╪я▐ я─п╟п╠п╬я┌я▀ п╨п╬п╫я│п╬п╩п╦.\n"
 "\n"
-"Сохраните настройки и перезапустите Rgui для изменения меню.\n"
+"п║п╬я┘я─п╟п╫п╦я┌п╣ п╫п╟я│я┌я─п╬п╧п╨п╦ п╦ п©п╣я─п╣п╥п╟п©я┐я│я┌п╦я┌п╣ Rgui п╢п╩я▐ п╦п╥п╪п╣п╫п╣п╫п╦я▐ п╪п╣п╫я▌.\n"
 
 #: src/gnuwin32/preferences.cpp:385
 msgid "Changes in pager size will not apply to any open pagers"
-msgstr "Изменения размера просмотрщика не отразятся на его уже открытых окнах"
+msgstr "п≤п╥п╪п╣п╫п╣п╫п╦я▐ я─п╟п╥п╪п╣я─п╟ п©я─п╬я│п╪п╬я┌я─я┴п╦п╨п╟ п╫п╣ п╬я┌я─п╟п╥я▐я┌я│я▐ п╫п╟ п╣пЁп╬ я┐п╤п╣ п╬я┌п╨я─я▀я┌я▀я┘ п╬п╨п╫п╟я┘"
 
 #: src/gnuwin32/preferences.cpp:391
 msgid ""
 "Do not change pager type if any pager is open\n"
 "Proceed?"
 msgstr ""
-"Тип просмотрщика не изменится, если хотя бы один открыт\n"
-"Продолжить?"
+"п╒п╦п© п©я─п╬я│п╪п╬я┌я─я┴п╦п╨п╟ п╫п╣ п╦п╥п╪п╣п╫п╦я┌я│я▐, п╣я│п╩п╦ я┘п╬я┌я▐ п╠я▀ п╬п╢п╦п╫ п╬я┌п╨я─я▀я┌\n"
+"п÷я─п╬п╢п╬п╩п╤п╦я┌я▄?"
 
 #: src/gnuwin32/preferences.cpp:425
 msgid "Select directory for file 'Rconsole'"
-msgstr "Выбрать папку для файла 'Rconsole'"
+msgstr "п▓я▀п╠я─п╟я┌я▄ п©п╟п©п╨я┐ п╢п╩я▐ я└п╟п╧п╩п╟ 'Rconsole'"
 
 #: src/gnuwin32/preferences.cpp:520
 msgid "Select 'Rconsole' file"
-msgstr "Выбрать файл 'Rconsole'"
+msgstr "п▓я▀п╠я─п╟я┌я▄ я└п╟п╧п╩ 'Rconsole'"
 
 #: src/gnuwin32/preferences.cpp:708
 #, c-format
 msgid "Ignored '%s' at line %d of file %s"
-msgstr "Проигнорировано '%s' на строке %d файла %s"
+msgstr "п÷я─п╬п╦пЁп╫п╬я─п╦я─п╬п╡п╟п╫п╬ '%s' п╫п╟ я│я┌я─п╬п╨п╣ %d я└п╟п╧п╩п╟ %s"
 
 #: src/gnuwin32/preferences.cpp:809
 msgid "Rgui Configuration Editor"
-msgstr "Редактор конфигурации Rgui"
+msgstr "п═п╣п╢п╟п╨я┌п╬я─ п╨п╬п╫я└п╦пЁя┐я─п╟я├п╦п╦ Rgui"
 
 #: src/gnuwin32/rui.cpp:209
 msgid "Select file to source"
-msgstr "Выбрать файл для загрузки"
+msgstr "п▓я▀п╠я─п╟я┌я▄ я└п╟п╧п╩ п╢п╩я▐ п╥п╟пЁя─я┐п╥п╨п╦"
 
 #: src/gnuwin32/rui.cpp:227
 msgid "Select image to load"
-msgstr "Выбрать образ для загрузки"
+msgstr "п▓я▀п╠я─п╟я┌я▄ п╬п╠я─п╟п╥ п╢п╩я▐ п╥п╟пЁя─я┐п╥п╨п╦"
 
 #: src/gnuwin32/rui.cpp:237
 msgid "Save image in"
-msgstr "Сохранить образ в"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╬п╠я─п╟п╥ п╡"
 
 #: src/gnuwin32/rui.cpp:249
 msgid "Load history from"
-msgstr "Загрузить историю команд из"
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ п╦я│я┌п╬я─п╦я▌ п╨п╬п╪п╟п╫п╢ п╦п╥"
 
 #: src/gnuwin32/rui.cpp:256
 msgid "Save history in"
-msgstr "Сохранить историю команд в"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╦я│я┌п╬я─п╦я▌ п╨п╬п╪п╟п╫п╢ п╡"
 
 #: src/gnuwin32/rui.cpp:303 src/gnuwin32/rui.cpp:312
 msgid "No text available"
-msgstr "Нет доступного текста"
+msgstr "п²п╣я┌ п╢п╬я│я┌я┐п©п╫п╬пЁп╬ я┌п╣п╨я│я┌п╟"
 
 #: src/gnuwin32/rui.cpp:358
 msgid "Name of data frame or matrix"
-msgstr "Имя таблицы данных или матрицы"
+msgstr "п≤п╪я▐ я┌п╟п╠п╩п╦я├я▀ п╢п╟п╫п╫я▀я┘ п╦п╩п╦ п╪п╟я┌я─п╦я├я▀"
 
 #: src/gnuwin32/rui.cpp:365
 #, c-format
 msgid "'%s' cannot be found"
-msgstr "'%s' не найден"
+msgstr "'%s' п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: src/gnuwin32/rui.cpp:510
 msgid "Are you sure?"
-msgstr "Вы уверены?"
+msgstr "п▓я▀ я┐п╡п╣я─п╣п╫я▀?"
 
 #: src/gnuwin32/rui.cpp:605
 msgid "Help on"
-msgstr "Справка по"
+msgstr "п║п©я─п╟п╡п╨п╟ п©п╬"
 
 #: src/gnuwin32/rui.cpp:661
 msgid "Search help"
-msgstr "Искать помощь"
+msgstr "п≤я│п╨п╟я┌я▄ п©п╬п╪п╬я┴я▄"
 
 #: src/gnuwin32/rui.cpp:675
 msgid "Search for words in help list archives and documentation"
-msgstr "Искать слова в архивах списков рассылки и в документации"
+msgstr "п≤я│п╨п╟я┌я▄ я│п╩п╬п╡п╟ п╡ п╟я─я┘п╦п╡п╟я┘ я│п©п╦я│п╨п╬п╡ я─п╟я│я│я▀п╩п╨п╦ п╦ п╡ п╢п╬п╨я┐п╪п╣п╫я┌п╟я├п╦п╦"
 
 #: src/gnuwin32/rui.cpp:690
 msgid "Apropos"
-msgstr "Подсказать команды"
+msgstr "п÷п╬п╢я│п╨п╟п╥п╟я┌я▄ п╨п╬п╪п╟п╫п╢я▀"
 
 #: src/gnuwin32/rui.cpp:917
 msgid "Can only drag-and-drop .R, .RData and .rda files"
-msgstr "Можно перетащить только файлы .R, .Rdata и .rda"
+msgstr "п°п╬п╤п╫п╬ п©п╣я─п╣я┌п╟я┴п╦я┌я▄ я┌п╬п╩я▄п╨п╬ я└п╟п╧п╩я▀ .R, .Rdata п╦ .rda"
 
 #: src/gnuwin32/rui.cpp:923 src/gnuwin32/rui.cpp:1220
 msgid "Paste commands only"
-msgstr "Вставить только команды"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ я┌п╬п╩я▄п╨п╬ п╨п╬п╪п╟п╫п╢я▀"
 
 #: src/gnuwin32/rui.cpp:924 src/gnuwin32/rui.cpp:1170
 msgid "Copy and paste"
-msgstr "Копировать и вставить"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ п╦ п╡я│я┌п╟п╡п╦я┌я▄"
 
 #: src/gnuwin32/rui.cpp:926
 msgid "Clear window"
-msgstr "Очистить окно"
+msgstr "п·я┤п╦я│я┌п╦я┌я▄ п╬п╨п╫п╬"
 
 #: src/gnuwin32/rui.cpp:930 src/gnuwin32/rui.cpp:1243
 msgid "Buffered output"
-msgstr "Буферизованный вывод"
+msgstr "п▒я┐я└п╣я─п╦п╥п╬п╡п╟п╫п╫я▀п╧ п╡я▀п╡п╬п╢"
 
 #: src/gnuwin32/rui.cpp:970
 msgid "Packages"
-msgstr "Пакеты"
+msgstr "п÷п╟п╨п╣я┌я▀"
 
 #: src/gnuwin32/rui.cpp:971
 msgid "Load package..."
-msgstr "Включить пакет..."
+msgstr "п▓п╨п╩я▌я┤п╦я┌я▄ п©п╟п╨п╣я┌..."
 
 #: src/gnuwin32/rui.cpp:973
 msgid "Set CRAN mirror..."
-msgstr "Определить зеркало CRAN..."
+msgstr "п·п©я─п╣п╢п╣п╩п╦я┌я▄ п╥п╣я─п╨п╟п╩п╬ CRAN..."
 
 #: src/gnuwin32/rui.cpp:975
 msgid "Select repositories..."
-msgstr "Определить хранилища..."
+msgstr "п·п©я─п╣п╢п╣п╩п╦я┌я▄ я┘я─п╟п╫п╦п╩п╦я┴п╟..."
 
 #: src/gnuwin32/rui.cpp:977
 msgid "Install package(s)..."
-msgstr "Установить пакет(ы)..."
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п©п╟п╨п╣я┌(я▀)..."
 
 #: src/gnuwin32/rui.cpp:979
 msgid "Update packages..."
-msgstr "Обновить пакеты..."
+msgstr "п·п╠п╫п╬п╡п╦я┌я▄ п©п╟п╨п╣я┌я▀..."
 
 #: src/gnuwin32/rui.cpp:982
 msgid "Install package(s) from local files..."
-msgstr "Установить пакет(ы) из локальных файлов..."
+msgstr "пёя│я┌п╟п╫п╬п╡п╦я┌я▄ п©п╟п╨п╣я┌(я▀) п╦п╥ п╩п╬п╨п╟п╩я▄п╫я▀я┘ я└п╟п╧п╩п╬п╡..."
 
 #: src/gnuwin32/rui.cpp:1006
 msgid "FAQ on R"
-msgstr "ЧаВО по R"
+msgstr "п╖п╟п▓п· п©п╬ R"
 
 #: src/gnuwin32/rui.cpp:1008
 msgid "FAQ on R for &Windows"
-msgstr "ЧаВО по R для Windows"
+msgstr "п╖п╟п▓п· п©п╬ R п╢п╩я▐ Windows"
 
 #: src/gnuwin32/rui.cpp:1014 src/gnuwin32/rui.cpp:1017
 msgid "Manuals (in PDF)"
-msgstr "Руководства (в PDF)"
+msgstr "п═я┐п╨п╬п╡п╬п╢я│я┌п╡п╟ (п╡ PDF)"
 
 #: src/gnuwin32/rui.cpp:1047
 msgid "R functions (text)..."
-msgstr "Функции R (текст)..."
+msgstr "п╓я┐п╫п╨я├п╦п╦ R (я┌п╣п╨я│я┌)..."
 
 #: src/gnuwin32/rui.cpp:1049
 msgid "Html help"
-msgstr "Гипертекстовая справка"
+msgstr "п⌠п╦п©п╣я─я┌п╣п╨я│я┌п╬п╡п╟я▐ я│п©я─п╟п╡п╨п╟"
 
 #: src/gnuwin32/rui.cpp:1051
 msgid "Search help..."
-msgstr "Искать помощь..."
+msgstr "п≤я│п╨п╟я┌я▄ п©п╬п╪п╬я┴я▄..."
 
 #: src/gnuwin32/rui.cpp:1056
 msgid "Apropos..."
-msgstr "Подсказка команд..."
+msgstr "п÷п╬п╢я│п╨п╟п╥п╨п╟ п╨п╬п╪п╟п╫п╢..."
 
 #: src/gnuwin32/rui.cpp:1058
 msgid "R Project home page"
-msgstr "Домашняя страница проекта R"
+msgstr "п■п╬п╪п╟я┬п╫я▐я▐ я│я┌я─п╟п╫п╦я├п╟ п©я─п╬п╣п╨я┌п╟ R"
 
 #: src/gnuwin32/rui.cpp:1059
 msgid "CRAN home page"
-msgstr "Домашняя страница архива CRAN"
+msgstr "п■п╬п╪п╟я┬п╫я▐я▐ я│я┌я─п╟п╫п╦я├п╟ п╟я─я┘п╦п╡п╟ CRAN"
 
 #: src/gnuwin32/rui.cpp:1061
 msgid "About"
-msgstr "О программе"
+msgstr "п· п©я─п╬пЁя─п╟п╪п╪п╣"
 
 #: src/gnuwin32/rui.cpp:1070 src/extra/graphapp/gmenus.c:52
 msgid "Windows"
-msgstr "Окна"
+msgstr "п·п╨п╫п╟"
 
 #: src/gnuwin32/rui.cpp:1071 src/extra/graphapp/gmenus.c:53
 msgid "Cascade"
-msgstr "Лесенкой"
+msgstr "п⌡п╣я│п╣п╫п╨п╬п╧"
 
 #: src/gnuwin32/rui.cpp:1072 src/extra/graphapp/gmenus.c:54
 msgid "Tile &Horizontally"
-msgstr "Слева направо"
+msgstr "п║п╩п╣п╡п╟ п╫п╟п©я─п╟п╡п╬"
 
 #: src/gnuwin32/rui.cpp:1073 src/extra/graphapp/gmenus.c:55
 msgid "Tile &Vertically"
-msgstr "Сверху вниз"
+msgstr "п║п╡п╣я─я┘я┐ п╡п╫п╦п╥"
 
 #: src/gnuwin32/rui.cpp:1074
 msgid "Minimize group"
-msgstr "Минимизировать группу"
+msgstr "п°п╦п╫п╦п╪п╦п╥п╦я─п╬п╡п╟я┌я▄ пЁя─я┐п©п©я┐"
 
 #: src/gnuwin32/rui.cpp:1075
 msgid "Restore group"
-msgstr "Восстановить группу"
+msgstr "п▓п╬я│я│я┌п╟п╫п╬п╡п╦я┌я▄ пЁя─я┐п©п©я┐"
 
 #: src/gnuwin32/rui.cpp:1154
 msgid "Load workspace"
-msgstr "Загрузить рабочее пространство"
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬"
 
 #: src/gnuwin32/rui.cpp:1158
 msgid "Save workspace"
-msgstr "Сохранить рабочее пространство"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬"
 
 #: src/gnuwin32/rui.cpp:1174
 msgid "Stop current computation"
-msgstr "Остановить текущую процедуру"
+msgstr "п·я│я┌п╟п╫п╬п╡п╦я┌я▄ я┌п╣п╨я┐я┴я┐я▌ п©я─п╬я├п╣п╢я┐я─я┐"
 
 #: src/gnuwin32/rui.cpp:1197
 msgid "Source R code..."
-msgstr "Загрузить код R..."
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ п╨п╬п╢ R..."
 
 #: src/gnuwin32/rui.cpp:1200
 msgid "Display file(s)..."
-msgstr "Показать файл(ы)..."
+msgstr "п÷п╬п╨п╟п╥п╟я┌я▄ я└п╟п╧п╩(я▀)..."
 
 #: src/gnuwin32/rui.cpp:1202
 msgid "Load Workspace..."
-msgstr "Загрузить рабочее пространство..."
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬..."
 
 #: src/gnuwin32/rui.cpp:1203
 msgid "Save Workspace..."
-msgstr "Сохранить рабочее пространство..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬..."
 
 #: src/gnuwin32/rui.cpp:1205
 msgid "Load History..."
-msgstr "Загрузить историю команд..."
+msgstr "п≈п╟пЁя─я┐п╥п╦я┌я▄ п╦я│я┌п╬я─п╦я▌ п╨п╬п╪п╟п╫п╢..."
 
 #: src/gnuwin32/rui.cpp:1207
 msgid "Save History..."
-msgstr "Сохранить историю команд..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╦я│я┌п╬я─п╦я▌ п╨п╬п╪п╟п╫п╢..."
 
 #: src/gnuwin32/rui.cpp:1210
 msgid "Change dir..."
-msgstr "Изменить папку..."
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ п©п╟п©п╨я┐..."
 
 #: src/gnuwin32/rui.cpp:1215
 msgid "Exit"
-msgstr "Выйти"
+msgstr "п▓я▀п╧я┌п╦"
 
 #: src/gnuwin32/rui.cpp:1222
 msgid "Copy and Paste"
-msgstr "Копировать и вставить"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ п╦ п╡я│я┌п╟п╡п╦я┌я▄"
 
 #: src/gnuwin32/rui.cpp:1226
 msgid "Data editor..."
-msgstr "Редактор данных..."
+msgstr "п═п╣п╢п╟п╨я┌п╬я─ п╢п╟п╫п╫я▀я┘..."
 
 #: src/gnuwin32/rui.cpp:1231
 msgid "Toolbar"
-msgstr "Панель инструментов"
+msgstr "п÷п╟п╫п╣п╩я▄ п╦п╫я│я┌я─я┐п╪п╣п╫я┌п╬п╡"
 
 #: src/gnuwin32/rui.cpp:1232
 msgid "Statusbar"
-msgstr "Строка состояния"
+msgstr "п║я┌я─п╬п╨п╟ я│п╬я│я┌п╬я▐п╫п╦я▐"
 
 #: src/gnuwin32/rui.cpp:1236
 msgid "Misc"
-msgstr "Разное"
+msgstr "п═п╟п╥п╫п╬п╣"
 
 #: src/gnuwin32/rui.cpp:1237
 msgid "Stop current computation           \tESC"
-msgstr "Остановить текущую процедуру       \tESC"
+msgstr "п·я│я┌п╟п╫п╬п╡п╦я┌я▄ я┌п╣п╨я┐я┴я┐я▌ п©я─п╬я├п╣п╢я┐я─я┐       \tESC"
 
 #: src/gnuwin32/rui.cpp:1239
 msgid "Stop all computations"
-msgstr "Остановить все вычисления"
+msgstr "п·я│я┌п╟п╫п╬п╡п╦я┌я▄ п╡я│п╣ п╡я▀я┤п╦я│п╩п╣п╫п╦я▐"
 
 #: src/gnuwin32/rui.cpp:1241
 msgid "Break to debugger"
-msgstr "Прерывание для отладчика"
+msgstr "п÷я─п╣я─я▀п╡п╟п╫п╦п╣ п╢п╩я▐ п╬я┌п╩п╟п╢я┤п╦п╨п╟"
 
 #: src/gnuwin32/rui.cpp:1244
 msgid "Word completion"
-msgstr "Дополнение слов"
+msgstr "п■п╬п©п╬п╩п╫п╣п╫п╦п╣ я│п╩п╬п╡"
 
 #: src/gnuwin32/rui.cpp:1246
 msgid "Filename completion"
-msgstr "Дополнение имен файлов"
+msgstr "п■п╬п©п╬п╩п╫п╣п╫п╦п╣ п╦п╪п╣п╫ я└п╟п╧п╩п╬п╡"
 
 #: src/gnuwin32/rui.cpp:1253
 msgid "List objects"
-msgstr "Перечислить объекты"
+msgstr "п÷п╣я─п╣я┤п╦я│п╩п╦я┌я▄ п╬п╠я┼п╣п╨я┌я▀"
 
 #: src/gnuwin32/rui.cpp:1254
 msgid "Remove all objects"
-msgstr "Удалить все объекты"
+msgstr "пёп╢п╟п╩п╦я┌я▄ п╡я│п╣ п╬п╠я┼п╣п╨я┌я▀"
 
 #: src/gnuwin32/rui.cpp:1255
 msgid "List search &path"
-msgstr "Отразить путь поиска"
+msgstr "п·я┌я─п╟п╥п╦я┌я▄ п©я┐я┌я▄ п©п╬п╦я│п╨п╟"
 
 #: src/gnuwin32/rui.cpp:1261
 msgid "Console"
-msgstr "Консоль"
+msgstr "п п╬п╫я│п╬п╩я▄"
 
 #: src/gnuwin32/rui.cpp:1322
 msgid "'mname' is limited to 1000 bytes"
-msgstr "'mname' ограничено: 1000 знаков"
+msgstr "'mname' п╬пЁя─п╟п╫п╦я┤п╣п╫п╬: 1000 п╥п╫п╟п╨п╬п╡"
 
 #: src/gnuwin32/rui.cpp:1367
 #, c-format
 msgid "menu %s does not exist"
-msgstr "меню %s не существует"
+msgstr "п╪п╣п╫я▌ %s п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌"
 
 #: src/gnuwin32/rui.cpp:1419
 msgid "'menu' is limited to 500 bytes"
-msgstr "'menu' ограничено: 500 знаков"
+msgstr "'menu' п╬пЁя─п╟п╫п╦я┤п╣п╫п╬: 500 п╥п╫п╟п╨п╬п╡"
 
 #: src/gnuwin32/rui.cpp:1429
 msgid "base menu does not exist"
-msgstr "базовое меню не существует"
+msgstr "п╠п╟п╥п╬п╡п╬п╣ п╪п╣п╫я▌ п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌"
 
 #: src/gnuwin32/rui.cpp:1444
 msgid "failed to allocate menu"
-msgstr "не получилось разместить меню"
+msgstr "п╫п╣ п©п╬п╩я┐я┤п╦п╩п╬я│я▄ я─п╟п╥п╪п╣я│я┌п╦я┌я▄ п╪п╣п╫я▌"
 
 #: src/gnuwin32/rui.cpp:1461 src/gnuwin32/rui.cpp:1585
 msgid "menu + item is limited to 1000 bytes"
-msgstr "меню + пункт меню ограничены: 1000 знаков"
+msgstr "п╪п╣п╫я▌ + п©я┐п╫п╨я┌ п╪п╣п╫я▌ п╬пЁя─п╟п╫п╦я┤п╣п╫я▀: 1000 п╥п╫п╟п╨п╬п╡"
 
 #: src/gnuwin32/rui.cpp:1469 src/gnuwin32/rui.cpp:1552
 msgid "menu does not exist"
-msgstr "меню не существует"
+msgstr "п╪п╣п╫я▌ п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌"
 
 #: src/gnuwin32/rui.cpp:1487 src/gnuwin32/rui.cpp:1510
 #: src/gnuwin32/rui.cpp:1515
 msgid "failed to allocate char storage"
-msgstr "не получилось разместить хранилище знаков"
+msgstr "п╫п╣ п©п╬п╩я┐я┤п╦п╩п╬я│я▄ я─п╟п╥п╪п╣я│я┌п╦я┌я▄ я┘я─п╟п╫п╦п╩п╦я┴п╣ п╥п╫п╟п╨п╬п╡"
 
 #: src/gnuwin32/rui.cpp:1523
 msgid "failed to allocate menuitem"
-msgstr "не получилось разместить пункт меню"
+msgstr "п╫п╣ п©п╬п╩я┐я┤п╦п╩п╬я│я▄ я─п╟п╥п╪п╣я│я┌п╦я┌я▄ п©я┐п╫п╨я┌ п╪п╣п╫я▌"
 
 #: src/gnuwin32/rui.cpp:1575
 msgid "menu not found"
-msgstr "меню не найдено"
+msgstr "п╪п╣п╫я▌ п╫п╣ п╫п╟п╧п╢п╣п╫п╬"
 
 #: src/gnuwin32/rui.cpp:1593
 msgid "menu or item does not exist"
-msgstr "меню или пункт меню не существует"
+msgstr "п╪п╣п╫я▌ п╦п╩п╦ п©я┐п╫п╨я┌ п╪п╣п╫я▌ п╫п╣ я│я┐я┴п╣я│я┌п╡я┐п╣я┌"
 
 #: src/gnuwin32/system.cpp:590
 msgid "Save workspace image?"
-msgstr "Сохранить рабочее пространство?"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ я─п╟п╠п╬я┤п╣п╣ п©я─п╬я│я┌я─п╟п╫я│я┌п╡п╬?"
 
 #: src/extra/graphapp/clipboard.c:69 src/extra/graphapp/clipboard.c:73
 msgid "Insufficient memory: cell not copied to the clipboard"
-msgstr "Мало памяти: ячейки не скопировались в буфер"
+msgstr "п°п╟п╩п╬ п©п╟п╪я▐я┌п╦: я▐я┤п╣п╧п╨п╦ п╫п╣ я│п╨п╬п©п╦я─п╬п╡п╟п╩п╦я│я▄ п╡ п╠я┐я└п╣я─"
 
 #: src/extra/graphapp/dialogs.c:144 src/extra/graphapp/dialogs.c:161
 #: src/extra/graphapp/dialogs.c:178
 msgid "Question"
-msgstr "Вопрос"
+msgstr "п▓п╬п©я─п╬я│"
 
 #: src/extra/graphapp/dialogs.c:249
 msgid " Change working directory to:"
-msgstr " Изменить рабочую папку на:"
+msgstr " п≤п╥п╪п╣п╫п╦я┌я▄ я─п╟п╠п╬я┤я┐я▌ п©п╟п©п╨я┐ п╫п╟:"
 
 #: src/extra/graphapp/dialogs.c:251
 #, c-format
 msgid "Unable to set '%s' as working directory"
-msgstr "Не могу установить '%s' как рабочую папку"
+msgstr "п²п╣ п╪п╬пЁя┐ я┐я│я┌п╟п╫п╬п╡п╦я┌я▄ '%s' п╨п╟п╨ я─п╟п╠п╬я┤я┐я▌ п©п╟п©п╨я┐"
 
 #: src/extra/graphapp/dialogs.c:705 src/extra/graphapp/dialogs.c:723
 #: src/extra/graphapp/dialogs.c:729 src/extra/graphapp/dialogs.c:839
 #: src/extra/graphapp/dialogs.c:853 src/extra/graphapp/dialogs.c:859
 #: src/library/utils/src/windows/widgets.cpp:136
 msgid "Cancel"
-msgstr "Отменить"
+msgstr "п·я┌п╪п╣п╫п╦я┌я▄"
 
 #: src/extra/graphapp/dialogs.c:725 src/extra/graphapp/dialogs.c:855
 #: src/library/utils/src/windows/widgets.cpp:135
@@ -852,110 +853,110 @@ msgstr "OK"
 
 #: src/extra/graphapp/dialogs.c:847
 msgid "User"
-msgstr "Пользователь"
+msgstr "п÷п╬п╩я▄п╥п╬п╡п╟я┌п╣п╩я▄"
 
 #: src/extra/graphapp/dialogs.c:848
 msgid "Password"
-msgstr "Пароль"
+msgstr "п÷п╟я─п╬п╩я▄"
 
 #: src/extra/graphapp/dialogs.c:1034 src/extra/graphapp/dialogs.c:1040
 #, c-format
 msgid "\"%s\" not found"
-msgstr "\"%s\" не найден"
+msgstr "\"%s\" п╫п╣ п╫п╟п╧п╢п╣п╫"
 
 #: src/extra/graphapp/gmenus.c:56
 msgid "Arrange Icons"
-msgstr "Упорядочить пиктограммы"
+msgstr "пёп©п╬я─я▐п╢п╬я┤п╦я┌я▄ п©п╦п╨я┌п╬пЁя─п╟п╪п╪я▀"
 
 #: src/extra/graphapp/metafile.c:55
 msgid "Unable to save metafile to the clipboard"
-msgstr "Не могу сохранить метафайл в буфер обмена"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬я┘я─п╟п╫п╦я┌я▄ п╪п╣я┌п╟я└п╟п╧п╩ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #: src/extra/graphapp/metafile.c:117
 msgid "Unable to create metafile"
-msgstr "Не могу создать метафайл"
+msgstr "п²п╣ п╪п╬пЁя┐ я│п╬п╥п╢п╟я┌я▄ п╪п╣я┌п╟я└п╟п╧п╩"
 
 #: src/extra/graphapp/metafile.c:122
 msgid "Insufficient memory to create metafile"
-msgstr "Недостаточно памяти для создания метафайла"
+msgstr "п²п╣п╢п╬я│я┌п╟я┌п╬я┤п╫п╬ п©п╟п╪я▐я┌п╦ п╢п╩я▐ я│п╬п╥п╢п╟п╫п╦я▐ п╪п╣я┌п╟я└п╟п╧п╩п╟"
 
 #: src/extra/graphapp/printer.c:111
 msgid "Unable to choose printer"
-msgstr "Не могу выбрать принтер"
+msgstr "п²п╣ п╪п╬пЁя┐ п╡я▀п╠я─п╟я┌я▄ п©я─п╦п╫я┌п╣я─"
 
 #: src/extra/graphapp/printer.c:139
 msgid "Insufficient memory for new printer"
-msgstr "Не хватает памяти для создания объекта принтера"
+msgstr "п²п╣ я┘п╡п╟я┌п╟п╣я┌ п©п╟п╪я▐я┌п╦ п╢п╩я▐ я│п╬п╥п╢п╟п╫п╦я▐ п╬п╠я┼п╣п╨я┌п╟ п©я─п╦п╫я┌п╣я─п╟"
 
 #: src/extra/graphapp/printer.c:175
 msgid "Unable to start the print job"
-msgstr "Не могу запустить задание на печать"
+msgstr "п²п╣ п╪п╬пЁя┐ п╥п╟п©я┐я│я┌п╦я┌я▄ п╥п╟п╢п╟п╫п╦п╣ п╫п╟ п©п╣я┤п╟я┌я▄"
 
 #: src/library/utils/src/windows/dataentry.cpp:248
 #: src/library/utils/src/windows/dataentry.cpp:1879
 #: src/library/utils/src/windows/dataentry.cpp:1882
 #: src/library/utils/src/windows/dataentry.cpp:1912
 msgid "invalid argument"
-msgstr "неправильный аргумент"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ п╟я─пЁя┐п╪п╣п╫я┌"
 
 #: src/library/utils/src/windows/dataentry.cpp:292
 msgid "invalid type for value"
-msgstr "неправильный тип данных"
+msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫я▀п╧ я┌п╦п© п╢п╟п╫п╫я▀я┘"
 
 #: src/library/utils/src/windows/dataentry.cpp:303
 msgid "Data Editor"
-msgstr "Редактор данных"
+msgstr "п═п╣п╢п╟п╨я┌п╬я─ п╢п╟п╫п╫я▀я┘"
 
 #: src/library/utils/src/windows/dataentry.cpp:353
 #: src/library/utils/src/windows/dataentry.cpp:1872
 msgid "dataentry: internal memory problem"
-msgstr "редактор данных: проблемы с памятью"
+msgstr "я─п╣п╢п╟п╨я┌п╬я─ п╢п╟п╫п╫я▀я┘: п©я─п╬п╠п╩п╣п╪я▀ я│ п©п╟п╪я▐я┌я▄я▌"
 
 #: src/library/utils/src/windows/dataentry.cpp:657
 #: src/library/utils/src/windows/dataentry.cpp:1259
 msgid "dataentry: internal memory error"
-msgstr "редактор данных: ошибка памяти"
+msgstr "я─п╣п╢п╟п╨я┌п╬я─ п╢п╟п╫п╫я▀я┘: п╬я┬п╦п╠п╨п╟ п©п╟п╪я▐я┌п╦"
 
 #: src/library/utils/src/windows/dataentry.cpp:780
 #: src/library/utils/src/windows/dataentry.cpp:793
 msgid "internal type error in dataentry"
-msgstr "внутренняя ошибка в редакторе данных"
+msgstr "п╡п╫я┐я┌я─п╣п╫п╫я▐я▐ п╬я┬п╦п╠п╨п╟ п╡ я─п╣п╢п╟п╨я┌п╬я─п╣ п╢п╟п╫п╫я▀я┘"
 
 #: src/library/utils/src/windows/dataentry.cpp:888
 msgid "dataentry: parse error on string"
-msgstr "редактор данных: ошибка обработки строки"
+msgstr "я─п╣п╢п╟п╨я┌п╬я─ п╢п╟п╫п╫я▀я┘: п╬я┬п╦п╠п╨п╟ п╬п╠я─п╟п╠п╬я┌п╨п╦ я│я┌я─п╬п╨п╦"
 
 #: src/library/utils/src/windows/dataentry.cpp:1033
 msgid "dataentry: expression too long"
-msgstr "редактор данных: слишком длинное выражение"
+msgstr "я─п╣п╢п╟п╨я┌п╬я─ п╢п╟п╫п╫я▀я┘: я│п╩п╦я┬п╨п╬п╪ п╢п╩п╦п╫п╫п╬п╣ п╡я▀я─п╟п╤п╣п╫п╦п╣"
 
 #: src/library/utils/src/windows/dataentry.cpp:1509
 msgid "column names cannot be blank"
-msgstr "имена колонок не могут быть пустыми"
+msgstr "п╦п╪п╣п╫п╟ п╨п╬п╩п╬п╫п╬п╨ п╫п╣ п╪п╬пЁя┐я┌ п╠я▀я┌я▄ п©я┐я│я┌я▀п╪п╦"
 
 #: src/library/utils/src/windows/dataentry.cpp:1555
 msgid "Variable editor"
-msgstr "Редактор переменной"
+msgstr "п═п╣п╢п╟п╨я┌п╬я─ п©п╣я─п╣п╪п╣п╫п╫п╬п╧"
 
 #: src/library/utils/src/windows/dataentry.cpp:1560
 msgid "variable name"
-msgstr "имя переменной"
+msgstr "п╦п╪я▐ п©п╣я─п╣п╪п╣п╫п╫п╬п╧"
 
 #: src/library/utils/src/windows/dataentry.cpp:1562
 msgid "type"
-msgstr "тип"
+msgstr "я┌п╦п©"
 
 #: src/library/utils/src/windows/dataentry.cpp:1677
 msgid "Cell width(s)"
-msgstr "Ширина ячейки (ячеек)"
+msgstr "п╗п╦я─п╦п╫п╟ я▐я┤п╣п╧п╨п╦ (я▐я┤п╣п╣п╨)"
 
 #: src/library/utils/src/windows/dataentry.cpp:1683
 msgid "Cell width"
-msgstr "Ширина ячейки"
+msgstr "п╗п╦я─п╦п╫п╟ я▐я┤п╣п╧п╨п╦"
 
 #: src/library/utils/src/windows/dataentry.cpp:1686
 msgid "variable"
-msgstr "переменная"
+msgstr "п©п╣я─п╣п╪п╣п╫п╫п╟я▐"
 
 #: src/library/utils/src/windows/dataentry.cpp:1729
 msgid ""
@@ -979,247 +980,247 @@ msgid ""
 "  Right-click menu for copy, paste, autosize currently selected column\n"
 "\n"
 msgstr ""
-"Перемещение.\n"
-"  Клавиатура: стрелки двигают выделение\n"
-"\tTab вправо, Shift+Tab влево\n"
-"\tPgDn или Ctrl+F: вниз на один экран\n"
-"\tPgUp или Ctrl+B: вверх на один экран\n"
-"\tHome: перейти к (1,1) ячейке\n"
-"\tEnd: последние строки последней колонки.\n"
-"   Мышь: щелкайте в ячейку, используйте прокрутку.\n"
+"п÷п╣я─п╣п╪п╣я┴п╣п╫п╦п╣.\n"
+"  п п╩п╟п╡п╦п╟я┌я┐я─п╟: я│я┌я─п╣п╩п╨п╦ п╢п╡п╦пЁп╟я▌я┌ п╡я▀п╢п╣п╩п╣п╫п╦п╣\n"
+"\tTab п╡п©я─п╟п╡п╬, Shift+Tab п╡п╩п╣п╡п╬\n"
+"\tPgDn п╦п╩п╦ Ctrl+F: п╡п╫п╦п╥ п╫п╟ п╬п╢п╦п╫ я█п╨я─п╟п╫\n"
+"\tPgUp п╦п╩п╦ Ctrl+B: п╡п╡п╣я─я┘ п╫п╟ п╬п╢п╦п╫ я█п╨я─п╟п╫\n"
+"\tHome: п©п╣я─п╣п╧я┌п╦ п╨ (1,1) я▐я┤п╣п╧п╨п╣\n"
+"\tEnd: п©п╬я│п╩п╣п╢п╫п╦п╣ я│я┌я─п╬п╨п╦ п©п╬я│п╩п╣п╢п╫п╣п╧ п╨п╬п╩п╬п╫п╨п╦.\n"
+"   п°я▀я┬я▄: я┴п╣п╩п╨п╟п╧я┌п╣ п╡ я▐я┤п╣п╧п╨я┐, п╦я│п©п╬п╩я▄п╥я┐п╧я┌п╣ п©я─п╬п╨я─я┐я┌п╨я┐.\n"
 "\n"
-"Правка.\n"
-"  Печатайте в выделенной ячейке\n"
-"  Двойной щелчок для правки ячейки\n"
+"п÷я─п╟п╡п╨п╟.\n"
+"  п÷п╣я┤п╟я┌п╟п╧я┌п╣ п╡ п╡я▀п╢п╣п╩п╣п╫п╫п╬п╧ я▐я┤п╣п╧п╨п╣\n"
+"  п■п╡п╬п╧п╫п╬п╧ я┴п╣п╩я┤п╬п╨ п╢п╩я▐ п©я─п╟п╡п╨п╦ я▐я┤п╣п╧п╨п╦\n"
 "\n"
-"Разное.\n"
-"  Ctrl-L перерисовывает экран и подбирает ширину колонок\n"
-"  Ctrl-C копирует выбранную ячейку\n"
-"  Ctrl-V вставляет в выбранную ячейку\n"
-"  Right-click меню для копирования, вставки и подбора ширины колонки\n"
+"п═п╟п╥п╫п╬п╣.\n"
+"  Ctrl-L п©п╣я─п╣я─п╦я│п╬п╡я▀п╡п╟п╣я┌ я█п╨я─п╟п╫ п╦ п©п╬п╢п╠п╦я─п╟п╣я┌ я┬п╦я─п╦п╫я┐ п╨п╬п╩п╬п╫п╬п╨\n"
+"  Ctrl-C п╨п╬п©п╦я─я┐п╣я┌ п╡я▀п╠я─п╟п╫п╫я┐я▌ я▐я┤п╣п╧п╨я┐\n"
+"  Ctrl-V п╡я│я┌п╟п╡п╩я▐п╣я┌ п╡ п╡я▀п╠я─п╟п╫п╫я┐я▌ я▐я┤п╣п╧п╨я┐\n"
+"  Right-click п╪п╣п╫я▌ п╢п╩я▐ п╨п╬п©п╦я─п╬п╡п╟п╫п╦я▐, п╡я│я┌п╟п╡п╨п╦ п╦ п©п╬п╢п╠п╬я─п╟ я┬п╦я─п╦п╫я▀ п╨п╬п╩п╬п╫п╨п╦\n"
 "\n"
 
 #: src/library/utils/src/windows/dataentry.cpp:1737
 msgid "Copy selected cell"
-msgstr "Копировать выделенную ячейку"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ я▐я┤п╣п╧п╨я┐"
 
 #: src/library/utils/src/windows/dataentry.cpp:1738
 msgid "Paste to selected cell"
-msgstr "Вставить в выделенную ячейку"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ п╡ п╡я▀п╢п╣п╩п╣п╫п╫я┐я▌ я▐я┤п╣п╧п╨я┐"
 
 #: src/library/utils/src/windows/dataentry.cpp:1739
 msgid "Autosize column"
-msgstr "Автоподбор ширины колонки"
+msgstr "п░п╡я┌п╬п©п╬п╢п╠п╬я─ я┬п╦я─п╦п╫я▀ п╨п╬п╩п╬п╫п╨п╦"
 
 #: src/library/utils/src/windows/dataentry.cpp:1835
 msgid "Copy  \tCTRL+C"
-msgstr "Копировать \tCTRL+C"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ \tCTRL+C"
 
 #: src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Paste \tCTRL+V"
-msgstr "Вставить \tCTRL+V"
+msgstr "п▓я│я┌п╟п╡п╦я┌я▄ \tCTRL+V"
 
 #: src/library/utils/src/windows/dataentry.cpp:1839
 msgid "Delete\tDEL"
-msgstr "Удалить\tDEL"
+msgstr "пёп╢п╟п╩п╦я┌я▄\tDEL"
 
 #: src/library/utils/src/windows/dataentry.cpp:1842
 msgid "Cell widths ..."
-msgstr "Ширина ячеек..."
+msgstr "п╗п╦я─п╦п╫п╟ я▐я┤п╣п╣п╨..."
 
 #: src/library/utils/src/windows/dataentry.cpp:1846
 msgid "Data editor"
-msgstr "Редактор данных"
+msgstr "п═п╣п╢п╟п╨я┌п╬я─ п╢п╟п╫п╫я▀я┘"
 
 #: src/library/utils/src/windows/dataentry.cpp:1919
 #, fuzzy
 msgid "unable to start data viewer"
-msgstr "Не могу запустить задание на печать"
+msgstr "п²п╣ п╪п╬пЁя┐ п╥п╟п©я┐я│я┌п╦я┌я▄ п╥п╟п╢п╟п╫п╦п╣ п╫п╟ п©п╣я┤п╟я┌я▄"
 
 #: src/library/grDevices/src/devWindows.cpp:937
 msgid "Portable network graphics file"
-msgstr "Файл PNG"
+msgstr "п╓п╟п╧п╩ PNG"
 
 #: src/library/grDevices/src/devWindows.cpp:940
 msgid "Windows bitmap file"
-msgstr "Растровый файл Windows"
+msgstr "п═п╟я│я┌я─п╬п╡я▀п╧ я└п╟п╧п╩ Windows"
 
 #: src/library/grDevices/src/devWindows.cpp:943
 msgid "TIFF file"
-msgstr "Файл TIFF"
+msgstr "п╓п╟п╧п╩ TIFF"
 
 #: src/library/grDevices/src/devWindows.cpp:946
 msgid "Jpeg file"
-msgstr "Файл JPEG"
+msgstr "п╓п╟п╧п╩ JPEG"
 
 #: src/library/grDevices/src/devWindows.cpp:967
 msgid "Postscript file"
-msgstr "Файл PostScript"
+msgstr "п╓п╟п╧п╩ PostScript"
 
 #: src/library/grDevices/src/devWindows.cpp:978
 msgid "PDF file"
-msgstr "Файл PDF"
+msgstr "п╓п╟п╧п╩ PDF"
 
 #: src/library/grDevices/src/devWindows.cpp:990
 msgid "Enhanced metafiles"
-msgstr "Улучшенные метафайлы Windows"
+msgstr "пёп╩я┐я┤я┬п╣п╫п╫я▀п╣ п╪п╣я┌п╟я└п╟п╧п╩я▀ Windows"
 
 #: src/library/grDevices/src/devWindows.cpp:993
 #: src/library/grDevices/src/devWindows.cpp:3528
 msgid "file path selected is too long: only 512 bytes are allowed"
-msgstr "выбранный файловый путь слишком длинный: можно только 512 байт"
+msgstr "п╡я▀п╠я─п╟п╫п╫я▀п╧ я└п╟п╧п╩п╬п╡я▀п╧ п©я┐я┌я▄ я│п╩п╦я┬п╨п╬п╪ п╢п╩п╦п╫п╫я▀п╧: п╪п╬п╤п╫п╬ я┌п╬п╩я▄п╨п╬ 512 п╠п╟п╧я┌"
 
 #: src/library/grDevices/src/devWindows.cpp:1203
 msgid "No plot to replace!"
-msgstr "Нет графика для замены!"
+msgstr "п²п╣я┌ пЁя─п╟я└п╦п╨п╟ п╢п╩я▐ п╥п╟п╪п╣п╫я▀!"
 
 #: src/library/grDevices/src/devWindows.cpp:1253
 msgid "Variable name"
-msgstr "Имя переменной"
+msgstr "п≤п╪я▐ п©п╣я─п╣п╪п╣п╫п╫п╬п╧"
 
 #: src/library/grDevices/src/devWindows.cpp:1262
 msgid "Variable doesn't contain any plots!"
-msgstr "Переменная не содержит графиков!"
+msgstr "п÷п╣я─п╣п╪п╣п╫п╫п╟я▐ п╫п╣ я│п╬п╢п╣я─п╤п╦я┌ пЁя─п╟я└п╦п╨п╬п╡!"
 
 #: src/library/grDevices/src/devWindows.cpp:1275
 msgid "Name of variable to save to"
-msgstr "Имя переменной для сохранения в"
+msgstr "п≤п╪я▐ п©п╣я─п╣п╪п╣п╫п╫п╬п╧ п╢п╩я▐ я│п╬я┘я─п╟п╫п╣п╫п╦я▐ п╡"
 
 #: src/library/grDevices/src/devWindows.cpp:1581
 msgid "Copy to the clipboard as a metafile"
-msgstr "Копировать в буфер обмена как метафайл"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟ п╨п╟п╨ п╪п╣я┌п╟я└п╟п╧п╩"
 
 #: src/library/grDevices/src/devWindows.cpp:1599
 #: src/library/grDevices/src/devWindows.cpp:1610
 msgid "Stop locator"
-msgstr "Остановить локатор"
+msgstr "п·я│я┌п╟п╫п╬п╡п╦я┌я▄ п╩п╬п╨п╟я┌п╬я─"
 
 #: src/library/grDevices/src/devWindows.cpp:1609
 #: src/library/grDevices/src/devWindows.cpp:1613
 msgid "Stop"
-msgstr "Остановить"
+msgstr "п·я│я┌п╟п╫п╬п╡п╦я┌я▄"
 
 #: src/library/grDevices/src/devWindows.cpp:1615
 msgid "Continue"
-msgstr "Продолжить"
+msgstr "п÷я─п╬п╢п╬п╩п╤п╦я┌я▄"
 
 #: src/library/grDevices/src/devWindows.cpp:1619
 msgid "Next"
-msgstr "Следующий"
+msgstr "п║п╩п╣п╢я┐я▌я┴п╦п╧"
 
 #: src/library/grDevices/src/devWindows.cpp:1620
 msgid "Next plot"
-msgstr "Следующий график"
+msgstr "п║п╩п╣п╢я┐я▌я┴п╦п╧ пЁя─п╟я└п╦п╨"
 
 #: src/library/grDevices/src/devWindows.cpp:1626
 msgid "Save as"
-msgstr "Сохранить как"
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╨п╟п╨"
 
 #: src/library/grDevices/src/devWindows.cpp:1635
 #: src/library/grDevices/src/devWindows.cpp:1637
 #: src/library/grDevices/src/devWindows.cpp:1639
 #, c-format
 msgid "%s quality..."
-msgstr "качество %s..."
+msgstr "п╨п╟я┤п╣я│я┌п╡п╬ %s..."
 
 #: src/library/grDevices/src/devWindows.cpp:1641
 msgid "Copy to the clipboard"
-msgstr "Копировать в буфер обмена"
+msgstr "п п╬п©п╦я─п╬п╡п╟я┌я▄ п╡ п╠я┐я└п╣я─ п╬п╠п╪п╣п╫п╟"
 
 #: src/library/grDevices/src/devWindows.cpp:1642
 msgid "as a Bitmap\tCTRL+C"
-msgstr "как растровый файл Windows\tCTRL+C"
+msgstr "п╨п╟п╨ я─п╟я│я┌я─п╬п╡я▀п╧ я└п╟п╧п╩ Windows\tCTRL+C"
 
 #: src/library/grDevices/src/devWindows.cpp:1643
 msgid "as a Metafile\tCTRL+W"
-msgstr "как метафайл\tCTRL+W"
+msgstr "п╨п╟п╨ п╪п╣я┌п╟я└п╟п╧п╩\tCTRL+W"
 
 #: src/library/grDevices/src/devWindows.cpp:1648
 msgid "close Device"
-msgstr "закрыть устройство"
+msgstr "п╥п╟п╨я─я▀я┌я▄ я┐я│я┌я─п╬п╧я│я┌п╡п╬"
 
 #: src/library/grDevices/src/devWindows.cpp:1649
 msgid "History"
-msgstr "История команд"
+msgstr "п≤я│я┌п╬я─п╦я▐ п╨п╬п╪п╟п╫п╢"
 
 #: src/library/grDevices/src/devWindows.cpp:1650
 msgid "Recording"
-msgstr "Запись"
+msgstr "п≈п╟п©п╦я│я▄"
 
 #: src/library/grDevices/src/devWindows.cpp:1653
 msgid "Add\tINS"
-msgstr "Добавлять\tINS"
+msgstr "п■п╬п╠п╟п╡п╩я▐я┌я▄\tINS"
 
 #: src/library/grDevices/src/devWindows.cpp:1654
 msgid "Replace"
-msgstr "Заменять"
+msgstr "п≈п╟п╪п╣п╫я▐я┌я▄"
 
 #: src/library/grDevices/src/devWindows.cpp:1656
 msgid "Previous\tPgUp"
-msgstr "Предыдущий\tPgUp"
+msgstr "п÷я─п╣п╢я▀п╢я┐я┴п╦п╧\tPgUp"
 
 #: src/library/grDevices/src/devWindows.cpp:1657
 msgid "Next\tPgDown"
-msgstr "Следующий\tPgDn"
+msgstr "п║п╩п╣п╢я┐я▌я┴п╦п╧\tPgDn"
 
 #: src/library/grDevices/src/devWindows.cpp:1659
 msgid "Save to variable..."
-msgstr "Сохранить в переменную..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╡ п©п╣я─п╣п╪п╣п╫п╫я┐я▌..."
 
 #: src/library/grDevices/src/devWindows.cpp:1660
 msgid "Get from variable..."
-msgstr "Взять из переменной..."
+msgstr "п▓п╥я▐я┌я▄ п╦п╥ п©п╣я─п╣п╪п╣п╫п╫п╬п╧..."
 
 #: src/library/grDevices/src/devWindows.cpp:1662
 msgid "Clear history"
-msgstr "Очистить историю"
+msgstr "п·я┤п╦я│я┌п╦я┌я▄ п╦я│я┌п╬я─п╦я▌"
 
 #: src/library/grDevices/src/devWindows.cpp:1663
 msgid "Resize"
-msgstr "Изменить размер"
+msgstr "п≤п╥п╪п╣п╫п╦я┌я▄ я─п╟п╥п╪п╣я─"
 
 #: src/library/grDevices/src/devWindows.cpp:1664
 msgid "R mode"
-msgstr "Режим R"
+msgstr "п═п╣п╤п╦п╪ R"
 
 #: src/library/grDevices/src/devWindows.cpp:1666
 msgid "Fit to window"
-msgstr "Подогнать под окно"
+msgstr "п÷п╬п╢п╬пЁп╫п╟я┌я▄ п©п╬п╢ п╬п╨п╫п╬"
 
 #: src/library/grDevices/src/devWindows.cpp:1668
 msgid "Fixed size"
-msgstr "Фиксированный размер"
+msgstr "п╓п╦п╨я│п╦я─п╬п╡п╟п╫п╫я▀п╧ я─п╟п╥п╪п╣я─"
 
 #: src/library/grDevices/src/devWindows.cpp:1675
 msgid "Copy as metafile"
-msgstr "Скопировать как метафайл"
+msgstr "п║п╨п╬п©п╦я─п╬п╡п╟я┌я▄ п╨п╟п╨ п╪п╣я┌п╟я└п╟п╧п╩"
 
 #: src/library/grDevices/src/devWindows.cpp:1677
 msgid "Copy as bitmap"
-msgstr "Скопировать как растровый файл Windows"
+msgstr "п║п╨п╬п©п╦я─п╬п╡п╟я┌я▄ п╨п╟п╨ я─п╟я│я┌я─п╬п╡я▀п╧ я└п╟п╧п╩ Windows"
 
 #: src/library/grDevices/src/devWindows.cpp:1680
 msgid "Save as metafile..."
-msgstr "Сохранить как метафайл..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╨п╟п╨ п╪п╣я┌п╟я└п╟п╧п╩..."
 
 #: src/library/grDevices/src/devWindows.cpp:1682
 msgid "Save as postscript..."
-msgstr "Сохранить как PostScript..."
+msgstr "п║п╬я┘я─п╟п╫п╦я┌я▄ п╨п╟п╨ PostScript..."
 
 #: src/library/grDevices/src/devWindows.cpp:3190
 msgid "Locator is active"
-msgstr "Локатор активен"
+msgstr "п⌡п╬п╨п╟я┌п╬я─ п╟п╨я┌п╦п╡п╣п╫"
 
 #: src/library/grDevices/src/devWindows.cpp:3846
 msgid "Waiting to confirm page change..."
-msgstr "Ожидаю подтверждения смены страницы..."
+msgstr "п·п╤п╦п╢п╟я▌ п©п╬п╢я┌п╡п╣я─п╤п╢п╣п╫п╦я▐ я│п╪п╣п╫я▀ я│я┌я─п╟п╫п╦я├я▀..."
 
 #: src/library/grDevices/src/devWindows.cpp:3858
 msgid "Click or hit ENTER for next page"
-msgstr "Следующая страница: щелкните или нажмите ENTER"
+msgstr "п║п╩п╣п╢я┐я▌я┴п╟я▐ я│я┌я─п╟п╫п╦я├п╟: я┴п╣п╩п╨п╫п╦я┌п╣ п╦п╩п╦ п╫п╟п╤п╪п╦я┌п╣ ENTER"
 
 #~ msgid "Print...\tCTRL+P"
-#~ msgstr "Печатать...\tCTRL+P"
+#~ msgstr "п÷п╣я┤п╟я┌п╟я┌я▄...\tCTRL+P"
 
 #~ msgid "invalid device"
-#~ msgstr "неправильное устройство"
+#~ msgstr "п╫п╣п©я─п╟п╡п╦п╩я▄п╫п╬п╣ я┐я│я┌я─п╬п╧я│я┌п╡п╬"

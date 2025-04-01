@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:46\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,9 +14,7 @@ msgstr ""
 
 
 #: R/pictex.R: 0
-#: R/postscript.R: 0
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
-#. R/postscript.R: gettextf("'%s' is deprecated.\n", "xfig")
 
 msgid "'%s' is deprecated."
 msgstr ""
@@ -27,6 +25,13 @@ msgstr ""
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 
 msgid "'%s' must be a non-empty character string"
+msgstr ""
+
+
+#: R/grDevices-defunct.R: 0
+#. R/grDevices-defunct.R: gettextf("'%s' was removed in R 4.5.0.\n", "xfig")
+
+msgid "'%s' was removed in R 4.5.0."
 msgstr ""
 
 
@@ -819,7 +824,6 @@ msgstr ""
 
 
 #: R/postscript.R: 0
-#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 

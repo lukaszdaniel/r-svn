@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 14:04\n"
+"POT-Creation-Date: 2025-04-01 16:28\n"
 "PO-Revision-Date: 2023-11-20 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -632,6 +632,17 @@ msgstr "«qr» i «y» han de tenir el mateix nombre de files"
 msgid "'receive.console.signals' must be TRUE or FALSE"
 msgstr "«receive.console.signals» ha de ser TRUE o FALSE"
 
+#. R/unlist.R: stop("'recursive' is NA")
+#: R/unlist.R:0
+msgid "'recursive' is NA"
+msgstr ""
+
+#. R/unlist.R: stop("'recursive' must be a length-1 vector")
+#: R/unlist.R:0
+#, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "\"origin\" ha de ser de longitud u"
+
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
 msgid "'recursive' will be ignored as 'to' is not a single existing directory"
@@ -998,15 +1009,6 @@ msgstr "S'està adjuntant el paquet: %s"
 #: R/load.R:0
 msgid "Attempting to load the environment %s"
 msgstr "S'està intentant carregar l'entorn %s"
-
-#. R/structure.R: warning("Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n  Consider 'structure(list(), *)' instead.")
-#: R/structure.R:0
-msgid ""
-"Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
-"  Consider 'structure(list(), *)' instead."
-msgstr ""
-"El fet de cridar «structure(NULL, *)» és obsolet, ja que NULL no pot tenir atributs.\n"
-"  Considereu «structure(list(), *)» com a alternativa."
 
 #. R/library.R: gettextf("Conflicts attaching package %s:\n%s", sQuote(package),     emsg)
 #: R/library.R:0
@@ -1472,6 +1474,11 @@ msgstr "s'ha intentat establir «colnames» a un objecte amb menys de dues dimen
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
 msgstr "s'ha intentat establir «rownames» a un objecte sense dimensions"
+
+#. R/structure.R: stop("attempt to set an attribute on NULL")
+#: R/structure.R:0
+msgid "attempt to set an attribute on NULL"
+msgstr ""
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
 #: R/autoload.R:0
@@ -3341,6 +3348,13 @@ msgid_plural "there are no packages called"
 msgstr[0] "no s'ha cridat cap paquet"
 msgstr[1] "no s'ha cridat cap paquet"
 
+#~ msgid ""
+#~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
+#~ "  Consider 'structure(list(), *)' instead."
+#~ msgstr ""
+#~ "El fet de cridar «structure(NULL, *)» és obsolet, ja que NULL no pot tenir atributs.\n"
+#~ "  Considereu «structure(list(), *)» com a alternativa."
+
 #, fuzzy
 #~ msgid "connections left open:"
 #~ msgstr "«connection» ha de ser una connexió"
@@ -3365,9 +3379,6 @@ msgstr[1] "no s'ha cridat cap paquet"
 
 #~ msgid "'name' must be a single character string"
 #~ msgstr "«name» ha de ser una única cadena de caràcters"
-
-#~ msgid "'origin' must be of length one"
-#~ msgstr "\"origin\" ha de ser de longitud u"
 
 #~ msgid "'package' must be of length 1"
 #~ msgstr "«package» ha de ser de longitud 1"

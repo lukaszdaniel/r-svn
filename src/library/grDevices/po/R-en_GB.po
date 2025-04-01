@@ -2,20 +2,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:46\n"
-"PO-Revision-Date: 2023-12-19 16:15+0000\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
+"PO-Revision-Date: 2025-04-01 16:54+0200\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: English\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
-#. R/postscript.R: gettextf("'%s' is deprecated.\n", "xfig")
-#: R/pictex.R:0 R/postscript.R:0
+#: R/pictex.R:0
 msgid "'%s' is deprecated."
 msgstr "'%s' is deprecated."
 
@@ -24,6 +24,11 @@ msgstr "'%s' is deprecated."
 #: R/postscript.R:0
 msgid "'%s' must be a non-empty character string"
 msgstr "'%s' must be a non-empty character string"
+
+#. R/grDevices-defunct.R: gettextf("'%s' was removed in R 4.5.0.\n", "xfig")
+#: R/grDevices-defunct.R:0
+msgid "'%s' was removed in R 4.5.0."
+msgstr ""
 
 #. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
 #: R/colorRamp.R:0
@@ -589,7 +594,6 @@ msgstr "invalid 'family' argument"
 msgid "invalid 'file'"
 msgstr "invalid 'file'"
 
-#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0

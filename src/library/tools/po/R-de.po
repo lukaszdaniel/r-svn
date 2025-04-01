@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -317,10 +317,6 @@ msgstr "Das Authors@R Feld enthält keine Person mit Namen und Rollen"
 #: R/QC.R:0
 #, fuzzy
 msgid "Authors@R field gives persons with duplicated ORCID identifiers:"
-msgstr "Das Authors@R Feld enthält Personen mit doppelten ORCID IDs:"
-
-#, fuzzy
-msgid "Authors@R field gives persons with invalid ROR identifiers:"
 msgstr "Das Authors@R Feld enthält Personen mit ungültigen ORCID IDs:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with duplicated ROR identifiers:")
@@ -2173,6 +2169,7 @@ msgstr ""
 #. R/urltools.R: sprintf("processing %s", u)
 #. R/utils.R: sprintf("processing %s", p)
 #. R/utils.R: sprintf("processing %s", basename(p))
+#. R/utils.R: sprintf("processing %s", f)
 #: R/admin.R:0 R/doitools.R:0 R/urltools.R:0 R/utils.R:0
 msgid "processing %s"
 msgstr "bearbeite %s'"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -42,44 +42,44 @@ msgstr "用於 '%s' 檔案的 md5 執行失敗"
 msgid "sha256 failed on file '%s'"
 msgstr "用於 '%s' 檔案的 md5 執行失敗"
 
-#: getfmts.cpp:57
+#: getfmts.cpp:56
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr "只允許 %d 個引數"
 
-#: getfmts.cpp:62
+#: getfmts.cpp:61
 msgid "'fmt' is not a character vector"
 msgstr "'fmt' 不是字元向量"
 
-#: getfmts.cpp:65
+#: getfmts.cpp:64
 msgid "'fmt' must be length 1"
 msgstr "'fmt' 的長度必須為一"
 
-#: getfmts.cpp:71
+#: getfmts.cpp:70
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "'fmt' 的長度超過了最大格式長度 %d"
 
-#: getfmts.cpp:92
+#: getfmts.cpp:91
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "不明的格式設定 '%s'"
 
-#: getfmts.cpp:132
+#: getfmts.cpp:131
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "每一個轉換設定最多只支援一個星 '*'"
 
-#: gramLatex.cpp:2584 gramRd.cpp:3965
+#: gramLatex.cpp:2757 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "無法為 %d 列的長字串指派緩衝區"
 
-#: gramLatex.cpp:2818 gramRd.cpp:4460
+#: gramLatex.cpp:3014 gramRd.cpp:4460
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "無法為 %d 列的長字串指派緩衝區"
 
-#: gramLatex.cpp:2861 gramRd.cpp:4511
+#: gramLatex.cpp:3056 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 值無效"
@@ -152,15 +152,15 @@ msgstr "無法從這個鏈結讀取"
 msgid "invalid Rd file"
 msgstr "Rd 檔案無效"
 
-#: gramRd.cpp:4556
+#: gramRd.cpp:4557
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr "'deparseRd' 只支援反解析字元元素"
 
-#: gramRd.cpp:4559
+#: gramRd.cpp:4560
 msgid "bad state"
 msgstr "狀態不好"
 
-#: gramRd.cpp:4572
+#: gramRd.cpp:4573
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr "'deparseRd' 裡的文字模式 %d 無效"
@@ -187,11 +187,11 @@ msgstr "'%s' 引數無效"
 msgid "write error during file append"
 msgstr "檔案附加寫入時發生錯誤"
 
-#: pdscan.cpp:68
+#: pdscan.cpp:75
 msgid "too many items"
 msgstr ""
 
-#: pdscan.cpp:116
+#: pdscan.cpp:122
 msgid "non-character argument"
 msgstr ""
 
@@ -203,19 +203,19 @@ msgstr "這個平臺不支援 pskill()"
 msgid "psnice() is not supported on this platform"
 msgstr "這個平臺不支援 psnice()"
 
-#: text.cpp:80
+#: text.cpp:79
 msgid "invalid argument type"
 msgstr "引數種類無效"
 
-#: text.cpp:169 text.cpp:205 text.cpp:329
+#: text.cpp:168 text.cpp:204 text.cpp:328
 #, fuzzy
 msgid "invalid input"
 msgstr "Rd 檔案無效"
 
-#: text.cpp:236 text.cpp:258
+#: text.cpp:235 text.cpp:257
 msgid "out of memory"
 msgstr "記憶體不足"
 
-#: text.cpp:278 text.cpp:280
+#: text.cpp:277 text.cpp:279
 msgid "first arg must be a single character string"
 msgstr ""

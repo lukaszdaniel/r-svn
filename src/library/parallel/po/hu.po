@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 16:51+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -122,15 +122,15 @@ msgstr ""
 msgid "'mcexit' failed"
 msgstr ""
 
-#: fork.cpp:1245 fork.cpp:1254
+#: fork.cpp:1246 fork.cpp:1255
 msgid "invalid CPU affinity specification"
 msgstr ""
 
-#: fork.cpp:1265
+#: fork.cpp:1266
 msgid "requested CPU set is too large for this system"
 msgstr ""
 
-#: fork.cpp:1288
+#: fork.cpp:1289
 msgid "retrieving CPU affinity set failed"
 msgstr ""
 

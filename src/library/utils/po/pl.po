@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2024-09-01 15:36+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -33,23 +33,25 @@ msgstr ""
 msgid "bad hash table type"
 msgstr ""
 
-#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:772 io.cpp:827 io.cpp:840
-#: io.cpp:844 io.cpp:850 io.cpp:1089 io.cpp:1090 io.cpp:1092 io.cpp:1093
-#: io.cpp:1094 io.cpp:1095 io.cpp:1096 stubs.cpp:47 stubs.cpp:67
-#: windows/dialogs.cpp:147 windows/dialogs.cpp:155 windows/dialogs.cpp:175
-#: windows/dialogs.cpp:200 windows/dialogs.cpp:203 windows/dialogs.cpp:245
-#: windows/dialogs.cpp:282 windows/dialogs.cpp:293 windows/dialogs.cpp:317
-#: windows/dialogs.cpp:325 windows/util.cpp:138 windows/widgets.cpp:90
-#: windows/widgets.cpp:93 windows/widgets.cpp:97
+#: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:771 io.cpp:826 io.cpp:839
+#: io.cpp:843 io.cpp:849 io.cpp:1088 io.cpp:1089 io.cpp:1091 io.cpp:1092
+#: io.cpp:1093 io.cpp:1094 io.cpp:1095 stubs.cpp:47 stubs.cpp:67
+#: windows/dialogs.cpp:84 windows/dialogs.cpp:88 windows/dialogs.cpp:92
+#: windows/dialogs.cpp:95 windows/dialogs.cpp:98 windows/dialogs.cpp:147
+#: windows/dialogs.cpp:155 windows/dialogs.cpp:175 windows/dialogs.cpp:200
+#: windows/dialogs.cpp:203 windows/dialogs.cpp:245 windows/dialogs.cpp:282
+#: windows/dialogs.cpp:293 windows/dialogs.cpp:317 windows/dialogs.cpp:325
+#: windows/util.cpp:138 windows/widgets.cpp:90 windows/widgets.cpp:93
+#: windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: io.cpp:347 io.cpp:837
+#: io.cpp:347 io.cpp:836
 msgid "invalid quote symbol set"
 msgstr "niepoprawnie ustawiony symbol cudzysłowu"
 
-#: io.cpp:359 io.cpp:859 io.cpp:1077
+#: io.cpp:359 io.cpp:858 io.cpp:1076
 msgid "cannot open the connection"
 msgstr "nie można otworzyć połączenia"
 
@@ -71,64 +73,64 @@ msgstr "pierwszy argument musi być trybu tekstowego"
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "niepoprawny ciąg znaków 'numerals': \"%s\""
 
-#: io.cpp:774
+#: io.cpp:773
 msgid "Selection: "
 msgstr "Wybór: "
 
-#: io.cpp:869 io.cpp:884
+#: io.cpp:868 io.cpp:883
 msgid "cannot allocate buffer in 'readTableHead'"
 msgstr "nie można przydzielić bufora w 'readTableHead'"
 
-#: io.cpp:897
+#: io.cpp:896
 msgid "\\ followed by EOF"
 msgstr "\\ po którym następuje EOF"
 
-#: io.cpp:936
+#: io.cpp:935
 #, c-format
 msgid "line %d appears to contain embedded nulls"
 msgstr ""
 
-#: io.cpp:949 io.cpp:953
+#: io.cpp:948 io.cpp:952
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
 msgstr "niekompletna końcowa linia znaleziona przez 'readTableHeader' w '%s'"
 
-#: io.cpp:1010
+#: io.cpp:1009
 msgid "index out of range"
 msgstr "indeks poza zakresem"
 
-#: io.cpp:1046
+#: io.cpp:1045
 #, c-format
 msgid "Problem closing connection:  %s"
 msgstr "Problem podczas zamykania połączenia: %s"
 
-#: io.cpp:1048
+#: io.cpp:1047
 msgid "Problem closing connection"
 msgstr "Problem podczas zamykania połączenia"
 
-#: io.cpp:1070
+#: io.cpp:1069
 msgid "'file' is not a connection"
 msgstr "argument 'file' nie jest połączeniem"
 
-#: io.cpp:1073
+#: io.cpp:1072
 msgid "cannot write to this connection"
 msgstr "nie można zapisać do tego połączenia"
 
-#: io.cpp:1102
+#: io.cpp:1101
 msgid "'dec' must be a single character"
 msgstr "argument 'dec' musi być pojedynczym znakiem"
 
-#: io.cpp:1126
+#: io.cpp:1125
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "uszkodzona ramka danych -- długość kolumny %d nie zgadza się z liczbą wierszy"
 
-#: io.cpp:1160
+#: io.cpp:1159
 #, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr "kolumna %d twierdzi, że jest czynnikiem, ale nie posiada kodów liczbowych"
 
-#: io.cpp:1178
+#: io.cpp:1177
 msgid "corrupt matrix -- dims do not match length"
 msgstr "macierz jest uszkodzona -- wymiary nie zgadzają się z długością"
 

@@ -2164,9 +2164,6 @@ msgstr[1] "die formalen Argumente der generischen Funktion für \"%s\" (%s) unte
 #~ msgid "(and methods)"
 #~ msgstr "(und Methoden)"
 
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "Funktion muss eine S4 Generische sein"
-
 #~ msgid "invalid method sublist"
 #~ msgstr "unzulässige Methodenteilliste"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 17:15+0100\n"
+"POT-Creation-Date: 2025-04-01 16:29+0200\n"
 "PO-Revision-Date: 2023-10-21 02:10+0000\n"
 "Last-Translator: Patricia loto <patricia.andrea.loto@gmail.com>\n"
 "Language-Team: none\n"
@@ -42,43 +42,43 @@ msgstr ""
 msgid "sha256 failed on file '%s'"
 msgstr ""
 
-#: getfmts.cpp:57
+#: getfmts.cpp:56
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr ""
 
-#: getfmts.cpp:62
+#: getfmts.cpp:61
 msgid "'fmt' is not a character vector"
 msgstr "'fmt' no es un vector de caracteres"
 
-#: getfmts.cpp:65
+#: getfmts.cpp:64
 msgid "'fmt' must be length 1"
 msgstr "El 'fmt' debe tener longitud igual a 1"
 
-#: getfmts.cpp:71
+#: getfmts.cpp:70
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "La longitud de 'fmt' excede la longitud máxima de %d"
 
-#: getfmts.cpp:92
+#: getfmts.cpp:91
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "La especificación del formato de %s es irreconocible"
 
-#: getfmts.cpp:132
+#: getfmts.cpp:131
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "Al menos, un asterisco es soportado en la especificación de cada conversión"
 
-#: gramLatex.cpp:2584 gramRd.cpp:3965
+#: gramLatex.cpp:2757 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2818 gramRd.cpp:4460
+#: gramLatex.cpp:3014 gramRd.cpp:4460
 msgid "unable to allocate in PushState"
 msgstr ""
 
-#: gramLatex.cpp:2861 gramRd.cpp:4511
+#: gramLatex.cpp:3056 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
@@ -151,15 +151,15 @@ msgstr ""
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.cpp:4556
+#: gramRd.cpp:4557
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4559
+#: gramRd.cpp:4560
 msgid "bad state"
 msgstr ""
 
-#: gramRd.cpp:4572
+#: gramRd.cpp:4573
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""
@@ -186,11 +186,11 @@ msgstr "argumento '%s' no válido"
 msgid "write error during file append"
 msgstr ""
 
-#: pdscan.cpp:68
+#: pdscan.cpp:75
 msgid "too many items"
 msgstr ""
 
-#: pdscan.cpp:116
+#: pdscan.cpp:122
 msgid "non-character argument"
 msgstr ""
 
@@ -202,18 +202,18 @@ msgstr ""
 msgid "psnice() is not supported on this platform"
 msgstr ""
 
-#: text.cpp:80
+#: text.cpp:79
 msgid "invalid argument type"
 msgstr ""
 
-#: text.cpp:169 text.cpp:205 text.cpp:329
+#: text.cpp:168 text.cpp:204 text.cpp:328
 msgid "invalid input"
 msgstr ""
 
-#: text.cpp:236 text.cpp:258
+#: text.cpp:235 text.cpp:257
 msgid "out of memory"
 msgstr ""
 
-#: text.cpp:278 text.cpp:280
+#: text.cpp:277 text.cpp:279
 msgid "first arg must be a single character string"
 msgstr ""

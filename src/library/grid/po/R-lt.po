@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grid 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-04-01 16:29\n"
 "PO-Revision-Date: 2020-12-09 13:08+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -312,9 +312,9 @@ msgstr "'x1', 'y1', 'x2' ir 'y2' turi būti vienetai"
 msgid "Cannot create zero-length unit vector (\"unit\" subsetting)"
 msgstr "Negalima sukurti nulinio ilgio vieneto vektoriaus (\"unit\" potipis)"
 
-#. R/coords.R: stop("Closed must not be a missing value")
+#. R/coords.R: stop("Closed must be length 1 and must not be a missing value")
 #: R/coords.R:0
-msgid "Closed must not be a missing value"
+msgid "Closed must be length 1 and must not be a missing value"
 msgstr ""
 
 #. R/grid.R: stop("Down viewport failed to record on display list")
@@ -927,14 +927,16 @@ msgstr "turi naršyti aukštyn bent viena peržiūros sritimi"
 msgid "must pop at least one viewport"
 msgstr "turi atidaryti bent vieną peržiūros sritį"
 
-#. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
+#. R/viewport.R: stop("must specify at least one of 'xData' or 'xscale'")
 #: R/viewport.R:0
-msgid "must specify at least one of 'x' or 'xscale'"
+#, fuzzy
+msgid "must specify at least one of 'xData' or 'xscale'"
 msgstr "turi nurodyti bent vieną iš 'x' arba 'xscale'"
 
-#. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
+#. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
-msgid "must specify at least one of 'y' or 'yscale'"
+#, fuzzy
+msgid "must specify at least one of 'yData' or 'yscale'"
 msgstr "turi nurodyti bent vieną iš 'y' arba 'yscale'"
 
 #. R/grid.R: stop("must specify at least one viewport")

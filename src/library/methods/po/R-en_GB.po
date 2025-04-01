@@ -2154,9 +2154,6 @@ msgstr[1] "the formal arguments of the generic function for %s (%s) differ from 
 #~ msgid "(and methods)"
 #~ msgstr "(and methods)"
 
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "Function must be an S4 generic"
-
 #~ msgid "invalid method sublist"
 #~ msgstr "invalid method sublist"
 
