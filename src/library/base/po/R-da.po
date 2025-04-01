@@ -3441,6 +3441,44 @@ msgstr[1] "der er ingen pakker rmed navnet"
 #~ msgid "'%s' must be a non-empty string"
 #~ msgstr "'file' skal være en streng der ikke er tom"
 
+#, fuzzy
+#~ msgid "'name' must be a single character string"
+#~ msgstr "argument 'object' skal deparse til en enkel tegnstreng"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from' skal angives"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' skal være et »Date«-objekt"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' skal være af længde 1"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' skal være af længde 1"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "'by' skal være af længde 1"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' skal være et »POSIXt«-objekt"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to' skal være et »POSIXt«-objekt"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' skal være på længde 1"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' skal have længden 1"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "argument 'length.out' skal have længden 1"
+
+#, fuzzy
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'to' skal være af længde 1"
+
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' skal være en tegnstreng af længde 1"
 

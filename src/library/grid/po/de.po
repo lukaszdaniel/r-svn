@@ -1,11 +1,11 @@
 # German translation of 
 # src/library/graphics/po/grid.pot
-# Copyright (C) 2009-2022 The R Foundation
+# Copyright (C) 2009-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2009-2022.
+# Detlef Steuer <steuer@hsu-hh.de>, 2009-2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: R-4.2.0\n"
+"Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-03 17:44+0100\n"
 "PO-Revision-Date: 2022-04-13 16:49+0200\n"
@@ -40,7 +40,7 @@ msgstr "Masken innerhalb eines (Clipping)-Pfades werden nicht beachtet"
 #: grid.cpp:702 grid.cpp:880
 #, c-format
 msgid "Viewport '%s' was not found"
-msgstr ""
+msgstr "Viewport '%s' nicht gefunden"
 
 #: grid.cpp:912 grid.cpp:917 grid.cpp:1038 grid.cpp:1043
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
@@ -84,17 +84,17 @@ msgstr ""
 
 #: grid.cpp:4027 grid.cpp:4083
 msgid "Coordinates for text pch not yet supported"
-msgstr ""
+msgstr "Koordinaten für textliche pch noch nicht unterstützt"
 
 #: grid.cpp:4088
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
-msgstr ""
+msgstr "pch Wert '%d' ist in dieser Lokalisation ungültig"
 
 #: grid.cpp:4909
 #, c-format
 msgid "unimplemented pch value '%d'"
-msgstr ""
+msgstr "nicht implementierter Wert für pch '%d'"
 
 #: grid.cpp:5067
 msgid "invalid plotting symbol"
@@ -186,7 +186,7 @@ msgstr "Einheiten können nur mit numerischen oder integer Werten multipliziert 
 
 #: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
-msgstr ""
+msgstr "Kann Texthöhe/-breite nicht berechnen (nutze Null)"
 
 #: util.cpp:308 util.cpp:320
 msgid "grid grob object is empty"

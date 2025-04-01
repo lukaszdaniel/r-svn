@@ -2306,6 +2306,10 @@ msgstr[1] ""
 #~ msgid "Function must be an S4 generic"
 #~ msgstr "Função fornecida como argumento \"f\" deve ser genérica"
 
+#, fuzzy
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "Função fornecida como argumento \"f\" deve ser genérica"
+
 #~ msgid "invalid method sublist"
 #~ msgstr "sublista de método inválida"
 

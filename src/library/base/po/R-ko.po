@@ -2089,6 +2089,13 @@ msgstr "유효하지 않은 ncol(y)입니다"
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
 #, fuzzy
+msgid "'recursive' must be a length-1 vector"
+msgstr "'origin'의 길이는 반드시 1이어야 합니다"
+
+msgid "'recursive' is NA"
+msgstr ""
+
+#, fuzzy
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "유효하지 않은 버전지정 %s입니다"
 

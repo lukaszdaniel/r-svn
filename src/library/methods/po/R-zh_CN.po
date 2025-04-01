@@ -2142,6 +2142,10 @@ msgstr[0] "用于%s泛型函数(%s)的正式参数与将作为默認值(%s)来�
 #~ msgid "(and methods)"
 #~ msgstr "为方法%s()"
 
+#, fuzzy
+#~ msgid "Function must be an S4 generic"
+#~ msgstr ".getGeneric里不能有空的函数名称"
+
 #~ msgid "invalid method sublist"
 #~ msgstr "方法子列表有错误"
 

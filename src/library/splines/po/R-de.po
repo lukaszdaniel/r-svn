@@ -1,11 +1,11 @@
 # Translation of /src/library/splines/po/R-splines.pot
 # to German
-# Copyright (C) 2005-2014 The R Foundation
+# Copyright (C) 2005-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2007-2014.
+# Detlef Steuer <steuer@hsu-hh.de>, 2007-2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 3.4.4\n"
+"Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2018-04-05 14:57+0200\n"
@@ -59,13 +59,13 @@ msgstr "'ord' muss eine positive ganze Zahl sein, maximal die Anzahl der Knoten"
 #. R/splines.R: stop("all interior knots match left boundary knot")
 #: R/splines.R:0
 msgid "all interior knots match left boundary knot"
-msgstr ""
+msgstr "alle inneren Knoten fallen auf den linken Randknoten"
 
 #. R/splines.R: warning("all interior knots match right boundary knot")
 #. R/splines.R: stop("all interior knots match right boundary knot")
 #: R/splines.R:0
 msgid "all interior knots match right boundary knot"
-msgstr ""
+msgstr "alle inneren Knoten fallen auf den rechten Randknoten"
 
 #. R/splineClasses.R: stop("currently implemented only for cubic splines")
 #: R/splineClasses.R:0
@@ -128,7 +128,7 @@ msgstr ""
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
 msgid "shoving 'interior' knots matching boundary knots to inside"
-msgstr ""
+msgstr "schiebe 'interior' Knoten, die auf Randknoten fallen ins Innere"
 
 #. R/splines.R: warning("some 'x' values beyond boundary knots may cause ill-conditioned bases")
 #: R/splines.R:0

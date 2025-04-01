@@ -2136,6 +2136,9 @@ msgstr[0] "用於 %s 泛型函式(%s)的正式引數與將做為預設值(%s)來
 #~ msgid "Function must be an S4 generic"
 #~ msgstr "函式必須是 S4 泛型"
 
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "函式必須是 S4 泛型"
+
 #~ msgid "invalid method sublist"
 #~ msgstr "方法子串列不正確"
 

@@ -1075,13 +1075,13 @@ msgstr "ha d'aparèixer com a mínim una àrea de visualització"
 #. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
 #: R/viewport.R:0
 #, fuzzy
-msgid "must specify at least one of 'x' or 'xscale'"
+msgid "must specify at least one of 'xData' or 'xscale'"
 msgstr "s'ha d'especificar com a mínim un dels «x» o «xscale»"
 
 #. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
 #: R/viewport.R:0
 #, fuzzy
-msgid "must specify at least one of 'y' or 'yscale'"
+msgid "must specify at least one of 'yData' or 'yscale'"
 msgstr "ha d'especificar com a mínim un de «y» o «yscale»"
 
 #. R/grid.R: stop("must specify at least one viewport")

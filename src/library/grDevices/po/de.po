@@ -1,10 +1,10 @@
 # Translation of src/library/grDevices/po/grDevices.pot to German.
-# Copyright (C) 2005-2022 The R Foundation
+# Copyright (C) 2005-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2009-2022.
+# Detlef Steuer <steuer@hsu-hh.de>, 2009-2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: R-4.2.0\n"
+"Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-07 17:14+0100\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
@@ -179,12 +179,12 @@ msgstr "ungültige Zeichenkette in '%s'"
 #: devPS.cpp:806
 #, fuzzy, c-format
 msgid "font width unknown for character 0x%02x in encoding %s"
-msgstr "Zeichenbreite unbekannt für das Zeichen 0x%x"
+msgstr "Zeichenbreite unbekannt für das Zeichen 0x%02x in Kodierung %s"
 
 #: devPS.cpp:866
 #, fuzzy, c-format
 msgid "font metrics unknown for Unicode character U+%04X"
-msgstr "Fontmetrik ist für das Unicode-Zeichen U+%04x unbekannt"
+msgstr "Fontmetrik ist für das Unicode-Zeichen U+%04X unbekannt"
 
 #: devPS.cpp:877
 #, c-format
@@ -194,17 +194,17 @@ msgstr "unbekannte Kodierung '%s' in 'PostScriptMetricInfo'"
 #: devPS.cpp:894
 #, c-format
 msgid "Unicode character %lc (U+%04X) cannot be converted"
-msgstr ""
+msgstr "Unicode Zeichen %lc (U+%04X) kann nicht konvertiert werden"
 
 #: devPS.cpp:913 devPS.cpp:967
 #, fuzzy, c-format
 msgid "font metrics unknown for character 0x%02x in encoding %s"
-msgstr "Fontmetrik für das Zeichen 0x%x unbekannt"
+msgstr "Fontmetrik für das Zeichen 0x%02x unbekannt"
 
 #: devPS.cpp:981
 #, fuzzy, c-format
 msgid "invalid character (%04X) sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
-msgstr "ungültiges Zeichen (%04x) an 'PostScriptCIDMetricInfo' in einer Ein-Byte-Lokalisierung gesendet"
+msgstr "ungültiges Zeichen (%04X) an 'PostScriptCIDMetricInfo' in einer Ein-Byte-Lokalisierung gesendet"
 
 #: devPS.cpp:989
 msgid "invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
@@ -401,7 +401,7 @@ msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
 #: devPS.cpp:4603 devPS.cpp:4610
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
-msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
+msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': für <%02x>"
 
 #: devPS.cpp:4605 devPS.cpp:4612
 #, c-format
@@ -518,7 +518,7 @@ msgstr "PDF fillStroke Schreiben fehlgeschlagen"
 
 #: devPS.cpp:7323
 msgid "Glyph ID larger than 0xFFFF; output will be incorrect"
-msgstr ""
+msgstr "Glyph ID größer als 0xFFFF; Ausgabe wird falsch sein"
 
 #: devPS.cpp:7347
 msgid "invalid 'alpha' value in PDF"
@@ -674,7 +674,7 @@ msgstr "Konnte PDF CID Zeichensatz nicht finden oder nicht laden"
 #: devPS.cpp:10801 devPS.cpp:10886 devPicTeX.cpp:767
 #, fuzzy, c-format
 msgid "invalid 'file' parameter in %s"
-msgstr "ungültiger 'family' Parameter in %s"
+msgstr "ungültiger 'file' Parameter in %s"
 
 #: devPS.cpp:10810 devPS.cpp:10814 devPS.cpp:10969 devPS.cpp:10973
 #, c-format
@@ -699,12 +699,12 @@ msgstr ""
 #: devQuartz.cpp:482
 #, fuzzy
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
-msgstr "Cairo Muster ausgeschöpft (Erhöhung von maxPatterns fehlgeschlagen)"
+msgstr "Quartz Gradienten ausgeschöpft (Erhöhung von maxPatterns fehlgeschlagen)"
 
 #: devQuartz.cpp:488
 #, fuzzy
 msgid "Quartz patterns exhausted (failed to increase maxPatterns)"
-msgstr "Cairo Muster ausgeschöpft (Erhöhung von maxPatterns fehlgeschlagen)"
+msgstr "Quartz Muster ausgeschöpft (Erhöhung von maxPatterns fehlgeschlagen)"
 
 #: devQuartz.cpp:529 cairo/cairoFns.cpp:348
 msgid "Attempt to release non-existent pattern"
@@ -713,61 +713,61 @@ msgstr "Versuch ein nicht existierendes Muster freizugeben"
 #: devQuartz.cpp:566
 #, fuzzy
 msgid "Quartz patterns exhausted"
-msgstr "Cairo Muster ausgeschöpft"
+msgstr "Quartz Muster ausgeschöpft"
 
 #: devQuartz.cpp:632 devQuartz.cpp:647 devQuartz.cpp:649 devQuartz.cpp:680
 #: devQuartz.cpp:682
 #, fuzzy
 msgid "Failed to create gradient"
-msgstr "konnte 'maxDefns' nicht erhöhen"
+msgstr "Erzeugung eines Gradienten fehlgeschlagen"
 
 #: devQuartz.cpp:664 devQuartz.cpp:697
 msgid "Unsupported gradient fill extend type; using 'pad'"
-msgstr ""
+msgstr "Nicht unterstützter Typ für Füllungsgradientenerweiterung; Nutze 'pad'"
 
 #: devQuartz.cpp:740 devQuartz.cpp:773
 #, fuzzy
 msgid "Failed to create pattern"
-msgstr "konnte Raster nicht allozieren"
+msgstr "Erzeugen eines Musters fehlgeschlagen"
 
 #: devQuartz.cpp:763
 msgid "Unsupported pattern extend mode;  using \"repeat\""
-msgstr ""
+msgstr "Nicht unterstützter Musterfortsetzungsmodus; nutze \"repeat\""
 
 #: devQuartz.cpp:825
 #, fuzzy
 msgid "Quartz clipping paths exhausted (failed to increase maxClipPaths)"
-msgstr "Cairo Clipping-Pfade ausgeschöpft (Erhöhung von maxClipPaths fehlgeschlagen)"
+msgstr "Quartz Clipping-Pfade ausgeschöpft (Erhöhung von maxClipPaths fehlgeschlagen)"
 
 #: devQuartz.cpp:874
 #, fuzzy
 msgid "Quartz clipping paths exhausted"
-msgstr "Cairo Clipping-Pfade ausgeschöpft"
+msgstr "Quartz Clipping-Pfade ausgeschöpft"
 
 #: devQuartz.cpp:882
 #, fuzzy
 msgid "Failed to create clipping path"
-msgstr "PDF clipping path Schreiben fehlgeschlagen"
+msgstr "Erzeugen des Clipping-Pfades fehlgeschlagen"
 
 #: devQuartz.cpp:975
 #, fuzzy
 msgid "Quartz masks exhausted (failed to increase maxMasks)"
-msgstr "Cairo Masken ausgeschöpft (Erhöhung von maxMasks fehlgeschlagen)"
+msgstr "Quartz Masken ausgeschöpft (Erhöhung von maxMasks fehlgeschlagen)"
 
 #: devQuartz.cpp:1026
 #, fuzzy
 msgid "Quartz masks exhausted"
-msgstr "Cairo Masken ausgeschöpft"
+msgstr "Quartz Masken ausgeschöpft"
 
 #: devQuartz.cpp:1042
 #, fuzzy
 msgid "Failed to create Quartz mask"
-msgstr "konnte Masken nicht allozieren"
+msgstr "Erzeugen der Quartz-Maske fehlgeschlagen"
 
 #: devQuartz.cpp:1142
 #, fuzzy
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
-msgstr "Cairo Gruppen ausgeschöpft (Erhöhung von maxGroups fehlgeschlagen)"
+msgstr "Quartz Gruppen ausgeschöpft (Erhöhung von maxGroups fehlgeschlagen)"
 
 #: devQuartz.cpp:1170 cairo/cairoFns.cpp:907
 msgid "Attempt to release non-existent group"
@@ -776,12 +776,12 @@ msgstr "Versuch eine nicht-existierende Gruppe freizugeben"
 #: devQuartz.cpp:1199
 #, fuzzy
 msgid "Quartz groups exhausted"
-msgstr "Cairo Gruppen ausgeschöpft"
+msgstr "Quartz Gruppen ausgeschöpft"
 
 #: devQuartz.cpp:1219
 #, fuzzy
 msgid "Add compositing operator not supported; falling back to over"
-msgstr "Der Kompositions-Operator hat keinen korrespondierenden blend Modus; Rückgriff auf Normal"
+msgstr "Hinzufügen eines compositing OOperators nicht unterstützt; Rückgriff auf over"
 
 #: devQuartz.cpp:1307 cairo/cairoFns.cpp:864
 msgid "Groups exhausted"
@@ -836,12 +836,12 @@ msgstr "Versuch nicht-existierende Maske freizugeben"
 #: devQuartz.cpp:3073
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
-msgstr "ungültiger 'fonts' Parameter in %s"
+msgstr "ungültiger Zeichensatzpfad %s"
 
 #: devQuartz.cpp:3103
 #, fuzzy
 msgid "Failed to load font"
-msgstr "konnte Zeichensatzliste nicht allozieren"
+msgstr "konnte Zeichensatz nicht laden"
 
 #: devQuartz.cpp:3196 devQuartz.cpp:3201
 msgid "invalid 'file' argument"
@@ -1155,7 +1155,7 @@ msgstr "Cairo Masken ausgeschöpft"
 
 #: cairo/cairoFns.cpp:640
 msgid "Ignored luminance mask (not supported on this device)"
-msgstr ""
+msgstr "Ignorierte Luminiszenzmaske (auf diesem Gerät nicht unterstützt)"
 
 #: cairo/cairoFns.cpp:709
 msgid "Cairo groups exhausted (failed to increase maxGroups)"
@@ -1187,7 +1187,45 @@ msgstr "ungültige Zeichenkette in '%s'"
 #: cairo/cairoFns.cpp:2376
 #, fuzzy
 msgid "Font file not found; matching font family and face"
-msgstr "Zeichensatzfamilie in der Windows Zeichensatzdatenbank nicht gefunden"
+msgstr "Zeichensatz Datei nicht gefunden; passende Zeichensatzfamilie und -face"
+
+#~ msgid "ran out of colors in xfig()"
+#~ msgstr "keine Farben mehr übrig in xfig()"
+
+#, c-format
+#~ msgid "unimplemented line texture %08x: using Dash-double-dotted"
+#~ msgstr "unimplementierte Zeilentextur %08x: nutze Strich-Punkt-Punkt"
+
+#, c-format
+#~ msgid "unknown postscript font family '%s', using Helvetica"
+#~ msgstr "unbekannte Postscript-Zeichensatzfamilie '%s', nutzt Helvetica"
+
+#~ msgid "invalid foreground/background color (xfig)"
+#~ msgstr "ungültige Vorder-/Hintergrundfarbe (xfig)"
+
+#~ msgid "only Type 1 fonts supported for XFig"
+#~ msgstr "es werden nur Type 1 Zeichensätze für XFig unterstützt"
+
+#~ msgid "failed to initialise default XFig font"
+#~ msgstr "konnte den Standard-Zeichensatz für XFig nicht initialisieren"
+
+#, c-format
+#~ msgid "invalid page type '%s' (xfig)"
+#~ msgstr "unzulässiger Seitentyp '%s' (xfig)"
+
+#, c-format
+#~ msgid "xfig(%s, onefile=FALSE) will only return the last plot"
+#~ msgstr "xfig(%s, onfile=FALSE) liefert nur die letzte Grafik"
+
+#~ msgid "empty file name"
+#~ msgstr "leerer Dateinamen"
+
+#, c-format
+#~ msgid "unable to use encoding '%s'"
+#~ msgstr "kann Kodierung '%s' nicht nutzen"
+
+#~ msgid "Ignored alpha mask (not supported on this device)"
+#~ msgstr "Ignorierte alpha-Maske (auf diesem Gerät nicht unterstützt)"
 
 #~ msgid "invalid argument"
 #~ msgstr "unzulässiges Argument"

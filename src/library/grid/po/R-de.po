@@ -1,10 +1,10 @@
 # Translation of src/library/graphics/po/R-grid.pot to German.
-# Copyright (C) 2005-2022 The R Foundation
+# Copyright (C) 2005-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2007-2022.
+# Detlef Steuer <steuer@hsu-hh.de>, 2007-2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 4.2.0\n"
+"Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2022-04-13 14:32+0200\n"
@@ -349,7 +349,7 @@ msgstr "ungültige 'order'"
 #: R/coords.R:0
 #, fuzzy
 msgid "Invalid coordinates"
-msgstr "ungültige 'order'"
+msgstr "Ungültige Koordinaten"
 
 #. R/group.R: stop("Invalid destination")
 #. R/group.R: stop("Invalid destination")
@@ -427,7 +427,7 @@ msgstr "Kein 'unit' Objekt"
 #: R/mask.R:0
 #, fuzzy
 msgid "Only a grob can be converted to a mask"
-msgstr "Nur ein grob kann in einen Pfad konvertiert werden"
+msgstr "Nur ein grob kann in eine Maske konvertiert werden"
 
 #. R/path.R: stop("Only a grob can be converted to a path")
 #: R/path.R:0
@@ -554,6 +554,8 @@ msgid ""
 "grob drawing produces more shapes than grob coords\n"
 "(recycling coords)"
 msgstr ""
+"Die grob Zeichnung erzeugt mehr Formen als grob Koordinaten\n"
+"(Koordinaten werden recycelt)"
 
 #. R/grab.R: warning("grob pushed viewports and did not pop/up them (grab MAY not be faithful)")
 #: R/grab.R:0

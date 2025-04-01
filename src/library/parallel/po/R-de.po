@@ -1,10 +1,10 @@
 # Translation of src/library/parallel/po/R-parallel.pot to German
-# Copyright (C) 2011-2022 The R Foundation
+# Copyright (C) 2011-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2011-2022.
+# Detlef Steuer <steuer@hsu-hh.de>, 2011-2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: R 4.2.0\n"
+"Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2024-08-31 23:44\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
@@ -170,7 +170,7 @@ msgstr "numerisches 'names' muss >= 1 sein"
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
 msgid "replacing registration for cluster type '%s'"
-msgstr ""
+msgstr "ersetze Registrierung für Clustertyp '%s'"
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0
@@ -181,7 +181,7 @@ msgstr "einige Ergebnisse könnten fehlen, brachen ab oder verursachten einen Fe
 #: R/snow.R:0
 #, fuzzy
 msgid "unknown cluster type: '%s'"
-msgstr "unbekannter Clustertyp"
+msgstr "unbekannter Clustertyp: '%s'"
 
 #. R/clusterApply.R: stop("zero-length inputs cannot be mixed with those of non-zero length")
 #: R/clusterApply.R:0

@@ -2159,6 +2159,9 @@ msgstr[1] "l'argomento formale della funzione generica per %s (%s) differisce da
 #~ msgid "(and methods)"
 #~ msgstr "(e metodi)"
 
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "La funzione dev'essere un S4 generico"
+
 #~ msgid "invalid method sublist"
 #~ msgstr "elenco secondario metodo non valido"
 

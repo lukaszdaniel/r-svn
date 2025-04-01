@@ -1,11 +1,11 @@
 # Translation of /src/library/stats/po/R-stats.pot to German
-# Copyright (C) 2008-2022 The R Foundation
+# Copyright (C) 2008-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2008-2023.
+# Detlef Steuer <steuer@hsu-hh.de>, 2008-2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: R-4.2.0\n"
+"Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-02 12:23\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
@@ -43,7 +43,7 @@ msgstr "%s benötigt das korrekt installierte Paket 'Matrix'"
 #. R/lm.R: gettextf("%s: NAs produced for non-estimable cases", msg1)
 #: R/lm.R:0
 msgid "%s: NAs produced for non-estimable cases"
-msgstr ""
+msgstr "%s: NAs für nicht-schätzbare Fälle erzeugt"
 
 #. R/lm.R: gettextf("%s; attr(*, \"non-estim\") has doubtful cases", msg1)
 #: R/lm.R:0
@@ -1992,13 +1992,13 @@ msgstr "Kontraste können nur auf Faktoren mit 2 oder mehr Stufen angewendet wer
 #: R/models.R:0
 #, fuzzy
 msgid "contrasts dropped from factor %s"
-msgstr "Kontraste arbeiten nur auf Faktoren"
+msgstr "Kontraste weggelassen von Faktor %s"
 
 #. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels",     nm)
 #: R/models.R:0
 #, fuzzy
 msgid "contrasts dropped from factor %s due to missing levels"
-msgstr "Kontraste können nur auf Faktoren mit 2 oder mehr Stufen angewendet werden"
+msgstr "Kontraste bei Faktor %s weggelassen, da Stufen fehlen"
 
 #. R/contr.poly.R: gettextf("contrasts not defined for %d degrees of freedom", n -     1)
 #. R/contrast.R: gettextf("contrasts not defined for %d degrees of freedom", n -     1L)

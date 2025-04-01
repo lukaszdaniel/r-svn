@@ -2168,6 +2168,9 @@ msgstr[2] "formalne argumenty ogólnej funkcji dla %s (%s) różnią się od tyc
 #~ msgid "(and methods)"
 #~ msgstr "(oraz metody)"
 
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "Funkcja musi być generyczną funkcją klasy S4"
+
 #~ msgid "invalid method sublist"
 #~ msgstr "niepoprawne podlista metod"
 

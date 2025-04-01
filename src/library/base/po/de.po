@@ -1,10 +1,10 @@
 # Translation of po/R.pot to German.
-# Copyright (C) 2005-2022 The R Foundation
+# Copyright (C) 2005-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2005-2022.
+# Detlef Steuer <steuer@hsu-hh.de>, 2005-2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: R-4.2.0\n"
+"Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-08 17:33+0100\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
@@ -471,6 +471,8 @@ msgid ""
 "expanded path length %llu would be too long for\n"
 "%s\n"
 msgstr ""
+"Länge %llu des vollständigen Pfades wäre zu lang für\n"
+"%s\n"
 
 #: src/gnuwin32/sys-win32.cpp:266
 msgid "character string expected as first argument"
@@ -587,7 +589,7 @@ msgstr "Objekt des Typs '%s' ist nicht indizierbar"
 #: src/include/Errormsg.h:33
 #, fuzzy
 msgid "missing subscript"
-msgstr "[[ ]] mit fehlendem Index"
+msgstr "fehlender Index"
 
 #: src/main/agrep.cpp:142 src/main/agrep.cpp:775 src/main/character.cpp:1465
 #: src/main/character.cpp:1469 src/main/grep.cpp:1294 src/main/grep.cpp:2132
@@ -980,7 +982,7 @@ msgstr "Datenlänge [%lld] ist kein Teiler oder Vielfaches der Anzahl der Spalte
 #: src/main/array.cpp:183 src/main/array.cpp:186
 #, fuzzy, c-format
 msgid "data length differs from size of matrix: [%lld != %d x %d]"
-msgstr "Datenlänge unterscheidet sich von der Größe der Matrix: [%lld != %d x %d]"
+msgstr "Datenlänge weicht von der Größe der Matrix ab: [%lld != %d x %d]"
 
 #: src/main/array.cpp:191
 msgid "non-empty data for zero-extent matrix"
@@ -1024,13 +1026,13 @@ msgstr "ein matrixähnliches Objekt ist als Argument für '%s' nötig"
 #, fuzzy, c-format
 msgid "%d argument passed to '%s' which requires at least %d"
 msgid_plural "%d arguments passed to '%s' which requires at least %d"
-msgstr[0] "%d Argument an '%s' übergeben, welches zwischen %d und %d benötigt"
-msgstr[1] "%d Argumente an '%s' übergeben, welches zwischen %d und %d benötigt"
+msgstr[0] "%d Argument an '%s' übergeben, welches mindestens %d benötigt"
+msgstr[1] "%d Argumente an '%s' übergeben, welches mindestens %d benötigt"
 
 #: src/main/array.cpp:1350
 #, c-format
 msgid "more than 2 arguments passed to default method of '%s'"
-msgstr ""
+msgstr "mehr als 2 Argumente an Standardmethode von '%s' übergeben"
 
 #: src/main/array.cpp:1355
 msgid "requires numeric/complex matrix/vector arguments"
@@ -1263,7 +1265,7 @@ msgstr "es muss genau ein Attribut 'which' angegeben werden"
 #: src/main/attrib.cpp:1624
 #, fuzzy
 msgid "invalid slot name length"
-msgstr "ungültige Länge"
+msgstr "ungültige Slotname Länge"
 
 #: src/main/attrib.cpp:1628
 #, c-format
@@ -1299,7 +1301,7 @@ msgstr "formale Klassen können nicht ohne das 'methods' Paket benutzt werden"
 #: src/main/attrib.cpp:1929
 #, fuzzy, c-format
 msgid "no applicable method for `@` applied to an object of class \"%s\""
-msgstr "nicht anwendbare Methode für '%s' auf Objekt der Klasse \"%s\" angewendet"
+msgstr "nicht anwendbare Methode für '@' auf Objekt der Klasse \"%s\" angewendet"
 
 #: src/main/bind.cpp:195
 #, c-format
@@ -1770,7 +1772,7 @@ msgstr "ungültige Argumentenliste"
 #: src/main/coerce.cpp:1743
 #, fuzzy, c-format
 msgid "'length = %lld' in coercion to '%s'"
-msgstr "'length(x) = %lld > 1' in Umwandlung zu '%s'"
+msgstr "'length = %lld' in Umwandlung zu '%s'"
 
 #: src/main/coerce.cpp:1770 src/main/debug.cpp:124
 #, fuzzy, c-format
@@ -1966,7 +1968,7 @@ msgstr "Nullstellensuche fehlgeschlagen"
 #: src/main/connections.cpp:225
 #, fuzzy, c-format
 msgid "all %d connections are in use"
-msgstr "alle Verbindungen werden benutzt"
+msgstr "alle %d Verbindungen werden benutzt"
 
 #: src/main/connections.cpp:236
 msgid "connection not found"
@@ -2487,7 +2489,7 @@ msgstr "zu viele Elemente"
 #: src/main/connections.cpp:4492
 #, fuzzy, c-format
 msgid "line %lld appears to contain an embedded nul"
-msgstr "Zeile %lld scheint ein nul Zeichen zu enthalten"
+msgstr "Zeile %lld scheint ein eingebettetes nul Zeichen zu enthalten"
 
 #: src/main/connections.cpp:4510
 #, c-format
@@ -2809,11 +2811,11 @@ msgstr "keine Socket Verbindung"
 #: src/unix/sys-std.cpp:251 src/unix/sys-std.cpp:406
 #, fuzzy
 msgid "file descriptor is too large for select()"
-msgstr "Länge %d zu lang für hashing"
+msgstr "Dateideskriptor ist zu groß für select()"
 
 #: src/main/connections.cpp:6739 src/modules/internet/libcurl.cpp:878
 msgid "too many file descriptors for select()"
-msgstr ""
+msgstr "zu viele Dateideskriptoren für select()"
 
 #: src/main/connections.cpp:6832
 #, fuzzy
@@ -2986,7 +2988,7 @@ msgstr "unbekannte cumxxx Funktion"
 #: src/main/datetime.cpp:560 src/main/datetime.cpp:571
 #: src/main/datetime.cpp:615 src/main/datetime.cpp:627
 msgid "datetimes before 1902 may not be accurate: warns once per session"
-msgstr ""
+msgstr "datetimes vor 1902 sind evtl nicht exakt: eine Warnung je Session"
 
 #: src/main/datetime.cpp:788 src/main/datetime.cpp:804 src/main/util.cpp:1169
 #, fuzzy
@@ -3009,30 +3011,30 @@ msgstr "Problem beim Zurücksetzen der Zeitzone"
 
 #: src/main/datetime.cpp:979
 msgid "a valid \"POSIXlt\" object is a list of at least 9 elements"
-msgstr ""
+msgstr "ein zulässiges \"POSIXlt\" Objekt ist eine Liste von mindestens 9 Elementen"
 
 #: src/main/datetime.cpp:983
 msgid "a valid \"POSIXlt\" object has names"
-msgstr ""
+msgstr "ein zulässiges \"POSIXlt\" Objekt hat Namen"
 
 #: src/main/datetime.cpp:989
 #, c-format
 msgid "a valid \"POSIXlt\" object has element %d with name '%s' which should be '%s'"
-msgstr ""
+msgstr "ein gültiges \"POSIXlt\" Objekt hat Element %d mit Namen '%s', welches '%s' sein sollte"
 
 #: src/main/datetime.cpp:996 src/main/datetime.cpp:1012
 #, c-format
 msgid "a valid \"POSIXlt\" object has a numeric element %s"
-msgstr ""
+msgstr "ein gültiges \"POSIXlt\" Objekt hat ein numerisches Element %s"
 
 #: src/main/datetime.cpp:1007
 #, c-format
 msgid "a valid \"POSIXlt\" object has a character element %s"
-msgstr ""
+msgstr "ein gültiges \"POSIXlt\" Objekt hat ein Zeichenkettenelement %s"
 
 #: src/main/datetime.cpp:1023
 msgid "attr(x, \"tzone\") should have length 1 or 3"
-msgstr ""
+msgstr "attr(x, \"tzone\") sollte Länge 1 oder 3 haben"
 
 #: src/main/datetime.cpp:1145
 #, c-format
@@ -3046,7 +3048,7 @@ msgstr ""
 #: src/main/datetime.cpp:1812
 #, fuzzy, c-format
 msgid "'%s' is not a \"%s\""
-msgstr "'%s' ist kein %s"
+msgstr "'%s' ist kein \"\"%s\"\""
 
 #: src/main/dcf.cpp:120 src/main/dcf.cpp:196 src/main/dcf.cpp:277
 msgid "could not allocate memory for 'read.dcf'"
@@ -3275,7 +3277,7 @@ msgstr "NULL-Wert für DLLInfoReference bei der Suche nach DLL"
 
 #: src/main/dotcode.cpp:1640
 msgid "DLL requires the use of native symbols"
-msgstr ""
+msgstr "DLL verlangt die Nutzung von nativen Symbolen"
 
 #: src/main/dotcode.cpp:1737
 #, c-format
@@ -3815,7 +3817,7 @@ msgstr "kein Symbol"
 #: src/main/envir.cpp:2086
 #, fuzzy, c-format
 msgid "invalid '%s' argument '%s'"
-msgstr "ungültiges '%s' Argument"
+msgstr "ungültiges '%s' Argument '%s'"
 
 #: src/main/envir.cpp:2104
 msgid "first argument has length > 1"
@@ -3838,17 +3840,17 @@ msgstr "zweites Argument muss eine Umgebung sein"
 #: src/main/envir.cpp:2288
 #, fuzzy, c-format
 msgid "first argument to '%s' must be a symbol"
-msgstr "erstes Argument muss ein Vektor sein"
+msgstr "erstes Argument für '%s'  muss ein Symbol sein"
 
 #: src/main/envir.cpp:2290
 #, fuzzy, c-format
 msgid "second argument to '%s' must be an environment"
-msgstr "zweites Argument muss eine Umgebung sein"
+msgstr "zweites Argument für '%s' muss eine Umgebung sein"
 
 #: src/main/envir.cpp:2437
 #, fuzzy, c-format
 msgid "'missing(%s)' did not find an argument"
-msgstr "'missing' kann nur für Argumente genutzt werden"
+msgstr "'missing(%s)' fand kein Argument"
 
 #: src/main/envir.cpp:2461
 msgid "invalid use of 'missing'"
@@ -4274,7 +4276,7 @@ msgstr "Knotenstack-Überlauf"
 
 #: src/main/eval.cpp:711
 msgid "samples too large for I/O buffer skipped by Rprof"
-msgstr ""
+msgstr "zu große Stichproben für den I/O Buffer von Rprof übersprungen"
 
 #: src/main/eval.cpp:713
 #, c-format
@@ -4312,12 +4314,12 @@ msgstr "nsl() wird auf dieser Plattform nicht unterstützt"
 #: src/main/eval.cpp:928
 #, c-format
 msgid "interval too short for this platform, using '%f'"
-msgstr ""
+msgstr "Interval zu kurz für diese Plattform, nutze '%f'"
 
 #: src/main/eval.cpp:933
 #, c-format
 msgid "interval too short, using '%f'"
-msgstr ""
+msgstr "Interval zu kurz, nutze '%f'"
 
 #: src/main/eval.cpp:949
 msgid "R profiling is not available on this system"
@@ -4391,7 +4393,7 @@ msgstr "mehrargumentige Rückgaben sind nicht erlaubt"
 #: src/main/eval.cpp:3195
 #, fuzzy
 msgid "\"expr\" must be a call expression"
-msgstr "'expr'-Argument muss ein Ausdruck sein"
+msgstr "\"expr\"' muss ein Call-Ausdruck sein"
 
 #: src/main/eval.cpp:3256
 msgid "recompile eval.c with -DSUPPORT_TAILCALL to enable Exec and Tailcall"
@@ -4429,7 +4431,7 @@ msgstr "ungültige (do_set) linke Seite in Zuweisung"
 #: src/main/eval.cpp:3946 src/main/eval.cpp:3949
 #, fuzzy, c-format
 msgid "invalid formal argument list for \"%s\""
-msgstr "ungültiges formales Argument für \"function\""
+msgstr "ungültige formale Argumentlsite für \"%s\""
 
 #: src/main/eval.cpp:4005 src/main/eval.cpp:4033 src/main/eval.cpp:4038
 #, c-format
@@ -4629,53 +4631,53 @@ msgstr "keine Verarbeitung für Grafikereignisse gesetzt"
 #: src/main/gram.y:767
 #, fuzzy, c-format
 msgid "invalid multibyte character in parser (%s:%d:%d)"
-msgstr "ungültiges multibyte Zeichen im Parser in Zeile %d"
+msgstr "ungültiges multibyte Zeichen im Parser (%s:%d:%d)"
 
 #: src/main/gram.cpp:2909 src/main/gram.y:600
 #, fuzzy, c-format
 msgid "input buffer overflow (%s:%d:%d)"
-msgstr "Überlauf des Eingabebuffers in Zeile %d"
+msgstr "Überlauf des Eingabebuffers (%s:%d:%d)"
 
 #: src/main/gram.cpp:3545 src/main/gram.y:1236
 #, c-format
 msgid "function '%s' not supported in RHS call of a pipe (%s:%d:%d)"
-msgstr ""
+msgstr "Funktion '%s' nicht als RHS eines pipe Aufrufs zugelassen (%s:%d:%d)"
 
 #: src/main/gram.cpp:3553 src/main/gram.cpp:3585 src/main/gram.y:1244
 #: src/main/gram.y:1276
 #, c-format
 msgid "pipe placeholder may only appear once (%s:%d:%d)"
-msgstr ""
+msgstr "pipe Platzhalter darf nur einmal auftreten (%s:%d:%d)"
 
 #: src/main/gram.cpp:3597 src/main/gram.y:1288
 #, fuzzy, c-format
 msgid "The pipe operator requires a function call as RHS (%s:%d:%d)"
-msgstr "Der pipe-Operator benötigt auf der rechten Seite einen Funktionsaufruf"
+msgstr "Der pipe Operator benötigt auf der rechten Seite einen Funktionsaufruf (%s:%d:%d)"
 
 #: src/main/gram.cpp:3605 src/main/gram.y:1296
 #, fuzzy, c-format
 msgid "RHS variable must be a symbol (%s:%d:%d)"
-msgstr "Variable auf der rechten Seite muss ein Symbol sein"
+msgstr "Variable auf der rechten Seite muss ein Symbol sein (%s:%d:%d)"
 
 #: src/main/gram.cpp:3616 src/main/gram.y:1307
 #, c-format
 msgid "pipe placeholder cannot be used in the RHS function (%s:%d:%d)"
-msgstr ""
+msgstr "pipe Platzhalte kann in der RHS Funktion nicht genutzt werden (%s:%d:%d)"
 
 #: src/main/gram.cpp:3632 src/main/gram.y:1323
 #, c-format
 msgid "pipe placeholder can only be used as a named argument (%s:%d:%d)"
-msgstr ""
+msgstr "pipe Platzhalte kann nur als benanntes Argument genutzt werden (%s:%d:%d)"
 
 #: src/main/gram.cpp:3665 src/main/gram.y:1356
 #, c-format
 msgid "'=>' is disabled; set '_R_USE_PIPEBIND_' envvar to a true value to enable it (%s:%d:%d)"
-msgstr ""
+msgstr "'=>' ist ausgeschaltet; setze '_R_USE_PIPEBIND_' Umgebungsvariable auf einen Wert von true, um es einzuschalten (%s:%d:%d)"
 
 #: src/main/gram.cpp:3741 src/main/gram.y:1432
 #, fuzzy, c-format
 msgid "incorrect tag type (%s:%d:%d)"
-msgstr "ungültiger tag-Typ in Zeile %d"
+msgstr "ungültiger tag-Typ (%s:%d:%d)"
 
 #: src/main/gram.cpp:3915 src/main/gram.y:1606
 msgid "allocation of source reference state failed"
@@ -4684,17 +4686,17 @@ msgstr "Allokation des Quellenreferenzzustands fehlgeschlagen"
 #: src/main/gram.cpp:4077 src/main/gram.y:1768
 #, c-format
 msgid "invalid use of pipe placeholder (%s:%d:%d)"
-msgstr ""
+msgstr "unzulässiger Gebrauch des pipe Platzhalters (%s:%d:%d)"
 
 #: src/main/gram.cpp:4086 src/main/gram.y:1777
 #, fuzzy, c-format
 msgid "invalid use of pipe bind symbol (%s:%d:%d)"
-msgstr "ungültige Menge von quote Symbolen"
+msgstr "unzulässige Nutzung des pipe Bindungssymbols (%s:%d:%d)"
 
 #: src/main/gram.cpp:4097 src/main/gram.y:1788
 #, fuzzy
 msgid "out of memory while parsing"
-msgstr "zu wenig Speicher beim Abschneiden von polyline"
+msgstr "zu wenig Speicher während des Parsens"
 
 #: src/main/gram.cpp:4456 src/main/gram.cpp:6312 src/main/gram.cpp:6320
 #: src/main/gram.cpp:6327 src/main/gram.cpp:6335 src/main/gram.y:2147
@@ -4702,7 +4704,7 @@ msgstr "zu wenig Speicher beim Abschneiden von polyline"
 #: src/main/gram.y:4026
 #, fuzzy, c-format
 msgid "contextstack overflow (%s:%d:%d)"
-msgstr "Kontextstack-Überlauf"
+msgstr "Kontextstack-Überlauf (%s:%d:%d)"
 
 #: src/main/gram.cpp:4710 src/main/gram.cpp:4716 src/main/gram.cpp:4738
 #: src/main/gram.y:2401 src/main/gram.y:2407 src/main/gram.y:2429
@@ -4742,7 +4744,7 @@ msgstr "Unerwartete(s) %s"
 #: src/main/gram.cpp:4763 src/main/gram.y:2454
 #, fuzzy, c-format
 msgid "repeated formal argument '%s' (%s:%d:%d)"
-msgstr "wiederholtes formales Argument '%s' in Zeile %d"
+msgstr "wiederholtes formales Argument '%s' (%s:%d:%d)"
 
 #: src/main/gram.cpp:5000 src/main/gram.y:2691
 #, c-format
@@ -4763,39 +4765,39 @@ msgstr "ganzzahliges Literal %s enthält unnötiges Komma"
 #: src/main/gram.y:2798
 #, fuzzy, c-format
 msgid "invalid multibyte character (%s:%d:%d)"
-msgstr "ungültiges multibyte Zeichen im Parser in Zeile %d"
+msgstr "ungültiges multibyte Zeichen (%s:%d:%d)"
 
 #: src/main/gram.cpp:5198 src/main/gram.y:2889
 #, c-format
 msgid "bidi formatting not allowed, use escapes instead (\\u%04x) (%s:%d:%d)"
-msgstr ""
+msgstr "Bidirektionale Formatierung ist nicht erlaubt, bitte stattdessen Escapes nutzen(\\\\u%04x) (%s:%d:%d)"
 
 #: src/main/gram.cpp:5250 src/main/gram.cpp:5281 src/main/gram.cpp:5328
 #: src/main/gram.cpp:5375 src/main/gram.y:2941 src/main/gram.y:2972
 #: src/main/gram.y:3019 src/main/gram.y:3066
 #, fuzzy, c-format
 msgid "nul character not allowed (%s:%d:%d)"
-msgstr "nul Zeichen nicht erlaubt (Zeile %d)"
+msgstr "nul Zeichen nicht erlaubt (%s:%d:%d)"
 
 #: src/main/gram.cpp:5253 src/main/gram.y:2944
 #, c-format
 msgid "\\%o exceeds maximum allowed octal value \\377 (%s:%d:%d)"
-msgstr ""
+msgstr "\\%o überschreitet den höchsten erlaubten oktalen Wert \\377 (%s:%d:%d)"
 
 #: src/main/gram.cpp:5272 src/main/gram.y:2963
 #, fuzzy, c-format
 msgid "'\\x' used without hex digits in character string (%s:%d:%d)"
-msgstr "\\x' ohne Hex-Ziffern in der Zeichenkette beginnened mit \"%s\" genutzt"
+msgstr "\\x' ohne Hex-Ziffern in der Zeichenkette genutzt (%s:%d:%d)"
 
 #: src/main/gram.cpp:5291 src/main/gram.y:2982
 #, fuzzy, c-format
 msgid "\\uxxxx sequences not supported inside backticks (%s:%d:%d)"
-msgstr "\\uxxxx Sequenzen werden nicht zwischen backticks unterstützt (Zeile %d)"
+msgstr "\\uxxxx Sequenzen werden zwischen backticks nicht unterstützt (%s:%d:%d)"
 
 #: src/main/gram.cpp:5311 src/main/gram.y:3002
 #, fuzzy, c-format
 msgid "'\\u' used without hex digits in character string (%s:%d:%d)"
-msgstr "\\u' ohne Hex-Ziffern in der Zeichekette beginnend mit \"%s\" genutzt"
+msgstr "\\u' ohne Hex-Ziffern in der Zeichekette genutzt (%s:%d:%d)"
 
 #: src/main/gram.cpp:5323 src/main/gram.y:3014
 #, c-format
@@ -4805,38 +4807,38 @@ msgstr "ungültige \\u{xxxx} Sequenz (Zeile %d)"
 #: src/main/gram.cpp:5338 src/main/gram.y:3029
 #, fuzzy, c-format
 msgid "\\Uxxxxxxxx sequences not supported inside backticks (%s:%d:%d)"
-msgstr "\\Uxxxxxxx Sequenzen werden nicht zwischen backticks unterstützt (Zeile %d)"
+msgstr "\\Uxxxxxxx Sequenzen werden zwischen backticks nicht unterstützt (%s:%d:%d)"
 
 #: src/main/gram.cpp:5358 src/main/gram.y:3049
 #, fuzzy, c-format
 msgid "'\\U' used without hex digits in character string (%s:%d:%d)"
-msgstr "'\\U' ohne Hex-Ziffern in der Zeichenkette beginnend mit \"%s\" genutzt"
+msgstr "'\\U' ohne Hex-Ziffern in Zeichenkette genutzt (%s:%d:%d)"
 
 #: src/main/gram.cpp:5370 src/main/gram.y:3061
 #, fuzzy, c-format
 msgid "invalid \\U{xxxxxxxx} sequence (%s:%d:%d)"
-msgstr "ungültige \\U{xxxxxxxx} Sequenz (Zeile %d)"
+msgstr "ungültige \\U{xxxxxxxx} Sequenz (%s:%d:%d)"
 
 #: src/main/gram.cpp:5379 src/main/gram.y:3070
 #, fuzzy, c-format
 msgid "invalid \\U{xxxxxxxx} value %6x (%s:%d:%d)"
-msgstr "ungültiger \\U{xxxxxxxx} Wert %6x (Zeile %d)"
+msgstr "ungültiger \\U{xxxxxxxx} Wert %6x (%s:%d:%d)"
 
 #: src/main/gram.cpp:5382 src/main/gram.y:3073
 #, fuzzy, c-format
 msgid "invalid \\Uxxxxxxxx value %6x (%s:%d:%d)"
-msgstr "ungültiger \\Uxxxxxxxx Wert %6x (Zeile %d)"
+msgstr "ungültiger \\Uxxxxxxxx Wert %6x (%s:%d:%d)"
 
 #: src/main/gram.cpp:5430 src/main/gram.y:3121
 #, fuzzy, c-format
 msgid "'\\%s' is an unrecognized escape in character string (%s:%d:%d)"
-msgstr "'\\%c' ist eine unbekannte Escape-Sequenz in der Zeichenkette beginnend mit \"%s\""
+msgstr "'\\%s' ist eine unbekannte Escape-Sequenz in einer Zeichenkette (%s:%d:%d)"
 
 #: src/main/gram.cpp:5511 src/main/gram.cpp:5651 src/main/gram.y:3202
 #: src/main/gram.y:3342
 #, fuzzy, c-format
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed (%s:%d:%d)"
-msgstr "Unicode und oktale bzw. hexadezimale Escapecodes in einer Zeichenkette zu mischen ist nicht zulässig."
+msgstr "Unicode und oktale bzw. hexadezimale Escapecodes in einer Zeichenkette zu mischen ist nicht zulässig (%s:%d:%d)"
 
 #: src/main/gram.cpp:5516 src/main/gram.cpp:5656 src/main/gram.y:3207
 #: src/main/gram.y:3347
@@ -4846,17 +4848,17 @@ msgid ""
 "is too long (max 10000 chars) (%s:%d:%d)"
 msgstr ""
 "Zeichenkette in Zeile %d mit Unicode-Escapecodes nicht aus dieser Lokalisierung\n"
-"ist zu lang (max. 1000 Zeichen)"
+"ist zu lang (max. 1000 Zeichen) (%s:%d:%d)"
 
 #: src/main/gram.cpp:5554 src/main/gram.y:3245
 #, fuzzy, c-format
 msgid "malformed raw string literal (%s:%d:%d)"
-msgstr "fehlformatiertes reines Zeichenkettenliteral in Zeile %d"
+msgstr "fehlformatiertes reines Zeichenkettenliteral in Zeile (%s:%d:%d)"
 
 #: src/main/gram.cpp:6425 src/main/gram.y:4116
 #, fuzzy, c-format
 msgid "internal parser error (%s:%d:%d)"
-msgstr "interner Parserfehler in Zeile %d"
+msgstr "interner Parserfehler (%s:%d:%d)"
 
 #: src/main/graphics.cpp:107
 #, c-format
@@ -4975,13 +4977,13 @@ msgstr "'split' Zeichenkette %lld ist ungültig in dieser Lokalisierung"
 #: src/main/grep.cpp:953
 #, fuzzy, c-format
 msgid "'split' string %lld is invalid"
-msgstr "'split' Zeichenkette %lld ist inkorrektes UTF-8"
+msgstr "'split' Zeichenkette %lld ist ungültig"
 
 #: src/main/grep.cpp:969 src/main/grep.cpp:1383 src/main/grep.cpp:2239
 #: src/main/grep.cpp:2546 src/main/grep.cpp:3114
 #, fuzzy, c-format
 msgid "input string %lld is invalid"
-msgstr "Eingabe-Zeichenkette %lld ist ungültig in UTF-8"
+msgstr "Eingabe-Zeichenkette %lld ist ungültig"
 
 #: src/main/grep.cpp:1089 src/main/grep.cpp:1104 src/main/grep.cpp:1431
 #: src/main/grep.cpp:2412 src/main/grep.cpp:2597 src/main/grep.cpp:3190
@@ -4993,7 +4995,7 @@ msgstr ""
 #: src/main/grep.cpp:1339 src/main/grep.cpp:3005 src/main/grep.cpp:3343
 #, fuzzy
 msgid "regular expression is invalid"
-msgstr "regulärer Ausdruck ist kein gültiges UTF-8"
+msgstr "regulärer Ausdruck ist ungültig"
 
 #: src/main/grep.cpp:1342 src/main/grep.cpp:3008
 msgid "regular expression is invalid UTF-8"
@@ -5012,12 +5014,12 @@ msgstr "Ergebnis-Zeichenkette ist zu lang"
 #: src/main/grep.cpp:2177
 #, fuzzy
 msgid "'pattern' is invalid"
-msgstr "'pattern' ist kein gültiges UTF-8"
+msgstr "'pattern' ist ungültig"
 
 #: src/main/grep.cpp:2179
 #, fuzzy
 msgid "'replacement' is invalid"
-msgstr "'replacement' ist kein gültiges UTF-8"
+msgstr "'replacement' ist ungültig"
 
 #: src/main/grep.cpp:2184
 msgid "'pattern' is invalid UTF-8"
@@ -6023,17 +6025,17 @@ msgstr "nur atomare Vektorargumente"
 #: src/main/patterns.cpp:66
 #, fuzzy
 msgid "pattern is not a linear gradient"
-msgstr "'parent' ist keine Umgebung"
+msgstr "Muster ist kein linearer Gradient"
 
 #: src/main/patterns.cpp:129
 #, fuzzy
 msgid "pattern is not a radial gradient"
-msgstr "\"%s\" ist kein Grafikparameter"
+msgstr "Muster ist kein radialer Gradient"
 
 #: src/main/patterns.cpp:201
 #, fuzzy
 msgid "pattern is not a tiling pattern"
-msgstr "'maxit' ist keine ganze Zahl"
+msgstr "Muster ist kein Kachelmuster"
 
 #: src/main/platform.cpp:346 src/main/platform.cpp:360
 msgid "invalid filename specification"
@@ -6112,7 +6114,7 @@ msgstr "(Hard-)Links werden auf dieser Plattform nicht unterstützt"
 #: src/main/platform.cpp:754 src/main/sysutils.cpp:489
 #, fuzzy, c-format
 msgid "'%s' and '%s' are of different lengths"
-msgstr "'from' und 'to' sind unterschiedlich lang"
+msgstr "'%s' und '%s' sind unterschiedlich lang"
 
 #: src/main/platform.cpp:771
 #, c-format
@@ -6135,12 +6137,12 @@ msgstr "kann Datei '%s' nicht in '%s' umbenennen. Grund '%s'"
 #: src/main/platform.cpp:1077
 #, fuzzy, c-format
 msgid "cannot resolve owner of file '%ls': %s"
-msgstr "kann Datei '%ls' nicht öffnen: %s"
+msgstr "kann den Besitzer der Datei '%ls' nicht auflösen: %s"
 
 #: src/main/platform.cpp:1293
 #, fuzzy, c-format
 msgid "error while listing a directory: '%s'"
-msgstr "Problem beim Erzeugen von Verzeichnis %s: %s"
+msgstr "Fehler beim auflisten eines Verzeichnisses: '%s'"
 
 #: src/main/platform.cpp:1446 src/main/platform.cpp:3036
 #: src/main/platform.cpp:3050 src/main/platform.cpp:3082
@@ -6192,7 +6194,7 @@ msgstr "das Setzen von 'LC_NUMERIC' kann bewirken, dass R sich komisch benimmt"
 #: src/main/platform.cpp:2257
 #, fuzzy, c-format
 msgid "%s does not exist on Windows"
-msgstr "Menü existiert nicht"
+msgstr "%s existiert nicht auf Windows"
 
 #: src/main/platform.cpp:2293
 #, c-format
@@ -6202,7 +6204,7 @@ msgstr "OS meldet: Anfrage Lokalisierung auf \"%s\" zu setzen kann nicht beachte
 #: src/main/platform.cpp:2304
 #, c-format
 msgid "using locale code page other than %d%s may cause problems"
-msgstr ""
+msgstr "Nutzung eine lokalen Kodepage außer  %d%s kann Probleme erzeugen"
 
 #: src/main/platform.cpp:2657 src/main/platform.cpp:2713
 #, fuzzy
@@ -6372,17 +6374,24 @@ msgstr "zu wenig Spaltenlabel"
 #, c-format
 msgid " %d row"
 msgid_plural " %d rows"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " %d Zeile"
+msgstr[1] " %d Zeilen"
 
 #: src/main/printarray.cpp:398
 msgid " and"
-msgstr ""
+msgstr " und"
 
 #: src/main/printarray.cpp:399
 #, c-format
 msgid " %d column"
 msgid_plural " %d columns"
+msgstr[0] " %d Spalte"
+msgstr[1] " %d Spalten"
+
+#: src/main/printarray.c:512
+#, c-format
+msgid " %d slice"
+msgid_plural " %d slices"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -6495,7 +6504,7 @@ msgstr ""
 
 #: src/main/radixsort.cpp:953
 msgid "Character encoding must be UTF-8, Latin-1 or bytes"
-msgstr ""
+msgstr "Zeichenkodierung muss UTF-8, Latin-1 oder bytes sein"
 
 #: src/main/radixsort.cpp:1566
 msgid "radix sort assumes sizeof(int) == 4"
@@ -6516,17 +6525,17 @@ msgstr "Länge der Argumente unterschiedlich"
 
 #: src/main/radixsort.cpp:1605
 msgid "length(decreasing) must match the number of order arguments"
-msgstr ""
+msgstr "length(decreasing) muss zur Anzahl der Ordnungsargumente passen"
 
 #: src/main/radixsort.cpp:1608
 #, fuzzy
 msgid "'decreasing' elements must be TRUE or FALSE"
-msgstr "'decreasing' muss TRUE oder FALSE sein"
+msgstr "'decreasing' Elemente müssen TRUE oder FALSE sein"
 
 #: src/main/radixsort.cpp:1617
 #, fuzzy
 msgid "long vectors not supported"
-msgstr "langer Vektor '%s' wird nicht unterstützt"
+msgstr "lange Vektoren werden nicht unterstützt"
 
 #: src/main/random.cpp:54
 msgid "invalid arguments"
@@ -6801,7 +6810,7 @@ msgstr "Operator braucht ein oder zwei Argumente"
 #: src/main/relop.cpp:204
 #, fuzzy, c-format
 msgid "comparison (%s) is not possible for language types"
-msgstr "Vergleich (%d) ist nur für atomare und Listentypen möglich"
+msgstr "Vergleich (%d) ist für Sprachtypen nicht möglich"
 
 #: src/main/relop.cpp:197
 #, fuzzy
@@ -6811,17 +6820,17 @@ msgstr "Namen in persistenten Zeichenketten werden noch nicht unterstützt"
 #: src/main/relop.cpp:209
 #, fuzzy
 msgid "comparison of call objects is not supported"
-msgstr "Vergleich dieser Typen ist nicht implementiert"
+msgstr "Vergleich von Aufrufobjekten ist nicht unterstützt"
 
 #: src/main/relop.cpp:212
 #, fuzzy
 msgid "comparison of language objects is not supported"
-msgstr "Vergleich dieser Typen ist nicht implementiert"
+msgstr "Vergleich von Sprachtypen ist nicht unterstützt"
 
 #: src/main/relop.cpp:308
 #, fuzzy, c-format
 msgid "comparison (%s) is possible only for atomic and list types"
-msgstr "Vergleich (%d) ist nur für atomare und Listentypen möglich"
+msgstr "Vergleich (%s) ist nur für atomare und Listentypen möglich"
 
 #: src/main/relop.cpp:313
 msgid "comparison is not allowed for expressions"
@@ -7342,7 +7351,7 @@ msgstr "Argument der Länge 0"
 #: src/main/seq.cpp:172
 #, fuzzy
 msgid "numerical expression has length > 1"
-msgstr "numerischer Ausdruck hat %d Element: nur erstes wird genutzt"
+msgstr "numerischer Ausdruck hat Länge > 1"
 
 #: src/main/seq.cpp:174
 #, fuzzy, c-format
@@ -7610,7 +7619,7 @@ msgstr "binäre Verbindung für ascii=FALSE benötigt"
 
 #: src/main/serialize.cpp:2698
 msgid "cannot return a promise (PROMSXP) object"
-msgstr ""
+msgstr "kann kein promise Objekt (PROMSXP) zurück geben"
 
 #: src/main/serialize.cpp:2845 src/main/serialize.cpp:2882
 #: src/main/serialize.cpp:2947
@@ -7690,8 +7699,8 @@ msgstr "NA oder unendlicher Index"
 
 #: src/main/sort.cpp:817
 #, fuzzy, c-format
-msgid "index %lld outside bounds"
-msgstr "Index %lld ist außerhalb der Grenzen"
+msgid "'partial' index %lld outside bounds"
+msgstr "Index %lld außerhalb der Grenzen"
 
 #: src/main/sort.cpp:822 src/main/sort.cpp:835
 msgid "NA index"
@@ -8115,7 +8124,7 @@ msgstr "kein Index angegeben"
 #: src/main/subset.cpp:1058
 #, fuzzy, c-format
 msgid "this %s class is not subsettable"
-msgstr "Diese S4-Klasse ist nicht in Teilen verfügbar"
+msgstr "Diese %s-Klasse ist nicht in Teilemengen zerlegbar"
 
 #: src/main/subset.cpp:1066
 msgid "wrong arguments for subsetting an environment"
@@ -8124,7 +8133,7 @@ msgstr "falsche Argumente um ein environment zu indizieren"
 #: src/main/subset.cpp:1284
 #, fuzzy
 msgid "invalid subscript length"
-msgstr "ungültige Länge für 'strip.white'"
+msgstr "ungültige Länge für subscript"
 
 #: src/main/summary.cpp:53
 #, c-format
@@ -8293,7 +8302,7 @@ msgstr "nicht unterstützte Umwandlung von '%s' aus codepage %d"
 #: src/main/sysutils.cpp:2182 src/main/sysutils.cpp:2187
 #, fuzzy, c-format
 msgid "unable to translate '%s' to a wide string"
-msgstr "kann '%s' nicht in native Kodierung übersetzen"
+msgstr "kann '%s' nicht in breite Zeichenkette übersetzen"
 
 #: src/main/sysutils.cpp:2380
 #, fuzzy
@@ -8308,7 +8317,7 @@ msgstr "ungültiger Unicode Punkt %u"
 #: src/main/sysutils.cpp:2651
 #, fuzzy
 msgid "'R_USER' not set"
-msgstr "R_HOME ist nicht gesetzt"
+msgstr "'R_USER' ist nicht gesetzt"
 
 #: src/main/sysutils.cpp:2671 src/main/sysutils.cpp:2699
 msgid "cannot allocate 'R_TempDir'"
@@ -8346,7 +8355,7 @@ msgstr "'dirmark = TRUE' wird auf dieser Plattform nicht unterstützt"
 #: src/main/unique.cpp:466 src/main/unique.cpp:469
 #, fuzzy, c-format
 msgid "length %lld is too large for hashing"
-msgstr "Länge %lld zu lang für hashing"
+msgstr "Länge %lld zu groß für hashing"
 
 #: src/main/unique.cpp:566 src/main/unique.cpp:578
 #, fuzzy
@@ -8870,7 +8879,7 @@ msgstr "InternetOpenUrl fehlgeschlagen: '%s'"
 #: src/modules/internet/internet.cpp:610
 #, fuzzy, c-format
 msgid "cannot open URL '%s': %s status was '%lu %s'"
-msgstr "Kann URL '%s' nicht öffnen: %s Status war '%lu %s'"
+msgstr "kann URL '%s' nicht öffnen: %s Status war '%lu %s'"
 
 #: src/modules/internet/internet.cpp:626 src/modules/internet/libcurl.cpp:503
 #, c-format
@@ -8901,7 +8910,7 @@ msgstr ""
 #: src/modules/internet/libcurl.cpp:229
 #, fuzzy, c-format
 msgid "cannot open URL '%s': %s status was '%ld %s'"
-msgstr "Kann URL '%s' nicht öffnen: %s Status war '%ld %s'"
+msgstr "kann URL '%s' nicht öffnen: %s Status war '%ld %s'"
 
 #: src/modules/internet/libcurl.cpp:238
 #, c-format
@@ -8922,7 +8931,7 @@ msgstr "curlGetHeaders wird auf dieser Plattform nicht unterstützt"
 #: src/modules/internet/libcurl.cpp:1294
 #, fuzzy
 msgid "could not create curl handle"
-msgstr "konnte keinen Speicher für DLL Tabelle reservieren"
+msgstr "konnte keinen curl handle erzeugen"
 
 #: src/modules/internet/libcurl.cpp:412
 #, fuzzy, c-format
@@ -9098,7 +9107,7 @@ msgstr "Argument type[1]='%s' muss einer von '1','O' oder 'I' sein"
 #: src/modules/lapack/Lapack.cpp:110
 #, fuzzy, c-format
 msgid "argument type[1]='%s' must be 'U' or 'L'"
-msgstr "Argument type[1]='%s' muss einer von '1','O' oder 'I' sein"
+msgstr "Argument type[1]='%s' muss entweder 'U' oder 'L' sein"
 
 #: src/modules/lapack/Lapack.cpp:133
 msgid "non-integer dim(u)"
@@ -9142,7 +9151,7 @@ msgstr "'x' muss eine quadratische, numerische Matrix sein"
 #: src/modules/lapack/Lapack.cpp:1407
 #, fuzzy, c-format
 msgid "'%s' must be a numeric matrix"
-msgstr "'A' muss numerische Matrix sein"
+msgstr "'%s' muss numerische Matrix sein"
 
 #: src/modules/lapack/Lapack.cpp:408
 #, c-format
@@ -9166,7 +9175,7 @@ msgstr "Fehlercode %d von Lapack-Routine 'dtrcon()'"
 #: src/modules/lapack/Lapack.cpp:816 src/modules/lapack/Lapack.cpp:862
 #, fuzzy, c-format
 msgid "'%s' must be a complex matrix"
-msgstr "'A' muss eine komplexe Matrix sein"
+msgstr "'%s' muss eine komplexe Matrix sein"
 
 #: src/modules/lapack/Lapack.cpp:525 src/modules/lapack/Lapack.cpp:581
 #: src/modules/lapack/Lapack.cpp:616 src/modules/lapack/Lapack.cpp:653
@@ -9248,12 +9257,12 @@ msgstr "'a' darf nicht 0-dimensional sein"
 #: src/modules/lapack/Lapack.cpp:1099
 #, fuzzy, c-format
 msgid "the leading minor of order %d is not positive"
-msgstr "der führende Minor der Ordnung %d ist nicht positiv definit"
+msgstr "der führende Minor der Ordnung %d ist nicht positiv"
 
 #: src/modules/lapack/Lapack.cpp:1114
 #, fuzzy
 msgid "the matrix is either rank-deficient or not positive definite"
-msgstr "die Matrix hat entweder nicht vollen Rang oder ist indefinit"
+msgstr "die Matrix hat entweder nicht vollen Rang oder ist nicht positiv definit"
 
 #: src/modules/lapack/Lapack.cpp:1142
 msgid "'size' argument must be a positive integer"
@@ -9709,7 +9718,7 @@ msgstr "'k' (%.2f) muss ganze Zahl sein, gerundet auf %.0f"
 #: src/nmath/dpq.h:126
 #, c-format
 msgid "non-integer x = %f"
-msgstr ""
+msgstr "nicht ganzzahliges x = %f"
 
 #: src/nmath/nmath.h:183
 #, c-format
@@ -9739,12 +9748,12 @@ msgstr "Underflow in '%s' aufgetreten\n"
 #: src/nmath/pbeta.cpp:69
 #, fuzzy, c-format
 msgid "pbeta_raw(%g, a=%g, b=%g, lower=%d, log=%d) -> bratio() gave error code %d"
-msgstr "pbeta_raw(%g, a=%g, b=%g, ..) -> bratio() ergab Fehlerkode %d"
+msgstr "pbeta_raw(%g, a=%g, b=%g, lower=%d, log=%d) -> bratio() ergab Fehlerkode %d"
 
 #: src/nmath/pbinom.cpp:37
 #, c-format
 msgid "non-integer n = %f"
-msgstr ""
+msgstr "nicht-ganzzahliges n = %f"
 
 #: src/nmath/pnbinom.cpp:82
 #, c-format
@@ -9812,6 +9821,8 @@ msgid ""
 "expanded path length %lld would be too long for\n"
 "%s\n"
 msgstr ""
+"Länge des vollständigen Pfades %lld wäre zu lang für\n"
+"%s\n"
 
 #: src/unix/sys-std.cpp:610
 msgid "An unusual circumstance has arisen in the nesting of readline input. Please report using bug.report()"

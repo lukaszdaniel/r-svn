@@ -1,11 +1,11 @@
 # Translation of src/library/utils/po/utils.pot to German.
-# Copyright (C) 2014-2022 The R Foundation
+# Copyright (C) 2014-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2014-2023.
+# Detlef Steuer <steuer@hsu-hh.de>, 2014-2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: R 4.2.0\n"
+"Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2023-02-22 13:05+0000\n"
@@ -50,7 +50,7 @@ msgstr "ungültiges '%s' Argument"
 #: io.cpp:347 io.cpp:837
 #, fuzzy
 msgid "invalid quote symbol set"
-msgstr "ungültiges quote Symbol gesetzt"
+msgstr "ungültige Menge von quote Symbolen"
 
 #: io.cpp:359 io.cpp:859 io.cpp:1077
 msgid "cannot open the connection"
@@ -59,7 +59,7 @@ msgstr "kann die Verbindung nicht öffnen"
 #: io.cpp:362 io.cpp:366
 #, fuzzy
 msgid "cannot read from this connection"
-msgstr "kann in diese Verbindung nicht schreiben"
+msgstr "kann aus dieser Verbindung nicht lesen"
 
 #: io.cpp:413 io.cpp:431
 #, c-format
@@ -122,7 +122,7 @@ msgstr "kann in diese Verbindung nicht schreiben"
 #: io.cpp:1102
 #, fuzzy
 msgid "'dec' must be a single character"
-msgstr "Argument 'x'  muss Zeichenkettenvektor der Länge 1 sein"
+msgstr "'dec' muss ein einzelnes Zeichen sein"
 
 #: io.cpp:1126
 #, c-format
@@ -132,7 +132,7 @@ msgstr "beschädigter Dataframe -- Länge der Spalte %d entspricht nicht der Anz
 #: io.cpp:1160
 #, fuzzy, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
-msgstr "Spalte %d behauptet Faktor zu sein, hat aber keine numerischen Kodes"
+msgstr "Spalte %d behauptet ein Faktor zu sein, hat aber keine numerischen Kodes"
 
 #: io.cpp:1178
 msgid "corrupt matrix -- dims do not match length"
@@ -243,12 +243,12 @@ msgstr "Menüfunktionen können nur im GUI genutzt werden"
 #: windows/dialogs.cpp:249
 #, fuzzy, c-format
 msgid "unable to retrieve items for %s (%s)"
-msgstr "kann Menüeintrag nicht entfernen (%s)"
+msgstr "kann Einträge für %snicht abrufen (%s)"
 
 #: windows/dialogs.cpp:287
 #, fuzzy, c-format
 msgid "unable to add menu (%s)"
-msgstr "kann Menüeintrag nicht hinzufügen (%s)"
+msgstr "kann Menü nicht hinzufügen (%s)"
 
 #: windows/dialogs.cpp:299
 #, c-format
@@ -306,7 +306,7 @@ msgstr ""
 #: windows/util.cpp:302
 #, fuzzy
 msgid "argument must be a character vector or a raw vector"
-msgstr "'hostname' muss ein Zeichenkettenvektor der Länge 1 sein"
+msgstr "Argument muss ein Zeichenkettenvektor oder ein raw Vektor sein"
 
 #: windows/util.cpp:343
 msgid "unable to open the clipboard"
@@ -319,7 +319,7 @@ msgstr "kann nicht in die Zwischenablage schreiben"
 #: windows/util.cpp:428
 #, fuzzy
 msgid "'title' must be a character string"
-msgstr "'text' muss eine Zeichenkette sein"
+msgstr "'title' muss eine Zeichenkette sein"
 
 #: windows/util.cpp:437
 #, fuzzy
@@ -353,7 +353,7 @@ msgstr "Wähle eins"
 #: windows/widgets.cpp:203 windows/widgets.cpp:270
 #, fuzzy
 msgid "'default' must be a character string"
-msgstr "'text' muss eine Zeichenkette sein"
+msgstr "'default' muss eine Zeichenkette sein"
 
 #: windows/widgets.cpp:205
 msgid "'default' is overlong"
@@ -362,7 +362,7 @@ msgstr "'default' ist überlang"
 #: windows/widgets.cpp:209 windows/widgets.cpp:276
 #, fuzzy
 msgid "'caption' must be a character string"
-msgstr "'text' muss eine Zeichenkette sein"
+msgstr "'caption' muss eine Zeichenkette sein"
 
 #: windows/widgets.cpp:211
 msgid "'filterindex' must be an integer value"

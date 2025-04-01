@@ -1,11 +1,11 @@
 # German translation of src/library/tools/po/tools.pot
-# Copyright (C) 2008-2022 The R Foundation
+# Copyright (C) 2008-2025 The R Foundation
 # This file is distributed under the same license as the R package.
-# Detlef Steuer <steuer@hsu-hh.de>, 2008-2022.
+# Detlef Steuer <steuer@hsu-hh.de>, 2008-2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: R-4.2.0\n"
+"Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-02-07 17:15+0100\n"
 "PO-Revision-Date: 2022-04-13 12:00+0200\n"
@@ -34,12 +34,12 @@ msgstr "md5 für Datei '%s' fehlgeschlagen"
 #: Rsha256.cpp:88
 #, fuzzy, c-format
 msgid "sha256 failed on file '%ls'"
-msgstr "md5 für Datei '%ls' fehlgeschlagen"
+msgstr "sha256 für Datei '%ls' fehlgeschlagen"
 
 #: Rsha256.cpp:90
 #, fuzzy, c-format
 msgid "sha256 failed on file '%s'"
-msgstr "md5 für Datei '%s' fehlgeschlagen"
+msgstr "sha256 für Datei '%s' fehlgeschlagen"
 
 #: getfmts.cpp:57
 #, c-format
@@ -171,7 +171,7 @@ msgstr "unzulässige Bindungsadressenspezifikation"
 #: http.cpp:37
 #, c-format
 msgid "Invalid port number %d: should be in 0:65535, typically above 1024"
-msgstr ""
+msgstr "Ungültige Portnummer %d: sollte in 0:65535 liegen, typischerweise über 1024"
 
 #: install.cpp:96
 msgid "path too long"

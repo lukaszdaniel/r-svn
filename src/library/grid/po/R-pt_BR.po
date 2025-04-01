@@ -1017,13 +1017,13 @@ msgstr "Deve restaurar ao menos uma vista"
 #. R/viewport.R: stop("must specify at least one of 'x' or 'xscale'")
 #: R/viewport.R:0
 #, fuzzy
-msgid "must specify at least one of 'x' or 'xscale'"
+msgid "must specify at least one of 'xData' or 'xscale'"
 msgstr "Deve especificar pelo menos um de 'x' ou 'xscale'"
 
 #. R/viewport.R: stop("must specify at least one of 'y' or 'yscale'")
 #: R/viewport.R:0
 #, fuzzy
-msgid "must specify at least one of 'y' or 'yscale'"
+msgid "must specify at least one of 'yData' or 'yscale'"
 msgstr "Deve especificar pelo menos um de 'y' ou 'yscale'"
 
 #. R/grid.R: stop("must specify at least one viewport")
