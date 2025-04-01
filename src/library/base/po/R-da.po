@@ -3181,7 +3181,7 @@ msgstr[1] ""
 msgid "%s is not TRUE"
 msgid_plural "%s are not all TRUE"
 msgstr[0] "%s er ikke TRUE"
-msgstr[1] "%s er overhovedet ikke TRUE"
+msgstr[1] "%s er ikke alle TRUE"
 
 #. R/match.R: ngettext(length(chs <- unique(choices[nzchar(choices)])), "'arg' should be %s",     "'arg' should be one of %s")
 #: R/match.R:0
