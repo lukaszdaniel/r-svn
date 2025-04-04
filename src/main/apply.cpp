@@ -410,9 +410,9 @@ static int islistfactor(SEXP X)
 	for (int i = 0; i < n; i++) {
 	    int isLF = islistfactor(XVECTOR_ELT(X, i));
 	    if (!isLF)
-		return FALSE;
-	    else if (isLF == TRUE)
-		ans = TRUE;
+		return false;
+	    else if (isLF == true)
+		ans = true;
 	    // else isLF is NA
 	}
 	return ans;

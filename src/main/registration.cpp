@@ -80,7 +80,7 @@
  *
  * @return Dummy output
  *
- * @note Callable from R via .Call(.C_R_dummy, ...)
+ * @note Callable from R via .Call(.C_R_dummy, NULL, NULL, NULL, NULL)
  */
 attribute_hidden SEXP R_dummy(SEXP x, SEXP y, SEXP z, SEXP w)
 {

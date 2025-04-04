@@ -978,9 +978,8 @@ void setup_Rmainloop(void)
       that the user wants to ne informed. */
 
     const char *s;	
-    int quiet;
 
-    quiet = !( ((s = getenv("LANG")) && *s) || ((s = getenv("LC_ALL")) && *s) );
+    bool quiet = !( ((s = getenv("LANG")) && *s) || ((s = getenv("LC_ALL")) && *s) );
 
     if(!setlocale(LC_CTYPE, "") && !quiet)
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
