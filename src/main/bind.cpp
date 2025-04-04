@@ -74,17 +74,17 @@ struct BindData {
 
 static bool HasNames(SEXP x)
 {
-    if(isVector(x)) {
+    if (isVector(x)) {
 	if (!isNull(getAttrib(x, R_NamesSymbol)))
-	    return 1;
+	    return true;
     }
-    else if(isList(x)) {
+    else if (isList(x)) {
 	while (!isNull(x)) {
 	    if (!isNull(TAG(x))) return 1;
 	    x = CDR(x);
 	}
     }
-    return 0;
+    return false;
 }
 
 // Determine result type of unlist() or c();  called from  do_c()  and  do_unlist()
@@ -1165,7 +1165,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args_, SEXP env)
 	    classlist = R_data_class2(obj);
 	    for (int i = 0; i < length(classlist); i++) {
 		const char *s = translateChar(STRING_ELT(classlist, i));
-		if(strlen(generic) + strlen(s) + 2 > 512)
+		if (strlen(generic) + strlen(s) + 2 > 512)
 		    error(_("class name too long in '%s'"), generic);
 		snprintf(buf, 512, "%s.%s", generic, s);
 		SEXP classmethod = R_LookupMethod(install(buf), env, env,
@@ -1292,7 +1292,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    u = PRINTNAME(CAR(t));
 	} else 
 	    u = PRVALUE(CAR(t));
-	if((isMatrix(u) ? nrows(u) : length(u)) > 0) {
+	if ((isMatrix(u) ? nrows(u) : length(u)) > 0) {
 	    lenmin = 1;
 	    break;
 	}
@@ -1574,7 +1574,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	    u = PRINTNAME(CAR(t));
 	} else 
 	    u = PRVALUE(CAR(t));
-	if((isMatrix(u) ? ncols(u) : length(u)) > 0) {
+	if ((isMatrix(u) ? ncols(u) : length(u)) > 0) {
 	    lenmin = 1;
 	    break;
 	}

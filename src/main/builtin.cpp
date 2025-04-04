@@ -149,9 +149,10 @@ attribute_hidden SEXP do_makelazy(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* This is a primitive SPECIALSXP */
 attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP code, oldcode, argList;
-    int addit = FALSE;
-    int after = TRUE;
+    GCStackRoot<> argList;
+    SEXP code, oldcode;
+    bool addit = false;
+    bool after = true;
     static SEXP do_onexit_formals = NULL;
 
     checkArity(op, args);
@@ -160,21 +161,19 @@ attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
                                               install("add"),
                                               install("after"));
 
-    PROTECT(argList =  matchArgs_NR(do_onexit_formals, args, call));
+    argList =  matchArgs_NR(do_onexit_formals, args, call);
     if (CAR(argList) == R_MissingArg) code = R_NilValue;
     else code = CAR(argList);
 
     if (CADR(argList) != R_MissingArg) {
-	addit = asLogical(PROTECT(eval(CADR(argList), rho)));
-	UNPROTECT(1);
-	if (addit == NA_LOGICAL)
-	    errorcall(call, _("invalid '%s' argument"), "add");
+	GCStackRoot<> evl;
+	evl = eval(CADR(argList), rho);
+	addit = asLogicalNoNA(evl, "add");
     }
     if (CADDR(argList) != R_MissingArg) {
-	after = asLogical(PROTECT(eval(CADDR(argList), rho)));
-	UNPROTECT(1);
-        if (after == NA_LOGICAL)
-            errorcall(call, _("invalid '%s' argument"), "lifo");
+	GCStackRoot<> evl;
+	evl = eval(CADDR(argList), rho);
+	after = asLogicalNoNA(evl, "lifo");
     }
 
     RCNTXT *ctxt = R_GlobalContext;
@@ -195,16 +194,16 @@ attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
                 ctxt->conexit = CONS(code, R_NilValue);
 	    else {
                 if (after) {
-                    SEXP codelist = PROTECT(CONS(code, R_NilValue));
+                    GCStackRoot<> codelist;
+                    codelist = CONS(code, R_NilValue);
                     ctxt->conexit = listAppend(shallow_duplicate(oldcode), codelist);
-                    UNPROTECT(1);
                 } else {
                     ctxt->conexit = CONS(code, oldcode);
                 }
 	    }
 	}
     }
-    UNPROTECT(1);
+
     return R_NilValue;
 }
 
@@ -714,8 +713,8 @@ attribute_hidden SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
 	n++;
     }
 
-    SEXP list = PROTECT(allocVector(VECSXP, n));
-    SEXP names = PROTECT(havenames ? allocVector(STRSXP, n) : R_NilValue);
+    GCStackRoot<> list(allocVector(VECSXP, n));
+    GCStackRoot<> names(havenames ? allocVector(STRSXP, n) : R_NilValue);
     for (int i = 0; i < n; i++) {
 	if (havenames) {
 	    if (TAG(args) != R_NilValue)
@@ -731,7 +730,7 @@ attribute_hidden SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (havenames) {
 	setAttrib(list, R_NamesSymbol, names);
     }
-    UNPROTECT(2);
+
     return list;
 }
 

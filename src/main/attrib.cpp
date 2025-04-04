@@ -1101,6 +1101,7 @@ static SEXP as_char_simpl(SEXP val1)
 
     if (inherits(val1, "factor"))  /* mimic as.character.factor */
 	return asCharacterFactor(val1);
+
     if (isString(val1))
 	return val1;
     // else  mimic as.character.default :
@@ -1286,7 +1287,7 @@ attribute_hidden SEXP do_attributes(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(CAR(args)) == ENVSXP)
 	R_CheckStack(); /* in case attributes might lead to a cycle */
 
-    SEXP attrs = ATTRIB(CAR(args)), namesattr;
+    GCStackRoot<> attrs(ATTRIB(CAR(args))), namesattr;
     int nvalues = length(attrs);
     if (isList(CAR(args))) {
 	namesattr = getAttrib(CAR(args), R_NamesSymbol);
@@ -1298,10 +1299,9 @@ attribute_hidden SEXP do_attributes(SEXP call, SEXP op, SEXP args, SEXP env)
     if (nvalues <= 0)
 	return R_NilValue;
     /* FIXME */
-    SEXP value, names;
-    PROTECT(namesattr);
-    PROTECT(value = allocVector(VECSXP, nvalues));
-    PROTECT(names = allocVector(STRSXP, nvalues));
+    GCStackRoot<> value, names;
+    value = allocVector(VECSXP, nvalues);
+    names = allocVector(STRSXP, nvalues);
     nvalues = 0;
     if (namesattr != R_NilValue) {
 	SET_VECTOR_ELT(value, nvalues, namesattr);
@@ -1323,7 +1323,7 @@ attribute_hidden SEXP do_attributes(SEXP call, SEXP op, SEXP args, SEXP env)
 	nvalues++;
     }
     setAttrib(value, R_NamesSymbol, names);
-    UNPROTECT(3);
+
     return value;
 }
 

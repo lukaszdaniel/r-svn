@@ -503,9 +503,9 @@ attribute_hidden int R::framedepth(RCNTXT *cptr)
 
 static SEXP getCallWithSrcref(RCNTXT *cptr)
 {
-    SEXP result;
+    GCStackRoot<> result;
 
-    PROTECT(result = shallow_duplicate(cptr->call));
+    result = shallow_duplicate(cptr->call);
     if (cptr->srcref && !isNull(cptr->srcref)) {
 	SEXP sref;
 	if (cptr->srcref == R_InBCInterpreter)
@@ -516,7 +516,7 @@ static SEXP getCallWithSrcref(RCNTXT *cptr)
 	    sref = cptr->srcref;
 	setAttrib(result, R_SrcrefSymbol, duplicate(sref));
     }
-    UNPROTECT(1);
+
     return result;
 }
 
