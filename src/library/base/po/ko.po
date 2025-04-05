@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:28+0200\n"
+"POT-Creation-Date: 2025-04-05 17:15+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -139,9 +139,8 @@ msgstr "'%ls'를 표시하는데 문제가 발생했습니다"
 #: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
 #: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
-#: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:580
-#: src/main/builtin.cpp:598 src/main/builtin.cpp:779 src/main/builtin.cpp:781
-#: src/main/builtin.cpp:783 src/main/character.cpp:339
+#: src/main/builtin.cpp:579 src/main/builtin.cpp:597 src/main/builtin.cpp:778
+#: src/main/builtin.cpp:780 src/main/builtin.cpp:782 src/main/character.cpp:339
 #: src/main/character.cpp:342 src/main/character.cpp:347
 #: src/main/character.cpp:946 src/main/character.cpp:1466
 #: src/main/character.cpp:1470 src/main/character.cpp:1473
@@ -1143,7 +1142,7 @@ msgstr "적합한 인자들이 아닙니다"
 msgid "'%s' argument is not a matrix"
 msgstr "인자가 행렬을 가지지 않습니다"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1244
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1245
 #, fuzzy, c-format
 msgid "invalid first argument, must be %s"
 msgstr "첫번째 인자가 유효하지 않습니다.  반드시 배열이어야만 합니다"
@@ -1285,48 +1284,48 @@ msgstr "'names' 인자는 함께 사용될 수 없습니다"
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "%s는 'names' 속성을 지정하는데 유효한 타입이 아닙니다"
 
-#: src/main/attrib.cpp:1120
+#: src/main/attrib.cpp:1121
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames'가 배열이 아닌 객체에 적용되었습니다"
 
-#: src/main/attrib.cpp:1125 src/main/coerce.cpp:2731
+#: src/main/attrib.cpp:1126 src/main/coerce.cpp:2731
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s'는 반드시 리스트(list)이어야 합니다."
 
-#: src/main/attrib.cpp:1129 src/main/attrib.cpp:1154
+#: src/main/attrib.cpp:1130 src/main/attrib.cpp:1155
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "'dimnames'의 길이 [%d]는 반드시 'dims'의 길이 [%d]와 같아야 합니다"
 
-#: src/main/attrib.cpp:1160
+#: src/main/attrib.cpp:1161
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "%s는 'dimnames'에 유효한 유형이 아닙니다 (이는 반드시 벡터이어야 합니다)"
 
-#: src/main/attrib.cpp:1163
+#: src/main/attrib.cpp:1164
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "'dimnames'의 길이 [%d]가 배열의 크기와 같지 않습니다"
 
-#: src/main/attrib.cpp:1246
+#: src/main/attrib.cpp:1247
 #, fuzzy, c-format
 msgid "invalid second argument, must be %s"
 msgstr "두번째 인자가 유효하지 않습니다"
 
-#: src/main/attrib.cpp:1251
+#: src/main/attrib.cpp:1252
 msgid "length-0 dimension vector is invalid"
 msgstr "차원벡터의 길이가 0인 것은 유효하지 않습니다"
 
-#: src/main/attrib.cpp:1256
+#: src/main/attrib.cpp:1257
 msgid "the dims contain missing values"
 msgstr "dims에 누락된 값들이 있습니다"
 
-#: src/main/attrib.cpp:1258
+#: src/main/attrib.cpp:1259
 msgid "the dims contain negative values"
 msgstr "dims에 음수값들이 포함되어 있습니다"
 
-#: src/main/attrib.cpp:1262
+#: src/main/attrib.cpp:1263
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "dims [product %lld]가 객체 [%lld]의 길이와 일치하지 않습니다"
@@ -1473,7 +1472,7 @@ msgstr "벡터의 크기는 NA 또는 NaN 일 수 없습니다"
 msgid "vector size cannot be infinite"
 msgstr "벡터의 크기는 무한할 수 없습니다"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:958
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957
 #: src/main/sort.cpp:1530
 msgid "vector size specified is too large"
 msgstr "지정된 벡터의 크기가 너무 큽니다"
@@ -1485,8 +1484,8 @@ msgstr "지정된 벡터의 크기가 너무 큽니다"
 msgid "invalid first argument"
 msgstr "첫번째 인자가 유효하지 않습니다"
 
-#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:314
-#: src/main/builtin.cpp:353 src/main/builtin.cpp:403 src/main/builtin.cpp:417
+#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313
+#: src/main/builtin.cpp:352 src/main/builtin.cpp:402 src/main/builtin.cpp:416
 #: src/main/coerce.cpp:1578 src/main/connections.cpp:3894
 #: src/main/engine.cpp:3221 src/main/envir.cpp:1010 src/main/envir.cpp:1061
 #: src/main/envir.cpp:1232 src/main/envir.cpp:1270 src/main/envir.cpp:2044
@@ -1497,47 +1496,47 @@ msgstr "첫번째 인자가 유효하지 않습니다"
 msgid "use of NULL environment is defunct"
 msgstr "NULL 인바이런먼트의 사용은 더이상 지원되지 않습니다"
 
-#: src/main/builtin.cpp:261 src/main/builtin.cpp:275
+#: src/main/builtin.cpp:260 src/main/builtin.cpp:274
 msgid "argument is not a function"
 msgstr "함수를 인자로 받지 않았습니다."
 
-#: src/main/builtin.cpp:328
+#: src/main/builtin.cpp:327
 msgid "setting environment(<primitive function>) is not possible and trying it is deprecated"
 msgstr ""
 
-#: src/main/builtin.cpp:333
+#: src/main/builtin.cpp:332
 msgid "replacement object is not an environment"
 msgstr "대체객체는 인바이런먼트가 아닙니다"
 
-#: src/main/builtin.cpp:357
+#: src/main/builtin.cpp:356
 msgid "'enclos' must be an environment"
 msgstr "'enclos'는 반드시 인바이런먼트이어야 합니다"
 
-#: src/main/builtin.cpp:375 src/main/builtin.cpp:408
+#: src/main/builtin.cpp:374 src/main/builtin.cpp:407
 msgid "argument is not an environment"
 msgstr "인자는 인바이런먼트이 아닙니다"
 
-#: src/main/builtin.cpp:377
+#: src/main/builtin.cpp:376
 msgid "the empty environment has no parent"
 msgstr "비어있는 인바이런먼트는 모체를 가지지 않습니다"
 
-#: src/main/builtin.cpp:410
+#: src/main/builtin.cpp:409
 msgid "can not set parent of the empty environment"
 msgstr "비어있는 인바이런먼트는 모체를 지정할 수 없습니다"
 
-#: src/main/builtin.cpp:412
+#: src/main/builtin.cpp:411
 msgid "can not set the parent environment of a namespace"
 msgstr ""
 
-#: src/main/builtin.cpp:414
+#: src/main/builtin.cpp:413
 msgid "can not set the parent environment of package imports"
 msgstr ""
 
-#: src/main/builtin.cpp:422 src/main/memory.cpp:4363
+#: src/main/builtin.cpp:421 src/main/memory.cpp:4363
 msgid "'parent' is not an environment"
 msgstr "'parent'는 인바이런먼트가 아닙니다"
 
-#: src/main/builtin.cpp:567 src/main/connections.cpp:4560
+#: src/main/builtin.cpp:566 src/main/connections.cpp:4560
 #: src/main/connections.cpp:4945 src/main/connections.cpp:4972
 #: src/main/connections.cpp:5353 src/main/connections.cpp:5416
 #: src/main/connections.cpp:5641 src/main/connections.cpp:5645
@@ -1546,70 +1545,70 @@ msgstr "'parent'는 인바이런먼트가 아닙니다"
 msgid "cannot write to this connection"
 msgstr "이 연결에 쓰기를 할 수 없습니다"
 
-#: src/main/builtin.cpp:572
+#: src/main/builtin.cpp:571
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "'%s' 지정이 유효하지 않습니다"
 
-#: src/main/builtin.cpp:589
+#: src/main/builtin.cpp:588
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "양수가 아닌 'fill' 인자는 무시되어질 것입니다"
 
-#: src/main/builtin.cpp:660
+#: src/main/builtin.cpp:659
 #, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "타입 '%2$s'인 인자 %1$d는 'cat'에 의하여 다루어 질 수 없습니다"
 
-#: src/main/builtin.cpp:799
+#: src/main/builtin.cpp:798
 #, fuzzy
 msgid "too long for a pairlist"
 msgstr "...는 pairlist가 아닙니다."
 
-#: src/main/builtin.cpp:803
+#: src/main/builtin.cpp:802
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
 msgstr "벡터: 모드가 '%s'인 벡터를 만들 수 없습니다."
 
-#: src/main/builtin.cpp:831
+#: src/main/builtin.cpp:830
 msgid "cannot set length of non-(vector or list)"
 msgstr "벡터형 또는 리스트형이 아닌 것에 길이를 설정할 수 없습니다."
 
-#: src/main/builtin.cpp:832 src/main/character.cpp:679 src/main/coerce.cpp:3097
+#: src/main/builtin.cpp:831 src/main/character.cpp:679 src/main/coerce.cpp:3097
 msgid "invalid value"
 msgstr "유효하지 않은 값입니다"
 
-#: src/main/builtin.cpp:834
+#: src/main/builtin.cpp:833
 msgid "length of NULL cannot be changed"
 msgstr ""
 
-#: src/main/builtin.cpp:954 src/main/envir.cpp:2257 src/main/envir.cpp:2265
+#: src/main/builtin.cpp:953 src/main/envir.cpp:2257 src/main/envir.cpp:2265
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "'%s' 인수의 길이가 잘못되었습니다"
 
-#: src/main/builtin.cpp:984 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
+#: src/main/builtin.cpp:983 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
 #: src/main/eval.cpp:1078 src/main/eval.cpp:1240 src/main/eval.cpp:3715
 #: src/main/eval.cpp:3804 src/main/eval.cpp:3875 src/main/eval.cpp:4222
 #: src/main/eval.cpp:7947 src/main/eval.cpp:8090
 msgid "'...' used in an incorrect context"
 msgstr "'...'가 잘못된 맥락에서 사용되었습니다"
 
-#: src/main/builtin.cpp:1006
+#: src/main/builtin.cpp:1005
 #, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "'switch'의 기본값으로 '%1$s'와 '%2$s'가 중복됩니다"
 
-#: src/main/builtin.cpp:1039 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
+#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
 #: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3734
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s'가 누락되어 있습니다"
 
-#: src/main/builtin.cpp:1043 src/main/eval.cpp:8500
+#: src/main/builtin.cpp:1042 src/main/eval.cpp:8500
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR은 반드시 길이가 1인 벡터이어야 합니다"
 
-#: src/main/builtin.cpp:1046 src/main/eval.cpp:8503
+#: src/main/builtin.cpp:1045 src/main/eval.cpp:8503
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1618,11 +1617,11 @@ msgstr ""
 "EXPR는 정수로서 다루어지는 \"factor\"입니다.\n"
 " 대신 '%s'을 사용해보세요."
 
-#: src/main/builtin.cpp:1093
+#: src/main/builtin.cpp:1092
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1102 src/main/eval.cpp:8512 src/main/eval.cpp:8540
+#: src/main/builtin.cpp:1101 src/main/eval.cpp:8512 src/main/eval.cpp:8540
 msgid "'switch' with no alternatives"
 msgstr ""
 
@@ -5418,109 +5417,109 @@ msgstr ""
 msgid "Setting LC_TIME=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:988
+#: src/main/main.cpp:987
 msgid "Setting LC_CTYPE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:991
+#: src/main/main.cpp:990
 msgid "Setting LC_COLLATE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:994
+#: src/main/main.cpp:993
 msgid "Setting LC_TIME failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:998
+#: src/main/main.cpp:997
 msgid "Setting LC_MESSAGES failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1004
+#: src/main/main.cpp:1003
 msgid "Setting LC_MONETARY failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1009
+#: src/main/main.cpp:1008
 msgid "Setting LC_PAPER failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1014
+#: src/main/main.cpp:1013
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1047
+#: src/main/main.cpp:1046
 #, c-format
 msgid "Using locale code page other than %d%s may cause problems."
 msgstr ""
 
-#: src/main/main.cpp:1074
+#: src/main/main.cpp:1073
 msgid "unable to open the base package\n"
 msgstr "base 패키지를 열 수 없습니다\n"
 
-#: src/main/main.cpp:1132
+#: src/main/main.cpp:1131
 #, fuzzy
 msgid "allocation failure in setup_Rmainloop"
 msgstr "R_tmpnam2내에 할당이 실패했습니다"
 
-#: src/main/main.cpp:1166
+#: src/main/main.cpp:1165
 #, c-format
 msgid "unable to restore saved data in %s\n"
 msgstr "%s에 저장되어 있는 데이터를 복구 할 수 없습니다\n"
 
-#: src/main/main.cpp:1220
+#: src/main/main.cpp:1219
 #, fuzzy
 msgid "Warning message during startup:"
 msgid_plural "Warning messages during startup:"
 msgstr[0] "경고메시지(들):"
 
-#: src/main/main.cpp:1238
+#: src/main/main.cpp:1237
 msgid "unable to initialize the JIT\n"
 msgstr ""
 
-#: src/main/main.cpp:1479
+#: src/main/main.cpp:1478
 msgid "non-interactive browser() -- left over from debugging?"
 msgstr ""
 
-#: src/main/main.cpp:1611
+#: src/main/main.cpp:1610
 msgid "cannot quit from browser"
 msgstr "브라우저로부터 빠져나올 수 없습니다"
 
-#: src/main/main.cpp:1615
+#: src/main/main.cpp:1614
 msgid "one of \"yes\", \"no\", \"ask\" or \"default\" expected."
 msgstr "\"yes\", \"no\", \"ask\" 또는 \"default\" 중 하나가 입력되어야 합니다"
 
-#: src/main/main.cpp:1620
+#: src/main/main.cpp:1619
 msgid "save=\"ask\" in non-interactive use: command-line default will be used"
 msgstr "save=\"ask\"은 비대화식 사용이므로 커맨드라인 디폴트가 사용될 것입니다"
 
-#: src/main/main.cpp:1628
+#: src/main/main.cpp:1627
 msgid "unrecognized value of 'save'"
 msgstr "'save'의 값을 인식할 수 없습니다"
 
-#: src/main/main.cpp:1631
+#: src/main/main.cpp:1630
 msgid "invalid 'status', 0 assumed"
 msgstr "'status'가 유효하지 않아 0으로 가정됩니다"
 
-#: src/main/main.cpp:1636
+#: src/main/main.cpp:1635
 msgid "invalid 'runLast', FALSE assumed"
 msgstr "'runLast'가 유효하지 않아 FALSE로 가정됩니다"
 
-#: src/main/main.cpp:1680
+#: src/main/main.cpp:1679
 msgid "cannot allocate space for toplevel callback element"
 msgstr "최상위 callback 요소에 공간을 할당할 수 없습니다"
 
-#: src/main/main.cpp:1766
+#: src/main/main.cpp:1765
 msgid "negative index passed to R_removeTaskCallbackByIndex"
 msgstr "R_removeTaskCallbackByIndex에 음수를 가지는 인덱스가 전달되었습니다"
 
-#: src/main/main.cpp:1885
+#: src/main/main.cpp:1884
 msgid "list of toplevel callbacks was corrupted"
 msgstr ""
 
-#: src/main/main.cpp:1890
+#: src/main/main.cpp:1889
 #, c-format
 msgid "warning messages from top-level task callback '%s'\n"
 msgstr "최상위 작업 callback '%s'로부터 나온 경고메시지입니다\n"
 
-#: src/main/main.cpp:1980
+#: src/main/main.cpp:1979
 msgid "top-level task callback did not return a logical value"
 msgstr "최상위 작업 callback이 논리값을 반환하지 않았습니다"
 

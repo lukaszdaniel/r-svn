@@ -199,7 +199,7 @@ msgstr "Unicode Zeichen %lc (U+%04X) kann nicht konvertiert werden"
 #: devPS.cpp:912 devPS.cpp:966
 #, fuzzy, c-format
 msgid "font metrics unknown for character 0x%02x in encoding %s"
-msgstr "Fontmetrik für das Zeichen 0x%02x unbekannt"
+msgstr "Fontmetrik unbekannt für das Zeichen 0x%02x in Kodierung %s"
 
 #: devPS.cpp:980
 #, fuzzy, c-format

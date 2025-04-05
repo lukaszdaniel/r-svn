@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:28+0200\n"
+"POT-Creation-Date: 2025-04-05 17:15+0200\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -139,9 +139,8 @@ msgstr "顯示 '%ls' 時發生問題"
 #: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
 #: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
-#: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:580
-#: src/main/builtin.cpp:598 src/main/builtin.cpp:779 src/main/builtin.cpp:781
-#: src/main/builtin.cpp:783 src/main/character.cpp:339
+#: src/main/builtin.cpp:579 src/main/builtin.cpp:597 src/main/builtin.cpp:778
+#: src/main/builtin.cpp:780 src/main/builtin.cpp:782 src/main/character.cpp:339
 #: src/main/character.cpp:342 src/main/character.cpp:347
 #: src/main/character.cpp:946 src/main/character.cpp:1466
 #: src/main/character.cpp:1470 src/main/character.cpp:1473
@@ -1150,7 +1149,7 @@ msgstr "非調和引數"
 msgid "'%s' argument is not a matrix"
 msgstr "引數不是矩陣"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1244
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1245
 #, fuzzy, c-format
 msgid "invalid first argument, must be %s"
 msgstr "第一個引數無效, 必須是陣列"
@@ -1294,48 +1293,48 @@ msgstr "不相容的 'names' 引數"
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "以無效的類型 (%s) 設定 'names' 屬性"
 
-#: src/main/attrib.cpp:1120
+#: src/main/attrib.cpp:1121
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' 被應用於非陣列"
 
-#: src/main/attrib.cpp:1125 src/main/coerce.cpp:2731
+#: src/main/attrib.cpp:1126 src/main/coerce.cpp:2731
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' 必須是串列"
 
-#: src/main/attrib.cpp:1129 src/main/attrib.cpp:1154
+#: src/main/attrib.cpp:1130 src/main/attrib.cpp:1155
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "'dimnames' 的長度 [%d] 必須同 'dims' 的長度 [%d] 相等"
 
-#: src/main/attrib.cpp:1160
+#: src/main/attrib.cpp:1161
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "設 'dimnames' 時的類型 (%s) 無效 (必須是向量)"
 
-#: src/main/attrib.cpp:1163
+#: src/main/attrib.cpp:1164
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "'dimnames' 的長度 [%d] 必須與陣列範圍相等"
 
-#: src/main/attrib.cpp:1246
+#: src/main/attrib.cpp:1247
 #, fuzzy, c-format
 msgid "invalid second argument, must be %s"
 msgstr "第二個引數無效"
 
-#: src/main/attrib.cpp:1251
+#: src/main/attrib.cpp:1252
 msgid "length-0 dimension vector is invalid"
 msgstr "長度為零的維度向量無效"
 
-#: src/main/attrib.cpp:1256
+#: src/main/attrib.cpp:1257
 msgid "the dims contain missing values"
 msgstr "維度包含缺少值"
 
-#: src/main/attrib.cpp:1258
+#: src/main/attrib.cpp:1259
 msgid "the dims contain negative values"
 msgstr "維度包含負值"
 
-#: src/main/attrib.cpp:1262
+#: src/main/attrib.cpp:1263
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "維度 [product %lld] 不符合物件 [%lld] 的長度"
@@ -1482,7 +1481,7 @@ msgstr "向量大小不能是 NA/NaN"
 msgid "vector size cannot be infinite"
 msgstr "向量大小不能是無限大"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:958
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957
 #: src/main/sort.cpp:1530
 msgid "vector size specified is too large"
 msgstr "指定的向量大小太大"
@@ -1494,8 +1493,8 @@ msgstr "指定的向量大小太大"
 msgid "invalid first argument"
 msgstr "第一個引數無效"
 
-#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:314
-#: src/main/builtin.cpp:353 src/main/builtin.cpp:403 src/main/builtin.cpp:417
+#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313
+#: src/main/builtin.cpp:352 src/main/builtin.cpp:402 src/main/builtin.cpp:416
 #: src/main/coerce.cpp:1578 src/main/connections.cpp:3894
 #: src/main/engine.cpp:3221 src/main/envir.cpp:1010 src/main/envir.cpp:1061
 #: src/main/envir.cpp:1232 src/main/envir.cpp:1270 src/main/envir.cpp:2044
@@ -1506,47 +1505,47 @@ msgstr "第一個引數無效"
 msgid "use of NULL environment is defunct"
 msgstr "NULL 環境的使用已經廢止"
 
-#: src/main/builtin.cpp:261 src/main/builtin.cpp:275
+#: src/main/builtin.cpp:260 src/main/builtin.cpp:274
 msgid "argument is not a function"
 msgstr "引數不是函式"
 
-#: src/main/builtin.cpp:328
+#: src/main/builtin.cpp:327
 msgid "setting environment(<primitive function>) is not possible and trying it is deprecated"
 msgstr ""
 
-#: src/main/builtin.cpp:333
+#: src/main/builtin.cpp:332
 msgid "replacement object is not an environment"
 msgstr "替換物件不是環境物件"
 
-#: src/main/builtin.cpp:357
+#: src/main/builtin.cpp:356
 msgid "'enclos' must be an environment"
 msgstr "'enclos' 必須是環境物件"
 
-#: src/main/builtin.cpp:375 src/main/builtin.cpp:408
+#: src/main/builtin.cpp:374 src/main/builtin.cpp:407
 msgid "argument is not an environment"
 msgstr "引數不是環境物件"
 
-#: src/main/builtin.cpp:377
+#: src/main/builtin.cpp:376
 msgid "the empty environment has no parent"
 msgstr "空環境沒有上一層"
 
-#: src/main/builtin.cpp:410
+#: src/main/builtin.cpp:409
 msgid "can not set parent of the empty environment"
 msgstr "無法設定空環境的上層"
 
-#: src/main/builtin.cpp:412
+#: src/main/builtin.cpp:411
 msgid "can not set the parent environment of a namespace"
 msgstr "無法設定命名空間的上層環境"
 
-#: src/main/builtin.cpp:414
+#: src/main/builtin.cpp:413
 msgid "can not set the parent environment of package imports"
 msgstr "無法設定套件匯入的上層環境"
 
-#: src/main/builtin.cpp:422 src/main/memory.cpp:4363
+#: src/main/builtin.cpp:421 src/main/memory.cpp:4363
 msgid "'parent' is not an environment"
 msgstr "'parent' 不是環境物件"
 
-#: src/main/builtin.cpp:567 src/main/connections.cpp:4560
+#: src/main/builtin.cpp:566 src/main/connections.cpp:4560
 #: src/main/connections.cpp:4945 src/main/connections.cpp:4972
 #: src/main/connections.cpp:5353 src/main/connections.cpp:5416
 #: src/main/connections.cpp:5641 src/main/connections.cpp:5645
@@ -1555,70 +1554,70 @@ msgstr "'parent' 不是環境物件"
 msgid "cannot write to this connection"
 msgstr "無法寫入此連接"
 
-#: src/main/builtin.cpp:572
+#: src/main/builtin.cpp:571
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "'%s' 設定無效"
 
-#: src/main/builtin.cpp:589
+#: src/main/builtin.cpp:588
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "非正數的 'fill' 引數將會被忽略"
 
-#: src/main/builtin.cpp:660
+#: src/main/builtin.cpp:659
 #, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "'cat' 目前還不能用 %d 引數 (類型 '%s')"
 
-#: src/main/builtin.cpp:799
+#: src/main/builtin.cpp:798
 #, fuzzy
 msgid "too long for a pairlist"
 msgstr "... 不是一個成對串列"
 
-#: src/main/builtin.cpp:803
+#: src/main/builtin.cpp:802
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
 msgstr "向量：無法建立模式為 '%s' 的向量。"
 
-#: src/main/builtin.cpp:831
+#: src/main/builtin.cpp:830
 msgid "cannot set length of non-(vector or list)"
 msgstr "無法設定非(向量或串列)的長度"
 
-#: src/main/builtin.cpp:832 src/main/character.cpp:679 src/main/coerce.cpp:3097
+#: src/main/builtin.cpp:831 src/main/character.cpp:679 src/main/coerce.cpp:3097
 msgid "invalid value"
 msgstr "無效的值"
 
-#: src/main/builtin.cpp:834
+#: src/main/builtin.cpp:833
 msgid "length of NULL cannot be changed"
 msgstr "NULL 的長度無法改變"
 
-#: src/main/builtin.cpp:954 src/main/envir.cpp:2257 src/main/envir.cpp:2265
+#: src/main/builtin.cpp:953 src/main/envir.cpp:2257 src/main/envir.cpp:2265
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "'%s' 引數的長度錯誤"
 
-#: src/main/builtin.cpp:984 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
+#: src/main/builtin.cpp:983 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
 #: src/main/eval.cpp:1078 src/main/eval.cpp:1240 src/main/eval.cpp:3715
 #: src/main/eval.cpp:3804 src/main/eval.cpp:3875 src/main/eval.cpp:4222
 #: src/main/eval.cpp:7947 src/main/eval.cpp:8090
 msgid "'...' used in an incorrect context"
 msgstr "'...' 的上下文用得不正確"
 
-#: src/main/builtin.cpp:1006
+#: src/main/builtin.cpp:1005
 #, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "複製 'switch' 的預設值：'%s' 和 '%s'"
 
-#: src/main/builtin.cpp:1039 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
+#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
 #: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3734
 #, c-format
 msgid "'%s' is missing"
 msgstr "缺少 '%s'"
 
-#: src/main/builtin.cpp:1043 src/main/eval.cpp:8500
+#: src/main/builtin.cpp:1042 src/main/eval.cpp:8500
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR 必須是長度為 1 的向量"
 
-#: src/main/builtin.cpp:1046 src/main/eval.cpp:8503
+#: src/main/builtin.cpp:1045 src/main/eval.cpp:8503
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1627,11 +1626,11 @@ msgstr ""
 "EXPR 是一個 \"factor\"，視為整數。\n"
 " 請考慮使用 '%s' 做為替代。"
 
-#: src/main/builtin.cpp:1093
+#: src/main/builtin.cpp:1092
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1102 src/main/eval.cpp:8512 src/main/eval.cpp:8540
+#: src/main/builtin.cpp:1101 src/main/eval.cpp:8512 src/main/eval.cpp:8540
 msgid "'switch' with no alternatives"
 msgstr "switch 而無替代方案"
 
@@ -5438,109 +5437,109 @@ msgstr ""
 msgid "Setting LC_TIME=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:988
+#: src/main/main.cpp:987
 msgid "Setting LC_CTYPE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:991
+#: src/main/main.cpp:990
 msgid "Setting LC_COLLATE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:994
+#: src/main/main.cpp:993
 msgid "Setting LC_TIME failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:998
+#: src/main/main.cpp:997
 msgid "Setting LC_MESSAGES failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1004
+#: src/main/main.cpp:1003
 msgid "Setting LC_MONETARY failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1009
+#: src/main/main.cpp:1008
 msgid "Setting LC_PAPER failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1014
+#: src/main/main.cpp:1013
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1047
+#: src/main/main.cpp:1046
 #, c-format
 msgid "Using locale code page other than %d%s may cause problems."
 msgstr ""
 
-#: src/main/main.cpp:1074
+#: src/main/main.cpp:1073
 msgid "unable to open the base package\n"
 msgstr "無法開啟基本套件\n"
 
-#: src/main/main.cpp:1132
+#: src/main/main.cpp:1131
 #, fuzzy
 msgid "allocation failure in setup_Rmainloop"
 msgstr "在 R_tmpnam2 中配置失敗"
 
-#: src/main/main.cpp:1166
+#: src/main/main.cpp:1165
 #, c-format
 msgid "unable to restore saved data in %s\n"
 msgstr "無法還原儲存在 %s 中的資料\n"
 
-#: src/main/main.cpp:1220
+#: src/main/main.cpp:1219
 #, fuzzy
 msgid "Warning message during startup:"
 msgid_plural "Warning messages during startup:"
 msgstr[0] "警告訊息："
 
-#: src/main/main.cpp:1238
+#: src/main/main.cpp:1237
 msgid "unable to initialize the JIT\n"
 msgstr "無法初始化 JIT\n"
 
-#: src/main/main.cpp:1479
+#: src/main/main.cpp:1478
 msgid "non-interactive browser() -- left over from debugging?"
 msgstr ""
 
-#: src/main/main.cpp:1611
+#: src/main/main.cpp:1610
 msgid "cannot quit from browser"
 msgstr "無法離開瀏覽器"
 
-#: src/main/main.cpp:1615
+#: src/main/main.cpp:1614
 msgid "one of \"yes\", \"no\", \"ask\" or \"default\" expected."
 msgstr "只能用 \"yes\"、\"no\"、\"ask\" 或 \"default\" 中的一個。"
 
-#: src/main/main.cpp:1620
+#: src/main/main.cpp:1619
 msgid "save=\"ask\" in non-interactive use: command-line default will be used"
 msgstr "save=\"ask\" 不能在非交互狀態時使用：改用命令列預設值"
 
-#: src/main/main.cpp:1628
+#: src/main/main.cpp:1627
 msgid "unrecognized value of 'save'"
 msgstr "沒有這種 'save' 值"
 
-#: src/main/main.cpp:1631
+#: src/main/main.cpp:1630
 msgid "invalid 'status', 0 assumed"
 msgstr "'status' 無效, 假定為 0"
 
-#: src/main/main.cpp:1636
+#: src/main/main.cpp:1635
 msgid "invalid 'runLast', FALSE assumed"
 msgstr "'runLast' 無效, 假定為 FALSE"
 
-#: src/main/main.cpp:1680
+#: src/main/main.cpp:1679
 msgid "cannot allocate space for toplevel callback element"
 msgstr "無法為最高層回呼元素配置空間"
 
-#: src/main/main.cpp:1766
+#: src/main/main.cpp:1765
 msgid "negative index passed to R_removeTaskCallbackByIndex"
 msgstr "負的索引值被傳遞給 R_removeTaskCallbackByIndex"
 
-#: src/main/main.cpp:1885
+#: src/main/main.cpp:1884
 msgid "list of toplevel callbacks was corrupted"
 msgstr ""
 
-#: src/main/main.cpp:1890
+#: src/main/main.cpp:1889
 #, c-format
 msgid "warning messages from top-level task callback '%s'\n"
 msgstr "最高層任務回呼 '%s' 產生了警告訊息\n"
 
-#: src/main/main.cpp:1980
+#: src/main/main.cpp:1979
 msgid "top-level task callback did not return a logical value"
 msgstr "最高層任務回呼沒回傳邏輯值"
 

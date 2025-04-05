@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:28+0200\n"
+"POT-Creation-Date: 2025-04-05 17:15+0200\n"
 "PO-Revision-Date: 2023-01-19 12:02+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -138,9 +138,8 @@ msgstr "problema durante la visualizzazione di '%ls'"
 #: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
 #: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
-#: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:580
-#: src/main/builtin.cpp:598 src/main/builtin.cpp:779 src/main/builtin.cpp:781
-#: src/main/builtin.cpp:783 src/main/character.cpp:339
+#: src/main/builtin.cpp:579 src/main/builtin.cpp:597 src/main/builtin.cpp:778
+#: src/main/builtin.cpp:780 src/main/builtin.cpp:782 src/main/character.cpp:339
 #: src/main/character.cpp:342 src/main/character.cpp:347
 #: src/main/character.cpp:946 src/main/character.cpp:1466
 #: src/main/character.cpp:1470 src/main/character.cpp:1473
@@ -1152,7 +1151,7 @@ msgstr "gli argomenti non sono compatibili"
 msgid "'%s' argument is not a matrix"
 msgstr "l'argomento non è una matrice"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1244
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1245
 #, c-format
 msgid "invalid first argument, must be %s"
 msgstr "primo argomento non valido, dev'essere %s"
@@ -1296,48 +1295,48 @@ msgstr "argomento 'names' incompatibile"
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "tipo non valido (%s) per impostare l'attributo 'names'"
 
-#: src/main/attrib.cpp:1120
+#: src/main/attrib.cpp:1121
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' utilizzata su un oggetto che non è di tipo array"
 
-#: src/main/attrib.cpp:1125 src/main/coerce.cpp:2731
+#: src/main/attrib.cpp:1126 src/main/coerce.cpp:2731
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' dev'essere una lista"
 
-#: src/main/attrib.cpp:1129 src/main/attrib.cpp:1154
+#: src/main/attrib.cpp:1130 src/main/attrib.cpp:1155
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "la lunghezza di 'dimnames' [%d] non corrisponde con quella di 'dims' [%d]"
 
-#: src/main/attrib.cpp:1160
+#: src/main/attrib.cpp:1161
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "tipo non valido (%s) per 'dimnames' (dev'essere vector)"
 
-#: src/main/attrib.cpp:1163
+#: src/main/attrib.cpp:1164
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "la lunghezza di 'dimnames' [%d] non corrisponde con l'estensione dell'array"
 
-#: src/main/attrib.cpp:1246
+#: src/main/attrib.cpp:1247
 #, c-format
 msgid "invalid second argument, must be %s"
 msgstr "secondo argomento non valido, dev'essere %s"
 
-#: src/main/attrib.cpp:1251
+#: src/main/attrib.cpp:1252
 msgid "length-0 dimension vector is invalid"
 msgstr "vettore con lunghezza 0 non valido"
 
-#: src/main/attrib.cpp:1256
+#: src/main/attrib.cpp:1257
 msgid "the dims contain missing values"
 msgstr "le dimensioni contengono valori mancanti"
 
-#: src/main/attrib.cpp:1258
+#: src/main/attrib.cpp:1259
 msgid "the dims contain negative values"
 msgstr "le dimensioni contengono valori negativi"
 
-#: src/main/attrib.cpp:1262
+#: src/main/attrib.cpp:1263
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "dims [product %lld] non corrisponde con la lunghezza dell'oggetto [%lld]"
@@ -1484,7 +1483,7 @@ msgstr "la dimensione di un vettore non può essere NA/NaN"
 msgid "vector size cannot be infinite"
 msgstr "la dimensione di un vettore non può essere infinita"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:958
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957
 #: src/main/sort.cpp:1530
 msgid "vector size specified is too large"
 msgstr "dimensione del vettore specificato troppo grande"
@@ -1496,8 +1495,8 @@ msgstr "dimensione del vettore specificato troppo grande"
 msgid "invalid first argument"
 msgstr "primo argomento non valido"
 
-#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:314
-#: src/main/builtin.cpp:353 src/main/builtin.cpp:403 src/main/builtin.cpp:417
+#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313
+#: src/main/builtin.cpp:352 src/main/builtin.cpp:402 src/main/builtin.cpp:416
 #: src/main/coerce.cpp:1578 src/main/connections.cpp:3894
 #: src/main/engine.cpp:3221 src/main/envir.cpp:1010 src/main/envir.cpp:1061
 #: src/main/envir.cpp:1232 src/main/envir.cpp:1270 src/main/envir.cpp:2044
@@ -1508,47 +1507,47 @@ msgstr "primo argomento non valido"
 msgid "use of NULL environment is defunct"
 msgstr "l'utilizzo dell'ambiente NULL è rimosso"
 
-#: src/main/builtin.cpp:261 src/main/builtin.cpp:275
+#: src/main/builtin.cpp:260 src/main/builtin.cpp:274
 msgid "argument is not a function"
 msgstr "l'argomento non è una funzione"
 
-#: src/main/builtin.cpp:328
+#: src/main/builtin.cpp:327
 msgid "setting environment(<primitive function>) is not possible and trying it is deprecated"
 msgstr ""
 
-#: src/main/builtin.cpp:333
+#: src/main/builtin.cpp:332
 msgid "replacement object is not an environment"
 msgstr "l'oggetto sostitutivo non è un ambiente"
 
-#: src/main/builtin.cpp:357
+#: src/main/builtin.cpp:356
 msgid "'enclos' must be an environment"
 msgstr "'enclos' dev'essere un ambiente"
 
-#: src/main/builtin.cpp:375 src/main/builtin.cpp:408
+#: src/main/builtin.cpp:374 src/main/builtin.cpp:407
 msgid "argument is not an environment"
 msgstr "l'argomento non è un ambiente"
 
-#: src/main/builtin.cpp:377
+#: src/main/builtin.cpp:376
 msgid "the empty environment has no parent"
 msgstr "l'ambiente vuoto non ha genitori"
 
-#: src/main/builtin.cpp:410
+#: src/main/builtin.cpp:409
 msgid "can not set parent of the empty environment"
 msgstr "non è possibile impostare il genitore di un ambiente vuoto"
 
-#: src/main/builtin.cpp:412
+#: src/main/builtin.cpp:411
 msgid "can not set the parent environment of a namespace"
 msgstr "non è possibile impostare l'ambiente genitore di un namespace"
 
-#: src/main/builtin.cpp:414
+#: src/main/builtin.cpp:413
 msgid "can not set the parent environment of package imports"
 msgstr "non è possibile impostare l'ambiente genitore alle importazioni di un package"
 
-#: src/main/builtin.cpp:422 src/main/memory.cpp:4363
+#: src/main/builtin.cpp:421 src/main/memory.cpp:4363
 msgid "'parent' is not an environment"
 msgstr "'parent' non è un ambiente"
 
-#: src/main/builtin.cpp:567 src/main/connections.cpp:4560
+#: src/main/builtin.cpp:566 src/main/connections.cpp:4560
 #: src/main/connections.cpp:4945 src/main/connections.cpp:4972
 #: src/main/connections.cpp:5353 src/main/connections.cpp:5416
 #: src/main/connections.cpp:5641 src/main/connections.cpp:5645
@@ -1557,70 +1556,70 @@ msgstr "'parent' non è un ambiente"
 msgid "cannot write to this connection"
 msgstr "non è possibile scrivere su questa connessione"
 
-#: src/main/builtin.cpp:572
+#: src/main/builtin.cpp:571
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "specificazione di '%s' non valida"
 
-#: src/main/builtin.cpp:589
+#: src/main/builtin.cpp:588
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "l'argumento non-positivo 'fill' sarà ignorato"
 
-#: src/main/builtin.cpp:660
+#: src/main/builtin.cpp:659
 #, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "l'argomento %d (tipo '%s') non può essere gestito da 'cat'"
 
-#: src/main/builtin.cpp:799
+#: src/main/builtin.cpp:798
 #, fuzzy
 msgid "too long for a pairlist"
 msgstr "... non è una pairlist"
 
-#: src/main/builtin.cpp:803
+#: src/main/builtin.cpp:802
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
 msgstr "vettore: non è possibile creare un vettore in modalità '%s'."
 
-#: src/main/builtin.cpp:831
+#: src/main/builtin.cpp:830
 msgid "cannot set length of non-(vector or list)"
 msgstr "non è possibile impostare la lunghezza di un oggetto che non sia un vettore o una lista"
 
-#: src/main/builtin.cpp:832 src/main/character.cpp:679 src/main/coerce.cpp:3097
+#: src/main/builtin.cpp:831 src/main/character.cpp:679 src/main/coerce.cpp:3097
 msgid "invalid value"
 msgstr "valore non valido"
 
-#: src/main/builtin.cpp:834
+#: src/main/builtin.cpp:833
 msgid "length of NULL cannot be changed"
 msgstr "la lunghezza di NULL non può essere cambiata"
 
-#: src/main/builtin.cpp:954 src/main/envir.cpp:2257 src/main/envir.cpp:2265
+#: src/main/builtin.cpp:953 src/main/envir.cpp:2257 src/main/envir.cpp:2265
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "lunghezza sbagliata per l'argomento '%s'"
 
-#: src/main/builtin.cpp:984 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
+#: src/main/builtin.cpp:983 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
 #: src/main/eval.cpp:1078 src/main/eval.cpp:1240 src/main/eval.cpp:3715
 #: src/main/eval.cpp:3804 src/main/eval.cpp:3875 src/main/eval.cpp:4222
 #: src/main/eval.cpp:7947 src/main/eval.cpp:8090
 msgid "'...' used in an incorrect context"
 msgstr "'...' utilizzato in un contesto sbagliato"
 
-#: src/main/builtin.cpp:1006
+#: src/main/builtin.cpp:1005
 #, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "impostazioni predefinite per 'switch' duplicate: '%s' e '%s'"
 
-#: src/main/builtin.cpp:1039 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
+#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
 #: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3734
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s' è assente"
 
-#: src/main/builtin.cpp:1043 src/main/eval.cpp:8500
+#: src/main/builtin.cpp:1042 src/main/eval.cpp:8500
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR dev'essere un vettore di lunghezza 1"
 
-#: src/main/builtin.cpp:1046 src/main/eval.cpp:8503
+#: src/main/builtin.cpp:1045 src/main/eval.cpp:8503
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1629,11 +1628,11 @@ msgstr ""
 "EXPR è un \"factor\", trattato come intero.\n"
 " Si consideri l'utilizzo alternativo di '%s'."
 
-#: src/main/builtin.cpp:1093
+#: src/main/builtin.cpp:1092
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1102 src/main/eval.cpp:8512 src/main/eval.cpp:8540
+#: src/main/builtin.cpp:1101 src/main/eval.cpp:8512 src/main/eval.cpp:8540
 msgid "'switch' with no alternatives"
 msgstr "'switch' senza alternative"
 
@@ -5434,110 +5433,110 @@ msgstr ""
 msgid "Setting LC_TIME=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:988
+#: src/main/main.cpp:987
 msgid "Setting LC_CTYPE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:991
+#: src/main/main.cpp:990
 msgid "Setting LC_COLLATE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:994
+#: src/main/main.cpp:993
 msgid "Setting LC_TIME failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:998
+#: src/main/main.cpp:997
 msgid "Setting LC_MESSAGES failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1004
+#: src/main/main.cpp:1003
 msgid "Setting LC_MONETARY failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1009
+#: src/main/main.cpp:1008
 msgid "Setting LC_PAPER failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1014
+#: src/main/main.cpp:1013
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1047
+#: src/main/main.cpp:1046
 #, fuzzy, c-format
 msgid "Using locale code page other than %d%s may cause problems."
 msgstr "l'utilizzo di un codice di localizzazione diverso da %d%s potrebbe causare problemi"
 
-#: src/main/main.cpp:1074
+#: src/main/main.cpp:1073
 msgid "unable to open the base package\n"
 msgstr "non è possibile aprire il pacchetto base\n"
 
-#: src/main/main.cpp:1132
+#: src/main/main.cpp:1131
 #, fuzzy
 msgid "allocation failure in setup_Rmainloop"
 msgstr "allocazione fallita in R_tmpnam2"
 
-#: src/main/main.cpp:1166
+#: src/main/main.cpp:1165
 #, c-format
 msgid "unable to restore saved data in %s\n"
 msgstr "non è possibile ripristinare i dati salvati in %s\n"
 
-#: src/main/main.cpp:1220
+#: src/main/main.cpp:1219
 #, fuzzy
 msgid "Warning message during startup:"
 msgid_plural "Warning messages during startup:"
 msgstr[0] "Messaggio di avvertimento:"
 msgstr[1] "Messaggi di avvertimento:"
 
-#: src/main/main.cpp:1238
+#: src/main/main.cpp:1237
 msgid "unable to initialize the JIT\n"
 msgstr "non è possibile inizializzare JIT\n"
 
-#: src/main/main.cpp:1479
+#: src/main/main.cpp:1478
 msgid "non-interactive browser() -- left over from debugging?"
 msgstr "browser() non interattivo -- rimasto dal debugging?"
 
-#: src/main/main.cpp:1611
+#: src/main/main.cpp:1610
 msgid "cannot quit from browser"
 msgstr "non posso uscire dal browser"
 
-#: src/main/main.cpp:1615
+#: src/main/main.cpp:1614
 msgid "one of \"yes\", \"no\", \"ask\" or \"default\" expected."
 msgstr "atteso \"yes\", \"no\", \"ask\" o \"default\"."
 
-#: src/main/main.cpp:1620
+#: src/main/main.cpp:1619
 msgid "save=\"ask\" in non-interactive use: command-line default will be used"
 msgstr "save=\"ask\" in modalità non interattiva: saranno utilizzate le impostazioni predefinite della riga di comando"
 
-#: src/main/main.cpp:1628
+#: src/main/main.cpp:1627
 msgid "unrecognized value of 'save'"
 msgstr "valore 'save' non riconosciuto"
 
-#: src/main/main.cpp:1631
+#: src/main/main.cpp:1630
 msgid "invalid 'status', 0 assumed"
 msgstr "valore 'status' non valido, si utilizza 0"
 
-#: src/main/main.cpp:1636
+#: src/main/main.cpp:1635
 msgid "invalid 'runLast', FALSE assumed"
 msgstr "argomento 'runLast' non valido, si utilizza FALSE"
 
-#: src/main/main.cpp:1680
+#: src/main/main.cpp:1679
 msgid "cannot allocate space for toplevel callback element"
 msgstr "non posso allocare spazio per l'elemento di callback di livello superiore"
 
-#: src/main/main.cpp:1766
+#: src/main/main.cpp:1765
 msgid "negative index passed to R_removeTaskCallbackByIndex"
 msgstr "indice negativo passato a R_removeTaskCallbackByIndex"
 
-#: src/main/main.cpp:1885
+#: src/main/main.cpp:1884
 msgid "list of toplevel callbacks was corrupted"
 msgstr ""
 
-#: src/main/main.cpp:1890
+#: src/main/main.cpp:1889
 #, c-format
 msgid "warning messages from top-level task callback '%s'\n"
 msgstr "messaggi di avvertimento dal processo callback di livello superiore '%s'\n"
 
-#: src/main/main.cpp:1980
+#: src/main/main.cpp:1979
 msgid "top-level task callback did not return a logical value"
 msgstr "il processo callback di livello superiore non ha restituito un valore logico"
 

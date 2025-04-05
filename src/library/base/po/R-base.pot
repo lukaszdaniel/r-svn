@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:28\n"
+"POT-Creation-Date: 2025-04-05 17:15\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1500,20 +1500,6 @@ msgstr ""
 #. R/warnings.R: gettextf("In %s", sQuote(cmd), domain = "R-base")
 
 msgid "In %s"
-msgstr ""
-
-
-#: R/stop.R: 0
-#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
-
-msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
-msgstr ""
-
-
-#: R/stop.R: 0
-#. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
-
-msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
 msgstr ""
 
 
@@ -3321,13 +3307,6 @@ msgstr ""
 #. R/match.R: stop("no match")
 
 msgid "no match"
-msgstr ""
-
-
-#: R/stop.R: 0
-#. R/stop.R: gettextf("no natural language support or missing translations")
-
-msgid "no natural language support or missing translations"
 msgstr ""
 
 

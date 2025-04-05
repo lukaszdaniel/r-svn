@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:28\n"
+"POT-Creation-Date: 2025-04-05 17:15\n"
 "PO-Revision-Date: 2024-10-25 19:29+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1103,16 +1103,6 @@ msgstr "Dalsza informacja jest dostępna w następujących ilustracjach w katalo
 #: R/warnings.R:0
 msgid "In %s"
 msgstr "W poleceniu %s"
-
-#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
-#: R/stop.R:0
-msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
-msgstr "W czystych ustawieniach regionalnych C, bez wymuszania ustawień regionalnych; ewentualnie użyj 'force = TRUE'?"
-
-#. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
-#: R/stop.R:0
-msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
-msgstr "W ustawieniach regionalnych C: reset LANGUAGE, ale język komunikatów może pozostać niezmieniony"
 
 #. R/library.R: gettext("Index:")
 #: R/library.R:0
@@ -2441,11 +2431,6 @@ msgstr "nie znaleziono drzew bibliotek w 'lib.loc'"
 msgid "no match"
 msgstr "brak dopasowania"
 
-#. R/stop.R: gettextf("no natural language support or missing translations")
-#: R/stop.R:0
-msgid "no natural language support or missing translations"
-msgstr "brak obsługi języka naturalnego lub brakuje tłumaczeń"
-
 #. R/library.R: message("no packages found")
 #: R/library.R:0
 msgid "no packages found"
@@ -3376,6 +3361,15 @@ msgid_plural "there are no packages called"
 msgstr[0] "nie ma pakietu o nazwie"
 msgstr[1] "nie ma pakietów o nazwach"
 msgstr[2] "nie ma pakietów o nazwach"
+
+#~ msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
+#~ msgstr "W czystych ustawieniach regionalnych C, bez wymuszania ustawień regionalnych; ewentualnie użyj 'force = TRUE'?"
+
+#~ msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
+#~ msgstr "W ustawieniach regionalnych C: reset LANGUAGE, ale język komunikatów może pozostać niezmieniony"
+
+#~ msgid "no natural language support or missing translations"
+#~ msgstr "brak obsługi języka naturalnego lub brakuje tłumaczeń"
 
 #~ msgid ""
 #~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:28+0200\n"
+"POT-Creation-Date: 2025-04-05 17:15+0200\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -133,9 +133,8 @@ msgstr "problema en mostrar «%ls»"
 #: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
 #: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
-#: src/main/builtin.cpp:171 src/main/builtin.cpp:177 src/main/builtin.cpp:580
-#: src/main/builtin.cpp:598 src/main/builtin.cpp:779 src/main/builtin.cpp:781
-#: src/main/builtin.cpp:783 src/main/character.cpp:339
+#: src/main/builtin.cpp:579 src/main/builtin.cpp:597 src/main/builtin.cpp:778
+#: src/main/builtin.cpp:780 src/main/builtin.cpp:782 src/main/character.cpp:339
 #: src/main/character.cpp:342 src/main/character.cpp:347
 #: src/main/character.cpp:946 src/main/character.cpp:1466
 #: src/main/character.cpp:1470 src/main/character.cpp:1473
@@ -1183,7 +1182,7 @@ msgstr "arguments no conformes"
 msgid "'%s' argument is not a matrix"
 msgstr "l'argument no és una matriu"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1244
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1245
 #, fuzzy, c-format
 msgid "invalid first argument, must be %s"
 msgstr "el primer argument no és vàlid, ha de ser %s"
@@ -1343,52 +1342,52 @@ msgstr "argument «names» incompatible"
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "tipus no vàlid (%s) per a definir l'atribut «names»"
 
-#: src/main/attrib.cpp:1120
+#: src/main/attrib.cpp:1121
 #, fuzzy
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' aplicat a no-array"
 
-#: src/main/attrib.cpp:1125 src/main/coerce.cpp:2731
+#: src/main/attrib.cpp:1126 src/main/coerce.cpp:2731
 #, fuzzy, c-format
 msgid "'%s' must be a list"
 msgstr "«%s» ha de ser una llista"
 
-#: src/main/attrib.cpp:1129 src/main/attrib.cpp:1154
+#: src/main/attrib.cpp:1130 src/main/attrib.cpp:1155
 #, fuzzy, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "la longitud de «dimnames» [%d] ha de coincidir amb la de «dims» [%d]"
 
-#: src/main/attrib.cpp:1160
+#: src/main/attrib.cpp:1161
 #, fuzzy, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "tipus no vàlid (%s) per a «dimnames» (ha de ser un vector)"
 
-#: src/main/attrib.cpp:1163
+#: src/main/attrib.cpp:1164
 #, fuzzy, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "la longitud de «dimnames» [%d] no és igual a l'extensió de la matriu"
 
-#: src/main/attrib.cpp:1246
+#: src/main/attrib.cpp:1247
 #, fuzzy, c-format
 msgid "invalid second argument, must be %s"
 msgstr "el segon argument no és vàlid, ha de ser %s"
 
-#: src/main/attrib.cpp:1251
+#: src/main/attrib.cpp:1252
 #, fuzzy
 msgid "length-0 dimension vector is invalid"
 msgstr "el vector longitud-0 dimensió no és vàlid"
 
-#: src/main/attrib.cpp:1256
+#: src/main/attrib.cpp:1257
 #, fuzzy
 msgid "the dims contain missing values"
 msgstr "els valors perduts contenen ATENUAcions"
 
-#: src/main/attrib.cpp:1258
+#: src/main/attrib.cpp:1259
 #, fuzzy
 msgid "the dims contain negative values"
 msgstr "els valors d'enfosquiment contenen valors negatius"
 
-#: src/main/attrib.cpp:1262
+#: src/main/attrib.cpp:1263
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "dims [producte %lld] no coincideix amb la longitud de l'objecte [%lld]"
@@ -1549,7 +1548,7 @@ msgstr "la mida del vector no pot ser NA/NaN"
 msgid "vector size cannot be infinite"
 msgstr "la mida del vector no pot ser infinita"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:958
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957
 #: src/main/sort.cpp:1530
 #, fuzzy
 msgid "vector size specified is too large"
@@ -1562,8 +1561,8 @@ msgstr "la mida del vector especificada és massa gran"
 msgid "invalid first argument"
 msgstr "el primer argument no és vàlid"
 
-#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:314
-#: src/main/builtin.cpp:353 src/main/builtin.cpp:403 src/main/builtin.cpp:417
+#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313
+#: src/main/builtin.cpp:352 src/main/builtin.cpp:402 src/main/builtin.cpp:416
 #: src/main/coerce.cpp:1578 src/main/connections.cpp:3894
 #: src/main/engine.cpp:3221 src/main/envir.cpp:1010 src/main/envir.cpp:1061
 #: src/main/envir.cpp:1232 src/main/envir.cpp:1270 src/main/envir.cpp:2044
@@ -1574,56 +1573,56 @@ msgstr "el primer argument no és vàlid"
 msgid "use of NULL environment is defunct"
 msgstr "l'ús de l'entorn NULL és obsolet"
 
-#: src/main/builtin.cpp:261 src/main/builtin.cpp:275
+#: src/main/builtin.cpp:260 src/main/builtin.cpp:274
 #, fuzzy
 msgid "argument is not a function"
 msgstr "l'argument no és una funció"
 
-#: src/main/builtin.cpp:328
+#: src/main/builtin.cpp:327
 msgid "setting environment(<primitive function>) is not possible and trying it is deprecated"
 msgstr ""
 
-#: src/main/builtin.cpp:333
+#: src/main/builtin.cpp:332
 #, fuzzy
 msgid "replacement object is not an environment"
 msgstr "l'objecte de substitució no és un entorn"
 
-#: src/main/builtin.cpp:357
+#: src/main/builtin.cpp:356
 #, fuzzy
 msgid "'enclos' must be an environment"
 msgstr "«enclos» ha de ser un entorn"
 
-#: src/main/builtin.cpp:375 src/main/builtin.cpp:408
+#: src/main/builtin.cpp:374 src/main/builtin.cpp:407
 #, fuzzy
 msgid "argument is not an environment"
 msgstr "l'argument no és un entorn"
 
-#: src/main/builtin.cpp:377
+#: src/main/builtin.cpp:376
 #, fuzzy
 msgid "the empty environment has no parent"
 msgstr "l'entorn buit no té pare"
 
-#: src/main/builtin.cpp:410
+#: src/main/builtin.cpp:409
 #, fuzzy
 msgid "can not set parent of the empty environment"
 msgstr "no es pot establir el pare de l'entorn buit"
 
-#: src/main/builtin.cpp:412
+#: src/main/builtin.cpp:411
 #, fuzzy
 msgid "can not set the parent environment of a namespace"
 msgstr "no es pot establir l'entorn pare d'un espai de noms"
 
-#: src/main/builtin.cpp:414
+#: src/main/builtin.cpp:413
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr "no es pot establir l'entorn pare de les importacions de paquets"
 
-#: src/main/builtin.cpp:422 src/main/memory.cpp:4363
+#: src/main/builtin.cpp:421 src/main/memory.cpp:4363
 #, fuzzy
 msgid "'parent' is not an environment"
 msgstr "'parent' no és un entorn"
 
-#: src/main/builtin.cpp:567 src/main/connections.cpp:4560
+#: src/main/builtin.cpp:566 src/main/connections.cpp:4560
 #: src/main/connections.cpp:4945 src/main/connections.cpp:4972
 #: src/main/connections.cpp:5353 src/main/connections.cpp:5416
 #: src/main/connections.cpp:5641 src/main/connections.cpp:5645
@@ -1633,52 +1632,52 @@ msgstr "'parent' no és un entorn"
 msgid "cannot write to this connection"
 msgstr "no s'ha pogut escriure a aquesta connexió"
 
-#: src/main/builtin.cpp:572
+#: src/main/builtin.cpp:571
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "especificació «%s» no vàlida"
 
-#: src/main/builtin.cpp:589
+#: src/main/builtin.cpp:588
 #, fuzzy
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "s'ignorarà l'argument «emplenat» no positiu"
 
-#: src/main/builtin.cpp:660
+#: src/main/builtin.cpp:659
 #, fuzzy, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "l'argument %d (tipus «%s») no es pot gestionar amb «cat»"
 
-#: src/main/builtin.cpp:799
+#: src/main/builtin.cpp:798
 #, fuzzy
 msgid "too long for a pairlist"
 msgstr "... no és una llista de parelles"
 
-#: src/main/builtin.cpp:803
+#: src/main/builtin.cpp:802
 #, fuzzy, c-format
 msgid "vector: cannot make a vector of mode '%s'."
 msgstr "vector: no es pot crear un vector de mode '%s'."
 
-#: src/main/builtin.cpp:831
+#: src/main/builtin.cpp:830
 #, fuzzy
 msgid "cannot set length of non-(vector or list)"
 msgstr "no s'ha pogut establir la longitud del no-(vector o llista)"
 
-#: src/main/builtin.cpp:832 src/main/character.cpp:679 src/main/coerce.cpp:3097
+#: src/main/builtin.cpp:831 src/main/character.cpp:679 src/main/coerce.cpp:3097
 #, fuzzy
 msgid "invalid value"
 msgstr "valor no vàlid"
 
-#: src/main/builtin.cpp:834
+#: src/main/builtin.cpp:833
 #, fuzzy
 msgid "length of NULL cannot be changed"
 msgstr "no es pot canviar la longitud de NULL"
 
-#: src/main/builtin.cpp:954 src/main/envir.cpp:2257 src/main/envir.cpp:2265
+#: src/main/builtin.cpp:953 src/main/envir.cpp:2257 src/main/envir.cpp:2265
 #, fuzzy, c-format
 msgid "wrong length for '%s' argument"
 msgstr "longitud incorrecta per a l'argument «%s»"
 
-#: src/main/builtin.cpp:984 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
+#: src/main/builtin.cpp:983 src/main/coerce.cpp:2800 src/main/coerce.cpp:2843
 #: src/main/eval.cpp:1078 src/main/eval.cpp:1240 src/main/eval.cpp:3715
 #: src/main/eval.cpp:3804 src/main/eval.cpp:3875 src/main/eval.cpp:4222
 #: src/main/eval.cpp:7947 src/main/eval.cpp:8090
@@ -1686,23 +1685,23 @@ msgstr "longitud incorrecta per a l'argument «%s»"
 msgid "'...' used in an incorrect context"
 msgstr "'...' utilitzat en un context incorrecte"
 
-#: src/main/builtin.cpp:1006
+#: src/main/builtin.cpp:1005
 #, fuzzy, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "els valors per defecte de «commutar» són duplicats: «%s» i «%s»"
 
-#: src/main/builtin.cpp:1039 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
+#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2685 src/main/dotcode.cpp:564
 #: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3734
 #, fuzzy, c-format
 msgid "'%s' is missing"
 msgstr "falta «%s»"
 
-#: src/main/builtin.cpp:1043 src/main/eval.cpp:8500
+#: src/main/builtin.cpp:1042 src/main/eval.cpp:8500
 #, fuzzy
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR ha de ser un vector de longitud 1"
 
-#: src/main/builtin.cpp:1046 src/main/eval.cpp:8503
+#: src/main/builtin.cpp:1045 src/main/eval.cpp:8503
 #, fuzzy, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1711,11 +1710,11 @@ msgstr ""
 "EXPR és un \"factor\", tractat com a enter.\n"
 " Considereu utilitzar «%s»."
 
-#: src/main/builtin.cpp:1093
+#: src/main/builtin.cpp:1092
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1102 src/main/eval.cpp:8512 src/main/eval.cpp:8540
+#: src/main/builtin.cpp:1101 src/main/eval.cpp:8512 src/main/eval.cpp:8540
 msgid "'switch' with no alternatives"
 msgstr "«switch» sense cap alternativa"
 
@@ -5917,121 +5916,121 @@ msgstr ""
 msgid "Setting LC_TIME=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:988
+#: src/main/main.cpp:987
 msgid "Setting LC_CTYPE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:991
+#: src/main/main.cpp:990
 msgid "Setting LC_COLLATE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:994
+#: src/main/main.cpp:993
 msgid "Setting LC_TIME failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:998
+#: src/main/main.cpp:997
 msgid "Setting LC_MESSAGES failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1004
+#: src/main/main.cpp:1003
 msgid "Setting LC_MONETARY failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1009
+#: src/main/main.cpp:1008
 msgid "Setting LC_PAPER failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1014
+#: src/main/main.cpp:1013
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1047
+#: src/main/main.cpp:1046
 #, fuzzy, c-format
 msgid "Using locale code page other than %d%s may cause problems."
 msgstr "l'ús de la pàgina de codi local diferent de %d%s pot causar problemes"
 
-#: src/main/main.cpp:1074
+#: src/main/main.cpp:1073
 #, fuzzy
 msgid "unable to open the base package\n"
 msgstr "no s'ha pogut obrir el paquet base\n"
 
-#: src/main/main.cpp:1132
+#: src/main/main.cpp:1131
 #, fuzzy
 msgid "allocation failure in setup_Rmainloop"
 msgstr "ha fallat l'assignació a R_tmpnam2"
 
-#: src/main/main.cpp:1166
+#: src/main/main.cpp:1165
 #, fuzzy, c-format
 msgid "unable to restore saved data in %s\n"
 msgstr "no s'han pogut restaurar les dades desades a %s\n"
 
-#: src/main/main.cpp:1220
+#: src/main/main.cpp:1219
 #, fuzzy
 msgid "Warning message during startup:"
 msgid_plural "Warning messages during startup:"
 msgstr[0] "Missatge d'avís:"
 msgstr[1] "Missatges d'avís:"
 
-#: src/main/main.cpp:1238
+#: src/main/main.cpp:1237
 #, fuzzy
 msgid "unable to initialize the JIT\n"
 msgstr "no s'ha pogut inicialitzar el JIT\n"
 
-#: src/main/main.cpp:1479
+#: src/main/main.cpp:1478
 #, fuzzy
 msgid "non-interactive browser() -- left over from debugging?"
 msgstr "navegador no interactiu() -- s'ha deixat de depuració?"
 
-#: src/main/main.cpp:1611
+#: src/main/main.cpp:1610
 #, fuzzy
 msgid "cannot quit from browser"
 msgstr "no es pot sortir del navegador"
 
-#: src/main/main.cpp:1615
+#: src/main/main.cpp:1614
 #, fuzzy
 msgid "one of \"yes\", \"no\", \"ask\" or \"default\" expected."
 msgstr "s'esperava un de «sí», «no», «pregunta» o «predeterminat»."
 
-#: src/main/main.cpp:1620
+#: src/main/main.cpp:1619
 #, fuzzy
 msgid "save=\"ask\" in non-interactive use: command-line default will be used"
 msgstr "save\"\"ask\" in non-interactive use: s'utilitzarà el valor per defecte de la línia d'ordres"
 
-#: src/main/main.cpp:1628
+#: src/main/main.cpp:1627
 #, fuzzy
 msgid "unrecognized value of 'save'"
 msgstr "valor no reconegut de «desa»"
 
-#: src/main/main.cpp:1631
+#: src/main/main.cpp:1630
 #, fuzzy
 msgid "invalid 'status', 0 assumed"
 msgstr "'estat' no vàlid, s'assumeix 0"
 
-#: src/main/main.cpp:1636
+#: src/main/main.cpp:1635
 #, fuzzy
 msgid "invalid 'runLast', FALSE assumed"
 msgstr "«runLast» no vàlid, s'assumeix «FALSE»"
 
-#: src/main/main.cpp:1680
+#: src/main/main.cpp:1679
 #, fuzzy
 msgid "cannot allocate space for toplevel callback element"
 msgstr "no s'ha pogut assignar espai per a l'element de crida de retorn de nivell superior"
 
-#: src/main/main.cpp:1766
+#: src/main/main.cpp:1765
 #, fuzzy
 msgid "negative index passed to R_removeTaskCallbackByIndex"
 msgstr "Índex negatiu passat a R_removeTaskCallbackByIndex"
 
-#: src/main/main.cpp:1885
+#: src/main/main.cpp:1884
 msgid "list of toplevel callbacks was corrupted"
 msgstr ""
 
-#: src/main/main.cpp:1890
+#: src/main/main.cpp:1889
 #, fuzzy, c-format
 msgid "warning messages from top-level task callback '%s'\n"
 msgstr "missatges d'avís de la crida de retorn de tasques de nivell superior «%s»\n"
 
-#: src/main/main.cpp:1980
+#: src/main/main.cpp:1979
 #, fuzzy
 msgid "top-level task callback did not return a logical value"
 msgstr "la crida de retorn de la tasca de nivell superior no ha retornat un valor lògic"

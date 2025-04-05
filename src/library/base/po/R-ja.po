@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:28\n"
+"POT-Creation-Date: 2025-04-05 17:15\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1123,16 +1123,6 @@ msgstr "これ以上の情報はディレクトリ %s にあるビニエット�
 #. R/warnings.R: gettextf("In %s", sQuote(cmd), domain = "R-base")
 #: R/warnings.R:0
 msgid "In %s"
-msgstr ""
-
-#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
-#: R/stop.R:0
-msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
-msgstr ""
-
-#. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
-#: R/stop.R:0
-msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
 msgstr ""
 
 #. R/library.R: gettext("Index:")
@@ -2479,11 +2469,6 @@ msgstr "'lib.loc' 中にライブラリーツリーがありません"
 #: R/match.R:0
 msgid "no match"
 msgstr "マッチしません"
-
-#. R/stop.R: gettextf("no natural language support or missing translations")
-#: R/stop.R:0
-msgid "no natural language support or missing translations"
-msgstr ""
 
 #. R/library.R: message("no packages found")
 #: R/library.R:0

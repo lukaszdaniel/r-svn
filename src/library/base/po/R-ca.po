@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:28\n"
+"POT-Creation-Date: 2025-04-05 17:15\n"
 "PO-Revision-Date: 2023-11-20 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -1104,16 +1104,6 @@ msgstr "Hi ha més informació disponible a les vinyetes següents al directori 
 #. R/warnings.R: gettextf("In %s", sQuote(cmd), domain = "R-base")
 #: R/warnings.R:0
 msgid "In %s"
-msgstr ""
-
-#. R/stop.R: gettextf("In bare C locale, not forcing locale; possibly use 'force = TRUE'?")
-#: R/stop.R:0
-msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
-msgstr ""
-
-#. R/stop.R: gettextf("In bare C locale: LANGUAGE reset, but message language may be unchanged")
-#: R/stop.R:0
-msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
 msgstr ""
 
 #. R/library.R: gettext("Index:")
@@ -2444,11 +2434,6 @@ msgstr "no s'ha trobat cap arbre de biblioteques a «lib.loc»"
 #: R/match.R:0
 msgid "no match"
 msgstr "sense coincidència"
-
-#. R/stop.R: gettextf("no natural language support or missing translations")
-#: R/stop.R:0
-msgid "no natural language support or missing translations"
-msgstr ""
 
 #. R/library.R: message("no packages found")
 #: R/library.R:0
