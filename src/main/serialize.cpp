@@ -651,11 +651,7 @@ static void InFormat(R_inpstream_t stream)
  * Hashing functions for hashing reference objects during writing.
  * Objects are entered, and the order in which they are encountered is
  * recorded.  HashGet returns this number, a positive integer, if the
- * object was seen before, and zero if not.  A fixed hash table size
- * is used; this is not ideal but seems adequate for now.  The hash
- * table representation consists of a (R_NilValue . vector) pair.  The
- * hash buckets are in the vector.  This indirect representation
- * should allow resizing the table at some point.
+ * object was seen before, and zero if not.
  */
 
 #define HASHSIZE 1099

@@ -922,9 +922,9 @@ static SEXP xxexprlist1(SEXP expr, YYLTYPE *lloc)
 	PRESERVE_SV(ans = NewList());
 	if (ParseState.keepSrcRefs) {
 	    setAttrib(ans, R_SrcrefSymbol, PS_SRCREFS);
-	    SEXP s = PROTECT(makeSrcref(lloc, PS_SRCFILE));
+	    GCStackRoot<> s;
+	    s = makeSrcref(lloc, PS_SRCFILE);
 	    SetSingleSrcRef(s);
-	    UNPROTECT(1); /* s */
 	}
 	GrowList(ans, expr);
     }
@@ -939,9 +939,9 @@ static SEXP xxexprlist2(SEXP exprlist, SEXP expr, YYLTYPE *lloc)
     SEXP ans;
     if (GenerateCode) {
 	if (ParseState.keepSrcRefs) {
-	    SEXP s = PROTECT(makeSrcref(lloc, PS_SRCFILE));
+	    GCStackRoot<> s;
+	    s = makeSrcref(lloc, PS_SRCFILE);
 	    AppendToSrcRefs(s);
-	    UNPROTECT(1); /* s */
 	}
 	GrowList(exprlist, expr);
 	ans = exprlist;

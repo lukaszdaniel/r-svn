@@ -138,7 +138,7 @@ static SEXP applyMethod(SEXP call, SEXP op, SEXP args, SEXP rho, SEXP newvars)
 	check_stack_balance(op, save);
     }
     else if (TYPEOF(op) == CLOSXP) {
-	ans = applyClosure(call, op, args, rho, newvars, FALSE);
+	ans = applyClosure(call, op, args, rho, newvars, false);
     }
     else
 	ans = R_NilValue;  /* for -Wall */
@@ -1560,17 +1560,17 @@ attribute_hidden
 bool R::R_has_methods(SEXP op)
 {
     R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr(); int offset;
-    if(NOT_METHODS_DISPATCH_PTR(ptr))
-	return FALSE;
-    if(!op || TYPEOF(op) == CLOSXP) /* except for primitives, just test for the package */
-	return TRUE;
-    if(!allowPrimitiveMethods) /* all primitives turned off by a call to R_set_prim */
-	return FALSE;
+    if (NOT_METHODS_DISPATCH_PTR(ptr))
+	return false;
+    if (!op || TYPEOF(op) == CLOSXP) /* except for primitives, just test for the package */
+	return true;
+    if (!allowPrimitiveMethods) /* all primitives turned off by a call to R_set_prim */
+	return false;
     offset = PRIMOFFSET(op);
-    if(offset > curMaxOffset || prim_methods[offset] == NO_METHODS
+    if (offset > curMaxOffset || prim_methods[offset] == NO_METHODS
        || prim_methods[offset] == SUPPRESSED)
-	return FALSE;
-    return TRUE;
+	return false;
+    return true;
 }
 
 static SEXP deferred_default_object;
@@ -1603,7 +1603,8 @@ attribute_hidden
 std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		    bool promisedArgs)
 {
-    SEXP fundef, value, mlist=R_NilValue, s, a, b, suppliedvars;
+    SEXP fundef, value, s, a, b, suppliedvars;
+    GCStackRoot<> mlist(R_NilValue);
     int offset;
     prim_methods_t current;
     offset = PRIMOFFSET(op);
@@ -1619,10 +1620,9 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 	   R_preserveobject, so later we can just grab mlist from
 	   prim_mlist */
 	do_set_prim_method(op, "suppressed", R_NilValue, mlist);
-	PROTECT(mlist = get_primitive_methods(op, rho));
+	mlist = get_primitive_methods(op, rho);
 	do_set_prim_method(op, "set", R_NilValue, mlist);
 	current = prim_methods[offset]; /* as revised by do_set_prim_method */
-	UNPROTECT(1);
     }
     mlist = prim_mlist[offset];
     if(mlist && !isNull(mlist)
@@ -1642,7 +1642,7 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 		if (length(s) != length(args)) error("%s", _("dispatch error"));
 		for (a = args, b = s; a != R_NilValue; a = CDR(a), b = CDR(b))
 		    IF_PROMSXP_SET_PRVALUE(CAR(b), CAR(a));
-		value =  applyClosure(call, value, s, rho, suppliedvars, TRUE);
+		value =  applyClosure(call, value, s, rho, suppliedvars, true);
 		UNPROTECT(2);
 		return std::make_pair(true, value);
 	    } else {
@@ -1650,7 +1650,7 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 		for (SEXP a = args; a != R_NilValue; a = CDR(a))
 		    INCREMENT_REFCNT(CAR(a));
 		value = applyClosure(call, value, args, rho,
-				     suppliedvars, FALSE);
+				     suppliedvars, false);
 		for (SEXP a = args; a != R_NilValue; a = CDR(a))
 		    DECREMENT_REFCNT(CAR(a));
                 UNPROTECT(1);
@@ -1670,13 +1670,13 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 	if (length(s) != length(args)) error("%s", _("dispatch error"));
 	for (a = args, b = s; a != R_NilValue; a = CDR(a), b = CDR(b))
 	    IF_PROMSXP_SET_PRVALUE(CAR(b), CAR(a));
-	value = applyClosure(call, fundef, s, rho, R_NilValue, TRUE);
+	value = applyClosure(call, fundef, s, rho, R_NilValue, true);
 	UNPROTECT(1);
     } else {
 	/* INC/DEC of REFCNT needed for non-tracking args */
 	for (SEXP a = args; a != R_NilValue; a = CDR(a))
 	    INCREMENT_REFCNT(CAR(a));
-	value = applyClosure(call, fundef, args, rho, R_NilValue, FALSE);
+	value = applyClosure(call, fundef, args, rho, R_NilValue, false);
 	for (SEXP a = args; a != R_NilValue; a = CDR(a))
 	    DECREMENT_REFCNT(CAR(a));
     }

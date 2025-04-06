@@ -1308,19 +1308,19 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(enc) != STRSXP)
 	error("%s", _("a character vector 'value' expected"));
     m = LENGTH(enc);
-    if(m == 0)
+    if (m == 0)
 	error("%s", _("'value' must be of positive length"));
-    if(MAYBE_REFERENCED(x)) x = duplicate(x);
+    if (MAYBE_REFERENCED(x)) x = duplicate(x);
     PROTECT(x);
     n = XLENGTH(x);
-    for(i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {
 	cetype_t ienc = CE_NATIVE;
 	this_ = CHAR(STRING_ELT(enc, i % m)); /* ASCII */
-	if(streql(this_, "latin1")) ienc = CE_LATIN1;
-	else if(streql(this_, "UTF-8")) ienc = CE_UTF8;
-	else if(streql(this_, "bytes")) ienc = CE_BYTES;
+	if (streql(this_, "latin1")) ienc = CE_LATIN1;
+	else if (streql(this_, "UTF-8")) ienc = CE_UTF8;
+	else if (streql(this_, "bytes")) ienc = CE_BYTES;
 	tmp = STRING_ELT(x, i);
-	if(tmp == NA_STRING) continue;
+	if (tmp == NA_STRING) continue;
 	if (! ((ienc == CE_LATIN1 && IS_LATIN1(tmp)) ||
 	       (ienc == CE_UTF8   && IS_UTF8(tmp))   ||
 	       (ienc == CE_BYTES  && IS_BYTES(tmp))  ||
@@ -1336,9 +1336,9 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP R::markKnown(const char *s, SEXP ref)
 {
     cetype_t ienc = CE_NATIVE;
-    if(ENC_KNOWN(ref)) {
-	if(known_to_be_latin1) ienc = CE_LATIN1;
-	if(known_to_be_utf8) ienc = CE_UTF8;
+    if (ENC_KNOWN(ref)) {
+	if (known_to_be_latin1) ienc = CE_LATIN1;
+	if (known_to_be_utf8) ienc = CE_UTF8;
     }
     return mkCharCE(s, ienc);
 }
@@ -1346,8 +1346,8 @@ attribute_hidden SEXP R::markKnown(const char *s, SEXP ref)
 bool R::strIsASCII(const char *str)
 {
     for (const char *p = str; *p; p++)
-	if((unsigned int)*p > 0x7F) return FALSE;
-    return TRUE;
+	if ((unsigned int)*p > 0x7F) return false;
+    return true;
 }
 
 /* Number of additional bytes */
@@ -1504,7 +1504,7 @@ size_t Rf_utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs32'"), s);
 	    if (m == 0) break;
 	    if (IS_HIGH_SURROGATE(*p)) *p = utf8toucs32(*p, s);
-	    res ++;
+	    res++;
 	    if (res >= (ssize_t) n) break;
 	}
     else
@@ -1513,7 +1513,7 @@ size_t Rf_utf8towcs4(R_wchar_t *wc, const char *s, size_t n)
 	    m  = (ssize_t) utf8toucs(&local, t);
 	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs32'"), s);
 	    if (m == 0) break;
-	    res ++;
+	    res++;
 	}
     return (size_t) res;
 }

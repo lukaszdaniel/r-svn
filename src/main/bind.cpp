@@ -1188,7 +1188,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args_, SEXP env)
 	    args = CDR(args); /* discard 'deparse.level' */
 	else
 	    SET_TAG(args, install("deparse.level")); /* tag 'deparse.level' */
-	SEXP ans = applyClosure(call, method, args, env, R_NilValue, TRUE);
+	SEXP ans = applyClosure(call, method, args, env, R_NilValue, true);
 	return ans;
     } else
 	args = CDR(args); /* discard 'deparse.level' */
