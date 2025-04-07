@@ -44,6 +44,7 @@
 #include <cstdlib>
 #include <R_ext/Minmax.h>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -1038,7 +1039,7 @@ static bool getccol(DEstruct DE)
 
 static SEXP processEscapes(SEXP x)
 {
-    SEXP newval, pattern, replacement, expr;
+    CXXR::GCStackRoot<> newval, pattern, replacement, expr;
     ParseStatus status;
 
     /* We process escape sequences in a scalar string by escaping
@@ -1053,27 +1054,27 @@ static SEXP processEscapes(SEXP x)
        code from the parser.  We need it in C code because this may be executed
        numerous times from C in dataentry.c */
 
-    PROTECT( pattern = mkString("(?<!\\\\)((\\\\\\\\)*)\"") );
-    PROTECT( replacement = mkString("\\1\\\\\"") );
+    pattern = mkString("(?<!\\\\)((\\\\\\\\)*)\"");
+    replacement = mkString("\\1\\\\\"");
     SEXP s_gsub = install("gsub");
-    PROTECT( expr = lang5(s_gsub, ScalarLogical(1), pattern, replacement, x) );
+    expr = lang5(s_gsub, ScalarLogical(1), pattern, replacement, x);
     SET_TAG( CDR(expr), install("perl") );
 
-    PROTECT( newval = eval(expr, R_BaseEnv) );
-    PROTECT( pattern = mkString("(^.*$)") );
-    PROTECT( replacement = mkString("\"\\1\"") );
-    PROTECT( expr = lang4(install("sub"), pattern, replacement, newval) );
-    PROTECT( newval = eval(expr, R_BaseEnv) );
-    PROTECT( expr = R_ParseVector( newval, 1, &status, R_NilValue) );
+    newval = eval(expr, R_BaseEnv);
+    pattern = mkString("(^.*$)");
+    replacement = mkString("\"\\1\"");
+    expr = lang4(install("sub"), pattern, replacement, newval);
+    newval = eval(expr, R_BaseEnv);
+    expr = R_ParseVector( newval, 1, &status, R_NilValue);
 
     /* We only handle the first entry. If this were available more generally,
        we'd probably want to loop over all of expr */
 
     if (status == PARSE_OK && length(expr))
-	PROTECT( newval = eval(XVECTOR_ELT(expr, 0), R_BaseEnv) );
+	newval = eval(XVECTOR_ELT(expr, 0), R_BaseEnv);
     else
-	PROTECT( newval = R_NilValue );  /* protect just so the count doesn't change */
-    UNPROTECT(10);
+	newval = R_NilValue;  /* protect just so the count doesn't change */
+
     return newval;
 }
 

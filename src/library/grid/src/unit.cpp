@@ -22,6 +22,7 @@
 #include <cmath>
 #include <cfloat>
 #include <cstring>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include "grid.h"
@@ -220,97 +221,93 @@ int pureNullUnit(SEXP unit, int index, pGEDevDesc dd) {
 	 * and width/height(grob) is pure null
 	 */
 	if (unitUnit(unit, index) == L_GROBWIDTH) {
-	    SEXP grob, updatedgrob, width;
-	    SEXP widthPreFn, widthFn, widthPostFn, findGrobFn;
-	    SEXP R_fcall0, R_fcall1, R_fcall2, R_fcall3;
-	    SEXP savedgpar, savedgrob;
+	    GCStackRoot<> grob, updatedgrob, width;
+	    GCStackRoot<> widthPreFn, widthFn, widthPostFn, findGrobFn;
+	    GCStackRoot<> R_fcall0, R_fcall1, R_fcall2, R_fcall3;
+	    GCStackRoot<> savedgpar, savedgrob;
 	    /*
 	     * The data could be a gPath to a grob
 	     * In this case, need to find the grob first, and in order
 	     * to do that correctly, need to call pre/postDraw code 
 	     */
-	    PROTECT(grob = unitData(unit, index));
-	    PROTECT(savedgpar = gridStateElement(dd, GSS_GPAR));
-	    PROTECT(savedgrob = gridStateElement(dd, GSS_CURRGROB));
-	    PROTECT(widthPreFn = findFun(install("preDraw"), 
-					 R_gridEvalEnv));
-	    PROTECT(widthFn = findFun(install("width"), R_gridEvalEnv));
-	    PROTECT(widthPostFn = findFun(install("postDraw"), 
-					  R_gridEvalEnv));
+	    grob = unitData(unit, index);
+	    savedgpar = gridStateElement(dd, GSS_GPAR);
+	    savedgrob = gridStateElement(dd, GSS_CURRGROB);
+	    widthPreFn = findFun(install("preDraw"), 
+					 R_gridEvalEnv);
+	    widthFn = findFun(install("width"), R_gridEvalEnv);
+	    widthPostFn = findFun(install("postDraw"), 
+					  R_gridEvalEnv);
 	    if (inherits(grob, "gPath")) {
 		if (isNull(savedgrob)) {
-		    PROTECT(findGrobFn = findFun(install("findGrobinDL"), 
-						 R_gridEvalEnv));
-		    PROTECT(R_fcall0 = lang2(findGrobFn, 
-					     getListElement(grob, "name")));
+		    findGrobFn = findFun(install("findGrobinDL"),
+						 R_gridEvalEnv);
+		    R_fcall0 = lang2(findGrobFn, 
+					     getListElement(grob, "name"));
 		    grob = eval(R_fcall0, R_gridEvalEnv);
 		} else {
-		    PROTECT(findGrobFn =findFun(install("findGrobinChildren"), 
-						R_gridEvalEnv));
-		    PROTECT(R_fcall0 = lang3(findGrobFn, 
+		    findGrobFn =findFun(install("findGrobinChildren"), 
+						R_gridEvalEnv);
+		    R_fcall0 = lang3(findGrobFn, 
 					     getListElement(grob, "name"),
 					     getListElement(savedgrob, 
-							    "children")));
+							    "children"));
 		    grob = eval(R_fcall0, R_gridEvalEnv);
 		}
-		UNPROTECT(2);
 	    }
-	    PROTECT(R_fcall1 = lang2(widthPreFn, grob));
-            PROTECT(updatedgrob = eval(R_fcall1, R_gridEvalEnv));
-	    PROTECT(R_fcall2 = lang2(widthFn, updatedgrob));
-	    PROTECT(width = eval(R_fcall2, R_gridEvalEnv));
+	    R_fcall1 = lang2(widthPreFn, grob);
+        updatedgrob = eval(R_fcall1, R_gridEvalEnv);
+	    R_fcall2 = lang2(widthFn, updatedgrob);
+	    width = eval(R_fcall2, R_gridEvalEnv);
 	    result = pureNullUnit(width, 0, dd);
-	    PROTECT(R_fcall3 = lang2(widthPostFn, updatedgrob));
+	    R_fcall3 = lang2(widthPostFn, updatedgrob);
 	    eval(R_fcall3, R_gridEvalEnv);
 	    setGridStateElement(dd, GSS_GPAR, savedgpar);
 	    setGridStateElement(dd, GSS_CURRGROB, savedgrob);
-	    UNPROTECT(11);
 	} else if (unitUnit(unit, index) == L_GROBHEIGHT) {
-	    SEXP grob, updatedgrob, height;
-	    SEXP heightPreFn, heightFn, heightPostFn, findGrobFn;
-	    SEXP R_fcall0, R_fcall1, R_fcall2, R_fcall3;
-	    SEXP savedgpar, savedgrob;
+	    GCStackRoot<> grob, updatedgrob, height;
+	    GCStackRoot<> heightPreFn, heightFn, heightPostFn, findGrobFn;
+	    GCStackRoot<> R_fcall0, R_fcall1, R_fcall2, R_fcall3;
+	    GCStackRoot<> savedgpar, savedgrob;
 	    /*
 	     * The data could be a gPath to a grob
 	     * In this case, need to find the grob first, and in order
 	     * to do that correctly, need to call pre/postDraw code 
 	     */
-	    PROTECT(grob = unitData(unit, index));
-	    PROTECT(savedgpar = gridStateElement(dd, GSS_GPAR));
-	    PROTECT(savedgrob = gridStateElement(dd, GSS_CURRGROB));
-	    PROTECT(heightPreFn = findFun(install("preDraw"), 
-					 R_gridEvalEnv));
-	    PROTECT(heightFn = findFun(install("height"), R_gridEvalEnv));
-	    PROTECT(heightPostFn = findFun(install("postDraw"), 
-					  R_gridEvalEnv));
+	    grob = unitData(unit, index);
+	    savedgpar = gridStateElement(dd, GSS_GPAR);
+	    savedgrob = gridStateElement(dd, GSS_CURRGROB);
+	    heightPreFn = findFun(install("preDraw"),
+					 R_gridEvalEnv);
+	    heightFn = findFun(install("height"), R_gridEvalEnv);
+	    heightPostFn = findFun(install("postDraw"),
+					  R_gridEvalEnv);
 	    if (inherits(grob, "gPath")) {
 		if (isNull(savedgrob)) {
-		    PROTECT(findGrobFn = findFun(install("findGrobinDL"), 
-						 R_gridEvalEnv));
-		    PROTECT(R_fcall0 = lang2(findGrobFn, 
-					     getListElement(grob, "name")));
+		    findGrobFn = findFun(install("findGrobinDL"),
+						 R_gridEvalEnv);
+		    R_fcall0 = lang2(findGrobFn,
+					     getListElement(grob, "name"));
 		    grob = eval(R_fcall0, R_gridEvalEnv);
 		} else {
-		    PROTECT(findGrobFn =findFun(install("findGrobinChildren"), 
-						R_gridEvalEnv));
-		    PROTECT(R_fcall0 = lang3(findGrobFn, 
+		    findGrobFn =findFun(install("findGrobinChildren"),
+						R_gridEvalEnv);
+		    R_fcall0 = lang3(findGrobFn, 
 					     getListElement(grob, "name"),
-					     getListElement(savedgrob, 
-							    "children")));
+					     getListElement(savedgrob,
+							    "children"));
 		    grob = eval(R_fcall0, R_gridEvalEnv);
 		}
-		UNPROTECT(2);
 	    }
-	    PROTECT(R_fcall1 = lang2(heightPreFn, grob));
-	    PROTECT(updatedgrob = eval(R_fcall1, R_gridEvalEnv));
-	    PROTECT(R_fcall2 = lang2(heightFn, updatedgrob));
-	    PROTECT(height = eval(R_fcall2, R_gridEvalEnv));
+	    R_fcall1 = lang2(heightPreFn, grob);
+	    updatedgrob = eval(R_fcall1, R_gridEvalEnv);
+	    R_fcall2 = lang2(heightFn, updatedgrob);
+	    height = eval(R_fcall2, R_gridEvalEnv);
 	    result = pureNullUnit(height, 0, dd);
-	    PROTECT(R_fcall3 = lang2(heightPostFn, updatedgrob));
+	    R_fcall3 = lang2(heightPostFn, updatedgrob);
 	    eval(R_fcall3, R_gridEvalEnv);
 	    setGridStateElement(dd, GSS_GPAR, savedgpar);
 	    setGridStateElement(dd, GSS_CURRGROB, savedgrob);
-	    UNPROTECT(11);
 	} else
 	    result = unitUnit(unit, index) == L_NULL;
     }

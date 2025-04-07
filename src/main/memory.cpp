@@ -516,19 +516,19 @@ attribute_hidden bool R::R_SetMaxVSize(R_size_t size)
 {
     if (size == R_SIZE_T_MAX) {
 	R_MaxVSize = R_SIZE_T_MAX;
-	return TRUE;
+	return true;
     }
     if (vsfac == 1) {
 	if (size >= R_VSize) {
 	    R_MaxVSize = size;
-	    return TRUE;
+	    return true;
 	}
     } else 
 	if (size / vsfac >= R_VSize) {
 	    R_MaxVSize = (size + 1) / vsfac;
-	    return TRUE;
+	    return true;
 	}
-    return FALSE;
+    return false;
 }
 
 attribute_hidden R_size_t R::R_GetMaxNSize(void)
@@ -540,9 +540,9 @@ attribute_hidden bool R::R_SetMaxNSize(R_size_t size)
 {
     if (size >= R_NSize) {
 	R_MaxNSize = size;
-	return TRUE;
+	return true;
     }
-    return FALSE;
+    return false;
 }
 
 attribute_hidden void R::R_SetPPSize(R_size_t size)
@@ -2155,7 +2155,7 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 
 attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP value;
+    GCStackRoot<> value;
 
     checkArity(op, args);
     std::ostream *old_report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
@@ -2172,7 +2172,7 @@ Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
 
     GCManager::setReporting(old_report_os);
     /*- now return the [used , gc trigger size] for cells and heap */
-    PROTECT(value = allocVector(REALSXP, 14));
+    value = allocVector(REALSXP, 14);
     REAL(value)[0] = GCNode::numNodes();
     REAL(value)[1] = MemoryBank::bytesAllocated()/sizeof(double);
     REAL(value)[4] = R_NSize;
@@ -2194,7 +2194,7 @@ Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
     REAL(value)[11] = R_V_maxused;
     REAL(value)[12] = 0.1*ceil(10. * R_N_maxused/Mega*sizeof(RObject));
     REAL(value)[13] = 0.1*ceil(10. * R_V_maxused/Mega*vsfac);
-    UNPROTECT(1);
+
     return value;
 }
 
@@ -2905,17 +2905,17 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 	  R_VSize += expand;
       }
 
-      s_gc_pending = TRUE;
+      s_gc_pending = true;
       return;
     }
-    s_gc_pending = FALSE;
+    s_gc_pending = false;
 
     double ncells, vcells, vfrac, nfrac;
     BadObject bad_object;
     unsigned int gens_collected = 0;
 
 #ifdef IMMEDIATE_FINALIZERS
-    bool first = TRUE;
+    bool first = true;
     bool ok = false;
     while (!ok) {
     ok = true;
@@ -2938,7 +2938,7 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 
     if (R_check_constants > 2 ||
 	    (R_check_constants > 1 && gens_collected == GCNode::numOldGenerations()))
-	R_checkConstants(TRUE);
+	R_checkConstants(true);
 
     if (s_os) {
 	REprintf("Garbage collection %d = %d", s_gc_count, s_gen_gc_counts[0]);
@@ -3001,12 +3001,12 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 
 attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, nms;
+    checkArity(op, args);
+    GCStackRoot<> ans, nms;
     int tmp;
 
-    checkArity(op, args);
-    PROTECT(ans = allocVector(INTSXP, 24));
-    PROTECT(nms = allocVector(STRSXP, 24));
+    ans = allocVector(INTSXP, 24);
+    nms = allocVector(STRSXP, 24);
     for (unsigned int i = 0; i < 24; i++) {
 	INTEGER(ans)[i] = 0;
 	SET_STRING_ELT(nms, i, type2str((SEXPTYPE) (i > LGLSXP? i+2 : i)));
@@ -3027,7 +3027,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 	  }
       }
     } END_SUSPEND_INTERRUPTS;
-    UNPROTECT(2);
+
     return ans;
 }
 

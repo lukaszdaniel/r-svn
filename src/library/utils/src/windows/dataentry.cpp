@@ -752,7 +752,7 @@ static void highlightrect(DEstruct DE)
 static bool getccol(DEstruct DE)
 {
     SEXP tmp, tmp2;
-    int i, len, newlen, wcol, wrow;
+    int len, newlen, wcol, wrow;
     SEXPTYPE type;
     char clab[25];
     bool newcol = FALSE;
@@ -784,7 +784,7 @@ static bool getccol(DEstruct DE)
 	for (newlen = max(len * 2, 10) ; newlen < wrow ; newlen *= 2)
 	    ;
 	tmp2 = ssNewVector(DE, type, newlen);
-	for (i = 0; i < len; i++)
+	for (int i = 0; i < len; i++)
 	    if (type == REALSXP)
 		REAL(tmp2)[i] = REAL(tmp)[i];
 	    else if (type == STRSXP)
@@ -798,7 +798,7 @@ static bool getccol(DEstruct DE)
 
 static SEXP processEscapes(SEXP x)
 {
-    SEXP newval, pattern, replacement, expr;
+    GCStackRoot<> newval, pattern, replacement, expr;
     ParseStatus status;
 
     /* We process escape sequences in a scalar string by escaping
@@ -813,38 +813,34 @@ static SEXP processEscapes(SEXP x)
        code from the parser.  We need it in C code because this may be executed
        numerous times from C in dataentry.c */
 
-    PROTECT( pattern = mkString("(?<!\\\\)((\\\\\\\\)*)\"") );
-    PROTECT( replacement = mkString("\\1\\\\\"") );
+    pattern = mkString("(?<!\\\\)((\\\\\\\\)*)\"");
+    replacement = mkString("\\1\\\\\"");
     SEXP s_gsub = install("gsub");
-    PROTECT( expr = lang5(s_gsub, ScalarLogical(1), pattern, replacement, x) );
+    expr = lang5(s_gsub, ScalarLogical(1), pattern, replacement, x);
     SET_TAG( CDR(expr), install("perl") );
 
     newval = R_tryEval(expr, R_BaseEnv, NULL);
     if (!newval) {
 	/* gsub will throw error for invalid string */
-	UNPROTECT(3);
 	return R_NilValue;
     }
-    PROTECT( newval );
-    PROTECT( pattern = mkString("(^.*$)") );
-    PROTECT( replacement = mkString("\"\\1\"") );
-    PROTECT( expr = lang4(install("sub"), pattern, replacement, newval) );
+    pattern = mkString("(^.*$)");
+    replacement = mkString("\"\\1\"");
+    expr = lang4(install("sub"), pattern, replacement, newval);
     newval = R_tryEval(expr, R_BaseEnv, NULL);
     if (!newval) {
-	UNPROTECT(7);
 	return R_NilValue;
     }
-    PROTECT( newval );
-    PROTECT( expr = R_ParseVector( newval, 1, &status, R_NilValue) );
+    expr = R_ParseVector( newval, 1, &status, R_NilValue);
 
     /* We only handle the first entry. If this were available more generally,
        we'd probably want to loop over all of expr */
 
     if (status == PARSE_OK && length(expr))
-	PROTECT( newval = eval(XVECTOR_ELT(expr, 0), R_BaseEnv) );
+	newval = eval(XVECTOR_ELT(expr, 0), R_BaseEnv);
     else
-	PROTECT( newval = R_NilValue );  /* protect just so the count doesn't change */
-    UNPROTECT(10);
+	newval = R_NilValue;  /* protect just so the count doesn't change */
+
     return newval;
 }
 
