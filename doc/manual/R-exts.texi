@@ -505,10 +505,10 @@ installed file: the convention is to use file @file{inst/COPYRIGHTS}.
 
 @c DESCRIPTION field Date
 The optional @samp{Date} field gives the @emph{release date} of the
-current version of the package.  It is strongly recommended@footnote{and
-required by @acronym{CRAN}, so checked by @command{R CMD check
---as-cran}.} to use the @samp{yyyy-mm-dd} format conforming to the ISO
-8601 standard.
+current version of the package.  Using the @samp{yyyy-mm-dd} format of
+the ISO 8601 standard is strongly recommended@footnote{and this format
+is required by @acronym{CRAN}, so checked by @command{R CMD check
+--as-cran} if a @samp{Date} is provided}.
 
 The @samp{Depends}, @samp{Imports}, @samp{Suggests}, @samp{Enhances},
 @samp{LinkingTo} and @samp{Additional_repositories} fields are discussed
@@ -5540,6 +5540,18 @@ UTC, the time represented is independent of the time zone: but how it is
 printed may not be.  Objects of class @code{"POSIXlt"} should have a
 @code{"tzone"} attribute.  Dates (e.g,@: birthdays) are conventionally
 considered independently of time zone.
+
+If input of date-times involves words not just numbers (day and month
+names, the am/pm indicator) consider if the local category
+@code{LC_TIME} needs to be set.  The am/pm indicator in the C/POSIX
+locale is @code{AM/PM}, but this need not be the case in other English
+locales. Worse, the OS has been known to change this at an update.
+This applies also to testing output.
+@c from "am" to "a.m." in en_GB in macOS 15.4
+
+Day and month names (and especially their abbreviations) in non-English
+languages may differ between OSes.
+@c seen in French
 
 @item
 If at all possible avoid any Internet access during package
@@ -13791,6 +13803,10 @@ or @code{convolveE}:
 
 @apifun ISNA
 @apifun ISNAN
+@apivar NA_REAL
+@apivar NA_LOGICAL
+@apivar NA_INTEGER
+@apivar NA_STRING
 
 Note that the @code{ISNA} macro, and the similar macros @code{ISNAN}
 (which checks for @code{NaN} or @code{NA}) and @code{R_FINITE} (which is
