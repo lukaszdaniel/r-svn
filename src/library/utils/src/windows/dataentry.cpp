@@ -763,7 +763,7 @@ static bool getccol(DEstruct DE)
 	/* extend work, names and lens */
 	DE->work = lengthgets(DE->work, wcol);
 	DE->names = lengthgets(DE->names, wcol);
-	for (i = DE->xmaxused; i < wcol; i++) {
+	for (int i = DE->xmaxused; i < wcol; i++) {
 	    snprintf(clab, 25, "var%d", i + 1);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
