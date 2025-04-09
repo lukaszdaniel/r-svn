@@ -54,7 +54,6 @@ using namespace CXXR;
 static SEXP installAttrib(SEXP, SEXP, SEXP);
 static SEXP removeAttrib(SEXP, SEXP);
 
-SEXP comment(SEXP);
 static SEXP commentgets(SEXP, SEXP);
 
 static SEXP row_names_gets(SEXP vec, SEXP val)
@@ -243,7 +242,7 @@ SEXP do_copyDFattr(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP in = CAR(args), out = CADR(args);
     SET_ATTRIB(out, shallow_duplicate(ATTRIB(in)));
-    if (IS_S4_OBJECT(in)) { SET_S4_OBJECT(out); } else { UNSET_S4_OBJECT(out); }
+    out->setS4Object(IS_S4_OBJECT(in));
     SET_OBJECT(out, OBJECT(in));
     return out;
 }
@@ -317,7 +316,7 @@ void Rf_copyMostAttrib(SEXP inp, SEXP ans)
 	}
     }
     if (OBJECT(inp)) SET_OBJECT(ans, 1);
-    if (IS_S4_OBJECT(inp)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); }
+    ans->setS4Object(IS_S4_OBJECT(inp));
     UNPROTECT(2);
 }
 
@@ -325,7 +324,7 @@ void Rf_copyMostAttrib(SEXP inp, SEXP ans)
 void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 {
     SEXP s;
-    int is_object = OBJECT(inp);
+    bool is_object = OBJECT(inp);
     bool is_s4_object = IS_S4_OBJECT(inp);
 
     if (ans == R_NilValue)
@@ -351,8 +350,8 @@ void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 	    if (!ists) installAttrib(ans, TAG(s), cl);
 	    else if(LENGTH(cl) <= 1) {
 		/* dropping class attribute */
-		is_object = 0;
-		is_s4_object = 0;
+		is_object = false;
+		is_s4_object = false;
 	    } else {
 		SEXP new_cl;
 		int l = LENGTH(cl);
@@ -366,7 +365,7 @@ void R::copyMostAttribNoTs(SEXP inp, SEXP ans)
 	}
     }
     SET_OBJECT(ans, is_object);
-    if (is_s4_object) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); }
+    ans->setS4Object(is_s4_object);
     UNPROTECT(2);
 }
 
@@ -407,7 +406,7 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
     SET_TAG(s, name);
     if (ATTRIB(vec) == R_NilValue) SET_ATTRIB(vec, s); else SETCDR(t, s);
     UNPROTECT(3);
-	// vec->setAttribute(static_cast<Symbol *>(name), val);
+    // vec->setAttribute(static_cast<Symbol *>(name), val);
     return val;
 }
 
@@ -415,7 +414,7 @@ static SEXP removeAttrib(SEXP vec, SEXP name)
 {
     if (vec == R_NilValue)
         return R_NilValue;
-    if(TYPEOF(vec) == CHARSXP)
+    if (TYPEOF(vec) == CHARSXP)
 	error("%s", _("cannot set attribute on a CHARSXP"));
     if (name == R_NamesSymbol && isPairList(vec)) {
 	for (SEXP t = vec; t != R_NilValue; t = CDR(t))
@@ -442,7 +441,7 @@ static void checkNames(SEXP x, SEXP s)
 	    error(_("'names' attribute [%lld] must be the same length as the vector [%lld]"),
 		  (long long)xlength(s), (long long)xlength(x));
     }
-    else if(IS_S4_OBJECT(x)) {
+    else if (IS_S4_OBJECT(x)) {
       /* leave validity checks to S4 code */
     }
     else error("%s", _("names() applied to a non-vector"));
@@ -1489,12 +1488,12 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(s) == ENVSXP)
 	R_CheckStack(); /* in case attributes might lead to a cycle */
 
-    if(nargs == 3) {
+    if (nargs == 3) {
 	exact = asLogicalNAFalse(CADDR(argList));
     }
 
 
-    if(STRING_ELT(t, 0) == NA_STRING) {
+    if (STRING_ELT(t, 0) == NA_STRING) {
 	UNPROTECT(1);
 	return R_NilValue;
     }
@@ -1590,12 +1589,12 @@ static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env)
 	objClass   = PROTECT(R_data_class(obj, FALSE));
     static SEXP checkAt = NULL;
     // 'methods' may *not* be in search() ==> do as if calling  methods::checkAtAssignment(..)
-    if(!isMethodsDispatchOn()) { // needed?
+    if (!isMethodsDispatchOn()) { // needed?
 	SEXP e = PROTECT(lang1(install("initMethodDispatch")));
 	eval(e, R_MethodsNamespace); // only works with methods loaded
 	UNPROTECT(1);
     }
-    if(checkAt == NULL)
+    if (checkAt == NULL)
 	checkAt = findFun(install("checkAtAssignment"), R_MethodsNamespace);
     SEXP e = PROTECT(lang4(checkAt, objClass, input, valueClass));
     eval(e, env);

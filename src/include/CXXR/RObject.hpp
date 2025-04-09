@@ -481,6 +481,15 @@ namespace CXXR
             return sxpinfo.alt;
         }
 
+        /** @brief Set the status of this RObject as an S4 object.
+         *
+         * @param on true iff this is to be considered an S4 object.
+         *          CXXR raises an error if an attempt is made to
+         *          unset the S4 object status of an S4Object
+         *          (::S4SXP), whereas CR permits this.
+         */
+        void setS4Object(bool on);
+
         GCEdge<> m_attrib;
 
         union U

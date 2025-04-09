@@ -34,6 +34,7 @@
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
 #include <Localization.h>
+#include <Defn.h> // for S4_OBJECT_MASK
 
 namespace CXXR
 {
@@ -70,12 +71,24 @@ namespace CXXR
         // m_attrib = nullptr;
     // }
 
-    RObject::RObject(SEXPTYPE stype) : GCNode(stype)
+    RObject::RObject(SEXPTYPE stype): GCNode(stype)
     {
         // u.listsxp.m_car = nullptr;
         // u.listsxp.m_tail = nullptr;
         // u.listsxp.m_tag = nullptr;
         m_attrib = R_NilValue;
+    }
+
+    void RObject::setS4Object(bool on)
+    {
+        if (on)
+        {
+            sxpinfo.gp |= S4_OBJECT_MASK;
+        }
+        else
+        {
+            sxpinfo.gp &= ~S4_OBJECT_MASK;
+        }
     }
 
     bool RObject::hasAttributes() const
@@ -114,10 +127,17 @@ namespace CXXR
     {
         if (name == R_NilValue)
             Rf_error("%s", _("attempt to set an attribute on NULL"));
-        if (sexptype() == CHARSXP)
-            Rf_error("%s", _("cannot set attribute on a 'CHARSXP'"));
-        if (sexptype() == SYMSXP)
-            Rf_error("%s", _("cannot set attribute on a symbol"));
+        switch (sexptype()) {
+        case CHARSXP:
+            error("%s", _("cannot set attribute on a 'CHARSXP'"));
+            break;
+        case SYMSXP:
+        case BUILTINSXP:
+        case SPECIALSXP:
+            error(_("cannot set attribute on a '%s'"), R_typeToChar(this));
+        default:
+            break;
+        }
         // Update m_has_class if necessary:
         if (name == R_ClassSymbol)
             sxpinfo.obj = (value != R_NilValue);
@@ -158,7 +178,7 @@ namespace CXXR
             GCStackRoot<const Symbol> namer(name);
             GCStackRoot<> valuer(value);
             if (MAYBE_REFERENCED(value))
-                R::ENSURE_NAMEDMAX(value);
+                (R::ENSURE_NAMEDMAX)(value);
             PairList *newnode = PairList::create(value, R_NilValue, const_cast<Symbol *>(name));
             if (prev && prev != R_NilValue)
                 prev->setTail(newnode);
