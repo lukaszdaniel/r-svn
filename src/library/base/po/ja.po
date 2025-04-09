@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-05 17:15+0200\n"
+"POT-Creation-Date: 2025-04-09 17:26+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -136,7 +136,7 @@ msgstr "'%ls' の表示に問題があります"
 #: src/main/agrep.cpp:773 src/main/agrep.cpp:778 src/main/altclasses.cpp:1381
 #: src/main/apply.cpp:365 src/main/apply.cpp:367 src/main/apply.cpp:370
 #: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
-#: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
+#: src/main/array.cpp:2362 src/main/attrib.cpp:228 src/main/builtin.cpp:107
 #: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
 #: src/main/builtin.cpp:579 src/main/builtin.cpp:597 src/main/builtin.cpp:778
 #: src/main/builtin.cpp:780 src/main/builtin.cpp:782 src/main/character.cpp:339
@@ -387,9 +387,9 @@ msgstr "<エラー: エンコーディング '%s' からの再エンコーディ
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
 #: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
 #: src/main/connections.cpp:920 src/main/dounzip.cpp:204
-#: src/main/saveload.cpp:2110 src/main/serialize.cpp:3063
-#: src/main/serialize.cpp:3068 src/main/serialize.cpp:3162
-#: src/main/serialize.cpp:3214 src/unix/system.cpp:432
+#: src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
+#: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158
+#: src/main/serialize.cpp:3210 src/unix/system.cpp:432
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr "ファイル '%s' を開くことができません: %s"
@@ -904,8 +904,8 @@ msgstr "引数はシンボルでなくてはいけません"
 msgid "'FUN.VALUE' must be a vector"
 msgstr "'FUN.VALUE' はベクトルでなければなりません"
 
-#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2022
-#: src/main/serialize.cpp:2040
+#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2018
+#: src/main/serialize.cpp:2036
 msgid "invalid length"
 msgstr "長さが不正です"
 
@@ -1144,7 +1144,7 @@ msgstr "適切な引数ではありません"
 msgid "'%s' argument is not a matrix"
 msgstr "引数が行列ではありません"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1245
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1212
 #, fuzzy, c-format
 msgid "invalid first argument, must be %s"
 msgstr "一番目の引数が不正です。配列でなくてはなりません"
@@ -1189,220 +1189,215 @@ msgstr "'x' は正の長さを持たなければなりません"
 msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "'backsolve' 中に特異行列がありました。[%d] 番目の対角要素に最初の 0 があります。"
 
-#: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:308
-#: src/main/attrib.cpp:332 src/main/attrib.cpp:466 src/main/attrib.cpp:513
-#: src/main/attrib.cpp:567 src/main/RObject.cpp:116
+#: src/main/attrib.cpp:64 src/main/attrib.cpp:275 src/main/attrib.cpp:307
+#: src/main/attrib.cpp:331 src/main/attrib.cpp:433 src/main/attrib.cpp:480
+#: src/main/attrib.cpp:534 src/main/RObject.cpp:129
 msgid "attempt to set an attribute on NULL"
 msgstr "NULL に対して属性を設定しようとしました"
 
-#: src/main/attrib.cpp:102
+#: src/main/attrib.cpp:101
 #, c-format
 msgid "row names must be 'character' or 'integer', not '%s'"
 msgstr "列の名前は '%s' ではなく文字型 ('character') 又は整数型 ('integer') でなければなりません"
 
-#: src/main/attrib.cpp:164
+#: src/main/attrib.cpp:163
 #, c-format
 msgid "getAttrib: invalid type (%s) for TAG"
 msgstr "getAttrib: TAG に対する型 (%s) が不正です"
 
-#: src/main/attrib.cpp:179
+#: src/main/attrib.cpp:178
 msgid "old list is no longer allowed for dimnames attribute"
 msgstr ""
 
-#: src/main/attrib.cpp:193
+#: src/main/attrib.cpp:192
 #, fuzzy
 msgid "cannot have attributes on a CHARSXP"
 msgstr "このシステムではタイムゾーンは設定できません"
 
-#: src/main/attrib.cpp:380 src/main/attrib.cpp:419
+#: src/main/attrib.cpp:386
 #, fuzzy
 msgid "cannot set attribute on a CHARSXP"
 msgstr "このシステムではタイムゾーンは設定できません"
 
-#: src/main/attrib.cpp:385
-#, fuzzy, c-format
-msgid "cannot set attribute on a '%s'"
-msgstr "このシステムではタイムゾーンは設定できません"
-
-#: src/main/attrib.cpp:439
+#: src/main/attrib.cpp:406
 #, fuzzy, c-format
 msgid "invalid type (%s) for 'names': must be vector or NULL"
 msgstr "'names' の型 (%s) が不正です; ベクトルでなければなりません"
 
-#: src/main/attrib.cpp:442
+#: src/main/attrib.cpp:409
 #, fuzzy, c-format
 msgid "'names' attribute [%lld] must be the same length as the vector [%lld]"
 msgstr "'names' 属性 [%lld] はベクトル [%lld] の長さと同じでなければなりません"
 
-#: src/main/attrib.cpp:448
+#: src/main/attrib.cpp:415
 msgid "names() applied to a non-vector"
 msgstr "names() 関数がベクトルでないものに適用されました"
 
-#: src/main/attrib.cpp:456
+#: src/main/attrib.cpp:423
 msgid "invalid time series parameters specified"
 msgstr "不正な時系列パラメータが指定されました"
 
-#: src/main/attrib.cpp:470
+#: src/main/attrib.cpp:437
 msgid "'tsp' attribute must be numeric"
 msgstr "'tsp' 属性は数値でなくてはなりません"
 
-#: src/main/attrib.cpp:476
+#: src/main/attrib.cpp:443
 msgid "'tsp' attribute must be numeric of length three"
 msgstr "'tsp' 属性は長さ 3 の数値でなくてはなりません"
 
-#: src/main/attrib.cpp:493
+#: src/main/attrib.cpp:460
 msgid "cannot assign 'tsp' to zero-length vector"
 msgstr "長さ 0 のベクトルには属性 'tsp' を与えられません"
 
-#: src/main/attrib.cpp:524
+#: src/main/attrib.cpp:491
 msgid "attempt to set invalid 'comment' attribute"
 msgstr "不正な 'comment' 属性を設定しようとしました"
 
-#: src/main/attrib.cpp:576
+#: src/main/attrib.cpp:543
 msgid "adding class \"factor\" to an invalid object"
 msgstr "無効のオブジェクトにクラス \"factor\" を追加"
 
-#: src/main/attrib.cpp:607
+#: src/main/attrib.cpp:574
 msgid "attempt to set invalid 'class' attribute"
 msgstr "不正な 'class' 属性を設定しようとしました"
 
-#: src/main/attrib.cpp:893
+#: src/main/attrib.cpp:860
 msgid "type must be LANGSXP at this point"
 msgstr ""
 
-#: src/main/attrib.cpp:924
+#: src/main/attrib.cpp:891
 #, fuzzy
 msgid "invalid class argument to internal .class_cache"
 msgstr " call_R の引数の個数が不正です "
 
-#: src/main/attrib.cpp:956
+#: src/main/attrib.cpp:923
 #, fuzzy, c-format
 msgid "invalid to use names()<- on an S4 object of class '%s'"
 msgstr "ベクタでないクラス ('%s') の 'names' スロットに値をセットするために names()<- を使うことはできません"
 
-#: src/main/attrib.cpp:997
+#: src/main/attrib.cpp:964
 msgid "incompatible 'names' argument"
 msgstr "'names' 引数に互換性がありません"
 
-#: src/main/attrib.cpp:1048
+#: src/main/attrib.cpp:1015
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "'names' 属性として設定するには不正な型 (%s) です"
 
-#: src/main/attrib.cpp:1121
+#: src/main/attrib.cpp:1088
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' が配列以外に適用されました"
 
-#: src/main/attrib.cpp:1126 src/main/coerce.cpp:2731
+#: src/main/attrib.cpp:1093 src/main/coerce.cpp:2731
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' はリストでなければなりません"
 
-#: src/main/attrib.cpp:1130 src/main/attrib.cpp:1155
+#: src/main/attrib.cpp:1097 src/main/attrib.cpp:1122
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "'dimnames' の長さ [%d] は 'dims' の長さ [%d] と同じでなくてはなりません"
 
-#: src/main/attrib.cpp:1161
+#: src/main/attrib.cpp:1128
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "'dimnames' の型 (%s) が不正です (ベクトルでなければなりません)"
 
-#: src/main/attrib.cpp:1164
+#: src/main/attrib.cpp:1131
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "'dimnames' の長さ [%d] が配列の大きさと違っています"
 
-#: src/main/attrib.cpp:1247
+#: src/main/attrib.cpp:1214
 #, fuzzy, c-format
 msgid "invalid second argument, must be %s"
 msgstr "二番目の引数が不正です"
 
-#: src/main/attrib.cpp:1252
+#: src/main/attrib.cpp:1219
 msgid "length-0 dimension vector is invalid"
 msgstr "長さ 0 の次元のベクトルは無効です"
 
-#: src/main/attrib.cpp:1257
+#: src/main/attrib.cpp:1224
 msgid "the dims contain missing values"
 msgstr "dims 変数は欠損値を含みます"
 
-#: src/main/attrib.cpp:1259
+#: src/main/attrib.cpp:1226
 msgid "the dims contain negative values"
 msgstr "dims 変数は負の値を含みます"
 
-#: src/main/attrib.cpp:1263
+#: src/main/attrib.cpp:1230
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "dims [product %lld] はオブジェクト [%lld] の長さに整合しません"
 
-#: src/main/attrib.cpp:1343
+#: src/main/attrib.cpp:1310
 #, c-format
 msgid "factor level [%lld] is duplicated"
 msgstr ""
 
-#: src/main/attrib.cpp:1371
+#: src/main/attrib.cpp:1338
 msgid "attributes must be a list or NULL"
 msgstr "属性はリストもしくは NULL でなければなりません"
 
-#: src/main/attrib.cpp:1376
+#: src/main/attrib.cpp:1343
 msgid "attributes must be named"
 msgstr "属性は名前が付けられていなければなりません"
 
-#: src/main/attrib.cpp:1380
+#: src/main/attrib.cpp:1347
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "全ての属性は名前を持っていなければなりません [%d が持っていません]"
 
-#: src/main/attrib.cpp:1478 src/main/errors.cpp:1192
+#: src/main/attrib.cpp:1445 src/main/errors.cpp:1192
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "文字列引数が要求されています"
 
-#: src/main/attrib.cpp:1485
+#: src/main/attrib.cpp:1452
 msgid "'which' must be of mode character"
 msgstr "'which' は文字列モードでなくてはなりません"
 
-#: src/main/attrib.cpp:1487
+#: src/main/attrib.cpp:1454
 msgid "exactly one attribute 'which' must be given"
 msgstr "性格に一つの属性 'which' が与えらなければなりません"
 
-#: src/main/attrib.cpp:1623
+#: src/main/attrib.cpp:1590
 #, fuzzy
 msgid "invalid slot name length"
 msgstr "長さが不正です"
 
-#: src/main/attrib.cpp:1627
+#: src/main/attrib.cpp:1594
 #, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "スロット名に対する不正な型 '%s' です"
 
-#: src/main/attrib.cpp:1674
+#: src/main/attrib.cpp:1641
 msgid "'name' must be non-null character string"
 msgstr "'name' は NULL でない文字列でなければなりません"
 
-#: src/main/attrib.cpp:1800 src/main/attrib.cpp:1871 src/main/attrib.cpp:1923
+#: src/main/attrib.cpp:1767 src/main/attrib.cpp:1838 src/main/attrib.cpp:1890
 msgid "invalid type or length for slot name"
 msgstr "スロット名の型または長さが不正です"
 
-#: src/main/attrib.cpp:1834
+#: src/main/attrib.cpp:1801
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "型 \"%s\" のオブジェクトからはスロット (\"%s\") を得ることは出来ません"
 
-#: src/main/attrib.cpp:1845
+#: src/main/attrib.cpp:1812
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "名前 \"%s\" というスロットが、クラス \"%s\" のこのオブジェクトには存在しません"
 
-#: src/main/attrib.cpp:1862
+#: src/main/attrib.cpp:1829
 msgid "attempt to set slot on NULL object"
 msgstr "NULL オブジェクトに対して スロットを設定しようとしました"
 
-#: src/main/attrib.cpp:1918
+#: src/main/attrib.cpp:1885
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "'methods' パッケージなしにフォーマルクラス (formal class) は使用できません"
 
-#: src/main/attrib.cpp:1928
+#: src/main/attrib.cpp:1895
 #, fuzzy, c-format
 msgid "no applicable method for `@` applied to an object of class \"%s\""
 msgstr "'%s' をクラス \"%s\" のオブジェクトに適用できるようなメソッドがありません"
@@ -1497,7 +1492,7 @@ msgstr "一番目の引数が不正です"
 #: src/main/envir.cpp:2118 src/main/envir.cpp:2247 src/main/envir.cpp:2973
 #: src/main/envir.cpp:3057 src/main/Environment.cpp:112 src/main/eval.cpp:8918
 #: src/main/objects.cpp:258 src/main/objects.cpp:266 src/main/saveload.cpp:2212
-#: src/main/saveload.cpp:2487 src/main/serialize.cpp:3235
+#: src/main/saveload.cpp:2487 src/main/serialize.cpp:3231
 msgid "use of NULL environment is defunct"
 msgstr "NULL環境の使用は廃要素です"
 
@@ -1547,7 +1542,7 @@ msgstr "'parent' は環境ではありません"
 #: src/main/connections.cpp:5353 src/main/connections.cpp:5416
 #: src/main/connections.cpp:5641 src/main/connections.cpp:5645
 #: src/main/connections.cpp:6098 src/main/deparse.cpp:422
-#: src/main/deparse.cpp:508 src/main/serialize.cpp:2509
+#: src/main/deparse.cpp:508 src/main/serialize.cpp:2505
 msgid "cannot write to this connection"
 msgstr "このコネクションには書き出せません"
 
@@ -2114,8 +2109,8 @@ msgstr "コネクションが不正です"
 msgid "closing unused connection %d (%s)\n"
 msgstr "使われていないコネクション %d (%s) を閉じます \n"
 
-#: src/main/connections.cpp:313 src/main/serialize.cpp:1757
-#: src/main/serialize.cpp:1778 src/main/sysutils.cpp:733
+#: src/main/connections.cpp:313 src/main/serialize.cpp:1753
+#: src/main/serialize.cpp:1774 src/main/sysutils.cpp:733
 #: src/main/sysutils.cpp:755 src/main/sysutils.cpp:776
 #: src/main/sysutils.cpp:1723 src/main/sysutils.cpp:1738
 #: src/main/sysutils.cpp:1952 src/main/sysutils.cpp:2120
@@ -2255,8 +2250,8 @@ msgstr "fifo 接続の割り当てに失敗しました"
 #: src/main/connections.cpp:5290 src/main/connections.cpp:5414
 #: src/main/connections.cpp:5637 src/main/dcf.cpp:105 src/main/deparse.cpp:419
 #: src/main/deparse.cpp:505 src/main/saveload.cpp:2395
-#: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2673
-#: src/main/serialize.cpp:2728 src/main/source.cpp:293
+#: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2669
+#: src/main/serialize.cpp:2724 src/main/source.cpp:293
 msgid "cannot open the connection"
 msgstr "コネクションを開くことができません"
 
@@ -2583,8 +2578,8 @@ msgid "cannot close 'message' sink connection"
 msgstr "'message' sink コネクションを閉じることができません"
 
 #: src/main/connections.cpp:4266 src/main/connections.cpp:6097
-#: src/main/connections.cpp:6105 src/main/serialize.cpp:2499
-#: src/main/serialize.cpp:2507
+#: src/main/connections.cpp:6105 src/main/serialize.cpp:2495
+#: src/main/serialize.cpp:2503
 msgid "connection is not open"
 msgstr "コネクションは開かれていません"
 
@@ -2607,7 +2602,7 @@ msgstr "コネクションへの書き込みエラーが発生しました"
 #: src/main/connections.cpp:4719 src/main/connections.cpp:5275
 #: src/main/connections.cpp:5293 src/main/connections.cpp:6106
 #: src/main/dcf.cpp:107 src/main/scan.cpp:969 src/main/scan.cpp:973
-#: src/main/serialize.cpp:2501 src/main/source.cpp:296
+#: src/main/serialize.cpp:2497 src/main/source.cpp:296
 msgid "cannot read from this connection"
 msgstr "このコネクションから読み込みできません"
 
@@ -3279,7 +3274,7 @@ msgstr "'opts' は、小さな非負の整数でなくてはなりません"
 #: src/main/deparse.cpp:477 src/main/envir.cpp:2034 src/main/envir.cpp:2158
 #: src/main/envir.cpp:2312 src/main/envir.cpp:3826 src/main/eval.cpp:1085
 #: src/main/eval.cpp:2662 src/main/eval.cpp:5806 src/main/saveload.cpp:2123
-#: src/main/saveload.cpp:2437 src/main/serialize.cpp:3253
+#: src/main/saveload.cpp:2437 src/main/serialize.cpp:3249
 #, c-format
 msgid "object '%s' not found"
 msgstr "オブジェクト '%s' がありません"
@@ -6085,7 +6080,7 @@ msgstr "primitive な総称関数の形式的定義は関数オブジェクト�
 msgid "object returned as generic function \"%s\" does not appear to be one"
 msgstr "総称的関数 \"%s\" として返されたオブジェクトが一つではないようです"
 
-#: src/main/objects.cpp:1611
+#: src/main/objects.cpp:1612
 msgid "invalid primitive operation given for dispatch"
 msgstr "ディスパッチ（dispatch）用に与えられた primitive 関数が不正です"
 
@@ -6239,9 +6234,9 @@ msgstr ""
 msgid "'%s' is deprecated and will be disabled"
 msgstr ""
 
-#: src/main/options.cpp:919 src/modules/X11/dataentry.cpp:318
-#: src/modules/X11/dataentry.cpp:460 src/modules/X11/dataentry.cpp:463
-#: src/modules/X11/dataentry.cpp:492
+#: src/main/options.cpp:919 src/modules/X11/dataentry.cpp:319
+#: src/modules/X11/dataentry.cpp:461 src/modules/X11/dataentry.cpp:464
+#: src/modules/X11/dataentry.cpp:493
 msgid "invalid argument"
 msgstr "引数が不正です"
 
@@ -7294,14 +7289,14 @@ msgstr "与えられた seed は適切な整数ではありません"
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
-#: src/main/RObject.cpp:118
+#: src/main/RObject.cpp:132
 #, fuzzy
 msgid "cannot set attribute on a 'CHARSXP'"
 msgstr "このシステムではタイムゾーンは設定できません"
 
-#: src/main/RObject.cpp:120
-#, fuzzy
-msgid "cannot set attribute on a symbol"
+#: src/main/RObject.cpp:137
+#, fuzzy, c-format
+msgid "cannot set attribute on a '%s'"
 msgstr "このシステムではタイムゾーンは設定できません"
 
 #: src/main/Rstrptime.h:523 src/main/Rstrptime.h:1011
@@ -7349,8 +7344,8 @@ msgstr "マルチバイト文字列が不正です"
 #: src/main/saveload.cpp:1574 src/main/serialize.cpp:414
 #: src/main/serialize.cpp:421 src/main/serialize.cpp:434
 #: src/main/serialize.cpp:438 src/main/serialize.cpp:468
-#: src/main/serialize.cpp:484 src/main/serialize.cpp:2117
-#: src/main/serialize.cpp:2894 src/main/serialize.cpp:2902
+#: src/main/serialize.cpp:484 src/main/serialize.cpp:2113
+#: src/main/serialize.cpp:2890 src/main/serialize.cpp:2898
 msgid "read error"
 msgstr "読み込みエラーです"
 
@@ -7394,7 +7389,7 @@ msgid "mismatch on types"
 msgstr "型が一致しません"
 
 #: src/main/saveload.cpp:652 src/main/saveload.cpp:1348
-#: src/main/serialize.cpp:2030
+#: src/main/serialize.cpp:2026
 #, c-format
 msgid "unrecognized internal function name \"%s\""
 msgstr "内部関数 \"%s\" を見つけることができませんでした"
@@ -7498,8 +7493,8 @@ msgstr "xdr 複素数データの出力エラーが起きました"
 msgid "an xdr complex data read error occurred"
 msgstr "xdr 複素数データの入力エラーが起きました"
 
-#: src/main/saveload.cpp:1859 src/main/serialize.cpp:2463
-#: src/main/serialize.cpp:3082 src/modules/internet/internet.cpp:403
+#: src/main/saveload.cpp:1859 src/main/serialize.cpp:2459
+#: src/main/serialize.cpp:3078 src/modules/internet/internet.cpp:403
 #: src/modules/internet/internet.cpp:473
 msgid "write failed"
 msgstr "書き込みに失敗しました"
@@ -7554,14 +7549,14 @@ msgid "first argument must be a file name"
 msgstr "最初の引数はファイル名でなくてはなりません"
 
 #: src/main/saveload.cpp:2247 src/main/saveload.cpp:2272
-#: src/main/serialize.cpp:930 src/main/serialize.cpp:971
-#: src/main/serialize.cpp:1013
+#: src/main/serialize.cpp:926 src/main/serialize.cpp:967
+#: src/main/serialize.cpp:1009
 msgid "XDR write failed"
 msgstr "XDR 書式での書き出しに失敗しました"
 
 #: src/main/saveload.cpp:2259 src/main/saveload.cpp:2284
-#: src/main/serialize.cpp:1558 src/main/serialize.cpp:1593
-#: src/main/serialize.cpp:1630
+#: src/main/serialize.cpp:1554 src/main/serialize.cpp:1589
+#: src/main/serialize.cpp:1626
 msgid "XDR read failed"
 msgstr "XDR 書式での読み込みに失敗しました"
 
@@ -7570,12 +7565,12 @@ msgstr "XDR 書式での読み込みに失敗しました"
 msgid "cannot save data -- unable to open '%s': %s"
 msgstr "データをセーブできません -- '%s' を開けません: %s"
 
-#: src/main/saveload.cpp:2384 src/main/serialize.cpp:2659
+#: src/main/saveload.cpp:2384 src/main/serialize.cpp:2655
 #, c-format
 msgid "cannot save to connections in version %d format"
 msgstr "バージョン %d 書式ではコネクションに保存できません"
 
-#: src/main/saveload.cpp:2401 src/main/serialize.cpp:2679
+#: src/main/saveload.cpp:2401 src/main/serialize.cpp:2675
 msgid "connection not open for writing"
 msgstr "コネクションは書き出しのために開かれていません"
 
@@ -7583,13 +7578,13 @@ msgstr "コネクションは書き出しのために開かれていません"
 msgid "cannot save XDR format to a text-mode connection"
 msgstr "テキストモードのコネクションには XDR 書式では保存できません"
 
-#: src/main/saveload.cpp:2423 src/main/serialize.cpp:2568
-#: src/main/serialize.cpp:2582 src/main/serialize.cpp:2767
-#: src/main/serialize.cpp:2790
+#: src/main/saveload.cpp:2423 src/main/serialize.cpp:2564
+#: src/main/serialize.cpp:2578 src/main/serialize.cpp:2763
+#: src/main/serialize.cpp:2786
 msgid "error writing to connection"
 msgstr "コネクションへの書き込みエラーが発生しました"
 
-#: src/main/saveload.cpp:2481 src/main/serialize.cpp:2731
+#: src/main/saveload.cpp:2481 src/main/serialize.cpp:2727
 msgid "connection not open for reading"
 msgstr "コネクションは読み込みのために開かれていません"
 
@@ -7800,7 +7795,7 @@ msgstr "ascii, binari または xdr 書式を指定して下さい"
 msgid "unknown output format"
 msgstr "未知の出力書式です"
 
-#: src/main/serialize.cpp:639 src/main/serialize.cpp:2386
+#: src/main/serialize.cpp:639 src/main/serialize.cpp:2382
 msgid "unknown input format"
 msgstr "未知の入力書式です"
 
@@ -7808,73 +7803,73 @@ msgstr "未知の入力書式です"
 msgid "input format does not match specified format"
 msgstr "指定された書式と入力書式がマッチしません"
 
-#: src/main/serialize.cpp:848
+#: src/main/serialize.cpp:844
 msgid "no restore method available"
 msgstr "復帰のためのメソッドがありません"
 
-#: src/main/serialize.cpp:896
+#: src/main/serialize.cpp:892
 msgid "names in persistent strings are currently ignored"
 msgstr "名前に対する永続的な文字列は、今のところ無視されます"
 
-#: src/main/serialize.cpp:1110
+#: src/main/serialize.cpp:1106
 #, c-format
 msgid "'%s' may not be available when loading"
 msgstr "'%s' はロード時には使えない可能性があります"
 
-#: src/main/serialize.cpp:1117
+#: src/main/serialize.cpp:1113
 msgid "namespaces may not be available when loading"
 msgstr "ロード中はネームスペースは使えないかもしれません"
 
-#: src/main/serialize.cpp:1285
+#: src/main/serialize.cpp:1281
 #, c-format
 msgid "WriteItem: unknown type %i"
 msgstr "WriteItem: 未知の型 %i です"
 
-#: src/main/serialize.cpp:1470
+#: src/main/serialize.cpp:1466
 #, c-format
 msgid "version %d not supported"
 msgstr "バージョン %d はサポートしていません"
 
-#: src/main/serialize.cpp:1504
+#: src/main/serialize.cpp:1500
 msgid "reference index out of range"
 msgstr "参照添字が範囲外です"
 
-#: src/main/serialize.cpp:1532
+#: src/main/serialize.cpp:1528
 msgid "names in persistent strings are not supported yet"
 msgstr "名前に対する永続的な文字列は、まだサポートされていません"
 
-#: src/main/serialize.cpp:1711
+#: src/main/serialize.cpp:1707
 #, c-format
 msgid "input string '%s' cannot be translated from '%s' to UTF-8, but is valid UTF-8"
 msgstr ""
 
-#: src/main/serialize.cpp:1715
+#: src/main/serialize.cpp:1711
 #, c-format
 msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"
 msgstr ""
 
-#: src/main/serialize.cpp:1750
+#: src/main/serialize.cpp:1746
 #, fuzzy, c-format
 msgid "deserializing invalid UTF-8 string '%s'"
 msgstr "'old' は不正な UTF-8 文字です"
 
-#: src/main/serialize.cpp:1780
+#: src/main/serialize.cpp:1776
 msgid "strings not representable in native encoding will not be translated"
 msgstr ""
 
-#: src/main/serialize.cpp:1782
+#: src/main/serialize.cpp:1778
 msgid "strings not representable in native encoding will be translated to UTF-8"
 msgstr ""
 
-#: src/main/serialize.cpp:1799
+#: src/main/serialize.cpp:1795
 msgid "negative serialized length for vector"
 msgstr "ベクトルのシリアル化長が負です"
 
-#: src/main/serialize.cpp:1807
+#: src/main/serialize.cpp:1803
 msgid "invalid upper part of serialized vector length"
 msgstr "不正なシリアル化されたベクトル長の上部"
 
-#: src/main/serialize.cpp:1812
+#: src/main/serialize.cpp:1808
 msgid ""
 "negative serialized vector length:\n"
 "perhaps long vector from 64-bit version of R?"
@@ -7882,122 +7877,122 @@ msgstr ""
 "負のシリアル化ベクトル長:\n"
 "おそらく R の 64 ビット版からのロングベクトル?"
 
-#: src/main/serialize.cpp:2105
+#: src/main/serialize.cpp:2101
 msgid "this version of R cannot read class references"
 msgstr "このバージョンの R ではクラス参照は読めません"
 
-#: src/main/serialize.cpp:2107
+#: src/main/serialize.cpp:2103
 msgid "this version of R cannot read generic function references"
 msgstr "このバージョンの R では総称関数参照は読めません"
 
-#: src/main/serialize.cpp:2136
+#: src/main/serialize.cpp:2132
 #, c-format
 msgid "ReadItem: unknown type %i, perhaps written by later version of R"
 msgstr "ReadItem: 恐らく R の後のバージョンによって書かれた未知のタイプ%i"
 
-#: src/main/serialize.cpp:2302 src/main/serialize.cpp:2392
+#: src/main/serialize.cpp:2298 src/main/serialize.cpp:2388
 #, fuzzy
 msgid "invalid length of encoding name"
 msgstr "スロット名の型または長さが不正です"
 
-#: src/main/serialize.cpp:2312
+#: src/main/serialize.cpp:2308
 #, c-format
 msgid "cannot read unreleased workspace version %d written by experimental R %d.%d.%d"
 msgstr "試行的な R %2$d.%3$d.%4$d で書かれた未公開バージョン %1$d の作業スペースを読み取ることができません"
 
-#: src/main/serialize.cpp:2316
+#: src/main/serialize.cpp:2312
 #, c-format
 msgid "cannot read workspace version %d written by R %d.%d.%d; need R %d.%d.%d or newer"
 msgstr "R %2$d.%3$d.%4$d により書かれたバージョン %1$d のワークスペースを読み取ることができません。R %5$d.%6$d.%7$d もしくはそれ以上が必要です"
 
-#: src/main/serialize.cpp:2470
+#: src/main/serialize.cpp:2466
 msgid "read failed"
 msgstr "読み込みに失敗しました"
 
-#: src/main/serialize.cpp:2531
+#: src/main/serialize.cpp:2527
 msgid "error reading from ascii connection"
 msgstr "ascii コネクションからの読み取りエラーが発生しました"
 
-#: src/main/serialize.cpp:2533
+#: src/main/serialize.cpp:2529
 msgid "unexpected format in ascii connection"
 msgstr "この ascii コネクションから読み込みできません"
 
-#: src/main/serialize.cpp:2538 src/main/serialize.cpp:2552
+#: src/main/serialize.cpp:2534 src/main/serialize.cpp:2548
 msgid "error reading from connection"
 msgstr "コネクションからの読み取りエラーが発生しました"
 
-#: src/main/serialize.cpp:2594
+#: src/main/serialize.cpp:2590
 msgid "only ascii format can be written to text mode connections"
 msgstr "テキストモードコネクションには ascii フォーマットだけが書き込めます"
 
-#: src/main/serialize.cpp:2609
+#: src/main/serialize.cpp:2605
 msgid "only ascii format can be read from text mode connections"
 msgstr "テキストモードコネクションからは ascii フォーマットだけが読み込めめます"
 
-#: src/main/serialize.cpp:2657 src/main/serialize.cpp:2817
-#: src/main/serialize.cpp:2968
+#: src/main/serialize.cpp:2653 src/main/serialize.cpp:2813
+#: src/main/serialize.cpp:2964
 msgid "bad version value"
 msgstr "不適切なバージョン値です"
 
-#: src/main/serialize.cpp:2677
+#: src/main/serialize.cpp:2673
 msgid "binary-mode connection required for ascii=FALSE"
 msgstr "ascii=FALSE に大してはバイナリコネクションが必要です"
 
-#: src/main/serialize.cpp:2698
+#: src/main/serialize.cpp:2694
 msgid "cannot return a promise (PROMSXP) object"
 msgstr ""
 
-#: src/main/serialize.cpp:2845 src/main/serialize.cpp:2882
-#: src/main/serialize.cpp:2947
+#: src/main/serialize.cpp:2841 src/main/serialize.cpp:2878
+#: src/main/serialize.cpp:2943
 msgid "serialization is too large to store in a raw vector"
 msgstr "線形化 (serialization) は raw ベクトルに保管するには大きすぎます"
 
-#: src/main/serialize.cpp:2862
+#: src/main/serialize.cpp:2858
 msgid "cannot allocate buffer"
 msgstr "バッファを割り当てることができません"
 
-#: src/main/serialize.cpp:3018
+#: src/main/serialize.cpp:3014
 msgid "character vectors are no longer accepted by unserialize()"
 msgstr ""
 
-#: src/main/serialize.cpp:3055 src/main/serialize.cpp:3133
+#: src/main/serialize.cpp:3051 src/main/serialize.cpp:3129
 msgid "not a proper file name"
 msgstr "ファイル名が不適切です"
 
-#: src/main/serialize.cpp:3059
+#: src/main/serialize.cpp:3055
 msgid "not a proper raw vector"
 msgstr "適正な raw ベクトルではありません"
 
-#: src/main/serialize.cpp:3073 src/main/serialize.cpp:3165
-#: src/main/serialize.cpp:3180 src/main/serialize.cpp:3194
-#: src/main/serialize.cpp:3204 src/main/serialize.cpp:3217
+#: src/main/serialize.cpp:3069 src/main/serialize.cpp:3161
+#: src/main/serialize.cpp:3176 src/main/serialize.cpp:3190
+#: src/main/serialize.cpp:3200 src/main/serialize.cpp:3213
 #, c-format
 msgid "seek failed on %s"
 msgstr "%s でシークに失敗しました"
 
-#: src/main/serialize.cpp:3083
+#: src/main/serialize.cpp:3079
 msgid "could not determine file position"
 msgstr "ファイルの位置を決定できませんでした"
 
-#: src/main/serialize.cpp:3137
+#: src/main/serialize.cpp:3133
 msgid "bad offset/length argument"
 msgstr "オフセット/長さ引数が不正です"
 
-#: src/main/serialize.cpp:3184 src/main/serialize.cpp:3198
-#: src/main/serialize.cpp:3208 src/main/serialize.cpp:3221
+#: src/main/serialize.cpp:3180 src/main/serialize.cpp:3194
+#: src/main/serialize.cpp:3204 src/main/serialize.cpp:3217
 #, c-format
 msgid "read failed on %s"
 msgstr "%s で読み込みに失敗しました"
 
-#: src/main/serialize.cpp:3239
+#: src/main/serialize.cpp:3235
 msgid "bad environment"
 msgstr "不正な環境です"
 
-#: src/main/serialize.cpp:3241
+#: src/main/serialize.cpp:3237
 msgid "bad variable names"
 msgstr "不適切な変数名です"
 
-#: src/main/serialize.cpp:3319
+#: src/main/serialize.cpp:3315
 #, c-format
 msgid "lazy-load database '%s' is corrupt"
 msgstr ""
@@ -9723,90 +9718,90 @@ msgstr "'size' は行数 nrow(x) = %d を超えることはできません"
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr "要素 (%d, %d) が 0 であるため、逆数が計算できません"
 
-#: src/modules/X11/dataentry.cpp:364
+#: src/modules/X11/dataentry.cpp:365
 #, fuzzy
 msgid "invalid type for value"
 msgstr "値が不正です"
 
-#: src/modules/X11/dataentry.cpp:375
+#: src/modules/X11/dataentry.cpp:376
 #, fuzzy
 msgid "unable to start data editor"
 msgstr "デバイス %s を開始できません"
 
-#: src/modules/X11/dataentry.cpp:434
+#: src/modules/X11/dataentry.cpp:435
 msgid "dataentry: internal memory problem"
 msgstr ""
 
-#: src/modules/X11/dataentry.cpp:451
+#: src/modules/X11/dataentry.cpp:452
 #, fuzzy
 msgid "allocation failed in in_R_X11_dataviewer"
 msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
-#: src/modules/X11/dataentry.cpp:498
+#: src/modules/X11/dataentry.cpp:499
 #, fuzzy
 msgid "unable to start data viewer"
 msgstr "デバイス %s を開始できません"
 
-#: src/modules/X11/dataentry.cpp:777
+#: src/modules/X11/dataentry.cpp:778
 msgid "get_col_name: column number too big to stringify"
 msgstr ""
 
-#: src/modules/X11/dataentry.cpp:904
+#: src/modules/X11/dataentry.cpp:905
 #, fuzzy
 msgid "dataentry: internal memory error"
 msgstr "内部エラー"
 
-#: src/modules/X11/dataentry.cpp:1021 src/modules/X11/dataentry.cpp:1033
+#: src/modules/X11/dataentry.cpp:1022 src/modules/X11/dataentry.cpp:1034
 #, fuzzy
 msgid "internal type error in dataentry"
 msgstr " do_random1 で内部エラーが起きました "
 
-#: src/modules/X11/dataentry.cpp:1133
+#: src/modules/X11/dataentry.cpp:1134
 msgid "dataentry: parse error on string"
 msgstr ""
 
-#: src/modules/X11/dataentry.cpp:1334 src/modules/X11/dataentry.cpp:1743
+#: src/modules/X11/dataentry.cpp:1335 src/modules/X11/dataentry.cpp:1744
 msgid "dataentry: expression too long"
 msgstr ""
 
-#: src/modules/X11/dataentry.cpp:1861 src/modules/X11/devX11.cpp:1265
+#: src/modules/X11/dataentry.cpp:1862 src/modules/X11/devX11.cpp:1265
 #, c-format
 msgid "X11 protocol error: %s"
 msgstr "X11 プロトコルエラー: %s"
 
-#: src/modules/X11/dataentry.cpp:1868 src/modules/X11/devX11.cpp:1291
+#: src/modules/X11/dataentry.cpp:1869 src/modules/X11/devX11.cpp:1291
 msgid "X11 fatal IO error: please save work and shut down R"
 msgstr "X11 の致命的 I/O エラーです、作業を保存して R を終了して下さい"
 
-#: src/modules/X11/dataentry.cpp:1893 src/modules/X11/devX11.cpp:1346
+#: src/modules/X11/dataentry.cpp:1894 src/modules/X11/devX11.cpp:1346
 msgid "locale not supported by Xlib: some X ops will operate in C locale"
 msgstr "Xlib がサポートしないロケールです。いくつかの X 機能は C ロケールで動作します"
 
-#: src/modules/X11/dataentry.cpp:1894 src/modules/X11/devX11.cpp:1347
+#: src/modules/X11/dataentry.cpp:1895 src/modules/X11/devX11.cpp:1347
 msgid "X cannot set locale modifiers"
 msgstr "X はロケール変更を設定することができません"
 
-#: src/modules/X11/dataentry.cpp:1898
+#: src/modules/X11/dataentry.cpp:1899
 #, fuzzy
 msgid "unable to open display"
 msgstr "ファイルを開くことができません"
 
-#: src/modules/X11/dataentry.cpp:1929
+#: src/modules/X11/dataentry.cpp:1930
 #, fuzzy, c-format
 msgid "unable to create fontset %s"
 msgstr " '%s' を解決することができません "
 
-#: src/modules/X11/dataentry.cpp:2060
+#: src/modules/X11/dataentry.cpp:2061
 #, fuzzy
 msgid "unable to open window for data editor"
 msgstr "読み込みのためにファイルを開くことができません"
 
-#: src/modules/X11/dataentry.cpp:2094
+#: src/modules/X11/dataentry.cpp:2095
 #, fuzzy
 msgid "unable to open X Input Method"
 msgstr "読み込みのためにファイルを開くことができません"
 
-#: src/modules/X11/dataentry.cpp:2129
+#: src/modules/X11/dataentry.cpp:2130
 #, fuzzy
 msgid "unable to open X Input Context"
 msgstr "読み込みのためにファイルを開くことができません"
@@ -10414,6 +10409,10 @@ msgstr "X11 モジュールをロードできません"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 が利用できません"
+
+#, fuzzy
+#~ msgid "cannot set attribute on a symbol"
+#~ msgstr "このシステムではタイムゾーンは設定できません"
 
 #, fuzzy
 #~ msgid "couldn't allocate node stack"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-04-09 17:26+0200\n"
 "PO-Revision-Date: 2024-05-23 03:05+0000\n"
 "Last-Translator: Nichole Haines <NicholeHaines54@gmail.com>\n"
 "Language-Team: none\n"
@@ -121,67 +121,67 @@ msgstr "matriz de transformación es singular"
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "no se puede almacenar el estado de 'grid'. ¿Demasiados dispositivos abiertos?"
 
-#: unit.cpp:75
+#: unit.cpp:76
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr "No se puede crear un escalar de unidades a partir de un vector de unidades de longitud 0"
 
-#: unit.cpp:809 unit.cpp:1308
+#: unit.cpp:806 unit.cpp:1305
 msgid "invalid unit or unit not yet implemented"
 msgstr "unidad no válida o unidad aún no implementada"
 
-#: unit.cpp:1365 unit.cpp:1396
+#: unit.cpp:1362 unit.cpp:1393
 msgid "Viewport has zero dimension(s)"
 msgstr "La ventana gráfica tiene dimensión(es) cero"
 
-#: unit.cpp:1428 unit.cpp:1443 unit.cpp:1458 unit.cpp:1473
+#: unit.cpp:1425 unit.cpp:1440 unit.cpp:1455 unit.cpp:1470
 msgid "Unsupported unit conversion"
 msgstr "Conversión de unidades no admitida"
 
-#: unit.cpp:1565
+#: unit.cpp:1562
 msgid "Invalid unit"
 msgstr "Unidad no válida"
 
-#: unit.cpp:1580
+#: unit.cpp:1577
 msgid "'units' must be character"
 msgstr "'units' debe ser de tipo carácter"
 
-#: unit.cpp:1583
+#: unit.cpp:1580
 msgid "'units' must be of length > 0"
 msgstr "'units' debe tener una longitud > 0"
 
-#: unit.cpp:1594
+#: unit.cpp:1591
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr "los datos deben ser NULL, tener una longitud de 1 o coincidir con la longitud del vector de unidades final"
 
-#: unit.cpp:1606
+#: unit.cpp:1603
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr "n se suministra ninguna cadena para la unidad 'strwidth/height'"
 
-#: unit.cpp:1610
+#: unit.cpp:1607
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr "no se ha suministrado 'grob' para la unidad de 'grobwidth/height'"
 
-#: unit.cpp:1628
+#: unit.cpp:1625
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr "'gPath' debe tener una profundidad de 1 en unidades 'grobwidth/height'"
 
-#: unit.cpp:1633
+#: unit.cpp:1630
 msgid "non-NULL value supplied for plain unit"
 msgstr "valor no NULL proporcionado para la unidad simple"
 
-#: unit.cpp:1686 unit.cpp:1720 unit.cpp:1769
+#: unit.cpp:1683 unit.cpp:1717 unit.cpp:1766
 msgid "old version of unit class is no longer allowed"
 msgstr "ya no se permite la versión anterior de la clase unit"
 
-#: unit.cpp:1692
+#: unit.cpp:1689
 msgid "object is not coercible to a unit"
 msgstr "no es posible forzar el objeto a una unidad"
 
-#: unit.cpp:1718
+#: unit.cpp:1715
 msgid "object is not a unit"
 msgstr "el objeto no es una unidad"
 
-#: unit.cpp:1853
+#: unit.cpp:1850
 msgid "units can only be multiplied with numerics and integers"
 msgstr "las unidades solo se pueden multiplicar por números y números enteros"
 

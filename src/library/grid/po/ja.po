@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-04-09 17:26+0200\n"
 "PO-Revision-Date: 2014-03-26 10:02+0200 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -121,67 +121,67 @@ msgstr "特異な変換行列です"
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "現在の 'grid' の状態を保持することが出来ません。デバイスを開きすぎていませんか?"
 
-#: unit.cpp:75
+#: unit.cpp:76
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr ""
 
-#: unit.cpp:809 unit.cpp:1308
+#: unit.cpp:806 unit.cpp:1305
 msgid "invalid unit or unit not yet implemented"
 msgstr "不正な単位 (unit) か、まだ実装されていない単位 (unit) です"
 
-#: unit.cpp:1365 unit.cpp:1396
+#: unit.cpp:1362 unit.cpp:1393
 msgid "Viewport has zero dimension(s)"
 msgstr "ビューポートの次元数がゼロです"
 
-#: unit.cpp:1428 unit.cpp:1443 unit.cpp:1458 unit.cpp:1473
+#: unit.cpp:1425 unit.cpp:1440 unit.cpp:1455 unit.cpp:1470
 msgid "Unsupported unit conversion"
 msgstr "対応していない単位変換です"
 
-#: unit.cpp:1565
+#: unit.cpp:1562
 msgid "Invalid unit"
 msgstr "不正な単位 (unit) です"
 
-#: unit.cpp:1580
+#: unit.cpp:1577
 msgid "'units' must be character"
 msgstr "単位 ('units') は文字型でなければなりません"
 
-#: unit.cpp:1583
+#: unit.cpp:1580
 msgid "'units' must be of length > 0"
 msgstr "単位 ('units') の長さは 0 より大きくなければなりません"
 
-#: unit.cpp:1594
+#: unit.cpp:1591
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr ""
 
-#: unit.cpp:1606
+#: unit.cpp:1603
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1610
+#: unit.cpp:1607
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1628
+#: unit.cpp:1625
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr ""
 
-#: unit.cpp:1633
+#: unit.cpp:1630
 msgid "non-NULL value supplied for plain unit"
 msgstr ""
 
-#: unit.cpp:1686 unit.cpp:1720 unit.cpp:1769
+#: unit.cpp:1683 unit.cpp:1717 unit.cpp:1766
 msgid "old version of unit class is no longer allowed"
 msgstr ""
 
-#: unit.cpp:1692
+#: unit.cpp:1689
 msgid "object is not coercible to a unit"
 msgstr ""
 
-#: unit.cpp:1718
+#: unit.cpp:1715
 msgid "object is not a unit"
 msgstr ""
 
-#: unit.cpp:1853
+#: unit.cpp:1850
 msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 
