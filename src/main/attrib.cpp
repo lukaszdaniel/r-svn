@@ -374,39 +374,7 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
     if (vec == R_NilValue)
         return R_NilValue;
 
-    switch(TYPEOF(vec)) {
-    case CHARSXP:
-	error("%s", _("cannot set attribute on a CHARSXP"));
-	break;
-    case SYMSXP:
-    case BUILTINSXP:
-    case SPECIALSXP:
-	error(_("cannot set attribute on a '%s'"), R_typeToChar(vec));
-    default:
-	break;
-    }
-
-    /* this does no allocation */
-    SEXP t = R_NilValue; /* -Wall */
-    for (SEXP s = ATTRIB(vec); s != R_NilValue; s = CDR(s)) {
-	if (TAG(s) == name) {
-	    if (MAYBE_REFERENCED(val) && val != CAR(s))
-		val = R_FixupRHS(vec, val);
-	    SETCAR(s, val);
-	    return val;
-	}
-	t = s; // record last attribute, if any
-    }
-    /* The usual convention is that the caller protects,
-       but a lot of existing code depends assume that
-       setAttrib/installAttrib protects its arguments */
-    PROTECT(vec); PROTECT(name); PROTECT(val);
-    if (MAYBE_REFERENCED(val)) ENSURE_NAMEDMAX(val);
-    SEXP s = CONS(val, R_NilValue);
-    SET_TAG(s, name);
-    if (ATTRIB(vec) == R_NilValue) SET_ATTRIB(vec, s); else SETCDR(t, s);
-    UNPROTECT(3);
-    // vec->setAttribute(static_cast<Symbol *>(name), val);
+    vec->setAttribute(static_cast<Symbol *>(name), val);
     return val;
 }
 
