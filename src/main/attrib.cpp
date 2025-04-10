@@ -795,10 +795,11 @@ static SEXP createDefaultClass(SEXP part1, SEXP part2, SEXP part3, SEXP part4)
     SEXP res = allocVector(STRSXP, size);
     R_PreserveObject(res);
 
-    if (part1 != R_NilValue) SET_STRING_ELT(res, 0, part1);
-    if (part2 != R_NilValue) SET_STRING_ELT(res, 1, part2);
-    if (part3 != R_NilValue) SET_STRING_ELT(res, 2, part3);
-    if (part4 != R_NilValue) SET_STRING_ELT(res, 3, part4);
+    int i = 0;
+    if (part1 != R_NilValue) SET_STRING_ELT(res, i++, part1);
+    if (part2 != R_NilValue) SET_STRING_ELT(res, i++, part2);
+    if (part3 != R_NilValue) SET_STRING_ELT(res, i++, part3);
+    if (part4 != R_NilValue) SET_STRING_ELT(res, i, part4);
 
     MARK_NOT_MUTABLE(res);
     return res;
