@@ -374,6 +374,7 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
     if (vec == R_NilValue)
         return R_NilValue;
 
+    GCStackRoot<> vecrt(vec);
     vec->setAttribute(static_cast<Symbol *>(name), val);
     return val;
 }
