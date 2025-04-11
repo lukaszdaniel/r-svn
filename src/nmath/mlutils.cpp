@@ -109,8 +109,20 @@ double R_pow_di(double x, int n)
     return pow;
 }
 
-constexpr double NA_REAL = ML_NAN; // Intel icx will not compile this.
-                                   // In R it is computed at compiletime.
+/* It is not clear why these are being defined in standalone nmath:
+ * but that they are is stated in the R-admin manual.
+ *
+ * In R NA_REAL is a specific NaN computed during initialization.
+ */
+#if defined(__clang__) && defined(NAN)
+// C99 (optionally) has NAN, which is a float but will coerce to double.
+constexpr double NA_REAL = NAN;
+#else
+// ML_NAN is defined as (0.0/0.0) in nmath.h
+// Fails to compile in Intel ics 2025.0, Apple clang 17, LLVM clang 20
+constexpr double NA_REAL = ML_NAN;
+#endif
+
 constexpr double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
 attribute_hidden void REprintf(const char *format, ...)

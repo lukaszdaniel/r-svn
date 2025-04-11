@@ -311,10 +311,11 @@ attribute_hidden Rcomplex R::ComplexFromString(SEXP x, int *warn)
 
 attribute_hidden SEXP R::StringFromLogical(int x, int *warn)
 {
-    int w;
-    formatLogical(&x, 1, &w);
+    static SEXP TrueCh = NULL, FalseCh = NULL; /* constants, initialized when first used */
     if (x == NA_LOGICAL) return NA_STRING;
-    else return mkChar(EncodeLogical(x, w));
+    else if (x)
+	 return TrueCh != NULL ? TrueCh  : (TrueCh  = mkChar("TRUE"));
+    else return FalseCh!= NULL ? FalseCh : (FalseCh = mkChar("FALSE"));
 }
 
 /* The conversions for small non-negative integers are saved in a chache. */

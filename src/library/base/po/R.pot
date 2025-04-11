@@ -1203,7 +1203,7 @@ msgid "cannot have attributes on a CHARSXP"
 msgstr ""
 
 #: src/main/attrib.cpp:386
-msgid "cannot set attribute on a CHARSXP"
+msgid "cannot set an attribute on a CHARSXP"
 msgstr ""
 
 #: src/main/attrib.cpp:406
@@ -7168,12 +7168,12 @@ msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
 #: src/main/RObject.cpp:132
-msgid "cannot set attribute on a 'CHARSXP'"
+msgid "cannot set an attribute on a 'CHARSXP'"
 msgstr ""
 
 #: src/main/RObject.cpp:137
 #, c-format
-msgid "cannot set attribute on a '%s'"
+msgid "cannot set an attribute on a '%s'"
 msgstr ""
 
 #: src/main/Rstrptime.h:523 src/main/Rstrptime.h:1011
