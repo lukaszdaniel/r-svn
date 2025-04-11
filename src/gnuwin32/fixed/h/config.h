@@ -1210,7 +1210,7 @@
 #endif
 
 /* Workaround for win64 pow() precision issue in Mingw-w64 V3 and higher
-   See http://sourceforge.net/p/mingw-w64/bugs/466 for discussion. */
+   See https://sourceforge.net/p/mingw-w64/bugs/466 for discussion. */
 #if defined(_WIN64) && defined(__MINGW64_VERSION_MAJOR) && __MINGW64_VERSION_MAJOR >= 3
 #define USE_POWL_IN_R_POW 1
 #endif

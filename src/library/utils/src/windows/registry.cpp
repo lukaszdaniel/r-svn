@@ -254,7 +254,7 @@ SEXP readRegistry(SEXP call, SEXP op, SEXP args, SEXP env)
     view = asInteger(CADDDR(args));
     /* Or KEY_READ with KEY_WOW64_64KEY or KEY_WOW64_32KEY to
        explicitly access the 64- or 32- bit registry view.  See
-       http://msdn.microsoft.com/en-us/library/aa384129(VS.85).aspx
+       https://learn.microsoft.com/en-us/windows/win32/winprog64/accessing-an-alternate-registry-view?redirectedfrom=MSDN
     */
     if(view == 2) acc |= KEY_WOW64_32KEY;
     else if(view == 3) acc |= KEY_WOW64_64KEY;

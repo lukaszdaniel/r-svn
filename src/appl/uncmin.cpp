@@ -982,7 +982,7 @@ static void hook_1step(int nr, int n, double *g, double *a, double *udiag, doubl
 	/*	copy (h,udiag) to l */
 	/*	where h <-- h+amu*(sx**2) [do not actually change (h,udiag)] */
 /* The original code was
-   http://people.sc.fsu.edu/~jburkardt/f77_src/uncmin/uncmin.f
+   https://people.sc.fsu.edu/~jburkardt/f77_src/uncmin/uncmin.f
 	do 100 j=1,n
 	  a(j,j)=udiag(j) + amu*sx(j)*sx(j)
 	  if(j.eq.n) go to 100

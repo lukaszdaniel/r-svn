@@ -1640,7 +1640,7 @@ static void PangoCairo_Text(double x, double y,
 /* ------------- cairo-ft section --------------- */
 
 /* This uses what cairo refers to as its 'toy' interface:
-   http://cairographics.org/manual/cairo-text.html
+   https://cairographics.org/manual/cairo-text.html
 
    No diagnostics that glyphs are present, no kerning. 
 

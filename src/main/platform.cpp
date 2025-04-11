@@ -3473,7 +3473,7 @@ attribute_hidden SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #ifdef Win32
 /* based on ideas in
-   http://www.codeproject.com/KB/winsdk/junctionpoints.aspx
+   https://www.codeproject.com/KB/winsdk/junctionpoints.aspx
 */
 typedef struct TMN_REPARSE_DATA_BUFFER
 {

@@ -390,11 +390,11 @@ static double psmirnov_exact_ties_upper(double q, int m, int n, int *z, int two)
 /* One-sample two-sided exact distribution */
 SEXP pkolmogorov_two_exact(SEXP sq, SEXP sn)
 {
-    int n = asInteger(sn), i;
+    int n = asInteger(sn);
     SEXP ans;
 
     PROTECT(ans = allocVector(REALSXP, LENGTH(sq)));
-    for(i = 0; i < LENGTH(sq); i++) {
+    for (int i = 0; i < LENGTH(sq); i++) {
 	REAL(ans)[i] = K2x(n, REAL(sq)[i]);
     }
     UNPROTECT(1);
@@ -409,7 +409,7 @@ static double K2x(int n, double d)
 	 George Marsaglia and Wai Wan Tsang and Jingbo Wang (2003),
 	 "Evaluating Kolmogorov's distribution".
 	 Journal of Statistical Software, Volume 8, 2003, Issue 18.
-	 URL: http://www.jstatsoft.org/v08/i18/.
+	 URL: https://www.jstatsoft.org/v08/i18/.
     */
 
    /* 

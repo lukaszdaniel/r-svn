@@ -30,8 +30,8 @@ struct interval_wcwidth {
 };
 
 /* Background info for the first column is in
-   http://www.unicode.org/Public/UCD/latest/ucd/EastAsianWidth.txt
-   http://www.unicode.org/reports/tr11/
+   https://www.unicode.org/Public/UCD/latest/ucd/EastAsianWidth.txt
+   https://www.unicode.org/reports/tr11/
 
    For the 2020-05 updating, see
    https://github.com/brodieG/char-width
@@ -1403,7 +1403,7 @@ static const struct interval_wcwidth table_wcwidth[] = {
     {0x20000,0x3ffff,{2,2,2,2,2,2,2}}
 };
 
-/* From http://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
+/* From https://www.cl.cam.ac.uk/~mgk25/ucs/wcwidth.c
  *    <quote>
  *    - The null character (U+0000) has a column width of 0.
  *

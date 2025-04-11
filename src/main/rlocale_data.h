@@ -35,7 +35,7 @@
    by Ei-ji Nakama.  Sources for updating include the Unicode tables;
 
    https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt
-   (described in http://www.unicode.org/L2/L1999/UnicodeData.html)
+   (described in https://www.unicode.org/L2/L1999/UnicodeData.html)
 
    with the help of Marcus Kuhn's 'uniset' Perl script
    (https://www.cl.cam.ac.uk/~mgk25/download/uniset.tar.gz: update the

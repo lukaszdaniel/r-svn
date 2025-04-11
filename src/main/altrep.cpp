@@ -259,7 +259,7 @@ struct altlist_methods_t : public altvec_methods_t
 
 /* Macro to extract first element from ... macro argument.
    From Richard Hansen's answer in
-   http://stackoverflow.com/questions/5588855/standard-alternative-to-gccs-va-args-trick 
+   https://stackoverflow.com/questions/5588855/standard-alternative-to-gccs-va-args-trick
 */
 #define DISPATCH_TARGET(...) DISPATCH_TARGET_HELPER(__VA_ARGS__, dummy)
 #define DISPATCH_TARGET_HELPER(x, ...) x

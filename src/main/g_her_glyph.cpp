@@ -22,7 +22,7 @@
    <pete@xc.org>, then at Octopus Enterprises.  In the 1980's the glyphs
    were incorporated in at least two freeware plotting programs, Nelson
    Beebe's PLOT79 and Tim Pearson's PGPLOT.  The latter is still available
-   (see http://astro.caltech.edu/~tjp/pgplot/ ).
+   (see https://astro.caltech.edu/~tjp/pgplot/ ).
 
    The standard hardcopy reference for the occidental Hershey glyphs, which
    tabulates and displays them, is:

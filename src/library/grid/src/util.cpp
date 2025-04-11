@@ -103,7 +103,7 @@ void copyRect(LRect r1, LRect *r)
 
 /* Do two lines intersect ?
  * Algorithm from Paul Bourke
- * (http://paulbourke.net/geometry/pointlineplane/)
+ * (https://paulbourke.net/geometry/pointlineplane/)
  */
 int linesIntersect(double x1, double x2, double x3, double x4,
 		   double y1, double y2, double y3, double y4)

@@ -55,7 +55,7 @@
    should not be needed in R.
 
    This is commonly known as LFS; _but_ 'LFS Linux' is something else.
-   See http://en.wikipedia.org/wiki/Large_file_support and
+   See https://en.wikipedia.org/wiki/Large_file_support and
    http://www.suse.de/~aj/linux_lfs.html
 
    Solaris has a similar scheme: see 'man lf64', 'man lfcompile' and
@@ -526,7 +526,7 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
     CXXR::RAllocStack::Scope rscope;
     if(res >= BUFSIZE) { /* res is the desired output length */
 	/* apparently some implementations count short,
-	   <http://unixpapa.com/incnote/stdio.html>
+	   <https://unixpapa.com/incnote/stdio.html>
 	   so add some margin here */
 	b = R_alloc(res + 101, sizeof(char));
 	vsnprintf(b, res + 100, format, ap);
@@ -936,7 +936,7 @@ static Rboolean file_open(Rconnection con)
 	 * unlink is valid) or FILE_FLAG_DELETE_ON_CLOSE.  E.g. create
 	 * via CreateFile, get an fd by _open_osfhandle and a file
 	 * stream by fdopen.  See
-	 * e.g. http://www.codeproject.com/KB/files/handles.aspx
+	 * e.g. https://www.codeproject.com/KB/files/handles.aspx
 	 *
 	 * unlink(name);
 	 */
@@ -1346,7 +1346,7 @@ static char* win_getlasterror_str(void)
     return err_msg;
 }
 
-static Rboolean	fifo_open(Rconnection con)
+static Rboolean fifo_open(Rconnection con)
 {
     Rfifoconn this_ = (Rfifoconn) con->connprivate;
     unsigned int uin_mode_len = strlen(con->mode);
@@ -1382,8 +1382,8 @@ static Rboolean	fifo_open(Rconnection con)
 
     /*
     ** FIFO using Windows API -> CreateNamedPipe() OR CreateFile()
-    ** http://msdn.microsoft.com/en-us/library/windows/desktop/aa363858(v=vs.85).aspx
-    ** http://msdn.microsoft.com/en-us/library/windows/desktop/aa365150(v=vs.85).aspx
+    ** https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-createfilea?redirectedfrom=MSDN
+    ** https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createnamedpipea?redirectedfrom=MSDN
     */
     this_->hdl_namedpipe = NULL;
     this_->overlapped_write = (LPOVERLAPPED) CreateEventA(NULL, TRUE, TRUE, NULL);

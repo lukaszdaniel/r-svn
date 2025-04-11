@@ -26,7 +26,7 @@
 #include "localization.h"
 
 /* Based on example at
-   http://msdn.microsoft.com/en-us/library/ms683194%28v=VS.85%29.aspx
+   https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getlogicalprocessorinformation?redirectedfrom=MSDN
 */
 
 #ifndef _W64

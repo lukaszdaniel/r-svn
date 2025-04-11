@@ -36,7 +36,7 @@
 
 /* Note: gcc -pedantic may warn in several places about C99 features
    as extensions.
-   This was a very-long-standing GCC bug, http://gcc.gnu.org/PR7263
+   This was a very-long-standing GCC bug, https://gcc.gnu.org/PR7263
    The system <complex.h> header can work around it: some do.
    It should have been resolved (after a decade) in 2012.
 */

@@ -1889,7 +1889,7 @@ char *Rf_acopy_string(const char *in)
 
 
 /* Table from
-http://unicode.org/Public/MAPPINGS/VENDORS/ADOBE/symbol.txt
+https://unicode.org/Public/MAPPINGS/VENDORS/ADOBE/symbol.txt
 */
 
 /* Conversion table that DOES use Private Usage Area

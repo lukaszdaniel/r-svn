@@ -137,7 +137,7 @@ double R::currentTime(void)
 #ifndef HAVE_POSIX_LEAPSECONDS
     /* No known current OSes */
     /* Disallowed by POSIX (1988-):
-       http://www.mail-archive.com/leapsecs@rom.usno.navy.mil/msg00109.html
+       https://www.mail-archive.com/leapsecs@rom.usno.navy.mil/msg00109.html
        https://en.wikipedia.org/wiki/Unix_time
     */
     if (!ISNAN(ans)) {

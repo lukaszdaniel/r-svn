@@ -55,10 +55,10 @@ SEXP winver(void)
     if(!GetVersionEx((OSVERSIONINFO *)&osvi))
 	error("%s", _("unsupported version of Windows"));
 
-    /* see http://msdn2.microsoft.com/en-us/library/ms724429.aspx
+    /* see https://learn.microsoft.com/en-us/windows/win32/sysinfo/getting-the-system-version?redirectedfrom=MSDN
        for ways to get more info.
        Pre-NT versions are all 4.x, so no need to separate test.
-       See also http://msdn.microsoft.com/en-us/library/ms724832.aspx
+       See also https://learn.microsoft.com/en-us/windows/win32/sysinfo/operating-system-version?redirectedfrom=MSDN
        https://msdn.microsoft.com/en-us/library/windows/desktop/ms724833%28v=vs.85%29.aspx
        for version number naming.
     */

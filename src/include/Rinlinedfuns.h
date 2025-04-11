@@ -25,7 +25,7 @@
    from GNU C systems.
 
    There are different conventions for inlining across compilation units.
-   See http://www.greenend.org.uk/rjk/2003/03/inline.html
+   See https://www.greenend.org.uk/rjk/tech/inline.html
  */
 #ifndef R_INLINES_H_
 #define R_INLINES_H_

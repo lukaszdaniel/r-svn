@@ -153,7 +153,7 @@ double unif_rand(void)
     case LECUYER_CMRG:
     {
 	/* Based loosely on the GPL-ed version of
-	   http://www.iro.umontreal.ca/~lecuyer/myftp/streams00/c2010/RngStream.c
+	   https://www.iro.umontreal.ca/~lecuyer/myftp/streams00/c2010/RngStream.c
 	   but using int_least64_t, which C99 guarantees.
 	*/
 	int k;
@@ -621,7 +621,7 @@ void seed_out(long *ignored)
 /* ===================  Mersenne Twister ========================== */
 /* From http://www.math.keio.ac.jp/~matumoto/emt.html */
 /* New URL (accessed 2018-11-08):
-   http://www.math.sci.hiroshima-u.ac.jp/~m-mat/eindex.html
+   https://www.math.sci.hiroshima-u.ac.jp/~m-mat/eindex.html
 
    The initialization method in the 1998 code and paper had a minor
    issue that was addressed with new initialization approaches in an
@@ -732,7 +732,7 @@ static double MT_genrand(void)
 /*
    The following code was taken from earlier versions of
    http://www-cs-faculty.stanford.edu/~knuth/programs/rng.c-old
-   http://www-cs-faculty.stanford.edu/~knuth/programs/rng.c
+   https://www-cs-faculty.stanford.edu/~knuth/programs/rng.c
 */
 
 
@@ -786,7 +786,7 @@ static long ran_arr_cycle(void)
 /*    This program by D E Knuth is in the public domain and freely copyable.
  *    It is explained in Seminumerical Algorithms, 3rd edition, Section 3.6
  *    (or in the errata to the 2nd edition --- see
- *        http://www-cs-faculty.stanford.edu/~knuth/taocp.html
+ *        https://www-cs-faculty.stanford.edu/~knuth/taocp.html
  *    in the changes to Volume 2 on pages 171 and following).              */
 
 /*    N.B. The MODIFICATIONS introduced in the 9th printing (2002) are

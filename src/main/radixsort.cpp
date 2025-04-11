@@ -135,7 +135,7 @@ static void savetl(SEXP s)
     nsaved++;
 }
 
-// http://gcc.gnu.org/onlinedocs/cpp/Swallowing-the-Semicolon.html#Swallowing-the-Semicolon
+// https://gcc.gnu.org/onlinedocs/cpp/Swallowing-the-Semicolon.html#Swallowing-the-Semicolon
 #define Error(...) do {savetl_end(); error(__VA_ARGS__);} while(0)
 #undef warning
 // since it can be turned to error via warn = 2
@@ -375,7 +375,7 @@ static void iinsert(int *x, int *o, int n)
 /*
   iradix is a counting sort performed forwards from MSB to LSB, with
   some tricks and short circuits building on Terdiman and Herf.
-  http://codercorner.com/RadixSortRevisited.htm
+  https://codercorner.com/RadixSortRevisited.htm
   http://stereopsis.com/radix.html
 
   ~ Note they are LSD, but we do MSD here which is more complicated,

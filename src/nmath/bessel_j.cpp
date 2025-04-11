@@ -20,7 +20,7 @@
 /*  DESCRIPTION --> see below */
 
 
-/* From http://www.netlib.org/specfun/rjbesl	Fortran translated by f2c,...
+/* From https://www.netlib.org/specfun/rjbesl	Fortran translated by f2c,...
  *	------------------------------=#----	Martin Maechler, ETH Zurich
  * Additional code for nu == alpha < 0  MM
  */

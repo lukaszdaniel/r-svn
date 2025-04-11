@@ -21,7 +21,7 @@
 /*  DESCRIPTION --> see below */
 
 
-/* From http://www.netlib.org/specfun/rkbesl	Fortran translated by f2c,...
+/* From https://www.netlib.org/specfun/rkbesl	Fortran translated by f2c,...
  *	------------------------------=#----	Martin Maechler, ETH Zurich
  */
 #include "nmath.h"
