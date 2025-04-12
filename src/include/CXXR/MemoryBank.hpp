@@ -152,6 +152,12 @@ namespace CXXR
          */
         static size_t bytesAllocated() { return s_bytes_allocated; }
 
+        /** @brief Number of doubles currently allocated.
+         *
+         * @return the number of doubles currently allocated.
+         */
+        static size_t doublesAllocated() { return (s_bytes_allocated + sizeof(double) - 1)/sizeof(double); }
+
         /** @brief Integrity check.
          *
          * Aborts the program with an error message if the class is

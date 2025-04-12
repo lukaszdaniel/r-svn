@@ -612,7 +612,7 @@ static R_size_t R_V_maxused=0;
    (! NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
 
 
-#define VHEAP_FREE() (R_VSize - MemoryBank::bytesAllocated()/sizeof(double))
+#define VHEAP_FREE() (R_VSize - MemoryBank::doublesAllocated())
 
 #define NEXT_NODE(s) (s)->m_next
 #define PREV_NODE(s) (s)->m_prev
@@ -903,7 +903,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 static void DEBUG_GC_SUMMARY(int full_gc)
 {
     REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
-	     MemoryBank::bytesAllocated()/sizeof(double));
+	     MemoryBank::doublesAllocated());
 	unsigned int OldCount = 0;
 	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
 	    OldCount += R_GenHeap->m_OldCount[gen];
@@ -919,7 +919,7 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 {
     REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
 	     100.0 * node_occup, 100.0 * vect_occup);
-    R_size_t alloc = MemoryBank::bytesAllocated()/sizeof(double) +
+    R_size_t alloc = MemoryBank::doublesAllocated() +
 	sizeof(VectorBase) * MemoryBank::blocksAllocated();
     REprintf("Total allocation: %lu\n", alloc);
     REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
@@ -937,7 +937,7 @@ static void AdjustHeapSize(R_size_t size_needed)
     R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
     R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
     R_size_t NNeeded = GCNode::numNodes() + R_MinNFree;
-    R_size_t VNeeded = MemoryBank::bytesAllocated()/sizeof(double) + size_needed + R_MinVFree;
+    R_size_t VNeeded = MemoryBank::doublesAllocated() + size_needed + R_MinVFree;
     double node_occup = ((double) NNeeded) / R_NSize;
     double vect_occup =	((double) VNeeded) / R_VSize;
 
@@ -2148,7 +2148,7 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 				      size_t *nodes)
 {
     *smallvsize = 0;
-    *largevsize = MemoryBank::bytesAllocated()/sizeof(double);
+    *largevsize = MemoryBank::doublesAllocated();
     *nodes = GCNode::numNodes() * sizeof(RObject);
     return;
 }
@@ -2174,12 +2174,12 @@ Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
     /*- now return the [used , gc trigger size] for cells and heap */
     value = allocVector(REALSXP, 14);
     REAL(value)[0] = GCNode::numNodes();
-    REAL(value)[1] = MemoryBank::bytesAllocated()/sizeof(double);
+    REAL(value)[1] = MemoryBank::doublesAllocated();
     REAL(value)[4] = R_NSize;
     REAL(value)[5] = R_VSize;
     /* next four are in 0.1Mb, rounded up */
     REAL(value)[2] = 0.1*ceil(10. * (GCNode::numNodes())/Mega * sizeof(RObject));
-    REAL(value)[3] = 0.1*ceil(10. * (MemoryBank::bytesAllocated()/sizeof(double))/Mega * vsfac);
+    REAL(value)[3] = 0.1*ceil(10. * (MemoryBank::doublesAllocated())/Mega * vsfac);
     REAL(value)[6] = 0.1*ceil(10. * R_NSize/Mega * sizeof(RObject));
     REAL(value)[7] = 0.1*ceil(10. * R_VSize/Mega * vsfac);
     REAL(value)[8] = (R_MaxNSize < R_SIZE_T_MAX) ?
@@ -2188,7 +2188,7 @@ Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
 	0.1*ceil(10. * R_MaxVSize/Mega * vsfac) : NA_REAL;
     if (reset_max){
 	    R_N_maxused = GCNode::numNodes();
-	    R_V_maxused = MemoryBank::bytesAllocated()/sizeof(double);
+	    R_V_maxused = MemoryBank::doublesAllocated();
     }
     REAL(value)[10] = R_N_maxused;
     REAL(value)[11] = R_V_maxused;
@@ -2924,7 +2924,7 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
     ++s_gc_count;
 
     R_N_maxused = std::max(R_N_maxused, GCNode::numNodes());
-    R_V_maxused = std::max(R_V_maxused, MemoryBank::bytesAllocated()/sizeof(double));
+    R_V_maxused = std::max(R_V_maxused, MemoryBank::doublesAllocated());
 
     BEGIN_SUSPEND_INTERRUPTS {
 	s_gc_is_running = true;
@@ -2953,7 +2953,7 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 	ncells = 0.1*ceil(10*ncells * sizeof(RObject)/Mega);
 	REprintf("\n%.1f %s of cons cells used (%d%%)\n",
 		 ncells, "Mbytes", (int) (nfrac + 0.5));
-	vcells = MemoryBank::bytesAllocated()/sizeof(double);
+	vcells = MemoryBank::doublesAllocated();
 	vfrac = (100.0 * vcells) / R_VSize;
 	vcells = 0.1*ceil(10*vcells * vsfac/Mega);
 	REprintf("%.1f %s of vectors used (%d%%)\n",
