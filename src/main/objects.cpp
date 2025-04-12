@@ -854,11 +854,11 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     sb = translateChar(STRING_ELT(basename, 0));
-    bool foundSignature = FALSE;
+    bool foundSignature = false;
     for (j = 0; j < LENGTH(klass); j++) {
 	sk = translateChar(STRING_ELT(klass, j));
 	if (equalS3Signature(b, sb, sk)) { /* b == sb.sk */
-	    foundSignature = TRUE;
+	    foundSignature = true;
 	    break;
 	}
     }
@@ -1019,7 +1019,7 @@ static SEXP inherits3(SEXP x, SEXP what, SEXP which)
     if (IS_S4_OBJECT(x))
 	klass = R_data_class2(x); // -> := S4_extends( "class(x)" )
     else
-	klass = R_data_class(x, FALSE);
+	klass = R_data_class(x, false);
 
     if (!isString(what))
 	error("%s", _("'what' must be a character vector or an object with a nameOfClass() method"));
@@ -1269,18 +1269,18 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 {
     /* dispatch the non-generic definition of `name'.  Used to trap
        calls to standardGeneric during the loading of the methods package */
-    SEXP e, value, fun, symbol;
+    SEXP value, fun, symbol;
 
     /* find a non-generic function */
     symbol = installTrChar(asChar(name));
     for (SEXP rho = ENCLOS(env); rho != R_EmptyEnv;
 	rho = ENCLOS(rho)) {
 	fun = R_findVarInFrame(rho, symbol);
-	if(fun == R_UnboundValue) continue;
-	switch(TYPEOF(fun)) {
+	if (fun == R_UnboundValue) continue;
+	switch (TYPEOF(fun)) {
 	case CLOSXP:
 	    value = R_findVarInFrame(CLOENV(fun), R_dot_Generic);
-	    if(value == R_UnboundValue) break;
+	    if (value == R_UnboundValue) break;
 	case BUILTINSXP:  case SPECIALSXP:
 	default:
 	    /* in all other cases, go on to the parent environment */
@@ -1289,7 +1289,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 	fun = R_UnboundValue;
     }
     fun = SYMVALUE(symbol);
-    if(fun == R_UnboundValue)
+    if (fun == R_UnboundValue)
 	error(_("unable to find a non-generic version of function \"%s\""),
 	      translateChar(asChar(name)));
     RCNTXT *cptr = R_GlobalContext;
@@ -1301,12 +1301,13 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 	cptr = cptr->nextcontext;
     }
 
-    PROTECT(e = shallow_duplicate(R_syscall(0, cptr)));
+    GCStackRoot<> e;
+    e = shallow_duplicate(R_syscall(0, cptr));
     SETCAR(e, fun);
     /* evaluate a call the non-generic with the same arguments and from
        the same environment as the call to the generic version */
     value = eval(e, cptr->sysparent);
-    UNPROTECT(1);
+
     return value;
 }
 
@@ -1315,12 +1316,12 @@ static SEXP get_this_generic(SEXP args);
 
 attribute_hidden SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP arg, value, fdef; R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
+    SEXP arg, value; R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
 
     checkArity(op, args); /* set to -1 */
     check1arg(args, call, "f");
 
-    if(!ptr) {
+    if (!ptr) {
 	warningcall(call, "%s",
 		    _("'standardGeneric' called without 'methods' dispatch enabled (will be ignored)"));
 	R_set_standardGeneric_ptr(dispatchNonGeneric, NULL);
@@ -1328,18 +1329,18 @@ attribute_hidden SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env
     }
 
     arg = CAR(args);
-    if(!isValidStringF(arg))
+    if (!isValidStringF(arg))
 	errorcall(call, "%s",
 		  _("argument to 'standardGeneric' must be a non-empty character string"));
 
-    PROTECT(fdef = get_this_generic(args));
+    GCStackRoot<> fdef;
+    fdef = get_this_generic(args);
 
-    if(isNull(fdef))
+    if (isNull(fdef))
 	error(_("call to standardGeneric(\"%s\") apparently not from the body of that generic function"), translateChar(STRING_ELT(arg, 0)));
 
     value = (*ptr)(arg, env, fdef);
 
-    UNPROTECT(1);
     return value;
 }
 
@@ -1367,9 +1368,9 @@ SEXP R::R_set_prim_method(SEXP fname, SEXP op, SEXP code_vec, SEXP fundef,
 	SEXP value = allowPrimitiveMethods ? mkTrue() : mkFalse();
 	switch(code_string[0]) {
 	case 'c': case 'C':/* clear */
-	    allowPrimitiveMethods = FALSE; break;
+	    allowPrimitiveMethods = false; break;
 	case 's': case 'S': /* set */
-	    allowPrimitiveMethods = TRUE; break;
+	    allowPrimitiveMethods = true; break;
 	default: /* just report the current state */
 	    break;
 	}
@@ -1417,7 +1418,7 @@ SEXP R::do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
     int offset = 0;
     prim_methods_t code = NO_METHODS; /* -Wall */
     SEXP value;
-    bool errorcase = FALSE;
+    bool errorcase = false;
     switch(code_string[0]) {
     case 'c': /* clear */
 	code = NO_METHODS; break;
@@ -1427,13 +1428,13 @@ SEXP R::do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
 	switch(code_string[1]) {
 	case 'e': code = HAS_METHODS; break;
 	case 'u': code = SUPPRESSED; break;
-	default: errorcase = TRUE;
+	default: errorcase = true;
 	}
 	break;
     default:
-	errorcase = TRUE;
+	errorcase = true;
     }
-    if(errorcase) {
+    if (errorcase) {
 	error(_("invalid primitive methods code (\"%s\"): should be \"clear\", \"reset\", \"set\", or \"suppress\""), code_string);
 	return R_NilValue;
     }
@@ -1784,13 +1785,12 @@ SEXP R_do_new_object(SEXP class_def)
 
 attribute_hidden bool R::R_seemsOldStyleS4Object(SEXP object)
 {
-    SEXP klass;
-    if(!isObject(object) || IS_S4_OBJECT(object)) return FALSE;
+    if (!isObject(object) || IS_S4_OBJECT(object)) return false;
     /* We want to know about S4SXPs with no S4 bit */
-    /* if(TYPEOF(object) == S4SXP) return FALSE; */
-    klass = getAttrib(object, R_ClassSymbol);
+    /* if(TYPEOF(object) == S4SXP) return false; */
+    SEXP klass = getAttrib(object, R_ClassSymbol);
     return (klass != R_NilValue && LENGTH(klass) == 1 &&
-	    getAttrib(klass, R_PackageSymbol) != R_NilValue) ? TRUE: FALSE;
+	    getAttrib(klass, R_PackageSymbol) != R_NilValue);
 }
 
 attribute_hidden SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)
