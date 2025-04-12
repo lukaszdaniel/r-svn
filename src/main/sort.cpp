@@ -132,6 +132,34 @@ Rboolean Rf_isUnsorted(SEXP x, Rboolean strictly)
 	       so we use ITERATE_BY_REGION to get the multiple INTEGER calls
 	       outside of the tight loop and be ALTREP safe. */
 	case LGLSXP:
+	    if (strictly) {
+		ITERATE_BY_REGION(x, xptr, i, nbatch, int, LOGICAL, {
+			/* itmp initialized to INT_MIN which is < all
+			   valid nonNA R int values so no need to
+			   exclude first iteration
+
+			   After first iteration itmp is value at end
+			   of last batch */
+			if (itmp >= xptr[0]) 
+			    return TRUE;
+			for (R_xlen_t k = 0; k < nbatch - 1; k++) {
+			    if (xptr[k] >= xptr[k+1])
+				return TRUE;
+			}
+			itmp = xptr[nbatch - 1];
+		    });
+	    } else {
+		ITERATE_BY_REGION(x, xptr, i, nbatch, int, LOGICAL, {
+			if (itmp > xptr[0]) //deal with batch barriers
+			    return TRUE;
+			for (R_xlen_t k = 0; k < nbatch - 1; k++) {
+			    if (xptr[k] > xptr[k+1])
+				return TRUE;
+			}
+			itmp = xptr[nbatch - 1];
+		    });
+	    }
+	    break;
 	case INTSXP:
 	    if(strictly) {
 		ITERATE_BY_REGION(x, xptr, i, nbatch, int, INTEGER, {
@@ -657,6 +685,8 @@ void R::sortVector(SEXP s, bool decreasing)
     if (n >= 2 && (decreasing || isUnsorted(s, FALSE)))
 	switch (TYPEOF(s)) {
 	case LGLSXP:
+	    R_isort2(LOGICAL(s), n, decreasing);
+	    break;
 	case INTSXP:
 	    R_isort2(INTEGER(s), n, decreasing);
 	    break;
@@ -756,6 +786,8 @@ static void Psort(SEXP x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
     /* Rprintf("looking for index %d in (%d, %d)\n", k, lo, hi);*/
     switch (TYPEOF(x)) {
     case LGLSXP:
+	iPsort2(LOGICAL(x), lo, hi, k);
+	break;
     case INTSXP:
 	iPsort2(INTEGER(x), lo, hi, k);
 	break;
@@ -863,6 +895,8 @@ static bool equal(R_xlen_t i, R_xlen_t j, SEXP x, bool nalast, SEXP rho)
     } else {
 	switch (TYPEOF(x)) {
 	case LGLSXP:
+	    c = icmp(LOGICAL(x)[i], LOGICAL(x)[j], nalast);
+	    break;
 	case INTSXP:
 	    c = icmp(INTEGER(x)[i], INTEGER(x)[j], nalast);
 	    break;
@@ -898,6 +932,8 @@ static bool greater(R_xlen_t i, R_xlen_t j, SEXP x, bool nalast,
     } else {
 	switch (TYPEOF(x)) {
 	case LGLSXP:
+	    c = icmp(LOGICAL(x)[i], LOGICAL(x)[j], nalast);
+	    break;
 	case INTSXP:
 	    c = icmp(INTEGER(x)[i], INTEGER(x)[j], nalast);
 	    break;
@@ -930,6 +966,8 @@ static bool listgreater(int i, int j, SEXP key, bool nalast,
 	x = CAR(key);
 	switch (TYPEOF(x)) {
 	case LGLSXP:
+	    c = icmp(LOGICAL(x)[i], LOGICAL(x)[j], nalast);
+	    break;
 	case INTSXP:
 	    c = icmp(INTEGER(x)[i], INTEGER(x)[j], nalast);
 	    break;
@@ -1026,6 +1064,8 @@ static bool listgreaterl(R_xlen_t i, R_xlen_t j, SEXP key, bool nalast,
 	x = CAR(key);
 	switch (TYPEOF(x)) {
 	case LGLSXP:
+	    c = icmp(LOGICAL(x)[i], LOGICAL(x)[j], nalast);
+	    break;
 	case INTSXP:
 	    c = icmp(INTEGER(x)[i], INTEGER(x)[j], nalast);
 	    break;
@@ -1174,6 +1214,8 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
     if (n < 2) return;
     switch (TYPEOF(key)) {
     case LGLSXP:
+	ix = LOGICAL(key);
+	break;
     case INTSXP:
 	ix = INTEGER(key);
 	break;
@@ -1195,6 +1237,8 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
 	isna = R_Calloc(n, bool);
 	switch (TYPEOF(key)) {
 	case LGLSXP:
+	    for (i = 0; i < n; i++) isna[i] = (ix[i] == NA_LOGICAL);
+	    break;
 	case INTSXP:
 	    for (i = 0; i < n; i++) isna[i] = (ix[i] == NA_INTEGER);
 	    break;
@@ -1315,6 +1359,8 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
     if (n < 2) return;
     switch (TYPEOF(key)) {
     case LGLSXP:
+	ix = LOGICAL(key);
+	break;
     case INTSXP:
 	ix = INTEGER(key);
 	break;
@@ -1336,6 +1382,8 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 	isna = R_Calloc(n, bool);
 	switch (TYPEOF(key)) {
 	case LGLSXP:
+	    for (i = 0; i < n; i++) isna[i] = (ix[i] == NA_LOGICAL);
+	    break;
 	case INTSXP:
 	    for (i = 0; i < n; i++) isna[i] = (ix[i] == NA_INTEGER);
 	    break;

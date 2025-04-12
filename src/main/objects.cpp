@@ -984,22 +984,20 @@ attribute_hidden SEXP do_unclass(SEXP call, SEXP op, SEXP args, SEXP env)
 
 attribute_hidden bool R::inherits2(SEXP x, const char *what) {
     if (OBJECT(x)) {
-	SEXP klass;
+	GCStackRoot<> klass;
 
-	if(IS_S4_OBJECT(x))
-	    PROTECT(klass = R_data_class2(x));
+	if (IS_S4_OBJECT(x))
+	    klass = R_data_class2(x);
 	else
-	    PROTECT(klass = R_data_class(x, FALSE));
+	    klass = R_data_class(x, false);
 	int nclass = length(klass);
 	for (int i = 0; i < nclass; i++) {
 	    if (streql(CHAR(STRING_ELT(klass, i)), what)) {
-		UNPROTECT(1);
-		return TRUE;
+		return true;
 	    }
 	}
-	UNPROTECT(1);
     }
-    return FALSE;
+    return false;
 }
 
 /* NOTE: Fast  inherits(x, what)    in ../include/Rinlinedfuns.h
@@ -1016,23 +1014,23 @@ attribute_hidden bool R::inherits2(SEXP x, const char *what) {
 static SEXP inherits3(SEXP x, SEXP what, SEXP which)
 {
     CXXR::RAllocStack::Scope rscope;
-    SEXP klass, rval = R_NilValue /* -Wall */;
+    GCStackRoot<> klass, rval(R_NilValue) /* -Wall */;
 
-    if(IS_S4_OBJECT(x))
-	PROTECT(klass = R_data_class2(x)); // -> := S4_extends( "class(x)" )
+    if (IS_S4_OBJECT(x))
+	klass = R_data_class2(x); // -> := S4_extends( "class(x)" )
     else
-	PROTECT(klass = R_data_class(x, FALSE));
+	klass = R_data_class(x, FALSE);
 
-    if(!isString(what))
+    if (!isString(what))
 	error("%s", _("'what' must be a character vector or an object with a nameOfClass() method"));
     int nwhat = LENGTH(what);
 
-    if( !isLogical(which) || (LENGTH(which) != 1) )
+    if (!isLogical(which) || (LENGTH(which) != 1))
 	error("%s", _("'which' must be a length 1 logical vector"));
     bool isvec = asRbool(which, R_NilValue);
 
-    if(isvec)
-	PROTECT(rval = allocVector(INTSXP, nwhat));
+    if (isvec)
+	rval = allocVector(INTSXP, nwhat);
 
     for (int j = 0; j < nwhat; j++) {
 	const char *ss = translateChar(STRING_ELT(what, j));
@@ -1040,15 +1038,13 @@ static SEXP inherits3(SEXP x, SEXP what, SEXP which)
 	if (isvec)
 	    INTEGER(rval)[j] = i+1; /* 0 when ss is not in klass */
 	else if (i >= 0) {
-	    UNPROTECT(1);
 	    return mkTrue();
 	}
     }
-    if(!isvec) {
-	UNPROTECT(1);
+    if (!isvec) {
 	return mkFalse();
     }
-    UNPROTECT(2);
+
     return rval;
 }
 
@@ -1216,10 +1212,10 @@ R_stdGen_ptr_t R::R_set_standardGeneric_ptr(R_stdGen_ptr_t val, SEXP envir)
 {
     R_stdGen_ptr_t old = R_standardGeneric_ptr;
     R_standardGeneric_ptr = val;
-    if(envir && !isNull(envir))
+    if (envir && !isNull(envir))
 	R_MethodsNamespace = envir;
     /* just in case ... */
-    if(!R_MethodsNamespace)
+    if (!R_MethodsNamespace)
 	R_MethodsNamespace = R_GlobalEnv;
     return old;
 }
@@ -1264,7 +1260,7 @@ bool R::isMethodsDispatchOn(void)
 attribute_hidden
 SEXP do_S4on(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    if(length(args) == 0) return ScalarLogical(isMethodsDispatchOn());
+    if (length(args) == 0) return ScalarLogical(isMethodsDispatchOn());
     return R_isMethodsDispatchOn(CAR(args));
 }
 
@@ -1273,11 +1269,11 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
 {
     /* dispatch the non-generic definition of `name'.  Used to trap
        calls to standardGeneric during the loading of the methods package */
-    SEXP e, value, rho, fun, symbol;
+    SEXP e, value, fun, symbol;
 
     /* find a non-generic function */
     symbol = installTrChar(asChar(name));
-    for(rho = ENCLOS(env); rho != R_EmptyEnv;
+    for (SEXP rho = ENCLOS(env); rho != R_EmptyEnv;
 	rho = ENCLOS(rho)) {
 	fun = R_findVarInFrame(rho, symbol);
 	if(fun == R_UnboundValue) continue;
@@ -1644,7 +1640,7 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 		    IF_PROMSXP_SET_PRVALUE(CAR(b), CAR(a));
 		value =  applyClosure(call, value, s, rho, suppliedvars, true);
 		UNPROTECT(2);
-		return std::make_pair(true, value);
+		return std::pair<bool, SEXP>(true, value);
 	    } else {
 		/* INC/DEC of REFCNT needed for non-tracking args */
 		for (SEXP a = args; a != R_NilValue; a = CDR(a))
@@ -1654,7 +1650,7 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 		for (SEXP a = args; a != R_NilValue; a = CDR(a))
 		    DECREMENT_REFCNT(CAR(a));
                 UNPROTECT(1);
-                return std::make_pair(true, value);
+                return std::pair<bool, SEXP>(true, value);
             }
 	}
 	/* else, need to perform full method search */
@@ -1684,7 +1680,7 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
     if(value == deferred_default_object)
 	return std::pair<bool, SEXP>(false, NULL);
     else
-	return std::make_pair(true, value);
+	return std::pair<bool, SEXP>(true, value);
 }
 
 SEXP R_do_MAKE_CLASS(const char *what)
@@ -1833,37 +1829,32 @@ Rboolean Rf_isS4(SEXP s)
 }
 
 // in Rinternals.h
-SEXP Rf_asS4(SEXP s, Rboolean flag, int complete)
+SEXP Rf_asS4(SEXP s_, Rboolean flag, int complete)
 {
-    if(flag == IS_S4_OBJECT(s))
-	return s;
-    PROTECT(s);
-    if(MAYBE_SHARED(s)) {
+    if (flag == IS_S4_OBJECT(s_))
+	return s_;
+    GCStackRoot<> s(s_);
+    if (MAYBE_SHARED(s)) {
 	s = shallow_duplicate(s);
-	UNPROTECT(1);
-	PROTECT(s);
     }
-    if(flag) SET_S4_OBJECT(s);
+    if (flag) SET_S4_OBJECT(s);
     else {
-	if(complete) {
-	    SEXP value;
+	if (complete) {
+	    SEXP value = R_getS4DataSlot(s, ANYSXP);
 	    /* TENTATIVE:  how much does this change? */
-	    if((value = R_getS4DataSlot(s, ANYSXP))
-	       != R_NilValue && !IS_S4_OBJECT(value)) {
-	      UNPROTECT(1);
+	    if (value != R_NilValue && !IS_S4_OBJECT(value)) {
 	      return value;
 	    }
 	    /* else no plausible S3 object*/
-	    else if(complete == 1) /* ordinary case (2, for conditional) */
+	    else if (complete == 1) /* ordinary case (2, for conditional) */
 	      error(_("object of class \"%s\" does not correspond to a valid S3 object"),
-		      CHAR(STRING_ELT(R_data_class(s, FALSE), 0)));
+		      CHAR(STRING_ELT(R_data_class(s, false), 0)));
 	    else {
-		UNPROTECT(1);
 		return s; /*  unchanged */
 	    }
 	}
 	UNSET_S4_OBJECT(s);
     }
-    UNPROTECT(1);
+
     return s;
 }
