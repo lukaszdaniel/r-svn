@@ -1281,56 +1281,57 @@ bool R::RunFinalizers(void)
     if (s_running) return false;
     s_running = true;
 
-    volatile bool finalizer_run = false;
+    bool finalizer_run = false;
     std::list<SEXP> pending_refs;
 
     while (!s_R_weak_refs.empty()) {
-	SEXP s = s_R_weak_refs.back();
-	s_R_weak_refs.pop_back();
-	if (!IS_READY_TO_FINALIZE(s)) {
-        pending_refs.push_front(s);
-	} else {
-	    volatile size_t savestack;
-	    GCRoot<> topExp, oldHStack, oldRStack;
-	    volatile bool oldvis;
-	    oldHStack = R_HandlerStack;
-	    oldRStack = R_RestartStack;
-	    oldvis = Evaluator::resultPrinted();
-	    R_HandlerStack = R_NilValue;
-	    R_RestartStack = R_NilValue;
-
-	    finalizer_run = true;
-
-        {
-	    // An Evaluator is declared for the finalizer to
-	    // insure that any errors that might occur do not spill into
-	    // the call that triggered the collection:
-	    Evaluator evalr;
-	    RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-	    savestack = R_PPStackTop;
-	    topExp = R_CurrentExpr;
-	    /* The value of 'next' is protected to make it safe
-	       for this routine to be called recursively from a
-	       gc triggered by a finalizer. */
-        try
-        {
-
-            /* The entry in the weak reference list is removed
-               before running the finalizer.  This insures that a
-               finalizer is run only once, even if running it
-               raises an error. */
-            R_RunWeakRefFinalizer(s);
+        SEXP s = s_R_weak_refs.back();
+        s_R_weak_refs.pop_back();
+        if (!IS_READY_TO_FINALIZE(s)) {
+            pending_refs.push_front(s);
         }
-        catch (CommandTerminated)
-        {
+        else {
+            size_t savestack;
+            GCRoot<> topExp, oldHStack, oldRStack;
+            bool oldvis;
+            oldHStack = R_HandlerStack;
+            oldRStack = R_RestartStack;
+            oldvis = Evaluator::resultPrinted();
+            R_HandlerStack = R_NilValue;
+            R_RestartStack = R_NilValue;
+
+            finalizer_run = true;
+
+            {
+                // An Evaluator is declared for the finalizer to
+                // insure that any errors that might occur do not spill into
+                // the call that triggered the collection:
+                Evaluator evalr;
+                RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
+                savestack = R_PPStackTop;
+                topExp = R_CurrentExpr;
+                /* The value of 'next' is protected to make it safe
+                   for this routine to be called recursively from a
+                   gc triggered by a finalizer. */
+                try
+                {
+
+                    /* The entry in the weak reference list is removed
+                       before running the finalizer.  This insures that a
+                       finalizer is run only once, even if running it
+                       raises an error. */
+                    R_RunWeakRefFinalizer(s);
+                }
+                catch (CommandTerminated)
+                {
+                }
+            }
+            ProtectStack::restoreSize(savestack);
+            R_CurrentExpr = topExp;
+            R_HandlerStack = oldHStack;
+            R_RestartStack = oldRStack;
+            Evaluator::enableResultPrinting(oldvis);
         }
-        }
-	    ProtectStack::restoreSize(savestack);
-	    R_CurrentExpr = topExp;
-	    R_HandlerStack = oldHStack;
-	    R_RestartStack = oldRStack;
-	    Evaluator::enableResultPrinting(oldvis);
-	}
     }
     if (!pending_refs.empty())
         s_R_weak_refs = std::move(pending_refs);
@@ -1352,7 +1353,7 @@ void R_RunExitFinalizers(void)
 void R_RunPendingFinalizers(void)
 {
     if (s_R_finalizers_pending)
-	RunFinalizers();
+        RunFinalizers();
 }
 
 void R_RegisterFinalizerEx(SEXP s, SEXP fun, Rboolean onexit)
@@ -2916,9 +2917,9 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
         if (s_gc_is_running)
             gc_error("*** recursive gc invocation\n");
 
-        if (!force_full_collection &&
-            VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
-            force_full_collection = true;
+        // if (!force_full_collection &&
+        //     VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
+        //     force_full_collection = true;
 
         if (size_needed > VHEAP_FREE()) {
             R_size_t expand = size_needed - VHEAP_FREE();
