@@ -1411,16 +1411,16 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-	    const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
-	    while (s != R_GenHeap->m_OldToNew[gen].get()) {
-		const GCNode *next = NEXT_NODE(s);
-		DO_CHILDREN(s, AgeNodeAndChildren, gen);
-		UNSNAP_NODE(s);
-		if (NODE_GENERATION(s) != gen)
-		    GCManager::gc_error("****snapping into wrong generation\n");
-		SNAP_NODE(s, R_GenHeap->m_Old[gen].get());
-		s = next;
-	    }
+        const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
+        while (s != R_GenHeap->m_OldToNew[gen].get()) {
+            const GCNode *next = NEXT_NODE(s);
+            DO_CHILDREN(s, AgeNodeAndChildren, gen);
+            UNSNAP_NODE(s);
+            if (NODE_GENERATION(s) != gen)
+                GCManager::gc_error("****snapping into wrong generation\n");
+            SNAP_NODE(s, R_GenHeap->m_Old[gen].get());
+            s = next;
+        }
     }
 #endif
 }
@@ -1454,17 +1454,17 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-	    R_GenHeap->m_OldCount[gen] = 0;
-	    const GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
-	    while (s != R_GenHeap->m_Old[gen].get()) {
-		const GCNode *next = NEXT_NODE(s);
-		if (gen < s_num_old_generations - 1)
-		    SET_NODE_GENERATION(s, gen + 1);
-		UNMARK_NODE(s);
-		s = next;
-	    }
-	    if (NEXT_NODE(R_GenHeap->m_Old[gen]) != R_GenHeap->m_Old[gen].get())
-		BULK_MOVE(R_GenHeap->m_Old[gen].get(), R_GenHeap->m_New.get());
+        R_GenHeap->m_OldCount[gen] = 0;
+        const GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
+        while (s != R_GenHeap->m_Old[gen].get()) {
+            const GCNode *next = NEXT_NODE(s);
+            if (gen < s_num_old_generations - 1)
+                SET_NODE_GENERATION(s, gen + 1);
+            UNMARK_NODE(s);
+            s = next;
+        }
+        if (NEXT_NODE(R_GenHeap->m_Old[gen]) != R_GenHeap->m_Old[gen].get())
+            BULK_MOVE(R_GenHeap->m_Old[gen].get(), R_GenHeap->m_New.get());
     }
 
     std::forward_list<const GCNode *> forwarded_nodes;
@@ -1472,10 +1472,10 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
     for (unsigned int gen = num_old_gens_to_collect; gen < s_num_old_generations; gen++)
-	    for (const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
-		 s != R_GenHeap->m_OldToNew[gen].get();
-		 s = NEXT_NODE(s))
-		FORWARD_CHILDREN(s);
+        for (const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
+            s != R_GenHeap->m_OldToNew[gen].get();
+            s = NEXT_NODE(s))
+            FORWARD_CHILDREN(s);
 #endif
 
     /* forward all roots */
@@ -1510,42 +1510,42 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     for (auto &[key, symbol] : Symbol::s_symbol_table)
     {
         if (ATTRIB(symbol) != R_NilValue)
-		    GCManager::gc_error("****found a symbol with attributes\n");
+            GCManager::gc_error("****found a symbol with attributes\n");
         FORWARD_NODE(symbol);
     }
 
     // if (R_CurrentExpr != NULL)	           /* Current expression */
-	// FORWARD_NODE(R_CurrentExpr);
+    //     FORWARD_NODE(R_CurrentExpr);
 
 #if CXXR_FALSE
     for (int i = 0; i < R_MaxDevices; i++) {   /* Device display lists */
-	pGEDevDesc gdd = GEgetDevice(i);
-	if (gdd) {
-	    FORWARD_NODE(gdd->displayList);
-	    FORWARD_NODE(gdd->savedSnapshot);
-	    if (gdd->dev)
-		FORWARD_NODE(gdd->dev->eventEnv);
-	}
+        pGEDevDesc gdd = GEgetDevice(i);
+        if (gdd) {
+            FORWARD_NODE(gdd->displayList);
+            FORWARD_NODE(gdd->savedSnapshot);
+            if (gdd->dev)
+                FORWARD_NODE(gdd->dev->eventEnv);
+        }
     }
 #endif
 
-    for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL ; ctxt = ctxt->nextcontext) {
-	// FORWARD_NODE(ctxt->conexit);       /* on.exit expressions */
-	// FORWARD_NODE(ctxt->promargs);	   /* promises supplied to closure */
-	// FORWARD_NODE(ctxt->callfun);       /* the closure called */
-	// FORWARD_NODE(ctxt->sysparent);     /* calling environment */
-	// FORWARD_NODE(ctxt->call);          /* the call */
-	// FORWARD_NODE(ctxt->cloenv);        /* the closure environment */
-	// FORWARD_NODE(ctxt->bcbody);        /* the current byte code object */
-	// FORWARD_NODE(ctxt->handlerstack);  /* the condition handler stack */
-	// FORWARD_NODE(ctxt->restartstack);  /* the available restarts stack */
-	// FORWARD_NODE(ctxt->srcref);	   /* the current source reference */
-	if (ctxt->returnValue.tag == 0)    /* For on.exit calls */
-	    FORWARD_NODE(ctxt->returnValue.u.sxpval);
+    for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL; ctxt = ctxt->nextcontext) {
+        // FORWARD_NODE(ctxt->conexit);       /* on.exit expressions */
+        // FORWARD_NODE(ctxt->promargs);	   /* promises supplied to closure */
+        // FORWARD_NODE(ctxt->callfun);       /* the closure called */
+        // FORWARD_NODE(ctxt->sysparent);     /* calling environment */
+        // FORWARD_NODE(ctxt->call);          /* the call */
+        // FORWARD_NODE(ctxt->cloenv);        /* the closure environment */
+        // FORWARD_NODE(ctxt->bcbody);        /* the current byte code object */
+        // FORWARD_NODE(ctxt->handlerstack);  /* the condition handler stack */
+        // FORWARD_NODE(ctxt->restartstack);  /* the available restarts stack */
+        // FORWARD_NODE(ctxt->srcref);	   /* the current source reference */
+        if (ctxt->returnValue.tag == 0)    /* For on.exit calls */
+            FORWARD_NODE(ctxt->returnValue.u.sxpval);
     }
 
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
-	FORWARD_NODE(R_PPStack[i]);
+        FORWARD_NODE(R_PPStack[i]);
 
     for (auto &node : *(GCStackRootBase::s_roots.get()))
     {
@@ -1560,10 +1560,10 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     }
 
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
-	if (sp->tag == RAWMEM_TAG)
-	    sp += sp->u.ival;
-	else if (sp->tag == 0 || IS_PARTIAL_SXP_TAG(sp->tag))
-	    FORWARD_NODE(sp->u.sxpval);
+        if (sp->tag == RAWMEM_TAG)
+            sp += sp->u.ival;
+        else if (sp->tag == 0 || IS_PARTIAL_SXP_TAG(sp->tag))
+            FORWARD_NODE(sp->u.sxpval);
     }
 
     /* main processing loop */
@@ -1571,23 +1571,23 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
     /* identify weakly reachable nodes */
     {
-	bool recheck_weak_refs;
-	do {
-	    recheck_weak_refs = false;
-	    for (auto &s : s_R_weak_refs) {
-		if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
-		    if (WEAKREF_VALUE(s) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
-			recheck_weak_refs = true;
-			FORWARD_NODE(WEAKREF_VALUE(s));
-		    }
-		    if (WEAKREF_FINALIZER(s) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
-			recheck_weak_refs = true;
-			FORWARD_NODE(WEAKREF_FINALIZER(s));
-		    }
-		}
-	    }
-	    PROCESS_NODES();
-	} while (recheck_weak_refs);
+        bool recheck_weak_refs;
+        do {
+            recheck_weak_refs = false;
+            for (auto &s : s_R_weak_refs) {
+                if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
+                    if (WEAKREF_VALUE(s) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
+                        recheck_weak_refs = true;
+                        FORWARD_NODE(WEAKREF_VALUE(s));
+                    }
+                    if (WEAKREF_FINALIZER(s) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
+                        recheck_weak_refs = true;
+                        FORWARD_NODE(WEAKREF_FINALIZER(s));
+                    }
+                }
+            }
+            PROCESS_NODES();
+        } while (recheck_weak_refs);
     }
 
     /* mark nodes ready for finalizing */
@@ -1595,10 +1595,10 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
     /* process the weak reference chain */
     for (auto &s : s_R_weak_refs) {
-	FORWARD_NODE(s);
-	FORWARD_NODE(WEAKREF_KEY(s));
-	FORWARD_NODE(WEAKREF_VALUE(s));
-	FORWARD_NODE(WEAKREF_FINALIZER(s));
+        FORWARD_NODE(s);
+        FORWARD_NODE(WEAKREF_KEY(s));
+        FORWARD_NODE(WEAKREF_VALUE(s));
+        FORWARD_NODE(WEAKREF_FINALIZER(s));
     }
     PROCESS_NODES();
 
@@ -1636,7 +1636,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
                     {
                         VectorBase *vec = static_cast<VectorBase *>(const_cast<GCNode *>(s));
                         if (IS_GROWABLE(vec))
-                        SET_STDVEC_LENGTH(vec, XTRUELENGTH(vec));
+                            SET_STDVEC_LENGTH(vec, XTRUELENGTH(vec));
                     }
 
                     switch (TYPEOF(s))
