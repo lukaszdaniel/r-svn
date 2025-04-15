@@ -64,10 +64,10 @@ typedef enum {
 #  include <cairo-xlib.h>
 #endif
 
-Rboolean X11DeviceDriver(pDevDesc, const char*, double, double, double,
+bool X11DeviceDriver(pDevDesc, const char*, double, double, double,
 			 double, X_COLORTYPE, int, int, int, SEXP,
 			 int, int, int, const char *, int, int, const char *,
-                         const char *, Rboolean);
+                         const char *, bool);
 
 
 	/********************************************************/
@@ -124,7 +124,7 @@ typedef struct {
     R_XFont *font;
     char fontfamily[500];               /* CURRENT fontfamily */
     char symbolfamily[500];
-    Rboolean usePUA;
+    bool usePUA;
 
     X_GTYPE type;			/* Window or pixmap? */
     int npages;				/* counter for a bitmap device */
@@ -132,14 +132,14 @@ typedef struct {
     char filename[R_PATH_MAX];		/* filename for a bitmap device */
     int quality;			/* JPEG quality/TIFF compression */
 
-    Rboolean handleOwnEvents;           /* Flag indicating whether events will
+    bool handleOwnEvents;           /* Flag indicating whether events will
 					   be handled externally from R (TRUE),
 					   or whether R is to handle the events
 					   (FALSE) */
     int res_dpi;			/* used for png/jpeg/tiff */
-    Rboolean warn_trans;		/* have we warned about translucent cols? */
+    bool warn_trans;		/* have we warned about translucent cols? */
     char title[101];
-    Rboolean onefile;
+    bool onefile;
 
 #ifdef HAVE_WORKING_X11_CAIRO
     /* In the buffered cases, xcc and xcs are the xlib context and surface
@@ -147,7 +147,8 @@ typedef struct {
        In the non-buffered case, xcc and xcs are NULL and cc, cs are the
        cairo context and surface used directly.
     */
-    Rboolean useCairo, buffered;
+    bool useCairo;
+    int buffered;
     cairo_t *cc, *xcc;
     cairo_surface_t *cs, *xcs;
     cairo_antialias_t antialias;
@@ -176,8 +177,8 @@ typedef X11Desc* pX11Desc;
 
 X11Desc *Rf_allocX11DeviceDesc(double ps);
 
-int Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
+bool Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
 		     int maxcube, Rboolean setHandlers);
 
-int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, X11Desc *xd);
+int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd);
 #endif

@@ -415,10 +415,9 @@ static unsigned GetGrayScalePixel(int r, int g, int b)
 {
     unsigned int d, dmin = 0xFFFFFFFF;
     unsigned int dr;
-    int i;
     unsigned int pixel = 0;  /* -Wall */
     int gray = (int)((0.299 * r + 0.587 * g + 0.114 * b) + 0.0001);
-    for (i = 0; i < PaletteSize; i++) {
+    for (int i = 0; i < PaletteSize; i++) {
 	dr = (RPalette[i].red - gray);
 	d = dr * dr;
 	if (d < dmin) {
@@ -429,12 +428,11 @@ static unsigned GetGrayScalePixel(int r, int g, int b)
     return pixel;
 }
 
-static Rboolean GetGrayPalette(Display *displ, Colormap cmap, int n)
+static bool GetGrayPalette(Display *displ, Colormap cmap, int n)
 {
-    int status, i, m;
-    m = 0;
-    i = 0;
-    for (i = 0; i < n; i++) {
+    int status;
+    int m = 0;
+    for (int i = 0; i < n; i++) {
 	RPalette[i].red	  = (unsigned short) ((i * 0xff) / (n - 1));
 	RPalette[i].green = RPalette[i].red;
 	RPalette[i].blue  = RPalette[i].red;
@@ -452,19 +450,20 @@ static Rboolean GetGrayPalette(Display *displ, Colormap cmap, int n)
     }
     PaletteSize = n;
     if (m > 0) {
-	for (i = 0; i < PaletteSize; i++) {
+	for (int i = 0; i < PaletteSize; i++) {
 	    if (XPalette[i].flags != 0)
 		XFreeColors(displ, cmap, &(XPalette[i].pixel), 1, 0);
 	}
 	PaletteSize = 0;
-	return FALSE;
+	return false;
     }
-    else return TRUE;
+    else return true;
 }
 
 static void SetupGrayScale(void)
 {
-    int res = 0, d;
+    bool res = false;
+    int d;
     PaletteSize = 0;
     /* try for 128 grays on an 8-bit display */
     if (depth > 8) d = depth = 8; else d = depth - 1;
@@ -504,12 +503,10 @@ static int NRGBlevels = sizeof(RGBlevels) / (3 * sizeof(int));
 
 static int GetColorPalette(Display *dpy, Colormap cmap, int nr, int ng, int nb)
 {
-    int status, i, m, r, g, b;
-    m = 0;
-    i = 0;
-    for (r = 0; r < nr; r++) {
-	for (g = 0; g < ng; g++) {
-	    for (b = 0; b < nb; b++) {
+    int status, i = 0, m = 0;
+    for (int r = 0; r < nr; r++) {
+	for (int g = 0; g < ng; g++) {
+	    for (int b = 0; b < nb; b++) {
 		RPalette[i].red	  = (r * 0xff) / (nr - 1);
 		RPalette[i].green = (g * 0xff) / (ng - 1);
 		RPalette[i].blue  = (b * 0xff) / (nb - 1);
@@ -534,7 +531,7 @@ static int GetColorPalette(Display *dpy, Colormap cmap, int nr, int ng, int nb)
     }
     PaletteSize = nr * ng * nb;
     if (m > 0) {
-	for (i = 0; i < PaletteSize; i++) {
+	for (int i = 0; i < PaletteSize; i++) {
 	    if (XPalette[i].flags != 0)
 		XFreeColors(dpy, cmap, &(XPalette[i].pixel), 1, 0);
 	}
@@ -547,10 +544,10 @@ static int GetColorPalette(Display *dpy, Colormap cmap, int nr, int ng, int nb)
 
 static void SetupPseudoColor(void)
 {
-    int i, size;
+    int size;
     PaletteSize = 0;
     if (model == PSEUDOCOLOR1) {
-	for (i = 0; i < NRGBlevels; i++) {
+	for (int i = 0; i < NRGBlevels; i++) {
 	    size = RGBlevels[i][0] * RGBlevels[i][1] * RGBlevels[i][2];
 	    if (size < maxcubesize && GetColorPalette(display, colormap,
 				RGBlevels[i][0],
@@ -591,9 +588,8 @@ static unsigned int GetPseudoColor1Pixel(int r, int g, int b)
 
 static unsigned int GetPseudoColor2Pixel(int r, int g, int b)
 {
-    int i;
     /* Search for previously allocated color */
-    for (i = 0; i < PaletteSize ; i++) {
+    for (int i = 0; i < PaletteSize ; i++) {
 	if (r == RPalette[i].red &&
 	    g == RPalette[i].green &&
 	    b == RPalette[i].blue) return (unsigned int) XPalette[i].pixel;
@@ -674,15 +670,14 @@ static unsigned int GetX11Pixel(int r, int g, int b)
 
 static void FreeX11Colors(void)
 {
-    int i;
     if (model == PSEUDOCOLOR2) {
-	for (i = 0; i < PaletteSize; i++)
+	for (int i = 0; i < PaletteSize; i++)
 	    XFreeColors(display, colormap, &(XPalette[i].pixel), 1, 0);
 	PaletteSize = 0;
     }
 }
 
-static Rboolean SetupX11Color(void)
+static bool SetupX11Color(void)
 {
     if (depth <= 1) {
 	/* On monochrome displays we must use black/white */
@@ -930,8 +925,7 @@ static R_XFont *R_XLoadQueryFontSet(Display *display,
     }
     if (missing_charset_count) {
 #ifdef DEBUG_X11
-	int i;
-	for(i = 0; i < missing_charset_count; i++)
+	for (int i = 0; i < missing_charset_count; i++)
 	   warning("font for charset %s is lacking.", missing_charset_list[i]);
 	XFreeStringList(missing_charset_list);
 #endif
@@ -945,7 +939,7 @@ static R_XFont *R_XLoadQueryFontSet(Display *display,
 static void *RLoadFont(pX11Desc xd, char* family, int face, int size)
 {
     /* size is in points here */
-    int pixelsize, i, dpi;
+    int pixelsize, dpi;
     cacheentry *f;
     char buf[BUFSIZ];
     char buf1[BUFSIZ];
@@ -958,14 +952,14 @@ static void *RLoadFont(pX11Desc xd, char* family, int face, int size)
     if (size < SMALLEST) size = SMALLEST;
     face--;
 
-    if(xd->type == PNG || xd->type == JPEG ||
+    if (xd->type == PNG || xd->type == JPEG ||
        xd->type == TIFF || xd->type == BMP) {
 	dpi = (xd->res_dpi > 0) ? (int)(xd->res_dpi + 0.5) : 72;
     } else {
 	dpi = (int)(1./pixelHeight() + 0.5);
     }
 
-    if(abs(dpi - 75) < 5) {
+    if (abs(dpi - 75) < 5) {
 	/* use pointsize as pixel size */
     } else if(abs(dpi - 100) < 5) {
     /* Here's a 1st class fudge: make sure that the Adobe design sizes
@@ -977,7 +971,7 @@ static void *RLoadFont(pX11Desc xd, char* family, int face, int size)
     } else size = (int) R_rint(size * dpi/72);
 
     /* search fontcache */
-    for ( i = nfonts ; i-- ; ) {
+    for (int i = nfonts ; i-- ; ) {
 	f = &fontcache[i];
 	if ( streql(f->family, family) &&
 	     f->face == face &&
@@ -1107,9 +1101,9 @@ static void *RLoadFont(pX11Desc xd, char* family, int face, int size)
     }
     if (nfonts == MAXFONTS) /* make room in the font cache */
     {
-	for (i = 0 ; i < CLRFONTS ; i++)
+	for (int i = 0 ; i < CLRFONTS ; i++)
 	      R_XFreeFont(display, fontcache[i].font);
-	for (i = CLRFONTS ; i < MAXFONTS ; i++)
+	for (int i = CLRFONTS ; i < MAXFONTS ; i++)
 	    fontcache[i - CLRFONTS] = fontcache[i];
 	nfonts -= CLRFONTS;
     }
@@ -1119,7 +1113,6 @@ static void *RLoadFont(pX11Desc xd, char* family, int face, int size)
 
 static void SetFont(const pGEcontext gc, pX11Desc xd)
 {
-    R_XFont *tmp;
     char *family = translateFontFamily(gc->fontfamily, xd);
     /* size is in points here */
     int size = (int)(gc->cex * gc->ps + 0.5), face = gc->fontface;
@@ -1129,7 +1122,7 @@ static void SetFont(const pGEcontext gc, pX11Desc xd)
     if (size != xd->fontsize	|| face != xd->fontface ||
 	!streql(family, xd->fontfamily)) {
 
-	tmp = (R_XFont*) RLoadFont(xd, family, face, size);
+	R_XFont *tmp = (R_XFont*) RLoadFont(xd, family, face, size);
 	if(tmp) {
 	    xd->font = tmp;
 	    strcpy(xd->fontfamily, family);
@@ -1146,7 +1139,7 @@ static void CheckAlpha(int color, pX11Desc xd)
     unsigned int alpha = R_ALPHA(color);
     if (alpha > 0 && alpha < 255 && !xd->warn_trans) {
 	warning("%s", _("semi-transparency is not supported on this device: reported only once per page"));
-	xd->warn_trans = TRUE;
+	xd->warn_trans = true;
     }
 }
 
@@ -1208,7 +1201,7 @@ static int gcToX11ljoin(R_GE_linejoin ljoin) {
 /* Not at all clear the optimization here is worth it */
 static void SetLinetype(const pGEcontext gc, pX11Desc xd)
 {
-    int i, newlty, newlend, newljoin;
+    int newlty, newlend, newljoin;
     double newlwd;
 
     newlty = gc->lty;
@@ -1229,7 +1222,8 @@ static void SetLinetype(const pGEcontext gc, pX11Desc xd)
 			       LineSolid, newlend, newljoin);
 	} else {
 	    static char dashlist[8];
-	    for(i = 0 ; i < 8 && (newlty != 0); i++) {
+	    int i = 0;
+	    for (i = 0 ; i < 8 && (newlty != 0); i++) {
 		int j = newlty & 15;
 		if (j == 0) j = 1; /* Or we die with an X Error */
 		/* scale line texture for line width */
@@ -1326,8 +1320,7 @@ static String x_fallback_resources[] = {
 };
 #endif
 
-Rboolean
-X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
+bool X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	 double w, double h, double gamma_fac, X_COLORTYPE colormodel,
 	 int maxcube, int bgcolor, int canvascolor, int res,
 	 int xpos, int ypos)
@@ -1349,7 +1342,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
     if (streqln(dsp, "png::", 5)) {
 #ifndef HAVE_PNG
 	warning("%s", _("no png support in this version of R"));
-	return FALSE;
+	return false;
 #else
 	char buf[R_PATH_MAX]; /* allow for pageno formats */
 	FILE *fp;
@@ -1359,7 +1352,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	snprintf(buf, R_PATH_MAX, dsp+5, 1); /* page 1 to start */
 	if (!(fp = R_fopen(R_ExpandFileName(buf), "w"))) {
 	    warning(_("could not open PNG file '%s'"), buf);
-	    return FALSE;
+	    return false;
 	}
 	xd->fp = fp;
 	type = PNG;
@@ -1371,7 +1364,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
     else if (streqln(dsp, "jpeg::", 6)) {
 #ifndef HAVE_JPEG
 	warning("%s", _("no jpeg support in this version of R"));
-	return FALSE;
+	return false;
 #else
 	char buf[R_PATH_MAX]; /* allow for pageno formats */
 	char tmp[R_PATH_MAX], *pp;
@@ -1385,7 +1378,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	snprintf(buf, R_PATH_MAX, pp+1, 1); /* page 1 to start */
 	if (!(fp = R_fopen(R_ExpandFileName(buf), "w"))) {
 	    warning(_("could not open JPEG file '%s'"), buf);
-	    return FALSE;
+	    return false;
 	}
 	xd->fp = fp;
 	type = JPEG;
@@ -1397,7 +1390,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
     else if (streqln(dsp, "tiff::", 5)) {
 #ifndef HAVE_TIFF
 	warning("%s", _("no tiff support in this version of R"));
-	return FALSE;
+	return false;
 #else
 	char tmp[R_PATH_MAX], *pp;
 	strcpy(tmp, dsp+6);
@@ -1421,7 +1414,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	snprintf(buf, R_PATH_MAX, dsp+5, 1); /* page 1 to start */
 	if (!(fp = R_fopen(R_ExpandFileName(buf), "w"))) {
 	    warning(_("could not open BMP file '%s'"), buf);
-	    return FALSE;
+	    return false;
 	}
 	xd->fp = fp;
 	type = BMP;
@@ -1451,12 +1444,12 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	if ((display = XOpenDisplay(p)) == NULL) {
 	    XSetIOErrorHandler(old);
 	    warning(_("unable to open connection to X11 display '%s'"), p);
-	    return FALSE;
+	    return false;
 	}
 	XSetIOErrorHandler(old);
 	Rf_setX11Display(display, gamma_fac, colormodel, maxcube, TRUE);
 	displayOpen = TRUE;
-	if(xd->handleOwnEvents == FALSE)
+	if(xd->handleOwnEvents == false)
 	    addInputHandler(R_InputHandlers, ConnectionNumber(display),
 			    R_ProcessX11Events, XActivity);
     } else if(!streql(p, dspname))
@@ -1600,7 +1593,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	    if (xd->window == 0 ) {
 	      XFree(hint);
 	      warning("%s", _("unable to create X11 window"));
-	      return FALSE;
+	      return false;
 	    }
 	    XSetWMNormalHints(display, xd->window, hint);
 	    XFree(hint);
@@ -1666,7 +1659,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 			warning(_("cairo error '%s'"),
 				cairo_status_to_string(res));
 			/* bail out */
-			return FALSE;
+			return false;
 		    }
 		    xd->xcc = cairo_create(xd->xcs);
 		    res = cairo_status(xd->xcc);
@@ -1675,14 +1668,14 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 				cairo_status_to_string(res));
 			cairo_surface_destroy(xd->xcs);
 			/* bail out */
-			return FALSE;
+			return false;
 		    }
 		    xd->cs = 
 			cairo_image_surface_create(CAIRO_FORMAT_RGB24,
 						   xd->windowWidth,
 						   xd->windowHeight);
 		    cairo_set_source_surface (xd->xcc, xd->cs, 0, 0);
-		    if(xd->buffered > 1) addBuffering(xd);
+		    if (xd->buffered > 1) addBuffering(xd);
 		} else /* non-buffered */
 		    xd->cs = 
 			cairo_xlib_surface_create(display, xd->window,
@@ -1694,9 +1687,9 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 		if (res != CAIRO_STATUS_SUCCESS) {
 		    warning(_("cairo error '%s'"), cairo_status_to_string(res));
 		    /* bail out */
-		    if(xd->xcs) cairo_surface_destroy(xd->xcs);
-		    if(xd->xcc) cairo_destroy(xd->xcc);
-		    return FALSE;
+		    if (xd->xcs) cairo_surface_destroy(xd->xcs);
+		    if (xd->xcc) cairo_destroy(xd->xcc);
+		    return false;
 		}
 		xd->cc = cairo_create(xd->cs);
 		res = cairo_status(xd->cc);
@@ -1704,9 +1697,9 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 		    warning(_("cairo error '%s'"), cairo_status_to_string(res));
 		    cairo_surface_destroy(xd->cs);
 		    /* bail out */
-		    if(xd->xcs) cairo_surface_destroy(xd->xcs);
-		    if(xd->xcc) cairo_destroy(xd->xcc);
-		    return FALSE;
+		    if (xd->xcs) cairo_surface_destroy(xd->xcs);
+		    if (xd->xcc) cairo_destroy(xd->xcc);
+		    return false;
 		}
 		cairo_set_operator(xd->cc, CAIRO_OPERATOR_OVER);
 		cairo_set_antialias(xd->cc, xd->antialias);
@@ -1756,7 +1749,7 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	    display, rootwin,
 	    iw, ih, DefaultDepth(display, screen))) == 0) {
 	    warning("%s", _("unable to create pixmap"));
-	    return FALSE;
+	    return false;
 	}
 	/* Save the pDevDesc with the window for event dispatching */
 	/* Is this needed? */
@@ -1777,17 +1770,16 @@ X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
     xd->ljoin = (R_GE_linejoin) 0;
 
     numX11Devices++;
-    return TRUE;
+    return true;
 }
 
 /* Return a non-relocatable copy of a string */
 
 static char *SaveFontSpec(SEXP sxp, int offset)
 {
-    char *s;
-    if(!isString(sxp) || length(sxp) <= offset)
+    if (!isString(sxp) || length(sxp) <= offset)
 	error("%s", _("invalid font specification"));
-    s = R_alloc(strlen(CHAR(STRING_ELT(sxp, offset)))+1, sizeof(char));
+    char *s = R_alloc(strlen(CHAR(STRING_ELT(sxp, offset)))+1, sizeof(char));
     strcpy(s, CHAR(STRING_ELT(sxp, offset)));
     return s;
 }
@@ -1804,31 +1796,31 @@ static char *SaveFontSpec(SEXP sxp, int offset)
  */
 static char* translateFontFamily(char* family, pX11Desc xd)
 {
-    SEXP graphicsNS, fontdb, fontnames;
+    CXXR::GCStackRoot<> graphicsNS, fontdb, fontnames;
     CXXR::GCStackRoot<> x11env;
-    int i, nfonts;
+    int nfonts;
     char* result = xd->basefontfamily;
 
-    PROTECT(graphicsNS = R_FindNamespace(ScalarString(mkChar("grDevices"))));
+    graphicsNS = R_FindNamespace(ScalarString(mkChar("grDevices")));
     x11env = findVar(install(".X11env"), graphicsNS);
-    if(TYPEOF(x11env) == PROMSXP)
+    if (TYPEOF(x11env) == PROMSXP)
 	x11env = eval(x11env, graphicsNS);
-    PROTECT(fontdb = findVar(install(".X11.Fonts"), x11env));
-    PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
+    fontdb = findVar(install(".X11.Fonts"), x11env);
+    fontnames = getAttrib(fontdb, R_NamesSymbol);
     nfonts = LENGTH(fontdb);
     if (family[0]) {
-	Rboolean found = FALSE;
-	for (i = 0; i < nfonts && !found; i++) {
+	bool found = false;
+	for (int i = 0; i < nfonts && !found; i++) {
 	    const char* fontFamily = CHAR(STRING_ELT(fontnames, i));
 	    if (streql(family, fontFamily)) {
-		found = TRUE;
+		found = true;
 		result = SaveFontSpec(VECTOR_ELT(fontdb, i), 0);
 	    }
 	}
 	if (!found)
 	    warning("%s", _("font family not found in X11 font database"));
     }
-    UNPROTECT(3);
+
     return result;
 }
 
@@ -1874,9 +1866,9 @@ static void X11_MetricInfo(int c, const pGEcontext gc,
 	if (xd->font->type != One_Font) {
 	    char **ml; XFontStruct **fs_list;
 #ifdef DEBUG_X11
-	    int i, cnt = XFontsOfFontSet(xd->font->fontset, &fs_list, &ml);
+	    int cnt = XFontsOfFontSet(xd->font->fontset, &fs_list, &ml);
 
-	    for (i = 0; i < cnt; i++) printf("%s\n", ml[i]);
+	    for (int i = 0; i < cnt; i++) printf("%s\n", ml[i]);
 	    printf("--- end of fontlist ---\n\n");
 #else
 	    XFontsOfFontSet(xd->font->fontset, &fs_list, &ml);
@@ -1915,7 +1907,7 @@ static void X11_MetricInfo(int c, const pGEcontext gc,
 	/* Rprintf("%d %lc w=%f a=%f d=%f\n", c, wc[0],
 		    *width, *ascent, *descent);*/
     } else { /* symbol font */
-	if(first <= c && c <= last) {
+	if (first <= c && c <= last) {
 	  /*
 	   * <MBCS-FIXED>: try demo(lm.glm,package="stats")
 	   * per_char is NULL case.
@@ -1975,7 +1967,7 @@ static void X11_NewPage(const pGEcontext gc, pDevDesc dd)
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
-    xd->warn_trans = FALSE;
+    xd->warn_trans = false;
     if (xd->type > WINDOW) {
 	if (xd->npages++) {
 	    /* try to preserve the page we do have */
@@ -2140,7 +2132,7 @@ static void X11_Close(pDevDesc dd)
 	while (nfonts--)
 	      R_XFreeFont(display, fontcache[nfonts].font);
 	nfonts = 0;
-	if(xd->handleOwnEvents == FALSE)
+	if(xd->handleOwnEvents == false)
 	    removeInputHandler(&R_InputHandlers,
 			       getInputHandler(R_InputHandlers,fd));
 	if(arrow_cursor) XFreeCursor(display, arrow_cursor);
@@ -2148,11 +2140,11 @@ static void X11_Close(pDevDesc dd)
 	if(watch_cursor) XFreeCursor(display, watch_cursor);
 	arrow_cursor = cross_cursor = watch_cursor = (Cursor) 0;
 	XCloseDisplay(display);
-	displayOpen = FALSE;
+	displayOpen = false;
     }
 
     free(xd);
-    inclose = FALSE;
+    inclose = false;
 }
 
 static void X11_Activate(pDevDesc dd)
@@ -2238,7 +2230,6 @@ static void flipRaster(unsigned int *rasterImage,
                        int imageWidth, int imageHeight,
                        int invertX, int invertY,
                        unsigned int *flippedRaster) {
-    int i, j;
     int rowInc, rowOff, colInc, colOff;
 
     if (invertX) {
@@ -2256,8 +2247,8 @@ static void flipRaster(unsigned int *rasterImage,
         rowOff = 0;
     }
 
-    for (i = 0; i < imageHeight ;i++) {
-        for (j = 0; j < imageWidth; j++) {
+    for (int i = 0; i < imageHeight ;i++) {
+        for (int j = 0; j < imageWidth; j++) {
             int row = (rowInc*i + rowOff);
             int col = (colInc*j + colOff);
             flippedRaster[i*imageWidth + j] = 
@@ -2273,7 +2264,7 @@ static void X11_Raster(unsigned int *raster, int w, int h,
                       Rboolean interpolate,
                       const pGEcontext gc, pDevDesc dd)
 {
-    int i, j, pixel;
+    int pixel;
     int imageWidth;
     int imageHeight;
     int invertX = 0;
@@ -2372,8 +2363,8 @@ static void X11_Raster(unsigned int *raster, int w, int h,
     if (image == NULL || XInitImage(image) == 0)
         error("%s", _("Unable to create XImage"));
 
-    for (i = 0; i < imageHeight ;i++) {
-        for (j = 0; j < imageWidth; j++) {
+    for (int i = 0; i < imageHeight ;i++) {
+        for (int j = 0; j < imageWidth; j++) {
             pixel = i*imageWidth + j;
             XPutPixel(image, j, i, makeX11Pixel(rasterImage, pixel));
         }
@@ -2395,15 +2386,15 @@ static SEXP X11_Cap(pDevDesc dd)
     XImage *image = XGetImage(display, xd->window, 0, 0,
                               xd->windowWidth, xd->windowHeight, 
                               AllPlanes, ZPixmap);
-    SEXP raster = R_NilValue;
+    CXXR::GCStackRoot<> raster(R_NilValue);
 
     if (image) {
-        SEXP dim;
+        CXXR::GCStackRoot<> dim;
         int size = xd->windowWidth * xd->windowHeight;
         CXXR::RAllocStack::Scope rscope;
         unsigned int *rint;
 
-        PROTECT(raster = allocVector(INTSXP, size));
+        raster = allocVector(INTSXP, size);
 
         /* Copy each byte of screen to an R matrix. 
          * The ARGB32 needs to be converted to an R ABGR32 */
@@ -2416,12 +2407,10 @@ static SEXP X11_Cap(pDevDesc dd)
                 rint[i*xd->windowWidth + j] = bitgp((void *) image, i, j);
             }
         }
-        PROTECT(dim = allocVector(INTSXP, 2));
+        dim = allocVector(INTSXP, 2);
         INTEGER(dim)[0] = xd->windowHeight;
         INTEGER(dim)[1] = xd->windowWidth;
         setAttrib(raster, R_DimSymbol, dim);
-
-        UNPROTECT(2);
 
         XDestroyImage(image);
     }
@@ -2480,12 +2469,11 @@ static void X11_Polyline(int n, double *x, double *y,
 {
     CXXR::RAllocStack::Scope rscope;
     XPoint *points;
-    int i, j;
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 
     points = (XPoint *) R_alloc(n, sizeof(XPoint));
 
-    for(i = 0 ; i < n ; i++) {
+    for (int i = 0 ; i < n ; i++) {
 	points[i].x = (short)(x[i]);
 	points[i].y = (short)(y[i]);
     }
@@ -2495,7 +2483,8 @@ static void X11_Polyline(int n, double *x, double *y,
 	SetColor(gc->col, xd);
 	SetLinetype(gc, xd);
 /* Some X servers need npoints < 64K */
-	for(i = 0; i < n; i+= 10000-1) {
+	int j = 0;
+	for (int i = 0; i < n; i+= 10000-1) {
 	    j = n - i;
 	    j = (j <= 10000) ? j: 10000; /* allow for overlap */
 	    XDrawLines(display, xd->window, xd->wgc, points+i, j,
@@ -2633,11 +2622,10 @@ static void X11_eventHelper(pDevDesc dd, int code)
     if (code == 1) {
     	R_ProcessX11Events((void*)NULL);	/* discard pending events */
     	if (isEnvironment(dd->eventEnv)) {
-    	    SEXP prompt = findVar(install("prompt"), dd->eventEnv);
+    	    CXXR::GCStackRoot<> prompt;
+    	    prompt = findVar(install("prompt"), dd->eventEnv);
     	    if (isString(prompt) && length(prompt) == 1) {
-    		 PROTECT(prompt);
     		 XStoreName(display, xd->window, CHAR(asChar(prompt)));
-    		 UNPROTECT(1);
     	    } else 
     	    	XStoreName(display, xd->window, "");
     	}
@@ -2782,7 +2770,7 @@ static void X11_releaseMask(SEXP ref, pDevDesc dd) {}
 	/*	 see X_COLORTYPE at top of file */
 	/*	7) maxcube			*/
 
-Rboolean X11DeviceDriver(pDevDesc dd,
+bool X11DeviceDriver(pDevDesc dd,
 			 const char *disp_name,
 			 double width,
 			 double height,
@@ -2800,27 +2788,27 @@ Rboolean X11DeviceDriver(pDevDesc dd,
 			 int antialias,
 			 const char *family,
 			 const char *symbolfamily,
-                         Rboolean usePUA)
+			 bool usePUA)
 {
     pX11Desc xd;
     const char *fn;
 
     xd = Rf_allocX11DeviceDesc(pointsize);
-    if(!xd) return FALSE;
+    if (!xd) return false;
     xd->bg = bgcolor;
 #ifdef HAVE_WORKING_X11_CAIRO
-    xd->useCairo = (Rboolean) (useCairo != 0);
-    xd->buffered = FALSE;
-    switch(useCairo) {
+    xd->useCairo = (useCairo != 0);
+    xd->buffered = 0;
+    switch (useCairo) {
     case 0: break; /* Xlib */
-    case 1: xd->buffered = (Rboolean) 1; break; /* cairo */
-    case 2: xd->buffered = (Rboolean) 0; break; /* nbcairo */
-    case 3: xd->buffered = (Rboolean) 2; break; /* dbcairo */
+    case 1: xd->buffered = 1; break; /* cairo */
+    case 2: xd->buffered = 0; break; /* nbcairo */
+    case 3: xd->buffered = 2; break; /* dbcairo */
     default:
 	warning("%s", _("that type is not supported on this platform - using \"nbcairo\""));
-	xd->buffered = FALSE;
+	xd->buffered = 0;
     }
-    if(useCairo) {
+    if (useCairo) {
 	switch(antialias){
 	case 1: xd->antialias = CAIRO_ANTIALIAS_DEFAULT; break;
 	case 2: xd->antialias = CAIRO_ANTIALIAS_NONE; break;
@@ -2831,24 +2819,24 @@ Rboolean X11DeviceDriver(pDevDesc dd,
     }
 #else
     /* Currently this gets caught at R level */
-    if(useCairo) {
+    if (useCairo) {
 	warning("%s", _("cairo-based types are not supported on this build - using \"Xlib\""));
-	useCairo = FALSE;
+	useCairo = false;
     }
 #endif
 
-    if(!useCairo) {
-	if(strlen(fn = CHAR(STRING_ELT(sfonts, 0))) > 499) {
+    if (!useCairo) {
+	if (strlen(fn = CHAR(STRING_ELT(sfonts, 0))) > 499) {
 	    strcpy(xd->basefontfamily, fontname);
 	    strcpy(xd->fontfamily, fontname);
 	} else {
 	    strcpy(xd->basefontfamily, fn);
 	    strcpy(xd->fontfamily, fn);
 	}
-	if(strlen(fn = CHAR(STRING_ELT(sfonts, 1))) > 499)
+	if (strlen(fn = CHAR(STRING_ELT(sfonts, 1))) > 499)
 	    strcpy(xd->symbolfamily, symbolname);
 	else strcpy(xd->symbolfamily, fn);
-        xd->usePUA = TRUE;
+        xd->usePUA = true;
     } else {
         strcpy(xd->basefontfamily, family);
         strcpy(xd->symbolfamily, symbolfamily);
@@ -2872,7 +2860,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
 		  gamma_fac, colormodel, maxcube, bgcolor,
 		  canvascolor, res, xpos, ypos)) {
 	free(xd);
-	return FALSE;
+	return false;
     }
 
     Rf_setX11DeviceData(dd, gamma_fac, xd);
@@ -2880,7 +2868,7 @@ Rboolean X11DeviceDriver(pDevDesc dd,
 			      first newpage does set whitecolor
 			      if par("bg") is not transparent */
 
-    return TRUE;
+    return true;
 }
 
 /**
@@ -3093,7 +3081,7 @@ pX11Desc Rf_allocX11DeviceDesc(double ps)
     xd->fontface = -1;
     xd->fontsize = -1;
     xd->pointsize = ps;
-    xd->handleOwnEvents = FALSE;
+    xd->handleOwnEvents = false;
     xd->window = (Window) NULL;
 
     return xd;
@@ -3141,11 +3129,11 @@ Display *Rf_getX11Display(void)
  function.
  Finally, setHandlers controls whether the code establishes handlers for the X errors.
  */
-int Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
+bool Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
 		 int maxcube, Rboolean setHandlers)
 {
 /*    static int alreadyDone = 0;
-    if(alreadyDone) return TRUE;
+    if(alreadyDone) return true;
     alreadyDone = 1; */
     display = dpy;
 
@@ -3173,14 +3161,14 @@ int Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
     maxcubesize = maxcube;
     SetupX11Color();
     devPtrContext = XUniqueContext();
-    displayOpen = TRUE;
+    displayOpen = true;
     /* set error handlers */
-    if(setHandlers == TRUE) {
+    if (setHandlers == TRUE) {
 	XSetErrorHandler(R_X11Err);
 	XSetIOErrorHandler(R_X11IOErr);
     }
 
-    return TRUE;
+    return true;
 }
 
 typedef Rboolean (*X11DeviceDriverRoutine)(pDevDesc, char*,
@@ -3397,7 +3385,7 @@ static int in_R_X11_access(void)
     X11IOhandler old;
 
     if (displayOpen) return TRUE;
-    if(!(p = getenv("DISPLAY"))) return FALSE;
+    if (!(p = getenv("DISPLAY"))) return FALSE;
     /* Bill Dunlap sees an error when tunneling to a non-existent
        X11 connection that BDR cannot reproduce.  We leave a handler set
        if we get an error, but that is rare.
@@ -3405,11 +3393,11 @@ static int in_R_X11_access(void)
     old = XSetIOErrorHandler(R_X11IOErrSimple);
     if ((display = XOpenDisplay(NULL)) == NULL) {
 	XSetIOErrorHandler(old);
-	return FALSE;
+	return false;
     } else {
 	XCloseDisplay(display);
 	XSetIOErrorHandler(old);
-	return TRUE;
+	return true;
     }
 }
 

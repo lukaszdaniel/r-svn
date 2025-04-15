@@ -467,7 +467,7 @@ static bool BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
 	return false;
     }
     if (xd->type == SVG || xd->type == PDF || xd->type == PS)
-	xd->onefile = (Rboolean) (quality != 0);
+	xd->onefile = (quality != 0);
 
     /* Set up Data Structures  */
     dd->size = cbm_Size;

@@ -1189,7 +1189,7 @@ static void menuadd(control m)
     gadesc *xd = (gadesc *) dd->deviceSpecific;
 
     AddtoPlotHistory(GEcreateSnapshot(desc2GEDesc(dd)), 0);
-    xd->needsave = FALSE;
+    xd->needsave = false;
 }
 
 static void menureplace(control m)
@@ -1232,7 +1232,7 @@ static void menuprev(control m)
 	    pGEDevDesc gdd = desc2GEDesc(dd);
 	    if (gdd->displayList != R_NilValue) {
 		AddtoPlotHistory(GEcreateSnapshot(gdd), 0);
-		xd->needsave = FALSE;
+		xd->needsave = false;
 		vDL = findVar(install(".SavedPlots"), R_GlobalEnv);
 		/* may have changed vDL pointer */
 	    }
@@ -1780,7 +1780,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
     if (!dsp[0]) {
 	if (!setupScreenDevice(dd, xd, w, h, recording, resize, xpos, ypos))
 	    return FALSE;
-	xd->have_alpha = TRUE;
+	xd->have_alpha = true;
     } else if (streqln(dsp, "win.print:", 10)) {
 	xd->kind = PRINTER;
 	xd->fast = 0; /* use scalable line widths */
@@ -1820,7 +1820,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    warning(_("unable to open file '%s' for writing"), buf);
 	    return FALSE;
 	}
-	xd->have_alpha = TRUE;
+	xd->have_alpha = true;
     } else if (streqln(dsp, "jpeg:", 5)) {
 	char *p = strchr(&dsp[5], ':');
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
@@ -1850,7 +1850,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    warning(_("unable to open file '%s' for writing"), buf);
 	    return FALSE;
 	}
-	xd->have_alpha = TRUE;
+	xd->have_alpha = true;
     } else if (streqln(dsp, "tiff:", 5)) {
 	char *p = strchr(&dsp[5], ':');
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
@@ -1874,7 +1874,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	    warning("%s", _("unable to allocate bitmap"));
 	    return FALSE;
 	}
-	xd->have_alpha = TRUE;
+	xd->have_alpha = true;
     } else {
 	/*
 	 * win.metafile[:] in memory (for the clipboard)
@@ -1922,7 +1922,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
     xd->origHeight = xd->showHeight = xd->windowHeight = rr.height;
     xd->clip = rr;
     setdata(xd->gawin, (void *) dd);
-    xd->needsave = FALSE;
+    xd->needsave = false;
     return TRUE;
 }
 
@@ -2125,7 +2125,7 @@ static void GA_Resize(pDevDesc dd)
 		xd->bm2 = newbitmap(iw, ih, getdepth(xd->gawin));
 		if (!xd->bm2) {
 		    R_ShowMessage(_("Insufficient memory for resize. Disabling alpha blending"));
-		    xd->have_alpha = FALSE;
+		    xd->have_alpha = false;
 		}
 	    }
 
@@ -2177,13 +2177,10 @@ static void GA_NewPage(const pGEcontext gc,
 	if(xd->buffered && !xd->holdlevel) SHOW;
 	if (xd->recording && xd->needsave)
 	    AddtoPlotHistory(desc2GEDesc(dd)->savedSnapshot, 0);
-	if (xd->replaying)
-	    xd->needsave = FALSE;
-	else
-	    xd->needsave = TRUE;
+	xd->needsave = !(xd->replaying);
     }
     xd->bg = gc->fill;
-    xd->warn_trans = FALSE;
+    xd->warn_trans = false;
     {
 	unsigned int alpha = R_ALPHA(xd->bg);
 	if(alpha  == 0) xd->bgcolor = xd->canvascolor;
@@ -2195,7 +2192,7 @@ static void GA_NewPage(const pGEcontext gc,
 	}
     }
     if (xd->kind != SCREEN) {
-	xd->needsave = TRUE;
+	xd->needsave = true;
 	xd->clip = getrect(xd->gawin);
 	if(R_OPAQUE(xd->bg) || xd->kind == BMP || xd->kind == JPEG
 	   || xd->kind == TIFF) {
@@ -2326,7 +2323,7 @@ static void GA_Deactivate(pDevDesc dd)
 
 #define WARN_SEMI_TRANS { \
 	    if(!xd->warn_trans) warning("%s", _("semi-transparency is not supported on this device: reported only once per page")); \
-	    xd->warn_trans = TRUE; \
+	    xd->warn_trans = true; \
 	}
 
 #define DRAW2(col) {if(xd->kind != SCREEN) gcopyalpha(xd->gawin,xd->bm2,r,R_ALPHA(col)); else {gcopyalpha(xd->bm,xd->bm2,r,R_ALPHA(col)); if(!xd->buffered) drawbits(xd);}}
@@ -3332,8 +3329,8 @@ bool GADeviceDriver(pDevDesc dd, const char *display, double width,
     dd->startgamma = gamma;
     xd->bm = NULL;
     xd->bm2 = NULL;
-    xd->have_alpha = FALSE; /* selectively overridden in GA_Open */
-    xd->warn_trans = FALSE;
+    xd->have_alpha = false; /* selectively overridden in GA_Open */
+    xd->warn_trans = false;
     strncpy(xd->title, title, 101);
     xd->title[100] = '\0';
     strncpy(xd->basefontfamily, family, 101);

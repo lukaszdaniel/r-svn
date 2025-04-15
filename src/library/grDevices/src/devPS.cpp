@@ -3496,7 +3496,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     pd->maxpointsize = (int)(72.0 * ((pd->pageheight > pd->pagewidth) ?
 				     pd->pageheight : pd->pagewidth));
     pd->pageno = pd->fileno = 0;
-    pd->warn_trans = FALSE;
+    pd->warn_trans = false;
 
     /* Base Pointsize */
     /* Nominal Character Sizes in Pixels */
@@ -3597,7 +3597,7 @@ static void CheckAlpha(int color, PostScriptDesc *pd)
     unsigned int alpha = R_ALPHA(color);
     if (alpha > 0 && alpha < 255 && !pd->warn_trans) {
 	warning("%s", _("semi-transparency is not supported on this device: reported only once per page"));
-	pd->warn_trans = TRUE;
+	pd->warn_trans = true;
     }
 }
 
@@ -3838,7 +3838,7 @@ static void PS_NewPage(const pGEcontext gc,
 	gc->col = R_TRANWHITE;
 	PS_Rect(0, 0, 72.0 * pd->pagewidth, 72.0 * pd->pageheight, gc, dd);
     }
-    pd->warn_trans = FALSE;
+    pd->warn_trans = false;
 }
 
 #ifdef Win32
@@ -8156,7 +8156,7 @@ static void PDF_Open(pDevDesc dd, PDFDesc *pd)
 	}
 	pd->open_type = 1;
 	if (!pd->onefile) {
-	    pd->onefile = TRUE;
+	    pd->onefile = true;
 	    warning("%s", _("file = \"|cmd\" implies 'onefile = TRUE'"));
 	}
     } else pd->open_type = 0;

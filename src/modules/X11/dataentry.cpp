@@ -303,14 +303,14 @@ static SEXP ssNewVector(SEXPTYPE type, int vlen)
 
 SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP colmodes, tnames, tvec, tvec2, work2;
+    SEXP colmodes, tnames, tvec, tvec2;
+    CXXR::GCStackRoot<> work2;
     SEXPTYPE type;
-    int i, j, cnt, len, nprotect;
+    int len;
     const char *title = "R Data Editor";
     destruct DE1;
     DEstruct DE = &DE1;
 
-    nprotect = 0;/* count the PROTECT()s */
     DE->work = duplicate(CAR(args));
     colmodes = CADR(args);
     tnames = getAttrib(DE->work, R_NamesSymbol);
@@ -332,7 +332,6 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     DE->colmin = 1;
     DE->rowmin = 1;
     PROTECT(ssNA_STRING = duplicate(NA_STRING));
-    nprotect++;
     DE->bwidth = 5;
     DE->hht = 30;
     DE->isEditor = TRUE;
@@ -343,14 +342,14 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (isNull(tnames)) {
 	DE->names = allocVector(STRSXP, DE->xmaxused);
-	for(i = 0; i < DE->xmaxused; i++) {
+	for (int i = 0; i < DE->xmaxused; i++) {
 	    char clab[25];
 	    snprintf(clab, 25, "var%d", i);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
     } else
 	DE->names = duplicate(tnames);
-    for (i = 0; i < DE->xmaxused; i++) {
+    for (int i = 0; i < DE->xmaxused; i++) {
 	int len = LENGTH(VECTOR_ELT(DE->work, i));
 	INTEGER(DE->lens)[i] = len;
 	DE->ymaxused = max(len, DE->ymaxused);
@@ -388,13 +387,13 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
         throw;
     }
     closewin(DE);
-    if(nView == 0) {
-	if(fdView >= 0) { /* might be open after viewers, but unlikely */
+    if (nView == 0) {
+	if (fdView >= 0) { /* might be open after viewers, but unlikely */
 	    removeInputHandler(&R_InputHandlers,
 			       getInputHandler(R_InputHandlers,fdView));
 	    fdView = -1;
 	}
-	if(font_set) {
+	if (font_set) {
 	    XFreeFontSet(iodisplay, font_set);
 	    font_set = NULL;
 	}
@@ -403,11 +402,12 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     /* drop out unused columns */
-    for(i = 0, cnt = 0; i < DE->xmaxused; i++)
-	if(!isNull(VECTOR_ELT(DE->work, i))) cnt++;
+    int cnt = 0;
+    for (int i = 0; i < DE->xmaxused; i++)
+	if (!isNull(VECTOR_ELT(DE->work, i))) cnt++;
     if (cnt < DE->xmaxused) {
-	PROTECT(work2 = allocVector(VECSXP, cnt)); nprotect++;
-	for(i = 0, j = 0; i < DE->xmaxused; i++) {
+	work2 = allocVector(VECSXP, cnt);
+	for (int i = 0, j = 0; i < DE->xmaxused; i++) {
 	    if(!isNull(VECTOR_ELT(DE->work, i))) {
 		SET_VECTOR_ELT(work2, j, VECTOR_ELT(DE->work, i));
 		INTEGER(DE->lens)[j] = INTEGER(DE->lens)[i];
@@ -418,12 +418,12 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 	DE->names = lengthgets(DE->names, cnt);
     } else work2 = DE->work;
 
-    for (i = 0; i < LENGTH(work2); i++) {
+    for (int i = 0; i < LENGTH(work2); i++) {
 	len = INTEGER(DE->lens)[i];
 	tvec = VECTOR_ELT(work2, i);
 	if (LENGTH(tvec) != len) {
 	    tvec2 = ssNewVector(TYPEOF(tvec), len);
-	    for (j = 0; j < len; j++) {
+	    for (int j = 0; j < len; j++) {
 		if (TYPEOF(tvec) == REALSXP) {
 			REAL(tvec2)[j] = REAL(tvec)[j];
 		} else if (TYPEOF(tvec) == STRSXP) {
@@ -439,7 +439,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     setAttrib(work2, R_NamesSymbol, DE->names);
-    UNPROTECT(nprotect);
+    UNPROTECT(1); // ssNA_STRING
     return work2;
 }
 
@@ -449,11 +449,10 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXPTYPE type;
     // FIXME: this should be checked
     DEstruct DE = (DEstruct) malloc(sizeof(destruct));
-    if(!DE) error("%s", _("allocation failed in in_R_X11_dataviewer"));
+    if (!DE) error("%s", _("allocation failed in in_R_X11_dataviewer"));
 
     nView++;
 
-    int nprotect = 0;/* count the PROTECT()s */
     DE->work = CAR(args);
     DE->names = getAttrib(DE->work, R_NamesSymbol);
 
@@ -504,7 +503,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     cell_cursor_init(DE);
 
-    if(fdView < 0) {
+    if (fdView < 0) {
 	fdView = ConnectionNumber(iodisplay);
 	addInputHandler(R_InputHandlers, fdView,
 			R_ProcessX11Events, XActivity);
@@ -523,7 +522,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
         nView--;
         throw;
     }
-    UNPROTECT(nprotect);
+
     return R_NilValue;
 }
 
@@ -537,7 +536,7 @@ static void setcellwidths(DEstruct DE)
     DE->nwide = 2;
     for (int i = 2; i < 100; i++) { /* 100 on-screen columns cannot occur */
 	dw = BOXW(i + DE->colmin - 1);
-	if((w += dw) > DE->fullwindowWidth ||
+	if ((w += dw) > DE->fullwindowWidth ||
 	   (!DE->isEditor && i > DE->xmaxused - DE->colmin + 1)) {
 	    DE->nwide = i;
 	    DE->windowWidth = w - dw;
@@ -548,7 +547,6 @@ static void setcellwidths(DEstruct DE)
 
 static void drawwindow(DEstruct DE)
 {
-    int i, st;
     XWindowAttributes attribs;
 
     /* if there is an active cell enter the data in it */
@@ -569,19 +567,20 @@ static void drawwindow(DEstruct DE)
     clearwindow(DE);
 
 
-    for (i = 1; i < DE->nhigh; i++)
+    for (int i = 1; i < DE->nhigh; i++)
 	drawrectangle(DE, 0, DE->hht + i * DE->box_h, DE->boxw[0], DE->box_h,
 		      1, 1);
      /* so row 0 and col 0 are reserved for labels */
     DE->colmax = DE->colmin + (DE->nwide - 2);
     DE->rowmax = DE->rowmin + (DE->nhigh - 2);
     printlabs(DE);
-    for (i = DE->colmin; i <= DE->colmax; i++) drawcol(DE, i);
+    for (int i = DE->colmin; i <= DE->colmax; i++) drawcol(DE, i);
 
-    if(DE->isEditor) {
+    if (DE->isEditor) {
 	/* draw the quit etc boxes */
 
-	i = textwidth(DE, "Quit");
+	int st;
+	int i = textwidth(DE, "Quit");
 	box_coords[0] = st = DE->fullwindowWidth - 6 - DE->bwidth;
 	box_coords[1] = st - i;
 	drawrectangle(DE, st - i, 3, i + 4, DE->hht - 6, 1, 1);
@@ -608,7 +607,7 @@ static void drawwindow(DEstruct DE)
 
 static void doHscroll(DEstruct DE, int oldcol)
 {
-    int i, dw;
+    int dw;
     int oldnwide = DE->nwide, oldwindowWidth = DE->windowWidth;
 
     /* horizontal re-position */
@@ -616,13 +615,13 @@ static void doHscroll(DEstruct DE, int oldcol)
     DE->colmax = DE->colmin + (DE->nwide - 2);
     if (oldcol < DE->colmin) { /* drop oldcol...colmin - 1 */
 	dw = DE->boxw[0];
-	for (i = oldcol; i < DE->colmin; i++) dw += BOXW(i);
+	for (int i = oldcol; i < DE->colmin; i++) dw += BOXW(i);
 	copyH(DE, dw, DE->boxw[0], oldwindowWidth - dw + 1);
 	dw = oldwindowWidth - BOXW(oldcol) + 1;
 	cleararea(DE, dw, DE->hht, DE->fullwindowWidth-dw,
 		  DE->fullwindowHeight);
 	/* oldnwide includes the row labels */
-	for (i = oldcol+oldnwide-1; i <= DE->colmax; i++) drawcol(DE, i);
+	for (int i = oldcol+oldnwide-1; i <= DE->colmax; i++) drawcol(DE, i);
     } else {
 	/* move one or more cols left */
 	dw = BOXW(DE->colmin);
@@ -645,10 +644,9 @@ static void doHscroll(DEstruct DE, int oldcol)
 static void find_coords(DEstruct DE,
 			int row, int col, int *xcoord, int *ycoord)
 {
-    int i, w;
-    w = DE->bwidth;
+    int w = DE->bwidth;
     if (col > 0) w += DE->boxw[0];
-    for(i = 1; i < col; i ++) w += BOXW(i + DE->colmin - 1);
+    for (int i = 1; i < col; i ++) w += BOXW(i + DE->colmin - 1);
     *xcoord = w;
     *ycoord = DE->bwidth + DE->hht + DE->box_h * row;
 }
@@ -994,7 +992,7 @@ static void highlightrect(DEstruct DE)
 static bool getccol(DEstruct DE)
 {
     SEXP tmp, tmp2;
-    int i, len, newlen, wcol, wrow;
+    int len, newlen, wcol, wrow;
     SEXPTYPE type;
     bool newcol = FALSE;
 
@@ -1004,7 +1002,7 @@ static bool getccol(DEstruct DE)
 	/* extend work, names and lens */
 	DE->work = lengthgets(DE->work, wcol);
 	DE->names = lengthgets(DE->names, wcol);
-	for (i = DE->xmaxused; i < wcol; i++) {
+	for (int i = DE->xmaxused; i < wcol; i++) {
 	    char clab[25];
 	    snprintf(clab, 25, "var%d", i + 1);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
@@ -1025,7 +1023,7 @@ static bool getccol(DEstruct DE)
     if (len < wrow) {
 	for (newlen = max(len * 2, 10) ; newlen < wrow ; newlen *= 2);
 	tmp2 = ssNewVector(type, newlen);
-	for (i = 0; i < len; i++)
+	for (int i = 0; i < len; i++)
 	    if (type == REALSXP)
 		REAL(tmp2)[i] = REAL(tmp)[i];
 	    else if (type == STRSXP)
@@ -1136,11 +1134,10 @@ static void closerect(DEstruct DE)
 		    REAL(cvec)[wrow - 1] = new_;
 		if (newcol && warn) {
 		    /* change mode to character */
-		    SEXP tmp = coerceVector(cvec, STRSXP);
-		    PROTECT(tmp);
+		    CXXR::GCStackRoot<> tmp;
+		    tmp = coerceVector(cvec, STRSXP);
 		    SET_STRING_ELT(tmp, wrow - 1, mkChar(buf));
 		    SET_VECTOR_ELT(DE->work, wcol - 1, tmp);
-		    UNPROTECT(1);
 		}
 	    } else {
 		if (TYPEOF(cvec) == STRSXP)
