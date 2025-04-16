@@ -435,7 +435,7 @@ static ssize_t pf_str(const char *s)
 #else
     size_t wbyte = 0;
     size_t nbyte = strlen(s);
-    for(;;) {
+    for (;;) {
 	ssize_t w = write(R_ProfileOutfile, s + wbyte, nbyte - wbyte);
 	if (w == -1) {
 	    if (errno == EINTR)
@@ -611,7 +611,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 	pf_str("\n"); 
     }
     
-    if(strlen(buf)) {
+    if (strlen(buf)) {
 	pf_str(buf);
 	pf_str("\n");
     }
@@ -648,7 +648,7 @@ static void *ProfileThread(void *pinfo)
 	until.tv_sec = (time_t) duntil_s;
 	until.tv_nsec = (long) (1e9 * (duntil_s - until.tv_sec));
 
-	for(;;) {
+	for (;;) {
 	    int res = pthread_cond_timedwait(&nfo->terminate_cv,
 					     &nfo->terminate_mu, &until);
 	    if (nfo->should_terminate)
@@ -675,7 +675,7 @@ static void R_EndProfiling(void)
 #ifdef Win32
     SetEvent(ProfileEvent);
     CloseHandle(MainThread);
-    if(R_ProfileOutfile) fclose(R_ProfileOutfile);
+    if (R_ProfileOutfile) fclose(R_ProfileOutfile);
     R_ProfileOutfile = NULL;
 #else /* not Win32 */
     if (R_Profiling_Event == RPE_CPU) {
@@ -698,7 +698,7 @@ static void R_EndProfiling(void)
 	pthread_mutex_destroy(&nfo->terminate_mu);
     }
     signal(SIGPROF, doprof_null);
-    if(R_ProfileOutfile >= 0) close(R_ProfileOutfile);
+    if (R_ProfileOutfile >= 0) close(R_ProfileOutfile);
     R_ProfileOutfile = -1;
 #endif /* not Win32 */
     Evaluator::enableProfiling(false);
@@ -725,7 +725,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 #ifndef Win32
     CXXR::RAllocStack::Scope rscope;
 
-    if(R_ProfileOutfile >= 0) R_EndProfiling();
+    if (R_ProfileOutfile >= 0) R_EndProfiling();
     if (filename != NA_STRING && filename) {
 	const char *fn = R_ExpandFileName(translateCharFP(filename));
 	int flags = O_CREAT | O_WRONLY;
@@ -742,7 +742,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
     int wait;
     HANDLE Proc = GetCurrentProcess();
 
-    if(R_ProfileOutfile != NULL) R_EndProfiling();
+    if (R_ProfileOutfile != NULL) R_EndProfiling();
     R_ProfileOutfile = RC_fopen(filename, append ? "a" : "w", TRUE);
     if (R_ProfileOutfile == NULL)
 	error(_("Rprof: cannot open profile file '%s'"),
@@ -751,11 +751,11 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
     int interval;
 
     interval = (int)(1e6 * dinterval + 0.5);
-    if(mem_profiling)
+    if (mem_profiling)
 	pf_str("memory profiling: ");
-    if(gc_profiling)
+    if (gc_profiling)
 	pf_str("GC profiling: ");
-    if(line_profiling)
+    if (line_profiling)
 	pf_str("line profiling: ");
     pf_str("sample.interval=");
     pf_int(interval); /* %d */
@@ -789,7 +789,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
     DuplicateHandle(Proc, GetCurrentThread(), Proc, &MainThread,
 		    0, FALSE, DUPLICATE_SAME_ACCESS);
     wait = interval/1000;
-    if(!(ProfileEvent = CreateEvent(NULL, FALSE, FALSE, NULL)) ||
+    if (!(ProfileEvent = CreateEvent(NULL, FALSE, FALSE, NULL)) ||
        ((int) _beginthread(ProfileThread, 0, &wait) == -1))
 	R_Suicide(_("unable to create profiling thread"));
     Sleep(wait/2); /* suspend this thread to ensure that the other one starts */
@@ -2070,7 +2070,7 @@ void R::PrintCall(SEXP call, SEXP rho)
 {
     int old_bl = R_BrowseLines,
         blines = asInteger(GetOption1(install("deparse.max.lines")));
-    if(blines != NA_INTEGER && blines > 0)
+    if (blines != NA_INTEGER && blines > 0)
 	R_BrowseLines = blines;
 
     R_PrintData pars;
@@ -2573,7 +2573,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
     for (next = FORMALS(op); next != R_NilValue; next = CDR(next)) {
 	SEXP symbol =  TAG(next);
 	R_varloc_t loc = R_findVarLocInFrame(rho,symbol);
-	if(R_VARLOC_IS_NULL(loc))
+	if (R_VARLOC_IS_NULL(loc))
 	    error(_("could not find symbol \"%s\" in environment of the generic function"),
 		  CHAR(PRINTNAME(symbol)));
 	bool missing = R_GetVarLocMISSING(loc);
@@ -2588,10 +2588,10 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 		/* find the symbol in the method, copy its expression
 		 * to the promise */
 		for (deflt = FORMALS(op); deflt != R_NilValue; deflt = CDR(deflt)) {
-		    if(TAG(deflt) == symbol)
+		    if (TAG(deflt) == symbol)
 			break;
 		}
-		if(deflt == R_NilValue)
+		if (deflt == R_NilValue)
 		    error(_("symbol \"%s\" not in environment of method"),
 			  CHAR(PRINTNAME(symbol)));
 		SET_PRCODE(val, CAR(deflt));
@@ -2649,7 +2649,7 @@ static SEXP EnsureLocal(SEXP symbol, SEXP rho, R_varloc_t *ploc)
 
     if ((vl = R_findVarInFrame(rho, symbol)) != R_UnboundValue) {
 	vl = eval(symbol, rho);	/* for promises */
-	if(MAYBE_SHARED(vl)) {
+	if (MAYBE_SHARED(vl)) {
 	    /* Using R_shallow_duplicate_attr may defer duplicating
 	       data until it it is needed. If the data are duplicated,
 	       then the wrapper can be discarded at the end of the
@@ -2843,7 +2843,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
     val = CADR(args);
     SEXP body = CADDR(args);
 
-    if ( !isSymbol(sym) ) errorcall(call, "%s", _("non-symbol loop variable"));
+    if (!isSymbol(sym)) errorcall(call, "%s", _("non-symbol loop variable"));
 
     bool dbg = ENV_RDEBUG(rho);
     if (R_jit_enabled > 2 && !dbg && ByteCode::ByteCodeEnabled()
@@ -2857,7 +2857,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
     /* deal with the case where we are iterating over a factor
        we need to coerce to character - then iterate */
 
-    if ( inherits(val, "factor") ) {
+    if (inherits(val, "factor")) {
 	SEXP tmp = asCharacterFactor(val);
 	val = tmp;
     }
@@ -3269,7 +3269,7 @@ static SEXP evalseq(SEXP expr_, SEXP rho, int forcelocal,  R_varloc_t tmploc,
     if (isNull(expr))
 	error("%s", _("invalid (NULL) left side of assignment"));
     if (isSymbol(expr)) { /* now we are down to the target symbol */
-	if(forcelocal) {
+	if (forcelocal) {
 	    nval = EnsureLocal(expr, rho, ploc);
 	}
 	else {
@@ -3387,7 +3387,7 @@ static SEXP installAssignFcnSymbol(SEXP fun)
     char buf[ASSIGNBUFSIZ];
 
     /* install the symbol */
-    if(strlen(CHAR(PRINTNAME(fun))) + 3 > ASSIGNBUFSIZ)
+    if (strlen(CHAR(PRINTNAME(fun))) + 3 > ASSIGNBUFSIZ)
 	error(_("overlong name in '%s'"), EncodeChar(PRINTNAME(fun)));
     snprintf(buf, ASSIGNBUFSIZ, "%s<-", CHAR(PRINTNAME(fun)));
     SEXP val = install(buf);
@@ -3805,7 +3805,7 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 		    h = CDR(h);
 		}
 	    }
-	    else if(h != R_MissingArg)
+	    else if (h != R_MissingArg)
 		error("%s", _("'...' used in an incorrect context"));
 	    UNPROTECT(1); /* h */
 	}
@@ -3923,11 +3923,11 @@ static SEXP VectorToPairListNamed(SEXP x)
     PROTECT(x);
     PROTECT(xnames = getAttrib(x, R_NamesSymbol)); /* isn't this protected via x? */
     bool named = (xnames != R_NilValue);
-    if(named)
+    if (named)
 	for (R_len_t i = 0; i < length(x); i++)
 	    if (CHAR(STRING_ELT(xnames, i))[0] != '\0') len++;
 
-    if(len) {
+    if (len) {
 	PROTECT(xnew = allocList(len));
 	xptr = xnew;
 	for (R_len_t i = 0; i < length(x); i++) {
@@ -3964,12 +3964,12 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* This is supposed to be defunct, but has been kept here
 	   (and documented as such) */
 	encl = R_BaseEnv;
-    } else if ( !isEnvironment(encl) &&
-		!isEnvironment((encl = simple_as_environment(encl))) ) {
+    } else if (!isEnvironment(encl) &&
+		!isEnvironment((encl = simple_as_environment(encl)))) {
 	error(_("invalid '%s' argument of type '%s'"),
 	      "enclos", R_typeToChar(encl));
     }
-    if(IS_S4_OBJECT(env) && (TYPEOF(env) == OBJSXP))
+    if (IS_S4_OBJECT(env) && (TYPEOF(env) == OBJSXP))
 	env = R_getS4DataSlot(env, ANYSXP); /* usually an ENVSXP */
     switch(TYPEOF(env)) {
     case NILSXP:
@@ -4103,7 +4103,7 @@ attribute_hidden SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
     */
     if (cptr->callfun != R_NilValue)
 	PROTECT(s = cptr->callfun);
-    else if( TYPEOF(CAR(cptr->call)) == SYMSXP)
+    else if (TYPEOF(CAR(cptr->call)) == SYMSXP)
 	PROTECT(s = findFun(CAR(cptr->call), cptr->sysparent));
     else
 	PROTECT(s = eval(CAR(cptr->call), cptr->sysparent));
@@ -4202,7 +4202,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
     GCStackRoot<> x(R_NilValue);
     bool dots = false;
 
-    if( argsevald )
+    if (argsevald)
 	{ x = CAR(args); }
     else {
 	/* Find the object to dispatch on, dropping any leading
@@ -4234,19 +4234,19 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	}
     }
 	/* try to dispatch on the object */
-    if( isObject(x) ) {
+    if (isObject(x)) {
 	char *pt;
 	/* Try for formal method. */
-	if(IS_S4_OBJECT(x) && R_has_methods(op)) {
+	if (IS_S4_OBJECT(x) && R_has_methods(op)) {
 	    GCStackRoot<> argValue;
 	    /* create a promise to pass down to applyClosure  */
-	    if(!argsevald) {
+	    if (!argsevald) {
 		argValue = promiseArgs(args, rho);
 		IF_PROMSXP_SET_PRVALUE(CAR(argValue), x);
 	    } else argValue = args;
 	    /* This means S4 dispatch */
 	    auto value = R_possible_dispatch(call, op, argValue, rho, true);
-	    if(value.first) {
+	    if (value.first) {
 		return value;
 	    }
 	    else {
@@ -4301,7 +4301,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	    dispatched = usemethod(generic, x, call, pargs, rho1, rho, R_BaseEnv);
 	    endcontext(&cntxt);
 	    }
-	    if(dispatched.first)
+	    if (dispatched.first)
 	    {
 #ifdef ADJUST_ENVIR_REFCNTS
 		R_CleanupEnvir(rho1, dispatched.second);
@@ -4315,7 +4315,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 #endif
 	}
     }
-    if(!argsevald) {
+    if (!argsevald) {
 	if (dots) {
 	    /* The first call argument was ... and may contain more than the
 	       object, so it needs to be evaluated here.  The object should be
@@ -4337,12 +4337,12 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 static R_INLINE void updateObjFromS4Slot(SEXP objSlot, const char *className) {
     SEXP obj = CAR(objSlot);
 
-    if(IS_S4_OBJECT(obj) && isBasicClass(className)) {
+    if (IS_S4_OBJECT(obj) && isBasicClass(className)) {
 	/* This and the similar test below implement the strategy
 	 for S3 methods selected for S4 objects.  See ?Methods */
-	if(NAMED(obj)) ENSURE_NAMEDMAX(obj);
+	if (NAMED(obj)) ENSURE_NAMEDMAX(obj);
 	obj = R_getS4DataSlot(obj, OBJSXP); /* the .S3Class obj. or NULL*/
-	if(obj != R_NilValue) /* use the S3Part as the inherited object */
+	if (obj != R_NilValue) /* use the S3Part as the inherited object */
 	    SETCAR(objSlot, obj);
     }
 }
@@ -4453,7 +4453,7 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
     /* try for formal method */
     if (length(args) == 1 && !IS_S4_OBJECT(CAR(args))) {
 	// no S4
-    } else if(length(args) == 2 && !IS_S4_OBJECT(CAR(args)) && !IS_S4_OBJECT(CADR(args))) {
+    } else if (length(args) == 2 && !IS_S4_OBJECT(CAR(args)) && !IS_S4_OBJECT(CADR(args))) {
 	// no S4
     } else { // try to use S4 :
 	/* Remove argument names to ensure positional matching */
@@ -4483,7 +4483,7 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
 
     const char *generic = PRIMNAME(op);
     SEXP lclass = PROTECT(classForGroupDispatch(CAR(args))), rclass;
-    if( nargs == 2 )
+    if (nargs == 2)
 	rclass = classForGroupDispatch(CADR(args));
     else
 	rclass = R_NilValue;
@@ -4509,13 +4509,13 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
     }
 
     if (lsxp != rsxp) {
-	if ( isFunction(lsxp) && isFunction(rsxp) ) {
+	if (isFunction(lsxp) && isFunction(rsxp)) {
 	    /* special-case some methods involving difftime */
 	    const char *lname = CHAR(PRINTNAME(lmeth)),
 		*rname = CHAR(PRINTNAME(rmeth));
-	    if( streql(rname, "Ops.difftime") &&
+	    if (streql(rname, "Ops.difftime") &&
 		(streql(lname, "+.POSIXt") || streql(lname, "-.POSIXt") ||
-		 streql(lname, "+.Date") || streql(lname, "-.Date")) )
+		 streql(lname, "+.Date") || streql(lname, "-.Date")))
 		rsxp = R_NilValue;
 	    else if (streql(lname, "Ops.difftime") &&
 		     (streql(rname, "+.POSIXt") || streql(rname, "+.Date")) )
@@ -4591,7 +4591,7 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
     for (m = s ; m != R_NilValue ; m = CDR(m), args = CDR(args) ) {
 	IF_PROMSXP_SET_PRVALUE(CAR(m), CAR(args));
 	/* ensure positional matching for operators */
-	if(isOps) SET_TAG(m, R_NilValue);
+	if (isOps) SET_TAG(m, R_NilValue);
     }
 
     SEXP ans = applyClosure(t, lsxp, s, rho, newvars, true);
