@@ -140,7 +140,7 @@ jobs:
 
   windows:
     name: Windows
-    runs-on: windows-latest
+    runs-on: ${{matrix.OS}}
     timeout-minutes: 120
     env:
       R_CRAN_WEB: "https://cran.rstudio.com"
@@ -152,10 +152,12 @@ jobs:
       fail-fast: false
       matrix:
         script: [ 'check', 'installer' ]
+        OS: [ 'windows-latest', 'windows-11-arm']
     steps:
-
     - name: Prepare git
-      run: git config --global core.autocrlf false
+      run: |
+        git config --global core.autocrlf false
+        echo "archfix=${{ matrix.OS == 'windows-11-arm' && '-aarch64' || '' }}" >> $GITHUB_ENV
       shell: bash
 
     - name: Checkout
@@ -168,12 +170,10 @@ jobs:
         msystem: MSYS
         install: git make perl curl texinfo texinfo-tex rsync zip unzip diffutils
 
-    - name: "Download rtools44 toolchain"
+    - name: "Download rtools45 toolchain"
       run: |
-        url="https://github.com/r-windows/rtools-chocolatey/releases/download/6104/rtools44-toolchain-libs-base-6104.tar.zst"
-        curl -sSL $url | tar x --zstd -C /c/ || true
-        #echo "RTOOLS44_HOME=c:" >> $GITHUB_ENV
-        #echo "R_CUSTOM_TOOLS_SOFT=c:/x86_64-w64-mingw32.static.posix" >> $GITHUB_ENV
+        url="https://github.com/r-windows/rtools-chocolatey/releases/download/6536/rtools45-toolchain-libs-base${archfix}-6536.tar.zst"
+        curl -sSL $url | tar x --zstd -C /c/
 
     - name: Set timezone
       shell: powershell
@@ -206,6 +206,6 @@ jobs:
 
     - uses: actions/upload-artifact@v4
       with:
-        name: installer
+        name: installer${{env.archfix}}
         path: src/gnuwin32/installer/R-devel-win.exe
       if: matrix.script == 'installer'
