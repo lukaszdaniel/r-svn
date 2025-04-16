@@ -180,5 +180,5 @@ X11Desc *Rf_allocX11DeviceDesc(double ps);
 bool Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
 		     int maxcube, Rboolean setHandlers);
 
-int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd);
+void Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd);
 #endif

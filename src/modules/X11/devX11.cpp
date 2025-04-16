@@ -2876,7 +2876,7 @@ bool X11DeviceDriver(pDevDesc dd,
   methods/functions. It also specifies the current values of the
   dimensions of the device, and establishes the fonts, line styles, etc.
  */
-int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
+void Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
 {
     double ps = xd->pointsize;
     int res0 = (xd->res_dpi > 0) ? xd->res_dpi : 72;
@@ -2891,9 +2891,9 @@ int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
 	dd->line = Cairo_Line;
 	dd->polyline = Cairo_Polyline;
 	dd->polygon = Cairo_Polygon;
-        dd->path = Cairo_Path;
-        dd->raster = Cairo_Raster;
-        dd->cap = Cairo_Cap;
+	dd->path = Cairo_Path;
+	dd->raster = Cairo_Raster;
+	dd->cap = Cairo_Cap;
 	dd->hasTextUTF8 = TRUE;
 	dd->wantSymbolUTF8 = TRUE;
 #ifdef HAVE_PANGOCAIRO
@@ -2912,22 +2912,22 @@ int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
 	dd->haveCapture = (xd->type > WINDOW) ? 1 : 2;
 	dd->haveLocator = (xd->type > WINDOW) ? 1 : 2;
 
-        dd->setPattern = Cairo_SetPattern;
-        dd->releasePattern = Cairo_ReleasePattern;
-        dd->setClipPath = Cairo_SetClipPath;
-        dd->releaseClipPath = Cairo_ReleaseClipPath;
-        dd->setMask = Cairo_SetMask;
-        dd->releaseMask = Cairo_ReleaseMask;
-        dd->defineGroup = Cairo_DefineGroup;
-        dd->useGroup = Cairo_UseGroup;
-        dd->releaseGroup = Cairo_ReleaseGroup;
-        dd->stroke = Cairo_Stroke;
-        dd->fill = Cairo_Fill;
-        dd->fillStroke = Cairo_FillStroke;
-        dd->capabilities = Cairo_Capabilities;
-        dd->glyph = Cairo_Glyph;
+	dd->setPattern = Cairo_SetPattern;
+	dd->releasePattern = Cairo_ReleasePattern;
+	dd->setClipPath = Cairo_SetClipPath;
+	dd->releaseClipPath = Cairo_ReleaseClipPath;
+	dd->setMask = Cairo_SetMask;
+	dd->releaseMask = Cairo_ReleaseMask;
+	dd->defineGroup = Cairo_DefineGroup;
+	dd->useGroup = Cairo_UseGroup;
+	dd->releaseGroup = Cairo_ReleaseGroup;
+	dd->stroke = Cairo_Stroke;
+	dd->fill = Cairo_Fill;
+	dd->fillStroke = Cairo_FillStroke;
+	dd->capabilities = Cairo_Capabilities;
+	dd->glyph = Cairo_Glyph;
 
-        dd->deviceVersion = R_GE_glyphs;
+	dd->deviceVersion = R_GE_glyphs;
     } else
 #endif
     {
@@ -2936,9 +2936,9 @@ int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
 	dd->strWidth = X11_StrWidth;
 	dd->text = X11_Text;
 	dd->rect = X11_Rect;
-        dd->path = X11_Path;
-        dd->raster     = X11_Raster;
-        dd->cap        = X11_Cap;
+	dd->path = X11_Path;
+	dd->raster = X11_Raster;
+	dd->cap = X11_Cap;
 	dd->circle = X11_Circle;
 	dd->line = X11_Line;
 	dd->polyline = X11_Polyline;
@@ -2952,14 +2952,14 @@ int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
 	dd->haveCapture = (xd->type > WINDOW) ? 1 : 2;
 	dd->haveLocator = (xd->type > WINDOW) ? 1 : 2;
 
-        dd->setPattern      = X11_setPattern;
-        dd->releasePattern  = X11_releasePattern;
-        dd->setClipPath     = X11_setClipPath;
-        dd->releaseClipPath = X11_releaseClipPath;
-        dd->setMask         = X11_setMask;
-        dd->releaseMask     = X11_releaseMask;
+	dd->setPattern      = X11_setPattern;
+	dd->releasePattern  = X11_releasePattern;
+	dd->setClipPath     = X11_setClipPath;
+	dd->releaseClipPath = X11_releaseClipPath;
+	dd->setMask         = X11_setMask;
+	dd->releaseMask     = X11_releaseMask;
 
-        dd->deviceVersion = R_GE_definitions;
+	dd->deviceVersion = R_GE_definitions;
     }
 
     dd->eventHelper = X11_eventHelper;
@@ -3057,8 +3057,6 @@ int Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd)
     dd->deviceSpecific = (void *) xd;
 
     dd->displayListOn = TRUE;
-
-    return TRUE;
 }
 
 
