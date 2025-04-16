@@ -1660,7 +1660,7 @@ int LogicalFromString(SEXP, int*);
 int IntegerFromString(SEXP, int*);
 double RealFromString(SEXP, int*);
 Rcomplex ComplexFromString(SEXP, int*);
-SEXP StringFromLogical(int, int*);
+SEXP StringFromLogical(int);
 SEXP StringFromInteger(int, int*);
 SEXP StringFromReal(double, int*);
 SEXP StringFromComplex(Rcomplex, int*);
