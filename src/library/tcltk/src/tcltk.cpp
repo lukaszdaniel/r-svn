@@ -110,14 +110,13 @@ static int R_call(ClientData clientData,
 		  int argc,
 		  const char *argv[])
 {
-    int i;
     SEXP expr, alist, ans;
     void *fun;
 
     SEXP s_try = install("try");
 
     alist = R_NilValue;
-    for (i = argc - 1 ; i > 1 ; i--){
+    for (int i = argc - 1 ; i > 1 ; i--){
 	PROTECT(alist);
 	alist = LCONS(mkString(argv[i]), alist);
 	UNPROTECT(1);
@@ -170,11 +169,10 @@ static int R_call_lang(ClientData clientData,
 
 static Tcl_Obj *tk_eval(const char *cmd)
 {
-    char *cmd_utf8;
     Tcl_DString  cmd_utf8_ds;
 
     Tcl_DStringInit(&cmd_utf8_ds);
-    cmd_utf8 = Tcl_ExternalToUtfDString(NULL, cmd, -1, &cmd_utf8_ds);
+    const char *cmd_utf8 = Tcl_ExternalToUtfDString(NULL, cmd, -1, &cmd_utf8_ds);
     if (Tcl_Eval(RTcl_interp, cmd_utf8) == TCL_ERROR)
     {
 	char p[512];
@@ -280,14 +278,14 @@ SEXP RTcl_ObjFromVar(SEXP args)
     CXXR::RAllocStack::Scope rscope;
 
     if(!isValidString(CADR(args)))
-	error(_("invalid argument"));
+	error("%s", _("invalid argument"));
     tclobj = Tcl_GetVar2Ex(RTcl_interp,
                            translateChar(STRING_ELT(CADR(args), 0)),
                            NULL,
                            0);
     if (tclobj == NULL)
 	/* the variable may have been deleted using "unset" */
-	error(_("no such variable"));
+	error("%s", _("no such variable"));
 
     return makeRTclObject(tclobj);
 }
@@ -330,7 +328,7 @@ SEXP RTcl_StringFromObj(SEXP args)
 
 SEXP RTcl_ObjAsCharVector(SEXP args)
 {
-    Tcl_Size count, i;
+    Tcl_Size count;
     Tcl_Obj **elem, *obj;
     int ret;
     SEXP ans;
@@ -340,11 +338,13 @@ SEXP RTcl_ObjAsCharVector(SEXP args)
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
     if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
-    if (ret != TCL_OK || count > R_XLEN_T_MAX)
+    if (ret != TCL_OK)
+	return RTcl_StringFromObj(args);
+    if (sizeof(Tcl_Size) > sizeof(R_xlen_t) && count > R_XLEN_T_MAX)
 	return RTcl_StringFromObj(args);
 
     PROTECT(ans = allocVector(STRSXP, (R_xlen_t) count));
-    for (i = 0 ; i < count ; i++) {
+    for (Tcl_Size i = 0 ; i < count ; i++) {
 	char *s;
 	Tcl_DString s_ds;
 	Tcl_DStringInit(&s_ds);
@@ -365,7 +365,6 @@ SEXP RTcl_ObjFromCharVector(SEXP args)
     Tcl_DString s_ds;
     int count;
     Tcl_Obj *tclobj, *elem;
-    int i;
     SEXP val, drop;
     Tcl_Encoding encoding;
     CXXR::RAllocStack::Scope rscope;
@@ -385,7 +384,7 @@ SEXP RTcl_ObjFromCharVector(SEXP args)
 	Tcl_SetStringObj(tclobj, s, -1);
 	Tcl_DStringFree(&s_ds);
     } else
-	for ( i = 0 ; i < count ; i++) {
+	for (int i = 0 ; i < count ; i++) {
 	    elem = Tcl_NewObj();
 	    Tcl_DStringInit(&s_ds);
 	    s = Tcl_ExternalToUtfDString(encoding, 
@@ -402,7 +401,7 @@ SEXP RTcl_ObjFromCharVector(SEXP args)
 
 SEXP RTcl_ObjAsDoubleVector(SEXP args)
 {
-    Tcl_Size count, i;
+    Tcl_Size count;
     Tcl_Obj **elem, *obj;
     int ret;
     double x;
@@ -419,11 +418,13 @@ SEXP RTcl_ObjAsDoubleVector(SEXP args)
 
     /* Then try as list */
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
-    if (ret != TCL_OK || count > R_XLEN_T_MAX) /* didn't work, return NULL */
+    if (ret != TCL_OK) /* didn't work, return NULL */
+	return R_NilValue;
+    if (sizeof(Tcl_Size) > sizeof(R_xlen_t) && count > R_XLEN_T_MAX)
 	return R_NilValue;
 
     ans = allocVector(REALSXP, (R_xlen_t) count);
-    for (i = 0 ; i < count ; i++){
+    for (Tcl_Size i = 0 ; i < count ; i++){
 	ret = Tcl_GetDoubleFromObj(RTcl_interp, elem[i], &x);
 	if (ret != TCL_OK) x = NA_REAL;
 	REAL(ans)[i] = x;
@@ -445,7 +446,6 @@ SEXP RTcl_ObjFromDoubleVector(SEXP args)
 {
     int count;
     Tcl_Obj *tclobj, *elem;
-    int i;
     SEXP val, drop;
 
     val = CADR(args);
@@ -457,7 +457,7 @@ SEXP RTcl_ObjFromDoubleVector(SEXP args)
     if (count == 1 && LOGICAL(drop)[0])
 	tclobj = NewIntOrDoubleObj(REAL(val)[0]);
     else
-	for ( i = 0 ; i < count ; i++) {
+	for (int i = 0 ; i < count ; i++) {
 	    elem = NewIntOrDoubleObj(REAL(val)[i]);
 	    Tcl_ListObjAppendElement(RTcl_interp, tclobj, elem);
 	}
@@ -467,7 +467,7 @@ SEXP RTcl_ObjFromDoubleVector(SEXP args)
 
 SEXP RTcl_ObjAsIntVector(SEXP args)
 {
-    Tcl_Size count, i;
+    Tcl_Size count;
     Tcl_Obj **elem, *obj;
     int ret;
     int x;
@@ -484,11 +484,13 @@ SEXP RTcl_ObjAsIntVector(SEXP args)
 
     /* Then try as list */
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
-    if (ret != TCL_OK || count > R_XLEN_T_MAX) /* didn't work, return NULL */
+    if (ret != TCL_OK) /* didn't work, return NULL */
+	return R_NilValue;
+    if (sizeof(Tcl_Size) > sizeof(R_xlen_t) && count > R_XLEN_T_MAX)
 	return R_NilValue;
 
     ans = allocVector(INTSXP, (R_xlen_t) count);
-    for (i = 0 ; i < count ; i++){
+    for (Tcl_Size i = 0 ; i < count ; i++){
 	ret = Tcl_GetIntFromObj(RTcl_interp, elem[i], &x);
 	if (ret != TCL_OK) x = NA_INTEGER;
 	INTEGER(ans)[i] = x;
@@ -500,7 +502,6 @@ SEXP RTcl_ObjFromIntVector(SEXP args)
 {
     int count;
     Tcl_Obj *tclobj, *elem;
-    int i;
     SEXP val, drop;
 
     val = CADR(args);
@@ -512,7 +513,7 @@ SEXP RTcl_ObjFromIntVector(SEXP args)
     if (count == 1 && LOGICAL(drop)[0])
 	tclobj = Tcl_NewIntObj(INTEGER(val)[0]);
     else
-	for ( i = 0 ; i < count ; i++) {
+	for (int i = 0 ; i < count ; i++) {
 	    elem = Tcl_NewIntObj(INTEGER(val)[i]);
 	    Tcl_ListObjAppendElement(RTcl_interp, tclobj, elem);
 	}
@@ -541,7 +542,8 @@ SEXP RTcl_ObjAsRawVector(SEXP args)
     /* Then try as list */
     if (Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem)
 	!= TCL_OK) return R_NilValue;
-    if (count > R_XLEN_T_MAX) return R_NilValue;
+    if (sizeof(Tcl_Size) > sizeof(R_xlen_t) && count > R_XLEN_T_MAX)
+	return R_NilValue;
 
     PROTECT(ans = allocVector(VECSXP, (R_xlen_t) count));
     for (i = 0 ; i < count ; i++) {
