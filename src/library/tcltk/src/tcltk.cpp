@@ -35,6 +35,11 @@ using namespace R;
 
 Tcl_Interp *RTcl_interp;
 
+/* For Tcl < 8.7 */
+#ifndef TCL_SIZE_MAX
+typedef int Tcl_Size;
+#endif
+
 static void RTcl_dec_refcount(SEXP R_tclobj)
 {
     Tcl_DecrRefCount((Tcl_Obj *) R_ExternalPtrAddr(R_tclobj));
@@ -325,9 +330,9 @@ SEXP RTcl_StringFromObj(SEXP args)
 
 SEXP RTcl_ObjAsCharVector(SEXP args)
 {
-    int count;
+    Tcl_Size count, i;
     Tcl_Obj **elem, *obj;
-    int ret, i;
+    int ret;
     SEXP ans;
 
     if (TYPEOF(CADR(args)) != EXTPTRSXP)
@@ -335,10 +340,10 @@ SEXP RTcl_ObjAsCharVector(SEXP args)
     obj = (Tcl_Obj *) R_ExternalPtrAddr(CADR(args));
     if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
-    if (ret != TCL_OK)
+    if (ret != TCL_OK || count > R_XLEN_T_MAX)
 	return RTcl_StringFromObj(args);
 
-    PROTECT(ans = allocVector(STRSXP, count));
+    PROTECT(ans = allocVector(STRSXP, (R_xlen_t) count));
     for (i = 0 ; i < count ; i++) {
 	char *s;
 	Tcl_DString s_ds;
@@ -397,9 +402,9 @@ SEXP RTcl_ObjFromCharVector(SEXP args)
 
 SEXP RTcl_ObjAsDoubleVector(SEXP args)
 {
-    int count;
+    Tcl_Size count, i;
     Tcl_Obj **elem, *obj;
-    int ret, i;
+    int ret;
     double x;
     SEXP ans;
 
@@ -414,10 +419,10 @@ SEXP RTcl_ObjAsDoubleVector(SEXP args)
 
     /* Then try as list */
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
-    if (ret != TCL_OK) /* didn't work, return NULL */
+    if (ret != TCL_OK || count > R_XLEN_T_MAX) /* didn't work, return NULL */
 	return R_NilValue;
 
-    ans = allocVector(REALSXP, count);
+    ans = allocVector(REALSXP, (R_xlen_t) count);
     for (i = 0 ; i < count ; i++){
 	ret = Tcl_GetDoubleFromObj(RTcl_interp, elem[i], &x);
 	if (ret != TCL_OK) x = NA_REAL;
@@ -462,9 +467,9 @@ SEXP RTcl_ObjFromDoubleVector(SEXP args)
 
 SEXP RTcl_ObjAsIntVector(SEXP args)
 {
-    int count;
+    Tcl_Size count, i;
     Tcl_Obj **elem, *obj;
-    int ret, i;
+    int ret;
     int x;
     SEXP ans;
 
@@ -479,10 +484,10 @@ SEXP RTcl_ObjAsIntVector(SEXP args)
 
     /* Then try as list */
     ret = Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem);
-    if (ret != TCL_OK) /* didn't work, return NULL */
+    if (ret != TCL_OK || count > R_XLEN_T_MAX) /* didn't work, return NULL */
 	return R_NilValue;
 
-    ans = allocVector(INTSXP, count);
+    ans = allocVector(INTSXP, (R_xlen_t) count);
     for (i = 0 ; i < count ; i++){
 	ret = Tcl_GetIntFromObj(RTcl_interp, elem[i], &x);
 	if (ret != TCL_OK) x = NA_INTEGER;
@@ -517,7 +522,7 @@ SEXP RTcl_ObjFromIntVector(SEXP args)
 
 SEXP RTcl_ObjAsRawVector(SEXP args)
 {
-    int nb, count, i, j;
+    Tcl_Size count, nb, i, j;
     Tcl_Obj **elem, *obj;
     unsigned char *ret;
     SEXP ans, el;
@@ -528,7 +533,7 @@ SEXP RTcl_ObjAsRawVector(SEXP args)
     if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
     ret = Tcl_GetByteArrayFromObj(obj, &nb);
     if (ret) {
-	ans = allocVector(RAWSXP, nb);
+	ans = allocVector(RAWSXP, (R_xlen_t) nb);
 	for (j = 0 ; j < nb ; j++) RAW(ans)[j] = ret[j];
 	return ans;
     }
@@ -536,10 +541,11 @@ SEXP RTcl_ObjAsRawVector(SEXP args)
     /* Then try as list */
     if (Tcl_ListObjGetElements(RTcl_interp, obj, &count, &elem)
 	!= TCL_OK) return R_NilValue;
+    if (count > R_XLEN_T_MAX) return R_NilValue;
 
-    PROTECT(ans = allocVector(VECSXP, count));
+    PROTECT(ans = allocVector(VECSXP, (R_xlen_t) count));
     for (i = 0 ; i < count ; i++) {
-	el = allocVector(RAWSXP, nb);
+	el = allocVector(RAWSXP, (R_xlen_t) nb);
 	SET_VECTOR_ELT(ans, i, el);
 	ret = Tcl_GetByteArrayFromObj(elem[i], &nb);
 	for (j = 0 ; j < nb ; j++) RAW(el)[j] = ret[j];
