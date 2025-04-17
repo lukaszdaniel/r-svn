@@ -41,12 +41,12 @@ int setupui(void);
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern Rboolean AllDevicesKilled;
 #include <R_ext/libextern.h>
 LibExtern int RguiMDI;
 LibExtern window RConsole;
 LibExtern window RFrame;
 LibExtern int Rwin_graphicsx, Rwin_graphicsy;
-LibExtern Rboolean AllDevicesKilled;
 #undef LibExtern
 #ifdef __cplusplus
 } //extern "C"
