@@ -324,7 +324,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 	    else if (format == CF_UNICODETEXT) {
 		const wchar_t *wp;
 		wchar_t *ws = (wchar_t *) s;
-		for(i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) {
 		    wp = wtransChar(STRING_ELT(text, i));
 		    while(*wp) *ws++ = *wp++;
 		    *ws++ = L'\r'; *ws++ = L'\n';

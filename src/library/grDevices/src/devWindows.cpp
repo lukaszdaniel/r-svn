@@ -3085,8 +3085,8 @@ static void GA_Text0(double x, double y, const char *str, int enc,
 	    /* As from 2.7.0 can use Unicode always */
 	    int n = strlen(str), cnt;
 	    R_CheckStack2(sizeof(wchar_t)*(n+1));
-		std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(n+1);
-		wchar_t *wc = tmp.get();/* only need terminator to debug */
+	    std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(n+1);
+	    wchar_t *wc = tmp.get();/* only need terminator to debug */
 	    cnt = (enc == CE_UTF8) ?
 		Rf_utf8towcs(wc, str, n+1): mbstowcs(wc, str, n);
 	    /* These macros need to be wrapped in braces */
