@@ -217,11 +217,8 @@ static void moveback(DEstruct DE)
 
 static SEXP ssNewVector(DEstruct DE, SEXPTYPE type, int vlen)
 {
-    SEXP tvec;
-    int j;
-
-    tvec = allocVector(type, vlen);
-    for (j = 0; j < vlen; j++)
+    SEXP tvec = allocVector(type, vlen);
+    for (int j = 0; j < vlen; j++)
 	if (type == REALSXP)
 	    REAL(tvec)[j] = NA_REAL;
 	else if (type == STRSXP)
@@ -245,7 +242,7 @@ SEXP Win_dataentry(SEXP args)
     tnames = getAttrib(DE->work, R_NamesSymbol);
 
     if (TYPEOF(DE->work) != VECSXP || TYPEOF(colmodes) != VECSXP)
-	error(G_("invalid argument"));
+	error("%s", G_("invalid argument"));
 
     /* initialize the constants */
 
@@ -289,7 +286,7 @@ SEXP Win_dataentry(SEXP args)
 	    if (type == NILSXP) type = REALSXP;
 	    SET_VECTOR_ELT(DE->work, i, ssNewVector(DE, type, 100));
 	} else if (!isVector(VECTOR_ELT(DE->work, i)))
-	    error(G_("invalid type for value"));
+	    error("%s", G_("invalid type for value"));
 	else {
 	    if (TYPEOF(VECTOR_ELT(DE->work, i)) != type)
 		SET_VECTOR_ELT(DE->work, i,
@@ -350,7 +347,7 @@ SEXP Win_dataentry(SEXP args)
 		    else
 			SET_STRING_ELT(tvec2, j, NA_STRING);
 		} else
-		    error(G_("dataentry: internal memory problem"));
+		    error("%s", G_("dataentry: internal memory problem"));
 	    }
 	    SET_VECTOR_ELT(work2, i, tvec2);
 	}
@@ -367,11 +364,11 @@ static rgb bbg;
 
 static void setcellwidths(DEstruct DE)
 {
-    int i, w, dw;
+    int w, dw;
 
     DE->windowWidth = w = 2*DE->bwidth + DE->boxw[0] + BOXW(DE->colmin);
     DE->nwide = 2;
-    for (i = 2; i < 100; i++) { /* 100 on-screen columns cannot occur */
+    for (int i = 2; i < 100; i++) { /* 100 on-screen columns cannot occur */
 	dw = BOXW(i + DE->colmin - 1);
 	if((w += dw) > DE->p->w ||
 	   (!DE->isEditor && i > DE->xmaxused - DE->colmin + 1)
@@ -407,7 +404,7 @@ static void drawwindow(DEstruct DE)
 
 static void doHscroll(DEstruct DE, int oldcol)
 {
-    int i, dw;
+    int dw;
     int oldnwide = DE->nwide, oldwindowWidth = DE->windowWidth;
 
     /* horizontal re-position */
@@ -415,12 +412,12 @@ static void doHscroll(DEstruct DE, int oldcol)
     DE->colmax = DE->colmin + (DE->nwide - 2);
     if (oldcol < DE->colmin) { /* drop oldcol...colmin - 1 */
 	dw = DE->boxw[0];
-	for (i = oldcol; i < DE->colmin; i++) dw += BOXW(i);
+	for (int i = oldcol; i < DE->colmin; i++) dw += BOXW(i);
 	copyH(DE, dw, DE->boxw[0], oldwindowWidth - dw + 1);
 	dw = oldwindowWidth - BOXW(oldcol) + 1;
 	cleararea(DE, dw, DE->hwidth, DE->p->w-dw, DE->p->h, DE->p->guiColors[dataeditbg]);
 	/* oldnwide includes the row labels */
-	for (i = oldcol+oldnwide-1; i <= DE->colmax; i++) drawcol(DE, i);
+	for (int i = oldcol+oldnwide-1; i <= DE->colmax; i++) drawcol(DE, i);
     } else {
 	/* move one or more cols left */
 	dw = BOXW(DE->colmin);
@@ -654,7 +651,7 @@ static void printelt(DEstruct DE, SEXP invec, int vrow, int ssrow, int sscol)
 	}
     }
     else
-	error(G_("dataentry: internal memory error"));
+	error("%s", G_("dataentry: internal memory error"));
 }
 
 
@@ -777,7 +774,7 @@ static bool getccol(DEstruct DE)
 	INTEGER(DE->lens)[wcol - 1] = 0;
     }
     if (!isVector(tmp = VECTOR_ELT(DE->work, wcol - 1)))
-	error(G_("internal type error in dataentry"));
+	error("%s", G_("internal type error in dataentry"));
     len = INTEGER(DE->lens)[wcol - 1];
     type = TYPEOF(tmp);
     if (len < wrow) {
@@ -790,7 +787,7 @@ static bool getccol(DEstruct DE)
 	    else if (type == STRSXP)
 		SET_STRING_ELT(tmp2, i, STRING_ELT(tmp, i));
 	    else
-		error(G_("internal type error in dataentry"));
+		error("%s", G_("internal type error in dataentry"));
 	SET_VECTOR_ELT(DE->work, wcol - 1, tmp2);
     }
     return newcol;
@@ -1252,7 +1249,7 @@ static const char *get_cell_text(DEstruct DE)
 	    } else if (TYPEOF(tvec) == STRSXP) {
 		if (STRING_ELT(tvec, wrow) != DE->ssNA_STRING)
 		    prev = EncodeElement(tvec, wrow, 0, '.');
-	    } else error(G_("dataentry: internal memory error"));
+	    } else error("%s", G_("dataentry: internal memory error"));
 	}
     }
     return prev;
@@ -1865,17 +1862,17 @@ SEXP Win_dataviewer(SEXP args)
     int i, nprotect;
     DEstruct DE = (DEstruct) malloc(sizeof(destruct));
     if (!DE)
-	error(G_("dataentry: internal memory problem"));
+	error("%s", G_("dataentry: internal memory problem"));
     DE->isEditor = FALSE;
     nprotect = 0;/* count the PROTECT()s */
     DE->work = CAR(args);
     DE->names = getAttrib(DE->work, R_NamesSymbol);
 
     if (TYPEOF(DE->work) != VECSXP)
-	error(G_("invalid argument"));
+	error("%s", G_("invalid argument"));
     stitle = CADR(args);
     if (!isString(stitle) || LENGTH(stitle) != 1)
-	error(G_("invalid argument"));
+	error("%s", G_("invalid argument"));
 
     /* initialize the constants */
 
@@ -1905,14 +1902,14 @@ SEXP Win_dataviewer(SEXP args)
 	DE->ymaxused = max(len, DE->ymaxused);
 	type = TYPEOF(VECTOR_ELT(DE->work, i));
 	if (type != STRSXP && type != REALSXP)
-	    error(G_("invalid argument"));
+	    error("%s", G_("invalid argument"));
     }
 
     DE->xScrollbarScale = DE->yScrollbarScale = 1;
 
     /* start up the window, more initializing in here */
     if (initwin(DE, CHAR(STRING_ELT(stitle, 0))))
-	error(G_("unable to start data viewer"));
+	error("%s", G_("unable to start data viewer"));
 
     /* set up a context which will close the window if there is an error */
     try {
