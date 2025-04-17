@@ -32,7 +32,7 @@
 #undef ERROR
 #include <R_ext/RS.h> /* for R_Calloc */
 
-#include "localization.h"
+#include "../localization.h"
 #include "rui.h"
 
 #include <Startup.h>

@@ -33,7 +33,7 @@
 #include <rui.h> // RConsole
 
 
-#include "localization.h"
+#include "../localization.h"
 #undef TRUE
 #undef FALSE
 

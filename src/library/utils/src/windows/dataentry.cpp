@@ -27,7 +27,7 @@
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
-#include "localization.h"
+#include "../localization.h"
 
 #include <cwchar>
 #include <rlocale.h>
@@ -147,7 +147,7 @@ int mb_char_len(const char *buf, int clength)
 
     mbstate_t mb_st;
     mbs_init(&mb_st);
-    for(int i = 0; i <= clength; i += mb_len)
+    for (int i = 0; i <= clength; i += mb_len)
 	mb_len = Mbrtowc(NULL, buf+i, R_MB_CUR_MAX, &mb_st);
     return mb_len;
 }
@@ -169,7 +169,7 @@ static char *strip_invalid_suffix(char *s)
 	res = mbrtowc(NULL, s + goodlen, slen - goodlen, &mb_st);
 	if (res == (size_t) -1 || res == (size_t) -2) {
 	    /* strip off all remaining characters */
-	    for(;goodlen < slen; goodlen++)
+	    for (;goodlen < slen; goodlen++)
 		s[goodlen] = '\0';
 	    return s;
 	}
@@ -268,7 +268,7 @@ SEXP Win_dataentry(SEXP args)
 
     if (isNull(tnames)) {
 	DE->names = allocVector(STRSXP, DE->xmaxused);
-	for(i = 0; i < DE->xmaxused; i++) {
+	for (i = 0; i < DE->xmaxused; i++) {
 	    snprintf(clab, 25, "var%d", i);
 	    SET_STRING_ELT(DE->names, i, mkChar(clab));
 	}
@@ -318,11 +318,11 @@ SEXP Win_dataentry(SEXP args)
     }
 
     /* drop out unused columns */
-    for(i = 0, cnt = 0; i < DE->xmaxused; i++)
+    for (i = 0, cnt = 0; i < DE->xmaxused; i++)
 	if(!isNull(VECTOR_ELT(DE->work, i))) cnt++;
     if (cnt < DE->xmaxused) {
 	PROTECT(work2 = allocVector(VECSXP, cnt)); nprotect++;
-	for(i = 0, j = 0; i < DE->xmaxused; i++) {
+	for (i = 0, j = 0; i < DE->xmaxused; i++) {
 	    if(!isNull(VECTOR_ELT(DE->work, i))) {
 		SET_VECTOR_ELT(work2, j, VECTOR_ELT(DE->work, i));
 		INTEGER(DE->lens)[j] = INTEGER(DE->lens)[i];
@@ -438,10 +438,9 @@ static void doHscroll(DEstruct DE, int oldcol)
 static void find_coords(DEstruct DE,
 			int row, int col, int *xcoord, int *ycoord)
 {
-    int i, w;
-    w = DE->bwidth;
+    int w = DE->bwidth;
     if (col > 0) w += DE->boxw[0];
-    for(i = 1; i < col; i ++) w += BOXW(i + DE->colmin - 1);
+    for (int i = 1; i < col; i ++) w += BOXW(i + DE->colmin - 1);
     *xcoord = w;
     *ycoord = DE->bwidth + DE->hwidth + DE->box_h * row;
 }
@@ -1040,13 +1039,12 @@ static void printlabs(DEstruct DE)
 {
     char clab[15];
     const char *p;
-    int i;
 
-    for (i = DE->colmin; i <= DE->colmax; i++) {
+    for (int i = DE->colmin; i <= DE->colmax; i++) {
 	p = get_col_name(DE, i);
 	printstring(DE, p, strlen(p), 0, i - DE->colmin + 1, 0);
     }
-    for (i = DE->rowmin; i <= DE->rowmax; i++) {
+    for (int i = DE->rowmin; i <= DE->rowmax; i++) {
 	snprintf(clab, 15, DE->labform, i);
 	printstring(DE, clab, strlen(clab), i - DE->rowmin + 1, 0, 0);
     }
@@ -1187,7 +1185,7 @@ static void de_ctrlkeyin(control c, int key)
 	else {
 	    /* Try to work out which cols we can fit in */
 	    int j, w = 0;
-	    for(j = DE->xmaxused;j >= 0; j--) {
+	    for (j = DE->xmaxused;j >= 0; j--) {
 		w += BOXW(j);
 		if(w > DE->p->w) break;
 	    }
@@ -1358,14 +1356,14 @@ static void de_mousedown(control c, int buttons, point xy)
 
 static void de_mouseup(control c, int buttons, point xy)
 {
-    int xw, bw, i, w;
+    int xw, bw, w;
     DEstruct DE;
 
     if (online) {
 	DE = (DEstruct) getdata(c);
 	xw = xy.x;
 	w = DE->bwidth + DE->boxw[0];
-	for(i = 1; i < clickline; i++) w+= BOXW(i+DE->colmin-1);
+	for (int i = 1; i < clickline; i++) w+= BOXW(i+DE->colmin-1);
 	bw = xw - w;
 	if (bw < (DE->p->fw)*4 + 8) bw = (DE->p->fw)*4 + 8;
 	if (bw > (DE->p->fw)*50) bw = (DE->p->fw)*50;

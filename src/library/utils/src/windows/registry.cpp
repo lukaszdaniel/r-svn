@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include "localization.h"
+#include "../localization.h"
 
 #include <windows.h>
 #undef FALSE

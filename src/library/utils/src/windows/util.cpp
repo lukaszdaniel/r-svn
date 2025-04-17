@@ -32,7 +32,7 @@
 #include <CXXR/String.hpp>
 #include <Defn.h>
 
-#include "localization.h"
+#include "../localization.h"
 #undef TRUE
 #undef FALSE
 
