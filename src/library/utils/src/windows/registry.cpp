@@ -23,7 +23,7 @@
 #endif
 
 #include "../localization.h"
-
+#include <memory>
 #include <windows.h>
 #undef FALSE
 #undef TRUE
@@ -75,7 +75,8 @@ static HKEY find_hive(const char *hkey)
 static SEXP mkCharUcs(wchar_t *name)
 {
     int n = wcslen(name), N = 3*n+1;
-    char buf[N];
+    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(N);
+    char *buf = tmp.get();
     R_CheckStack();
     wcstombs(buf, name, N); buf[N-1] = '\0';
     return mkCharCE(buf, CE_UTF8);
