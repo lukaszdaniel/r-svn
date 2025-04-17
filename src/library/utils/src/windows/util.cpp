@@ -24,6 +24,7 @@
 #include <config.h>
 #endif
 
+#include <memory>
 #include <windows.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -254,11 +255,11 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
     int format = asInteger(sformat);
     bool raw = asLogical(sraw);
 
-    if(OpenClipboard(NULL)) {
-	if(IsClipboardFormatAvailable(format) &&
+    if (OpenClipboard(NULL)) {
+	if (IsClipboardFormatAvailable(format) &&
 	   (hglb = GetClipboardData(format)) &&
 	   (pc = (const char *) GlobalLock(hglb))) {
-	    if(raw) {
+	    if (raw) {
 		Rbyte *pans;
 		int size = GlobalSize(hglb);
 		ans = allocVector(RAWSXP, size); /* no R allocation below */
@@ -269,10 +270,11 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
 		cetype_t ienc = CE_NATIVE;
 		const wchar_t *wpc = (wchar_t *) pc;
 		n = wcslen(wpc);
-		char text[4*n+1];  
+		std::unique_ptr<char[]> tmp = std::make_unique<char[]>(4*n+1);
+		char *text = tmp.get();
 		R_CheckStack();
 		wcstoutf8(text, wpc, sizeof(text));
-		if(!strIsASCII(text)) ienc = CE_UTF8;
+		if (!strIsASCII(text)) ienc = CE_UTF8;
 		ans = splitClipboardText(text, ienc);
 	    } else if (format == CF_TEXT || format == CF_OEMTEXT || format == CF_DIF) {
 		/* can we get the encoding out of a CF_LOCALE entry? */
