@@ -108,7 +108,7 @@ static void (* R_Tcl_do)(void) = NULL; /* Initialized to be sure */
 void set_R_Tcldo(DO_FUNC ptr)
 {
     if (R_Tcl_do)
-	error(_("Thief about! Something other than package tcltk has set or is attempting to set R_Tcl_do"));
+	error("%s", _("Thief about! Something other than package tcltk has set or is attempting to set R_Tcl_do"));
     R_Tcl_do = ptr;
     return;
 }
@@ -118,7 +118,7 @@ void unset_R_Tcldo(DO_FUNC ptr)
     /* This needs to be a warning not an error, or tcltk will not be able
        to be detached. */
     if (R_Tcl_do != ptr)
-	warning(_("Thief about! Something other than package tcltk has set or is attempting to unset R_Tcl_do"));
+	warning("%s", _("Thief about! Something other than package tcltk has set or is attempting to unset R_Tcl_do"));
     R_Tcl_do = NULL;
     return;
 }
@@ -1055,7 +1055,7 @@ static bool use_workspace(Rstart Rp, char *name, bool usedRdata)
 
     if (!usedRdata) {
 	if (!set_workspace_name(name)) {
-	    snprintf(s, 1024, _("Not enough memory"));
+	    snprintf(s, 1024, "%s", _("Not enough memory"));
 	    R_ShowMessage(s);
 	} else {
 	    path = (char *)malloc(strlen(name) + 1);	
