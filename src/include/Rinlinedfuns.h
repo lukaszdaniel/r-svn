@@ -59,6 +59,13 @@
 #include <cstring> /* for strlen, strcmp */
 #include <Localization.h>
 
+#ifdef TRUE
+#undef TRUE
+#endif
+#ifdef FALSE
+#undef FALSE
+#endif
+
 #ifdef TESTING_WRITE_BARRIER
 using namespace R;
 #endif
