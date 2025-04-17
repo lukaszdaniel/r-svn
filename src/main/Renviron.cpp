@@ -169,9 +169,9 @@ static const char *subterm(char *s)
 }
 
 /* skip along until we find an unmatched right brace */
-static char *findRbrace(char *s)
+static const char *findRbrace(const char *s)
 {
-    char *p = s, *pl, *pr;
+    const char *p = s, *pl, *pr;
     int nl = 0, nr = 0;
 
     while(nr <= nl) {
@@ -190,18 +190,19 @@ static char *findRbrace(char *s)
 #define BUF_SIZE 100000
 static const char *findterm(const char *s)
 {
-    char *p, *q;
+    const char *p;
+    const char *q;
     const char *r2, *ss = s;
     static char ans[BUF_SIZE];
 
-    if(!strlen(s)) return "";
+    if (!strlen(s)) return "";
     ans[0] = '\0';
-    while(1) {
+    while (1) {
 	/* Look for ${...}, taking care to look for inner matches */
 	p = Renviron_strchr(s, '$');
-	if(!p || p[1] != '{') break;
+	if (!p || p[1] != '{') break;
 	q = findRbrace(p+2);
-	if(!q) break;
+	if (!q) break;
 	/* copy over leading part */
 	size_t nans = strlen(ans);
 	strncat(ans, s, (size_t) (p - s)); ans[nans + p - s] = '\0';
@@ -211,11 +212,11 @@ static const char *findterm(const char *s)
 	strncpy(r, p, (size_t) (q - p + 1));
 	r[q - p + 1] = '\0';
 	r2 = subterm(r);
-	if(strlen(ans) + strlen(r2) < BUF_SIZE) strcat(ans, r2); else return ss;
+	if (strlen(ans) + strlen(r2) < BUF_SIZE) strcat(ans, r2); else return ss;
 	/* now repeat on the tail */
 	s = q+1;
     }
-    if(strlen(ans) + strlen(s) < BUF_SIZE) strcat(ans, s); else return ss;
+    if (strlen(ans) + strlen(s) < BUF_SIZE) strcat(ans, s); else return ss;
     return ans;
 }
 
