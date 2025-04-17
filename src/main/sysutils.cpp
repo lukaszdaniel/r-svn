@@ -375,6 +375,12 @@ int R_system(const char *command)
 #else
 #include <unistd.h> // extern char ** environ;
 #endif
+#ifdef TRUE
+#undef TRUE
+#endif
+#ifdef FALSE
+#undef FALSE
+#endif
 
 // .Internal(Sys.getenv(x, unset))
 attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
