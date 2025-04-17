@@ -6,7 +6,7 @@ CSOURCES =
 CXXSOURCES = \
 	integrate.cpp interv.cpp maxcol.cpp optim.cpp pretty.cpp uncmin.cpp
 FSOURCES = \
-	dchdc.f dpbfa.f dpbsl.f dpoco.f dpodi.f dpofa.f dposl.f dqrdc.f \
+	dpbfa.f dpbsl.f dpoco.f dpodi.f dpofa.f dposl.f dqrdc.f \
 	dqrdc2.f dqrls.f dqrsl.f dqrutl.f dsvdc.f dtrco.f dtrsl.f
 OBJS = $(CSOURCES:.c=.o) $(CXXSOURCES:.cpp=.o) $(FSOURCES:.f=.o)
 

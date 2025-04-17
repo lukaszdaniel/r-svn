@@ -1547,7 +1547,7 @@ void console_ctrlkeyin(control c, int key)
     if (p->needredraw) REDRAW;
 }
 
-static bool incomplete = FALSE;
+static bool s_incomplete = FALSE;
 int consolewrites(control c, const char *s)
 {
     ConsoleData p = (ConsoleData) getdata(c);
@@ -1560,7 +1560,7 @@ int consolewrites(control c, const char *s)
 	buf[1000] = L'\0';
 	/* now zap it */
 	for(i = 0; i < len; i++) xbufaddxc(p->lbuf, L'\b');
-	if (incomplete) {
+	if (s_incomplete) {
 	    NUMLINES--;
 	    p->lbuf->free--;
 	    p->lbuf->av++;
@@ -1570,8 +1570,8 @@ int consolewrites(control c, const char *s)
     xbufadds(p->lbuf, s, 0);
     FC = 0;
     if(p->input) {
-	incomplete = (s[strlen(s) - 1] != '\n');
-	if (incomplete) xbufaddxc(p->lbuf, L'\n');
+	s_incomplete = (s[strlen(s) - 1] != '\n');
+	if (s_incomplete) xbufaddxc(p->lbuf, L'\n');
 	xbufaddxs(p->lbuf, buf, 1);
     }
     if (strchr(s, '\n')) p->needredraw = 1;
@@ -1675,9 +1675,7 @@ static wchar_t consolegetc(control c)
    during overflow */
 static void consoleungetc(control c, wchar_t ch)
 {
-    ConsoleData p;
-
-    p = (ConsoleData) getdata(c);
+    ConsoleData p = (ConsoleData) getdata(c);
     p->pushed_back_char = ch;
 }
 
