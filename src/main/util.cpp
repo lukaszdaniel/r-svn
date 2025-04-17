@@ -840,6 +840,12 @@ attribute_hidden SEXP do_getwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 #if defined(Win32) && defined(_MSC_VER)
 # include <direct.h> /* for chdir, via io.h */
 #endif
+#ifdef TRUE
+#undef TRUE
+#endif
+#ifdef FALSE
+#undef FALSE
+#endif
 
 attribute_hidden SEXP do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
 {

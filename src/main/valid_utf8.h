@@ -65,8 +65,7 @@ characters is still checked.
 #ifndef VALID_UTF_8
 #define VALID_UTF_8
 
-static int
-valid_utf8(const char *string, size_t length) // R change int->size_t
+static int valid_utf8(const char *string, size_t length) // R change int->size_t
 {
     const unsigned char *p;
 
