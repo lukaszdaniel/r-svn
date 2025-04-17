@@ -28,6 +28,7 @@
 #include <config.h>
 #endif
 
+#include <memory>
 #include <R_ext/Minmax.h>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -397,7 +398,7 @@ static void SaveAsPostscript(pDevDesc dd, const char *fn)
 	return;
     }
 
-    if(strchr(fn, '%')) error(_("'%%' is not allowed in file name"));
+    if(strchr(fn, '%')) error("%s", _("'%%' is not allowed in file name"));
 
     /* need to initialize PS/PDF font database:
        also sets .PostScript.Options */
@@ -470,7 +471,7 @@ static void SaveAsPDF(pDevDesc dd, const char *fn)
 	return;
     }
 
-    if(strchr(fn, '%')) error(_("'%%' is not allowed in file name"));
+    if(strchr(fn, '%')) error("%s", _("'%%' is not allowed in file name"));
 
     /* Set default values... */
     init_PS_PDF();
@@ -1822,7 +1823,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	}
 	xd->have_alpha = true;
     } else if (streqln(dsp, "jpeg:", 5)) {
-	char *p = strchr(&dsp[5], ':');
+	char *p = (char *) strchr(&dsp[5], ':');
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
 	xd->kind = JPEG;
@@ -1852,7 +1853,7 @@ static bool GA_Open(pDevDesc dd, gadesc *xd, const char *dsp,
 	}
 	xd->have_alpha = true;
     } else if (streqln(dsp, "tiff:", 5)) {
-	char *p = strchr(&dsp[5], ':');
+	char *p = (char *) strchr(&dsp[5], ':');
 	xd->res_dpi = (xpos == NA_INTEGER) ? 0 : xpos;
 	xd->bg = dd->startfill = canvascolor;
 	xd->kind = TIFF;
@@ -3084,7 +3085,8 @@ static void GA_Text0(double x, double y, const char *str, int enc,
 	    /* As from 2.7.0 can use Unicode always */
 	    int n = strlen(str), cnt;
 	    R_CheckStack2(sizeof(wchar_t)*(n+1));
-	    wchar_t wc[n+1];/* only need terminator to debug */
+		std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(n+1);
+		wchar_t *wc = tmp.get();/* only need terminator to debug */
 	    cnt = (enc == CE_UTF8) ?
 		Rf_utf8towcs(wc, str, n+1): mbstowcs(wc, str, n);
 	    /* These macros need to be wrapped in braces */
@@ -3109,7 +3111,8 @@ static void GA_Text0(double x, double y, const char *str, int enc,
 	    if(gc->fontface != 5) {
 		int n = strlen(str), cnt;
 		R_CheckStack2(sizeof(wchar_t)*(n+1));
-		wchar_t wc[n+1];
+		std::unique_ptr<wchar_t[]> tmp = std::make_unique<wchar_t[]>(n+1);
+		wchar_t *wc = tmp.get();
 		cnt = (enc == CE_UTF8) ?
 		    Rf_utf8towcs(wc, str, n+1): mbstowcs(wc, str, n);
 		gwdrawstr1(xd->bm2, xd->font, xd->fgcolor, pt(x, y),
@@ -3788,7 +3791,7 @@ SEXP devga(SEXP args)
 	if (display[0]) {
 	    strncpy(type, display, 100 - 1);
 	    type[100 - 1] = '\0';
-	    char *p = strchr(display, ':');
+	    char *p = (char *) strchr(display, ':');
 	    if (p) {
 		file = R_alloc(strlen(p+1) + 1, 1);
 		strcpy(file, p+1);

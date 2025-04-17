@@ -290,30 +290,29 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
 
 SEXP writeClipboard(SEXP text, SEXP sformat)
 {
-    int i, n, format;
     HGLOBAL hglb;
     char *s;
     const char *p;
     bool success = FALSE, raw = FALSE;
     CXXR::RAllocStack::Scope rscope;
 
-    format = asInteger(sformat);
+    int format = asInteger(sformat);
 
     if (TYPEOF(text) == RAWSXP) raw = TRUE;
     else if(!isString(text))
 	error("%s", _("argument must be a character vector or a raw vector"));
 
-    n = length(text);
+    int n = length(text);
     if(n > 0) {
 	int len = 0;
 	if(raw) len = n;
 	else if (format == CF_UNICODETEXT) {
 	    len = 2; /* terminator */
-	    for(i = 0; i < n; i++)
+	    for (int i = 0; i < n; i++)
 		len += 2 * (wcslen(wtransChar(STRING_ELT(text, i))) + 2);
 	} else if (format == CF_TEXT || format == CF_OEMTEXT || format == CF_DIF) {
 	    len = 1; /* terminator */
-	    for(i = 0; i < n; i++)
+	    for (int i = 0; i < n; i++)
 		len += strlen(translateChar(STRING_ELT(text, i))) + 2;
 	} else
 	    error("'raw = FALSE' and format is a not a known text format");
@@ -321,7 +320,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 	if ( (hglb = GlobalAlloc(GHND, len)) &&
 	     (s = (char *)GlobalLock(hglb)) ) {
 	    if(raw)
-		for(i = 0; i < n; i++) *s++ = RAW(text)[i];
+		for (int i = 0; i < n; i++) *s++ = RAW(text)[i];
 	    else if (format == CF_UNICODETEXT) {
 		const wchar_t *wp;
 		wchar_t *ws = (wchar_t *) s;
@@ -332,7 +331,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 		}
 		*ws = L'\0';
 	    } else {
-		for(i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++) {
 		    p = translateChar(STRING_ELT(text, i));
 		    while(*p) *s++ = *p++;
 		    *s++ = '\r'; *s++ = '\n';
