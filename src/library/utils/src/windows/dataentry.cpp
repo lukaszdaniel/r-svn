@@ -878,7 +878,7 @@ static void closerect(DEstruct DE)
 	    	if (TYPEOF(newval) == STRSXP && length(newval) == 1)
 		    SET_STRING_ELT(cvec, wrow - 1, STRING_ELT(newval, 0));
 		else
-		    warning(G_("dataentry: parse error on string"));
+		    warning("%s", G_("dataentry: parse error on string"));
 		UNPROTECT(2);
 	    } else
 		REAL(cvec)[wrow - 1] = new_;
@@ -1023,7 +1023,7 @@ static void handlechar(DEstruct DE, const char *text)
 	}
 
     if (DE->clength++ > 199) {
-	warning(G_("dataentry: expression too long"));
+	warning("%s", G_("dataentry: expression too long"));
 	DE->clength--;
 	goto donehc;
     }
