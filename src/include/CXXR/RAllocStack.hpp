@@ -322,7 +322,8 @@ extern "C"
      */
     inline void *vmaxget(void)
     {
-        return static_cast<char *>(nullptr) + CXXR::RAllocStack::size();
+        return reinterpret_cast<void *>(CXXR::RAllocStack::size());
+        // return static_cast<char *>(nullptr) + CXXR::RAllocStack::size();
     }
 
     /** @brief Reclaims memory blocks.

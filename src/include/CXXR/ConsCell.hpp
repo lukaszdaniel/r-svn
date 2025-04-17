@@ -341,6 +341,9 @@ namespace CXXR
          */
         ConsCell(SEXPTYPE stype, SEXP cr, SEXP tl, SEXP tg) : RObject(stype)
         {
+            u.listsxp.m_car.reset();
+            u.listsxp.m_tail.reset();
+            u.listsxp.m_tag.reset();
             u.listsxp.m_car = cr;
             u.listsxp.m_tail = tl;
             u.listsxp.m_tag = tg;

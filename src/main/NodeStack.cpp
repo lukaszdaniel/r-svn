@@ -38,4 +38,4 @@ namespace CXXR
         m_R_BCNodeStackEnd = m_R_BCNodeStackBase.get() + initial_capacity;
         m_R_BCProtTop = m_R_BCNodeStackTop;
     }
-}
+} // namespace CXXR
