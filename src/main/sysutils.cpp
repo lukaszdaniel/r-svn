@@ -661,11 +661,11 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* some iconv's allow "UTF8", but GNU libiconv does not */
 	if(R_strieql(from, "UTF8")) from = "UTF-8";
 	if(R_strieql(to, "UTF8")) to = "UTF-8";
-	if(streql(to, "UTF-8")) isUTF8 = TRUE;
+	if(streql(to, "UTF-8")) isUTF8 = true;
 	if(R_strieql(to, "latin1") || R_strieql(to, "ISO_8859-1")
-	    || R_strieql(to, "CP1252")) isLatin1 = TRUE;
-	if(streql(to, "") && known_to_be_latin1) isLatin1 = TRUE;
-	if(streql(to, "") && known_to_be_utf8) isUTF8 = TRUE;
+	    || R_strieql(to, "CP1252")) isLatin1 = true;
+	if(streql(to, "") && known_to_be_latin1) isLatin1 = true;
+	if(streql(to, "") && known_to_be_utf8) isUTF8 = true;
 #ifdef OS_MUSL
 	if(R_strieql(from, "latin-2") || R_strieql(from, "latin2") )
 	    from = "iso88592";
@@ -742,7 +742,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		#endif
 		}
 		obj = utf8_obj;
-		fromUTF8 = TRUE;
+		fromUTF8 = true;
 	    } else if (!isRawlist && IS_LATIN1(si) && streql(from, "")) {
 		if (latin1_obj == (iconv_t)-1) {
 		    latin1_obj = Riconv_open(to, "latin1");

@@ -54,8 +54,8 @@ FILE *R_OpenInitFile(void)
 
     fp = NULL;
     if (LoadInitFile) {
-	if(p) {
-	    if(!*p) return NULL;  /* set to "" */
+	if (p) {
+	    if (!*p) return NULL;  /* set to "" */
 	    return R_fopen(R_ExpandFileName(p), "r");
 	}
 	if ((fp = R_fopen(".Rprofile", "r")))
@@ -87,18 +87,18 @@ const char *R_ExpandFileName(const char *s)
 {
     char *p, *q;
 
-    if(s[0] != '~' || (s[0] && isalpha(s[1]))) return s;
-    if(HaveHOME < 0) {
+    if (s[0] != '~' || (s[0] && isalpha(s[1]))) return s;
+    if (HaveHOME < 0) {
 	HaveHOME = 0;
 	p = getenv("R_USER"); /* should be set so the rest is a safety measure */
-	if(p && strlen(p)) {
+	if (p && strlen(p)) {
 	    if ((UserHOME = (char *)malloc(strlen(p) + 1))) {
 		strcpy(UserHOME, p);
 		HaveHOME = 1;
 	    }
 	} else {
 	    p = getenv("HOME");
-	    if(p && strlen(p)) {
+	    if (p && strlen(p)) {
 		if ((UserHOME = (char *)malloc(strlen(p) + 1))) {
 		    strcpy(UserHOME, p);
 		    HaveHOME = 1;
@@ -106,7 +106,7 @@ const char *R_ExpandFileName(const char *s)
 	    } else {
 		p = getenv("HOMEDRIVE");
 		q = getenv("HOMEPATH");
-		if(p && q &&
+		if (p && q &&
 		   (UserHOME = (char *)malloc(strlen(p) + strlen(q) + 1))) {
 
 		    strcpy(UserHOME, p);
@@ -116,9 +116,9 @@ const char *R_ExpandFileName(const char *s)
 	    }
 	}
     }
-    if(HaveHOME > 0) {
+    if (HaveHOME > 0) {
 	size_t len = strlen(UserHOME) + strlen(s+1);
-	if(len < NEWFILENAME_MAX) {
+	if (len < NEWFILENAME_MAX) {
 	    strcpy(newFileName, UserHOME);
 	    strcat(newFileName, s+1);
 	    return newFileName;
@@ -284,7 +284,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   has to fit into a 32-bit unsigned integer */
 	errorcall(call, _("invalid '%s' argument"), "timeout");
     if (timeout && !flag)
-	errorcall(call, _("Timeout with background running processes is not supported."));
+	errorcall(call, "%s", _("Timeout with background running processes is not supported."));
     args = CDR(args);
     bool consignals = asLogicalNoNA(CAR(args), "receive.console.signals");
 
@@ -371,7 +371,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    SET_STRING_ELT(rval, j, CAR(tlist));
 	    tlist = CDR(tlist);
 	}
-	if(ll) {
+	if (ll) {
 	    SEXP lsym = install("status");
 	    setAttrib(rval, lsym, ScalarInteger(ll));
 	}
