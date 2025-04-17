@@ -28,7 +28,7 @@ static void gl_error(const char *msg)
 
 static void gl_beep(void)
 {
-    if(gl_beep_on) MessageBeep(MB_OK);
+    if (gl_beep_on) MessageBeep(MB_OK);
 }
 
 static wchar_t *hist_save(const wchar_t *p)        
@@ -36,7 +36,7 @@ static wchar_t *hist_save(const wchar_t *p)
 {
     wchar_t *s = 0;
     int   len = wcslen(p);
-    wchar_t *nl = wcschr(p, L'\n');
+    const wchar_t *nl = wcschr(p, L'\n');
 
     if (nl) {
         if ((s = (wchar_t *) malloc(len * sizeof(wchar_t)))) {
