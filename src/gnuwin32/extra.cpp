@@ -758,12 +758,12 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
-    if(!isString(paths))
+    if (!isString(paths))
 	errorcall(call, "%s", _("'path' must be a character vector"));
 
     slash = CADR(args);
-    if(!isString(slash) || LENGTH(slash) != 1)
-	errorcall(call, _("'winslash' must be a character string"));
+    if (!isString(slash) || LENGTH(slash) != 1)
+	errorcall(call, "%s", _("'winslash' must be a character string"));
     const char *sl = translateCharFP(STRING_ELT(slash, 0));
     if (!streql(sl, "/") && !streql(sl, "\\"))
 	errorcall(call, "'winslash' must be '/' or '\\\\'");
@@ -778,11 +778,11 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	result = el;
 	if (el == NA_STRING) {
 	    result = NA_STRING;
-	    if(mustWork == 1)
+	    if (mustWork == 1)
 		errorcall(call, "path[%d]=NA", i+1);
-	    else if(mustWork == NA_LOGICAL)
+	    else if (mustWork == NA_LOGICAL)
 		warningcall(call, "path[%d]=NA", i+1);
-	} else if(getCharCE(el) == CE_UTF8) {
+	} else if (getCharCE(el) == CE_UTF8) {
 	    const wchar_t *wel = filenameToWchar(el, FALSE);
 	    wchar_t *wfull = R_getFullPathNameW(wel);
 	    wchar_t *wnorm = getFinalPathNameW(wel);
@@ -1021,21 +1021,21 @@ int winAccessW(const wchar_t *path, int mode)
 {
     DWORD attr = GetFileAttributesW(path);
 
-    if(attr == INVALID_FILE_ATTRIBUTES)
+    if (attr == INVALID_FILE_ATTRIBUTES)
 	/* file does not exist or may be locked */
 	return -1;
 
-    if(mode == F_OK) return 0;
+    if (mode == F_OK) return 0;
     
     if ((mode & W_OK)
 	&& !(attr & FILE_ATTRIBUTE_DIRECTORY)
 	&& (attr & FILE_ATTRIBUTE_READONLY)) return -1;
 
-    if(mode & X_OK)
-	if(!(attr & FILE_ATTRIBUTE_DIRECTORY)) { /* Directory, so OK */
+    if (mode & X_OK)
+	if (!(attr & FILE_ATTRIBUTE_DIRECTORY)) { /* Directory, so OK */
 	    /* Look at extension for executables */
-	    wchar_t *p = wcsrchr(path, '.');
-	    if(p == NULL ||
+	    const wchar_t *p = wcsrchr(path, '.');
+	    if (p == NULL ||
 	       !((wcsicmp(p, L".exe") == 0) || (wcsicmp(p, L".com") == 0) ||
 		 (wcsicmp(p, L".bat") == 0) || (wcsicmp(p, L".cmd") == 0)) )
 		return -1;
