@@ -123,7 +123,7 @@ constexpr double NA_REAL = NAN;
 constexpr double NA_REAL = ML_NAN;
 #endif
 
-constexpr double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
+// constexpr double R_PosInf = ML_POSINF, R_NegInf = ML_NEGINF;
 
 attribute_hidden void REprintf(const char *format, ...)
 {
