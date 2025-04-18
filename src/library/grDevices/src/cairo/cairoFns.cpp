@@ -2365,7 +2365,7 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
                                         R_GE_glyphFontFile(font),
                                         FC_INDEX, FcTypeInteger, 
                                         R_GE_glyphFontIndex(font),
-                                        NULL);
+                                        NULL, NULL);
     cairo_face = cairo_ft_font_face_create_for_pattern(pattern);
     FcPatternDestroy(pattern);
 #endif
