@@ -67,3 +67,14 @@ x <- 1:10
 .Internal(refcnt(x))
 .Internal(named(x))
 stopifnot(max(.Internal(named(x)), .Internal(refcnt(x))) == 65535)
+
+e <- baseenv()
+identical(names(e), ls(e, all.names=TRUE, sorted=FALSE))
+
+e <- globalenv()
+identical(names(e), names(as.list(e, all.names=TRUE)))
+
+
+for(e in c(baseenv(), globalenv()))
+stopifnot(identical(names(e), ls(e, all.names=TRUE, sorted=FALSE)),
+          identical(names(e), names(as.list(e, all.names=TRUE))))
