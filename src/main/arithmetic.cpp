@@ -142,7 +142,7 @@ int R_finite(double x)
 #ifdef HAVE_WORKING_ISFINITE
     return std::isfinite(x);
 #else
-    return (!std::isnan(x) & (x != R_PosInf) & (x != R_NegInf));
+    return (!std::isnan(x) && (x != R_PosInf) && (x != R_NegInf));
 #endif
 }
 
@@ -176,7 +176,7 @@ attribute_hidden void R::InitArithmetic(void)
 static double myfmod(double x1, double x2)
 {
     if (x2 == 0.0) return R_NaN;
-    if(fabs(x2) * c_eps > 1 && R_FINITE(x1) && fabs(x1) <= fabs(x2)) {
+    if (fabs(x2) * c_eps > 1 && R_FINITE(x1) && fabs(x1) <= fabs(x2)) {
 	return
 	    (fabs(x1) == fabs(x2)) ? 0 :
 	    ((x1 < 0 && x2 > 0) ||
@@ -185,7 +185,7 @@ static double myfmod(double x1, double x2)
 	     : x1   ; // "same" signs (incl. 0)
     }
     double q = x1 / x2;
-    if(R_FINITE(q) && (fabs(q) * c_eps > 1))
+    if (R_FINITE(q) && (fabs(q) * c_eps > 1))
 	warning("%s", _("probable complete loss of accuracy in modulus"));
     LDOUBLE tmp = (LDOUBLE)x1 - floor(q) * (LDOUBLE)x2;
     return (double) (tmp - floorl(tmp/x2) * x2);
@@ -196,7 +196,7 @@ static double myfloor(double x1, double x2)
     double q = x1 / x2;
     if (x2 == 0.0 || fabs(q) * c_eps > 1 || !R_FINITE(q))
 	return q;
-    if(fabs(q) < 1)
+    if (fabs(q) < 1)
 	return (q < 0) ? -1
 	    : ((x1 < 0 && x2 > 0) ||
 	       (x1 > 0 && x2 < 0) // differing signs
@@ -209,11 +209,11 @@ double R_pow(double x, double y) /* = x ^ y */
 {
     /* squaring is the most common of the specially handled cases so
        check for it first. */
-    if(y == 2.0)
+    if (y == 2.0)
 	return x * x;
-    if(x == 1. || y == 0.)
+    if (x == 1. || y == 0.)
 	return(1.);
-    if(x == 0.) {
+    if (x == 0.) {
 	if(y > 0.) return(0.);
 	else if(y < 0) return(R_PosInf);
 	else return(y); /* NA or NaN, we assert */
@@ -231,17 +231,17 @@ double R_pow(double x, double y) /* = x ^ y */
     }
     if (ISNAN(x) || ISNAN(y))
 	return(x + y);
-    if(!R_FINITE(x)) {
-	if(x > 0)		/* Inf ^ y */
+    if (!R_FINITE(x)) {
+	if (x > 0)		/* Inf ^ y */
 	    return (y < 0.)? 0. : R_PosInf;
 	else {			/* (-Inf) ^ y */
 	    if(R_FINITE(y) && y == floor(y)) /* (-Inf) ^ n */
 		return (y < 0.) ? 0. : (myfmod(y, 2.) != 0 ? x  : -x);
 	}
     }
-    if(!R_FINITE(y)) {
-	if(x >= 0) {
-	    if(y > 0)		/* y == +Inf */
+    if (!R_FINITE(y)) {
+	if (x >= 0) {
+	    if (y > 0)		/* y == +Inf */
 		return (x >= 1) ? R_PosInf : 0.;
 	    else		/* y == -Inf */
 		return (x < 1) ? R_PosInf : 0.;
@@ -261,12 +261,12 @@ double R_pow_di(double x, int n)
 	if (!R_FINITE(x)) return R_POW(x, (double)n);
 
 	bool is_neg = (n < 0);
-	if(is_neg) n = -n;
+	if (is_neg) n = -n;
 	for (;;) {
 	    if(n & 01) xn *= x;
 	    if(n >>= 1) x *= x; else break;
 	}
-	if(is_neg) xn = 1. / xn;
+	if (is_neg) xn = 1. / xn;
     }
     return xn;
 }

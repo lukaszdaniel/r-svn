@@ -68,10 +68,16 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
     else R_DBG_printf("\n");
 
     if(left) {	// (lower_tail, *z >= p)  or  (upper tail, *z < p): search to the __left__
-	for(int iter = 0; ; iter++) {
+#if !defined(MATHLIB_STANDALONE) || defined(DEBUG_qbinom)
+	int iter = 0;
+#endif
+	while (true) {
 	    double newz = -1.; // -Wall
 #ifndef MATHLIB_STANDALONE
-	    if(iter % 10000 == 0) R_CheckUserInterrupt();// have seen inf.loops
+	    if (iter % 10000 == 0) R_CheckUserInterrupt();// have seen inf.loops
+#endif
+#if !defined(MATHLIB_STANDALONE) || defined(DEBUG_qbinom)
+	    ++iter;
 #endif
 	    if(y > 0)
 		newz = P_DIST(y - incr, _dist_PARS_);
@@ -82,7 +88,6 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 	 	R_DBG_printf("  new y=%.15g, " AS_CHAR(_pDIST_) "(y-incr,*) %s;"
 			     " ==> search() returns previous z=%g after %d iter.\n", y,
 			     ISNAN(newz) ? "is NaN" : (lower_tail ? "< p" : ">= p"), *z, iter);
-		iter = 0; // reset iter. Dummy action to avoid compiler warning
 		return y; // and previous *z
 	    }
 	    y = fmax2(0, y - incr);
@@ -90,11 +95,17 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 	}
     }
     else { // (lower_tail, *z < p)  or  (upper tail, *z >= p): search to the __right__
-	for(int iter = 0; ; iter++) {
+#if !defined(MATHLIB_STANDALONE) || defined(DEBUG_qbinom)
+	int iter = 0;
+#endif
+	while (true) {
 	    double prevy = y;
 	    double newz = -1.; // -Wall
 #ifndef MATHLIB_STANDALONE
-	    if(iter % 10000 == 0) R_CheckUserInterrupt();
+	    if (iter % 10000 == 0) R_CheckUserInterrupt();
+#endif
+#if !defined(MATHLIB_STANDALONE) || defined(DEBUG_qbinom)
+	    ++iter;
 #endif
 	    y += incr;
 #ifdef _dist_MAX_y
@@ -115,7 +126,6 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 		R_DBG_printf("  new y=%.15g, z=%g = " AS_CHAR(_pDIST_) "(y,*) %s;"
 			     " ==> search() returns after %d iter.\n", y, newz,
 			     ISNAN(newz) ? "is NaN" : (lower_tail ? ">= p" : "< p"), iter);
-		iter = 0; // reset iter. Dummy action to avoid compiler warning
 		if (incr <= 1) {
 		    *z = newz;
 		    return y;
