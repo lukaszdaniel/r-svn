@@ -82,6 +82,7 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 	 	R_DBG_printf("  new y=%.15g, " AS_CHAR(_pDIST_) "(y-incr,*) %s;"
 			     " ==> search() returns previous z=%g after %d iter.\n", y,
 			     ISNAN(newz) ? "is NaN" : (lower_tail ? "< p" : ">= p"), *z, iter);
+		iter = 0; // reset iter. Dummy action to avoid compiler warning
 		return y; // and previous *z
 	    }
 	    y = fmax2(0, y - incr);
@@ -114,6 +115,7 @@ static double DO_SEARCH_FUN(_dist_PARS_DECL_)
 		R_DBG_printf("  new y=%.15g, z=%g = " AS_CHAR(_pDIST_) "(y,*) %s;"
 			     " ==> search() returns after %d iter.\n", y, newz,
 			     ISNAN(newz) ? "is NaN" : (lower_tail ? ">= p" : "< p"), iter);
+		iter = 0; // reset iter. Dummy action to avoid compiler warning
 		if (incr <= 1) {
 		    *z = newz;
 		    return y;
