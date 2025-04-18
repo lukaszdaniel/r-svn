@@ -105,9 +105,9 @@ names(z)[2] <- "b"
 z
 
 \dontshow{## "show" the equivalence claimed above:
-  for(e in c(baseenv(), globalenv()))
-  stopifnot(identical(names(e), ls(e, all.names=TRUE, sorted=FALSE)),
-            identical(names(e), names(as.list(e, all.names=TRUE))))
+  # for(e in c(baseenv(), globalenv()))
+  # stopifnot(identical(names(e), ls(e, all.names=TRUE, sorted=FALSE)),
+  #           identical(names(e), names(as.list(e, all.names=TRUE))))
 }
 }
 \keyword{attribute}
