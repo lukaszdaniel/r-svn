@@ -15,6 +15,9 @@
   \subsection{NEW FEATURES}{
     \itemize{
       \item \code{str()} now shows more via \code{format()} for external pointers.
+
+      \item \code{terms(<formula>, specials = *)} now treats non-syntactic
+      specials more gracefully, thanks to \I{Mikael Jagan}'s \PR{18568}.
     }
   }
 
@@ -46,6 +49,13 @@
       macros \emph{may} generate correct code (but not always) and always
       results in confusing-to-read code.
       %% Someone defined 'true' as -1, for example.
+
+      \item The cascaded stylesheet \file{R.css} now adds less vertical
+      white space when rendering Rd files' \verb{\itemize},
+      \verb{\enumerate}, and \verb{\describe} list \verb{\item}s to HTML.
+
+      Where \R is used via extensive \abbr{IDE}s such as \command{RStudio},
+      their maintainers may need to adapt \file{R.css} files accordingly.
     }
   }
 
@@ -295,9 +305,6 @@
       \item \code{selectMethod(f, ..)} now keeps the function name if the
       function belongs to a group generic and the method is for the
       generic.
-
-      \item \code{terms(<formula>, specials = *)} now treats non-syntactic
-      specials more gracefully, thanks to \I{Mikael Jagan}'s \PR{18568}.
     }
   }
 
