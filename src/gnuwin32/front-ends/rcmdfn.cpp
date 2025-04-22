@@ -444,18 +444,18 @@ R_MAJOR, R_MINOR, R_SVN_REVISION,
 
     char *RUser = getRUser();
 
-    if ( (p = getenv("TMPDIR")) && isDir(p)) {
+    if ((p = getenv("TMPDIR")) && isDir(p)) {
 	/* TMPDIR is already set */
     } else {
-	if ( (p = getenv("TEMP")) && isDir(p))
+	if ((p = getenv("TEMP")) && isDir(p))
 	    R_putenv_path_cpy("TMPDIR", p, 0);
-	else if ( (p = getenv("TMP")) && isDir(p))
+	else if ((p = getenv("TMP")) && isDir(p))
 	    R_putenv_path_cpy("TMPDIR", p, 0);
 	else
 	    R_putenv_path_cpy("TMPDIR", RUser, 0);
     }
 
-    if( !getenv("HOME") ) 
+    if (!getenv("HOME"))
 	R_putenv_path_cpy("HOME", RUser, 0);
 
     freeRUser(RUser);

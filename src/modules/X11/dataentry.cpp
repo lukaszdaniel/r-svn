@@ -2095,11 +2095,11 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
 
 	/* search supported input style */
 	XGetIMValues(ioim, XNQueryInputStyle, &ioim_styles,NULL);
-	for(i = 0; i < ioim_styles->count_styles; i++) {
-	    for(j = 0; preedit_styles[j]; j++){
-		for(k = 0; status_styles[k]; k++){
+	for (i = 0; i < ioim_styles->count_styles; i++) {
+	    for (j = 0; preedit_styles[j]; j++){
+		for (k = 0; status_styles[k]; k++){
 		    ioim_style = (preedit_styles[j] | status_styles[k]);
-		    if( ioim_styles->supported_styles[i] == ioim_style) {
+		    if (ioim_styles->supported_styles[i] == ioim_style) {
 			goto loop_out;
 		    }
 		}

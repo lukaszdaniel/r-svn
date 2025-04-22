@@ -176,7 +176,7 @@ static SEXP EnlargeVector(SEXP x, R_xlen_t newlen)
 
     /* if the vector is not shared, is growable. and has room, then
        increase its length */
-    if (! MAYBE_SHARED(x) &&
+    if (!MAYBE_SHARED(x) &&
 	IS_GROWABLE(x) &&
 	XTRUELENGTH(x) >= newlen) {
 	SET_STDVEC_LENGTH(x, newlen);
@@ -1589,7 +1589,7 @@ int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 	SEXP x = eval(CAR(args), rho);
 	PROTECT(x);
 	INCREMENT_LINKS(x);
-	if (! OBJECT(x)) {
+	if (!OBJECT(x)) {
 	    *ans = CONS_NR(x, evalListKeepMissing(CDR(args), rho));
 	    DECREMENT_LINKS(x);
 	    UNPROTECT(1);
@@ -1649,7 +1649,8 @@ NORET static void errorMissingSubscript(SEXP x)
 attribute_hidden SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP subs, x, y;
-    int nsubs, oldtype;
+    int nsubs;
+    SEXPTYPE oldtype = NILSXP;
 
     PROTECT(args);
 
@@ -1674,11 +1675,11 @@ attribute_hidden SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* over always duplicating. */
 
     if (MAYBE_SHARED(CAR(args)) ||
-	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
+	((!IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(CAR(args))))
 	x = SETCAR(args, shallow_duplicate(CAR(args)));
 
     bool S4 = IS_S4_OBJECT(x); // {before it is changed}
-    oldtype = 0;
+
     if (TYPEOF(x) == LISTSXP || TYPEOF(x) == LANGSXP) {
 	oldtype = TYPEOF(x);
 	PROTECT(x = PairToVectorList(x));
@@ -1849,7 +1850,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
     /* If it is not, then make a local copy. */
 
     if (MAYBE_SHARED(x) ||
-	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))
+	((!IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))
 	SETCAR(args, x = shallow_duplicate(x));
 
     /* code to allow classes to extend ENVSXP */
@@ -1876,8 +1877,8 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
     }
 
     /* ENVSXP special case first */
-    if( TYPEOF(x) == ENVSXP) {
-	if( nsubs!=1 || !isString(CAR(subs)) || length(CAR(subs)) != 1 )
+    if (TYPEOF(x) == ENVSXP) {
+	if (nsubs!=1 || !isString(CAR(subs)) || length(CAR(subs)) != 1)
 	    error("%s", _("wrong args for environment subassignment"));
 	defineVar(installTrChar(STRING_ELT(CAR(subs), 0)), y, x);
 	UNPROTECT(3); /* x, args, y */
@@ -2116,7 +2117,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 	    else
 		SET_STRING_ELT(names, offset, newname);
 	}
-	if (old_x != x && ! recursed)
+	if (old_x != x && !recursed)
 	    // might be safe even if recursed is TRUE, but avoid for now
 	    CLEAR_VECTOR(old_x);
 	UNPROTECT(4); /* y, x, xup, x */
@@ -2221,7 +2222,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
     bool S4 = IS_S4_OBJECT(x);
 
     if (MAYBE_SHARED(x) ||
-	((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))
+	((!IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(x)))
 	x = shallow_duplicate(x);
 
     /* code to allow classes to extend ENVSXP */
@@ -2280,11 +2281,11 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 	}
     }
     /* cannot use isEnvironment since we do not want NULL here */
-    else if( TYPEOF(x) == ENVSXP ) {
+    else if (TYPEOF(x) == ENVSXP) {
 	defineVar(nlist, val, x);
 	INCREMENT_NAMED(val);
     }
-    else if( TYPEOF(x) == SYMSXP || /* Used to 'work' in R < 2.8.0 */
+    else if (TYPEOF(x) == SYMSXP || /* Used to 'work' in R < 2.8.0 */
 	     Rf_isFunction(x)) {
 	errorNotSubsettable(x);
     }

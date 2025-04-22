@@ -644,17 +644,17 @@ SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 static SEXP fixcall(SEXP call, SEXP args)
 {
     SEXP s;
-    int found;
+    bool found;
 
-    for(SEXP t = args; t != R_NilValue; t = CDR(t)) {
-	if(TAG(t) != R_NilValue) {
-		found = 0;
-		for(s = call; CDR(s) != R_NilValue; s = CDR(s))
-		    if(TAG(CDR(s)) == TAG(t)) {
-			found = 1;
+    for (SEXP t = args; t != R_NilValue; t = CDR(t)) {
+	if (TAG(t) != R_NilValue) {
+		found = false;
+		for (s = call; CDR(s) != R_NilValue; s = CDR(s))
+		    if (TAG(CDR(s)) == TAG(t)) {
+			found = true;
 			break;
 		    }
-		if( !found ) {
+		if (!found) {
 			SETCDR(s, allocList(1));
 			SET_TAG(CDR(s), TAG(t));
 			SETCAR(CDR(s), lazy_duplicate(CAR(t)));

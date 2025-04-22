@@ -1687,7 +1687,7 @@ static Rboolean pipe_open(Rconnection con)
 	Rf_utf8towcs(wname, con->description, n+1);
 	mbstowcs(wmode, con->mode, 10);
 	fp = _wpopen(wname, wmode);
-	if(!fp) {
+	if (!fp) {
 	    warning(_("cannot pipe() cmd '%ls': %s"), wname, strerror(errno));
 	    return FALSE;
 	}
@@ -1698,7 +1698,7 @@ static Rboolean pipe_open(Rconnection con)
 #else
 	fp = R_popen_pg(con->description, mode);
 #endif
-    if(!fp) {
+    if (!fp) {
 	warning(_("cannot open pipe() cmd '%s': %s"), con->description,
 		strerror(errno));
 	return FALSE;
@@ -1708,7 +1708,7 @@ static Rboolean pipe_open(Rconnection con)
     con->canwrite = (con->mode[0] == 'w');
     con->canread = (Rboolean) (!con->canwrite);
     mlen = (int) strlen(con->mode);
-    if(mlen >= 2 && con->mode[mlen - 1] == 'b') con->text = FALSE;
+    if (mlen >= 2 && con->mode[mlen - 1] == 'b') con->text = FALSE;
     else con->text = TRUE;
     this_->last_was_write = (!con->canread);
     this_->rpos = this_->wpos = 0;
@@ -1731,16 +1731,16 @@ static Rconnection newpipe(const char *description, int ienc, const char *mode)
 {
     Rconnection new_;
     new_ = (Rconnection) malloc(sizeof(struct Rconn));
-    if(!new_) error("%s", _("allocation of pipe connection failed"));
+    if (!new_) error("%s", _("allocation of pipe connection failed"));
     new_->connclass = (char *) malloc(strlen("pipe") + 1);
-    if(!new_->connclass) {
+    if (!new_->connclass) {
 	free(new_);
 	error("%s", _("allocation of pipe connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
     }
     strcpy(new_->connclass, "pipe");
     new_->description = (char *) malloc(strlen(description) + 1);
-    if(!new_->description) {
+    if (!new_->description) {
 	free(new_->connclass); free(new_);
 	error("%s", _("allocation of pipe connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
@@ -1755,7 +1755,7 @@ static Rconnection newpipe(const char *description, int ienc, const char *mode)
     new_->read = &file_read;
     new_->write = &file_write;
     new_->connprivate = (void *) malloc(sizeof(struct fileconn));
-    if(!new_->connprivate) {
+    if (!new_->connprivate) {
 	free(new_->description); free(new_->connclass); free(new_);
 	error("%s", _("allocation of pipe connection failed"));
 	/* for Solaris 12.5 */ new_ = NULL;
@@ -1777,13 +1777,13 @@ attribute_hidden SEXP do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     scmd = CAR(args);
-    if(!isString(scmd) || LENGTH(scmd) != 1 ||
+    if (!isString(scmd) || LENGTH(scmd) != 1 ||
        STRING_ELT(scmd, 0) == NA_STRING)
 	error(_("invalid '%s' argument"), "description");
-    if(LENGTH(scmd) > 1)
+    if (LENGTH(scmd) > 1)
 	warning("%s", _("only first element of 'description' argument used"));
 #ifdef Win32
-    if( !IS_ASCII(STRING_ELT(scmd, 0)) ) {
+    if (!IS_ASCII(STRING_ELT(scmd, 0))) {
 	ienc = CE_UTF8;
 	file = trCharUTF8(STRING_ELT(scmd, 0));
     } else {
@@ -1794,11 +1794,11 @@ attribute_hidden SEXP do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
     file = translateCharFP(STRING_ELT(scmd, 0));
 #endif
     sopen = CADR(args);
-    if(!isString(sopen) || LENGTH(sopen) != 1)
+    if (!isString(sopen) || LENGTH(sopen) != 1)
 	error(_("invalid '%s' argument"), "open");
     open = CHAR(STRING_ELT(sopen, 0)); /* ASCII */
     enc = CADDR(args);
-    if(!isString(enc) || LENGTH(enc) != 1 ||
+    if (!isString(enc) || LENGTH(enc) != 1 ||
        strlen(CHAR(STRING_ELT(enc, 0))) > 100) /* ASCII */
 	error(_("invalid '%s' argument"), "encoding");
 
@@ -1814,14 +1814,14 @@ attribute_hidden SEXP do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
     con->ex_ptr = PROTECT(R_MakeExternalPtr(con->id, install("connection"), R_NilValue));
 
     /* open it if desired */
-    if(strlen(open))
+    if (strlen(open))
 	checked_open(ncon);
 
     PROTECT(ans = ScalarInteger(ncon));
     PROTECT(class_ = allocVector(STRSXP, 2));
     SET_STRING_ELT(class_, 0, mkChar("pipe"));
 #ifdef Win32
-    if(CharacterMode != RTerm)
+    if (CharacterMode != RTerm)
 	SET_STRING_ELT(class_, 0, mkChar("pipeWin32"));
 #endif
     SET_STRING_ELT(class_, 1, mkChar("connection"));

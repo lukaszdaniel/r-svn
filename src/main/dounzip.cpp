@@ -1183,7 +1183,7 @@ local unzFile unzOpenInternal(const void *path, int is64bitOpenFunction)
 
 
     s=(unz64_s*)ALLOC(sizeof(unz64_s));
-    if( s != NULL)
+    if (s != NULL)
     {
 	*s = us;
 	unzGoToFirstFile((unzFile)s);

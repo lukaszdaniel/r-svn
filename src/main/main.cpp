@@ -111,7 +111,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
     /* set up context _after_ R_InitSrcRefState */
     try {
     size_t savestack = R_PPStackTop;
-    for(;;) {
+    for (;;) {
 	ProtectStack::restoreSize(savestack);
 	R_CurrentExpr = R_Parse1File(fp, 1, &status);
 	switch (status) {
@@ -126,7 +126,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 	    SET_SYMVALUE(R_LastvalueSymbol, R_CurrentExpr);
 	    if (Evaluator::resultPrinted())
 		PrintValueEnv(R_CurrentExpr, rho);
-	    if( R_CollectWarnings )
+	    if (R_CollectWarnings)
 		PrintWarnings();
 	}
 	    break;
@@ -160,8 +160,8 @@ static const char *R_PromptString(int type)
 	return BrowsePrompt;
     }
     else {
-	if(type == 1) {
-	    if(Browser::numberActive()) {
+	if (type == 1) {
+	    if (Browser::numberActive()) {
 		snprintf(BrowsePrompt, 20, "Browse[%zu]> ", Browser::numberActive());
 		return BrowsePrompt;
 	    }
@@ -234,7 +234,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *s
     if (R_CollectWarnings)
 	PrintWarnings();
 
-    if(!*state->bufp) {
+    if (!*state->bufp) {
 	    R_Busy(0);
 	    if (R_ReadConsole(R_PromptString(state->prompt_type),
 			      state->buf, CONSOLE_BUFFER_SIZE, 1) == 0)
@@ -252,7 +252,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *s
     while((c = *state->bufp)) {
 	    state->bufp++;
 	    R_IoBufferPutc(c, &R_ConsoleIob);
-	    if(c == ';' || c == '\n') break;
+	    if (c == ';' || c == '\n') break;
     }
 
     ProtectStack::restoreSize(savestack);
@@ -1610,18 +1610,18 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	warning("%s", _("cannot quit from browser"));
 	return R_NilValue;
     }
-    if( !isString(CAR(args)) )
+    if (!isString(CAR(args)))
 	error("%s", _("one of \"yes\", \"no\", \"ask\" or \"default\" expected."));
     tmp = CHAR(STRING_ELT(CAR(args), 0)); /* ASCII */
-    if( streql(tmp, "ask") ) {
+    if (streql(tmp, "ask")) {
 	ask = SA_SAVEASK;
 	if(!R_Interactive)
 	    warning("%s", _("save=\"ask\" in non-interactive use: command-line default will be used"));
-    } else if( streql(tmp, "no") )
+    } else if (streql(tmp, "no"))
 	ask = SA_NOSAVE;
-    else if( streql(tmp, "yes") )
+    else if (streql(tmp, "yes"))
 	ask = SA_SAVE;
-    else if( streql(tmp, "default") )
+    else if (streql(tmp, "default"))
 	ask = SA_DEFAULT;
     else
 	error("%s", _("unrecognized value of 'save'"));

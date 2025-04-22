@@ -74,8 +74,8 @@ attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef LONG_VECTOR_SUPPORT
     bool isLong = (n > INT_MAX);
 #endif
-    if(x_int) ivx = INTEGER(sx); else vx = REAL(sx);
-    if(indx_ret) {
+    if (x_int) ivx = INTEGER(sx); else vx = REAL(sx);
+    if (indx_ret) {
 	SEXP ans, ansnames, indx;
 	/* answer will have x = sorted x , ix = index :*/
 	PROTECT(ans = allocVector(VECSXP, 2));
@@ -99,7 +99,7 @@ attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    for (int i = 0; i < nn; i++) ix[i] = i+1;
 	    // do not need to sort 0-length array
 	    if (nn > 0) {
-		if(x_int) R_qsort_int_I(ivx, ix, 1, nn);
+		if (x_int) R_qsort_int_I(ivx, ix, 1, nn);
 		else R_qsort_I(vx, ix, 1, nn);
 	    }
 	}
@@ -113,8 +113,8 @@ attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return ans;
     } else { // not indx_ret
 	// do not need to sort 0-length array
-	if( n > 0) {
-	    if(x_int)
+	if (n > 0) {
+	    if (x_int)
 		R_qsort_int(ivx, 1, n);
 	    else
 		R_qsort(vx, 1, n);
