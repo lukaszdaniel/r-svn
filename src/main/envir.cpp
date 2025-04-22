@@ -109,6 +109,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Promise.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
@@ -1114,7 +1115,7 @@ void R::readS3VarsFromFrame(SEXP rho,
     slow but still correct.
     */
 
-    for(;TAG(frame) != R_dot_Generic; frame = CDR(frame))
+    for (;TAG(frame) != R_dot_Generic; frame = CDR(frame))
 	if (frame == R_NilValue) goto slowpath;
     *dotGeneric = BINDING_VALUE(frame);
     frame = CDR(frame);
@@ -1165,12 +1166,11 @@ slowpath:
    so the cache can be used. */
 static SEXP findGlobalVarLoc(SEXP symbol)
 {
-    SEXP rho;
     bool canCache = true;
     SEXP vl = R_GetGlobalCacheLoc(symbol);
     if (vl != R_UnboundValue)
 	return vl;
-    for (rho = R_GlobalEnv; rho != R_EmptyEnv; rho = ENCLOS(rho)) {
+    for (SEXP rho = R_GlobalEnv; rho != R_EmptyEnv; rho = ENCLOS(rho)) {
 	if (rho != R_BaseEnv) { /* we won't have R_BaseNamespace */
 	    vl = findVarLocInFrame(rho, symbol, &canCache);
 	    if (vl != R_NilValue) {
@@ -1604,8 +1604,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
 	error("%s", _("cannot assign values in the empty environment"));
 
     if (IS_USER_DATABASE(rho)) {
-	R_ObjectTable *table;
-	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
+	R_ObjectTable *table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
 	if (table->assign == NULL)
 	    error("%s", _("cannot assign variables to this database"));
 	PROTECT(value);
@@ -1693,11 +1692,10 @@ void R::addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 
     /* remove duplicates - a variable listed later has precedence over a
        variable listed sooner */
-    for(SEXP end = CDR(addVars); end != R_NilValue; end = CDR(end)) {
+    for (SEXP end = CDR(addVars); end != R_NilValue; end = CDR(end)) {
 	SEXP endTag = TAG(end);
 	SEXP sprev = R_NilValue;
-	SEXP s;
-	for(s = addVars; s != end; s = CDR(s)) {
+	for (SEXP s = addVars; s != end; s = CDR(s)) {
 	    if (TAG(s) == endTag) {
 		/* remove variable s from the list, because it is overridden by "end" */
 		if (sprev == R_NilValue) {
@@ -1729,8 +1727,7 @@ static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 
     if (IS_USER_DATABASE(rho)) {
 	/* FIXME: This does not behave as described */
-	R_ObjectTable *table;
-	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
+	R_ObjectTable *table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(rho));
 	if (table->assign == NULL)
 	    error("%s", _("cannot assign variables to this database"));
 	PROTECT(value);
@@ -1902,7 +1899,7 @@ attribute_hidden SEXP do_list2env(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (TYPEOF(envir) != ENVSXP)
 	error("%s", _("'envir' argument must be an environment"));
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
 	SEXP name = installTrChar(STRING_ELT(xnms, i));
 	defineVar(name, lazy_duplicate(VECTOR_ELT(x, i)), envir);
     }
@@ -1936,8 +1933,7 @@ static bool RemoveVariable(SEXP name, int hashcode, SEXP env)
 	error("%s", _("cannot remove bindings from a locked environment"));
 
     if (IS_USER_DATABASE(env)) {
-	R_ObjectTable *table;
-	table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(env));
+	R_ObjectTable *table = (R_ObjectTable *) R_ExternalPtrAddr(HASHTAB(env));
 	if (table->remove == NULL)
 	    error("%s", _("cannot remove variables from this database"));
 	return(table->remove(CHAR(PRINTNAME(name)), table));
@@ -2206,7 +2202,7 @@ attribute_hidden SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* It must be present and a string */
     if (!isString(x) )
 	error("%s", _("invalid first argument"));
-    for(int i = 0; i < nvals; i++)
+    for (int i = 0; i < nvals; i++)
 	if (isNull(STRING_ELT(x, i)) || !CHAR(STRING_ELT(x, 0))[0])
 	    error(_("invalid name in position %d"), i+1);
 
@@ -2236,7 +2232,7 @@ attribute_hidden SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     PROTECT(ans = allocVector(VECSXP, nvals));
 
-    for(int i = 0; i < nvals; i++) {
+    for (int i = 0; i < nvals; i++) {
 	bool wants_S4 = FALSE;
 	const char *modestr = CHAR(STRING_ELT(CADDR(args), i % nmode));
 	SEXPTYPE gmode = str2mode(modestr, &wants_S4);
@@ -2839,16 +2835,14 @@ static void BuiltinNames(bool all, bool internal_only, SEXP names, int *indx)
 
 static void BuiltinValues(bool all, bool internal_only, SEXP values, int *indx)
 {
-    SEXP vl;
+    GCStackRoot<> vl;
     for (Symbol::const_iterator it = Symbol::begin(); it != Symbol::end(); ++it)
     {
         const SEXP sym = it->second;
         if (BuiltinTest(sym, all, internal_only)) {
 		    vl = SYMVALUE(sym);
-		    if (TYPEOF(vl) == PROMSXP) {
-			PROTECT(vl);
-			vl = eval(vl, R_BaseEnv);
-			UNPROTECT(1);
+		    if (Promise::isA(vl)) {
+			vl = Evaluator::evaluate(vl, Environment::base());
 		    }
 		    SET_VECTOR_ELT(values, (*indx)++, lazy_duplicate(vl));
         }
@@ -3645,11 +3639,10 @@ Rboolean R_IsNamespaceEnv(SEXP rho)
     if (rho == R_BaseNamespace)
 	return TRUE;
     else if (TYPEOF(rho) == ENVSXP) {
-	SEXP info = R_findVarInFrame(rho, R_NamespaceSymbol);
+	GCStackRoot<> info;
+	info = R_findVarInFrame(rho, R_NamespaceSymbol);
 	if (info != R_UnboundValue && TYPEOF(info) == ENVSXP) {
-	    PROTECT(info);
 	    SEXP spec = R_findVarInFrame(info, install("spec"));
-	    UNPROTECT(1);
 	    if (spec != R_UnboundValue &&
 		TYPEOF(spec) == STRSXP && LENGTH(spec) > 0)
 		return TRUE;
@@ -3920,7 +3913,6 @@ attribute_hidden SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
        Promises are not forced and active bindings are preserved. */
     SEXP impenv, impnames, expenv, expnames;
     SEXP impsym, expsym, val;
-    int n;
 
     checkArity(op, args);
 
@@ -3940,7 +3932,7 @@ attribute_hidden SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (LENGTH(impnames) != LENGTH(expnames))
 	error("%s", _("length of import and export names must match"));
 
-    n = LENGTH(impnames);
+    int n = LENGTH(impnames);
     for (int i = 0; i < n; i++) {
 	impsym = installTrChar(STRING_ELT(impnames, i));
 	expsym = installTrChar(STRING_ELT(expnames, i));
@@ -4003,7 +3995,7 @@ SEXP Rf_mkCharCE(const char *name, cetype_t enc)
     size_t len =  strlen(name);
     if (len > INT_MAX)
 	error("%s", _("R character strings are limited to 2^31-1 bytes"));
-   return mkCharLenCE(name, (int) len, enc);
+    return mkCharLenCE(name, (int) len, enc);
 }
 
 /* no longer used in R but documented in 2.7.x */
@@ -4072,7 +4064,7 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
     REprintf(" --- string (printed):\n");
     PrintValue(cval);
     REprintf(" --- string (bytes with ASCII chars):\n");
-    for(int i = 0; i < LENGTH(cval); i++) {
+    for (int i = 0; i < LENGTH(cval); i++) {
 	if (i > 0)
 	    REprintf(" ");
 	unsigned char b = (unsigned char) CHAR(cval)[i];
