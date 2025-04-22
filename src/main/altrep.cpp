@@ -728,11 +728,10 @@ static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 	if (attr != R_NilValue) {
 	    SET_ATTRIB(ans, deep ? duplicate(attr) : shallow_duplicate(attr));
 	    SET_OBJECT(ans, OBJECT(x));
-	    if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); }
+	    ans->setS4Object(IS_S4_OBJECT(x));
 	}
 	else if (ATTRIB(ans) != R_NilValue) {
-	    SET_ATTRIB(ans, R_NilValue);
-	    SET_OBJECT(ans, FALSE);
+	    ans->clearAttributes();
 	    UNSET_S4_OBJECT(ans);
 	}
     }

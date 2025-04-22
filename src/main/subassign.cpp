@@ -1543,7 +1543,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
     }
     if (val != R_NilValue) {
 	SET_ATTRIB(val, ATTRIB(x));
-	if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(val); } else { UNSET_S4_OBJECT(val); }
+	val->setS4Object(IS_S4_OBJECT(x));
 	SET_OBJECT(val, OBJECT(x));
 	RAISE_NAMED(val, NAMED(x));
     }
