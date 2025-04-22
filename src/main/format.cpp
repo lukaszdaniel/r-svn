@@ -183,9 +183,9 @@ void formatLogicalS(SEXP x, R_xlen_t n, int *fieldwidth) {
     ITERATE_BY_REGION_PARTIAL(x, px, idx, nb, int, LOGICAL, 0, n,
 			      {
 				  formatLogical(px, nb, &tmpfieldwidth);
-				  if( tmpfieldwidth > *fieldwidth )
+				  if (tmpfieldwidth > *fieldwidth)
 				      *fieldwidth = tmpfieldwidth;
-				  if( *fieldwidth == 5)
+				  if (*fieldwidth == 5)
 				      break;  /* break iteration loop */
 			      });
     return;

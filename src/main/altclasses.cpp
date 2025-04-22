@@ -30,6 +30,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -44,6 +45,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /***
  *** ALTREP Concrete Class Implementations
@@ -823,7 +825,7 @@ static SEXP deferred_string_Extract_subset(SEXP x, SEXP indx, SEXP call)
 {
     SEXP result = NULL;
 
-    if (! OBJECT(x) && ATTRIB(x) == R_NilValue &&
+    if (!OBJECT(x) && ATTRIB(x) == R_NilValue &&
 	DEFERRED_STRING_STATE(x) != R_NilValue) {
 	/* For deferred string coercions, create a new conversion
 	   using the subset of the argument.  Could try to
@@ -1004,7 +1006,7 @@ static SEXP make_mmap(void *p, SEXP file, size_t size, SEXPTYPE type,
     }
 
     SEXP ans = R_new_altrep(class_, eptr, state);
-    if (ptrOK && ! wrtOK)
+    if (ptrOK && !wrtOK)
 	MARK_NOT_MUTABLE(ans);
 
     UNPROTECT(2); /* state, eptr */
@@ -1323,7 +1325,7 @@ static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
     if (stat(efn, &sb) != 0)
 	MMAP_FILE_WARNING_OR_ERROR(_("stat: %s"), strerror(errno));
 
-    if (! S_ISREG(sb.st_mode))
+    if (!S_ISREG(sb.st_mode))
 	MMAP_FILE_WARNING_OR_ERROR(_("%s is not a regular file"), efn);
 
     int oflags = wrtOK ? O_RDWR : O_RDONLY;
@@ -1394,7 +1396,7 @@ attribute_hidden SEXP do_munmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x = CAR(args);
 
     /**** would be useful to have R_mmap_class virtual class as parent here */
-    if (! (R_altrep_inherits(x, mmap_integer_class) ||
+    if (!(R_altrep_inherits(x, mmap_integer_class) ||
 	   R_altrep_inherits(x, mmap_real_class)))
 	error("%s", _("not a memory-mapped object"));
 
@@ -1469,9 +1471,9 @@ static SEXP wrapper_Serialized_state(SEXP x)
        metadata then return NULL to allow this to be serialized as a
        standard object. This avoids serializing potentially large
        attributes on the wrapped value (PR18142). */
-    if (! ALTREP(WRAPPER_WRAPPED(x)) &&
+    if (!ALTREP(WRAPPER_WRAPPED(x)) &&
 	WRAPPER_SORTED(x) == UNKNOWN_SORTEDNESS &&
-	! WRAPPER_NO_NA(x))
+	!WRAPPER_NO_NA(x))
 	return NULL;
 
     return CONS(WRAPPER_WRAPPED(x), WRAPPER_METADATA(x));
@@ -1911,7 +1913,7 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
 {
     /* If x is itself a wrapper it might be a good idea to fuse */
     R_altrep_class_t cls;
-    switch(TYPEOF(x)) {
+    switch (TYPEOF(x)) {
     case INTSXP: cls = wrap_integer_class; break;
     case LGLSXP: cls = wrap_logical_class; break;
     case REALSXP: cls = wrap_real_class; break;
@@ -1922,17 +1924,16 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
     default: error("%s", _("unsupported type"));
     }
 
-    SEXP ans = R_new_altrep(cls, x, meta);
+    GCStackRoot<> ans;
+    ans = R_new_altrep(cls, x, meta);
 
 #define WRAPATTRIB
 #ifdef WRAPATTRIB
     if (ATTRIB(x) != R_NilValue) {
 	/* could just move attributes if there are no references to x */
-	PROTECT(ans);
 	SET_ATTRIB(ans, shallow_duplicate(ATTRIB(x)));
 	SET_OBJECT(ans, OBJECT(x));
-	if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(ans); } else { UNSET_S4_OBJECT(ans); }
-	UNPROTECT(1); /* ans */
+	ans->setS4Object(IS_S4_OBJECT(x));
     }
 #endif
 
@@ -2037,21 +2038,20 @@ attribute_hidden SEXP do_tryWrap(SEXP call, SEXP op, SEXP args, SEXP env)
    will be referenced from C code after it is cleared. */
 attribute_hidden SEXP R::R_tryUnwrap(SEXP x)
 {
-    if (! MAYBE_SHARED(x) && is_wrapper(x) &&
-	WRAPPER_SORTED(x) == UNKNOWN_SORTEDNESS && ! WRAPPER_NO_NA(x)) {
+    if (!MAYBE_SHARED(x) && is_wrapper(x) &&
+	WRAPPER_SORTED(x) == UNKNOWN_SORTEDNESS && !WRAPPER_NO_NA(x)) {
 	SEXP data = WRAPPER_WRAPPED(x);
-	if (data && ! MAYBE_SHARED(data)) {
+	if (data && !MAYBE_SHARED(data)) {
 	    SET_ATTRIB(data, ATTRIB(x));
 	    SET_OBJECT(data, OBJECT(x));
-	    if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(data); } else { UNSET_S4_OBJECT(data); }
+	    data->setS4Object(IS_S4_OBJECT(x));
 
 	    /* Clear the fields to drop reference counts and set the
 	       type to LISTSXP to limit errors in case the object is
 	       still live. */
 	    ALTREP_SET_TYPEOF(x, LISTSXP);
 	    SETALTREP(x, 0);
-	    SET_ATTRIB(x, R_NilValue);
-	    SET_OBJECT(x, 0);
+	    x->clearAttributes();
 	    SET_DATA1(x, R_NilValue);
 	    SET_DATA2(x, R_NilValue);
 	    SET_CLASS(x, R_NilValue);

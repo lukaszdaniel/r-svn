@@ -64,7 +64,7 @@ attribute_hidden SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_RDEBUG(CAR(args), 1);
 	break;
     case 1: // undebug()
-	if( RDEBUG(CAR(args)) != 1 )
+	if (RDEBUG(CAR(args)) != 1)
 	    warning("%s", _("argument is not being debugged"));
 	SET_RDEBUG(CAR(args), 0);
 	break;
@@ -115,9 +115,9 @@ attribute_hidden SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool trace = (PRIMVAL(op) == 0),
 	prev = trace ? GET_TRACE_STATE : GET_DEBUG_STATE;
 
-    if(length(onOff) > 0) {
+    if (length(onOff) > 0) {
 	bool _new = asLogical(onOff);
-	if(_new == TRUE || _new == FALSE)
+	if (_new == TRUE || _new == FALSE)
 	    if(trace) SET_TRACE_STATE(_new);
 	    else      SET_DEBUG_STATE(_new);
 	else
@@ -151,13 +151,13 @@ attribute_hidden SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (Rf_isFunction(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
-    if(object == R_NilValue)
+    if (object == R_NilValue)
 	errorcall(call, "%s", _("cannot trace NULL"));
 
-    if(TYPEOF(object) == ENVSXP || TYPEOF(object) == PROMSXP)
+    if (TYPEOF(object) == ENVSXP || TYPEOF(object) == PROMSXP)
 	errorcall(call, "%s",
 		  _("'tracemem' is not useful for promise and environment objects"));
-    if(TYPEOF(object) == EXTPTRSXP || TYPEOF(object) == WEAKREFSXP)
+    if (TYPEOF(object) == EXTPTRSXP || TYPEOF(object) == WEAKREFSXP)
 	errorcall(call, "%s",
 		  _("'tracemem' is not useful for weak reference or external pointer objects"));
 
@@ -270,15 +270,15 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 						  R_PreviousSymbol);
 
     argList =  matchArgs_NR(do_retracemem_formals, args, call);
-    if(CAR(argList) == R_MissingArg) SETCAR(argList, R_NilValue);
-    if(CADR(argList) == R_MissingArg) SETCAR(CDR(argList), R_NilValue);
+    if (CAR(argList) == R_MissingArg) SETCAR(argList, R_NilValue);
+    if (CADR(argList) == R_MissingArg) SETCAR(CDR(argList), R_NilValue);
 
     object = CAR(argList);
     if (Rf_isFunction(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
     previous = CADR(argList);
-    if(!isNull(previous) && (!isString(previous) || LENGTH(previous) != 1))
+    if (!isNull(previous) && (!isString(previous) || LENGTH(previous) != 1))
 	    errorcall(call, _("invalid '%s' argument"), "previous");
 
     if (RTRACE(object)) {

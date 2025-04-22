@@ -109,7 +109,7 @@ using namespace CXXR;
   if (__a__ != R_NilValue) { \
       SET_ATTRIB(to, duplicate1(__a__, deep)); \
     SET_OBJECT(to, OBJECT(from)); \
-    if (IS_S4_OBJECT(from)) { SET_S4_OBJECT(to); } else { UNSET_S4_OBJECT(to); }  \
+    to->setS4Object(IS_S4_OBJECT(from));  \
   } \
 } while (0)
 
@@ -373,7 +373,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
     }
     if(TYPEOF(t) == TYPEOF(s) ) { /* surely it only makes sense in this case*/
 	SET_OBJECT(t, OBJECT(s));
-	if (IS_S4_OBJECT(s)) { SET_S4_OBJECT(t); } else { UNSET_S4_OBJECT(t); }
+	t->setS4Object(IS_S4_OBJECT(s));
     }
     return t;
 }

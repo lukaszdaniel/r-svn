@@ -684,13 +684,13 @@ typedef struct {
 static int clipcode(double x, double y, cliprect *cr)
 {
     int c = 0;
-    if(x < cr->xl)
+    if (x < cr->xl)
 	c |= CS_LEFT;
-    else if(x > cr->xr)
+    else if (x > cr->xr)
 	c |= CS_RIGHT;
-    if(y < cr->yb)
+    if (y < cr->yb)
 	c |= CS_BOTTOM;
-    else if(y > cr->yt)
+    else if (y > cr->yt)
 	c |= CS_TOP;
     return c;
 }
@@ -706,7 +706,7 @@ static bool CSclipline(double *x1, double *y1, double *x2, double *y2,
     *clipped2 = 0;
     c1 = clipcode(*x1, *y1, cr);
     c2 = clipcode(*x2, *y2, cr);
-    if ( !c1 && !c2 )
+    if (!c1 && !c2)
 	return TRUE;
 
     xl = cr->xl;
@@ -719,31 +719,31 @@ static bool CSclipline(double *x1, double *y1, double *x2, double *y2,
      */
     x = xl;		/* keep -Wall happy */
     y = yb;		/* keep -Wall happy */
-    while( c1 || c2 ) {
+    while (c1 || c2) {
 	if(c1 & c2)
 	    return FALSE;
-	if( c1 )
+	if (c1)
 	    c = c1;
 	else
 	    c = c2;
-	if( c & CS_LEFT ) {
+	if (c & CS_LEFT) {
 	    y = *y1 + (*y2 - *y1) * (xl - *x1) / (*x2 - *x1);
 	    x = xl;
 	}
-	else if( c & CS_RIGHT ) {
+	else if (c & CS_RIGHT) {
 	    y = *y1 + (*y2 - *y1) * (xr - *x1) / (*x2 -  *x1);
 	    x = xr;
 	}
-	else if( c & CS_BOTTOM ) {
+	else if (c & CS_BOTTOM) {
 	    x = *x1 + (*x2 - *x1) * (yb - *y1) / (*y2 - *y1);
 	    y = yb;
 	}
-	else if( c & CS_TOP ) {
+	else if (c & CS_TOP) {
 	    x = *x1 + (*x2 - *x1) * (yt - *y1)/(*y2 - *y1);
 	    y = yt;
 	}
 
-	if( c==c1 ) {
+	if (c==c1) {
 	    *x1 = x;
 	    *y1 = y;
 	    *clipped1 = 1;

@@ -18,6 +18,11 @@
 
       \item \code{terms(<formula>, specials = *)} now treats non-syntactic
       specials more gracefully, thanks to \I{Mikael Jagan}'s \PR{18568}.
+
+      \item \code{help.start()} gets a \code{lib.loc} option and its
+      default for \code{make.packages.html()} is enhanced to allow, e.g.,
+      fast access to \code{.Library} when that contains only base and
+      recommended packages.
     }
   }
 
@@ -41,7 +46,6 @@
 
   \subsection{UTILITIES}{
     \itemize{
-      % this will not be ported to R 4.5.0.
       \item \command{R CMD check} now reports further \command{clang} warnings
       including \code{-Wkeyword-macro}.  This is most commonly seen for
       the C23 keywords \code{bool}, \code{true} and \code{false}, but is
@@ -87,8 +91,11 @@
       \command{icx}\sspace{}2025.0.
 
       \item Java detection in \code{javareconf} could not detect
-      \file{libjvm.*} in the \code{zero} variant of the JDK (\PR{18884}).
-      All valid variants as of JDK 24u are now supported.
+      \file{libjvm.*} in the \code{zero} variant of the \abbr{JDK} (\PR{18884}).
+      All valid variants as of \abbr{JDK} 24u are now supported.
+
+      \item \code{factanal(.., rotation=*)} now correctly updates
+      \code{rotmat}, fixing \PR{18886}.
     }
   }
 }
@@ -349,7 +356,7 @@
       compilation of \R and packages.  \R builds can opt out \emph{via} the
       \command{configure} flag \option{--without-C23}, unless the
       specified or default (usually \command{gcc}) compiler defaults to C23:
-      \command{gcc}\sspace{}15 will.
+      \command{gcc}\sspace{}15 does.
 
       %% GCC 13 was released in 2023-04, LLVM 18 was 2024-03, 15 was 2022-09
       %% Apple clang 14.0.3 was too old: 15 is the earliest that can be
