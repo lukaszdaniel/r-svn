@@ -105,6 +105,24 @@ names(z)[2] <- "b"
 z
 
 \dontshow{## "show" the equivalence claimed above:
+e <- baseenv()
+b <- ls(e, all.names=TRUE, sorted=FALSE)
+c <- names(as.list(e, all.names=TRUE))
+length(names(e))
+length(b)
+length(c)
+identical(names(e), b)
+identical(names(e), c)
+
+e <- globalenv()
+b <- ls(e, all.names=TRUE, sorted=FALSE)
+c <- names(as.list(e, all.names=TRUE))
+length(names(e))
+length(b)
+length(c)
+identical(names(e), b)
+identical(names(e), c)
+
   for(e in c(baseenv(), globalenv()))
   stopifnot(identical(names(e), ls(e, all.names=TRUE, sorted=FALSE)),
             identical(names(e), names(as.list(e, all.names=TRUE))))
