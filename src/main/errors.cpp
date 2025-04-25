@@ -84,10 +84,10 @@ inError = 2: Writing traceback
 inError = 3: In user error handler (i.e. options(error=handler))
 */
 static int inError = 0;
-static bool inWarning = 0;
-static bool inPrintWarnings = 0;
-static bool immediateWarning = 0;
-static bool noBreakWarning = 0;
+static bool inWarning = false;
+static bool inPrintWarnings = false;
+static bool immediateWarning = false;
+static bool noBreakWarning = false;
 
 static void try_jump_to_restart(void);
 // The next is crucial to the use of NORET attributes.
@@ -383,7 +383,7 @@ static char *Rstrncpy(char *dest, const char *src, size_t n)
 static R_INLINE void RprintTrunc(char *buf, bool truncated)
 {
     if (truncated) {
-	char *msg = _("[... truncated]");
+	const char *msg = _("[... truncated]");
 	if (strlen(buf) + 1 + strlen(msg) < BUFSIZE) {
 	    strcat(buf, " ");
 	    strcat(buf, msg);
@@ -462,11 +462,11 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	return;
 
     s = GetOption1(install("warning.expression"));
-    if( s != R_NilValue ) {
-	if( !isLanguage(s) &&  ! isExpression(s) )
+    if (s != R_NilValue) {
+	if (!isLanguage(s) &&  !isExpression(s))
 	    error("%s", _("invalid option \"warning.expression\""));
 	RCNTXT *cptr = R_GlobalContext;
-	while ( !(cptr->callflag & CTXT_FUNCTION) && cptr->callflag )
+	while (!(cptr->callflag & CTXT_FUNCTION) && cptr->callflag)
 	    cptr = cptr->nextcontext;
 	evalKeepVis(s, cptr->cloenv);
 	return;
@@ -474,35 +474,35 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 
     w = asInteger(GetOption1(install("warn")));
 
-    if( w == NA_INTEGER ) /* set to a sensible value */
+    if (w == NA_INTEGER) /* set to a sensible value */
 	w = 0;
 
-    if( w <= 0 && immediateWarning ) w = 1;
+    if (w <= 0 && immediateWarning) w = 1;
 
-    if( w < 0 || inWarning || inError) /* ignore if w<0 or already in here*/
+    if (w < 0 || inWarning || inError) /* ignore if w<0 or already in here*/
 	return;
 
-    inWarning = 1;
+    inWarning = true;
 
     /* set up a context which will restore inWarning if there is an exit */
     try {
-    if(w >= 2) { /* make it an error */
+    if (w >= 2) { /* make it an error */
 	psize = min(BUFSIZE, R_WarnLength+1);
 	pval = Rvsnprintf_mbcs(buf, psize, format, ap);
 	RprintTrunc(buf, (size_t) pval >= psize);
-	inWarning = 0; /* PR#1570 */
+	inWarning = false; /* PR#1570 */
 	errorcall(call, _("(converted from warning) %s"), buf);
     }
     else if(w == 1) {	/* print as they happen */
 	const char *tr;
-	if( call != R_NilValue ) {
+	if (call != R_NilValue) {
 	    dcall = CHAR(STRING_ELT(deparse1s(call), false));
 	} else dcall = "";
 	psize = min(BUFSIZE, R_WarnLength+1);
 	pval = Rvsnprintf_mbcs(buf, psize, format, ap);
 	RprintTrunc(buf, (size_t) pval >= psize);
 
-	if(dcall[0] == '\0') RWprintf("%s", _("Warning:"));
+	if (dcall[0] == '\0') RWprintf("%s", _("Warning:"));
 	else {
 	    RWprintf(_("Warning in '%s':"), dcall);
 	    // This did not allow for buf containing line breaks
@@ -511,26 +511,26 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	    char buf1[BUFSIZE];
 	    strncpy(buf1, buf, BUFSIZE);
 	    char *p = strstr(buf1, "\n");
-	    if(p) *p = '\0';
-	    if(!(noBreakWarning ||
-		 ( mbcslocale && (18 + wd(dcall) + wd(buf1) <= LONGWARN)) ||
+	    if (p) *p = '\0';
+	    if (!(noBreakWarning ||
+		  (mbcslocale && (18 + wd(dcall) + wd(buf1) <= LONGWARN)) ||
 		 (!mbcslocale && (18 + strlen(dcall) + strlen(buf1) <= LONGWARN))))
 		RWprintf("\n ");
 	}
 	RWprintf(" %s\n", buf);
-	if(R_ShowWarnCalls && call != R_NilValue) {
+	if (R_ShowWarnCalls && call != R_NilValue) {
 	    tr = R_ConciseTraceback(call, 0);
 	    if (strlen(tr)) {RWprintf("%s", _("Calls:")); RWprintf(" %s\n", tr);}
 	}
     }
-    else if(w == 0) {	/* collect them */
-	if(!R_CollectWarnings) setupwarnings();
-	if(R_CollectWarnings < R_nwarnings) {
+    else if (w == 0) {	/* collect them */
+	if (!R_CollectWarnings) setupwarnings();
+	if (R_CollectWarnings < R_nwarnings) {
 	    SET_VECTOR_ELT(R_Warnings, R_CollectWarnings, call);
 	    psize = min(BUFSIZE, R_WarnLength+1);
 	    pval = Rvsnprintf_mbcs(buf, psize, format, ap);
 	    RprintTrunc(buf, (size_t) pval >= psize);
-	    if(R_ShowWarnCalls && call != R_NilValue) {
+	    if (R_ShowWarnCalls && call != R_NilValue) {
 		const char *tr =  R_ConciseTraceback(call, 0);
 		size_t nc = strlen(tr);
 		if (nc && nc + (int)strlen(buf) + 8 < BUFSIZE) {
@@ -546,10 +546,10 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
     }
     /* else:  w <= -1 */
 	} catch (...) {
-        inWarning = 0;
+        inWarning = false;
         throw;
 	}
-    inWarning = 0;
+    inWarning = false;
 }
 
 static void warningcall_dflt(SEXP call, const char *format,...)
@@ -606,10 +606,10 @@ void R::PrintWarnings(const char *hdr)
     /* set up a context which will restore inPrintWarnings if there is
        an exit */
     try {
-    if( R_CollectWarnings == 1 ) {
+    if (R_CollectWarnings == 1) {
 	RWprintf("%s\n", header);
 	names = CAR(ATTRIB(R_Warnings));
-	if( VECTOR_ELT(R_Warnings, 0) == R_NilValue )
+	if (VECTOR_ELT(R_Warnings, 0) == R_NilValue)
 	    RWprintf("%s \n", CHAR(STRING_ELT(names, 0)));
 	else {
 	    const char *dcall, *msg = CHAR(STRING_ELT(names, 0));
@@ -633,11 +633,11 @@ void R::PrintWarnings(const char *hdr)
 	    }
 	    RWprintf(" %s\n", msg);
 	}
-    } else if( R_CollectWarnings <= 10 ) {
+    } else if (R_CollectWarnings <= 10) {
 	RWprintf("%s\n", header);
 	names = CAR(ATTRIB(R_Warnings));
 	for(i = 0; i < R_CollectWarnings; i++) {
-	    if( VECTOR_ELT(R_Warnings, i) == R_NilValue ) {
+	    if (VECTOR_ELT(R_Warnings, i) == R_NilValue) {
 		RWprintf("%d: %s \n", i+1, CHAR(STRING_ELT(names, i)));
 	    } else {
 		const char *dcall, *msg = CHAR(STRING_ELT(names, i));
@@ -758,7 +758,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 
     if (inError) {
 	/* fail-safe handler for recursive errors */
-	if(inError == 3) {
+	if (inError == 3) {
 	     /* Can REprintf generate an error? If so we should guard for it */
 	    REprintf("%s", _("Error during wrapup: "));
 	    /* this does NOT try to print the call since that could
@@ -859,15 +859,15 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	ERRBUFCAT("...\n");
     } else {
 	char *p = errbuf + nc - 1;
-	if(*p != '\n') {
+	if (*p != '\n') {
 	    ERRBUFCAT("\n");  // guaranteed to have room for this
 	    ++nc;
 	}
-	if(R_ShowErrorCalls && call != R_NilValue) {  /* assume we want to avoid deparse */
+	if (R_ShowErrorCalls && call != R_NilValue) {  /* assume we want to avoid deparse */
 	    const char *tr = R_ConciseTraceback(call, 0);
 	    size_t nc_tr = strlen(tr);
 	    if (nc_tr) {
-		char * call_trans = _("Calls:");
+		const char * call_trans = _("Calls:");
 		if (nc_tr + nc + strlen(call_trans) + 2 < BUFSIZE + 1) {
 		    ERRBUFCAT(call_trans);
 		    ERRBUFCAT(" ");
@@ -879,7 +879,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     }
     if (R_ShowErrorMessages) REprintf("%s", errbuf);
 
-    if( R_ShowErrorMessages && R_CollectWarnings ) {
+    if (R_ShowErrorMessages && R_CollectWarnings) {
         PrintWarnings(n_("Additional warning message:",
                          "Additional warning messages:",
                          R_CollectWarnings));
@@ -998,14 +998,14 @@ static void jump_to_top_ex(bool traceback,
     try {
     /* don't use options("error") when handling a C stack overflow */
     if (R_OldCStackLimit == 0 && tryUserHandler && inError < 3) {
-	if (! inError)
+	if (!inError)
 	    inError = 1;
 
 	/* now see if options("error") is set */
 	s = GetOption1(install("error"));
 	haveHandler = ( s != R_NilValue );
 	if (haveHandler) {
-	    if( !isLanguage(s) &&  ! isExpression(s) )  /* shouldn't happen */
+	    if (!isLanguage(s) &&  !isExpression(s))  /* shouldn't happen */
 		REprintf("%s", _("invalid option \"error\"\n"));
 	    else {
 		R_CheckStack();
@@ -1014,8 +1014,8 @@ static void jump_to_top_ex(bool traceback,
 		    Evaluator::evaluate(s, Environment::global());
 		else /* expression */
 		    {
-			int i, n = LENGTH(s);
-			for (i = 0 ; i < n ; i++)
+			int n = LENGTH(s);
+			for (int i = 0 ; i < n ; i++)
 			    eval(XVECTOR_ELT(s, i), R_GlobalEnv);
 		    }
 		inError = oldInError;
@@ -1025,7 +1025,7 @@ static void jump_to_top_ex(bool traceback,
     }
 
     /* print warnings if there are any left to be printed */
-    if( processWarnings && R_CollectWarnings )
+    if (processWarnings && R_CollectWarnings)
 	PrintWarnings();
 
     /* reset some stuff--not sure (all) this belongs here */
@@ -1050,7 +1050,7 @@ static void jump_to_top_ex(bool traceback,
        you can do is reset things and exit.  */
 
     /* jump to a browser/try if one is on the stack */
-    if (! ignoreRestartContexts)
+    if (!ignoreRestartContexts)
 	try_jump_to_restart();
     /* at this point, i.e. if we have not exited in
        try_jump_to_restart, we are heading for R_ToplevelContext */
@@ -1293,7 +1293,7 @@ attribute_hidden SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(domain && strlen(domain)) {
 	/* libintl seems to malfunction if given a message of "" */
 	if(length(STRING_ELT(msg1, 0))) {
-	    char *fmt = dngettext(domain,
+	    const char *fmt = dngettext(domain,
 		      translateChar(STRING_ELT(msg1, 0)),
 		      translateChar(STRING_ELT(msg2, 0)),
 		      n);
@@ -1317,7 +1317,7 @@ attribute_hidden SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if(!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
 	error(_("invalid '%s' value"), "domain");
 
-    char *res;
+    const char *res;
     if(isNull(CADR(args))) {
 	res = bindtextdomain(translateChar(STRING_ELT(CAR(args),0)), NULL);
     } else {
@@ -2003,7 +2003,7 @@ attribute_hidden void R::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname
 
     /**** need more here to keep recursive errors in browser? */
     SEXP h = GetOption1(install("browser.error.handler"));
-    if (! isFunction(h)) h = R_RestartToken;
+    if (!isFunction(h)) h = R_RestartToken;
     rho = cptr->cloenv;
     PROTECT(klass = mkChar("error"));
     entry = mkHandlerEntry(klass, rho, h, rho, R_NilValue, TRUE);
@@ -2120,7 +2120,7 @@ attribute_hidden SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     if (isTopLevelContext(R_GlobalContext) ||
-	! (R_GlobalContext->callflag & CTXT_FUNCTION))
+	!(R_GlobalContext->callflag & CTXT_FUNCTION))
 	error("%s", _("not in a try context"));
     SET_RESTART_BIT_ON(R_GlobalContext);
     R_InsertRestartHandlers(R_GlobalContext, "tryRestart");
@@ -2133,7 +2133,7 @@ attribute_hidden SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     msg = CAR(args);
-    if(!isString(msg) || LENGTH(msg) != 1)
+    if (!isString(msg) || LENGTH(msg) != 1)
 	error("%s", _("error message must be a character string"));
     R_SetErrmessage(CHAR(STRING_ELT(msg, 0)));
     return R_NilValue;
@@ -2651,7 +2651,7 @@ static void R_signalCondition(SEXP cond, SEXP call,
 		SEXP h = ENTRY_HANDLER(entry);
 		if (h == R_RestartToken)
 		    break;
-		else if (! exitOnly) {
+		else if (!exitOnly) {
 		    R_CheckStack();
 		    SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
 		    PROTECT(hcall);
