@@ -123,7 +123,7 @@ int R_IsNA(double x)
 
 int R_IsNaN(double x)
 {
-    return std::isnan(x) && ! R_NaN_is_R_NA(x);
+    return std::isnan(x) && !R_NaN_is_R_NA(x);
 }
 
 /* ISNAN uses isnan, which is undefined by C++ headers
@@ -654,7 +654,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	setAttrib(val, R_ClassSymbol, klass);
     }
 
-    if(xS4 || yS4) {   /* Only set the bit:  no method defined! */
+    if (xS4 || yS4) {   /* Only set the bit:  no method defined! */
 	val = asS4(val, TRUE, TRUE); // from objects.c
     }
 
@@ -1645,7 +1645,7 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
     UNPROTECT(1); /* call2 */
 
     if (!dgroup.first) {
-        if (! is_signif) {
+        if (!is_signif) {
             args = match_Math2_dflt_args(args, call);
 
             if (CADR(args) == R_MissingArg)
@@ -1722,7 +1722,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
     if (n == 1 && TAG(args) == R_NilValue) {
 	/* log(x) is handled here */
 	SEXP x = CAR(args);
-	if (x != R_MissingArg && ! OBJECT(x)) {
+	if (x != R_MissingArg && !OBJECT(x)) {
 	    if (isComplex(x))
 		res = complex_math1(call, op, args, env);
 	    else
@@ -1737,7 +1737,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
 	SEXP x = CAR(args);
 	SEXP y = CADR(args);
 	if (x != R_MissingArg && y != R_MissingArg &&
-	    ! OBJECT(x) && ! OBJECT(y)) {
+	    !OBJECT(x) && !OBJECT(y)) {
 	    if (isComplex(x) || isComplex(y))
 		res = complex_math2(call, op, args, env);
 	    else
@@ -1774,7 +1774,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
 	/* after the match, length(args) will be 2 */
 	args = matchArgs_NR(do_log_formals, args, call);
 
-	if(CAR(args) == R_MissingArg)
+	if (CAR(args) == R_MissingArg)
 	    R_MissingArgError_c("x", call, "log2Error");
 	if (CADR(args) == R_MissingArg)
 	    SETCADR(args, ScalarReal(DFLT_LOG_BASE));
@@ -2030,7 +2030,7 @@ static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
     double ai, bi, ci, di, *y;
 
 #define SETUP_Math4							\
-    if(!isNumeric(sa)|| !isNumeric(sb)|| !isNumeric(sc)|| !isNumeric(sd))\
+    if (!isNumeric(sa)|| !isNumeric(sb)|| !isNumeric(sc)|| !isNumeric(sd))\
 	error("%s", R_MSG_NONNUM_MATH);				        \
 									\
     na = XLENGTH(sa);							\
@@ -2186,9 +2186,9 @@ attribute_hidden SEXP do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
 /* Mathematical Functions of Five (Real) Arguments */
 
 #define if_NA_Math5_set(y,a,b,c,d,e)					\
-	if     (ISNA (a)|| ISNA (b)|| ISNA (c)|| ISNA (d)|| ISNA (e))	\
+	if (ISNA (a)|| ISNA (b)|| ISNA (c)|| ISNA (d)|| ISNA (e))	\
 		y = NA_REAL;						\
-	else if(ISNAN(a)|| ISNAN(b)|| ISNAN(c)|| ISNAN(d)|| ISNAN(e))	\
+	else if (ISNAN(a)|| ISNAN(b)|| ISNAN(c)|| ISNAN(d)|| ISNAN(e))	\
 		y = R_NaN;
 
 static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())

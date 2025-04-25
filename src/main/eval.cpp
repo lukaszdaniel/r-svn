@@ -7836,7 +7836,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	SEXP symbol = GETCONST(constants, GETOP());
 	SEXP value = findFun(symbol, rho);
 	INIT_CALL_FRAME(value);
-	if(RTRACE(value)) {
+	if (RTRACE(value)) {
 	  Rprintf("trace: ");
 	  PrintValue(symbol);
 	}
@@ -7848,7 +7848,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	SEXP symbol = GETCONST(constants, GETOP());
 	SEXP value = findFun(symbol, R_GlobalEnv);
 	INIT_CALL_FRAME(value);
-	if(RTRACE(value)) {
+	if (RTRACE(value)) {
 	  Rprintf("trace: ");
 	  PrintValue(symbol);
 	}
@@ -7862,7 +7862,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	if (Promise::isA(value)) {
 	    value = static_cast<Promise *>(value)->force();
 	}
-	if(RTRACE(value)) {
+	if (RTRACE(value)) {
 	  Rprintf("trace: ");
 	  PrintValue(symbol);
 	}

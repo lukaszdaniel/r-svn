@@ -676,7 +676,7 @@ static bool usable_nice_names(SEXP x, bool isAtomic)
     if(TYPEOF(x) == STRSXP) {
 	R_xlen_t n = xlength(x);
 	bool all_0 = true;
-	if(isAtomic) // c(*, recursive=, use.names=): cannot use these as nice_names
+	if (isAtomic) // c(*, recursive=, use.names=): cannot use these as nice_names
 	    for (R_xlen_t i = 0; i < n; i++) {
 		if (STRING_ELT(x, i) == NA_STRING
 		    || streql(CHAR(STRING_ELT(x, i)), "recursive")

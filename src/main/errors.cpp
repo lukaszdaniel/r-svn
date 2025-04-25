@@ -583,7 +583,6 @@ void Rf_warningcall_immediate(SEXP call, const char *format, ...)
 attribute_hidden
 void R::PrintWarnings(const char *hdr)
 {
-    int i;
     const char *header = nullptr;
     SEXP names;
     GCStackRoot<> s, t;
@@ -636,7 +635,7 @@ void R::PrintWarnings(const char *hdr)
     } else if (R_CollectWarnings <= 10) {
 	RWprintf("%s\n", header);
 	names = CAR(ATTRIB(R_Warnings));
-	for(i = 0; i < R_CollectWarnings; i++) {
+	for (int i = 0; i < R_CollectWarnings; i++) {
 	    if (VECTOR_ELT(R_Warnings, i) == R_NilValue) {
 		RWprintf("%d: %s \n", i+1, CHAR(STRING_ELT(names, i)));
 	    } else {
@@ -681,7 +680,7 @@ void R::PrintWarnings(const char *hdr)
     s = allocVector(VECSXP, R_CollectWarnings);
     t = allocVector(STRSXP, R_CollectWarnings);
     names = CAR(ATTRIB(R_Warnings));
-    for(i = 0; i < R_CollectWarnings; i++) {
+    for (int i = 0; i < R_CollectWarnings; i++) {
 	SET_VECTOR_ELT(s, i, VECTOR_ELT(R_Warnings, i));
 	SET_STRING_ELT(t, i, STRING_ELT(names, i));
     }
@@ -707,22 +706,21 @@ void R::PrintWarnings(const char *hdr)
    is not valid "" will be returned.
 */
 
-static SEXP GetSrcLoc(SEXP srcref)
+static SEXP GetSrcLoc(SEXP srcref_)
 {
-    SEXP sep, line, result, srcfile;
-    if (TYPEOF(srcref) != INTSXP || length(srcref) < 4)
+    if (TYPEOF(srcref_) != INTSXP || length(srcref_) < 4)
 	return ScalarString(mkChar(""));
 
-    PROTECT(srcref);
-    PROTECT(srcfile = R_GetSrcFilename(srcref));
-    SEXP e2 = PROTECT(lang2( install("basename"), srcfile));
-    PROTECT(srcfile = eval(e2, R_BaseEnv ) );
-    PROTECT(sep = ScalarString(mkChar("#")));
-    PROTECT(line = ScalarInteger(INTEGER(srcref)[0]));
-    SEXP e = PROTECT(lang4( install("paste0"), srcfile, sep, line ));
-    result = eval(e, R_BaseEnv );
-    UNPROTECT(7);
-    return result;
+    GCStackRoot<> sep, line, srcfile, e2, e;
+    GCStackRoot<> srcref(srcref_);
+    srcfile = R_GetSrcFilename(srcref);
+    e2 = lang2(install("basename"), srcfile);
+    srcfile = eval(e2, R_BaseEnv);
+    sep = ScalarString(mkChar("#"));
+    line = ScalarInteger(INTEGER(srcref)[0]);
+    e = lang4(install("paste0"), srcfile, sep, line);
+
+    return eval(e, R_BaseEnv);
 }
 
 static char errbuf[BUFSIZE + 1]; /* add 1 to leave room for a null byte */
@@ -745,14 +743,14 @@ static void restore_inError(void *data)
    overhead due to the checks would be too high, and the program is doing
    something strange anyway (i.e. running no-segfault tests). The constant
    checks in GC and session exit (or .Call) do not have such limit. */
-static int allowedConstsChecks = 1000;
+static int s_allowedConstsChecks = 1000;
 
 /* Construct newline terminated error message, write it to global errbuf, and
    possibly display with REprintf. */
 NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 {
-    if (allowedConstsChecks > 0) {
-	allowedConstsChecks--;
+    if (s_allowedConstsChecks > 0) {
+	s_allowedConstsChecks--;
 	R_checkConstants(TRUE);
     }
 
@@ -1595,7 +1593,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
     static char buf[560];
     size_t nl;
     int ncalls = 0;
-    bool too_many = FALSE;
+    bool too_many = false;
     const char *top = "" /* -Wall */;
 
     buf[0] = '\0';
@@ -1609,21 +1607,21 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
 		SEXP fun = CAR(c->call);
 		const char *funstr = (TYPEOF(fun) == SYMSXP) ?
 		    CHAR(PRINTNAME(fun)) : "<Anonymous>";
-		if(streql(funstr, "stop") ||
+		if (streql(funstr, "stop") ||
 		   streql(funstr, "warning") ||
 		   streql(funstr, "suppressWarnings") ||
 		   streql(funstr, ".signalSimpleWarning")) {
-		    buf[0] =  '\0'; ncalls = 0; too_many = FALSE;
+		    buf[0] =  '\0'; ncalls = 0; too_many = false;
 		} else {
 		    ncalls++;
-		    if(too_many) {
+		    if (too_many) {
 			top = funstr;
-		    } else if(strlen(buf) > (size_t) (R_NShowCalls)) {
+		    } else if (strlen(buf) > (size_t) (R_NShowCalls)) {
 			memmove(buf+4, buf, strlen(buf)+1);
 			memcpy(buf, "... ", 4);
-			too_many = TRUE;
+			too_many = true;
 			top = funstr;
-		    } else if(strlen(buf)) {
+		    } else if (strlen(buf)) {
 			nl = strlen(funstr);
 			memmove(buf+nl+4, buf, strlen(buf)+1);
 			memcpy(buf, funstr, strlen(funstr));
@@ -1633,7 +1631,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
 		}
 	    }
 	}
-    if(too_many && (nl = strlen(top)) < 50) {
+    if (too_many && (nl = strlen(top)) < 50) {
 	memmove(buf+nl+1, buf, strlen(buf)+1);
 	memcpy(buf, top, strlen(top));
 	memcpy(buf+nl, " ", 1);
@@ -1645,7 +1643,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
 	SEXP fun = CAR(call);
 	const char *funstr = (TYPEOF(fun) == SYMSXP) ?
 	    CHAR(PRINTNAME(fun)) : "<Anonymous>";
-	if(streql(buf, funstr)) return "";
+	if (streql(buf, funstr)) return "";
     }
     return buf;
 }
@@ -2129,10 +2127,8 @@ attribute_hidden SEXP do_addTryHandlers(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_seterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP msg;
-
     checkArity(op, args);
-    msg = CAR(args);
+    SEXP msg = CAR(args);
     if (!isString(msg) || LENGTH(msg) != 1)
 	error("%s", _("error message must be a character string"));
     R_SetErrmessage(CHAR(STRING_ELT(msg, 0)));
@@ -2333,7 +2329,7 @@ SEXP R_GetCurrentSrcref(int skip)
 {
     RCNTXT *c = R_GlobalContext;
     SEXP srcref = NULL;
-    int keep_looking = skip == NA_INTEGER;
+    bool keep_looking = (skip == NA_INTEGER);
     if (keep_looking) skip = 0;
     if (skip < 0) { /* to count up from the bottom, we need to count them all first */
 	while (c) {
@@ -2404,11 +2400,11 @@ SEXP R_tryCatchError(SEXP (*body)(void *), void *bdata,
 		     SEXP (*handler)(SEXP, void *), void *hdata)
 {
     SEXP val;
-    SEXP cond = Rf_mkString("error");
+    GCStackRoot<> cond;
+    cond = Rf_mkString("error");
 
-    PROTECT(cond);
     val = R_tryCatch(body, bdata, cond, handler, hdata, NULL, NULL);
-    UNPROTECT(1);
+
     return val;
 }
 
@@ -2643,8 +2639,8 @@ static void R_signalCondition(SEXP cond, SEXP call,
 	UNPROTECT(1); /* oldstack */
     }
     else {
-	SEXP list;
-	while ((list = findConditionHandler(cond)) != R_NilValue) {
+	SEXP list = findConditionHandler(cond);
+	while (list != R_NilValue) {
 	    SEXP entry = CAR(list);
 	    R_HandlerStack = CDR(list);
 	    if (IS_CALLING_ENTRY(entry)) {
@@ -2697,10 +2693,10 @@ void R::R_signalWarningCondition(SEXP cond)
         expr = R_ParseString("warning(cond)");
         R_PreserveObject(expr);
     }
-    SEXP env = PROTECT(R_NewEnv(R_BaseNamespace, FALSE, 0));
+    GCStackRoot<> env;
+    env = R_NewEnv(R_BaseNamespace, FALSE, 0);
     defineVar(condSym, cond, env);
     evalKeepVis(expr, env);
-    UNPROTECT(1); /* env*/
 }
 
 
@@ -2768,16 +2764,15 @@ NORET void R::R_MissingArgError_c(const char* arg, SEXP call, const char* subcla
     if (call == R_CurrentExpression) /* as error() */
 	call = getCurrentCall();
     PROTECT(call);
-    SEXP cond;
-    if(*arg)
+    GCStackRoot<> cond;
+    if (*arg)
 	cond = R_makeErrorCondition(call, "missingArgError", subclass, 0,
 				    _("argument \"%s\" is missing, with no default"), arg);
     else
 	cond = R_makeErrorCondition(call, "missingArgError", subclass, 0,
 				    _("argument is missing, with no default"));
-    PROTECT(cond);
+
     R_signalErrorCondition(cond, call);
-    UNPROTECT(2); /* not reached */
 }
 
 NORET void R::R_MissingArgError(SEXP symbol, SEXP call, const char* subclass)
@@ -2870,12 +2865,13 @@ static const char *C_SO_msg_fmt =
 
 attribute_hidden SEXP R::R_makeCStackOverflowError(SEXP call, intptr_t usage)
 {
-    SEXP cond = R_makeErrorCondition(call, "stackOverflowError",
+    GCStackRoot<> cond;
+    cond = R_makeErrorCondition(call, "stackOverflowError",
 				     "CStackOverflowError", 1,
 				     C_SO_msg_fmt, usage);
-    PROTECT(cond);
+
     R_setConditionField(cond, 2, "usage", ScalarReal((double) usage));
-    UNPROTECT(1); /* cond */
+
     return cond;
 }
 
@@ -2952,16 +2948,16 @@ SEXP R::R_makeWarningCondition(SEXP call,
 
 SEXP R::R_makePartialMatchWarningCondition(SEXP call, SEXP argument, SEXP formal)
 {
-    SEXP cond =
-	R_makeWarningCondition(call, "partialMatchWarning", NULL, 2,
+    GCStackRoot<> cond;
+    cond = R_makeWarningCondition(call, "partialMatchWarning", NULL, 2,
 			       _("partial argument match of '%s' to '%s'"),
 			       CHAR(PRINTNAME(argument)),//EncodeChar??
 			       CHAR(PRINTNAME(formal)));//EncodeChar??
-    PROTECT(cond);
+
     R_setConditionField(cond, 2, "argument", argument);
     R_setConditionField(cond, 3, "formal", formal);
     // idealy we would want the function/object in a field also
-    UNPROTECT(1); /* cond */
+
     return cond;
 }
 
