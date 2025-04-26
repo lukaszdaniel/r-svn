@@ -673,7 +673,7 @@ static bool needsparens(PPinfo mainop, SEXP arg, unsigned int left,
  * or if(isAtomic) does it have one "recursive" or "use.names" ?  */
 static bool usable_nice_names(SEXP x, bool isAtomic)
 {
-    if(TYPEOF(x) == STRSXP) {
+    if (TYPEOF(x) == STRSXP) {
 	R_xlen_t n = xlength(x);
 	bool all_0 = true;
 	if (isAtomic) // c(*, recursive=, use.names=): cannot use these as nice_names

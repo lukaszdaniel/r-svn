@@ -753,7 +753,7 @@ static SEXP bitwiseNot(SEXP a)
 {
     SEXP ans;
     int np = 0;
-    if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
+    if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
 
     switch(TYPEOF(a)) {
     case INTSXP:
@@ -771,15 +771,15 @@ static SEXP bitwiseNot(SEXP a)
     default:
 	UNIMPLEMENTED_TYPE("bitwNot", a);
     }
-    if(np) UNPROTECT(np);
+    if (np) UNPROTECT(np);
     return ans;
 }
 
 #define BIT(op, name)							\
     SEXP ans;								\
     int np = 0;								\
-    if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}		\
-    if(isReal(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}		\
+    if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}	\
+    if (isReal(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}	\
     if (TYPEOF(a) != TYPEOF(b))						\
 	error("%s", _("'a' and 'b' must have the same type"));		\
     switch(TYPEOF(a)) {							\
@@ -801,7 +801,7 @@ static SEXP bitwiseNot(SEXP a)
     default:								\
 	UNIMPLEMENTED_TYPE(name, a);					\
     }									\
-    if(np) UNPROTECT(np);						\
+    if (np) UNPROTECT(np);						\
     return ans
 
 static SEXP bitwiseAnd(SEXP a, SEXP b)
@@ -823,8 +823,8 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
 {
     SEXP ans;
     int np = 0;
-    if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
-    if(!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
+    if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
+    if (!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     if (TYPEOF(a) != TYPEOF(b))
 	error("%s", _("'a' and 'b' must have the same type"));
 
@@ -849,7 +849,7 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
     default:
 	UNIMPLEMENTED_TYPE("bitShiftL", a);
     }
-    if(np) UNPROTECT(np);
+    if (np) UNPROTECT(np);
     return ans;
 }
 
@@ -857,8 +857,8 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
 {
     SEXP ans;
     int np = 0;
-    if(isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
-    if(!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
+    if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
+    if (!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     if (TYPEOF(a) != TYPEOF(b))
 	error("%s", _("'a' and 'b' must have the same type"));
 
@@ -883,7 +883,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
     default:
 	UNIMPLEMENTED_TYPE("bitShiftR", a);
     }
-    if(np) UNPROTECT(np);
+    if (np) UNPROTECT(np);
     return ans;
 }
 

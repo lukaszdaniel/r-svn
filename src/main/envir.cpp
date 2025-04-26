@@ -1456,29 +1456,28 @@ attribute_hidden SEXP do_dotsLength(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    SEXP vl = R_findVar(R_DotsSymbol, env);
-    PROTECT(vl);
+    GCStackRoot<> vl;
+    vl = R_findVar(R_DotsSymbol, env);
+
     if (vl == R_UnboundValue)
 	error("%s", _("incorrect context: the current call has no '...' to look in"));
     // else
-    SEXP out = R_NilValue;
+    GCStackRoot<> out(R_NilValue);
     int n = length_DOTS(vl);
-    bool named = FALSE;
+    bool named = false;
     for (int i = 0; i < n; i++) {
 	if (TAG(vl) != R_NilValue) {
-	    if (!named) { named = TRUE;
-		PROTECT(out = allocVector(STRSXP, n)); // and is filled with "" already
+	    if (!named) { named = true;
+		out = allocVector(STRSXP, n); // and is filled with "" already
 	    }
 	    SET_STRING_ELT(out, i, PRINTNAME(TAG(vl)));
 	}
         vl = CDR(vl);
     }
-    if (named) {
-        UNPROTECT(1);
-    } else {
+    if (!named) {
 	out = R_NilValue;
     }
-    UNPROTECT(1);
+
     return out;
 }
 
