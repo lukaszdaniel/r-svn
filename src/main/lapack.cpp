@@ -35,16 +35,16 @@ using namespace R;
 static R_LapackRoutines *ptr;
 
 
-static int initialized = 0;
+static int s_initialized = 0;
 
 static void La_Init(void)
 {
     int res = R_moduleCdynload("lapack", 1, 1); // -> ../modules/lapack/Lapack.c
-    initialized = -1;
-    if(!res) return;
-    if(!ptr->do_lapack)
+    s_initialized = -1;
+    if (!res) return;
+    if (!ptr->do_lapack)
 	error("%s", _("LAPACK routines cannot be accessed in module"));
-    initialized = 1;
+    s_initialized = 1;
     return;
 }
 
@@ -52,8 +52,8 @@ static void La_Init(void)
 attribute_hidden SEXP do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    if(!initialized) La_Init();
-    if(initialized > 0)
+    if (!s_initialized) La_Init();
+    if (s_initialized > 0)
 	return (*ptr->do_lapack)(call, op, args, env);
     else {
 	error("%s", _("LAPACK routines cannot be loaded"));

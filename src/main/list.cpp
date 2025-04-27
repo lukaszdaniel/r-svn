@@ -64,16 +64,16 @@ static void namewalk(SEXP s, NameWalkData *d)
 {
     SEXP name;
 
-    switch(TYPEOF(s)) {
+    switch (TYPEOF(s)) {
     case SYMSXP:
 	name = PRINTNAME(s);
 	/* skip blank symbols */
-	if(CHAR(name)[0] == '\0') goto ignore;
-	if(d->ItemCounts < d->MaxCount) {
-	    if(d->StoreValues) {
-		if(d->UniqueNames) {
-		    for(int j = 0 ; j < d->ItemCounts ; j++) {
-			if(STRING_ELT(d->ans, j) == name)
+	if (CHAR(name)[0] == '\0') goto ignore;
+	if (d->ItemCounts < d->MaxCount) {
+	    if (d->StoreValues) {
+		if (d->UniqueNames) {
+		    for (int j = 0 ; j < d->ItemCounts ; j++) {
+			if (STRING_ELT(d->ans, j) == name)
 			    goto ignore;
 		    }
 		}
@@ -84,8 +84,8 @@ static void namewalk(SEXP s, NameWalkData *d)
     ignore:
 	break;
     case LANGSXP:
-	if(!d->IncludeFunctions) s = CDR(s);
-	while(s != R_NilValue) {
+	if (!d->IncludeFunctions) s = CDR(s);
+	while (s != R_NilValue) {
 	    namewalk(CAR(s), d);
 	    s = CDR(s);
 	}
@@ -114,18 +114,18 @@ attribute_hidden SEXP do_allnames(SEXP call, SEXP op, SEXP args, SEXP env)
     args = CDR(args);
 
     data.IncludeFunctions = asLogical(CAR(args));
-    if(data.IncludeFunctions == NA_LOGICAL)
+    if (data.IncludeFunctions == NA_LOGICAL)
 	data.IncludeFunctions = 0;
     args = CDR(args);
 
     data.MaxCount = asInteger(CAR(args));
-    if(data.MaxCount == -1) data.MaxCount = R_INT_MAX;
-    if(data.MaxCount < 0 || data.MaxCount == NA_INTEGER)
+    if (data.MaxCount == -1) data.MaxCount = R_INT_MAX;
+    if (data.MaxCount < 0 || data.MaxCount == NA_INTEGER)
 	data.MaxCount = 0;
     args = CDR(args);
 
     data.UniqueNames = asLogical(CAR(args));
-    if(data.UniqueNames == NA_LOGICAL)
+    if (data.UniqueNames == NA_LOGICAL)
 	data.UniqueNames = 1;
 
     namewalk(expr, &data);
@@ -137,10 +137,10 @@ attribute_hidden SEXP do_allnames(SEXP call, SEXP op, SEXP args, SEXP env)
     data.ItemCounts = 0;
     namewalk(expr, &data);
 
-    if(data.ItemCounts != savecount) {
+    if (data.ItemCounts != savecount) {
 	PROTECT(expr = data.ans);
 	data.ans = allocVector(STRSXP, data.ItemCounts);
-	for(int i = 0 ; i < data.ItemCounts ; i++)
+	for (int i = 0 ; i < data.ItemCounts ; i++)
 	    SET_STRING_ELT(data.ans, i, STRING_ELT(expr, i));
 	UNPROTECT(1);
     }

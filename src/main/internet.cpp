@@ -62,7 +62,7 @@ void extR_HTTPDStop(void);
 and more
  */
 
-static int initialized = 0;
+static int s_initialized = 0;
 
 R_InternetRoutines *R_setInternetRoutines(R_InternetRoutines *routines)
 {
@@ -76,18 +76,18 @@ static void internet_Init(void)
 {
     int res;
     res = R_moduleCdynload("internet", 1, 1);
-    initialized = -1;
-    if(!res) return;
-    if(!ptr->download)
+    s_initialized = -1;
+    if (!res) return;
+    if (!ptr->download)
 	error("%s", _("internet routines cannot be accessed in module"));
-    initialized = 1;
+    s_initialized = 1;
     return;
 }
 
 SEXP Rdownload(SEXP args)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->download)(args);
     else {
 	error("%s", _("internet routines cannot be loaded"));
@@ -98,8 +98,8 @@ SEXP Rdownload(SEXP args)
 // As from R 4.2.0 this is only used on Windows
 attribute_hidden Rconnection R_newurl(const char *description, const char * const mode, SEXP headers, int type)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->newurl)(description, mode, headers, type);
     else {
 	error("%s", _("internet routines cannot be loaded"));
@@ -110,8 +110,8 @@ attribute_hidden Rconnection R_newurl(const char *description, const char * cons
 attribute_hidden Rconnection R_newsock(const char *host, int port, int server, int serverfd,
           const char * const mode, int timeout, int options)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->newsock)(host, port, server, serverfd, mode, timeout, options);
     else {
 	error("%s", _("internet routines cannot be loaded"));
@@ -121,8 +121,8 @@ attribute_hidden Rconnection R_newsock(const char *host, int port, int server, i
 
 attribute_hidden Rconnection R_newservsock(int port)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->newservsock)(port);
     else {
 	error("%s", _("internet routines cannot be loaded"));
@@ -132,8 +132,8 @@ attribute_hidden Rconnection R_newservsock(int port)
 
 int extR_HTTPDCreate(const char *ip, int port)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->HTTPDCreate)(ip, port);
     else
 	error("%s", _("internet routines cannot be loaded"));
@@ -142,8 +142,8 @@ int extR_HTTPDCreate(const char *ip, int port)
 
 void extR_HTTPDStop(void)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	(*ptr->HTTPDStop)();
     else
 	error("%s", _("internet routines cannot be loaded"));
@@ -156,8 +156,8 @@ SEXP Rsockconnect(SEXP sport, SEXP shost)
     int port = asInteger(sport);
     char *host[1];
     host[0] = (char *) translateCharFP(STRING_ELT(shost, 0));
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	(*ptr->sockconnect)(&port, host);
     else
 	error("%s", _("socket routines cannot be loaded"));
@@ -175,8 +175,8 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
     rbuf = allocVector(RAWSXP, maxlen + 1);
     char *buf = (char *) RAW(rbuf), *abuf[1];
     abuf[0] = buf;
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	(*ptr->sockread)(&sock, abuf, &maxlen);
     else
 	error("%s", _("socket routines cannot be loaded"));
@@ -194,8 +194,8 @@ SEXP Rsockclose(SEXP ssock)
     if (length(ssock) != 1) error("%s", _("invalid 'socket' argument"));
     int sock = asInteger(ssock);
     if (sock <= 0) error("%s", _("attempt to close invalid socket"));
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	(*ptr->sockclose)(&sock);
     else
 	error("%s", _("socket routines cannot be loaded"));
@@ -206,8 +206,8 @@ SEXP Rsockopen(SEXP sport)
 {
     if (length(sport) != 1) error("%s", _("invalid 'port' argument"));
     int port = asInteger(sport);
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	(*ptr->sockopen)(&port);
     else
 	error("%s", _("socket routines cannot be loaded"));
@@ -220,8 +220,8 @@ SEXP Rsocklisten(SEXP ssock)
     int sock = asInteger(ssock), len = 256;
     char buf[257], *abuf[1];
     abuf[0] = buf;
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	(*ptr->socklisten)(&sock, abuf, &len);
     else
 	error("%s", _("socket routines cannot be loaded"));
@@ -241,8 +241,8 @@ SEXP Rsockwrite(SEXP ssock, SEXP sstring)
     char *buf = (char *) translateCharFP(STRING_ELT(sstring, 0)), *abuf[1];
     end = len = (int) strlen(buf);
     abuf[0] = buf;
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	(*ptr->sockwrite)(&sock, abuf, &start, &end, &len);
     else
 	error("%s", _("socket routines cannot be loaded"));
@@ -254,8 +254,8 @@ attribute_hidden
 int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
 		double timeout)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->sockselect)(nsock, insockfd, ready, write, timeout);
     else {
 	error("%s", _("socket routines cannot be loaded"));
@@ -266,8 +266,8 @@ int Rsockselect(int nsock, int *insockfd, int *ready, int *write,
 attribute_hidden SEXP do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->curlVersion)(call, op, args, rho);
     else {
 	error("%s", _("internet routines cannot be loaded"));
@@ -278,8 +278,8 @@ attribute_hidden SEXP do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->curlGetHeaders)(call, op, args, rho);
     else {
 	error("%s", _("internet routines cannot be loaded"));
@@ -290,8 +290,8 @@ attribute_hidden SEXP do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->curlDownload)(call, op, args, rho);
     else {
 	error("%s", _("internet routines cannot be loaded"));
@@ -301,13 +301,13 @@ attribute_hidden SEXP do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden Rconnection R_newCurlUrl(const char *description, const char * const mode, SEXP headers, int type)
 {
-    if(!initialized) internet_Init();
-    if(initialized > 0)
+    if (!s_initialized) internet_Init();
+    if (s_initialized > 0)
 	return (*ptr->newcurlurl)(description, mode, headers, type);
     else {
 	error("%s", _("internet routines cannot be loaded"));
-	return (Rconnection)0;
+	return (Rconnection)NULL;
     }
-    return (Rconnection)0; /* -Wall in gcc, but Solaris compiler complains */
+    return (Rconnection)NULL; /* -Wall in gcc, but Solaris compiler complains */
 }
 

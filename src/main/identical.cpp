@@ -416,11 +416,11 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
     switch (str) {
     case single_NA__num_eq:
     case single_NA__num_bit:
-	if(R_IsNA(x))
+	if (R_IsNA(x))
 	    return (!R_IsNA(y));
-	if(R_IsNA(y))
+	if (R_IsNA(y))
 	    return (!R_IsNA(x));
-	if(ISNAN(x))
+	if (ISNAN(x))
 	    return (!ISNAN(y));
 
     case bit_NA__num_eq:
@@ -432,7 +432,7 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
     case single_NA__num_eq:
 	return (x != y);
     case bit_NA__num_eq:
-	if(!ISNAN(x) && !ISNAN(y))
+	if (!ISNAN(x) && !ISNAN(y))
 	    return (x != y);
 	else /* bitwise check for NA/NaN's */
 	    return memcmp((const void *) &x,
@@ -442,6 +442,6 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
 	return memcmp((const void *) &x,
 		      (const void *) &y, sizeof(double));
     default: /* Wall */
-	return FALSE;
+	return false;
     }
 }

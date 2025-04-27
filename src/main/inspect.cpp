@@ -86,7 +86,7 @@ static void pp(int pre) {
  * @return name of RObject's type
  */
 const char *R::typeName(SEXP v) {
-    if(TYPEOF(v) == OBJSXP && IS_S4_OBJECT(v))
+    if (TYPEOF(v) == OBJSXP && IS_S4_OBJECT(v))
 	return "S4SXP";
     return sexptype2char(TYPEOF(v)); // -> memory.c
 }
