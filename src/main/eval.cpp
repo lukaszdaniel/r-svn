@@ -963,50 +963,6 @@ attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
 	     PRIMNAME(op), save, R_PPStackTop);
 }
 
-// #define ENSURE_PROMISE_IS_EVALUATED(x) forcePromise((x));
-
-static void forcePromise(SEXP expr)
-{
-    if (expr && !PROMISE_IS_EVALUATED(expr))
-    {
-        GCStackRoot<> e(expr);
-        if (PRSEEN(e) == UNDER_EVALUATION)
-            errorcall(R_GlobalContext->call, "%s",
-                      _("promise already under evaluation: recursive default argument reference or earlier problems?"));
-        else if (PRSEEN(e) == INTERRUPTED)
-        {
-            /* set PRSEEN to 1 to avoid infinite recursion */
-            SET_PRSEEN(e, UNDER_EVALUATION);
-            warningcall(R_GlobalContext->call, "%s",
-                        _("restarting interrupted promise evaluation"));
-        }
-
-        /* Mark the promise as under evaluation and push it on a stack
-           that can be used to unmark pending promises if a jump out
-           of the evaluation occurs. */
-        SET_PRSEEN(e, UNDER_EVALUATION);
-        try
-        {
-            SEXP val = Evaluator::evaluate(PRCODE(e), PRENV(e));
-            SET_PRVALUE(e, val);
-            ENSURE_NAMEDMAX(val);
-        }
-        catch (...)
-        {
-            /* The value INTERRUPTED installed in PRSEEN allows forcePromise
-               to signal a warning when asked to evaluate a promise
-               whose evaluation has been interrupted by a jump. */
-            SET_PRSEEN(e, INTERRUPTED);
-            throw;
-        }
-        /* Unmark the promise and set its value field.
-           Also set the environment to R_NilValue to allow GC to
-           reclaim the promise environment; this is also useful for
-           fancy games with delayedAssign() */
-        SET_PRSEEN(e, DEFAULT);
-        SET_PRENV(e, R_NilValue);
-    }
-}
 
 #define CXXR_POP(n) R_BCNodeStackTop -= (n)
 
@@ -1106,33 +1062,71 @@ namespace
     {
         SEXP tmp = R_NilValue;
 
-	if (e == R_DotsSymbol)
-	    error("%s", _("'...' used in an incorrect context"));
-	if (DDVAL(e))
-	    tmp = ddfindVar(e,rho);
-	else
-	    tmp = R_findVar(e, rho);
-	if (tmp == Symbol::unboundValue())
-	    errorcall_cpy(getLexicalCall(rho),
-			  _("object '%s' not found"),
-			  EncodeChar(PRINTNAME(e)));
-	else if (tmp == R_MissingArg) {
-	    /* the error signaled here for a missing ..d matches the one
-	       signaled in getvar() for byte compiled code, but ...elt()
-	       signals a slightly different error (see PR18661) */
-	    R_MissingArgError(e, getLexicalCall(rho), "evalError");
-	}
-	else if (Promise::isA(tmp)) {
-	    return static_cast<Promise *>(tmp)->force();
-	}
-	else ENSURE_NAMED(tmp); /* needed for .Last.value - LT */
+        if (e == R_DotsSymbol)
+            error("%s", _("'...' used in an incorrect context"));
+        if (DDVAL(e))
+            tmp = ddfindVar(e, rho);
+        else
+            tmp = R_findVar(e, rho);
+        if (tmp == Symbol::unboundValue())
+            errorcall_cpy(getLexicalCall(rho),
+                _("object '%s' not found"),
+                EncodeChar(PRINTNAME(e)));
+        else if (tmp == R_MissingArg) {
+            /* the error signaled here for a missing ..d matches the one
+               signaled in getvar() for byte compiled code, but ...elt()
+               signals a slightly different error (see PR18661) */
+            R_MissingArgError(e, getLexicalCall(rho), "evalError");
+        }
+        else if (Promise::isA(tmp)) {
+            return static_cast<Promise *>(tmp)->force();
+        }
+        else ENSURE_NAMED(tmp); /* needed for .Last.value - LT */
 
         return tmp;
     }
 
-    SEXP Promise_evaluate(SEXP e, SEXP rho)
+    SEXP Promise_evaluate(SEXP expr, SEXP rho)
     {
-        forcePromise(e);
+        GCStackRoot<> e(expr);
+        if (expr && !PROMISE_IS_EVALUATED(expr))
+        {
+            if (PRSEEN(e) == UNDER_EVALUATION)
+                errorcall(R_GlobalContext->call, "%s",
+                    _("promise already under evaluation: recursive default argument reference or earlier problems?"));
+            else if (PRSEEN(e) == INTERRUPTED)
+            {
+                /* set PRSEEN to 1 to avoid infinite recursion */
+                SET_PRSEEN(e, UNDER_EVALUATION);
+                warningcall(R_GlobalContext->call, "%s",
+                    _("restarting interrupted promise evaluation"));
+            }
+
+            /* Mark the promise as under evaluation and push it on a stack
+               that can be used to unmark pending promises if a jump out
+               of the evaluation occurs. */
+            SET_PRSEEN(e, UNDER_EVALUATION);
+            try
+            {
+                SEXP val = Evaluator::evaluate(PRCODE(e), PRENV(e));
+                SET_PRVALUE(e, val);
+                ENSURE_NAMEDMAX(val);
+            }
+            catch (...)
+            {
+                /* The value INTERRUPTED installed in PRSEEN allows
+                   to signal a warning when asked to evaluate a promise
+                   whose evaluation has been interrupted by a jump. */
+                SET_PRSEEN(e, INTERRUPTED);
+                throw;
+            }
+            /* Unmark the promise and set its value field.
+               Also set the environment to R_NilValue to allow GC to
+               reclaim the promise environment; this is also useful for
+               fancy games with delayedAssign() */
+            SET_PRSEEN(e, DEFAULT);
+            SET_PRENV(e, R_NilValue);
+        }
         return PRVALUE(e);
         /* This does _not_ change the value of NAMED on the value tmp,
            in contrast to the handling of promises bound to symbols in
@@ -1149,83 +1143,84 @@ namespace
            end up getting duplicated if NAMED > 1.) LT */
     }
 
-    SEXP Expression_evaluate(SEXP e, SEXP rho)
+    SEXP Expression_evaluate(SEXP expr, SEXP rho)
     {
-	SEXP tmp = R_NilValue;
-	SEXP op;
-	if (TYPEOF(CAR(e)) == SYMSXP) {
-	    /* This will throw an error if the function is not found */
-	    SEXP ecall = e;
+        GCStackRoot<> tmp(R_NilValue);
+        GCStackRoot<> op, e(expr);
+        if (TYPEOF(CAR(e)) == SYMSXP) {
+            /* This will throw an error if the function is not found */
+            SEXP ecall = e;
 
-	    /* This picks the correct/better error expression for
-	       replacement calls running in the AST interpreter. */
-	    if (R_GlobalContext != NULL &&
-		    (R_GlobalContext->callflag == CTXT_CCODE))
-		ecall = R_GlobalContext->call;
-	    PROTECT(op = findFun3(CAR(e), rho, ecall));
-	} else
-	    PROTECT(op = Evaluator::evaluate(CAR(e), rho));
+            /* This picks the correct/better error expression for
+               replacement calls running in the AST interpreter. */
+            if (R_GlobalContext != NULL &&
+                (R_GlobalContext->callflag == CTXT_CCODE))
+                ecall = R_GlobalContext->call;
+            op = findFun3(CAR(e), rho, ecall);
+        }
+        else
+            op = Evaluator::evaluate(CAR(e), rho);
 
-	if (RTRACE(op) && R_current_trace_state()) {
-	    Rprintf("trace: ");
-	    PrintValue(e);
-	}
-	if (TYPEOF(op) == SPECIALSXP) {
-	    size_t save = R_PPStackTop;
-	    int flag = PRIMPRINT(op);
-	    CXXR::RAllocStack::Scope rscope;
-	    PROTECT(e);
-	    Evaluator::enableResultPrinting(flag != 1);
-	    tmp = PRIMFUN(op) (e, op, CDR(e), rho);
-#ifdef CHECK_VISIBILITY
-	    if (flag < 2 && Evaluator::resultPrinted() == flag) {
-		const char *nm = PRIMNAME(op);
-		if (!streql(nm, "for")
-		   && !streql(nm, "repeat") && !streql(nm, "while")
-		   && !streql(nm, "[[<-") && !streql(nm, "on.exit"))
-		    printf("vis: special %s\n", nm);
-	    }
-#endif
-	    if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
-	    UNPROTECT(1);
-	    check_stack_balance(op, save);
-	}
-	else if (TYPEOF(op) == BUILTINSXP) {
-	    size_t save = R_PPStackTop;
-	    int flag = PRIMPRINT(op);
+        if (RTRACE(op) && R_current_trace_state()) {
+            Rprintf("trace: ");
+            PrintValue(e);
+        }
+        if (TYPEOF(op) == SPECIALSXP) {
+            size_t save = R_PPStackTop;
+            int flag = PRIMPRINT(op);
             CXXR::RAllocStack::Scope rscope;
-	    PROTECT(tmp = evalList(CDR(e), rho, e, 0));
-	    if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
-	    /* We used to insert a context only if profiling,
-	       but helps for tracebacks on .C etc. */
-	    if (Evaluator::profiling() || (PPINFO(op).kind == PP_FOREIGN)) {
-		SEXP oldref = R_Srcref;
-		RCNTXT cntxt(CTXT_BUILTIN, e, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
-		R_Srcref = NULL;
-		tmp = PRIMFUN(op) (e, op, tmp, rho);
-		R_Srcref = oldref;
-		endcontext(&cntxt);
-	    } else {
-		tmp = PRIMFUN(op) (e, op, tmp, rho);
-	    }
+            Evaluator::enableResultPrinting(flag != 1);
+            tmp = PRIMFUN(op) (e, op, CDR(e), rho);
 #ifdef CHECK_VISIBILITY
-	    if (flag < 2 && Evaluator::resultPrinted() == flag) {
-		const char *nm = PRIMNAME(op);
-		printf("vis: builtin %s\n", nm);
-	    }
+            if (flag < 2 && Evaluator::resultPrinted() == flag) {
+                const char *nm = PRIMNAME(op);
+                if (!streql(nm, "for")
+                    && !streql(nm, "repeat") && !streql(nm, "while")
+                    && !streql(nm, "[[<-") && !streql(nm, "on.exit"))
+                    printf("vis: special %s\n", nm);
+            }
 #endif
-	    if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
-	    UNPROTECT(1);
-	    check_stack_balance(op, save);
-	}
-	else if (TYPEOF(op) == CLOSXP) {
-	    GCStackRoot<> pargs;
-	    pargs = promiseArgs(CDR(e), rho);
-	    tmp = applyClosure(e, op, pargs, rho, R_NilValue, true);
-	}
-	else
-	    error("%s", _("attempt to apply non-function"));
-	UNPROTECT(1);
+            if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
+
+            check_stack_balance(op, save);
+        }
+        else if (TYPEOF(op) == BUILTINSXP) {
+            size_t save = R_PPStackTop;
+            int flag = PRIMPRINT(op);
+            CXXR::RAllocStack::Scope rscope;
+            tmp = evalList(CDR(e), rho, e, 0);
+            if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
+            /* We used to insert a context only if profiling,
+               but helps for tracebacks on .C etc. */
+            if (Evaluator::profiling() || (PPINFO(op).kind == PP_FOREIGN)) {
+                SEXP oldref = R_Srcref;
+                RCNTXT cntxt(CTXT_BUILTIN, e, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
+                R_Srcref = NULL;
+                tmp = PRIMFUN(op) (e, op, tmp, rho);
+                R_Srcref = oldref;
+                endcontext(&cntxt);
+            }
+            else {
+                tmp = PRIMFUN(op) (e, op, tmp, rho);
+            }
+#ifdef CHECK_VISIBILITY
+            if (flag < 2 && Evaluator::resultPrinted() == flag) {
+                const char *nm = PRIMNAME(op);
+                printf("vis: builtin %s\n", nm);
+            }
+#endif
+            if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
+
+            check_stack_balance(op, save);
+        }
+        else if (TYPEOF(op) == CLOSXP) {
+            GCStackRoot<> pargs;
+            pargs = promiseArgs(CDR(e), rho);
+            tmp = applyClosure(e, op, pargs, rho, R_NilValue, true);
+        }
+        else
+            error("%s", _("attempt to apply non-function"));
+
         return tmp;
     }
 
@@ -1869,14 +1864,15 @@ static R_INLINE bool jit_srcref_match(SEXP cmpsrcref, SEXP srcref)
 attribute_hidden SEXP R::R_cmpfun1(SEXP fun)
 {
     bool old_visible = Evaluator::resultPrinted();
-    SEXP packsym, funsym, call, fcall, val;
+    SEXP packsym, funsym;
+    GCStackRoot<> call, fcall, val;
 
     packsym = install("compiler");
     funsym = install("tryCmpfun");
 
-    PROTECT(fcall = lang3(R_TripleColonSymbol, packsym, funsym));
-    PROTECT(call = lang2(fcall, fun));
-    PROTECT(val = eval(call, R_GlobalEnv));
+    fcall = lang3(R_TripleColonSymbol, packsym, funsym);
+    call = lang2(fcall, fun);
+    val = eval(call, R_GlobalEnv);
     if (TYPEOF(BODY(val)) != BCODESXP)
 	/* Compilation may have failed because R allocator could not malloc
 	   memory to extend the R heap, so we run GC to release some pages.
@@ -1886,7 +1882,6 @@ attribute_hidden SEXP R::R_cmpfun1(SEXP fun)
 	   A more general solution might be to run the GC conditionally inside
 	   error handling. */
 	R_gc();
-    UNPROTECT(3); /* fcall, call, val */
 
     Evaluator::enableResultPrinting(old_visible);
     return val;
@@ -2464,10 +2459,10 @@ void Closure::DebugScope::endDebugging() const
     }
 }
 
-SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
+SEXP R_forceAndCall(SEXP expr, int n, SEXP rho)
 {
-    GCStackRoot<> fun;
-    SEXP tmp = R_NilValue;
+    GCStackRoot<> fun, e(expr);
+    GCStackRoot<> tmp(R_NilValue);
     if (TYPEOF(CAR(e)) == SYMSXP)
 	/* This will throw an error if the function is not found */
 	fun = findFun(CAR(e), rho);
@@ -2476,15 +2471,13 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 
     if (TYPEOF(fun) == SPECIALSXP) {
 	int flag = PRIMPRINT(fun);
-	PROTECT(e);
 	Evaluator::enableResultPrinting(flag != 1);
 	tmp = PRIMFUN(fun) (e, fun, CDR(e), rho);
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
-	UNPROTECT(1);
     }
     else if (TYPEOF(fun) == BUILTINSXP) {
 	int flag = PRIMPRINT(fun);
-	PROTECT(tmp = evalList(CDR(e), rho, e, 0));
+	tmp = evalList(CDR(e), rho, e, 0);
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	/* We used to insert a context only if profiling,
 	   but helps for tracebacks on .C etc. */
@@ -2500,10 +2493,9 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	    tmp = PRIMFUN(fun) (e, fun, tmp, rho);
 	}
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
-	UNPROTECT(1);
     }
     else if (TYPEOF(fun) == CLOSXP) {
-	PROTECT(tmp = promiseArgs(CDR(e), rho));
+	tmp = promiseArgs(CDR(e), rho);
 	int i = 0;
 	for (SEXP a = tmp; i < n && a != R_NilValue; a = CDR(a), i++) {
 	    SEXP p = CAR(a);
@@ -2515,7 +2507,6 @@ SEXP R_forceAndCall(SEXP e, int n, SEXP rho)
 	}
 	SEXP pargs = tmp;
 	tmp = applyClosure(e, fun, pargs, rho, R_NilValue, true);
-	UNPROTECT(1);
     }
     else {
 	error("%s", _("attempt to apply non-function"));
@@ -2543,11 +2534,12 @@ attribute_hidden SEXP do_forceAndCall(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* called from methods_list_dispatch.c */
 SEXP R::R_execMethod(SEXP op, SEXP rho)
 {
-    SEXP newrho, next, val;
+    SEXP next, val;
+    GCStackRoot<> newrho;
 
     /* create a new environment frame enclosed by the lexical
        environment of the method */
-    PROTECT(newrho = NewEnvironment(R_NilValue, R_NilValue, CLOENV(op)));
+    newrho = NewEnvironment(R_NilValue, R_NilValue, CLOENV(op));
 
     /* copy the bindings for the formal environment from the top frame
        of the internal environment of the generic call to the new
@@ -2620,7 +2612,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 #ifdef ADJUST_ENVIR_REFCNTS
     R_CleanupEnvir(newrho, val);
 #endif
-    UNPROTECT(1);
+
 #ifdef SUPPORT_TAILCALL
     if (is_exec_continuation(val))
 	error("'Exec' and 'Tailcall' are not supported in methods yet");
@@ -3666,8 +3658,8 @@ attribute_hidden SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 {
-    SEXP head, tail, ev, h, val;
-
+    SEXP tail, ev, val;
+    GCStackRoot<> head, h;
     head = R_NilValue;
     tail = R_NilValue; /* to prevent uninitialized variable warnings */
 
@@ -3683,16 +3675,14 @@ attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 	     *	the list of resulting values into the return value.
 	     * Anything else bound to a ... symbol is an error
 	     */
-	    PROTECT(h = R_findVar(CAR(el), rho));
+	    h = R_findVar(CAR(el), rho);
 	    if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 		while (h != R_NilValue) {
 		    val = eval(CAR(h), rho);
 		    INCREMENT_LINKS(val);
 		    ev = CONS_NR(val, R_NilValue);
 		    if (head == R_NilValue) {
-			UNPROTECT(1); /* h */
-			PROTECT(head = ev);
-			PROTECT(h); /* put current h on top of protect stack */
+			head = ev;
 		    }
 		    else
 			SETCDR(tail, ev);
@@ -3703,7 +3693,6 @@ attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 	    }
 	    else if (h != R_MissingArg)
 		error("%s", _("'...' used in an incorrect context"));
-	    UNPROTECT(1); /* h */
 	} else if (CAR(el) == R_MissingArg) {
 	    /* It was an empty element: most likely get here from evalArgs
 	       which may have been called on part of the args. */
@@ -3729,7 +3718,7 @@ attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 	    INCREMENT_LINKS(val);
 	    ev = CONS_NR(val, R_NilValue);
 	    if (head == R_NilValue)
-		PROTECT(head = ev);
+		head = ev;
 	    else
 		SETCDR(tail, ev);
 	    COPY_TAG(ev, el);
@@ -3741,9 +3730,6 @@ attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
     for (el = head; el != R_NilValue; el = CDR(el))
 	DECREMENT_LINKS(CAR(el));
 
-    if (head != R_NilValue)
-	UNPROTECT(1);
-
     return head;
 
 } /* evalList() */
@@ -3754,8 +3740,8 @@ attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 /* used in evalArgs, arithmetic.c, seq.c */
 attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 {
-    SEXP head, tail, ev, h, val;
-
+    SEXP tail, ev, val;
+    GCStackRoot<> head, h;
     head = R_NilValue;
     tail = R_NilValue; /* to prevent uninitialized variable warnings */
 
@@ -3770,7 +3756,7 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 	 * Anything else bound to a ... symbol is an error
 	*/
 	if (CAR(el) == R_DotsSymbol) {
-	    PROTECT(h = R_findVar(CAR(el), rho));
+	    h = R_findVar(CAR(el), rho);
 	    if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 		while (h != R_NilValue) {
 		    if (CAR(h) == R_MissingArg)
@@ -3780,9 +3766,7 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 		    INCREMENT_LINKS(val);
 		    ev = CONS_NR(val, R_NilValue);
 		    if (head == R_NilValue) {
-			UNPROTECT(1); /* h */
-			PROTECT(head = ev);
-			PROTECT(h);
+			head = ev;
 		    } else
 			SETCDR(tail, ev);
 		    COPY_TAG(ev, h);
@@ -3792,7 +3776,6 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 	    }
 	    else if (h != R_MissingArg)
 		error("%s", _("'...' used in an incorrect context"));
-	    UNPROTECT(1); /* h */
 	}
 	else {
 	    if (CAR(el) == R_MissingArg ||
@@ -3803,7 +3786,7 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 	    INCREMENT_LINKS(val);
 	    ev = CONS_NR(val, R_NilValue);
 	    if (head==R_NilValue)
-		PROTECT(head = ev);
+		head = ev;
 	    else
 		SETCDR(tail, ev);
 	    COPY_TAG(ev, el);
@@ -3814,9 +3797,6 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 
     for (el = head; el != R_NilValue; el = CDR(el))
 	DECREMENT_LINKS(CAR(el));
-
-    if (head!=R_NilValue)
-	UNPROTECT(1);
 
     return head;
 }
@@ -3829,9 +3809,9 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 
 attribute_hidden SEXP R::promiseArgs(SEXP el, SEXP rho)
 {
-    SEXP ans, h, tail;
-
-    PROTECT(ans = tail = CONS(R_NilValue, R_NilValue));
+    SEXP tail;
+    GCStackRoot<> ans, h;
+    ans = tail = CONS(R_NilValue, R_NilValue);
 
     while(el != R_NilValue) {
 
@@ -3849,7 +3829,7 @@ attribute_hidden SEXP R::promiseArgs(SEXP el, SEXP rho)
 	   the callee */
 
 	if (CAR(el) == R_DotsSymbol) {
-	    PROTECT(h = R_findVar(CAR(el), rho));
+	    h = R_findVar(CAR(el), rho);
 	    if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
 		while (h != R_NilValue) {
 		    if (CAR(h) == R_MissingArg)
@@ -3863,7 +3843,6 @@ attribute_hidden SEXP R::promiseArgs(SEXP el, SEXP rho)
 	    }
 	    else if (h != R_MissingArg)
 		error("%s", _("'...' used in an incorrect context"));
-	    UNPROTECT(1); /* h */
 	}
 	else if (CAR(el) == R_MissingArg) {
 	    SETCDR(tail, CONS(R_MissingArg, R_NilValue));
@@ -3877,7 +3856,6 @@ attribute_hidden SEXP R::promiseArgs(SEXP el, SEXP rho)
 	}
 	el = CDR(el);
     }
-    UNPROTECT(1);
     ans = CDR(ans);
     DECREMENT_REFCNT(ans);
     return ans;
@@ -4061,7 +4039,8 @@ attribute_hidden SEXP do_withVisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* This is a special .Internal */
 attribute_hidden SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP s, ans ;
+    GCStackRoot<> s;
+    SEXP ans;
     RCNTXT *cptr = R_GlobalContext;
     /* get the args supplied */
     while (cptr != NULL) {
@@ -4087,15 +4066,15 @@ attribute_hidden SEXP do_recall(SEXP call, SEXP op, SEXP args, SEXP rho)
        originally used to get it.
     */
     if (cptr->callfun != R_NilValue)
-	PROTECT(s = cptr->callfun);
+	s = cptr->callfun;
     else if (TYPEOF(CAR(cptr->call)) == SYMSXP)
-	PROTECT(s = findFun(CAR(cptr->call), cptr->sysparent));
+	s = findFun(CAR(cptr->call), cptr->sysparent);
     else
-	PROTECT(s = eval(CAR(cptr->call), cptr->sysparent));
+	s = eval(CAR(cptr->call), cptr->sysparent);
     if (TYPEOF(s) != CLOSXP)
 	error("%s", _("'Recall' called from outside a closure"));
     ans = applyClosure(cptr->call, s, args, cptr->sysparent, R_NilValue, true);
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -4854,6 +4833,7 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
     s->u.sxpval = value;
     return value;
 }
+
 #define GETSTACK_PTR(s) ((s)->tag ? GETSTACK_PTR_TAG(s) : (s)->u.sxpval)
 
 #define GETSTACK_SXPVAL_PTR(s) ((s)->u.sxpval)
@@ -5692,7 +5672,7 @@ static R_INLINE SEXP BINDING_VALUE(SEXP loc)
 	R_expand_binding_value(loc);
 	return CAR0(loc);
     }
-    else if (loc != R_NilValue && ! IS_ACTIVE_BINDING(loc))
+    else if (loc != R_NilValue && !IS_ACTIVE_BINDING(loc))
 	return CAR0(loc);
     else
 	return R_UnboundValue;
