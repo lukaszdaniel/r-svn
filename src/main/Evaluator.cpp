@@ -28,6 +28,8 @@
  */
 
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/WeakRef.hpp> // for R_RunPendingFinalizers
+#include <R_ext/Utils.h> // for R_CheckUserInterrupt
 #include <Defn.h> // for R_interrupts_suspended and R_interrupts_pending
 
 using namespace CXXR;
@@ -56,6 +58,17 @@ namespace CXXR
         {
             checkForUserInterrupts();
         }
+    }
+
+    void Evaluator::checkForUserInterrupts()
+    {
+        R_CheckUserInterrupt();
+#ifndef IMMEDIATE_FINALIZERS
+        /* finalizers are run here since this should only be called at
+           points where running arbitrary code should be safe */
+        R_RunPendingFinalizers();
+#endif
+        s_countdown = s_countdown_start;
     }
 
     void Evaluator::enableResultPrinting(bool on)

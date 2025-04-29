@@ -34,6 +34,8 @@
 #include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
 
+// #define IMMEDIATE_FINALIZERS
+
 extern "C"
 {
     using R_CFinalizer_t = void (*)(SEXP);

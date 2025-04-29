@@ -1095,17 +1095,6 @@ static void handle_eval_depth_overflow(void)
     R_signalErrorCondition(cond, R_NilValue);
 }
 
-void Evaluator::checkForUserInterrupts()
-{
-	R_CheckUserInterrupt();
-#ifndef IMMEDIATE_FINALIZERS
-	/* finalizers are run here since this should only be called at
-	   points where running arbitrary code should be safe */
-	R_RunPendingFinalizers();
-#endif
-	s_countdown = s_countdown_start;
-}
-
 namespace
 {
     SEXP ByteCode_evaluate(SEXP e, SEXP rho)
