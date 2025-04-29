@@ -494,7 +494,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
     }
 #elif defined(HAVE_PTHREAD)
     if (R_Profiling_Event == RPE_CPU) {
-	if (! pthread_equal(pthread_self(), R_profiled_thread)) {
+	if (!pthread_equal(pthread_self(), R_profiled_thread)) {
 	    pthread_kill(R_profiled_thread, sig);
 	    errno = old_errno;
 	    return;
@@ -1282,11 +1282,11 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
 
     if (TYPEOF(e) != PROMSXP) // non-environment check only matters for non-Promise objects
     {
-    if (!rho)
-	error("'rho' cannot be C NULL: detected in C-level eval");
-    if (!isEnvironment(rho))
-	error("'rho' must be an environment not %s: detected in C-level eval",
-	      R_typeToChar(rho));
+        if (!rho)
+            error("'rho' cannot be C NULL: detected in C-level eval");
+        if (!isEnvironment(rho))
+            error("'rho' must be an environment not %s: detected in C-level eval",
+                R_typeToChar(rho));
     }
 
     /* Save the current srcref context. */
@@ -1306,7 +1306,7 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
        fpu.
      */
 # if (defined(__i386) || defined(__x86_64))
-    __asm__ ( "fninit" );
+    __asm__("fninit");
 # elif defined(__aarch64__)
     __asm__ volatile("msr fpcr, %0" : : "r"(0LL));
 # else
@@ -1317,7 +1317,7 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
     switch (TYPEOF(e)) {
     case BCODESXP:
     {
-	tmp = ByteCode_evaluate(e, rho);
+        tmp = ByteCode_evaluate(e, rho);
     }
     break;
     case SYMSXP:
@@ -1341,7 +1341,7 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
     }
     break;
     default:
-	UNIMPLEMENTED_TYPE("eval", e);
+        UNIMPLEMENTED_TYPE("eval", e);
     }
 
     R_Srcref = srcrefsave;
@@ -1648,7 +1648,7 @@ static R_INLINE bool R_CheckJIT(SEXP fun)
     SEXP body = BODY(fun);
 
     if (R_jit_enabled > 0 && TYPEOF(body) != BCODESXP &&
-	ByteCode::ByteCodeEnabled() && ! NOJIT(fun)) {
+	ByteCode::ByteCodeEnabled() && !NOJIT(fun)) {
 
 	if (MAYBEJIT(fun)) {
 	    /* function marked as MAYBEJIT the first time now seen
@@ -1704,8 +1704,8 @@ static R_INLINE bool R_CheckJIT(SEXP fun)
 /* FIXME: this should not depend on internals from envir.c but does for now. */
 /* copied from envir.c for now */
 #define IS_USER_DATABASE(rho)  (OBJECT((rho)) && inherits((rho), "UserDefinedDatabase"))
-#define IS_STANDARD_UNHASHED_FRAME(e) (! IS_USER_DATABASE(e) && HASHTAB(e) == R_NilValue)
-#define IS_STANDARD_HASHED_FRAME(e) (! IS_USER_DATABASE(e) && HASHTAB(e) != R_NilValue)
+#define IS_STANDARD_UNHASHED_FRAME(e) (!IS_USER_DATABASE(e) && HASHTAB(e) == R_NilValue)
+#define IS_STANDARD_HASHED_FRAME(e) (!IS_USER_DATABASE(e) && HASHTAB(e) != R_NilValue)
 
 /* This makes a snapshot of the local variables in cmpenv and creates
    a new environment with the same top level environment and bindings
@@ -1852,7 +1852,7 @@ static R_INLINE bool jit_env_match(SEXP cmpenv, SEXP fun)
 
     if (top == cmpenv_topenv(cmpenv)) {
 	for (SEXP frmls = FORMALS(fun); frmls != R_NilValue; frmls = CDR(frmls))
-	    if (! cmpenv_exists_local(TAG(frmls), cmpenv, top))
+	    if (!cmpenv_exists_local(TAG(frmls), cmpenv, top))
 		return false;
 	for (; env != top; env = ENCLOS(env)) {
 	    if (IS_STANDARD_UNHASHED_FRAME(env)) {
@@ -1862,7 +1862,7 @@ static R_INLINE bool jit_env_match(SEXP cmpenv, SEXP fun)
 		for (SEXP frame = FRAME(env);
 		     frame != R_NilValue;
 		     frame = CDR(frame))
-		    if (! cmpenv_exists_local(TAG(frame), cmpenv, top))
+		    if (!cmpenv_exists_local(TAG(frame), cmpenv, top))
 			return false;
 	    }
 	    else return false;
@@ -2282,9 +2282,6 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
 static SEXP make_applyClosure_env(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 				  SEXP suppliedvars)
 {
-    SEXP formals, actuals, savedrho, newrho;
-    SEXP f, a;
-
     /* formals = list of formal parameters */
     /* actuals = values to be bound to formals */
     /* arglist = the tagged list of arguments */
@@ -2298,8 +2295,8 @@ static SEXP make_applyClosure_env(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 	errorcall(call, _("'rho' must be an environment not %s: detected in C-level applyClosure"),
 		  R_typeToChar(rho));
 
-    formals = FORMALS(op);
-    savedrho = CLOENV(op);
+    SEXP formals = FORMALS(op);
+    SEXP savedrho = CLOENV(op);
 
     /*  Build a list which matches the actual (unevaluated) arguments
 	to the formal paramters.  Build a new environment which
@@ -2307,8 +2304,9 @@ static SEXP make_applyClosure_env(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 	result becomes part of the environment frame and so needs
 	reference couting enabled. */
 
-    actuals = matchArgs_RC(formals, arglist, call);
-    PROTECT(newrho = NewEnvironment(formals, actuals, savedrho));
+    SEXP actuals = matchArgs_RC(formals, arglist, call);
+    GCStackRoot<> newrho;
+    newrho = NewEnvironment(formals, actuals, savedrho);
 
     /*  Use the default code for unbound formals.  FIXME: It looks like
 	this code should preceed the building of the environment so that
@@ -2322,8 +2320,8 @@ static SEXP make_applyClosure_env(SEXP call, SEXP op, SEXP arglist, SEXP rho,
        environment layout.  We can live with it for now since it only
        happens immediately after the environment creation.  LT */
 
-    f = formals;
-    a = actuals;
+    SEXP f = formals;
+    SEXP a = actuals;
     while (f != R_NilValue) {
 	if (CAR(a) == R_MissingArg && CAR(f) != R_MissingArg) {
 	    SETCAR(a, mkPROMISE(CAR(f), newrho));
@@ -2341,7 +2339,6 @@ static SEXP make_applyClosure_env(SEXP call, SEXP op, SEXP arglist, SEXP rho,
     if (R_envHasNoSpecialSymbols(newrho))
 	SET_NO_SPECIAL_SYMBOLS(newrho);
 
-    UNPROTECT(1); /* newrho */
     return newrho;
 }
 
@@ -2349,8 +2346,8 @@ static SEXP make_applyClosure_env(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 			      SEXP suppliedvars, bool unpromise)
 {
-    SEXP newrho = make_applyClosure_env(call, op, arglist, rho, suppliedvars);
-    PROTECT(newrho);
+    GCStackRoot<> newrho;
+    newrho = make_applyClosure_env(call, op, arglist, rho, suppliedvars);
 
     /*  If we have a generic function we need to use the sysparent of
 	the generic as the sysparent of the method because the method
@@ -2362,7 +2359,7 @@ static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 			     rho, arglist, op);
 #ifdef ADJUST_ENVIR_REFCNTS
     bool is_getter_call =
-	(CADR(call) == R_TmpvalSymbol && ! R_isReplaceSymbol(CAR(call)));
+	(CADR(call) == R_TmpvalSymbol && !R_isReplaceSymbol(CAR(call)));
     R_CleanupEnvir(newrho, val);
     if (is_getter_call && MAYBE_REFERENCED(val))
     	val = shallow_duplicate(val);
@@ -2370,7 +2367,6 @@ static SEXP applyClosure_core(SEXP call, SEXP op, SEXP arglist, SEXP rho,
 	unpromiseArgs(arglist);
 #endif
 
-    UNPROTECT(1); /* newrho */
     return val;
 }
 
@@ -2455,7 +2451,7 @@ void Closure::DebugScope::startDebugging() const
 
     SET_RSTEP(m_closure, 0);
     SET_ENV_RDEBUG(newrho, 1);
-    cntxt->browserfinish = 0; // Don't want to inherit the "f"
+    cntxt->browserfinish = false; // Don't want to inherit the "f"
     // switch to interpreted version when debugging compiled code
     if (ByteCode::isA(body))
         body = bytecodeExpr(body);
@@ -2713,7 +2709,7 @@ static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call)
     if (IS_SCALAR(s, LGLSXP)) {
 	cond = SCALAR_LVAL(s);
 	if (cond != NA_LOGICAL)
-	    return (Rboolean) cond;
+	    return cond;
     }
     else if (IS_SCALAR(s, INTSXP)) {
 	int val = SCALAR_IVAL(s);
@@ -2768,7 +2764,7 @@ attribute_hidden SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     GCStackRoot<> Cond;
     SEXP Stmt = R_NilValue;
-    int vis=0;
+    bool vis = false;
 
     Cond = eval(CAR(args), rho);
     if (asLogicalNoNA2(Cond, call))
@@ -2777,7 +2773,7 @@ attribute_hidden SEXP do_if(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (length(args) > 2)
 	    Stmt = CADDR(args);
 	else
-	    vis = 1;
+	    vis = true;
     }
     if (!vis && ENV_RDEBUG(rho) && !BodyHasBraces(Stmt) && !R_GlobalContext->browserfinish) {
 	SrcrefPrompt("debug", R_Srcref);
@@ -2800,7 +2796,7 @@ static R_INLINE SEXP GET_BINDING_CELL(SEXP symbol, SEXP rho)
 	return R_NilValue;
     else {
 	R_varloc_t loc = R_findVarLocInFrame(rho, symbol);
-	return (! R_VARLOC_IS_NULL(loc) && ! IS_ACTIVE_BINDING(loc.cell)) ?
+	return (!R_VARLOC_IS_NULL(loc) && !IS_ACTIVE_BINDING(loc.cell)) ?
 	    loc.cell : R_NilValue;
     }
 }
@@ -4444,8 +4440,8 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
        of the first two is an object -- both of these cases would be
        rejected by the code following the string examination code
        below */
-    if (args != R_NilValue && ! isObject(CAR(args)) &&
-	(CDR(args) == R_NilValue || ! isObject(CADR(args))))
+    if (args != R_NilValue && !isObject(CAR(args)) &&
+	(CDR(args) == R_NilValue || !isObject(CADR(args))))
 	return std::pair<bool, RObject *>(false, nullptr);
 
     bool isOps = (streql(group, "Ops") || streql(group, "matrixOps"));
@@ -5022,14 +5018,14 @@ static R_INLINE R_bcstack_t *bcStackScalarReal(R_bcstack_t *s, R_bcstack_t *v)
 	R_bcstack_t vvx, vvy;						\
 	R_bcstack_t *vx = bcStackScalar(R_BCNodeStackTop - 2, &vvx);	\
 	R_bcstack_t *vy = bcStackScalar(R_BCNodeStackTop - 1, &vvy);	\
-	if (vx->tag == REALSXP && ! ISNAN(vx->u.dval)) {		\
-	    if (vy->tag == REALSXP && ! ISNAN(vy->u.dval))		\
+	if (vx->tag == REALSXP && !ISNAN(vx->u.dval)) {			\
+	    if (vy->tag == REALSXP && !ISNAN(vy->u.dval))		\
 		DO_FAST_RELOP2(op, vx->u.dval, vy->u.dval);		\
 	    else if (vy->tag == INTSXP && vy->u.ival != NA_INTEGER)	\
 		DO_FAST_RELOP2(op, vx->u.dval, vy->u.ival);		\
 	}								\
 	else if (vx->tag == INTSXP && vx->u.ival != NA_INTEGER) {	\
-	    if (vy->tag == REALSXP && ! ISNAN(vy->u.dval))		\
+	    if (vy->tag == REALSXP && !ISNAN(vy->u.dval))		\
 		DO_FAST_RELOP2(op, vx->u.ival, vy->u.dval);		\
 	    else if (vy->tag == INTSXP && vy->u.ival != NA_INTEGER) {	\
 		DO_FAST_RELOP2(op, vx->u.ival, vy->u.ival);		\
@@ -5428,7 +5424,7 @@ static R_INLINE double (*getMath1Fun(int i, SEXP call))(double) {
 
 #define DO_SEQ_ALONG() do {					\
 	SEXP x = GETSTACK(-1);					\
-	if (! OBJECT(x)) {					\
+	if (!OBJECT(x)) {					\
 	    R_xlen_t len = xlength(x);				\
 	    if (len >= 1 && len <= INT_MAX) {			\
 		SKIP_OP(); /* skip 'call' index */		\
@@ -5680,7 +5676,7 @@ typedef int BCODE;
 #define BNDCELL_TAG_WR(v) (BINDING_IS_LOCKED(v) ? NILSXP : BNDCELL_TAG(v))
 
 #define BNDCELL_WRITABLE(v)						\
-    (v != R_NilValue &&	 ! BINDING_IS_LOCKED(v) && ! IS_ACTIVE_BINDING(v))
+    (v != R_NilValue &&	 !BINDING_IS_LOCKED(v) && !IS_ACTIVE_BINDING(v))
 #define BNDCELL_UNBOUND(v) (BNDCELL_TAG(v) == NILSXP && CAR0(v) == R_UnboundValue)
 
 static R_INLINE void NEW_BNDCELL_DVAL(SEXP cell, double dval)
@@ -5809,7 +5805,7 @@ static R_INLINE SEXP GET_BINDING_CELL_CACHE(SEXP symbol, SEXP rho,
        binding cell or R_NilValue.  TAG(R_NilValue) is R_NilValue, and
        that will not equal symbol. So a separate test for cell !=
        R_NilValue is not needed. */
-    if (TAG(cell) == symbol && ! BNDCELL_UNBOUND(cell))
+    if (TAG(cell) == symbol && !BNDCELL_UNBOUND(cell))
 	return cell;
     else {
 	SEXP ncell = GET_BINDING_CELL(symbol, rho);
@@ -5980,7 +5976,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 	case PROMSXP:							\
 	    break;							\
 	default:							\
-	    if (cell != R_NilValue && ! IS_ACTIVE_BINDING(cell)) {	\
+	    if (cell != R_NilValue && !IS_ACTIVE_BINDING(cell)) {	\
 		BCNPUSH(value);						\
 		NEXT();							\
 	    }								\
@@ -5988,8 +5984,8 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
     }									\
     SEXP symbol = GETCONST(constants, sidx);				\
     SEXP value = findVarEX(symbol, rho, dd, vcache, sidx);		\
-    if (! keepmiss && TYPEOF(value) == PROMSXP &&			\
-	! PRSEEN(value) && ! PROMISE_IS_EVALUATED(value) &&		\
+    if (!keepmiss && TYPEOF(value) == PROMSXP &&			\
+	!PRSEEN(value) && !PROMISE_IS_EVALUATED(value) &&		\
 	TYPEOF(PRCODE(value)) == BCODESXP) {				\
 	START_BCFRAME_PROM(value);					\
 	NEXT();								\
@@ -6134,7 +6130,7 @@ static bool tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *
   R_CleanupEnvir(rho1, dispatched ? *pv : R_NilValue);
   unpromiseArgs(pargs);
 #else
-  if (! dispatched) DECREMENT_REFCNT(x);
+  if (!dispatched) DECREMENT_REFCNT(x);
 #endif
   return dispatched;
 }
@@ -6276,7 +6272,7 @@ static bool tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs
   Evaluator::enableResultPrinting(true); \
   NEXT(); \
 } while (0)
-#define isNumericOnly(x) (isNumeric(x) && ! isLogical(x))
+#define isNumericOnly(x) (isNumeric(x) && !isLogical(x))
 
 #ifdef BC_PROFILING
 #define NO_CURRENT_OPCODE -1
@@ -6345,7 +6341,7 @@ static R_INLINE R_xlen_t bcStackIndex(R_bcstack_t *s)
     case REALSXP:
 	{
 	    double val = s->u.dval;
-	    if (! ISNAN(val) && val <= R_XLEN_T_MAX && val > 0)
+	    if (!ISNAN(val) && val <= R_XLEN_T_MAX && val > 0)
 		return (R_xlen_t) s->u.dval;
 	    else return -1;
 	}
@@ -6362,7 +6358,7 @@ static R_INLINE R_xlen_t bcStackIndex(R_bcstack_t *s)
     }
     else if (IS_SCALAR(idx, REALSXP)) {
 	double val = SCALAR_DVAL(idx);
-	if (! ISNAN(val) && val <= R_XLEN_T_MAX && val > 0)
+	if (!ISNAN(val) && val <= R_XLEN_T_MAX && val > 0)
 	    return (R_xlen_t) val;
 	else return -1;
     }
@@ -7468,7 +7464,7 @@ static R_INLINE void finish_force_promise(void)
 SEXP ByteCode::interpret(SEXP body, SEXP rho, bool useCache)
 {
   /* check version and allow bytecode to be disabled for testing */
-  if (ByteCode::ByteCodeDisabled() || ! R_BCVersionOK(body))
+  if (ByteCode::ByteCodeDisabled() || !R_BCVersionOK(body))
       return eval(bytecodeExpr(body), rho);
 
   struct bcEval_globals globals;
@@ -7536,7 +7532,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	bool cond = GETSTACK_LOGICAL_NO_NA_PTR(R_BCNodeStackTop - 1,
 						   callidx, constants, rho);
 	BCNPOP_IGNORE_VALUE();
-	if (! cond) {
+	if (!cond) {
 	    BC_CHECK_SIGINT(); /**** only on back branch?*/
 	    pc = codebase + label;
 	}
@@ -7822,7 +7818,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 
 	SEXP value = GETSTACK(-1);
 	INCREMENT_NAMED(value);
-	if (! SET_BINDING_VALUE(loc, value)) {
+	if (!SET_BINDING_VALUE(loc, value)) {
 	    SEXP symbol = GETCONST(constants, sidx);
 	    PROTECT(value);
 	    defineVar(symbol, value, rho);
@@ -8162,7 +8158,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	    }
 	}
 	INCREMENT_NAMED(value);
-	if (! SET_BINDING_VALUE(cell, value))
+	if (!SET_BINDING_VALUE(cell, value))
 	    defineVar(symbol, value, rho);
 	CXXR_POP(2); /* now pop cell and LHS value off the stack */
 	/* original right-hand side value is now on top of stack again */
@@ -8238,7 +8234,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	    dispatched = tryDispatch("$<-", ncall, x, rho, &value);
 	    UNPROTECT(1);
 	}
-	if (! dispatched)
+	if (!dispatched)
 	  value = R_subassign3_dflt(call, x, symbol, rhs);
 	CXXR_POP(1);
 	SETSTACK(-1, value);
@@ -8248,7 +8244,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
     OP(ISLOGICAL, 0): DO_ISTYPE(LGLSXP);
     OP(ISINTEGER, 0): {
 	SEXP arg = GETSTACK(-1);
-	bool test = ((TYPEOF(arg) == INTSXP) && ! inherits(arg, "factor"));
+	bool test = ((TYPEOF(arg) == INTSXP) && !inherits(arg, "factor"));
 	SETSTACK(-1, test ? R_TrueValue : R_FalseValue);
 	Evaluator::enableResultPrinting(true);
 	NEXT();
@@ -8993,7 +8989,7 @@ attribute_hidden SEXP do_disassemble(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
   checkArity(op, args);
   SEXP code = CAR(args);
-  if (! isByteCode(code))
+  if (!isByteCode(code))
     error("%s", _("argument is not a byte code object"));
   return disassemble(code);
 }
@@ -9045,7 +9041,7 @@ FILE *R_OpenCompiledFile(char *fname, char *buf, size_t bsize)
 
     if (cname != NULL && R_FileExists(cname) &&
 	(streql(fname, cname) ||
-	 ! R_FileExists(fname) ||
+	 !R_FileExists(fname) ||
 	 R_FileMtime(cname) > R_FileMtime(fname)))
 	/* the compiled file cname exists, and either fname does not
 	   exist, or it is the same as cname, or both exist and cname
