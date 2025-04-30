@@ -6066,11 +6066,11 @@ static R_INLINE SEXP CLOSURE_CALL_FRAME_ARGS(void)
 
 static bool tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *pv)
 {
-  SEXP pargs, rho1;
+  GCStackRoot<> pargs, rho1;
   bool dispatched = false;
   SEXP op = SYMVALUE(install(generic)); /**** avoid this */
 
-  PROTECT(pargs = promiseArgs(CDR(call), rho));
+  pargs = promiseArgs(CDR(call), rho);
   IF_PROMSXP_SET_PRVALUE(CAR(pargs), x);
 
   /**** Minimal hack to try to handle the S4 case.  If we do the check
@@ -6081,20 +6081,19 @@ static bool tryDispatch(const char *generic, SEXP call, SEXP x, SEXP rho, SEXP *
     auto val = R_possible_dispatch(call, op, pargs, rho, true);
     if (val.first) {
       *pv = val.second;
-      UNPROTECT(1);
       return true;
     }
   }
 
   /* See comment at first usemethod() call in this file. LT */
-  PROTECT(rho1 = NewEnvironment(R_NilValue, R_NilValue, rho));
+  rho1 = NewEnvironment(R_NilValue, R_NilValue, rho);
   {
   RCNTXT cntxt(CTXT_RETURN, call, rho1, rho, pargs, op);
   if (usemethod(generic, x, call, pargs, rho1, rho, R_BaseEnv, pv))
     dispatched = true;
   endcontext(&cntxt);
   }
-  UNPROTECT(2);
+
 #ifdef ADJUST_ENVIR_REFCNTS
   R_CleanupEnvir(rho1, dispatched ? *pv : R_NilValue);
   unpromiseArgs(pargs);
@@ -6108,16 +6107,17 @@ static bool tryAssignDispatch(const char *generic, SEXP call, SEXP lhs, SEXP rhs
 			     SEXP rho, SEXP *pv)
 {
     bool result;
-    SEXP ncall, last, prom;
+    SEXP last, prom;
+    GCStackRoot<> ncall;
 
-    PROTECT(ncall = duplicate(call));
+    ncall = duplicate(call);
     last = ncall;
     while (CDR(last) != R_NilValue)
 	last = CDR(last);
     prom = mkRHSPROMISE(CAR(last), rhs);
     SETCAR(last, prom);
     result = tryDispatch(generic, ncall, lhs, rho, pv);
-    UNPROTECT(1);
+
     return result;
 }
 
