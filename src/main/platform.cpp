@@ -2055,7 +2055,7 @@ void R_CleanTempDir(void)
 attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  fn;
-    int i, j, nfiles, res, failures = 0;
+    int nfiles, res, failures = 0;
     const wchar_t *names;
     wglob_t globbuf;
 
@@ -2068,18 +2068,18 @@ attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 	bool recursive = asLogicalNoNA(CADR(args), "recursive");
 	bool force = asLogicalNoNA(CADDR(args), "force");
 	bool expand = asLogicalNoNA(CADDDR(args), "expand");
-	for (i = 0; i < nfiles; i++) {
+	for (int i = 0; i < nfiles; i++) {
 	    if (STRING_ELT(fn, i) != NA_STRING) {
 		/* FIXME: does not convert encodings, currently matching
 		          filenameToWchar */
 		if (streql(CHAR(STRING_ELT(fn, i)),"~"))
 		    continue;
-		names = filenameToWchar(STRING_ELT(fn, i), expand ? TRUE : FALSE);
+		names = filenameToWchar(STRING_ELT(fn, i), expand);
 		if (expand) {
 		    res = dos_wglob(names, GLOB_NOCHECK, NULL, &globbuf);
 		    if (res == GLOB_NOSPACE)
 			error("%s", _("internal out-of-memory condition"));
-		    for (j = 0; j < globbuf.gl_pathc; j++)
+		    for (int j = 0; j < globbuf.gl_pathc; j++)
 			failures += R_unlink(globbuf.gl_pathv[j], recursive,
 			                     force);
 		    dos_wglobfree(&globbuf);

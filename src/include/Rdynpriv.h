@@ -101,7 +101,7 @@ struct _DllInfo {
     char  *path;
     char  *name;
     HINSTANCE handle;
-    Rboolean useDynamicLookup; /* Flag indicating whether we use both
+    bool useDynamicLookup; /* Flag indicating whether we use both
 				  registered and dynamic lookup (TRUE)
 				  or just registered values if there
 				  are any. */
@@ -117,7 +117,7 @@ struct _DllInfo {
     int numExternalSymbols;
     Rf_DotExternalSymbol *ExternalSymbols;
 
-    Rboolean forceSymbols;
+    bool forceSymbols;
 };
 
 

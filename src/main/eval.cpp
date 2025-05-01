@@ -4880,7 +4880,7 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 	if (__v__ == NA_LOGICAL)		\
 	    (s)->u.lval = NA_LOGICAL;		\
 	else					\
-	    (s)->u.lval = __v__ ? TRUE : FALSE;	\
+	    (s)->u.lval = __v__;	\
     } while (0)
 
 #define IS_STACKVAL_BOXED(idx)	(R_BCNodeStackTop[idx].tag == NILSXP)

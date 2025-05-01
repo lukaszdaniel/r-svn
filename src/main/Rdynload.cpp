@@ -93,6 +93,7 @@
 #include <memory>
 #include <cstring>
 #include <cstdlib>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -138,6 +139,7 @@ static int CountDLL = 0;
 #undef FALSE
 
 using namespace R;
+using namespace CXXR;
 
 /* Allocated in initLoadedDLL at R session start. Never free'd */
 static DllInfo** LoadedDLL = NULL;
@@ -294,17 +296,17 @@ DllInfo *R_getEmbeddingDllInfo(void)
 // API, in header R_ext/Rdynload.h
 Rboolean R_useDynamicSymbols(DllInfo *info, Rboolean value)
 {
-    Rboolean old = info->useDynamicLookup;
+    bool old = info->useDynamicLookup;
     info->useDynamicLookup = value;
-    return old;
+    return Rboolean(old);
 }
 
 // API, in header R_ext/Rdynload.h
 Rboolean R_forceSymbols(DllInfo *info, Rboolean value)
 {
-    Rboolean old = info->forceSymbols;
+    bool old = info->forceSymbols;
     info->forceSymbols = value;
-    return old;
+    return Rboolean(old);
 }
 
 static void R_addCRoutine(DllInfo *info, const R_CMethodDef * const croutine,
@@ -368,8 +370,8 @@ int R_registerRoutines(DllInfo *info, const R_CMethodDef * const croutines,
        Potentially change in the future to be only registered
        if there are any registered values.
     */
-    info->useDynamicLookup = (info->handle) ? TRUE : FALSE;
-    info->forceSymbols = FALSE;
+    info->useDynamicLookup = (info->handle);
+    info->forceSymbols = false;
 
     if(croutines) {
 	for(num = 0; croutines[num].name != NULL; num++) {;}
@@ -916,8 +918,8 @@ static DllInfo *R_RegisterDLL(HINSTANCE handle, const char *path)
 	/* default is to use old-style dynamic lookup.  The object's
 	   initialization routine can limit access by setting this to FALSE.
 	*/
-	info->useDynamicLookup = TRUE;
-	info->forceSymbols = FALSE;
+	info->useDynamicLookup = true;
+	info->forceSymbols = false;
 	return info;
     } else
 	/* dpath freed in addDLL */
@@ -1081,10 +1083,10 @@ attribute_hidden DL_FUNC R_dlsym(DllInfo *info, char const *name,
     DL_FUNC f;
 
     f = R_getDLLRegisteredSymbol(info, name, symbol);
-    if(f) return f;
+    if (f) return f;
 
 
-    if(info->useDynamicLookup == FALSE) return NULL;
+    if (info->useDynamicLookup == false) return NULL;
 
 #ifdef HAVE_NO_SYMBOL_UNDERSCORE
     snprintf(buf, len, "%s", name);
@@ -1128,7 +1130,8 @@ DL_FUNC R_FindSymbol(char const *name, char const *pkg,
 		     R_RegisteredNativeSymbol *symbol)
 {
     DL_FUNC fcnptr = (DL_FUNC) NULL;
-    int all = (strlen(pkg) == 0), doit;
+    bool all = (strlen(pkg) == 0);
+    int doit;
 
     if(R_osDynSymbol->lookupCachedSymbol) {
 	DllInfo *dll = NULL;
@@ -1280,13 +1283,13 @@ bool R::R_cairoCdynload(int local, int now)
  */
 static SEXP Rf_MakeNativeSymbolRef(DL_FUNC f)
 {
-    SEXP ref, klass;
+    GCStackRoot<> ref, klass;
 
-    PROTECT(ref = R_MakeExternalPtrFn(f, install("native symbol"),
-				      R_NilValue));
-    PROTECT(klass = mkString("NativeSymbol"));
+    ref = R_MakeExternalPtrFn(f, install("native symbol"),
+				      R_NilValue);
+    klass = mkString("NativeSymbol");
     setAttrib(ref, R_ClassSymbol, klass);
-    UNPROTECT(2);
+
     return ref;
 }
 
@@ -1300,7 +1303,7 @@ static void freeRegisteredNativeSymbolCopy(SEXP ref)
 
 static SEXP Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
 {
-    SEXP ref, klass;
+    GCStackRoot<> ref, klass;
     R_RegisteredNativeSymbol *copy;
     copy = (R_RegisteredNativeSymbol *) malloc(1 * sizeof(R_RegisteredNativeSymbol));
     if(!copy) {
@@ -1311,34 +1314,32 @@ static SEXP Rf_MakeRegisteredNativeSymbol(R_RegisteredNativeSymbol *symbol)
     }
     *copy = *symbol;
 
-    PROTECT(ref = R_MakeExternalPtr(copy,
+    ref = R_MakeExternalPtr(copy,
 				    install("registered native symbol"),
-				    R_NilValue));
+				    R_NilValue);
     R_RegisterCFinalizer(ref, freeRegisteredNativeSymbolCopy);
 
-    PROTECT(klass = mkString("RegisteredNativeSymbol"));
+    klass = mkString("RegisteredNativeSymbol");
     setAttrib(ref, R_ClassSymbol, klass);
 
-    UNPROTECT(2);
     return ref;
 }
 
 
 static SEXP Rf_makeDllObject(HINSTANCE inst)
 {
-    SEXP ans;
+    GCStackRoot<> ans;
 
-    PROTECT(ans = R_MakeExternalPtr(inst, install("DLLHandle"),
-				    R_NilValue));
+    ans = R_MakeExternalPtr(inst, install("DLLHandle"),
+				    R_NilValue);
     setAttrib(ans, R_ClassSymbol, mkString("DLLHandle"));
-    UNPROTECT(1);
 
     return ans;
 }
 
 static SEXP Rf_makeDllInfoReference(DllInfo *info)
 {
-    SEXP ans;
+    GCStackRoot<> ans;
 
     int i = R_getDllIndex(info);
     if (i >= 0) {
@@ -1347,12 +1348,11 @@ static SEXP Rf_makeDllInfoReference(DllInfo *info)
 	    return ans;
     }
 
-    PROTECT(ans = R_MakeExternalPtr((HINSTANCE) info, install("DLLInfo"),
-				    R_NilValue));
+    ans = R_MakeExternalPtr((HINSTANCE) info, install("DLLInfo"),
+				    R_NilValue);
     setAttrib(ans, R_ClassSymbol, mkString("DLLInfoReference"));
     if (i >= 0)
 	SET_VECTOR_ELT(DLLInfoEptrs, i, ans);
-    UNPROTECT(1);
 
     return ans;
 }
