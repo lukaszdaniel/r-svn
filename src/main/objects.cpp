@@ -1508,18 +1508,19 @@ SEXP R::do_set_prim_method(SEXP op, const char *code_string, SEXP fundef,
 
 static SEXP get_primitive_methods(SEXP op, SEXP rho)
 {
-    SEXP f, e, val;
-    int nprotect = 0;
-    f = PROTECT(allocVector(STRSXP, 1));  nprotect++;
+    GCStackRoot<> f, e;
+    SEXP val;
+
+    f = allocVector(STRSXP, 1);
     SET_STRING_ELT(f, 0, mkChar(PRIMNAME(op)));
-    PROTECT(e = allocVector(LANGSXP, 2)); nprotect++;
+    e = allocVector(LANGSXP, 2);
     SETCAR(e, install("getGeneric"));
     val = CDR(e); SETCAR(val, f);
     val = eval(e, rho);
     /* a rough sanity check that this looks like a generic function */
     if(TYPEOF(val) != CLOSXP || !IS_S4_OBJECT(val))
 	error(_("object returned as generic function \"%s\" does not appear to be one"), PRIMNAME(op));
-    UNPROTECT(nprotect);
+
     return CLOENV(val);
 }
 
@@ -1533,17 +1534,17 @@ static SEXP get_this_generic(SEXP args)
     static SEXP gen_name = NULL;
 
     /* a second argument to the call, if any, is taken as the function */
-    if(CDR(args) != R_NilValue)
+    if (CDR(args) != R_NilValue)
 	return CAR(CDR(args));
-    if(!gen_name)
+    if (!gen_name)
 	gen_name = install("generic");
     SEXP fname = STRING_ELT(CAR(args), 0); /* type and length checked by caller */
 
     /* check for a matching "generic" slot */
     for (RCNTXT *cptr = R_GlobalContext; cptr != NULL; cptr = cptr->nextcontext)
-	if((cptr->callflag & CTXT_FUNCTION) && isObject(cptr->callfun)) {
+	if ((cptr->callflag & CTXT_FUNCTION) && isObject(cptr->callfun)) {
 	    SEXP generic = getAttrib(cptr->callfun, gen_name);
-	    if(isValidString(generic) && Seql(fname, STRING_ELT(generic, 0)))
+	    if (isValidString(generic) && Seql(fname, STRING_ELT(generic, 0)))
 		/* not duplicating/marking immutable, used read-only */
 		return cptr->callfun;
 	}
@@ -1600,18 +1601,17 @@ attribute_hidden
 std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP rho,
 		    bool promisedArgs)
 {
-    SEXP fundef, value, s, a, b, suppliedvars;
+    SEXP fundef, value, a, b;
+    GCStackRoot<> s, suppliedvars;
     GCStackRoot<> mlist(R_NilValue);
-    int offset;
-    prim_methods_t current;
-    offset = PRIMOFFSET(op);
-    if(offset < 0 || offset > curMaxOffset)
+    int offset = PRIMOFFSET(op);
+    if (offset < 0 || offset > curMaxOffset)
 	error("%s", _("invalid primitive operation given for dispatch"));
-    current = prim_methods[offset];
-    if(current == NO_METHODS || current == SUPPRESSED)
+    prim_methods_t current = prim_methods[offset];
+    if (current == NO_METHODS || current == SUPPRESSED)
 	return std::pair<bool, SEXP>(false, NULL);
     /* check that the methods for this function have been set */
-    if(current == NEEDS_RESET) {
+    if (current == NEEDS_RESET) {
 	/* get the methods and store them in the in-core primitive
 	   method table.	The entries will be preserved via
 	   R_preserveobject, so later we can just grab mlist from
@@ -1622,25 +1622,24 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 	current = prim_methods[offset]; /* as revised by do_set_prim_method */
     }
     mlist = prim_mlist[offset];
-    if(mlist && !isNull(mlist)
+    if (mlist && !isNull(mlist)
        && quick_method_check_ptr) {
 	value = (*quick_method_check_ptr)(args, mlist, op);
-	if(isPrimitive(value))
+	if (isPrimitive(value))
 	    return std::pair<bool, SEXP>(false, NULL);
-	if(isFunction(value)) {
+	if (isFunction(value)) {
             if (inherits(value, "internalDispatchMethod")) {
                 return std::pair<bool, SEXP>(false, NULL);
             }
-            PROTECT(suppliedvars = list1(mkString(PRIMNAME(op))));
+            suppliedvars = list1(mkString(PRIMNAME(op)));
             SET_TAG(suppliedvars, R_dot_Generic);
 	    /* found a method, call it with promised args */
 	    if(!promisedArgs) {
-		PROTECT(s = promiseArgs(CDR(call), rho));
+		s = promiseArgs(CDR(call), rho);
 		if (length(s) != length(args)) error("%s", _("dispatch error"));
 		for (a = args, b = s; a != R_NilValue; a = CDR(a), b = CDR(b))
 		    IF_PROMSXP_SET_PRVALUE(CAR(b), CAR(a));
 		value =  applyClosure(call, value, s, rho, suppliedvars, true);
-		UNPROTECT(2);
 		return std::pair<bool, SEXP>(true, value);
 	    } else {
 		/* INC/DEC of REFCNT needed for non-tracking args */
@@ -1650,25 +1649,23 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 				     suppliedvars, false);
 		for (SEXP a = args; a != R_NilValue; a = CDR(a))
 		    DECREMENT_REFCNT(CAR(a));
-                UNPROTECT(1);
                 return std::pair<bool, SEXP>(true, value);
             }
 	}
 	/* else, need to perform full method search */
     }
     fundef = prim_generics[offset];
-    if(!fundef || TYPEOF(fundef) != CLOSXP)
+    if (!fundef || TYPEOF(fundef) != CLOSXP)
 	error(_("primitive function \"%s\" has been set for methods but no generic function supplied"),
 	      PRIMNAME(op));
     /* To do:  arrange for the setting to be restored in case of an
        error in method search */
-    if(!promisedArgs) {
-	PROTECT(s = promiseArgs(CDR(call), rho));
+    if (!promisedArgs) {
+	s = promiseArgs(CDR(call), rho);
 	if (length(s) != length(args)) error("%s", _("dispatch error"));
 	for (a = args, b = s; a != R_NilValue; a = CDR(a), b = CDR(b))
 	    IF_PROMSXP_SET_PRVALUE(CAR(b), CAR(a));
 	value = applyClosure(call, fundef, s, rho, R_NilValue, true);
-	UNPROTECT(1);
     } else {
 	/* INC/DEC of REFCNT needed for non-tracking args */
 	for (SEXP a = args; a != R_NilValue; a = CDR(a))
@@ -1678,7 +1675,7 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 	    DECREMENT_REFCNT(CAR(a));
     }
     prim_methods[offset] = current;
-    if(value == deferred_default_object)
+    if (value == deferred_default_object)
 	return std::pair<bool, SEXP>(false, NULL);
     else
 	return std::pair<bool, SEXP>(true, value);
@@ -1688,9 +1685,9 @@ SEXP R_do_MAKE_CLASS(const char *what)
 {
     static SEXP s_getClass = NULL;
     SEXP e, call;
-    if(!what)
+    if (!what)
 	error("%s", _("C level MAKE_CLASS macro called with NULL string pointer"));
-    if(!s_getClass) s_getClass = install("getClass");
+    if (!s_getClass) s_getClass = install("getClass");
     PROTECT(call = allocVector(LANGSXP, 2));
     SETCAR(call, s_getClass);
     SETCAR(CDR(call), mkString(what));
@@ -1704,8 +1701,8 @@ SEXP R_do_MAKE_CLASS(const char *what)
 attribute_hidden SEXP R_getClassDef_R(SEXP what)
 {
     static SEXP s_getClassDef = NULL;
-    if(!s_getClassDef) s_getClassDef = install("getClassDef");
-    if(!isMethodsDispatchOn()) error("%s", _("'methods' package not yet loaded"));
+    if (!s_getClassDef) s_getClassDef = install("getClassDef");
+    if (!isMethodsDispatchOn()) error("%s", _("'methods' package not yet loaded"));
     SEXP call = PROTECT(lang2(s_getClassDef, what));
     SEXP e = eval(call, R_MethodsNamespace);
     UNPROTECT(1);
@@ -1754,32 +1751,32 @@ attribute_hidden Rboolean R_extends(SEXP class1, SEXP class2, SEXP env)
 SEXP R_do_new_object(SEXP class_def)
 {
     static SEXP s_virtual = NULL, s_prototype, s_className;
-    SEXP e, value;
+    GCStackRoot<> e, value;
     CXXR::RAllocStack::Scope rscope;
-    if(!s_virtual) {
+    if (!s_virtual) {
 	s_virtual = install("virtual");
 	s_prototype = install("prototype");
 	s_className = install("className");
     }
-    if(!class_def)
+    if (!class_def)
 	error("%s", _("C level NEW macro called with null class definition pointer"));
     e = R_do_slot(class_def, s_virtual);
-    if(asLogical(e) != 0)  { /* includes NA, TRUE, or anything other than FALSE */
+    if (asLogical(e) != 0)  { /* includes NA, TRUE, or anything other than FALSE */
 	e = R_do_slot(class_def, s_className);
 	error(_("trying to generate an object from a virtual class (\"%s\")"),
 	      translateChar(asChar(e)));
     }
-    PROTECT(e = R_do_slot(class_def, s_className));
-    PROTECT(value = duplicate(R_do_slot(class_def, s_prototype)));
+    e = R_do_slot(class_def, s_className);
+    value = duplicate(R_do_slot(class_def, s_prototype));
     bool xDataType = TYPEOF(value) == ENVSXP || TYPEOF(value) == SYMSXP ||
 	TYPEOF(value) == EXTPTRSXP;
-    if((TYPEOF(value) == OBJSXP || getAttrib(e, R_PackageSymbol) != R_NilValue) &&
+    if ((TYPEOF(value) == OBJSXP || getAttrib(e, R_PackageSymbol) != R_NilValue) &&
        !xDataType)
     {
 	setAttrib(value, R_ClassSymbol, e);
 	SET_S4_OBJECT(value);
     }
-    UNPROTECT(2); /* value, e */
+
     return value;
 }
 
