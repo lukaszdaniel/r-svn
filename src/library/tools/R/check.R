@@ -3901,7 +3901,7 @@ add_dummies <- function(dir, Log)
                 ## -Werror is not compiler independent
                 ##   (as what is a warning is not)
                 ## -Wno-dev is from qt, not a compiler flag.
-                ## -Wstrict-prototypea is long supported by gcc and LLVM/Apple clang.
+                ## -Wstrict-prototypes is long supported by gcc and LLVM/Apple clang.
                 except <- Sys.getenv("_R_CHECK_COMPILATION_FLAGS_KNOWN_", "")
                 except <- unlist(strsplit(except, "\\s", perl = TRUE))
                 warns <- setdiff(warns,
@@ -4479,7 +4479,12 @@ add_dummies <- function(dir, Log)
             }
             any <- any || bad
 
-            if (!any && !(check_incoming && do_timings && do_diff))
+            check_incoming_submission_only <-
+                (check_incoming &&
+                 !config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_DROP_SUBMISSION_ONLY_",
+                                                   "FALSE")))
+
+            if (!any && !(check_incoming_submission_only && do_timings && do_diff))
                 resultLog(Log, "OK")
 
             if (do_timings && do_diff) { ## do_diff = false is for re-running
@@ -4496,10 +4501,7 @@ add_dummies <- function(dir, Log)
                 keep <- ((times[[1L]] + times[[2L]] > theta) |
                          (times[[3L]] > theta))
                 if(any(keep)) {
-                    if(!any &&
-                       check_incoming &&
-                       !config_val_to_logical(Sys.getenv("_R_CHECK_CRAN_INCOMING_DROP_SUBMISSION_ONLY_",
-                                                         "FALSE"))) {
+                    if(!any && check_incoming_submission_only) {
                         noteLog(Log)
                         any <- TRUE
                     }
@@ -4517,7 +4519,7 @@ add_dummies <- function(dir, Log)
                     keep <- ((times[[1L]] + times[[2L]]) >=
                               pmax(theta * times[[3L]], 1))
                     if(any(keep)) {
-                        if(!any && check_incoming) {
+                        if(!any && check_incoming_submission_only) {
                             noteLog(Log)
                             any <- TRUE
                         }
@@ -4533,7 +4535,7 @@ add_dummies <- function(dir, Log)
                     }
                 }
 
-                if(!any && check_incoming)
+                if(!any && check_incoming_submission_only)
                     resultLog(Log, "OK")
             }
 
@@ -6054,6 +6056,7 @@ add_dummies <- function(dir, Log)
                              "\\[-Warray-parameter=\\]",
                              ## GCC 14's C++ stdlib (as seen for TMB headers)
                              "\\[-Wtemplate-id-cdtor\\]",
+                             "\\[-Warray-bounds=\\]",
                              ## clang version (not Apple clang)
                              "\\[-Warray-parameter\\]",
                              "\\[-Wuse-after-free\\]",
