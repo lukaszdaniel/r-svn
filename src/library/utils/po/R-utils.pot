@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-05-18 13:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -997,7 +997,6 @@ msgstr ""
 
 
 #: R/help.R: 0
-#. R/help.R: gettextf("Saving help page to %s", sQuote(basename(ofile2)))
 #. R/help.R: gettextf("Saving help page to %s", sQuote(ofile))
 
 msgid "Saving help page to %s"

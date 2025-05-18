@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -311,12 +311,12 @@ msgstr "no s'ha pogut enregistrar la codificació del dispositiu"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "l'objecte «.ps.prolog» no és un vector de caràcters"
 
-#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:789
+#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:790
 #, fuzzy
 msgid "invalid line end"
 msgstr "final de línia no vàlid"
 
-#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:802
+#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:803
 #, fuzzy
 msgid "invalid line join"
 msgstr "la unió de línia no és vàlida"
@@ -387,7 +387,7 @@ msgstr "'postscript(print.it=TRUE)' utilitzat amb una ordre buida 'print'"
 msgid "invalid page type '%s' (postscript)"
 msgstr "el tipus de pàgina «%s» no és vàlid (postscript)"
 
-#: devPS.cpp:3599 devWindows.cpp:2328
+#: devPS.cpp:3599 devWindows.cpp:2326
 #, fuzzy
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "la semitransparència no està suportada en aquest dispositiu: només s'informa una vegada per pàgina"
@@ -902,130 +902,130 @@ msgstr "no s'ha pogut crear la destinació del dispositiu quartz(), és possible
 msgid "Quartz device is not available on this platform"
 msgstr "El dispositiu Quartz no està disponible en aquesta plataforma"
 
-#: devWindows.cpp:345 devWindows.cpp:391 devWindows.cpp:464
+#: devWindows.cpp:346 devWindows.cpp:392 devWindows.cpp:465
 #, fuzzy
 msgid "Not enough memory to copy graphics window"
 msgstr "No hi ha prou memòria per a copiar la finestra gràfica"
 
-#: devWindows.cpp:350 devWindows.cpp:396 devWindows.cpp:469
+#: devWindows.cpp:351 devWindows.cpp:397 devWindows.cpp:470
 #, fuzzy
 msgid "No device available to copy graphics window"
 msgstr "No hi ha cap dispositiu disponible per a copiar la finestra gràfica"
 
-#: devWindows.cpp:374
+#: devWindows.cpp:375
 msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
 msgstr ""
 
-#: devWindows.cpp:400 devWindows.cpp:473
+#: devWindows.cpp:401 devWindows.cpp:474
 #, fuzzy, c-format
 msgid "'%%' is not allowed in file name"
 msgstr "«%%» no està permès en el nom del fitxer"
 
-#: devWindows.cpp:609
+#: devWindows.cpp:610
 msgid "invalid font specification"
 msgstr "especificació de tipus de lletra no vàlida"
 
-#: devWindows.cpp:648
+#: devWindows.cpp:649
 #, fuzzy
 msgid "font family not found in Windows font database"
 msgstr "no s'ha trobat la família de tipus de lletra a la base de dades de tipus de lletra del Windows"
 
-#: devWindows.cpp:712
+#: devWindows.cpp:713
 msgid "unable to set or substitute a suitable font"
 msgstr ""
 
-#: devWindows.cpp:717
+#: devWindows.cpp:718
 #, fuzzy
 msgid "unable to set font: using Arial"
 msgstr "no es pot utilitzar la codificació «%s»"
 
-#: devWindows.cpp:1077
+#: devWindows.cpp:1078
 #, fuzzy
 msgid "plot history seems corrupted"
 msgstr "l'historial del gràfic sembla corrupte"
 
-#: devWindows.cpp:1084
+#: devWindows.cpp:1085
 #, fuzzy
 msgid "no plot history!"
 msgstr "sense historial de trames!"
 
-#: devWindows.cpp:1562
+#: devWindows.cpp:1563
 #, fuzzy
 msgid "unable to open window"
 msgstr "no es pot obrir el fitxer «%s» per a escriptura"
 
-#: devWindows.cpp:1789
+#: devWindows.cpp:1790
 #, fuzzy
 msgid "unable to open printer"
 msgstr "no s'ha pogut assignar la imatge ràster"
 
-#: devWindows.cpp:1796
+#: devWindows.cpp:1797
 #, fuzzy, c-format
 msgid "filename too long in %s() call"
 msgstr "el nom del fitxer és massa llarg a la crida %s()"
 
-#: devWindows.cpp:1801 devWindows.cpp:1836 devWindows.cpp:1866
+#: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "«width=%d, height=%d» són valors poc probables en píxels"
 
-#: devWindows.cpp:1809 devWindows.cpp:1814 devWindows.cpp:1839
-#: devWindows.cpp:1844 devWindows.cpp:1869 devWindows.cpp:1874
+#: devWindows.cpp:1810 devWindows.cpp:1815 devWindows.cpp:1840
+#: devWindows.cpp:1845 devWindows.cpp:1870 devWindows.cpp:1875
 #, fuzzy
 msgid "unable to allocate bitmap"
 msgstr "no s'ha pogut assignar el mapa de bits"
 
-#: devWindows.cpp:1820 devWindows.cpp:1850 devWindows.cpp:2171
+#: devWindows.cpp:1821 devWindows.cpp:1851 devWindows.cpp:2172
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "no es pot obrir el fitxer «%s» per a escriptura"
 
-#: devWindows.cpp:1833
+#: devWindows.cpp:1834
 #, fuzzy
 msgid "filename too long in jpeg() call"
 msgstr "nom de fitxer massa llarg a la crida jpeg()"
 
-#: devWindows.cpp:1863
+#: devWindows.cpp:1864
 #, fuzzy
 msgid "filename too long in tiff() call"
 msgstr "nom de fitxer massa llarg a la crida tiff()"
 
-#: devWindows.cpp:1891
+#: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
 msgstr "nom de fitxer massa llarg a la crida win.metafile()"
 
-#: devWindows.cpp:1895
+#: devWindows.cpp:1896
 #, fuzzy
 msgid "filename too long in win.metafile() call"
 msgstr "nom de fitxer massa llarg a la crida win.metafile()"
 
-#: devWindows.cpp:1906
+#: devWindows.cpp:1907
 #, fuzzy, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "no es pot obrir el metafitxer «%s» per a escriptura"
 
-#: devWindows.cpp:1908
+#: devWindows.cpp:1909
 #, fuzzy
 msgid "unable to open clipboard to write metafile"
 msgstr "no s'ha pogut obrir el porta-retalls per a escriure el metafitxer"
 
-#: devWindows.cpp:2119
+#: devWindows.cpp:2120
 #, fuzzy
 msgid "Insufficient memory for resize. Killing device"
 msgstr "No hi ha prou memòria per a redimensionar. S'està matant el dispositiu"
 
-#: devWindows.cpp:2127
+#: devWindows.cpp:2128
 #, fuzzy
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "No hi ha prou memòria per a redimensionar. Desactiva la barreja alfa"
 
-#: devWindows.cpp:2156
+#: devWindows.cpp:2157
 #, fuzzy
 msgid "a clipboard metafile can store only one figure."
 msgstr "un metafitxer del porta-retalls només pot emmagatzemar una figura."
 
-#: devWindows.cpp:2162
+#: devWindows.cpp:2163
 #, fuzzy, c-format
 msgid "metafile '%s' could not be created"
 msgstr "no s'ha pogut crear el metafitxer «%s»"

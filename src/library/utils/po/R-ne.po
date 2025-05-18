@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-05-18 13:37\n"
 "PO-Revision-Date: 2024-07-13 03:05+0000\n"
 "Last-Translator: Binod Jung Bogati <m1s1ng@outlook.com>\n"
 "Language-Team: none\n"
@@ -725,7 +725,6 @@ msgstr ""
 msgid "S3 method '%s' not found"
 msgstr ""
 
-#. R/help.R: gettextf("Saving help page to %s", sQuote(basename(ofile2)))
 #. R/help.R: gettextf("Saving help page to %s", sQuote(ofile))
 #: R/help.R:0
 msgid "Saving help page to %s"

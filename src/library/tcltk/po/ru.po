@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.10.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-05-18 13:37+0200\n"
 "PO-Revision-Date: 2025-04-01 17:05+0200\n"
 "Last-Translator: Alexey Shipunov <dactylorhiza@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -21,36 +21,36 @@ msgstr ""
 "X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: tcltk.cpp:68
+#: tcltk.cpp:73
 msgid "parse error in R expression"
 msgstr "ошибка разбора выражения R"
 
-#: tcltk.cpp:177 tcltk.cpp:254
+#: tcltk.cpp:180 tcltk.cpp:257
 msgid "tcl error.\n"
 msgstr "ошибка tcl.\n"
 
-#: tcltk.cpp:206 tcltk.cpp:278 tcltk.cpp:294 tcltk.cpp:314 tcltk.cpp:334
-#: tcltk.cpp:407 tcltk.cpp:472 tcltk.cpp:526 tcltk.cpp:762
+#: tcltk.cpp:209 tcltk.cpp:281 tcltk.cpp:297 tcltk.cpp:317 tcltk.cpp:337
+#: tcltk.cpp:411 tcltk.cpp:477 tcltk.cpp:532 tcltk.cpp:770
 msgid "invalid argument"
 msgstr "неправильный аргумент"
 
-#: tcltk.cpp:285
+#: tcltk.cpp:288
 msgid "no such variable"
 msgstr "нет такой переменной"
 
-#: tcltk.cpp:316 tcltk.cpp:336 tcltk.cpp:409 tcltk.cpp:474 tcltk.cpp:528
+#: tcltk.cpp:319 tcltk.cpp:339 tcltk.cpp:413 tcltk.cpp:479 tcltk.cpp:534
 msgid "invalid tclObj -- perhaps saved from another session?"
 msgstr "неправильный tclObj -- может быть, сохраненный в другой сессии?"
 
-#: tcltk.cpp:635
+#: tcltk.cpp:643
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "список аргументов слишком длинен во внутренней функции tcltk 'callback_closure'"
 
-#: tcltk.cpp:668
+#: tcltk.cpp:676
 msgid "argument is not of correct type"
 msgstr "аргументы неправильного типа"
 
-#: tcltk.cpp:720
+#: tcltk.cpp:728
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "нет переменной DISPLAY, поэтому Tk недоступен"
 

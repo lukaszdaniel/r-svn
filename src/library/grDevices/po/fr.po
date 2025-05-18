@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-05-18 13:36+0200\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -284,11 +284,11 @@ msgstr "échec d'enregistrement de l'encodage du périphérique"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "l’objet '.ps.prolog' n'est pas un vecteur de mode caractère"
 
-#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:789
+#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:790
 msgid "invalid line end"
 msgstr "extrémité de ligne incorrecte"
 
-#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:802
+#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:803
 msgid "invalid line join"
 msgstr "jointure de ligne incorrecte"
 
@@ -351,7 +351,7 @@ msgstr "'postscript(print.it=TRUE)' utilisé avec une commande 'print' vide"
 msgid "invalid page type '%s' (postscript)"
 msgstr "type de page incorrect '%s' (postscript)"
 
-#: devPS.cpp:3599 devWindows.cpp:2328
+#: devPS.cpp:3599 devWindows.cpp:2326
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "la semi-transparence n'est pas supportée sur ce périphérique : reporté seulement une fois par page"
 
@@ -821,117 +821,117 @@ msgstr "impossible de créer le périphérique cible quartz(), le type fourni n'
 msgid "Quartz device is not available on this platform"
 msgstr "Périphérique Quartz non disponible sur cette architecture"
 
-#: devWindows.cpp:345 devWindows.cpp:391 devWindows.cpp:464
+#: devWindows.cpp:346 devWindows.cpp:392 devWindows.cpp:465
 msgid "Not enough memory to copy graphics window"
 msgstr "Mémoire insuffisante pour copier la fenêtre graphique"
 
-#: devWindows.cpp:350 devWindows.cpp:396 devWindows.cpp:469
+#: devWindows.cpp:351 devWindows.cpp:397 devWindows.cpp:470
 msgid "No device available to copy graphics window"
 msgstr "Aucun périphérique disponible pour copier la fenêtre graphique"
 
-#: devWindows.cpp:374
+#: devWindows.cpp:375
 msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
 msgstr ""
 
-#: devWindows.cpp:400 devWindows.cpp:473
+#: devWindows.cpp:401 devWindows.cpp:474
 #, c-format
 msgid "'%%' is not allowed in file name"
 msgstr "'%%' n'est pas autorisé dans le nom du fichier"
 
-#: devWindows.cpp:609
+#: devWindows.cpp:610
 msgid "invalid font specification"
 msgstr "spécification de police incorrecte"
 
-#: devWindows.cpp:648
+#: devWindows.cpp:649
 msgid "font family not found in Windows font database"
 msgstr "famille de police introuvable dans la base de données des polices Windows"
 
-#: devWindows.cpp:712
+#: devWindows.cpp:713
 msgid "unable to set or substitute a suitable font"
 msgstr ""
 
-#: devWindows.cpp:717
+#: devWindows.cpp:718
 #, fuzzy
 msgid "unable to set font: using Arial"
 msgstr "impossible d'utiliser l'encodage '%s'"
 
-#: devWindows.cpp:1077
+#: devWindows.cpp:1078
 msgid "plot history seems corrupted"
 msgstr "l'historique des graphes semble corrompu"
 
-#: devWindows.cpp:1084
+#: devWindows.cpp:1085
 msgid "no plot history!"
 msgstr "pas d'historique des graphes !"
 
-#: devWindows.cpp:1562
+#: devWindows.cpp:1563
 #, fuzzy
 msgid "unable to open window"
 msgstr "impossible d'ouvrir le fichier '%s' pour écriture"
 
-#: devWindows.cpp:1789
+#: devWindows.cpp:1790
 #, fuzzy
 msgid "unable to open printer"
 msgstr "impossible d'allouer une image en mode pixel"
 
-#: devWindows.cpp:1796
+#: devWindows.cpp:1797
 #, c-format
 msgid "filename too long in %s() call"
 msgstr "nom de fichier trop long dans l'appel %s()"
 
-#: devWindows.cpp:1801 devWindows.cpp:1836 devWindows.cpp:1866
+#: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d' ne sont probablement pas des valeurs en pixels"
 
-#: devWindows.cpp:1809 devWindows.cpp:1814 devWindows.cpp:1839
-#: devWindows.cpp:1844 devWindows.cpp:1869 devWindows.cpp:1874
+#: devWindows.cpp:1810 devWindows.cpp:1815 devWindows.cpp:1840
+#: devWindows.cpp:1845 devWindows.cpp:1870 devWindows.cpp:1875
 msgid "unable to allocate bitmap"
 msgstr "impossible d'allouer un bitmap"
 
-#: devWindows.cpp:1820 devWindows.cpp:1850 devWindows.cpp:2171
+#: devWindows.cpp:1821 devWindows.cpp:1851 devWindows.cpp:2172
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "impossible d'ouvrir le fichier '%s' pour écriture"
 
-#: devWindows.cpp:1833
+#: devWindows.cpp:1834
 msgid "filename too long in jpeg() call"
 msgstr "nom de fichier trop long dans l'appel à jpeg()"
 
-#: devWindows.cpp:1863
+#: devWindows.cpp:1864
 msgid "filename too long in tiff() call"
 msgstr "nom de fichier trop long dans l'appel tiff()"
 
-#: devWindows.cpp:1891
+#: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
 msgstr "nom de fichier trop long dans l'appel à win.metafile()"
 
-#: devWindows.cpp:1895
+#: devWindows.cpp:1896
 msgid "filename too long in win.metafile() call"
 msgstr "nom de fichier trop long dans l'appel à win.metafile()"
 
-#: devWindows.cpp:1906
+#: devWindows.cpp:1907
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "impossible d'ouvrir le fichier metafile '%s' pour écriture"
 
-#: devWindows.cpp:1908
+#: devWindows.cpp:1909
 msgid "unable to open clipboard to write metafile"
 msgstr "impossible d'ouvrir le presse-papier pour écrire les données metafile"
 
-#: devWindows.cpp:2119
+#: devWindows.cpp:2120
 msgid "Insufficient memory for resize. Killing device"
 msgstr "Mémoire insuffisante pour modifier la taille. Le périphérique va être fermé"
 
-#: devWindows.cpp:2127
+#: devWindows.cpp:2128
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "Mémoire insuffisante pour modifier la taille. L'\"alpha blending\" est désactivé"
 
-#: devWindows.cpp:2156
+#: devWindows.cpp:2157
 msgid "a clipboard metafile can store only one figure."
 msgstr "un presse-papier metafile ne peut stocker qu'une seule figure."
 
-#: devWindows.cpp:2162
+#: devWindows.cpp:2163
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "le fichier metafile '%s' ne peut être créé"

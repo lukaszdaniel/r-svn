@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-05-18 13:37+0200\n"
 "PO-Revision-Date: 2023-02-22 13:05+0000\n"
 "Last-Translator: Martin Mächler <maechler@stat.math.ethz.ch>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -43,7 +43,7 @@ msgstr ""
 #: windows/dialogs.cpp:155 windows/dialogs.cpp:175 windows/dialogs.cpp:200
 #: windows/dialogs.cpp:203 windows/dialogs.cpp:245 windows/dialogs.cpp:282
 #: windows/dialogs.cpp:293 windows/dialogs.cpp:317 windows/dialogs.cpp:325
-#: windows/util.cpp:138 windows/widgets.cpp:90 windows/widgets.cpp:93
+#: windows/util.cpp:139 windows/widgets.cpp:90 windows/widgets.cpp:93
 #: windows/widgets.cpp:97
 #, fuzzy, c-format
 msgid "invalid '%s' argument"
@@ -224,7 +224,7 @@ msgstr "unbekanntes Format von 'gethostbyname' zurückgegeben"
 msgid "nsl() is not supported on this platform"
 msgstr "nsl() ist auf dieser Plattform nicht unterstützt"
 
-#: windows/dataentry.cpp:304
+#: windows/dataentry.cpp:301
 #, fuzzy
 msgid "unable to start data editor"
 msgstr "kann nicht in die Zwischenablage schreiben"
@@ -266,80 +266,80 @@ msgstr "Menü existiert nicht"
 msgid "unable to delete menu item (%s)"
 msgstr "kann Menüeintrag nicht entfernen (%s)"
 
-#: windows/registry.cpp:71 windows/registry.cpp:246 windows/registry.cpp:249
-#: windows/registry.cpp:252
+#: windows/registry.cpp:71 windows/registry.cpp:247 windows/registry.cpp:250
+#: windows/registry.cpp:253
 #, c-format
 msgid "invalid '%s' value"
 msgstr "ungültiger '%s' Wert"
 
-#: windows/registry.cpp:144 windows/registry.cpp:148
+#: windows/registry.cpp:145 windows/registry.cpp:149
 #, c-format
 msgid "unhandled key type %s\n"
 msgstr ""
 
-#: windows/registry.cpp:152
+#: windows/registry.cpp:153
 #, c-format
 msgid "unhandled key type %lu\n"
 msgstr ""
 
-#: windows/registry.cpp:175
+#: windows/registry.cpp:176
 #, c-format
 msgid "RegQueryInfoKey error code %d: '%s'"
 msgstr ""
 
-#: windows/registry.cpp:264
+#: windows/registry.cpp:265
 #, fuzzy, c-format
 msgid "Registry key '%ls' not found"
 msgstr "Registryeintrag '%ls' nicht gefunden"
 
-#: windows/registry.cpp:266
+#: windows/registry.cpp:267
 #, c-format
 msgid "RegOpenKeyEx error code %d: '%s'"
 msgstr ""
 
-#: windows/util.cpp:56
+#: windows/util.cpp:57
 msgid "unsupported version of Windows"
 msgstr "nicht unterstützte Version von Windows"
 
-#: windows/util.cpp:281
+#: windows/util.cpp:283
 msgid "'raw = FALSE' and format is a not a known text format"
 msgstr ""
 
-#: windows/util.cpp:302
+#: windows/util.cpp:303
 #, fuzzy
 msgid "argument must be a character vector or a raw vector"
 msgstr "Argument muss ein Zeichenkettenvektor oder ein raw Vektor sein"
 
-#: windows/util.cpp:343
+#: windows/util.cpp:344
 msgid "unable to open the clipboard"
 msgstr "kann Zwischenablage nicht öffnen"
 
-#: windows/util.cpp:348
+#: windows/util.cpp:349
 msgid "unable to write to the clipboard"
 msgstr "kann nicht in die Zwischenablage schreiben"
 
-#: windows/util.cpp:428
+#: windows/util.cpp:429
 #, fuzzy
 msgid "'title' must be a character string"
 msgstr "'title' muss eine Zeichenkette sein"
 
-#: windows/util.cpp:437
+#: windows/util.cpp:438
 #, fuzzy
 msgid "'text' must be a character string"
 msgstr "'text' muss eine Zeichenkette sein"
 
-#: windows/util.cpp:476
+#: windows/util.cpp:477
 #, fuzzy, c-format
 msgid "'%s' must be length 1"
 msgstr "'%s' muss Länge 1 haben"
 
-#: windows/util.cpp:586
+#: windows/util.cpp:587
 #, fuzzy, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' muss eine Liste sein"
 
 # +
-#: windows/util.cpp:590
+#: windows/util.cpp:591
 #, fuzzy, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' Element %d ist keine Fenster-Handle"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-05-18 13:37+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -18,36 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: tcltk.cpp:68
+#: tcltk.cpp:73
 msgid "parse error in R expression"
 msgstr "R 運算式裡句法分析錯誤"
 
-#: tcltk.cpp:177 tcltk.cpp:254
+#: tcltk.cpp:180 tcltk.cpp:257
 msgid "tcl error.\n"
 msgstr "tcl 錯誤。\n"
 
-#: tcltk.cpp:206 tcltk.cpp:278 tcltk.cpp:294 tcltk.cpp:314 tcltk.cpp:334
-#: tcltk.cpp:407 tcltk.cpp:472 tcltk.cpp:526 tcltk.cpp:762
+#: tcltk.cpp:209 tcltk.cpp:281 tcltk.cpp:297 tcltk.cpp:317 tcltk.cpp:337
+#: tcltk.cpp:411 tcltk.cpp:477 tcltk.cpp:532 tcltk.cpp:770
 msgid "invalid argument"
 msgstr "引數無效"
 
-#: tcltk.cpp:285
+#: tcltk.cpp:288
 msgid "no such variable"
 msgstr ""
 
-#: tcltk.cpp:316 tcltk.cpp:336 tcltk.cpp:409 tcltk.cpp:474 tcltk.cpp:528
+#: tcltk.cpp:319 tcltk.cpp:339 tcltk.cpp:413 tcltk.cpp:479 tcltk.cpp:534
 msgid "invalid tclObj -- perhaps saved from another session?"
 msgstr "tclObj 無效 -- 是不是因此它是由另外一個對話期間儲存的？"
 
-#: tcltk.cpp:635
+#: tcltk.cpp:643
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "tcltk 內部函式 'callback_closure' 的引數串列太長"
 
-#: tcltk.cpp:668
+#: tcltk.cpp:676
 msgid "argument is not of correct type"
 msgstr "引數的種類無效"
 
-#: tcltk.cpp:720
+#: tcltk.cpp:728
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "沒有 DISPLAY 變數，因此沒有 Tk 這個功能"
 

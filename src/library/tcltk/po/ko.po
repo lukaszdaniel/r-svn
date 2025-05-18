@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2025-05-18 13:37+0200\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -18,36 +18,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: tcltk.cpp:68
+#: tcltk.cpp:73
 msgid "parse error in R expression"
 msgstr "R 표현식(expression)을 구문분석(parse) 하던 도중에 에러가 발생했습니다."
 
-#: tcltk.cpp:177 tcltk.cpp:254
+#: tcltk.cpp:180 tcltk.cpp:257
 msgid "tcl error.\n"
 msgstr "tcl 에러입니다.\n"
 
-#: tcltk.cpp:206 tcltk.cpp:278 tcltk.cpp:294 tcltk.cpp:314 tcltk.cpp:334
-#: tcltk.cpp:407 tcltk.cpp:472 tcltk.cpp:526 tcltk.cpp:762
+#: tcltk.cpp:209 tcltk.cpp:281 tcltk.cpp:297 tcltk.cpp:317 tcltk.cpp:337
+#: tcltk.cpp:411 tcltk.cpp:477 tcltk.cpp:532 tcltk.cpp:770
 msgid "invalid argument"
 msgstr "올바르지 않은 인자입니다."
 
-#: tcltk.cpp:285
+#: tcltk.cpp:288
 msgid "no such variable"
 msgstr ""
 
-#: tcltk.cpp:316 tcltk.cpp:336 tcltk.cpp:409 tcltk.cpp:474 tcltk.cpp:528
+#: tcltk.cpp:319 tcltk.cpp:339 tcltk.cpp:413 tcltk.cpp:479 tcltk.cpp:534
 msgid "invalid tclObj -- perhaps saved from another session?"
 msgstr "올바르지 않은 tclObj입니다 -- 혹시 다른 세션으로부터 저장된것이 아닐까요?"
 
-#: tcltk.cpp:635
+#: tcltk.cpp:643
 msgid "argument list is too long in tcltk internal function 'callback_closure'"
 msgstr "tcltk 내부 함수 'callback_closure'에 있는 인자목록이 너무 깁니다"
 
-#: tcltk.cpp:668
+#: tcltk.cpp:676
 msgid "argument is not of correct type"
 msgstr "올바른 유형(correct type)의 인자가 아닙니다."
 
-#: tcltk.cpp:720
+#: tcltk.cpp:728
 msgid "no DISPLAY variable so Tk is not available"
 msgstr "DISPLAY 변수가 없기 때문에 Tk를 사용할 수 없습니다"
 

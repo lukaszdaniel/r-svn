@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-05-18 13:37+0200\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: windows/dialogs.cpp:155 windows/dialogs.cpp:175 windows/dialogs.cpp:200
 #: windows/dialogs.cpp:203 windows/dialogs.cpp:245 windows/dialogs.cpp:282
 #: windows/dialogs.cpp:293 windows/dialogs.cpp:317 windows/dialogs.cpp:325
-#: windows/util.cpp:138 windows/widgets.cpp:90 windows/widgets.cpp:93
+#: windows/util.cpp:139 windows/widgets.cpp:90 windows/widgets.cpp:93
 #: windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
@@ -218,7 +218,7 @@ msgstr "'gethostbyname' вернула неправильный формат"
 msgid "nsl() is not supported on this platform"
 msgstr "nsl() не поддерживается на этой платформе"
 
-#: windows/dataentry.cpp:304
+#: windows/dataentry.cpp:301
 #, fuzzy
 msgid "unable to start data editor"
 msgstr "не могу писать в буфер обмена"
@@ -260,76 +260,76 @@ msgstr "меню не существует"
 msgid "unable to delete menu item (%s)"
 msgstr "не могу удалить элемент меню (%s)"
 
-#: windows/registry.cpp:71 windows/registry.cpp:246 windows/registry.cpp:249
-#: windows/registry.cpp:252
+#: windows/registry.cpp:71 windows/registry.cpp:247 windows/registry.cpp:250
+#: windows/registry.cpp:253
 #, c-format
 msgid "invalid '%s' value"
 msgstr "неправильное значение '%s'"
 
-#: windows/registry.cpp:144 windows/registry.cpp:148
+#: windows/registry.cpp:145 windows/registry.cpp:149
 #, c-format
 msgid "unhandled key type %s\n"
 msgstr ""
 
-#: windows/registry.cpp:152
+#: windows/registry.cpp:153
 #, c-format
 msgid "unhandled key type %lu\n"
 msgstr ""
 
-#: windows/registry.cpp:175
+#: windows/registry.cpp:176
 #, c-format
 msgid "RegQueryInfoKey error code %d: '%s'"
 msgstr ""
 
-#: windows/registry.cpp:264
+#: windows/registry.cpp:265
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr "Ключ реестра '%ls' не найден"
 
-#: windows/registry.cpp:266
+#: windows/registry.cpp:267
 #, c-format
 msgid "RegOpenKeyEx error code %d: '%s'"
 msgstr ""
 
-#: windows/util.cpp:56
+#: windows/util.cpp:57
 msgid "unsupported version of Windows"
 msgstr "неподдерживаемая версия Windows"
 
-#: windows/util.cpp:281
+#: windows/util.cpp:283
 msgid "'raw = FALSE' and format is a not a known text format"
 msgstr ""
 
-#: windows/util.cpp:302
+#: windows/util.cpp:303
 msgid "argument must be a character vector or a raw vector"
 msgstr "аргумент должен быть текстовым вектором или простым вектором"
 
-#: windows/util.cpp:343
+#: windows/util.cpp:344
 msgid "unable to open the clipboard"
 msgstr "не могу открыть буфер обмена"
 
-#: windows/util.cpp:348
+#: windows/util.cpp:349
 msgid "unable to write to the clipboard"
 msgstr "не могу писать в буфер обмена"
 
-#: windows/util.cpp:428
+#: windows/util.cpp:429
 msgid "'title' must be a character string"
 msgstr "'title' должен быть текстовой строкой"
 
-#: windows/util.cpp:437
+#: windows/util.cpp:438
 msgid "'text' must be a character string"
 msgstr "'text' должен быть текстовой строкой"
 
-#: windows/util.cpp:476
+#: windows/util.cpp:477
 #, c-format
 msgid "'%s' must be length 1"
 msgstr "'%s' должен быть длиной 1"
 
-#: windows/util.cpp:586
+#: windows/util.cpp:587
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' должен быть списком"
 
-#: windows/util.cpp:590
+#: windows/util.cpp:591
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' элемент из %d -- не дескриптор окна"
