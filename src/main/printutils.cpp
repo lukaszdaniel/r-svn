@@ -239,11 +239,11 @@ const char *Rf_EncodeReal0(double x, int w, int d, int e, const char *dec)
     }
     buff[NB-1] = '\0';
 
-    if(!streql(dec, ".")) { /* replace "." by dec */
+    if (!streql(dec, ".")) { /* replace "." by dec */
 	int len = strwidth(dec); /* 3·14 must work */
-	if(len != 1) warning(
-	    _("the decimal mark is %s than one character wide; this will become an error"),
-	    (len > 1) ? "more" : "less");
+	if (len != 1) warning((len > 1) ?
+	    _("the decimal mark is more than one character wide; this will become an error") :
+	    _("the decimal mark is less than one character wide; this will become an error"));
 
 	char *p, *q;
 	for(p = buff, q = buff2; *p; p++) {
@@ -300,11 +300,11 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
 	}
     }
 
-    if(!streql(dec, ".")) { /* replace "." by dec */
+    if (!streql(dec, ".")) { /* replace "." by dec */
 	int len = strwidth(dec); /* 3·14 must work */
-	if(len != 1) warning(
-	    _("the decimal mark is %s than one character wide; this will become an error"),
-	    (len > 1) ? "more" : "less");
+	if (len != 1) warning((len > 1) ?
+	    _("the decimal mark is more than one character wide; this will become an error") :
+	    _("the decimal mark is less than one character wide; this will become an error"));
 
 	char *p, *q;
 	for(p = buff, q = buff2; *p; p++) {

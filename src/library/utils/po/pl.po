@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-05-18 13:37+0200\n"
-"PO-Revision-Date: 2024-09-01 15:36+0200\n"
+"PO-Revision-Date: 2025-05-24 14:08+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -12,12 +12,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: hashtab.cpp:38
 msgid "wrong argument count"
-msgstr ""
+msgstr "niepoprawna liczba argumentów"
 
 #: hashtab.cpp:45
 #, fuzzy
@@ -166,7 +166,7 @@ msgstr "'%s' zawiera brakujące wartości"
 
 #: stubs.cpp:313
 msgid "size must be finite and >= 0"
-msgstr ""
+msgstr "rozmiar musi być skończony i musi być >= 0"
 
 #: utils.cpp:75
 msgid "argument 'class' must be a character string"
@@ -191,9 +191,8 @@ msgid "'charClass' is not available on this platform"
 msgstr "'nsl()' nie jest obsługiwany na tej platformie"
 
 #: utils.cpp:131
-#, fuzzy
 msgid "input must be a character string"
-msgstr "argument 'title' musi być ciągiem znaków"
+msgstr "wejście musi być ciągiem znaków"
 
 #: utils.cpp:154
 msgid "'hostname' must be a character vector of length 1"
@@ -213,13 +212,12 @@ msgid "nsl() is not supported on this platform"
 msgstr "'nsl()' nie jest obsługiwany na tej platformie"
 
 #: windows/dataentry.cpp:301
-#, fuzzy
 msgid "unable to start data editor"
-msgstr "nie można zapisać do schowka"
+msgstr "nie można uruchomić edytora danych"
 
 #: windows/dialogs.cpp:133
 msgid "invalid progressbar -- has it been closed?"
-msgstr ""
+msgstr "nieprawidłowy pasek postępu -- czy został zamknięty?"
 
 #: windows/dialogs.cpp:187
 msgid "unknown type"
@@ -263,12 +261,12 @@ msgstr "niepoprawna wartość '%s'"
 #: windows/registry.cpp:145 windows/registry.cpp:149
 #, c-format
 msgid "unhandled key type %s\n"
-msgstr ""
+msgstr "nieobsługiwany typ klucza %s\n"
 
 #: windows/registry.cpp:153
 #, c-format
 msgid "unhandled key type %lu\n"
-msgstr ""
+msgstr "nieobsługiwany typ klucza %lu\n"
 
 #: windows/registry.cpp:176
 #, c-format

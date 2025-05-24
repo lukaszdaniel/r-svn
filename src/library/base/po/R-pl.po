@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-04-05 17:15\n"
-"PO-Revision-Date: 2024-10-25 19:29+0200\n"
+"PO-Revision-Date: 2025-05-24 13:46+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -172,9 +172,8 @@ msgstr "'%s' ma sens tylko dla uporządkowanych czynników jeśli wszystkie argu
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
 #: R/datetime.R:0
-#, fuzzy
 msgid "'%s' must be a \"%s\" object"
-msgstr "argument 'to' musi być obiektem klasy \"Date\""
+msgstr "argument '%s' musi być obiektem klasy \"%s\""
 
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
@@ -220,11 +219,9 @@ msgstr "argumen '%s' musi być zmienną logiczną"
 #. R/seq.R: gettextf("'%s' must be of length 1", "to")
 #. R/seq.R: gettextf("'%s' must be of length 1", "by")
 #. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/taskCallback.R:0
-#, fuzzy
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0
 msgid "'%s' must be of length 1"
-msgstr "argument 'by' musi mieć długość 1"
+msgstr "argument '%s' musi mieć długość 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
@@ -634,7 +631,7 @@ msgstr "argument 'receive.console.signals' musi mieć wartość TRUE lub FALSE"
 #. R/unlist.R: stop("'recursive' is NA")
 #: R/unlist.R:0
 msgid "'recursive' is NA"
-msgstr ""
+msgstr "argument 'recursive' ma wartość NA"
 
 #. R/unlist.R: stop("'recursive' must be a length-1 vector")
 #: R/unlist.R:0
@@ -1758,9 +1755,8 @@ msgstr "ścisła osobliwość w funkcji 'qr.coef()'"
 
 #. R/datetime.R: stop("exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified")
 #: R/datetime.R:0
-#, fuzzy
 msgid "exactly three of 'to', 'from', 'by' and 'length.out' / 'along.with' must be specified"
-msgstr "dokładnie dwa z 'to', 'by' oraz 'length.out' / 'along.with' muszą być określone"
+msgstr "dokładnie trzy z 'to', 'from', 'by' oraz 'length.out' / 'along.with' muszą być określone"
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
 #: R/namespace.R:0
@@ -1845,9 +1841,8 @@ msgstr "funkcja nie jest w przestrzeni nazw tak więc nie można zlokalizować p
 
 #. R/dates.R: stop("given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "given 'by', exactly two of 'to', 'from' and 'length.out' / 'along.with' must be specified"
-msgstr "dokładnie dwa z 'to', 'by' oraz 'length.out' / 'along.with' muszą być określone"
+msgstr "mając podane 'by', dokładnie dwa z 'to', 'from' oraz 'length.out' / 'along.with' muszą być określone"
 
 #. R/taskCallback.R: stop("handler must be a function")
 #: R/taskCallback.R:0

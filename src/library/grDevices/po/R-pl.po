@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
 #: R/pictex.R:0
@@ -29,7 +29,7 @@ msgstr "argument '%s' musi być niepustym ciągiem znaków"
 #. R/grDevices-defunct.R: gettextf("'%s' was removed in R 4.5.0.\n", "xfig")
 #: R/grDevices-defunct.R:0
 msgid "'%s' was removed in R 4.5.0."
-msgstr ""
+msgstr "'%s' zostało usunięte w R 4.5.0."
 
 #. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
 #: R/colorRamp.R:0
@@ -816,9 +816,8 @@ msgstr "brak odpowiedniej nieużywanej nazwy pliku dla 'postscript()'"
 
 #. R/colorstuff.R: stop("numerical color values must be positive", domain = "R-grDevices")
 #: R/colorstuff.R:0
-#, fuzzy
 msgid "numerical color values must be positive"
-msgstr "argument 'bias' musi być dodatni"
+msgstr "liczbowe wartości kolorów muszą być dodatnie"
 
 #. R/raster.R: stop("operator not meaningful for raster objects")
 #: R/raster.R:0
@@ -848,7 +847,7 @@ msgstr "argumenty 'r', 'g' oraz 'b' muszą być w przedziale [0, maxColorValue]"
 #. R/windows/windows.R: gettext("screen devices should not be used in examples etc",     domain = "R-grDevices")
 #: R/windows/windows.R:0
 msgid "screen devices should not be used in examples etc"
-msgstr ""
+msgstr "urządzenia ekranu nie powinny być używane w przykładach, itp."
 
 #. R/recordplot.R: stop("snapshot contains invalid graphics call")
 #: R/recordplot.R:0
@@ -928,7 +927,7 @@ msgstr "nierozpoznany format 'gs -help'"
 #. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 #: R/windows/windows.R:0
 msgid "windows devices should not be used in examples etc"
-msgstr ""
+msgstr "urządzenia okien nie powinny być używane w przykładach, itp."
 
 #. R/hcl.colors.R: stop("wrong 'type'; should never happen, please report!")
 #: R/hcl.colors.R:0

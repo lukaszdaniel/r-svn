@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-05-18 13:37\n"
-"PO-Revision-Date: 2024-10-05 20:26+0200\n"
+"PO-Revision-Date: 2025-05-23 21:21+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Bookmarks: -1,203,-1,-1,-1,-1,-1,-1,-1,-1\n"
@@ -2254,12 +2254,11 @@ msgstr[2] "Niepoprawne identyfikatory ORCID: %s."
 
 #. R/citation.R: ngettext(length(bad), "Invalid ROR ID: %s.", "Invalid ROR IDs: %s.")
 #: R/citation.R:0
-#, fuzzy
 msgid "Invalid ROR ID: %s."
 msgid_plural "Invalid ROR IDs: %s."
-msgstr[0] "Niepoprawny identyfikator ORCID: %s."
-msgstr[1] "Niepoprawne identyfikatory ORCID: %s."
-msgstr[2] "Niepoprawne identyfikatory ORCID: %s."
+msgstr[0] "Niepoprawny identyfikator ROR: %s."
+msgstr[1] "Niepoprawne identyfikatory ROR: %s."
+msgstr[2] "Niepoprawne identyfikatory ROR: %s."
 
 #. R/citation.R: ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s.")
 #. R/citation.R: ngettext(length(pos[ind]), "Invalid role specification: %s.",     "Invalid role specifications: %s.")

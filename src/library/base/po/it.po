@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:36+0200\n"
+"POT-Creation-Date: 2025-05-24 17:06+0200\n"
 "PO-Revision-Date: 2023-01-19 12:02+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -6757,8 +6757,11 @@ msgid "BLAS/LAPACK routine '%6s' gave error code %d"
 msgstr "La routine BLAS/LAPACK '%6s' ha restituito il codice di errore %d"
 
 #: src/main/printutils.cpp:245 src/main/printutils.cpp:306
-#, c-format
-msgid "the decimal mark is %s than one character wide; this will become an error"
+msgid "the decimal mark is more than one character wide; this will become an error"
+msgstr ""
+
+#: src/main/printutils.cpp:246 src/main/printutils.cpp:307
+msgid "the decimal mark is less than one character wide; this will become an error"
 msgstr ""
 
 #: src/main/printutils.cpp:435

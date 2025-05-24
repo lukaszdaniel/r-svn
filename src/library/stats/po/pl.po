@@ -3,17 +3,17 @@ msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-04-01 16:29+0200\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2025-05-24 12:33+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.6\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.5\n"
 
 #: Srunmed.cpp:65
 msgid "bandwidth/span of running medians is larger than n"
@@ -75,9 +75,8 @@ msgid "non-finite x[%d] in bandwidth calculation"
 msgstr "nieskończone x[%d] w obliczeniach pasma"
 
 #: bandwidths.cpp:128
-#, fuzzy
 msgid "data are constant in bandwidth calculation"
-msgstr "nieskończone x[%d] w obliczeniach pasma"
+msgstr "dane są stałe w obliczeniach przepustowości"
 
 #: complete_cases.cpp:26
 #, c-format
@@ -352,9 +351,8 @@ msgid "evaluation of function gave a result of wrong type"
 msgstr ""
 
 #: integrate.cpp:63
-#, fuzzy
 msgid "non-finite function value"
-msgstr "nieskończona wartość skończonej różnicy [%d]"
+msgstr "nieskończona wartość funkcji"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
@@ -412,9 +410,8 @@ msgid "workspace required (%.0f) is too large."
 msgstr "wymagany obszar roboczy (%.0f) jest za duży."
 
 #: loglin.cpp:43
-#, fuzzy
 msgid "no variables"
-msgstr "niepoprawne zmienne"
+msgstr "brak zmiennych"
 
 #: loglin.cpp:376
 msgid "this should not happen"
@@ -429,9 +426,8 @@ msgid "incorrect specification of 'table' or 'start'"
 msgstr "niepoprawne określenie 'table' lub 'start'"
 
 #: lowess.cpp:286 lowess.cpp:288
-#, fuzzy
 msgid "invalid input"
-msgstr "niepoprawny znacznik"
+msgstr "niepoprawne wejście"
 
 #: lowess.cpp:290
 msgid "'f' must be finite and > 0"
@@ -744,9 +740,9 @@ msgid "-Inf replaced by maximally negative value"
 msgstr "-Inf zastąpiona maksymalną ujemną wartością"
 
 #: optimize.cpp:227 optimize.cpp:317 optimize.cpp:539
-#, fuzzy, c-format
+#, c-format
 msgid "%s replaced by maximum positive value"
-msgstr "wartość NA zastąpiona przez maksymalną dodatnią wartość"
+msgstr "%s zastąpiono maksymalną wartością dodatnią"
 
 #: optimize.cpp:237
 msgid "invalid function value in 'optimize'"
@@ -963,23 +959,21 @@ msgid "'rho' must be an environment"
 msgstr "'rho' musi być środowiskiem"
 
 #: port.cpp:407 port.cpp:575
-#, fuzzy
 msgid "'d' must be a nonempty numeric (double) vector"
-msgstr "'d' musi być niepustym wektorem liczbowym"
+msgstr "'d' musi być niepustym wektorem liczbowym (podwójnym)"
 
 #: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Kiedy jest zdefiniowany Hesjan musi być również zdefiniowany gradient"
 
 #: port.cpp:412
-#, fuzzy, c-format
+#, c-format
 msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
-msgstr "środowisko 'rho' musi zawierać wektor liczbowy '.par' o długości %d"
+msgstr "środowisko 'rho' musi zawierać (podwójny) wektor liczbowy '.par' o długości %d"
 
 #: port.cpp:426
-#, fuzzy
 msgid "'lower' and 'upper' must be numeric (double) vectors"
-msgstr "'lower' oraz 'upper' muszą być wektorami liczbowymi"
+msgstr "'lower' oraz 'upper' muszą być (podwójnymi) wektorami liczbowymi"
 
 #: port.cpp:441
 #, fuzzy
@@ -1085,6 +1079,9 @@ msgstr "brakuje wartości w ostatnich %d obserwacjach"
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "to nie powinno się wydarzyć"
+
+#~ msgid "'central' is NA, but must be TRUE or FALSE"
+#~ msgstr "argument 'central' ma wartość NA, a musi mieć wartość TRUE lub FALSE"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "wartości NA/Inf zastąpione przez maksymalne dodatnie wartości"

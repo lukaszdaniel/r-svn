@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
 #: R/unit.R:0
@@ -312,9 +312,8 @@ msgstr "Nie można utworzyć wektora jednostkowego o zerowej długości (podzbi�
 
 #. R/coords.R: stop("Closed must be length 1 and must not be a missing value")
 #: R/coords.R:0
-#, fuzzy
 msgid "Closed must be length 1 and must not be a missing value"
-msgstr "argument 'closed' nie może być brakującą wartością"
+msgstr "argument 'closed' musi mieć długość 1 i nie może być brakującą wartością"
 
 #. R/grid.R: stop("Down viewport failed to record on display list")
 #: R/grid.R:0
@@ -918,15 +917,13 @@ msgstr "potrzeba wyświetlić przynajmniej jedno okno ekranu"
 
 #. R/viewport.R: stop("must specify at least one of 'xData' or 'xscale'")
 #: R/viewport.R:0
-#, fuzzy
 msgid "must specify at least one of 'xData' or 'xscale'"
-msgstr "przynajmniej jeden z 'x' oraz 'xscale' musi być określony"
+msgstr "przynajmniej jeden z 'xData' oraz 'xscale' musi być określony"
 
 #. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
-#, fuzzy
 msgid "must specify at least one of 'yData' or 'yscale'"
-msgstr "tylko jeden z 'font' oraz 'fontface' może być określony"
+msgstr "przynajmniej jeden z 'yData' oraz 'yscale' musi być określony"
 
 #. R/grid.R: stop("must specify at least one viewport")
 #: R/grid.R:0

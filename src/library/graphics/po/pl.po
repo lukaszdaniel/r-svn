@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-04-01 16:29+0200\n"
-"PO-Revision-Date: 2024-09-01 15:31+0200\n"
+"PO-Revision-Date: 2025-05-24 16:46+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: base.cpp:40
 msgid "no base graphics system is registered"
@@ -24,7 +24,7 @@ msgstr "Niepoprawny stan grafiki"
 
 #: base.cpp:352
 msgid "event 'GE_ScalePS' requires a single numeric (double) value"
-msgstr ""
+msgstr "zdarzenie 'GE_ScalePS' wymagarequires a single numeric (double) value"
 
 #: base.cpp:381 base.cpp:388 base.cpp:396
 msgid "the base graphics system is not registered"
@@ -87,11 +87,11 @@ msgstr "Brak aktywnego urządzenia graficznego"
 
 #: graphics.cpp:2887
 msgid "unable to allocate memory (in GPolygon)"
-msgstr ""
+msgstr "nie można przydzielić bloku pamięci (w GPolygon)"
 
 #: graphics.cpp:2921
 msgid "unable to allocate memory (in GPolyline)"
-msgstr ""
+msgstr "nie można przydzielić bloku pamięci (w GPolyline)"
 
 #: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
@@ -189,7 +189,7 @@ msgstr "zbyt wiele komórek w layoucie, limit %d"
 
 #: plot.cpp:45 plot3d.cpp:42
 msgid "invalid type passed to graphics function"
-msgstr ""
+msgstr "nieprawidłowy typ przekazany do funkcji graficznej"
 
 #: plot.cpp:68
 msgid "invalid color specification"
@@ -207,9 +207,8 @@ msgstr "niepoprawny symbol wykresu"
 msgid "invalid font specification"
 msgstr "niepoprawne określenie koloru"
 
-#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193
-#: plot.cpp:2200 plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167
-#: plot3d.cpp:1169 plot3d.cpp:1898
+#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193 plot.cpp:2200 plot.cpp:3223
+#: plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167 plot3d.cpp:1169 plot3d.cpp:1898
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
@@ -265,10 +264,9 @@ msgstr "Oś logarytmiczna musi mieć dodatnie granice"
 msgid "invalid type for axis labels"
 msgstr "niepoprawny typ dla etykiet osi"
 
-#: plot.cpp:787 plot.cpp:1394 plot.cpp:1706 plot.cpp:1771 plot.cpp:1845
-#: plot.cpp:1909 plot.cpp:1982 plot.cpp:2077 plot.cpp:2153 plot.cpp:2431
-#: plot.cpp:2605 plot.cpp:2820 plot.cpp:3364 plot.cpp:3507 plot.cpp:3578
-#: plot.cpp:3740 plot.cpp:4020 plot3d.cpp:1867
+#: plot.cpp:787 plot.cpp:1394 plot.cpp:1706 plot.cpp:1771 plot.cpp:1845 plot.cpp:1909 plot.cpp:1982
+#: plot.cpp:2077 plot.cpp:2153 plot.cpp:2431 plot.cpp:2605 plot.cpp:2820 plot.cpp:3364 plot.cpp:3507
+#: plot.cpp:3578 plot.cpp:3740 plot.cpp:4020 plot3d.cpp:1867
 msgid "too few arguments"
 msgstr "zbyt mało argumentów"
 
@@ -281,9 +279,8 @@ msgstr "niepoprawny numer %d osi"
 msgid "'hadj' must be of length one"
 msgstr "argument 'hadj' musi mieć długość 1"
 
-#: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455
-#: plot.cpp:2463 plot.cpp:2470 plot.cpp:2477 plot.cpp:2484 plot.cpp:2491
-#: plot.cpp:2499 plot.cpp:2506 plot.cpp:3226
+#: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455 plot.cpp:2463 plot.cpp:2470
+#: plot.cpp:2477 plot.cpp:2484 plot.cpp:2491 plot.cpp:2499 plot.cpp:2506 plot.cpp:3226
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "określono '%s' o zerowej długości"
@@ -345,11 +342,11 @@ msgstr "nie można mieszać współrzędnych o zerowej i niezerowej długości"
 
 #: plot.cpp:1874
 msgid "unable to allocate memory (in GPath)"
-msgstr ""
+msgstr "nie można przydzielić bloku pamięci (w GPath)"
 
 #: plot.cpp:1880
 msgid "invalid 'x' or 'y' (in 'GPath')"
-msgstr ""
+msgstr "nieprawidłowe 'x' lub 'y' (w 'GPath')"
 
 #: plot.cpp:1914
 msgid "Empty raster"
@@ -379,10 +376,9 @@ msgstr "niepoprawne określenie 'a=', 'b='"
 msgid "'a' and 'b' must be finite"
 msgstr "argumenty 'a' oraz 'b' muszą być skończone"
 
-#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
-#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
-#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
-#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120 plot.cpp:4140 plot.cpp:4144
+#: plot.cpp:4147 plot.cpp:4167 plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089
+#: plot3d.cpp:1094 plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
 #: stem.cpp:171 stem.cpp:172
 #, c-format
 msgid "invalid '%s' argument"
@@ -499,7 +495,7 @@ msgstr "niepoprawna długość dla argumentu '%s'"
 
 #: plot.cpp:4059
 msgid "unable to allocate memory (in xspline)"
-msgstr ""
+msgstr "nie można przydzielić bloku pamięci (w xspline)"
 
 #: plot3d.cpp:184 plot3d.cpp:1924
 msgid "insufficient 'x' or 'y' values"
@@ -645,9 +641,8 @@ msgstr[2] ""
 "\n"
 
 #: stem.cpp:162
-#, fuzzy
 msgid "invalid input"
-msgstr "niepoprawne jednostki"
+msgstr "niepoprawne wejście"
 
 #: stem.cpp:165
 #, c-format
@@ -656,7 +651,7 @@ msgstr "długi wektor '%s' nie jest wspierany"
 
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
-msgstr ""
+msgstr "zliczenia dla przedziału przekraczają INT_MAX"
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"
