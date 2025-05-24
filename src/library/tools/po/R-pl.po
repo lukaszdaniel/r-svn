@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Bookmarks: -1,232,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #. R/QC.R: gettextf("  %s calls:", f)
@@ -313,9 +313,8 @@ msgstr "Pole 'Authors@R' wskazuje na osoby z nieprawidłowymi identyfikatorami O
 
 #. R/QC.R: gettext("Authors@R field gives persons with duplicated ROR identifiers:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives persons with duplicated ROR identifiers:"
-msgstr "Pole 'Authors@R' wskazuje na osoby z nieprawidłowymi identyfikatorami ORCID:"
+msgstr "Pole 'Authors@R' wskazuje na osoby ze zdublowanymi identyfikatorami ROR:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:")
 #: R/QC.R:0
@@ -324,9 +323,8 @@ msgstr "Pole 'Authors@R' wskazuje na osoby z nieprawidłowymi identyfikatorami O
 
 #. R/QC.R: gettext("Authors@R field gives persons with invalid ROR identifiers:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives persons with invalid ROR identifiers:"
-msgstr "Pole 'Authors@R' wskazuje na osoby z nieprawidłowymi identyfikatorami ORCID:"
+msgstr "Pole 'Authors@R' wskazuje na osoby z nieprawidłowymi identyfikatorami ROR:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:")
 #: R/QC.R:0
@@ -395,7 +393,7 @@ msgstr "Zmiany wymagają określonego 'style'"
 #. R/CRANtools.R: sprintf("Checking %s", m)
 #: R/CRANtools.R:0
 msgid "Checking %s"
-msgstr "sprawdzanie %s"
+msgstr "Sprawdzanie %s"
 
 #. R/news.R: sprintf("\nChunk %s:\n%s", format(seq_along(bad)), bad)
 #: R/news.R:0
@@ -722,13 +720,13 @@ msgstr "W ilustracjach '%s', '%s' oraz '%s' mają te same nazwy ilustracji"
 #. R/admin.R: gettext("Invalid DESCRIPTION file")
 #: R/admin.R:0
 msgid "Invalid DESCRIPTION file"
-msgstr "niepoprawny plik 'DESCRIPTION'"
+msgstr "Niepoprawny plik 'DESCRIPTION'"
 
 #. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(dirname(p))))
 #. R/packages.R: gettextf("Invalid DESCRIPTION file for package %s", sQuote(basename(paths[i])))
 #: R/packages.R:0
 msgid "Invalid DESCRIPTION file for package %s"
-msgstr "niepoprawny plik 'DESCRIPTION' w pakiecie %s"
+msgstr "Niepoprawny plik 'DESCRIPTION' w pakiecie %s"
 
 #. R/QC.R: gettext("Invalid Priority field.")
 #: R/QC.R:0
@@ -768,7 +766,7 @@ msgstr "Fragment licencji jest niepoprawny w pliku DCF."
 #. R/QC.R: gettext("License stub records with missing/empty fields:", paste0("  ",     y))
 #: R/QC.R:0
 msgid "License stub records with missing/empty fields:"
-msgstr "nie można poradzić sobie z obiektami Rd z brakującymi/pustymi nazwami:"
+msgstr "Wpisy o licencjach z brakującymi/pustymi nazwami:"
 
 #. R/dynamicHelp.R: gettextf("Link %s in package %s could not be located", mono(helpdoc),     mono(pkg))
 #: R/dynamicHelp.R:0
@@ -884,9 +882,8 @@ msgstr "Niezgodność w nazwach argumentów:"
 
 #. R/QC.R: gettextf("Missing link(s) in Rd file '%s':", names(xb)[i])
 #: R/QC.R:0
-#, fuzzy
 msgid "Missing link(s) in Rd file '%s':"
-msgstr "Brakujący link lub linki w pliku Rd '%s':"
+msgstr "Brakujące linki w pliku Rd '%s':"
 
 #. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
 #: R/QC.R:0
@@ -1051,9 +1048,8 @@ msgstr "Niestandardowa specyfikacja licencji:"
 
 #. R/QC.R: gettextf("Non-topic package-anchored link(s) in Rd file '%s':",     names(xs)[i])
 #: R/QC.R:0
-#, fuzzy
 msgid "Non-topic package-anchored link(s) in Rd file '%s':"
-msgstr "Linki zakotwiczone w pakiecie nie będące plikami w pliku Rd '%s':"
+msgstr "Linki zakotwiczone w pakiecie nie będące tematami w pliku Rd '%s':"
 
 #. R/Vignettes.R: gettextf("Note: skipping %s", sQuote(file))
 #: R/Vignettes.R:0
@@ -1344,7 +1340,7 @@ msgstr "Domyślny styl JSS nie może być zmieniony."
 #. R/QC.R: stop("The package 'dir' argument must be of length 1")
 #: R/QC.R:0
 msgid "The package 'dir' argument must be of length 1"
-msgstr "argument 'dir' pakiety musi być długości 1"
+msgstr "Argument 'dir' pakietu musi być długości 1"
 
 #. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
@@ -1748,8 +1744,7 @@ msgstr "zawiera pustą linię"
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
-#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "bieżący katalog roboczy nie może być ustalony"
 
@@ -1948,7 +1943,7 @@ msgstr "niepoprawna wartość dla '%s' : %s"
 #. R/build.R: gettextf("invalid value for '--compact-vignettes', assuming %s",     "\"qpdf\"")
 #: R/build.R:0
 msgid "invalid value for '--compact-vignettes', assuming %s"
-msgstr "Niepoprawna wartość '--compact-vignettes', zakładanie %s"
+msgstr "niepoprawna wartość '--compact-vignettes', zakładanie %s"
 
 #. R/Rd2HTML.R: warning("links not supported for 'standalone = FALSE' when _R_HELP_LINKS_TO_TOPICS_=false")
 #: R/Rd2HTML.R:0
@@ -2149,7 +2144,7 @@ msgid ""
 "reading DESCRIPTION for package %s failed with message:\n"
 "  %s"
 msgstr ""
-"Odczytywanie pliku 'DESCRIPTION' dla pakietu %s nie powiodło się zwracając komunikat:\n"
+"odczytywanie pliku 'DESCRIPTION' dla pakietu %s nie powiodło się zwracając komunikat:\n"
 "  %s"
 
 #. R/install.R: message("  restoration failed\n")
@@ -2230,7 +2225,7 @@ msgstr "testowanie '%s' nie powiodło się"
 #. R/utils.R: warning("texi2dvi script/program not available, using emulation")
 #: R/utils.R:0
 msgid "texi2dvi script/program not available, using emulation"
-msgstr "Skrypt/program texi2dvi jest niedostępny, używannie emulacji"
+msgstr "skrypt/program texi2dvi jest niedostępny, używannie emulacji"
 
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 #: R/makeLazyLoad.R:0
@@ -2492,7 +2487,6 @@ msgstr[2] "Znaleziono %d wersji pakietu do przetworzenia."
 
 #. R/QC.R: ngettext(length(x$bad_S4methods), "Found a .Internal call in methods for the following S4 generic:",     "Found .Internal calls in methods for the following S4 generics:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Found a .Internal call in methods for the following S4 generic:"
 msgid_plural "Found .Internal calls in methods for the following S4 generics:"
 msgstr[0] "Znaleziono wywołanie '.Internal' w metodach w następującej funkcji ogólnej S4:"
@@ -2613,7 +2607,6 @@ msgstr[2] "Uwaga: znaleziono %d ciągów oznaczonych jako ciągi UTF-8"
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "Uwaga: znaleziono %d ciąg oznaczony jako \"bytes\""

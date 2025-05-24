@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: Rmd5.cpp:60 Rsha256.cpp:72
 msgid "argument 'files' must be character"
@@ -72,9 +72,8 @@ msgid "unable to allocate buffer for long string at line %d"
 msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
 
 #: gramLatex.cpp:3014 gramRd.cpp:4460
-#, fuzzy
 msgid "unable to allocate in PushState"
-msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
+msgstr "nie można przydzielić bloku pamięci w PushState"
 
 #: gramLatex.cpp:3056 gramRd.cpp:4511
 #, c-format
@@ -102,7 +101,7 @@ msgstr "Brak makra zdefiniowanego dla '%s'."
 
 #: gramRd.cpp:3184 gramRd.cpp:3199
 msgid "internal error: invalid argument to xxusermacro"
-msgstr ""
+msgstr "błąd wewnętrzny: niepoprawny argument przekazany do xxusermacro"
 
 #: gramRd.cpp:3228
 #, c-format
@@ -111,7 +110,7 @@ msgstr "Zbyt mało argumentów przekazanych do makra '%s' użytkownika"
 
 #: gramRd.cpp:3287
 msgid "internal error: inconsistent argument count"
-msgstr ""
+msgstr "błąd wewnętrzny: niezgodna liczba argumentów"
 
 #: gramRd.cpp:3368 gramRd.cpp:3372
 #, c-format
@@ -205,14 +204,13 @@ msgid "invalid argument type"
 msgstr "niepoprawny typ argumentu"
 
 #: text.cpp:168 text.cpp:204 text.cpp:328
-#, fuzzy
 msgid "invalid input"
-msgstr "niepoprawny plik Rd"
+msgstr "niepoprawne wejście"
 
 #: text.cpp:235 text.cpp:257
 msgid "out of memory"
-msgstr "Zabrakło pamięci"
+msgstr "zabrakło pamięci"
 
 #: text.cpp:277 text.cpp:279
 msgid "first arg must be a single character string"
-msgstr ""
+msgstr "pierwszy argument musi być pojedynczym ciągiem znaków"

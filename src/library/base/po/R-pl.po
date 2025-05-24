@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-04-05 17:15\n"
-"PO-Revision-Date: 2025-05-24 13:46+0200\n"
+"PO-Revision-Date: 2025-05-24 20:49+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -635,9 +635,8 @@ msgstr "argument 'recursive' ma wartość NA"
 
 #. R/unlist.R: stop("'recursive' must be a length-1 vector")
 #: R/unlist.R:0
-#, fuzzy
 msgid "'recursive' must be a length-1 vector"
-msgstr "argument 'origin' musi mieć długość 1"
+msgstr "argument 'recursive' musi być wektorem o długość 1"
 
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
@@ -1051,9 +1050,8 @@ msgstr "Dokumentacja dla pakietu %s"
 
 #. R/../../../../share/R/REMOVE.R: gettextf("ERROR: cannot cd to directory %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
 msgid "ERROR: cannot cd to directory %s"
-msgstr "BŁĄD: nie można wejść do katalogu"
+msgstr "BŁĄD: nie można wejść do katalogu %s"
 
 #. R/../../../../share/R/REMOVE.R: stop("ERROR: no packages specified", domain = "R-base", call. = FALSE)
 #: R/../../../../share/R/REMOVE.R:0
@@ -1062,9 +1060,8 @@ msgstr "BŁĄD: nie określono pakietów"
 
 #. R/../../../../share/R/REMOVE.R: gettextf("ERROR: no permission to remove from directory %s",     sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
 msgid "ERROR: no permission to remove from directory %s"
-msgstr "BŁĄD: brak uprawnień aby usunąć z katalogu"
+msgstr "BŁĄD: brak uprawnień aby usunąć z katalogu %s"
 
 #. R/New-Internal.R: gettextf("Error in '%s': ", paste(dcall, collapse = ""), domain = "R-base")
 #. R/conditions.R: gettextf("Error in '%s':", deparse(call, nlines = 1L), domain = "R-base")
@@ -1084,7 +1081,7 @@ msgstr "Błąd:"
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
 msgid "F used instead of FALSE"
-msgstr ""
+msgstr "użyto F zamiast FALSE"
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1188,7 +1185,7 @@ msgstr "Śledzenie nie jest dostepne"
 #. R/stop.R: stop("Only one of 'exprs', 'exprObject' or expressions, not more")
 #: R/stop.R:0
 msgid "Only one of 'exprs', 'exprObject' or expressions, not more"
-msgstr "tylko jedno z 'exprs', 'exprObject' lub wyrażeń, nie więcej"
+msgstr "Tylko jedno z 'exprs', 'exprObject' lub wyrażeń, nie więcej"
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package),     oldversion, paste0(P, conditionMessage(e), "\n"))
 #: R/library.R:0
@@ -1216,9 +1213,8 @@ msgstr "Usuwanie %s"
 
 #. R/../../../../share/R/REMOVE.R: gettextf("Removing from library %s", sQuote(lib))
 #: R/../../../../share/R/REMOVE.R:0
-#, fuzzy
 msgid "Removing from library %s"
-msgstr "Usuwanie z biblioteki"
+msgstr "Usuwanie z biblioteki %s"
 
 #. R/namespace.R: gettextf("S3 method %s was declared but not found", sQuote(method))
 #: R/namespace.R:0
@@ -1277,9 +1273,8 @@ msgstr "Sys.setenv(LANGUAGE=\"%s\") mogło się nie powieść"
 
 #. R/../../../../share/R/examples-header.R: stop("T used instead of TRUE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
-#, fuzzy
 msgid "T used instead of TRUE"
-msgstr "zmienna %s nie ma wartości TRUE"
+msgstr "użyto T zamiast TRUE"
 
 #. R/library.R: gettextf("This is R %s, package %s needs %s %s", current, sQuote(pkgname),     dep$op, target)
 #: R/library.R:0
@@ -1463,7 +1458,7 @@ msgstr "próba ustawienia 'rownames' dla obiektu bez wymiarów"
 #. R/structure.R: stop("attempt to set an attribute on NULL")
 #: R/structure.R:0
 msgid "attempt to set an attribute on NULL"
-msgstr ""
+msgstr "próba ustawienia atrybutu na wartości NULL"
 
 #. R/autoload.R: gettextf("autoloader did not find '%s' in '%s'", name, package)
 #: R/autoload.R:0
@@ -1583,7 +1578,7 @@ msgstr "nie można przekształcić w tabelę"
 #. R/../../../../share/R/nspackloader.R: gettextf("cannot find namespace environment for package %s",     sQuote(pkg))
 #: R/../../../../share/R/nspackloader.R:0
 msgid "cannot find namespace environment for package %s"
-msgstr ""
+msgstr "nie można znaleźć środowiska przestrzeni nazw dla pakietu %s"
 
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
@@ -1651,14 +1646,14 @@ msgstr "indeks dolny składnika musi być ciągiem znaków"
 #. R/conditions.R: stop("condition handlers must be functions")
 #: R/conditions.R:0
 msgid "condition handlers must be functions"
-msgstr "Obsługa zdarzeń (condition handlers) powinna być typu funkcyjnego"
+msgstr "obsługi warunków muszą być funkcjami"
 
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #: R/conditions.R:0
 msgid "condition handlers must be specified with a condition class"
-msgstr "Procedury obsługi warunków muszą być określone za pomocą klasy warunku"
+msgstr "obsługi warunków muszą być określone za pomocą klasy warunku"
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NAs")
 #: R/format.R:0
@@ -2141,7 +2136,7 @@ msgstr "niepoprawne określenie wersji %s"
 #. R/../../../../share/R/examples-header.R: gettextf("items %s were removed from the search path", paste(sQuote(missitems),     collapse = ", "))
 #: R/../../../../share/R/examples-header.R:0
 msgid "items %s were removed from the search path"
-msgstr ""
+msgstr "pozycje %s zostały usunięte ze ścieżki wyszukiwania"
 
 #. R/scale.R: stop("length of 'center' must equal the number of columns of 'x'")
 #: R/scale.R:0
@@ -2642,7 +2637,7 @@ msgstr "pakiet %s posiada licencję, którą musisz zaakceptować po przeglądni
 #. R/namespace.R: gettextf("package %s has a license that you need to accept in an interactive session",     sQuote(pkg))
 #: R/namespace.R:0
 msgid "package %s has a license that you need to accept in an interactive session"
-msgstr "Pakiet %s posiada licencję, którą musisz zaakceptować w interaktywnej sesji"
+msgstr "pakiet %s posiada licencję, którą musisz zaakceptować w interaktywnej sesji"
 
 #. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #: R/namespace.R:0
@@ -3051,18 +3046,17 @@ msgstr "wersja %s pakietu %s zakryta przez wersję %s w %s"
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr ""
+msgstr "bez argumentu 'by', co najmniej jeden z argumentów 'to' i 'from' musi być określony"
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified"
-msgstr "dokładnie dwa z 'to', 'by' oraz 'length.out' / 'along.with' muszą być określone"
+msgstr "bez podanego 'by', gdy brakuje jednego z 'to' lub 'from', argument 'length.out' / 'along.with' musi być określony"
 
 #. R/../../../../share/R/examples-header.R: gettextf("working directory was changed to %s, resetting", sQuote(wd))
 #: R/../../../../share/R/examples-header.R:0
 msgid "working directory was changed to %s, resetting"
-msgstr ""
+msgstr "katalog roboczy został zmieniony na %s, resetowanie"
 
 #. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
@@ -3237,8 +3231,8 @@ msgstr[2] "biblioteki %s nie zawierają pakietów"
 msgid "non-numeric-alike variable in data frame: "
 msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0] "zmienna nieliczbowa w ramce danych: "
-msgstr[1] "zmienne nieliczbowe w ramce danych:"
-msgstr[2] "zmienne nieliczbowe w ramce danych:"
+msgstr[1] "zmienne nieliczbowe w ramce danych: "
+msgstr[2] "zmienne nieliczbowe w ramce danych: "
 
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
