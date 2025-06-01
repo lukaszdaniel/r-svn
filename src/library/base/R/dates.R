@@ -275,7 +275,7 @@ seq.Date <- function(from, to, by, length.out = NULL, along.with = NULL, ...)
             stop("invalid 'by' string")
         bys <- c("days", "weeks", "months", "quarters", "years")
         valid <- pmatch(by2[nby2], bys) 
-        if(is.na(valid)) stop("invalid string for 'by'")
+        if(is.na(valid)) stop("invalid 'by' string")
         by <- bys[valid] # had *partial* match
         if(valid > 2L) { # seq.POSIXt handles the logic for non-arithmetic cases
             if (nby2 == 2L) by <- paste(by2[1L], by)

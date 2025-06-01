@@ -172,17 +172,19 @@ function(dir, potFile, name = "R", version, bugs)
     dir <- file_path_as_absolute(dir)
     if(missing(potFile))
         potFile <- paste0("R-", basename(dir), ".pot")
+
+    regpth <- paste(dir, "/", sep = "", collapse = "")
+
+    # --- Extract singular messages from xgettext ---
     msgid <- unlist(xgettext(dir, asCall = FALSE))
     ind <- 2*seq_len(length(msgid)/2)-1 # traverse through every odd record
     msgid <- data.frame(msg = msgid[ind], Cmd = msgid[ind+1], location = names(msgid[ind]), stringsAsFactors=FALSE, row.names = NULL)
     msgid <- msgid[order(msgid[, "msg"]), ] # order wrt translatable msg
-    regpth <- paste(dir, "/", sep = "", collapse = "")
-    # trim command
+
+    # --- Combine entries with same msg ---
     msgid[,"Cmd"] <- paste(sub("\\.msg[0-9]*$", ": ", sub(regpth, "#. ", msgid[,"location"])), msgid[,"Cmd"], "\n", sep = "")
-    # trim location
     msgid[,"location"] <- sub("\\.msg[0-9]*$", ": 0", sub(regpth, "\n#: ", msgid[,"location"]))
 
-    # group all locations and commands wrt translatable msg
     for(i in seq_len(nrow(msgid)-1)) 
       if(msgid[i,"msg"] == msgid[i+1,"msg"]) {
         if(msgid[i,"location"] != msgid[i+1,"location"])
@@ -194,18 +196,17 @@ function(dir, potFile, name = "R", version, bugs)
     if(length(msgid) > 0L)
 	msgid[,"msg"] <- shQuote(encodeString(msgid[,"msg"]), type="cmd")  # need to quote \n, \t etc
 
+    # --- Extract plural messages from xngettext ---
     msgid_plural <- unlist(xngettext(dir))
     if(!is.null(msgid_plural)) {
     ind <- 3*seq_len(length(msgid_plural)/3)-2 # traverse through every 3rd record starting from 1
     msgid_plural <- data.frame(Smsg = msgid_plural[ind], Pmsg = msgid_plural[ind + 1], Cmd = msgid_plural[ind + 2], location = names(msgid_plural[ind]), stringsAsFactors=FALSE, row.names = NULL)
     msgid_plural <- msgid_plural[order(msgid_plural[, "Smsg"]), ] # order wrt translatable msg
-    regpth <- paste(dir, "/", sep = "", collapse = "")
-    # trim command
+
+    # --- Combine entries with same msg ---
     msgid_plural[,"Cmd"] <- paste(sub("\\.msg[0-9]*$", ": ", sub(regpth, "#. ", msgid_plural[,"location"])), msgid_plural[,"Cmd"], "\n", sep = "")
-    # trim location
     msgid_plural[,"location"] <- sub("\\.msg[0-9]*$", ": 0", sub(regpth, "\n#: ", msgid_plural[,"location"]))
 
-    # group all locations and commands wrt translatable msg
     for(i in seq_len(nrow(msgid_plural)-1)) 
       if(msgid_plural[i,"Smsg"] == msgid_plural[i+1,"Smsg"]) {
         if(msgid_plural[i,"location"] != msgid_plural[i+1,"location"]) 
@@ -220,6 +221,7 @@ function(dir, potFile, name = "R", version, bugs)
     if(missing(version))
         version <- paste(R.version$major, R.version$minor, sep = ".")
     if(missing(bugs)) bugs <- "bugs.r-project.org"
+
     writeLines(con = con,
                c('msgid ""',
                  'msgstr ""',
@@ -233,9 +235,11 @@ function(dir, potFile, name = "R", version, bugs)
                  '"Language-Team: LANGUAGE <LL@li.org>\\n"',
                  '"Language: \\n"',
                  '"MIME-Version: 1.0\\n"',
-                 '"Content-Type: text/plain; charset=CHARSET\\n"',
+                 sprintf('"Content-Type: text/plain; charset=%s\\n"', "UTF-8"),
                  '"Content-Transfer-Encoding: 8bit\\n"',
                  if(!is.null(msgid_plural)) '"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\\n"'))
+
+    # --- Write singular messages ---
     for(i in seq_len(nrow(msgid)))
         writeLines(con=con, c('', 
 				msgid[i, "location"],
@@ -243,6 +247,7 @@ function(dir, potFile, name = "R", version, bugs)
 				paste('msgid', msgid[i, "msg"]),
 				'msgstr ""'))
 
+    # --- Write plural messages ---
     if(!is.null(msgid_plural)) {
     for(i in seq_len(nrow(msgid_plural))) {
                 writeLines(

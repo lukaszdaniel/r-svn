@@ -304,8 +304,8 @@ attribute_hidden SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
     s2 = CADR(args);
     PROTECT(s1 = eval(s1, env));
     if (!isNumber(s1))
-	errorcall(call, _("invalid 'x' type in 'x %s y'"),
-		  PRIMVAL(op) == 1 ? "&&" : "||");
+	errorcall(call, _("invalid %s type in 'x %s y'"),
+		  "x", PRIMVAL(op) == 1 ? "&&" : "||");
 
     x1 = asLogical2(s1, /*checking*/ 1, call);
     UNPROTECT(1); /* s1 */
@@ -313,8 +313,8 @@ attribute_hidden SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 #define get_2nd							\
 	PROTECT(s2 = eval(s2, env));				\
 	if (!isNumber(s2))					\
-	    errorcall(call, _("invalid 'y' type in 'x %s y'"),	\
-		      PRIMVAL(op) == 1 ? "&&" : "||");		\
+	    errorcall(call, _("invalid %s type in 'x %s y'"),	\
+		      "y", PRIMVAL(op) == 1 ? "&&" : "||");		\
 	x2 = asLogical2(s2, 1, call);			\
 	UNPROTECT(1); /* s2 */
 

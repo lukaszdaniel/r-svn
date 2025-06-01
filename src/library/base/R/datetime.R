@@ -1004,7 +1004,7 @@ function(from, to, by, length.out = NULL, along.with = NULL, ...)
         valid <- pmatch(by2[length(by2)],
                         c("secs", "mins", "hours", "days", "weeks",
                           "months", "years", "DSTdays", "quarters"))
-        if(is.na(valid)) stop("invalid string for 'by'")
+        if(is.na(valid)) stop("invalid 'by' string")
         if(valid <= 5L) {
             by <- c(1, 60, 3600, 86400, 7*86400)[valid]
             if (length(by2) == 2L) by <- by * as.integer(by2[1L])
