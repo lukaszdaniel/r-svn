@@ -37,12 +37,15 @@ function(dir, verbose = FALSE, asCall = TRUE)
     out <- vector("list", length = length(R_files))
     names(out) <- R_files
 
-    find_strings <- function(e) {
-        find_strings2 <- function(e, cmd_e, suppress) {
+    find_strings <- function(e, srcref = NULL) {
+        find_strings2 <- function(e, cmd_e, suppress, srcref = NULL) {
             if(is.character(e)) {
                 e <- sub("^[ \t\n]*", "", e)
                 e <- sub("[ \t\n]*$", "", e)
-                if(!suppress) strings <<- c(strings, list(c(msg = e, cmd = cmd_e)))
+                if(!suppress) {
+                    line <- if (!is.null(srcref)) srcref[1L] else 0
+                    strings <<- c(strings, list(c(msg = e, cmd = cmd_e, line = line)))
+                }
             } else if(is.call(e)) {
                 cmd_e <- paste(deparse(e), sep = "", collapse = "")
                 if(is.name(e[[1L]])) {
@@ -63,7 +66,7 @@ function(dir, verbose = FALSE, asCall = TRUE)
                     } else if(fname == "ngettext")
                         return()
                 }
-                for(i in seq_along(e)) find_strings2(e[[i]], cmd_e, suppress)
+                for(i in seq_along(e)) find_strings2(e[[i]], cmd_e, suppress, attr(e, "srcref"))
             }
         }
         if(is.call(e)
@@ -78,25 +81,29 @@ function(dir, verbose = FALSE, asCall = TRUE)
              ## remove named args
              if(!is.null(names(e)))
                  e <- e[names(e) %notin% c("call.", "immediate.", "domain")]
+
+            line <- if (!is.null(srcref)) srcref[1L] else 0
+
              if(asCall) {
                  e <- sub("^[ \t\n]*", "", as.character(e)[-1L])
                  e <- sub("[ \t\n]*$", "", e)
-                 if(!suppress) strings <<- c(strings, list(c(msg = e, cmd = cmd_e)))
+                 if(!suppress) strings <<- c(strings, list(c(msg = e, cmd = cmd_e, line = line)))
              } else {
                  if(as.character(e[[1L]]) == "gettextf") {
                      e <- match.call(gettextf, e)
                      e <- e["fmt"] # just look at fmt arg
                  }
-                 for(i in seq_along(e)) find_strings2(e[[i]], cmd_e, suppress)
+                 for(i in seq_along(e)) find_strings2(e[[i]], cmd_e, suppress, attr(e, "srcref"))
              }
         } else if(is.recursive(e))
-            for(i in seq_along(e)) Recall(e[[i]])
+            for(i in seq_along(e)) Recall(e[[i]], attr(e[[i]], "srcref"))
     }
 
     for(f in R_files) {
         if(verbose) message(gettextf("parsing '%s'", f), domain = "R-tools")
         strings <- list()
-        for(e in parse(file = f)) find_strings(e)
+        exprs <- parse(file = f, keep.source = TRUE)
+        for (e in exprs) find_strings(e, attr(e, "srcref"))
         ## strip leading and trailing white space
         out[[f]] <- structure(strings, class="xgettext")
     }
@@ -109,6 +116,7 @@ print.xgettext <- function(x, ...)
     lapply(x, function(x)
            cat("\nmsgid        = ", encodeString(x[1L]),
                "\ncommand      = ", encodeString(x[2L]),
+               "\nline         = ", encodeString(x[3L]),
                "\n", sep = ""))
     invisible(x)
 }
@@ -120,6 +128,7 @@ print.xngettext <- function(x, ...)
         cat("\nmsgid        = ", e[1L],
             "\nmsgid_plural = ", e[2L],
             "\ncommand      = ", e[3L],
+            "\nline         = ", e[4L],
             "\n", sep = "")
     })
     invisible(x)
@@ -140,7 +149,7 @@ function(dir, verbose = FALSE)
     out <- vector("list", length = length(R_files))
     names(out) <- R_files
 
-    find_strings <- function(e) {
+    find_strings <- function(e, srcref = NULL) {
         if(is.call(e) && is.name(e[[1L]])
            && as.character(e[[1L]]) %in% "ngettext") {
 	    cmd_e <- paste(deparse(e), sep = "", collapse = "")
@@ -148,18 +157,22 @@ function(dir, verbose = FALSE)
             domain <- e[["domain"]]
             suppress <- !is.null(domain) && !is.name(domain) && is.na(domain)
 	    if (!suppress &&
-                is.character(e[["msg1"]]) && is.character(e[["msg2"]]))
+                is.character(e[["msg1"]]) && is.character(e[["msg2"]])) {
+	    	line <- if (!is.null(srcref)) srcref[1L] else 0
 	    	strings <<- c(strings, list(c(msg1 = e[["msg1"]],
 	    				      msg2 = e[["msg2"]],
-	    				      cmd  = cmd_e)))
+	    				      cmd  = cmd_e,
+	    				      line = line)))
+            }
         } else if(is.recursive(e))
-            for(i in seq_along(e)) Recall(e[[i]])
+            for(i in seq_along(e)) Recall(e[[i]], attr(e[[i]], "srcref"))
     }
 
     for(f in R_files) {
         if(verbose) message(gettextf("parsing '%s'", f), domain = "R-tools")
         strings <- list()
-        for(e in parse(file = f)) find_strings(e)
+        exprs <- parse(file = f, keep.source = TRUE)
+        for(e in exprs) find_strings(e, attr(e, "srcref"))
         out[[f]] <- structure(strings, class="xngettext")
     }
 
@@ -176,46 +189,93 @@ function(dir, potFile, name = "R", version, bugs)
     regpth <- paste(dir, "/", sep = "", collapse = "")
 
     # --- Extract singular messages from xgettext ---
-    msgid <- unlist(xgettext(dir, asCall = FALSE))
-    ind <- 2*seq_len(length(msgid)/2)-1 # traverse through every odd record
-    msgid <- data.frame(msg = msgid[ind], Cmd = msgid[ind+1], location = names(msgid[ind]), stringsAsFactors=FALSE, row.names = NULL)
-    msgid <- msgid[order(msgid[, "msg"]), ] # order wrt translatable msg
+    convert_singular_to_df <- function(out) {
+        result <- lapply(names(out), function(fname) {
+        entries <- out[[fname]]
+        lapply(entries, function(entry) {
+          data.frame(
+            msg = entry[["msg"]],
+            command = entry[["cmd"]],
+            line = entry[["line"]],
+            file = sub(regpth, "", fname),
+            stringsAsFactors = FALSE
+          )
+        })
+        })
+
+        # Flatten list and filter NULLs
+        result <- Filter(Negate(is.null), unlist(result, recursive = FALSE))
+
+        # Combine into data frame
+        do.call(rbind, result)
+    }
+    #raw <- unlist(xgettext(dir, asCall = FALSE))
+    msg_list <- xgettext(dir, asCall = FALSE)
+    msg_df <- convert_singular_to_df(msg_list)
+    msg_df <- msg_df[order(msg_df[["msg"]]), ]
 
     # --- Combine entries with same msg ---
-    msgid[,"Cmd"] <- paste(sub("\\.msg[0-9]*$", ": ", sub(regpth, "#. ", msgid[,"location"])), msgid[,"Cmd"], "\n", sep = "")
-    msgid[,"location"] <- sub("\\.msg[0-9]*$", ": 0", sub(regpth, "\n#: ", msgid[,"location"]))
+    msg_df$loc_str <- sprintf("\n#: %s: %s", msg_df$file, msg_df$line)
+    msg_df$Cmd_str <- sprintf("#. %s: %s\n", msg_df$file, msg_df$command)
 
-    for(i in seq_len(nrow(msgid)-1)) 
-      if(msgid[i,"msg"] == msgid[i+1,"msg"]) {
-        if(msgid[i,"location"] != msgid[i+1,"location"])
-		 msgid[i+1,"location"] <- paste(msgid[i,"location"], msgid[i+1,"location"], sep = "", collapse = "")
-        msgid[i+1,"Cmd"] <- paste(msgid[i,"Cmd"], msgid[i+1,"Cmd"], sep = "", collapse = "")
-        msgid[i, ] <- "" # mark record as empty ""
-      }
-    msgid <- msgid[nzchar(msgid[,"msg"]), ]
-    if(length(msgid) > 0L)
-	msgid[,"msg"] <- shQuote(encodeString(msgid[,"msg"]), type="cmd")  # need to quote \n, \t etc
+    for(i in seq_len(nrow(msg_df) - 1)) {
+        if(msg_df$msg[i] == msg_df$msg[i + 1]) {
+            if(msg_df$loc_str[i] != msg_df$loc_str[i + 1])
+                msg_df$loc_str[i + 1] <- paste0(msg_df$loc_str[i], msg_df$loc_str[i + 1])
+            msg_df$Cmd_str[i + 1] <- paste0(msg_df$Cmd_str[i], msg_df$Cmd_str[i + 1])
+            msg_df[i, ] <- "" # mark record as empty ""
+        }
+    }
+    msg_df <- msg_df[nzchar(msg_df$msg), ]
+    msg_df$msg <- shQuote(encodeString(msg_df$msg), type = "cmd")  # need to quote \n, \t etc
 
     # --- Extract plural messages from xngettext ---
-    msgid_plural <- unlist(xngettext(dir))
-    if(!is.null(msgid_plural)) {
-    ind <- 3*seq_len(length(msgid_plural)/3)-2 # traverse through every 3rd record starting from 1
-    msgid_plural <- data.frame(Smsg = msgid_plural[ind], Pmsg = msgid_plural[ind + 1], Cmd = msgid_plural[ind + 2], location = names(msgid_plural[ind]), stringsAsFactors=FALSE, row.names = NULL)
-    msgid_plural <- msgid_plural[order(msgid_plural[, "Smsg"]), ] # order wrt translatable msg
+    convert_plural_to_df <- function(out) {
+        result <- lapply(names(out), function(fname) {
+        entries <- out[[fname]]
+        lapply(entries, function(entry) {
+            data.frame(
+            Smsg = entry[["msg1"]],
+            Pmsg = entry[["msg2"]],
+            command =entry[["cmd"]],
+            line = entry[["line"]],
+            file = sub(regpth, "", fname),
+            stringsAsFactors = FALSE
+          )
+        })
+        })
+
+        # Flatten list and filter NULLs
+        result <- Filter(Negate(is.null), unlist(result, recursive = FALSE))
+
+        # Combine into data frame
+        do.call(rbind, result)
+    }
+
+    msgp_list <- xngettext(dir)
+    msgp_df <- data.frame()
+    if(length(msgp_list) > 0) {
+    msgp_df <- convert_plural_to_df(msgp_list)
+    msgp_df <- msgp_df[order(msgp_df$Smsg), ]
 
     # --- Combine entries with same msg ---
-    msgid_plural[,"Cmd"] <- paste(sub("\\.msg[0-9]*$", ": ", sub(regpth, "#. ", msgid_plural[,"location"])), msgid_plural[,"Cmd"], "\n", sep = "")
-    msgid_plural[,"location"] <- sub("\\.msg[0-9]*$", ": 0", sub(regpth, "\n#: ", msgid_plural[,"location"]))
+    msgp_df$loc_str <- sprintf("\n#: %s: %s", msgp_df$file, msgp_df$line)
+    msgp_df$Cmd_str <- sprintf("#. %s: %s\n", msgp_df$file, msgp_df$command)
 
-    for(i in seq_len(nrow(msgid_plural)-1)) 
-      if(msgid_plural[i,"Smsg"] == msgid_plural[i+1,"Smsg"]) {
-        if(msgid_plural[i,"location"] != msgid_plural[i+1,"location"]) 
-		 msgid_plural[i+1,"location"] <- paste(msgid_plural[i,"location"], msgid_plural[i+1,"location"], sep = "", collapse = "")
-        msgid_plural[i+1,"Cmd"] <- paste(msgid_plural[i,"Cmd"], msgid_plural[i+1,"Cmd"], sep = "", collapse = "")
-        msgid_plural[i, ] <- "" # mark record as empty ""
-      }
-    msgid_plural <- msgid_plural[nzchar(msgid_plural[,"location"]), ]
+    for(i in seq_len(nrow(msgp_df) - 1)) {
+        if(msgp_df$Smsg[i] == msgp_df$Smsg[i + 1]) {
+            if(msgp_df$loc_str[i] != msgp_df$loc_str[i + 1])
+                msgp_df$loc_str[i + 1] <- paste0(msgp_df$loc_str[i], msgp_df$loc_str[i + 1])
+            msgp_df$Cmd_str[i + 1] <- paste0(msgp_df$Cmd_str[i], msgp_df$Cmd_str[i + 1])
+            msgp_df[i, ] <- "" # mark record as empty ""
+        }
     }
+    msgp_df <- msgp_df[nzchar(msgp_df$Smsg), ]
+    msgp_df$Smsg <- shQuote(encodeString(msgp_df$Smsg), type = "cmd")
+    msgp_df$Pmsg <- shQuote(encodeString(msgp_df$Pmsg), type = "cmd")
+    }
+
+    # --- Write POT file ---
     con <- file(potFile, "wt")
     on.exit(close(con))
     if(missing(version))
@@ -237,26 +297,24 @@ function(dir, potFile, name = "R", version, bugs)
                  '"MIME-Version: 1.0\\n"',
                  sprintf('"Content-Type: text/plain; charset=%s\\n"', "UTF-8"),
                  '"Content-Transfer-Encoding: 8bit\\n"',
-                 if(!is.null(msgid_plural)) '"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\\n"'))
+                 if(nrow(msgp_df) > 0) '"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\\n"'))
 
     # --- Write singular messages ---
-    for(i in seq_len(nrow(msgid)))
+    for(i in seq_len(nrow(msg_df)))
         writeLines(con=con, c('', 
-				msgid[i, "location"],
-				msgid[i, "Cmd"],
-				paste('msgid', msgid[i, "msg"]),
+				msg_df[i, "loc_str"],
+				msg_df[i, "Cmd_str"],
+				sprintf("msgid %s", msg_df[i, "msg"]),
 				'msgstr ""'))
 
     # --- Write plural messages ---
-    if(!is.null(msgid_plural)) {
-    for(i in seq_len(nrow(msgid_plural))) {
-                writeLines(
-                    con=con,
-                    c('',
-                      msgid_plural[i, "location"],
-                      msgid_plural[i, "Cmd"],
-                      paste('msgid       ', shQuote(encodeString(msgid_plural[i, "Smsg"]), type="cmd")),
-                      paste('msgid_plural', shQuote(encodeString(msgid_plural[i, "Pmsg"]), type="cmd")),
+    if(nrow(msgp_df) > 0) {
+    for(i in seq_len(nrow(msgp_df))) {
+            writeLines(con = con, c("",
+                      msgp_df[i, "loc_str"],
+                      msgp_df[i, "Cmd_str"],
+                      sprintf("msgid        %s", msgp_df[i, "Smsg"]),
+                      sprintf("msgid_plural %s", msgp_df[i, "Pmsg"]),
                       'msgstr[0]    ""',
                       'msgstr[1]    ""')
                 )
