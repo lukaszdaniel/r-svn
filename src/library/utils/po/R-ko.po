@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:37\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -29,7 +29,6 @@ msgstr ""
 msgid "%s has a help file but no examples"
 msgstr "%s에 대한 도움말이 있지만 예제는 없습니다"
 
-#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
 #. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
 #: R/citation.R:0
 msgid "%s has to be one of %s"
@@ -62,11 +61,6 @@ msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s'은 형식적인 제네릭 함수이므로 S3 메소드를 아마 찾을 수 없을 것입니다"
 
 #. R/help.search.R: gettextf("'%s' must be a character string", arg)
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
 #: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
@@ -105,7 +99,6 @@ msgid "'as.is' should be specified by the caller; using TRUE"
 msgstr ""
 
 #. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
-#. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
 #. R/windows/create.post.R: stop("'ccaddress' must be of length 1")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
 msgid "'ccaddress' must be of length 1"
@@ -139,8 +132,9 @@ msgstr "'compressed'는 반드시 논리값 또는 문자이어야 합니다"
 #. R/unix/download.file.R: stop("'curl' call had nonzero exit status")
 #. R/windows/download.file.R: stop("'curl' call had nonzero exit status")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
 msgid "'curl' call had nonzero exit status"
-msgstr ""
+msgstr "다운로드의 종료상태(exit status)가 0이 아닙니다."
 
 #. R/packages.R: stop("'destdir' is not a directory")
 #: R/packages.R:0
@@ -148,8 +142,6 @@ msgid "'destdir' is not a directory"
 msgstr "'destdir'는 디렉토리가 아닙니다"
 
 #. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 msgid "'destfile' must be a length-one character vector"
@@ -190,7 +182,6 @@ msgstr "'file'은 반드시 \"\" 또는 연결이 열려있는 객체이어야 �
 msgid "'file' must be NULL, a character string or a connection"
 msgstr "'file'은 반드시 NULL, 문자열, 또는 커넥션이어야 합니다."
 
-#. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/write.table.R: stop("'file' must be a character string or connection")
 #: R/readtable.R:0 R/write.table.R:0
@@ -272,7 +263,6 @@ msgid "'memory.size()' is no longer supported"
 msgstr "'memory.size()'는 윈도우즈 전용입니다"
 
 #. R/de.R: warning("'modes' argument ignored")
-#. R/de.R: warning("'modes' argument ignored")
 #: R/de.R:0
 msgid "'modes' argument ignored"
 msgstr "'modes' 인자가 무시되었습니다"
@@ -299,8 +289,6 @@ msgid "'package' must be a character vector or NULL"
 msgstr "'package'는 반드시 문자열 또는 NULL이어야 합니다"
 
 #. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
-#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
-#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #: R/progressBar.R:0 R/windows/winDialog.R:0
 msgid "'pb' is not from class %s"
@@ -337,7 +325,6 @@ msgid "'tar' returned non-zero exit code %d"
 msgstr "'tar'는 0 이 아닌 종료코드 %d를 반환했습니다"
 
 #. R/tar.R: stop("'tarfile' must be a character string or a connection")
-#. R/tar.R: stop("'tarfile' must be a character string or a connection")
 #: R/tar.R:0
 msgid "'tarfile' must be a character string or a connection"
 msgstr "'tarfile'은 반드시 문자열 또는 연결이어야 합니다"
@@ -353,10 +340,6 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr "'topic'은 반드시 이름, 길이가 하나인 문자벡터, 또는 예약어이어야 합니다"
 
 #. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 msgid "'url' must be a length-one character vector"
@@ -365,8 +348,9 @@ msgstr "'url'은 반드시 길이가 1인 문자형 벡터이어야 합니다."
 #. R/unix/download.file.R: stop("'wget' call had nonzero exit status")
 #. R/windows/download.file.R: stop("'wget' call had nonzero exit status")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
+#, fuzzy
 msgid "'wget' call had nonzero exit status"
-msgstr ""
+msgstr "다운로드의 종료상태(exit status)가 0이 아닙니다."
 
 #. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---")
 #: R/packages.R:0
@@ -406,8 +390,9 @@ msgstr "사용가능한 environments가 다음의 호출을 가집니다:"
 
 #. R/debugger.R: gettext("Browsing in the environment with call:\n   ")
 #: R/debugger.R:0
+#, fuzzy
 msgid "Browsing in the environment with call:"
-msgstr ""
+msgstr "사용가능한 environments가 다음의 호출을 가집니다:"
 
 #. R/askYesNo.R: c("Yes", "No", "Cancel")
 #: R/askYesNo.R:0
@@ -415,9 +400,6 @@ msgid "Cancel"
 msgstr ""
 
 #. R/help.request.R: stop("Cancelled by user")
-#. R/help.request.R: stop("Cancelled by user")
-#. R/help.request.R: stop("Cancelled by user")
-#. R/packages2.R: stop("Cancelled by user")
 #. R/packages2.R: stop("Cancelled by user")
 #: R/help.request.R:0 R/packages2.R:0
 msgid "Cancelled by user"
@@ -443,9 +425,6 @@ msgstr "PDF 문서를 생성합니다."
 msgid "Could not create file %s, aborting"
 msgstr "파일 %s을 생성할 수 없어 종료합니다"
 
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #: R/prompt.R:0
 msgid "Created file named %s."
@@ -489,8 +468,9 @@ msgstr ""
 #. R/unix/mac.install.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
 #. R/windows/install.packages.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
+#, fuzzy
 msgid "ERROR: failed to create lock directory %s"
-msgstr ""
+msgstr "디렉토리 %s를 생성하는데 실패했습니다"
 
 #. R/unix/mac.install.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
 #. R/windows/install.packages.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
@@ -500,9 +480,6 @@ msgid ""
 "Try removing %s"
 msgstr ""
 
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
 #. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
 #: R/prompt.R:0
 msgid "Edit the file and move it to the appropriate directory."
@@ -529,7 +506,6 @@ msgstr "메뉴로부터 해당항목을 누르거나, 종료하려면 0을 입�
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "하나 또는 그 이상의 숫자를 공백을 이용하여 입력하거나, 취소를 하고자 한다면 빈 라인을 입력해주세요"
 
-#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 #: R/aspell.R:0
 msgid "Filter '%s' is not available."
@@ -681,7 +657,6 @@ msgstr "%s에 의해 발견된 비네트가 없습니다."
 msgid "Not a validObject():"
 msgstr ""
 
-#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
 #: R/citation.R:0
@@ -853,8 +828,9 @@ msgstr ""
 
 #. R/askYesNo.R: stop("Unrecognized response ", dQuote(ans))
 #: R/askYesNo.R:0
+#, fuzzy
 msgid "Unrecognized response"
-msgstr ""
+msgstr "인식할 수 없는 특수한 데이터 값입니다"
 
 #. R/read.DIF.R: stop("Unrecognized special data value")
 #: R/read.DIF.R:0
@@ -863,8 +839,9 @@ msgstr "인식할 수 없는 특수한 데이터 값입니다"
 
 #. R/read.DIF.R: stop("Unrecognized value indicator")
 #: R/read.DIF.R:0
+#, fuzzy
 msgid "Unrecognized value indicator"
-msgstr ""
+msgstr "인식할 수 없는 특수한 데이터 값입니다"
 
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
 #. R/packages2.R: message("Updating HTML index of packages in '.Library'")
@@ -901,7 +878,6 @@ msgstr "브라우저를 이용하여 mailto: URI를 엽니다"
 msgid "Using the first match ..."
 msgstr "첫번째로 일치하는 것을 사용합니다 ..."
 
-#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
 #: R/Sweave.R:0
 msgid "Warning: unknown option %s"
@@ -986,7 +962,6 @@ msgid "at least one vector element is required"
 msgstr "최소한 한개이상의 벡터를 구성하는 요소가 필요합니다"
 
 #. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
-#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
 #: R/write.table.R:0
 msgid "attempt to set '%s' ignored"
 msgstr "'%s'로 설정하고자 하는 시도가 무시되었습니다"
@@ -1023,17 +998,15 @@ msgid "cannot create directory '%s'"
 msgstr "디렉토리 '%s'를 생성할 수 없습니다"
 
 #. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
 #: R/prompt.R:0
 msgid "cannot determine a usable name"
 msgstr "사용가능한 이름을 결정할 수 없습니다"
 
 #. R/prompt.R: stop("cannot determine import name")
 #: R/prompt.R:0
+#, fuzzy
 msgid "cannot determine import name"
-msgstr ""
+msgstr "사용가능한 이름을 결정할 수 없습니다"
 
 #. R/edit.R: stop("cannot edit NULL row names")
 #: R/edit.R:0
@@ -1164,7 +1137,6 @@ msgstr "다운로드의 종료상태(exit status)가 0이 아닙니다."
 
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
-#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #: R/packages.R:0
 msgid "download of package %s failed"
 msgstr "패키지 %s를 다운로드 하는데 실패했습니다"
@@ -1191,8 +1163,6 @@ msgid "empty beginning of file"
 msgstr ""
 
 #. R/objects.R: stop("environment specified is not a package")
-#. R/objects.R: stop("environment specified is not a package")
-#. R/objects.R: stop("environment specified is not a package")
 #: R/objects.R:0
 msgid "environment specified is not a package"
 msgstr "지정된 환경은 패키지가 아닙니다"
@@ -1209,13 +1179,10 @@ msgstr "모든 패키지는 최소한 한 개이상의 다른 패키지들과 �
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
 msgid "failed to copy %s to %s"
 msgstr "%s를 %s로 복사하는데 실패했습니다"
 
-#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
-#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
 #. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
 #. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
 #: R/windows/install.packages.R:0
@@ -1233,8 +1200,6 @@ msgstr "디렉토리 %s를 생성하는데 실패했습니다"
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr ""
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
 msgid "file %s is not a macOS binary package"
@@ -1308,7 +1273,6 @@ msgstr "올바르게 구성되지 않은 'instPkgs' 행렬입니다"
 
 #. R/tar.R: if (is.character(tarfile)) "incomplete block on file" else "incomplete block: rather use gzfile(.) created connection?"
 #. R/tar.R: stop("incomplete block on file")
-#. R/tar.R: stop("incomplete block on file")
 #: R/tar.R:0
 msgid "incomplete block on file"
 msgstr "파일에 완성되지 않은 블럭이 있습니다"
@@ -1329,14 +1293,10 @@ msgid "incorrect field specification"
 msgstr "항목지정이 잘못되었습니다"
 
 #. R/help.search.R: stop("incorrect type specification")
-#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 msgid "incorrect type specification"
 msgstr "유형지정이 잘못되었습니다"
 
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #: R/packages2.R:0
 msgid "inferring 'repos = NULL' from 'pkgs'"
@@ -1366,7 +1326,6 @@ msgstr ""
 msgid "installation of package %s failed"
 msgstr "패키지 %s를 다운로드 하는데 실패했습니다"
 
-#. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #: R/packages2.R:0
 msgid "installation of package %s had non-zero exit status"
@@ -1451,7 +1410,6 @@ msgstr "'socket' 인자가 잘못되었습니다"
 msgid "invalid 'tarfile' argument"
 msgstr "'tarfile' 인자가 잘못되었습니다"
 
-#. R/packages.R: stop("invalid 'type'")
 #. R/packages.R: stop("invalid 'type'")
 #: R/packages.R:0
 #, fuzzy
@@ -1564,7 +1522,6 @@ msgid "menu() cannot be used non-interactively"
 msgstr "menu()는 인터랙티브하게 사용할 수 없습니다"
 
 #. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
-#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
 #: R/packages.R:0
 msgid "metadata of %s is corrupt"
 msgstr "메타데이터 %s가 손상되었습니다"
@@ -1587,8 +1544,9 @@ msgstr "객체 %s에만 사용할 수 있는 메소드입니다."
 
 #. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
 #: R/packages.R:0
+#, fuzzy
 msgid "mirror non-interactively"
-msgstr ""
+msgstr "비대화식으로 저장소드을 설정할 수 없습니다"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -1628,7 +1586,6 @@ msgstr "반드시 'max'는  'min'보다 큰 값을 가져야 합니다"
 msgid "must have some non-empty fields"
 msgstr ""
 
-#. R/unix/create.post.R: stop("must specify 'address'")
 #. R/unix/create.post.R: stop("must specify 'address'")
 #. R/windows/create.post.R: stop("must specify 'address'")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
@@ -1739,12 +1696,10 @@ msgid "no package %s at the repositories"
 msgstr "저장소들로부터 패키지 %s를 찾을 수 없습니다"
 
 #. R/indices.R: gettextf("no package '%s' was found", pkg)
-#. R/indices.R: gettextf("no package '%s' was found", pkg)
 #: R/indices.R:0
 msgid "no package '%s' was found"
 msgstr "패키지 '%s'를 찾을 수 없습니다"
 
-#. R/packages2.R: stop("no packages were specified")
 #. R/packages2.R: stop("no packages were specified")
 #: R/packages2.R:0
 msgid "no packages were specified"
@@ -1952,7 +1907,6 @@ msgid "source repository is unavailable to check versions"
 msgstr "소스저장소는 버전을 체크할 수 없습니다"
 
 #. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
-#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
 #. R/packages2.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
 #: R/packages.R:0 R/packages2.R:0
 msgid "specifying 'contriburl' or 'available' requires a single type, not type = \"both\""
@@ -1963,7 +1917,6 @@ msgstr ""
 msgid "str.data.frame() called with non-data.frame -- coercing to one."
 msgstr "데이터 프레임이 아닌 것과 함께 호출된 str.data.frame()이므로 1로 강제형변환합니다"
 
-#. R/citation.R: gettext("subscript out of bounds")
 #. R/citation.R: gettext("subscript out of bounds")
 #: R/citation.R:0
 msgid "subscript out of bounds"
@@ -2072,8 +2025,6 @@ msgid "unable to create %s"
 msgstr "%s를 생성할 수 없습니다."
 
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
-#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
-#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
@@ -2083,8 +2034,6 @@ msgstr "%s를 생성할 수 없습니다."
 msgid "unable to create temporary directory %s"
 msgstr "임시 디렉토리 %s를 생성할 수 없습니다."
 
-#. R/packages2.R: stop("unable to install packages")
-#. R/packages2.R: stop("unable to install packages")
 #. R/packages2.R: stop("unable to install packages")
 #: R/packages2.R:0
 msgid "unable to install packages"
@@ -2158,8 +2107,6 @@ msgid "winDialogString() cannot be used non-interactively"
 msgstr "winDialogString()는 인터랙티브하게 사용되어져야 합니다"
 
 #. R/de.R: stop("wrong argument to 'dataentry'")
-#. R/de.R: stop("wrong argument to 'dataentry'")
-#. R/de.R: stop("wrong argument to 'dataentry'")
 #: R/de.R:0
 msgid "wrong argument to 'dataentry'"
 msgstr "'dataentry'에 잘못된 인자가 전달되었습니다"
@@ -2181,9 +2128,10 @@ msgstr "zip 파일 %s를 찾을 수 없습니다"
 
 #. R/Sweave.R: ngettext(length(f), "%d Sweave file for basename %s found", "%d Sweave files for basename %s found",     domain = "R-utils")
 #: R/Sweave.R:0
+#, fuzzy
 msgid "%d Sweave file for basename %s found"
 msgid_plural "%d Sweave files for basename %s found"
-msgstr[0] ""
+msgstr[0] "%s이라는 이름을 가진 Sweave 파일을 찾을 수 없습니다."
 
 #. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
 #: R/modifyList.R:0
@@ -2288,9 +2236,10 @@ msgstr[0] "바이너리 버전을 이용할 수 있습니다 (그리고 설치�
 
 #. R/packages2.R: ngettext(sum(later), "There is a binary version available but the source version is later",     "There are binary versions available but the source versions are later")
 #: R/packages2.R:0
+#, fuzzy
 msgid "There is a binary version available but the source version is later"
 msgid_plural "There are binary versions available but the source versions are later"
-msgstr[0] ""
+msgstr[0] "바이너리 버전을 이용할 수 있습니다 (그리고 설치되어질 것입니다) 그러나 소스 버전은 추후에 제공될 것입니다"
 
 #. R/packages2.R: ngettext(length(added), "also installing the dependency %s",     "also installing the dependencies %s")
 #: R/packages2.R:0
@@ -2318,9 +2267,10 @@ msgstr[0] "소스형태의 패키지 %s(들)를 설치합니다."
 
 #. R/roman.R: ngettext(sum(!ok), "invalid roman numeral: %s", "invalid roman numerals: %s")
 #: R/roman.R:0
+#, fuzzy
 msgid "invalid roman numeral: %s"
 msgid_plural "invalid roman numerals: %s"
-msgstr[0] ""
+msgstr[0] "%1$s에 대한 값이 올바르지 않습니다: %2$s"
 
 #. R/read.fwf.R: ngettext(nread%%recordlength, "last record incomplete, %d line discarded",     "last record incomplete, %d lines discarded")
 #: R/read.fwf.R:0
@@ -2349,9 +2299,10 @@ msgstr[0] "패키지 %s가 사용중이므로 설치되지 않을 것입니다"
 
 #. R/packages2.R: ngettext(sum(base), "package %s is a base package, and should not be updated",     "packages %s are base packages, and should not be updated")
 #: R/packages2.R:0
+#, fuzzy
 msgid "package %s is a base package, and should not be updated"
 msgid_plural "packages %s are base packages, and should not be updated"
-msgstr[0] ""
+msgstr[0] "패키지 %s가 사용중이므로 설치되지 않을 것입니다"
 
 #. R/packages2.R: ngettext(length(na), "package %s is available as a source package but not as a binary",     "packages %s are available as source packages but not as binaries")
 #: R/packages2.R:0

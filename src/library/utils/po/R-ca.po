@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:37\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -25,7 +25,6 @@ msgstr "%d errors detectats a %s.  Els missatges d'error i les seves freqüènci
 msgid "%s has a help file but no examples"
 msgstr "%s té un fitxer d'ajuda però no hi ha exemples"
 
-#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
 #. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
 #: R/citation.R:0
 #, fuzzy
@@ -63,11 +62,6 @@ msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "«%s» és una funció genèrica formal; és probable que no es trobin mètodes S3"
 
 #. R/help.search.R: gettextf("'%s' must be a character string", arg)
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
 #: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
@@ -109,7 +103,6 @@ msgstr "'as.is' té una longitud incorrecta %d != cols = %d"
 msgid "'as.is' should be specified by the caller; using TRUE"
 msgstr "El cridador ha d'especificar «as.is», usant «TRUE»"
 
-#. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
 #. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
 #. R/windows/create.post.R: stop("'ccaddress' must be of length 1")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
@@ -161,8 +154,6 @@ msgid "'destdir' is not a directory"
 msgstr "«destdir» no és un directori"
 
 #. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 #, fuzzy
@@ -211,7 +202,6 @@ msgstr "«file» ha de ser «» o bé un objecte de connexió obert"
 msgid "'file' must be NULL, a character string or a connection"
 msgstr "«file» ha de ser NULL, una cadena de caràcters o una connexió"
 
-#. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/write.table.R: stop("'file' must be a character string or connection")
 #: R/readtable.R:0 R/write.table.R:0
@@ -303,7 +293,6 @@ msgid "'memory.size()' is no longer supported"
 msgstr "'memory.size()' ja no és compatible"
 
 #. R/de.R: warning("'modes' argument ignored")
-#. R/de.R: warning("'modes' argument ignored")
 #: R/de.R:0
 #, fuzzy
 msgid "'modes' argument ignored"
@@ -334,8 +323,6 @@ msgid "'package' must be a character vector or NULL"
 msgstr "«package» ha de ser un vector de caràcters o NULL"
 
 #. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
-#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
-#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #: R/progressBar.R:0 R/windows/winDialog.R:0
 #, fuzzy
@@ -379,7 +366,6 @@ msgid "'tar' returned non-zero exit code %d"
 msgstr "'tar' ha retornat un codi de sortida no nul %d"
 
 #. R/tar.R: stop("'tarfile' must be a character string or a connection")
-#. R/tar.R: stop("'tarfile' must be a character string or a connection")
 #: R/tar.R:0
 #, fuzzy
 msgid "'tarfile' must be a character string or a connection"
@@ -398,10 +384,6 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr "'tòpic' ha de ser un nom, un vector de caràcters de longitud u o una paraula reservada"
 
 #. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 #, fuzzy
@@ -469,9 +451,6 @@ msgid "Cancel"
 msgstr "Cancel·la"
 
 #. R/help.request.R: stop("Cancelled by user")
-#. R/help.request.R: stop("Cancelled by user")
-#. R/help.request.R: stop("Cancelled by user")
-#. R/packages2.R: stop("Cancelled by user")
 #. R/packages2.R: stop("Cancelled by user")
 #: R/help.request.R:0 R/packages2.R:0
 #, fuzzy
@@ -502,9 +481,6 @@ msgstr "Compactant el document PDF"
 msgid "Could not create file %s, aborting"
 msgstr "No s'ha pogut crear el fitxer %s, s'interromp"
 
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #: R/prompt.R:0
 #, fuzzy
@@ -572,9 +548,6 @@ msgstr ""
 "Proveu d'eliminar %s"
 
 #. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
 #: R/prompt.R:0
 #, fuzzy
 msgid "Edit the file and move it to the appropriate directory."
@@ -604,7 +577,6 @@ msgstr "Introduïu un element del menú, o 0 per a sortir"
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "Introduïu un o més números separats per espais i després introduïu, o 0 per a cancel·lar"
 
-#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 #: R/aspell.R:0
 #, fuzzy
@@ -782,7 +754,6 @@ msgstr "No s'ha trobat cap vinyeta per %s"
 msgid "Not a validObject():"
 msgstr "No és un validObject():"
 
-#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
 #: R/citation.R:0
@@ -1037,7 +1008,6 @@ msgid "Using the first match ..."
 msgstr "S'està utilitzant la primera coincidència..."
 
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
-#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
 #: R/Sweave.R:0
 #, fuzzy
 msgid "Warning: unknown option %s"
@@ -1140,7 +1110,6 @@ msgid "at least one vector element is required"
 msgstr "es requereix almenys un element vectorial"
 
 #. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
-#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
 #: R/write.table.R:0
 #, fuzzy
 msgid "attempt to set '%s' ignored"
@@ -1182,9 +1151,6 @@ msgstr "no es pot coaccionar «x» al roman"
 msgid "cannot create directory '%s'"
 msgstr "no es pot crear el directori «%s»"
 
-#. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
 #. R/prompt.R: stop("cannot determine a usable name")
 #: R/prompt.R:0
 #, fuzzy
@@ -1349,7 +1315,6 @@ msgstr "la baixada té un estat de sortida diferent de zero"
 
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
-#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #: R/packages.R:0
 #, fuzzy
 msgid "download of package %s failed"
@@ -1380,8 +1345,6 @@ msgid "empty beginning of file"
 msgstr "el començament del fitxer és buit"
 
 #. R/objects.R: stop("environment specified is not a package")
-#. R/objects.R: stop("environment specified is not a package")
-#. R/objects.R: stop("environment specified is not a package")
 #: R/objects.R:0
 #, fuzzy
 msgid "environment specified is not a package"
@@ -1401,14 +1364,11 @@ msgstr "cada paquet depèn almenys d'un altre"
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
 #, fuzzy
 msgid "failed to copy %s to %s"
 msgstr "no s'ha pogut copiar %s a %s"
 
-#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
-#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
 #. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
 #. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
 #: R/windows/install.packages.R:0
@@ -1429,8 +1389,6 @@ msgstr "no s'ha pogut crear el directori %s"
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr "no s'ha pogut baixar el fitxer de rèpliques (%s); s'usarà el fitxer local «%s»"
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
 #, fuzzy
@@ -1517,7 +1475,6 @@ msgstr "matriu «instPkgs» mal formada"
 
 #. R/tar.R: if (is.character(tarfile)) "incomplete block on file" else "incomplete block: rather use gzfile(.) created connection?"
 #. R/tar.R: stop("incomplete block on file")
-#. R/tar.R: stop("incomplete block on file")
 #: R/tar.R:0
 #, fuzzy
 msgid "incomplete block on file"
@@ -1542,15 +1499,11 @@ msgid "incorrect field specification"
 msgstr "especificació de camp incorrecta"
 
 #. R/help.search.R: stop("incorrect type specification")
-#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 #, fuzzy
 msgid "incorrect type specification"
 msgstr "especificació de tipus incorrecta"
 
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #: R/packages2.R:0
 #, fuzzy
@@ -1579,7 +1532,6 @@ msgstr "ha fallat la instal·lació de %d paquets: %s"
 msgid "installation of package %s failed"
 msgstr "ha fallat la instal·lació del paquet %s"
 
-#. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #: R/packages2.R:0
 #, fuzzy
@@ -1678,7 +1630,6 @@ msgstr "argument «socket» no vàlid"
 msgid "invalid 'tarfile' argument"
 msgstr "argument «tarfile» no vàlid"
 
-#. R/packages.R: stop("invalid 'type'")
 #. R/packages.R: stop("invalid 'type'")
 #: R/packages.R:0
 #, fuzzy
@@ -1808,7 +1759,6 @@ msgid "menu() cannot be used non-interactively"
 msgstr "menu() no es pot utilitzar sense interacció"
 
 #. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
-#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
 #: R/packages.R:0
 #, fuzzy
 msgid "metadata of %s is corrupt"
@@ -1882,7 +1832,6 @@ msgstr "ha de tenir «max» > «min»"
 msgid "must have some non-empty fields"
 msgstr ""
 
-#. R/unix/create.post.R: stop("must specify 'address'")
 #. R/unix/create.post.R: stop("must specify 'address'")
 #. R/windows/create.post.R: stop("must specify 'address'")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
@@ -2012,13 +1961,11 @@ msgid "no package %s at the repositories"
 msgstr "no hi ha cap paquet %s als repositoris"
 
 #. R/indices.R: gettextf("no package '%s' was found", pkg)
-#. R/indices.R: gettextf("no package '%s' was found", pkg)
 #: R/indices.R:0
 #, fuzzy
 msgid "no package '%s' was found"
 msgstr "no s'ha trobat cap paquet «%s»"
 
-#. R/packages2.R: stop("no packages were specified")
 #. R/packages2.R: stop("no packages were specified")
 #: R/packages2.R:0
 #, fuzzy
@@ -2261,7 +2208,6 @@ msgid "source repository is unavailable to check versions"
 msgstr "el repositori font no està disponible per a comprovar les versions"
 
 #. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
-#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
 #. R/packages2.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
 #: R/packages.R:0 R/packages2.R:0
 #, fuzzy
@@ -2274,7 +2220,6 @@ msgstr "especificar «contriburl» o «disponible» requereix un únic tipus, no
 msgid "str.data.frame() called with non-data.frame -- coercing to one."
 msgstr "str.data.frame() cridada amb un «non-data.frame» -- coaccionant a un."
 
-#. R/citation.R: gettext("subscript out of bounds")
 #. R/citation.R: gettext("subscript out of bounds")
 #: R/citation.R:0
 msgid "subscript out of bounds"
@@ -2405,8 +2350,6 @@ msgid "unable to create %s"
 msgstr "no s'ha pogut crear %s"
 
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
-#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
-#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
@@ -2417,8 +2360,6 @@ msgstr "no s'ha pogut crear %s"
 msgid "unable to create temporary directory %s"
 msgstr "no s'ha pogut crear el directori temporal %s"
 
-#. R/packages2.R: stop("unable to install packages")
-#. R/packages2.R: stop("unable to install packages")
 #. R/packages2.R: stop("unable to install packages")
 #: R/packages2.R:0
 #, fuzzy
@@ -2502,8 +2443,6 @@ msgstr "winDialog() no es pot utilitzar de forma no interactiva"
 msgid "winDialogString() cannot be used non-interactively"
 msgstr "winDialogString() no es pot utilitzar de forma no interactiva"
 
-#. R/de.R: stop("wrong argument to 'dataentry'")
-#. R/de.R: stop("wrong argument to 'dataentry'")
 #. R/de.R: stop("wrong argument to 'dataentry'")
 #: R/de.R:0
 #, fuzzy

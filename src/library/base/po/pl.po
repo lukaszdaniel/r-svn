@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-24 17:06+0200\n"
-"PO-Revision-Date: 2025-05-24 17:12+0200\n"
+"POT-Creation-Date: 2025-06-01 10:55+0200\n"
+"PO-Revision-Date: 2025-06-01 10:57+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -348,9 +348,8 @@ msgid "Allocation error"
 msgstr "błąd przydziału 'bessel_i'"
 
 #: src/gnuwin32/system.cpp:972
-#, fuzzy
 msgid "allocation failure in reading Renviron"
-msgstr "przydział w 'R_setArgStyles' nie powiódł się"
+msgstr "niepowodzenie przydziału pamięci w 'Renviron'"
 
 #: src/gnuwin32/system.cpp:1046 src/unix/system.cpp:131
 msgid "WARNING: invalid R_HISTSIZE ignored;"
@@ -767,9 +766,9 @@ msgid "stat: %s"
 msgstr ""
 
 #: src/main/altclasses.cpp:1329
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a regular file"
-msgstr "'raw = FALSE', ale '%s' nie jest zwykłym plikiem"
+msgstr "'%s' nie jest zwykłym plikiem"
 
 #: src/main/altclasses.cpp:1334
 #, fuzzy, c-format
@@ -4498,7 +4497,7 @@ msgstr ""
 msgid "bad opcode"
 msgstr "błędny kod operacji"
 
-#: src/main/eval.cpp:6838
+#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "błędny typ '%s' w 'x %s y'"
@@ -4526,7 +4525,7 @@ msgid "bad function"
 msgstr "zła funkcja"
 
 #: src/main/eval.cpp:7989
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "'%s' nie jest funkcją '%s'"
 
@@ -5166,16 +5165,6 @@ msgstr "operacje są możliwe jedynie dla typów liczbowych, logicznych oraz zes
 msgid "'%s' operator requires 2 arguments"
 msgstr "operator '%s' wymaga 2 argumentów"
 
-#: src/main/logic.cpp:307
-#, c-format
-msgid "invalid 'x' type in 'x %s y'"
-msgstr "błędny typ 'x' w 'x %s y'"
-
-#: src/main/logic.cpp:316
-#, c-format
-msgid "invalid 'y' type in 'x %s y'"
-msgstr "błędny typ 'y' w 'x %s y'"
-
 #: src/main/logic.cpp:394
 msgid "Unary operator `!' called with two arguments"
 msgstr "Operator jednoargumentowy '!' wywołany z dwoma argumentami"
@@ -5588,9 +5577,9 @@ msgstr "'SETLENGTH()' może być zastosowane jedynie do standardowego wektora, a
 #: src/main/memory.cpp:3869 src/main/memory.cpp:3878 src/main/memory.cpp:3887 src/main/memory.cpp:3895 src/main/memory.cpp:3903
 #: src/main/memory.cpp:3911 src/main/memory.cpp:3919 src/main/memory.cpp:3932 src/main/memory.cpp:3941 src/main/memory.cpp:3966
 #: src/main/memory.cpp:3985
-#, fuzzy, c-format
+#, c-format
 msgid "%s() can only be applied to a '%s', not a '%s'"
-msgstr "RAW() może być zastosowane jedynie do 'raw', a nie '%s'"
+msgstr "%s() może być zastosowane jedynie do '%s', a nie '%s'"
 
 #: src/main/memory.cpp:3804
 msgid "cannot get STDVEC_DATAPTR from ALTREP object"
@@ -10095,6 +10084,14 @@ msgstr "moduł X11 nie może zostać załadowany"
 #: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161 src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
+
+#, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "błędny typ 'x' w 'x %s y'"
+
+#, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "błędny typ 'y' w 'x %s y'"
 
 #~ msgid "cannot set attribute on a symbol"
 #~ msgstr "nie można ustawić atrybutu na symbolu"

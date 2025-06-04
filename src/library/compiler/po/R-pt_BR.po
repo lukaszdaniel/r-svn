@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:43\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -15,16 +15,19 @@ msgstr ""
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
 #: R/cmp.R:0
+#, fuzzy
 msgid "'%s' is not a valid compiler option"
 msgstr "'%s' não é uma opção válida de compilação"
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "'env' must be a top level environment"
 msgstr "'env' deve ser um ambiente em primeiro nível"
 
 #. R/cmp.R: gettext("'switch' with no alternatives")
 #: R/cmp.R:0
+#, fuzzy
 msgid "'switch' with no alternatives"
 msgstr "'switch' sem alternativas"
 
@@ -40,12 +43,10 @@ msgstr "atribuição inválida 1"
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad assignment 2"
-msgstr "atribuição inválida 2"
+msgstr "atribuição inválida 1"
 
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
 msgid "bad assignment: %s"
@@ -53,31 +54,27 @@ msgstr "atribuição não apropriada: %s"
 
 #. R/cmp.R: gettext("bad namespace import frame")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad namespace import frame"
 msgstr "nome de espaço inválido no quadro de importação"
 
 #. R/cmp.R: stop("cannot compile a non-function")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile a non-function"
 msgstr "não é possível compilar algo que não seja uma função"
 
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
 #. R/cmp.R: gettext("cannot compile byte code literals in code")
 #: R/cmp.R:0
 msgid "cannot compile byte code literals in code"
 msgstr "não é possível compilar literais de byte code no código"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile promise literals in code"
 msgstr "não é possível compilar promessas literais em código"
 
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
 #. R/cmp.R: gettext("cannot compile this expression")
 #: R/cmp.R:0
 #, fuzzy
@@ -91,6 +88,7 @@ msgstr "não é possível dobrar objetos literais bytecode"
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "não é possível dobrar de maneira constante promessas literais"
 
@@ -99,7 +97,6 @@ msgstr "não é possível dobrar de maneira constante promessas literais"
 msgid "compiling '%s'"
 msgstr "compilando '%s'"
 
-#. R/cmp.R: gettext("done")
 #. R/cmp.R: gettext("done")
 #: R/cmp.R:0
 msgid "done"
@@ -112,6 +109,7 @@ msgstr "alternativa vazia em switch numérico"
 
 #. R/cmp.R: warning("empty input file; no output written")
 #: R/cmp.R:0
+#, fuzzy
 msgid "empty input file; no output written"
 msgstr "arquivo de entrada vazio; nenhuma saída escrita"
 
@@ -141,13 +139,13 @@ msgid "invalid environment variable value: %s==%s"
 msgstr ""
 
 #. R/cmp.R: gettext("invalid function in complex assignment")
-#. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "função inválida em atribuição complexa"
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0
+#, fuzzy
 msgid "missing arguments are not allowed"
 msgstr "argumentos faltantes não são permitidos"
 
@@ -159,21 +157,25 @@ msgstr "mais de um valor default fornecido na chamada de switch"
 
 #. R/cmp.R: stop("namespace found within global environments")
 #: R/cmp.R:0
+#, fuzzy
 msgid "namespace found within global environments"
-msgstr ""
+msgstr "'ns' deve ser um espaço de nomes ou um ambiente importado de espaço de nomes"
 
 #. R/cmp.R: stop("namespace found within local environments")
 #: R/cmp.R:0
+#, fuzzy
 msgid "namespace found within local environments"
-msgstr ""
+msgstr "'ns' deve ser um espaço de nomes ou um ambiente importado de espaço de nomes"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
+#, fuzzy
 msgid "no offset recorded for label \"%s\""
 msgstr "nenhuma compensação registrada para o rótulo \"%s\""
 
 #. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
 #: R/cmp.R:0
+#, fuzzy
 msgid "no visible binding for '<<-' assignment to '%s'"
 msgstr "nenhuma associação para atribuição '<<-' para '%s'"
 
@@ -184,6 +186,7 @@ msgstr "nenhuma associação visível para variável global '%s'"
 
 #. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
 #: R/cmp.R:0
+#, fuzzy
 msgid "no visible global function definition for '%s'"
 msgstr "nenhuma definição de função global visível para '%s'"
 
@@ -194,8 +197,8 @@ msgid "non-namespace found within namespace environments"
 msgstr "'ns' deve ser um espaço de nomes ou um ambiente importado de espaço de nomes"
 
 #. R/cmp.R: stop("not a proper evaluation environment")
-#. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "não é um ambiente apropriado para avaliação"
 
@@ -207,6 +210,7 @@ msgstr "possível erro em '%s': %s"
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", file)
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", outfile)
 #: R/cmp.R:0
+#, fuzzy
 msgid "saving to file \"%s\" ..."
 msgstr "salvando para o arquivo \"%s\" ..."
 
@@ -221,6 +225,22 @@ msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "atribuição local para função sintática: "
 msgstr[1] "atribuições locais para funções sintáticas: "
+
+#, fuzzy
+#~ msgid "gettext(\"bad assignment 2\")"
+#~ msgstr "atribuição inválida 2"
+
+#, fuzzy
+#~ msgid "gettext(\"cannot compile this expression\")"
+#~ msgstr "não é possível compilar promessas literais em código"
+
+#, fuzzy
+#~ msgid "gettext(\"invalid function in complex assignment\")"
+#~ msgstr "função inválida em atribuição complexa"
+
+#, fuzzy
+#~ msgid "gettextf(\"saving to file \\\\\"%s\\\\\" ... \", outfile)"
+#~ msgstr "salvando para o arquivo \"%s\" ..."
 
 #~ msgid "'ns' must be a namespace or a namespace imports environment"
 #~ msgstr "'ns' deve ser um espaço de nomes ou um ambiente importado de espaço de nomes"

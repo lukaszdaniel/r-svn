@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2025-04-01 17:06+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -22,12 +22,10 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/QC.R: gettextf("  %s calls:", f)
-#. R/QC.R: gettextf("  %s calls:", f)
 #: R/QC.R:0
 msgid "%s calls:"
 msgstr "%s вызывает:"
 
-#. R/QC.R: gettextf("  %s has wrong argument list %s", f, sQuote(paste(bad,     collapse = ", ")))
 #. R/QC.R: gettextf("  %s has wrong argument list %s", f, sQuote(paste(bad,     collapse = ", ")))
 #: R/QC.R:0
 msgid "%s has wrong argument list %s"
@@ -179,7 +177,6 @@ msgid "* Package: %s"
 msgstr ""
 
 #. R/admin.R: gettextf("*** someone has corrupted the Built field in package '%s' ***",     db["Package"])
-#. R/admin.R: gettextf("*** someone has corrupted the Built field in package '%s' ***",     db["Package"])
 #: R/admin.R:0
 msgid "*** someone has corrupted the Built field in package '%s' ***"
 msgstr "*** что-то сломалось в поле 'Built' пакета '%s'***"
@@ -190,18 +187,15 @@ msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr "*не* использую 'C' для категории локали LC_COLLATE"
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
-#. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
 msgid "--- failed re-building %s"
 msgstr "--- не удалось пересоздать %s"
 
 #. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
-#. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
 msgid "--- finished re-building %s"
 msgstr "--- закончил пересоздание %s"
 
-#. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
 #. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
 #: R/Vignettes.R:0
 msgid "--- re-building %s using %s"
@@ -213,7 +207,6 @@ msgstr "--- пересоздаю %s с использованием %s"
 msgid "-l option without value"
 msgstr "-l опция без значения"
 
-#. R/Rd2pdf.R: stop("-o option without value", call. = FALSE)
 #. R/Rd2pdf.R: stop("-o option without value", call. = FALSE)
 #. R/check.R: stop("-o option without value", call. = FALSE)
 #. R/install.R: stop("-o option without value", call. = FALSE)
@@ -251,7 +244,6 @@ msgstr "<p>Чтобы увидеть результат в браузере, у�
 msgid "All existing entry MD5sums match tarballs."
 msgstr "Все наличные MD5-суммы элементов соответствуют архивам."
 
-#. R/QC.R: gettext("All field tags must be ASCII.")
 #. R/QC.R: gettext("All field tags must be ASCII.")
 #: R/QC.R:0
 msgid "All field tags must be ASCII."
@@ -377,7 +369,6 @@ msgid "Cannot extract Maintainer field from Authors@R field:"
 msgstr "Не могу вынуть поле Maintainer из поля Authors@R:"
 
 #. R/news.R: gettextf("Cannot extract version info from the following section titles:\n%s",     paste0("  ", unique(nms[!ind]), collapse = "\n"))
-#. R/news.R: gettextf("Cannot extract version info from the following section titles:\n%s",     paste0("  ", unique(nms[!ind]), collapse = "\n"))
 #: R/news.R:0
 msgid ""
 "Cannot extract version info from the following section titles:\n"
@@ -446,15 +437,10 @@ msgid "Could not extract news from the following text chunks:"
 msgstr "Не могу отделить новости от следующих текстовых единиц:"
 
 #. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
-#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
-#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
-#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
-#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
 #: R/RdHelpers.R:0
 msgid "DESCRIPTION file is for package '%s', not '%s'"
 msgstr "Файл DESCRIPTION для пакета '%s', а не для '%s'"
 
-#. R/news.R: stop("DESCRIPTION file not found")
 #. R/news.R: stop("DESCRIPTION file not found")
 #: R/news.R:0
 msgid "DESCRIPTION file not found"
@@ -587,7 +573,6 @@ msgid "Error: no packages were specified"
 msgstr "Ошибка: пакеты не определены"
 
 #. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
-#. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
 #: R/Vignettes.R:0
 msgid ""
 "Error: processing vignette '%s' failed with diagnostics:\n"
@@ -648,22 +633,16 @@ msgid "Failed to locate %s output file %s or %s for vignette with name %s and en
 msgstr "Не удалось найти %s выходной файл %s или %s для очерка с именем %s и сервера %s. Вот какие файлы есть в папке %s: %s"
 
 #. R/QC.R: gettext("Fields with non-ASCII tags:")
-#. R/QC.R: gettext("Fields with non-ASCII tags:")
 #: R/QC.R:0
 msgid "Fields with non-ASCII tags:"
 msgstr "Поля с не-ASCII-метками:"
 
-#. R/QC.R: gettext("Fields with non-ASCII values:")
 #. R/QC.R: gettext("Fields with non-ASCII values:")
 #: R/QC.R:0
 msgid "Fields with non-ASCII values:"
 msgstr "Поля с не-ASCII значениями:"
 
 #. R/QC.R: gettextf("File %s:", sQuote(f))
-#. R/QC.R: gettextf("File %s:", sQuote(f))
-#. R/QC.R: gettextf("File %s:", sQuote(f))
-#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
-#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #: R/QC.R:0 R/sotools.R:0
 msgid "File %s:"
@@ -785,7 +764,6 @@ msgstr "Поля шаблона лицензии с пустыми или про
 msgid "Link %s in package %s could not be located"
 msgstr "Ссылка %s в пакете %s не найдена"
 
-#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)),     sQuote(name), fmt_file_sizes(output))
 #. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)),     sQuote(name), fmt_file_sizes(output))
 #: R/Vignettes.R:0
 msgid "Located more than one %s output file (by engine %s) for vignette with name %s: %s"
@@ -929,7 +907,6 @@ msgid "NEWS file not found"
 msgstr "файл NEWS не найден"
 
 #. R/testing.R: message(" NOTE")
-#. R/testing.R: message(" NOTE")
 #: R/testing.R:0
 msgid "NOTE"
 msgstr "ЗАМЕЧАНИЕ"
@@ -945,7 +922,6 @@ msgid "NOTE: fixed library identification name"
 msgstr "ЗАМЕЧАНИЕ: предустановленное идентификационное название библиотеки"
 
 #. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
-#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
 #: R/install.R:0
 msgid "NOTE: fixed library path"
 msgstr "ЗАМЕЧАНИЕ: предустановленный путь для библиотеки"
@@ -956,7 +932,6 @@ msgid "NOTE: fixed path"
 msgstr "ЗАМЕЧАНИЕ: предустановленный путь"
 
 #. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
 #. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
 #: R/install.R:0
 msgid "NOTE: fixed rpath"
@@ -1034,8 +1009,6 @@ msgid "No package index found for package %s"
 msgstr "Не найдено указателя для пакета %s"
 
 #. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
-#. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
-#. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
 #: R/dynamicHelp.R:0
 msgid "No package named %s could be found"
 msgstr "Не найден пакет %s"
@@ -1071,10 +1044,6 @@ msgstr "В Rd файле '%s' есть ссылки на \\alias но не фа�
 msgid "Note: skipping %s"
 msgstr "Примечание: пропускаю %s"
 
-#. R/testing.R: message(" OK")
-#. R/testing.R: message(" OK")
-#. R/testing.R: message(" OK")
-#. R/testing.R: message(" OK")
 #. R/testing.R: message(" OK")
 #. R/testing.R: if (res != 0L) "DIFFERED" else "OK"
 #: R/testing.R:0
@@ -1164,13 +1133,11 @@ msgstr "Пакеты с привилегиями 'base' или 'recommended' и�
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
-#. R/htmltools.R: sprintf("Processing %s ...", f)
 #. R/htmltools.R: sprintf("Processing %s ...", u)
 #: R/CRANtools.R:0 R/htmltools.R:0
 msgid "Processing %s ..."
 msgstr "Обрабатываю %s ..."
 
-#. R/packages.R: message("Processing packages:")
 #. R/packages.R: message("Processing packages:")
 #: R/packages.R:0
 msgid "Processing packages:"
@@ -1247,7 +1214,6 @@ msgid "Running"
 msgstr "Запускаю"
 
 #. R/testing.R: gettextf("  Running %s", sQuote(f))
-#. R/testing.R: gettextf("  Running %s", sQuote(f))
 #: R/testing.R:0
 msgid "Running %s"
 msgstr "Запускаю %s"
@@ -1293,7 +1259,6 @@ msgstr ""
 "  %s\n"
 "."
 
-#. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.")
 #. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.")
 #: R/Rd.R:0
 msgid "See chapter 'Writing R documentation' in manual 'Writing R Extensions'."
@@ -1369,7 +1334,6 @@ msgstr "Эти поля должны иметь ASCII-значения."
 msgid "This field must contain one or more packages (and no version requirement)."
 msgstr "Это поле должно включать один или больше пакет (и не включать требования версии)."
 
-#. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 #. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 #: R/dynamicHelp.R:0
 msgid "URL %s was not found"
@@ -1481,7 +1445,6 @@ msgid "Vignette %s overwrites the following %s output by vignette %s: %s"
 msgstr "Очерк %s переписывает вывод %s от очерка %s: %s"
 
 #. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding",     name)
-#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding",     name)
 #: R/Vignettes.R:0
 msgid "Vignette '%s' is non-ASCII but has no declared encoding"
 msgstr "Очерк '%s' не ASCII, но кодировка не указана"
@@ -1496,7 +1459,6 @@ msgstr "Зависимости очерка (%s элементы) должны �
 msgid "Vignette engine %s is not registered"
 msgstr "Движок очерка %s не зарегистрирован"
 
-#. R/Vignettes.R: gettextf("Vignette engine %s is not registered by any of the packages %s",     sQuote(name), paste(sQuote(package), collapse = ", "))
 #. R/Vignettes.R: gettextf("Vignette engine %s is not registered by any of the packages %s",     sQuote(name), paste(sQuote(package), collapse = ", "))
 #: R/Vignettes.R:0
 msgid "Vignette engine %s is not registered by any of the packages %s"
@@ -1528,7 +1490,6 @@ msgstr ""
 msgid "WARNING: failed to revert patch"
 msgstr ""
 
-# not translating installation-time patches
 #. R/install.R: message("WARNING: installation-time patches will not be applied, could not get the patches index")
 #: R/install.R:0
 msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
@@ -1554,7 +1515,6 @@ msgstr "ПРЕДУПРЕЖДЕНИЕ: пропускаю бессмысленн�
 msgid "WARNING: shared objects/dynamic libraries with hard-coded temporary installation paths"
 msgstr "ПРЕДУПРЕЖДЕНИЕ: разделенные объекты / динамические библиотеки с встроенными временными инсталляционными путями"
 
-#. R/Rd2pdf.R: message("Warning: unknown option ", sQuote(a))
 #. R/Rd2pdf.R: message("Warning: unknown option ", sQuote(a))
 #. R/build.R: message("Warning: unknown option ", sQuote(a))
 #. R/check.R: message("Warning: unknown option ", sQuote(a))
@@ -1612,25 +1572,6 @@ msgid "argument 'outFile' must be a character string or connection"
 msgstr "аргумент 'outFile' должен быть текстовой строкой или соединением"
 
 #. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
 #. R/Rd.R: stop("argument 'package' must be of length 1")
 #. R/Vignettes.R: stop("argument 'package' must be of length 1")
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0
@@ -1686,9 +1627,7 @@ msgstr "не могу линковать с %s"
 #. R/admin.R: gettextf("cannot open directory '%s'", meta_dir)
 #. R/admin.R: gettextf("cannot open directory '%s'", outDir)
 #. R/admin.R: gettextf("cannot open directory '%s'", outCodeDir)
-#. R/admin.R: gettextf("cannot open directory '%s'", outMetaDir)
 #. R/admin.R: gettextf("cannot open directory '%s'", outVignetteDir)
-#. R/admin.R: gettextf("cannot open directory '%s'", outMetaDir)
 #: R/admin.R:0
 msgid "cannot open directory '%s'"
 msgstr "не могу открыть папку '%s'"
@@ -1716,7 +1655,6 @@ msgstr "проверяю %s..."
 
 #. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(savefile)))
 #. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(prevfile)))
-#. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
 #. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
 #: R/testing.R:0
 msgid "comparing %s to %s ..."
@@ -1748,17 +1686,12 @@ msgstr "содержит пустую строку"
 
 #. R/Rd2pdf.R: stop("current working directory cannot be ascertained")
 #. R/Vignettes.R: stop("current working directory cannot be ascertained")
-#. R/Vignettes.R: stop("current working directory cannot be ascertained")
-#. R/Vignettes.R: stop("current working directory cannot be ascertained")
-#. R/admin.R: stop("current working directory cannot be ascertained")
 #. R/admin.R: stop("current working directory cannot be ascertained")
 #. R/build.R: stop("current working directory cannot be ascertained")
 #. R/check.R: stop("current working directory cannot be ascertained")
 #. R/install.R: stop("current working directory cannot be ascertained")
 #. R/md5.R: stop("current working directory cannot be ascertained")
-#. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
-#. R/sha256.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
 #: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
 #: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
@@ -1771,54 +1704,20 @@ msgid "directory %s is not writeable"
 msgstr "папка '%s' недоступна для записи"
 
 #. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
 #: R/QC.R:0
 msgid "directory '%s' does not contain R code"
 msgstr "папка '%s' не содержит кода R"
 
-#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
 #. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
 #: R/QC.R:0
 msgid "directory '%s' does not contain Rd objects"
 msgstr "папка '%s' не содержит Rd-объектов"
 
 #. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
 #. R/Rd.R: gettextf("directory '%s' does not exist", dir)
 #. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
-#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
-#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
-#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
-#. R/admin.R: gettextf("directory '%s' does not exist", dir)
 #. R/admin.R: gettextf("directory '%s' does not exist", dir)
 #. R/admin.R: gettextf("directory '%s' does not exist", outDir)
-#. R/index.R: gettextf("directory '%s' does not exist", demoDir)
 #. R/index.R: gettextf("directory '%s' does not exist", demoDir)
 #. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0 R/makeLazyLoad.R:0
@@ -1827,7 +1726,6 @@ msgstr "папка '%s' не существует"
 
 #. R/dynamicHelp.R: message(" done")
 #. R/install.R: message(" done")
-#. R/packages.R: message("done")
 #. R/packages.R: message("done")
 #: R/dynamicHelp.R:0 R/install.R:0 R/packages.R:0
 msgid "done"
@@ -1881,8 +1779,6 @@ msgid "failed to start the httpd server"
 msgstr "не удалось запустить httpd сервер"
 
 #. R/QC.R: gettextf("file '%s' does not exist", file)
-#. R/QC.R: gettextf("file '%s' does not exist", file)
-#. R/translations.R: gettextf("file '%s' does not exist", potfile)
 #. R/translations.R: gettextf("file '%s' does not exist", potfile)
 #. R/utils.R: gettextf("file '%s' does not exist", x)
 #. R/utils.R: gettextf("file '%s' does not exist", dfile)
@@ -1945,7 +1841,6 @@ msgstr "неправильный пакет"
 msgid "invalid package layout"
 msgstr "неправильная структура пакета"
 
-#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
 #, fuzzy
@@ -2118,8 +2013,6 @@ msgstr ""
 "%s"
 
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
 #: R/QC.R:0
@@ -2130,7 +2023,6 @@ msgstr ""
 "ошибка разбора в файле '%s':\n"
 "%s"
 
-#. R/xgettext.R: gettextf("parsing '%s'", f)
 #. R/xgettext.R: gettextf("parsing '%s'", f)
 #: R/xgettext.R:0
 msgid "parsing '%s'"
@@ -2143,7 +2035,6 @@ msgstr ""
 
 #. R/admin.R: gettextf("processing %s", sQuote(basename(file)))
 #. R/doitools.R: sprintf("processing %s", p)
-#. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", i)
@@ -2300,7 +2191,6 @@ msgid "unable to find any package tarballs in %s"
 msgstr "не могу найти архивов пакета в"
 
 #. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
-#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
 #: R/utils.R:0
 msgid "unable to run %s on '%s'"
 msgstr "не могу запустить %s на '%s'"
@@ -2373,7 +2263,6 @@ msgid "vignette filename '%s' does not match any of the '%s' filename patterns"
 msgstr "имя файла очерка '%s' не соответствует никакому из '%s' паттернов имен файла"
 
 #. R/checktools.R: stop("wrong class")
-#. R/checktools.R: stop("wrong class")
 #: R/checktools.R:0
 msgid "wrong class"
 msgstr "неправильный класс"
@@ -2390,16 +2279,6 @@ msgid "you must specify 'dir' or 'files'"
 msgstr "Вы должны задать 'dir' или 'file'"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
 #. R/Rd.R: stop("you must specify 'package' or 'dir'")
 #. R/Vignettes.R: stop("you must specify 'package' or 'dir'")
 #. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
@@ -2407,7 +2286,6 @@ msgstr "Вы должны задать 'dir' или 'file'"
 msgid "you must specify 'package' or 'dir'"
 msgstr "не могу определить 'package' или 'dir'"
 
-#. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
 #. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
 #: R/QC.R:0
 msgid "you must specify 'package', 'dir' or 'file'"

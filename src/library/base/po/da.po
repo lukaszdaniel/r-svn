@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-24 17:06+0200\n"
+"POT-Creation-Date: 2025-06-01 10:55+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -4629,7 +4629,7 @@ msgstr ""
 msgid "bad opcode"
 msgstr "ugyldig opcode"
 
-#: src/main/eval.cpp:6838
+#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr ""
@@ -5312,16 +5312,6 @@ msgstr ""
 #: src/main/logic.cpp:300
 #, c-format
 msgid "'%s' operator requires 2 arguments"
-msgstr ""
-
-#: src/main/logic.cpp:307
-#, c-format
-msgid "invalid 'x' type in 'x %s y'"
-msgstr ""
-
-#: src/main/logic.cpp:316
-#, c-format
-msgid "invalid 'y' type in 'x %s y'"
 msgstr ""
 
 #: src/main/logic.cpp:394

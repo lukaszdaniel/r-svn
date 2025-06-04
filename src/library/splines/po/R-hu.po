@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -24,7 +24,6 @@ msgid "'degree' must be integer >= 1"
 msgstr "'degree' értéke 1 vagy annál nagyobb egész szám kell hogy legyen"
 
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
-#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #: R/splineClasses.R:0
 msgid "'deriv' must be between 0 and %d"
 msgstr "a 'deriv' értékének 0 és %d közé kell esnie"
@@ -36,18 +35,20 @@ msgid "'df' was too small; have used %d"
 msgstr ""
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
-#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "\"y ~ x\" formában kell megadni a 'formula'-t"
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' értéke 2 vagy nagyobb kell hogy legyen"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "az 'ord' pozitív egész szám, maximális értéke a knots vektor hossza lehet"
 
@@ -74,13 +75,13 @@ msgid "empty 'derivs'"
 msgstr ""
 
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
-#. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #: R/splineClasses.R:0
 msgid "knot positions must be non-decreasing"
 msgstr "nem csökkenők kell legyenek a knot pozíciók"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "a knot pozíciók szigorúan növekvők kell hogy legyenek"
 
@@ -91,6 +92,7 @@ msgstr ""
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "'x' és 'y' hossza meg kell, hogy egyezzen"
 
@@ -106,21 +108,21 @@ msgstr "a knots vektor hosszának legalább olyan hosszúnak kell lennie, mint a
 
 #. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "must have at least 'ord'=%d points"
-msgstr ""
+msgstr "a knots vektor hosszának legalább olyan hosszúnak kell lennie, mint az 'ord' értéke"
 
 #. R/splineClasses.R: gettextf("need at least %s (=%d) knots", "2*ord -1", 2 * ord -     1)
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "need at least %s (=%d) knots"
-msgstr ""
+msgstr "a knots vektor hosszának legalább olyan hosszúnak kell lennie, mint az 'ord' értéke"
 
-#. R/splines.R: stop("non-finite knots")
 #. R/splines.R: stop("non-finite knots")
 #: R/splines.R:0
 msgid "non-finite knots"
 msgstr ""
 
-#. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
 msgid "shoving 'interior' knots matching boundary knots to inside"
@@ -134,6 +136,7 @@ msgstr "egyes határ csomókon túli 'x' értékek rosszul kondícionált bázis
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "spline must be monotone"
 msgstr "a spline monotonnak kell lennie"
 
@@ -148,8 +151,8 @@ msgid "the range of 'x' values exceeds one period"
 msgstr "'x' értékeinek tartománya meghalad egy periódust"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
-#. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "'x' értékeinek különbözőknek kell lennie"
 
@@ -157,3 +160,7 @@ msgstr "'x' értékeinek különbözőknek kell lennie"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "'x' értékeinek szigorúan növekvőnek kell lenniük"
+
+#, fuzzy
+#~ msgid "stop(\"knot positions must be non-decreasing\")"
+#~ msgstr "nem csökkenők kell legyenek a knot pozíciók"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2025-04-01 17:05+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -25,10 +25,10 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
+#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "'filters' должны быть символьной матрицей из двух колонок"
 
-#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #: R/utils.R:0
 msgid "'pb' is not from class %s"
@@ -71,6 +71,7 @@ msgstr "Помощь"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Help topic:"
 msgstr "Раздел помощи:"
 
@@ -81,6 +82,7 @@ msgstr "Установить пакеты с CRAN"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "Интерактивная линейная подгонка"
 
@@ -91,6 +93,7 @@ msgstr "Загрузить"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Load packages"
 msgstr "Загрузить пакеты"
 
@@ -121,21 +124,25 @@ msgstr "R FAQ"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Save workspace"
-msgstr "Сохранить рабочее пространство"
+msgstr "Не сохранять рабочее пространство"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Source R code"
 msgstr "Исходный код R"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
+#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "пакет Tcl '%s' не найден"
 
 #. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
 #: R/windows/zzz.R:0
+#, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "файлы поддержки Tcl/Tk не установлены"
 
@@ -151,6 +158,7 @@ msgstr "tkGUI недоступна под Windows"
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
+#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "нельзя изменить имя массива Tcl"
 
@@ -170,10 +178,17 @@ msgid "t test"
 msgstr "t тест"
 
 #. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
-#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr "библиотека tcltk связана с"
+
+#, fuzzy
+#~ msgid "gettext(\"Save workspace\")"
+#~ msgstr "Сохранить рабочее пространство"
+
+#, fuzzy
+#~ msgid "message(\"tcltk DLL is linked to \", shQuote(this))"
+#~ msgstr "библиотека tcltk связана с"
 
 #~ msgid "Loading Tcl/Tk interface ..."
 #~ msgstr "Загружаю интерфейс Tcl/Tk..."

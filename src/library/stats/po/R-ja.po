@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -29,7 +29,6 @@ msgstr "リンク %s は利用できません"
 msgid "%s must be 0 or 1"
 msgstr "%s は 0 か 1 でなければなりません"
 
-#. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
 #: R/contrast.R:0 R/xtabs.R:0
@@ -181,12 +180,10 @@ msgid "'coef' must be a vector"
 msgstr "'coef' はベクトルでなければなりません"
 
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
-#. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
 msgid "'coef' must define a contrast, i.e., sum to 0"
 msgstr "'coef' は対比を定義しなければなりません、すなわち総和が 0 になる必要があります"
 
-#. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #: R/aov.R:0
 msgid "'coef' must have same length as 'contrast.obj'"
@@ -262,13 +259,11 @@ msgid "'cv' must not be NA when 'df' is specified"
 msgstr "'df' が特定されているので、'cv' は NA になってはいけません"
 
 #. R/models.R: stop("'data' must be a data.frame, environment, or list")
-#. R/models.R: stop("'data' must be a data.frame, environment, or list")
 #: R/models.R:0
 #, fuzzy
 msgid "'data' must be a data.frame, environment, or list"
 msgstr "'data' はリストか環境でなければなりません"
 
-#. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
 msgid "'data' must be a data.frame, not a matrix or an array"
@@ -290,12 +285,10 @@ msgid "'degree' must be at least 1"
 msgstr "次数 ('degree') は少なくとも 1 でなければなりません"
 
 #. R/contr.poly.R: stop("'degree' must be less than number of unique points")
-#. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 #: R/contr.poly.R:0
 msgid "'degree' must be less than number of unique points"
 msgstr "次数 ('degree') はユニークな点の数未満でなければなりません"
 
-#. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #: R/splinefun.R:0
 msgid "'deriv' must be between 0 and 3"
@@ -348,13 +341,10 @@ msgstr "モデル式 ('formula') がありません"
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
 #. R/ks.test.R: stop("'formula' missing or incorrect")
-#. R/ks.test.R: stop("'formula' missing or incorrect")
 #. R/mood.test.R: stop("'formula' missing or incorrect")
 #. R/oneway.test.R: stop("'formula' missing or incorrect")
 #. R/t.test.R: stop("'formula' missing or incorrect")
-#. R/t.test.R: stop("'formula' missing or incorrect")
 #. R/var.test.R: stop("'formula' missing or incorrect")
-#. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/ftable.R:0
@@ -438,7 +428,6 @@ msgid "'k' is bigger than 'n'!  Changing 'k' to %d"
 msgstr "'k' は 'n' より大きいです!  'k' を %d に変更します"
 
 #. R/kernel.R: stop("'k' is not a kernel")
-#. R/kernel.R: stop("'k' is not a kernel")
 #: R/kernel.R:0
 msgid "'k' is not a kernel"
 msgstr "'k' はカーネルではありません"
@@ -499,7 +488,6 @@ msgid "'lower' and 'upper' must be finite values"
 msgstr "'lower' と 'upper' は有限の値でなければなりません"
 
 #. R/kernel.R: stop("'m' is less than 1")
-#. R/kernel.R: stop("'m' is less than 1")
 #: R/kernel.R:0
 msgid "'m' is less than 1"
 msgstr "'m' は 1 未満です"
@@ -509,7 +497,6 @@ msgstr "'m' は 1 未満です"
 msgid "'m' must be numeric with non-negative integers"
 msgstr "'m' は非負整数の数値ベクトルでなければなりません"
 
-#. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #: R/termplot.R:0
 msgid "'main' must be TRUE, FALSE, NULL or character (vector)."
@@ -642,20 +629,15 @@ msgid "'order.max' must be < 'n.obs'"
 msgstr "'order.max' は 'n.used' より小さくなければなりません"
 
 #. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
 #: R/ar.R:0
 msgid "'order.max' must be < 'n.used'"
 msgstr "'order.max' は 'n.used' より小さくなければなりません"
 
 #. R/ar.R: stop("'order.max' must be >= 0")
-#. R/ar.R: stop("'order.max' must be >= 0")
 #: R/ar.R:0
 msgid "'order.max' must be >= 0"
 msgstr "'order.max' は >= 0 でなければなりません"
 
-#. R/ar.R: stop("'order.max' must be >= 1")
-#. R/ar.R: stop("'order.max' must be >= 1")
 #. R/ar.R: stop("'order.max' must be >= 1")
 #: R/ar.R:0
 msgid "'order.max' must be >= 1"
@@ -702,9 +684,6 @@ msgid "'print.level' must be in {0,1,2}"
 msgstr "'print.level' は {0, 1, 2} 中でなければなりません"
 
 #. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
 #: R/distn.R:0
 msgid "'prob' and 'mu' both specified"
 msgstr "'prob' と 'mu' の双方が指定されました"
@@ -714,7 +693,6 @@ msgstr "'prob' と 'mu' の双方が指定されました"
 msgid "'probs' outside [0,1]"
 msgstr "'probs' が範囲 [0, 1] 外です"
 
-#. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
@@ -777,7 +755,6 @@ msgstr "'row.var.names' がありません"
 msgid "'sampleT' and 'nser' must be integer"
 msgstr "'sampleT' と 'nser' は整数でなければなりません"
 
-#. R/biplot.R: warning("'scale' is outside [0, 1]")
 #. R/biplot.R: warning("'scale' is outside [0, 1]")
 #: R/biplot.R:0
 msgid "'scale' is outside [0, 1]"
@@ -843,7 +820,6 @@ msgid "'start' and 'table' must be same length"
 msgstr "'strat' と 'table' は同じ長さでなければなりません"
 
 #. R/ts.R: stop("'start' cannot be after 'end'")
-#. R/ts.R: stop("'start' cannot be after 'end'")
 #: R/ts.R:0
 msgid "'start' cannot be after 'end'"
 msgstr "開始時間 ('start') は終了時間 ('end') の後にあることができません"
@@ -886,8 +862,9 @@ msgstr "'ts' オブジェクトは 1 つ以上の観測値を持たなければ�
 
 #. R/quantile.R: stop("'type' must be 1 or 3 for ordered factors")
 #: R/quantile.R:0
+#, fuzzy
 msgid "'type' must be 1 or 3 for ordered factors"
-msgstr ""
+msgstr "'relevel' は因子専用です"
 
 #. R/quantile.R: stop("'type' must be an integer in 1..9")
 #: R/quantile.R:0
@@ -910,7 +887,6 @@ msgstr "'varying' 引数は同じ長さでなければなりません"
 msgid "'varying' has wrong length"
 msgstr "'varying' が 誤った長さです"
 
-#. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #: R/nls-profile.R:0
 msgid "'varying' must be in seq_along(pars)"
@@ -1053,8 +1029,6 @@ msgid "'x' is not a kernel"
 msgstr "'x' はカーネルではありません"
 
 #. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
 #. R/kernel.R: stop("'x' is not a vector")
 #: R/diffinv.R:0 R/kernel.R:0
 msgid "'x' is not a vector"
@@ -1094,7 +1068,6 @@ msgid "'x' must be a list with at least 2 elements"
 msgstr "'x' は少なくとも 2 つの要素を持つリストでなければ なりません"
 
 #. R/lm.R: stop("'x' must be a matrix")
-#. R/lm.R: stop("'x' must be a matrix")
 #: R/lm.R:0
 msgid "'x' must be a matrix"
 msgstr "'x' は行列でなければなりません"
@@ -1119,8 +1092,6 @@ msgstr "'x' は数値ベクトルでなければなりません"
 msgid "'x' must be a time series or an ar() fit"
 msgstr "'x' は時系列か ar() 当てはめ結果である必要があります"
 
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #: R/ftable.R:0
 msgid "'x' must be an \"ftable\" object"
@@ -1163,9 +1134,6 @@ msgstr "'x' は非負整数でなければなりません"
 
 #. R/StructTS.R: stop("'x' must be numeric")
 #. R/acf.R: stop("'x' must be numeric")
-#. R/acf.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
 #. R/ar.R: stop("'x' must be numeric")
 #. R/arima.R: stop("'x' must be numeric")
 #. R/arma0.R: stop("'x' must be numeric")
@@ -1294,7 +1262,6 @@ msgid "(unordered) factors are not allowed"
 msgstr "要因 (factor) は許されません"
 
 #. R/lm.R: stop("0 (non-NA) cases")
-#. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
 msgid "0 (non-NA) cases"
 msgstr "(非 NA 値の) ケースが 0 です"
@@ -1329,7 +1296,6 @@ msgstr "モデル当てはめは重みつきですが、予測誤差は一定と
 msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr "バリアアルゴリズムは指定回数繰り返しましたが収束しませんでした"
 
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #: R/cor.test.R:0
 msgid "Cannot compute exact p-value with ties"
@@ -1411,14 +1377,10 @@ msgstr "'%s' 中に NA 値があります"
 
 #. R/acf.R: stop("NAs in 'x'")
 #. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
 #: R/acf.R:0 R/ar.R:0
 msgid "NAs in 'x'"
 msgstr "'x' 中に NA 値があります"
 
-#. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #: R/ar.R:0
 #, fuzzy
@@ -1473,7 +1435,6 @@ msgstr "目的関数は外部繰り返し %d で増加しました"
 
 #. R/prcomp.R: stop("PCA applies only to numerical variables")
 #. R/princomp.R: stop("PCA applies only to numerical variables")
-#. R/princomp.R: stop("PCA applies only to numerical variables")
 #: R/prcomp.R:0 R/princomp.R:0
 msgid "PCA applies only to numerical variables"
 msgstr "PCA は数値変数にしか適用できません"
@@ -1515,7 +1476,6 @@ msgid "Requested conf.level not achievable"
 msgstr "要求された conf.level は達成不能です"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
-#. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
 msgstr "型 '%s' に対する SE はまだ実装されていません"
@@ -1545,14 +1505,10 @@ msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`
 msgstr ""
 
 #. R/confint.R: message("Waiting for profiling to be done...")
-#. R/confint.R: message("Waiting for profiling to be done...")
 #: R/confint.R:0
 msgid "Waiting for profiling to be done..."
 msgstr ""
 
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
 #. R/mlm.R: stop("X does not define a subspace of M")
 #: R/mlm.R:0
 msgid "X does not define a subspace of M"
@@ -1668,7 +1624,6 @@ msgid "argument 'sides' must be 1 or 2"
 msgstr "引数 'sides' は 1 か 2 でなければなりません"
 
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
-#. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
 #, fuzzy
 msgid "argument 'sizes' must be a vector of length 2"
@@ -1686,8 +1641,9 @@ msgstr "引数 'x' をクラス %s に強制変換できません"
 
 #. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
+#, fuzzy
 msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
-msgstr ""
+msgstr "引数 'x' は数値でなければなりません"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
@@ -1880,7 +1836,6 @@ msgstr "タイがあるため、正確な信頼区間を計算することがで
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
 #. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
 #: R/ansari.test.R:0 R/wilcox.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "タイがあるため、正確な p 値を計算することができません"
@@ -1994,7 +1949,6 @@ msgid "computation of exact probability failed, returning Monte Carlo approximat
 msgstr ""
 
 #. R/contrast.R: stop("contrasts apply only to factors")
-#. R/contrast.R: stop("contrasts apply only to factors")
 #: R/contrast.R:0
 msgid "contrasts apply only to factors"
 msgstr "対比は因子にしか適用できません"
@@ -2047,7 +2001,6 @@ msgstr "被覆確率が範囲 [0, 1) 外です"
 msgid "cross-validation with non-unique 'x' values seems doubtful"
 msgstr "一意でない 'x' 値によるクロスバリデーションには問題があるかも知れません"
 
-#. R/t.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
 #: R/t.test.R:0
 msgid "data are essentially constant"
@@ -2158,7 +2111,6 @@ msgstr "'x' の要素は 'n' のそれらより大きくてはいけません"
 
 #. R/kmeans.R: stop("empty cluster: try a better set of initial centers", call. = FALSE)
 #. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
-#. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
 #: R/kmeans.R:0
 msgid "empty cluster: try a better set of initial centers"
 msgstr "空のクラスタ: より良い初期中心を試みましょう"
@@ -2213,7 +2165,6 @@ msgstr "f.lower = f(lower) が NA です"
 msgid "f.upper = f(upper) is NA"
 msgstr "f.upper = f(upper) が NA です"
 
-#. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #: R/factanal.R:0
 msgid "factor analysis applies only to numerical variables"
@@ -2344,7 +2295,6 @@ msgid "ignoring prior weights"
 msgstr "事前重みを無視します"
 
 #. R/lm.R: stop("incompatible dimensions")
-#. R/lm.R: stop("incompatible dimensions")
 #: R/lm.R:0
 msgid "incompatible dimensions"
 msgstr "矛盾した次元です"
@@ -2370,7 +2320,6 @@ msgid "incorrect length of 'x'"
 msgstr "'x' の長さが不正確です"
 
 #. R/ftable.R: stop("incorrect specification for 'col.vars'")
-#. R/ftable.R: stop("incorrect specification for 'col.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'col.vars'"
 msgstr "'col.vars' の指定が不正確です"
@@ -2381,7 +2330,6 @@ msgstr "'col.vars' の指定が不正確です"
 msgid "incorrect specification for 'formula'"
 msgstr "モデル式 ('formula') の指定が不正確です"
 
-#. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'row.vars'"
@@ -2485,8 +2433,6 @@ msgid "invalid 'method' argument"
 msgstr "無効な 'method' 引数です"
 
 #. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
 #: R/bandwidths.R:0
 msgid "invalid 'nb'"
 msgstr "無効な 'nb'"
@@ -2497,14 +2443,10 @@ msgid "invalid 'tree' ('merge' component)"
 msgstr "無効な 'tree' ('merge' 成分) です"
 
 #. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr "無効な 'use' 引数です"
 
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/bandwidths.R: stop("invalid 'x'")
 #. R/bandwidths.R: stop("invalid 'x'")
 #. R/chisq.test.R: stop("invalid 'x'")
 #. R/loess.R: stop("invalid 'x'")
@@ -2624,8 +2566,9 @@ msgstr "deriv に不正な式があります"
 
 #. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
+#, fuzzy
 msgid "invalid formula %s: extraneous call to `%s` is deprecated"
-msgstr ""
+msgstr "deriv に不正な式があります"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
 #: R/models.R:0
@@ -2633,7 +2576,6 @@ msgstr ""
 msgid "invalid formula %s: not a call"
 msgstr "deriv に不正な式があります"
 
-#. R/deriv.R: stop("invalid formula in deriv")
 #. R/deriv.R: stop("invalid formula in deriv")
 #: R/deriv.R:0
 msgid "invalid formula in deriv"
@@ -2645,7 +2587,6 @@ msgstr "deriv に不正な式があります"
 msgid "invalid formula: %s"
 msgstr "無効なモデル式です"
 
-#. R/approx.R: stop("invalid interpolation method")
 #. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
 #: R/approx.R:0 R/spline.R:0
@@ -2659,9 +2600,6 @@ msgstr "メンバーの長さが無効です"
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
-#. R/approx.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
 #. R/bandwidths.R: stop("invalid length(x)")
 #. R/stl.R: stop("invalid length(x)")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/stl.R:0
@@ -2779,7 +2717,6 @@ msgstr ""
 " マージンの長さ %d と合致しません"
 
 #. R/biplot.R: stop("length of choices must be 2")
-#. R/biplot.R: stop("length of choices must be 2")
 #: R/biplot.R:0
 msgid "length of choices must be 2"
 msgstr "選択の長さは 2 でなければなりません"
@@ -2800,12 +2737,6 @@ msgstr "'x' と 'xreg' の長さが一致しません"
 msgid "levels truncated to positive values only"
 msgstr "水準は正の値だけに縮小されました"
 
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #: R/family.R:0
 #, fuzzy
@@ -2847,8 +2778,6 @@ msgid "method = \"Brent\" is only available for one-dimensional optimization"
 msgstr "method = \"Brent\" は一次元最適化でのみ使えます。"
 
 #. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
 #: R/lm.R:0
 msgid "method = '%s' is not supported. Using 'qr'"
 msgstr "method = '%s' はサポートされていません。'qr' を使用します"
@@ -2863,7 +2792,6 @@ msgstr "L-BFGS-B 法は、'reltol' そして 'abstol' の代わりに 'factr' (�
 msgid "midcache() of non-binary dendrograms only partly implemented"
 msgstr "バイナリでないデンドログラムの midcache() は部分的にしか実装されていません"
 
-#. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
@@ -2927,7 +2855,6 @@ msgid "model frame and formula mismatch in model.matrix()"
 msgstr "model.matrix() でモデルフレームとモデル式の組合せが不適当です"
 
 #. R/AIC.R: warning("models are not all fitted to the same number of observations")
-#. R/AIC.R: warning("models are not all fitted to the same number of observations")
 #: R/AIC.R:0
 msgid "models are not all fitted to the same number of observations"
 msgstr "モデルあてはめに使用した観察数が全て同じではありません"
@@ -2958,7 +2885,6 @@ msgstr "データ点よりも多くのクラスタ中心があります"
 msgid "more cluster centers than distinct data points."
 msgstr "異なったデータ点よりも多くのクラスタ中心があります"
 
-#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #: R/dummy.coef.R:0
 msgid "multivariate case with missing coefficients is not yet implemented"
@@ -3042,10 +2968,6 @@ msgid "need an object with call component"
 msgstr "呼出し成分を持つオブジェクトが必要です"
 
 #. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
 #: R/bandwidths.R:0
 msgid "need at least 2 data points"
 msgstr "少なくとも 2 つのデータ点が必要です"
@@ -3066,7 +2988,6 @@ msgid "need at least four unique 'x' values"
 msgstr "'x' には少なくとも 4 つの異なる値が必要です"
 
 #. R/approx.R: stop("need at least two non-NA values to interpolate")
-#. R/approx.R: stop("need at least two non-NA values to interpolate")
 #: R/approx.R:0
 msgid "need at least two non-NA values to interpolate"
 msgstr "補間のためには少なくとも 2 つの非 NA 値が必要です"
@@ -3077,8 +2998,6 @@ msgid "need dendrograms where all leaves have labels"
 msgstr "すべての葉がラベルを持つデンドログラムが必要です"
 
 #. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
 #: R/manova.R:0
 msgid "need multiple responses"
 msgstr "多重応答を必要とします"
@@ -3088,8 +3007,6 @@ msgstr "多重応答を必要とします"
 msgid "need numeric data"
 msgstr "数値データが必要です"
 
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #: R/smspline.R:0
 msgid "need result of smooth.spline(keep.data = TRUE)"
@@ -3198,8 +3115,6 @@ msgid "no scores are available: refit with 'retx=TRUE'"
 msgstr "いかなるスコアも利用できません: 'retx=TRUE' で再当てはめしてください"
 
 #. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
 #: R/nlm.R:0
 msgid "no sign change found in %d iterations"
 msgstr "%d 回の反復を行いましたが符号が変化しませんでした"
@@ -3225,13 +3140,10 @@ msgid "no terms component nor attribute"
 msgstr "terms 要素も terms 属性もありません"
 
 #. R/add.R: stop("no terms in scope")
-#. R/add.R: stop("no terms in scope")
 #: R/add.R:0
 msgid "no terms in scope"
 msgstr "スコープ中に項がありません"
 
-#. R/add.R: stop("no terms in scope for adding to object")
-#. R/add.R: stop("no terms in scope for adding to object")
 #. R/add.R: stop("no terms in scope for adding to object")
 #: R/add.R:0
 msgid "no terms in scope for adding to object"
@@ -3242,7 +3154,6 @@ msgstr "オブジェクトへ加えるべき項がスコープ中にありませ
 msgid "no time series supplied"
 msgstr "時系列が与えられていません"
 
-#. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #: R/glm.R:0
 msgid "no valid set of coefficients has been found: please supply starting values"
@@ -3372,22 +3283,17 @@ msgid "not an unreplicated complete block design"
 msgstr "繰り返しの無い完全なブロックデザインではありません"
 
 #. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
 #: R/ks.test.R:0
 msgid "not enough 'x' data"
 msgstr "'x' データの数が十分ではありません"
 
 #. R/ansari.test.R: stop("not enough 'x' observations")
 #. R/t.test.R: stop("not enough 'x' observations")
-#. R/t.test.R: stop("not enough 'x' observations")
 #. R/var.test.R: stop("not enough 'x' observations")
 #: R/ansari.test.R:0 R/t.test.R:0 R/var.test.R:0
 msgid "not enough 'x' observations"
 msgstr "観測値 'x' の個数が不十分です"
 
-#. R/ks.test.R: stop("not enough 'y' data")
-#. R/ks.test.R: stop("not enough 'y' data")
 #. R/ks.test.R: stop("not enough 'y' data")
 #: R/ks.test.R:0
 msgid "not enough 'y' data"
@@ -3414,13 +3320,10 @@ msgid "not enough data"
 msgstr "十分なデータがありません"
 
 #. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
 #: R/contrast.R:0
 msgid "not enough degrees of freedom to define contrasts"
 msgstr "対比を定義するために十分な自由度ではありません"
 
-#. R/cor.test.R: stop("not enough finite observations")
 #. R/cor.test.R: stop("not enough finite observations")
 #: R/cor.test.R:0
 msgid "not enough finite observations"
@@ -3507,8 +3410,6 @@ msgid "number of offsets is %d, should equal %d (number of observations)"
 msgstr "オフセットの数は %d ですが、%d (観測値の数)に等しくなければなりません"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #: R/add.R:0
 msgid "number of rows in use has changed: remove missing values?"
 msgstr "使用中の行数が変わりました: 欠損値を取除きますか？"
@@ -3552,7 +3453,6 @@ msgstr ""
 "数値の y を与えなければなりません。\n"
 "密度の推定には density() を使いましょう"
 
-#. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #: R/biplot.R:0
 msgid "object '%s' has no scores"
@@ -3621,16 +3521,10 @@ msgid "only univariate series are allowed"
 msgstr "一変量系列だけが許されます"
 
 #. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
 #: R/HoltWinters.R:0
 msgid "optimization difficulties: %s"
 msgstr "%s の最適化に失敗しました"
 
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
 #. R/HoltWinters.R: stop("optimization failure")
 #: R/HoltWinters.R:0
 msgid "optimization failure"
@@ -3682,7 +3576,6 @@ msgstr "'inverse.gaussian' ファミリでは正の値しか許されません"
 msgid "possible convergence problem: 'optim' gave code = %d and message %s"
 msgstr "収束に問題があるかもしれません: 'optim' はコード = %d とメッセージ %s で終了しました"
 
-#. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arma0.R: gettextf("possible convergence problem: optim gave code = %d",     code)
 #: R/arima.R:0 R/arma0.R:0
@@ -3736,9 +3629,6 @@ msgid "ref = %d must be in 1L:%d"
 msgstr "ref = %d は 1L:%d 中になければなりません:"
 
 #. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
 #: R/wilcox.test.R:0
 msgid "requested conf.level not achievable"
 msgstr "指定された conf.level を達成できませんでした"
@@ -3758,7 +3648,6 @@ msgstr "オブジェクト中の残り自由度はこれは \"lm\" オブジェ�
 msgid "residuals have rank %d < %d"
 msgstr "残差はランク %d < %d を持ちます"
 
-#. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #: R/mlm.R:0
 msgid "residuals have rank %s < %s"
@@ -3793,7 +3682,6 @@ msgid "sample size must be between 3 and 5000"
 msgstr "サンプルの大きさは 3 と 5000 の間になければなりません"
 
 #. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
-#. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
 #: R/ansari.test.R:0
 msgid "samples differ in location: cannot compute confidence set, returning NA"
 msgstr "サンプルの位置が異なります: 信頼集合を計算できません、NA 値を返します"
@@ -3803,8 +3691,6 @@ msgstr "サンプルの位置が異なります: 信頼集合を計算できま�
 msgid "scatter plots only for univariate time series"
 msgstr "散布図は一変量時系列用です"
 
-#. R/add.R: stop("scope is not a subset of term labels")
-#. R/add.R: stop("scope is not a subset of term labels")
 #. R/add.R: stop("scope is not a subset of term labels")
 #: R/add.R:0
 msgid "scope is not a subset of term labels"
@@ -3823,7 +3709,6 @@ msgid "series is corrupt, with no 'tsp' attribute"
 msgstr "系列は壊れています, 'tsp' 属性がありません"
 
 #. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
-#. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
 #: R/ts.R:0
 msgid "series is corrupt: length %d with 'tsp' implying %d"
 msgstr "系列は壊れています: 'tsp' を持つ %d は %d を意味します"
@@ -3833,7 +3718,6 @@ msgstr "系列は壊れています: 'tsp' を持つ %d は %d を意味しま�
 msgid "series is not periodic or has less than two periods"
 msgstr "系列は周期的でないか、2 未満の周期しか持ちません"
 
-#. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #: R/nls.R:0
 msgid "setVarying : 'vary' length must match length of parameters"
@@ -3862,7 +3746,6 @@ msgid "singular contrast matrix"
 msgstr "特異な対比行列です"
 
 #. R/glm.R: stop("singular fit encountered")
-#. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #: R/glm.R:0 R/lm.R:0
 msgid "singular fit encountered"
@@ -3935,17 +3818,10 @@ msgstr "唯一つの数値予測子を持つ予測子の平方は捨て去るこ
 
 #. R/distn.R: warning("specify 'rate' or 'scale' but not both")
 #. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
 #: R/distn.R:0
 msgid "specify 'rate' or 'scale' but not both"
 msgstr "'rate' または 'scale' のどちらか一方を指定してください"
 
-#. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #: R/identify.hclust.R:0
 msgid "specify exactly one of 'k' and 'h'"
@@ -3987,7 +3863,6 @@ msgid "sum(weights) != 1  -- will not get true density"
 msgstr "sum(weights) != 1 -- 真の密度にはならないでしょう"
 
 #. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
-#. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
 #: R/cor.R:0
 msgid "supply both 'x' and 'y' or a matrix-like 'x'"
 msgstr "'x' to 'y' の両方を与えるか、行列形の 'x' を与えてください"
@@ -4018,7 +3893,6 @@ msgid "the case k > 2 is unimplemented"
 msgstr "k > 2 の場合はまだ実装されていません"
 
 #. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
-#. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
 #: R/aov.R:0
 msgid "the contrast defined is empty (has no TRUE elements)"
 msgstr "定義された対比は空です (TRUE 要素がありません)"
@@ -4033,8 +3907,6 @@ msgstr "時系列の最初の値は欠損していてはいけません"
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "'anova.glm' への次の引数は無効であり、除去されました:"
 
-#. R/StructTS.R: stop("the series is entirely NA")
-#. R/StructTS.R: stop("the series is entirely NA")
 #. R/StructTS.R: stop("the series is entirely NA")
 #: R/StructTS.R:0
 msgid "the series is entirely NA"
@@ -4153,7 +4025,6 @@ msgid "transformed ARMA parameters were fixed"
 msgstr "変形された ARMA パラメータが固定されました"
 
 #. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
-#. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #: R/model.tables.R:0
 msgid "type '%s' is not implemented yet"
 msgstr "型 '%s' はまだ実装されていません"
@@ -4210,7 +4081,6 @@ msgid "using F test with a '%s' family is inappropriate"
 msgstr "'%s' ファミリに対して F 検定を使うのは不適切です"
 
 #. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
-#. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
 #: R/glm.R:0
 msgid "using F test with a fixed dispersion is inappropriate"
 msgstr "固定された dispersion に F 検定を使うことは適当ではありません"
@@ -4266,7 +4136,6 @@ msgid "weights must be non-negative and not all zero"
 msgstr "重みは非負であり、全てがゼロであってはいけません"
 
 #. R/embed.R: stop("wrong embedding dimension")
-#. R/embed.R: stop("wrong embedding dimension")
 #: R/embed.R:0
 msgid "wrong embedding dimension"
 msgstr "誤った埋め込み次元です"
@@ -4304,7 +4173,6 @@ msgid "wrong number of contrast matrix rows"
 msgstr "対比行列の行数が間違っています"
 
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 msgid "x is not a vector or univariate time series"
 msgstr "x はベクトルもしくは一変量時系列ではありません"
@@ -4341,14 +4209,12 @@ msgid "y values must be 0 <= y <= 1"
 msgstr "y の値は [0, 1] 中でなければなりません"
 
 #. R/approx.R: stop("zero non-NA points")
-#. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
 #. R/splinefun.R: stop("zero non-NA points")
 #: R/approx.R:0 R/spline.R:0 R/splinefun.R:0
 msgid "zero non-NA points"
 msgstr "非 NA 値がありません"
 
-#. R/ar.R: stop("zero-variance series")
 #. R/ar.R: stop("zero-variance series")
 #: R/ar.R:0
 msgid "zero-variance series"
@@ -4518,7 +4384,6 @@ msgid "upper scope has term %s not included in model"
 msgid_plural "upper scope has terms %s not included in model"
 msgstr[0] "上位のスコープはモデル中に含まれない項 %s を持ちます"
 
-#. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #: R/add.R:0
 msgid "using the %d/%d row from a combined fit"

@@ -2,13 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
@@ -36,15 +36,12 @@ msgstr ""
 
 #: R/unix/mcfork.R: 0
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
-#. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 
 msgid "'children' must be a list of processes or a single process"
 msgstr ""
 
 
 #: R/windows/mcdummies.R: 0
-#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
-#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 
 msgid "'mc.cores' > 1 is not supported on Windows"
@@ -54,12 +51,8 @@ msgstr ""
 #: R/unix/mclapply.R: 0
 #: R/unix/pvec.R: 0
 #: R/windows/mcdummies.R: 0
-#: R/windows/mcdummies.R: 0
-#: R/windows/mcdummies.R: 0
 #. R/unix/mclapply.R: stop("'mc.cores' must be >= 1")
 #. R/unix/pvec.R: stop("'mc.cores' must be >= 1")
-#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
-#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 #. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 
 msgid "'mc.cores' must be >= 1"
@@ -161,7 +154,6 @@ msgstr ""
 
 #: R/unix/mcfork.R: 0
 #. R/unix/mcfork.R: stop("invalid 'child' argument")
-#. R/unix/mcfork.R: stop("invalid 'child' argument")
 
 msgid "invalid 'child' argument"
 msgstr ""
@@ -175,7 +167,6 @@ msgstr ""
 
 
 #: R/RngStream.R: 0
-#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 
 msgid "invalid value of %s"

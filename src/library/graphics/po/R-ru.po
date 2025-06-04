@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2025-04-01 16:53+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -357,8 +357,6 @@ msgid "at least one entry of 'x' must be positive"
 msgstr "как минимум одна запись в 'x' должна быть положительной"
 
 #. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
 #: R/plot.R:0
 msgid "cannot handle more than one 'x' coordinate"
 msgstr "не могу взять больше чем одну координату 'x'"
@@ -379,8 +377,6 @@ msgid "default 'pch' is smaller than number of columns and hence recycled"
 msgstr "умалчиваемое значение 'pch' меньше количества колонок и поэтому повторяется"
 
 #. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/spineplot.R: stop("dependent variable should be a factor")
 #. R/spineplot.R: stop("dependent variable should be a factor")
 #: R/cdplot.R:0 R/spineplot.R:0
 msgid "dependent variable should be a factor"
@@ -521,7 +517,6 @@ msgid "invalid coordinate lengths"
 msgstr "неправильные длины координат"
 
 #. R/boxplot.R: stop("invalid first argument")
-#. R/boxplot.R: stop("invalid first argument")
 #. R/stripchart.R: stop("invalid first argument")
 #: R/boxplot.R:0 R/stripchart.R:0
 msgid "invalid first argument"
@@ -570,15 +565,10 @@ msgid "invalid rectangle specification"
 msgstr "неправильное указание прямоугольника"
 
 #. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
 #: R/screen.R:0
 msgid "invalid screen number"
 msgstr "неправильный номер экрана"
 
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/datetime.R:0
 msgid "invalid specification of 'breaks'"
@@ -644,8 +634,6 @@ msgid "missing values in contingency table"
 msgstr "пропущенные значения в таблице сопряженности"
 
 #. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
 #: R/plot.R:0
 msgid "must have a response variable"
 msgstr "нужна зависимая переменная"
@@ -679,7 +667,6 @@ msgstr "нет конечных и непропущенных значений"
 msgid "no proper 'z' matrix specified"
 msgstr "не указано подходящей матрицы 'z'"
 
-#. R/pairs.R: stop("non-numeric argument to 'pairs'")
 #. R/pairs.R: stop("non-numeric argument to 'pairs'")
 #: R/pairs.R:0
 msgid "non-numeric argument to 'pairs'"
@@ -793,7 +780,6 @@ msgstr "несортированные 'breaks' будут отсортиров�
 msgid "weights are not supported for 2-way table specification"
 msgstr "не поддерживаются веса для двумерной таблицы"
 
-#. R/datetime.R: stop("wrong method")
 #. R/datetime.R: stop("wrong method")
 #: R/datetime.R:0
 msgid "wrong method"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-24 17:06+0200\n"
+"POT-Creation-Date: 2025-06-01 10:55+0200\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -5082,7 +5082,7 @@ msgstr ""
 msgid "bad opcode"
 msgstr "codi d'operació incorrecte"
 
-#: src/main/eval.cpp:6838
+#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, fuzzy, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "tipus %s no vàlid a «x %s y»"
@@ -5824,16 +5824,6 @@ msgstr "les operacions només són possibles per a tipus numèrics, lògics o co
 #, fuzzy, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "l'operador «%s» requereix 2 arguments"
-
-#: src/main/logic.cpp:307
-#, fuzzy, c-format
-msgid "invalid 'x' type in 'x %s y'"
-msgstr "tipus «x» no vàlid a «x %s y»"
-
-#: src/main/logic.cpp:316
-#, fuzzy, c-format
-msgid "invalid 'y' type in 'x %s y'"
-msgstr "tipus «y» no vàlid a «x %s y»"
 
 #: src/main/logic.cpp:394
 #, fuzzy
@@ -11346,6 +11336,14 @@ msgstr "No es pot carregar el mòdul X11"
 #, fuzzy
 msgid "X11 is not available"
 msgstr "X11 no està disponible"
+
+#, fuzzy, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "tipus «x» no vàlid a «x %s y»"
+
+#, fuzzy, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "tipus «y» no vàlid a «x %s y»"
 
 #, fuzzy
 #~ msgid "cannot set attribute on a symbol"

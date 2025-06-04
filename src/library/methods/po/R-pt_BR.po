@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -106,7 +106,6 @@ msgid "%s is not a reference class"
 msgstr "'%s' não é uma das funções básicas"
 
 #. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
-#. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #: R/SClasses.R:0
 #, fuzzy
 msgid "%s is not a slot in class %s"
@@ -198,20 +197,21 @@ msgstr ""
 
 #. R/is.R: stop("'class1' must be the name of a class or a class definition")
 #: R/is.R:0
+#, fuzzy
 msgid "'class1' must be the name of a class or a class definition"
-msgstr ""
+msgstr "'Class' deve ser uma definição válida de classe ou classe"
 
 #. R/is.R: stop("'class2' must be the name of a class or a class definition")
 #: R/is.R:0
+#, fuzzy
 msgid "'class2' must be the name of a class or a class definition"
-msgstr ""
+msgstr "'Class' deve ser uma definição válida de classe ou classe"
 
 #. R/RClassUtils.R: stop("'externalptr' objects cannot be initialized from new()")
 #: R/RClassUtils.R:0
 msgid "'externalptr' objects cannot be initialized from new()"
 msgstr "objetos 'externalptr' não podem ser inicializados a partir de new()"
 
-#. R/Methods.R: stop("'file' must be a character string or a connection")
 #. R/Methods.R: stop("'file' must be a character string or a connection")
 #: R/Methods.R:0
 msgid "'file' must be a character string or a connection"
@@ -343,8 +343,9 @@ msgstr "slot \"%s\" na classe \"%s\" definido atualmente (ou herdado) como \"%s\
 
 #. R/RMethodUtils.R: message("Empty function name in .getGeneric")
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "Empty function name in .getGeneric"
-msgstr ""
+msgstr "Função fornecida como argumento \"f\" deve ser genérica"
 
 #. R/trace.R: gettextf("Environment of class %s is locked; using global environment for new class",     dQuote(className))
 #: R/trace.R:0
@@ -490,15 +491,15 @@ msgid "The prototype for class %s has undefined slot(s): %s"
 msgstr "a lista '%s' para a classe \"%s\", incluí uma classe não definida \"%s\""
 
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
-#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 #: R/MethodsList.R:0
 msgid "Use %s instead."
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' must be a function of two arguments, got %d",     length(args))
 #: R/as.R:0
+#, fuzzy
 msgid "a 'replace' method definition in 'setAs' must be a function of two arguments, got %d"
-msgstr ""
+msgstr "o argumento 'replace' para setIs() deve ser uma função de 2 ou 3 argumentos, objeto da classe %s obtido"
 
 #. R/NextMethod.R: gettextf("a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'",     sQuote(f))
 #: R/NextMethod.R:0
@@ -512,8 +513,7 @@ msgid "a call to superClass() is in the method %s but there is no superclass def
 msgstr ""
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
-#. R/trace.R: stop("a function for argument 'f' must be a generic function")
-#: R/Methods.R:0 R/trace.R:0
+#: R/Methods.R:0
 #, fuzzy
 msgid "a function for argument 'f' must be a generic function"
 msgstr "função para o argumento 'f' deve ser uma função genérica"
@@ -532,8 +532,9 @@ msgstr "um protótipo foi especificado para a classe \"%s\", mas a definição d
 
 #. R/refClass.R: gettextf("a single class name is needed for field %s, got a character vector of length %d",     sQuote(thisName), length(thisField))
 #: R/refClass.R:0
+#, fuzzy
 msgid "a single class name is needed for field %s, got a character vector of length %d"
-msgstr ""
+msgstr "definição de método inválida: uma função era esperada, mas foi especificado um objeto de classe \"%s\""
 
 #. R/RClassUtils.R: gettextf("a validity method must be a function of one argument, got an object of class %s",     dQuote(class(validity)))
 #: R/RClassUtils.R:0
@@ -581,8 +582,9 @@ msgstr "argumento \"f\" deve ser uma função genérica ou um único caractere, 
 
 #. R/oldClass.R: gettextf("argument 'Classes' must be a vector of two classes; got an argument of length %d",     length(Classes))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "argument 'Classes' must be a vector of two classes; got an argument of length %d"
-msgstr ""
+msgstr "argumento 'f' inválido, esperada uma função ou seu nome, mas foi obtido um objeto de classe  \"%s\""
 
 #. R/oldClass.R: gettextf("argument 'S4Class' must be a class definition: got an object of class %s",     dQuote(class(S4Class)))
 #: R/oldClass.R:0
@@ -621,8 +623,9 @@ msgstr "argumento \"f\" deve ser uma função genérica ou %s"
 
 #. R/RClassUtils.R: stop("argument 'includeSubclasses' must be a logical, either one value or a vector of the same length as argument 'classes'")
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "argument 'includeSubclasses' must be a logical, either one value or a vector of the same length as argument 'classes'"
-msgstr ""
+msgstr "argumento 'f' inválido, esperada uma função ou seu nome, mas foi obtido um objeto de classe  \"%s\""
 
 #. R/trace.R: stop("argument 'signature' is not meaningful for tracing reference methods")
 #: R/trace.R:0
@@ -646,8 +649,9 @@ msgstr ""
 
 #. R/trace.R: stop("argument 'what' should be the name of a function")
 #: R/trace.R:0
+#, fuzzy
 msgid "argument 'what' should be the name of a function"
-msgstr ""
+msgstr "argumento \"f\" deve ser uma função genérica ou %s"
 
 #. R/RMethodUtils.R: stop("argument f must be a generic function with signature \"...\"")
 #: R/RMethodUtils.R:0
@@ -847,8 +851,9 @@ msgstr ""
 
 #. R/is.R: gettextf("class %s has no visible definition from package or environment %s",     dQuote(class2), sQuote(getPackageName(where)))
 #: R/is.R:0
+#, fuzzy
 msgid "class %s has no visible definition from package or environment %s"
-msgstr ""
+msgstr "'Class' deve ser uma definição válida de classe ou classe"
 
 #. R/BasicClasses.R: gettextf("class %s is VIRTUAL; not meaningful to create an S4 object from this class",     dQuote(cl))
 #: R/BasicClasses.R:0
@@ -984,13 +989,15 @@ msgstr ""
 
 #. R/SClasses.R: gettextf("error in contained classes (%s) for class %s and unable to remove definition from %s",     msg, dQuote(Class), sQuote(getPackageName(where)))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "error in contained classes (%s) for class %s and unable to remove definition from %s"
-msgstr ""
+msgstr "subclasse %s da classe %s não definida; definição não atualizada"
 
 #. R/SClasses.R: gettextf("error in contained classes (%s) for class %s and unable to restore previous definition from %s",     msg, dQuote(Class), sQuote(getPackageName(where)))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "error in contained classes (%s) for class %s and unable to restore previous definition from %s"
-msgstr ""
+msgstr "subclasse %s da classe %s não definida; definição não atualizada"
 
 #. R/SClasses.R: gettextf("error in contained classes (%s) for class %s; class definition removed from %s",     msg, dQuote(Class), sQuote(getPackageName(where)))
 #: R/SClasses.R:0
@@ -1000,8 +1007,9 @@ msgstr "subclasse %s da classe %s não definida; definição não atualizada"
 
 #. R/SClasses.R: gettextf("error in contained classes (%s) for class %s; previous definition restored to %s",     msg, dQuote(Class), sQuote(getPackageName(where)))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "error in contained classes (%s) for class %s; previous definition restored to %s"
-msgstr ""
+msgstr "subclasse %s da classe %s não definida; definição não atualizada"
 
 #. R/RMethodUtils.R: gettextf("error in load action %s for package %s: %s: %s", aname,     getPackageName(where), callString, value$message)
 #: R/RMethodUtils.R:0
@@ -1017,8 +1025,9 @@ msgstr "erro na atualização da função genérica S4 \"%s\"; a definição da 
 
 #. R/RMethodUtils.R: gettextf("expanding the signature to include omitted arguments in definition: %s",     paste(sigNames[omittedSig], "= \"missing\"", collapse = ", "))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "expanding the signature to include omitted arguments in definition: %s"
-msgstr ""
+msgstr "na assinatura do método da função \"%s\" nomes de argumentos inválidos na assinatura: %s"
 
 #. R/addedFunctions.R: gettextf("expected a non-empty character string for argument 'name'")
 #: R/addedFunctions.R:0
@@ -1076,8 +1085,9 @@ msgstr "primeiro argumento deve ser o(s) nome(s) de funções genérica (foi esp
 
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "formal arguments (%s) omitted in the method definition cannot be in the signature"
-msgstr ""
+msgstr "argumentos 'names' e 'signature' devem ter o mesmo comprimento"
 
 #. R/Methods.R: gettext("formal arguments differ (in default values?)")
 #: R/Methods.R:0
@@ -1138,8 +1148,9 @@ msgstr "se o argumento 'def' for fornecido, ele deve ser uma função que chama 
 
 #. R/RMethodUtils.R: gettextf("in changing formal arguments in %s, some of the old names are not in fact arguments: %s",     msg, paste0("\"", old[is.na(match(old, names(dlist)))], "\"",         collapse = ", "))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "in changing formal arguments in %s, some of the old names are not in fact arguments: %s"
-msgstr ""
+msgstr "tentando mudar a lista de argumentos de uma função com %d argumentos para ter argumentos (%s)"
 
 #. R/RClassUtils.R: gettextf("in constructing the prototype for class %s, slots in prototype and not in class: %s",     dQuote(className), paste(extra, collapse = ", "))
 #: R/RClassUtils.R:0
@@ -1577,8 +1588,6 @@ msgid "no function definition found for %s"
 msgstr "nenhuma função genérica '%s' encontrada"
 
 #. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 #: R/Methods.R:0
 msgid "no generic function %s found"
 msgstr "nenhuma função genérica %s encontrada"
@@ -1642,8 +1651,9 @@ msgstr "nenhum método definido para a função '%s' e assinatura %s"
 
 #. R/as.R: gettextf("no method or default for as() replacement of %s with Class=\"%s\"",     dQuote(thisClass), Class)
 #: R/as.R:0
+#, fuzzy
 msgid "no method or default for as() replacement of %s with Class=\"%s\""
-msgstr ""
+msgstr "nenhum método encontrado para a função \"%s\" e assinatura %s"
 
 #. R/as.R: gettextf("no method or default for coercing %s to %s", dQuote(thisClass),     dQuote(Class))
 #: R/as.R:0
@@ -1680,7 +1690,6 @@ msgstr "nenhuma função genérica '%s' encontrada"
 msgid "no package name supplied and no class definition found for %s"
 msgstr "nenhuma função genérica '%s' encontrada"
 
-#. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 #. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 #: R/RMethodUtils.R:0
 msgid "no suitable arguments to dispatch methods in this function"
@@ -1723,7 +1732,6 @@ msgstr ""
 msgid "none of the objects in the source code could be found:  need to attach or specify the package"
 msgstr ""
 
-#. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #: R/refClass.R:0
 #, fuzzy
@@ -1933,7 +1941,6 @@ msgid "the body of the generic function for %s calls 'standardGeneric' to dispat
 msgstr ""
 
 #. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
-#. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
 #: R/refClass.R:0
 msgid "the class of field %s in the object is not compatible with the desired class %s in the target"
 msgstr ""
@@ -1943,7 +1950,6 @@ msgstr ""
 msgid "the computation: 'as(object,\"%s\") <- value' is valid when object has class %s only if 'is(value, \"%s\")' is TRUE ('class(value)' was %s)"
 msgstr "a instrução: 'as(object,\"%s\") <- valor' é válida quando o objeto for da classe %s somente se 'is(value, \"%s\")' for TRUE ('class(valor)' é %s)"
 
-#. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #: R/refClass.R:0
 #, fuzzy
@@ -1958,8 +1964,9 @@ msgstr "o método para a função \"%s\" e assinatura %s está selado e não pod
 
 #. R/trace.R: stop("the editing in trace() can only change the body of the function, not the arguments or defaults")
 #: R/trace.R:0
+#, fuzzy
 msgid "the editing in trace() can only change the body of the function, not the arguments or defaults"
-msgstr ""
+msgstr "definição de método inválida: uma função era esperada, mas foi especificado um objeto de classe \"%s\""
 
 #. R/trace.R: gettextf("the editing in trace() can only change the body of the function; got an object of class %s",     dQuote(class(def2)))
 #: R/trace.R:0
@@ -2041,8 +2048,9 @@ msgstr "tentando parear com uma assinatura de método um objeto (de classe \"%s\
 
 #. R/RMethodUtils.R: gettextf("trying to change the formal arguments in %s, but getting the new formals from an object of class %s; expected a function definition",     msg, dQuote(class(def)))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "trying to change the formal arguments in %s, but getting the new formals from an object of class %s; expected a function definition"
-msgstr ""
+msgstr "tentando parear com uma assinatura de método um objeto (de classe \"%s\") que não é uma função genérica"
 
 #. R/RMethodUtils.R: gettextf("trying to change the formal arguments in %s, but the number of existing arguments is greater than the number of new arguments (the extra arguments won't be used): (%s) vs (%s)",     msg, paste0("\"", old, "\"", collapse = ", "), paste0("\"",         new, "\"", collapse = ", "))
 #: R/RMethodUtils.R:0
@@ -2051,8 +2059,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("trying to change the formal arguments in %s, but the number of existing arguments is less than the number of new arguments: (%s) vs (%s)",     msg, paste0("\"", old, "\"", collapse = ", "), paste0("\"",         new, "\"", collapse = ", "))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "trying to change the formal arguments in %s, but the number of existing arguments is less than the number of new arguments: (%s) vs (%s)"
-msgstr ""
+msgstr "tentando mudar a lista de argumentos de uma função com %d argumentos para ter argumentos (%s)"
 
 #. R/methodsTable.R: gettextf("trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s",     what, i, paste(unlist(funs), collapse = ", "), paste(as.character(gnames),         collapse = ", "))
 #: R/methodsTable.R:0
@@ -2165,8 +2174,9 @@ msgstr "argumento \"f\" deve ser uma função genérica ou um único caractere, 
 
 #. R/SClasses.R: stop("validity method must be NULL or a function of one argument")
 #: R/SClasses.R:0
+#, fuzzy
 msgid "validity method must be NULL or a function of one argument"
-msgstr ""
+msgstr "um método de validade deve ser uma função de um argumento, mas foi obtido um objeto de classe \"%s\""
 
 #. R/Methods.R: gettextf("value classes differ: %s, %s", .dQ(gpString(f1@valueClass)),     .dQ(gpString(f2@valueClass)))
 #: R/Methods.R:0
@@ -2281,7 +2291,6 @@ msgstr[0] "nenhuma definição de classe %s na posição especificada, %s, defin
 msgstr[1] "nenhuma definição de classe %s na posição especificada, %s, definições em : %s"
 
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
-#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #: R/RMethodUtils.R:0
 msgid "non-argument found in the signature: %s"
 msgid_plural "non-arguments found in the signature: %s"
@@ -2301,10 +2310,6 @@ msgid "the formal argument of the generic function for %s (%s) differs from that
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "Função fornecida como argumento \"f\" deve ser genérica"
 
 #~ msgid "invalid method sublist"
 #~ msgstr "sublista de método inválida"
@@ -2494,10 +2499,6 @@ msgstr[1] ""
 #, fuzzy
 #~ msgid "the environment/package \"%s\" is locked; cannot remove methods data for \"%s\""
 #~ msgstr "o ambiente/pacote '%s' está bloqueado; não é possível remover dados de métodos para '%s'"
-
-#, fuzzy
-#~ msgid "trying to change the argument list of %s with %d arguments to have arguments (%s)"
-#~ msgstr "tentando mudar a lista de argumentos de uma função com %d argumentos para ter argumentos (%s)"
 
 #, fuzzy
 #~ msgid "get rid of variables in definition %s (%s); they conflict with the needed change to argument names (%s)"

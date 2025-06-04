@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-05 17:15\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
 "PO-Revision-Date: 2024-01-30 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -68,8 +68,6 @@ msgid "%s namespace cannot be unloaded:"
 msgstr "%s namespace cannot be unloaded:"
 
 #. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
-#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
-#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
 msgid "%s not defined for \"Date\" objects"
 msgstr "%s not defined for \"Date\" objects"
@@ -90,8 +88,6 @@ msgid "%s not found on search path, using pos = 2"
 msgstr "%s not found on search path, using pos = 2"
 
 #. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
-#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
-#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
 #: R/factor.R:0
 msgid "%s not meaningful for factors"
 msgstr "%s not meaningful for factors"
@@ -107,12 +103,10 @@ msgid "%sPackages in library %s:"
 msgstr "%sPackages in library %s:"
 
 #. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
-#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
 #: R/windows/system.R:0
 msgid "'%s' could not be run"
 msgstr "'%s' could not be run"
 
-#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
 #. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
 #: R/windows/system.R:0
 msgid "'%s' execution failed with error code %d"
@@ -134,13 +128,10 @@ msgid "'%s' is not a function, character or symbol"
 msgstr "'%s' is not a function, character or symbol"
 
 #. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
-#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
 #: R/RNG.R:0
 msgid "'%s' is not a valid abbreviation of an RNG"
 msgstr "'%s' is not a valid abbreviation of an RNG"
 
-#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
-#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
 #. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
 #. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
 #: R/RNG.R:0
@@ -176,8 +167,6 @@ msgstr "'to' must be a \"Date\" object"
 
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
-#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
-#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
 #: R/RNG.R:0 R/connections.R:0 R/format.R:0
@@ -186,7 +175,6 @@ msgid "'%s' must be a character string"
 msgstr "'name' must be a single character string"
 
 #. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
@@ -194,11 +182,7 @@ msgid "'%s' must be a non-empty character string"
 msgstr "'name' must be a single character string"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.names")
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
@@ -227,15 +211,10 @@ msgid "'%s' must be of length 1"
 msgstr "'by' must be of length 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
 msgid "'%s' not defined for \"POSIXt\" objects"
 msgstr "'%s' not defined for \"POSIXt\" objects"
 
-#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
 #: R/datetime.R:0
 msgid "'%s' not defined for \"difftime\" objects"
@@ -251,7 +230,6 @@ msgstr "'%s' not defined for \"numeric_version\" objects"
 msgid "'%s' not defined for ordered factors"
 msgstr "'%s' not defined for ordered factors"
 
-#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #: R/library.R:0
 msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
@@ -360,7 +338,6 @@ msgid "'compress' must be logical or character"
 msgstr "'compress' must be logical or character"
 
 #. R/serialize.R: stop("'connection' must be a connection")
-#. R/serialize.R: stop("'connection' must be a connection")
 #: R/serialize.R:0
 msgid "'connection' must be a connection"
 msgstr "'connection' must be a connection"
@@ -435,7 +412,6 @@ msgid "'file' must be NULL, a connection or a character string"
 msgstr "'file' must be NULL, a connection or a character string"
 
 #. R/dcf.R: stop("'file' must be a character string or connection")
-#. R/dcf.R: stop("'file' must be a character string or connection")
 #. R/scan.R: stop("'file' must be a character string or connection")
 #: R/dcf.R:0 R/scan.R:0
 msgid "'file' must be a character string or connection"
@@ -462,7 +438,6 @@ msgid "'formula' must be a formula"
 msgstr "'formula' must be a formula"
 
 #. R/seq.R: stop("'from' must be a finite number")
-#. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
 msgid "'from' must be a finite number"
 msgstr "'from' must be a finite number"
@@ -473,7 +448,6 @@ msgid "'from' must be raw or character"
 msgstr "'from' must be raw or character"
 
 #. R/formals.R: warning("'fun' is not a function")
-#. R/formals.R: warning("'fun' is not a function")
 #: R/formals.R:0
 msgid "'fun' is not a function"
 msgstr "'fun' is not a function"
@@ -483,7 +457,6 @@ msgstr "'fun' is not a function"
 msgid "'headers' must have names and must not be NA"
 msgstr "'headers' must have names and must not be NA"
 
-#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #: R/New-Internal.R:0
 msgid "'iconvlist' is not available on this system"
@@ -522,7 +495,6 @@ msgid "'input' and 'target' must be character vectors"
 msgstr "'input' and 'target' must be character vectors"
 
 #. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
-#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
 #: R/unix/system.unix.R:0
 msgid "'input' must be a character vector or 'NULL'"
 msgstr "'input' must be a character vector or 'NULL'"
@@ -544,7 +516,6 @@ msgid "'intern' must be TRUE or FALSE"
 msgstr "'intern' must be TRUE or FALSE"
 
 #. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
 #: R/windows/system.R:0
 msgid "'invisible' must be TRUE or FALSE"
 msgstr "'invisible' must be TRUE or FALSE"
@@ -554,7 +525,6 @@ msgstr "'invisible' must be TRUE or FALSE"
 msgid "'k' is too large"
 msgstr "'k' is too large"
 
-#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
 #, fuzzy
@@ -579,7 +549,6 @@ msgstr "'length.out' must be a non-negative number"
 msgid "'local' must be TRUE, FALSE or an environment"
 msgstr "'local' must be TRUE, FALSE or an environment"
 
-#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
 #: R/windows/system.R:0
 msgid "'minimized' must be TRUE or FALSE"
@@ -616,17 +585,11 @@ msgid "'pos=1' is not possible and has been warned about for years"
 msgstr "'pos=1' is not possible and has been warned about for years"
 
 #. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
 #: R/qr.R:0
 msgid "'qr' and 'y' must have the same number of rows"
 msgstr "'qr' and 'y' must have the same number of rows"
 
 #. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
 #: R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'receive.console.signals' must be TRUE or FALSE"
@@ -681,8 +644,6 @@ msgid "'stdout' must be of length 1"
 msgstr "'stdout' must be of length 1"
 
 #. R/frametools.R: stop("'subset' must be logical")
-#. R/frametools.R: stop("'subset' must be logical")
-#. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
 msgid "'subset' must be logical"
 msgstr "'subset' must be logical"
@@ -723,7 +684,6 @@ msgid "'tzone' attributes are inconsistent"
 msgstr "'tzone' attributes are inconsistent"
 
 #. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
-#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
 #: R/kappa.R:0
 msgid "'uplo' must be \"U\" or \"L\""
 msgstr "'uplo' must be \"U\" or \"L\""
@@ -754,8 +714,6 @@ msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 
 #. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
 #: R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'wait' must be TRUE or FALSE"
@@ -823,9 +781,6 @@ msgid "'x' must be a vector of an atomic type"
 msgstr "'x' must be a vector of an atomic type"
 
 #. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
 #: R/colSums.R:0
 msgid "'x' must be an array of at least two dimensions"
 msgstr "'x' must be an array of at least two dimensions"
@@ -851,7 +806,6 @@ msgstr ""
 msgid "'x' must be numeric"
 msgstr "'x' must be numeric"
 
-#. R/array.R: stop("'x' must have named dimnames")
 #. R/array.R: stop("'x' must have named dimnames")
 #. R/sweep.R: stop("'x' must have named dimnames")
 #: R/array.R:0 R/sweep.R:0
@@ -908,7 +862,6 @@ msgstr "-- done registerS3methods for"
 msgid "-- done running .onLoad for"
 msgstr "-- done running .onLoad for"
 
-#. R/namespace.R: message("-- loading code for ", dQuote(package))
 #. R/namespace.R: message("-- loading code for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- loading code for"
@@ -1087,8 +1040,9 @@ msgstr ""
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
+#, fuzzy
 msgid "F used instead of FALSE"
-msgstr ""
+msgstr "%s is not TRUE"
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1152,8 +1106,6 @@ msgstr "Loading required namespace: %s"
 msgid "Loading required package: %s"
 msgstr "Loading required package: %s"
 
-#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
-#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
 #. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
 #: R/duplicated.R:0
 msgid "MARGIN = %s is invalid for dim = %s"
@@ -1363,9 +1315,6 @@ msgid "all variables should have the same length"
 msgstr "all variables should have the same length"
 
 #. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
 #: R/pmax.R:0
 msgid "an argument will be fractionally recycled"
 msgstr "an argument will be fractionally recycled"
@@ -1390,12 +1339,6 @@ msgstr "argument '%s' will be ignored"
 msgid "argument 'where' of length 0"
 msgstr "argument 'where' of length 0"
 
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
 #. R/qr.R: stop("argument is not a QR decomposition")
 #: R/qr.R:0
 msgid "argument is not a QR decomposition"
@@ -1453,12 +1396,10 @@ msgid "attempt to make a table with >= 2^31 elements"
 msgstr "attempt to make a table with >= 2^31 elements"
 
 #. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
-#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
 #: R/matrix.R:0
 msgid "attempt to set 'colnames' on an object with less than two dimensions"
 msgstr "attempt to set 'colnames' on an object with less than two dimensions"
 
-#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
@@ -1480,8 +1421,6 @@ msgid "bad 'S3method' directive: %s"
 msgstr "bad 'S3method' directive: %s"
 
 #. R/load.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
 #. R/serialize.R: stop("bad 'file' argument")
 #: R/load.R:0 R/serialize.R:0
 msgid "bad 'file' argument"
@@ -1553,7 +1492,6 @@ msgid "can only truncate an open connection"
 msgstr "can only truncate an open connection"
 
 #. R/connections.R: stop("can only write character objects")
-#. R/connections.R: stop("can only write character objects")
 #: R/connections.R:0
 msgid "can only write character objects"
 msgstr "can only write character objects"
@@ -1563,7 +1501,6 @@ msgstr "can only write character objects"
 msgid "can only write vector objects"
 msgstr "can only write vector objects"
 
-#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
 #. R/source.R: stop("cannot 'chdir' as current directory is unknown")
 #: R/source.R:0
 msgid "cannot 'chdir' as current directory is unknown"
@@ -1636,7 +1573,6 @@ msgid "coercing argument to \"character\" for format=\"s\""
 msgstr "coercing argument to \"character\" for format=\"s\""
 
 #. R/dataframe.R: stop("column name \"\" cannot match any column")
-#. R/dataframe.R: stop("column name \"\" cannot match any column")
 #: R/dataframe.R:0
 msgid "column name \"\" cannot match any column"
 msgstr "column name \"\" cannot match any column"
@@ -1647,7 +1583,6 @@ msgid "complex matrices not permitted at present"
 msgstr "complex matrices not permitted at present"
 
 #. R/datetime.R: stop("component subscript must be a character string")
-#. R/datetime.R: stop("component subscript must be a character string")
 #: R/datetime.R:0
 msgid "component subscript must be a character string"
 msgstr "component subscript must be a character string"
@@ -1657,8 +1592,6 @@ msgstr "component subscript must be a character string"
 msgid "condition handlers must be functions"
 msgstr "condition handlers must be functions"
 
-#. R/conditions.R: stop("condition handlers must be specified with a condition class")
-#. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #: R/conditions.R:0
 msgid "condition handlers must be specified with a condition class"
@@ -1706,7 +1639,6 @@ msgstr "duplicate 'row.names' are not allowed"
 msgid "duplicate import names %s"
 msgstr "duplicate import names %s"
 
-#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #: R/dataframe.R:0
 msgid "duplicate row.names: %s"
@@ -1799,7 +1731,6 @@ msgid "failed to load methods package for undebugging by signature"
 msgstr "failed to load methods package for undebugging by signature"
 
 #. R/debug.R: stop("failed to load the methods package for debugging by signature")
-#. R/debug.R: stop("failed to load the methods package for debugging by signature")
 #: R/debug.R:0
 msgid "failed to load the methods package for debugging by signature"
 msgstr "failed to load the methods package for debugging by signature"
@@ -1876,7 +1807,6 @@ msgid "in package %s methods %s were specified for export but not defined"
 msgstr "in package %s methods %s were specified for export but not defined"
 
 #. R/rowsum.R: stop("incorrect length for 'group'")
-#. R/rowsum.R: stop("incorrect length for 'group'")
 #: R/rowsum.R:0
 msgid "incorrect length for 'group'"
 msgstr "incorrect length for 'group'"
@@ -1886,7 +1816,6 @@ msgstr "incorrect length for 'group'"
 msgid "incorrect value for 'MARGIN'"
 msgstr "incorrect value for 'MARGIN'"
 
-#. R/strwrap.R: stop("incorrect value for 'x'")
 #. R/strwrap.R: stop("incorrect value for 'x'")
 #: R/strwrap.R:0
 msgid "incorrect value for 'x'"
@@ -1921,7 +1850,6 @@ msgid "invalid 'by' string"
 msgstr "invalid 'by' string"
 
 #. R/locales.R: stop("invalid 'category' argument")
-#. R/locales.R: stop("invalid 'category' argument")
 #: R/locales.R:0
 msgid "invalid 'category' argument"
 msgstr "invalid 'category' argument"
@@ -1937,20 +1865,15 @@ msgid "invalid 'digits'"
 msgstr "invalid 'digits'"
 
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
-#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
 msgid "invalid 'dimnames' given for data frame"
 msgstr "invalid 'dimnames' given for data frame"
 
 #. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
 #: R/colSums.R:0
 msgid "invalid 'dims'"
 msgstr "invalid 'dims'"
 
-#. R/connections.R: stop("invalid 'endian' argument")
 #. R/connections.R: stop("invalid 'endian' argument")
 #: R/connections.R:0
 msgid "invalid 'endian' argument"
@@ -1961,8 +1884,6 @@ msgstr "invalid 'endian' argument"
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "invalid 'labels'; length %d should be 1 or %d"
 
-#. R/dataframe.R: stop("invalid 'make.names'")
-#. R/dataframe.R: stop("invalid 'make.names'")
 #. R/dataframe.R: stop("invalid 'make.names'")
 #: R/dataframe.R:0
 msgid "invalid 'make.names'"
@@ -1989,7 +1910,6 @@ msgid "invalid 'rle' structure"
 msgstr "invalid 'rle' structure"
 
 #. R/dataframe.R: stop("invalid 'row.names' length")
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
 msgstr "invalid 'row.names' length"
@@ -1999,9 +1919,6 @@ msgstr "invalid 'row.names' length"
 msgid "invalid 'time' argument"
 msgstr "invalid 'time' argument"
 
-#. R/version.R: stop("invalid 'value'")
-#. R/version.R: stop("invalid 'value'")
-#. R/version.R: stop("invalid 'value'")
 #. R/version.R: stop("invalid 'value'")
 #: R/version.R:0
 msgid "invalid 'value'"
@@ -2023,14 +1940,10 @@ msgid "invalid NCOL(R)"
 msgstr "invalid NCOL(R)"
 
 #. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
 #: R/qr.R:0
 msgid "invalid NCOL(y)"
 msgstr "invalid NCOL(y)"
 
-#. R/factor.R: warning("invalid factor level, NA generated")
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
 msgid "invalid factor level, NA generated"
@@ -2078,10 +1991,6 @@ msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "invalid non-character version specification 'x' (type: %s)"
 
 #. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
 #: R/qr.R:0
 msgid "invalid nrow(qr$qr)"
 msgstr "invalid nrow(qr$qr)"
@@ -2108,27 +2017,16 @@ msgid "invalid package name"
 msgstr "invalid package name"
 
 #. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid specification of 'breaks'"
 msgstr "invalid specification of 'breaks'"
-
-#. R/dates.R: stop("invalid string for 'by'")
-#. R/datetime.R: stop("invalid string for 'by'")
-#: R/dates.R:0 R/datetime.R:0
-msgid "invalid string for 'by'"
-msgstr "invalid string for 'by'"
 
 #. R/mode.R: stop("invalid to change the storage mode of a factor")
 #: R/mode.R:0
 msgid "invalid to change the storage mode of a factor"
 msgstr "invalid to change the storage mode of a factor"
 
-#. R/datetime.R: stop("invalid units specified")
 #. R/datetime.R: stop("invalid units specified")
 #: R/datetime.R:0
 msgid "invalid units specified"
@@ -2164,7 +2062,6 @@ msgstr "length of 'scale' must equal the number of columns of 'x'"
 msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
 msgstr "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
 
-#. R/factor.R: stop("level sets of factors are different")
 #. R/factor.R: stop("level sets of factors are different")
 #: R/factor.R:0
 msgid "level sets of factors are different"
@@ -2202,7 +2099,6 @@ msgid "malformed version string"
 msgstr "malformed version string"
 
 #. R/grep.R: stop("match distance components must be non-negative")
-#. R/grep.R: stop("match distance components must be non-negative")
 #: R/grep.R:0
 msgid "match distance components must be non-negative"
 msgstr "match distance components must be non-negative"
@@ -2218,18 +2114,15 @@ msgid "mismatch of row names in arguments of 'data.frame', item %d"
 msgstr "mismatch of row names in arguments of 'data.frame', item %d"
 
 #. R/grep.R: stop("missing replacement values are not allowed")
-#. R/grep.R: stop("missing replacement values are not allowed")
 #: R/grep.R:0
 msgid "missing replacement values are not allowed"
 msgstr "missing replacement values are not allowed"
 
 #. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
-#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
 #: R/dataframe.R:0
 msgid "missing values are not allowed in subscripted assignments of data frames"
 msgstr "missing values are not allowed in subscripted assignments of data frames"
 
-#. R/rowsum.R: warning("missing values for 'group'")
 #. R/rowsum.R: warning("missing values for 'group'")
 #: R/rowsum.R:0
 msgid "missing values for 'group'"
@@ -2287,7 +2180,6 @@ msgid "must specify names of formal arguments for 'vectorize'"
 msgstr "must specify names of formal arguments for 'vectorize'"
 
 #. R/dataframe.R: warning("named arguments are discouraged")
-#. R/dataframe.R: warning("named arguments are discouraged")
 #: R/dataframe.R:0
 msgid "named arguments are discouraged"
 msgstr "named arguments are discouraged"
@@ -2302,7 +2194,6 @@ msgstr "named arguments other than 'drop' are discouraged"
 msgid "named arguments other than 'exact' are discouraged"
 msgstr "named arguments other than 'exact' are discouraged"
 
-#. R/dataframe.R: stop("names do not match previous names")
 #. R/dataframe.R: stop("names do not match previous names")
 #: R/dataframe.R:0
 msgid "names do not match previous names"
@@ -2369,7 +2260,6 @@ msgid "new columns would leave holes after existing columns"
 msgstr "new columns would leave holes after existing columns"
 
 #. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
-#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
 #: R/conditions.R:0
 msgid "no 'restart' '%s' found"
 msgstr "no 'restart' '%s' found"
@@ -2385,7 +2275,6 @@ msgid "no Olson database found"
 msgstr "no Olson database found"
 
 #. R/pmax.R: stop("no arguments")
-#. R/pmax.R: stop("no arguments")
 #: R/pmax.R:0
 msgid "no arguments"
 msgstr "no arguments"
@@ -2400,7 +2289,6 @@ msgstr "no file found"
 msgid "no files to copy to"
 msgstr "no files to copy to"
 
-#. R/files.R: stop("no files to link from")
 #. R/files.R: stop("no files to link from")
 #: R/files.R:0
 msgid "no files to link from"
@@ -2448,7 +2336,6 @@ msgid "no such element '%s'"
 msgstr "no such element '%s'"
 
 #. R/dataframe.R: stop("non-existent rows not allowed")
-#. R/dataframe.R: stop("non-existent rows not allowed")
 #: R/dataframe.R:0
 msgid "non-existent rows not allowed"
 msgstr "non-existent rows not allowed"
@@ -2490,7 +2377,6 @@ msgstr "not a valid restart specification"
 
 #. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
-#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #. R/sweep.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/apply.R:0 R/array.R:0 R/sweep.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
@@ -2513,7 +2399,6 @@ msgstr ""
 "%s"
 
 #. R/qr.R: stop("not implemented for complex 'qr'")
-#. R/qr.R: stop("not implemented for complex 'qr'")
 #: R/qr.R:0
 msgid "not implemented for complex 'qr'"
 msgstr "not implemented for complex 'qr'"
@@ -2523,7 +2408,6 @@ msgstr "not implemented for complex 'qr'"
 msgid "not loading a namespace"
 msgstr "not loading a namespace"
 
-#. R/qr.R: stop("not supported for LAPACK QR")
 #. R/qr.R: stop("not supported for LAPACK QR")
 #: R/qr.R:0
 msgid "not supported for LAPACK QR"
@@ -2570,7 +2454,6 @@ msgid "number of levels differs"
 msgstr "number of levels differs"
 
 #. R/dataframe.R: stop("numbers of columns of arguments do not match")
-#. R/dataframe.R: stop("numbers of columns of arguments do not match")
 #: R/dataframe.R:0
 msgid "numbers of columns of arguments do not match"
 msgstr "numbers of columns of arguments do not match"
@@ -2600,7 +2483,6 @@ msgstr "only matrix diagonals can be replaced"
 msgid "only one of 'include.only' and 'exclude' can be used"
 msgstr "only one of 'include.only' and 'exclude' can be used"
 
-#. R/solve.R: stop("only square matrices can be inverted")
 #. R/solve.R: stop("only square matrices can be inverted")
 #: R/solve.R:0
 msgid "only square matrices can be inverted"
@@ -2762,7 +2644,6 @@ msgid "replacing element in non-existent column: %s"
 msgstr "replacing element in non-existent column: %s"
 
 #. R/namespace.R: gettext("replacing local value with import %s when loading %s")
-#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
 #: R/namespace.R:0
 msgid "replacing local value with import %s when loading %s"
 msgstr "replacing local value with import %s when loading %s"
@@ -2778,7 +2659,6 @@ msgid "replacing previous import by %s when loading %s"
 msgstr "replacing previous import by %s when loading %s"
 
 #. R/dataframe.R: stop("row names contain missing values")
-#. R/dataframe.R: stop("row names contain missing values")
 #: R/dataframe.R:0
 msgid "row names contain missing values"
 msgstr "row names contain missing values"
@@ -2793,7 +2673,6 @@ msgstr "row names supplied are of the wrong length"
 msgid "row names were found from a short variable and have been discarded"
 msgstr "row names were found from a short variable and have been discarded"
 
-#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
@@ -2870,7 +2749,6 @@ msgid "target is %s, current is %s"
 msgstr "target is %s, current is %s"
 
 #. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
-#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #. R/solve.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #. R/svd.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #: R/chol.R:0 R/solve.R:0 R/svd.R:0
@@ -2884,7 +2762,6 @@ msgstr "there is more than one match in 'match.arg'"
 
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
-#. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #: R/library.R:0
 msgid "there is no package called %s"
 msgstr "there is no package called %s"
@@ -2975,10 +2852,6 @@ msgid "unary - is not defined for \"Date\" objects"
 msgstr "unary - is not defined for \"Date\" objects"
 
 #. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
 #: R/dataframe.R:0
 msgid "undefined columns selected"
 msgstr "undefined columns selected"
@@ -3055,8 +2928,9 @@ msgstr "version %s of %s masked by %s in %s"
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
+#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr ""
+msgstr "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3069,7 +2943,6 @@ msgstr "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specif
 msgid "working directory was changed to %s, resetting"
 msgstr ""
 
-#. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
 #. R/version.R: stop("wrong class")
@@ -3118,7 +2991,6 @@ msgid_plural "'arg' should be one of %s"
 msgstr[0] "'arg' should be %s"
 msgstr[1] "'arg' should be one of %s"
 
-#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
 #. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
 #: R/merge.R:0
 msgid "'by' must specify a uniquely valid column"
@@ -3298,11 +3170,6 @@ msgstr[0] "replacement has %d item, need %d"
 msgstr[1] "replacement has %d items, need %d"
 
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
 #: R/dataframe.R:0
 msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
@@ -3329,6 +3196,9 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "there is no package called"
 msgstr[1] "there are no packages called"
+
+#~ msgid "invalid string for 'by'"
+#~ msgstr "invalid string for 'by'"
 
 #~ msgid ""
 #~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"

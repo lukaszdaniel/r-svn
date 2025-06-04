@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-05 17:15\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -71,8 +71,6 @@ msgid "%s namespace cannot be unloaded:"
 msgstr "无法卸下%s这个命名空间："
 
 #. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
-#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
-#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
 msgid "%s not defined for \"Date\" objects"
 msgstr "%s对\"Date\"没有定义"
@@ -93,8 +91,6 @@ msgid "%s not found on search path, using pos = 2"
 msgstr "在搜索路径上找不到%s，用pos=2"
 
 #. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
-#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
-#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
 #: R/factor.R:0
 msgid "%s not meaningful for factors"
 msgstr "%s 对因子没有意义"
@@ -110,12 +106,10 @@ msgid "%sPackages in library %s:"
 msgstr "图书馆%2$s里有%1$s个程序包："
 
 #. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
-#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
 #: R/windows/system.R:0
 msgid "'%s' could not be run"
 msgstr "无法運行'%s'"
 
-#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
 #. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
 #: R/windows/system.R:0
 msgid "'%s' execution failed with error code %d"
@@ -137,13 +131,10 @@ msgid "'%s' is not a function, character or symbol"
 msgstr "'%s'不是函数，也不是字符，也不是符號"
 
 #. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
-#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
 #: R/RNG.R:0
 msgid "'%s' is not a valid abbreviation of an RNG"
 msgstr "'%s'不是有效的RNG缩写"
 
-#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
-#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
 #. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
 #. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
 #: R/RNG.R:0
@@ -179,8 +170,6 @@ msgstr "'to'一定得是\"Date\"对象"
 
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
-#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
-#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
 #: R/RNG.R:0 R/connections.R:0 R/format.R:0
@@ -189,7 +178,6 @@ msgid "'%s' must be a character string"
 msgstr "“name”必须是单个字符串"
 
 #. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
@@ -197,11 +185,7 @@ msgid "'%s' must be a non-empty character string"
 msgstr "“name”必须是单个字符串"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.names")
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
@@ -230,15 +214,10 @@ msgid "'%s' must be of length 1"
 msgstr "'by'的长度必需为一"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
 msgid "'%s' not defined for \"POSIXt\" objects"
 msgstr "'%s'对\"POSIXt\"对象不适用"
 
-#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
 #: R/datetime.R:0
 msgid "'%s' not defined for \"difftime\" objects"
@@ -254,7 +233,6 @@ msgstr "'%s'对numeric_version对象没有定义"
 msgid "'%s' not defined for ordered factors"
 msgstr "'%s'对順序化的因子没有意义"
 
-#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #: R/library.R:0
 msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
@@ -363,7 +341,6 @@ msgid "'compress' must be logical or character"
 msgstr "'compress'要么是逻辑值，要么是字符"
 
 #. R/serialize.R: stop("'connection' must be a connection")
-#. R/serialize.R: stop("'connection' must be a connection")
 #: R/serialize.R:0
 msgid "'connection' must be a connection"
 msgstr "'connection'必需是个链结"
@@ -436,7 +413,6 @@ msgid "'file' must be NULL, a connection or a character string"
 msgstr "'file'要么是NULL要么是是链结要么是字符串"
 
 #. R/dcf.R: stop("'file' must be a character string or connection")
-#. R/dcf.R: stop("'file' must be a character string or connection")
 #. R/scan.R: stop("'file' must be a character string or connection")
 #: R/dcf.R:0 R/scan.R:0
 msgid "'file' must be a character string or connection"
@@ -464,7 +440,6 @@ msgid "'formula' must be a formula"
 msgstr "'from'要么是生的，要么是字符。"
 
 #. R/seq.R: stop("'from' must be a finite number")
-#. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
 #, fuzzy
 msgid "'from' must be a finite number"
@@ -476,7 +451,6 @@ msgid "'from' must be raw or character"
 msgstr "'from'要么是生的，要么是字符。"
 
 #. R/formals.R: warning("'fun' is not a function")
-#. R/formals.R: warning("'fun' is not a function")
 #: R/formals.R:0
 msgid "'fun' is not a function"
 msgstr "'fn'不是函数"
@@ -486,7 +460,6 @@ msgstr "'fn'不是函数"
 msgid "'headers' must have names and must not be NA"
 msgstr "“headers”必须有名称，并且不能是 NA"
 
-#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #: R/New-Internal.R:0
 msgid "'iconvlist' is not available on this system"
@@ -525,7 +498,6 @@ msgid "'input' and 'target' must be character vectors"
 msgstr "'input'和'target'一定都得是字符串"
 
 #. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
-#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
 #: R/unix/system.unix.R:0
 msgid "'input' must be a character vector or 'NULL'"
 msgstr "'input'只能为字符向量或NULL值"
@@ -547,7 +519,6 @@ msgid "'intern' must be TRUE or FALSE"
 msgstr "'intern'的值必需是'TRUE'或'FALSE'值"
 
 #. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
 #: R/windows/system.R:0
 msgid "'invisible' must be TRUE or FALSE"
 msgstr "'invisible'的值必需是'TRUE'或'FALSE'值"
@@ -557,7 +528,6 @@ msgstr "'invisible'的值必需是'TRUE'或'FALSE'值"
 msgid "'k' is too large"
 msgstr "'k'值太大"
 
-#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
 #, fuzzy
@@ -583,7 +553,6 @@ msgstr "长度必需为非负数"
 msgid "'local' must be TRUE, FALSE or an environment"
 msgstr "'local'的值必需是'TRUE'，或是'FALSE'，或是环境"
 
-#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
 #: R/windows/system.R:0
 msgid "'minimized' must be TRUE or FALSE"
@@ -620,17 +589,11 @@ msgid "'pos=1' is not possible and has been warned about for years"
 msgstr "“pos=1”是不可能的，并且一直被警告"
 
 #. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
 #: R/qr.R:0
 msgid "'qr' and 'y' must have the same number of rows"
 msgstr "'qr'和'y'必需有相同的行数"
 
 #. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
 #: R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
@@ -686,8 +649,6 @@ msgid "'stdout' must be of length 1"
 msgstr "'stdout'的长度必需为一"
 
 #. R/frametools.R: stop("'subset' must be logical")
-#. R/frametools.R: stop("'subset' must be logical")
-#. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
 msgid "'subset' must be logical"
 msgstr "'subset'必需是逻辑值"
@@ -730,7 +691,6 @@ msgid "'tzone' attributes are inconsistent"
 msgstr "'tzone'的屬性相互有矛盾"
 
 #. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
-#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
 #: R/kappa.R:0
 #, fuzzy
 msgid "'uplo' must be \"U\" or \"L\""
@@ -762,8 +722,6 @@ msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose'是TRUE，但'echo'不是；... 强迫'echo <- TRUE'"
 
 #. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
 #: R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'wait' must be TRUE or FALSE"
@@ -834,9 +792,6 @@ msgid "'x' must be a vector of an atomic type"
 msgstr "'x'必需为原子向量"
 
 #. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
 #: R/colSums.R:0
 msgid "'x' must be an array of at least two dimensions"
 msgstr "'x'必需是阵列，而且至少得有两个维度"
@@ -863,7 +818,6 @@ msgstr ""
 msgid "'x' must be numeric"
 msgstr "'x' 必需是数值"
 
-#. R/array.R: stop("'x' must have named dimnames")
 #. R/array.R: stop("'x' must have named dimnames")
 #. R/sweep.R: stop("'x' must have named dimnames")
 #: R/array.R:0 R/sweep.R:0
@@ -921,7 +875,6 @@ msgid "-- done running .onLoad for"
 msgstr ""
 
 #. R/namespace.R: message("-- loading code for ", dQuote(package))
-#. R/namespace.R: message("-- loading code for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- loading code for"
 msgstr ""
@@ -938,13 +891,15 @@ msgstr ""
 
 #. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
 #: R/namespace.R:0
+#, fuzzy
 msgid "-- processing S4 stuff for"
-msgstr ""
+msgstr "类别不正确"
 
 #. R/namespace.R: message("-- processing imports for ", dQuote(package))
 #: R/namespace.R:0
+#, fuzzy
 msgid "-- processing imports for"
-msgstr ""
+msgstr "类别不正确"
 
 #. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
 #: R/namespace.R:0
@@ -974,8 +929,9 @@ msgstr "类别不正确"
 
 #. R/namespace.R: message("--- processing exports for ", dQuote(package))
 #: R/namespace.R:0
+#, fuzzy
 msgid "--- processing exports for"
-msgstr ""
+msgstr "类别不正确"
 
 #. R/namespace.R: message("--- sealing exports for ", dQuote(package))
 #: R/namespace.R:0
@@ -1164,8 +1120,6 @@ msgstr "载入需要的命名空间：%s"
 msgid "Loading required package: %s"
 msgstr "载入需要的程序包：%s"
 
-#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
-#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
 #. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
 #: R/duplicated.R:0
 msgid "MARGIN = %s is invalid for dim = %s"
@@ -1375,9 +1329,6 @@ msgid "all variables should have the same length"
 msgstr "列表参数有错误：所有变量的长度都应该是一样的"
 
 #. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
 #: R/pmax.R:0
 msgid "an argument will be fractionally recycled"
 msgstr "参数将被数据略微回收"
@@ -1402,12 +1353,6 @@ msgstr "忽略'%s'参数值"
 msgid "argument 'where' of length 0"
 msgstr "参数长度为零"
 
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
 #. R/qr.R: stop("argument is not a QR decomposition")
 #: R/qr.R:0
 msgid "argument is not a QR decomposition"
@@ -1465,12 +1410,10 @@ msgid "attempt to make a table with >= 2^31 elements"
 msgstr "企图建立一个元素多于2^31的表"
 
 #. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
-#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
 #: R/matrix.R:0
 msgid "attempt to set 'colnames' on an object with less than two dimensions"
 msgstr "不能给维度小于二的对象设'colnames'"
 
-#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
@@ -1492,8 +1435,6 @@ msgid "bad 'S3method' directive: %s"
 msgstr "不是'S3method'指令：%s"
 
 #. R/load.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
 #. R/serialize.R: stop("bad 'file' argument")
 #: R/load.R:0 R/serialize.R:0
 msgid "bad 'file' argument"
@@ -1565,7 +1506,6 @@ msgid "can only truncate an open connection"
 msgstr "只能截断已经打开了的链结"
 
 #. R/connections.R: stop("can only write character objects")
-#. R/connections.R: stop("can only write character objects")
 #: R/connections.R:0
 msgid "can only write character objects"
 msgstr "只能写字符对象"
@@ -1575,7 +1515,6 @@ msgstr "只能写字符对象"
 msgid "can only write vector objects"
 msgstr "只能写向量对象"
 
-#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
 #. R/source.R: stop("cannot 'chdir' as current directory is unknown")
 #: R/source.R:0
 msgid "cannot 'chdir' as current directory is unknown"
@@ -1625,8 +1564,9 @@ msgstr "无法将消息链结分割"
 
 #. R/sort.R: stop("cannot xtfrm 'x'")
 #: R/sort.R:0
+#, fuzzy
 msgid "cannot xtfrm 'x'"
-msgstr ""
+msgstr "不是数据框"
 
 #. R/dataframe.R: stop("cannot xtfrm data frames")
 #: R/dataframe.R:0
@@ -1650,7 +1590,6 @@ msgid "coercing argument to \"character\" for format=\"s\""
 msgstr "用format=\"s\"时参数被强迫转变成\"character\""
 
 #. R/dataframe.R: stop("column name \"\" cannot match any column")
-#. R/dataframe.R: stop("column name \"\" cannot match any column")
 #: R/dataframe.R:0
 msgid "column name \"\" cannot match any column"
 msgstr "对不上\"\"这个列名"
@@ -1661,7 +1600,6 @@ msgid "complex matrices not permitted at present"
 msgstr "复数矩阵现在不能用"
 
 #. R/datetime.R: stop("component subscript must be a character string")
-#. R/datetime.R: stop("component subscript must be a character string")
 #: R/datetime.R:0
 msgid "component subscript must be a character string"
 msgstr "组件下标必须是字符串"
@@ -1671,8 +1609,6 @@ msgstr "组件下标必须是字符串"
 msgid "condition handlers must be functions"
 msgstr "条件处理程序必须是函数"
 
-#. R/conditions.R: stop("condition handlers must be specified with a condition class")
-#. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #: R/conditions.R:0
 msgid "condition handlers must be specified with a condition class"
@@ -1720,7 +1656,6 @@ msgstr "'row.names'里不能有重复的名称"
 msgid "duplicate import names %s"
 msgstr "重复进口名称%s"
 
-#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #: R/dataframe.R:0
 msgid "duplicate row.names: %s"
@@ -1814,7 +1749,6 @@ msgid "failed to load methods package for undebugging by signature"
 msgstr "无法加载方法包以通过签名取消调试"
 
 #. R/debug.R: stop("failed to load the methods package for debugging by signature")
-#. R/debug.R: stop("failed to load the methods package for debugging by signature")
 #: R/debug.R:0
 msgid "failed to load the methods package for debugging by signature"
 msgstr "无法加载方法包以进行签名调试"
@@ -1891,7 +1825,6 @@ msgid "in package %s methods %s were specified for export but not defined"
 msgstr "在%s程序包中%s方法指定被用于导出，但它的定义并不存在"
 
 #. R/rowsum.R: stop("incorrect length for 'group'")
-#. R/rowsum.R: stop("incorrect length for 'group'")
 #: R/rowsum.R:0
 msgid "incorrect length for 'group'"
 msgstr "‘group’的长度不正确"
@@ -1901,7 +1834,6 @@ msgstr "‘group’的长度不正确"
 msgid "incorrect value for 'MARGIN'"
 msgstr "'MARGIN'的值有错误"
 
-#. R/strwrap.R: stop("incorrect value for 'x'")
 #. R/strwrap.R: stop("incorrect value for 'x'")
 #: R/strwrap.R:0
 msgid "incorrect value for 'x'"
@@ -1938,7 +1870,6 @@ msgid "invalid 'by' string"
 msgstr "'by'字符串有错误"
 
 #. R/locales.R: stop("invalid 'category' argument")
-#. R/locales.R: stop("invalid 'category' argument")
 #: R/locales.R:0
 msgid "invalid 'category' argument"
 msgstr "'category'参数有错误"
@@ -1955,20 +1886,15 @@ msgid "invalid 'digits'"
 msgstr "'digits'的值无效"
 
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
-#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
 msgid "invalid 'dimnames' given for data frame"
 msgstr "数据框的'dimnames'给得无效"
 
 #. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
 #: R/colSums.R:0
 msgid "invalid 'dims'"
 msgstr "'dims'无效"
 
-#. R/connections.R: stop("invalid 'endian' argument")
 #. R/connections.R: stop("invalid 'endian' argument")
 #: R/connections.R:0
 msgid "invalid 'endian' argument"
@@ -1979,8 +1905,6 @@ msgstr "无效的“endian”参数"
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "'labels'无效；长度%d应该是一或%d"
 
-#. R/dataframe.R: stop("invalid 'make.names'")
-#. R/dataframe.R: stop("invalid 'make.names'")
 #. R/dataframe.R: stop("invalid 'make.names'")
 #: R/dataframe.R:0
 msgid "invalid 'make.names'"
@@ -2007,7 +1931,6 @@ msgid "invalid 'rle' structure"
 msgstr "'rle'结构有错误"
 
 #. R/dataframe.R: stop("invalid 'row.names' length")
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
 msgstr "'row.names'的长度无效"
@@ -2017,9 +1940,6 @@ msgstr "'row.names'的长度无效"
 msgid "invalid 'time' argument"
 msgstr "'time'参数无效"
 
-#. R/version.R: stop("invalid 'value'")
-#. R/version.R: stop("invalid 'value'")
-#. R/version.R: stop("invalid 'value'")
 #. R/version.R: stop("invalid 'value'")
 #: R/version.R:0
 msgid "invalid 'value'"
@@ -2043,14 +1963,10 @@ msgid "invalid NCOL(R)"
 msgstr "NCOL(R)无效"
 
 #. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
 #: R/qr.R:0
 msgid "invalid NCOL(y)"
 msgstr "NCOL(y)无效"
 
-#. R/factor.R: warning("invalid factor level, NA generated")
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
 msgid "invalid factor level, NA generated"
@@ -2099,10 +2015,6 @@ msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "版本设定无效%s"
 
 #. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
 #: R/qr.R:0
 msgid "invalid nrow(qr$qr)"
 msgstr "nrow(qr$qr)无效"
@@ -2130,27 +2042,16 @@ msgid "invalid package name"
 msgstr "程序包名称无效"
 
 #. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid specification of 'breaks'"
 msgstr "'breaks'的值有错误"
-
-#. R/dates.R: stop("invalid string for 'by'")
-#. R/datetime.R: stop("invalid string for 'by'")
-#: R/dates.R:0 R/datetime.R:0
-msgid "invalid string for 'by'"
-msgstr "'by'的字符串有错误"
 
 #. R/mode.R: stop("invalid to change the storage mode of a factor")
 #: R/mode.R:0
 msgid "invalid to change the storage mode of a factor"
 msgstr "不能改变因子的存储状态"
 
-#. R/datetime.R: stop("invalid units specified")
 #. R/datetime.R: stop("invalid units specified")
 #: R/datetime.R:0
 msgid "invalid units specified"
@@ -2189,7 +2090,6 @@ msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
 msgstr "length(STATS)或dim(STATS)于dim(x)[MARGIN]不匹配"
 
 #. R/factor.R: stop("level sets of factors are different")
-#. R/factor.R: stop("level sets of factors are different")
 #: R/factor.R:0
 msgid "level sets of factors are different"
 msgstr "因子的水平集不同"
@@ -2226,7 +2126,6 @@ msgid "malformed version string"
 msgstr "版本字串格式有错误"
 
 #. R/grep.R: stop("match distance components must be non-negative")
-#. R/grep.R: stop("match distance components must be non-negative")
 #: R/grep.R:0
 msgid "match distance components must be non-negative"
 msgstr "匹配距离组件不能有负值"
@@ -2242,18 +2141,15 @@ msgid "mismatch of row names in arguments of 'data.frame', item %d"
 msgstr "'data.frame'参数里%d单元中行名不匹配"
 
 #. R/grep.R: stop("missing replacement values are not allowed")
-#. R/grep.R: stop("missing replacement values are not allowed")
 #: R/grep.R:0
 msgid "missing replacement values are not allowed"
 msgstr "不允许有替换值"
 
 #. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
-#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
 #: R/dataframe.R:0
 msgid "missing values are not allowed in subscripted assignments of data frames"
 msgstr "执行数据框下标赋值时是不允许缺失值的"
 
-#. R/rowsum.R: warning("missing values for 'group'")
 #. R/rowsum.R: warning("missing values for 'group'")
 #: R/rowsum.R:0
 msgid "missing values for 'group'"
@@ -2311,7 +2207,6 @@ msgid "must specify names of formal arguments for 'vectorize'"
 msgstr "用'vectorize'时必需指定正式参数"
 
 #. R/dataframe.R: warning("named arguments are discouraged")
-#. R/dataframe.R: warning("named arguments are discouraged")
 #: R/dataframe.R:0
 msgid "named arguments are discouraged"
 msgstr "最好不用带名称的参数"
@@ -2326,7 +2221,6 @@ msgstr "除了'drop'之外最好不用带名称的参数"
 msgid "named arguments other than 'exact' are discouraged"
 msgstr "除了'exact'之外最好不用带名称的参数"
 
-#. R/dataframe.R: stop("names do not match previous names")
 #. R/dataframe.R: stop("names do not match previous names")
 #: R/dataframe.R:0
 msgid "names do not match previous names"
@@ -2391,7 +2285,6 @@ msgid "new columns would leave holes after existing columns"
 msgstr "新的列会在旧的列里留下洞"
 
 #. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
-#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
 #: R/conditions.R:0
 msgid "no 'restart' '%s' found"
 msgstr "没有找到'restart' '%s'"
@@ -2407,7 +2300,6 @@ msgid "no Olson database found"
 msgstr "未找到 Olson 数据库"
 
 #. R/pmax.R: stop("no arguments")
-#. R/pmax.R: stop("no arguments")
 #: R/pmax.R:0
 msgid "no arguments"
 msgstr "没有参数"
@@ -2422,7 +2314,6 @@ msgstr "找不到文件"
 msgid "no files to copy to"
 msgstr "拷贝时没有可以写的文件"
 
-#. R/files.R: stop("no files to link from")
 #. R/files.R: stop("no files to link from")
 #: R/files.R:0
 msgid "no files to link from"
@@ -2470,7 +2361,6 @@ msgid "no such element '%s'"
 msgstr "没有这样的单元'%s'"
 
 #. R/dataframe.R: stop("non-existent rows not allowed")
-#. R/dataframe.R: stop("non-existent rows not allowed")
 #: R/dataframe.R:0
 msgid "non-existent rows not allowed"
 msgstr "不能有不存在的行"
@@ -2512,7 +2402,6 @@ msgstr "重新开始的规格不正确"
 
 #. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
-#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #. R/sweep.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/apply.R:0 R/array.R:0 R/sweep.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
@@ -2533,7 +2422,6 @@ msgid ""
 msgstr "不载入命名空间"
 
 #. R/qr.R: stop("not implemented for complex 'qr'")
-#. R/qr.R: stop("not implemented for complex 'qr'")
 #: R/qr.R:0
 msgid "not implemented for complex 'qr'"
 msgstr "没有在复数'qr'内实现"
@@ -2543,7 +2431,6 @@ msgstr "没有在复数'qr'内实现"
 msgid "not loading a namespace"
 msgstr "不载入命名空间"
 
-#. R/qr.R: stop("not supported for LAPACK QR")
 #. R/qr.R: stop("not supported for LAPACK QR")
 #: R/qr.R:0
 msgid "not supported for LAPACK QR"
@@ -2590,7 +2477,6 @@ msgid "number of levels differs"
 msgstr "水平数目不同"
 
 #. R/dataframe.R: stop("numbers of columns of arguments do not match")
-#. R/dataframe.R: stop("numbers of columns of arguments do not match")
 #: R/dataframe.R:0
 msgid "numbers of columns of arguments do not match"
 msgstr "变量的列数不正确"
@@ -2620,7 +2506,6 @@ msgstr "只能替换矩阵的对角"
 msgid "only one of 'include.only' and 'exclude' can be used"
 msgstr ""
 
-#. R/solve.R: stop("only square matrices can be inverted")
 #. R/solve.R: stop("only square matrices can be inverted")
 #: R/solve.R:0
 msgid "only square matrices can be inverted"
@@ -2784,7 +2669,6 @@ msgid "replacing element in non-existent column: %s"
 msgstr "在不存在的列里替换单元: %s"
 
 #. R/namespace.R: gettext("replacing local value with import %s when loading %s")
-#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
 #: R/namespace.R:0
 msgid "replacing local value with import %s when loading %s"
 msgstr "在输入%2$s时局部值将被引进值%1$s代替"
@@ -2802,7 +2686,6 @@ msgid "replacing previous import by %s when loading %s"
 msgstr "输入%2$s将代替前次引进%1$s"
 
 #. R/dataframe.R: stop("row names contain missing values")
-#. R/dataframe.R: stop("row names contain missing values")
 #: R/dataframe.R:0
 msgid "row names contain missing values"
 msgstr "行名里有缺失值"
@@ -2817,7 +2700,6 @@ msgstr "行名长度有误"
 msgid "row names were found from a short variable and have been discarded"
 msgstr "短变量里找到了行名，因此不用"
 
-#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
@@ -2895,7 +2777,6 @@ msgid "target is %s, current is %s"
 msgstr "目标应该是%s ，现在却是%s"
 
 #. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
-#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #. R/solve.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #. R/svd.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #: R/chol.R:0 R/solve.R:0 R/svd.R:0
@@ -2909,7 +2790,6 @@ msgstr "'match.arg'里有重复的匹配"
 
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
-#. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #: R/library.R:0
 msgid "there is no package called %s"
 msgstr "不存在叫%s这个名称的程序包"
@@ -3002,10 +2882,6 @@ msgid "unary - is not defined for \"Date\" objects"
 msgstr "一进列的-法对\"Date\"对象不适用"
 
 #. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
 #: R/dataframe.R:0
 msgid "undefined columns selected"
 msgstr "选择了未定义的列"
@@ -3082,8 +2958,9 @@ msgstr ""
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
+#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr ""
+msgstr "'to'，'by'，'length.out'/'along.with'中四个只能同时选两个"
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3096,7 +2973,6 @@ msgstr "'to'，'by'，'length.out'/'along.with'中四个只能同时选两个"
 msgid "working directory was changed to %s, resetting"
 msgstr ""
 
-#. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
 #. R/version.R: stop("wrong class")
@@ -3140,7 +3016,6 @@ msgid "'arg' should be %s"
 msgid_plural "'arg' should be one of %s"
 msgstr[0] "'arg'应当是%s其中的一个"
 
-#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
 #. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
 #: R/merge.R:0
 msgid "'by' must specify a uniquely valid column"
@@ -3296,11 +3171,6 @@ msgid_plural "replacement has %d items, need %d"
 msgstr[0] "替换值里有%d单元，需要的是%d"
 
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
 #: R/dataframe.R:0
 msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
@@ -3324,6 +3194,9 @@ msgstr[0] "%d行名与%d行不匹配"
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "不存在叫这个名称的程序包"
+
+#~ msgid "invalid string for 'by'"
+#~ msgstr "'by'的字符串有错误"
 
 #, fuzzy
 #~ msgid "connections left open:"

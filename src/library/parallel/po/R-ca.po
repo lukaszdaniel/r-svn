@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -31,14 +31,11 @@ msgid "'child' must be a valid child process"
 msgstr "\"fill\" ha de ser un procés fill vàlid"
 
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
-#. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 #: R/unix/mcfork.R:0
 #, fuzzy
 msgid "'children' must be a list of processes or a single process"
 msgstr "Els «nens» han de ser una llista de processos o un únic procés"
 
-#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
-#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #: R/windows/mcdummies.R:0
 msgid "'mc.cores' > 1 is not supported on Windows"
@@ -46,8 +43,6 @@ msgstr "«mc.cores» > 1 no és compatible amb Windows"
 
 #. R/unix/mclapply.R: stop("'mc.cores' must be >= 1")
 #. R/unix/pvec.R: stop("'mc.cores' must be >= 1")
-#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
-#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 #. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 #: R/unix/mclapply.R:0 R/unix/pvec.R:0 R/windows/mcdummies.R:0
 #, fuzzy
@@ -133,7 +128,6 @@ msgid "fork clusters are not supported on Windows"
 msgstr "els clústers de bifurcació no són compatibles amb Windows"
 
 #. R/unix/mcfork.R: stop("invalid 'child' argument")
-#. R/unix/mcfork.R: stop("invalid 'child' argument")
 #: R/unix/mcfork.R:0
 #, fuzzy
 msgid "invalid 'child' argument"
@@ -145,7 +139,6 @@ msgstr "argument «child» no vàlid"
 msgid "invalid 'jobs' argument"
 msgstr "argument «jobs» no vàlid"
 
-#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #: R/RngStream.R:0
 msgid "invalid value of %s"
@@ -188,8 +181,9 @@ msgstr "els 'noms' numèrics han de ser s= 1"
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
+#, fuzzy
 msgid "replacing registration for cluster type '%s'"
-msgstr ""
+msgstr "tipus de clúster desconegut"
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0

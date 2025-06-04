@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:43\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
 "PO-Revision-Date: 2024-03-18 06:08+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -15,16 +15,19 @@ msgstr ""
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
 #: R/cmp.R:0
+#, fuzzy
 msgid "'%s' is not a valid compiler option"
 msgstr "«%s» no és una opció vàlida de compilació"
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "'env' must be a top level environment"
 msgstr "«env» ha de ser un entorn de nivell superior"
 
 #. R/cmp.R: gettext("'switch' with no alternatives")
 #: R/cmp.R:0
+#, fuzzy
 msgid "'switch' with no alternatives"
 msgstr "«switch» sense cap alternativa"
 
@@ -40,12 +43,10 @@ msgstr "assignació incorrecta 1"
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad assignment 2"
-msgstr "assignació incorrecta 2"
+msgstr "assignació incorrecta 1"
 
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
 msgid "bad assignment: %s"
@@ -53,31 +54,27 @@ msgstr "assignació incorrecta: %s"
 
 #. R/cmp.R: gettext("bad namespace import frame")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad namespace import frame"
 msgstr "marc d'importació d'espai de noms incorrecte"
 
 #. R/cmp.R: stop("cannot compile a non-function")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile a non-function"
 msgstr "no es pot compilar una no-funció"
 
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
 #. R/cmp.R: gettext("cannot compile byte code literals in code")
 #: R/cmp.R:0
 msgid "cannot compile byte code literals in code"
 msgstr "no s'han pogut compilar els literals de codi de bytes del codi"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile promise literals in code"
 msgstr "no es poden compilar promeses literals en el codi"
 
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
 #. R/cmp.R: gettext("cannot compile this expression")
 #: R/cmp.R:0
 msgid "cannot compile this expression"
@@ -90,6 +87,7 @@ msgstr "els objectes de bytecode literal no es poden plegar de manera constant"
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "les promeses literals no es poden plegar de manera constant"
 
@@ -98,7 +96,6 @@ msgstr "les promeses literals no es poden plegar de manera constant"
 msgid "compiling '%s'"
 msgstr "s'està compilant «%s»"
 
-#. R/cmp.R: gettext("done")
 #. R/cmp.R: gettext("done")
 #: R/cmp.R:0
 msgid "done"
@@ -111,6 +108,7 @@ msgstr "alternativa buida al commutador numèric"
 
 #. R/cmp.R: warning("empty input file; no output written")
 #: R/cmp.R:0
+#, fuzzy
 msgid "empty input file; no output written"
 msgstr "fitxer d'entrada buit; no s'ha escrit cap sortida"
 
@@ -131,6 +129,7 @@ msgstr "els noms dels fitxers d'entrada i sortida són els mateixos"
 
 #. R/cmp.R: gettextf("invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2",     optimize, jitEnabled)
 #: R/cmp.R:0
+#, fuzzy
 msgid "invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2"
 msgstr "opcions no vàlides del compilador: optimize(==%d)<2 and jitEnabled(==%d)>2"
 
@@ -140,13 +139,13 @@ msgid "invalid environment variable value: %s==%s"
 msgstr "el valor de la variable d'entorn no és vàlid: %s==%s"
 
 #. R/cmp.R: gettext("invalid function in complex assignment")
-#. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "funció no vàlida en una assignació complexa"
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0
+#, fuzzy
 msgid "missing arguments are not allowed"
 msgstr "no es permet que faltin arguments"
 
@@ -167,11 +166,13 @@ msgstr "espai de noms trobat en entorns locals"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
+#, fuzzy
 msgid "no offset recorded for label \"%s\""
 msgstr "no s'ha enregistrat cap desplaçament per a l'etiqueta «%s»"
 
 #. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
 #: R/cmp.R:0
+#, fuzzy
 msgid "no visible binding for '<<-' assignment to '%s'"
 msgstr "no hi ha cap vinculació visible per a l'assignació «<--» a «%s»"
 
@@ -182,6 +183,7 @@ msgstr "no hi ha cap vinculació visible per a la variable global «%s»"
 
 #. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
 #: R/cmp.R:0
+#, fuzzy
 msgid "no visible global function definition for '%s'"
 msgstr "no hi ha cap definició visible de funció global per a «%s»"
 
@@ -191,8 +193,8 @@ msgid "non-namespace found within namespace environments"
 msgstr "s'ha trobat un no espai de noms en els entorns de l'espai de noms"
 
 #. R/cmp.R: stop("not a proper evaluation environment")
-#. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "no és un entorn d'avaluació adequat"
 
@@ -204,6 +206,7 @@ msgstr "possible error a «%s»: %s"
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", file)
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", outfile)
 #: R/cmp.R:0
+#, fuzzy
 msgid "saving to file \"%s\" ..."
 msgstr "s'està desant al fitxer \"%s\" ..."
 
@@ -218,3 +221,19 @@ msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "assignació local a una funció sintàctica: "
 msgstr[1] "assignacions locals a funcions sintàctiques: "
+
+#, fuzzy
+#~ msgid "gettext(\"bad assignment 2\")"
+#~ msgstr "assignació incorrecta 2"
+
+#, fuzzy
+#~ msgid "gettext(\"cannot compile this expression\")"
+#~ msgstr "no s'ha pogut compilar aquesta expressió"
+
+#, fuzzy
+#~ msgid "gettext(\"invalid function in complex assignment\")"
+#~ msgstr "funció no vàlida en una assignació complexa"
+
+#, fuzzy
+#~ msgid "gettextf(\"saving to file \\\\\"%s\\\\\" ... \", outfile)"
+#~ msgstr "s'està desant al fitxer \"%s\" ..."

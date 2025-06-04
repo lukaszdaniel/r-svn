@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-24 17:06+0200\n"
+"POT-Creation-Date: 2025-06-01 10:55+0200\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -4656,7 +4656,7 @@ msgstr ""
 msgid "bad opcode"
 msgstr "不當的操作代碼"
 
-#: src/main/eval.cpp:6838
+#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "'x %2$s y' 中無效的 %1$s 類型"
@@ -5350,16 +5350,6 @@ msgstr "運算只適用於數值、邏輯或複數類型"
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "'%s' 運算子需要兩個引數"
-
-#: src/main/logic.cpp:307
-#, c-format
-msgid "invalid 'x' type in 'x %s y'"
-msgstr "'x %s y' 中的 'x' 類型無效"
-
-#: src/main/logic.cpp:316
-#, c-format
-msgid "invalid 'y' type in 'x %s y'"
-msgstr "'x %s y' 中的 'y' 類型無效"
 
 #: src/main/logic.cpp:394
 msgid "Unary operator `!' called with two arguments"
@@ -10388,6 +10378,14 @@ msgstr "無法載入 X11 模組"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "無法使用 X11"
+
+#, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "'x %s y' 中的 'x' 類型無效"
+
+#, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "'x %s y' 中的 'y' 類型無效"
 
 #~ msgid "cannot set attribute on a symbol"
 #~ msgstr "無法為符號設定屬性"

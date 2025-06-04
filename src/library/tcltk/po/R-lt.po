@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tcltk 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2020-11-29 16:50+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -14,10 +14,10 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
+#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "'filters' turi būti 2 stulpelių simbolių matrica"
 
-#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #: R/utils.R:0
 msgid "'pb' is not from class %s"
@@ -60,6 +60,7 @@ msgstr "Žinynas"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Help topic:"
 msgstr "Žinyno tema:"
 
@@ -70,6 +71,7 @@ msgstr "Įdiekite paketus iš CRAN"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "Interaktyvus tiesinis pritaikymas"
 
@@ -80,6 +82,7 @@ msgstr "Įkelti"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Load packages"
 msgstr "Įkelti paketus"
 
@@ -110,21 +113,25 @@ msgstr "R DUK"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Save workspace"
-msgstr "Išsaugoti darbo sritį"
+msgstr "Neišsaugota darbo sritis"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Source R code"
 msgstr "Šaltinio R kodas"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
+#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "Tcl paketas '%s' nerastas"
 
 #. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
 #: R/windows/zzz.R:0
+#, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "Tcl/Tk palaikymo failai nebuvo įdiegti"
 
@@ -140,6 +147,7 @@ msgstr "TkGUI nėra prieinamas Windows"
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
+#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "negalima pakeisti vardų Tcl masyve"
 
@@ -159,7 +167,10 @@ msgid "t test"
 msgstr "t-testas"
 
 #. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
-#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr ""
+
+#, fuzzy
+#~ msgid "gettext(\"Save workspace\")"
+#~ msgstr "Išsaugoti darbo sritį"

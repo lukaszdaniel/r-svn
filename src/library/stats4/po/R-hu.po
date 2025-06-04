@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 13:26\n"
+"POT-Creation-Date: 2025-06-04 19:16\n"
 "PO-Revision-Date: 2024-06-17 03:05+0000\n"
 "Last-Translator: Nichole Haines <NicholeHaines54@gmail.com>\n"
 "Language-Team: none\n"
@@ -20,11 +20,13 @@ msgstr "Eltérés a kezdőértékek hosszában"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
+#, fuzzy
 msgid "extra arguments discarded"
 msgstr "a töblet argumentumok figyelmen kívül lettek hagyva"
 
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
+#, fuzzy
 msgid "fixed values violate constraints"
 msgstr "A rögzített értékek megsértik a korlátozásokat"
 
@@ -40,11 +42,13 @@ msgstr "Elnevezett lista várható"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
+#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "A profilalkotás jobb megoldást talált, így az eredeti illeszkedés nem konvergált"
 
 #. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
+#, fuzzy
 msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr "Egyes elnevezett értékek nem argumentumai a megadott log-likelihood"
 

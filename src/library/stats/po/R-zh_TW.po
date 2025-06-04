@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -33,7 +33,6 @@ msgstr "不明 %s 的鏈結"
 msgid "%s must be 0 or 1"
 msgstr "%s 必須是零或一"
 
-#. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
 #: R/contrast.R:0 R/xtabs.R:0
@@ -184,12 +183,10 @@ msgid "'coef' must be a vector"
 msgstr "'coef' 必須是向量"
 
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
-#. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
 msgid "'coef' must define a contrast, i.e., sum to 0"
 msgstr "'coef' 必須設定對比，如，總和為零"
 
-#. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #: R/aov.R:0
 msgid "'coef' must have same length as 'contrast.obj'"
@@ -265,13 +262,11 @@ msgid "'cv' must not be NA when 'df' is specified"
 msgstr "當 'df' 有定義時 'cv' 不能是 NA"
 
 #. R/models.R: stop("'data' must be a data.frame, environment, or list")
-#. R/models.R: stop("'data' must be a data.frame, environment, or list")
 #: R/models.R:0
 #, fuzzy
 msgid "'data' must be a data.frame, environment, or list"
 msgstr "'data' 必須是串列或是環境"
 
-#. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
 msgid "'data' must be a data.frame, not a matrix or an array"
@@ -293,12 +288,10 @@ msgid "'degree' must be at least 1"
 msgstr "'degree' 至少為一"
 
 #. R/contr.poly.R: stop("'degree' must be less than number of unique points")
-#. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 #: R/contr.poly.R:0
 msgid "'degree' must be less than number of unique points"
 msgstr "'degree' 必須小於唯一資料點的數目"
 
-#. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #: R/splinefun.R:0
 msgid "'deriv' must be between 0 and 3"
@@ -351,13 +344,10 @@ msgstr "沒有 'formula'"
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
 #. R/ks.test.R: stop("'formula' missing or incorrect")
-#. R/ks.test.R: stop("'formula' missing or incorrect")
 #. R/mood.test.R: stop("'formula' missing or incorrect")
 #. R/oneway.test.R: stop("'formula' missing or incorrect")
 #. R/t.test.R: stop("'formula' missing or incorrect")
-#. R/t.test.R: stop("'formula' missing or incorrect")
 #. R/var.test.R: stop("'formula' missing or incorrect")
-#. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/ftable.R:0
@@ -441,7 +431,6 @@ msgid "'k' is bigger than 'n'!  Changing 'k' to %d"
 msgstr "'k' 比 'n' 大！ 把 'k' 改成 %d"
 
 #. R/kernel.R: stop("'k' is not a kernel")
-#. R/kernel.R: stop("'k' is not a kernel")
 #: R/kernel.R:0
 msgid "'k' is not a kernel"
 msgstr "'k' 不是內核"
@@ -502,7 +491,6 @@ msgid "'lower' and 'upper' must be finite values"
 msgstr "'lower' 和 'upper' 必須都是有限值"
 
 #. R/kernel.R: stop("'m' is less than 1")
-#. R/kernel.R: stop("'m' is less than 1")
 #: R/kernel.R:0
 msgid "'m' is less than 1"
 msgstr "'m' 小於一"
@@ -512,7 +500,6 @@ msgstr "'m' 小於一"
 msgid "'m' must be numeric with non-negative integers"
 msgstr "'m' 必須是非負的整數"
 
-#. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #: R/termplot.R:0
 msgid "'main' must be TRUE, FALSE, NULL or character (vector)."
@@ -644,20 +631,15 @@ msgid "'order.max' must be < 'n.obs'"
 msgstr "'order.max' 必須小於 'n.obs'"
 
 #. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
 #: R/ar.R:0
 msgid "'order.max' must be < 'n.used'"
 msgstr "'order.max' 必須小於 'n.used'"
 
 #. R/ar.R: stop("'order.max' must be >= 0")
-#. R/ar.R: stop("'order.max' must be >= 0")
 #: R/ar.R:0
 msgid "'order.max' must be >= 0"
 msgstr "'order.max' 必須大於等於零"
 
-#. R/ar.R: stop("'order.max' must be >= 1")
-#. R/ar.R: stop("'order.max' must be >= 1")
 #. R/ar.R: stop("'order.max' must be >= 1")
 #: R/ar.R:0
 msgid "'order.max' must be >= 1"
@@ -704,9 +686,6 @@ msgid "'print.level' must be in {0,1,2}"
 msgstr "'print.level' 必須是 {0,1,2}"
 
 #. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
 #: R/distn.R:0
 msgid "'prob' and 'mu' both specified"
 msgstr "'prob' 和 'mu' 不能同時設定"
@@ -716,7 +695,6 @@ msgstr "'prob' 和 'mu' 不能同時設定"
 msgid "'probs' outside [0,1]"
 msgstr "'probs' 在[0,1]外"
 
-#. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
@@ -777,7 +755,6 @@ msgstr "沒有 'row.var.names' 值"
 msgid "'sampleT' and 'nser' must be integer"
 msgstr "'sampleT' 和 'nser' 必須都是整數"
 
-#. R/biplot.R: warning("'scale' is outside [0, 1]")
 #. R/biplot.R: warning("'scale' is outside [0, 1]")
 #: R/biplot.R:0
 msgid "'scale' is outside [0, 1]"
@@ -842,7 +819,6 @@ msgstr "'start' 大於 'end'"
 msgid "'start' and 'table' must be same length"
 msgstr "'start' 和 'table' 的長度必須相等"
 
-#. R/ts.R: stop("'start' cannot be after 'end'")
 #. R/ts.R: stop("'start' cannot be after 'end'")
 #: R/ts.R:0
 msgid "'start' cannot be after 'end'"
@@ -910,7 +886,6 @@ msgstr "'varying' 引數的長度必須相同"
 msgid "'varying' has wrong length"
 msgstr "'varying' 長度無效"
 
-#. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #: R/nls-profile.R:0
 msgid "'varying' must be in seq_along(pars)"
@@ -1053,8 +1028,6 @@ msgid "'x' is not a kernel"
 msgstr "'x' 不是內核"
 
 #. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
 #. R/kernel.R: stop("'x' is not a vector")
 #: R/diffinv.R:0 R/kernel.R:0
 msgid "'x' is not a vector"
@@ -1094,7 +1067,6 @@ msgid "'x' must be a list with at least 2 elements"
 msgstr "'x' 必須是至少有兩個單元的串列"
 
 #. R/lm.R: stop("'x' must be a matrix")
-#. R/lm.R: stop("'x' must be a matrix")
 #: R/lm.R:0
 msgid "'x' must be a matrix"
 msgstr "'x' 必須是矩陣"
@@ -1119,8 +1091,6 @@ msgstr "'x' 必須是數值向量"
 msgid "'x' must be a time series or an ar() fit"
 msgstr "'x' 必須是時間序列或 ar()擬合"
 
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #: R/ftable.R:0
 msgid "'x' must be an \"ftable\" object"
@@ -1163,9 +1133,6 @@ msgstr "'x' 必須是非負的整數"
 
 #. R/StructTS.R: stop("'x' must be numeric")
 #. R/acf.R: stop("'x' must be numeric")
-#. R/acf.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
 #. R/ar.R: stop("'x' must be numeric")
 #. R/arima.R: stop("'x' must be numeric")
 #. R/arma0.R: stop("'x' must be numeric")
@@ -1294,7 +1261,6 @@ msgid "(unordered) factors are not allowed"
 msgstr "因子不適用於此"
 
 #. R/lm.R: stop("0 (non-NA) cases")
-#. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
 msgid "0 (non-NA) cases"
 msgstr "沒有(非 NA)案例可用"
@@ -1329,7 +1295,6 @@ msgstr "雖然模型在擬和時用了衡量，但在預測時仍假定方差不
 msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr "壁壘演算法超過了迭代但沒有收斂"
 
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #: R/cor.test.R:0
 msgid "Cannot compute exact p-value with ties"
@@ -1411,14 +1376,10 @@ msgstr "'%s' 裡不能有 NA"
 
 #. R/acf.R: stop("NAs in 'x'")
 #. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
 #: R/acf.R:0 R/ar.R:0
 msgid "NAs in 'x'"
 msgstr "'x' 裡不能有 NA"
 
-#. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #: R/ar.R:0
 msgid "NAs in 'x' must be the same row-wise"
@@ -1473,7 +1434,6 @@ msgstr "目標函式在外部循環增加了 %d"
 
 #. R/prcomp.R: stop("PCA applies only to numerical variables")
 #. R/princomp.R: stop("PCA applies only to numerical variables")
-#. R/princomp.R: stop("PCA applies only to numerical variables")
 #: R/prcomp.R:0 R/princomp.R:0
 msgid "PCA applies only to numerical variables"
 msgstr "PCA 只適用於數值變數"
@@ -1514,7 +1474,6 @@ msgid "Requested conf.level not achievable"
 msgstr "無法達到所要求的 conf.level"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
-#. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
 msgstr "還沒有為 '%s' 種類實作標準誤的演算法"
@@ -1544,14 +1503,10 @@ msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`
 msgstr ""
 
 #. R/confint.R: message("Waiting for profiling to be done...")
-#. R/confint.R: message("Waiting for profiling to be done...")
 #: R/confint.R:0
 msgid "Waiting for profiling to be done..."
 msgstr ""
 
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
 #. R/mlm.R: stop("X does not define a subspace of M")
 #: R/mlm.R:0
 msgid "X does not define a subspace of M"
@@ -1667,7 +1622,6 @@ msgid "argument 'sides' must be 1 or 2"
 msgstr "引數 'sides' 必須是一或二"
 
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
-#. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
 #, fuzzy
 msgid "argument 'sizes' must be a vector of length 2"
@@ -1685,8 +1639,9 @@ msgstr "無法將 'x' 引數強制轉換成 %s 類別"
 
 #. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
+#, fuzzy
 msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
-msgstr ""
+msgstr "引數 'x' 必須是數值"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
@@ -1878,7 +1833,6 @@ msgstr "無法精確計算帶連結的置信區間"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
 #. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
 #: R/ansari.test.R:0 R/wilcox.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "無法精確計算帶連結的 p 值"
@@ -1992,7 +1946,6 @@ msgid "computation of exact probability failed, returning Monte Carlo approximat
 msgstr ""
 
 #. R/contrast.R: stop("contrasts apply only to factors")
-#. R/contrast.R: stop("contrasts apply only to factors")
 #: R/contrast.R:0
 msgid "contrasts apply only to factors"
 msgstr "對比只適用於因子"
@@ -2045,7 +1998,6 @@ msgstr "覆蓋機率在值欄位[0,1) 外"
 msgid "cross-validation with non-unique 'x' values seems doubtful"
 msgstr "用有重複的 'x' 來做交叉驗證好像不太對"
 
-#. R/t.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
 #: R/t.test.R:0
 msgid "data are essentially constant"
@@ -2156,7 +2108,6 @@ msgstr "'x' 的單元不能比 'n' 的單元大"
 
 #. R/kmeans.R: stop("empty cluster: try a better set of initial centers", call. = FALSE)
 #. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
-#. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
 #: R/kmeans.R:0
 msgid "empty cluster: try a better set of initial centers"
 msgstr "空的叢集: 請試試更精確一點的初始中心集"
@@ -2211,7 +2162,6 @@ msgstr "f.lower = f(lower) 的值為 NA"
 msgid "f.upper = f(upper) is NA"
 msgstr "f.upper = f(upper) 的值為 NA"
 
-#. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #: R/factanal.R:0
 msgid "factor analysis applies only to numerical variables"
@@ -2342,7 +2292,6 @@ msgid "ignoring prior weights"
 msgstr "先驗重量忽略不用"
 
 #. R/lm.R: stop("incompatible dimensions")
-#. R/lm.R: stop("incompatible dimensions")
 #: R/lm.R:0
 msgid "incompatible dimensions"
 msgstr "維度不符合"
@@ -2368,7 +2317,6 @@ msgid "incorrect length of 'x'"
 msgstr "'x' 長度無效"
 
 #. R/ftable.R: stop("incorrect specification for 'col.vars'")
-#. R/ftable.R: stop("incorrect specification for 'col.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'col.vars'"
 msgstr "'col.vars' 設定無效"
@@ -2379,7 +2327,6 @@ msgstr "'col.vars' 設定無效"
 msgid "incorrect specification for 'formula'"
 msgstr "'formula' 設定無效"
 
-#. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'row.vars'"
@@ -2482,8 +2429,6 @@ msgid "invalid 'method' argument"
 msgstr "'method' 引數無效"
 
 #. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
 #: R/bandwidths.R:0
 msgid "invalid 'nb'"
 msgstr "'nb' 無效"
@@ -2494,14 +2439,10 @@ msgid "invalid 'tree' ('merge' component)"
 msgstr "'tree' 不對('merge' 元件)"
 
 #. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr "'use' 引數無效"
 
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/bandwidths.R: stop("invalid 'x'")
 #. R/bandwidths.R: stop("invalid 'x'")
 #. R/chisq.test.R: stop("invalid 'x'")
 #. R/loess.R: stop("invalid 'x'")
@@ -2620,8 +2561,9 @@ msgstr "deriv 裡的公式無效"
 
 #. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
+#, fuzzy
 msgid "invalid formula %s: extraneous call to `%s` is deprecated"
-msgstr ""
+msgstr "deriv 裡的公式無效"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
 #: R/models.R:0
@@ -2629,7 +2571,6 @@ msgstr ""
 msgid "invalid formula %s: not a call"
 msgstr "deriv 裡的公式無效"
 
-#. R/deriv.R: stop("invalid formula in deriv")
 #. R/deriv.R: stop("invalid formula in deriv")
 #: R/deriv.R:0
 msgid "invalid formula in deriv"
@@ -2641,7 +2582,6 @@ msgstr "deriv 裡的公式無效"
 msgid "invalid formula: %s"
 msgstr "公式無效"
 
-#. R/approx.R: stop("invalid interpolation method")
 #. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
 #: R/approx.R:0 R/spline.R:0
@@ -2655,9 +2595,6 @@ msgstr "成員長度無效"
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
-#. R/approx.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
 #. R/bandwidths.R: stop("invalid length(x)")
 #. R/stl.R: stop("invalid length(x)")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/stl.R:0
@@ -2775,7 +2712,6 @@ msgstr ""
 "與邊緣的長度，%d 不相符"
 
 #. R/biplot.R: stop("length of choices must be 2")
-#. R/biplot.R: stop("length of choices must be 2")
 #: R/biplot.R:0
 msgid "length of choices must be 2"
 msgstr "選擇長度必須為二"
@@ -2796,12 +2732,6 @@ msgstr "'x' 和 'xreg' 的長度不一樣"
 msgid "levels truncated to positive values only"
 msgstr "層次被縮短成正值"
 
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #: R/family.R:0
 #, fuzzy
@@ -2843,8 +2773,6 @@ msgid "method = \"Brent\" is only available for one-dimensional optimization"
 msgstr "method = \"Brent\" 只適用於一維最佳化"
 
 #. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
 #: R/lm.R:0
 msgid "method = '%s' is not supported. Using 'qr'"
 msgstr "不支援 method = '%s'。用 'qr'"
@@ -2859,7 +2787,6 @@ msgstr "L-BFGS-B 方法用 'factr'(和 'pgtol') ，而不是 'reltol' 和 'absto
 msgid "midcache() of non-binary dendrograms only partly implemented"
 msgstr "非二分系統樹圖的 midcache()只實作了一部分"
 
-#. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
@@ -2923,7 +2850,6 @@ msgid "model frame and formula mismatch in model.matrix()"
 msgstr "model.matrix() 裡的模型框和公式不符合"
 
 #. R/AIC.R: warning("models are not all fitted to the same number of observations")
-#. R/AIC.R: warning("models are not all fitted to the same number of observations")
 #: R/AIC.R:0
 msgid "models are not all fitted to the same number of observations"
 msgstr "模型擬合時沒有用同樣大小的資料集"
@@ -2954,7 +2880,6 @@ msgstr "叢集中心的數目要比資料點數目多"
 msgid "more cluster centers than distinct data points."
 msgstr "叢集中心的數目要比資料點數目多。"
 
-#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #: R/dummy.coef.R:0
 msgid "multivariate case with missing coefficients is not yet implemented"
@@ -3037,10 +2962,6 @@ msgid "need an object with call component"
 msgstr "需要一個有調用元件的物件"
 
 #. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
 #: R/bandwidths.R:0
 msgid "need at least 2 data points"
 msgstr "至少需要兩個資料點"
@@ -3061,7 +2982,6 @@ msgid "need at least four unique 'x' values"
 msgstr "至少需要四個相互不同的 'x' 值"
 
 #. R/approx.R: stop("need at least two non-NA values to interpolate")
-#. R/approx.R: stop("need at least two non-NA values to interpolate")
 #: R/approx.R:0
 msgid "need at least two non-NA values to interpolate"
 msgstr "呼叫內插至少需要兩個非 NA 值的資料"
@@ -3072,8 +2992,6 @@ msgid "need dendrograms where all leaves have labels"
 msgstr "需要所有葉子都有標記的系統樹圖"
 
 #. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
 #: R/manova.R:0
 msgid "need multiple responses"
 msgstr "需要多個回應"
@@ -3083,8 +3001,6 @@ msgstr "需要多個回應"
 msgid "need numeric data"
 msgstr "需要數值資料"
 
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #: R/smspline.R:0
 msgid "need result of smooth.spline(keep.data = TRUE)"
@@ -3193,8 +3109,6 @@ msgid "no scores are available: refit with 'retx=TRUE'"
 msgstr "沒有分數: 用 'retx=TRUE' 重新進行擬合"
 
 #. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
 #: R/nlm.R:0
 msgid "no sign change found in %d iterations"
 msgstr "%d 迭代中沒有正負號變更"
@@ -3220,13 +3134,10 @@ msgid "no terms component nor attribute"
 msgstr "沒有項元件也沒有屬性"
 
 #. R/add.R: stop("no terms in scope")
-#. R/add.R: stop("no terms in scope")
 #: R/add.R:0
 msgid "no terms in scope"
 msgstr "範疇裡沒有項"
 
-#. R/add.R: stop("no terms in scope for adding to object")
-#. R/add.R: stop("no terms in scope for adding to object")
 #. R/add.R: stop("no terms in scope for adding to object")
 #: R/add.R:0
 msgid "no terms in scope for adding to object"
@@ -3237,7 +3148,6 @@ msgstr "加入物件時範疇內沒有項"
 msgid "no time series supplied"
 msgstr "沒有設定時間序列"
 
-#. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #: R/glm.R:0
 msgid "no valid set of coefficients has been found: please supply starting values"
@@ -3367,22 +3277,17 @@ msgid "not an unreplicated complete block design"
 msgstr "不是非折疊完全區組設計"
 
 #. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
 #: R/ks.test.R:0
 msgid "not enough 'x' data"
 msgstr "'x' 資料不夠"
 
 #. R/ansari.test.R: stop("not enough 'x' observations")
 #. R/t.test.R: stop("not enough 'x' observations")
-#. R/t.test.R: stop("not enough 'x' observations")
 #. R/var.test.R: stop("not enough 'x' observations")
 #: R/ansari.test.R:0 R/t.test.R:0 R/var.test.R:0
 msgid "not enough 'x' observations"
 msgstr "'x' 觀察值數量不夠"
 
-#. R/ks.test.R: stop("not enough 'y' data")
-#. R/ks.test.R: stop("not enough 'y' data")
 #. R/ks.test.R: stop("not enough 'y' data")
 #: R/ks.test.R:0
 msgid "not enough 'y' data"
@@ -3409,13 +3314,10 @@ msgid "not enough data"
 msgstr "資料不夠"
 
 #. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
 #: R/contrast.R:0
 msgid "not enough degrees of freedom to define contrasts"
 msgstr "設定對比的自由度不夠"
 
-#. R/cor.test.R: stop("not enough finite observations")
 #. R/cor.test.R: stop("not enough finite observations")
 #: R/cor.test.R:0
 msgid "not enough finite observations"
@@ -3501,8 +3403,6 @@ msgid "number of offsets is %d, should equal %d (number of observations)"
 msgstr "偏置的個數為 %d，應該為 %d (觀察量數目)"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #: R/add.R:0
 msgid "number of rows in use has changed: remove missing values?"
 msgstr "列數有變化：是不是刪除了遺漏值？"
@@ -3546,7 +3446,6 @@ msgstr ""
 "y 數值必須存在。\n"
 "用 density()來估計密度"
 
-#. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #: R/biplot.R:0
 msgid "object '%s' has no scores"
@@ -3615,16 +3514,10 @@ msgid "only univariate series are allowed"
 msgstr "只允許單變數序列"
 
 #. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
 #: R/HoltWinters.R:0
 msgid "optimization difficulties: %s"
 msgstr "最佳化困難： %s"
 
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
 #. R/HoltWinters.R: stop("optimization failure")
 #: R/HoltWinters.R:0
 msgid "optimization failure"
@@ -3676,7 +3569,6 @@ msgstr "'inverse.gaussian' 分布家族只允許正值"
 msgid "possible convergence problem: 'optim' gave code = %d and message %s"
 msgstr "可能遇到了收斂問題：'optim' 提供了 code=%d 和資訊 %s"
 
-#. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arma0.R: gettextf("possible convergence problem: optim gave code = %d",     code)
 #: R/arima.R:0 R/arma0.R:0
@@ -3730,9 +3622,6 @@ msgid "ref = %d must be in 1L:%d"
 msgstr "ref = %d 必須在 1L:%d 裡"
 
 #. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
 #: R/wilcox.test.R:0
 msgid "requested conf.level not achievable"
 msgstr "無法達到所要求的 conf.level"
@@ -3752,7 +3641,6 @@ msgstr "物件的殘差自由度表明這不是\"lm\" 擬合"
 msgid "residuals have rank %d < %d"
 msgstr "殘差的秩 %d < %d"
 
-#. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #: R/mlm.R:0
 msgid "residuals have rank %s < %s"
@@ -3787,7 +3675,6 @@ msgid "sample size must be between 3 and 5000"
 msgstr "樣本大小必須在 3 和 5000 之間"
 
 #. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
-#. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
 #: R/ansari.test.R:0
 msgid "samples differ in location: cannot compute confidence set, returning NA"
 msgstr "樣本的位置不一樣：無法計算置信集，因此回覆 NA"
@@ -3797,8 +3684,6 @@ msgstr "樣本的位置不一樣：無法計算置信集，因此回覆 NA"
 msgid "scatter plots only for univariate time series"
 msgstr "散佈圖只適用於單變數時間序列"
 
-#. R/add.R: stop("scope is not a subset of term labels")
-#. R/add.R: stop("scope is not a subset of term labels")
 #. R/add.R: stop("scope is not a subset of term labels")
 #: R/add.R:0
 msgid "scope is not a subset of term labels"
@@ -3817,7 +3702,6 @@ msgid "series is corrupt, with no 'tsp' attribute"
 msgstr "系列不對：缺少 'tsp' 此一屬性"
 
 #. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
-#. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
 #: R/ts.R:0
 msgid "series is corrupt: length %d with 'tsp' implying %d"
 msgstr "系列不對：長度為 %d 的 'tsp' 意味着 %d"
@@ -3827,7 +3711,6 @@ msgstr "系列不對：長度為 %d 的 'tsp' 意味着 %d"
 msgid "series is not periodic or has less than two periods"
 msgstr "序列沒有周期，或其周期小於二"
 
-#. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #: R/nls.R:0
 msgid "setVarying : 'vary' length must match length of parameters"
@@ -3855,7 +3738,6 @@ msgid "singular contrast matrix"
 msgstr "奇異對比矩陣"
 
 #. R/glm.R: stop("singular fit encountered")
-#. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #: R/glm.R:0 R/lm.R:0
 msgid "singular fit encountered"
@@ -3928,17 +3810,10 @@ msgstr "只有一個數值預測子時不能忽略預測子的二次方"
 
 #. R/distn.R: warning("specify 'rate' or 'scale' but not both")
 #. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
 #: R/distn.R:0
 msgid "specify 'rate' or 'scale' but not both"
 msgstr "'rate' 和 'scale' 兩個中只能設定其中一個"
 
-#. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #: R/identify.hclust.R:0
 msgid "specify exactly one of 'k' and 'h'"
@@ -3980,7 +3855,6 @@ msgid "sum(weights) != 1  -- will not get true density"
 msgstr "sum(weights) ！= 1，因此無法取得真密度函式"
 
 #. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
-#. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
 #: R/cor.R:0
 msgid "supply both 'x' and 'y' or a matrix-like 'x'"
 msgstr "要麼同時設定 'x' 和 'y'，要麼只設定矩陣式的 'x'"
@@ -4011,7 +3885,6 @@ msgid "the case k > 2 is unimplemented"
 msgstr "還沒有實作 k > 2 的例子"
 
 #. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
-#. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
 #: R/aov.R:0
 msgid "the contrast defined is empty (has no TRUE elements)"
 msgstr "設定的對比是空的(不含任何 TRUE 值)"
@@ -4026,8 +3899,6 @@ msgstr "時間序列的第一個數值不能是遺漏值"
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "以下 'anova.glm' 的引數不對因此忽略不用："
 
-#. R/StructTS.R: stop("the series is entirely NA")
-#. R/StructTS.R: stop("the series is entirely NA")
 #. R/StructTS.R: stop("the series is entirely NA")
 #: R/StructTS.R:0
 msgid "the series is entirely NA"
@@ -4146,7 +4017,6 @@ msgid "transformed ARMA parameters were fixed"
 msgstr "變換過的 ARMA 參數是固定的"
 
 #. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
-#. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #: R/model.tables.R:0
 msgid "type '%s' is not implemented yet"
 msgstr "還沒有實作 '%s' 種類"
@@ -4203,7 +4073,6 @@ msgid "using F test with a '%s' family is inappropriate"
 msgstr "將 F 檢驗用於 %s 分布家族是不正確的"
 
 #. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
-#. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
 #: R/glm.R:0
 msgid "using F test with a fixed dispersion is inappropriate"
 msgstr "將 F 檢驗用於固定疏散的分布是不正確的"
@@ -4259,7 +4128,6 @@ msgid "weights must be non-negative and not all zero"
 msgstr "權數必須為非負值，而且不能全部都為零"
 
 #. R/embed.R: stop("wrong embedding dimension")
-#. R/embed.R: stop("wrong embedding dimension")
 #: R/embed.R:0
 msgid "wrong embedding dimension"
 msgstr "內嵌維度無效"
@@ -4295,7 +4163,6 @@ msgstr "新資料裡的行數不對："
 msgid "wrong number of contrast matrix rows"
 msgstr "對比矩陣的列數無效"
 
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 msgid "x is not a vector or univariate time series"
@@ -4333,14 +4200,12 @@ msgid "y values must be 0 <= y <= 1"
 msgstr "y 值必須滿足 0 <= y <= 1"
 
 #. R/approx.R: stop("zero non-NA points")
-#. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
 #. R/splinefun.R: stop("zero non-NA points")
 #: R/approx.R:0 R/spline.R:0 R/splinefun.R:0
 msgid "zero non-NA points"
 msgstr "沒有非 NA 資料點"
 
-#. R/ar.R: stop("zero-variance series")
 #. R/ar.R: stop("zero-variance series")
 #: R/ar.R:0
 msgid "zero-variance series"
@@ -4510,7 +4375,6 @@ msgid "upper scope has term %s not included in model"
 msgid_plural "upper scope has terms %s not included in model"
 msgstr[0] "模型裡上範疇沒有這些詞條 %s"
 
-#. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #: R/add.R:0
 msgid "using the %d/%d row from a combined fit"

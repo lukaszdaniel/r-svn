@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2021-10-15 18:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,7 +28,6 @@ msgstr "%s saitas nežinomas"
 msgid "%s must be 0 or 1"
 msgstr "%s turi būti 0 arba 1"
 
-#. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
 #: R/contrast.R:0 R/xtabs.R:0
@@ -179,12 +178,10 @@ msgid "'coef' must be a vector"
 msgstr "'coef' turi būti vektorius"
 
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
-#. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
 msgid "'coef' must define a contrast, i.e., sum to 0"
 msgstr "'coef' turi apibrėžti priešingybę, t. y. suma į 0"
 
-#. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #: R/aov.R:0
 msgid "'coef' must have same length as 'contrast.obj'"
@@ -259,13 +256,11 @@ msgid "'cv' must not be NA when 'df' is specified"
 msgstr "'cv' neturi būti NA, kai nurodyta 'df'"
 
 #. R/models.R: stop("'data' must be a data.frame, environment, or list")
-#. R/models.R: stop("'data' must be a data.frame, environment, or list")
 #: R/models.R:0
 #, fuzzy
 msgid "'data' must be a data.frame, environment, or list"
 msgstr "'data' turi būti sąrašas ar aplinka"
 
-#. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
 msgid "'data' must be a data.frame, not a matrix or an array"
@@ -287,12 +282,10 @@ msgid "'degree' must be at least 1"
 msgstr "'degree' turi būti mažiausiai 1"
 
 #. R/contr.poly.R: stop("'degree' must be less than number of unique points")
-#. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 #: R/contr.poly.R:0
 msgid "'degree' must be less than number of unique points"
 msgstr "'degree' turi būti mažesnis negu unikalių taškų skaičius"
 
-#. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #: R/splinefun.R:0
 msgid "'deriv' must be between 0 and 3"
@@ -344,13 +337,10 @@ msgstr "trūksta 'formula'"
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
 #. R/ks.test.R: stop("'formula' missing or incorrect")
-#. R/ks.test.R: stop("'formula' missing or incorrect")
 #. R/mood.test.R: stop("'formula' missing or incorrect")
 #. R/oneway.test.R: stop("'formula' missing or incorrect")
 #. R/t.test.R: stop("'formula' missing or incorrect")
-#. R/t.test.R: stop("'formula' missing or incorrect")
 #. R/var.test.R: stop("'formula' missing or incorrect")
-#. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/ftable.R:0
@@ -433,7 +423,6 @@ msgid "'k' is bigger than 'n'!  Changing 'k' to %d"
 msgstr "'k' yra didesnis negu 'n'! Keitimas 'k' į %d"
 
 #. R/kernel.R: stop("'k' is not a kernel")
-#. R/kernel.R: stop("'k' is not a kernel")
 #: R/kernel.R:0
 msgid "'k' is not a kernel"
 msgstr "'k' nėra branduolys"
@@ -494,7 +483,6 @@ msgid "'lower' and 'upper' must be finite values"
 msgstr "'lower' ir 'upper' turi būti baigtinės reikšmės"
 
 #. R/kernel.R: stop("'m' is less than 1")
-#. R/kernel.R: stop("'m' is less than 1")
 #: R/kernel.R:0
 msgid "'m' is less than 1"
 msgstr "'m' yra mažiau negu 1"
@@ -504,7 +492,6 @@ msgstr "'m' yra mažiau negu 1"
 msgid "'m' must be numeric with non-negative integers"
 msgstr "'m' turi būti skaitinis su neneigiamais sveikaisiais skaičiais"
 
-#. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #: R/termplot.R:0
 msgid "'main' must be TRUE, FALSE, NULL or character (vector)."
@@ -636,20 +623,15 @@ msgid "'order.max' must be < 'n.obs'"
 msgstr "'order.max' turi būti < 'n.obs'"
 
 #. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
 #: R/ar.R:0
 msgid "'order.max' must be < 'n.used'"
 msgstr "'order.max' turi būti < 'n.used'"
 
 #. R/ar.R: stop("'order.max' must be >= 0")
-#. R/ar.R: stop("'order.max' must be >= 0")
 #: R/ar.R:0
 msgid "'order.max' must be >= 0"
 msgstr "'order.max' turi būti >= 0"
 
-#. R/ar.R: stop("'order.max' must be >= 1")
-#. R/ar.R: stop("'order.max' must be >= 1")
 #. R/ar.R: stop("'order.max' must be >= 1")
 #: R/ar.R:0
 msgid "'order.max' must be >= 1"
@@ -696,9 +678,6 @@ msgid "'print.level' must be in {0,1,2}"
 msgstr "'print.level' turi būti {0,1,2}"
 
 #. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
 #: R/distn.R:0
 msgid "'prob' and 'mu' both specified"
 msgstr "nurodyti abu 'prob' ir 'mu'"
@@ -708,7 +687,6 @@ msgstr "nurodyti abu 'prob' ir 'mu'"
 msgid "'probs' outside [0,1]"
 msgstr "'probs' už [0,1]"
 
-#. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
@@ -769,7 +747,6 @@ msgstr "trūksta 'row.var.names'"
 msgid "'sampleT' and 'nser' must be integer"
 msgstr "'sampleT' ir 'nser' turi būti sveikasis skaičius"
 
-#. R/biplot.R: warning("'scale' is outside [0, 1]")
 #. R/biplot.R: warning("'scale' is outside [0, 1]")
 #: R/biplot.R:0
 msgid "'scale' is outside [0, 1]"
@@ -834,7 +811,6 @@ msgstr "'start' > 'end'"
 msgid "'start' and 'table' must be same length"
 msgstr "'start' ir 'table' turi būti tokio paties ilgio"
 
-#. R/ts.R: stop("'start' cannot be after 'end'")
 #. R/ts.R: stop("'start' cannot be after 'end'")
 #: R/ts.R:0
 msgid "'start' cannot be after 'end'"
@@ -902,7 +878,6 @@ msgstr "'varying' argumentai turi būti tokio paties ilgio"
 msgid "'varying' has wrong length"
 msgstr "blogas 'varying' ilgis"
 
-#. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #: R/nls-profile.R:0
 msgid "'varying' must be in seq_along(pars)"
@@ -1045,8 +1020,6 @@ msgid "'x' is not a kernel"
 msgstr "'x' nėra branduolys"
 
 #. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
 #. R/kernel.R: stop("'x' is not a vector")
 #: R/diffinv.R:0 R/kernel.R:0
 msgid "'x' is not a vector"
@@ -1086,7 +1059,6 @@ msgid "'x' must be a list with at least 2 elements"
 msgstr "'x' turi būti mažiausiai 2 elementų sąrašas"
 
 #. R/lm.R: stop("'x' must be a matrix")
-#. R/lm.R: stop("'x' must be a matrix")
 #: R/lm.R:0
 msgid "'x' must be a matrix"
 msgstr "'x' turi būti matrica"
@@ -1111,8 +1083,6 @@ msgstr "'x' turi būti skaitinis vektorius"
 msgid "'x' must be a time series or an ar() fit"
 msgstr "'x' turi būti laiko eilutė arba ar() pritaikymas"
 
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #: R/ftable.R:0
 msgid "'x' must be an \"ftable\" object"
@@ -1155,9 +1125,6 @@ msgstr "'x' turi būti neneigiamas ir sveikasis skaičius"
 
 #. R/StructTS.R: stop("'x' must be numeric")
 #. R/acf.R: stop("'x' must be numeric")
-#. R/acf.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
 #. R/ar.R: stop("'x' must be numeric")
 #. R/arima.R: stop("'x' must be numeric")
 #. R/arma0.R: stop("'x' must be numeric")
@@ -1286,7 +1253,6 @@ msgid "(unordered) factors are not allowed"
 msgstr "faktoriai negalimi"
 
 #. R/lm.R: stop("0 (non-NA) cases")
-#. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
 msgid "0 (non-NA) cases"
 msgstr "0 (ne-NA) atvejai"
@@ -1321,7 +1287,6 @@ msgstr "Darant prielaidą, kad prognozavimo dispersija yra pastovi, net jei mode
 msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr "Barjero algoritme trūko iteracijų ir nekonvergavo"
 
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #: R/cor.test.R:0
 msgid "Cannot compute exact p-value with ties"
@@ -1403,14 +1368,10 @@ msgstr "NA, esančios '%s'"
 
 #. R/acf.R: stop("NAs in 'x'")
 #. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
 #: R/acf.R:0 R/ar.R:0
 msgid "NAs in 'x'"
 msgstr "NA, esančios 'x'"
 
-#. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #: R/ar.R:0
 msgid "NAs in 'x' must be the same row-wise"
@@ -1463,7 +1424,6 @@ msgstr "Tikslo funkcija padidėjo išorinėje iteracijoje %d"
 
 #. R/prcomp.R: stop("PCA applies only to numerical variables")
 #. R/princomp.R: stop("PCA applies only to numerical variables")
-#. R/princomp.R: stop("PCA applies only to numerical variables")
 #: R/prcomp.R:0 R/princomp.R:0
 msgid "PCA applies only to numerical variables"
 msgstr "PCA taikoma tik skaitiniams kintamiesiems"
@@ -1504,7 +1464,6 @@ msgid "Requested conf.level not achievable"
 msgstr "Reikalaujamas conf.level nepasiekiamas"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
-#. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
 msgstr "SEs tipui '%s' dar nėra įgyvendinamas"
@@ -1534,14 +1493,10 @@ msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`
 msgstr "Nepalyginamas 'response' \"%s\"; naudojimas prieštarauja.  Naudokite as.name(.) arba '..'!"
 
 #. R/confint.R: message("Waiting for profiling to be done...")
-#. R/confint.R: message("Waiting for profiling to be done...")
 #: R/confint.R:0
 msgid "Waiting for profiling to be done..."
 msgstr ""
 
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
 #. R/mlm.R: stop("X does not define a subspace of M")
 #: R/mlm.R:0
 msgid "X does not define a subspace of M"
@@ -1657,7 +1612,6 @@ msgid "argument 'sides' must be 1 or 2"
 msgstr "argumentas 'sides' turi būti 1 arba 2"
 
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
-#. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
 #, fuzzy
 msgid "argument 'sizes' must be a vector of length 2"
@@ -1675,8 +1629,9 @@ msgstr "argumentas 'x' negali būti pakeistas į %s klasę"
 
 #. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
+#, fuzzy
 msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
-msgstr ""
+msgstr "argumentas 'x' turi būti skaitinis"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
@@ -1868,7 +1823,6 @@ msgstr "negali tiksliai apskaičiuoti pasitikėjimo intervalą su ryšiais"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
 #. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
 #: R/ansari.test.R:0 R/wilcox.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "nepavyko apskaičiuoti tikslios p-reikšmės su ryšiais"
@@ -1982,7 +1936,6 @@ msgid "computation of exact probability failed, returning Monte Carlo approximat
 msgstr ""
 
 #. R/contrast.R: stop("contrasts apply only to factors")
-#. R/contrast.R: stop("contrasts apply only to factors")
 #: R/contrast.R:0
 msgid "contrasts apply only to factors"
 msgstr "kontrastai taikomi tik faktoriams"
@@ -2035,7 +1988,6 @@ msgstr "aprėpties tikimybė nepatenka į intervalą [0,1)"
 msgid "cross-validation with non-unique 'x' values seems doubtful"
 msgstr "kryžminis patvirtinimas naudojant ne unikalias 'x' reikšmes atrodo abejotinas"
 
-#. R/t.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
 #: R/t.test.R:0
 msgid "data are essentially constant"
@@ -2146,7 +2098,6 @@ msgstr "'x' elementai neturi būti didesnis už 'n'"
 
 #. R/kmeans.R: stop("empty cluster: try a better set of initial centers", call. = FALSE)
 #. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
-#. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
 #: R/kmeans.R:0
 msgid "empty cluster: try a better set of initial centers"
 msgstr "tuščias klasteris: išbandykite geresnį pradinių centrų rinkinį"
@@ -2201,7 +2152,6 @@ msgstr "f.lower = f(lower) yra NA"
 msgid "f.upper = f(upper) is NA"
 msgstr "f.upper = f(upper) yra NA"
 
-#. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #: R/factanal.R:0
 msgid "factor analysis applies only to numerical variables"
@@ -2331,7 +2281,6 @@ msgid "ignoring prior weights"
 msgstr "ankstesni svoriai ignoruojami"
 
 #. R/lm.R: stop("incompatible dimensions")
-#. R/lm.R: stop("incompatible dimensions")
 #: R/lm.R:0
 msgid "incompatible dimensions"
 msgstr "nesuderinami matavimo skaičiai"
@@ -2357,7 +2306,6 @@ msgid "incorrect length of 'x'"
 msgstr "'x' ilgis neteisingas"
 
 #. R/ftable.R: stop("incorrect specification for 'col.vars'")
-#. R/ftable.R: stop("incorrect specification for 'col.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'col.vars'"
 msgstr "neteisinga 'col.vars' specifikacija"
@@ -2368,7 +2316,6 @@ msgstr "neteisinga 'col.vars' specifikacija"
 msgid "incorrect specification for 'formula'"
 msgstr "neteisinga 'formula' specifikacija"
 
-#. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'row.vars'"
@@ -2471,8 +2418,6 @@ msgid "invalid 'method' argument"
 msgstr "neteisingas 'method' argumentas"
 
 #. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
 #: R/bandwidths.R:0
 msgid "invalid 'nb'"
 msgstr "neteisingas 'nb'"
@@ -2483,14 +2428,10 @@ msgid "invalid 'tree' ('merge' component)"
 msgstr "neteisingas 'tree' ('merge' komponentas)"
 
 #. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr "neteisingas 'use' argumentas"
 
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/bandwidths.R: stop("invalid 'x'")
 #. R/bandwidths.R: stop("invalid 'x'")
 #. R/chisq.test.R: stop("invalid 'x'")
 #. R/loess.R: stop("invalid 'x'")
@@ -2616,7 +2557,6 @@ msgid "invalid formula %s: not a call"
 msgstr "neleistina formulė %s: ne iškvietimas"
 
 #. R/deriv.R: stop("invalid formula in deriv")
-#. R/deriv.R: stop("invalid formula in deriv")
 #: R/deriv.R:0
 msgid "invalid formula in deriv"
 msgstr "neteisinga formulė, esanti deriv"
@@ -2626,7 +2566,6 @@ msgstr "neteisinga formulė, esanti deriv"
 msgid "invalid formula: %s"
 msgstr "netinkama formulė: %s"
 
-#. R/approx.R: stop("invalid interpolation method")
 #. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
 #: R/approx.R:0 R/spline.R:0
@@ -2640,9 +2579,6 @@ msgstr "neteisingas narių ilgis"
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
-#. R/approx.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
 #. R/bandwidths.R: stop("invalid length(x)")
 #. R/stl.R: stop("invalid length(x)")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/stl.R:0
@@ -2759,7 +2695,6 @@ msgstr ""
 "neatitinka paraštės ilgio, %d"
 
 #. R/biplot.R: stop("length of choices must be 2")
-#. R/biplot.R: stop("length of choices must be 2")
 #: R/biplot.R:0
 msgid "length of choices must be 2"
 msgstr "pasirinkimo ilgis turi būti 2"
@@ -2780,12 +2715,6 @@ msgstr "nesutampa 'x' ir 'xreg' ilgiai"
 msgid "levels truncated to positive values only"
 msgstr "lygiai sutrumpinti tik iki teigiamų reikšmių"
 
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #: R/family.R:0
 msgid "link \"%s\" not available for %s family; available links are %s"
@@ -2826,8 +2755,6 @@ msgid "method = \"Brent\" is only available for one-dimensional optimization"
 msgstr "metodas = \"Brent\" yra prieinamas tik vieno matmens optimizavimui"
 
 #. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
 #: R/lm.R:0
 msgid "method = '%s' is not supported. Using 'qr'"
 msgstr "metodas = '%s' nepalaikomas. Naudoti 'qr'"
@@ -2842,7 +2769,6 @@ msgstr "metodas L-BFGS-B naudoja 'factr' (ir 'pgtol') vietoj 'reltol' ir 'abstol
 msgid "midcache() of non-binary dendrograms only partly implemented"
 msgstr "midcache() ne dvejetainių dendrogramų įgyvendinimas tik iš dalies"
 
-#. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
@@ -2906,7 +2832,6 @@ msgid "model frame and formula mismatch in model.matrix()"
 msgstr "modelio sistemos ir formulės neatitikimas model.matrix()"
 
 #. R/AIC.R: warning("models are not all fitted to the same number of observations")
-#. R/AIC.R: warning("models are not all fitted to the same number of observations")
 #: R/AIC.R:0
 msgid "models are not all fitted to the same number of observations"
 msgstr "ne visi modeliai pritaikyti vienodam stebėjimų skaičiui"
@@ -2937,7 +2862,6 @@ msgstr "daugiau klasterio centrų nei duomenų taškų"
 msgid "more cluster centers than distinct data points."
 msgstr "daugiau klasterio centrų nei atskirų duomenų taškų."
 
-#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #: R/dummy.coef.R:0
 msgid "multivariate case with missing coefficients is not yet implemented"
@@ -3020,10 +2944,6 @@ msgid "need an object with call component"
 msgstr "reikia objekto su iškvietimo komponentu"
 
 #. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
 #: R/bandwidths.R:0
 msgid "need at least 2 data points"
 msgstr "reikia bent 2 duomenų taškų"
@@ -3044,7 +2964,6 @@ msgid "need at least four unique 'x' values"
 msgstr "reikia bent keturių unikalių 'x' reikšmių"
 
 #. R/approx.R: stop("need at least two non-NA values to interpolate")
-#. R/approx.R: stop("need at least two non-NA values to interpolate")
 #: R/approx.R:0
 msgid "need at least two non-NA values to interpolate"
 msgstr "norint interpoliuoti, reikia bent dviejų ne NA reikšmių"
@@ -3055,8 +2974,6 @@ msgid "need dendrograms where all leaves have labels"
 msgstr "reikia dendrogramų ten, kur visi lapai turi etiketes"
 
 #. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
 #: R/manova.R:0
 msgid "need multiple responses"
 msgstr "reikia kelių atsakymų"
@@ -3066,8 +2983,6 @@ msgstr "reikia kelių atsakymų"
 msgid "need numeric data"
 msgstr "reikia skaitinių duomenų"
 
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #: R/smspline.R:0
 msgid "need result of smooth.spline(keep.data = TRUE)"
@@ -3176,8 +3091,6 @@ msgid "no scores are available: refit with 'retx=TRUE'"
 msgstr "rezultatų nėra: pakartokite naudodami 'retx=TRUE'"
 
 #. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
 #: R/nlm.R:0
 msgid "no sign change found in %d iterations"
 msgstr "ženklo pokyčio nerasta %d iteracijose"
@@ -3203,13 +3116,10 @@ msgid "no terms component nor attribute"
 msgstr "nėra termų komponento nei atributo"
 
 #. R/add.R: stop("no terms in scope")
-#. R/add.R: stop("no terms in scope")
 #: R/add.R:0
 msgid "no terms in scope"
 msgstr "nėra termų taikymo srityje"
 
-#. R/add.R: stop("no terms in scope for adding to object")
-#. R/add.R: stop("no terms in scope for adding to object")
 #. R/add.R: stop("no terms in scope for adding to object")
 #: R/add.R:0
 msgid "no terms in scope for adding to object"
@@ -3220,7 +3130,6 @@ msgstr "nėra termų taikymo srityje pridedant prie objekto"
 msgid "no time series supplied"
 msgstr "nėra pateikta laiko eilučių"
 
-#. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #: R/glm.R:0
 msgid "no valid set of coefficients has been found: please supply starting values"
@@ -3345,22 +3254,17 @@ msgid "not an unreplicated complete block design"
 msgstr "pakartotinai užbaigtas blokų dizainas"
 
 #. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
 #: R/ks.test.R:0
 msgid "not enough 'x' data"
 msgstr "nepakanka 'x' duomenų"
 
 #. R/ansari.test.R: stop("not enough 'x' observations")
 #. R/t.test.R: stop("not enough 'x' observations")
-#. R/t.test.R: stop("not enough 'x' observations")
 #. R/var.test.R: stop("not enough 'x' observations")
 #: R/ansari.test.R:0 R/t.test.R:0 R/var.test.R:0
 msgid "not enough 'x' observations"
 msgstr "nepakanka 'x' stebėjimų"
 
-#. R/ks.test.R: stop("not enough 'y' data")
-#. R/ks.test.R: stop("not enough 'y' data")
 #. R/ks.test.R: stop("not enough 'y' data")
 #: R/ks.test.R:0
 msgid "not enough 'y' data"
@@ -3386,13 +3290,10 @@ msgid "not enough data"
 msgstr "nepakanka duomenų"
 
 #. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
 #: R/contrast.R:0
 msgid "not enough degrees of freedom to define contrasts"
 msgstr "nepakanka laisvės laipsnių apibrėžti kontrastus"
 
-#. R/cor.test.R: stop("not enough finite observations")
 #. R/cor.test.R: stop("not enough finite observations")
 #: R/cor.test.R:0
 msgid "not enough finite observations"
@@ -3478,8 +3379,6 @@ msgid "number of offsets is %d, should equal %d (number of observations)"
 msgstr "poslinkių skaičius yra %d ir turėtų būti lygus %d (stebėjimų skaičius)"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #: R/add.R:0
 msgid "number of rows in use has changed: remove missing values?"
 msgstr "pasikeitė naudojamų eilučių skaičius: pašalinkite trūkstamas reikšmes?"
@@ -3523,7 +3422,6 @@ msgstr ""
 "skaitinis y turi būti pateiktas.\n"
 "Tankio įvertinimui naudokite density()"
 
-#. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #: R/biplot.R:0
 msgid "object '%s' has no scores"
@@ -3592,16 +3490,10 @@ msgid "only univariate series are allowed"
 msgstr "tik vienmatės eilutės yra leidžiamos"
 
 #. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
 #: R/HoltWinters.R:0
 msgid "optimization difficulties: %s"
 msgstr "optimizavimo kliūtys: %s"
 
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
 #. R/HoltWinters.R: stop("optimization failure")
 #: R/HoltWinters.R:0
 msgid "optimization failure"
@@ -3653,7 +3545,6 @@ msgstr "teigiamos reikšmės yra leidžiamos tik 'inverse.gaussian' šeimai"
 msgid "possible convergence problem: 'optim' gave code = %d and message %s"
 msgstr "galima konvergencijos problema: 'optim' davė kodą = %d ir pranešimą %s"
 
-#. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arma0.R: gettextf("possible convergence problem: optim gave code = %d",     code)
 #: R/arima.R:0 R/arma0.R:0
@@ -3707,9 +3598,6 @@ msgid "ref = %d must be in 1L:%d"
 msgstr "ref = %d turi būti 1L:%d"
 
 #. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
 #: R/wilcox.test.R:0
 msgid "requested conf.level not achievable"
 msgstr "reikalaujamas conf.level nepasiekiamas"
@@ -3729,7 +3617,6 @@ msgstr "liekanų laisvės laipsniai objekte rodo, kad tai netinka \"lm\""
 msgid "residuals have rank %d < %d"
 msgstr "liekanos turi rangą %d < %d"
 
-#. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #: R/mlm.R:0
 msgid "residuals have rank %s < %s"
@@ -3764,7 +3651,6 @@ msgid "sample size must be between 3 and 5000"
 msgstr "imties dydis turi būti tarp 3 ir 5000"
 
 #. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
-#. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
 #: R/ansari.test.R:0
 msgid "samples differ in location: cannot compute confidence set, returning NA"
 msgstr "imtys skiriasi vietoje: negalima apskaičiuoti nustatyto pasikliautimo rinkinio, grąžina NA"
@@ -3774,8 +3660,6 @@ msgstr "imtys skiriasi vietoje: negalima apskaičiuoti nustatyto pasikliautimo r
 msgid "scatter plots only for univariate time series"
 msgstr "sklaidos diagramos tik vienmatėms laiko eilutėms"
 
-#. R/add.R: stop("scope is not a subset of term labels")
-#. R/add.R: stop("scope is not a subset of term labels")
 #. R/add.R: stop("scope is not a subset of term labels")
 #: R/add.R:0
 msgid "scope is not a subset of term labels"
@@ -3794,7 +3678,6 @@ msgid "series is corrupt, with no 'tsp' attribute"
 msgstr "eilutės yra sugadintos, be 'tsp' atributo"
 
 #. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
-#. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
 #: R/ts.R:0
 msgid "series is corrupt: length %d with 'tsp' implying %d"
 msgstr "eilutės yra sugadintos: ilgis %d su 'tsp' reiškia %d"
@@ -3804,7 +3687,6 @@ msgstr "eilutės yra sugadintos: ilgis %d su 'tsp' reiškia %d"
 msgid "series is not periodic or has less than two periods"
 msgstr "eilutės nėra periodinės arba turi mažiau nei du periodus"
 
-#. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #: R/nls.R:0
 msgid "setVarying : 'vary' length must match length of parameters"
@@ -3832,7 +3714,6 @@ msgid "singular contrast matrix"
 msgstr "singuliari konstrastinė matrica"
 
 #. R/glm.R: stop("singular fit encountered")
-#. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #: R/glm.R:0 R/lm.R:0
 msgid "singular fit encountered"
@@ -3905,17 +3786,10 @@ msgstr "nurodytas faktoriaus prediktoriaus kvadratas turi būti sumažintas tik 
 
 #. R/distn.R: warning("specify 'rate' or 'scale' but not both")
 #. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
 #: R/distn.R:0
 msgid "specify 'rate' or 'scale' but not both"
 msgstr "nurodykite 'rate' arba 'scale', bet ne abu"
 
-#. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #: R/identify.hclust.R:0
 msgid "specify exactly one of 'k' and 'h'"
@@ -3957,7 +3831,6 @@ msgid "sum(weights) != 1  -- will not get true density"
 msgstr "sum(weights) != 1 -- negaus tikrojo tankio"
 
 #. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
-#. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
 #: R/cor.R:0
 msgid "supply both 'x' and 'y' or a matrix-like 'x'"
 msgstr "pateikite ir 'x', ir 'y' arba 'x' kaip matricą"
@@ -3988,7 +3861,6 @@ msgid "the case k > 2 is unimplemented"
 msgstr "atvejis k > 2 yra nerealizuotas"
 
 #. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
-#. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
 #: R/aov.R:0
 msgid "the contrast defined is empty (has no TRUE elements)"
 msgstr "apibrėžtas kontrastas yra tuščias (neturi TRUE elementų)"
@@ -4003,8 +3875,6 @@ msgstr "pirma laiko eilutės reikšmė turi būti netrūkstama"
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "šie argumentai 'anova.glm' yra neteisingi arba prarasti:"
 
-#. R/StructTS.R: stop("the series is entirely NA")
-#. R/StructTS.R: stop("the series is entirely NA")
 #. R/StructTS.R: stop("the series is entirely NA")
 #: R/StructTS.R:0
 msgid "the series is entirely NA"
@@ -4122,7 +3992,6 @@ msgid "transformed ARMA parameters were fixed"
 msgstr "buvo nustatyti transformuoti ARMA parametrai"
 
 #. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
-#. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #: R/model.tables.R:0
 msgid "type '%s' is not implemented yet"
 msgstr "'%s' tipas neįdiegtas"
@@ -4179,7 +4048,6 @@ msgid "using F test with a '%s' family is inappropriate"
 msgstr "testo F naudojimas su '%s' šeima yra netinkamas"
 
 #. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
-#. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
 #: R/glm.R:0
 msgid "using F test with a fixed dispersion is inappropriate"
 msgstr "testo F naudojimas su fiksuota dispersija yra netinkamas"
@@ -4235,7 +4103,6 @@ msgid "weights must be non-negative and not all zero"
 msgstr "svoriai turi būti neneigiami ir ne visi nuliniai"
 
 #. R/embed.R: stop("wrong embedding dimension")
-#. R/embed.R: stop("wrong embedding dimension")
 #: R/embed.R:0
 msgid "wrong embedding dimension"
 msgstr "neteisingai įterptas matavimo skaičius"
@@ -4271,7 +4138,6 @@ msgstr "neteisingas stulpelių skaičius naujuose duomenyse:"
 msgid "wrong number of contrast matrix rows"
 msgstr "neteisingas kontrasto matricos eilučių skaičius"
 
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 msgid "x is not a vector or univariate time series"
@@ -4309,14 +4175,12 @@ msgid "y values must be 0 <= y <= 1"
 msgstr "y reikšmės turi būti 0 <= y <= 1"
 
 #. R/approx.R: stop("zero non-NA points")
-#. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
 #. R/splinefun.R: stop("zero non-NA points")
 #: R/approx.R:0 R/spline.R:0 R/splinefun.R:0
 msgid "zero non-NA points"
 msgstr "nuliniai ne NA taškai"
 
-#. R/ar.R: stop("zero-variance series")
 #. R/ar.R: stop("zero-variance series")
 #: R/ar.R:0
 msgid "zero-variance series"
@@ -4540,7 +4404,6 @@ msgstr[0] "viršutinė sritis turi termą %s, kuris neįtrauktas į modelį"
 msgstr[1] "viršutinė sritis turi termus %s, kurie neįtraukti į modelį"
 msgstr[2] "viršutinė sritis turi termų %s, kurie neįtraukti į modelį"
 
-#. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #: R/add.R:0
 msgid "using the %d/%d row from a combined fit"

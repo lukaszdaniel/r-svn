@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-24 17:06+0200\n"
+"POT-Creation-Date: 2025-06-01 10:55+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -4717,7 +4717,7 @@ msgstr ""
 msgid "bad opcode"
 msgstr "Ugyldig opcode"
 
-#: src/main/eval.cpp:6838
+#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "ugyldig %s-type i «x %s y»"
@@ -5425,16 +5425,6 @@ msgstr "operasjonane kan berre brukast på numeriske, logiske eller komplekse ty
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "«%s»-operatoren tek nøyaktig 2 argument"
-
-#: src/main/logic.cpp:307
-#, c-format
-msgid "invalid 'x' type in 'x %s y'"
-msgstr "ugyldig «x»-type i «x %s y»"
-
-#: src/main/logic.cpp:316
-#, c-format
-msgid "invalid 'y' type in 'x %s y'"
-msgstr "ugyldig «y»-type i «x %s y»"
 
 #: src/main/logic.cpp:394
 msgid "Unary operator `!' called with two arguments"
@@ -10553,6 +10543,14 @@ msgstr "X11-modulen kan ikkje lastast"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 er ikkje tilgjengeleg"
+
+#, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "ugyldig «x»-type i «x %s y»"
+
+#, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "ugyldig «y»-type i «x %s y»"
 
 #, fuzzy
 #~ msgid "cannot set attribute on a symbol"

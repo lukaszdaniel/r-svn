@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -23,9 +23,6 @@ msgstr ""
 msgid "'Summary' function '%s' not meaningful for units"
 msgstr "função 'Summary' '%s' não faz sentido para unidades"
 
-#. R/grob.R: stop("'allDevices' not yet implemented")
-#. R/grob.R: stop("'allDevices' not yet implemented")
-#. R/grob.R: stop("'allDevices' not yet implemented")
 #. R/grob.R: stop("'allDevices' not yet implemented")
 #: R/grob.R:0
 msgid "'allDevices' not yet implemented"
@@ -63,23 +60,16 @@ msgid "'gEditList' can only contain 'gEdit' objects"
 msgstr "'gEditList' pode conter apenas objetos 'gEdit'"
 
 #. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
 #. R/grob.R: gettextf("'gPath' (%s) not found", gPath)
 #: R/grob.R:0
 msgid "'gPath' (%s) not found"
 msgstr "'gPath' (%s) não encontrado"
 
 #. R/grob.R: stop("'gPath' does not specify a valid child")
-#. R/grob.R: stop("'gPath' does not specify a valid child")
-#. R/grob.R: stop("'gPath' does not specify a valid child")
 #: R/grob.R:0
 msgid "'gPath' does not specify a valid child"
 msgstr "'gPath' não especifica uma criança válida"
 
-#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
-#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #: R/gpar.R:0
 #, fuzzy
@@ -93,15 +83,15 @@ msgid "'gpar' element '%s' must not be length 0"
 msgstr "elemento gpar '%s' não deve ser de comprimento 0"
 
 #. R/highlevel.R: stop("'hgap' must be single unit")
-#. R/highlevel.R: stop("'hgap' must be single unit")
 #: R/highlevel.R:0
 msgid "'hgap' must be single unit"
 msgstr "'hgap' deve ser uma única unidade"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
+#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr ""
+msgstr "'x' e 'y' devem ter comprimento 1"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -119,7 +109,6 @@ msgstr "'l' deve ser um layout"
 msgid "'labels' and 'at' locations must have same length"
 msgstr "localizações de 'labels' e 'at' devem ter o mesmo comprimento"
 
-#. R/primitives.R: stop("'length' must be a 'unit' object")
 #. R/primitives.R: stop("'length' must be a 'unit' object")
 #: R/primitives.R:0
 #, fuzzy
@@ -181,7 +170,6 @@ msgid "'squareShape' must be between -1 and 1"
 msgstr "'squareShape' deve ser entre -1 e 1"
 
 #. R/highlevel.R: stop("'vgap' must be single unit")
-#. R/highlevel.R: stop("'vgap' must be single unit")
 #: R/highlevel.R:0
 msgid "'vgap' must be single unit"
 msgstr "'vgap' deve ser uma única unidade"
@@ -198,18 +186,10 @@ msgid "'x' and 'units' must have length > 0"
 msgstr "'x' e 'units' devem ter comprimentos > 0"
 
 #. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
 #: R/primitives.R:0
 msgid "'x' and 'y' and 'id' must all be same length"
 msgstr "'x' e 'y' e 'id' devem ter o mesmo comprimento"
 
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 #. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 #: R/primitives.R:0
 msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
@@ -233,21 +213,10 @@ msgid "'x' and 'y' must be 'unit' objects and have the same length"
 msgstr "'x' e 'y' devem ser objetos unitários e devem ter os mesmos comprimentos"
 
 #. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
 #: R/primitives.R:0
 msgid "'x' and 'y' must be same length"
 msgstr "'x' e 'y' devem ter o mesmo comprimento"
 
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/typeset.R: stop("'x' and 'y' must be units")
 #: R/primitives.R:0 R/typeset.R:0
@@ -265,7 +234,6 @@ msgstr "'x' e 'y' devem ser objetos unitários e devem ter os mesmos comprimento
 msgid "'x' and 'y' must be units or NULL"
 msgstr "'x' e 'y' devem ser unidades ou NULL"
 
-#. R/primitives.R: stop("'x' and 'y' must have length 1")
 #. R/primitives.R: stop("'x' and 'y' must have length 1")
 #: R/primitives.R:0
 msgid "'x' and 'y' must have length 1"
@@ -288,8 +256,6 @@ msgstr "'x', 'y' e 'size' devem ser unidades"
 msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
 msgstr "'x', 'y', 'width', e 'height' devem ser todos unidades de comprimento 1'x', 'y', 'width', e 'height' devem ser todos unidades de comprimento 1"
 
-#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
-#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must be units")
 #: R/primitives.R:0 R/roundRect.R:0
@@ -363,7 +329,6 @@ msgid "Invalid coordinates"
 msgstr "'frame' inválido"
 
 #. R/group.R: stop("Invalid destination")
-#. R/group.R: stop("Invalid destination")
 #: R/group.R:0
 #, fuzzy
 msgid "Invalid destination"
@@ -394,10 +359,10 @@ msgid "Invalid grob coordinates"
 msgstr "Nome(s) de 'grob' inválido(s)"
 
 #. R/grid.R: stop("Invalid number of generations")
-#. R/grid.R: stop("Invalid number of generations")
 #: R/grid.R:0
+#, fuzzy
 msgid "Invalid number of generations"
-msgstr ""
+msgstr "Justificação inválida"
 
 #. R/grob.R: stop("Invalid revert target")
 #: R/grob.R:0
@@ -405,7 +370,6 @@ msgstr ""
 msgid "Invalid revert target"
 msgstr "argumento 'print' inválido"
 
-#. R/group.R: stop("Invalid source")
 #. R/group.R: stop("Invalid source")
 #: R/group.R:0
 #, fuzzy
@@ -421,8 +385,9 @@ msgstr "'frame' inválido"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
+#, fuzzy
 msgid "Invalid transform (nothing drawn)"
-msgstr ""
+msgstr "'frame' inválido"
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
@@ -451,7 +416,6 @@ msgid "Only a grob can be converted to a path"
 msgstr ""
 
 #. R/patterns.R: warning("Pattern fill applied to object with no inside")
-#. R/patterns.R: warning("Pattern fill applied to object with no inside")
 #: R/patterns.R:0
 msgid "Pattern fill applied to object with no inside"
 msgstr ""
@@ -463,8 +427,9 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
+#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr ""
+msgstr "Justificação horizontal inválida"
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -472,7 +437,6 @@ msgstr ""
 msgid "Unknown anchor; using left justification"
 msgstr "Justificação horizontal inválida"
 
-#. R/group.R: paste0("Unknown group: ", x$group)
 #. R/group.R: paste0("Unknown group: ", x$group)
 #: R/group.R:0
 msgid "Unknown group:"
@@ -485,8 +449,9 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
+#, fuzzy
 msgid "Unknown width; using first width"
-msgstr ""
+msgstr "Justificação horizontal inválida"
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -536,14 +501,11 @@ msgid "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col
 msgstr "Não pode ser especificado mais de um 'side=[\"left\", \"right\"]', 'col', 'col.before', ou 'col.after'"
 
 #. R/patterns.R: stop("colours and stops must be at least length 1")
-#. R/patterns.R: stop("colours and stops must be at least length 1")
 #: R/patterns.R:0
 #, fuzzy
 msgid "colours and stops must be at least length 1"
 msgstr "'x' e 'y' devem ter o mesmo comprimento"
 
-#. R/primitives.R: stop("corrupt 'arrows' object")
-#. R/primitives.R: stop("corrupt 'arrows' object")
 #. R/primitives.R: stop("corrupt 'arrows' object")
 #: R/primitives.R:0
 #, fuzzy
@@ -569,7 +531,6 @@ msgid "gPath (%s) not found"
 msgstr "gPath (%s) não encontrado"
 
 #. R/grob.R: gettextf("grob '%s' not found", name)
-#. R/grob.R: gettextf("grob '%s' not found", name)
 #: R/grob.R:0
 #, fuzzy
 msgid "grob '%s' not found"
@@ -593,7 +554,6 @@ msgstr "grob modificou a ordem e a mesma não foi restaurada (captura PODE não 
 msgid "how did we get here?"
 msgstr "Como é que chegamos aqui?"
 
-#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
@@ -625,11 +585,6 @@ msgid "invalid 'angle' in viewport"
 msgstr "'angle' inválido em vista"
 
 #. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
 #: R/primitives.R:0
 msgid "invalid 'arrow' argument"
 msgstr "argumento 'arrow' inválido"
@@ -659,13 +614,11 @@ msgid "invalid 'col' specification"
 msgstr "Especificação inválida para 'col'"
 
 #. R/edit.R: stop("invalid 'edit' information")
-#. R/edit.R: stop("invalid 'edit' information")
 #: R/edit.R:0
 #, fuzzy
 msgid "invalid 'edit' information"
 msgstr "informação 'edit' inválida"
 
-#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
 #. R/primitives.R: stop("invalid 'ends' or 'type' argument")
 #: R/primitives.R:0
 #, fuzzy
@@ -679,19 +632,11 @@ msgid "invalid 'f'"
 msgstr "'f' inválido"
 
 #. R/frames.R: stop("invalid 'frame'")
-#. R/frames.R: stop("invalid 'frame'")
 #: R/frames.R:0
 #, fuzzy
 msgid "invalid 'frame'"
 msgstr "'frame' inválido"
 
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 #, fuzzy
@@ -711,21 +656,11 @@ msgid "invalid 'gp' value"
 msgstr "Valor 'grep' inválido"
 
 #. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 #, fuzzy
 msgid "invalid 'grep' value"
 msgstr "Valor 'grep' inválido"
 
-#. R/frames.R: stop("invalid 'grob'")
 #. R/frames.R: stop("invalid 'grob'")
 #: R/frames.R:0
 #, fuzzy
@@ -871,7 +806,6 @@ msgid "invalid horizontal justification"
 msgstr "Justificação horizontal inválida"
 
 #. R/just.R: stop("invalid justification")
-#. R/just.R: stop("invalid justification")
 #: R/just.R:0
 #, fuzzy
 msgid "invalid justification"
@@ -920,10 +854,6 @@ msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
 msgstr "É inválido editar diretamente os slots 'children' ou 'childrenOrder'"
 
 #. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
 #: R/primitives.R:0
 #, fuzzy
 msgid "it is invalid to specify both 'id' and 'id.lengths'"
@@ -935,8 +865,6 @@ msgstr "É inválido especificar 'id' e 'id.lengths' juntos"
 msgid "it is only valid to add a 'grob' to a \"gTree\""
 msgstr "Somente é válido adicionar um 'grob' a um 'gTree'"
 
-#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
-#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 #. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 #: R/grob.R:0
 #, fuzzy
@@ -962,7 +890,6 @@ msgid "it is only valid to get a child from a \"gTree\""
 msgstr "Só é válido obter um 'child' de uma 'gTree'"
 
 #. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
-#. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
 #: R/grob.R:0
 #, fuzzy
 msgid "it is only valid to remove a child from a \"gTree\""
@@ -980,7 +907,6 @@ msgstr "Somente é válido definir um 'grob' como criança de um 'gTree'"
 msgid "it is only valid to set a child of a \"gTree\""
 msgstr "Somente é válido definir uma criança de uma 'gTree'"
 
-#. R/components.R: stop("logical 'label' supplied of length 0")
 #. R/components.R: stop("logical 'label' supplied of length 0")
 #: R/components.R:0
 #, fuzzy
@@ -1057,7 +983,6 @@ msgid "must start new page if showing leaves separately"
 msgstr "Deve iniciar nova página se folhas estão exibidas separadamente"
 
 #. R/unit.R: stop("non-unit operand must be numeric")
-#. R/unit.R: stop("non-unit operand must be numeric")
 #: R/unit.R:0
 #, fuzzy
 msgid "non-unit operand must be numeric"
@@ -1129,8 +1054,6 @@ msgid "slot '%s' not found"
 msgstr "Slot '%s' não encontrado"
 
 #. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
-#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
-#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
 #: R/grob.R:0
 #, fuzzy
 msgid "the new 'grob' must have the same name as the old 'grob'"
@@ -1143,12 +1066,10 @@ msgid "unable to coerce to \"gList\""
 msgstr "Impossível converter automaticamente em uma gList"
 
 #. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
-#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
 #: R/grab.R:0
 msgid "viewport overwritten (grab MAY not be faithful)"
 msgstr "Vista sobrescrita (captura PODE não ser fiel)"
 
-#. R/primitives.R: stop("x and y must be units")
 #. R/primitives.R: stop("x and y must be units")
 #: R/primitives.R:0
 msgid "x and y must be units"

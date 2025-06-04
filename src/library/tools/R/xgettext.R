@@ -215,17 +215,29 @@ function(dir, potFile, name = "R", version, bugs)
     msg_df <- msg_df[order(msg_df[["msg"]]), ]
 
     # --- Combine entries with same msg ---
-    msg_df$loc_str <- sprintf("\n#: %s: %s", msg_df$file, msg_df$line)
-    msg_df$Cmd_str <- sprintf("#. %s: %s\n", msg_df$file, msg_df$command)
+    msg_df$line <- sprintf("\n#: %s: %s", msg_df$file, msg_df$line)
+    msg_df$command <- sprintf("#. %s: %s\n", msg_df$file, msg_df$command)
 
-    for(i in seq_len(nrow(msg_df) - 1)) {
-        if(msg_df$msg[i] == msg_df$msg[i + 1]) {
-            if(msg_df$loc_str[i] != msg_df$loc_str[i + 1])
-                msg_df$loc_str[i + 1] <- paste0(msg_df$loc_str[i], msg_df$loc_str[i + 1])
-            msg_df$Cmd_str[i + 1] <- paste0(msg_df$Cmd_str[i], msg_df$Cmd_str[i + 1])
-            msg_df[i, ] <- "" # mark record as empty ""
-        }
+    group_singular_translations <- function(df) {
+      msgs <- unique(df$msg)
+      result <- data.frame(msg = character(), command = character(), line = character(), stringsAsFactors = FALSE)
+
+      for (m in msgs) {
+        subset_df <- df[df$msg == m, ]
+        unique_commands <- unique(subset_df$command)
+        unique_lines <- unique(subset_df$line)
+
+        result <- rbind(result, data.frame(
+          msg = m,
+          command = paste(unique_commands, collapse = ""),
+          line = paste(unique_lines, collapse = ""),
+          stringsAsFactors = FALSE
+        ))
+      }
+
+      return(result)
     }
+    msg_df <- group_singular_translations(msg_df)
     msg_df <- msg_df[nzchar(msg_df$msg), ]
     msg_df$msg <- shQuote(encodeString(msg_df$msg), type = "cmd")  # need to quote \n, \t etc
 
@@ -237,7 +249,7 @@ function(dir, potFile, name = "R", version, bugs)
             data.frame(
             Smsg = entry[["msg1"]],
             Pmsg = entry[["msg2"]],
-            command =entry[["cmd"]],
+            command = entry[["cmd"]],
             line = entry[["line"]],
             file = sub(regpth, "", fname),
             stringsAsFactors = FALSE
@@ -259,17 +271,30 @@ function(dir, potFile, name = "R", version, bugs)
     msgp_df <- msgp_df[order(msgp_df$Smsg), ]
 
     # --- Combine entries with same msg ---
-    msgp_df$loc_str <- sprintf("\n#: %s: %s", msgp_df$file, msgp_df$line)
-    msgp_df$Cmd_str <- sprintf("#. %s: %s\n", msgp_df$file, msgp_df$command)
+    msgp_df$line <- sprintf("\n#: %s: %s", msgp_df$file, msgp_df$line)
+    msgp_df$command <- sprintf("#. %s: %s\n", msgp_df$file, msgp_df$command)
 
-    for(i in seq_len(nrow(msgp_df) - 1)) {
-        if(msgp_df$Smsg[i] == msgp_df$Smsg[i + 1]) {
-            if(msgp_df$loc_str[i] != msgp_df$loc_str[i + 1])
-                msgp_df$loc_str[i + 1] <- paste0(msgp_df$loc_str[i], msgp_df$loc_str[i + 1])
-            msgp_df$Cmd_str[i + 1] <- paste0(msgp_df$Cmd_str[i], msgp_df$Cmd_str[i + 1])
-            msgp_df[i, ] <- "" # mark record as empty ""
-        }
+    group_plural_translations <- function(df) {
+      Smsgs <- unique(df$Smsg)
+      result <- data.frame(Smsg = character(), Pmsg = character(), command = character(), line = character(), stringsAsFactors = FALSE)
+
+      for (m in Smsgs) {
+        subset_df <- df[df$Smsg == m, ]
+        unique_Pmsgs <- unique(subset_df$Pmsg)
+        unique_commands <- unique(subset_df$command)
+        unique_lines <- unique(subset_df$line)
+
+        result <- rbind(result, data.frame(
+          Smsg = m,
+          Pmsg = unique_Pmsgs[1],  # Take the first Pmsg for the Smsg
+          command = paste(unique_commands, collapse = ""),
+          line = paste(unique_lines, collapse = ""),
+          stringsAsFactors = FALSE
+        ))
+      }
+    return(result)
     }
+    msgp_df <- group_plural_translations(msgp_df)
     msgp_df <- msgp_df[nzchar(msgp_df$Smsg), ]
     msgp_df$Smsg <- shQuote(encodeString(msgp_df$Smsg), type = "cmd")
     msgp_df$Pmsg <- shQuote(encodeString(msgp_df$Pmsg), type = "cmd")
@@ -302,8 +327,8 @@ function(dir, potFile, name = "R", version, bugs)
     # --- Write singular messages ---
     for(i in seq_len(nrow(msg_df)))
         writeLines(con=con, c('', 
-				msg_df[i, "loc_str"],
-				msg_df[i, "Cmd_str"],
+				msg_df[i, "line"],
+				msg_df[i, "command"],
 				sprintf("msgid %s", msg_df[i, "msg"]),
 				'msgstr ""'))
 
@@ -311,8 +336,8 @@ function(dir, potFile, name = "R", version, bugs)
     if(nrow(msgp_df) > 0) {
     for(i in seq_len(nrow(msgp_df))) {
             writeLines(con = con, c("",
-                      msgp_df[i, "loc_str"],
-                      msgp_df[i, "Cmd_str"],
+                      msgp_df[i, "line"],
+                      msgp_df[i, "command"],
                       sprintf("msgid        %s", msgp_df[i, "Smsg"]),
                       sprintf("msgid_plural %s", msgp_df[i, "Pmsg"]),
                       'msgstr[0]    ""',

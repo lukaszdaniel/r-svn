@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-09-18 03:05+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -356,8 +356,6 @@ msgid "at least one entry of 'x' must be positive"
 msgstr "'x'里至少要有一个值是正数"
 
 #. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
 #: R/plot.R:0
 msgid "cannot handle more than one 'x' coordinate"
 msgstr "不能处理多个'x'座标"
@@ -378,8 +376,6 @@ msgid "default 'pch' is smaller than number of columns and hence recycled"
 msgstr "'pch'的默认值比列的数目要小，因此再循环使用"
 
 #. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/spineplot.R: stop("dependent variable should be a factor")
 #. R/spineplot.R: stop("dependent variable should be a factor")
 #: R/cdplot.R:0 R/spineplot.R:0
 msgid "dependent variable should be a factor"
@@ -524,7 +520,6 @@ msgid "invalid coordinate lengths"
 msgstr "座标长度无效"
 
 #. R/boxplot.R: stop("invalid first argument")
-#. R/boxplot.R: stop("invalid first argument")
 #. R/stripchart.R: stop("invalid first argument")
 #: R/boxplot.R:0 R/stripchart.R:0
 msgid "invalid first argument"
@@ -574,15 +569,10 @@ msgid "invalid rectangle specification"
 msgstr "长方形定义无效"
 
 #. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
 #: R/screen.R:0
 msgid "invalid screen number"
 msgstr "屏幕数字无效"
 
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/datetime.R:0
 msgid "invalid specification of 'breaks'"
@@ -646,8 +636,6 @@ msgid "missing values in contingency table"
 msgstr "列联表里有缺少值"
 
 #. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
 #: R/plot.R:0
 msgid "must have a response variable"
 msgstr "必需有响应变量"
@@ -682,7 +670,6 @@ msgstr "所有的值都是缺少值"
 msgid "no proper 'z' matrix specified"
 msgstr "没有设定正确的'z'矩阵"
 
-#. R/pairs.R: stop("non-numeric argument to 'pairs'")
 #. R/pairs.R: stop("non-numeric argument to 'pairs'")
 #: R/pairs.R:0
 msgid "non-numeric argument to 'pairs'"
@@ -796,7 +783,6 @@ msgstr "'breaks'没有被排序，在使用前会对之进行排序"
 msgid "weights are not supported for 2-way table specification"
 msgstr ""
 
-#. R/datetime.R: stop("wrong method")
 #. R/datetime.R: stop("wrong method")
 #: R/datetime.R:0
 msgid "wrong method"

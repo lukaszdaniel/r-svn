@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:16\n"
 "PO-Revision-Date: 2022-10-16 14:04+0000\n"
 "Last-Translator: Gabriel Tormin <gta1998@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -24,6 +24,7 @@ msgstr ""
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
+#, fuzzy
 msgid "extra arguments discarded"
 msgstr "argumentos extras descartados"
 
@@ -46,6 +47,7 @@ msgstr "lista nomeada esperada"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
+#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "análise do perfil encontrou uma solução melhor, então ajuste inicial não convergiu"
 

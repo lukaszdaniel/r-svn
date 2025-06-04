@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-09-09 04:02+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -55,8 +55,9 @@ msgstr ""
 
 #. R/SClasses.R: gettextf("%s is not a defined class", dQuote(Class))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "%s is not a defined class"
-msgstr ""
+msgstr "%s nincs definiálva metódussal"
 
 #. R/refClass.R: gettextf("%s is not a defined class in this environment", dQuote(Class))
 #: R/refClass.R:0
@@ -77,13 +78,15 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("%s is not a generic function (or not visible here)",     sQuote(f))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "%s is not a generic function (or not visible here)"
-msgstr ""
+msgstr "A %s nem S4 általános függvény %s-ban; Nem eltávolított módszerek"
 
 #. R/trace.R: gettextf("%s is not a method for reference class %s", sQuote(as.character(if (is.symbol(thisName)) thisName else what)),     dQuote(class(where)))
 #: R/trace.R:0
+#, fuzzy
 msgid "%s is not a method for reference class %s"
-msgstr ""
+msgstr "nincs módszer a %s egyezik osztályhoz %s"
 
 #. R/refClass.R: gettextf("%s is not a reference class", dQuote(Class))
 #. R/refClass.R: gettextf("%s is not a reference class", dQuote(def@className))
@@ -91,7 +94,6 @@ msgstr ""
 msgid "%s is not a reference class"
 msgstr ""
 
-#. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #: R/SClasses.R:0
 msgid "%s is not a slot in class %s"
@@ -134,8 +136,9 @@ msgstr ""
 
 #. R/trace.R: gettextf("%s() is not a generic function in the target environment -- methods will not be inserted",     f)
 #: R/trace.R:0
+#, fuzzy
 msgid "%s() is not a generic function in the target environment -- methods will not be inserted"
-msgstr ""
+msgstr "A %s nem S4 általános függvény %s-ban; Nem eltávolított módszerek"
 
 #. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is defunct.",     dQuote(this))
 #: R/MethodsList.R:0
@@ -149,8 +152,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("'%s' is not a known generic function {and 'package' not specified}",     f)
 #: R/Methods.R:0
+#, fuzzy
 msgid "'%s' is not a known generic function {and 'package' not specified}"
-msgstr ""
+msgstr "A %s nem S4 általános függvény %s-ban; Nem eltávolított módszerek"
 
 #. R/RClassUtils.R: stop("'Class' must be a valid class definition or class")
 #: R/RClassUtils.R:0
@@ -159,13 +163,15 @@ msgstr ""
 
 #. R/oldClass.R: gettextf("'S3Class' can only assign to S4 objects that extend \"oldClass\"; not true of class %s",     dQuote(class(object)))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "'S3Class' can only assign to S4 objects that extend \"oldClass\"; not true of class %s"
-msgstr ""
+msgstr "az \"S3Class\" argumentumnak %s szuperosztálynak kell lennie: ez nem igaz a %s osztályra"
 
 #. R/oldClass.R: gettextf("'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s",     dQuote("oldClass"), dQuote(class(object)))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s"
-msgstr ""
+msgstr "Az S3Part() csak a setOldCLass() által létrehozott osztályokra, ezek alaposztályaira vagy alosztályaira van definiálva: nem igaz a %s osztályra"
 
 #. R/as.R: gettextf("'as' method should have one argument, or match the arguments of coerce(): got  (%s)",     paste(formalArgs(def), collapse = ", "))
 #: R/as.R:0
@@ -187,7 +193,6 @@ msgstr ""
 msgid "'externalptr' objects cannot be initialized from new()"
 msgstr ""
 
-#. R/Methods.R: stop("'file' must be a character string or a connection")
 #. R/Methods.R: stop("'file' must be a character string or a connection")
 #: R/Methods.R:0
 #, fuzzy
@@ -245,8 +250,9 @@ msgstr ""
 
 #. R/show.R: gettextf("An object of class %s", dQuote(class(object)))
 #: R/show.R:0
+#, fuzzy
 msgid "An object of class %s"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/SClasses.R: stop("Argument \"representation\" cannot be used if argument \"slots\" is supplied")
 #: R/SClasses.R:0
@@ -275,10 +281,11 @@ msgstr ""
 
 #. R/Methods.R: gettextf("Creating a generic function for %s from %s in %s\n    (from the saved implicit definition)",     sQuote(name), sQuote(package), thisPName)
 #: R/Methods.R:0
+#, fuzzy
 msgid ""
 "Creating a generic function for %s from %s in %s\n"
 "    (from the saved implicit definition)"
-msgstr ""
+msgstr "Általános függvény létrehozása %s számára a %s csomagból %s"
 
 #. R/Methods.R: gettextf("Creating a generic function for %s from package %s in %s",     sQuote(f), sQuote(fdef@package), thisPName)
 #: R/Methods.R:0
@@ -334,8 +341,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("Function %s is a group generic; do not call it directly",     sQuote(name))
 #: R/Methods.R:0
+#, fuzzy
 msgid "Function %s is a group generic; do not call it directly"
-msgstr ""
+msgstr "A %s függvény már csoportáltalános; nincs változás"
 
 #. R/Methods.R: gettextf("Function %s is already a group generic; no change",     sQuote(name))
 #: R/Methods.R:0
@@ -354,8 +362,9 @@ msgstr ""
 
 #. R/trace.R: gettextf("Methods inserted for function %s(): %s", f, paste(methodsInserted,     collapse = ", "))
 #: R/trace.R:0
+#, fuzzy
 msgid "Methods inserted for function %s(): %s"
-msgstr ""
+msgstr "Nem található metódus a %s függvényhez és a %s aláíráshoz"
 
 #. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
 #: R/RMethodUtils.R:0
@@ -389,8 +398,9 @@ msgstr ""
 
 #. R/methodsTable.R: gettextf("No simply inherited methods found for function %s; using non-simple method",     sQuote(fdef@generic))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid "No simply inherited methods found for function %s; using non-simple method"
-msgstr ""
+msgstr "Nem található metódus a %s függvényhez és a %s aláíráshoz"
 
 #. R/trace.R: gettextf("Non-function objects are not currently inserted (not traceable): %s",     paste(notTraceable, collapse = ", "))
 #: R/trace.R:0
@@ -399,11 +409,12 @@ msgstr ""
 
 #. R/methodsTable.R: gettextf("Note: method with signature %s chosen for function %s,\n target signature %s.\n %s would also be valid",     sQuote(selected), sQuote(attr(cond, "generic")), sQuote(attr(cond,         "target")), paste0("\"", possible[is.na(match(possible,         selected))], "\"", collapse = ", "))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid ""
 "Note: method with signature %s chosen for function %s,\n"
 " target signature %s.\n"
 " %s would also be valid"
-msgstr ""
+msgstr "A %s függvény és a %s aláírás módszere le van zárva, és nem definiálható újra"
 
 #. R/RClassUtils.R: gettextf("Note: some superclasses of class %s in package %s have duplicate definitions.  This definition is not being treated as equivalent to that from package %s",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 #: R/RClassUtils.R:0
@@ -451,15 +462,15 @@ msgid "The prototype for class %s has undefined slot(s): %s"
 msgstr ""
 
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
-#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 #: R/MethodsList.R:0
 msgid "Use %s instead."
 msgstr ""
 
 #. R/as.R: gettextf("a 'replace' method definition in 'setAs' must be a function of two arguments, got %d",     length(args))
 #: R/as.R:0
+#, fuzzy
 msgid "a 'replace' method definition in 'setAs' must be a function of two arguments, got %d"
-msgstr ""
+msgstr "a setIs() 'replace' argumentumának 2 vagy 3 argumentumból álló függvénynek kell lennie, a %s osztály objektumát kapta"
 
 #. R/NextMethod.R: gettextf("a call to callNextMethod() appears in a call to %s, but the call does not seem to come from either a generic function or another 'callNextMethod'",     sQuote(f))
 #: R/NextMethod.R:0
@@ -472,8 +483,7 @@ msgid "a call to superClass() is in the method %s but there is no superclass def
 msgstr ""
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
-#. R/trace.R: stop("a function for argument 'f' must be a generic function")
-#: R/Methods.R:0 R/trace.R:0
+#: R/Methods.R:0
 msgid "a function for argument 'f' must be a generic function"
 msgstr "Az \"F\" argumentum függvényének általános függvénynek kell lennie"
 
@@ -494,8 +504,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("a validity method must be a function of one argument, got an object of class %s",     dQuote(class(validity)))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "a validity method must be a function of one argument, got an object of class %s"
-msgstr ""
+msgstr "a \"kényszerítés\" argumentumnak a \"setIs\" -hez egy argumentum függvényének kell lennie, és a %s osztály objektumát kapta"
 
 #. R/SClasses.R: gettextf("abnormal type %s is not supported as a superclass of a class definition",     dQuote(type))
 #: R/SClasses.R:0
@@ -525,13 +536,15 @@ msgstr ""
 
 #. R/Methods.R: gettextf("argument %s must be a generic function or a single character string; got an object of class %s",     sQuote("f"), dQuote(class(f)))
 #: R/Methods.R:0
+#, fuzzy
 msgid "argument %s must be a generic function or a single character string; got an object of class %s"
-msgstr ""
+msgstr "a \"kényszerítés\" argumentumnak a \"setIs\" -hez egy argumentum függvényének kell lennie, és a %s osztály objektumát kapta"
 
 #. R/SClasses.R: gettextf("argument %s must be a list or a character vector; got an object of class %s",     dQuote(what), dQuote(class(fields)))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "argument %s must be a list or a character vector; got an object of class %s"
-msgstr ""
+msgstr "a \"kényszerítés\" argumentumnak a \"setIs\" -hez egy argumentum függvényének kell lennie, és a %s osztály objektumát kapta"
 
 #. R/oldClass.R: gettextf("argument 'Classes' must be a vector of two classes; got an argument of length %d",     length(Classes))
 #: R/oldClass.R:0
@@ -540,8 +553,9 @@ msgstr ""
 
 #. R/oldClass.R: gettextf("argument 'S4Class' must be a class definition: got an object of class %s",     dQuote(class(S4Class)))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "argument 'S4Class' must be a class definition: got an object of class %s"
-msgstr ""
+msgstr "A helyettesítő értéknek %s osztályúnak kell lennie, %s osztályúnak kell lennie"
 
 #. R/RClassUtils.R: stop("argument 'abbreviate' must be 0, 1, 2, or 3")
 #: R/RClassUtils.R:0
@@ -550,18 +564,21 @@ msgstr ""
 
 #. R/SClasses.R: stop("argument 'classDef' must be a class definition or the name of a class")
 #: R/SClasses.R:0
+#, fuzzy
 msgid "argument 'classDef' must be a class definition or the name of a class"
-msgstr ""
+msgstr "A helyettesítő értéknek %s osztályúnak kell lennie, %s osztályúnak kell lennie"
 
 #. R/SClasses.R: gettextf("argument 'classDef' must be a string or a class representation; got an object of class %s",     dQuote(class(classDef)))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "argument 'classDef' must be a string or a class representation; got an object of class %s"
-msgstr ""
+msgstr "a \"kényszerítés\" argumentumnak a \"setIs\" -hez egy argumentum függvényének kell lennie, és a %s osztály objektumát kapta"
 
 #. R/Methods.R: gettextf("argument 'f' must be a generic function or %s", .notSingleString(f))
 #: R/Methods.R:0
+#, fuzzy
 msgid "argument 'f' must be a generic function or %s"
-msgstr ""
+msgstr "Az \"F\" argumentum függvényének általános függvénynek kell lennie"
 
 #. R/RMethodUtils.R: stop("argument 'f' must be a string, generic function, or primitive: got an ordinary function")
 #: R/RMethodUtils.R:0
@@ -597,8 +614,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: stop("argument f must be a generic function with signature \"...\"")
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "argument f must be a generic function with signature \"...\""
-msgstr ""
+msgstr "Az \"F\" argumentum függvényének általános függvénynek kell lennie"
 
 #. R/as.R: gettextf("argument names in 'replace' changed to agree with 'coerce<-' generic:\n%s",     paste(deparse(replace), sep = "\n    "))
 #: R/as.R:0
@@ -614,13 +632,15 @@ msgstr ""
 
 #. R/refClass.R: stop("arguments must all be character string names of fields")
 #: R/refClass.R:0
+#, fuzzy
 msgid "arguments must all be character string names of fields"
-msgstr ""
+msgstr "A \"fájlnak\" karakterláncnak vagy kapcsolatnak kell lennie"
 
 #. R/refClass.R: stop("arguments to methods() must be named, or one named list")
 #: R/refClass.R:0
+#, fuzzy
 msgid "arguments to methods() must be named, or one named list"
-msgstr ""
+msgstr "A New() névtelen argumentumának az új objektum környezetének kell lennie"
 
 #. R/RClassUtils.R: gettextf("assigning as %s a class representation with internal name %s",     dQuote(Class), dQuote(def@className))
 #: R/RClassUtils.R:0
@@ -629,8 +649,9 @@ msgstr ""
 
 #. R/trace.R: gettextf("assigning over the binding of symbol %s in environment/package %s",     sQuote(what), sQuote(pname))
 #: R/trace.R:0
+#, fuzzy
 msgid "assigning over the binding of symbol %s in environment/package %s"
-msgstr ""
+msgstr "A(z) %s metódusai nem távolíthatók el zárolt környezetben/csomagban (%s)"
 
 #. R/SClasses.R: gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE",     dQuote(valueClass), sQuote(name), dQuote(cl), slotClass)
 #: R/SClasses.R:0
@@ -649,18 +670,21 @@ msgstr "A %d elemhez megadott hibás osztály (egyetlen karakterből álló kara
 
 #. R/methodsTable.R: gettextf("bad method object stored in method table, class %s",     dQuote(class(current)))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid "bad method object stored in method table, class %s"
-msgstr ""
+msgstr "nincs módszer a %s egyezik osztályhoz %s"
 
 #. R/NextMethod.R: gettextf("bad object found as method (class %s)", dQuote(class(method)))
 #: R/NextMethod.R:0
+#, fuzzy
 msgid "bad object found as method (class %s)"
-msgstr ""
+msgstr "nincs módszer a %s egyezik osztályhoz %s"
 
 #. R/is.R: gettext("both classes must be defined")
 #: R/is.R:0
+#, fuzzy
 msgid "both classes must be defined"
-msgstr ""
+msgstr "A tagosztályokat meg kell határozni: nem igaz a %s"
 
 #. R/NextMethod.R: stop("call to 'callNextMethod' does not appear to be in a 'method' or 'callNextMethod' context")
 #: R/NextMethod.R:0
@@ -679,8 +703,9 @@ msgstr ""
 
 #. R/trace.R: gettextf("cannot find an environment corresponding to package name '%s\"",     package)
 #: R/trace.R:0
+#, fuzzy
 msgid "cannot find an environment corresponding to package name '%s\""
-msgstr ""
+msgstr "nincs olyan környezet vagy csomag, amely megfelel az argumentumnak ahol=%s"
 
 #. R/BasicClasses.R: stop("cannot have more than one unnamed argument as environment")
 #: R/BasicClasses.R:0
@@ -714,8 +739,9 @@ msgstr "Nem lehet megadni a matrix() argumentumokat a ' megadásakor. Adatok\""
 
 #. R/trace.R: gettextf("cannot untrace method for %s; no method defined for this signature: %s",     sQuote(what), paste(signature, collapse = ", "))
 #: R/trace.R:0
+#, fuzzy
 msgid "cannot untrace method for %s; no method defined for this signature: %s"
-msgstr ""
+msgstr "Nem található módszer a %s aláíráshoz"
 
 #. R/trace.R: stop("cannot use 'at' argument unless the function body has the form '{ ... }'")
 #: R/trace.R:0
@@ -739,8 +765,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("class %s does not have a data part (a .Data slot) defined",     dQuote(class(object)))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "class %s does not have a data part (a .Data slot) defined"
-msgstr ""
+msgstr "a %s osztálynak nincs S3 adatrésze, ezért \"S4\" típusú; nincs S3 ekvivalens"
 
 #. R/BasicClasses.R: gettextf("class %s does not have an S3 data part, and so is of type \"S4\"; no S3 equivalent",     dQuote(class(from)))
 #: R/BasicClasses.R:0
@@ -844,8 +871,9 @@ msgstr ""
 
 #. R/MethodsListClass.R: gettextf("class generator function for class %s from package %s\n",     dQuote(object@className), sQuote(object@package))
 #: R/MethodsListClass.R:0
+#, fuzzy
 msgid "class generator function for class %s from package %s"
-msgstr ""
+msgstr "Általános függvény létrehozása %s számára a %s csomagból %s"
 
 #. R/refClass.R: gettextf("class must be a reference class representation or a character string; got an object of class %s",     dQuote(class(Class)))
 #: R/refClass.R:0
@@ -864,8 +892,9 @@ msgstr ""
 
 #. R/MethodsList.R: gettextf("default method must be a method definition, a primitive or NULL: got an object of class %s",     dQuote(class(method)))
 #: R/MethodsList.R:0
+#, fuzzy
 msgid "default method must be a method definition, a primitive or NULL: got an object of class %s"
-msgstr ""
+msgstr "Érvénytelen metódusdefiníció: várt egy függvényt, kapott egy %s osztályú objektumot"
 
 #. R/refClass.R: stop("direct calls to callSuper() are invalid:  should only be called from another method")
 #: R/refClass.R:0
@@ -924,8 +953,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("error in load action %s for package %s: %s: %s", aname,     getPackageName(where), callString, value$message)
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "error in load action %s for package %s: %s: %s"
-msgstr ""
+msgstr "Általános függvény létrehozása %s számára a %s csomagból %s"
 
 #. R/Methods.R: gettextf("error in updating S4 generic function %s; the function definition is not an S4 generic function (class %s)",     sQuote(f), dQuote(class(fdef)))
 #: R/Methods.R:0
@@ -934,8 +964,9 @@ msgstr "hiba az S4 általános függvény frissítésekor %s; a függvénydefin�
 
 #. R/RMethodUtils.R: gettextf("expanding the signature to include omitted arguments in definition: %s",     paste(sigNames[omittedSig], "= \"missing\"", collapse = ", "))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "expanding the signature to include omitted arguments in definition: %s"
-msgstr ""
+msgstr "Nem található metódus a %s függvényhez és a %s aláíráshoz"
 
 #. R/addedFunctions.R: gettextf("expected a non-empty character string for argument 'name'")
 #: R/addedFunctions.R:0
@@ -954,8 +985,9 @@ msgstr ""
 
 #. R/oldClass.R: gettextf("explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s",     to, dQuote(class(from)[1L]))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s"
-msgstr ""
+msgstr "A %s osztály \"as(x, \"%s\") <- értékére nem határoztak meg \"csere\" módszert"
 
 #. R/methodsTable.R: stop("failed to find expected group generic function: ", what)
 #: R/methodsTable.R:0
@@ -1020,8 +1052,9 @@ msgstr "általános függvény %s nem található eltávolításra"
 
 #. R/Methods.R: gettextf("generic function supplied was not created for %s",     sQuote(name))
 #: R/Methods.R:0
+#, fuzzy
 msgid "generic function supplied was not created for %s"
-msgstr ""
+msgstr "nem található általános függvény a következőhöz: \"%s\""
 
 #. R/Methods.R: gettextf("generic names differ: %s, %s", .dQ(f1@generic), .dQ(f2@generic))
 #: R/Methods.R:0
@@ -1075,8 +1108,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("in method for %s with signature %s: ", sQuote(f), sQuote(msig))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "in method for %s with signature %s:"
-msgstr ""
+msgstr "Nem található módszer a %s aláíráshoz"
 
 #. R/oldClass.R: gettextf("inconsistent old-style class information for %s (maybe mixing old and new classes?)",     dQuote(cl))
 #: R/oldClass.R:0
@@ -1110,13 +1144,15 @@ msgstr ""
 
 #. R/refClass.R: stop("invalid 'Class' argument:  should be a single string")
 #: R/refClass.R:0
+#, fuzzy
 msgid "invalid 'Class' argument:  should be a single string"
-msgstr ""
+msgstr "A %d elemhez megadott hibás osztály (egyetlen karakterből álló karakterláncnak kell lennie)"
 
 #. R/show.R: gettextf("invalid 'ignore' argument; should be a class definition or a character vector, got an object of class %s",     dQuote(class(ignore)))
 #: R/show.R:0
+#, fuzzy
 msgid "invalid 'ignore' argument; should be a class definition or a character vector, got an object of class %s"
-msgstr ""
+msgstr "a \"kényszerítés\" argumentumnak a \"setIs\" -hez egy argumentum függvényének kell lennie, és a %s osztály objektumát kapta"
 
 #. R/MethodsList.R: stop("invalid 'package' slot or attribute, wrong length")
 #: R/MethodsList.R:0
@@ -1125,8 +1161,9 @@ msgstr ""
 
 #. R/trace.R: gettextf("invalid 'source' argument: expected file names or a connection but got an object of class %s",     dQuote(class(source)[[1L]]))
 #: R/trace.R:0
+#, fuzzy
 msgid "invalid 'source' argument: expected file names or a connection but got an object of class %s"
-msgstr ""
+msgstr "Érvénytelen metódusdefiníció: várt egy függvényt, kapott egy %s osztályú objektumot"
 
 #. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
@@ -1145,8 +1182,9 @@ msgstr ""
 
 #. R/show.R: gettextf("invalid call to 'classLabel': expected a name or a class definition, got an object of class %s",     classLabel(class(Class)))
 #: R/show.R:0
+#, fuzzy
 msgid "invalid call to 'classLabel': expected a name or a class definition, got an object of class %s"
-msgstr ""
+msgstr "Érvénytelen metódusdefiníció: várt egy függvényt, kapott egy %s osztályú objektumot"
 
 #. R/SClasses.R: gettextf("invalid class %s object", dQuote(Class))
 #: R/SClasses.R:0
@@ -1165,8 +1203,9 @@ msgstr ""
 
 #. R/MethodsList.R: stop("invalid first argument: should be the name of the first argument in the dispatch")
 #: R/MethodsList.R:0
+#, fuzzy
 msgid "invalid first argument: should be the name of the first argument in the dispatch"
-msgstr ""
+msgstr "Az első argumentumnak az egyik általánosabb függvény nevének kell lennie (a %s osztály GOT objektumának)"
 
 #. R/methodsTable.R: gettextf("invalid group generic function in search for inherited method (class %s)",     dQuote(class(gen)))
 #: R/methodsTable.R:0
@@ -1205,13 +1244,15 @@ msgstr ""
 
 #. R/methodsTable.R: gettextf("invalid object in methods table (%s), expected a method, got an object of class %s",     sQuote(what), dQuote(class(method)))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid "invalid object in methods table (%s), expected a method, got an object of class %s"
-msgstr ""
+msgstr "Érvénytelen metódusdefiníció: várt egy függvényt, kapott egy %s osztályú objektumot"
 
 #. R/methodsTable.R: gettextf("invalid or unset methods table in generic function %s",     sQuote(fdef@generic))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid "invalid or unset methods table in generic function %s"
-msgstr ""
+msgstr "Az \"F\" argumentum függvényének általános függvénynek kell lennie"
 
 #. R/refClass.R: gettextf("invalid replacement: reference class field %s is read-only",     sQuote(fieldName))
 #: R/refClass.R:0
@@ -1233,8 +1274,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("making a generic for special function %s", sQuote(f))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "making a generic for special function %s"
-msgstr ""
+msgstr "Általános függvény létrehozása %s függvényből %s-ban"
 
 #. R/trace.R: warning("making a traced version of a special; arguments may be altered")
 #: R/trace.R:0
@@ -1277,8 +1319,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("missing function for load action: %s", what)
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "missing function for load action: %s"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/MethodsListClass.R: gettextf("missing package slot (%s) in object of class %s (package info added)",     packageSlot(co), dQuote(class(.Object)))
 #: R/MethodsListClass.R:0
@@ -1302,8 +1345,9 @@ msgstr ""
 
 #. R/SClasses.R: gettextf("multiple class definitions for %s from packages: %s; picking the first",     dQuote(className), paste(sQuote(pkgs), collapse = ", "))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "multiple class definitions for %s from packages: %s; picking the first"
-msgstr ""
+msgstr "Általános függvény létrehozása %s számára a %s csomagból %s"
 
 #. R/RMethodUtils.R: gettextf("multiple definitions exist for class %s, but the supplied package (%s) is not one of them (%s)",     dQuote(classi), sQuote(pkgi), paste(dQuote(get(classi, envir = .classTable)),         collapse = ", "))
 #: R/RMethodUtils.R:0
@@ -1352,8 +1396,9 @@ msgstr "meg kell adnia egy függvényvázat a %s számára, explicit módon vagy
 
 #. R/RMethodUtils.R: gettextf("must supply either a generic function or a function as default for %s",     sQuote(f))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "must supply either a generic function or a function as default for %s"
-msgstr ""
+msgstr "Általános függvény létrehozása %s függvényből %s-ban"
 
 #. R/method.skeleton.R: stop("need a definition for the method here")
 #: R/method.skeleton.R:0
@@ -1367,8 +1412,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("no '.Data' slot defined for class %s", dQuote(class(object)))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "no '.Data' slot defined for class %s"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/ClassExtensions.R: gettextf("no 'replace' method was defined for 'as(x, \"%s\") <- value' for class %s",     to, dQuote(class(from)))
 #: R/ClassExtensions.R:0
@@ -1382,28 +1428,33 @@ msgstr ""
 
 #. R/fixPrevious.R: gettextf("no definition for the class of %s (class %s) found",     sQuote(what), dQuote(class))
 #: R/fixPrevious.R:0
+#, fuzzy
 msgid "no definition for the class of %s (class %s) found"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/RMethodUtils.R: gettextf("no definition found for class %s", dQuote(classi))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "no definition found for class %s"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/refClass.R: gettextf("no definition found for inherited class: %s", paste0("\"",     contains[missingDefs], "\"", collapse = ", "))
 #: R/refClass.R:0
+#, fuzzy
 msgid "no definition found for inherited class: %s"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/SClasses.R: gettextf("no definition of %s to use for %s", dQuote(Class),     unique)
 #: R/SClasses.R:0
+#, fuzzy
 msgid "no definition of %s to use for %s"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/promptClass.R: gettextf("no definition of class %s found", dQuote(clName))
 #: R/promptClass.R:0
+#, fuzzy
 msgid "no definition of class %s found"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/RClassUtils.R: gettextf("no definition of inheritance from %s to %s, though the relation was implied by the setIs() from %s",     .dQ(what), .dQ(def2@className), .dQ(class))
 #: R/RClassUtils.R:0
@@ -1427,21 +1478,22 @@ msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/addedFunctions.R: gettextf("no function %s found", sQuote(name))
 #: R/addedFunctions.R:0
+#, fuzzy
 msgid "no function %s found"
-msgstr ""
+msgstr "nincs általános függvény %s"
 
 #. R/trace.R: gettextf("no function definition for %s found", sQuote(what))
 #: R/trace.R:0
+#, fuzzy
 msgid "no function definition for %s found"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/method.skeleton.R: gettextf("no function definition found for %s", sQuote(generic))
 #: R/method.skeleton.R:0
+#, fuzzy
 msgid "no function definition found for %s"
-msgstr ""
+msgstr "nem található általános függvény a következőhöz: \"%s\""
 
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 #. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 #: R/Methods.R:0
 msgid "no generic function %s found"
@@ -1449,13 +1501,15 @@ msgstr "nincs általános függvény %s"
 
 #. R/MethodsList.R: gettextf("no generic function found corresponding to %s", sQuote(f))
 #: R/MethodsList.R:0
+#, fuzzy
 msgid "no generic function found corresponding to %s"
-msgstr ""
+msgstr "nem található általános függvény a következőhöz: \"%s\""
 
 #. R/RMethodUtils.R: gettextf("no generic function found for %s", sQuote(f))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "no generic function found for %s"
-msgstr ""
+msgstr "nem található általános függvény a következőhöz: \"%s\""
 
 #. R/Methods.R: gettextf("no generic function found for '%s'", f)
 #: R/Methods.R:0
@@ -1491,8 +1545,9 @@ msgstr "Nem található módszer a %s aláíráshoz"
 
 #. R/trace.R: gettextf("no method in methods table for %s for signature %s",     sQuote(what), sQuote(signature))
 #: R/trace.R:0
+#, fuzzy
 msgid "no method in methods table for %s for signature %s"
-msgstr ""
+msgstr "Nem található módszer a %s aláíráshoz"
 
 #. R/as.R: gettextf("no method or default for as() replacement of %s with Class=\"%s\"",     dQuote(thisClass), Class)
 #: R/as.R:0
@@ -1501,8 +1556,9 @@ msgstr ""
 
 #. R/as.R: gettextf("no method or default for coercing %s to %s", dQuote(thisClass),     dQuote(Class))
 #: R/as.R:0
+#, fuzzy
 msgid "no method or default for coercing %s to %s"
-msgstr ""
+msgstr "Nem található metódus a %s függvényhez és a %s aláíráshoz"
 
 #. R/RMethodUtils.R: gettextf("no method or default matching the \"...\" arguments in %s",     deparse(sys.call(sys.parent()), nlines = 1))
 #: R/RMethodUtils.R:0
@@ -1516,20 +1572,22 @@ msgstr ""
 
 #. R/methodsTable.R: gettextf("no methods table for generic %s from package %s in package %s",     sQuote(generic@generic), sQuote(generic@package), sQuote(getPackageName(where)))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid "no methods table for generic %s from package %s in package %s"
-msgstr ""
+msgstr "Általános függvény létrehozása %s számára a %s csomagból %s"
 
 #. R/addedFunctions.R: gettextf("no non-generic function %s found", sQuote(name))
 #: R/addedFunctions.R:0
+#, fuzzy
 msgid "no non-generic function %s found"
-msgstr ""
+msgstr "nincs általános függvény %s"
 
 #. R/SClasses.R: gettextf("no package name supplied and no class definition found for %s",     dQuote(className))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "no package name supplied and no class definition found for %s"
-msgstr ""
+msgstr "nem található általános függvény a következőhöz: \"%s\""
 
-#. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 #. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 #: R/RMethodUtils.R:0
 msgid "no suitable arguments to dispatch methods in this function"
@@ -1547,8 +1605,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("non-generic function '%s' given to findMethods()",     f)
 #: R/Methods.R:0
+#, fuzzy
 msgid "non-generic function '%s' given to findMethods()"
-msgstr ""
+msgstr "nincs általános függvény %s"
 
 #. R/refClass.R: gettextf("non-local assignment to method names is not allowed\n    %s\n( in method %s for class %s)",     paste(unlist(assigned$globals)[globalsInMethods], collapse = "; "),     methodName, className)
 #: R/refClass.R:0
@@ -1571,7 +1630,6 @@ msgstr ""
 msgid "none of the objects in the source code could be found:  need to attach or specify the package"
 msgstr ""
 
-#. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #: R/refClass.R:0
 msgid "not a reference class: %s"
@@ -1634,8 +1692,9 @@ msgstr ""
 
 #. R/Methods.R: gettext("original function is prohibited as a generic function")
 #: R/Methods.R:0
+#, fuzzy
 msgid "original function is prohibited as a generic function"
-msgstr ""
+msgstr "Az \"F\" argumentum függvényének általános függvénynek kell lennie"
 
 #. R/trace.R: gettextf("package %s is not attached and no namespace found for it",     sQuote(package))
 #: R/trace.R:0
@@ -1674,13 +1733,15 @@ msgstr "A helyettesítő értéknek ki kell terjesztenie a %s osztályt, kapott 
 
 #. R/oldClass.R: gettextf("restoring definition of class %s", dQuote(cl))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "restoring definition of class %s"
-msgstr ""
+msgstr "nincs létező definíciója a %s függvénynek"
 
 #. R/trace.R: gettextf("setting a method over the binding of symbol %s in environment/package %s",     sQuote(what), sQuote(getPackageName(where)))
 #: R/trace.R:0
+#, fuzzy
 msgid "setting a method over the binding of symbol %s in environment/package %s"
-msgstr ""
+msgstr "A(z) %s metódusai nem távolíthatók el zárolt környezetben/csomagban (%s)"
 
 #. R/Methods.R: gettextf("signatures differ:  (%s), (%s)", paste(f1@signature,     collapse = ", "), paste(f2@signature, collapse = ", "))
 #: R/Methods.R:0
@@ -1694,8 +1755,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "single string; got an object of class %s"
-msgstr ""
+msgstr "Érvénytelen metódusdefiníció: várt egy függvényt, kapott egy %s osztályú objektumot"
 
 #. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what),     dQuote(slots1[[what]]), dQuote(slots2[[what]]))
 #: R/oldClass.R:0
@@ -1714,13 +1776,15 @@ msgstr ""
 
 #. R/methodsTable.R: gettextf("the \"ambiguousMethodSelection\" option should be a function to be called as the condition action; got an object of class %s",     dQuote(class(condAction)))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid "the \"ambiguousMethodSelection\" option should be a function to be called as the condition action; got an object of class %s"
-msgstr ""
+msgstr "a \"kényszerítés\" argumentumnak a \"setIs\" -hez egy argumentum függvényének kell lennie, és a %s osztály objektumát kapta"
 
 #. R/RMethodUtils.R: gettextf("the %s argument must be NULL or a generic function object; got an object of class %s",     sQuote("genericFunction"), dQuote(class(genericFunction)))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "the %s argument must be NULL or a generic function object; got an object of class %s"
-msgstr ""
+msgstr "Az első argumentumnak az egyik általánosabb függvény nevének kell lennie (a %s osztály GOT objektumának)"
 
 #. R/RClassUtils.R: gettextf("the '%s' list for class %s, includes an undefined class %s",     if (superClassCase) "superClass" else "subClass", dQuote(className),     dQuote(.className(by)))
 #: R/RClassUtils.R:0
@@ -1739,8 +1803,9 @@ msgstr "a \"kényszerítés\" argumentumnak a \"setIs\" -hez egy argumentum füg
 
 #. R/refClass.R: gettextf("the 'contains' argument should be the names of superclasses:  got an element of class %s",     dQuote(class(what)))
 #: R/refClass.R:0
+#, fuzzy
 msgid "the 'contains' argument should be the names of superclasses:  got an element of class %s"
-msgstr ""
+msgstr "az \"S3Class\" argumentumnak %s szuperosztálynak kell lennie: ez nem igaz a %s osztályra"
 
 #. R/ClassExtensions.R: gettextf("the 'replace' argument to setIs() should be a function of 2 or 3 arguments, got an object of class %s",     dQuote(class(replace)))
 #: R/ClassExtensions.R:0
@@ -1763,7 +1828,6 @@ msgid "the body of the generic function for %s calls 'standardGeneric' to dispat
 msgstr ""
 
 #. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
-#. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
 #: R/refClass.R:0
 msgid "the class of field %s in the object is not compatible with the desired class %s in the target"
 msgstr ""
@@ -1774,15 +1838,15 @@ msgid "the computation: 'as(object,\"%s\") <- value' is valid when object has cl
 msgstr "az 'as(object,\"%s\") <- value' számítás csak akkor érvényes, ha az objektum csak akkor rendelkezik %s osztállyal, ha 'is(value, \"%s\")' TRUE ('class(value)' was %s)"
 
 #. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
-#. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #: R/refClass.R:0
 msgid "the definition of class %s in package %s is locked so fields may not be modified"
 msgstr ""
 
 #. R/refClass.R: gettextf("the definition of class %s in package %s is locked, methods may not be redefined",     dQuote(def@className), sQuote(def@package))
 #: R/refClass.R:0
+#, fuzzy
 msgid "the definition of class %s in package %s is locked, methods may not be redefined"
-msgstr ""
+msgstr "A %s függvény és a %s aláírás módszere le van zárva, és nem definiálható újra"
 
 #. R/trace.R: stop("the editing in trace() can only change the body of the function, not the arguments or defaults")
 #: R/trace.R:0
@@ -1791,8 +1855,9 @@ msgstr ""
 
 #. R/trace.R: gettextf("the editing in trace() can only change the body of the function; got an object of class %s",     dQuote(class(def2)))
 #: R/trace.R:0
+#, fuzzy
 msgid "the editing in trace() can only change the body of the function; got an object of class %s"
-msgstr ""
+msgstr "Érvénytelen metódusdefiníció: várt egy függvényt, kapott egy %s osztályú objektumot"
 
 #. R/Methods.R: gettextf("the environment %s is locked; cannot assign methods for function %s",     sQuote(getPackageName(where)), sQuote(f))
 #: R/Methods.R:0
@@ -1811,8 +1876,9 @@ msgstr "A tagosztályokat meg kell határozni: nem igaz a %s"
 
 #. R/trace.R: gettextf("the method for %s for this signature was not being traced",     sQuote(what))
 #: R/trace.R:0
+#, fuzzy
 msgid "the method for %s for this signature was not being traced"
-msgstr ""
+msgstr "A %s függvény és a %s aláírás módszere le van zárva, és nem definiálható újra"
 
 #. R/Methods.R: gettextf("the method for function %s and signature %s is sealed and cannot be re-defined",     sQuote(f), .signatureString(fdef, signature))
 #: R/Methods.R:0
@@ -1888,8 +1954,9 @@ msgstr ""
 
 #. R/methodsTable.R: stop("trying to find a methods table in a non-generic function")
 #: R/methodsTable.R:0
+#, fuzzy
 msgid "trying to find a methods table in a non-generic function"
-msgstr ""
+msgstr "Az \"F\" argumentum függvényének általános függvénynek kell lennie"
 
 #. R/MethodsList.R: gettextf("trying to match a method signature of class %s; expects a list or a character vector",     dQuote(class(signature)))
 #: R/MethodsList.R:0
@@ -1923,8 +1990,9 @@ msgstr ""
 
 #. R/methodsTable.R: gettextf("unable to find an inherited method for function %s for signature %s",     sQuote(fdef@generic), sQuote(cnames))
 #: R/methodsTable.R:0
+#, fuzzy
 msgid "unable to find an inherited method for function %s for signature %s"
-msgstr ""
+msgstr "Nem található metódus a %s függvényhez és a %s aláíráshoz"
 
 #. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 #: R/RClassUtils.R:0
@@ -1943,8 +2011,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettext("undefined slot classes in definition of %s: %s", domain = "R-methods")
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "undefined slot classes in definition of %s: %s"
-msgstr ""
+msgstr "A %s alapértelmezett függvénydefiníciójának visszaállítása"
 
 #. R/RClassUtils.R: gettextf("undefined subclass %s of class %s; definition not updated",     .dQ(what), .dQ(def@className))
 #: R/RClassUtils.R:0
@@ -1973,8 +2042,9 @@ msgstr "A New() névtelen argumentumának az új objektum környezetének kell l
 
 #. R/refClass.R: gettextf("unnamed arguments to $new() must be objects from a reference class; got an object of class %s",     dQuote(class(super)))
 #: R/refClass.R:0
+#, fuzzy
 msgid "unnamed arguments to $new() must be objects from a reference class; got an object of class %s"
-msgstr ""
+msgstr "A New() névtelen argumentumának az új objektum környezetének kell lennie"
 
 #. R/SClasses.R: stop("validity method must be NULL or a function of one argument")
 #: R/SClasses.R:0
@@ -2044,10 +2114,11 @@ msgstr[1] ""
 
 #. R/MethodsList.R: ngettext(sum(is.na(which)), "in the method signature for function %s invalid argument name in the signature: %s",     "in the method signature for function %s invalid argument names in the signature: %s")
 #: R/MethodsList.R:0
+#, fuzzy
 msgid "in the method signature for function %s invalid argument name in the signature: %s"
 msgid_plural "in the method signature for function %s invalid argument names in the signature: %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nem található metódus a %s függvényhez és a %s aláíráshoz"
+msgstr[1] "Nem található metódus a %s függvényhez és a %s aláíráshoz"
 
 #. R/SClasses.R: ngettext(sum(is.na(which)), "invalid name for slot of class %s: %s",     "invalid names for slots of class %s: %s")
 #: R/SClasses.R:0
@@ -2076,10 +2147,11 @@ msgstr[1] ""
 
 #. R/MethodsList.R: ngettext(length(unknown), "no definition for class %s", "no definition for classes %s")
 #: R/MethodsList.R:0
+#, fuzzy
 msgid "no definition for class %s"
 msgid_plural "no definition for classes %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "nincs létező definíciója a %s függvénynek"
+msgstr[1] "nincs létező definíciója a %s függvénynek"
 
 #. R/promptClass.R: ngettext(length(whereClass), "no definition of class %s in the specified position, %s, definition on : %s",     "no definition of class %s in the specified position, %s, definitions on : %s")
 #: R/promptClass.R:0
@@ -2089,12 +2161,12 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
-#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "non-argument found in the signature: %s"
 msgid_plural "non-arguments found in the signature: %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nem található módszer a %s aláíráshoz"
+msgstr[1] "Nem található módszer a %s aláíráshoz"
 
 #. R/is.R: ngettext(length(bad), "slot in class %s must extend corresponding slot in class %s: fails for %s",     "slots in class %s must extend corresponding slots in class %s: fails for %s")
 #: R/is.R:0

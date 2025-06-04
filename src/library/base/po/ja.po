@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-24 17:06+0200\n"
+"POT-Creation-Date: 2025-06-01 10:55+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -4663,7 +4663,7 @@ msgstr ""
 msgid "bad opcode"
 msgstr "opcode が不適当です"
 
-#: src/main/eval.cpp:6838
+#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "'x %s y' の %s の型が不正です"
@@ -5358,16 +5358,6 @@ msgstr "演算が可能なのは数値、論理値、そして複素数型のみ
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "'%s' 演算子には 2 つの引数が必要です"
-
-#: src/main/logic.cpp:307
-#, c-format
-msgid "invalid 'x' type in 'x %s y'"
-msgstr "'x %s y' の 'x' の型が不正です"
-
-#: src/main/logic.cpp:316
-#, c-format
-msgid "invalid 'y' type in 'x %s y'"
-msgstr "'x %s y' の 'y' の型が不正です"
 
 #: src/main/logic.cpp:394
 msgid "Unary operator `!' called with two arguments"
@@ -10416,6 +10406,14 @@ msgstr "X11 モジュールをロードできません"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 が利用できません"
+
+#, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "'x %s y' の 'x' の型が不正です"
+
+#, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "'x %s y' の 'y' の型が不正です"
 
 #, fuzzy
 #~ msgid "cannot set attribute on a symbol"

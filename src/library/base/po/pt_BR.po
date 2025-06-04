@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-24 17:06+0200\n"
+"POT-Creation-Date: 2025-06-01 10:55+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -4675,7 +4675,7 @@ msgstr ""
 msgid "bad opcode"
 msgstr "Código de operador defeituoso"
 
-#: src/main/eval.cpp:6838
+#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "tipo '%s' inválido em 'x %s y'"
@@ -5384,16 +5384,6 @@ msgstr "operações são possíveis somente para tipos numéricos, lógicos ou c
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "operador '%s' requer 2 argumentos"
-
-#: src/main/logic.cpp:307
-#, c-format
-msgid "invalid 'x' type in 'x %s y'"
-msgstr "tipo de 'x' inválido em 'x %s y'"
-
-#: src/main/logic.cpp:316
-#, c-format
-msgid "invalid 'y' type in 'x %s y'"
-msgstr "tipo de 'y' inválido em 'x %s y'"
 
 #: src/main/logic.cpp:394
 msgid "Unary operator `!' called with two arguments"
@@ -10493,6 +10483,14 @@ msgstr "módulo X11 não pode ser carregado"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 não está disponível"
+
+#, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "tipo de 'x' inválido em 'x %s y'"
+
+#, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "tipo de 'y' inválido em 'x %s y'"
 
 #~ msgid "cannot set attribute on a symbol"
 #~ msgstr "não é possível definir atributo em um símbolo"

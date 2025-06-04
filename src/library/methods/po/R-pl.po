@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -93,7 +93,6 @@ msgstr "%s nie jest metodą dla klasy referencyjnej %s"
 msgid "%s is not a reference class"
 msgstr "%s nie jest klasą referencyjną"
 
-#. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #: R/SClasses.R:0
 msgid "%s is not a slot in class %s"
@@ -189,7 +188,6 @@ msgstr "'class2' musi być nazwą klasy albo definicją klasy"
 msgid "'externalptr' objects cannot be initialized from new()"
 msgstr "obiekty 'externalptr' nie mogą być inicjalizowane z funkcji 'new()'"
 
-#. R/Methods.R: stop("'file' must be a character string or a connection")
 #. R/Methods.R: stop("'file' must be a character string or a connection")
 #: R/Methods.R:0
 msgid "'file' must be a character string or a connection"
@@ -463,7 +461,6 @@ msgid "The prototype for class %s has undefined slot(s): %s"
 msgstr "Prototyp dla klasy %s, zawiera w sobie niezdefiniowane gniazda: %s"
 
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
-#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 #: R/MethodsList.R:0
 msgid "Use %s instead."
 msgstr "Użyj w zamian %s."
@@ -484,8 +481,7 @@ msgid "a call to superClass() is in the method %s but there is no superclass def
 msgstr "wywołanie 'superClass()' jest w metodzie %s, ale brak tam definicji superklasy tej metody dla klasy %s"
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
-#. R/trace.R: stop("a function for argument 'f' must be a generic function")
-#: R/Methods.R:0 R/trace.R:0
+#: R/Methods.R:0
 msgid "a function for argument 'f' must be a generic function"
 msgstr "funkcja dla argumentu 'f' musi być ogólną funkcją"
 
@@ -1460,8 +1456,6 @@ msgid "no function definition found for %s"
 msgstr "nie znaleziono definicji funkcji dla %s"
 
 #. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 #: R/Methods.R:0
 msgid "no generic function %s found"
 msgstr "nie znaleziono ogólnej funkcji %s"
@@ -1551,7 +1545,6 @@ msgid "no package name supplied and no class definition found for %s"
 msgstr "nie dostarczono nazwy pakietu oraz nie znaleziono definicji klasy dla klasy %s"
 
 #. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
-#. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 #: R/RMethodUtils.R:0
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr "brak odpowiednich argumentów do rozdzielenia metod w tej funkcji"
@@ -1598,7 +1591,6 @@ msgstr ""
 msgid "none of the objects in the source code could be found:  need to attach or specify the package"
 msgstr "żaden z obiektów w kodzie źródłowym nie mógł zostać znaleziony:  potrzeba dołączyć lub określić pakiet"
 
-#. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #: R/refClass.R:0
 msgid "not a reference class: %s"
@@ -1790,7 +1782,6 @@ msgid "the body of the generic function for %s calls 'standardGeneric' to dispat
 msgstr "ciało ogólnej funkcji dla %s wywołuje 'standardGeneric' by rozdzielić pod inna nazwą ('%s')!"
 
 #. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
-#. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
 #: R/refClass.R:0
 msgid "the class of field %s in the object is not compatible with the desired class %s in the target"
 msgstr "klasa pola %s w obiekcie nie jest zgodna z pożądaną klasą %s w celu"
@@ -1800,7 +1791,6 @@ msgstr "klasa pola %s w obiekcie nie jest zgodna z pożądaną klasą %s w celu"
 msgid "the computation: 'as(object,\"%s\") <- value' is valid when object has class %s only if 'is(value, \"%s\")' is TRUE ('class(value)' was %s)"
 msgstr "obliczenie: 'as(object,\"%s\") <- value' jest poprawne gdy obiekt posiada klasę %s tylko jeśli 'is(value, \"%s\")' jest TRUE ('class(value)' było %s)"
 
-#. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #: R/refClass.R:0
 msgid "the definition of class %s in package %s is locked so fields may not be modified"
@@ -2137,7 +2127,6 @@ msgstr[0] "brak definicji klasy %s we wskazanym położeniu, %s, definicja: %s"
 msgstr[1] "brak definicji klasy %s we wskazanym położeniu, %s, definicje: %s"
 msgstr[2] "brak definicji klasy %s we wskazanym położeniu, %s, definicje: %s"
 
-#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #: R/RMethodUtils.R:0
 msgid "non-argument found in the signature: %s"

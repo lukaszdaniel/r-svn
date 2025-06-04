@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-05 17:15\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -68,8 +68,6 @@ msgid "%s namespace cannot be unloaded:"
 msgstr "%s 名前空間はアンロード出来ません"
 
 #. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
-#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
-#. R/dates.R: gettextf("%s not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
 msgid "%s not defined for \"Date\" objects"
 msgstr "%s は \"Date\" オブジェクトに対して定義されていません"
@@ -90,8 +88,6 @@ msgid "%s not found on search path, using pos = 2"
 msgstr "%s は検索パス上には見つかりませんでした。pos = 2 を使用します"
 
 #. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
-#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
-#. R/factor.R: gettextf("%s not meaningful for factors", sQuote(.Generic))
 #: R/factor.R:0
 msgid "%s not meaningful for factors"
 msgstr "%s は因子に対しては無意味です"
@@ -107,12 +103,10 @@ msgid "%sPackages in library %s:"
 msgstr "%s パッケージ （ライブラリ %s 中):"
 
 #. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
-#. R/windows/system.R: gettextf("'%s' could not be run", cmd0)
 #: R/windows/system.R:0
 msgid "'%s' could not be run"
 msgstr "'%s' を実行できませんでした"
 
-#. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
 #. R/windows/system.R: gettextf("'%s' execution failed with error code %d", cmd0, res)
 #: R/windows/system.R:0
 msgid "'%s' execution failed with error code %d"
@@ -134,13 +128,10 @@ msgid "'%s' is not a function, character or symbol"
 msgstr "'%s' は関数、文字、またはシンボルではありません"
 
 #. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
-#. R/RNG.R: gettextf("'%s' is not a valid abbreviation of an RNG", kind)
 #: R/RNG.R:0
 msgid "'%s' is not a valid abbreviation of an RNG"
 msgstr "'%s' は RNG の有効な省略名ではありません"
 
-#. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
-#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
 #. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
 #. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
 #: R/RNG.R:0
@@ -176,8 +167,6 @@ msgstr "'to' は \"Date\" オブジェクトでなければなりません"
 
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
-#. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
-#. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
 #. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
 #: R/RNG.R:0 R/connections.R:0 R/format.R:0
@@ -186,7 +175,6 @@ msgid "'%s' must be a character string"
 msgstr "引数 'object' は空でない単一の文字列でなければなりません"
 
 #. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
-#. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
@@ -194,11 +182,7 @@ msgid "'%s' must be a non-empty character string"
 msgstr "引数 'object' は空でない単一の文字列でなければなりません"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
-#. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.names")
 #: R/all.equal.R:0
 msgid "'%s' must be logical"
@@ -227,15 +211,10 @@ msgid "'%s' must be of length 1"
 msgstr "'by' は長さ 1 でなければなりません"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
 msgid "'%s' not defined for \"POSIXt\" objects"
 msgstr "'%s' は \"POSIXt\" オブジェクトに対しては定義されていません"
 
-#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
-#. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
 #. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
 #: R/datetime.R:0
 msgid "'%s' not defined for \"difftime\" objects"
@@ -251,7 +230,6 @@ msgstr "'%s' は \"numeric_version\" オブジェクトに対しては定義さ�
 msgid "'%s' not defined for ordered factors"
 msgstr "'%s' は順序因子に対しては定義されません"
 
-#. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #. R/library.R: warning("'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #: R/library.R:0
 msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
@@ -360,7 +338,6 @@ msgid "'compress' must be logical or character"
 msgstr "'compress' は論理値または文字列でなければなりません"
 
 #. R/serialize.R: stop("'connection' must be a connection")
-#. R/serialize.R: stop("'connection' must be a connection")
 #: R/serialize.R:0
 msgid "'connection' must be a connection"
 msgstr "'connection' はコネクションでなければなりません"
@@ -437,7 +414,6 @@ msgid "'file' must be NULL, a connection or a character string"
 msgstr "'file' は NULL、コネクション、または文字列でなければなりません"
 
 #. R/dcf.R: stop("'file' must be a character string or connection")
-#. R/dcf.R: stop("'file' must be a character string or connection")
 #. R/scan.R: stop("'file' must be a character string or connection")
 #: R/dcf.R:0 R/scan.R:0
 msgid "'file' must be a character string or connection"
@@ -466,7 +442,6 @@ msgid "'formula' must be a formula"
 msgstr "'from' は raw または文字でなければなりません"
 
 #. R/seq.R: stop("'from' must be a finite number")
-#. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
 #, fuzzy
 msgid "'from' must be a finite number"
@@ -477,7 +452,6 @@ msgstr "'from' は \"Date\" オブジェクトでなければなりません"
 msgid "'from' must be raw or character"
 msgstr "'from' は raw または文字でなければなりません"
 
-#. R/formals.R: warning("'fun' is not a function")
 #. R/formals.R: warning("'fun' is not a function")
 #: R/formals.R:0
 #, fuzzy
@@ -490,7 +464,6 @@ msgstr "ハンドラーは関数でなければなりません"
 msgid "'headers' must have names and must not be NA"
 msgstr "'x' は名前付きの次元名を持たなければなりません"
 
-#. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #: R/New-Internal.R:0
 msgid "'iconvlist' is not available on this system"
@@ -529,7 +502,6 @@ msgid "'input' and 'target' must be character vectors"
 msgstr "'input' そして 'target' は文字ベクトルでなければなりません"
 
 #. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
-#. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
 #: R/unix/system.unix.R:0
 msgid "'input' must be a character vector or 'NULL'"
 msgstr "'input' は文字ベクトルまたは 'NULL' でなければなりません"
@@ -552,7 +524,6 @@ msgid "'intern' must be TRUE or FALSE"
 msgstr "'intern' は TRUE か FALSE でなければなりません"
 
 #. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
 #: R/windows/system.R:0
 msgid "'invisible' must be TRUE or FALSE"
 msgstr "'invisible' は TRUE か FALSE でなければなりません"
@@ -562,7 +533,6 @@ msgstr "'invisible' は TRUE か FALSE でなければなりません"
 msgid "'k' is too large"
 msgstr "'k' は大きすぎます"
 
-#. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
 #, fuzzy
@@ -588,7 +558,6 @@ msgstr "長さは非負の数値でなければなりません"
 msgid "'local' must be TRUE, FALSE or an environment"
 msgstr "'local' は TRUE か FALSE 、または環境でなければなりません"
 
-#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
 #: R/windows/system.R:0
 msgid "'minimized' must be TRUE or FALSE"
@@ -626,17 +595,11 @@ msgid "'pos=1' is not possible and has been warned about for years"
 msgstr "*** 'pos=1' は不可能です。今は 'pos=2' と設定します"
 
 #. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
-#. R/qr.R: stop("'qr' and 'y' must have the same number of rows")
 #: R/qr.R:0
 msgid "'qr' and 'y' must have the same number of rows"
 msgstr "'qr' そして 'y' は同じ行数を持たなければなりません"
 
 #. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
 #: R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
@@ -693,8 +656,6 @@ msgid "'stdout' must be of length 1"
 msgstr "'stdout' は長さ 1 でなければなりません"
 
 #. R/frametools.R: stop("'subset' must be logical")
-#. R/frametools.R: stop("'subset' must be logical")
-#. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
 msgid "'subset' must be logical"
 msgstr "'subset' は論理値でなければなりません"
@@ -737,7 +698,6 @@ msgid "'tzone' attributes are inconsistent"
 msgstr "'tzone' 属性は整合性がありません"
 
 #. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
-#. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
 #: R/kappa.R:0
 #, fuzzy
 msgid "'uplo' must be \"U\" or \"L\""
@@ -770,8 +730,6 @@ msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose' が TRUE で 'echo' はそうではありません。'echo < - TRUE' とします"
 
 #. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
 #. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
 #: R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'wait' must be TRUE or FALSE"
@@ -841,9 +799,6 @@ msgid "'x' must be a vector of an atomic type"
 msgstr "'x' はアトミックな型のベクトルでなければなりません"
 
 #. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
-#. R/colSums.R: stop("'x' must be an array of at least two dimensions")
 #: R/colSums.R:0
 msgid "'x' must be an array of at least two dimensions"
 msgstr "'x' は少なくとも二次元の配列でなければなりません"
@@ -870,7 +825,6 @@ msgstr ""
 msgid "'x' must be numeric"
 msgstr "'x' は数値でなければなりません"
 
-#. R/array.R: stop("'x' must have named dimnames")
 #. R/array.R: stop("'x' must have named dimnames")
 #. R/sweep.R: stop("'x' must have named dimnames")
 #: R/array.R:0 R/sweep.R:0
@@ -929,7 +883,6 @@ msgid "-- done running .onLoad for"
 msgstr ""
 
 #. R/namespace.R: message("-- loading code for ", dQuote(package))
-#. R/namespace.R: message("-- loading code for ", dQuote(package))
 #: R/namespace.R:0
 msgid "-- loading code for"
 msgstr ""
@@ -946,13 +899,15 @@ msgstr ""
 
 #. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
 #: R/namespace.R:0
+#, fuzzy
 msgid "-- processing S4 stuff for"
-msgstr ""
+msgstr "間違ったクラスです"
 
 #. R/namespace.R: message("-- processing imports for ", dQuote(package))
 #: R/namespace.R:0
+#, fuzzy
 msgid "-- processing imports for"
-msgstr ""
+msgstr "間違ったクラスです"
 
 #. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
 #: R/namespace.R:0
@@ -982,8 +937,9 @@ msgstr "間違ったクラスです"
 
 #. R/namespace.R: message("--- processing exports for ", dQuote(package))
 #: R/namespace.R:0
+#, fuzzy
 msgid "--- processing exports for"
-msgstr ""
+msgstr "間違ったクラスです"
 
 #. R/namespace.R: message("--- sealing exports for ", dQuote(package))
 #: R/namespace.R:0
@@ -1172,8 +1128,6 @@ msgstr "要求されたパッケージ %s をロード中です"
 msgid "Loading required package: %s"
 msgstr "要求されたパッケージ %s をロード中です"
 
-#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
-#. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
 #. R/duplicated.R: gettextf("MARGIN = %s is invalid for dim = %s", paste(MARGIN,     collapse = ","), paste(dx, collapse = ","))
 #: R/duplicated.R:0
 #, fuzzy
@@ -1384,9 +1338,6 @@ msgid "all variables should have the same length"
 msgstr "無効なリストの引数です。全ての変数は同じ長さを持つべきです"
 
 #. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
-#. R/pmax.R: warning("an argument will be fractionally recycled")
 #: R/pmax.R:0
 msgid "an argument will be fractionally recycled"
 msgstr "引数は繰り返して使われます"
@@ -1412,12 +1363,6 @@ msgstr "'drop' 引数は無視されます"
 msgid "argument 'where' of length 0"
 msgstr "長さ 0 の引数 'where' です"
 
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
-#. R/qr.R: stop("argument is not a QR decomposition")
 #. R/qr.R: stop("argument is not a QR decomposition")
 #: R/qr.R:0
 msgid "argument is not a QR decomposition"
@@ -1475,12 +1420,10 @@ msgid "attempt to make a table with >= 2^31 elements"
 msgstr "2^31 個の要素を超えるテーブルを作成しようとしています"
 
 #. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
-#. R/matrix.R: stop("attempt to set 'colnames' on an object with less than two dimensions")
 #: R/matrix.R:0
 msgid "attempt to set 'colnames' on an object with less than two dimensions"
 msgstr "次元が 2 未満のオブジェクトに 'colnames' を設定しようとしました"
 
-#. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #. R/matrix.R: stop("attempt to set 'rownames' on an object with no dimensions")
 #: R/matrix.R:0
 msgid "attempt to set 'rownames' on an object with no dimensions"
@@ -1502,8 +1445,6 @@ msgid "bad 'S3method' directive: %s"
 msgstr "誤った 'S3method' 指令です: %s"
 
 #. R/load.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
 #. R/serialize.R: stop("bad 'file' argument")
 #: R/load.R:0 R/serialize.R:0
 msgid "bad 'file' argument"
@@ -1541,8 +1482,9 @@ msgstr "バイナリコネクションへしかセーブできません"
 
 #. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
 #: R/backquote.R:0
+#, fuzzy
 msgid "can only splice inside a call"
-msgstr ""
+msgstr "ベクトルオブジェクトしか書き込めません"
 
 #. R/backquote.R: stop("can only splice vectors")
 #: R/backquote.R:0
@@ -1576,7 +1518,6 @@ msgid "can only truncate an open connection"
 msgstr "開かれたコネクションしか切り詰められません"
 
 #. R/connections.R: stop("can only write character objects")
-#. R/connections.R: stop("can only write character objects")
 #: R/connections.R:0
 msgid "can only write character objects"
 msgstr "文字オブジェクトしか書き込めません"
@@ -1586,7 +1527,6 @@ msgstr "文字オブジェクトしか書き込めません"
 msgid "can only write vector objects"
 msgstr "ベクトルオブジェクトしか書き込めません"
 
-#. R/source.R: stop("cannot 'chdir' as current directory is unknown")
 #. R/source.R: stop("cannot 'chdir' as current directory is unknown")
 #: R/source.R:0
 msgid "cannot 'chdir' as current directory is unknown"
@@ -1637,8 +1577,9 @@ msgstr "メッセージコネクションを分割できません"
 
 #. R/sort.R: stop("cannot xtfrm 'x'")
 #: R/sort.R:0
+#, fuzzy
 msgid "cannot xtfrm 'x'"
-msgstr ""
+msgstr "データフレームではありません"
 
 #. R/dataframe.R: stop("cannot xtfrm data frames")
 #: R/dataframe.R:0
@@ -1663,7 +1604,6 @@ msgid "coercing argument to \"character\" for format=\"s\""
 msgstr "引数を format=\"s\" に対する \"character\" へ強制変換します"
 
 #. R/dataframe.R: stop("column name \"\" cannot match any column")
-#. R/dataframe.R: stop("column name \"\" cannot match any column")
 #: R/dataframe.R:0
 msgid "column name \"\" cannot match any column"
 msgstr "列の名前 \"\" はどの列にもマッチしません"
@@ -1673,7 +1613,6 @@ msgstr "列の名前 \"\" はどの列にもマッチしません"
 msgid "complex matrices not permitted at present"
 msgstr "複素行列は現在許可されていません"
 
-#. R/datetime.R: stop("component subscript must be a character string")
 #. R/datetime.R: stop("component subscript must be a character string")
 #: R/datetime.R:0
 #, fuzzy
@@ -1687,11 +1626,10 @@ msgid "condition handlers must be functions"
 msgstr "ハンドラーは関数でなければなりません"
 
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
-#. R/conditions.R: stop("condition handlers must be specified with a condition class")
-#. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #: R/conditions.R:0
+#, fuzzy
 msgid "condition handlers must be specified with a condition class"
-msgstr ""
+msgstr "ハンドラーは関数でなければなりません"
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NAs")
 #: R/format.R:0
@@ -1736,7 +1674,6 @@ msgstr "重複した 'row.names' は許されません"
 msgid "duplicate import names %s"
 msgstr "重複したインポート名 %s です"
 
-#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #: R/dataframe.R:0
 msgid "duplicate row.names: %s"
@@ -1829,7 +1766,6 @@ msgid "failed to load methods package for undebugging by signature"
 msgstr ""
 
 #. R/debug.R: stop("failed to load the methods package for debugging by signature")
-#. R/debug.R: stop("failed to load the methods package for debugging by signature")
 #: R/debug.R:0
 msgid "failed to load the methods package for debugging by signature"
 msgstr ""
@@ -1906,7 +1842,6 @@ msgid "in package %s methods %s were specified for export but not defined"
 msgstr "パッケージ %s 中のメソッド %s をエクスポートするように指定されていますが、定義されていません"
 
 #. R/rowsum.R: stop("incorrect length for 'group'")
-#. R/rowsum.R: stop("incorrect length for 'group'")
 #: R/rowsum.R:0
 msgid "incorrect length for 'group'"
 msgstr "'group' に対する不正な長さです"
@@ -1916,7 +1851,6 @@ msgstr "'group' に対する不正な長さです"
 msgid "incorrect value for 'MARGIN'"
 msgstr "'MARGIN' の値が不正です"
 
-#. R/strwrap.R: stop("incorrect value for 'x'")
 #. R/strwrap.R: stop("incorrect value for 'x'")
 #: R/strwrap.R:0
 msgid "incorrect value for 'x'"
@@ -1953,7 +1887,6 @@ msgid "invalid 'by' string"
 msgstr "無効な文字列 'by' です"
 
 #. R/locales.R: stop("invalid 'category' argument")
-#. R/locales.R: stop("invalid 'category' argument")
 #: R/locales.R:0
 msgid "invalid 'category' argument"
 msgstr "無効な 'category' 引数です"
@@ -1970,20 +1903,15 @@ msgid "invalid 'digits'"
 msgstr "無効な 'digits' です"
 
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
-#. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
 msgid "invalid 'dimnames' given for data frame"
 msgstr "データフレームに無効な 'dimnames' が与えられました"
 
 #. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
-#. R/colSums.R: stop("invalid 'dims'")
 #: R/colSums.R:0
 msgid "invalid 'dims'"
 msgstr "無効な 'dims' です"
 
-#. R/connections.R: stop("invalid 'endian' argument")
 #. R/connections.R: stop("invalid 'endian' argument")
 #: R/connections.R:0
 #, fuzzy
@@ -1995,8 +1923,6 @@ msgstr "無効な 'name' 引数です"
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "無効な 'labels' です; 長さ %d は 1 または %d であるべきです"
 
-#. R/dataframe.R: stop("invalid 'make.names'")
-#. R/dataframe.R: stop("invalid 'make.names'")
 #. R/dataframe.R: stop("invalid 'make.names'")
 #: R/dataframe.R:0
 #, fuzzy
@@ -2024,7 +1950,6 @@ msgid "invalid 'rle' structure"
 msgstr "無効な 'rle' 構造です"
 
 #. R/dataframe.R: stop("invalid 'row.names' length")
-#. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
 msgstr "無効な 'row.names' 長です"
@@ -2034,9 +1959,6 @@ msgstr "無効な 'row.names' 長です"
 msgid "invalid 'time' argument"
 msgstr "無効な 'time' 引数です"
 
-#. R/version.R: stop("invalid 'value'")
-#. R/version.R: stop("invalid 'value'")
-#. R/version.R: stop("invalid 'value'")
 #. R/version.R: stop("invalid 'value'")
 #: R/version.R:0
 msgid "invalid 'value'"
@@ -2060,14 +1982,10 @@ msgid "invalid NCOL(R)"
 msgstr "NCOL(R) が不正です"
 
 #. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
-#. R/qr.R: stop("invalid NCOL(y)")
 #: R/qr.R:0
 msgid "invalid NCOL(y)"
 msgstr "NCOL(y) が不正です"
 
-#. R/factor.R: warning("invalid factor level, NA generated")
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
 msgid "invalid factor level, NA generated"
@@ -2116,10 +2034,6 @@ msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "無効なバージョンの指定 %s です"
 
 #. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#. R/qr.R: stop("invalid nrow(qr$qr)")
 #: R/qr.R:0
 msgid "invalid nrow(qr$qr)"
 msgstr "nrow(qr$qr) が不正です"
@@ -2147,27 +2061,16 @@ msgid "invalid package name"
 msgstr "不当なパッケージ名"
 
 #. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/dates.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid specification of 'breaks'"
 msgstr "'breaks' の無効な指定です"
-
-#. R/dates.R: stop("invalid string for 'by'")
-#. R/datetime.R: stop("invalid string for 'by'")
-#: R/dates.R:0 R/datetime.R:0
-msgid "invalid string for 'by'"
-msgstr "'by' に対する無効な文字列です"
 
 #. R/mode.R: stop("invalid to change the storage mode of a factor")
 #: R/mode.R:0
 msgid "invalid to change the storage mode of a factor"
 msgstr "factor の格納モードを変えるのは不正です"
 
-#. R/datetime.R: stop("invalid units specified")
 #. R/datetime.R: stop("invalid units specified")
 #: R/datetime.R:0
 msgid "invalid units specified"
@@ -2205,7 +2108,6 @@ msgid "length(STATS) or dim(STATS) do not match dim(x)[MARGIN]"
 msgstr "length(STATS) または dim(STATS) は dim(x)[MARGIN] にマッチしません"
 
 #. R/factor.R: stop("level sets of factors are different")
-#. R/factor.R: stop("level sets of factors are different")
 #: R/factor.R:0
 msgid "level sets of factors are different"
 msgstr "因子の水準セットが異なっています"
@@ -2242,7 +2144,6 @@ msgid "malformed version string"
 msgstr "正しい形式のバージョン文字列ではありません"
 
 #. R/grep.R: stop("match distance components must be non-negative")
-#. R/grep.R: stop("match distance components must be non-negative")
 #: R/grep.R:0
 msgid "match distance components must be non-negative"
 msgstr "match distance 成分は非負でなければなりません"
@@ -2258,18 +2159,15 @@ msgid "mismatch of row names in arguments of 'data.frame', item %d"
 msgstr "'data.frame' の引数中の行名 (項目 %d) が不適当です"
 
 #. R/grep.R: stop("missing replacement values are not allowed")
-#. R/grep.R: stop("missing replacement values are not allowed")
 #: R/grep.R:0
 msgid "missing replacement values are not allowed"
 msgstr "置換の値が必要です"
 
 #. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
-#. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
 #: R/dataframe.R:0
 msgid "missing values are not allowed in subscripted assignments of data frames"
 msgstr "データフレームの添字による代入では、欠損値は許されません"
 
-#. R/rowsum.R: warning("missing values for 'group'")
 #. R/rowsum.R: warning("missing values for 'group'")
 #: R/rowsum.R:0
 msgid "missing values for 'group'"
@@ -2327,7 +2225,6 @@ msgid "must specify names of formal arguments for 'vectorize'"
 msgstr "'vectorize.args' には仮引数名しか指定出来ません"
 
 #. R/dataframe.R: warning("named arguments are discouraged")
-#. R/dataframe.R: warning("named arguments are discouraged")
 #: R/dataframe.R:0
 msgid "named arguments are discouraged"
 msgstr "名前付き引数は推奨されません"
@@ -2342,7 +2239,6 @@ msgstr "'drop' 以外での名前付き引数は推奨されません"
 msgid "named arguments other than 'exact' are discouraged"
 msgstr "'exact' 以外での名前付き引数は推奨されません"
 
-#. R/dataframe.R: stop("names do not match previous names")
 #. R/dataframe.R: stop("names do not match previous names")
 #: R/dataframe.R:0
 msgid "names do not match previous names"
@@ -2407,7 +2303,6 @@ msgid "new columns would leave holes after existing columns"
 msgstr "新しい列は既存の列に穴を開けるかも知れません"
 
 #. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
-#. R/conditions.R: gettextf("no 'restart' '%s' found", as.character(r))
 #: R/conditions.R:0
 msgid "no 'restart' '%s' found"
 msgstr "'restart' '%s' が見付かりません"
@@ -2423,7 +2318,6 @@ msgid "no Olson database found"
 msgstr "Olson データベースが見つかりません"
 
 #. R/pmax.R: stop("no arguments")
-#. R/pmax.R: stop("no arguments")
 #: R/pmax.R:0
 msgid "no arguments"
 msgstr "引数がありません"
@@ -2438,7 +2332,6 @@ msgstr "ファイルが見つかりません"
 msgid "no files to copy to"
 msgstr "そこへコピーすべきファイルがありません"
 
-#. R/files.R: stop("no files to link from")
 #. R/files.R: stop("no files to link from")
 #: R/files.R:0
 msgid "no files to link from"
@@ -2486,7 +2379,6 @@ msgid "no such element '%s'"
 msgstr "そのような要素 '%s' はありません"
 
 #. R/dataframe.R: stop("non-existent rows not allowed")
-#. R/dataframe.R: stop("non-existent rows not allowed")
 #: R/dataframe.R:0
 msgid "non-existent rows not allowed"
 msgstr "存在しない行は許されません"
@@ -2528,7 +2420,6 @@ msgstr "有効な再スタート指定ではありません"
 
 #. R/apply.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
-#. R/array.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #. R/sweep.R: stop("not all elements of 'MARGIN' are names of dimensions")
 #: R/apply.R:0 R/array.R:0 R/sweep.R:0
 msgid "not all elements of 'MARGIN' are names of dimensions"
@@ -2549,7 +2440,6 @@ msgid ""
 msgstr "名前空間をロードしません"
 
 #. R/qr.R: stop("not implemented for complex 'qr'")
-#. R/qr.R: stop("not implemented for complex 'qr'")
 #: R/qr.R:0
 msgid "not implemented for complex 'qr'"
 msgstr "複素数の 'qr' に対しては実装されていません"
@@ -2559,7 +2449,6 @@ msgstr "複素数の 'qr' に対しては実装されていません"
 msgid "not loading a namespace"
 msgstr "名前空間をロードしません"
 
-#. R/qr.R: stop("not supported for LAPACK QR")
 #. R/qr.R: stop("not supported for LAPACK QR")
 #: R/qr.R:0
 msgid "not supported for LAPACK QR"
@@ -2608,7 +2497,6 @@ msgid "number of levels differs"
 msgstr "水準の数が異なります"
 
 #. R/dataframe.R: stop("numbers of columns of arguments do not match")
-#. R/dataframe.R: stop("numbers of columns of arguments do not match")
 #: R/dataframe.R:0
 msgid "numbers of columns of arguments do not match"
 msgstr "引数の列の数が一致しません"
@@ -2639,7 +2527,6 @@ msgstr "行列の対角成分だけが置き換えられます"
 msgid "only one of 'include.only' and 'exclude' can be used"
 msgstr ""
 
-#. R/solve.R: stop("only square matrices can be inverted")
 #. R/solve.R: stop("only square matrices can be inverted")
 #: R/solve.R:0
 msgid "only square matrices can be inverted"
@@ -2803,7 +2690,6 @@ msgid "replacing element in non-existent column: %s"
 msgstr "存在しない列中の要素の置き換えです: %s"
 
 #. R/namespace.R: gettext("replacing local value with import %s when loading %s")
-#. R/namespace.R: gettext("replacing local value with import %s when loading %s")
 #: R/namespace.R:0
 msgid "replacing local value with import %s when loading %s"
 msgstr "ローカル変数をインポート %s で置き換えています (%s のロード中)"
@@ -2820,7 +2706,6 @@ msgid "replacing previous import by %s when loading %s"
 msgstr "%2$s のロード中に、以前のインポート %1$s を置き換えています"
 
 #. R/dataframe.R: stop("row names contain missing values")
-#. R/dataframe.R: stop("row names contain missing values")
 #: R/dataframe.R:0
 msgid "row names contain missing values"
 msgstr "列名は欠測値を含んでいます"
@@ -2835,7 +2720,6 @@ msgstr "与えられた列名は誤った長さです"
 msgid "row names were found from a short variable and have been discarded"
 msgstr "列名は短い変数から見つけられ、捨て去られました"
 
-#. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
@@ -2913,7 +2797,6 @@ msgid "target is %s, current is %s"
 msgstr "引数 target は %s、引数 current は %s です"
 
 #. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
-#. R/chol.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #. R/solve.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #. R/svd.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #: R/chol.R:0 R/solve.R:0 R/svd.R:0
@@ -2927,7 +2810,6 @@ msgstr "'match.arg' に複数のマッチがあります"
 
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
-#. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #: R/library.R:0
 msgid "there is no package called %s"
 msgstr "%s という名前のパッケージはありません"
@@ -3020,10 +2902,6 @@ msgid "unary - is not defined for \"Date\" objects"
 msgstr "単項演算子 - は \"Date\" オブジェクトに対しては定義されていません"
 
 #. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
-#. R/dataframe.R: stop("undefined columns selected")
 #: R/dataframe.R:0
 msgid "undefined columns selected"
 msgstr "未定義の列が選ばれました"
@@ -3100,8 +2978,9 @@ msgstr "%2$s の バージョン %1$s は，%4$s 中の %3$s によってマス�
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
+#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr ""
+msgstr "'to', 'by', 'length.out' かまたは 'along.with' の内丁度二つを指定しなければなりません"
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3114,7 +2993,6 @@ msgstr "'to', 'by', 'length.out' かまたは 'along.with' の内丁度二つを
 msgid "working directory was changed to %s, resetting"
 msgstr ""
 
-#. R/datetime.R: stop("wrong class")
 #. R/datetime.R: stop("wrong class")
 #. R/library.R: stop("wrong class")
 #. R/version.R: stop("wrong class")
@@ -3157,7 +3035,6 @@ msgid "'arg' should be %s"
 msgid_plural "'arg' should be one of %s"
 msgstr[0] "'arg' は %s の一つでなければなりません："
 
-#. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
 #. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
 #: R/merge.R:0
 msgid "'by' must specify a uniquely valid column"
@@ -3311,11 +3188,6 @@ msgid_plural "replacement has %d items, need %d"
 msgstr[0] "置換は %d 個の項目を持ちますが、%d 個必要です"
 
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
-#. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
 #: R/dataframe.R:0
 msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
@@ -3338,6 +3210,9 @@ msgstr[0] "%d 個の行名が %d 個の行に提供されました"
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "呼び出されたパッケージがありません"
+
+#~ msgid "invalid string for 'by'"
+#~ msgstr "'by' に対する無効な文字列です"
 
 #, fuzzy
 #~ msgid "connections left open:"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Caio Lente <lente@ime.usp.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -28,7 +28,6 @@ msgid "'degree' must be integer >= 1"
 msgstr "'degree' deve ser inteiro >= 1"
 
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
-#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #: R/splineClasses.R:0
 msgid "'deriv' must be between 0 and %d"
 msgstr "'deriv' deve estar entre 0 e %d"
@@ -41,18 +40,20 @@ msgid "'df' was too small; have used %d"
 msgstr "'df' muito pequeno; foi usado"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
-#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' deve ser da forma \"y ~ x\""
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' deve ser >= 2"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "'ord' deve ser um inteiro positivo, sendo no máximo igual ao número de nós"
 
@@ -79,13 +80,13 @@ msgid "empty 'derivs'"
 msgstr ""
 
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
-#. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #: R/splineClasses.R:0
 msgid "knot positions must be non-decreasing"
 msgstr "posições dos nós devem ser não decrescentes"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "posições dos nós devem ser estritamente crescentes"
 
@@ -97,6 +98,7 @@ msgstr "comprimento de 'derivs' deve ser igual ao comprimento de 'x'"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "comprimentos de 'x' e 'y' devem ser iguais"
 
@@ -123,12 +125,10 @@ msgid "need at least %s (=%d) knots"
 msgstr "são necessários pelo menos 2*ord -1 (=%d) nós"
 
 #. R/splines.R: stop("non-finite knots")
-#. R/splines.R: stop("non-finite knots")
 #: R/splines.R:0
 msgid "non-finite knots"
 msgstr ""
 
-#. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
 msgid "shoving 'interior' knots matching boundary knots to inside"
@@ -141,6 +141,7 @@ msgstr "alguns valores de 'x' depois dos nós de fronteira podem causar bases m�
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "spline must be monotone"
 msgstr "spline deve ser monótono"
 
@@ -156,8 +157,8 @@ msgid "the range of 'x' values exceeds one period"
 msgstr "a faixa de variação dos valores de 'x' escede um período"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
-#. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "valores de 'x' devem ser distintos"
 
@@ -165,3 +166,11 @@ msgstr "valores de 'x' devem ser distintos"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "valores de 'x' devem ser estritamente crescentes"
+
+#, fuzzy
+#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
+#~ msgstr "'df' muito pequeno; foi usado"
+
+#, fuzzy
+#~ msgid "stop(\"knot positions must be non-decreasing\")"
+#~ msgstr "posições dos nós devem ser não decrescentes"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2020-11-29 17:23+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -349,8 +349,6 @@ msgid "at least one entry of 'x' must be positive"
 msgstr "bent vienas 'x' įrašas turi būti teigiamas"
 
 #. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
 #: R/plot.R:0
 msgid "cannot handle more than one 'x' coordinate"
 msgstr "negalima apdoroti daugiau nei vienos 'x' koordinatės"
@@ -371,8 +369,6 @@ msgid "default 'pch' is smaller than number of columns and hence recycled"
 msgstr "numatytasis 'pch' mažesnis nei stulpelių skaičius ir todėl perdirbtas"
 
 #. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/spineplot.R: stop("dependent variable should be a factor")
 #. R/spineplot.R: stop("dependent variable should be a factor")
 #: R/cdplot.R:0 R/spineplot.R:0
 msgid "dependent variable should be a factor"
@@ -513,7 +509,6 @@ msgid "invalid coordinate lengths"
 msgstr "neteisingi koordinačių ilgiai"
 
 #. R/boxplot.R: stop("invalid first argument")
-#. R/boxplot.R: stop("invalid first argument")
 #. R/stripchart.R: stop("invalid first argument")
 #: R/boxplot.R:0 R/stripchart.R:0
 msgid "invalid first argument"
@@ -564,15 +559,10 @@ msgid "invalid rectangle specification"
 msgstr "netinkama stačiakampio specifikacija"
 
 #. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
 #: R/screen.R:0
 msgid "invalid screen number"
 msgstr "neteisingas ekrano numeris"
 
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/datetime.R:0
 msgid "invalid specification of 'breaks'"
@@ -638,8 +628,6 @@ msgid "missing values in contingency table"
 msgstr "trūkstama reikšmė požymių sąveikos lentelėje"
 
 #. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
 #: R/plot.R:0
 msgid "must have a response variable"
 msgstr "turi turėti atsako kintamąjį"
@@ -673,7 +661,6 @@ msgstr "nėra baigtinių ar netrūkstamų reikšmių"
 msgid "no proper 'z' matrix specified"
 msgstr "nenurodyta tinkama 'z' matrica"
 
-#. R/pairs.R: stop("non-numeric argument to 'pairs'")
 #. R/pairs.R: stop("non-numeric argument to 'pairs'")
 #: R/pairs.R:0
 msgid "non-numeric argument to 'pairs'"
@@ -787,7 +774,6 @@ msgstr "nesurikiuotas 'breaks' bus surikiuojamas prieš naudojimą"
 msgid "weights are not supported for 2-way table specification"
 msgstr ""
 
-#. R/datetime.R: stop("wrong method")
 #. R/datetime.R: stop("wrong method")
 #: R/datetime.R:0
 msgid "wrong method"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -23,7 +23,6 @@ msgstr ""
 msgid "'%s' is deprecated."
 msgstr ""
 
-#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
 #, fuzzy
@@ -71,24 +70,17 @@ msgid "'drop' is always implicitly FALSE in '[.raster'"
 msgstr "'[.raster' 裡的 'drop' 含蓄值總是 FALSE"
 
 #. R/unix/dev2bitmap.R: stop("'file' is missing with no default")
-#. R/unix/dev2bitmap.R: stop("'file' is missing with no default")
-#. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
 #. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' is missing with no default"
 msgstr "'file' 不存在，也沒有預設值"
 
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
 msgstr "'file' 必須是非空字串"
 
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #: R/unix/png.R:0
 #, fuzzy
@@ -234,17 +226,12 @@ msgid "Font information is inconsistent"
 msgstr ""
 
 #. R/postscript.R: stop("GhostScript was not found")
-#. R/postscript.R: stop("GhostScript was not found")
 #. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
 #. R/windows/dev2bitmap.R: stop("GhostScript was not found")
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "GhostScript was not found"
 msgstr "找不到 GhostScript"
 
-#. R/patterns.R: stop("Invalid 'extend' value")
-#. R/patterns.R: stop("Invalid 'extend' value")
 #. R/patterns.R: stop("Invalid 'extend' value")
 #: R/patterns.R:0
 #, fuzzy
@@ -292,8 +279,9 @@ msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr ""
+msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -303,28 +291,33 @@ msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph height"
-msgstr ""
+msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr ""
+msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph info"
-msgstr ""
+msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph width"
-msgstr ""
+msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr ""
+msgstr "字型種類無效"
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -476,8 +469,6 @@ msgid "can only manipulate windows devices"
 msgstr "只能操控視窗裝置"
 
 #. R/device.R: stop("can only print from a screen device")
-#. R/device.R: stop("can only print from a screen device")
-#. R/device.R: stop("can only print from a screen device")
 #. R/unix/quartz.R: stop("can only print from a screen device")
 #: R/device.R:0 R/unix/quartz.R:0
 msgid "can only print from a screen device"
@@ -600,7 +591,6 @@ msgid "invalid 'cmapEncoding' in font specification"
 msgstr "字型設定裡的 'cmapEncoding' 值無效"
 
 #. R/postscript.R: stop("invalid 'family' argument")
-#. R/postscript.R: stop("invalid 'family' argument")
 #: R/postscript.R:0
 msgid "invalid 'family' argument"
 msgstr "'family' 引數無效"
@@ -611,21 +601,12 @@ msgid "invalid 'file'"
 msgstr "'file' 無效"
 
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
-#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0
 msgid "invalid 'file' argument '%s'"
 msgstr "'file' 引數 '%s' 無效"
 
 #. R/cairo.R: stop("invalid 'filename'")
-#. R/cairo.R: stop("invalid 'filename'")
-#. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
 #. R/windows/windows.R: stop("invalid 'filename'")
 #: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
@@ -717,7 +698,6 @@ msgid "invalid encoding in font specification"
 msgstr "字型設定裡的編碼有問題"
 
 #. R/postscript.R: stop("invalid family name in font specification")
-#. R/postscript.R: stop("invalid family name in font specification")
 #: R/postscript.R:0
 msgid "invalid family name in font specification"
 msgstr "字型設定裡的系列名稱無效"
@@ -738,7 +718,6 @@ msgstr "第一個引數不對[語言物件發生錯誤]"
 msgid "invalid height"
 msgstr "'title' 無效"
 
-#. R/postscript.R: stop("invalid metric information in font specification")
 #. R/postscript.R: stop("invalid metric information in font specification")
 #: R/postscript.R:0
 msgid "invalid metric information in font specification"
@@ -781,8 +760,6 @@ msgid "invalid width"
 msgstr "'title' 無效"
 
 #. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
-#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
-#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
 #: R/glyph.R:0
 msgid "length of arguments must match (and be greater than 0)"
 msgstr ""
@@ -802,8 +779,6 @@ msgstr "必須設定 'z' 這個矩陣"
 msgid "no current device to record from"
 msgstr "沒有可用來記載的裝置"
 
-#. R/device.R: stop("no device to print from")
-#. R/device.R: stop("no device to print from")
 #. R/device.R: stop("no device to print from")
 #. R/unix/quartz.R: stop("no device to print from")
 #: R/device.R:0 R/unix/quartz.R:0
@@ -883,7 +858,6 @@ msgid "snapshot recorded in different R version (pre 3.3.0)"
 msgstr "由不同 R 版本 (pre 3.3.0) 記錄的快照"
 
 #. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
-#. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
 #: R/postscript.R:0
 msgid "status %d in running command '%s'"
 msgstr "呼叫命令 '%2$s' 的執行狀況為 %1$d"
@@ -899,9 +873,6 @@ msgid "svg: Cairo-based devices are not available for this platform"
 msgstr ""
 
 #. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
 msgstr ""
@@ -912,14 +883,10 @@ msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
 msgstr ""
 
 #. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
 msgstr ""
 
-#. R/postscript.R: gettextf("unknown family '%s'", family)
 #. R/postscript.R: gettextf("unknown family '%s'", family)
 #: R/postscript.R:0
 msgid "unknown family '%s'"
@@ -941,7 +908,6 @@ msgstr "不明的字型"
 msgid "unrecognized format of gs -help"
 msgstr "gs -help 的格式無效"
 
-#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 #. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 #: R/windows/windows.R:0
 msgid "windows devices should not be used in examples etc"

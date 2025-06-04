@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2018-04-09 12:09-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -34,13 +34,10 @@ msgid "'child' must be a valid child process"
 msgstr "'child'은 반드시 유효한 자식 프로세스이어야 합니다"
 
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
-#. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 #: R/unix/mcfork.R:0
 msgid "'children' must be a list of processes or a single process"
 msgstr "'children'은 반드시 프로세스들의 목록이거나 단일 프로세스이어야 합니다"
 
-#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
-#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #: R/windows/mcdummies.R:0
 msgid "'mc.cores' > 1 is not supported on Windows"
@@ -48,8 +45,6 @@ msgstr "'mc.cores' > 1은 윈도우즈에서 지원되지 않습니다"
 
 #. R/unix/mclapply.R: stop("'mc.cores' must be >= 1")
 #. R/unix/pvec.R: stop("'mc.cores' must be >= 1")
-#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
-#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 #. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 #: R/unix/mclapply.R:0 R/unix/pvec.R:0 R/windows/mcdummies.R:0
 msgid "'mc.cores' must be >= 1"
@@ -122,7 +117,6 @@ msgid "fork clusters are not supported on Windows"
 msgstr "포크 클러스터들은 윈도우즈에서 지원되지 않습니다"
 
 #. R/unix/mcfork.R: stop("invalid 'child' argument")
-#. R/unix/mcfork.R: stop("invalid 'child' argument")
 #: R/unix/mcfork.R:0
 msgid "invalid 'child' argument"
 msgstr "유효하지 않은 'child' 인자입니다"
@@ -132,7 +126,6 @@ msgstr "유효하지 않은 'child' 인자입니다"
 msgid "invalid 'jobs' argument"
 msgstr "올바르지 않은 'jobs' 인자입니다."
 
-#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #: R/RngStream.R:0
 msgid "invalid value of %s"
@@ -170,8 +163,9 @@ msgstr "'names'는 반드시 1보다 크거나 같아야 합니다."
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
+#, fuzzy
 msgid "replacing registration for cluster type '%s'"
-msgstr ""
+msgstr "알 수 없는 클러스터 유형입니다"
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0
@@ -209,15 +203,17 @@ msgstr[0] ""
 
 #. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0
+#, fuzzy
 msgid "scheduled core %s did not deliver a result, all values of the job will be affected"
 msgid_plural "scheduled cores %s did not deliver results, all values of the jobs will be affected"
-msgstr[0] ""
+msgstr[0] "모든 예약된 코어들은 사용자코드내 에러를 접했습니다"
 
 #. R/unix/mclapply.R: ngettext(length(has.errors), "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0
+#, fuzzy
 msgid "scheduled core %s encountered error in user code, all values of the job will be affected"
 msgid_plural "scheduled cores %s encountered errors in user code, all values of the jobs will be affected"
-msgstr[0] ""
+msgstr[0] "모든 예약된 코어들은 사용자코드내 에러를 접했습니다"
 
 #. R/snowSOCK.R: ngettext(length(hosts), "socket cluster with %d nodes on host %s",     "socket cluster with %d nodes on hosts %s")
 #: R/snowSOCK.R:0

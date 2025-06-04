@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-09-01 10:22+0000\n"
 "Last-Translator: Ayush Bipin Patel <ayush.ap58@gmail.com>\n"
 "Language-Team: none\n"
@@ -29,13 +29,10 @@ msgid "'child' must be a valid child process"
 msgstr "'child' एक मान्य child प्रक्रिया होनी चाहिये"
 
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
-#. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 #: R/unix/mcfork.R:0
 msgid "'children' must be a list of processes or a single process"
 msgstr "'children' का कोई प्रक्रिया या प्रक्रीयओ कि यादी (list) होना अनिवार्य है"
 
-#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
-#. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #: R/windows/mcdummies.R:0
 msgid "'mc.cores' > 1 is not supported on Windows"
@@ -43,8 +40,6 @@ msgstr ""
 
 #. R/unix/mclapply.R: stop("'mc.cores' must be >= 1")
 #. R/unix/pvec.R: stop("'mc.cores' must be >= 1")
-#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
-#. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 #. R/windows/mcdummies.R: stop("'mc.cores' must be >= 1")
 #: R/unix/mclapply.R:0 R/unix/pvec.R:0 R/windows/mcdummies.R:0
 msgid "'mc.cores' must be >= 1"
@@ -73,8 +68,9 @@ msgstr "'v' एक वेक्टर (vector) होना चाहिये"
 
 #. R/unix/mcfork.R: stop("'what' must be a character or raw vector")
 #: R/unix/mcfork.R:0
+#, fuzzy
 msgid "'what' must be a character or raw vector"
-msgstr ""
+msgstr "'v' एक वेक्टर (vector) होना चाहिये"
 
 #. R/unix/forkCluster.R: stop("Cluster setup failed.")
 #: R/unix/forkCluster.R:0
@@ -117,7 +113,6 @@ msgid "fork clusters are not supported on Windows"
 msgstr ""
 
 #. R/unix/mcfork.R: stop("invalid 'child' argument")
-#. R/unix/mcfork.R: stop("invalid 'child' argument")
 #: R/unix/mcfork.R:0
 msgid "invalid 'child' argument"
 msgstr "अमान्य 'child'आर्गुमेंत (argument)"
@@ -127,7 +122,6 @@ msgstr "अमान्य 'child'आर्गुमेंत (argument)"
 msgid "invalid 'jobs' argument"
 msgstr "अमान्य 'jobs' अर्गुमेंत (argument)"
 
-#. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
 #: R/RngStream.R:0
 msgid "invalid value of %s"
@@ -165,8 +159,9 @@ msgstr "संखीकीय 'names' >= 1 हो ना अनिवार्�
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
+#, fuzzy
 msgid "replacing registration for cluster type '%s'"
-msgstr ""
+msgstr "अज्ञात प्रकार का समूह"
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:16\n"
 "PO-Revision-Date: 2022-10-14 10:41+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -25,11 +25,13 @@ msgstr "La lunghezza dei valori iniziali non corrisponde"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
+#, fuzzy
 msgid "extra arguments discarded"
 msgstr "argomenti extra ignorati"
 
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
+#, fuzzy
 msgid "fixed values violate constraints"
 msgstr "i valori fissi violano i vincoli"
 
@@ -45,11 +47,13 @@ msgstr "attesa lista definita"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
+#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "la profilazione ha trovato una soluzione migliore, quindi la stima originale non converge"
 
 #. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
+#, fuzzy
 msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr "alcuni valori nominati non sono argomenti passati alla log-verosimiglianza"
 

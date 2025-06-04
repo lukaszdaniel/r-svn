@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:43\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -16,11 +16,13 @@ msgstr ""
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
 #: R/cmp.R:0
+#, fuzzy
 msgid "'%s' is not a valid compiler option"
 msgstr "'%s' は有効なコンパイルオプションではありません"
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "'env' must be a top level environment"
 msgstr "'env' はトップレベルの環境でなければなりません"
 
@@ -41,12 +43,10 @@ msgstr "付値の誤り 1"
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad assignment 2"
-msgstr "付値の誤り 2"
+msgstr "付値の誤り 1"
 
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
 msgid "bad assignment: %s"
@@ -54,31 +54,27 @@ msgstr "誤った付値: %s"
 
 #. R/cmp.R: gettext("bad namespace import frame")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad namespace import frame"
 msgstr "ネームスペースのインポートフレームが不正です"
 
 #. R/cmp.R: stop("cannot compile a non-function")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile a non-function"
 msgstr "非関数はコンパイルできません"
 
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
 #. R/cmp.R: gettext("cannot compile byte code literals in code")
 #: R/cmp.R:0
 msgid "cannot compile byte code literals in code"
 msgstr "コード中のバイトコードリテラルをコンパイルできません"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile promise literals in code"
 msgstr "コード中のプロミスリテラルをコンパイルできません"
 
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
 #. R/cmp.R: gettext("cannot compile this expression")
 #: R/cmp.R:0
 msgid "cannot compile this expression"
@@ -91,6 +87,7 @@ msgstr "バイトコードオブジェクトのリテラルの定数畳み込み
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "プロミスのリテラルの定数畳み込みができません"
 
@@ -99,7 +96,6 @@ msgstr "プロミスのリテラルの定数畳み込みができません"
 msgid "compiling '%s'"
 msgstr "'%s' をコンパイルしています"
 
-#. R/cmp.R: gettext("done")
 #. R/cmp.R: gettext("done")
 #: R/cmp.R:0
 msgid "done"
@@ -112,6 +108,7 @@ msgstr "数値によるスイッチの中で、代替選択肢が空です。"
 
 #. R/cmp.R: warning("empty input file; no output written")
 #: R/cmp.R:0
+#, fuzzy
 msgid "empty input file; no output written"
 msgstr "空の入力ファイルです; アウトプットは出力されません"
 
@@ -141,13 +138,13 @@ msgid "invalid environment variable value: %s==%s"
 msgstr ""
 
 #. R/cmp.R: gettext("invalid function in complex assignment")
-#. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "complex の付値に不正な関数があります"
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0
+#, fuzzy
 msgid "missing arguments are not allowed"
 msgstr "引数の欠損は許されません"
 
@@ -158,21 +155,25 @@ msgstr "switch() 呼び出しの中で、デフォルト選択肢が 2 つ以上
 
 #. R/cmp.R: stop("namespace found within global environments")
 #: R/cmp.R:0
+#, fuzzy
 msgid "namespace found within global environments"
-msgstr ""
+msgstr "'ns' はネームスペースか、あるいは環境をインポートしたネームスペースでなければなりません"
 
 #. R/cmp.R: stop("namespace found within local environments")
 #: R/cmp.R:0
+#, fuzzy
 msgid "namespace found within local environments"
-msgstr ""
+msgstr "'ns' はネームスペースか、あるいは環境をインポートしたネームスペースでなければなりません"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
+#, fuzzy
 msgid "no offset recorded for label \"%s\""
 msgstr "ラベル \"%s\" に対するオフセットが記録されていません"
 
 #. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
 #: R/cmp.R:0
+#, fuzzy
 msgid "no visible binding for '<<-' assignment to '%s'"
 msgstr "'%s' に対する '<<-' 付値の明示されたバインディングが見つかりません"
 
@@ -183,6 +184,7 @@ msgstr "グローバル変数 '%s' の明示されたバインディングが見
 
 #. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
 #: R/cmp.R:0
+#, fuzzy
 msgid "no visible global function definition for '%s'"
 msgstr "グローバル関数 '%s' の明示された定義が見つかりません"
 
@@ -193,8 +195,8 @@ msgid "non-namespace found within namespace environments"
 msgstr "'ns' はネームスペースか、あるいは環境をインポートしたネームスペースでなければなりません"
 
 #. R/cmp.R: stop("not a proper evaluation environment")
-#. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "評価環境が適切ではありません"
 
@@ -206,6 +208,7 @@ msgstr "おそらく '%s' 中のエラーです: %s"
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", file)
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", outfile)
 #: R/cmp.R:0
+#, fuzzy
 msgid "saving to file \"%s\" ..."
 msgstr "ファイル \"%s\" に保存しています..."
 
@@ -219,6 +222,22 @@ msgstr "'%s' に対する引数の数が違います"
 msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "シンタックス関数へのローカル付値です: "
+
+#, fuzzy
+#~ msgid "gettext(\"bad assignment 2\")"
+#~ msgstr "付値の誤り 2"
+
+#, fuzzy
+#~ msgid "gettext(\"cannot compile this expression\")"
+#~ msgstr "この式はコンパイルできません"
+
+#, fuzzy
+#~ msgid "gettext(\"invalid function in complex assignment\")"
+#~ msgstr "complex の付値に不正な関数があります"
+
+#, fuzzy
+#~ msgid "gettextf(\"saving to file \\\\\"%s\\\\\" ... \", outfile)"
+#~ msgstr "ファイル \"%s\" に保存しています..."
 
 #~ msgid "'ns' must be a namespace or a namespace imports environment"
 #~ msgstr " 'ns' はネームスペースか、あるいは環境をインポートしたネームスペースでなければなりません "

@@ -2,13 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
@@ -122,7 +122,6 @@ msgstr ""
 
 
 #: R/SClasses.R: 0
-#. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 
 msgid "%s is not a slot in class %s"
@@ -256,7 +255,6 @@ msgstr ""
 
 
 #: R/Methods.R: 0
-#. R/Methods.R: stop("'file' must be a character string or a connection")
 #. R/Methods.R: stop("'file' must be a character string or a connection")
 
 msgid "'file' must be a character string or a connection"
@@ -608,7 +606,6 @@ msgstr ""
 
 #: R/MethodsList.R: 0
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
-#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 
 msgid "Use %s instead."
 msgstr ""
@@ -636,9 +633,7 @@ msgstr ""
 
 
 #: R/Methods.R: 0
-#: R/trace.R: 0
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
-#. R/trace.R: stop("a function for argument 'f' must be a generic function")
 
 msgid "a function for argument 'f' must be a generic function"
 msgstr ""
@@ -1978,8 +1973,6 @@ msgstr ""
 
 #: R/Methods.R: 0
 #. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 
 msgid "no generic function %s found"
 msgstr ""
@@ -2099,7 +2092,6 @@ msgstr ""
 
 #: R/RMethodUtils.R: 0
 #. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
-#. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr ""
@@ -2148,7 +2140,6 @@ msgstr ""
 
 
 #: R/refClass.R: 0
-#. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 
 msgid "not a reference class: %s"
@@ -2416,7 +2407,6 @@ msgstr ""
 
 #: R/refClass.R: 0
 #. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
-#. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
 
 msgid "the class of field %s in the object is not compatible with the desired class %s in the target"
 msgstr ""
@@ -2430,7 +2420,6 @@ msgstr ""
 
 
 #: R/refClass.R: 0
-#. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 
 msgid "the definition of class %s in package %s is locked so fields may not be modified"
@@ -2851,7 +2840,6 @@ msgstr[1]    ""
 
 
 #: R/RMethodUtils.R: 0
-#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 
 msgid        "non-argument found in the signature: %s"

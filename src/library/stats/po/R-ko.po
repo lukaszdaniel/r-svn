@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -33,7 +33,6 @@ msgstr "인식되지 않는 %s 링크입니다"
 msgid "%s must be 0 or 1"
 msgstr "%s는 반드시 0 또는 1 이어야 합니다."
 
-#. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
 #: R/contrast.R:0 R/xtabs.R:0
@@ -125,8 +124,9 @@ msgstr "'all.knots'가 TRUE이기 때문에 'nknots'지정은 사용되지 않�
 
 #. R/smspline.R: warning("'all.knots' is vector of knots; 'nknots' specification is disregarded")
 #: R/smspline.R:0
+#, fuzzy
 msgid "'all.knots' is vector of knots; 'nknots' specification is disregarded"
-msgstr ""
+msgstr "'all.knots'가 TRUE이기 때문에 'nknots'지정은 사용되지 않습니다"
 
 #. R/HoltWinters.R: stop("'alpha', 'beta' and 'gamma' must be within the unit interval")
 #: R/HoltWinters.R:0
@@ -184,12 +184,10 @@ msgid "'coef' must be a vector"
 msgstr "'coef'는 반드시 벡터이어야 합니다"
 
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
-#. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
 msgid "'coef' must define a contrast, i.e., sum to 0"
 msgstr "'coef'는 반드시 contrast를 정의해야 합니다.  예를들면, 총계는 0입니다"
 
-#. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #: R/aov.R:0
 msgid "'coef' must have same length as 'contrast.obj'"
@@ -265,13 +263,11 @@ msgid "'cv' must not be NA when 'df' is specified"
 msgstr "'df'가 지정되었을때 'cv'는 반드시 NA이서는 안됩니다"
 
 #. R/models.R: stop("'data' must be a data.frame, environment, or list")
-#. R/models.R: stop("'data' must be a data.frame, environment, or list")
 #: R/models.R:0
 #, fuzzy
 msgid "'data' must be a data.frame, environment, or list"
 msgstr "'data'는 반드시 리스트 또는 environment이어야 합니다"
 
-#. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
 msgid "'data' must be a data.frame, not a matrix or an array"
@@ -293,12 +289,10 @@ msgid "'degree' must be at least 1"
 msgstr "'degree'는 반드시 적어도 1이어야 합니다"
 
 #. R/contr.poly.R: stop("'degree' must be less than number of unique points")
-#. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 #: R/contr.poly.R:0
 msgid "'degree' must be less than number of unique points"
 msgstr "'degree'의 값은 반드시 고유한 값을 가지는 포인트들의 개수보다 적어야 합니다"
 
-#. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #: R/splinefun.R:0
 msgid "'deriv' must be between 0 and 3"
@@ -351,13 +345,10 @@ msgstr "'formula'가 없습니다"
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
 #. R/ks.test.R: stop("'formula' missing or incorrect")
-#. R/ks.test.R: stop("'formula' missing or incorrect")
 #. R/mood.test.R: stop("'formula' missing or incorrect")
 #. R/oneway.test.R: stop("'formula' missing or incorrect")
 #. R/t.test.R: stop("'formula' missing or incorrect")
-#. R/t.test.R: stop("'formula' missing or incorrect")
 #. R/var.test.R: stop("'formula' missing or incorrect")
-#. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/ftable.R:0
@@ -441,7 +432,6 @@ msgid "'k' is bigger than 'n'!  Changing 'k' to %d"
 msgstr "'k'는 'n'보다 큽니다! 'k'를 %d로 변경합니다"
 
 #. R/kernel.R: stop("'k' is not a kernel")
-#. R/kernel.R: stop("'k' is not a kernel")
 #: R/kernel.R:0
 msgid "'k' is not a kernel"
 msgstr "'k'는 커널이 아닙니다"
@@ -502,7 +492,6 @@ msgid "'lower' and 'upper' must be finite values"
 msgstr "'lower'과 'upper'의 값은 반드시 유한해야 합니다"
 
 #. R/kernel.R: stop("'m' is less than 1")
-#. R/kernel.R: stop("'m' is less than 1")
 #: R/kernel.R:0
 msgid "'m' is less than 1"
 msgstr "'m'은 1보다 적습니다"
@@ -512,7 +501,6 @@ msgstr "'m'은 1보다 적습니다"
 msgid "'m' must be numeric with non-negative integers"
 msgstr "'m'은 반드시 음이 아닌 정수를 가지는 숫자이어야 합니다"
 
-#. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #: R/termplot.R:0
 msgid "'main' must be TRUE, FALSE, NULL or character (vector)."
@@ -545,8 +533,9 @@ msgstr "'model'은 반드시 리스트(list)이어야 합니다."
 
 #. R/model.tables.R: stop("'model.tables' is not implemented for multiple responses")
 #: R/model.tables.R:0
+#, fuzzy
 msgid "'model.tables' is not implemented for multiple responses"
-msgstr ""
+msgstr "다변량모델을 위한 'se.fit'은 아직 구현되어 있지 않습니다"
 
 #. R/t.test.R: stop("'mu' must be a single number")
 #. R/wilcox.test.R: stop("'mu' must be a single number")
@@ -644,20 +633,15 @@ msgid "'order.max' must be < 'n.obs'"
 msgstr "'order.max'는 'n.obs' 보다 작아야 합니다."
 
 #. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
 #: R/ar.R:0
 msgid "'order.max' must be < 'n.used'"
 msgstr "'order.max'는 반드시 'n.used'보다 작아야 합니다"
 
 #. R/ar.R: stop("'order.max' must be >= 0")
-#. R/ar.R: stop("'order.max' must be >= 0")
 #: R/ar.R:0
 msgid "'order.max' must be >= 0"
 msgstr "'order.max'는 반드시 0보다 크거나 같아야 합니다"
 
-#. R/ar.R: stop("'order.max' must be >= 1")
-#. R/ar.R: stop("'order.max' must be >= 1")
 #. R/ar.R: stop("'order.max' must be >= 1")
 #: R/ar.R:0
 msgid "'order.max' must be >= 1"
@@ -704,9 +688,6 @@ msgid "'print.level' must be in {0,1,2}"
 msgstr "'print.level'은 반드시 {0,1,2}내에 있어야 합니다"
 
 #. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
 #: R/distn.R:0
 msgid "'prob' and 'mu' both specified"
 msgstr "'prob'와 'mu' 모두 지정되어 있습니다"
@@ -717,10 +698,10 @@ msgid "'probs' outside [0,1]"
 msgstr "'probs'는 [0,1] 범위외입니다"
 
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
-#. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
+#, fuzzy
 msgid "'proj' is not implemented for multiple responses"
-msgstr ""
+msgstr "다변량모델을 위한 'se.fit'은 아직 구현되어 있지 않습니다"
 
 #. R/kernel.R: stop("'r' is less than 0")
 #: R/kernel.R:0
@@ -777,7 +758,6 @@ msgstr "'row.var.names'이 빠져있습니다"
 msgid "'sampleT' and 'nser' must be integer"
 msgstr "'sampleT'와 'nser'는 반드시 정수이어야 합니다"
 
-#. R/biplot.R: warning("'scale' is outside [0, 1]")
 #. R/biplot.R: warning("'scale' is outside [0, 1]")
 #: R/biplot.R:0
 msgid "'scale' is outside [0, 1]"
@@ -842,7 +822,6 @@ msgstr "'start'는 'end'보다 큽니다."
 msgid "'start' and 'table' must be same length"
 msgstr "'start'와 'table'는 반드시 같은 길이이어야 합니다"
 
-#. R/ts.R: stop("'start' cannot be after 'end'")
 #. R/ts.R: stop("'start' cannot be after 'end'")
 #: R/ts.R:0
 msgid "'start' cannot be after 'end'"
@@ -911,7 +890,6 @@ msgid "'varying' has wrong length"
 msgstr "'varying'의 길이가 잘못되었습니다"
 
 #. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
-#. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #: R/nls-profile.R:0
 msgid "'varying' must be in seq_along(pars)"
 msgstr "'varying'은 반드시 seq_along(pars)내에 있어야 합니다"
@@ -928,8 +906,9 @@ msgstr "'varying'은 반드시 비어있지 않은 리스트 또는 벡터이어
 
 #. R/lm.R: stop("'weights' as formula should be one-sided")
 #: R/lm.R:0
+#, fuzzy
 msgid "'weights' as formula should be one-sided"
-msgstr ""
+msgstr "'weights'는 반드시 음수이어야 합니다"
 
 #. R/density.R: stop("'weights' must all be finite")
 #: R/density.R:0
@@ -964,8 +943,9 @@ msgstr "'which'는 제거되어질 일부 요인이 아닌 것들을 지정했�
 
 #. R/poisson.test.R: stop("'x' and 'T' have incompatible length")
 #: R/poisson.test.R:0
+#, fuzzy
 msgid "'x' and 'T' have incompatible length"
-msgstr ""
+msgstr "'x'와 'weights'는 서로 다른 길이를 가지고 있습니다"
 
 #. R/bartlett.test.R: stop("'x' and 'g' must have the same length")
 #. R/fligner.test.R: stop("'x' and 'g' must have the same length")
@@ -1029,8 +1009,9 @@ msgstr "'x'는 다음과 같은 정수로 반올림 되었습니다: %s"
 
 #. R/fisher.test.R: stop("'x' has entries too large to be integer")
 #: R/fisher.test.R:0
+#, fuzzy
 msgid "'x' has entries too large to be integer"
-msgstr ""
+msgstr "'x'는 다음과 같은 정수로 반올림 되었습니다: %s"
 
 #. R/cancor.R: stop("'x' has rank 0")
 #: R/cancor.R:0
@@ -1052,8 +1033,6 @@ msgstr "'x'는 empty합니다"
 msgid "'x' is not a kernel"
 msgstr "'x'는 커널이 아닙니다"
 
-#. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
 #. R/diffinv.R: stop("'x' is not a vector")
 #. R/kernel.R: stop("'x' is not a vector")
 #: R/diffinv.R:0 R/kernel.R:0
@@ -1094,7 +1073,6 @@ msgid "'x' must be a list with at least 2 elements"
 msgstr "'x'는 반드시 2개의 요소들을 가지고 있는 리스트이어야 합니다"
 
 #. R/lm.R: stop("'x' must be a matrix")
-#. R/lm.R: stop("'x' must be a matrix")
 #: R/lm.R:0
 msgid "'x' must be a matrix"
 msgstr "'x'는 반드시 행렬이어야 합니다"
@@ -1120,8 +1098,6 @@ msgid "'x' must be a time series or an ar() fit"
 msgstr "'x'는 반드시 시계열이거나 ar() 적합이어야 합니다"
 
 #. R/ftable.R: stop("'x' must be an \"ftable\" object")
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #: R/ftable.R:0
 msgid "'x' must be an \"ftable\" object"
 msgstr "'x'는 반드시 \"ftable\" 객체이어야 합니다"
@@ -1138,8 +1114,9 @@ msgstr "'x'는 반드시 -1과 1 사이에 있어야 합니다"
 
 #. R/smspline.R: stop("'x' must be between 0 and 1 for periodic smooth")
 #: R/smspline.R:0
+#, fuzzy
 msgid "'x' must be between 0 and 1 for periodic smooth"
-msgstr ""
+msgstr "'x'는 반드시 -1과 1 사이에 있어야 합니다"
 
 #. R/anova.R: stop("'x' must be coefficient matrix/data frame")
 #: R/anova.R:0
@@ -1163,9 +1140,6 @@ msgstr "'x'는 반드시 음의 값을 가지지 않는 정수이어야 합니�
 
 #. R/StructTS.R: stop("'x' must be numeric")
 #. R/acf.R: stop("'x' must be numeric")
-#. R/acf.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
 #. R/ar.R: stop("'x' must be numeric")
 #. R/arima.R: stop("'x' must be numeric")
 #. R/arma0.R: stop("'x' must be numeric")
@@ -1246,8 +1220,9 @@ msgstr "'y'의 rank는 0입니다"
 #. R/t.test.R: stop("'y' is missing for paired test")
 #. R/wilcox.test.R: stop("'y' is missing for paired test")
 #: R/t.test.R:0 R/wilcox.test.R:0
+#, fuzzy
 msgid "'y' is missing for paired test"
-msgstr ""
+msgstr "'formula'가 누락되었거나 잘못되었습니다"
 
 #. R/cor.test.R: stop("'y' must be a numeric vector")
 #: R/cor.test.R:0
@@ -1294,7 +1269,6 @@ msgid "(unordered) factors are not allowed"
 msgstr "요인은 허용되지 않습니다"
 
 #. R/lm.R: stop("0 (non-NA) cases")
-#. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
 msgid "0 (non-NA) cases"
 msgstr ""
@@ -1316,20 +1290,21 @@ msgstr "AIC는 이 모델에 정의되어 있지 않으므로 'step'은 더 이�
 
 #. R/lm.R: warning("ANOVA F-tests on an essentially perfect fit are unreliable")
 #: R/lm.R:0
+#, fuzzy
 msgid "ANOVA F-tests on an essentially perfect fit are unreliable"
-msgstr ""
+msgstr "근본적으로 완벽한 적합에 대한 모델선택을 시도하는 것은 넌센스입니다"
 
 #. R/lm.R: warning("Assuming constant prediction variance even though model fit is weighted\n")
 #: R/lm.R:0
+#, fuzzy
 msgid "Assuming constant prediction variance even though model fit is weighted"
-msgstr ""
+msgstr "prediction variance는 모델적합시 사용된 가중치의 역수에 비례한다고 가정합니다"
 
 #. R/constrOptim.R: gettext("Barrier algorithm ran out of iterations and did not converge")
 #: R/constrOptim.R:0
 msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr "Barrier 알고리즘이 주어진 최대반복수에 도달했으므로 수렴하지 않습니다"
 
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #: R/cor.test.R:0
 msgid "Cannot compute exact p-value with ties"
@@ -1411,18 +1386,15 @@ msgstr "'%s' 내에 NA가 존재합니다"
 
 #. R/acf.R: stop("NAs in 'x'")
 #. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
 #: R/acf.R:0 R/ar.R:0
 msgid "NAs in 'x'"
 msgstr "'x'내에 NA가 있습니다"
 
 #. R/ar.R: stop("NAs in 'x' must be the same row-wise")
-#. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #: R/ar.R:0
+#, fuzzy
 msgid "NAs in 'x' must be the same row-wise"
-msgstr ""
+msgstr "'x'와 'g'는 반드시 같은 길이를 가지고 있어야 합니다"
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
@@ -1471,10 +1443,10 @@ msgstr "outer iteration %d에서 목적함수가 증가했습니다"
 
 #. R/prcomp.R: stop("PCA applies only to numerical variables")
 #. R/princomp.R: stop("PCA applies only to numerical variables")
-#. R/princomp.R: stop("PCA applies only to numerical variables")
 #: R/prcomp.R:0 R/princomp.R:0
+#, fuzzy
 msgid "PCA applies only to numerical variables"
-msgstr ""
+msgstr "'ppr'은 오로지 수치형 변수들에만 적용합니다"
 
 #. R/acf.R: gettextf("Page [%d,%d]: i =%s; j =%s", I, J, paste(iind, collapse = ","),     paste(jind, collapse = ","))
 #: R/acf.R:0
@@ -1512,7 +1484,6 @@ msgid "Requested conf.level not achievable"
 msgstr "수행할 수 없는 conf.level의 값이 주어졌습니다."
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
-#. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
 msgstr "유형 '%s'에 대한 SE는 아직 구현되지 않았습니다"
@@ -1542,14 +1513,10 @@ msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`
 msgstr ""
 
 #. R/confint.R: message("Waiting for profiling to be done...")
-#. R/confint.R: message("Waiting for profiling to be done...")
 #: R/confint.R:0
 msgid "Waiting for profiling to be done..."
 msgstr ""
 
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
 #. R/mlm.R: stop("X does not define a subspace of M")
 #: R/mlm.R:0
 msgid "X does not define a subspace of M"
@@ -1603,14 +1570,16 @@ msgstr "모든 관측치는 같은 그룹내에 있어야 합니다"
 #. R/StructTS.R: stop("all parameters were fixed")
 #. R/arma0.R: stop("all parameters were fixed")
 #: R/StructTS.R:0 R/arma0.R:0
+#, fuzzy
 msgid "all parameters were fixed"
-msgstr ""
+msgstr "적합할 파라미터들이 없습니다"
 
 #. R/na.ts.R: stop("all times contain an NA")
 #. R/ts.R: stop("all times contain an NA")
 #: R/na.ts.R:0 R/ts.R:0
+#, fuzzy
 msgid "all times contain an NA"
-msgstr ""
+msgstr "모든 그룹들은 반드시 데이터를 가지고 있어야 합니다"
 
 #. R/smspline.R: stop("all weights should be non-negative")
 #: R/smspline.R:0
@@ -1665,7 +1634,6 @@ msgid "argument 'sides' must be 1 or 2"
 msgstr "인자 'sides'는 반드시 1 또는 2이어야 합니다"
 
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
-#. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
 #, fuzzy
 msgid "argument 'sizes' must be a vector of length 2"
@@ -1683,8 +1651,9 @@ msgstr "인수 'x'를 클래스  %s로 강제형변환을 할 수 없습니다"
 
 #. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
+#, fuzzy
 msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
-msgstr ""
+msgstr "인자 'x'는 반드시 수치형이어야 합니다"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
@@ -1860,13 +1829,15 @@ msgstr "추정치를 계산할 수 없어 NA를 반환합니다"
 
 #. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
 #: R/wilcox.test.R:0
+#, fuzzy
 msgid "cannot compute exact confidence interval with ties"
-msgstr ""
+msgstr "tie가 있어 정확한 신뢰구간을 계산할 수 없습니다"
 
 #. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
 #: R/wilcox.test.R:0
+#, fuzzy
 msgid "cannot compute exact confidence interval with zeroes"
-msgstr ""
+msgstr "tie가 있어 정확한 신뢰구간을 계산할 수 없습니다"
 
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
 #. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
@@ -1876,20 +1847,21 @@ msgstr "tie가 있어 정확한 신뢰구간을 계산할 수 없습니다"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
 #. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
 #: R/ansari.test.R:0 R/wilcox.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "tie가 있어 정확한 p값을 계산할 수 없습니다"
 
 #. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
 #: R/wilcox.test.R:0
+#, fuzzy
 msgid "cannot compute exact p-value with zeroes"
-msgstr ""
+msgstr "tie가 있어 정확한 p값을 계산할 수 없습니다"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0
+#, fuzzy
 msgid "cannot compute simulated p-value with zero marginals"
-msgstr ""
+msgstr "tie가 있어 정확한 p값을 계산할 수 없습니다"
 
 #. R/models.R: stop("cannot create a formula from a zero-column data frame")
 #: R/models.R:0
@@ -1956,8 +1928,9 @@ msgstr "주어진 데이터에서는 formula에 dots 기법를 사용할 수 없
 
 #. R/smspline.R: stop("cannot use more inner knots than unique 'x' values")
 #: R/smspline.R:0
+#, fuzzy
 msgid "cannot use more inner knots than unique 'x' values"
-msgstr ""
+msgstr "고유한 'x'값들로 범위를 축소합니다"
 
 #. R/kernel.R: stop("coefficients do not add to 1")
 #: R/kernel.R:0
@@ -1990,7 +1963,6 @@ msgid "computation of exact probability failed, returning Monte Carlo approximat
 msgstr ""
 
 #. R/contrast.R: stop("contrasts apply only to factors")
-#. R/contrast.R: stop("contrasts apply only to factors")
 #: R/contrast.R:0
 msgid "contrasts apply only to factors"
 msgstr "contrasts는 요인들에만 적용합니다"
@@ -2020,8 +1992,9 @@ msgstr ""
 
 #. R/nlm.R: stop("convergence problem in zero finding: ", conditionMessage(val))
 #: R/nlm.R:0
+#, fuzzy
 msgid "convergence problem in zero finding:"
-msgstr ""
+msgstr "수렴에 관한 문제: optim은 code = %d를 반환하였습니다"
 
 #. R/arma0.R: warning("converting non-invertible initial MA values")
 #: R/arma0.R:0
@@ -2044,7 +2017,6 @@ msgid "cross-validation with non-unique 'x' values seems doubtful"
 msgstr ""
 
 #. R/t.test.R: stop("data are essentially constant")
-#. R/t.test.R: stop("data are essentially constant")
 #: R/t.test.R:0
 msgid "data are essentially constant"
 msgstr "데이터는 본질적으로 상수입니다"
@@ -2066,8 +2038,9 @@ msgstr "양수가 아닌 #{branches}가 사용된 덴드로그램 노드입니�
 
 #. R/dendrogram.R: stop("dendrogram non-leaf node with non-positive #{branches}")
 #: R/dendrogram.R:0
+#, fuzzy
 msgid "dendrogram non-leaf node with non-positive #{branches}"
-msgstr ""
+msgstr "양수가 아닌 #{branches}가 사용된 덴드로그램 노드입니다"
 
 #. R/model.tables.R: stop("design is unbalanced so cannot proceed")
 #: R/model.tables.R:0
@@ -2154,7 +2127,6 @@ msgstr "'x'의 구성요소들은 반드시 'n'의 구성요소들보다 커서�
 
 #. R/kmeans.R: stop("empty cluster: try a better set of initial centers", call. = FALSE)
 #. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
-#. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
 #: R/kmeans.R:0
 msgid "empty cluster: try a better set of initial centers"
 msgstr ""
@@ -2191,8 +2163,9 @@ msgstr ""
 
 #. R/logLik.R: warning("extra arguments discarded")
 #: R/logLik.R:0
+#, fuzzy
 msgid "extra arguments discarded"
-msgstr ""
+msgstr "추가 인자 %1$s는 클래스 \"%2$s\"가 아닙니다"
 
 #. R/nlm.R: if (doX) "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0" else "f() values at end points not of opposite sign"
 #: R/nlm.R:0
@@ -2209,7 +2182,6 @@ msgstr "f.lower = f(lower)의 결과가 NA입니다"
 msgid "f.upper = f(upper) is NA"
 msgstr "f.upper = f(upper)의 결과가 NA입니다"
 
-#. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #: R/factanal.R:0
 msgid "factor analysis applies only to numerical variables"
@@ -2288,8 +2260,9 @@ msgstr "glm.fit: 적합된 확률값들이 0 또는 1 입니다"
 
 #. R/glm.R: warning("glm.fit: fitted rates numerically 0 occurred", call. = FALSE)
 #: R/glm.R:0
+#, fuzzy
 msgid "glm.fit: fitted rates numerically 0 occurred"
-msgstr ""
+msgstr "glm.fit: 적합된 확률값들이 0 또는 1 입니다"
 
 #. R/ansari.test.R: stop("grouping factor must have exactly 2 levels")
 #. R/ks.test.R: stop("grouping factor must have exactly 2 levels")
@@ -2338,10 +2311,10 @@ msgid "ignoring prior weights"
 msgstr "prior weights를 무시합니다"
 
 #. R/lm.R: stop("incompatible dimensions")
-#. R/lm.R: stop("incompatible dimensions")
 #: R/lm.R:0
+#, fuzzy
 msgid "incompatible dimensions"
-msgstr ""
+msgstr "'xi'의 차원이 잘못되었습니다"
 
 #. R/ts.R: stop("inconsistent specification of 'ar' order")
 #: R/ts.R:0
@@ -2364,7 +2337,6 @@ msgid "incorrect length of 'x'"
 msgstr "'x'의 길이가 올바르지 않습니다"
 
 #. R/ftable.R: stop("incorrect specification for 'col.vars'")
-#. R/ftable.R: stop("incorrect specification for 'col.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'col.vars'"
 msgstr "'col.vars' 지정이 잘못되었습니다"
@@ -2375,7 +2347,6 @@ msgstr "'col.vars' 지정이 잘못되었습니다"
 msgid "incorrect specification for 'formula'"
 msgstr "formula' 지정이 잘못되었습니다"
 
-#. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'row.vars'"
@@ -2478,8 +2449,6 @@ msgid "invalid 'method' argument"
 msgstr "유효하지 않은 'method' 인자입니다"
 
 #. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
 #: R/bandwidths.R:0
 msgid "invalid 'nb'"
 msgstr "유효하지 않은 'nb'입니다"
@@ -2490,14 +2459,10 @@ msgid "invalid 'tree' ('merge' component)"
 msgstr "유효하지 않은 'tree'입니다 ('merge'요소입니다)"
 
 #. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr "유효하지 않은 'use' 인자입니다"
 
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/bandwidths.R: stop("invalid 'x'")
 #. R/bandwidths.R: stop("invalid 'x'")
 #. R/chisq.test.R: stop("invalid 'x'")
 #. R/loess.R: stop("invalid 'x'")
@@ -2522,8 +2487,9 @@ msgstr "유효하지 않은 NCOL(X)입니다"
 
 #. R/loess.R: stop("invalid NROW(X)")
 #: R/loess.R:0
+#, fuzzy
 msgid "invalid NROW(X)"
-msgstr ""
+msgstr "유효하지 않은 NCOL(X)입니다"
 
 #. R/r2dtable.R: stop("invalid argument 'c'")
 #: R/r2dtable.R:0
@@ -2616,8 +2582,9 @@ msgstr "deriv에 유효하지 않은 formula입니다"
 
 #. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
+#, fuzzy
 msgid "invalid formula %s: extraneous call to `%s` is deprecated"
-msgstr ""
+msgstr "deriv에 유효하지 않은 formula입니다"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
 #: R/models.R:0
@@ -2625,7 +2592,6 @@ msgstr ""
 msgid "invalid formula %s: not a call"
 msgstr "deriv에 유효하지 않은 formula입니다"
 
-#. R/deriv.R: stop("invalid formula in deriv")
 #. R/deriv.R: stop("invalid formula in deriv")
 #: R/deriv.R:0
 msgid "invalid formula in deriv"
@@ -2638,7 +2604,6 @@ msgid "invalid formula: %s"
 msgstr "유효하지 않은 formula입니다"
 
 #. R/approx.R: stop("invalid interpolation method")
-#. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
 #: R/approx.R:0 R/spline.R:0
 msgid "invalid interpolation method"
@@ -2646,14 +2611,12 @@ msgstr "유효하지 않은 보간법입니다"
 
 #. R/hclust.R: stop("invalid length of members")
 #: R/hclust.R:0
+#, fuzzy
 msgid "invalid length of members"
-msgstr ""
+msgstr "%s의 값이 올바르지 않습니다."
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
-#. R/approx.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
 #. R/bandwidths.R: stop("invalid length(x)")
 #. R/stl.R: stop("invalid length(x)")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/stl.R:0
@@ -2682,8 +2645,9 @@ msgstr "유효하지 않은 nrow(x)입니다"
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
+#, fuzzy
 msgid "invalid number of points"
-msgstr ""
+msgstr "%s의 값이 올바르지 않습니다."
 
 #. R/integrate.R: stop("invalid parameter values")
 #: R/integrate.R:0
@@ -2770,7 +2734,6 @@ msgstr ""
 " 이는 margins의 길이 %d와 일치하지 않습니다"
 
 #. R/biplot.R: stop("length of choices must be 2")
-#. R/biplot.R: stop("length of choices must be 2")
 #: R/biplot.R:0
 msgid "length of choices must be 2"
 msgstr "choices의 길이는 반드시 2이어야 합니다"
@@ -2791,12 +2754,6 @@ msgstr "'x'와 'xreg'의 길이가 일치하지 않습니다"
 msgid "levels truncated to positive values only"
 msgstr ""
 
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #: R/family.R:0
 #, fuzzy
@@ -2838,8 +2795,6 @@ msgid "method = \"Brent\" is only available for one-dimensional optimization"
 msgstr "1차원 최적화 문제는 method에 \"Brent\" 옵션을 이용할 수 있습니다"
 
 #. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
 #: R/lm.R:0
 msgid "method = '%s' is not supported. Using 'qr'"
 msgstr "method = '%s'는 지원되지 않으므로 'qr'을 이용해보세요"
@@ -2854,7 +2809,6 @@ msgstr "메소드 L-BFGS-B는 'reltol'과 'abtol' 대신에 'factr'(그리고 'p
 msgid "midcache() of non-binary dendrograms only partly implemented"
 msgstr "부분적으로만 구현된 바이너리가 아닌 덴드로그램들의 midcahe()입니다"
 
-#. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
@@ -2917,7 +2871,6 @@ msgid "model frame and formula mismatch in model.matrix()"
 msgstr "model.matrix()에서 model frame과 formula가 일치하지 않습니다"
 
 #. R/AIC.R: warning("models are not all fitted to the same number of observations")
-#. R/AIC.R: warning("models are not all fitted to the same number of observations")
 #: R/AIC.R:0
 msgid "models are not all fitted to the same number of observations"
 msgstr "모델적합에 사용된 관측치의 개수들이 같지 않습니다."
@@ -2926,8 +2879,9 @@ msgstr "모델적합에 사용된 관측치의 개수들이 같지 않습니다.
 #. R/lm.R: stop("models were not all fitted to the same size of dataset")
 #. R/mlm.R: stop("models were not all fitted to the same size of dataset")
 #: R/glm.R:0 R/lm.R:0 R/mlm.R:0
+#, fuzzy
 msgid "models were not all fitted to the same size of dataset"
-msgstr ""
+msgstr "모델적합에 사용된 관측치의 개수들이 같지 않습니다."
 
 #. R/glm.R: gettextf("models with response %s removed because response differs from model 1",     sQuote(deparse(responses[!sameresp])))
 #. R/lm.R: gettextf("models with response %s removed because response differs from model 1",     sQuote(deparse(responses[!sameresp])))
@@ -2948,7 +2902,6 @@ msgstr "데이터 포인트들보다 더 많은 cluster centers가 있습니다"
 msgid "more cluster centers than distinct data points."
 msgstr "서로 다르게 구별되는 데이터 포인트들보다도 더 많은 cluster center가 있습니다"
 
-#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #: R/dummy.coef.R:0
 msgid "multivariate case with missing coefficients is not yet implemented"
@@ -3022,18 +2975,15 @@ msgstr "0의 값을 가지지 않는 행방향의 marginal들이 2개 이상 필
 
 #. R/family.R: stop("need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' family")
 #: R/family.R:0
+#, fuzzy
 msgid "need CRAN package 'SuppDists' for simulation from the 'inverse.gaussian' family"
-msgstr ""
+msgstr "'inverse.gaussian' 페밀링에서는 양수값들만 사용할 수 있습니다"
 
 #. R/update.R: stop("need an object with call component")
 #: R/update.R:0
 msgid "need an object with call component"
 msgstr "호출요소(call component)를 가진 객체가 필요합니다"
 
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
 #. R/bandwidths.R: stop("need at least 2 data points")
 #: R/bandwidths.R:0
 msgid "need at least 2 data points"
@@ -3055,7 +3005,6 @@ msgid "need at least four unique 'x' values"
 msgstr "적어도 네개의 고유한 'x'값들이 필요합니다"
 
 #. R/approx.R: stop("need at least two non-NA values to interpolate")
-#. R/approx.R: stop("need at least two non-NA values to interpolate")
 #: R/approx.R:0
 msgid "need at least two non-NA values to interpolate"
 msgstr "보간을 위해서는 최소한 2개의 NA가 아닌 값들이 필요합니다"
@@ -3066,8 +3015,6 @@ msgid "need dendrograms where all leaves have labels"
 msgstr ""
 
 #. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
 #: R/manova.R:0
 msgid "need multiple responses"
 msgstr ""
@@ -3077,8 +3024,6 @@ msgstr ""
 msgid "need numeric data"
 msgstr "수치형 데이터가 필요합니다"
 
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #: R/smspline.R:0
 msgid "need result of smooth.spline(keep.data = TRUE)"
@@ -3153,8 +3098,9 @@ msgstr "적합된 모델에 요인들이 없습니다"
 
 #. R/smspline.R: stop("no finite observations")
 #: R/smspline.R:0
+#, fuzzy
 msgid "no finite observations"
-msgstr ""
+msgstr "유한한 값을 가지는 관측치가 충분하지 않습니다"
 
 #. R/loess.R: stop("no models to compare")
 #: R/loess.R:0
@@ -3163,8 +3109,9 @@ msgstr "비교할 모델들이 없습니다"
 
 #. R/glm.R: gettextf("no observations informative at iteration %d", iter)
 #: R/glm.R:0
+#, fuzzy
 msgid "no observations informative at iteration %d"
-msgstr ""
+msgstr "outer iteration %d에서 목적함수가 증가했습니다"
 
 #. R/nls.R: stop("no parameters to fit")
 #: R/nls.R:0
@@ -3187,11 +3134,10 @@ msgid "no scores are available: refit with 'retx=TRUE'"
 msgstr ""
 
 #. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
 #: R/nlm.R:0
+#, fuzzy
 msgid "no sign change found in %d iterations"
-msgstr ""
+msgstr "medpolish()는 %d 번째 반복에서 수렴하지 않았습니다."
 
 #. R/bandwidths.R: stop("no solution in the specified range of bandwidths")
 #: R/bandwidths.R:0
@@ -3210,17 +3156,15 @@ msgstr "제공된 시작값들이 없습니다"
 
 #. R/models.R: stop("no terms component nor attribute")
 #: R/models.R:0
+#, fuzzy
 msgid "no terms component nor attribute"
-msgstr ""
+msgstr "scope에는 객체에 추가할 목적의 항이 없습니다"
 
-#. R/add.R: stop("no terms in scope")
 #. R/add.R: stop("no terms in scope")
 #: R/add.R:0
 msgid "no terms in scope"
 msgstr "scope에 아무런 항이 없습니다"
 
-#. R/add.R: stop("no terms in scope for adding to object")
-#. R/add.R: stop("no terms in scope for adding to object")
 #. R/add.R: stop("no terms in scope for adding to object")
 #: R/add.R:0
 msgid "no terms in scope for adding to object"
@@ -3231,7 +3175,6 @@ msgstr "scope에는 객체에 추가할 목적의 항이 없습니다"
 msgid "no time series supplied"
 msgstr "주어진 시계열(time series)이 없습니다"
 
-#. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #: R/glm.R:0
 msgid "no valid set of coefficients has been found: please supply starting values"
@@ -3286,8 +3229,9 @@ msgstr ""
 
 #. R/dendrogram.R: stop("non-leaf subtree of length 0")
 #: R/dendrogram.R:0
+#, fuzzy
 msgid "non-leaf subtree of length 0"
-msgstr ""
+msgstr "'ref'는 반드시 길이가 1이어야 합니다"
 
 #. R/models.R: warning("non-list contrasts argument ignored")
 #: R/models.R:0
@@ -3330,8 +3274,9 @@ msgstr ""
 
 #. R/ts.R: stop("non-time series not of the correct length")
 #: R/ts.R:0
+#, fuzzy
 msgid "non-time series not of the correct length"
-msgstr ""
+msgstr "'coef'의 길이가 잘못되었습니다"
 
 #. R/smspline.R: stop("not a valid \"smooth.spline\" object")
 #: R/smspline.R:0
@@ -3345,8 +3290,9 @@ msgstr "유효한 step function이 아닙니다"
 
 #. R/ts.R: stop("not all series have the same frequency")
 #: R/ts.R:0
+#, fuzzy
 msgid "not all series have the same frequency"
-msgstr ""
+msgstr "모든 관측치는 같은 그룹내에 있어야 합니다"
 
 #. R/ts.R: stop("not all series have the same phase")
 #: R/ts.R:0
@@ -3361,22 +3307,17 @@ msgid "not an unreplicated complete block design"
 msgstr "unreplicated complete 블록 디자인이 아닙니다"
 
 #. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
 #: R/ks.test.R:0
 msgid "not enough 'x' data"
 msgstr "충분하지 않은 'x' 데이터입니다"
 
 #. R/ansari.test.R: stop("not enough 'x' observations")
 #. R/t.test.R: stop("not enough 'x' observations")
-#. R/t.test.R: stop("not enough 'x' observations")
 #. R/var.test.R: stop("not enough 'x' observations")
 #: R/ansari.test.R:0 R/t.test.R:0 R/var.test.R:0
 msgid "not enough 'x' observations"
 msgstr "'x' 관측값들이 충분하지 않습니다"
 
-#. R/ks.test.R: stop("not enough 'y' data")
-#. R/ks.test.R: stop("not enough 'y' data")
 #. R/ks.test.R: stop("not enough 'y' data")
 #: R/ks.test.R:0
 msgid "not enough 'y' data"
@@ -3399,17 +3340,15 @@ msgstr "'x' 관측값들이 충분하지 않습니다"
 #. R/poisson.test.R: stop("not enough data")
 #. R/prop.test.R: stop("not enough data")
 #: R/poisson.test.R:0 R/prop.test.R:0
+#, fuzzy
 msgid "not enough data"
-msgstr ""
+msgstr "충분하지 않은 'x' 데이터입니다"
 
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
 #. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
 #: R/contrast.R:0
 msgid "not enough degrees of freedom to define contrasts"
 msgstr "contrasts를 정의하기에는 자유도가 충분하지 않습니다"
 
-#. R/cor.test.R: stop("not enough finite observations")
 #. R/cor.test.R: stop("not enough finite observations")
 #: R/cor.test.R:0
 msgid "not enough finite observations"
@@ -3417,8 +3356,9 @@ msgstr "유한한 값을 가지는 관측치가 충분하지 않습니다"
 
 #. R/oneway.test.R: stop("not enough groups")
 #: R/oneway.test.R:0
+#, fuzzy
 msgid "not enough groups"
-msgstr ""
+msgstr "그룹의 수가 너무 적습니다"
 
 #. R/fligner.test.R: stop("not enough observations")
 #. R/kruskal.test.R: stop("not enough observations")
@@ -3427,8 +3367,9 @@ msgstr ""
 #. R/t.test.R: stop("not enough observations")
 #: R/fligner.test.R:0 R/kruskal.test.R:0 R/mood.test.R:0 R/oneway.test.R:0
 #: R/t.test.R:0
+#, fuzzy
 msgid "not enough observations"
-msgstr ""
+msgstr "'x' 관측값들이 충분하지 않습니다"
 
 #. R/plot.lm.R: gettextf("not plotting observations with leverage one:\n  %s",     paste(which(isInf), collapse = ", "))
 #: R/plot.lm.R:0
@@ -3493,8 +3434,6 @@ msgid "number of offsets is %d, should equal %d (number of observations)"
 msgstr "offset의 개수  %1$d는 관측치의 개수 %2$d와 같아야 합니다"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #: R/add.R:0
 msgid "number of rows in use has changed: remove missing values?"
 msgstr "행의 개수가 변경되었습니다: 결측치들을 제거했나요?"
@@ -3538,7 +3477,6 @@ msgstr ""
 "수치형 y가 반드시 제공되어야 합니다.\n"
 "밀도추정을 위해서는 density()를 사용하세요"
 
-#. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #: R/biplot.R:0
 msgid "object '%s' has no scores"
@@ -3598,8 +3536,9 @@ msgstr "오로지 일변량 시계열에서만 구현되어 있습니다"
 
 #. R/ts.R: stop("only replacement of elements is allowed")
 #: R/ts.R:0
+#, fuzzy
 msgid "only replacement of elements is allowed"
-msgstr ""
+msgstr "제공된 치환값(replacement values)들이 너무 많습니다."
 
 #. R/stl.R: stop("only univariate series are allowed")
 #: R/stl.R:0
@@ -3607,16 +3546,10 @@ msgid "only univariate series are allowed"
 msgstr "오로지 단변량 시리즈만이 허용됩니다"
 
 #. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
 #: R/HoltWinters.R:0
 msgid "optimization difficulties: %s"
 msgstr "최적화하는데 다음과 같은 어려움이 있습니다: %s"
 
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
 #. R/HoltWinters.R: stop("optimization failure")
 #: R/HoltWinters.R:0
 msgid "optimization failure"
@@ -3669,7 +3602,6 @@ msgid "possible convergence problem: 'optim' gave code = %d and message %s"
 msgstr "해에 대한 수렴문제: 'optim'이 코드 = %d와 메시지 %s를 돌려주었습니다"
 
 #. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
-#. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arma0.R: gettextf("possible convergence problem: optim gave code = %d",     code)
 #: R/arima.R:0 R/arma0.R:0
 msgid "possible convergence problem: optim gave code = %d"
@@ -3721,9 +3653,6 @@ msgid "ref = %d must be in 1L:%d"
 msgstr "ref = %d은 반드시 1L:%d 내에 있어야 합니다"
 
 #. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
 #: R/wilcox.test.R:0
 msgid "requested conf.level not achievable"
 msgstr "수행할 수 없는 conf.level의 값이 주어졌습니다."
@@ -3743,7 +3672,6 @@ msgstr "객체내의 잔차에 대한 자유도는 \"lm\"을 사용한 적합이
 msgid "residuals have rank %d < %d"
 msgstr "잔차는 %2$d보다 작은 수의 rank %1$d을 가집니다"
 
-#. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #: R/mlm.R:0
 msgid "residuals have rank %s < %s"
@@ -3778,18 +3706,16 @@ msgid "sample size must be between 3 and 5000"
 msgstr "샘플의 크기는 반드시 3 부터 5000 이내에 있어야 합니다"
 
 #. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
-#. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
 #: R/ansari.test.R:0
 msgid "samples differ in location: cannot compute confidence set, returning NA"
 msgstr "location에 있는 샘플들이 다르므로 confidence set을 계산할 수 없어 NA를 돌려줍니다"
 
 #. R/ts.R: stop("scatter plots only for univariate time series")
 #: R/ts.R:0
+#, fuzzy
 msgid "scatter plots only for univariate time series"
-msgstr ""
+msgstr "x는 벡터 또는 단변량 시계열이 아닙니다"
 
-#. R/add.R: stop("scope is not a subset of term labels")
-#. R/add.R: stop("scope is not a subset of term labels")
 #. R/add.R: stop("scope is not a subset of term labels")
 #: R/add.R:0
 msgid "scope is not a subset of term labels"
@@ -3808,17 +3734,16 @@ msgid "series is corrupt, with no 'tsp' attribute"
 msgstr ""
 
 #. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
-#. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
 #: R/ts.R:0
 msgid "series is corrupt: length %d with 'tsp' implying %d"
 msgstr ""
 
 #. R/stl.R: stop("series is not periodic or has less than two periods")
 #: R/stl.R:0
+#, fuzzy
 msgid "series is not periodic or has less than two periods"
-msgstr ""
+msgstr "시계열이 없거나 2 주기보다 적습니다"
 
-#. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #: R/nls.R:0
 msgid "setVarying : 'vary' length must match length of parameters"
@@ -3842,11 +3767,11 @@ msgstr "simulate()은 다변량 모델에 사용되는 lm()에 아직 구현되�
 
 #. R/contrast.R: stop("singular contrast matrix")
 #: R/contrast.R:0
+#, fuzzy
 msgid "singular contrast matrix"
-msgstr ""
+msgstr "contrast 행렬의 행의 개수가 잘못되었습니다"
 
 #. R/glm.R: stop("singular fit encountered")
-#. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #: R/glm.R:0 R/lm.R:0
 msgid "singular fit encountered"
@@ -3919,17 +3844,10 @@ msgstr ""
 
 #. R/distn.R: warning("specify 'rate' or 'scale' but not both")
 #. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
 #: R/distn.R:0
 msgid "specify 'rate' or 'scale' but not both"
 msgstr "'rate' 또는 'scale' 중 하나만 지정해야 합니다"
 
-#. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #: R/identify.hclust.R:0
 msgid "specify exactly one of 'k' and 'h'"
@@ -3957,8 +3875,9 @@ msgstr "수렴하지 않기 때문에 step size는 잘려졌습니다"
 
 #. R/glm.R: warning("step size truncated: out of bounds", call. = FALSE)
 #: R/glm.R:0
+#, fuzzy
 msgid "step size truncated: out of bounds"
-msgstr ""
+msgstr "수렴하지 않기 때문에 step size는 잘려졌습니다"
 
 #. R/stepfun.R: stop("stepfun: 'x' must be ordered increasingly")
 #: R/stepfun.R:0
@@ -3970,7 +3889,6 @@ msgstr ""
 msgid "sum(weights) != 1  -- will not get true density"
 msgstr "sum(weights) != 1 이므로 이것으로부터 확률밀도를 얻을 수 없습니다"
 
-#. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
 #. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
 #: R/cor.R:0
 msgid "supply both 'x' and 'y' or a matrix-like 'x'"
@@ -3998,10 +3916,10 @@ msgstr "'split' 인자는 반드시 리스트이어야 합니다"
 
 #. R/poisson.test.R: stop("the case k > 2 is unimplemented")
 #: R/poisson.test.R:0
+#, fuzzy
 msgid "the case k > 2 is unimplemented"
-msgstr ""
+msgstr "타입 '%s'는 아직 구현되지 않았습니다"
 
-#. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
 #. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
 #: R/aov.R:0
 msgid "the contrast defined is empty (has no TRUE elements)"
@@ -4017,8 +3935,6 @@ msgstr "시계열의 첫번째 값은 반드시 누락되어서는 안됩니다"
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "'anova.glm'에 전달된 다음의 인자들은 유효하지 않아 사용되지 않을 것입니다"
 
-#. R/StructTS.R: stop("the series is entirely NA")
-#. R/StructTS.R: stop("the series is entirely NA")
 #. R/StructTS.R: stop("the series is entirely NA")
 #: R/StructTS.R:0
 msgid "the series is entirely NA"
@@ -4047,8 +3963,9 @@ msgstr "Kolmogorov-Smirnov 테스트를 이용할 때는 ties가 있으면 안�
 
 #. R/ts.R: stop("time series contains internal NAs")
 #: R/ts.R:0
+#, fuzzy
 msgid "time series contains internal NAs"
-msgstr ""
+msgstr "시리즈가 완전하게 NA입니다"
 
 #. R/HoltWinters.R: stop("time series has no or less than 2 periods")
 #: R/HoltWinters.R:0
@@ -4068,23 +3985,27 @@ msgstr "관측치의 수가 너무 적습니다, 즉, n < k 입니다"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
 #: R/zzModels.R:0
+#, fuzzy
 msgid "too few distinct input values to fit a Michaelis-Menten model"
-msgstr ""
+msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기에는 너무 적은 개수의 고유한 값(distinct input values)들이 입력되었습니다."
 
 #. R/zzModels.R: stop("too few distinct input values to fit a biexponential")
 #: R/zzModels.R:0
+#, fuzzy
 msgid "too few distinct input values to fit a biexponential"
-msgstr ""
+msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기에는 너무 적은 개수의 고유한 값(distinct input values)들이 입력되었습니다."
 
 #. R/zzModels.R: stop("too few distinct input values to fit a four-parameter logistic")
 #: R/zzModels.R:0
+#, fuzzy
 msgid "too few distinct input values to fit a four-parameter logistic"
-msgstr ""
+msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기에는 너무 적은 개수의 고유한 값(distinct input values)들이 입력되었습니다."
 
 #. R/zzModels.R: stop("too few distinct input values to fit a logistic model")
 #: R/zzModels.R:0
+#, fuzzy
 msgid "too few distinct input values to fit a logistic model"
-msgstr ""
+msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기에는 너무 적은 개수의 고유한 값(distinct input values)들이 입력되었습니다."
 
 #. R/zzModels.R: stop("too few distinct input values to fit an asymptotic regression model")
 #: R/zzModels.R:0
@@ -4093,23 +4014,27 @@ msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기�
 
 #. R/zzModels.R: stop("too few distinct input values to fit the 'asympOff' model")
 #: R/zzModels.R:0
+#, fuzzy
 msgid "too few distinct input values to fit the 'asympOff' model"
-msgstr ""
+msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기에는 너무 적은 개수의 고유한 값(distinct input values)들이 입력되었습니다."
 
 #. R/zzModels.R: stop("too few distinct input values to fit the 'asympOrig' model")
 #: R/zzModels.R:0
+#, fuzzy
 msgid "too few distinct input values to fit the 'asympOrig' model"
-msgstr ""
+msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기에는 너무 적은 개수의 고유한 값(distinct input values)들이 입력되었습니다."
 
 #. R/zzModels.R: stop("too few distinct input values to fit the Gompertz model")
 #: R/zzModels.R:0
+#, fuzzy
 msgid "too few distinct input values to fit the Gompertz model"
-msgstr ""
+msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기에는 너무 적은 개수의 고유한 값(distinct input values)들이 입력되었습니다."
 
 #. R/zzModels.R: stop("too few distinct input values to fit the Weibull growth model")
 #: R/zzModels.R:0
+#, fuzzy
 msgid "too few distinct input values to fit the Weibull growth model"
-msgstr ""
+msgstr "점근회귀모형(asymptotic regression model)을 적합하기 하기에는 너무 적은 개수의 고유한 값(distinct input values)들이 입력되었습니다."
 
 #. R/pairwise.R: stop("too few groups")
 #: R/pairwise.R:0
@@ -4133,10 +4058,10 @@ msgstr "제공된 치환값(replacement values)들이 너무 많습니다."
 
 #. R/arma0.R: warning("transformed ARMA parameters were fixed")
 #: R/arma0.R:0
+#, fuzzy
 msgid "transformed ARMA parameters were fixed"
-msgstr ""
+msgstr "일부 ARMA 파라미터들은 고정되어 있습니다:  transform.pars = FALSE로 설정합니다"
 
-#. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #: R/model.tables.R:0
 msgid "type '%s' is not implemented yet"
@@ -4194,7 +4119,6 @@ msgid "using F test with a '%s' family is inappropriate"
 msgstr "'%s' 페밀리를 이용하여 F 테스트를 사용하는 것은 부적절합니다"
 
 #. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
-#. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
 #: R/glm.R:0
 msgid "using F test with a fixed dispersion is inappropriate"
 msgstr "고정된 dispersion을 이용해서 F 테스트를 사용하는 것은 부적절합니다"
@@ -4250,7 +4174,6 @@ msgid "weights must be non-negative and not all zero"
 msgstr "weights는 반드시 음의 값을 가지지 않으며, 모두 0이어서는 안됩니다"
 
 #. R/embed.R: stop("wrong embedding dimension")
-#. R/embed.R: stop("wrong embedding dimension")
 #: R/embed.R:0
 msgid "wrong embedding dimension"
 msgstr ""
@@ -4278,15 +4201,15 @@ msgstr "'x'에 있는 열의 개수가 잘못되었습니다"
 
 #. R/contr.poly.R: stop("wrong number of columns in new data: ", deparse1(substitute(...)))
 #: R/contr.poly.R:0
+#, fuzzy
 msgid "wrong number of columns in new data:"
-msgstr ""
+msgstr "'x'에 있는 열의 개수가 잘못되었습니다"
 
 #. R/contrast.R: stop("wrong number of contrast matrix rows")
 #: R/contrast.R:0
 msgid "wrong number of contrast matrix rows"
 msgstr "contrast 행렬의 행의 개수가 잘못되었습니다"
 
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 msgid "x is not a vector or univariate time series"
@@ -4324,14 +4247,12 @@ msgid "y values must be 0 <= y <= 1"
 msgstr "y 값들은 반드시 0 이상 1 이하이어야 합니다"
 
 #. R/approx.R: stop("zero non-NA points")
-#. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
 #. R/splinefun.R: stop("zero non-NA points")
 #: R/approx.R:0 R/spline.R:0 R/splinefun.R:0
 msgid "zero non-NA points"
 msgstr "NA가 아닌 포인트들의 개수는 0입니다"
 
-#. R/ar.R: stop("zero-variance series")
 #. R/ar.R: stop("zero-variance series")
 #: R/ar.R:0
 msgid "zero-variance series"
@@ -4345,9 +4266,10 @@ msgstr[0] ""
 
 #. R/lsfit.R: ngettext(sum(!good), "%d missing value deleted", "%d missing values deleted")
 #: R/lsfit.R:0
+#, fuzzy
 msgid "%d missing value deleted"
 msgid_plural "%d missing values deleted"
-msgstr[0] ""
+msgstr[0] "결측값들은 삭제되었습니다"
 
 #. R/nafns.R: ngettext(n <- length(x), "%d observation deleted due to missingness",     "%d observations deleted due to missingness")
 #: R/nafns.R:0
@@ -4405,9 +4327,10 @@ msgstr[0] "X 행렬은 rank %1$d를 가지고 있으나  %2$d개의 관측치 �
 
 #. R/nlm.R: ngettext(maxiter, "_NOT_ converged in %d iteration", "_NOT_ converged in %d iterations")
 #: R/nlm.R:0
+#, fuzzy
 msgid "_NOT_ converged in %d iteration"
 msgid_plural "_NOT_ converged in %d iterations"
-msgstr[0] ""
+msgstr[0] "medpolish()는 %d 번째 반복에서 수렴하지 않았습니다."
 
 #. R/lsfit.R: ngettext(ncx, "but %d variable", "but %d variables")
 #: R/lsfit.R:0
@@ -4423,9 +4346,10 @@ msgstr[0] "그러나 찾아진 변수는 %d개의 행을 가지고 있었습니�
 
 #. R/kmeans.R: ngettext(iter.max, "did not converge in %d iteration", "did not converge in %d iterations")
 #: R/kmeans.R:0
+#, fuzzy
 msgid "did not converge in %d iteration"
 msgid_plural "did not converge in %d iterations"
-msgstr[0] ""
+msgstr[0] "medpolish()는 %d 번째 반복에서 수렴하지 않았습니다."
 
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"%s\"",     "extra arguments %s are not of class \"%s\"")
 #: R/dendrogram.R:0
@@ -4501,7 +4425,6 @@ msgid "upper scope has term %s not included in model"
 msgid_plural "upper scope has terms %s not included in model"
 msgstr[0] "upper scope는 모델에는 포함되어 있지 않은 항 %s를 가지고 있습니다"
 
-#. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #: R/add.R:0
 msgid "using the %d/%d row from a combined fit"

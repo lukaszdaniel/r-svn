@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-24 17:06+0200\n"
+"POT-Creation-Date: 2025-06-01 10:55+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -4644,7 +4644,7 @@ msgstr ""
 msgid "bad opcode"
 msgstr "잘못된 opcode입니다"
 
-#: src/main/eval.cpp:6838
+#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr "'x %s y'에 유효하지 않은 %s 타입입니다"
@@ -5331,16 +5331,6 @@ msgstr "오로지 숫자, 논리, 또는 복소수 유형에 대한 연산들만
 #, c-format
 msgid "'%s' operator requires 2 arguments"
 msgstr "'%s' 연산자는 2개의 인자들을 필요로 합니다"
-
-#: src/main/logic.cpp:307
-#, c-format
-msgid "invalid 'x' type in 'x %s y'"
-msgstr "'x' 유형은 'x %s y'에 유효하지 않습니다"
-
-#: src/main/logic.cpp:316
-#, c-format
-msgid "invalid 'y' type in 'x %s y'"
-msgstr "'y' 유형은 'x %s y'에 유효하지 않습니다"
 
 #: src/main/logic.cpp:394
 msgid "Unary operator `!' called with two arguments"
@@ -10357,6 +10347,14 @@ msgstr "X11 모듈이 로드되어질 수 없습니다"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11을 사용할 수 없습니다"
+
+#, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "'x' 유형은 'x %s y'에 유효하지 않습니다"
+
+#, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "'y' 유형은 'x %s y'에 유효하지 않습니다"
 
 #, fuzzy
 #~ msgid "couldn't allocate node stack"

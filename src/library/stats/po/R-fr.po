@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-04-14 03:05+0000\n"
 "Last-Translator: Hugo Gruson <hugo.gruson@normalesup.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -33,7 +33,6 @@ msgstr "lien %s non reconnu"
 msgid "%s must be 0 or 1"
 msgstr "%s doit être 0 ou 1"
 
-#. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
 #: R/contrast.R:0 R/xtabs.R:0
@@ -184,12 +183,10 @@ msgid "'coef' must be a vector"
 msgstr "'coef' doit être un vecteur"
 
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
-#. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
 msgid "'coef' must define a contrast, i.e., sum to 0"
 msgstr "'coef' doit définir un constrate, i.e., sa somme doit être 0"
 
-#. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #: R/aov.R:0
 msgid "'coef' must have same length as 'contrast.obj'"
@@ -264,12 +261,10 @@ msgid "'cv' must not be NA when 'df' is specified"
 msgstr "'cv' ne peut être NA lorsque 'df' est spécifié"
 
 #. R/models.R: stop("'data' must be a data.frame, environment, or list")
-#. R/models.R: stop("'data' must be a data.frame, environment, or list")
 #: R/models.R:0
 msgid "'data' must be a data.frame, environment, or list"
 msgstr "'data' doit être un data frame, un environnement ou une liste"
 
-#. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
 msgid "'data' must be a data.frame, not a matrix or an array"
@@ -291,12 +286,10 @@ msgid "'degree' must be at least 1"
 msgstr "'degree' doit valoir au moins 1"
 
 #. R/contr.poly.R: stop("'degree' must be less than number of unique points")
-#. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 #: R/contr.poly.R:0
 msgid "'degree' must be less than number of unique points"
 msgstr "'degree' doit être inférieur au nombre de points uniques"
 
-#. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #: R/splinefun.R:0
 msgid "'deriv' must be between 0 and 3"
@@ -348,13 +341,10 @@ msgstr "'formula' manquante"
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
 #. R/ks.test.R: stop("'formula' missing or incorrect")
-#. R/ks.test.R: stop("'formula' missing or incorrect")
 #. R/mood.test.R: stop("'formula' missing or incorrect")
 #. R/oneway.test.R: stop("'formula' missing or incorrect")
 #. R/t.test.R: stop("'formula' missing or incorrect")
-#. R/t.test.R: stop("'formula' missing or incorrect")
 #. R/var.test.R: stop("'formula' missing or incorrect")
-#. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/ftable.R:0
@@ -437,7 +427,6 @@ msgid "'k' is bigger than 'n'!  Changing 'k' to %d"
 msgstr "'k' est plus grand que 'n' ! La valeur de 'k' est remplacée par %d"
 
 #. R/kernel.R: stop("'k' is not a kernel")
-#. R/kernel.R: stop("'k' is not a kernel")
 #: R/kernel.R:0
 msgid "'k' is not a kernel"
 msgstr "'k' n'est pas un noyau"
@@ -498,7 +487,6 @@ msgid "'lower' and 'upper' must be finite values"
 msgstr "'lower' et 'upper' doivent être des valeurs finies"
 
 #. R/kernel.R: stop("'m' is less than 1")
-#. R/kernel.R: stop("'m' is less than 1")
 #: R/kernel.R:0
 msgid "'m' is less than 1"
 msgstr "'m' est inférieur à 1"
@@ -508,7 +496,6 @@ msgstr "'m' est inférieur à 1"
 msgid "'m' must be numeric with non-negative integers"
 msgstr "'m' doit être numérique et contenir des entiers non négatifs"
 
-#. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #: R/termplot.R:0
 msgid "'main' must be TRUE, FALSE, NULL or character (vector)."
@@ -640,20 +627,15 @@ msgid "'order.max' must be < 'n.obs'"
 msgstr "'order.max' doit être < 'n.obs'"
 
 #. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
 #: R/ar.R:0
 msgid "'order.max' must be < 'n.used'"
 msgstr "'order.max' doit être < 'n.used'"
 
 #. R/ar.R: stop("'order.max' must be >= 0")
-#. R/ar.R: stop("'order.max' must be >= 0")
 #: R/ar.R:0
 msgid "'order.max' must be >= 0"
 msgstr "'order.max' doit être >= 0"
 
-#. R/ar.R: stop("'order.max' must be >= 1")
-#. R/ar.R: stop("'order.max' must be >= 1")
 #. R/ar.R: stop("'order.max' must be >= 1")
 #: R/ar.R:0
 msgid "'order.max' must be >= 1"
@@ -700,9 +682,6 @@ msgid "'print.level' must be in {0,1,2}"
 msgstr "'print.level' doit appartenir à {0,1,2}"
 
 #. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
 #: R/distn.R:0
 msgid "'prob' and 'mu' both specified"
 msgstr "'prob' et 'mu' spécifiés tous les deux"
@@ -712,7 +691,6 @@ msgstr "'prob' et 'mu' spécifiés tous les deux"
 msgid "'probs' outside [0,1]"
 msgstr "'probs' en dehors de [0,1]"
 
-#. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
@@ -773,7 +751,6 @@ msgstr "'row.var.names' manquant"
 msgid "'sampleT' and 'nser' must be integer"
 msgstr "'sampleT' et 'nser' doivent être des entiers"
 
-#. R/biplot.R: warning("'scale' is outside [0, 1]")
 #. R/biplot.R: warning("'scale' is outside [0, 1]")
 #: R/biplot.R:0
 msgid "'scale' is outside [0, 1]"
@@ -838,7 +815,6 @@ msgstr "'start' > 'end'"
 msgid "'start' and 'table' must be same length"
 msgstr "'start' et 'table' doivent avoir la même longueur"
 
-#. R/ts.R: stop("'start' cannot be after 'end'")
 #. R/ts.R: stop("'start' cannot be after 'end'")
 #: R/ts.R:0
 msgid "'start' cannot be after 'end'"
@@ -906,7 +882,6 @@ msgstr "les arguments varying doivent avoir la même longueur"
 msgid "'varying' has wrong length"
 msgstr "'varying' n'a pas la bonne longueur"
 
-#. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #: R/nls-profile.R:0
 msgid "'varying' must be in seq_along(pars)"
@@ -1049,8 +1024,6 @@ msgid "'x' is not a kernel"
 msgstr "'x' n'est pas un noyau"
 
 #. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
 #. R/kernel.R: stop("'x' is not a vector")
 #: R/diffinv.R:0 R/kernel.R:0
 msgid "'x' is not a vector"
@@ -1090,7 +1063,6 @@ msgid "'x' must be a list with at least 2 elements"
 msgstr "'x' doit être une liste à 2 éléments"
 
 #. R/lm.R: stop("'x' must be a matrix")
-#. R/lm.R: stop("'x' must be a matrix")
 #: R/lm.R:0
 msgid "'x' must be a matrix"
 msgstr "'x' doit être une matrice"
@@ -1115,8 +1087,6 @@ msgstr "'x' doit être un vecteur numérique"
 msgid "'x' must be a time series or an ar() fit"
 msgstr "'x' doit être une série temporelle ou un ajustement ar()"
 
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #: R/ftable.R:0
 msgid "'x' must be an \"ftable\" object"
@@ -1159,9 +1129,6 @@ msgstr "'x' doit être un entier positif ou nul"
 
 #. R/StructTS.R: stop("'x' must be numeric")
 #. R/acf.R: stop("'x' must be numeric")
-#. R/acf.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
 #. R/ar.R: stop("'x' must be numeric")
 #. R/arima.R: stop("'x' must be numeric")
 #. R/arma0.R: stop("'x' must be numeric")
@@ -1289,7 +1256,6 @@ msgid "(unordered) factors are not allowed"
 msgstr "les facteurs (non ordonnés) ne sont pas autorisés"
 
 #. R/lm.R: stop("0 (non-NA) cases")
-#. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
 msgid "0 (non-NA) cases"
 msgstr "aucun cas ne contient autre chose que des valeurs manquantes (NA)"
@@ -1324,7 +1290,6 @@ msgstr "Hypothèse d'une variance constante des prédictions, bien que le modèl
 msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr "L’algorithme de barrière a atteint le nombre maximal d'itérations sans avoir convergé"
 
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #: R/cor.test.R:0
 msgid "Cannot compute exact p-value with ties"
@@ -1406,14 +1371,10 @@ msgstr "NAs dans '%s'"
 
 #. R/acf.R: stop("NAs in 'x'")
 #. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
 #: R/acf.R:0 R/ar.R:0
 msgid "NAs in 'x'"
 msgstr "NAs dans 'x'"
 
-#. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #: R/ar.R:0
 msgid "NAs in 'x' must be the same row-wise"
@@ -1466,7 +1427,6 @@ msgstr "La fonction objective a augmenté dans l'itération externe %d"
 
 #. R/prcomp.R: stop("PCA applies only to numerical variables")
 #. R/princomp.R: stop("PCA applies only to numerical variables")
-#. R/princomp.R: stop("PCA applies only to numerical variables")
 #: R/prcomp.R:0 R/princomp.R:0
 msgid "PCA applies only to numerical variables"
 msgstr "L’ACP ne s'applique qu'à des valeurs numériques"
@@ -1508,7 +1468,6 @@ msgid "Requested conf.level not achievable"
 msgstr "Requête 'conf.level' impossible à atteindre"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
-#. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
 msgstr "Les erreur-types pour le type '%s' ne sont pas encore implémentées"
@@ -1538,14 +1497,10 @@ msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`
 msgstr "Impossible d’analyser le code de la reponse \"%s\" ; cet usage est obsolète. Utilisez as.name(.) ou `..` !"
 
 #. R/confint.R: message("Waiting for profiling to be done...")
-#. R/confint.R: message("Waiting for profiling to be done...")
 #: R/confint.R:0
 msgid "Waiting for profiling to be done..."
 msgstr ""
 
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
 #. R/mlm.R: stop("X does not define a subspace of M")
 #: R/mlm.R:0
 msgid "X does not define a subspace of M"
@@ -1661,7 +1616,6 @@ msgid "argument 'sides' must be 1 or 2"
 msgstr "l'argument 'sides' doit valoir 1 ou 2"
 
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
-#. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
 #, fuzzy
 msgid "argument 'sizes' must be a vector of length 2"
@@ -1679,8 +1633,9 @@ msgstr "l'argument 'x' ne peut pas être converti automatiquement en objet de cl
 
 #. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
+#, fuzzy
 msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
-msgstr ""
+msgstr "l'argument 'x' doit être numérique"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
@@ -1872,7 +1827,6 @@ msgstr "impossible de calculer les intervalles de confiance exacts avec des ex-a
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
 #. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
 #: R/ansari.test.R:0 R/wilcox.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "impossible de calculer la p-value exacte avec des ex-aequos"
@@ -1986,7 +1940,6 @@ msgid "computation of exact probability failed, returning Monte Carlo approximat
 msgstr ""
 
 #. R/contrast.R: stop("contrasts apply only to factors")
-#. R/contrast.R: stop("contrasts apply only to factors")
 #: R/contrast.R:0
 msgid "contrasts apply only to factors"
 msgstr "les contrastes s'appliquent uniquement aux facteurs"
@@ -2039,7 +1992,6 @@ msgstr "probabilité de l'intervalle en dehors des limites [0,1)"
 msgid "cross-validation with non-unique 'x' values seems doubtful"
 msgstr "la validation croisée avec des valeurs de 'x' non uniques paraît douteuse"
 
-#. R/t.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
 #: R/t.test.R:0
 msgid "data are essentially constant"
@@ -2150,7 +2102,6 @@ msgstr "les éléments de 'x' ne doivent pas être supérieurs à ceux de 'n'"
 
 #. R/kmeans.R: stop("empty cluster: try a better set of initial centers", call. = FALSE)
 #. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
-#. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
 #: R/kmeans.R:0
 msgid "empty cluster: try a better set of initial centers"
 msgstr "classe vide : essayez un jeu de centres meilleur"
@@ -2205,7 +2156,6 @@ msgstr "f.lower = f(lower) est NA"
 msgid "f.upper = f(upper) is NA"
 msgstr "f.upper = f(upper) est NA"
 
-#. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #: R/factanal.R:0
 msgid "factor analysis applies only to numerical variables"
@@ -2335,7 +2285,6 @@ msgid "ignoring prior weights"
 msgstr "les pondération initiales sont ignorées"
 
 #. R/lm.R: stop("incompatible dimensions")
-#. R/lm.R: stop("incompatible dimensions")
 #: R/lm.R:0
 msgid "incompatible dimensions"
 msgstr "dimensions incompatibles"
@@ -2361,7 +2310,6 @@ msgid "incorrect length of 'x'"
 msgstr "la longueur de 'x' est incorrecte"
 
 #. R/ftable.R: stop("incorrect specification for 'col.vars'")
-#. R/ftable.R: stop("incorrect specification for 'col.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'col.vars'"
 msgstr "'col.vars' incorrect"
@@ -2372,7 +2320,6 @@ msgstr "'col.vars' incorrect"
 msgid "incorrect specification for 'formula'"
 msgstr "'formula' incorrecte"
 
-#. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'row.vars'"
@@ -2475,8 +2422,6 @@ msgid "invalid 'method' argument"
 msgstr "argument 'method' incorrect"
 
 #. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
 #: R/bandwidths.R:0
 msgid "invalid 'nb'"
 msgstr "'nb' incorrect"
@@ -2487,14 +2432,10 @@ msgid "invalid 'tree' ('merge' component)"
 msgstr "'tree' incorrect (composante 'merge')"
 
 #. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr "argument 'use' incorrect"
 
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/bandwidths.R: stop("invalid 'x'")
 #. R/bandwidths.R: stop("invalid 'x'")
 #. R/chisq.test.R: stop("invalid 'x'")
 #. R/loess.R: stop("invalid 'x'")
@@ -2620,7 +2561,6 @@ msgid "invalid formula %s: not a call"
 msgstr "formule %s incorrecte : ce n’est pas un appel"
 
 #. R/deriv.R: stop("invalid formula in deriv")
-#. R/deriv.R: stop("invalid formula in deriv")
 #: R/deriv.R:0
 msgid "invalid formula in deriv"
 msgstr "formule incorrecte dans deriv"
@@ -2630,7 +2570,6 @@ msgstr "formule incorrecte dans deriv"
 msgid "invalid formula: %s"
 msgstr "'formula' incorrecte : %s"
 
-#. R/approx.R: stop("invalid interpolation method")
 #. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
 #: R/approx.R:0 R/spline.R:0
@@ -2644,9 +2583,6 @@ msgstr "longueur des membres incorrecte"
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
-#. R/approx.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
 #. R/bandwidths.R: stop("invalid length(x)")
 #. R/stl.R: stop("invalid length(x)")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/stl.R:0
@@ -2763,7 +2699,6 @@ msgstr ""
 " ne correspond pas à la longueur des marges, %d"
 
 #. R/biplot.R: stop("length of choices must be 2")
-#. R/biplot.R: stop("length of choices must be 2")
 #: R/biplot.R:0
 msgid "length of choices must be 2"
 msgstr "la longueur des choix doit être 2"
@@ -2784,12 +2719,6 @@ msgstr "les longueurs de 'x' et de 'xreg' ne correspondent pas"
 msgid "levels truncated to positive values only"
 msgstr "les niveaux ont été réduits aux valeurs positives"
 
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #: R/family.R:0
 msgid "link \"%s\" not available for %s family; available links are %s"
@@ -2830,8 +2759,6 @@ msgid "method = \"Brent\" is only available for one-dimensional optimization"
 msgstr "method = \"Brent\" n'est disponible que pour une optimisation unidimensionnelle"
 
 #. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
 #: R/lm.R:0
 msgid "method = '%s' is not supported. Using 'qr'"
 msgstr "method = '%s' n'est pas supporté. Utilisation de 'qr'"
@@ -2846,7 +2773,6 @@ msgstr "la méthode L-BFGS-B utilise 'factr' (et 'pgtol') au lieu de 'reltol' et
 msgid "midcache() of non-binary dendrograms only partly implemented"
 msgstr "midcache() pour des dendrogrammes non binaires n'est implémenté que partiellement"
 
-#. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
@@ -2910,7 +2836,6 @@ msgid "model frame and formula mismatch in model.matrix()"
 msgstr "le tableau du modèle et la formule ne correspondent pas dans model.matrix()"
 
 #. R/AIC.R: warning("models are not all fitted to the same number of observations")
-#. R/AIC.R: warning("models are not all fitted to the same number of observations")
 #: R/AIC.R:0
 msgid "models are not all fitted to the same number of observations"
 msgstr "tous les modèles n'ont pas été ajustés sur le même nombre d'observations"
@@ -2941,7 +2866,6 @@ msgstr "le nombre de centres de classes est supérieur au nombre de points"
 msgid "more cluster centers than distinct data points."
 msgstr "le nombre de centres de classes est supérieur au nombre de points distincts."
 
-#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #: R/dummy.coef.R:0
 msgid "multivariate case with missing coefficients is not yet implemented"
@@ -3024,10 +2948,6 @@ msgid "need an object with call component"
 msgstr "il faut un objet avec une composante call"
 
 #. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
 #: R/bandwidths.R:0
 msgid "need at least 2 data points"
 msgstr "il faut au moins 2 points"
@@ -3048,7 +2968,6 @@ msgid "need at least four unique 'x' values"
 msgstr "il faut au moins quatre valeurs de 'x' différentes"
 
 #. R/approx.R: stop("need at least two non-NA values to interpolate")
-#. R/approx.R: stop("need at least two non-NA values to interpolate")
 #: R/approx.R:0
 msgid "need at least two non-NA values to interpolate"
 msgstr "il faut au moins deux valeurs non manquantes pour interpoler"
@@ -3059,8 +2978,6 @@ msgid "need dendrograms where all leaves have labels"
 msgstr "il faut un dendrogramme où toutes les feuilles ont une étiquette"
 
 #. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
 #: R/manova.R:0
 msgid "need multiple responses"
 msgstr "réponses multiples nécessaires"
@@ -3070,8 +2987,6 @@ msgstr "réponses multiples nécessaires"
 msgid "need numeric data"
 msgstr "données numériques nécessaires"
 
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #: R/smspline.R:0
 msgid "need result of smooth.spline(keep.data = TRUE)"
@@ -3180,8 +3095,6 @@ msgid "no scores are available: refit with 'retx=TRUE'"
 msgstr "pas de score disponible : refaites l'ajustement avec 'retx=TRUE'"
 
 #. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
 #: R/nlm.R:0
 msgid "no sign change found in %d iterations"
 msgstr "pas de changement de signe après %d itérations"
@@ -3207,13 +3120,10 @@ msgid "no terms component nor attribute"
 msgstr "pas de composante 'terms' ni d'attribut"
 
 #. R/add.R: stop("no terms in scope")
-#. R/add.R: stop("no terms in scope")
 #: R/add.R:0
 msgid "no terms in scope"
 msgstr "aucun terme dans la formule cible"
 
-#. R/add.R: stop("no terms in scope for adding to object")
-#. R/add.R: stop("no terms in scope for adding to object")
 #. R/add.R: stop("no terms in scope for adding to object")
 #: R/add.R:0
 msgid "no terms in scope for adding to object"
@@ -3224,7 +3134,6 @@ msgstr "aucun terme dans la formule cible à rajouter à l'objet"
 msgid "no time series supplied"
 msgstr "aucune série temporelle fournie"
 
-#. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #: R/glm.R:0
 msgid "no valid set of coefficients has been found: please supply starting values"
@@ -3349,22 +3258,17 @@ msgid "not an unreplicated complete block design"
 msgstr "ce n'est pas un plan en bloc complet sans répétitions"
 
 #. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
 #: R/ks.test.R:0
 msgid "not enough 'x' data"
 msgstr "pas assez de données 'x'"
 
 #. R/ansari.test.R: stop("not enough 'x' observations")
 #. R/t.test.R: stop("not enough 'x' observations")
-#. R/t.test.R: stop("not enough 'x' observations")
 #. R/var.test.R: stop("not enough 'x' observations")
 #: R/ansari.test.R:0 R/t.test.R:0 R/var.test.R:0
 msgid "not enough 'x' observations"
 msgstr "nombre d'observations 'x' insuffisant"
 
-#. R/ks.test.R: stop("not enough 'y' data")
-#. R/ks.test.R: stop("not enough 'y' data")
 #. R/ks.test.R: stop("not enough 'y' data")
 #: R/ks.test.R:0
 msgid "not enough 'y' data"
@@ -3390,13 +3294,10 @@ msgid "not enough data"
 msgstr "pas assez de données"
 
 #. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
 #: R/contrast.R:0
 msgid "not enough degrees of freedom to define contrasts"
 msgstr "nombre de degrés de liberté insuffisant pour définir des contrastes"
 
-#. R/cor.test.R: stop("not enough finite observations")
 #. R/cor.test.R: stop("not enough finite observations")
 #: R/cor.test.R:0
 msgid "not enough finite observations"
@@ -3482,8 +3383,6 @@ msgid "number of offsets is %d, should equal %d (number of observations)"
 msgstr "le nombre de décalages est %d, il devrait valoir %d (nombre d'observations)"
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #: R/add.R:0
 msgid "number of rows in use has changed: remove missing values?"
 msgstr "le nombre de lignes utilisées a changé : supprimer les valeurs manquantes ?"
@@ -3527,7 +3426,6 @@ msgstr ""
 "y doit être fourni.\n"
 "Pour l'estimation de la densité, utilisez density()"
 
-#. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #: R/biplot.R:0
 msgid "object '%s' has no scores"
@@ -3596,16 +3494,10 @@ msgid "only univariate series are allowed"
 msgstr "seules les séries univariées sont autorisées"
 
 #. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
 #: R/HoltWinters.R:0
 msgid "optimization difficulties: %s"
 msgstr "difficultés d'optimisation : %s"
 
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
 #. R/HoltWinters.R: stop("optimization failure")
 #: R/HoltWinters.R:0
 msgid "optimization failure"
@@ -3657,7 +3549,6 @@ msgstr "seules les valeurs positives sont autorisées pour la famille 'inverse.g
 msgid "possible convergence problem: 'optim' gave code = %d and message %s"
 msgstr "problème de convergence possible : 'optim' renvoie un code = %d et un message %s"
 
-#. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arma0.R: gettextf("possible convergence problem: optim gave code = %d",     code)
 #: R/arima.R:0 R/arma0.R:0
@@ -3711,9 +3602,6 @@ msgid "ref = %d must be in 1L:%d"
 msgstr "ref = %d doit appartenir à 1L:%d"
 
 #. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
 #: R/wilcox.test.R:0
 msgid "requested conf.level not achievable"
 msgstr "requête conf.level impossible à atteindre"
@@ -3733,7 +3621,6 @@ msgstr "les degrés de liberté résiduels de l'objet suggère que ce n'est pas 
 msgid "residuals have rank %d < %d"
 msgstr "les résidus sont de rang %d < %d"
 
-#. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #: R/mlm.R:0
 msgid "residuals have rank %s < %s"
@@ -3768,7 +3655,6 @@ msgid "sample size must be between 3 and 5000"
 msgstr "la taille de l'échantillon doit être comprise entre 3 et 5000"
 
 #. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
-#. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
 #: R/ansari.test.R:0
 msgid "samples differ in location: cannot compute confidence set, returning NA"
 msgstr "la position des échantillons diffère : impossible de calculer l'intervalle de confiance, NA est renvoyé"
@@ -3778,8 +3664,6 @@ msgstr "la position des échantillons diffère : impossible de calculer l'interv
 msgid "scatter plots only for univariate time series"
 msgstr "les nuages de points ne sont que pour les séries temporelles univariées"
 
-#. R/add.R: stop("scope is not a subset of term labels")
-#. R/add.R: stop("scope is not a subset of term labels")
 #. R/add.R: stop("scope is not a subset of term labels")
 #: R/add.R:0
 msgid "scope is not a subset of term labels"
@@ -3798,7 +3682,6 @@ msgid "series is corrupt, with no 'tsp' attribute"
 msgstr "la série est incorrecte, pas d'attribut 'tsp'"
 
 #. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
-#. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
 #: R/ts.R:0
 msgid "series is corrupt: length %d with 'tsp' implying %d"
 msgstr "la série est incorrecte : longeur %d mais avec un 'tps' qui implique %d observations"
@@ -3808,7 +3691,6 @@ msgstr "la série est incorrecte : longeur %d mais avec un 'tps' qui implique %d
 msgid "series is not periodic or has less than two periods"
 msgstr "la série n'est pas périodique ou elle a moins de deux périodes"
 
-#. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #: R/nls.R:0
 msgid "setVarying : 'vary' length must match length of parameters"
@@ -3836,7 +3718,6 @@ msgid "singular contrast matrix"
 msgstr "matrice de contrastes singulière"
 
 #. R/glm.R: stop("singular fit encountered")
-#. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #: R/glm.R:0 R/lm.R:0
 msgid "singular fit encountered"
@@ -3909,17 +3790,10 @@ msgstr "le carré d'un prédicteur à ignorer a été spécifié, alors qu'il n'
 
 #. R/distn.R: warning("specify 'rate' or 'scale' but not both")
 #. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
 #: R/distn.R:0
 msgid "specify 'rate' or 'scale' but not both"
 msgstr "spécifiez 'rate' ou 'scale', mais pas les deux en même temps"
 
-#. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #: R/identify.hclust.R:0
 msgid "specify exactly one of 'k' and 'h'"
@@ -3961,7 +3835,6 @@ msgid "sum(weights) != 1  -- will not get true density"
 msgstr "sum(weights) != 1  -- vous n'obtiendrez pas réellement une densité de probabilité"
 
 #. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
-#. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
 #: R/cor.R:0
 msgid "supply both 'x' and 'y' or a matrix-like 'x'"
 msgstr "fournir 'x' et 'y' ou bien 'x' en matrice"
@@ -3992,7 +3865,6 @@ msgid "the case k > 2 is unimplemented"
 msgstr "le cas k > 2 n'est pas implémenté"
 
 #. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
-#. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
 #: R/aov.R:0
 msgid "the contrast defined is empty (has no TRUE elements)"
 msgstr "le contraste défini est vide (il n'a aucun élément TRUE)"
@@ -4007,8 +3879,6 @@ msgstr "la première valeur de la série temporelle ne peut pas être manquante"
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr "les arguments de 'anova.glm' suivants sont incorrects et ignorés :"
 
-#. R/StructTS.R: stop("the series is entirely NA")
-#. R/StructTS.R: stop("the series is entirely NA")
 #. R/StructTS.R: stop("the series is entirely NA")
 #: R/StructTS.R:0
 msgid "the series is entirely NA"
@@ -4126,7 +3996,6 @@ msgid "transformed ARMA parameters were fixed"
 msgstr "les paramètres ARMA tranformés étaient fixés"
 
 #. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
-#. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #: R/model.tables.R:0
 msgid "type '%s' is not implemented yet"
 msgstr "le type '%s' n'est pas encore implémenté"
@@ -4183,7 +4052,6 @@ msgid "using F test with a '%s' family is inappropriate"
 msgstr "l'utilisation d'un test F avec une famille '%s' n'est pas appropriée"
 
 #. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
-#. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
 #: R/glm.R:0
 msgid "using F test with a fixed dispersion is inappropriate"
 msgstr "l'utilisation d'un test F avec un facteur de dispersion fixe n'est pas appropriée"
@@ -4239,7 +4107,6 @@ msgid "weights must be non-negative and not all zero"
 msgstr "les poids doivent être positifs ou nuls et de somme non nulle"
 
 #. R/embed.R: stop("wrong embedding dimension")
-#. R/embed.R: stop("wrong embedding dimension")
 #: R/embed.R:0
 msgid "wrong embedding dimension"
 msgstr "dimension d'inclusion incorrecte"
@@ -4275,7 +4142,6 @@ msgstr "le nombre de colonnes des nouvelles données est incorrect :"
 msgid "wrong number of contrast matrix rows"
 msgstr "nombre de lignes de la matrice de contrastes incorrect"
 
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 msgid "x is not a vector or univariate time series"
@@ -4313,14 +4179,12 @@ msgid "y values must be 0 <= y <= 1"
 msgstr "les valeurs de y doivent être 0 <= y <= 1"
 
 #. R/approx.R: stop("zero non-NA points")
-#. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
 #. R/splinefun.R: stop("zero non-NA points")
 #: R/approx.R:0 R/spline.R:0 R/splinefun.R:0
 msgid "zero non-NA points"
 msgstr "zéro points non NA"
 
-#. R/ar.R: stop("zero-variance series")
 #. R/ar.R: stop("zero-variance series")
 #: R/ar.R:0
 msgid "zero-variance series"
@@ -4517,7 +4381,6 @@ msgid_plural "upper scope has terms %s not included in model"
 msgstr[0] "la formule inférieure a un terme %s non inclus dans le modèle"
 msgstr[1] "la formule inférieure a des termes %s non inclus dans le modèle"
 
-#. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #: R/add.R:0
 msgid "using the %d/%d row from a combined fit"

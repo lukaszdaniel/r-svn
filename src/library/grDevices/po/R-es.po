@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-08-31 11:06+0000\n"
 "Last-Translator: Geraldine Gomez Millan <geralidine.gomez@javeriana.edu.co>\n"
 "Language-Team: none\n"
@@ -18,7 +18,6 @@ msgstr ""
 msgid "'%s' is deprecated."
 msgstr ""
 
-#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
 msgid "'%s' must be a non-empty character string"
@@ -46,8 +45,9 @@ msgstr ""
 
 #. R/colorRamp.R: stop("'bias' must be positive")
 #: R/colorRamp.R:0
+#, fuzzy
 msgid "'bias' must be positive"
-msgstr ""
+msgstr "'coef' no debe ser negativo"
 
 #. R/calc.R: stop("'coef' must not be negative")
 #: R/calc.R:0
@@ -65,24 +65,17 @@ msgid "'drop' is always implicitly FALSE in '[.raster'"
 msgstr ""
 
 #. R/unix/dev2bitmap.R: stop("'file' is missing with no default")
-#. R/unix/dev2bitmap.R: stop("'file' is missing with no default")
-#. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
 #. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' is missing with no default"
 msgstr ""
 
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
 msgstr ""
 
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #: R/unix/png.R:0
 msgid "'filename' must be a non-empty character string"
@@ -225,21 +218,17 @@ msgid "Font information is inconsistent"
 msgstr ""
 
 #. R/postscript.R: stop("GhostScript was not found")
-#. R/postscript.R: stop("GhostScript was not found")
 #. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
 #. R/windows/dev2bitmap.R: stop("GhostScript was not found")
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "GhostScript was not found"
 msgstr ""
 
 #. R/patterns.R: stop("Invalid 'extend' value")
-#. R/patterns.R: stop("Invalid 'extend' value")
-#. R/patterns.R: stop("Invalid 'extend' value")
 #: R/patterns.R:0
+#, fuzzy
 msgid "Invalid 'extend' value"
-msgstr ""
+msgstr "nombre de archivo invalido"
 
 #. R/postscript.R: stop("Invalid 'glyphInfo'")
 #: R/postscript.R:0
@@ -258,8 +247,9 @@ msgstr ""
 
 #. R/path.R: stop("Invalid fill rule")
 #: R/path.R:0
+#, fuzzy
 msgid "Invalid fill rule"
-msgstr ""
+msgstr "nombre de archivo invalido"
 
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
@@ -433,8 +423,9 @@ msgstr "cairo_pdf: dispositivos basados en Cairo no están disponibles para esta
 
 #. R/cairo.R: stop("cairo_ps: Cairo-based devices are not available for this platform")
 #: R/cairo.R:0
+#, fuzzy
 msgid "cairo_ps: Cairo-based devices are not available for this platform"
-msgstr ""
+msgstr "cairo_pdf: dispositivos basados en Cairo no están disponibles para esta plataforma"
 
 #. R/windows/windows.R: stop("can only bring windows devices to the front")
 #: R/windows/windows.R:0
@@ -456,8 +447,6 @@ msgstr ""
 msgid "can only manipulate windows devices"
 msgstr ""
 
-#. R/device.R: stop("can only print from a screen device")
-#. R/device.R: stop("can only print from a screen device")
 #. R/device.R: stop("can only print from a screen device")
 #. R/unix/quartz.R: stop("can only print from a screen device")
 #: R/device.R:0 R/unix/quartz.R:0
@@ -581,32 +570,25 @@ msgid "invalid 'cmapEncoding' in font specification"
 msgstr ""
 
 #. R/postscript.R: stop("invalid 'family' argument")
-#. R/postscript.R: stop("invalid 'family' argument")
 #: R/postscript.R:0
+#, fuzzy
 msgid "invalid 'family' argument"
-msgstr ""
+msgstr "nombre de archivo invalido"
 
 #. R/unix/quartz.R: stop("invalid 'file'")
 #: R/unix/quartz.R:0
+#, fuzzy
 msgid "invalid 'file'"
-msgstr ""
+msgstr "nombre de archivo invalido"
 
-#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0
+#, fuzzy
 msgid "invalid 'file' argument '%s'"
-msgstr ""
+msgstr "nombre de archivo invalido"
 
 #. R/cairo.R: stop("invalid 'filename'")
-#. R/cairo.R: stop("invalid 'filename'")
-#. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
 #. R/windows/windows.R: stop("invalid 'filename'")
 #: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
@@ -616,8 +598,9 @@ msgstr "nombre de archivo invalido"
 #. R/unix/quartz.R: stop("invalid 'title'")
 #. R/unix/x11.R: stop("invalid 'title'")
 #: R/unix/quartz.R:0 R/unix/x11.R:0
+#, fuzzy
 msgid "invalid 'title'"
-msgstr ""
+msgstr "nombre de archivo invalido"
 
 #. R/postscript.R: stop("invalid CMap name in font specification")
 #: R/postscript.R:0
@@ -698,15 +681,15 @@ msgid "invalid encoding in font specification"
 msgstr ""
 
 #. R/postscript.R: stop("invalid family name in font specification")
-#. R/postscript.R: stop("invalid family name in font specification")
 #: R/postscript.R:0
 msgid "invalid family name in font specification"
 msgstr ""
 
 #. R/xyz.coords.R: stop("invalid first argument")
 #: R/xyz.coords.R:0
+#, fuzzy
 msgid "invalid first argument"
-msgstr ""
+msgstr "nombre de archivo invalido"
 
 #. R/xyz.coords.R: stop("invalid first argument [bad language object]")
 #: R/xyz.coords.R:0
@@ -718,7 +701,6 @@ msgstr ""
 msgid "invalid height"
 msgstr ""
 
-#. R/postscript.R: stop("invalid metric information in font specification")
 #. R/postscript.R: stop("invalid metric information in font specification")
 #: R/postscript.R:0
 msgid "invalid metric information in font specification"
@@ -760,8 +742,6 @@ msgid "invalid width"
 msgstr ""
 
 #. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
-#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
-#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
 #: R/glyph.R:0
 msgid "length of arguments must match (and be greater than 0)"
 msgstr ""
@@ -781,8 +761,6 @@ msgstr ""
 msgid "no current device to record from"
 msgstr ""
 
-#. R/device.R: stop("no device to print from")
-#. R/device.R: stop("no device to print from")
 #. R/device.R: stop("no device to print from")
 #. R/unix/quartz.R: stop("no device to print from")
 #: R/device.R:0 R/unix/quartz.R:0
@@ -861,7 +839,6 @@ msgid "snapshot recorded in different R version (pre 3.3.0)"
 msgstr ""
 
 #. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
-#. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
 #: R/postscript.R:0
 msgid "status %d in running command '%s'"
 msgstr ""
@@ -877,9 +854,6 @@ msgid "svg: Cairo-based devices are not available for this platform"
 msgstr "svg: los dispositivos basados en Cairo no están disponibles para esta plataforma"
 
 #. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
 msgstr ""
@@ -890,14 +864,10 @@ msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
 msgstr ""
 
 #. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
 msgstr ""
 
-#. R/postscript.R: gettextf("unknown family '%s'", family)
 #. R/postscript.R: gettextf("unknown family '%s'", family)
 #: R/postscript.R:0
 msgid "unknown family '%s'"
@@ -919,7 +889,6 @@ msgstr ""
 msgid "unrecognized format of gs -help"
 msgstr ""
 
-#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 #. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 #: R/windows/windows.R:0
 msgid "windows devices should not be used in examples etc"
@@ -946,7 +915,8 @@ msgstr[1] ""
 
 #. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'", domain = "R-grDevices")
 #: R/postscript.R:0
+#, fuzzy
 msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "nombre de archivo invalido"
+msgstr[1] "nombre de archivo invalido"

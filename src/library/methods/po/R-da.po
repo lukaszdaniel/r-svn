@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-10-05 20:10+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -56,8 +56,9 @@ msgstr ""
 
 #. R/SClasses.R: gettextf("%s is not a defined class", dQuote(Class))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "%s is not a defined class"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/refClass.R: gettextf("%s is not a defined class in this environment", dQuote(Class))
 #: R/refClass.R:0
@@ -68,8 +69,9 @@ msgstr ""
 #. R/refClass.R: gettextf("%s is not a field in class %s", sQuote(what), dQuote(def@className))
 #. R/refClass.R: gettextf("%s is not a field in class %s", sQuote(what), dQuote(className))
 #: R/refClass.R:0
+#, fuzzy
 msgid "%s is not a field in class %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/refClass.R: gettextf("%s is not a field in this class", sQuote(name))
 #: R/refClass.R:0
@@ -83,20 +85,22 @@ msgstr ""
 
 #. R/trace.R: gettextf("%s is not a method for reference class %s", sQuote(as.character(if (is.symbol(thisName)) thisName else what)),     dQuote(class(where)))
 #: R/trace.R:0
+#, fuzzy
 msgid "%s is not a method for reference class %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/refClass.R: gettextf("%s is not a reference class", dQuote(Class))
 #. R/refClass.R: gettextf("%s is not a reference class", dQuote(def@className))
 #: R/refClass.R:0
+#, fuzzy
 msgid "%s is not a reference class"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
-#. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "%s is not a slot in class %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/refClass.R: gettextf("%s is not a valid field or method name for reference class %s",     sQuote(field), dQuote(thisClass@className))
 #: R/refClass.R:0
@@ -155,13 +159,15 @@ msgstr ""
 
 #. R/RClassUtils.R: stop("'Class' must be a valid class definition or class")
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "'Class' must be a valid class definition or class"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/oldClass.R: gettextf("'S3Class' can only assign to S4 objects that extend \"oldClass\"; not true of class %s",     dQuote(class(object)))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "'S3Class' can only assign to S4 objects that extend \"oldClass\"; not true of class %s"
-msgstr ""
+msgstr "S3Part() er kun defineret for klasser opsat af setOldClass(), grundlæggende klasser eller underklasser af disse: gælder ikke klasse %s"
 
 #. R/oldClass.R: gettextf("'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s",     dQuote("oldClass"), dQuote(class(object)))
 #: R/oldClass.R:0
@@ -189,7 +195,6 @@ msgstr ""
 msgid "'externalptr' objects cannot be initialized from new()"
 msgstr ""
 
-#. R/Methods.R: stop("'file' must be a character string or a connection")
 #. R/Methods.R: stop("'file' must be a character string or a connection")
 #: R/Methods.R:0
 msgid "'file' must be a character string or a connection"
@@ -435,8 +440,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("Restoring default function definition of %s", sQuote(f))
 #: R/Methods.R:0
+#, fuzzy
 msgid "Restoring default function definition of %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/ClassExtensions.R: gettextf("S3Part() is only defined for classes set up by setOldCLass(), basic classes or subclasses of these:  not true of class %s",     dQuote(class(object)))
 #: R/ClassExtensions.R:0
@@ -453,7 +459,6 @@ msgstr ""
 msgid "The prototype for class %s has undefined slot(s): %s"
 msgstr ""
 
-#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 #: R/MethodsList.R:0
 msgid "Use %s instead."
@@ -475,8 +480,7 @@ msgid "a call to superClass() is in the method %s but there is no superclass def
 msgstr ""
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
-#. R/trace.R: stop("a function for argument 'f' must be a generic function")
-#: R/Methods.R:0 R/trace.R:0
+#: R/Methods.R:0
 msgid "a function for argument 'f' must be a generic function"
 msgstr ""
 
@@ -487,8 +491,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("a prototype was supplied of class %s, but the class definition requires an object that is class %s",     dQuote(class(prototype)), dQuote(dataPartClass))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "a prototype was supplied of class %s, but the class definition requires an object that is class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/refClass.R: gettextf("a single class name is needed for field %s, got a character vector of length %d",     sQuote(thisName), length(thisField))
 #: R/refClass.R:0
@@ -497,8 +502,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("a validity method must be a function of one argument, got an object of class %s",     dQuote(class(validity)))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "a validity method must be a function of one argument, got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/SClasses.R: gettextf("abnormal type %s is not supported as a superclass of a class definition",     dQuote(type))
 #: R/SClasses.R:0
@@ -528,8 +534,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("argument %s must be a generic function or a single character string; got an object of class %s",     sQuote("f"), dQuote(class(f)))
 #: R/Methods.R:0
+#, fuzzy
 msgid "argument %s must be a generic function or a single character string; got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/SClasses.R: gettextf("argument %s must be a list or a character vector; got an object of class %s",     dQuote(what), dQuote(class(fields)))
 #: R/SClasses.R:0
@@ -539,8 +546,9 @@ msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/oldClass.R: gettextf("argument 'Classes' must be a vector of two classes; got an argument of length %d",     length(Classes))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "argument 'Classes' must be a vector of two classes; got an argument of length %d"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/oldClass.R: gettextf("argument 'S4Class' must be a class definition: got an object of class %s",     dQuote(class(S4Class)))
 #: R/oldClass.R:0
@@ -561,13 +569,15 @@ msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/SClasses.R: gettextf("argument 'classDef' must be a string or a class representation; got an object of class %s",     dQuote(class(classDef)))
 #: R/SClasses.R:0
+#, fuzzy
 msgid "argument 'classDef' must be a string or a class representation; got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/Methods.R: gettextf("argument 'f' must be a generic function or %s", .notSingleString(f))
 #: R/Methods.R:0
+#, fuzzy
 msgid "argument 'f' must be a generic function or %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/RMethodUtils.R: stop("argument 'f' must be a string, generic function, or primitive: got an ordinary function")
 #: R/RMethodUtils.R:0
@@ -576,8 +586,9 @@ msgstr ""
 
 #. R/RClassUtils.R: stop("argument 'includeSubclasses' must be a logical, either one value or a vector of the same length as argument 'classes'")
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "argument 'includeSubclasses' must be a logical, either one value or a vector of the same length as argument 'classes'"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/trace.R: stop("argument 'signature' is not meaningful for tracing reference methods")
 #: R/trace.R:0
@@ -620,8 +631,9 @@ msgstr ""
 
 #. R/refClass.R: stop("arguments must all be character string names of fields")
 #: R/refClass.R:0
+#, fuzzy
 msgid "arguments must all be character string names of fields"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/refClass.R: stop("arguments to methods() must be named, or one named list")
 #: R/refClass.R:0
@@ -661,8 +673,9 @@ msgstr ""
 
 #. R/NextMethod.R: gettextf("bad object found as method (class %s)", dQuote(class(method)))
 #: R/NextMethod.R:0
+#, fuzzy
 msgid "bad object found as method (class %s)"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/is.R: gettext("both classes must be defined")
 #: R/is.R:0
@@ -749,8 +762,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("class %s does not have a data part (a .Data slot) defined",     dQuote(class(object)))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "class %s does not have a data part (a .Data slot) defined"
-msgstr ""
+msgstr "Klasse %s har ikke en S3-datadel, og er således af type »S4«; ingen tilsvarende S3"
 
 #. R/BasicClasses.R: gettextf("class %s does not have an S3 data part, and so is of type \"S4\"; no S3 equivalent",     dQuote(class(from)))
 #: R/BasicClasses.R:0
@@ -861,8 +875,9 @@ msgstr ""
 
 #. R/refClass.R: gettextf("class must be a reference class representation or a character string; got an object of class %s",     dQuote(class(Class)))
 #: R/refClass.R:0
+#, fuzzy
 msgid "class must be a reference class representation or a character string; got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/refClass.R: gettextf("code for methods in class %s was not checked for suspicious field assignments (recommended package %s not available?)",     dQuote(Class), sQuote("codetools"))
 #: R/refClass.R:0
@@ -876,8 +891,9 @@ msgstr ""
 
 #. R/MethodsList.R: gettextf("default method must be a method definition, a primitive or NULL: got an object of class %s",     dQuote(class(method)))
 #: R/MethodsList.R:0
+#, fuzzy
 msgid "default method must be a method definition, a primitive or NULL: got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/refClass.R: stop("direct calls to callSuper() are invalid:  should only be called from another method")
 #: R/refClass.R:0
@@ -966,8 +982,9 @@ msgstr ""
 
 #. R/oldClass.R: gettextf("explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s",     to, dQuote(class(from)[1L]))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s"
-msgstr ""
+msgstr "ingen 'replace'-metode blev defineret for as(x, \"%s\") <- værdi for klasse %s"
 
 #. R/methodsTable.R: stop("failed to find expected group generic function: ", what)
 #: R/methodsTable.R:0
@@ -996,8 +1013,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("first argument should be the names of one of more generic functions (got object of class %s)",     dQuote(class(f)))
 #: R/Methods.R:0
+#, fuzzy
 msgid "first argument should be the names of one of more generic functions (got object of class %s)"
-msgstr ""
+msgstr "S3Class-argumentet skal være en overklasse af %s: gælder ikke for klasse %s"
 
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
@@ -1127,8 +1145,9 @@ msgstr ""
 
 #. R/show.R: gettextf("invalid 'ignore' argument; should be a class definition or a character vector, got an object of class %s",     dQuote(class(ignore)))
 #: R/show.R:0
+#, fuzzy
 msgid "invalid 'ignore' argument; should be a class definition or a character vector, got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/MethodsList.R: stop("invalid 'package' slot or attribute, wrong length")
 #: R/MethodsList.R:0
@@ -1137,8 +1156,9 @@ msgstr ""
 
 #. R/trace.R: gettextf("invalid 'source' argument: expected file names or a connection but got an object of class %s",     dQuote(class(source)[[1L]]))
 #: R/trace.R:0
+#, fuzzy
 msgid "invalid 'source' argument: expected file names or a connection but got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
@@ -1157,8 +1177,9 @@ msgstr ""
 
 #. R/show.R: gettextf("invalid call to 'classLabel': expected a name or a class definition, got an object of class %s",     classLabel(class(Class)))
 #: R/show.R:0
+#, fuzzy
 msgid "invalid call to 'classLabel': expected a name or a class definition, got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/SClasses.R: gettextf("invalid class %s object", dQuote(Class))
 #: R/SClasses.R:0
@@ -1377,8 +1398,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("no '.Data' slot defined for class %s", dQuote(class(object)))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "no '.Data' slot defined for class %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/ClassExtensions.R: gettextf("no 'replace' method was defined for 'as(x, \"%s\") <- value' for class %s",     to, dQuote(class(from)))
 #: R/ClassExtensions.R:0
@@ -1393,8 +1415,9 @@ msgstr ""
 
 #. R/fixPrevious.R: gettextf("no definition for the class of %s (class %s) found",     sQuote(what), dQuote(class))
 #: R/fixPrevious.R:0
+#, fuzzy
 msgid "no definition for the class of %s (class %s) found"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/RMethodUtils.R: gettextf("no definition found for class %s", dQuote(classi))
 #: R/RMethodUtils.R:0
@@ -1404,18 +1427,21 @@ msgstr "\", fik en af klasse \""
 
 #. R/refClass.R: gettextf("no definition found for inherited class: %s", paste0("\"",     contains[missingDefs], "\"", collapse = ", "))
 #: R/refClass.R:0
+#, fuzzy
 msgid "no definition found for inherited class: %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/SClasses.R: gettextf("no definition of %s to use for %s", dQuote(Class),     unique)
 #: R/SClasses.R:0
+#, fuzzy
 msgid "no definition of %s to use for %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/promptClass.R: gettextf("no definition of class %s found", dQuote(clName))
 #: R/promptClass.R:0
+#, fuzzy
 msgid "no definition of class %s found"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/RClassUtils.R: gettextf("no definition of inheritance from %s to %s, though the relation was implied by the setIs() from %s",     .dQ(what), .dQ(def2@className), .dQ(class))
 #: R/RClassUtils.R:0
@@ -1424,8 +1450,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("no definition was found for superclass %s in the specification of class %s",     dQuote(cl), dQuote(name))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "no definition was found for superclass %s in the specification of class %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/Methods.R: gettextf("no environment or package corresponding to argument where=%s",     deparse(where))
 #: R/Methods.R:0
@@ -1434,8 +1461,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("no existing definition for function %s", sQuote(f))
 #: R/Methods.R:0
+#, fuzzy
 msgid "no existing definition for function %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/addedFunctions.R: gettextf("no function %s found", sQuote(name))
 #: R/addedFunctions.R:0
@@ -1444,16 +1472,16 @@ msgstr ""
 
 #. R/trace.R: gettextf("no function definition for %s found", sQuote(what))
 #: R/trace.R:0
+#, fuzzy
 msgid "no function definition for %s found"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/method.skeleton.R: gettextf("no function definition found for %s", sQuote(generic))
 #: R/method.skeleton.R:0
+#, fuzzy
 msgid "no function definition found for %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 #. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 #: R/Methods.R:0
 msgid "no generic function %s found"
@@ -1466,13 +1494,15 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("no generic function found for %s", sQuote(f))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "no generic function found for %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/Methods.R: gettextf("no generic function found for '%s'", f)
 #: R/Methods.R:0
+#, fuzzy
 msgid "no generic function found for '%s'"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/Methods.R: gettextf("no generic version of %s on package %s is allowed;\n   a new generic will be assigned for %s",     sQuote(name), sQuote(package), thisPName)
 #: R/Methods.R:0
@@ -1483,8 +1513,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("no method for %s matches class %s", sQuote("..."),     dQuote(signature))
 #: R/Methods.R:0
+#, fuzzy
 msgid "no method for %s matches class %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/Methods.R: gettextf("no method found for function %s and signature %s",     sQuote(fdef@generic), paste(.dQ(signature), collapse = ", "))
 #: R/Methods.R:0
@@ -1498,8 +1529,9 @@ msgstr ""
 
 #. R/Methods.R: gettextf("no method found for signature %s", paste(signature,     collapse = ", "))
 #: R/Methods.R:0
+#, fuzzy
 msgid "no method found for signature %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/trace.R: gettextf("no method in methods table for %s for signature %s",     sQuote(what), sQuote(signature))
 #: R/trace.R:0
@@ -1542,7 +1574,6 @@ msgid "no package name supplied and no class definition found for %s"
 msgstr ""
 
 #. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
-#. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 #: R/RMethodUtils.R:0
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr ""
@@ -1583,7 +1614,6 @@ msgstr ""
 msgid "none of the objects in the source code could be found:  need to attach or specify the package"
 msgstr ""
 
-#. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #: R/refClass.R:0
 #, fuzzy
@@ -1711,8 +1741,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "single string; got an object of class %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what),     dQuote(slots1[[what]]), dQuote(slots2[[what]]))
 #: R/oldClass.R:0
@@ -1736,8 +1767,9 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("the %s argument must be NULL or a generic function object; got an object of class %s",     sQuote("genericFunction"), dQuote(class(genericFunction)))
 #: R/RMethodUtils.R:0
+#, fuzzy
 msgid "the %s argument must be NULL or a generic function object; got an object of class %s"
-msgstr ""
+msgstr "Erstatningsværdi skal udvide klasse %s, fik %s"
 
 #. R/RClassUtils.R: gettextf("the '%s' list for class %s, includes an undefined class %s",     if (superClassCase) "superClass" else "subClass", dQuote(className),     dQuote(.className(by)))
 #: R/RClassUtils.R:0
@@ -1752,8 +1784,9 @@ msgstr "S3Class-argumentet skal være en overklasse af %s: gælder ikke for klas
 
 #. R/ClassExtensions.R: gettextf("the 'coerce' argument to 'setIs' should be a function of one argument, got an object of class %s",     dQuote(class(coerce)))
 #: R/ClassExtensions.R:0
+#, fuzzy
 msgid "the 'coerce' argument to 'setIs' should be a function of one argument, got an object of class %s"
-msgstr ""
+msgstr "S3Class-argumentet skal være en overklasse af %s: gælder ikke for klasse %s"
 
 #. R/refClass.R: gettextf("the 'contains' argument should be the names of superclasses:  got an element of class %s",     dQuote(class(what)))
 #: R/refClass.R:0
@@ -1763,8 +1796,9 @@ msgstr "S3Class-argumentet skal være en overklasse af %s: gælder ikke for klas
 
 #. R/ClassExtensions.R: gettextf("the 'replace' argument to setIs() should be a function of 2 or 3 arguments, got an object of class %s",     dQuote(class(replace)))
 #: R/ClassExtensions.R:0
+#, fuzzy
 msgid "the 'replace' argument to setIs() should be a function of 2 or 3 arguments, got an object of class %s"
-msgstr ""
+msgstr "Unavngivet argument for new() skal være et miljø for det nye objekt"
 
 #. R/Methods.R: gettextf("the 'where' environment (%s) is a locked namespace; cannot assign methods there",     getPackageName(where))
 #: R/Methods.R:0
@@ -1782,7 +1816,6 @@ msgid "the body of the generic function for %s calls 'standardGeneric' to dispat
 msgstr ""
 
 #. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
-#. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
 #: R/refClass.R:0
 msgid "the class of field %s in the object is not compatible with the desired class %s in the target"
 msgstr ""
@@ -1792,7 +1825,6 @@ msgstr ""
 msgid "the computation: 'as(object,\"%s\") <- value' is valid when object has class %s only if 'is(value, \"%s\")' is TRUE ('class(value)' was %s)"
 msgstr ""
 
-#. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #: R/refClass.R:0
 msgid "the definition of class %s in package %s is locked so fields may not be modified"
@@ -1962,8 +1994,9 @@ msgstr ""
 
 #. R/RClassUtils.R: gettext("undefined slot classes in definition of %s: %s", domain = "R-methods")
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid "undefined slot classes in definition of %s: %s"
-msgstr ""
+msgstr "\", fik en af klasse \""
 
 #. R/RClassUtils.R: gettextf("undefined subclass %s of class %s; definition not updated",     .dQ(what), .dQ(def@className))
 #: R/RClassUtils.R:0
@@ -2097,10 +2130,11 @@ msgstr[1] ""
 
 #. R/MethodsList.R: ngettext(length(unknown), "no definition for class %s", "no definition for classes %s")
 #: R/MethodsList.R:0
+#, fuzzy
 msgid "no definition for class %s"
 msgid_plural "no definition for classes %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "\", fik en af klasse \""
+msgstr[1] "\", fik en af klasse \""
 
 #. R/promptClass.R: ngettext(length(whereClass), "no definition of class %s in the specified position, %s, definition on : %s",     "no definition of class %s in the specified position, %s, definitions on : %s")
 #: R/promptClass.R:0
@@ -2109,7 +2143,6 @@ msgid_plural "no definition of class %s in the specified position, %s, definitio
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #: R/RMethodUtils.R:0
 msgid "non-argument found in the signature: %s"

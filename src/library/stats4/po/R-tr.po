@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:16\n"
 "PO-Revision-Date: 2011-04-01 04:27+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -27,6 +27,7 @@ msgstr ""
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
+#, fuzzy
 msgid "extra arguments discarded"
 msgstr "ekstra argümanlar çıkarıldı"
 
@@ -47,6 +48,7 @@ msgstr ""
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
+#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "profilleme daha iyi bir çözüm buldu, özgün uyum yakınsamadı"
 

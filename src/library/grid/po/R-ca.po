@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -25,9 +25,6 @@ msgstr "«*» o «/» no es poden utilitzar com a operador unari"
 msgid "'Summary' function '%s' not meaningful for units"
 msgstr "la funció de resum «%s» no té sentit per a les unitats"
 
-#. R/grob.R: stop("'allDevices' not yet implemented")
-#. R/grob.R: stop("'allDevices' not yet implemented")
-#. R/grob.R: stop("'allDevices' not yet implemented")
 #. R/grob.R: stop("'allDevices' not yet implemented")
 #: R/grob.R:0
 #, fuzzy
@@ -71,9 +68,6 @@ msgid "'gEditList' can only contain 'gEdit' objects"
 msgstr "'gEditList' només pot contenir objectes 'gEdit'"
 
 #. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
 #. R/grob.R: gettextf("'gPath' (%s) not found", gPath)
 #: R/grob.R:0
 #, fuzzy
@@ -81,15 +75,11 @@ msgid "'gPath' (%s) not found"
 msgstr "no s'ha trobat «gPath» (%s)"
 
 #. R/grob.R: stop("'gPath' does not specify a valid child")
-#. R/grob.R: stop("'gPath' does not specify a valid child")
-#. R/grob.R: stop("'gPath' does not specify a valid child")
 #: R/grob.R:0
 #, fuzzy
 msgid "'gPath' does not specify a valid child"
 msgstr "«gPath» no especifica un fill vàlid"
 
-#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
-#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #: R/gpar.R:0
 #, fuzzy
@@ -102,7 +92,6 @@ msgstr "L'element «gamma» «gpar» és obsolet"
 msgid "'gpar' element '%s' must not be length 0"
 msgstr "l'element 'gpar' «%s» no ha de ser de longitud 0"
 
-#. R/highlevel.R: stop("'hgap' must be single unit")
 #. R/highlevel.R: stop("'hgap' must be single unit")
 #: R/highlevel.R:0
 #, fuzzy
@@ -133,7 +122,6 @@ msgstr "«l» ha de ser una disposició"
 msgid "'labels' and 'at' locations must have same length"
 msgstr "les ubicacions «etiquetes» i «a» han de tenir la mateixa longitud"
 
-#. R/primitives.R: stop("'length' must be a 'unit' object")
 #. R/primitives.R: stop("'length' must be a 'unit' object")
 #: R/primitives.R:0
 #, fuzzy
@@ -202,7 +190,6 @@ msgid "'squareShape' must be between -1 and 1"
 msgstr "«squareShape» ha d'estar entre -1 i 1"
 
 #. R/highlevel.R: stop("'vgap' must be single unit")
-#. R/highlevel.R: stop("'vgap' must be single unit")
 #: R/highlevel.R:0
 #, fuzzy
 msgid "'vgap' must be single unit"
@@ -220,19 +207,11 @@ msgid "'x' and 'units' must have length > 0"
 msgstr "«x» i «units» han de tenir longitud have 0"
 
 #. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
 #: R/primitives.R:0
 #, fuzzy
 msgid "'x' and 'y' and 'id' must all be same length"
 msgstr "«x» i «y» i «id» han de tenir la mateixa longitud"
 
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 #. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 #: R/primitives.R:0
 #, fuzzy
@@ -258,22 +237,11 @@ msgid "'x' and 'y' must be 'unit' objects and have the same length"
 msgstr "«x» i «y» han de ser objectes «units» i tenir la mateixa longitud"
 
 #. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
 #: R/primitives.R:0
 #, fuzzy
 msgid "'x' and 'y' must be same length"
 msgstr "«x» i «y» han de tenir la mateixa longitud"
 
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/typeset.R: stop("'x' and 'y' must be units")
 #: R/primitives.R:0 R/typeset.R:0
@@ -293,7 +261,6 @@ msgstr "«x» i «y» han de ser unitats i «device» ha de ser lògic"
 msgid "'x' and 'y' must be units or NULL"
 msgstr "«x» i «y» han de ser unitats o NULL"
 
-#. R/primitives.R: stop("'x' and 'y' must have length 1")
 #. R/primitives.R: stop("'x' and 'y' must have length 1")
 #: R/primitives.R:0
 #, fuzzy
@@ -318,8 +285,6 @@ msgstr "«x», «y» i «size» han de ser unitats"
 msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
 msgstr "«x», «y», «width» i «height» han de ser unitats de longitud 1"
 
-#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
-#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must be units")
 #: R/primitives.R:0 R/roundRect.R:0
@@ -400,7 +365,6 @@ msgid "Invalid coordinates"
 msgstr "Coordenades no vàlides"
 
 #. R/group.R: stop("Invalid destination")
-#. R/group.R: stop("Invalid destination")
 #: R/group.R:0
 #, fuzzy
 msgid "Invalid destination"
@@ -431,7 +395,6 @@ msgid "Invalid grob coordinates"
 msgstr "Coordenades grob no vàlides"
 
 #. R/grid.R: stop("Invalid number of generations")
-#. R/grid.R: stop("Invalid number of generations")
 #: R/grid.R:0
 #, fuzzy
 msgid "Invalid number of generations"
@@ -443,7 +406,6 @@ msgstr "El nombre de generacions no és vàlid"
 msgid "Invalid revert target"
 msgstr "Destinació de reversió no vàlida"
 
-#. R/group.R: stop("Invalid source")
 #. R/group.R: stop("Invalid source")
 #: R/group.R:0
 #, fuzzy
@@ -494,7 +456,6 @@ msgid "Only a grob can be converted to a path"
 msgstr "Només es pot convertir un grob a un camí"
 
 #. R/patterns.R: warning("Pattern fill applied to object with no inside")
-#. R/patterns.R: warning("Pattern fill applied to object with no inside")
 #: R/patterns.R:0
 #, fuzzy
 msgid "Pattern fill applied to object with no inside"
@@ -518,7 +479,6 @@ msgstr "Àncora desconeguda; s'usarà la justificació inferior"
 msgid "Unknown anchor; using left justification"
 msgstr "Àncora desconeguda; s'usarà la justificació esquerra"
 
-#. R/group.R: paste0("Unknown group: ", x$group)
 #. R/group.R: paste0("Unknown group: ", x$group)
 #: R/group.R:0
 #, fuzzy
@@ -586,14 +546,11 @@ msgid "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col
 msgstr "no es pot especificar més d'una de 'side=[\"left\", \"right\"]', 'col', 'col.before' o 'col.after'"
 
 #. R/patterns.R: stop("colours and stops must be at least length 1")
-#. R/patterns.R: stop("colours and stops must be at least length 1")
 #: R/patterns.R:0
 #, fuzzy
 msgid "colours and stops must be at least length 1"
 msgstr "els colors i les aturades han de tenir almenys 1 longitud"
 
-#. R/primitives.R: stop("corrupt 'arrows' object")
-#. R/primitives.R: stop("corrupt 'arrows' object")
 #. R/primitives.R: stop("corrupt 'arrows' object")
 #: R/primitives.R:0
 #, fuzzy
@@ -619,7 +576,6 @@ msgstr "els punts finals no han de ser idèntics"
 msgid "gPath (%s) not found"
 msgstr "no s'ha trobat gPath (%s)"
 
-#. R/grob.R: gettextf("grob '%s' not found", name)
 #. R/grob.R: gettextf("grob '%s' not found", name)
 #: R/grob.R:0
 #, fuzzy
@@ -648,7 +604,6 @@ msgstr "grob va empènyer les àrees de visualització i no les va fer emergir/a
 msgid "how did we get here?"
 msgstr "Com hem arribat fins aquí?"
 
-#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
@@ -680,11 +635,6 @@ msgid "invalid 'angle' in viewport"
 msgstr "«angle» no vàlid a l'àrea de visualització"
 
 #. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
 #: R/primitives.R:0
 #, fuzzy
 msgid "invalid 'arrow' argument"
@@ -715,13 +665,11 @@ msgid "invalid 'col' specification"
 msgstr "especificació «col» no vàlida"
 
 #. R/edit.R: stop("invalid 'edit' information")
-#. R/edit.R: stop("invalid 'edit' information")
 #: R/edit.R:0
 #, fuzzy
 msgid "invalid 'edit' information"
 msgstr "la informació «edit» no és vàlida"
 
-#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
 #. R/primitives.R: stop("invalid 'ends' or 'type' argument")
 #: R/primitives.R:0
 #, fuzzy
@@ -735,19 +683,11 @@ msgid "invalid 'f'"
 msgstr "«f» no vàlid"
 
 #. R/frames.R: stop("invalid 'frame'")
-#. R/frames.R: stop("invalid 'frame'")
 #: R/frames.R:0
 #, fuzzy
 msgid "invalid 'frame'"
 msgstr "«frame» no vàlid"
 
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 #, fuzzy
@@ -767,21 +707,11 @@ msgid "invalid 'gp' value"
 msgstr "el valor «gp» no és vàlid"
 
 #. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 #, fuzzy
 msgid "invalid 'grep' value"
 msgstr "valor «grep» no vàlid"
 
-#. R/frames.R: stop("invalid 'grob'")
 #. R/frames.R: stop("invalid 'grob'")
 #: R/frames.R:0
 #, fuzzy
@@ -927,7 +857,6 @@ msgid "invalid horizontal justification"
 msgstr "justificació horitzontal no vàlida"
 
 #. R/just.R: stop("invalid justification")
-#. R/just.R: stop("invalid justification")
 #: R/just.R:0
 #, fuzzy
 msgid "invalid justification"
@@ -975,10 +904,6 @@ msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
 msgstr "no és vàlid editar directament la ranura «children» o «childrenOrder»"
 
 #. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
 #: R/primitives.R:0
 #, fuzzy
 msgid "it is invalid to specify both 'id' and 'id.lengths'"
@@ -990,8 +915,6 @@ msgstr "no és vàlid especificar tant «id» com «id.lengths»"
 msgid "it is only valid to add a 'grob' to a \"gTree\""
 msgstr "només és vàlid afegir un «grob» a un «gTree»"
 
-#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
-#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 #. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 #: R/grob.R:0
 #, fuzzy
@@ -1017,7 +940,6 @@ msgid "it is only valid to get a child from a \"gTree\""
 msgstr "només és vàlid obtenir un fill d'un «gTree»"
 
 #. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
-#. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
 #: R/grob.R:0
 #, fuzzy
 msgid "it is only valid to remove a child from a \"gTree\""
@@ -1035,7 +957,6 @@ msgstr "només és vàlid establir un «grob» com a fill d'«gTree»"
 msgid "it is only valid to set a child of a \"gTree\""
 msgstr "només és vàlid establir un fill d'un «gTree»"
 
-#. R/components.R: stop("logical 'label' supplied of length 0")
 #. R/components.R: stop("logical 'label' supplied of length 0")
 #: R/components.R:0
 #, fuzzy
@@ -1115,7 +1036,6 @@ msgid "must start new page if showing leaves separately"
 msgstr "cal iniciar una pàgina nova si es mostren les fulles per separat"
 
 #. R/unit.R: stop("non-unit operand must be numeric")
-#. R/unit.R: stop("non-unit operand must be numeric")
 #: R/unit.R:0
 #, fuzzy
 msgid "non-unit operand must be numeric"
@@ -1188,8 +1108,6 @@ msgid "slot '%s' not found"
 msgstr "no s'ha trobat la ranura «%s»"
 
 #. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
-#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
-#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
 #: R/grob.R:0
 #, fuzzy
 msgid "the new 'grob' must have the same name as the old 'grob'"
@@ -1202,13 +1120,11 @@ msgid "unable to coerce to \"gList\""
 msgstr "no es pot coaccionar a «gList»"
 
 #. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
-#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
 #: R/grab.R:0
 #, fuzzy
 msgid "viewport overwritten (grab MAY not be faithful)"
 msgstr "s'ha sobreescrit l'àrea de visualització (pot no ser fidel)"
 
-#. R/primitives.R: stop("x and y must be units")
 #. R/primitives.R: stop("x and y must be units")
 #: R/primitives.R:0
 #, fuzzy

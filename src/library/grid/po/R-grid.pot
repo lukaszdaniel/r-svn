@@ -2,13 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
@@ -28,9 +28,6 @@ msgstr ""
 
 
 #: R/grob.R: 0
-#. R/grob.R: stop("'allDevices' not yet implemented")
-#. R/grob.R: stop("'allDevices' not yet implemented")
-#. R/grob.R: stop("'allDevices' not yet implemented")
 #. R/grob.R: stop("'allDevices' not yet implemented")
 
 msgid "'allDevices' not yet implemented"
@@ -81,9 +78,6 @@ msgstr ""
 
 #: R/grob.R: 0
 #. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
 #. R/grob.R: gettextf("'gPath' (%s) not found", gPath)
 
 msgid "'gPath' (%s) not found"
@@ -92,16 +86,12 @@ msgstr ""
 
 #: R/grob.R: 0
 #. R/grob.R: stop("'gPath' does not specify a valid child")
-#. R/grob.R: stop("'gPath' does not specify a valid child")
-#. R/grob.R: stop("'gPath' does not specify a valid child")
 
 msgid "'gPath' does not specify a valid child"
 msgstr ""
 
 
 #: R/gpar.R: 0
-#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
-#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 
 msgid "'gamma' 'gpar' element is defunct"
@@ -116,7 +106,6 @@ msgstr ""
 
 
 #: R/highlevel.R: 0
-#. R/highlevel.R: stop("'hgap' must be single unit")
 #. R/highlevel.R: stop("'hgap' must be single unit")
 
 msgid "'hgap' must be single unit"
@@ -152,7 +141,6 @@ msgstr ""
 
 
 #: R/primitives.R: 0
-#. R/primitives.R: stop("'length' must be a 'unit' object")
 #. R/primitives.R: stop("'length' must be a 'unit' object")
 
 msgid "'length' must be a 'unit' object"
@@ -233,7 +221,6 @@ msgstr ""
 
 #: R/highlevel.R: 0
 #. R/highlevel.R: stop("'vgap' must be single unit")
-#. R/highlevel.R: stop("'vgap' must be single unit")
 
 msgid "'vgap' must be single unit"
 msgstr ""
@@ -255,20 +242,12 @@ msgstr ""
 
 #: R/primitives.R: 0
 #. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
 
 msgid "'x' and 'y' and 'id' must all be same length"
 msgstr ""
 
 
 #: R/primitives.R: 0
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 #. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 
 msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
@@ -298,10 +277,6 @@ msgstr ""
 
 #: R/primitives.R: 0
 #. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
 
 msgid "'x' and 'y' must be same length"
 msgstr ""
@@ -309,13 +284,6 @@ msgstr ""
 
 #: R/primitives.R: 0
 #: R/typeset.R: 0
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/typeset.R: stop("'x' and 'y' must be units")
 
@@ -338,7 +306,6 @@ msgstr ""
 
 
 #: R/primitives.R: 0
-#. R/primitives.R: stop("'x' and 'y' must have length 1")
 #. R/primitives.R: stop("'x' and 'y' must have length 1")
 
 msgid "'x' and 'y' must have length 1"
@@ -370,8 +337,6 @@ msgstr ""
 
 #: R/primitives.R: 0
 #: R/roundRect.R: 0
-#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
-#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must be units")
 
@@ -465,7 +430,6 @@ msgstr ""
 
 #: R/group.R: 0
 #. R/group.R: stop("Invalid destination")
-#. R/group.R: stop("Invalid destination")
 
 msgid "Invalid destination"
 msgstr ""
@@ -501,7 +465,6 @@ msgstr ""
 
 #: R/grid.R: 0
 #. R/grid.R: stop("Invalid number of generations")
-#. R/grid.R: stop("Invalid number of generations")
 
 msgid "Invalid number of generations"
 msgstr ""
@@ -515,7 +478,6 @@ msgstr ""
 
 
 #: R/group.R: 0
-#. R/group.R: stop("Invalid source")
 #. R/group.R: stop("Invalid source")
 
 msgid "Invalid source"
@@ -574,7 +536,6 @@ msgstr ""
 
 #: R/patterns.R: 0
 #. R/patterns.R: warning("Pattern fill applied to object with no inside")
-#. R/patterns.R: warning("Pattern fill applied to object with no inside")
 
 msgid "Pattern fill applied to object with no inside"
 msgstr ""
@@ -602,7 +563,6 @@ msgstr ""
 
 
 #: R/group.R: 0
-#. R/group.R: paste0("Unknown group: ", x$group)
 #. R/group.R: paste0("Unknown group: ", x$group)
 
 msgid "Unknown group:"
@@ -681,15 +641,12 @@ msgstr ""
 
 #: R/patterns.R: 0
 #. R/patterns.R: stop("colours and stops must be at least length 1")
-#. R/patterns.R: stop("colours and stops must be at least length 1")
 
 msgid "colours and stops must be at least length 1"
 msgstr ""
 
 
 #: R/primitives.R: 0
-#. R/primitives.R: stop("corrupt 'arrows' object")
-#. R/primitives.R: stop("corrupt 'arrows' object")
 #. R/primitives.R: stop("corrupt 'arrows' object")
 
 msgid "corrupt 'arrows' object"
@@ -720,7 +677,6 @@ msgstr ""
 
 #: R/grob.R: 0
 #. R/grob.R: gettextf("grob '%s' not found", name)
-#. R/grob.R: gettextf("grob '%s' not found", name)
 
 msgid "grob '%s' not found"
 msgstr ""
@@ -748,7 +704,6 @@ msgstr ""
 
 
 #: R/unit.R: 0
-#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #. R/unit.R: stop("index must be of length 1", call. = FALSE)
 
 msgid "index must be of length 1"
@@ -785,11 +740,6 @@ msgstr ""
 
 #: R/primitives.R: 0
 #. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
 
 msgid "invalid 'arrow' argument"
 msgstr ""
@@ -825,14 +775,12 @@ msgstr ""
 
 #: R/edit.R: 0
 #. R/edit.R: stop("invalid 'edit' information")
-#. R/edit.R: stop("invalid 'edit' information")
 
 msgid "invalid 'edit' information"
 msgstr ""
 
 
 #: R/primitives.R: 0
-#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
 #. R/primitives.R: stop("invalid 'ends' or 'type' argument")
 
 msgid "invalid 'ends' or 'type' argument"
@@ -848,20 +796,12 @@ msgstr ""
 
 #: R/frames.R: 0
 #. R/frames.R: stop("invalid 'frame'")
-#. R/frames.R: stop("invalid 'frame'")
 
 msgid "invalid 'frame'"
 msgstr ""
 
 
 #: R/grob.R: 0
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
 #. R/grob.R: stop("invalid 'gPath'")
 
 msgid "invalid 'gPath'"
@@ -884,22 +824,12 @@ msgstr ""
 
 #: R/grob.R: 0
 #. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
 
 msgid "invalid 'grep' value"
 msgstr ""
 
 
 #: R/frames.R: 0
-#. R/frames.R: stop("invalid 'grob'")
 #. R/frames.R: stop("invalid 'grob'")
 
 msgid "invalid 'grob'"
@@ -1069,7 +999,6 @@ msgstr ""
 
 #: R/just.R: 0
 #. R/just.R: stop("invalid justification")
-#. R/just.R: stop("invalid justification")
 
 msgid "invalid justification"
 msgstr ""
@@ -1126,10 +1055,6 @@ msgstr ""
 
 #: R/primitives.R: 0
 #. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
 
 msgid "it is invalid to specify both 'id' and 'id.lengths'"
 msgstr ""
@@ -1143,8 +1068,6 @@ msgstr ""
 
 
 #: R/grob.R: 0
-#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
-#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 #. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 
 msgid "it is only valid to add a child to a \"gTree\""
@@ -1174,7 +1097,6 @@ msgstr ""
 
 #: R/grob.R: 0
 #. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
-#. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
 
 msgid "it is only valid to remove a child from a \"gTree\""
 msgstr ""
@@ -1195,7 +1117,6 @@ msgstr ""
 
 
 #: R/components.R: 0
-#. R/components.R: stop("logical 'label' supplied of length 0")
 #. R/components.R: stop("logical 'label' supplied of length 0")
 
 msgid "logical 'label' supplied of length 0"
@@ -1288,7 +1209,6 @@ msgstr ""
 
 #: R/unit.R: 0
 #. R/unit.R: stop("non-unit operand must be numeric")
-#. R/unit.R: stop("non-unit operand must be numeric")
 
 msgid "non-unit operand must be numeric"
 msgstr ""
@@ -1373,8 +1293,6 @@ msgstr ""
 
 #: R/grob.R: 0
 #. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
-#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
-#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
 
 msgid "the new 'grob' must have the same name as the old 'grob'"
 msgstr ""
@@ -1389,14 +1307,12 @@ msgstr ""
 
 #: R/grab.R: 0
 #. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
-#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
 
 msgid "viewport overwritten (grab MAY not be faithful)"
 msgstr ""
 
 
 #: R/primitives.R: 0
-#. R/primitives.R: stop("x and y must be units")
 #. R/primitives.R: stop("x and y must be units")
 
 msgid "x and y must be units"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-10-14 06:55+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -106,7 +106,6 @@ msgstr "%s no és un mètode per a la classe de referència %s"
 msgid "%s is not a reference class"
 msgstr "%s no és una classe de referència"
 
-#. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #: R/SClasses.R:0
 #, fuzzy
@@ -221,7 +220,6 @@ msgstr "'class2' ha de ser el nom d'una classe o una definició de classe"
 msgid "'externalptr' objects cannot be initialized from new()"
 msgstr "Els objectes «externalptr» no es poden inicialitzar des de new()"
 
-#. R/Methods.R: stop("'file' must be a character string or a connection")
 #. R/Methods.R: stop("'file' must be a character string or a connection")
 #: R/Methods.R:0
 #, fuzzy
@@ -541,7 +539,6 @@ msgid "The prototype for class %s has undefined slot(s): %s"
 msgstr "El prototip de la classe %s té ranures no definides: %s"
 
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
-#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 #: R/MethodsList.R:0
 #, fuzzy
 msgid "Use %s instead."
@@ -566,8 +563,7 @@ msgid "a call to superClass() is in the method %s but there is no superclass def
 msgstr "una crida a superClass() està en el mètode %s però no hi ha cap definició de superclasse d'aquest mètode per a la classe %s"
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
-#. R/trace.R: stop("a function for argument 'f' must be a generic function")
-#: R/Methods.R:0 R/trace.R:0
+#: R/Methods.R:0
 #, fuzzy
 msgid "a function for argument 'f' must be a generic function"
 msgstr "una funció per a l'argument «f» ha de ser una funció genèrica"
@@ -1733,8 +1729,6 @@ msgid "no function definition found for %s"
 msgstr "no s'ha trobat cap definició de funció per a %s"
 
 #. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 #: R/Methods.R:0
 #, fuzzy
 msgid "no generic function %s found"
@@ -1841,7 +1835,6 @@ msgid "no package name supplied and no class definition found for %s"
 msgstr "no s'ha proporcionat cap nom de paquet i no s'ha trobat cap definició de classe per a %s"
 
 #. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
-#. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 #: R/RMethodUtils.R:0
 #, fuzzy
 msgid "no suitable arguments to dispatch methods in this function"
@@ -1894,7 +1887,6 @@ msgstr ""
 msgid "none of the objects in the source code could be found:  need to attach or specify the package"
 msgstr "no s'ha pogut trobar cap dels objectes del codi font: cal adjuntar o especificar el paquet"
 
-#. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #: R/refClass.R:0
 #, fuzzy
@@ -2124,7 +2116,6 @@ msgid "the body of the generic function for %s calls 'standardGeneric' to dispat
 msgstr "el cos de la funció genèrica per a %s crida «standardGeneric» per a enviar amb un nom diferent («%s»)!"
 
 #. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
-#. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
 #: R/refClass.R:0
 #, fuzzy
 msgid "the class of field %s in the object is not compatible with the desired class %s in the target"
@@ -2136,7 +2127,6 @@ msgstr "la classe del camp %s a l'objecte no és compatible amb la classe desitj
 msgid "the computation: 'as(object,\"%s\") <- value' is valid when object has class %s only if 'is(value, \"%s\")' is TRUE ('class(value)' was %s)"
 msgstr "el càlcul: 'as(objecte,\"%s\") )- valor' és vàlid quan l'objecte té classe %s només si 'is(valor, \"%s\")' és CERT ('class(valor)' era %s)"
 
-#. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #: R/refClass.R:0
 #, fuzzy
@@ -2513,7 +2503,6 @@ msgid_plural "no definition of class %s in the specified position, %s, definitio
 msgstr[0] "no hi ha cap definició de la classe %s a la posició especificada, %s, definició a : %s"
 msgstr[1] "no hi ha cap definició de la classe %s a la posició especificada, %s, definicions a : %s"
 
-#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #: R/RMethodUtils.R:0
 #, fuzzy

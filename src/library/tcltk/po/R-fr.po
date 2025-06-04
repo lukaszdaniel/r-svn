@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2025-04-01 17:04+0200\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -21,10 +21,10 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
+#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "'filters' doit ï¿½tre une matrice de chaï¿½nes de caractï¿½res ï¿½ 2 colonnes"
 
-#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #: R/utils.R:0
 msgid "'pb' is not from class %s"
@@ -67,6 +67,7 @@ msgstr "Aide"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Help topic:"
 msgstr "Aide sur :"
 
@@ -77,6 +78,7 @@ msgstr "Installer des packages depuis CRAN"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "Ajustement linï¿½aire interactif"
 
@@ -87,6 +89,7 @@ msgstr "Charger"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Load packages"
 msgstr "Charger des packages"
 
@@ -117,21 +120,25 @@ msgstr "FAQ R"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Save workspace"
-msgstr "Sauver l'environnement"
+msgstr "Ne pas sauver l'environnement"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Source R code"
 msgstr "Sourcer du code R"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
+#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "Le package Tcl '%s' est introuvable"
 
 #. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
 #: R/windows/zzz.R:0
+#, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "Les fichiers Tcl/Tk nï¿½cessaires n'ont pas ï¿½tï¿½ installï¿½s"
 
@@ -147,6 +154,7 @@ msgstr "L'interface utilisateur tkGUI n'est pas disponible sous Windows"
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
+#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "impossible de changer les noms dans un tableau Tcl"
 
@@ -166,10 +174,17 @@ msgid "t test"
 msgstr "test t"
 
 #. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
-#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr "tcltk DLL est lié à"
+
+#, fuzzy
+#~ msgid "gettext(\"Save workspace\")"
+#~ msgstr "Sauver l'environnement"
+
+#, fuzzy
+#~ msgid "message(\"tcltk DLL is linked to \", shQuote(this))"
+#~ msgstr "tcltk DLL est lié à"
 
 #~ msgid "Loading Tcl/Tk interface ..."
 #~ msgstr "Chargement de Tcl/Tk..."

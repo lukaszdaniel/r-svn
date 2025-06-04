@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -28,9 +28,6 @@ msgstr ""
 msgid "'Summary' function '%s' not meaningful for units"
 msgstr "'Summary'函数'%s'对这个单元没有意义"
 
-#. R/grob.R: stop("'allDevices' not yet implemented")
-#. R/grob.R: stop("'allDevices' not yet implemented")
-#. R/grob.R: stop("'allDevices' not yet implemented")
 #. R/grob.R: stop("'allDevices' not yet implemented")
 #: R/grob.R:0
 msgid "'allDevices' not yet implemented"
@@ -67,23 +64,16 @@ msgid "'gEditList' can only contain 'gEdit' objects"
 msgstr "'gEditList'只能包含'gEdit'对象"
 
 #. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
-#. R/grob.R: gettextf("'gPath' (%s) not found", as.character(gPath))
 #. R/grob.R: gettextf("'gPath' (%s) not found", gPath)
 #: R/grob.R:0
 msgid "'gPath' (%s) not found"
 msgstr "不存在'gPath'(%s)"
 
 #. R/grob.R: stop("'gPath' does not specify a valid child")
-#. R/grob.R: stop("'gPath' does not specify a valid child")
-#. R/grob.R: stop("'gPath' does not specify a valid child")
 #: R/grob.R:0
 msgid "'gPath' does not specify a valid child"
 msgstr "'gPath'没有指定正确的子值"
 
-#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
-#. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #. R/gpar.R: warning("'gamma' 'gpar' element is defunct")
 #: R/gpar.R:0
 msgid "'gamma' 'gpar' element is defunct"
@@ -95,15 +85,15 @@ msgid "'gpar' element '%s' must not be length 0"
 msgstr "'gpar'成分'%s'的长度不能为零"
 
 #. R/highlevel.R: stop("'hgap' must be single unit")
-#. R/highlevel.R: stop("'hgap' must be single unit")
 #: R/highlevel.R:0
 msgid "'hgap' must be single unit"
 msgstr "'hgap'的值必需是单元"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
+#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr ""
+msgstr "'x'和'y'的长度必需为一"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -121,7 +111,6 @@ msgstr "'l'必需为布局"
 msgid "'labels' and 'at' locations must have same length"
 msgstr "'labels'和'at'的位置量必需有相同的长度"
 
-#. R/primitives.R: stop("'length' must be a 'unit' object")
 #. R/primitives.R: stop("'length' must be a 'unit' object")
 #: R/primitives.R:0
 msgid "'length' must be a 'unit' object"
@@ -181,7 +170,6 @@ msgid "'squareShape' must be between -1 and 1"
 msgstr "'squareShape'的值必需在-1和1之间"
 
 #. R/highlevel.R: stop("'vgap' must be single unit")
-#. R/highlevel.R: stop("'vgap' must be single unit")
 #: R/highlevel.R:0
 msgid "'vgap' must be single unit"
 msgstr "'vgap'的值必需是单元"
@@ -198,18 +186,10 @@ msgid "'x' and 'units' must have length > 0"
 msgstr "'x'和'unit'的长度必需大于零"
 
 #. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
-#. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
 #: R/primitives.R:0
 msgid "'x' and 'y' and 'id' must all be same length"
 msgstr "'x'，'y'和'id'的长度必需相同"
 
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
-#. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 #. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 #: R/primitives.R:0
 msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
@@ -232,21 +212,10 @@ msgid "'x' and 'y' must be 'unit' objects and have the same length"
 msgstr "'x'和'y'必需为'unit'对象，而且它们的长度必需相同"
 
 #. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
-#. R/primitives.R: stop("'x' and 'y' must be same length")
 #: R/primitives.R:0
 msgid "'x' and 'y' must be same length"
 msgstr "'x'和'y'的长度必需相同"
 
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
-#. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/typeset.R: stop("'x' and 'y' must be units")
 #: R/primitives.R:0 R/typeset.R:0
@@ -264,7 +233,6 @@ msgstr "'x'和'y'必需为'unit'对象，而且它们的长度必需相同"
 msgid "'x' and 'y' must be units or NULL"
 msgstr "'x'和'y'要么是单元值，要么是NULL"
 
-#. R/primitives.R: stop("'x' and 'y' must have length 1")
 #. R/primitives.R: stop("'x' and 'y' must have length 1")
 #: R/primitives.R:0
 msgid "'x' and 'y' must have length 1"
@@ -287,8 +255,6 @@ msgstr "'x', 'y'和'size'必需为单元值"
 msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
 msgstr "'x', 'y', 'width'和'height'都应该是长度为一的单元值"
 
-#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
-#. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must be units")
 #: R/primitives.R:0 R/roundRect.R:0
@@ -360,7 +326,6 @@ msgid "Invalid coordinates"
 msgstr "'order'的值无效"
 
 #. R/group.R: stop("Invalid destination")
-#. R/group.R: stop("Invalid destination")
 #: R/group.R:0
 #, fuzzy
 msgid "Invalid destination"
@@ -390,10 +355,10 @@ msgid "Invalid grob coordinates"
 msgstr "无效的grob坐标"
 
 #. R/grid.R: stop("Invalid number of generations")
-#. R/grid.R: stop("Invalid number of generations")
 #: R/grid.R:0
+#, fuzzy
 msgid "Invalid number of generations"
-msgstr ""
+msgstr "定位无效"
 
 #. R/grob.R: stop("Invalid revert target")
 #: R/grob.R:0
@@ -401,7 +366,6 @@ msgstr ""
 msgid "Invalid revert target"
 msgstr "'print'参数值无效"
 
-#. R/group.R: stop("Invalid source")
 #. R/group.R: stop("Invalid source")
 #: R/group.R:0
 #, fuzzy
@@ -417,8 +381,9 @@ msgstr "'order'的值无效"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
+#, fuzzy
 msgid "Invalid transform (nothing drawn)"
-msgstr ""
+msgstr "'order'的值无效"
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
@@ -447,7 +412,6 @@ msgid "Only a grob can be converted to a path"
 msgstr ""
 
 #. R/patterns.R: warning("Pattern fill applied to object with no inside")
-#. R/patterns.R: warning("Pattern fill applied to object with no inside")
 #: R/patterns.R:0
 msgid "Pattern fill applied to object with no inside"
 msgstr ""
@@ -459,8 +423,9 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
+#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr ""
+msgstr "水平定位无效"
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -468,7 +433,6 @@ msgstr ""
 msgid "Unknown anchor; using left justification"
 msgstr "水平定位无效"
 
-#. R/group.R: paste0("Unknown group: ", x$group)
 #. R/group.R: paste0("Unknown group: ", x$group)
 #: R/group.R:0
 msgid "Unknown group:"
@@ -481,8 +445,9 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
+#, fuzzy
 msgid "Unknown width; using first width"
-msgstr ""
+msgstr "水平定位无效"
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -525,14 +490,11 @@ msgid "cannot specify more than one of 'side=[\"left\", \"right\"]', 'col', 'col
 msgstr "只能指定'side=[\"left\", \"right\"]', 'col', 'col.before'或'col.after'中的一个"
 
 #. R/patterns.R: stop("colours and stops must be at least length 1")
-#. R/patterns.R: stop("colours and stops must be at least length 1")
 #: R/patterns.R:0
 #, fuzzy
 msgid "colours and stops must be at least length 1"
 msgstr "'x'和'y'的长度必需相同"
 
-#. R/primitives.R: stop("corrupt 'arrows' object")
-#. R/primitives.R: stop("corrupt 'arrows' object")
 #. R/primitives.R: stop("corrupt 'arrows' object")
 #: R/primitives.R:0
 msgid "corrupt 'arrows' object"
@@ -556,7 +518,6 @@ msgid "gPath (%s) not found"
 msgstr "gPath(%s)不存在"
 
 #. R/grob.R: gettextf("grob '%s' not found", name)
-#. R/grob.R: gettextf("grob '%s' not found", name)
 #: R/grob.R:0
 msgid "grob '%s' not found"
 msgstr "不存在grob'%s'这个值"
@@ -578,7 +539,6 @@ msgstr "grob推了视口，但没有将它弹起来(grab有可能不保持原状
 msgid "how did we get here?"
 msgstr "怎么搞的？"
 
-#. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 #, fuzzy
@@ -607,11 +567,6 @@ msgid "invalid 'angle' in viewport"
 msgstr "视口里的'angle'值无效"
 
 #. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#. R/primitives.R: stop("invalid 'arrow' argument")
 #: R/primitives.R:0
 msgid "invalid 'arrow' argument"
 msgstr "'arrow'参数无效"
@@ -637,12 +592,10 @@ msgid "invalid 'col' specification"
 msgstr "'col'设定得无效"
 
 #. R/edit.R: stop("invalid 'edit' information")
-#. R/edit.R: stop("invalid 'edit' information")
 #: R/edit.R:0
 msgid "invalid 'edit' information"
 msgstr "'edit'信息无效"
 
-#. R/primitives.R: stop("invalid 'ends' or 'type' argument")
 #. R/primitives.R: stop("invalid 'ends' or 'type' argument")
 #: R/primitives.R:0
 msgid "invalid 'ends' or 'type' argument"
@@ -654,18 +607,10 @@ msgid "invalid 'f'"
 msgstr "'f'的值无效"
 
 #. R/frames.R: stop("invalid 'frame'")
-#. R/frames.R: stop("invalid 'frame'")
 #: R/frames.R:0
 msgid "invalid 'frame'"
 msgstr "'frame'的值无效"
 
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
-#. R/grob.R: stop("invalid 'gPath'")
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 msgid "invalid 'gPath'"
@@ -682,20 +627,10 @@ msgid "invalid 'gp' value"
 msgstr "'gp'的值无效"
 
 #. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
-#. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 msgid "invalid 'grep' value"
 msgstr "'grep'的值无效"
 
-#. R/frames.R: stop("invalid 'grob'")
 #. R/frames.R: stop("invalid 'grob'")
 #: R/frames.R:0
 msgid "invalid 'grob'"
@@ -819,7 +754,6 @@ msgid "invalid horizontal justification"
 msgstr "水平定位无效"
 
 #. R/just.R: stop("invalid justification")
-#. R/just.R: stop("invalid justification")
 #: R/just.R:0
 msgid "invalid justification"
 msgstr "定位无效"
@@ -860,10 +794,6 @@ msgid "it is invalid to directly edit the 'children' or 'childrenOrder' slot"
 msgstr "不能直接对'children'或'childrenOrder'这样的类型进行修改"
 
 #. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
-#. R/primitives.R: stop("it is invalid to specify both 'id' and 'id.lengths'")
 #: R/primitives.R:0
 msgid "it is invalid to specify both 'id' and 'id.lengths'"
 msgstr "不能同时对'id'和'id.lengths'进行指定"
@@ -873,8 +803,6 @@ msgstr "不能同时对'id'和'id.lengths'进行指定"
 msgid "it is only valid to add a 'grob' to a \"gTree\""
 msgstr "对\"gTree\"只能加'grob'这样的值数"
 
-#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
-#. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 #. R/grob.R: stop("it is only valid to add a child to a \"gTree\"")
 #: R/grob.R:0
 msgid "it is only valid to add a child to a \"gTree\""
@@ -896,7 +824,6 @@ msgid "it is only valid to get a child from a \"gTree\""
 msgstr "只能从\"gTree\"那儿取得子树"
 
 #. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
-#. R/grob.R: stop("it is only valid to remove a child from a \"gTree\"")
 #: R/grob.R:0
 msgid "it is only valid to remove a child from a \"gTree\""
 msgstr "只能从\"gTree\"那儿删除子值"
@@ -911,7 +838,6 @@ msgstr "\"gTree\"的子值只能设成'grob'"
 msgid "it is only valid to set a child of a \"gTree\""
 msgstr "只能给\"gTree\"设子值"
 
-#. R/components.R: stop("logical 'label' supplied of length 0")
 #. R/components.R: stop("logical 'label' supplied of length 0")
 #: R/components.R:0
 msgid "logical 'label' supplied of length 0"
@@ -980,7 +906,6 @@ msgid "must start new page if showing leaves separately"
 msgstr "如果分别显示树叶的话需要重新开一页"
 
 #. R/unit.R: stop("non-unit operand must be numeric")
-#. R/unit.R: stop("non-unit operand must be numeric")
 #: R/unit.R:0
 msgid "non-unit operand must be numeric"
 msgstr "非单元运算对象必需为数字"
@@ -1043,8 +968,6 @@ msgid "slot '%s' not found"
 msgstr "没有'%s'这样的类型"
 
 #. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
-#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
-#. R/grob.R: stop("the new 'grob' must have the same name as the old 'grob'")
 #: R/grob.R:0
 msgid "the new 'grob' must have the same name as the old 'grob'"
 msgstr "新的'grob'值必需等于旧的'grob'值"
@@ -1055,12 +978,10 @@ msgid "unable to coerce to \"gList\""
 msgstr "无法转换成\"gList\""
 
 #. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
-#. R/grab.R: warning("viewport overwritten (grab MAY not be faithful)")
 #: R/grab.R:0
 msgid "viewport overwritten (grab MAY not be faithful)"
 msgstr "视口被覆盖(grab有可能不保持原状态)"
 
-#. R/primitives.R: stop("x and y must be units")
 #. R/primitives.R: stop("x and y must be units")
 #: R/primitives.R:0
 msgid "x and y must be units"

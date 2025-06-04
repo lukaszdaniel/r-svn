@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:37\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -23,7 +23,6 @@ msgstr "%d erros capturados em %s.  As mensagens de erro e suas frequências sã
 msgid "%s has a help file but no examples"
 msgstr "%s tem um arquivo de ajuda, mas nenhum exemplo"
 
-#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
 #. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
 #: R/citation.R:0
 msgid "%s has to be one of %s"
@@ -56,11 +55,6 @@ msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' é uma função genérica formal; métodos S3 provavelmente não serão encontrados"
 
 #. R/help.search.R: gettextf("'%s' must be a character string", arg)
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
 #: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
@@ -96,7 +90,6 @@ msgstr "'as.is' tem o comprimento errado %d  != cols = %d"
 msgid "'as.is' should be specified by the caller; using TRUE"
 msgstr "'as.is' deve ser especificado; usando TRUE"
 
-#. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
 #. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
 #. R/windows/create.post.R: stop("'ccaddress' must be of length 1")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
@@ -140,8 +133,6 @@ msgid "'destdir' is not a directory"
 msgstr "'destdir' não é um diretório"
 
 #. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 msgid "'destfile' must be a length-one character vector"
@@ -182,7 +173,6 @@ msgstr "'file' deve ser \"\" ou um objeto de conexão aberto"
 msgid "'file' must be NULL, a character string or a connection"
 msgstr "'file' deve ser NULL, uma string de caracteres ou uma conexão"
 
-#. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/write.table.R: stop("'file' must be a character string or connection")
 #: R/readtable.R:0 R/write.table.R:0
@@ -261,7 +251,6 @@ msgid "'memory.size()' is no longer supported"
 msgstr "'memory.size()' não é mais suportado"
 
 #. R/de.R: warning("'modes' argument ignored")
-#. R/de.R: warning("'modes' argument ignored")
 #: R/de.R:0
 msgid "'modes' argument ignored"
 msgstr "argumento 'modes' ignorado"
@@ -287,8 +276,6 @@ msgid "'package' must be a character vector or NULL"
 msgstr "'package' deve ser um vetor de caracteres ou NULL"
 
 #. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
-#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
-#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #: R/progressBar.R:0 R/windows/winDialog.R:0
 msgid "'pb' is not from class %s"
@@ -325,7 +312,6 @@ msgid "'tar' returned non-zero exit code %d"
 msgstr "'tar' retornou código de saída diferente de zero %d"
 
 #. R/tar.R: stop("'tarfile' must be a character string or a connection")
-#. R/tar.R: stop("'tarfile' must be a character string or a connection")
 #: R/tar.R:0
 msgid "'tarfile' must be a character string or a connection"
 msgstr "'tarfile' deve ser uma string de caracteres ou uma conexão"
@@ -341,10 +327,6 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr "'topic' deveria ser um nome, um vetor de caracteres de comprimento 1 ou uma palavra reservada"
 
 #. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 msgid "'url' must be a length-one character vector"
@@ -403,9 +385,6 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. R/help.request.R: stop("Cancelled by user")
-#. R/help.request.R: stop("Cancelled by user")
-#. R/help.request.R: stop("Cancelled by user")
-#. R/packages2.R: stop("Cancelled by user")
 #. R/packages2.R: stop("Cancelled by user")
 #: R/help.request.R:0 R/packages2.R:0
 msgid "Cancelled by user"
@@ -431,9 +410,6 @@ msgstr "Compactando documento PDF"
 msgid "Could not create file %s, aborting"
 msgstr "Não foi possível criar o arquivo %s, abortando"
 
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #: R/prompt.R:0
 msgid "Created file named %s."
@@ -493,9 +469,6 @@ msgstr ""
 "Tente remover %s"
 
 #. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
 #: R/prompt.R:0
 msgid "Edit the file and move it to the appropriate directory."
 msgstr "Edite o arquivo e mova-o para o diretório apropriado."
@@ -520,7 +493,6 @@ msgstr "Insira um item do menu, ou 0 para sair"
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "Digite um ou mais números separados por espaços e, em seguida, ENTER ou 0 para cancelar"
 
-#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 #: R/aspell.R:0
 msgid "Filter '%s' is not available."
@@ -671,7 +643,6 @@ msgstr "Nenhuma vignette encontrada por %s"
 msgid "Not a validObject():"
 msgstr "Não é um validObject():"
 
-#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
 #: R/citation.R:0
@@ -892,7 +863,6 @@ msgid "Using the first match ..."
 msgstr "Usando a primeira correspondência ..."
 
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
-#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
 #: R/Sweave.R:0
 msgid "Warning: unknown option %s"
 msgstr "Alerta: opção desconhecida %s"
@@ -979,7 +949,6 @@ msgid "at least one vector element is required"
 msgstr "pelo menos um elemento vetorial é requerido"
 
 #. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
-#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
 #: R/write.table.R:0
 msgid "attempt to set '%s' ignored"
 msgstr "tentativa de definir '%s' ignorada"
@@ -1015,9 +984,6 @@ msgstr "não é possível fazer coerção de 'x' para romano"
 msgid "cannot create directory '%s'"
 msgstr "não é possível criar diretório '%s'"
 
-#. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
 #. R/prompt.R: stop("cannot determine a usable name")
 #: R/prompt.R:0
 msgid "cannot determine a usable name"
@@ -1157,7 +1123,6 @@ msgstr "download teve status de saída diferente de zero"
 
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
-#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #: R/packages.R:0
 msgid "download of package %s failed"
 msgstr "download do pacote %s falhou"
@@ -1184,8 +1149,6 @@ msgid "empty beginning of file"
 msgstr "começo de arquivo vazio"
 
 #. R/objects.R: stop("environment specified is not a package")
-#. R/objects.R: stop("environment specified is not a package")
-#. R/objects.R: stop("environment specified is not a package")
 #: R/objects.R:0
 msgid "environment specified is not a package"
 msgstr "ambiente especificado não é um pacote"
@@ -1202,13 +1165,10 @@ msgstr "todo pacote depende de pelo menos algum outro"
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
 msgid "failed to copy %s to %s"
 msgstr "falha ao copiar %s para %s"
 
-#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
-#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
 #. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
 #. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
 #: R/windows/install.packages.R:0
@@ -1226,8 +1186,6 @@ msgstr "falha em criar o diretório %s"
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr "falha ao baixar arquivo de mirrors (%s); usando arquivo local '%s'"
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
 msgid "file %s is not a macOS binary package"
@@ -1301,7 +1259,6 @@ msgstr "matriz 'instPkgs' malformada"
 
 #. R/tar.R: if (is.character(tarfile)) "incomplete block on file" else "incomplete block: rather use gzfile(.) created connection?"
 #. R/tar.R: stop("incomplete block on file")
-#. R/tar.R: stop("incomplete block on file")
 #: R/tar.R:0
 msgid "incomplete block on file"
 msgstr "bloco inválido no arquivo"
@@ -1322,14 +1279,10 @@ msgid "incorrect field specification"
 msgstr "especificação de campo incorreta"
 
 #. R/help.search.R: stop("incorrect type specification")
-#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 msgid "incorrect type specification"
 msgstr "especificação de tipo incompleta"
 
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #: R/packages2.R:0
 msgid "inferring 'repos = NULL' from 'pkgs'"
@@ -1354,7 +1307,6 @@ msgstr "instalação de %d pacotes falhou:  %s"
 msgid "installation of package %s failed"
 msgstr "instalação do pacote %s falhou"
 
-#. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #: R/packages2.R:0
 msgid "installation of package %s had non-zero exit status"
@@ -1439,7 +1391,6 @@ msgstr "argumento 'socket' inválido"
 msgid "invalid 'tarfile' argument"
 msgstr "argumento 'tarfile' inválido"
 
-#. R/packages.R: stop("invalid 'type'")
 #. R/packages.R: stop("invalid 'type'")
 #: R/packages.R:0
 msgid "invalid 'type'"
@@ -1548,7 +1499,6 @@ msgid "menu() cannot be used non-interactively"
 msgstr "menu() não deve ser usada de forma não interativa"
 
 #. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
-#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
 #: R/packages.R:0
 msgid "metadata of %s is corrupt"
 msgstr "metadados de %s estão corrompidos"
@@ -1612,7 +1562,6 @@ msgstr "deve haver 'max' > 'min'"
 msgid "must have some non-empty fields"
 msgstr ""
 
-#. R/unix/create.post.R: stop("must specify 'address'")
 #. R/unix/create.post.R: stop("must specify 'address'")
 #. R/windows/create.post.R: stop("must specify 'address'")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
@@ -1722,12 +1671,10 @@ msgid "no package %s at the repositories"
 msgstr "nenhum pacote %s nos repositórios"
 
 #. R/indices.R: gettextf("no package '%s' was found", pkg)
-#. R/indices.R: gettextf("no package '%s' was found", pkg)
 #: R/indices.R:0
 msgid "no package '%s' was found"
 msgstr "nenhum pacote '%s' foi encontrado"
 
-#. R/packages2.R: stop("no packages were specified")
 #. R/packages2.R: stop("no packages were specified")
 #: R/packages2.R:0
 msgid "no packages were specified"
@@ -1933,7 +1880,6 @@ msgid "source repository is unavailable to check versions"
 msgstr "repositório fonte não está disponível para verificar versões"
 
 #. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
-#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
 #. R/packages2.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
 #: R/packages.R:0 R/packages2.R:0
 msgid "specifying 'contriburl' or 'available' requires a single type, not type = \"both\""
@@ -1944,7 +1890,6 @@ msgstr "a especificação de 'contriburl' ou 'available' requer um único tipo, 
 msgid "str.data.frame() called with non-data.frame -- coercing to one."
 msgstr "str.data.frame() chamada com uma não data.frame -- fazendo coerção para uma."
 
-#. R/citation.R: gettext("subscript out of bounds")
 #. R/citation.R: gettext("subscript out of bounds")
 #: R/citation.R:0
 msgid "subscript out of bounds"
@@ -2058,8 +2003,6 @@ msgid "unable to create %s"
 msgstr "não é possível criar %s"
 
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
-#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
-#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
@@ -2069,8 +2012,6 @@ msgstr "não é possível criar %s"
 msgid "unable to create temporary directory %s"
 msgstr "não é possível criar diretório temporário %s"
 
-#. R/packages2.R: stop("unable to install packages")
-#. R/packages2.R: stop("unable to install packages")
 #. R/packages2.R: stop("unable to install packages")
 #: R/packages2.R:0
 msgid "unable to install packages"
@@ -2142,8 +2083,6 @@ msgstr "winDialog() não pode ser usada de forma não interativa"
 msgid "winDialogString() cannot be used non-interactively"
 msgstr "winDialogString() não pode ser usada de forma não interativa"
 
-#. R/de.R: stop("wrong argument to 'dataentry'")
-#. R/de.R: stop("wrong argument to 'dataentry'")
 #. R/de.R: stop("wrong argument to 'dataentry'")
 #: R/de.R:0
 msgid "wrong argument to 'dataentry'"

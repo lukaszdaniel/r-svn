@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:43\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
 "PO-Revision-Date: 2023-04-22 22:03+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -15,11 +15,13 @@ msgstr ""
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
 #: R/cmp.R:0
+#, fuzzy
 msgid "'%s' is not a valid compiler option"
 msgstr "'%s' er ikke et gyldigt kompilertilvalg"
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "'env' must be a top level environment"
 msgstr "'env' skal være et miljø på topniveau"
 
@@ -40,12 +42,10 @@ msgstr "ugyldig tildeling 1"
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad assignment 2"
-msgstr "ugyldig tildeling 2"
+msgstr "ugyldig tildeling 1"
 
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
 msgid "bad assignment: %s"
@@ -53,31 +53,27 @@ msgstr "ugyldig tildeling: %s"
 
 #. R/cmp.R: gettext("bad namespace import frame")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad namespace import frame"
 msgstr "ugyldig importramme for navnerum"
 
 #. R/cmp.R: stop("cannot compile a non-function")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile a non-function"
 msgstr "kan ikke kompilere en ikkefunktion"
 
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
 #. R/cmp.R: gettext("cannot compile byte code literals in code")
 #: R/cmp.R:0
 msgid "cannot compile byte code literals in code"
 msgstr "kan ikke kompilere ordrette bytecode i kode"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile promise literals in code"
 msgstr "kan ikke kompilere ordrette lovninger i kode"
 
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
 #. R/cmp.R: gettext("cannot compile this expression")
 #: R/cmp.R:0
 #, fuzzy
@@ -91,6 +87,7 @@ msgstr "kan ikke konstant folde ordrette bytecode-objekter"
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "kan ikke konstant folde ordrette løfter"
 
@@ -99,7 +96,6 @@ msgstr "kan ikke konstant folde ordrette løfter"
 msgid "compiling '%s'"
 msgstr "kompilerer '%s'"
 
-#. R/cmp.R: gettext("done")
 #. R/cmp.R: gettext("done")
 #: R/cmp.R:0
 msgid "done"
@@ -112,6 +108,7 @@ msgstr "tom alternativ i numerisk kontakt"
 
 #. R/cmp.R: warning("empty input file; no output written")
 #: R/cmp.R:0
+#, fuzzy
 msgid "empty input file; no output written"
 msgstr "tom inddatafil; ingen uddata skrevet"
 
@@ -141,13 +138,13 @@ msgid "invalid environment variable value: %s==%s"
 msgstr ""
 
 #. R/cmp.R: gettext("invalid function in complex assignment")
-#. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "ugyldig funktion i kompleks tildeling"
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0
+#, fuzzy
 msgid "missing arguments are not allowed"
 msgstr "manglende argumenter er ikke tilladt"
 
@@ -159,21 +156,25 @@ msgstr "mere end en standard tilbudt i kontaktkald"
 
 #. R/cmp.R: stop("namespace found within global environments")
 #: R/cmp.R:0
+#, fuzzy
 msgid "namespace found within global environments"
-msgstr ""
+msgstr "'ns' skal være et navnerum eller et importmiljø for navnerum"
 
 #. R/cmp.R: stop("namespace found within local environments")
 #: R/cmp.R:0
+#, fuzzy
 msgid "namespace found within local environments"
-msgstr ""
+msgstr "'ns' skal være et navnerum eller et importmiljø for navnerum"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
+#, fuzzy
 msgid "no offset recorded for label \"%s\""
 msgstr "ingen forskydning optaget for etiket »%s«"
 
 #. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
 #: R/cmp.R:0
+#, fuzzy
 msgid "no visible binding for '<<-' assignment to '%s'"
 msgstr "ingen synlig binding for '<<-'-tildeling for '%s'"
 
@@ -184,6 +185,7 @@ msgstr "ingen synlig binding for global variabel '%s'"
 
 #. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
 #: R/cmp.R:0
+#, fuzzy
 msgid "no visible global function definition for '%s'"
 msgstr "ingen synlig global funktionsdefinition for '%s'"
 
@@ -194,8 +196,8 @@ msgid "non-namespace found within namespace environments"
 msgstr "'ns' skal være et navnerum eller et importmiljø for navnerum"
 
 #. R/cmp.R: stop("not a proper evaluation environment")
-#. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "ikke et korrekt evuleringsmiljø"
 
@@ -207,6 +209,7 @@ msgstr "mulig fejl i '%s': %s"
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", file)
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", outfile)
 #: R/cmp.R:0
+#, fuzzy
 msgid "saving to file \"%s\" ..."
 msgstr "gemmer til fil »%s«..."
 
@@ -221,6 +224,22 @@ msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "lokal tildeling til syntaksfunktion: "
 msgstr[1] "lokale tildelinger til syntaksfunktioner: "
+
+#, fuzzy
+#~ msgid "gettext(\"bad assignment 2\")"
+#~ msgstr "ugyldig tildeling 2"
+
+#, fuzzy
+#~ msgid "gettext(\"cannot compile this expression\")"
+#~ msgstr "kan ikke kompilere ordrette lovninger i kode"
+
+#, fuzzy
+#~ msgid "gettext(\"invalid function in complex assignment\")"
+#~ msgstr "ugyldig funktion i kompleks tildeling"
+
+#, fuzzy
+#~ msgid "gettextf(\"saving to file \\\\\"%s\\\\\" ... \", outfile)"
+#~ msgstr "gemmer til fil »%s«..."
 
 #~ msgid "'ns' must be a namespace or a namespace imports environment"
 #~ msgstr "'ns' skal være et navnerum eller et importmiljø for navnerum"

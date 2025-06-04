@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-12-20 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -24,7 +24,6 @@ msgid "'degree' must be integer >= 1"
 msgstr "'degree' must be integer >= 1"
 
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
-#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #: R/splineClasses.R:0
 msgid "'deriv' must be between 0 and %d"
 msgstr "'deriv' must be between 0 and %d"
@@ -32,30 +31,34 @@ msgstr "'deriv' must be between 0 and %d"
 #. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
 #. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
 #: R/splines.R:0
+#, fuzzy
 msgid "'df' was too small; have used %d"
 msgstr "'df' was too small; have used %d"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
-#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' must be of the form \"y ~ x\""
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' must be >= 2"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "'ord' must be positive integer, at most the number of knots"
 
 #. R/splines.R: warning("all interior knots match left boundary knot")
 #. R/splines.R: stop("all interior knots match left boundary knot")
 #: R/splines.R:0
+#, fuzzy
 msgid "all interior knots match left boundary knot"
-msgstr "all interior knots match left boundary knot"
+msgstr "all interior knots match right boundary knot"
 
 #. R/splines.R: warning("all interior knots match right boundary knot")
 #. R/splines.R: stop("all interior knots match right boundary knot")
@@ -74,23 +77,25 @@ msgid "empty 'derivs'"
 msgstr "empty 'derivs'"
 
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
-#. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #: R/splineClasses.R:0
 msgid "knot positions must be non-decreasing"
 msgstr "knot positions must be non-decreasing"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "knot positions must be strictly increasing"
 
 #. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "length of 'derivs' is larger than length of 'x'"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "lengths of 'x' and 'y' must be the same"
 
@@ -115,14 +120,13 @@ msgid "need at least %s (=%d) knots"
 msgstr "need at least %s (=%d) knots"
 
 #. R/splines.R: stop("non-finite knots")
-#. R/splines.R: stop("non-finite knots")
 #: R/splines.R:0
 msgid "non-finite knots"
 msgstr "non-finite knots"
 
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
-#. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
+#, fuzzy
 msgid "shoving 'interior' knots matching boundary knots to inside"
 msgstr "shoving 'interior' knots matching boundary knots to inside"
 
@@ -133,11 +137,13 @@ msgstr "some 'x' values beyond boundary knots may cause ill-conditioned bases"
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "spline must be monotone"
 msgstr "spline must be monotone"
 
 #. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'",     knots[ord], knots[nk - degree], "outer.ok = TRUE")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr "the 'x' data must be in the range %g to %g unless you set '%s'"
 
@@ -147,8 +153,8 @@ msgid "the range of 'x' values exceeds one period"
 msgstr "the range of 'x' values exceeds one period"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
-#. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "values of 'x' must be distinct"
 
@@ -156,3 +162,19 @@ msgstr "values of 'x' must be distinct"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "values of 'x' must be strictly increasing"
+
+#, fuzzy
+#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
+#~ msgstr "'df' was too small; have used %d"
+
+#, fuzzy
+#~ msgid "stop(\"all interior knots match left boundary knot\")"
+#~ msgstr "all interior knots match left boundary knot"
+
+#, fuzzy
+#~ msgid "stop(\"knot positions must be non-decreasing\")"
+#~ msgstr "knot positions must be non-decreasing"
+
+#, fuzzy
+#~ msgid "warning(\"all interior knots match left boundary knot\")"
+#~ msgstr "all interior knots match left boundary knot"

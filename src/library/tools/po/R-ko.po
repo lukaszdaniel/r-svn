@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -19,12 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. R/QC.R: gettextf("  %s calls:", f)
-#. R/QC.R: gettextf("  %s calls:", f)
 #: R/QC.R:0
 msgid "%s calls:"
 msgstr "%s는 다음을 호출합니다:"
 
-#. R/QC.R: gettextf("  %s has wrong argument list %s", f, sQuote(paste(bad,     collapse = ", ")))
 #. R/QC.R: gettextf("  %s has wrong argument list %s", f, sQuote(paste(bad,     collapse = ", ")))
 #: R/QC.R:0
 msgid "%s has wrong argument list %s"
@@ -176,7 +174,6 @@ msgid "* Package: %s"
 msgstr ""
 
 #. R/admin.R: gettextf("*** someone has corrupted the Built field in package '%s' ***",     db["Package"])
-#. R/admin.R: gettextf("*** someone has corrupted the Built field in package '%s' ***",     db["Package"])
 #: R/admin.R:0
 msgid "*** someone has corrupted the Built field in package '%s' ***"
 msgstr "*** 패키지 '%s'내에 있는 Built 항목을 손상되었습니다 ***"
@@ -187,18 +184,15 @@ msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr ""
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
-#. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
 msgid "--- failed re-building %s"
 msgstr ""
 
 #. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
-#. R/Vignettes.R: gettextf("--- finished re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
 msgid "--- finished re-building %s"
 msgstr ""
 
-#. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
 #. R/Vignettes.R: gettextf("--- re-building %s using %s", sQuote(file), engine$name)
 #: R/Vignettes.R:0
 msgid "--- re-building %s using %s"
@@ -210,7 +204,6 @@ msgstr ""
 msgid "-l option without value"
 msgstr "-l 옵션에 대한 값이 주어지지 않았습니다."
 
-#. R/Rd2pdf.R: stop("-o option without value", call. = FALSE)
 #. R/Rd2pdf.R: stop("-o option without value", call. = FALSE)
 #. R/check.R: stop("-o option without value", call. = FALSE)
 #. R/install.R: stop("-o option without value", call. = FALSE)
@@ -248,7 +241,6 @@ msgstr ""
 msgid "All existing entry MD5sums match tarballs."
 msgstr ""
 
-#. R/QC.R: gettext("All field tags must be ASCII.")
 #. R/QC.R: gettext("All field tags must be ASCII.")
 #: R/QC.R:0
 msgid "All field tags must be ASCII."
@@ -299,18 +291,21 @@ msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자�
 
 #. R/QC.R: gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.")
 #: R/QC.R:0
+#, fuzzy
 msgid "Authors@R field gives no person with maintainer role, valid email address and non-empty name."
-msgstr ""
+msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
 
 #. R/QC.R: gettext("Authors@R field gives no person with name and author role")
 #: R/QC.R:0
+#, fuzzy
 msgid "Authors@R field gives no person with name and author role"
-msgstr ""
+msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
 
 #. R/QC.R: gettext("Authors@R field gives no person with name and roles.")
 #: R/QC.R:0
+#, fuzzy
 msgid "Authors@R field gives no person with name and roles."
-msgstr ""
+msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with duplicated ORCID identifiers:")
 #: R/QC.R:0
@@ -338,13 +333,15 @@ msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자�
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:")
 #: R/QC.R:0
+#, fuzzy
 msgid "Authors@R field gives persons with no name:"
-msgstr ""
+msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with no role:")
 #: R/QC.R:0
+#, fuzzy
 msgid "Authors@R field gives persons with no role:"
-msgstr ""
+msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
 
 #. R/QC.R: gettextf("Auto-generated content requiring editing in Rd file '%s':",     nm)
 #: R/QC.R:0
@@ -378,7 +375,6 @@ msgstr "Author 항목을 Authors@R 항목으로부터 추출할 수 없습니다
 msgid "Cannot extract Maintainer field from Authors@R field:"
 msgstr "Maintainer의 항목을 Authors@R 항목으로부터 추출할 수 없습니다:"
 
-#. R/news.R: gettextf("Cannot extract version info from the following section titles:\n%s",     paste0("  ", unique(nms[!ind]), collapse = "\n"))
 #. R/news.R: gettextf("Cannot extract version info from the following section titles:\n%s",     paste0("  ", unique(nms[!ind]), collapse = "\n"))
 #: R/news.R:0
 #, fuzzy
@@ -440,19 +436,15 @@ msgstr "Rd 파일들을 LaTeX 로 변환하고 있습니다..."
 
 #. R/news.R: stop("Could not extract news from the following text chunks:\n",     paste(sprintf("\nChunk %s:\n%s", format(seq_along(bad)),         bad), collapse = "\n"))
 #: R/news.R:0
+#, fuzzy
 msgid "Could not extract news from the following text chunks:"
-msgstr ""
+msgstr "다음의 섹션 제목으로부터 버전정보를 추출할 수 없습니다:"
 
-#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
-#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
-#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
-#. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
 #. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
 #: R/RdHelpers.R:0
 msgid "DESCRIPTION file is for package '%s', not '%s'"
 msgstr "DESCRIPTION 파일은 패키지 '%1$s'에 관한 것이지 '%2$s'에 관한 것이 아닙니다."
 
-#. R/news.R: stop("DESCRIPTION file not found")
 #. R/news.R: stop("DESCRIPTION file not found")
 #: R/news.R:0
 msgid "DESCRIPTION file not found"
@@ -591,7 +583,6 @@ msgid "Error: no packages were specified"
 msgstr "에러: 지정된 패키지들이 없습니다"
 
 #. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
-#. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
 #: R/Vignettes.R:0
 #, fuzzy
 msgid ""
@@ -656,22 +647,16 @@ msgid "Failed to locate %s output file %s or %s for vignette with name %s and en
 msgstr "%3$s 이름을 가진 비니에트에 대해서 %1$s 출력파일 (엔진 %2$s에 의해서)을 위치시키는데 실패했습니다. 디렉토리 %4$s내에 다음과 같은 파일들이 있습니다: %5$s"
 
 #. R/QC.R: gettext("Fields with non-ASCII tags:")
-#. R/QC.R: gettext("Fields with non-ASCII tags:")
 #: R/QC.R:0
 msgid "Fields with non-ASCII tags:"
 msgstr "ASCII가 아닌 태그가 사용된 항목들:"
 
-#. R/QC.R: gettext("Fields with non-ASCII values:")
 #. R/QC.R: gettext("Fields with non-ASCII values:")
 #: R/QC.R:0
 msgid "Fields with non-ASCII values:"
 msgstr "ASCII가 아닌 값을 가지는 항목들:"
 
 #. R/QC.R: gettextf("File %s:", sQuote(f))
-#. R/QC.R: gettextf("File %s:", sQuote(f))
-#. R/QC.R: gettextf("File %s:", sQuote(f))
-#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
-#. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #: R/QC.R:0 R/sotools.R:0
 msgid "File %s:"
@@ -768,8 +753,9 @@ msgstr "파일 '%s'에서 파싱에러가 발생했습니다:"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
+#, fuzzy
 msgid "License components which are templates and need '+ file LICENSE':"
-msgstr ""
+msgstr "다음은 허용되지 않는 제한을 가지고 있는 라이센스 구성요소들입니다:"
 
 #. R/QC.R: gettext("License components with restrictions not permitted:")
 #: R/QC.R:0
@@ -792,7 +778,6 @@ msgstr "이름이 없는 Rd 객체들은 다루어질 수 없습니다"
 msgid "Link %s in package %s could not be located"
 msgstr "패키지 %2$s 내의 링크 %1$s 를 제자리에 위치시킬 수 없습니다"
 
-#. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)),     sQuote(name), fmt_file_sizes(output))
 #. R/Vignettes.R: gettextf("Located more than one %s output file (by engine %s) for vignette with name %s: %s",     sQuote(by), sQuote(sprintf("%s::%s", engine$package, engine$name)),     sQuote(name), fmt_file_sizes(output))
 #: R/Vignettes.R:0
 msgid "Located more than one %s output file (by engine %s) for vignette with name %s: %s"
@@ -923,7 +908,6 @@ msgid "NEWS file not found"
 msgstr "NEWS 파일을 찾을 수 없습니다."
 
 #. R/testing.R: message(" NOTE")
-#. R/testing.R: message(" NOTE")
 #: R/testing.R:0
 msgid "NOTE"
 msgstr ""
@@ -940,7 +924,6 @@ msgid "NOTE: fixed library identification name"
 msgstr ""
 
 #. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
-#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
 #: R/install.R:0
 msgid "NOTE: fixed library path"
 msgstr ""
@@ -951,7 +934,6 @@ msgid "NOTE: fixed path"
 msgstr ""
 
 #. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
 #. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
 #: R/install.R:0
 msgid "NOTE: fixed rpath"
@@ -1029,8 +1011,6 @@ msgid "No package index found for package %s"
 msgstr "패키지 %s에 대한 패키지 인덱스를 찾을 수 없습니다"
 
 #. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
-#. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
-#. R/dynamicHelp.R: gettextf("No package named %s could be found", mono(pkg))
 #: R/dynamicHelp.R:0
 msgid "No package named %s could be found"
 msgstr "%s이라는 이름의 패키지를 찾을 수없습니다"
@@ -1048,8 +1028,9 @@ msgstr "파일 '%s'에서 파싱에러가 발생했습니다:"
 
 #. R/QC.R: gettextf("Non-portable flags in variable '%s':", names(x))
 #: R/QC.R:0
+#, fuzzy
 msgid "Non-portable flags in variable '%s':"
-msgstr ""
+msgstr "파일 '%s'에서 파싱에러가 발생했습니다:"
 
 #. R/QC.R: gettext("Non-standard license specification:")
 #: R/QC.R:0
@@ -1068,10 +1049,6 @@ msgstr "다큐멘테이션 객체 '%s'내에서 빠져있는 링크(들)은 다�
 msgid "Note: skipping %s"
 msgstr "%s를 처리중입니다"
 
-#. R/testing.R: message(" OK")
-#. R/testing.R: message(" OK")
-#. R/testing.R: message(" OK")
-#. R/testing.R: message(" OK")
 #. R/testing.R: message(" OK")
 #. R/testing.R: if (res != 0L) "DIFFERED" else "OK"
 #: R/testing.R:0
@@ -1161,13 +1138,11 @@ msgstr "'base' 또는 'recommended' 또는 'defunct-base'와 같은 우선순위
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
-#. R/htmltools.R: sprintf("Processing %s ...", f)
 #. R/htmltools.R: sprintf("Processing %s ...", u)
 #: R/CRANtools.R:0 R/htmltools.R:0
 msgid "Processing %s ..."
 msgstr "%s를 프로세싱 중입니다..."
 
-#. R/packages.R: message("Processing packages:")
 #. R/packages.R: message("Processing packages:")
 #: R/packages.R:0
 msgid "Processing packages:"
@@ -1222,8 +1197,9 @@ msgstr "다음은 중복된 에일리어스 '%s'를 가진 Rd 파일들입니다
 
 #. R/Rd.R: gettextf("Rd macro package '%s' is not installed.", p)
 #: R/Rd.R:0
+#, fuzzy
 msgid "Rd macro package '%s' is not installed."
-msgstr ""
+msgstr "패키지 %s로부터 Rd macro를 찾을 수 없습니다."
 
 #. R/Rd.R: stop("Rd object required")
 #: R/Rd.R:0
@@ -1245,7 +1221,6 @@ msgstr ""
 msgid "Running"
 msgstr "실행중입니다"
 
-#. R/testing.R: gettextf("  Running %s", sQuote(f))
 #. R/testing.R: gettextf("  Running %s", sQuote(f))
 #: R/testing.R:0
 msgid "Running %s"
@@ -1291,7 +1266,6 @@ msgid ""
 "for details."
 msgstr ""
 
-#. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.")
 #. R/Rd.R: gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'.")
 #: R/Rd.R:0
 msgid "See chapter 'Writing R documentation' in manual 'Writing R Extensions'."
@@ -1366,7 +1340,6 @@ msgstr "반드시 ASCII 값들을 가져야만 하는 항목들입니다."
 msgid "This field must contain one or more packages (and no version requirement)."
 msgstr "이 항목은 반드시 하나 이상의 패키지를 포함해야 합니다 (버전은 요구되지 않습니다)."
 
-#. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 #. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 #: R/dynamicHelp.R:0
 msgid "URL %s was not found"
@@ -1480,7 +1453,6 @@ msgid "Vignette %s overwrites the following %s output by vignette %s: %s"
 msgstr "비니에트 %1$s은 다음의 %2$s 출력물을 비니에트 %3$s에 의하여 덮어썼습니다: %4$s"
 
 #. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding",     name)
-#. R/Vignettes.R: gettextf("Vignette '%s' is non-ASCII but has no declared encoding",     name)
 #: R/Vignettes.R:0
 msgid "Vignette '%s' is non-ASCII but has no declared encoding"
 msgstr "비그네트 '%s'는 ASCII 형식이 아니며 이에 대하여 선언된 인코딩을 찾을 수 없습니다."
@@ -1495,7 +1467,6 @@ msgstr "비니에트 종속성 (%s 항목들)은 반드시 DESCRIPTION Depends/S
 msgid "Vignette engine %s is not registered"
 msgstr "비니에트 엔진 %s이 등록되지 않았습니다"
 
-#. R/Vignettes.R: gettextf("Vignette engine %s is not registered by any of the packages %s",     sQuote(name), paste(sQuote(package), collapse = ", "))
 #. R/Vignettes.R: gettextf("Vignette engine %s is not registered by any of the packages %s",     sQuote(name), paste(sQuote(package), collapse = ", "))
 #: R/Vignettes.R:0
 msgid "Vignette engine %s is not registered by any of the packages %s"
@@ -1553,7 +1524,6 @@ msgid "WARNING: shared objects/dynamic libraries with hard-coded temporary insta
 msgstr ""
 
 #. R/Rd2pdf.R: message("Warning: unknown option ", sQuote(a))
-#. R/Rd2pdf.R: message("Warning: unknown option ", sQuote(a))
 #. R/build.R: message("Warning: unknown option ", sQuote(a))
 #. R/check.R: message("Warning: unknown option ", sQuote(a))
 #: R/Rd2pdf.R:0 R/build.R:0 R/check.R:0
@@ -1608,25 +1578,6 @@ msgstr "인자 'delim'는 반드시 두개의 문자를 지정해야 합니다"
 msgid "argument 'outFile' must be a character string or connection"
 msgstr "인자 'outFile'는 반드시 문자열 또는 연결이어야 합니다"
 
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
-#. R/QC.R: stop("argument 'package' must be of length 1")
 #. R/QC.R: stop("argument 'package' must be of length 1")
 #. R/Rd.R: stop("argument 'package' must be of length 1")
 #. R/Vignettes.R: stop("argument 'package' must be of length 1")
@@ -1683,9 +1634,7 @@ msgstr "%s로부터 연결할 수 없습니다"
 #. R/admin.R: gettextf("cannot open directory '%s'", meta_dir)
 #. R/admin.R: gettextf("cannot open directory '%s'", outDir)
 #. R/admin.R: gettextf("cannot open directory '%s'", outCodeDir)
-#. R/admin.R: gettextf("cannot open directory '%s'", outMetaDir)
 #. R/admin.R: gettextf("cannot open directory '%s'", outVignetteDir)
-#. R/admin.R: gettextf("cannot open directory '%s'", outMetaDir)
 #: R/admin.R:0
 msgid "cannot open directory '%s'"
 msgstr "디렉토리 '%s'를 열 수 없습니다"
@@ -1713,7 +1662,6 @@ msgstr "%s를 확인합니다 ..."
 
 #. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(savefile)))
 #. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(prevfile)))
-#. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
 #. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
 #: R/testing.R:0
 msgid "comparing %s to %s ..."
@@ -1745,17 +1693,12 @@ msgstr "비어있는 라인을 포함하고 있습니다"
 
 #. R/Rd2pdf.R: stop("current working directory cannot be ascertained")
 #. R/Vignettes.R: stop("current working directory cannot be ascertained")
-#. R/Vignettes.R: stop("current working directory cannot be ascertained")
-#. R/Vignettes.R: stop("current working directory cannot be ascertained")
-#. R/admin.R: stop("current working directory cannot be ascertained")
 #. R/admin.R: stop("current working directory cannot be ascertained")
 #. R/build.R: stop("current working directory cannot be ascertained")
 #. R/check.R: stop("current working directory cannot be ascertained")
 #. R/install.R: stop("current working directory cannot be ascertained")
 #. R/md5.R: stop("current working directory cannot be ascertained")
-#. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
-#. R/sha256.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
 #: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
 #: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
@@ -1769,54 +1712,20 @@ msgid "directory %s is not writeable"
 msgstr "디렉토리 '%s'는 존재하지 않습니다"
 
 #. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain R code", dir)
 #: R/QC.R:0
 msgid "directory '%s' does not contain R code"
 msgstr "디렉토리 '%s'는 R 코드를 포함하지 않습니다"
 
-#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
-#. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
 #. R/QC.R: gettextf("directory '%s' does not contain Rd objects", dir)
 #: R/QC.R:0
 msgid "directory '%s' does not contain Rd objects"
 msgstr "디렉퇴 '%s'는 Rd 객체들을 포함하지 않습니다"
 
 #. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
-#. R/QC.R: gettextf("directory '%s' does not exist", dir)
 #. R/Rd.R: gettextf("directory '%s' does not exist", dir)
 #. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
-#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
-#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
-#. R/Vignettes.R: gettextf("directory '%s' does not exist", dir)
-#. R/admin.R: gettextf("directory '%s' does not exist", dir)
 #. R/admin.R: gettextf("directory '%s' does not exist", dir)
 #. R/admin.R: gettextf("directory '%s' does not exist", outDir)
-#. R/index.R: gettextf("directory '%s' does not exist", demoDir)
 #. R/index.R: gettextf("directory '%s' does not exist", demoDir)
 #. R/makeLazyLoad.R: gettextf("directory '%s' does not exist", dir)
 #: R/QC.R:0 R/Rd.R:0 R/Vignettes.R:0 R/admin.R:0 R/index.R:0 R/makeLazyLoad.R:0
@@ -1825,7 +1734,6 @@ msgstr "디렉토리 '%s'는 존재하지 않습니다"
 
 #. R/dynamicHelp.R: message(" done")
 #. R/install.R: message(" done")
-#. R/packages.R: message("done")
 #. R/packages.R: message("done")
 #: R/dynamicHelp.R:0 R/install.R:0 R/packages.R:0
 msgid "done"
@@ -1838,8 +1746,9 @@ msgstr "%s을 다운로드 하고 있습니다  ..."
 
 #. R/checktools.R: message("downloading reverse dependencies ...")
 #: R/checktools.R:0
+#, fuzzy
 msgid "downloading reverse dependencies ..."
-msgstr ""
+msgstr "%s을 다운로드 하고 있습니다  ..."
 
 #. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
 #: R/admin.R:0
@@ -1879,8 +1788,6 @@ msgid "failed to start the httpd server"
 msgstr "httpd 서버를 시작하는데 실패했습니다"
 
 #. R/QC.R: gettextf("file '%s' does not exist", file)
-#. R/QC.R: gettextf("file '%s' does not exist", file)
-#. R/translations.R: gettextf("file '%s' does not exist", potfile)
 #. R/translations.R: gettextf("file '%s' does not exist", potfile)
 #. R/utils.R: gettextf("file '%s' does not exist", x)
 #. R/utils.R: gettextf("file '%s' does not exist", dfile)
@@ -1943,7 +1850,6 @@ msgstr "패키지가 잘못되었습니다"
 msgid "invalid package layout"
 msgstr "올바른 패키지 레이아웃(package layout)이 아닙니다."
 
-#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
 msgid "invalid value %s for R_CROSS_BUILD"
@@ -2032,8 +1938,9 @@ msgstr "체크할 패키지들이 없습니다"
 
 #. R/testing.R: message("no parsed files found")
 #: R/testing.R:0
+#, fuzzy
 msgid "no parsed files found"
-msgstr ""
+msgstr "소스파일들을 찾을 수 없습니다"
 
 #. R/dynamicHelp.R: stop("no running server to stop")
 #: R/dynamicHelp.R:0
@@ -2114,8 +2021,6 @@ msgid ""
 msgstr "파일 '%s'에 포함된 예제부분에서  파싱에러가 발생했습니다:"
 
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
 #: R/QC.R:0
@@ -2126,7 +2031,6 @@ msgstr ""
 "파일 '%s'내에서 파싱에러가 발생했습니다:\n"
 "%s"
 
-#. R/xgettext.R: gettextf("parsing '%s'", f)
 #. R/xgettext.R: gettextf("parsing '%s'", f)
 #: R/xgettext.R:0
 msgid "parsing '%s'"
@@ -2139,7 +2043,6 @@ msgstr ""
 
 #. R/admin.R: gettextf("processing %s", sQuote(basename(file)))
 #. R/doitools.R: sprintf("processing %s", p)
-#. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", .file_path_relative_to_dir(f, dir))
 #. R/urltools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", i)
@@ -2154,10 +2057,13 @@ msgstr "%s를 처리중입니다"
 #. R/packages.R: gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",     sQuote(basename(dirname(p))), conditionMessage(temp))
 #. R/packages.R: gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",     sQuote(basename(paths[i])), conditionMessage(temp))
 #: R/packages.R:0
+#, fuzzy
 msgid ""
 "reading DESCRIPTION for package %s failed with message:\n"
 "  %s"
 msgstr ""
+"TeX 파일 %s를 컴파일하는데 실패했습니다:\n"
+"%s"
 
 #. R/install.R: message("  restoration failed\n")
 #: R/install.R:0
@@ -2295,7 +2201,6 @@ msgid "unable to find any package tarballs in %s"
 msgstr ""
 
 #. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
-#. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
 #: R/utils.R:0
 msgid "unable to run %s on '%s'"
 msgstr "'%2$s'에 %1$s를 실행할 수 없습니다"
@@ -2319,8 +2224,9 @@ msgstr "구현되지 않은 인코딩입니다"
 
 #. R/toHTML.R: warning("unknown header specification")
 #: R/toHTML.R:0
+#, fuzzy
 msgid "unknown header specification"
-msgstr ""
+msgstr "비표준 라이센스 지정(non-standard license specification)입니다:"
 
 #. R/dynamicHelp.R: gettextf("unsupported URL %s", mono(path))
 #: R/dynamicHelp.R:0
@@ -2368,7 +2274,6 @@ msgid "vignette filename '%s' does not match any of the '%s' filename patterns"
 msgstr "비니에트 파일명 '%1$s'은 '%2$s' 파일명 패턴들 중 어느것과도 일치하지 않습니다"
 
 #. R/checktools.R: stop("wrong class")
-#. R/checktools.R: stop("wrong class")
 #: R/checktools.R:0
 msgid "wrong class"
 msgstr "잘못된 클래스입니다"
@@ -2385,16 +2290,6 @@ msgid "you must specify 'dir' or 'files'"
 msgstr "'dir' 또는 'files'을 반드시 지정해야 합니다"
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
-#. R/QC.R: stop("you must specify 'package' or 'dir'")
 #. R/Rd.R: stop("you must specify 'package' or 'dir'")
 #. R/Vignettes.R: stop("you must specify 'package' or 'dir'")
 #. R/makeLazyLoad.R: stop("you must specify 'package' or 'dir'")
@@ -2402,7 +2297,6 @@ msgstr "'dir' 또는 'files'을 반드시 지정해야 합니다"
 msgid "you must specify 'package' or 'dir'"
 msgstr "'package' 또는 'dir'를 반드시 지정해야 합니다"
 
-#. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
 #. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
 #: R/QC.R:0
 msgid "you must specify 'package', 'dir' or 'file'"
@@ -2492,33 +2386,38 @@ msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
 #. R/QC.R: ngettext(length(x$bad_S4methods), "Found an obsolete/platform-specific call in methods for the following S4 generic:",     "Found an obsolete/platform-specific call in methods for the following S4 generics:")
 #: R/QC.R:0
+#, fuzzy
 msgid "Found an obsolete/platform-specific call in methods for the following S4 generic:"
 msgid_plural "Found an obsolete/platform-specific call in methods for the following S4 generics:"
-msgstr[0] ""
+msgstr[0] "다음의 S4 제네릭에 대하여 메소드로부터 .Internal 호출을 찾았습니다:"
 
 #. R/QC.R: ngettext(length(x$bad_refs), "Found an obsolete/platform-specific call in methods for the following reference class:",     "Found an obsolete/platform-specific call in methods for the following reference classes:")
 #: R/QC.R:0
+#, fuzzy
 msgid "Found an obsolete/platform-specific call in methods for the following reference class:"
 msgid_plural "Found an obsolete/platform-specific call in methods for the following reference classes:"
-msgstr[0] ""
+msgstr[0] "다음과 같은 레퍼런스 클래스에 대하여 메소들로부터 .Internal 호출을 찾았습니다:"
 
 #. R/QC.R: ngettext(length(x$bad_closures), "Found an obsolete/platform-specific call in the following function:",     "Found an obsolete/platform-specific call in the following functions:")
 #: R/QC.R:0
+#, fuzzy
 msgid "Found an obsolete/platform-specific call in the following function:"
 msgid_plural "Found an obsolete/platform-specific call in the following functions:"
-msgstr[0] ""
+msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
 #. R/QC.R: ngettext(length(x$bad_examples), "Found possibly global 'T' or 'F' in the examples of the following Rd file:",     "Found possibly global 'T' or 'F' in the examples of the following Rd files:")
 #: R/QC.R:0
+#, fuzzy
 msgid "Found possibly global 'T' or 'F' in the examples of the following Rd file:"
 msgid_plural "Found possibly global 'T' or 'F' in the examples of the following Rd files:"
-msgstr[0] ""
+msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
 #. R/QC.R: ngettext(length(x$bad_closures), "Found possibly global 'T' or 'F' in the following function:",     "Found possibly global 'T' or 'F' in the following functions:")
 #: R/QC.R:0
+#, fuzzy
 msgid "Found possibly global 'T' or 'F' in the following function:"
 msgid_plural "Found possibly global 'T' or 'F' in the following functions:"
-msgstr[0] ""
+msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
 #. R/QC.R: ngettext(length(x$defunct), "Found the defunct/removed function:",     "Found the defunct/removed functions:")
 #: R/QC.R:0
@@ -2654,13 +2553,14 @@ msgstr[0] "파일 %s내에 다음과 같은 경고를 발견했습니다:"
 
 #. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
 #: R/Rd.R:0
+#, fuzzy
 msgid ""
 "missing/empty \\name field in Rd file\n"
 "%s"
 msgid_plural ""
 "missing/empty \\name field in Rd files\n"
 "%s"
-msgstr[0] ""
+msgstr[0] "'%s'내에 \\title 항목이 비어있습니다"
 
 #. R/makeLazyLoad.R: ngettext(sum(dup), "object %s is created by more than one data call",     "objects %s are created by more than one data call")
 #: R/makeLazyLoad.R:0
@@ -2670,9 +2570,10 @@ msgstr[0] "객체 %s는 하나 이상의 데이터 호출로부터 생성되었�
 
 #. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s")
 #: R/admin.R:0
+#, fuzzy
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
-msgstr[0] ""
+msgstr[0] "'%2$s'에 %1$s를 실행할 수 없습니다"
 
 #, fuzzy
 #~ msgid "in package installation"

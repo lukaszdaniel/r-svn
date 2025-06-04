@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -23,7 +23,6 @@ msgstr ""
 msgid "'%s' is deprecated."
 msgstr ""
 
-#. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
 #, fuzzy
@@ -71,24 +70,17 @@ msgid "'drop' is always implicitly FALSE in '[.raster'"
 msgstr "'drop'은 '[.raster'에서 항상 암묵적으로 FALSE입니다"
 
 #. R/unix/dev2bitmap.R: stop("'file' is missing with no default")
-#. R/unix/dev2bitmap.R: stop("'file' is missing with no default")
-#. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
 #. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' is missing with no default"
 msgstr "'file'은 기본값 없이 누락되었습니다"
 
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
-#. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
 msgstr "'file'은 반드시 비어있지 않은 문자열이어야 합니다"
 
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
-#. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #: R/unix/png.R:0
 #, fuzzy
@@ -234,17 +226,12 @@ msgid "Font information is inconsistent"
 msgstr ""
 
 #. R/postscript.R: stop("GhostScript was not found")
-#. R/postscript.R: stop("GhostScript was not found")
 #. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
 #. R/windows/dev2bitmap.R: stop("GhostScript was not found")
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "GhostScript was not found"
 msgstr ""
 
-#. R/patterns.R: stop("Invalid 'extend' value")
-#. R/patterns.R: stop("Invalid 'extend' value")
 #. R/patterns.R: stop("Invalid 'extend' value")
 #: R/patterns.R:0
 #, fuzzy
@@ -292,8 +279,9 @@ msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr ""
+msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -303,28 +291,33 @@ msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph height"
-msgstr ""
+msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr ""
+msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph info"
-msgstr ""
+msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph width"
-msgstr ""
+msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
+#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr ""
+msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -476,8 +469,6 @@ msgid "can only manipulate windows devices"
 msgstr "윈도우즈 장치들을 조절할수만 있습니다"
 
 #. R/device.R: stop("can only print from a screen device")
-#. R/device.R: stop("can only print from a screen device")
-#. R/device.R: stop("can only print from a screen device")
 #. R/unix/quartz.R: stop("can only print from a screen device")
 #: R/device.R:0 R/unix/quartz.R:0
 msgid "can only print from a screen device"
@@ -600,7 +591,6 @@ msgid "invalid 'cmapEncoding' in font specification"
 msgstr "폰트지정에 유효하지 않은 'cmapEncoding'입니다"
 
 #. R/postscript.R: stop("invalid 'family' argument")
-#. R/postscript.R: stop("invalid 'family' argument")
 #: R/postscript.R:0
 msgid "invalid 'family' argument"
 msgstr "유효하지 않은 'family' 인자입니다"
@@ -611,21 +601,12 @@ msgid "invalid 'file'"
 msgstr "유효하지 않은 'file'입니다"
 
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
-#. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0
 msgid "invalid 'file' argument '%s'"
 msgstr "'file' 인자 '%s'가 올바르지 않습니다"
 
 #. R/cairo.R: stop("invalid 'filename'")
-#. R/cairo.R: stop("invalid 'filename'")
-#. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
 #. R/windows/windows.R: stop("invalid 'filename'")
 #: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
@@ -717,7 +698,6 @@ msgid "invalid encoding in font specification"
 msgstr "폰트 지정에 유효하지 않은 인코딩입니다"
 
 #. R/postscript.R: stop("invalid family name in font specification")
-#. R/postscript.R: stop("invalid family name in font specification")
 #: R/postscript.R:0
 msgid "invalid family name in font specification"
 msgstr "폰트지정에 유효하지 않은 페밀리명입니다"
@@ -738,7 +718,6 @@ msgstr "유효하지 않은 첫번째 인자입니다 [잘못된 language 객체
 msgid "invalid height"
 msgstr "유효하지 않은 'title'입니다"
 
-#. R/postscript.R: stop("invalid metric information in font specification")
 #. R/postscript.R: stop("invalid metric information in font specification")
 #: R/postscript.R:0
 msgid "invalid metric information in font specification"
@@ -781,8 +760,6 @@ msgid "invalid width"
 msgstr "유효하지 않은 'title'입니다"
 
 #. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
-#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
-#. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
 #: R/glyph.R:0
 msgid "length of arguments must match (and be greater than 0)"
 msgstr ""
@@ -802,8 +779,6 @@ msgstr "'z'라고 지정된 행렬이 없습니다"
 msgid "no current device to record from"
 msgstr "다음으로부터 기록을 할 수 있는 장치가 없습니다"
 
-#. R/device.R: stop("no device to print from")
-#. R/device.R: stop("no device to print from")
 #. R/device.R: stop("no device to print from")
 #. R/unix/quartz.R: stop("no device to print from")
 #: R/device.R:0 R/unix/quartz.R:0
@@ -883,7 +858,6 @@ msgid "snapshot recorded in different R version (pre 3.3.0)"
 msgstr ""
 
 #. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
-#. R/postscript.R: gettextf("status %d in running command '%s'", ret, cmd)
 #: R/postscript.R:0
 msgid "status %d in running command '%s'"
 msgstr "명령어 '%2$s'를 실행하던 중 상태 %1$d가 되었습니다"
@@ -899,9 +873,6 @@ msgid "svg: Cairo-based devices are not available for this platform"
 msgstr ""
 
 #. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
 msgstr ""
@@ -912,14 +883,10 @@ msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
 msgstr ""
 
 #. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
 #: R/unix/png.R:0
 msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
 msgstr ""
 
-#. R/postscript.R: gettextf("unknown family '%s'", family)
 #. R/postscript.R: gettextf("unknown family '%s'", family)
 #: R/postscript.R:0
 msgid "unknown family '%s'"
@@ -941,7 +908,6 @@ msgstr "알수없는 폰트입니다"
 msgid "unrecognized format of gs -help"
 msgstr "알수없는 gs 포맷입니다 -help"
 
-#. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 #. R/windows/windows.R: stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 #: R/windows/windows.R:0
 msgid "windows devices should not be used in examples etc"

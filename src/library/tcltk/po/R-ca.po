@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-10-15 03:05+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -19,7 +19,6 @@ msgstr ""
 msgid "'filters' must be a 2-column character matrix"
 msgstr "«filters» ha de ser una matriu de caràcters de 2 columnes"
 
-#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #: R/utils.R:0
 #, fuzzy
@@ -125,8 +124,9 @@ msgstr "PMF DE L'R"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Save workspace"
-msgstr "Desa l'espai de treball"
+msgstr "No desis l'espai de treball"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
@@ -182,8 +182,15 @@ msgid "t test"
 msgstr "test t"
 
 #. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
-#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
 #: R/unix/zzz.R:0
 #, fuzzy
 msgid "tcltk DLL is linked to"
 msgstr "Tcltk DLL està enllaçat a"
+
+#, fuzzy
+#~ msgid "gettext(\"Save workspace\")"
+#~ msgstr "Desa l'espai de treball"
+
+#, fuzzy
+#~ msgid "message(\"tcltk DLL is linked to \", shQuote(this))"
+#~ msgstr "Tcltk DLL està enllaçat a"

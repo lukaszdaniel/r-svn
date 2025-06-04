@@ -2,13 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 
@@ -28,7 +28,6 @@ msgstr ""
 
 #: R/splineClasses.R: 0
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
-#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 
 msgid "'deriv' must be between 0 and %d"
 msgstr ""
@@ -43,7 +42,6 @@ msgstr ""
 
 
 #: R/splineClasses.R: 0
-#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 
 msgid "'formula' must be of the form \"y ~ x\""
@@ -95,7 +93,6 @@ msgstr ""
 
 
 #: R/splineClasses.R: 0
-#. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
 
 msgid "knot positions must be non-decreasing"
@@ -153,14 +150,12 @@ msgstr ""
 
 #: R/splines.R: 0
 #. R/splines.R: stop("non-finite knots")
-#. R/splines.R: stop("non-finite knots")
 
 msgid "non-finite knots"
 msgstr ""
 
 
 #: R/splines.R: 0
-#. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 
 msgid "shoving 'interior' knots matching boundary knots to inside"
@@ -196,7 +191,6 @@ msgstr ""
 
 
 #: R/splineClasses.R: 0
-#. R/splineClasses.R: stop("values of 'x' must be distinct")
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
 
 msgid "values of 'x' must be distinct"

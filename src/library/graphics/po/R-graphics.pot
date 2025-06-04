@@ -2,13 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
@@ -487,8 +487,6 @@ msgstr ""
 
 #: R/plot.R: 0
 #. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
 
 msgid "cannot handle more than one 'x' coordinate"
 msgstr ""
@@ -517,10 +515,7 @@ msgstr ""
 
 #: R/cdplot.R: 0
 #: R/spineplot.R: 0
-#: R/spineplot.R: 0
 #. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/spineplot.R: stop("dependent variable should be a factor")
 #. R/spineplot.R: stop("dependent variable should be a factor")
 
 msgid "dependent variable should be a factor"
@@ -720,7 +715,6 @@ msgstr ""
 #: R/boxplot.R: 0
 #: R/stripchart.R: 0
 #. R/boxplot.R: stop("invalid first argument")
-#. R/boxplot.R: stop("invalid first argument")
 #. R/stripchart.R: stop("invalid first argument")
 
 msgid "invalid first argument"
@@ -789,17 +783,12 @@ msgstr ""
 
 #: R/screen.R: 0
 #. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
 
 msgid "invalid screen number"
 msgstr ""
 
 
 #: R/datetime.R: 0
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 
 msgid "invalid specification of 'breaks'"
@@ -885,8 +874,6 @@ msgstr ""
 
 #: R/plot.R: 0
 #. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
 
 msgid "must have a response variable"
 msgstr ""
@@ -936,7 +923,6 @@ msgstr ""
 
 
 #: R/pairs.R: 0
-#. R/pairs.R: stop("non-numeric argument to 'pairs'")
 #. R/pairs.R: stop("non-numeric argument to 'pairs'")
 
 msgid "non-numeric argument to 'pairs'"
@@ -1097,7 +1083,6 @@ msgstr ""
 
 
 #: R/datetime.R: 0
-#. R/datetime.R: stop("wrong method")
 #. R/datetime.R: stop("wrong method")
 
 msgid "wrong method"

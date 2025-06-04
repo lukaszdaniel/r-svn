@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:43\n"
-"PO-Revision-Date: 2024-03-18 21:18+0000\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
+"PO-Revision-Date: 2025-06-02 18:01+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -46,9 +46,6 @@ msgid "bad assignment 2"
 msgstr "złe przypisanie 2"
 
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
 msgid "bad assignment: %s"
 msgstr "złe przypisanie: %s"
@@ -64,22 +61,15 @@ msgid "cannot compile a non-function"
 msgstr "nie można skompilować nie-funkcji"
 
 #. R/cmp.R: gettext("cannot compile byte code literals in code")
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
 #: R/cmp.R:0
 msgid "cannot compile byte code literals in code"
 msgstr "nie można skompilować dosłownych bajtów kodu w kod"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
 msgid "cannot compile promise literals in code"
 msgstr "nie można skompilować dosłownych obietnic w kod"
 
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
 #. R/cmp.R: gettext("cannot compile this expression")
 #: R/cmp.R:0
 msgid "cannot compile this expression"
@@ -100,7 +90,6 @@ msgstr "nie można ukryć stałych z dosłownymi obietnicami"
 msgid "compiling '%s'"
 msgstr "kompilowanie '%s'"
 
-#. R/cmp.R: gettext("done")
 #. R/cmp.R: gettext("done")
 #: R/cmp.R:0
 msgid "done"
@@ -141,7 +130,6 @@ msgstr "niepoprawne opcje kompilatora: 'optimize(==%d)<2' oraz 'jitEnabled(==%d)
 msgid "invalid environment variable value: %s==%s"
 msgstr "niepoprawna wartość zmiennej środowiskowej: %s==%s"
 
-#. R/cmp.R: gettext("invalid function in complex assignment")
 #. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
@@ -192,7 +180,6 @@ msgstr "brak widocznej globalnej definicji funkcji dla '%s'"
 msgid "non-namespace found within namespace environments"
 msgstr "obiekt niebędący przestrzenią nazw znaleziony wewnątrz środowisk przestrzeni nazw"
 
-#. R/cmp.R: stop("not a proper evaluation environment")
 #. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
 msgid "not a proper evaluation environment"

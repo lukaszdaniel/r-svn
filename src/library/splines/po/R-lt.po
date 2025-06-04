@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: splines 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2021-11-06 22:23+0100\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -23,7 +23,6 @@ msgid "'degree' must be integer >= 1"
 msgstr "'degree' turi būti sveikasis skaičius >= 1"
 
 #. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
-#. R/splineClasses.R: gettextf("'deriv' must be between 0 and %d", ord - 1)
 #: R/splineClasses.R:0
 msgid "'deriv' must be between 0 and %d"
 msgstr "'deriv' turi būti tarp 0 ir %d"
@@ -31,22 +30,25 @@ msgstr "'deriv' turi būti tarp 0 ir %d"
 #. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
 #. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
 #: R/splines.R:0
+#, fuzzy
 msgid "'df' was too small; have used %d"
 msgstr "'df' buvo per mažas; naudojote %d"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
-#. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' turi būti \"y ~ x\" formos"
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' turi būti >= 2"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "'ord' turi būti teigiamas sveikasis skaičius, didžiausias mazgų skaičius"
 
@@ -73,23 +75,25 @@ msgid "empty 'derivs'"
 msgstr "tuščias 'derivs'"
 
 #. R/splineClasses.R: stop("knot positions must be non-decreasing")
-#. R/splineClasses.R: stop("knot positions must be non-decreasing")
 #: R/splineClasses.R:0
 msgid "knot positions must be non-decreasing"
 msgstr "mazgo pozicijos turi būti nemažėjančios"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "mazgo pozicijos turi būti griežtai didėjančios"
 
 #. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "'derivs' ilgis yra didesnis nei 'x' ilgis"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "'x' ir 'y' ilgiai turi būti tokie pat"
 
@@ -114,12 +118,10 @@ msgid "need at least %s (=%d) knots"
 msgstr "reikia bent %s (=%d) mazgų"
 
 #. R/splines.R: stop("non-finite knots")
-#. R/splines.R: stop("non-finite knots")
 #: R/splines.R:0
 msgid "non-finite knots"
 msgstr ""
 
-#. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
 msgid "shoving 'interior' knots matching boundary knots to inside"
@@ -132,11 +134,13 @@ msgstr "kai kurios 'x' reikšmės už ribinių mazgų gali sukelti blogai sąlyg
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "spline must be monotone"
 msgstr "spline turi būti monotoninė"
 
 #. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'",     knots[ord], knots[nk - degree], "outer.ok = TRUE")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr "'x' duomenys turi būti srityje nuo %g iki %g, nebent nustatėte '%s'"
 
@@ -146,8 +150,8 @@ msgid "the range of 'x' values exceeds one period"
 msgstr "'x' reikšmių sritis viršija vieną periodą"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
-#. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
+#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "'x' reikšmės turi būti skirtingos"
 
@@ -155,3 +159,11 @@ msgstr "'x' reikšmės turi būti skirtingos"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "'x' reikšmės turi būti griežtai didėjančios"
+
+#, fuzzy
+#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
+#~ msgstr "'df' buvo per mažas; naudojote %d"
+
+#, fuzzy
+#~ msgid "stop(\"knot positions must be non-decreasing\")"
+#~ msgstr "mazgo pozicijos turi būti nemažėjančios"

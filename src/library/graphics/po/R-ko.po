@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -355,8 +355,6 @@ msgid "at least one entry of 'x' must be positive"
 msgstr "'x'의 항목들 중 적어도 하나는 양수이어야 합니다"
 
 #. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
-#. R/plot.R: stop("cannot handle more than one 'x' coordinate")
 #: R/plot.R:0
 msgid "cannot handle more than one 'x' coordinate"
 msgstr "한개 이상의 'x'좌표를 처리할 수 없습니다"
@@ -377,8 +375,6 @@ msgid "default 'pch' is smaller than number of columns and hence recycled"
 msgstr "'pch'의 기본값이 열의 수보다 작기 때문에 리사이클 되었습니다"
 
 #. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/cdplot.R: stop("dependent variable should be a factor")
-#. R/spineplot.R: stop("dependent variable should be a factor")
 #. R/spineplot.R: stop("dependent variable should be a factor")
 #: R/cdplot.R:0 R/spineplot.R:0
 msgid "dependent variable should be a factor"
@@ -521,7 +517,6 @@ msgid "invalid coordinate lengths"
 msgstr "축의 길이들이 올바르지 않습니다"
 
 #. R/boxplot.R: stop("invalid first argument")
-#. R/boxplot.R: stop("invalid first argument")
 #. R/stripchart.R: stop("invalid first argument")
 #: R/boxplot.R:0 R/stripchart.R:0
 msgid "invalid first argument"
@@ -572,15 +567,10 @@ msgid "invalid rectangle specification"
 msgstr "직사각형을 그리는데 유효한 지정이 아닙니다"
 
 #. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
-#. R/screen.R: stop("invalid screen number")
 #: R/screen.R:0
 msgid "invalid screen number"
 msgstr "유효하지 않은 스크린 넘버입니다"
 
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
-#. R/datetime.R: stop("invalid specification of 'breaks'")
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/datetime.R:0
 msgid "invalid specification of 'breaks'"
@@ -644,8 +634,6 @@ msgid "missing values in contingency table"
 msgstr "분할표에 누락된 값들이 있습니다"
 
 #. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
-#. R/plot.R: stop("must have a response variable")
 #: R/plot.R:0
 msgid "must have a response variable"
 msgstr "반드시 종속변수를 가져야 합니다"
@@ -680,7 +668,6 @@ msgid "no proper 'z' matrix specified"
 msgstr "적합한 'z' 행렬이 지정되지 않았습니다"
 
 #. R/pairs.R: stop("non-numeric argument to 'pairs'")
-#. R/pairs.R: stop("non-numeric argument to 'pairs'")
 #: R/pairs.R:0
 msgid "non-numeric argument to 'pairs'"
 msgstr "'pairs'에 숫자가 아닌 인자가 전달되었습니다"
@@ -710,8 +697,9 @@ msgstr "오로지 1차원에서만 이용가능합니다"
 
 #. R/pairs.R: stop("only one column in the argument to 'pairs'")
 #: R/pairs.R:0
+#, fuzzy
 msgid "only one column in the argument to 'pairs'"
-msgstr ""
+msgstr "'pairs'에 숫자가 아닌 인자가 전달되었습니다"
 
 #. R/abline.R: gettextf("only using the first two of %d regression coefficients",     p)
 #: R/abline.R:0
@@ -793,7 +781,6 @@ msgstr "정렬되지 않은 'breaks'는 사용전에 자동으로 정렬될 것�
 msgid "weights are not supported for 2-way table specification"
 msgstr ""
 
-#. R/datetime.R: stop("wrong method")
 #. R/datetime.R: stop("wrong method")
 #: R/datetime.R:0
 msgid "wrong method"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-09-01 13:26\n"
+"POT-Creation-Date: 2025-06-04 19:55\n"
 "PO-Revision-Date: 2024-06-18 03:05+0000\n"
 "Last-Translator: Nichole Haines <NicholeHaines54@gmail.com>\n"
 "Language-Team: none\n"
@@ -20,8 +20,9 @@ msgstr ""
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "'env' must be a top level environment"
-msgstr ""
+msgstr "nem megfelelő értékelési környezet"
 
 #. R/cmp.R: gettext("'switch' with no alternatives")
 #: R/cmp.R:0
@@ -40,12 +41,10 @@ msgstr "Rossz feladat 1"
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad assignment 2"
 msgstr "Rossz feladat 1"
 
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
-#. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
 msgid "bad assignment: %s"
@@ -53,6 +52,7 @@ msgstr "Hibás hozzárendelés: %s"
 
 #. R/cmp.R: gettext("bad namespace import frame")
 #: R/cmp.R:0
+#, fuzzy
 msgid "bad namespace import frame"
 msgstr "Hibás névtér importálási keret"
 
@@ -62,26 +62,21 @@ msgid "cannot compile a non-function"
 msgstr ""
 
 #. R/cmp.R: gettext("cannot compile byte code literals in code")
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
-#. R/cmp.R: gettext("cannot compile byte code literals in code")
 #: R/cmp.R:0
 msgid "cannot compile byte code literals in code"
 msgstr "Nem lehet bájtkód-literálokat fordítani a kódban"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
-#. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile promise literals in code"
 msgstr "nem tud ígéret literálokat fordítani a kódban"
 
 #. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
-#. R/cmp.R: gettext("cannot compile this expression")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot compile this expression"
-msgstr ""
+msgstr "nem tud ígéret literálokat fordítani a kódban"
 
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 #: R/cmp.R:0
@@ -90,6 +85,7 @@ msgstr "nem lehet konstansra hajtani a konstans literális bájtkód objektumoka
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
+#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "nem hajtogathatja állandóan a szó szerinti ígéreteket"
 
@@ -98,7 +94,6 @@ msgstr "nem hajtogathatja állandóan a szó szerinti ígéreteket"
 msgid "compiling '%s'"
 msgstr ""
 
-#. R/cmp.R: gettext("done")
 #. R/cmp.R: gettext("done")
 #: R/cmp.R:0
 msgid "done"
@@ -140,7 +135,6 @@ msgid "invalid environment variable value: %s==%s"
 msgstr ""
 
 #. R/cmp.R: gettext("invalid function in complex assignment")
-#. R/cmp.R: gettext("invalid function in complex assignment")
 #: R/cmp.R:0
 msgid "invalid function in complex assignment"
 msgstr "Érvénytelen függvény összetett hozzárendelésben"
@@ -167,6 +161,7 @@ msgstr "Helyi környezetekben található névtér"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
+#, fuzzy
 msgid "no offset recorded for label \"%s\""
 msgstr "nincs eltolás rögzítve a \"%s\" címkéhez"
 
@@ -191,8 +186,8 @@ msgid "non-namespace found within namespace environments"
 msgstr "névtérkörnyezetekben található nem névtér"
 
 #. R/cmp.R: stop("not a proper evaluation environment")
-#. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
+#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "nem megfelelő értékelési környezet"
 
@@ -218,3 +213,11 @@ msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "gettext(\"bad assignment 2\")"
+#~ msgstr "Rossz feladat 1"
+
+#, fuzzy
+#~ msgid "gettext(\"invalid function in complex assignment\")"
+#~ msgstr "Érvénytelen függvény összetett hozzárendelésben"

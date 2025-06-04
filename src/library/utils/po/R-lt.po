@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:37\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -23,7 +23,6 @@ msgstr "%d klaidos, kurios aptiktos %s.  Klaidų pranešimai ir jų dažnumas yr
 msgid "%s has a help file but no examples"
 msgstr "%s turi pagalbos failą, bet neturi pavyzdžių"
 
-#. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
 #. R/citation.R: gettextf("%s has to be one of %s", sQuote("bibtype"), paste(BibTeX_names,     collapse = ", "))
 #: R/citation.R:0
 msgid "%s has to be one of %s"
@@ -56,11 +55,6 @@ msgid "'%s' is a formal generic function; S3 methods will not likely be found"
 msgstr "'%s' yra formali bendrinė funkcija; S3 metodai greičiausiai nebus rasti"
 
 #. R/help.search.R: gettextf("'%s' must be a character string", arg)
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
-#. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
 #: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
@@ -98,7 +92,6 @@ msgstr "'as.is' turi neteisingą ilgį %d != cols = %d"
 msgid "'as.is' should be specified by the caller; using TRUE"
 msgstr "'as.is' turėtų būti nurodytas kaip iškvietos šaltinis; naudojant TRUE"
 
-#. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
 #. R/unix/create.post.R: stop("'ccaddress' must be of length 1")
 #. R/windows/create.post.R: stop("'ccaddress' must be of length 1")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
@@ -142,8 +135,6 @@ msgid "'destdir' is not a directory"
 msgstr "'destdir' nėra katalogas"
 
 #. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 msgid "'destfile' must be a length-one character vector"
@@ -184,7 +175,6 @@ msgstr "'file' turi būti \"\" arba atviras ryšio objektas"
 msgid "'file' must be NULL, a character string or a connection"
 msgstr "'file' turi būti NULL, simbolių eilutė arba ryšys"
 
-#. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/write.table.R: stop("'file' must be a character string or connection")
 #: R/readtable.R:0 R/write.table.R:0
@@ -266,7 +256,6 @@ msgid "'memory.size()' is no longer supported"
 msgstr "'memory.size()' yra skirtas Windows"
 
 #. R/de.R: warning("'modes' argument ignored")
-#. R/de.R: warning("'modes' argument ignored")
 #: R/de.R:0
 msgid "'modes' argument ignored"
 msgstr "'modes' argumentas ignoruojamas"
@@ -293,8 +282,6 @@ msgid "'package' must be a character vector or NULL"
 msgstr "'package' turi būti simbolių eilutė arba NULL"
 
 #. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
-#. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
-#. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #: R/progressBar.R:0 R/windows/winDialog.R:0
 msgid "'pb' is not from class %s"
@@ -331,7 +318,6 @@ msgid "'tar' returned non-zero exit code %d"
 msgstr "'tar' grąžino ne nulinį išėjimo kodą %d"
 
 #. R/tar.R: stop("'tarfile' must be a character string or a connection")
-#. R/tar.R: stop("'tarfile' must be a character string or a connection")
 #: R/tar.R:0
 msgid "'tarfile' must be a character string or a connection"
 msgstr "'tarfile' turi būti simbolių eilutė arba ryšys"
@@ -347,10 +333,6 @@ msgid "'topic' should be a name, length-one character vector or reserved word"
 msgstr "'topic' turėtų būti pavadinimas, 1 ilgio simbolių vektorius arba rezervuotas žodis"
 
 #. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/unix/download.file.R: stop("'url' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
-#. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
 msgid "'url' must be a length-one character vector"
@@ -409,9 +391,6 @@ msgid "Cancel"
 msgstr "Atšaukti"
 
 #. R/help.request.R: stop("Cancelled by user")
-#. R/help.request.R: stop("Cancelled by user")
-#. R/help.request.R: stop("Cancelled by user")
-#. R/packages2.R: stop("Cancelled by user")
 #. R/packages2.R: stop("Cancelled by user")
 #: R/help.request.R:0 R/packages2.R:0
 msgid "Cancelled by user"
@@ -437,9 +416,6 @@ msgstr "PDF dokumento glaudinimas"
 msgid "Could not create file %s, aborting"
 msgstr "Nepavyko sukurti failo %s, nutraukiant"
 
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
-#. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #: R/prompt.R:0
 msgid "Created file named %s."
@@ -499,9 +475,6 @@ msgstr ""
 "Pabandykite pašalinti %s"
 
 #. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
-#. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
 #: R/prompt.R:0
 msgid "Edit the file and move it to the appropriate directory."
 msgstr "Redaguokite failą ir perkelkite jį į atitinkamą katalogą."
@@ -526,7 +499,6 @@ msgstr "Iš meniu įveskite elementą arba 0, kad išeitumėte"
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "Įveskite vieną ar daugiau skaičių, atskirtų tarpais, tada ENTER arba 0, kad atšauktumėte"
 
-#. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 #: R/aspell.R:0
 msgid "Filter '%s' is not available."
@@ -677,7 +649,6 @@ msgstr "%s nerado vinječių"
 msgid "Not a validObject():"
 msgstr "Nėra validObject():"
 
-#. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(args)[!args_length_ok], collapse = ", "))
 #. R/citation.R: gettextf("Not all arguments are of the same length, the following need to be recycled: %s",     paste(names(other)[!other_length_ok], collapse = ", "))
 #: R/citation.R:0
@@ -898,7 +869,6 @@ msgid "Using the first match ..."
 msgstr "Naudojant pirmąjį sutapimą ..."
 
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
-#. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
 #: R/Sweave.R:0
 msgid "Warning: unknown option %s"
 msgstr "Įspėjimas: nežinoma parinktis %s"
@@ -985,7 +955,6 @@ msgid "at least one vector element is required"
 msgstr "būtinas bent vienas vektorinis elementas"
 
 #. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
-#. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
 #: R/write.table.R:0
 msgid "attempt to set '%s' ignored"
 msgstr "bandymas nustatyti '%s' ignoruojamas"
@@ -1021,9 +990,6 @@ msgstr "negalima 'x' pakeisti į romėnų"
 msgid "cannot create directory '%s'"
 msgstr "negali sukurti katalogo '%s'"
 
-#. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
-#. R/prompt.R: stop("cannot determine a usable name")
 #. R/prompt.R: stop("cannot determine a usable name")
 #: R/prompt.R:0
 msgid "cannot determine a usable name"
@@ -1163,7 +1129,6 @@ msgstr "atsisiuntimas turėjo nenulinio išėjimo būseną"
 
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
-#. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #: R/packages.R:0
 msgid "download of package %s failed"
 msgstr "nepavyko atsisiųsti paketo %s"
@@ -1190,8 +1155,6 @@ msgid "empty beginning of file"
 msgstr "tuščia failo pradžia"
 
 #. R/objects.R: stop("environment specified is not a package")
-#. R/objects.R: stop("environment specified is not a package")
-#. R/objects.R: stop("environment specified is not a package")
 #: R/objects.R:0
 msgid "environment specified is not a package"
 msgstr "nurodyta aplinka nėra paketas"
@@ -1208,13 +1171,10 @@ msgstr "kiekvienas paketas priklauso vienas nuo kito"
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
 msgid "failed to copy %s to %s"
 msgstr "nepavyko nukopijuoti %s į %s"
 
-#. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
-#. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
 #. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
 #. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
 #: R/windows/install.packages.R:0
@@ -1232,8 +1192,6 @@ msgstr "nepavyko sukurti katalogo %s"
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr "nepavyko atsisiųsti failo (%s); naudojant vietinį failą '%s'"
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
 #. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
 msgid "file %s is not a macOS binary package"
@@ -1307,7 +1265,6 @@ msgstr "blogai suformuota 'instPkgs' matrica"
 
 #. R/tar.R: if (is.character(tarfile)) "incomplete block on file" else "incomplete block: rather use gzfile(.) created connection?"
 #. R/tar.R: stop("incomplete block on file")
-#. R/tar.R: stop("incomplete block on file")
 #: R/tar.R:0
 msgid "incomplete block on file"
 msgstr "nebaigtas blokas faile"
@@ -1328,14 +1285,10 @@ msgid "incorrect field specification"
 msgstr "neteisinga lauko specifikacija"
 
 #. R/help.search.R: stop("incorrect type specification")
-#. R/help.search.R: stop("incorrect type specification")
 #: R/help.search.R:0
 msgid "incorrect type specification"
 msgstr "neteisinga tipo specifikacija"
 
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
-#. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #. R/packages2.R: message("inferring 'repos = NULL' from 'pkgs'")
 #: R/packages2.R:0
 msgid "inferring 'repos = NULL' from 'pkgs'"
@@ -1365,7 +1318,6 @@ msgstr ""
 msgid "installation of package %s failed"
 msgstr "nepavyko atsisiųsti paketo %s"
 
-#. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #: R/packages2.R:0
 msgid "installation of package %s had non-zero exit status"
@@ -1451,7 +1403,6 @@ msgstr "neleistinas 'socket' argumentas"
 msgid "invalid 'tarfile' argument"
 msgstr "netinkamas 'tarfile' argumentas"
 
-#. R/packages.R: stop("invalid 'type'")
 #. R/packages.R: stop("invalid 'type'")
 #: R/packages.R:0
 msgid "invalid 'type'"
@@ -1562,7 +1513,6 @@ msgid "menu() cannot be used non-interactively"
 msgstr "meniu() negalima naudoti neinteraktyviai"
 
 #. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
-#. R/packages.R: gettextf("metadata of %s is corrupt", sQuote(pkgpath))
 #: R/packages.R:0
 msgid "metadata of %s is corrupt"
 msgstr "%s metaduomenys sugadinti"
@@ -1626,7 +1576,6 @@ msgstr "turi būti 'max' > 'min'"
 msgid "must have some non-empty fields"
 msgstr ""
 
-#. R/unix/create.post.R: stop("must specify 'address'")
 #. R/unix/create.post.R: stop("must specify 'address'")
 #. R/windows/create.post.R: stop("must specify 'address'")
 #: R/unix/create.post.R:0 R/windows/create.post.R:0
@@ -1736,12 +1685,10 @@ msgid "no package %s at the repositories"
 msgstr "saugyklose nėra paketo %s"
 
 #. R/indices.R: gettextf("no package '%s' was found", pkg)
-#. R/indices.R: gettextf("no package '%s' was found", pkg)
 #: R/indices.R:0
 msgid "no package '%s' was found"
 msgstr "nerastas paketas '%s'"
 
-#. R/packages2.R: stop("no packages were specified")
 #. R/packages2.R: stop("no packages were specified")
 #: R/packages2.R:0
 msgid "no packages were specified"
@@ -1947,7 +1894,6 @@ msgid "source repository is unavailable to check versions"
 msgstr "šaltinio saugykla nepasiekiama versijoms tikrinti"
 
 #. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
-#. R/packages.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
 #. R/packages2.R: stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
 #: R/packages.R:0 R/packages2.R:0
 msgid "specifying 'contriburl' or 'available' requires a single type, not type = \"both\""
@@ -1958,7 +1904,6 @@ msgstr "'contriburl' or 'available' nurodymas reikalauja vieno tipo, o ne type =
 msgid "str.data.frame() called with non-data.frame -- coercing to one."
 msgstr "str.data.frame() iškviestas su non-data.frame -- versti į vieną."
 
-#. R/citation.R: gettext("subscript out of bounds")
 #. R/citation.R: gettext("subscript out of bounds")
 #: R/citation.R:0
 msgid "subscript out of bounds"
@@ -2072,8 +2017,6 @@ msgid "unable to create %s"
 msgstr "nepavyko sukurti %s"
 
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
-#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
-#. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
 #. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
@@ -2083,8 +2026,6 @@ msgstr "nepavyko sukurti %s"
 msgid "unable to create temporary directory %s"
 msgstr "nepavyko sukurti laikino katalogo %s"
 
-#. R/packages2.R: stop("unable to install packages")
-#. R/packages2.R: stop("unable to install packages")
 #. R/packages2.R: stop("unable to install packages")
 #: R/packages2.R:0
 msgid "unable to install packages"
@@ -2156,8 +2097,6 @@ msgstr "winDialog() negali būti naudojamas ne interaktyviai"
 msgid "winDialogString() cannot be used non-interactively"
 msgstr "winDialogString() negalima naudoti ne interaktyviai"
 
-#. R/de.R: stop("wrong argument to 'dataentry'")
-#. R/de.R: stop("wrong argument to 'dataentry'")
 #. R/de.R: stop("wrong argument to 'dataentry'")
 #: R/de.R:0
 msgid "wrong argument to 'dataentry'"

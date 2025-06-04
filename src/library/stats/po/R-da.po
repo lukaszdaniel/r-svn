@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2012-01-28 01:18+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -29,7 +29,6 @@ msgstr ""
 msgid "%s must be 0 or 1"
 msgstr "»acf« skal have længden to eller længere"
 
-#. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
 #: R/contrast.R:0 R/xtabs.R:0
@@ -76,8 +75,9 @@ msgstr "»A« skal være en array eller tabel"
 
 #. R/dendrogram.R: stop("'ColSideColors' must be a character vector of length ncol(x)")
 #: R/dendrogram.R:0
+#, fuzzy
 msgid "'ColSideColors' must be a character vector of length ncol(x)"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/anova.R: stop("'P.values' is TRUE, but 'has.Pvalue' is not")
 #: R/anova.R:0
@@ -86,13 +86,15 @@ msgstr ""
 
 #. R/dendrogram.R: stop("'RowSideColors' must be a character vector of length nrow(x)")
 #: R/dendrogram.R:0
+#, fuzzy
 msgid "'RowSideColors' must be a character vector of length nrow(x)"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/poisson.test.R: stop("'T' must be nonnegative")
 #: R/poisson.test.R:0
+#, fuzzy
 msgid "'T' must be nonnegative"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/cor.R: stop("'V' is not a square numeric matrix")
 #: R/cor.R:0
@@ -157,8 +159,9 @@ msgstr ""
 
 #. R/aggregate.R: stop("'by' must be a list")
 #: R/aggregate.R:0
+#, fuzzy
 msgid "'by' must be a list"
-msgstr ""
+msgstr "»lag.max« skal være mindst 0"
 
 #. R/kmeans.R: stop("'centers' must be a number or a matrix")
 #: R/kmeans.R:0
@@ -177,16 +180,15 @@ msgstr ""
 
 #. R/kernel.R: stop("'coef' must be a vector")
 #: R/kernel.R:0
+#, fuzzy
 msgid "'coef' must be a vector"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
-#. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
 msgid "'coef' must define a contrast, i.e., sum to 0"
 msgstr "»coef« skal definere en kontrast, dvs. summere til 0"
 
-#. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #. R/aov.R: stop("'coef' must have same length as 'contrast.obj'")
 #: R/aov.R:0
 msgid "'coef' must have same length as 'contrast.obj'"
@@ -194,8 +196,9 @@ msgstr "»coef« skal have samme længde som »contrast.obj«"
 
 #. R/ftable.R: stop("'col.vars' missing or incorrect")
 #: R/ftable.R:0
+#, fuzzy
 msgid "'col.vars' missing or incorrect"
-msgstr ""
+msgstr "»formula« mangler eller er ukorrekt"
 
 #. R/qqplot.R: stop("'conf.level' is not a probability")
 #: R/qqplot.R:0
@@ -244,8 +247,9 @@ msgstr ""
 
 #. R/model.tables.R: stop("'cterms' argument must match terms in model object")
 #: R/model.tables.R:0
+#, fuzzy
 msgid "'cterms' argument must match terms in model object"
-msgstr ""
+msgstr "argumentet »split« skal være en liste"
 
 #. R/symnum.R: gettext("'cutpoints' must be unique in 0 < cuts < 1, but are = ")
 #: R/symnum.R:0
@@ -263,12 +267,10 @@ msgid "'cv' must not be NA when 'df' is specified"
 msgstr ""
 
 #. R/models.R: stop("'data' must be a data.frame, environment, or list")
-#. R/models.R: stop("'data' must be a data.frame, environment, or list")
 #: R/models.R:0
 msgid "'data' must be a data.frame, environment, or list"
 msgstr ""
 
-#. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #. R/models.R: stop("'data' must be a data.frame, not a matrix or an array")
 #: R/models.R:0
 msgid "'data' must be a data.frame, not a matrix or an array"
@@ -281,25 +283,26 @@ msgstr ""
 
 #. R/loess.R: stop("'degree' must be 0, 1 or 2")
 #: R/loess.R:0
+#, fuzzy
 msgid "'degree' must be 0, 1 or 2"
-msgstr ""
+msgstr "»acf« skal have længden to eller længere"
 
 #. R/contr.poly.R: stop("'degree' must be at least 1")
 #: R/contr.poly.R:0
+#, fuzzy
 msgid "'degree' must be at least 1"
-msgstr ""
+msgstr "»lag.max« skal være mindst 1"
 
-#. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 #. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 #: R/contr.poly.R:0
 msgid "'degree' must be less than number of unique points"
 msgstr ""
 
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
-#. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #: R/splinefun.R:0
+#, fuzzy
 msgid "'deriv' must be between 0 and 3"
-msgstr ""
+msgstr "»conf.level« skal være et enkelt tal mellem 0 og 1"
 
 #. R/ts.R: stop("'end' must be a whole number of cycles after 'start'")
 #: R/ts.R:0
@@ -323,8 +326,9 @@ msgstr ""
 
 #. R/ftable.R: stop("'file' must be a character string or connection")
 #: R/ftable.R:0
+#, fuzzy
 msgid "'file' must be a character string or connection"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/filter.R: stop("'filter' is longer than time series")
 #: R/filter.R:0
@@ -339,8 +343,9 @@ msgstr "»formula« skal have både venstre og højre hånds sider"
 
 #. R/quade.test.R: stop("'formula' missing")
 #: R/quade.test.R:0
+#, fuzzy
 msgid "'formula' missing"
-msgstr ""
+msgstr "»formula« mangler eller er ukorrekt"
 
 #. R/ansari.test.R: stop("'formula' missing or incorrect")
 #. R/bartlett.test.R: stop("'formula' missing or incorrect")
@@ -348,13 +353,10 @@ msgstr ""
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
 #. R/ks.test.R: stop("'formula' missing or incorrect")
-#. R/ks.test.R: stop("'formula' missing or incorrect")
 #. R/mood.test.R: stop("'formula' missing or incorrect")
 #. R/oneway.test.R: stop("'formula' missing or incorrect")
 #. R/t.test.R: stop("'formula' missing or incorrect")
-#. R/t.test.R: stop("'formula' missing or incorrect")
 #. R/var.test.R: stop("'formula' missing or incorrect")
-#. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
 #: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/ftable.R:0
@@ -365,8 +367,9 @@ msgstr "»formula« mangler eller er ukorrekt"
 
 #. R/cor.test.R: stop("'formula' missing or invalid")
 #: R/cor.test.R:0
+#, fuzzy
 msgid "'formula' missing or invalid"
-msgstr ""
+msgstr "»formula« mangler eller er ukorrekt"
 
 #. R/ftable.R: stop("'formula' must have both left and right hand sides")
 #: R/ftable.R:0
@@ -418,25 +421,27 @@ msgstr ""
 
 #. R/nlm.R: stop("'interval' must be a vector of length 2")
 #: R/nlm.R:0
+#, fuzzy
 msgid "'interval' must be a vector of length 2"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/kmeans.R: stop("'iter.max' must be positive")
 #: R/kmeans.R:0
+#, fuzzy
 msgid "'iter.max' must be positive"
-msgstr ""
+msgstr "»lag.max« skal være mindst 0"
 
 #. R/identify.hclust.R: stop("'k' and 'h' must be a scalar")
 #: R/identify.hclust.R:0
+#, fuzzy
 msgid "'k' and 'h' must be a scalar"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/runmed.R: gettextf("'k' is bigger than 'n'!  Changing 'k' to %d", k <- as.integer(1 +     2 * ((n - 1)%/%2)))
 #: R/runmed.R:0
 msgid "'k' is bigger than 'n'!  Changing 'k' to %d"
 msgstr ""
 
-#. R/kernel.R: stop("'k' is not a kernel")
 #. R/kernel.R: stop("'k' is not a kernel")
 #: R/kernel.R:0
 msgid "'k' is not a kernel"
@@ -459,8 +464,9 @@ msgstr ""
 
 #. R/runmed.R: stop("'k' must be positive")
 #: R/runmed.R:0
+#, fuzzy
 msgid "'k' must be positive"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/kernel.R: stop("'kernapply' is not available for object 'x'")
 #: R/kernel.R:0
@@ -498,7 +504,6 @@ msgid "'lower' and 'upper' must be finite values"
 msgstr ""
 
 #. R/kernel.R: stop("'m' is less than 1")
-#. R/kernel.R: stop("'m' is less than 1")
 #: R/kernel.R:0
 msgid "'m' is less than 1"
 msgstr ""
@@ -509,10 +514,10 @@ msgid "'m' must be numeric with non-negative integers"
 msgstr ""
 
 #. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
-#. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #: R/termplot.R:0
+#, fuzzy
 msgid "'main' must be TRUE, FALSE, NULL or character (vector)."
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/loglin.R: stop("'margin' must contain names or numbers corresponding to 'table'")
 #: R/loglin.R:0
@@ -521,8 +526,9 @@ msgstr ""
 
 #. R/dendrogram.R: stop("'margins' must be a numeric vector of length 2")
 #: R/dendrogram.R:0
+#, fuzzy
 msgid "'margins' must be a numeric vector of length 2"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/mlm.R: stop("'mlm' objects with weights are not supported")
 #: R/mlm.R:0
@@ -531,24 +537,29 @@ msgstr ""
 
 #. R/ts.R: stop("'model$order' must be of length 3")
 #: R/ts.R:0
+#, fuzzy
 msgid "'model$order' must be of length 3"
-msgstr ""
+msgstr "»acf« skal have længden to eller længere"
 
 #. R/ts.R: stop("'model' must be list")
 #: R/ts.R:0
+#, fuzzy
 msgid "'model' must be list"
-msgstr ""
+msgstr "»lag.max« skal være mindst 0"
 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
 #. R/model.tables.R: stop("'model.tables' is not implemented for multiple responses")
 #: R/model.tables.R:0
+#, fuzzy
 msgid "'model.tables' is not implemented for multiple responses"
-msgstr ""
+msgstr "kun implementeret for univariate tidsserier"
 
 #. R/t.test.R: stop("'mu' must be a single number")
 #. R/wilcox.test.R: stop("'mu' must be a single number")
 #: R/t.test.R:0 R/wilcox.test.R:0
+#, fuzzy
 msgid "'mu' must be a single number"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/fisher.test.R: stop("'mult' must be integer >= 2, typically = 30")
 #: R/fisher.test.R:0
@@ -557,18 +568,21 @@ msgstr ""
 
 #. R/binom.test.R: stop("'n' must be a positive integer >= 'x'")
 #: R/binom.test.R:0
+#, fuzzy
 msgid "'n' must be a positive integer >= 'x'"
-msgstr ""
+msgstr "frekvens skal være en positivt heltal >= 2 for BSM"
 
 #. R/ts.R: stop("'n' must be strictly positive")
 #: R/ts.R:0
+#, fuzzy
 msgid "'n' must be strictly positive"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/ar.R: stop("'n.ahead' must be at least 1")
 #: R/ar.R:0
+#, fuzzy
 msgid "'n.ahead' must be at least 1"
-msgstr ""
+msgstr "»lag.max« skal være mindst 1"
 
 #. R/prcomp.R: stop("'newdata' does not have named columns matching one or more of the original columns")
 #. R/princomp-add.R: stop("'newdata' does not have named columns matching one or more of the original columns")
@@ -585,18 +599,21 @@ msgstr ""
 #. R/prcomp.R: stop("'newdata' must be a matrix or data frame")
 #. R/princomp-add.R: stop("'newdata' must be a matrix or data frame")
 #: R/prcomp.R:0 R/princomp-add.R:0
+#, fuzzy
 msgid "'newdata' must be a matrix or data frame"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/smspline.R: stop("'nknots' must be at least 1")
 #: R/smspline.R:0
+#, fuzzy
 msgid "'nknots' must be at least 1"
-msgstr ""
+msgstr "»lag.max« skal være mindst 1"
 
 #. R/smspline.R: stop("'nknots' must be numeric (in {1,..,n})")
 #: R/smspline.R:0
+#, fuzzy
 msgid "'nknots' must be numeric (in {1,..,n})"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/ppr.R: stop("'nterms' is missing with no default")
 #: R/ppr.R:0
@@ -615,19 +632,22 @@ msgstr ""
 
 #. R/models.R: stop("'offset' must be numeric")
 #: R/models.R:0
+#, fuzzy
 msgid "'offset' must be numeric"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/fisher.test.R: stop("'or' must be a single number between 0 and Inf")
 #: R/fisher.test.R:0
+#, fuzzy
 msgid "'or' must be a single number between 0 and Inf"
-msgstr ""
+msgstr "»conf.level« skal være et enkelt tal mellem 0 og 1"
 
 #. R/arima.R: stop("'order' must be a non-negative numeric vector of length 3")
 #. R/arma0.R: stop("'order' must be a non-negative numeric vector of length 3")
 #: R/arima.R:0 R/arma0.R:0
+#, fuzzy
 msgid "'order' must be a non-negative numeric vector of length 3"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/dendrogram.R: stop("'order.dendrogram' requires a dendrogram")
 #: R/dendrogram.R:0
@@ -640,44 +660,46 @@ msgid "'order.max' must be < 'n.obs'"
 msgstr ""
 
 #. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
-#. R/ar.R: stop("'order.max' must be < 'n.used'")
 #: R/ar.R:0
+#, fuzzy
 msgid "'order.max' must be < 'n.used'"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/ar.R: stop("'order.max' must be >= 0")
-#. R/ar.R: stop("'order.max' must be >= 0")
 #: R/ar.R:0
+#, fuzzy
 msgid "'order.max' must be >= 0"
-msgstr ""
+msgstr "»lag.max« skal være mindst 0"
 
 #. R/ar.R: stop("'order.max' must be >= 1")
-#. R/ar.R: stop("'order.max' must be >= 1")
-#. R/ar.R: stop("'order.max' must be >= 1")
 #: R/ar.R:0
+#, fuzzy
 msgid "'order.max' must be >= 1"
-msgstr ""
+msgstr "»lag.max« skal være mindst 1"
 
 #. R/binom.test.R: stop("'p' must be a single number between 0 and 1")
 #: R/binom.test.R:0
+#, fuzzy
 msgid "'p' must be a single number between 0 and 1"
-msgstr ""
+msgstr "»conf.level« skal være et enkelt tal mellem 0 og 1"
 
 #. R/spectrum.R: stop("'p' must be between 0 and 0.5")
 #: R/spectrum.R:0
+#, fuzzy
 msgid "'p' must be between 0 and 0.5"
-msgstr ""
+msgstr "»conf.level« skal være et enkelt tal mellem 0 og 1"
 
 #. R/prop.test.R: stop("'p' must have the same length as 'x' and 'n'")
 #: R/prop.test.R:0
+#, fuzzy
 msgid "'p' must have the same length as 'x' and 'n'"
-msgstr ""
+msgstr "»coef« skal have samme længde som »contrast.obj«"
 
 #. R/nls-profile.R: stop("'params' has wrong length")
 #: R/nls-profile.R:0
+#, fuzzy
 msgid "'params' has wrong length"
-msgstr ""
+msgstr "»acf« skal have længden to eller længere"
 
 #. R/stepfun.R: stop("'plot.stepfun' called with wrong type of argument 'x'")
 #: R/stepfun.R:0
@@ -700,9 +722,6 @@ msgid "'print.level' must be in {0,1,2}"
 msgstr ""
 
 #. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
-#. R/distn.R: stop("'prob' and 'mu' both specified")
 #: R/distn.R:0
 msgid "'prob' and 'mu' both specified"
 msgstr ""
@@ -712,11 +731,12 @@ msgstr ""
 msgid "'probs' outside [0,1]"
 msgstr ""
 
-#. R/proj.R: stop("'proj' is not implemented for multiple responses")
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
+#, fuzzy
 msgid "'proj' is not implemented for multiple responses"
-msgstr ""
+msgstr "kun implementeret for univariate tidsserier"
 
 #. R/kernel.R: stop("'r' is less than 0")
 #: R/kernel.R:0
@@ -740,13 +760,15 @@ msgstr ""
 
 #. R/relevel.R: stop("'ref' must be an existing level")
 #: R/relevel.R:0
+#, fuzzy
 msgid "'ref' must be an existing level"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/relevel.R: stop("'ref' must be of length one")
 #: R/relevel.R:0
+#, fuzzy
 msgid "'ref' must be of length one"
-msgstr ""
+msgstr "»acf« skal have længden to eller længere"
 
 #. R/relevel.R: stop("'relevel' only for (unordered) factors")
 #: R/relevel.R:0
@@ -774,7 +796,6 @@ msgid "'sampleT' and 'nser' must be integer"
 msgstr ""
 
 #. R/biplot.R: warning("'scale' is outside [0, 1]")
-#. R/biplot.R: warning("'scale' is outside [0, 1]")
 #: R/biplot.R:0
 msgid "'scale' is outside [0, 1]"
 msgstr ""
@@ -789,22 +810,26 @@ msgstr ""
 msgid "'scores' must all be different numbers"
 msgstr ""
 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
 #. R/ar.R: warning("'se.fit' not yet implemented for multivariate models")
 #: R/ar.R:0
+#, fuzzy
 msgid "'se.fit' not yet implemented for multivariate models"
-msgstr ""
+msgstr "kun implementeret for univariate tidsserier"
 
 #. R/arima.R: stop("'seasonal$order' must be a non-negative numeric vector of length 3")
 #. R/arma0.R: stop("'seasonal$order' must be a non-negative numeric vector of length 3")
 #: R/arima.R:0 R/arma0.R:0
+#, fuzzy
 msgid "'seasonal$order' must be a non-negative numeric vector of length 3"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/arima.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
 #. R/arma0.R: stop("'seasonal' is neither a list with component 'order' nor a numeric vector of length 3")
 #: R/arima.R:0 R/arma0.R:0
+#, fuzzy
 msgid "'seasonal' is neither a list with component 'order' nor a numeric vector of length 3"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/arima.R: stop("'seasonal' must be a list with component 'order'")
 #. R/arma0.R: stop("'seasonal' must be a list with component 'order'")
@@ -814,8 +839,9 @@ msgstr ""
 
 #. R/smspline.R: stop("'span' must be between 0 and 1.")
 #: R/smspline.R:0
+#, fuzzy
 msgid "'span' must be between 0 and 1."
-msgstr ""
+msgstr "»conf.level« skal være et enkelt tal mellem 0 og 1"
 
 #. R/smspline.R: stop("'spar' must be of length 1")
 #: R/smspline.R:0
@@ -835,10 +861,10 @@ msgstr ""
 
 #. R/loglin.R: stop("'start' and 'table' must be same length")
 #: R/loglin.R:0
+#, fuzzy
 msgid "'start' and 'table' must be same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
-#. R/ts.R: stop("'start' cannot be after 'end'")
 #. R/ts.R: stop("'start' cannot be after 'end'")
 #: R/ts.R:0
 msgid "'start' cannot be after 'end'"
@@ -846,8 +872,9 @@ msgstr ""
 
 #. R/ts.R: warning("'start' value not changed")
 #: R/ts.R:0
+#, fuzzy
 msgid "'start' value not changed"
-msgstr ""
+msgstr "x$lag skal have mindst 1 kolonne"
 
 #. R/models.R: stop("'termlabels' must be a character vector")
 #: R/models.R:0
@@ -877,8 +904,9 @@ msgstr ""
 
 #. R/ts.R: stop("'ts' object must have one or more observations")
 #: R/ts.R:0
+#, fuzzy
 msgid "'ts' object must have one or more observations"
-msgstr ""
+msgstr "»anova-objekt« skal have kolonnenavne"
 
 #. R/quantile.R: stop("'type' must be 1 or 3 for ordered factors")
 #: R/quantile.R:0
@@ -898,15 +926,15 @@ msgstr ""
 
 #. R/reshape.R: stop("'varying' arguments must be the same length")
 #: R/reshape.R:0
+#, fuzzy
 msgid "'varying' arguments must be the same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/nls-profile.R: stop("'varying' has wrong length")
 #: R/nls-profile.R:0
 msgid "'varying' has wrong length"
 msgstr ""
 
-#. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #. R/nls-profile.R: stop("'varying' must be in seq_along(pars)")
 #: R/nls-profile.R:0
 msgid "'varying' must be in seq_along(pars)"
@@ -919,8 +947,9 @@ msgstr ""
 
 #. R/reshape.R: stop("'varying' must be nonempty list or vector")
 #: R/reshape.R:0
+#, fuzzy
 msgid "'varying' must be nonempty list or vector"
-msgstr ""
+msgstr "»acf« skal have længden to eller længere"
 
 #. R/lm.R: stop("'weights' as formula should be one-sided")
 #: R/lm.R:0
@@ -935,8 +964,9 @@ msgstr ""
 #. R/glm.R: stop("'weights' must be a numeric vector")
 #. R/lm.R: stop("'weights' must be a numeric vector")
 #: R/glm.R:0 R/lm.R:0
+#, fuzzy
 msgid "'weights' must be a numeric vector"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/density.R: stop("'weights' must not be negative")
 #: R/density.R:0
@@ -967,14 +997,16 @@ msgstr ""
 #. R/fligner.test.R: stop("'x' and 'g' must have the same length")
 #. R/kruskal.test.R: stop("'x' and 'g' must have the same length")
 #: R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
+#, fuzzy
 msgid "'x' and 'g' must have the same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/pairwise.R: stop("'x' and 'n' must have the same length")
 #. R/prop.test.R: stop("'x' and 'n' must have the same length")
 #: R/pairwise.R:0 R/prop.test.R:0
+#, fuzzy
 msgid "'x' and 'n' must have the same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/chisq.test.R: stop("'x' and 'p' must have the same number of elements")
 #: R/chisq.test.R:0
@@ -983,8 +1015,9 @@ msgstr ""
 
 #. R/weighted.mean.R: stop("'x' and 'w' must have the same length")
 #: R/weighted.mean.R:0
+#, fuzzy
 msgid "'x' and 'w' must have the same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/density.R: stop("'x' and 'weights' have unequal length")
 #: R/density.R:0
@@ -995,8 +1028,9 @@ msgstr ""
 #. R/fisher.test.R: stop("'x' and 'y' must have at least 2 levels")
 #. R/mantelhaen.test.R: stop("'x' and 'y' must have at least 2 levels")
 #: R/chisq.test.R:0 R/fisher.test.R:0 R/mantelhaen.test.R:0
+#, fuzzy
 msgid "'x' and 'y' must have at least 2 levels"
-msgstr ""
+msgstr "x$lag skal have mindst 1 kolonne"
 
 #. R/chisq.test.R: stop("'x' and 'y' must have the same length")
 #. R/cor.test.R: stop("'x' and 'y' must have the same length")
@@ -1005,8 +1039,9 @@ msgstr ""
 #. R/wilcox.test.R: stop("'x' and 'y' must have the same length")
 #: R/chisq.test.R:0 R/cor.test.R:0 R/fisher.test.R:0 R/mcnemar.test.R:0
 #: R/wilcox.test.R:0
+#, fuzzy
 msgid "'x' and 'y' must have the same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/mcnemar.test.R: stop("'x' and 'y' must have the same number of levels (minimum 2)")
 #: R/mcnemar.test.R:0
@@ -1049,8 +1084,6 @@ msgid "'x' is not a kernel"
 msgstr ""
 
 #. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
-#. R/diffinv.R: stop("'x' is not a vector")
 #. R/kernel.R: stop("'x' is not a vector")
 #: R/diffinv.R:0 R/kernel.R:0
 msgid "'x' is not a vector"
@@ -1069,8 +1102,9 @@ msgstr ""
 
 #. R/chisq.test.R: stop("'x' must at least have 2 elements")
 #: R/chisq.test.R:0
+#, fuzzy
 msgid "'x' must at least have 2 elements"
-msgstr ""
+msgstr "x$lag skal have mindst 1 kolonne"
 
 #. R/splinefun.R: stop("'x' must be *strictly* increasing (non - NA)")
 #: R/splinefun.R:0
@@ -1079,8 +1113,9 @@ msgstr ""
 
 #. R/mantelhaen.test.R: stop("'x' must be a 3-dimensional array")
 #: R/mantelhaen.test.R:0
+#, fuzzy
 msgid "'x' must be a 3-dimensional array"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/bartlett.test.R: stop("'x' must be a list with at least 2 elements")
 #. R/fligner.test.R: stop("'x' must be a list with at least 2 elements")
@@ -1090,25 +1125,28 @@ msgid "'x' must be a list with at least 2 elements"
 msgstr ""
 
 #. R/lm.R: stop("'x' must be a matrix")
-#. R/lm.R: stop("'x' must be a matrix")
 #: R/lm.R:0
+#, fuzzy
 msgid "'x' must be a matrix"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/cov.wt.R: stop("'x' must be a matrix or a data frame")
 #: R/cov.wt.R:0
+#, fuzzy
 msgid "'x' must be a matrix or a data frame"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/dendrogram.R: stop("'x' must be a numeric matrix")
 #: R/dendrogram.R:0
+#, fuzzy
 msgid "'x' must be a numeric matrix"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/cor.test.R: stop("'x' must be a numeric vector")
 #: R/cor.test.R:0
+#, fuzzy
 msgid "'x' must be a numeric vector"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/spectrum.R: stop("'x' must be a time series or an ar() fit")
 #: R/spectrum.R:0
@@ -1116,11 +1154,10 @@ msgid "'x' must be a time series or an ar() fit"
 msgstr ""
 
 #. R/ftable.R: stop("'x' must be an \"ftable\" object")
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
-#. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #: R/ftable.R:0
+#, fuzzy
 msgid "'x' must be an \"ftable\" object"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/symnum.R: gettextf("'x' must be between %s and %s", format(minc), format(maxc))
 #: R/symnum.R:0
@@ -1129,8 +1166,9 @@ msgstr ""
 
 #. R/symnum.R: gettext("'x' must be between -1 and 1")
 #: R/symnum.R:0
+#, fuzzy
 msgid "'x' must be between -1 and 1"
-msgstr ""
+msgstr "»conf.level« skal være et enkelt tal mellem 0 og 1"
 
 #. R/smspline.R: stop("'x' must be between 0 and 1 for periodic smooth")
 #: R/smspline.R:0
@@ -1149,19 +1187,18 @@ msgstr ""
 
 #. R/distn.R: stop("'x' must be non-negative")
 #: R/distn.R:0
+#, fuzzy
 msgid "'x' must be non-negative"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/binom.test.R: stop("'x' must be nonnegative and integer")
 #: R/binom.test.R:0
+#, fuzzy
 msgid "'x' must be nonnegative and integer"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/StructTS.R: stop("'x' must be numeric")
 #. R/acf.R: stop("'x' must be numeric")
-#. R/acf.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
-#. R/ar.R: stop("'x' must be numeric")
 #. R/ar.R: stop("'x' must be numeric")
 #. R/arima.R: stop("'x' must be numeric")
 #. R/arma0.R: stop("'x' must be numeric")
@@ -1174,8 +1211,9 @@ msgstr "»x« skal være numerisk"
 
 #. R/mcnemar.test.R: stop("'x' must be square with at least two rows and columns")
 #: R/mcnemar.test.R:0
+#, fuzzy
 msgid "'x' must be square with at least two rows and columns"
-msgstr ""
+msgstr "x$lag skal have mindst 1 kolonne"
 
 #. R/cov.wt.R: stop("'x' must contain finite values only")
 #: R/cov.wt.R:0
@@ -1184,34 +1222,40 @@ msgstr ""
 
 #. R/ecdf.R: stop("'x' must have 1 or more non-missing values")
 #: R/ecdf.R:0
+#, fuzzy
 msgid "'x' must have 1 or more non-missing values"
-msgstr ""
+msgstr "x$lag skal have mindst 1 kolonne"
 
 #. R/pairwise.R: stop("'x' must have 2 columns")
 #. R/prop.test.R: stop("'x' must have 2 columns")
 #: R/pairwise.R:0 R/prop.test.R:0
+#, fuzzy
 msgid "'x' must have 2 columns"
-msgstr ""
+msgstr "x$lag skal have mindst 1 kolonne"
 
 #. R/dendrogram.R: stop("'x' must have at least 2 rows and 2 columns")
 #: R/dendrogram.R:0
+#, fuzzy
 msgid "'x' must have at least 2 rows and 2 columns"
-msgstr ""
+msgstr "x$lag skal have mindst 1 kolonne"
 
 #. R/fisher.test.R: stop("'x' must have at least 2 rows and columns")
 #: R/fisher.test.R:0
+#, fuzzy
 msgid "'x' must have at least 2 rows and columns"
-msgstr ""
+msgstr "x$lag skal have mindst 1 kolonne"
 
 #. R/stepfun.R: stop("'x' must have length >= 1")
 #: R/stepfun.R:0
+#, fuzzy
 msgid "'x' must have length >= 1"
-msgstr ""
+msgstr "»acf« skal have længden to eller længere"
 
 #. R/mantelhaen.test.R: stop("'x', 'y', and 'z' must have the same length")
 #: R/mantelhaen.test.R:0
+#, fuzzy
 msgid "'x', 'y', and 'z' must have the same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/diffinv.R: stop("'xi' does not have the right length")
 #: R/diffinv.R:0
@@ -1231,8 +1275,9 @@ msgstr ""
 
 #. R/ts.R: stop("'xy.labels' must be logical or character")
 #: R/ts.R:0
+#, fuzzy
 msgid "'xy.labels' must be logical or character"
-msgstr ""
+msgstr "»A« skal være en array eller tabel"
 
 #. R/cancor.R: stop("'y' has rank 0")
 #: R/cancor.R:0
@@ -1242,13 +1287,15 @@ msgstr ""
 #. R/t.test.R: stop("'y' is missing for paired test")
 #. R/wilcox.test.R: stop("'y' is missing for paired test")
 #: R/t.test.R:0 R/wilcox.test.R:0
+#, fuzzy
 msgid "'y' is missing for paired test"
-msgstr ""
+msgstr "»formula« mangler eller er ukorrekt"
 
 #. R/cor.test.R: stop("'y' must be a numeric vector")
 #: R/cor.test.R:0
+#, fuzzy
 msgid "'y' must be a numeric vector"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/spline.R: stop("'y' must be increasing or decreasing")
 #. R/splinefun.R: stop("'y' must be increasing or decreasing")
@@ -1259,8 +1306,9 @@ msgstr ""
 #. R/cor.R: stop("'y' must be numeric")
 #. R/wilcox.test.R: stop("'y' must be numeric")
 #: R/cor.R:0 R/wilcox.test.R:0
+#, fuzzy
 msgid "'y' must be numeric"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/ks.test.R: stop("'y' must be numeric or a function or a string naming a valid function")
 #: R/ks.test.R:0
@@ -1269,26 +1317,28 @@ msgstr ""
 
 #. R/smspline.R: stop("'y' must be numeric vector")
 #: R/smspline.R:0
+#, fuzzy
 msgid "'y' must be numeric vector"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/stepfun.R: stop("'y' must be one longer than 'x'")
 #: R/stepfun.R:0
+#, fuzzy
 msgid "'y' must be one longer than 'x'"
-msgstr ""
+msgstr "»acf« skal have længden to eller længere"
 
 #. R/friedman.test.R: stop("'y', 'groups' and 'blocks' must have the same length")
 #. R/quade.test.R: stop("'y', 'groups' and 'blocks' must have the same length")
 #: R/friedman.test.R:0 R/quade.test.R:0
+#, fuzzy
 msgid "'y', 'groups' and 'blocks' must have the same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
 msgid "(unordered) factors are not allowed"
 msgstr ""
 
-#. R/lm.R: stop("0 (non-NA) cases")
 #. R/lm.R: stop("0 (non-NA) cases")
 #: R/lm.R:0
 msgid "0 (non-NA) cases"
@@ -1325,10 +1375,10 @@ msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr ""
 
 #. R/cor.test.R: warning("Cannot compute exact p-value with ties")
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
 #: R/cor.test.R:0
+#, fuzzy
 msgid "Cannot compute exact p-value with ties"
-msgstr ""
+msgstr "kan ikke beregne præcis p-værdi med bindinger"
 
 #. R/chisq.test.R: warning("Chi-squared approximation may be incorrect")
 #. R/prop.test.R: warning("Chi-squared approximation may be incorrect")
@@ -1363,8 +1413,9 @@ msgstr "F-test antager »quasi%s-familie«"
 
 #. R/add.R: gettextf("F test assumes quasi%s family", fam)
 #: R/add.R:0
+#, fuzzy
 msgid "F test assumes quasi%s family"
-msgstr ""
+msgstr "F-test antager »quasi%s-familie«"
 
 #. R/arima.R: warning("MA part of model is not invertible")
 #. R/arma0.R: warning("MA part of model is not invertible")
@@ -1372,10 +1423,12 @@ msgstr ""
 msgid "MA part of model is not invertible"
 msgstr ""
 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
 #. R/ar.R: stop("MLE only implemented for univariate series")
 #: R/ar.R:0
+#, fuzzy
 msgid "MLE only implemented for univariate series"
-msgstr ""
+msgstr "kun implementeret for univariate tidsserier"
 
 #. R/smspline.R: stop("NA lev[]; probably smoothing parameter 'spar' way too large!")
 #: R/smspline.R:0
@@ -1407,14 +1460,10 @@ msgstr "NA'er i »x«"
 
 #. R/acf.R: stop("NAs in 'x'")
 #. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
-#. R/ar.R: stop("NAs in 'x'")
 #: R/acf.R:0 R/ar.R:0
 msgid "NAs in 'x'"
 msgstr "NA'er i »x«"
 
-#. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #: R/ar.R:0
 msgid "NAs in 'x' must be the same row-wise"
@@ -1422,8 +1471,9 @@ msgstr ""
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
+#, fuzzy
 msgid "NAs in V(mu)"
-msgstr ""
+msgstr "NA'er i »x«"
 
 #. R/glm.R: stop("NAs in d(mu)/d(eta)")
 #: R/glm.R:0
@@ -1467,7 +1517,6 @@ msgstr ""
 
 #. R/prcomp.R: stop("PCA applies only to numerical variables")
 #. R/princomp.R: stop("PCA applies only to numerical variables")
-#. R/princomp.R: stop("PCA applies only to numerical variables")
 #: R/prcomp.R:0 R/princomp.R:0
 msgid "PCA applies only to numerical variables"
 msgstr ""
@@ -1508,7 +1557,6 @@ msgid "Requested conf.level not achievable"
 msgstr ""
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
-#. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
 msgstr ""
@@ -1536,14 +1584,10 @@ msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`
 msgstr ""
 
 #. R/confint.R: message("Waiting for profiling to be done...")
-#. R/confint.R: message("Waiting for profiling to be done...")
 #: R/confint.R:0
 msgid "Waiting for profiling to be done..."
 msgstr ""
 
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
-#. R/mlm.R: stop("X does not define a subspace of M")
 #. R/mlm.R: stop("X does not define a subspace of M")
 #: R/mlm.R:0
 msgid "X does not define a subspace of M"
@@ -1638,8 +1682,9 @@ msgstr ""
 
 #. R/selfStart.R: stop("argument 'object' has an impossible length")
 #: R/selfStart.R:0
+#, fuzzy
 msgid "argument 'object' has an impossible length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/ks.test.R: stop("argument 'p' must be numeric")
 #: R/ks.test.R:0
@@ -1655,10 +1700,10 @@ msgstr "»x« skal være numerisk"
 
 #. R/filter.R: stop("argument 'sides' must be 1 or 2")
 #: R/filter.R:0
+#, fuzzy
 msgid "argument 'sides' must be 1 or 2"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
-#. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
 #, fuzzy
@@ -1667,18 +1712,21 @@ msgstr "argumenter skal have samme længde"
 
 #. R/nls.R: warning("argument 'subset' will be ignored")
 #: R/nls.R:0
+#, fuzzy
 msgid "argument 'subset' will be ignored"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/hclust.R: gettextf("argument 'x' cannot be coerced to class %s", dQuote("hclust"))
 #: R/hclust.R:0
+#, fuzzy
 msgid "argument 'x' cannot be coerced to class %s"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
+#, fuzzy
 msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
@@ -1688,8 +1736,9 @@ msgstr "argumenter skal have samme længde"
 
 #. R/density.R: stop("argument 'x' must be numeric")
 #: R/density.R:0
+#, fuzzy
 msgid "argument 'x' must be numeric"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/proj.R: stop("argument does not include a 'qr' component")
 #: R/proj.R:0
@@ -1703,8 +1752,9 @@ msgstr ""
 
 #. R/r2dtable.R: stop("arguments 'r' and 'c' must have the same sums")
 #: R/r2dtable.R:0
+#, fuzzy
 msgid "arguments 'r' and 'c' must have the same sums"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/aggregate.R: stop("arguments must have same length")
 #: R/aggregate.R:0
@@ -1713,8 +1763,9 @@ msgstr "argumenter skal have samme længde"
 
 #. R/contr.poly.R: stop("arguments must have the same length")
 #: R/contr.poly.R:0
+#, fuzzy
 msgid "arguments must have the same length"
-msgstr ""
+msgstr "argumenter skal have samme længde"
 
 #. R/lm.R: warning("assuming prediction variance inversely proportional to weights used for fitting\n")
 #: R/lm.R:0
@@ -1723,8 +1774,9 @@ msgstr ""
 
 #. R/chisq.test.R: stop("at least one entry of 'x' must be positive")
 #: R/chisq.test.R:0
+#, fuzzy
 msgid "at least one entry of 'x' must be positive"
-msgstr ""
+msgstr "hvert element for »%s« skal være logisk"
 
 #. R/smooth.R: stop("attempt to smooth NA values")
 #: R/smooth.R:0
@@ -1854,22 +1906,24 @@ msgstr ""
 
 #. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
 #: R/wilcox.test.R:0
+#, fuzzy
 msgid "cannot compute exact confidence interval with ties"
-msgstr ""
+msgstr "kan ikke beregne præcis p-værdi med bindinger"
 
 #. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
 #: R/wilcox.test.R:0
+#, fuzzy
 msgid "cannot compute exact confidence interval with zeroes"
-msgstr ""
+msgstr "kan ikke beregne præcis p-værdi med bindinger"
 
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
 #. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
 #: R/ansari.test.R:0 R/wilcox.test.R:0
+#, fuzzy
 msgid "cannot compute exact confidence intervals with ties"
-msgstr ""
+msgstr "kan ikke beregne præcis p-værdi med bindinger"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
 #. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
 #: R/ansari.test.R:0 R/wilcox.test.R:0
 msgid "cannot compute exact p-value with ties"
@@ -1877,13 +1931,15 @@ msgstr "kan ikke beregne præcis p-værdi med bindinger"
 
 #. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
 #: R/wilcox.test.R:0
+#, fuzzy
 msgid "cannot compute exact p-value with zeroes"
-msgstr ""
+msgstr "kan ikke beregne præcis p-værdi med bindinger"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0
+#, fuzzy
 msgid "cannot compute simulated p-value with zero marginals"
-msgstr ""
+msgstr "kan ikke beregne præcis p-værdi med bindinger"
 
 #. R/models.R: stop("cannot create a formula from a zero-column data frame")
 #: R/models.R:0
@@ -1970,20 +2026,21 @@ msgstr ""
 
 #. R/aov.R: stop("columns of 'contrast.obj' must define a contrast (sum to zero)")
 #: R/aov.R:0
+#, fuzzy
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
-msgstr ""
+msgstr "»coef« skal definere en kontrast, dvs. summere til 0"
 
 #. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
 #: R/aov.R:0
+#, fuzzy
 msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-msgstr ""
+msgstr "»coef« skal definere en kontrast, dvs. summere til 0"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
 #: R/ks.test.R:0
 msgid "computation of exact probability failed, returning Monte Carlo approximation"
 msgstr ""
 
-#. R/contrast.R: stop("contrasts apply only to factors")
 #. R/contrast.R: stop("contrasts apply only to factors")
 #: R/contrast.R:0
 msgid "contrasts apply only to factors"
@@ -2036,7 +2093,6 @@ msgstr ""
 msgid "cross-validation with non-unique 'x' values seems doubtful"
 msgstr ""
 
-#. R/t.test.R: stop("data are essentially constant")
 #. R/t.test.R: stop("data are essentially constant")
 #: R/t.test.R:0
 msgid "data are essentially constant"
@@ -2122,23 +2178,27 @@ msgstr ""
 
 #. R/cutree.R: gettextf("elements of 'k' must be between 1 and %d", n)
 #: R/cutree.R:0
+#, fuzzy
 msgid "elements of 'k' must be between 1 and %d"
-msgstr ""
+msgstr "hvert element for »%s« skal være logisk"
 
 #. R/prop.test.R: stop("elements of 'n' must be positive")
 #: R/prop.test.R:0
+#, fuzzy
 msgid "elements of 'n' must be positive"
-msgstr ""
+msgstr "hvert element for »%s« skal være logisk"
 
 #. R/prop.test.R: stop("elements of 'p' must be in (0,1)")
 #: R/prop.test.R:0
+#, fuzzy
 msgid "elements of 'p' must be in (0,1)"
-msgstr ""
+msgstr "hvert element for »%s« skal være logisk"
 
 #. R/prop.test.R: stop("elements of 'x' must be nonnegative")
 #: R/prop.test.R:0
+#, fuzzy
 msgid "elements of 'x' must be nonnegative"
-msgstr ""
+msgstr "hvert element for »%s« skal være logisk"
 
 #. R/prop.test.R: stop("elements of 'x' must not be greater than those of 'n'")
 #: R/prop.test.R:0
@@ -2146,7 +2206,6 @@ msgid "elements of 'x' must not be greater than those of 'n'"
 msgstr ""
 
 #. R/kmeans.R: stop("empty cluster: try a better set of initial centers", call. = FALSE)
-#. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
 #. R/kmeans.R: warning("empty cluster: try a better set of initial centers",     call. = FALSE)
 #: R/kmeans.R:0
 msgid "empty cluster: try a better set of initial centers"
@@ -2203,7 +2262,6 @@ msgid "f.upper = f(upper) is NA"
 msgstr ""
 
 #. R/factanal.R: stop("factor analysis applies only to numerical variables")
-#. R/factanal.R: stop("factor analysis applies only to numerical variables")
 #: R/factanal.R:0
 msgid "factor analysis applies only to numerical variables"
 msgstr ""
@@ -2225,8 +2283,9 @@ msgstr ""
 
 #. R/loess.R: stop("first argument must be a \"loess\" object")
 #: R/loess.R:0
+#, fuzzy
 msgid "first argument must be a \"loess\" object"
-msgstr ""
+msgstr "argumentet »split« skal være en liste"
 
 #. R/glm.R: warning("fitting to calculate the null deviance did not converge -- increase 'maxit'?")
 #: R/glm.R:0
@@ -2253,8 +2312,9 @@ msgstr "»formula« skal have både venstre og højre hånds sider"
 
 #. R/friedman.test.R: stop("formula missing")
 #: R/friedman.test.R:0
+#, fuzzy
 msgid "formula missing"
-msgstr ""
+msgstr "»formula« mangler eller er ukorrekt"
 
 #. R/StructTS.R: stop("frequency must be a positive integer >= 2 for BSM")
 #: R/StructTS.R:0
@@ -2328,7 +2388,6 @@ msgid "ignoring prior weights"
 msgstr ""
 
 #. R/lm.R: stop("incompatible dimensions")
-#. R/lm.R: stop("incompatible dimensions")
 #: R/lm.R:0
 msgid "incompatible dimensions"
 msgstr ""
@@ -2354,7 +2413,6 @@ msgid "incorrect length of 'x'"
 msgstr ""
 
 #. R/ftable.R: stop("incorrect specification for 'col.vars'")
-#. R/ftable.R: stop("incorrect specification for 'col.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'col.vars'"
 msgstr ""
@@ -2365,7 +2423,6 @@ msgstr ""
 msgid "incorrect specification for 'formula'"
 msgstr ""
 
-#. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #: R/ftable.R:0
 msgid "incorrect specification for 'row.vars'"
@@ -2468,8 +2525,6 @@ msgid "invalid 'method' argument"
 msgstr ""
 
 #. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
-#. R/bandwidths.R: stop("invalid 'nb'")
 #: R/bandwidths.R:0
 msgid "invalid 'nb'"
 msgstr ""
@@ -2480,14 +2535,10 @@ msgid "invalid 'tree' ('merge' component)"
 msgstr ""
 
 #. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
-#. R/cor.R: stop("invalid 'use' argument")
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr ""
 
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/bandwidths.R: stop("invalid 'x'")
 #. R/bandwidths.R: stop("invalid 'x'")
 #. R/chisq.test.R: stop("invalid 'x'")
 #. R/loess.R: stop("invalid 'x'")
@@ -2612,7 +2663,6 @@ msgid "invalid formula %s: not a call"
 msgstr ""
 
 #. R/deriv.R: stop("invalid formula in deriv")
-#. R/deriv.R: stop("invalid formula in deriv")
 #: R/deriv.R:0
 msgid "invalid formula in deriv"
 msgstr ""
@@ -2622,7 +2672,6 @@ msgstr ""
 msgid "invalid formula: %s"
 msgstr ""
 
-#. R/approx.R: stop("invalid interpolation method")
 #. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
 #: R/approx.R:0 R/spline.R:0
@@ -2636,9 +2685,6 @@ msgstr ""
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
-#. R/approx.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
-#. R/bandwidths.R: stop("invalid length(x)")
 #. R/bandwidths.R: stop("invalid length(x)")
 #. R/stl.R: stop("invalid length(x)")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/stl.R:0
@@ -2754,7 +2800,6 @@ msgid ""
 msgstr ""
 
 #. R/biplot.R: stop("length of choices must be 2")
-#. R/biplot.R: stop("length of choices must be 2")
 #: R/biplot.R:0
 msgid "length of choices must be 2"
 msgstr ""
@@ -2775,12 +2820,6 @@ msgstr ""
 msgid "levels truncated to positive values only"
 msgstr ""
 
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
-#. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #: R/family.R:0
 msgid "link \"%s\" not available for %s family; available links are %s"
@@ -2819,8 +2858,6 @@ msgid "method = \"Brent\" is only available for one-dimensional optimization"
 msgstr ""
 
 #. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
-#. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
 #: R/lm.R:0
 msgid "method = '%s' is not supported. Using 'qr'"
 msgstr ""
@@ -2835,7 +2872,6 @@ msgstr ""
 msgid "midcache() of non-binary dendrograms only partly implemented"
 msgstr ""
 
-#. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #. R/bandwidths.R: warning("minimum occurred at one end of the range")
 #: R/bandwidths.R:0
 msgid "minimum occurred at one end of the range"
@@ -2898,7 +2934,6 @@ msgid "model frame and formula mismatch in model.matrix()"
 msgstr ""
 
 #. R/AIC.R: warning("models are not all fitted to the same number of observations")
-#. R/AIC.R: warning("models are not all fitted to the same number of observations")
 #: R/AIC.R:0
 msgid "models are not all fitted to the same number of observations"
 msgstr "modeller er ikke alle egnede til det samme antal observationer"
@@ -2907,8 +2942,9 @@ msgstr "modeller er ikke alle egnede til det samme antal observationer"
 #. R/lm.R: stop("models were not all fitted to the same size of dataset")
 #. R/mlm.R: stop("models were not all fitted to the same size of dataset")
 #: R/glm.R:0 R/lm.R:0 R/mlm.R:0
+#, fuzzy
 msgid "models were not all fitted to the same size of dataset"
-msgstr ""
+msgstr "modeller er ikke alle egnede til det samme antal observationer"
 
 #. R/glm.R: gettextf("models with response %s removed because response differs from model 1",     sQuote(deparse(responses[!sameresp])))
 #. R/lm.R: gettextf("models with response %s removed because response differs from model 1",     sQuote(deparse(responses[!sameresp])))
@@ -2929,7 +2965,6 @@ msgstr ""
 msgid "more cluster centers than distinct data points."
 msgstr ""
 
-#. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #: R/dummy.coef.R:0
 msgid "multivariate case with missing coefficients is not yet implemented"
@@ -3011,10 +3046,6 @@ msgid "need an object with call component"
 msgstr ""
 
 #. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
-#. R/bandwidths.R: stop("need at least 2 data points")
 #: R/bandwidths.R:0
 msgid "need at least 2 data points"
 msgstr ""
@@ -3036,7 +3067,6 @@ msgid "need at least four unique 'x' values"
 msgstr ""
 
 #. R/approx.R: stop("need at least two non-NA values to interpolate")
-#. R/approx.R: stop("need at least two non-NA values to interpolate")
 #: R/approx.R:0
 msgid "need at least two non-NA values to interpolate"
 msgstr ""
@@ -3047,8 +3077,6 @@ msgid "need dendrograms where all leaves have labels"
 msgstr ""
 
 #. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
-#. R/manova.R: stop("need multiple responses")
 #: R/manova.R:0
 msgid "need multiple responses"
 msgstr ""
@@ -3058,8 +3086,6 @@ msgstr ""
 msgid "need numeric data"
 msgstr ""
 
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
-#. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #. R/smspline.R: stop("need result of smooth.spline(keep.data = TRUE)")
 #: R/smspline.R:0
 msgid "need result of smooth.spline(keep.data = TRUE)"
@@ -3103,13 +3129,15 @@ msgstr ""
 
 #. R/add.R: stop("no 'drop1' method for \"mlm\" models")
 #: R/add.R:0
+#, fuzzy
 msgid "no 'drop1' method for \"mlm\" models"
-msgstr ""
+msgstr "ingen »add1-metode« implementeret for »mlm-modeller«"
 
 #. R/selfStart.R: gettextf("no 'getInitial' method found for \"%s\" objects", data.class(object))
 #: R/selfStart.R:0
+#, fuzzy
 msgid "no 'getInitial' method found for \"%s\" objects"
-msgstr ""
+msgstr "ingen »add1-metode« implementeret for »mlm-modeller«"
 
 #. R/logLik.R: warning("no 'nobs' method is available")
 #. R/logLik.R: stop("no 'nobs' method is available")
@@ -3134,8 +3162,9 @@ msgstr "ingen faktorer i den faste model"
 
 #. R/smspline.R: stop("no finite observations")
 #: R/smspline.R:0
+#, fuzzy
 msgid "no finite observations"
-msgstr ""
+msgstr "ikke nok »x-observationer«"
 
 #. R/loess.R: stop("no models to compare")
 #: R/loess.R:0
@@ -3149,8 +3178,9 @@ msgstr ""
 
 #. R/nls.R: stop("no parameters to fit")
 #: R/nls.R:0
+#, fuzzy
 msgid "no parameters to fit"
-msgstr ""
+msgstr "alle parametre var faste"
 
 #. R/ts.R: stop("no replacement values supplied")
 #: R/ts.R:0
@@ -3167,8 +3197,6 @@ msgstr ""
 msgid "no scores are available: refit with 'retx=TRUE'"
 msgstr ""
 
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
-#. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
 #. R/nlm.R: gettextf("no sign change found in %d iterations", it - 1)
 #: R/nlm.R:0
 msgid "no sign change found in %d iterations"
@@ -3195,13 +3223,10 @@ msgid "no terms component nor attribute"
 msgstr ""
 
 #. R/add.R: stop("no terms in scope")
-#. R/add.R: stop("no terms in scope")
 #: R/add.R:0
 msgid "no terms in scope"
 msgstr ""
 
-#. R/add.R: stop("no terms in scope for adding to object")
-#. R/add.R: stop("no terms in scope for adding to object")
 #. R/add.R: stop("no terms in scope for adding to object")
 #: R/add.R:0
 msgid "no terms in scope for adding to object"
@@ -3209,10 +3234,10 @@ msgstr ""
 
 #. R/ts.R: stop("no time series supplied")
 #: R/ts.R:0
+#, fuzzy
 msgid "no time series supplied"
-msgstr ""
+msgstr "kun univariate tidsserier"
 
-#. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #: R/glm.R:0
 msgid "no valid set of coefficients has been found: please supply starting values"
@@ -3270,8 +3295,9 @@ msgstr ""
 
 #. R/models.R: warning("non-list contrasts argument ignored")
 #: R/models.R:0
+#, fuzzy
 msgid "non-list contrasts argument ignored"
-msgstr ""
+msgstr "argumentet »split« skal være en liste"
 
 #. R/family.R: stop("non-positive values not allowed for the 'Gamma' family")
 #: R/family.R:0
@@ -3337,14 +3363,12 @@ msgid "not an unreplicated complete block design"
 msgstr ""
 
 #. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
-#. R/ks.test.R: stop("not enough 'x' data")
 #: R/ks.test.R:0
+#, fuzzy
 msgid "not enough 'x' data"
-msgstr ""
+msgstr "ikke nok »x-observationer«"
 
 #. R/ansari.test.R: stop("not enough 'x' observations")
-#. R/t.test.R: stop("not enough 'x' observations")
 #. R/t.test.R: stop("not enough 'x' observations")
 #. R/var.test.R: stop("not enough 'x' observations")
 #: R/ansari.test.R:0 R/t.test.R:0 R/var.test.R:0
@@ -3352,11 +3376,10 @@ msgid "not enough 'x' observations"
 msgstr "ikke nok »x-observationer«"
 
 #. R/ks.test.R: stop("not enough 'y' data")
-#. R/ks.test.R: stop("not enough 'y' data")
-#. R/ks.test.R: stop("not enough 'y' data")
 #: R/ks.test.R:0
+#, fuzzy
 msgid "not enough 'y' data"
-msgstr ""
+msgstr "ikke nok »y-observationer«"
 
 #. R/ansari.test.R: stop("not enough 'y' observations")
 #. R/t.test.R: stop("not enough 'y' observations")
@@ -3375,26 +3398,26 @@ msgstr "ikke nok »x-observationer«"
 #. R/poisson.test.R: stop("not enough data")
 #. R/prop.test.R: stop("not enough data")
 #: R/poisson.test.R:0 R/prop.test.R:0
+#, fuzzy
 msgid "not enough data"
-msgstr ""
+msgstr "ikke nok »x-observationer«"
 
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
-#. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
 #. R/contrast.R: stop("not enough degrees of freedom to define contrasts")
 #: R/contrast.R:0
 msgid "not enough degrees of freedom to define contrasts"
 msgstr ""
 
 #. R/cor.test.R: stop("not enough finite observations")
-#. R/cor.test.R: stop("not enough finite observations")
 #: R/cor.test.R:0
+#, fuzzy
 msgid "not enough finite observations"
-msgstr ""
+msgstr "ikke nok »x-observationer«"
 
 #. R/oneway.test.R: stop("not enough groups")
 #: R/oneway.test.R:0
+#, fuzzy
 msgid "not enough groups"
-msgstr ""
+msgstr "ikke nok »x-observationer«"
 
 #. R/fligner.test.R: stop("not enough observations")
 #. R/kruskal.test.R: stop("not enough observations")
@@ -3403,8 +3426,9 @@ msgstr ""
 #. R/t.test.R: stop("not enough observations")
 #: R/fligner.test.R:0 R/kruskal.test.R:0 R/mood.test.R:0 R/oneway.test.R:0
 #: R/t.test.R:0
+#, fuzzy
 msgid "not enough observations"
-msgstr ""
+msgstr "ikke nok »x-observationer«"
 
 #. R/plot.lm.R: gettextf("not plotting observations with leverage one:\n  %s",     paste(which(isInf), collapse = ", "))
 #: R/plot.lm.R:0
@@ -3440,13 +3464,15 @@ msgstr ""
 
 #. R/ts.R: stop("number of differences must be a positive integer")
 #: R/ts.R:0
+#, fuzzy
 msgid "number of differences must be a positive integer"
-msgstr ""
+msgstr "frekvens skal være en positivt heltal >= 2 for BSM"
 
 #. R/power.anova.test.R: stop("number of groups must be at least 2")
 #: R/power.anova.test.R:0
+#, fuzzy
 msgid "number of groups must be at least 2"
-msgstr ""
+msgstr "»lag.max« skal være mindst 0"
 
 #. R/smspline.R: stop("number of observations in 'x' and 'y' must match.")
 #: R/smspline.R:0
@@ -3469,8 +3495,6 @@ msgid "number of offsets is %d, should equal %d (number of observations)"
 msgstr ""
 
 #. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
-#. R/add.R: stop("number of rows in use has changed: remove missing values?")
 #: R/add.R:0
 msgid "number of rows in use has changed: remove missing values?"
 msgstr "antallet af rækker i brug har ændret sig: fjern manglende værdier?"
@@ -3492,8 +3516,9 @@ msgstr ""
 
 #. R/smspline.R: stop("number of weights must match number of observations.")
 #: R/smspline.R:0
+#, fuzzy
 msgid "number of weights must match number of observations."
-msgstr ""
+msgstr "modeller er ikke alle egnede til det samme antal observationer"
 
 #. R/smspline.R: stop("numeric 'all.knots' must cover [0,1] (= the transformed data-range)")
 #: R/smspline.R:0
@@ -3512,7 +3537,6 @@ msgid ""
 "For density estimation use density()"
 msgstr ""
 
-#. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #. R/biplot.R: gettextf("object '%s' has no scores", deparse1(substitute(x)))
 #: R/biplot.R:0
 msgid "object '%s' has no scores"
@@ -3576,12 +3600,10 @@ msgstr ""
 
 #. R/stl.R: stop("only univariate series are allowed")
 #: R/stl.R:0
+#, fuzzy
 msgid "only univariate series are allowed"
-msgstr ""
+msgstr "kun univariate tidsserier"
 
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
-#. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
 #. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
 #: R/HoltWinters.R:0
 #, fuzzy
@@ -3589,17 +3611,15 @@ msgid "optimization difficulties: %s"
 msgstr "optimeringsfejl"
 
 #. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
-#. R/HoltWinters.R: stop("optimization failure")
 #: R/HoltWinters.R:0
 msgid "optimization failure"
 msgstr "optimeringsfejl"
 
 #. R/anova.R: warning("option \"show.coef.Pvalues\" is invalid: assuming TRUE")
 #: R/anova.R:0
+#, fuzzy
 msgid "option \"show.coef.Pvalues\" is invalid: assuming TRUE"
-msgstr ""
+msgstr "tilvalg »show.signif.stars« er ugyldig: antager TRUE"
 
 #. R/anova.R: warning("option \"show.signif.stars\" is invalid: assuming TRUE")
 #: R/anova.R:0
@@ -3644,7 +3664,6 @@ msgid "possible convergence problem: 'optim' gave code = %d and message %s"
 msgstr "mulig konvergensproblem: optim gav kode="
 
 #. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
-#. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arma0.R: gettextf("possible convergence problem: optim gave code = %d",     code)
 #: R/arima.R:0 R/arma0.R:0
 #, fuzzy
@@ -3663,8 +3682,9 @@ msgstr ""
 
 #. R/loess.R: stop("predictors must all be numeric")
 #: R/loess.R:0
+#, fuzzy
 msgid "predictors must all be numeric"
-msgstr ""
+msgstr "»x« skal være numerisk"
 
 #. R/distn.R: stop("probabilities must be finite, non-negative and not all 0")
 #: R/distn.R:0
@@ -3697,9 +3717,6 @@ msgid "ref = %d must be in 1L:%d"
 msgstr ""
 
 #. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
-#. R/wilcox.test.R: warning("requested conf.level not achievable")
 #: R/wilcox.test.R:0
 msgid "requested conf.level not achievable"
 msgstr ""
@@ -3719,7 +3736,6 @@ msgstr ""
 msgid "residuals have rank %d < %d"
 msgstr ""
 
-#. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #. R/mlm.R: gettextf("residuals have rank %s < %s", rss.qr$rank, pp)
 #: R/mlm.R:0
 msgid "residuals have rank %s < %s"
@@ -3753,18 +3769,17 @@ msgid "sample size must be between 3 and 5000"
 msgstr ""
 
 #. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
-#. R/ansari.test.R: warning("samples differ in location: cannot compute confidence set, returning NA")
 #: R/ansari.test.R:0
 msgid "samples differ in location: cannot compute confidence set, returning NA"
 msgstr ""
 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
 #. R/ts.R: stop("scatter plots only for univariate time series")
 #: R/ts.R:0
+#, fuzzy
 msgid "scatter plots only for univariate time series"
-msgstr ""
+msgstr "kun implementeret for univariate tidsserier"
 
-#. R/add.R: stop("scope is not a subset of term labels")
-#. R/add.R: stop("scope is not a subset of term labels")
 #. R/add.R: stop("scope is not a subset of term labels")
 #: R/add.R:0
 msgid "scope is not a subset of term labels"
@@ -3783,17 +3798,16 @@ msgid "series is corrupt, with no 'tsp' attribute"
 msgstr ""
 
 #. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
-#. R/ts.R: gettextf("series is corrupt: length %d with 'tsp' implying %d",     NROW(x), nn)
 #: R/ts.R:0
 msgid "series is corrupt: length %d with 'tsp' implying %d"
 msgstr ""
 
 #. R/stl.R: stop("series is not periodic or has less than two periods")
 #: R/stl.R:0
+#, fuzzy
 msgid "series is not periodic or has less than two periods"
-msgstr ""
+msgstr "tidsserier har ingen eller mindre end 2 perioder"
 
-#. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #: R/nls.R:0
 msgid "setVarying : 'vary' length must match length of parameters"
@@ -3823,7 +3837,6 @@ msgid "singular contrast matrix"
 msgstr ""
 
 #. R/glm.R: stop("singular fit encountered")
-#. R/lm.R: stop("singular fit encountered")
 #. R/lm.R: stop("singular fit encountered")
 #: R/glm.R:0 R/lm.R:0
 msgid "singular fit encountered"
@@ -3896,17 +3909,10 @@ msgstr ""
 
 #. R/distn.R: warning("specify 'rate' or 'scale' but not both")
 #. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
-#. R/distn.R: warning("specify 'rate' or 'scale' but not both")
-#. R/distn.R: stop("specify 'rate' or 'scale' but not both")
 #: R/distn.R:0
 msgid "specify 'rate' or 'scale' but not both"
 msgstr ""
 
-#. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #. R/identify.hclust.R: stop("specify exactly one of 'k' and 'h'")
 #: R/identify.hclust.R:0
 msgid "specify exactly one of 'k' and 'h'"
@@ -3948,7 +3954,6 @@ msgid "sum(weights) != 1  -- will not get true density"
 msgstr ""
 
 #. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
-#. R/cor.R: stop("supply both 'x' and 'y' or a matrix-like 'x'")
 #: R/cor.R:0
 msgid "supply both 'x' and 'y' or a matrix-like 'x'"
 msgstr ""
@@ -3965,8 +3970,9 @@ msgstr ""
 
 #. R/lm.R: stop("the 'se.fit' argument is not yet implemented for \"mlm\" objects")
 #: R/lm.R:0
+#, fuzzy
 msgid "the 'se.fit' argument is not yet implemented for \"mlm\" objects"
-msgstr ""
+msgstr "ingen »add1-metode« implementeret for »mlm-modeller«"
 
 #. R/aov.R: stop("the 'split' argument must be a list")
 #: R/aov.R:0
@@ -3978,7 +3984,6 @@ msgstr "argumentet »split« skal være en liste"
 msgid "the case k > 2 is unimplemented"
 msgstr ""
 
-#. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
 #. R/aov.R: stop("the contrast defined is empty (has no TRUE elements)")
 #: R/aov.R:0
 msgid "the contrast defined is empty (has no TRUE elements)"
@@ -3994,8 +3999,6 @@ msgstr "den første værdi i tidsserierne må ikke mangle"
 msgid "the following arguments to 'anova.glm' are invalid and dropped:"
 msgstr ""
 
-#. R/StructTS.R: stop("the series is entirely NA")
-#. R/StructTS.R: stop("the series is entirely NA")
 #. R/StructTS.R: stop("the series is entirely NA")
 #: R/StructTS.R:0
 msgid "the series is entirely NA"
@@ -4023,8 +4026,9 @@ msgstr ""
 
 #. R/ts.R: stop("time series contains internal NAs")
 #: R/ts.R:0
+#, fuzzy
 msgid "time series contains internal NAs"
-msgstr ""
+msgstr "serierne er helt NA"
 
 #. R/HoltWinters.R: stop("time series has no or less than 2 periods")
 #: R/HoltWinters.R:0
@@ -4093,8 +4097,9 @@ msgstr ""
 
 #. R/arima.R: stop("too few non-missing observations")
 #: R/arima.R:0
+#, fuzzy
 msgid "too few non-missing observations"
-msgstr ""
+msgstr "ikke nok »x-observationer«"
 
 #. R/zzModels.R: stop("too few observations to fit an asymptotic regression model")
 #: R/zzModels.R:0
@@ -4108,10 +4113,10 @@ msgstr ""
 
 #. R/arma0.R: warning("transformed ARMA parameters were fixed")
 #: R/arma0.R:0
+#, fuzzy
 msgid "transformed ARMA parameters were fixed"
-msgstr ""
+msgstr "alle parametre var faste"
 
-#. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #: R/model.tables.R:0
 msgid "type '%s' is not implemented yet"
@@ -4144,8 +4149,9 @@ msgstr ""
 
 #. R/optim.R: gettext("unknown names in control: ", domain = "R-stats")
 #: R/optim.R:0
+#, fuzzy
 msgid "unknown names in control:"
-msgstr ""
+msgstr "ukendte navne i listen »split«"
 
 #. R/stl.R: stop("unknown string value for s.window")
 #: R/stl.R:0
@@ -4168,7 +4174,6 @@ msgstr ""
 msgid "using F test with a '%s' family is inappropriate"
 msgstr ""
 
-#. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
 #. R/glm.R: warning("using F test with a fixed dispersion is inappropriate")
 #: R/glm.R:0
 msgid "using F test with a fixed dispersion is inappropriate"
@@ -4225,7 +4230,6 @@ msgid "weights must be non-negative and not all zero"
 msgstr ""
 
 #. R/embed.R: stop("wrong embedding dimension")
-#. R/embed.R: stop("wrong embedding dimension")
 #: R/embed.R:0
 msgid "wrong embedding dimension"
 msgstr ""
@@ -4261,11 +4265,12 @@ msgstr ""
 msgid "wrong number of contrast matrix rows"
 msgstr ""
 
-#. R/ts-tests.R: stop("x is not a vector or univariate time series")
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
+#, fuzzy
 msgid "x is not a vector or univariate time series"
-msgstr ""
+msgstr "kun implementeret for univariate tidsserier"
 
 #. R/acf.R: stop("x$lag must have at least 1 column")
 #: R/acf.R:0
@@ -4295,10 +4300,10 @@ msgstr ""
 
 #. R/family.R: stop("y values must be 0 <= y <= 1")
 #: R/family.R:0
+#, fuzzy
 msgid "y values must be 0 <= y <= 1"
-msgstr ""
+msgstr "»acf« skal have længden to eller længere"
 
-#. R/approx.R: stop("zero non-NA points")
 #. R/approx.R: stop("zero non-NA points")
 #. R/spline.R: stop("zero non-NA points")
 #. R/splinefun.R: stop("zero non-NA points")
@@ -4306,7 +4311,6 @@ msgstr ""
 msgid "zero non-NA points"
 msgstr ""
 
-#. R/ar.R: stop("zero-variance series")
 #. R/ar.R: stop("zero-variance series")
 #: R/ar.R:0
 msgid "zero-variance series"
@@ -4364,17 +4368,19 @@ msgstr[1] "x$lag skal have mindst 1 kolonne"
 
 #. R/models.R: ngettext(nr, "'newdata' had %d row", "'newdata' had %d rows")
 #: R/models.R:0
+#, fuzzy
 msgid "'newdata' had %d row"
 msgid_plural "'newdata' had %d rows"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "x$lag skal have mindst 1 kolonne"
+msgstr[1] "x$lag skal have mindst 1 kolonne"
 
 #. R/factanal.R: ngettext(p, "'start' must have %d row", "'start' must have %d rows")
 #: R/factanal.R:0
+#, fuzzy
 msgid "'start' must have %d row"
 msgid_plural "'start' must have %d rows"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "x$lag skal have mindst 1 kolonne"
+msgstr[1] "x$lag skal have mindst 1 kolonne"
 
 #. R/ts.R: ngettext(n.start, "'start.innov' is too short: need %d point",     "'start.innov' is too short: need %d points")
 #: R/ts.R:0
@@ -4505,13 +4511,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
-#. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #: R/add.R:0
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "'init' must have 1 or %d columns"
-#~ msgstr "x$lag skal have mindst 1 kolonne"

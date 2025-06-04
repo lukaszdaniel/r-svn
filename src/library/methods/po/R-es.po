@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2023-04-05 09:17+0000\n"
 "Last-Translator: Richard Detomasi <richard.detomasi@gmail.com>\n"
 "Language-Team: none\n"
@@ -92,7 +92,6 @@ msgid "%s is not a reference class"
 msgstr ""
 
 #. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
-#. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #: R/SClasses.R:0
 msgid "%s is not a slot in class %s"
 msgstr ""
@@ -164,8 +163,9 @@ msgstr ""
 
 #. R/oldClass.R: gettextf("'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s",     dQuote("oldClass"), dQuote(class(object)))
 #: R/oldClass.R:0
+#, fuzzy
 msgid "'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s"
-msgstr ""
+msgstr "argumento sin nombre debe extender la clase S3 o la clase de parte de los datos; no es el caso de  clase %s"
 
 #. R/as.R: gettextf("'as' method should have one argument, or match the arguments of coerce(): got  (%s)",     paste(formalArgs(def), collapse = ", "))
 #: R/as.R:0
@@ -187,7 +187,6 @@ msgstr ""
 msgid "'externalptr' objects cannot be initialized from new()"
 msgstr ""
 
-#. R/Methods.R: stop("'file' must be a character string or a connection")
 #. R/Methods.R: stop("'file' must be a character string or a connection")
 #: R/Methods.R:0
 msgid "'file' must be a character string or a connection"
@@ -450,7 +449,6 @@ msgid "The prototype for class %s has undefined slot(s): %s"
 msgstr ""
 
 #. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
-#. R/MethodsList.R: gettextf("Use %s instead. ", dQuote(instead))
 #: R/MethodsList.R:0
 msgid "Use %s instead."
 msgstr ""
@@ -471,8 +469,7 @@ msgid "a call to superClass() is in the method %s but there is no superclass def
 msgstr ""
 
 #. R/Methods.R: stop("a function for argument 'f' must be a generic function")
-#. R/trace.R: stop("a function for argument 'f' must be a generic function")
-#: R/Methods.R:0 R/trace.R:0
+#: R/Methods.R:0
 msgid "a function for argument 'f' must be a generic function"
 msgstr ""
 
@@ -1438,8 +1435,6 @@ msgid "no function definition found for %s"
 msgstr ""
 
 #. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
-#. R/Methods.R: gettextf("no generic function %s found", sQuote(f))
 #: R/Methods.R:0
 msgid "no generic function %s found"
 msgstr ""
@@ -1527,7 +1522,6 @@ msgid "no package name supplied and no class definition found for %s"
 msgstr ""
 
 #. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
-#. R/RMethodUtils.R: stop("no suitable arguments to dispatch methods in this function")
 #: R/RMethodUtils.R:0
 msgid "no suitable arguments to dispatch methods in this function"
 msgstr ""
@@ -1568,7 +1562,6 @@ msgstr ""
 msgid "none of the objects in the source code could be found:  need to attach or specify the package"
 msgstr ""
 
-#. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #. R/refClass.R: gettextf("not a reference class: %s", ClassDef@name)
 #: R/refClass.R:0
 msgid "not a reference class: %s"
@@ -1726,8 +1719,9 @@ msgstr ""
 
 #. R/ClassExtensions.R: gettextf("the 'S3Class' argument must be a superclass of %s:  not true of class %s",     dQuote(class(object)), dQuote(S3Class))
 #: R/ClassExtensions.R:0
+#, fuzzy
 msgid "the 'S3Class' argument must be a superclass of %s:  not true of class %s"
-msgstr ""
+msgstr "argumento sin nombre debe extender la clase S3 o la clase de parte de los datos; no es el caso de  clase %s"
 
 #. R/ClassExtensions.R: gettextf("the 'coerce' argument to 'setIs' should be a function of one argument, got an object of class %s",     dQuote(class(coerce)))
 #: R/ClassExtensions.R:0
@@ -1760,7 +1754,6 @@ msgid "the body of the generic function for %s calls 'standardGeneric' to dispat
 msgstr ""
 
 #. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
-#. R/refClass.R: gettextf("the class of field %s in the object is not compatible with the desired class %s in the target",     sQuote(field), dQuote(fieldClasses[[field]]))
 #: R/refClass.R:0
 msgid "the class of field %s in the object is not compatible with the desired class %s in the target"
 msgstr ""
@@ -1770,7 +1763,6 @@ msgstr ""
 msgid "the computation: 'as(object,\"%s\") <- value' is valid when object has class %s only if 'is(value, \"%s\")' is TRUE ('class(value)' was %s)"
 msgstr ""
 
-#. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #. R/refClass.R: gettextf("the definition of class %s in package %s is locked so fields may not be modified",     dQuote(def@className), sQuote(def@package))
 #: R/refClass.R:0
 msgid "the definition of class %s in package %s is locked so fields may not be modified"
@@ -1970,8 +1962,9 @@ msgstr ""
 
 #. R/refClass.R: gettextf("unnamed arguments to $new() must be objects from a reference class; got an object of class %s",     dQuote(class(super)))
 #: R/refClass.R:0
+#, fuzzy
 msgid "unnamed arguments to $new() must be objects from a reference class; got an object of class %s"
-msgstr ""
+msgstr "argumento sin nombre debe extender la clase S3 o la clase de parte de los datos; no es el caso de  clase %s"
 
 #. R/SClasses.R: stop("validity method must be NULL or a function of one argument")
 #: R/SClasses.R:0
@@ -2085,7 +2078,6 @@ msgid_plural "no definition of class %s in the specified position, %s, definitio
 msgstr[0] ""
 msgstr[1] ""
 
-#. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #: R/RMethodUtils.R:0
 msgid "non-argument found in the signature: %s"

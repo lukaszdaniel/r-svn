@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2024-08-31 23:44\n"
+"POT-Creation-Date: 2025-06-04 19:56\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -20,10 +20,10 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
+#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "'filters' 必須是有兩個列的字元矩陣"
 
-#. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #. R/utils.R: gettextf("'pb' is not from class %s", dQuote("tkProgressBar"))
 #: R/utils.R:0
 msgid "'pb' is not from class %s"
@@ -66,6 +66,7 @@ msgstr "求助"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Help topic:"
 msgstr "求助題目："
 
@@ -76,6 +77,7 @@ msgstr "用 CRAN 安裝程式套件"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "交互線性擬合"
 
@@ -86,6 +88,7 @@ msgstr "載入"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Load packages"
 msgstr "載入程式套件"
 
@@ -116,21 +119,25 @@ msgstr "R FAQ"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Save workspace"
-msgstr "儲存工作空間"
+msgstr "不要儲存工作空間"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
+#, fuzzy
 msgid "Source R code"
 msgstr "R 原始碼"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
+#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "沒有 '%s' 這個 Tcl 程式套件"
 
 #. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
 #: R/windows/zzz.R:0
+#, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "沒有安裝 Tcl/Tk 支援檔案"
 
@@ -146,6 +153,7 @@ msgstr "Windows 下沒有 tkGUI 這個功能"
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
+#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "無法在 Tcl 排列上改名"
 
@@ -165,7 +173,10 @@ msgid "t test"
 msgstr "t 檢驗"
 
 #. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
-#. R/unix/zzz.R: message("tcltk DLL is linked to ", shQuote(this))
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr ""
+
+#, fuzzy
+#~ msgid "gettext(\"Save workspace\")"
+#~ msgstr "儲存工作空間"
