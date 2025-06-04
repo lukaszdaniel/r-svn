@@ -232,7 +232,7 @@ function(x)
     if(any(ind)) {
         message(paste0(which(ind), ": ",
                        ## iconv will usually substitute,
-                       ## but inplementations including macOS 14
+                       ## but implementations including macOS 14
                        ## may translate to ASCII.
                        iconv(x[ind], "", "ASCII", sub = "byte"),
                        collapse = "\n"), domain = NA)
@@ -1020,7 +1020,7 @@ function(con, n = 4L)
     ## Try matching both the regular error indicator ('!') as well as
     ## the file line error indicator ('file:line:').
     pos <- grep("(^! |^!pdfTeX error:|:[0123456789]+:.*[Ee]rror)", lines)
-    ## unforunately that was too general and caught false positives
+    ## unfortunately that was too general and caught false positives
     ## Errors are typically of the form
     ## ! LaTeX Error:
     ## !pdfTeX error:
@@ -2735,6 +2735,8 @@ R <-
 function(fun, args = list(), opts = "--no-save --no-restore",
          env = character(), arch = "", drop = TRUE, timeout = 0)
 {
+    stopifnot(is.list(args))
+    
     .safe_repositories <- function() {
         x <- getOption("repos")
         y <- .get_standard_repository_URLs()
@@ -2775,7 +2777,8 @@ function(fun, args = list(), opts = "--no-save --no-restore",
         val <- readRDS(tfo)
         if (inherits(val, "condition")) {
             ## maybe wrap in a classed error and include some of res
-            msg <- paste0("error in inferior call:\n  ", conditionMessage(val))
+            msg <- gettextf("error in inferior call:\n  %s",
+                            conditionMessage(val))
             stop(do.call(errorCondition,
                          c(list(message = msg, 
                                 class = "inferiorCallError",
@@ -2794,7 +2797,7 @@ function(fun, args = list(), opts = "--no-save --no-restore",
         ## again maybe wrap in a classed error  and include some of res
         ## might want to distinguish two errors by sub-classes
         stop(do.call(errorCondition,
-                     c(list(message = "inferior call failed",
+                     c(list(message = gettext("inferior call failed"),
                             class = "inferiorCallError"),
                        res = res)), domain = NA)
 }

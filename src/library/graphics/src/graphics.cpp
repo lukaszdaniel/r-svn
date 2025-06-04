@@ -1786,7 +1786,7 @@ pGEDevDesc Rf_GNewPlot(Rboolean recording)
        That sets new = TRUE and also sets currentFigure <= lastFigure
        so treat separately. */
 
-    /* The logic for when to start a new page is mimiced in the
+    /* The logic for when to start a new page is mimicked in the
      * read-only par("page") in par.c, SO if you make changes
      * to the logic here, you will need to change that as well
      */

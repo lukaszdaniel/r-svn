@@ -34,9 +34,13 @@
       \samp{R >= 4.6.0}.
 
       \item \code{tools::analyze_license()} now also computes
-      \href{https://spdx.dev/learn/handling-license-info/}{SPDX license
-	identifiers},
+      \href{https://spdx.dev/learn/handling-license-info/}{\abbr{SPDX}
+	license identifiers},
       thanks to \I{Thierry Onkelinx} and \I{LLuís Revilla}.
+
+      \item \code{read.dcf} now recognizes lines starting with \samp{#}
+      as comment lines.  By \I{Dirk Eddelbuettel}, \I{Laurent Gatto} and
+      \I{Hugo Gruson}.
     }
   }
 
@@ -108,10 +112,9 @@
       absence of a \code{[.Pair} method, which has now been added.
     }
   }
-
 }
 
-\section{\Rlogo CHANGES IN R 4.5.0 patched}{
+\section{\Rlogo CHANGES IN R 4.5.1}{
   \subsection{INSTALLATION}{
     \itemize{
       \item Standalone \code{nmath} can be built with early-2025
@@ -154,12 +157,12 @@
       (but still to prevent overflow to \code{Inf}), fixing \PR{18889}.
 
       \item \code{prettyNum(*, zero.print={>=1-char}, replace.zero=TRUE)}
-      now works as documented, thanks to Marttila Mikko and Ivan Krylov's
-      messages on R-devel.
+      now works as documented, thanks to \I{Marttila Mikko} and
+      \I{Ivan Krylov}'s messages on R-devel.
 
-      \code{pbeta(x, a,b, ..)} for very large \code{a,b} no longer returns
+      \item \code{pbeta(x, a,b, ..)} for very large \code{a,b} no longer returns
       \code{NaN} but the correct values (0 or 1, or their logs for \code{log.p = TRUE}).
-      This improves Mathlib's C level \code{bratio()} and hence also
+      This improves \I{Mathlib}'s C level \code{bratio()} and hence also
       \code{pnbinom()}, etc..
     }
   }
@@ -3424,7 +3427,6 @@
       \code{diff(ylim)} is infinite.
 
       \item \code{nclass.FD()} gains a \code{digits} option.
-
 
       \item The R \I{Mathlib} internal C function \code{bd0()} (called
       indirectly from a dozen probability density and distribution
