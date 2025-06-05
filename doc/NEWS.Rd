@@ -110,6 +110,14 @@
       \item The \code{Pair(x,y)} construction in the formula interface to
       paired tests did not work with the \code{subset} argument, due to the
       absence of a \code{[.Pair} method, which has now been added.
+
+      \item Subsetting \code{"table"} objects keeps S3 classes more
+      consistently, fixing \PR{18845}.
+
+      \item When \code{browser()} is active or when otherwise debugging, \R code
+      such as \code{if(TRUE)} now longer triggers a new browser level, fixing
+      \PR{18885} (differently than the fix for \PR{15770}), with thanks to
+      \I{Ivan Krylov}.
     }
   }
 }
