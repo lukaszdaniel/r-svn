@@ -1,7 +1,7 @@
 /*
  *  Below code was created based on colorout.c (1.3-2)
  *  from the colorout R package.
- *  Copyright (C) 2024 Lukasz Daniel
+ *  Copyright (C) 2024-2025 Lukasz Daniel
  *
  *  You can distribute this file under the terms of
  *  the GNU General Public License (GPL >= 2).
@@ -29,6 +29,7 @@
  ***************************************************************/
 // Source code for the colorout package is available at:
 // https://github.com/jalvesaq/colorout
+// updated to match colorout 1.3-3
 
 #include <R_ext/Minmax.h>
 #include <string>
@@ -101,29 +102,26 @@ static bool isword(const char * b, int i, int len)
     return !is_letter_preceeding && !is_letter_following;
 }
 
-static bool iswhitespace(const char b)
+static bool isdelim(const char b)
 {
-    /* space or horizontal tab, new line, vertical tab, form feed, carriage return */
-    return b == 32 || (b >= 9 && b <= 13);
+    /* not a letter or number */
+    return (b >= 0 && b <= 47) || (b >= 58 && b <= 63) || (b >= 91 && b <= 94) || (b >= 123 && b <= 126);
 }
 
 static bool isnumber(const char * b, int i, int len)
 {
-    if(i > 0 && !iswhitespace(b[i-1]) && b[i-1] != '-')
+    if(i > 0 && !isdelim(b[i-1]))
         return 0;
 
+    /* Look 8 bytes ahead */
     int l = len;
-    if(l > (i + 5))
-        l = i + 5;
+    if(l > (i + 8))
+        l = i + 8;
     i++;
     while(i < l){
-        if(((b[i] > 0 && b[i] < '0') || (b[i] > '9' && b[i] < 'A') || (b[i] > 'Z' && b[i] < 'a') || (b[i] > 'z' && b[i] > 0)) &&
-                b[i] != '.' && b[i] != ',' &&
-                !(b[i] == 'e' && (i + 2) < len && (b[i+1] == '-' || b[i+1] == '+') && b[i+2] >= '0' && b[i+2] <= '9') &&
-                !(b[i-1] == 'e' && (b[i] == '-' || b[i] == '+')))
-            break;
-        if((b[i] < '0' || b[i] > '9') &&
-                b[i] != '.' && b[i] != ',' &&
+        if (isdelim(b[i]))
+            return 1;
+        if(!(b[i] >= '0' && b[i] <= '9') && b[i] != '.' && b[i] != ',' &&
                 !(b[i] == 'e' && (i + 2) < len && (b[i+1] == '-' || b[i+1] == '+') && b[i+2] >= '0' && b[i+2] <= '9') &&
                 !(b[i-1] == 'e' && (b[i] == '-' || b[i] == '+')))
             return 0;
@@ -133,7 +131,7 @@ static bool isnumber(const char * b, int i, int len)
 }
 
 
-static bool iszero(const char * b, int i, int len)
+static bool is_zero(const char * b, int i, int len)
 {
     char *charnum, *stopstring;
     double x;
@@ -687,7 +685,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                 j += normalsize;
                 /* positive numbers */
             } else if(bbuf[i] >= '0' && bbuf[i] <= '9' && isnumber(bbuf, i, len)){
-                if (hlzero && iszero(bbuf, i, len)){
+                if (hlzero && is_zero(bbuf, i, len)){
                     strcat(newbuf, crzero);
                     j += zerosize;
                 }else{
@@ -713,7 +711,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                 j += normalsize;
                 /* negative numbers */
             } else if(bbuf[i] == '-' && (bbuf[i+1] >= '0' && bbuf[i+1] <= '9') && isnumber(bbuf, i+1, len)){
-                if (hlzero && iszero(bbuf, i+1, len)){
+                if (hlzero && is_zero(bbuf, i+1, len)){
                     strcat(newbuf, crzero);
                     j += zerosize;
                 }else{
