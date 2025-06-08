@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 10:47+0200\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -563,17 +563,10 @@ msgstr "geçersiz 'y' sınırları"
 msgid "invalid 'z' limits"
 msgstr "geçersiz 'z' sınırları"
 
-#: plot3d.cpp:1137
-msgid "'xlab' must be a character vector of length 1"
+#: plot3d.cpp:1137 plot3d.cpp:1139 plot3d.cpp:1141
+#, fuzzy, c-format
+msgid "'%s' must be a character vector of length 1"
 msgstr "'xlab' 1 birim uzunluğunda bir karakter vektörü olmalıdır"
-
-#: plot3d.cpp:1139
-msgid "'ylab' must be a character vector of length 1"
-msgstr "'ylab' 1 birim uzunluğunda bir karakter vektörü olmalıdır"
-
-#: plot3d.cpp:1141
-msgid "'zlab' must be a character vector of length 1"
-msgstr "'zlab' 1 birim uzunluğunda bir karakter vektörü olmalıdır"
 
 #: plot3d.cpp:1161
 msgid "invalid viewing parameters"
@@ -661,6 +654,12 @@ msgstr ""
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "'ylab' 1 birim uzunluğunda bir karakter vektörü olmalıdır"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "'zlab' 1 birim uzunluğunda bir karakter vektörü olmalıdır"
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"

@@ -687,7 +687,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	} else {
 	    if(TYPEOF(x) != STRSXP)
-		error("%s", _("'x' must be a character vector"));
+		error(_("'%s' must be a character vector"), "x");
 	    if(toRaw) {
 		PROTECT(ans = allocVector(VECSXP, LENGTH(x)));
 		SHALLOW_DUPLICATE_ATTRIB(ans, x);

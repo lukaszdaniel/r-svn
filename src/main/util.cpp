@@ -1085,7 +1085,7 @@ attribute_hidden SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (!isString(paths))
-	error("%s", _("'path' must be a character vector"));
+	error(_("'%s' must be a character vector"), "path");
 
     int mustWork = asLogical(CADDR(args)); /* 1, NA_LOGICAL or 0 */
 
@@ -3203,7 +3203,7 @@ char *Rstrdup(const char *s)
 {
     size_t nb = strlen(s) + 1;
     void *cpy = malloc(nb);
-    if (cpy == NULL) error("%s", _("allocation error in Rstrdup"));
+    if (cpy == NULL) error(_("allocation error in '%s'"), "Rstrdup");
     memcpy(cpy, s, nb);
     return (char *) cpy;
 }

@@ -1134,11 +1134,11 @@ SEXP C_persp(SEXP args)
     ylab = CAR(args); args = CDR(args);
     zlab = CAR(args); args = CDR(args);
     if (!isString(xlab) || length(xlab) < 1)
-	error("%s", _("'xlab' must be a character vector of length 1"));
+	error(_("'%s' must be a character vector of length 1"), "xlab");
     if (!isString(ylab) || length(ylab) < 1)
-	error("%s", _("'ylab' must be a character vector of length 1"));
+	error(_("'%s' must be a character vector of length 1"), "ylab");
     if (!isString(zlab) || length(zlab) < 1)
-	error("%s", _("'zlab' must be a character vector of length 1"));
+	error(_("'%s' must be a character vector of length 1"), "zlab");
 
     if (R_FINITE(Shade) && Shade <= 0) Shade = 1;
     if (R_FINITE(ltheta) && R_FINITE(lphi) && R_FINITE(Shade))

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 19:22+0100\n"
+"POT-Creation-Date: 2025-06-06 16:56+0200\n"
 "PO-Revision-Date: 2025-04-01 16:50+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: src/gnuwin32/console.cpp:1195 src/gnuwin32/console.cpp:1237
-#: src/gnuwin32/console.cpp:1767
+#: src/gnuwin32/console.cpp:1765
 msgid "Not enough memory"
 msgstr "Nepakanka atminties"
 
@@ -33,11 +33,11 @@ msgstr "Nepakanka atminties: tekstas nenukopijuotas į iškarpinę"
 msgid "Unable to open the clipboard"
 msgstr "Neįmanoma atidaryti iškarpinės"
 
-#: src/gnuwin32/console.cpp:2131
+#: src/gnuwin32/console.cpp:2129
 msgid "Insufficient memory. Please close the console"
 msgstr "Nepakanka atminties. Uždarykite konsolę"
 
-#: src/gnuwin32/console.cpp:2186 src/gnuwin32/console.cpp:2240
+#: src/gnuwin32/console.cpp:2184 src/gnuwin32/console.cpp:2238
 #: src/gnuwin32/preferences.cpp:347
 #, c-format
 msgid ""
@@ -47,23 +47,23 @@ msgstr ""
 "Šriftas %s-%d-%d nerastas.\n"
 "Fiksuoto sistemos šrifto naudojimas"
 
-#: src/gnuwin32/console.cpp:2343
+#: src/gnuwin32/console.cpp:2341
 msgid "Save selection to"
 msgstr "Įrašyti pasirinkimą į"
 
-#: src/gnuwin32/console.cpp:2345
+#: src/gnuwin32/console.cpp:2343
 msgid "Save console contents to"
 msgstr "Įrašyti konsolės turinį į"
 
-#: src/gnuwin32/console.cpp:2452
+#: src/gnuwin32/console.cpp:2450
 msgid "Scrolling.\n"
 msgstr "Slinkimas.\n"
 
-#: src/gnuwin32/console.cpp:2453
+#: src/gnuwin32/console.cpp:2451
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 msgstr "  Klaviatūra: PgUp, PgDown, Ctrl+rodyklės, Ctrl+Home, Ctrl+End,\n"
 
-#: src/gnuwin32/console.cpp:2454
+#: src/gnuwin32/console.cpp:2452
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
@@ -71,91 +71,91 @@ msgstr ""
 "  Pelė: naudokite slinkties juostą (-as).\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2455
+#: src/gnuwin32/console.cpp:2453
 msgid "Editing.\n"
 msgstr "Redagavimas.\n"
 
-#: src/gnuwin32/console.cpp:2456
+#: src/gnuwin32/console.cpp:2454
 msgid "  Moving the cursor: \n"
 msgstr "  Žymeklio perkėlimas: \n"
 
-#: src/gnuwin32/console.cpp:2457
+#: src/gnuwin32/console.cpp:2455
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     Rodyklė kairėn arba Ctrl+B: judėti atgal per vieną simbolį;\n"
 
-#: src/gnuwin32/console.cpp:2458
+#: src/gnuwin32/console.cpp:2456
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
 msgstr "     Rodyklė dešinėn arba Ctrl+F: judėti į priekį per vieną simbolį;\n"
 
-#: src/gnuwin32/console.cpp:2459
+#: src/gnuwin32/console.cpp:2457
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     Home arba Ctrl+A: eiti į eilutės pradžią;\n"
 
-#: src/gnuwin32/console.cpp:2460
+#: src/gnuwin32/console.cpp:2458
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     End arba Ctrl+E: eiti į eilutės pabaigą;\n"
 
-#: src/gnuwin32/console.cpp:2461
+#: src/gnuwin32/console.cpp:2459
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
 msgstr "  Istorija: rodyklės aukštyn ir žemyn, Ctrl+P, Ctrl+N\n"
 
-#: src/gnuwin32/console.cpp:2462
+#: src/gnuwin32/console.cpp:2460
 msgid "  Deleting:\n"
 msgstr "  Šalinimas:\n"
 
-#: src/gnuwin32/console.cpp:2463
+#: src/gnuwin32/console.cpp:2461
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     Del arba Ctrl+D: naikinti dabartinį simbolį arba pasirinkimą;\n"
 
-#: src/gnuwin32/console.cpp:2464
+#: src/gnuwin32/console.cpp:2462
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     Backspace: ištrinti ankstesnį simbolį;\n"
 
-#: src/gnuwin32/console.cpp:2465
+#: src/gnuwin32/console.cpp:2463
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
 msgstr "     Ctrl+Del arba Ctrl+K: šalinti tekstą nuo dabartinio simbolio iki eilutės pabaigos.\n"
 
-#: src/gnuwin32/console.cpp:2466
+#: src/gnuwin32/console.cpp:2464
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     Ctrl+U: ištrinti visą tekstą iš dabartinės eilutės.\n"
 
-#: src/gnuwin32/console.cpp:2467
+#: src/gnuwin32/console.cpp:2465
 msgid "  Copy and paste.\n"
 msgstr "  Kopijuoti ir įklijuoti.\n"
 
-#: src/gnuwin32/console.cpp:2468
+#: src/gnuwin32/console.cpp:2466
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
 msgstr "     Norėdami pažymėti tekstą naudokite pelę (laikyti kairįjį mygtuką).\n"
 
-#: src/gnuwin32/console.cpp:2469
+#: src/gnuwin32/console.cpp:2467
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
 msgstr "     Naudoti Shift+Del (arba Ctrl+C) nukipijuoti pažymėtą tekstą į iškarpinę ir\n"
 
-#: src/gnuwin32/console.cpp:2470
+#: src/gnuwin32/console.cpp:2468
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr "     Shift+Ins (arba Ctrl+V arba Ctrl+Y) įklijuoti iškarpinės turinį (jei yra)  \n"
 
-#: src/gnuwin32/console.cpp:2471
+#: src/gnuwin32/console.cpp:2469
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     į konsolę, Ctrl+X pirmiausia nukopijuokite tada įklijuokite\n"
 
-#: src/gnuwin32/console.cpp:2472
+#: src/gnuwin32/console.cpp:2470
 msgid "  Misc:\n"
 msgstr "  Kita:\n"
 
-#: src/gnuwin32/console.cpp:2473
+#: src/gnuwin32/console.cpp:2471
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     Ctrl+L: išvalyti konsolę.\n"
 
-#: src/gnuwin32/console.cpp:2474
+#: src/gnuwin32/console.cpp:2472
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     Ctrl+O arba INS: perjungti perrašymo režimą: iš pradžių išjungta.\n"
 
-#: src/gnuwin32/console.cpp:2475
+#: src/gnuwin32/console.cpp:2473
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     Ctrl+T: apsikeisti dabartinį simbolį su vienu į kairę.\n"
 
-#: src/gnuwin32/console.cpp:2476
+#: src/gnuwin32/console.cpp:2474
 msgid ""
 "\n"
 "Note: Console is updated only when some input is required.\n"
@@ -163,7 +163,7 @@ msgstr ""
 "\n"
 "Pastaba: konsolė atnaujinama tik tada, kai reikia įvesties.\n"
 
-#: src/gnuwin32/console.cpp:2477
+#: src/gnuwin32/console.cpp:2475
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
@@ -171,7 +171,7 @@ msgstr ""
 "  Naudokite Ctrl+W, kad perjungtumėte šios funkcijos būseną.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2478
+#: src/gnuwin32/console.cpp:2476
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -179,7 +179,7 @@ msgstr ""
 "Norėdami sustabdyti interpretatorių, naudokite ESC.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2479
+#: src/gnuwin32/console.cpp:2477
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -187,11 +187,11 @@ msgstr ""
 "TAB pradeda užbaigti dabartinį žodį.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2480
+#: src/gnuwin32/console.cpp:2478
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "Standartiniai Windows spartieji klavišai gali būti naudojami norint perjungti\n"
 
-#: src/gnuwin32/console.cpp:2481
+#: src/gnuwin32/console.cpp:2479
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "grafikos įrenginys (Ctrl+Tab arba Ctrl+F6 (MDI), Alt+Tab (SDI))"
 
@@ -307,7 +307,7 @@ msgid "Save script"
 msgstr "Įrašyti scenarijų"
 
 #: src/gnuwin32/editor.cpp:778 src/gnuwin32/pager.cpp:458
-#: src/library/grDevices/src/devWindows.cpp:1593
+#: src/library/grDevices/src/devWindows.cpp:1594
 msgid "Return focus to Console"
 msgstr "Grąžinti fokusą į konsolę"
 
@@ -316,13 +316,13 @@ msgid "Print script"
 msgstr "Spausdinti scenarijų"
 
 #: src/gnuwin32/editor.cpp:783 src/gnuwin32/pager.cpp:453
-#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1587
+#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1588
 msgid "Print"
 msgstr "Spausdinti"
 
 #: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:474
-#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1828
-#: src/library/grDevices/src/devWindows.cpp:1625
+#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1819
+#: src/library/grDevices/src/devWindows.cpp:1626
 msgid "File"
 msgstr "Failas"
 
@@ -345,8 +345,8 @@ msgid "Save as..."
 msgstr "Įrašyti kaip..."
 
 #: src/gnuwin32/editor.cpp:811 src/gnuwin32/pager.cpp:477
-#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1646
-#: src/library/grDevices/src/devWindows.cpp:1688
+#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1647
+#: src/library/grDevices/src/devWindows.cpp:1689
 msgid "Print..."
 msgstr "Spausdinti..."
 
@@ -355,7 +355,7 @@ msgid "Close script"
 msgstr "Užverti scenarijų"
 
 #: src/gnuwin32/editor.cpp:816 src/gnuwin32/pager.cpp:484
-#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1834
+#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1825
 msgid "Edit"
 msgstr "Redaguoti"
 
@@ -380,8 +380,8 @@ msgid "GUI preferences..."
 msgstr "GUI nuostatos..."
 
 #: src/gnuwin32/editor.cpp:852 src/gnuwin32/rui.cpp:1260
-#: src/library/utils/src/windows/dataentry.cpp:1735
-#: src/library/utils/src/windows/dataentry.cpp:1845
+#: src/library/utils/src/windows/dataentry.cpp:1726
+#: src/library/utils/src/windows/dataentry.cpp:1836
 msgid "Help"
 msgstr "Pagalba"
 
@@ -429,14 +429,14 @@ msgid "Paste commands to console"
 msgstr "Įklijuoti komandas į konsolę"
 
 #: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:931
-#: src/library/utils/src/windows/dataentry.cpp:1741
-#: src/library/grDevices/src/devWindows.cpp:1685
+#: src/library/utils/src/windows/dataentry.cpp:1732
+#: src/library/grDevices/src/devWindows.cpp:1686
 msgid "Stay on top"
 msgstr "Likite viršuje"
 
 #: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:482
-#: src/library/utils/src/windows/dataentry.cpp:1743
-#: src/library/utils/src/windows/dataentry.cpp:1830
+#: src/library/utils/src/windows/dataentry.cpp:1734
+#: src/library/utils/src/windows/dataentry.cpp:1821
 msgid "Close"
 msgstr "Užverti"
 
@@ -897,73 +897,73 @@ msgstr "Nepakanka atminties, kad būtų galima rodyti failą vidiniame ieškikly
 msgid "Unable to start the print job"
 msgstr "Neįmanoma sukurti ieškiklio lango"
 
-#: src/library/utils/src/windows/dataentry.cpp:248
-#: src/library/utils/src/windows/dataentry.cpp:1879
-#: src/library/utils/src/windows/dataentry.cpp:1882
-#: src/library/utils/src/windows/dataentry.cpp:1912
+#: src/library/utils/src/windows/dataentry.cpp:245
+#: src/library/utils/src/windows/dataentry.cpp:1870
+#: src/library/utils/src/windows/dataentry.cpp:1873
+#: src/library/utils/src/windows/dataentry.cpp:1903
 msgid "invalid argument"
 msgstr "neteisingas argumentas"
 
-#: src/library/utils/src/windows/dataentry.cpp:292
+#: src/library/utils/src/windows/dataentry.cpp:289
 msgid "invalid type for value"
 msgstr "neleistinas reikšmės tipas"
 
-#: src/library/utils/src/windows/dataentry.cpp:303
+#: src/library/utils/src/windows/dataentry.cpp:300
 msgid "Data Editor"
 msgstr "Duomenų rengyklė"
 
-#: src/library/utils/src/windows/dataentry.cpp:353
-#: src/library/utils/src/windows/dataentry.cpp:1872
+#: src/library/utils/src/windows/dataentry.cpp:350
+#: src/library/utils/src/windows/dataentry.cpp:1863
 msgid "dataentry: internal memory problem"
 msgstr "dataentry: vidinės atminties problema"
 
-#: src/library/utils/src/windows/dataentry.cpp:657
-#: src/library/utils/src/windows/dataentry.cpp:1259
+#: src/library/utils/src/windows/dataentry.cpp:653
+#: src/library/utils/src/windows/dataentry.cpp:1250
 msgid "dataentry: internal memory error"
 msgstr "dataentry: vidinės atminties klaida"
 
-#: src/library/utils/src/windows/dataentry.cpp:780
-#: src/library/utils/src/windows/dataentry.cpp:793
+#: src/library/utils/src/windows/dataentry.cpp:776
+#: src/library/utils/src/windows/dataentry.cpp:789
 msgid "internal type error in dataentry"
 msgstr "vidinio tipo klaida esanti dataentry"
 
-#: src/library/utils/src/windows/dataentry.cpp:888
+#: src/library/utils/src/windows/dataentry.cpp:880
 msgid "dataentry: parse error on string"
 msgstr "dataentry: analizavimo klaida eilutėje"
 
-#: src/library/utils/src/windows/dataentry.cpp:1033
+#: src/library/utils/src/windows/dataentry.cpp:1025
 msgid "dataentry: expression too long"
 msgstr "dataentry: išraiška per ilga"
 
-#: src/library/utils/src/windows/dataentry.cpp:1509
+#: src/library/utils/src/windows/dataentry.cpp:1500
 msgid "column names cannot be blank"
 msgstr "stulpelių pavadinimai negali būti tušti"
 
-#: src/library/utils/src/windows/dataentry.cpp:1555
+#: src/library/utils/src/windows/dataentry.cpp:1546
 msgid "Variable editor"
 msgstr "Kintamojo rengyklė"
 
-#: src/library/utils/src/windows/dataentry.cpp:1560
+#: src/library/utils/src/windows/dataentry.cpp:1551
 msgid "variable name"
 msgstr "kintamojo pavadinimas"
 
-#: src/library/utils/src/windows/dataentry.cpp:1562
+#: src/library/utils/src/windows/dataentry.cpp:1553
 msgid "type"
 msgstr "tipas"
 
-#: src/library/utils/src/windows/dataentry.cpp:1677
+#: src/library/utils/src/windows/dataentry.cpp:1668
 msgid "Cell width(s)"
 msgstr "Langelio plotis (-čiai)"
 
-#: src/library/utils/src/windows/dataentry.cpp:1683
+#: src/library/utils/src/windows/dataentry.cpp:1674
 msgid "Cell width"
 msgstr "Langelio plotis"
 
-#: src/library/utils/src/windows/dataentry.cpp:1686
+#: src/library/utils/src/windows/dataentry.cpp:1677
 msgid "variable"
 msgstr "kintamasis"
 
-#: src/library/utils/src/windows/dataentry.cpp:1729
+#: src/library/utils/src/windows/dataentry.cpp:1720
 msgid ""
 "Navigation.\n"
 "  Keyboard: cursor keys move selection\n"
@@ -1005,210 +1005,210 @@ msgstr ""
 "  Dešiniuoju pelės mygtuku spustelėkite meniu, norėdami nukopijuoti, įklijuoti, automatiškai pakeisti pasirinktą stulpelį\n"
 "\n"
 
-#: src/library/utils/src/windows/dataentry.cpp:1737
+#: src/library/utils/src/windows/dataentry.cpp:1728
 msgid "Copy selected cell"
 msgstr "Kopijuoti pažymėtą langelį"
 
-#: src/library/utils/src/windows/dataentry.cpp:1738
+#: src/library/utils/src/windows/dataentry.cpp:1729
 msgid "Paste to selected cell"
 msgstr "Įklijuoti į pasirinktą langelį"
 
-#: src/library/utils/src/windows/dataentry.cpp:1739
+#: src/library/utils/src/windows/dataentry.cpp:1730
 msgid "Autosize column"
 msgstr "Automatinis stulpelio dydžio keitimas"
 
-#: src/library/utils/src/windows/dataentry.cpp:1835
+#: src/library/utils/src/windows/dataentry.cpp:1826
 msgid "Copy  \tCTRL+C"
 msgstr "Kopijuoti  \tCTRL+C"
 
-#: src/library/utils/src/windows/dataentry.cpp:1837
+#: src/library/utils/src/windows/dataentry.cpp:1828
 msgid "Paste \tCTRL+V"
 msgstr "Įklijuoti \tCTRL+V"
 
-#: src/library/utils/src/windows/dataentry.cpp:1839
+#: src/library/utils/src/windows/dataentry.cpp:1830
 msgid "Delete\tDEL"
 msgstr "Šalinti\tDEL"
 
-#: src/library/utils/src/windows/dataentry.cpp:1842
+#: src/library/utils/src/windows/dataentry.cpp:1833
 msgid "Cell widths ..."
 msgstr "Langelio pločiai ..."
 
-#: src/library/utils/src/windows/dataentry.cpp:1846
+#: src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Data editor"
 msgstr "Duomenų rengyklė"
 
-#: src/library/utils/src/windows/dataentry.cpp:1919
+#: src/library/utils/src/windows/dataentry.cpp:1910
 #, fuzzy
 msgid "unable to start data viewer"
 msgstr "Neįmanoma sukurti ieškiklio lango"
 
-#: src/library/grDevices/src/devWindows.cpp:937
+#: src/library/grDevices/src/devWindows.cpp:938
 msgid "Portable network graphics file"
 msgstr "Nešiojamasis tinklo grafikos failas"
 
-#: src/library/grDevices/src/devWindows.cpp:940
+#: src/library/grDevices/src/devWindows.cpp:941
 msgid "Windows bitmap file"
 msgstr "Windows rastro failas"
 
-#: src/library/grDevices/src/devWindows.cpp:943
+#: src/library/grDevices/src/devWindows.cpp:944
 msgid "TIFF file"
 msgstr "TIFF failas"
 
-#: src/library/grDevices/src/devWindows.cpp:946
+#: src/library/grDevices/src/devWindows.cpp:947
 msgid "Jpeg file"
 msgstr "JPEG failas"
 
-#: src/library/grDevices/src/devWindows.cpp:967
+#: src/library/grDevices/src/devWindows.cpp:968
 msgid "Postscript file"
 msgstr "Postskriptinis failas"
 
-#: src/library/grDevices/src/devWindows.cpp:978
+#: src/library/grDevices/src/devWindows.cpp:979
 msgid "PDF file"
 msgstr "PDF failas"
 
-#: src/library/grDevices/src/devWindows.cpp:990
+#: src/library/grDevices/src/devWindows.cpp:991
 msgid "Enhanced metafiles"
 msgstr "Išplėstiniai metafailai"
 
-#: src/library/grDevices/src/devWindows.cpp:993
+#: src/library/grDevices/src/devWindows.cpp:994
 #: src/library/grDevices/src/devWindows.cpp:3528
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "pasirinktas failo kelias per ilgas: leidžiama naudoti tik 512 baitų"
 
-#: src/library/grDevices/src/devWindows.cpp:1203
+#: src/library/grDevices/src/devWindows.cpp:1204
 msgid "No plot to replace!"
 msgstr "Nėra brėžinio, kurį pakeisti!"
 
-#: src/library/grDevices/src/devWindows.cpp:1253
+#: src/library/grDevices/src/devWindows.cpp:1254
 msgid "Variable name"
 msgstr "Kintamojo pavadinimas"
 
-#: src/library/grDevices/src/devWindows.cpp:1262
+#: src/library/grDevices/src/devWindows.cpp:1263
 msgid "Variable doesn't contain any plots!"
 msgstr "Kintamajame nėra jokių brėžinių!"
 
-#: src/library/grDevices/src/devWindows.cpp:1275
+#: src/library/grDevices/src/devWindows.cpp:1276
 msgid "Name of variable to save to"
 msgstr "Kintamojo pavadinimas, kurį norite įrašyti į"
 
-#: src/library/grDevices/src/devWindows.cpp:1581
+#: src/library/grDevices/src/devWindows.cpp:1582
 msgid "Copy to the clipboard as a metafile"
 msgstr "Kopijuoti į iškarpinę kaip metafailą"
 
-#: src/library/grDevices/src/devWindows.cpp:1599
-#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1600
+#: src/library/grDevices/src/devWindows.cpp:1611
 msgid "Stop locator"
 msgstr "Stabdyti ieškiklį"
 
-#: src/library/grDevices/src/devWindows.cpp:1609
-#: src/library/grDevices/src/devWindows.cpp:1613
+#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1614
 msgid "Stop"
 msgstr "Stabdyti"
 
-#: src/library/grDevices/src/devWindows.cpp:1615
+#: src/library/grDevices/src/devWindows.cpp:1616
 msgid "Continue"
 msgstr "Tęsti"
 
-#: src/library/grDevices/src/devWindows.cpp:1619
+#: src/library/grDevices/src/devWindows.cpp:1620
 msgid "Next"
 msgstr "Sekantis"
 
-#: src/library/grDevices/src/devWindows.cpp:1620
+#: src/library/grDevices/src/devWindows.cpp:1621
 msgid "Next plot"
 msgstr "Kitas brėžinys"
 
-#: src/library/grDevices/src/devWindows.cpp:1626
+#: src/library/grDevices/src/devWindows.cpp:1627
 msgid "Save as"
 msgstr "Įrašyti kaip"
 
-#: src/library/grDevices/src/devWindows.cpp:1635
-#: src/library/grDevices/src/devWindows.cpp:1637
-#: src/library/grDevices/src/devWindows.cpp:1639
+#: src/library/grDevices/src/devWindows.cpp:1636
+#: src/library/grDevices/src/devWindows.cpp:1638
+#: src/library/grDevices/src/devWindows.cpp:1640
 #, c-format
 msgid "%s quality..."
 msgstr "%s kokybė..."
 
-#: src/library/grDevices/src/devWindows.cpp:1641
+#: src/library/grDevices/src/devWindows.cpp:1642
 msgid "Copy to the clipboard"
 msgstr "Kopijuoti į iškarpinę"
 
-#: src/library/grDevices/src/devWindows.cpp:1642
+#: src/library/grDevices/src/devWindows.cpp:1643
 msgid "as a Bitmap\tCTRL+C"
 msgstr "kaip rastras\tCTRL+C"
 
-#: src/library/grDevices/src/devWindows.cpp:1643
+#: src/library/grDevices/src/devWindows.cpp:1644
 msgid "as a Metafile\tCTRL+W"
 msgstr "kaip metafailas\tCTRL+W"
 
-#: src/library/grDevices/src/devWindows.cpp:1648
+#: src/library/grDevices/src/devWindows.cpp:1649
 msgid "close Device"
 msgstr "užverti įrenginį"
 
-#: src/library/grDevices/src/devWindows.cpp:1649
+#: src/library/grDevices/src/devWindows.cpp:1650
 msgid "History"
 msgstr "Istorija"
 
-#: src/library/grDevices/src/devWindows.cpp:1650
+#: src/library/grDevices/src/devWindows.cpp:1651
 msgid "Recording"
 msgstr "Įrašymas"
 
-#: src/library/grDevices/src/devWindows.cpp:1653
+#: src/library/grDevices/src/devWindows.cpp:1654
 msgid "Add\tINS"
 msgstr "Įtraukti\tINS"
 
-#: src/library/grDevices/src/devWindows.cpp:1654
+#: src/library/grDevices/src/devWindows.cpp:1655
 msgid "Replace"
 msgstr "Pakeisti"
 
-#: src/library/grDevices/src/devWindows.cpp:1656
+#: src/library/grDevices/src/devWindows.cpp:1657
 msgid "Previous\tPgUp"
 msgstr "Ankstesnis\tPgUp"
 
-#: src/library/grDevices/src/devWindows.cpp:1657
+#: src/library/grDevices/src/devWindows.cpp:1658
 msgid "Next\tPgDown"
 msgstr "Sekantis\tPgDown"
 
-#: src/library/grDevices/src/devWindows.cpp:1659
+#: src/library/grDevices/src/devWindows.cpp:1660
 msgid "Save to variable..."
 msgstr "Įrašyti į kintamąjį..."
 
-#: src/library/grDevices/src/devWindows.cpp:1660
+#: src/library/grDevices/src/devWindows.cpp:1661
 msgid "Get from variable..."
 msgstr "Gauti iš kintamojo..."
 
-#: src/library/grDevices/src/devWindows.cpp:1662
+#: src/library/grDevices/src/devWindows.cpp:1663
 msgid "Clear history"
 msgstr "Valyti istoriją"
 
-#: src/library/grDevices/src/devWindows.cpp:1663
+#: src/library/grDevices/src/devWindows.cpp:1664
 msgid "Resize"
 msgstr "Keisti dydį"
 
-#: src/library/grDevices/src/devWindows.cpp:1664
+#: src/library/grDevices/src/devWindows.cpp:1665
 msgid "R mode"
 msgstr "R režimas"
 
-#: src/library/grDevices/src/devWindows.cpp:1666
+#: src/library/grDevices/src/devWindows.cpp:1667
 msgid "Fit to window"
 msgstr "Talpinti į langą"
 
-#: src/library/grDevices/src/devWindows.cpp:1668
+#: src/library/grDevices/src/devWindows.cpp:1669
 msgid "Fixed size"
 msgstr "Fiksuotas dydis"
 
-#: src/library/grDevices/src/devWindows.cpp:1675
+#: src/library/grDevices/src/devWindows.cpp:1676
 msgid "Copy as metafile"
 msgstr "Kopijuoti kaip metafailą"
 
-#: src/library/grDevices/src/devWindows.cpp:1677
+#: src/library/grDevices/src/devWindows.cpp:1678
 msgid "Copy as bitmap"
 msgstr "Kopijuoti kaip rastrą"
 
-#: src/library/grDevices/src/devWindows.cpp:1680
+#: src/library/grDevices/src/devWindows.cpp:1681
 msgid "Save as metafile..."
 msgstr "Įrašyti kaip metafailą..."
 
-#: src/library/grDevices/src/devWindows.cpp:1682
+#: src/library/grDevices/src/devWindows.cpp:1683
 msgid "Save as postscript..."
 msgstr "Įrašyti kaip postskriptą..."
 

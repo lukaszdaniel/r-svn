@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
-"PO-Revision-Date: 2025-05-24 12:33+0200\n"
+"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"PO-Revision-Date: 2025-06-07 13:35+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -30,7 +30,7 @@ msgstr "runmed(): niepoprawna wartość 'na.action'"
 
 #: Srunmed.cpp:279
 msgid "long vectors are not supported for algorithm = \"Turlach\""
-msgstr ""
+msgstr "długie wektory nie są wspierane dla algorytmu \"Turlach\""
 
 #: Srunmed.cpp:318
 #, c-format
@@ -100,12 +100,16 @@ msgid ""
 "Calling var(x) on a factor x is defunct.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
+"Wywołanie var(x) na czynniku x jest przestarzałe.\n"
+"  Użyj czegoś takiego jak 'all(duplicated(x)[-1L])', aby sprawdzić, czy jest to stały wektor."
 
 #: cov.cpp:638
 msgid ""
 "Calling var(x) on a factor x is deprecated and will become an error.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
+"Wywołanie var(x) na czynniku x jest przestarzałe i stanie się błędem.\n"
+"  Użyj czegoś takiego jak 'all(duplicated(x)[-1L])', aby sprawdzić, czy jest to stały wektor."
 
 #: cov.cpp:643
 msgid "'x' is NULL"
@@ -140,6 +144,8 @@ msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
+"tylko wywołania z jednym argumentem dla log() są wspierane;\n"
+"  może użyj log(x,a) = log(x)/log(a)"
 
 #: deriv.cpp:677
 #, c-format
@@ -269,7 +275,7 @@ msgstr ""
 
 #: fexact.cpp:1448
 msgid "integer overflow in exact computation"
-msgstr ""
+msgstr "przepełnienie całkowitoliczbowe w dokładnym obliczeniu"
 
 #: fexact.cpp:1460
 #, c-format
@@ -288,6 +294,8 @@ msgid ""
 "FEXACT error %d.\n"
 "%s"
 msgstr ""
+"Błąd FEXACT %d.\n"
+"%s"
 
 #: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:367
 #: model.cpp:375 optim.cpp:216
@@ -305,7 +313,7 @@ msgstr "błąd faktoryzacji szybkiej transformaty Fouriera"
 
 #: fourier.cpp:77 fourier.cpp:101 fourier.cpp:168
 msgid "fft too large"
-msgstr ""
+msgstr "fft jest zbyt duże"
 
 #: fourier.cpp:137
 msgid "vector-valued (multivariate) series required"
@@ -344,11 +352,11 @@ msgstr "nextn() = %llu > 2^53 może nie być dokładnie reprezentowalne w R (jak
 
 #: integrate.cpp:55
 msgid "evaluation of function gave a result of wrong length"
-msgstr ""
+msgstr "ewaluacja funkcji zwróciła wynik o niepoprawnej długości"
 
 #: integrate.cpp:59
 msgid "evaluation of function gave a result of wrong type"
-msgstr ""
+msgstr "ewaluacja funkcji zwróciła wynik o niepoprawnym typie"
 
 #: integrate.cpp:63
 msgid "non-finite function value"
@@ -366,20 +374,19 @@ msgstr "nieskończona wartość sum(y) == %g nie jest dozwolona"
 
 #: ks.cpp:516
 msgid "Smirnov statistic only defined for two groups"
-msgstr ""
+msgstr "Statystyka Smirnova jest zdefiniowana tylko dla dwóch grup"
 
 #: ks.cpp:521
 msgid "Sample size too large"
-msgstr ""
+msgstr "Rozmiar próby jest zbyt duży"
 
 #: ksmooth.cpp:69
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "tylko 2500 wierszy jest dozwolonych dla 'sm.method=\"spline\"'"
 
 #: line.cpp:149
-#, fuzzy
 msgid "insufficient observations"
-msgstr "brakuje wartości w ostatnich %d obserwacjach"
+msgstr "niewystarczająca liczba obserwacji"
 
 #: lm.cpp:55
 msgid "'x' is not a matrix"
@@ -574,7 +581,7 @@ msgstr "niepoprawna formuła modelu w funkcji 'ExtractVars()'"
 #: model.cpp:1284
 #, c-format
 msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
-msgstr ""
+msgstr "AllocT..Bit1(%s): Konieczne jest zwiększenie nwords do %d. To nie powinno się wydarzyć!\n"
 
 #: model.cpp:1610
 #, c-format
@@ -611,16 +618,18 @@ msgid "n must be at least two"
 msgstr "argument 'n' musi wynosić co najmniej 2"
 
 #: monoSpl.cpp:71
-msgid "Argument m must be numeric"
-msgstr "argument 'm' musi być liczbą"
+#, c-format
+msgid "'%s' must be numeric"
+msgstr "argument '%s' musi być liczbą"
 
 #: monoSpl.cpp:74
 msgid "length(m) must be at least two"
 msgstr "'length(m)' musi wynosić co najmniej dwa"
 
 #: monoSpl.cpp:76
-msgid "Argument Sx must be numeric vector one shorter than m[]"
-msgstr "Argument 'Sx' musi być wektorem liczbowym o jeden którszym niż 'm[]'"
+#, c-format
+msgid "'%s' must be numeric vector one shorter than m[]"
+msgstr "argument '%s' musi być wektorem liczbowym o jeden którszym niż 'm[]'"
 
 #: nls.cpp:101
 msgid "'control' must be a list"
@@ -943,7 +952,7 @@ msgstr "funkcja gradientu musi zwrócić wektor liczbowy o długości %d"
 
 #: port.cpp:342
 msgid "NA/NaN gradient evaluation"
-msgstr ""
+msgstr "wartość NA/NaN przy ewaluacji gradientu"
 
 #: port.cpp:350
 #, c-format
@@ -952,7 +961,7 @@ msgstr "Funkcja hesjana musi zwrócić kwadratową macierz liczbową rzędu %d"
 
 #: port.cpp:355
 msgid "NA/NaN Hessian evaluation"
-msgstr ""
+msgstr "wartość NA/NaN przy ewaluacji hessjanu"
 
 #: port.cpp:405
 msgid "'rho' must be an environment"
@@ -976,9 +985,8 @@ msgid "'lower' and 'upper' must be numeric (double) vectors"
 msgstr "'lower' oraz 'upper' muszą być (podwójnymi) wektorami liczbowymi"
 
 #: port.cpp:441
-#, fuzzy
 msgid "NA/NaN function evaluation"
-msgstr "niepoprawna wartość funkcji w funkcji 'zeroin()'"
+msgstr "wartość NA/NaN przy ewaluacji funkcji"
 
 #: port.cpp:484
 msgid "'getElement' applies only to named lists"
@@ -1068,7 +1076,7 @@ msgstr "niepoprawna końcowa reguła dla ruchomiej mediany 3: %d"
 
 #: splines.cpp:368
 msgid "inputs of different lengths"
-msgstr ""
+msgstr "argumenty są różnej długości"
 
 #: starma.cpp:357
 #, c-format
@@ -1076,9 +1084,9 @@ msgid "missing value in last %d observations"
 msgstr "brakuje wartości w ostatnich %d obserwacjach"
 
 #: swilk.cpp:209
-#, fuzzy, c-format
+#, c-format
 msgid "ifault=%d. This should not happen"
-msgstr "to nie powinno się wydarzyć"
+msgstr "ifault=%d. To nie powinno się wydarzyć"
 
 #~ msgid "'central' is NA, but must be TRUE or FALSE"
 #~ msgstr "argument 'central' ma wartość NA, a musi mieć wartość TRUE lub FALSE"

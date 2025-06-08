@@ -151,7 +151,7 @@ SEXP nsl(SEXP hostname)
     struct hostent *hp;
 
     if (!isString(hostname) || length(hostname) != 1)
-	error("%s", _("'hostname' must be a character vector of length 1"));
+	error(_("'%s' must be a character vector of length 1"), "hostname");
     name = translateChar(STRING_ELT(hostname, 0));
 
     hp = gethostbyname(name);

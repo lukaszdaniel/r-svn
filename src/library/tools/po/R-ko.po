@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-05 16:38\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1767,6 +1767,13 @@ msgstr ""
 msgid "empty 'data' directory"
 msgstr "비어있는 'data' 디렉토리입니다"
 
+#. R/utils.R: gettextf("error in inferior call:\n  %s", conditionMessage(val))
+#: R/utils.R:0
+msgid ""
+"error in inferior call:\n"
+"  %s"
+msgstr ""
+
 #. R/install.R: gettextf("error reading file '%s'", fd)
 #: R/install.R:0
 msgid "error reading file '%s'"
@@ -1828,6 +1835,11 @@ msgstr "디버그 기호 %s를 생성합니다"
 #. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
+msgstr ""
+
+#. R/utils.R: gettext("inferior call failed")
+#: R/utils.R:0
+msgid "inferior call failed"
 msgstr ""
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
@@ -2020,9 +2032,9 @@ msgid ""
 "%s"
 msgstr "파일 '%s'에 포함된 예제부분에서  파싱에러가 발생했습니다:"
 
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error(e))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error(e))
 #: R/QC.R:0
 msgid ""
 "parse error in file '%s':\n"

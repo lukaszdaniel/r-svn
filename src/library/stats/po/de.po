@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 13:29+0200\n"
 "PO-Revision-Date: 2022-04-13 14:54+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -618,7 +618,8 @@ msgid "n must be at least two"
 msgstr "n muss mindestes zwei sein"
 
 #: monoSpl.cpp:71
-msgid "Argument m must be numeric"
+#, fuzzy, c-format
+msgid "'%s' must be numeric"
 msgstr "Argument m muss numerisch sein"
 
 #: monoSpl.cpp:74
@@ -626,7 +627,8 @@ msgid "length(m) must be at least two"
 msgstr "length(m) nuss mindestens zwei sein"
 
 #: monoSpl.cpp:76
-msgid "Argument Sx must be numeric vector one shorter than m[]"
+#, fuzzy, c-format
+msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "Argument Sx muss ein numerischer Vektor einen Eintrag kürzer als m[] sein"
 
 #: nls.cpp:101

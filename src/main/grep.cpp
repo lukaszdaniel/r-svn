@@ -479,7 +479,7 @@ static void set_pcre_recursion_limit(pcre_extra **re_pe_ptr, const long limit)
 	    // this will be freed by pcre_free_study so cannot use R_Calloc
 	    re_pe = (pcre_extra *) calloc(1, sizeof(pcre_extra));
 	    if (!re_pe) {
-		warning("%s", _("allocation failure in set_pcre_recursion_limit"));
+		warning(_("allocation error in '%s'"), "set_pcre_recursion_limit");
 		return;
 	    }
 	    re_pe->flags = PCRE_EXTRA_MATCH_LIMIT_RECURSION;

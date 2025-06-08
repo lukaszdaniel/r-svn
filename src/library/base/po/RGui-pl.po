@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 19:22+0100\n"
+"POT-Creation-Date: 2025-06-06 16:56+0200\n"
 "PO-Revision-Date: 2025-02-07 19:23+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -15,51 +15,25 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-# src/gnuwin32/console.cpp: 1167
-# G_("Not enough memory")
-# src/gnuwin32/console.cpp: 1209
-# G_("Not enough memory")
 #: src/gnuwin32/console.cpp:1195 src/gnuwin32/console.cpp:1237
-#: src/gnuwin32/console.cpp:1767
+#: src/gnuwin32/console.cpp:1765
 msgid "Not enough memory"
 msgstr "Zbyt mało pamięci"
 
-# src/gnuwin32/console.cpp: 1256
-# G_("Insufficient memory: text not copied to the clipboard")
-# src/gnuwin32/console.cpp: 1260
-# G_("Insufficient memory: text not copied to the clipboard")
 #: src/gnuwin32/console.cpp:1284 src/gnuwin32/console.cpp:1288
 msgid "Insufficient memory: text not copied to the clipboard"
 msgstr "Za mało pamięci: tekst nie został skopiowany do schowka"
 
-# src/extra/graphapp/clipboard.cpp: 53
-# G_("Unable to open the clipboard")
-# src/extra/graphapp/clipboard.cpp: 79
-# G_("Unable to open the clipboard")
-# src/gnuwin32/console.cpp: 1296
-# G_("Unable to open the clipboard")
 #: src/gnuwin32/console.cpp:1326 src/extra/graphapp/clipboard.c:53
 #: src/extra/graphapp/clipboard.c:79
 msgid "Unable to open the clipboard"
 msgstr "Nie można otworzyć schowka"
 
-# src/gnuwin32/console.cpp: 1914
-# G_("Insufficient memory. Please close the console")
-#: src/gnuwin32/console.cpp:2131
+#: src/gnuwin32/console.cpp:2129
 msgid "Insufficient memory. Please close the console"
 msgstr "Za mało pamięci. Proszę zamknąć konsolę"
 
-# src/gnuwin32/console.cpp: 1968
-# sprintf(msg,
-# 		    G_("Font %s-%d-%d  not found.\nUsing system fixed font"),
-# 		    fontname, fontsty | FixedWidth, pointsize)
-# src/gnuwin32/console.cpp: 2022
-# G_("Font %s-%d-%d  not found.\nUsing system fixed font")
-# src/gnuwin32/preferences.cpp: 332
-# sprintf(msg,
-# 		    G_("Font %s-%d-%d  not found.\nUsing system fixed font"),
-# 		    fontname, fontsty | FixedWidth, pointsize)
-#: src/gnuwin32/console.cpp:2186 src/gnuwin32/console.cpp:2240
+#: src/gnuwin32/console.cpp:2184 src/gnuwin32/console.cpp:2238
 #: src/gnuwin32/preferences.cpp:347
 #, c-format
 msgid ""
@@ -69,29 +43,23 @@ msgstr ""
 "Czcionka %s-%d-%d nie została znaleziona.\n"
 "Korzystanie z czcionki systemowej"
 
-# src/gnuwin32/console.cpp: 2127
-# G_("Save selection to")
-#: src/gnuwin32/console.cpp:2343
+#: src/gnuwin32/console.cpp:2341
 msgid "Save selection to"
 msgstr "Zapisz zaznaczenie w"
 
-# src/gnuwin32/console.cpp: 2129
-# G_("Save console contents to")
-#: src/gnuwin32/console.cpp:2345
+#: src/gnuwin32/console.cpp:2343
 msgid "Save console contents to"
 msgstr "Zapisz zawartość konsoli w"
 
-#: src/gnuwin32/console.cpp:2452
+#: src/gnuwin32/console.cpp:2450
 msgid "Scrolling.\n"
 msgstr "Przewijanie.\n"
 
-#: src/gnuwin32/console.cpp:2453
+#: src/gnuwin32/console.cpp:2451
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 msgstr "  Klawiatura: PgUp, PgDown, Ctrl+Strzałki, Ctrl+Home, Ctrl+End,\n"
 
-# src/gnuwin32/console.cpp: 2230
-# G_("  Mouse: use the scrollbar(s).\n\n")
-#: src/gnuwin32/console.cpp:2454
+#: src/gnuwin32/console.cpp:2452
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
@@ -99,93 +67,91 @@ msgstr ""
 "  Myszka: użyj pasków przewijania.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2455
+#: src/gnuwin32/console.cpp:2453
 msgid "Editing.\n"
 msgstr "Edytowanie.\n"
 
-#: src/gnuwin32/console.cpp:2456
+#: src/gnuwin32/console.cpp:2454
 msgid "  Moving the cursor: \n"
 msgstr "  Przesuwanie kursora: \n"
 
-#: src/gnuwin32/console.cpp:2457
+#: src/gnuwin32/console.cpp:2455
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     Lewa strzałka lub Ctrl+B: przesuń wstecz o jeden znak;\n"
 
-#: src/gnuwin32/console.cpp:2458
+#: src/gnuwin32/console.cpp:2456
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
 msgstr "     Prawa strzałka lub Ctrl+F: przesuń do przodu o jeden znak;\n"
 
-#: src/gnuwin32/console.cpp:2459
+#: src/gnuwin32/console.cpp:2457
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     Home lub Ctrl+A: idź do początku linii;\n"
 
-#: src/gnuwin32/console.cpp:2460
+#: src/gnuwin32/console.cpp:2458
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     End lub Ctrl+E: idź do końca linii;\n"
 
-#: src/gnuwin32/console.cpp:2461
+#: src/gnuwin32/console.cpp:2459
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
 msgstr "  Historia: Strzałki Up oraz Down, Ctrl+P, Ctrl+N\n"
 
-#: src/gnuwin32/console.cpp:2462
+#: src/gnuwin32/console.cpp:2460
 msgid "  Deleting:\n"
 msgstr "  Kasowanie:\n"
 
-#: src/gnuwin32/console.cpp:2463
+#: src/gnuwin32/console.cpp:2461
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     Del lub Ctrl+D: usuń bieżący znak lub zaznaczenie;\n"
 
-#: src/gnuwin32/console.cpp:2464
+#: src/gnuwin32/console.cpp:2462
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     Backspace: usuń poprzedni znak;\n"
 
-#: src/gnuwin32/console.cpp:2465
+#: src/gnuwin32/console.cpp:2463
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
 msgstr "     Ctrl+Del lub Ctrl+K: usuń tekst od bieżącego znaku do końca linii.\n"
 
-#: src/gnuwin32/console.cpp:2466
+#: src/gnuwin32/console.cpp:2464
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     Ctrl+U: usuń cały tekst z bieżącej linii.\n"
 
-#: src/gnuwin32/console.cpp:2467
+#: src/gnuwin32/console.cpp:2465
 msgid "  Copy and paste.\n"
 msgstr "  Kopiuj i wklej.\n"
 
-#: src/gnuwin32/console.cpp:2468
+#: src/gnuwin32/console.cpp:2466
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
 msgstr "     Użyj myszki (z naciśniętym lewym przyciskiem myszki) by zaznaczyć (wybrać) tekst.\n"
 
-#: src/gnuwin32/console.cpp:2469
+#: src/gnuwin32/console.cpp:2467
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
 msgstr "     Użyj Shift+Del (lub Ctrl+C) by skopiować zaznaczony tekst do schowka i\n"
 
-#: src/gnuwin32/console.cpp:2470
+#: src/gnuwin32/console.cpp:2468
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr "     Shift+Ins (lub Ctrl+V lub Ctrl+Y) by wkleić zawartość schowka (jeśli jakaś jest)  \n"
 
-#: src/gnuwin32/console.cpp:2471
+#: src/gnuwin32/console.cpp:2469
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     do konsoli, Ctrl+X najpierw kopiuje potem wkleja\n"
 
-#: src/gnuwin32/console.cpp:2472
+#: src/gnuwin32/console.cpp:2470
 msgid "  Misc:\n"
 msgstr "  Różne:\n"
 
-#: src/gnuwin32/console.cpp:2473
+#: src/gnuwin32/console.cpp:2471
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     Ctrl+L: Wyczyść konsolę.\n"
 
-#: src/gnuwin32/console.cpp:2474
+#: src/gnuwin32/console.cpp:2472
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     Ctrl+O lub INS: Przełącz tryb nadpisywania: początkowo wyłączony.\n"
 
-#: src/gnuwin32/console.cpp:2475
+#: src/gnuwin32/console.cpp:2473
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     Ctrl+T: Zamień bieżący znak z tym po lewej.\n"
 
-# src/gnuwin32/console.cpp: 2252
-# G_("\nNote: Console is updated only when some input is required.\n")
-#: src/gnuwin32/console.cpp:2476
+#: src/gnuwin32/console.cpp:2474
 msgid ""
 "\n"
 "Note: Console is updated only when some input is required.\n"
@@ -193,9 +159,7 @@ msgstr ""
 "\n"
 "Uwaga: Konsola jest aktualizowana jedynie gdy jest wymagane jakieś wejście.\n"
 
-# src/gnuwin32/console.cpp: 2253
-# G_("  Use Ctrl+W to toggle this feature off/on.\n\n")
-#: src/gnuwin32/console.cpp:2477
+#: src/gnuwin32/console.cpp:2475
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
@@ -203,9 +167,7 @@ msgstr ""
 "  Użyj Ctrl+W by przełączać tę funkcjonalność na wył./wł.\n"
 "\n"
 
-# src/gnuwin32/console.cpp: 2254
-# G_("Use ESC to stop the interpreter.\n\n")
-#: src/gnuwin32/console.cpp:2478
+#: src/gnuwin32/console.cpp:2476
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -213,9 +175,7 @@ msgstr ""
 "Użyj ESC aby zatrzymać interpretera.\n"
 "\n"
 
-# src/gnuwin32/console.cpp: 2255
-# G_("TAB starts completion of the current word.\n\n")
-#: src/gnuwin32/console.cpp:2479
+#: src/gnuwin32/console.cpp:2477
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -223,70 +183,42 @@ msgstr ""
 "TAB uzupełnia bieżące słowo.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2480
+#: src/gnuwin32/console.cpp:2478
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "Standardowe klawisze skrótu mogą być użyte by przełączyć się do\n"
 
-# src/gnuwin32/console.cpp: 2257
-# G_("graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)")
-#: src/gnuwin32/console.cpp:2481
+#: src/gnuwin32/console.cpp:2479
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "urządzenia graficznego (Ctrl+Tab lub Ctrl+F6 w MDI, Alt+Tab w SDI)"
 
-# src/gnuwin32/editor.cpp: 88
-# G_("R Editor")
-# src/gnuwin32/editor.cpp: 90
-# G_("R Editor")
 #: src/gnuwin32/editor.cpp:93 src/gnuwin32/editor.cpp:95
 msgid "R Editor"
 msgstr "Edytor R"
 
-# src/gnuwin32/editor.cpp: 119
-# G_("unable to open file %s for reading")
 #: src/gnuwin32/editor.cpp:164
 #, c-format
 msgid "unable to open file %s for reading"
 msgstr "nie można otworzyć pliku %s do odczytu"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #: src/gnuwin32/editor.cpp:189
 #, c-format
 msgid "Could not read from file '%s'"
 msgstr "Nie można odczytać z pliku '%s'"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #: src/gnuwin32/editor.cpp:222
 #, c-format
 msgid "Could not save file '%s'"
 msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/editor.cpp: 182
-# G_("Save script as")
 #: src/gnuwin32/editor.cpp:242
 msgid "Save script as"
 msgstr "Zapisz skrypt jako"
 
-# src/gnuwin32/rui.cpp: 1074
-# G_("Open script")
-# src/gnuwin32/editor.cpp: 375
-# G_("Open script")
-# src/gnuwin32/editor.cpp: 692
-# G_("Open script")
-# src/gnuwin32/pager.cpp: 431
-# G_("Open script")
 #: src/gnuwin32/editor.cpp:440 src/gnuwin32/editor.cpp:766
 #: src/gnuwin32/pager.cpp:438 src/gnuwin32/rui.cpp:1150
 msgid "Open script"
 msgstr "Otwórz skrypt"
 
-# src/gnuwin32/editor.cpp: 498
-# G_("No RGui console to paste to")
-# src/gnuwin32/pager.cpp: 185
-# G_("No RGui console to paste to")
-# src/gnuwin32/pager.cpp: 205
-# G_("No RGui console to paste to")
 #: src/gnuwin32/editor.cpp:572 src/gnuwin32/pager.cpp:192
 #: src/gnuwin32/pager.cpp:212
 msgid "No RGui console to paste to"
@@ -332,402 +264,190 @@ msgstr "Jeśli nie ma zaznaczenia, to uruchomi bieżącą linię i przesunie\n"
 msgid "the cursor by one line.\n"
 msgstr "kursor o jedną linię.\n"
 
-# src/gnuwin32/editor.cpp: 623
-# GN_("Run line or selection")
-# src/gnuwin32/editor.cpp: 700
-# G_("Run line or selection")
-# src/gnuwin32/editor.cpp: 761
-# G_("Run line or selection")
 #: src/gnuwin32/editor.cpp:697 src/gnuwin32/editor.cpp:774
 #: src/gnuwin32/editor.cpp:832
 msgid "Run line or selection"
 msgstr "Uruchom wiersz lub zaznaczenie"
 
-# src/gnuwin32/editor.cpp: 625
-# GN_("Undo")
-# src/gnuwin32/editor.cpp: 746
-# G_("Undo")
 #: src/gnuwin32/editor.cpp:699 src/gnuwin32/editor.cpp:817
 msgid "Undo"
 msgstr "Cofnij"
 
-# src/gnuwin32/editor.cpp: 627
-# GN_("Cut")
-# src/gnuwin32/editor.cpp: 749
-# G_("Cut")
 #: src/gnuwin32/editor.cpp:701 src/gnuwin32/editor.cpp:820
 msgid "Cut"
 msgstr "Wytnij"
 
-# src/gnuwin32/rui.cpp: 857
-# GN_("Copy")
-# src/gnuwin32/rui.cpp: 1086
-# G_("Copy")
-# src/gnuwin32/rui.cpp: 1142
-# G_("Copy")
-# src/gnuwin32/editor.cpp: 628
-# GN_("Copy")
-# src/gnuwin32/editor.cpp: 751
-# G_("Copy")
-# src/gnuwin32/pager.cpp: 305
-# GN_("Copy")
-# src/gnuwin32/pager.cpp: 478
-# G_("Copy")
 #: src/gnuwin32/editor.cpp:702 src/gnuwin32/editor.cpp:822
 #: src/gnuwin32/pager.cpp:312 src/gnuwin32/pager.cpp:485
 #: src/gnuwin32/rui.cpp:921 src/gnuwin32/rui.cpp:1162 src/gnuwin32/rui.cpp:1218
 msgid "Copy"
 msgstr "Kopiuj"
 
-# src/gnuwin32/rui.cpp: 858
-# GN_("Paste")
-# src/gnuwin32/rui.cpp: 1090
-# G_("Paste")
-# src/gnuwin32/rui.cpp: 1143
-# G_("Paste")
-# src/gnuwin32/editor.cpp: 629
-# GN_("Paste")
-# src/gnuwin32/editor.cpp: 753
-# G_("Paste")
 #: src/gnuwin32/editor.cpp:703 src/gnuwin32/editor.cpp:824
 #: src/gnuwin32/rui.cpp:922 src/gnuwin32/rui.cpp:1166 src/gnuwin32/rui.cpp:1219
 msgid "Paste"
 msgstr "Wklej"
 
-# src/gnuwin32/editor.cpp: 630
-# GN_("Delete")
-# src/gnuwin32/editor.cpp: 755
-# G_("Delete")
 #: src/gnuwin32/editor.cpp:704 src/gnuwin32/editor.cpp:826
 msgid "Delete"
 msgstr "Usuń"
 
-# src/gnuwin32/rui.cpp: 864
-# GN_("Select all")
-# src/gnuwin32/rui.cpp: 1147
-# G_("Select all")
-# src/gnuwin32/editor.cpp: 632
-# GN_("Select all")
-# src/gnuwin32/editor.cpp: 757
-# G_("Select all")
-# src/gnuwin32/pager.cpp: 308
-# GN_("Select all")
-# src/gnuwin32/pager.cpp: 484
-# G_("Select all")
 #: src/gnuwin32/editor.cpp:706 src/gnuwin32/editor.cpp:828
 #: src/gnuwin32/pager.cpp:315 src/gnuwin32/pager.cpp:491
 #: src/gnuwin32/rui.cpp:928 src/gnuwin32/rui.cpp:1223
 msgid "Select all"
 msgstr "Zaznacz wszystko"
 
-# src/gnuwin32/editor.cpp: 696
-# G_("Save script")
 #: src/gnuwin32/editor.cpp:770
 msgid "Save script"
 msgstr "Zapisz skrypt"
 
-# src/gnuwin32/editor.cpp: 704
-# G_("Return focus to Console")
-# src/gnuwin32/pager.cpp: 451
-# G_("Return focus to Console")
-# src/library/grDevices/src/devWindows.cpp: 1593
-# G_("Return focus to Console")
 #: src/gnuwin32/editor.cpp:778 src/gnuwin32/pager.cpp:458
-#: src/library/grDevices/src/devWindows.cpp:1593
+#: src/library/grDevices/src/devWindows.cpp:1594
 msgid "Return focus to Console"
 msgstr "Ustaw fokus z powrotem na konsolę"
 
-# src/gnuwin32/editor.cpp: 707
-# G_("Print script")
 #: src/gnuwin32/editor.cpp:781
 msgid "Print script"
 msgstr "Drukuj skrypt"
 
-# src/gnuwin32/rui.cpp: 1102
-# G_("Print")
-# src/gnuwin32/editor.cpp: 709
-# G_("Print")
-# src/gnuwin32/pager.cpp: 446
-# G_("Print")
-# src/library/grDevices/src/devWindows.cpp: 1587
-# G_("Print")
 #: src/gnuwin32/editor.cpp:783 src/gnuwin32/pager.cpp:453
-#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1587
+#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1588
 msgid "Print"
 msgstr "Drukuj"
 
-# src/gnuwin32/rui.cpp: 1120
-# G_("File")
-# src/gnuwin32/editor.cpp: 727
-# G_("File")
-# src/gnuwin32/pager.cpp: 467
-# G_("File")
-# src/library/grDevices/src/devWindows.cpp: 1625
-# G_("File")
-# src/library/tcltk/R/tkGUI.R: 38
-# gettext("File")
-# src/library/utils/src/windows/dataentry.cpp: 1790
-# G_("File")
-# src/library/utils/tests/Sweave-tst.R: 26
-# stop("File", file, "does not exist in", getwd())
-# src/library/utils/tests/Sweave-tst.R: 30
-# stop("File", texF, "does not exist in", getwd())
 #: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:474
-#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1828
-#: src/library/grDevices/src/devWindows.cpp:1625
+#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1819
+#: src/library/grDevices/src/devWindows.cpp:1626
 msgid "File"
 msgstr "Plik"
 
-# src/gnuwin32/rui.cpp: 1122
-# G_("New script")
-# src/gnuwin32/editor.cpp: 728
-# G_("New script")
-# src/gnuwin32/pager.cpp: 468
-# G_("New script")
 #: src/gnuwin32/editor.cpp:802 src/gnuwin32/pager.cpp:475
 #: src/gnuwin32/rui.cpp:1198
 msgid "New script"
 msgstr "Nowy skrypt"
 
-# src/gnuwin32/rui.cpp: 1123
-# G_("Open script...")
-# src/gnuwin32/editor.cpp: 730
-# G_("Open script...")
-# src/gnuwin32/pager.cpp: 469
-# G_("Open script...")
 #: src/gnuwin32/editor.cpp:804 src/gnuwin32/pager.cpp:476
 #: src/gnuwin32/rui.cpp:1199
 msgid "Open script..."
 msgstr "Otwórz skrypt..."
 
-# src/gnuwin32/editor.cpp: 732
-# G_("Save")
 #: src/gnuwin32/editor.cpp:806
 msgid "Save"
 msgstr "Zapisz"
 
-# src/gnuwin32/editor.cpp: 734
-# G_("Save as...")
 #: src/gnuwin32/editor.cpp:808
 msgid "Save as..."
 msgstr "Zapisz jako..."
 
-# src/gnuwin32/rui.cpp: 1136
-# G_("Print...")
-# src/gnuwin32/editor.cpp: 737
-# G_("Print...")
-# src/gnuwin32/pager.cpp: 470
-# G_("Print...")
-# src/library/grDevices/src/devWindows.cpp: 1688
-# G_("Print...")
 #: src/gnuwin32/editor.cpp:811 src/gnuwin32/pager.cpp:477
-#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1646
-#: src/library/grDevices/src/devWindows.cpp:1688
+#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1647
+#: src/library/grDevices/src/devWindows.cpp:1689
 msgid "Print..."
 msgstr "Drukuj..."
 
-# src/gnuwin32/editor.cpp: 740
-# G_("Close script")
 #: src/gnuwin32/editor.cpp:814
 msgid "Close script"
 msgstr "Zamknij skrypt"
 
-# src/gnuwin32/rui.cpp: 1141
-# G_("Edit")
-# src/gnuwin32/editor.cpp: 745
-# G_("Edit")
-# src/gnuwin32/pager.cpp: 477
-# G_("Edit")
-# src/library/utils/src/windows/dataentry.cpp: 1796
-# G_("Edit")
 #: src/gnuwin32/editor.cpp:816 src/gnuwin32/pager.cpp:484
-#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1834
+#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1825
 msgid "Edit"
 msgstr "Edycja"
 
-# src/gnuwin32/rui.cpp: 1148
-# G_("Clear console")
-# src/gnuwin32/editor.cpp: 759
-# G_("Clear console")
 #: src/gnuwin32/editor.cpp:830 src/gnuwin32/rui.cpp:1224
 msgid "Clear console"
 msgstr "Wyczyść konsolę"
 
-# src/gnuwin32/editor.cpp: 763
-# G_("Run all")
 #: src/gnuwin32/editor.cpp:834
 msgid "Run all"
 msgstr "Uruchom wszystko"
 
-# src/gnuwin32/editor.cpp: 766
-# G_("Find...")
 #: src/gnuwin32/editor.cpp:837
 msgid "Find..."
 msgstr "Znajdź..."
 
-# src/gnuwin32/editor.cpp: 768
-# G_("Replace...")
 #: src/gnuwin32/editor.cpp:839
 msgid "Replace..."
 msgstr "Zamień..."
 
-# src/gnuwin32/rui.cpp: 1152
-# G_("GUI preferences...")
-# src/gnuwin32/editor.cpp: 771
-# G_("GUI preferences...")
 #: src/gnuwin32/editor.cpp:842 src/gnuwin32/rui.cpp:1228
 msgid "GUI preferences..."
 msgstr "Preferencje GUI..."
 
-# src/gnuwin32/rui.cpp: 1184
-# G_("Help")
-# src/gnuwin32/editor.cpp: 781
-# G_("Help")
-# src/library/tcltk/R/tkGUI.R: 41
-# gettext("Help")
-# src/library/utils/src/windows/dataentry.cpp: 1697
-# GN_("Help")
-# src/library/utils/src/windows/dataentry.cpp: 1807
-# G_("Help")
 #: src/gnuwin32/editor.cpp:852 src/gnuwin32/rui.cpp:1260
-#: src/library/utils/src/windows/dataentry.cpp:1735
-#: src/library/utils/src/windows/dataentry.cpp:1845
+#: src/library/utils/src/windows/dataentry.cpp:1726
+#: src/library/utils/src/windows/dataentry.cpp:1836
 msgid "Help"
 msgstr "Pomoc"
 
-# src/gnuwin32/editor.cpp: 782
-# G_("Editor")
 #: src/gnuwin32/editor.cpp:853
 msgid "Editor"
 msgstr "Edytor"
 
-# src/gnuwin32/editor.cpp: 841
-# G_("Maximum number of editors reached")
 #: src/gnuwin32/editor.cpp:912
 msgid "Maximum number of editors reached"
 msgstr "Osiągnięto maksymalną liczbę edytorów"
 
-# src/gnuwin32/pager.cpp: 519
-# G_("Unable to create pager window")
 #: src/gnuwin32/editor.cpp:917
 msgid "Unable to create editor window"
 msgstr "Nie można utworzyć okna edytora"
 
-# src/gnuwin32/editor.cpp: 854
-# G_("Untitled")
 #: src/gnuwin32/editor.cpp:925
 msgid "Untitled"
 msgstr "Bez tytułu"
 
-# src/gnuwin32/rui.cpp: 1222
-# G_("Select file")
-# src/gnuwin32/extra.cpp: 823
-# G_("Select file")
 #: src/gnuwin32/extra.cpp:1131
 msgid "Select file"
 msgstr "Wybierz plik"
 
-# src/gnuwin32/pager.cpp: 89
-# G_("Error opening file")
 #: src/gnuwin32/pager.cpp:80 src/gnuwin32/pager.cpp:96
 msgid "Error opening file"
 msgstr "Błąd podczas otwierania pliku"
 
-# src/gnuwin32/pager.cpp: 96
-# G_("Insufficient memory to display file in internal pager")
 #: src/gnuwin32/pager.cpp:85 src/gnuwin32/pager.cpp:103
 msgid "Insufficient memory to display file in internal pager"
 msgstr "Brak wystarczającej pamięci aby wyświetlić plik w wewnętrznej stronie"
 
-# src/gnuwin32/rui.cpp: 236
-# G_("No selection")
-# src/gnuwin32/rui.cpp: 263
-# G_("No selection")
-# src/gnuwin32/pager.cpp: 177
-# G_("No selection")
-# src/gnuwin32/pager.cpp: 189
-# G_("No selection")
-# src/gnuwin32/pager.cpp: 209
-# G_("No selection")
 #: src/gnuwin32/pager.cpp:184 src/gnuwin32/pager.cpp:196
 #: src/gnuwin32/pager.cpp:216 src/gnuwin32/rui.cpp:294 src/gnuwin32/rui.cpp:321
 msgid "No selection"
 msgstr "Brak zaznaczenia"
 
-# src/gnuwin32/pager.cpp: 306
-# GN_("Paste to console")
-# src/gnuwin32/pager.cpp: 436
-# G_("Paste to console")
-# src/gnuwin32/pager.cpp: 480
-# G_("Paste to console")
 #: src/gnuwin32/pager.cpp:313 src/gnuwin32/pager.cpp:443
 #: src/gnuwin32/pager.cpp:487
 msgid "Paste to console"
 msgstr "Wklej do konsoli"
 
-# src/gnuwin32/pager.cpp: 307
-# GN_("Paste commands to console")
-# src/gnuwin32/pager.cpp: 441
-# G_("Paste commands to console")
-# src/gnuwin32/pager.cpp: 482
-# G_("Paste commands to console")
 #: src/gnuwin32/pager.cpp:314 src/gnuwin32/pager.cpp:448
 #: src/gnuwin32/pager.cpp:489
 msgid "Paste commands to console"
 msgstr "Wklej polecenia do konsoli"
 
-# src/gnuwin32/rui.cpp: 867
-# GN_("Stay on top")
-# src/gnuwin32/pager.cpp: 310
-# GN_("Stay on top")
-# src/library/grDevices/src/devWindows.cpp: 1685
-# G_("Stay on top")
-# src/library/utils/src/windows/dataentry.cpp: 1703
-# GN_("Stay on top")
 #: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:931
-#: src/library/utils/src/windows/dataentry.cpp:1741
-#: src/library/grDevices/src/devWindows.cpp:1685
+#: src/library/utils/src/windows/dataentry.cpp:1732
+#: src/library/grDevices/src/devWindows.cpp:1686
 msgid "Stay on top"
 msgstr "Zawsze na wierzchu"
 
-# src/gnuwin32/pager.cpp: 312
-# GN_("Close")
-# src/gnuwin32/pager.cpp: 475
-# G_("Close")
-# src/library/utils/src/windows/dataentry.cpp: 1705
-# GN_("Close")
-# src/library/utils/src/windows/dataentry.cpp: 1792
-# G_("Close")
 #: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:482
-#: src/library/utils/src/windows/dataentry.cpp:1743
-#: src/library/utils/src/windows/dataentry.cpp:1830
+#: src/library/utils/src/windows/dataentry.cpp:1734
+#: src/library/utils/src/windows/dataentry.cpp:1821
 msgid "Close"
 msgstr "Zamknij"
 
-# src/gnuwin32/rui.cpp: 1137
-# G_("Save to File...")
-# src/gnuwin32/pager.cpp: 472
-# G_("Save to File...")
 #: src/gnuwin32/pager.cpp:479 src/gnuwin32/rui.cpp:1213
 msgid "Save to File..."
 msgstr "Zapisz do pliku..."
 
-# src/gnuwin32/rui.cpp: 1154
-# G_("View")
-# src/gnuwin32/pager.cpp: 487
-# G_("View")
 #: src/gnuwin32/pager.cpp:494 src/gnuwin32/rui.cpp:1230
 msgid "View"
 msgstr "Widok"
 
-# src/gnuwin32/pager.cpp: 519
-# G_("Unable to create pager window")
 #: src/gnuwin32/pager.cpp:526
 msgid "Unable to create pager window"
 msgstr "Nie można utworzyć okna strony"
 
-# src/gnuwin32/preferences.cpp: 302
-# G_("The overall console properties cannot be changed\non a running console.\n\nSave the preferences and restart Rgui to apply them.\n")
 #: src/gnuwin32/preferences.cpp:312
 msgid ""
 "The overall console properties cannot be changed\n"
@@ -740,8 +460,6 @@ msgstr ""
 "\n"
 "Zapisz ustawienia oraz zrestartuj Rgui aby je zastosować.\n"
 
-# src/gnuwin32/preferences.cpp: 306
-# G_("The language for menus cannot be changed on a\n running console.\n\nSave the preferences and restart Rgui to apply to menus.\n")
 #: src/gnuwin32/preferences.cpp:316
 msgid ""
 "The language for menus cannot be changed on a\n"
@@ -754,14 +472,10 @@ msgstr ""
 "\n"
 "Zapisz ustawienia oraz zrestartuj Rgui by zastosować zmiany do menu.\n"
 
-# src/gnuwin32/preferences.cpp: 371
-# G_("Changes in pager size will not apply to any open pagers")
 #: src/gnuwin32/preferences.cpp:385
 msgid "Changes in pager size will not apply to any open pagers"
 msgstr "Zmiany w rozmiarze strony nie zostaną zastosowane w żadnych otwartych stronach"
 
-# src/gnuwin32/preferences.cpp: 377
-# G_("Do not change pager type if any pager is open\nProceed?")
 #: src/gnuwin32/preferences.cpp:391
 msgid ""
 "Do not change pager type if any pager is open\n"
@@ -770,590 +484,356 @@ msgstr ""
 "Nie zmieniaj typu strony jeśli jakakolwiek strona jest otwarta\n"
 "Kontynuować?"
 
-# src/gnuwin32/preferences.cpp: 410
-# G_("Select directory for file 'Rconsole'")
 #: src/gnuwin32/preferences.cpp:425
 msgid "Select directory for file 'Rconsole'"
 msgstr "Wybierz katalog dla pliku 'Rconsole'"
 
-# src/gnuwin32/preferences.cpp: 503
-# G_("Select 'Rconsole' file")
 #: src/gnuwin32/preferences.cpp:520
 msgid "Select 'Rconsole' file"
 msgstr "Wybierz plik 'Rconsole'"
 
-# src/gnuwin32/preferences.cpp: 688
-# G_("Ignored '%s' at line %d of file %s")
 #: src/gnuwin32/preferences.cpp:708
 #, c-format
 msgid "Ignored '%s' at line %d of file %s"
 msgstr "Zignorowano '%s' w linii %d pliku %s"
 
-# src/gnuwin32/preferences.cpp: 789
-# G_("Rgui Configuration Editor")
 #: src/gnuwin32/preferences.cpp:809
 msgid "Rgui Configuration Editor"
 msgstr "Edytor konfiguracji Rgui"
 
-# src/gnuwin32/rui.cpp: 139
-# G_("Select file to source")
 #: src/gnuwin32/rui.cpp:209
 msgid "Select file to source"
 msgstr "Wybierz plik źródłowy"
 
-# src/gnuwin32/rui.cpp: 160
-# G_("Select image to load")
 #: src/gnuwin32/rui.cpp:227
 msgid "Select image to load"
 msgstr "Wybierz obraz do załadowania"
 
-# src/gnuwin32/rui.cpp: 175
-# G_("Save image in")
 #: src/gnuwin32/rui.cpp:237
 msgid "Save image in"
 msgstr "Zapisz obraz w"
 
-# src/gnuwin32/rui.cpp: 189
-# G_("Load history from")
 #: src/gnuwin32/rui.cpp:249
 msgid "Load history from"
 msgstr "Załaduj historię z"
 
-# src/gnuwin32/rui.cpp: 198
-# G_("Save history in")
 #: src/gnuwin32/rui.cpp:256
 msgid "Save history in"
 msgstr "Zapisz historię w"
 
-# src/gnuwin32/rui.cpp: 245
-# G_("No text available")
-# src/gnuwin32/rui.cpp: 254
-# G_("No text available")
 #: src/gnuwin32/rui.cpp:303 src/gnuwin32/rui.cpp:312
 msgid "No text available"
 msgstr "Brak dostępnego tekstu"
 
-# src/gnuwin32/rui.cpp: 303
-# G_("Name of data frame or matrix")
 #: src/gnuwin32/rui.cpp:358
 msgid "Name of data frame or matrix"
 msgstr "Nazwa ramki danych lub macierzy"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #: src/gnuwin32/rui.cpp:365
 #, c-format
 msgid "'%s' cannot be found"
 msgstr "'%s' nie może zostać znalezione"
 
-# src/gnuwin32/rui.cpp: 449
-# G_("Are you sure?")
 #: src/gnuwin32/rui.cpp:510
 msgid "Are you sure?"
 msgstr "Czy na pewno?"
 
-# src/gnuwin32/rui.cpp: 544
-# G_("Help on")
 #: src/gnuwin32/rui.cpp:605
 msgid "Help on"
 msgstr "Pomoc na temat"
 
-# src/gnuwin32/rui.cpp: 600
-# G_("Search help")
 #: src/gnuwin32/rui.cpp:661
 msgid "Search help"
 msgstr "Przeszukaj pomoc"
 
-# src/gnuwin32/rui.cpp: 615
-# G_("Search for words in help list archives and documentation")
 #: src/gnuwin32/rui.cpp:675
 msgid "Search for words in help list archives and documentation"
 msgstr "Szukaj słów w liście archiwum pomocy lub dokumentacji"
 
-# src/gnuwin32/rui.cpp: 630
-# G_("Apropos")
 #: src/gnuwin32/rui.cpp:690
 msgid "Apropos"
 msgstr "À propos"
 
-# src/gnuwin32/rui.cpp: 853
-# G_("Can only drag-and-drop .R, .RData and .rda files")
 #: src/gnuwin32/rui.cpp:917
 msgid "Can only drag-and-drop .R, .RData and .rda files"
 msgstr "Można przeciągać jedynie pliki .R, .RData oraz .rda"
 
-# src/gnuwin32/rui.cpp: 859
-# GN_("Paste commands only")
-# src/gnuwin32/rui.cpp: 1144
-# G_("Paste commands only")
 #: src/gnuwin32/rui.cpp:923 src/gnuwin32/rui.cpp:1220
 msgid "Paste commands only"
 msgstr "Wklej tylko polecenia"
 
-# src/gnuwin32/rui.cpp: 860
-# GN_("Copy and paste")
-# src/gnuwin32/rui.cpp: 1094
-# G_("Copy and paste")
 #: src/gnuwin32/rui.cpp:924 src/gnuwin32/rui.cpp:1170
 msgid "Copy and paste"
 msgstr "Kopiuj i wklej"
 
-# src/gnuwin32/rui.cpp: 862
-# GN_("Clear window")
 #: src/gnuwin32/rui.cpp:926
 msgid "Clear window"
 msgstr "Wyczyść okno"
 
-# src/gnuwin32/rui.cpp: 866
-# GN_("Buffered output")
-# src/gnuwin32/rui.cpp: 1167
-# G_("Buffered output")
 #: src/gnuwin32/rui.cpp:930 src/gnuwin32/rui.cpp:1243
 msgid "Buffered output"
 msgstr "Buforowanie wyjścia"
 
-# src/gnuwin32/rui.cpp: 906
-# G_("Packages")
-# src/library/tcltk/R/tkGUI.R: 40
-# gettext("Packages")
 #: src/gnuwin32/rui.cpp:970
 msgid "Packages"
 msgstr "Pakiety"
 
-# src/gnuwin32/rui.cpp: 907
-# G_("Load package...")
 #: src/gnuwin32/rui.cpp:971
 msgid "Load package..."
 msgstr "Załaduj pakiet..."
 
-# src/gnuwin32/rui.cpp: 909
-# G_("Set CRAN mirror...")
 #: src/gnuwin32/rui.cpp:973
 msgid "Set CRAN mirror..."
 msgstr "Ustaw serwer lustrzany CRAN..."
 
-# src/gnuwin32/rui.cpp: 911
-# G_("Select repositories...")
 #: src/gnuwin32/rui.cpp:975
 msgid "Select repositories..."
 msgstr "Wybierz repozytoria..."
 
-# src/gnuwin32/rui.cpp: 913
-# G_("Install package(s)...")
 #: src/gnuwin32/rui.cpp:977
 msgid "Install package(s)..."
 msgstr "Zainstaluj pakiet(y)..."
 
-# src/gnuwin32/rui.cpp: 915
-# G_("Update packages...")
 #: src/gnuwin32/rui.cpp:979
 msgid "Update packages..."
 msgstr "Zaktualizuj pakiety..."
 
-# src/gnuwin32/rui.cpp: 918
-# G_("Install package(s) from local zip files...")
 #: src/gnuwin32/rui.cpp:982
 msgid "Install package(s) from local files..."
 msgstr "Zainstaluj pakiet(y) z lokalnych plików..."
 
-# src/gnuwin32/rui.cpp: 942
-# G_("FAQ on R")
 #: src/gnuwin32/rui.cpp:1006
 msgid "FAQ on R"
 msgstr "FAQ na temat R"
 
-# src/gnuwin32/rui.cpp: 944
-# G_("FAQ on R for &Windows")
 #: src/gnuwin32/rui.cpp:1008
 msgid "FAQ on R for &Windows"
 msgstr "FAQ na temat R dla &Windows"
 
-# src/gnuwin32/rui.cpp: 950
-# G_("Manuals (in PDF)")
-# src/gnuwin32/rui.cpp: 953
-# G_("Manuals (in PDF)")
 #: src/gnuwin32/rui.cpp:1014 src/gnuwin32/rui.cpp:1017
 msgid "Manuals (in PDF)"
 msgstr "Podręczniki (w PDF)"
 
-# src/gnuwin32/rui.cpp: 983
-# G_("R functions (text)...")
 #: src/gnuwin32/rui.cpp:1047
 msgid "R functions (text)..."
 msgstr "Funkcje R (tekst)..."
 
-# src/gnuwin32/rui.cpp: 985
-# G_("Html help")
 #: src/gnuwin32/rui.cpp:1049
 msgid "Html help"
 msgstr "Pomoc HTML"
 
-# src/gnuwin32/rui.cpp: 987
-# G_("Search help...")
 #: src/gnuwin32/rui.cpp:1051
 msgid "Search help..."
 msgstr "Przeszukaj pomoc..."
 
-# src/gnuwin32/rui.cpp: 992
-# G_("Apropos...")
 #: src/gnuwin32/rui.cpp:1056
 msgid "Apropos..."
 msgstr "À propos..."
 
-# src/gnuwin32/rui.cpp: 994
-# G_("R Project home page")
 #: src/gnuwin32/rui.cpp:1058
 msgid "R Project home page"
 msgstr "Strona domowa projektu R"
 
-# src/gnuwin32/rui.cpp: 995
-# G_("CRAN home page")
 #: src/gnuwin32/rui.cpp:1059
 msgid "CRAN home page"
 msgstr "Strona domowa CRAN"
 
-# src/gnuwin32/rui.cpp: 997
-# G_("About")
 #: src/gnuwin32/rui.cpp:1061
 msgid "About"
 msgstr "O programie"
 
-# src/extra/graphapp/gmenus.cpp: 52
-# G_("Windows")
-# src/gnuwin32/rui.cpp: 1006
-# G_("Windows")
 #: src/gnuwin32/rui.cpp:1070 src/extra/graphapp/gmenus.c:52
 msgid "Windows"
 msgstr "Okna"
 
-# src/extra/graphapp/gmenus.cpp: 53
-# G_("Cascade")
-# src/gnuwin32/rui.cpp: 1007
-# G_("Cascade")
 #: src/gnuwin32/rui.cpp:1071 src/extra/graphapp/gmenus.c:53
 msgid "Cascade"
 msgstr "Kaskada"
 
-# src/extra/graphapp/gmenus.cpp: 54
-# G_("Tile &Horizontally")
-# src/gnuwin32/rui.cpp: 1008
-# G_("Tile &Horizontally")
 #: src/gnuwin32/rui.cpp:1072 src/extra/graphapp/gmenus.c:54
 msgid "Tile &Horizontally"
 msgstr "Ułóż &poziomo"
 
-# src/extra/graphapp/gmenus.cpp: 55
-# G_("Tile &Vertically")
-# src/gnuwin32/rui.cpp: 1009
-# G_("Tile &Vertically")
 #: src/gnuwin32/rui.cpp:1073 src/extra/graphapp/gmenus.c:55
 msgid "Tile &Vertically"
 msgstr "Ułóż pionowo"
 
-# src/gnuwin32/rui.cpp: 1010
-# G_("Minimize group")
 #: src/gnuwin32/rui.cpp:1074
 msgid "Minimize group"
 msgstr "Zminimalizuj grupę"
 
-# src/gnuwin32/rui.cpp: 1011
-# G_("Restore group")
 #: src/gnuwin32/rui.cpp:1075
 msgid "Restore group"
 msgstr "Przywróć grupę"
 
-# src/gnuwin32/rui.cpp: 1078
-# G_("Load workspace")
 #: src/gnuwin32/rui.cpp:1154
 msgid "Load workspace"
 msgstr "Załaduj obszar roboczy"
 
-# src/gnuwin32/rui.cpp: 1082
-# G_("Save workspace")
-# src/library/tcltk/R/tkGUI.R: 50
-# gettext("Save workspace")
 #: src/gnuwin32/rui.cpp:1158
 msgid "Save workspace"
 msgstr "Zapisz obszar roboczy"
 
-# src/gnuwin32/rui.cpp: 1098
-# G_("Stop current computation")
 #: src/gnuwin32/rui.cpp:1174
 msgid "Stop current computation"
 msgstr "Przerwij bieżące obliczenia"
 
-# src/gnuwin32/rui.cpp: 1121
-# G_("Source R code...")
 #: src/gnuwin32/rui.cpp:1197
 msgid "Source R code..."
 msgstr "Źródłowy kod R..."
 
-# src/gnuwin32/rui.cpp: 1124
-# G_("Display file(s)...")
 #: src/gnuwin32/rui.cpp:1200
 msgid "Display file(s)..."
 msgstr "Wyświetl plik(i)..."
 
-# src/gnuwin32/rui.cpp: 1126
-# G_("Load Workspace...")
 #: src/gnuwin32/rui.cpp:1202
 msgid "Load Workspace..."
 msgstr "Załaduj obszar roboczy..."
 
-# src/gnuwin32/rui.cpp: 1127
-# G_("Save Workspace...")
 #: src/gnuwin32/rui.cpp:1203
 msgid "Save Workspace..."
 msgstr "Zapisz obszar roboczy..."
 
-# src/gnuwin32/rui.cpp: 1129
-# G_("Load History...")
 #: src/gnuwin32/rui.cpp:1205
 msgid "Load History..."
 msgstr "Załaduj historię..."
 
-# src/gnuwin32/rui.cpp: 1131
-# G_("Save History...")
 #: src/gnuwin32/rui.cpp:1207
 msgid "Save History..."
 msgstr "Zapisz historię..."
 
-# src/gnuwin32/rui.cpp: 1134
-# G_("Change dir...")
 #: src/gnuwin32/rui.cpp:1210
 msgid "Change dir..."
 msgstr "Zmień katalog..."
 
-# src/gnuwin32/rui.cpp: 1139
-# G_("Exit")
-# src/gnuwin32/editor.cpp: 743
-# G_("Exit")
 #: src/gnuwin32/rui.cpp:1215
 msgid "Exit"
 msgstr "Wyjście"
 
-# src/gnuwin32/rui.cpp: 1146
-# G_("Copy and Paste")
 #: src/gnuwin32/rui.cpp:1222
 msgid "Copy and Paste"
 msgstr "Kopiuj i wklej"
 
-# src/gnuwin32/rui.cpp: 1150
-# G_("Data editor...")
 #: src/gnuwin32/rui.cpp:1226
 msgid "Data editor..."
 msgstr "Edytor danych..."
 
-# src/gnuwin32/rui.cpp: 1155
-# G_("Toolbar")
 #: src/gnuwin32/rui.cpp:1231
 msgid "Toolbar"
 msgstr "Pasek narzędzi"
 
-# src/gnuwin32/rui.cpp: 1156
-# G_("Statusbar")
 #: src/gnuwin32/rui.cpp:1232
 msgid "Statusbar"
 msgstr "Pasek stanu"
 
-# src/gnuwin32/rui.cpp: 1160
-# G_("Misc")
 #: src/gnuwin32/rui.cpp:1236
 msgid "Misc"
 msgstr "Różne"
 
-# src/gnuwin32/rui.cpp: 1161
-# G_("Stop current computation           \tESC")
 #: src/gnuwin32/rui.cpp:1237
 msgid "Stop current computation           \tESC"
 msgstr "Przerwij bieżące obliczenia           \tESC"
 
-# src/gnuwin32/rui.cpp: 1163
-# G_("Stop all computations")
 #: src/gnuwin32/rui.cpp:1239
 msgid "Stop all computations"
 msgstr "Zatrzymaj wszystkie obliczenia"
 
-# src/gnuwin32/rui.cpp: 1165
-# G_("Break to debugger")
 #: src/gnuwin32/rui.cpp:1241
 msgid "Break to debugger"
 msgstr "Przerwij by przejść do debuggera"
 
-# src/gnuwin32/rui.cpp: 1168
-# G_("Word completion")
 #: src/gnuwin32/rui.cpp:1244
 msgid "Word completion"
 msgstr "Uzupełnianie słów"
 
-# src/gnuwin32/rui.cpp: 1170
-# G_("Filename completion")
 #: src/gnuwin32/rui.cpp:1246
 msgid "Filename completion"
 msgstr "Uzupełnianie nazw plików"
 
-# src/gnuwin32/rui.cpp: 1177
-# G_("List objects")
 #: src/gnuwin32/rui.cpp:1253
 msgid "List objects"
 msgstr "Wylistuj obiekty"
 
-# src/gnuwin32/rui.cpp: 1178
-# G_("Remove all objects")
 #: src/gnuwin32/rui.cpp:1254
 msgid "Remove all objects"
 msgstr "Usuń wszystkie obiekty"
 
-# src/gnuwin32/rui.cpp: 1179
-# G_("List search &path")
 #: src/gnuwin32/rui.cpp:1255
 msgid "List search &path"
 msgstr "Ścieżka &przeszukiwania listy"
 
-# src/gnuwin32/rui.cpp: 1185
-# G_("Console")
 #: src/gnuwin32/rui.cpp:1261
 msgid "Console"
 msgstr "Konsola"
 
-# src/gnuwin32/rui.cpp: 1361
-# G_("'menu' is limited to 500 bytes")
 #: src/gnuwin32/rui.cpp:1322
 msgid "'mname' is limited to 1000 bytes"
 msgstr "'mname' jest ograniczone do 1000 bajtów"
 
-# src/gnuwin32/rui.cpp: 1371
-# G_("base menu does not exist")
 #: src/gnuwin32/rui.cpp:1367
 #, c-format
 msgid "menu %s does not exist"
 msgstr "menu %s nie istnieje"
 
-# src/gnuwin32/rui.cpp: 1361
-# G_("'menu' is limited to 500 bytes")
 #: src/gnuwin32/rui.cpp:1419
 msgid "'menu' is limited to 500 bytes"
 msgstr "'menu' jest ograniczone do 500 bajtów"
 
-# src/gnuwin32/rui.cpp: 1371
-# G_("base menu does not exist")
 #: src/gnuwin32/rui.cpp:1429
 msgid "base menu does not exist"
 msgstr "bazowe menu nie istnieje"
 
-# src/gnuwin32/rui.cpp: 1429
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1452
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1457
-# G_("failed to allocate char storage")
 #: src/gnuwin32/rui.cpp:1444
 msgid "failed to allocate menu"
 msgstr "nie można przydzielić pamięci dla menu"
 
-# src/gnuwin32/rui.cpp: 1403
-# G_("menu + item is limited to 1000 bytes")
-# src/gnuwin32/rui.cpp: 1527
-# G_("menu + item is limited to 1000 bytes")
 #: src/gnuwin32/rui.cpp:1461 src/gnuwin32/rui.cpp:1585
 msgid "menu + item is limited to 1000 bytes"
 msgstr "menu + pozycja są łącznie ograniczone do 1000 bajtów"
 
-# src/gnuwin32/rui.cpp: 1371
-# G_("base menu does not exist")
 #: src/gnuwin32/rui.cpp:1469 src/gnuwin32/rui.cpp:1552
 msgid "menu does not exist"
 msgstr "menu nie istnieje"
 
-# src/gnuwin32/rui.cpp: 1429
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1452
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1457
-# G_("failed to allocate char storage")
 #: src/gnuwin32/rui.cpp:1487 src/gnuwin32/rui.cpp:1510
 #: src/gnuwin32/rui.cpp:1515
 msgid "failed to allocate char storage"
 msgstr "nie można przydzielić pamięci dla znaku"
 
-# src/gnuwin32/rui.cpp: 1429
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1452
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1457
-# G_("failed to allocate char storage")
 #: src/gnuwin32/rui.cpp:1523
 msgid "failed to allocate menuitem"
 msgstr "nie można przydzielić pamięci dla pozycji menu"
 
-# src/extra/graphapp/dialogs.cpp: 900
-# G_("\"%s\" not found")
-# src/extra/graphapp/dialogs.cpp: 906
-# G_("\"%s\" not found")
 #: src/gnuwin32/rui.cpp:1575
 msgid "menu not found"
 msgstr "menu nie zostało znalezione"
 
-# src/gnuwin32/rui.cpp: 1371
-# G_("base menu does not exist")
 #: src/gnuwin32/rui.cpp:1593
 msgid "menu or item does not exist"
 msgstr "menu lub pozycja nie istnieje"
 
-# src/gnuwin32/system.cpp: 442
-# G_("Save workspace image?")
 #: src/gnuwin32/system.cpp:590
 msgid "Save workspace image?"
 msgstr "Zapisać obraz obszaru roboczego?"
 
-# src/extra/graphapp/clipboard.cpp: 69
-# G_("Insufficient memory: cell not copied to the clipboard")
-# src/extra/graphapp/clipboard.cpp: 73
-# G_("Insufficient memory: cell not copied to the clipboard")
 #: src/extra/graphapp/clipboard.c:69 src/extra/graphapp/clipboard.c:73
 msgid "Insufficient memory: cell not copied to the clipboard"
 msgstr "Brak wystarczającej pamięci: komórka nie została skopiowana do schowka"
 
-# src/extra/graphapp/dialogs.cpp: 147
-# G_("Question")
-# src/extra/graphapp/dialogs.cpp: 164
-# G_("Question")
-# src/extra/graphapp/dialogs.cpp: 181
-# G_("Question")
 #: src/extra/graphapp/dialogs.c:144 src/extra/graphapp/dialogs.c:161
 #: src/extra/graphapp/dialogs.c:178
 msgid "Question"
 msgstr "Pytanie"
 
-# src/extra/graphapp/dialogs.cpp: 202
-# G_(" Change working directory to:")
 #: src/extra/graphapp/dialogs.c:249
 msgid " Change working directory to:"
 msgstr " Zmień katalog roboczy na:"
 
-# src/extra/graphapp/dialogs.cpp: 205
-# G_("Unable to set '%s' as working directory")
 #: src/extra/graphapp/dialogs.c:251
 #, c-format
 msgid "Unable to set '%s' as working directory"
 msgstr "Nie można ustawić '%s' jako katalogu roboczego"
 
-# src/extra/graphapp/dialogs.cpp: 602
-# G_("Cancel")
-# src/extra/graphapp/dialogs.cpp: 620
-# G_("Cancel")
-# src/extra/graphapp/dialogs.cpp: 626
-# G_("Cancel")
-# src/extra/graphapp/dialogs.cpp: 725
-# G_("Cancel")
-# src/extra/graphapp/dialogs.cpp: 739
-# G_("Cancel")
-# src/extra/graphapp/dialogs.cpp: 745
-# G_("Cancel")
-# src/library/tcltk/R/utils.R: 50
-# gettext("Cancel")
-# src/library/utils/src/windows/widgets.cpp: 125
-# G_("Cancel")
 #: src/extra/graphapp/dialogs.c:705 src/extra/graphapp/dialogs.c:723
 #: src/extra/graphapp/dialogs.c:729 src/extra/graphapp/dialogs.c:839
 #: src/extra/graphapp/dialogs.c:853 src/extra/graphapp/dialogs.c:859
@@ -1361,261 +841,119 @@ msgstr "Nie można ustawić '%s' jako katalogu roboczego"
 msgid "Cancel"
 msgstr "Anuluj"
 
-# src/extra/graphapp/dialogs.cpp: 622
-# G_("OK")
-# src/extra/graphapp/dialogs.cpp: 741
-# G_("OK")
-# src/library/tools/R/testing.R: 270
-# message(" OK")
-# src/library/tools/R/testing.R: 281
-# message(" OK")
-# src/library/tools/R/testing.R: 319
-# message(" OK")
-# src/library/tools/R/testing.R: 407
-# message(" OK")
-# src/library/tools/R/testing.R: 531
-# message(" OK")
-# src/library/tools/R/testing.R: 551
-# message("OK")
-# src/library/tools/R/testing.R: 562
-# message("OK")
-# src/library/tcltk/R/utils.R: 49
-# gettext("OK")
-# src/library/parallel/tests/Master.R: 21
-# message(" OK")
-# src/library/utils/src/windows/widgets.cpp: 124
-# G_("OK")
 #: src/extra/graphapp/dialogs.c:725 src/extra/graphapp/dialogs.c:855
 #: src/library/utils/src/windows/widgets.cpp:135
 msgid "OK"
 msgstr "OK"
 
-# src/extra/graphapp/dialogs.cpp: 733
-# G_("User")
 #: src/extra/graphapp/dialogs.c:847
 msgid "User"
 msgstr "Użytkownik"
 
-# src/extra/graphapp/dialogs.cpp: 734
-# G_("Password")
-# src/extra/graphapp/dialogs.cpp: 736
-# (_("Password"), rect(10, h*4, tw+4, h*2+2), AlignLeft)
 #: src/extra/graphapp/dialogs.c:848
 msgid "Password"
 msgstr "Hasło"
 
-# src/extra/graphapp/dialogs.cpp: 900
-# G_("\"%s\" not found")
-# src/extra/graphapp/dialogs.cpp: 906
-# G_("\"%s\" not found")
 #: src/extra/graphapp/dialogs.c:1034 src/extra/graphapp/dialogs.c:1040
 #, c-format
 msgid "\"%s\" not found"
 msgstr "nie znaleziono \"%s\""
 
-# src/extra/graphapp/gmenus.cpp: 56
-# G_("Arrange Icons")
 #: src/extra/graphapp/gmenus.c:56
 msgid "Arrange Icons"
 msgstr "Rozmieść ikony"
 
-# src/extra/graphapp/clipboard.cpp: 53
-# G_("Unable to open the clipboard")
-# src/extra/graphapp/clipboard.cpp: 79
-# G_("Unable to open the clipboard")
-# src/gnuwin32/console.cpp: 1296
-# G_("Unable to open the clipboard")
 #: src/extra/graphapp/metafile.c:55
 msgid "Unable to save metafile to the clipboard"
 msgstr "Nie można zapisać metapliku do schowka"
 
-# src/gnuwin32/editor.cpp: 846
-# G_("Unable to create editor window")
 #: src/extra/graphapp/metafile.c:117
 msgid "Unable to create metafile"
 msgstr "Nie można utworzyć metapliku"
 
-# src/gnuwin32/pager.cpp: 96
-# G_("Insufficient memory to display file in internal pager")
 #: src/extra/graphapp/metafile.c:122
 msgid "Insufficient memory to create metafile"
 msgstr "Brak wystarczającej pamięci aby utworzyć metaplik"
 
-# src/gnuwin32/pager.cpp: 519
-# G_("Unable to create pager window")
 #: src/extra/graphapp/printer.c:111
 msgid "Unable to choose printer"
 msgstr "Nie można wybrać drukarki"
 
-# src/gnuwin32/pager.cpp: 96
-# G_("Insufficient memory to display file in internal pager")
 #: src/extra/graphapp/printer.c:139
 msgid "Insufficient memory for new printer"
 msgstr "Brak wystarczającej pamięci dla nowej drukarki"
 
-# src/gnuwin32/pager.cpp: 519
-# G_("Unable to create pager window")
 #: src/extra/graphapp/printer.c:175
 msgid "Unable to start the print job"
 msgstr "Nie można rozpocząć zadania drukowania"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
-#: src/library/utils/src/windows/dataentry.cpp:248
-#: src/library/utils/src/windows/dataentry.cpp:1879
-#: src/library/utils/src/windows/dataentry.cpp:1882
-#: src/library/utils/src/windows/dataentry.cpp:1912
+#: src/library/utils/src/windows/dataentry.cpp:245
+#: src/library/utils/src/windows/dataentry.cpp:1870
+#: src/library/utils/src/windows/dataentry.cpp:1873
+#: src/library/utils/src/windows/dataentry.cpp:1903
 msgid "invalid argument"
 msgstr "niepoprawny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
-#: src/library/utils/src/windows/dataentry.cpp:292
+#: src/library/utils/src/windows/dataentry.cpp:289
 msgid "invalid type for value"
 msgstr "niepoprawny typ dla wartości"
 
-# src/library/utils/src/windows/dataentry.cpp: 281
-# G_("Data Editor")
-#: src/library/utils/src/windows/dataentry.cpp:303
+#: src/library/utils/src/windows/dataentry.cpp:300
 msgid "Data Editor"
 msgstr "Edytor danych"
 
-# src/modules/X11/dataentry.cpp: 439
-# error("dataentry: internal memory problem")
-# src/library/utils/src/windows/dataentry.cpp: 331
-# error(G_("dataentry: internal memory problem"))
-#: src/library/utils/src/windows/dataentry.cpp:353
-#: src/library/utils/src/windows/dataentry.cpp:1872
+#: src/library/utils/src/windows/dataentry.cpp:350
+#: src/library/utils/src/windows/dataentry.cpp:1863
 msgid "dataentry: internal memory problem"
 msgstr "dataentry: wewnętrzny problem pamięci"
 
-# src/modules/X11/dataentry.cpp: 915
-# error("dataentry: internal memory error")
-# src/library/utils/src/windows/dataentry.cpp: 634
-# error(G_("dataentry: internal memory error"))
-# src/library/utils/src/windows/dataentry.cpp: 1221
-# error(G_("dataentry: internal memory error"))
-#: src/library/utils/src/windows/dataentry.cpp:657
-#: src/library/utils/src/windows/dataentry.cpp:1259
+#: src/library/utils/src/windows/dataentry.cpp:653
+#: src/library/utils/src/windows/dataentry.cpp:1250
 msgid "dataentry: internal memory error"
 msgstr "dataentry: wewnętrzny błąd pamięci"
 
-# src/modules/X11/dataentry.cpp: 1032
-# error("internal type error in dataentry")
-# src/modules/X11/dataentry.cpp: 1045
-# error("internal type error in dataentry")
-# src/library/utils/src/windows/dataentry.cpp: 757
-# error(G_("internal type error in dataentry"))
-# src/library/utils/src/windows/dataentry.cpp: 770
-# error(G_("internal type error in dataentry"))
-#: src/library/utils/src/windows/dataentry.cpp:780
-#: src/library/utils/src/windows/dataentry.cpp:793
+#: src/library/utils/src/windows/dataentry.cpp:776
+#: src/library/utils/src/windows/dataentry.cpp:789
 msgid "internal type error in dataentry"
 msgstr "wewnętrzny błąd typu przy wprowadzaniu danych"
 
-# src/modules/X11/dataentry.cpp: 1145
-# warning("dataentry: parse error on string")
-# src/library/utils/src/windows/dataentry.cpp: 852
-# warning(G_("dataentry: parse error on string"))
-#: src/library/utils/src/windows/dataentry.cpp:888
+#: src/library/utils/src/windows/dataentry.cpp:880
 msgid "dataentry: parse error on string"
 msgstr "dataentry: błąd składni w ciągu znaków"
 
-# src/modules/X11/dataentry.cpp: 1345
-# warning("dataentry: expression too long")
-# src/modules/X11/dataentry.cpp: 1755
-# warning("dataentry: expression too long")
-# src/library/utils/src/windows/dataentry.cpp: 995
-# warning(G_("dataentry: expression too long"))
-#: src/library/utils/src/windows/dataentry.cpp:1033
+#: src/library/utils/src/windows/dataentry.cpp:1025
 msgid "dataentry: expression too long"
 msgstr "dataentry: wyrażenie jest zbyt długie"
 
-# src/library/utils/src/windows/dataentry.cpp: 1472
-# G_("column names cannot be blank")
-#: src/library/utils/src/windows/dataentry.cpp:1509
+#: src/library/utils/src/windows/dataentry.cpp:1500
 msgid "column names cannot be blank"
 msgstr "nazwy kolumn nie mogą być puste"
 
-# src/library/utils/src/windows/dataentry.cpp: 1518
-# G_("Variable editor")
-#: src/library/utils/src/windows/dataentry.cpp:1555
+#: src/library/utils/src/windows/dataentry.cpp:1546
 msgid "Variable editor"
 msgstr "Edytor zmiennych"
 
-# src/library/grDevices/src/devWindows.cpp: 1249
-# G_("Variable name")
-#: src/library/utils/src/windows/dataentry.cpp:1560
+#: src/library/utils/src/windows/dataentry.cpp:1551
 msgid "variable name"
 msgstr "Nazwa zmiennej"
 
-# src/modules/X11/devX11.cpp: 3235
-# error(_("invalid '%s' argument"), "type")
-# src/modules/X11/devX11.cpp: 3262
-# error(_("invalid '%s' argument"), "type")
-# src/library/grDevices/src/cairo/cairoBM.cpp: 475
-# error(_("invalid '%s' argument"), "type")
-# src/library/utils/src/windows/dataentry.cpp: 1525
-# G_("type")
-# src/main/dotcode.cpp: 485
-# error(_("invalid '%s' argument"), "type")
-# src/main/attrib.cpp: 196
-# error(_("invalid '%s' argument"), "type")
-# src/main/character.cpp: 139
-# error(_("invalid '%s' argument"), "type")
-# src/main/character.cpp: 142
-# error(_("invalid '%s' argument"), "type")
-# src/main/character.cpp: 203
-# error(_("invalid '%s' argument"), "type")
-# src/main/connections.cpp: 4551
-# error(_("invalid '%s' argument"), "type")
-# src/main/connections.cpp: 4581
-# error(_("invalid '%s' argument"), "type")
-#: src/library/utils/src/windows/dataentry.cpp:1562
+#: src/library/utils/src/windows/dataentry.cpp:1553
 msgid "type"
 msgstr "typ"
 
-# src/library/utils/src/windows/dataentry.cpp: 1639
-# G_("Cell width(s)")
-#: src/library/utils/src/windows/dataentry.cpp:1677
+#: src/library/utils/src/windows/dataentry.cpp:1668
 msgid "Cell width(s)"
 msgstr "Szerokość(i) komórki"
 
-# src/library/utils/src/windows/dataentry.cpp: 1645
-# G_("Cell width")
-#: src/library/utils/src/windows/dataentry.cpp:1683
+#: src/library/utils/src/windows/dataentry.cpp:1674
 msgid "Cell width"
 msgstr "Szerokość komórki"
 
-# src/library/base/man/gettext.Rd: 87
-# ngettext(length(miss), "variable", "variables")
-# src/library/utils/src/windows/dataentry.cpp: 1648
-# G_("variable")
-#: src/library/utils/src/windows/dataentry.cpp:1686
+#: src/library/utils/src/windows/dataentry.cpp:1677
 msgid "variable"
 msgstr "zmienna"
 
-# src/library/utils/src/windows/dataentry.cpp: 1691
-# GN_("Navigation.\n  Keyboard: cursor keys move selection\n\tTab move right, Shift+Tab moves left\n\tPgDn or Ctrl+F: move down one screenful\n\tPgUp or Ctrl+B: move up one screenful\n\tHome: move to (1,1) cell\n\tEnd: show last rows of last column.\n   Mouse: left-click in a cell, use the scrollbar(s).\n\nEditing.\n  Type in the currently hightlighted cell\n  Double-click in a cell for an editable field\n\nMisc.\n  Ctrl-L redraws the screen, auto-resizing the columns\n  Ctrl-C copies selected cell\n  Ctrl-V pastes to selected cell\n  Right-click menu for copy, paste, autosize currently selected column\n\n")
-#: src/library/utils/src/windows/dataentry.cpp:1729
+#: src/library/utils/src/windows/dataentry.cpp:1720
 msgid ""
 "Navigation.\n"
 "  Keyboard: cursor keys move selection\n"
@@ -1657,1670 +995,590 @@ msgstr ""
 "  Kliknij prawym przyciskiem myszy aby skopiować, wkleić automatycznie wstawić aktualnie zaznaczoną kolumnę\n"
 "\n"
 
-# src/library/utils/src/windows/dataentry.cpp: 1699
-# GN_("Copy selected cell")
-#: src/library/utils/src/windows/dataentry.cpp:1737
+#: src/library/utils/src/windows/dataentry.cpp:1728
 msgid "Copy selected cell"
 msgstr "Kopiuj zaznaczoną komórkę"
 
-# src/library/utils/src/windows/dataentry.cpp: 1700
-# GN_("Paste to selected cell")
-#: src/library/utils/src/windows/dataentry.cpp:1738
+#: src/library/utils/src/windows/dataentry.cpp:1729
 msgid "Paste to selected cell"
 msgstr "Wklej do zaznaczonej komórki"
 
-# src/library/utils/src/windows/dataentry.cpp: 1701
-# GN_("Autosize column")
-#: src/library/utils/src/windows/dataentry.cpp:1739
+#: src/library/utils/src/windows/dataentry.cpp:1730
 msgid "Autosize column"
 msgstr "Automatycznie dopasuj kolumnę"
 
-# src/library/utils/src/windows/dataentry.cpp: 1797
-# G_("Copy  \tCTRL+C")
-#: src/library/utils/src/windows/dataentry.cpp:1835
+#: src/library/utils/src/windows/dataentry.cpp:1826
 msgid "Copy  \tCTRL+C"
 msgstr "Kopiuj  \tCTRL+C"
 
-# src/library/utils/src/windows/dataentry.cpp: 1799
-# G_("Paste \tCTRL+V")
-#: src/library/utils/src/windows/dataentry.cpp:1837
+#: src/library/utils/src/windows/dataentry.cpp:1828
 msgid "Paste \tCTRL+V"
 msgstr "Wklej \tCTRL+V"
 
-# src/library/utils/src/windows/dataentry.cpp: 1801
-# G_("Delete\tDEL")
-#: src/library/utils/src/windows/dataentry.cpp:1839
+#: src/library/utils/src/windows/dataentry.cpp:1830
 msgid "Delete\tDEL"
 msgstr "Usuń\tDEL"
 
-# src/library/utils/src/windows/dataentry.cpp: 1804
-# G_("Cell widths ...")
-#: src/library/utils/src/windows/dataentry.cpp:1842
+#: src/library/utils/src/windows/dataentry.cpp:1833
 msgid "Cell widths ..."
 msgstr "Szerokości komórki..."
 
-# src/library/utils/src/windows/dataentry.cpp: 1808
-# G_("Data editor")
-#: src/library/utils/src/windows/dataentry.cpp:1846
+#: src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Data editor"
 msgstr "Edytor danych"
 
-# src/gnuwin32/editor.cpp: 846
-# G_("Unable to create editor window")
-#: src/library/utils/src/windows/dataentry.cpp:1919
+#: src/library/utils/src/windows/dataentry.cpp:1910
 msgid "unable to start data viewer"
 msgstr "Nie można utworzyć przeglądarki danych"
 
-# src/library/grDevices/src/devWindows.cpp: 932
-# G_("Portable network graphics file")
-#: src/library/grDevices/src/devWindows.cpp:937
+#: src/library/grDevices/src/devWindows.cpp:938
 msgid "Portable network graphics file"
 msgstr "Plik PNG"
 
-# src/library/grDevices/src/devWindows.cpp: 935
-# G_("Windows bitmap file")
-#: src/library/grDevices/src/devWindows.cpp:940
+#: src/library/grDevices/src/devWindows.cpp:941
 msgid "Windows bitmap file"
 msgstr "Plik bitmapy systemu Windows"
 
-# src/library/grDevices/src/devWindows.cpp: 938
-# G_("TIFF file")
-#: src/library/grDevices/src/devWindows.cpp:943
+#: src/library/grDevices/src/devWindows.cpp:944
 msgid "TIFF file"
 msgstr "Plik TIFF"
 
-# src/library/grDevices/src/devWindows.cpp: 941
-# G_("Jpeg file")
-#: src/library/grDevices/src/devWindows.cpp:946
+#: src/library/grDevices/src/devWindows.cpp:947
 msgid "Jpeg file"
 msgstr "Plik jpeg"
 
-# src/library/grDevices/src/devWindows.cpp: 963
-# G_("Postscript file")
-#: src/library/grDevices/src/devWindows.cpp:967
+#: src/library/grDevices/src/devWindows.cpp:968
 msgid "Postscript file"
 msgstr "Plik Postscript"
 
-# src/library/grDevices/src/devWindows.cpp: 975
-# G_("PDF file")
-#: src/library/grDevices/src/devWindows.cpp:978
+#: src/library/grDevices/src/devWindows.cpp:979
 msgid "PDF file"
 msgstr "Plik PDF"
 
-# src/library/grDevices/src/devWindows.cpp: 987
-# G_("Enhanced metafiles")
-#: src/library/grDevices/src/devWindows.cpp:990
+#: src/library/grDevices/src/devWindows.cpp:991
 msgid "Enhanced metafiles"
 msgstr "Ulepszone metapliki"
 
-# src/library/grDevices/src/devWindows.cpp: 990
-# G_("file path selected is too long: only 512 bytes are allowed")
-# src/library/grDevices/src/devWindows.cpp: 3435
-# G_("file path selected is too long: only 512 bytes are allowed")
-#: src/library/grDevices/src/devWindows.cpp:993
+#: src/library/grDevices/src/devWindows.cpp:994
 #: src/library/grDevices/src/devWindows.cpp:3528
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "wybrana ścieżka do pliku jest zbyt długa: dozwolone jest tylko 512 bajtów"
 
-# src/library/grDevices/src/devWindows.cpp: 1201
-# G_("No plot to replace!")
-#: src/library/grDevices/src/devWindows.cpp:1203
+#: src/library/grDevices/src/devWindows.cpp:1204
 msgid "No plot to replace!"
 msgstr "Brak wykresu do zastąpienia!"
 
-# src/library/grDevices/src/devWindows.cpp: 1249
-# G_("Variable name")
-#: src/library/grDevices/src/devWindows.cpp:1253
+#: src/library/grDevices/src/devWindows.cpp:1254
 msgid "Variable name"
 msgstr "Nazwa zmiennej"
 
-# src/library/grDevices/src/devWindows.cpp: 1256
-# G_("Variable doesn't exist or doesn't contain any plots!")
-#: src/library/grDevices/src/devWindows.cpp:1262
+#: src/library/grDevices/src/devWindows.cpp:1263
 msgid "Variable doesn't contain any plots!"
 msgstr "Zmienna nie zawiera żadnych wykresów!"
 
-# src/library/grDevices/src/devWindows.cpp: 1272
-# G_("Name of variable to save to")
-#: src/library/grDevices/src/devWindows.cpp:1275
+#: src/library/grDevices/src/devWindows.cpp:1276
 msgid "Name of variable to save to"
 msgstr "Nazwa zmiennej do której zapisać"
 
-# src/library/grDevices/src/devWindows.cpp: 1581
-# G_("Copy to the clipboard as a metafile")
-#: src/library/grDevices/src/devWindows.cpp:1581
+#: src/library/grDevices/src/devWindows.cpp:1582
 msgid "Copy to the clipboard as a metafile"
 msgstr "Kopiuj do schowka jako metaplik"
 
-# src/library/grDevices/src/devWindows.cpp: 1599
-# G_("Stop locator")
-# src/library/grDevices/src/devWindows.cpp: 1610
-# G_("Stop locator")
-#: src/library/grDevices/src/devWindows.cpp:1599
-#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1600
+#: src/library/grDevices/src/devWindows.cpp:1611
 msgid "Stop locator"
 msgstr "Zatrzymaj lokalizator"
 
-# src/library/grDevices/src/devWindows.cpp: 1609
-# G_("Stop")
-# src/library/grDevices/src/devWindows.cpp: 1613
-# G_("Stop")
-#: src/library/grDevices/src/devWindows.cpp:1609
-#: src/library/grDevices/src/devWindows.cpp:1613
+#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1614
 msgid "Stop"
 msgstr "Stop"
 
-# src/library/grDevices/src/devWindows.cpp: 1615
-# G_("Continue")
-#: src/library/grDevices/src/devWindows.cpp:1615
+#: src/library/grDevices/src/devWindows.cpp:1616
 msgid "Continue"
 msgstr "Kontynuuj"
 
-# src/library/grDevices/src/devWindows.cpp: 1619
-# G_("Next")
-#: src/library/grDevices/src/devWindows.cpp:1619
+#: src/library/grDevices/src/devWindows.cpp:1620
 msgid "Next"
 msgstr "Następny"
 
-# src/library/grDevices/src/devWindows.cpp: 1620
-# G_("Next plot")
-#: src/library/grDevices/src/devWindows.cpp:1620
+#: src/library/grDevices/src/devWindows.cpp:1621
 msgid "Next plot"
 msgstr "Następny wykres"
 
-# src/library/grDevices/src/devWindows.cpp: 1626
-# G_("Save as")
-#: src/library/grDevices/src/devWindows.cpp:1626
+#: src/library/grDevices/src/devWindows.cpp:1627
 msgid "Save as"
 msgstr "Zapisz jako"
 
-# src/library/grDevices/src/devWindows.cpp: 1635
-# G_("%s quality...")
-# src/library/grDevices/src/devWindows.cpp: 1637
-# G_("%s quality...")
-# src/library/grDevices/src/devWindows.cpp: 1639
-# G_("%s quality...")
-#: src/library/grDevices/src/devWindows.cpp:1635
-#: src/library/grDevices/src/devWindows.cpp:1637
-#: src/library/grDevices/src/devWindows.cpp:1639
+#: src/library/grDevices/src/devWindows.cpp:1636
+#: src/library/grDevices/src/devWindows.cpp:1638
+#: src/library/grDevices/src/devWindows.cpp:1640
 #, c-format
 msgid "%s quality..."
 msgstr "%s jakości..."
 
-# src/library/grDevices/src/devWindows.cpp: 1641
-# G_("Copy to the clipboard")
-#: src/library/grDevices/src/devWindows.cpp:1641
+#: src/library/grDevices/src/devWindows.cpp:1642
 msgid "Copy to the clipboard"
 msgstr "Kopiuj do schowka"
 
-# src/library/grDevices/src/devWindows.cpp: 1642
-# G_("as a Bitmap\tCTRL+C")
-#: src/library/grDevices/src/devWindows.cpp:1642
+#: src/library/grDevices/src/devWindows.cpp:1643
 msgid "as a Bitmap\tCTRL+C"
 msgstr "jako Bitmapę\tCTRL+C"
 
-# src/library/grDevices/src/devWindows.cpp: 1643
-# G_("as a Metafile\tCTRL+W")
-#: src/library/grDevices/src/devWindows.cpp:1643
+#: src/library/grDevices/src/devWindows.cpp:1644
 msgid "as a Metafile\tCTRL+W"
 msgstr "jako Metaplik\tCTRL+W"
 
-# src/library/grDevices/src/devWindows.cpp: 1648
-# G_("close Device")
-#: src/library/grDevices/src/devWindows.cpp:1648
+#: src/library/grDevices/src/devWindows.cpp:1649
 msgid "close Device"
 msgstr "Zamknij okno"
 
-# src/library/grDevices/src/devWindows.cpp: 1649
-# G_("History")
-#: src/library/grDevices/src/devWindows.cpp:1649
+#: src/library/grDevices/src/devWindows.cpp:1650
 msgid "History"
 msgstr "Historia"
 
-# src/library/grDevices/src/devWindows.cpp: 1650
-# G_("Recording")
-#: src/library/grDevices/src/devWindows.cpp:1650
+#: src/library/grDevices/src/devWindows.cpp:1651
 msgid "Recording"
 msgstr "Nagrywanie"
 
-# src/library/grDevices/src/devWindows.cpp: 1653
-# G_("Add\tINS")
-#: src/library/grDevices/src/devWindows.cpp:1653
+#: src/library/grDevices/src/devWindows.cpp:1654
 msgid "Add\tINS"
 msgstr "Dodaj\tINS"
 
-# src/library/grDevices/src/devWindows.cpp: 1654
-# G_("Replace")
-#: src/library/grDevices/src/devWindows.cpp:1654
+#: src/library/grDevices/src/devWindows.cpp:1655
 msgid "Replace"
 msgstr "Zamień"
 
-# src/library/grDevices/src/devWindows.cpp: 1656
-# G_("Previous\tPgUp")
-#: src/library/grDevices/src/devWindows.cpp:1656
+#: src/library/grDevices/src/devWindows.cpp:1657
 msgid "Previous\tPgUp"
 msgstr "Poprzedni\tPgUp"
 
-# src/library/grDevices/src/devWindows.cpp: 1657
-# G_("Next\tPgDown")
-#: src/library/grDevices/src/devWindows.cpp:1657
+#: src/library/grDevices/src/devWindows.cpp:1658
 msgid "Next\tPgDown"
 msgstr "Następny\tPgDown"
 
-# src/library/grDevices/src/devWindows.cpp: 1659
-# G_("Save to variable...")
-#: src/library/grDevices/src/devWindows.cpp:1659
+#: src/library/grDevices/src/devWindows.cpp:1660
 msgid "Save to variable..."
 msgstr "Zapisz do zmiennej..."
 
-# src/library/grDevices/src/devWindows.cpp: 1660
-# G_("Get from variable...")
-#: src/library/grDevices/src/devWindows.cpp:1660
+#: src/library/grDevices/src/devWindows.cpp:1661
 msgid "Get from variable..."
 msgstr "Pobierz ze zmiennej..."
 
-# src/library/grDevices/src/devWindows.cpp: 1662
-# G_("Clear history")
-#: src/library/grDevices/src/devWindows.cpp:1662
+#: src/library/grDevices/src/devWindows.cpp:1663
 msgid "Clear history"
 msgstr "Wyczyść historię"
 
-# src/library/grDevices/src/devWindows.cpp: 1663
-# G_("Resize")
-#: src/library/grDevices/src/devWindows.cpp:1663
+#: src/library/grDevices/src/devWindows.cpp:1664
 msgid "Resize"
 msgstr "Zmień rozmiar"
 
-# src/library/grDevices/src/devWindows.cpp: 1664
-# G_("R mode")
-#: src/library/grDevices/src/devWindows.cpp:1664
+#: src/library/grDevices/src/devWindows.cpp:1665
 msgid "R mode"
 msgstr "Tryb R"
 
-# src/library/grDevices/src/devWindows.cpp: 1666
-# G_("Fit to window")
-#: src/library/grDevices/src/devWindows.cpp:1666
+#: src/library/grDevices/src/devWindows.cpp:1667
 msgid "Fit to window"
 msgstr "Dopasuj do okna"
 
-# src/library/grDevices/src/devWindows.cpp: 1668
-# G_("Fixed size")
-#: src/library/grDevices/src/devWindows.cpp:1668
+#: src/library/grDevices/src/devWindows.cpp:1669
 msgid "Fixed size"
 msgstr "Stały rozmiar"
 
-# src/library/grDevices/src/devWindows.cpp: 1675
-# G_("Copy as metafile")
-#: src/library/grDevices/src/devWindows.cpp:1675
+#: src/library/grDevices/src/devWindows.cpp:1676
 msgid "Copy as metafile"
 msgstr "Kopiuj jako metaplik"
 
-# src/library/grDevices/src/devWindows.cpp: 1677
-# G_("Copy as bitmap")
-#: src/library/grDevices/src/devWindows.cpp:1677
+#: src/library/grDevices/src/devWindows.cpp:1678
 msgid "Copy as bitmap"
 msgstr "Kopiuj jako bitmapę"
 
-# src/library/grDevices/src/devWindows.cpp: 1680
-# G_("Save as metafile...")
-#: src/library/grDevices/src/devWindows.cpp:1680
+#: src/library/grDevices/src/devWindows.cpp:1681
 msgid "Save as metafile..."
 msgstr "Zapisz jako metaplik..."
 
-# src/library/grDevices/src/devWindows.cpp: 1682
-# G_("Save as postscript...")
-#: src/library/grDevices/src/devWindows.cpp:1682
+#: src/library/grDevices/src/devWindows.cpp:1683
 msgid "Save as postscript..."
 msgstr "Zapisz jako postscript..."
 
-# src/library/grDevices/src/devWindows.cpp: 3135
-# G_("Locator is active")
 #: src/library/grDevices/src/devWindows.cpp:3190
 msgid "Locator is active"
 msgstr "Lokalizator jest aktywny"
 
-# src/library/grDevices/src/devWindows.cpp: 3758
-# G_("Waiting to confirm page change...")
 #: src/library/grDevices/src/devWindows.cpp:3846
 msgid "Waiting to confirm page change..."
 msgstr "Oczekiwanie na potwierdzenie zmiany strony..."
 
-# src/library/grDevices/src/devWindows.cpp: 3770
-# G_("Click or hit ENTER for next page")
 #: src/library/grDevices/src/devWindows.cpp:3858
 msgid "Click or hit ENTER for next page"
 msgstr "Kliknij lub naciśnij ENTER aby przejść do następnej strony"
 
-# src/library/grDevices/src/devWindows.cpp: 1646
-# G_("Print...\tCTRL+P")
 #~ msgid "Print...\tCTRL+P"
 #~ msgstr "Drukuj...\tCTRL+P"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #~ msgid "invalid device"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "Invalid regexp"
 #~ msgstr "błędny argument"
 
-# src/modules/X11/dataentry.cpp: 1032
-# error("internal type error in dataentry")
-# src/modules/X11/dataentry.cpp: 1045
-# error("internal type error in dataentry")
-# src/library/utils/src/windows/dataentry.cpp: 757
-# error(G_("internal type error in dataentry"))
-# src/library/utils/src/windows/dataentry.cpp: 770
-# error(G_("internal type error in dataentry"))
 #, fuzzy
 #~ msgid "internal error in trio library"
 #~ msgstr "wewnętrzny błąd typu przy wprowadzaniu danych"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "Invalid argument"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "Invalid range"
 #~ msgstr "błędny argument"
 
-# src/extra/graphapp/dialogs.cpp: 202
-# G_(" Change working directory to:")
 #, fuzzy
 #~ msgid "cannot get working directory"
 #~ msgstr "Zmień katalog roboczy na:"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "file '%s' was not found"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "problem in displaying file '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "file '%ls' was not found"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid '%s' argument"
 #~ msgstr "błędny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid '%s' value"
 #~ msgstr "błędny typ dla wartości"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "incorrect argument"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid graphical device number"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "bad device"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/gnuwin32/console.cpp: 1914
-# G_("Insufficient memory. Please close the console")
 #, fuzzy
 #~ msgid "Insufficient memory (rpipeOpen)"
 #~ msgstr "Brak wystarczającej pamięci. Proszę zamknąć konsolę"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "cannot open file '%s': %s"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/rui.cpp: 1308
-# G_("menu %s does not exist")
 #, fuzzy
 #~ msgid "file.show(): file '%s' does not exist\n"
 #~ msgstr "menu %s nie istnieje"
 
-# src/gnuwin32/editor.cpp: 119
-# G_("unable to open file %s for reading")
 #, fuzzy
 #~ msgid "unable to open TIFF file '%s'"
 #~ msgstr "nie można otworzyć pliku %s do czytania"
 
-# src/gnuwin32/editor.cpp: 119
-# G_("unable to open file %s for reading")
 #, fuzzy
 #~ msgid "unable to open '%s'"
 #~ msgstr "nie można otworzyć pliku %s do czytania"
 
-# src/extra/graphapp/clipboard.cpp: 53
-# G_("Unable to open the clipboard")
-# src/extra/graphapp/clipboard.cpp: 79
-# G_("Unable to open the clipboard")
-# src/gnuwin32/console.cpp: 1296
-# G_("Unable to open the clipboard")
 #, fuzzy
 #~ msgid "Unable to open %ls"
 #~ msgstr "Nie można otworzyć schowka"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid call %s"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid length"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid unary operator"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid second argument of length 0"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid argument 'base' of length 0"
 #~ msgstr "błędny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid '%s' value (< 0)"
 #~ msgstr "błędny typ dla wartości"
 
-# src/modules/X11/dataentry.cpp: 1345
-# warning("dataentry: expression too long")
-# src/modules/X11/dataentry.cpp: 1755
-# warning("dataentry: expression too long")
-# src/library/utils/src/windows/dataentry.cpp: 995
-# warning(G_("dataentry: expression too long"))
 #, fuzzy
 #~ msgid "data is too long"
 #~ msgstr "dataentry: wyrażenie zbyt długie"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "'%s' argument cannot be of length 0"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid first argument"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid second argument"
 #~ msgstr "błędny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid type '%s' for slot name"
 #~ msgstr "błędny typ dla wartości"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid type or length for slot name"
 #~ msgstr "błędny typ dla wartości"
 
-# src/gnuwin32/rui.cpp: 1411
-# G_("menu does not exist")
-# src/gnuwin32/rui.cpp: 1494
-# G_("menu does not exist")
-# src/library/utils/src/windows/dialogs.cpp: 319
-#  _("menu does not exist")
 #, fuzzy
 #~ msgid "argument is not a list"
 #~ msgstr "menu nie istnieje"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid value"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid substring arguments"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid environment"
 #~ msgstr "błędny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid body for function"
 #~ msgstr "błędny typ dla wartości"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid length 0 argument"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid argument list"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid environment specified"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/gnuwin32/rui.cpp: 1170
-# G_("Filename completion")
 #, fuzzy
 #~ msgid "unimplemented complex operation"
 #~ msgstr "Uzupełnianie nazw plików"
 
-# src/gnuwin32/rui.cpp: 1517
-# G_("menu not found")
 #, fuzzy
 #~ msgid "connection was not found"
 #~ msgstr "nie znaleziono menu"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid connection"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "cannot open file '%ls': %s"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/editor.cpp: 119
-# G_("unable to open file %s for reading")
 #, fuzzy
 #~ msgid "connection is not open for reading"
 #~ msgstr "nie można otworzyć pliku %s do czytania"
 
-# src/extra/graphapp/clipboard.cpp: 53
-# G_("Unable to open the clipboard")
-# src/extra/graphapp/clipboard.cpp: 79
-# G_("Unable to open the clipboard")
-# src/gnuwin32/console.cpp: 1296
-# G_("Unable to open the clipboard")
 #, fuzzy
 #~ msgid "unable to write to the clipboard"
 #~ msgstr "Nie można otworzyć schowka"
 
-# src/gnuwin32/editor.cpp: 841
-# G_("Maximum number of editors reached")
 #, fuzzy
 #~ msgid "maximum number of pushback lines exceeded"
 #~ msgstr "Osiągnięto maksymalną liczbę edytorów"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "could not allocate space for '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/modules/X11/dataentry.cpp: 1032
-# error("internal type error in dataentry")
-# src/modules/X11/dataentry.cpp: 1045
-# error("internal type error in dataentry")
-# src/library/utils/src/windows/dataentry.cpp: 757
-# error(G_("internal type error in dataentry"))
-# src/library/utils/src/windows/dataentry.cpp: 770
-# error(G_("internal type error in dataentry"))
 #, fuzzy
 #~ msgid "internal error %d in '%s' function"
 #~ msgstr "wewnętrzny błąd typu przy wprowadzaniu danych"
 
-# src/modules/X11/dataentry.cpp: 1032
-# error("internal type error in dataentry")
-# src/modules/X11/dataentry.cpp: 1045
-# error("internal type error in dataentry")
-# src/library/utils/src/windows/dataentry.cpp: 757
-# error(G_("internal type error in dataentry"))
-# src/library/utils/src/windows/dataentry.cpp: 770
-# error(G_("internal type error in dataentry"))
 #, fuzzy
 #~ msgid "internal error in '%s'"
 #~ msgstr "wewnętrzny błąd typu przy wprowadzaniu danych"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "object '%s' was not found"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid graphics state"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid argument count in 'call_R()'"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid " not overwriting file '%s"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "zip file '%s' cannot be opened"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid zip name argument"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/rui.cpp: 1411
-# G_("menu does not exist")
-# src/gnuwin32/rui.cpp: 1494
-# G_("menu does not exist")
-# src/library/utils/src/windows/dialogs.cpp: 319
-#  _("menu does not exist")
 #, fuzzy
 #~ msgid "'exdir' does not exist"
 #~ msgstr "menu nie istnieje"
 
-# src/modules/X11/dataentry.cpp: 1032
-# error("internal type error in dataentry")
-# src/modules/X11/dataentry.cpp: 1045
-# error("internal type error in dataentry")
-# src/library/utils/src/windows/dataentry.cpp: 757
-# error(G_("internal type error in dataentry"))
-# src/library/utils/src/windows/dataentry.cpp: 770
-# error(G_("internal type error in dataentry"))
 #, fuzzy
 #~ msgid "internal error in 'unz' code"
 #~ msgstr "wewnętrzny błąd typu przy wprowadzaniu danych"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "cannot open zip file '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid body argument for 'function'"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid argument to edit()"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/editor.cpp: 119
-# G_("unable to open file %s for reading")
 #, fuzzy
 #~ msgid "unable to open file"
 #~ msgstr "nie można otworzyć pliku %s do czytania"
 
-# src/gnuwin32/editor.cpp: 846
-# G_("Unable to create editor window")
 #, fuzzy
 #~ msgid "unable to run editor '%s'"
 #~ msgstr "Nie można utworzyć okna edytora"
 
-# src/gnuwin32/rui.cpp: 1465
-# G_("failed to allocate menuitem")
 #, fuzzy
 #~ msgid "unable to allocate memory (in 'GEregister')"
 #~ msgstr "nie można przydzielić pozycji menu"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid line end"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid line join"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid line type: zeroes are not allowed"
 #~ msgstr "błędny typ dla wartości"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid line type"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "could not find function '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid name in position %d"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "'%s' is not a function"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/gnuwin32/rui.cpp: 1266
-# G_("'mname' is limited to 1000 bytes")
 #, fuzzy
 #~ msgid "R character strings are limited to 2^31-1 bytes"
 #~ msgstr "'mname' jest ograniczone do 1000 bajtów"
 
-# src/gnuwin32/pager.cpp: 89
-# G_("Error opening file")
 #, fuzzy
 #~ msgid "Error in function:"
 #~ msgstr "Błąd podczas otwierania pliku"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid number of arguments"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid argument type"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "incompatible arguments"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/editor.cpp: 135
-# G_("Could not read from file '%s'")
 #, fuzzy
 #~ msgid "Rprof: cannot open profile file '%s'"
 #~ msgstr "Nie można było odczytać z pliku '%s'"
 
-# src/gnuwin32/pager.cpp: 519
-# G_("Unable to create pager window")
 #, fuzzy
 #~ msgid "unable to create profiling thread"
 #~ msgstr "Nie można utworzyć okna strony"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid '%s' argument of type '%s'"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid body"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid symbol"
 #~ msgstr "błędny typ dla wartości"
 
-# src/library/utils/src/windows/dataentry.cpp: 1523
-# G_("variable name")
 #, fuzzy
 #~ msgid "bad file name"
 #~ msgstr "nazwa zmiennej"
 
-# src/modules/X11/dataentry.cpp: 915
-# error("dataentry: internal memory error")
-# src/library/utils/src/windows/dataentry.cpp: 634
-# error(G_("dataentry: internal memory error"))
-# src/library/utils/src/windows/dataentry.cpp: 1221
-# error(G_("dataentry: internal memory error"))
 #, fuzzy
 #~ msgid "internal error"
 #~ msgstr "dataentry: wewnętrzny błąd pamięci"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid prompt"
 #~ msgstr "błędny argument"
 
-# src/modules/X11/dataentry.cpp: 1032
-# error("internal type error in dataentry")
-# src/modules/X11/dataentry.cpp: 1045
-# error("internal type error in dataentry")
-# src/library/utils/src/windows/dataentry.cpp: 757
-# error(G_("internal type error in dataentry"))
-# src/library/utils/src/windows/dataentry.cpp: 770
-# error(G_("internal type error in dataentry"))
 #, fuzzy
 #~ msgid "internal parser error at line %d"
 #~ msgstr "wewnętrzny błąd typu przy wprowadzaniu danych"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid 'socket' argument"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid 'port' argument"
 #~ msgstr "błędny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 1472
-# G_("column names cannot be blank")
 #, fuzzy
 #~ msgid "LAPACK routines cannot be loaded"
 #~ msgstr "nazwy kolumn nie mogą być puste"
 
-# src/gnuwin32/rui.cpp: 1429
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1452
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1457
-# G_("failed to allocate char storage")
 #, fuzzy
 #~ msgid "failed to set alternate signal stack"
 #~ msgstr "nie można przydzielić pamięci dla znaku"
 
-# src/extra/graphapp/clipboard.cpp: 53
-# G_("Unable to open the clipboard")
-# src/extra/graphapp/clipboard.cpp: 79
-# G_("Unable to open the clipboard")
-# src/gnuwin32/console.cpp: 1296
-# G_("Unable to open the clipboard")
 #, fuzzy
 #~ msgid "unable to open the base package\n"
 #~ msgstr "Nie można otworzyć schowka"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid 'status' argument, 0 assumed"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "unused argument %s"
 #~ msgid_plural "unused arguments %s"
@@ -3328,704 +1586,240 @@ msgstr "Kliknij lub naciśnij ENTER aby przejść do następnej strony"
 #~ msgstr[1] "błędny argument"
 #~ msgstr[2] "błędny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid length for pairlist"
 #~ msgstr "błędny typ dla wartości"
 
-# src/gnuwin32/rui.cpp: 1266
-# G_("'mname' is limited to 1000 bytes")
 #, fuzzy
 #~ msgid "variable names are limited to %d bytes"
 #~ msgstr "'mname' jest ograniczone do 1000 bajtów"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid .Internal() argument"
 #~ msgstr "błędny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid value for '%s'"
 #~ msgstr "błędny typ dla wartości"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid separator"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid filename argument"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/rui.cpp: 1170
-# G_("Filename completion")
 #, fuzzy
 #~ msgid "file name is too long"
 #~ msgstr "Uzupełnianie nazw plików"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid accent"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid group delimiter"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid row labels"
 #~ msgstr "błędny typ dla wartości"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid 'tryS4' internal argument"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid arguments"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "file '%s' cannot be opened for reading"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid multibyte format string"
 #~ msgstr "błędny typ dla wartości"
 
-# src/gnuwin32/editor.cpp: 119
-# G_("unable to open file %s for reading")
 #, fuzzy
 #~ msgid "connection not open for reading"
 #~ msgstr "nie można otworzyć pliku %s do czytania"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid decimal separator"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid quote symbol set"
 #~ msgstr "błędny typ dla wartości"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "NA/NaN argument"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/rui.cpp: 245
-# G_("No text available")
-# src/gnuwin32/rui.cpp: 254
-# G_("No text available")
 #, fuzzy
 #~ msgid "no restore method available"
 #~ msgstr "Brak dostępnego tekstu"
 
-# src/gnuwin32/editor.cpp: 135
-# G_("Could not read from file '%s'")
 #, fuzzy
 #~ msgid "could not determine file position"
 #~ msgstr "Nie można było odczytać z pliku '%s'"
 
-# src/library/utils/src/windows/dataentry.cpp: 1523
-# G_("variable name")
 #, fuzzy
 #~ msgid "bad variable names"
 #~ msgstr "nazwa zmiennej"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid type of argument[%d]: '%s'"
 #~ msgstr "błędny typ dla wartości"
 
-# src/modules/X11/dataentry.cpp: 1032
-# error("internal type error in dataentry")
-# src/modules/X11/dataentry.cpp: 1045
-# error("internal type error in dataentry")
-# src/library/utils/src/windows/dataentry.cpp: 757
-# error(G_("internal type error in dataentry"))
-# src/library/utils/src/windows/dataentry.cpp: 770
-# error(G_("internal type error in dataentry"))
 #, fuzzy
 #~ msgid "internal error: index %d from length %d"
 #~ msgstr "wewnętrzny błąd typu przy wprowadzaniu danych"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "invalid subscript for pairlist"
 #~ msgstr "błędny typ dla wartości"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid 'type' (%s) of argument"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "non-numeric argument"
 #~ msgstr "błędny argument"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "no arguments"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid "invalid input type"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid filename pattern"
 #~ msgstr "błędny argument"
 
-# src/library/utils/src/windows/dataentry.cpp: 270
-# error(G_("invalid type for value"))
 #, fuzzy
 #~ msgid "wrong type for argument"
 #~ msgstr "błędny typ dla wartości"
 
-# src/gnuwin32/rui.cpp: 1535
-# G_("menu or item does not exist")
 #, fuzzy
 #~ msgid "... used in a situation where it does not exist"
 #~ msgstr "menu lub pozycja nie istnieją"
 
-# src/gnuwin32/rui.cpp: 1386
-# G_("failed to allocate menu")
 #, fuzzy
 #~ msgid "failed to set ICU locale"
 #~ msgstr "nie można przydzielić menu"
 
-# src/gnuwin32/rui.cpp: 1429
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1452
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1457
-# G_("failed to allocate char storage")
 #, fuzzy
 #~ msgid "failed to open ICU collator"
 #~ msgstr "nie można przydzielić pamięci dla znaku"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid input"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "width cannot be zero"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/gnuwin32/editor.cpp: 119
-# G_("unable to open file %s for reading")
 #, fuzzy
 #~ msgid "can only open URLs for reading"
 #~ msgstr "nie można otworzyć pliku %s do czytania"
 
-# src/gnuwin32/rui.cpp: 1429
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1452
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1457
-# G_("failed to allocate char storage")
 #, fuzzy
 #~ msgid "failed to connect to server"
 #~ msgstr "nie można przydzielić pamięci dla znaku"
 
-# src/gnuwin32/rui.cpp: 1429
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1452
-# G_("failed to allocate char storage")
-# src/gnuwin32/rui.cpp: 1457
-# G_("failed to allocate char storage")
 #, fuzzy
 #~ msgid "failed to create a data connection"
 #~ msgstr "nie można przydzielić pamięci dla znaku"
 
-# src/gnuwin32/editor.cpp: 846
-# G_("Unable to create editor window")
 #, fuzzy
 #~ msgid "unable to create socket"
 #~ msgstr "Nie można utworzyć okna edytora"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "port %d cannot be opened"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/extra/graphapp/clipboard.cpp: 53
-# G_("Unable to open the clipboard")
-# src/extra/graphapp/clipboard.cpp: 79
-# G_("Unable to open the clipboard")
-# src/gnuwin32/console.cpp: 1296
-# G_("Unable to open the clipboard")
 #, fuzzy
 #~ msgid "unable to open display"
 #~ msgstr "Nie można otworzyć schowka"
 
-# src/gnuwin32/editor.cpp: 846
-# G_("Unable to create editor window")
 #, fuzzy
 #~ msgid "unable to create fontset %s"
 #~ msgstr "Nie można utworzyć okna edytora"
 
-# src/gnuwin32/editor.cpp: 119
-# G_("unable to open file %s for reading")
 #, fuzzy
 #~ msgid "unable to open window for data editor"
 #~ msgstr "nie można otworzyć pliku %s do czytania"
 
-# src/extra/graphapp/clipboard.cpp: 53
-# G_("Unable to open the clipboard")
-# src/extra/graphapp/clipboard.cpp: 79
-# G_("Unable to open the clipboard")
-# src/gnuwin32/console.cpp: 1296
-# G_("Unable to open the clipboard")
 #, fuzzy
 #~ msgid "unable to open X Input Method"
 #~ msgstr "Nie można otworzyć schowka"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "could not open PNG file '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "could not open JPEG file '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "could not open BMP file '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/pager.cpp: 519
-# G_("Unable to create pager window")
 #, fuzzy
 #~ msgid "unable to create pixmap"
 #~ msgstr "Nie można utworzyć okna strony"
 
-# src/gnuwin32/extra.cpp: 574
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 576
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 599
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 601
-# error(_("invalid device"))
-# src/gnuwin32/extra.cpp: 636
-# error(_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 282
-# error(G_("invalid device"))
-# src/library/utils/src/windows/dataentry.cpp: 1891
-# error(G_("invalid device"))
-# src/main/gevents.cpp: 60
-#  _("invalid device")
-# src/main/gevents.cpp: 97
-#  _("invalid device")
 #, fuzzy
 #~ msgid " (inactive device)"
 #~ msgstr "niepoprawne urządzenie"
 
-# src/gnuwin32/pager.cpp: 519
-# G_("Unable to create pager window")
 #, fuzzy
 #~ msgid "Unable to create XImage"
 #~ msgstr "Nie można utworzyć okna strony"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid 'width' or 'height' arguments"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "cannot open file '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/extra/graphapp/dialogs.cpp: 202
-# G_(" Change working directory to:")
 #, fuzzy
 #~ msgid "cannot get working directory!"
 #~ msgstr "Zmień katalog roboczy na:"
 
-# src/gnuwin32/rui.cpp: 310
-# G_("'%s' cannot be found")
 #, fuzzy
 #~ msgid "symbol '%s' was not found"
 #~ msgstr "'%s nie może zostać znalezione"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid "problem in saving the history file '%s'"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/gnuwin32/editor.cpp: 166
-# G_("Could not save file '%s'")
 #, fuzzy
 #~ msgid ""
 #~ "Cannot open file '%s': %s\n"
 #~ "\n"
 #~ msgstr "Nie można było zapisać pliku '%s'"
 
-# src/library/utils/src/windows/dataentry.cpp: 1523
-# G_("variable name")
 #, fuzzy
 #~ msgid "Enter file name: "
 #~ msgstr "nazwa zmiennej"
 
-# src/library/grDevices/src/devices.cpp: 52
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 187
-# error(_("invalid argument"))
-# src/library/tcltk/src/tcltk.cpp: 714
-# error(_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 223
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1850
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1853
-# error(G_("invalid argument"))
-# src/library/utils/src/windows/dataentry.cpp: 1884
-# error(G_("invalid argument"))
-# src/main/builtin.cpp: 889
-# error(_("invalid argument"))
-# src/main/builtin.cpp: 899
-# error(_("invalid argument"))
-# src/main/options.cpp: 629
-# error(_("invalid argument"))
 #, fuzzy
 #~ msgid "invalid timestamp"
 #~ msgstr "błędny argument"
 
-# src/gnuwin32/rui.cpp: 245
-# G_("No text available")
-# src/gnuwin32/rui.cpp: 254
-# G_("No text available")
 #, fuzzy
 #~ msgid "X11 is not available"
 #~ msgstr "Brak dostępnego tekstu"

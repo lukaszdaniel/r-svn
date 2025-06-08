@@ -1298,7 +1298,7 @@ static void srv_input_handler(void *data)
     if (cl_sock == INVALID_SOCKET) /* accept failed, don't bother */
 	return;
     c = (httpd_conn_t*) calloc(1, sizeof(httpd_conn_t));
-    if (c == NULL) error("%s", _("allocation error in srv_input_handler"));
+    if (c == NULL) error(_("allocation error in '%s'"), "srv_input_handler");
     c->sock = cl_sock;
     c->peer = peer_sa.sin_addr;
 #ifndef _WIN32

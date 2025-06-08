@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 20:13+0200\n"
 "PO-Revision-Date: 2011-03-26 08:54-0300\n"
 "Last-Translator: Fernando Henrique <pessoal@fernandohrosa.com.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -160,18 +160,18 @@ msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the fr
 msgstr "erro interno em 'callNextMethod': '.nextMethod' não foi atribuído no escopo da chamada do método"
 
 #: methods_list_dispatch.cpp:892
-#, c-format
-msgid "'%s' must be a single string (got a character vector of length %d)"
+#, fuzzy, c-format
+msgid "%s must be a single string (got a character vector of length %d)"
 msgstr "'%s' deve ser uma única string (foi especificado um vetor de caracteres de comprimento %d)"
 
 #: methods_list_dispatch.cpp:896
-#, c-format
-msgid "'%s' must be a non-empty string; got an empty string"
+#, fuzzy, c-format
+msgid "%s must be a non-empty string; got an empty string"
 msgstr "'%s' deve ser uma string não-vazia; foi obtida uma string vazia"
 
 #: methods_list_dispatch.cpp:900
-#, c-format
-msgid "'%s' must be a single string (got an object of class \"%s\")"
+#, fuzzy, c-format
+msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr "'%s' deve ser uma string única (foi obtido um objeto da classe \"%s\")"
 
 #: methods_list_dispatch.cpp:934

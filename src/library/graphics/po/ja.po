@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 10:47+0200\n"
 "PO-Revision-Date: 2014-03-26 13:54+0200 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: R-core <R-core@R-project.org> \n"
@@ -549,17 +549,10 @@ msgstr "'y' の限界値が不正です"
 msgid "invalid 'z' limits"
 msgstr "'zlim' の限界値が不正です"
 
-#: plot3d.cpp:1137
-msgid "'xlab' must be a character vector of length 1"
+#: plot3d.cpp:1137 plot3d.cpp:1139 plot3d.cpp:1141
+#, fuzzy, c-format
+msgid "'%s' must be a character vector of length 1"
 msgstr "'xlab' は長さ 1 の文字ベクトルでなくてはなりません"
-
-#: plot3d.cpp:1139
-msgid "'ylab' must be a character vector of length 1"
-msgstr "'ylab' は長さ 1 の文字ベクトルでなくてはなりません"
-
-#: plot3d.cpp:1141
-msgid "'zlab' must be a character vector of length 1"
-msgstr "'zlab' は長さ 1 の文字ベクトルでなくてはなりません"
 
 #: plot3d.cpp:1161
 msgid "invalid viewing parameters"
@@ -647,6 +640,12 @@ msgstr "long vector '%s' はサポートされていません"
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "'ylab' は長さ 1 の文字ベクトルでなくてはなりません"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "'zlab' は長さ 1 の文字ベクトルでなくてはなりません"
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"

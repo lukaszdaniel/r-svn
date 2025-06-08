@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 19:22+0100\n"
+"POT-Creation-Date: 2025-06-06 16:56+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Weblate 4.16.4\n"
 
 #: src/gnuwin32/console.cpp:1195 src/gnuwin32/console.cpp:1237
-#: src/gnuwin32/console.cpp:1767
+#: src/gnuwin32/console.cpp:1765
 msgid "Not enough memory"
 msgstr "Ikkje nok minne"
 
@@ -32,11 +32,11 @@ msgstr "Ikkje nok minne: tekst ikkje kopiert til utklippstavla"
 msgid "Unable to open the clipboard"
 msgstr "Klarte ikkje opna utklippstavla"
 
-#: src/gnuwin32/console.cpp:2131
+#: src/gnuwin32/console.cpp:2129
 msgid "Insufficient memory. Please close the console"
 msgstr "Ikkje nok minne. Lukk konsollen."
 
-#: src/gnuwin32/console.cpp:2186 src/gnuwin32/console.cpp:2240
+#: src/gnuwin32/console.cpp:2184 src/gnuwin32/console.cpp:2238
 #: src/gnuwin32/preferences.cpp:347
 #, c-format
 msgid ""
@@ -46,23 +46,23 @@ msgstr ""
 "Fann ikkje skrifta «%s-%d-%d».\n"
 "Brukar system-skrifta."
 
-#: src/gnuwin32/console.cpp:2343
+#: src/gnuwin32/console.cpp:2341
 msgid "Save selection to"
 msgstr "Lagra utvalet til"
 
-#: src/gnuwin32/console.cpp:2345
+#: src/gnuwin32/console.cpp:2343
 msgid "Save console contents to"
 msgstr "Lagra konsollinhaldet til"
 
-#: src/gnuwin32/console.cpp:2452
+#: src/gnuwin32/console.cpp:2450
 msgid "Scrolling.\n"
 msgstr "Rulling.\n"
 
-#: src/gnuwin32/console.cpp:2453
+#: src/gnuwin32/console.cpp:2451
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 msgstr "  Tastatur: Page Up, Page Down, Ctrl + piltastar, Ctrl + Home, Ctrl + End,\n"
 
-#: src/gnuwin32/console.cpp:2454
+#: src/gnuwin32/console.cpp:2452
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
@@ -70,91 +70,91 @@ msgstr ""
 "  Mus: Bruk rullefelta.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2455
+#: src/gnuwin32/console.cpp:2453
 msgid "Editing.\n"
 msgstr "Redigering.\n"
 
-#: src/gnuwin32/console.cpp:2456
+#: src/gnuwin32/console.cpp:2454
 msgid "  Moving the cursor: \n"
 msgstr "  Flytting av skrivemerket: \n"
 
-#: src/gnuwin32/console.cpp:2457
+#: src/gnuwin32/console.cpp:2455
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     «Pil venstre» eller «Ctrl + B»: flytt eitt teikn bakover;\n"
 
-#: src/gnuwin32/console.cpp:2458
+#: src/gnuwin32/console.cpp:2456
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
 msgstr "     «Pil høgre» eller «Ctrl + F»: flytt eitt teikn framover;\n"
 
-#: src/gnuwin32/console.cpp:2459
+#: src/gnuwin32/console.cpp:2457
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     «Home» eller «Ctrl + A»: gå til starten av linja;\n"
 
-#: src/gnuwin32/console.cpp:2460
+#: src/gnuwin32/console.cpp:2458
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     «End» eller «Ctrl + E»: gå til slutten av linja;\n"
 
-#: src/gnuwin32/console.cpp:2461
+#: src/gnuwin32/console.cpp:2459
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
 msgstr "  Loggen: «Pil opp» og «Pil ned», eller «Ctrl + P» og «Ctrl + N»\n"
 
-#: src/gnuwin32/console.cpp:2462
+#: src/gnuwin32/console.cpp:2460
 msgid "  Deleting:\n"
 msgstr "  Sletting:\n"
 
-#: src/gnuwin32/console.cpp:2463
+#: src/gnuwin32/console.cpp:2461
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     «Delete» eller «Ctrl + D»: slett gjeldande teikn eller utval;\n"
 
-#: src/gnuwin32/console.cpp:2464
+#: src/gnuwin32/console.cpp:2462
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     «Rettetast»: slett førre teikn;\n"
 
-#: src/gnuwin32/console.cpp:2465
+#: src/gnuwin32/console.cpp:2463
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
 msgstr "     «Ctrl + Delete» eller «Ctrl + K»: slett tekst frå gjeldande teikn til slutten av linja.\n"
 
-#: src/gnuwin32/console.cpp:2466
+#: src/gnuwin32/console.cpp:2464
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     «Ctrl + U»: Slett all teksten frå den gjeldande linja.\n"
 
-#: src/gnuwin32/console.cpp:2467
+#: src/gnuwin32/console.cpp:2465
 msgid "  Copy and paste.\n"
 msgstr "  Kopiering og innliming.\n"
 
-#: src/gnuwin32/console.cpp:2468
+#: src/gnuwin32/console.cpp:2466
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
 msgstr "     Bruk musa (med venstre museknapp inne) for å merkje teksten.\n"
 
-#: src/gnuwin32/console.cpp:2469
+#: src/gnuwin32/console.cpp:2467
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
 msgstr "     Bruk «Shift + Delete» eller «Ctrl + C» for kopiera utvalet til utklippstavla, og\n"
 
-#: src/gnuwin32/console.cpp:2470
+#: src/gnuwin32/console.cpp:2468
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr "     «Shift + Insert», «Ctrl + V» eller «Ctrl +Y» for å lima inn innhaldet frå utklippstavla  \n"
 
-#: src/gnuwin32/console.cpp:2471
+#: src/gnuwin32/console.cpp:2469
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     til konsollen, «Ctrl + X» først kopiera og så lima inn\n"
 
-#: src/gnuwin32/console.cpp:2472
+#: src/gnuwin32/console.cpp:2470
 msgid "  Misc:\n"
 msgstr "  Ymse:\n"
 
-#: src/gnuwin32/console.cpp:2473
+#: src/gnuwin32/console.cpp:2471
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     «Ctrl + L»: tøm konsollen.\n"
 
-#: src/gnuwin32/console.cpp:2474
+#: src/gnuwin32/console.cpp:2472
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     « Ctrl + O» eller «Insert»: slå på/av overskrivingsmodus (av som standard).\n"
 
-#: src/gnuwin32/console.cpp:2475
+#: src/gnuwin32/console.cpp:2473
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     «Ctrl +T»: Byt det gjeldande teiknet med det til venstre.\n"
 
-#: src/gnuwin32/console.cpp:2476
+#: src/gnuwin32/console.cpp:2474
 msgid ""
 "\n"
 "Note: Console is updated only when some input is required.\n"
@@ -162,7 +162,7 @@ msgstr ""
 "\n"
 "Merk: Konsollen vert berre oppdatert når han treng inndata.\n"
 
-#: src/gnuwin32/console.cpp:2477
+#: src/gnuwin32/console.cpp:2475
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
@@ -170,7 +170,7 @@ msgstr ""
 "  Bruk «Ctrl + W» for å slå funksjonen av eller på.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2478
+#: src/gnuwin32/console.cpp:2476
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -178,7 +178,7 @@ msgstr ""
 "Bruk «Escape» for å stoppa skriptkøyringa.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2479
+#: src/gnuwin32/console.cpp:2477
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -186,11 +186,11 @@ msgstr ""
 "Bruk «Tab» for å autofullføra det gjeldande ordet.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2480
+#: src/gnuwin32/console.cpp:2478
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "Du kan bruka dei vanlige Windows-snarvegane for å byta til\n"
 
-#: src/gnuwin32/console.cpp:2481
+#: src/gnuwin32/console.cpp:2479
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "grafikkeininga («Ctrl + Tab» eller «Ctrl + F6» i MDI, og «Alt + Tab» i SDI)"
 
@@ -306,7 +306,7 @@ msgid "Save script"
 msgstr "Lagra skript"
 
 #: src/gnuwin32/editor.cpp:778 src/gnuwin32/pager.cpp:458
-#: src/library/grDevices/src/devWindows.cpp:1593
+#: src/library/grDevices/src/devWindows.cpp:1594
 msgid "Return focus to Console"
 msgstr "Flytt fokuset tilbake til konsollen"
 
@@ -315,13 +315,13 @@ msgid "Print script"
 msgstr "Skriv ut skript"
 
 #: src/gnuwin32/editor.cpp:783 src/gnuwin32/pager.cpp:453
-#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1587
+#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1588
 msgid "Print"
 msgstr "Skriv ut"
 
 #: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:474
-#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1828
-#: src/library/grDevices/src/devWindows.cpp:1625
+#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1819
+#: src/library/grDevices/src/devWindows.cpp:1626
 msgid "File"
 msgstr "Fil"
 
@@ -344,8 +344,8 @@ msgid "Save as..."
 msgstr "Lagra som …"
 
 #: src/gnuwin32/editor.cpp:811 src/gnuwin32/pager.cpp:477
-#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1646
-#: src/library/grDevices/src/devWindows.cpp:1688
+#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1647
+#: src/library/grDevices/src/devWindows.cpp:1689
 msgid "Print..."
 msgstr "Skriv ut …"
 
@@ -354,7 +354,7 @@ msgid "Close script"
 msgstr "Lukk skript"
 
 #: src/gnuwin32/editor.cpp:816 src/gnuwin32/pager.cpp:484
-#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1834
+#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1825
 msgid "Edit"
 msgstr "Rediger"
 
@@ -379,8 +379,8 @@ msgid "GUI preferences..."
 msgstr "GUI-innstillingar …"
 
 #: src/gnuwin32/editor.cpp:852 src/gnuwin32/rui.cpp:1260
-#: src/library/utils/src/windows/dataentry.cpp:1735
-#: src/library/utils/src/windows/dataentry.cpp:1845
+#: src/library/utils/src/windows/dataentry.cpp:1726
+#: src/library/utils/src/windows/dataentry.cpp:1836
 msgid "Help"
 msgstr "Hjelp"
 
@@ -428,14 +428,14 @@ msgid "Paste commands to console"
 msgstr "Lim inn kommandoar i konsollen"
 
 #: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:931
-#: src/library/utils/src/windows/dataentry.cpp:1741
-#: src/library/grDevices/src/devWindows.cpp:1685
+#: src/library/utils/src/windows/dataentry.cpp:1732
+#: src/library/grDevices/src/devWindows.cpp:1686
 msgid "Stay on top"
 msgstr "Hald øvst"
 
 #: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:482
-#: src/library/utils/src/windows/dataentry.cpp:1743
-#: src/library/utils/src/windows/dataentry.cpp:1830
+#: src/library/utils/src/windows/dataentry.cpp:1734
+#: src/library/utils/src/windows/dataentry.cpp:1821
 msgid "Close"
 msgstr "Lukk"
 
@@ -898,73 +898,73 @@ msgstr "Ikkje nok minne til å visa fila i intern filvisar"
 msgid "Unable to start the print job"
 msgstr "Klarte ikkje laga nytt lesevindauge"
 
-#: src/library/utils/src/windows/dataentry.cpp:248
-#: src/library/utils/src/windows/dataentry.cpp:1879
-#: src/library/utils/src/windows/dataentry.cpp:1882
-#: src/library/utils/src/windows/dataentry.cpp:1912
+#: src/library/utils/src/windows/dataentry.cpp:245
+#: src/library/utils/src/windows/dataentry.cpp:1870
+#: src/library/utils/src/windows/dataentry.cpp:1873
+#: src/library/utils/src/windows/dataentry.cpp:1903
 msgid "invalid argument"
 msgstr "ugyldig argument"
 
-#: src/library/utils/src/windows/dataentry.cpp:292
+#: src/library/utils/src/windows/dataentry.cpp:289
 msgid "invalid type for value"
 msgstr "ugyldige type for verdien"
 
-#: src/library/utils/src/windows/dataentry.cpp:303
+#: src/library/utils/src/windows/dataentry.cpp:300
 msgid "Data Editor"
 msgstr "Dataredigering"
 
-#: src/library/utils/src/windows/dataentry.cpp:353
-#: src/library/utils/src/windows/dataentry.cpp:1872
+#: src/library/utils/src/windows/dataentry.cpp:350
+#: src/library/utils/src/windows/dataentry.cpp:1863
 msgid "dataentry: internal memory problem"
 msgstr "inndata: internt minneproblem"
 
-#: src/library/utils/src/windows/dataentry.cpp:657
-#: src/library/utils/src/windows/dataentry.cpp:1259
+#: src/library/utils/src/windows/dataentry.cpp:653
+#: src/library/utils/src/windows/dataentry.cpp:1250
 msgid "dataentry: internal memory error"
 msgstr "inndata: intern minnefeil"
 
-#: src/library/utils/src/windows/dataentry.cpp:780
-#: src/library/utils/src/windows/dataentry.cpp:793
+#: src/library/utils/src/windows/dataentry.cpp:776
+#: src/library/utils/src/windows/dataentry.cpp:789
 msgid "internal type error in dataentry"
 msgstr "intern typefeil i inndata"
 
-#: src/library/utils/src/windows/dataentry.cpp:888
+#: src/library/utils/src/windows/dataentry.cpp:880
 msgid "dataentry: parse error on string"
 msgstr "inndata: klarte ikkje tolka tekststrengen"
 
-#: src/library/utils/src/windows/dataentry.cpp:1033
+#: src/library/utils/src/windows/dataentry.cpp:1025
 msgid "dataentry: expression too long"
 msgstr "inndata: uttrykket er for langt"
 
-#: src/library/utils/src/windows/dataentry.cpp:1509
+#: src/library/utils/src/windows/dataentry.cpp:1500
 msgid "column names cannot be blank"
 msgstr "kolonnenamna kan ikkje vera tomme"
 
-#: src/library/utils/src/windows/dataentry.cpp:1555
+#: src/library/utils/src/windows/dataentry.cpp:1546
 msgid "Variable editor"
 msgstr "Variabelredigering"
 
-#: src/library/utils/src/windows/dataentry.cpp:1560
+#: src/library/utils/src/windows/dataentry.cpp:1551
 msgid "variable name"
 msgstr "variabelnamn"
 
-#: src/library/utils/src/windows/dataentry.cpp:1562
+#: src/library/utils/src/windows/dataentry.cpp:1553
 msgid "type"
 msgstr "type"
 
-#: src/library/utils/src/windows/dataentry.cpp:1677
+#: src/library/utils/src/windows/dataentry.cpp:1668
 msgid "Cell width(s)"
 msgstr "Cellebreidd(er)"
 
-#: src/library/utils/src/windows/dataentry.cpp:1683
+#: src/library/utils/src/windows/dataentry.cpp:1674
 msgid "Cell width"
 msgstr "Cellebreidd"
 
-#: src/library/utils/src/windows/dataentry.cpp:1686
+#: src/library/utils/src/windows/dataentry.cpp:1677
 msgid "variable"
 msgstr "variabel"
 
-#: src/library/utils/src/windows/dataentry.cpp:1729
+#: src/library/utils/src/windows/dataentry.cpp:1720
 msgid ""
 "Navigation.\n"
 "  Keyboard: cursor keys move selection\n"
@@ -1006,211 +1006,211 @@ msgstr ""
 "  Høgreklikk for å få ein meny for kopiering, innliming og kolonnebreidd\n"
 "\n"
 
-#: src/library/utils/src/windows/dataentry.cpp:1737
+#: src/library/utils/src/windows/dataentry.cpp:1728
 msgid "Copy selected cell"
 msgstr "Kopier merkt celle"
 
-#: src/library/utils/src/windows/dataentry.cpp:1738
+#: src/library/utils/src/windows/dataentry.cpp:1729
 msgid "Paste to selected cell"
 msgstr "Lim inn i den valde cella"
 
-#: src/library/utils/src/windows/dataentry.cpp:1739
+#: src/library/utils/src/windows/dataentry.cpp:1730
 msgid "Autosize column"
 msgstr "Automatisk kolonnebreidd"
 
-#: src/library/utils/src/windows/dataentry.cpp:1835
+#: src/library/utils/src/windows/dataentry.cpp:1826
 msgid "Copy  \tCTRL+C"
 msgstr "Kopier  \tCTRL+C"
 
-#: src/library/utils/src/windows/dataentry.cpp:1837
+#: src/library/utils/src/windows/dataentry.cpp:1828
 msgid "Paste \tCTRL+V"
 msgstr "Lim inn \tCTRL+V"
 
-#: src/library/utils/src/windows/dataentry.cpp:1839
+#: src/library/utils/src/windows/dataentry.cpp:1830
 msgid "Delete\tDEL"
 msgstr "Søett\tDEL"
 
-#: src/library/utils/src/windows/dataentry.cpp:1842
+#: src/library/utils/src/windows/dataentry.cpp:1833
 msgid "Cell widths ..."
 msgstr "Cellebreidder …"
 
-#: src/library/utils/src/windows/dataentry.cpp:1846
+#: src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Data editor"
 msgstr "Dataredigering"
 
-#: src/library/utils/src/windows/dataentry.cpp:1919
+#: src/library/utils/src/windows/dataentry.cpp:1910
 #, fuzzy
 msgid "unable to start data viewer"
 msgstr "Klarte ikkje laga nytt lesevindauge"
 
-#: src/library/grDevices/src/devWindows.cpp:937
+#: src/library/grDevices/src/devWindows.cpp:938
 msgid "Portable network graphics file"
 msgstr "Portabel nettverksgrafikk-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:940
+#: src/library/grDevices/src/devWindows.cpp:941
 msgid "Windows bitmap file"
 msgstr "Windows-punktbiletfil"
 
-#: src/library/grDevices/src/devWindows.cpp:943
+#: src/library/grDevices/src/devWindows.cpp:944
 msgid "TIFF file"
 msgstr "TIFF-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:946
+#: src/library/grDevices/src/devWindows.cpp:947
 msgid "Jpeg file"
 msgstr "JPEG-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:967
+#: src/library/grDevices/src/devWindows.cpp:968
 msgid "Postscript file"
 msgstr "PostScript-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:978
+#: src/library/grDevices/src/devWindows.cpp:979
 msgid "PDF file"
 msgstr "PDF-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:990
+#: src/library/grDevices/src/devWindows.cpp:991
 msgid "Enhanced metafiles"
 msgstr "Enhanced metafile"
 
-#: src/library/grDevices/src/devWindows.cpp:993
+#: src/library/grDevices/src/devWindows.cpp:994
 #: src/library/grDevices/src/devWindows.cpp:3528
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "for lang filadresse: maksgrensa er på 512 byte"
 
-#: src/library/grDevices/src/devWindows.cpp:1203
+#: src/library/grDevices/src/devWindows.cpp:1204
 msgid "No plot to replace!"
 msgstr "Manglar plott å byta ut"
 
-#: src/library/grDevices/src/devWindows.cpp:1253
+#: src/library/grDevices/src/devWindows.cpp:1254
 msgid "Variable name"
 msgstr "Variabelnamn"
 
-#: src/library/grDevices/src/devWindows.cpp:1262
+#: src/library/grDevices/src/devWindows.cpp:1263
 #, fuzzy
 msgid "Variable doesn't contain any plots!"
 msgstr "Variabelen finst ikkje, eller inneheld ikkje plott"
 
-#: src/library/grDevices/src/devWindows.cpp:1275
+#: src/library/grDevices/src/devWindows.cpp:1276
 msgid "Name of variable to save to"
 msgstr "Namn på variabelen å lagra til"
 
-#: src/library/grDevices/src/devWindows.cpp:1581
+#: src/library/grDevices/src/devWindows.cpp:1582
 msgid "Copy to the clipboard as a metafile"
 msgstr "Kopier to utklippstavla som metafil"
 
-#: src/library/grDevices/src/devWindows.cpp:1599
-#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1600
+#: src/library/grDevices/src/devWindows.cpp:1611
 msgid "Stop locator"
 msgstr "Stopp posisjonslesar"
 
-#: src/library/grDevices/src/devWindows.cpp:1609
-#: src/library/grDevices/src/devWindows.cpp:1613
+#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1614
 msgid "Stop"
 msgstr "Stopp"
 
-#: src/library/grDevices/src/devWindows.cpp:1615
+#: src/library/grDevices/src/devWindows.cpp:1616
 msgid "Continue"
 msgstr "Hald fram"
 
-#: src/library/grDevices/src/devWindows.cpp:1619
+#: src/library/grDevices/src/devWindows.cpp:1620
 msgid "Next"
 msgstr "Neste"
 
-#: src/library/grDevices/src/devWindows.cpp:1620
+#: src/library/grDevices/src/devWindows.cpp:1621
 msgid "Next plot"
 msgstr "Neste plott"
 
-#: src/library/grDevices/src/devWindows.cpp:1626
+#: src/library/grDevices/src/devWindows.cpp:1627
 msgid "Save as"
 msgstr "Lagra som"
 
-#: src/library/grDevices/src/devWindows.cpp:1635
-#: src/library/grDevices/src/devWindows.cpp:1637
-#: src/library/grDevices/src/devWindows.cpp:1639
+#: src/library/grDevices/src/devWindows.cpp:1636
+#: src/library/grDevices/src/devWindows.cpp:1638
+#: src/library/grDevices/src/devWindows.cpp:1640
 #, c-format
 msgid "%s quality..."
 msgstr "%s-kvalitet …"
 
-#: src/library/grDevices/src/devWindows.cpp:1641
+#: src/library/grDevices/src/devWindows.cpp:1642
 msgid "Copy to the clipboard"
 msgstr "Kopier til utklippstavla"
 
-#: src/library/grDevices/src/devWindows.cpp:1642
+#: src/library/grDevices/src/devWindows.cpp:1643
 msgid "as a Bitmap\tCTRL+C"
 msgstr "som punktbilete\tCTRL+C"
 
-#: src/library/grDevices/src/devWindows.cpp:1643
+#: src/library/grDevices/src/devWindows.cpp:1644
 msgid "as a Metafile\tCTRL+W"
 msgstr "Som metafil\tCTRL+w"
 
-#: src/library/grDevices/src/devWindows.cpp:1648
+#: src/library/grDevices/src/devWindows.cpp:1649
 msgid "close Device"
 msgstr "lukk eining"
 
-#: src/library/grDevices/src/devWindows.cpp:1649
+#: src/library/grDevices/src/devWindows.cpp:1650
 msgid "History"
 msgstr "Logg"
 
-#: src/library/grDevices/src/devWindows.cpp:1650
+#: src/library/grDevices/src/devWindows.cpp:1651
 msgid "Recording"
 msgstr "Opptak"
 
-#: src/library/grDevices/src/devWindows.cpp:1653
+#: src/library/grDevices/src/devWindows.cpp:1654
 msgid "Add\tINS"
 msgstr "Legg til\tINS"
 
-#: src/library/grDevices/src/devWindows.cpp:1654
+#: src/library/grDevices/src/devWindows.cpp:1655
 msgid "Replace"
 msgstr "Byt ut"
 
-#: src/library/grDevices/src/devWindows.cpp:1656
+#: src/library/grDevices/src/devWindows.cpp:1657
 msgid "Previous\tPgUp"
 msgstr "Førre\tPgUp"
 
-#: src/library/grDevices/src/devWindows.cpp:1657
+#: src/library/grDevices/src/devWindows.cpp:1658
 msgid "Next\tPgDown"
 msgstr "Neste\tPgDown"
 
-#: src/library/grDevices/src/devWindows.cpp:1659
+#: src/library/grDevices/src/devWindows.cpp:1660
 msgid "Save to variable..."
 msgstr "Lagra til variabel …"
 
-#: src/library/grDevices/src/devWindows.cpp:1660
+#: src/library/grDevices/src/devWindows.cpp:1661
 msgid "Get from variable..."
 msgstr "Hent frå variabel …"
 
-#: src/library/grDevices/src/devWindows.cpp:1662
+#: src/library/grDevices/src/devWindows.cpp:1663
 msgid "Clear history"
 msgstr "Tøm loggen"
 
-#: src/library/grDevices/src/devWindows.cpp:1663
+#: src/library/grDevices/src/devWindows.cpp:1664
 msgid "Resize"
 msgstr "Endra storleik"
 
-#: src/library/grDevices/src/devWindows.cpp:1664
+#: src/library/grDevices/src/devWindows.cpp:1665
 msgid "R mode"
 msgstr "R-modus"
 
-#: src/library/grDevices/src/devWindows.cpp:1666
+#: src/library/grDevices/src/devWindows.cpp:1667
 msgid "Fit to window"
 msgstr "Tilpassa til vindauget"
 
-#: src/library/grDevices/src/devWindows.cpp:1668
+#: src/library/grDevices/src/devWindows.cpp:1669
 msgid "Fixed size"
 msgstr "Fast storleik"
 
-#: src/library/grDevices/src/devWindows.cpp:1675
+#: src/library/grDevices/src/devWindows.cpp:1676
 msgid "Copy as metafile"
 msgstr "Kopier som metafil"
 
-#: src/library/grDevices/src/devWindows.cpp:1677
+#: src/library/grDevices/src/devWindows.cpp:1678
 msgid "Copy as bitmap"
 msgstr "Kopier som punktbilet"
 
-#: src/library/grDevices/src/devWindows.cpp:1680
+#: src/library/grDevices/src/devWindows.cpp:1681
 msgid "Save as metafile..."
 msgstr "Lagra som metafil …"
 
-#: src/library/grDevices/src/devWindows.cpp:1682
+#: src/library/grDevices/src/devWindows.cpp:1683
 msgid "Save as postscript..."
 msgstr "Lagra som PostScript …"
 

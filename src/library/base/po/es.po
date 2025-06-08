@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-01 10:55+0200\n"
+"POT-Creation-Date: 2025-06-08 10:47+0200\n"
 "PO-Revision-Date: 2025-04-01 16:52+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -252,13 +252,22 @@ msgstr "versión de Windows no soportada"
 msgid "cannot resolve current user or domain: '%s'"
 msgstr "no fue posible abrir el archivo '%s': %s"
 
-#: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879 src/main/util.cpp:1088
-msgid "'path' must be a character vector"
-msgstr "'path' debe ser un vector de caracteres"
+#: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879
+#: src/main/sysutils.cpp:690 src/main/unique.cpp:2183 src/main/util.cpp:1088
+#, fuzzy, c-format
+msgid "'%s' must be a character vector"
+msgstr "'x' debe ser un vector de caracteres"
 
-#: src/gnuwin32/extra.cpp:766
-#, fuzzy
-msgid "'winslash' must be a character string"
+#: src/gnuwin32/extra.cpp:766 src/main/errors.cpp:1284 src/main/errors.cpp:1286
+#: src/main/options.cpp:484 src/main/unique.cpp:2187
+#: src/modules/lapack/Lapack.cpp:118 src/modules/lapack/Lapack.cpp:354
+#: src/modules/lapack/Lapack.cpp:383 src/modules/lapack/Lapack.cpp:434
+#: src/modules/lapack/Lapack.cpp:435 src/modules/lapack/Lapack.cpp:471
+#: src/modules/lapack/Lapack.cpp:509 src/modules/lapack/Lapack.cpp:540
+#: src/modules/lapack/Lapack.cpp:595 src/modules/lapack/Lapack.cpp:632
+#: src/modules/lapack/Lapack.cpp:633 src/modules/lapack/Lapack.cpp:896
+#, fuzzy, c-format
+msgid "'%s' must be a character string"
 msgstr "'sep' debe ser una cadena (string) de caracteres"
 
 #: src/gnuwin32/extra.cpp:942 src/gnuwin32/extra.cpp:944
@@ -632,65 +641,26 @@ msgstr ""
 msgid "cannot get data pointer of '%s' objects"
 msgstr "no fue posible crear fifo '%s', motivo '%s'"
 
-#: src/include/Rinlinedfuns.h:159
-msgid "bad LGLSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:163
-msgid "bad INTSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:166
-msgid "bad REALSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:169
-msgid "bad CPLXSXP vector"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:159 src/include/Rinlinedfuns.h:163
+#: src/include/Rinlinedfuns.h:166 src/include/Rinlinedfuns.h:169
 #: src/include/Rinlinedfuns.h:172
-msgid "bad RAWSXP vector"
-msgstr ""
+#, fuzzy, c-format
+msgid "bad '%s' vector"
+msgstr "vector de nombres inválido"
 
-#: src/include/Rinlinedfuns.h:232
-msgid "bad standard LGLSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:236
-msgid "bad standard INTSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:240
-msgid "bad standard REALSXP vector"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:244
-msgid "bad standard CPLXSXP vector"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:232 src/include/Rinlinedfuns.h:236
+#: src/include/Rinlinedfuns.h:240 src/include/Rinlinedfuns.h:244
 #: src/include/Rinlinedfuns.h:248
-msgid "bad standard RAWSXP vector"
-msgstr ""
+#, fuzzy, c-format
+msgid "bad standard '%s' vector"
+msgstr "vector de nombres inválido"
 
-#: src/include/Rinlinedfuns.h:253
-msgid "bad LGLSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:257
-msgid "bad INTSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:261
-msgid "bad REALSXP scalar"
-msgstr ""
-
-#: src/include/Rinlinedfuns.h:265
-msgid "bad CPLXSXP scalar"
-msgstr ""
-
+#: src/include/Rinlinedfuns.h:253 src/include/Rinlinedfuns.h:257
+#: src/include/Rinlinedfuns.h:261 src/include/Rinlinedfuns.h:265
 #: src/include/Rinlinedfuns.h:269
-msgid "bad RAWSXP scalar"
-msgstr ""
+#, fuzzy, c-format
+msgid "bad '%s' scalar"
+msgstr "valor de '%s' no válido"
 
 #: src/include/Rinlinedfuns.h:1105
 msgid "cycle detected"
@@ -741,20 +711,17 @@ msgstr "argumento '%s' será ignorado"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "la cadena de entrada x[%d] es inválida en esta localización"
 
-#: src/main/agrep.cpp:631
-#, fuzzy
-msgid "allocation failure in adist"
-msgstr "fallo de asignación en GVText"
+#: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
+#: src/main/util.cpp:3206 src/modules/internet/Rhttpd.cpp:1301
+#: src/modules/X11/dataentry.cpp:452
+#, fuzzy, c-format
+msgid "allocation error in '%s'"
+msgstr "error de asignación de memoria en realpr"
 
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
 msgstr "la cadena de entrada y[%d] es inválida en esta localización"
-
-#: src/main/agrep.cpp:838
-#, fuzzy
-msgid "allocation failure in aregexec"
-msgstr "fallo de asignación en GVText"
 
 #: src/main/altclasses.cpp:113 src/main/altclasses.cpp:147
 #: src/main/altclasses.cpp:195 src/main/altclasses.cpp:248
@@ -806,25 +773,10 @@ msgstr ""
 msgid "mmap objects not supported on Windows yet"
 msgstr "el tipo '%s' no es soportado"
 
-#: src/main/altclasses.cpp:1326
-#, c-format
-msgid "stat: %s"
-msgstr ""
-
 #: src/main/altclasses.cpp:1329
 #, fuzzy, c-format
 msgid "%s is not a regular file"
 msgstr "'%s' no es una función"
-
-#: src/main/altclasses.cpp:1334
-#, c-format
-msgid "open: %s"
-msgstr ""
-
-#: src/main/altclasses.cpp:1340
-#, c-format
-msgid "mmap: %s"
-msgstr ""
 
 #: src/main/altclasses.cpp:1375 src/main/apply.cpp:148
 #, c-format
@@ -833,11 +785,6 @@ msgstr "el tipo '%s' no es soportado"
 
 #: src/main/altclasses.cpp:1401
 msgid "not a memory-mapped object"
-msgstr ""
-
-#: src/main/altclasses.cpp:1408
-#, c-format
-msgid "munmap: %s"
 msgstr ""
 
 #: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448
@@ -867,25 +814,15 @@ msgstr ""
 msgid "serialized class '%s' from package '%s' has type %s; registered class has type %s"
 msgstr ""
 
-#: src/main/altrep.cpp:401
-msgid "cannot get ALTVEC DATAPTR during GC"
-msgstr ""
+#: src/main/altrep.cpp:401 src/main/altrep.cpp:556 src/main/altrep.cpp:588
+#, fuzzy, c-format
+msgid "cannot get '%s' during GC"
+msgstr "no se puede obtener una carpeta de trabajo"
 
-#: src/main/altrep.cpp:556
-msgid "cannot get ALTSTRING_ELT during GC"
-msgstr ""
-
-#: src/main/altrep.cpp:567
-msgid "cannot set ALTSTRING_ELT during GC"
-msgstr ""
-
-#: src/main/altrep.cpp:588
-msgid "cannot get ALTLIST_ELT during GC"
-msgstr ""
-
-#: src/main/altrep.cpp:599
-msgid "cannot set ALTLIST_ELT during GC"
-msgstr ""
+#: src/main/altrep.cpp:567 src/main/altrep.cpp:599
+#, fuzzy, c-format
+msgid "cannot set '%s' during GC"
+msgstr "no fue posible crear fifo '%s', motivo '%s'"
 
 #: src/main/altrep.cpp:708
 msgid "cannot unserialize this ALTREP object yet"
@@ -1173,7 +1110,8 @@ msgid "value out of range in 'perm'"
 msgstr "valor fuera de sus límites en 'perm'"
 
 #: src/main/array.cpp:1990
-msgid "'x' must be numeric"
+#, fuzzy, c-format
+msgid "'%s' must be numeric"
 msgstr "'x' debe ser numérico"
 
 # No se en que contexto va este mensaje, puede estar bien o mal traducido. Vos sabes?
@@ -1219,12 +1157,7 @@ msgstr ""
 msgid "cannot have attributes on a CHARSXP"
 msgstr "no se puede establecer un atributo en un símbolo"
 
-#: src/main/attrib.cpp:373 src/main/attrib.cpp:412
-#, fuzzy
-msgid "cannot set an attribute on a CHARSXP"
-msgstr "no se puede establecer un atributo en un símbolo"
-
-#: src/main/attrib.cpp:378
+#: src/main/attrib.cpp:373 src/main/attrib.cpp:378 src/main/attrib.cpp:412
 #, fuzzy, c-format
 msgid "cannot set an attribute on a '%s'"
 msgstr "no se puede establecer un atributo en un símbolo"
@@ -3022,8 +2955,8 @@ msgid "'from' must be raw or character"
 msgstr "'msg1' debe ser un string de caracteres"
 
 #: src/main/connections.cpp:6967
-#, fuzzy
-msgid "allocation error in memCompress with libdeflate"
+#, fuzzy, c-format
+msgid "allocation error in '%s' with libdeflate"
 msgstr "error de asignación de memoria en realpr"
 
 #: src/main/connections.cpp:6975
@@ -3225,16 +3158,16 @@ msgstr ""
 msgid "'%s' is not a \"%s\""
 msgstr "fifo '%s' no está listo"
 
-#: src/main/dcf.cpp:120 src/main/dcf.cpp:196 src/main/dcf.cpp:277
+#: src/main/dcf.cpp:120 src/main/dcf.cpp:198 src/main/dcf.cpp:279
 msgid "could not allocate memory for 'read.dcf'"
 msgstr "no se puede asignar memoria para 'read.dcf'"
 
-#: src/main/dcf.cpp:167
+#: src/main/dcf.cpp:169
 #, c-format
 msgid "Found continuation line starting '%s ...' at begin of record."
 msgstr "Se encontró línea de inicio '%s ... \" al comenzo de un registro."
 
-#: src/main/dcf.cpp:306
+#: src/main/dcf.cpp:308
 #, c-format
 msgid "Line starting '%s ...' is malformed!"
 msgstr "Línea de inicio '%s ...esta mal formateada!"
@@ -4354,18 +4287,6 @@ msgstr[1] "Avisos:"
 msgid "invalid option \"error\"\n"
 msgstr "opción inválida \"error\"\n"
 
-#: src/main/errors.cpp:1284 src/main/errors.cpp:1286 src/main/options.cpp:484
-#: src/main/unique.cpp:2187 src/modules/lapack/Lapack.cpp:118
-#: src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383
-#: src/modules/lapack/Lapack.cpp:434 src/modules/lapack/Lapack.cpp:435
-#: src/modules/lapack/Lapack.cpp:471 src/modules/lapack/Lapack.cpp:509
-#: src/modules/lapack/Lapack.cpp:540 src/modules/lapack/Lapack.cpp:595
-#: src/modules/lapack/Lapack.cpp:632 src/modules/lapack/Lapack.cpp:633
-#: src/modules/lapack/Lapack.cpp:896
-#, fuzzy, c-format
-msgid "'%s' must be a character string"
-msgstr "'sep' debe ser una cadena (string) de caracteres"
-
 #: src/main/errors.cpp:1359 src/main/errors.cpp:1391
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
@@ -5001,7 +4922,7 @@ msgstr "desbordamiento contextstack"
 msgid "unexpected input"
 msgstr "entrada inesperada"
 
-#: src/main/gram.cpp:4699 src/main/gram.y:2390 src/main/main.cpp:350
+#: src/main/gram.cpp:4699 src/main/gram.y:2390 src/main/main.cpp:349
 #, fuzzy
 msgid "unexpected end of input"
 msgstr "fin de entrada"
@@ -5237,11 +5158,6 @@ msgstr ""
 "error de compilación PCRE JIT\n"
 "\t'%s'"
 
-#: src/main/grep.cpp:482
-#, fuzzy
-msgid "allocation failure in set_pcre_recursion_limit"
-msgstr "fallo de asignación en GVText"
-
 #: src/main/grep.cpp:525
 #, c-format
 msgid ""
@@ -5463,11 +5379,11 @@ msgstr "coarcionando argumento de tipo '%s' a logical"
 msgid "dummy - do not translate"
 msgstr "dummy"
 
-#: src/main/main.cpp:389
+#: src/main/main.cpp:388
 msgid "error during cleanup\n"
 msgstr "Error durante la limpieza:\n"
 
-#: src/main/main.cpp:398
+#: src/main/main.cpp:397
 msgid "Execution halted\n"
 msgstr "Ejecución interrumpida\n"
 
@@ -8848,10 +8764,6 @@ msgstr "este sistema no puede desvincular variables generales que han sido puest
 msgid "'Sys.unsetenv' is not available on this system"
 msgstr "'putenv' no está disponible en este sistema"
 
-#: src/main/sysutils.cpp:690
-msgid "'x' must be a character vector"
-msgstr "'x' debe ser un vector de caracteres"
-
 #: src/main/sysutils.cpp:705
 #, fuzzy
 msgid "'x' must be a character vector or a list of NULL or raw vectors"
@@ -9037,10 +8949,6 @@ msgstr "data frame no numérico en rowsum"
 #: src/main/unique.cpp:2112
 msgid "this cannot happen"
 msgstr "esto no puede ocurrir"
-
-#: src/main/unique.cpp:2183
-msgid "'names' must be a character vector"
-msgstr "'names' debe ser un vector de caracteres"
 
 #: src/main/unique.cpp:2261
 #, fuzzy
@@ -9305,11 +9213,6 @@ msgstr ".C(..): 'type' debe ser \"entero\" para poder utilizar el formato \"d\""
 #, fuzzy
 msgid "unsupported type "
 msgstr "tipo no soportado"
-
-#: src/main/util.cpp:3206
-#, fuzzy
-msgid "allocation error in Rstrdup"
-msgstr "error de asignación de memoria en realpr"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -9635,11 +9538,6 @@ msgstr "no se puede abrir la conexión"
 msgid "allocation error in remove_dot_segments"
 msgstr ""
 
-#: src/modules/internet/Rhttpd.cpp:1301
-#, fuzzy
-msgid "allocation error in srv_input_handler"
-msgstr "error de asignación de memoria en realpr"
-
 #: src/modules/internet/Rhttpd.cpp:1362
 #, fuzzy
 msgid "unable to create socket"
@@ -9921,11 +9819,6 @@ msgstr "no fue posible iniciar el dispositivo %s"
 #: src/modules/X11/dataentry.cpp:435
 msgid "dataentry: internal memory problem"
 msgstr ""
-
-#: src/modules/X11/dataentry.cpp:452
-#, fuzzy
-msgid "allocation failed in in_R_X11_dataviewer"
-msgstr "fallo de asignación en GVText"
 
 #: src/modules/X11/dataentry.cpp:498
 #, fuzzy
@@ -10606,6 +10499,44 @@ msgstr "módulo X11 no puede ser cargado"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 no está disponible"
+
+#~ msgid "'path' must be a character vector"
+#~ msgstr "'path' debe ser un vector de caracteres"
+
+#~ msgid "'names' must be a character vector"
+#~ msgstr "'names' debe ser un vector de caracteres"
+
+#, fuzzy
+#~ msgid "'winslash' must be a character string"
+#~ msgstr "'sep' debe ser una cadena (string) de caracteres"
+
+#, fuzzy, c-format
+#~ msgid "allocation failure in '%s'"
+#~ msgstr "fallo de asignación en GVText"
+
+#, fuzzy
+#~ msgid "allocation failure in aregexec"
+#~ msgstr "fallo de asignación en GVText"
+
+#, fuzzy
+#~ msgid "allocation failure in set_pcre_recursion_limit"
+#~ msgstr "fallo de asignación en GVText"
+
+#, fuzzy
+#~ msgid "allocation error in memCompress with libdeflate"
+#~ msgstr "error de asignación de memoria en realpr"
+
+#, fuzzy
+#~ msgid "allocation error in srv_input_handler"
+#~ msgstr "error de asignación de memoria en realpr"
+
+#, fuzzy
+#~ msgid "allocation failed in in_R_X11_dataviewer"
+#~ msgstr "fallo de asignación en GVText"
+
+#, fuzzy
+#~ msgid "cannot set an attribute on a CHARSXP"
+#~ msgstr "no se puede establecer un atributo en un símbolo"
 
 #, c-format
 #~ msgid "invalid 'x' type in 'x %s y'"
@@ -11353,9 +11284,6 @@ msgstr "X11 no está disponible"
 
 #~ msgid "invalid hcl color"
 #~ msgstr "color hcl inválido"
-
-#~ msgid "invalid 'names' vector"
-#~ msgstr "vector de nombres inválido"
 
 #~ msgid "invalid gray level, must be in [0,1]."
 #~ msgstr "nivel de gris inválido, debe estar en el intervalo [0,1]"

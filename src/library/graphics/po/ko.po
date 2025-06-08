@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 10:47+0200\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -546,17 +546,10 @@ msgstr "유효하지 않은 'y' limits입니다"
 msgid "invalid 'z' limits"
 msgstr "유효하지 않은 'z' limits입니다"
 
-#: plot3d.cpp:1137
-msgid "'xlab' must be a character vector of length 1"
+#: plot3d.cpp:1137 plot3d.cpp:1139 plot3d.cpp:1141
+#, fuzzy, c-format
+msgid "'%s' must be a character vector of length 1"
 msgstr "'xlab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
-
-#: plot3d.cpp:1139
-msgid "'ylab' must be a character vector of length 1"
-msgstr "'ylab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
-
-#: plot3d.cpp:1141
-msgid "'zlab' must be a character vector of length 1"
-msgstr "'zlab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
 #: plot3d.cpp:1161
 msgid "invalid viewing parameters"
@@ -644,6 +637,12 @@ msgstr "벡터 '%s'는 지원되지 않는 길이를 가지고 있습니다"
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "'ylab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "'zlab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"

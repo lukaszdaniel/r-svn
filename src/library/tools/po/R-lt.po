@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-05 16:38\n"
 "PO-Revision-Date: 2021-11-08 10:33+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -1771,6 +1771,13 @@ msgstr "praėjusios laiko limitas %g %s, pasiektas antrinio proceso metu"
 msgid "empty 'data' directory"
 msgstr "katalogas 'data' tuščias"
 
+#. R/utils.R: gettextf("error in inferior call:\n  %s", conditionMessage(val))
+#: R/utils.R:0
+msgid ""
+"error in inferior call:\n"
+"  %s"
+msgstr ""
+
 #. R/install.R: gettextf("error reading file '%s'", fd)
 #: R/install.R:0
 msgid "error reading file '%s'"
@@ -1833,6 +1840,11 @@ msgstr "generuojami derinimo simboliai (%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "httpd serverį išjungė R_DISABLE_HTTPD"
+
+#. R/utils.R: gettext("inferior call failed")
+#: R/utils.R:0
+msgid "inferior call failed"
+msgstr ""
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -2024,9 +2036,9 @@ msgid ""
 "%s"
 msgstr "analizavimo klaida pavyzdžiuose iš failo '%s':"
 
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error(e))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error(e))
 #: R/QC.R:0
 msgid ""
 "parse error in file '%s':\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 19:22+0100\n"
+"POT-Creation-Date: 2025-06-06 16:56+0200\n"
 "PO-Revision-Date: 2025-04-01 16:51+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: src/gnuwin32/console.cpp:1195 src/gnuwin32/console.cpp:1237
-#: src/gnuwin32/console.cpp:1767
+#: src/gnuwin32/console.cpp:1765
 msgid "Not enough memory"
 msgstr "Memoria insuficiente"
 
@@ -33,11 +33,11 @@ msgstr "Memoria insuficiente: texto no copiado en el área de transferencia"
 msgid "Unable to open the clipboard"
 msgstr "No es posible abrir el área de transferencia"
 
-#: src/gnuwin32/console.cpp:2131
+#: src/gnuwin32/console.cpp:2129
 msgid "Insufficient memory. Please close the console"
 msgstr "Memoria insuficiente. Por favor cierre la consola"
 
-#: src/gnuwin32/console.cpp:2186 src/gnuwin32/console.cpp:2240
+#: src/gnuwin32/console.cpp:2184 src/gnuwin32/console.cpp:2238
 #: src/gnuwin32/preferences.cpp:347
 #, c-format
 msgid ""
@@ -47,23 +47,23 @@ msgstr ""
 "Fuente %s-%d-%d  no encontrada.\n"
 "Usando fuente dada por el sistema"
 
-#: src/gnuwin32/console.cpp:2343
+#: src/gnuwin32/console.cpp:2341
 msgid "Save selection to"
 msgstr "Guardar como"
 
-#: src/gnuwin32/console.cpp:2345
+#: src/gnuwin32/console.cpp:2343
 msgid "Save console contents to"
 msgstr "Guardar contenido de la consola en"
 
-#: src/gnuwin32/console.cpp:2452
+#: src/gnuwin32/console.cpp:2450
 msgid "Scrolling.\n"
 msgstr "Desplazarse.\n"
 
-#: src/gnuwin32/console.cpp:2453
+#: src/gnuwin32/console.cpp:2451
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 msgstr "  Teclado: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 
-#: src/gnuwin32/console.cpp:2454
+#: src/gnuwin32/console.cpp:2452
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
@@ -71,91 +71,91 @@ msgstr ""
 "  Mouse: use la barra de desplazamiento.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2455
+#: src/gnuwin32/console.cpp:2453
 msgid "Editing.\n"
 msgstr "Editando.\n"
 
-#: src/gnuwin32/console.cpp:2456
+#: src/gnuwin32/console.cpp:2454
 msgid "  Moving the cursor: \n"
 msgstr "  Moviendo el cursor: \n"
 
-#: src/gnuwin32/console.cpp:2457
+#: src/gnuwin32/console.cpp:2455
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     Flecha izquierda or Ctrl+B: mueve un caracter para atras;\n"
 
-#: src/gnuwin32/console.cpp:2458
+#: src/gnuwin32/console.cpp:2456
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
 msgstr "     Flecha derecha o  Ctrl+F: mueve un caracter para adelante;\n"
 
-#: src/gnuwin32/console.cpp:2459
+#: src/gnuwin32/console.cpp:2457
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     Home o Ctrl+A: va al principio de linea;\n"
 
-#: src/gnuwin32/console.cpp:2460
+#: src/gnuwin32/console.cpp:2458
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     End o Ctrl+E: va al fin de linea;\n"
 
-#: src/gnuwin32/console.cpp:2461
+#: src/gnuwin32/console.cpp:2459
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
 msgstr "  Histórico: flechas arriba y abajo, Ctrl+P, Ctrl+N\n"
 
-#: src/gnuwin32/console.cpp:2462
+#: src/gnuwin32/console.cpp:2460
 msgid "  Deleting:\n"
 msgstr "  Borrando:\n"
 
-#: src/gnuwin32/console.cpp:2463
+#: src/gnuwin32/console.cpp:2461
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     Del o Ctrl+D: borrar caracter actual o sección;\n"
 
-#: src/gnuwin32/console.cpp:2464
+#: src/gnuwin32/console.cpp:2462
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     Retroceso: borra el carácter precedente\n"
 
-#: src/gnuwin32/console.cpp:2465
+#: src/gnuwin32/console.cpp:2463
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
 msgstr "     Ctrl+Del o Ctrl+K: borra texto desde caracter actual al fin de linea.\n"
 
-#: src/gnuwin32/console.cpp:2466
+#: src/gnuwin32/console.cpp:2464
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     Ctrl+U: borrar todo el texto desde la linea actual.\n"
 
-#: src/gnuwin32/console.cpp:2467
+#: src/gnuwin32/console.cpp:2465
 msgid "  Copy and paste.\n"
 msgstr "  Copiar y pegar.\n"
 
-#: src/gnuwin32/console.cpp:2468
+#: src/gnuwin32/console.cpp:2466
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
 msgstr "     Use el mouse (con el botón izquierdo sujetado) para marcar (selecionar) texto.\n"
 
-#: src/gnuwin32/console.cpp:2469
+#: src/gnuwin32/console.cpp:2467
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
 msgstr "     Use Shift+Del (o Ctrl+C) para copiar el texto selecionado para a área de transferencia\n"
 
-#: src/gnuwin32/console.cpp:2470
+#: src/gnuwin32/console.cpp:2468
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr "     Shift+Ins (o Ctrl+V o Ctrl+Y) para pegar el contenido del área de transferencia (si hubiera alguno)  \n"
 
-#: src/gnuwin32/console.cpp:2471
+#: src/gnuwin32/console.cpp:2469
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     para la consola, Ctrl+X primeiro copie depues pegue\n"
 
-#: src/gnuwin32/console.cpp:2472
+#: src/gnuwin32/console.cpp:2470
 msgid "  Misc:\n"
 msgstr "  Misceláneo:\n"
 
-#: src/gnuwin32/console.cpp:2473
+#: src/gnuwin32/console.cpp:2471
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     Ctrl+L: Limpia la consola.\n"
 
-#: src/gnuwin32/console.cpp:2474
+#: src/gnuwin32/console.cpp:2472
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     Ctrl+O o INS: Alterna o modo de sobre ecritura: inicialmente desactivado.\n"
 
-#: src/gnuwin32/console.cpp:2475
+#: src/gnuwin32/console.cpp:2473
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     Ctrl+T: Intercambia caracter actual con uno de la izquierda.\n"
 
-#: src/gnuwin32/console.cpp:2476
+#: src/gnuwin32/console.cpp:2474
 msgid ""
 "\n"
 "Note: Console is updated only when some input is required.\n"
@@ -163,7 +163,7 @@ msgstr ""
 "\n"
 "Nota: Consola es actualizada solo cuando alguna entrada es requerida.\n"
 
-#: src/gnuwin32/console.cpp:2477
+#: src/gnuwin32/console.cpp:2475
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
@@ -171,7 +171,7 @@ msgstr ""
 "  Use Ctrl+W para alternar esta caracteristica prendido/apagado.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2478
+#: src/gnuwin32/console.cpp:2476
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -179,7 +179,7 @@ msgstr ""
 "Use ESC para parar el interprete.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2479
+#: src/gnuwin32/console.cpp:2477
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -187,11 +187,11 @@ msgstr ""
 "TAB comienza a completar la palabra.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2480
+#: src/gnuwin32/console.cpp:2478
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "Teclas estandards de Windows pueden ser utilizadas para cambiar a\n"
 
-#: src/gnuwin32/console.cpp:2481
+#: src/gnuwin32/console.cpp:2479
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "dispositivo gráfico (Ctrl+Tab ou Ctrl+F6 en MDI, Alt+Tab en SDI)"
 
@@ -307,7 +307,7 @@ msgid "Save script"
 msgstr "Guardar script"
 
 #: src/gnuwin32/editor.cpp:778 src/gnuwin32/pager.cpp:458
-#: src/library/grDevices/src/devWindows.cpp:1593
+#: src/library/grDevices/src/devWindows.cpp:1594
 msgid "Return focus to Console"
 msgstr "Retornar foco a la consola"
 
@@ -316,13 +316,13 @@ msgid "Print script"
 msgstr "Imprimir script"
 
 #: src/gnuwin32/editor.cpp:783 src/gnuwin32/pager.cpp:453
-#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1587
+#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1588
 msgid "Print"
 msgstr "Imprimir"
 
 #: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:474
-#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1828
-#: src/library/grDevices/src/devWindows.cpp:1625
+#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1819
+#: src/library/grDevices/src/devWindows.cpp:1626
 msgid "File"
 msgstr "Archivo"
 
@@ -345,8 +345,8 @@ msgid "Save as..."
 msgstr "Guardar como..."
 
 #: src/gnuwin32/editor.cpp:811 src/gnuwin32/pager.cpp:477
-#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1646
-#: src/library/grDevices/src/devWindows.cpp:1688
+#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1647
+#: src/library/grDevices/src/devWindows.cpp:1689
 msgid "Print..."
 msgstr "Imprimir..."
 
@@ -355,7 +355,7 @@ msgid "Close script"
 msgstr "Cerrar script"
 
 #: src/gnuwin32/editor.cpp:816 src/gnuwin32/pager.cpp:484
-#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1834
+#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1825
 msgid "Edit"
 msgstr "Editar"
 
@@ -380,8 +380,8 @@ msgid "GUI preferences..."
 msgstr "Preferencias de la interface gráfica..."
 
 #: src/gnuwin32/editor.cpp:852 src/gnuwin32/rui.cpp:1260
-#: src/library/utils/src/windows/dataentry.cpp:1735
-#: src/library/utils/src/windows/dataentry.cpp:1845
+#: src/library/utils/src/windows/dataentry.cpp:1726
+#: src/library/utils/src/windows/dataentry.cpp:1836
 msgid "Help"
 msgstr "Ayuda"
 
@@ -429,14 +429,14 @@ msgid "Paste commands to console"
 msgstr "Pegar comandos en la consola"
 
 #: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:931
-#: src/library/utils/src/windows/dataentry.cpp:1741
-#: src/library/grDevices/src/devWindows.cpp:1685
+#: src/library/utils/src/windows/dataentry.cpp:1732
+#: src/library/grDevices/src/devWindows.cpp:1686
 msgid "Stay on top"
 msgstr "Siempre visible"
 
 #: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:482
-#: src/library/utils/src/windows/dataentry.cpp:1743
-#: src/library/utils/src/windows/dataentry.cpp:1830
+#: src/library/utils/src/windows/dataentry.cpp:1734
+#: src/library/utils/src/windows/dataentry.cpp:1821
 msgid "Close"
 msgstr "Cerrar"
 
@@ -891,73 +891,73 @@ msgstr "Memoria insuficiente para mostrar un archivo en la impresora"
 msgid "Unable to start the print job"
 msgstr "No fue posible iniciar la impresión"
 
-#: src/library/utils/src/windows/dataentry.cpp:248
-#: src/library/utils/src/windows/dataentry.cpp:1879
-#: src/library/utils/src/windows/dataentry.cpp:1882
-#: src/library/utils/src/windows/dataentry.cpp:1912
+#: src/library/utils/src/windows/dataentry.cpp:245
+#: src/library/utils/src/windows/dataentry.cpp:1870
+#: src/library/utils/src/windows/dataentry.cpp:1873
+#: src/library/utils/src/windows/dataentry.cpp:1903
 msgid "invalid argument"
 msgstr "argumento no válido"
 
-#: src/library/utils/src/windows/dataentry.cpp:292
+#: src/library/utils/src/windows/dataentry.cpp:289
 msgid "invalid type for value"
 msgstr "tipo no válido para el valor"
 
-#: src/library/utils/src/windows/dataentry.cpp:303
+#: src/library/utils/src/windows/dataentry.cpp:300
 msgid "Data Editor"
 msgstr "Editor de datos"
 
-#: src/library/utils/src/windows/dataentry.cpp:353
-#: src/library/utils/src/windows/dataentry.cpp:1872
+#: src/library/utils/src/windows/dataentry.cpp:350
+#: src/library/utils/src/windows/dataentry.cpp:1863
 msgid "dataentry: internal memory problem"
 msgstr "dataentry: problema interno de memória"
 
-#: src/library/utils/src/windows/dataentry.cpp:657
-#: src/library/utils/src/windows/dataentry.cpp:1259
+#: src/library/utils/src/windows/dataentry.cpp:653
+#: src/library/utils/src/windows/dataentry.cpp:1250
 msgid "dataentry: internal memory error"
 msgstr "dataentry: error interno de memória"
 
-#: src/library/utils/src/windows/dataentry.cpp:780
-#: src/library/utils/src/windows/dataentry.cpp:793
+#: src/library/utils/src/windows/dataentry.cpp:776
+#: src/library/utils/src/windows/dataentry.cpp:789
 msgid "internal type error in dataentry"
 msgstr "error de tipo interno en la entrada de datos"
 
-#: src/library/utils/src/windows/dataentry.cpp:888
+#: src/library/utils/src/windows/dataentry.cpp:880
 msgid "dataentry: parse error on string"
 msgstr "dataentry: error de análisis en cadena de"
 
-#: src/library/utils/src/windows/dataentry.cpp:1033
+#: src/library/utils/src/windows/dataentry.cpp:1025
 msgid "dataentry: expression too long"
 msgstr "dataentry: expresion demasiado larga"
 
-#: src/library/utils/src/windows/dataentry.cpp:1509
+#: src/library/utils/src/windows/dataentry.cpp:1500
 msgid "column names cannot be blank"
 msgstr "nombres de columnas no pueden ser blancos"
 
-#: src/library/utils/src/windows/dataentry.cpp:1555
+#: src/library/utils/src/windows/dataentry.cpp:1546
 msgid "Variable editor"
 msgstr "Editor de variables"
 
-#: src/library/utils/src/windows/dataentry.cpp:1560
+#: src/library/utils/src/windows/dataentry.cpp:1551
 msgid "variable name"
 msgstr "nombre de variable"
 
-#: src/library/utils/src/windows/dataentry.cpp:1562
+#: src/library/utils/src/windows/dataentry.cpp:1553
 msgid "type"
 msgstr "tipo"
 
-#: src/library/utils/src/windows/dataentry.cpp:1677
+#: src/library/utils/src/windows/dataentry.cpp:1668
 msgid "Cell width(s)"
 msgstr "Largo(s) de celdas(s)"
 
-#: src/library/utils/src/windows/dataentry.cpp:1683
+#: src/library/utils/src/windows/dataentry.cpp:1674
 msgid "Cell width"
 msgstr "Largo de celdas"
 
-#: src/library/utils/src/windows/dataentry.cpp:1686
+#: src/library/utils/src/windows/dataentry.cpp:1677
 msgid "variable"
 msgstr "variable"
 
-#: src/library/utils/src/windows/dataentry.cpp:1729
+#: src/library/utils/src/windows/dataentry.cpp:1720
 msgid ""
 "Navigation.\n"
 "  Keyboard: cursor keys move selection\n"
@@ -999,210 +999,210 @@ msgstr ""
 "  Use el boton derecho en el meno para copiar, pegar, redimensionar columnas actualmente seleccionadas.\n"
 "\n"
 
-#: src/library/utils/src/windows/dataentry.cpp:1737
+#: src/library/utils/src/windows/dataentry.cpp:1728
 msgid "Copy selected cell"
 msgstr "Copiar la celda selecionada"
 
-#: src/library/utils/src/windows/dataentry.cpp:1738
+#: src/library/utils/src/windows/dataentry.cpp:1729
 msgid "Paste to selected cell"
 msgstr "Pegar la celda selecionada"
 
-#: src/library/utils/src/windows/dataentry.cpp:1739
+#: src/library/utils/src/windows/dataentry.cpp:1730
 msgid "Autosize column"
 msgstr "Autodimensionar la columna"
 
-#: src/library/utils/src/windows/dataentry.cpp:1835
+#: src/library/utils/src/windows/dataentry.cpp:1826
 msgid "Copy  \tCTRL+C"
 msgstr "Copiar  \tCTRL+C"
 
-#: src/library/utils/src/windows/dataentry.cpp:1837
+#: src/library/utils/src/windows/dataentry.cpp:1828
 msgid "Paste \tCTRL+V"
 msgstr "Pegar \tCTRL+V"
 
-#: src/library/utils/src/windows/dataentry.cpp:1839
+#: src/library/utils/src/windows/dataentry.cpp:1830
 msgid "Delete\tDEL"
 msgstr "Borrar\tDEL"
 
-#: src/library/utils/src/windows/dataentry.cpp:1842
+#: src/library/utils/src/windows/dataentry.cpp:1833
 msgid "Cell widths ..."
 msgstr "Ancho de celda ..."
 
-#: src/library/utils/src/windows/dataentry.cpp:1846
+#: src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Data editor"
 msgstr "Editor de datos"
 
-#: src/library/utils/src/windows/dataentry.cpp:1919
+#: src/library/utils/src/windows/dataentry.cpp:1910
 #, fuzzy
 msgid "unable to start data viewer"
 msgstr "No fue posible iniciar la impresión"
 
-#: src/library/grDevices/src/devWindows.cpp:937
+#: src/library/grDevices/src/devWindows.cpp:938
 msgid "Portable network graphics file"
 msgstr "Archivos de tipo Portable network graphics"
 
-#: src/library/grDevices/src/devWindows.cpp:940
+#: src/library/grDevices/src/devWindows.cpp:941
 msgid "Windows bitmap file"
 msgstr "Archivos de tipo Windows bitmap"
 
-#: src/library/grDevices/src/devWindows.cpp:943
+#: src/library/grDevices/src/devWindows.cpp:944
 msgid "TIFF file"
 msgstr "Archivos TIFF"
 
-#: src/library/grDevices/src/devWindows.cpp:946
+#: src/library/grDevices/src/devWindows.cpp:947
 msgid "Jpeg file"
 msgstr "Archivos jpeg"
 
-#: src/library/grDevices/src/devWindows.cpp:967
+#: src/library/grDevices/src/devWindows.cpp:968
 msgid "Postscript file"
 msgstr "Archivos postscript"
 
-#: src/library/grDevices/src/devWindows.cpp:978
+#: src/library/grDevices/src/devWindows.cpp:979
 msgid "PDF file"
 msgstr "Archivos PDF"
 
-#: src/library/grDevices/src/devWindows.cpp:990
+#: src/library/grDevices/src/devWindows.cpp:991
 msgid "Enhanced metafiles"
 msgstr "Realzar metafiles"
 
-#: src/library/grDevices/src/devWindows.cpp:993
+#: src/library/grDevices/src/devWindows.cpp:994
 #: src/library/grDevices/src/devWindows.cpp:3528
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "camino de archivo seleccionado es demaciado largo: solamente 512 bytes son permitidos"
 
-#: src/library/grDevices/src/devWindows.cpp:1203
+#: src/library/grDevices/src/devWindows.cpp:1204
 msgid "No plot to replace!"
 msgstr "No hay gráfico a substituir!"
 
-#: src/library/grDevices/src/devWindows.cpp:1253
+#: src/library/grDevices/src/devWindows.cpp:1254
 msgid "Variable name"
 msgstr "Nombre de variable"
 
-#: src/library/grDevices/src/devWindows.cpp:1262
+#: src/library/grDevices/src/devWindows.cpp:1263
 msgid "Variable doesn't contain any plots!"
 msgstr "La variable no contiene ningún gráfico!"
 
-#: src/library/grDevices/src/devWindows.cpp:1275
+#: src/library/grDevices/src/devWindows.cpp:1276
 msgid "Name of variable to save to"
 msgstr "Nombre de variables a salvar"
 
-#: src/library/grDevices/src/devWindows.cpp:1581
+#: src/library/grDevices/src/devWindows.cpp:1582
 msgid "Copy to the clipboard as a metafile"
 msgstr "Copiar al área de transferencia como un metafile"
 
-#: src/library/grDevices/src/devWindows.cpp:1599
-#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1600
+#: src/library/grDevices/src/devWindows.cpp:1611
 msgid "Stop locator"
 msgstr "Parar localizador"
 
-#: src/library/grDevices/src/devWindows.cpp:1609
-#: src/library/grDevices/src/devWindows.cpp:1613
+#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1614
 msgid "Stop"
 msgstr "Parar"
 
-#: src/library/grDevices/src/devWindows.cpp:1615
+#: src/library/grDevices/src/devWindows.cpp:1616
 msgid "Continue"
 msgstr "Continuar"
 
-#: src/library/grDevices/src/devWindows.cpp:1619
+#: src/library/grDevices/src/devWindows.cpp:1620
 msgid "Next"
 msgstr "Próximo"
 
-#: src/library/grDevices/src/devWindows.cpp:1620
+#: src/library/grDevices/src/devWindows.cpp:1621
 msgid "Next plot"
 msgstr "Próximo gráfico"
 
-#: src/library/grDevices/src/devWindows.cpp:1626
+#: src/library/grDevices/src/devWindows.cpp:1627
 msgid "Save as"
 msgstr "Guardar como"
 
-#: src/library/grDevices/src/devWindows.cpp:1635
-#: src/library/grDevices/src/devWindows.cpp:1637
-#: src/library/grDevices/src/devWindows.cpp:1639
+#: src/library/grDevices/src/devWindows.cpp:1636
+#: src/library/grDevices/src/devWindows.cpp:1638
+#: src/library/grDevices/src/devWindows.cpp:1640
 #, c-format
 msgid "%s quality..."
 msgstr "%s calidad..."
 
-#: src/library/grDevices/src/devWindows.cpp:1641
+#: src/library/grDevices/src/devWindows.cpp:1642
 msgid "Copy to the clipboard"
 msgstr "Copiar para el área de transferencia"
 
-#: src/library/grDevices/src/devWindows.cpp:1642
+#: src/library/grDevices/src/devWindows.cpp:1643
 msgid "as a Bitmap\tCTRL+C"
 msgstr "como un Bitmap\tCTRL+C"
 
-#: src/library/grDevices/src/devWindows.cpp:1643
+#: src/library/grDevices/src/devWindows.cpp:1644
 msgid "as a Metafile\tCTRL+W"
 msgstr "como un Metafile\tCTRL+W"
 
-#: src/library/grDevices/src/devWindows.cpp:1648
+#: src/library/grDevices/src/devWindows.cpp:1649
 msgid "close Device"
 msgstr "cerrar Dispositivo"
 
-#: src/library/grDevices/src/devWindows.cpp:1649
+#: src/library/grDevices/src/devWindows.cpp:1650
 msgid "History"
 msgstr "Histórico"
 
-#: src/library/grDevices/src/devWindows.cpp:1650
+#: src/library/grDevices/src/devWindows.cpp:1651
 msgid "Recording"
 msgstr "Grabando"
 
-#: src/library/grDevices/src/devWindows.cpp:1653
+#: src/library/grDevices/src/devWindows.cpp:1654
 msgid "Add\tINS"
 msgstr "Agregar\tINS"
 
-#: src/library/grDevices/src/devWindows.cpp:1654
+#: src/library/grDevices/src/devWindows.cpp:1655
 msgid "Replace"
 msgstr "Substituir"
 
-#: src/library/grDevices/src/devWindows.cpp:1656
+#: src/library/grDevices/src/devWindows.cpp:1657
 msgid "Previous\tPgUp"
 msgstr "Anterior\tPageUp"
 
-#: src/library/grDevices/src/devWindows.cpp:1657
+#: src/library/grDevices/src/devWindows.cpp:1658
 msgid "Next\tPgDown"
 msgstr "Próximo\tPageDown"
 
-#: src/library/grDevices/src/devWindows.cpp:1659
+#: src/library/grDevices/src/devWindows.cpp:1660
 msgid "Save to variable..."
 msgstr "Guardar en la variable ..."
 
-#: src/library/grDevices/src/devWindows.cpp:1660
+#: src/library/grDevices/src/devWindows.cpp:1661
 msgid "Get from variable..."
 msgstr "Obtener de la variable..."
 
-#: src/library/grDevices/src/devWindows.cpp:1662
+#: src/library/grDevices/src/devWindows.cpp:1663
 msgid "Clear history"
 msgstr "Limpar histórico"
 
-#: src/library/grDevices/src/devWindows.cpp:1663
+#: src/library/grDevices/src/devWindows.cpp:1664
 msgid "Resize"
 msgstr "Redimensionar"
 
-#: src/library/grDevices/src/devWindows.cpp:1664
+#: src/library/grDevices/src/devWindows.cpp:1665
 msgid "R mode"
 msgstr "Modo R"
 
-#: src/library/grDevices/src/devWindows.cpp:1666
+#: src/library/grDevices/src/devWindows.cpp:1667
 msgid "Fit to window"
 msgstr "Ajuste al tamaño de ventana"
 
-#: src/library/grDevices/src/devWindows.cpp:1668
+#: src/library/grDevices/src/devWindows.cpp:1669
 msgid "Fixed size"
 msgstr "Tamaño fijo"
 
-#: src/library/grDevices/src/devWindows.cpp:1675
+#: src/library/grDevices/src/devWindows.cpp:1676
 msgid "Copy as metafile"
 msgstr "Copiar como metafile"
 
-#: src/library/grDevices/src/devWindows.cpp:1677
+#: src/library/grDevices/src/devWindows.cpp:1678
 msgid "Copy as bitmap"
 msgstr "Copiar como bitmap"
 
-#: src/library/grDevices/src/devWindows.cpp:1680
+#: src/library/grDevices/src/devWindows.cpp:1681
 msgid "Save as metafile..."
 msgstr "Guardar como metafile..."
 
-#: src/library/grDevices/src/devWindows.cpp:1682
+#: src/library/grDevices/src/devWindows.cpp:1683
 msgid "Save as postscript..."
 msgstr "Guardar como postscript..."
 

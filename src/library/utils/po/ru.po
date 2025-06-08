@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:37+0200\n"
+"POT-Creation-Date: 2025-06-08 10:48+0200\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -202,7 +202,8 @@ msgid "input must be a character string"
 msgstr "'title' должен быть текстовой строкой"
 
 #: utils.cpp:154
-msgid "'hostname' must be a character vector of length 1"
+#, fuzzy, c-format
+msgid "'%s' must be a character vector of length 1"
 msgstr "'hostname' должно быть текстовым вектором длиной 1"
 
 #: utils.cpp:160
@@ -295,7 +296,7 @@ msgstr ""
 msgid "unsupported version of Windows"
 msgstr "неподдерживаемая версия Windows"
 
-#: windows/util.cpp:283
+#: windows/util.cpp:283 windows/util.cpp:318
 msgid "'raw = FALSE' and format is a not a known text format"
 msgstr ""
 

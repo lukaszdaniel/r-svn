@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-05 16:38\n"
 "PO-Revision-Date: 2021-11-06 22:40+0100\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1782,6 +1782,13 @@ msgstr "%g %s 達到了子行程的經過時間限制"
 msgid "empty 'data' directory"
 msgstr "空的 'data' 目錄"
 
+#. R/utils.R: gettextf("error in inferior call:\n  %s", conditionMessage(val))
+#: R/utils.R:0
+msgid ""
+"error in inferior call:\n"
+"  %s"
+msgstr ""
+
 #. R/install.R: gettextf("error reading file '%s'", fd)
 #: R/install.R:0
 msgid "error reading file '%s'"
@@ -1844,6 +1851,11 @@ msgstr "產生除錯符號(%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "R_DISABLE_HTTPD 的設定關閉了 httpd 伺服器"
+
+#. R/utils.R: gettext("inferior call failed")
+#: R/utils.R:0
+msgid "inferior call failed"
+msgstr ""
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -2034,9 +2046,9 @@ msgid ""
 "%s"
 msgstr "檔案 '%s' 中的例子在進行句法分析時發生錯誤："
 
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error(e))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error(e))
 #: R/QC.R:0
 msgid ""
 "parse error in file '%s':\n"

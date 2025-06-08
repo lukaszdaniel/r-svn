@@ -398,7 +398,7 @@ static R_INLINE void *ALTVEC_DATAPTR_EX(SEXP x, Rboolean writable)
 
     /**** move GC disabling into methods? */
     if (GCManager::gcIsRunning())
-	error("%s", _("cannot get ALTVEC DATAPTR during GC"));
+	error(_("cannot get '%s' during GC"), "ALTVEC DATAPTR");
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -553,7 +553,7 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 {
     /**** move GC disabling into method? */
     if (GCManager::gcIsRunning())
-	error("%s", _("cannot get ALTSTRING_ELT during GC"));
+	error(_("cannot get '%s' during GC"), "ALTSTRING_ELT");
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -564,7 +564,7 @@ attribute_hidden void R::ALTSTRING_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
     if (GCManager::gcIsRunning())
-	error("%s", _("cannot set ALTSTRING_ELT during GC"));
+	error(_("cannot set '%s' during GC"), "ALTSTRING_ELT");
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -585,7 +585,7 @@ attribute_hidden SEXP R::ALTLIST_ELT(SEXP x, R_xlen_t i)
 {
     /**** move GC disabling into method? */
     if (GCManager::gcIsRunning())
-	error("%s", _("cannot get ALTLIST_ELT during GC"));
+	error(_("cannot get '%s' during GC"), "ALTLIST_ELT");
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 
@@ -596,7 +596,7 @@ attribute_hidden void R::ALTLIST_SET_ELT(SEXP x, R_xlen_t i, SEXP v)
 {
     /**** move GC disabling into method? */
     if (GCManager::gcIsRunning())
-	error("%s", _("cannot set ALTLIST_ELT during GC"));
+	error(_("cannot set '%s' during GC"), "ALTLIST_ELT");
     R_CHECK_THREAD;
     GCManager::GCInhibitor no_gc;
 

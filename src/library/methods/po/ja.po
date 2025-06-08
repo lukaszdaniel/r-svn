@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 20:13+0200\n"
 "PO-Revision-Date: 2013-03-01 04:12+0200 \n"
 "Last-Translator: Triad sou  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -161,18 +161,18 @@ msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the fr
 msgstr " 'callNextMethod' 中に内部エラー： '.nextMethod' はメソッド呼び出しのフレームで代入されていません "
 
 #: methods_list_dispatch.cpp:892
-#, c-format
-msgid "'%s' must be a single string (got a character vector of length %d)"
+#, fuzzy, c-format
+msgid "%s must be a single string (got a character vector of length %d)"
 msgstr "'%s' は単一の文字列でなければなりません(長さ %d の文字ベクトルでした)"
 
 #: methods_list_dispatch.cpp:896
-#, c-format
-msgid "'%s' must be a non-empty string; got an empty string"
+#, fuzzy, c-format
+msgid "%s must be a non-empty string; got an empty string"
 msgstr "'%s' は空でない文字列でなければなりません; 空の文字列でした"
 
 #: methods_list_dispatch.cpp:900
-#, c-format
-msgid "'%s' must be a single string (got an object of class \"%s\")"
+#, fuzzy, c-format
+msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr "'%s' は単一の文字列でなければなりません (クラス \"%s\" のオブジェクトでした)"
 
 #: methods_list_dispatch.cpp:934

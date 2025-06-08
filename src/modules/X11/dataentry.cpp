@@ -449,7 +449,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXPTYPE type;
     // FIXME: this should be checked
     DEstruct DE = (DEstruct) malloc(sizeof(destruct));
-    if (!DE) error("%s", _("allocation failed in in_R_X11_dataviewer"));
+    if (!DE) error(_("allocation error in '%s'"), "in_R_X11_dataviewer");
 
     nView++;
 

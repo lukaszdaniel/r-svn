@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 10:47+0200\n"
 "PO-Revision-Date: 2020-12-09 13:20+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -545,17 +545,10 @@ msgstr "netinkamos 'y' ribos"
 msgid "invalid 'z' limits"
 msgstr "netinkamos 'z' ribos"
 
-#: plot3d.cpp:1137
-msgid "'xlab' must be a character vector of length 1"
+#: plot3d.cpp:1137 plot3d.cpp:1139 plot3d.cpp:1141
+#, fuzzy, c-format
+msgid "'%s' must be a character vector of length 1"
 msgstr "‘xlab’ turi būti 1 ilgio simbolių vektorius"
-
-#: plot3d.cpp:1139
-msgid "'ylab' must be a character vector of length 1"
-msgstr "‘ylab’ turi būti 1 ilgio simbolių vektorius"
-
-#: plot3d.cpp:1141
-msgid "'zlab' must be a character vector of length 1"
-msgstr "‘zlab’ turi būti 1 ilgio simbolių vektorius"
 
 #: plot3d.cpp:1161
 msgid "invalid viewing parameters"
@@ -647,6 +640,12 @@ msgstr "ilgas vektorius '%s' nepalaikomas"
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "‘ylab’ turi būti 1 ilgio simbolių vektorius"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "‘zlab’ turi būti 1 ilgio simbolių vektorius"
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"

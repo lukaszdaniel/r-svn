@@ -370,7 +370,7 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
 
     switch (TYPEOF(vec)) {
     case CHARSXP:
-        error("%s", _("cannot set an attribute on a CHARSXP"));
+        error(_("cannot set an attribute on a '%s'"), "CHARSXP");
         break;
     case SYMSXP:
     case BUILTINSXP:
@@ -409,7 +409,7 @@ static SEXP removeAttrib(SEXP vec, SEXP name)
     if (vec == R_NilValue)
         return R_NilValue;
     if (TYPEOF(vec) == CHARSXP)
-	error("%s", _("cannot set an attribute on a CHARSXP"));
+	error(_("cannot set an attribute on a '%s'"), "CHARSXP");
     if (name == R_NamesSymbol && isPairList(vec)) {
 	for (SEXP t = vec; t != R_NilValue; t = CDR(t))
 	    SET_TAG(t, R_NilValue);

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-05 16:38\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Caio Lente <lente@ime.usp.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1774,6 +1774,13 @@ msgstr "limite de tempo decorrido de %g %s foi atingido para subprocesso"
 msgid "empty 'data' directory"
 msgstr "diretório 'data' vazio"
 
+#. R/utils.R: gettextf("error in inferior call:\n  %s", conditionMessage(val))
+#: R/utils.R:0
+msgid ""
+"error in inferior call:\n"
+"  %s"
+msgstr ""
+
 #. R/install.R: gettextf("error reading file '%s'", fd)
 #: R/install.R:0
 msgid "error reading file '%s'"
@@ -1836,6 +1843,11 @@ msgstr "gerando símbolos de depuragem (%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "servidor httpd desabilitado por R_DISABLE_HTTPD"
+
+#. R/utils.R: gettext("inferior call failed")
+#: R/utils.R:0
+msgid "inferior call failed"
+msgstr ""
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -2027,9 +2039,9 @@ msgid ""
 "%s"
 msgstr "erro na análise dos exemplos do arquivo '%s':"
 
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error(e))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error(e))
 #: R/QC.R:0
 msgid ""
 "parse error in file '%s':\n"

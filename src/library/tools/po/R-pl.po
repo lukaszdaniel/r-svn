@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-05 16:38\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1678,8 +1678,7 @@ msgstr "zawiera pustą linię"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
-#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "bieżący katalog roboczy nie może być ustalony"
 
@@ -1743,6 +1742,15 @@ msgstr "granica upływu czasu o wartości %g %s został osiągnięta dla podproc
 msgid "empty 'data' directory"
 msgstr "pusty katalog 'data'"
 
+#. R/utils.R: gettextf("error in inferior call:\n  %s", conditionMessage(val))
+#: R/utils.R:0
+msgid ""
+"error in inferior call:\n"
+"  %s"
+msgstr ""
+"błąd w niższym wywołaniu:\n"
+"  %s"
+
 #. R/install.R: gettextf("error reading file '%s'", fd)
 #: R/install.R:0
 msgid "error reading file '%s'"
@@ -1805,6 +1813,11 @@ msgstr "tworzenie symboli debugowania (%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "serwer httpd wyłączony przez R_DISABLE_HTTPD"
+
+#. R/utils.R: gettext("inferior call failed")
+#: R/utils.R:0
+msgid "inferior call failed"
+msgstr "gorsze połączenie nie powiodło się"
 
 #. R/QC.R: gettextf("invalid 'OS.type' \"%s\".  Should not happen", .Platform$OS.type)
 #: R/QC.R:0
@@ -1996,9 +2009,9 @@ msgstr ""
 "błąd przetwarzania w przykładach z pliku '%s':\n"
 "%s"
 
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error(e))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error(e))
 #: R/QC.R:0
 msgid ""
 "parse error in file '%s':\n"
@@ -2642,9 +2655,6 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
-
-#~ msgid "inferior call failed"
-#~ msgstr "gorsze połączenie nie powiodło się"
 
 #~ msgid "inferiorCallError"
 #~ msgstr "inferiorCallError"

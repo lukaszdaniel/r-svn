@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-07 19:22+0100\n"
+"POT-Creation-Date: 2025-06-06 16:56+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Weblate 4.16.4\n"
 
 #: src/gnuwin32/console.cpp:1195 src/gnuwin32/console.cpp:1237
-#: src/gnuwin32/console.cpp:1767
+#: src/gnuwin32/console.cpp:1765
 msgid "Not enough memory"
 msgstr "पर्याप्त मेमोरी छैन"
 
@@ -32,11 +32,11 @@ msgstr "अपर्याप्त मेमोरी: क्लिपबोर
 msgid "Unable to open the clipboard"
 msgstr "क्लिपबोर्ड खोल्न सकिएन"
 
-#: src/gnuwin32/console.cpp:2131
+#: src/gnuwin32/console.cpp:2129
 msgid "Insufficient memory. Please close the console"
 msgstr "अपर्याप्त मेमोरी। कृपया कन्सोल बन्द गर्नुहोस्"
 
-#: src/gnuwin32/console.cpp:2186 src/gnuwin32/console.cpp:2240
+#: src/gnuwin32/console.cpp:2184 src/gnuwin32/console.cpp:2238
 #: src/gnuwin32/preferences.cpp:347
 #, c-format
 msgid ""
@@ -46,23 +46,23 @@ msgstr ""
 "फन्ट %s-%d-%d फेला परेन।\n"
 "प्रणाली निश्चित फन्ट प्रयोग गर्दै"
 
-#: src/gnuwin32/console.cpp:2343
+#: src/gnuwin32/console.cpp:2341
 msgid "Save selection to"
 msgstr "चयन सुरक्षित गर्नुहोस्"
 
-#: src/gnuwin32/console.cpp:2345
+#: src/gnuwin32/console.cpp:2343
 msgid "Save console contents to"
 msgstr "कन्सोल सामग्रीहरू सुरक्षित गर्नुहोस्"
 
-#: src/gnuwin32/console.cpp:2452
+#: src/gnuwin32/console.cpp:2450
 msgid "Scrolling.\n"
 msgstr "स्क्रोल गर्दै।\n"
 
-#: src/gnuwin32/console.cpp:2453
+#: src/gnuwin32/console.cpp:2451
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 msgstr "  किबोर्ड: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 
-#: src/gnuwin32/console.cpp:2454
+#: src/gnuwin32/console.cpp:2452
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
@@ -70,91 +70,91 @@ msgstr ""
 "  माउस: स्क्रोलबार(हरू) प्रयोग गर्नुहोस्।\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2455
+#: src/gnuwin32/console.cpp:2453
 msgid "Editing.\n"
 msgstr "सम्पादन गर्दै।\n"
 
-#: src/gnuwin32/console.cpp:2456
+#: src/gnuwin32/console.cpp:2454
 msgid "  Moving the cursor: \n"
 msgstr "  कर्सर सार्दै: \n"
 
-#: src/gnuwin32/console.cpp:2457
+#: src/gnuwin32/console.cpp:2455
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     बायाँ तीर वा Ctrl+B: एक वर्ण पछाडि सार्नुहोस्;\n"
 
-#: src/gnuwin32/console.cpp:2458
+#: src/gnuwin32/console.cpp:2456
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
 msgstr "     दायाँ तीर वा Ctrl+F: अगाडि सार्नुहोस् एक वर्ण;\n"
 
-#: src/gnuwin32/console.cpp:2459
+#: src/gnuwin32/console.cpp:2457
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     Home वा Ctrl+A: रेखाको सुरुमा जानुहोस्;\n"
 
-#: src/gnuwin32/console.cpp:2460
+#: src/gnuwin32/console.cpp:2458
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     End वा Ctrl+E: रेखाको अन्त्यमा जानुहोस्;\n"
 
-#: src/gnuwin32/console.cpp:2461
+#: src/gnuwin32/console.cpp:2459
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
 msgstr "  इतिहास: Up र Down तीरहरू, Ctrl+P, Ctrl+N\n"
 
-#: src/gnuwin32/console.cpp:2462
+#: src/gnuwin32/console.cpp:2460
 msgid "  Deleting:\n"
 msgstr "  मेटाउँदै:\n"
 
-#: src/gnuwin32/console.cpp:2463
+#: src/gnuwin32/console.cpp:2461
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     Del वा Ctrl+D: हालको क्यारेक्टर वा चयन मेटाउनुहोस्;\n"
 
-#: src/gnuwin32/console.cpp:2464
+#: src/gnuwin32/console.cpp:2462
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     ब्याकस्पेस: अघिल्लो वर्ण मेटाउनुहोस्;\n"
 
-#: src/gnuwin32/console.cpp:2465
+#: src/gnuwin32/console.cpp:2463
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
 msgstr "     Ctrl+Del वा Ctrl+K: हालको अक्षरबाट रेखाको अन्त्यसम्म पाठ मेटाउनुहोस्।\n"
 
-#: src/gnuwin32/console.cpp:2466
+#: src/gnuwin32/console.cpp:2464
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     Ctrl+U: हालको रेखाबाट सबै पाठ मेटाउनुहोस्।\n"
 
-#: src/gnuwin32/console.cpp:2467
+#: src/gnuwin32/console.cpp:2465
 msgid "  Copy and paste.\n"
 msgstr "  कपी र टाँस्नुहोस्।\n"
 
-#: src/gnuwin32/console.cpp:2468
+#: src/gnuwin32/console.cpp:2466
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
 msgstr "     पाठ चिन्ह (चयन) गर्न माउस (बायाँ बटन तल समातेर) प्रयोग गर्नुहोस्।\n"
 
-#: src/gnuwin32/console.cpp:2469
+#: src/gnuwin32/console.cpp:2467
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
 msgstr "     क्लिपबोर्डमा चिन्ह लगाइएको पाठ प्रतिलिपि गर्न Shift+Del (वा Ctrl+C) प्रयोग गर्नुहोस् र\n"
 
-#: src/gnuwin32/console.cpp:2470
+#: src/gnuwin32/console.cpp:2468
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr "     Shift+Ins (वा Ctrl+V वा Ctrl+Y) क्लिपबोर्डको सामग्री टाँस्न (यदि छ भने)  \n"
 
-#: src/gnuwin32/console.cpp:2471
+#: src/gnuwin32/console.cpp:2469
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     कन्सोलमा, Ctrl+X पहिले प्रतिलिपि गर्नुहोस् त्यसपछि टाँस्नुहोस्\n"
 
-#: src/gnuwin32/console.cpp:2472
+#: src/gnuwin32/console.cpp:2470
 msgid "  Misc:\n"
 msgstr "  विविध:\n"
 
-#: src/gnuwin32/console.cpp:2473
+#: src/gnuwin32/console.cpp:2471
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     Ctrl+L: कन्सोल खाली गर्नुहोस्।\n"
 
-#: src/gnuwin32/console.cpp:2474
+#: src/gnuwin32/console.cpp:2472
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     Ctrl+O वा INS: अधिलेखन मोड टगल गर्नुहोस्: सुरुमा बन्द।\n"
 
-#: src/gnuwin32/console.cpp:2475
+#: src/gnuwin32/console.cpp:2473
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     Ctrl+T: हालको अक्षरलाई बायाँबाट एकसँग बदल्नुहोस्।\n"
 
-#: src/gnuwin32/console.cpp:2476
+#: src/gnuwin32/console.cpp:2474
 msgid ""
 "\n"
 "Note: Console is updated only when some input is required.\n"
@@ -162,7 +162,7 @@ msgstr ""
 "\n"
 "नोट: केही इनपुट आवश्यक हुँदा मात्र कन्सोल अपडेट हुन्छ।\n"
 
-#: src/gnuwin32/console.cpp:2477
+#: src/gnuwin32/console.cpp:2475
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
@@ -170,7 +170,7 @@ msgstr ""
 "  यो सुविधा बन्द/अन टगल गर्न Ctrl+W प्रयोग गर्नुहोस्।\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2478
+#: src/gnuwin32/console.cpp:2476
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -178,7 +178,7 @@ msgstr ""
 "अनुवादकलाई रोक्नको लागि ESC प्रयोग गर्नुहोस्।\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2479
+#: src/gnuwin32/console.cpp:2477
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -186,11 +186,11 @@ msgstr ""
 "TAB ले हालको शब्द पूरा गर्न सुरु गर्छ।\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2480
+#: src/gnuwin32/console.cpp:2478
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "मानक विन्डोज हटकीहरू मा स्विच गर्न प्रयोग गर्न सकिन्छ\n"
 
-#: src/gnuwin32/console.cpp:2481
+#: src/gnuwin32/console.cpp:2479
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "ग्राफिक्स उपकरण (MDI मा Ctrl+Tab वा Ctrl+F6, SDI मा Alt+Tab)"
 
@@ -306,7 +306,7 @@ msgid "Save script"
 msgstr "लिपि सुरक्षित गर्नुहोस्"
 
 #: src/gnuwin32/editor.cpp:778 src/gnuwin32/pager.cpp:458
-#: src/library/grDevices/src/devWindows.cpp:1593
+#: src/library/grDevices/src/devWindows.cpp:1594
 msgid "Return focus to Console"
 msgstr "कन्सोलमा फोकस फर्काउनुहोस्"
 
@@ -315,13 +315,13 @@ msgid "Print script"
 msgstr "लिपि छाप्नुहोस्"
 
 #: src/gnuwin32/editor.cpp:783 src/gnuwin32/pager.cpp:453
-#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1587
+#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1588
 msgid "Print"
 msgstr "छाप्नुहोस्"
 
 #: src/gnuwin32/editor.cpp:801 src/gnuwin32/pager.cpp:474
-#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1828
-#: src/library/grDevices/src/devWindows.cpp:1625
+#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1819
+#: src/library/grDevices/src/devWindows.cpp:1626
 msgid "File"
 msgstr "फाइल"
 
@@ -344,8 +344,8 @@ msgid "Save as..."
 msgstr "यस रूपमा सुरक्षित गर्नुहोस्..."
 
 #: src/gnuwin32/editor.cpp:811 src/gnuwin32/pager.cpp:477
-#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1646
-#: src/library/grDevices/src/devWindows.cpp:1688
+#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1647
+#: src/library/grDevices/src/devWindows.cpp:1689
 msgid "Print..."
 msgstr "छाप्नुहोस्..."
 
@@ -354,7 +354,7 @@ msgid "Close script"
 msgstr "लिपि बन्द गर्नुहोस्"
 
 #: src/gnuwin32/editor.cpp:816 src/gnuwin32/pager.cpp:484
-#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1834
+#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1825
 msgid "Edit"
 msgstr "सम्पादन गर्नुहोस्"
 
@@ -379,8 +379,8 @@ msgid "GUI preferences..."
 msgstr "GUI प्राथमिकताहरू..."
 
 #: src/gnuwin32/editor.cpp:852 src/gnuwin32/rui.cpp:1260
-#: src/library/utils/src/windows/dataentry.cpp:1735
-#: src/library/utils/src/windows/dataentry.cpp:1845
+#: src/library/utils/src/windows/dataentry.cpp:1726
+#: src/library/utils/src/windows/dataentry.cpp:1836
 msgid "Help"
 msgstr "मद्दत"
 
@@ -428,14 +428,14 @@ msgid "Paste commands to console"
 msgstr "कन्सोलमा आदेशहरू टाँस्नुहोस्"
 
 #: src/gnuwin32/pager.cpp:317 src/gnuwin32/rui.cpp:931
-#: src/library/utils/src/windows/dataentry.cpp:1741
-#: src/library/grDevices/src/devWindows.cpp:1685
+#: src/library/utils/src/windows/dataentry.cpp:1732
+#: src/library/grDevices/src/devWindows.cpp:1686
 msgid "Stay on top"
 msgstr "माथि रहनुहोस्"
 
 #: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:482
-#: src/library/utils/src/windows/dataentry.cpp:1743
-#: src/library/utils/src/windows/dataentry.cpp:1830
+#: src/library/utils/src/windows/dataentry.cpp:1734
+#: src/library/utils/src/windows/dataentry.cpp:1821
 msgid "Close"
 msgstr "बन्द"
 
@@ -890,73 +890,73 @@ msgstr "नयाँ प्रिन्टरको लागि अपर्य
 msgid "Unable to start the print job"
 msgstr "प्रिन्ट कार्य सुरु गर्न असमर्थ"
 
-#: src/library/utils/src/windows/dataentry.cpp:248
-#: src/library/utils/src/windows/dataentry.cpp:1879
-#: src/library/utils/src/windows/dataentry.cpp:1882
-#: src/library/utils/src/windows/dataentry.cpp:1912
+#: src/library/utils/src/windows/dataentry.cpp:245
+#: src/library/utils/src/windows/dataentry.cpp:1870
+#: src/library/utils/src/windows/dataentry.cpp:1873
+#: src/library/utils/src/windows/dataentry.cpp:1903
 msgid "invalid argument"
 msgstr "अवैध तर्क"
 
-#: src/library/utils/src/windows/dataentry.cpp:292
+#: src/library/utils/src/windows/dataentry.cpp:289
 msgid "invalid type for value"
 msgstr "मानको लागि अवैध प्रकार"
 
-#: src/library/utils/src/windows/dataentry.cpp:303
+#: src/library/utils/src/windows/dataentry.cpp:300
 msgid "Data Editor"
 msgstr "डाटा सम्पादक"
 
-#: src/library/utils/src/windows/dataentry.cpp:353
-#: src/library/utils/src/windows/dataentry.cpp:1872
+#: src/library/utils/src/windows/dataentry.cpp:350
+#: src/library/utils/src/windows/dataentry.cpp:1863
 msgid "dataentry: internal memory problem"
 msgstr "डाटाएन्ट्री: आन्तरिक मेमोरी समस्या"
 
-#: src/library/utils/src/windows/dataentry.cpp:657
-#: src/library/utils/src/windows/dataentry.cpp:1259
+#: src/library/utils/src/windows/dataentry.cpp:653
+#: src/library/utils/src/windows/dataentry.cpp:1250
 msgid "dataentry: internal memory error"
 msgstr "डाटाएन्ट्री: आन्तरिक मेमोरी समस्या"
 
-#: src/library/utils/src/windows/dataentry.cpp:780
-#: src/library/utils/src/windows/dataentry.cpp:793
+#: src/library/utils/src/windows/dataentry.cpp:776
+#: src/library/utils/src/windows/dataentry.cpp:789
 msgid "internal type error in dataentry"
 msgstr "डाटाएन्ट्री आन्तरिक प्रकार त्रुटि"
 
-#: src/library/utils/src/windows/dataentry.cpp:888
+#: src/library/utils/src/windows/dataentry.cpp:880
 msgid "dataentry: parse error on string"
 msgstr "डाटाएन्ट्री: स्ट्रिङमा पार्स त्रुटि"
 
-#: src/library/utils/src/windows/dataentry.cpp:1033
+#: src/library/utils/src/windows/dataentry.cpp:1025
 msgid "dataentry: expression too long"
 msgstr "डाटाएन्ट्री: अभिव्यक्ति धेरै लामो"
 
-#: src/library/utils/src/windows/dataentry.cpp:1509
+#: src/library/utils/src/windows/dataentry.cpp:1500
 msgid "column names cannot be blank"
 msgstr "स्तम्भ नामहरू खाली हुन सक्दैन"
 
-#: src/library/utils/src/windows/dataentry.cpp:1555
+#: src/library/utils/src/windows/dataentry.cpp:1546
 msgid "Variable editor"
 msgstr "चर सम्पादक"
 
-#: src/library/utils/src/windows/dataentry.cpp:1560
+#: src/library/utils/src/windows/dataentry.cpp:1551
 msgid "variable name"
 msgstr "चर नाम"
 
-#: src/library/utils/src/windows/dataentry.cpp:1562
+#: src/library/utils/src/windows/dataentry.cpp:1553
 msgid "type"
 msgstr "प्रकार"
 
-#: src/library/utils/src/windows/dataentry.cpp:1677
+#: src/library/utils/src/windows/dataentry.cpp:1668
 msgid "Cell width(s)"
 msgstr "कक्ष चौडाइ(हरू)"
 
-#: src/library/utils/src/windows/dataentry.cpp:1683
+#: src/library/utils/src/windows/dataentry.cpp:1674
 msgid "Cell width"
 msgstr "कक्ष चौडाइ"
 
-#: src/library/utils/src/windows/dataentry.cpp:1686
+#: src/library/utils/src/windows/dataentry.cpp:1677
 msgid "variable"
 msgstr "चर"
 
-#: src/library/utils/src/windows/dataentry.cpp:1729
+#: src/library/utils/src/windows/dataentry.cpp:1720
 msgid ""
 "Navigation.\n"
 "  Keyboard: cursor keys move selection\n"
@@ -998,210 +998,210 @@ msgstr ""
 "copy, paste, autosize हाल चयन गरिएको स्तम्भको लागि मेनुमा दायाँ क्लिक गर्नुहोस्\n"
 "\n"
 
-#: src/library/utils/src/windows/dataentry.cpp:1737
+#: src/library/utils/src/windows/dataentry.cpp:1728
 msgid "Copy selected cell"
 msgstr "चयन गरिएको कक्ष प्रतिलिपि गर्नुहोस्"
 
-#: src/library/utils/src/windows/dataentry.cpp:1738
+#: src/library/utils/src/windows/dataentry.cpp:1729
 msgid "Paste to selected cell"
 msgstr "चयनित कक्षमा टाँस्नुहोस्"
 
-#: src/library/utils/src/windows/dataentry.cpp:1739
+#: src/library/utils/src/windows/dataentry.cpp:1730
 msgid "Autosize column"
 msgstr "स्वत: आकार स्तम्भ"
 
-#: src/library/utils/src/windows/dataentry.cpp:1835
+#: src/library/utils/src/windows/dataentry.cpp:1826
 msgid "Copy  \tCTRL+C"
 msgstr "CTRL+C प्रतिलिपि गर्नुहोस्"
 
-#: src/library/utils/src/windows/dataentry.cpp:1837
+#: src/library/utils/src/windows/dataentry.cpp:1828
 msgid "Paste \tCTRL+V"
 msgstr "CTRL+V टाँस्नुहोस्"
 
-#: src/library/utils/src/windows/dataentry.cpp:1839
+#: src/library/utils/src/windows/dataentry.cpp:1830
 msgid "Delete\tDEL"
 msgstr "DEL मेटाउनुहोस्"
 
-#: src/library/utils/src/windows/dataentry.cpp:1842
+#: src/library/utils/src/windows/dataentry.cpp:1833
 msgid "Cell widths ..."
 msgstr "कक्ष चौडाइहरू ..."
 
-#: src/library/utils/src/windows/dataentry.cpp:1846
+#: src/library/utils/src/windows/dataentry.cpp:1837
 msgid "Data editor"
 msgstr "डाटा सम्पादक"
 
-#: src/library/utils/src/windows/dataentry.cpp:1919
+#: src/library/utils/src/windows/dataentry.cpp:1910
 #, fuzzy
 msgid "unable to start data viewer"
 msgstr "प्रिन्ट कार्य सुरु गर्न असमर्थ"
 
-#: src/library/grDevices/src/devWindows.cpp:937
+#: src/library/grDevices/src/devWindows.cpp:938
 msgid "Portable network graphics file"
 msgstr "पोर्टेबल नेटवर्क ग्राफिक्स फाइल"
 
-#: src/library/grDevices/src/devWindows.cpp:940
+#: src/library/grDevices/src/devWindows.cpp:941
 msgid "Windows bitmap file"
 msgstr "विन्डोज बिटम्याप फाइल"
 
-#: src/library/grDevices/src/devWindows.cpp:943
+#: src/library/grDevices/src/devWindows.cpp:944
 msgid "TIFF file"
 msgstr "TIFF फाइल"
 
-#: src/library/grDevices/src/devWindows.cpp:946
+#: src/library/grDevices/src/devWindows.cpp:947
 msgid "Jpeg file"
 msgstr "Jpeg फाइल"
 
-#: src/library/grDevices/src/devWindows.cpp:967
+#: src/library/grDevices/src/devWindows.cpp:968
 msgid "Postscript file"
 msgstr "Postscript फाइल"
 
-#: src/library/grDevices/src/devWindows.cpp:978
+#: src/library/grDevices/src/devWindows.cpp:979
 msgid "PDF file"
 msgstr "PDF फाइल"
 
-#: src/library/grDevices/src/devWindows.cpp:990
+#: src/library/grDevices/src/devWindows.cpp:991
 msgid "Enhanced metafiles"
 msgstr "परिष्कृत मेटाफाइलहरू"
 
-#: src/library/grDevices/src/devWindows.cpp:993
+#: src/library/grDevices/src/devWindows.cpp:994
 #: src/library/grDevices/src/devWindows.cpp:3528
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "चयन गरिएको फाइल मार्ग धेरै लामो छ: केवल 512 बाइटहरूलाई अनुमति छ"
 
-#: src/library/grDevices/src/devWindows.cpp:1203
+#: src/library/grDevices/src/devWindows.cpp:1204
 msgid "No plot to replace!"
 msgstr "बदल्नको लागि कुनै प्लट छैन!"
 
-#: src/library/grDevices/src/devWindows.cpp:1253
+#: src/library/grDevices/src/devWindows.cpp:1254
 msgid "Variable name"
 msgstr "चर नाम"
 
-#: src/library/grDevices/src/devWindows.cpp:1262
+#: src/library/grDevices/src/devWindows.cpp:1263
 msgid "Variable doesn't contain any plots!"
 msgstr "भेरिएबलले कुनै पनि प्लटहरू समावेश गर्दैन!"
 
-#: src/library/grDevices/src/devWindows.cpp:1275
+#: src/library/grDevices/src/devWindows.cpp:1276
 msgid "Name of variable to save to"
 msgstr "बचत गर्न भेरिएबलको नाम"
 
-#: src/library/grDevices/src/devWindows.cpp:1581
+#: src/library/grDevices/src/devWindows.cpp:1582
 msgid "Copy to the clipboard as a metafile"
 msgstr "क्लिपबोर्डमा मेटाफाइलको रूपमा प्रतिलिपि गर्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1599
-#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1600
+#: src/library/grDevices/src/devWindows.cpp:1611
 msgid "Stop locator"
 msgstr "लोकेटर रोक्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1609
-#: src/library/grDevices/src/devWindows.cpp:1613
+#: src/library/grDevices/src/devWindows.cpp:1610
+#: src/library/grDevices/src/devWindows.cpp:1614
 msgid "Stop"
 msgstr "रोक"
 
-#: src/library/grDevices/src/devWindows.cpp:1615
+#: src/library/grDevices/src/devWindows.cpp:1616
 msgid "Continue"
 msgstr "जारी राख्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1619
+#: src/library/grDevices/src/devWindows.cpp:1620
 msgid "Next"
 msgstr "अर्को"
 
-#: src/library/grDevices/src/devWindows.cpp:1620
+#: src/library/grDevices/src/devWindows.cpp:1621
 msgid "Next plot"
 msgstr "अर्को प्लट"
 
-#: src/library/grDevices/src/devWindows.cpp:1626
+#: src/library/grDevices/src/devWindows.cpp:1627
 msgid "Save as"
 msgstr "यसमा सुरक्षित गर्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1635
-#: src/library/grDevices/src/devWindows.cpp:1637
-#: src/library/grDevices/src/devWindows.cpp:1639
+#: src/library/grDevices/src/devWindows.cpp:1636
+#: src/library/grDevices/src/devWindows.cpp:1638
+#: src/library/grDevices/src/devWindows.cpp:1640
 #, c-format
 msgid "%s quality..."
 msgstr "%s गुणस्तर..."
 
-#: src/library/grDevices/src/devWindows.cpp:1641
+#: src/library/grDevices/src/devWindows.cpp:1642
 msgid "Copy to the clipboard"
 msgstr "क्लिपबोर्डमा प्रतिलिपि गर्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1642
+#: src/library/grDevices/src/devWindows.cpp:1643
 msgid "as a Bitmap\tCTRL+C"
 msgstr "बिटमैपको रूपमा CTRL+C"
 
-#: src/library/grDevices/src/devWindows.cpp:1643
+#: src/library/grDevices/src/devWindows.cpp:1644
 msgid "as a Metafile\tCTRL+W"
 msgstr "मेटाफाइलको रूपमा CTRL+W"
 
-#: src/library/grDevices/src/devWindows.cpp:1648
+#: src/library/grDevices/src/devWindows.cpp:1649
 msgid "close Device"
 msgstr "उपकरण बन्द"
 
-#: src/library/grDevices/src/devWindows.cpp:1649
+#: src/library/grDevices/src/devWindows.cpp:1650
 msgid "History"
 msgstr "इतिहास"
 
-#: src/library/grDevices/src/devWindows.cpp:1650
+#: src/library/grDevices/src/devWindows.cpp:1651
 msgid "Recording"
 msgstr "रेकर्डिङ"
 
-#: src/library/grDevices/src/devWindows.cpp:1653
+#: src/library/grDevices/src/devWindows.cpp:1654
 msgid "Add\tINS"
 msgstr "INS थप्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1654
+#: src/library/grDevices/src/devWindows.cpp:1655
 msgid "Replace"
 msgstr "बदल्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1656
+#: src/library/grDevices/src/devWindows.cpp:1657
 msgid "Previous\tPgUp"
 msgstr "अघिल्लो PgUp"
 
-#: src/library/grDevices/src/devWindows.cpp:1657
+#: src/library/grDevices/src/devWindows.cpp:1658
 msgid "Next\tPgDown"
 msgstr "अर्को PgDown"
 
-#: src/library/grDevices/src/devWindows.cpp:1659
+#: src/library/grDevices/src/devWindows.cpp:1660
 msgid "Save to variable..."
 msgstr "भेरीएबलमा सेभ गर्नुहोस्..."
 
-#: src/library/grDevices/src/devWindows.cpp:1660
+#: src/library/grDevices/src/devWindows.cpp:1661
 msgid "Get from variable..."
 msgstr "भेरीएबलबाट प्राप्त गर्नुहोस् ..."
 
-#: src/library/grDevices/src/devWindows.cpp:1662
+#: src/library/grDevices/src/devWindows.cpp:1663
 msgid "Clear history"
 msgstr "इतिहास खाली गर्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1663
+#: src/library/grDevices/src/devWindows.cpp:1664
 msgid "Resize"
 msgstr "रिसाइज गर्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1664
+#: src/library/grDevices/src/devWindows.cpp:1665
 msgid "R mode"
 msgstr "R मोड"
 
-#: src/library/grDevices/src/devWindows.cpp:1666
+#: src/library/grDevices/src/devWindows.cpp:1667
 msgid "Fit to window"
 msgstr "विन्डोमा फिट"
 
-#: src/library/grDevices/src/devWindows.cpp:1668
+#: src/library/grDevices/src/devWindows.cpp:1669
 msgid "Fixed size"
 msgstr "निश्चित आकार"
 
-#: src/library/grDevices/src/devWindows.cpp:1675
+#: src/library/grDevices/src/devWindows.cpp:1676
 msgid "Copy as metafile"
 msgstr "मेटाफाइलको रूपमा प्रतिलिपि गर्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1677
+#: src/library/grDevices/src/devWindows.cpp:1678
 msgid "Copy as bitmap"
 msgstr "बिटम्यापको रूपमा प्रतिलिपि गर्नुहोस्"
 
-#: src/library/grDevices/src/devWindows.cpp:1680
+#: src/library/grDevices/src/devWindows.cpp:1681
 msgid "Save as metafile..."
 msgstr "मेटाफाइलको रूपमा सेभ गर्नुहोस्..."
 
-#: src/library/grDevices/src/devWindows.cpp:1682
+#: src/library/grDevices/src/devWindows.cpp:1683
 msgid "Save as postscript..."
 msgstr "पोस्टस्क्रिप्टको रूपमा सेभ गर्नुहोस्..."
 

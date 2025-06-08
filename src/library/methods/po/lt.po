@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 20:13+0200\n"
 "PO-Revision-Date: 2020-12-08 13:57+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -164,17 +164,17 @@ msgstr ""
 
 #: methods_list_dispatch.cpp:892
 #, fuzzy, c-format
-msgid "'%s' must be a single string (got a character vector of length %d)"
+msgid "%s must be a single string (got a character vector of length %d)"
 msgstr "vienos klasės vardas reikalingas %s laukui, gautas %d ilgio tekstinis vektorius"
 
 #: methods_list_dispatch.cpp:896
-#, c-format
-msgid "'%s' must be a non-empty string; got an empty string"
+#, fuzzy, c-format
+msgid "%s must be a non-empty string; got an empty string"
 msgstr "'%s' negali būti tuščia eilutė; gavo tuščią eilutę"
 
 #: methods_list_dispatch.cpp:900
 #, fuzzy, c-format
-msgid "'%s' must be a single string (got an object of class \"%s\")"
+msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr "viena eilutė, gaunamas klasės %s objektas"
 
 #: methods_list_dispatch.cpp:934

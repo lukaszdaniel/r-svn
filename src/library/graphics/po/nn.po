@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 10:47+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -561,17 +561,10 @@ msgstr "ugyldige «y»-grenser"
 msgid "invalid 'z' limits"
 msgstr "ugyldige «z»-grenser"
 
-#: plot3d.cpp:1137
-msgid "'xlab' must be a character vector of length 1"
+#: plot3d.cpp:1137 plot3d.cpp:1139 plot3d.cpp:1141
+#, fuzzy, c-format
+msgid "'%s' must be a character vector of length 1"
 msgstr "«xlab» må vera ein teiknvektor av lengd 1"
-
-#: plot3d.cpp:1139
-msgid "'ylab' must be a character vector of length 1"
-msgstr "«ylab» må vera ein teiknvektor av lengd 1"
-
-#: plot3d.cpp:1141
-msgid "'zlab' must be a character vector of length 1"
-msgstr "«zlab» må vera ein teiknvektor av lengd 1"
 
 #: plot3d.cpp:1161
 msgid "invalid viewing parameters"
@@ -661,6 +654,12 @@ msgstr ""
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "«ylab» må vera ein teiknvektor av lengd 1"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "«zlab» må vera ein teiknvektor av lengd 1"
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"

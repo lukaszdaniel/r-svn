@@ -6964,7 +6964,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(c == NULL) {
 	    c = libdeflate_alloc_compressor(6);
 	    if(c == NULL)
-		error("%s", _("allocation error in memCompress with libdeflate"));
+		error(_("allocation error in '%s' with libdeflate"), "memCompress");
 	}
 	size_t inlen = XLENGTH(from);
 	size_t outlen = libdeflate_zlib_compress_bound(c, inlen);

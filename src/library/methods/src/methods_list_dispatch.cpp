@@ -889,15 +889,15 @@ static const char *check_single_string(SEXP obj, bool nonEmpty, const char *what
     const char *string_ = "<unset>"; /* -Wall */
     if(isString(obj)) {
 	if(length(obj) != 1)
-	    error(_("'%s' must be a single string (got a character vector of length %d)"),
+	    error(_("%s must be a single string (got a character vector of length %d)"),
 		  what, length(obj));
 	string_ = CHAR(STRING_ELT(obj, 0)); /* FIXME: translateChar? */
 	if(nonEmpty && (! string_ || !string_[0]))
-	    error(_("'%s' must be a non-empty string; got an empty string"),
+	    error(_("%s must be a non-empty string; got an empty string"),
 		  what);
     }
     else {
-	error(_("'%s' must be a single string (got an object of class \"%s\")"),
+	error(_("%s must be a single string (got an object of class \"%s\")"),
 	      what, class_string(obj));
     }
     return string_;

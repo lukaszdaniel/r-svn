@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:37+0200\n"
+"POT-Creation-Date: 2025-06-08 10:48+0200\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -202,7 +202,8 @@ msgid "input must be a character string"
 msgstr "'title'은 반드시 문자열이어야 합니다"
 
 #: utils.cpp:154
-msgid "'hostname' must be a character vector of length 1"
+#, fuzzy, c-format
+msgid "'%s' must be a character vector of length 1"
 msgstr "'hostname'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
 #: utils.cpp:160
@@ -295,7 +296,7 @@ msgstr ""
 msgid "unsupported version of Windows"
 msgstr "지원되지 않는 버전의 윈도우즈입니다"
 
-#: windows/util.cpp:283
+#: windows/util.cpp:283 windows/util.cpp:318
 msgid "'raw = FALSE' and format is a not a known text format"
 msgstr ""
 

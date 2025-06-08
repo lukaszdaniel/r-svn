@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 13:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -604,7 +604,8 @@ msgid "n must be at least two"
 msgstr ""
 
 #: monoSpl.cpp:71
-msgid "Argument m must be numeric"
+#, c-format
+msgid "'%s' must be numeric"
 msgstr ""
 
 #: monoSpl.cpp:74
@@ -612,7 +613,8 @@ msgid "length(m) must be at least two"
 msgstr ""
 
 #: monoSpl.cpp:76
-msgid "Argument Sx must be numeric vector one shorter than m[]"
+#, c-format
+msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr ""
 
 #: nls.cpp:101

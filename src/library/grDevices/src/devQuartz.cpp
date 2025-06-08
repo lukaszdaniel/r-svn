@@ -1309,7 +1309,7 @@ static void QuartzUseGroup(SEXP ref, SEXP trans,
     }
 
     if (index >= 0 && !xd->groups[index]) {
-        warning("%s", _("Unknown group "));
+        warning("%s", _("Unknown group"));
         return;
     } 
 

@@ -315,7 +315,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
 	    for (int i = 0; i < n; i++)
 		len += strlen(translateChar(STRING_ELT(text, i))) + 2;
 	} else
-	    error("'raw = FALSE' and format is a not a known text format");
+	    error("%s", _("'raw = FALSE' and format is a not a known text format"));
 
 	if ( (hglb = GlobalAlloc(GHND, len)) &&
 	     (s = (char *)GlobalLock(hglb)) ) {

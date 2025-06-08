@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:36+0200\n"
+"POT-Creation-Date: 2025-06-07 20:32+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -94,11 +94,11 @@ msgstr "niepoprawny poziom szarości, musi być w przedziale [0, 1]."
 
 #: colors.cpp:525
 msgid "rgb is not a matrix (internally)"
-msgstr ""
+msgstr "rgb nie jest macierzą (wewnętrznie)"
 
 #: colors.cpp:527
 msgid "rgb must have 3 rows (internally)"
-msgstr ""
+msgstr "rgb musi mieć 3 wiersze (wewnętrznie)"
 
 #: colors.cpp:1344
 msgid "invalid hex digit in 'color' or 'lty'"
@@ -142,7 +142,7 @@ msgstr "maksymalna liczba kolorów wynosi %d"
 
 #: colors.cpp:1546
 msgid "requires INTSXP argument"
-msgstr ""
+msgstr "wymagany jest argument będący typem całkowitym"
 
 #: devCairo.cpp:50 devCairo.cpp:61
 msgid "failed to load cairo DLL"
@@ -154,14 +154,12 @@ msgid "afm file '%s' could not be opened"
 msgstr "plik afm '%s' nie mógł zostać otwarty"
 
 #: devPS.cpp:617
-#, fuzzy
 msgid "'FontBBox' could not be parsed"
-msgstr "plik afm '%s' nie mógł zostać otwarty"
+msgstr "'FontBBox' nie mógł być przetworzony"
 
 #: devPS.cpp:625
-#, fuzzy
 msgid "'CharInfo' could not be parsed"
-msgstr "plik afm '%s' nie mógł zostać otwarty"
+msgstr "'CharInfo' nie mógł być przetworzony"
 
 #: devPS.cpp:655
 msgid "unknown AFM entity encountered"
@@ -439,7 +437,7 @@ msgstr "maska alfa została zignorowana (nieobsługiwana na tym urządzeniu)"
 
 #: devPS.cpp:5497 devPS.cpp:5585
 msgid "Shading type not yet supported"
-msgstr ""
+msgstr "Typ cieniowania nie jest jeszcze wspierany"
 
 #: devPS.cpp:5800
 msgid "Drawing not appended to path (contains text)"
@@ -484,7 +482,7 @@ msgstr "nie można przydzielić obrazu rastrowego"
 #: devPS.cpp:6627 devPS.cpp:6677
 #, c-format
 msgid "internal error %d in writeRasterXObject"
-msgstr ""
+msgstr "błąd wewnętrzny %d w writeRasterXObject"
 
 #: devPS.cpp:6656 devPS.cpp:6700 devPS.cpp:8231
 msgid "write failed"
@@ -500,11 +498,11 @@ msgstr "nie udało się zarejestrować kodowania urządzenia; czcionka nie zosta
 
 #: devPS.cpp:6858
 msgid "cannot allocate pd->pos"
-msgstr ""
+msgstr "nie można przydzielić pamięci dla pd->pos"
 
 #: devPS.cpp:6866
 msgid "cannot allocate pd->pageobj"
-msgstr ""
+msgstr "nie można przydzielić pamięci dla pd->pageobj"
 
 #: devPS.cpp:6891
 msgid "increasing the PDF version to 1.2"
@@ -583,7 +581,7 @@ msgstr "file = \"|cmd\" sugeruje, że 'onefile = TRUE'"
 
 #: devPS.cpp:8221
 msgid "internal read error in PDF_endpage"
-msgstr ""
+msgstr "wewnętrzny błąd odczytu w PDF_endpage"
 
 #: devPS.cpp:8227
 #, c-format
@@ -724,8 +722,8 @@ msgid "Groups exhausted"
 msgstr "Grupy wyczerpane"
 
 #: devQuartz.cpp:1312 cairo/cairoFns.cpp:869
-msgid "Unknown group "
-msgstr ""
+msgid "Unknown group"
+msgstr "Nieznana grupa"
 
 #: devQuartz.cpp:1572
 msgid "Cannot load CoreGraphics"
@@ -877,9 +875,8 @@ msgid "filename too long in tiff() call"
 msgstr "nazwa pliku w wywołaniu 'tiff()' jest zbyt długa"
 
 #: devWindows.cpp:1892
-#, fuzzy
 msgid "invalid specification for file name in win.metafile()"
-msgstr "nazwa pliku w wywołaniu 'win.metafile()' jest zbyt długa"
+msgstr "nieprawidłowe określenie nazwy pliku w wywołaniu 'win.metafile()'"
 
 #: devWindows.cpp:1896
 msgid "filename too long in win.metafile() call"
@@ -929,7 +926,7 @@ msgstr "niepowodzenie przydziału pamięci w 'GADeviceDriver()'"
 
 #: devWindows.cpp:3349
 msgid "opening device failed"
-msgstr ""
+msgstr "otwieranie urządzenia nie powiodło się"
 
 #: devWindows.cpp:3480
 msgid "option 'windowsTimeouts' should be integer"
@@ -961,9 +958,8 @@ msgid "processing of the plot ran out of memory"
 msgstr "zabrakło pamięci podczas przetwarzania wykresu"
 
 #: devWindows.cpp:3594
-#, fuzzy
 msgid "Not enough memory to create error message."
-msgstr "Zbyt mało pamięci aby skopiować okno grafiki"
+msgstr "Zbyt mało pamięci aby utworzyć komunikat o błędzie."
 
 #: devWindows.cpp:3596
 msgid "Impossible to open "
@@ -980,13 +976,12 @@ msgid "invalid value of '%s'"
 msgstr "niepoprawna wartość '%s'"
 
 #: devWindows.cpp:3921
-#, fuzzy
 msgid "Not enough memory to create buffer for path."
-msgstr "Zbyt mało pamięci aby skopiować okno grafiki"
+msgstr "Zbyt mało pamięci aby utworzyć bufor dla ścieżki."
 
 #: devWindows.cpp:3962
 msgid "unable to load winCairo.dll: was it built?"
-msgstr ""
+msgstr "nie udało się załadować winCairo.dll: czy został zbudowany?"
 
 #: devices.cpp:47
 msgid "argument must have positive length"
@@ -1032,7 +1027,7 @@ msgstr "niepowodzenie przydziału pamięci w 'R_SaveAsTIF()'"
 
 #: winbitmap.cpp:554
 msgid "Problems writing to 'bmp' file"
-msgstr ""
+msgstr "Problem z zapisywaniem do pliku 'bmp'"
 
 #: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
 #: cairo/cairoBM.cpp:139 cairo/cairoBM.cpp:153 cairo/cairoBM.cpp:161
@@ -1041,7 +1036,7 @@ msgstr ""
 #: cairo/cairoBM.cpp:344 cairo/cairoBM.cpp:356
 #, c-format
 msgid "cairo error '%s'"
-msgstr ""
+msgstr "błąd cairo '%s'"
 
 #: cairo/cairoBM.cpp:195 cairo/cairoBM.cpp:364
 msgid "unimplemented cairo-based device"
@@ -1111,23 +1106,20 @@ msgid "Cairo groups exhausted"
 msgstr "Wyczerpano grupy Cairo"
 
 #: cairo/cairoFns.cpp:1577 cairo/cairoFns.cpp:1600
-#, fuzzy
 msgid "invalid string in PangoCairo_Text"
-msgstr "niepoprawny łańcuch w '%s'"
+msgstr "niepoprawny ciąg znaków w PangoCairo_Text"
 
 #: cairo/cairoFns.cpp:1741
 msgid "unable to initialize FontConfig in cairo-ft font selection"
-msgstr ""
+msgstr "nie można zainicjować FontConfig w wyborze czcionki cairo-ft"
 
 #: cairo/cairoFns.cpp:1947
-#, fuzzy
 msgid "invalid string in Cairo_StrWidth"
-msgstr "niepoprawny łańcuch w '%s'"
+msgstr "niepoprawny ciąg znaków w Cairo_StrWidth"
 
 #: cairo/cairoFns.cpp:1969
-#, fuzzy
 msgid "invalid string in Cairo_Text"
-msgstr "niepoprawny łańcuch w '%s'"
+msgstr "niepoprawny ciąg znaków w Cairo_Text"
 
 #: cairo/cairoFns.cpp:2376
 msgid "Font file not found; matching font family and face"

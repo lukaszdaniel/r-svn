@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-05 16:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2336,6 +2336,13 @@ msgid "empty 'data' directory"
 msgstr ""
 
 
+#: R/utils.R: 0
+#. R/utils.R: gettextf("error in inferior call:\n  %s", conditionMessage(val))
+
+msgid "error in inferior call:\n  %s"
+msgstr ""
+
+
 #: R/install.R: 0
 #. R/install.R: gettextf("error reading file '%s'", fd)
 
@@ -2422,6 +2429,13 @@ msgstr ""
 #. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
 
 msgid "httpd server disabled by R_DISABLE_HTTPD"
+msgstr ""
+
+
+#: R/utils.R: 0
+#. R/utils.R: gettext("inferior call failed")
+
+msgid "inferior call failed"
 msgstr ""
 
 
@@ -2687,9 +2701,9 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", file, .massage_file_parse_error(e))
 #. R/QC.R: gettextf("parse error in file '%s':\n%s", f, msg)
-#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error_message(conditionMessage(e)))
+#. R/QC.R: gettextf("parse error in file '%s':\n%s", summary(files)$description,     .massage_file_parse_error(e))
 
 msgid "parse error in file '%s':\n%s"
 msgstr ""

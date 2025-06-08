@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:37+0200\n"
-"PO-Revision-Date: 2025-05-24 14:08+0200\n"
+"POT-Creation-Date: 2025-06-08 10:48+0200\n"
+"PO-Revision-Date: 2025-06-08 10:49+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -20,18 +20,17 @@ msgid "wrong argument count"
 msgstr "niepoprawna liczba argumentów"
 
 #: hashtab.cpp:45
-#, fuzzy
 msgid "hash table type must be a scalar string"
-msgstr "argument 'text' musi być ciągiem znaków"
+msgstr "typ tablicy mieszającej musi być tekstem"
 
 #: hashtab.cpp:52
 #, c-format
 msgid "hash table type '%s' is not supported"
-msgstr ""
+msgstr "typ '%s' tablicy mieszającej nie jest wspierany"
 
 #: hashtab.cpp:112
 msgid "bad hash table type"
-msgstr ""
+msgstr "zły typ tablicy mieszającej"
 
 #: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:771 io.cpp:826 io.cpp:839
 #: io.cpp:843 io.cpp:849 io.cpp:1088 io.cpp:1089 io.cpp:1091 io.cpp:1092
@@ -88,7 +87,7 @@ msgstr "\\ po którym następuje EOF"
 #: io.cpp:935
 #, c-format
 msgid "line %d appears to contain embedded nulls"
-msgstr ""
+msgstr "wiersz %d wydaje się zawierać osadzony znak nul"
 
 #: io.cpp:948 io.cpp:952
 #, c-format
@@ -175,7 +174,7 @@ msgstr "argument 'class' musi być ciągiem znaków"
 #: utils.cpp:79
 #, c-format
 msgid "character class \"%s\" is invalid"
-msgstr ""
+msgstr "nieprawidłowa klasa znaku \"%s\""
 
 #: utils.cpp:85
 msgid "argument 'x' must be a length-1 character vector"
@@ -186,17 +185,17 @@ msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr "argument 'x' musi być w kodowaniu UTF-8 (wliczając ASCII)"
 
 #: utils.cpp:119
-#, fuzzy
 msgid "'charClass' is not available on this platform"
-msgstr "'nsl()' nie jest obsługiwany na tej platformie"
+msgstr "'charClass' nie jest obsługiwany na tej platformie"
 
 #: utils.cpp:131
 msgid "input must be a character string"
 msgstr "wejście musi być ciągiem znaków"
 
 #: utils.cpp:154
-msgid "'hostname' must be a character vector of length 1"
-msgstr "argument 'hostname' musi być wektorem tekstowym o długości 1"
+#, c-format
+msgid "'%s' must be a character vector of length 1"
+msgstr "argument '%s' musi być wektorem tekstowym o długości 1"
 
 #: utils.cpp:160
 #, c-format
@@ -271,7 +270,7 @@ msgstr "nieobsługiwany typ klucza %lu\n"
 #: windows/registry.cpp:176
 #, c-format
 msgid "RegQueryInfoKey error code %d: '%s'"
-msgstr ""
+msgstr "kod błędu %d RegQueryInfoKey: '%s'"
 
 #: windows/registry.cpp:265
 #, c-format
@@ -281,15 +280,15 @@ msgstr "Nie znaleziono klucza rejestru '%ls'"
 #: windows/registry.cpp:267
 #, c-format
 msgid "RegOpenKeyEx error code %d: '%s'"
-msgstr ""
+msgstr "kod błędu %d RegOpenKeyEx: '%s'"
 
 #: windows/util.cpp:57
 msgid "unsupported version of Windows"
 msgstr "niewspierana wersja systemu Windows"
 
-#: windows/util.cpp:283
+#: windows/util.cpp:283 windows/util.cpp:318
 msgid "'raw = FALSE' and format is a not a known text format"
-msgstr ""
+msgstr "'raw = FALSE' a podany format nie jest znanym formatem tekstowym"
 
 #: windows/util.cpp:303
 msgid "argument must be a character vector or a raw vector"

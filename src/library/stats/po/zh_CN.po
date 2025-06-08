@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 13:29+0200\n"
 "PO-Revision-Date: 2023-09-18 03:05+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -604,7 +604,8 @@ msgid "n must be at least two"
 msgstr "n至少需要是二"
 
 #: monoSpl.cpp:71
-msgid "Argument m must be numeric"
+#, fuzzy, c-format
+msgid "'%s' must be numeric"
 msgstr "参数m必需为数值"
 
 #: monoSpl.cpp:74
@@ -612,7 +613,8 @@ msgid "length(m) must be at least two"
 msgstr "length(m)的值必需为二"
 
 #: monoSpl.cpp:76
-msgid "Argument Sx must be numeric vector one shorter than m[]"
+#, fuzzy, c-format
+msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "参数Sx必需是长度比m[]小一的数值向量"
 
 #: nls.cpp:101

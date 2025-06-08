@@ -759,11 +759,11 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     if (!isString(paths))
-	errorcall(call, "%s", _("'path' must be a character vector"));
+	errorcall(call, _("'%s' must be a character vector"), "path");
 
     slash = CADR(args);
     if (!isString(slash) || LENGTH(slash) != 1)
-	errorcall(call, "%s", _("'winslash' must be a character string"));
+	errorcall(call, _("'%s' must be a character string"), "winslash");
     const char *sl = translateCharFP(STRING_ELT(slash, 0));
     if (!streql(sl, "/") && !streql(sl, "\\"))
 	errorcall(call, "'winslash' must be '/' or '\\\\'");
@@ -876,7 +876,7 @@ SEXP in_shortpath(SEXP paths)
     DWORD res;
     CXXR::RAllocStack::Scope rscope;
 
-    if(!isString(paths)) error("%s", _("'path' must be a character vector"));
+    if(!isString(paths)) error(_("'%s' must be a character vector"), "path");
 
     PROTECT(ans = allocVector(STRSXP, n));
     for (i = 0; i < n; i++) {

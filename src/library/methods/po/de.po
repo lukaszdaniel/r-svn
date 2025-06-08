@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 20:13+0200\n"
 "PO-Revision-Date: 2022-04-13 12:15+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -159,18 +159,18 @@ msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the fr
 msgstr "interner Fehler in 'callNextMethod': '.NextMethod' wurde im Rahmen der Methodenaufrufs nicht zugewiesen"
 
 #: methods_list_dispatch.cpp:892
-#, c-format
-msgid "'%s' must be a single string (got a character vector of length %d)"
+#, fuzzy, c-format
+msgid "%s must be a single string (got a character vector of length %d)"
 msgstr "\"%s\" muss eine einzelne Zeichenkette sein (bekam Zeichenkettenvektor der Länge %d)"
 
 #: methods_list_dispatch.cpp:896
-#, c-format
-msgid "'%s' must be a non-empty string; got an empty string"
+#, fuzzy, c-format
+msgid "%s must be a non-empty string; got an empty string"
 msgstr "'%s' muss eine nicht-leere Zeichenkette sein; bekam eine leere Zeichenkette"
 
 #: methods_list_dispatch.cpp:900
-#, c-format
-msgid "'%s' must be a single string (got an object of class \"%s\")"
+#, fuzzy, c-format
+msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr "'%s' muss eine einzelne Zeichenkette sein (bekam ein Objekt der Klasse \"%s\")"
 
 #: methods_list_dispatch.cpp:934

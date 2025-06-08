@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 13:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -613,7 +613,8 @@ msgid "n must be at least two"
 msgstr "n turi būti ne mažiau kaip du"
 
 #: monoSpl.cpp:71
-msgid "Argument m must be numeric"
+#, fuzzy, c-format
+msgid "'%s' must be numeric"
 msgstr "Argumentas m turi būti skaitinis"
 
 #: monoSpl.cpp:74
@@ -621,7 +622,8 @@ msgid "length(m) must be at least two"
 msgstr "length(m) turi būti ne mažesnis kaip du"
 
 #: monoSpl.cpp:76
-msgid "Argument Sx must be numeric vector one shorter than m[]"
+#, fuzzy, c-format
+msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "Argumentas Sx turi būti skaitinis vektorius vienu trumpesnis nei m[]"
 
 #: nls.cpp:101

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 10:47+0200\n"
 "PO-Revision-Date: 2025-04-01 16:53+0200\n"
 "Last-Translator: Patricia loto <patricia.andrea.loto@gmail.com>\n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -214,8 +214,9 @@ msgstr "símbolo de gráfico inválido"
 msgid "invalid font specification"
 msgstr "especificación de fuente no válida"
 
-#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193 plot.cpp:2200 plot.cpp:3223
-#: plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167 plot3d.cpp:1169 plot3d.cpp:1898
+#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193
+#: plot.cpp:2200 plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167
+#: plot3d.cpp:1169 plot3d.cpp:1898
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valor de '%s' no válido"
@@ -271,9 +272,10 @@ msgstr "Ejes logarítmicos deben tener limites positivos"
 msgid "invalid type for axis labels"
 msgstr "tipo inválido para rótulos de ejes"
 
-#: plot.cpp:787 plot.cpp:1394 plot.cpp:1706 plot.cpp:1771 plot.cpp:1845 plot.cpp:1909 plot.cpp:1982
-#: plot.cpp:2077 plot.cpp:2153 plot.cpp:2431 plot.cpp:2605 plot.cpp:2820 plot.cpp:3364 plot.cpp:3507
-#: plot.cpp:3578 plot.cpp:3740 plot.cpp:4020 plot3d.cpp:1867
+#: plot.cpp:787 plot.cpp:1394 plot.cpp:1706 plot.cpp:1771 plot.cpp:1845
+#: plot.cpp:1909 plot.cpp:1982 plot.cpp:2077 plot.cpp:2153 plot.cpp:2431
+#: plot.cpp:2605 plot.cpp:2820 plot.cpp:3364 plot.cpp:3507 plot.cpp:3578
+#: plot.cpp:3740 plot.cpp:4020 plot3d.cpp:1867
 msgid "too few arguments"
 msgstr "muy pocos argumentos"
 
@@ -286,8 +288,9 @@ msgstr "número de ejes no válido %d"
 msgid "'hadj' must be of length one"
 msgstr "'hadj' debe tener longitud 1"
 
-#: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455 plot.cpp:2463 plot.cpp:2470
-#: plot.cpp:2477 plot.cpp:2484 plot.cpp:2491 plot.cpp:2499 plot.cpp:2506 plot.cpp:3226
+#: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455
+#: plot.cpp:2463 plot.cpp:2470 plot.cpp:2477 plot.cpp:2484 plot.cpp:2491
+#: plot.cpp:2499 plot.cpp:2506 plot.cpp:3226
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "el ' '%s' de longitud cero fue especificado"
@@ -385,9 +388,10 @@ msgstr "especificación a=, b= no válida"
 msgid "'a' and 'b' must be finite"
 msgstr "'a' y 'b' deben ser finitos"
 
-#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120 plot.cpp:4140 plot.cpp:4144
-#: plot.cpp:4147 plot.cpp:4167 plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089
-#: plot3d.cpp:1094 plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
 #: stem.cpp:171 stem.cpp:172
 #, c-format
 msgid "invalid '%s' argument"
@@ -546,17 +550,10 @@ msgstr "límites de 'y' no válidos"
 msgid "invalid 'z' limits"
 msgstr "límites de 'z' no válidos"
 
-#: plot3d.cpp:1137
-msgid "'xlab' must be a character vector of length 1"
+#: plot3d.cpp:1137 plot3d.cpp:1139 plot3d.cpp:1141
+#, fuzzy, c-format
+msgid "'%s' must be a character vector of length 1"
 msgstr "'xlab' debe ser un vector de caracteres de longitud 1"
-
-#: plot3d.cpp:1139
-msgid "'ylab' must be a character vector of length 1"
-msgstr "'ylab' debe ser un vector de caracteres de longitud 1"
-
-#: plot3d.cpp:1141
-msgid "'zlab' must be a character vector of length 1"
-msgstr "'zlab' debe ser un vector de caracteres de longitud 1"
 
 #: plot3d.cpp:1161
 msgid "invalid viewing parameters"
@@ -647,6 +644,12 @@ msgstr "el vector largo '%s' no es compatible"
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "'ylab' must be a character vector of length 1"
+#~ msgstr "'ylab' debe ser un vector de caracteres de longitud 1"
+
+#~ msgid "'zlab' must be a character vector of length 1"
+#~ msgstr "'zlab' debe ser un vector de caracteres de longitud 1"
 
 #, c-format
 #~ msgid "plot type '%s' will be truncated to first character"

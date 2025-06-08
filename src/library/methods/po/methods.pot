@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 20:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,17 +186,17 @@ msgstr ""
 
 #: methods_list_dispatch.cpp:892
 #, c-format
-msgid "'%s' must be a single string (got a character vector of length %d)"
+msgid "%s must be a single string (got a character vector of length %d)"
 msgstr ""
 
 #: methods_list_dispatch.cpp:896
 #, c-format
-msgid "'%s' must be a non-empty string; got an empty string"
+msgid "%s must be a non-empty string; got an empty string"
 msgstr ""
 
 #: methods_list_dispatch.cpp:900
 #, c-format
-msgid "'%s' must be a single string (got an object of class \"%s\")"
+msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr ""
 
 #: methods_list_dispatch.cpp:934

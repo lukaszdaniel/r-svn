@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-05-18 13:36+0200\n"
+"POT-Creation-Date: 2025-06-07 20:32+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -737,7 +737,7 @@ msgid "Groups exhausted"
 msgstr ""
 
 #: devQuartz.cpp:1312 cairo/cairoFns.cpp:869
-msgid "Unknown group "
+msgid "Unknown group"
 msgstr ""
 
 #: devQuartz.cpp:1572

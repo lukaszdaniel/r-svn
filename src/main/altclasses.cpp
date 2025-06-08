@@ -1323,7 +1323,7 @@ static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
 
     /* Target not link */
     if (stat(efn, &sb) != 0)
-	MMAP_FILE_WARNING_OR_ERROR(_("stat: %s"), strerror(errno));
+	MMAP_FILE_WARNING_OR_ERROR("stat: %s", strerror(errno));
 
     if (!S_ISREG(sb.st_mode))
 	MMAP_FILE_WARNING_OR_ERROR(_("%s is not a regular file"), efn);
@@ -1331,13 +1331,13 @@ static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
     int oflags = wrtOK ? O_RDWR : O_RDONLY;
     int fd = open(efn, oflags);
     if (fd == -1)
-	MMAP_FILE_WARNING_OR_ERROR(_("open: %s"), strerror(errno));
+	MMAP_FILE_WARNING_OR_ERROR("open: %s", strerror(errno));
 
     int pflags = wrtOK ? PROT_READ | PROT_WRITE : PROT_READ;
     void *p = mmap(0, sb.st_size, pflags, MAP_SHARED, fd, 0);
     close(fd); /* don't care if this fails */
     if (p == MAP_FAILED)
-	MMAP_FILE_WARNING_OR_ERROR(_("mmap: %s"), strerror(errno));
+	MMAP_FILE_WARNING_OR_ERROR("mmap: %s", strerror(errno));
 
     return make_mmap(p, file, sb.st_size, type, ptrOK, wrtOK, serOK);
 }
@@ -1405,7 +1405,7 @@ attribute_hidden SEXP do_munmap_file(SEXP call, SEXP op, SEXP args, SEXP env)
     errno = 0;
     R_RunWeakRefFinalizer(R_ExternalPtrTag(eptr));
     if (errno)
-	error(_("munmap: %s"), strerror(errno));
+	error("munmap: %s", strerror(errno));
     return R_NilValue;
 }
 

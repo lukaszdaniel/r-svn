@@ -2180,7 +2180,7 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     names = CAR(args);
     if(!isString(names))
-	error("%s", _("'names' must be a character vector"));
+	error(_("'%s' must be a character vector"), "names");
     n = LENGTH(names);
     sep = CADR(args);
     if(!isString(sep) || LENGTH(sep) != 1)

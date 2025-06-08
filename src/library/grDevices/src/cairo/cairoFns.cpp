@@ -866,7 +866,7 @@ static void CairoUseGroup(SEXP ref, SEXP trans, pX11Desc xd)
     }
 
     if (index >= 0 && !xd->groups[index]) {
-        warning("%s", _("Unknown group "));
+        warning("%s", _("Unknown group"));
         return;
     } 
 

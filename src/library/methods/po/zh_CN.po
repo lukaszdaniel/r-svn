@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 20:13+0200\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -161,18 +161,18 @@ msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the fr
 msgstr "'callNextMethod'内部错误：方法调用框里没有为'.nextMethod'定义"
 
 #: methods_list_dispatch.cpp:892
-#, c-format
-msgid "'%s' must be a single string (got a character vector of length %d)"
+#, fuzzy, c-format
+msgid "%s must be a single string (got a character vector of length %d)"
 msgstr "'%s'必需是单一字符串(现在它是长度为%d的字符向量)"
 
 #: methods_list_dispatch.cpp:896
-#, c-format
-msgid "'%s' must be a non-empty string; got an empty string"
+#, fuzzy, c-format
+msgid "%s must be a non-empty string; got an empty string"
 msgstr "'%s'必需是非空字符串；现在它是空的字符串"
 
 #: methods_list_dispatch.cpp:900
-#, c-format
-msgid "'%s' must be a single string (got an object of class \"%s\")"
+#, fuzzy, c-format
+msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr "'%s'必需是单一字符串(现在它是类别为\"%s\"的对象)"
 
 #: methods_list_dispatch.cpp:934

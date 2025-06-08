@@ -1987,7 +1987,7 @@ attribute_hidden SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
     case INTSXP:
     case REALSXP: break;
     default:
-	error("%s", _("'x' must be numeric"));
+	error(_("'%s' must be numeric"), "x");
     }
     if ((double)n * (double)p > XLENGTH(x))
 	error("%s", _("'x' is too short")); /* PR#16367 */

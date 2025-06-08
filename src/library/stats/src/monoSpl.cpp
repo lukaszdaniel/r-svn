@@ -68,12 +68,12 @@ SEXP monoFC_m(SEXP m, SEXP Sx)
 	val = PROTECT(coerceVector(m, REALSXP));
     else {
 	if (!isReal(m))
-	    error("%s", _("Argument m must be numeric"));
+	    error( _("'%s' must be numeric"), "m");
 	val = PROTECT(duplicate(m));
     }
     if(n < 2) error("%s", _("length(m) must be at least two"));
     if(!isReal(Sx) || LENGTH(Sx) != n-1)
-	error("%s", _("Argument Sx must be numeric vector one shorter than m[]"));
+	error(_("'%s' must be numeric vector one shorter than m[]"), "Sx");
 
     /* Fix up the slopes m[] := val[]: */
     monoFC_mod(REAL(val), REAL(Sx), n);

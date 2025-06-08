@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-07 13:29+0200\n"
 "PO-Revision-Date: 2023-01-19 18:31+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -619,7 +619,8 @@ msgid "n must be at least two"
 msgstr "n dev'essere almeno due"
 
 #: monoSpl.cpp:71
-msgid "Argument m must be numeric"
+#, fuzzy, c-format
+msgid "'%s' must be numeric"
 msgstr "L'argomento m dev'essere numerico"
 
 #: monoSpl.cpp:74
@@ -627,7 +628,8 @@ msgid "length(m) must be at least two"
 msgstr "length(m) dev'essere almeno due"
 
 #: monoSpl.cpp:76
-msgid "Argument Sx must be numeric vector one shorter than m[]"
+#, fuzzy, c-format
+msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "L'argomento Sx dev'essere un vettore numerico di uno più corto di m[]"
 
 #: nls.cpp:101
