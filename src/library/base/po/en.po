@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-08 17:01+0200\n"
 "PO-Revision-Date: 2025-04-01 16:52+0200\n"
 "Last-Translator: Brian Ripley <Brian.Ripley@R-project.org>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -350,8 +350,9 @@ msgstr ""
 msgid "allocation of pipe connection failed"
 msgstr ""
 
-#: src/gnuwin32/run.cpp:1142
-msgid "'names' is not a character vector"
+#: src/gnuwin32/run.cpp:1142 src/main/sprintf.cpp:112 src/main/util.cpp:2337
+#, c-format
+msgid "'%s' is not a character vector"
 msgstr ""
 
 #: src/gnuwin32/system.cpp:111
@@ -704,7 +705,8 @@ msgid "input string x[%d] is invalid in this locale"
 msgstr ""
 
 #: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
-#: src/main/util.cpp:3206 src/modules/internet/Rhttpd.cpp:1301
+#: src/main/print.cpp:1194 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
 #: src/modules/X11/dataentry.cpp:452
 #, c-format
 msgid "allocation error in '%s'"
@@ -777,7 +779,7 @@ msgstr ""
 msgid "not a memory-mapped object"
 msgstr ""
 
-#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448
+#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448 src/main/util.cpp:3194
 msgid "unsupported type"
 msgstr ""
 
@@ -2737,8 +2739,10 @@ msgstr ""
 msgid "R_compress1 requires a raw vector"
 msgstr ""
 
-#: src/main/connections.cpp:6500
-msgid "allocation error in R_compress1 with libdeflate"
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
+#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#, c-format
+msgid "allocation error in '%s' with libdeflate"
 msgstr ""
 
 #: src/main/connections.cpp:6513
@@ -2749,42 +2753,31 @@ msgstr ""
 msgid "R_decompress1 requires a raw vector"
 msgstr ""
 
-#: src/main/connections.cpp:6531
-msgid "allocation error in R_decompress1 with libdeflate"
-msgstr ""
-
 #: src/main/connections.cpp:6544
 #, c-format
-msgid "internal error %d in R_decompress1 with libdeflate"
+msgid "internal error %d in '%s' with libdeflate"
 msgstr ""
 
-#: src/main/connections.cpp:6570
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
+#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
+#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#: src/main/connections.cpp:7282
 #, c-format
-msgid "internal error %d in R_compress1"
-msgstr ""
-
-#: src/main/connections.cpp:6591 src/main/connections.cpp:6664
-#: src/main/connections.cpp:6928
-#, c-format
-msgid "internal error %d in R_decompress1"
+msgid "internal error %d in '%s'"
 msgstr ""
 
 #: src/main/connections.cpp:6613
 msgid "R_compress2 requires a raw vector"
 msgstr ""
 
-#: src/main/connections.cpp:6623
-#, c-format
-msgid "internal error %d in R_compress2"
-msgstr ""
-
 #: src/main/connections.cpp:6647
 msgid "R_decompress2 requires a raw vector"
-msgstr ""
-
-#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
-#, c-format
-msgid "internal error %d in R_decompress2"
 msgstr ""
 
 #: src/main/connections.cpp:6671
@@ -2822,18 +2815,8 @@ msgstr ""
 msgid "R_compress3 requires a raw vector"
 msgstr ""
 
-#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
-#, c-format
-msgid "internal error %d in R_compress3"
-msgstr ""
-
 #: src/main/connections.cpp:6872
 msgid "R_decompress3 requires a raw vector"
-msgstr ""
-
-#: src/main/connections.cpp:6883
-#, c-format
-msgid "internal error %d in R_decompress3"
 msgstr ""
 
 #: src/main/connections.cpp:6893
@@ -2853,19 +2836,8 @@ msgstr ""
 msgid "'from' must be raw or character"
 msgstr ""
 
-#: src/main/connections.cpp:6967
-#, c-format
-msgid "allocation error in '%s' with libdeflate"
-msgstr ""
-
 #: src/main/connections.cpp:6975
 msgid "internal libdeflate error in memCompress"
-msgstr ""
-
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#, c-format
-msgid "internal error %d in memCompress"
 msgstr ""
 
 #: src/main/connections.cpp:7055
@@ -2877,22 +2849,12 @@ msgstr ""
 msgid "unknown compression, assuming none"
 msgstr ""
 
-#: src/main/connections.cpp:7116
-msgid "allocation error in memDecompress with libdeflate"
-msgstr ""
-
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#, c-format
-msgid "internal error %d in memDecompress(%s)"
-msgstr ""
-
 #: src/main/connections.cpp:7256
 #, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr ""
 
-#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#: src/main/connections.cpp:7286
 #, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr ""
@@ -2957,8 +2919,10 @@ msgstr ""
 msgid "debug will apply when function leaves compiled code"
 msgstr ""
 
-#: src/main/context.cpp:750
-msgid "internal error in 'do_sys'"
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215
+#: src/main/random.cpp:301
+#, c-format
+msgid "internal error in '%s'"
 msgstr ""
 
 #: src/main/contour-common.h:327
@@ -6507,10 +6471,6 @@ msgstr ""
 msgid "invalid character length in 'realpr'"
 msgstr ""
 
-#: src/main/print.cpp:1194
-msgid "memory allocation error in 'realpr'"
-msgstr ""
-
 #: src/main/print.cpp:1227
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
@@ -6603,18 +6563,6 @@ msgstr ""
 #: src/main/random.cpp:109 src/main/random.cpp:126 src/main/random.cpp:192
 #: src/main/random.cpp:218 src/main/random.cpp:290 src/main/random.cpp:304
 msgid "NAs produced"
-msgstr ""
-
-#: src/main/random.cpp:123
-msgid "internal error in do_random1"
-msgstr ""
-
-#: src/main/random.cpp:215
-msgid "internal error in do_random2"
-msgstr ""
-
-#: src/main/random.cpp:301
-msgid "internal error in do_random3"
 msgstr ""
 
 #: src/main/random.cpp:458
@@ -7812,10 +7760,6 @@ msgstr ""
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr ""
 
-#: src/main/sprintf.cpp:112
-msgid "'fmt' is not a character vector"
-msgstr ""
-
 #: src/main/sprintf.cpp:117
 #, c-format
 msgid "only %d arguments are allowed"
@@ -8512,7 +8456,8 @@ msgid "any_duplicated3(., <0-length incomp>)"
 msgstr ""
 
 #: src/main/unique.cpp:1137
-msgid "'fromLast' must be length 1"
+#, c-format
+msgid "'%s' must be length 1"
 msgstr ""
 
 #: src/main/unique.cpp:1148
@@ -8720,10 +8665,6 @@ msgstr ""
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr ""
 
-#: src/main/util.cpp:2337
-msgid "argument is not a character vector"
-msgstr ""
-
 #: src/main/util.cpp:2536
 msgid "all arguments must be named"
 msgstr ""
@@ -8790,10 +8731,6 @@ msgstr ""
 
 #: src/main/util.cpp:3081
 msgid "'type' must be \"integer\" for  \"d\"-format"
-msgstr ""
-
-#: src/main/util.cpp:3194
-msgid "unsupported type "
 msgstr ""
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
@@ -9099,10 +9036,6 @@ msgstr ""
 #: src/modules/internet/libcurl.cpp:1319
 #, c-format
 msgid "cannot open the connection to '%s'"
-msgstr ""
-
-#: src/modules/internet/Rhttpd.cpp:805
-msgid "allocation error in remove_dot_segments"
 msgstr ""
 
 #: src/modules/internet/Rhttpd.cpp:1362
@@ -9688,7 +9621,7 @@ msgid "allocation failure in R_SaveAsTIF"
 msgstr ""
 
 #: src/modules/X11/rbitmap.cpp:576
-msgid "No TIFF support in this version of R"
+msgid "no TIFF support in this version of R"
 msgstr ""
 
 #: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600

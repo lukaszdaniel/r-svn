@@ -223,7 +223,7 @@ static void BM_Close_bitmap(pX11Desc xd)
 
     void *xi = cairo_image_surface_get_data(xd->cs);
     if (!xi) {
-	warning("%s", _("BM_Close_bitmap called on non-surface"));
+	warning(_("'%s' called on non-surface"), "BM_Close_bitmap");
 	return;
     }
 

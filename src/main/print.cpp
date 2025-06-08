@@ -1191,7 +1191,7 @@ void F77_SUB(realp0) (const char *label, int *nchar, float *data, int *ndata)
     }
     if(nd > 0) {
 	double *ddata = (double *) malloc(nd*sizeof(double));
-	if(!ddata) error("%s", _("memory allocation error in 'realpr'"));
+	if(!ddata) error(_("allocation error in '%s'"), "realpr");
 	for (int k = 0; k < nd; k++) ddata[k] = (double) data[k];
 	printRealVector(ddata, nd, 1);
 	free(ddata);

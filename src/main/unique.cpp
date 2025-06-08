@@ -1134,7 +1134,7 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x = CAR(args);
     SEXP incomp = CADR(args);
     if (length(CADDR(args)) < 1)
-	error("%s", _("'fromLast' must be length 1"));
+	error(_("'%s' must be length 1"), "fromLast");
     bool fL = asLogicalNoNA(CADDR(args), "fromLast");
 
     /* handle zero length vectors, and NULL */

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 11:39+0200\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -48,11 +48,13 @@ msgid "only %d arguments are allowed"
 msgstr "오로지 %d 인자들만이 허용됩니다"
 
 #: getfmts.cpp:61
-msgid "'fmt' is not a character vector"
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "'fmt'는 문자형 벡터가 아닙니다"
 
 #: getfmts.cpp:64
-msgid "'fmt' must be length 1"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
 msgstr "'fmt'는 반드시 길이가 1이어야 합니다"
 
 #: getfmts.cpp:70

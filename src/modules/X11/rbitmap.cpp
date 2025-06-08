@@ -573,7 +573,7 @@ int R_SaveAsTIFF(void *d, int width, int height,
 		unsigned int (*gp)(void *, int, int),
 		 int bgr, const char *outfile, int res, int compression)
 {
-    warning("%s", _("No TIFF support in this version of R"));
+    warning("%s", _("no TIFF support in this version of R"));
     return 0;
 }
 #endif  /* HAVE_TIFF */

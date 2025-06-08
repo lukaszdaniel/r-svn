@@ -747,7 +747,7 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' value"), "which");
 	return (R_sysfunction(n, cptr));
     default:
-	error("%s", _("internal error in 'do_sys'"));
+	error(_("internal error in '%s'"), "do_sys");
 	return R_NilValue;/* just for -Wall */
     }
 }

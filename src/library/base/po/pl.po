@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
-"PO-Revision-Date: 2025-06-08 10:48+0200\n"
+"POT-Creation-Date: 2025-06-08 17:01+0200\n"
+"PO-Revision-Date: 2025-06-08 17:08+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -287,9 +287,10 @@ msgstr "drukowanie wyjątkowo długiego wyjścia zostało przycięte"
 msgid "allocation of pipe connection failed"
 msgstr "przydział połączenia potokowego nie powiódł się"
 
-#: src/gnuwin32/run.cpp:1142
-msgid "'names' is not a character vector"
-msgstr "argument 'names' nie jest wektorem tekstowym"
+#: src/gnuwin32/run.cpp:1142 src/main/sprintf.cpp:112 src/main/util.cpp:2337
+#, c-format
+msgid "'%s' is not a character vector"
+msgstr "argument '%s' nie jest wektorem tekstowym"
 
 #: src/gnuwin32/system.cpp:111
 msgid "Thief about! Something other than package tcltk has set or is attempting to set R_Tcl_do"
@@ -447,22 +448,20 @@ msgstr ""
 "*** Błąd: 'getline()': przepełnienie bufora wejściowego\n"
 
 #: src/gnuwin32/getline/getline.cpp:452 src/gnuwin32/getline/getline.cpp:899
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: getline(): not enough memory.\n"
 msgstr ""
 "\n"
-"*** Błąd: 'getline()': zbyt mało pamięci."
+"*** Błąd: 'getline()': zbyt mało pamięci.\n"
 
 #: src/gnuwin32/getline/getline.cpp:469
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: getline(): not interactive, use stdio.\n"
 msgstr ""
 "\n"
-"*** Błąd: 'getline()': nie jest interaktywne, użyj stdio."
+"*** Błąd: 'getline()': nie jest interaktywne, użyj stdio.\n"
 
 #: src/gnuwin32/getline/getline.cpp:475 src/gnuwin32/getline/getline.cpp:481
 #, fuzzy
@@ -492,13 +491,12 @@ msgstr ""
 "*** Błąd: 'getline()': przepełnienie bufora wejściowego\n"
 
 #: src/gnuwin32/getline/getline.cpp:545
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: minimum screen width is 21\n"
 msgstr ""
 "\n"
-"*** Błąd: minimalna szerokość ekranu to 21"
+"*** Błąd: minimalna szerokość ekranu to 21\n"
 
 #: src/gnuwin32/getline/getline.cpp:936 src/gnuwin32/getline/getline.cpp:991 src/gnuwin32/getline/getline.cpp:1069
 msgid ""
@@ -509,31 +507,28 @@ msgstr ""
 "*** Błąd: 'getline()': przepełnienie bufora wejściowego\n"
 
 #: src/gnuwin32/getline/getline.cpp:1452
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: gl_hist_init() failed on malloc\n"
 msgstr ""
 "\n"
-"*** Błąd: funkcja 'gl_hist_init()' nie powiodła się przy 'malloc'"
+"*** Błąd: funkcja 'gl_hist_init()' nie powiodła się przy 'malloc'\n"
 
 #: src/gnuwin32/getline/getline.cpp:1479
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: gl_histadd() failed on realloc\n"
 msgstr ""
 "\n"
-"*** Błąd: funkcja 'gl_histadd()' nie powiodła się przy 'realloc'"
+"*** Błąd: funkcja 'gl_histadd()' nie powiodła się przy 'realloc'\n"
 
 #: src/gnuwin32/getline/getline.cpp:1540
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: hist_save() failed on malloc\n"
 msgstr ""
 "\n"
-"*** Błąd: funkcja 'hist_save()' nie powiodła się przy 'malloc'"
+"*** Błąd: funkcja 'hist_save()' nie powiodła się przy 'malloc'\n"
 
 #: src/gnuwin32/getline/getline.cpp:1553 src/gnuwin32/getline/wc_history.cpp:138
 #, c-format
@@ -593,7 +588,7 @@ msgstr "'value' pustego obiektu nie jest zdefiniowane"
 
 #: src/include/Rinlinedfuns.h:88
 msgid "bad binding access"
-msgstr ""
+msgstr "zły dostęp do wiązania"
 
 #: src/include/Rinlinedfuns.h:116
 #, fuzzy, c-format
@@ -660,8 +655,8 @@ msgstr "argument '%s' zostanie zignorowany"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "wejściowy łańcuch tekstowy x[%d] jest niepoprawny w lokalizacji"
 
-#: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482 src/main/util.cpp:3206 src/modules/internet/Rhttpd.cpp:1301
-#: src/modules/X11/dataentry.cpp:452
+#: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482 src/main/print.cpp:1194 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301 src/modules/X11/dataentry.cpp:452
 #, c-format
 msgid "allocation error in '%s'"
 msgstr "błąd przydziału pamięci w '%s'"
@@ -701,9 +696,8 @@ msgid "mmap for %s not supported yet"
 msgstr "mmap dla %s nie jest jeszcze wspierana"
 
 #: src/main/altclasses.cpp:1032
-#, fuzzy
 msgid "object has been unmapped"
-msgstr "nie znaleziono obiektu '%s'"
+msgstr "obiekt został odmapowany"
 
 #: src/main/altclasses.cpp:1126
 msgid "memory mapping failed; returning vector of length zero"
@@ -732,7 +726,7 @@ msgstr "typ '%s' nie jest wspierany"
 msgid "not a memory-mapped object"
 msgstr ""
 
-#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448
+#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448 src/main/util.cpp:3194
 msgid "unsupported type"
 msgstr "niewspierany typ"
 
@@ -1310,9 +1304,9 @@ msgid "number of rows of matrices must match (see arg %d)"
 msgstr "liczby wierszy macierzy muszą być zgodne (zobacz argument %d)"
 
 #: src/main/bind.cpp:1342
-#, fuzzy, c-format
+#, c-format
 msgid "number of rows of result is not a multiple of vector length (arg %d)"
-msgstr "liczba kolumn wyniku nie jest wielokrotnością długości wektora (argument %d)"
+msgstr "liczba wierszy wyniku nie jest wielokrotnością długości wektora (argument %d)"
 
 #: src/main/bind.cpp:1489
 #, c-format
@@ -1747,9 +1741,9 @@ msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr "'%s()' zastosowane do nie-listy lub nie-wektora typu '%s'"
 
 #: src/main/coerce.cpp:2452
-#, fuzzy, c-format
+#, c-format
 msgid "anyNA() applied to non-(list or vector) of type '%s'"
-msgstr "'%s()' zastosowane do nie-listy lub nie-wektora typu '%s'"
+msgstr "'anyNA()' zastosowane do nie-listy lub nie-wektora typu '%s'"
 
 #: src/main/coerce.cpp:2464
 msgid "anyNA takes 1 or 2 arguments"
@@ -2129,7 +2123,7 @@ msgstr "przydział bufora przepełnienia dla bzfile nie powiódł się"
 #: src/main/connections.cpp:2106
 #, c-format
 msgid "file '%s' has trailing content that appears not to be compressed by bzip2"
-msgstr "Plik '%s' posiada końcową treść, która wydaje się nie być skompresowana przez bzip2"
+msgstr "plik '%s' posiada końcową treść, która wydaje się nie być skompresowana przez bzip2"
 
 #: src/main/connections.cpp:2161 src/main/connections.cpp:2165 src/main/connections.cpp:2172 src/main/connections.cpp:2190
 msgid "allocation of bzfile connection failed"
@@ -2141,9 +2135,8 @@ msgid "cannot initialize lzma decoder, error %d"
 msgstr "nie można zainicjować dekodera lzma, błąd %d"
 
 #: src/main/connections.cpp:2253 src/main/connections.cpp:6810 src/main/connections.cpp:7021
-#, fuzzy
 msgid "problem setting presets"
-msgstr "problem z ustawieniem ustawień domyślnych"
+msgstr "problem z ustawieniem wartości domyślnych"
 
 #: src/main/connections.cpp:2260
 #, c-format
@@ -2635,9 +2628,10 @@ msgstr "przydział połączenia gzcon nie powiódł się"
 msgid "R_compress1 requires a raw vector"
 msgstr "'R_compress1()' wymaga pustego wektora"
 
-#: src/main/connections.cpp:6500
-msgid "allocation error in R_compress1 with libdeflate"
-msgstr "błąd przydziału pamięci w 'R_compress1 ' z libdeflate"
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531 src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#, c-format
+msgid "allocation error in '%s' with libdeflate"
+msgstr "błąd przydziału pamięci w '%s' z libdeflate"
 
 #: src/main/connections.cpp:6513
 #, fuzzy
@@ -2648,42 +2642,27 @@ msgstr "błąd wewnętrzny %d w R_compress1"
 msgid "R_decompress1 requires a raw vector"
 msgstr "'R_decompress1()' wymaga pustego wektora"
 
-#: src/main/connections.cpp:6531
-msgid "allocation error in R_decompress1 with libdeflate"
-msgstr "błąd przydziału pamięci w 'R_decompress1 ' z libdeflate"
-
 #: src/main/connections.cpp:6544
 #, c-format
-msgid "internal error %d in R_decompress1 with libdeflate"
-msgstr "błąd wewnętrzny %d w R_decompress1 z libdeflate"
+msgid "internal error %d in '%s' with libdeflate"
+msgstr "błąd wewnętrzny %d w '%s' z libdeflate"
 
-#: src/main/connections.cpp:6570
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591 src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842 src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928 src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037 src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208 src/main/connections.cpp:7282
 #, c-format
-msgid "internal error %d in R_compress1"
-msgstr "błąd wewnętrzny %d w R_compress1"
-
-#: src/main/connections.cpp:6591 src/main/connections.cpp:6664 src/main/connections.cpp:6928
-#, c-format
-msgid "internal error %d in R_decompress1"
-msgstr "błąd wewnętrzny %d w R_decompress1"
+msgid "internal error %d in '%s'"
+msgstr "błąd wewnętrzny %d w '%s'"
 
 #: src/main/connections.cpp:6613
 msgid "R_compress2 requires a raw vector"
 msgstr "'R_compress2()' wymaga pustego wektora"
 
-#: src/main/connections.cpp:6623
-#, c-format
-msgid "internal error %d in R_compress2"
-msgstr "błąd wewnętrzny %d w R_compress2"
-
 #: src/main/connections.cpp:6647
 msgid "R_decompress2 requires a raw vector"
 msgstr "'R_decompress2()' wymaga pustego wektora"
-
-#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
-#, c-format
-msgid "internal error %d in R_decompress2"
-msgstr "błąd wewnętrzny %d w R_decompress2"
 
 #: src/main/connections.cpp:6671
 msgid "unknown type in R_decompress2"
@@ -2719,19 +2698,9 @@ msgstr "zbyt wiele opisów plików dla 'select()'"
 msgid "R_compress3 requires a raw vector"
 msgstr "'R_compress3()' wymaga pustego wektora"
 
-#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
-#, c-format
-msgid "internal error %d in R_compress3"
-msgstr "błąd wewnętrzny %d w R_compress3"
-
 #: src/main/connections.cpp:6872
 msgid "R_decompress3 requires a raw vector"
 msgstr "'R_decompress3()' wymaga pustego wektora"
-
-#: src/main/connections.cpp:6883
-#, c-format
-msgid "internal error %d in R_decompress3"
-msgstr "błąd wewnęrzny %d w R_decompress3"
 
 #: src/main/connections.cpp:6893
 #, c-format
@@ -2747,23 +2716,12 @@ msgid "unknown type in R_decompress3"
 msgstr "nieznany typ w R_decompress3"
 
 #: src/main/connections.cpp:6956
-#, fuzzy
 msgid "'from' must be raw or character"
 msgstr "argument 'from' musi być tekstem lub pustym wektorem"
-
-#: src/main/connections.cpp:6967
-#, c-format
-msgid "allocation error in '%s' with libdeflate"
-msgstr "błąd przydziału pamięci w '%s' z libdeflate"
 
 #: src/main/connections.cpp:6975
 #, fuzzy
 msgid "internal libdeflate error in memCompress"
-msgstr "błąd wewnęrzny %d w memCompress"
-
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004 src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#, c-format
-msgid "internal error %d in memCompress"
 msgstr "błąd wewnęrzny %d w memCompress"
 
 #: src/main/connections.cpp:7055
@@ -2775,21 +2733,12 @@ msgstr "błąd wewnęrzny %d w memCompress"
 msgid "unknown compression, assuming none"
 msgstr "nieznana kompresja, zakładam brak"
 
-#: src/main/connections.cpp:7116
-msgid "allocation error in memDecompress with libdeflate"
-msgstr "błąd przydziału pamięci w 'memDecompress ' z libdeflate"
-
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152 src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#, c-format
-msgid "internal error %d in memDecompress(%s)"
-msgstr "błąd wewnętrzny %d w memDecompress(%s)"
-
 #: src/main/connections.cpp:7256
 #, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr "błąd wewnętrzny %d w memDecompress(%s) w %llu"
 
-#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#: src/main/connections.cpp:7286
 #, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr "błąd wewnętrzny w memDecompress(%s)"
@@ -2802,7 +2751,7 @@ msgstr "przydział połączenia %s nie powiódł się"
 #: src/main/ConsCell.cpp:59
 #, c-format
 msgid "bad binding access: %d"
-msgstr ""
+msgstr "zły dostęp do wiązania: %d"
 
 #: src/main/context.cpp:201
 msgid "bad target context--should NEVER happen if R was called correctly"
@@ -2853,9 +2802,10 @@ msgstr "flaga debugowania w skompilowanych funkcjach nie ma żadnego efektu"
 msgid "debug will apply when function leaves compiled code"
 msgstr "debug będzie miało zastosowanie gdy funkcja opuści skompilowany kod"
 
-#: src/main/context.cpp:750
-msgid "internal error in 'do_sys'"
-msgstr "błąd wewnętrzny w 'do_sys'"
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215 src/main/random.cpp:301
+#, c-format
+msgid "internal error in '%s'"
+msgstr "błąd wewnętrzny w '%s'"
 
 #: src/main/contour-common.h:327
 #, c-format
@@ -3213,9 +3163,8 @@ msgid "complex NA/NaN/Inf in foreign function call (arg %d)"
 msgstr "złożone wartości NA/NaN/Inf w wywołaniu obcej funkcji (argument %d)"
 
 #: src/main/dotcode.cpp:1891
-#, fuzzy
 msgid "only the first string in a char vector used in .Fortran"
-msgstr "tylko pierwszy łańcuch w wektorze tekstowym został użyty w '.Fortran'"
+msgstr "tylko pierwszy ciąg w wektorze tekstowym został użyty w '.Fortran'"
 
 #: src/main/dotcode.cpp:1893
 msgid "passing a char vector to .Fortran is not portable"
@@ -3361,9 +3310,8 @@ msgid "allocation of 'unz' connection failed"
 msgstr "przydział połączenia 'unz' nie powiódł się"
 
 #: src/main/dounzip.cpp:2106
-#, fuzzy
 msgid "possible truncation of >= 4GB file"
-msgstr "przycięcie pliku nie powiodło się"
+msgstr "prawdopodobne przycięcie pliki >= 4GB"
 
 #: src/main/dstruct.cpp:71
 msgid "offset is out of R_FunTab range"
@@ -3900,9 +3848,8 @@ msgid "argument must be a hashed environment"
 msgstr "argument musi być haszowanym środowiskiem"
 
 #: src/main/envir.cpp:4088
-#, fuzzy
 msgid "invalid string was created"
-msgstr "niepoprawne argumenty podłańcucha"
+msgstr "utworzono nieprawidłowy ciąg"
 
 #: src/main/envir.cpp:4101 src/main/envir.cpp:4103
 #, c-format
@@ -4118,9 +4065,8 @@ msgid "not an external pointer"
 msgstr "argument nie jest wskaźnikiem zewnętrznym"
 
 #: src/main/errors.cpp:2606 src/main/errors.cpp:2621
-#, fuzzy
 msgid "should not be called with handlers on the stack"
-msgstr "funkcja powinna być wywoływana tylko w kontekście przypisania."
+msgstr "funkcja nie powinna być wywoływana z handlerami na stosie"
 
 #: src/main/errors.cpp:2672
 msgid "condition object must be a VECSXP of length at least one"
@@ -4242,12 +4188,11 @@ msgid "%s at %s#%d: "
 msgstr "'%s' w %s#%d: "
 
 #: src/main/eval.cpp:2277
-#, fuzzy
 msgid "'rho' cannot be C NULL: detected in C-level applyClosure"
 msgstr "argument 'rho' nie może być wartością C NULL: wykryto na poziomie C w funkcji 'applyClosure'"
 
 #: src/main/eval.cpp:2279
-#, fuzzy, c-format
+#, c-format
 msgid "'rho' must be an environment not %s: detected in C-level applyClosure"
 msgstr "argument 'rho' musi być środowiskiem a nie %s: wykryto na poziomie C w funkcji 'applyClosure'"
 
@@ -4961,9 +4906,8 @@ msgid "too long a vector"
 msgstr "zbyt długi wektor"
 
 #: src/main/gzio.h:292 src/main/gzio.h:352 src/main/gzio.h:374
-#, fuzzy
 msgid "invalid or incomplete compressed data"
-msgstr "niepoprawna funkcja w złożonym przypisaniu"
+msgstr "nieprawidłowe lub niekompletne skompresowane dane"
 
 #: src/main/gzio.h:295 src/main/gzio.h:376
 msgid "error reading the file"
@@ -5435,9 +5379,8 @@ msgid "LENGTH or similar applied to %s object"
 msgstr "LENGTH lub coś podobnego zastosowano do obiektu %s"
 
 #: src/main/memory.cpp:3707
-#, fuzzy
 msgid "SETLENGTH() cannot be applied to an ALTVEC object."
-msgstr "'SETLENGTH()' może być zastosowane jedynie do standardowego wektora, a nie '%s'"
+msgstr "'SETLENGTH()' nie może być zastosowane do obiektu ALTVEC."
 
 #: src/main/memory.cpp:3709
 #, c-format
@@ -5458,9 +5401,9 @@ msgid "cannot get STDVEC_DATAPTR from ALTREP object"
 msgstr ""
 
 #: src/main/memory.cpp:3806
-#, fuzzy, c-format
+#, c-format
 msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
-msgstr "'SETLENGTH()' może być zastosowane jedynie do standardowego wektora, a nie '%s'"
+msgstr "'STDVEC_DATAPTR()' może być zastosowane jedynie do wektora, a nie '%s'"
 
 #: src/main/memory.cpp:3927
 msgid "not safe to return vector pointer"
@@ -5492,9 +5435,8 @@ msgid "CAR/CDR/TAG or similar applied to %s object"
 msgstr "LENGTH lub coś podobnego zastosowano do obiektu %s"
 
 #: src/main/memory.cpp:4133
-#, fuzzy
 msgid "argument not tracking references"
-msgstr "argument nie jest środowiskiem"
+msgstr "argument nie śledzi referencji"
 
 #: src/main/memory.cpp:4201 src/main/memory.cpp:4210 src/main/memory.cpp:4221 src/main/memory.cpp:4237 src/main/memory.cpp:4251
 #: src/main/memory.cpp:4266 src/main/memory.cpp:4282
@@ -6193,9 +6135,9 @@ msgid "insufficient OS support on this platform"
 msgstr "niewystarczające wsparcie OS na tej platformie"
 
 #: src/main/platform.cpp:3357
-#, fuzzy, c-format
+#, c-format
 msgid "possible truncation of value for element %d"
-msgstr "przycięcie pliku nie powiodło się"
+msgstr "prawdopodobne przycięcie wartości dla elementu %d"
 
 #: src/main/platform.cpp:3438
 #, c-format
@@ -6407,10 +6349,6 @@ msgstr "niepoprawna długość tekstu w 'intpr'"
 msgid "invalid character length in 'realpr'"
 msgstr "niepoprawna długość tekstu w 'realpr'"
 
-#: src/main/print.cpp:1194
-msgid "memory allocation error in 'realpr'"
-msgstr "błąd przydziału pamięci w 'realpr'"
-
 #: src/main/print.cpp:1227
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
@@ -6508,18 +6446,6 @@ msgstr "niepoprawne argumenty"
 msgid "NAs produced"
 msgstr "wyprodukowano wartości Na"
 
-#: src/main/random.cpp:123
-msgid "internal error in do_random1"
-msgstr "błąd wewnętrzny w 'do_random1'"
-
-#: src/main/random.cpp:215
-msgid "internal error in do_random2"
-msgstr "błąd wewnętrzny w 'do_random2'"
-
-#: src/main/random.cpp:301
-msgid "internal error in do_random3"
-msgstr "błąd wewnętrzny w 'do_random3'"
-
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
 msgstr "wartość NA w wektorze prawdopodobieństwa"
@@ -6591,7 +6517,7 @@ msgstr ""
 
 #: src/main/Rdynload.cpp:177
 msgid "DLL table corruption detected"
-msgstr ""
+msgstr "wykryto uszkodzenie tablicy DLL"
 
 #: src/main/Rdynload.cpp:204
 #, c-format
@@ -6818,14 +6744,12 @@ msgid "path to Renviron.site is too long: skipping"
 msgstr "ścieżka do Renviron.site jest zbyt długa: pomijanie"
 
 #: src/main/Renviron.cpp:463
-#, fuzzy
 msgid "path to arch-specific user Renviron is too long: skipping"
-msgstr "ścieżka do Renviron.site zależnego od architektury jest zbyt długa: pomijanie"
+msgstr "ścieżka do pliku Renviron zależnego od architektury jest zbyt długa: pomijanie"
 
 #: src/main/Renviron.cpp:497
-#, fuzzy
 msgid "path to user Renviron is too long: skipping"
-msgstr "ścieżka do systemowego Renviron jest zbyt długa: pomijanie"
+msgstr "ścieżka do pliku Renviron użytkownika jest zbyt długa: pomijanie"
 
 #: src/main/Renviron.cpp:537
 #, c-format
@@ -7342,7 +7266,7 @@ msgstr "argument 'length.out' musi być liczbą nieujemną"
 #: src/main/seq.cpp:899 src/main/seq.cpp:906 src/main/seq.cpp:914
 #, c-format
 msgid "'%s' must be of length 1"
-msgstr "argument '%s' musi mieć długość 1"
+msgstr "argument '%s' musi mieć długość równą 1"
 
 #: src/main/seq.cpp:935
 msgid "invalid '(to - from)/by'"
@@ -7705,10 +7629,6 @@ msgstr "czynnik posiada błędny poziom"
 #, c-format
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "wymagana długość %d wynikowego łańcucha jest większa niż maksymalna %d"
-
-#: src/main/sprintf.cpp:112
-msgid "'fmt' is not a character vector"
-msgstr "'fmt' nie jest wektorem tekstowym"
 
 #: src/main/sprintf.cpp:117
 #, c-format
@@ -8211,7 +8131,7 @@ msgstr "sygnatura jest zbyt długa w '%s'"
 
 #: src/main/Symbol.cpp:109
 msgid "..n symbol name for a negative n is not permitted"
-msgstr ""
+msgstr "nazwa '..n' symbolu dla ujemnego 'n' nie jest dozwolona"
 
 #: src/main/sysutils.cpp:89 src/main/sysutils.cpp:104
 #, c-format
@@ -8399,8 +8319,9 @@ msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "any_duplicated3(., <0-length incomp>)"
 
 #: src/main/unique.cpp:1137
-msgid "'fromLast' must be length 1"
-msgstr "'fromLast' musi mieć długość 1"
+#, c-format
+msgid "'%s' must be length 1"
+msgstr "argument '%s' musi mieć długość 1"
 
 #: src/main/unique.cpp:1148
 #, c-format
@@ -8608,11 +8529,6 @@ msgstr "Konwersja nie powiodła się"
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr "utracono precyzję podczas konwersji z \"%s\" do liczby"
 
-#: src/main/util.cpp:2337
-#, fuzzy
-msgid "argument is not a character vector"
-msgstr "argument '%s' nie jest wektorem tekstowym"
-
 #: src/main/util.cpp:2536
 msgid "all arguments must be named"
 msgstr "wszystkie argumenty muszą być nazwane"
@@ -8623,28 +8539,27 @@ msgid "cannot use ICU on this system"
 msgstr "nie można ustawić stref czasowych na tym systemie"
 
 #: src/main/util.cpp:2566
-#, fuzzy, c-format
+#, c-format
 msgid "failed to set ICU locale %s (%d)"
-msgstr "nie udało się ustawić lokalizacji ICU"
+msgstr "nie udało się ustawić lokalizacji ICU %s (%d)"
 
 #: src/main/util.cpp:2570 src/main/util.cpp:2667
-#, fuzzy, c-format
+#, c-format
 msgid "failed to open ICU collator (%d)"
-msgstr "nie udało się otworzyć kolatora ICU"
+msgstr "nie udało się otworzyć kolatora ICU (%d)"
 
 #: src/main/util.cpp:2592
 msgid "failed to set ICU collator attribute"
 msgstr "nie udało się ustawić atrybutu kolatora ICU"
 
 #: src/main/util.cpp:2663
-#, fuzzy, c-format
+#, c-format
 msgid "failed to set ICU locale (%d)"
-msgstr "nie udało się ustawić lokalizacji ICU"
+msgstr "nie udało się ustawić lokalizacji ICU (%d)"
 
 #: src/main/util.cpp:2685
-#, fuzzy
 msgid "could not collate using ICU"
-msgstr "nie udało się zebrać"
+msgstr "nie można było zestawić za pomocą ICU"
 
 #: src/main/util.cpp:2693
 msgid "ICU is not supported on this build"
@@ -8683,10 +8598,6 @@ msgstr "szerokość nie może wynosić zero"
 #, fuzzy
 msgid "'type' must be \"integer\" for  \"d\"-format"
 msgstr "argument 'type' musi być typu \"integer\" dla formatu \"d\""
-
-#: src/main/util.cpp:3194
-msgid "unsupported type "
-msgstr "niewspierany typ"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, c-format
@@ -8981,7 +8892,7 @@ msgstr "długości argumentów 'url' oraz 'destfile' muszą się zgadzać"
 
 #: src/modules/internet/libcurl.cpp:916 src/modules/internet/libcurl.cpp:932
 msgid "out of memory"
-msgstr "Zabrakło pamięci"
+msgstr "zabrakło pamięci"
 
 #: src/modules/internet/libcurl.cpp:1000 src/modules/internet/libcurl.cpp:1200
 #, c-format
@@ -9003,7 +8914,7 @@ msgstr "pobieranie z '%s' nie powiodło się"
 
 #: src/modules/internet/libcurl.cpp:1168
 msgid "Failure in re-allocation in rcvData"
-msgstr ""
+msgstr "niepowodzenie przydziału pamięci w 'rcvData'"
 
 #: src/modules/internet/libcurl.cpp:1257
 msgid "cannot read from connection"
@@ -9013,10 +8924,6 @@ msgstr "nie można czytać z połączenia"
 #, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "nie można otworzyć połączenia do '%s'"
-
-#: src/modules/internet/Rhttpd.cpp:805
-msgid "allocation error in remove_dot_segments"
-msgstr ""
 
 #: src/modules/internet/Rhttpd.cpp:1362
 msgid "unable to create socket"
@@ -9037,9 +8944,8 @@ msgid "cannot create synchronization event"
 msgstr ""
 
 #: src/modules/internet/Rhttpd.cpp:1415
-#, fuzzy
 msgid "cannot create server thread"
-msgstr "nie można zmniejszyć limitu pamięci: zignorowano"
+msgstr "nie można utworzyć wątku serwera"
 
 #: src/modules/internet/Rhttpd.cpp:1455
 msgid "invalid bind address specification"
@@ -9289,9 +9195,8 @@ msgid "dataentry: internal memory error"
 msgstr "dataentry: błąd wewnętrzny pamięci"
 
 #: src/modules/X11/dataentry.cpp:1020 src/modules/X11/dataentry.cpp:1032
-#, fuzzy
 msgid "internal type error in dataentry"
-msgstr "błąd wewnętrzny w 'dataentry'"
+msgstr "wewnętrzny błąd typu w 'dataentry'"
 
 #: src/modules/X11/dataentry.cpp:1132
 msgid "dataentry: parse error on string"
@@ -9591,12 +9496,12 @@ msgid "allocation failure in R_SaveAsTIF"
 msgstr "niepowodzenie przydziału pamięci w 'R_SaveAsTIF()'"
 
 #: src/modules/X11/rbitmap.cpp:576
-msgid "No TIFF support in this version of R"
+msgid "no TIFF support in this version of R"
 msgstr "brak wsparcia TIFF w tej wersji R"
 
 #: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600 src/modules/X11/rbitmap.cpp:609
 msgid "Problems writing to 'bmp' file"
-msgstr "problem z zapisywaniem do pliku 'bmp'"
+msgstr "Problem z zapisywaniem do pliku 'bmp'"
 
 #: src/nmath/bessel_i.cpp:67
 msgid "bessel_i allocation error"
@@ -9876,9 +9781,8 @@ msgid "Cannot open /dev/null for reading:"
 msgstr "można jedynie otworzyć adresy URL do odczytu"
 
 #: src/unix/sys-unix.cpp:617
-#, fuzzy
 msgid "Invalid file pointer in pclose"
-msgstr "niepoprawny wzorzec nazwy pliku"
+msgstr "nieprawidłowy wskaźnik pliku w pclose"
 
 #: src/unix/sys-unix.cpp:871
 #, c-format
@@ -9923,6 +9827,78 @@ msgstr "moduł X11 nie może zostać załadowany"
 #: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161 src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
+
+#~ msgid "allocation error in R_compress1 with libdeflate"
+#~ msgstr "błąd przydziału pamięci w 'R_compress1 ' z libdeflate"
+
+#~ msgid "allocation error in R_decompress1 with libdeflate"
+#~ msgstr "błąd przydziału pamięci w 'R_decompress1 ' z libdeflate"
+
+#~ msgid "allocation error in memDecompress with libdeflate"
+#~ msgstr "błąd przydziału pamięci w 'memDecompress ' z libdeflate"
+
+#~ msgid "memory allocation error in 'realpr'"
+#~ msgstr "błąd przydziału pamięci w 'realpr'"
+
+#~ msgid "allocation error in remove_dot_segments"
+#~ msgstr "błąd przydziału pamięci w 'remove_dot_segments'"
+
+#~ msgid "unsupported type "
+#~ msgstr "niewspierany typ"
+
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "'fromLast' musi mieć długość 1"
+
+#~ msgid "'fmt' is not a character vector"
+#~ msgstr "'fmt' nie jest wektorem tekstowym"
+
+#, fuzzy
+#~ msgid "argument is not a character vector"
+#~ msgstr "argument '%s' nie jest wektorem tekstowym"
+
+#~ msgid "internal error in 'do_sys'"
+#~ msgstr "błąd wewnętrzny w 'do_sys'"
+
+#~ msgid "internal error in do_random1"
+#~ msgstr "błąd wewnętrzny w 'do_random1'"
+
+#~ msgid "internal error in do_random2"
+#~ msgstr "błąd wewnętrzny w 'do_random2'"
+
+#~ msgid "internal error in do_random3"
+#~ msgstr "błąd wewnętrzny w 'do_random3'"
+
+#, c-format
+#~ msgid "internal error %d in R_compress1"
+#~ msgstr "błąd wewnętrzny %d w R_compress1"
+
+#, c-format
+#~ msgid "internal error %d in R_decompress1"
+#~ msgstr "błąd wewnętrzny %d w R_decompress1"
+
+#, c-format
+#~ msgid "internal error %d in R_compress2"
+#~ msgstr "błąd wewnętrzny %d w R_compress2"
+
+#, c-format
+#~ msgid "internal error %d in R_decompress2"
+#~ msgstr "błąd wewnętrzny %d w R_decompress2"
+
+#, c-format
+#~ msgid "internal error %d in R_compress3"
+#~ msgstr "błąd wewnętrzny %d w R_compress3"
+
+#, c-format
+#~ msgid "internal error %d in R_decompress3"
+#~ msgstr "błąd wewnęrzny %d w R_decompress3"
+
+#, c-format
+#~ msgid "internal error %d in memCompress"
+#~ msgstr "błąd wewnęrzny %d w memCompress"
+
+#, c-format
+#~ msgid "internal error %d in memDecompress(%s)"
+#~ msgstr "błąd wewnętrzny %d w memDecompress(%s)"
 
 #~ msgid "'path' must be a character vector"
 #~ msgstr "'path' musi być wektorem tekstowym"
@@ -11124,9 +11100,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "'%s' function requires a raw vector"
 #~ msgstr "funkcja '%s' wymaga pustego wektora"
-
-#~ msgid "internal error %d in '%s' function"
-#~ msgstr "błąd wewnętrzny %d w funkcji '%s'"
 
 #~ msgid "unknown type in '%s' function"
 #~ msgstr "nieznany typ w funkcji '%s'"

@@ -169,7 +169,7 @@ msgstr "%s musi być niepustym ciągiem znaków; otrzymano pusty ciąg"
 #: methods_list_dispatch.cpp:900
 #, c-format
 msgid "%s must be a single string (got an object of class \"%s\")"
-msgstr "%s musi być pojedynczym ciągiem znaków (otrzymano obiekt klasy '%s')"
+msgstr "%s musi być pojedynczym ciągiem znaków (otrzymano obiekt klasy \"%s\")"
 
 #: methods_list_dispatch.cpp:934
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"

@@ -2334,7 +2334,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
     check1arg(args, call, "x");
 
     if (!isString(CAR(args)))
-	errorcall(call, "%s", _("argument is not a character vector"));
+	errorcall(call, _("'%s' is not a character vector"), "x");
     ans = CAR(args);
     for (i = 0; i < XLENGTH(ans); i++) {
 	el = STRING_ELT(ans, i);
@@ -3191,7 +3191,7 @@ static void str_signif_sexp(SEXP x, const char *type, int width, int digits,
 					 format, flag, result + idx);
 			  });
     } else {
-	error("%s", _("unsupported type "));
+	error("%s", _("unsupported type"));
     }
 }
 

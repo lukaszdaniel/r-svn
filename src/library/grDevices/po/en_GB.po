@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 20:32+0200\n"
+"POT-Creation-Date: 2025-06-08 16:31+0200\n"
 "PO-Revision-Date: 2025-04-01 16:54+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: English\n"
@@ -488,7 +488,7 @@ msgstr "unable to allocate raster image"
 
 #: devPS.cpp:6627 devPS.cpp:6677
 #, c-format
-msgid "internal error %d in writeRasterXObject"
+msgid "internal error %d in '%s'"
 msgstr ""
 
 #: devPS.cpp:6656 devPS.cpp:6700 devPS.cpp:8231
@@ -781,7 +781,8 @@ msgid "Invalid font path: \"%s\""
 msgstr "invalid 'fonts' parameter in %s"
 
 #: devQuartz.cpp:3097
-msgid "Failed to load font"
+#, fuzzy
+msgid "failed to load font"
 msgstr "Failed to load font"
 
 #: devQuartz.cpp:3190 devQuartz.cpp:3195
@@ -1056,7 +1057,8 @@ msgid "unimplemented cairo-based device"
 msgstr "unimplemented cairo-based device"
 
 #: cairo/cairoBM.cpp:226
-msgid "BM_Close_bitmap called on non-surface"
+#, c-format
+msgid "'%s' called on non-surface"
 msgstr ""
 
 #: cairo/cairoBM.cpp:267

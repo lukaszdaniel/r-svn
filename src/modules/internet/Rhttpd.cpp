@@ -802,7 +802,7 @@ static char *remove_dot_segments(char *p) {
 
     char *outbuf = (char *) malloc(strlen(inbuf) + 1);
     if (!outbuf)
-	error("%s", _("allocation error in remove_dot_segments"));
+	error(_("allocation error in '%s'"), "remove_dot_segments");
     char *out = outbuf; /* last byte (terminator) of output buffer */
     *out = '\0';
 

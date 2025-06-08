@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-08 17:01+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -350,8 +350,9 @@ msgstr "出力が長過ぎるのでプリントは切りつめられました"
 msgid "allocation of pipe connection failed"
 msgstr "パイプ接続の割り当てに失敗しました"
 
-#: src/gnuwin32/run.cpp:1142
-msgid "'names' is not a character vector"
+#: src/gnuwin32/run.cpp:1142 src/main/sprintf.cpp:112 src/main/util.cpp:2337
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "'names' は文字ベクトルではありません"
 
 #: src/gnuwin32/system.cpp:111
@@ -710,7 +711,8 @@ msgid "input string x[%d] is invalid in this locale"
 msgstr "入力文字列 x[%d] はこのロケールでは不適切です"
 
 #: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
-#: src/main/util.cpp:3206 src/modules/internet/Rhttpd.cpp:1301
+#: src/main/print.cpp:1194 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
 #: src/modules/X11/dataentry.cpp:452
 #, fuzzy, c-format
 msgid "allocation error in '%s'"
@@ -785,7 +787,7 @@ msgstr "'%s' という型はサポートされていません"
 msgid "not a memory-mapped object"
 msgstr ""
 
-#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448
+#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448 src/main/util.cpp:3194
 msgid "unsupported type"
 msgstr "サポートされていないタイプです"
 
@@ -2796,9 +2798,10 @@ msgstr "'gzcon' コネクションで割り当てに失敗しました"
 msgid "R_compress1 requires a raw vector"
 msgstr "'%s' は文字ベクトルを要求します"
 
-#: src/main/connections.cpp:6500
-#, fuzzy
-msgid "allocation error in R_compress1 with libdeflate"
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
+#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#, fuzzy, c-format
+msgid "allocation error in '%s' with libdeflate"
 msgstr "'realpr' 中でメモリ確保に失敗しました"
 
 #: src/main/connections.cpp:6513
@@ -2810,46 +2813,34 @@ msgstr ""
 msgid "R_decompress1 requires a raw vector"
 msgstr "'%s' は文字ベクトルを要求します"
 
-#: src/main/connections.cpp:6531
-#, fuzzy
-msgid "allocation error in R_decompress1 with libdeflate"
-msgstr "'realpr' 中でメモリ確保に失敗しました"
-
 #: src/main/connections.cpp:6544
 #, fuzzy, c-format
-msgid "internal error %d in R_decompress1 with libdeflate"
+msgid "internal error %d in '%s' with libdeflate"
 msgstr "再帰的インデックスの使用中に、内部エラーが起きました"
 
-#: src/main/connections.cpp:6570
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
+#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
+#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#: src/main/connections.cpp:7282
 #, fuzzy, c-format
-msgid "internal error %d in R_compress1"
-msgstr " do_random2 で内部エラーが起きました "
-
-#: src/main/connections.cpp:6591 src/main/connections.cpp:6664
-#: src/main/connections.cpp:6928
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress1"
-msgstr " do_random2 で内部エラーが起きました "
+msgid "internal error %d in '%s'"
+msgstr "'do_sys' で内部エラーが起きました"
 
 #: src/main/connections.cpp:6613
 #, fuzzy
 msgid "R_compress2 requires a raw vector"
 msgstr "'%s' は文字ベクトルを要求します"
 
-#: src/main/connections.cpp:6623
-#, fuzzy, c-format
-msgid "internal error %d in R_compress2"
-msgstr "'do_sys' で内部エラーが起きました"
-
 #: src/main/connections.cpp:6647
 #, fuzzy
 msgid "R_decompress2 requires a raw vector"
 msgstr "'%s' は文字ベクトルを要求します"
-
-#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress2"
-msgstr "'do_sys' で内部エラーが起きました"
 
 #: src/main/connections.cpp:6671
 msgid "unknown type in R_decompress2"
@@ -2889,20 +2880,10 @@ msgstr ""
 msgid "R_compress3 requires a raw vector"
 msgstr "'%s' は文字ベクトルを要求します"
 
-#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
-#, fuzzy, c-format
-msgid "internal error %d in R_compress3"
-msgstr " do_random3 で内部エラーが起きました "
-
 #: src/main/connections.cpp:6872
 #, fuzzy
 msgid "R_decompress3 requires a raw vector"
 msgstr "'%s' は文字ベクトルを要求します"
-
-#: src/main/connections.cpp:6883
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress3"
-msgstr " do_random3 で内部エラーが起きました "
 
 #: src/main/connections.cpp:6893
 #, fuzzy, c-format
@@ -2923,21 +2904,10 @@ msgstr ""
 msgid "'from' must be raw or character"
 msgstr " 'norm' は文字列でなければなりません "
 
-#: src/main/connections.cpp:6967
-#, fuzzy, c-format
-msgid "allocation error in '%s' with libdeflate"
-msgstr "'realpr' 中でメモリ確保に失敗しました"
-
 #: src/main/connections.cpp:6975
 #, fuzzy
 msgid "internal libdeflate error in memCompress"
 msgstr " do_random1 で内部エラーが起きました "
-
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#, fuzzy, c-format
-msgid "internal error %d in memCompress"
-msgstr "'do_sys' で内部エラーが起きました"
 
 #: src/main/connections.cpp:7055
 #, fuzzy, c-format
@@ -2948,23 +2918,12 @@ msgstr "'do_sys' で内部エラーが起きました"
 msgid "unknown compression, assuming none"
 msgstr "未知の圧縮法です、何も仮定しません"
 
-#: src/main/connections.cpp:7116
-#, fuzzy
-msgid "allocation error in memDecompress with libdeflate"
-msgstr "'realpr' 中でメモリ確保に失敗しました"
-
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#, fuzzy, c-format
-msgid "internal error %d in memDecompress(%s)"
-msgstr "'do_sys' で内部エラーが起きました"
-
 #: src/main/connections.cpp:7256
 #, fuzzy, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr "内部エラー (do_summary 中の 'op = %d')。\t R の達人に相談しましょう"
 
-#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#: src/main/connections.cpp:7286
 #, fuzzy, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr "'do_sys' で内部エラーが起きました"
@@ -3033,8 +2992,10 @@ msgstr ""
 msgid "debug will apply when function leaves compiled code"
 msgstr ""
 
-#: src/main/context.cpp:750
-msgid "internal error in 'do_sys'"
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215
+#: src/main/random.cpp:301
+#, fuzzy, c-format
+msgid "internal error in '%s'"
 msgstr "'do_sys' で内部エラーが起きました"
 
 #: src/main/contour-common.h:327
@@ -6664,10 +6625,6 @@ msgstr "'intpr' 中の文字列の長さが不正です"
 msgid "invalid character length in 'realpr'"
 msgstr "'realpr' 中の文字列の長さが不正です"
 
-#: src/main/print.cpp:1194
-msgid "memory allocation error in 'realpr'"
-msgstr "'realpr' 中でメモリ確保に失敗しました"
-
 #: src/main/print.cpp:1227
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
@@ -6766,20 +6723,6 @@ msgstr "引数 (複数) が不正です"
 #: src/main/random.cpp:218 src/main/random.cpp:290 src/main/random.cpp:304
 msgid "NAs produced"
 msgstr "NA が生成されました"
-
-#: src/main/random.cpp:123
-#, fuzzy
-msgid "internal error in do_random1"
-msgstr " do_random2 で内部エラーが起きました "
-
-#: src/main/random.cpp:215
-#, fuzzy
-msgid "internal error in do_random2"
-msgstr " do_random2 で内部エラーが起きました "
-
-#: src/main/random.cpp:301
-msgid "internal error in do_random3"
-msgstr " do_random3 で内部エラーが起きました "
 
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
@@ -8007,10 +7950,6 @@ msgstr "　因子が不正な水準を持ちます"
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "要求された結果の文字列長 %d が上限 %d を超えています"
 
-#: src/main/sprintf.cpp:112
-msgid "'fmt' is not a character vector"
-msgstr "'fmt' は文字ベクトルではありません"
-
 #: src/main/sprintf.cpp:117
 #, c-format
 msgid "only %d arguments are allowed"
@@ -8722,8 +8661,9 @@ msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "any_duplicated3(., <0-length incomp>)"
 
 #: src/main/unique.cpp:1137
-msgid "'fromLast' must be length 1"
-msgstr "'fromLast' は長さ 1 でなければなりません"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
+msgstr "'%s' は長さ1でなければなりません"
 
 #: src/main/unique.cpp:1148
 #, c-format
@@ -8940,11 +8880,6 @@ msgstr "不適切なバージョン値です"
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr "\"%s\" を数値に変換する際に精度が損なわれました"
 
-#: src/main/util.cpp:2337
-#, fuzzy
-msgid "argument is not a character vector"
-msgstr "'names' は文字ベクトルではありません"
-
 #: src/main/util.cpp:2536
 msgid "all arguments must be named"
 msgstr "全ての引数は名前が付けられていなければなりません"
@@ -9019,11 +8954,6 @@ msgstr " .C(..): 幅(Width)は0ではいけません "
 #, fuzzy
 msgid "'type' must be \"integer\" for  \"d\"-format"
 msgstr " .C(..): 'type' は \"d\"-書式においては \"integer\" でなくてはなりません "
-
-#: src/main/util.cpp:3194
-#, fuzzy
-msgid "unsupported type "
-msgstr "サポートされていないタイプです"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -9342,10 +9272,6 @@ msgstr "このコネクションから読み込みできません"
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "コネクションを開くことができません"
-
-#: src/modules/internet/Rhttpd.cpp:805
-msgid "allocation error in remove_dot_segments"
-msgstr ""
 
 #: src/modules/internet/Rhttpd.cpp:1362
 #, fuzzy
@@ -9960,7 +9886,7 @@ msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
 #: src/modules/X11/rbitmap.cpp:576
 #, fuzzy
-msgid "No TIFF support in this version of R"
+msgid "no TIFF support in this version of R"
 msgstr "この R のバージョンには png のサポートはありません"
 
 #: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600
@@ -10299,6 +10225,81 @@ msgstr "X11 モジュールをロードできません"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 が利用できません"
+
+#, fuzzy
+#~ msgid "allocation error in R_compress1 with libdeflate"
+#~ msgstr "'realpr' 中でメモリ確保に失敗しました"
+
+#, fuzzy
+#~ msgid "allocation error in R_decompress1 with libdeflate"
+#~ msgstr "'realpr' 中でメモリ確保に失敗しました"
+
+#, fuzzy
+#~ msgid "allocation error in memDecompress with libdeflate"
+#~ msgstr "'realpr' 中でメモリ確保に失敗しました"
+
+#~ msgid "memory allocation error in 'realpr'"
+#~ msgstr "'realpr' 中でメモリ確保に失敗しました"
+
+#, fuzzy
+#~ msgid "unsupported type "
+#~ msgstr "サポートされていないタイプです"
+
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "'fromLast' は長さ 1 でなければなりません"
+
+#~ msgid "'fmt' is not a character vector"
+#~ msgstr "'fmt' は文字ベクトルではありません"
+
+#, fuzzy
+#~ msgid "argument is not a character vector"
+#~ msgstr "'names' は文字ベクトルではありません"
+
+#~ msgid "internal error in 'do_sys'"
+#~ msgstr "'do_sys' で内部エラーが起きました"
+
+#, fuzzy
+#~ msgid "internal error in do_random1"
+#~ msgstr " do_random2 で内部エラーが起きました "
+
+#, fuzzy
+#~ msgid "internal error in do_random2"
+#~ msgstr " do_random2 で内部エラーが起きました "
+
+#~ msgid "internal error in do_random3"
+#~ msgstr " do_random3 で内部エラーが起きました "
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress1"
+#~ msgstr " do_random2 で内部エラーが起きました "
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress1"
+#~ msgstr " do_random2 で内部エラーが起きました "
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress2"
+#~ msgstr "'do_sys' で内部エラーが起きました"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress2"
+#~ msgstr "'do_sys' で内部エラーが起きました"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress3"
+#~ msgstr " do_random3 で内部エラーが起きました "
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress3"
+#~ msgstr " do_random3 で内部エラーが起きました "
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memCompress"
+#~ msgstr "'do_sys' で内部エラーが起きました"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memDecompress(%s)"
+#~ msgstr "'do_sys' で内部エラーが起きました"
 
 #~ msgid "'path' must be a character vector"
 #~ msgstr "'path' は文字ベクトルでなくてはなりません"

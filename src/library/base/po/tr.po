@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-08 17:01+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -354,9 +354,9 @@ msgstr "aşırı uzun çıktının yazdırılması kısaltıldı"
 msgid "allocation of pipe connection failed"
 msgstr "pipe bağlantısı yerleştirmesinde hata"
 
-#: src/gnuwin32/run.cpp:1142
-#, fuzzy
-msgid "'names' is not a character vector"
+#: src/gnuwin32/run.cpp:1142 src/main/sprintf.cpp:112 src/main/util.cpp:2337
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "'fmt' bir karakter vektörü değil"
 
 #: src/gnuwin32/system.cpp:111
@@ -716,7 +716,8 @@ msgid "input string x[%d] is invalid in this locale"
 msgstr "giriş dizesi %d bu yerelde geçersiz"
 
 #: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
-#: src/main/util.cpp:3206 src/modules/internet/Rhttpd.cpp:1301
+#: src/main/print.cpp:1194 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
 #: src/modules/X11/dataentry.cpp:452
 #, fuzzy, c-format
 msgid "allocation error in '%s'"
@@ -791,7 +792,7 @@ msgstr "tip '%s' desteklenmiyor"
 msgid "not a memory-mapped object"
 msgstr ""
 
-#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448
+#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448 src/main/util.cpp:3194
 msgid "unsupported type"
 msgstr "desteklenmeyen tip"
 
@@ -2823,9 +2824,10 @@ msgstr "'gzcon' bağlantısı ayırması başarısız"
 msgid "R_compress1 requires a raw vector"
 msgstr "'%s' bir karakter vektörü gerektirir"
 
-#: src/main/connections.cpp:6500
-#, fuzzy
-msgid "allocation error in R_compress1 with libdeflate"
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
+#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#, fuzzy, c-format
+msgid "allocation error in '%s' with libdeflate"
 msgstr "realpr de bellek ayırma hatası"
 
 #: src/main/connections.cpp:6513
@@ -2837,46 +2839,34 @@ msgstr ""
 msgid "R_decompress1 requires a raw vector"
 msgstr "'%s' bir karakter vektörü gerektirir"
 
-#: src/main/connections.cpp:6531
-#, fuzzy
-msgid "allocation error in R_decompress1 with libdeflate"
-msgstr "realpr de bellek ayırma hatası"
-
 #: src/main/connections.cpp:6544
 #, fuzzy, c-format
-msgid "internal error %d in R_decompress1 with libdeflate"
+msgid "internal error %d in '%s' with libdeflate"
 msgstr "yinelemeli indisleme kullanımında iç hata"
 
-#: src/main/connections.cpp:6570
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
+#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
+#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#: src/main/connections.cpp:7282
 #, fuzzy, c-format
-msgid "internal error %d in R_compress1"
-msgstr "do_random2 içinde iç hata"
-
-#: src/main/connections.cpp:6591 src/main/connections.cpp:6664
-#: src/main/connections.cpp:6928
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress1"
-msgstr "do_random2 içinde iç hata"
+msgid "internal error %d in '%s'"
+msgstr "'do_sys'de iç hata"
 
 #: src/main/connections.cpp:6613
 #, fuzzy
 msgid "R_compress2 requires a raw vector"
 msgstr "'%s' bir karakter vektörü gerektirir"
 
-#: src/main/connections.cpp:6623
-#, fuzzy, c-format
-msgid "internal error %d in R_compress2"
-msgstr "'do_sys'de iç hata"
-
 #: src/main/connections.cpp:6647
 #, fuzzy
 msgid "R_decompress2 requires a raw vector"
 msgstr "'%s' bir karakter vektörü gerektirir"
-
-#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress2"
-msgstr "'do_sys'de iç hata"
 
 #: src/main/connections.cpp:6671
 msgid "unknown type in R_decompress2"
@@ -2916,20 +2906,10 @@ msgstr ""
 msgid "R_compress3 requires a raw vector"
 msgstr "'%s' bir karakter vektörü gerektirir"
 
-#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
-#, fuzzy, c-format
-msgid "internal error %d in R_compress3"
-msgstr "do_random3 içinde iç hata"
-
 #: src/main/connections.cpp:6872
 #, fuzzy
 msgid "R_decompress3 requires a raw vector"
 msgstr "'%s' bir karakter vektörü gerektirir"
-
-#: src/main/connections.cpp:6883
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress3"
-msgstr "do_random3 içinde iç hata"
 
 #: src/main/connections.cpp:6893
 #, fuzzy, c-format
@@ -2950,21 +2930,10 @@ msgstr ""
 msgid "'from' must be raw or character"
 msgstr "'norm' bir karakter dizesi olmalıdır"
 
-#: src/main/connections.cpp:6967
-#, fuzzy, c-format
-msgid "allocation error in '%s' with libdeflate"
-msgstr "realpr de bellek ayırma hatası"
-
 #: src/main/connections.cpp:6975
 #, fuzzy
 msgid "internal libdeflate error in memCompress"
 msgstr "do_random1içinde iç hata"
-
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#, fuzzy, c-format
-msgid "internal error %d in memCompress"
-msgstr "'do_sys'de iç hata"
 
 #: src/main/connections.cpp:7055
 #, fuzzy, c-format
@@ -2975,23 +2944,12 @@ msgstr "'do_sys'de iç hata"
 msgid "unknown compression, assuming none"
 msgstr "bilinmeyen sıkıştırma, sıkıştırma olmadığı varsayılıyor"
 
-#: src/main/connections.cpp:7116
-#, fuzzy
-msgid "allocation error in memDecompress with libdeflate"
-msgstr "realpr de bellek ayırma hatası"
-
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#, fuzzy, c-format
-msgid "internal error %d in memDecompress(%s)"
-msgstr "'do_sys'de iç hata"
-
 #: src/main/connections.cpp:7256
 #, fuzzy, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr "iç hata (do_summary içinde 'op = %d') \t Bir uzman çağırın"
 
-#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#: src/main/connections.cpp:7286
 #, fuzzy, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr "'do_sys'de iç hata"
@@ -3061,8 +3019,10 @@ msgstr ""
 msgid "debug will apply when function leaves compiled code"
 msgstr ""
 
-#: src/main/context.cpp:750
-msgid "internal error in 'do_sys'"
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215
+#: src/main/random.cpp:301
+#, fuzzy, c-format
+msgid "internal error in '%s'"
 msgstr "'do_sys'de iç hata"
 
 #: src/main/contour-common.h:327
@@ -6743,11 +6703,6 @@ msgstr "intpr de geçersiz karakter uzunluğu"
 msgid "invalid character length in 'realpr'"
 msgstr "realpr de geçersiz karakter uzunluğu"
 
-#: src/main/print.cpp:1194
-#, fuzzy
-msgid "memory allocation error in 'realpr'"
-msgstr "realpr de bellek ayırma hatası"
-
 #: src/main/print.cpp:1227
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
@@ -6847,20 +6802,6 @@ msgstr "geçersiz argümanlar"
 #: src/main/random.cpp:218 src/main/random.cpp:290 src/main/random.cpp:304
 msgid "NAs produced"
 msgstr "NAs oluştu"
-
-#: src/main/random.cpp:123
-#, fuzzy
-msgid "internal error in do_random1"
-msgstr "do_random2 içinde iç hata"
-
-#: src/main/random.cpp:215
-#, fuzzy
-msgid "internal error in do_random2"
-msgstr "do_random2 içinde iç hata"
-
-#: src/main/random.cpp:301
-msgid "internal error in do_random3"
-msgstr "do_random3 içinde iç hata"
 
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
@@ -8108,10 +8049,6 @@ msgstr "faktör hatalı seviyeye sahip"
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "gerekli sonuç dizesi uzunluğu %d > maksimum uzunluk %d'den"
 
-#: src/main/sprintf.cpp:112
-msgid "'fmt' is not a character vector"
-msgstr "'fmt' bir karakter vektörü değil"
-
 #: src/main/sprintf.cpp:117
 #, c-format
 msgid "only %d arguments are allowed"
@@ -8831,8 +8768,8 @@ msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "any_duplicated3(., <0-length incomp>)"
 
 #: src/main/unique.cpp:1137
-#, fuzzy
-msgid "'fromLast' must be length 1"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
 msgstr "'%s' 1 uzunluğunda olmalıdır"
 
 #: src/main/unique.cpp:1148
@@ -9054,11 +8991,6 @@ msgstr "hatalı sürüm değeri"
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr ""
 
-#: src/main/util.cpp:2337
-#, fuzzy
-msgid "argument is not a character vector"
-msgstr "'fmt' bir karakter vektörü değil"
-
 #: src/main/util.cpp:2536
 #, fuzzy
 msgid "all arguments must be named"
@@ -9136,11 +9068,6 @@ msgstr ".C(..): Genişlik sıfır olamaz"
 #, fuzzy
 msgid "'type' must be \"integer\" for  \"d\"-format"
 msgstr ".C(..): 'type' \"d\" biçimi için bir \"tamsayı\" olmalıdır"
-
-#: src/main/util.cpp:3194
-#, fuzzy
-msgid "unsupported type "
-msgstr "desteklenmeyen tip"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -9458,10 +9385,6 @@ msgstr "bu bağlantıdan okunamıyor"
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "bağlantı açılamadı"
-
-#: src/modules/internet/Rhttpd.cpp:805
-msgid "allocation error in remove_dot_segments"
-msgstr ""
 
 #: src/modules/internet/Rhttpd.cpp:1362
 #, fuzzy
@@ -10077,7 +10000,7 @@ msgstr "R_tmpnam için bellek ayırma hatası"
 
 #: src/modules/X11/rbitmap.cpp:576
 #, fuzzy
-msgid "No TIFF support in this version of R"
+msgid "no TIFF support in this version of R"
 msgstr "R'nin bu sürümünde png desteği yok"
 
 #: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600
@@ -10416,6 +10339,83 @@ msgstr "X11 modülü yüklenemiyor"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 mevcut değil"
+
+#, fuzzy
+#~ msgid "allocation error in R_compress1 with libdeflate"
+#~ msgstr "realpr de bellek ayırma hatası"
+
+#, fuzzy
+#~ msgid "allocation error in R_decompress1 with libdeflate"
+#~ msgstr "realpr de bellek ayırma hatası"
+
+#, fuzzy
+#~ msgid "allocation error in memDecompress with libdeflate"
+#~ msgstr "realpr de bellek ayırma hatası"
+
+#, fuzzy
+#~ msgid "memory allocation error in 'realpr'"
+#~ msgstr "realpr de bellek ayırma hatası"
+
+#, fuzzy
+#~ msgid "unsupported type "
+#~ msgstr "desteklenmeyen tip"
+
+#, fuzzy
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "'%s' 1 uzunluğunda olmalıdır"
+
+#~ msgid "'fmt' is not a character vector"
+#~ msgstr "'fmt' bir karakter vektörü değil"
+
+#, fuzzy
+#~ msgid "argument is not a character vector"
+#~ msgstr "'fmt' bir karakter vektörü değil"
+
+#~ msgid "internal error in 'do_sys'"
+#~ msgstr "'do_sys'de iç hata"
+
+#, fuzzy
+#~ msgid "internal error in do_random1"
+#~ msgstr "do_random2 içinde iç hata"
+
+#, fuzzy
+#~ msgid "internal error in do_random2"
+#~ msgstr "do_random2 içinde iç hata"
+
+#~ msgid "internal error in do_random3"
+#~ msgstr "do_random3 içinde iç hata"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress1"
+#~ msgstr "do_random2 içinde iç hata"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress1"
+#~ msgstr "do_random2 içinde iç hata"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress2"
+#~ msgstr "'do_sys'de iç hata"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress2"
+#~ msgstr "'do_sys'de iç hata"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress3"
+#~ msgstr "do_random3 içinde iç hata"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress3"
+#~ msgstr "do_random3 içinde iç hata"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memCompress"
+#~ msgstr "'do_sys'de iç hata"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memDecompress(%s)"
+#~ msgstr "'do_sys'de iç hata"
 
 #~ msgid "'path' must be a character vector"
 #~ msgstr "'path' bir karakter vektörü olmalıdır"

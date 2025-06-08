@@ -3094,7 +3094,7 @@ void RQuartz_glyph(int n, int *glyphs, double *x, double *y,
         CFRelease(ctFont);
         CFRelease(cfFontDescriptors);
     } else {
-        warning("%s", _("Failed to load font"));
+        warning("%s", _("failed to load font"));
     }
     
     QuartzEnd(grouping, layer, ctx, savedCTX, xd);

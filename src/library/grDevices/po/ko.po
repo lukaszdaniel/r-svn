@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 20:32+0200\n"
+"POT-Creation-Date: 2025-06-08 16:31+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -487,7 +487,7 @@ msgstr "래스터 이미지를 할당할 수 없습니다"
 
 #: devPS.cpp:6627 devPS.cpp:6677
 #, c-format
-msgid "internal error %d in writeRasterXObject"
+msgid "internal error %d in '%s'"
 msgstr ""
 
 #: devPS.cpp:6656 devPS.cpp:6700 devPS.cpp:8231
@@ -784,7 +784,7 @@ msgstr "%s에 유효하지 않은 'fonts' 파라미터가 있습니다"
 
 #: devQuartz.cpp:3097
 #, fuzzy
-msgid "Failed to load font"
+msgid "failed to load font"
 msgstr "폰트 리스트를 할당하는데 실패했습니다"
 
 #: devQuartz.cpp:3190 devQuartz.cpp:3195
@@ -1059,7 +1059,8 @@ msgid "unimplemented cairo-based device"
 msgstr ""
 
 #: cairo/cairoBM.cpp:226
-msgid "BM_Close_bitmap called on non-surface"
+#, c-format
+msgid "'%s' called on non-surface"
 msgstr ""
 
 #: cairo/cairoBM.cpp:267

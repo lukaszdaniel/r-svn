@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 20:32+0200\n"
+"POT-Creation-Date: 2025-06-08 16:31+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -384,14 +384,14 @@ msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "nieznana strona kodowa '%s' w 'mbcsToSbcs'"
 
 #: devPS.cpp:4592 devPS.cpp:4594
-#, fuzzy, c-format
+#, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
-msgstr "błąd konwersji na '%s'; w 'mbcsToSbcs': dla <%02x>"
+msgstr "błąd konwersji na '%s'; w 'mbcsToSbcs': dla %s (U+%04X)"
 
 #: devPS.cpp:4597
-#, fuzzy, c-format
+#, c-format
 msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
-msgstr "błąd konwersji na '%s' w 'mbcsToSbcs': kropka zastąpiona <%02x>"
+msgstr "dla '%s' w 'mbcsToSbcs': %s zastąpiono %s (U+%04X)"
 
 #: devPS.cpp:4603 devPS.cpp:4610
 #, c-format
@@ -404,9 +404,9 @@ msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr "błąd konwersji na '%s' w 'mbcsToSbcs': kropka zastąpiona <%02x>"
 
 #: devPS.cpp:4622
-#, fuzzy, c-format
+#, c-format
 msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
-msgstr "błąd konwersji na '%s'; w 'mbcsToSbcs': dla <%02x>"
+msgstr "błąd konwersji z %s do %s na '%s'; w 'mbcsToSbcs'"
 
 #: devPS.cpp:4694
 #, c-format
@@ -431,9 +431,8 @@ msgid "failed to increase 'maxDefns'"
 msgstr "nie udało się zwiększyć 'maxDefns'"
 
 #: devPS.cpp:5388 devPS.cpp:5441
-#, fuzzy
 msgid "Repeat or reflect pattern not supported on PDF device"
-msgstr "maska alfa została zignorowana (nieobsługiwana na tym urządzeniu)"
+msgstr "Powtarzanie lub odzwierciedlanie wzoru nie jest obsługiwane na urządzeniu PDF"
 
 #: devPS.cpp:5497 devPS.cpp:5585
 msgid "Shading type not yet supported"
@@ -481,8 +480,8 @@ msgstr "nie można przydzielić obrazu rastrowego"
 
 #: devPS.cpp:6627 devPS.cpp:6677
 #, c-format
-msgid "internal error %d in writeRasterXObject"
-msgstr "błąd wewnętrzny %d w writeRasterXObject"
+msgid "internal error %d in '%s'"
+msgstr "błąd wewnętrzny %d w '%s'"
 
 #: devPS.cpp:6656 devPS.cpp:6700 devPS.cpp:8231
 msgid "write failed"
@@ -554,9 +553,8 @@ msgid "failed to load sRGB colorspace file"
 msgstr "nie udało się załadować pliku przestrzeni kolorów sRGB"
 
 #: devPS.cpp:7869 devPS.cpp:7894 devPS.cpp:8247 devPS.cpp:8290
-#, fuzzy
 msgid "unable to increase object limit: please shutdown the pdf device"
-msgstr "nie udało się zwiększyć ciągu definicji (zamknięcie urządzenia PDF)"
+msgstr "nie można zwiększyć granic obiektu: proszę wyłączyć urządzenie pdf"
 
 #: devPS.cpp:7930
 msgid "corrupt encodings in PDF device"
@@ -586,12 +584,11 @@ msgstr "wewnętrzny błąd odczytu w PDF_endpage"
 #: devPS.cpp:8227
 #, c-format
 msgid "internal compression error %d in PDF_endpage"
-msgstr ""
+msgstr "wewnętrzny błąd kompresji %d w PDF_endpage"
 
 #: devPS.cpp:8282
-#, fuzzy
 msgid "unable to increase page limit: please shutdown the pdf device"
-msgstr "nie udało się zwiększyć ciągu definicji (zamknięcie urządzenia PDF)"
+msgstr "nie można zwiększyć granic strony: proszę wyłączyć urządzenie pdf"
 
 #: devPS.cpp:8304
 #, c-format
@@ -642,7 +639,7 @@ msgstr "nie można uruchomić urządzenia '%s()'"
 
 #: devQuartz.cpp:384
 msgid "Tried to restore an empty snapshot?"
-msgstr ""
+msgstr "Próba przywrócenia pustej migawki?"
 
 #: devQuartz.cpp:482
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
@@ -773,7 +770,7 @@ msgid "Invalid font path: \"%s\""
 msgstr "Nieprawidłowa ścieżka czcionki: \"%s\""
 
 #: devQuartz.cpp:3097
-msgid "Failed to load font"
+msgid "failed to load font"
 msgstr "nie udało się załadować czcionki"
 
 #: devQuartz.cpp:3190 devQuartz.cpp:3195
@@ -806,7 +803,7 @@ msgstr "Brak dostępnego urządzenia aby skopiować okno grafiki"
 
 #: devWindows.cpp:375
 msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
-msgstr ""
+msgstr "brakujący initPSandPDFfonts() w przestrzeni nazw grDevices: to nie powinno się wydarzyć"
 
 #: devWindows.cpp:401 devWindows.cpp:474
 #, c-format
@@ -823,12 +820,11 @@ msgstr "rodzina czcionek nie została znaleziona w bazie czcionek systemu Window
 
 #: devWindows.cpp:713
 msgid "unable to set or substitute a suitable font"
-msgstr ""
+msgstr "nie można ustawić ani zamienić odpowiedniej czcionki"
 
 #: devWindows.cpp:718
-#, fuzzy
 msgid "unable to set font: using Arial"
-msgstr "nie można użyć strony kodowej '%s'"
+msgstr "nie można ustawić czcionki: używanie Arial"
 
 #: devWindows.cpp:1078
 msgid "plot history seems corrupted"
@@ -1017,9 +1013,9 @@ msgid "allocation failure in QuartzBitmap_DeviceCreate"
 msgstr "niepowodzenie przydziału pamięci w 'QuartzBitmap_DeviceCreate()'"
 
 #: winbitmap.cpp:458
-#, fuzzy, c-format
+#, c-format
 msgid "unable to open TIFF file '%s'"
-msgstr "nie można otworzyć pliku '%s' do zapisu"
+msgstr "nie można otworzyć pliku TIFF '%s'"
 
 #: winbitmap.cpp:497 winbitmap.cpp:524
 msgid "allocation failure in R_SaveAsTIF"
@@ -1043,8 +1039,9 @@ msgid "unimplemented cairo-based device"
 msgstr "niezaimplementowane urządzenie oparte o Cairo"
 
 #: cairo/cairoBM.cpp:226
-msgid "BM_Close_bitmap called on non-surface"
-msgstr ""
+#, c-format
+msgid "'%s' called on non-surface"
+msgstr "'%s' wywołane na obiekcie nie będącym powierzchnią"
 
 #: cairo/cairoBM.cpp:267
 #, c-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-08 17:01+0200\n"
 "PO-Revision-Date: 2025-04-01 16:52+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: English\n"
@@ -351,8 +351,9 @@ msgstr "printing of extremely long output is truncated"
 msgid "allocation of pipe connection failed"
 msgstr "allocation of pipe connection failed"
 
-#: src/gnuwin32/run.cpp:1142
-msgid "'names' is not a character vector"
+#: src/gnuwin32/run.cpp:1142 src/main/sprintf.cpp:112 src/main/util.cpp:2337
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "'names' is not a character vector"
 
 #: src/gnuwin32/system.cpp:111
@@ -712,7 +713,8 @@ msgid "input string x[%d] is invalid in this locale"
 msgstr "input string x[%d] is invalid in this locale"
 
 #: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
-#: src/main/util.cpp:3206 src/modules/internet/Rhttpd.cpp:1301
+#: src/main/print.cpp:1194 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
 #: src/modules/X11/dataentry.cpp:452
 #, fuzzy, c-format
 msgid "allocation error in '%s'"
@@ -787,7 +789,7 @@ msgstr "type '%s' is not supported"
 msgid "not a memory-mapped object"
 msgstr ""
 
-#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448
+#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448 src/main/util.cpp:3194
 msgid "unsupported type"
 msgstr "unsupported type"
 
@@ -2787,9 +2789,10 @@ msgstr "allocation of 'gzcon' connection failed"
 msgid "R_compress1 requires a raw vector"
 msgstr "'%s' requires a character vector"
 
-#: src/main/connections.cpp:6500
-#, fuzzy
-msgid "allocation error in R_compress1 with libdeflate"
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
+#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#, fuzzy, c-format
+msgid "allocation error in '%s' with libdeflate"
 msgstr "memory allocation error in 'realpr'"
 
 #: src/main/connections.cpp:6513
@@ -2801,25 +2804,23 @@ msgstr ""
 msgid "R_decompress1 requires a raw vector"
 msgstr "'%s' requires a character vector"
 
-#: src/main/connections.cpp:6531
-#, fuzzy
-msgid "allocation error in R_decompress1 with libdeflate"
-msgstr "memory allocation error in 'realpr'"
-
 #: src/main/connections.cpp:6544
 #, fuzzy, c-format
-msgid "internal error %d in R_decompress1 with libdeflate"
+msgid "internal error %d in '%s' with libdeflate"
 msgstr "internal error in use of recursive indexing"
 
-#: src/main/connections.cpp:6570
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
+#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
+#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#: src/main/connections.cpp:7282
 #, fuzzy, c-format
-msgid "internal error %d in R_compress1"
-msgstr "internal error in 'do_sys'"
-
-#: src/main/connections.cpp:6591 src/main/connections.cpp:6664
-#: src/main/connections.cpp:6928
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress1"
+msgid "internal error %d in '%s'"
 msgstr "internal error in 'do_sys'"
 
 #: src/main/connections.cpp:6613
@@ -2827,20 +2828,10 @@ msgstr "internal error in 'do_sys'"
 msgid "R_compress2 requires a raw vector"
 msgstr "'%s' requires a character vector"
 
-#: src/main/connections.cpp:6623
-#, fuzzy, c-format
-msgid "internal error %d in R_compress2"
-msgstr "internal error in 'do_sys'"
-
 #: src/main/connections.cpp:6647
 #, fuzzy
 msgid "R_decompress2 requires a raw vector"
 msgstr "'%s' requires a character vector"
-
-#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress2"
-msgstr "internal error in 'do_sys'"
 
 #: src/main/connections.cpp:6671
 msgid "unknown type in R_decompress2"
@@ -2879,20 +2870,10 @@ msgstr ""
 msgid "R_compress3 requires a raw vector"
 msgstr "'%s' requires a character vector"
 
-#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
-#, fuzzy, c-format
-msgid "internal error %d in R_compress3"
-msgstr "internal error in 'do_sys'"
-
 #: src/main/connections.cpp:6872
 #, fuzzy
 msgid "R_decompress3 requires a raw vector"
 msgstr "'%s' requires a character vector"
-
-#: src/main/connections.cpp:6883
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress3"
-msgstr "internal error in 'do_sys'"
 
 #: src/main/connections.cpp:6893
 #, fuzzy, c-format
@@ -2913,20 +2894,9 @@ msgstr ""
 msgid "'from' must be raw or character"
 msgstr "'x' must be a character vector"
 
-#: src/main/connections.cpp:6967
-#, fuzzy, c-format
-msgid "allocation error in '%s' with libdeflate"
-msgstr "memory allocation error in 'realpr'"
-
 #: src/main/connections.cpp:6975
 #, fuzzy
 msgid "internal libdeflate error in memCompress"
-msgstr "internal error in 'do_sys'"
-
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#, fuzzy, c-format
-msgid "internal error %d in memCompress"
 msgstr "internal error in 'do_sys'"
 
 #: src/main/connections.cpp:7055
@@ -2938,23 +2908,12 @@ msgstr "internal error in 'do_sys'"
 msgid "unknown compression, assuming none"
 msgstr "unknown compression, assuming none"
 
-#: src/main/connections.cpp:7116
-#, fuzzy
-msgid "allocation error in memDecompress with libdeflate"
-msgstr "memory allocation error in 'realpr'"
-
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#, fuzzy, c-format
-msgid "internal error %d in memDecompress(%s)"
-msgstr "internal error in 'do_sys'"
-
 #: src/main/connections.cpp:7256
 #, fuzzy, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr "internal error ('op = %d' in do_summary).\t Call a Guru"
 
-#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#: src/main/connections.cpp:7286
 #, fuzzy, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr "internal error in 'do_sys'"
@@ -3019,8 +2978,10 @@ msgstr "debug flag in compiled function has no effect"
 msgid "debug will apply when function leaves compiled code"
 msgstr "debug will apply when function leaves compiled code"
 
-#: src/main/context.cpp:750
-msgid "internal error in 'do_sys'"
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215
+#: src/main/random.cpp:301
+#, fuzzy, c-format
+msgid "internal error in '%s'"
 msgstr "internal error in 'do_sys'"
 
 #: src/main/contour-common.h:327
@@ -6641,10 +6602,6 @@ msgstr "invalid character length in 'intpr'"
 msgid "invalid character length in 'realpr'"
 msgstr "invalid character length in 'realpr'"
 
-#: src/main/print.cpp:1194
-msgid "memory allocation error in 'realpr'"
-msgstr "memory allocation error in 'realpr'"
-
 #: src/main/print.cpp:1227
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
@@ -6741,21 +6698,6 @@ msgstr "invalid arguments"
 #: src/main/random.cpp:218 src/main/random.cpp:290 src/main/random.cpp:304
 msgid "NAs produced"
 msgstr "NAs produced"
-
-#: src/main/random.cpp:123
-#, fuzzy
-msgid "internal error in do_random1"
-msgstr "internal error in 'do_sys'"
-
-#: src/main/random.cpp:215
-#, fuzzy
-msgid "internal error in do_random2"
-msgstr "internal error in 'do_sys'"
-
-#: src/main/random.cpp:301
-#, fuzzy
-msgid "internal error in do_random3"
-msgstr "internal error in 'do_sys'"
 
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
@@ -7969,10 +7911,6 @@ msgstr "factor has bad level"
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "required resulting string length %d is greater than maximal %d"
 
-#: src/main/sprintf.cpp:112
-msgid "'fmt' is not a character vector"
-msgstr "'fmt' is not a character vector"
-
 #: src/main/sprintf.cpp:117
 #, c-format
 msgid "only %d arguments are allowed"
@@ -8678,8 +8616,9 @@ msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "any_duplicated3(., <0-length incomp>)"
 
 #: src/main/unique.cpp:1137
-msgid "'fromLast' must be length 1"
-msgstr "'fromLast' must be length 1"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
+msgstr "'%s' must be of length 1"
 
 #: src/main/unique.cpp:1148
 #, c-format
@@ -8895,11 +8834,6 @@ msgstr "Conversion failed"
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr "accuracy loss in conversion from \"%s\" to numeric"
 
-#: src/main/util.cpp:2337
-#, fuzzy
-msgid "argument is not a character vector"
-msgstr "'names' is not a character vector"
-
 #: src/main/util.cpp:2536
 msgid "all arguments must be named"
 msgstr "all arguments must be named"
@@ -8973,11 +8907,6 @@ msgstr "zip file '%s' cannot be opened"
 #: src/main/util.cpp:3081
 msgid "'type' must be \"integer\" for  \"d\"-format"
 msgstr ""
-
-#: src/main/util.cpp:3194
-#, fuzzy
-msgid "unsupported type "
-msgstr "unsupported type"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -9295,10 +9224,6 @@ msgstr "cannot read from connection"
 #, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "cannot open the connection to '%s'"
-
-#: src/modules/internet/Rhttpd.cpp:805
-msgid "allocation error in remove_dot_segments"
-msgstr ""
 
 #: src/modules/internet/Rhttpd.cpp:1362
 #, fuzzy
@@ -9915,7 +9840,7 @@ msgstr "allocation failed in R_tmpnam2"
 
 #: src/modules/X11/rbitmap.cpp:576
 #, fuzzy
-msgid "No TIFF support in this version of R"
+msgid "no TIFF support in this version of R"
 msgstr "no png support in this version of R"
 
 #: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600
@@ -10253,6 +10178,82 @@ msgstr "X11 module cannot be loaded"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 is not available"
+
+#, fuzzy
+#~ msgid "allocation error in R_compress1 with libdeflate"
+#~ msgstr "memory allocation error in 'realpr'"
+
+#, fuzzy
+#~ msgid "allocation error in R_decompress1 with libdeflate"
+#~ msgstr "memory allocation error in 'realpr'"
+
+#, fuzzy
+#~ msgid "allocation error in memDecompress with libdeflate"
+#~ msgstr "memory allocation error in 'realpr'"
+
+#~ msgid "memory allocation error in 'realpr'"
+#~ msgstr "memory allocation error in 'realpr'"
+
+#, fuzzy
+#~ msgid "unsupported type "
+#~ msgstr "unsupported type"
+
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "'fromLast' must be length 1"
+
+#~ msgid "'fmt' is not a character vector"
+#~ msgstr "'fmt' is not a character vector"
+
+#, fuzzy
+#~ msgid "argument is not a character vector"
+#~ msgstr "'names' is not a character vector"
+
+#~ msgid "internal error in 'do_sys'"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy
+#~ msgid "internal error in do_random1"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy
+#~ msgid "internal error in do_random2"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy
+#~ msgid "internal error in do_random3"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress1"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress1"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress2"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress2"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress3"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress3"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memCompress"
+#~ msgstr "internal error in 'do_sys'"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memDecompress(%s)"
+#~ msgstr "internal error in 'do_sys'"
 
 #~ msgid "'path' must be a character vector"
 #~ msgstr "'path' must be a character vector"

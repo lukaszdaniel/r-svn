@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 11:39+0200\n"
 "PO-Revision-Date: 2021-11-06 22:43+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -47,11 +47,13 @@ msgid "only %d arguments are allowed"
 msgstr "leidžiami tik %d argumentai"
 
 #: getfmts.cpp:61
-msgid "'fmt' is not a character vector"
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "'fmt' nėra tekstinis vektorius"
 
 #: getfmts.cpp:64
-msgid "'fmt' must be length 1"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
 msgstr "'fmt' turi būti 1 ilgis"
 
 #: getfmts.cpp:70

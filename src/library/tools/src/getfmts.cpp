@@ -58,10 +58,10 @@ SEXP getfmts(SEXP format)
 	SET_STRING_ELT(res, (n), mkChar(s));				\
     }
     
-    if (!isString(format)) error("%s", _("'fmt' is not a character vector"));
+    if (!isString(format)) error(_("'%s' is not a character vector"), "fmt");
     nfmt = LENGTH(format);
     if (nfmt != 1) 
-        error("%s", _("'fmt' must be length 1"));
+        error(_("'%s' must be length 1"), "fmt");
 
     bool use_UTF8 = getCharCE(STRING_ELT(format, 0)) == CE_UTF8;
     formatString = TRANSLATE_CHAR(format, 0);

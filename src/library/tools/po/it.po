@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 11:39+0200\n"
 "PO-Revision-Date: 2022-10-14 10:45+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -48,11 +48,13 @@ msgid "only %d arguments are allowed"
 msgstr "sono ammessi solo %d argomenti"
 
 #: getfmts.cpp:61
-msgid "'fmt' is not a character vector"
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "'fmt' non è un vettore di caratteri"
 
 #: getfmts.cpp:64
-msgid "'fmt' must be length 1"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
 msgstr "'fmt' dev'essere di lunghezza 1"
 
 #: getfmts.cpp:70

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-08 17:01+0200\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -346,8 +346,9 @@ msgstr "la impressió d'una sortida extremadament llarga està truncada"
 msgid "allocation of pipe connection failed"
 msgstr "ha fallat l'assignació de la connexió de canonada"
 
-#: src/gnuwin32/run.cpp:1142
-msgid "'names' is not a character vector"
+#: src/gnuwin32/run.cpp:1142 src/main/sprintf.cpp:112 src/main/util.cpp:2337
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "«names» no és un vector de caràcters"
 
 #: src/gnuwin32/system.cpp:111
@@ -709,7 +710,8 @@ msgid "input string x[%d] is invalid in this locale"
 msgstr "la cadena d'entrada x[%d] no és vàlida en aquesta configuració regional"
 
 #: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
-#: src/main/util.cpp:3206 src/modules/internet/Rhttpd.cpp:1301
+#: src/main/print.cpp:1194 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
 #: src/modules/X11/dataentry.cpp:452
 #, fuzzy, c-format
 msgid "allocation error in '%s'"
@@ -785,7 +787,7 @@ msgstr "el tipus «%s» no és compatible"
 msgid "not a memory-mapped object"
 msgstr ""
 
-#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448
+#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448 src/main/util.cpp:3194
 #, fuzzy
 msgid "unsupported type"
 msgstr "tipus no suportat"
@@ -3015,9 +3017,10 @@ msgstr "ha fallat l'assignació de la connexió «gzcon»"
 msgid "R_compress1 requires a raw vector"
 msgstr "«%s» requereix un vector de caràcters"
 
-#: src/main/connections.cpp:6500
-#, fuzzy
-msgid "allocation error in R_compress1 with libdeflate"
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
+#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#, fuzzy, c-format
+msgid "allocation error in '%s' with libdeflate"
 msgstr "error d'assignació de memòria a «realpr»"
 
 #: src/main/connections.cpp:6513
@@ -3029,25 +3032,23 @@ msgstr ""
 msgid "R_decompress1 requires a raw vector"
 msgstr "«%s» requereix un vector de caràcters"
 
-#: src/main/connections.cpp:6531
-#, fuzzy
-msgid "allocation error in R_decompress1 with libdeflate"
-msgstr "error d'assignació de memòria a «realpr»"
-
 #: src/main/connections.cpp:6544
 #, fuzzy, c-format
-msgid "internal error %d in R_decompress1 with libdeflate"
+msgid "internal error %d in '%s' with libdeflate"
 msgstr "error intern en l'ús de la indexació recursiva"
 
-#: src/main/connections.cpp:6570
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
+#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
+#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#: src/main/connections.cpp:7282
 #, fuzzy, c-format
-msgid "internal error %d in R_compress1"
-msgstr "error intern a «dosys»"
-
-#: src/main/connections.cpp:6591 src/main/connections.cpp:6664
-#: src/main/connections.cpp:6928
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress1"
+msgid "internal error %d in '%s'"
 msgstr "error intern a «dosys»"
 
 #: src/main/connections.cpp:6613
@@ -3055,20 +3056,10 @@ msgstr "error intern a «dosys»"
 msgid "R_compress2 requires a raw vector"
 msgstr "«%s» requereix un vector de caràcters"
 
-#: src/main/connections.cpp:6623
-#, fuzzy, c-format
-msgid "internal error %d in R_compress2"
-msgstr "error intern a «dosys»"
-
 #: src/main/connections.cpp:6647
 #, fuzzy
 msgid "R_decompress2 requires a raw vector"
 msgstr "«%s» requereix un vector de caràcters"
-
-#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress2"
-msgstr "error intern a «dosys»"
 
 #: src/main/connections.cpp:6671
 msgid "unknown type in R_decompress2"
@@ -3111,20 +3102,10 @@ msgstr ""
 msgid "R_compress3 requires a raw vector"
 msgstr "«%s» requereix un vector de caràcters"
 
-#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
-#, fuzzy, c-format
-msgid "internal error %d in R_compress3"
-msgstr "error intern a «dosys»"
-
 #: src/main/connections.cpp:6872
 #, fuzzy
 msgid "R_decompress3 requires a raw vector"
 msgstr "«%s» requereix un vector de caràcters"
-
-#: src/main/connections.cpp:6883
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress3"
-msgstr "error intern a «dosys»"
 
 #: src/main/connections.cpp:6893
 #, fuzzy, c-format
@@ -3145,20 +3126,9 @@ msgstr ""
 msgid "'from' must be raw or character"
 msgstr "«x» ha de ser un vector de caràcters"
 
-#: src/main/connections.cpp:6967
-#, fuzzy, c-format
-msgid "allocation error in '%s' with libdeflate"
-msgstr "error d'assignació de memòria a «realpr»"
-
 #: src/main/connections.cpp:6975
 #, fuzzy
 msgid "internal libdeflate error in memCompress"
-msgstr "error intern a «dosys»"
-
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#, fuzzy, c-format
-msgid "internal error %d in memCompress"
 msgstr "error intern a «dosys»"
 
 #: src/main/connections.cpp:7055
@@ -3171,23 +3141,12 @@ msgstr "error intern a «dosys»"
 msgid "unknown compression, assuming none"
 msgstr "compressió desconeguda, assumint-ne cap"
 
-#: src/main/connections.cpp:7116
-#, fuzzy
-msgid "allocation error in memDecompress with libdeflate"
-msgstr "error d'assignació de memòria a «realpr»"
-
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#, fuzzy, c-format
-msgid "internal error %d in memDecompress(%s)"
-msgstr "error intern a «dosys»"
-
 #: src/main/connections.cpp:7256
 #, fuzzy, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr "error intern ('op ). %d' en dosummary).\t Truca a un gurú"
 
-#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#: src/main/connections.cpp:7286
 #, fuzzy, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr "error intern a «dosys»"
@@ -3263,9 +3222,10 @@ msgstr "l'indicador de depuració a la funció compilada no té cap efecte"
 msgid "debug will apply when function leaves compiled code"
 msgstr "la depuració s'aplicarà quan la funció deixi el codi compilat"
 
-#: src/main/context.cpp:750
-#, fuzzy
-msgid "internal error in 'do_sys'"
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215
+#: src/main/random.cpp:301
+#, fuzzy, c-format
+msgid "internal error in '%s'"
 msgstr "error intern a «dosys»"
 
 #: src/main/contour-common.h:327
@@ -7251,11 +7211,6 @@ msgstr "longitud de caràcter no vàlida a «intpr»"
 msgid "invalid character length in 'realpr'"
 msgstr "longitud de caràcter no vàlida a «realpr»"
 
-#: src/main/print.cpp:1194
-#, fuzzy
-msgid "memory allocation error in 'realpr'"
-msgstr "error d'assignació de memòria a «realpr»"
-
 #: src/main/print.cpp:1227
 #, fuzzy, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
@@ -7361,21 +7316,6 @@ msgstr "arguments no vàlids"
 #, fuzzy
 msgid "NAs produced"
 msgstr "S'han produït els SNA"
-
-#: src/main/random.cpp:123
-#, fuzzy
-msgid "internal error in do_random1"
-msgstr "error intern a «dosys»"
-
-#: src/main/random.cpp:215
-#, fuzzy
-msgid "internal error in do_random2"
-msgstr "error intern a «dosys»"
-
-#: src/main/random.cpp:301
-#, fuzzy
-msgid "internal error in do_random3"
-msgstr "error intern a «dosys»"
 
 #: src/main/random.cpp:458
 #, fuzzy
@@ -8747,11 +8687,6 @@ msgstr "el factor té un nivell dolent"
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "la longitud de cadena resultant requerida %d és més gran que la màxima %d"
 
-#: src/main/sprintf.cpp:112
-#, fuzzy
-msgid "'fmt' is not a character vector"
-msgstr "«fmt» no és un vector de caràcters"
-
 #: src/main/sprintf.cpp:117
 #, fuzzy, c-format
 msgid "only %d arguments are allowed"
@@ -9530,9 +9465,9 @@ msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "anyduplicated3(., <0-length incomp>)"
 
 #: src/main/unique.cpp:1137
-#, fuzzy
-msgid "'fromLast' must be length 1"
-msgstr "'desdeLast' ha de ser la longitud 1"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
+msgstr "«%s» ha de ser de longitud 1"
 
 #: src/main/unique.cpp:1148
 #, fuzzy, c-format
@@ -9770,11 +9705,6 @@ msgstr "Ha fallat la conversió"
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr "pèrdua de precisió en la conversió de «%s» a numèrica"
 
-#: src/main/util.cpp:2337
-#, fuzzy
-msgid "argument is not a character vector"
-msgstr "«names» no és un vector de caràcters"
-
 #: src/main/util.cpp:2536
 #, fuzzy
 msgid "all arguments must be named"
@@ -9853,11 +9783,6 @@ msgstr "no es pot obrir el fitxer zip «%s»"
 #: src/main/util.cpp:3081
 msgid "'type' must be \"integer\" for  \"d\"-format"
 msgstr ""
-
-#: src/main/util.cpp:3194
-#, fuzzy
-msgid "unsupported type "
-msgstr "tipus no suportat"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -10196,10 +10121,6 @@ msgstr "no es pot llegir des de la connexió"
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "no s'ha pogut obrir la connexió a «%s»"
-
-#: src/modules/internet/Rhttpd.cpp:805
-msgid "allocation error in remove_dot_segments"
-msgstr ""
 
 #: src/modules/internet/Rhttpd.cpp:1362
 #, fuzzy
@@ -10859,7 +10780,7 @@ msgstr "ha fallat l'assignació a R_tmpnam2"
 
 #: src/modules/X11/rbitmap.cpp:576
 #, fuzzy
-msgid "No TIFF support in this version of R"
+msgid "no TIFF support in this version of R"
 msgstr "no hi ha suport png en aquesta versió de R"
 
 #: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600
@@ -11226,6 +11147,86 @@ msgstr "No es pot carregar el mòdul X11"
 #, fuzzy
 msgid "X11 is not available"
 msgstr "X11 no està disponible"
+
+#, fuzzy
+#~ msgid "allocation error in R_compress1 with libdeflate"
+#~ msgstr "error d'assignació de memòria a «realpr»"
+
+#, fuzzy
+#~ msgid "allocation error in R_decompress1 with libdeflate"
+#~ msgstr "error d'assignació de memòria a «realpr»"
+
+#, fuzzy
+#~ msgid "allocation error in memDecompress with libdeflate"
+#~ msgstr "error d'assignació de memòria a «realpr»"
+
+#, fuzzy
+#~ msgid "memory allocation error in 'realpr'"
+#~ msgstr "error d'assignació de memòria a «realpr»"
+
+#, fuzzy
+#~ msgid "unsupported type "
+#~ msgstr "tipus no suportat"
+
+#, fuzzy
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "'desdeLast' ha de ser la longitud 1"
+
+#, fuzzy
+#~ msgid "'fmt' is not a character vector"
+#~ msgstr "«fmt» no és un vector de caràcters"
+
+#, fuzzy
+#~ msgid "argument is not a character vector"
+#~ msgstr "«names» no és un vector de caràcters"
+
+#, fuzzy
+#~ msgid "internal error in 'do_sys'"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy
+#~ msgid "internal error in do_random1"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy
+#~ msgid "internal error in do_random2"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy
+#~ msgid "internal error in do_random3"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress1"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress1"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress2"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress2"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress3"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress3"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memCompress"
+#~ msgstr "error intern a «dosys»"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memDecompress(%s)"
+#~ msgstr "error intern a «dosys»"
 
 #~ msgid "'path' must be a character vector"
 #~ msgstr "«path» ha de ser un vector de caràcters"

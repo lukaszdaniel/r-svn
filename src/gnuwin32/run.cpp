@@ -1139,7 +1139,7 @@ SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     nm = CAR(args);
     if(!isString(nm))
-	error("%s", _("'names' is not a character vector"));
+	error(_("'%s' is not a character vector"), "names");
     n = LENGTH(nm);
     ans = allocVector(STRSXP, n);
     for (int i = 0; i < n; i++) {

@@ -109,7 +109,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     /* grab the format string */
     format = CAR(args);
     if (!isString(format))
-	error("%s", _("'fmt' is not a character vector"));
+	error(_("'%s' is not a character vector"), "fmt");
     nfmt = length(format);
     if (nfmt == 0) return allocVector(STRSXP, 0);
     args = CDR(args); nargs--;

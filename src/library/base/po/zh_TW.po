@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-08 17:01+0200\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -351,8 +351,9 @@ msgstr "截短了需要列印的特長輸出"
 msgid "allocation of pipe connection failed"
 msgstr "管道連接配置失敗"
 
-#: src/gnuwin32/run.cpp:1142
-msgid "'names' is not a character vector"
+#: src/gnuwin32/run.cpp:1142 src/main/sprintf.cpp:112 src/main/util.cpp:2337
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "'names' 並非字元向量"
 
 #: src/gnuwin32/system.cpp:111
@@ -711,7 +712,8 @@ msgid "input string x[%d] is invalid in this locale"
 msgstr "輸入字串 x[%d] 在這個語區中無效"
 
 #: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
-#: src/main/util.cpp:3206 src/modules/internet/Rhttpd.cpp:1301
+#: src/main/print.cpp:1194 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
 #: src/modules/X11/dataentry.cpp:452
 #, fuzzy, c-format
 msgid "allocation error in '%s'"
@@ -786,7 +788,7 @@ msgstr "類型 '%s' 未被支援"
 msgid "not a memory-mapped object"
 msgstr ""
 
-#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448
+#: src/main/altclasses.cpp:1924 src/main/sprintf.cpp:448 src/main/util.cpp:3194
 msgid "unsupported type"
 msgstr "不支援此一類型"
 
@@ -2793,9 +2795,10 @@ msgstr "配置 'gzcon' 連接失敗"
 msgid "R_compress1 requires a raw vector"
 msgstr "'%s' 需要字元向量"
 
-#: src/main/connections.cpp:6500
-#, fuzzy
-msgid "allocation error in R_compress1 with libdeflate"
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
+#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#, fuzzy, c-format
+msgid "allocation error in '%s' with libdeflate"
 msgstr "realpr 記憶體配置錯誤"
 
 #: src/main/connections.cpp:6513
@@ -2807,25 +2810,23 @@ msgstr ""
 msgid "R_decompress1 requires a raw vector"
 msgstr "'%s' 需要字元向量"
 
-#: src/main/connections.cpp:6531
-#, fuzzy
-msgid "allocation error in R_decompress1 with libdeflate"
-msgstr "realpr 記憶體配置錯誤"
-
 #: src/main/connections.cpp:6544
 #, fuzzy, c-format
-msgid "internal error %d in R_decompress1 with libdeflate"
+msgid "internal error %d in '%s' with libdeflate"
 msgstr "用遞迴索引時發生了內部錯誤"
 
-#: src/main/connections.cpp:6570
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
+#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
+#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#: src/main/connections.cpp:7282
 #, fuzzy, c-format
-msgid "internal error %d in R_compress1"
-msgstr "'do_sys' 發生內部錯誤"
-
-#: src/main/connections.cpp:6591 src/main/connections.cpp:6664
-#: src/main/connections.cpp:6928
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress1"
+msgid "internal error %d in '%s'"
 msgstr "'do_sys' 發生內部錯誤"
 
 #: src/main/connections.cpp:6613
@@ -2833,20 +2834,10 @@ msgstr "'do_sys' 發生內部錯誤"
 msgid "R_compress2 requires a raw vector"
 msgstr "'%s' 需要字元向量"
 
-#: src/main/connections.cpp:6623
-#, fuzzy, c-format
-msgid "internal error %d in R_compress2"
-msgstr "'do_sys' 發生內部錯誤"
-
 #: src/main/connections.cpp:6647
 #, fuzzy
 msgid "R_decompress2 requires a raw vector"
 msgstr "'%s' 需要字元向量"
-
-#: src/main/connections.cpp:6655 src/main/connections.cpp:6920
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress2"
-msgstr "'do_sys' 發生內部錯誤"
 
 #: src/main/connections.cpp:6671
 msgid "unknown type in R_decompress2"
@@ -2886,20 +2877,10 @@ msgstr ""
 msgid "R_compress3 requires a raw vector"
 msgstr "'%s' 需要字元向量"
 
-#: src/main/connections.cpp:6842 src/main/connections.cpp:6849
-#, fuzzy, c-format
-msgid "internal error %d in R_compress3"
-msgstr "'do_sys' 發生內部錯誤"
-
 #: src/main/connections.cpp:6872
 #, fuzzy
 msgid "R_decompress3 requires a raw vector"
 msgstr "'%s' 需要字元向量"
-
-#: src/main/connections.cpp:6883
-#, fuzzy, c-format
-msgid "internal error %d in R_decompress3"
-msgstr "'do_sys' 發生內部錯誤"
 
 #: src/main/connections.cpp:6893
 #, fuzzy, c-format
@@ -2920,20 +2901,9 @@ msgstr ""
 msgid "'from' must be raw or character"
 msgstr "'norm' 必須是字串"
 
-#: src/main/connections.cpp:6967
-#, fuzzy, c-format
-msgid "allocation error in '%s' with libdeflate"
-msgstr "realpr 記憶體配置錯誤"
-
 #: src/main/connections.cpp:6975
 #, fuzzy
 msgid "internal libdeflate error in memCompress"
-msgstr "'do_sys' 發生內部錯誤"
-
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#, fuzzy, c-format
-msgid "internal error %d in memCompress"
 msgstr "'do_sys' 發生內部錯誤"
 
 #: src/main/connections.cpp:7055
@@ -2945,23 +2915,12 @@ msgstr "'do_sys' 發生內部錯誤"
 msgid "unknown compression, assuming none"
 msgstr "不明壓縮，假設為沒有"
 
-#: src/main/connections.cpp:7116
-#, fuzzy
-msgid "allocation error in memDecompress with libdeflate"
-msgstr "realpr 記憶體配置錯誤"
-
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#, fuzzy, c-format
-msgid "internal error %d in memDecompress(%s)"
-msgstr "'do_sys' 發生內部錯誤"
-
 #: src/main/connections.cpp:7256
 #, fuzzy, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr "內部錯誤 (do_summary 中的 'op = %d')。\t 請向專家請教"
 
-#: src/main/connections.cpp:7282 src/main/connections.cpp:7286
+#: src/main/connections.cpp:7286
 #, fuzzy, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr "'do_sys' 發生內部錯誤"
@@ -3026,8 +2985,10 @@ msgstr "已編譯函式中的除錯旗標沒有作用"
 msgid "debug will apply when function leaves compiled code"
 msgstr "函式離開已編譯碼時才會套用除錯"
 
-#: src/main/context.cpp:750
-msgid "internal error in 'do_sys'"
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215
+#: src/main/random.cpp:301
+#, fuzzy, c-format
+msgid "internal error in '%s'"
 msgstr "'do_sys' 發生內部錯誤"
 
 #: src/main/contour-common.h:327
@@ -6652,10 +6613,6 @@ msgstr "intpr 字元長度無效"
 msgid "invalid character length in 'realpr'"
 msgstr "realpr 字元長度無效"
 
-#: src/main/print.cpp:1194
-msgid "memory allocation error in 'realpr'"
-msgstr "realpr 記憶體配置錯誤"
-
 #: src/main/print.cpp:1227
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
@@ -6754,21 +6711,6 @@ msgstr "引數無效"
 #: src/main/random.cpp:218 src/main/random.cpp:290 src/main/random.cpp:304
 msgid "NAs produced"
 msgstr "產生了 NA"
-
-#: src/main/random.cpp:123
-#, fuzzy
-msgid "internal error in do_random1"
-msgstr "'do_sys' 發生內部錯誤"
-
-#: src/main/random.cpp:215
-#, fuzzy
-msgid "internal error in do_random2"
-msgstr "'do_sys' 發生內部錯誤"
-
-#: src/main/random.cpp:301
-#, fuzzy
-msgid "internal error in do_random3"
-msgstr "'do_sys' 發生內部錯誤"
 
 #: src/main/random.cpp:458
 msgid "NA in probability vector"
@@ -7991,10 +7933,6 @@ msgstr ""
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "需要的結果字串長度 %d 大於最大值 %d"
 
-#: src/main/sprintf.cpp:112
-msgid "'fmt' is not a character vector"
-msgstr "'fmt' 並非字元向量"
-
 #: src/main/sprintf.cpp:117
 #, c-format
 msgid "only %d arguments are allowed"
@@ -8703,8 +8641,9 @@ msgid "any_duplicated3(., <0-length incomp>)"
 msgstr "any_duplicated3(., <長度零不相容>)"
 
 #: src/main/unique.cpp:1137
-msgid "'fromLast' must be length 1"
-msgstr "'fromLast' 的長度必須是 1"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
+msgstr "'%s' 的長度必須是 1"
 
 #: src/main/unique.cpp:1148
 #, c-format
@@ -8920,11 +8859,6 @@ msgstr "不當的版本值"
 msgid "accuracy loss in conversion from \"%s\" to numeric"
 msgstr "從 \"%s\" 轉換到數值時失去了準確度"
 
-#: src/main/util.cpp:2337
-#, fuzzy
-msgid "argument is not a character vector"
-msgstr "'names' 並非字元向量"
-
 #: src/main/util.cpp:2536
 msgid "all arguments must be named"
 msgstr "所有屬性必須被命名"
@@ -8998,11 +8932,6 @@ msgstr "zip 檔案 '%s' 無法開啟"
 #: src/main/util.cpp:3081
 msgid "'type' must be \"integer\" for  \"d\"-format"
 msgstr ""
-
-#: src/main/util.cpp:3194
-#, fuzzy
-msgid "unsupported type "
-msgstr "不支援此一類型"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -9316,10 +9245,6 @@ msgstr "無法從此連接讀取"
 #, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "無法開啟到 '%s' 的連接"
-
-#: src/modules/internet/Rhttpd.cpp:805
-msgid "allocation error in remove_dot_segments"
-msgstr ""
 
 #: src/modules/internet/Rhttpd.cpp:1362
 #, fuzzy
@@ -9933,7 +9858,7 @@ msgstr "在 R_tmpnam2 中配置失敗"
 
 #: src/modules/X11/rbitmap.cpp:576
 #, fuzzy
-msgid "No TIFF support in this version of R"
+msgid "no TIFF support in this version of R"
 msgstr "這個版本的 R 不支援 png"
 
 #: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600
@@ -10271,6 +10196,82 @@ msgstr "無法載入 X11 模組"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "無法使用 X11"
+
+#, fuzzy
+#~ msgid "allocation error in R_compress1 with libdeflate"
+#~ msgstr "realpr 記憶體配置錯誤"
+
+#, fuzzy
+#~ msgid "allocation error in R_decompress1 with libdeflate"
+#~ msgstr "realpr 記憶體配置錯誤"
+
+#, fuzzy
+#~ msgid "allocation error in memDecompress with libdeflate"
+#~ msgstr "realpr 記憶體配置錯誤"
+
+#~ msgid "memory allocation error in 'realpr'"
+#~ msgstr "realpr 記憶體配置錯誤"
+
+#, fuzzy
+#~ msgid "unsupported type "
+#~ msgstr "不支援此一類型"
+
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "'fromLast' 的長度必須是 1"
+
+#~ msgid "'fmt' is not a character vector"
+#~ msgstr "'fmt' 並非字元向量"
+
+#, fuzzy
+#~ msgid "argument is not a character vector"
+#~ msgstr "'names' 並非字元向量"
+
+#~ msgid "internal error in 'do_sys'"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy
+#~ msgid "internal error in do_random1"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy
+#~ msgid "internal error in do_random2"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy
+#~ msgid "internal error in do_random3"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress1"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress1"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress2"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress2"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_compress3"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in R_decompress3"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memCompress"
+#~ msgstr "'do_sys' 發生內部錯誤"
+
+#, fuzzy, c-format
+#~ msgid "internal error %d in memDecompress(%s)"
+#~ msgstr "'do_sys' 發生內部錯誤"
 
 #~ msgid "'path' must be a character vector"
 #~ msgstr "'path' 必須是字元向量"

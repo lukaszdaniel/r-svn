@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-01 16:29+0200\n"
+"POT-Creation-Date: 2025-06-08 11:39+0200\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -48,11 +48,13 @@ msgid "only %d arguments are allowed"
 msgstr "seuls %d arguments sont autorisés"
 
 #: getfmts.cpp:61
-msgid "'fmt' is not a character vector"
+#, fuzzy, c-format
+msgid "'%s' is not a character vector"
 msgstr "'fmt' n'est pas un vecteur de chaînes de caractères"
 
 #: getfmts.cpp:64
-msgid "'fmt' must be length 1"
+#, fuzzy, c-format
+msgid "'%s' must be length 1"
 msgstr "'fmt' doit avoir une longueur 1"
 
 #: getfmts.cpp:70

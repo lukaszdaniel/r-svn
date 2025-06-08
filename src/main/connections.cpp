@@ -6497,7 +6497,7 @@ SEXP R::R_compress1(SEXP in)
     if (c == NULL) {
        c = libdeflate_alloc_compressor(6);
        if(c == NULL)
-           error("%s", _("allocation error in R_compress1 with libdeflate"));
+           error(_("allocation error in '%s' with libdeflate"), "R_compress1");
     }
 
     CXXR::RAllocStack::Scope rscope;
@@ -6528,7 +6528,7 @@ SEXP R::R_decompress1(SEXP in, bool *err)
     if (d == NULL) {
 	d = libdeflate_alloc_decompressor();
 	if(d == NULL)
-	    error("%s", _("allocation error in R_decompress1 with libdeflate"));
+	    error(_("allocation error in '%s' with libdeflate"), "R_decompress1");
     }
 
     unsigned char *p = RAW(in);
@@ -6541,7 +6541,7 @@ SEXP R::R_decompress1(SEXP in, bool *err)
 				   outlen, &actual_out);
 
     if(res != LIBDEFLATE_SUCCESS) {
-	warning(_("internal error %d in R_decompress1 with libdeflate"), res);
+	warning(_("internal error %d in '%s' with libdeflate"), res, "R_decompress1");
 	*err = TRUE;
 	return R_NilValue;
     }
@@ -6567,7 +6567,7 @@ SEXP R::R_compress1(SEXP in)
     /* we want this to be system-independent */
     *((unsigned int *)buf) = (unsigned int) uiSwap(inlen);
     int res = compress(buf + 4, &outlen, (Bytef *)RAW(in), inlen);
-    if(res != Z_OK) error(_("internal error %d in R_compress1"), res);
+    if(res != Z_OK) error(_("internal error %d in '%s'"), res, "R_compress1");
     SEXP ans = allocVector(RAWSXP, outlen + 4);
     memcpy(RAW(ans), buf, outlen + 4);
 
@@ -6588,7 +6588,7 @@ SEXP R::R_decompress1(SEXP in, bool *err)
     Bytef *buf = (Bytef *) R_alloc(outlen, sizeof(Bytef));
     int res = uncompress(buf, &outlen, (Bytef *)(p + 4), inlen - 4);
     if(res != Z_OK) {
-	warning(_("internal error %d in R_decompress1"), res);
+	warning(_("internal error %d in '%s'"), res, "R_decompress1");
 	*err = TRUE;
 	return R_NilValue;
     }
@@ -6620,7 +6620,7 @@ SEXP R::R_compress2(SEXP in)
     res = BZ2_bzBuffToBuffCompress(buf + 5, &outlen,
 				   (char *)RAW(in), inlen,
 				   9, 0, 0);
-    if(res != BZ_OK) error(_("internal error %d in R_compress2"), res);
+    if(res != BZ_OK) error(_("internal error %d in '%s'"), res, "R_compress2");
     /* printf("compressed %d to %d\n", inlen, outlen); */
     if (res != BZ_OK || outlen > inlen) {
 	outlen = inlen;
@@ -6652,7 +6652,7 @@ SEXP R::R_decompress2(SEXP in, bool *err)
     if (type == '2') {
 	res = BZ2_bzBuffToBuffDecompress(buf, &outlen, p + 5, inlen - 5, 0, 0);
 	if(res != BZ_OK) {
-	    warning(_("internal error %d in R_decompress2"), res);
+	    warning(_("internal error %d in '%s'"), res, "R_decompress2");
 	    *err = TRUE;
 	    return R_NilValue;
 	}
@@ -6661,7 +6661,7 @@ SEXP R::R_decompress2(SEXP in, bool *err)
 	res = uncompress((unsigned char *) buf, &outl,
 			 (Bytef *)(p + 5), inlen - 5);
 	if(res != Z_OK) {
-	    warning(_("internal error %d in R_decompress1"), res);
+	    warning(_("internal error %d in '%s'"), res, "R_decompress1");
 	    *err = TRUE;
 	    return R_NilValue;
 	}
@@ -6839,14 +6839,14 @@ SEXP R::R_compress3(SEXP in)
 
     init_filters();
     ret = lzma_raw_encoder(&strm, filters);
-    if (ret != LZMA_OK) error(_("internal error %d in R_compress3"), ret);
+    if (ret != LZMA_OK) error(_("internal error %d in '%s'"), ret, "R_compress3");
     strm.next_in = RAW(in);
     strm.avail_in = inlen;
     strm.next_out = buf + 5;
     strm.avail_out = outlen;
     while(!ret) ret = lzma_code(&strm, LZMA_FINISH);
     if (ret != LZMA_STREAM_END || (strm.avail_in > 0)) {
-	warning(_("internal error %d in R_compress3"), ret);
+	warning(_("internal error %d in '%s'"), ret, "R_compress3");
 	outlen = inlen;
 	buf[4] = '0';
 	memcpy(buf+5, (char *)RAW(in), inlen);
@@ -6880,7 +6880,7 @@ SEXP R::R_decompress3(SEXP in, bool *err)
 	init_filters();
 	ret = lzma_raw_decoder(&strm, filters);
 	if (ret != LZMA_OK) {
-	    warning(_("internal error %d in R_decompress3"), (int)ret);
+	    warning(_("internal error %d in '%s'"), (int)ret, "R_decompress3");
 	    *err = TRUE;
 	    return R_NilValue;
 	}
@@ -6917,7 +6917,7 @@ SEXP R::R_decompress3(SEXP in, bool *err)
 	res = BZ2_bzBuffToBuffDecompress((char *)buf, &outlen,
 					 (char *)(p + 5), inlen - 5, 0, 0);
 	if(res != BZ_OK) {
-	    warning(_("internal error %d in R_decompress2"), res);
+	    warning(_("internal error %d in '%s'"), res, "R_decompress2");
 	    *err = TRUE;
 	    return R_NilValue;
 	}
@@ -6925,7 +6925,7 @@ SEXP R::R_decompress3(SEXP in, bool *err)
 	uLong outl; int res;
 	res = uncompress(buf, &outl, (Bytef *)(p + 5), inlen - 5);
 	if(res != Z_OK) {
-	    warning(_("internal error %d in R_decompress1"), res);
+	    warning(_("internal error %d in '%s'"), res, "R_decompress1");
 	    *err = TRUE;
 	    return R_NilValue;
 	}
@@ -6985,7 +6985,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	    outlen = (uLong)(1.001*(double)inlen + 20);
 	buf = (Bytef *) R_alloc(outlen, sizeof(Bytef));
 	res = compress(buf, &outlen, (Bytef *)RAW(from), inlen);
-	if(res != Z_OK) error(_("internal error %d in memCompress"), res);
+	if(res != Z_OK) error(_("internal error %d in '%s'"), res, "memCompress");
 	ans = allocVector(RAWSXP, outlen);
 	if (outlen)
 	    memcpy(RAW(ans), buf, outlen);
@@ -7001,7 +7001,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	buf = R_alloc(outlen, sizeof(char));
 	res = BZ2_bzBuffToBuffCompress(buf, &outlen, (char *)RAW(from),
 				       inlen, 9, 0, 0);
-	if(res != BZ_OK) error(_("internal error %d in memCompress"), res);
+	if(res != BZ_OK) error(_("internal error %d in '%s'"), res, "memCompress");
 	ans = allocVector(RAWSXP, outlen);
 	if (outlen)
 	    memcpy(RAW(ans), buf, outlen);
@@ -7024,7 +7024,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	filters[1].id = LZMA_VLI_UNKNOWN;
 
 	ret = lzma_stream_encoder(&strm, filters, LZMA_CHECK_CRC32);
-	if (ret != LZMA_OK) error(_("internal error %d in memCompress"), ret);
+	if (ret != LZMA_OK) error(_("internal error %d in '%s'"), ret, "memCompress");
 
 	outlen = inlen + inlen/100 + 600; /* FIXME, copied from bzip2 case */
 	buf = (unsigned char *) R_alloc(outlen, sizeof(unsigned char));
@@ -7034,7 +7034,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	strm.avail_out = outlen;
 	while(!ret) ret = lzma_code(&strm, LZMA_FINISH);
 	if (ret != LZMA_STREAM_END || (strm.avail_in > 0))
-	    error(_("internal error %d in memCompress"), ret);
+	    error(_("internal error %d in '%s'"), ret, "memCompress");
 	/* If LZMZ_BUF_ERROR, could realloc and continue */
 	outlen = (unsigned int)strm.total_out;
 	lzma_end(&strm);
@@ -7113,7 +7113,7 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(d == NULL) {
 	    d = libdeflate_alloc_decompressor();
 	    if(d == NULL)
-		error("%s", _("allocation error in memDecompress with libdeflate"));
+		error(_("allocation error in '%s' with libdeflate"), "memDecompress");
 	}
 
 	size_t inlen = XLENGTH(from), outlen = 3*inlen, actual_out;
@@ -7135,8 +7135,8 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 		    } else break;
 		}
 		if(res == LIBDEFLATE_SUCCESS) break;
-		error(_("internal error %d in memDecompress(%s)"), res,
-		      "type = \"libdeflate\"");
+		error(_("internal error %d in '%s'"), res,
+		      "memDecompress(type = \"libdeflate\")");
 	    }
 	} else {
 	    while(1) {
@@ -7149,8 +7149,8 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 		    } else break;
 		}
 		if(res == LIBDEFLATE_SUCCESS) break;
-		error(_("internal error %d in memDecompress(%s)"), res,
-		      "type = \"libdeflate\"");
+		error(_("internal error %d in '%s'"), res,
+		      "memDecompress(type = \"libdeflate\")");
 	    }
 	}
 	ans = allocVector(RAWSXP, actual_out);
@@ -7178,8 +7178,8 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else break;
 	    }
 	    if(res >= 0) break;
-	    error(_("internal error %d in memDecompress(%s)"), res,
-		  "type = \"gzip\"");
+	    error(_("internal error %d in '%s'"), res,
+		  "memDecompress(type = \"gzip\")");
 	}
 
 	ans = allocVector(RAWSXP, outlen);
@@ -7205,8 +7205,8 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else break;
 	    }
 	    if(res == BZ_OK) break;
-	    error(_("internal error %d in memDecompress(%s)"), res,
-		  "type = \"bzip2\"");
+	    error(_("internal error %d in '%s'"), res,
+		  "memDecompress(type = \"bzip2\")");
 	}
 	ans = allocVector(RAWSXP, outlen);
 	if (outlen)
@@ -7279,7 +7279,7 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (outlen == ZSTD_CONTENTSIZE_UNKNOWN)
 	    outlen = ZSTD_decompressBound(p, inlen);
 	if (outlen == ZSTD_CONTENTSIZE_ERROR)
-	    error(_("internal error in memDecompress(%s)"), "type = \"zstd\"");
+	    error(_("internal error %d in '%s'"), int(outlen), "memDecompress(type = \"zstd\")");
 	buf = (Bytef *) R_alloc(outlen, sizeof(Bytef));
 	res = ZSTD_decompress(buf, outlen, p, inlen);
 	if (ZSTD_isError(res))

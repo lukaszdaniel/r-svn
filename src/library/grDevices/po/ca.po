@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 20:32+0200\n"
+"POT-Creation-Date: 2025-06-08 16:31+0200\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -537,7 +537,7 @@ msgstr "no s'ha pogut assignar la imatge ràster"
 
 #: devPS.cpp:6627 devPS.cpp:6677
 #, c-format
-msgid "internal error %d in writeRasterXObject"
+msgid "internal error %d in '%s'"
 msgstr ""
 
 #: devPS.cpp:6656 devPS.cpp:6700 devPS.cpp:8231
@@ -874,7 +874,7 @@ msgstr "argument 'fonts' no vàlid a %s"
 
 #: devQuartz.cpp:3097
 #, fuzzy
-msgid "Failed to load font"
+msgid "failed to load font"
 msgstr "No s'ha pogut carregar el tipus de lletra"
 
 #: devQuartz.cpp:3190 devQuartz.cpp:3195
@@ -1185,7 +1185,8 @@ msgid "unimplemented cairo-based device"
 msgstr "dispositiu no implementat basat en cairo"
 
 #: cairo/cairoBM.cpp:226
-msgid "BM_Close_bitmap called on non-surface"
+#, c-format
+msgid "'%s' called on non-surface"
 msgstr ""
 
 #: cairo/cairoBM.cpp:267
