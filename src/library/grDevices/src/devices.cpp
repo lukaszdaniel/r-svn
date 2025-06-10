@@ -134,7 +134,8 @@ SEXP devcap(SEXP args)
 {
     SEXP capabilities, devcap;
     SEXP trans, transbg, raster, capture, locator, events, 
-        patterns, clippaths, masks, compositing, transforms, paths, glyphs;
+        patterns, clippaths, masks, compositing, transforms, paths, 
+        glyphs, variableFonts;
     pDevDesc dd = GEcurrentDevice()->dev;
 
     args = CDR(args);
@@ -217,6 +218,15 @@ SEXP devcap(SEXP args)
         INTEGER(glyphs)[0] = NA_INTEGER;
     }
     SET_VECTOR_ELT(capabilities, R_GE_capability_glyphs, glyphs);
+    UNPROTECT(1);
+
+    PROTECT(variableFonts = allocVector(INTSXP, 1));
+    if (dd->deviceVersion < R_GE_fontVar) {
+        INTEGER(variableFonts)[0] = 0;
+    } else {
+        INTEGER(variableFonts)[0] = NA_INTEGER;
+    }
+    SET_VECTOR_ELT(capabilities, R_GE_capability_variableFonts, variableFonts);
     UNPROTECT(1);
 
     /* Further capabilities can be filled in by device */
