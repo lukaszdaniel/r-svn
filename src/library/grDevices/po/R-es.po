@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-10 16:39\n"
 "PO-Revision-Date: 2023-08-31 11:06+0000\n"
 "Last-Translator: Geraldine Gomez Millan <geralidine.gomez@javeriana.edu.co>\n"
 "Language-Team: none\n"
@@ -192,6 +192,21 @@ msgid ""
 "%s"
 msgstr ""
 
+#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+#: R/glyph.R:0
+msgid "Axis names must 4 ASCII letters long"
+msgstr ""
+
+#. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")
+#: R/glyph.R:0
+msgid "Axis value(s) out of range:"
+msgstr ""
+
+#. R/glyph.R: stop("Axis values must be numeric")
+#: R/glyph.R:0
+msgid "Axis values must be numeric"
+msgstr ""
+
 #. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
 #: R/windows/windows.R:0
 msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
@@ -200,6 +215,11 @@ msgstr ""
 #. R/convertColor.R: gettextf("Color space converter: %s", x$name)
 #: R/convertColor.R:0
 msgid "Color space converter: %s"
+msgstr ""
+
+#. R/glyph.R: warning("Custom axis names must be upper case")
+#: R/glyph.R:0
+msgid "Custom axis names must be upper case"
 msgstr ""
 
 #. R/glyph.R: warning("Font family longer than 200 will be truncated")
@@ -331,6 +351,11 @@ msgstr ""
 msgid "NOT changing %s"
 msgstr ""
 
+#. R/glyph.R: stop("No axes specified")
+#: R/glyph.R:0
+msgid "No axes specified"
+msgstr ""
+
 #. R/postscript.R: stop("Not a CID font")
 #: R/postscript.R:0
 msgid "Not a CID font"
@@ -344,6 +369,11 @@ msgstr ""
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white)
 #: R/convertColor.R:0
 msgid "Reference white: %s"
+msgstr ""
+
+#. R/glyph.R: warning("Registered axis names must be lower case")
+#: R/glyph.R:0
+msgid "Registered axis names must be lower case"
 msgstr ""
 
 #. R/glyph.R: stop("There must be anchors named \"left\" and \"bottom\"")

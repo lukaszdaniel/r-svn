@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 16:31+0200\n"
+"POT-Creation-Date: 2025-06-10 16:48+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1118,7 +1118,15 @@ msgstr "niepoprawny ciąg znaków w Cairo_StrWidth"
 msgid "invalid string in Cairo_Text"
 msgstr "niepoprawny ciąg znaków w Cairo_Text"
 
-#: cairo/cairoFns.cpp:2376
+#: cairo/cairoFns.cpp:2375 cairo/cairoFns.cpp:2398
+msgid "Font variations too long"
+msgstr "Warianty czcionek są zbyt długie"
+
+#: cairo/cairoFns.cpp:2418
+msgid "Failed to apply font variations"
+msgstr "nie udało się zastosować wariantów czcionek"
+
+#: cairo/cairoFns.cpp:2462
 msgid "Font file not found; matching font family and face"
 msgstr "Nie znaleziono pliku czcionki; Dopasowywanie rodziny czcionek oraz kroju"
 

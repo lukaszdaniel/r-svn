@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 17:01+0200\n"
+"POT-Creation-Date: 2025-06-10 16:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3694,6 +3694,10 @@ msgstr ""
 
 #: src/main/engine.cpp:3801
 msgid "FillStroke ignored (device is appending path)"
+msgstr ""
+
+#: src/main/engine.cpp:3904 src/main/engine.cpp:3922 src/main/engine.cpp:3939
+msgid "Index out of bounds"
 msgstr ""
 
 #: src/main/envir.cpp:155 src/main/envir.cpp:169

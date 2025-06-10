@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-09 16:00\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -17,11 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-
-#. R/unix/mclapply.R: gettextf("%d function calls resulted in an error", has.errors)
-#: R/unix/mclapply.R:0
-msgid "%d function calls resulted in an error"
-msgstr "%d 個函式呼叫導致錯誤"
 
 #. R/clusterApply.R: stop("'X' must have named dimnames")
 #: R/clusterApply.R:0
@@ -183,7 +178,14 @@ msgstr "未知的集群類型"
 msgid "zero-length inputs cannot be mixed with those of non-zero length"
 msgstr "非零長度的輸入和長度為零的輸入不能同時混用"
 
-#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results")
+#. R/unix/mclapply.R: ngettext(has.errors, "%d function call resulted in an error",     "%d function calls resulted in an error", domain = "R-parallel")
+#: R/unix/mclapply.R:0
+#, fuzzy
+msgid "%d function call resulted in an error"
+msgid_plural "%d function calls resulted in an error"
+msgstr[0] "%d 個函式呼叫導致錯誤"
+
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results", domain = "R-parallel")
 #: R/unix/mclapply.R:0
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"

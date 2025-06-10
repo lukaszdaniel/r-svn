@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-10 16:39\n"
 "PO-Revision-Date: 2023-09-18 03:05+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -199,6 +199,23 @@ msgid ""
 "%s"
 msgstr "可用的装置是%s"
 
+#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+#: R/glyph.R:0
+msgid "Axis names must 4 ASCII letters long"
+msgstr ""
+
+#. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Axis value(s) out of range:"
+msgstr "下标值超出边界了"
+
+#. R/glyph.R: stop("Axis values must be numeric")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Axis values must be numeric"
+msgstr "rgb矩阵必需是数字"
+
 #. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
 #: R/windows/windows.R:0
 msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
@@ -208,6 +225,11 @@ msgstr ""
 #: R/convertColor.R:0
 msgid "Color space converter: %s"
 msgstr "颜色空间转换器: %s"
+
+#. R/glyph.R: warning("Custom axis names must be upper case")
+#: R/glyph.R:0
+msgid "Custom axis names must be upper case"
+msgstr ""
 
 #. R/glyph.R: warning("Font family longer than 200 will be truncated")
 #: R/glyph.R:0
@@ -350,6 +372,12 @@ msgstr ""
 msgid "NOT changing %s"
 msgstr "不更换%s"
 
+#. R/glyph.R: stop("No axes specified")
+#: R/glyph.R:0
+#, fuzzy
+msgid "No axes specified"
+msgstr "必需设定'z'这个矩阵"
+
 #. R/postscript.R: stop("Not a CID font")
 #: R/postscript.R:0
 msgid "Not a CID font"
@@ -364,6 +392,11 @@ msgstr ""
 #: R/convertColor.R:0
 msgid "Reference white: %s"
 msgstr "白色参考: %s"
+
+#. R/glyph.R: warning("Registered axis names must be lower case")
+#: R/glyph.R:0
+msgid "Registered axis names must be lower case"
+msgstr ""
 
 #. R/glyph.R: stop("There must be anchors named \"left\" and \"bottom\"")
 #: R/glyph.R:0

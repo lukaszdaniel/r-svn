@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 17:01+0200\n"
+"POT-Creation-Date: 2025-06-10 16:33+0200\n"
 "PO-Revision-Date: 2025-04-08 17:03+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -3745,6 +3745,11 @@ msgstr "Fill wird ignoriert (Gerät hängt Pfad an)"
 #: src/main/engine.cpp:3801
 msgid "FillStroke ignored (device is appending path)"
 msgstr "FillStroke wird ignoriert (Gerät hängt Pfad an)"
+
+#: src/main/engine.cpp:3904 src/main/engine.cpp:3922 src/main/engine.cpp:3939
+#, fuzzy
+msgid "Index out of bounds"
+msgstr "Index %d ist außerhalb der Grenzen"
 
 #: src/main/envir.cpp:155 src/main/envir.cpp:169
 #, c-format
@@ -10348,10 +10353,6 @@ msgstr "X11 nicht verfügbar"
 #, fuzzy
 #~ msgid "couldn't allocate node stack"
 #~ msgstr "konnte keinen Speicher für pushBack allokieren"
-
-#, c-format
-#~ msgid "index %d outside bounds"
-#~ msgstr "Index %d ist außerhalb der Grenzen"
 
 #~ msgid "not a BUILTIN function"
 #~ msgstr "keine BUILTIN Funktion"

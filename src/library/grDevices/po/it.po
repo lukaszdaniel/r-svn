@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 16:31+0200\n"
+"POT-Creation-Date: 2025-06-10 16:48+0200\n"
 "PO-Revision-Date: 2022-10-14 10:23+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -1152,7 +1152,17 @@ msgstr "stringa in '%s' non valida"
 msgid "invalid string in Cairo_Text"
 msgstr "stringa in '%s' non valida"
 
-#: cairo/cairoFns.cpp:2376
+#: cairo/cairoFns.cpp:2375 cairo/cairoFns.cpp:2398
+#, fuzzy
+msgid "Font variations too long"
+msgstr "il nome della famiglia del carattere è troppo lungo"
+
+#: cairo/cairoFns.cpp:2418
+#, fuzzy
+msgid "Failed to apply font variations"
+msgstr "allocazione fallita per le definizioni"
+
+#: cairo/cairoFns.cpp:2462
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "famiglia di caratteri non trovata nel database dei caratteri di Windows"

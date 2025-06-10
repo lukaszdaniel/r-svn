@@ -133,9 +133,9 @@ checkAxisRange <- function(axis, value) {
     low <- value < standardAxisMin[axis]
     high <- value > standardAxisMax[axis] 
     if (any(low) || any(high)) {
-        warning("Axis value(s) out of range: ",
+        warning(gettext("Axis value(s) out of range: ", domain="R-grDevices"),
                 paste(paste0(axis[low|high], "=", value[low|high]),
-                      collapse="; "))
+                      collapse="; "), domain = NA)
     }
 }
 

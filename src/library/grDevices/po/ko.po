@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 16:31+0200\n"
+"POT-Creation-Date: 2025-06-10 16:48+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -1141,7 +1141,17 @@ msgstr "'%s'내에 유효하지 않은 문자열이 있습니다"
 msgid "invalid string in Cairo_Text"
 msgstr "'%s'내에 유효하지 않은 문자열이 있습니다"
 
-#: cairo/cairoFns.cpp:2376
+#: cairo/cairoFns.cpp:2375 cairo/cairoFns.cpp:2398
+#, fuzzy
+msgid "Font variations too long"
+msgstr "폰트 페밀리명이 너무 깁니다"
+
+#: cairo/cairoFns.cpp:2418
+#, fuzzy
+msgid "Failed to apply font variations"
+msgstr "폰트 리스트를 할당하는데 실패했습니다"
+
+#: cairo/cairoFns.cpp:2462
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "윈도우즈 폰트데이터베이스에서 찾을 수 없는 폰트페밀리입니다"

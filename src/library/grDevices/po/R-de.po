@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-10 16:39\n"
 "PO-Revision-Date: 2022-04-13 13:19+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -198,6 +198,23 @@ msgstr ""
 "Verfügbare Devices sind:\n"
 "%s"
 
+#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+#: R/glyph.R:0
+msgid "Axis names must 4 ASCII letters long"
+msgstr ""
+
+#. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Axis value(s) out of range:"
+msgstr "Index außerhalb des Bereichs"
+
+#. R/glyph.R: stop("Axis values must be numeric")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Axis values must be numeric"
+msgstr "RGB Matrix muss numerisch sein"
+
 #. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
 #: R/windows/windows.R:0
 msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
@@ -207,6 +224,11 @@ msgstr "Aufrufe wie '%s' sind unsicher und sollten durch '%s' ersetzt werden"
 #: R/convertColor.R:0
 msgid "Color space converter: %s"
 msgstr "Farbraumkonverter: %s"
+
+#. R/glyph.R: warning("Custom axis names must be upper case")
+#: R/glyph.R:0
+msgid "Custom axis names must be upper case"
+msgstr ""
 
 #. R/glyph.R: warning("Font family longer than 200 will be truncated")
 #: R/glyph.R:0
@@ -347,6 +369,12 @@ msgstr "Das ('Recommended') Paket \"KernSmooth\" muss installiert sein"
 msgid "NOT changing %s"
 msgstr "andere NICHT %s"
 
+#. R/glyph.R: stop("No axes specified")
+#: R/glyph.R:0
+#, fuzzy
+msgid "No axes specified"
+msgstr "keine 'z' Matrix angegeben"
+
 #. R/postscript.R: stop("Not a CID font")
 #: R/postscript.R:0
 msgid "Not a CID font"
@@ -361,6 +389,11 @@ msgstr ""
 #: R/convertColor.R:0
 msgid "Reference white: %s"
 msgstr "Referenz-Weiß: %s"
+
+#. R/glyph.R: warning("Registered axis names must be lower case")
+#: R/glyph.R:0
+msgid "Registered axis names must be lower case"
+msgstr ""
 
 #. R/glyph.R: stop("There must be anchors named \"left\" and \"bottom\"")
 #: R/glyph.R:0

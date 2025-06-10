@@ -154,12 +154,15 @@ mclapply <- function(X, FUN, ..., mc.preschedule = TRUE, mc.set.seed = TRUE,
             if (nores > 0)
                 warning(sprintf(ngettext(nores,
                                          "%d parallel function call did not deliver a result",
-                                         "%d parallel function calls did not deliver results"),
+                                         "%d parallel function calls did not deliver results",
+                                        domain = "R-parallel"),
                                 nores),
                         domain = NA)
         }
         if (has.errors)
-            warning(gettextf("%d function calls resulted in an error",
+            warning(sprintf(ngettext(has.errors, "%d function call resulted in an error",
+                                                 "%d function calls resulted in an error",
+                                                 domain = "R-parallel"),
                              has.errors), domain = NA)
         return(res)
     }

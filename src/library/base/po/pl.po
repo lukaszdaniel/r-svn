@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 17:01+0200\n"
-"PO-Revision-Date: 2025-06-08 17:08+0200\n"
+"POT-Creation-Date: 2025-06-10 16:33+0200\n"
+"PO-Revision-Date: 2025-06-10 16:50+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -3535,6 +3535,10 @@ msgstr "Wypełnienie zignorowano (urządzenie dołącza ścieżkę)"
 #: src/main/engine.cpp:3801
 msgid "FillStroke ignored (device is appending path)"
 msgstr "FillStroke zignorowano (urządzenie dołącza ścieżkę)"
+
+#: src/main/engine.cpp:3904 src/main/engine.cpp:3922 src/main/engine.cpp:3939
+msgid "Index out of bounds"
+msgstr "indeks jest poza granicami"
 
 #: src/main/envir.cpp:155 src/main/envir.cpp:169
 #, c-format

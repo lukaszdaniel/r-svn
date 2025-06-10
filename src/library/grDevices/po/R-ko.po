@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-10 16:39\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -200,6 +200,23 @@ msgstr ""
 "사용가능한 장치들은 다음과 같습니다:\n"
 "%s"
 
+#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+#: R/glyph.R:0
+msgid "Axis names must 4 ASCII letters long"
+msgstr ""
+
+#. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Axis value(s) out of range:"
+msgstr "첨자가 범위외에 있습니다"
+
+#. R/glyph.R: stop("Axis values must be numeric")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Axis values must be numeric"
+msgstr "rgb 행렬은 반드시 수치형이어야 합니다"
+
 #. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
 #: R/windows/windows.R:0
 msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
@@ -209,6 +226,11 @@ msgstr ""
 #: R/convertColor.R:0
 msgid "Color space converter: %s"
 msgstr "컬러 스페이스 컨버터: %s"
+
+#. R/glyph.R: warning("Custom axis names must be upper case")
+#: R/glyph.R:0
+msgid "Custom axis names must be upper case"
+msgstr ""
 
 #. R/glyph.R: warning("Font family longer than 200 will be truncated")
 #: R/glyph.R:0
@@ -352,6 +374,12 @@ msgstr ""
 msgid "NOT changing %s"
 msgstr "%s를 변경하지 않습니다"
 
+#. R/glyph.R: stop("No axes specified")
+#: R/glyph.R:0
+#, fuzzy
+msgid "No axes specified"
+msgstr "'z'라고 지정된 행렬이 없습니다"
+
 #. R/postscript.R: stop("Not a CID font")
 #: R/postscript.R:0
 msgid "Not a CID font"
@@ -366,6 +394,11 @@ msgstr ""
 #: R/convertColor.R:0
 msgid "Reference white: %s"
 msgstr "기준 백색: %s"
+
+#. R/glyph.R: warning("Registered axis names must be lower case")
+#: R/glyph.R:0
+msgid "Registered axis names must be lower case"
+msgstr ""
 
 #. R/glyph.R: stop("There must be anchors named \"left\" and \"bottom\"")
 #: R/glyph.R:0

@@ -2343,8 +2343,7 @@ static void applyFontVar(cairo_font_face_t *cairo_face,
                          SEXP font, int numVar,
                          pX11Desc xd)
 {
-    int i;
-    int success = 0;
+    bool success = false;
     cairo_scaled_font_t *scaled_font;
     cairo_matrix_t font_matrix; 
     cairo_matrix_t ctm;
@@ -2360,7 +2359,7 @@ static void applyFontVar(cairo_font_face_t *cairo_face,
             const char* format1 = "%s=%f";
             const char* format2 = ",%s=%f";
             const char* format;
-            for (i = 0; i < numVar; i++) {
+            for (int i = 0; i < numVar; i++) {
                 if (i == 0) {
                     format = format1;
                 } else {
@@ -2384,7 +2383,7 @@ static void applyFontVar(cairo_font_face_t *cairo_face,
             const char* format1 = "%s";
             const char* format2 = ",%s";
             const char* format;
-            for (i = 0; i < numVar; i++) {
+            for (int i = 0; i < numVar; i++) {
                 if (i == 0) {
                     format = format1;
                 } else {
@@ -2412,7 +2411,7 @@ static void applyFontVar(cairo_font_face_t *cairo_face,
             cairo_scaled_font_status(scaled_font) == CAIRO_STATUS_SUCCESS) {
             cairo_set_scaled_font(xd->cc, scaled_font);
             cairo_scaled_font_destroy(scaled_font);
-            success = 1;
+            success = true;
         } 
     }
     if (!success) {

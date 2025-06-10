@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-09 16:00\n"
 "PO-Revision-Date: 2022-10-14 10:34+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -17,11 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
-
-#. R/unix/mclapply.R: gettextf("%d function calls resulted in an error", has.errors)
-#: R/unix/mclapply.R:0
-msgid "%d function calls resulted in an error"
-msgstr "%d chiamate di funzione apparse in un errore"
 
 #. R/clusterApply.R: stop("'X' must have named dimnames")
 #: R/clusterApply.R:0
@@ -183,7 +178,15 @@ msgstr "tipo di cluster sconosciuto"
 msgid "zero-length inputs cannot be mixed with those of non-zero length"
 msgstr "i valori di input di lunghezza zero non possono essere mischiati con quelli di lunghezza differente"
 
-#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results")
+#. R/unix/mclapply.R: ngettext(has.errors, "%d function call resulted in an error",     "%d function calls resulted in an error", domain = "R-parallel")
+#: R/unix/mclapply.R:0
+#, fuzzy
+msgid "%d function call resulted in an error"
+msgid_plural "%d function calls resulted in an error"
+msgstr[0] "%d chiamate di funzione apparse in un errore"
+msgstr[1] "%d chiamate di funzione apparse in un errore"
+
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results", domain = "R-parallel")
 #: R/unix/mclapply.R:0
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"

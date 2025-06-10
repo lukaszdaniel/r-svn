@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.14.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-09 16:00\n"
 "PO-Revision-Date: 2025-04-01 17:01+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -19,11 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-
-#. R/unix/mclapply.R: gettextf("%d function calls resulted in an error", has.errors)
-#: R/unix/mclapply.R:0
-msgid "%d function calls resulted in an error"
-msgstr "вызовы функции %d привели к ошибке"
 
 #. R/clusterApply.R: stop("'X' must have named dimnames")
 #: R/clusterApply.R:0
@@ -185,7 +180,16 @@ msgstr "неизвестный тип кластера"
 msgid "zero-length inputs cannot be mixed with those of non-zero length"
 msgstr "нулевой ввод нельзя смешивать с ненулевым"
 
-#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results")
+#. R/unix/mclapply.R: ngettext(has.errors, "%d function call resulted in an error",     "%d function calls resulted in an error", domain = "R-parallel")
+#: R/unix/mclapply.R:0
+#, fuzzy
+msgid "%d function call resulted in an error"
+msgid_plural "%d function calls resulted in an error"
+msgstr[0] "вызовы функции %d привели к ошибке"
+msgstr[1] "вызовы функции %d привели к ошибке"
+msgstr[2] "вызовы функции %d привели к ошибке"
+
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results", domain = "R-parallel")
 #: R/unix/mclapply.R:0
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"

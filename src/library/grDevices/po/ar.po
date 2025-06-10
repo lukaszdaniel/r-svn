@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 16:31+0200\n"
+"POT-Creation-Date: 2025-06-10 16:48+0200\n"
 "PO-Revision-Date: 2024-03-23 12:08+0000\n"
 "Last-Translator: Worood Alswaji <woroodalswaji@gmail.com>\n"
 "Language-Team: none\n"
@@ -1117,7 +1117,15 @@ msgstr ""
 msgid "invalid string in Cairo_Text"
 msgstr ""
 
-#: cairo/cairoFns.cpp:2376
+#: cairo/cairoFns.cpp:2375 cairo/cairoFns.cpp:2398
+msgid "Font variations too long"
+msgstr ""
+
+#: cairo/cairoFns.cpp:2418
+msgid "Failed to apply font variations"
+msgstr ""
+
+#: cairo/cairoFns.cpp:2462
 msgid "Font file not found; matching font family and face"
 msgstr ""
 

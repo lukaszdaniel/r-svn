@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 16:31+0200\n"
+"POT-Creation-Date: 2025-06-10 16:48+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1148,7 +1148,17 @@ msgstr "'%s' 中に不正な文字列"
 msgid "invalid string in Cairo_Text"
 msgstr "'%s' 中に不正な文字列"
 
-#: cairo/cairoFns.cpp:2376
+#: cairo/cairoFns.cpp:2375 cairo/cairoFns.cpp:2398
+#, fuzzy
+msgid "Font variations too long"
+msgstr "フォントファミリーの名前が長すぎます"
+
+#: cairo/cairoFns.cpp:2418
+#, fuzzy
+msgid "Failed to apply font variations"
+msgstr "フォントリストを割り当てることができませんでした"
+
+#: cairo/cairoFns.cpp:2462
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "Quartz フォントのデータベースにフォントファミリが見付かりません"

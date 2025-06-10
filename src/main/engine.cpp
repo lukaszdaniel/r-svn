@@ -3901,7 +3901,7 @@ const char* R_GE_glyphFontVarAxis(SEXP glyphFont, int index) {
      */
     n = LENGTH(fontVar);
     if (index < 0 || index >= n) {
-        error(_("Index out of bounds"));
+        error("%s", _("Index out of bounds"));
     }
     PROTECT(names = getAttrib(fontVar, R_NamesSymbol));
     result = CHAR(STRING_ELT(names, index));
@@ -3919,7 +3919,7 @@ double R_GE_glyphFontVarValue(SEXP glyphFont, int index) {
      */
     n = LENGTH(fontVar);
     if (index < 0 || index >= n) {
-        error(_("Index out of bounds"));
+        error("%s", _("Index out of bounds"));
     }
     result = REAL(fontVar)[index];
     UNPROTECT(1);
@@ -3936,7 +3936,7 @@ const char* R_GE_glyphFontVarFormatted(SEXP glyphFont, int index) {
      */
     n = LENGTH(fontVar);
     if (index < 0 || index >= n) {
-        error(_("Index out of bounds"));
+        error("%s", _("Index out of bounds"));
     }
     PROTECT(varFormatted = getAttrib(fontVar, install("formatted")));
     result = CHAR(STRING_ELT(varFormatted, index));

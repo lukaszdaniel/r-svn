@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parallel 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-09 16:00\n"
 "PO-Revision-Date: 2020-11-29 16:30+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -11,11 +11,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-#. R/unix/mclapply.R: gettextf("%d function calls resulted in an error", has.errors)
-#: R/unix/mclapply.R:0
-msgid "%d function calls resulted in an error"
-msgstr "%d funkcijos kreipiniai sukėlė klaidą"
 
 #. R/clusterApply.R: stop("'X' must have named dimnames")
 #: R/clusterApply.R:0
@@ -177,7 +172,16 @@ msgstr "nežinomas klasterio tipas"
 msgid "zero-length inputs cannot be mixed with those of non-zero length"
 msgstr "nulinio ilgio įvestys negali būti sumaišytos su nenulinio ilgio įvestimis"
 
-#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results")
+#. R/unix/mclapply.R: ngettext(has.errors, "%d function call resulted in an error",     "%d function calls resulted in an error", domain = "R-parallel")
+#: R/unix/mclapply.R:0
+#, fuzzy
+msgid "%d function call resulted in an error"
+msgid_plural "%d function calls resulted in an error"
+msgstr[0] "%d funkcijos kreipiniai sukėlė klaidą"
+msgstr[1] "%d funkcijos kreipiniai sukėlė klaidą"
+msgstr[2] "%d funkcijos kreipiniai sukėlė klaidą"
+
+#. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results", domain = "R-parallel")
 #: R/unix/mclapply.R:0
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"

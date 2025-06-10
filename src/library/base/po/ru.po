@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 17:01+0200\n"
+"POT-Creation-Date: 2025-06-10 16:33+0200\n"
 "PO-Revision-Date: 2025-04-01 16:44+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -3738,6 +3738,11 @@ msgstr "Игнорирую 'Fill' (устройство дописывает к�
 #: src/main/engine.cpp:3801
 msgid "FillStroke ignored (device is appending path)"
 msgstr "Игнорирую 'FillStroke' (устройство дописывает контур)"
+
+#: src/main/engine.cpp:3904 src/main/engine.cpp:3922 src/main/engine.cpp:3939
+#, fuzzy
+msgid "Index out of bounds"
+msgstr "подгруппа выходит за пределы"
 
 #: src/main/envir.cpp:155 src/main/envir.cpp:169
 #, c-format

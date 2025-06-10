@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 16:31+0200\n"
+"POT-Creation-Date: 2025-06-10 16:48+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1147,7 +1147,17 @@ msgstr "'%s'里的字符串无效"
 msgid "invalid string in Cairo_Text"
 msgstr "'%s'里的字符串无效"
 
-#: cairo/cairoFns.cpp:2376
+#: cairo/cairoFns.cpp:2375 cairo/cairoFns.cpp:2398
+#, fuzzy
+msgid "Font variations too long"
+msgstr "字体家族名称太长"
+
+#: cairo/cairoFns.cpp:2418
+#, fuzzy
+msgid "Failed to apply font variations"
+msgstr "无法分配字体列"
+
+#: cairo/cairoFns.cpp:2462
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "石英字体数据库里找不到字体系列"

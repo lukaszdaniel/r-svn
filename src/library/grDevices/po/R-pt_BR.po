@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-10 16:39\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -197,6 +197,23 @@ msgid ""
 "%s"
 msgstr "dispositivos disponíveis são %s"
 
+#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+#: R/glyph.R:0
+msgid "Axis names must 4 ASCII letters long"
+msgstr ""
+
+#. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Axis value(s) out of range:"
+msgstr "subscrito fora da faixa"
+
+#. R/glyph.R: stop("Axis values must be numeric")
+#: R/glyph.R:0
+#, fuzzy
+msgid "Axis values must be numeric"
+msgstr "matriz rgb deve ser numérica"
+
 #. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
 #: R/windows/windows.R:0
 msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
@@ -207,6 +224,11 @@ msgstr ""
 #, fuzzy
 msgid "Color space converter: %s"
 msgstr "Conversor de espaço de cor:"
+
+#. R/glyph.R: warning("Custom axis names must be upper case")
+#: R/glyph.R:0
+msgid "Custom axis names must be upper case"
+msgstr ""
 
 #. R/glyph.R: warning("Font family longer than 200 will be truncated")
 #: R/glyph.R:0
@@ -352,6 +374,12 @@ msgstr ""
 msgid "NOT changing %s"
 msgstr "NOT mudando"
 
+#. R/glyph.R: stop("No axes specified")
+#: R/glyph.R:0
+#, fuzzy
+msgid "No axes specified"
+msgstr "nenhuma matriz 'z' especificada"
+
 #. R/postscript.R: stop("Not a CID font")
 #: R/postscript.R:0
 msgid "Not a CID font"
@@ -367,6 +395,11 @@ msgstr ""
 #, fuzzy
 msgid "Reference white: %s"
 msgstr "Referencia branca:"
+
+#. R/glyph.R: warning("Registered axis names must be lower case")
+#: R/glyph.R:0
+msgid "Registered axis names must be lower case"
+msgstr ""
 
 #. R/glyph.R: stop("There must be anchors named \"left\" and \"bottom\"")
 #: R/glyph.R:0

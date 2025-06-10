@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 16:31+0200\n"
+"POT-Creation-Date: 2025-06-10 16:48+0200\n"
 "PO-Revision-Date: 2025-04-01 16:55+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -1142,7 +1142,17 @@ msgstr "неправильная строка в '%s'"
 msgid "invalid string in Cairo_Text"
 msgstr "неправильная строка в '%s'"
 
-#: cairo/cairoFns.cpp:2376
+#: cairo/cairoFns.cpp:2375 cairo/cairoFns.cpp:2398
+#, fuzzy
+msgid "Font variations too long"
+msgstr "слишком длинное имя семейства шрифтов"
+
+#: cairo/cairoFns.cpp:2418
+#, fuzzy
+msgid "Failed to apply font variations"
+msgstr "не могу разместить определения"
+
+#: cairo/cairoFns.cpp:2462
 msgid "Font file not found; matching font family and face"
 msgstr "Файл шрифта не найден; ищу по семейству и названию шрифта"
 

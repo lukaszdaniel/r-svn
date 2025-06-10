@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: base 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 17:01+0200\n"
+"POT-Creation-Date: 2025-06-10 16:33+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -3736,6 +3736,11 @@ msgstr ""
 #: src/main/engine.cpp:3801
 msgid "FillStroke ignored (device is appending path)"
 msgstr ""
+
+#: src/main/engine.cpp:3904 src/main/engine.cpp:3922 src/main/engine.cpp:3939
+#, fuzzy
+msgid "Index out of bounds"
+msgstr "indeksas nepatenka į rėžius"
 
 #: src/main/envir.cpp:155 src/main/envir.cpp:169
 #, c-format

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-10 16:39\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,6 +263,27 @@ msgid "Available devices are:\n%s"
 msgstr ""
 
 
+#: R/glyph.R: 0
+#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+
+msgid "Axis names must 4 ASCII letters long"
+msgstr ""
+
+
+#: R/glyph.R: 0
+#. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")
+
+msgid "Axis value(s) out of range:"
+msgstr ""
+
+
+#: R/glyph.R: 0
+#. R/glyph.R: stop("Axis values must be numeric")
+
+msgid "Axis values must be numeric"
+msgstr ""
+
+
 #: R/windows/windows.R: 0
 #. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
 
@@ -274,6 +295,13 @@ msgstr ""
 #. R/convertColor.R: gettextf("Color space converter: %s", x$name)
 
 msgid "Color space converter: %s"
+msgstr ""
+
+
+#: R/glyph.R: 0
+#. R/glyph.R: warning("Custom axis names must be upper case")
+
+msgid "Custom axis names must be upper case"
 msgstr ""
 
 
@@ -456,6 +484,13 @@ msgid "NOT changing %s"
 msgstr ""
 
 
+#: R/glyph.R: 0
+#. R/glyph.R: stop("No axes specified")
+
+msgid "No axes specified"
+msgstr ""
+
+
 #: R/postscript.R: 0
 #. R/postscript.R: stop("Not a CID font")
 
@@ -474,6 +509,13 @@ msgstr ""
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white)
 
 msgid "Reference white: %s"
+msgstr ""
+
+
+#: R/glyph.R: 0
+#. R/glyph.R: warning("Registered axis names must be lower case")
+
+msgid "Registered axis names must be lower case"
 msgstr ""
 
 

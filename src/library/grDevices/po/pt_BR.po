@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 16:31+0200\n"
+"POT-Creation-Date: 2025-06-10 16:48+0200\n"
 "PO-Revision-Date: 2023-10-19 19:25+0000\n"
 "Last-Translator: Renata Hirota <re.hirota@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1154,7 +1154,16 @@ msgstr "cadeia de caracteres inválida em '%s'"
 msgid "invalid string in Cairo_Text"
 msgstr "cadeia de caracteres inválida em '%s'"
 
-#: cairo/cairoFns.cpp:2376
+#: cairo/cairoFns.cpp:2375 cairo/cairoFns.cpp:2398
+msgid "Font variations too long"
+msgstr ""
+
+#: cairo/cairoFns.cpp:2418
+#, fuzzy
+msgid "Failed to apply font variations"
+msgstr "falha ao alocar lista de fonte"
+
+#: cairo/cairoFns.cpp:2462
 msgid "Font file not found; matching font family and face"
 msgstr ""
 
