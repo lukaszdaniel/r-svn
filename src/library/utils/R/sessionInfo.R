@@ -122,8 +122,9 @@ sessionInfo <- function(package = NULL)
     ## no need to re-encode given what we extract.
     pkgDesc <- lapply(package, packageDescription, encoding = NA)
     if(length(package) == 0) stop("no valid packages were specified")
-    basePkgs <- sapply(pkgDesc,
-                       function(x) !is.null(x$Priority) && x$Priority=="base")
+    basePkgs <- vapply(pkgDesc,
+                       function(x) !is.null(x$Priority) && x$Priority=="base",
+                       NA)
     ## Hmm, see tools:::.get_standard_package_names()$base
     z$basePkgs <- package[basePkgs]
     if(any(!basePkgs)){
@@ -156,9 +157,9 @@ print.sessionInfo <- function(x, locale = TRUE, tzone = locale,
 			      ...)
 {
     mkLabel <- function(L, n) {
-        vers <- sapply(L[[n]], function(x) x[["Version"]])
-        pkg <-  sapply(L[[n]], function(x) x[["Package"]])
-        paste(pkg, vers, sep = "_")
+        paste(vapply(L[[n]], `[[`, "", "Package"),
+              vapply(L[[n]], `[[`, "", "Version"),
+              sep = "_")
     }
 
     cat(x$R.version$version.string, "\n", sep = "")

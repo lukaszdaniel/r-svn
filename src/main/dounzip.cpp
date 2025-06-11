@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
  *  file dounzip.c
- *  first part Copyright (C) 2002-2023  The R Core Team
+ *  first part Copyright (C) 2002-2025  The R Core Team
  *  second part Copyright (C) 1998-2010 Gilles Vollant
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -40,6 +40,7 @@
 #endif
 #include <cerrno>
 #include <cstdlib>
+#include <cstring>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
@@ -139,7 +140,7 @@ static int extract_one(unzFile uf, const char *const dest, const char * const fi
 
     err = unzOpenCurrentFile(uf);
     if (err != UNZ_OK) return err;
-    if (strlen(dest) > R_PATH_MAX - 1) return 1;
+    if (strlen(dest) > R_PATH_MAX - 2) return 1;
     strcpy(outname, dest);
     strcat(outname, FILESEP);
     unz_file_info64 file_info;
@@ -148,9 +149,8 @@ static int extract_one(unzFile uf, const char *const dest, const char * const fi
 				  sizeof(filename_inzip), NULL, 0, NULL, 0);
     fn = filename_inzip; /* might be UTF-8 ... */
     if (filename) {
-	if (strlen(dest) + strlen(filename) > R_PATH_MAX - 2) return 1;
-	strncpy(fn0, filename, R_PATH_MAX);
-	fn0[R_PATH_MAX - 1] = '\0';
+	if (strlen(filename) > R_PATH_MAX - 1) return 1;
+	strcpy(fn0, filename);
 	fn = fn0;
     }
 #ifdef Win32
@@ -160,12 +160,14 @@ static int extract_one(unzFile uf, const char *const dest, const char * const fi
 	p = Rf_strrchr(fn, '/');
 	if (p) fn = p+1;
     }
+    if (strlen(outname) + strlen(fn) > R_PATH_MAX - 1) return 1;
     strcat(outname, fn);
 
 #ifdef Win32
     R_fixslash(outname); /* ensure path separator is / */
 #endif
     p = outname + strlen(outname) - 1;
+    bool warned = FALSE;
     if (*p == '/') { /* Directories are stored with trailing slash */
 	if (!junk) {
 	    *p = '\0';
@@ -173,10 +175,20 @@ static int extract_one(unzFile uf, const char *const dest, const char * const fi
 		/* make parents as required: have already checked dest exists */
 		pp = outname + strlen(dest) + 1;
 		while((p = Rf_strchr(pp, '/'))) {
-		    strcpy(dirs, outname);
-		    dirs[p - outname] = '\0';
-		    if (!R_FileExists(dirs)) R_mkdir(dirs);
-		    pp = p + 1;
+		    if (p - pp == 2 && !strncmp(pp, "..", 2)) {
+			if (!warned) {
+			    warning(
+			      _("skipped \"../\" path component(s) in '%s'"),
+			      fn);
+			    warned = true;
+			}
+			memmove(pp, p + 1, strlen(p + 1) + 1);
+		    } else {
+			strcpy(dirs, outname);
+			dirs[p - outname] = '\0';
+			if (!R_FileExists(dirs)) R_mkdir(dirs);
+			pp = p + 1;
+		    }
 		}
 		err = R_mkdir(outname);
 	    }
@@ -185,11 +197,21 @@ static int extract_one(unzFile uf, const char *const dest, const char * const fi
 	/* make parents as required: have already checked dest exists */
 	pp = outname + strlen(dest) + 1;
 	while((p = Rf_strchr(pp, '/'))) {
-	    strcpy(dirs, outname);
-	    dirs[p - outname] = '\0';
-	    /* Rprintf("dirs is %s\n", dirs); */
-	    if (!R_FileExists(dirs)) R_mkdir(dirs);
-	    pp = p + 1;
+	    if (p - pp == 2 && !strncmp(pp, "..", 2)) {
+		if (!warned) {
+		    warning(
+		      _("skipped \"../\" path component(s) in '%s'"),
+		      fn);
+		    warned = true;
+		}
+		memmove(pp, p + 1, strlen(p + 1) + 1);
+	    } else {
+		strcpy(dirs, outname);
+		dirs[p - outname] = '\0';
+		/* Rprintf("dirs is %s\n", dirs); */
+		if (!R_FileExists(dirs)) R_mkdir(dirs);
+		pp = p + 1;
+	    }
 	}
 	/* Rprintf("extracting %s\n", outname); */
 	if (!overwrite && R_FileExists(outname)) {
