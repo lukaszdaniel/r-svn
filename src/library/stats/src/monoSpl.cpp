@@ -35,7 +35,7 @@
 void monoFC_mod(double *m, double S[], int n)
 {
     if(n < 2)
-	error("%s", _("n must be at least two"));
+	error(_("'%s' must be at least %d"), "n", 2);
 
     for (int k = 0; k < n - 1; k++) {
 	/* modify both (m[k] & m[k+1]) if needed : */
@@ -71,7 +71,7 @@ SEXP monoFC_m(SEXP m, SEXP Sx)
 	    error( _("'%s' must be numeric"), "m");
 	val = PROTECT(duplicate(m));
     }
-    if(n < 2) error("%s", _("length(m) must be at least two"));
+    if(n < 2) error(_("'%s' must be at least %d"), "length(m)", 2);
     if(!isReal(Sx) || LENGTH(Sx) != n-1)
 	error(_("'%s' must be numeric vector one shorter than m[]"), "Sx");
 

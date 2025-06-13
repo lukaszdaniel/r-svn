@@ -1347,7 +1347,7 @@ bool X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	char buf[R_PATH_MAX]; /* allow for pageno formats */
 	FILE *fp;
 	if(strlen(dsp+5) >= R_PATH_MAX)
-	    error("%s", _("filename too long in png() call"));
+	    error(_("filename too long in '%s' call"), "png()");
 	strcpy(xd->filename, dsp+5);
 	snprintf(buf, R_PATH_MAX, dsp+5, 1); /* page 1 to start */
 	if (!(fp = R_fopen(R_ExpandFileName(buf), "w"))) {
@@ -1373,7 +1373,7 @@ bool X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	pp = strchr(tmp, ':'); *pp='\0';
 	xd->quality = atoi(dsp+6);
 	if(strlen(pp+1) >= R_PATH_MAX)
-	    error("%s", _("filename too long in jpeg() call"));
+	    error(_("filename too long in '%s' call"), "jpen()");
 	strcpy(xd->filename, pp+1);
 	snprintf(buf, R_PATH_MAX, pp+1, 1); /* page 1 to start */
 	if (!(fp = R_fopen(R_ExpandFileName(buf), "w"))) {
@@ -1397,7 +1397,7 @@ bool X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	pp = strchr(tmp, ':'); *pp='\0';
 	xd->quality = atoi(dsp+6);
 	if(strlen(pp+1) >= R_PATH_MAX)
-	    error("%s", _("filename too long in tiff() call"));
+	    error(_("filename too long in '%s' call"), "tiff()");
 	strcpy(xd->filename, pp+1);
 	xd->fp = NULL;
 	type = TIFF;
@@ -1409,7 +1409,7 @@ bool X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	char buf[R_PATH_MAX]; /* allow for pageno formats */
 	FILE *fp;
 	if(strlen(dsp+5) >= R_PATH_MAX)
-	    error("%s", _("filename too long in bmp() call"));
+	    error(_("filename too long in '%s' call"), "bmp()");
 	strcpy(xd->filename, dsp+5);
 	snprintf(buf, R_PATH_MAX, dsp+5, 1); /* page 1 to start */
 	if (!(fp = R_fopen(R_ExpandFileName(buf), "w"))) {

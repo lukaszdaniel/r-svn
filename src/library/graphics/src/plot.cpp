@@ -879,7 +879,7 @@ SEXP C_axis(SEXP args)
 
     /* Optional argument: "hadj" */
     if (length(CAR(args)) != 1)
-	error("%s", _("'hadj' must be of length one"));
+	error(_("'%s' must be of length 1"), "hadj");
     double hadj = asReal(CAR(args));
     args = CDR(args);
 
@@ -891,7 +891,7 @@ SEXP C_axis(SEXP args)
 
     /* Optional argument: "gap.axis" */
     if (length(CAR(args)) != 1)
-	error("%s", _("'gap.axis' must be of length one"));
+	error(_("'%s' must be of length 1"), "gap.axis");
     double gap = asReal(CAR(args));
 
     /* Now we process all the remaining inline par values:
@@ -3750,7 +3750,7 @@ SEXP C_symbols(SEXP args)
     p = PROTECT(coerceVector(CAR(args), REALSXP)); args = CDR(args);
     CheckSymbolPar(p, &nr, &nc);
     if (LENGTH(x) != nr || LENGTH(y) != nr)
-	error("%s", _("x/y/parameter length mismatch"));
+	error("%s", _("x/y parameter length mismatch"));
 
     inches = asReal(CAR(args)); args = CDR(args);
     if (!R_FINITE(inches) || inches < 0)

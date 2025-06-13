@@ -1238,7 +1238,7 @@ static void ExtractVars(SEXP formula)
 	InstallVar(formula);
 	Return;
     }
-    error("%s", _("invalid model formula in ExtractVars"));
+    error(_("invalid model formula in '%s'"), "ExtractVars");
 }
 
 
@@ -1673,7 +1673,7 @@ static SEXP EncodeVars(SEXP formula)
 #endif
 	return CONS(term, R_NilValue);
     }
-    error("%s", _("invalid model formula in EncodeVars"));
+    error(_("invalid model formula in '%s'"), "EncodeVars");
     return R_NilValue;/*NOTREACHED*/
 }
 

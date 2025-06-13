@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: 2011-12-01 20:24+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -345,7 +345,7 @@ msgstr ""
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, fuzzy, c-format
-msgid "'%s' must be of length one"
+msgid "'%s' must be of length 1"
 msgstr "'m' skal være en liste"
 
 #: isoreg.cpp:57
@@ -564,9 +564,9 @@ msgstr "ugyldig værdi for lag.max"
 msgid "invalid power in formula"
 msgstr "ugyldig værdi for lag.max"
 
-#: model.cpp:1241
-#, fuzzy
-msgid "invalid model formula in ExtractVars"
+#: model.cpp:1241 model.cpp:1676
+#, fuzzy, c-format
+msgid "invalid model formula in '%s'"
 msgstr "ugyldig værdi for lag.max"
 
 #: model.cpp:1284
@@ -578,11 +578,6 @@ msgstr ""
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr ""
-
-#: model.cpp:1676
-#, fuzzy
-msgid "invalid model formula in EncodeVars"
-msgstr "ugyldig værdi for lag.max"
 
 #: model.cpp:1752
 msgid "argument is not a valid model"
@@ -606,30 +601,24 @@ msgstr ""
 msgid "'.' in formula and no 'data' argument"
 msgstr ""
 
-#: monoSpl.cpp:38
-msgid "n must be at least two"
-msgstr "n skal mindst være to"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, fuzzy, c-format
+msgid "'%s' must be at least %d"
+msgstr "'m' skal være en liste"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "Argument m skal være numerisk"
 
-#: monoSpl.cpp:74
-msgid "length(m) must be at least two"
-msgstr "length(m) skal være mindst to"
-
 #: monoSpl.cpp:76
 #, fuzzy, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "Argument Sx skal være en numerisk vektor en kortere end m[]"
 
-#: nls.cpp:101
-msgid "'control' must be a list"
-msgstr "'control' skal være en liste"
-
-#: nls.cpp:103
-msgid "'m' must be a list"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, fuzzy, c-format
+msgid "'%s' must be a list"
 msgstr "'m' skal være en liste"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
@@ -756,7 +745,7 @@ msgid "attempt to minimize non-function"
 msgstr ""
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "approx(): ugyldig f-værdi"
@@ -921,10 +910,6 @@ msgstr "fejlkode for starma %d"
 msgid "forkal error code %d"
 msgstr "fejlkode for forkal %d"
 
-#: pacf.cpp:460
-msgid "invalid value of lag.max"
-msgstr "ugyldig værdi for lag.max"
-
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -1002,10 +987,6 @@ msgstr "fcn lavede tilstand %d, længde %d - ønsket tilstand %d, længde %d"
 msgid "invalid type for eval_check_store"
 msgstr "ugyldig type for eval_check_store"
 
-#: port.cpp:576
-msgid "m must be a list"
-msgstr "m skal være en liste"
-
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' og 'upperb' skal være numeriske vektorer"
@@ -1081,6 +1062,29 @@ msgstr "manglende værdi i sidste %d observationer"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr ""
+
+#~ msgid "n must be at least two"
+#~ msgstr "n skal mindst være to"
+
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) skal være mindst to"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "ugyldig værdi for lag.max"
+
+#, fuzzy
+#~ msgid "invalid model formula in ExtractVars"
+#~ msgstr "ugyldig værdi for lag.max"
+
+#, fuzzy
+#~ msgid "invalid model formula in EncodeVars"
+#~ msgstr "ugyldig værdi for lag.max"
+
+#~ msgid "'control' must be a list"
+#~ msgstr "'control' skal være en liste"
+
+#~ msgid "m must be a list"
+#~ msgstr "m skal være en liste"
 
 #, fuzzy
 #~ msgid "'x' is a factor"

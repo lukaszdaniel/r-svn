@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-11 18:28\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -239,24 +239,16 @@ msgstr "'lib=\"%s\"' 不可寫"
 msgid "'list' must be a character vector naming R objects"
 msgstr "'list' 必須是為 R 物件取名稱的字元向量"
 
-#. R/unix/sysutils.R: warning("'memory.limit()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.limit()' is Windows-specific"
-msgstr "'memory.limit()' 只在 Windows 上有用"
-
+#. R/unix/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 #, fuzzy
 msgid "'memory.limit()' is no longer supported"
 msgstr "'memory.limit()' 只在 Windows 上有用"
 
-#. R/unix/sysutils.R: warning("'memory.size()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.size()' is Windows-specific"
-msgstr "'memory.size()' 只在 Windows 上有用"
-
+#. R/unix/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 #, fuzzy
 msgid "'memory.size()' is no longer supported"
 msgstr "'memory.size()' 只在 Windows 上有用"
@@ -2315,6 +2307,12 @@ msgstr[0] "正在使用 %s 這個程式套件，因此不會被安裝"
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' 只在 Windows 上有用"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()' 只在 Windows 上有用"
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"

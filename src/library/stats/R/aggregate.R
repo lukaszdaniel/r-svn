@@ -148,7 +148,7 @@ aggregate.formula <-
 function(x, data, FUN, ..., subset, na.action = na.omit)
 {
     if(missing(x))
-        stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+        stop("argument 'x' is missing -- it has been renamed from 'formula'")
     if(!inherits(x, "formula")) stop("argument 'x' must be a formula")
     if(length(x) != 3L)
         stop("formula 'x' must have both left and right hand sides")

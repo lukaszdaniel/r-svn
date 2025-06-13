@@ -98,9 +98,9 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     bool doTrace = asLogical(doTraceArg);
 
     if(!isNewList(control))
-	error("%s", _("'control' must be a list"));
+	error(_("'%s' must be a list"), "control");
     if(!isNewList(m))
-	error("%s", _("'m' must be a list"));
+	error(_("'%s' must be a list"), "m");
 
     SEXP tmp, conv;
     PROTECT(tmp = getAttrib(control, R_NamesSymbol));

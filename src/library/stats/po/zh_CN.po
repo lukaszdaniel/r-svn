@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: 2023-09-18 03:05+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -346,7 +346,7 @@ msgstr "'zeroin'函数值无效"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, fuzzy, c-format
-msgid "'%s' must be of length one"
+msgid "'%s' must be of length 1"
 msgstr "'m'的值必需是列表"
 
 #: isoreg.cpp:57
@@ -560,9 +560,10 @@ msgstr "模型公式无效"
 msgid "invalid power in formula"
 msgstr "公式里的幂无效"
 
-#: model.cpp:1241
-msgid "invalid model formula in ExtractVars"
-msgstr "ExtractVars里的模型公式无效"
+#: model.cpp:1241 model.cpp:1676
+#, fuzzy, c-format
+msgid "invalid model formula in '%s'"
+msgstr "模型公式无效"
 
 #: model.cpp:1284
 #, c-format
@@ -573,10 +574,6 @@ msgstr ""
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "在数据框里用'.'时不能有重复的名称’%s'"
-
-#: model.cpp:1676
-msgid "invalid model formula in EncodeVars"
-msgstr "EncodeVars中的模型公式无效"
 
 #: model.cpp:1752
 msgid "argument is not a valid model"
@@ -599,30 +596,24 @@ msgstr ""
 msgid "'.' in formula and no 'data' argument"
 msgstr "公式里有'.'，而没有'data'这一参数"
 
-#: monoSpl.cpp:38
-msgid "n must be at least two"
-msgstr "n至少需要是二"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, fuzzy, c-format
+msgid "'%s' must be at least %d"
+msgstr "'m'的值必需是列表"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "参数m必需为数值"
 
-#: monoSpl.cpp:74
-msgid "length(m) must be at least two"
-msgstr "length(m)的值必需为二"
-
 #: monoSpl.cpp:76
 #, fuzzy, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "参数Sx必需是长度比m[]小一的数值向量"
 
-#: nls.cpp:101
-msgid "'control' must be a list"
-msgstr "'control'的值必需为列表"
-
-#: nls.cpp:103
-msgid "'m' must be a list"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, fuzzy, c-format
+msgid "'%s' must be a list"
 msgstr "'m'的值必需是列表"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
@@ -749,7 +740,7 @@ msgid "attempt to minimize non-function"
 msgstr "不能将非函数最小化"
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s'值无效"
@@ -913,10 +904,6 @@ msgstr "starma出错编号%d"
 msgid "forkal error code %d"
 msgstr "forkal出错编号%d"
 
-#: pacf.cpp:460
-msgid "invalid value of lag.max"
-msgstr "lag.max的值无效"
-
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -995,10 +982,6 @@ msgstr "fcn运行结果的模式为%d , 长度为%d - 但正确的模式应该�
 msgid "invalid type for eval_check_store"
 msgstr "eval_check_store的类型无效"
 
-#: port.cpp:576
-msgid "m must be a list"
-msgstr "m必需为列表"
-
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb'和'upperb'必需为数字向量"
@@ -1071,6 +1054,27 @@ msgstr "最后%d个观测值里出现了缺省值"
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "这不应该发生"
+
+#~ msgid "n must be at least two"
+#~ msgstr "n至少需要是二"
+
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m)的值必需为二"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "lag.max的值无效"
+
+#~ msgid "invalid model formula in ExtractVars"
+#~ msgstr "ExtractVars里的模型公式无效"
+
+#~ msgid "invalid model formula in EncodeVars"
+#~ msgstr "EncodeVars中的模型公式无效"
+
+#~ msgid "'control' must be a list"
+#~ msgstr "'control'的值必需为列表"
+
+#~ msgid "m must be a list"
+#~ msgstr "m必需为列表"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf被换成最大的正值"

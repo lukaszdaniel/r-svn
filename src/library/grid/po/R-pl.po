@@ -1013,7 +1013,7 @@ msgstr[2] "niepoprawne nazwy okien ekranu"
 #~ msgstr "brak argumentów gdzie oczekiwano przynajmniej jednego"
 
 #~ msgid "no string supplied for 'strwidth/height' unit"
-#~ msgstr "nie dostarczono łańcuchów dla jednostki 'strwidth/height'"
+#~ msgstr "nie dostarczono tekstów dla jednostki 'strwidth/height'"
 
 #~ msgid "non-NULL value supplied for plain unit"
 #~ msgstr "wartość inna niż NULL dostarczona dla zwykłej jednostki"

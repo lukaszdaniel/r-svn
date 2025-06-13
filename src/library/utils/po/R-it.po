@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-11 18:28\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -237,23 +237,15 @@ msgstr "'lib = \"%s\"' non è scrivibile"
 msgid "'list' must be a character vector naming R objects"
 msgstr "'list' dev'essere un vettore di caratteri con riferimenti ad oggetti R"
 
-#. R/unix/sysutils.R: warning("'memory.limit()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.limit()' is Windows-specific"
-msgstr "'memory.limit()' è specifico per Windows"
-
+#. R/unix/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 msgid "'memory.limit()' is no longer supported"
 msgstr "'memory.limit()' non è più supportato"
 
-#. R/unix/sysutils.R: warning("'memory.size()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.size()' is Windows-specific"
-msgstr "'memory.size()' è specifico per Windows"
-
+#. R/unix/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 msgid "'memory.size()' is no longer supported"
 msgstr "'memory.size()' non è più supportato"
 
@@ -2336,6 +2328,12 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "il pacchetto %s non è disponibile %s"
 msgstr[1] "i pacchetti %s non sono disponibili %s"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' è specifico per Windows"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()' è specifico per Windows"
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"

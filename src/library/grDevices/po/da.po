@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2023-04-22 22:07+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -82,10 +82,11 @@ msgstr ""
 msgid "invalid hcl color"
 msgstr ""
 
-#: colors.cpp:401
-#, fuzzy
-msgid "invalid value of 'maxColorValue'"
-msgstr "ugyldig værdi for '%s'"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, fuzzy, c-format
+msgid "invalid '%s' value"
+msgstr "ugyldigt 'fil'-argument"
 
 #: colors.cpp:429
 #, fuzzy
@@ -315,10 +316,12 @@ msgstr "Ugyldig linjegering"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "forsøg på at bruge ugyldig skrifttype %d erstattet af skrifttype 1"
 
-#: devPS.cpp:3219 devPS.cpp:6832
-#, c-format
-msgid "filename too long in %s()"
-msgstr "filnavn er for langt i %s()"
+# 83%
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "filnavn er for langt i %s()-kald"
 
 #: devPS.cpp:3225 devPS.cpp:6838
 #, c-format
@@ -901,12 +904,6 @@ msgstr "Kan ikke åbne fil '%s' for skrivning"
 msgid "unable to open printer"
 msgstr "Kan ikke allokere raster-billede"
 
-# 83%
-#: devWindows.cpp:1797
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "filnavn er for langt i %s()-kald"
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -923,21 +920,9 @@ msgstr "Kan ikke allokere bitmap"
 msgid "unable to open file '%s' for writing"
 msgstr "Kan ikke åbne fil '%s' for skrivning"
 
-#: devWindows.cpp:1834
-msgid "filename too long in jpeg() call"
-msgstr "filnavn for langt i jpeg()-kald"
-
-#: devWindows.cpp:1864
-msgid "filename too long in tiff() call"
-msgstr "filnavn for langt i tiff()-kald"
-
 #: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
-msgstr "filnavn for langt i win.metafile()-kald"
-
-#: devWindows.cpp:1896
-msgid "filename too long in win.metafile() call"
 msgstr "filnavn for langt i win.metafile()-kald"
 
 #: devWindows.cpp:1907
@@ -1032,12 +1017,6 @@ msgstr "Umulig at åbne "
 msgid "invalid 'width' or 'height'"
 msgstr "ugyldig 'bredde' eller 'højde'"
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "ugyldig værdi for '%s'"
-
 #: devWindows.cpp:3921
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
@@ -1126,11 +1105,6 @@ msgstr "kan ikke åbne fil '%s'"
 msgid "invalid '%s' argument"
 msgstr "ugyldigt 'fil'-argument"
 
-#: cairo/cairoBM.cpp:622
-#, fuzzy, c-format
-msgid "invalid '%s' value"
-msgstr "ugyldigt 'fil'-argument"
-
 # 85%
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
@@ -1207,6 +1181,27 @@ msgstr "kunne ikke allokere skriftliste"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
+
+#, fuzzy
+#~ msgid "invalid value of 'maxColorValue'"
+#~ msgstr "ugyldig værdi for '%s'"
+
+#, c-format
+#~ msgid "filename too long in %s()"
+#~ msgstr "filnavn er for langt i %s()"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "filnavn for langt i jpeg()-kald"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "filnavn for langt i tiff()-kald"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "filnavn for langt i win.metafile()-kald"
+
+#, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "ugyldig værdi for '%s'"
 
 #, fuzzy
 #~ msgid "ran out of colors in xfig()"

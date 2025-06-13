@@ -407,13 +407,13 @@ msgstr "'file' musi być wartością NULL lub już otwartym połączeniem"
 #. R/sink.R: stop("'file' must be NULL, a connection or a character string")
 #: R/sink.R:0
 msgid "'file' must be NULL, a connection or a character string"
-msgstr "'file' musi być wartością NULL, połączeniem lub łańcuchem tekstowym"
+msgstr "'file' musi być wartością NULL, połączeniem lub ciągiem znaków"
 
 #. R/dcf.R: stop("'file' must be a character string or connection")
 #. R/scan.R: stop("'file' must be a character string or connection")
 #: R/dcf.R:0 R/scan.R:0
 msgid "'file' must be a character string or connection"
-msgstr "argument 'file' musi być łańcuchem tekstowym lub połączeniem"
+msgstr "argument 'file' musi być ciągiem znaków lub połączeniem"
 
 #. R/load.R: stop("'file' must be specified")
 #: R/load.R:0
@@ -931,7 +931,7 @@ msgstr "opcja -l bez wartości"
 #. R/rm.R: stop("... must contain names or character strings")
 #: R/rm.R:0
 msgid "... must contain names or character strings"
-msgstr "'...' musi zawierać nazwy lub łańcuchy tekstowe"
+msgstr "'...' musi zawierać nazwy lub teksty"
 
 #. R/eigen.R: stop("0 x 0 matrix")
 #: R/eigen.R:0
@@ -1551,7 +1551,7 @@ msgstr "nie można wywołać 'xtfrm` na ramce danych"
 #. R/datetime.R: stop("character string is not in a standard unambiguous format")
 #: R/dates.R:0 R/datetime.R:0
 msgid "character string is not in a standard unambiguous format"
-msgstr "łańcuch tekstowy nie jest w standardowym jednoznacznym formacie"
+msgstr "ciąg znaków nie jest w standardowym jednoznacznym formacie"
 
 #. R/format.R: warning("class of 'x' was discarded")
 #: R/format.R:0
@@ -1836,7 +1836,7 @@ msgstr "niepoprawne '(to - from)/by'"
 #. R/datetime.R: stop("invalid 'by' string")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid 'by' string"
-msgstr "błędny łańcuch 'by'"
+msgstr "błędny argument 'by'"
 
 #. R/locales.R: stop("invalid 'category' argument")
 #: R/locales.R:0
@@ -2085,7 +2085,7 @@ msgstr "poszukiwanie pliku DLL dla wywołania rodzimej procedury, ale brak plik�
 #. R/RNG.R: stop("malformed version string")
 #: R/RNG.R:0
 msgid "malformed version string"
-msgstr "zniekształcony łańcuch tekstowy wersji"
+msgstr "zniekształcony tekst wersji"
 
 #. R/grep.R: stop("match distance components must be non-negative")
 #: R/grep.R:0
@@ -3218,7 +3218,7 @@ msgstr[1] "nie ma pakietów o nazwach"
 msgstr[2] "nie ma pakietów o nazwach"
 
 #~ msgid "invalid string for 'by'"
-#~ msgstr "błędny łańcuch 'by'"
+#~ msgstr "błędny argument 'by'"
 
 #~ msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
 #~ msgstr "W czystych ustawieniach regionalnych C, bez wymuszania ustawień regionalnych; ewentualnie użyj 'force = TRUE'?"
@@ -3320,7 +3320,7 @@ msgstr[2] "nie ma pakietów o nazwach"
 #~ msgstr "pakiet %s nie posiada przestrzeni nazw i powinien zostać zainstalowany ponownie"
 
 #~ msgid "argument 'object' must deparse to a single character string"
-#~ msgstr "argument 'object' musi być konwertowalny do pojedynczego łańcucha tekstowego"
+#~ msgstr "argument 'object' musi być konwertowalny do pojedynczego ciągu znaków"
 
 #~ msgid "'%s' is not an exported object from 'namespace:%s'"
 #~ msgstr "'%s' nie jest eksportowanym obiektem z 'namespace:%s'"

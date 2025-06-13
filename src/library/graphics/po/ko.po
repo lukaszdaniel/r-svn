@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -107,7 +107,8 @@ msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "유효한 par(\"bty\") = '%c'가 아니므로 그려질 box()가 없습니다"
 
 #: graphics.cpp:3201
-msgid "invalid argument to GBox"
+#, fuzzy, c-format
+msgid "invalid argument to '%s'"
 msgstr "유효하지 않은 인자가 GBox에 전달되었습니다"
 
 #: graphics.cpp:3408
@@ -281,8 +282,9 @@ msgstr "인자의 수가 너무 적습니다"
 msgid "invalid axis number %d"
 msgstr "유효하지 않은 축 번호 %d입니다"
 
-#: plot.cpp:882
-msgid "'hadj' must be of length one"
+#: plot.cpp:882 plot.cpp:894
+#, fuzzy, c-format
+msgid "'%s' must be of length 1"
 msgstr "'hadj'의 길이는 반드시 1이어야 합니다"
 
 #: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455
@@ -291,11 +293,6 @@ msgstr "'hadj'의 길이는 반드시 1이어야 합니다"
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "길이가 0인 '%s'가 지정되었습니다"
-
-#: plot.cpp:894
-#, fuzzy
-msgid "'gap.axis' must be of length one"
-msgstr "'hadj'의 길이는 반드시 1이어야 합니다"
 
 #: plot.cpp:924
 msgid "'gap.axis' must be NA or a finite number"
@@ -440,7 +437,8 @@ msgid "invalid symbol coordinates"
 msgstr "심볼의 좌표가 유효하지 않습니다"
 
 #: plot.cpp:3753
-msgid "x/y/parameter length mismatch"
+#, fuzzy
+msgid "x/y parameter length mismatch"
 msgstr "x/y/파라미터의 길이가 일치하지 않습니다"
 
 #: plot.cpp:3772
@@ -637,6 +635,10 @@ msgstr "벡터 '%s'는 지원되지 않는 길이를 가지고 있습니다"
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'gap.axis' must be of length one"
+#~ msgstr "'hadj'의 길이는 반드시 1이어야 합니다"
 
 #~ msgid "'ylab' must be a character vector of length 1"
 #~ msgstr "'ylab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"

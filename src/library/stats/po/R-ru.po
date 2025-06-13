@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2025-04-01 17:03+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -1631,9 +1631,10 @@ msgstr "аргумент 'subset' будет пропущен"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "аргумент 'x' не может быть конвертирован в класс %s"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+#, fuzzy
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "пропущен аргумент 'x' -- он был переименован из 'formula'"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1925,11 +1926,6 @@ msgstr "упорядочивание колонок дендрограммы д�
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
 msgstr "колонки 'контраст.obj' должен определять контраст (с нулевой суммой)"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-msgstr "колонки 'контраст.obj' должны определять контраст (с нулевой суммой)"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
 #: R/ks.test.R:0
@@ -4403,6 +4399,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "использую %d/%d строку из комбинированного выравнивания"
 msgstr[1] "использую %d/%d строки из комбинированного выравнивания"
 msgstr[2] "использую %d/%d строк из комбинированного выравнивания"
+
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "колонки 'контраст.obj' должны определять контраст (с нулевой суммой)"
 
 #~ msgid ","
 #~ msgstr ","

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2022-04-13 12:31+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -107,7 +107,8 @@ msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "ungültiger par(\"bty\") = '%c': keine box() gezeichnet"
 
 #: graphics.cpp:3201
-msgid "invalid argument to GBox"
+#, fuzzy, c-format
+msgid "invalid argument to '%s'"
 msgstr "ungültiges Argument für GBox"
 
 #: graphics.cpp:3408
@@ -281,8 +282,9 @@ msgstr "zu wenig Argumente"
 msgid "invalid axis number %d"
 msgstr "ungültige Achsennummer %d"
 
-#: plot.cpp:882
-msgid "'hadj' must be of length one"
+#: plot.cpp:882 plot.cpp:894
+#, fuzzy, c-format
+msgid "'%s' must be of length 1"
 msgstr "'hadj' muss Länge 1 haben"
 
 #: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455
@@ -291,10 +293,6 @@ msgstr "'hadj' muss Länge 1 haben"
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "'%s' mit Länge 0 angegeben"
-
-#: plot.cpp:894
-msgid "'gap.axis' must be of length one"
-msgstr "'gap.axis' muss Länge 1 haben"
 
 #: plot.cpp:924
 msgid "'gap.axis' must be NA or a finite number"
@@ -440,7 +438,8 @@ msgid "invalid symbol coordinates"
 msgstr "ungültige Symbolkoordinaten"
 
 #: plot.cpp:3753
-msgid "x/y/parameter length mismatch"
+#, fuzzy
+msgid "x/y parameter length mismatch"
 msgstr "x/y/Parameter haben unterschiedliche Längen"
 
 #: plot.cpp:3772
@@ -639,6 +638,9 @@ msgstr "langer Vektor '%s' wird nicht unterstützt"
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "'gap.axis' must be of length one"
+#~ msgstr "'gap.axis' muss Länge 1 haben"
 
 #~ msgid "'ylab' must be a character vector of length 1"
 #~ msgstr "'ylab' muss ein Zeichenkettenvektor der Länge 1 sein"

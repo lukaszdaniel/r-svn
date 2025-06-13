@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: 2023-08-31 20:16+0000\n"
 "Last-Translator: Ayush Bipin Patel <ayush.ap58@gmail.com>\n"
 "Language-Team: none\n"
@@ -343,7 +343,7 @@ msgstr ""
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
-msgid "'%s' must be of length one"
+msgid "'%s' must be of length 1"
 msgstr ""
 
 #: isoreg.cpp:57
@@ -553,8 +553,9 @@ msgstr ""
 msgid "invalid power in formula"
 msgstr ""
 
-#: model.cpp:1241
-msgid "invalid model formula in ExtractVars"
+#: model.cpp:1241 model.cpp:1676
+#, c-format
+msgid "invalid model formula in '%s'"
 msgstr ""
 
 #: model.cpp:1284
@@ -565,10 +566,6 @@ msgstr ""
 #: model.cpp:1610
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
-msgstr ""
-
-#: model.cpp:1676
-msgid "invalid model formula in EncodeVars"
 msgstr ""
 
 #: model.cpp:1752
@@ -592,8 +589,9 @@ msgstr ""
 msgid "'.' in formula and no 'data' argument"
 msgstr ""
 
-#: monoSpl.cpp:38
-msgid "n must be at least two"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, c-format
+msgid "'%s' must be at least %d"
 msgstr ""
 
 #: monoSpl.cpp:71
@@ -601,21 +599,14 @@ msgstr ""
 msgid "'%s' must be numeric"
 msgstr ""
 
-#: monoSpl.cpp:74
-msgid "length(m) must be at least two"
-msgstr ""
-
 #: monoSpl.cpp:76
 #, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr ""
 
-#: nls.cpp:101
-msgid "'control' must be a list"
-msgstr ""
-
-#: nls.cpp:103
-msgid "'m' must be a list"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, c-format
+msgid "'%s' must be a list"
 msgstr ""
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
@@ -741,7 +732,7 @@ msgid "attempt to minimize non-function"
 msgstr ""
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "अमान्य %s संख्या"
@@ -901,10 +892,6 @@ msgstr ""
 msgid "forkal error code %d"
 msgstr ""
 
-#: pacf.cpp:460
-msgid "invalid value of lag.max"
-msgstr ""
-
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -978,10 +965,6 @@ msgstr ""
 
 #: port.cpp:555
 msgid "invalid type for eval_check_store"
-msgstr ""
-
-#: port.cpp:576
-msgid "m must be a list"
 msgstr ""
 
 #: port.cpp:596

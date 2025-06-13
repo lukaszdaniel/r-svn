@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1649,10 +1649,10 @@ msgstr "인자 'subset'은 사용되지 않을 것입니다"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "인수 'x'를 클래스  %s로 강제형변환을 할 수 없습니다"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
 #, fuzzy
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "인자 'x'는 반드시 수치형이어야 합니다"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1951,11 +1951,6 @@ msgstr ""
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
 msgstr "'contrast.obj'의 열들은 반드시 합계가 0이 되도록 contrast를 정의 해야합니다"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-msgstr "'contrast.obj'의 열들은 반드시 합이 0이 되도록 constrast를 정의해야 합니다"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
 #: R/ks.test.R:0
@@ -4430,6 +4425,9 @@ msgstr[0] "upper scope는 모델에는 포함되어 있지 않은 항 %s를 가�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
+
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "'contrast.obj'의 열들은 반드시 합이 0이 되도록 constrast를 정의해야 합니다"
 
 #~ msgid ","
 #~ msgstr ","

@@ -122,7 +122,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     fn = CAR(args); args = CDR(args);
     if (!isString(fn))
-	error("%s", _("invalid argument to edit()"));
+	error(_("invalid argument to '%s'"), "edit()");
 
     if (LENGTH(STRING_ELT(fn, 0)) > 0) {
 	const char *ss = translateCharFP(STRING_ELT(fn, 0));

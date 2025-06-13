@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -84,9 +84,11 @@ msgstr "hsv 顏色無效"
 msgid "invalid hcl color"
 msgstr "hcl 顏色無效"
 
-#: colors.cpp:401
-msgid "invalid value of 'maxColorValue'"
-msgstr "'maxColorValue' 的值無效"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, c-format
+msgid "invalid '%s' value"
+msgstr "'%s' 值 無效"
 
 #: colors.cpp:429
 msgid "invalid 'names' vector"
@@ -303,10 +305,11 @@ msgstr "行斜接發生錯誤"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "不能用 %d 這個字型，代用一字型"
 
-#: devPS.cpp:3219 devPS.cpp:6832
-#, c-format
-msgid "filename too long in %s()"
-msgstr "%s() 裡的文字名稱太長"
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "%s()調用裡的文字名稱太長"
 
 #: devPS.cpp:3225 devPS.cpp:6838
 #, c-format
@@ -861,11 +864,6 @@ msgstr "無法開啟 '%s' 文字寫入"
 msgid "unable to open printer"
 msgstr "無法指派光柵圖像"
 
-#: devWindows.cpp:1797
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "%s()調用裡的文字名稱太長"
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -881,21 +879,9 @@ msgstr "無法指派 bitmap"
 msgid "unable to open file '%s' for writing"
 msgstr "無法開啟 '%s' 文字寫入"
 
-#: devWindows.cpp:1834
-msgid "filename too long in jpeg() call"
-msgstr "jpeg()調用中的文字名稱太長"
-
-#: devWindows.cpp:1864
-msgid "filename too long in tiff() call"
-msgstr "tiff()調用裡的文字名稱太長"
-
 #: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
-msgstr "win.metafile()調用裡的文字名稱太長"
-
-#: devWindows.cpp:1896
-msgid "filename too long in win.metafile() call"
 msgstr "win.metafile()調用裡的文字名稱太長"
 
 #: devWindows.cpp:1907
@@ -986,12 +972,6 @@ msgstr "無法開啟 "
 msgid "invalid 'width' or 'height'"
 msgstr "'width' 或 'height' 的值無效"
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "'%s' 的值無效"
-
 #: devWindows.cpp:3921
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
@@ -1078,11 +1058,6 @@ msgstr "無法開啟 '%s' 檔案"
 msgid "invalid '%s' argument"
 msgstr "'%s' 引數無效"
 
-#: cairo/cairoBM.cpp:622
-#, c-format
-msgid "invalid '%s' value"
-msgstr "'%s' 值 無效"
-
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
@@ -1157,6 +1132,26 @@ msgstr "無法指派字型列"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "Windows 字型資料庫裡不明的字型系列"
+
+#~ msgid "invalid value of 'maxColorValue'"
+#~ msgstr "'maxColorValue' 的值無效"
+
+#, c-format
+#~ msgid "filename too long in %s()"
+#~ msgstr "%s() 裡的文字名稱太長"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "jpeg()調用中的文字名稱太長"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "tiff()調用裡的文字名稱太長"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "win.metafile()調用裡的文字名稱太長"
+
+#, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "'%s' 的值無效"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "xfig() 裡的顏色不夠用"

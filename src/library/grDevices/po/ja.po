@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -84,9 +84,11 @@ msgstr "hsv カラーが不正です"
 msgid "invalid hcl color"
 msgstr "hcl カラーが不正です"
 
-#: colors.cpp:401
-msgid "invalid value of 'maxColorValue'"
-msgstr "'maxColorValue' の値が不正です"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, c-format
+msgid "invalid '%s' value"
+msgstr "'%s' の値が不正です"
 
 #: colors.cpp:429
 msgid "invalid 'names' vector"
@@ -303,10 +305,11 @@ msgstr "線分のマイターリミットの指定が不正です"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "不正なフォント %d を使おうとしましたが、フォント 1 で置き換えました"
 
-#: devPS.cpp:3219 devPS.cpp:6832
-#, c-format
-msgid "filename too long in %s()"
-msgstr "%s() 中のファイル名が長すぎます"
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "呼出し %s() 中に長すぎるファイル名"
 
 #: devPS.cpp:3225 devPS.cpp:6838
 #, c-format
@@ -864,11 +867,6 @@ msgstr "ファイル '%s' を書込み用に開くことができません"
 msgid "unable to open printer"
 msgstr "ラスター画像を割り当てられません"
 
-#: devWindows.cpp:1797
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "呼出し %s() 中に長すぎるファイル名"
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -884,21 +882,9 @@ msgstr "ビットマップを割り当てられません"
 msgid "unable to open file '%s' for writing"
 msgstr "ファイル '%s' を書込み用に開くことができません"
 
-#: devWindows.cpp:1834
-msgid "filename too long in jpeg() call"
-msgstr "呼出し jpeg() 中に長すぎるファイル名"
-
-#: devWindows.cpp:1864
-msgid "filename too long in tiff() call"
-msgstr "呼出し tiff() 中に長すぎるファイル名"
-
 #: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
-msgstr "呼出し win.metafile() 中に長すぎるファイル名"
-
-#: devWindows.cpp:1896
-msgid "filename too long in win.metafile() call"
 msgstr "呼出し win.metafile() 中に長すぎるファイル名"
 
 #: devWindows.cpp:1907
@@ -989,12 +975,6 @@ msgstr "オープンできません "
 msgid "invalid 'width' or 'height'"
 msgstr "不正な幅か高さ"
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "'%s' の値が不正です"
-
 #: devWindows.cpp:3921
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
@@ -1083,11 +1063,6 @@ msgstr "ファイル '%s' を開けません"
 msgid "invalid '%s' argument"
 msgstr "引数 '%s' が不正です"
 
-#: cairo/cairoBM.cpp:622
-#, c-format
-msgid "invalid '%s' value"
-msgstr "'%s' の値が不正です"
-
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
@@ -1162,6 +1137,26 @@ msgstr "フォントリストを割り当てることができませんでした
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "Quartz フォントのデータベースにフォントファミリが見付かりません"
+
+#~ msgid "invalid value of 'maxColorValue'"
+#~ msgstr "'maxColorValue' の値が不正です"
+
+#, c-format
+#~ msgid "filename too long in %s()"
+#~ msgstr "%s() 中のファイル名が長すぎます"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "呼出し jpeg() 中に長すぎるファイル名"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "呼出し tiff() 中に長すぎるファイル名"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "呼出し win.metafile() 中に長すぎるファイル名"
+
+#, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "'%s' の値が不正です"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "xfig() 中の色数が多すぎました"

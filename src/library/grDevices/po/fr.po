@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -83,9 +83,11 @@ msgstr "couleur hsv incorrecte"
 msgid "invalid hcl color"
 msgstr "couleur hcl incorrecte"
 
-#: colors.cpp:401
-msgid "invalid value of 'maxColorValue'"
-msgstr "valeur incorrecte de 'maxColorValue'"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, c-format
+msgid "invalid '%s' value"
+msgstr "valeur '%s' incorrecte"
 
 #: colors.cpp:429
 msgid "invalid 'names' vector"
@@ -302,10 +304,11 @@ msgstr "mitre (jointure pointue) de ligne incorrecte"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "tentative d'utiliser la police incorrecte %d remplacée par police 1"
 
-#: devPS.cpp:3219 devPS.cpp:6832
-#, c-format
-msgid "filename too long in %s()"
-msgstr "nom de fichier trop long dans %s()"
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "nom de fichier trop long dans l'appel %s()"
 
 #: devPS.cpp:3225 devPS.cpp:6838
 #, c-format
@@ -873,11 +876,6 @@ msgstr "impossible d'ouvrir le fichier '%s' pour écriture"
 msgid "unable to open printer"
 msgstr "impossible d'allouer une image en mode pixel"
 
-#: devWindows.cpp:1797
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "nom de fichier trop long dans l'appel %s()"
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -893,21 +891,9 @@ msgstr "impossible d'allouer un bitmap"
 msgid "unable to open file '%s' for writing"
 msgstr "impossible d'ouvrir le fichier '%s' pour écriture"
 
-#: devWindows.cpp:1834
-msgid "filename too long in jpeg() call"
-msgstr "nom de fichier trop long dans l'appel à jpeg()"
-
-#: devWindows.cpp:1864
-msgid "filename too long in tiff() call"
-msgstr "nom de fichier trop long dans l'appel tiff()"
-
 #: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
-msgstr "nom de fichier trop long dans l'appel à win.metafile()"
-
-#: devWindows.cpp:1896
-msgid "filename too long in win.metafile() call"
 msgstr "nom de fichier trop long dans l'appel à win.metafile()"
 
 #: devWindows.cpp:1907
@@ -998,12 +984,6 @@ msgstr "Impossible d'ouvrir "
 msgid "invalid 'width' or 'height'"
 msgstr "'width' ou 'height' incorrecte"
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "valeur incorrecte de '%s'"
-
 #: devWindows.cpp:3921
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
@@ -1091,11 +1071,6 @@ msgstr "impossible d'ouvrir le fichier '%s'"
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
 
-#: cairo/cairoBM.cpp:622
-#, c-format
-msgid "invalid '%s' value"
-msgstr "valeur '%s' incorrecte"
-
 #: cairo/cairoBM.cpp:665
 #, c-format
 msgid "unable to start device '%s'"
@@ -1170,6 +1145,26 @@ msgstr "échec d'allocation de définitions"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "famille de police introuvable dans la base de données des polices Windows"
+
+#~ msgid "invalid value of 'maxColorValue'"
+#~ msgstr "valeur incorrecte de 'maxColorValue'"
+
+#, c-format
+#~ msgid "filename too long in %s()"
+#~ msgstr "nom de fichier trop long dans %s()"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nom de fichier trop long dans l'appel à jpeg()"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nom de fichier trop long dans l'appel tiff()"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "nom de fichier trop long dans l'appel à win.metafile()"
+
+#, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "valeur incorrecte de '%s'"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "trop de couleurs pour xfig()"

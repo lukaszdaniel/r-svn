@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-09 17:26+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -146,7 +146,8 @@ msgid "'units' must be character"
 msgstr "'units' 必須是字元"
 
 #: unit.cpp:1580
-msgid "'units' must be of length > 0"
+#, fuzzy, c-format
+msgid "'%s' must be of length > 0"
 msgstr "'units' 的長度必須大於零"
 
 #: unit.cpp:1591

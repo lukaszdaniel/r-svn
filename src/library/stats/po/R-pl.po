@@ -314,7 +314,7 @@ msgstr "argument 'family' nie został rozpoznany"
 #. R/ftable.R: stop("'file' must be a character string or connection")
 #: R/ftable.R:0
 msgid "'file' must be a character string or connection"
-msgstr "argument 'file' musi być łańcuchem tekstowym lub połączeniem"
+msgstr "argument 'file' musi być ciągiem znaków lub połączeniem"
 
 #. R/filter.R: stop("'filter' is longer than time series")
 #: R/filter.R:0
@@ -1225,7 +1225,7 @@ msgstr "argument 'y' musi być liczbą"
 #. R/ks.test.R: stop("'y' must be numeric or a function or a string naming a valid function")
 #: R/ks.test.R:0
 msgid "'y' must be numeric or a function or a string naming a valid function"
-msgstr "'y' musi być liczbą lub funkcją lub łańcuchem o poprawnej nazwie funkcji"
+msgstr "'y' musi być liczbą lub funkcją lub tekstem o poprawnej nazwie funkcji"
 
 #. R/smspline.R: stop("'y' must be numeric vector")
 #: R/smspline.R:0
@@ -1317,12 +1317,12 @@ msgstr "model 'Error()' jest osobliwy"
 #. R/add.R: gettextf("F test assumes 'quasi%s' family", fam)
 #: R/add.R:0
 msgid "F test assumes 'quasi%s' family"
-msgstr "Test Fishera zakłada rodzinę kwazi-%s"
+msgstr "Test Fishera zakłada rodzinę quasi-%s"
 
 #. R/add.R: gettextf("F test assumes quasi%s family", fam)
 #: R/add.R:0
 msgid "F test assumes quasi%s family"
-msgstr "Test Fishera zakłada rodzinę kwazi-%s"
+msgstr "Test Fishera zakłada rodzinę quasi-%s"
 
 #. R/arima.R: warning("MA part of model is not invertible")
 #. R/arma0.R: warning("MA part of model is not invertible")
@@ -1620,9 +1620,9 @@ msgstr "argument 'subset' zostanie zignornowany"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "argument 'x' nie może zostać przekształcony w klasę %s"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "brakuje argumentu 'x' -- został przemianowany z 'formula'"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1913,11 +1913,6 @@ msgstr "porządkowanie drzewa celu względem kolumn zwróciło indeks o niepopra
 #. R/aov.R: stop("columns of 'contrast.obj' must define a contrast (sum to zero)")
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
-msgstr "kolumny 'contrast.obj' muszą określać konstrast (sumować się do zera)"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 msgstr "kolumny 'contrast.obj' muszą określać kontrast (sumować się do zera)"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
@@ -4006,7 +4001,7 @@ msgstr "nieznane nazwy w kontroli:"
 #. R/stl.R: stop("unknown string value for s.window")
 #: R/stl.R:0
 msgid "unknown string value for s.window"
-msgstr "nieznana wartość łańcucha dla argumentu 's.window'"
+msgstr "nieznana wartość tekstu dla argumentu 's.window'"
 
 #. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
 #: R/nls.R:0
@@ -4430,10 +4425,10 @@ msgstr[2] "używanie %d/%d wierszy z połączonego dopasowania"
 #~ msgstr "link '%s' nie jest dostępny dla rodziny 'inverse.gaussian'; dostępne linki to %s"
 
 #~ msgid "link \"%s\" not available for quasibinomial family; available links are %s"
-#~ msgstr "link '%s' nie jest dostępny dla rodziny kwazi-Bernoulliego; dostępne linki to %s"
+#~ msgstr "link '%s' nie jest dostępny dla rodziny quasi-Bernoulliego; dostępne linki to %s"
 
 #~ msgid "link \"%s\" not available for quasipoisson family; available links are %s"
-#~ msgstr "link '%s' nie jest dostępny dla rodziny kwazi-Poissona; dostępne linki to %s"
+#~ msgstr "link '%s' nie jest dostępny dla rodziny quasi-Poissona; dostępne linki to %s"
 
 #~ msgid "'invalid value of 'k'"
 #~ msgstr "niepoprawna wartość 'k'"

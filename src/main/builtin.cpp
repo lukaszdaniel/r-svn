@@ -353,7 +353,7 @@ attribute_hidden SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if( !isEnvironment(enclos) &&
 	!isEnvironment((enclos = simple_as_environment(enclos))))
-	error("%s", _("'enclos' must be an environment"));
+	error(_("'%s' must be an environment"), "enclos");
 
     if( hash ) {
 	size = asInteger(CADR(args));

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:33+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -173,7 +173,7 @@ msgstr "在显示'%ls'时出了问题"
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
-#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:356 src/main/dounzip.cpp:363
+#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:378 src/main/dounzip.cpp:385
 #: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087
 #: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
@@ -325,7 +325,7 @@ msgstr "内存不足(rpipeOpen)"
 msgid "cannot open cmd `%s'"
 msgstr "无法打开URL'%s'"
 
-#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
+#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
 msgid "seek not enabled for this connection"
 msgstr "读取在这个链结无效"
 
@@ -396,7 +396,7 @@ msgstr "<错误: 无法将编码'%s'重新进行编码>\n"
 
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
 #: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:204
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:226
 #: src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
 #: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158
 #: src/main/serialize.cpp:3210 src/unix/system.cpp:432
@@ -1230,7 +1230,7 @@ msgstr "设'names'属性时类型(%s)出错"
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames'只能用于陈列"
 
-#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736
+#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' 必须是列表"
@@ -1450,8 +1450,10 @@ msgstr ""
 msgid "replacement object is not an environment"
 msgstr "替换对象不是环境"
 
-#: src/main/builtin.cpp:356
-msgid "'enclos' must be an environment"
+#: src/main/builtin.cpp:356 src/main/coerce.cpp:2740 src/main/engine.cpp:3225
+#: src/main/envir.cpp:1899 src/main/unique.cpp:1894
+#, fuzzy, c-format
+msgid "'%s' must be an environment"
 msgstr "'enclos'必需是环境"
 
 #: src/main/builtin.cpp:374 src/main/builtin.cpp:407
@@ -1695,13 +1697,13 @@ msgstr "strtrim()需要字符向量"
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
 #: src/main/dotcode.cpp:235 src/main/errors.cpp:1176 src/main/errors.cpp:1198
 #: src/main/errors.cpp:1316 src/main/errors.cpp:1323 src/main/errors.cpp:1586
-#: src/main/platform.cpp:3859 src/main/seq.cpp:268 src/main/seq.cpp:275
-#: src/main/seq.cpp:279 src/main/seq.cpp:389 src/main/seq.cpp:396
-#: src/main/seq.cpp:399 src/main/seq.cpp:401 src/main/seq.cpp:458
-#: src/main/seq.cpp:462 src/main/seq.cpp:466 src/main/sort.cpp:1580
-#: src/main/sort.cpp:1584 src/main/sort.cpp:1591 src/main/source.cpp:230
-#: src/main/sysutils.cpp:282 src/main/util.cpp:1215 src/main/util.cpp:1220
-#: src/main/util.cpp:1227 src/main/util.cpp:2611
+#: src/main/errors.cpp:2268 src/main/platform.cpp:3859 src/main/seq.cpp:268
+#: src/main/seq.cpp:275 src/main/seq.cpp:279 src/main/seq.cpp:389
+#: src/main/seq.cpp:396 src/main/seq.cpp:399 src/main/seq.cpp:401
+#: src/main/seq.cpp:458 src/main/seq.cpp:462 src/main/seq.cpp:466
+#: src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591
+#: src/main/source.cpp:230 src/main/sysutils.cpp:282 src/main/util.cpp:1215
+#: src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611
 #: src/modules/lapack/Lapack.cpp:1093 src/modules/X11/devX11.cpp:3231
 #: src/modules/X11/devX11.cpp:3258 src/modules/X11/devX11.cpp:3263
 #: src/modules/X11/devX11.cpp:3268 src/modules/X11/devX11.cpp:3278
@@ -1868,10 +1870,6 @@ msgstr ""
 #: src/main/coerce.cpp:2729
 msgid "'what' must be a function or character string"
 msgstr "“what”必须是函数或字符串"
-
-#: src/main/coerce.cpp:2740 src/main/unique.cpp:1894
-msgid "'envir' must be an environment"
-msgstr "'envir'必需是环境"
 
 #: src/main/coerce.cpp:2899
 msgid "invalid environment specified"
@@ -3412,105 +3410,110 @@ msgid ""
 "'%s'->'%s'\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:196
+#: src/main/dounzip.cpp:181 src/main/dounzip.cpp:203
+#, c-format
+msgid "skipped \"../\" path component(s) in '%s'"
+msgstr ""
+
+#: src/main/dounzip.cpp:218
 #, c-format
 msgid " not overwriting file '%s"
 msgstr " 无法覆盖'%s'文件"
 
-#: src/main/dounzip.cpp:284
+#: src/main/dounzip.cpp:306
 #, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "无法打开'%s'文件"
 
-#: src/main/dounzip.cpp:290
+#: src/main/dounzip.cpp:312
 #, c-format
 msgid "error %d with zipfile in unzGetGlobalInfo"
 msgstr ""
 
-#: src/main/dounzip.cpp:307
+#: src/main/dounzip.cpp:329
 #, c-format
 msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:325
+#: src/main/dounzip.cpp:347
 #, c-format
 msgid "error %d with zipfile in unzGoToNextFile\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:346
+#: src/main/dounzip.cpp:368
 msgid "invalid zip name argument"
 msgstr "zip名称参数无效"
 
-#: src/main/dounzip.cpp:349 src/main/dounzip.cpp:433
+#: src/main/dounzip.cpp:371 src/main/dounzip.cpp:455
 msgid "zip path is too long"
 msgstr "zip路径太长"
 
-#: src/main/dounzip.cpp:366
+#: src/main/dounzip.cpp:388
 msgid "'exdir' is too long"
 msgstr "'exdir'太长"
 
-#: src/main/dounzip.cpp:369
+#: src/main/dounzip.cpp:391
 msgid "'exdir' does not exist"
 msgstr "'exdir'不存在"
 
-#: src/main/dounzip.cpp:386
+#: src/main/dounzip.cpp:408
 msgid "requested file not found in the zip file"
 msgstr "你所要求的文件在zip文件中没有"
 
-#: src/main/dounzip.cpp:389
+#: src/main/dounzip.cpp:411
 msgid "zip file is corrupt"
 msgstr "zip文件有损坏"
 
-#: src/main/dounzip.cpp:392
+#: src/main/dounzip.cpp:414
 msgid "CRC error in zip file"
 msgstr "zip文件出了CRC错误"
 
-#: src/main/dounzip.cpp:396
+#: src/main/dounzip.cpp:418
 #, fuzzy
 msgid "internal error in 'unz' code"
 msgstr "'do_sys'里发生了内部错误"
 
-#: src/main/dounzip.cpp:399
+#: src/main/dounzip.cpp:421
 msgid "write error in extracting from zip file"
 msgstr "提取zip文件时出现了写入错误"
 
-#: src/main/dounzip.cpp:402
+#: src/main/dounzip.cpp:424
 #, c-format
 msgid "error %d in extracting from zip file"
 msgstr "从zip文件中提取%d时出了错"
 
-#: src/main/dounzip.cpp:428
+#: src/main/dounzip.cpp:450
 msgid "unz connections can only be opened for reading"
 msgstr "unz链结只可读不可写"
 
-#: src/main/dounzip.cpp:439
+#: src/main/dounzip.cpp:461
 msgid "invalid description of 'unz' connection"
 msgstr "'unz'链结的描述无效"
 
-#: src/main/dounzip.cpp:445
+#: src/main/dounzip.cpp:467
 #, c-format
 msgid "cannot open zip file '%s'"
 msgstr "无法打开zip文件'%s'"
 
-#: src/main/dounzip.cpp:449
+#: src/main/dounzip.cpp:471
 #, c-format
 msgid "cannot locate file '%s' in zip file '%s'"
 msgstr "在zip文件'%2$s'里找不到%1$s这个文件"
 
-#: src/main/dounzip.cpp:494
+#: src/main/dounzip.cpp:516
 msgid "printing not enabled for this connection"
 msgstr "此链结无法打印"
 
-#: src/main/dounzip.cpp:500
+#: src/main/dounzip.cpp:522
 msgid "write not enabled for this connection"
 msgstr "无法对这个链结写入"
 
-#: src/main/dounzip.cpp:517 src/main/dounzip.cpp:521 src/main/dounzip.cpp:528
-#: src/main/dounzip.cpp:546
+#: src/main/dounzip.cpp:539 src/main/dounzip.cpp:543 src/main/dounzip.cpp:550
+#: src/main/dounzip.cpp:568
 msgid "allocation of 'unz' connection failed"
 msgstr "分配'unz'链结失败"
 
-#: src/main/dounzip.cpp:2106
+#: src/main/dounzip.cpp:2128
 #, fuzzy
 msgid "possible truncation of >= 4GB file"
 msgstr "未能缩短文件"
@@ -3528,8 +3531,9 @@ msgid "vector types do not match in copyVector"
 msgstr ""
 
 #: src/main/edit.cpp:125
-msgid "invalid argument to edit()"
-msgstr "edit()参数无效"
+#, fuzzy, c-format
+msgid "invalid argument to '%s'"
+msgstr "'%s'参数无效"
 
 #: src/main/edit.cpp:136 src/main/saveload.cpp:2218
 msgid "unable to open file"
@@ -3697,14 +3701,6 @@ msgstr ""
 msgid "'expr' argument must be an expression"
 msgstr "'expr'参数必需是表达式"
 
-#: src/main/engine.cpp:3219
-msgid "'list' argument must be a list"
-msgstr "'list'参数必需是列表"
-
-#: src/main/engine.cpp:3225
-msgid "'env' argument must be an environment"
-msgstr "'env'参数必需是环境"
-
 #: src/main/engine.cpp:3324 src/main/engine.cpp:3332
 msgid "invalid multibyte char in pch=\"c\""
 msgstr "pch=\"c\"里的多字节字元无效"
@@ -3842,10 +3838,6 @@ msgstr "第一个参数必需是带名称的列表"
 #: src/main/envir.cpp:1896
 msgid "names(x) must be a character vector of the same length as x"
 msgstr "name(x)必需是长度与x一样的字符向量"
-
-#: src/main/envir.cpp:1899
-msgid "'envir' argument must be an environment"
-msgstr "'envir'参数必需是环境"
 
 #: src/main/envir.cpp:1926
 msgid "cannot remove variables from base namespace"
@@ -4256,11 +4248,6 @@ msgstr "不在try的上下文中"
 #: src/main/errors.cpp:2133
 msgid "error message must be a character string"
 msgstr "错误信息必需是字符串"
-
-#: src/main/errors.cpp:2268
-#, fuzzy, c-format
-msgid "invalid value of %s"
-msgstr "'%s'的值无效"
 
 #: src/main/errors.cpp:2453 src/main/errors.cpp:2548
 #, fuzzy
@@ -6411,8 +6398,9 @@ msgstr "读取文件目录%s时出了问题：%s"
 msgid "problem copying %s to %s: %s"
 msgstr "拷贝%s到%s出了问题: %s"
 
-#: src/main/platform.cpp:3264
-msgid "'mode' must be of length at least one"
+#: src/main/platform.cpp:3264 src/main/platform.cpp:3438
+#, fuzzy, c-format
+msgid "'%s' must be of length at least one"
 msgstr "'mode'的长度至少需要是一"
 
 #: src/main/platform.cpp:3303 src/main/platform.cpp:3330
@@ -6423,11 +6411,6 @@ msgstr "本平台操作系统支持不足"
 #, fuzzy, c-format
 msgid "possible truncation of value for element %d"
 msgstr "未能缩短文件"
-
-#: src/main/platform.cpp:3438
-#, fuzzy, c-format
-msgid "'%s' must be of length at least one"
-msgstr "'mode'的长度至少需要是一"
 
 #: src/main/platform.cpp:3527
 #, fuzzy, c-format
@@ -9689,8 +9672,10 @@ msgstr "在打开'%s'链结的时候X11 I/O出错"
 msgid "no png support in this version of R"
 msgstr "本R版本不支持png"
 
-#: src/modules/X11/devX11.cpp:1350
-msgid "filename too long in png() call"
+#: src/modules/X11/devX11.cpp:1350 src/modules/X11/devX11.cpp:1376
+#: src/modules/X11/devX11.cpp:1400 src/modules/X11/devX11.cpp:1412
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
 msgstr "png()调用时文件名称太长"
 
 #: src/modules/X11/devX11.cpp:1354
@@ -9702,10 +9687,6 @@ msgstr "无法打开PNG文件'%s'"
 msgid "no jpeg support in this version of R"
 msgstr "本R版本不支持jpeg"
 
-#: src/modules/X11/devX11.cpp:1376
-msgid "filename too long in jpeg() call"
-msgstr "jpeg()调用时文件名称太长"
-
 #: src/modules/X11/devX11.cpp:1380
 #, c-format
 msgid "could not open JPEG file '%s'"
@@ -9714,14 +9695,6 @@ msgstr "无法打开JPEG文件'%s'"
 #: src/modules/X11/devX11.cpp:1392
 msgid "no tiff support in this version of R"
 msgstr "本R版本不支持tiff"
-
-#: src/modules/X11/devX11.cpp:1400
-msgid "filename too long in tiff() call"
-msgstr "tiff()调用时文件名称太长"
-
-#: src/modules/X11/devX11.cpp:1412
-msgid "filename too long in bmp() call"
-msgstr "bmp()调用时文件名称太长"
 
 #: src/modules/X11/devX11.cpp:1416
 #, c-format
@@ -10219,6 +10192,37 @@ msgstr "无法载入X11模块"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "没有X11平台这一功能"
+
+#~ msgid "'envir' must be an environment"
+#~ msgstr "'envir'必需是环境"
+
+#~ msgid "invalid argument to edit()"
+#~ msgstr "edit()参数无效"
+
+#~ msgid "'env' argument must be an environment"
+#~ msgstr "'env'参数必需是环境"
+
+#~ msgid "'envir' argument must be an environment"
+#~ msgstr "'envir'参数必需是环境"
+
+#, fuzzy, c-format
+#~ msgid "invalid value of %s"
+#~ msgstr "'%s'的值无效"
+
+#~ msgid "'mode' must be of length at least one"
+#~ msgstr "'mode'的长度至少需要是一"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "jpeg()调用时文件名称太长"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "tiff()调用时文件名称太长"
+
+#~ msgid "filename too long in bmp() call"
+#~ msgstr "bmp()调用时文件名称太长"
+
+#~ msgid "'list' argument must be a list"
+#~ msgstr "'list'参数必需是列表"
 
 #, fuzzy
 #~ msgid "allocation error in R_compress1 with libdeflate"

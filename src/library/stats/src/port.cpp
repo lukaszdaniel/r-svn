@@ -573,7 +573,7 @@ SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 
     if (!isReal(d) || n < 1)
 	error("%s", _("'d' must be a nonempty numeric (double) vector"));
-    if(!isNewList(m)) error("%s", _("m must be a list"));
+    if(!isNewList(m)) error(_("'%s' must be a list"), "m");
 				/* Initialize parameter vector */
     getPars = PROTECT(lang1(getFunc(m, "getPars", "m")));
     eval_check_store(getPars, R_GlobalEnv, x);

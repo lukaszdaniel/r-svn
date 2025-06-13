@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-11 18:28\n"
 "PO-Revision-Date: 2025-05-23 21:21+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -74,7 +74,7 @@ msgstr "argument '%s' musi być niepustym tekstem"
 #. R/indices.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #: R/indices.R:0
 msgid "'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible"
-msgstr "plilk 'DESCRIPTION' posiada pole 'Encoding' i ponowne kodowanie nie jest możliwe"
+msgstr "plik 'DESCRIPTION' posiada pole 'Encoding' i ponowne kodowanie nie jest możliwe"
 
 #. R/combn.R: stop("'FUN' must be a function or NULL")
 #: R/combn.R:0
@@ -173,13 +173,13 @@ msgstr "argument 'file' musi być \"\" lub obiektem otwartego połączenia"
 #. R/capture.output.R: stop("'file' must be NULL, a character string or a connection")
 #: R/capture.output.R:0
 msgid "'file' must be NULL, a character string or a connection"
-msgstr "argument 'file' musi być wartością NULL, łańcuchem tekstowym lub połączeniem"
+msgstr "argument 'file' musi być wartością NULL, ciągiem znaków lub połączeniem"
 
 #. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/write.table.R: stop("'file' must be a character string or connection")
 #: R/readtable.R:0 R/write.table.R:0
 msgid "'file' must be a character string or connection"
-msgstr "argument 'file' musi być wartością NULL, łańcuchem tekstowym lub połączeniem"
+msgstr "argument 'file' musi być ciągiem znaków lub połączeniem"
 
 #. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
 #: R/zip.R:0
@@ -204,7 +204,7 @@ msgstr "'form' musi być dwustronną formułą"
 #. R/frametools.R: stop("'form' must be a two-sided formula with one term on each side")
 #: R/frametools.R:0
 msgid "'form' must be a two-sided formula with one term on each side"
-msgstr "'form' musi być dwustronną formułą z jednym członej po każdej stronie"
+msgstr "'form' musi być dwustronną formułą z jednym członem po każdej stronie"
 
 #. R/changedFiles.R: stop("'full.names' must be TRUE for multiple paths.")
 #: R/changedFiles.R:0
@@ -232,23 +232,15 @@ msgstr "'lib = \"%s\"' nie jest zapisywalna"
 msgid "'list' must be a character vector naming R objects"
 msgstr "argument 'list' musi być wektorem tekstowym nazywającym obiekty R"
 
-#. R/unix/sysutils.R: warning("'memory.limit()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.limit()' is Windows-specific"
-msgstr "funkcja 'memory.limit()' jest specyficzna dla systemów Windows"
-
+#. R/unix/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 msgid "'memory.limit()' is no longer supported"
 msgstr "funkcja 'memory.limit()' nie jest już obsługiwana"
 
-#. R/unix/sysutils.R: warning("'memory.size()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.size()' is Windows-specific"
-msgstr "funkcja 'memory.size()' jest specyficzna dla systemów Windows"
-
+#. R/unix/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 msgid "'memory.size()' is no longer supported"
 msgstr "funkcja 'memory.size()' nie jest już obsługiwana"
 
@@ -316,7 +308,7 @@ msgstr "funkcja 'tar' zwróciła niezerowy kod %d wyjścia"
 #. R/tar.R: stop("'tarfile' must be a character string or a connection")
 #: R/tar.R:0
 msgid "'tarfile' must be a character string or a connection"
-msgstr "argument 'tarfile' musi być łańcuchem tekstowym lub połączeniem"
+msgstr "argument 'tarfile' musi być ciągiem znaków lub połączeniem"
 
 #. R/widgets.R: stop("'title' must be NULL or a length-1 character vector")
 #: R/widgets.R:0
@@ -525,8 +517,8 @@ msgid ""
 "If nothing happens, you should open\n"
 "%s yourself"
 msgstr ""
-"Jeśli nic się nie stanie, powinieneś otworzyć\n"
-"%s samemu"
+"Jeśli nic się nie stanie, otwórz\n"
+"%s samodzielnie"
 
 #. R/help.start.R: gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",     browser)
 #: R/help.start.R:0
@@ -945,7 +937,7 @@ msgstr "argument nie jest funkcją ani obiektem języka:"
 #. R/frametools.R: stop("at least one vector element is required")
 #: R/frametools.R:0
 msgid "at least one vector element is required"
-msgstr "przynajmnej jeden element wektora jest wymagany"
+msgstr "przynajmniej jeden element wektora jest wymagany"
 
 #. R/write.table.R: gettextf("attempt to set '%s' ignored", argname)
 #: R/write.table.R:0
@@ -1056,7 +1048,7 @@ msgstr "błąd sumy kontrolnej dla wpisu '%s'"
 #. R/edit.R: warning("class of 'name' will be discarded", call. = FALSE, immediate. = TRUE)
 #: R/edit.R:0
 msgid "class of 'name' will be discarded"
-msgstr "klasa 'name' zostanie odrzucone"
+msgstr "klasa 'name' zostanie odrzucona"
 
 #. R/citation.R: gettextf("could not determine year for %s from package DESCRIPTION file",     sQuote(package))
 #: R/citation.R:0
@@ -1604,7 +1596,7 @@ msgstr "nie zarejestrowano żadnych zdarzeń"
 #. R/objects.R: gettextf("no function '%s' could be found", f)
 #: R/objects.R:0
 msgid "no function '%s' could be found"
-msgstr "nie znaleziono fukcjii '%s'"
+msgstr "nie znaleziono funkcji '%s'"
 
 #. R/objects.R: gettextf("no function '%s' is visible", generic.function)
 #: R/objects.R:0
@@ -1691,7 +1683,7 @@ msgstr "nie wybrano żadnej kolumny wektora"
 #. R/frametools.R: warning("non-vector columns will be ignored")
 #: R/frametools.R:0
 msgid "non-vector columns will be ignored"
-msgstr "niewektorowe kolumny będą zignorowane"
+msgstr "kolumny nie będące wektorami zostaną zignorowane"
 
 #. R/frametools.R: warning("non-vector elements will be ignored")
 #: R/frametools.R:0
@@ -1767,7 +1759,7 @@ msgid ""
 "parse error or empty option in\n"
 "%s"
 msgstr ""
-"błąd parsowania lub pusta opcja w\n"
+"błąd przetwarzania lub pusta opcja w\n"
 "%s"
 
 #. R/tar.R: stop("path contains '..'")
@@ -2092,7 +2084,7 @@ msgstr "błędna liczba wpisów w wierszach tabeli"
 #. R/help.R: gettextf("you could try %s", sQuote(paste0("??", topic)))
 #: R/help.R:0
 msgid "you could try %s"
-msgstr "mógłbyś spróbować %s"
+msgstr "możesz spróbować %s"
 
 #. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
 #: R/windows/install.packages.R:0
@@ -2362,6 +2354,12 @@ msgstr[0] "pakiet %s nie jest dostępny (%s)"
 msgstr[1] "pakiety %s nie są dostępne (%s)"
 msgstr[2] "pakiety %s nie są dostępne (%s)"
 
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "funkcja 'memory.limit()' jest specyficzna dla systemów Windows"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "funkcja 'memory.size()' jest specyficzna dla systemów Windows"
+
 #~ msgid "argument %s must be a character string"
 #~ msgstr "argument %s musi być tekstem"
 
@@ -2399,11 +2397,11 @@ msgstr[2] "pakiety %s nie są dostępne (%s)"
 #~ msgstr "zbiory danych zostały przeniesione z pakietu 'stats' do pakietu 'datasets'"
 
 #~ msgid "'browser' must be a non-empty character string"
-#~ msgstr "argument 'browser' musi być niepustym łańcuchem tekstowym"
+#~ msgstr "argument 'browser' musi być niepustym ciągiem znaków"
 
 #, fuzzy
 #~ msgid "argument 'zip' must be a non-empty character string"
-#~ msgstr "argument 'url' musi być niepustym łańcuchem tekstowym"
+#~ msgstr "argument 'url' musi być niepustym ciągiem znaków"
 
 #~ msgid "bad argument"
 #~ msgstr "niepoprawny argument"

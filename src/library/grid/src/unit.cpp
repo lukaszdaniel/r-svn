@@ -1577,7 +1577,7 @@ SEXP validUnits(SEXP units)
 	    error("%s", _("'units' must be character"));
 	}
     } else {
-	error("%s", _("'units' must be of length > 0"));
+	error(_("'%s' must be of length > 0"), "units");
     }
     return answer;
 }

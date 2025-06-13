@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -348,7 +348,7 @@ msgstr "'zeroin' における関数値が不正です"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, fuzzy, c-format
-msgid "'%s' must be of length one"
+msgid "'%s' must be of length 1"
 msgstr "'m' はリストでなければなりません"
 
 #: isoreg.cpp:57
@@ -561,9 +561,10 @@ msgstr "モデル式が不正です"
 msgid "invalid power in formula"
 msgstr "モデル式中に不正なべき乗があります"
 
-#: model.cpp:1241
-msgid "invalid model formula in ExtractVars"
-msgstr "ExtractVars 中のモデル式が不正です"
+#: model.cpp:1241 model.cpp:1676
+#, fuzzy, c-format
+msgid "invalid model formula in '%s'"
+msgstr "モデル式が不正です"
 
 #: model.cpp:1284
 #, c-format
@@ -574,10 +575,6 @@ msgstr ""
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "データフレーム中の重複した名前 '%s' を '.' を使って複製しました"
-
-#: model.cpp:1676
-msgid "invalid model formula in EncodeVars"
-msgstr "EncodeVars 中のモデル式が不正です"
 
 #: model.cpp:1752
 msgid "argument is not a valid model"
@@ -600,30 +597,24 @@ msgstr ""
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' が式中にありますが, 'data' 引数がありません"
 
-#: monoSpl.cpp:38
-msgid "n must be at least two"
-msgstr "n は最低でも 2 でなければなりません"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, fuzzy, c-format
+msgid "'%s' must be at least %d"
+msgstr "'m' はリストでなければなりません"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "引数 m は数値でなければなりません"
 
-#: monoSpl.cpp:74
-msgid "length(m) must be at least two"
-msgstr "length(m) は少なくとも 2 でなければなりません"
-
 #: monoSpl.cpp:76
 #, fuzzy, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "引数 Sx は長さが m[] より 1 だけ短い数値ベクトルでなければなりません"
 
-#: nls.cpp:101
-msgid "'control' must be a list"
-msgstr "'control' はリストでなければなりません"
-
-#: nls.cpp:103
-msgid "'m' must be a list"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, fuzzy, c-format
+msgid "'%s' must be a list"
 msgstr "'m' はリストでなければなりません"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
@@ -749,7 +740,7 @@ msgid "attempt to minimize non-function"
 msgstr "関数でないものを最小化しようとしました"
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' の値が不正です"
@@ -918,10 +909,6 @@ msgstr "starma エラーコード %d です"
 msgid "forkal error code %d"
 msgstr "forkal エラーコード %d です"
 
-#: pacf.cpp:460
-msgid "invalid value of lag.max"
-msgstr "不正な lag.max 値です"
-
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -1000,10 +987,6 @@ msgstr "モード %d, 長さ %d の fcn が作られました - モード %d, �
 msgid "invalid type for eval_check_store"
 msgstr "eval_check_store に対する不正なタイプです"
 
-#: port.cpp:576
-msgid "m must be a list"
-msgstr "m はリストでなければなりません"
-
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' と 'upperb' は数値ベクトルでなければなりません"
@@ -1076,6 +1059,27 @@ msgstr "直前の %d 個の観測値中に欠損値があります"
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "これは起こるべきではありません"
+
+#~ msgid "n must be at least two"
+#~ msgstr "n は最低でも 2 でなければなりません"
+
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) は少なくとも 2 でなければなりません"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "不正な lag.max 値です"
+
+#~ msgid "invalid model formula in ExtractVars"
+#~ msgstr "ExtractVars 中のモデル式が不正です"
+
+#~ msgid "invalid model formula in EncodeVars"
+#~ msgstr "EncodeVars 中のモデル式が不正です"
+
+#~ msgid "'control' must be a list"
+#~ msgstr "'control' はリストでなければなりません"
+
+#~ msgid "m must be a list"
+#~ msgstr "m はリストでなければなりません"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf は正の最大値で置き換えられました"

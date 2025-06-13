@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -397,7 +397,7 @@ msgstr "valor de diferència finita no definit [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, fuzzy, c-format
-msgid "'%s' must be of length one"
+msgid "'%s' must be of length 1"
 msgstr "«%s» ha de ser d'una longitud"
 
 #: isoreg.cpp:57
@@ -636,10 +636,10 @@ msgstr "fórmula de model no vàlida"
 msgid "invalid power in formula"
 msgstr "potència no vàlida a la fórmula"
 
-#: model.cpp:1241
-#, fuzzy
-msgid "invalid model formula in ExtractVars"
-msgstr "fórmula de model no vàlida a ExtractVars"
+#: model.cpp:1241 model.cpp:1676
+#, fuzzy, c-format
+msgid "invalid model formula in '%s'"
+msgstr "fórmula de model no vàlida"
 
 #: model.cpp:1284
 #, c-format
@@ -650,11 +650,6 @@ msgstr ""
 #, fuzzy, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "nom duplicat «%s» en el marc de dades usant «.»"
-
-#: model.cpp:1676
-#, fuzzy
-msgid "invalid model formula in EncodeVars"
-msgstr "fórmula de model no vàlida a EncodeVars"
 
 #: model.cpp:1752
 #, fuzzy
@@ -681,34 +676,24 @@ msgstr "'varlist' ha canviat (des de nvar=%d) a un nou %d després de EncodeVars
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' a la fórmula i sense argument 'data'"
 
-#: monoSpl.cpp:38
-#, fuzzy
-msgid "n must be at least two"
-msgstr "n ha de ser com a mínim dos"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, fuzzy, c-format
+msgid "'%s' must be at least %d"
+msgstr "«m» ha de ser una llista"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "L'argument m ha de ser numèric"
 
-#: monoSpl.cpp:74
-#, fuzzy
-msgid "length(m) must be at least two"
-msgstr "length(m) ha de ser com a mínim dos"
-
 #: monoSpl.cpp:76
 #, fuzzy, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "Argument Sx ha de ser un vector numèric més curt que m[]"
 
-#: nls.cpp:101
-#, fuzzy
-msgid "'control' must be a list"
-msgstr "«control» ha de ser una llista"
-
-#: nls.cpp:103
-#, fuzzy
-msgid "'m' must be a list"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, fuzzy, c-format
+msgid "'%s' must be a list"
 msgstr "«m» ha de ser una llista"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
@@ -852,7 +837,7 @@ msgid "attempt to minimize non-function"
 msgstr "s'ha intentat minimitzar la no-funció"
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
@@ -1053,11 +1038,6 @@ msgstr "codi d'error de l'Starma %d"
 msgid "forkal error code %d"
 msgstr "codi d'error forkal %d"
 
-#: pacf.cpp:460
-#, fuzzy
-msgid "invalid value of lag.max"
-msgstr "valor no vàlid de lag.max"
-
 #: port.cpp:149
 #, fuzzy, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -1140,11 +1120,6 @@ msgstr "fcn mode produït %d, longitud %d - mode desitjat %d, longitud %d"
 #, fuzzy
 msgid "invalid type for eval_check_store"
 msgstr "tipus no vàlid per evalcheckstore"
-
-#: port.cpp:576
-#, fuzzy
-msgid "m must be a list"
-msgstr "m ha de ser una llista"
 
 #: port.cpp:596
 #, fuzzy
@@ -1229,6 +1204,34 @@ msgstr "manca un valor en les últimes %d observacions"
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "això no hauria de passar"
+
+#, fuzzy
+#~ msgid "n must be at least two"
+#~ msgstr "n ha de ser com a mínim dos"
+
+#, fuzzy
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) ha de ser com a mínim dos"
+
+#, fuzzy
+#~ msgid "invalid value of lag.max"
+#~ msgstr "valor no vàlid de lag.max"
+
+#, fuzzy
+#~ msgid "invalid model formula in ExtractVars"
+#~ msgstr "fórmula de model no vàlida a ExtractVars"
+
+#, fuzzy
+#~ msgid "invalid model formula in EncodeVars"
+#~ msgstr "fórmula de model no vàlida a EncodeVars"
+
+#, fuzzy
+#~ msgid "'control' must be a list"
+#~ msgstr "«control» ha de ser una llista"
+
+#, fuzzy
+#~ msgid "m must be a list"
+#~ msgstr "m ha de ser una llista"
 
 #, fuzzy
 #~ msgid "NA/Inf replaced by maximum positive value"

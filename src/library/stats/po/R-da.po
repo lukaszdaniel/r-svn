@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2012-01-28 01:18+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -1722,10 +1722,10 @@ msgstr "»x« skal være numerisk"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "argumenter skal have samme længde"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
 #, fuzzy
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "argumenter skal have samme længde"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -2028,12 +2028,6 @@ msgstr ""
 #: R/aov.R:0
 #, fuzzy
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
-msgstr "»coef« skal definere en kontrast, dvs. summere til 0"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-#, fuzzy
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 msgstr "»coef« skal definere en kontrast, dvs. summere til 0"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
@@ -4516,3 +4510,7 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "»coef« skal definere en kontrast, dvs. summere til 0"

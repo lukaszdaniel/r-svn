@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2023-10-20 14:35+0000\n"
 "Last-Translator: Jan Strappa <jansf@disroot.org>\n"
 "Language-Team: none\n"
@@ -83,8 +83,10 @@ msgstr ""
 msgid "invalid hcl color"
 msgstr ""
 
-#: colors.cpp:401
-msgid "invalid value of 'maxColorValue'"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, c-format
+msgid "invalid '%s' value"
 msgstr ""
 
 #: colors.cpp:429
@@ -299,9 +301,10 @@ msgstr ""
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr ""
 
-#: devPS.cpp:3219 devPS.cpp:6832
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
 #, c-format
-msgid "filename too long in %s()"
+msgid "filename too long in '%s' call"
 msgstr ""
 
 #: devPS.cpp:3225 devPS.cpp:6838
@@ -841,11 +844,6 @@ msgstr ""
 msgid "unable to open printer"
 msgstr ""
 
-#: devWindows.cpp:1797
-#, c-format
-msgid "filename too long in %s() call"
-msgstr ""
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -861,20 +859,8 @@ msgstr ""
 msgid "unable to open file '%s' for writing"
 msgstr ""
 
-#: devWindows.cpp:1834
-msgid "filename too long in jpeg() call"
-msgstr ""
-
-#: devWindows.cpp:1864
-msgid "filename too long in tiff() call"
-msgstr ""
-
 #: devWindows.cpp:1892
 msgid "invalid specification for file name in win.metafile()"
-msgstr ""
-
-#: devWindows.cpp:1896
-msgid "filename too long in win.metafile() call"
 msgstr ""
 
 #: devWindows.cpp:1907
@@ -964,12 +950,6 @@ msgstr ""
 msgid "invalid 'width' or 'height'"
 msgstr ""
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, c-format
-msgid "invalid value of '%s'"
-msgstr ""
-
 #: devWindows.cpp:3921
 msgid "Not enough memory to create buffer for path."
 msgstr ""
@@ -1054,11 +1034,6 @@ msgstr ""
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argumento '%s' no válido"
-
-#: cairo/cairoBM.cpp:622
-#, c-format
-msgid "invalid '%s' value"
-msgstr ""
 
 #: cairo/cairoBM.cpp:665
 #, c-format

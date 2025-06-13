@@ -2265,7 +2265,7 @@ attribute_hidden void R_BadValueInRCode(SEXP value, SEXP call, SEXP rho, const c
 	    } else if (check[0] == ',') {
 		check++;
 	    } else
-		error(_("invalid value of %s"), varname);
+		error(_("invalid '%s' value"), varname);
 	} // end of while (check[0] != '\0')
  
 	if (ignore) {

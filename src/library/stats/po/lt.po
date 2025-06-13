@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -353,8 +353,8 @@ msgid "non-finite function value"
 msgstr "nebaigtinė riboto skirtumo reikšmė [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
-#, c-format
-msgid "'%s' must be of length one"
+#, fuzzy, c-format
+msgid "'%s' must be of length 1"
 msgstr "'%s' ilgis turi būti vienas"
 
 #: isoreg.cpp:57
@@ -569,9 +569,10 @@ msgstr "netinkama modelio formulė"
 msgid "invalid power in formula"
 msgstr "neteisinga galia formulėje"
 
-#: model.cpp:1241
-msgid "invalid model formula in ExtractVars"
-msgstr "netinkama modelio formulė, esanti ExtractVars"
+#: model.cpp:1241 model.cpp:1676
+#, fuzzy, c-format
+msgid "invalid model formula in '%s'"
+msgstr "netinkama modelio formulė"
 
 #: model.cpp:1284
 #, c-format
@@ -582,10 +583,6 @@ msgstr ""
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "dubliuotas pavadinimas '%s' duomenų sistemoje naudojant '.'"
-
-#: model.cpp:1676
-msgid "invalid model formula in EncodeVars"
-msgstr "netinkama modelio formulė, esanti EncodeVars"
 
 #: model.cpp:1752
 msgid "argument is not a valid model"
@@ -608,30 +605,24 @@ msgstr "'varlist' pasikeitė (iš nvar=%d) į naują %d po EncodeVars() -- nebet
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' formulėje ir nėra argumento 'data'"
 
-#: monoSpl.cpp:38
-msgid "n must be at least two"
-msgstr "n turi būti ne mažiau kaip du"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, fuzzy, c-format
+msgid "'%s' must be at least %d"
+msgstr "'m' turi būti sąrašas"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "Argumentas m turi būti skaitinis"
 
-#: monoSpl.cpp:74
-msgid "length(m) must be at least two"
-msgstr "length(m) turi būti ne mažesnis kaip du"
-
 #: monoSpl.cpp:76
 #, fuzzy, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "Argumentas Sx turi būti skaitinis vektorius vienu trumpesnis nei m[]"
 
-#: nls.cpp:101
-msgid "'control' must be a list"
-msgstr "'control' turi būti sąrašas"
-
-#: nls.cpp:103
-msgid "'m' must be a list"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, fuzzy, c-format
+msgid "'%s' must be a list"
 msgstr "'m' turi būti sąrašas"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
@@ -757,7 +748,7 @@ msgid "attempt to minimize non-function"
 msgstr "bandymas sumažinti ne funkciją"
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "neleistina '%s' reikšmė"
@@ -927,10 +918,6 @@ msgstr "starma klaidos kodas %d"
 msgid "forkal error code %d"
 msgstr "forkal klaidos kodas %d"
 
-#: pacf.cpp:460
-msgid "invalid value of lag.max"
-msgstr "neleistina lag.max reikšmė"
-
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -1009,10 +996,6 @@ msgstr "fcn sukurtas tipas %d, ilgis %d – ieškomas tipas %d, ilgis %d"
 msgid "invalid type for eval_check_store"
 msgstr "netinkamas tipas eval_check_store"
 
-#: port.cpp:576
-msgid "m must be a list"
-msgstr "m turi būti sąrašas"
-
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' ir 'upperb' turi būti skaitiniai vektoriai"
@@ -1085,6 +1068,27 @@ msgstr "trūkstama reikšmė paskutiniuose %d stebėjimuose"
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "tai neturėtų įvykti"
+
+#~ msgid "n must be at least two"
+#~ msgstr "n turi būti ne mažiau kaip du"
+
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) turi būti ne mažesnis kaip du"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "neleistina lag.max reikšmė"
+
+#~ msgid "invalid model formula in ExtractVars"
+#~ msgstr "netinkama modelio formulė, esanti ExtractVars"
+
+#~ msgid "invalid model formula in EncodeVars"
+#~ msgstr "netinkama modelio formulė, esanti EncodeVars"
+
+#~ msgid "'control' must be a list"
+#~ msgstr "'control' turi būti sąrašas"
+
+#~ msgid "m must be a list"
+#~ msgstr "m turi būti sąrašas"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf pakeista didžiausia teigiama reikšme"

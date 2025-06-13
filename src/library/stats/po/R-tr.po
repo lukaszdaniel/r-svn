@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -1696,10 +1696,10 @@ msgstr "'subset' argümanı görmezden gelinecek"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "'x' argümanı nümerik olmalı"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
 #, fuzzy
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "'x' argümanı nümerik olmalı"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -2007,11 +2007,6 @@ msgstr ""
 #. R/aov.R: stop("columns of 'contrast.obj' must define a contrast (sum to zero)")
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
-msgstr ""
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 msgstr ""
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-11 18:28\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -240,24 +240,16 @@ msgstr "'lib = \"%s\"'는 기록이 가능하지 않습니다"
 msgid "'list' must be a character vector naming R objects"
 msgstr "'list'는 반드시 R 객체들을 이름지어주는 문자형 벡터이어야 합니다"
 
-#. R/unix/sysutils.R: warning("'memory.limit()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.limit()' is Windows-specific"
-msgstr "'memory.limit()'은 윈도우즈 전용입니다"
-
+#. R/unix/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 #, fuzzy
 msgid "'memory.limit()' is no longer supported"
 msgstr "'memory.limit()'은 윈도우즈 전용입니다"
 
-#. R/unix/sysutils.R: warning("'memory.size()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.size()' is Windows-specific"
-msgstr "'memory.size()'는 윈도우즈 전용입니다"
-
+#. R/unix/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 #, fuzzy
 msgid "'memory.size()' is no longer supported"
 msgstr "'memory.size()'는 윈도우즈 전용입니다"
@@ -2322,6 +2314,12 @@ msgstr[0] "패키지 %s가 사용중이므로 설치되지 않을 것입니다"
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "패키지 %s(들)이 사용가능하지 않습니다 (그 이유는 %s 입니다)"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()'은 윈도우즈 전용입니다"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()'는 윈도우즈 전용입니다"
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"

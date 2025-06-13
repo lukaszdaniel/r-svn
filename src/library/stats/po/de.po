@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: 2022-04-13 14:54+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -359,8 +359,8 @@ msgid "non-finite function value"
 msgstr "nicht-endlicher Wert für endlichen-differenzen Wert [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
-#, c-format
-msgid "'%s' must be of length one"
+#, fuzzy, c-format
+msgid "'%s' must be of length 1"
 msgstr "'%s' muss Länge 1 haben"
 
 #: isoreg.cpp:57
@@ -574,9 +574,10 @@ msgstr "ungültige Modellformel"
 msgid "invalid power in formula"
 msgstr "ungültige Potenz in Formel"
 
-#: model.cpp:1241
-msgid "invalid model formula in ExtractVars"
-msgstr "ungültige Modellformel in ExtractVars"
+#: model.cpp:1241 model.cpp:1676
+#, fuzzy, c-format
+msgid "invalid model formula in '%s'"
+msgstr "ungültige Modellformel"
 
 #: model.cpp:1284
 #, c-format
@@ -587,10 +588,6 @@ msgstr ""
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "verdoppelter Name '%s' in Dataframe bei Benutzung von '.'"
-
-#: model.cpp:1676
-msgid "invalid model formula in EncodeVars"
-msgstr "ungültige Modellformel in EncodeVars"
 
 #: model.cpp:1752
 msgid "argument is not a valid model"
@@ -613,30 +610,24 @@ msgstr "'varlist' hat sich geändert (von nvar=%d) zu neuem %d nach EncodeVars()
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' erscheint in der Formel und 'data' Argument ist ungültig"
 
-#: monoSpl.cpp:38
-msgid "n must be at least two"
-msgstr "n muss mindestes zwei sein"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, fuzzy, c-format
+msgid "'%s' must be at least %d"
+msgstr "'m' muss eine Liste sein"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "Argument m muss numerisch sein"
 
-#: monoSpl.cpp:74
-msgid "length(m) must be at least two"
-msgstr "length(m) nuss mindestens zwei sein"
-
 #: monoSpl.cpp:76
 #, fuzzy, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "Argument Sx muss ein numerischer Vektor einen Eintrag kürzer als m[] sein"
 
-#: nls.cpp:101
-msgid "'control' must be a list"
-msgstr "'control' muss eine Liste sein"
-
-#: nls.cpp:103
-msgid "'m' must be a list"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, fuzzy, c-format
+msgid "'%s' must be a list"
 msgstr "'m' muss eine Liste sein"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
@@ -762,7 +753,7 @@ msgid "attempt to minimize non-function"
 msgstr "Versuch etwas anderes als eine Funktion zu minimieren"
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "ungültiger '%s' Wert"
@@ -932,10 +923,6 @@ msgstr "starma Fehlerkode %d"
 msgid "forkal error code %d"
 msgstr "forkal Fehlerkode %d"
 
-#: pacf.cpp:460
-msgid "invalid value of lag.max"
-msgstr "unzulässiger Wert von lag.max"
-
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -1014,10 +1001,6 @@ msgstr "fcn erzeugte Modus %d, Länge %d - gewünscht Modus %d, Länge %d"
 msgid "invalid type for eval_check_store"
 msgstr "unzulässiger Typ für eval_check_store"
 
-#: port.cpp:576
-msgid "m must be a list"
-msgstr "m nuss eine Liste sein"
-
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' und 'upperb' muss ein numerischer Vektor sein"
@@ -1090,6 +1073,27 @@ msgstr "Fehlende Werte in den letzten %d Beobachtungen"
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "das sollte nicht sein"
+
+#~ msgid "n must be at least two"
+#~ msgstr "n muss mindestes zwei sein"
+
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) nuss mindestens zwei sein"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "unzulässiger Wert von lag.max"
+
+#~ msgid "invalid model formula in ExtractVars"
+#~ msgstr "ungültige Modellformel in ExtractVars"
+
+#~ msgid "invalid model formula in EncodeVars"
+#~ msgstr "ungültige Modellformel in EncodeVars"
+
+#~ msgid "'control' must be a list"
+#~ msgstr "'control' muss eine Liste sein"
+
+#~ msgid "m must be a list"
+#~ msgstr "m nuss eine Liste sein"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf durch größte positive Zahl ersetzt"

@@ -2737,7 +2737,7 @@ attribute_hidden SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
     if (!isEnvironment(envir))
-	error("%s", _("'envir' must be an environment"));
+	error(_("'%s' must be an environment"), "envir");
 
     n = length(args);
     PROTECT(names = getAttrib(args, R_NamesSymbol));

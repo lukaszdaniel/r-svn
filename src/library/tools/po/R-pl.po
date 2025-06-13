@@ -250,7 +250,7 @@ msgstr "Zastosowano łatkę %s podczas instalacjioraz zapisano ją jako %s w ins
 #. R/Vignettes.R: gettextf("Argument %s must be a character vector or NULL and not %s",     sQuote("pattern"), sQuote(class(pattern)[1L]))
 #: R/Vignettes.R:0
 msgid "Argument %s must be a character vector or NULL and not %s"
-msgstr "Argument %s musi być łańcuchem tekstowym lub wartością NULL, a nie %s"
+msgstr "Argument %s musi być ciągiem znaków lub wartością NULL, a nie %s"
 
 #. R/Vignettes.R: gettextf("Argument %s must be a function and not %s", sQuote("weave"),     sQuote(class(weave)[1L]))
 #. R/Vignettes.R: gettextf("Argument %s must be a function and not %s", sQuote("tangle"),     sQuote(class(tangle)[1L]))
@@ -841,7 +841,7 @@ msgstr "Niepoprawnie wypełnione pole wersji pakietu."
 #. R/QC.R: gettext("  Mismatches in argument default values (first 3):")
 #: R/QC.R:0
 msgid "Mismatches in argument default values (first 3):"
-msgstr "Niezgodność w domyslnych wartościach argumentów (pierwsze 3):"
+msgstr "Niezgodność w domyślnych wartościach argumentów (pierwsze 3):"
 
 #. R/QC.R: gettext("  Mismatches in argument default values:")
 #: R/QC.R:0
@@ -1544,7 +1544,7 @@ msgstr "wszystkie pakiety powinny mieć plik 'NAMESPACE'"
 #. R/read.00Index.R: gettextf("argument '%s' must be a character string or connection",     file)
 #: R/read.00Index.R:0
 msgid "argument '%s' must be a character string or connection"
-msgstr "argument '%s' musi być łańcuchem tekstowym lub połączeniem"
+msgstr "argument '%s' musi być ciągiem znaków lub połączeniem"
 
 #. R/utils.R: stop("argument 'delim' must specify two characters")
 #: R/utils.R:0
@@ -1554,7 +1554,7 @@ msgstr "argument 'delim' musi określać dwa znaki"
 #. R/Rd.R: stop("argument 'outFile' must be a character string or connection")
 #: R/Rd.R:0
 msgid "argument 'outFile' must be a character string or connection"
-msgstr "argument 'outfile' musi być łańcuchem tekstowym lub połączeniem"
+msgstr "argument 'outFile' musi być ciągiem znaków lub połączeniem"
 
 #. R/QC.R: stop("argument 'package' must be of length 1")
 #. R/Rd.R: stop("argument 'package' must be of length 1")
@@ -2740,7 +2740,7 @@ msgstr[2] "nie można przekodować %s linie %s"
 #~ msgstr "argument 'vignette' musi być długości 1"
 
 #~ msgid "%s must be a character string or a file/raw connection"
-#~ msgstr "argument %s musi być łańcuchem tekstowym lub połączeniem plikowym/prostym"
+#~ msgstr "argument %s musi być ciągiem znaków lub połączeniem plikowym/prostym"
 
 #~ msgid "C++11 standard requested but CXX11 is not defined"
 #~ msgstr "Zażądano standardu C++11 ale CXX11 nie jest zdefiniowany"
@@ -2785,13 +2785,13 @@ msgstr[2] "nie można przekodować %s linie %s"
 #~ msgstr "nie można odczytać obiektu słownika"
 
 #~ msgid "cannot read hexadecimal string object"
-#~ msgstr "nie można odczytać obiektu o szestnastkowym łańcuchu"
+#~ msgstr "nie można odczytać obiektu o szestnastkowym tekście"
 
 #~ msgid "cannot read indirect reference object"
 #~ msgstr "nie można odczytać obiektu o niebezpośredniej referencji"
 
 #~ msgid "cannot read literal string object"
-#~ msgstr "nie można odczytać dosłownych obiektów łańcucha"
+#~ msgstr "nie można odczytać dosłownych obiektów tekstu"
 
 #~ msgid "cannot read name object"
 #~ msgstr "nie można odczytać obiektu nazwy"

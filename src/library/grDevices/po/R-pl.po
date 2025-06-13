@@ -75,7 +75,7 @@ msgstr "brakuje argumentu 'file', a brak zdefiniowanej wartości domyślnej"
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
-msgstr "argument 'file' musi być niepustym łańcuchem tekstowym"
+msgstr "argument 'file' musi być niepustym ciągiem znaków"
 
 #. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #: R/unix/png.R:0
@@ -85,7 +85,7 @@ msgstr "argument 'file' musi być niepustym ciągiem znaków"
 #. R/convertColor.R: stop("'from' must be a \"colorConverter\" object or a string")
 #: R/convertColor.R:0
 msgid "'from' must be a \"colorConverter\" object or a string"
-msgstr "argument 'from' musi być obiektem klasy \"colorConverter\" lub łańcuchem tekstowym"
+msgstr "argument 'from' musi być obiektem klasy \"colorConverter\" lub tekstem"
 
 #. R/convertColor.R: gettextf("'from.ref.white' disagrees with definition of %s",     from$name)
 #: R/convertColor.R:0
@@ -153,7 +153,7 @@ msgstr "argument 'title' \"%s\" zawiera niepoprawne znaki"
 #. R/convertColor.R: stop("'to' must be a \"colorConverter\" object or a string")
 #: R/convertColor.R:0
 msgid "'to' must be a \"colorConverter\" object or a string"
-msgstr "'to' musi być obiektem klasy \"colorConverter\" lub łańcuchem"
+msgstr "'to' musi być obiektem klasy \"colorConverter\" lub tekstem"
 
 #. R/convertColor.R: gettextf("'to.ref.white' disagrees with definition of %s", to$name)
 #: R/convertColor.R:0
@@ -646,7 +646,7 @@ msgstr "niepoprawna wersja PDF"
 #. R/unix/quartz.R: stop("invalid Quartz font:  must be 4 strings")
 #: R/unix/quartz.R:0
 msgid "invalid Quartz font:  must be 4 strings"
-msgstr "niepoprawna czcionka 'Quartz': muszą być 4 łańcuchy"
+msgstr "niepoprawna czcionka 'Quartz': muszą być 4 teksty"
 
 #. R/windows/windows.R: stop("invalid Windows font:  must be a single font family name")
 #: R/windows/windows.R:0
@@ -774,7 +774,7 @@ msgstr "długość argumentów musi być taka sama (i większa niż 0)"
 #. R/device.R: warning("need to specify one of 'width' and 'height'")
 #: R/device.R:0
 msgid "need to specify one of 'width' and 'height'"
-msgstr "potrzeba określić jeden z 'width' oraz 'height'"
+msgstr "konieczne jest określenie jednego z 'width' oraz 'height'"
 
 #. R/calc.R: stop("no 'z' matrix specified")
 #: R/calc.R:0

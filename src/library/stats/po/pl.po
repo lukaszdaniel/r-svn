@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: 2025-06-07 13:35+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -159,7 +159,7 @@ msgstr "wyrażenie nie może być typu '%s'"
 
 #: deriv.cpp:787
 msgid "variable must be a character string"
-msgstr "zmienna musi być łańcuchem tekstowym"
+msgstr "zmienna musi być ciągiem znaków"
 
 #: deriv.cpp:789
 msgid "only the first element is used as variable name"
@@ -364,7 +364,7 @@ msgstr "nieskończona wartość funkcji"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, c-format
-msgid "'%s' must be of length one"
+msgid "'%s' must be of length 1"
 msgstr "argument '%s' musi mieć długość 1"
 
 #: isoreg.cpp:57
@@ -574,9 +574,10 @@ msgstr "niepoprawna formuła modelu"
 msgid "invalid power in formula"
 msgstr "niepoprawna potęga w formule"
 
-#: model.cpp:1241
-msgid "invalid model formula in ExtractVars"
-msgstr "niepoprawna formuła modelu w funkcji 'ExtractVars()'"
+#: model.cpp:1241 model.cpp:1676
+#, c-format
+msgid "invalid model formula in '%s'"
+msgstr "niepoprawna formuła modelu w '%s'"
 
 #: model.cpp:1284
 #, c-format
@@ -587,10 +588,6 @@ msgstr "AllocT..Bit1(%s): Konieczne jest zwiększenie nwords do %d. To nie powin
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "powtórzona nazwa '%s' w ramce danych używając '.'"
-
-#: model.cpp:1676
-msgid "invalid model formula in EncodeVars"
-msgstr "niepoprawna formuła modelu w funkcji 'EncodeVars()'"
 
 #: model.cpp:1752
 msgid "argument is not a valid model"
@@ -613,31 +610,25 @@ msgstr "'varlist' został zmieniony (z nvar=%d) na nowy %d po EncodeVars() -- ni
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' w formule oraz brak argumentu 'data'"
 
-#: monoSpl.cpp:38
-msgid "n must be at least two"
-msgstr "argument 'n' musi wynosić co najmniej 2"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, c-format
+msgid "'%s' must be at least %d"
+msgstr "argument '%s' musi wynosić co najmniej %d"
 
 #: monoSpl.cpp:71
 #, c-format
 msgid "'%s' must be numeric"
 msgstr "argument '%s' musi być liczbą"
 
-#: monoSpl.cpp:74
-msgid "length(m) must be at least two"
-msgstr "'length(m)' musi wynosić co najmniej dwa"
-
 #: monoSpl.cpp:76
 #, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "argument '%s' musi być wektorem liczbowym o jeden którszym niż 'm[]'"
 
-#: nls.cpp:101
-msgid "'control' must be a list"
-msgstr "argument 'control' musi być listą"
-
-#: nls.cpp:103
-msgid "'m' must be a list"
-msgstr "argument 'm' musi być listą"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, c-format
+msgid "'%s' must be a list"
+msgstr "argument '%s' musi być listą"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
 #: nls.cpp:143 nls.cpp:148 nls.cpp:153 nls.cpp:158 nls.cpp:163
@@ -762,7 +753,7 @@ msgid "attempt to minimize non-function"
 msgstr "próba minimalizacji nie-funkcji"
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
@@ -932,10 +923,6 @@ msgstr "starma: kod błędu %d"
 msgid "forkal error code %d"
 msgstr "forkal: kod błędu %d"
 
-#: pacf.cpp:460
-msgid "invalid value of lag.max"
-msgstr "niepoprawna wartość 'lag.max'"
-
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -1011,10 +998,6 @@ msgstr "'fcn' wyprodukował tryb %d, długość %d - oczekiwano tryb %d, długo�
 msgid "invalid type for eval_check_store"
 msgstr "niepoprawny typ dla funkcji 'eval_check_store()'"
 
-#: port.cpp:576
-msgid "m must be a list"
-msgstr "argument 'm' musi być listą"
-
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' oraz 'upperb' muszą być wektorami liczbowymi"
@@ -1025,7 +1008,7 @@ msgstr "nieprawidłowy rozmiar 'n' próby w procedurze C 'prho(n,s,*)'"
 
 #: rWishart.cpp:53
 msgid "inconsistent degrees of freedom and dimension"
-msgstr "niespójna liczba stopni swodoby oraz wymiaru"
+msgstr "niespójna liczba stopni swobody oraz wymiaru"
 
 #: rWishart.cpp:86
 msgid "'scal' must be a square, real matrix"
@@ -1072,7 +1055,7 @@ msgstr "rcont2 [%d,%d]: wyrażenie spadło do 0; niepowodzenie algorytmu"
 #: smooth.cpp:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
-msgstr "niepoprawna końcowa reguła dla ruchomiej mediany 3: %d"
+msgstr "niepoprawna końcowa reguła dla ruchomej mediany 3: %d"
 
 #: splines.cpp:368
 msgid "inputs of different lengths"
@@ -1087,6 +1070,27 @@ msgstr "brakuje wartości w ostatnich %d obserwacjach"
 #, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "ifault=%d. To nie powinno się wydarzyć"
+
+#~ msgid "n must be at least two"
+#~ msgstr "argument 'n' musi wynosić co najmniej 2"
+
+#~ msgid "length(m) must be at least two"
+#~ msgstr "'length(m)' musi wynosić co najmniej dwa"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "niepoprawna wartość 'lag.max'"
+
+#~ msgid "invalid model formula in ExtractVars"
+#~ msgstr "niepoprawna formuła modelu w funkcji 'ExtractVars()'"
+
+#~ msgid "invalid model formula in EncodeVars"
+#~ msgstr "niepoprawna formuła modelu w funkcji 'EncodeVars()'"
+
+#~ msgid "'control' must be a list"
+#~ msgstr "argument 'control' musi być listą"
+
+#~ msgid "m must be a list"
+#~ msgstr "argument 'm' musi być listą"
 
 #~ msgid "'central' is NA, but must be TRUE or FALSE"
 #~ msgstr "argument 'central' ma wartość NA, a musi mieć wartość TRUE lub FALSE"

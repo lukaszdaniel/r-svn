@@ -3261,7 +3261,7 @@ attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(smode = coerceVector(CADR(args), INTSXP));
     modes = INTEGER(smode);
     m = LENGTH(smode);
-    if(!m && n) error("%s", _("'mode' must be of length at least one"));
+    if(!m && n) error(_("'%s' must be of length at least one"), "mode");
     bool useUmask = asLogicalNoNA(CADDR(args), "use_umask");
 #ifdef HAVE_UMASK
     um = umask(0); umask(um);

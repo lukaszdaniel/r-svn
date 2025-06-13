@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-04-09 17:26+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2024-05-23 03:05+0000\n"
 "Last-Translator: Nichole Haines <NicholeHaines54@gmail.com>\n"
 "Language-Team: none\n"
@@ -146,7 +146,8 @@ msgid "'units' must be character"
 msgstr "'units' debe ser de tipo carácter"
 
 #: unit.cpp:1580
-msgid "'units' must be of length > 0"
+#, fuzzy, c-format
+msgid "'%s' must be of length > 0"
 msgstr "'units' debe tener una longitud > 0"
 
 #: unit.cpp:1591

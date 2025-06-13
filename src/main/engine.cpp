@@ -3216,13 +3216,13 @@ attribute_hidden SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isLanguage(code))
 	error("%s", _("'expr' argument must be an expression"));
     if (TYPEOF(list) != VECSXP)
-	error("%s", _("'list' argument must be a list"));
+	error(_("'%s' must be a list"), "list");
     if (isNull(parentenv)) {
 	error("%s", _("use of NULL environment is defunct"));
 	parentenv = R_BaseEnv;
     } else
     if (!isEnvironment(parentenv))
-	error("%s", _("'env' argument must be an environment"));
+	error(_("'%s' must be an environment"), "env");
     /*
      * This conversion of list to env taken from do_eval
      */

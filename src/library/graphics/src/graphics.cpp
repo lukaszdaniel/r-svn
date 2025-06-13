@@ -3198,7 +3198,7 @@ void Rf_GBox(int which, pGEDevDesc dd)
 		 R_TRANWHITE, gpptr(dd)->col, dd);
 	break;
     default:
-	error("%s", _("invalid argument to GBox"));
+	error(_("invalid argument to '%s'"), "GBox");
     }
 }
 

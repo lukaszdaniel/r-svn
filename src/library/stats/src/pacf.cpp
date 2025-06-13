@@ -457,7 +457,7 @@ SEXP ARMAtoMA(SEXP ar, SEXP ma, SEXP lag_max)
     SEXP res;
 
     if(m <= 0 || m == NA_INTEGER)
-	error("%s", _("invalid value of lag.max"));
+	error(_("invalid '%s' value"), "lag.max");
     PROTECT(res = allocVector(REALSXP, m));
     psi = REAL(res);
     for(i = 0; i < m; i++) {

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1625,9 +1625,10 @@ msgstr "argumento 'subset' será ignorado"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "argumento 'x' não é coercível para classe %s"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+#, fuzzy
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "argumento 'x' está  ausente -- foi renomeado de 'formula'"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1921,11 +1922,6 @@ msgstr "coluna de ordenação do dendrograma forneceu índice de comprimento err
 #. R/aov.R: stop("columns of 'contrast.obj' must define a contrast (sum to zero)")
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
-msgstr "colunas de 'contrast.obj' devem definir um contraste (somatório zero)"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 msgstr "colunas de 'contrast.obj' devem definir um contraste (somatório zero)"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
@@ -4380,6 +4376,9 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "usando a linha %d/%d de um ajuste combinado"
 msgstr[1] "usando as linhas %d/%d de um ajuste combinado"
+
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "colunas de 'contrast.obj' devem definir um contraste (somatório zero)"
 
 #~ msgid ","
 #~ msgstr ","

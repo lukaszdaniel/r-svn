@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:33+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -173,7 +173,7 @@ msgstr "problème lors de l'affichage de '%ls'"
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
-#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:356 src/main/dounzip.cpp:363
+#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:378 src/main/dounzip.cpp:385
 #: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087
 #: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
@@ -325,7 +325,7 @@ msgstr "Mémoire insuffisante (rpipeOpen)"
 msgid "cannot open cmd `%s'"
 msgstr "impossible d'ouvrir l'URL '%s'"
 
-#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
+#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
 msgid "seek not enabled for this connection"
 msgstr "parcours interdit pour cette connexion"
 
@@ -396,7 +396,7 @@ msgstr "<ERREUR : réencodage erroné pour l'encodage '%s'>\n"
 
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
 #: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:204
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:226
 #: src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
 #: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158
 #: src/main/serialize.cpp:3210 src/unix/system.cpp:432
@@ -1231,7 +1231,7 @@ msgstr "type incorrect (%s) pour l'attribut 'names'"
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' appliqué à autre chose qu'un tableau"
 
-#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736
+#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' doit être une liste"
@@ -1451,8 +1451,10 @@ msgstr ""
 msgid "replacement object is not an environment"
 msgstr "l'objet de remplacement n'est pas un environnement"
 
-#: src/main/builtin.cpp:356
-msgid "'enclos' must be an environment"
+#: src/main/builtin.cpp:356 src/main/coerce.cpp:2740 src/main/engine.cpp:3225
+#: src/main/envir.cpp:1899 src/main/unique.cpp:1894
+#, fuzzy, c-format
+msgid "'%s' must be an environment"
 msgstr "'enclos' doit être un environnement"
 
 #: src/main/builtin.cpp:374 src/main/builtin.cpp:407
@@ -1697,13 +1699,13 @@ msgstr "strtrim() exige un vecteur de caractères comme argument"
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
 #: src/main/dotcode.cpp:235 src/main/errors.cpp:1176 src/main/errors.cpp:1198
 #: src/main/errors.cpp:1316 src/main/errors.cpp:1323 src/main/errors.cpp:1586
-#: src/main/platform.cpp:3859 src/main/seq.cpp:268 src/main/seq.cpp:275
-#: src/main/seq.cpp:279 src/main/seq.cpp:389 src/main/seq.cpp:396
-#: src/main/seq.cpp:399 src/main/seq.cpp:401 src/main/seq.cpp:458
-#: src/main/seq.cpp:462 src/main/seq.cpp:466 src/main/sort.cpp:1580
-#: src/main/sort.cpp:1584 src/main/sort.cpp:1591 src/main/source.cpp:230
-#: src/main/sysutils.cpp:282 src/main/util.cpp:1215 src/main/util.cpp:1220
-#: src/main/util.cpp:1227 src/main/util.cpp:2611
+#: src/main/errors.cpp:2268 src/main/platform.cpp:3859 src/main/seq.cpp:268
+#: src/main/seq.cpp:275 src/main/seq.cpp:279 src/main/seq.cpp:389
+#: src/main/seq.cpp:396 src/main/seq.cpp:399 src/main/seq.cpp:401
+#: src/main/seq.cpp:458 src/main/seq.cpp:462 src/main/seq.cpp:466
+#: src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591
+#: src/main/source.cpp:230 src/main/sysutils.cpp:282 src/main/util.cpp:1215
+#: src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611
 #: src/modules/lapack/Lapack.cpp:1093 src/modules/X11/devX11.cpp:3231
 #: src/modules/X11/devX11.cpp:3258 src/modules/X11/devX11.cpp:3263
 #: src/modules/X11/devX11.cpp:3268 src/modules/X11/devX11.cpp:3278
@@ -1870,10 +1872,6 @@ msgstr ""
 #: src/main/coerce.cpp:2729
 msgid "'what' must be a function or character string"
 msgstr "'what' doit être une fonction ou une chaîne de caractères"
-
-#: src/main/coerce.cpp:2740 src/main/unique.cpp:1894
-msgid "'envir' must be an environment"
-msgstr "'envir' doit être un environnement"
 
 #: src/main/coerce.cpp:2899
 msgid "invalid environment specified"
@@ -3410,105 +3408,110 @@ msgid ""
 "'%s'->'%s'\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:196
+#: src/main/dounzip.cpp:181 src/main/dounzip.cpp:203
+#, c-format
+msgid "skipped \"../\" path component(s) in '%s'"
+msgstr ""
+
+#: src/main/dounzip.cpp:218
 #, c-format
 msgid " not overwriting file '%s"
 msgstr " pas d'écrasement du fichier '%s"
 
-#: src/main/dounzip.cpp:284
+#: src/main/dounzip.cpp:306
 #, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "le fichier zip '%s' ne peut être ouvert"
 
-#: src/main/dounzip.cpp:290
+#: src/main/dounzip.cpp:312
 #, c-format
 msgid "error %d with zipfile in unzGetGlobalInfo"
 msgstr ""
 
-#: src/main/dounzip.cpp:307
+#: src/main/dounzip.cpp:329
 #, c-format
 msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:325
+#: src/main/dounzip.cpp:347
 #, c-format
 msgid "error %d with zipfile in unzGoToNextFile\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:346
+#: src/main/dounzip.cpp:368
 msgid "invalid zip name argument"
 msgstr "argument nom de zip incorrect"
 
-#: src/main/dounzip.cpp:349 src/main/dounzip.cpp:433
+#: src/main/dounzip.cpp:371 src/main/dounzip.cpp:455
 msgid "zip path is too long"
 msgstr "le chemin zip est trop long"
 
-#: src/main/dounzip.cpp:366
+#: src/main/dounzip.cpp:388
 msgid "'exdir' is too long"
 msgstr "'exdir' est trop long"
 
-#: src/main/dounzip.cpp:369
+#: src/main/dounzip.cpp:391
 msgid "'exdir' does not exist"
 msgstr "'exdir' n'existe pas"
 
-#: src/main/dounzip.cpp:386
+#: src/main/dounzip.cpp:408
 msgid "requested file not found in the zip file"
 msgstr "le fichier demandé n'est pas trouvé dans le fichier zip"
 
-#: src/main/dounzip.cpp:389
+#: src/main/dounzip.cpp:411
 msgid "zip file is corrupt"
 msgstr "fichier zip corrompu"
 
-#: src/main/dounzip.cpp:392
+#: src/main/dounzip.cpp:414
 msgid "CRC error in zip file"
 msgstr "Erreur CRC dans le fichier zip"
 
-#: src/main/dounzip.cpp:396
+#: src/main/dounzip.cpp:418
 #, fuzzy
 msgid "internal error in 'unz' code"
 msgstr "erreur interne dans 'do_sys'"
 
-#: src/main/dounzip.cpp:399
+#: src/main/dounzip.cpp:421
 msgid "write error in extracting from zip file"
 msgstr "erreur d'écriture lors de l'extraction d'un fichier zip"
 
-#: src/main/dounzip.cpp:402
+#: src/main/dounzip.cpp:424
 #, c-format
 msgid "error %d in extracting from zip file"
 msgstr "erreur %d lors de l'extraction d'un fichier zip"
 
-#: src/main/dounzip.cpp:428
+#: src/main/dounzip.cpp:450
 msgid "unz connections can only be opened for reading"
 msgstr "ouverture des connexions unz seulement possibles en lecture"
 
-#: src/main/dounzip.cpp:439
+#: src/main/dounzip.cpp:461
 msgid "invalid description of 'unz' connection"
 msgstr "description incorrecte pour une connexion 'unz'"
 
-#: src/main/dounzip.cpp:445
+#: src/main/dounzip.cpp:467
 #, c-format
 msgid "cannot open zip file '%s'"
 msgstr "impossible d'ouvrir le fichier zip '%s'"
 
-#: src/main/dounzip.cpp:449
+#: src/main/dounzip.cpp:471
 #, c-format
 msgid "cannot locate file '%s' in zip file '%s'"
 msgstr "impossible de trouver le fichier '%s' dans le fichier zip '%s'"
 
-#: src/main/dounzip.cpp:494
+#: src/main/dounzip.cpp:516
 msgid "printing not enabled for this connection"
 msgstr "impression interdite pour cette connexion"
 
-#: src/main/dounzip.cpp:500
+#: src/main/dounzip.cpp:522
 msgid "write not enabled for this connection"
 msgstr "écriture interdite vers cette connexion"
 
-#: src/main/dounzip.cpp:517 src/main/dounzip.cpp:521 src/main/dounzip.cpp:528
-#: src/main/dounzip.cpp:546
+#: src/main/dounzip.cpp:539 src/main/dounzip.cpp:543 src/main/dounzip.cpp:550
+#: src/main/dounzip.cpp:568
 msgid "allocation of 'unz' connection failed"
 msgstr "l'allocation d'une connexion 'unz' a échoué"
 
-#: src/main/dounzip.cpp:2106
+#: src/main/dounzip.cpp:2128
 #, fuzzy
 msgid "possible truncation of >= 4GB file"
 msgstr "la troncature du fichier a échoué"
@@ -3526,8 +3529,9 @@ msgid "vector types do not match in copyVector"
 msgstr ""
 
 #: src/main/edit.cpp:125
-msgid "invalid argument to edit()"
-msgstr "argument incorrect pour edit()"
+#, fuzzy, c-format
+msgid "invalid argument to '%s'"
+msgstr "argument '%s' incorrect"
 
 #: src/main/edit.cpp:136 src/main/saveload.cpp:2218
 msgid "unable to open file"
@@ -3698,14 +3702,6 @@ msgstr "instantané enregistré avec une version différente du moteur graphique
 msgid "'expr' argument must be an expression"
 msgstr "l'argument 'expr' doit être une expression"
 
-#: src/main/engine.cpp:3219
-msgid "'list' argument must be a list"
-msgstr "l'argument 'list' doit être une liste"
-
-#: src/main/engine.cpp:3225
-msgid "'env' argument must be an environment"
-msgstr "l'argument 'env' doit être un environnement"
-
 #: src/main/engine.cpp:3324 src/main/engine.cpp:3332
 msgid "invalid multibyte char in pch=\"c\""
 msgstr "caractère multioctet incorrect dans pch=\"c\""
@@ -3843,10 +3839,6 @@ msgstr "le premier argument doit être une liste nommée"
 #: src/main/envir.cpp:1896
 msgid "names(x) must be a character vector of the same length as x"
 msgstr "names(x) doit être un vecteur de caractères de la même longueur que x"
-
-#: src/main/envir.cpp:1899
-msgid "'envir' argument must be an environment"
-msgstr "l'argument 'envir' doit être un environnement"
 
 #: src/main/envir.cpp:1926
 msgid "cannot remove variables from base namespace"
@@ -4257,11 +4249,6 @@ msgstr "vous n'êtes pas dans un contexte 'try'"
 #: src/main/errors.cpp:2133
 msgid "error message must be a character string"
 msgstr "le message d'erreur doit être une chaîne de caractères"
-
-#: src/main/errors.cpp:2268
-#, fuzzy, c-format
-msgid "invalid value of %s"
-msgstr "valeur incorrecte pour '%s'"
 
 #: src/main/errors.cpp:2453 src/main/errors.cpp:2548
 #, fuzzy
@@ -6404,9 +6391,10 @@ msgstr "problème lors de la lecture du répertoire %s : %s"
 msgid "problem copying %s to %s: %s"
 msgstr "problème lors de la copie de %s vers %s : %s"
 
-#: src/main/platform.cpp:3264
-msgid "'mode' must be of length at least one"
-msgstr "'mode' doit être de longueur unitaire ou plus"
+#: src/main/platform.cpp:3264 src/main/platform.cpp:3438
+#, c-format
+msgid "'%s' must be of length at least one"
+msgstr "'%s' doit être au moins de longueur unitaire"
 
 #: src/main/platform.cpp:3303 src/main/platform.cpp:3330
 msgid "insufficient OS support on this platform"
@@ -6416,11 +6404,6 @@ msgstr "support de l'OS insuffisant sur cette plateforme"
 #, fuzzy, c-format
 msgid "possible truncation of value for element %d"
 msgstr "la troncature du fichier a échoué"
-
-#: src/main/platform.cpp:3438
-#, c-format
-msgid "'%s' must be of length at least one"
-msgstr "'%s' doit être au moins de longueur unitaire"
 
 #: src/main/platform.cpp:3527
 #, fuzzy, c-format
@@ -9680,8 +9663,10 @@ msgstr "Erreur d'entrée/sortie X11 lors de l'ouverture d'une connexion X11 vers
 msgid "no png support in this version of R"
 msgstr "format PNG indisponible dans cette version de R"
 
-#: src/modules/X11/devX11.cpp:1350
-msgid "filename too long in png() call"
+#: src/modules/X11/devX11.cpp:1350 src/modules/X11/devX11.cpp:1376
+#: src/modules/X11/devX11.cpp:1400 src/modules/X11/devX11.cpp:1412
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
 msgstr "nom de fichier trop long dans un appel a png()"
 
 #: src/modules/X11/devX11.cpp:1354
@@ -9693,10 +9678,6 @@ msgstr "impossible d'ouvrir le fichier PNG '%s'"
 msgid "no jpeg support in this version of R"
 msgstr "format JPEG indisponible dans cette version de R"
 
-#: src/modules/X11/devX11.cpp:1376
-msgid "filename too long in jpeg() call"
-msgstr "nom de fichier trop long dans un appel a jpeg()"
-
 #: src/modules/X11/devX11.cpp:1380
 #, c-format
 msgid "could not open JPEG file '%s'"
@@ -9705,14 +9686,6 @@ msgstr "impossible d'ouvrir le fichier JPEG '%s'"
 #: src/modules/X11/devX11.cpp:1392
 msgid "no tiff support in this version of R"
 msgstr "format TIFF indisponible dans cette version de R"
-
-#: src/modules/X11/devX11.cpp:1400
-msgid "filename too long in tiff() call"
-msgstr "nom de fichier trop long dans l'appel tiff()"
-
-#: src/modules/X11/devX11.cpp:1412
-msgid "filename too long in bmp() call"
-msgstr "nom de fichier trop long dans un appel à bmp()"
 
 #: src/modules/X11/devX11.cpp:1416
 #, c-format
@@ -10212,6 +10185,37 @@ msgstr "Impossible de charger le module X11"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 indisponible"
+
+#~ msgid "'envir' must be an environment"
+#~ msgstr "'envir' doit être un environnement"
+
+#~ msgid "invalid argument to edit()"
+#~ msgstr "argument incorrect pour edit()"
+
+#~ msgid "'env' argument must be an environment"
+#~ msgstr "l'argument 'env' doit être un environnement"
+
+#~ msgid "'envir' argument must be an environment"
+#~ msgstr "l'argument 'envir' doit être un environnement"
+
+#, fuzzy, c-format
+#~ msgid "invalid value of %s"
+#~ msgstr "valeur incorrecte pour '%s'"
+
+#~ msgid "'mode' must be of length at least one"
+#~ msgstr "'mode' doit être de longueur unitaire ou plus"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nom de fichier trop long dans un appel a jpeg()"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nom de fichier trop long dans l'appel tiff()"
+
+#~ msgid "filename too long in bmp() call"
+#~ msgstr "nom de fichier trop long dans un appel à bmp()"
+
+#~ msgid "'list' argument must be a list"
+#~ msgstr "l'argument 'list' doit être une liste"
 
 #, fuzzy
 #~ msgid "allocation error in R_compress1 with libdeflate"

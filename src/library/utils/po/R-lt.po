@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-11 18:28\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -233,24 +233,16 @@ msgstr "'lib = \"%s\"' nėra įrašomas"
 msgid "'list' must be a character vector naming R objects"
 msgstr "'list' turi būti tekstinis vektorius įvardijantis R objektus"
 
-#. R/unix/sysutils.R: warning("'memory.limit()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.limit()' is Windows-specific"
-msgstr "'memory.limit()' yra skirtas Windows"
-
+#. R/unix/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 #, fuzzy
 msgid "'memory.limit()' is no longer supported"
 msgstr "'memory.limit()' yra skirtas Windows"
 
-#. R/unix/sysutils.R: warning("'memory.size()' is Windows-specific", call. = FALSE)
-#: R/unix/sysutils.R:0
-msgid "'memory.size()' is Windows-specific"
-msgstr "'memory.size()' yra skirtas Windows"
-
+#. R/unix/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.size()' is no longer supported", call. = FALSE)
-#: R/windows/sysutils.R:0
+#: R/unix/sysutils.R:0 R/windows/sysutils.R:0
 #, fuzzy
 msgid "'memory.size()' is no longer supported"
 msgstr "'memory.size()' yra skirtas Windows"
@@ -2375,6 +2367,12 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "paketas %s negalimas (%s)"
 msgstr[1] "paketai %s negalimi (%s)"
 msgstr[2] "%s paketų yra negalimi (%s)"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' yra skirtas Windows"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()' yra skirtas Windows"
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"

@@ -1896,7 +1896,7 @@ attribute_hidden SEXP do_list2env(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("names(x) must be a character vector of the same length as x"));
     envir = CADR(args);
     if (TYPEOF(envir) != ENVSXP)
-	error("%s", _("'envir' argument must be an environment"));
+	error(_("'%s' must be an environment"), "envir");
 
     for (int i = 0; i < n; i++) {
 	SEXP name = installTrChar(STRING_ELT(xnms, i));

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -88,10 +88,11 @@ msgstr "color hsv no vàlid"
 msgid "invalid hcl color"
 msgstr "color hcl no vàlid"
 
-#: colors.cpp:401
-#, fuzzy
-msgid "invalid value of 'maxColorValue'"
-msgstr "valor no vàlid de «maxColorValue»"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, c-format
+msgid "invalid '%s' value"
+msgstr "el valor «%s» no és vàlid"
 
 #: colors.cpp:429
 #, fuzzy
@@ -332,10 +333,11 @@ msgstr "el mitre de línia no és vàlid"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "s'ha intentat utilitzar un tipus de lletra no vàlid %d substituït pel tipus de lletra 1"
 
-#: devPS.cpp:3219 devPS.cpp:6832
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
 #, fuzzy, c-format
-msgid "filename too long in %s()"
-msgstr "el nom del fitxer és massa llarg a %s()"
+msgid "filename too long in '%s' call"
+msgstr "el nom del fitxer és massa llarg a la crida %s()"
 
 #: devPS.cpp:3225 devPS.cpp:6838
 #, fuzzy, c-format
@@ -959,11 +961,6 @@ msgstr "no es pot obrir el fitxer «%s» per a escriptura"
 msgid "unable to open printer"
 msgstr "no s'ha pogut assignar la imatge ràster"
 
-#: devWindows.cpp:1797
-#, fuzzy, c-format
-msgid "filename too long in %s() call"
-msgstr "el nom del fitxer és massa llarg a la crida %s()"
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -980,24 +977,9 @@ msgstr "no s'ha pogut assignar el mapa de bits"
 msgid "unable to open file '%s' for writing"
 msgstr "no es pot obrir el fitxer «%s» per a escriptura"
 
-#: devWindows.cpp:1834
-#, fuzzy
-msgid "filename too long in jpeg() call"
-msgstr "nom de fitxer massa llarg a la crida jpeg()"
-
-#: devWindows.cpp:1864
-#, fuzzy
-msgid "filename too long in tiff() call"
-msgstr "nom de fitxer massa llarg a la crida tiff()"
-
 #: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
-msgstr "nom de fitxer massa llarg a la crida win.metafile()"
-
-#: devWindows.cpp:1896
-#, fuzzy
-msgid "filename too long in win.metafile() call"
 msgstr "nom de fitxer massa llarg a la crida win.metafile()"
 
 #: devWindows.cpp:1907
@@ -1103,12 +1085,6 @@ msgstr "Impossible obrir "
 msgid "invalid 'width' or 'height'"
 msgstr "'amplada' o 'alçada' no són vàlids"
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, fuzzy, c-format
-msgid "invalid value of '%s'"
-msgstr "valor no vàlid de «%s»"
-
 #: devWindows.cpp:3921
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
@@ -1202,11 +1178,6 @@ msgstr "no s'ha pogut obrir el fitxer «%s»"
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"
 
-#: cairo/cairoBM.cpp:622
-#, c-format
-msgid "invalid '%s' value"
-msgstr "el valor «%s» no és vàlid"
-
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
@@ -1290,6 +1261,30 @@ msgstr "no s'han pogut assignar les definicions"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "No s'ha trobat el fitxer de tipus de lletra; s'aparellen la família i la cara del tipus de lletra"
+
+#, fuzzy
+#~ msgid "invalid value of 'maxColorValue'"
+#~ msgstr "valor no vàlid de «maxColorValue»"
+
+#, fuzzy, c-format
+#~ msgid "filename too long in %s()"
+#~ msgstr "el nom del fitxer és massa llarg a %s()"
+
+#, fuzzy
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nom de fitxer massa llarg a la crida jpeg()"
+
+#, fuzzy
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nom de fitxer massa llarg a la crida tiff()"
+
+#, fuzzy
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "nom de fitxer massa llarg a la crida win.metafile()"
+
+#, fuzzy, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "valor no vàlid de «%s»"
 
 #, fuzzy
 #~ msgid "ran out of colors in xfig()"

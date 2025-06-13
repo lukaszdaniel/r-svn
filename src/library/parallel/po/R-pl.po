@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. R/clusterApply.R: stop("'X' must have named dimnames")
 #: R/clusterApply.R:0
@@ -175,12 +175,11 @@ msgstr "wejścia o zerowej długości nie mogą być pomieszane z tymi o niezero
 
 #. R/unix/mclapply.R: ngettext(has.errors, "%d function call resulted in an error",     "%d function calls resulted in an error", domain = "R-parallel")
 #: R/unix/mclapply.R:0
-#, fuzzy
 msgid "%d function call resulted in an error"
 msgid_plural "%d function calls resulted in an error"
-msgstr[0] "wywołania funkcji %d spowodowało błąd"
-msgstr[1] "wywołania funkcji %d spowodowało błąd"
-msgstr[2] "wywołania funkcji %d spowodowało błąd"
+msgstr[0] "%d wywołanie funkcji spowodowało błąd"
+msgstr[1] "%d wywołania funkcji spowodowały błąd"
+msgstr[2] "%d wywołań funkcji spowodowało błąd"
 
 #. R/unix/mclapply.R: ngettext(nores, "%d parallel function call did not deliver a result",     "%d parallel function calls did not deliver results", domain = "R-parallel")
 #: R/unix/mclapply.R:0

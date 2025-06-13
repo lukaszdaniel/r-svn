@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2021-10-15 18:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1627,10 +1627,10 @@ msgstr "argumentas 'subset' bus ignoruojamas"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "argumentas 'x' negali būti pakeistas į %s klasę"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
 #, fuzzy
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "argumentas 'x' turi būti skaitinis"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1924,11 +1924,6 @@ msgstr "stulpelių dendrogramų tvarkymas davė neteisingo ilgio indeksą"
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
 msgstr "'contrast.obj' stulpelis turi apibrėžti kontrastą (suma lygi nuliui)"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-msgstr "'contrast.obj' stulpelis turi apibrėžti contrast(sum to zero)"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
 #: R/ks.test.R:0
@@ -4411,6 +4406,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "naudojant %d/%d eilutę iš kompleksinio parinkimo"
 msgstr[1] "naudojant %d/%d eilutes iš kompleksinio parinkimo"
 msgstr[2] "naudojant %d/%d eilučių iš kompleksinio parinkimo"
+
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "'contrast.obj' stulpelis turi apibrėžti contrast(sum to zero)"
 
 #~ msgid ","
 #~ msgstr ","

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -109,7 +109,8 @@ msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\") = '%c' incorrect ; aucune boîte n'est tracée à l'aide de box()"
 
 #: graphics.cpp:3201
-msgid "invalid argument to GBox"
+#, fuzzy, c-format
+msgid "invalid argument to '%s'"
 msgstr "argument incorrect pour GBox"
 
 #: graphics.cpp:3408
@@ -283,8 +284,9 @@ msgstr "trop peu d'arguments"
 msgid "invalid axis number %d"
 msgstr "nombre d'axes %d incorrect"
 
-#: plot.cpp:882
-msgid "'hadj' must be of length one"
+#: plot.cpp:882 plot.cpp:894
+#, fuzzy, c-format
+msgid "'%s' must be of length 1"
 msgstr "'hadj' doit être de longueur unitaire"
 
 #: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455
@@ -293,10 +295,6 @@ msgstr "'hadj' doit être de longueur unitaire"
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "'%s' choisi de taille nulle"
-
-#: plot.cpp:894
-msgid "'gap.axis' must be of length one"
-msgstr "'gap.axis' doit être de longueur unitaire"
 
 #: plot.cpp:924
 msgid "'gap.axis' must be NA or a finite number"
@@ -442,7 +440,8 @@ msgid "invalid symbol coordinates"
 msgstr "coordonnées des symboles incorrectes"
 
 #: plot.cpp:3753
-msgid "x/y/parameter length mismatch"
+#, fuzzy
+msgid "x/y parameter length mismatch"
 msgstr "les longueurs des paramètres x et y diffèrent"
 
 #: plot.cpp:3772
@@ -641,6 +640,9 @@ msgstr "le vecteur long '%s' n'est pas supporté"
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#~ msgid "'gap.axis' must be of length one"
+#~ msgstr "'gap.axis' doit être de longueur unitaire"
 
 #~ msgid "'ylab' must be a character vector of length 1"
 #~ msgstr "'ylab' doit être un vecteur de caractères de longueur 1"

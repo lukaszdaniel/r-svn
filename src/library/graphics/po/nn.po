@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2011-02-18 09:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -113,7 +113,8 @@ msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "ugyldig par(\"bty\") = '%c' (ingen box() teikna)"
 
 #: graphics.cpp:3201
-msgid "invalid argument to GBox"
+#, fuzzy, c-format
+msgid "invalid argument to '%s'"
 msgstr "ugyldig argument til GBox"
 
 #: graphics.cpp:3408
@@ -291,8 +292,9 @@ msgstr "for få argument"
 msgid "invalid axis number %d"
 msgstr "ugyldig aksetal %d"
 
-#: plot.cpp:882
-msgid "'hadj' must be of length one"
+#: plot.cpp:882 plot.cpp:894
+#, fuzzy, c-format
+msgid "'%s' must be of length 1"
 msgstr "«hadj» må ha lengd 1"
 
 #: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455
@@ -301,11 +303,6 @@ msgstr "«hadj» må ha lengd 1"
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr "«side» av lengd null oppgjeven"
-
-#: plot.cpp:894
-#, fuzzy
-msgid "'gap.axis' must be of length one"
-msgstr "«hadj» må ha lengd 1"
 
 #: plot.cpp:924
 msgid "'gap.axis' must be NA or a finite number"
@@ -451,7 +448,8 @@ msgid "invalid symbol coordinates"
 msgstr "ugyldige symbolkoordinator"
 
 #: plot.cpp:3753
-msgid "x/y/parameter length mismatch"
+#, fuzzy
+msgid "x/y parameter length mismatch"
 msgstr "ulike lengder på x/y/parameter"
 
 #: plot.cpp:3772
@@ -654,6 +652,10 @@ msgstr ""
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'gap.axis' must be of length one"
+#~ msgstr "«hadj» må ha lengd 1"
 
 #~ msgid "'ylab' must be a character vector of length 1"
 #~ msgstr "«ylab» må vera ein teiknvektor av lengd 1"

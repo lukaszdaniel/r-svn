@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 13:29+0200\n"
+"POT-Creation-Date: 2025-06-12 17:53+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -359,8 +359,8 @@ msgid "non-finite function value"
 msgstr "valor de diferencia finita no finita [%d]"
 
 #: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
-#, c-format
-msgid "'%s' must be of length one"
+#, fuzzy, c-format
+msgid "'%s' must be of length 1"
 msgstr "'%s' debe tener longitud 1"
 
 #: isoreg.cpp:57
@@ -574,9 +574,10 @@ msgstr "fórmula de modelo inválida"
 msgid "invalid power in formula"
 msgstr "poder inválido en la fórmula"
 
-#: model.cpp:1241
-msgid "invalid model formula in ExtractVars"
-msgstr "fórmula de modelo inválida en ExtractVars"
+#: model.cpp:1241 model.cpp:1676
+#, fuzzy, c-format
+msgid "invalid model formula in '%s'"
+msgstr "fórmula de modelo inválida"
 
 #: model.cpp:1284
 #, c-format
@@ -587,10 +588,6 @@ msgstr ""
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "nombre duplicado '%s' en el data frame usando '.'"
-
-#: model.cpp:1676
-msgid "invalid model formula in EncodeVars"
-msgstr "fórmula de modelo inválida en ExtractVars"
 
 #: model.cpp:1752
 msgid "argument is not a valid model"
@@ -613,30 +610,24 @@ msgstr "'varlist' ha cambiado (de nvar=%d) a nuevo %d después de EncodeVars() -
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' en la fórmula y sin argumento 'data'"
 
-#: monoSpl.cpp:38
-msgid "n must be at least two"
-msgstr "n debería ser al menos dos"
+#: monoSpl.cpp:38 monoSpl.cpp:74
+#, fuzzy, c-format
+msgid "'%s' must be at least %d"
+msgstr "'m' debe ser una lista"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "el argumento m debería ser numérico"
 
-#: monoSpl.cpp:74
-msgid "length(m) must be at least two"
-msgstr "la longitud(m) debe ser al menos dos"
-
 #: monoSpl.cpp:76
 #, fuzzy, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "el argumento Sx debe ser un vector numérico uno más corto que m[]"
 
-#: nls.cpp:101
-msgid "'control' must be a list"
-msgstr "'control' debe ser una lista"
-
-#: nls.cpp:103
-msgid "'m' must be a list"
+#: nls.cpp:101 nls.cpp:103 port.cpp:576
+#, fuzzy, c-format
+msgid "'%s' must be a list"
 msgstr "'m' debe ser una lista"
 
 #: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
@@ -762,7 +753,7 @@ msgid "attempt to minimize non-function"
 msgstr "tentativa de minimizar una no-función"
 
 #: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372
+#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valor '%s' inválido"
@@ -922,10 +913,6 @@ msgstr ""
 msgid "forkal error code %d"
 msgstr ""
 
-#: pacf.cpp:460
-msgid "invalid value of lag.max"
-msgstr ""
-
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
@@ -1003,10 +990,6 @@ msgstr ""
 msgid "invalid type for eval_check_store"
 msgstr ""
 
-#: port.cpp:576
-msgid "m must be a list"
-msgstr ""
-
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr ""
@@ -1079,6 +1062,21 @@ msgstr ""
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "Esto no debería suceder"
+
+#~ msgid "n must be at least two"
+#~ msgstr "n debería ser al menos dos"
+
+#~ msgid "length(m) must be at least two"
+#~ msgstr "la longitud(m) debe ser al menos dos"
+
+#~ msgid "invalid model formula in ExtractVars"
+#~ msgstr "fórmula de modelo inválida en ExtractVars"
+
+#~ msgid "invalid model formula in EncodeVars"
+#~ msgstr "fórmula de modelo inválida en ExtractVars"
+
+#~ msgid "'control' must be a list"
+#~ msgstr "'control' debe ser una lista"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf reemplazada por el máximo valor positivo"

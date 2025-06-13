@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -82,9 +82,11 @@ msgstr "unzulässige HSV Farbe"
 msgid "invalid hcl color"
 msgstr "unzulässige HCL Farbe"
 
-#: colors.cpp:401
-msgid "invalid value of 'maxColorValue'"
-msgstr "unzulässiger Wert von 'maxColorValue'"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, c-format
+msgid "invalid '%s' value"
+msgstr "unzulässiger '%s' Wert"
 
 #: colors.cpp:429
 msgid "invalid 'names' vector"
@@ -301,10 +303,11 @@ msgstr "unzulässige Zeilenkappung"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "Versuch den unzulässigen Zeichensatz %d zu benutzen, nutze stattdessen Zeichensatz 1"
 
-#: devPS.cpp:3219 devPS.cpp:6832
-#, c-format
-msgid "filename too long in %s()"
-msgstr "Dateiname in %s() zu lang"
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "Dateiname im Aufruf von %s() zu lang"
 
 #: devPS.cpp:3225 devPS.cpp:6838
 #, c-format
@@ -870,11 +873,6 @@ msgstr "kann Datei '%s' nicht zum Schreiben öffnen"
 msgid "unable to open printer"
 msgstr "kann Rasterimage nicht allozieren"
 
-#: devWindows.cpp:1797
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "Dateiname im Aufruf von %s() zu lang"
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -890,21 +888,9 @@ msgstr "kann Bitmap nicht allozieren"
 msgid "unable to open file '%s' for writing"
 msgstr "kann Datei '%s' nicht zum Schreiben öffnen"
 
-#: devWindows.cpp:1834
-msgid "filename too long in jpeg() call"
-msgstr "Dateiname zu lang in jpeg() Aufruf"
-
-#: devWindows.cpp:1864
-msgid "filename too long in tiff() call"
-msgstr "Dateiname zu lang in tiff() Aufruf"
-
 #: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
-msgstr "Dateiname zu lang in win.metafile() Aufruf"
-
-#: devWindows.cpp:1896
-msgid "filename too long in win.metafile() call"
 msgstr "Dateiname zu lang in win.metafile() Aufruf"
 
 #: devWindows.cpp:1907
@@ -995,12 +981,6 @@ msgstr "Kann nicht öffnen "
 msgid "invalid 'width' or 'height'"
 msgstr "unzulässige 'with' oder 'height'"
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "unzulässiger Wert von '%s'"
-
 #: devWindows.cpp:3921
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
@@ -1089,11 +1069,6 @@ msgstr "konnte Datei '%s' nicht öffnen"
 msgid "invalid '%s' argument"
 msgstr "unzulässiges '%s' Argument"
 
-#: cairo/cairoBM.cpp:622
-#, c-format
-msgid "invalid '%s' value"
-msgstr "unzulässiger '%s' Wert"
-
 #: cairo/cairoBM.cpp:665
 #, c-format
 msgid "unable to start device '%s'"
@@ -1168,6 +1143,26 @@ msgstr "konnte Definitionen nicht allozieren"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "Zeichensatz Datei nicht gefunden; passende Zeichensatzfamilie und -face"
+
+#~ msgid "invalid value of 'maxColorValue'"
+#~ msgstr "unzulässiger Wert von 'maxColorValue'"
+
+#, c-format
+#~ msgid "filename too long in %s()"
+#~ msgstr "Dateiname in %s() zu lang"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "Dateiname zu lang in jpeg() Aufruf"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "Dateiname zu lang in tiff() Aufruf"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "Dateiname zu lang in win.metafile() Aufruf"
+
+#, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "unzulässiger Wert von '%s'"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "keine Farben mehr übrig in xfig()"

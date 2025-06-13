@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1647,10 +1647,10 @@ msgstr "参数'subset'忽略不用"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "无法将'x'参数強制转换成%s类别"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
 #, fuzzy
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "参数'x'必需是数值"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1945,11 +1945,6 @@ msgstr "行系統樹圖排序索引结果的长度出了错"
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
 msgstr "'contrast.obj'的列必需设定成对比(总和为零)"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-msgstr "'contrast.obj'列必需设定对比(总和为零)"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
 #: R/ks.test.R:0
@@ -4409,6 +4404,9 @@ msgstr[0] "模型里上范围没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "从组合拟合中用%d/%d行"
+
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "'contrast.obj'列必需设定对比(总和为零)"
 
 #~ msgid ","
 #~ msgstr ","

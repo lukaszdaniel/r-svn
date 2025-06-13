@@ -682,7 +682,7 @@ se.contrast.aovlist <-
     else {
         contrast <- contrast.obj
         if(any(abs(colSums(contrast)) > 1e-8))
-            stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
+            stop("columns of 'contrast.obj' must define a contrast (sum to zero)")
         if(!length(colnames(contrast)))
             colnames(contrast) <- paste("Contrast", seq(ncol(contrast)))
     }

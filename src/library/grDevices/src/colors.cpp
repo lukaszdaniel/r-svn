@@ -398,7 +398,7 @@ SEXP rgb(SEXP r, SEXP g, SEXP b, SEXP a, SEXP MCV, SEXP nam)
     double mV = asReal(MCV);
 
     if(!R_FINITE(mV) || mV == 0.)
-	error("%s", _("invalid value of 'maxColorValue'"));
+	error(_("invalid '%s' value"), "maxColorValue");
     if(mV == 255.) {
 	PROTECT(r = coerceVector(r, INTSXP));
 	PROTECT(g = coerceVector(g, INTSXP));

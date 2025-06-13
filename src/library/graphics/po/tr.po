@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:47+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2011-04-02 18:24+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -115,7 +115,8 @@ msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "geçersiz par(\"bty\") = '%c'; box() çizilmedi"
 
 #: graphics.cpp:3201
-msgid "invalid argument to GBox"
+#, fuzzy, c-format
+msgid "invalid argument to '%s'"
 msgstr "GBox a geçersiz argüman"
 
 #: graphics.cpp:3408
@@ -293,8 +294,9 @@ msgstr "çok az argüman"
 msgid "invalid axis number %d"
 msgstr "geçersiz eksen numarası %d"
 
-#: plot.cpp:882
-msgid "'hadj' must be of length one"
+#: plot.cpp:882 plot.cpp:894
+#, fuzzy, c-format
+msgid "'%s' must be of length 1"
 msgstr "'hadj' bir birim uzunluğunda olmalıdır"
 
 #: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455
@@ -303,11 +305,6 @@ msgstr "'hadj' bir birim uzunluğunda olmalıdır"
 #, fuzzy, c-format
 msgid "zero-length '%s' specified"
 msgstr "sıfır birim uzunlukta 'side' belirlendi"
-
-#: plot.cpp:894
-#, fuzzy
-msgid "'gap.axis' must be of length one"
-msgstr "'hadj' bir birim uzunluğunda olmalıdır"
 
 #: plot.cpp:924
 msgid "'gap.axis' must be NA or a finite number"
@@ -453,7 +450,8 @@ msgid "invalid symbol coordinates"
 msgstr "geçersiz sembol koordinatları"
 
 #: plot.cpp:3753
-msgid "x/y/parameter length mismatch"
+#, fuzzy
+msgid "x/y parameter length mismatch"
 msgstr "x/y/parametre uzunluğu uyumsuzluğu"
 
 #: plot.cpp:3772
@@ -654,6 +652,10 @@ msgstr ""
 #: stem.cpp:201
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
+
+#, fuzzy
+#~ msgid "'gap.axis' must be of length one"
+#~ msgstr "'hadj' bir birim uzunluğunda olmalıdır"
 
 #~ msgid "'ylab' must be a character vector of length 1"
 #~ msgstr "'ylab' 1 birim uzunluğunda bir karakter vektörü olmalıdır"

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:33+0200\n"
-"PO-Revision-Date: 2025-06-10 16:50+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"PO-Revision-Date: 2025-06-12 17:52+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -148,8 +148,8 @@ msgstr "problem z wyświetleniem pliku '%ls'"
 #: src/main/connections.cpp:5851 src/main/connections.cpp:5900 src/main/connections.cpp:5908 src/main/connections.cpp:6759
 #: src/main/connections.cpp:6786 src/main/connections.cpp:6793 src/main/context.cpp:696 src/main/context.cpp:705
 #: src/main/context.cpp:709 src/main/datetime.cpp:1269 src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
-#: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510 src/main/dotcode.cpp:515 src/main/dounzip.cpp:356
-#: src/main/dounzip.cpp:363 src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087 src/main/envir.cpp:2101
+#: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510 src/main/dotcode.cpp:515 src/main/dounzip.cpp:378
+#: src/main/dounzip.cpp:385 src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087 src/main/envir.cpp:2101
 #: src/main/envir.cpp:2217 src/main/envir.cpp:2225 src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
 #: src/main/envir.cpp:3159 src/main/envir.cpp:3173 src/main/envir.cpp:3180 src/main/envir.cpp:3196 src/main/envir.cpp:3930
 #: src/main/errors.cpp:1282 src/main/eval.cpp:893 src/main/eval.cpp:903 src/main/eval.cpp:906 src/main/eval.cpp:909
@@ -265,9 +265,9 @@ msgstr "Niewystarczająca ilość pamięci (rpipeOpen)"
 msgid "cannot open cmd `%s'"
 msgstr "nie można otworzyć adresu URL '%s'"
 
-#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:505
+#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
 msgid "seek not enabled for this connection"
-msgstr "przeszukwanie nie jest udostępnione dla tego połączenia"
+msgstr "przeszukiwanie nie jest udostępnione dla tego połączenia"
 
 #: src/gnuwin32/run.cpp:1008
 msgid "truncate not enabled for this connection"
@@ -332,7 +332,7 @@ msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<BŁĄD: ponowne kodowanie nie powiodło się dla kodowania '%s'>\n"
 
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255 src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:204 src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:226 src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
 #: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158 src/main/serialize.cpp:3210 src/unix/system.cpp:432
 #, c-format
 msgid "cannot open file '%s': %s"
@@ -421,16 +421,16 @@ msgstr ""
 
 #: src/gnuwin32/sys-win32.cpp:266
 msgid "character string expected as first argument"
-msgstr "oczekiwano łańcucha tekstowego jako pierwszego argumentu"
+msgstr "oczekiwano ciągu znaków jako pierwszego argumentu"
 
 #: src/gnuwin32/sys-win32.cpp:275
 msgid "character string expected as third argument"
-msgstr "oczekiwano łańcucha tekstowego jako trzeciego argumentu"
+msgstr "oczekiwano ciągu znaków jako trzeciego argumentu"
 
 #: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036 src/unix/sys-unix.cpp:1094
 #, c-format
 msgid "command '%s' timed out after %ds"
-msgstr "polecenie '%s' przekroczyło czas oczekiwania po %d sekudach"
+msgstr "polecenie '%s' przekroczyło czas oczekiwania po %d sekundach"
 
 #: src/gnuwin32/sys-win32.cpp:364 src/unix/sys-unix.cpp:874
 #, c-format
@@ -625,7 +625,7 @@ msgstr "argument '%s' ma długość > 1 i tylko pierwszy element zostanie użyty
 
 #: src/main/agrep.cpp:199 src/main/agrep.cpp:817
 msgid "'pattern' must be a non-empty character string"
-msgstr "argument 'pattern' musi być niepustym łańcuchem tekstowym"
+msgstr "argument 'pattern' musi być niepustym ciągiem znaków"
 
 #: src/main/agrep.cpp:210 src/main/agrep.cpp:826 src/main/grep.cpp:1346 src/main/grep.cpp:3013 src/main/grep.cpp:3350
 msgid "regular expression is invalid in this locale"
@@ -653,7 +653,7 @@ msgstr "argument '%s' zostanie zignorowany"
 #: src/main/agrep.cpp:617
 #, c-format
 msgid "input string x[%d] is invalid in this locale"
-msgstr "wejściowy łańcuch tekstowy x[%d] jest niepoprawny w lokalizacji"
+msgstr "wejściowy tekst x[%d] jest niepoprawny w lokalizacji"
 
 #: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482 src/main/print.cpp:1194 src/main/util.cpp:3206
 #: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301 src/modules/X11/dataentry.cpp:452
@@ -664,7 +664,7 @@ msgstr "błąd przydziału pamięci w '%s'"
 #: src/main/agrep.cpp:664
 #, c-format
 msgid "input string y[%d] is invalid in this locale"
-msgstr "wejściowy łańcuch tekstowy y[%d] jest niepoprawny w lokalizacji"
+msgstr "wejściowy tekst y[%d] jest niepoprawny w lokalizacji"
 
 #: src/main/altclasses.cpp:113 src/main/altclasses.cpp:147 src/main/altclasses.cpp:195 src/main/altclasses.cpp:248
 #: src/main/altclasses.cpp:335
@@ -1154,7 +1154,7 @@ msgstr "niepoprawny typ (%s) do ustawienia atrybutu 'names'"
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames()' zastosowane do nie-tablicy"
 
-#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736
+#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
 #, c-format
 msgid "'%s' must be a list"
 msgstr "argument '%s' musi być listą"
@@ -1237,7 +1237,7 @@ msgstr "niepoprawny typ '%s' dla nazwy gniazda"
 
 #: src/main/attrib.cpp:1658
 msgid "'name' must be non-null character string"
-msgstr "'name' musi być niepustym łańcuchem tekstowym"
+msgstr "'name' musi być niepustym ciągiem znaków"
 
 #: src/main/attrib.cpp:1784 src/main/attrib.cpp:1855 src/main/attrib.cpp:1907
 msgid "invalid type or length for slot name"
@@ -1366,9 +1366,10 @@ msgstr "ustawienie 'environment(<funkcja prymitywna>)' nie jest możliwe i prób
 msgid "replacement object is not an environment"
 msgstr "zastępujący obiekt nie jest środowiskiem"
 
-#: src/main/builtin.cpp:356
-msgid "'enclos' must be an environment"
-msgstr "'enclos' musi być środowiskiem"
+#: src/main/builtin.cpp:356 src/main/coerce.cpp:2740 src/main/engine.cpp:3225 src/main/envir.cpp:1899 src/main/unique.cpp:1894
+#, c-format
+msgid "'%s' must be an environment"
+msgstr "'%s' musi być środowiskiem"
 
 #: src/main/builtin.cpp:374 src/main/builtin.cpp:407
 msgid "argument is not an environment"
@@ -1495,7 +1496,7 @@ msgstr "'%s' wymaga wektora tekstowego"
 #: src/main/character.cpp:407 src/main/character.cpp:609 src/main/character.cpp:614
 #, c-format
 msgid "invalid multibyte string, %s"
-msgstr "niepoprawny wielobajtowy łańcuch, %s"
+msgstr "niepoprawny wielobajtowy tekst, %s"
 
 #: src/main/character.cpp:211
 #, c-format
@@ -1524,11 +1525,11 @@ msgstr "szerokość nie jest obliczalna w kodowaniu \"bytes\", element %ld"
 
 #: src/main/character.cpp:447
 msgid "extracting substrings from a non-character object"
-msgstr "wyodrębnianie podłańcuchów z nietekstowego obiektu"
+msgstr "wyodrębnianie elementów tekstu z nietekstowego obiektu"
 
 #: src/main/character.cpp:458 src/main/character.cpp:676
 msgid "invalid substring arguments"
-msgstr "niepoprawne argumenty podłańcucha"
+msgstr "niepoprawne argumenty elementów tekstu"
 
 #: src/main/character.cpp:502
 msgid "non-character object(s)"
@@ -1536,7 +1537,7 @@ msgstr "nietekstowe obiekty"
 
 #: src/main/character.cpp:671
 msgid "replacing substrings in a non-character object"
-msgstr "zastępowanie podłańcuchów w nietekstowym obiekcie"
+msgstr "zastępowanie elementów tekstu w nietekstowym obiekcie"
 
 #: src/main/character.cpp:943
 msgid "the first argument must be a character vector"
@@ -1571,19 +1572,19 @@ msgstr "określenie zmniejszenia zakresu ('%c-%c')"
 
 #: src/main/character.cpp:1510 src/main/character.cpp:1516
 msgid "invalid UTF-8 string 'old'"
-msgstr "niepoprawny łańcuch UTF-8 'old'"
+msgstr "niepoprawny tekst UTF-8 'old'"
 
 #: src/main/character.cpp:1522
 msgid "invalid multibyte string 'old'"
-msgstr "niepoprawny wielobajtowy łańcuch 'old'"
+msgstr "niepoprawny wielobajtowy tekst 'old'"
 
 #: src/main/character.cpp:1535 src/main/character.cpp:1541
 msgid "invalid UTF-8 string 'new'"
-msgstr "niepoprawny łańcuch UTF-8 'new'"
+msgstr "niepoprawny tekst UTF-8 'new'"
 
 #: src/main/character.cpp:1547
 msgid "invalid multibyte string 'new'"
-msgstr "niepoprawny wielobajtowy łańcuch 'new'"
+msgstr "niepoprawny wielobajtowy tekst 'new'"
 
 #: src/main/character.cpp:1575 src/main/character.cpp:1664
 msgid "'old' is longer than 'new'"
@@ -1602,20 +1603,20 @@ msgstr "'strtrim()' wymaga wektora tekstowego"
 #: src/main/datetime.cpp:1020 src/main/datetime.cpp:1050 src/main/datetime.cpp:1157 src/main/datetime.cpp:1275
 #: src/main/datetime.cpp:1497 src/main/datetime.cpp:1659 src/main/datetime.cpp:1978 src/main/dotcode.cpp:235
 #: src/main/errors.cpp:1176 src/main/errors.cpp:1198 src/main/errors.cpp:1316 src/main/errors.cpp:1323 src/main/errors.cpp:1586
-#: src/main/platform.cpp:3859 src/main/seq.cpp:268 src/main/seq.cpp:275 src/main/seq.cpp:279 src/main/seq.cpp:389
-#: src/main/seq.cpp:396 src/main/seq.cpp:399 src/main/seq.cpp:401 src/main/seq.cpp:458 src/main/seq.cpp:462 src/main/seq.cpp:466
-#: src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591 src/main/source.cpp:230 src/main/sysutils.cpp:282
-#: src/main/util.cpp:1215 src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611 src/modules/lapack/Lapack.cpp:1093
-#: src/modules/X11/devX11.cpp:3231 src/modules/X11/devX11.cpp:3258 src/modules/X11/devX11.cpp:3263 src/modules/X11/devX11.cpp:3268
-#: src/modules/X11/devX11.cpp:3278 src/modules/X11/devX11.cpp:3283 src/modules/X11/devX11.cpp:3287 src/modules/X11/devX11.cpp:3291
-#: src/modules/X11/devX11.cpp:3296
+#: src/main/errors.cpp:2268 src/main/platform.cpp:3859 src/main/seq.cpp:268 src/main/seq.cpp:275 src/main/seq.cpp:279
+#: src/main/seq.cpp:389 src/main/seq.cpp:396 src/main/seq.cpp:399 src/main/seq.cpp:401 src/main/seq.cpp:458 src/main/seq.cpp:462
+#: src/main/seq.cpp:466 src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591 src/main/source.cpp:230
+#: src/main/sysutils.cpp:282 src/main/util.cpp:1215 src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611
+#: src/modules/lapack/Lapack.cpp:1093 src/modules/X11/devX11.cpp:3231 src/modules/X11/devX11.cpp:3258
+#: src/modules/X11/devX11.cpp:3263 src/modules/X11/devX11.cpp:3268 src/modules/X11/devX11.cpp:3278 src/modules/X11/devX11.cpp:3283
+#: src/modules/X11/devX11.cpp:3287 src/modules/X11/devX11.cpp:3291 src/modules/X11/devX11.cpp:3296
 #, c-format
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
 #: src/main/character.cpp:1860 src/main/envir.cpp:3996 src/main/envir.cpp:4018 src/main/envir.cpp:4027 src/main/grep.cpp:203
 msgid "R character strings are limited to 2^31-1 bytes"
-msgstr "łańcuchy tekstowe R są ograniczone do 2^31-1 bajtów"
+msgstr "teksty R są ograniczone do 2^31-1 bajtów"
 
 #: src/main/Closure.cpp:63
 msgid "invalid body argument for 'function'"
@@ -1756,7 +1757,7 @@ msgstr "domyślna metoda nie jest zaimplementowana dla typu '%s'"
 
 #: src/main/coerce.cpp:2697
 msgid "first argument must be a character string"
-msgstr "pierwszy argument musi być łańcuchem tekstowym"
+msgstr "pierwszy argument musi być ciągiem znaków"
 
 #: src/main/coerce.cpp:2699 src/main/coerce.cpp:2748 src/main/coerce.cpp:2752
 msgid "illegal usage"
@@ -1764,11 +1765,7 @@ msgstr "niepoprawne użycie"
 
 #: src/main/coerce.cpp:2729
 msgid "'what' must be a function or character string"
-msgstr "argument 'what' musi być łańcuchem tekstowym lub funkcją"
-
-#: src/main/coerce.cpp:2740 src/main/unique.cpp:1894
-msgid "'envir' must be an environment"
-msgstr "'envir' musi być środowiskiem"
+msgstr "argument 'what' musi być ciągiem znaków lub funkcją"
 
 #: src/main/coerce.cpp:2899
 msgid "invalid environment specified"
@@ -1781,7 +1778,7 @@ msgstr "Ustawianie class(x) na NULL. Wynik nie będzie już dłużej obiektem S4
 #: src/main/coerce.cpp:2971
 #, c-format
 msgid "Setting class(x) to multiple strings (\"%s\", \"%s\", ...); result will no longer be an S4 object"
-msgstr "Ustawianie class(x) w wiele łańcuchów (\"%s\", \"%s\", ...). Wynik nie będzie już dłużej obiektem S4"
+msgstr "Ustawianie class(x) na wiele tekstów (\"%s\", \"%s\", ...). Wynik nie będzie już dłużej obiektem S4"
 
 #: src/main/coerce.cpp:2975
 #, c-format
@@ -1790,7 +1787,7 @@ msgstr "Ustawianie class(x) na \"%s\" ustawia atrybut na NULL. Wynik nie będzie
 
 #: src/main/coerce.cpp:3000
 msgid "invalid replacement object to be a class string"
-msgstr "niepoprawny zastępujący obiekt na miejsce łańcucha klasy"
+msgstr "niepoprawny zastępujący obiekt, który ma być tekstem"
 
 #: src/main/coerce.cpp:3006
 #, c-format
@@ -1808,7 +1805,7 @@ msgstr "nie można ustawić klasy na \"array\" chyba, że atrybut wymiaru ma dł
 
 #: src/main/coerce.cpp:3094
 msgid "'value' must be non-null character string"
-msgstr "'value' musi być niepustym łańcuchem tekstowym"
+msgstr "'value' musi być niepustym ciągiem znaków"
 
 #: src/main/coerce.cpp:3098
 msgid "use of 'real' is defunct: use 'double' instead"
@@ -1954,7 +1951,7 @@ msgstr "%s nie jest udostępnione dla tego połączenia"
 
 #: src/main/connections.cpp:563
 msgid "invalid char string in output conversion"
-msgstr "niepoprawny łańcuch znaków w wyjściowej konwersji"
+msgstr "niepoprawny tekst w wyjściowej konwersji"
 
 #: src/main/connections.cpp:686
 #, c-format
@@ -2407,11 +2404,11 @@ msgstr "zbyt mało linii odczytanych w 'readLines()'"
 
 #: src/main/connections.cpp:4627
 msgid "incomplete string at end of file has been discarded"
-msgstr "niekompletny łańcuch na końcu pliku został odrzucony"
+msgstr "niekompletny tekst na końcu pliku został odrzucony"
 
 #: src/main/connections.cpp:4633
 msgid "null terminator not found: breaking string at 10000 bytes"
-msgstr "ogranicznik 'null' nie został znaleziony: przerywanie łańcucha po 10000 bajtów"
+msgstr "ogranicznik 'null' nie został znaleziony: przerywanie tekstu po 10000 bajtów"
 
 #: src/main/connections.cpp:4696
 msgid "can only read from a binary connection"
@@ -2486,11 +2483,11 @@ msgstr "zbyt dużo danych dla pustego wektora na tej platformie"
 
 #: src/main/connections.cpp:5431
 msgid "writeChar: more bytes requested than are in the string - will zero-pad"
-msgstr "writeChar: zażądano więcej bajtów niż jest w łańcuchu - zostaną wyzerowane"
+msgstr "writeChar: zażądano więcej bajtów niż jest w tekście - zostaną wyzerowane"
 
 #: src/main/connections.cpp:5458
 msgid "writeChar: more characters requested than are in the string - will zero-pad"
-msgstr "writeChar: zażądano więcej znaków niż jest w łańcuchu - zostaną wyzerowane"
+msgstr "writeChar: zażądano więcej znaków niż jest w tekście - zostaną wyzerowane"
 
 #: src/main/connections.cpp:5522
 msgid "maximum number of pushback lines exceeded"
@@ -2942,15 +2939,15 @@ msgstr "niepoprawna wartość 'cutoff' w metodzie 'deparse()', używanie domyśl
 
 #: src/main/deparse.cpp:325
 msgid "deparse may be incomplete"
-msgstr "konwersja wyrażenia na łańcuch może być niekompletna"
+msgstr "konwersja wyrażenia na tekst może być niekompletna"
 
 #: src/main/deparse.cpp:328
 msgid "deparse may be not be source()able in R < 2.7.0"
-msgstr "wynik konwersji wyrażenia na łańcuch tekstowy może być niedostępny dla metody 'source()' w R < 2.7.0"
+msgstr "wynik konwersji wyrażenia na tekst może być niedostępny dla metody 'source()' w R < 2.7.0"
 
 #: src/main/deparse.cpp:410 src/main/source.cpp:211
 msgid "'file' must be a character string or connection"
-msgstr "argument 'file' musi być łańcuchem tekstowym lub połączeniem"
+msgstr "argument 'file' musi być ciągiem znaków lub połączeniem"
 
 #: src/main/deparse.cpp:430 src/main/deparse.cpp:526 src/main/deparse.cpp:533
 msgid "wrote too few characters"
@@ -3033,7 +3030,7 @@ msgstr "symbol '%s' jest zbyt długi"
 
 #: src/main/dotcode.cpp:188
 msgid "first argument must be a string (of length 1) or native symbol reference"
-msgstr "pierwszy argument musi być łańcuchem (o długości 1) lub naturalnym symbolicznym powiązaniem"
+msgstr "pierwszy argument musi być tekstem (o długości 1) lub naturalnym symbolicznym powiązaniem"
 
 #: src/main/dotcode.cpp:237 src/main/dotcode.cpp:1434
 msgid "too many arguments in foreign function call"
@@ -3084,7 +3081,7 @@ msgstr "niepoprawny typ (%s) argumentu 'PACKAGE'"
 
 #: src/main/dotcode.cpp:431
 msgid "PACKAGE argument must be a single character string"
-msgstr "argument PACKAGE musi być jednoznakowym łańcuchem tekstowym"
+msgstr "argument PACKAGE musi być pojedynczym ciągiem znaków"
 
 #: src/main/dotcode.cpp:437
 msgid "PACKAGE argument is too long"
@@ -3213,103 +3210,108 @@ msgstr ""
 "przepełniona tablica w .C(\"%s\") w tekstowym argumencie %d, element %d\n"
 "'%s'->'%s'"
 
-#: src/main/dounzip.cpp:196
+#: src/main/dounzip.cpp:181 src/main/dounzip.cpp:203
+#, c-format
+msgid "skipped \"../\" path component(s) in '%s'"
+msgstr "pominięto komponenty ścieżki \"../\" w '%s'"
+
+#: src/main/dounzip.cpp:218
 #, c-format
 msgid " not overwriting file '%s"
 msgstr " plik '%s' nie jest nadpisywany"
 
-#: src/main/dounzip.cpp:284
+#: src/main/dounzip.cpp:306
 #, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "plik zip '%s' nie może zostać otwarty"
 
-#: src/main/dounzip.cpp:290
+#: src/main/dounzip.cpp:312
 #, fuzzy, c-format
 msgid "error %d with zipfile in unzGetGlobalInfo"
 msgstr "błąd %d z plikiem zip w unzGetCurrentFileInfo\n"
 
-#: src/main/dounzip.cpp:307
+#: src/main/dounzip.cpp:329
 #, c-format
 msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
 msgstr "błąd %d z plikiem zip w unzGetCurrentFileInfo\n"
 
-#: src/main/dounzip.cpp:325
+#: src/main/dounzip.cpp:347
 #, c-format
 msgid "error %d with zipfile in unzGoToNextFile\n"
 msgstr "błąd %d z plikiem zip w unzGoToNextFile\n"
 
-#: src/main/dounzip.cpp:346
+#: src/main/dounzip.cpp:368
 msgid "invalid zip name argument"
 msgstr "niepoprawny argument nazwy pliku zip"
 
-#: src/main/dounzip.cpp:349 src/main/dounzip.cpp:433
+#: src/main/dounzip.cpp:371 src/main/dounzip.cpp:455
 msgid "zip path is too long"
 msgstr "ścieżka do pliku zip jest zbyt długa"
 
-#: src/main/dounzip.cpp:366
+#: src/main/dounzip.cpp:388
 msgid "'exdir' is too long"
 msgstr "'exdir' jest zbyt długi"
 
-#: src/main/dounzip.cpp:369
+#: src/main/dounzip.cpp:391
 msgid "'exdir' does not exist"
 msgstr "'exdir' nie istnieje"
 
-#: src/main/dounzip.cpp:386
+#: src/main/dounzip.cpp:408
 msgid "requested file not found in the zip file"
 msgstr "żądany plik nie został znaleziony w pliku zip"
 
-#: src/main/dounzip.cpp:389
+#: src/main/dounzip.cpp:411
 msgid "zip file is corrupt"
 msgstr "plik zip jest uszkodzony"
 
-#: src/main/dounzip.cpp:392
+#: src/main/dounzip.cpp:414
 msgid "CRC error in zip file"
 msgstr "błąd CRC w pliku zip"
 
-#: src/main/dounzip.cpp:396
+#: src/main/dounzip.cpp:418
 msgid "internal error in 'unz' code"
 msgstr "błąd wewnętrzny w kodzie 'unz'"
 
-#: src/main/dounzip.cpp:399
+#: src/main/dounzip.cpp:421
 msgid "write error in extracting from zip file"
 msgstr "błąd zapisu podczas rozpakowywania pliku zip"
 
-#: src/main/dounzip.cpp:402
+#: src/main/dounzip.cpp:424
 #, c-format
 msgid "error %d in extracting from zip file"
 msgstr "błąd %d podczas rozpakowywania pliku zip"
 
-#: src/main/dounzip.cpp:428
+#: src/main/dounzip.cpp:450
 msgid "unz connections can only be opened for reading"
 msgstr "połączenia 'unz' mogą być otwarte tylko do odczytu"
 
-#: src/main/dounzip.cpp:439
+#: src/main/dounzip.cpp:461
 msgid "invalid description of 'unz' connection"
 msgstr "niepoprawny opis połączenia 'unz'"
 
-#: src/main/dounzip.cpp:445
+#: src/main/dounzip.cpp:467
 #, c-format
 msgid "cannot open zip file '%s'"
 msgstr "nie można otworzyć pliku zip '%s'"
 
-#: src/main/dounzip.cpp:449
+#: src/main/dounzip.cpp:471
 #, c-format
 msgid "cannot locate file '%s' in zip file '%s'"
 msgstr "nie można znaleźć pliku '%s' w pliku zip '%s'"
 
-#: src/main/dounzip.cpp:494
+#: src/main/dounzip.cpp:516
 msgid "printing not enabled for this connection"
 msgstr "drukowanie dla tego połączenia jest niedostępne"
 
-#: src/main/dounzip.cpp:500
+#: src/main/dounzip.cpp:522
 msgid "write not enabled for this connection"
 msgstr "zapis nie jest dostępny dla tego połączenia"
 
-#: src/main/dounzip.cpp:517 src/main/dounzip.cpp:521 src/main/dounzip.cpp:528 src/main/dounzip.cpp:546
+#: src/main/dounzip.cpp:539 src/main/dounzip.cpp:543 src/main/dounzip.cpp:550 src/main/dounzip.cpp:568
 msgid "allocation of 'unz' connection failed"
 msgstr "przydział połączenia 'unz' nie powiódł się"
 
-#: src/main/dounzip.cpp:2106
+#: src/main/dounzip.cpp:2128
 msgid "possible truncation of >= 4GB file"
 msgstr "prawdopodobne przycięcie pliki >= 4GB"
 
@@ -3326,8 +3328,9 @@ msgid "vector types do not match in copyVector"
 msgstr ""
 
 #: src/main/edit.cpp:125
-msgid "invalid argument to edit()"
-msgstr "niepoprawny argument przekazany do 'edit()'"
+#, c-format
+msgid "invalid argument to '%s'"
+msgstr "niepoprawny argument przekazany do '%s'"
 
 #: src/main/edit.cpp:136 src/main/saveload.cpp:2218
 msgid "unable to open file"
@@ -3343,7 +3346,7 @@ msgstr "argument 'editor' nie jest ustawiony"
 
 #: src/main/edit.cpp:157
 msgid "'title' must be a string"
-msgstr "'title' musi być łańcuchem tekstowym"
+msgstr "'title' musi być tekstem"
 
 #: src/main/edit.cpp:175
 #, c-format
@@ -3496,14 +3499,6 @@ msgstr "zrzut zapisany z inną wersją silnika grafiki (%d - to jest wersja %d)"
 msgid "'expr' argument must be an expression"
 msgstr "argument 'expr' musi być wyrażeniem"
 
-#: src/main/engine.cpp:3219
-msgid "'list' argument must be a list"
-msgstr "argument 'list' musi być listą"
-
-#: src/main/engine.cpp:3225
-msgid "'env' argument must be an environment"
-msgstr "argument 'env' musi być środowiskiem"
-
 #: src/main/engine.cpp:3324 src/main/engine.cpp:3332
 msgid "invalid multibyte char in pch=\"c\""
 msgstr "niepoprawny znak wielobajtowy w 'pch=\"c\"'"
@@ -3644,10 +3639,6 @@ msgstr "pierwszy argument musi być nazwaną listą"
 #: src/main/envir.cpp:1896
 msgid "names(x) must be a character vector of the same length as x"
 msgstr "'names(x)' musi być wektorem tekstowym tej samej długości co 'x'"
-
-#: src/main/envir.cpp:1899
-msgid "'envir' argument must be an environment"
-msgstr "argument 'envir' musi być środowiskiem"
 
 #: src/main/envir.cpp:1926
 msgid "cannot remove variables from base namespace"
@@ -3863,7 +3854,7 @@ msgstr "niepoprawny ciąg znaków '%s'"
 #: src/main/envir.cpp:4115
 #, c-format
 msgid "embedded nul in string: '%s'"
-msgstr "osadzony znak null w łańcuchu: '%s'"
+msgstr "osadzony znak null w tekście: '%s'"
 
 #: src/main/envir.cpp:4201
 #, c-format
@@ -4029,7 +4020,7 @@ msgstr "błędne dane programu obsługi"
 
 #: src/main/errors.cpp:1899
 msgid "error message not a string"
-msgstr "komunikat błędu nie jest łańcuchem"
+msgstr "komunikat błędu nie jest tekstem"
 
 #: src/main/errors.cpp:1978
 msgid "handler or restart stack mismatch in old restart"
@@ -4053,12 +4044,7 @@ msgstr "to nie jest w kontekście 'try'"
 
 #: src/main/errors.cpp:2133
 msgid "error message must be a character string"
-msgstr "komunikat błędu musi być łańcuchem tekstowym"
-
-#: src/main/errors.cpp:2268
-#, c-format
-msgid "invalid value of %s"
-msgstr "niepoprawna wartość '%s'"
+msgstr "komunikat błędu musi być ciągiem znaków"
 
 #: src/main/errors.cpp:2453 src/main/errors.cpp:2548
 msgid "body function is required"
@@ -4656,7 +4642,7 @@ msgstr "\\%o przekracza maksymalną dozwoloną wartość ósemkową \\377 (%s:%d
 #: src/main/gram.cpp:5257 src/main/gram.y:2948
 #, c-format
 msgid "'\\x' used without hex digits in character string (%s:%d:%d)"
-msgstr "'\\x' użyte bez szesnastkowych cyfr w łańcuchu tekstowym (%s:%d:%d)"
+msgstr "'\\x' użyte bez szesnastkowych cyfr w tekście (%s:%d:%d)"
 
 #: src/main/gram.cpp:5276 src/main/gram.y:2967
 #, c-format
@@ -4666,7 +4652,7 @@ msgstr "sekwencja \\uxxxxxxxx nie jest wspierana wewnątrz odwrotnych cudzysłow
 #: src/main/gram.cpp:5296 src/main/gram.y:2987
 #, c-format
 msgid "'\\u' used without hex digits in character string (%s:%d:%d)"
-msgstr "'\\u' użyte bez szesnastkowych cyfr w łańcuchu tekstowym rozpoczynającym (%s:%d:%d)"
+msgstr "'\\u' użyte bez szesnastkowych cyfr w tekście rozpoczynającym (%s:%d:%d)"
 
 #: src/main/gram.cpp:5308 src/main/gram.y:2999
 #, c-format
@@ -4681,7 +4667,7 @@ msgstr "sekwencja \\Uxxxxxxxx nie jest wspierana wewnątrz odwrotnych cudzysłow
 #: src/main/gram.cpp:5343 src/main/gram.y:3034
 #, c-format
 msgid "'\\U' used without hex digits in character string (%s:%d:%d)"
-msgstr "'\\U' użyte bez szesnastkowych cyfr w łańcuchu tekstowym (%s:%d:%d)"
+msgstr "'\\U' użyte bez szesnastkowych cyfr w tekście (%s:%d:%d)"
 
 #: src/main/gram.cpp:5355 src/main/gram.y:3046
 #, c-format
@@ -4701,12 +4687,12 @@ msgstr "niepoprawna wartość \\U{xxxxxxxx} %6x (%s:%d:%d)"
 #: src/main/gram.cpp:5415 src/main/gram.y:3106
 #, c-format
 msgid "'\\%s' is an unrecognized escape in character string (%s:%d:%d)"
-msgstr "'\\%s' jest nierozpoznanym znakiem modyfikacji w łańcuchu tekstowym (%s:%d:%d)"
+msgstr "'\\%s' jest nierozpoznanym znakiem modyfikacji w tekście (%s:%d:%d)"
 
 #: src/main/gram.cpp:5494 src/main/gram.cpp:5632 src/main/gram.y:3185 src/main/gram.y:3323
 #, c-format
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed (%s:%d:%d)"
-msgstr "mieszanie znaków Unicode oraz ósemkowych/szesnastkowych znaków modyfikacji w łańcuchu jest niedozwolone (%s:%d:%d)"
+msgstr "mieszanie znaków Unicode oraz ósemkowych/szesnastkowych znaków modyfikacji w tekście jest niedozwolone (%s:%d:%d)"
 
 #: src/main/gram.cpp:5499 src/main/gram.cpp:5637 src/main/gram.y:3190 src/main/gram.y:3328
 #, c-format
@@ -4714,7 +4700,7 @@ msgid ""
 "string containing Unicode escapes not in this locale\n"
 "is too long (max 10000 chars) (%s:%d:%d)"
 msgstr ""
-"łańcuch zawierający znak modyfikacji Unicode nie w tej lokalizacji\n"
+"tekst zawierający znak modyfikacji Unicode nie w tej lokalizacji\n"
 "jest zbyt długi (maksymalnie 10000 znaków) (%s:%d:%d)"
 
 #: src/main/gram.cpp:5536 src/main/gram.y:3227
@@ -4861,11 +4847,11 @@ msgstr "wyrażenie regularne to niepoprawny UTF-8"
 
 #: src/main/grep.cpp:1799
 msgid "pattern matches an empty string infinitely, returning first match only"
-msgstr "wzorzec dopasowuje pusty łańcuch w nieskończoność, zwracane jest tylko pierwsze dopasowanie"
+msgstr "wzorzec dopasowuje pusty tekst w nieskończoność, zwracane jest tylko pierwsze dopasowanie"
 
 #: src/main/grep.cpp:2024
 msgid "result string is too long"
-msgstr "wynikowy łańcuch jest zbyt długi"
+msgstr "wynikowy tekst jest zbyt długi"
 
 #: src/main/grep.cpp:2178
 msgid "'pattern' is invalid"
@@ -5179,7 +5165,7 @@ msgstr "dłuższy argument nie jest wielokrotnością długości krótszego"
 
 #: src/main/match.cpp:108
 msgid "invalid partial string match"
-msgstr "niepoprawna częściowa zgodność łańcucha"
+msgstr "niepoprawna częściowa zgodność tekstu"
 
 #: src/main/match.cpp:245 src/main/match.cpp:288 src/main/objects.cpp:70 src/main/objects.cpp:81 src/main/summary.cpp:434
 #, c-format
@@ -5505,7 +5491,7 @@ msgstr "długie wektory nie są jeszcze wspierane: %s:%d"
 
 #: src/main/names.cpp:1094
 msgid "string argument required"
-msgstr "wymagany jest argument łańcucha"
+msgstr "wymagany jest argument tekstowy"
 
 #: src/main/names.cpp:1097
 msgid "no such primitive function"
@@ -5560,7 +5546,7 @@ msgstr "argument 'generic' musi być podany"
 
 #: src/main/objects.cpp:569
 msgid "'generic' argument must be a character string"
-msgstr "argument 'generic' musi być łańcuchem tekstowym"
+msgstr "argument 'generic' musi być ciągiem znaków"
 
 #: src/main/objects.cpp:576
 msgid "'UseMethod' used in an inappropriate fashion"
@@ -5660,7 +5646,7 @@ msgstr "'standardGeneric' wywołane bez włączonego wysyłania 'methods' (będz
 
 #: src/main/objects.cpp:1334
 msgid "argument to 'standardGeneric' must be a non-empty character string"
-msgstr "argument przekazywany do 'standardGeneric()' musi być niepustym łańcuchem tekstowym"
+msgstr "argument przekazywany do 'standardGeneric()' musi być niepustym ciągiem znaków"
 
 #: src/main/objects.cpp:1340
 #, c-format
@@ -5670,7 +5656,7 @@ msgstr "wywołanie dla 'standardGeneric' (\"%s\") najwyraźniej nie zostało wys
 #: src/main/objects.cpp:1363 src/main/raw.cpp:214 src/main/Renviron.cpp:533
 #, c-format
 msgid "argument '%s' must be a character string"
-msgstr "argument '%s' musi być łańcuchem tekstowym"
+msgstr "argument '%s' musi być ciągiem znaków"
 
 #: src/main/objects.cpp:1383
 #, fuzzy, c-format
@@ -5711,7 +5697,7 @@ msgstr "prymitywna funkcja '%s' została ustawiona dla metod, ale nie dostarczon
 
 #: src/main/objects.cpp:1689
 msgid "C level MAKE_CLASS macro called with NULL string pointer"
-msgstr "makro MAKE_CLASS poziomu C wywołane ze wskaźnikiem łańcucha ustawionym na NULL"
+msgstr "makro MAKE_CLASS poziomu C wywołane ze wskaźnikiem tekstu ustawionym na NULL"
 
 #: src/main/objects.cpp:1705
 msgid "'methods' package not yet loaded"
@@ -5719,7 +5705,7 @@ msgstr "pakiet 'methods' nie został jeszcze załadowany"
 
 #: src/main/objects.cpp:1715
 msgid "R_getClassDef(.) called with NULL string pointer"
-msgstr "'R_getClassDef(.)' wywołane ze wskaźnikiem łańcucha ustawionym na NULL"
+msgstr "'R_getClassDef(.)' wywołane ze wskaźnikiem tekstu ustawionym na NULL"
 
 #: src/main/objects.cpp:1762
 msgid "C level NEW macro called with null class definition pointer"
@@ -5731,9 +5717,8 @@ msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr "próba wygenerowania obiektu z klasy wirtualnej (\"%s\")"
 
 #: src/main/objects.cpp:1814
-#, fuzzy
 msgid "'R_get_primname' called on a non-primitive"
-msgstr "'R_get_primname()' wywołane na nieprymitywnej funkcji"
+msgstr "'R_get_primname' wywołano na funkcji nieprymitywnej"
 
 #: src/main/objects.cpp:1847
 #, c-format
@@ -6130,9 +6115,10 @@ msgstr "problem z czytaniem katalogu %s: %s"
 msgid "problem copying %s to %s: %s"
 msgstr "problem z kopiowaniem %s do %s: %s"
 
-#: src/main/platform.cpp:3264
-msgid "'mode' must be of length at least one"
-msgstr "argument 'mode' musi mieć długość co najmniej 1"
+#: src/main/platform.cpp:3264 src/main/platform.cpp:3438
+#, c-format
+msgid "'%s' must be of length at least one"
+msgstr "argument '%s' musi mieć długość co najmniej 1"
 
 #: src/main/platform.cpp:3303 src/main/platform.cpp:3330
 msgid "insufficient OS support on this platform"
@@ -6142,11 +6128,6 @@ msgstr "niewystarczające wsparcie OS na tej platformie"
 #, c-format
 msgid "possible truncation of value for element %d"
 msgstr "prawdopodobne przycięcie wartości dla elementu %d"
-
-#: src/main/platform.cpp:3438
-#, c-format
-msgid "'%s' must be of length at least one"
-msgstr "argument '%s' musi mieć długość co najmniej 1"
 
 #: src/main/platform.cpp:3527
 #, c-format
@@ -6228,7 +6209,7 @@ msgstr "niepoprawny wielobajtowy ciąg znaków w '%s'"
 
 #: src/main/plotmath.cpp:1006
 msgid "invalid multibyte string"
-msgstr "niepoprawny wielobajtowy łańcuch"
+msgstr "niepoprawny wielobajtowy tekst"
 
 #: src/main/plotmath.cpp:1070
 msgid "invalid character in current multibyte locale"
@@ -6374,7 +6355,7 @@ msgstr "niewspierana kodowanie (%d) w Rstrwid"
 #: src/main/printutils.cpp:671
 #, c-format
 msgid "too large string (nchar=%d) => 5*nchar + 8 > SIZE_MAX"
-msgstr "zbyt duży łańcuch tekstowy (nchar=%d) => 5*nchar + 8 > SIZE_MAX"
+msgstr "zbyt duży tekst (nchar=%d) => 5*nchar + 8 > SIZE_MAX"
 
 #: src/main/printutils.cpp:786
 msgid "it is not known that wchar_t is Unicode on this platform"
@@ -6513,7 +6494,7 @@ msgstr "argument 'x' nie może zawierać wartości NA"
 
 #: src/main/raw.cpp:352 src/main/util.cpp:2025
 msgid "invalid UTF-8 string"
-msgstr "niepoprawny łańcuch UTF-8"
+msgstr "niepoprawny tekst UTF-8"
 
 #: src/main/raw.cpp:397
 msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
@@ -6892,15 +6873,15 @@ msgstr "łąńcuch wejściowy jest zbyt długi"
 
 #: src/main/Rstrptime.h:1309
 msgid "invalid multibyte input string"
-msgstr "niepoprawny wielobajtowy łańcuch wejściowy"
+msgstr "niepoprawny wielobajtowy tekst wejściowy"
 
 #: src/main/Rstrptime.h:1312
 msgid "format string is too long"
-msgstr "łańcuch formatujący jest zbyt długi"
+msgstr "tekst formatujący jest zbyt długi"
 
 #: src/main/Rstrptime.h:1314
 msgid "invalid multibyte format string"
-msgstr "niepoprawny wielobajtowy łańcuch formatujący"
+msgstr "niepoprawny wielobajtowy tekst formatujący"
 
 #: src/main/saveload.cpp:228 src/main/saveload.cpp:233 src/main/saveload.cpp:242 src/main/saveload.cpp:251 src/main/saveload.cpp:260
 #: src/main/saveload.cpp:269 src/main/saveload.cpp:273 src/main/saveload.cpp:282 src/main/saveload.cpp:1449
@@ -7011,7 +6992,7 @@ msgstr "NewReadItem: nieznany typ %i"
 
 #: src/main/saveload.cpp:1507
 msgid "out of memory reading ascii string"
-msgstr "zabrakło pamięci podczas czytania łańcucha ASCII"
+msgstr "zabrakło pamięci podczas czytania tekstu ASCII"
 
 #: src/main/saveload.cpp:1632
 msgid "a binary read error occurred"
@@ -7019,11 +7000,11 @@ msgstr "nastąpił błąd odczytu danych binarnych"
 
 #: src/main/saveload.cpp:1647 src/main/saveload.cpp:1748
 msgid "out of memory reading binary string"
-msgstr "zabrakło pamięci podczas czytania łańcucha binarnego"
+msgstr "zabrakło pamięci podczas czytania tekstu binarnego"
 
 #: src/main/saveload.cpp:1652
 msgid "a binary string read error occurred"
-msgstr "nastąpił błąd odczytu łańcucha binarnego"
+msgstr "nastąpił błąd odczytu tekstu binarnego"
 
 #: src/main/saveload.cpp:1712
 msgid "an xdr integer data write error occurred"
@@ -7035,7 +7016,7 @@ msgstr "pojawił się błąd odczytu danych liczby całkowitej w xdr"
 
 #: src/main/saveload.cpp:1734 src/main/saveload.cpp:1753
 msgid "an xdr string data write error occurred"
-msgstr "pojawił się błąd zapisu danych łańcucha w xdr"
+msgstr "pojawił się błąd zapisu danych tekstu w xdr"
 
 #: src/main/saveload.cpp:1761
 msgid "an xdr real data write error occurred"
@@ -7080,7 +7061,7 @@ msgstr "nie można otworzyć 'file'"
 
 #: src/main/saveload.cpp:2058 src/main/saveload.cpp:2093
 msgid "'file' must be non-empty string"
-msgstr "'file' musi być niepustym łańcuchem tekstowym"
+msgstr "'file' musi być niepustym ciągiem znaków"
 
 #: src/main/saveload.cpp:2060 src/main/saveload.cpp:2095
 msgid "'ascii' must be logical"
@@ -7355,7 +7336,7 @@ msgstr "brak dostępnej metody przywracania"
 
 #: src/main/serialize.cpp:892
 msgid "names in persistent strings are currently ignored"
-msgstr "nazwy w persystentych łańcuchach są aktualnie ignorowane"
+msgstr "nazwy w trwałych tekstach są obecnie ignorowane"
 
 #: src/main/serialize.cpp:1106
 #, c-format
@@ -7382,22 +7363,22 @@ msgstr "indeks referencyjny poza zasięgiem"
 
 #: src/main/serialize.cpp:1528
 msgid "names in persistent strings are not supported yet"
-msgstr "nazwy w persystentnych łańcuchach nie są jeszcze wspierane"
+msgstr "nazwy w trwałych tekstach nie są jeszcze obsługiwane"
 
 #: src/main/serialize.cpp:1707
 #, c-format
 msgid "input string '%s' cannot be translated from '%s' to UTF-8, but is valid UTF-8"
-msgstr "łańcuch wejściowy '%s' nie może być przetłumaczony z '%s' na UTF-8, ale jest poprawnym UTF-8"
+msgstr "tekst wejściowy '%s' nie może być przetłumaczony z '%s' na UTF-8, ale jest poprawnym UTF-8"
 
 #: src/main/serialize.cpp:1711
 #, c-format
 msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"
-msgstr "łańcuch wejściowy '%s' nie może być przetłumaczony na UTF-8; czy jest on poprawny w '%s'?"
+msgstr "tekst wejściowy '%s' nie może być przetłumaczony na UTF-8; czy jest on poprawny w '%s'?"
 
 #: src/main/serialize.cpp:1746
 #, c-format
 msgid "deserializing invalid UTF-8 string '%s'"
-msgstr "deserializowanie niepoprawnego łańcucha UTF-8 '%s'"
+msgstr "deserializacja niepoprawnego tekstu UTF-8 '%s'"
 
 #: src/main/serialize.cpp:1776
 msgid "strings not representable in native encoding will not be translated"
@@ -7632,7 +7613,7 @@ msgstr "czynnik posiada błędny poziom"
 #: src/main/sprintf.cpp:104
 #, c-format
 msgid "required resulting string length %d is greater than maximal %d"
-msgstr "wymagana długość %d wynikowego łańcucha jest większa niż maksymalna %d"
+msgstr "wymagana długość %d wynikowego tekstu jest większa niż maksymalna %d"
 
 #: src/main/sprintf.cpp:117
 #, c-format
@@ -7707,7 +7688,7 @@ msgstr "użyj formatu '%s' dla obiektu tekstowego"
 #: src/main/sprintf.cpp:439
 #, c-format
 msgid "likely truncation of character string to %d characters"
-msgstr "prawdopodobne przycięcie łańcucha tekstowego do %d znaków"
+msgstr "prawdopodobne przycięcie ciągu znaków do %d znaków"
 
 #: src/main/sprintf.cpp:490
 #, c-format
@@ -8216,7 +8197,7 @@ msgstr "'%s' musi być wywołany na 'CHARSXP', ale otrzymano '%s'"
 
 #: src/main/sysutils.cpp:1694 src/main/sysutils.cpp:1925 src/main/sysutils.cpp:2063
 msgid "translating strings with \"bytes\" encoding is not allowed"
-msgstr "tłumaczenie łańcuchów tekstowych ze stroną kodową \"bytes\" nie jest dozwolone"
+msgstr "tłumaczenie tekstów ze stroną kodową \"bytes\" nie jest dozwolone"
 
 #: src/main/sysutils.cpp:1707 src/main/sysutils.cpp:1937
 msgid "internal error: no translation needed"
@@ -8244,7 +8225,7 @@ msgstr "nie można przetłumaczyć '%s' do szerokiego tekstu"
 
 #: src/main/sysutils.cpp:2391
 msgid "converted string too long for buffer"
-msgstr "przekonwertowany łańcuch jest zbyt długi dla bufora"
+msgstr "przekonwertowany tekst jest zbyt długi dla bufora"
 
 #: src/main/sysutils.cpp:2572
 #, c-format
@@ -8514,7 +8495,7 @@ msgstr "niepoprawny punkt Unicode %u"
 #: src/main/util.cpp:1645
 #, c-format
 msgid "invalid multibyte string at '%s'"
-msgstr "niepoprawny wielobajtowy łańcuch w '%s'"
+msgstr "niepoprawny wielobajtowy tekst w '%s'"
 
 #: src/main/util.cpp:1841
 msgid "error message truncated to 255 chars"
@@ -8571,7 +8552,7 @@ msgstr "ICU nie jest wspierany w tej kompilacji"
 
 #: src/main/util.cpp:2742
 msgid "input must be a character string"
-msgstr "wejście musi być łańcuchem tekstowym"
+msgstr "wejście musi być ciągiem znaków"
 
 #: src/main/util.cpp:2759
 msgid "'breaks' is not sorted"
@@ -8998,7 +8979,7 @@ msgstr "utworzenie gniazda serwera nie powiodło się: nie można otworzyć port
 #: src/modules/lapack/Lapack.cpp:72 src/modules/lapack/Lapack.cpp:91 src/modules/lapack/Lapack.cpp:106
 #, c-format
 msgid "argument type[1]='%s' must be a character string of string length 1"
-msgstr "argument type[1]='%s' musi być łańcuchem tekstowym o długości 1"
+msgstr "argument type[1]='%s' musi być ciągiem znaków o długości 1"
 
 #: src/modules/lapack/Lapack.cpp:80
 #, c-format
@@ -9204,7 +9185,7 @@ msgstr "wewnętrzny błąd typu w 'dataentry'"
 
 #: src/modules/X11/dataentry.cpp:1132
 msgid "dataentry: parse error on string"
-msgstr "dataentry: błąd przetwarzania łańcucha"
+msgstr "dataentry: błąd przetwarzania tekstu"
 
 #: src/modules/X11/dataentry.cpp:1332 src/modules/X11/dataentry.cpp:1741
 msgid "dataentry: expression too long"
@@ -9313,9 +9294,10 @@ msgstr "błąd X11 wejścia/wyjścia podczas otwierania połączenia X11 z '%s'"
 msgid "no png support in this version of R"
 msgstr "brak wsparcia 'png' w tej wersji R"
 
-#: src/modules/X11/devX11.cpp:1350
-msgid "filename too long in png() call"
-msgstr "nazwa pliku jest zbyt długa w wywołaniu 'png()'"
+#: src/modules/X11/devX11.cpp:1350 src/modules/X11/devX11.cpp:1376 src/modules/X11/devX11.cpp:1400 src/modules/X11/devX11.cpp:1412
+#, c-format
+msgid "filename too long in '%s' call"
+msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s'"
 
 #: src/modules/X11/devX11.cpp:1354
 #, c-format
@@ -9326,10 +9308,6 @@ msgstr "nie udało się otworzyć pliku PNG '%s'"
 msgid "no jpeg support in this version of R"
 msgstr "brak wsparcia 'jpeg' w tej wersji R"
 
-#: src/modules/X11/devX11.cpp:1376
-msgid "filename too long in jpeg() call"
-msgstr "nazwa pliku jest zbyt długa w wywołaniu 'jpeg()'"
-
 #: src/modules/X11/devX11.cpp:1380
 #, c-format
 msgid "could not open JPEG file '%s'"
@@ -9338,14 +9316,6 @@ msgstr "nie udało się otworzyć pliku JPEG '%s'"
 #: src/modules/X11/devX11.cpp:1392
 msgid "no tiff support in this version of R"
 msgstr "brak wsparcia 'tiff' w tej wersji R"
-
-#: src/modules/X11/devX11.cpp:1400
-msgid "filename too long in tiff() call"
-msgstr "nazwa pliku jest zbyt długa w wywołaniu 'tiff()'"
-
-#: src/modules/X11/devX11.cpp:1412
-msgid "filename too long in bmp() call"
-msgstr "nazwa pliku jest zbyt długa w wywołaniu 'bmp()'"
 
 #: src/modules/X11/devX11.cpp:1416
 #, c-format
@@ -9832,6 +9802,43 @@ msgstr "moduł X11 nie może zostać załadowany"
 msgid "X11 is not available"
 msgstr "X11 nie jest dostępne"
 
+#~ msgid "'enclos' must be an environment"
+#~ msgstr "'enclos' musi być środowiskiem"
+
+#~ msgid "'envir' must be an environment"
+#~ msgstr "'envir' musi być środowiskiem"
+
+#~ msgid "invalid argument to edit()"
+#~ msgstr "niepoprawny argument przekazany do 'edit()'"
+
+#~ msgid "'env' argument must be an environment"
+#~ msgstr "argument 'env' musi być środowiskiem"
+
+#~ msgid "'envir' argument must be an environment"
+#~ msgstr "argument 'envir' musi być środowiskiem"
+
+#, c-format
+#~ msgid "invalid value of %s"
+#~ msgstr "niepoprawna wartość '%s'"
+
+#~ msgid "'mode' must be of length at least one"
+#~ msgstr "argument 'mode' musi mieć długość co najmniej 1"
+
+#~ msgid "filename too long in png() call"
+#~ msgstr "nazwa pliku jest zbyt długa w wywołaniu 'png()'"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nazwa pliku jest zbyt długa w wywołaniu 'jpeg()'"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nazwa pliku jest zbyt długa w wywołaniu 'tiff()'"
+
+#~ msgid "filename too long in bmp() call"
+#~ msgstr "nazwa pliku jest zbyt długa w wywołaniu 'bmp()'"
+
+#~ msgid "'list' argument must be a list"
+#~ msgstr "argument 'list' musi być listą"
+
 #~ msgid "allocation error in R_compress1 with libdeflate"
 #~ msgstr "błąd przydziału pamięci w 'R_compress1 ' z libdeflate"
 
@@ -10040,7 +10047,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "Dodatkowo: "
 
 #~ msgid " [invalid string in warning(.)]"
-#~ msgstr " [niepoprawny łańcuch w 'warning()']"
+#~ msgstr " [niepoprawny tekst w 'warning()']"
 
 #~ msgid "During startup - "
 #~ msgstr "Podczas startu - "
@@ -10215,10 +10222,10 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "'A' musi być macierzą liczbową"
 
 #~ msgid "'type' must be a character string"
-#~ msgstr "'type' musi być łańcuchem tekstowym"
+#~ msgstr "'type' musi być ciągiem znaków"
 
 #~ msgid "'norm' must be a character string"
-#~ msgstr "'norm' musi być łańcuchem tekstowym"
+#~ msgstr "'norm' musi być ciągiem znaków"
 
 #, c-format
 #~ msgid "error [%d] from Lapack 'dgetrf()'"
@@ -10250,7 +10257,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "'b' musi być macierzą zespoloną"
 
 #~ msgid "'jobu' must be a character string"
-#~ msgstr "argument 'jobu' musi być łańcuchem tekstowym"
+#~ msgstr "argument 'jobu' musi być ciągiem znaków"
 
 #~ msgid "'a' must be a numeric matrix"
 #~ msgstr "'a' musi być macierzą liczbową"
@@ -10307,7 +10314,7 @@ msgstr "X11 nie jest dostępne"
 
 #, c-format
 #~ msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s' ?"
-#~ msgstr "łańcuch wejściowy '%s' nie może być przetłumaczony na UTF-8; czy jest on poprawny w '%s'?"
+#~ msgstr "tekst wejściowy '%s' nie może być przetłumaczony na UTF-8; czy jest on poprawny w '%s'?"
 
 #~ msgid "wrong length for argument"
 #~ msgstr "błędna długość argumentu"
@@ -10440,7 +10447,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "obiekt (symbol) nie może zostać przekształcony na typ '%s'"
 
 #~ msgid "as.call(<character string>)  not yet implemented"
-#~ msgstr "'as.call(<łańcuch tekstowy>)' nie jest jeszcze zaimplementowane"
+#~ msgstr "'as.call(<tekst>)' nie jest jeszcze zaimplementowane"
 
 #~ msgid "'con' is not a rawConnection"
 #~ msgstr "'con' nie jest rawConnection"
@@ -10455,7 +10462,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "przepełnienie stosu liczb całkowitych"
 
 #~ msgid "unable to allocate buffer for long string at line %d"
-#~ msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
+#~ msgstr "nie można przydzielić bufora dla długiego tekstu w linii %d"
 
 #~ msgid "invalid split pattern '%s'"
 #~ msgstr "niepoprawny wzór '%s' rozdzielenia"
@@ -10464,7 +10471,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "niepoprawny parametr 'width', dozwolone %d...%d"
 
 #~ msgid "non-string argument to internal 'paste'"
-#~ msgstr "argument niełańcuchowy przekazany do wewnętrznej funkcji 'paste()'"
+#~ msgstr "argument nie-tekstowy przekazany do wewnętrznej funkcji 'paste()'"
 
 #~ msgid "first argument must be atomic"
 #~ msgstr "pierwszy argument musi być atomowy"
@@ -10494,7 +10501,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "klasa \"%s\" nie ma gniazda 'names'; przypisanie atrybutu 'names' spowoduje utworzenie niepoprawnego obiektu"
 
 #~ msgid "deparse of an S4 object will not be source()able"
-#~ msgstr "wynik konwersji wyrażenia na łańcuch tekstowy na obiekcie S4 nie będzie dostępny dla metody 'source()'"
+#~ msgstr "wynik konwersji wyrażenia na tekst na obiekcie S4 nie będzie dostępny dla metody 'source()'"
 
 #~ msgid "binary operation on non-conformable arrays"
 #~ msgstr "operacja dwuargumentowa na niezgodnych tablicach"
@@ -10572,19 +10579,19 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "procedury internetowe zostały już zainicjowane"
 
 #~ msgid "'msg1' must be a character string"
-#~ msgstr "'msg1' musi być łańcuchem tekstowym"
+#~ msgstr "'msg1' musi być ciągiem znaków"
 
 #~ msgid "'msg2' must be a character string"
-#~ msgstr "'msg2' musi być łańcuchem tekstowym"
+#~ msgstr "'msg2' musi być ciągiem znaków"
 
 #~ msgid "argument 'code' must be a character string"
-#~ msgstr "argument 'code' musi być łańcuchem tekstowym"
+#~ msgstr "argument 'code' musi być ciągiem znaków"
 
 #~ msgid "argument 'type' must be a character string"
-#~ msgstr "argument 'type' musi być łańcuchem tekstowym"
+#~ msgstr "argument 'type' musi być ciągiem znaków"
 
 #~ msgid "'sep' must be a character string"
-#~ msgstr "'sep' musi być łańcuchem tekstowym"
+#~ msgstr "'sep' musi być ciągiem znaków"
 
 #~ msgid "InternetOpenUrl timed out"
 #~ msgstr "przekroczono czas oczekiwania na połączenie z 'InternetOpenUrl'"
@@ -10672,7 +10679,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "ujemna wartość w 'x'"
 
 #~ msgid "'jobu' and 'jobv' must be character strings"
-#~ msgstr "argumenty 'jobu' oraz 'jobv' muszą być łańcuchami tekstowymi"
+#~ msgstr "argumenty 'jobu' oraz 'jobv' muszą być tekstami"
 
 #~ msgid "Singular triangular system detected."
 #~ msgstr "Wykryto osobliwy trójkątny system."
@@ -10888,9 +10895,9 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "%6d unresolved string\n"
 #~ msgid_plural "%6d unresolved strings\n"
-#~ msgstr[0] "%6d nierozwiązany łańcuch\n"
-#~ msgstr[1] "%6d nierozwiązane łańcuchy\n"
-#~ msgstr[2] "%6d nierozwiązanych łańcuchów\n"
+#~ msgstr[0] "%6d nierozwiązany tekst\n"
+#~ msgstr[1] "%6d nierozwiązane teksty\n"
+#~ msgstr[2] "%6d nierozwiązanych tekstów\n"
 
 #~ msgid "        reconstructing block ...\n"
 #~ msgstr "        rekonstruowanie bloku ...\n"
@@ -11058,7 +11065,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "argument '%s' musi być wektorem o długości 1"
 
 #~ msgid "invalid multibyte input string %d"
-#~ msgstr "niepoprawny wielobajtowy łańcuch wejściowy %d"
+#~ msgstr "niepoprawny wielobajtowy tekst wejściowy %d"
 
 #~ msgid "NA values introduced by coercion"
 #~ msgstr "pojawiły się wartości NA na skutek przekształcenia"
@@ -11127,7 +11134,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "argument '%s' został użyty więcej niż raz"
 
 #~ msgid "'%s' argument must be a single character string"
-#~ msgstr "argument '%s' musi być pojedynczym łańcuchem tekstowym"
+#~ msgstr "argument '%s' musi być pojedynczym ciągiem znaków"
 
 #~ msgid "invalid function in 'call_R()'"
 #~ msgstr "niepoprawna funkcja w 'call_R()'"
@@ -11211,7 +11218,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "brak wewnętrznej (.Internal) funkcji '%s'"
 
 #~ msgid "'%s' argument must be non-empty character string"
-#~ msgstr "argument '%s' musi być niepustym łańcuchem tekstowym"
+#~ msgstr "argument '%s' musi być niepustym ciągiem znaków"
 
 #~ msgid "'%s' argument must be logical"
 #~ msgstr "argument '%s' musi być typem logicznym"
@@ -11220,7 +11227,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "Zmniejszanie stosu poprzez regułę %d (linia %lu):\n"
 
 #~ msgid "'%s' used without hex digits in character string starting \"%s\""
-#~ msgstr "'%s' użyte bez szestnastkowych cyfr w łańcuchu tekstowym rozpoczynającym \"%s\""
+#~ msgstr "'%s' użyte bez szestnastkowych cyfr w tekście rozpoczynającym \"%s\""
 
 #~ msgid "'%s' sequences not supported inside backticks (line %d)"
 #~ msgstr "sekwencja '%s' nie jest wspierana wewnątrz odwrotnych cudzysłowiów (``) (linia %d)"
@@ -11428,7 +11435,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "argument '%s' musi być wektorem logicznym o długości 1"
 
 #~ msgid "non-string argument to internal 'paste()' function"
-#~ msgstr "argument niełańcuchowy przekazany do wewnętrznej funkcji 'paste()'"
+#~ msgstr "argument nie-tekstowy przekazany do wewnętrznej funkcji 'paste()'"
 
 #~ msgid "expanded '%s' name is too long"
 #~ msgstr "rozszerzona nazwa '%s' jest zbyt długa"
@@ -11666,7 +11673,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "argument %d procedury 'Lapack' '%s' posiadał niepoprawną wartość"
 
 #~ msgid "'jobu' argument must be a character string"
-#~ msgstr "argument 'jobu' musi być łańcuchem tekstowym"
+#~ msgstr "argument 'jobu' musi być ciągiem znaków"
 
 #~ msgid "R Data Editor"
 #~ msgstr "Edytor danych R"
@@ -11689,9 +11696,6 @@ msgstr "X11 nie jest dostępne"
 
 #~ msgid "locale is not supported by Xlib: some X operations will operate in C locale"
 #~ msgstr "lokalizacja nie jest wspierana przez 'Xlib': niektóre opcje X będą operowały w lokalizacji C"
-
-#~ msgid "filename is too long in '%s' call"
-#~ msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s'"
 
 #~ msgid ""
 #~ "--- end of fontlist ---\n"
@@ -11725,7 +11729,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "Problem z instalacją\n"
 
 #~ msgid "impossibly long path for RHOME\n"
-#~ msgstr "niemożliwie długi łańcuch tekstowy dla RHOME\n"
+#~ msgstr "niemożliwie długi tekst dla RHOME\n"
 
 #~ msgid "-e not followed by an expression\n"
 #~ msgstr "po opcji -e brakuje wyrażenia\n"
@@ -11740,7 +11744,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "brakuje nazwy pliku\n"
 
 #~ msgid "impossibly long string for R_ARCH\n"
-#~ msgstr "niemożliwie długi łańcuch tekstowy dla R_ARCH\n"
+#~ msgstr "niemożliwie długi tekst dla R_ARCH\n"
 
 #~ msgid ""
 #~ "running\n"
@@ -11882,7 +11886,7 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "nazwa pliku jest zbyt długa\n"
 
 #~ msgid "'type' argument must be a character string"
-#~ msgstr "argument 'generic' musi być łańcuchem tekstowym"
+#~ msgstr "argument 'generic' musi być ciągiem znaków"
 
 #~ msgid "'env' is not an environment"
 #~ msgstr "argument 'env' nie jest środowiskiem"
@@ -11891,13 +11895,13 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "argument 'fun' nie jest funkcją"
 
 #~ msgid "'%s' argument must be non-null character string"
-#~ msgstr "argument '%s' musi być niepustym łańcuchem tekstowym"
+#~ msgstr "argument '%s' musi być niepustym ciągiem znaków"
 
 #~ msgid "'ascii' argument must be logical"
 #~ msgstr "argument 'ascii' musi być typem logicznym"
 
 #~ msgid "'%s' argument must be non-empty string"
-#~ msgstr "argument '%s' musi być niepustym łańcuchem tekstowym"
+#~ msgstr "argument '%s' musi być niepustym ciągiem znaków"
 
 #~ msgid "<environment: %s"
 #~ msgstr "<środowisko: %s>"
@@ -11915,13 +11919,10 @@ msgstr "X11 nie jest dostępne"
 #~ msgstr "'na.rm' musi mieć wartość TRUE lub FALSE"
 
 #~ msgid "'norm' argument must be a character string"
-#~ msgstr "argument 'norm' musi być łańcuchem tekstowym"
+#~ msgstr "argument 'norm' musi być ciągiem znaków"
 
 #~ msgid "'resize' argument must be TRUE or FALSE"
 #~ msgstr "argument 'resize' musi posiadać wartość TRUE lub FALSE"
-
-#~ msgid "'%s' must be an environment"
-#~ msgstr "'%s' musi być środowiskiem"
 
 #~ msgid "'EXPR' must be a length 1 vector"
 #~ msgstr "'EXPR' musi być wektorem o długości 1"

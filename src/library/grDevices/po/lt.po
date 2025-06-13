@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: 2020-12-09 13:16+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -83,9 +83,11 @@ msgstr "netinkama hsv spalva"
 msgid "invalid hcl color"
 msgstr "netinkamas hcl spalva"
 
-#: colors.cpp:401
-msgid "invalid value of 'maxColorValue'"
-msgstr "neteisinga 'maxColorValue' reikšmė"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, c-format
+msgid "invalid '%s' value"
+msgstr "neteisinga '%s' reikšmė"
 
 #: colors.cpp:429
 msgid "invalid 'names' vector"
@@ -302,10 +304,11 @@ msgstr "neteisingas linijos jungimas 45° nuožambiu kampu"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "bandymas naudoti negaliojantį šriftą %d pakeistas šriftu 1"
 
-#: devPS.cpp:3219 devPS.cpp:6832
-#, c-format
-msgid "filename too long in %s()"
-msgstr "failo vardas yra per ilgas %s()"
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
+#, fuzzy, c-format
+msgid "filename too long in '%s' call"
+msgstr "failo vardas yra per ilgas %s() kreipinyje"
 
 #: devPS.cpp:3225 devPS.cpp:6838
 #, c-format
@@ -860,11 +863,6 @@ msgstr "nepavyko atverti failo '%s' įrašymui"
 msgid "unable to open printer"
 msgstr "nepavyko priskirti rastrinio vaizdo"
 
-#: devWindows.cpp:1797
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "failo vardas yra per ilgas %s() kreipinyje"
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -880,21 +878,9 @@ msgstr "nepavyko priskirti rastrų"
 msgid "unable to open file '%s' for writing"
 msgstr "nepavyko atverti failo '%s' įrašymui"
 
-#: devWindows.cpp:1834
-msgid "filename too long in jpeg() call"
-msgstr "failo vardas per ilgas jpeg() kreipinyje"
-
-#: devWindows.cpp:1864
-msgid "filename too long in tiff() call"
-msgstr "failo vardas per ilgas tiff() kreipinyje"
-
 #: devWindows.cpp:1892
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
-msgstr "failo vardas yra per ilgas win.metafile() kreipinyje"
-
-#: devWindows.cpp:1896
-msgid "filename too long in win.metafile() call"
 msgstr "failo vardas yra per ilgas win.metafile() kreipinyje"
 
 #: devWindows.cpp:1907
@@ -985,12 +971,6 @@ msgstr "Neįmanoma atverti "
 msgid "invalid 'width' or 'height'"
 msgstr "neteisingas 'width' arba 'height'"
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "neteisinga '%s' reikšmė"
-
 #: devWindows.cpp:3921
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
@@ -1077,11 +1057,6 @@ msgstr "nepavyko atverti failo '%s'"
 msgid "invalid '%s' argument"
 msgstr "neteisingas '%s' argumentas"
 
-#: cairo/cairoBM.cpp:622
-#, c-format
-msgid "invalid '%s' value"
-msgstr "neteisinga '%s' reikšmė"
-
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
@@ -1156,6 +1131,26 @@ msgstr "nepavyko priskirti apibrėžimų"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "šrifto šeima nerasta Windows šriftų duomenų bazėje"
+
+#~ msgid "invalid value of 'maxColorValue'"
+#~ msgstr "neteisinga 'maxColorValue' reikšmė"
+
+#, c-format
+#~ msgid "filename too long in %s()"
+#~ msgstr "failo vardas yra per ilgas %s()"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "failo vardas per ilgas jpeg() kreipinyje"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "failo vardas per ilgas tiff() kreipinyje"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "failo vardas yra per ilgas win.metafile() kreipinyje"
+
+#, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "neteisinga '%s' reikšmė"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "xfig() trūksta spalvų"

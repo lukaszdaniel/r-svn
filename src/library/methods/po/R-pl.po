@@ -191,7 +191,7 @@ msgstr "obiekty 'externalptr' nie mogą być inicjalizowane z funkcji 'new()'"
 #. R/Methods.R: stop("'file' must be a character string or a connection")
 #: R/Methods.R:0
 msgid "'file' must be a character string or a connection"
-msgstr "'file' musi być łańcuchem tekstowym lub połączeniem"
+msgstr "'file' musi być ciągiem znaków lub połączeniem"
 
 #. R/MethodsListClass.R: gettextf("'initialize' method returned an object of class %s instead of the required class %s",     paste(dQuote(class(value)), collapse = ", "), dQuote(class(.Object)))
 #: R/MethodsListClass.R:0
@@ -534,7 +534,7 @@ msgstr "argument '%s' nie jest S4"
 #. R/Methods.R: gettextf("argument %s must be a generic function or a single character string; got an object of class %s",     sQuote("f"), dQuote(class(f)))
 #: R/Methods.R:0
 msgid "argument %s must be a generic function or a single character string; got an object of class %s"
-msgstr "argument %s musi być funkcją ogólną lub pojedynczym łańcuchem tekstowym; otrzymano obiekt klasy %s"
+msgstr "argument %s musi być funkcją ogólną lub pojedynczym ciągiem znaków; otrzymano obiekt klasy %s"
 
 #. R/SClasses.R: gettextf("argument %s must be a list or a character vector; got an object of class %s",     dQuote(what), dQuote(class(fields)))
 #: R/SClasses.R:0
@@ -564,7 +564,7 @@ msgstr "argument 'classDef' musi być definicją klasy lub nazwą klasy"
 #. R/SClasses.R: gettextf("argument 'classDef' must be a string or a class representation; got an object of class %s",     dQuote(class(classDef)))
 #: R/SClasses.R:0
 msgid "argument 'classDef' must be a string or a class representation; got an object of class %s"
-msgstr "argument 'classDef' musi być łańcuchem albo reprezentacją klasy; otrzymano obiekt klasy %s"
+msgstr "argument 'classDef' musi być tekstem albo reprezentacją klasy; otrzymano obiekt klasy %s"
 
 #. R/Methods.R: gettextf("argument 'f' must be a generic function or %s", .notSingleString(f))
 #: R/Methods.R:0
@@ -574,7 +574,7 @@ msgstr "argument 'f' musi być funkcją ogólną lub %s"
 #. R/RMethodUtils.R: stop("argument 'f' must be a string, generic function, or primitive: got an ordinary function")
 #: R/RMethodUtils.R:0
 msgid "argument 'f' must be a string, generic function, or primitive: got an ordinary function"
-msgstr "argument 'f' musi być łańcuchem, ogólną funkcją, lub funkcją prymitywną: otrzymano zwykłą funkcję"
+msgstr "argument 'f' musi być tekstem, ogólną funkcją, lub funkcją prymitywną: otrzymano zwykłą funkcję"
 
 #. R/RClassUtils.R: stop("argument 'includeSubclasses' must be a logical, either one value or a vector of the same length as argument 'classes'")
 #: R/RClassUtils.R:0
@@ -627,7 +627,7 @@ msgstr "argumenty 'names' oraz 'signature' muszą posiadać tę samą długość
 #. R/refClass.R: stop("arguments must all be character string names of fields")
 #: R/refClass.R:0
 msgid "arguments must all be character string names of fields"
-msgstr "wszystkie argumenty muszą być łańcuchami tekstowymi nazw pól"
+msgstr "wszystkie argumenty muszą być ciągiem znaków nazw pól"
 
 #. R/refClass.R: stop("arguments to methods() must be named, or one named list")
 #: R/refClass.R:0
@@ -657,7 +657,7 @@ msgstr "przypisanie obiektu klasy %s nie jest poprawny dla gniazda %s w obiekcie
 #. R/Methods.R: gettextf("bad class specified for element %d (should be a single character string)",     i)
 #: R/Methods.R:0
 msgid "bad class specified for element %d (should be a single character string)"
-msgstr "określono błędną klasę dla elementu %d (powinien być jednym łańcuchem tekstowym)"
+msgstr "określono błędną klasę dla elementu %d (powinien być jednym ciągiem znaków)"
 
 #. R/methodsTable.R: gettextf("bad method object stored in method table, class %s",     dQuote(class(current)))
 #: R/methodsTable.R:0
@@ -862,7 +862,7 @@ msgstr "funkcja generatora klas dla klasy %s z pakietu %s"
 #. R/refClass.R: gettextf("class must be a reference class representation or a character string; got an object of class %s",     dQuote(class(Class)))
 #: R/refClass.R:0
 msgid "class must be a reference class representation or a character string; got an object of class %s"
-msgstr "klasa musi być referencyjną reprezentacją klasy lub łańcuchem tekstowym; otrzymano obiekt klasy %s"
+msgstr "klasa musi być referencyjną reprezentacją klasy lub ciągiem znaków; otrzymano obiekt klasy %s"
 
 #. R/refClass.R: gettextf("code for methods in class %s was not checked for suspicious field assignments (recommended package %s not available?)",     dQuote(Class), sQuote("codetools"))
 #: R/refClass.R:0
@@ -912,7 +912,7 @@ msgstr "element %d na poziomie %d (klasa %s) nie może być interpretowany jak f
 #. R/SClasses.R: gettextf("element %d of the representation was not a single character string",     i)
 #: R/SClasses.R:0
 msgid "element %d of the representation was not a single character string"
-msgstr "element %d reprezentacji nie był pojedynczym łańcuchem tekstowym"
+msgstr "element %d reprezentacji nie był pojedynczym ciągiem znaków"
 
 #. R/SClasses.R: gettextf("error in contained classes (%s) for class %s and unable to remove definition from %s",     msg, dQuote(Class), sQuote(getPackageName(where)))
 #: R/SClasses.R:0
@@ -957,7 +957,7 @@ msgstr "oczekiwano niepustego tekstu dla argumentu 'name'"
 #. R/Methods.R: gettextf("expected a non-empty character string for argument name")
 #: R/Methods.R:0
 msgid "expected a non-empty character string for argument name"
-msgstr "oczekiwano niepustego łańcucha tekstowego dla nazwy argumentu"
+msgstr "oczekiwano niepustego ciągu znaków dla nazwy argumentu"
 
 #. R/oldClass.R: gettextf("explicit coercion of old-style class (%s) is not defined",     paste(class(from), collapse = ", "))
 #: R/oldClass.R:0
@@ -1123,12 +1123,12 @@ msgstr "wstawianie metody z niepoprawną sygnaturą pasującą do argumentu '...
 #. R/refClass.R: stop("invalid 'Class' argument:  should be a single string")
 #: R/refClass.R:0
 msgid "invalid 'Class' argument:  should be a single string"
-msgstr "niepoprawny argument 'Class': powinien być pojedycznym łańcuchem"
+msgstr "niepoprawny argument 'Class': powinien być pojedynczym tekstem"
 
 #. R/show.R: gettextf("invalid 'ignore' argument; should be a class definition or a character vector, got an object of class %s",     dQuote(class(ignore)))
 #: R/show.R:0
 msgid "invalid 'ignore' argument; should be a class definition or a character vector, got an object of class %s"
-msgstr "niepoprawny argument 'ignore'; powinien być definicją klasy lub łańcuchem tekstowym; otrzymano obiekt klasy %s"
+msgstr "niepoprawny argument 'ignore'; powinien być definicją klasy lub ciągiem znaków; otrzymano obiekt klasy %s"
 
 #. R/MethodsList.R: stop("invalid 'package' slot or attribute, wrong length")
 #: R/MethodsList.R:0
@@ -1714,7 +1714,7 @@ msgstr "pojedynczy ciąg; wekor znakowy o długości %s"
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0
 msgid "single string; got an object of class %s"
-msgstr "pojedynczy łańcuch; otrzymano obiekt klasy %s"
+msgstr "pojedynczy tekst; otrzymano obiekt klasy %s"
 
 #. R/oldClass.R: gettextf("slot %s: class %s should extend class %s", sQuote(what),     dQuote(slots1[[what]]), dQuote(slots2[[what]]))
 #: R/oldClass.R:0
@@ -1824,7 +1824,7 @@ msgstr "funkcja użyta jako %s podczas tworzenia ogólnej funkcji dla %s jest ak
 #. R/ClassUnion.R: gettextf("the member classes must be defined: not true of %s",     paste(.dQ(as(members[!membersDefined], "character")), collapse = ", "))
 #: R/ClassUnion.R:0
 msgid "the member classes must be defined: not true of %s"
-msgstr "klasy członkowe muszą być zdefiniowane: nie jest to prawda dla %s"
+msgstr "klasy członkowskie muszą być zdefiniowane: nie jest to prawda dla %s"
 
 #. R/trace.R: gettextf("the method for %s for this signature was not being traced",     sQuote(what))
 #: R/trace.R:0
@@ -1928,7 +1928,7 @@ msgstr "próba ustawienia relacji 'as' z %s na siebie samą"
 #. R/ClassUnion.R: gettextf("unable to create union class:  could not set members %s",     paste(.dQ(failed), collapse = ", "))
 #: R/ClassUnion.R:0
 msgid "unable to create union class:  could not set members %s"
-msgstr "nie można utworzyć uni klas:  nie można ustawić członków %s"
+msgstr "nie można utworzyć unii klas:  nie można ustawić członków %s"
 
 #. R/RClassUtils.R: gettextf("unable to find a consistent ordering of superclasses for class %s: order chosen is inconsistent with the superclasses of %s",     .dQ(className), paste(.dQ(setdiff(newconflicts, conflicts)),         collapse = ", "))
 #: R/RClassUtils.R:0

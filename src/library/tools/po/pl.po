@@ -71,7 +71,7 @@ msgstr "co najwyżej jedna gwiazdka '*' jest wspierana w każdym określeniu zam
 #: gramLatex.cpp:2757 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
-msgstr "nie można przydzielić bufora dla długiego łańcucha w linii %d"
+msgstr "nie można przydzielić bufora dla długiego tekstu w linii %d"
 
 #: gramLatex.cpp:3014 gramRd.cpp:4460
 msgid "unable to allocate in PushState"

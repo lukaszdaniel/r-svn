@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:48+0200\n"
+"POT-Creation-Date: 2025-06-12 17:52+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -80,9 +80,11 @@ msgstr "niepoprawny kolor hsv"
 msgid "invalid hcl color"
 msgstr "niepoprawny kolor hcl"
 
-#: colors.cpp:401
-msgid "invalid value of 'maxColorValue'"
-msgstr "niepoprawna wartość 'maxColorValue'"
+#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
+#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#, c-format
+msgid "invalid '%s' value"
+msgstr "niepoprawna wartość '%s'"
 
 #: colors.cpp:429
 msgid "invalid 'names' vector"
@@ -169,7 +171,7 @@ msgstr "napotkano nieznany obiekt AFM"
 #: devPicTeX.cpp:484
 #, c-format
 msgid "invalid string in '%s'"
-msgstr "niepoprawny łańcuch w '%s'"
+msgstr "niepoprawny tekst w '%s'"
 
 #: devPS.cpp:806
 #, c-format
@@ -235,7 +237,7 @@ msgstr "nie udało się przydzielić listy kodowań"
 
 #: devPS.cpp:1411
 msgid "truncated string which was too long for copy"
-msgstr "przycięty łańcuch, który był zbyt długi do skopiowania"
+msgstr "przycięty tekst, który był zbyt długi do skopiowania"
 
 #: devPS.cpp:1451
 #, c-format
@@ -296,10 +298,11 @@ msgstr "niepoprawny ukośnik linii"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "próba użycia niepoprawnej czcionki %d zastąpionej przez czcionkę 1"
 
-#: devPS.cpp:3219 devPS.cpp:6832
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
+#: devWindows.cpp:1864 devWindows.cpp:1896
 #, c-format
-msgid "filename too long in %s()"
-msgstr "nazwa pliku w '%s()' jest zbyt długa"
+msgid "filename too long in '%s' call"
+msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s'"
 
 #: devPS.cpp:3225 devPS.cpp:6838
 #, c-format
@@ -842,11 +845,6 @@ msgstr "nie można otworzyć okna"
 msgid "unable to open printer"
 msgstr "nie można otworzyć drukarki"
 
-#: devWindows.cpp:1797
-#, c-format
-msgid "filename too long in %s() call"
-msgstr "nazwa pliku jest zbyt długa w wywołaniu '%s()'"
-
 #: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
@@ -862,21 +860,9 @@ msgstr "nie można przydzielić bitmapy"
 msgid "unable to open file '%s' for writing"
 msgstr "nie można otworzyć pliku '%s' do zapisu"
 
-#: devWindows.cpp:1834
-msgid "filename too long in jpeg() call"
-msgstr "nazwa pliku w wywołaniu 'jpeg()' jest zbyt długa"
-
-#: devWindows.cpp:1864
-msgid "filename too long in tiff() call"
-msgstr "nazwa pliku w wywołaniu 'tiff()' jest zbyt długa"
-
 #: devWindows.cpp:1892
 msgid "invalid specification for file name in win.metafile()"
 msgstr "nieprawidłowe określenie nazwy pliku w wywołaniu 'win.metafile()'"
-
-#: devWindows.cpp:1896
-msgid "filename too long in win.metafile() call"
-msgstr "nazwa pliku w wywołaniu 'win.metafile()' jest zbyt długa"
 
 #: devWindows.cpp:1907
 #, c-format
@@ -965,12 +951,6 @@ msgstr "Nie można otworzyć "
 msgid "invalid 'width' or 'height'"
 msgstr "niepoprawna wartość 'width' lub 'height'"
 
-#: devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771
-#, c-format
-msgid "invalid value of '%s'"
-msgstr "niepoprawna wartość '%s'"
-
 #: devWindows.cpp:3921
 msgid "Not enough memory to create buffer for path."
 msgstr "Zbyt mało pamięci aby utworzyć bufor dla ścieżki."
@@ -1056,11 +1036,6 @@ msgstr "nie udało się otworzyć pliku '%s'"
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: cairo/cairoBM.cpp:622
-#, c-format
-msgid "invalid '%s' value"
-msgstr "niepoprawna wartość '%s'"
-
 #: cairo/cairoBM.cpp:665
 #, c-format
 msgid "unable to start device '%s'"
@@ -1129,6 +1104,26 @@ msgstr "nie udało się zastosować wariantów czcionek"
 #: cairo/cairoFns.cpp:2462
 msgid "Font file not found; matching font family and face"
 msgstr "Nie znaleziono pliku czcionki; Dopasowywanie rodziny czcionek oraz kroju"
+
+#~ msgid "invalid value of 'maxColorValue'"
+#~ msgstr "niepoprawna wartość 'maxColorValue'"
+
+#, c-format
+#~ msgid "filename too long in %s()"
+#~ msgstr "nazwa pliku w '%s()' jest zbyt długa"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nazwa pliku w wywołaniu 'jpeg()' jest zbyt długa"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nazwa pliku w wywołaniu 'tiff()' jest zbyt długa"
+
+#~ msgid "filename too long in win.metafile() call"
+#~ msgstr "nazwa pliku w wywołaniu 'win.metafile()' jest zbyt długa"
+
+#, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "niepoprawna wartość '%s'"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "zabrakło kolorów w 'xfig()'"

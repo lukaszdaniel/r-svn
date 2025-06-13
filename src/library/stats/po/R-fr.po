@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2023-04-14 03:05+0000\n"
 "Last-Translator: Hugo Gruson <hugo.gruson@normalesup.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1631,10 +1631,10 @@ msgstr "l'argument 'subset' sera ignoré"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "l'argument 'x' ne peut pas être converti automatiquement en objet de classe %s"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
 #, fuzzy
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "l'argument 'x' doit être numérique"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1927,11 +1927,6 @@ msgstr "longueur incorrecte pour l'indice d'ordre des colonnes dans le dendrogra
 #. R/aov.R: stop("columns of 'contrast.obj' must define a contrast (sum to zero)")
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
-msgstr "les colonnes de 'contrast.obj' doivent définir un contraste (somme nulle)"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 msgstr "les colonnes de 'contrast.obj' doivent définir un contraste (somme nulle)"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
@@ -4387,6 +4382,9 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilisation de %d/%d ligne d'un ajustement combiné"
 msgstr[1] "utilisation des %d/%d lignes d'un ajustement combiné"
+
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "les colonnes de 'contrast.obj' doivent définir un contraste (somme nulle)"
 
 #~ msgid ","
 #~ msgstr ","

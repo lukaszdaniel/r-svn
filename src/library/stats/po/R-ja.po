@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1639,10 +1639,10 @@ msgstr "引数 'subset' は無視されます"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "引数 'x' をクラス %s に強制変換できません"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
 #, fuzzy
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "引数 'x' は数値でなければなりません"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1936,11 +1936,6 @@ msgstr "列デンドログラムの順序は 誤った長さのインデック�
 #. R/aov.R: stop("columns of 'contrast.obj' must define a contrast (sum to zero)")
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
-msgstr "'contrast.obj' の列は対比 (総和が 0) を定義しなければなりません"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 msgstr "'contrast.obj' の列は対比 (総和が 0) を定義しなければなりません"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
@@ -4389,6 +4384,9 @@ msgstr[0] "上位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "結合された当てはめから %d/%d 行を使用します"
+
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "'contrast.obj' の列は対比 (総和が 0) を定義しなければなりません"
 
 #~ msgid ","
 #~ msgstr ","

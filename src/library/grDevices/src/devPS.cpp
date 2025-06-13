@@ -3216,7 +3216,7 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     if(strlen(file) > R_PATH_MAX - 1) {
 	free(dd);
-	error(_("filename too long in %s()"), "postscript");
+	error(_("filename too long in '%s' call"), "postscript()");
     }
 
     /* allocate new postscript device description */
@@ -6829,7 +6829,7 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     if(file && strlen(file) > R_PATH_MAX - 1) {
 	/* not yet created PDFcleanup(0, pd); */
 	free(dd);
-	error(_("filename too long in %s()"), "pdf");
+	error(_("filename too long in '%s' call"), "pdf()");
     }
 
     /* allocate new PDF device description */

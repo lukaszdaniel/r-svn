@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-13 16:26\n"
 "PO-Revision-Date: 2023-01-19 18:34+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -1627,9 +1627,10 @@ msgstr "l'argomento 'subset' sarà ignorato"
 msgid "argument 'x' cannot be coerced to class %s"
 msgstr "l'argomento 'x' non può essere convertito in classe %s"
 
-#. R/aggregate.R: stop("argument 'x' is  missing -- it has been renamed from 'formula'")
+#. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
-msgid "argument 'x' is  missing -- it has been renamed from 'formula'"
+#, fuzzy
+msgid "argument 'x' is missing -- it has been renamed from 'formula'"
 msgstr "l'argomento 'x' è mancante -- è stato rinominato da 'formula'"
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
@@ -1922,11 +1923,6 @@ msgstr "ordinamento per colonna del dendrogramma restituisce un indice di lunghe
 #: R/aov.R:0
 msgid "columns of 'contrast.obj' must define a contrast (sum to zero)"
 msgstr "le colonne di 'contrast.obj' deve definire un contrasto (sommare a zero)"
-
-#. R/aov.R: stop("columns of 'contrast.obj' must define a contrast(sum to zero)")
-#: R/aov.R:0
-msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-msgstr "le colonne di 'contrast.obj' devono definire un contrasto (sommare a zero)"
 
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
 #: R/ks.test.R:0
@@ -4377,6 +4373,9 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilizzo la riga %d/%d da una stima combinata"
 msgstr[1] "utilizzo le righe %d/%d da una stima combinata"
+
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "le colonne di 'contrast.obj' devono definire un contrasto (sommare a zero)"
 
 #~ msgid ","
 #~ msgstr ","

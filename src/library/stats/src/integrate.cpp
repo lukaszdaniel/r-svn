@@ -76,9 +76,9 @@ SEXP call_dqags(SEXP args)
     args = CDR(args);
     is.f = CAR(args); args = CDR(args);
     is.env = CAR(args); args = CDR(args);
-    if(length(CAR(args)) > 1) error(_("'%s' must be of length one"), "lower");
+    if(length(CAR(args)) > 1) error(_("'%s' must be of length 1"), "lower");
     lower = asReal(CAR(args)); args = CDR(args);
-    if(length(CAR(args)) > 1) error(_("'%s' must be of length one"), "upper");
+    if(length(CAR(args)) > 1) error(_("'%s' must be of length 1"), "upper");
     upper = asReal(CAR(args)); args = CDR(args);
     epsabs = asReal(CAR(args)); args = CDR(args);
     epsrel = asReal(CAR(args)); args = CDR(args);
@@ -120,7 +120,7 @@ SEXP call_dqagi(SEXP args)
     args = CDR(args);
     is.f = CAR(args); args = CDR(args);
     is.env = CAR(args); args = CDR(args);
-    if(length(CAR(args)) > 1) error(_("'%s' must be of length one"), "bound");
+    if(length(CAR(args)) > 1) error(_("'%s' must be of length 1"), "bound");
     bound = asReal(CAR(args)); args = CDR(args);
     inf = asInteger(CAR(args)); args = CDR(args);
     epsabs = asReal(CAR(args)); args = CDR(args);
