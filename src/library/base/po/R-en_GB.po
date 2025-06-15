@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:55\n"
+"POT-Creation-Date: 2025-06-15 17:34\n"
 "PO-Revision-Date: 2024-01-30 03:05+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -1420,17 +1420,6 @@ msgstr "autoloader did not find '%s' in '%s'"
 msgid "bad 'S3method' directive: %s"
 msgstr "bad 'S3method' directive: %s"
 
-#. R/load.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
-#: R/load.R:0 R/serialize.R:0
-msgid "bad 'file' argument"
-msgstr "bad 'file' argument"
-
-#. R/load.R: stop("bad file argument")
-#: R/load.R:0
-msgid "bad file argument"
-msgstr "bad file argument"
-
 #. R/namespace.R: stop("bad method")
 #: R/namespace.R:0
 msgid "bad method"
@@ -1833,26 +1822,41 @@ msgstr "infinite or missing values in 'x'"
 msgid "input has been corrupted, with LF replaced by CR"
 msgstr "input has been corrupted, with LF replaced by CR"
 
+#. R/attach.R: gettextf("invalid '%s' argument", "name")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/files.R: gettextf("invalid '%s' argument", "path")
+#. R/files.R: gettextf("invalid '%s' argument", "time")
+#. R/load.R: gettextf("invalid '%s' argument", "file")
+#. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
+#: R/attach.R:0 R/connections.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
+#: R/serialize.R:0 R/taskCallback.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "invalid 'name' argument"
+
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(y)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(R)")
+#. R/seq.R: gettextf("invalid '%s' value", "(to - from)/by")
+#: R/qr.R:0 R/seq.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "invalid 'value'"
+
 #. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
 #: R/kappa.R:0
 msgid "invalid '%s': type \"%s\""
 msgstr "invalid '%s': type \"%s\""
-
-#. R/seq.R: stop("invalid '(to - from)/by'")
-#: R/seq.R:0
-msgid "invalid '(to - from)/by'"
-msgstr "invalid '(to - from)/by'"
 
 #. R/dates.R: stop("invalid 'by' string")
 #. R/datetime.R: stop("invalid 'by' string")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid 'by' string"
 msgstr "invalid 'by' string"
-
-#. R/locales.R: stop("invalid 'category' argument")
-#: R/locales.R:0
-msgid "invalid 'category' argument"
-msgstr "invalid 'category' argument"
 
 #. R/serialize.R: stop("invalid 'compress' argument: ", compress)
 #: R/serialize.R:0
@@ -1874,11 +1878,6 @@ msgstr "invalid 'dimnames' given for data frame"
 msgid "invalid 'dims'"
 msgstr "invalid 'dims'"
 
-#. R/connections.R: stop("invalid 'endian' argument")
-#: R/connections.R:0
-msgid "invalid 'endian' argument"
-msgstr "invalid 'endian' argument"
-
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
 msgid "invalid 'labels'; length %d should be 1 or %d"
@@ -1894,16 +1893,6 @@ msgstr "invalid 'make.names'"
 msgid "invalid 'max' / getOption(\"max.print\"):"
 msgstr "invalid 'max' / getOption(\"max.print\"):"
 
-#. R/attach.R: stop("invalid 'name' argument")
-#: R/attach.R:0
-msgid "invalid 'name' argument"
-msgstr "invalid 'name' argument"
-
-#. R/files.R: stop("invalid 'path' argument")
-#: R/files.R:0
-msgid "invalid 'path' argument"
-msgstr "invalid 'path' argument"
-
 #. R/rle.R: stop("invalid 'rle' structure")
 #: R/rle.R:0
 msgid "invalid 'rle' structure"
@@ -1914,35 +1903,15 @@ msgstr "invalid 'rle' structure"
 msgid "invalid 'row.names' length"
 msgstr "invalid 'row.names' length"
 
-#. R/files.R: stop("invalid 'time' argument")
-#: R/files.R:0
-msgid "invalid 'time' argument"
-msgstr "invalid 'time' argument"
-
 #. R/version.R: stop("invalid 'value'")
 #: R/version.R:0
 msgid "invalid 'value'"
 msgstr "invalid 'value'"
 
-#. R/taskCallback.R: stop("invalid 'which' argument")
-#: R/taskCallback.R:0
-msgid "invalid 'which' argument"
-msgstr "invalid 'which' argument"
-
 #. R/rowsum.R: stop("invalid 'x'")
 #: R/rowsum.R:0
 msgid "invalid 'x'"
 msgstr "invalid 'x'"
-
-#. R/qr.R: stop("invalid NCOL(R)")
-#: R/qr.R:0
-msgid "invalid NCOL(R)"
-msgstr "invalid NCOL(R)"
-
-#. R/qr.R: stop("invalid NCOL(y)")
-#: R/qr.R:0
-msgid "invalid NCOL(y)"
-msgstr "invalid NCOL(y)"
 
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
@@ -1975,11 +1944,6 @@ msgstr "invalid ncol(qr$qr)"
 msgid "invalid ncol(qr$rank)"
 msgstr "invalid ncol(qr$rank)"
 
-#. R/qr.R: stop("invalid ncol(x)")
-#: R/qr.R:0
-msgid "invalid ncol(x)"
-msgstr "invalid ncol(x)"
-
 #. R/qr.R: stop("invalid ncol(y)")
 #: R/qr.R:0
 msgid "invalid ncol(y)"
@@ -1996,8 +1960,7 @@ msgid "invalid nrow(qr$qr)"
 msgstr "invalid nrow(qr$qr)"
 
 #. R/eigen.R: stop("invalid nrow(x)")
-#. R/qr.R: stop("invalid nrow(x)")
-#: R/eigen.R:0 R/qr.R:0
+#: R/eigen.R:0
 msgid "invalid nrow(x)"
 msgstr "invalid nrow(x)"
 
@@ -2413,9 +2376,10 @@ msgstr "not loading a namespace"
 msgid "not supported for LAPACK QR"
 msgstr "not supported for LAPACK QR"
 
-#. R/load.R: warning("nothing specified to be save()d")
+#. R/load.R: warning("nothing specified to be saved")
 #: R/load.R:0
-msgid "nothing specified to be save()d"
+#, fuzzy
+msgid "nothing specified to be saved"
 msgstr "nothing specified to be save()d"
 
 #. R/table.R: stop("nothing to tabulate")
@@ -2617,9 +2581,10 @@ msgstr ""
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "probably wrong encoding in names(.) of column"
 
-#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
+#. R/conditions.R: sprintf("pushing duplicate '%s' handler on top of the stack",     class)
 #: R/conditions.R:0
-msgid "pushing duplicate `%s` handler on top of the stack"
+#, fuzzy
+msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr "pushing duplicate `%s` handler on top of the stack"
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
@@ -2627,9 +2592,10 @@ msgstr "pushing duplicate `%s` handler on top of the stack"
 msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
 msgstr "replaced '[<-' by '\\\\[<-' in regular expression pattern"
 
-#. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
+#. R/attach.R: warning("replaced regular expression pattern '[' by '\\\\['")
 #: R/attach.R:0
-msgid "replaced regular expression pattern '[' by  '\\\\['"
+#, fuzzy
+msgid "replaced regular expression pattern '[' by '\\\\['"
 msgstr "replaced regular expression pattern '[' by  '\\\\['"
 
 #. R/diag.R: stop("replacement diagonal has wrong length")
@@ -2821,11 +2787,13 @@ msgstr "unable to load R code in package %s"
 msgid "unable to re-encode some lines in NAMESPACE file"
 msgstr "unable to re-encode some lines in NAMESPACE file"
 
-#. R/dates.R: gettextf("unary %s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("unary '%s' not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
-msgid "unary %s not defined for \"Date\" objects"
+#, fuzzy
+msgid "unary '%s' not defined for \"Date\" objects"
 msgstr "unary %s not defined for \"Date\" objects"
 
+#. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", "-")
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
 msgid "unary '%s' not defined for \"POSIXt\" objects"
@@ -2840,11 +2808,6 @@ msgstr "unary '%s' not defined for \"difftime\" objects"
 #: R/version.R:0
 msgid "unary '%s' not defined for \"numeric_version\" objects"
 msgstr "unary '%s' not defined for \"numeric_version\" objects"
-
-#. R/datetime.R: stop("unary '-' is not defined for \"POSIXt\" objects")
-#: R/datetime.R:0
-msgid "unary '-' is not defined for \"POSIXt\" objects"
-msgstr "unary '-' is not defined for \"POSIXt\" objects"
 
 #. R/dates.R: stop("unary - is not defined for \"Date\" objects")
 #: R/dates.R:0
@@ -3196,6 +3159,42 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "there is no package called"
 msgstr[1] "there are no packages called"
+
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "invalid '(to - from)/by'"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "invalid NCOL(R)"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "invalid NCOL(y)"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "invalid ncol(x)"
+
+#~ msgid "bad 'file' argument"
+#~ msgstr "bad 'file' argument"
+
+#~ msgid "bad file argument"
+#~ msgstr "bad file argument"
+
+#~ msgid "invalid 'category' argument"
+#~ msgstr "invalid 'category' argument"
+
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "invalid 'endian' argument"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "invalid 'path' argument"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "invalid 'time' argument"
+
+#~ msgid "invalid 'which' argument"
+#~ msgstr "invalid 'which' argument"
+
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "unary '-' is not defined for \"POSIXt\" objects"
 
 #~ msgid "invalid string for 'by'"
 #~ msgstr "invalid string for 'by'"

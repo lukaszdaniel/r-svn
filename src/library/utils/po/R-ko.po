@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-11 18:28\n"
+"POT-Creation-Date: 2025-06-14 12:50\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -87,10 +87,11 @@ msgstr "'DESCRIPTION' 파일은 'Encoding' 항목을 가지고 있는데, 이는
 msgid "'FUN' must be a function or NULL"
 msgstr "'FUN'은 반드시 함수 또는 NULL이어야 합니다"
 
-#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
-#. R/readtable.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
+#. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
 #: R/read.DIF.R:0 R/readtable.R:0
-msgid "'as.is' has the wrong length %d  != cols = %d"
+#, fuzzy
+msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is'는 열의 개수 %2$d와 다른 잘못된 길이 %1$d를 가집니다"
 
 #. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")

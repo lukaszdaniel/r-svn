@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:39\n"
+"POT-Creation-Date: 2025-06-15 14:04\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -180,9 +180,10 @@ msgstr "'x'와 'y'의 길이가 다릅니다"
 msgid "'x' is a list, but does not have components 'x' and 'y'"
 msgstr "'x'는 리스트이지만 'x'와 'y'컴포넌트드을 가지고 있지 않습니다"
 
-#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y' and 'z'")
 #: R/xyz.coords.R:0
-msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+#, fuzzy
+msgid "'x' is a list, but does not have components 'x', 'y' and 'z'"
 msgstr "'x'는 리스트이지만, 컴포넌트 'x', 'y', 그리고 'z'를 가지고 있지 않습니다"
 
 #. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")

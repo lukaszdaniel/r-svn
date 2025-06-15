@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-13 16:26\n"
+"POT-Creation-Date: 2025-06-15 17:27\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -1651,12 +1651,6 @@ msgstr "Reajustant el model per permetre la projecció"
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr "estadístic. Esperant..."
 
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-#, fuzzy
-msgid "Requested conf.level not achievable"
-msgstr "El conf.level sol·licitat no és assolible"
-
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 #, fuzzy
@@ -2303,6 +2297,12 @@ msgstr "no s'ha aconseguit estendre els extrems de l'interval per f(lower) * f(u
 msgid "dimension 0 in 'x' or 'y'"
 msgstr "dimensió 0 en «x» o «y»"
 
+#. R/hclust.R: stop("dissimilarities of improper length")
+#. R/hclust.R: warning("dissimilarities of improper length")
+#: R/hclust.R:0
+msgid "dissimilarities of improper length"
+msgstr ""
+
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 #: R/cmdscale.R:0
 msgid "distances must be result of 'dist' or a square matrix"
@@ -2671,11 +2671,12 @@ msgstr "bucle intern 2; no es pot corregir la mida del pas"
 msgid "interactions are not allowed"
 msgstr "no es permeten interaccions"
 
-#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
-#: R/nls.R:0
+#. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
+#: R/kmeans.R:0
 #, fuzzy
-msgid "invalid  'attr(rhs, \"gradient\")'"
-msgstr "'attr(rhs, \"gradient\") no vàlid"
+msgid "invalid '%s' value"
+msgstr "argument «use» no vàlid"
 
 #. R/arima.R: stop("invalid 'SSinit'")
 #: R/arima.R:0
@@ -2687,6 +2688,12 @@ msgstr "«SSinit» no vàlid"
 #, fuzzy
 msgid "invalid 'abbr.colnames'"
 msgstr "'abbr.colnames' no vàlid"
+
+#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+#, fuzzy
+msgid "invalid 'attr(rhs, \"gradient\")'"
+msgstr "'attr(rhs, \"gradient\") no vàlid"
 
 #. R/loess.R: stop("invalid 'control' argument")
 #: R/loess.R:0
@@ -2887,10 +2894,10 @@ msgstr "fórmula no vàlida %s"
 msgid "invalid formula %s: assignment is deprecated"
 msgstr "fórmula no vàlida %s: l'activitat és obsoleta"
 
-#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
+#. R/models.R: gettextf("invalid formula %s: extraneous call to '%s' is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
 #, fuzzy
-msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgid "invalid formula %s: extraneous call to '%s' is deprecated"
 msgstr "la fórmula %s no és vàlida: la crida estranya a «%s» és obsoleta"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
@@ -2942,16 +2949,6 @@ msgstr "valors de predicció lineal no vàlids en el model buit"
 #, fuzzy
 msgid "invalid model QR matrix"
 msgstr "la matriu QR del model no és vàlida"
-
-#. R/kmeans.R: stop("invalid ncol(x)")
-#: R/kmeans.R:0
-msgid "invalid ncol(x)"
-msgstr "ncol(x) no vàlid"
-
-#. R/kmeans.R: stop("invalid nrow(x)")
-#: R/kmeans.R:0
-msgid "invalid nrow(x)"
-msgstr "nrow(x) no vàlid"
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
@@ -3099,10 +3096,10 @@ msgstr ""
 msgid "logical 'hessian' argument not allowed.  See documentation."
 msgstr "no es permet l'argument lògic «hessian».  Vegeu la documentació."
 
-#. R/nlm.R: stop("lower < upper  is not fulfilled")
+#. R/nlm.R: stop("lower < upper is not fulfilled")
 #: R/nlm.R:0
 #, fuzzy
-msgid "lower < upper  is not fulfilled"
+msgid "lower < upper is not fulfilled"
 msgstr "inferior  is superior no està satisfeta"
 
 #. R/lm.R: message("lower-rank qr: determining non-estimable cases")
@@ -4103,7 +4100,8 @@ msgid "residual degrees of freedom in object suggest this is not an \"lm\" fit"
 msgstr "graus residuals de llibertat a l'objecte suggereixen que això no és un ajust «lm»"
 
 #. R/manova.R: gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid))
-#: R/manova.R:0
+#. R/mlm.R: gettextf("residuals have rank %d < %d", rss.qr$rank, pp)
+#: R/manova.R:0 R/mlm.R:0
 #, fuzzy
 msgid "residuals have rank %d < %d"
 msgstr "els residus tenen rang %d s %d"
@@ -4198,9 +4196,10 @@ msgstr "setVarying : la longitud «vary» ha de coincidir amb la longitud dels a
 msgid "setting '%s' in terms.formula() is deprecated"
 msgstr ""
 
-#. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
+#. R/smspline.R: warning(wtxt, "\nsetting df = 1 __use with care!__")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+#, fuzzy
+msgid "setting df = 1 __use with care!__"
 msgstr "establint df = 1  __useu-ho amb cura!__"
 
 #. R/lm.R: stop("simulate() is not yet implemented for multivariate lm()")
@@ -4448,10 +4447,10 @@ msgstr "la sèrie temporal no en té cap o menys 2 períodes"
 msgid "times to be replaced do not match"
 msgstr "els temps a substituir no coincideixen"
 
-#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
+#. R/lm.influence.R: stop("too few cases (with h_ii > 0), n < k")
 #: R/lm.influence.R:0
 #, fuzzy
-msgid "too few cases i with h_ii > 0), n < k"
+msgid "too few cases (with h_ii > 0), n < k"
 msgstr "massa pocs casos i amb hii ), 0), n ), k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
@@ -4977,6 +4976,16 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilitzant la fila %d/%d d'un ajust combinat"
 msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) no vàlid"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x) no vàlid"
+
+#, fuzzy
+#~ msgid "Requested conf.level not achievable"
+#~ msgstr "El conf.level sol·licitat no és assolible"
 
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "les columnes de «contrast.obj» han de definir un contrast(han de sumar zero)"

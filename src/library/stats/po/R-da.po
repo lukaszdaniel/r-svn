@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-13 16:26\n"
+"POT-Creation-Date: 2025-06-15 17:27\n"
 "PO-Revision-Date: 2012-01-28 01:18+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -1551,11 +1551,6 @@ msgstr ""
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "Requested conf.level not achievable"
-msgstr ""
-
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
@@ -2139,6 +2134,12 @@ msgstr ""
 msgid "dimension 0 in 'x' or 'y'"
 msgstr ""
 
+#. R/hclust.R: stop("dissimilarities of improper length")
+#. R/hclust.R: warning("dissimilarities of improper length")
+#: R/hclust.R:0
+msgid "dissimilarities of improper length"
+msgstr ""
+
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 #: R/cmdscale.R:0
 msgid "distances must be result of 'dist' or a square matrix"
@@ -2463,9 +2464,10 @@ msgstr ""
 msgid "interactions are not allowed"
 msgstr ""
 
-#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
-#: R/nls.R:0
-msgid "invalid  'attr(rhs, \"gradient\")'"
+#. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
+#: R/kmeans.R:0
+msgid "invalid '%s' value"
 msgstr ""
 
 #. R/arima.R: stop("invalid 'SSinit'")
@@ -2476,6 +2478,11 @@ msgstr ""
 #. R/symnum.R: stop("invalid 'abbr.colnames'")
 #: R/symnum.R:0
 msgid "invalid 'abbr.colnames'"
+msgstr ""
+
+#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid 'attr(rhs, \"gradient\")'"
 msgstr ""
 
 #. R/loess.R: stop("invalid 'control' argument")
@@ -2646,9 +2653,9 @@ msgstr ""
 msgid "invalid formula %s: assignment is deprecated"
 msgstr ""
 
-#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
+#. R/models.R: gettextf("invalid formula %s: extraneous call to '%s' is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
-msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgid "invalid formula %s: extraneous call to '%s' is deprecated"
 msgstr ""
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
@@ -2693,16 +2700,6 @@ msgstr ""
 #. R/lm.influence.R: stop("invalid model QR matrix")
 #: R/lm.influence.R:0
 msgid "invalid model QR matrix"
-msgstr ""
-
-#. R/kmeans.R: stop("invalid ncol(x)")
-#: R/kmeans.R:0
-msgid "invalid ncol(x)"
-msgstr ""
-
-#. R/kmeans.R: stop("invalid nrow(x)")
-#: R/kmeans.R:0
-msgid "invalid nrow(x)"
 msgstr ""
 
 #. R/smspline.R: stop("invalid number of points")
@@ -2831,9 +2828,9 @@ msgstr ""
 msgid "logical 'hessian' argument not allowed.  See documentation."
 msgstr ""
 
-#. R/nlm.R: stop("lower < upper  is not fulfilled")
+#. R/nlm.R: stop("lower < upper is not fulfilled")
 #: R/nlm.R:0
-msgid "lower < upper  is not fulfilled"
+msgid "lower < upper is not fulfilled"
 msgstr ""
 
 #. R/lm.R: message("lower-rank qr: determining non-estimable cases")
@@ -3726,7 +3723,8 @@ msgid "residual degrees of freedom in object suggest this is not an \"lm\" fit"
 msgstr ""
 
 #. R/manova.R: gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid))
-#: R/manova.R:0
+#. R/mlm.R: gettextf("residuals have rank %d < %d", rss.qr$rank, pp)
+#: R/manova.R:0 R/mlm.R:0
 msgid "residuals have rank %d < %d"
 msgstr ""
 
@@ -3813,9 +3811,9 @@ msgstr ""
 msgid "setting '%s' in terms.formula() is deprecated"
 msgstr ""
 
-#. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
+#. R/smspline.R: warning(wtxt, "\nsetting df = 1 __use with care!__")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+msgid "setting df = 1 __use with care!__"
 msgstr ""
 
 # In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
@@ -4034,9 +4032,9 @@ msgstr "tidsserier har ingen eller mindre end 2 perioder"
 msgid "times to be replaced do not match"
 msgstr ""
 
-#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
+#. R/lm.influence.R: stop("too few cases (with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases i with h_ii > 0), n < k"
+msgid "too few cases (with h_ii > 0), n < k"
 msgstr ""
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")

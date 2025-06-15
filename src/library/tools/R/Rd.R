@@ -41,8 +41,7 @@ function(file, encoding = "unknown")
             c(gettextf("missing/empty %s field in '%s'",
                        "\\name",
                        description),
-              gettextf("Rd files must have a non-empty %s.",
-                       "\\name"),
+              gettext("Rd files must have a non-empty \\name."),
               gettext("See chapter 'Writing R documentation' in manual 'Writing R Extensions'."))
         stop(paste(msg, collapse = "\n"), domain = NA)
     }

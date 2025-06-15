@@ -324,7 +324,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                                c(-Inf, diffs[ql + 1])
                            })
                 if (achieved.alpha-alpha > alpha/2) {
-                    warning("Requested conf.level not achievable")
+                    warning("requested conf.level not achievable")
                     conf.level <- 1 - achieved.alpha
                 }
                 attr(cint, "conf.level") <- conf.level

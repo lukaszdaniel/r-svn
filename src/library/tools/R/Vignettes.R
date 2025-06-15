@@ -147,7 +147,7 @@ function(package, dir, lib.loc = NULL,
     if(workdir == "tmp") {
         tmpd <- tempfile("Sweave")   ## <= Rename?
         if(!dir.create(tmpd))
-            stop(gettextf("unable to create temp directory %s ", sQuote(tmpd)),
+            stop(gettextf("unable to create temp directory %s", sQuote(tmpd)),
                  domain = NA)
         setwd(tmpd)
     }

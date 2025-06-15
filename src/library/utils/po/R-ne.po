@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-11 18:28\n"
+"POT-Creation-Date: 2025-06-14 12:50\n"
 "PO-Revision-Date: 2024-07-13 03:05+0000\n"
 "Last-Translator: Binod Jung Bogati <m1s1ng@outlook.com>\n"
 "Language-Team: none\n"
@@ -78,10 +78,10 @@ msgstr ""
 msgid "'FUN' must be a function or NULL"
 msgstr ""
 
-#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
-#. R/readtable.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
+#. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
 #: R/read.DIF.R:0 R/readtable.R:0
-msgid "'as.is' has the wrong length %d  != cols = %d"
+msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr ""
 
 #. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")

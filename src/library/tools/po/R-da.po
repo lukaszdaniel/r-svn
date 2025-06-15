@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-05 16:38\n"
+"POT-Creation-Date: 2025-06-14 19:00\n"
 "PO-Revision-Date: 2012-01-07 22:11+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -1137,9 +1137,9 @@ msgstr ""
 msgid "R include directory is empty -- perhaps need to install R-devel.rpm or similar"
 msgstr ""
 
-#. R/Rd.R: gettextf("Rd files must have a non-empty %s.", "\\name")
+#. R/Rd.R: gettext("Rd files must have a non-empty \\name.")
 #: R/Rd.R:0
-msgid "Rd files must have a non-empty %s."
+msgid "Rd files must have a non-empty \\name."
 msgstr ""
 
 #. R/Rd.R: gettext("Rd files must have a non-empty \\title.")
@@ -2174,7 +2174,7 @@ msgstr "kan ikke oprette"
 msgid "unable to create '%s'"
 msgstr "kan ikke oprette"
 
-#. R/Vignettes.R: gettextf("unable to create temp directory %s ", sQuote(tmpd))
+#. R/Vignettes.R: gettextf("unable to create temp directory %s", sQuote(tmpd))
 #: R/Vignettes.R:0
 #, fuzzy
 msgid "unable to create temp directory %s"

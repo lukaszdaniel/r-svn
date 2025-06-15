@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-15 11:12\n"
 "PO-Revision-Date: 2023-10-14 06:55+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -1352,10 +1352,10 @@ msgstr "ranura o atribut «package» no vàlids, la longitud és incorrecta"
 msgid "invalid 'source' argument: expected file names or a connection but got an object of class %s"
 msgstr "argument «source» no vàlid: s'esperava un nom de fitxer o una connexió, però s'ha obtingut un objecte de classe %s"
 
-#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
+#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
 #, fuzzy
-msgid "invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s"
+msgid "invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s"
 msgstr "classe S4 no vàlida corresponent a la classe S3: els espais buits a la versió S4 han d'estendre els espais buits corresponents a la versió S3: falla per a %s"
 
 #. R/Methods.R: gettextf("invalid argument 'name': %s", .isSingleName(name))

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:39\n"
+"POT-Creation-Date: 2025-06-15 14:04\n"
 "PO-Revision-Date: 2024-03-18 21:25+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -176,9 +176,10 @@ msgstr "'x' と 'y' の長さが異なります"
 msgid "'x' is a list, but does not have components 'x' and 'y'"
 msgstr "'x' はリストですが，成分 'x' と 'y' を持ちません"
 
-#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y' and 'z'")
 #: R/xyz.coords.R:0
-msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+#, fuzzy
+msgid "'x' is a list, but does not have components 'x', 'y' and 'z'"
 msgstr "'x' はリストですが、成分 'x' と 'y' そして 'z' を持ちません"
 
 #. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")

@@ -127,7 +127,7 @@ msgstr "argument 'legend' ma długość 0"
 #. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
 #: R/arrows.R:0
 msgid "'length', 'angle', or 'code' greater than length 1; values after the first are ignored"
-msgstr "argument 'length', 'angle', lub 'code' mają długość większą niż 1; wszystkie wartości oprócz pierwszych zostaną zignorowane"
+msgstr "argument 'length', 'angle', lub 'code' mają długość większą niż 1; wszystkie wartości oprócz pierwszego zostaną zignorowane"
 
 #. R/stars.R: stop("'locations' must be a 2-column matrix.")
 #: R/stars.R:0
@@ -589,7 +589,7 @@ msgid ""
 "layout matrix must contain at least one reference\n"
 "to each of the values {1 ... %d}"
 msgstr ""
-"macierz layoutu musi zawierać przynajmniej jedną referencję\n"
+"macierz układu musi zawierać przynajmniej jedną referencję\n"
 "do każdej z wartości {1 ... %d}"
 
 #. R/stars.R: stop("length of 'angles' must equal 'ncol(x)'")

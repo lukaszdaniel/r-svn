@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:39\n"
+"POT-Creation-Date: 2025-06-15 14:04\n"
 "PO-Revision-Date: 2022-10-14 10:22+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -180,9 +180,10 @@ msgstr "le lunghezze di 'x' e 'y' differiscono"
 msgid "'x' is a list, but does not have components 'x' and 'y'"
 msgstr "'x' è una lista, ma non ha componenti 'x' e 'y'"
 
-#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y' and 'z'")
 #: R/xyz.coords.R:0
-msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+#, fuzzy
+msgid "'x' is a list, but does not have components 'x', 'y' and 'z'"
 msgstr "'x' è una lista, ma non ha componenti 'x', 'y' e 'z'"
 
 #. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")

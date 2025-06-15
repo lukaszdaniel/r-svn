@@ -53,7 +53,7 @@ msgstr "'expr' musi zwrócić obiekt klasy \"grob\" lub \"gList\""
 #. R/gpar.R: stop("'fill' gpar list components must all be patterns")
 #: R/gpar.R:0
 msgid "'fill' gpar list components must all be patterns"
-msgstr "Wszystkie składniki listy gpar 'fill' muszą być wzorcami"
+msgstr "wszystkie składniki listy gpar 'fill' muszą być wzorcami"
 
 #. R/edit.R: stop("'gEditList' can only contain 'gEdit' objects")
 #: R/edit.R:0
@@ -99,7 +99,7 @@ msgstr "argumenty 'hjust' oraz 'vjust' muszą mieć długość 1"
 #. R/highlevel.R: stop("'l' must be a layout")
 #: R/highlevel.R:0
 msgid "'l' must be a layout"
-msgstr "argument 'l' musi być layoutem"
+msgstr "argument 'l' musi być układem"
 
 #. R/components.R: stop("'labels' and 'at' locations must have same length")
 #: R/components.R:0
@@ -288,7 +288,7 @@ msgstr "Nie udało się poprawnie zarejestrować okna ekranu na liście wyświet
 #. R/grid.R: warning("Down viewport incorrectly recorded on display list")
 #: R/grid.R:0
 msgid "Down viewport incorrectly recorded on display list"
-msgstr "Okno ekranu nie poprawnie zarejestrowane na liście wyświetleń"
+msgstr "Okno ekranu niepoprawnie zarejestrowane na liście wyświetleń"
 
 #. R/group.R: warning("Group definition failed")
 #: R/group.R:0
@@ -449,7 +449,7 @@ msgstr "można jedynie zmienić kolejność argumentu 'children' dla \"gTree\""
 #. R/grob.R: stop("can only set 'children' for a \"gTree\"")
 #: R/grob.R:0
 msgid "can only set 'children' for a \"gTree\""
-msgstr "można jedynie ustwić dzieci dla \"gTree\""
+msgstr "można jedynie ustawić dzieci dla \"gTree\""
 
 #. R/unit.R: stop("can't divide with a unit")
 #: R/unit.R:0
@@ -654,7 +654,7 @@ msgstr "niepoprawny argument 'n'"
 #. R/origin.R: stop("invalid 'origin'")
 #: R/origin.R:0
 msgid "invalid 'origin'"
-msgstr "niepoprawna wartość \"origin\""
+msgstr "niepoprawna wartość 'origin'"
 
 #. R/ls.R: stop("invalid 'print' argument")
 #: R/ls.R:0
@@ -799,7 +799,7 @@ msgstr "poprawne jest jedynie usunięcie dziecka do \"gTree\""
 #. R/grob.R: stop("it is only valid to set a 'grob' as child of a \"gTree\"")
 #: R/grob.R:0
 msgid "it is only valid to set a 'grob' as child of a \"gTree\""
-msgstr "poprawne jest jedynie ustawienie'grob' jako dziecka \"gTree\""
+msgstr "poprawne jest jedynie ustawienie 'grob' jako dziecka \"gTree\""
 
 #. R/grob.R: stop("it is only valid to set a child of a \"gTree\"")
 #: R/grob.R:0
@@ -819,22 +819,22 @@ msgstr "kombinacja brakujących i niebrakujących wartości dla %s"
 #. R/primitives.R: stop("must have exactly 4 control points")
 #: R/primitives.R:0
 msgid "must have exactly 4 control points"
-msgstr "potrzeba mieć dokładnie 4 punkty kontrolne"
+msgstr "należy mieć dokładnie 4 punkty kontrolne"
 
 #. R/primitives.R: stop("must have exactly 4 control points per Bezier curve")
 #: R/primitives.R:0
 msgid "must have exactly 4 control points per Bezier curve"
-msgstr "potrzeba mieć dokładnie 4 punkty kontrolne na każdą krzywą Beziera"
+msgstr "należy mieć dokładnie 4 punkty kontrolne na każdą krzywą Beziera"
 
 #. R/grid.R: stop("must navigate up at least one viewport")
 #: R/grid.R:0
 msgid "must navigate up at least one viewport"
-msgstr "potrzeba przenieść w górę przynajmniej jedno okno ekranu"
+msgstr "należy przenieść w górę przynajmniej jedno okno ekranu"
 
 #. R/grid.R: stop("must pop at least one viewport")
 #: R/grid.R:0
 msgid "must pop at least one viewport"
-msgstr "potrzeba wyświetlić przynajmniej jedno okno ekranu"
+msgstr "należy wyświetlić przynajmniej jedno okno ekranu"
 
 #. R/viewport.R: stop("must specify at least one of 'xData' or 'xscale'")
 #: R/viewport.R:0
@@ -854,22 +854,22 @@ msgstr "przynajmniej jedno okno ekranu musi być określone"
 #. R/frames.R: stop("must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'")
 #: R/frames.R:0
 msgid "must specify exactly one of 'side=[\"top\", \"bottom\"]', 'row', 'row.before', or 'row.after'"
-msgstr "potrzeba określić dokładnie jeden z 'side=[\"top\", \"bottom\"]', 'row', 'row.before', lub 'row.after'"
+msgstr "należy określić dokładnie jeden z 'side=[\"top\", \"bottom\"]', 'row', 'row.before', lub 'row.after'"
 
 #. R/gpar.R: stop("must specify only one of 'font' and 'fontface'")
 #: R/gpar.R:0
 msgid "must specify only one of 'font' and 'fontface'"
-msgstr "potrzeba określić tylko jeden z 'font' oraz 'fontface'"
+msgstr "należy określić tylko jeden z 'font' oraz 'fontface'"
 
 #. R/gpar.R: stop("must specify only valid 'gpar' names")
 #: R/gpar.R:0
 msgid "must specify only valid 'gpar' names"
-msgstr "potrzeba określić tylko poprawne nazwy 'gpar'"
+msgstr "należy określić tylko poprawne nazwy 'gpar'"
 
 #. R/debug.R: stop("must start new page if showing leaves separately")
 #: R/debug.R:0
 msgid "must start new page if showing leaves separately"
-msgstr "trzeba rozpocząć nową stronę jeśli liście mają być pokazywane oddzielnie"
+msgstr "należy rozpocząć nową stronę jeśli liście mają być pokazywane oddzielnie"
 
 #. R/unit.R: stop("non-unit operand must be numeric")
 #: R/unit.R:0

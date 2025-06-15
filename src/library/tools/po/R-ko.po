@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-05 16:38\n"
+"POT-Creation-Date: 2025-06-14 19:00\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1163,10 +1163,11 @@ msgstr "R CMD build가 실패했습니다"
 msgid "R include directory is empty -- perhaps need to install R-devel.rpm or similar"
 msgstr ""
 
-#. R/Rd.R: gettextf("Rd files must have a non-empty %s.", "\\name")
+#. R/Rd.R: gettext("Rd files must have a non-empty \\name.")
 #: R/Rd.R:0
-msgid "Rd files must have a non-empty %s."
-msgstr "Rd 파일들은 반드시 비어있지 않은 %s를 가져야 합니다."
+#, fuzzy
+msgid "Rd files must have a non-empty \\name."
+msgstr "Rd 파일은 반드시 비어있지 않은 \\title 를 가지고 있어야 합니다."
 
 #. R/Rd.R: gettext("Rd files must have a non-empty \\title.")
 #: R/Rd.R:0
@@ -2195,7 +2196,7 @@ msgstr "생성할 수 없습니다"
 msgid "unable to create '%s'"
 msgstr "'%s'을 생성할 수 없습니다"
 
-#. R/Vignettes.R: gettextf("unable to create temp directory %s ", sQuote(tmpd))
+#. R/Vignettes.R: gettextf("unable to create temp directory %s", sQuote(tmpd))
 #: R/Vignettes.R:0
 msgid "unable to create temp directory %s"
 msgstr "임시디렉토리 %s를 생성하지 못했습니다"
@@ -2586,6 +2587,9 @@ msgstr[0] "객체 %s는 하나 이상의 데이터 호출로부터 생성되었�
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "'%2$s'에 %1$s를 실행할 수 없습니다"
+
+#~ msgid "Rd files must have a non-empty %s."
+#~ msgstr "Rd 파일들은 반드시 비어있지 않은 %s를 가져야 합니다."
 
 #, fuzzy
 #~ msgid "in package installation"

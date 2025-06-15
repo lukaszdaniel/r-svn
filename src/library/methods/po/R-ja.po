@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0 \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-15 11:12\n"
 "PO-Revision-Date: 2015-03-27 14:52+0900 \n"
 "Last-Translator: Masafumi  \n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
@@ -1149,9 +1149,10 @@ msgstr "不正な 'package' スロットもしくは属性、間違った長さ"
 msgid "invalid 'source' argument: expected file names or a connection but got an object of class %s"
 msgstr "不正な 'source' 引数です: ファイル名かコネクションが期待されますが、クラス %s のオブジェクトが得られました"
 
-#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
+#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
-msgid "invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s"
+#, fuzzy
+msgid "invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s"
 msgstr "S3 クラスに対する不正な S4 クラス: S4 バージョン中のスロットは S3 バージョン中のスロットに拡張されなければなりません: %s に対して失敗しました"
 
 #. R/Methods.R: gettextf("invalid argument 'name': %s", .isSingleName(name))

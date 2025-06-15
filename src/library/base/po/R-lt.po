@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:55\n"
+"POT-Creation-Date: 2025-06-15 17:34\n"
 "PO-Revision-Date: 2021-01-27 10:37+0100\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -1438,17 +1438,6 @@ msgstr "automatinis įkėliklis nerado '%s', esančio (-ios) '%s'"
 msgid "bad 'S3method' directive: %s"
 msgstr "bloga 'S3method' direktyva: %s"
 
-#. R/load.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
-#: R/load.R:0 R/serialize.R:0
-msgid "bad 'file' argument"
-msgstr "netinkamas 'file' argumentas"
-
-#. R/load.R: stop("bad file argument")
-#: R/load.R:0
-msgid "bad file argument"
-msgstr "netinkamas failo argumentas"
-
 #. R/namespace.R: stop("bad method")
 #: R/namespace.R:0
 msgid "bad method"
@@ -1854,26 +1843,41 @@ msgstr "begalinės arba trūkstamos reikšmės 'x'"
 msgid "input has been corrupted, with LF replaced by CR"
 msgstr "įvestis sugadinta su LF, kuris pakeistas CR"
 
+#. R/attach.R: gettextf("invalid '%s' argument", "name")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/files.R: gettextf("invalid '%s' argument", "path")
+#. R/files.R: gettextf("invalid '%s' argument", "time")
+#. R/load.R: gettextf("invalid '%s' argument", "file")
+#. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
+#: R/attach.R:0 R/connections.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
+#: R/serialize.R:0 R/taskCallback.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "netaisyklingas 'name' argumentas"
+
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(y)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(R)")
+#. R/seq.R: gettextf("invalid '%s' value", "(to - from)/by")
+#: R/qr.R:0 R/seq.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "neteisinga 'value'"
+
 #. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
 #: R/kappa.R:0
 msgid "invalid '%s': type \"%s\""
 msgstr ""
-
-#. R/seq.R: stop("invalid '(to - from)/by'")
-#: R/seq.R:0
-msgid "invalid '(to - from)/by'"
-msgstr "neteisinga '(to - from)/by'"
 
 #. R/dates.R: stop("invalid 'by' string")
 #. R/datetime.R: stop("invalid 'by' string")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid 'by' string"
 msgstr "netaisyklinga 'by' eilutė"
-
-#. R/locales.R: stop("invalid 'category' argument")
-#: R/locales.R:0
-msgid "invalid 'category' argument"
-msgstr "netaisyklingas 'category' argumentas"
 
 #. R/serialize.R: stop("invalid 'compress' argument: ", compress)
 #: R/serialize.R:0
@@ -1895,11 +1899,6 @@ msgstr "neteisingas 'dimnames' suteiktas duomenų sistemai"
 msgid "invalid 'dims'"
 msgstr "netaisyklinga 'dims'"
 
-#. R/connections.R: stop("invalid 'endian' argument")
-#: R/connections.R:0
-msgid "invalid 'endian' argument"
-msgstr "netaisyklingas 'endian' argumentas"
-
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
 msgid "invalid 'labels'; length %d should be 1 or %d"
@@ -1915,16 +1914,6 @@ msgstr "netaisyklingas 'make.names'"
 msgid "invalid 'max' / getOption(\"max.print\"):"
 msgstr "neteisingas 'max' / getOption(\"max.print\"):"
 
-#. R/attach.R: stop("invalid 'name' argument")
-#: R/attach.R:0
-msgid "invalid 'name' argument"
-msgstr "netaisyklingas 'name' argumentas"
-
-#. R/files.R: stop("invalid 'path' argument")
-#: R/files.R:0
-msgid "invalid 'path' argument"
-msgstr "netaisyklingas 'path' argumentas"
-
 #. R/rle.R: stop("invalid 'rle' structure")
 #: R/rle.R:0
 msgid "invalid 'rle' structure"
@@ -1935,36 +1924,16 @@ msgstr "netaisyklingas 'rle' struktūra"
 msgid "invalid 'row.names' length"
 msgstr "netaisyklingas 'row.names' ilgis"
 
-#. R/files.R: stop("invalid 'time' argument")
-#: R/files.R:0
-msgid "invalid 'time' argument"
-msgstr "netaisyklingas 'time' argumentas"
-
 #. R/version.R: stop("invalid 'value'")
 #: R/version.R:0
 msgid "invalid 'value'"
 msgstr "neteisinga 'value'"
-
-#. R/taskCallback.R: stop("invalid 'which' argument")
-#: R/taskCallback.R:0
-msgid "invalid 'which' argument"
-msgstr "netaisyklingas 'which' argumentas"
 
 #. R/rowsum.R: stop("invalid 'x'")
 #: R/rowsum.R:0
 #, fuzzy
 msgid "invalid 'x'"
 msgstr "netaisyklinga 'dims'"
-
-#. R/qr.R: stop("invalid NCOL(R)")
-#: R/qr.R:0
-msgid "invalid NCOL(R)"
-msgstr "netaisyklingas NCOL(R)"
-
-#. R/qr.R: stop("invalid NCOL(y)")
-#: R/qr.R:0
-msgid "invalid NCOL(y)"
-msgstr "neteisingas NCOL(y)"
 
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
@@ -1997,11 +1966,6 @@ msgstr "neteisingas ncol(qr$qr)"
 msgid "invalid ncol(qr$rank)"
 msgstr "neteisingas ncol(qr$rank)"
 
-#. R/qr.R: stop("invalid ncol(x)")
-#: R/qr.R:0
-msgid "invalid ncol(x)"
-msgstr "neteisingas ncol(x)"
-
 #. R/qr.R: stop("invalid ncol(y)")
 #: R/qr.R:0
 msgid "invalid ncol(y)"
@@ -2019,8 +1983,7 @@ msgid "invalid nrow(qr$qr)"
 msgstr "neteisingas nrow(qr$qr)"
 
 #. R/eigen.R: stop("invalid nrow(x)")
-#. R/qr.R: stop("invalid nrow(x)")
-#: R/eigen.R:0 R/qr.R:0
+#: R/eigen.R:0
 msgid "invalid nrow(x)"
 msgstr "neteisingas nrow(x)"
 
@@ -2437,9 +2400,10 @@ msgstr "vardų erdvė neįkeliama"
 msgid "not supported for LAPACK QR"
 msgstr "nepalaikomas LAPACK QR"
 
-#. R/load.R: warning("nothing specified to be save()d")
+#. R/load.R: warning("nothing specified to be saved")
 #: R/load.R:0
-msgid "nothing specified to be save()d"
+#, fuzzy
+msgid "nothing specified to be saved"
 msgstr "niekas nenurodyta, kad būtų save()d"
 
 #. R/table.R: stop("nothing to tabulate")
@@ -2644,9 +2608,10 @@ msgstr ""
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "tikriausiai neteisinga koduotė stulpelio names(.)"
 
-#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
+#. R/conditions.R: sprintf("pushing duplicate '%s' handler on top of the stack",     class)
 #: R/conditions.R:0
-msgid "pushing duplicate `%s` handler on top of the stack"
+#, fuzzy
+msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr "stumiama dubliuota '%s' manipuliavimo programa dėklo viršuje"
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
@@ -2654,9 +2619,10 @@ msgstr "stumiama dubliuota '%s' manipuliavimo programa dėklo viršuje"
 msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
 msgstr "pakeistas '[<-' by '\\\\[<-' reguliariojo reiškinio šablone"
 
-#. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
+#. R/attach.R: warning("replaced regular expression pattern '[' by '\\\\['")
 #: R/attach.R:0
-msgid "replaced regular expression pattern '[' by  '\\\\['"
+#, fuzzy
+msgid "replaced regular expression pattern '[' by '\\\\['"
 msgstr "pakeistas reguliariojo reiškinio šablonas '[' by  '\\\\['"
 
 #. R/diag.R: stop("replacement diagonal has wrong length")
@@ -2848,11 +2814,13 @@ msgstr "negalima įkelti R kodo pakete %s"
 msgid "unable to re-encode some lines in NAMESPACE file"
 msgstr "nepavyko iš naujo koduoti kai kurių eilučių NAMESPACE faile"
 
-#. R/dates.R: gettextf("unary %s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("unary '%s' not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
-msgid "unary %s not defined for \"Date\" objects"
+#, fuzzy
+msgid "unary '%s' not defined for \"Date\" objects"
 msgstr "vienvietė %s neapibrėžta \"Date\" objektams"
 
+#. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", "-")
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
 msgid "unary '%s' not defined for \"POSIXt\" objects"
@@ -2867,11 +2835,6 @@ msgstr "vienvietė '%s' neapibrėžta \"difftime\" objektams"
 #: R/version.R:0
 msgid "unary '%s' not defined for \"numeric_version\" objects"
 msgstr "vienvietė '%s' neapibrėžta \"numeric_version\" objektams"
-
-#. R/datetime.R: stop("unary '-' is not defined for \"POSIXt\" objects")
-#: R/datetime.R:0
-msgid "unary '-' is not defined for \"POSIXt\" objects"
-msgstr "vienvietis '-' neapibrėžtas \"POSIXt\" objektams"
 
 #. R/dates.R: stop("unary - is not defined for \"Date\" objects")
 #: R/dates.R:0
@@ -3259,6 +3222,42 @@ msgid_plural "there are no packages called"
 msgstr[0] "nėra paketo, vadinamo"
 msgstr[1] "nėra paketų, vadinamų"
 msgstr[2] "nėra paketų, vadinamų"
+
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "neteisinga '(to - from)/by'"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "netaisyklingas NCOL(R)"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "neteisingas NCOL(y)"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "neteisingas ncol(x)"
+
+#~ msgid "bad 'file' argument"
+#~ msgstr "netinkamas 'file' argumentas"
+
+#~ msgid "bad file argument"
+#~ msgstr "netinkamas failo argumentas"
+
+#~ msgid "invalid 'category' argument"
+#~ msgstr "netaisyklingas 'category' argumentas"
+
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "netaisyklingas 'endian' argumentas"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "netaisyklingas 'path' argumentas"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "netaisyklingas 'time' argumentas"
+
+#~ msgid "invalid 'which' argument"
+#~ msgstr "netaisyklingas 'which' argumentas"
+
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "vienvietis '-' neapibrėžtas \"POSIXt\" objektams"
 
 #~ msgid "invalid string for 'by'"
 #~ msgstr "netaisyklinga 'by' eilutė"

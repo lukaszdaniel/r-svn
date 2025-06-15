@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.2\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-14 19:05+0200\n"
 "PO-Revision-Date: 2012-10-26 22:30+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -319,7 +319,7 @@ msgstr ""
 
 #: src/gnuwin32/run.cpp:964
 #, c-format
-msgid "cannot open cmd `%s'"
+msgid "cannot open cmd '%s'"
 msgstr ""
 
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
@@ -8714,7 +8714,11 @@ msgid "width cannot be zero"
 msgstr ""
 
 #: src/main/util.cpp:3081
-msgid "'type' must be \"integer\" for  \"d\"-format"
+msgid "'type' must be \"integer\" for \"d\"-format"
+msgstr ""
+
+#: src/main/util.cpp:3166
+msgid "'type' must be \"real\" for this format"
 msgstr ""
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127

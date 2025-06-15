@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:55\n"
+"POT-Creation-Date: 2025-06-15 17:34\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1920,22 +1920,6 @@ msgid "bad 'S3method' directive: %s"
 msgstr ""
 
 
-#: R/load.R: 0
-#: R/serialize.R: 0
-#. R/load.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
-
-msgid "bad 'file' argument"
-msgstr ""
-
-
-#: R/load.R: 0
-#. R/load.R: stop("bad file argument")
-
-msgid "bad file argument"
-msgstr ""
-
-
 #: R/namespace.R: 0
 #. R/namespace.R: stop("bad method")
 
@@ -2498,17 +2482,43 @@ msgid "input has been corrupted, with LF replaced by CR"
 msgstr ""
 
 
+#: R/attach.R: 0
+#: R/connections.R: 0
+#: R/files.R: 0
+#: R/load.R: 0
+#: R/locales.R: 0
+#: R/serialize.R: 0
+#: R/taskCallback.R: 0
+#. R/attach.R: gettextf("invalid '%s' argument", "name")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/files.R: gettextf("invalid '%s' argument", "path")
+#. R/files.R: gettextf("invalid '%s' argument", "time")
+#. R/load.R: gettextf("invalid '%s' argument", "file")
+#. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
+
+msgid "invalid '%s' argument"
+msgstr ""
+
+
+#: R/qr.R: 0
+#: R/seq.R: 0
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(y)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(R)")
+#. R/seq.R: gettextf("invalid '%s' value", "(to - from)/by")
+
+msgid "invalid '%s' value"
+msgstr ""
+
+
 #: R/kappa.R: 0
 #. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
 
 msgid "invalid '%s': type \"%s\""
-msgstr ""
-
-
-#: R/seq.R: 0
-#. R/seq.R: stop("invalid '(to - from)/by'")
-
-msgid "invalid '(to - from)/by'"
 msgstr ""
 
 
@@ -2518,13 +2528,6 @@ msgstr ""
 #. R/datetime.R: stop("invalid 'by' string")
 
 msgid "invalid 'by' string"
-msgstr ""
-
-
-#: R/locales.R: 0
-#. R/locales.R: stop("invalid 'category' argument")
-
-msgid "invalid 'category' argument"
 msgstr ""
 
 
@@ -2556,13 +2559,6 @@ msgid "invalid 'dims'"
 msgstr ""
 
 
-#: R/connections.R: 0
-#. R/connections.R: stop("invalid 'endian' argument")
-
-msgid "invalid 'endian' argument"
-msgstr ""
-
-
 #: R/factor.R: 0
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 
@@ -2584,20 +2580,6 @@ msgid "invalid 'max' / getOption(\"max.print\"):"
 msgstr ""
 
 
-#: R/attach.R: 0
-#. R/attach.R: stop("invalid 'name' argument")
-
-msgid "invalid 'name' argument"
-msgstr ""
-
-
-#: R/files.R: 0
-#. R/files.R: stop("invalid 'path' argument")
-
-msgid "invalid 'path' argument"
-msgstr ""
-
-
 #: R/rle.R: 0
 #. R/rle.R: stop("invalid 'rle' structure")
 
@@ -2612,13 +2594,6 @@ msgid "invalid 'row.names' length"
 msgstr ""
 
 
-#: R/files.R: 0
-#. R/files.R: stop("invalid 'time' argument")
-
-msgid "invalid 'time' argument"
-msgstr ""
-
-
 #: R/version.R: 0
 #. R/version.R: stop("invalid 'value'")
 
@@ -2626,31 +2601,10 @@ msgid "invalid 'value'"
 msgstr ""
 
 
-#: R/taskCallback.R: 0
-#. R/taskCallback.R: stop("invalid 'which' argument")
-
-msgid "invalid 'which' argument"
-msgstr ""
-
-
 #: R/rowsum.R: 0
 #. R/rowsum.R: stop("invalid 'x'")
 
 msgid "invalid 'x'"
-msgstr ""
-
-
-#: R/qr.R: 0
-#. R/qr.R: stop("invalid NCOL(R)")
-
-msgid "invalid NCOL(R)"
-msgstr ""
-
-
-#: R/qr.R: 0
-#. R/qr.R: stop("invalid NCOL(y)")
-
-msgid "invalid NCOL(y)"
 msgstr ""
 
 
@@ -2699,13 +2653,6 @@ msgstr ""
 
 
 #: R/qr.R: 0
-#. R/qr.R: stop("invalid ncol(x)")
-
-msgid "invalid ncol(x)"
-msgstr ""
-
-
-#: R/qr.R: 0
 #. R/qr.R: stop("invalid ncol(y)")
 
 msgid "invalid ncol(y)"
@@ -2727,9 +2674,7 @@ msgstr ""
 
 
 #: R/eigen.R: 0
-#: R/qr.R: 0
 #. R/eigen.R: stop("invalid nrow(x)")
-#. R/qr.R: stop("invalid nrow(x)")
 
 msgid "invalid nrow(x)"
 msgstr ""
@@ -3301,9 +3246,9 @@ msgstr ""
 
 
 #: R/load.R: 0
-#. R/load.R: warning("nothing specified to be save()d")
+#. R/load.R: warning("nothing specified to be saved")
 
-msgid "nothing specified to be save()d"
+msgid "nothing specified to be saved"
 msgstr ""
 
 
@@ -3569,9 +3514,9 @@ msgstr ""
 
 
 #: R/conditions.R: 0
-#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
+#. R/conditions.R: sprintf("pushing duplicate '%s' handler on top of the stack",     class)
 
-msgid "pushing duplicate `%s` handler on top of the stack"
+msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr ""
 
 
@@ -3583,9 +3528,9 @@ msgstr ""
 
 
 #: R/attach.R: 0
-#. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
+#. R/attach.R: warning("replaced regular expression pattern '[' by '\\\\['")
 
-msgid "replaced regular expression pattern '[' by  '\\\\['"
+msgid "replaced regular expression pattern '[' by '\\\\['"
 msgstr ""
 
 
@@ -3855,13 +3800,14 @@ msgstr ""
 
 
 #: R/dates.R: 0
-#. R/dates.R: gettextf("unary %s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("unary '%s' not defined for \"Date\" objects", .Generic)
 
-msgid "unary %s not defined for \"Date\" objects"
+msgid "unary '%s' not defined for \"Date\" objects"
 msgstr ""
 
 
 #: R/datetime.R: 0
+#. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", "-")
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
 
 msgid "unary '%s' not defined for \"POSIXt\" objects"
@@ -3879,13 +3825,6 @@ msgstr ""
 #. R/version.R: gettextf("unary '%s' not defined for \"numeric_version\" objects",     .Generic)
 
 msgid "unary '%s' not defined for \"numeric_version\" objects"
-msgstr ""
-
-
-#: R/datetime.R: 0
-#. R/datetime.R: stop("unary '-' is not defined for \"POSIXt\" objects")
-
-msgid "unary '-' is not defined for \"POSIXt\" objects"
 msgstr ""
 
 

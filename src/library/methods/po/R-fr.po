@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-15 11:12\n"
 "PO-Revision-Date: 2021-11-06 17:51+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1146,9 +1146,10 @@ msgstr "slot ou attribut 'package' incorrect, longueur erronée"
 msgid "invalid 'source' argument: expected file names or a connection but got an object of class %s"
 msgstr "argument 'source' incorrect : un ou des noms de fichiers ou une connexion sont attendus, un objet de classe %s est fourni"
 
-#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
+#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
-msgid "invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s"
+#, fuzzy
+msgid "invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s"
 msgstr "classe S4 incorrecte en correspondance à une classe S3 : les slots dans la version S4 doivent étendre les slots correspondants de la version S3 : échec pour %s"
 
 #. R/Methods.R: gettextf("invalid argument 'name': %s", .isSingleName(name))

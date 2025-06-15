@@ -797,7 +797,7 @@ msgstr "klasa %s jest WIRTUALNA; nie ma sensu tworzyć obiektu S4 z tej klasy"
 #. R/as.R: gettextf("class %s is a class union: 'coerce' relations to a class union are not meaningful",     dQuote(to))
 #: R/as.R:0
 msgid "class %s is a class union: 'coerce' relations to a class union are not meaningful"
-msgstr "klasa %s jest unią klas: relacje 'coerce' dla uni klas nie mają sensu"
+msgstr "klasa %s jest unią klas: relacje 'coerce' dla unii klas nie mają sensu"
 
 #. R/is.R: gettextf("class %s is defined (with package slot %s) but no metadata object found to revise %s information---not imported?  Making a copy in package %s",     .dQ(class), sQuote(classDef@package), purpose, sQuote(getPackageName(where,         FALSE)))
 #: R/is.R:0
@@ -1103,7 +1103,7 @@ msgstr "niespójny stary styl informacji o klasie dla %s; klasa jest zdefiniowan
 #. R/RClassUtils.R: gettextf("initializing objects from class %s with these arguments is not supported",     dQuote(Class))
 #: R/RClassUtils.R:0
 msgid "initializing objects from class %s with these arguments is not supported"
-msgstr "inicjalizowanie obiektów z klasy %s z tymi argumentami nie jest wspierane"
+msgstr "inicjowanie obiektów z klasy %s z tymi argumentami nie jest wspierane"
 
 #. R/MethodsList.R: stop("inserting method corresponding to empty signature")
 #: R/MethodsList.R:0
@@ -1140,9 +1140,9 @@ msgstr "niepoprawna gniazdo 'package' lub atrybut; niepoprawna długość"
 msgid "invalid 'source' argument: expected file names or a connection but got an object of class %s"
 msgstr "niepoprawny argument 'source': oczekiwano nazw plików lub połączenia, a otrzymano obiekt klasy %s"
 
-#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
+#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
-msgid "invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s"
+msgid "invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s"
 msgstr "niepoprawna klasa S4 odpowiadająca klasie S3: gniazda w wersji S4 muszą rozszerzać odpowiadające im sloty w wersji S3: nie powiodło się dla %s"
 
 #. R/Methods.R: gettextf("invalid argument 'name': %s", .isSingleName(name))
@@ -1244,7 +1244,7 @@ msgid ""
 msgstr ""
 "lokalne przypisanie do nazwy pola nie zmieni pola:\n"
 "    %s\n"
-" Czy chciałeś użyć \"<<-\"? ( w metodzie %s klasy %s)"
+" Może lepiej użyć \"<<-\"? ( w metodzie %s klasy %s)"
 
 #. R/RMethodUtils.R: gettextf("making a generic for special function %s", sQuote(f))
 #: R/RMethodUtils.R:0
@@ -1378,7 +1378,7 @@ msgstr "potrzeba tutaj definicji dla metody"
 #. R/RClassUtils.R: gettextf("needed the supplied labels vector of length %d, got %d",     length(nodes), length(short))
 #: R/RClassUtils.R:0
 msgid "needed the supplied labels vector of length %d, got %d"
-msgstr "potrzebowano dostarczyć wektora etykiet o długości %d, otrzymano %d"
+msgstr "potrzebny był dostarczony wektor etykiet o długości %d, otrzymano %d"
 
 #. R/RClassUtils.R: gettextf("no '.Data' slot defined for class %s", dQuote(class(object)))
 #: R/RClassUtils.R:0
@@ -1532,7 +1532,7 @@ msgstr "nie znaleziono metod dla %s; 'cacheGenericsMetaData()' nie będzie miał
 #. R/methodsTable.R: gettextf("no methods table for generic %s from package %s in package %s",     sQuote(generic@generic), sQuote(generic@package), sQuote(getPackageName(where)))
 #: R/methodsTable.R:0
 msgid "no methods table for generic %s from package %s in package %s"
-msgstr "brak tablicy metod dla ogolnej funkcji %s z pakietu %s w pakiecie %s"
+msgstr "brak tablicy metod dla ogólnej funkcji %s z pakietu %s w pakiecie %s"
 
 #. R/addedFunctions.R: gettextf("no non-generic function %s found", sQuote(name))
 #: R/addedFunctions.R:0
@@ -1599,7 +1599,7 @@ msgstr "to nie jest referencja klasy: %s"
 #. R/oldClass.R: stop("not allowed to have test==TRUE and an S4Class definition")
 #: R/oldClass.R:0
 msgid "not allowed to have test==TRUE and an S4Class definition"
-msgstr "niedozwolone by mieć 'test==TRUE' oraz definicję S4Class"
+msgstr "nie można mieć 'test==TRUE' oraz definicji S4Class"
 
 #. R/Methods.R: gettext("not both functions!")
 #: R/Methods.R:0
@@ -1973,7 +1973,7 @@ msgstr "niezdefiniowana podklasa %s klasy %s; definicja nie została zaktualizow
 #. R/zzz.R: message("unloading 'methods' package ...")
 #: R/zzz.R:0
 msgid "unloading 'methods' package ..."
-msgstr "zwalnianie pakietu 'methods'..."
+msgstr "zwalnianie pakietu 'methods' ..."
 
 #. R/BasicClasses.R: gettextf("unnamed argument must extend either the S3 class or the class of the data part; not true of class %s",     dQuote(Classi))
 #: R/BasicClasses.R:0

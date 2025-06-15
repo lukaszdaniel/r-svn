@@ -186,7 +186,7 @@ xyz.coords <- function(x, y=NULL, z=NULL, xlab=NULL, ylab=NULL, zlab=NULL,
                 z <- x[["z"]]
                 x <- x[["x"]]
             } else
-                stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+                stop("'x' is a list, but does not have components 'x', 'y' and 'z'")
         }
     }
 

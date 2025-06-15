@@ -175,9 +175,9 @@ msgstr "długości zmiennych 'x' oraz 'y' różnią się"
 msgid "'x' is a list, but does not have components 'x' and 'y'"
 msgstr "obiekt 'x' jest listą, ale nie zawiera komponentów 'x' oraz 'y'"
 
-#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y' and 'z'")
 #: R/xyz.coords.R:0
-msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+msgid "'x' is a list, but does not have components 'x', 'y' and 'z'"
 msgstr "obiekt 'x' jest listą, ale nie zawiera komponentów 'x', 'y' oraz 'z'"
 
 #. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")

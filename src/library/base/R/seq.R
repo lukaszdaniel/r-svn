@@ -73,7 +73,7 @@ seq.default <-
 	    if(!is.finite(n)) {
 		if(!is.na(by) && by == 0 && del == 0)
 		    return(from)
-		stop("invalid '(to - from)/by'")
+		stop(gettextf("invalid '%s' value", "(to - from)/by"))
 	    }
 	    if(n < 0L)
 		stop("wrong sign in 'by' argument")

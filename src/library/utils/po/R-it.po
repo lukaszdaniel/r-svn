@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-11 18:28\n"
+"POT-Creation-Date: 2025-06-14 12:50\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -86,10 +86,11 @@ msgstr "Il file 'DESCRIPTION' ha un campo 'Encoding' e la ricodifica non è poss
 msgid "'FUN' must be a function or NULL"
 msgstr "'FUN' dev'essere una funzione o NULL"
 
-#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
-#. R/readtable.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
+#. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
 #: R/read.DIF.R:0 R/readtable.R:0
-msgid "'as.is' has the wrong length %d  != cols = %d"
+#, fuzzy
+msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is' ha lunghezza errata %d  != cols = %d"
 
 #. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")

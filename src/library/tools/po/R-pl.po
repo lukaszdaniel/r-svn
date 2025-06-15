@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-05 16:38\n"
+"POT-Creation-Date: 2025-06-14 12:50\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -459,7 +459,7 @@ msgstr "Przestarzała licencja: %s"
 #. R/Vignettes.R: gettextf("Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files",     paste(sQuote(docs), collapse = ", "), paste(sQuote(names),         collapse = ", "))
 #: R/Vignettes.R:0
 msgid "Detected vignette source files (%s) with shared names (%s) and therefore risking overwriting each other's output files"
-msgstr "Wykryto pliki źródłowe winiet (%s) o współdzielonych nazwach (%s), co stwarza ryzyko wzajemnego nadpisywania plików wyjściowych"
+msgstr "Wykryto pliki źródłowe ilustracji (%s) o współdzielonych nazwach (%s), co stwarza ryzyko wzajemnego nadpisywania plików wyjściowych"
 
 #. R/QC.R: gettextf("Docs: %s", format_args(ffd))
 #. R/QC.R: gettextf("Docs: %s", format_args(docObj[["docs"]]))
@@ -550,7 +550,7 @@ msgstr "Błąd w uruchomieniu 'tools::texi2pdf()'"
 #. R/Vignettes.R: gettextf("Error: Vignette '%s' is non-ASCII but has no declared encoding",     file)
 #: R/Vignettes.R:0
 msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
-msgstr "Błąd: Winieta '%s' nie jest w formacie ASCII, ale nie ma zadeklarowanego kodowania"
+msgstr "Błąd: Ilustracja '%s' nie jest w formacie ASCII, ale nie ma zadeklarowanego kodowania"
 
 #. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
 #: R/build.R:0
@@ -568,7 +568,7 @@ msgid ""
 "Error: processing vignette '%s' failed with diagnostics:\n"
 "%s"
 msgstr ""
-"Błąd: przetwarzanie winiety '%s' nie powiodło się z diagnostyką:\n"
+"Błąd: przetwarzanie ilustracji '%s' nie powiodło się z diagnostyką:\n"
 "%s"
 
 #. R/testing.R: gettextf("Error: running examples in %s failed", sQuote(Rfile))
@@ -587,7 +587,7 @@ msgid ""
 "Error: tangling vignette '%s' failed with diagnostics:\n"
 "%s"
 msgstr ""
-"Błąd: splątana winieta '%s' nie powiodła się z diagnostyką:\n"
+"Błąd: splątana ilustracja '%s' nie powiodła się z diagnostyką:\n"
 "%s"
 
 #. R/update_packages.R: warning("Existing PACKAGES file contained no rows and/or no columns")
@@ -613,12 +613,12 @@ msgstr "Nie udało się uzyskać błędu podczas wyznaczania %s"
 #. R/Vignettes.R: gettextf("Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(name), sQuote(sprintf("%s::%s",         engine$package, engine$name)), sQuote(normalizePath(dir)),     fmt_file_sizes(output0))
 #: R/Vignettes.R:0
 msgid "Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s"
-msgstr "Nie udało się zlokalizować pliku wyjściowego %s %s dla winiety o nazwie %s i silniku %s. W katalogu roboczym %s znajdują się następujące pliki: %s"
+msgstr "Nie udało się zlokalizować pliku wyjściowego %s %s dla ilustracji o nazwie %s i silniku %s. W katalogu roboczym %s znajdują się następujące pliki: %s"
 
 #. R/Vignettes.R: gettextf("Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(paste0(name,         ".html")), sQuote(name), sQuote(sprintf("%s::%s", engine$package,         engine$name)), sQuote(normalizePath(dir)), fmt_file_sizes(output0))
 #: R/Vignettes.R:0
 msgid "Failed to locate %s output file %s or %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s"
-msgstr "Nie udało się zlokalizować pliku wyjściowego %s %s lub %s dla winiety o nazwie %s i silniku %s. W katalogu roboczym %s znajdują się następujące pliki: %s"
+msgstr "Nie udało się zlokalizować pliku wyjściowego %s %s lub %s dla ilustracji o nazwie %s i silniku %s. W katalogu roboczym %s znajdują się następujące pliki: %s"
 
 #. R/QC.R: gettext("Fields with non-ASCII tags:")
 #: R/QC.R:0
@@ -1048,7 +1048,7 @@ msgstr "Przeszkadzające wpisy:"
 #. R/dynamicHelp.R: gettextf("Only help files, %s, %s and files under %s and %s in a package can be viewed",     mono("NEWS"), mono("DESCRIPTION"), mono("doc/"), mono("demo/"))
 #: R/dynamicHelp.R:0
 msgid "Only help files, %s, %s and files under %s and %s in a package can be viewed"
-msgstr "Tylko pliki pomocy, %s, %s oraz pliki w %s oraz %s w pakiecie mogą być przegladane"
+msgstr "Tylko pliki pomocy, %s, %s oraz pliki w %s oraz %s w pakiecie mogą być przeglądane"
 
 #. R/RdConv2.R: gettextf("Only one Rd section per %s is supported.", "\\Sexpr")
 #: R/RdConv2.R:0
@@ -1142,10 +1142,10 @@ msgstr "'R CMD build' nie powiodło się"
 msgid "R include directory is empty -- perhaps need to install R-devel.rpm or similar"
 msgstr "Katalog 'include' w R jest pusty -- być może trzeba zainstalować R-devel.rpm lub coś podobnego"
 
-#. R/Rd.R: gettextf("Rd files must have a non-empty %s.", "\\name")
+#. R/Rd.R: gettext("Rd files must have a non-empty \\name.")
 #: R/Rd.R:0
-msgid "Rd files must have a non-empty %s."
-msgstr "Pliki Rd muszą mieć niepustą %s."
+msgid "Rd files must have a non-empty \\name."
+msgstr "Pliki Rd muszą mieć niepustą sekcję '\\name'."
 
 #. R/Rd.R: gettext("Rd files must have a non-empty \\title.")
 #: R/Rd.R:0
@@ -1445,7 +1445,7 @@ msgstr "Silnik ilustracji %s nie jest zarejestrowany"
 #. R/Vignettes.R: gettextf("Vignette engine %s is not registered by any of the packages %s",     sQuote(name), paste(sQuote(package), collapse = ", "))
 #: R/Vignettes.R:0
 msgid "Vignette engine %s is not registered by any of the packages %s"
-msgstr "Silnik ilustracji %s nie jest zarejestrowany przez jakekolwiek pakiety %s"
+msgstr "Silnik ilustracji %s nie jest zarejestrowany przez żaden z pakietów %s"
 
 #. R/Vignettes.R: stop("Vignette engine package not specified", call. = FALSE)
 #: R/Vignettes.R:0
@@ -1571,7 +1571,7 @@ msgstr "argument 'x' musi być wektorem tekstowym"
 #. R/install.R: stop("building a fake installation is disallowed")
 #: R/install.R:0
 msgid "building a fake installation is disallowed"
-msgstr "budowałe fałszywej instalacji jest zabronione"
+msgstr "budowanie fałszywej instalacji jest zabronione"
 
 #. R/QC.R: warning("cannot check R code installed as image")
 #: R/QC.R:0
@@ -1723,7 +1723,7 @@ msgstr "pobieranie pliku %s ..."
 #. R/checktools.R: message("downloading reverse dependencies ...")
 #: R/checktools.R:0
 msgid "downloading reverse dependencies ..."
-msgstr "pobieranie wstecznych zależności ..."
+msgstr "pobieranie odwrotnych zależności ..."
 
 #. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
 #: R/admin.R:0
@@ -1735,7 +1735,7 @@ msgstr "powtórzone pliki w polu '%s':"
 #. R/check.R: gettextf("elapsed-time limit of %g %s reached for sub-process",     tlim, "seconds")
 #: R/check.R:0
 msgid "elapsed-time limit of %g %s reached for sub-process"
-msgstr "granica upływu czasu o wartości %g %s został osiągnięta dla podprocesu"
+msgstr "osiągnięto limit czasu upłyniętego %g %s dla podprocesu"
 
 #. R/install.R: warning("empty 'data' directory", call. = FALSE)
 #: R/install.R:0
@@ -1827,7 +1827,7 @@ msgstr "niepoprawny 'OS.type' \"%s\". Nie powinno się wydarzyć"
 #. R/sha256.R: stop("invalid hex string")
 #: R/sha256.R:0
 msgid "invalid hex string"
-msgstr "niepoprawny ciąg znaków hex"
+msgstr "nnieprawidłowy tekst szesnastkowy"
 
 #. R/install.R: warning("invalid package ", sQuote(pkg), call. = FALSE)
 #: R/install.R:0
@@ -1918,7 +1918,7 @@ msgstr "brak wejść"
 #. R/sotools.R: message("no native symbols were extracted")
 #: R/sotools.R:0
 msgid "no native symbols were extracted"
-msgstr "żadne natywne symbole nie zostały wydobyte"
+msgstr "nie wyodrębniono żadnych symboli natywnych"
 
 #. R/checktools.R: message("no packages to check")
 #: R/checktools.R:0
@@ -2110,7 +2110,7 @@ msgstr "źródło musi być środowiskiem lub listą"
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
 msgid "staged installation is only possible with locking"
-msgstr "instalacja etapowy jest możliwa tylko z blokadą"
+msgstr "instalacja etapowa jest możliwa tylko z blokadą"
 
 #. R/dynamicHelp.R: message("starting httpd help server ...", appendLF = FALSE)
 #: R/dynamicHelp.R:0
@@ -2131,7 +2131,7 @@ msgstr "testowanie '%s' nie powiodło się"
 #. R/utils.R: warning("texi2dvi script/program not available, using emulation")
 #: R/utils.R:0
 msgid "texi2dvi script/program not available, using emulation"
-msgstr "skrypt/program texi2dvi jest niedostępny, używannie emulacji"
+msgstr "skrypt/program texi2dvi jest niedostępny, używanie emulacji"
 
 #. R/makeLazyLoad.R: stop("this cannot be used for package 'base'")
 #: R/makeLazyLoad.R:0
@@ -2141,17 +2141,17 @@ msgstr "to nie może zostać użyte dla pakietu 'base'"
 #. R/sotools.R: warning("this requires 'nm' to be on the PATH")
 #: R/sotools.R:0
 msgid "this requires 'nm' to be on the PATH"
-msgstr "'nm' musi być określowe w ścieżce środowiskowej PATH"
+msgstr "'nm' musi być określone w ścieżce środowiskowej PATH"
 
 #. R/sotools.R: warning("this requires 'objdump.exe' to be on the PATH")
 #: R/sotools.R:0
 msgid "this requires 'objdump.exe' to be on the PATH"
-msgstr "'objdump.exe' musi być określowe w ścieżce środowiskowej PATH"
+msgstr "'objdump.exe' musi być określone w ścieżce środowiskowej PATH"
 
 #. R/install.R: stop("this seems to be a bundle -- and they are defunct")
 #: R/install.R:0
 msgid "this seems to be a bundle -- and they are defunct"
-msgstr "plik 'DESCRIPTION' wygląda to na paczkę -- a one zostały zlikwidowane"
+msgstr "wygląda to na paczkę -- a one zostały zlikwidowane"
 
 #. R/admin.R: gettextf("unable to copy INDEX to '%s'", file.path(outDir, "INDEX"))
 #: R/admin.R:0
@@ -2170,7 +2170,7 @@ msgstr "nie można utworzyć"
 msgid "unable to create '%s'"
 msgstr "nie można utworzyć '%s'"
 
-#. R/Vignettes.R: gettextf("unable to create temp directory %s ", sQuote(tmpd))
+#. R/Vignettes.R: gettextf("unable to create temp directory %s", sQuote(tmpd))
 #: R/Vignettes.R:0
 msgid "unable to create temp directory %s"
 msgstr "nie można utworzyć katalogu tymczasowego %s"
@@ -2266,7 +2266,7 @@ msgstr "błędna klasa"
 #. R/sha256.R: stop("x must be a single string")
 #: R/sha256.R:0
 msgid "x must be a single string"
-msgstr "argument 'x' musi być pojedynczym ciągiem znaków"
+msgstr "argument 'x' musi być pojedynczym tekstem"
 
 #. R/Rd.R: stop("you must specify 'dir' or 'files'")
 #: R/Rd.R:0
@@ -2446,7 +2446,7 @@ msgstr[2] "Znaleziono prawdopodobnie globalną wartość 'T' lub 'F' w następuj
 #: R/QC.R:0
 msgid "Found the defunct/removed function:"
 msgid_plural "Found the defunct/removed functions:"
-msgstr[0] "Znaleziono zlikwidowaną/usunietą funkcję:"
+msgstr[0] "Znaleziono zlikwidowaną/usuniętą funkcję:"
 msgstr[1] "Znaleziono zlikwidowane/usuniete funkcje:"
 msgstr[2] "Znaleziono zlikwidowane/usuniete funkcje:"
 
@@ -2510,9 +2510,9 @@ msgstr[2] "Uwaga: znaleziono %d ciągów oznaczonych jako \"bytes\""
 #: R/Vignettes.R:0
 msgid "Package %s does not have a registered vignette engine"
 msgid_plural "None of packages %s have registered vignette engines"
-msgstr[0] "Pakiet %s nie posiada zarejestrowanego silnika winiet"
-msgstr[1] "Żadne z pakietów %s nie mają zarejestrowanych silników winiet"
-msgstr[2] "Żadne z pakietów %s nie mają zarejestrowanych silników winiet"
+msgstr[0] "Pakiet %s nie ma zarejestrowanego silnika ilustracji"
+msgstr[1] "Żadne z pakietów %s nie mają zarejestrowanych silników ilustracji"
+msgstr[2] "Żadne z pakietów %s nie mają zarejestrowanych silników ilustracji"
 
 #. R/QC.R: ngettext(length(y), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
 #: R/QC.R:0
@@ -2655,6 +2655,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "Rd files must have a non-empty %s."
+#~ msgstr "Pliki Rd muszą mieć niepustą sekcję %s."
 
 #~ msgid "inferiorCallError"
 #~ msgstr "inferiorCallError"

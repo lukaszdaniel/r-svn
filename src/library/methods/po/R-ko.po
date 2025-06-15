@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-15 11:12\n"
 "PO-Revision-Date: 2018-04-09 12:09-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1165,9 +1165,9 @@ msgstr "잘못된 'package' 슬롯 또는 속성이며, 잘못된 길이를 가�
 msgid "invalid 'source' argument: expected file names or a connection but got an object of class %s"
 msgstr "잘못된 'source' 인자입니다: 파일명 또는 커넥션이 와야하는데 클래스 %s의 객체를 가집니다"
 
-#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
+#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
-msgid "invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s"
+msgid "invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s"
 msgstr ""
 
 #. R/Methods.R: gettextf("invalid argument 'name': %s", .isSingleName(name))

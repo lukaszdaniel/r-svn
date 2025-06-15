@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-13 16:26\n"
+"POT-Creation-Date: 2025-06-15 17:27\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1478,11 +1478,6 @@ msgstr "projection을 허용하도록 모델을 재적합합니다"
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "Requested conf.level not achievable"
-msgstr "수행할 수 없는 conf.level의 값이 주어졌습니다."
-
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
@@ -2064,6 +2059,12 @@ msgstr ""
 msgid "dimension 0 in 'x' or 'y'"
 msgstr "'x' 또는 'y'의 차원이 0입니다"
 
+#. R/hclust.R: stop("dissimilarities of improper length")
+#. R/hclust.R: warning("dissimilarities of improper length")
+#: R/hclust.R:0
+msgid "dissimilarities of improper length"
+msgstr ""
+
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 #: R/cmdscale.R:0
 msgid "distances must be result of 'dist' or a square matrix"
@@ -2388,10 +2389,12 @@ msgstr ""
 msgid "interactions are not allowed"
 msgstr "interactions을 허용하지 않습니다"
 
-#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
-#: R/nls.R:0
-msgid "invalid  'attr(rhs, \"gradient\")'"
-msgstr ""
+#. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
+#: R/kmeans.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "유효하지 않은 'use' 인자입니다"
 
 #. R/arima.R: stop("invalid 'SSinit'")
 #: R/arima.R:0
@@ -2402,6 +2405,11 @@ msgstr "유효하지 않은 'SSinit'"
 #: R/symnum.R:0
 msgid "invalid 'abbr.colnames'"
 msgstr "유효하지 않은 'abbr.colnames'입니다"
+
+#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid 'attr(rhs, \"gradient\")'"
+msgstr ""
 
 #. R/loess.R: stop("invalid 'control' argument")
 #: R/loess.R:0
@@ -2575,10 +2583,10 @@ msgstr "유효하지 않은 formula입니다"
 msgid "invalid formula %s: assignment is deprecated"
 msgstr "deriv에 유효하지 않은 formula입니다"
 
-#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
+#. R/models.R: gettextf("invalid formula %s: extraneous call to '%s' is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
 #, fuzzy
-msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgid "invalid formula %s: extraneous call to '%s' is deprecated"
 msgstr "deriv에 유효하지 않은 formula입니다"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
@@ -2627,16 +2635,6 @@ msgstr "유효하지 않은 linear predictor 값들이 empty 모델에 있습니
 #: R/lm.influence.R:0
 msgid "invalid model QR matrix"
 msgstr ""
-
-#. R/kmeans.R: stop("invalid ncol(x)")
-#: R/kmeans.R:0
-msgid "invalid ncol(x)"
-msgstr "유효하지 않은 ncol(x)입니다"
-
-#. R/kmeans.R: stop("invalid nrow(x)")
-#: R/kmeans.R:0
-msgid "invalid nrow(x)"
-msgstr "유효하지 않은 nrow(x)입니다"
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
@@ -2769,9 +2767,10 @@ msgstr ""
 msgid "logical 'hessian' argument not allowed.  See documentation."
 msgstr ""
 
-#. R/nlm.R: stop("lower < upper  is not fulfilled")
+#. R/nlm.R: stop("lower < upper is not fulfilled")
 #: R/nlm.R:0
-msgid "lower < upper  is not fulfilled"
+#, fuzzy
+msgid "lower < upper is not fulfilled"
 msgstr "lower < upper 이라는 조건이 만족하지 않습니다"
 
 #. R/lm.R: message("lower-rank qr: determining non-estimable cases")
@@ -3663,7 +3662,8 @@ msgid "residual degrees of freedom in object suggest this is not an \"lm\" fit"
 msgstr "객체내의 잔차에 대한 자유도는 \"lm\"을 사용한 적합이 아니라는 것을 의미합니다"
 
 #. R/manova.R: gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid))
-#: R/manova.R:0
+#. R/mlm.R: gettextf("residuals have rank %d < %d", rss.qr$rank, pp)
+#: R/manova.R:0 R/mlm.R:0
 msgid "residuals have rank %d < %d"
 msgstr "잔차는 %2$d보다 작은 수의 rank %1$d을 가집니다"
 
@@ -3750,9 +3750,9 @@ msgstr "setVarying : 'vary'의 길이는 반드시 파라미터들의 길이와 
 msgid "setting '%s' in terms.formula() is deprecated"
 msgstr ""
 
-#. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
+#. R/smspline.R: warning(wtxt, "\nsetting df = 1 __use with care!__")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+msgid "setting df = 1 __use with care!__"
 msgstr ""
 
 #. R/lm.R: stop("simulate() is not yet implemented for multivariate lm()")
@@ -3972,10 +3972,10 @@ msgstr "시계열이 없거나 2 주기보다 적습니다"
 msgid "times to be replaced do not match"
 msgstr ""
 
-#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
+#. R/lm.influence.R: stop("too few cases (with h_ii > 0), n < k")
 #: R/lm.influence.R:0
 #, fuzzy
-msgid "too few cases i with h_ii > 0), n < k"
+msgid "too few cases (with h_ii > 0), n < k"
 msgstr "관측치의 수가 너무 적습니다, 즉, n < k 입니다"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
@@ -4425,6 +4425,15 @@ msgstr[0] "upper scope는 모델에는 포함되어 있지 않은 항 %s를 가�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "유효하지 않은 ncol(x)입니다"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "유효하지 않은 nrow(x)입니다"
+
+#~ msgid "Requested conf.level not achievable"
+#~ msgstr "수행할 수 없는 conf.level의 값이 주어졌습니다."
 
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "'contrast.obj'의 열들은 반드시 합이 0이 되도록 constrast를 정의해야 합니다"

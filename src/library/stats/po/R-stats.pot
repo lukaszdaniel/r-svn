@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-13 16:26\n"
+"POT-Creation-Date: 2025-06-15 17:27\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2057,13 +2057,6 @@ msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
 
-#: R/wilcox.test.R: 0
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-
-msgid "Requested conf.level not achievable"
-msgstr ""
-
-
 #: R/model.tables.R: 0
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 
@@ -2853,6 +2846,14 @@ msgid "dimension 0 in 'x' or 'y'"
 msgstr ""
 
 
+#: R/hclust.R: 0
+#. R/hclust.R: stop("dissimilarities of improper length")
+#. R/hclust.R: warning("dissimilarities of improper length")
+
+msgid "dissimilarities of improper length"
+msgstr ""
+
+
 #: R/cmdscale.R: 0
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 
@@ -3293,10 +3294,11 @@ msgid "interactions are not allowed"
 msgstr ""
 
 
-#: R/nls.R: 0
-#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
+#: R/kmeans.R: 0
+#. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
 
-msgid "invalid  'attr(rhs, \"gradient\")'"
+msgid "invalid '%s' value"
 msgstr ""
 
 
@@ -3311,6 +3313,13 @@ msgstr ""
 #. R/symnum.R: stop("invalid 'abbr.colnames'")
 
 msgid "invalid 'abbr.colnames'"
+msgstr ""
+
+
+#: R/nls.R: 0
+#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
+
+msgid "invalid 'attr(rhs, \"gradient\")'"
 msgstr ""
 
 
@@ -3552,9 +3561,9 @@ msgstr ""
 
 
 #: R/models.R: 0
-#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
+#. R/models.R: gettextf("invalid formula %s: extraneous call to '%s' is deprecated",     deparse2(x), as.character(c.))
 
-msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgid "invalid formula %s: extraneous call to '%s' is deprecated"
 msgstr ""
 
 
@@ -3619,20 +3628,6 @@ msgstr ""
 #. R/lm.influence.R: stop("invalid model QR matrix")
 
 msgid "invalid model QR matrix"
-msgstr ""
-
-
-#: R/kmeans.R: 0
-#. R/kmeans.R: stop("invalid ncol(x)")
-
-msgid "invalid ncol(x)"
-msgstr ""
-
-
-#: R/kmeans.R: 0
-#. R/kmeans.R: stop("invalid nrow(x)")
-
-msgid "invalid nrow(x)"
 msgstr ""
 
 
@@ -3809,9 +3804,9 @@ msgstr ""
 
 
 #: R/nlm.R: 0
-#. R/nlm.R: stop("lower < upper  is not fulfilled")
+#. R/nlm.R: stop("lower < upper is not fulfilled")
 
-msgid "lower < upper  is not fulfilled"
+msgid "lower < upper is not fulfilled"
 msgstr ""
 
 
@@ -5029,7 +5024,9 @@ msgstr ""
 
 
 #: R/manova.R: 0
+#: R/mlm.R: 0
 #. R/manova.R: gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid))
+#. R/mlm.R: gettextf("residuals have rank %d < %d", rss.qr$rank, pp)
 
 msgid "residuals have rank %d < %d"
 msgstr ""
@@ -5149,9 +5146,9 @@ msgstr ""
 
 
 #: R/smspline.R: 0
-#. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
+#. R/smspline.R: warning(wtxt, "\nsetting df = 1 __use with care!__")
 
-msgid "setting df = 1  __use with care!__"
+msgid "setting df = 1 __use with care!__"
 msgstr ""
 
 
@@ -5453,9 +5450,9 @@ msgstr ""
 
 
 #: R/lm.influence.R: 0
-#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
+#. R/lm.influence.R: stop("too few cases (with h_ii > 0), n < k")
 
-msgid "too few cases i with h_ii > 0), n < k"
+msgid "too few cases (with h_ii > 0), n < k"
 msgstr ""
 
 

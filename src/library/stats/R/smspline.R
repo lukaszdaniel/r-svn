@@ -221,7 +221,7 @@ smooth.spline <-
         } else {
             fit$ty <- rep(mean(y), nx) ## would be df = 1
             df <- 1
-            warning(wtxt,"\nsetting df = 1  __use with care!__")
+            warning(wtxt,"\nsetting df = 1 __use with care!__")
         }
     }
     cv.crit <-

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: methods 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-15 11:12\n"
 "PO-Revision-Date: 2021-11-06 17:41+0100\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -1139,9 +1139,10 @@ msgstr "neteisingas 'package' laukas ar atributas, klaidingas ilgis"
 msgid "invalid 'source' argument: expected file names or a connection but got an object of class %s"
 msgstr "neteisingas 'source' argumentas: turėtų būti failo vardai ar ryšiai, bet yra klasės %s objektas"
 
-#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
+#. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
-msgid "invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s"
+#, fuzzy
+msgid "invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s"
 msgstr "neteisinga S4 klasė atitinkanti S3 klasę: laukai S4 versijoje turi praplėsti laukus S3 versijoje: klaida %s"
 
 #. R/Methods.R: gettextf("invalid argument 'name': %s", .isSingleName(name))

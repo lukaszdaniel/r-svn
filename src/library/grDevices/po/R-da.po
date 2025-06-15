@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:39\n"
+"POT-Creation-Date: 2025-06-15 14:04\n"
 "PO-Revision-Date: 2023-04-22 22:04+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -179,9 +179,10 @@ msgstr "længden på »x« og »y« er forskellig"
 msgid "'x' is a list, but does not have components 'x' and 'y'"
 msgstr "»x« er en liste, men har ikke komponenterne »x« og »y«"
 
-#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y' and 'z'")
 #: R/xyz.coords.R:0
-msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+#, fuzzy
+msgid "'x' is a list, but does not have components 'x', 'y' and 'z'"
 msgstr "»x« er en liste, men har ikke komponenterne »x«, »y« og »z«"
 
 #. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")

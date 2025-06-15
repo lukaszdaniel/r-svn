@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-13 16:26\n"
+"POT-Creation-Date: 2025-06-15 17:27\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1470,11 +1470,6 @@ msgstr "射影を許容するためにモデルの再当てはめを行います
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "Requested conf.level not achievable"
-msgstr "要求された conf.level は達成不能です"
-
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
@@ -2048,6 +2043,12 @@ msgstr "f(lower) * f(upper) <= 0 において、区間の端点を拡張する�
 msgid "dimension 0 in 'x' or 'y'"
 msgstr "'x' または 'y' の次元が 0 です"
 
+#. R/hclust.R: stop("dissimilarities of improper length")
+#. R/hclust.R: warning("dissimilarities of improper length")
+#: R/hclust.R:0
+msgid "dissimilarities of improper length"
+msgstr ""
+
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 #: R/cmdscale.R:0
 msgid "distances must be result of 'dist' or a square matrix"
@@ -2371,10 +2372,12 @@ msgstr "内部ループ 2; ステップサイズを訂正することができ�
 msgid "interactions are not allowed"
 msgstr "交互作用は許されません"
 
-#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
-#: R/nls.R:0
-msgid "invalid  'attr(rhs, \"gradient\")'"
-msgstr ""
+#. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
+#: R/kmeans.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "無効な 'use' 引数です"
 
 #. R/arima.R: stop("invalid 'SSinit'")
 #: R/arima.R:0
@@ -2385,6 +2388,11 @@ msgstr "無効な 'SSinit'"
 #: R/symnum.R:0
 msgid "invalid 'abbr.colnames'"
 msgstr "無効な 'abbr.colnames' です"
+
+#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid 'attr(rhs, \"gradient\")'"
+msgstr ""
 
 #. R/loess.R: stop("invalid 'control' argument")
 #: R/loess.R:0
@@ -2559,10 +2567,10 @@ msgstr "無効なモデル式です"
 msgid "invalid formula %s: assignment is deprecated"
 msgstr "deriv に不正な式があります"
 
-#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
+#. R/models.R: gettextf("invalid formula %s: extraneous call to '%s' is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
 #, fuzzy
-msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgid "invalid formula %s: extraneous call to '%s' is deprecated"
 msgstr "deriv に不正な式があります"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
@@ -2610,16 +2618,6 @@ msgstr "空モデル中の無効な線形予測子です"
 #: R/lm.influence.R:0
 msgid "invalid model QR matrix"
 msgstr "モデルの計算における QR 分解の結果が不正です"
-
-#. R/kmeans.R: stop("invalid ncol(x)")
-#: R/kmeans.R:0
-msgid "invalid ncol(x)"
-msgstr "ncol(x) が不正です"
-
-#. R/kmeans.R: stop("invalid nrow(x)")
-#: R/kmeans.R:0
-msgid "invalid nrow(x)"
-msgstr "nrow(x) が不正です"
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
@@ -2752,9 +2750,10 @@ msgstr ""
 msgid "logical 'hessian' argument not allowed.  See documentation."
 msgstr "論理値の 'hessian' は許されません。ドキュメントを参照してください。"
 
-#. R/nlm.R: stop("lower < upper  is not fulfilled")
+#. R/nlm.R: stop("lower < upper is not fulfilled")
 #: R/nlm.R:0
-msgid "lower < upper  is not fulfilled"
+#, fuzzy
+msgid "lower < upper is not fulfilled"
 msgstr "lower < upper になっていません"
 
 #. R/lm.R: message("lower-rank qr: determining non-estimable cases")
@@ -3639,7 +3638,8 @@ msgid "residual degrees of freedom in object suggest this is not an \"lm\" fit"
 msgstr "オブジェクト中の残り自由度はこれは \"lm\" オブジェクトではないことを示唆します"
 
 #. R/manova.R: gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid))
-#: R/manova.R:0
+#. R/mlm.R: gettextf("residuals have rank %d < %d", rss.qr$rank, pp)
+#: R/manova.R:0 R/mlm.R:0
 msgid "residuals have rank %d < %d"
 msgstr "残差はランク %d < %d を持ちます"
 
@@ -3724,9 +3724,10 @@ msgstr "setVarying: 'vary' 長はパラメータの長さに一致しなけれ�
 msgid "setting '%s' in terms.formula() is deprecated"
 msgstr ""
 
-#. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
+#. R/smspline.R: warning(wtxt, "\nsetting df = 1 __use with care!__")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+#, fuzzy
+msgid "setting df = 1 __use with care!__"
 msgstr "df = 1 と設定しました。注意して使ってください！"
 
 #. R/lm.R: stop("simulate() is not yet implemented for multivariate lm()")
@@ -3943,10 +3944,10 @@ msgstr "時系列の期間が無いか、2未満です"
 msgid "times to be replaced do not match"
 msgstr "置き換えるべき時間が不整合です"
 
-#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
+#. R/lm.influence.R: stop("too few cases (with h_ii > 0), n < k")
 #: R/lm.influence.R:0
 #, fuzzy
-msgid "too few cases i with h_ii > 0), n < k"
+msgid "too few cases (with h_ii > 0), n < k"
 msgstr "ケースが少なすぎます、n < k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
@@ -4384,6 +4385,15 @@ msgstr[0] "上位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "結合された当てはめから %d/%d 行を使用します"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) が不正です"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x) が不正です"
+
+#~ msgid "Requested conf.level not achievable"
+#~ msgstr "要求された conf.level は達成不能です"
 
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "'contrast.obj' の列は対比 (総和が 0) を定義しなければなりません"

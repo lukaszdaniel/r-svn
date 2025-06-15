@@ -318,7 +318,7 @@ anova.mlm <-
 
             rss.qr <- qr((T %*% ssd$SSD  %*% t(T)) * scm, tol=tol)
             if(rss.qr$rank < pp)
-                stop(gettextf("residuals have rank %s < %s", rss.qr$rank, pp),
+                stop(gettextf("residuals have rank %d < %d", rss.qr$rank, pp),
                      domain = NA)
             eigs <- array(NA, c(nmodels, pp))
             stats <- matrix(NA, nmodels+1L, 5L,

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-10 16:39\n"
+"POT-Creation-Date: 2025-06-15 14:04\n"
 "PO-Revision-Date: 2020-11-29 17:27+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -174,9 +174,10 @@ msgstr "skirtingi 'x' ir 'y' ilgiai"
 msgid "'x' is a list, but does not have components 'x' and 'y'"
 msgstr "'x' yra sąrašas, bet neturi 'x' ir 'y' komponentų"
 
-#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y'  and 'z'")
+#. R/xyz.coords.R: stop("'x' is a list, but does not have components 'x', 'y' and 'z'")
 #: R/xyz.coords.R:0
-msgid "'x' is a list, but does not have components 'x', 'y'  and 'z'"
+#, fuzzy
+msgid "'x' is a list, but does not have components 'x', 'y' and 'z'"
 msgstr "'x' yra sąrašas, bet neturi 'x', 'y' ir 'z' komponentų"
 
 #. R/xyz.coords.R: stop("'x', 'y' and 'z' lengths differ")

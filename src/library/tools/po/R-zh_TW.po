@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-05 16:38\n"
+"POT-Creation-Date: 2025-06-14 19:00\n"
 "PO-Revision-Date: 2021-11-06 22:40+0100\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1177,10 +1177,11 @@ msgstr "R CMD build 失敗"
 msgid "R include directory is empty -- perhaps need to install R-devel.rpm or similar"
 msgstr "R 包含目錄是空的 -- 也許您需要安裝 R-devel.rpm 或類似的程式套件"
 
-#. R/Rd.R: gettextf("Rd files must have a non-empty %s.", "\\name")
+#. R/Rd.R: gettext("Rd files must have a non-empty \\name.")
 #: R/Rd.R:0
-msgid "Rd files must have a non-empty %s."
-msgstr "Rd 檔案裡必須要有非空白的 %s。"
+#, fuzzy
+msgid "Rd files must have a non-empty \\name."
+msgstr "Rd 檔案必須要有非空白的\\title。"
 
 #. R/Rd.R: gettext("Rd files must have a non-empty \\title.")
 #: R/Rd.R:0
@@ -2209,7 +2210,7 @@ msgstr "無法建立"
 msgid "unable to create '%s'"
 msgstr "無法建立 '%s'"
 
-#. R/Vignettes.R: gettextf("unable to create temp directory %s ", sQuote(tmpd))
+#. R/Vignettes.R: gettextf("unable to create temp directory %s", sQuote(tmpd))
 #: R/Vignettes.R:0
 msgid "unable to create temp directory %s"
 msgstr "無法建立臨時目錄 %s"
@@ -2595,6 +2596,9 @@ msgstr[0] "不能用多個資料呼叫來產生物件 %s"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "無法重新編碼 %s 行 %s"
+
+#~ msgid "Rd files must have a non-empty %s."
+#~ msgstr "Rd 檔案裡必須要有非空白的 %s。"
 
 #, fuzzy
 #~ msgid "in package installation"

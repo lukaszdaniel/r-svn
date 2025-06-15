@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:55\n"
+"POT-Creation-Date: 2025-06-15 17:34\n"
 "PO-Revision-Date: 2018-04-09 12:05-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1431,17 +1431,6 @@ msgstr "오토로더는 '%s'를 '%s'에서 찾지 못했습니다"
 msgid "bad 'S3method' directive: %s"
 msgstr ""
 
-#. R/load.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
-#: R/load.R:0 R/serialize.R:0
-msgid "bad 'file' argument"
-msgstr "잘못된 'file'인자입니다"
-
-#. R/load.R: stop("bad file argument")
-#: R/load.R:0
-msgid "bad file argument"
-msgstr "잘못도니 파일 인자입니다"
-
 #. R/namespace.R: stop("bad method")
 #: R/namespace.R:0
 msgid "bad method"
@@ -1857,27 +1846,41 @@ msgstr "'x'에 무한(infinite) 또는 결측(missing)값이 존재합니다."
 msgid "input has been corrupted, with LF replaced by CR"
 msgstr ""
 
+#. R/attach.R: gettextf("invalid '%s' argument", "name")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/files.R: gettextf("invalid '%s' argument", "path")
+#. R/files.R: gettextf("invalid '%s' argument", "time")
+#. R/load.R: gettextf("invalid '%s' argument", "file")
+#. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
+#: R/attach.R:0 R/connections.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
+#: R/serialize.R:0 R/taskCallback.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "유효한 'name' 인자가 아닙니다"
+
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(y)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(R)")
+#. R/seq.R: gettextf("invalid '%s' value", "(to - from)/by")
+#: R/qr.R:0 R/seq.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "유효하지 않은 'value'입니다"
+
 #. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
 #: R/kappa.R:0
 msgid "invalid '%s': type \"%s\""
 msgstr ""
-
-#. R/seq.R: stop("invalid '(to - from)/by'")
-#: R/seq.R:0
-#, fuzzy
-msgid "invalid '(to - from)/by'"
-msgstr "'by'에 유효하지 않은 모드입니다"
 
 #. R/dates.R: stop("invalid 'by' string")
 #. R/datetime.R: stop("invalid 'by' string")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid 'by' string"
 msgstr "'by' 문자열이 잘못되었습니다"
-
-#. R/locales.R: stop("invalid 'category' argument")
-#: R/locales.R:0
-msgid "invalid 'category' argument"
-msgstr "유효하지 않은 'category' 인자입니다"
 
 #. R/serialize.R: stop("invalid 'compress' argument: ", compress)
 #: R/serialize.R:0
@@ -1899,12 +1902,6 @@ msgstr "데이터프레임에 잘못된 'dimnames'이 주어졌습니다"
 msgid "invalid 'dims'"
 msgstr "유효하지 않은 'dims'가 아닙니다"
 
-#. R/connections.R: stop("invalid 'endian' argument")
-#: R/connections.R:0
-#, fuzzy
-msgid "invalid 'endian' argument"
-msgstr "유효한 'name' 인자가 아닙니다"
-
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
 msgid "invalid 'labels'; length %d should be 1 or %d"
@@ -1921,16 +1918,6 @@ msgstr "유효하지 않은 패키지명입니다"
 msgid "invalid 'max' / getOption(\"max.print\"):"
 msgstr ""
 
-#. R/attach.R: stop("invalid 'name' argument")
-#: R/attach.R:0
-msgid "invalid 'name' argument"
-msgstr "유효한 'name' 인자가 아닙니다"
-
-#. R/files.R: stop("invalid 'path' argument")
-#: R/files.R:0
-msgid "invalid 'path' argument"
-msgstr "유효하지 않은 'path' 인자입니다"
-
 #. R/rle.R: stop("invalid 'rle' structure")
 #: R/rle.R:0
 msgid "invalid 'rle' structure"
@@ -1941,37 +1928,16 @@ msgstr "유효하지 않은 'rle' 구조입니다"
 msgid "invalid 'row.names' length"
 msgstr "유효하지 않은 'row.names'의 길이입니다"
 
-#. R/files.R: stop("invalid 'time' argument")
-#: R/files.R:0
-msgid "invalid 'time' argument"
-msgstr "유효하지 않은 'time' 인자입니다"
-
 #. R/version.R: stop("invalid 'value'")
 #: R/version.R:0
 msgid "invalid 'value'"
 msgstr "유효하지 않은 'value'입니다"
-
-#. R/taskCallback.R: stop("invalid 'which' argument")
-#: R/taskCallback.R:0
-#, fuzzy
-msgid "invalid 'which' argument"
-msgstr "유효하지 않은 'path' 인자입니다"
 
 #. R/rowsum.R: stop("invalid 'x'")
 #: R/rowsum.R:0
 #, fuzzy
 msgid "invalid 'x'"
 msgstr "유효하지 않은 'dims'가 아닙니다"
-
-#. R/qr.R: stop("invalid NCOL(R)")
-#: R/qr.R:0
-msgid "invalid NCOL(R)"
-msgstr "유효하지 않은 NCOL(R)입니다"
-
-#. R/qr.R: stop("invalid NCOL(y)")
-#: R/qr.R:0
-msgid "invalid NCOL(y)"
-msgstr "유효하지 않은 NCOL(y)입니다"
 
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
@@ -2005,11 +1971,6 @@ msgstr "유효하지 않은 ncol(qr$qr)입니다"
 msgid "invalid ncol(qr$rank)"
 msgstr "유효하지 않은 ncol(qr$rank)입니다"
 
-#. R/qr.R: stop("invalid ncol(x)")
-#: R/qr.R:0
-msgid "invalid ncol(x)"
-msgstr "유효하지 않은 ncol(x)입니다"
-
 #. R/qr.R: stop("invalid ncol(y)")
 #: R/qr.R:0
 msgid "invalid ncol(y)"
@@ -2027,8 +1988,7 @@ msgid "invalid nrow(qr$qr)"
 msgstr "유효하지 않은 nrow(qr$qr)입니다"
 
 #. R/eigen.R: stop("invalid nrow(x)")
-#. R/qr.R: stop("invalid nrow(x)")
-#: R/eigen.R:0 R/qr.R:0
+#: R/eigen.R:0
 msgid "invalid nrow(x)"
 msgstr "유효하지 않은 nrow(x)입니다"
 
@@ -2450,9 +2410,10 @@ msgstr "네임스페이스가 로딩되지 않았습니다"
 msgid "not supported for LAPACK QR"
 msgstr ""
 
-#. R/load.R: warning("nothing specified to be save()d")
+#. R/load.R: warning("nothing specified to be saved")
 #: R/load.R:0
-msgid "nothing specified to be save()d"
+#, fuzzy
+msgid "nothing specified to be saved"
 msgstr "save()에 이용될 아무런 것도 지정되지 않았습니다"
 
 #. R/table.R: stop("nothing to tabulate")
@@ -2657,9 +2618,9 @@ msgstr ""
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr ""
 
-#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
+#. R/conditions.R: sprintf("pushing duplicate '%s' handler on top of the stack",     class)
 #: R/conditions.R:0
-msgid "pushing duplicate `%s` handler on top of the stack"
+msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
@@ -2667,9 +2628,10 @@ msgstr ""
 msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
 msgstr "정규표현패턴 '[<-' 은 '\\\\[<-' 으로 대체되었습니다"
 
-#. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
+#. R/attach.R: warning("replaced regular expression pattern '[' by '\\\\['")
 #: R/attach.R:0
-msgid "replaced regular expression pattern '[' by  '\\\\['"
+#, fuzzy
+msgid "replaced regular expression pattern '[' by '\\\\['"
 msgstr "정규표현패턴 '[' 은  '\\\\[' 으로 대체되었습니다"
 
 #. R/diag.R: stop("replacement diagonal has wrong length")
@@ -2861,11 +2823,13 @@ msgstr "패키지 %s내에서 R 코드를 로드할 수 없습니다"
 msgid "unable to re-encode some lines in NAMESPACE file"
 msgstr ""
 
-#. R/dates.R: gettextf("unary %s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("unary '%s' not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
-msgid "unary %s not defined for \"Date\" objects"
+#, fuzzy
+msgid "unary '%s' not defined for \"Date\" objects"
 msgstr "\"Date\" 객체에 정의되어 있지 않은 단항연산자 %s입니다"
 
+#. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", "-")
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
 msgid "unary '%s' not defined for \"POSIXt\" objects"
@@ -2880,11 +2844,6 @@ msgstr "단항연산자 '%s'는 \"difftime\" 객체에 사용할 수 없습니�
 #: R/version.R:0
 msgid "unary '%s' not defined for \"numeric_version\" objects"
 msgstr "\"numeric_version\" 객체들에 정의되지 않은 단일연산자  '%s'입니다"
-
-#. R/datetime.R: stop("unary '-' is not defined for \"POSIXt\" objects")
-#: R/datetime.R:0
-msgid "unary '-' is not defined for \"POSIXt\" objects"
-msgstr "단항연산자 '-'는 \"POSIXt\" 객체들에 대해서 정의되어 있지 않습니다"
 
 #. R/dates.R: stop("unary - is not defined for \"Date\" objects")
 #: R/dates.R:0
@@ -3213,6 +3172,45 @@ msgstr[0] ""
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "호출된 패키지(들)가 없습니다."
+
+#, fuzzy
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "'by'에 유효하지 않은 모드입니다"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "유효하지 않은 NCOL(R)입니다"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "유효하지 않은 NCOL(y)입니다"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "유효하지 않은 ncol(x)입니다"
+
+#~ msgid "bad 'file' argument"
+#~ msgstr "잘못된 'file'인자입니다"
+
+#~ msgid "bad file argument"
+#~ msgstr "잘못도니 파일 인자입니다"
+
+#~ msgid "invalid 'category' argument"
+#~ msgstr "유효하지 않은 'category' 인자입니다"
+
+#, fuzzy
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "유효한 'name' 인자가 아닙니다"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "유효하지 않은 'path' 인자입니다"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "유효하지 않은 'time' 인자입니다"
+
+#, fuzzy
+#~ msgid "invalid 'which' argument"
+#~ msgstr "유효하지 않은 'path' 인자입니다"
+
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "단항연산자 '-'는 \"POSIXt\" 객체들에 대해서 정의되어 있지 않습니다"
 
 #~ msgid "invalid string for 'by'"
 #~ msgstr "'by'에 유효하지 않은 문자열입니다"

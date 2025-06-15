@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-14 19:05+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -326,7 +326,7 @@ msgstr "Yetersiz bellek (rpipeOpen)"
 
 #: src/gnuwin32/run.cpp:964
 #, fuzzy, c-format
-msgid "cannot open cmd `%s'"
+msgid "cannot open cmd '%s'"
 msgstr "URL '%s' açılamıyor"
 
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
@@ -9053,8 +9053,13 @@ msgstr ".C(..): Genişlik sıfır olamaz"
 
 #: src/main/util.cpp:3081
 #, fuzzy
-msgid "'type' must be \"integer\" for  \"d\"-format"
+msgid "'type' must be \"integer\" for \"d\"-format"
 msgstr ".C(..): 'type' \"d\" biçimi için bir \"tamsayı\" olmalıdır"
+
+#: src/main/util.cpp:3166
+#, fuzzy
+msgid "'type' must be \"real\" for this format"
+msgstr ".C(..): 'type' bu biçim için bir \"real\" olmaldır"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -11049,9 +11054,6 @@ msgstr "X11 mevcut değil"
 #, fuzzy
 #~ msgid "\"%s\" is not an existing slot in an object of class \"%s\""
 #~ msgstr "\"%s\" adında bir slot yok (\"%s\" sınıfında bir nesne için)"
-
-#~ msgid ".C(..): 'type' must be \"real\" for this format"
-#~ msgstr ".C(..): 'type' bu biçim için bir \"real\" olmaldır"
 
 #~ msgid "'names' is not a character string"
 #~ msgstr "'name' bir karakter dizesi değil"

@@ -62,7 +62,7 @@ uniroot <- function(f, interval, ...,
     if(!missing(interval) && length(interval) != 2L)
         stop("'interval' must be a vector of length 2")
     if(!is.numeric(lower) || !is.numeric(upper) || lower >= upper)
-        stop("lower < upper  is not fulfilled")
+        stop("lower < upper is not fulfilled")
     if(is.na(f.lower)) stop("f.lower = f(lower) is NA")
     if(is.na(f.upper)) stop("f.upper = f(upper) is NA")
     Sig <- switch(match.arg(extendInt),

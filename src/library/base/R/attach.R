@@ -116,7 +116,7 @@ detach <- function(name, pos = 2L, unload = FALSE, character.only = FALSE,
                 if (!is.character(name)) name <- deparse1(name)
                 match(name, search())
             }
-	if(is.na(pos)) stop("invalid 'name' argument")
+	if(is.na(pos)) stop(gettextf("invalid '%s' argument", "name"))
     }
 
     packageName <- search()[[pos]]
@@ -219,7 +219,7 @@ ls <- objects <-
              ll != length(grep("]", pattern, fixed = TRUE))) {
             if (pattern == "[") {
                 pattern <- "\\["
-                warning("replaced regular expression pattern '[' by  '\\\\['")
+                warning("replaced regular expression pattern '[' by '\\\\['")
             }
             else if (length(grep("[^\\\\]\\[<-", pattern))) {
                 pattern <- sub("\\[<-", "\\\\\\[<-", pattern)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-13 16:26\n"
+"POT-Creation-Date: 2025-06-15 17:27\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1468,11 +1468,6 @@ msgstr "重新擬合模型以提供射影"
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "Requested conf.level not achievable"
-msgstr "無法達到所要求的 conf.level"
-
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
@@ -2045,6 +2040,12 @@ msgstr "未能成功地擴展區間的 f(lower) * f(upper) <= 0 極點"
 msgid "dimension 0 in 'x' or 'y'"
 msgstr "'x' 或 'y' 的維度為零"
 
+#. R/hclust.R: stop("dissimilarities of improper length")
+#. R/hclust.R: warning("dissimilarities of improper length")
+#: R/hclust.R:0
+msgid "dissimilarities of improper length"
+msgstr ""
+
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 #: R/cmdscale.R:0
 msgid "distances must be result of 'dist' or a square matrix"
@@ -2368,10 +2369,12 @@ msgstr "內循環二 ; 無法校正步驟大小"
 msgid "interactions are not allowed"
 msgstr "不允許有交互作用項"
 
-#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
-#: R/nls.R:0
-msgid "invalid  'attr(rhs, \"gradient\")'"
-msgstr ""
+#. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
+#: R/kmeans.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "'use' 引數無效"
 
 #. R/arima.R: stop("invalid 'SSinit'")
 #: R/arima.R:0
@@ -2382,6 +2385,11 @@ msgstr "無效的 'SSinit'"
 #: R/symnum.R:0
 msgid "invalid 'abbr.colnames'"
 msgstr "'abbr.colnames' 無效"
+
+#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid 'attr(rhs, \"gradient\")'"
+msgstr ""
 
 #. R/loess.R: stop("invalid 'control' argument")
 #: R/loess.R:0
@@ -2554,10 +2562,10 @@ msgstr "公式無效"
 msgid "invalid formula %s: assignment is deprecated"
 msgstr "deriv 裡的公式無效"
 
-#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
+#. R/models.R: gettextf("invalid formula %s: extraneous call to '%s' is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
 #, fuzzy
-msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+msgid "invalid formula %s: extraneous call to '%s' is deprecated"
 msgstr "deriv 裡的公式無效"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
@@ -2605,16 +2613,6 @@ msgstr "空模型裡的線性預測子值無效"
 #: R/lm.influence.R:0
 msgid "invalid model QR matrix"
 msgstr "模型 QR 矩陣無效"
-
-#. R/kmeans.R: stop("invalid ncol(x)")
-#: R/kmeans.R:0
-msgid "invalid ncol(x)"
-msgstr "ncol(x) 無效"
-
-#. R/kmeans.R: stop("invalid nrow(x)")
-#: R/kmeans.R:0
-msgid "invalid nrow(x)"
-msgstr "nrow(x) 無效"
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
@@ -2747,9 +2745,10 @@ msgstr ""
 msgid "logical 'hessian' argument not allowed.  See documentation."
 msgstr "邏輯值的 `hessian' 引數是不可以的。請參考說明書。"
 
-#. R/nlm.R: stop("lower < upper  is not fulfilled")
+#. R/nlm.R: stop("lower < upper is not fulfilled")
 #: R/nlm.R:0
-msgid "lower < upper  is not fulfilled"
+#, fuzzy
+msgid "lower < upper is not fulfilled"
 msgstr "沒有滿足 lower 小於 upper 這個條件"
 
 #. R/lm.R: message("lower-rank qr: determining non-estimable cases")
@@ -3632,7 +3631,8 @@ msgid "residual degrees of freedom in object suggest this is not an \"lm\" fit"
 msgstr "物件的殘差自由度表明這不是\"lm\" 擬合"
 
 #. R/manova.R: gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid))
-#: R/manova.R:0
+#. R/mlm.R: gettextf("residuals have rank %d < %d", rss.qr$rank, pp)
+#: R/manova.R:0 R/mlm.R:0
 msgid "residuals have rank %d < %d"
 msgstr "殘差的秩 %d < %d"
 
@@ -3717,9 +3717,10 @@ msgstr "setVarying : 'vary' 的長度必須同參數的長度相符"
 msgid "setting '%s' in terms.formula() is deprecated"
 msgstr ""
 
-#. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
+#. R/smspline.R: warning(wtxt, "\nsetting df = 1 __use with care!__")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+#, fuzzy
+msgid "setting df = 1 __use with care!__"
 msgstr "設定 df = 1， _ 小心使用！_"
 
 #. R/lm.R: stop("simulate() is not yet implemented for multivariate lm()")
@@ -3935,10 +3936,10 @@ msgstr "時間序列的周期不能小於二"
 msgid "times to be replaced do not match"
 msgstr "需要替換的時間不相符"
 
-#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
+#. R/lm.influence.R: stop("too few cases (with h_ii > 0), n < k")
 #: R/lm.influence.R:0
 #, fuzzy
-msgid "too few cases i with h_ii > 0), n < k"
+msgid "too few cases (with h_ii > 0), n < k"
 msgstr "案例不夠，n 小於 k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
@@ -4375,6 +4376,15 @@ msgstr[0] "模型裡上範疇沒有這些詞條 %s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "從組合擬合中用 %d/%d 列"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) 無效"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x) 無效"
+
+#~ msgid "Requested conf.level not achievable"
+#~ msgstr "無法達到所要求的 conf.level"
 
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "'contrast.obj' 行必須設定對比(總和為零)"

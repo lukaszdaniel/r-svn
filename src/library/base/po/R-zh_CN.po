@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:55\n"
+"POT-Creation-Date: 2025-06-15 17:34\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1434,17 +1434,6 @@ msgstr "自动载入器在'%2$s'找不到'%1$s'"
 msgid "bad 'S3method' directive: %s"
 msgstr "不是'S3method'指令：%s"
 
-#. R/load.R: stop("bad 'file' argument")
-#. R/serialize.R: stop("bad 'file' argument")
-#: R/load.R:0 R/serialize.R:0
-msgid "bad 'file' argument"
-msgstr "'file'参数不正确"
-
-#. R/load.R: stop("bad file argument")
-#: R/load.R:0
-msgid "bad file argument"
-msgstr "文件参数值不正确"
-
 #. R/namespace.R: stop("bad method")
 #: R/namespace.R:0
 msgid "bad method"
@@ -1851,28 +1840,42 @@ msgstr "'x'里有无穷值或缺失值"
 msgid "input has been corrupted, with LF replaced by CR"
 msgstr "输入有破损，LF被CR取代"
 
+#. R/attach.R: gettextf("invalid '%s' argument", "name")
+#. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/files.R: gettextf("invalid '%s' argument", "path")
+#. R/files.R: gettextf("invalid '%s' argument", "time")
+#. R/load.R: gettextf("invalid '%s' argument", "file")
+#. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/serialize.R: gettextf("invalid '%s' argument", "file")
+#. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
+#: R/attach.R:0 R/connections.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
+#: R/serialize.R:0 R/taskCallback.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "'name'参数无效"
+
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/qr.R: gettextf("invalid '%s' value", "nrow(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(y)")
+#. R/qr.R: gettextf("invalid '%s' value", "NCOL(R)")
+#. R/seq.R: gettextf("invalid '%s' value", "(to - from)/by")
+#: R/qr.R:0 R/seq.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "'value'无效"
+
 #. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
 #: R/kappa.R:0
 #, fuzzy
 msgid "invalid '%s': type \"%s\""
 msgstr "'n'的值有错"
 
-#. R/seq.R: stop("invalid '(to - from)/by'")
-#: R/seq.R:0
-#, fuzzy
-msgid "invalid '(to - from)/by'"
-msgstr "'seq'内的'(to - from)/by'值设得无效"
-
 #. R/dates.R: stop("invalid 'by' string")
 #. R/datetime.R: stop("invalid 'by' string")
 #: R/dates.R:0 R/datetime.R:0
 msgid "invalid 'by' string"
 msgstr "'by'字符串有错误"
-
-#. R/locales.R: stop("invalid 'category' argument")
-#: R/locales.R:0
-msgid "invalid 'category' argument"
-msgstr "'category'参数有错误"
 
 #. R/serialize.R: stop("invalid 'compress' argument: ", compress)
 #: R/serialize.R:0
@@ -1895,11 +1898,6 @@ msgstr "数据框的'dimnames'给得无效"
 msgid "invalid 'dims'"
 msgstr "'dims'无效"
 
-#. R/connections.R: stop("invalid 'endian' argument")
-#: R/connections.R:0
-msgid "invalid 'endian' argument"
-msgstr "无效的“endian”参数"
-
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
 msgid "invalid 'labels'; length %d should be 1 or %d"
@@ -1915,16 +1913,6 @@ msgstr "无效的“make.names”"
 msgid "invalid 'max' / getOption(\"max.print\"):"
 msgstr "无效的 'max' / getOption(\"max.print\"):"
 
-#. R/attach.R: stop("invalid 'name' argument")
-#: R/attach.R:0
-msgid "invalid 'name' argument"
-msgstr "'name'参数无效"
-
-#. R/files.R: stop("invalid 'path' argument")
-#: R/files.R:0
-msgid "invalid 'path' argument"
-msgstr "'path'参数无效"
-
 #. R/rle.R: stop("invalid 'rle' structure")
 #: R/rle.R:0
 msgid "invalid 'rle' structure"
@@ -1935,37 +1923,16 @@ msgstr "'rle'结构有错误"
 msgid "invalid 'row.names' length"
 msgstr "'row.names'的长度无效"
 
-#. R/files.R: stop("invalid 'time' argument")
-#: R/files.R:0
-msgid "invalid 'time' argument"
-msgstr "'time'参数无效"
-
 #. R/version.R: stop("invalid 'value'")
 #: R/version.R:0
 msgid "invalid 'value'"
 msgstr "'value'无效"
-
-#. R/taskCallback.R: stop("invalid 'which' argument")
-#: R/taskCallback.R:0
-#, fuzzy
-msgid "invalid 'which' argument"
-msgstr "'path'参数无效"
 
 #. R/rowsum.R: stop("invalid 'x'")
 #: R/rowsum.R:0
 #, fuzzy
 msgid "invalid 'x'"
 msgstr "'dims'无效"
-
-#. R/qr.R: stop("invalid NCOL(R)")
-#: R/qr.R:0
-msgid "invalid NCOL(R)"
-msgstr "NCOL(R)无效"
-
-#. R/qr.R: stop("invalid NCOL(y)")
-#: R/qr.R:0
-msgid "invalid NCOL(y)"
-msgstr "NCOL(y)无效"
 
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
@@ -1998,11 +1965,6 @@ msgstr "ncol(qr$qr)无效"
 msgid "invalid ncol(qr$rank)"
 msgstr "ncol(qr$rank)无效"
 
-#. R/qr.R: stop("invalid ncol(x)")
-#: R/qr.R:0
-msgid "invalid ncol(x)"
-msgstr "ncol(x)无效"
-
 #. R/qr.R: stop("invalid ncol(y)")
 #: R/qr.R:0
 msgid "invalid ncol(y)"
@@ -2020,8 +1982,7 @@ msgid "invalid nrow(qr$qr)"
 msgstr "nrow(qr$qr)无效"
 
 #. R/eigen.R: stop("invalid nrow(x)")
-#. R/qr.R: stop("invalid nrow(x)")
-#: R/eigen.R:0 R/qr.R:0
+#: R/eigen.R:0
 msgid "invalid nrow(x)"
 msgstr "nrow(x)无效"
 
@@ -2436,9 +2397,10 @@ msgstr "不载入命名空间"
 msgid "not supported for LAPACK QR"
 msgstr "不支持LAPACK QR"
 
-#. R/load.R: warning("nothing specified to be save()d")
+#. R/load.R: warning("nothing specified to be saved")
 #: R/load.R:0
-msgid "nothing specified to be save()d"
+#, fuzzy
+msgid "nothing specified to be saved"
 msgstr "没有指定要save()的东西"
 
 #. R/table.R: stop("nothing to tabulate")
@@ -2642,9 +2604,10 @@ msgstr "%s程序包或命名空间载入失败，"
 msgid "probably wrong encoding in 'names(.)' of column %s"
 msgstr "列名称的编码可能有误"
 
-#. R/conditions.R: sprintf("pushing duplicate `%s` handler on top of the stack",     class)
+#. R/conditions.R: sprintf("pushing duplicate '%s' handler on top of the stack",     class)
 #: R/conditions.R:0
-msgid "pushing duplicate `%s` handler on top of the stack"
+#, fuzzy
+msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr "将重复的 `%s` 处理程序推送到堆栈顶部"
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
@@ -2652,9 +2615,10 @@ msgstr "将重复的 `%s` 处理程序推送到堆栈顶部"
 msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
 msgstr "正规表现'[<-'被换成'\\\\[<-'"
 
-#. R/attach.R: warning("replaced regular expression pattern '[' by  '\\\\['")
+#. R/attach.R: warning("replaced regular expression pattern '[' by '\\\\['")
 #: R/attach.R:0
-msgid "replaced regular expression pattern '[' by  '\\\\['"
+#, fuzzy
+msgid "replaced regular expression pattern '[' by '\\\\['"
 msgstr "正规表现'['被换成'\\\\['"
 
 #. R/diag.R: stop("replacement diagonal has wrong length")
@@ -2851,11 +2815,13 @@ msgstr "程序包%s里的R写碼载入失败"
 msgid "unable to re-encode some lines in NAMESPACE file"
 msgstr "'NAMESPACE'文件里'%s'指示中有空的名称"
 
-#. R/dates.R: gettextf("unary %s not defined for \"Date\" objects", .Generic)
+#. R/dates.R: gettextf("unary '%s' not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
-msgid "unary %s not defined for \"Date\" objects"
+#, fuzzy
+msgid "unary '%s' not defined for \"Date\" objects"
 msgstr "一进列%s对\"Date\"对象不适用"
 
+#. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", "-")
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
 msgid "unary '%s' not defined for \"POSIXt\" objects"
@@ -2870,11 +2836,6 @@ msgstr "一进列'%s'对\"difftime\"对象不适用"
 #: R/version.R:0
 msgid "unary '%s' not defined for \"numeric_version\" objects"
 msgstr "一元算符'%s'对numeric_version对象没有定义"
-
-#. R/datetime.R: stop("unary '-' is not defined for \"POSIXt\" objects")
-#: R/datetime.R:0
-msgid "unary '-' is not defined for \"POSIXt\" objects"
-msgstr "一进列的'-'法对\"POSIXt\"对象不适用"
 
 #. R/dates.R: stop("unary - is not defined for \"Date\" objects")
 #: R/dates.R:0
@@ -3194,6 +3155,44 @@ msgstr[0] "%d行名与%d行不匹配"
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "不存在叫这个名称的程序包"
+
+#, fuzzy
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "'seq'内的'(to - from)/by'值设得无效"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "NCOL(R)无效"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "NCOL(y)无效"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x)无效"
+
+#~ msgid "bad 'file' argument"
+#~ msgstr "'file'参数不正确"
+
+#~ msgid "bad file argument"
+#~ msgstr "文件参数值不正确"
+
+#~ msgid "invalid 'category' argument"
+#~ msgstr "'category'参数有错误"
+
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "无效的“endian”参数"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "'path'参数无效"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "'time'参数无效"
+
+#, fuzzy
+#~ msgid "invalid 'which' argument"
+#~ msgstr "'path'参数无效"
+
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "一进列的'-'法对\"POSIXt\"对象不适用"
 
 #~ msgid "invalid string for 'by'"
 #~ msgstr "'by'的字符串有错误"

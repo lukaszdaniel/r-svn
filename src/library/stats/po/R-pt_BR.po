@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-13 16:26\n"
+"POT-Creation-Date: 2025-06-15 17:27\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1459,11 +1459,6 @@ msgstr "Reajustando o modelo para permitir projeção"
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "Requested conf.level not achievable"
-msgstr "conf.level solicitado não alcançável"
-
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
@@ -2034,6 +2029,12 @@ msgstr "não foi possível estender os limites do intervalo para f(inferior) * f
 msgid "dimension 0 in 'x' or 'y'"
 msgstr "dimensão 0 em 'x' ou 'y'"
 
+#. R/hclust.R: stop("dissimilarities of improper length")
+#. R/hclust.R: warning("dissimilarities of improper length")
+#: R/hclust.R:0
+msgid "dissimilarities of improper length"
+msgstr ""
+
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 #: R/cmdscale.R:0
 msgid "distances must be result of 'dist' or a square matrix"
@@ -2355,10 +2356,12 @@ msgstr "loop interno 2; não é possível corrigir o tamanho do passo"
 msgid "interactions are not allowed"
 msgstr "interações não são permitidas"
 
-#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
-#: R/nls.R:0
-msgid "invalid  'attr(rhs, \"gradient\")'"
-msgstr "'attr(rhs, \"gradient\")' inválido"
+#. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
+#: R/kmeans.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "argumento 'use' inválido"
 
 #. R/arima.R: stop("invalid 'SSinit'")
 #: R/arima.R:0
@@ -2369,6 +2372,12 @@ msgstr "'SSinit' inválido"
 #: R/symnum.R:0
 msgid "invalid 'abbr.colnames'"
 msgstr "'abbr.colnames' inválido"
+
+#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+#, fuzzy
+msgid "invalid 'attr(rhs, \"gradient\")'"
+msgstr "'attr(rhs, \"gradient\")' inválido"
 
 #. R/loess.R: stop("invalid 'control' argument")
 #: R/loess.R:0
@@ -2539,9 +2548,10 @@ msgstr "fórmula inválida %s"
 msgid "invalid formula %s: assignment is deprecated"
 msgstr "fórmula inválida %s: a atribuição foi descontinuada"
 
-#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
+#. R/models.R: gettextf("invalid formula %s: extraneous call to '%s' is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
-msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+#, fuzzy
+msgid "invalid formula %s: extraneous call to '%s' is deprecated"
 msgstr "fórmula inválida %s: chamada divergente para '%s' foi descontinuada"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
@@ -2587,16 +2597,6 @@ msgstr "valores de previsão linear inválidos no modelo vazio"
 #: R/lm.influence.R:0
 msgid "invalid model QR matrix"
 msgstr "matriz QR do modelo inválido"
-
-#. R/kmeans.R: stop("invalid ncol(x)")
-#: R/kmeans.R:0
-msgid "invalid ncol(x)"
-msgstr "ncol(x) inválido"
-
-#. R/kmeans.R: stop("invalid nrow(x)")
-#: R/kmeans.R:0
-msgid "invalid nrow(x)"
-msgstr "nrow(x) inválido"
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
@@ -2728,9 +2728,10 @@ msgstr ""
 msgid "logical 'hessian' argument not allowed.  See documentation."
 msgstr "argumento lógico \"hessian\" não permitido. Consulte a documentação."
 
-#. R/nlm.R: stop("lower < upper  is not fulfilled")
+#. R/nlm.R: stop("lower < upper is not fulfilled")
 #: R/nlm.R:0
-msgid "lower < upper  is not fulfilled"
+#, fuzzy
+msgid "lower < upper is not fulfilled"
 msgstr "lower < upper  não está cumprido"
 
 #. R/lm.R: message("lower-rank qr: determining non-estimable cases")
@@ -3606,7 +3607,8 @@ msgid "residual degrees of freedom in object suggest this is not an \"lm\" fit"
 msgstr "graus de liberdade dos resíduos em objeto sugerem que este não é um ajuste \"lm\""
 
 #. R/manova.R: gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid))
-#: R/manova.R:0
+#. R/mlm.R: gettextf("residuals have rank %d < %d", rss.qr$rank, pp)
+#: R/manova.R:0 R/mlm.R:0
 msgid "residuals have rank %d < %d"
 msgstr "resíduos têm postos %d < %d"
 
@@ -3690,9 +3692,10 @@ msgstr "setVarying : comprimento de 'vary'  deve corresponder ao comprimento de 
 msgid "setting '%s' in terms.formula() is deprecated"
 msgstr ""
 
-#. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
+#. R/smspline.R: warning(wtxt, "\nsetting df = 1 __use with care!__")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+#, fuzzy
+msgid "setting df = 1 __use with care!__"
 msgstr "definindo df = 1 __use com cuidado!__"
 
 #. R/lm.R: stop("simulate() is not yet implemented for multivariate lm()")
@@ -3907,9 +3910,10 @@ msgstr "série temporal não tem período, ou tem menos de 2"
 msgid "times to be replaced do not match"
 msgstr "tempos a serem substituídos não coincidem"
 
-#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
+#. R/lm.influence.R: stop("too few cases (with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases i with h_ii > 0), n < k"
+#, fuzzy
+msgid "too few cases (with h_ii > 0), n < k"
 msgstr "poucos casos i com h_ii > 0), n < k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
@@ -4376,6 +4380,15 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "usando a linha %d/%d de um ajuste combinado"
 msgstr[1] "usando as linhas %d/%d de um ajuste combinado"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) inválido"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x) inválido"
+
+#~ msgid "Requested conf.level not achievable"
+#~ msgstr "conf.level solicitado não alcançável"
 
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "colunas de 'contrast.obj' devem definir um contraste (somatório zero)"

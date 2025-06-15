@@ -180,7 +180,7 @@ summary.Date <- function(object, digits = 12L, ...)
 Ops.Date <- function(e1, e2)
 {
     if (nargs() == 1L)
-        stop(gettextf("unary %s not defined for \"Date\" objects", .Generic),
+        stop(gettextf("unary '%s' not defined for \"Date\" objects", .Generic),
              domain = NA)
     boolean <- switch(.Generic, "<" =, ">" =, "==" =,
                       "!=" =, "<=" =, ">=" = TRUE,

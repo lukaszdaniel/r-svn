@@ -421,7 +421,7 @@ globalCallingHandlers <-
                     classHandlers <- lapply(gh[idx], funAsList)
                     dups <- duplicated(classHandlers)
                     if (any(dups)) {
-                        message(sprintf("pushing duplicate `%s` handler on top of the stack", class))
+                        message(sprintf("pushing duplicate '%s' handler on top of the stack", class))
                         gh <- gh[-idx[dups]]
                     }
                 }

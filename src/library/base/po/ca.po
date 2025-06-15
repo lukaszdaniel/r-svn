@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-14 19:05+0200\n"
 "PO-Revision-Date: 2024-08-31 22:44+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -317,7 +317,7 @@ msgstr "Memòria insuficient (rpipeOpen)"
 
 #: src/gnuwin32/run.cpp:964
 #, fuzzy, c-format
-msgid "cannot open cmd `%s'"
+msgid "cannot open cmd '%s'"
 msgstr "no s'ha pogut obrir l'URL «%s»"
 
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
@@ -9762,8 +9762,14 @@ msgid "width cannot be zero"
 msgstr "no es pot obrir el fitxer zip «%s»"
 
 #: src/main/util.cpp:3081
-msgid "'type' must be \"integer\" for  \"d\"-format"
-msgstr ""
+#, fuzzy
+msgid "'type' must be \"integer\" for \"d\"-format"
+msgstr "'pos' ha de ser un enter"
+
+#: src/main/util.cpp:3166
+#, fuzzy
+msgid "'type' must be \"real\" for this format"
+msgstr "'pos' ha de ser un enter"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format

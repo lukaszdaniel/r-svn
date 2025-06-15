@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-05 16:38\n"
+"POT-Creation-Date: 2025-06-14 19:00\n"
 "PO-Revision-Date: 2021-02-10 17:55+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1170,10 +1170,11 @@ msgstr "R CMD build a échoué"
 msgid "R include directory is empty -- perhaps need to install R-devel.rpm or similar"
 msgstr "Le répertoire include de R est vide -- il faut peut-être installer R-devel.rpm ou similaire"
 
-#. R/Rd.R: gettextf("Rd files must have a non-empty %s.", "\\name")
+#. R/Rd.R: gettext("Rd files must have a non-empty \\name.")
 #: R/Rd.R:0
-msgid "Rd files must have a non-empty %s."
-msgstr "Les fichiers Rd doivent avoir un %s non vide."
+#, fuzzy
+msgid "Rd files must have a non-empty \\name."
+msgstr "Les fichiers Rd doivent avoir un \\title non vide."
 
 #. R/Rd.R: gettext("Rd files must have a non-empty \\title.")
 #: R/Rd.R:0
@@ -2205,7 +2206,7 @@ msgstr "impossible de créer"
 msgid "unable to create '%s'"
 msgstr "impossible de créer '%s'"
 
-#. R/Vignettes.R: gettextf("unable to create temp directory %s ", sQuote(tmpd))
+#. R/Vignettes.R: gettextf("unable to create temp directory %s", sQuote(tmpd))
 #: R/Vignettes.R:0
 msgid "unable to create temp directory %s"
 msgstr "impossible de créer le répertoire temporaire %s"
@@ -2635,6 +2636,9 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossible de réencoder %s ligne %s"
 msgstr[1] "impossible de réencoder %s lignes %s"
+
+#~ msgid "Rd files must have a non-empty %s."
+#~ msgstr "Les fichiers Rd doivent avoir un %s non vide."
 
 #, fuzzy
 #~ msgid "inferiorCallError"

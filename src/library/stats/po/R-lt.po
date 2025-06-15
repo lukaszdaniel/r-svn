@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-13 16:26\n"
+"POT-Creation-Date: 2025-06-15 17:27\n"
 "PO-Revision-Date: 2021-10-15 18:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -1458,11 +1458,6 @@ msgstr "Atstatymo modelis, kad leisti projekciją"
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
 
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "Requested conf.level not achievable"
-msgstr "Reikalaujamas conf.level nepasiekiamas"
-
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
 msgid "SEs for type '%s' are not yet implemented"
@@ -2035,6 +2030,12 @@ msgstr "nepavyko išplėsti intervalo galutinio taško, kuris skirtas f(lower) *
 msgid "dimension 0 in 'x' or 'y'"
 msgstr "'x' arba 'y' matavimo skaičius yra 0"
 
+#. R/hclust.R: stop("dissimilarities of improper length")
+#. R/hclust.R: warning("dissimilarities of improper length")
+#: R/hclust.R:0
+msgid "dissimilarities of improper length"
+msgstr ""
+
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 #: R/cmdscale.R:0
 msgid "distances must be result of 'dist' or a square matrix"
@@ -2357,10 +2358,12 @@ msgstr "vidinis ciklas 2; negalima koreguoti žingsnio dydžio"
 msgid "interactions are not allowed"
 msgstr "sąveikos negalimos"
 
-#. R/nls.R: stop("invalid  'attr(rhs, \"gradient\")'")
-#: R/nls.R:0
-msgid "invalid  'attr(rhs, \"gradient\")'"
-msgstr ""
+#. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
+#: R/kmeans.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "neteisingas 'use' argumentas"
 
 #. R/arima.R: stop("invalid 'SSinit'")
 #: R/arima.R:0
@@ -2371,6 +2374,11 @@ msgstr "neteisingas 'SSinit'"
 #: R/symnum.R:0
 msgid "invalid 'abbr.colnames'"
 msgstr "neteisingas 'abbr.colnames'"
+
+#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
+#: R/nls.R:0
+msgid "invalid 'attr(rhs, \"gradient\")'"
+msgstr ""
 
 #. R/loess.R: stop("invalid 'control' argument")
 #: R/loess.R:0
@@ -2541,9 +2549,10 @@ msgstr "neleistina formulė %s"
 msgid "invalid formula %s: assignment is deprecated"
 msgstr "neleistina formulė %s: priskyrimas nebenaudojamas"
 
-#. R/models.R: gettextf("invalid formula %s: extraneous call to `%s` is deprecated",     deparse2(x), as.character(c.))
+#. R/models.R: gettextf("invalid formula %s: extraneous call to '%s' is deprecated",     deparse2(x), as.character(c.))
 #: R/models.R:0
-msgid "invalid formula %s: extraneous call to `%s` is deprecated"
+#, fuzzy
+msgid "invalid formula %s: extraneous call to '%s' is deprecated"
 msgstr "neleistina formulė %s: nebenaudojamas pašalinis iškvietimas į '%s'"
 
 #. R/models.R: gettextf("invalid formula %s: not a call", deparse2(x))
@@ -2589,16 +2598,6 @@ msgstr "neteisingos tiesinio prediktoriaus reikšmės tuščiame modelyje"
 #: R/lm.influence.R:0
 msgid "invalid model QR matrix"
 msgstr "neteisingas QR matricos modelis"
-
-#. R/kmeans.R: stop("invalid ncol(x)")
-#: R/kmeans.R:0
-msgid "invalid ncol(x)"
-msgstr "neteisingas ncol(x)"
-
-#. R/kmeans.R: stop("invalid nrow(x)")
-#: R/kmeans.R:0
-msgid "invalid nrow(x)"
-msgstr "neteisingas nrow(x)"
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
@@ -2729,9 +2728,10 @@ msgstr ""
 msgid "logical 'hessian' argument not allowed.  See documentation."
 msgstr "loginis 'hessian' parametras negalimas. Skaitykite dokumentaciją."
 
-#. R/nlm.R: stop("lower < upper  is not fulfilled")
+#. R/nlm.R: stop("lower < upper is not fulfilled")
 #: R/nlm.R:0
-msgid "lower < upper  is not fulfilled"
+#, fuzzy
+msgid "lower < upper is not fulfilled"
 msgstr "apatinis < viršutinis nėra įvykdyti"
 
 #. R/lm.R: message("lower-rank qr: determining non-estimable cases")
@@ -3608,7 +3608,8 @@ msgid "residual degrees of freedom in object suggest this is not an \"lm\" fit"
 msgstr "liekanų laisvės laipsniai objekte rodo, kad tai netinka \"lm\""
 
 #. R/manova.R: gettextf("residuals have rank %d < %d", rss.qr$rank, ncol(resid))
-#: R/manova.R:0
+#. R/mlm.R: gettextf("residuals have rank %d < %d", rss.qr$rank, pp)
+#: R/manova.R:0 R/mlm.R:0
 msgid "residuals have rank %d < %d"
 msgstr "liekanos turi rangą %d < %d"
 
@@ -3693,9 +3694,10 @@ msgstr "setVarying : 'vary' ilgis turi atitikti parametrų ilgį"
 msgid "setting '%s' in terms.formula() is deprecated"
 msgstr ""
 
-#. R/smspline.R: warning(wtxt, "\nsetting df = 1  __use with care!__")
+#. R/smspline.R: warning(wtxt, "\nsetting df = 1 __use with care!__")
 #: R/smspline.R:0
-msgid "setting df = 1  __use with care!__"
+#, fuzzy
+msgid "setting df = 1 __use with care!__"
 msgstr "nustatymą df = 1 __naudokite atsargiai!__"
 
 #. R/lm.R: stop("simulate() is not yet implemented for multivariate lm()")
@@ -3911,9 +3913,10 @@ msgstr "laiko eilutės visai neturi arba turi mažiau nei 2 periodus"
 msgid "times to be replaced do not match"
 msgstr "laikas, kurį reikia pakeisti, nesutampa"
 
-#. R/lm.influence.R: stop("too few cases i with h_ii > 0), n < k")
+#. R/lm.influence.R: stop("too few cases (with h_ii > 0), n < k")
 #: R/lm.influence.R:0
-msgid "too few cases i with h_ii > 0), n < k"
+#, fuzzy
+msgid "too few cases (with h_ii > 0), n < k"
 msgstr "per mažai atvejų i su h_ii > 0), n < k"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
@@ -4406,6 +4409,15 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "naudojant %d/%d eilutę iš kompleksinio parinkimo"
 msgstr[1] "naudojant %d/%d eilutes iš kompleksinio parinkimo"
 msgstr[2] "naudojant %d/%d eilučių iš kompleksinio parinkimo"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "neteisingas ncol(x)"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "neteisingas nrow(x)"
+
+#~ msgid "Requested conf.level not achievable"
+#~ msgstr "Reikalaujamas conf.level nepasiekiamas"
 
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "'contrast.obj' stulpelis turi apibrėžti contrast(sum to zero)"

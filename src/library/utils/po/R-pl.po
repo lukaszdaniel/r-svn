@@ -81,10 +81,10 @@ msgstr "plik 'DESCRIPTION' posiada pole 'Encoding' i ponowne kodowanie nie jest 
 msgid "'FUN' must be a function or NULL"
 msgstr "argument 'FUN' musi być funkcją lub wartością NULL"
 
-#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
-#. R/readtable.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
+#. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
 #: R/read.DIF.R:0 R/readtable.R:0
-msgid "'as.is' has the wrong length %d  != cols = %d"
+msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is' posiada niepoprawną długość %d != kolumny = %d"
 
 #. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")
@@ -469,7 +469,7 @@ msgstr "Edytuj ten plik i przenieś go do odpowiedniego katalogu."
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
-msgstr "Albo upewnij się, że odłączyłeś od listy wylistowany obiekt, albo określ strukturę oddzielnie."
+msgstr "Upewnij się, że usuwasz z listy obiekt, który można ponownie wstawić, albo określ strukturę oddzielnie."
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -756,7 +756,7 @@ msgstr "Przestrzeń nazw dla pakietu '%s' jest zablokowana; nie można dokonać 
 #. R/strcapture.R: stop("The number of captures in 'pattern' != 'length(proto)'")
 #: R/strcapture.R:0
 msgid "The number of captures in 'pattern' != 'length(proto)'"
-msgstr "Liczba przechwytań w 'pattern' != 'length(proto)'"
+msgstr "Liczba przechwyceń w 'pattern' != 'length(proto)'"
 
 #. R/strcapture.R: stop("The number of tokens != 'length(proto)'")
 #: R/strcapture.R:0
@@ -1545,7 +1545,7 @@ msgstr "znaleziono więcej niż jedno określenie składni, używanie pierwszego
 #. R/progressBar.R: stop("must have 'max' > 'min'")
 #: R/progressBar.R:0
 msgid "must have 'max' > 'min'"
-msgstr "potrzeba mieć 'max' > 'min'"
+msgstr "konieczne jest 'max' > 'min'"
 
 #. R/citation.R: gettext("must have some non-empty fields")
 #: R/citation.R:0
@@ -2104,8 +2104,8 @@ msgstr[2] "znaleziono %d plików 'Sweave' dla nazwy bazowej %s"
 msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
 msgstr[0] "%d przechwycony błąd w %s: %s"
-msgstr[1] "%d razy przechwycony ten sam błąd w %s: %s"
-msgstr[2] "%d razy przechwycony ten sam błąd w %s: %s"
+msgstr[1] "%d razy przechwycono ten sam błąd w %s: %s"
+msgstr[2] "%d razy przechwycono ten sam błąd w %s: %s"
 
 #. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s")
 #: R/apropos.R:0
@@ -2120,8 +2120,8 @@ msgstr[2] "%d wystąpień w %s"
 msgid "'lib' element %s is not a writable directory"
 msgid_plural "'lib' elements %s are not writable directories"
 msgstr[0] "element 'lib' %s nie jest zapisywalnym katalogiem"
-msgstr[1] "elementy 'lib' %s nie są zapisywalnymi katalogiami"
-msgstr[2] "elementy 'lib' %s nie są zapisywalnymi katalogiami"
+msgstr[1] "elementy 'lib' %s nie są zapisywalnymi katalogami"
+msgstr[2] "elementy 'lib' %s nie są zapisywalnymi katalogami"
 
 #. R/citation.R: ngettext(sum(!ok), "A bibentry of bibtype %s has to specify the field: %s",     "A bibentry of bibtype %s has to specify the fields: %s")
 #: R/citation.R:0
@@ -2334,9 +2334,9 @@ msgstr[2] "pakiety %s są pakietami bazowymi i nie powinny być aktualizowane"
 #: R/packages2.R:0
 msgid "package %s is available as a source package but not as a binary"
 msgid_plural "packages %s are available as source packages but not as binaries"
-msgstr[0] "pakiet %s jest dostępny jako pakiet z kodem źródłowym ale nie jako binaria"
-msgstr[1] "pakiety %s są dostępne jako pakiety z kodem źródłowym ale nie jako binaria"
-msgstr[2] "pakiety %s są dostępne jako pakiety z kodem źródłowym ale nie jako binaria"
+msgstr[0] "pakiet %s jest dostępny jako pakiet z kodem źródłowym ale nie jako plik binarny"
+msgstr[1] "pakiety %s są dostępne jako pakiety z kodem źródłowym ale nie jako pliki binarne"
+msgstr[2] "pakiety %s są dostępne jako pakiety z kodem źródłowym ale nie jako pliki binarne"
 
 #. R/packages2.R: ngettext(sum(inuse), "package %s is in use and will not be installed",     "packages %s are in use and will not be installed")
 #: R/packages2.R:0

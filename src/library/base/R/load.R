@@ -43,7 +43,7 @@ load <- function (file, envir = parent.frame(), verbose = FALSE)
     } else if (inherits(file, "connection")) {
         con <- if(inherits(file, "gzfile") || inherits(file, "gzcon")) file
                else gzcon(file)
-    } else stop("bad 'file' argument")
+    } else stop(gettextf("invalid '%s' argument", "file"))
 
     if (verbose)
     	cat("Loading objects:\n")
@@ -70,7 +70,7 @@ save <- function(..., list = character(),
 
     names <- as.character(substitute(list(...)))[-1L]
     if(missing(list) && !length(names))
-	warning("nothing specified to be save()d")
+	warning("nothing specified to be saved")
     list <- c(list, names)
     if (!is.null(version) && version == 1)
         .Internal(save(list, file, ascii, version, envir, eval.promises))
@@ -123,7 +123,7 @@ save <- function(..., list = character(),
 	}
 	else if (inherits(file, "connection"))
 	    con <- file
-	else stop("bad file argument")
+	else stop(gettextf("invalid '%s' argument", "file"))
 	if(isOpen(con) && !ascii && summary(con)$text != "binary")
 	    stop("can only save to a binary connection")
 	.Internal(saveToConn(list, con, ascii, version, envir, eval.promises))

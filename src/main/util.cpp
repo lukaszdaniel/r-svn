@@ -3078,7 +3078,7 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 		snprintf(result[i], strlen(result[i]) + 1,
 			 form, width, ((int *)x)[i]);
 	else
-	    error("%s", _("'type' must be \"integer\" for  \"d\"-format"));
+	    error("%s", _("'type' must be \"integer\" for \"d\"-format"));
     }
     else { /* --- floating point --- */
 	if (len_flag == 0)
@@ -3163,7 +3163,7 @@ static void str_signif(void *x, R_xlen_t n, const char *type, int width, int dig
 		    snprintf(result[i], strlen(result[i]) + 1,
 			     form, width, dig, ((double *)x)[i]);
 	} else
-	    error("'type' must be \"real\" for this format");
+	    error("%s", _("'type' must be \"real\" for this format"));
     }
 }
 

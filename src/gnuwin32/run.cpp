@@ -961,7 +961,7 @@ static Rboolean Wpipe_open(Rconnection con)
     rp = rpipeOpen(con->description, (cetype_t) (con->enc), visible, fin, io, fout, ferr, 0,
                    newconsole);
     if(!rp) {
-	warning(_("cannot open cmd `%s'"), con->description);
+	warning(_("cannot open cmd '%s'"), con->description);
 	return FALSE;
     }
     ((RWpipeconn)(con->connprivate))->rp = rp;

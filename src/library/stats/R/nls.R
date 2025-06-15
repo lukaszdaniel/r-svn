@@ -77,7 +77,7 @@ nlsModel.plinear <- function(form, data, start, wts, scaleOffset = 0, nDcentral 
     dimGrad <- dim(attr(rhs, "gradient"))
     marg <- length(dimGrad)
     if(marg > 0) {
-        if(marg < 2L) stop("invalid  'attr(rhs, \"gradient\")'")
+        if(marg < 2L) stop("invalid 'attr(rhs, \"gradient\")'")
         gradSetArgs <- vector("list", marg + 1L)
         for(i in 2:marg)
             gradSetArgs[[i]] <- rep_len(TRUE, dimGrad[i-1L])

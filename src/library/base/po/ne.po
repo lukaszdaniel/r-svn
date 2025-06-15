@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-14 19:05+0200\n"
 "PO-Revision-Date: 2023-09-01 09:15+0000\n"
 "Last-Translator: Binod Jung Bogati <m1s1ng@outlook.com>\n"
 "Language-Team: none\n"
@@ -315,7 +315,7 @@ msgstr ""
 
 #: src/gnuwin32/run.cpp:964
 #, c-format
-msgid "cannot open cmd `%s'"
+msgid "cannot open cmd '%s'"
 msgstr ""
 
 #: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
@@ -8728,8 +8728,13 @@ msgid "width cannot be zero"
 msgstr ""
 
 #: src/main/util.cpp:3081
-msgid "'type' must be \"integer\" for  \"d\"-format"
+msgid "'type' must be \"integer\" for \"d\"-format"
 msgstr ""
+
+#: src/main/util.cpp:3166
+#, fuzzy
+msgid "'type' must be \"real\" for this format"
+msgstr "'La.svd' मा आर्गुमेन्ट numeric वा complex हुनुपर्छ"
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, c-format

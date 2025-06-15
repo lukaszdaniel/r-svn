@@ -42,7 +42,7 @@ saveRDS <-
         con <- file
     }
     else
-        stop("bad 'file' argument")
+        stop(gettextf("invalid '%s' argument", "file"))
     .Internal(serializeToConn(object, con, ascii, version, refhook))
 }
 
@@ -53,7 +53,7 @@ readRDS <- function(file, refhook = NULL)
         on.exit(close(con))
     } else if (inherits(file, "connection"))
 	con <- if(inherits(file, "url")) gzcon(file) else file
-    else stop("bad 'file' argument")
+    else stop(gettextf("invalid '%s' argument", "file"))
     .Internal(unserializeFromConn(con, refhook))
 }
 
@@ -64,7 +64,7 @@ infoRDS <- function(file)
         on.exit(close(con))
     } else if (inherits(file, "connection"))
         con <- if(inherits(file, "url")) gzcon(file) else file
-    else stop("bad 'file' argument")
+    else stop(gettextf("invalid '%s' argument", "file"))
     .Internal(serializeInfoFromConn(con))
 }
 

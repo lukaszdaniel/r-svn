@@ -99,7 +99,7 @@ formula.character <- function(x, env = parent.frame(), ...)
                       ff[[3L]] # RHS of "v = <form>" (pkgs 'GeNetIt', 'KMgene')
                   } else if(c. == quote(`(`) || c. == quote(`{`)) {
                       .Deprecated(msg = gettextf(
-			"invalid formula %s: extraneous call to `%s` is deprecated",
+			"invalid formula %s: extraneous call to '%s' is deprecated",
 			deparse2(x), as.character(c.)))
                       eval(ff)
                   }

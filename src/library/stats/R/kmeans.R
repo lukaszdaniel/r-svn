@@ -83,8 +83,8 @@ function(x, centers, iter.max = 10L, nstart = 1L,
     }
     x <- as.matrix(x)
     ## as.integer(<too large>) gives NA ==> not allowing too large nrow() / ncol():
-    m <- as.integer(nrow(x)); if(is.na(m)) stop("invalid nrow(x)")
-    p <- as.integer(ncol(x)); if(is.na(p)) stop("invalid ncol(x)")
+    m <- as.integer(nrow(x)); if(is.na(m)) stop(gettextf("invalid '%s' value", "nrow(x)"))
+    p <- as.integer(ncol(x)); if(is.na(p)) stop(gettextf("invalid '%s' value", "ncol(x)"))
     if(missing(centers))
 	stop("'centers' must be a number or a matrix")
     nmeth <- switch(match.arg(algorithm),

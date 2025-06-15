@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-11 18:28\n"
+"POT-Creation-Date: 2025-06-14 12:50\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -87,10 +87,11 @@ msgstr "'DESCRIPTION' 檔案有 'Encoding' 這個欄位但重新編碼是不可�
 msgid "'FUN' must be a function or NULL"
 msgstr "'FUN' 的值必須是函式或 NULL"
 
-#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
-#. R/readtable.R: gettextf("'as.is' has the wrong length %d  != cols = %d", length(as.is),     cols)
+#. R/read.DIF.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
+#. R/readtable.R: gettextf("'as.is' has the wrong length %d != cols = %d", length(as.is),     cols)
 #: R/read.DIF.R:0 R/readtable.R:0
-msgid "'as.is' has the wrong length %d  != cols = %d"
+#, fuzzy
+msgid "'as.is' has the wrong length %d != cols = %d"
 msgstr "'as.is' 的長度不對 %d  ！= cols = %d"
 
 #. R/readtable.R: warning("'as.is' should be specified by the caller; using TRUE")

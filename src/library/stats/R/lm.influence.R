@@ -273,7 +273,7 @@ influence.measures <- function(model, infl = influence(model))
         d <- dim(infmat)
         k <- d[[length(d)]] - 4L
         if(n <= k)
-            stop("too few cases i with h_ii > 0), n < k")
+            stop("too few cases (with h_ii > 0), n < k")
         absmat <- abs(infmat)
 	r <-
 	    if(is.matrix(infmat)) { # usual non-mlm case

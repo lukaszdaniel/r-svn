@@ -69,8 +69,8 @@ hclust <- function(d, method="complete", members=NULL)
         stop("must have n >= 2 objects to cluster")
     len <- as.integer(n*(n-1)/2)
     if(length(d) != len)
-        (if (length(d) < len) stop else warning
-         )("dissimilarities of improper length")
+        if (length(d) < len) stop("dissimilarities of improper length")
+        else warning("dissimilarities of improper length")
 
     if(is.null(members))
         members <- rep(1, n)
