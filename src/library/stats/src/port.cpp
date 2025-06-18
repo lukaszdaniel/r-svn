@@ -402,7 +402,7 @@ SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
 	error("%s", _("use of NULL environment is defunct"));
 	rho = R_BaseEnv;
     } else if (!isEnvironment(rho))
-	error("%s", _("'rho' must be an environment"));
+	error(_("'%s' must be an environment"), "rho");
     if (!isReal(d) || n < 1)
 	error("%s", _("'d' must be a nonempty numeric (double) vector"));
     if (hs != R_NilValue && gr == R_NilValue)

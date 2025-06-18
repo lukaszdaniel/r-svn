@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:53+0200\n"
+"POT-Creation-Date: 2025-06-16 18:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -927,7 +927,8 @@ msgid "NA/NaN Hessian evaluation"
 msgstr ""
 
 #: port.cpp:405
-msgid "'rho' must be an environment"
+#, c-format
+msgid "'%s' must be an environment"
 msgstr ""
 
 #: port.cpp:407 port.cpp:575

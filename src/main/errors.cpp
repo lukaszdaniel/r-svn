@@ -1109,7 +1109,7 @@ static const char * determine_domain_gettext(SEXP domain_, bool up)
     /* R_findParentContext(cptr, 1)->cloenv == cptr->sysparent */
     if(isNull(domain_)) {
 	RCNTXT *cptr;
-	GETT_PRINT(">> determine_domain_gettext(), first rho=%s\n", EncodeEnvironment(rho));
+	GETT_PRINT(">> determine_domain_gettext()\n");
 
 	/* stop() etc have internal call to .makeMessage */
 	/* gettextf calls gettext */

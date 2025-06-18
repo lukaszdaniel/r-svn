@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 19:05+0200\n"
+"POT-Creation-Date: 2025-06-16 19:05+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -185,42 +185,42 @@ msgstr "feil ved vising av «%ls»"
 #: src/main/eval.cpp:909 src/main/eval.cpp:917 src/main/eval.cpp:924
 #: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
 #: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2131
-#: src/main/grep.cpp:2135 src/main/grep.cpp:2140 src/main/grep.cpp:2973
-#: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321
-#: src/main/memory.cpp:4583 src/main/objects.cpp:1800 src/main/objects.cpp:1802
-#: src/main/paste.cpp:152 src/main/paste.cpp:496 src/main/paste.cpp:501
-#: src/main/paste.cpp:506 src/main/paste.cpp:512 src/main/paste.cpp:521
-#: src/main/paste.cpp:526 src/main/paste.cpp:710 src/main/paste.cpp:715
-#: src/main/platform.cpp:348 src/main/platform.cpp:350
-#: src/main/platform.cpp:352 src/main/platform.cpp:364
-#: src/main/platform.cpp:375 src/main/platform.cpp:453
-#: src/main/platform.cpp:455 src/main/platform.cpp:749
-#: src/main/platform.cpp:751 src/main/platform.cpp:849
-#: src/main/platform.cpp:1578 src/main/platform.cpp:1584
-#: src/main/platform.cpp:1661 src/main/platform.cpp:1741
-#: src/main/platform.cpp:1809 src/main/platform.cpp:1812
-#: src/main/platform.cpp:2067 src/main/platform.cpp:2114
-#: src/main/platform.cpp:2162 src/main/platform.cpp:2198
-#: src/main/platform.cpp:2200 src/main/platform.cpp:2286
-#: src/main/platform.cpp:2383 src/main/platform.cpp:2650
-#: src/main/platform.cpp:2708 src/main/platform.cpp:2912
-#: src/main/platform.cpp:2915 src/main/platform.cpp:3162
-#: src/main/platform.cpp:3165 src/main/platform.cpp:3172
-#: src/main/platform.cpp:3259 src/main/platform.cpp:3301
-#: src/main/platform.cpp:3345 src/main/platform.cpp:3434 src/main/print.cpp:304
-#: src/main/random.cpp:482 src/main/random.cpp:485 src/main/random.cpp:494
-#: src/main/random.cpp:522 src/main/Rdynload.cpp:1428
-#: src/main/saveload.cpp:2066 src/main/saveload.cpp:2101
-#: src/main/saveload.cpp:2104 src/main/saveload.cpp:2214
-#: src/main/saveload.cpp:2382 src/main/saveload.cpp:2387
-#: src/main/saveload.cpp:2489 src/main/scan.cpp:708 src/main/scan.cpp:887
-#: src/main/scan.cpp:900 src/main/scan.cpp:904 src/main/scan.cpp:906
-#: src/main/scan.cpp:917 src/main/scan.cpp:947 src/main/scan.cpp:1007
-#: src/main/seq.cpp:700 src/main/seq.cpp:707 src/main/seq.cpp:717
-#: src/main/seq.cpp:723 src/main/seq.cpp:767 src/main/seq.cpp:772
-#: src/main/seq.cpp:775 src/main/seq.cpp:779 src/main/seq.cpp:784
-#: src/main/seq.cpp:791 src/main/seq.cpp:795 src/main/seq.cpp:801
-#: src/main/sysutils.cpp:646 src/main/sysutils.cpp:650
+#: src/main/grep.cpp:2135 src/main/grep.cpp:2140 src/main/grep.cpp:2178
+#: src/main/grep.cpp:2180 src/main/grep.cpp:2973 src/main/grep.cpp:2978
+#: src/main/grep.cpp:3316 src/main/grep.cpp:3321 src/main/memory.cpp:4584
+#: src/main/objects.cpp:1800 src/main/objects.cpp:1802 src/main/paste.cpp:152
+#: src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
+#: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526
+#: src/main/paste.cpp:710 src/main/paste.cpp:715 src/main/platform.cpp:348
+#: src/main/platform.cpp:350 src/main/platform.cpp:352
+#: src/main/platform.cpp:364 src/main/platform.cpp:375
+#: src/main/platform.cpp:453 src/main/platform.cpp:455
+#: src/main/platform.cpp:749 src/main/platform.cpp:751
+#: src/main/platform.cpp:849 src/main/platform.cpp:1578
+#: src/main/platform.cpp:1584 src/main/platform.cpp:1661
+#: src/main/platform.cpp:1741 src/main/platform.cpp:1809
+#: src/main/platform.cpp:1812 src/main/platform.cpp:2067
+#: src/main/platform.cpp:2114 src/main/platform.cpp:2162
+#: src/main/platform.cpp:2198 src/main/platform.cpp:2200
+#: src/main/platform.cpp:2286 src/main/platform.cpp:2383
+#: src/main/platform.cpp:2650 src/main/platform.cpp:2708
+#: src/main/platform.cpp:2912 src/main/platform.cpp:2915
+#: src/main/platform.cpp:3162 src/main/platform.cpp:3165
+#: src/main/platform.cpp:3172 src/main/platform.cpp:3259
+#: src/main/platform.cpp:3301 src/main/platform.cpp:3345
+#: src/main/platform.cpp:3434 src/main/print.cpp:304 src/main/random.cpp:482
+#: src/main/random.cpp:485 src/main/random.cpp:494 src/main/random.cpp:522
+#: src/main/Rdynload.cpp:1428 src/main/saveload.cpp:2066
+#: src/main/saveload.cpp:2101 src/main/saveload.cpp:2104
+#: src/main/saveload.cpp:2214 src/main/saveload.cpp:2382
+#: src/main/saveload.cpp:2387 src/main/saveload.cpp:2489 src/main/scan.cpp:708
+#: src/main/scan.cpp:887 src/main/scan.cpp:900 src/main/scan.cpp:904
+#: src/main/scan.cpp:906 src/main/scan.cpp:917 src/main/scan.cpp:947
+#: src/main/scan.cpp:1007 src/main/seq.cpp:700 src/main/seq.cpp:707
+#: src/main/seq.cpp:717 src/main/seq.cpp:723 src/main/seq.cpp:767
+#: src/main/seq.cpp:772 src/main/seq.cpp:775 src/main/seq.cpp:779
+#: src/main/seq.cpp:784 src/main/seq.cpp:791 src/main/seq.cpp:795
+#: src/main/seq.cpp:801 src/main/sysutils.cpp:646 src/main/sysutils.cpp:650
 #: src/main/sysutils.cpp:654 src/main/sysutils.cpp:2971
 #: src/main/unique.cpp:1886 src/main/unique.cpp:1890 src/main/unique.cpp:2285
 #: src/main/unique.cpp:2290 src/main/util.cpp:716 src/main/util.cpp:719
@@ -1459,14 +1459,17 @@ msgid "replacement object is not an environment"
 msgstr "erstattingsobjektet er ikkje ein omgjevnad"
 
 #: src/main/builtin.cpp:356 src/main/coerce.cpp:2740 src/main/engine.cpp:3225
-#: src/main/envir.cpp:1899 src/main/unique.cpp:1894
+#: src/main/envir.cpp:1899 src/main/envir.cpp:2940 src/main/envir.cpp:3019
+#: src/main/unique.cpp:1894
 #, fuzzy, c-format
 msgid "'%s' must be an environment"
 msgstr "«enclos» må vera ein omgjevnad"
 
-#: src/main/builtin.cpp:374 src/main/builtin.cpp:407
-msgid "argument is not an environment"
-msgstr "argumentet er ikkje ein omgjevnad"
+#: src/main/builtin.cpp:374 src/main/builtin.cpp:407 src/main/builtin.cpp:421
+#: src/main/memory.cpp:4387
+#, fuzzy, c-format
+msgid "'%s' is not an environment"
+msgstr "«parent» er ikkje ein omgjevnad"
 
 #: src/main/builtin.cpp:376
 msgid "the empty environment has no parent"
@@ -1485,10 +1488,6 @@ msgstr "kan ikkje definera forelderen til den tomme omgjevnaden"
 #, fuzzy
 msgid "can not set the parent environment of package imports"
 msgstr "kan ikkje definera forelderen til den tomme omgjevnaden"
-
-#: src/main/builtin.cpp:421 src/main/memory.cpp:4386
-msgid "'parent' is not an environment"
-msgstr "«parent» er ikkje ein omgjevnad"
 
 #: src/main/builtin.cpp:566 src/main/connections.cpp:4560
 #: src/main/connections.cpp:4945 src/main/connections.cpp:4972
@@ -1836,7 +1835,8 @@ msgstr "ugyldig argumentliste"
 msgid "'length = %lld' in coercion to '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:1775 src/main/debug.cpp:124
+#: src/main/coerce.cpp:1775 src/main/debug.cpp:124 src/main/util.cpp:721
+#: src/main/util.cpp:724
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "det tredje argumentet må vera «TRUE» (sann) eller «FALSE» (usann)"
@@ -3976,10 +3976,6 @@ msgstr "kan ikkje kopla laus «package:base»"
 msgid "bad hash table contents"
 msgstr "ugyldige variabelnamn"
 
-#: src/main/envir.cpp:2940 src/main/envir.cpp:3019
-msgid "argument must be an environment"
-msgstr "argumentet må vera ein omgjevnad"
-
 #: src/main/envir.cpp:3023
 msgid "arguments must be symbolic"
 msgstr "argumenta må vera symbolske"
@@ -5152,16 +5148,6 @@ msgstr ""
 msgid "result string is too long"
 msgstr "resultatteksten er for lang"
 
-#: src/main/grep.cpp:2178
-#, fuzzy
-msgid "'pattern' is invalid"
-msgstr "«pattern» er ugyldig UTF-8"
-
-#: src/main/grep.cpp:2180
-#, fuzzy
-msgid "'replacement' is invalid"
-msgstr "«replacement» er ugyldig UTF-8"
-
 #: src/main/grep.cpp:2185
 msgid "'pattern' is invalid UTF-8"
 msgstr "«pattern» er ugyldig UTF-8"
@@ -5639,183 +5625,185 @@ msgstr "R_Calloc klarte ikkje reservera (%llu av %llu) minne"
 
 #: src/main/memory.cpp:3200
 #, fuzzy, c-format
-msgid "'R_Realloc' could not re-allocate memory (%llu bytes)"
-msgstr "R_Realloc klarte ikkje endra storleik (%llu) på reservert minne"
+msgid "'R_Realloc' could not re-allocate memory (%llu byte)"
+msgid_plural "'R_Realloc' could not re-allocate memory (%llu bytes)"
+msgstr[0] "R_Realloc klarte ikkje endra storleik (%llu) på reservert minne"
+msgstr[1] "R_Realloc klarte ikkje endra storleik (%llu) på reservert minne"
 
-#: src/main/memory.cpp:3216 src/main/memory.cpp:3223
+#: src/main/memory.cpp:3217 src/main/memory.cpp:3224
 #, fuzzy, c-format
 msgid "object is too large (%llu byte)"
 msgid_plural "object is too large (%llu bytes)"
 msgstr[0] "den oppgjevne vektorstorleiken er for stor"
 msgstr[1] "den oppgjevne vektorstorleiken er for stor"
 
-#: src/main/memory.cpp:3304
+#: src/main/memory.cpp:3305
 #, fuzzy
 msgid "'initialSize' must be non-negative"
 msgstr "«gap» må vera eit heiltal større enn null"
 
-#: src/main/memory.cpp:3323
+#: src/main/memory.cpp:3324
 #, fuzzy
 msgid "Invalid mset"
 msgstr "ugyldig samband"
 
-#: src/main/memory.cpp:3347
+#: src/main/memory.cpp:3348
 #, fuzzy
 msgid "Multi-set overflow"
 msgstr "«default» er for lang"
 
-#: src/main/memory.cpp:3413
+#: src/main/memory.cpp:3414
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "det første argumentet må vera ein omgjevnad eller ein ekstern peikar"
 
-#: src/main/memory.cpp:3539
+#: src/main/memory.cpp:3540
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3576
+#: src/main/memory.cpp:3577
 #, c-format
 msgid "can't change type from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3584
+#: src/main/memory.cpp:3585
 #, c-format
 msgid "can't change the type of an ALTREP object from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3591
+#: src/main/memory.cpp:3592
 #, fuzzy
 msgid "can't change the type of a binding cell"
 msgstr "kan ikkje endra verksam binding viss binding er låst"
 
-#: src/main/memory.cpp:3694
+#: src/main/memory.cpp:3695
 #, c-format
 msgid "LENGTH or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.cpp:3707
+#: src/main/memory.cpp:3708
 msgid "SETLENGTH() cannot be applied to an ALTVEC object."
 msgstr ""
 
-#: src/main/memory.cpp:3709
+#: src/main/memory.cpp:3710
 #, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3727 src/main/memory.cpp:3735 src/main/memory.cpp:3752
-#: src/main/memory.cpp:3769 src/main/memory.cpp:3815 src/main/memory.cpp:3824
-#: src/main/memory.cpp:3834 src/main/memory.cpp:3843 src/main/memory.cpp:3852
-#: src/main/memory.cpp:3861 src/main/memory.cpp:3869 src/main/memory.cpp:3878
-#: src/main/memory.cpp:3887 src/main/memory.cpp:3895 src/main/memory.cpp:3903
-#: src/main/memory.cpp:3911 src/main/memory.cpp:3919 src/main/memory.cpp:3932
-#: src/main/memory.cpp:3941 src/main/memory.cpp:3966 src/main/memory.cpp:3985
+#: src/main/memory.cpp:3728 src/main/memory.cpp:3736 src/main/memory.cpp:3753
+#: src/main/memory.cpp:3770 src/main/memory.cpp:3816 src/main/memory.cpp:3825
+#: src/main/memory.cpp:3835 src/main/memory.cpp:3844 src/main/memory.cpp:3853
+#: src/main/memory.cpp:3862 src/main/memory.cpp:3870 src/main/memory.cpp:3879
+#: src/main/memory.cpp:3888 src/main/memory.cpp:3896 src/main/memory.cpp:3904
+#: src/main/memory.cpp:3912 src/main/memory.cpp:3920 src/main/memory.cpp:3933
+#: src/main/memory.cpp:3942 src/main/memory.cpp:3967 src/main/memory.cpp:3986
 #, fuzzy, c-format
 msgid "%s() can only be applied to a '%s', not a '%s'"
 msgstr "scan() venta «%s», men fekk «%s»"
 
-#: src/main/memory.cpp:3804
+#: src/main/memory.cpp:3805
 msgid "cannot get STDVEC_DATAPTR from ALTREP object"
 msgstr ""
 
-#: src/main/memory.cpp:3806
+#: src/main/memory.cpp:3807
 #, c-format
 msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3927
+#: src/main/memory.cpp:3928
 msgid "not safe to return vector pointer"
 msgstr "ikkje trygt å returnera vektorpeikar"
 
-#: src/main/memory.cpp:3944
+#: src/main/memory.cpp:3945
 #, c-format
 msgid "Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3947
+#: src/main/memory.cpp:3948
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_STRING_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:3970
+#: src/main/memory.cpp:3971
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_VECTOR_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:3989
+#: src/main/memory.cpp:3990
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:4019
+#: src/main/memory.cpp:4020
 #, c-format
 msgid "CAR/CDR/TAG or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.cpp:4133
+#: src/main/memory.cpp:4134
 #, fuzzy
 msgid "argument not tracking references"
 msgstr "argumentet er ikkje ein omgjevnad"
 
-#: src/main/memory.cpp:4201 src/main/memory.cpp:4210 src/main/memory.cpp:4221
-#: src/main/memory.cpp:4237 src/main/memory.cpp:4251 src/main/memory.cpp:4266
-#: src/main/memory.cpp:4282
+#: src/main/memory.cpp:4202 src/main/memory.cpp:4211 src/main/memory.cpp:4222
+#: src/main/memory.cpp:4238 src/main/memory.cpp:4252 src/main/memory.cpp:4267
+#: src/main/memory.cpp:4283
 msgid "bad value"
 msgstr "ugyldig verdi"
 
-#: src/main/memory.cpp:4226
+#: src/main/memory.cpp:4227
 msgid "inserting non-tracking CDR in tracking cell"
 msgstr ""
 
-#: src/main/memory.cpp:4302
+#: src/main/memory.cpp:4303
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not a closure"
 msgstr "argumentet %d er ikkje ein vektor"
 
-#: src/main/memory.cpp:4334
+#: src/main/memory.cpp:4335
 #, c-format
 msgid "%s: argument of type %s is not a symbol or NULL"
 msgstr ""
 
-#: src/main/memory.cpp:4368
+#: src/main/memory.cpp:4369
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an environment or NULL"
 msgstr "argumentet til «%s» er ikkje ein omgjevnad"
 
-#: src/main/memory.cpp:4389
+#: src/main/memory.cpp:4390
 #, fuzzy
 msgid "cycles in parent chains are not allowed"
 msgstr "kan ikkje ha vektorar av negativ lengd"
 
-#: src/main/memory.cpp:4419
+#: src/main/memory.cpp:4420
 #, c-format
 msgid "expecting a 'PROMSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4451
+#: src/main/memory.cpp:4452
 #, c-format
 msgid "value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4529
+#: src/main/memory.cpp:4530
 msgid "memory profiling is not available on this system"
 msgstr "minneprofilering er ikkje tilgjengeleg på dette systemet"
 
-#: src/main/memory.cpp:4572
+#: src/main/memory.cpp:4573
 #, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr "Rprofmem: klarte ikkje opna utfila «%s»"
 
-#: src/main/memory.cpp:4612
+#: src/main/memory.cpp:4613
 msgid "R_AllocStringBuffer( (size_t)-1 ) is no longer allowed"
 msgstr ""
 
-#: src/main/memory.cpp:4631
+#: src/main/memory.cpp:4632
 #, fuzzy, c-format
 msgid "could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'"
 msgstr "klarte ikkje reservera minne til «read.dcf»"
 
-#: src/main/memory.cpp:4686
+#: src/main/memory.cpp:4687
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -8902,14 +8890,6 @@ msgstr "«nthcdr»-lista er kortare enn %d"
 msgid "'nthcdr' needs a list to CDR down"
 msgstr "«nthcdr» treng ei liste til CDR ned"
 
-#: src/main/util.cpp:721
-msgid "'all.x' must be TRUE or FALSE"
-msgstr "«all.x» må vera TRUE eller FALSE"
-
-#: src/main/util.cpp:724
-msgid "'all.y' must be TRUE or FALSE"
-msgstr "«all.y» må vera TRUE eller FALSE"
-
 #: src/main/util.cpp:754
 msgid "number of rows in the result exceeds maximum vector length"
 msgstr ""
@@ -10341,6 +10321,26 @@ msgstr "X11-modulen kan ikkje lastast"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 er ikkje tilgjengeleg"
+
+#, fuzzy
+#~ msgid "'pattern' is invalid"
+#~ msgstr "«pattern» er ugyldig UTF-8"
+
+#, fuzzy
+#~ msgid "'replacement' is invalid"
+#~ msgstr "«replacement» er ugyldig UTF-8"
+
+#~ msgid "argument must be an environment"
+#~ msgstr "argumentet må vera ein omgjevnad"
+
+#~ msgid "'all.x' must be TRUE or FALSE"
+#~ msgstr "«all.x» må vera TRUE eller FALSE"
+
+#~ msgid "'all.y' must be TRUE or FALSE"
+#~ msgstr "«all.y» må vera TRUE eller FALSE"
+
+#~ msgid "argument is not an environment"
+#~ msgstr "argumentet er ikkje ein omgjevnad"
 
 #~ msgid "'envir' must be an environment"
 #~ msgstr "«envir» må vera ein omgjevnad"

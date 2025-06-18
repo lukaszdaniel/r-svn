@@ -3197,8 +3197,9 @@ void *R_chk_realloc(void *ptr, size_t size)
     /* Protect against broken realloc */
     if (ptr) p = realloc(ptr, size); else p = malloc(size);
     if (!p)
-	error(_("'R_Realloc' could not re-allocate memory (%llu bytes)"),
-	      (unsigned long long)size);
+	error(n_("'R_Realloc' could not re-allocate memory (%llu byte)",
+	      "'R_Realloc' could not re-allocate memory (%llu bytes)",
+	      (unsigned long long)size), (unsigned long long)size);
     return(p);
 }
 
@@ -4383,7 +4384,7 @@ void (SET_ENCLOS)(SEXP x, SEXP v)
 	/* mainly to handle unserializing old files */
 	v = R_EmptyEnv;
     if (TYPEOF(v) != ENVSXP)
-	error("%s", _("'parent' is not an environment"));
+	error(_("'%s' is not an environment"), "parent");
     for (SEXP e = v; e != R_NilValue; e = ENCLOS(e))
 	if (e == x)
 	    error("%s", _("cycles in parent chains are not allowed"));

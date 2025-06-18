@@ -371,7 +371,7 @@ attribute_hidden SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if( !isEnvironment(arg)  &&
 	!isEnvironment((arg = simple_as_environment(arg))))
-	error("%s", _("argument is not an environment"));
+	error(_("'%s' is not an environment"), "env");
     if( arg == R_EmptyEnv )
 	error("%s", _("the empty environment has no parent"));
     return ENCLOS(arg);
@@ -404,7 +404,7 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else
     if( !isEnvironment(env) &&
 	!isEnvironment((env = simple_as_environment(env))))
-	error("%s", _("argument is not an environment"));
+	error(_("'%s' is not an environment"), "env");
     if( env == R_EmptyEnv )
 	error("%s", _("can not set parent of the empty environment"));
     if (R_EnvironmentIsLocked(env) && R_IsNamespaceEnv(env))
@@ -418,7 +418,7 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else
     if( !isEnvironment(parent) &&
 	!isEnvironment((parent = simple_as_environment(parent))))
-	error("%s", _("'parent' is not an environment"));
+	error(_("'%s' is not an environment"), "parent");
 
     SET_ENCLOS(env, parent);
 

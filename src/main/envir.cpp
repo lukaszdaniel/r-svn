@@ -2937,7 +2937,7 @@ attribute_hidden SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    (xdata = R_getS4DataSlot(env, ENVSXP)) != R_NilValue)
 	    env = xdata;
 	else
-	    error("%s", _("argument must be an environment"));
+	    error(_("'%s' must be an environment"), "x");
     }
 
     bool all = asLogicalNAFalse(CADR(args)); /* all.names = TRUE/FALSE */
@@ -3016,7 +3016,7 @@ attribute_hidden SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (ISNULL(env))
 	error("%s", _("use of NULL environment is defunct"));
     if (!isEnvironment(env))
-	error("%s", _("argument must be an environment"));
+	error(_("'%s' must be an environment"), "env");
 
     FUN = CADR(args);
     if (!isSymbol(FUN))

@@ -2175,9 +2175,9 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	srep = CHAR(STRING_ELT(rep, 0));
     } else if (use_WC) {
 	wpat = wtransChar2(STRING_ELT(pat, 0));
-	if (!wpat) error("%s", _("'pattern' is invalid"));
+	if (!wpat) error(_("invalid '%s' argument"), "pattern");
 	wrep = wtransChar2(STRING_ELT(rep, 0));
-	if (!wrep) error("%s", _("'replacement' is invalid"));
+	if (!wrep) error(_("invalid '%s' argument"), "replacement");
 	ascii_patrep = (IS_ASCII(STRING_ELT(pat, 0)) &&
 	                IS_ASCII(STRING_ELT(rep, 0)));
     } else if (use_UTF8) {

@@ -718,10 +718,10 @@ attribute_hidden SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
     if ( !isInteger(yi) || !(ny = LENGTH(yi)) )
 	error(_("invalid '%s' argument"), "yinds");
     if(!LENGTH(ans = CADDR(args)))
-	error("%s", _("'all.x' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "all.x");
     all_x = asLogicalNoNA(ans, "all.x");
     if(!LENGTH(ans = CADDDR(args)))
-	error("%s", _("'all.y' must be TRUE or FALSE"));
+	error(_("'%s' argument must be TRUE or FALSE"), "all.y");
     all_y = asLogicalNoNA(ans, "all.y");
 
     /* 0. sort the indices */
