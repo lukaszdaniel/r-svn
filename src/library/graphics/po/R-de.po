@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-18 21:13\n"
 "PO-Revision-Date: 2022-04-13 12:29+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -603,6 +603,11 @@ msgstr "Länge von 'angles' muss 'ncol(x)' entsprechen"
 #: R/mosaicplot.R:0
 msgid "length of 'sort' does not conform to 'dim(x)'"
 msgstr "Länge von 'sort' passt nicht zu 'dim(x)'"
+
+#. R/text.R: gettextf("length(labels) > max(length(x), length(y)). labels truncated to length %d.",     n, domain = "R-graphics")
+#: R/text.R:0
+msgid "length(labels) > max(length(x), length(y)). labels truncated to length %d."
+msgstr ""
 
 #. R/barplot.R: stop("log scale error: 'xlim' <= 0")
 #: R/barplot.R:0

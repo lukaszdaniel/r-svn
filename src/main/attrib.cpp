@@ -444,17 +444,14 @@ static void checkNames(SEXP x, SEXP s)
 
 /* Time Series Parameters */
 
-NORET static void badtsp(void)
+NORET static void badtsp(int k)
 {
-    error("%s", _("invalid time series parameters specified"));
+    error(_("invalid time series parameters specified (%d)"), k);
 }
 
 attribute_hidden
 SEXP R::tspgets(SEXP vec, SEXP val)
 {
-    double start, end, frequency;
-    int n;
-
     if (vec == R_NilValue)
 	error("%s", _("attempt to set an attribute on NULL"));
 
@@ -468,6 +465,7 @@ SEXP R::tspgets(SEXP vec, SEXP val)
     if (!isNumeric(val) || LENGTH(val) != 3)
 	error("%s", _("'tsp' attribute must be numeric of length three"));
 
+    double start, end, frequency;
     if (isReal(val)) {
 	start = REAL(val)[0];
 	end = REAL(val)[1];
@@ -481,13 +479,12 @@ SEXP R::tspgets(SEXP vec, SEXP val)
 	frequency = (INTEGER(val)[2] == NA_INTEGER) ?
 	    NA_REAL : INTEGER(val)[2];
     }
-    if (frequency <= 0) badtsp();
-    n = nrows(vec);
+    if (frequency <= 0) badtsp(0);
+    int n = nrows(vec);
     if (n == 0) error("%s", _("cannot assign 'tsp' to zero-length vector"));
 
-    /* FIXME:  1.e-5 should rather be == option('ts.eps') !! */
-    if (fabs(end - start - (n - 1)/frequency) > 1.e-5)
-	badtsp();
+    if (fabs(end - start - (n - 1)/frequency) > asReal(GetOption1(install("ts.eps"))))
+	badtsp(1);
 
     PROTECT(vec);
     val = allocVector(REALSXP, 3);

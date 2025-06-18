@@ -140,7 +140,10 @@ static int extract_one(unzFile uf, const char *const dest, const char * const fi
 
     err = unzOpenCurrentFile(uf);
     if (err != UNZ_OK) return err;
-    if (strlen(dest) > R_PATH_MAX - 2) return 1;
+    if (strlen(dest) > R_PATH_MAX - 2) {
+	unzCloseCurrentFile(uf);
+	return 1;
+    }
     strcpy(outname, dest);
     strcat(outname, FILESEP);
     unz_file_info64 file_info;
@@ -149,9 +152,16 @@ static int extract_one(unzFile uf, const char *const dest, const char * const fi
 				  sizeof(filename_inzip), NULL, 0, NULL, 0);
     fn = filename_inzip; /* might be UTF-8 ... */
     if (filename) {
-	if (strlen(filename) > R_PATH_MAX - 1) return 1;
+	if (strlen(filename) > R_PATH_MAX - 1) {
+	    unzCloseCurrentFile(uf);
+	    return 1;
+	}
 	strcpy(fn0, filename);
 	fn = fn0;
+    } else if (err != UNZ_OK
+               || file_info.size_filename >= sizeof(filename_inzip)) {
+	unzCloseCurrentFile(uf);
+	return 1;
     }
 #ifdef Win32
     R_fixslash(fn);
@@ -160,7 +170,10 @@ static int extract_one(unzFile uf, const char *const dest, const char * const fi
 	p = Rf_strrchr(fn, '/');
 	if (p) fn = p+1;
     }
-    if (strlen(outname) + strlen(fn) > R_PATH_MAX - 1) return 1;
+    if (strlen(outname) + strlen(fn) > R_PATH_MAX - 1) {
+	unzCloseCurrentFile(uf);
+	return 1;
+    }
     strcat(outname, fn);
 
 #ifdef Win32
@@ -324,7 +337,9 @@ static SEXP ziplist(const char *zipname)
 
 	err = unzGetCurrentFileInfo64(uf, &file_info, filename_inzip,
 				      sizeof(filename_inzip), NULL, 0, NULL, 0);
-	if (err != UNZ_OK) {
+	if (err != UNZ_OK ||
+	    file_info.size_filename >= sizeof(filename_inzip)) {
+
 	    unzClose(uf);
 	    error(_("error %d with zipfile in unzGetCurrentFileInfo\n"), err);
 	}
@@ -1636,6 +1651,7 @@ extern int ZEXPORT unzLocateFile(unzFile file, const char *szFileName, int iCase
     while (err == UNZ_OK)
     {
 	char szCurrentFileName[UNZ_MAXFILENAMEINZIP+1];
+	szCurrentFileName[UNZ_MAXFILENAMEINZIP] = '\0';
 	err = unzGetCurrentFileInfo64(file, NULL,
 				      szCurrentFileName,
 				      sizeof(szCurrentFileName)-1,

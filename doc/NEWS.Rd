@@ -44,7 +44,7 @@
       Gatto} and \I{Hugo Gruson}.
 
       \item \code{tcltk::tclVersion()} now only optionally includes the
-      \sQuote{patch level}, as Tcl full versions can be of the the form
+      \sQuote{patch level}, as Tcl full versions can be of the form
       \code{8.7a5} or \code{9.0b1} without three clear components.
     }
   }
@@ -57,13 +57,13 @@
 
       The \code{glyphFont()} function gains a \code{variations}
       argument, which allows variable font axes to be specified,
-      e.g., \code{c(wght=100)}.
+      e.g., \code{c(wght = 100)}.
 
-      Only Cairo-based graphics devices (but not \code{cairo_pdf()})
-      support variable font axes so far.
+      Only the \code{quartz()} device and Cairo-based graphics devices
+      (but not \code{cairo_pdf()}) support variable font axes so far.
     }
   }
-  
+
   \subsection{INSTALLATION}{
     \itemize{
       \item .
@@ -142,11 +142,39 @@
       \item \code{t.test(c(1:3, Inf))} and similar no longer produce an error but
       return a (still not so useful) \code{"htest"} result, fixing
       \PR{18901}, thanks to \I{Jesse Alderliesten}.
+
+      \item \code{text()} now truncates \code{labels} to maximum length
+      of \code{x} and \code{y} (if it is longer), fixing \PR{7084}.
+      Thanks to \I{Heather Turner}, \I{Ella Kaye}, and
+      \I{Philippe Grosjean}.
+
+      \item \code{attr(., "tsp") <- val} now uses \code{getOption("ts.eps")}
+      instead of hardwired \code{1e-5}; consequently, \code{ts(.., ts.eps=*)}
+      now passes \code{ts.eps} to the \code{"tsp"} setting C code;
+      both fixing a long-standing \sQuote{\I{FIXME}}.
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 4.5.1 patched}{
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item .
     }
   }
 }
 
 \section{\Rlogo CHANGES IN R 4.5.1}{
+
+  \subsection{NEW FEATURES}{
+    \itemize{
+      \item The internal method of \code{unzip()} now follows \code{unzip 6.00}
+      in how it handles extracted file paths which contain \code{"../"}.
+      With thanks to \I{Ivan Krylov}.
+    }
+  }
+
   \subsection{INSTALLATION}{
     \itemize{
       \item Standalone \code{nmath} can be built with early-2025
@@ -156,9 +184,6 @@
 
       \item Tcl/Tk\sspace{}9 can be used to build package \code{tcltk}:
       this has become the default in some Linux distributions.
-      \strong{N.B.}  several third-party packages currently require
-      Tcl/Tk\sspace{}8 or even 8.6 without declaring so.
-      %% including tkrplot, loon and tcltk2
     }
   }
 
@@ -3541,7 +3566,7 @@
       patch by \I{Thomas Soeiro} in \PR{18243}.
 
       \item \code{as.vector()} gains a \code{data.frame} method which
-      returns a simple named list, also clearing a long standing
+      returns a simple named list, also clearing a long-standing
       \sQuote{\I{FIXME}} to enable \code{as.vector(<data.frame>,
       mode="list")}.  This breaks code relying on
       \code{as.vector(<data.frame>)} to return the unchanged data frame.

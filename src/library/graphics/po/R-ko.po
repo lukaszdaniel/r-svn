@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-18 21:13\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -607,6 +607,11 @@ msgstr "'angles'의 길이는 반드시 'ncol(x)'와 같아야 합니다"
 #: R/mosaicplot.R:0
 msgid "length of 'sort' does not conform to 'dim(x)'"
 msgstr "'sort'의 길이가 'dim(x)'와 맞지 않습니다"
+
+#. R/text.R: gettextf("length(labels) > max(length(x), length(y)). labels truncated to length %d.",     n, domain = "R-graphics")
+#: R/text.R:0
+msgid "length(labels) > max(length(x), length(y)). labels truncated to length %d."
+msgstr ""
 
 #. R/barplot.R: stop("log scale error: 'xlim' <= 0")
 #: R/barplot.R:0

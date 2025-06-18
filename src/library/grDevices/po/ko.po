@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -780,33 +780,33 @@ msgstr ""
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3067
+#: devQuartz.cpp:3174
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "%s에 유효하지 않은 'fonts' 파라미터가 있습니다"
 
-#: devQuartz.cpp:3097
+#: devQuartz.cpp:3217
 #, fuzzy
 msgid "failed to load font"
 msgstr "폰트 리스트를 할당하는데 실패했습니다"
 
-#: devQuartz.cpp:3190 devQuartz.cpp:3195
+#: devQuartz.cpp:3310 devQuartz.cpp:3315
 msgid "invalid 'file' argument"
 msgstr "유효하지 않은 'file' 인자입니다"
 
-#: devQuartz.cpp:3222
+#: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
 msgstr "유효하지 않은 quartz()장치 크기입니다"
 
-#: devQuartz.cpp:3250
+#: devQuartz.cpp:3370
 msgid "unable to create device description"
 msgstr "device description을 생성할 수 없습니다"
 
-#: devQuartz.cpp:3299
+#: devQuartz.cpp:3419
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "quartz() 장치대상을 생성할 수 없었습니다.  아마도 타입이 지원되지 않는 것 같습니다"
 
-#: devQuartz.cpp:3432
+#: devQuartz.cpp:3552
 msgid "Quartz device is not available on this platform"
 msgstr "이 플랫폼에서는 Quartz장치를 사용할 수 없습니다"
 

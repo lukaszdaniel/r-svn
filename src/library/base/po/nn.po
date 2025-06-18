@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-16 19:05+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -175,7 +175,7 @@ msgstr "feil ved vising av «%ls»"
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
-#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:378 src/main/dounzip.cpp:385
+#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
 #: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087
 #: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
@@ -327,7 +327,7 @@ msgstr "Ikkje nok minne («rpipeOpen»)"
 msgid "cannot open cmd '%s'"
 msgstr "klarte ikkje opna adressa «%s»"
 
-#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
+#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:542
 msgid "seek not enabled for this connection"
 msgstr "«seek» er ikkje slått på for dette sambandet"
 
@@ -398,7 +398,7 @@ msgstr "<FEIL: Feil ved omkoding frå teiknkodinga «%s»>\n"
 
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
 #: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:226
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:239
 #: src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
 #: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158
 #: src/main/serialize.cpp:3210 src/unix/system.cpp:432
@@ -1089,7 +1089,7 @@ msgstr "ikkje-samsvarande argument"
 msgid "'%s' argument is not a matrix"
 msgstr "argumentet er ikkje ei matrise"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1232
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1229
 #, fuzzy, c-format
 msgid "invalid first argument, must be %s"
 msgstr "førsteargumentet må vera eit array"
@@ -1138,8 +1138,8 @@ msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr ""
 
 #: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306
-#: src/main/attrib.cpp:324 src/main/attrib.cpp:459 src/main/attrib.cpp:506
-#: src/main/attrib.cpp:560 src/main/RObject.cpp:129
+#: src/main/attrib.cpp:324 src/main/attrib.cpp:456 src/main/attrib.cpp:503
+#: src/main/attrib.cpp:557 src/main/RObject.cpp:129
 msgid "attempt to set an attribute on NULL"
 msgstr "prøvde å setja attributt på NULL"
 
@@ -1182,171 +1182,172 @@ msgid "names() applied to a non-vector"
 msgstr "names() brukt på ikkje-vektor"
 
 #: src/main/attrib.cpp:449
-msgid "invalid time series parameters specified"
+#, fuzzy, c-format
+msgid "invalid time series parameters specified (%d)"
 msgstr "ugyldig tidsrekkjeparametrar oppgjevne"
 
-#: src/main/attrib.cpp:463
+#: src/main/attrib.cpp:460
 msgid "'tsp' attribute must be numeric"
 msgstr "«tsp»-attributtet må vera numerisk"
 
-#: src/main/attrib.cpp:469
+#: src/main/attrib.cpp:466
 msgid "'tsp' attribute must be numeric of length three"
 msgstr "«tsp»-attributtet må vera numerisk av lengd tre"
 
-#: src/main/attrib.cpp:486
+#: src/main/attrib.cpp:484
 msgid "cannot assign 'tsp' to zero-length vector"
 msgstr "kan ikkje tildela «tsp» til vektor av lengd null"
 
-#: src/main/attrib.cpp:517
+#: src/main/attrib.cpp:514
 msgid "attempt to set invalid 'comment' attribute"
 msgstr "prøvde å definera eit ugyldig «comment»-attributt"
 
-#: src/main/attrib.cpp:569
+#: src/main/attrib.cpp:566
 msgid "adding class \"factor\" to an invalid object"
 msgstr "legg klassen «factor» til eit ugyldig objekt"
 
-#: src/main/attrib.cpp:600
+#: src/main/attrib.cpp:597
 msgid "attempt to set invalid 'class' attribute"
 msgstr "prøvde å definera eit ugyldig «class»-attributt"
 
-#: src/main/attrib.cpp:880
+#: src/main/attrib.cpp:877
 msgid "type must be LANGSXP at this point"
 msgstr ""
 
-#: src/main/attrib.cpp:911
+#: src/main/attrib.cpp:908
 #, fuzzy
 msgid "invalid class argument to internal .class_cache"
 msgstr "ugyldig argumenttal i call_R"
 
-#: src/main/attrib.cpp:943
+#: src/main/attrib.cpp:940
 #, fuzzy, c-format
 msgid "invalid to use names()<- on an S4 object of class '%s'"
 msgstr "det finst ikkje ein slot med namnet «%s» for dette objektet av klassen «%s»"
 
-#: src/main/attrib.cpp:984
+#: src/main/attrib.cpp:981
 msgid "incompatible 'names' argument"
 msgstr "ikkje-kompatibelt «names»-argument"
 
-#: src/main/attrib.cpp:1035
+#: src/main/attrib.cpp:1032
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "ugyldig type (%s) for å setja «names»-attributt"
 
-#: src/main/attrib.cpp:1108
+#: src/main/attrib.cpp:1105
 msgid "'dimnames' applied to non-array"
 msgstr "«dimnames» brukt på ikkje-array"
 
-#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
+#: src/main/attrib.cpp:1110 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
 #, fuzzy, c-format
 msgid "'%s' must be a list"
 msgstr "«%s» må vera ei liste"
 
-#: src/main/attrib.cpp:1117 src/main/attrib.cpp:1142
+#: src/main/attrib.cpp:1114 src/main/attrib.cpp:1139
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "lengda til «dimnames» [%d] må vera i samsvar med «dims» [%d]"
 
-#: src/main/attrib.cpp:1148
+#: src/main/attrib.cpp:1145
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "ugyldig type (%s) for «dimnames» (må vera ein vektor)"
 
-#: src/main/attrib.cpp:1151
+#: src/main/attrib.cpp:1148
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "lengda til «dimnames» [%d] er ikkje lik array-storleiken"
 
-#: src/main/attrib.cpp:1234
+#: src/main/attrib.cpp:1231
 #, fuzzy, c-format
 msgid "invalid second argument, must be %s"
 msgstr "ugyldig andreargument"
 
-#: src/main/attrib.cpp:1239
+#: src/main/attrib.cpp:1236
 msgid "length-0 dimension vector is invalid"
 msgstr "dimensjonsvektoren kan ikkje ha lengd 0"
 
-#: src/main/attrib.cpp:1244
+#: src/main/attrib.cpp:1241
 msgid "the dims contain missing values"
 msgstr "dimensjonane inneheld manglande verdiar"
 
-#: src/main/attrib.cpp:1246
+#: src/main/attrib.cpp:1243
 msgid "the dims contain negative values"
 msgstr "dimensjonane inneheld negative verdiar"
 
-#: src/main/attrib.cpp:1250
+#: src/main/attrib.cpp:1247
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "«dims» [produkt %lld] er ikkje i samsvar med lengda av objektet [%lld]"
 
-#: src/main/attrib.cpp:1330
+#: src/main/attrib.cpp:1327
 #, c-format
 msgid "factor level [%lld] is duplicated"
 msgstr ""
 
-#: src/main/attrib.cpp:1358
+#: src/main/attrib.cpp:1355
 msgid "attributes must be a list or NULL"
 msgstr "attributta må vera ei liste eller NULL"
 
-#: src/main/attrib.cpp:1363
+#: src/main/attrib.cpp:1360
 msgid "attributes must be named"
 msgstr "attributta må ha namn"
 
-#: src/main/attrib.cpp:1367
+#: src/main/attrib.cpp:1364
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "alle attributta må ha namn (%d har ikkje det)"
 
-#: src/main/attrib.cpp:1465 src/main/errors.cpp:1190
+#: src/main/attrib.cpp:1462 src/main/errors.cpp:1190
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "krev strengargument"
 
-#: src/main/attrib.cpp:1472
+#: src/main/attrib.cpp:1469
 msgid "'which' must be of mode character"
 msgstr "«which» må ha modus «character»"
 
-#: src/main/attrib.cpp:1474
+#: src/main/attrib.cpp:1471
 msgid "exactly one attribute 'which' must be given"
 msgstr "nøyaktig eitt «which»-attributt må vera oppgjeve"
 
-#: src/main/attrib.cpp:1610
+#: src/main/attrib.cpp:1607
 #, fuzzy
 msgid "invalid slot name length"
 msgstr "ugyldig lengd"
 
-#: src/main/attrib.cpp:1614
+#: src/main/attrib.cpp:1611
 #, fuzzy, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "ugyldig type eller lengd på slot-namn"
 
-#: src/main/attrib.cpp:1658
+#: src/main/attrib.cpp:1655
 msgid "'name' must be non-null character string"
 msgstr "«name» må vera ein teiknstreng ulik null"
 
-#: src/main/attrib.cpp:1784 src/main/attrib.cpp:1855 src/main/attrib.cpp:1907
+#: src/main/attrib.cpp:1781 src/main/attrib.cpp:1852 src/main/attrib.cpp:1904
 msgid "invalid type or length for slot name"
 msgstr "ugyldig type eller lengd på slot-namn"
 
-#: src/main/attrib.cpp:1818
+#: src/main/attrib.cpp:1815
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "klarte ikkje henta slot («%s») frå eit objekt av typen «%s»"
 
-#: src/main/attrib.cpp:1829
+#: src/main/attrib.cpp:1826
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "det finst ikkje ein slot med namnet «%s» for dette objektet av klassen «%s»"
 
-#: src/main/attrib.cpp:1846
+#: src/main/attrib.cpp:1843
 msgid "attempt to set slot on NULL object"
 msgstr "prøvde å setja slot på eit NULL-objekt"
 
-#: src/main/attrib.cpp:1902
+#: src/main/attrib.cpp:1899
 #, fuzzy
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "formelle klassar kan ikkje brukast utan «methods»-pakken"
 
-#: src/main/attrib.cpp:1912
+#: src/main/attrib.cpp:1909
 #, fuzzy, c-format
 msgid "no applicable method for `@` applied to an object of class \"%s\""
 msgstr "ingen samsvarande metode for «%s» brukt på eit objekt av klassen «%s»"
@@ -3449,112 +3450,112 @@ msgid ""
 "'%s'->'%s'\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:181 src/main/dounzip.cpp:203
+#: src/main/dounzip.cpp:194 src/main/dounzip.cpp:216
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
 
-#: src/main/dounzip.cpp:218
+#: src/main/dounzip.cpp:231
 #, c-format
 msgid " not overwriting file '%s"
 msgstr " skriv ikkje over fila «%s»"
 
-#: src/main/dounzip.cpp:306
+#: src/main/dounzip.cpp:319
 #, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "zip-fila «%s» kan ikkje opnast"
 
-#: src/main/dounzip.cpp:312
+#: src/main/dounzip.cpp:325
 #, c-format
 msgid "error %d with zipfile in unzGetGlobalInfo"
 msgstr ""
 
-#: src/main/dounzip.cpp:329
+#: src/main/dounzip.cpp:344
 #, c-format
 msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:347
+#: src/main/dounzip.cpp:362
 #, c-format
 msgid "error %d with zipfile in unzGoToNextFile\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:368
+#: src/main/dounzip.cpp:383
 msgid "invalid zip name argument"
 msgstr "ugyldig zip-namneargument"
 
-#: src/main/dounzip.cpp:371 src/main/dounzip.cpp:455
+#: src/main/dounzip.cpp:386 src/main/dounzip.cpp:470
 msgid "zip path is too long"
 msgstr "zip-adressa er for lang"
 
-#: src/main/dounzip.cpp:388
+#: src/main/dounzip.cpp:403
 msgid "'exdir' is too long"
 msgstr "«exdir» er for lang"
 
-#: src/main/dounzip.cpp:391
+#: src/main/dounzip.cpp:406
 msgid "'exdir' does not exist"
 msgstr "«exdir» finst ikkje"
 
-#: src/main/dounzip.cpp:408
+#: src/main/dounzip.cpp:423
 msgid "requested file not found in the zip file"
 msgstr "fann ikkje den oppgjevne fila i zip-fila"
 
-#: src/main/dounzip.cpp:411
+#: src/main/dounzip.cpp:426
 msgid "zip file is corrupt"
 msgstr "zip-fila er øydelagd"
 
-#: src/main/dounzip.cpp:414
+#: src/main/dounzip.cpp:429
 msgid "CRC error in zip file"
 msgstr "CRC-feil i zip-fil"
 
-#: src/main/dounzip.cpp:418
+#: src/main/dounzip.cpp:433
 #, fuzzy
 msgid "internal error in 'unz' code"
 msgstr "intern feil i «do_sys»"
 
-#: src/main/dounzip.cpp:421
+#: src/main/dounzip.cpp:436
 msgid "write error in extracting from zip file"
 msgstr "skrivefeil ved utpakking av zip-fil"
 
-#: src/main/dounzip.cpp:424
+#: src/main/dounzip.cpp:439
 #, c-format
 msgid "error %d in extracting from zip file"
 msgstr "feil %d ved utpakking av zip-fil"
 
-#: src/main/dounzip.cpp:450
+#: src/main/dounzip.cpp:465
 msgid "unz connections can only be opened for reading"
 msgstr "unz-samband kan berre opnast for lesing"
 
-#: src/main/dounzip.cpp:461
+#: src/main/dounzip.cpp:476
 #, fuzzy
 msgid "invalid description of 'unz' connection"
 msgstr "ugyldig skildring av unz-samband"
 
-#: src/main/dounzip.cpp:467
+#: src/main/dounzip.cpp:482
 #, c-format
 msgid "cannot open zip file '%s'"
 msgstr "kan ikkje opna zip-fila «%s»"
 
-#: src/main/dounzip.cpp:471
+#: src/main/dounzip.cpp:486
 #, c-format
 msgid "cannot locate file '%s' in zip file '%s'"
 msgstr "finn ikkje fila «%s» i zip-fila «%s»"
 
-#: src/main/dounzip.cpp:516
+#: src/main/dounzip.cpp:531
 msgid "printing not enabled for this connection"
 msgstr "kan ikkje visa tekst med dette sambandet"
 
-#: src/main/dounzip.cpp:522
+#: src/main/dounzip.cpp:537
 msgid "write not enabled for this connection"
 msgstr "kan ikkje skriva med dette sambandet"
 
-#: src/main/dounzip.cpp:539 src/main/dounzip.cpp:543 src/main/dounzip.cpp:550
-#: src/main/dounzip.cpp:568
+#: src/main/dounzip.cpp:554 src/main/dounzip.cpp:558 src/main/dounzip.cpp:565
+#: src/main/dounzip.cpp:583
 #, fuzzy
 msgid "allocation of 'unz' connection failed"
 msgstr "feil ved reservering av unz-samband"
 
-#: src/main/dounzip.cpp:2128
+#: src/main/dounzip.cpp:2144
 #, fuzzy
 msgid "possible truncation of >= 4GB file"
 msgstr "feil ved filtrunkering"

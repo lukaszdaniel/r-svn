@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -869,37 +869,37 @@ msgstr "S'ha intentat alliberar un camí de retall inexistent"
 msgid "Attempt to release non-existent mask"
 msgstr "S'ha intentat alliberar una màscara inexistent"
 
-#: devQuartz.cpp:3067
+#: devQuartz.cpp:3174
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "argument 'fonts' no vàlid a %s"
 
-#: devQuartz.cpp:3097
+#: devQuartz.cpp:3217
 #, fuzzy
 msgid "failed to load font"
 msgstr "No s'ha pogut carregar el tipus de lletra"
 
-#: devQuartz.cpp:3190 devQuartz.cpp:3195
+#: devQuartz.cpp:3310 devQuartz.cpp:3315
 #, fuzzy
 msgid "invalid 'file' argument"
 msgstr "argument «file» no vàlid"
 
-#: devQuartz.cpp:3222
+#: devQuartz.cpp:3342
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "la mida del dispositiu de quartz() no és vàlida"
 
-#: devQuartz.cpp:3250
+#: devQuartz.cpp:3370
 #, fuzzy
 msgid "unable to create device description"
 msgstr "no s'ha pogut crear la descripció del dispositiu"
 
-#: devQuartz.cpp:3299
+#: devQuartz.cpp:3419
 #, fuzzy
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "no s'ha pogut crear la destinació del dispositiu quartz(), és possible que no s'admeti el tipus indicat"
 
-#: devQuartz.cpp:3432
+#: devQuartz.cpp:3552
 #, fuzzy
 msgid "Quartz device is not available on this platform"
 msgstr "El dispositiu Quartz no està disponible en aquesta plataforma"

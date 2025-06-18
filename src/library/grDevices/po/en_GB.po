@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2025-04-01 16:54+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: English\n"
@@ -778,33 +778,33 @@ msgstr "Attempt to release non-existent clipping path"
 msgid "Attempt to release non-existent mask"
 msgstr "Attempt to release non-existent mask"
 
-#: devQuartz.cpp:3067
+#: devQuartz.cpp:3174
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "invalid 'fonts' parameter in %s"
 
-#: devQuartz.cpp:3097
+#: devQuartz.cpp:3217
 #, fuzzy
 msgid "failed to load font"
 msgstr "Failed to load font"
 
-#: devQuartz.cpp:3190 devQuartz.cpp:3195
+#: devQuartz.cpp:3310 devQuartz.cpp:3315
 msgid "invalid 'file' argument"
 msgstr "invalid 'file' argument"
 
-#: devQuartz.cpp:3222
+#: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
 msgstr "invalid quartz() device size"
 
-#: devQuartz.cpp:3250
+#: devQuartz.cpp:3370
 msgid "unable to create device description"
 msgstr "unable to create device description"
 
-#: devQuartz.cpp:3299
+#: devQuartz.cpp:3419
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "unable to create quartz() device target, given type may not be supported"
 
-#: devQuartz.cpp:3432
+#: devQuartz.cpp:3552
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz device is not available on this platform"
 

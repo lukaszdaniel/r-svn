@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2020-12-09 13:16+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -781,33 +781,33 @@ msgstr ""
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3067
+#: devQuartz.cpp:3174
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "neteisingas 'fonts' parametras, esantis %s"
 
-#: devQuartz.cpp:3097
+#: devQuartz.cpp:3217
 #, fuzzy
 msgid "failed to load font"
 msgstr "nepavyko paskirti šriftų sąrašo"
 
-#: devQuartz.cpp:3190 devQuartz.cpp:3195
+#: devQuartz.cpp:3310 devQuartz.cpp:3315
 msgid "invalid 'file' argument"
 msgstr "neteisingas 'file' argumentas"
 
-#: devQuartz.cpp:3222
+#: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
 msgstr "netinkamas quartz() įrenginio dydis"
 
-#: devQuartz.cpp:3250
+#: devQuartz.cpp:3370
 msgid "unable to create device description"
 msgstr "nepavyko sukurti įrenginio aprašo"
 
-#: devQuartz.cpp:3299
+#: devQuartz.cpp:3419
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "nepavyko sukurti quartz() paskirties įrenginio, nurodytas tipas gali būti nepalaikomas"
 
-#: devQuartz.cpp:3432
+#: devQuartz.cpp:3552
 msgid "Quartz device is not available on this platform"
 msgstr "Šioje platformoje nėra Quartz įrenginio"
 

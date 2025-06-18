@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2023-04-22 22:07+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -816,36 +816,36 @@ msgstr ""
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3067
+#: devQuartz.cpp:3174
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "ugyldigt 'fonts'-parameter i %s"
 
-#: devQuartz.cpp:3097
+#: devQuartz.cpp:3217
 #, fuzzy
 msgid "failed to load font"
 msgstr "kunne ikke allokere skriftliste"
 
-#: devQuartz.cpp:3190 devQuartz.cpp:3195
+#: devQuartz.cpp:3310 devQuartz.cpp:3315
 msgid "invalid 'file' argument"
 msgstr "ugyldigt 'fil'-argument"
 
-#: devQuartz.cpp:3222
+#: devQuartz.cpp:3342
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "ugyldig Quartz-enhedsstørrelse"
 
-#: devQuartz.cpp:3250
+#: devQuartz.cpp:3370
 #, fuzzy
 msgid "unable to create device description"
 msgstr "Kan ikke oprette enhedsbeskrivelse."
 
-#: devQuartz.cpp:3299
+#: devQuartz.cpp:3419
 #, fuzzy
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "Kan ikke oprette Quartz-enhedsmål, angivet type er måske ikke understøttet."
 
-#: devQuartz.cpp:3432
+#: devQuartz.cpp:3552
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz-enhed er ikke tilgængelig på denne platform"
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-18 21:13\n"
 "PO-Revision-Date: 2020-11-29 17:23+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -601,6 +601,11 @@ msgstr "'angles' turi būti lygus 'ncol(x)'"
 #: R/mosaicplot.R:0
 msgid "length of 'sort' does not conform to 'dim(x)'"
 msgstr "'sort' ilgis neatitinka 'dim(x)'"
+
+#. R/text.R: gettextf("length(labels) > max(length(x), length(y)). labels truncated to length %d.",     n, domain = "R-graphics")
+#: R/text.R:0
+msgid "length(labels) > max(length(x), length(y)). labels truncated to length %d."
+msgstr ""
 
 #. R/barplot.R: stop("log scale error: 'xlim' <= 0")
 #: R/barplot.R:0

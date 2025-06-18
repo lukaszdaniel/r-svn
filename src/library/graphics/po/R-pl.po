@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-18 21:13\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
 #: R/image.R:0
@@ -601,6 +601,11 @@ msgstr "długość 'angles' musi równać się 'ncol(x)'"
 #: R/mosaicplot.R:0
 msgid "length of 'sort' does not conform to 'dim(x)'"
 msgstr "długość 'sort' nie jest zgodna z 'dim(x)'"
+
+#. R/text.R: gettextf("length(labels) > max(length(x), length(y)). labels truncated to length %d.",     n, domain = "R-graphics")
+#: R/text.R:0
+msgid "length(labels) > max(length(x), length(y)). labels truncated to length %d."
+msgstr "length(labels) > max(length(x), length(y)). etykiety przycięte do długości %d."
 
 #. R/barplot.R: stop("log scale error: 'xlim' <= 0")
 #: R/barplot.R:0

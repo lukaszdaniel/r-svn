@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-16 19:05+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2025-04-01 16:44+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -178,7 +178,7 @@ msgstr "проблема при отображении '%ls'"
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
-#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:378 src/main/dounzip.cpp:385
+#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
 #: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087
 #: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
@@ -330,7 +330,7 @@ msgstr "Недостаточно памяти (rpipeOpen)"
 msgid "cannot open cmd '%s'"
 msgstr "не могу открыть URL '%s'"
 
-#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
+#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:542
 msgid "seek not enabled for this connection"
 msgstr "поиск для этого соединения не разрешен"
 
@@ -401,7 +401,7 @@ msgstr "<ОШИБКА: неудачная перекодировка из '%s'>\
 
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
 #: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:226
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:239
 #: src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
 #: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158
 #: src/main/serialize.cpp:3210 src/unix/system.cpp:432
@@ -1093,7 +1093,7 @@ msgstr "неподобные аргументы"
 msgid "'%s' argument is not a matrix"
 msgstr "аргумент не является матрицей"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1232
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1229
 #, c-format
 msgid "invalid first argument, must be %s"
 msgstr "неправильный первый аргумент, должен быть %s"
@@ -1139,8 +1139,8 @@ msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "вырожденная матрица 'backsolve'. Первый нуль в диагонали [%d]"
 
 #: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306
-#: src/main/attrib.cpp:324 src/main/attrib.cpp:459 src/main/attrib.cpp:506
-#: src/main/attrib.cpp:560 src/main/RObject.cpp:129
+#: src/main/attrib.cpp:324 src/main/attrib.cpp:456 src/main/attrib.cpp:503
+#: src/main/attrib.cpp:557 src/main/RObject.cpp:129
 msgid "attempt to set an attribute on NULL"
 msgstr "попытка присвоения атрибута на NULL"
 
@@ -1183,169 +1183,170 @@ msgid "names() applied to a non-vector"
 msgstr "names() применен к не-вектору"
 
 #: src/main/attrib.cpp:449
-msgid "invalid time series parameters specified"
+#, fuzzy, c-format
+msgid "invalid time series parameters specified (%d)"
 msgstr "указаны неправильные параметры временного ряда"
 
-#: src/main/attrib.cpp:463
+#: src/main/attrib.cpp:460
 msgid "'tsp' attribute must be numeric"
 msgstr "атрибут 'tsp' должен быть числовым"
 
-#: src/main/attrib.cpp:469
+#: src/main/attrib.cpp:466
 msgid "'tsp' attribute must be numeric of length three"
 msgstr "атрибут 'tsp' должен быть числовым, длиной в 3"
 
-#: src/main/attrib.cpp:486
+#: src/main/attrib.cpp:484
 msgid "cannot assign 'tsp' to zero-length vector"
 msgstr "не могу присвоить 'tsp' нулевому вектору"
 
-#: src/main/attrib.cpp:517
+#: src/main/attrib.cpp:514
 msgid "attempt to set invalid 'comment' attribute"
 msgstr "попытка установить неправильный атрибут 'comment'"
 
-#: src/main/attrib.cpp:569
+#: src/main/attrib.cpp:566
 msgid "adding class \"factor\" to an invalid object"
 msgstr "добавление класса \"factor\" к неправильному объекту"
 
-#: src/main/attrib.cpp:600
+#: src/main/attrib.cpp:597
 msgid "attempt to set invalid 'class' attribute"
 msgstr "попытка установить неправильный атрибут 'class'"
 
-#: src/main/attrib.cpp:880
+#: src/main/attrib.cpp:877
 msgid "type must be LANGSXP at this point"
 msgstr ""
 
-#: src/main/attrib.cpp:911
+#: src/main/attrib.cpp:908
 #, fuzzy
 msgid "invalid class argument to internal .class_cache"
 msgstr "неправильный счет аргументов в call_R"
 
-#: src/main/attrib.cpp:943
+#: src/main/attrib.cpp:940
 #, c-format
 msgid "invalid to use names()<- on an S4 object of class '%s'"
 msgstr "нельзя использовать names()<- для S4 объекта класса '%s'"
 
-#: src/main/attrib.cpp:984
+#: src/main/attrib.cpp:981
 msgid "incompatible 'names' argument"
 msgstr "несовместимый аргумент 'names'"
 
-#: src/main/attrib.cpp:1035
+#: src/main/attrib.cpp:1032
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "неправильный (%s) тип установки атрибута 'names'"
 
-#: src/main/attrib.cpp:1108
+#: src/main/attrib.cpp:1105
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' применены для не-многомерной матрицы"
 
-#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
+#: src/main/attrib.cpp:1110 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' должен быть списком"
 
-#: src/main/attrib.cpp:1117 src/main/attrib.cpp:1142
+#: src/main/attrib.cpp:1114 src/main/attrib.cpp:1139
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "длина 'dimnames' [%d] должна соответствовать 'dims' [%d]"
 
-#: src/main/attrib.cpp:1148
+#: src/main/attrib.cpp:1145
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "неправильный (%s) тип 'dimnames' (должен быть вектор)"
 
-#: src/main/attrib.cpp:1151
+#: src/main/attrib.cpp:1148
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "длина 'dimnames' [%d] не равна протяженности многомерной матрицы"
 
-#: src/main/attrib.cpp:1234
+#: src/main/attrib.cpp:1231
 #, c-format
 msgid "invalid second argument, must be %s"
 msgstr "неправильный второй аргумент, должен быть %s"
 
-#: src/main/attrib.cpp:1239
+#: src/main/attrib.cpp:1236
 msgid "length-0 dimension vector is invalid"
 msgstr "вектор размерности нулевой длины недопустим"
 
-#: src/main/attrib.cpp:1244
+#: src/main/attrib.cpp:1241
 msgid "the dims contain missing values"
 msgstr "измерения содержат пропущенные значения"
 
-#: src/main/attrib.cpp:1246
+#: src/main/attrib.cpp:1243
 msgid "the dims contain negative values"
 msgstr "змерения содержат отрицательные значения"
 
-#: src/main/attrib.cpp:1250
+#: src/main/attrib.cpp:1247
 #, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "измерения [произведение %lld] не соответствуют длине объекта [%lld]"
 
-#: src/main/attrib.cpp:1330
+#: src/main/attrib.cpp:1327
 #, c-format
 msgid "factor level [%lld] is duplicated"
 msgstr "уровень фактора [%lld] дублирован"
 
-#: src/main/attrib.cpp:1358
+#: src/main/attrib.cpp:1355
 msgid "attributes must be a list or NULL"
 msgstr "атрибуты должны быть списком или NULL"
 
-#: src/main/attrib.cpp:1363
+#: src/main/attrib.cpp:1360
 msgid "attributes must be named"
 msgstr "атрибуты должны быть именованы"
 
-#: src/main/attrib.cpp:1367
+#: src/main/attrib.cpp:1364
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "все атрибуты должны иметь имена [%d не имеет]"
 
-#: src/main/attrib.cpp:1465 src/main/errors.cpp:1190
+#: src/main/attrib.cpp:1462 src/main/errors.cpp:1190
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "нужен текстовый аргумент"
 
-#: src/main/attrib.cpp:1472
+#: src/main/attrib.cpp:1469
 msgid "'which' must be of mode character"
 msgstr "'which' должен быть текстом"
 
-#: src/main/attrib.cpp:1474
+#: src/main/attrib.cpp:1471
 msgid "exactly one attribute 'which' must be given"
 msgstr "должен быть задан в точности один атрибут 'which'"
 
-#: src/main/attrib.cpp:1610
+#: src/main/attrib.cpp:1607
 msgid "invalid slot name length"
 msgstr "неправильная длина имени слота"
 
-#: src/main/attrib.cpp:1614
+#: src/main/attrib.cpp:1611
 #, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "неправильный тип '%s' для имени слота"
 
-#: src/main/attrib.cpp:1658
+#: src/main/attrib.cpp:1655
 msgid "'name' must be non-null character string"
 msgstr "'name' должно быть непустой строкой"
 
-#: src/main/attrib.cpp:1784 src/main/attrib.cpp:1855 src/main/attrib.cpp:1907
+#: src/main/attrib.cpp:1781 src/main/attrib.cpp:1852 src/main/attrib.cpp:1904
 msgid "invalid type or length for slot name"
 msgstr "неправильный тип или длина для имени слота"
 
-#: src/main/attrib.cpp:1818
+#: src/main/attrib.cpp:1815
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "не могу получить слот (\"%s\") из объекта типа \"%s\""
 
-#: src/main/attrib.cpp:1829
+#: src/main/attrib.cpp:1826
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "нет слота имени \"%s\" для этого объекта класса \"%s\""
 
-#: src/main/attrib.cpp:1846
+#: src/main/attrib.cpp:1843
 msgid "attempt to set slot on NULL object"
 msgstr "попытка установить слот на NULL объект"
 
-#: src/main/attrib.cpp:1902
+#: src/main/attrib.cpp:1899
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "формальные классы не могут использоваться без пакета 'methods'"
 
-#: src/main/attrib.cpp:1912
+#: src/main/attrib.cpp:1909
 #, c-format
 msgid "no applicable method for `@` applied to an object of class \"%s\""
 msgstr "нет подходящего метода для `@`, применяемого к объекту класса \"%s\""
@@ -3409,110 +3410,110 @@ msgid ""
 "'%s'->'%s'\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:181 src/main/dounzip.cpp:203
+#: src/main/dounzip.cpp:194 src/main/dounzip.cpp:216
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
 
-#: src/main/dounzip.cpp:218
+#: src/main/dounzip.cpp:231
 #, c-format
 msgid " not overwriting file '%s"
 msgstr " перезапись файла '%s' не выполнена"
 
-#: src/main/dounzip.cpp:306
+#: src/main/dounzip.cpp:319
 #, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "zip файл '%s' не может быть открыт"
 
-#: src/main/dounzip.cpp:312
+#: src/main/dounzip.cpp:325
 #, c-format
 msgid "error %d with zipfile in unzGetGlobalInfo"
 msgstr ""
 
-#: src/main/dounzip.cpp:329
+#: src/main/dounzip.cpp:344
 #, c-format
 msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:347
+#: src/main/dounzip.cpp:362
 #, c-format
 msgid "error %d with zipfile in unzGoToNextFile\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:368
+#: src/main/dounzip.cpp:383
 msgid "invalid zip name argument"
 msgstr "неправильный аргумент имени zip"
 
-#: src/main/dounzip.cpp:371 src/main/dounzip.cpp:455
+#: src/main/dounzip.cpp:386 src/main/dounzip.cpp:470
 msgid "zip path is too long"
 msgstr "путь zip слишком длинный"
 
-#: src/main/dounzip.cpp:388
+#: src/main/dounzip.cpp:403
 msgid "'exdir' is too long"
 msgstr "'exdir' слишком длинное"
 
-#: src/main/dounzip.cpp:391
+#: src/main/dounzip.cpp:406
 msgid "'exdir' does not exist"
 msgstr "'exdir' не существует"
 
-#: src/main/dounzip.cpp:408
+#: src/main/dounzip.cpp:423
 msgid "requested file not found in the zip file"
 msgstr "запрошенный файл не найден в zip-файле"
 
-#: src/main/dounzip.cpp:411
+#: src/main/dounzip.cpp:426
 msgid "zip file is corrupt"
 msgstr "zip-файл поврежден"
 
-#: src/main/dounzip.cpp:414
+#: src/main/dounzip.cpp:429
 msgid "CRC error in zip file"
 msgstr "ошибка CRC в zip-файле"
 
-#: src/main/dounzip.cpp:418
+#: src/main/dounzip.cpp:433
 #, fuzzy
 msgid "internal error in 'unz' code"
 msgstr "внутренняя ошибка в 'do_sys'"
 
-#: src/main/dounzip.cpp:421
+#: src/main/dounzip.cpp:436
 msgid "write error in extracting from zip file"
 msgstr "ошибка записи при распаковке zip-файла"
 
-#: src/main/dounzip.cpp:424
+#: src/main/dounzip.cpp:439
 #, c-format
 msgid "error %d in extracting from zip file"
 msgstr "ошибка %d при распаковке zip-файла"
 
-#: src/main/dounzip.cpp:450
+#: src/main/dounzip.cpp:465
 msgid "unz connections can only be opened for reading"
 msgstr "unz-соединение может быть открыто только для чтения"
 
-#: src/main/dounzip.cpp:461
+#: src/main/dounzip.cpp:476
 msgid "invalid description of 'unz' connection"
 msgstr "неправильное описание 'unz'-соединения"
 
-#: src/main/dounzip.cpp:467
+#: src/main/dounzip.cpp:482
 #, c-format
 msgid "cannot open zip file '%s'"
 msgstr "не могу открыть zip-файл '%s'"
 
-#: src/main/dounzip.cpp:471
+#: src/main/dounzip.cpp:486
 #, c-format
 msgid "cannot locate file '%s' in zip file '%s'"
 msgstr "не могу найти файл '%s' в zip-файле '%s'"
 
-#: src/main/dounzip.cpp:516
+#: src/main/dounzip.cpp:531
 msgid "printing not enabled for this connection"
 msgstr "печать для этого соединения невозможна"
 
-#: src/main/dounzip.cpp:522
+#: src/main/dounzip.cpp:537
 msgid "write not enabled for this connection"
 msgstr "запись для этого соединения невозможна"
 
-#: src/main/dounzip.cpp:539 src/main/dounzip.cpp:543 src/main/dounzip.cpp:550
-#: src/main/dounzip.cpp:568
+#: src/main/dounzip.cpp:554 src/main/dounzip.cpp:558 src/main/dounzip.cpp:565
+#: src/main/dounzip.cpp:583
 msgid "allocation of 'unz' connection failed"
 msgstr "размещение 'unz'-соединения не удалось"
 
-#: src/main/dounzip.cpp:2128
+#: src/main/dounzip.cpp:2144
 #, fuzzy
 msgid "possible truncation of >= 4GB file"
 msgstr "укорочение файла не удалось"

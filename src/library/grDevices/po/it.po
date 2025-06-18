@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2022-10-14 10:23+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -791,33 +791,33 @@ msgstr "Tentato rilascio di un tracciato di ritaglio inesistente"
 msgid "Attempt to release non-existent mask"
 msgstr "Tentato rilascio di una maschera inesistente"
 
-#: devQuartz.cpp:3067
+#: devQuartz.cpp:3174
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "parametro 'fonts' non valido in %s"
 
-#: devQuartz.cpp:3097
+#: devQuartz.cpp:3217
 #, fuzzy
 msgid "failed to load font"
 msgstr "allocazione lista font fallita"
 
-#: devQuartz.cpp:3190 devQuartz.cpp:3195
+#: devQuartz.cpp:3310 devQuartz.cpp:3315
 msgid "invalid 'file' argument"
 msgstr "argomento 'file' non valido"
 
-#: devQuartz.cpp:3222
+#: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
 msgstr "dimensione dispositivo quartz() non valida"
 
-#: devQuartz.cpp:3250
+#: devQuartz.cpp:3370
 msgid "unable to create device description"
 msgstr "non è possibile creare una descrizione per il dispositivo"
 
-#: devQuartz.cpp:3299
+#: devQuartz.cpp:3419
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "non è possibile creare il dispositivo quartz(), quest'ultimo potrebber non essere supportato"
 
-#: devQuartz.cpp:3432
+#: devQuartz.cpp:3552
 msgid "Quartz device is not available on this platform"
 msgstr "Il dispositivo Quartz non è disponibile su questa piattaforma"
 

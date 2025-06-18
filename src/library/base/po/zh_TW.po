@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-16 19:05+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -174,7 +174,7 @@ msgstr "顯示 '%ls' 時發生問題"
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
-#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:378 src/main/dounzip.cpp:385
+#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
 #: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087
 #: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
@@ -326,7 +326,7 @@ msgstr "沒有足夠的記憶體 (rpipeOpen)"
 msgid "cannot open cmd '%s'"
 msgstr "無法開啟網址 '%s'"
 
-#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
+#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:542
 msgid "seek not enabled for this connection"
 msgstr "這個連接上不能使用搜索"
 
@@ -397,7 +397,7 @@ msgstr "<錯誤：從編碼 '%s' 重新編碼時失敗>\n"
 
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
 #: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:226
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:239
 #: src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
 #: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158
 #: src/main/serialize.cpp:3210 src/unix/system.cpp:432
@@ -1087,7 +1087,7 @@ msgstr "非調和引數"
 msgid "'%s' argument is not a matrix"
 msgstr "引數不是矩陣"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1232
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1229
 #, fuzzy, c-format
 msgid "invalid first argument, must be %s"
 msgstr "第一個引數無效, 必須是陣列"
@@ -1133,8 +1133,8 @@ msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "'backsolve' 中的奇異矩陣。第一個零值位於對角 [%d]"
 
 #: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306
-#: src/main/attrib.cpp:324 src/main/attrib.cpp:459 src/main/attrib.cpp:506
-#: src/main/attrib.cpp:560 src/main/RObject.cpp:129
+#: src/main/attrib.cpp:324 src/main/attrib.cpp:456 src/main/attrib.cpp:503
+#: src/main/attrib.cpp:557 src/main/RObject.cpp:129
 msgid "attempt to set an attribute on NULL"
 msgstr "試圖在 NULL 上設定屬性"
 
@@ -1177,170 +1177,171 @@ msgid "names() applied to a non-vector"
 msgstr "names() 被用於非向量"
 
 #: src/main/attrib.cpp:449
-msgid "invalid time series parameters specified"
+#, fuzzy, c-format
+msgid "invalid time series parameters specified (%d)"
 msgstr "時間序列參數設定無效"
 
-#: src/main/attrib.cpp:463
+#: src/main/attrib.cpp:460
 msgid "'tsp' attribute must be numeric"
 msgstr "'tsp' 屬性必須是數值"
 
-#: src/main/attrib.cpp:469
+#: src/main/attrib.cpp:466
 msgid "'tsp' attribute must be numeric of length three"
 msgstr "'tsp' 屬性必須是長度為三的數值"
 
-#: src/main/attrib.cpp:486
+#: src/main/attrib.cpp:484
 msgid "cannot assign 'tsp' to zero-length vector"
 msgstr "零長度向量不能指派為 'tsp'"
 
-#: src/main/attrib.cpp:517
+#: src/main/attrib.cpp:514
 msgid "attempt to set invalid 'comment' attribute"
 msgstr "試圖設定無效的 'comment' 屬性"
 
-#: src/main/attrib.cpp:569
+#: src/main/attrib.cpp:566
 msgid "adding class \"factor\" to an invalid object"
 msgstr "加入 \"factor\" 類別到無效的物件"
 
-#: src/main/attrib.cpp:600
+#: src/main/attrib.cpp:597
 msgid "attempt to set invalid 'class' attribute"
 msgstr "試圖設定無效的 'class' 屬性"
 
-#: src/main/attrib.cpp:880
+#: src/main/attrib.cpp:877
 msgid "type must be LANGSXP at this point"
 msgstr ""
 
-#: src/main/attrib.cpp:911
+#: src/main/attrib.cpp:908
 #, fuzzy
 msgid "invalid class argument to internal .class_cache"
 msgstr "內部 'paste' 的引數不是字串"
 
-#: src/main/attrib.cpp:943
+#: src/main/attrib.cpp:940
 #, c-format
 msgid "invalid to use names()<- on an S4 object of class '%s'"
 msgstr "在類別 '%s' 的 S4 物件中使用 names()<- 是無效的"
 
-#: src/main/attrib.cpp:984
+#: src/main/attrib.cpp:981
 msgid "incompatible 'names' argument"
 msgstr "不相容的 'names' 引數"
 
-#: src/main/attrib.cpp:1035
+#: src/main/attrib.cpp:1032
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "以無效的類型 (%s) 設定 'names' 屬性"
 
-#: src/main/attrib.cpp:1108
+#: src/main/attrib.cpp:1105
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' 被應用於非陣列"
 
-#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
+#: src/main/attrib.cpp:1110 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' 必須是串列"
 
-#: src/main/attrib.cpp:1117 src/main/attrib.cpp:1142
+#: src/main/attrib.cpp:1114 src/main/attrib.cpp:1139
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "'dimnames' 的長度 [%d] 必須同 'dims' 的長度 [%d] 相等"
 
-#: src/main/attrib.cpp:1148
+#: src/main/attrib.cpp:1145
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "設 'dimnames' 時的類型 (%s) 無效 (必須是向量)"
 
-#: src/main/attrib.cpp:1151
+#: src/main/attrib.cpp:1148
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "'dimnames' 的長度 [%d] 必須與陣列範圍相等"
 
-#: src/main/attrib.cpp:1234
+#: src/main/attrib.cpp:1231
 #, fuzzy, c-format
 msgid "invalid second argument, must be %s"
 msgstr "第二個引數無效"
 
-#: src/main/attrib.cpp:1239
+#: src/main/attrib.cpp:1236
 msgid "length-0 dimension vector is invalid"
 msgstr "長度為零的維度向量無效"
 
-#: src/main/attrib.cpp:1244
+#: src/main/attrib.cpp:1241
 msgid "the dims contain missing values"
 msgstr "維度包含缺少值"
 
-#: src/main/attrib.cpp:1246
+#: src/main/attrib.cpp:1243
 msgid "the dims contain negative values"
 msgstr "維度包含負值"
 
-#: src/main/attrib.cpp:1250
+#: src/main/attrib.cpp:1247
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "維度 [product %lld] 不符合物件 [%lld] 的長度"
 
-#: src/main/attrib.cpp:1330
+#: src/main/attrib.cpp:1327
 #, fuzzy, c-format
 msgid "factor level [%lld] is duplicated"
 msgstr "因子層次 [%lld] 已重複"
 
-#: src/main/attrib.cpp:1358
+#: src/main/attrib.cpp:1355
 msgid "attributes must be a list or NULL"
 msgstr "屬性必須是串列或空值"
 
-#: src/main/attrib.cpp:1363
+#: src/main/attrib.cpp:1360
 msgid "attributes must be named"
 msgstr "屬性必須命名"
 
-#: src/main/attrib.cpp:1367
+#: src/main/attrib.cpp:1364
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "所有的屬性都必須有名稱 [%d 卻沒有]"
 
-#: src/main/attrib.cpp:1465 src/main/errors.cpp:1190
+#: src/main/attrib.cpp:1462 src/main/errors.cpp:1190
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "需要字串引數"
 
-#: src/main/attrib.cpp:1472
+#: src/main/attrib.cpp:1469
 msgid "'which' must be of mode character"
 msgstr "'which' 的模式必須是字元"
 
-#: src/main/attrib.cpp:1474
+#: src/main/attrib.cpp:1471
 msgid "exactly one attribute 'which' must be given"
 msgstr "必須給定 'which' 剛好一個屬性"
 
-#: src/main/attrib.cpp:1610
+#: src/main/attrib.cpp:1607
 #, fuzzy
 msgid "invalid slot name length"
 msgstr "長度無效"
 
-#: src/main/attrib.cpp:1614
+#: src/main/attrib.cpp:1611
 #, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "類型 '%s' 做為插槽名稱無效"
 
-#: src/main/attrib.cpp:1658
+#: src/main/attrib.cpp:1655
 msgid "'name' must be non-null character string"
 msgstr "'name' 必須是非空字串"
 
-#: src/main/attrib.cpp:1784 src/main/attrib.cpp:1855 src/main/attrib.cpp:1907
+#: src/main/attrib.cpp:1781 src/main/attrib.cpp:1852 src/main/attrib.cpp:1904
 msgid "invalid type or length for slot name"
 msgstr "名稱插槽的類型或長度無效"
 
-#: src/main/attrib.cpp:1818
+#: src/main/attrib.cpp:1815
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "類型 \"%2$s\" 的物件中沒有 \"%1$s\" 這樣一個插槽"
 
-#: src/main/attrib.cpp:1829
+#: src/main/attrib.cpp:1826
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "\"%1$s\" 插槽名不存在於 \"%2$s\" 類型物件中"
 
-#: src/main/attrib.cpp:1846
+#: src/main/attrib.cpp:1843
 msgid "attempt to set slot on NULL object"
 msgstr "試圖設在空值物件上定插槽"
 
-#: src/main/attrib.cpp:1902
+#: src/main/attrib.cpp:1899
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "一定要有 'methods' 套件才能使用形式類別"
 
-#: src/main/attrib.cpp:1912
+#: src/main/attrib.cpp:1909
 #, fuzzy, c-format
 msgid "no applicable method for `@` applied to an object of class \"%s\""
 msgstr "沒有適用的方法可將 '%s' 套用到 \"%s\" 類別的物件"
@@ -3407,110 +3408,110 @@ msgid ""
 "'%s'->'%s'\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:181 src/main/dounzip.cpp:203
+#: src/main/dounzip.cpp:194 src/main/dounzip.cpp:216
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
 
-#: src/main/dounzip.cpp:218
+#: src/main/dounzip.cpp:231
 #, c-format
 msgid " not overwriting file '%s"
 msgstr " 無法覆寫檔案 '%s"
 
-#: src/main/dounzip.cpp:306
+#: src/main/dounzip.cpp:319
 #, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "zip 檔案 '%s' 無法開啟"
 
-#: src/main/dounzip.cpp:312
+#: src/main/dounzip.cpp:325
 #, c-format
 msgid "error %d with zipfile in unzGetGlobalInfo"
 msgstr ""
 
-#: src/main/dounzip.cpp:329
+#: src/main/dounzip.cpp:344
 #, c-format
 msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:347
+#: src/main/dounzip.cpp:362
 #, c-format
 msgid "error %d with zipfile in unzGoToNextFile\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:368
+#: src/main/dounzip.cpp:383
 msgid "invalid zip name argument"
 msgstr "zip 名稱引數無效"
 
-#: src/main/dounzip.cpp:371 src/main/dounzip.cpp:455
+#: src/main/dounzip.cpp:386 src/main/dounzip.cpp:470
 msgid "zip path is too long"
 msgstr "zip 路徑太長"
 
-#: src/main/dounzip.cpp:388
+#: src/main/dounzip.cpp:403
 msgid "'exdir' is too long"
 msgstr "'exdir' 太長"
 
-#: src/main/dounzip.cpp:391
+#: src/main/dounzip.cpp:406
 msgid "'exdir' does not exist"
 msgstr "'exdir' 不存在"
 
-#: src/main/dounzip.cpp:408
+#: src/main/dounzip.cpp:423
 msgid "requested file not found in the zip file"
 msgstr "您所要求的檔案在 zip 檔案中沒有"
 
-#: src/main/dounzip.cpp:411
+#: src/main/dounzip.cpp:426
 msgid "zip file is corrupt"
 msgstr "zip 檔案有損壞"
 
-#: src/main/dounzip.cpp:414
+#: src/main/dounzip.cpp:429
 msgid "CRC error in zip file"
 msgstr "zip 檔案出現 CRC 錯誤"
 
-#: src/main/dounzip.cpp:418
+#: src/main/dounzip.cpp:433
 #, fuzzy
 msgid "internal error in 'unz' code"
 msgstr "'do_sys' 發生內部錯誤"
 
-#: src/main/dounzip.cpp:421
+#: src/main/dounzip.cpp:436
 msgid "write error in extracting from zip file"
 msgstr "抽取 zip 檔案時出了寫入錯誤"
 
-#: src/main/dounzip.cpp:424
+#: src/main/dounzip.cpp:439
 #, c-format
 msgid "error %d in extracting from zip file"
 msgstr "從 zip 檔案中解開 %d 時發生錯誤"
 
-#: src/main/dounzip.cpp:450
+#: src/main/dounzip.cpp:465
 msgid "unz connections can only be opened for reading"
 msgstr "unz 連接可讀不可寫"
 
-#: src/main/dounzip.cpp:461
+#: src/main/dounzip.cpp:476
 msgid "invalid description of 'unz' connection"
 msgstr "unz 連接的描述無效"
 
-#: src/main/dounzip.cpp:467
+#: src/main/dounzip.cpp:482
 #, c-format
 msgid "cannot open zip file '%s'"
 msgstr "無法開啟 zip 檔案 '%s'"
 
-#: src/main/dounzip.cpp:471
+#: src/main/dounzip.cpp:486
 #, c-format
 msgid "cannot locate file '%s' in zip file '%s'"
 msgstr "找不到在 zip 檔案 '%2$s' 中的 %1$s 檔案"
 
-#: src/main/dounzip.cpp:516
+#: src/main/dounzip.cpp:531
 msgid "printing not enabled for this connection"
 msgstr "此連接無法列印"
 
-#: src/main/dounzip.cpp:522
+#: src/main/dounzip.cpp:537
 msgid "write not enabled for this connection"
 msgstr "無法寫入這個連接"
 
-#: src/main/dounzip.cpp:539 src/main/dounzip.cpp:543 src/main/dounzip.cpp:550
-#: src/main/dounzip.cpp:568
+#: src/main/dounzip.cpp:554 src/main/dounzip.cpp:558 src/main/dounzip.cpp:565
+#: src/main/dounzip.cpp:583
 msgid "allocation of 'unz' connection failed"
 msgstr "配置 unz 連接失敗"
 
-#: src/main/dounzip.cpp:2128
+#: src/main/dounzip.cpp:2144
 #, fuzzy
 msgid "possible truncation of >= 4GB file"
 msgstr "未能截短檔案"

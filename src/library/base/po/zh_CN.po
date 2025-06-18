@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-16 19:05+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -173,7 +173,7 @@ msgstr "在显示'%ls'时出了问题"
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
-#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:378 src/main/dounzip.cpp:385
+#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
 #: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087
 #: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
@@ -325,7 +325,7 @@ msgstr "内存不足(rpipeOpen)"
 msgid "cannot open cmd '%s'"
 msgstr "无法打开URL'%s'"
 
-#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:527
+#: src/gnuwin32/run.cpp:1002 src/main/dounzip.cpp:542
 msgid "seek not enabled for this connection"
 msgstr "读取在这个链结无效"
 
@@ -396,7 +396,7 @@ msgstr "<错误: 无法将编码'%s'重新进行编码>\n"
 
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
 #: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:226
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:239
 #: src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
 #: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158
 #: src/main/serialize.cpp:3210 src/unix/system.cpp:432
@@ -1086,7 +1086,7 @@ msgstr "非整合参数"
 msgid "'%s' argument is not a matrix"
 msgstr "参数不是矩阵"
 
-#: src/main/array.cpp:1786 src/main/attrib.cpp:1232
+#: src/main/array.cpp:1786 src/main/attrib.cpp:1229
 #, c-format
 msgid "invalid first argument, must be %s"
 msgstr "第一个参数无效, 必需是 %s"
@@ -1132,8 +1132,8 @@ msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "'backsolve'里出现了奇异矩阵。对角线[%d]里第一个零"
 
 #: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306
-#: src/main/attrib.cpp:324 src/main/attrib.cpp:459 src/main/attrib.cpp:506
-#: src/main/attrib.cpp:560 src/main/RObject.cpp:129
+#: src/main/attrib.cpp:324 src/main/attrib.cpp:456 src/main/attrib.cpp:503
+#: src/main/attrib.cpp:557 src/main/RObject.cpp:129
 msgid "attempt to set an attribute on NULL"
 msgstr "NULL是不能有属性的"
 
@@ -1176,170 +1176,171 @@ msgid "names() applied to a non-vector"
 msgstr "names()不能用于非向量"
 
 #: src/main/attrib.cpp:449
-msgid "invalid time series parameters specified"
+#, fuzzy, c-format
+msgid "invalid time series parameters specified (%d)"
 msgstr "时间系列参数设定无效"
 
-#: src/main/attrib.cpp:463
+#: src/main/attrib.cpp:460
 msgid "'tsp' attribute must be numeric"
 msgstr "'tsp'属性必需为数值"
 
-#: src/main/attrib.cpp:469
+#: src/main/attrib.cpp:466
 msgid "'tsp' attribute must be numeric of length three"
 msgstr "'tsp'属性值的长度必需是三"
 
-#: src/main/attrib.cpp:486
+#: src/main/attrib.cpp:484
 msgid "cannot assign 'tsp' to zero-length vector"
 msgstr "零长度向量不能设成'tsp'"
 
-#: src/main/attrib.cpp:517
+#: src/main/attrib.cpp:514
 msgid "attempt to set invalid 'comment' attribute"
 msgstr "无法设定'comment'属性"
 
-#: src/main/attrib.cpp:569
+#: src/main/attrib.cpp:566
 msgid "adding class \"factor\" to an invalid object"
 msgstr "无法为不适当的对象加\"factor\" 类别"
 
-#: src/main/attrib.cpp:600
+#: src/main/attrib.cpp:597
 msgid "attempt to set invalid 'class' attribute"
 msgstr "无法设非适当'class'属性"
 
-#: src/main/attrib.cpp:880
+#: src/main/attrib.cpp:877
 msgid "type must be LANGSXP at this point"
 msgstr ""
 
-#: src/main/attrib.cpp:911
+#: src/main/attrib.cpp:908
 #, fuzzy
 msgid "invalid class argument to internal .class_cache"
 msgstr "call_R的参数数目不对"
 
-#: src/main/attrib.cpp:943
+#: src/main/attrib.cpp:940
 #, c-format
 msgid "invalid to use names()<- on an S4 object of class '%s'"
 msgstr "在类 '%s' 的 S4 对象上使用 names()<- 无效"
 
-#: src/main/attrib.cpp:984
+#: src/main/attrib.cpp:981
 msgid "incompatible 'names' argument"
 msgstr "非兼容'names'参数"
 
-#: src/main/attrib.cpp:1035
+#: src/main/attrib.cpp:1032
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "设'names'属性时类型(%s)出错"
 
-#: src/main/attrib.cpp:1108
+#: src/main/attrib.cpp:1105
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames'只能用于陈列"
 
-#: src/main/attrib.cpp:1113 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
+#: src/main/attrib.cpp:1110 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' 必须是列表"
 
-#: src/main/attrib.cpp:1117 src/main/attrib.cpp:1142
+#: src/main/attrib.cpp:1114 src/main/attrib.cpp:1139
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "'dimnames'的长度[%d]必需同'dims'的长度[%d]相等"
 
-#: src/main/attrib.cpp:1148
+#: src/main/attrib.cpp:1145
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "设'dimnames'时的类型(%s)无效(必需为向量)"
 
-#: src/main/attrib.cpp:1151
+#: src/main/attrib.cpp:1148
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "'dimnames'的长度[%d]必需与陈列范围相等"
 
-#: src/main/attrib.cpp:1234
+#: src/main/attrib.cpp:1231
 #, c-format
 msgid "invalid second argument, must be %s"
 msgstr "第二个参数无效，必须是 %s"
 
-#: src/main/attrib.cpp:1239
+#: src/main/attrib.cpp:1236
 msgid "length-0 dimension vector is invalid"
 msgstr "不能有零长度的大小向量"
 
-#: src/main/attrib.cpp:1244
+#: src/main/attrib.cpp:1241
 msgid "the dims contain missing values"
 msgstr "dims不能包含缺少值"
 
-#: src/main/attrib.cpp:1246
+#: src/main/attrib.cpp:1243
 msgid "the dims contain negative values"
 msgstr "dims不能包含负值级"
 
-#: src/main/attrib.cpp:1250
+#: src/main/attrib.cpp:1247
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "dims [product %lld]与对象长度[%lld]不匹配"
 
-#: src/main/attrib.cpp:1330
+#: src/main/attrib.cpp:1327
 #, fuzzy, c-format
 msgid "factor level [%lld] is duplicated"
 msgstr "因子水平 [%lld] 重复"
 
-#: src/main/attrib.cpp:1358
+#: src/main/attrib.cpp:1355
 msgid "attributes must be a list or NULL"
 msgstr "属性必需是列表或NULL值"
 
-#: src/main/attrib.cpp:1363
+#: src/main/attrib.cpp:1360
 msgid "attributes must be named"
 msgstr "属性必需取名"
 
-#: src/main/attrib.cpp:1367
+#: src/main/attrib.cpp:1364
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "所有的属性都必需有名称[%d没有]"
 
-#: src/main/attrib.cpp:1465 src/main/errors.cpp:1190
+#: src/main/attrib.cpp:1462 src/main/errors.cpp:1190
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "需要字符串参数"
 
-#: src/main/attrib.cpp:1472
+#: src/main/attrib.cpp:1469
 msgid "'which' must be of mode character"
 msgstr "'which'属性的状态必需是字符"
 
-#: src/main/attrib.cpp:1474
+#: src/main/attrib.cpp:1471
 msgid "exactly one attribute 'which' must be given"
 msgstr "只能给一个'which'属性"
 
-#: src/main/attrib.cpp:1610
+#: src/main/attrib.cpp:1607
 #, fuzzy
 msgid "invalid slot name length"
 msgstr "长度无效"
 
-#: src/main/attrib.cpp:1614
+#: src/main/attrib.cpp:1611
 #, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "类型名称的类别'%s'无效"
 
-#: src/main/attrib.cpp:1658
+#: src/main/attrib.cpp:1655
 msgid "'name' must be non-null character string"
 msgstr "'name'必需为非空字符"
 
-#: src/main/attrib.cpp:1784 src/main/attrib.cpp:1855 src/main/attrib.cpp:1907
+#: src/main/attrib.cpp:1781 src/main/attrib.cpp:1852 src/main/attrib.cpp:1904
 msgid "invalid type or length for slot name"
 msgstr "名称类型的类别或长度无效"
 
-#: src/main/attrib.cpp:1818
+#: src/main/attrib.cpp:1815
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "无法获取插槽 \"%s\" 从一个类型为\"%s\"的对象中"
 
-#: src/main/attrib.cpp:1829
+#: src/main/attrib.cpp:1826
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "没有名称为\"%s\"的插槽对于此对象类 \"%s\""
 
-#: src/main/attrib.cpp:1846
+#: src/main/attrib.cpp:1843
 msgid "attempt to set slot on NULL object"
 msgstr "不能为NULL目标对象设属性"
 
-#: src/main/attrib.cpp:1902
+#: src/main/attrib.cpp:1899
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "一定要有'methods'程序包才能用正式类别"
 
-#: src/main/attrib.cpp:1912
+#: src/main/attrib.cpp:1909
 #, c-format
 msgid "no applicable method for `@` applied to an object of class \"%s\""
 msgstr "没有适用于`@`的方法应用于类“%s”的对象"
@@ -3410,110 +3411,110 @@ msgid ""
 "'%s'->'%s'\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:181 src/main/dounzip.cpp:203
+#: src/main/dounzip.cpp:194 src/main/dounzip.cpp:216
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
 
-#: src/main/dounzip.cpp:218
+#: src/main/dounzip.cpp:231
 #, c-format
 msgid " not overwriting file '%s"
 msgstr " 无法覆盖'%s'文件"
 
-#: src/main/dounzip.cpp:306
+#: src/main/dounzip.cpp:319
 #, c-format
 msgid "zip file '%s' cannot be opened"
 msgstr "无法打开'%s'文件"
 
-#: src/main/dounzip.cpp:312
+#: src/main/dounzip.cpp:325
 #, c-format
 msgid "error %d with zipfile in unzGetGlobalInfo"
 msgstr ""
 
-#: src/main/dounzip.cpp:329
+#: src/main/dounzip.cpp:344
 #, c-format
 msgid "error %d with zipfile in unzGetCurrentFileInfo\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:347
+#: src/main/dounzip.cpp:362
 #, c-format
 msgid "error %d with zipfile in unzGoToNextFile\n"
 msgstr ""
 
-#: src/main/dounzip.cpp:368
+#: src/main/dounzip.cpp:383
 msgid "invalid zip name argument"
 msgstr "zip名称参数无效"
 
-#: src/main/dounzip.cpp:371 src/main/dounzip.cpp:455
+#: src/main/dounzip.cpp:386 src/main/dounzip.cpp:470
 msgid "zip path is too long"
 msgstr "zip路径太长"
 
-#: src/main/dounzip.cpp:388
+#: src/main/dounzip.cpp:403
 msgid "'exdir' is too long"
 msgstr "'exdir'太长"
 
-#: src/main/dounzip.cpp:391
+#: src/main/dounzip.cpp:406
 msgid "'exdir' does not exist"
 msgstr "'exdir'不存在"
 
-#: src/main/dounzip.cpp:408
+#: src/main/dounzip.cpp:423
 msgid "requested file not found in the zip file"
 msgstr "你所要求的文件在zip文件中没有"
 
-#: src/main/dounzip.cpp:411
+#: src/main/dounzip.cpp:426
 msgid "zip file is corrupt"
 msgstr "zip文件有损坏"
 
-#: src/main/dounzip.cpp:414
+#: src/main/dounzip.cpp:429
 msgid "CRC error in zip file"
 msgstr "zip文件出了CRC错误"
 
-#: src/main/dounzip.cpp:418
+#: src/main/dounzip.cpp:433
 #, fuzzy
 msgid "internal error in 'unz' code"
 msgstr "'do_sys'里发生了内部错误"
 
-#: src/main/dounzip.cpp:421
+#: src/main/dounzip.cpp:436
 msgid "write error in extracting from zip file"
 msgstr "提取zip文件时出现了写入错误"
 
-#: src/main/dounzip.cpp:424
+#: src/main/dounzip.cpp:439
 #, c-format
 msgid "error %d in extracting from zip file"
 msgstr "从zip文件中提取%d时出了错"
 
-#: src/main/dounzip.cpp:450
+#: src/main/dounzip.cpp:465
 msgid "unz connections can only be opened for reading"
 msgstr "unz链结只可读不可写"
 
-#: src/main/dounzip.cpp:461
+#: src/main/dounzip.cpp:476
 msgid "invalid description of 'unz' connection"
 msgstr "'unz'链结的描述无效"
 
-#: src/main/dounzip.cpp:467
+#: src/main/dounzip.cpp:482
 #, c-format
 msgid "cannot open zip file '%s'"
 msgstr "无法打开zip文件'%s'"
 
-#: src/main/dounzip.cpp:471
+#: src/main/dounzip.cpp:486
 #, c-format
 msgid "cannot locate file '%s' in zip file '%s'"
 msgstr "在zip文件'%2$s'里找不到%1$s这个文件"
 
-#: src/main/dounzip.cpp:516
+#: src/main/dounzip.cpp:531
 msgid "printing not enabled for this connection"
 msgstr "此链结无法打印"
 
-#: src/main/dounzip.cpp:522
+#: src/main/dounzip.cpp:537
 msgid "write not enabled for this connection"
 msgstr "无法对这个链结写入"
 
-#: src/main/dounzip.cpp:539 src/main/dounzip.cpp:543 src/main/dounzip.cpp:550
-#: src/main/dounzip.cpp:568
+#: src/main/dounzip.cpp:554 src/main/dounzip.cpp:558 src/main/dounzip.cpp:565
+#: src/main/dounzip.cpp:583
 msgid "allocation of 'unz' connection failed"
 msgstr "分配'unz'链结失败"
 
-#: src/main/dounzip.cpp:2128
+#: src/main/dounzip.cpp:2144
 #, fuzzy
 msgid "possible truncation of >= 4GB file"
 msgstr "未能缩短文件"

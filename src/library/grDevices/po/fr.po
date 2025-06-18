@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-06-18 21:09+0200\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -794,33 +794,33 @@ msgstr "Tentative de libération d'un chemin de détourage inexistant"
 msgid "Attempt to release non-existent mask"
 msgstr "Tentative de libération d'un masque inexistant"
 
-#: devQuartz.cpp:3067
+#: devQuartz.cpp:3174
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "paramètre 'fonts' incorrect dans %s"
 
-#: devQuartz.cpp:3097
+#: devQuartz.cpp:3217
 #, fuzzy
 msgid "failed to load font"
 msgstr "échec d'allocation de la liste de polices"
 
-#: devQuartz.cpp:3190 devQuartz.cpp:3195
+#: devQuartz.cpp:3310 devQuartz.cpp:3315
 msgid "invalid 'file' argument"
 msgstr "argument 'file' incorrect"
 
-#: devQuartz.cpp:3222
+#: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
 msgstr "taille de périphérique quartz() incorrecte"
 
-#: devQuartz.cpp:3250
+#: devQuartz.cpp:3370
 msgid "unable to create device description"
 msgstr "impossible de créer une description du périphérique"
 
-#: devQuartz.cpp:3299
+#: devQuartz.cpp:3419
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "impossible de créer le périphérique cible quartz(), le type fourni n'est peut-être pas supporté"
 
-#: devQuartz.cpp:3432
+#: devQuartz.cpp:3552
 msgid "Quartz device is not available on this platform"
 msgstr "Périphérique Quartz non disponible sur cette architecture"
 
