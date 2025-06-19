@@ -3123,7 +3123,7 @@ static CTFontDescriptorRef applyFontVar(CTFontRef ctFont,
                     CFDictionaryGetValue(axisDict, 
                                          kCTFontVariationAxisNameKey);
                 if (axisNameMatch(axisName, axisDictName)) {
-                    axisID = 
+                    axisID = (CFNumberRef)
                         CFDictionaryGetValue(axisDict, 
                                              kCTFontVariationAxisIdentifierKey);
                     found = 1;
