@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 17:27\n"
+"POT-Creation-Date: 2025-06-19 16:45\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -2382,9 +2382,20 @@ msgstr "内循環二; 无法校正步驟大小"
 msgid "interactions are not allowed"
 msgstr "不允许有交互作用项"
 
+#. R/bandwidths.R: gettextf("invalid '%s' argument", "x")
+#. R/bandwidths.R: gettextf("invalid '%s' argument", "nb")
+#. R/chisq.test.R: gettextf("invalid '%s' argument", "x")
+#. R/loess.R: gettextf("invalid '%s' argument", "x")
+#. R/loess.R: gettextf("invalid '%s' argument", "y")
+#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "'use'参数无效"
+
+#. R/bandwidths.R: gettextf("invalid '%s' value", "length(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
-#: R/kmeans.R:0
+#: R/bandwidths.R:0 R/kmeans.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "'use'参数无效"
@@ -2447,11 +2458,6 @@ msgstr "'lm'对象无效: 不包含'term'组件"
 msgid "invalid 'method' argument"
 msgstr "'method'参数无效"
 
-#. R/bandwidths.R: stop("invalid 'nb'")
-#: R/bandwidths.R:0
-msgid "invalid 'nb'"
-msgstr "'nb'无效"
-
 #. R/cutree.R: stop("invalid 'tree' ('merge' component)")
 #: R/cutree.R:0
 msgid "invalid 'tree' ('merge' component)"
@@ -2461,18 +2467,6 @@ msgstr "'tree'无效('merge'组件)"
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr "'use'参数无效"
-
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/chisq.test.R: stop("invalid 'x'")
-#. R/loess.R: stop("invalid 'x'")
-#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
-msgid "invalid 'x'"
-msgstr "'x'无效"
-
-#. R/loess.R: stop("invalid 'y'")
-#: R/loess.R:0
-msgid "invalid 'y'"
-msgstr "'y'无效"
 
 #. R/dendrogram.R: stop("invalid (length 0) node in dendrogram")
 #: R/dendrogram.R:0
@@ -4405,6 +4399,15 @@ msgstr[0] "模型里上范围没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "从组合拟合中用%d/%d行"
+
+#~ msgid "invalid 'nb'"
+#~ msgstr "'nb'无效"
+
+#~ msgid "invalid 'x'"
+#~ msgstr "'x'无效"
+
+#~ msgid "invalid 'y'"
+#~ msgstr "'y'无效"
 
 #~ msgid "invalid ncol(x)"
 #~ msgstr "ncol(x)无效"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-19 15:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9264,7 +9264,7 @@ msgid "error [%d] from Lapack 'ztrcon()'"
 msgstr ""
 
 #: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:1197
-msgid "'a' is 0-diml"
+msgid "'a' is 0-dimensional"
 msgstr ""
 
 #: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1200
@@ -9610,7 +9610,7 @@ msgid "invalid 'width' or 'height'"
 msgstr ""
 
 #: src/modules/X11/devX11.cpp:3234
-msgid "invalid colortype passed to X11 driver"
+msgid "invalid 'colortype' passed to X11 driver"
 msgstr ""
 
 #: src/modules/X11/devX11.cpp:3248
@@ -9820,7 +9820,7 @@ msgid "rbinom: probability sum should be 1, but is %g"
 msgstr ""
 
 #: src/nmath/signrank.cpp:75
-msgid "signrank allocation error"
+msgid "'signrank' allocation error"
 msgstr ""
 
 #: src/nmath/snorm.cpp:326

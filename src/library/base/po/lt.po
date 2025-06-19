@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: base 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-19 15:01+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -9427,7 +9427,8 @@ msgid "error [%d] from Lapack 'ztrcon()'"
 msgstr "klaida [%d] iš Lapack 'ztrcon()'"
 
 #: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:1197
-msgid "'a' is 0-diml"
+#, fuzzy
+msgid "'a' is 0-dimensional"
 msgstr "'a' yra 0-dimL"
 
 #: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1200
@@ -9791,7 +9792,8 @@ msgid "invalid 'width' or 'height'"
 msgstr "neteisingas 'width' arba 'height'"
 
 #: src/modules/X11/devX11.cpp:3234
-msgid "invalid colortype passed to X11 driver"
+#, fuzzy
+msgid "invalid 'colortype' passed to X11 driver"
 msgstr "neteisingas spalvų tipas perduotas X11 įrenginiui"
 
 #: src/modules/X11/devX11.cpp:3248
@@ -10006,7 +10008,8 @@ msgid "rbinom: probability sum should be 1, but is %g"
 msgstr "rbinom: tikimybės suma turėtų būti 1, bet yra %g"
 
 #: src/nmath/signrank.cpp:75
-msgid "signrank allocation error"
+#, fuzzy
+msgid "'signrank' allocation error"
 msgstr "žymėtojo rango paskirstymo klaida"
 
 #: src/nmath/snorm.cpp:326

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 17:27\n"
+"POT-Creation-Date: 2025-06-19 16:45\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -2671,9 +2671,20 @@ msgstr "bucle intern 2; no es pot corregir la mida del pas"
 msgid "interactions are not allowed"
 msgstr "no es permeten interaccions"
 
+#. R/bandwidths.R: gettextf("invalid '%s' argument", "x")
+#. R/bandwidths.R: gettextf("invalid '%s' argument", "nb")
+#. R/chisq.test.R: gettextf("invalid '%s' argument", "x")
+#. R/loess.R: gettextf("invalid '%s' argument", "x")
+#. R/loess.R: gettextf("invalid '%s' argument", "y")
+#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "argument «use» no vàlid"
+
+#. R/bandwidths.R: gettextf("invalid '%s' value", "length(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
-#: R/kmeans.R:0
+#: R/bandwidths.R:0 R/kmeans.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "argument «use» no vàlid"
@@ -2743,11 +2754,6 @@ msgstr "l'objecte «lm» no és vàlid: no hi ha cap component «termes»"
 msgid "invalid 'method' argument"
 msgstr "argument «method» no vàlid"
 
-#. R/bandwidths.R: stop("invalid 'nb'")
-#: R/bandwidths.R:0
-msgid "invalid 'nb'"
-msgstr "«nb» no vàlid"
-
 #. R/cutree.R: stop("invalid 'tree' ('merge' component)")
 #: R/cutree.R:0
 #, fuzzy
@@ -2759,19 +2765,6 @@ msgstr "el component «merge» no és vàlid"
 #, fuzzy
 msgid "invalid 'use' argument"
 msgstr "argument «use» no vàlid"
-
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/chisq.test.R: stop("invalid 'x'")
-#. R/loess.R: stop("invalid 'x'")
-#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
-msgid "invalid 'x'"
-msgstr "«x» no vàlid"
-
-#. R/loess.R: stop("invalid 'y'")
-#: R/loess.R:0
-#, fuzzy
-msgid "invalid 'y'"
-msgstr "«y» no vàlid"
 
 #. R/dendrogram.R: stop("invalid (length 0) node in dendrogram")
 #: R/dendrogram.R:0
@@ -4976,6 +4969,16 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilitzant la fila %d/%d d'un ajust combinat"
 msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
+
+#~ msgid "invalid 'nb'"
+#~ msgstr "«nb» no vàlid"
+
+#~ msgid "invalid 'x'"
+#~ msgstr "«x» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'y'"
+#~ msgstr "«y» no vàlid"
 
 #~ msgid "invalid ncol(x)"
 #~ msgstr "ncol(x) no vàlid"

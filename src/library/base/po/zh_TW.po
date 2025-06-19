@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-19 15:01+0200\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -9396,7 +9396,8 @@ msgid "error [%d] from Lapack 'ztrcon()'"
 msgstr "錯誤 [%d] 來自 Lapack 'ztrcon()'"
 
 #: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:1197
-msgid "'a' is 0-diml"
+#, fuzzy
+msgid "'a' is 0-dimensional"
 msgstr "'a' 是 0-diml"
 
 #: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1200
@@ -9758,7 +9759,8 @@ msgid "invalid 'width' or 'height'"
 msgstr "'width' 或 'height' 無效"
 
 #: src/modules/X11/devX11.cpp:3234
-msgid "invalid colortype passed to X11 driver"
+#, fuzzy
+msgid "invalid 'colortype' passed to X11 driver"
 msgstr "傳給 X11 驅動器的顏色類型無效"
 
 #: src/modules/X11/devX11.cpp:3248
@@ -9973,7 +9975,8 @@ msgid "rbinom: probability sum should be 1, but is %g"
 msgstr "rbinom: 機率和應該為 1，而不是 %g"
 
 #: src/nmath/signrank.cpp:75
-msgid "signrank allocation error"
+#, fuzzy
+msgid "'signrank' allocation error"
 msgstr "signrank 配置錯誤"
 
 #: src/nmath/snorm.cpp:326

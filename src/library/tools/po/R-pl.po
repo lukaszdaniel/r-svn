@@ -1827,7 +1827,7 @@ msgstr "niepoprawny 'OS.type' \"%s\". Nie powinno się wydarzyć"
 #. R/sha256.R: stop("invalid hex string")
 #: R/sha256.R:0
 msgid "invalid hex string"
-msgstr "nnieprawidłowy tekst szesnastkowy"
+msgstr "nieprawidłowy tekst szesnastkowy"
 
 #. R/install.R: warning("invalid package ", sQuote(pkg), call. = FALSE)
 #: R/install.R:0

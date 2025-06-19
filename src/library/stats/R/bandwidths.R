@@ -58,9 +58,9 @@ bw.SJ <- function(x, nb = 1000L, lower = 0.1*hmax, upper = hmax,
     if((n <- length(x)) < 2L) stop("need at least 2 data points")
     n <- as.integer(n)
     if (is.na(n)) stop("invalid length(x)")
-    if(!is.numeric(x)) stop("invalid 'x'")
+    if(!is.numeric(x)) stop(gettextf("invalid '%s' argument", "x"))
     nb <- as.integer(nb)
-    if (is.na(nb) || nb <= 0L) stop("invalid 'nb'")
+    if (is.na(nb) || nb <= 0L) stop(gettextf("invalid '%s' argument", "nb"))
     storage.mode(x) <- "double"
 
     method <- match.arg(method)
@@ -109,10 +109,10 @@ bw.ucv <- function(x, nb = 1000L, lower = 0.1*hmax, upper = hmax,
 {
     if((n <- length(x)) < 2L) stop("need at least 2 data points")
     n <- as.integer(n)
-    if (is.na(n)) stop("invalid length(x)")
-    if(!is.numeric(x)) stop("invalid 'x'")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
+    if(!is.numeric(x)) stop(gettextf("invalid '%s' argument", "x"))
     nb <- as.integer(nb)
-    if (is.na(nb) || nb <= 0L) stop("invalid 'nb'")
+    if (is.na(nb) || nb <= 0L) stop(gettextf("invalid '%s' argument", "nb"))
     storage.mode(x) <- "double"
 
     hmax <- 1.144 * sqrt(var(x)) * n^(-1/5)
@@ -130,10 +130,10 @@ bw.bcv <- function(x, nb = 1000L, lower = 0.1*hmax, upper = hmax,
 {
     if((n <- length(x)) < 2L) stop("need at least 2 data points")
     n <- as.integer(n)
-    if (is.na(n)) stop("invalid length(x)")
-    if(!is.numeric(x)) stop("invalid 'x'")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
+    if(!is.numeric(x)) stop(gettextf("invalid '%s' argument", "x"))
     nb <- as.integer(nb)
-    if (is.na(nb) || nb <= 0L) stop("invalid 'nb'")
+    if (is.na(nb) || nb <= 0L) stop(gettextf("invalid '%s' argument", "nb"))
     storage.mode(x) <- "double"
 
     hmax <- 1.144 * sqrt(var(x)) * n^(-1/5)

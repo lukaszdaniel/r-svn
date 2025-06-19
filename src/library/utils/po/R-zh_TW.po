@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -968,10 +968,11 @@ msgstr "只能對向量和因子元素適用"
 msgid "can only receive calls on local machine"
 msgstr "只能在局部電腦上接收調用"
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
-msgstr "無法選用一個"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "無法在非交互情況下設定貯藏處"
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
@@ -1532,11 +1533,6 @@ msgstr "'mailx' 只在 Unix 上有用"
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
 msgstr "這個方法只適用於 %s 目標物件"
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-msgid "mirror non-interactively"
-msgstr "鏡像而在非交互的情況下"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -2308,6 +2304,12 @@ msgstr[0] "正在使用 %s 這個程式套件，因此不會被安裝"
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
+
+#~ msgid "cannot choose a"
+#~ msgstr "無法選用一個"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "鏡像而在非交互的情況下"
 
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()' 只在 Windows 上有用"

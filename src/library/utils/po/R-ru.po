@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -964,10 +964,11 @@ msgstr "могу работать только с элементами вект�
 msgid "can only receive calls on local machine"
 msgstr "могу принимать вызовы только на локальной машине"
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
-msgstr "не могу выбрать"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "не могу выбрать зеркало BioC неинтерактивно"
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
@@ -1518,11 +1519,6 @@ msgstr "метод 'mailx' только для Unix"
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
 msgstr "метод не подходит для объектов %s"
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-msgid "mirror non-interactively"
-msgstr "использую зеркало неинтерактивно"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -2367,6 +2363,12 @@ msgstr[0] "пакет '%s' недоступен (%s)"
 msgstr[1] "пакеты %s недоступны (%s)"
 msgstr[2] "пакеты %s недоступны (%s)"
 
+#~ msgid "cannot choose a"
+#~ msgstr "не могу выбрать"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "использую зеркало неинтерактивно"
+
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()' -- Windows-специфичный"
 
@@ -2446,9 +2448,6 @@ msgstr[2] "пакеты %s недоступны (%s)"
 
 #~ msgid "could not find package %s"
 #~ msgstr "не могу найти пакет %s"
-
-#~ msgid "cannot choose a BioC mirror non-interactively"
-#~ msgstr "не могу выбрать зеркало BioC неинтерактивно"
 
 #~ msgid "Do you want to attempt to install these from sources?"
 #~ msgstr "Вы хотите попытаться инсталлировать их из исходников?"

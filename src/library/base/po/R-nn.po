@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 17:34\n"
+"POT-Creation-Date: 2025-06-19 16:44\n"
 "PO-Revision-Date: 2012-09-28 22:18+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -163,6 +163,24 @@ msgstr "«%s» gjev ikkje meining for ordna faktorar"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "«%s» gjev berre meining for ordna faktorar viss alle argumenta har same nivå"
 
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "intern")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stdout")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stderr")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "wait")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "receive.console.signals")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "intern")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stdout")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stderr")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "wait")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "show.output.on.console")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "minimized")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "invisible")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "receive.console.signals")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+#, fuzzy
+msgid "'%s' must be TRUE or FALSE"
+msgstr "«wait» må vera TRUE eller FALSE"
+
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
 #: R/datetime.R:0
@@ -210,8 +228,12 @@ msgstr "«subset» må vera ein logisk vektor"
 #. R/seq.R: gettextf("'%s' must be of length 1", "to")
 #. R/seq.R: gettextf("'%s' must be of length 1", "by")
 #. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stdout")
+#. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/taskCallback.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
 msgstr "«by» må ha lengd 1"
@@ -301,11 +323,6 @@ msgstr "«by» er NA"
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
 msgid "'by' must match number of columns"
-msgstr "«by» må vera i samsvar med talet på kolonnar"
-
-#. R/merge.R: stop("'by' must match numbers of columns")
-#: R/merge.R:0
-msgid "'by' must match numbers of columns"
 msgstr "«by» må vera i samsvar med talet på kolonnar"
 
 #. R/merge.R: stop("'by' must specify one or more columns as numbers, names or logical")
@@ -480,18 +497,6 @@ msgstr "«X» må namn namngjevne «dimnames»"
 msgid "'iconvlist' is not available on this system"
 msgstr "«iconvlist» er ikkje tilgjengeleg på dette systemet"
 
-#. R/unix/system.unix.R: stop("'ignore.stderr' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'ignore.stderr' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'ignore.stderr' must be TRUE or FALSE"
-msgstr "«ignore.stderr» må vera TRUE eller FALSE"
-
-#. R/unix/system.unix.R: stop("'ignore.stdout' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'ignore.stdout' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'ignore.stdout' must be TRUE or FALSE"
-msgstr "«ignore.stdout» må vera TRUE eller FALSE"
-
 #. R/merge.R: stop("'incomparables' is supported only for merging on a single column")
 #: R/merge.R:0
 msgid "'incomparables' is supported only for merging on a single column"
@@ -528,17 +533,6 @@ msgstr "«input» må ha eitt element"
 msgid "'input.d.mark' has no characters"
 msgstr "«input» og «target» må vera teiknvektorar"
 
-#. R/unix/system.unix.R: stop("'intern' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'intern' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'intern' must be TRUE or FALSE"
-msgstr "«intern» må vera TRUE eller FALSE"
-
-#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'invisible' must be TRUE or FALSE"
-msgstr "«invisible» må vera TRUE eller FALSE"
-
 #. R/qr.R: stop("'k' is too large")
 #: R/qr.R:0
 msgid "'k' is too large"
@@ -568,11 +562,6 @@ msgstr "lengda må vera eit ikkje-negativt tal"
 #: R/source.R:0 R/stop.R:0
 msgid "'local' must be TRUE, FALSE or an environment"
 msgstr "«local» må vera TRUE, FALSE eller ein omgjevnad"
-
-#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'minimized' must be TRUE or FALSE"
-msgstr "«minimized» må vera TRUE eller FALSE"
 
 #. R/format.R: stop("'mode' must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
@@ -611,13 +600,6 @@ msgstr "*** «pos = 1» er ikkje mogleg – set «pos = 2»."
 msgid "'qr' and 'y' must have the same number of rows"
 msgstr "«qr» og «y» må ha like mange rader"
 
-#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-#, fuzzy
-msgid "'receive.console.signals' must be TRUE or FALSE"
-msgstr "«intern» må vera TRUE eller FALSE"
-
 #. R/unlist.R: stop("'recursive' is NA")
 #: R/unlist.R:0
 msgid "'recursive' is NA"
@@ -651,23 +633,6 @@ msgstr "«row.names» bør spesifisera éin av variablane"
 #, fuzzy
 msgid "'scale' should be numeric or NULL"
 msgstr "«arg» skal vera éin av %s"
-
-#. R/windows/system.R: stop("'show.output.on.console' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'show.output.on.console' must be TRUE or FALSE"
-msgstr "«show.output.on.console» må vera TRUE eller FALSE"
-
-#. R/unix/system.unix.R: stop("'stderr' must be of length 1")
-#. R/windows/system.R: stop("'stderr' must be of length 1")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'stderr' must be of length 1"
-msgstr "«stderr» må ha lengd 1"
-
-#. R/unix/system.unix.R: stop("'stdout' must be of length 1")
-#. R/windows/system.R: stop("'stdout' must be of length 1")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'stdout' must be of length 1"
-msgstr "«stdout» må ha lengd 1"
 
 #. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
@@ -746,12 +711,6 @@ msgstr "«verbose» og «quietly» er begge sanne – brukar «verbose»"
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "«verbose» er TRUE, men det er ikkje «echo» – køyrer «echo <- TRUE»"
-
-#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'wait' must be TRUE or FALSE"
-msgstr "«wait» må vera TRUE eller FALSE"
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
@@ -875,71 +834,75 @@ msgstr ""
 msgid "'zero.print' must be character, logical or NULL"
 msgstr "«zero.print» må vera ein teiknstreng, ein boolsk verdi eller NULL"
 
-#. R/namespace.R: message("- done loading ", dQuote(package))
-#: R/namespace.R:0
-msgid "- done loading"
-msgstr ""
-
-#. R/namespace.R: message("- loading ", dQuote(package))
-#: R/namespace.R:0
-msgid "- loading"
-msgstr ""
-
-#. R/namespace.R: message("-- done processing S4 stuff for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- done processing S4 stuff for"
-msgstr ""
-
-#. R/namespace.R: message("-- done processing imports for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- done processing imports for"
-msgstr ""
-
-#. R/namespace.R: message("-- done registerS3methods for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- done registerS3methods for"
-msgstr ""
-
-#. R/namespace.R: message("-- done running .onLoad for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- done running .onLoad for"
-msgstr ""
-
-#. R/namespace.R: message("-- loading code for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- loading code for"
-msgstr ""
-
-#. R/namespace.R: message("-- loading lazydata for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- loading lazydata for"
-msgstr ""
-
-#. R/namespace.R: message("-- loading sysdata for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- loading sysdata for"
-msgstr ""
-
-#. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
+#. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
 #, fuzzy
-msgid "-- processing S4 stuff for"
-msgstr "feil klasse"
+msgid "- done loading %s"
+msgstr "Fjernar"
 
-#. R/namespace.R: message("-- processing imports for ", dQuote(package))
+#. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
 #, fuzzy
-msgid "-- processing imports for"
+msgid "- loading %s"
+msgstr "Fjernar"
+
+#. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- done processing S4 stuff for %s"
 msgstr "feil klasse"
 
-#. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
+#. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- registerS3methods for"
+#, fuzzy
+msgid "-- done processing imports for %s"
+msgstr "feil klasse"
+
+#. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done registerS3methods for %s"
 msgstr ""
 
-#. R/namespace.R: message("-- running .onLoad for ", dQuote(package))
+#. R/namespace.R: gettextf("-- done running .onLoad for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- running .onLoad for"
+msgid "-- done running .onLoad for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- loading code for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading code for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- loading lazydata for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading lazydata for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- loading sysdata for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading sysdata for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- processing S4 stuff for %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- processing S4 stuff for %s"
+msgstr "feil klasse"
+
+#. R/namespace.R: gettextf("-- processing imports for %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- processing imports for %s"
+msgstr "feil klasse"
+
+#. R/namespace.R: gettextf("-- registerS3methods for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- registerS3methods for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- running .onLoad for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- running .onLoad for %s"
 msgstr ""
 
 #. R/namespace.R: message("--- caching metadata")
@@ -958,16 +921,17 @@ msgstr ""
 msgid "--- processing classes"
 msgstr "feil klasse"
 
-#. R/namespace.R: message("--- processing exports for ", dQuote(package))
+#. R/namespace.R: gettextf("--- processing exports for %s", dQuote(package))
 #: R/namespace.R:0
 #, fuzzy
-msgid "--- processing exports for"
+msgid "--- processing exports for %s"
 msgstr "feil klasse"
 
-#. R/namespace.R: message("--- sealing exports for ", dQuote(package))
+#. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "--- sealing exports for"
-msgstr ""
+#, fuzzy
+msgid "--- sealing exports for %s"
+msgstr "feil klasse"
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -1139,6 +1103,12 @@ msgstr ""
 "Vanlege linjer må ha ein tagg.\n"
 "Ugyldige linjer begynner med:\n"
 "%s"
+
+#. R/namespace.R: gettextf("License for %s", sQuote(pkg))
+#: R/namespace.R:0
+#, fuzzy
+msgid "License for %s"
+msgstr "Lisensvilkår"
 
 #. R/namespace.R: gettextf("Loading required namespace: %s", package)
 #: R/namespace.R:0
@@ -1906,26 +1876,37 @@ msgid "input has been corrupted, with LF replaced by CR"
 msgstr "ugyldig inndata, men LF erstatta med CR"
 
 #. R/attach.R: gettextf("invalid '%s' argument", "name")
+#. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/rowsum.R: gettextf("invalid '%s' argument", "x")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
-#: R/attach.R:0 R/connections.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/taskCallback.R:0
+#. R/version.R: gettextf("invalid '%s' argument", "value")
+#. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "ugyldig «name»-argument"
 
+#. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kappa.R: gettextf("invalid '%s' value", "nrow(z)")
 #. R/qr.R: gettextf("invalid '%s' value", "ncol(x)")
 #. R/qr.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/qr.R: gettextf("invalid '%s' value", "nrow(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(qr$rank)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(y)")
 #. R/qr.R: gettextf("invalid '%s' value", "NCOL(y)")
 #. R/qr.R: gettextf("invalid '%s' value", "NCOL(R)")
 #. R/seq.R: gettextf("invalid '%s' value", "(to - from)/by")
-#: R/qr.R:0 R/seq.R:0
+#: R/eigen.R:0 R/kappa.R:0 R/qr.R:0 R/seq.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "ugyldig verdi"
@@ -1948,32 +1929,16 @@ msgstr "ugyldig «by»-verdi"
 msgid "invalid 'compress' argument:"
 msgstr "ugyldig «name»-argument"
 
-#. R/zapsmall.R: stop("invalid 'digits'")
-#: R/zapsmall.R:0
-msgid "invalid 'digits'"
-msgstr "ugyldig «digits»-verdi"
-
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
 msgid "invalid 'dimnames' given for data frame"
 msgstr "ugyldig «dimnames» oppgjeve for dataramme"
-
-#. R/colSums.R: stop("invalid 'dims'")
-#: R/colSums.R:0
-msgid "invalid 'dims'"
-msgstr "ugyldige «dims»-verdiar"
 
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
 #, fuzzy
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "ugyldige merkelappar – lengd %d må vera 1 eller %d"
-
-#. R/dataframe.R: stop("invalid 'make.names'")
-#: R/dataframe.R:0
-#, fuzzy
-msgid "invalid 'make.names'"
-msgstr "ugyldig pakkenamn"
 
 #. R/dataframe.R: stop("invalid 'max' / getOption(\"max.print\"): ", max)
 #: R/dataframe.R:0
@@ -1989,18 +1954,6 @@ msgstr "ugyldig «rle»-struktur"
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
 msgstr "ugyldig «row.names»-lengd"
-
-#. R/version.R: stop("invalid 'value'")
-#: R/version.R:0
-#, fuzzy
-msgid "invalid 'value'"
-msgstr "ugyldig verdi"
-
-#. R/rowsum.R: stop("invalid 'x'")
-#: R/rowsum.R:0
-#, fuzzy
-msgid "invalid 'x'"
-msgstr "ugyldige «dims»-verdiar"
 
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
@@ -2023,42 +1976,11 @@ msgstr "ugyldig listeargument: alle variablar må vera like lange"
 msgid "invalid mode for 'by'"
 msgstr "ugyldig «mode» for «by»"
 
-#. R/qr.R: stop("invalid ncol(qr$qr)")
-#: R/qr.R:0
-msgid "invalid ncol(qr$qr)"
-msgstr "ugyldig ncol(qr$qr)"
-
-#. R/qr.R: stop("invalid ncol(qr$rank)")
-#: R/qr.R:0
-msgid "invalid ncol(qr$rank)"
-msgstr "ugyldig ncol(qr$rank)"
-
-#. R/qr.R: stop("invalid ncol(y)")
-#: R/qr.R:0
-msgid "invalid ncol(y)"
-msgstr "ugyldig ncol(y)"
-
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
 #, fuzzy
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "ugyldig versjonsspesifikasjon"
-
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#: R/qr.R:0
-msgid "invalid nrow(qr$qr)"
-msgstr "ugyldig nrow(qr$qr)"
-
-#. R/eigen.R: stop("invalid nrow(x)")
-#: R/eigen.R:0
-msgid "invalid nrow(x)"
-msgstr "ugyldig nrow(x)"
-
-#. R/kappa.R: stop("invalid nrow(z)")
-#: R/kappa.R:0
-#, fuzzy
-msgid "invalid nrow(z)"
-msgstr "ugyldig nrow(x)"
 
 #. R/cut.R: stop("invalid number of intervals")
 #: R/cut.R:0
@@ -2765,9 +2687,10 @@ msgstr "det andre argumentet må vera ei liste"
 msgid "second argument of / cannot be a \"difftime\" object"
 msgstr "det andre argumentet til «/» kan ikkje vera eit «difftime»-objekt"
 
-#. R/unix/system.unix.R: warning("setting stdout = TRUE")
+#. R/unix/system.unix.R: warning("setting 'stdout = TRUE'")
 #: R/unix/system.unix.R:0
-msgid "setting stdout = TRUE"
+#, fuzzy
+msgid "setting 'stdout = TRUE'"
 msgstr "set «stdout =TRUE»"
 
 #. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
@@ -2784,11 +2707,6 @@ msgstr "det delte objektet «%s» vart ikkje lasta"
 #: R/library.R:0
 msgid "shared object '%s' already loaded"
 msgstr "det delte objektet «%s» er alt lasta"
-
-#. R/library.R: gettextf("shared object '%s' not found", sQuote(chname1))
-#: R/library.R:0
-msgid "shared object '%s' not found"
-msgstr "fann ikkje det delte objektet «%s»"
 
 #. R/solve.R: stop("singular matrix 'a' in 'solve'")
 #: R/solve.R:0
@@ -3291,6 +3209,77 @@ msgid_plural "there are no packages called"
 msgstr[0] "det finst ikkje nokon pakke med namnet"
 msgstr[1] "det finst ikkje nokon pakkar med namna"
 
+#~ msgid "invalid 'digits'"
+#~ msgstr "ugyldig «digits»-verdi"
+
+#~ msgid "invalid 'dims'"
+#~ msgstr "ugyldige «dims»-verdiar"
+
+#, fuzzy
+#~ msgid "invalid 'make.names'"
+#~ msgstr "ugyldig pakkenamn"
+
+#, fuzzy
+#~ msgid "invalid 'value'"
+#~ msgstr "ugyldig verdi"
+
+#, fuzzy
+#~ msgid "invalid 'x'"
+#~ msgstr "ugyldige «dims»-verdiar"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "ugyldig ncol(qr$qr)"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "ugyldig ncol(qr$rank)"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "ugyldig ncol(y)"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "ugyldig nrow(qr$qr)"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "ugyldig nrow(x)"
+
+#, fuzzy
+#~ msgid "invalid nrow(z)"
+#~ msgstr "ugyldig nrow(x)"
+
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "«by» må vera i samsvar med talet på kolonnar"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "«stderr» må ha lengd 1"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "«stdout» må ha lengd 1"
+
+#~ msgid "shared object '%s' not found"
+#~ msgstr "fann ikkje det delte objektet «%s»"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "«ignore.stderr» må vera TRUE eller FALSE"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "«ignore.stdout» må vera TRUE eller FALSE"
+
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "«intern» må vera TRUE eller FALSE"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "«invisible» må vera TRUE eller FALSE"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "«minimized» må vera TRUE eller FALSE"
+
+#, fuzzy
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "«intern» må vera TRUE eller FALSE"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "«show.output.on.console» må vera TRUE eller FALSE"
+
 #, fuzzy
 #~ msgid "invalid '(to - from)/by'"
 #~ msgstr "ugyldig (to - from)/by i seq(.)"
@@ -3563,9 +3552,6 @@ msgstr[1] "det finst ikkje nokon pakkar med namna"
 
 #~ msgid "'subset' must evaluate to logical"
 #~ msgstr "«subset» må evaluerast til ein logisk vektor"
-
-#~ msgid "License"
-#~ msgstr "Lisensvilkår"
 
 #~ msgid ""
 #~ "file %s has magic number '%s'\n"

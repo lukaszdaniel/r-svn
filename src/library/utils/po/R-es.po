@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -950,9 +950,9 @@ msgstr ""
 msgid "can only receive calls on local machine"
 msgstr ""
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
+msgid "cannot choose a %s mirror non-interactively"
 msgstr ""
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
@@ -1510,11 +1510,6 @@ msgstr ""
 #. R/citation.R: gettextf("method is only applicable to %s objects", sQuote("bibentry"))
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
-msgstr ""
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-msgid "mirror non-interactively"
 msgstr ""
 
 #. R/read.fortran.R: stop("missing lengths for some fields")

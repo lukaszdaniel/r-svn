@@ -3231,7 +3231,7 @@ static SEXP in_do_X11(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, _("invalid '%s' value"), "gamma");
 
     if (!isValidString(CAR(args)))
-	error("%s", _("invalid colortype passed to X11 driver"));
+	error("%s", _("invalid 'colortype' passed to X11 driver"));
     cname = CHAR(STRING_ELT(CAR(args), 0));
     if (streql(cname, "mono"))
 	colormodel = 0;

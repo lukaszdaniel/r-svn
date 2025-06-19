@@ -222,7 +222,7 @@ loadNamespace <- function (package, lib.loc = NULL,
                 if(is.na(lev)) lev <- 0L
             }
         }
-	if(lev > 0L) message("- loading ", dQuote(package))
+	if(lev > 0L) message(gettextf("- loading %s", dQuote(package)))
         ## only used here for .onLoad
         runHook <- function(hookname, env, libname, pkgname) {
 	    if (!is.null(fun <- env[[hookname]])) {
@@ -464,7 +464,7 @@ loadNamespace <- function (package, lib.loc = NULL,
                                      pkgInfo$DESCRIPTION["License"]), domain = "R-base")
                 }
                 choice <- utils::menu(c("accept", "decline"),
-                                      title = paste("License for", sQuote(pkg)))
+                                      title = gettextf("License for %s", sQuote(pkg)))
                 if(choice != 1)
                     stop(gettextf("license for package %s not accepted",
                                   sQuote(package)), domain = NA, call. = FALSE)
@@ -508,7 +508,7 @@ loadNamespace <- function (package, lib.loc = NULL,
         on.exit(.Internal(unregisterNamespace(package)))
 
         ## process imports
-	if(lev > 1L) message("-- processing imports for ", dQuote(package))
+	if(lev > 1L) message(gettextf("-- processing imports for %s", dQuote(package)))
         for (i in nsInfo$imports) {
             if (is.character(i))
                 namespaceImport(ns,
@@ -540,7 +540,7 @@ loadNamespace <- function (package, lib.loc = NULL,
                                                      versionCheck = vI[[j]]),
                                    imp[[2L]], from = package)
 
-        if(lev > 1L) message("-- done processing imports for ", dQuote(package))
+        if(lev > 1L) message(gettextf("-- done processing imports for %s", dQuote(package)))
 
         ## store info for loading namespace for loadingNamespaceInfo to read
         "__LoadingNamespaceInfo__" <- list(libname = package.lib,
@@ -554,7 +554,7 @@ loadNamespace <- function (package, lib.loc = NULL,
         codename <- strsplit(package, "_", fixed = TRUE)[[1L]][1L]
         codeFile <- file.path(pkgpath, "R", codename)
         if (file.exists(codeFile)) {
-            if(lev > 1L) message("-- loading code for ", dQuote(package))
+            if(lev > 1L) message(gettextf("-- loading code for %s", dQuote(package)))
 	    # The code file has been converted to the native encoding
 	    save.enc <- options(encoding = "native.enc")
             res <- try(sys.source(codeFile, env, keep.source = keep.source,
@@ -563,7 +563,7 @@ loadNamespace <- function (package, lib.loc = NULL,
             if(inherits(res, "try-error"))
                 stop(gettextf("unable to load R code in package %s",
                               sQuote(package)), call. = FALSE, domain = NA)
-            if(lev > 1L) message("-- loading code for ", dQuote(package))
+            if(lev > 1L) message(gettextf("-- loading code for %s", dQuote(package)))
         }
         # a package without R code currently is required to have a namespace
         # else warning(gettextf("package %s contains no R code",
@@ -576,21 +576,21 @@ loadNamespace <- function (package, lib.loc = NULL,
         ## lazy-load any sysdata
         dbbase <- file.path(pkgpath, "R", "sysdata")
         if (file.exists(paste0(dbbase, ".rdb"))) {
-            if(lev > 1L) message("-- loading sysdata for ", dQuote(package))
+            if(lev > 1L) message(gettextf("-- loading sysdata for %s", dQuote(package)))
             lazyLoad(dbbase, env)
 	}
 
         ## load any lazydata into a separate environment
         dbbase <- file.path(pkgpath, "data", "Rdata")
         if(file.exists(paste0(dbbase, ".rdb"))) {
-            if(lev > 1L) message("-- loading lazydata for ", dQuote(package))
+            if(lev > 1L) message(gettextf("-- loading lazydata for %s", dQuote(package)))
             lazyLoad(dbbase, .getNamespaceInfo(env, "lazydata"))
 	}
 
         ## register any S3 methods
-        if(lev > 1L) message("-- registerS3methods for ", dQuote(package))
+        if(lev > 1L) message(gettextf("-- registerS3methods for %s", dQuote(package)))
         registerS3methods(nsInfo$S3methods, package, env)
-        if(lev > 1L) message("-- done registerS3methods for ", dQuote(package))
+        if(lev > 1L) message(gettextf("-- done registerS3methods for %s", dQuote(package)))
 
         ## load any dynamic libraries
         dlls <- list()
@@ -620,9 +620,9 @@ loadNamespace <- function (package, lib.loc = NULL,
         Sys.setenv("_R_NS_LOAD_" = package)
         on.exit(Sys.unsetenv("_R_NS_LOAD_"), add = TRUE)
         ## run the load hook
-	if(lev > 1L) message("-- running .onLoad for ", dQuote(package))
+	if(lev > 1L) message(gettextf("-- running .onLoad for %s", dQuote(package)))
         runHook(".onLoad", env, package.lib, package)
-	if(lev > 1L) message("-- done running .onLoad for ", dQuote(package))
+	if(lev > 1L) message(gettextf("-- done running .onLoad for %s", dQuote(package)))
 
         ## process exports, seal, and clear on.exit action
         exports <- nsInfo$exports
@@ -641,7 +641,7 @@ loadNamespace <- function (package, lib.loc = NULL,
         }
         if(.isMethodsDispatchOn() && hasS4m && !identical(package, "methods") ) {
             if(lev > 1L || lev == -5)
-                message("-- processing S4 stuff for ", dQuote(package))
+                message(gettextf("-- processing S4 stuff for %s", dQuote(package)))
             ## cache generics, classes in this namespace (but not methods itself,
             if(lev > 2L) message('--- caching metadata')
             ## which pre-cached at install time
@@ -798,7 +798,7 @@ loadNamespace <- function (package, lib.loc = NULL,
                      domain = NA)
             exports <- unique(c(exports, expClasses,  expTables))
             if(lev > 1L || lev == -5)
-                message("-- done processing S4 stuff for ", dQuote(package))
+                message(gettextf("-- done processing S4 stuff for %s", dQuote(package)))
         }
         ## certain things should never be exported.
         if (length(exports)) {
@@ -808,13 +808,13 @@ loadNamespace <- function (package, lib.loc = NULL,
                           ".__global__", ".__suppressForeign__")
             exports <- exports[! exports %in% stoplist]
         }
-	if(lev > 2L) message("--- processing exports for ", dQuote(package))
+	if(lev > 2L) message(gettextf("--- processing exports for %s", dQuote(package)))
         namespaceExport(ns, exports)
-	if(lev > 2L) message("--- sealing exports for ", dQuote(package))
+	if(lev > 2L) message(gettextf("--- sealing exports for %s", dQuote(package)))
         sealNamespace(ns)
         runUserHook(package, pkgpath)
         on.exit()
-	if(lev > 0L) message("- done loading ", dQuote(package))
+	if(lev > 0L) message(gettextf("- done loading %s", dQuote(package)))
         Sys.unsetenv("_R_NS_LOAD_")
         ns
     }

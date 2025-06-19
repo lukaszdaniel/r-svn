@@ -73,7 +73,7 @@ row.names.default <- function(x) if(!is.null(dim(x))) rownames(x)# else NULL
             attr(x, "row.names") <- .set_row_names(n)
             return(x)
         }
-        else if(!isTRUE(make.names)) stop("invalid 'make.names'")
+        else if(!isTRUE(make.names)) stop(gettextf("invalid '%s' argument", "make.names"))
         ## else  make.names = TRUE: amend 'value' to correct ones:
         else if((nv <- length(value)) < n)
             value <- c(value, rep_len(value[nv], n-nv))
@@ -98,7 +98,7 @@ row.names.default <- function(x) if(!is.null(dim(x))) rownames(x)# else NULL
                     length(x[[1L]])
                 else n)
         }
-        else if(!isTRUE(make.names)) stop("invalid 'make.names'")
+        else if(!isTRUE(make.names)) stop(gettextf("invalid '%s' argument", "make.names"))
         else # make.names = TRUE: amend 'value' to correct ones:
             value <- make.names(value, unique=TRUE)
         ## NB: 'value' is now guaranteed to have no NA's ==> can use 'else if' :
@@ -108,7 +108,7 @@ row.names.default <- function(x) if(!is.null(dim(x))) rownames(x)# else NULL
             stop("missing values in 'row.names' are not allowed")
         if(is.na(make.names)) # automatic row.names
             value <- .set_row_names(if(n > 0) n else length(value))
-        else if(!isTRUE(make.names)) stop("invalid 'make.names'")
+        else if(!isTRUE(make.names)) stop(gettextf("invalid '%s' argument", "make.names"))
         else # make.names = TRUE: amend 'value' to correct ones:
             value <- make.names(value, unique=TRUE)
     }

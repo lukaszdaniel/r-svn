@@ -44,21 +44,21 @@ system <- function(command, intern = FALSE,
                    invisible = TRUE, timeout = 0, receive.console.signals = wait)
 {
     if(!is.logical(intern) || is.na(intern))
-        stop("'intern' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "intern"))
     if(!is.logical(ignore.stdout) || is.na(ignore.stdout))
-        stop("'ignore.stdout' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "ignore.stdout"))
     if(!is.logical(ignore.stderr) || is.na(ignore.stderr))
-        stop("'ignore.stderr' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "ignore.stderr"))
     if(!is.logical(wait) || is.na(wait))
-        stop("'wait' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "wait"))
     if(!is.logical(show.output.on.console) || is.na(show.output.on.console))
-        stop("'show.output.on.console' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "show.output.on.console"))
     if(!is.logical(minimized) || is.na(minimized))
-        stop("'minimized' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "minimized"))
     if(!is.logical(invisible) || is.na(invisible))
-        stop("'invisible' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "invisible"))
     if(!is.logical(receive.console.signals) || is.na(receive.console.signals))
-        stop("'receive.console.signals' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "receive.console.signals"))
     stdout <- ifelse(ignore.stdout, FALSE, "")
     stderr <- ifelse(ignore.stderr, FALSE, "")
 
@@ -120,22 +120,22 @@ system2 <- function(command, args = character(),
                     timeout = 0, receive.console.signals = wait)
 {
     if(!is.logical(wait) || is.na(wait))
-        stop("'wait' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "wait"))
     if(!is.logical(minimized) || is.na(minimized))
-        stop("'minimized' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "minimized"))
     if(!is.logical(invisible) || is.na(invisible))
-        stop("'invisible' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "invisible"))
     if(!is.logical(receive.console.signals) || is.na(receive.console.signals))
-        stop("'receive.console.signals' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "receive.console.signals"))
 
     command <- paste(c(shQuote(command), env, args), collapse = " ")
 
     if(is.null(stdout)) stdout <- FALSE
     if(is.null(stderr)) stderr <- FALSE
-    
-    if(length(stdout) != 1L) stop("'stdout' must be of length 1")
-    if(length(stderr) != 1L) stop("'stderr' must be of length 1")
-    
+
+    if(length(stdout) != 1L) stop(gettextf("'%s' must be of length 1", "stdout"))
+    if(length(stderr) != 1L) stop(gettextf("'%s' must be of length 1", "stderr"))
+
     if (!is.null(input)) {
         f <- tempfile()
         on.exit(unlink(f))

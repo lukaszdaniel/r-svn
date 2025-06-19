@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 17:34\n"
+"POT-Creation-Date: 2025-06-19 16:44\n"
 "PO-Revision-Date: 2018-04-09 12:05-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -162,6 +162,24 @@ msgstr "순서형 요인(ordered factors)에 대하여 의미가 있는 '%s'가 
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "만약 모든 인자들이 같은 수준들을 가지고 있다면 '%s'는 오로지 순위형 요인들에 대해서만 의미가 있습니다."
 
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "intern")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stdout")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stderr")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "wait")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "receive.console.signals")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "intern")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stdout")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stderr")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "wait")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "show.output.on.console")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "minimized")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "invisible")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "receive.console.signals")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+#, fuzzy
+msgid "'%s' must be TRUE or FALSE"
+msgstr "'wait'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
 #: R/datetime.R:0
@@ -208,8 +226,12 @@ msgstr "'%s'은 반드시 논리형이어야 합니다"
 #. R/seq.R: gettextf("'%s' must be of length 1", "to")
 #. R/seq.R: gettextf("'%s' must be of length 1", "by")
 #. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
+#. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stdout")
+#. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
 #: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/taskCallback.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
 msgstr "'by'는 반드시 길이가 1이어야 합니다"
@@ -300,11 +322,6 @@ msgstr "'by'는 NA입니다"
 #: R/merge.R:0
 msgid "'by' must match number of columns"
 msgstr "by'는 반드시 열의 개수와 일치해야 합니다"
-
-#. R/merge.R: stop("'by' must match numbers of columns")
-#: R/merge.R:0
-msgid "'by' must match numbers of columns"
-msgstr "'by'는 반드시 열의 개수와 일치해야 합니다"
 
 #. R/merge.R: stop("'by' must specify one or more columns as numbers, names or logical")
 #: R/merge.R:0
@@ -472,18 +489,6 @@ msgstr "'X'는 반드시 named dimnames를 가져야 합니다"
 msgid "'iconvlist' is not available on this system"
 msgstr "이 시스템에서는 'iconvlist'을 사용할 수 없습니다."
 
-#. R/unix/system.unix.R: stop("'ignore.stderr' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'ignore.stderr' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'ignore.stderr' must be TRUE or FALSE"
-msgstr "'ignore.stderr'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#. R/unix/system.unix.R: stop("'ignore.stdout' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'ignore.stdout' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'ignore.stdout' must be TRUE or FALSE"
-msgstr "'ignore.stdout'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
 #. R/merge.R: stop("'incomparables' is supported only for merging on a single column")
 #: R/merge.R:0
 msgid "'incomparables' is supported only for merging on a single column"
@@ -519,17 +524,6 @@ msgstr "'input'은 반드시 길이가 1 이어야 합니다"
 msgid "'input.d.mark' has no characters"
 msgstr "'input.d.mark'는 어떠한 문자도 가지고 있습니다."
 
-#. R/unix/system.unix.R: stop("'intern' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'intern' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'intern' must be TRUE or FALSE"
-msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'invisible' must be TRUE or FALSE"
-msgstr "'invisible'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
 #. R/qr.R: stop("'k' is too large")
 #: R/qr.R:0
 msgid "'k' is too large"
@@ -558,11 +552,6 @@ msgstr "'length.out'는 음수를 가질 수 없습니다."
 #: R/source.R:0 R/stop.R:0
 msgid "'local' must be TRUE, FALSE or an environment"
 msgstr "'local'은 반드시 TRUE, FALSE 또는 environment 이어야 합니다"
-
-#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'minimized' must be TRUE or FALSE"
-msgstr "'minimized'는 반드시 TRUE 또는 FALSE이어야 합니다"
 
 #. R/format.R: stop("'mode' must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
@@ -599,13 +588,6 @@ msgstr ""
 msgid "'qr' and 'y' must have the same number of rows"
 msgstr "'qr'과 'y'는 반드시 같은 수의 행을 가지고 있어야 합니다"
 
-#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-#, fuzzy
-msgid "'receive.console.signals' must be TRUE or FALSE"
-msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
 #. R/unlist.R: stop("'recursive' is NA")
 #: R/unlist.R:0
 msgid "'recursive' is NA"
@@ -637,23 +619,6 @@ msgstr "'row.names'은 변수들중 하나를 지정해야만 합니다"
 #: R/all.equal.R:0
 msgid "'scale' should be numeric or NULL"
 msgstr "'scale'은 반드시 수치형 또는 NULL이어야 합니다"
-
-#. R/windows/system.R: stop("'show.output.on.console' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'show.output.on.console' must be TRUE or FALSE"
-msgstr "'show.output.on.console'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#. R/unix/system.unix.R: stop("'stderr' must be of length 1")
-#. R/windows/system.R: stop("'stderr' must be of length 1")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'stderr' must be of length 1"
-msgstr "'stderr'은 반드시 길이가 1이어야 합니다"
-
-#. R/unix/system.unix.R: stop("'stdout' must be of length 1")
-#. R/windows/system.R: stop("'stdout' must be of length 1")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'stdout' must be of length 1"
-msgstr "'stdout'은 반드시 길이가 1이어야 합니다"
 
 #. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
@@ -726,12 +691,6 @@ msgstr "'verbose'와 'quitely' 모두 참으로 설정되어 있는데, verbose�
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose'는 TRUE인데 'echo'는 그렇지 않습니다; ... 'echo <- TRUE'로 강제변환합니다"
-
-#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'wait' must be TRUE or FALSE"
-msgstr "'wait'은 반드시 TRUE 또는 FALSE이어야 합니다"
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
@@ -846,71 +805,75 @@ msgstr ""
 msgid "'zero.print' must be character, logical or NULL"
 msgstr "'zero.print'는 반드시 문자, 논리값, 또는 NULL이어야 합니다"
 
-#. R/namespace.R: message("- done loading ", dQuote(package))
-#: R/namespace.R:0
-msgid "- done loading"
-msgstr ""
-
-#. R/namespace.R: message("- loading ", dQuote(package))
-#: R/namespace.R:0
-msgid "- loading"
-msgstr ""
-
-#. R/namespace.R: message("-- done processing S4 stuff for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- done processing S4 stuff for"
-msgstr ""
-
-#. R/namespace.R: message("-- done processing imports for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- done processing imports for"
-msgstr ""
-
-#. R/namespace.R: message("-- done registerS3methods for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- done registerS3methods for"
-msgstr ""
-
-#. R/namespace.R: message("-- done running .onLoad for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- done running .onLoad for"
-msgstr ""
-
-#. R/namespace.R: message("-- loading code for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- loading code for"
-msgstr ""
-
-#. R/namespace.R: message("-- loading lazydata for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- loading lazydata for"
-msgstr ""
-
-#. R/namespace.R: message("-- loading sysdata for ", dQuote(package))
-#: R/namespace.R:0
-msgid "-- loading sysdata for"
-msgstr ""
-
-#. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
+#. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
 #, fuzzy
-msgid "-- processing S4 stuff for"
-msgstr "잘못된 클래스입니다"
+msgid "- done loading %s"
+msgstr "%s를 삭제합니다"
 
-#. R/namespace.R: message("-- processing imports for ", dQuote(package))
+#. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
 #, fuzzy
-msgid "-- processing imports for"
+msgid "- loading %s"
+msgstr "%s를 삭제합니다"
+
+#. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- done processing S4 stuff for %s"
 msgstr "잘못된 클래스입니다"
 
-#. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
+#. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- registerS3methods for"
+#, fuzzy
+msgid "-- done processing imports for %s"
+msgstr "잘못된 클래스입니다"
+
+#. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- done registerS3methods for %s"
 msgstr ""
 
-#. R/namespace.R: message("-- running .onLoad for ", dQuote(package))
+#. R/namespace.R: gettextf("-- done running .onLoad for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- running .onLoad for"
+msgid "-- done running .onLoad for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- loading code for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading code for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- loading lazydata for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading lazydata for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- loading sysdata for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- loading sysdata for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- processing S4 stuff for %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- processing S4 stuff for %s"
+msgstr "잘못된 클래스입니다"
+
+#. R/namespace.R: gettextf("-- processing imports for %s", dQuote(package))
+#: R/namespace.R:0
+#, fuzzy
+msgid "-- processing imports for %s"
+msgstr "잘못된 클래스입니다"
+
+#. R/namespace.R: gettextf("-- registerS3methods for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- registerS3methods for %s"
+msgstr ""
+
+#. R/namespace.R: gettextf("-- running .onLoad for %s", dQuote(package))
+#: R/namespace.R:0
+msgid "-- running .onLoad for %s"
 msgstr ""
 
 #. R/namespace.R: message("--- caching metadata")
@@ -929,16 +892,17 @@ msgstr ""
 msgid "--- processing classes"
 msgstr "잘못된 클래스입니다"
 
-#. R/namespace.R: message("--- processing exports for ", dQuote(package))
+#. R/namespace.R: gettextf("--- processing exports for %s", dQuote(package))
 #: R/namespace.R:0
 #, fuzzy
-msgid "--- processing exports for"
+msgid "--- processing exports for %s"
 msgstr "잘못된 클래스입니다"
 
-#. R/namespace.R: message("--- sealing exports for ", dQuote(package))
+#. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "--- sealing exports for"
-msgstr ""
+#, fuzzy
+msgid "--- sealing exports for %s"
+msgstr "잘못된 클래스입니다"
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -1101,6 +1065,11 @@ msgid ""
 "Regular lines must have a tag.\n"
 "Offending lines start with:\n"
 "%s"
+msgstr ""
+
+#. R/namespace.R: gettextf("License for %s", sQuote(pkg))
+#: R/namespace.R:0
+msgid "License for %s"
 msgstr ""
 
 #. R/namespace.R: gettextf("Loading required namespace: %s", package)
@@ -1847,26 +1816,37 @@ msgid "input has been corrupted, with LF replaced by CR"
 msgstr ""
 
 #. R/attach.R: gettextf("invalid '%s' argument", "name")
+#. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/rowsum.R: gettextf("invalid '%s' argument", "x")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
-#: R/attach.R:0 R/connections.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/taskCallback.R:0
+#. R/version.R: gettextf("invalid '%s' argument", "value")
+#. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "유효한 'name' 인자가 아닙니다"
 
+#. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kappa.R: gettextf("invalid '%s' value", "nrow(z)")
 #. R/qr.R: gettextf("invalid '%s' value", "ncol(x)")
 #. R/qr.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/qr.R: gettextf("invalid '%s' value", "nrow(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(qr$rank)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(y)")
 #. R/qr.R: gettextf("invalid '%s' value", "NCOL(y)")
 #. R/qr.R: gettextf("invalid '%s' value", "NCOL(R)")
 #. R/seq.R: gettextf("invalid '%s' value", "(to - from)/by")
-#: R/qr.R:0 R/seq.R:0
+#: R/eigen.R:0 R/kappa.R:0 R/qr.R:0 R/seq.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "유효하지 않은 'value'입니다"
@@ -1887,31 +1867,15 @@ msgstr "'by' 문자열이 잘못되었습니다"
 msgid "invalid 'compress' argument:"
 msgstr "올바른 'compress' 인자가 아닙니다:"
 
-#. R/zapsmall.R: stop("invalid 'digits'")
-#: R/zapsmall.R:0
-msgid "invalid 'digits'"
-msgstr "유효하지 않은 'digits'입니다"
-
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
 msgid "invalid 'dimnames' given for data frame"
 msgstr "데이터프레임에 잘못된 'dimnames'이 주어졌습니다"
 
-#. R/colSums.R: stop("invalid 'dims'")
-#: R/colSums.R:0
-msgid "invalid 'dims'"
-msgstr "유효하지 않은 'dims'가 아닙니다"
-
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "유효하지 않은 'labels'입니다; 길이 %d는 반드시 1 이거나 %d이어야 합니다"
-
-#. R/dataframe.R: stop("invalid 'make.names'")
-#: R/dataframe.R:0
-#, fuzzy
-msgid "invalid 'make.names'"
-msgstr "유효하지 않은 패키지명입니다"
 
 #. R/dataframe.R: stop("invalid 'max' / getOption(\"max.print\"): ", max)
 #: R/dataframe.R:0
@@ -1927,17 +1891,6 @@ msgstr "유효하지 않은 'rle' 구조입니다"
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
 msgstr "유효하지 않은 'row.names'의 길이입니다"
-
-#. R/version.R: stop("invalid 'value'")
-#: R/version.R:0
-msgid "invalid 'value'"
-msgstr "유효하지 않은 'value'입니다"
-
-#. R/rowsum.R: stop("invalid 'x'")
-#: R/rowsum.R:0
-#, fuzzy
-msgid "invalid 'x'"
-msgstr "유효하지 않은 'dims'가 아닙니다"
 
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
@@ -1961,42 +1914,11 @@ msgstr "유효하지 않은 리스트 인자입니다:  모든 변수들이 같�
 msgid "invalid mode for 'by'"
 msgstr "'by'에 유효하지 않은 모드입니다"
 
-#. R/qr.R: stop("invalid ncol(qr$qr)")
-#: R/qr.R:0
-msgid "invalid ncol(qr$qr)"
-msgstr "유효하지 않은 ncol(qr$qr)입니다"
-
-#. R/qr.R: stop("invalid ncol(qr$rank)")
-#: R/qr.R:0
-msgid "invalid ncol(qr$rank)"
-msgstr "유효하지 않은 ncol(qr$rank)입니다"
-
-#. R/qr.R: stop("invalid ncol(y)")
-#: R/qr.R:0
-msgid "invalid ncol(y)"
-msgstr "유효하지 않은 ncol(y)입니다"
-
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
 #, fuzzy
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "유효하지 않은 버전지정 %s입니다"
-
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#: R/qr.R:0
-msgid "invalid nrow(qr$qr)"
-msgstr "유효하지 않은 nrow(qr$qr)입니다"
-
-#. R/eigen.R: stop("invalid nrow(x)")
-#: R/eigen.R:0
-msgid "invalid nrow(x)"
-msgstr "유효하지 않은 nrow(x)입니다"
-
-#. R/kappa.R: stop("invalid nrow(z)")
-#: R/kappa.R:0
-#, fuzzy
-msgid "invalid nrow(z)"
-msgstr "유효하지 않은 nrow(x)입니다"
 
 #. R/cut.R: stop("invalid number of intervals")
 #: R/cut.R:0
@@ -2690,9 +2612,9 @@ msgstr "두번째 인자는 반드시 리스트(list)이어야 합니다."
 msgid "second argument of / cannot be a \"difftime\" object"
 msgstr "/ 의 두번째 인자가 \"difftime\" 객체이서는 안됩니다."
 
-#. R/unix/system.unix.R: warning("setting stdout = TRUE")
+#. R/unix/system.unix.R: warning("setting 'stdout = TRUE'")
 #: R/unix/system.unix.R:0
-msgid "setting stdout = TRUE"
+msgid "setting 'stdout = TRUE'"
 msgstr ""
 
 #. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
@@ -2709,11 +2631,6 @@ msgstr "공유 객체 %s는 로드되지 않았ㅅ브니다"
 #: R/library.R:0
 msgid "shared object '%s' already loaded"
 msgstr "공유된 객체 '%s'는 이미 로드되었습니다"
-
-#. R/library.R: gettextf("shared object '%s' not found", sQuote(chname1))
-#: R/library.R:0
-msgid "shared object '%s' not found"
-msgstr "공유된 객체 '%s'를 찾을 수 없습니다"
 
 #. R/solve.R: stop("singular matrix 'a' in 'solve'")
 #: R/solve.R:0
@@ -3172,6 +3089,76 @@ msgstr[0] ""
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "호출된 패키지(들)가 없습니다."
+
+#~ msgid "invalid 'digits'"
+#~ msgstr "유효하지 않은 'digits'입니다"
+
+#~ msgid "invalid 'dims'"
+#~ msgstr "유효하지 않은 'dims'가 아닙니다"
+
+#, fuzzy
+#~ msgid "invalid 'make.names'"
+#~ msgstr "유효하지 않은 패키지명입니다"
+
+#~ msgid "invalid 'value'"
+#~ msgstr "유효하지 않은 'value'입니다"
+
+#, fuzzy
+#~ msgid "invalid 'x'"
+#~ msgstr "유효하지 않은 'dims'가 아닙니다"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "유효하지 않은 ncol(qr$qr)입니다"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "유효하지 않은 ncol(qr$rank)입니다"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "유효하지 않은 ncol(y)입니다"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "유효하지 않은 nrow(qr$qr)입니다"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "유효하지 않은 nrow(x)입니다"
+
+#, fuzzy
+#~ msgid "invalid nrow(z)"
+#~ msgstr "유효하지 않은 nrow(x)입니다"
+
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "'by'는 반드시 열의 개수와 일치해야 합니다"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr'은 반드시 길이가 1이어야 합니다"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout'은 반드시 길이가 1이어야 합니다"
+
+#~ msgid "shared object '%s' not found"
+#~ msgstr "공유된 객체 '%s'를 찾을 수 없습니다"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "'ignore.stdout'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "'invisible'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "'minimized'는 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#, fuzzy
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "'show.output.on.console'은 반드시 TRUE 또는 FALSE이어야 합니다"
 
 #, fuzzy
 #~ msgid "invalid '(to - from)/by'"

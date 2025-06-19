@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-19 15:01+0200\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -9404,7 +9404,8 @@ msgid "error [%d] from Lapack 'ztrcon()'"
 msgstr "code d'erreur [%d] dans le sous-programme Lapack 'ztrcon()'"
 
 #: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:1197
-msgid "'a' is 0-diml"
+#, fuzzy
+msgid "'a' is 0-dimensional"
 msgstr "'a' est de dimension nulle"
 
 #: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1200
@@ -9768,7 +9769,8 @@ msgid "invalid 'width' or 'height'"
 msgstr "'width' ou 'height' incorrecte"
 
 #: src/modules/X11/devX11.cpp:3234
-msgid "invalid colortype passed to X11 driver"
+#, fuzzy
+msgid "invalid 'colortype' passed to X11 driver"
 msgstr "colorimétrie incorrecte passée au pilote X11"
 
 #: src/modules/X11/devX11.cpp:3248
@@ -9983,7 +9985,8 @@ msgid "rbinom: probability sum should be 1, but is %g"
 msgstr "rbinom : la somme des probabilités devrait valoir 1, mais elle vaut %g"
 
 #: src/nmath/signrank.cpp:75
-msgid "signrank allocation error"
+#, fuzzy
+msgid "'signrank' allocation error"
 msgstr "erreur d'allocation pour signrank"
 
 #: src/nmath/snorm.cpp:326

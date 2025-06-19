@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -962,10 +962,11 @@ msgstr "può unicamente gestire elementi vector e factor"
 msgid "can only receive calls on local machine"
 msgstr "si possono solo ricevere chiamate sulla macchina locale"
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
-msgstr "non è possibile selezionare un"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "non è possibile impostare repository in maniera non-interattiva"
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
@@ -1517,11 +1518,6 @@ msgstr "metodo 'mailx' solo per Unix"
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
 msgstr "il metodo si può applicare solo ad oggetti %s"
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-msgid "mirror non-interactively"
-msgstr "mirror non-interattivo"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -2329,6 +2325,12 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "il pacchetto %s non è disponibile %s"
 msgstr[1] "i pacchetti %s non sono disponibili %s"
+
+#~ msgid "cannot choose a"
+#~ msgstr "non è possibile selezionare un"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "mirror non-interattivo"
 
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()' è specifico per Windows"

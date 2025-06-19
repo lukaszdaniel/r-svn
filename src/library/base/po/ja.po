@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-19 15:01+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -9421,7 +9421,8 @@ msgid "error [%d] from Lapack 'ztrcon()'"
 msgstr "Lapack ルーチン 'ztrcon()' からエラー [%d] が返されました"
 
 #: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:1197
-msgid "'a' is 0-diml"
+#, fuzzy
+msgid "'a' is 0-dimensional"
 msgstr "'a' の次元が 0 です"
 
 #: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1200
@@ -9785,7 +9786,8 @@ msgid "invalid 'width' or 'height'"
 msgstr "'width' または 'height' が不正です"
 
 #: src/modules/X11/devX11.cpp:3234
-msgid "invalid colortype passed to X11 driver"
+#, fuzzy
+msgid "invalid 'colortype' passed to X11 driver"
 msgstr "不正な色タイプが X11 ドライバーに引き渡されました"
 
 #: src/modules/X11/devX11.cpp:3248
@@ -10000,7 +10002,8 @@ msgid "rbinom: probability sum should be 1, but is %g"
 msgstr "rbinom: 確率の総和は 1 になるべきですが、%g になっています"
 
 #: src/nmath/signrank.cpp:75
-msgid "signrank allocation error"
+#, fuzzy
+msgid "'signrank' allocation error"
 msgstr "signrank 割り当てエラーです"
 
 #: src/nmath/snorm.cpp:326

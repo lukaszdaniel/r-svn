@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 17:27\n"
+"POT-Creation-Date: 2025-06-19 16:45\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -2372,9 +2372,20 @@ msgstr "内部ループ 2; ステップサイズを訂正することができ�
 msgid "interactions are not allowed"
 msgstr "交互作用は許されません"
 
+#. R/bandwidths.R: gettextf("invalid '%s' argument", "x")
+#. R/bandwidths.R: gettextf("invalid '%s' argument", "nb")
+#. R/chisq.test.R: gettextf("invalid '%s' argument", "x")
+#. R/loess.R: gettextf("invalid '%s' argument", "x")
+#. R/loess.R: gettextf("invalid '%s' argument", "y")
+#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "無効な 'use' 引数です"
+
+#. R/bandwidths.R: gettextf("invalid '%s' value", "length(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
-#: R/kmeans.R:0
+#: R/bandwidths.R:0 R/kmeans.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "無効な 'use' 引数です"
@@ -2435,11 +2446,6 @@ msgstr "無効な 'lm' オブジェクト: 項 ('terms') 成分がありませ�
 msgid "invalid 'method' argument"
 msgstr "無効な 'method' 引数です"
 
-#. R/bandwidths.R: stop("invalid 'nb'")
-#: R/bandwidths.R:0
-msgid "invalid 'nb'"
-msgstr "無効な 'nb'"
-
 #. R/cutree.R: stop("invalid 'tree' ('merge' component)")
 #: R/cutree.R:0
 msgid "invalid 'tree' ('merge' component)"
@@ -2449,18 +2455,6 @@ msgstr "無効な 'tree' ('merge' 成分) です"
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr "無効な 'use' 引数です"
-
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/chisq.test.R: stop("invalid 'x'")
-#. R/loess.R: stop("invalid 'x'")
-#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
-msgid "invalid 'x'"
-msgstr "無効な 'x'"
-
-#. R/loess.R: stop("invalid 'y'")
-#: R/loess.R:0
-msgid "invalid 'y'"
-msgstr "無効な 'y'"
 
 #. R/dendrogram.R: stop("invalid (length 0) node in dendrogram")
 #: R/dendrogram.R:0
@@ -4385,6 +4379,15 @@ msgstr[0] "上位のスコープはモデル中に含まれない項 %s を持�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "結合された当てはめから %d/%d 行を使用します"
+
+#~ msgid "invalid 'nb'"
+#~ msgstr "無効な 'nb'"
+
+#~ msgid "invalid 'x'"
+#~ msgstr "無効な 'x'"
+
+#~ msgid "invalid 'y'"
+#~ msgstr "無効な 'y'"
 
 #~ msgid "invalid ncol(x)"
 #~ msgstr "ncol(x) が不正です"

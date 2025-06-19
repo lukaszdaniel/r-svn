@@ -661,7 +661,7 @@ function(chname, libpath, verbose = getOption("verbose"),
         if(.Platform$OS.type == "windows")
             stop(gettextf("DLL %s not found", sQuote(chname1)), domain = NA)
         else
-            stop(gettextf("shared object '%s' not found", sQuote(chname1)),
+            stop(gettextf("shared object %s not found", sQuote(chname1)),
                  domain = NA)
     if(verbose)
         message(gettextf("now dyn.unload(\"%s\") ...", file), domain = NA)

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -971,10 +971,11 @@ msgstr "ベクトルと因子要素だけを処理できます"
 msgid "can only receive calls on local machine"
 msgstr "ローカルな機械上でのコールだけを受け取ることが出来ます"
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
-msgstr ""
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
+msgstr " BioC ミラーの選択は対話的にしかできません "
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
@@ -1538,12 +1539,6 @@ msgstr "'mailx' メソッドは Unix でのみ利用可能です"
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
 msgstr "メソッドは %s オブジェクトだけに適用可能です"
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-#, fuzzy
-msgid "mirror non-interactively"
-msgstr "CRAN ミラーの選択は対話的にしかできません"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -2316,6 +2311,10 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "パッケージ %s が利用できません (%s)"
 
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "CRAN ミラーの選択は対話的にしかできません"
+
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()' は Windows 固有の関数です"
 
@@ -2370,9 +2369,6 @@ msgstr[0] "パッケージ %s が利用できません (%s)"
 
 #~ msgid "Do you want to attempt to install these from sources?"
 #~ msgstr " ソースファイルからのインストールを試みますか？ "
-
-#~ msgid "cannot choose a BioC mirror non-interactively"
-#~ msgstr " BioC ミラーの選択は対話的にしかできません "
 
 #~ msgid "no download method found"
 #~ msgstr " ダウンロードの方法が見付かりません "

@@ -27,15 +27,15 @@ system <- function(command, intern = FALSE,
         message("arguments 'show.output.on.console', 'minimized' and 'invisible' are for Windows only")
 
     if(!is.logical(intern) || is.na(intern))
-        stop("'intern' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "intern"))
     if(!is.logical(ignore.stdout) || is.na(ignore.stdout))
-        stop("'ignore.stdout' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "ignore.stdout"))
     if(!is.logical(ignore.stderr) || is.na(ignore.stderr))
-        stop("'ignore.stderr' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "ignore.stderr"))
     if(!is.logical(wait) || is.na(wait))
-        stop("'wait' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "wait"))
     if(!is.logical(receive.console.signals) || is.na(receive.console.signals))
-        stop("'receive.console.signals' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "receive.console.signals"))
 
     if(ignore.stdout) command <- paste(command, ">/dev/null")
     if(ignore.stderr) command <- paste(command, "2>/dev/null")
@@ -63,9 +63,9 @@ system2 <- function(command, args = character(),
     if(!missing(minimized) || !missing(invisible))
         message("arguments 'minimized' and 'invisible' are for Windows only")
     if(!is.logical(wait) || is.na(wait))
-        stop("'wait' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "wait"))
     if(!is.logical(receive.console.signals) || is.na(receive.console.signals))
-        stop("'receive.console.signals' must be TRUE or FALSE")
+        stop(gettextf("'%s' must be TRUE or FALSE", "receive.console.signals"))
     intern <- FALSE
     command <- paste(c(env, shQuote(command), args), collapse = " ")
 
@@ -73,7 +73,7 @@ system2 <- function(command, args = character(),
     if(is.null(stderr))
 	stderr <- FALSE
     else if (isTRUE(stderr)) {
-        if (!isTRUE(stdout)) warning("setting stdout = TRUE")
+        if (!isTRUE(stdout)) warning("setting 'stdout = TRUE'")
         stdout <- TRUE
     }
     if (identical(stdout, FALSE))
@@ -81,7 +81,7 @@ system2 <- function(command, args = character(),
     else if(isTRUE(stdout))
         intern <- TRUE
     else if(is.character(stdout)) {
-        if(length(stdout) != 1L) stop("'stdout' must be of length 1")
+        if(length(stdout) != 1L) stop(gettextf("'%s' must be of length 1", "stdout"))
         if(nzchar(stdout)) {
             command <- if (identical(stdout, stderr))
 		paste (command, ">", shQuote(stdout), "2>&1")
@@ -93,7 +93,7 @@ system2 <- function(command, args = character(),
     else if(isTRUE(stderr)) { # stdout == TRUE
         command <- paste(command, "2>&1")
     } else if(is.character(stderr)) {
-        if(length(stderr) != 1L) stop("'stderr' must be of length 1")
+        if(length(stderr) != 1L) stop(gettextf("'%s' must be of length 1", "stderr"))
         if(nzchar(stderr) && !identical(stdout, stderr))
             command <- paste(command, "2>", shQuote(stderr))
     }

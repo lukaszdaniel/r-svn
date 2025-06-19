@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
-"PO-Revision-Date: 2025-06-18 21:10+0200\n"
+"POT-Creation-Date: 2025-06-19 15:01+0200\n"
+"PO-Revision-Date: 2025-06-19 15:06+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -439,13 +439,12 @@ msgstr "uruchomione polecenie '%s' otrzymało status %d"
 
 #: src/gnuwin32/getline/getline.cpp:422 src/gnuwin32/getline/getline.cpp:662 src/gnuwin32/getline/getline.cpp:973
 #: src/gnuwin32/getline/getline.cpp:1404 src/gnuwin32/getline/getline.cpp:1428
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: getline(): invalid multi-byte character.\n"
 msgstr ""
 "\n"
-"*** Błąd: 'getline()': przepełnienie bufora wejściowego\n"
+"*** Błąd: 'getline()': niepoprawny znak wielobajtowy\n"
 
 #: src/gnuwin32/getline/getline.cpp:452 src/gnuwin32/getline/getline.cpp:899
 msgid ""
@@ -464,31 +463,28 @@ msgstr ""
 "*** Błąd: 'getline()': nie jest interaktywne, użyj stdio.\n"
 
 #: src/gnuwin32/getline/getline.cpp:475 src/gnuwin32/getline/getline.cpp:481
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: getline(): unable to convert to UCS-4.\n"
 msgstr ""
 "\n"
-"*** Błąd: 'getline()': przepełnienie bufora wejściowego\n"
+"*** Błąd: 'getline()': nie można przekształcić na UCS-4.\n"
 
 #: src/gnuwin32/getline/getline.cpp:478
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: getline(): unable to convert to UTF-16.\n"
 msgstr ""
 "\n"
-"*** Błąd: 'getline()': przepełnienie bufora wejściowego\n"
+"*** Błąd: 'getline()': nie można przekształcić na UTF-16.\n"
 
 #: src/gnuwin32/getline/getline.cpp:485
-#, fuzzy
 msgid ""
 "\n"
 "*** Error: getline(): unable to convert from OEM CP.\n"
 msgstr ""
 "\n"
-"*** Błąd: 'getline()': przepełnienie bufora wejściowego\n"
+"*** Błąd: 'getline()': nie można przekształcić z OEM CP.\n"
 
 #: src/gnuwin32/getline/getline.cpp:545
 msgid ""
@@ -600,7 +596,7 @@ msgstr "niepoprawny wektor '%s'"
 #: src/include/Rinlinedfuns.h:248
 #, c-format
 msgid "bad standard '%s' vector"
-msgstr ""
+msgstr "niepoprawny standardowy wektor '%s'"
 
 #: src/include/Rinlinedfuns.h:253 src/include/Rinlinedfuns.h:257 src/include/Rinlinedfuns.h:261 src/include/Rinlinedfuns.h:265
 #: src/include/Rinlinedfuns.h:269
@@ -727,7 +723,7 @@ msgstr "niewspierany typ"
 
 #: src/main/altclasses.cpp:1994
 msgid "srt must be -2, -1, 0, or +1, +2, or NA"
-msgstr ""
+msgstr "argument 'srt' musi mieć wartość -2, -1, 0, lub +1, +2, lub NA"
 
 #: src/main/altclasses.cpp:1997
 msgid "no_na must be 0 or +1"
@@ -1125,7 +1121,7 @@ msgstr "próba ustawienia niepoprawnego atrybutu 'class'"
 
 #: src/main/attrib.cpp:877
 msgid "type must be LANGSXP at this point"
-msgstr ""
+msgstr "na tym etapie typ obiektu musi być LANGSXP"
 
 #: src/main/attrib.cpp:908
 #, fuzzy
@@ -2191,7 +2187,7 @@ msgstr "przydział połączenia zstdfile nie powiódł się"
 
 #: src/main/connections.cpp:2691 src/main/connections.cpp:6912 src/main/connections.cpp:7061 src/main/connections.cpp:7293
 msgid "Zstd compression support was not included in this R binary."
-msgstr ""
+msgstr "W tym pliku binarnym R nie uwzględniono obsługi kompresji Zstd."
 
 #: src/main/connections.cpp:2728
 #, c-format
@@ -3082,7 +3078,6 @@ msgid "PACKAGE argument is too long"
 msgstr "argument PACKAGE jest zbyt długi"
 
 #: src/main/dotcode.cpp:482 src/main/dotcode.cpp:486
-#, fuzzy
 msgid "ENCODING is defunct and will be ignored"
 msgstr "argument 'ENCODING' jest przestarzały i zostanie zignorowany"
 
@@ -3097,7 +3092,7 @@ msgstr "zbyt wiele argumentów"
 #: src/main/dotcode.cpp:546
 #, c-format
 msgid "WEIRD RETURN VALUE: %p"
-msgstr ""
+msgstr "ZWRÓCONO DZIWNĄ WARTOŚĆ: %p"
 
 #: src/main/dotcode.cpp:549
 msgid "converting NULL pointer to R NULL"
@@ -3220,9 +3215,9 @@ msgid "zip file '%s' cannot be opened"
 msgstr "plik zip '%s' nie może zostać otwarty"
 
 #: src/main/dounzip.cpp:325
-#, fuzzy, c-format
+#, c-format
 msgid "error %d with zipfile in unzGetGlobalInfo"
-msgstr "błąd %d z plikiem zip w unzGetCurrentFileInfo\n"
+msgstr "błąd %d z plikiem zip w unzGetGlobalInfo"
 
 #: src/main/dounzip.cpp:344
 #, c-format
@@ -5012,24 +5007,24 @@ msgid "invalid parameter passed to a C runtime function"
 msgstr "niepoprawny typ przekazany do wewnętrznej funkcji\n"
 
 #: src/main/main.cpp:943
-#, fuzzy, c-format
+#, c-format
 msgid "Setting LC_COLLATE=%.200s failed\n"
-msgstr "Ustawianie LC_COLLATE=%s nie powiodło się\n"
+msgstr "Ustawianie LC_COLLATE=%.200s nie powiodło się\n"
 
 #: src/main/main.cpp:948
-#, fuzzy, c-format
+#, c-format
 msgid "Setting LC_CTYPE=%.200s failed\n"
-msgstr "Ustawianie LC_CTYPE=%s nie powiodło się\n"
+msgstr "Ustawianie LC_CTYPE=%.200s nie powiodło się\n"
 
 #: src/main/main.cpp:953
-#, fuzzy, c-format
+#, c-format
 msgid "Setting LC_MONETARY=%.200s failed\n"
-msgstr "Ustawianie LC_MONETARY=%s nie powiodło się\n"
+msgstr "Ustawianie LC_MONETARY=%.200s nie powiodło się\n"
 
 #: src/main/main.cpp:958
-#, fuzzy, c-format
+#, c-format
 msgid "Setting LC_TIME=%.200s failed\n"
-msgstr "Ustawianie LC_TIME=%s nie powiodło się\n"
+msgstr "Ustawianie LC_TIME=%.200s nie powiodło się\n"
 
 #: src/main/main.cpp:987
 msgid "Setting LC_CTYPE failed, using \"C\"\n"
@@ -6835,7 +6830,7 @@ msgstr "nie można ustawić atrybutu na '%s'"
 #: src/main/Rstrptime.h:523 src/main/Rstrptime.h:1011
 #, c-format
 msgid "values for %%z outside +/-1400 are an error"
-msgstr ""
+msgstr "wartości dla %%z spoza zakresu +/-1400 są błędem"
 
 #: src/main/Rstrptime.h:532 src/main/Rstrptime.h:1020
 #, c-format
@@ -7736,40 +7731,36 @@ msgid "WARNING: vsize ridiculously low, Megabytes assumed\n"
 msgstr "OSTRZEŻENIE: 'vsize' jest wyjątkowo niskie, założono Megabajty\n"
 
 #: src/main/startup.cpp:326
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: too small v(ector heap)size '%lu' ignored, using default = %gM\n"
-msgstr ""
-"OSTRZEŻENIE: niepoprawne vsize (rozmiar stosu wektora) '%lu' zostało zignorowane\n"
-"używanie domyślnego = %gM\n"
+msgstr "OSTRZEŻENIE: zbyt mały rozmiar stosu wektora '%lu' zostało zignorowane, używanie domyślnego = %gM\n"
 
 #: src/main/startup.cpp:331
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: too large v(ector heap)size '%lu' ignored, using default = %gM\n"
-msgstr ""
-"OSTRZEŻENIE: niepoprawne vsize (rozmiar stosu wektora) '%lu' zostało zignorowane\n"
-"używanie domyślnego = %gM\n"
+msgstr "OSTRZEŻENIE: zbyt duży rozmiar stosu wektora '%lu' został zignorowany, używanie domyślnego = %gM\n"
 
 #: src/main/startup.cpp:340
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: too small language heap (n)size '%lu' ignored, using default = %ld\n"
-msgstr "OSTRZEŻENIE: niepoprawny rozmiar stosu języka nsize `%lu' został zignorowany, używanie domyślnego = %ld\n"
+msgstr "OSTRZEŻENIE: zbyt mały rozmiar stosu języka '`%lu' został zignorowany, używanie domyślnego = %ld\n"
 
 #: src/main/startup.cpp:345
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: too large language heap (n)size '%lu' ignored, using default = %ld\n"
-msgstr "OSTRZEŻENIE: niepoprawny rozmiar stosu języka nsize `%lu' został zignorowany, używanie domyślnego = %ld\n"
+msgstr "OSTRZEŻENIE: zbyt duży rozmiar stosu języka '`%lu' został zignorowany, używanie domyślnego = %ld\n"
 
 #: src/main/startup.cpp:360
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: too small maximum for v(ector heap)size '%lu' ignored, \t\t the current usage %gM is already larger\n"
 msgstr ""
-"OSTRZEŻENIE: niepoprawne vsize (rozmiar stosu wektora) '%lu' zostało zignorowane\n"
-"używanie domyślnego = %gM\n"
+"OSTRZEŻENIE: zbyt mały maksymalny rozmiar stosu wektora '%lu' zostało zignorowane\t\t bieżące użycie %gM jest obecnie większe\n"
 
 #: src/main/startup.cpp:368
-#, fuzzy, c-format
+#, c-format
 msgid "WARNING: too small maximum for language heap (n)size '%lu' ignored, \t\t the current usage '%lu' is already larger\n"
-msgstr "OSTRZEŻENIE: niepoprawny rozmiar stosu języka nsize `%lu' został zignorowany, używanie domyślnego = %ld\n"
+msgstr ""
+"OSTRZEŻENIE: zbyt mały maksymalny rozmiar stosu języka '%lu' zostało zignorowane\t\t bieżące użycie '%lu' jest obecnie większe\n"
 
 #: src/main/startup.cpp:378
 #, c-format
@@ -8933,9 +8924,8 @@ msgid "problem in listening on this socket"
 msgstr "problem z nasłuchiwaniem na tym gniedźcie"
 
 #: src/modules/internet/sockconn.cpp:82
-#, fuzzy
 msgid "problem in accepting connections on this socket"
-msgstr "problem z nasłuchiwaniem na tym gniedźcie"
+msgstr "problem z akceptacją połączeń na tym gnieździe"
 
 #: src/modules/internet/sockconn.cpp:101
 #, c-format
@@ -9047,7 +9037,8 @@ msgid "error [%d] from Lapack 'ztrcon()'"
 msgstr "błąd [%d] w funkcji Lapack 'ztrcon()'"
 
 #: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:1197
-msgid "'a' is 0-diml"
+#, fuzzy
+msgid "'a' is 0-dimensional"
 msgstr "'a' jest 0-wymiarowe"
 
 #: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1200
@@ -9392,7 +9383,8 @@ msgid "invalid 'width' or 'height'"
 msgstr "niepoprawne argumenty 'width' lub 'height'"
 
 #: src/modules/X11/devX11.cpp:3234
-msgid "invalid colortype passed to X11 driver"
+#, fuzzy
+msgid "invalid 'colortype' passed to X11 driver"
 msgstr "niepoprawny argument 'colortype' przekazany do sterownika X11"
 
 #: src/modules/X11/devX11.cpp:3248
@@ -9600,7 +9592,7 @@ msgid "rbinom: probability sum should be 1, but is %g"
 msgstr "rbinom: suma prawdopodobieństw powinna wynosić 1, a wynosi %g"
 
 #: src/nmath/signrank.cpp:75
-msgid "signrank allocation error"
+msgid "'signrank' allocation error"
 msgstr "błąd przydziału 'signrank'"
 
 #: src/nmath/snorm.cpp:326

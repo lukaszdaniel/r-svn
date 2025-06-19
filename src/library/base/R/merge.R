@@ -44,7 +44,7 @@ merge.data.frame <-
             by <- match(by, poss) - 1L
         } else if(is.numeric(by)) {
             if(any(by < 0L) || any(by > nc))
-                stop("'by' must match numbers of columns")
+                stop("'by' must match number of columns")
         } else if(is.logical(by)) {
             if(length(by) != nc) stop("'by' must match number of columns")
             by <- seq_along(by)[by]

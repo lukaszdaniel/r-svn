@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-19 15:01+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -9366,7 +9366,7 @@ msgid "error [%d] from Lapack 'ztrcon()'"
 msgstr "Lapack의 함수 'ztrcon()'로부터 에러 [%d]가 발생했습니다"
 
 #: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:1197
-msgid "'a' is 0-diml"
+msgid "'a' is 0-dimensional"
 msgstr ""
 
 #: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1200
@@ -9723,7 +9723,8 @@ msgid "invalid 'width' or 'height'"
 msgstr "'width' 또는 'height'가 잘못되었습니다"
 
 #: src/modules/X11/devX11.cpp:3234
-msgid "invalid colortype passed to X11 driver"
+#, fuzzy
+msgid "invalid 'colortype' passed to X11 driver"
 msgstr "올바르지 않은 컬러타입이 X11 장치에 전달되었습니다"
 
 #: src/modules/X11/devX11.cpp:3248
@@ -9942,8 +9943,9 @@ msgid "rbinom: probability sum should be 1, but is %g"
 msgstr "rbinom: 모든 확률값들의 합은 1이어야 하는데 %g 입니다."
 
 #: src/nmath/signrank.cpp:75
-msgid "signrank allocation error"
-msgstr ""
+#, fuzzy
+msgid "'signrank' allocation error"
+msgstr "regcomp 에러: '%s'"
 
 #: src/nmath/snorm.cpp:326
 #, c-format

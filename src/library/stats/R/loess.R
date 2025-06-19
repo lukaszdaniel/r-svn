@@ -104,8 +104,8 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
     if(D > 4) stop("only 1-4 predictors are allowed")
     N <- as.integer(NROW(x))
     if (is.na(N)) stop("invalid NROW(X)")
-    if(!N || !D)	stop("invalid 'x'")
-    if(length(y) != N)	stop("invalid 'y'")
+    if(!N || !D)	stop(gettextf("invalid '%s' argument", "x"))
+    if(length(y) != N)	stop(gettextf("invalid '%s' argument", "y"))
     x <- as.matrix(x)
     storage.mode(x) <- "double"
     storage.mode(y) <- "double"

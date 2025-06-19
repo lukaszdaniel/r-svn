@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -965,10 +965,11 @@ msgstr "kann nur Vektor- und Faktorelemente behandeln"
 msgid "can only receive calls on local machine"
 msgstr "kann Aufrufe nur auf der lokalen Maschine entgegennehmen"
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
-msgstr "kann nicht wählen"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "kann keinen BioC-Spiegelserver nicht-interaktiv wählen"
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
@@ -1530,11 +1531,6 @@ msgstr "Methode 'mailx' nur unter UNIX"
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
 msgstr "Methode kann nicht auf %s Objekte angewendet werden"
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-msgid "mirror non-interactively"
-msgstr "mirror nicht interaktiv"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -2347,6 +2343,12 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "Paket %s ist nicht verfügbar %s"
 msgstr[1] "Pakete %s sind nicht verfügbar %s"
 
+#~ msgid "cannot choose a"
+#~ msgstr "kann nicht wählen"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "mirror nicht interaktiv"
+
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()' ist spezifisch für Windows"
 
@@ -2427,9 +2429,6 @@ msgstr[1] "Pakete %s sind nicht verfügbar %s"
 
 #~ msgid "could not find package %s"
 #~ msgstr "konnte Paket %s nicht finden"
-
-#~ msgid "cannot choose a BioC mirror non-interactively"
-#~ msgstr "kann keinen BioC-Spiegelserver nicht-interaktiv wählen"
 
 #~ msgid "Do you want to attempt to install these from sources?"
 #~ msgstr "Möchten Sie aus den Quelltexten installieren?"

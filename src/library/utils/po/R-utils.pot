@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1260,9 +1260,9 @@ msgstr ""
 
 
 #: R/packages.R: 0
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 
-msgid "cannot choose a"
+msgid "cannot choose a %s mirror non-interactively"
 msgstr ""
 
 
@@ -2031,13 +2031,6 @@ msgstr ""
 #. R/citation.R: gettextf("method is only applicable to %s objects", sQuote("bibentry"))
 
 msgid "method is only applicable to %s objects"
-msgstr ""
-
-
-#: R/packages.R: 0
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-
-msgid "mirror non-interactively"
 msgstr ""
 
 

@@ -72,7 +72,7 @@ static void w_init_maybe(int n)
     if(!w) {
 	w = (double *) calloc((size_t) c + 1, sizeof(double));
 #ifdef MATHLIB_STANDALONE
-	if (!w) MATHLIB_ERROR("%s", _("signrank allocation error"));
+	if (!w) MATHLIB_ERROR("%s", _("'signrank' allocation error"));
 #endif
 	allocated_n = n;
     }

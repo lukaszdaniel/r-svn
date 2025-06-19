@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 17:34\n"
-"PO-Revision-Date: 2025-06-01 20:38+0200\n"
+"POT-Creation-Date: 2025-06-19 16:44\n"
+"PO-Revision-Date: 2025-06-19 16:45+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -160,6 +160,23 @@ msgstr "'%s' nie ma sensu dla uporządkowanych czynników"
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
 msgstr "'%s' ma sens tylko dla uporządkowanych czynników jeśli wszystkie argumenty mają ten sam zbiór poziomów"
 
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "intern")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stdout")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stderr")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "wait")
+#. R/unix/system.unix.R: gettextf("'%s' must be TRUE or FALSE", "receive.console.signals")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "intern")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stdout")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "ignore.stderr")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "wait")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "show.output.on.console")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "minimized")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "invisible")
+#. R/windows/system.R: gettextf("'%s' must be TRUE or FALSE", "receive.console.signals")
+#: R/unix/system.unix.R:0 R/windows/system.R:0
+msgid "'%s' must be TRUE or FALSE"
+msgstr "argument '%s' musi mieć wartość TRUE lub FALSE"
+
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
 #: R/datetime.R:0
@@ -203,8 +220,11 @@ msgstr "argumen '%s' musi być zmienną logiczną"
 #. R/seq.R: gettextf("'%s' must be of length 1", "to")
 #. R/seq.R: gettextf("'%s' must be of length 1", "by")
 #. R/taskCallback.R: gettextf("'%s' must be of length 1", "which")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/taskCallback.R:0
+#. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stdout")
+#. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
+#. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
+#. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'%s' must be of length 1"
 msgstr "argument '%s' musi mieć długość 1"
 
@@ -293,11 +313,6 @@ msgstr "'by' posiada wartość NA"
 #. R/merge.R: stop("'by' must match number of columns")
 #: R/merge.R:0
 msgid "'by' must match number of columns"
-msgstr "argument 'by' musi zgadzać się z liczbą kolumn"
-
-#. R/merge.R: stop("'by' must match numbers of columns")
-#: R/merge.R:0
-msgid "'by' must match numbers of columns"
 msgstr "argument 'by' musi zgadzać się z liczbą kolumn"
 
 #. R/merge.R: stop("'by' must specify one or more columns as numbers, names or logical")
@@ -460,18 +475,6 @@ msgstr "argument 'headers' musi zawierać nazwy i nie mogą być one wartościam
 msgid "'iconvlist' is not available on this system"
 msgstr "'iconvlist' nie jest dostępne w tym systemie"
 
-#. R/unix/system.unix.R: stop("'ignore.stderr' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'ignore.stderr' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'ignore.stderr' must be TRUE or FALSE"
-msgstr "argument 'ignore.stderr' musi mieć wartość TRUE lub FALSE"
-
-#. R/unix/system.unix.R: stop("'ignore.stdout' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'ignore.stdout' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'ignore.stdout' must be TRUE or FALSE"
-msgstr "argument 'ignore.stdout' musi mieć wartość TRUE lub FALSE"
-
 #. R/merge.R: stop("'incomparables' is supported only for merging on a single column")
 #: R/merge.R:0
 msgid "'incomparables' is supported only for merging on a single column"
@@ -507,17 +510,6 @@ msgstr "argument 'input' musi mieć długość 1"
 msgid "'input.d.mark' has no characters"
 msgstr "argument 'input.d.mark' nie zawiera znaków"
 
-#. R/unix/system.unix.R: stop("'intern' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'intern' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'intern' must be TRUE or FALSE"
-msgstr "argument 'intern' musi mieć wartość TRUE lub FALSE"
-
-#. R/windows/system.R: stop("'invisible' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'invisible' must be TRUE or FALSE"
-msgstr "argument 'invisible' musi mieć wartość TRUE lub FALSE"
-
 #. R/qr.R: stop("'k' is too large")
 #: R/qr.R:0
 msgid "'k' is too large"
@@ -545,11 +537,6 @@ msgstr "argument 'length.out' musi być liczbą nieujemną"
 #: R/source.R:0 R/stop.R:0
 msgid "'local' must be TRUE, FALSE or an environment"
 msgstr "argument 'local' musi być TRUE, FALSE lub musi być środowiskiem"
-
-#. R/windows/system.R: stop("'minimized' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'minimized' must be TRUE or FALSE"
-msgstr "argument 'minimized' musi mieć wartość TRUE lub FALSE"
 
 #. R/format.R: stop("'mode' must be \"double\" (\"real\"), \"integer\" or \"character\"")
 #: R/format.R:0
@@ -586,12 +573,6 @@ msgstr "'pos=1' nie jest możliwe co było już przez lata wskazywane"
 msgid "'qr' and 'y' must have the same number of rows"
 msgstr "argumenty 'qr' oraz 'y' muszą mieć tę samą liczbę wierszy"
 
-#. R/unix/system.unix.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'receive.console.signals' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'receive.console.signals' must be TRUE or FALSE"
-msgstr "argument 'receive.console.signals' musi mieć wartość TRUE lub FALSE"
-
 #. R/unlist.R: stop("'recursive' is NA")
 #: R/unlist.R:0
 msgid "'recursive' is NA"
@@ -621,23 +602,6 @@ msgstr "argument 'row.names' powinien określać jedną ze zmiennych"
 #: R/all.equal.R:0
 msgid "'scale' should be numeric or NULL"
 msgstr "argument 'scale' powininen być liczbą lub wartością NULL"
-
-#. R/windows/system.R: stop("'show.output.on.console' must be TRUE or FALSE")
-#: R/windows/system.R:0
-msgid "'show.output.on.console' must be TRUE or FALSE"
-msgstr "argument 'show.output.on.console' musi mieć wartość TRUE lub FALSE"
-
-#. R/unix/system.unix.R: stop("'stderr' must be of length 1")
-#. R/windows/system.R: stop("'stderr' must be of length 1")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'stderr' must be of length 1"
-msgstr "'stderr' musi mieć długość 1"
-
-#. R/unix/system.unix.R: stop("'stdout' must be of length 1")
-#. R/windows/system.R: stop("'stdout' must be of length 1")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'stdout' must be of length 1"
-msgstr "'stdout' musi mieć długość 1"
 
 #. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
@@ -708,12 +672,6 @@ msgstr "oba argumenty 'verbose' oraz 'quietly' są ustawione na tak; przyjmuję 
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "argument 'verbose' jest TRUE, argument 'echo' nie; ... przekształcanie 'echo <- TRUE'"
-
-#. R/unix/system.unix.R: stop("'wait' must be TRUE or FALSE")
-#. R/windows/system.R: stop("'wait' must be TRUE or FALSE")
-#: R/unix/system.unix.R:0 R/windows/system.R:0
-msgid "'wait' must be TRUE or FALSE"
-msgstr "argument 'wait' musi mieć wartość TRUE lub FALSE"
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
@@ -828,70 +786,70 @@ msgstr "argument 'zero.print' został przycięty celem dopasowania do sformatowa
 msgid "'zero.print' must be character, logical or NULL"
 msgstr "'zero.print' musi być tekstem, wartością logiczną lub NULL"
 
-#. R/namespace.R: message("- done loading ", dQuote(package))
+#. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
-msgid "- done loading"
-msgstr "- zakończono ładowanie"
+msgid "- done loading %s"
+msgstr "- zakończono ładowanie %s"
 
-#. R/namespace.R: message("- loading ", dQuote(package))
+#. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
-msgid "- loading"
-msgstr "- ładowanie"
+msgid "- loading %s"
+msgstr "- ładowanie %s"
 
-#. R/namespace.R: message("-- done processing S4 stuff for ", dQuote(package))
+#. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- done processing S4 stuff for"
-msgstr "-- zakończono przetwarzanie rzeczy S4 dla"
+msgid "-- done processing S4 stuff for %s"
+msgstr "-- zakończono przetwarzanie rzeczy S4 dla %s"
 
-#. R/namespace.R: message("-- done processing imports for ", dQuote(package))
+#. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- done processing imports for"
-msgstr "-- zakończono przetwarzanie importów dla"
+msgid "-- done processing imports for %s"
+msgstr "-- zakończono przetwarzanie importów dla %s"
 
-#. R/namespace.R: message("-- done registerS3methods for ", dQuote(package))
+#. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- done registerS3methods for"
-msgstr "-- zakończono registerS3methods dla"
+msgid "-- done registerS3methods for %s"
+msgstr "-- zakończono registerS3methods dla %s"
 
-#. R/namespace.R: message("-- done running .onLoad for ", dQuote(package))
+#. R/namespace.R: gettextf("-- done running .onLoad for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- done running .onLoad for"
-msgstr "-- zakończono uruchamianie .onLoad dla"
+msgid "-- done running .onLoad for %s"
+msgstr "-- zakończono uruchamianie .onLoad dla %s"
 
-#. R/namespace.R: message("-- loading code for ", dQuote(package))
+#. R/namespace.R: gettextf("-- loading code for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- loading code for"
-msgstr "-- ładowanie kodu dla"
+msgid "-- loading code for %s"
+msgstr "-- ładowanie kodu dla %s"
 
-#. R/namespace.R: message("-- loading lazydata for ", dQuote(package))
+#. R/namespace.R: gettextf("-- loading lazydata for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- loading lazydata for"
-msgstr "-- leniwe ładowanie danych dla"
+msgid "-- loading lazydata for %s"
+msgstr "-- leniwe ładowanie danych dla %s"
 
-#. R/namespace.R: message("-- loading sysdata for ", dQuote(package))
+#. R/namespace.R: gettextf("-- loading sysdata for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- loading sysdata for"
-msgstr "-- ładowanie danych systemowych dla"
+msgid "-- loading sysdata for %s"
+msgstr "-- ładowanie danych systemowych dla %s"
 
-#. R/namespace.R: message("-- processing S4 stuff for ", dQuote(package))
+#. R/namespace.R: gettextf("-- processing S4 stuff for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- processing S4 stuff for"
-msgstr "-- przetwarzanie rzeczy S4 dla"
+msgid "-- processing S4 stuff for %s"
+msgstr "-- przetwarzanie rzeczy S4 dla %s"
 
-#. R/namespace.R: message("-- processing imports for ", dQuote(package))
+#. R/namespace.R: gettextf("-- processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- processing imports for"
-msgstr "-- przetwarzanie importów dla"
+msgid "-- processing imports for %s"
+msgstr "-- przetwarzanie importów dla %s"
 
-#. R/namespace.R: message("-- registerS3methods for ", dQuote(package))
+#. R/namespace.R: gettextf("-- registerS3methods for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- registerS3methods for"
-msgstr "-- registerS3methods dla"
+msgid "-- registerS3methods for %s"
+msgstr "-- registerS3methods dla %s"
 
-#. R/namespace.R: message("-- running .onLoad for ", dQuote(package))
+#. R/namespace.R: gettextf("-- running .onLoad for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "-- running .onLoad for"
-msgstr "-- uruchamianie .onLoad dla"
+msgid "-- running .onLoad for %s"
+msgstr "-- uruchamianie .onLoad dla %s"
 
 #. R/namespace.R: message("--- caching metadata")
 #: R/namespace.R:0
@@ -908,15 +866,15 @@ msgstr "--- zakończono buforowanie metadanych"
 msgid "--- processing classes"
 msgstr "--- przetwarzanie klas"
 
-#. R/namespace.R: message("--- processing exports for ", dQuote(package))
+#. R/namespace.R: gettextf("--- processing exports for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "--- processing exports for"
-msgstr "--- przetwarzanie eksportów dla"
+msgid "--- processing exports for %s"
+msgstr "--- przetwarzanie eksportów dla %s"
 
-#. R/namespace.R: message("--- sealing exports for ", dQuote(package))
+#. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-msgid "--- sealing exports for"
-msgstr "--- domykanie eksportów dla"
+msgid "--- sealing exports for %s"
+msgstr "--- domykanie eksportów dla %s"
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -1087,6 +1045,11 @@ msgstr ""
 "Regularne linie muszą mieć znacznik.\n"
 "Przeszkadzające linie rozpoczynają się od:\n"
 "%s"
+
+#. R/namespace.R: gettextf("License for %s", sQuote(pkg))
+#: R/namespace.R:0
+msgid "License for %s"
+msgstr "Licencja dla %s"
 
 #. R/namespace.R: gettextf("Loading required namespace: %s", package)
 #: R/namespace.R:0
@@ -1812,25 +1775,35 @@ msgid "input has been corrupted, with LF replaced by CR"
 msgstr "wejście zostało uszkodzone z LF zastąpionym przez CR"
 
 #. R/attach.R: gettextf("invalid '%s' argument", "name")
+#. R/colSums.R: gettextf("invalid '%s' argument", "dims")
 #. R/connections.R: gettextf("invalid '%s' argument", "endian")
+#. R/dataframe.R: gettextf("invalid '%s' argument", "make.names")
 #. R/files.R: gettextf("invalid '%s' argument", "path")
 #. R/files.R: gettextf("invalid '%s' argument", "time")
 #. R/load.R: gettextf("invalid '%s' argument", "file")
 #. R/locales.R: gettextf("invalid '%s' argument", "category")
+#. R/rowsum.R: gettextf("invalid '%s' argument", "x")
 #. R/serialize.R: gettextf("invalid '%s' argument", "file")
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
-#: R/attach.R:0 R/connections.R:0 R/files.R:0 R/load.R:0 R/locales.R:0
-#: R/serialize.R:0 R/taskCallback.R:0
+#. R/version.R: gettextf("invalid '%s' argument", "value")
+#. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
+#. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
+#. R/kappa.R: gettextf("invalid '%s' value", "nrow(z)")
 #. R/qr.R: gettextf("invalid '%s' value", "ncol(x)")
 #. R/qr.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/qr.R: gettextf("invalid '%s' value", "nrow(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(qr$qr)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(qr$rank)")
+#. R/qr.R: gettextf("invalid '%s' value", "ncol(y)")
 #. R/qr.R: gettextf("invalid '%s' value", "NCOL(y)")
 #. R/qr.R: gettextf("invalid '%s' value", "NCOL(R)")
 #. R/seq.R: gettextf("invalid '%s' value", "(to - from)/by")
-#: R/qr.R:0 R/seq.R:0
+#: R/eigen.R:0 R/kappa.R:0 R/qr.R:0 R/seq.R:0
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
@@ -1850,30 +1823,15 @@ msgstr "błędny argument 'by'"
 msgid "invalid 'compress' argument:"
 msgstr "niepoprawny argument 'compress':"
 
-#. R/zapsmall.R: stop("invalid 'digits'")
-#: R/zapsmall.R:0
-msgid "invalid 'digits'"
-msgstr "niepoprawna wartość 'digits'"
-
 #. R/dataframe.R: stop("invalid 'dimnames' given for data frame")
 #: R/dataframe.R:0
 msgid "invalid 'dimnames' given for data frame"
 msgstr "niepoprawne 'dimnames' dla podanej ramki danych"
 
-#. R/colSums.R: stop("invalid 'dims'")
-#: R/colSums.R:0
-msgid "invalid 'dims'"
-msgstr "niepoprawna wartość argumentu 'dims'"
-
 #. R/factor.R: gettextf("invalid 'labels'; length %d should be 1 or %d", nlab,     length(levels))
 #: R/factor.R:0
 msgid "invalid 'labels'; length %d should be 1 or %d"
 msgstr "nieprawidłowe 'labels'; długość %d powinna wynosić 1 lub %d"
-
-#. R/dataframe.R: stop("invalid 'make.names'")
-#: R/dataframe.R:0
-msgid "invalid 'make.names'"
-msgstr "niepoprawne 'make.names'"
 
 #. R/dataframe.R: stop("invalid 'max' / getOption(\"max.print\"): ", max)
 #: R/dataframe.R:0
@@ -1889,16 +1847,6 @@ msgstr "niepoprawna struktura 'rle'"
 #: R/dataframe.R:0
 msgid "invalid 'row.names' length"
 msgstr "niepoprawna długość 'row.names'"
-
-#. R/version.R: stop("invalid 'value'")
-#: R/version.R:0
-msgid "invalid 'value'"
-msgstr "niepoprawna wartość 'value'"
-
-#. R/rowsum.R: stop("invalid 'x'")
-#: R/rowsum.R:0
-msgid "invalid 'x'"
-msgstr "niepoprawny argument 'x'"
 
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
@@ -1921,40 +1869,10 @@ msgstr "niepoprawny argument listy: wszystkie zmienne powinny mieć tę samą d�
 msgid "invalid mode for 'by'"
 msgstr "błędny tryb dla argumentu 'by'"
 
-#. R/qr.R: stop("invalid ncol(qr$qr)")
-#: R/qr.R:0
-msgid "invalid ncol(qr$qr)"
-msgstr "niepoprawna wartość 'ncol(qr$qr)'"
-
-#. R/qr.R: stop("invalid ncol(qr$rank)")
-#: R/qr.R:0
-msgid "invalid ncol(qr$rank)"
-msgstr "niepoprawna wartość 'ncol(qr$rank)'"
-
-#. R/qr.R: stop("invalid ncol(y)")
-#: R/qr.R:0
-msgid "invalid ncol(y)"
-msgstr "niepoprawna wartość 'ncol(y)'"
-
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
 msgid "invalid non-character version specification 'x' (type: %s)"
 msgstr "niepoprawna specyfikacja wersji niezawierającej znaków 'x' (typ: %s)"
-
-#. R/qr.R: stop("invalid nrow(qr$qr)")
-#: R/qr.R:0
-msgid "invalid nrow(qr$qr)"
-msgstr "niepoprawna wartość 'nrow(qr$qr)'"
-
-#. R/eigen.R: stop("invalid nrow(x)")
-#: R/eigen.R:0
-msgid "invalid nrow(x)"
-msgstr "niepoprawna wartość 'nrow(x)'"
-
-#. R/kappa.R: stop("invalid nrow(z)")
-#: R/kappa.R:0
-msgid "invalid nrow(z)"
-msgstr "niepoprawna wartość 'nrow(z)'"
 
 #. R/cut.R: stop("invalid number of intervals")
 #: R/cut.R:0
@@ -2639,9 +2557,9 @@ msgstr "drugi argument musi być listą"
 msgid "second argument of / cannot be a \"difftime\" object"
 msgstr "drugi argument operatora '/' nie może być obiektem klasy \"difftime\""
 
-#. R/unix/system.unix.R: warning("setting stdout = TRUE")
+#. R/unix/system.unix.R: warning("setting 'stdout = TRUE'")
 #: R/unix/system.unix.R:0
-msgid "setting stdout = TRUE"
+msgid "setting 'stdout = TRUE'"
 msgstr "ustawianie 'stdout = TRUE'"
 
 #. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
@@ -2658,11 +2576,6 @@ msgstr "współdzielony obiekt %s nie został załadowany"
 #: R/library.R:0
 msgid "shared object '%s' already loaded"
 msgstr "współdzielony obiekt '%s' jest już załadowany"
-
-#. R/library.R: gettextf("shared object '%s' not found", sQuote(chname1))
-#: R/library.R:0
-msgid "shared object '%s' not found"
-msgstr "współdzielony obiekt '%s' nie został znaleziony"
 
 #. R/solve.R: stop("singular matrix 'a' in 'solve'")
 #: R/solve.R:0
@@ -3173,6 +3086,72 @@ msgid_plural "there are no packages called"
 msgstr[0] "nie ma pakietu o nazwie"
 msgstr[1] "nie ma pakietów o nazwach"
 msgstr[2] "nie ma pakietów o nazwach"
+
+#~ msgid "invalid 'digits'"
+#~ msgstr "niepoprawna wartość 'digits'"
+
+#~ msgid "invalid 'dims'"
+#~ msgstr "niepoprawna wartość argumentu 'dims'"
+
+#~ msgid "invalid 'make.names'"
+#~ msgstr "niepoprawne 'make.names'"
+
+#~ msgid "invalid 'value'"
+#~ msgstr "niepoprawna wartość 'value'"
+
+#~ msgid "invalid 'x'"
+#~ msgstr "niepoprawny argument 'x'"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "niepoprawna wartość 'ncol(qr$qr)'"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "niepoprawna wartość 'ncol(qr$rank)'"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "niepoprawna wartość 'ncol(y)'"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "niepoprawna wartość 'nrow(qr$qr)'"
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "niepoprawna wartość 'nrow(x)'"
+
+#~ msgid "invalid nrow(z)"
+#~ msgstr "niepoprawna wartość 'nrow(z)'"
+
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "argument 'by' musi zgadzać się z liczbą kolumn"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr' musi mieć długość 1"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout' musi mieć długość 1"
+
+#~ msgid "shared object '%s' not found"
+#~ msgstr "współdzielony obiekt '%s' nie został znaleziony"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "argument 'ignore.stderr' musi mieć wartość TRUE lub FALSE"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "argument 'ignore.stdout' musi mieć wartość TRUE lub FALSE"
+
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "argument 'intern' musi mieć wartość TRUE lub FALSE"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "argument 'invisible' musi mieć wartość TRUE lub FALSE"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "argument 'minimized' musi mieć wartość TRUE lub FALSE"
+
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "argument 'receive.console.signals' musi mieć wartość TRUE lub FALSE"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "argument 'show.output.on.console' musi mieć wartość TRUE lub FALSE"
 
 #~ msgid "invalid '(to - from)/by'"
 #~ msgstr "niepoprawne '(to - from)/by'"

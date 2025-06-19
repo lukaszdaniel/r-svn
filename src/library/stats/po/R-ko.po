@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 17:27\n"
+"POT-Creation-Date: 2025-06-19 16:45\n"
 "PO-Revision-Date: 2018-04-09 12:10-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -2389,9 +2389,20 @@ msgstr ""
 msgid "interactions are not allowed"
 msgstr "interactions을 허용하지 않습니다"
 
+#. R/bandwidths.R: gettextf("invalid '%s' argument", "x")
+#. R/bandwidths.R: gettextf("invalid '%s' argument", "nb")
+#. R/chisq.test.R: gettextf("invalid '%s' argument", "x")
+#. R/loess.R: gettextf("invalid '%s' argument", "x")
+#. R/loess.R: gettextf("invalid '%s' argument", "y")
+#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "유효하지 않은 'use' 인자입니다"
+
+#. R/bandwidths.R: gettextf("invalid '%s' value", "length(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
-#: R/kmeans.R:0
+#: R/bandwidths.R:0 R/kmeans.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "유효하지 않은 'use' 인자입니다"
@@ -2451,11 +2462,6 @@ msgstr "유효하지 않은 'lm'객체입니다:  그 이유는 구성요소 'te
 msgid "invalid 'method' argument"
 msgstr "유효하지 않은 'method' 인자입니다"
 
-#. R/bandwidths.R: stop("invalid 'nb'")
-#: R/bandwidths.R:0
-msgid "invalid 'nb'"
-msgstr "유효하지 않은 'nb'입니다"
-
 #. R/cutree.R: stop("invalid 'tree' ('merge' component)")
 #: R/cutree.R:0
 msgid "invalid 'tree' ('merge' component)"
@@ -2465,18 +2471,6 @@ msgstr "유효하지 않은 'tree'입니다 ('merge'요소입니다)"
 #: R/cor.R:0
 msgid "invalid 'use' argument"
 msgstr "유효하지 않은 'use' 인자입니다"
-
-#. R/bandwidths.R: stop("invalid 'x'")
-#. R/chisq.test.R: stop("invalid 'x'")
-#. R/loess.R: stop("invalid 'x'")
-#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
-msgid "invalid 'x'"
-msgstr "유효하지 않은 'x'입니다"
-
-#. R/loess.R: stop("invalid 'y'")
-#: R/loess.R:0
-msgid "invalid 'y'"
-msgstr "유효하지 않은 'y'입니다"
 
 #. R/dendrogram.R: stop("invalid (length 0) node in dendrogram")
 #: R/dendrogram.R:0
@@ -4425,6 +4419,15 @@ msgstr[0] "upper scope는 모델에는 포함되어 있지 않은 항 %s를 가�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
+
+#~ msgid "invalid 'nb'"
+#~ msgstr "유효하지 않은 'nb'입니다"
+
+#~ msgid "invalid 'x'"
+#~ msgstr "유효하지 않은 'x'입니다"
+
+#~ msgid "invalid 'y'"
+#~ msgstr "유효하지 않은 'y'입니다"
 
 #~ msgid "invalid ncol(x)"
 #~ msgstr "유효하지 않은 ncol(x)입니다"

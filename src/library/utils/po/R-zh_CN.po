@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -979,10 +979,11 @@ msgstr "只能对向量和因子元素适用"
 msgid "can only receive calls on local machine"
 msgstr "只能在局部电脑上接收調用"
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
-msgstr ""
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "无法在非互交的情况下选用BioC镜像"
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
@@ -1548,12 +1549,6 @@ msgstr "'mailx'只在Unix上有用"
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
 msgstr "这个方法只适用于%s目标对象"
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-#, fuzzy
-msgid "mirror non-interactively"
-msgstr "无法在非互交的情况下选用CRAN镜像"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -2334,6 +2329,10 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "没有%s这个程序包(给%s用)"
 
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "无法在非互交的情况下选用CRAN镜像"
+
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()'只在Windows上有用"
 
@@ -2388,9 +2387,6 @@ msgstr[0] "没有%s这个程序包(给%s用)"
 
 #~ msgid "Do you want to attempt to install these from sources?"
 #~ msgstr "你想从源代码尝试安装这些"
-
-#~ msgid "cannot choose a BioC mirror non-interactively"
-#~ msgstr "无法在非互交的情况下选用BioC镜像"
 
 #~ msgid "no download method found"
 #~ msgstr "没有下载方法"

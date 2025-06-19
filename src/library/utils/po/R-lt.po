@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 12:50\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -962,10 +962,11 @@ msgstr "gali tvarkyti tik vektoriaus ir faktoriaus elementus"
 msgid "can only receive calls on local machine"
 msgstr "gali priimti tik iškvietimus vietiniame kompiuteryje"
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
-msgstr "negali pasirinkti"
+#, fuzzy
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "negalima pasirinkti BioC veidrodžio neinteraktyviai"
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
@@ -1525,11 +1526,6 @@ msgstr "metodas 'mailx' yra tik Unix"
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
 msgstr "metodas taikomas tik %s objektams"
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-msgid "mirror non-interactively"
-msgstr "veidrodis neinteraktyviai"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -2369,6 +2365,12 @@ msgstr[0] "paketas %s negalimas (%s)"
 msgstr[1] "paketai %s negalimi (%s)"
 msgstr[2] "%s paketų yra negalimi (%s)"
 
+#~ msgid "cannot choose a"
+#~ msgstr "negali pasirinkti"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "veidrodis neinteraktyviai"
+
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()' yra skirtas Windows"
 
@@ -2556,9 +2558,6 @@ msgstr[2] "%s paketų yra negalimi (%s)"
 
 #~ msgid "3. also installing the dependencies %s"
 #~ msgstr "3. taip pat diegiant %s priklausomybių "
-
-#~ msgid "cannot choose a BioC mirror non-interactively"
-#~ msgstr "negalima pasirinkti BioC veidrodžio neinteraktyviai"
 
 #~ msgid "cannot choose a CRAN mirror non-interactively"
 #~ msgstr "negalima pasirinkti CRAN veidrodžio neinteraktyviu"

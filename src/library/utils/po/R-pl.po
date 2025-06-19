@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-11 18:28\n"
+"POT-Creation-Date: 2025-06-19 15:02\n"
 "PO-Revision-Date: 2025-05-23 21:21+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -954,10 +954,10 @@ msgstr "można obsłużyć jedynie elementy wektora oraz czynnika"
 msgid "can only receive calls on local machine"
 msgstr "można odbierać wywołania jedynie na lokalnej maszynie"
 
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
+#. R/packages.R: gettextf("cannot choose a %s mirror non-interactively", label)
 #: R/packages.R:0
-msgid "cannot choose a"
-msgstr "nie można wybrać serwera lustrzanego"
+msgid "cannot choose a %s mirror non-interactively"
+msgstr "nie można wybrać serweru lustrzanego %s nieinteraktywnie"
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
@@ -1508,11 +1508,6 @@ msgstr "metoda 'mailx' jest tylko dla systemów Unix"
 #: R/citation.R:0
 msgid "method is only applicable to %s objects"
 msgstr "metoda jest stosowalna jedynie do obiektów %s"
-
-#. R/packages.R: stop("cannot choose a ", label, " mirror non-interactively")
-#: R/packages.R:0
-msgid "mirror non-interactively"
-msgstr "nieinteraktywnie"
 
 #. R/read.fortran.R: stop("missing lengths for some fields")
 #: R/read.fortran.R:0
@@ -2354,6 +2349,12 @@ msgstr[0] "pakiet %s nie jest dostępny (%s)"
 msgstr[1] "pakiety %s nie są dostępne (%s)"
 msgstr[2] "pakiety %s nie są dostępne (%s)"
 
+#~ msgid "cannot choose a"
+#~ msgstr "nie można wybrać serwera lustrzanego"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "nieinteraktywnie"
+
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "funkcja 'memory.limit()' jest specyficzna dla systemów Windows"
 
@@ -2414,9 +2415,6 @@ msgstr[2] "pakiety %s nie są dostępne (%s)"
 
 #~ msgid "Do you want to attempt to install these from sources?"
 #~ msgstr "Czy chcesz spróbować zainstalować je ze źródeł?"
-
-#~ msgid "cannot choose a %s mirror non-interactively"
-#~ msgstr "nie można wybrać serweru lustrzanego %s nieinteraktywnie"
 
 #~ msgid "number of matches does not always match ncol(proto)"
 #~ msgstr "liczba dopasowań nie zawsze pasuje do 'ncol(proto)'"

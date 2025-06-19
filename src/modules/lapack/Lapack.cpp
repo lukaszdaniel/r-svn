@@ -667,7 +667,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
     if (!isMatrix(A)) error(_("'%s' must be a complex matrix"), "a");
     Adims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
     n = Adims[0];
-    if(n == 0) error("%s", _("'a' is 0-diml"));
+    if(n == 0) error("%s", _("'a' is 0-dimensional"));
     size_t nl = n;
     int n2 = Adims[1];
     if(n2 != n) error(_("'a' (%d x %d) must be square"), n, n2);
@@ -1194,7 +1194,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
 	error(_("'%s' must be a numeric matrix"), "a");
     int *Adims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
     n = Adims[0];
-    if(n == 0) error("%s", _("'a' is 0-diml"));
+    if(n == 0) error("%s", _("'a' is 0-dimensional"));
     size_t nl = n;
     int n2 = Adims[1];
     if(n2 != n) error(_("'a' (%d x %d) must be square"), n, n2);
