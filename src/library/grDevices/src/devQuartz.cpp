@@ -3117,9 +3117,9 @@ static CTFontDescriptorRef applyFontVar(CTFontRef ctFont,
             CFNumberRef axisID;
             int found = 0;
             for (j = 0; j < numAxes; j++) {
-                CFDictionaryRef axisDict = 
+                CFDictionaryRef axisDict = (CFDictionaryRef)
                     CFArrayGetValueAtIndex(ctFontVariationAxes, j);
-                CFStringRef axisDictName = 
+                CFStringRef axisDictName = (CFStringRef)
                     CFDictionaryGetValue(axisDict, 
                                          kCTFontVariationAxisNameKey);
                 if (axisNameMatch(axisName, axisDictName)) {
