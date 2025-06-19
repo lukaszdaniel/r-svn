@@ -27,9 +27,9 @@ runmed <- function(x, k, endrule = c("median","keep","constant"),
                    print.level = 0)
 {
     n <- length(x)
-    if(is.na(n)) stop(gettextf("invalid value of %s", "length(x)"), domain = NA)
+    if(is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
     k <- as.integer(k)
-    if(is.na(k)) stop(gettextf("invalid value of %s", "'k'"), domain = NA)
+    if(is.na(k)) stop(gettextf("invalid '%s' argument", "k"))
     if(k < 0L) stop("'k' must be positive")
     if(k %% 2L == 0L)
         warning(gettextf("'k' must be odd!  Changing 'k' to %d",

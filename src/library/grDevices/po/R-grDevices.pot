@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 14:04\n"
+"POT-Creation-Date: 2025-06-19 18:21\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -825,16 +825,18 @@ msgstr ""
 
 
 #: R/postscript.R: 0
-#. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
+#: R/windows/windows.R: 0
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
 
-msgid "invalid 'cmapEncoding' in font specification"
+msgid "invalid '%s' argument"
 msgstr ""
 
 
 #: R/postscript.R: 0
-#. R/postscript.R: stop("invalid 'family' argument")
+#. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 
-msgid "invalid 'family' argument"
+msgid "invalid 'cmapEncoding' in font specification"
 msgstr ""
 
 
@@ -855,11 +857,9 @@ msgstr ""
 #: R/cairo.R: 0
 #: R/unix/png.R: 0
 #: R/windows/png.R: 0
-#: R/windows/windows.R: 0
 #. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/windows.R: stop("invalid 'filename'")
 
 msgid "invalid 'filename'"
 msgstr ""

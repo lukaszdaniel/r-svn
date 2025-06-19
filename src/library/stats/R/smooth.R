@@ -27,7 +27,7 @@ smooth <- function(x, kind = c("3RS3R", "3RSS", "3RSR", "3R", "3", "S"),
     if(anyNA(x)) stop("attempt to smooth NA values")
     endrule <- match.arg(endrule)
     rules <- c("copy","Tukey")#- exact order matters!
-    if(is.na(iend <- pmatch(endrule, rules))) stop("invalid 'endrule' argument")
+    if(is.na(iend <- pmatch(endrule, rules))) stop(gettextf("invalid '%s' argument", "endrule"))
     kind <- match.arg(kind)
     if(startsWith(kind, "3RS") && !do.ends) iend <- -iend
     else if(kind == "S") iend <- as.logical(do.ends)

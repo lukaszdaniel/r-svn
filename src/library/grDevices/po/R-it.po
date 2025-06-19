@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 14:04\n"
+"POT-Creation-Date: 2025-06-19 18:21\n"
 "PO-Revision-Date: 2022-10-14 10:22+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -614,15 +614,17 @@ msgstr "i valori di 'x' e 'y' devono essere crescenti"
 msgid "invalid \"recordedplot\":"
 msgstr "\"recordedplot\" non valido:"
 
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
+#: R/postscript.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "primo argomento non valido"
+
 #. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 #: R/postscript.R:0
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr "'cmapEncoding' non valido nella specificazione del carattere"
-
-#. R/postscript.R: stop("invalid 'family' argument")
-#: R/postscript.R:0
-msgid "invalid 'family' argument"
-msgstr "argomento 'family' non valido"
 
 #. R/unix/quartz.R: stop("invalid 'file'")
 #: R/unix/quartz.R:0
@@ -637,8 +639,7 @@ msgstr "argomento 'file' non valido '%s'"
 #. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/windows.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
 msgid "invalid 'filename'"
 msgstr "'filename' non valido"
 
@@ -967,6 +968,9 @@ msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "nome argomento %s non valido in '%s'"
 msgstr[1] "nomi argomenti %s non validi in '%s'"
+
+#~ msgid "invalid 'family' argument"
+#~ msgstr "argomento 'family' non valido"
 
 #~ msgid "log_le_0"
 #~ msgstr "log_le_0"

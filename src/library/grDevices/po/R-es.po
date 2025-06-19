@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 14:04\n"
+"POT-Creation-Date: 2025-06-19 18:21\n"
 "PO-Revision-Date: 2023-08-31 11:06+0000\n"
 "Last-Translator: Geraldine Gomez Millan <geralidine.gomez@javeriana.edu.co>\n"
 "Language-Team: none\n"
@@ -594,16 +594,17 @@ msgstr ""
 msgid "invalid \"recordedplot\":"
 msgstr ""
 
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
+#: R/postscript.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "nombre de archivo invalido"
+
 #. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 #: R/postscript.R:0
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr ""
-
-#. R/postscript.R: stop("invalid 'family' argument")
-#: R/postscript.R:0
-#, fuzzy
-msgid "invalid 'family' argument"
-msgstr "nombre de archivo invalido"
 
 #. R/unix/quartz.R: stop("invalid 'file'")
 #: R/unix/quartz.R:0
@@ -620,8 +621,7 @@ msgstr "nombre de archivo invalido"
 #. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/windows.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
 msgid "invalid 'filename'"
 msgstr "nombre de archivo invalido"
 
@@ -950,3 +950,7 @@ msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "nombre de archivo invalido"
 msgstr[1] "nombre de archivo invalido"
+
+#, fuzzy
+#~ msgid "invalid 'family' argument"
+#~ msgstr "nombre de archivo invalido"

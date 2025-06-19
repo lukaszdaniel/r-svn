@@ -185,12 +185,31 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
         }
     }
 
+    if(names(NVAL) == "correlation") {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true correlation is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true correlation is greater than %s", NVAL, domain = "R-stats"))
+    } else if(names(NVAL) == "tau") {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true tau is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true tau is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true tau is greater than %s", NVAL, domain = "R-stats"))
+   } else {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true rho is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true rho is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true rho is greater than %s", NVAL, domain = "R-stats"))
+
+   }
+
     RVAL <- list(statistic = STATISTIC,
                  parameter = PARAMETER,
                  p.value = as.numeric(PVAL),
                  estimate = ESTIMATE,
                  null.value = NVAL,
                  alternative = alternative,
+                 alt.name = alt.name,
                  method = method,
                  data.name = DNAME)
     if(conf.int)

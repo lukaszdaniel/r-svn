@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 14:04\n"
+"POT-Creation-Date: 2025-06-19 18:21\n"
 "PO-Revision-Date: 2023-04-22 22:04+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -627,15 +627,17 @@ msgstr "øgende »x-« og »y-værdier« forventet"
 msgid "invalid \"recordedplot\":"
 msgstr ""
 
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
+#: R/postscript.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "ugyldigt første argument"
+
 #. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 #: R/postscript.R:0
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr "ugyldig »cmapEncoding« i skriftspecifikation"
-
-#. R/postscript.R: stop("invalid 'family' argument")
-#: R/postscript.R:0
-msgid "invalid 'family' argument"
-msgstr "ugyldigt argument for »family«"
 
 #. R/unix/quartz.R: stop("invalid 'file'")
 #: R/unix/quartz.R:0
@@ -651,8 +653,7 @@ msgstr "ugyldigt argument for »family«"
 #. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/windows.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
 msgid "invalid 'filename'"
 msgstr "ugyldig »filename«"
 
@@ -990,6 +991,9 @@ msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "ugyldigt argumentnavn %s i »%s«"
 msgstr[1] "ugyldige argumentnavne %s i »%s«"
+
+#~ msgid "invalid 'family' argument"
+#~ msgstr "ugyldigt argument for »family«"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

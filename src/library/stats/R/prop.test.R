@@ -149,6 +149,17 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
 	    z <- sign(DELTA) * sqrt(STATISTIC)
 	PVAL <- pnorm(z, lower.tail = (alternative == "less"))
     }
+    if(k == 1) {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true proportion is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true proportion is greater than %s", NVAL, domain = "R-stats"))
+    } else {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true proportion (%s) is not equal to %s", paste((1:l)[OK], collapse = ", "), NVAL, domain = "R-stats"),
+                           less = gettextf("true proportion (%s) is less than %s", paste((1:l)[OK], collapse = ", "), NVAL, domain = "R-stats"),
+                           greater = gettextf("true proportion (%s) is greater than %s", paste((1:l)[OK], collapse = ", "), NVAL, domain = "R-stats"))
+    }
 
     RVAL <- list(statistic = STATISTIC,
 		 parameter = PARAMETER,
@@ -157,6 +168,7 @@ function(x, n, p = NULL, alternative = c("two.sided", "less", "greater"),
 		 null.value = NVAL,
 		 conf.int = CINT,
 		 alternative = alternative,
+		 alt.name = alt.name,
 		 method = METHOD,
 		 data.name = DNAME)
     class(RVAL) <- "htest"

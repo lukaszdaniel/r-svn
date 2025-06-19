@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 14:04\n"
+"POT-Creation-Date: 2025-06-19 18:21\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -698,17 +698,18 @@ msgstr "s'esperen valors creixents de «x» i «y»"
 msgid "invalid \"recordedplot\":"
 msgstr "«recordedplot» no vàlid:"
 
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
+#: R/postscript.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "el primer argument no és vàlid"
+
 #. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 #: R/postscript.R:0
 #, fuzzy
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr "«cmapEncoding» no és vàlid en l'especificació del tipus de lletra"
-
-#. R/postscript.R: stop("invalid 'family' argument")
-#: R/postscript.R:0
-#, fuzzy
-msgid "invalid 'family' argument"
-msgstr "argument «family» no vàlid"
 
 #. R/unix/quartz.R: stop("invalid 'file'")
 #: R/unix/quartz.R:0
@@ -725,8 +726,7 @@ msgstr "argument «%s» no vàlid de «file»"
 #. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/windows.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
 msgid "invalid 'filename'"
 msgstr "'filename' és not vàlid"
 
@@ -1105,3 +1105,7 @@ msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "el nom de l'argument %s a «%s» no és vàlid"
 msgstr[1] "els noms d'argument %s a «%s» no són vàlids"
+
+#, fuzzy
+#~ msgid "invalid 'family' argument"
+#~ msgstr "argument «family» no vàlid"

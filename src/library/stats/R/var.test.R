@@ -43,11 +43,11 @@ function(x, y, ratio = 1,
         x <- x[is.finite(x)]
         DF.x <- length(x) - 1L
         if (DF.x < 1L)
-            stop("not enough 'x' observations")
+            stop(gettextf("not enough '%s' observations", "x"))
         y <- y[is.finite(y)]
         DF.y <- length(y) - 1L
         if (DF.y < 1L)
-            stop("not enough 'y' observations")
+            stop(gettextf("not enough '%s' observations", "y"))
         V.x <- var(x)
         V.y <- var(y)
     }
@@ -70,6 +70,11 @@ function(x, y, ratio = 1,
     names(STATISTIC) <- "F"
     names(ESTIMATE) <- names(ratio) <- "ratio of variances"
     attr(CINT, "conf.level") <- conf.level
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true ratio of variances is not equal to %s", ratio, domain = "R-stats"),
+                           less = gettextf("true ratio of variances is less than %s", ratio, domain = "R-stats"),
+                           greater = gettextf("true ratio of variances is greater than %s", ratio, domain = "R-stats"))
+
     RVAL <- list(statistic = STATISTIC,
                  parameter = PARAMETER,
                  p.value = PVAL,
@@ -77,9 +82,10 @@ function(x, y, ratio = 1,
                  estimate = ESTIMATE,
                  null.value = ratio,
                  alternative = alternative,
+                 alt.name = alt.name,
                  method = "F test to compare two variances",
                  data.name = DNAME)
-    attr(RVAL, "class") <- "htest"
+    class(RVAL) <- "htest"
     return(RVAL)
 }
 

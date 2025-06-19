@@ -39,13 +39,7 @@ print.htest <- function(x, digits = getOption("digits"), prefix = "\t", ...)
 	cat("alternative hypothesis: ")
 	if(!is.null(x$null.value)) {
 	    if(length(x$null.value) == 1L) {
-		alt.char <-
-		    switch(x$alternative,
-			   two.sided = "not equal to",
-			   less = "less than",
-			   greater = "greater than")
-		cat("true ", names(x$null.value), " is ", alt.char, " ",
-		    x$null.value, "\n", sep = "")
+		   cat(x$alt.name, "\n", sep = "")
 	    }
 	    else {
 		cat(x$alternative, "\nnull values:\n", sep = "")

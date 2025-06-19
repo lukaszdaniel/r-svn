@@ -156,7 +156,7 @@ win.metafile <-
     if (identical(check, "stop"))
         stop("windows devices should not be used in examples etc", domain = "R-grDevices")
 
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     filename <- path.expand(filename)
     invisible(.External(C_devga, paste0("win.metafile:", filename),
                         width, height, pointsize, FALSE, 1L,

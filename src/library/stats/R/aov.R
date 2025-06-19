@@ -28,8 +28,8 @@ aov <- function(formula, data = NULL, projections = FALSE, qr = TRUE,
     ## in English.  But some languages have multiple plurals.
     if(length(indError) > 1L)
         stop(sprintf(ngettext(length(indError),
-                              "there are %d Error terms: only 1 is allowed",
-                              "there are %d Error terms: only 1 is allowed"),
+                              "there is %d Error term: only 1 is allowed",
+                              "there are %d Error terms: only 1 is allowed", domain = "R-stats"),
                      length(indError)), domain = NA)
     lmcall <- Call <- match.call()
     ## need stats:: for non-standard evaluation

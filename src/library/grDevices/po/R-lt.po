@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 14:04\n"
+"POT-Creation-Date: 2025-06-19 18:21\n"
 "PO-Revision-Date: 2020-11-29 17:27+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -611,15 +611,17 @@ msgstr "turėtų būti didėjančios 'x' ir 'y' reikšmės"
 msgid "invalid \"recordedplot\":"
 msgstr "neteisingas \"recordedplot\":"
 
+#. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
+#: R/postscript.R:0 R/windows/windows.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "neteisingas pirmas argumentas"
+
 #. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 #: R/postscript.R:0
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr "neteisinga 'cmapEncoding' šrifto specifikacijoje"
-
-#. R/postscript.R: stop("invalid 'family' argument")
-#: R/postscript.R:0
-msgid "invalid 'family' argument"
-msgstr "neteisingas 'family' argumentas"
 
 #. R/unix/quartz.R: stop("invalid 'file'")
 #: R/unix/quartz.R:0
@@ -634,8 +636,7 @@ msgstr "neteisingas 'file' argumentas '%s'"
 #. R/cairo.R: stop("invalid 'filename'")
 #. R/unix/png.R: stop("invalid 'filename'")
 #. R/windows/png.R: stop("invalid 'filename'")
-#. R/windows/windows.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
 msgid "invalid 'filename'"
 msgstr "neteisingas 'filename'"
 
@@ -968,6 +969,9 @@ msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "neteisingas argumento vardas %s, esantis ‘%s’"
 msgstr[1] "neteisingi argumento vardai %s, esantys ‘%s’"
 msgstr[2] "neteisingų argumento vardų %s, esančių ‘%s’"
+
+#~ msgid "invalid 'family' argument"
+#~ msgstr "neteisingas 'family' argumentas"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

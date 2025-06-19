@@ -427,11 +427,24 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
     }
 
     names(mu) <- if(paired || !is.null(y)) "location shift" else "location"
+   if(paired || !is.null(y)) {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true location shift is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true location shift is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true location shift is greater than %s", mu, domain = "R-stats"))
+  } else {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true location is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true location is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true location is greater than %s", mu, domain = "R-stats"))
+  }
+
     RVAL <- list(statistic = STATISTIC,
                  parameter = NULL,
                  p.value = as.numeric(PVAL),
                  null.value = mu,
                  alternative = alternative,
+                 alt.name = alt.name,
                  method = METHOD,
                  data.name = DNAME)
     if(conf.int)

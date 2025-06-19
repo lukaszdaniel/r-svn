@@ -171,7 +171,7 @@ reshape <-
             thistime <- data[data[, timevar] %in% times[i], ]
             tab <- table(thistime[, idvar])
             if (any(tab > 1L))
-                warning(sprintf("multiple rows match for %s=%s: first taken",
+                warning(gettextf("multiple rows match for %s=%s: first taken",
                                 timevar, times[i]), domain = NA)
             rval[, varying[, i]] <-
                 thistime[match(rval[, idvar], thistime[, idvar]), v.names]

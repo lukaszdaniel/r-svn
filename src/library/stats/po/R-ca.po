@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 16:45\n"
+"POT-Creation-Date: 2025-06-19 18:43\n"
 "PO-Revision-Date: 2024-03-22 18:10+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -368,27 +368,24 @@ msgstr "El «filter» és més llarg que la sèrie temporal"
 msgid "'formula' has '.' in both left and right hand sides"
 msgstr "\"fórmula\" té \".\" tant a la mà esquerra com a la dreta"
 
-#. R/quade.test.R: stop("'formula' missing")
-#: R/quade.test.R:0
-#, fuzzy
-msgid "'formula' missing"
-msgstr "Manca la «fórmula»"
-
 #. R/ansari.test.R: stop("'formula' missing or incorrect")
 #. R/bartlett.test.R: stop("'formula' missing or incorrect")
 #. R/fligner.test.R: stop("'formula' missing or incorrect")
+#. R/friedman.test.R: stop("'formula' missing or incorrect")
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
 #. R/ks.test.R: stop("'formula' missing or incorrect")
 #. R/mood.test.R: stop("'formula' missing or incorrect")
 #. R/oneway.test.R: stop("'formula' missing or incorrect")
+#. R/quade.test.R: stop("'formula' missing or incorrect")
 #. R/t.test.R: stop("'formula' missing or incorrect")
 #. R/var.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
-#: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/ftable.R:0
-#: R/kruskal.test.R:0 R/ks.test.R:0 R/mood.test.R:0 R/oneway.test.R:0
-#: R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0 R/xtabs.R:0
+#: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/friedman.test.R:0
+#: R/ftable.R:0 R/kruskal.test.R:0 R/ks.test.R:0 R/mood.test.R:0
+#: R/oneway.test.R:0 R/quade.test.R:0 R/t.test.R:0 R/var.test.R:0
+#: R/wilcox.test.R:0 R/xtabs.R:0
 msgid "'formula' missing or incorrect"
 msgstr "«formula» absent o incorrecta"
 
@@ -1530,8 +1527,7 @@ msgid "NA values not allowed in 'd'"
 msgstr "No es permeten els valors NA en «d»"
 
 #. R/friedman.test.R: stop("NA's are not allowed in 'groups' or 'blocks'")
-#. R/quade.test.R: stop("NA's are not allowed in 'groups' or 'blocks'")
-#: R/friedman.test.R:0 R/quade.test.R:0
+#: R/friedman.test.R:0
 #, fuzzy
 msgid "NA's are not allowed in 'groups' or 'blocks'"
 msgstr "No es permeten els NA a «groups» o «blocks»"
@@ -1541,6 +1537,12 @@ msgstr "No es permeten els NA a «groups» o «blocks»"
 #, fuzzy
 msgid "NAs are not allowed"
 msgstr "No es permeten les SD"
+
+#. R/quade.test.R: stop("NAs are not allowed in 'groups' or 'blocks'")
+#: R/quade.test.R:0
+#, fuzzy
+msgid "NAs are not allowed in 'groups' or 'blocks'"
+msgstr "No es permeten els NA a «groups» o «blocks»"
 
 #. R/arima.R: gettextf("NAs in '%s'", "phi")
 #. R/arima.R: gettextf("NAs in '%s'", "theta")
@@ -2488,12 +2490,6 @@ msgstr "la fórmula «%s» ha de ser de la forma «expr»"
 msgid "formula 'x' must have both left and right hand sides"
 msgstr "la fórmula «x» ha de tenir els costats esquerre i dret"
 
-#. R/friedman.test.R: stop("formula missing")
-#: R/friedman.test.R:0
-#, fuzzy
-msgid "formula missing"
-msgstr "manca la fórmula"
-
 #. R/StructTS.R: stop("frequency must be a positive integer >= 2 for BSM")
 #: R/StructTS.R:0
 msgid "frequency must be a positive integer >= 2 for BSM"
@@ -2611,13 +2607,6 @@ msgstr "longitud incorrecta de «x»"
 msgid "incorrect specification for 'col.vars'"
 msgstr "especificació incorrecta per a «col.vars»"
 
-#. R/friedman.test.R: stop("incorrect specification for 'formula'")
-#. R/quade.test.R: stop("incorrect specification for 'formula'")
-#: R/friedman.test.R:0 R/quade.test.R:0
-#, fuzzy
-msgid "incorrect specification for 'formula'"
-msgstr "especificació incorrecta per a «fórmula»"
-
 #. R/ftable.R: stop("incorrect specification for 'row.vars'")
 #: R/ftable.R:0
 #, fuzzy
@@ -2676,7 +2665,14 @@ msgstr "no es permeten interaccions"
 #. R/chisq.test.R: gettextf("invalid '%s' argument", "x")
 #. R/loess.R: gettextf("invalid '%s' argument", "x")
 #. R/loess.R: gettextf("invalid '%s' argument", "y")
-#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0
+#. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
+#. R/r2dtable.R: gettextf("invalid '%s' argument", "r")
+#. R/r2dtable.R: gettextf("invalid '%s' argument", "c")
+#. R/runmed.R: gettextf("invalid '%s' argument", "k")
+#. R/smooth.R: gettextf("invalid '%s' argument", "endrule")
+#. R/symnum.R: gettextf("invalid '%s' argument", "abbr.colnames'")
+#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0 R/r2dtable.R:0 R/runmed.R:0
+#: R/smooth.R:0 R/symnum.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "argument «use» no vàlid"
@@ -2684,7 +2680,8 @@ msgstr "argument «use» no vàlid"
 #. R/bandwidths.R: gettextf("invalid '%s' value", "length(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
-#: R/bandwidths.R:0 R/kmeans.R:0
+#. R/runmed.R: gettextf("invalid '%s' value", "length(x)")
+#: R/bandwidths.R:0 R/kmeans.R:0 R/runmed.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "argument «use» no vàlid"
@@ -2693,12 +2690,6 @@ msgstr "argument «use» no vàlid"
 #: R/arima.R:0
 msgid "invalid 'SSinit'"
 msgstr "«SSinit» no vàlid"
-
-#. R/symnum.R: stop("invalid 'abbr.colnames'")
-#: R/symnum.R:0
-#, fuzzy
-msgid "invalid 'abbr.colnames'"
-msgstr "'abbr.colnames' no vàlid"
 
 #. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
 #: R/nls.R:0
@@ -2723,12 +2714,6 @@ msgstr "«control.spar» no vàlid"
 #, fuzzy
 msgid "invalid 'data' argument"
 msgstr "argument «data» no vàlid"
-
-#. R/smooth.R: stop("invalid 'endrule' argument")
-#: R/smooth.R:0
-#, fuzzy
-msgid "invalid 'endrule' argument"
-msgstr "argument «endrule» no vàlid"
 
 #. R/nlm.R: stop("invalid 'extendInt'; please report")
 #: R/nlm.R:0
@@ -2784,12 +2769,6 @@ msgstr "NCOL(X) no vàlid"
 msgid "invalid NROW(X)"
 msgstr "NROW(X) no vàlid"
 
-#. R/r2dtable.R: stop("invalid argument 'c'")
-#: R/r2dtable.R:0
-#, fuzzy
-msgid "invalid argument 'c'"
-msgstr "l'argument «c» no és vàlid"
-
 #. R/loess.R: stop("invalid argument 'cell'")
 #: R/loess.R:0
 #, fuzzy
@@ -2808,23 +2787,11 @@ msgstr "l'argument «grau» no és vàlid"
 msgid "invalid argument 'lambda'"
 msgstr "l'argument «lambda» no és vàlid"
 
-#. R/r2dtable.R: stop("invalid argument 'n'")
-#: R/r2dtable.R:0
-#, fuzzy
-msgid "invalid argument 'n'"
-msgstr "l'argument «n» no és vàlid"
-
 #. R/nafns.R: stop("invalid argument 'omit'")
 #: R/nafns.R:0
 #, fuzzy
 msgid "invalid argument 'omit'"
 msgstr "l'argument «omit» no és vàlid"
-
-#. R/r2dtable.R: stop("invalid argument 'r'")
-#: R/r2dtable.R:0
-#, fuzzy
-msgid "invalid argument 'r'"
-msgstr "l'argument «r» no és vàlid"
 
 #. R/loess.R: stop("invalid argument 'span'")
 #: R/loess.R:0
@@ -2967,12 +2934,10 @@ msgstr "tipus de resposta no vàlid"
 #. R/filter.R: gettextf("invalid value of %s", "NROW(x)")
 #. R/filter.R: gettextf("invalid value of %s", "length(filter)")
 #. R/kmeans.R: gettextf("invalid value of %s", "'k'")
-#. R/runmed.R: gettextf("invalid value of %s", "length(x)")
-#. R/runmed.R: gettextf("invalid value of %s", "'k'")
 #. R/spline.R: gettextf("invalid value of %s", "length(x)")
 #. R/splinefun.R: gettextf("invalid value of %s", "length(x)")
 #: R/cmdscale.R:0 R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0
-#: R/runmed.R:0 R/spline.R:0 R/splinefun.R:0
+#: R/spline.R:0 R/splinefun.R:0
 msgid "invalid value of %s"
 msgstr "valor no vàlid de %s"
 
@@ -3236,6 +3201,11 @@ msgstr "més centres de clústers que punts de dades"
 #, fuzzy
 msgid "more cluster centers than distinct data points."
 msgstr "Més centres de clústers que punts de dades diferents."
+
+#. R/reshape.R: gettextf("multiple rows match for %s=%s: first taken", timevar,     times[i])
+#: R/reshape.R:0
+msgid "multiple rows match for %s=%s: first taken"
+msgstr ""
 
 #. R/dummy.coef.R: stop("multivariate case with missing coefficients is not yet implemented")
 #: R/dummy.coef.R:0
@@ -3689,6 +3659,13 @@ msgstr "no totes les sèries tenen la mateixa fase"
 msgid "not an unreplicated complete block design"
 msgstr "no és un disseny de bloc complet no replicat"
 
+#. R/var.test.R: gettextf("not enough '%s' observations", "x")
+#. R/var.test.R: gettextf("not enough '%s' observations", "y")
+#: R/var.test.R:0
+#, fuzzy
+msgid "not enough '%s' observations"
+msgstr "no hi ha proutes observacions «x»"
+
 #. R/ks.test.R: stop("not enough 'x' data")
 #: R/ks.test.R:0
 #, fuzzy
@@ -3697,8 +3674,7 @@ msgstr "no hi ha prou dades «x»"
 
 #. R/ansari.test.R: stop("not enough 'x' observations")
 #. R/t.test.R: stop("not enough 'x' observations")
-#. R/var.test.R: stop("not enough 'x' observations")
-#: R/ansari.test.R:0 R/t.test.R:0 R/var.test.R:0
+#: R/ansari.test.R:0 R/t.test.R:0
 msgid "not enough 'x' observations"
 msgstr "no hi ha proutes observacions «x»"
 
@@ -3710,9 +3686,8 @@ msgstr "no hi ha prou dades «y»"
 
 #. R/ansari.test.R: stop("not enough 'y' observations")
 #. R/t.test.R: stop("not enough 'y' observations")
-#. R/var.test.R: stop("not enough 'y' observations")
 #. R/wilcox.test.R: stop("not enough 'y' observations")
-#: R/ansari.test.R:0 R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0 R/t.test.R:0 R/wilcox.test.R:0
 msgid "not enough 'y' observations"
 msgstr "no hi ha proutes observacions «y»"
 
@@ -4528,6 +4503,255 @@ msgstr "s'han proporcionat massa valors de substitució"
 msgid "transformed ARMA parameters were fixed"
 msgstr "s'han corregit els paràmetres ARMA transformats"
 
+#. R/mantelhaen.test.R: gettextf("true common odds ratio is greater than %s", NVAL, domain = "R-stats")
+#: R/mantelhaen.test.R:0
+msgid "true common odds ratio is greater than %s"
+msgstr ""
+
+#. R/mantelhaen.test.R: gettextf("true common odds ratio is less than %s", NVAL, domain = "R-stats")
+#: R/mantelhaen.test.R:0
+msgid "true common odds ratio is less than %s"
+msgstr ""
+
+#. R/mantelhaen.test.R: gettextf("true common odds ratio is not equal to %s", NVAL, domain = "R-stats")
+#: R/mantelhaen.test.R:0
+msgid "true common odds ratio is not equal to %s"
+msgstr ""
+
+#. R/cor.test.R: gettextf("true correlation is greater than %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+msgid "true correlation is greater than %s"
+msgstr ""
+
+#. R/cor.test.R: gettextf("true correlation is less than %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+#, fuzzy
+msgid "true correlation is less than %s"
+msgstr "«r» és inferior a 0"
+
+#. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+msgid "true correlation is not equal to %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true difference in means is greater than %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+msgid "true difference in means is greater than %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true difference in means is less than %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+msgid "true difference in means is less than %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true difference in means is not equal to %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+msgid "true difference in means is not equal to %s"
+msgstr ""
+
+#. R/poisson.test.R: gettextf("true event rate is greater than %s", r, domain = "R-stats")
+#: R/poisson.test.R:0
+msgid "true event rate is greater than %s"
+msgstr ""
+
+#. R/poisson.test.R: gettextf("true event rate is less than %s", r, domain = "R-stats")
+#: R/poisson.test.R:0
+#, fuzzy
+msgid "true event rate is less than %s"
+msgstr "«r» és inferior a 0"
+
+#. R/poisson.test.R: gettextf("true event rate is not equal to %s", r, domain = "R-stats")
+#: R/poisson.test.R:0
+msgid "true event rate is not equal to %s"
+msgstr ""
+
+#. R/wilcox.test.R: gettextf("true location is greater than %s", mu, domain = "R-stats")
+#: R/wilcox.test.R:0
+msgid "true location is greater than %s"
+msgstr ""
+
+#. R/wilcox.test.R: gettextf("true location is less than %s", mu, domain = "R-stats")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "true location is less than %s"
+msgstr "«r» és inferior a 0"
+
+#. R/wilcox.test.R: gettextf("true location is not equal to %s", mu, domain = "R-stats")
+#: R/wilcox.test.R:0
+msgid "true location is not equal to %s"
+msgstr ""
+
+#. R/wilcox.test.R: gettextf("true location shift is greater than %s", mu, domain = "R-stats")
+#: R/wilcox.test.R:0
+msgid "true location shift is greater than %s"
+msgstr ""
+
+#. R/wilcox.test.R: gettextf("true location shift is less than %s", mu, domain = "R-stats")
+#: R/wilcox.test.R:0
+msgid "true location shift is less than %s"
+msgstr ""
+
+#. R/wilcox.test.R: gettextf("true location shift is not equal to %s", mu, domain = "R-stats")
+#: R/wilcox.test.R:0
+msgid "true location shift is not equal to %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true mean difference is greater than %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+msgid "true mean difference is greater than %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true mean difference is less than %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+msgid "true mean difference is less than %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true mean difference is not equal to %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+msgid "true mean difference is not equal to %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true mean is greater than %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+msgid "true mean is greater than %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true mean is less than %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+#, fuzzy
+msgid "true mean is less than %s"
+msgstr "«m» és inferior a 1"
+
+#. R/t.test.R: gettextf("true mean is not equal to %s", mu, domain = "R-stats")
+#: R/t.test.R:0
+msgid "true mean is not equal to %s"
+msgstr ""
+
+#. R/fisher.test.R: gettextf("true odds ratio is greater than %s", NVAL, domain = "R-stats")
+#: R/fisher.test.R:0
+msgid "true odds ratio is greater than %s"
+msgstr ""
+
+#. R/fisher.test.R: gettextf("true odds ratio is less than %s", NVAL, domain = "R-stats")
+#: R/fisher.test.R:0
+#, fuzzy
+msgid "true odds ratio is less than %s"
+msgstr "«r» és inferior a 0"
+
+#. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
+#: R/fisher.test.R:0
+msgid "true odds ratio is not equal to %s"
+msgstr ""
+
+#. R/prop.test.R: gettextf("true proportion (%s) is greater than %s", paste((1:l)[OK],     collapse = ", "), NVAL, domain = "R-stats")
+#: R/prop.test.R:0
+msgid "true proportion (%s) is greater than %s"
+msgstr ""
+
+#. R/prop.test.R: gettextf("true proportion (%s) is less than %s", paste((1:l)[OK],     collapse = ", "), NVAL, domain = "R-stats")
+#: R/prop.test.R:0
+msgid "true proportion (%s) is less than %s"
+msgstr ""
+
+#. R/prop.test.R: gettextf("true proportion (%s) is not equal to %s", paste((1:l)[OK],     collapse = ", "), NVAL, domain = "R-stats")
+#: R/prop.test.R:0
+msgid "true proportion (%s) is not equal to %s"
+msgstr ""
+
+#. R/prop.test.R: gettextf("true proportion is greater than %s", NVAL, domain = "R-stats")
+#: R/prop.test.R:0
+msgid "true proportion is greater than %s"
+msgstr ""
+
+#. R/prop.test.R: gettextf("true proportion is less than %s", NVAL, domain = "R-stats")
+#: R/prop.test.R:0
+#, fuzzy
+msgid "true proportion is less than %s"
+msgstr "«r» és inferior a 0"
+
+#. R/prop.test.R: gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats")
+#: R/prop.test.R:0
+msgid "true proportion is not equal to %s"
+msgstr ""
+
+#. R/poisson.test.R: gettextf("true rate ratio is greater than %s", r, domain = "R-stats")
+#: R/poisson.test.R:0
+msgid "true rate ratio is greater than %s"
+msgstr ""
+
+#. R/poisson.test.R: gettextf("true rate ratio is less than %s", r, domain = "R-stats")
+#: R/poisson.test.R:0
+#, fuzzy
+msgid "true rate ratio is less than %s"
+msgstr "«r» és inferior a 0"
+
+#. R/poisson.test.R: gettextf("true rate ratio is not equal to %s", r, domain = "R-stats")
+#: R/poisson.test.R:0
+msgid "true rate ratio is not equal to %s"
+msgstr ""
+
+#. R/ansari.test.R: gettextf("true ratio of scales is greater than %s", NVAL, domain = "R-stats")
+#: R/ansari.test.R:0
+msgid "true ratio of scales is greater than %s"
+msgstr ""
+
+#. R/ansari.test.R: gettextf("true ratio of scales is less than %s", NVAL, domain = "R-stats")
+#: R/ansari.test.R:0
+msgid "true ratio of scales is less than %s"
+msgstr ""
+
+#. R/ansari.test.R: gettextf("true ratio of scales is not equal to %s", NVAL, domain = "R-stats")
+#: R/ansari.test.R:0
+msgid "true ratio of scales is not equal to %s"
+msgstr ""
+
+#. R/var.test.R: gettextf("true ratio of variances is greater than %s", ratio,     domain = "R-stats")
+#: R/var.test.R:0
+msgid "true ratio of variances is greater than %s"
+msgstr ""
+
+#. R/var.test.R: gettextf("true ratio of variances is less than %s", ratio, domain = "R-stats")
+#: R/var.test.R:0
+msgid "true ratio of variances is less than %s"
+msgstr ""
+
+#. R/var.test.R: gettextf("true ratio of variances is not equal to %s", ratio,     domain = "R-stats")
+#: R/var.test.R:0
+msgid "true ratio of variances is not equal to %s"
+msgstr ""
+
+#. R/cor.test.R: gettextf("true rho is greater than %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+msgid "true rho is greater than %s"
+msgstr ""
+
+#. R/cor.test.R: gettextf("true rho is less than %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+#, fuzzy
+msgid "true rho is less than %s"
+msgstr "«r» és inferior a 0"
+
+#. R/cor.test.R: gettextf("true rho is not equal to %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+msgid "true rho is not equal to %s"
+msgstr ""
+
+#. R/cor.test.R: gettextf("true tau is greater than %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+msgid "true tau is greater than %s"
+msgstr ""
+
+#. R/cor.test.R: gettextf("true tau is less than %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+#, fuzzy
+msgid "true tau is less than %s"
+msgstr "«r» és inferior a 0"
+
+#. R/cor.test.R: gettextf("true tau is not equal to %s", NVAL, domain = "R-stats")
+#: R/cor.test.R:0
+msgid "true tau is not equal to %s"
+msgstr ""
+
 #. R/model.tables.R: gettextf("type '%s' is not implemented yet", type)
 #: R/model.tables.R:0
 #, fuzzy
@@ -4922,9 +5146,10 @@ msgid_plural "parameters %s do not occur in the model formula"
 msgstr[0] "l'argument %s no apareix a la fórmula del model"
 msgstr[1] "els paràmetres %s no apareixen a la fórmula del model"
 
-#. R/aov.R: ngettext(length(indError), "there are %d Error terms: only 1 is allowed",     "there are %d Error terms: only 1 is allowed")
+#. R/aov.R: ngettext(length(indError), "there is %d Error term: only 1 is allowed",     "there are %d Error terms: only 1 is allowed", domain = "R-stats")
 #: R/aov.R:0
-msgid "there are %d Error terms: only 1 is allowed"
+#, fuzzy
+msgid "there is %d Error term: only 1 is allowed"
 msgid_plural "there are %d Error terms: only 1 is allowed"
 msgstr[0] "hi ha %d terme d'error: només es permet 1"
 msgstr[1] "hi ha %d termes d'error: només es permet 1"
@@ -4969,6 +5194,42 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilitzant la fila %d/%d d'un ajust combinat"
 msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
+
+#, fuzzy
+#~ msgid "'formula' missing"
+#~ msgstr "Manca la «fórmula»"
+
+#, fuzzy
+#~ msgid "formula missing"
+#~ msgstr "manca la fórmula"
+
+#, fuzzy
+#~ msgid "incorrect specification for 'formula'"
+#~ msgstr "especificació incorrecta per a «fórmula»"
+
+#, fuzzy
+#~ msgid "invalid '%s' attribute"
+#~ msgstr "argument «use» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'abbr.colnames'"
+#~ msgstr "'abbr.colnames' no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'endrule' argument"
+#~ msgstr "argument «endrule» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid argument 'c'"
+#~ msgstr "l'argument «c» no és vàlid"
+
+#, fuzzy
+#~ msgid "invalid argument 'n'"
+#~ msgstr "l'argument «n» no és vàlid"
+
+#, fuzzy
+#~ msgid "invalid argument 'r'"
+#~ msgstr "l'argument «r» no és vàlid"
 
 #~ msgid "invalid 'nb'"
 #~ msgstr "«nb» no vàlid"

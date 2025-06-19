@@ -29,7 +29,7 @@ function(y, groups, blocks, ...)
     }
     else {
         if(anyNA(groups) || anyNA(blocks))
-            stop("NA's are not allowed in 'groups' or 'blocks'")
+            stop("NAs are not allowed in 'groups' or 'blocks'")
         if(any(diff(c(length(y), length(groups), length(blocks))) != 0L))
             stop("'y', 'groups' and 'blocks' must have the same length")
         DNAME <- paste0(DNAME, ", ",
@@ -81,17 +81,15 @@ function(y, groups, blocks, ...)
 quade.test.formula <-
 function(formula, data, subset, na.action, ...)
 {
-    if(missing(formula))
-        stop("'formula' missing")
     ## <FIXME>
     ## Maybe put this into an internal rewriteTwoWayFormula() when
     ## adding support for strata()
-    if((length(formula) != 3L)
+    if(missing(formula) || (length(formula) != 3L)
        || (length(formula[[3L]]) != 3L)
        || (formula[[3L]][[1L]] != as.name("|"))
        || (length(formula[[3L]][[2L]]) != 1L)
        || (length(formula[[3L]][[3L]]) != 1L))
-        stop("incorrect specification for 'formula'")
+        stop("'formula' missing or incorrect")
     formula[[3L]][[1L]] <- as.name("+")
     ## </FIXME>
     m <- match.call(expand.dots = FALSE)

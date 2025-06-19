@@ -116,10 +116,28 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                  else if(!is.null(y)) "difference in means"
                  else "mean"
     attr(cint,"conf.level") <- conf.level
+    if(paired) {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true mean difference is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true mean difference is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true mean difference is greater than %s", mu, domain = "R-stats"))
+   } else if (!is.null(y)) {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true difference in means is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true difference in means is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true difference in means is greater than %s", mu, domain = "R-stats"))
+   } else {
+	    alt.name <- switch(alternative,
+                           two.sided = gettextf("true mean is not equal to %s", mu, domain = "R-stats"),
+                           less = gettextf("true mean is less than %s", mu, domain = "R-stats"),
+                           greater = gettextf("true mean is greater than %s", mu, domain = "R-stats"))
+   }
+
     rval <- list(statistic = tstat, parameter = df, p.value = pval,
 	       conf.int = cint, estimate = estimate, null.value = mu,
 	       stderr = stderr,
 	       alternative = alternative,
+	       alt.name = alt.name,
 	       method = method, data.name = dname)
     class(rval) <- "htest"
     rval

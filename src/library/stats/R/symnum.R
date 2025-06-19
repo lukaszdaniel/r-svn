@@ -107,7 +107,7 @@ symnum <- function(x, cutpoints = c(  .3,  .6,	 .8,  .9, .95),
 	}
 	else if(is.null(abbr.colnames) || is.null(dimnames(ans)[[2L]]))
 	    dimnames(ans)[[2L]] <- rep("", dim(ans)[2L])
-	else if(!is.logical(abbr.colnames)) stop("invalid 'abbr.colnames'")
+	else if(!is.logical(abbr.colnames)) stop(gettextf("invalid '%s' argument", "abbr.colnames'"))
     }
     if(legend) {
 	legend <- c(rbind(sapply(cutpoints,format),

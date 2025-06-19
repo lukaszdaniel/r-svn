@@ -246,11 +246,17 @@ function(x, y = NULL, z = NULL,
 
         names(ESTIMATE) <- names(NVAL)
         attr(CINT, "conf.level") <- conf.level
+        alt.name <- switch(alternative,
+                           two.sided = gettextf("true common odds ratio is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true common odds ratio is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true common odds ratio is greater than %s", NVAL, domain = "R-stats"))
+
         RVAL <- c(RVAL,
                   list(conf.int = CINT,
                        estimate = ESTIMATE,
                        null.value = NVAL,
-                       alternative = alternative))
+                       alternative = alternative,
+                       alt.name = alt.name))
     }
     else {
         ## Generalized Cochran-Mantel-Haenszel I x J x K test

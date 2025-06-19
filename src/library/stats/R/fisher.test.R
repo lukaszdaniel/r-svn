@@ -247,9 +247,14 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
                            })
             attr(CINT, "conf.level") <- conf.level
         }
+        alt.name <- switch(alternative,
+                           two.sided = gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true odds ratio is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true odds ratio is greater than %s", NVAL, domain = "R-stats"))
         RVAL <- c(RVAL,
                   list(conf.int = if(conf.int) CINT,
                        estimate = ESTIMATE,
+                       alt.name = alt.name,
                        null.value = NVAL))
     } ## end (2 x 2)
 

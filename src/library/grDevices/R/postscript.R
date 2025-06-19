@@ -256,7 +256,7 @@ postscript <- function(file = if(onefile) "Rplots.ps" else "Rplot%03d.ps",
               stop(gettextf("unknown family '%s'", family), domain = NA)
             matchFont(pf, old$encoding)
         } else
-            stop("invalid 'family' argument")
+            stop(gettextf("invalid '%s' argument", "family"))
         old$family <- family
     }
     if(grepl("[\n\r\f\177]", old$title))
@@ -340,7 +340,7 @@ pdf <- function(file = if(onefile) "Rplots.pdf" else "Rplot%03d.pdf",
               stop(gettextf("unknown family '%s'", family), domain = NA)
             matchFont(pf, old$encoding)
         } else
-            stop("invalid 'family' argument")
+            stop(gettextf("invalid '%s' argument", "family"))
         old$family <- family
     }
     # Extract version

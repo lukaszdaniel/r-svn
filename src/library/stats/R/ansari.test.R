@@ -227,10 +227,16 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
     }
 
     names(STATISTIC) <- "AB"
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true ratio of scales is not equal to %s", NVAL, domain = "R-stats"),
+                           less = gettextf("true ratio of scales is less than %s", NVAL, domain = "R-stats"),
+                           greater = gettextf("true ratio of scales is greater than %s", NVAL, domain = "R-stats"))
+
     RVAL <- list(statistic = STATISTIC,
                  p.value = PVAL,
                  null.value = c("ratio of scales" = 1),
                  alternative = alternative,
+                 alt.name = alt.name,
                  method = "Ansari-Bradley test",
                  data.name = DNAME)
     if(conf.int)
