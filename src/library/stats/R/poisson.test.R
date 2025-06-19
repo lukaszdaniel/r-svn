@@ -56,8 +56,10 @@ poisson.test <- function(x, T = 1, r = 1, alternative =
 
         RVAL$data.name <- DNAME
         RVAL$statistic <- c(count1 = x[1L])
-        RVAL$parameter <- c("expected count1" = sum(x) * r * T[1L]/sum(T * c(1, r)))
-        RVAL$estimate  <- c("rate ratio" = (x[1L]/T[1L])/(x[2L]/T[2L]))
+        RVAL$parameter <- sum(x) * r * T[1L]/sum(T * c(1, r))
+	names(RVAL$parameter) <- "expected count1"
+        RVAL$estimate  <- (x[1L]/T[1L])/(x[2L]/T[2L])
+	names(RVAL$estimate) <- "rate ratio"
         pp <- RVAL$conf.int
         RVAL$conf.int <- pp/(1 - pp)*T[2L]/T[1L]
         names(r) <- "rate ratio"
@@ -142,13 +144,14 @@ poisson.test <- function(x, T = 1, r = 1, alternative =
         names(T) <- "time base"	# or simply "n" ??
         names(ESTIMATE) <-
             names(r) <- "event rate" # or simply "p" ??
+        METHOD <- "Exact Poisson test"
 
        alt.name <- switch(alternative,
                            two.sided = gettextf("true event rate is not equal to %s", r, domain = "R-stats"),
                            less = gettextf("true event rate is less than %s", r, domain = "R-stats"),
                            greater = gettextf("true event rate is greater than %s", r, domain = "R-stats"))
 
-        structure(list(statistic = x,
+        RVAL <- list(statistic = x,
                        parameter = T,
                        p.value = PVAL,
                        conf.int = CINT,
@@ -156,9 +159,10 @@ poisson.test <- function(x, T = 1, r = 1, alternative =
                        null.value = r,
                        alternative = alternative,
                        alt.name = alt.name,
-                       method = "Exact Poisson test",
-                       data.name = DNAME),
-                  class = "htest")
+                       method = METHOD,
+                       data.name = DNAME)
+    class(RVAL) <- "htest"
+    return(RVAL)
 
     }
 }

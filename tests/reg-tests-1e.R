@@ -1537,7 +1537,7 @@ A <- array(1:120, dim=2:5)
 ch1 <- tryCmsg(colSums (A, dims=1:2))
 ch2 <- tryCmsg(rowMeans(A, dims=1:2))
 stopifnot(identical(ch1, ch2),
-          identical(ch1, "invalid 'dims'"))
+          identical(ch1, "invalid 'dims' argument"))
 ## error msg was  "'length = 2' in coercion to 'logical(1)'"
 
 

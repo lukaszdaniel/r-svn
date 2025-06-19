@@ -226,7 +226,10 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
         }
     }
 
+    NVAL <- 1    
+    names(NVAL) <- "ratio of scales"
     names(STATISTIC) <- "AB"
+    METHOD <- "Ansari-Bradley test"
     alt.name <- switch(alternative,
                            two.sided = gettextf("true ratio of scales is not equal to %s", NVAL, domain = "R-stats"),
                            less = gettextf("true ratio of scales is less than %s", NVAL, domain = "R-stats"),
@@ -234,15 +237,17 @@ function(x, y, alternative = c("two.sided", "less", "greater"),
 
     RVAL <- list(statistic = STATISTIC,
                  p.value = PVAL,
-                 null.value = c("ratio of scales" = 1),
+                 null.value = NVAL,
                  alternative = alternative,
                  alt.name = alt.name,
-                 method = "Ansari-Bradley test",
+                 method = METHOD,
                  data.name = DNAME)
-    if(conf.int)
+    if(conf.int) {
+	names(ESTIMATE) <- names(NVAL)
         RVAL <- c(RVAL,
                   list(conf.int = cint,
-                       estimate = c("ratio of scales" = ESTIMATE)))
+                       estimate = ESTIMATE))
+    }
     class(RVAL) <- "htest"
     return(RVAL)
 }

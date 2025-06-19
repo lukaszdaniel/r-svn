@@ -107,7 +107,7 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
             ## hybridPars = c(expect = 5, percent = 80, Emin = 1),
             if(!is.null(nhP <- names(hybridPars)) &&
                !identical(nhP, c("expect", "percent", "Emin")))
-                stop("names(hybridPars) should be NULL or be identical to the default's")
+                stop("'names(hybridPars)' should be NULL or be identical to the default's")
             stopifnot(is.double(hypp <- as.double(hybridPars)),
                       length(hypp) == 3L,
                       hypp[1] > 0, hypp[3] >= 0,
@@ -129,7 +129,8 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
         x <- x[1L, 1L]
         lo <- max(0L, k - n)
         hi <- min(k, m)
-        NVAL <- c("odds ratio" = or)
+        NVAL <- or
+	names(NVAL) <- "odds ratio"
 
         ## Note that in general the conditional distribution of x given
         ## the marginals is a non-central hypergeometric distribution H
@@ -205,7 +206,8 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
             else
                 1
         }
-        ESTIMATE <- c("odds ratio" = mle(x))
+        ESTIMATE <- mle(x)
+        names(ESTIMATE) <- "odds ratio"
 
         if(conf.int) {
             ## Determine confidence intervals for the odds ratio.

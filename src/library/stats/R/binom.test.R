@@ -121,15 +121,22 @@ function(x, n, p = 0.5, alternative = c("two.sided", "less", "greater"),
     names(n) <- "number of trials"	# or simply "n" ??
     names(ESTIMATE) <-
     names(p) <- "probability of success"# or simply "p" ??
+    METHOD <- "Exact binomial test"
+    alt.name <- switch(alternative,
+                           two.sided = gettextf("true probability of success is not equal to %s", p, domain = "R-stats"),
+                           less = gettextf("true probability of success is less than %s", p, domain = "R-stats"),
+                           greater = gettextf("true probability of success is greater than %s", p, domain = "R-stats"))
 
-    structure(list(statistic = x,
+    RVAL <- list(statistic = x,
                    parameter = n,
                    p.value = PVAL,
                    conf.int = CINT,
                    estimate = ESTIMATE,
                    null.value = p,
                    alternative = alternative,
-                   method = "Exact binomial test",
-                   data.name = DNAME),
-              class = "htest")
+                   alt.name = alt.name,
+                   method = METHOD,
+                   data.name = DNAME)
+    class(RVAL) <- "htest"
+    return(RVAL)
 }

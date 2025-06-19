@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 18:43\n"
+"POT-Creation-Date: 2025-06-19 20:07\n"
 "PO-Revision-Date: 2023-01-19 18:34+0100\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -552,6 +552,12 @@ msgstr "'n' dev'essere strettamente positivo"
 #: R/ar.R:0
 msgid "'n.ahead' must be at least 1"
 msgstr "'n.ahead' dev'essere almeno 1"
+
+#. R/fisher.test.R: stop("'names(hybridPars)' should be NULL or be identical to the default's")
+#: R/fisher.test.R:0
+#, fuzzy
+msgid "'names(hybridPars)' should be NULL or be identical to the default's"
+msgstr "names(hybridPars) dovrebbero essere NULL o identici ai predefiniti"
 
 #. R/prcomp.R: stop("'newdata' does not have named columns matching one or more of the original columns")
 #. R/princomp-add.R: stop("'newdata' does not have named columns matching one or more of the original columns")
@@ -2881,11 +2887,6 @@ msgstr "fornire uno o più vettori"
 msgid "na.action must be a function"
 msgstr "na.action dev'essere una funzione"
 
-#. R/fisher.test.R: stop("names(hybridPars) should be NULL or be identical to the default's")
-#: R/fisher.test.R:0
-msgid "names(hybridPars) should be NULL or be identical to the default's"
-msgstr "names(hybridPars) dovrebbero essere NULL o identici ai predefiniti"
-
 #. R/fisher.test.R: stop("need 2 or more non-zero column marginals")
 #: R/fisher.test.R:0
 msgid "need 2 or more non-zero column marginals"
@@ -4100,6 +4101,22 @@ msgstr "'r' è minori di 0"
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
 msgid "true odds ratio is not equal to %s"
+msgstr ""
+
+#. R/binom.test.R: gettextf("true probability of success is greater than %s", p,     domain = "R-stats")
+#: R/binom.test.R:0
+msgid "true probability of success is greater than %s"
+msgstr ""
+
+#. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
+#: R/binom.test.R:0
+#, fuzzy
+msgid "true probability of success is less than %s"
+msgstr "'r' è minori di 0"
+
+#. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
+#: R/binom.test.R:0
+msgid "true probability of success is not equal to %s"
 msgstr ""
 
 #. R/prop.test.R: gettextf("true proportion (%s) is greater than %s", paste((1:l)[OK],     collapse = ", "), NVAL, domain = "R-stats")

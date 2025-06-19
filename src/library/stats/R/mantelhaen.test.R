@@ -61,7 +61,8 @@ function(x, y = NULL, z = NULL,
             conf.level < 0 || conf.level > 1))
             stop("'conf.level' must be a single number between 0 and 1")
 
-        NVAL <- c("common odds ratio" = 1)
+        NVAL <- 1
+        names(NVAL) <- "common odds ratio"
 
         if(!exact) {
             ## Classical Mantel-Haenszel 2 x 2 x K test
@@ -83,9 +84,10 @@ function(x, y = NULL, z = NULL,
 
             names(STATISTIC) <- "Mantel-Haenszel X-squared"
             names(PARAMETER) <- "df"
-            METHOD <- paste("Mantel-Haenszel chi-squared test",
-                            if(YATES) "with" else "without",
-                            "continuity correction")
+	    if(YATES)
+                METHOD <- "Mantel-Haenszel chi-squared test with continuity correction"
+	    else
+                METHOD <- "Mantel-Haenszel chi-squared test without continuity correction"
             s.diag <- sum(x[1L, 1L, ] * x[2L, 2L, ] / n)
             s.offd <- sum(x[1L, 2L, ] * x[2L, 1L, ] / n)
             ## Mantel-Haenszel (1959) estimate of the common odds ratio.
@@ -126,8 +128,7 @@ function(x, y = NULL, z = NULL,
             ## where or is the common odds ratio in the k tables (and
             ## d(.) is a product hypergeometric distribution).
 
-            METHOD <- paste("Exact conditional test of independence",
-                            "in 2 x 2 x k tables")
+            METHOD <- "Exact conditional test of independence in 2 x 2 x k tables"
             mn <- apply(x, c(2L, 3L), sum)
             m <- mn[1L, ]
             n <- mn[2L, ]

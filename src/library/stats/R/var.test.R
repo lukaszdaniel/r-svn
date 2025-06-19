@@ -70,6 +70,7 @@ function(x, y, ratio = 1,
     names(STATISTIC) <- "F"
     names(ESTIMATE) <- names(ratio) <- "ratio of variances"
     attr(CINT, "conf.level") <- conf.level
+    METHOD <- "F test to compare two variances"
     alt.name <- switch(alternative,
                            two.sided = gettextf("true ratio of variances is not equal to %s", ratio, domain = "R-stats"),
                            less = gettextf("true ratio of variances is less than %s", ratio, domain = "R-stats"),
@@ -83,7 +84,7 @@ function(x, y, ratio = 1,
                  null.value = ratio,
                  alternative = alternative,
                  alt.name = alt.name,
-                 method = "F test to compare two variances",
+                 method = METHOD,
                  data.name = DNAME)
     class(RVAL) <- "htest"
     return(RVAL)

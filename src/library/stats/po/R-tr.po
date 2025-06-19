@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 18:43\n"
+"POT-Creation-Date: 2025-06-19 20:07\n"
 "PO-Revision-Date: 2011-04-02 \n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -578,6 +578,11 @@ msgstr "'ratio' tek bir pozitif tamsayı olmalı"
 #: R/ar.R:0
 msgid "'n.ahead' must be at least 1"
 msgstr "'n.ahead' en az 1 olmalı"
+
+#. R/fisher.test.R: stop("'names(hybridPars)' should be NULL or be identical to the default's")
+#: R/fisher.test.R:0
+msgid "'names(hybridPars)' should be NULL or be identical to the default's"
+msgstr ""
 
 #. R/prcomp.R: stop("'newdata' does not have named columns matching one or more of the original columns")
 #. R/princomp-add.R: stop("'newdata' does not have named columns matching one or more of the original columns")
@@ -3008,11 +3013,6 @@ msgstr "1 veya daha fazla vektör verilmeli"
 msgid "na.action must be a function"
 msgstr "na.action bir fonksiyon olmalı"
 
-#. R/fisher.test.R: stop("names(hybridPars) should be NULL or be identical to the default's")
-#: R/fisher.test.R:0
-msgid "names(hybridPars) should be NULL or be identical to the default's"
-msgstr ""
-
 #. R/fisher.test.R: stop("need 2 or more non-zero column marginals")
 #: R/fisher.test.R:0
 msgid "need 2 or more non-zero column marginals"
@@ -4266,6 +4266,22 @@ msgstr "'r' 0'dan küçük"
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
 msgid "true odds ratio is not equal to %s"
+msgstr ""
+
+#. R/binom.test.R: gettextf("true probability of success is greater than %s", p,     domain = "R-stats")
+#: R/binom.test.R:0
+msgid "true probability of success is greater than %s"
+msgstr ""
+
+#. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
+#: R/binom.test.R:0
+#, fuzzy
+msgid "true probability of success is less than %s"
+msgstr "'r' 0'dan küçük"
+
+#. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
+#: R/binom.test.R:0
+msgid "true probability of success is not equal to %s"
 msgstr ""
 
 #. R/prop.test.R: gettextf("true proportion (%s) is greater than %s", paste((1:l)[OK],     collapse = ", "), NVAL, domain = "R-stats")
