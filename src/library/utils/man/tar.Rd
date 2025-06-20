@@ -105,11 +105,12 @@ tar(tarfile, files = NULL,
   FreeBSD and Windows 10 use \command{bsdtar} from the \I{libarchive}
   project (but for macOS often a quite-old version), and commercial
   Unixes will have their own versions. \command{bsdtar} is available for
-  many other platforms: macOS up to at least 10.9 (but not recently) had
+  many other platforms (sometimes bundled with \code{libarchive},
+  sometimes not) : macOS used to have
   GNU \command{tar} as \command{gnutar} and other platforms,
   e.g.\sspace{}Solaris, have it as \command{gtar}: on a Unix-alike
   \command{configure} will try \command{gnutar} and \command{gtar}
-  before \code{tar}.
+  before \command{tar} (and then \command{bsdtar}).
 
   %% Heirloom Toolchest (http://heirloom.sourceforge.net/) is
   %% another implementation available on NetBSD, but probably not the default.
@@ -187,12 +188,12 @@ tar(tarfile, files = NULL,
   \I{Heirloom Toolchest} are not documented to support \command{xz} nor
   \command{zstd}.
 
-  The \command{tar} program in recent macOS (e.g.\sspace{}15.2) does
-  support \command{zstd} compression.\emph{via} an
-  external command, but Apple does not supply one.
+  The \command{tar} program in recent macOS (e.g.\sspace{}15.5) does
+  support \command{zstd} compression.\emph{via} an external
+  \command{zstd} program, but Apple does not supply one.
 
-  The \command{tar} programs in commercial Unixen such as \I{AIX} and
-  Solaris do not support compression.
+  %% The \command{tar} programs in commercial Unixen such as \I{AIX} and
+  %% Solaris do not support compression.
 
   GNU \command{tar} added support in version 1.22 for \command{xz}
   compression and in version 1.31 for \command{zstd} compression.
@@ -203,15 +204,21 @@ tar(tarfile, files = NULL,
   support parallel compression --- but this function can be used to write
   an uncompressed tarball which can then be compressed in parallel, for
   example with \command{zstd -T0}.
+
+  Some external commands have \sQuote{security} measures to by default
+  change the recorded file paths.  For example, GNU \code{tar} and
+  \command{bsdtar} remove the leading slash on absolute filepaths:
+  specify \code{extra_flags = "-P"} to override this.
 }
 
 \note{
-  For users of macOS.  Apple's file systems have a legacy concept of
+  For users of macOS.  Apple's legacy file systems had a concept of
   \sQuote{resource forks} dating from classic Mac OS and rarely used
-  nowadays.  Apple's version of \command{tar} stores these as separate
-  files in the tarball with names prefixed by \file{._}, and unpacks
-  such files into resource forks (if possible): other ways of unpacking
-  (including \code{\link{untar}} in \R) unpack them as separate files.
+  nowadays (and only partially supported in APFS).  Apple's version of
+  \command{tar} stored these as separate files in the tarball with names
+  prefixed by \file{._}, and unpacks such files into resource forks (if
+  possible): other ways of unpacking (including \code{\link{untar}} in
+  \R) unpack them as separate files.
 
   When argument \code{tar} is set to the command \command{tar} on macOS,
   environment variable \env{COPYFILE_DISABLE=1} is set, which for the
