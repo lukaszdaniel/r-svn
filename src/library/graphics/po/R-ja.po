@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:13\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -19,6 +19,12 @@ msgstr ""
 #: R/image.R:0
 msgid "%s can only be used with a regular grid"
 msgstr "%s は規則的なグリッドと共にのみ使用することができます"
+
+#. R/legend.R: gettextf("'%s' is of length 0", "legend")
+#: R/legend.R:0
+#, fuzzy
+msgid "'%s' is of length 0"
+msgstr "'legend' が長さが 0 です"
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
 #: R/abline.R:0
@@ -118,11 +124,6 @@ msgstr "'breaks' がベクトルではないので 'include.lowest' は無視さ
 #: R/contour.R:0
 msgid "'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels."
 msgstr ""
-
-#. R/legend.R: stop("'legend' is of length 0")
-#: R/legend.R:0
-msgid "'legend' is of length 0"
-msgstr "'legend' が長さが 0 です"
 
 #. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
 #: R/arrows.R:0
@@ -458,35 +459,20 @@ msgstr "'x' と 'y' の値は昇順であることが期待されています"
 msgid "integer colors must be non-negative"
 msgstr "整数によりパレットから色を指定する場合、正の整数を指定してください"
 
-#. R/axis.R: stop("invalid 'axp'")
-#: R/axis.R:0
-msgid "invalid 'axp'"
-msgstr "無効な 'axp' です"
-
-#. R/coplot.R: stop("invalid 'given.values'")
-#: R/coplot.R:0
-msgid "invalid 'given.values'"
-msgstr "'given.values' が無効です"
-
-#. R/axis.R: stop("invalid 'log'")
-#: R/axis.R:0
-msgid "invalid 'log'"
-msgstr "無効な 'log' です"
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
+#: R/axis.R:0 R/coplot.R:0 R/legend.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "最初の引数が無効です"
 
 #. R/mosaicplot.R: stop("invalid 'shade' specification")
 #: R/mosaicplot.R:0
 msgid "invalid 'shade' specification"
 msgstr "無効な陰影 ('shade') の指定です"
-
-#. R/legend.R: stop("invalid 'title'")
-#: R/legend.R:0
-msgid "invalid 'title'"
-msgstr "無効な 'title' です"
-
-#. R/axis.R: stop("invalid 'usr'")
-#: R/axis.R:0
-msgid "invalid 'usr'"
-msgstr "無効な 'usr' です"
 
 #. R/pairs.R: stop("invalid argument 'horInd'")
 #: R/pairs.R:0
@@ -827,6 +813,21 @@ msgstr[0] "外れ値 (%s) は描かれません 箱型図 %d 中では"
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "引数 %s は使用されていません"
+
+#~ msgid "invalid 'axp'"
+#~ msgstr "無効な 'axp' です"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values' が無効です"
+
+#~ msgid "invalid 'log'"
+#~ msgstr "無効な 'log' です"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "無効な 'title' です"
+
+#~ msgid "invalid 'usr'"
+#~ msgstr "無効な 'usr' です"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

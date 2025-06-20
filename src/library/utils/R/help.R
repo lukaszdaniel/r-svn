@@ -264,7 +264,7 @@ print.help_files_with_topic <- function(x, ...) # ...  may contain  msg=FALSE
     path <- dirname(file)
     dirpath <- dirname(path)
     if(!file.exists(dirpath))
-        stop(gettextf("invalid %s argument", sQuote("file")), domain = NA)
+        stop(gettextf("invalid '%s' argument", "file"), domain = NA)
     pkgname <- basename(dirpath)
     RdDB <- file.path(path, pkgname)
     if(!file.exists(paste0(RdDB, ".rdx")))

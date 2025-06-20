@@ -82,7 +82,7 @@ valid.viewport <- function(x, y, width, height, just,
       length(width) > 1 || length(height) > 1)
     stop("'x', 'y', 'width', and 'height' must all be units of length 1")
   if (!is.gpar(gp))
-    stop("invalid 'gp' value")
+    stop(gettextf("invalid '%s' argument", "gp"))
   if (!is.logical(clip)) {
       if (is.grob(clip)) {
           clip <- createClipPath(as.path(clip))
@@ -93,7 +93,7 @@ valid.viewport <- function(x, y, width, height, just,
                          on=TRUE,
                          off=NA,
                          inherit=FALSE,
-                         stop("invalid 'clip' value"))
+                         stop(gettextf("invalid '%s' argument", "clip")))
       }
   }
   if (!is.logical(mask)) {
@@ -105,7 +105,7 @@ valid.viewport <- function(x, y, width, height, just,
           mask <- switch(as.character(mask),
                          inherit=TRUE,
                          none=FALSE,
-                         stop("invalid 'mask' value"))
+                         stop(gettextf("invalid '%s' argument", "mask")))
       }
   }
   # Ensure both 'xscale' and 'yscale' are numeric (brute force defense)

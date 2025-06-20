@@ -118,7 +118,7 @@ validDetails.line.to <- function(x) {
   if (length(x$x) > 1 || length(x$y) > 1)
     stop("'x' and 'y' must have length 1")
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' argument", "arrow"))
   x
 }
 
@@ -157,7 +157,7 @@ validDetails.lines <- function(x) {
       !is.unit(x$y))
     stop("'x' and 'y' must be units")
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' argument", "arrow"))
   x
 }
 
@@ -249,7 +249,7 @@ validDetails.polyline <- function(x) {
   if (!is.null(x$id.lengths))
       x$id.lengths <- as.integer(x$id.lengths)
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' argument", "arrow"))
   x
 }
 
@@ -330,7 +330,7 @@ validDetails.segments <- function(x) {
       !is.unit(x$y0) || !is.unit(x$y1))
     stop("'x0', 'y0', 'x1', and 'y1' must be units")
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' argument", "arrow"))
   x
 }
 
@@ -788,7 +788,7 @@ validDetails.xspline <- function(x) {
   if (!is.null(x$id.lengths))
     x$id.lengths <- as.integer(x$id.lengths)
   if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-      stop("invalid 'arrow' argument")
+      stop(gettextf("invalid '%s' argument", "arrow"))
   if (any(x$shape < -1 | x$shape > 1))
     stop("'shape' must be between -1 and 1")
   x$open <- as.logical(x$open)
@@ -978,7 +978,7 @@ validDetails.beziergrob <- function(x) {
             stop("must have exactly 4 control points per Bezier curve")
     }
     if (!(is.null(x$arrow) || inherits(x$arrow, "arrow")))
-        stop("invalid 'arrow' argument")
+        stop(gettextf("invalid '%s' argument", "arrow"))
     x
 }
 
@@ -1385,7 +1385,7 @@ validDetails.text <- function(x) {
     stop("'x' and 'y' must be units")
   x$rot <- as.numeric(x$rot)
   if (!all(is.finite(x$rot)) || length(x$rot) == 0)
-    stop("invalid 'rot' value")
+    stop(gettextf("invalid '%s' value", "rot"))
   valid.just(x$just)
   if (!is.null(x$hjust))
     x$hjust <- as.numeric(x$hjust)

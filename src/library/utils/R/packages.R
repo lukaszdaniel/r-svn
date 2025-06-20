@@ -222,7 +222,7 @@ function(contriburl = contrib.url(repos, type), method,
             f <- available_packages_filters_db[[f[1L]]]
         }
         if(!is.function(f))
-            stop("invalid 'filters' argument.")
+            stop(gettextf("invalid '%s' argument", "filters"))
         res <- f(res)
     }
 
@@ -810,7 +810,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
                                 "source" = ".tar.gz",
                                 "mac.binary" = ".tgz",
                                 "win.binary" = ".zip",
-                                stop("invalid 'type'")))
+                                stop(gettextf("invalid '%s' argument", "type"))))
             have_fn <- !is.na(File)
             fn[have_fn] <- File[have_fn]
             repos <- available[ok, "Repository"]
@@ -920,7 +920,7 @@ contrib.url <- function(repos, type = getOption("pkgType"))
 		"source" = paste(gsub("/$", "", repos), "src", "contrib", sep = "/"),
                 "mac.binary" = paste(gsub("/$", "", repos), "bin", mac.path, "contrib", ver, sep = "/"),
                 "win.binary" = paste(gsub("/$", "", repos), "bin", "windows", "contrib", ver, sep = "/"),
-                stop("invalid 'type'")
+                stop(gettextf("invalid '%s' argument", "type"))
                )
     res
 }

@@ -22,7 +22,7 @@ svg <- function(filename = if(onefile) "Rplots.svg" else "Rplot%03d.svg",
                 antialias = c("default", "none", "gray", "subpixel"),
                 symbolfamily)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     if(!capabilities("cairo"))
         stop("svg: Cairo-based devices are not available for this platform")
     antialiases <- eval(formals()$antialias)
@@ -39,7 +39,7 @@ cairo_pdf <- function(filename = if(onefile) "Rplots.pdf" else "Rplot%03d.pdf",
                       antialias = c("default", "none", "gray", "subpixel"),
                       fallback_resolution = 300, symbolfamily)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     if(!capabilities("cairo"))
         stop("cairo_pdf: Cairo-based devices are not available for this platform")
     antialiases <- eval(formals()$antialias)
@@ -57,7 +57,7 @@ cairo_ps <- function(filename = if(onefile) "Rplots.ps" else "Rplot%03d.ps",
                      antialias = c("default", "none", "gray", "subpixel"),
                      fallback_resolution = 300, symbolfamily)
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     if(!capabilities("cairo"))
         stop("cairo_ps: Cairo-based devices are not available for this platform")
     antialiases <- eval(formals()$antialias)

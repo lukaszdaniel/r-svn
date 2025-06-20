@@ -604,7 +604,7 @@ msgstr "argument 'data' posiada niepoprawny typ"
 #: model.cpp:1841
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
-msgstr "'varlist' został zmieniony (z nvar=%d) na nowy %d po EncodeVars() -- nie powinno się już zdarzyć!"
+msgstr "'varlist' został zmieniony (z nvar=%d) na nowy %d po EncodeVars() -- nie powinno się już wydarzyć!"
 
 #: model.cpp:2123
 msgid "'.' in formula and no 'data' argument"

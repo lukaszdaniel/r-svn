@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-20 08:23+0200\n"
 "PO-Revision-Date: 2023-04-22 22:07+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -826,8 +826,13 @@ msgstr "ugyldigt 'fonts'-parameter i %s"
 msgid "failed to load font"
 msgstr "kunne ikke allokere skriftliste"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315
-msgid "invalid 'file' argument"
+#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
+#: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
+#: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
+#: cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
+#, fuzzy, c-format
+msgid "invalid '%s' argument"
 msgstr "ugyldigt 'fil'-argument"
 
 #: devQuartz.cpp:3342
@@ -1097,14 +1102,6 @@ msgstr ""
 msgid "could not open file '%s'"
 msgstr "kan ikke åbne fil '%s'"
 
-#: cairo/cairoBM.cpp:599 cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606
-#: cairo/cairoBM.cpp:610 cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618
-#: cairo/cairoBM.cpp:629 cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637
-#: cairo/cairoBM.cpp:641 cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
-#, fuzzy, c-format
-msgid "invalid '%s' argument"
-msgstr "ugyldigt 'fil'-argument"
-
 # 85%
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
@@ -1181,6 +1178,9 @@ msgstr "kunne ikke allokere skriftliste"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "ugyldigt 'fil'-argument"
 
 #, fuzzy
 #~ msgid "invalid value of 'maxColorValue'"

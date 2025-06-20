@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:13\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,13 @@ msgstr ""
 #. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
 
 msgid "%s can only be used with a regular grid"
+msgstr ""
+
+
+#: R/legend.R: 0
+#. R/legend.R: gettextf("'%s' is of length 0", "legend")
+
+msgid "'%s' is of length 0"
 msgstr ""
 
 
@@ -158,13 +165,6 @@ msgstr ""
 #. R/contour.R: stop("'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels.")
 
 msgid "'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels."
-msgstr ""
-
-
-#: R/legend.R: 0
-#. R/legend.R: stop("'legend' is of length 0")
-
-msgid "'legend' is of length 0"
 msgstr ""
 
 
@@ -636,23 +636,15 @@ msgstr ""
 
 
 #: R/axis.R: 0
-#. R/axis.R: stop("invalid 'axp'")
-
-msgid "invalid 'axp'"
-msgstr ""
-
-
 #: R/coplot.R: 0
-#. R/coplot.R: stop("invalid 'given.values'")
+#: R/legend.R: 0
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
 
-msgid "invalid 'given.values'"
-msgstr ""
-
-
-#: R/axis.R: 0
-#. R/axis.R: stop("invalid 'log'")
-
-msgid "invalid 'log'"
+msgid "invalid '%s' argument"
 msgstr ""
 
 
@@ -660,20 +652,6 @@ msgstr ""
 #. R/mosaicplot.R: stop("invalid 'shade' specification")
 
 msgid "invalid 'shade' specification"
-msgstr ""
-
-
-#: R/legend.R: 0
-#. R/legend.R: stop("invalid 'title'")
-
-msgid "invalid 'title'"
-msgstr ""
-
-
-#: R/axis.R: 0
-#. R/axis.R: stop("invalid 'usr'")
-
-msgid "invalid 'usr'"
 msgstr ""
 
 

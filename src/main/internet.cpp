@@ -152,7 +152,7 @@ void extR_HTTPDStop(void)
 
 SEXP Rsockconnect(SEXP sport, SEXP shost)
 {
-    if (length(sport) != 1) error("%s", _("invalid 'socket' argument"));
+    if (length(sport) != 1) error(_("invalid '%s' argument"), "socket");
     int port = asInteger(sport);
     char *host[1];
     host[0] = (char *) translateCharFP(STRING_ELT(shost, 0));
@@ -166,7 +166,7 @@ SEXP Rsockconnect(SEXP sport, SEXP shost)
 
 SEXP Rsockread(SEXP ssock, SEXP smaxlen)
 {
-    if (length(ssock) != 1) error("%s", _("invalid 'socket' argument"));
+    if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
     int sock = asInteger(ssock);
     int maxlen = asInteger(smaxlen);
     if (maxlen < 0) /* also catches NA_INTEGER */
@@ -191,7 +191,7 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
 
 SEXP Rsockclose(SEXP ssock)
 {
-    if (length(ssock) != 1) error("%s", _("invalid 'socket' argument"));
+    if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
     int sock = asInteger(ssock);
     if (sock <= 0) error("%s", _("attempt to close invalid socket"));
     if (!s_initialized) internet_Init();
@@ -204,7 +204,7 @@ SEXP Rsockclose(SEXP ssock)
 
 SEXP Rsockopen(SEXP sport)
 {
-    if (length(sport) != 1) error("%s", _("invalid 'port' argument"));
+    if (length(sport) != 1) error(_("invalid '%s' argument"), "port");
     int port = asInteger(sport);
     if (!s_initialized) internet_Init();
     if (s_initialized > 0)
@@ -216,7 +216,7 @@ SEXP Rsockopen(SEXP sport)
 
 SEXP Rsocklisten(SEXP ssock)
 {
-    if (length(ssock) != 1) error("%s", _("invalid 'socket' argument"));
+    if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
     int sock = asInteger(ssock), len = 256;
     char buf[257], *abuf[1];
     abuf[0] = buf;
@@ -236,7 +236,7 @@ SEXP Rsocklisten(SEXP ssock)
 
 SEXP Rsockwrite(SEXP ssock, SEXP sstring)
 {
-    if (length(ssock) != 1) error("%s", _("invalid 'socket' argument"));
+    if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
     int sock = asInteger(ssock), start = 0, end, len;
     char *buf = (char *) translateCharFP(STRING_ELT(sstring, 0)), *abuf[1];
     end = len = (int) strlen(buf);

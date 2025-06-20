@@ -50,7 +50,7 @@ png <- function(filename = "Rplot%03d.png",
 {
     if(!is.character(filename) || length(filename) != 1L || !nzchar(filename))
         stop("'filename' must be a non-empty character string")
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     new <- list(...)
     if(missing(type)) type <- getOption("bitmapType")
@@ -96,7 +96,7 @@ jpeg <- function(filename = "Rplot%03d.jpeg",
 {
     if(!is.character(filename) || length(filename) != 1L || !nzchar(filename))
         stop("'filename' must be a non-empty character string")
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     new <- list(...)
     type <- if(!missing(type)) match.arg(type) else getOption("bitmapType")
@@ -137,7 +137,7 @@ tiff <- function(filename = "Rplot%03d.tiff",
 {
     if(!is.character(filename) || length(filename) != 1L || !nzchar(filename))
         stop("'filename' must be a non-empty character string")
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     new <- list(...)
     type <- if(!missing(type)) match.arg(type) else getOption("bitmapType")
@@ -184,7 +184,7 @@ bmp <- function(filename = "Rplot%03d.bmp",
 {
     if(!is.character(filename) || length(filename) != 1L || !nzchar(filename))
         stop("'filename' must be a non-empty character string")
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     new <- list(...)
     type <- if(!missing(type)) match.arg(type) else getOption("bitmapType")

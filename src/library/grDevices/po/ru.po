@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-20 08:23+0200\n"
 "PO-Revision-Date: 2025-04-01 16:55+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -790,9 +790,14 @@ msgstr "неправильный параметр 'fonts' в %s"
 msgid "failed to load font"
 msgstr "Не могу загрузить шрифт"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315
-msgid "invalid 'file' argument"
-msgstr "неправильный аргумент 'file'"
+#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
+#: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
+#: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
+#: cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "неправильный аргумент %s"
 
 #: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
@@ -1049,14 +1054,6 @@ msgstr ""
 msgid "could not open file '%s'"
 msgstr "не могу открыть файл '%s'"
 
-#: cairo/cairoBM.cpp:599 cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606
-#: cairo/cairoBM.cpp:610 cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618
-#: cairo/cairoBM.cpp:629 cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637
-#: cairo/cairoBM.cpp:641 cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
-#, c-format
-msgid "invalid '%s' argument"
-msgstr "неправильный аргумент %s"
-
 #: cairo/cairoBM.cpp:665
 #, c-format
 msgid "unable to start device '%s'"
@@ -1130,6 +1127,9 @@ msgstr "не могу разместить определения"
 #: cairo/cairoFns.cpp:2462
 msgid "Font file not found; matching font family and face"
 msgstr "Файл шрифта не найден; ищу по семейству и названию шрифта"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "неправильный аргумент 'file'"
 
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "неправильное значение 'maxColorValue'"

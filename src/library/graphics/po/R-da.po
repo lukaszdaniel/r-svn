@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:13\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2023-04-22 22:05+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -16,6 +16,11 @@ msgstr ""
 #. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
 #: R/image.R:0
 msgid "%s can only be used with a regular grid"
+msgstr ""
+
+#. R/legend.R: gettextf("'%s' is of length 0", "legend")
+#: R/legend.R:0
+msgid "'%s' is of length 0"
 msgstr ""
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
@@ -116,11 +121,6 @@ msgstr ""
 #. R/contour.R: stop("'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels.")
 #: R/contour.R:0
 msgid "'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels."
-msgstr ""
-
-#. R/legend.R: stop("'legend' is of length 0")
-#: R/legend.R:0
-msgid "'legend' is of length 0"
 msgstr ""
 
 #. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
@@ -461,37 +461,20 @@ msgstr ""
 msgid "integer colors must be non-negative"
 msgstr ""
 
-#. R/axis.R: stop("invalid 'axp'")
-#: R/axis.R:0
-msgid "invalid 'axp'"
-msgstr "ugyldig »axp«"
-
-#. R/coplot.R: stop("invalid 'given.values'")
-#: R/coplot.R:0
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
+#: R/axis.R:0 R/coplot.R:0 R/legend.R:0
 #, fuzzy
-msgid "invalid 'given.values'"
-msgstr "ugyldig »log«"
-
-#. R/axis.R: stop("invalid 'log'")
-#: R/axis.R:0
-msgid "invalid 'log'"
-msgstr "ugyldig »log«"
+msgid "invalid '%s' argument"
+msgstr "ugyldig »usr«"
 
 #. R/mosaicplot.R: stop("invalid 'shade' specification")
 #: R/mosaicplot.R:0
 msgid "invalid 'shade' specification"
 msgstr ""
-
-#. R/legend.R: stop("invalid 'title'")
-#: R/legend.R:0
-#, fuzzy
-msgid "invalid 'title'"
-msgstr "ugyldig »log«"
-
-#. R/axis.R: stop("invalid 'usr'")
-#: R/axis.R:0
-msgid "invalid 'usr'"
-msgstr "ugyldig »usr«"
 
 #. R/pairs.R: stop("invalid argument 'horInd'")
 #: R/pairs.R:0
@@ -841,3 +824,17 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "invalid 'axp'"
+#~ msgstr "ugyldig »axp«"
+
+#, fuzzy
+#~ msgid "invalid 'given.values'"
+#~ msgstr "ugyldig »log«"
+
+#~ msgid "invalid 'log'"
+#~ msgstr "ugyldig »log«"
+
+#, fuzzy
+#~ msgid "invalid 'title'"
+#~ msgstr "ugyldig »log«"

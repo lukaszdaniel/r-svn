@@ -52,7 +52,7 @@ smooth.spline <-
     ctrl.Num <- contr.sp[1:4]
     if(!all(vapply(ctrl.Num, is.numeric, NA)) ||
        contr.sp$tol < 0 || contr.sp$eps <= 0 || contr.sp$maxit <= 0)
-        stop("invalid 'control.spar'")
+        stop(gettextf("invalid '%s' argument", "control.spar"))
 
     xy <- xy.coords(x, y, setLab=FALSE)
     y <- xy$y
@@ -74,7 +74,7 @@ smooth.spline <-
     ## Replace y[], w[] for same x[] (to a precision of 'tol') by their mean :
     if(!is.finite(tol) || tol <= 0)
         stop("'tol' must be strictly positive and finite")
-    if(!match(keep.stuff, c(FALSE,TRUE))) stop("invalid 'keep.stuff'")
+    if(!match(keep.stuff, c(FALSE,TRUE))) stop(gettextf("invalid '%s' argument", "keep.stuff"))
     xx <- round((x - mean(x))/tol)  # de-mean to avoid possible overflow
     uns.x <- is.unsorted(x)
     iOx <- if(uns.x) sort.list(x) else TRUE
@@ -407,7 +407,7 @@ supsmu <-
     if(diff <- n - leno)
         warning(sprintf(ngettext(diff,
                                  "%d observation with NA, NaN or Inf deleted",
-                                 "%d observations with NAs, NaNs and/or Infs deleted"),
+                                 "%d observations with NAs, NaNs and/or Infs deleted", domain = "R-stats"),
                         diff), domain = NA)
     .Fortran(C_setsmu, as.integer(trace))
     smo <- .Fortran(C_supsmu,

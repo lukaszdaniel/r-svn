@@ -42,7 +42,7 @@ stl <- function(x, s.window,
     x <- na.action(as.ts(x))
     if(is.matrix(x)) stop("only univariate series are allowed")
     n <- as.integer(length(x))
-    if (is.na(n)) stop("invalid length(x)")
+    if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
     period <- frequency(x)
     if(period < 2 || n <= 2 * period)
 	stop("series is not periodic or has less than two periods")

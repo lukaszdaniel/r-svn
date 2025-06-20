@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -555,6 +555,32 @@ msgstr ""
 msgid "invalid \"gTree\" class"
 msgstr "유효하지 않은 \"gTree\" 클래스 입니다"
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "유효하지 않은 'grob' 인자입니다"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "유효하지 않는 'gp' 값입니다"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 msgid "invalid 'alpha' value"
@@ -565,11 +591,6 @@ msgstr "유효하지 않은 'alpha' 값입니다"
 msgid "invalid 'angle' in viewport"
 msgstr "보임창에 유효하지 않는 'angle'입니다"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-msgid "invalid 'arrow' argument"
-msgstr "유효하지 않은 'arrow' 인자입니다"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 msgid "invalid 'at' location in 'axis'"
@@ -579,11 +600,6 @@ msgstr "'axis'에 유효하지 않은 'at' 위치입니다"
 #: R/unit.R:0
 msgid "invalid 'axis' or 'type'"
 msgstr "유효하지 않은 'axis' 또는 'type'입니다"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-msgid "invalid 'clip' value"
-msgstr "유효하지 않는 'clip' 값입니다"
 
 #. R/frames.R: stop("invalid 'col' specification")
 #: R/frames.R:0
@@ -605,11 +621,6 @@ msgstr "유효하지 않은 'ends' 또는 'type' 인자입니다"
 msgid "invalid 'f'"
 msgstr "유효하지 않은 'f'입니다"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-msgid "invalid 'frame'"
-msgstr "유효하지 않은 'frame'입니다"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 msgid "invalid 'gPath'"
@@ -620,25 +631,10 @@ msgstr "유효하지 않은 'gPath'입니다"
 msgid "invalid 'gp' slot"
 msgstr "유효하지 않은 'gp' 슬롯입니다"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-msgid "invalid 'gp' value"
-msgstr "유효하지 않는 'gp' 값입니다"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 msgid "invalid 'grep' value"
 msgstr "유효하지 않은 'grep' 값입니다"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-msgid "invalid 'grob'"
-msgstr "유효하지 않은 'grob'입니다"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-msgid "invalid 'grob' argument"
-msgstr "유효하지 않은 'grob' 인자입니다"
 
 #. R/grob.R: stop("invalid 'grob' class")
 #: R/grob.R:0
@@ -665,41 +661,10 @@ msgstr "보임창에 유효하지 않는 'layout.pos.row'입니다"
 msgid "invalid 'linemitre' value"
 msgstr "유효하지 않은 'linemitre' 값입니다"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-msgid "invalid 'listing'"
-msgstr "유효하지 않은 'listing'입니다"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'mask' value"
-msgstr "유효하지 않는 'gp' 값입니다"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 msgid "invalid 'n'"
 msgstr "유효하지 않은 'n'입니다"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-msgid "invalid 'origin'"
-msgstr "유효하지 않은 'origin'입니다"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-msgid "invalid 'print' argument"
-msgstr "유효하지 않은 'print' 인자입니다"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-msgid "invalid 'result'"
-msgstr "유효하지 않은 'result'입니다"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-msgid "invalid 'rot' value"
-msgstr "유효하지 않은 'rot' 값입니다"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
 #: R/frames.R:0
@@ -710,11 +675,6 @@ msgstr "유효하지 않은 'row' 그리고/또는 'col'입니다 (프레임 레
 #: R/frames.R:0
 msgid "invalid 'row' specification"
 msgstr "유효하지 않은 'row'지정입니다"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-msgid "invalid 'theta'"
-msgstr "유효하지 않은 'theta'입니다"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -758,11 +718,6 @@ msgstr "유효하지 않은 'col' 지정입니다"
 #, fuzzy
 msgid "invalid justification"
 msgstr "유효하지 않은 'col' 지정입니다"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-msgid "invalid listing"
-msgstr "유효하지 않은 listing입니다"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -1023,6 +978,42 @@ msgstr[0] "유효하지 않은 'grob' 인자입니다"
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "보임창에 유효하지 않는 'angle'입니다"
+
+#~ msgid "invalid 'clip' value"
+#~ msgstr "유효하지 않는 'clip' 값입니다"
+
+#~ msgid "invalid 'frame'"
+#~ msgstr "유효하지 않은 'frame'입니다"
+
+#~ msgid "invalid 'gp' value"
+#~ msgstr "유효하지 않는 'gp' 값입니다"
+
+#~ msgid "invalid 'grob'"
+#~ msgstr "유효하지 않은 'grob'입니다"
+
+#~ msgid "invalid 'listing'"
+#~ msgstr "유효하지 않은 'listing'입니다"
+
+#~ msgid "invalid 'origin'"
+#~ msgstr "유효하지 않은 'origin'입니다"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "유효하지 않은 'result'입니다"
+
+#~ msgid "invalid 'rot' value"
+#~ msgstr "유효하지 않은 'rot' 값입니다"
+
+#~ msgid "invalid 'theta'"
+#~ msgstr "유효하지 않은 'theta'입니다"
+
+#~ msgid "invalid listing"
+#~ msgstr "유효하지 않은 listing입니다"
+
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "유효하지 않은 'arrow' 인자입니다"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "유효하지 않은 'print' 인자입니다"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "'x' 인수가 반드시 유닛객체이어야 합니다"

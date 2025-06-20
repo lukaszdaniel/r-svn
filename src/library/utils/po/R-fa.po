@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 15:02\n"
+"POT-Creation-Date: 2025-06-20 20:11\n"
 "PO-Revision-Date: 2012-12-30 23:32+0330\n"
 "Last-Translator: Seyed Mahmood Taghavi Shahri <taghavi_m@razi.tums.ac.ir>\n"
 "Language-Team: Persian\n"
@@ -520,11 +520,6 @@ msgstr ""
 #. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
 #: R/indices.R:0
 msgid "Invalid \"Built\":"
-msgstr ""
-
-#. R/aspell.R: stop("Invalid 'filter' argument.")
-#: R/aspell.R:0
-msgid "Invalid 'filter' argument."
 msgstr ""
 
 #. R/widgets.R: gettext("Invalid input, please try again\n")
@@ -1279,30 +1274,24 @@ msgstr "که پیش‌نیاز است نیز نصب می‌شود %s بسته"
 msgid "installation of package %s had non-zero exit status"
 msgstr ""
 
-#. R/help.R: gettextf("invalid %s argument", sQuote("file"))
-#. R/packages2.R: gettextf("invalid %s argument", sQuote("keep_outputs"))
-#: R/help.R:0 R/packages2.R:0
-msgid "invalid %s argument"
+#. R/aspell.R: gettextf("invalid '%s' argument", "filter")
+#. R/edit.R: gettextf("invalid '%s' argument", "data")
+#. R/edit.R: gettextf("invalid '%s' argument", "modes")
+#. R/edit.R: gettextf("invalid '%s' argument", "x")
+#. R/help.R: gettextf("invalid '%s' argument", "file")
+#. R/packages.R: gettextf("invalid '%s' argument", "filters")
+#. R/packages.R: gettextf("invalid '%s' argument", "type")
+#. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
+#. R/sock.R: gettextf("invalid '%s' argument", "socket")
+#. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
+msgid "invalid '%s' argument"
 msgstr ""
 
 #. R/write.table.R: stop("invalid 'col.names' specification")
 #: R/write.table.R:0
 msgid "invalid 'col.names' specification"
-msgstr ""
-
-#. R/edit.R: stop("invalid 'data' argument")
-#: R/edit.R:0
-msgid "invalid 'data' argument"
-msgstr ""
-
-#. R/packages.R: stop("invalid 'filters' argument.")
-#: R/packages.R:0
-msgid "invalid 'filters' argument."
-msgstr ""
-
-#. R/edit.R: stop("invalid 'modes' argument")
-#: R/edit.R:0
-msgid "invalid 'modes' argument"
 msgstr ""
 
 #. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
@@ -1346,26 +1335,6 @@ msgstr ""
 #. R/write.table.R: stop("invalid 'row.names' specification")
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 msgid "invalid 'row.names' specification"
-msgstr ""
-
-#. R/sock.R: stop("invalid 'socket' argument")
-#: R/sock.R:0
-msgid "invalid 'socket' argument"
-msgstr ""
-
-#. R/tar.R: stop("invalid 'tarfile' argument")
-#: R/tar.R:0
-msgid "invalid 'tarfile' argument"
-msgstr ""
-
-#. R/packages.R: stop("invalid 'type'")
-#: R/packages.R:0
-msgid "invalid 'type'"
-msgstr ""
-
-#. R/edit.R: stop("invalid 'x' argument")
-#: R/edit.R:0
-msgid "invalid 'x' argument"
 msgstr ""
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")

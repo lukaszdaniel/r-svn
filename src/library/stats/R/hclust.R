@@ -57,9 +57,9 @@ hclust <- function(d, method="complete", members=NULL)
     i.meth <-  pmatch(method, METHODS)
     if(is.na(i.meth))
         ## TODO: use gettextf() [-> translation string change]
-	stop("invalid clustering method", paste("", method))
+	stop(gettextf("invalid clustering method %s", method))
     if(i.meth == -1)
-	stop("ambiguous clustering method", paste("", method))
+	stop(gettextf("ambiguous clustering method %s", method))
 
     n <- as.integer(attr(d, "Size"))
     if(is.null(n))

@@ -480,7 +480,7 @@ makeARIMA <- function(phi, theta, Delta, kappa = 1e6,
         Pn[1L:r, 1L:r] <- switch(match.arg(SSinit),
                                  "Gardner1980" = .Call(C_getQ0, phi, theta),
                                  "Rossignol2011" = .Call(C_getQ0bis, phi, theta, tol),
-                                 stop("invalid 'SSinit'"))
+                                 stop(gettextf("invalid '%s' argument", "SSinit")))
     else Pn[1L, 1L] <- if(p > 0) 1/(1 - phi^2) else 1
     if(d > 0L) Pn[cbind(r+1L:d, r+1L:d)] <- kappa
     list(phi=phi, theta=theta, Delta=Delta, Z=Z, a=a, P=P, T=T, V=V,

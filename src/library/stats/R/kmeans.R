@@ -69,9 +69,9 @@ function(x, centers, iter.max = 10L, nstart = 1L,
 	}
 	if(Z$iter > iter.max) {
 	    warning(sprintf(ngettext(iter.max,
-				     "did not converge in %d iteration",
-				     "did not converge in %d iterations"),
-			    iter.max), call. = FALSE, domain = NA)
+				     "'%s' did not converge in %d iteration",
+				     "'%s' did not converge in %d iterations", domain = "R-stats"),
+			    "kmeans", iter.max), call. = FALSE, domain = NA)
 	    if(m23) Z$ifault <- 2L
 	}
         if(nmeth %in% c(2L, 3L)) {
@@ -114,7 +114,7 @@ function(x, centers, iter.max = 10L, nstart = 1L,
             stop("more cluster centers than data points")
     }
     k <- as.integer(k)
-    if(is.na(k)) stop(gettextf("invalid value of %s", "'k'"), domain = NA)
+    if(is.na(k)) stop(gettextf("invalid '%s' value", "k"))
     if (k == 1L) nmeth <- 3L # Hartigan-Wong, (Fortran) needs k > 1
     iter.max <- as.integer(iter.max)
     if(is.na(iter.max) || iter.max < 1L) stop("'iter.max' must be positive")

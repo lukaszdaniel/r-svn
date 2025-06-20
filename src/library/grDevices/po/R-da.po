@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 18:21\n"
+"POT-Creation-Date: 2025-06-20 10:49\n"
 "PO-Revision-Date: 2023-04-22 22:04+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -627,9 +627,16 @@ msgstr "øgende »x-« og »y-værdier« forventet"
 msgid "invalid \"recordedplot\":"
 msgstr ""
 
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
+#. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
-#: R/postscript.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0 R/unix/x11.R:0
+#: R/windows/png.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "ugyldigt første argument"
@@ -639,29 +646,11 @@ msgstr "ugyldigt første argument"
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr "ugyldig »cmapEncoding« i skriftspecifikation"
 
-#. R/unix/quartz.R: stop("invalid 'file'")
-#: R/unix/quartz.R:0
-msgid "invalid 'file'"
-msgstr "ugyldig »file«"
-
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0
 #, fuzzy
 msgid "invalid 'file' argument '%s'"
 msgstr "ugyldigt argument for »family«"
-
-#. R/cairo.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
-msgid "invalid 'filename'"
-msgstr "ugyldig »filename«"
-
-#. R/unix/quartz.R: stop("invalid 'title'")
-#. R/unix/x11.R: stop("invalid 'title'")
-#: R/unix/quartz.R:0 R/unix/x11.R:0
-msgid "invalid 'title'"
-msgstr "ugyldig »title«"
 
 #. R/postscript.R: stop("invalid CMap name in font specification")
 #: R/postscript.R:0
@@ -991,6 +980,15 @@ msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "ugyldigt argumentnavn %s i »%s«"
 msgstr[1] "ugyldige argumentnavne %s i »%s«"
+
+#~ msgid "invalid 'filename'"
+#~ msgstr "ugyldig »filename«"
+
+#~ msgid "invalid 'file'"
+#~ msgstr "ugyldig »file«"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "ugyldig »title«"
 
 #~ msgid "invalid 'family' argument"
 #~ msgstr "ugyldigt argument for »family«"

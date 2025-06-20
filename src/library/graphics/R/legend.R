@@ -43,13 +43,13 @@ function(x, y = NULL, legend, fill = NULL, col = par("col"), border="black",
     }
     if(is.null(text.font)) text.font <- par("font")
     title <- as.graphicsAnnot(title)
-    if(length(title) > 1) stop("invalid 'title'")
+    if(length(title) > 1) stop(gettextf("invalid '%s' argument", "title"))
     legend <- as.graphicsAnnot(legend)
 	## if legend is a length one call or a list containing at least one call, 
 	## we want to convert to an expression:
 	if(any(vapply(legend, is.language, NA))) legend <- as.expression(legend)
     n.leg <- length(legend)
-    if(n.leg == 0) stop("'legend' is of length 0")
+    if(n.leg == 0) stop(gettextf("'%s' is of length 0", "legend"))
     auto <-
 	if (is.character(x))
 	    match.arg(x, c("bottomright", "bottom", "bottomleft", "left",

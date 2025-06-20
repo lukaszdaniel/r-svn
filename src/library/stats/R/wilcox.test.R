@@ -132,7 +132,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                            "two.sided" = sign(z) * 0.5,
                            "greater" = 0.5,
                            "less" = -0.5)
-                METHOD <- paste(METHOD, "with continuity correction")
+                METHOD <- "Wilcoxon signed rank test with continuity correction"
             }
 	    z <- (z - CORRECTION) / SIGMA
 	    PVAL <- switch(alternative,
@@ -343,7 +343,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                                      "two.sided" = sign(z) * 0.5,
                                      "greater" = 0.5,
                                      "less" = -0.5)
-                METHOD <- paste(METHOD, "with continuity correction")
+                METHOD <- "Wilcoxon rank sum test with continuity correction"
             }
 	    z <- (z - CORRECTION) / SIGMA
 	    PVAL <- switch(alternative,

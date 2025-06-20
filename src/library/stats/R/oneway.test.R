@@ -65,7 +65,7 @@ function(formula, data, subset, na.action, var.equal = FALSE)
             ((k - 1) * (1 + 2 * (k - 2) * tmp))
         PARAMETER <- c(k - 1, 1 / (3 * tmp))
         PVAL <- pf(STATISTIC, k - 1, 1 / (3 * tmp), lower.tail = FALSE)
-        METHOD <- paste(METHOD, "(not assuming equal variances)")
+        METHOD <- "One-way analysis of means (not assuming equal variances)"
     }
     names(STATISTIC) <- "F"
     names(PARAMETER) <- c("num df", "denom df")

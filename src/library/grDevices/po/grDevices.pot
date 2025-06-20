@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-20 08:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -782,8 +782,13 @@ msgstr ""
 msgid "failed to load font"
 msgstr ""
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315
-msgid "invalid 'file' argument"
+#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
+#: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
+#: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
+#: cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
+#, c-format
+msgid "invalid '%s' argument"
 msgstr ""
 
 #: devQuartz.cpp:3342
@@ -1034,14 +1039,6 @@ msgstr ""
 #: cairo/cairoBM.cpp:267
 #, c-format
 msgid "could not open file '%s'"
-msgstr ""
-
-#: cairo/cairoBM.cpp:599 cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606
-#: cairo/cairoBM.cpp:610 cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618
-#: cairo/cairoBM.cpp:629 cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637
-#: cairo/cairoBM.cpp:641 cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
-#, c-format
-msgid "invalid '%s' argument"
 msgstr ""
 
 #: cairo/cairoBM.cpp:665

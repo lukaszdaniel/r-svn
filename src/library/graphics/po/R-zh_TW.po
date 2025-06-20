@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:13\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -22,6 +22,12 @@ msgstr ""
 #: R/image.R:0
 msgid "%s can only be used with a regular grid"
 msgstr "%s 只適用於普通網格"
+
+#. R/legend.R: gettextf("'%s' is of length 0", "legend")
+#: R/legend.R:0
+#, fuzzy
+msgid "'%s' is of length 0"
+msgstr "'legend' 長度為零"
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
 #: R/abline.R:0
@@ -121,11 +127,6 @@ msgstr "因為 'breaks' 不對向量，'include.lowest' 忽略不用"
 #: R/contour.R:0
 msgid "'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels."
 msgstr "'labels' 長度為零。使用'drawlabels = FALSE' 來抑制 labels。"
-
-#. R/legend.R: stop("'legend' is of length 0")
-#: R/legend.R:0
-msgid "'legend' is of length 0"
-msgstr "'legend' 長度為零"
 
 #. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
 #: R/arrows.R:0
@@ -461,35 +462,20 @@ msgstr "需要遞增的 'x' 和 'y' 值"
 msgid "integer colors must be non-negative"
 msgstr "整數顏色值必須是正數"
 
-#. R/axis.R: stop("invalid 'axp'")
-#: R/axis.R:0
-msgid "invalid 'axp'"
-msgstr "'axp' 無效"
-
-#. R/coplot.R: stop("invalid 'given.values'")
-#: R/coplot.R:0
-msgid "invalid 'given.values'"
-msgstr "'given.values' 值無效"
-
-#. R/axis.R: stop("invalid 'log'")
-#: R/axis.R:0
-msgid "invalid 'log'"
-msgstr "'log' 無效"
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
+#: R/axis.R:0 R/coplot.R:0 R/legend.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "第一個引數無效"
 
 #. R/mosaicplot.R: stop("invalid 'shade' specification")
 #: R/mosaicplot.R:0
 msgid "invalid 'shade' specification"
 msgstr "'shade' 定義無效"
-
-#. R/legend.R: stop("invalid 'title'")
-#: R/legend.R:0
-msgid "invalid 'title'"
-msgstr "'title' 無效"
-
-#. R/axis.R: stop("invalid 'usr'")
-#: R/axis.R:0
-msgid "invalid 'usr'"
-msgstr "'usr' 無效"
 
 #. R/pairs.R: stop("invalid argument 'horInd'")
 #: R/pairs.R:0
@@ -828,6 +814,21 @@ msgstr[0] "boxplot%2$d 裡沒有畫離群值(%1$s)"
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "沒有用 %s 這個引數"
+
+#~ msgid "invalid 'axp'"
+#~ msgstr "'axp' 無效"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values' 值無效"
+
+#~ msgid "invalid 'log'"
+#~ msgstr "'log' 無效"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "'title' 無效"
+
+#~ msgid "invalid 'usr'"
+#~ msgstr "'usr' 無效"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:13\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2024-03-18 06:08+0000\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -17,6 +17,12 @@ msgstr ""
 #: R/image.R:0
 msgid "%s can only be used with a regular grid"
 msgstr "%s només es pot utilitzar amb una quadrícula regular"
+
+#. R/legend.R: gettextf("'%s' is of length 0", "legend")
+#: R/legend.R:0
+#, fuzzy
+msgid "'%s' is of length 0"
+msgstr "«legend» té longitud 0"
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
 #: R/abline.R:0
@@ -116,11 +122,6 @@ msgstr "«include.lowest» ignorat perquè «breaks» no és un vector"
 #: R/contour.R:0
 msgid "'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels."
 msgstr "«labels» té una longitud zero. Utilitzeu «drawlabels = FALSE» per a suprimir les etiquetes."
-
-#. R/legend.R: stop("'legend' is of length 0")
-#: R/legend.R:0
-msgid "'legend' is of length 0"
-msgstr "«legend» té longitud 0"
 
 #. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
 #: R/arrows.R:0
@@ -453,35 +454,20 @@ msgstr "s'esperen valors creixents de «x» i «y»"
 msgid "integer colors must be non-negative"
 msgstr "els colors enters han de ser no negatius"
 
-#. R/axis.R: stop("invalid 'axp'")
-#: R/axis.R:0
-msgid "invalid 'axp'"
-msgstr "«axp» no vàlid"
-
-#. R/coplot.R: stop("invalid 'given.values'")
-#: R/coplot.R:0
-msgid "invalid 'given.values'"
-msgstr "«given.values» no vàlid"
-
-#. R/axis.R: stop("invalid 'log'")
-#: R/axis.R:0
-msgid "invalid 'log'"
-msgstr "«log» no vàlid"
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
+#: R/axis.R:0 R/coplot.R:0 R/legend.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "el primer argument no és vàlid"
 
 #. R/mosaicplot.R: stop("invalid 'shade' specification")
 #: R/mosaicplot.R:0
 msgid "invalid 'shade' specification"
 msgstr "especificació «shade» no vàlida"
-
-#. R/legend.R: stop("invalid 'title'")
-#: R/legend.R:0
-msgid "invalid 'title'"
-msgstr "«title» no vàlid"
-
-#. R/axis.R: stop("invalid 'usr'")
-#: R/axis.R:0
-msgid "invalid 'usr'"
-msgstr "«usr» no vàlid"
 
 #. R/pairs.R: stop("invalid argument 'horInd'")
 #: R/pairs.R:0
@@ -823,6 +809,21 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "l'argument %s no s'ha utilitzat"
 msgstr[1] "els arguments %s no s'han utilitzat"
+
+#~ msgid "invalid 'axp'"
+#~ msgstr "«axp» no vàlid"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "«given.values» no vàlid"
+
+#~ msgid "invalid 'log'"
+#~ msgstr "«log» no vàlid"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "«title» no vàlid"
+
+#~ msgid "invalid 'usr'"
+#~ msgstr "«usr» no vàlid"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

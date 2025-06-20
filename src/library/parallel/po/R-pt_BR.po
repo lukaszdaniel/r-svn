@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-09 16:00\n"
+"POT-Creation-Date: 2025-06-20 08:24\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Caio Lente <lente@ime.usp.br>\n"
 "Language-Team: none\n"
@@ -112,14 +112,11 @@ msgstr "dim(X) deve ter um comprimento positivo"
 msgid "fork clusters are not supported on Windows"
 msgstr "'mc.cores' > 1 não é suportado no Windows"
 
-#. R/unix/mcfork.R: stop("invalid 'child' argument")
-#: R/unix/mcfork.R:0
-msgid "invalid 'child' argument"
-msgstr "argumento 'child' inválido"
-
-#. R/unix/mcparallel.R: stop("invalid 'jobs' argument")
-#: R/unix/mcparallel.R:0
-msgid "invalid 'jobs' argument"
+#. R/unix/mcfork.R: gettextf("invalid '%s' argument", "child")
+#. R/unix/mcparallel.R: gettextf("invalid '%s' argument", "jobs")
+#: R/unix/mcfork.R:0 R/unix/mcparallel.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
 msgstr "argumento 'jobs' inválido"
 
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
@@ -227,3 +224,6 @@ msgid "socket cluster with %d nodes on host %s"
 msgid_plural "socket cluster with %d nodes on hosts %s"
 msgstr[0] ""
 msgstr[1] ""
+
+#~ msgid "invalid 'child' argument"
+#~ msgstr "argumento 'child' inválido"

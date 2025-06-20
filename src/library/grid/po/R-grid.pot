@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -724,6 +724,40 @@ msgid "invalid \"gTree\" class"
 msgstr ""
 
 
+#: R/frames.R: 0
+#: R/grob.R: 0
+#: R/ls.R: 0
+#: R/origin.R: 0
+#: R/primitives.R: 0
+#: R/unit.R: 0
+#: R/viewport.R: 0
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+
+msgid "invalid '%s' argument"
+msgstr ""
+
+
+#: R/ls.R: 0
+#: R/primitives.R: 0
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+
+msgid "invalid '%s' value"
+msgstr ""
+
+
 #: R/gpar.R: 0
 #. R/gpar.R: stop("invalid 'alpha' value")
 
@@ -738,13 +772,6 @@ msgid "invalid 'angle' in viewport"
 msgstr ""
 
 
-#: R/primitives.R: 0
-#. R/primitives.R: stop("invalid 'arrow' argument")
-
-msgid "invalid 'arrow' argument"
-msgstr ""
-
-
 #: R/components.R: 0
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 
@@ -756,13 +783,6 @@ msgstr ""
 #. R/unit.R: stop("invalid 'axis' or 'type'")
 
 msgid "invalid 'axis' or 'type'"
-msgstr ""
-
-
-#: R/viewport.R: 0
-#. R/viewport.R: stop("invalid 'clip' value")
-
-msgid "invalid 'clip' value"
 msgstr ""
 
 
@@ -794,13 +814,6 @@ msgid "invalid 'f'"
 msgstr ""
 
 
-#: R/frames.R: 0
-#. R/frames.R: stop("invalid 'frame'")
-
-msgid "invalid 'frame'"
-msgstr ""
-
-
 #: R/grob.R: 0
 #. R/grob.R: stop("invalid 'gPath'")
 
@@ -815,31 +828,10 @@ msgid "invalid 'gp' slot"
 msgstr ""
 
 
-#: R/viewport.R: 0
-#. R/viewport.R: stop("invalid 'gp' value")
-
-msgid "invalid 'gp' value"
-msgstr ""
-
-
 #: R/grob.R: 0
 #. R/grob.R: stop("invalid 'grep' value")
 
 msgid "invalid 'grep' value"
-msgstr ""
-
-
-#: R/frames.R: 0
-#. R/frames.R: stop("invalid 'grob'")
-
-msgid "invalid 'grob'"
-msgstr ""
-
-
-#: R/grob.R: 0
-#. R/grob.R: stop("invalid 'grob' argument")
-
-msgid "invalid 'grob' argument"
 msgstr ""
 
 
@@ -878,52 +870,10 @@ msgid "invalid 'linemitre' value"
 msgstr ""
 
 
-#: R/ls.R: 0
-#. R/ls.R: stop("invalid 'listing'")
-
-msgid "invalid 'listing'"
-msgstr ""
-
-
-#: R/viewport.R: 0
-#. R/viewport.R: stop("invalid 'mask' value")
-
-msgid "invalid 'mask' value"
-msgstr ""
-
-
 #: R/function.R: 0
 #. R/function.R: stop("invalid 'n'")
 
 msgid "invalid 'n'"
-msgstr ""
-
-
-#: R/origin.R: 0
-#. R/origin.R: stop("invalid 'origin'")
-
-msgid "invalid 'origin'"
-msgstr ""
-
-
-#: R/ls.R: 0
-#. R/ls.R: stop("invalid 'print' argument")
-
-msgid "invalid 'print' argument"
-msgstr ""
-
-
-#: R/grob.R: 0
-#. R/grob.R: stop("invalid 'result'")
-
-msgid "invalid 'result'"
-msgstr ""
-
-
-#: R/primitives.R: 0
-#. R/primitives.R: stop("invalid 'rot' value")
-
-msgid "invalid 'rot' value"
 msgstr ""
 
 
@@ -938,13 +888,6 @@ msgstr ""
 #. R/frames.R: stop("invalid 'row' specification")
 
 msgid "invalid 'row' specification"
-msgstr ""
-
-
-#: R/unit.R: 0
-#. R/unit.R: stop("invalid 'theta'")
-
-msgid "invalid 'theta'"
 msgstr ""
 
 
@@ -1001,13 +944,6 @@ msgstr ""
 #. R/just.R: stop("invalid justification")
 
 msgid "invalid justification"
-msgstr ""
-
-
-#: R/ls.R: 0
-#. R/ls.R: stop("invalid listing")
-
-msgid "invalid listing"
 msgstr ""
 
 

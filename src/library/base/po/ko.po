@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 15:01+0200\n"
+"POT-Creation-Date: 2025-06-20 18:45+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -180,13 +180,16 @@ msgstr "'%ls'를 표시하는데 문제가 발생했습니다"
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
 #: src/main/envir.cpp:3159 src/main/envir.cpp:3173 src/main/envir.cpp:3180
 #: src/main/envir.cpp:3196 src/main/envir.cpp:3930 src/main/errors.cpp:1282
-#: src/main/eval.cpp:893 src/main/eval.cpp:903 src/main/eval.cpp:906
-#: src/main/eval.cpp:909 src/main/eval.cpp:917 src/main/eval.cpp:924
-#: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
-#: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2131
-#: src/main/grep.cpp:2135 src/main/grep.cpp:2140 src/main/grep.cpp:2178
-#: src/main/grep.cpp:2180 src/main/grep.cpp:2973 src/main/grep.cpp:2978
-#: src/main/grep.cpp:3316 src/main/grep.cpp:3321 src/main/memory.cpp:4584
+#: src/main/errors.cpp:2793 src/main/eval.cpp:893 src/main/eval.cpp:903
+#: src/main/eval.cpp:906 src/main/eval.cpp:909 src/main/eval.cpp:917
+#: src/main/eval.cpp:924 src/main/grep.cpp:1292 src/main/grep.cpp:1297
+#: src/main/grep.cpp:1594 src/main/grep.cpp:1596 src/main/grep.cpp:1598
+#: src/main/grep.cpp:2131 src/main/grep.cpp:2135 src/main/grep.cpp:2140
+#: src/main/grep.cpp:2178 src/main/grep.cpp:2180 src/main/grep.cpp:2973
+#: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321
+#: src/main/internet.cpp:155 src/main/internet.cpp:169
+#: src/main/internet.cpp:194 src/main/internet.cpp:207
+#: src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4584
 #: src/main/objects.cpp:1800 src/main/objects.cpp:1802 src/main/paste.cpp:152
 #: src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
 #: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526
@@ -3738,16 +3741,9 @@ msgstr "'%s'에 대해서 잠긴 바인딩의 값은 변경할 수 없습니다"
 msgid "cannot add bindings to a locked environment"
 msgstr "잠겨있는 인바이런먼트에 바인딩을 추가할 수 없습니다"
 
-#: src/main/envir.cpp:443
-msgid "first argument ('table') not of type VECSXP, from R_HashResize"
-msgstr ""
-
-#: src/main/envir.cpp:500
-msgid "first argument ('table') not of type VECSXP, R_HashSizeCheck"
-msgstr ""
-
-#: src/main/envir.cpp:524
-msgid "first argument ('table') not of type ENVSXP, from R_HashVector2Hash"
+#: src/main/envir.cpp:443 src/main/envir.cpp:500 src/main/envir.cpp:524
+#, c-format
+msgid "first argument ('table') not of type '%s', from %s"
 msgstr ""
 
 #: src/main/envir.cpp:831
@@ -4004,7 +4000,7 @@ msgid "bad namespace"
 msgstr "잘못된 네임스페이스명입니다"
 
 #: src/main/envir.cpp:3875
-msgid "bad value returned by `getNamespaceName'"
+msgid "bad value returned by 'getNamespaceName'"
 msgstr ""
 
 #: src/main/envir.cpp:3877
@@ -4267,11 +4263,6 @@ msgstr "기본값이 없는 인수 \"%s\"가 누락되어 있습니다"
 #: src/main/errors.cpp:2773
 msgid "argument is missing, with no default"
 msgstr "기본값이 없는 인수가 누락되어 있습니다"
-
-#: src/main/errors.cpp:2793
-#, fuzzy
-msgid "bad condition argument"
-msgstr "불러오기 인바이런먼트 인자가 잘못되었습니다"
 
 #: src/main/errors.cpp:2795
 #, fuzzy
@@ -4574,11 +4565,11 @@ msgid "cannot find index for threaded code address"
 msgstr ""
 
 #: src/main/eval.cpp:8688
-msgid "registerBC requires integer vector as bcBytes"
+msgid "R_registerBC requires integer vector as bcBytes"
 msgstr ""
 
 #: src/main/eval.cpp:8690
-msgid "registerBC requires BCODESXP object as bcode"
+msgid "R_registerBC requires BCODESXP object as bcode"
 msgstr ""
 
 #: src/main/eval.cpp:8769
@@ -5118,7 +5109,7 @@ msgstr ""
 
 #: src/main/identical.cpp:391
 #, c-format
-msgid "Unknown Type in identical(): %s (%x)\n"
+msgid "Unknown type in identical(): %s (%x)\n"
 msgstr ""
 
 #: src/main/inspect.cpp:301
@@ -5137,13 +5128,6 @@ msgstr "이 모듈에서는 인터넷 루틴들에 접근할 수 없습니다"
 #: src/main/internet.cpp:308
 msgid "internet routines cannot be loaded"
 msgstr "인터넷 루틴들을 로드할 수 없습니다"
-
-#: src/main/internet.cpp:155 src/main/internet.cpp:169
-#: src/main/internet.cpp:194 src/main/internet.cpp:219
-#: src/main/internet.cpp:239
-#, fuzzy
-msgid "invalid 'socket' argument"
-msgstr "유효하지 않은 'mode' 인자입니다"
 
 #: src/main/internet.cpp:163 src/main/internet.cpp:182
 #: src/main/internet.cpp:201 src/main/internet.cpp:213
@@ -5165,11 +5149,6 @@ msgstr "zip 파일에서 CRC 에러입니다"
 #: src/main/internet.cpp:196
 msgid "attempt to close invalid socket"
 msgstr ""
-
-#: src/main/internet.cpp:207
-#, fuzzy
-msgid "invalid 'port' argument"
-msgstr "유효하지 않은 'mode' 인자입니다"
 
 #: src/main/lapack.cpp:46
 msgid "LAPACK routines cannot be accessed in module"
@@ -5579,9 +5558,9 @@ msgstr ""
 msgid "can't change the type of a binding cell"
 msgstr "바인딩이 잠겨있다면 활성화 되어 있는 바인딩을 변경할 수 없습니다"
 
-#: src/main/memory.cpp:3695
+#: src/main/memory.cpp:3695 src/main/memory.cpp:4020
 #, c-format
-msgid "LENGTH or similar applied to %s object"
+msgid "'%s' or similar applied to %s object"
 msgstr ""
 
 #: src/main/memory.cpp:3708
@@ -5635,11 +5614,6 @@ msgstr ""
 #: src/main/memory.cpp:3990
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
-msgstr ""
-
-#: src/main/memory.cpp:4020
-#, c-format
-msgid "CAR/CDR/TAG or similar applied to %s object"
 msgstr ""
 
 #: src/main/memory.cpp:4134
@@ -6621,7 +6595,7 @@ msgid "Could not realloc savedtl in savetl"
 msgstr "'path'에 공간을 할당할 수 없습니다"
 
 #: src/main/radixsort.cpp:778 src/main/radixsort.cpp:866
-msgid "Not yet used, still using iradix instead"
+msgid "'colSize = 4' not yet used, still using iradix instead"
 msgstr ""
 
 #: src/main/radixsort.cpp:955
@@ -6735,7 +6709,7 @@ msgid "invalid UTF-8 string"
 msgstr "잘못된 UTF-8 문자열입니다"
 
 #: src/main/raw.cpp:397
-msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgid "'allow_surrogate_pairs = TRUE' is incompatible with 'multiple = TRUE' and will be ignored"
 msgstr ""
 
 #: src/main/Rdynload.cpp:177
@@ -7113,7 +7087,7 @@ msgstr ""
 
 #: src/main/Rstrptime.h:699 src/main/Rstrptime.h:1183
 #, c-format
-msgid "(0-based) yday %d in year %d is invalid\n"
+msgid "(0-based) day-of-year %d in year %d is invalid\n"
 msgstr ""
 
 #: src/main/Rstrptime.h:1307
@@ -9933,7 +9907,7 @@ msgstr ""
 
 #: src/nmath/rhyper.cpp:200
 #, c-format
-msgid "w = %g <= 0: Underflow in rhyper()  SHOULD NOT HAPPEN!"
+msgid "w = %g <= 0: Underflow in rhyper() SHOULD NOT HAPPEN!"
 msgstr ""
 
 # added on 28-MAR-2013
@@ -10131,6 +10105,18 @@ msgstr "X11 모듈이 로드되어질 수 없습니다"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11을 사용할 수 없습니다"
+
+#, fuzzy
+#~ msgid "bad condition argument"
+#~ msgstr "불러오기 인바이런먼트 인자가 잘못되었습니다"
+
+#, fuzzy
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "유효하지 않은 'mode' 인자입니다"
+
+#, fuzzy
+#~ msgid "invalid 'port' argument"
+#~ msgstr "유효하지 않은 'mode' 인자입니다"
 
 #, fuzzy
 #~ msgid "'pattern' is invalid"

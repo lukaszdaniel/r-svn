@@ -160,7 +160,7 @@ uniroot <- function(f, interval, ...,
 	(if(check.conv) stop else warning)(
 	    sprintf(ngettext(maxiter,
 			     "_NOT_ converged in %d iteration",
-			     "_NOT_ converged in %d iterations"),
+			     "_NOT_ converged in %d iterations", domain = "R-stats"),
 		    maxiter), domain = NA)
 	iter <- maxiter
     }

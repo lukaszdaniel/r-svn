@@ -8685,9 +8685,9 @@ attribute_hidden void R::R_registerBC(SEXP bcBytes, SEXP bcode)
     if (R_check_constants <= 0)
 	return;
     if (TYPEOF(bcBytes) != INTSXP)
-	error("%s", _("registerBC requires integer vector as bcBytes"));
+	error("%s", _("R_registerBC requires integer vector as bcBytes"));
     if (TYPEOF(bcode) != BCODESXP)
-	error("%s", _("registerBC requires BCODESXP object as bcode"));
+	error("%s", _("R_registerBC requires BCODESXP object as bcode"));
 
     static int s_count = CONST_CHECK_COUNT;
     if (--s_count <= 0) {

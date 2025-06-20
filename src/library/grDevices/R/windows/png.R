@@ -42,7 +42,7 @@ png <-
              antialias = c("default", "none", "cleartype", "gray", "subpixel"),
              symbolfamily="default")
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     if(match.arg(type) == "cairo") {
         antialias <- match(match.arg(antialias), aa.cairo)
@@ -83,7 +83,7 @@ bmp <-
              antialias = c("default", "none", "cleartype", "gray", "subpixel"),
              symbolfamily="default")
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     if(match.arg(type) == "cairo") {
         antialias <- match(match.arg(antialias), aa.cairo)
@@ -117,7 +117,7 @@ jpeg <-
              antialias = c("default", "none", "cleartype", "gray", "subpixel"),
              symbolfamily="default")
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     if(match.arg(type) == "cairo") {
         antialias <- match(match.arg(antialias), aa.cairo)
@@ -154,7 +154,7 @@ tiff <-
              antialias = c("default", "none", "cleartype", "gray", "subpixel"),
              symbolfamily="default")
 {
-    if(!checkIntFormat(filename)) stop("invalid 'filename'")
+    if(!checkIntFormat(filename)) stop(gettextf("invalid '%s' argument", "filename"))
     g <- .geometry(width, height, units, res)
     comp <- if(is.numeric(compression)) compression
             else

@@ -44,7 +44,7 @@ lsfit <- function(x, y, wt = NULL, intercept = TRUE, tolerance = 1e-07,
     if( any(!good) ) {
         warning(sprintf(ngettext(sum(!good),
                                  "%d missing value deleted",
-                                 "%d missing values deleted"),
+                                 "%d missing values deleted", domain = "R-stats"),
                         sum(!good)), domain = NA)
 	x <- as.matrix(x)[good, , drop=FALSE]
 	y <- as.matrix(y)[good, , drop=FALSE]
@@ -61,21 +61,21 @@ lsfit <- function(x, y, wt = NULL, intercept = TRUE, tolerance = 1e-07,
     if(nry != nrx)
         stop(sprintf(paste0(ngettext(nrx,
                        "'X' matrix has %d case (row)",
-                       "'X' matrix has %d cases (rows)"),
+                       "'X' matrix has %d cases (rows)", domain = "R-stats"),
               ", ",
               ngettext(nry,
                        "'Y' has %d case (row)",
-                       "'Y' has %d cases (rows)")),
+                       "'Y' has %d cases (rows)", domain = "R-stats")),
                        nrx, nry),
                        domain = NA)
     if(nry < ncx)
         stop(sprintf(paste0(ngettext(nry,
                               "only %d case",
-                              "only %d cases"),
+                              "only %d cases", domain = "R-stats"),
                      ", ",
                      ngettext(ncx,
                               "but %d variable",
-                              "but %d variables")),
+                              "but %d variables", domain = "R-stats")),
                      nry, ncx),
              domain = NA)
     ## check weights if necessary

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -526,6 +526,30 @@ msgstr "indeks poza zakresem (podzbiór 'unit')"
 msgid "invalid \"gTree\" class"
 msgstr "niepoprawna klasa \"gTree\""
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+msgid "invalid '%s' argument"
+msgstr "niepoprawny argument '%s'"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+msgid "invalid '%s' value"
+msgstr "niepoprawna wartość '%s'"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 msgid "invalid 'alpha' value"
@@ -536,11 +560,6 @@ msgstr "niepoprawna wartość 'alpha'"
 msgid "invalid 'angle' in viewport"
 msgstr "niepoprawny argument 'angle' w oknie ekranu"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-msgid "invalid 'arrow' argument"
-msgstr "niepoprawny argument 'arrow'"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 msgid "invalid 'at' location in 'axis'"
@@ -550,11 +569,6 @@ msgstr "niepoprawne położenie 'at' w 'axis'"
 #: R/unit.R:0
 msgid "invalid 'axis' or 'type'"
 msgstr "niepoprawna wartość 'axis' lub 'type'"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-msgid "invalid 'clip' value"
-msgstr "niepoprawna wartość 'clip'"
 
 #. R/frames.R: stop("invalid 'col' specification")
 #: R/frames.R:0
@@ -576,11 +590,6 @@ msgstr "niepoprawny argument 'ends' lub 'type'"
 msgid "invalid 'f'"
 msgstr "niepoprawna wartość 'f'"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-msgid "invalid 'frame'"
-msgstr "niepoprawny argument 'frame'"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 msgid "invalid 'gPath'"
@@ -591,25 +600,10 @@ msgstr "niepoprawne wartość 'gPath'"
 msgid "invalid 'gp' slot"
 msgstr "niepoprawne gniazdo 'gp'"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-msgid "invalid 'gp' value"
-msgstr "niepoprawna wartość 'gp'"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 msgid "invalid 'grep' value"
 msgstr "niepoprawna wartość 'grep'"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-msgid "invalid 'grob'"
-msgstr "niepoprawny argument 'grob'"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-msgid "invalid 'grob' argument"
-msgstr "niepoprawny argument 'grob'"
 
 #. R/grob.R: stop("invalid 'grob' class")
 #: R/grob.R:0
@@ -636,40 +630,10 @@ msgstr "niepoprawny argument 'layout.pos.row' w oknie ekranu"
 msgid "invalid 'linemitre' value"
 msgstr "niepoprawna wartość 'linemitre'"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-msgid "invalid 'listing'"
-msgstr "niepoprawna wartość 'listing'"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-msgid "invalid 'mask' value"
-msgstr "niepoprawna wartość 'mask'"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 msgid "invalid 'n'"
 msgstr "niepoprawny argument 'n'"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-msgid "invalid 'origin'"
-msgstr "niepoprawna wartość 'origin'"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-msgid "invalid 'print' argument"
-msgstr "niepoprawny argument 'print'"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-msgid "invalid 'result'"
-msgstr "niepoprawna wartość 'result'"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-msgid "invalid 'rot' value"
-msgstr "niepoprawna wartość 'rot'"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
 #: R/frames.R:0
@@ -680,11 +644,6 @@ msgstr "niepoprawne argumenty 'row' oraz/lub 'col' (brak takiej komórki w ramce
 #: R/frames.R:0
 msgid "invalid 'row' specification"
 msgstr "niepoprawne określenie 'row'"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-msgid "invalid 'theta'"
-msgstr "niepoprawna wartość 'theta'"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -725,11 +684,6 @@ msgstr "niepoprawne poziome justowanie"
 #: R/just.R:0
 msgid "invalid justification"
 msgstr "niepoprawne justowanie"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-msgid "invalid listing"
-msgstr "niepoprawna wartość 'listing'"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -981,6 +935,42 @@ msgid_plural "invalid viewport names"
 msgstr[0] "niepoprawna nazwa okna ekranu"
 msgstr[1] "niepoprawne nazwy okien ekranu"
 msgstr[2] "niepoprawne nazwy okien ekranu"
+
+#~ msgid "invalid 'clip' value"
+#~ msgstr "niepoprawna wartość 'clip'"
+
+#~ msgid "invalid 'frame'"
+#~ msgstr "niepoprawny argument 'frame'"
+
+#~ msgid "invalid 'gp' value"
+#~ msgstr "niepoprawna wartość 'gp'"
+
+#~ msgid "invalid 'grob'"
+#~ msgstr "niepoprawny argument 'grob'"
+
+#~ msgid "invalid 'listing'"
+#~ msgstr "niepoprawna wartość 'listing'"
+
+#~ msgid "invalid 'origin'"
+#~ msgstr "niepoprawna wartość 'origin'"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "niepoprawna wartość 'result'"
+
+#~ msgid "invalid 'rot' value"
+#~ msgstr "niepoprawna wartość 'rot'"
+
+#~ msgid "invalid 'theta'"
+#~ msgstr "niepoprawna wartość 'theta'"
+
+#~ msgid "invalid listing"
+#~ msgstr "niepoprawna wartość 'listing'"
+
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "niepoprawny argument 'arrow'"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "niepoprawny argument 'print'"
 
 #~ msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 #~ msgstr "'gPath' musi mieć głębokość 1 w jednostkach 'grobwidth/height'"

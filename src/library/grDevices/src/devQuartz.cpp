@@ -3307,12 +3307,12 @@ SEXP Quartz(SEXP args)
     else if (isString(tmps) && LENGTH(tmps) >= 1) {
 	SEXP tmp1 = STRING_ELT(tmps, 0);
 	if(tmp1 == NA_STRING)
-	    error("%s", _("invalid 'file' argument"));
+	    error(_("invalid '%s' argument"), "file");
         const char *tmp = R_ExpandFileName(CHAR(tmp1));
 	file = R_alloc(strlen(tmp) + 1, sizeof(char));
 	strcpy(file, tmp);
     } else
-        error("%s", _("invalid 'file' argument"));
+        error(_("invalid '%s' argument"), "file");
     width     = ARG(asReal,args);
     height    = ARG(asReal,args);
     ps        = ARG(asReal,args);

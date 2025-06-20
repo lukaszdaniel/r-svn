@@ -440,7 +440,7 @@ static SEXP R_HashResize(SEXP table)
 {
     /* Do some checking */
     if (TYPEOF(table) != VECSXP)
-	error("%s", _("first argument ('table') not of type VECSXP, from R_HashResize"));
+	error(_("first argument ('table') not of type '%s', from %s"), "VECSXP", "R_HashResize");
 
     /* This may have to change.	 The growth rate should
        be independent of the size (not implemented yet) */
@@ -497,7 +497,7 @@ static int R_HashSizeCheck(SEXP table)
 
     /* Do some checking */
     if (TYPEOF(table) != VECSXP)
-	error("%s", _("first argument ('table') not of type VECSXP, R_HashSizeCheck"));
+	error(_("first argument ('table') not of type '%s', from %s"), "VECSXP", "R_HashSizeCheck");
     resize = 0; thresh_val = 0.85;
     if ((double)HASHPRI(table) > (double)HASHSIZE(table) * thresh_val)
 	resize = 1;
@@ -521,7 +521,7 @@ static SEXP R_HashFrame(SEXP rho)
 {
     /* Do some checking */
     if (TYPEOF(rho) != ENVSXP)
-	error("%s", _("first argument ('table') not of type ENVSXP, from R_HashVector2Hash"));
+	error(_("first argument ('table') not of type '%s', from %s"), "ENVSXP", "R_HashFrame");
     SEXP table = HASHTAB(rho);
     SEXP frame = FRAME(rho);
     while (!ISNULL(frame)) {
@@ -3872,7 +3872,7 @@ attribute_hidden SEXP R_getNSValue(SEXP call, SEXP ns, SEXP name, bool exported)
 
     SEXP nsname = PROTECT(callR1(R_getNamespaceNameSymbol, ns));
     if (TYPEOF(nsname) != STRSXP || LENGTH(nsname) != 1)
-	errorcall(call, "%s", _("bad value returned by `getNamespaceName'"));
+	errorcall(call, "%s", _("bad value returned by 'getNamespaceName'"));
     errorcall_cpy(call,
 		  _("'%s' is not an exported object from 'namespace:%s'"),
 		  EncodeChar(PRINTNAME(name)),

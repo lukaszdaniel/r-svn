@@ -77,7 +77,7 @@ nlsModel.plinear <- function(form, data, start, wts, scaleOffset = 0, nDcentral 
     dimGrad <- dim(attr(rhs, "gradient"))
     marg <- length(dimGrad)
     if(marg > 0) {
-        if(marg < 2L) stop("invalid 'attr(rhs, \"gradient\")'")
+        if(marg < 2L) stop(gettextf("invalid '%s' value", "attr(rhs, \"gradient\")"))
         gradSetArgs <- vector("list", marg + 1L)
         for(i in 2:marg)
             gradSetArgs[[i]] <- rep_len(TRUE, dimGrad[i-1L])
@@ -420,7 +420,7 @@ nls_port_fit <- function(m, start, lower, upper, control, trace, give.v=FALSE)
 	if (any(nap <- is.na(pos))) {
             warning(sprintf(ngettext(length(nap),
                                      "unrecognized control element named %s ignored",
-                                     "unrecognized control elements named %s ignored"),
+                                     "unrecognized control elements named %s ignored", domain = "R-stats"),
                             paste(nms[nap], collapse = ", ")),
                     domain = NA)
 	    pos <- pos[!nap]
@@ -518,10 +518,9 @@ nls <-
                     stop("no starting values specified")
                 ## Provide some starting values instead of erroring out later;
                 ## '1' seems slightly better than 0 (which is often invalid):
-                warning("No starting values specified for some parameters.\n",
-                        "Initializing ", paste(sQuote(nnn), collapse=", "),
-                        " to '1.'.\n",
-                        "Consider specifying 'start' or using a selfStart model", domain = NA)
+                warning("No starting values specified for some parameters.", "\n",
+                        gettextf("Initializing %s to '1.'.", paste(sQuote(nnn), collapse=", ")), "\n",
+                        "Consider specifying 'start' or using a selfStart model", domain = "R-stats", sep = "")
 		start <- setNames(as.list(rep_len(1., length(nnn))), nnn)
                 varNames <- varNames[i <- is.na(match(varNames, nnn))]
                 n <- n[i]
@@ -536,7 +535,7 @@ nls <-
             ## Can fit a model with pnames even if no varNames
             message(sprintf(ngettext(sum(np == -1),
                                      "fitting parameter %s without any variables",
-                                     "fitting parameters %s without any variables"),
+                                     "fitting parameters %s without any variables", domain = "R-stats"),
                             paste(sQuote(pnames[np == -1]), collapse=", ")),
                     domain = NA)
             n <- integer()
@@ -622,7 +621,7 @@ nls <-
     ## Iterate
     if (algorithm != "port") { ## i.e. "default" or  "plinear" :
 	if (!identical(lower, -Inf) || !identical(upper, +Inf)) {
-	    warning('upper and lower bounds ignored unless algorithm = "port"')
+	    warning("upper and lower bounds ignored unless 'algorithm = \"port\"'")
 	    cl$lower <- NULL # see PR#15960 -- confint() would use these regardless of algorithm
 	    cl$upper <- NULL
 	}

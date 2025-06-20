@@ -3692,7 +3692,7 @@ static R_INLINE SEXP CHK2(SEXP x)
 {
     x = CHK(x);
     if (not_a_vec[TYPEOF(x)])
-	error(_("LENGTH or similar applied to %s object"), R_typeToChar(x));
+	error(_("'%s' or similar applied to %s object"), "LENGTH", R_typeToChar(x));
     return x;
 }
 
@@ -4017,7 +4017,7 @@ static R_INLINE SEXP CHKCONS(SEXP e)
     case EXTPTRSXP: /**** use separate accessors? */
 	return CHK(e);
     default:
-	error(_("CAR/CDR/TAG or similar applied to %s object"),
+	error(_("'%s' or similar applied to %s object"), "CAR/CDR/TAG"
 	      R_typeToChar(e));
     }
 }

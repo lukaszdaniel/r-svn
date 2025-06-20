@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 18:21\n"
+"POT-Creation-Date: 2025-06-20 10:49\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -594,39 +594,28 @@ msgstr "oczekiwano rosnących wartości 'x' oraz 'y'"
 msgid "invalid \"recordedplot\":"
 msgstr "niepoprawne \"recordedplot\":"
 
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
+#. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
-#: R/postscript.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0 R/unix/x11.R:0
+#: R/windows/png.R:0 R/windows/windows.R:0
 msgid "invalid '%s' argument"
-msgstr "niepoprawny '%s' argument"
+msgstr "niepoprawny argument '%s'"
 
 #. R/postscript.R: stop("invalid 'cmapEncoding' in font specification")
 #: R/postscript.R:0
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr "niepoprawne 'cmapEncoding' w specyfikacji czcionki"
 
-#. R/unix/quartz.R: stop("invalid 'file'")
-#: R/unix/quartz.R:0
-msgid "invalid 'file'"
-msgstr "niepoprawny argument 'file'"
-
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0
 msgid "invalid 'file' argument '%s'"
 msgstr "niepoprawny argument 'file' '%s'"
-
-#. R/cairo.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
-msgid "invalid 'filename'"
-msgstr "niepoprawny argument 'filename'"
-
-#. R/unix/quartz.R: stop("invalid 'title'")
-#. R/unix/x11.R: stop("invalid 'title'")
-#: R/unix/quartz.R:0 R/unix/x11.R:0
-msgid "invalid 'title'"
-msgstr "niepoprawny argument 'title'"
 
 #. R/postscript.R: stop("invalid CMap name in font specification")
 #: R/postscript.R:0
@@ -947,6 +936,15 @@ msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "niepoprawna nazwa argumentu %s w '%s'"
 msgstr[1] "niepoprawne nazwy argumentów %s w '%s'"
 msgstr[2] "niepoprawne nazwy argumentów %s w '%s'"
+
+#~ msgid "invalid 'filename'"
+#~ msgstr "niepoprawny argument 'filename'"
+
+#~ msgid "invalid 'file'"
+#~ msgstr "niepoprawny argument 'file'"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "niepoprawny argument 'title'"
 
 #~ msgid "invalid 'family' argument"
 #~ msgstr "niepoprawny argument 'family'"

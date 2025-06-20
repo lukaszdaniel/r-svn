@@ -43,7 +43,7 @@ selfStart.formula <-
         if (any(msng <- is.na(match(parameters, nm)))) {
             stop(sprintf(ngettext(sum(msng),
                        "parameter %s does not occur in the model formula",
-                       "parameters %s do not occur in the model formula"),
+                       "parameters %s do not occur in the model formula", domain = "R-stats"),
                          paste(sQuote(parameters[msng]), collapse=", ")),
                  domain = NA)
         }

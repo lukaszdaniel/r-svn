@@ -622,7 +622,7 @@ convertTheta <- function(theta) {
                north=90,
                west=180,
                south=270,
-               stop("invalid 'theta'"))
+               stop(gettextf("invalid '%s' argument", "theta")))
     else
         # Ensure theta in [0, 360)
         theta <- as.numeric(theta) %% 360

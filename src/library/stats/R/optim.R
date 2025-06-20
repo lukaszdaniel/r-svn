@@ -59,7 +59,7 @@ optim <-
     if(npar == 1 && method == "Nelder-Mead" && isTRUE(con$warn.1d.NelderMead))
         warning("one-dimensional optimization by Nelder-Mead is unreliable:\nuse \"Brent\" or optimize() directly")
     if(npar > 1 && method == "Brent")
-	stop('method = "Brent" is only available for one-dimensional optimization')
+	stop("method = \"Brent\" is only available for one-dimensional optimization")
     lower <- as.double(rep_len(lower, npar))
     upper <- as.double(rep_len(upper, npar))
     res <- if(method == "Brent") { ## 1-D

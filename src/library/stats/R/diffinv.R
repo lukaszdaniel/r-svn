@@ -33,7 +33,7 @@ diffinv.vector <- function (x, lag = 1L, differences = 1L, xi, ...)
         x <- as.double(x)
         xi <- as.double(xi)
         n <- as.integer(length(x))
-        if(is.na(n)) stop(gettextf("invalid value of %s", "length(x)"), domain = NA)
+        if (is.na(n)) stop(gettextf("invalid '%s' value", "length(x)"))
 #        y <- c(xi[1L:lag], double(n))
 #        z <- .C(C_R_intgrt_vec, x, y = y, as.integer(lag), n)$y
         .Call(C_intgrt_vec, x, xi, lag)

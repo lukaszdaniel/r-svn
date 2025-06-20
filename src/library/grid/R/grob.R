@@ -41,7 +41,7 @@ grobName <- function(grob=NULL, prefix="GRID") {
         grobAutoName(prefix)
     else {
         if (!is.grob(grob))
-            stop("invalid 'grob' argument")
+            stop(gettextf("invalid '%s' argument", "grob"))
         else
             grobAutoName(prefix, class(grob)[1L])
     }
@@ -568,9 +568,9 @@ grid.edit <- function(gPath, ..., strict=FALSE,
   if (is.character(gPath))
     gPath <- gPath(gPath)
   if (!inherits(gPath, "gPath"))
-    stop("invalid 'gPath'")
+    stop(gettextf("invalid '%s' argument", "gPath"))
   if (!is.logical(grep))
-    stop("invalid 'grep' value")
+    stop(gettextf("invalid '%s' argument", "grep"))
   grep <- rep(grep, length.out=depth(gPath))
   specs <- list(...)
   editDLfromGPath(gPath, specs, strict, grep, global, redraw)
@@ -737,7 +737,7 @@ growResult <- function(result, x) {
 # Should only be when result is NULL
 growResult.default <- function(result, x) {
   if (!is.null(result))
-    stop("invalid 'result'")
+    stop(gettextf("invalid '%s' argument", "result"))
   x
 }
 

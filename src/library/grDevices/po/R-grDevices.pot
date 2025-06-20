@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 18:21\n"
+"POT-Creation-Date: 2025-06-20 10:49\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -824,9 +824,20 @@ msgid "invalid \"recordedplot\":"
 msgstr ""
 
 
+#: R/cairo.R: 0
 #: R/postscript.R: 0
+#: R/unix/png.R: 0
+#: R/unix/quartz.R: 0
+#: R/unix/x11.R: 0
+#: R/windows/png.R: 0
 #: R/windows/windows.R: 0
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
+#. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
 
 msgid "invalid '%s' argument"
@@ -840,37 +851,10 @@ msgid "invalid 'cmapEncoding' in font specification"
 msgstr ""
 
 
-#: R/unix/quartz.R: 0
-#. R/unix/quartz.R: stop("invalid 'file'")
-
-msgid "invalid 'file'"
-msgstr ""
-
-
 #: R/postscript.R: 0
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 
 msgid "invalid 'file' argument '%s'"
-msgstr ""
-
-
-#: R/cairo.R: 0
-#: R/unix/png.R: 0
-#: R/windows/png.R: 0
-#. R/cairo.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-
-msgid "invalid 'filename'"
-msgstr ""
-
-
-#: R/unix/quartz.R: 0
-#: R/unix/x11.R: 0
-#. R/unix/quartz.R: stop("invalid 'title'")
-#. R/unix/x11.R: stop("invalid 'title'")
-
-msgid "invalid 'title'"
 msgstr ""
 
 

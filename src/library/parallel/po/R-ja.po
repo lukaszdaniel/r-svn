@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-09 16:00\n"
+"POT-Creation-Date: 2025-06-20 08:24\n"
 "PO-Revision-Date: 2024-02-26 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -106,14 +106,11 @@ msgstr "dim(X) は正の長さでなければなりません"
 msgid "fork clusters are not supported on Windows"
 msgstr "fork クラスターは Windows ではサポートされていません"
 
-#. R/unix/mcfork.R: stop("invalid 'child' argument")
-#: R/unix/mcfork.R:0
-msgid "invalid 'child' argument"
-msgstr "無効な 'child' 引数です"
-
-#. R/unix/mcparallel.R: stop("invalid 'jobs' argument")
-#: R/unix/mcparallel.R:0
-msgid "invalid 'jobs' argument"
+#. R/unix/mcfork.R: gettextf("invalid '%s' argument", "child")
+#. R/unix/mcparallel.R: gettextf("invalid '%s' argument", "jobs")
+#: R/unix/mcfork.R:0 R/unix/mcparallel.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
 msgstr "無効な 'jobs' 引数です"
 
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
@@ -215,3 +212,6 @@ msgstr[0] "スケジュールされたコア %s でユーザーコードでエ�
 msgid "socket cluster with %d nodes on host %s"
 msgid_plural "socket cluster with %d nodes on hosts %s"
 msgstr[0] "ホスト %2$s 上に %1$d 個のノードを持つソケットクラスター"
+
+#~ msgid "invalid 'child' argument"
+#~ msgstr "無効な 'child' 引数です"

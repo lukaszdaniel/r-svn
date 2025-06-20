@@ -27,7 +27,7 @@ tapply <- function (X, INDEX, FUN = NULL, ..., default = NA, simplify = TRUE)
     if (!is.list(INDEX)) INDEX <- list(INDEX)
     INDEX <- lapply(INDEX, as.factor)
     nI <- length(INDEX)  # now, 'INDEX' is not classed
-    if (!nI) stop("'INDEX' is of length zero")
+    if (!nI) stop(gettextf("'%s' is of length 0", "INDEX"))
     if (!is.object(X) && !all(lengths(INDEX) == length(X)))
         stop("arguments must have same length")
     namelist <- lapply(INDEX, levels)#- all of them, yes !

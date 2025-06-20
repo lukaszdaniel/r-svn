@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -545,6 +545,32 @@ msgstr "添え字が範囲を超えています ('unit' subsetting)"
 msgid "invalid \"gTree\" class"
 msgstr "不正な \"gTree\" クラスです"
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "不正な 'grob' 引数です"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "不正な 'ask' 値です"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 msgid "invalid 'alpha' value"
@@ -555,11 +581,6 @@ msgstr "'alpha' の値が不正です"
 msgid "invalid 'angle' in viewport"
 msgstr "viewport 中の 'angle' が不正です"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-msgid "invalid 'arrow' argument"
-msgstr "不正な 'arrow' 引数です"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 msgid "invalid 'at' location in 'axis'"
@@ -569,11 +590,6 @@ msgstr "'axis' 中の 'at' のロケーション (location) が不正です"
 #: R/unit.R:0
 msgid "invalid 'axis' or 'type'"
 msgstr "不正な 'axis' または 'type' です"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-msgid "invalid 'clip' value"
-msgstr "不正な 'clip' 値です"
 
 #. R/frames.R: stop("invalid 'col' specification")
 #: R/frames.R:0
@@ -595,11 +611,6 @@ msgstr "不正な 'ends' 引数か 'type' 引数です"
 msgid "invalid 'f'"
 msgstr "不正な 'f' です"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-msgid "invalid 'frame'"
-msgstr "不正な 'frame' です"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 msgid "invalid 'gPath'"
@@ -610,25 +621,10 @@ msgstr "不正な 'gPath' です"
 msgid "invalid 'gp' slot"
 msgstr "不正な 'gp' スロットです"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-msgid "invalid 'gp' value"
-msgstr "不正な 'gp' 値です"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 msgid "invalid 'grep' value"
 msgstr "'grep' の値が不正です"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-msgid "invalid 'grob'"
-msgstr "不正な 'grob' です"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-msgid "invalid 'grob' argument"
-msgstr "不正な 'grob' 引数です"
 
 #. R/grob.R: stop("invalid 'grob' class")
 #: R/grob.R:0
@@ -655,41 +651,10 @@ msgstr "viewport 中の 'layout.pos.row' が不正です"
 msgid "invalid 'linemitre' value"
 msgstr "'linemitre' の値が不正です"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-msgid "invalid 'listing'"
-msgstr "不正な 'listing'"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'mask' value"
-msgstr "不正な 'ask' 値です"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 msgid "invalid 'n'"
 msgstr "不正な 'n' です"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-msgid "invalid 'origin'"
-msgstr "不正な 'origin' です"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-msgid "invalid 'print' argument"
-msgstr "不正な 'print' 引数です"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-msgid "invalid 'result'"
-msgstr "不正な 'result' です"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-msgid "invalid 'rot' value"
-msgstr "不正な 'rot' 値です"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
 #: R/frames.R:0
@@ -700,11 +665,6 @@ msgstr "不正な 'row' かつ/または 'col' です (frame layout の中にそ
 #: R/frames.R:0
 msgid "invalid 'row' specification"
 msgstr "不正な 'row' の指定です"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-msgid "invalid 'theta'"
-msgstr "不正な 'theta' です"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -745,11 +705,6 @@ msgstr "不正な水平方向の位置決め指定 (justification) です"
 #: R/just.R:0
 msgid "invalid justification"
 msgstr "不正な位置決め指定 (justification) です"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-msgid "invalid listing"
-msgstr "不正なリスティング"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -1003,6 +958,42 @@ msgstr[0] "不正な grob 名です"
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "不正な viewport 名です"
+
+#~ msgid "invalid 'clip' value"
+#~ msgstr "不正な 'clip' 値です"
+
+#~ msgid "invalid 'frame'"
+#~ msgstr "不正な 'frame' です"
+
+#~ msgid "invalid 'gp' value"
+#~ msgstr "不正な 'gp' 値です"
+
+#~ msgid "invalid 'grob'"
+#~ msgstr "不正な 'grob' です"
+
+#~ msgid "invalid 'listing'"
+#~ msgstr "不正な 'listing'"
+
+#~ msgid "invalid 'origin'"
+#~ msgstr "不正な 'origin' です"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "不正な 'result' です"
+
+#~ msgid "invalid 'rot' value"
+#~ msgstr "不正な 'rot' 値です"
+
+#~ msgid "invalid 'theta'"
+#~ msgstr "不正な 'theta' です"
+
+#~ msgid "invalid listing"
+#~ msgstr "不正なリスティング"
+
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "不正な 'arrow' 引数です"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "不正な 'print' 引数です"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr " 引数 'x' は単位 (units) オブジェクトでなければなりません "

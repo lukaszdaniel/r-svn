@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:13\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2018-04-09 12:06-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -22,6 +22,12 @@ msgstr ""
 #: R/image.R:0
 msgid "%s can only be used with a regular grid"
 msgstr "%s는 regular grid와 함께 사용되어 질 수 있습니다"
+
+#. R/legend.R: gettextf("'%s' is of length 0", "legend")
+#: R/legend.R:0
+#, fuzzy
+msgid "'%s' is of length 0"
+msgstr "'legend'의 길이가 0입니다"
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
 #: R/abline.R:0
@@ -121,11 +127,6 @@ msgstr "'breaks'가 벡터가 아니므로 'include.lowest'는 무시됩니다"
 #: R/contour.R:0
 msgid "'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels."
 msgstr ""
-
-#. R/legend.R: stop("'legend' is of length 0")
-#: R/legend.R:0
-msgid "'legend' is of length 0"
-msgstr "'legend'의 길이가 0입니다"
 
 #. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
 #: R/arrows.R:0
@@ -461,35 +462,20 @@ msgstr "'x'와 'y'의 값은 증가해야만 합니다"
 msgid "integer colors must be non-negative"
 msgstr ""
 
-#. R/axis.R: stop("invalid 'axp'")
-#: R/axis.R:0
-msgid "invalid 'axp'"
-msgstr "유효한 'axp'가 아닙니다"
-
-#. R/coplot.R: stop("invalid 'given.values'")
-#: R/coplot.R:0
-msgid "invalid 'given.values'"
-msgstr "유효하지 않은 'given.values'입니다"
-
-#. R/axis.R: stop("invalid 'log'")
-#: R/axis.R:0
-msgid "invalid 'log'"
-msgstr "유효한 'log'가 아닙니다"
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
+#: R/axis.R:0 R/coplot.R:0 R/legend.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "첫번째 인자가 잘못되었습니다"
 
 #. R/mosaicplot.R: stop("invalid 'shade' specification")
 #: R/mosaicplot.R:0
 msgid "invalid 'shade' specification"
 msgstr "유효하지 않은 'shade' 지정입니다"
-
-#. R/legend.R: stop("invalid 'title'")
-#: R/legend.R:0
-msgid "invalid 'title'"
-msgstr "유효하지 않은 'title'입니다"
-
-#. R/axis.R: stop("invalid 'usr'")
-#: R/axis.R:0
-msgid "invalid 'usr'"
-msgstr "유효한 'usr'이 아닙니다"
 
 #. R/pairs.R: stop("invalid argument 'horInd'")
 #: R/pairs.R:0
@@ -829,3 +815,18 @@ msgstr[0] "박스플랏 %2$d내에 이상값 (%1$s)가 그려지지 않았습니
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] ""
+
+#~ msgid "invalid 'axp'"
+#~ msgstr "유효한 'axp'가 아닙니다"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "유효하지 않은 'given.values'입니다"
+
+#~ msgid "invalid 'log'"
+#~ msgstr "유효한 'log'가 아닙니다"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "유효하지 않은 'title'입니다"
+
+#~ msgid "invalid 'usr'"
+#~ msgstr "유효한 'usr'이 아닙니다"

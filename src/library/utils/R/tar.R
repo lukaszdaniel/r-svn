@@ -29,7 +29,7 @@ untar <- function(tarfile, files = NULL, list = FALSE, exdir = ".",
     }
 
     if (!(is.character(tarfile) && length(tarfile) == 1L))
-        stop("invalid 'tarfile' argument")
+        stop(gettextf("invalid '%s' argument", "tarfile"))
     tarfile <- path.expand(tarfile)
     support_old_tars <- isTRUE(as.logical(support_old_tars))
 

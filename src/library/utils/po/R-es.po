@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 15:02\n"
+"POT-Creation-Date: 2025-06-20 20:11\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -532,11 +532,6 @@ msgstr ""
 #. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
 #: R/indices.R:0
 msgid "Invalid \"Built\":"
-msgstr ""
-
-#. R/aspell.R: stop("Invalid 'filter' argument.")
-#: R/aspell.R:0
-msgid "Invalid 'filter' argument."
 msgstr ""
 
 #. R/widgets.R: gettext("Invalid input, please try again\n")
@@ -1297,34 +1292,26 @@ msgstr ""
 msgid "installation of package %s had non-zero exit status"
 msgstr ""
 
-#. R/help.R: gettextf("invalid %s argument", sQuote("file"))
-#. R/packages2.R: gettextf("invalid %s argument", sQuote("keep_outputs"))
-#: R/help.R:0 R/packages2.R:0
-msgid "invalid %s argument"
-msgstr ""
+#. R/aspell.R: gettextf("invalid '%s' argument", "filter")
+#. R/edit.R: gettextf("invalid '%s' argument", "data")
+#. R/edit.R: gettextf("invalid '%s' argument", "modes")
+#. R/edit.R: gettextf("invalid '%s' argument", "x")
+#. R/help.R: gettextf("invalid '%s' argument", "file")
+#. R/packages.R: gettextf("invalid '%s' argument", "filters")
+#. R/packages.R: gettextf("invalid '%s' argument", "type")
+#. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
+#. R/sock.R: gettextf("invalid '%s' argument", "socket")
+#. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "longitud de 'row.names' inválida"
 
 #. R/write.table.R: stop("invalid 'col.names' specification")
 #: R/write.table.R:0
 #, fuzzy
 msgid "invalid 'col.names' specification"
-msgstr "longitud de 'row.names' inválida"
-
-#. R/edit.R: stop("invalid 'data' argument")
-#: R/edit.R:0
-#, fuzzy
-msgid "invalid 'data' argument"
-msgstr "longitud de 'row.names' inválida"
-
-#. R/packages.R: stop("invalid 'filters' argument.")
-#: R/packages.R:0
-#, fuzzy
-msgid "invalid 'filters' argument."
-msgstr "longitud de 'row.names' inválida"
-
-#. R/edit.R: stop("invalid 'modes' argument")
-#: R/edit.R:0
-#, fuzzy
-msgid "invalid 'modes' argument"
 msgstr "longitud de 'row.names' inválida"
 
 #. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
@@ -1369,29 +1356,6 @@ msgstr "longitud de 'row.names' inválida"
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 #, fuzzy
 msgid "invalid 'row.names' specification"
-msgstr "longitud de 'row.names' inválida"
-
-#. R/sock.R: stop("invalid 'socket' argument")
-#: R/sock.R:0
-#, fuzzy
-msgid "invalid 'socket' argument"
-msgstr "longitud de 'row.names' inválida"
-
-#. R/tar.R: stop("invalid 'tarfile' argument")
-#: R/tar.R:0
-#, fuzzy
-msgid "invalid 'tarfile' argument"
-msgstr "longitud de 'row.names' inválida"
-
-#. R/packages.R: stop("invalid 'type'")
-#: R/packages.R:0
-msgid "invalid 'type'"
-msgstr ""
-
-#. R/edit.R: stop("invalid 'x' argument")
-#: R/edit.R:0
-#, fuzzy
-msgid "invalid 'x' argument"
 msgstr "longitud de 'row.names' inválida"
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
@@ -2308,3 +2272,23 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "longitud de 'row.names' inválida"
+
+#, fuzzy
+#~ msgid "invalid 'data' argument"
+#~ msgstr "longitud de 'row.names' inválida"
+
+#, fuzzy
+#~ msgid "invalid 'modes' argument"
+#~ msgstr "longitud de 'row.names' inválida"
+
+#, fuzzy
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "longitud de 'row.names' inválida"
+
+#, fuzzy
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "longitud de 'row.names' inválida"

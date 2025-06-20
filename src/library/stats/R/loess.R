@@ -58,7 +58,7 @@ function(formula, data, weights, subset, na.action, model = FALSE,
     if(!is.list(control) || !is.character(control$surface) ||
        !is.character(control$statistics) || !is.character(control$trace.hat) ||
        !is.numeric(control$cell) || !is.numeric(iterations))
-        stop("invalid 'control' argument")
+        stop(gettextf("invalid '%s' argument", "control"))
     fit <- simpleLoess(y, x, w, span, degree=degree, parametric=parametric,
                        drop.square=drop.square, normalize=normalize,
                        statistics=control$statistics, surface=control$surface,
@@ -100,10 +100,10 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
     ## loess_ translated to R.
 
     D <- as.integer(NCOL(x))
-    if (is.na(D)) stop("invalid NCOL(X)")
+    if (is.na(D)) stop(gettextf("invalid '%s' value", "NCOL(X)"))
     if(D > 4) stop("only 1-4 predictors are allowed")
     N <- as.integer(NROW(x))
-    if (is.na(N)) stop("invalid NROW(X)")
+    if (is.na(N)) stop(gettextf("invalid '%s' value", "NROW(X)"))
     if(!N || !D)	stop(gettextf("invalid '%s' argument", "x"))
     if(length(y) != N)	stop(gettextf("invalid '%s' argument", "y"))
     x <- as.matrix(x)
@@ -131,9 +131,9 @@ simpleLoess <- function(y, x, weights, span = 0.75, degree = 2L,
     if(D == 1L && sum.drop.sqr)
 	stop("specified the square of a predictor to be dropped with only one numeric predictor")
     if(sum.parametric == D) stop("specified parametric for all predictors")
-    if (length(span) != 1L) stop("invalid argument 'span'")
-    if (length(cell) != 1L) stop("invalid argument 'cell'")
-    if (length(degree) != 1L) stop("invalid argument 'degree'")
+    if (length(span) != 1L) stop(gettextf("invalid '%s' argument", "span"))
+    if (length(cell) != 1L) stop(gettextf("invalid '%s' argument", "cell"))
+    if (length(degree) != 1L) stop(gettextf("invalid '%s' argument", "degree"))
 
     if(surface == "interpolate" && statistics == "approximate") # default
         statistics <- if(trace.hat == "exact") "1.approx"

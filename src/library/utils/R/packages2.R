@@ -694,7 +694,7 @@ install.packages <-
         outdir <- normalizePath(keep_outputs)
         keep_outputs <- TRUE
     } else
-        stop(gettextf("invalid %s argument", sQuote("keep_outputs")),
+        stop(gettextf("invalid '%s' argument", "keep_outputs"),
              domain = NA)
 
     ## we need to ensure that R CMD INSTALL runs with the same

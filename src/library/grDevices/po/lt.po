@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-20 08:23+0200\n"
 "PO-Revision-Date: 2020-12-09 13:16+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -791,9 +791,14 @@ msgstr "neteisingas 'fonts' parametras, esantis %s"
 msgid "failed to load font"
 msgstr "nepavyko paskirti šriftų sąrašo"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315
-msgid "invalid 'file' argument"
-msgstr "neteisingas 'file' argumentas"
+#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
+#: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
+#: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
+#: cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "neteisingas '%s' argumentas"
 
 #: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
@@ -1049,14 +1054,6 @@ msgstr ""
 msgid "could not open file '%s'"
 msgstr "nepavyko atverti failo '%s'"
 
-#: cairo/cairoBM.cpp:599 cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606
-#: cairo/cairoBM.cpp:610 cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618
-#: cairo/cairoBM.cpp:629 cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637
-#: cairo/cairoBM.cpp:641 cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
-#, c-format
-msgid "invalid '%s' argument"
-msgstr "neteisingas '%s' argumentas"
-
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
@@ -1131,6 +1128,9 @@ msgstr "nepavyko priskirti apibrėžimų"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "šrifto šeima nerasta Windows šriftų duomenų bazėje"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "neteisingas 'file' argumentas"
 
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "neteisinga 'maxColorValue' reikšmė"

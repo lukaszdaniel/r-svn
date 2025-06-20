@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -550,6 +550,32 @@ msgstr "索引值出界(取 'unit' 子集時)"
 msgid "invalid \"gTree\" class"
 msgstr "\"gTree\"的類別無效"
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "'grob' 引數值無效"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "'gp' 的值無效"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 msgid "invalid 'alpha' value"
@@ -560,11 +586,6 @@ msgstr "'alpha' 的值無效"
 msgid "invalid 'angle' in viewport"
 msgstr "檢視區裡的 'angle' 值無效"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-msgid "invalid 'arrow' argument"
-msgstr "'arrow' 引數無效"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 msgid "invalid 'at' location in 'axis'"
@@ -574,11 +595,6 @@ msgstr "'axis' 裡的 'at' 位置無效"
 #: R/unit.R:0
 msgid "invalid 'axis' or 'type'"
 msgstr "'axis' 或 'type' 的值無效"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-msgid "invalid 'clip' value"
-msgstr "'clip' 值無效"
 
 #. R/frames.R: stop("invalid 'col' specification")
 #: R/frames.R:0
@@ -600,11 +616,6 @@ msgstr "'ends' 或 'type' 引數的值無效"
 msgid "invalid 'f'"
 msgstr "'f' 的值無效"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-msgid "invalid 'frame'"
-msgstr "'frame' 的值無效"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 msgid "invalid 'gPath'"
@@ -615,25 +626,10 @@ msgstr "'gPath' 的值無效"
 msgid "invalid 'gp' slot"
 msgstr "'gp' 槽的值無效"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-msgid "invalid 'gp' value"
-msgstr "'gp' 的值無效"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 msgid "invalid 'grep' value"
 msgstr "'grep' 的值無效"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-msgid "invalid 'grob'"
-msgstr "'grob' 的值無效"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-msgid "invalid 'grob' argument"
-msgstr "'grob' 引數值無效"
 
 #. R/grob.R: stop("invalid 'grob' class")
 #: R/grob.R:0
@@ -660,41 +656,10 @@ msgstr "檢視區裡的 'layout.pos.row' 值無效"
 msgid "invalid 'linemitre' value"
 msgstr "'linemitre' 的值無效"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-msgid "invalid 'listing'"
-msgstr "'listing' 無效"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'mask' value"
-msgstr "'gp' 的值無效"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 msgid "invalid 'n'"
 msgstr "'n' 的值無效"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-msgid "invalid 'origin'"
-msgstr "'origin' 的值無效"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-msgid "invalid 'print' argument"
-msgstr "'print' 引數值無效"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-msgid "invalid 'result'"
-msgstr "'result' 的值無效"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-msgid "invalid 'rot' value"
-msgstr "'rot' 的值無效"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
 #: R/frames.R:0
@@ -705,11 +670,6 @@ msgstr "'row' 或是是 'col' 的值不對(沒有在框版面設置裡有這樣�
 #: R/frames.R:0
 msgid "invalid 'row' specification"
 msgstr "'row' 設定得無效"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-msgid "invalid 'theta'"
-msgstr "'theta' 值無效"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -750,11 +710,6 @@ msgstr "水平定位無效"
 #: R/just.R:0
 msgid "invalid justification"
 msgstr "定位無效"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-msgid "invalid listing"
-msgstr "表無效"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -1008,6 +963,42 @@ msgstr[0] "'grob' 名稱無效"
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "檢視區名稱無效"
+
+#~ msgid "invalid 'clip' value"
+#~ msgstr "'clip' 值無效"
+
+#~ msgid "invalid 'frame'"
+#~ msgstr "'frame' 的值無效"
+
+#~ msgid "invalid 'gp' value"
+#~ msgstr "'gp' 的值無效"
+
+#~ msgid "invalid 'grob'"
+#~ msgstr "'grob' 的值無效"
+
+#~ msgid "invalid 'listing'"
+#~ msgstr "'listing' 無效"
+
+#~ msgid "invalid 'origin'"
+#~ msgstr "'origin' 的值無效"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "'result' 的值無效"
+
+#~ msgid "invalid 'rot' value"
+#~ msgstr "'rot' 的值無效"
+
+#~ msgid "invalid 'theta'"
+#~ msgstr "'theta' 值無效"
+
+#~ msgid "invalid listing"
+#~ msgstr "表無效"
+
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "'arrow' 引數無效"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "'print' 引數值無效"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "'x' 引數必須是單元物件"

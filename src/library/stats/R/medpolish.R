@@ -49,9 +49,9 @@ medpolish <-
         if(trace.iter) cat("Final: ", newsum, "\n", sep = "")
     } else
     warning(sprintf(ngettext(maxiter,
-                             "medpolish() did not converge in %d iteration",
-                             "medpolish() did not converge in %d iterations"),
-                    maxiter), domain = NA)
+                             "'%s' did not converge in %d iteration",
+                             "'%s' did not converge in %d iterations", domain = "R-stats"),
+                    "medpolish()", maxiter), domain = NA)
     names(r) <- rownames(z)
     names(c) <- colnames(z)
     ans <- list(overall = t, row = r, col = c, residuals = z,

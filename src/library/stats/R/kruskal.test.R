@@ -64,11 +64,11 @@ function(x, g, ...)
     PVAL <- pchisq(STATISTIC, PARAMETER, lower.tail = FALSE)
     names(STATISTIC) <- "Kruskal-Wallis chi-squared"
     names(PARAMETER) <- "df"
-
+    METHOD <- "Kruskal-Wallis rank sum test"
     RVAL <- list(statistic = STATISTIC,
                  parameter = PARAMETER,
                  p.value = PVAL,
-                 method = "Kruskal-Wallis rank sum test",
+                 method = METHOD,
                  data.name = DNAME)
     class(RVAL) <- "htest"
     return(RVAL)

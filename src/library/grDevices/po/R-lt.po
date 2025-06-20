@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 18:21\n"
+"POT-Creation-Date: 2025-06-20 10:49\n"
 "PO-Revision-Date: 2020-11-29 17:27+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -611,9 +611,16 @@ msgstr "turėtų būti didėjančios 'x' ir 'y' reikšmės"
 msgid "invalid \"recordedplot\":"
 msgstr "neteisingas \"recordedplot\":"
 
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
+#. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
-#: R/postscript.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0 R/unix/x11.R:0
+#: R/windows/png.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "neteisingas pirmas argumentas"
@@ -623,28 +630,10 @@ msgstr "neteisingas pirmas argumentas"
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr "neteisinga 'cmapEncoding' šrifto specifikacijoje"
 
-#. R/unix/quartz.R: stop("invalid 'file'")
-#: R/unix/quartz.R:0
-msgid "invalid 'file'"
-msgstr "neteisingas 'file'"
-
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0
 msgid "invalid 'file' argument '%s'"
 msgstr "neteisingas 'file' argumentas '%s'"
-
-#. R/cairo.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
-msgid "invalid 'filename'"
-msgstr "neteisingas 'filename'"
-
-#. R/unix/quartz.R: stop("invalid 'title'")
-#. R/unix/x11.R: stop("invalid 'title'")
-#: R/unix/quartz.R:0 R/unix/x11.R:0
-msgid "invalid 'title'"
-msgstr "neteisingas 'title'"
 
 #. R/postscript.R: stop("invalid CMap name in font specification")
 #: R/postscript.R:0
@@ -969,6 +958,15 @@ msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "neteisingas argumento vardas %s, esantis ‘%s’"
 msgstr[1] "neteisingi argumento vardai %s, esantys ‘%s’"
 msgstr[2] "neteisingų argumento vardų %s, esančių ‘%s’"
+
+#~ msgid "invalid 'filename'"
+#~ msgstr "neteisingas 'filename'"
+
+#~ msgid "invalid 'file'"
+#~ msgstr "neteisingas 'file'"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "neteisingas 'title'"
 
 #~ msgid "invalid 'family' argument"
 #~ msgstr "neteisingas 'family' argumentas"

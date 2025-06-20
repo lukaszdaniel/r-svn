@@ -47,7 +47,7 @@ mcnemar.test <- function(x, y = NULL, correct = TRUE)
 
     if (correct && (r == 2) && any(x - t(x) != 0)) {
         y <- (abs(x - t(x)) - 1)
-        METHOD <- paste(METHOD, "with continuity correction")
+        METHOD <- "McNemar's Chi-squared test with continuity correction"
     }
     else
         y <- x - t(x)

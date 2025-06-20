@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:13\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2020-11-29 17:23+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -16,6 +16,12 @@ msgstr ""
 #: R/image.R:0
 msgid "%s can only be used with a regular grid"
 msgstr "%s gali būti naudojamas tik su įprastu tinkleliu"
+
+#. R/legend.R: gettextf("'%s' is of length 0", "legend")
+#: R/legend.R:0
+#, fuzzy
+msgid "'%s' is of length 0"
+msgstr "'legend' yra 0 ilgio"
 
 #. R/abline.R: warning("'a' and 'b' are overridden by 'coef'")
 #: R/abline.R:0
@@ -115,11 +121,6 @@ msgstr "'include.lowest' ignoruojamas kaip 'breaks' ir nėra vektorius"
 #: R/contour.R:0
 msgid "'labels' is length zero.  Use 'drawlabels = FALSE' to suppress labels."
 msgstr "'labels' yra nulinio ilgio.  Norint nerodyti žymenų, naudokite 'drawlabels = FALSE'."
-
-#. R/legend.R: stop("'legend' is of length 0")
-#: R/legend.R:0
-msgid "'legend' is of length 0"
-msgstr "'legend' yra 0 ilgio"
 
 #. R/arrows.R: warning("'length', 'angle', or 'code' greater than length 1; values after the first are ignored")
 #: R/arrows.R:0
@@ -453,35 +454,20 @@ msgstr "turėtų būti didėjančios 'x' ir 'y' reikšmės"
 msgid "integer colors must be non-negative"
 msgstr "sveikųjų skaičių spalvos turi būti neneigiamos"
 
-#. R/axis.R: stop("invalid 'axp'")
-#: R/axis.R:0
-msgid "invalid 'axp'"
-msgstr "neteisinga 'axp'"
-
-#. R/coplot.R: stop("invalid 'given.values'")
-#: R/coplot.R:0
-msgid "invalid 'given.values'"
-msgstr "neteisinga 'given.values'"
-
-#. R/axis.R: stop("invalid 'log'")
-#: R/axis.R:0
-msgid "invalid 'log'"
-msgstr "neteisinga 'log'"
+#. R/axis.R: gettextf("invalid '%s' argument", "axp")
+#. R/axis.R: gettextf("invalid '%s' argument", "log")
+#. R/axis.R: gettextf("invalid '%s' argument", "usr")
+#. R/coplot.R: gettextf("invalid '%s' argument", "given.values")
+#. R/legend.R: gettextf("invalid '%s' argument", "title")
+#: R/axis.R:0 R/coplot.R:0 R/legend.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "neteisingas pirmas argumentas"
 
 #. R/mosaicplot.R: stop("invalid 'shade' specification")
 #: R/mosaicplot.R:0
 msgid "invalid 'shade' specification"
 msgstr "neteisinga 'shade' specifikacija"
-
-#. R/legend.R: stop("invalid 'title'")
-#: R/legend.R:0
-msgid "invalid 'title'"
-msgstr "neteisingas 'title'"
-
-#. R/axis.R: stop("invalid 'usr'")
-#: R/axis.R:0
-msgid "invalid 'usr'"
-msgstr "neteisingas 'usr'"
 
 #. R/pairs.R: stop("invalid argument 'horInd'")
 #: R/pairs.R:0
@@ -828,6 +814,21 @@ msgid_plural "arguments %s are not made use of"
 msgstr[0] "argumentas %s nėra sukurtas naudoti"
 msgstr[1] "argumentai %s nėra sukurti naudoti"
 msgstr[2] "argumentų %s nėra sukurta naudoti"
+
+#~ msgid "invalid 'axp'"
+#~ msgstr "neteisinga 'axp'"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "neteisinga 'given.values'"
+
+#~ msgid "invalid 'log'"
+#~ msgstr "neteisinga 'log'"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "neteisingas 'title'"
+
+#~ msgid "invalid 'usr'"
+#~ msgstr "neteisingas 'usr'"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

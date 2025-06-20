@@ -84,7 +84,7 @@ nlminb <-
 	if (any(nap <- is.na(pos))) {
             warning(sprintf(ngettext(length(nap),
                                      "unrecognized control element named %s ignored",
-                                     "unrecognized control elements named %s ignored"),
+                                     "unrecognized control elements named %s ignored", domain = "R-stats"),
                             paste(sQuote(nms[nap]), collapse = ", ")),
                     domain = NA)
 	    pos <- pos[!nap]
@@ -129,10 +129,10 @@ nlminb <-
 	 evaluations = c("function" = iv[6L], "gradient" = iv[30L]),
 	 "message" = if(19 <= iv1 && iv1 <= 43) {
 	     if(any(B <- iv1 == port_cpos))
-		 sprintf("'control' component '%s' = %g, is out of range",
+		 gettextf("'control' component '%s' = %g, is out of range",
 			 names(port_cpos)[B], v[iv1])
 	     else
-		 sprintf("V[IV[1]] = V[%d] = %g is out of range (see PORT docu.)",
+		 gettextf("V[IV[1]] = V[%d] = %g is out of range (see PORT docu.)",
 			 iv1, v[iv1])
 	 } else port_msg(iv1))
 }

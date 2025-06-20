@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-20 08:23+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -794,9 +794,14 @@ msgstr "%s里的'fonts'参数无效"
 msgid "failed to load font"
 msgstr "无法分配字体列"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315
-msgid "invalid 'file' argument"
-msgstr "'file'参数无效"
+#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
+#: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
+#: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
+#: cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "'%s'参数无效"
 
 #: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
@@ -1054,14 +1059,6 @@ msgstr ""
 msgid "could not open file '%s'"
 msgstr "无法打开'%s'文件"
 
-#: cairo/cairoBM.cpp:599 cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606
-#: cairo/cairoBM.cpp:610 cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618
-#: cairo/cairoBM.cpp:629 cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637
-#: cairo/cairoBM.cpp:641 cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
-#, c-format
-msgid "invalid '%s' argument"
-msgstr "'%s'参数无效"
-
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
@@ -1136,6 +1133,9 @@ msgstr "无法分配字体列"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "石英字体数据库里找不到字体系列"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "'file'参数无效"
 
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "“maxColorValue”的值无效"

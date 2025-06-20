@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 16:44\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2025-04-01 16:46+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -161,6 +161,12 @@ msgstr "'%s' пока не разработан"
 msgid "'%s' is not meaningful for ordered factors"
 msgstr "'%s' не значим для упорядоченных факторов"
 
+#. R/tapply.R: gettextf("'%s' is of length 0", "INDEX")
+#: R/tapply.R:0
+#, fuzzy
+msgid "'%s' is of length 0"
+msgstr "'by' должен быть длиной 1"
+
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
@@ -264,11 +270,6 @@ msgstr "'%s' не определен для упорядоченных факт�
 #: R/library.R:0
 msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
 msgstr "У 'DESCRIPTION' есть поле 'Encoding', но перекодировка невозможна"
-
-#. R/tapply.R: stop("'INDEX' is of length zero")
-#: R/tapply.R:0
-msgid "'INDEX' is of length zero"
-msgstr "'INDEX' нулевой длины"
 
 #. R/apply.R: stop("'MARGIN' does not match dim(X)")
 #. R/array.R: stop("'MARGIN' does not match dim(X)")
@@ -2852,6 +2853,15 @@ msgstr "неправильный класс"
 msgid "wrong sign in 'by' argument"
 msgstr "неправильный знак в 'by' аргумент"
 
+#. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n",     domain = "R-base")
+#: R/dataframe.R:0
+#, fuzzy
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n"
+msgid_plural " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n"
+msgstr[0] "неправильный 'max' / getOption(\"max.print\"):"
+msgstr[1] "неправильный 'max' / getOption(\"max.print\"):"
+msgstr[2] "неправильный 'max' / getOption(\"max.print\"):"
+
 #. R/warnings.R: ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n",     domain = "R-base")
 #: R/warnings.R:0
 msgid "%d identical warning:\n"
@@ -3019,6 +3029,14 @@ msgstr[0] "нечисловая переменн(ая) в таблице дан�
 msgstr[1] "нечисловая переменн(ая) в таблице данных:"
 msgstr[2] "нечисловая переменн(ая) в таблице данных:"
 
+#. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s",     "non-unique values when setting 'row.names': %s", domain = "R-base")
+#: R/dataframe.R:0
+msgid "non-unique value when setting 'row.names': %s"
+msgid_plural "non-unique values when setting 'row.names': %s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
 msgid "object %s is not exported by 'namespace:%s'"
@@ -3130,6 +3148,9 @@ msgid_plural "there are no packages called"
 msgstr[0] "нет пакета под названием"
 msgstr[1] "нет пакетов под названиями"
 msgstr[2] "нет пакетов под названиями"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX' нулевой длины"
 
 #~ msgid "invalid 'digits'"
 #~ msgstr "неправильные 'digits'"

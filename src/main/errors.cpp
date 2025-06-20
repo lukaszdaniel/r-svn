@@ -2790,7 +2790,7 @@ void R::R_setConditionField(SEXP cond, R_xlen_t idx, const char *name, SEXP val)
     /**** or maybe it should check that cond inherits from "condition" */
     /**** or maybe just fill in the next empty slot and not take an index */
     if (TYPEOF(cond) != VECSXP)
-	error("%s", _("bad condition argument"));
+	error(_("invalid '%s' argument"), "cond");
     if (idx < 0 || idx >= XLENGTH(cond))
 	error("%s", _("bad field index"));
     SEXP names = getAttrib(cond, R_NamesSymbol);

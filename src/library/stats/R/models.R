@@ -79,8 +79,8 @@ formula.character <- function(x, env = parent.frame(), ...)
 {
     ff <- if(length(x) > 1L) {
               .Deprecated(msg=
- "Using formula(x) is deprecated when x is a character vector of length > 1.
-  Consider formula(paste(x, collapse = \" \")) instead.")
+ gettext("Using formula(x) is deprecated when x is a character vector of length > 1.
+  Consider formula(paste(x, collapse = \" \")) instead."))
               str2expression(x)[[1L]]
           } else {
               str2lang(x)
@@ -546,11 +546,11 @@ model.frame.default <-
         if(nr2 != nr)
             warning(sprintf(paste0(ngettext(nr,
                                             "'newdata' had %d row",
-                                            "'newdata' had %d rows"),
+                                            "'newdata' had %d rows", domain = "R-stats"),
                                    " ",
                                   ngettext(nr2,
                                            "but variable found had %d row",
-                                           "but variables found have %d rows")),
+                                           "but variables found have %d rows", domain = "R-stats")),
                             nr, nr2),
                     call. = FALSE, domain = NA)
     }
@@ -582,7 +582,7 @@ model.frame.default <-
 		    if(any(m <- is.na(match(nxl, xl))))
                         stop(sprintf(ngettext(length(m),
                                               "factor %s has new level %s",
-                                              "factor %s has new levels %s"),
+                                              "factor %s has new levels %s", domain = "R-stats"),
                                      nm, paste(nxl[m], collapse=", ")),
                              domain = NA)
 		    data[[nm]] <- factor(xi, levels=xl, exclude=NULL)
@@ -692,7 +692,7 @@ model.response <- function (data, type = "any")
 	if (is.list(data) || is.data.frame(data)) {
 	    v <- data[[1L]]
 	    if (type == "numeric" && is.factor(v)) {
-		warning('using type = "numeric" with a factor response will be ignored')
+		warning("using type = \"numeric\" with a factor response will be ignored")
 	    } else if (type == "numeric" || type == "double")
 		storage.mode(v) <- "double"
 	    else if (type != "any") stop("invalid response type")
@@ -707,7 +707,7 @@ model.response <- function (data, type = "any")
 			dimnames(v) <- list(rows, dn[[2L]])
 	    }
 	    return(v)
-	} else stop("invalid 'data' argument")
+	} else stop(gettextf("invalid '%s' argument", "data"))
     } else return(NULL)
 }
 

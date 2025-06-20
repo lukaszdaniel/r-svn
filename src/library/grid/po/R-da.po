@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2023-04-22 22:05+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -576,6 +576,32 @@ msgstr ""
 msgid "invalid \"gTree\" class"
 msgstr "Ugyldig »grob«"
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "Ugyldig »grob«"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "Ugyldig »grob«"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 #, fuzzy
@@ -588,12 +614,6 @@ msgstr "Ugyldig »grob«"
 msgid "invalid 'angle' in viewport"
 msgstr "Ugyldig »edit-information«"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-#, fuzzy
-msgid "invalid 'arrow' argument"
-msgstr "Ugyldig »grob«"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 #, fuzzy
@@ -604,12 +624,6 @@ msgstr "Ugyldig »at«-placering i »axis«"
 #: R/unit.R:0
 #, fuzzy
 msgid "invalid 'axis' or 'type'"
-msgstr "Ugyldig »grob«"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'clip' value"
 msgstr "Ugyldig »grob«"
 
 #. R/frames.R: stop("invalid 'col' specification")
@@ -636,12 +650,6 @@ msgstr "Ugyldig »grob«"
 msgid "invalid 'f'"
 msgstr "Ugyldig »frame«"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-#, fuzzy
-msgid "invalid 'frame'"
-msgstr "Ugyldig »frame«"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 #, fuzzy
@@ -654,28 +662,10 @@ msgstr "Ugyldig »grob«"
 msgid "invalid 'gp' slot"
 msgstr "Ugyldig »grob«"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'gp' value"
-msgstr "Ugyldig »grob«"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 #, fuzzy
 msgid "invalid 'grep' value"
-msgstr "Ugyldig »grob«"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-#, fuzzy
-msgid "invalid 'grob'"
-msgstr "Ugyldig »grob«"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid 'grob' argument"
 msgstr "Ugyldig »grob«"
 
 #. R/grob.R: stop("invalid 'grob' class")
@@ -708,46 +698,10 @@ msgstr "Ugyldig »edit-information«"
 msgid "invalid 'linemitre' value"
 msgstr "Ugyldig »grob«"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid 'listing'"
-msgstr "Ugyldig »grob«"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'mask' value"
-msgstr "Ugyldig »grob«"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 #, fuzzy
 msgid "invalid 'n'"
-msgstr "Ugyldig »grob«"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-#, fuzzy
-msgid "invalid 'origin'"
-msgstr "Ugyldig »grob«"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid 'print' argument"
-msgstr "Ugyldig »grob«"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid 'result'"
-msgstr "Ugyldig »frame«"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-#, fuzzy
-msgid "invalid 'rot' value"
 msgstr "Ugyldig »grob«"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
@@ -761,12 +715,6 @@ msgstr "Ugyldig »row« og /eller »col« (ingen sådan celle i billedlayout)"
 #, fuzzy
 msgid "invalid 'row' specification"
 msgstr "Ugyldig »row-specifikation«"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-#, fuzzy
-msgid "invalid 'theta'"
-msgstr "Ugyldig »grob«"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -814,12 +762,6 @@ msgstr "Ugyldig »col-specifikation«"
 #, fuzzy
 msgid "invalid justification"
 msgstr "Ugyldig »col-specifikation«"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid listing"
-msgstr "Ugyldig »grob«"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -1082,6 +1024,54 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "Ugyldig »frame«"
 msgstr[1] "Ugyldig »frame«"
+
+#, fuzzy
+#~ msgid "invalid 'clip' value"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'frame'"
+#~ msgstr "Ugyldig »frame«"
+
+#, fuzzy
+#~ msgid "invalid 'gp' value"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'grob'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'listing'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'origin'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'result'"
+#~ msgstr "Ugyldig »frame«"
+
+#, fuzzy
+#~ msgid "invalid 'rot' value"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'theta'"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid listing"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid 'print' argument"
+#~ msgstr "Ugyldig »grob«"
 
 #, fuzzy
 #~ msgid "invalid graphics parameters"

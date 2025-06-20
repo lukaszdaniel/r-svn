@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2025-04-01 16:59+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -533,6 +533,32 @@ msgstr "индекс за пределами (подмножество един�
 msgid "invalid \"gTree\" class"
 msgstr "неправильный класс \"gTree\""
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "неправильный аргумент 'grob'"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "неправильное значение 'mask'"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 msgid "invalid 'alpha' value"
@@ -543,11 +569,6 @@ msgstr "неправильное значение  'alpha'"
 msgid "invalid 'angle' in viewport"
 msgstr "неправильное 'angle' в оконнице"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-msgid "invalid 'arrow' argument"
-msgstr "неправильный аргумент 'arrow'"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 msgid "invalid 'at' location in 'axis'"
@@ -557,11 +578,6 @@ msgstr "неправильная позиция 'at' в 'axis'"
 #: R/unit.R:0
 msgid "invalid 'axis' or 'type'"
 msgstr "неправильный 'axis' или 'type'"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-msgid "invalid 'clip' value"
-msgstr "неправильное значение 'clip'"
 
 #. R/frames.R: stop("invalid 'col' specification")
 #: R/frames.R:0
@@ -583,11 +599,6 @@ msgstr "неправильные аргументы 'ends' или 'type'"
 msgid "invalid 'f'"
 msgstr "неправильный 'f'"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-msgid "invalid 'frame'"
-msgstr "неправильная 'frame'"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 msgid "invalid 'gPath'"
@@ -598,25 +609,10 @@ msgstr "неправильный 'gPath'"
 msgid "invalid 'gp' slot"
 msgstr "неправильный слот 'gp'"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-msgid "invalid 'gp' value"
-msgstr "неправильное значение 'gp'"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 msgid "invalid 'grep' value"
 msgstr "неправильное значение 'grep'"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-msgid "invalid 'grob'"
-msgstr "неправильный 'grob'"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-msgid "invalid 'grob' argument"
-msgstr "неправильный аргумент 'grob'"
 
 #. R/grob.R: stop("invalid 'grob' class")
 #: R/grob.R:0
@@ -643,40 +639,10 @@ msgstr "неправильное 'layout.pos.row' в оконнице"
 msgid "invalid 'linemitre' value"
 msgstr "неправильное значение 'linemitre'"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-msgid "invalid 'listing'"
-msgstr "неправильный список"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-msgid "invalid 'mask' value"
-msgstr "неправильное значение 'mask'"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 msgid "invalid 'n'"
 msgstr "неправильный 'n'"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-msgid "invalid 'origin'"
-msgstr "неправильный 'origin'"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-msgid "invalid 'print' argument"
-msgstr "неправильный аргумент 'print'"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-msgid "invalid 'result'"
-msgstr "неправильный 'result'"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-msgid "invalid 'rot' value"
-msgstr "неправильное значение 'rot'"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
 #: R/frames.R:0
@@ -687,11 +653,6 @@ msgstr "неправильный 'row' и/или 'col' (нет такой кле
 #: R/frames.R:0
 msgid "invalid 'row' specification"
 msgstr "неправильное указание 'row'"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-msgid "invalid 'theta'"
-msgstr "неправильная theta"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -732,11 +693,6 @@ msgstr "неправильное горизонтальное выравнива
 #: R/just.R:0
 msgid "invalid justification"
 msgstr "неправильное выравнивание"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-msgid "invalid listing"
-msgstr "неправильный 'listing'"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -990,6 +946,42 @@ msgid_plural "invalid viewport names"
 msgstr[0] "неправильное имя оконницы"
 msgstr[1] "неправильные имена оконниц"
 msgstr[2] "неправильные имена оконниц"
+
+#~ msgid "invalid 'clip' value"
+#~ msgstr "неправильное значение 'clip'"
+
+#~ msgid "invalid 'frame'"
+#~ msgstr "неправильная 'frame'"
+
+#~ msgid "invalid 'gp' value"
+#~ msgstr "неправильное значение 'gp'"
+
+#~ msgid "invalid 'grob'"
+#~ msgstr "неправильный 'grob'"
+
+#~ msgid "invalid 'listing'"
+#~ msgstr "неправильный список"
+
+#~ msgid "invalid 'origin'"
+#~ msgstr "неправильный 'origin'"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "неправильный 'result'"
+
+#~ msgid "invalid 'rot' value"
+#~ msgstr "неправильное значение 'rot'"
+
+#~ msgid "invalid 'theta'"
+#~ msgstr "неправильная theta"
+
+#~ msgid "invalid listing"
+#~ msgstr "неправильный 'listing'"
+
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "неправильный аргумент 'arrow'"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "неправильный аргумент 'print'"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "аргумент 'x' должен быть объектом-единицей"

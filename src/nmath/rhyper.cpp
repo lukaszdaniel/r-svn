@@ -197,7 +197,7 @@ double rhyper(double nn1in, double nn2in, double kkin)
 		 (w > 0) ? "> 0" : "= 0 <==> Underflow __NOT GOOD__");
 #endif
 	if(w <= 0.)
-	    MATHLIB_ERROR(_("w = %g <= 0: Underflow in rhyper()  SHOULD NOT HAPPEN!"), w);
+	    MATHLIB_ERROR(_("w = %g <= 0: Underflow in rhyper() SHOULD NOT HAPPEN!"), w);
 	// FIXME: MM has code "rhyper.c+M3" for switching to log space if w == 0
 
 	double p, u;

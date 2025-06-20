@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2024-03-19 12:53+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -572,6 +572,32 @@ msgstr "Índice fora dos limites (subsetting unitário)"
 msgid "invalid \"gTree\" class"
 msgstr "Classe 'gTree' inválida"
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "Argumento 'grob' inválido"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "Valor 'ask' incorreto"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 #, fuzzy
@@ -584,11 +610,6 @@ msgstr "Valor 'alpha' inválido"
 msgid "invalid 'angle' in viewport"
 msgstr "'angle' inválido em vista"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-msgid "invalid 'arrow' argument"
-msgstr "argumento 'arrow' inválido"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 #, fuzzy
@@ -600,12 +621,6 @@ msgstr "Localização 'at' inválida em 'axis'"
 #, fuzzy
 msgid "invalid 'axis' or 'type'"
 msgstr "'axis' ou 'type' inválido"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'clip' value"
-msgstr "Valor 'clip' inválido"
 
 #. R/frames.R: stop("invalid 'col' specification")
 #: R/frames.R:0
@@ -631,12 +646,6 @@ msgstr "argumento 'ends' ou 'type' inválido"
 msgid "invalid 'f'"
 msgstr "'f' inválido"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-#, fuzzy
-msgid "invalid 'frame'"
-msgstr "'frame' inválido"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 #, fuzzy
@@ -649,29 +658,11 @@ msgstr "'gPath' inválido"
 msgid "invalid 'gp' slot"
 msgstr "Slot 'gp' inválido"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'gp' value"
-msgstr "Valor 'grep' inválido"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 #, fuzzy
 msgid "invalid 'grep' value"
 msgstr "Valor 'grep' inválido"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-#, fuzzy
-msgid "invalid 'grob'"
-msgstr "'grob' inválido"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid 'grob' argument"
-msgstr "Argumento 'grob' inválido"
 
 #. R/grob.R: stop("invalid 'grob' class")
 #: R/grob.R:0
@@ -703,47 +694,11 @@ msgstr "'layout.pos.row' inválido em vista"
 msgid "invalid 'linemitre' value"
 msgstr "Valor 'linemitre' inválido"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid 'listing'"
-msgstr "listing inválido"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'mask' value"
-msgstr "Valor 'ask' incorreto"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 #, fuzzy
 msgid "invalid 'n'"
 msgstr "'n' inválido"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-#, fuzzy
-msgid "invalid 'origin'"
-msgstr "'origin' inválido"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid 'print' argument"
-msgstr "argumento 'print' inválido"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid 'result'"
-msgstr "'result' inválido"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-#, fuzzy
-msgid "invalid 'rot' value"
-msgstr "Valor 'rot' Inválido"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
 #: R/frames.R:0
@@ -756,12 +711,6 @@ msgstr "'row' e/ou 'col' (nenhuma célula na estrutura de dados)"
 #, fuzzy
 msgid "invalid 'row' specification"
 msgstr "Especificação inválida para 'row'"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-#, fuzzy
-msgid "invalid 'theta'"
-msgstr "theta inválido"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -810,12 +759,6 @@ msgstr "Justificação horizontal inválida"
 #, fuzzy
 msgid "invalid justification"
 msgstr "Justificação inválida"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid listing"
-msgstr "listing inválido"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -1105,6 +1048,53 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "Nome de vista inválido"
 msgstr[1] "Nomes de vista inválidos"
+
+#, fuzzy
+#~ msgid "invalid 'clip' value"
+#~ msgstr "Valor 'clip' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'frame'"
+#~ msgstr "'frame' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'gp' value"
+#~ msgstr "Valor 'grep' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'grob'"
+#~ msgstr "'grob' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'listing'"
+#~ msgstr "listing inválido"
+
+#, fuzzy
+#~ msgid "invalid 'origin'"
+#~ msgstr "'origin' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'result'"
+#~ msgstr "'result' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'rot' value"
+#~ msgstr "Valor 'rot' Inválido"
+
+#, fuzzy
+#~ msgid "invalid 'theta'"
+#~ msgstr "theta inválido"
+
+#, fuzzy
+#~ msgid "invalid listing"
+#~ msgstr "listing inválido"
+
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "argumento 'arrow' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'print' argument"
+#~ msgstr "argumento 'print' inválido"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "argumento 'x' deve ser um objeto unitário"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parallel 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-09 16:00\n"
+"POT-Creation-Date: 2025-06-20 08:24\n"
 "PO-Revision-Date: 2020-11-29 16:30+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -105,14 +105,11 @@ msgstr "dim(X) ilgis turi būti teigiamas"
 msgid "fork clusters are not supported on Windows"
 msgstr "išsišakojimo klasteriai nepalaikomi Windows"
 
-#. R/unix/mcfork.R: stop("invalid 'child' argument")
-#: R/unix/mcfork.R:0
-msgid "invalid 'child' argument"
-msgstr "neteisingas 'child' argumentas"
-
-#. R/unix/mcparallel.R: stop("invalid 'jobs' argument")
-#: R/unix/mcparallel.R:0
-msgid "invalid 'jobs' argument"
+#. R/unix/mcfork.R: gettextf("invalid '%s' argument", "child")
+#. R/unix/mcparallel.R: gettextf("invalid '%s' argument", "jobs")
+#: R/unix/mcfork.R:0 R/unix/mcparallel.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
 msgstr "neteisingas 'jobs' argumentas"
 
 #. R/RngStream.R: gettextf("invalid value of %s", "'seed'")
@@ -228,6 +225,9 @@ msgid_plural "socket cluster with %d nodes on hosts %s"
 msgstr[0] "prievado klasteris su %d mazgais kompiuteryje %s"
 msgstr[1] "prievado klasteris su %d mazgais kompiuteriuose %s"
 msgstr[2] "prievado klasteris su %d mazgais kompiuteriuose %s"
+
+#~ msgid "invalid 'child' argument"
+#~ msgstr "neteisingas 'child' argumentas"
 
 #~ msgid "2. scheduled cores %s encountered errors in user code, all values of the jobs will be affected"
 #~ msgstr "2. suplanuoti branduoliai %s aptiko klaidą vartotojo kode, bus įtakotos visos darbų reikšmės"

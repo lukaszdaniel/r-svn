@@ -76,7 +76,7 @@ function(files, filter, control = list(), encoding = "unknown",
                     domain = NA)
     }
     else if(!is.function(filter))
-        stop("Invalid 'filter' argument.")
+        stop(gettextf("invalid '%s' argument", "filter"))
 
     encoding <- rep_len(encoding, length(files))
 

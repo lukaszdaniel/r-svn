@@ -68,11 +68,10 @@ power.t.test <-
 		   paired = "n is number of *pairs*, sd is std.dev. of *differences* within pairs",
 		   two.sample = "n is number in *each* group", NULL)
 
-    METHOD <- paste(switch(type,
-			   one.sample = "One-sample",
-			   two.sample = "Two-sample",
-			   paired = "Paired"),
-		    "t test power calculation")
+    METHOD <- switch(type,
+			   one.sample = "One-sample t test power calculation",
+			   two.sample = "Two-sample t test power calculation",
+			   paired = "Paired t test power calculation")
 
     structure(list(n=n, delta=delta, sd=sd,
 		   sig.level=sig.level, power=power,

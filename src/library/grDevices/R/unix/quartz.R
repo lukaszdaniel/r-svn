@@ -64,8 +64,8 @@ quartz <- function(title, width, height, pointsize, family, antialias,
     if(!missing(canvas)) new$canvas <- canvas
     if(!missing(type)) new$type <- type
     if(!missing(dpi)) new$dpi <- dpi
-    if(!checkIntFormat(new$title)) stop("invalid 'title'")
-    if(!is.null(file) && !checkIntFormat(file)) stop("invalid 'file'")
+    if(!checkIntFormat(new$title)) stop(gettextf("invalid '%s' argument", "title"))
+    if(!is.null(file) && !checkIntFormat(file)) stop(gettextf("invalid '%s' argument", "file"))
     d <- check.options(new, name.opt = ".quartz.Options", envir = .Quartzenv)
     .External(C_Quartz, d$type, file, d$width, d$height, d$pointsize, d$family,
               d$antialias, d$title, d$bg, d$canvas,

@@ -77,7 +77,7 @@ X11 <- function(display = "", width, height, pointsize, gamma,
     if(!missing(xpos)) new$xpos <- xpos
     if(!missing(ypos)) new$ypos <- ypos
     if(!missing(title)) new$title <- title
-    if(!checkIntFormat(new$title)) stop("invalid 'title'")
+    if(!checkIntFormat(new$title)) stop(gettextf("invalid '%s' argument", "title"))
     if(!missing(type)) {
         new$type <- match.arg(type, c("Xlib", "cairo", "nbcairo", "dbcairo"))
         if(!capabilities("cairo") && type != "Xlib")

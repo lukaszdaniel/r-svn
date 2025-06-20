@@ -388,7 +388,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     default:
 	/* these are all supposed to be types that represent constant
 	   entities, so no further testing required ?? */
-	printf(_("Unknown Type in identical(): %s (%x)\n"), R_typeToChar(x), TYPEOF(x));
+	printf(_("Unknown type in identical(): %s (%x)\n"), R_typeToChar(x), TYPEOF(x));
 	return TRUE;
     }
 }

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 15:01+0200\n"
+"POT-Creation-Date: 2025-06-20 18:45+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -178,13 +178,16 @@ msgstr "problema ao mostrar '%ls'"
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
 #: src/main/envir.cpp:3159 src/main/envir.cpp:3173 src/main/envir.cpp:3180
 #: src/main/envir.cpp:3196 src/main/envir.cpp:3930 src/main/errors.cpp:1282
-#: src/main/eval.cpp:893 src/main/eval.cpp:903 src/main/eval.cpp:906
-#: src/main/eval.cpp:909 src/main/eval.cpp:917 src/main/eval.cpp:924
-#: src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594
-#: src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2131
-#: src/main/grep.cpp:2135 src/main/grep.cpp:2140 src/main/grep.cpp:2178
-#: src/main/grep.cpp:2180 src/main/grep.cpp:2973 src/main/grep.cpp:2978
-#: src/main/grep.cpp:3316 src/main/grep.cpp:3321 src/main/memory.cpp:4584
+#: src/main/errors.cpp:2793 src/main/eval.cpp:893 src/main/eval.cpp:903
+#: src/main/eval.cpp:906 src/main/eval.cpp:909 src/main/eval.cpp:917
+#: src/main/eval.cpp:924 src/main/grep.cpp:1292 src/main/grep.cpp:1297
+#: src/main/grep.cpp:1594 src/main/grep.cpp:1596 src/main/grep.cpp:1598
+#: src/main/grep.cpp:2131 src/main/grep.cpp:2135 src/main/grep.cpp:2140
+#: src/main/grep.cpp:2178 src/main/grep.cpp:2180 src/main/grep.cpp:2973
+#: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321
+#: src/main/internet.cpp:155 src/main/internet.cpp:169
+#: src/main/internet.cpp:194 src/main/internet.cpp:207
+#: src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4584
 #: src/main/objects.cpp:1800 src/main/objects.cpp:1802 src/main/paste.cpp:152
 #: src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
 #: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526
@@ -3757,17 +3760,10 @@ msgstr "não é possível mudar o valor de vinculo bloqueado para '%s'"
 msgid "cannot add bindings to a locked environment"
 msgstr "não é possível adicionar vinculações a um ambiente bloqueado"
 
-#: src/main/envir.cpp:443
-msgid "first argument ('table') not of type VECSXP, from R_HashResize"
-msgstr ""
-
-#: src/main/envir.cpp:500
-msgid "first argument ('table') not of type VECSXP, R_HashSizeCheck"
-msgstr ""
-
-#: src/main/envir.cpp:524
-msgid "first argument ('table') not of type ENVSXP, from R_HashVector2Hash"
-msgstr ""
+#: src/main/envir.cpp:443 src/main/envir.cpp:500 src/main/envir.cpp:524
+#, fuzzy, c-format
+msgid "first argument ('table') not of type '%s', from %s"
+msgstr "correspondência parcial de argumento de '%s' para '%s'"
 
 #: src/main/envir.cpp:831
 msgid "cannot unbind in the base namespace"
@@ -4028,7 +4024,7 @@ msgid "bad namespace"
 msgstr "nome de espaço de nomes inválido"
 
 #: src/main/envir.cpp:3875
-msgid "bad value returned by `getNamespaceName'"
+msgid "bad value returned by 'getNamespaceName'"
 msgstr ""
 
 #: src/main/envir.cpp:3877
@@ -4295,11 +4291,6 @@ msgstr "argumento \"%s\" ausente, sem padrão"
 #: src/main/errors.cpp:2773
 msgid "argument is missing, with no default"
 msgstr "argumento ausente, sem padrão"
-
-#: src/main/errors.cpp:2793
-#, fuzzy
-msgid "bad condition argument"
-msgstr "argumento de importação de ambiente inválido"
 
 #: src/main/errors.cpp:2795
 #, fuzzy
@@ -4605,11 +4596,11 @@ msgid "cannot find index for threaded code address"
 msgstr "não é possível encontrar um índice para código de endereço encadeado"
 
 #: src/main/eval.cpp:8688
-msgid "registerBC requires integer vector as bcBytes"
+msgid "R_registerBC requires integer vector as bcBytes"
 msgstr ""
 
 #: src/main/eval.cpp:8690
-msgid "registerBC requires BCODESXP object as bcode"
+msgid "R_registerBC requires BCODESXP object as bcode"
 msgstr ""
 
 #: src/main/eval.cpp:8769
@@ -5167,7 +5158,7 @@ msgstr ""
 
 #: src/main/identical.cpp:391
 #, c-format
-msgid "Unknown Type in identical(): %s (%x)\n"
+msgid "Unknown type in identical(): %s (%x)\n"
 msgstr ""
 
 #: src/main/inspect.cpp:301
@@ -5186,13 +5177,6 @@ msgstr "rotinas de internet não podem ser acessadas dentro do módulo"
 #: src/main/internet.cpp:308
 msgid "internet routines cannot be loaded"
 msgstr "rotinas de internet não podem ser carregadas"
-
-#: src/main/internet.cpp:155 src/main/internet.cpp:169
-#: src/main/internet.cpp:194 src/main/internet.cpp:219
-#: src/main/internet.cpp:239
-#, fuzzy
-msgid "invalid 'socket' argument"
-msgstr "argumento 'mode' inválido"
 
 #: src/main/internet.cpp:163 src/main/internet.cpp:182
 #: src/main/internet.cpp:201 src/main/internet.cpp:213
@@ -5215,11 +5199,6 @@ msgstr "erro CRC no arquivo zip"
 #, fuzzy
 msgid "attempt to close invalid socket"
 msgstr "tentativa de especificar um atributo 'comment' inválido"
-
-#: src/main/internet.cpp:207
-#, fuzzy
-msgid "invalid 'port' argument"
-msgstr "argumento 'mode' inválido"
 
 #: src/main/lapack.cpp:46
 #, fuzzy
@@ -5638,9 +5617,9 @@ msgstr ""
 msgid "can't change the type of a binding cell"
 msgstr "não é possível mudar a vinculação ativa se o vínculo estiver bloqueado"
 
-#: src/main/memory.cpp:3695
+#: src/main/memory.cpp:3695 src/main/memory.cpp:4020
 #, c-format
-msgid "LENGTH or similar applied to %s object"
+msgid "'%s' or similar applied to %s object"
 msgstr ""
 
 #: src/main/memory.cpp:3708
@@ -5694,11 +5673,6 @@ msgstr ""
 #: src/main/memory.cpp:3990
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
-msgstr ""
-
-#: src/main/memory.cpp:4020
-#, c-format
-msgid "CAR/CDR/TAG or similar applied to %s object"
 msgstr ""
 
 #: src/main/memory.cpp:4134
@@ -6703,7 +6677,7 @@ msgid "Could not realloc savedtl in savetl"
 msgstr "não foi possível alocar espaço para 'path'"
 
 #: src/main/radixsort.cpp:778 src/main/radixsort.cpp:866
-msgid "Not yet used, still using iradix instead"
+msgid "'colSize = 4' not yet used, still using iradix instead"
 msgstr ""
 
 #: src/main/radixsort.cpp:955
@@ -6824,7 +6798,7 @@ msgid "invalid UTF-8 string"
 msgstr "string UTF-8 'old' inválida"
 
 #: src/main/raw.cpp:397
-msgid "allow_surrogate_pairs = TRUE is incompatible with multiple = TRUE and will be ignored"
+msgid "'allow_surrogate_pairs = TRUE' is incompatible with 'multiple = TRUE' and will be ignored"
 msgstr ""
 
 #: src/main/Rdynload.cpp:177
@@ -7201,7 +7175,7 @@ msgstr ""
 
 #: src/main/Rstrptime.h:699 src/main/Rstrptime.h:1183
 #, c-format
-msgid "(0-based) yday %d in year %d is invalid\n"
+msgid "(0-based) day-of-year %d in year %d is invalid\n"
 msgstr ""
 
 #: src/main/Rstrptime.h:1307
@@ -10069,7 +10043,7 @@ msgstr ""
 
 #: src/nmath/rhyper.cpp:200
 #, c-format
-msgid "w = %g <= 0: Underflow in rhyper()  SHOULD NOT HAPPEN!"
+msgid "w = %g <= 0: Underflow in rhyper() SHOULD NOT HAPPEN!"
 msgstr ""
 
 #: src/nmath/rmultinom.cpp:78
@@ -10267,6 +10241,18 @@ msgstr "módulo X11 não pode ser carregado"
 #: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 não está disponível"
+
+#, fuzzy
+#~ msgid "bad condition argument"
+#~ msgstr "argumento de importação de ambiente inválido"
+
+#, fuzzy
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "argumento 'mode' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'port' argument"
+#~ msgstr "argumento 'mode' inválido"
 
 #, fuzzy
 #~ msgid "'pattern' is invalid"

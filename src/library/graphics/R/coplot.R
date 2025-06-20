@@ -119,7 +119,7 @@ coplot <-
         stop("'number' must be integer >= 1")
     if(any(overlap >= 1)) stop("'overlap' must be < 1 (and typically >= 0).")
 
-    bad.givens <- function() stop("invalid 'given.values'")
+    bad.givens <- function() stop(gettextf("invalid '%s' argument", "given.values"))
     if(missing(given.values)) {
 	a.intervals <-
 	    if(a.is.fac) {

@@ -99,7 +99,7 @@ factanal <-
     if(dof < 0)
         stop(sprintf(ngettext(factors,
                               "%d factor is too many for %d variables",
-                              "%d factors are too many for %d variables"),
+                              "%d factors are too many for %d variables", domain = "R-stats"),
                      factors, p), domain = NA)
     ## FIXME: cov2cor() shows how to do this faster (for large dim)
     sds <- sqrt(diag(cv))
@@ -121,7 +121,7 @@ factanal <-
     if(nrow(start) != p)
         stop(sprintf(ngettext(p,
                        "'start' must have %d row",
-                       "'start' must have %d rows"),
+                       "'start' must have %d rows", domain = "R-stats"),
                      p), domain = NA)
     nc <- ncol(start)
     if(nc < 1) stop("no starting values supplied")
@@ -140,7 +140,7 @@ factanal <-
     if(best == Inf)
         stop(ngettext(nc,
                       "unable to optimize from this starting value",
-                      "unable to optimize from these starting values"),
+                      "unable to optimize from these starting values", domain = "R-stats"),
              domain = NA)
                                         # the following line changed by C. Bernaards, 20 December 2022
     load <- sortLoadings(fit$loadings)$Lambda

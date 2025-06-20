@@ -28,8 +28,9 @@ shapiro.test <- function(x)
     if(rng == 0) stop("all 'x' values are identical")
     if(rng < 1e-10) x <- x/rng # rescale to avoid ifault=6 with single version.
     res <- .Call(C_SWilk, x)
+    METHOD <- "Shapiro-Wilk normality test"
     RVAL <- list(statistic = c(W = res[1]), p.value = res[2],
-		 method = "Shapiro-Wilk normality test", data.name = DNAME)
+		 method = METHOD, data.name = DNAME)
     class(RVAL) <- "htest"
     return(RVAL)
 }

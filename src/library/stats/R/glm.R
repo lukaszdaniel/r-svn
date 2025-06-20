@@ -54,7 +54,7 @@ glm <- function(formula, family = gaussian, data, weights,
     if(identical(method, "model.frame")) return(mf)
 
     if (!is.character(method) && !is.function(method))
-        stop("invalid 'method' argument")
+        stop(gettextf("invalid '%s' argument", "method"))
     ## for back-compatibility in return result
     if (identical(method, "glm.fit"))
         control <- do.call("glm.control", control)
@@ -255,7 +255,7 @@ glm.fit <-
             if (nobs < fit$rank)
                 stop(sprintf(ngettext(nobs,
                                       "X matrix has rank %d, but only %d observation",
-                                      "X matrix has rank %d, but only %d observations"),
+                                      "X matrix has rank %d, but only %d observations", domain = "R-stats"),
                              fit$rank, nobs), domain = NA)
             if(!singular.ok && fit$rank < nvars) stop("singular fit encountered")
             ## calculate updated values of eta and mu with the new coef:

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 20:07\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2025-04-01 17:03+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -230,6 +230,11 @@ msgstr "аргумент 'contrasts.arg' должен быть именован"
 msgid "'control' argument must be a named list"
 msgstr "аргумент 'control' должен быть именованным списком"
 
+#. R/nlminb.R: gettextf("'control' component '%s' = %g, is out of range", names(port_cpos)[B],     v[iv1])
+#: R/nlminb.R:0
+msgid "'control' component '%s' = %g, is out of range"
+msgstr ""
+
 #. R/factanal.R: stop("'covmat' is not a valid covariance list")
 #. R/princomp.R: stop("'covmat' is not a valid covariance list")
 #: R/factanal.R:0 R/princomp.R:0
@@ -247,14 +252,16 @@ msgstr "'covmat' неизвестного типа"
 msgid "'cterms' argument must match terms in model object"
 msgstr "аргумент 'cterms' должен соответствовать выражениям в модельном объекте"
 
-#. R/symnum.R: gettext("'cutpoints' must be unique in 0 < cuts < 1, but are = ")
+#. R/symnum.R: gettextf("'cutpoints' must be unique in 0 < cuts < 1, but are = %s")
 #: R/symnum.R:0
-msgid "'cutpoints' must be unique in 0 < cuts < 1, but are ="
+#, fuzzy
+msgid "'cutpoints' must be unique in 0 < cuts < 1, but are = %s"
 msgstr "'cutpoints' должны быть уникальны в пределах 0 < cuts < 1, но они ="
 
-#. R/symnum.R: gettext("'cutpoints' must be unique, but are = ")
+#. R/symnum.R: gettextf("'cutpoints' must be unique, but are = %s")
 #: R/symnum.R:0
-msgid "'cutpoints' must be unique, but are ="
+#, fuzzy
+msgid "'cutpoints' must be unique, but are = %s"
 msgstr "'cutpoints' должны быть уникальны, но они ="
 
 #. R/smspline.R: stop("'cv' must not be NA when 'df' is specified")
@@ -831,6 +838,12 @@ msgstr "'start' не может быть после 'end'"
 msgid "'start' value not changed"
 msgstr "значение 'start' не изменилось"
 
+#. R/symnum.R: gettextf("'symbols' must be unique, but are = %s", paste(symbols,     collapse = "|"))
+#: R/symnum.R:0
+#, fuzzy
+msgid "'symbols' must be unique, but are = %s"
+msgstr "'cutpoints' должны быть уникальны, но они ="
+
 #. R/models.R: stop("'termlabels' must be a character vector")
 #: R/models.R:0
 #, fuzzy
@@ -1317,6 +1330,11 @@ msgstr "Colv = \"Rowv\", но nrow(x) != ncol(x)"
 msgid "Consider providing an as.hclust.%s() method"
 msgstr "Советую указать метод as.hclust.%s()"
 
+#. R/nls.R: warning("No starting values specified for some parameters.",     "\n", gettextf("Initializing %s to '1.'.", paste(sQuote(nnn),         collapse = ", ")), "\n", "Consider specifying 'start' or using a selfStart model",     domain = "R-stats", sep = "")
+#: R/nls.R:0
+msgid "Consider specifying 'start' or using a selfStart model"
+msgstr "Укажите 'start' или я использую модель 'selfStart'"
+
 #. R/model.tables.R: message("Design is unbalanced - use se.contrast() for se's")
 #: R/model.tables.R:0
 msgid "Design is unbalanced - use se.contrast() for se's"
@@ -1336,6 +1354,12 @@ msgstr "Тест Фишера предполагает семейство 'quasi
 #: R/add.R:0
 msgid "F test assumes quasi%s family"
 msgstr "Тест Фишера предполагает квази-%s семейство"
+
+#. R/nls.R: gettextf("Initializing %s to '1.'.", paste(sQuote(nnn), collapse = ", "))
+#: R/nls.R:0
+#, fuzzy
+msgid "Initializing %s to '1.'."
+msgstr "Инициализую"
 
 #. R/arima.R: warning("MA part of model is not invertible")
 #. R/arma0.R: warning("MA part of model is not invertible")
@@ -1421,6 +1445,11 @@ msgstr "Не найдены p2 в [p1, 1], нужные для достижен�
 msgid "No significance level [0, 1] can be found to achieve the desired power"
 msgstr "Не найден уровень значимости [0, 1], чтобы достичь желаемой мощности"
 
+#. R/nls.R: warning("No starting values specified for some parameters.",     "\n", gettextf("Initializing %s to '1.'.", paste(sQuote(nnn),         collapse = ", ")), "\n", "Consider specifying 'start' or using a selfStart model",     domain = "R-stats", sep = "")
+#: R/nls.R:0
+msgid "No starting values specified for some parameters."
+msgstr "Для некоторых параметров не указаны стартовые значения."
+
 #. R/smspline.R: stop("Numeric 'all.knots' must be strictly increasing")
 #: R/smspline.R:0
 msgid "Numeric 'all.knots' must be strictly increasing"
@@ -1503,6 +1532,18 @@ msgstr "Метод \"ward\" переименован в \"ward.D\"; обрати
 msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
 msgstr "Неразбираемый 'response' \"%s\"; использование не разрешается.  Используйте as.name(.) или `..`!"
 
+#. R/models.R: gettext("Using formula(x) is deprecated when x is a character vector of length > 1.\n  Consider formula(paste(x, collapse = \" \")) instead.")
+#: R/models.R:0
+msgid ""
+"Using formula(x) is deprecated when x is a character vector of length > 1.\n"
+"  Consider formula(paste(x, collapse = \" \")) instead."
+msgstr ""
+
+#. R/nlminb.R: gettextf("V[IV[1]] = V[%d] = %g is out of range (see PORT docu.)",     iv1, v[iv1])
+#: R/nlminb.R:0
+msgid "V[IV[1]] = V[%d] = %g is out of range (see PORT docu.)"
+msgstr ""
+
 #. R/confint.R: message("Waiting for profiling to be done...")
 #: R/confint.R:0
 msgid "Waiting for profiling to be done..."
@@ -1580,9 +1621,10 @@ msgstr "все веса должны быть неотрицательны"
 msgid "alternative must be \"two.sided\", \"less\" or \"greater\""
 msgstr "альтернатива должна быть \"two.sided\", \"less\" или \"greater\""
 
-#. R/hclust.R: stop("ambiguous clustering method", paste("", method))
+#. R/hclust.R: gettextf("ambiguous clustering method %s", method)
 #: R/hclust.R:0
-msgid "ambiguous clustering method"
+#, fuzzy
+msgid "ambiguous clustering method %s"
 msgstr "сомнительный метод кластеризации"
 
 #. R/dist.R: stop("ambiguous distance method")
@@ -2354,127 +2396,73 @@ msgstr "внутренний цикл 2; не могу исправить раз
 msgid "interactions are not allowed"
 msgstr "взаимодействия не разрешены"
 
+#. R/arima.R: gettextf("invalid '%s' argument", "SSinit")
 #. R/bandwidths.R: gettextf("invalid '%s' argument", "x")
 #. R/bandwidths.R: gettextf("invalid '%s' argument", "nb")
 #. R/chisq.test.R: gettextf("invalid '%s' argument", "x")
+#. R/cor.R: gettextf("invalid '%s' argument", "use")
+#. R/family.R: gettextf("invalid '%s' argument", "lambda")
+#. R/glm.R: gettextf("invalid '%s' argument", "method")
+#. R/loess.R: gettextf("invalid '%s' argument", "control")
 #. R/loess.R: gettextf("invalid '%s' argument", "x")
 #. R/loess.R: gettextf("invalid '%s' argument", "y")
+#. R/loess.R: gettextf("invalid '%s' argument", "span")
+#. R/loess.R: gettextf("invalid '%s' argument", "cell")
+#. R/loess.R: gettextf("invalid '%s' argument", "degree")
+#. R/models.R: gettextf("invalid '%s' argument", "data")
+#. R/nafns.R: gettextf("invalid '%s' argument", "omit")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "n")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "r")
 #. R/r2dtable.R: gettextf("invalid '%s' argument", "c")
 #. R/runmed.R: gettextf("invalid '%s' argument", "k")
 #. R/smooth.R: gettextf("invalid '%s' argument", "endrule")
+#. R/smspline.R: gettextf("invalid '%s' argument", "control.spar")
+#. R/smspline.R: gettextf("invalid '%s' argument", "keep.stuff")
 #. R/symnum.R: gettextf("invalid '%s' argument", "abbr.colnames'")
-#: R/bandwidths.R:0 R/chisq.test.R:0 R/loess.R:0 R/r2dtable.R:0 R/runmed.R:0
-#: R/smooth.R:0 R/symnum.R:0
+#: R/arima.R:0 R/bandwidths.R:0 R/chisq.test.R:0 R/cor.R:0 R/family.R:0
+#: R/glm.R:0 R/loess.R:0 R/models.R:0 R/nafns.R:0 R/r2dtable.R:0 R/runmed.R:0
+#: R/smooth.R:0 R/smspline.R:0 R/symnum.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "недопустимый аргумент 'use'"
 
 #. R/bandwidths.R: gettextf("invalid '%s' value", "length(x)")
+#. R/diffinv.R: gettextf("invalid '%s' value", "length(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kmeans.R: gettextf("invalid '%s' value", "ncol(x)")
+#. R/kmeans.R: gettextf("invalid '%s' value", "k")
+#. R/loess.R: gettextf("invalid '%s' value", "NCOL(X)")
+#. R/loess.R: gettextf("invalid '%s' value", "NROW(X)")
+#. R/nls.R: gettextf("invalid '%s' value", "attr(rhs, \"gradient\")")
 #. R/runmed.R: gettextf("invalid '%s' value", "length(x)")
-#: R/bandwidths.R:0 R/kmeans.R:0 R/runmed.R:0
+#. R/spline.R: gettextf("invalid '%s' value", "length(x)")
+#. R/splinefun.R: gettextf("invalid '%s' value", "length(x)")
+#. R/stl.R: gettextf("invalid '%s' value", "length(x)")
+#: R/bandwidths.R:0 R/diffinv.R:0 R/kmeans.R:0 R/loess.R:0 R/nls.R:0
+#: R/runmed.R:0 R/spline.R:0 R/splinefun.R:0 R/stl.R:0
 #, fuzzy
 msgid "invalid '%s' value"
 msgstr "недопустимый аргумент 'use'"
-
-#. R/arima.R: stop("invalid 'SSinit'")
-#: R/arima.R:0
-msgid "invalid 'SSinit'"
-msgstr "неправильный 'SSinit'"
-
-#. R/nls.R: stop("invalid 'attr(rhs, \"gradient\")'")
-#: R/nls.R:0
-#, fuzzy
-msgid "invalid 'attr(rhs, \"gradient\")'"
-msgstr "неправильный 'attr(rhs, \"gradient\")'"
-
-#. R/loess.R: stop("invalid 'control' argument")
-#: R/loess.R:0
-msgid "invalid 'control' argument"
-msgstr "неправильный аргумент 'control'"
-
-#. R/smspline.R: stop("invalid 'control.spar'")
-#: R/smspline.R:0
-msgid "invalid 'control.spar'"
-msgstr "неправильный 'control.spar'"
-
-#. R/models.R: stop("invalid 'data' argument")
-#: R/models.R:0
-msgid "invalid 'data' argument"
-msgstr "недопустимый аргумент 'data'"
 
 #. R/nlm.R: stop("invalid 'extendInt'; please report")
 #: R/nlm.R:0
 msgid "invalid 'extendInt'; please report"
 msgstr "неправильный 'extendInt'; пожалуйста, сообщите"
 
-#. R/smspline.R: stop("invalid 'keep.stuff'")
-#: R/smspline.R:0
-msgid "invalid 'keep.stuff'"
-msgstr "неправильный 'keep.stuff'"
-
 #. R/lm.R: stop("invalid 'lm' object:  no 'terms' component")
 #: R/lm.R:0
 msgid "invalid 'lm' object:  no 'terms' component"
 msgstr "неправильный 'lm' объект:  нет компонента 'terms'"
-
-#. R/glm.R: stop("invalid 'method' argument")
-#: R/glm.R:0
-msgid "invalid 'method' argument"
-msgstr "недопустимый аргумент 'method'"
 
 #. R/cutree.R: stop("invalid 'tree' ('merge' component)")
 #: R/cutree.R:0
 msgid "invalid 'tree' ('merge' component)"
 msgstr "неправильное 'tree' (компонент 'merge')"
 
-#. R/cor.R: stop("invalid 'use' argument")
-#: R/cor.R:0
-msgid "invalid 'use' argument"
-msgstr "недопустимый аргумент 'use'"
-
 #. R/dendrogram.R: stop("invalid (length 0) node in dendrogram")
 #: R/dendrogram.R:0
 msgid "invalid (length 0) node in dendrogram"
 msgstr "неправильный (длина = 0) узел дендрограммы"
-
-#. R/loess.R: stop("invalid NCOL(X)")
-#: R/loess.R:0
-msgid "invalid NCOL(X)"
-msgstr "неправильный NCOL(X)"
-
-#. R/loess.R: stop("invalid NROW(X)")
-#: R/loess.R:0
-msgid "invalid NROW(X)"
-msgstr "неправильный NROW(X)"
-
-#. R/loess.R: stop("invalid argument 'cell'")
-#: R/loess.R:0
-msgid "invalid argument 'cell'"
-msgstr "неправильный аргумент 'cell'"
-
-#. R/loess.R: stop("invalid argument 'degree'")
-#: R/loess.R:0
-msgid "invalid argument 'degree'"
-msgstr "неправильный аргумент 'degree'"
-
-#. R/family.R: stop("invalid argument 'lambda'")
-#: R/family.R:0
-msgid "invalid argument 'lambda'"
-msgstr "неправильный аргумент 'lambda'"
-
-#. R/nafns.R: stop("invalid argument 'omit'")
-#: R/nafns.R:0
-msgid "invalid argument 'omit'"
-msgstr "недопустимый аргумент 'omit'"
-
-#. R/loess.R: stop("invalid argument 'span'")
-#: R/loess.R:0
-msgid "invalid argument 'span'"
-msgstr "неправильный аргумент 'span'"
 
 #. R/nls-profile.R: stop("invalid argument to 'getProfile'")
 #: R/nls-profile.R:0
@@ -2486,9 +2474,10 @@ msgstr "неправильный аргумент для 'getProfile'"
 msgid "invalid arguments"
 msgstr "неправильные аргументы"
 
-#. R/hclust.R: stop("invalid clustering method", paste("", method))
+#. R/hclust.R: gettextf("invalid clustering method %s", method)
 #: R/hclust.R:0
-msgid "invalid clustering method"
+#, fuzzy
+msgid "invalid clustering method %s"
 msgstr "неправильный метод кластеризации"
 
 #. R/hclust.R: stop("invalid dissimilarities")
@@ -2557,8 +2546,7 @@ msgstr "неправильная длина членов"
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
 #. R/bandwidths.R: stop("invalid length(x)")
-#. R/stl.R: stop("invalid length(x)")
-#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0 R/stl.R:0
+#: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0
 msgid "invalid length(x)"
 msgstr "неправильная length(x)"
 
@@ -2589,14 +2577,9 @@ msgstr "неправильный тип отклика"
 
 #. R/cmdscale.R: gettextf("invalid value of %s", "'n'")
 #. R/density.R: gettextf("invalid value of %s", "length(x)")
-#. R/diffinv.R: gettextf("invalid value of %s", "length(x)")
 #. R/filter.R: gettextf("invalid value of %s", "NROW(x)")
 #. R/filter.R: gettextf("invalid value of %s", "length(filter)")
-#. R/kmeans.R: gettextf("invalid value of %s", "'k'")
-#. R/spline.R: gettextf("invalid value of %s", "length(x)")
-#. R/splinefun.R: gettextf("invalid value of %s", "length(x)")
-#: R/cmdscale.R:0 R/density.R:0 R/diffinv.R:0 R/filter.R:0 R/kmeans.R:0
-#: R/spline.R:0 R/splinefun.R:0
+#: R/cmdscale.R:0 R/density.R:0 R/filter.R:0
 msgid "invalid value of %s"
 msgstr "неправильное значение %s"
 
@@ -4267,9 +4250,10 @@ msgstr "неизвестные имена в директиве:"
 msgid "unknown string value for s.window"
 msgstr "неизвестное значение строки для 's.window'"
 
-#. R/nls.R: warning("upper and lower bounds ignored unless algorithm = \"port\"")
+#. R/nls.R: warning("upper and lower bounds ignored unless 'algorithm = \"port\"'")
 #: R/nls.R:0
-msgid "upper and lower bounds ignored unless algorithm = \"port\""
+#, fuzzy
+msgid "upper and lower bounds ignored unless 'algorithm = \"port\"'"
 msgstr "верхние и нижние границы игнорируются, пока не algorithm = \"port\""
 
 #. R/plot.lm.R: stop("use only with \"lm\" objects")
@@ -4422,7 +4406,7 @@ msgstr "нулевые не-NA точки"
 msgid "zero-variance series"
 msgstr "серия с нулевой вариансой"
 
-#. R/factanal.R: ngettext(factors, "%d factor is too many for %d variables", "%d factors are too many for %d variables")
+#. R/factanal.R: ngettext(factors, "%d factor is too many for %d variables", "%d factors are too many for %d variables",     domain = "R-stats")
 #: R/factanal.R:0
 msgid "%d factor is too many for %d variables"
 msgid_plural "%d factors are too many for %d variables"
@@ -4430,7 +4414,7 @@ msgstr[0] "%d фактор -- это слишком много для %d пер�
 msgstr[1] "%d факторов слишком много для %d переменных"
 msgstr[2] "%d факторов слишком много для %d переменных"
 
-#. R/lsfit.R: ngettext(sum(!good), "%d missing value deleted", "%d missing values deleted")
+#. R/lsfit.R: ngettext(sum(!good), "%d missing value deleted", "%d missing values deleted",     domain = "R-stats")
 #: R/lsfit.R:0
 msgid "%d missing value deleted"
 msgid_plural "%d missing values deleted"
@@ -4446,7 +4430,7 @@ msgstr[0] "%d пропущенное наблюдение удалено"
 msgstr[1] "%d пропущенных наблюдений удалены"
 msgstr[2] "%d пропущенных наблюдений удалены"
 
-#. R/smspline.R: ngettext(diff, "%d observation with NA, NaN or Inf deleted",     "%d observations with NAs, NaNs and/or Infs deleted")
+#. R/smspline.R: ngettext(diff, "%d observation with NA, NaN or Inf deleted",     "%d observations with NAs, NaNs and/or Infs deleted", domain = "R-stats")
 #: R/smspline.R:0
 msgid "%d observation with NA, NaN or Inf deleted"
 msgid_plural "%d observations with NAs, NaNs and/or Infs deleted"
@@ -4454,7 +4438,17 @@ msgstr[0] "%d наблюдение с NA, NaN и/или Inf удалено"
 msgstr[1] "%d наблюдения с NAs, NaNs и/или Infs удалены"
 msgstr[2] "%d наблюдений с NAs, NaNs и/или Infs удалены"
 
-#. R/lsfit.R: ngettext(nrx, "'X' matrix has %d case (row)", "'X' matrix has %d cases (rows)")
+#. R/kmeans.R: ngettext(iter.max, "'%s' did not converge in %d iteration", "'%s' did not converge in %d iterations",     domain = "R-stats")
+#. R/medpolish.R: ngettext(maxiter, "'%s' did not converge in %d iteration", "'%s' did not converge in %d iterations",     domain = "R-stats")
+#: R/kmeans.R:0 R/medpolish.R:0
+#, fuzzy
+msgid "'%s' did not converge in %d iteration"
+msgid_plural "'%s' did not converge in %d iterations"
+msgstr[0] "не сошлось за %d итерацию"
+msgstr[1] "не сошлось за %d итерации"
+msgstr[2] "не сошлось за %d итераций"
+
+#. R/lsfit.R: ngettext(nrx, "'X' matrix has %d case (row)", "'X' matrix has %d cases (rows)",     domain = "R-stats")
 #: R/lsfit.R:0
 msgid "'X' matrix has %d case (row)"
 msgid_plural "'X' matrix has %d cases (rows)"
@@ -4462,7 +4456,7 @@ msgstr[0] "'X'-матрица имеет %d отклик (строку)"
 msgstr[1] "'X'-матрица имеет %d отклика (строки)"
 msgstr[2] "'X'-матрица имеет %d откликов (строк)"
 
-#. R/lsfit.R: ngettext(nry, "'Y' has %d case (row)", "'Y' has %d cases (rows)")
+#. R/lsfit.R: ngettext(nry, "'Y' has %d case (row)", "'Y' has %d cases (rows)",     domain = "R-stats")
 #: R/lsfit.R:0
 msgid "'Y' has %d case (row)"
 msgid_plural "'Y' has %d cases (rows)"
@@ -4478,7 +4472,7 @@ msgstr[0] "'init' должен иметь %d колонку"
 msgstr[1] "'init' должен иметь 1 или %d колонки"
 msgstr[2] "'init' должен иметь одну или %d колонок"
 
-#. R/models.R: ngettext(nr, "'newdata' had %d row", "'newdata' had %d rows")
+#. R/models.R: ngettext(nr, "'newdata' had %d row", "'newdata' had %d rows",     domain = "R-stats")
 #: R/models.R:0
 msgid "'newdata' had %d row"
 msgid_plural "'newdata' had %d rows"
@@ -4486,7 +4480,7 @@ msgstr[0] "'start' должен иметь %d строк"
 msgstr[1] "'newdata' должна иметь %d строки"
 msgstr[2] "'newdata' должна иметь %d строк"
 
-#. R/factanal.R: ngettext(p, "'start' must have %d row", "'start' must have %d rows")
+#. R/factanal.R: ngettext(p, "'start' must have %d row", "'start' must have %d rows",     domain = "R-stats")
 #: R/factanal.R:0
 msgid "'start' must have %d row"
 msgid_plural "'start' must have %d rows"
@@ -4502,7 +4496,7 @@ msgstr[0] "'start.innov' слишком короткий: нужно %d точк
 msgstr[1] "'start.innov' слишком короткий: нужно %d точки"
 msgstr[2] "'start.innov' слишком короткий: нужно %d точек"
 
-#. R/glm.R: ngettext(nobs, "X matrix has rank %d, but only %d observation",     "X matrix has rank %d, but only %d observations")
+#. R/glm.R: ngettext(nobs, "X matrix has rank %d, but only %d observation",     "X matrix has rank %d, but only %d observations", domain = "R-stats")
 #: R/glm.R:0
 msgid "X matrix has rank %d, but only %d observation"
 msgid_plural "X matrix has rank %d, but only %d observations"
@@ -4510,7 +4504,7 @@ msgstr[0] "матрица X имеет ранг %d, но только %d наб�
 msgstr[1] "матрица X имеет ранг %d, но только %d наблюдения"
 msgstr[2] "матрица X имеет ранг %d, но только %d наблюдений"
 
-#. R/nlm.R: ngettext(maxiter, "_NOT_ converged in %d iteration", "_NOT_ converged in %d iterations")
+#. R/nlm.R: ngettext(maxiter, "_NOT_ converged in %d iteration", "_NOT_ converged in %d iterations",     domain = "R-stats")
 #: R/nlm.R:0
 msgid "_NOT_ converged in %d iteration"
 msgid_plural "_NOT_ converged in %d iterations"
@@ -4518,7 +4512,7 @@ msgstr[0] "_НЕ_ сошлось за %d итерацию"
 msgstr[1] "_НЕ_ сошлось за %d итерации"
 msgstr[2] "_НЕ_ сошлось за %d итераций"
 
-#. R/lsfit.R: ngettext(ncx, "but %d variable", "but %d variables")
+#. R/lsfit.R: ngettext(ncx, "but %d variable", "but %d variables", domain = "R-stats")
 #: R/lsfit.R:0
 msgid "but %d variable"
 msgid_plural "but %d variables"
@@ -4526,21 +4520,13 @@ msgstr[0] "но только %d переменную"
 msgstr[1] "но только %d переменных"
 msgstr[2] "но только %d переменных"
 
-#. R/models.R: ngettext(nr2, "but variable found had %d row", "but variables found have %d rows")
+#. R/models.R: ngettext(nr2, "but variable found had %d row", "but variables found have %d rows",     domain = "R-stats")
 #: R/models.R:0
 msgid "but variable found had %d row"
 msgid_plural "but variables found have %d rows"
 msgstr[0] "но найденная переменная имеет %d строку"
 msgstr[1] "но найденная переменная имеет %d строки"
 msgstr[2] "но найденная переменная имеет %d строк"
-
-#. R/kmeans.R: ngettext(iter.max, "did not converge in %d iteration", "did not converge in %d iterations")
-#: R/kmeans.R:0
-msgid "did not converge in %d iteration"
-msgid_plural "did not converge in %d iterations"
-msgstr[0] "не сошлось за %d итерацию"
-msgstr[1] "не сошлось за %d итерации"
-msgstr[2] "не сошлось за %d итераций"
 
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"%s\"",     "extra arguments %s are not of class \"%s\"")
 #: R/dendrogram.R:0
@@ -4550,7 +4536,7 @@ msgstr[0] "дополнительный аргумент %s не класса \"
 msgstr[1] "дополнительные аргументы %s не класса \"%s\""
 msgstr[2] "дополнительные аргументы %s не класса \"%s\""
 
-#. R/models.R: ngettext(length(m), "factor %s has new level %s", "factor %s has new levels %s")
+#. R/models.R: ngettext(length(m), "factor %s has new level %s", "factor %s has new levels %s",     domain = "R-stats")
 #: R/models.R:0
 msgid "factor %s has new level %s"
 msgid_plural "factor %s has new levels %s"
@@ -4558,7 +4544,7 @@ msgstr[0] "у фактора %s есть новый уровень %s"
 msgstr[1] "у фактора %s есть новые уровни %s"
 msgstr[2] "у фактора %s есть новые уровни %s"
 
-#. R/nls.R: ngettext(sum(np == -1), "fitting parameter %s without any variables",     "fitting parameters %s without any variables")
+#. R/nls.R: ngettext(sum(np == -1), "fitting parameter %s without any variables",     "fitting parameters %s without any variables", domain = "R-stats")
 #: R/nls.R:0
 msgid "fitting parameter %s without any variables"
 msgid_plural "fitting parameters %s without any variables"
@@ -4574,15 +4560,7 @@ msgstr[0] "нижняя область действия имеет выраже�
 msgstr[1] "нижняя область действия имеет выражения %s, не включенные в модель"
 msgstr[2] "нижняя область действия имеет выражения %s, не включенные в модель"
 
-#. R/medpolish.R: ngettext(maxiter, "medpolish() did not converge in %d iteration",     "medpolish() did not converge in %d iterations")
-#: R/medpolish.R:0
-msgid "medpolish() did not converge in %d iteration"
-msgid_plural "medpolish() did not converge in %d iterations"
-msgstr[0] "medpolish() не сошелся в %d итерацию"
-msgstr[1] "medpolish() не сошелся в %d итерации"
-msgstr[2] "medpolish() не сошелся в %d итераций"
-
-#. R/lsfit.R: ngettext(nry, "only %d case", "only %d cases")
+#. R/lsfit.R: ngettext(nry, "only %d case", "only %d cases", domain = "R-stats")
 #: R/lsfit.R:0
 msgid "only %d case"
 msgid_plural "only %d cases"
@@ -4590,7 +4568,7 @@ msgstr[0] "но только %d случай"
 msgstr[1] "но только %d случая"
 msgstr[2] "но только %d случаев"
 
-#. R/selfStart.R: ngettext(sum(msng), "parameter %s does not occur in the model formula",     "parameters %s do not occur in the model formula")
+#. R/selfStart.R: ngettext(sum(msng), "parameter %s does not occur in the model formula",     "parameters %s do not occur in the model formula", domain = "R-stats")
 #: R/selfStart.R:0
 msgid "parameter %s does not occur in the model formula"
 msgid_plural "parameters %s do not occur in the model formula"
@@ -4607,7 +4585,7 @@ msgstr[0] "здесь %d ошибочных выражения: разрешен
 msgstr[1] "здесь %d ошибочных выражения: разрешено лишь одно"
 msgstr[2] "здесь %d ошибочных выражений: разрешено лишь одно"
 
-#. R/factanal.R: ngettext(nc, "unable to optimize from this starting value", "unable to optimize from these starting values")
+#. R/factanal.R: ngettext(nc, "unable to optimize from this starting value", "unable to optimize from these starting values",     domain = "R-stats")
 #: R/factanal.R:0
 msgid "unable to optimize from this starting value"
 msgid_plural "unable to optimize from these starting values"
@@ -4623,8 +4601,8 @@ msgstr[0] "неизвестное имя %s в 'split'-списке"
 msgstr[1] "неизвестные имена %s в 'split'-списке"
 msgstr[2] "неизвестные имена %s в 'split'-списке"
 
-#. R/nlminb.R: ngettext(length(nap), "unrecognized control element named %s ignored",     "unrecognized control elements named %s ignored")
-#. R/nls.R: ngettext(length(nap), "unrecognized control element named %s ignored",     "unrecognized control elements named %s ignored")
+#. R/nlminb.R: ngettext(length(nap), "unrecognized control element named %s ignored",     "unrecognized control elements named %s ignored", domain = "R-stats")
+#. R/nls.R: ngettext(length(nap), "unrecognized control element named %s ignored",     "unrecognized control elements named %s ignored", domain = "R-stats")
 #: R/nlminb.R:0 R/nls.R:0
 msgid "unrecognized control element named %s ignored"
 msgid_plural "unrecognized control elements named %s ignored"
@@ -4647,6 +4625,58 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "использую %d/%d строку из комбинированного выравнивания"
 msgstr[1] "использую %d/%d строки из комбинированного выравнивания"
 msgstr[2] "использую %d/%d строк из комбинированного выравнивания"
+
+#~ msgid "invalid 'SSinit'"
+#~ msgstr "неправильный 'SSinit'"
+
+#, fuzzy
+#~ msgid "invalid 'attr(rhs, \"gradient\")'"
+#~ msgstr "неправильный 'attr(rhs, \"gradient\")'"
+
+#~ msgid "invalid 'keep.stuff'"
+#~ msgstr "неправильный 'keep.stuff'"
+
+#~ msgid "invalid 'use' argument"
+#~ msgstr "недопустимый аргумент 'use'"
+
+#~ msgid "medpolish() did not converge in %d iteration"
+#~ msgid_plural "medpolish() did not converge in %d iterations"
+#~ msgstr[0] "medpolish() не сошелся в %d итерацию"
+#~ msgstr[1] "medpolish() не сошелся в %d итерации"
+#~ msgstr[2] "medpolish() не сошелся в %d итераций"
+
+#~ msgid "invalid 'control' argument"
+#~ msgstr "неправильный аргумент 'control'"
+
+#~ msgid "invalid 'method' argument"
+#~ msgstr "недопустимый аргумент 'method'"
+
+#~ msgid "invalid NCOL(X)"
+#~ msgstr "неправильный NCOL(X)"
+
+#~ msgid "invalid NROW(X)"
+#~ msgstr "неправильный NROW(X)"
+
+#~ msgid "invalid argument 'cell'"
+#~ msgstr "неправильный аргумент 'cell'"
+
+#~ msgid "invalid argument 'degree'"
+#~ msgstr "неправильный аргумент 'degree'"
+
+#~ msgid "invalid argument 'lambda'"
+#~ msgstr "неправильный аргумент 'lambda'"
+
+#~ msgid "invalid argument 'span'"
+#~ msgstr "неправильный аргумент 'span'"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "недопустимый аргумент 'data'"
+
+#~ msgid "invalid argument 'omit'"
+#~ msgstr "недопустимый аргумент 'omit'"
+
+#~ msgid "invalid 'control.spar'"
+#~ msgstr "неправильный 'control.spar'"
 
 #~ msgid "'formula' missing"
 #~ msgstr "'formula' пропущена"
@@ -4911,17 +4941,8 @@ msgstr[2] "использую %d/%d строк из комбинированно
 #~ msgid "invalid length(vec)"
 #~ msgstr "неверная length(vec)"
 
-#~ msgid "No starting values specified for some parameters."
-#~ msgstr "Для некоторых параметров не указаны стартовые значения."
-
-#~ msgid "Initializing"
-#~ msgstr "Инициализую"
-
 #~ msgid "to '1.'."
 #~ msgstr "до '1.'."
-
-#~ msgid "Consider specifying 'start' or using a selfStart model"
-#~ msgstr "Укажите 'start' или я использую модель 'selfStart'"
 
 #~ msgid "wrong number of predictors"
 #~ msgstr "неправильное число предикторов"

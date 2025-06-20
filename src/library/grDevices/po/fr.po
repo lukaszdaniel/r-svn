@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-20 08:23+0200\n"
 "PO-Revision-Date: 2022-08-31 15:04+0000\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -804,9 +804,14 @@ msgstr "paramètre 'fonts' incorrect dans %s"
 msgid "failed to load font"
 msgstr "échec d'allocation de la liste de polices"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315
-msgid "invalid 'file' argument"
-msgstr "argument 'file' incorrect"
+#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
+#: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
+#: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
+#: cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "argument '%s' incorrect"
 
 #: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
@@ -1063,14 +1068,6 @@ msgstr ""
 msgid "could not open file '%s'"
 msgstr "impossible d'ouvrir le fichier '%s'"
 
-#: cairo/cairoBM.cpp:599 cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606
-#: cairo/cairoBM.cpp:610 cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618
-#: cairo/cairoBM.cpp:629 cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637
-#: cairo/cairoBM.cpp:641 cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
-#, c-format
-msgid "invalid '%s' argument"
-msgstr "argument '%s' incorrect"
-
 #: cairo/cairoBM.cpp:665
 #, c-format
 msgid "unable to start device '%s'"
@@ -1145,6 +1142,9 @@ msgstr "échec d'allocation de définitions"
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "famille de police introuvable dans la base de données des polices Windows"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "argument 'file' incorrect"
 
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "valeur incorrecte de 'maxColorValue'"

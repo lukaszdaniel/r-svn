@@ -28,7 +28,7 @@ splinefun <-
     y <- x$y
     x <- x$x
     nx <- length(x) # large vectors ==> non-integer
-    if(is.na(nx)) stop(gettextf("invalid value of %s", "length(x)"), domain = NA)
+    if(is.na(nx)) stop(gettextf("invalid '%s' value", "length(x)"))
     if(nx == 0) stop("zero non-NA points")
     method <- match.arg(method)
     if(method == "periodic" && y[1L] != y[nx]) {

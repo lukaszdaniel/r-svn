@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-18 21:09+0200\n"
+"POT-Creation-Date: 2025-06-20 08:23+0200\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -795,9 +795,14 @@ msgstr "%s 中に不正な 'fonts' パラメータ"
 msgid "failed to load font"
 msgstr "フォントリストを割り当てることができませんでした"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315
-msgid "invalid 'file' argument"
-msgstr "不正な 'file' 引数"
+#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
+#: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
+#: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
+#: cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
+#, c-format
+msgid "invalid '%s' argument"
+msgstr "引数 '%s' が不正です"
 
 #: devQuartz.cpp:3342
 msgid "invalid quartz() device size"
@@ -1055,14 +1060,6 @@ msgstr ""
 msgid "could not open file '%s'"
 msgstr "ファイル '%s' を開けません"
 
-#: cairo/cairoBM.cpp:599 cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606
-#: cairo/cairoBM.cpp:610 cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618
-#: cairo/cairoBM.cpp:629 cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637
-#: cairo/cairoBM.cpp:641 cairo/cairoBM.cpp:646 cairo/cairoBM.cpp:649
-#, c-format
-msgid "invalid '%s' argument"
-msgstr "引数 '%s' が不正です"
-
 #: cairo/cairoBM.cpp:665
 #, fuzzy, c-format
 msgid "unable to start device '%s'"
@@ -1137,6 +1134,9 @@ msgstr "フォントリストを割り当てることができませんでした
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "Quartz フォントのデータベースにフォントファミリが見付かりません"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "不正な 'file' 引数"
 
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "'maxColorValue' の値が不正です"

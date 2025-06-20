@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 18:21\n"
+"POT-Creation-Date: 2025-06-20 10:49\n"
 "PO-Revision-Date: 2024-03-18 21:25+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -615,9 +615,16 @@ msgstr "'x' と 'y' の値は昇順でなければなりません"
 msgid "invalid \"recordedplot\":"
 msgstr ""
 
+#. R/cairo.R: gettextf("invalid '%s' argument", "filename")
 #. R/postscript.R: gettextf("invalid '%s' argument", "family")
+#. R/unix/png.R: gettextf("invalid '%s' argument", "filename")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "title")
+#. R/unix/quartz.R: gettextf("invalid '%s' argument", "file")
+#. R/unix/x11.R: gettextf("invalid '%s' argument", "title")
+#. R/windows/png.R: gettextf("invalid '%s' argument", "filename")
 #. R/windows/windows.R: gettextf("invalid '%s' argument", "filename")
-#: R/postscript.R:0 R/windows/windows.R:0
+#: R/cairo.R:0 R/postscript.R:0 R/unix/png.R:0 R/unix/quartz.R:0 R/unix/x11.R:0
+#: R/windows/png.R:0 R/windows/windows.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "最初の引数が無効です"
@@ -627,28 +634,10 @@ msgstr "最初の引数が無効です"
 msgid "invalid 'cmapEncoding' in font specification"
 msgstr "フォント指定中に不正な 'cmapEncoding' があります"
 
-#. R/unix/quartz.R: stop("invalid 'file'")
-#: R/unix/quartz.R:0
-msgid "invalid 'file'"
-msgstr "不正な 'file' です"
-
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0
 msgid "invalid 'file' argument '%s'"
 msgstr "不正な 'file' 引数 '%s' です"
-
-#. R/cairo.R: stop("invalid 'filename'")
-#. R/unix/png.R: stop("invalid 'filename'")
-#. R/windows/png.R: stop("invalid 'filename'")
-#: R/cairo.R:0 R/unix/png.R:0 R/windows/png.R:0
-msgid "invalid 'filename'"
-msgstr "不正な 'filename' 引数です"
-
-#. R/unix/quartz.R: stop("invalid 'title'")
-#. R/unix/x11.R: stop("invalid 'title'")
-#: R/unix/quartz.R:0 R/unix/x11.R:0
-msgid "invalid 'title'"
-msgstr "不正な 'title' です"
 
 #. R/postscript.R: stop("invalid CMap name in font specification")
 #: R/postscript.R:0
@@ -968,6 +957,15 @@ msgstr[0] "が新しいものと前のもので異なります"
 msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
 msgstr[0] "'%2$s' 中の %1$s は不正な引数名です"
+
+#~ msgid "invalid 'filename'"
+#~ msgstr "不正な 'filename' 引数です"
+
+#~ msgid "invalid 'file'"
+#~ msgstr "不正な 'file' です"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "不正な 'title' です"
 
 #~ msgid "invalid 'family' argument"
 #~ msgstr "不正な 'family' 引数です"

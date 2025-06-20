@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 16:44\n"
-"PO-Revision-Date: 2025-06-19 16:45+0200\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
+"PO-Revision-Date: 2025-06-20 10:25+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -155,6 +155,11 @@ msgstr "'%s' nie jest jeszcze zaimplementowane"
 msgid "'%s' is not meaningful for ordered factors"
 msgstr "'%s' nie ma sensu dla uporządkowanych czynników"
 
+#. R/tapply.R: gettextf("'%s' is of length 0", "INDEX")
+#: R/tapply.R:0
+msgid "'%s' is of length 0"
+msgstr "argument '%s' musi mieć długość 0"
+
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
@@ -224,7 +229,8 @@ msgstr "argumen '%s' musi być zmienną logiczną"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'%s' must be of length 1"
 msgstr "argument '%s' musi mieć długość 1"
 
@@ -252,11 +258,6 @@ msgstr "'%s' nie jest określone dla uporządkowanych czynników"
 #: R/library.R:0
 msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
 msgstr "plik 'DESCRIPTION' posiada pole 'Encoding' i ponowne kodowanie nie jest możliwe"
-
-#. R/tapply.R: stop("'INDEX' is of length zero")
-#: R/tapply.R:0
-msgid "'INDEX' is of length zero"
-msgstr "argument 'INDEX' ma zerową długość"
 
 #. R/apply.R: stop("'MARGIN' does not match dim(X)")
 #. R/array.R: stop("'MARGIN' does not match dim(X)")
@@ -1787,7 +1788,8 @@ msgstr "wejście zostało uszkodzone z LF zastąpionym przez CR"
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
 #: R/version.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -2813,6 +2815,14 @@ msgstr "błędna klasa"
 msgid "wrong sign in 'by' argument"
 msgstr "błędny znak w argumencie 'by'"
 
+#. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n",     domain = "R-base")
+#: R/dataframe.R:0
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n"
+msgid_plural " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n"
+msgstr[0] " [ niepoprawna wartość 'max' / getOption(\"max.print\") -- pominięto %d wiersz ]\n"
+msgstr[1] " [ niepoprawna wartość 'max' / getOption(\"max.print\") -- pominięto %d wiersze ]\n"
+msgstr[2] " [ niepoprawna wartość 'max' / getOption(\"max.print\") -- pominięto %d wierszy ]\n"
+
 #. R/warnings.R: ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n",     domain = "R-base")
 #: R/warnings.R:0
 msgid "%d identical warning:\n"
@@ -2975,6 +2985,14 @@ msgstr[0] "zmienna nieliczbowa w ramce danych: "
 msgstr[1] "zmienne nieliczbowe w ramce danych: "
 msgstr[2] "zmienne nieliczbowe w ramce danych: "
 
+#. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s",     "non-unique values when setting 'row.names': %s", domain = "R-base")
+#: R/dataframe.R:0
+msgid "non-unique value when setting 'row.names': %s"
+msgid_plural "non-unique values when setting 'row.names': %s"
+msgstr[0] "nieunikalna wartość podczas ustawiania 'row.names': %s"
+msgstr[1] "nieunikalne wartości podczas ustawiania 'row.names': %s"
+msgstr[2] "nieunikalne wartości podczas ustawiania 'row.names': %s"
+
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
 msgid "object %s is not exported by 'namespace:%s'"
@@ -3086,6 +3104,9 @@ msgid_plural "there are no packages called"
 msgstr[0] "nie ma pakietu o nazwie"
 msgstr[1] "nie ma pakietów o nazwach"
 msgstr[2] "nie ma pakietów o nazwach"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "argument 'INDEX' ma zerową długość"
 
 #~ msgid "invalid 'digits'"
 #~ msgstr "niepoprawna wartość 'digits'"

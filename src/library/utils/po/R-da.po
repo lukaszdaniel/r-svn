@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 15:02\n"
+"POT-Creation-Date: 2025-06-20 20:11\n"
 "PO-Revision-Date: 2012-01-09 20:51+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -542,11 +542,6 @@ msgstr ""
 #: R/indices.R:0
 msgid "Invalid \"Built\":"
 msgstr ""
-
-#. R/aspell.R: stop("Invalid 'filter' argument.")
-#: R/aspell.R:0
-msgid "Invalid 'filter' argument."
-msgstr "Ugyldigt argument for »filter«."
 
 #. R/widgets.R: gettext("Invalid input, please try again\n")
 #: R/widgets.R:0
@@ -1318,11 +1313,20 @@ msgstr ""
 msgid "installation of package %s had non-zero exit status"
 msgstr ""
 
-#. R/help.R: gettextf("invalid %s argument", sQuote("file"))
-#. R/packages2.R: gettextf("invalid %s argument", sQuote("keep_outputs"))
-#: R/help.R:0 R/packages2.R:0
+#. R/aspell.R: gettextf("invalid '%s' argument", "filter")
+#. R/edit.R: gettextf("invalid '%s' argument", "data")
+#. R/edit.R: gettextf("invalid '%s' argument", "modes")
+#. R/edit.R: gettextf("invalid '%s' argument", "x")
+#. R/help.R: gettextf("invalid '%s' argument", "file")
+#. R/packages.R: gettextf("invalid '%s' argument", "filters")
+#. R/packages.R: gettextf("invalid '%s' argument", "type")
+#. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
+#. R/sock.R: gettextf("invalid '%s' argument", "socket")
+#. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 #, fuzzy
-msgid "invalid %s argument"
+msgid "invalid '%s' argument"
 msgstr "Ugyldigt argument for »filter«."
 
 #. R/write.table.R: stop("invalid 'col.names' specification")
@@ -1330,24 +1334,6 @@ msgstr "Ugyldigt argument for »filter«."
 #, fuzzy
 msgid "invalid 'col.names' specification"
 msgstr "Ugyldige rollespecifikationer: %s."
-
-#. R/edit.R: stop("invalid 'data' argument")
-#: R/edit.R:0
-#, fuzzy
-msgid "invalid 'data' argument"
-msgstr "Ugyldigt argument for »filter«."
-
-#. R/packages.R: stop("invalid 'filters' argument.")
-#: R/packages.R:0
-#, fuzzy
-msgid "invalid 'filters' argument."
-msgstr "Ugyldigt argument for »filter«."
-
-#. R/edit.R: stop("invalid 'modes' argument")
-#: R/edit.R:0
-#, fuzzy
-msgid "invalid 'modes' argument"
-msgstr "Ugyldigt argument for »filter«."
 
 #. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
 #: R/head.R:0
@@ -1395,30 +1381,6 @@ msgstr "Ugyldigt argument for »filter«."
 #, fuzzy
 msgid "invalid 'row.names' specification"
 msgstr "Ugyldige rollespecifikationer: %s."
-
-#. R/sock.R: stop("invalid 'socket' argument")
-#: R/sock.R:0
-#, fuzzy
-msgid "invalid 'socket' argument"
-msgstr "Ugyldigt argument for »filter«."
-
-#. R/tar.R: stop("invalid 'tarfile' argument")
-#: R/tar.R:0
-#, fuzzy
-msgid "invalid 'tarfile' argument"
-msgstr "Ugyldigt argument for »filter«."
-
-#. R/packages.R: stop("invalid 'type'")
-#: R/packages.R:0
-#, fuzzy
-msgid "invalid 'type'"
-msgstr "Ugyldigt argument for »filter«."
-
-#. R/edit.R: stop("invalid 'x' argument")
-#: R/edit.R:0
-#, fuzzy
-msgid "invalid 'x' argument"
-msgstr "Ugyldigt argument for »filter«."
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -2358,6 +2320,41 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "Filter »%s« er ikke tilgængelig."
 msgstr[1] "Filter »%s« er ikke tilgængelig."
+
+#~ msgid "Invalid 'filter' argument."
+#~ msgstr "Ugyldigt argument for »filter«."
+
+#, fuzzy
+#~ msgid "invalid 'type'"
+#~ msgstr "Ugyldigt argument for »filter«."
+
+#, fuzzy
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "Ugyldigt argument for »filter«."
+
+#, fuzzy
+#~ msgid "invalid %s argument"
+#~ msgstr "Ugyldigt argument for »filter«."
+
+#, fuzzy
+#~ msgid "invalid 'data' argument"
+#~ msgstr "Ugyldigt argument for »filter«."
+
+#, fuzzy
+#~ msgid "invalid 'modes' argument"
+#~ msgstr "Ugyldigt argument for »filter«."
+
+#, fuzzy
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "Ugyldigt argument for »filter«."
+
+#, fuzzy
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "Ugyldigt argument for »filter«."
+
+#, fuzzy
+#~ msgid "invalid 'x' argument"
+#~ msgstr "Ugyldigt argument for »filter«."
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"

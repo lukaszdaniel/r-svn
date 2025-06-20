@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 15:02\n"
+"POT-Creation-Date: 2025-06-20 20:11\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -535,11 +535,6 @@ msgstr "Jei naršyklė, kurią paleido '%s', jau paleista, ji yra *ne* iš naujo
 #: R/indices.R:0
 msgid "Invalid \"Built\":"
 msgstr "Neleistinas \"Built\":"
-
-#. R/aspell.R: stop("Invalid 'filter' argument.")
-#: R/aspell.R:0
-msgid "Invalid 'filter' argument."
-msgstr "Neleistinas 'filter' argumentas."
 
 #. R/widgets.R: gettext("Invalid input, please try again\n")
 #: R/widgets.R:0
@@ -1317,31 +1312,26 @@ msgstr "nepavyko atsisiųsti paketo %s"
 msgid "installation of package %s had non-zero exit status"
 msgstr "paketo %s diegimas turėjo ne nulinio išėjimo būseną"
 
-#. R/help.R: gettextf("invalid %s argument", sQuote("file"))
-#. R/packages2.R: gettextf("invalid %s argument", sQuote("keep_outputs"))
-#: R/help.R:0 R/packages2.R:0
-msgid "invalid %s argument"
+#. R/aspell.R: gettextf("invalid '%s' argument", "filter")
+#. R/edit.R: gettextf("invalid '%s' argument", "data")
+#. R/edit.R: gettextf("invalid '%s' argument", "modes")
+#. R/edit.R: gettextf("invalid '%s' argument", "x")
+#. R/help.R: gettextf("invalid '%s' argument", "file")
+#. R/packages.R: gettextf("invalid '%s' argument", "filters")
+#. R/packages.R: gettextf("invalid '%s' argument", "type")
+#. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
+#. R/sock.R: gettextf("invalid '%s' argument", "socket")
+#. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
 msgstr "neleistinas argumentas %s"
 
 #. R/write.table.R: stop("invalid 'col.names' specification")
 #: R/write.table.R:0
 msgid "invalid 'col.names' specification"
 msgstr "neleistina 'col.names' specifikacija"
-
-#. R/edit.R: stop("invalid 'data' argument")
-#: R/edit.R:0
-msgid "invalid 'data' argument"
-msgstr "neleistinas 'data' argumentas"
-
-#. R/packages.R: stop("invalid 'filters' argument.")
-#: R/packages.R:0
-msgid "invalid 'filters' argument."
-msgstr "netinkamas 'filters' argumentas."
-
-#. R/edit.R: stop("invalid 'modes' argument")
-#: R/edit.R:0
-msgid "invalid 'modes' argument"
-msgstr "netinkamas 'modes' argumentas"
 
 #. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
 #: R/head.R:0
@@ -1386,26 +1376,6 @@ msgstr "neleistinas 'row.names' ilgis"
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 msgid "invalid 'row.names' specification"
 msgstr "neleistina 'row.names' specifikacija"
-
-#. R/sock.R: stop("invalid 'socket' argument")
-#: R/sock.R:0
-msgid "invalid 'socket' argument"
-msgstr "neleistinas 'socket' argumentas"
-
-#. R/tar.R: stop("invalid 'tarfile' argument")
-#: R/tar.R:0
-msgid "invalid 'tarfile' argument"
-msgstr "netinkamas 'tarfile' argumentas"
-
-#. R/packages.R: stop("invalid 'type'")
-#: R/packages.R:0
-msgid "invalid 'type'"
-msgstr "neleistinas 'type'"
-
-#. R/edit.R: stop("invalid 'x' argument")
-#: R/edit.R:0
-msgid "invalid 'x' argument"
-msgstr "neleistinas 'x' argumentas"
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -2364,6 +2334,33 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "paketas %s negalimas (%s)"
 msgstr[1] "paketai %s negalimi (%s)"
 msgstr[2] "%s paketų yra negalimi (%s)"
+
+#~ msgid "Invalid 'filter' argument."
+#~ msgstr "Neleistinas 'filter' argumentas."
+
+#~ msgid "invalid 'type'"
+#~ msgstr "neleistinas 'type'"
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "netinkamas 'filters' argumentas."
+
+#~ msgid "invalid %s argument"
+#~ msgstr "neleistinas argumentas %s"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "neleistinas 'data' argumentas"
+
+#~ msgid "invalid 'modes' argument"
+#~ msgstr "netinkamas 'modes' argumentas"
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "neleistinas 'socket' argumentas"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "netinkamas 'tarfile' argumentas"
+
+#~ msgid "invalid 'x' argument"
+#~ msgstr "neleistinas 'x' argumentas"
 
 #~ msgid "cannot choose a"
 #~ msgstr "negali pasirinkti"

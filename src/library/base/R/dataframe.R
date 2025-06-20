@@ -84,11 +84,10 @@ row.names.default <- function(x) if(!is.null(dim(x))) rownames(x)# else NULL
         if(isFALSE(make.names)) {
             nonuniq <- sort(unique(value[duplicated(value)]))
             ## warning + stop ?? FIXME: s/warning/stop/ and drop (2nd) stop ??
-            warning(ngettext(length(nonuniq),
-                             sprintf("non-unique value when setting 'row.names': %s",
-                                     sQuote(nonuniq[1L])),
-                             sprintf("non-unique values when setting 'row.names': %s",
-                                     paste(sQuote(nonuniq), collapse = ", "))),
+            warning(sprintf(ngettext(length(nonuniq),
+                         "non-unique value when setting 'row.names': %s",
+                         "non-unique values when setting 'row.names': %s", domain = "R-base"),
+                                 paste(sQuote(nonuniq), collapse = ", ")),
                 domain = NA, call. = FALSE)
             stop("duplicate 'row.names' are not allowed")
         }
@@ -436,7 +435,7 @@ data.frame <-
 		if(all(current == new) || all(current == ""))
 		    return(new)
 		stop(gettextf(
-		    "mismatch of row names in arguments of 'data.frame\', item %d", i),
+		    "mismatch of row names in arguments of 'data.frame', item %d", i),
 		    domain = NA)
 	    }
 	else function(current, new, i) {
@@ -1507,8 +1506,7 @@ print.data.frame <-
 		else row.names
 	print(m, ..., quote = quote, right = right, max = max)
 	if(omit)
-	    cat(" [ reached 'max' / getOption(\"max.print\") -- omitted",
-		n - n0, "rows ]\n")
+	    cat(sprintf(ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n", " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n", domain = "R-base"), n - n0))
     }
     invisible(x)
 }

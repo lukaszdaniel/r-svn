@@ -775,7 +775,7 @@ static void dradix(unsigned char *x, int *o, int n)
             push(thisgrpn);
         } else {
             if (colSize == 4) { // ready for merging in iradix ...
-                error("%s", _("Not yet used, still using iradix instead"));
+                error("%s", _("'colSize = 4' not yet used, still using iradix instead"));
                 for (int j = 0; j < thisgrpn; j++)
                     ((int *)radix_xsub)[j] = (int)twiddle(x, o[itmp+j]-1, order);
                 // this is why this xsub here can't be the same memory
@@ -863,7 +863,7 @@ static void dradix_r(unsigned char *xsub, int *osub, int n, int radix)
 	    thiscounts[i] = (itmp += thiscounts[i]);
     p = xsub + (n - 1) * colSize;
     if (colSize == 4) {
-	error("%s", _("Not yet used, still using iradix instead"));
+	error("%s", _("'colSize = 4' not yet used, still using iradix instead"));
 	for (int i = n - 1; i >= 0; i--) {
 	    int j = --thiscounts[*(p + RADIX_BYTE)];
 	    otmp[j] = osub[i];

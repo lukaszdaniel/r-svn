@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -556,6 +556,32 @@ msgstr "索引值出界(取'unit'子集时)"
 msgid "invalid \"gTree\" class"
 msgstr "\"gTree\"的类别无效"
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "'grob'参数值无效"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "'ask'的值无效"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 msgid "invalid 'alpha' value"
@@ -566,11 +592,6 @@ msgstr "'alpha'的值无效"
 msgid "invalid 'angle' in viewport"
 msgstr "视口里的'angle'值无效"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-msgid "invalid 'arrow' argument"
-msgstr "'arrow'参数无效"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 msgid "invalid 'at' location in 'axis'"
@@ -580,11 +601,6 @@ msgstr "'axis'里的'at'位置无效"
 #: R/unit.R:0
 msgid "invalid 'axis' or 'type'"
 msgstr "'axis'或'type'的值无效"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-msgid "invalid 'clip' value"
-msgstr "'clip'值无效"
 
 #. R/frames.R: stop("invalid 'col' specification")
 #: R/frames.R:0
@@ -606,11 +622,6 @@ msgstr "'ends'或'type'参数的值无效"
 msgid "invalid 'f'"
 msgstr "'f'的值无效"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-msgid "invalid 'frame'"
-msgstr "'frame'的值无效"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 msgid "invalid 'gPath'"
@@ -621,25 +632,10 @@ msgstr "'gPath'的值无效"
 msgid "invalid 'gp' slot"
 msgstr "'gp'类型的值无效"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-msgid "invalid 'gp' value"
-msgstr "'gp'的值无效"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 msgid "invalid 'grep' value"
 msgstr "'grep'的值无效"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-msgid "invalid 'grob'"
-msgstr "'grob'的值无效"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-msgid "invalid 'grob' argument"
-msgstr "'grob'参数值无效"
 
 #. R/grob.R: stop("invalid 'grob' class")
 #: R/grob.R:0
@@ -666,41 +662,10 @@ msgstr "视口里的'layout.pos.row'值无效"
 msgid "invalid 'linemitre' value"
 msgstr "'linemitre'的值无效"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-msgid "invalid 'listing'"
-msgstr "'listing'无效"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'mask' value"
-msgstr "'ask'的值无效"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 msgid "invalid 'n'"
 msgstr "'n'的值无效"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-msgid "invalid 'origin'"
-msgstr "'origin'的值无效"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-msgid "invalid 'print' argument"
-msgstr "'print'参数值无效"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-msgid "invalid 'result'"
-msgstr "'result'的值无效"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-msgid "invalid 'rot' value"
-msgstr "'rot'的值无效"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
 #: R/frames.R:0
@@ -711,11 +676,6 @@ msgstr "'row'或者是'col'的值无效(没有在框布局里有这样的单元�
 #: R/frames.R:0
 msgid "invalid 'row' specification"
 msgstr "'row'设定得无效"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-msgid "invalid 'theta'"
-msgstr "'theta'值无效"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -757,11 +717,6 @@ msgstr "水平定位无效"
 #: R/just.R:0
 msgid "invalid justification"
 msgstr "定位无效"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-msgid "invalid listing"
-msgstr "表无效"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -1015,6 +970,42 @@ msgstr[0] "'grob'名称无效"
 msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "视口名称无效"
+
+#~ msgid "invalid 'clip' value"
+#~ msgstr "'clip'值无效"
+
+#~ msgid "invalid 'frame'"
+#~ msgstr "'frame'的值无效"
+
+#~ msgid "invalid 'gp' value"
+#~ msgstr "'gp'的值无效"
+
+#~ msgid "invalid 'grob'"
+#~ msgstr "'grob'的值无效"
+
+#~ msgid "invalid 'listing'"
+#~ msgstr "'listing'无效"
+
+#~ msgid "invalid 'origin'"
+#~ msgstr "'origin'的值无效"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "'result'的值无效"
+
+#~ msgid "invalid 'rot' value"
+#~ msgstr "'rot'的值无效"
+
+#~ msgid "invalid 'theta'"
+#~ msgstr "'theta'值无效"
+
+#~ msgid "invalid listing"
+#~ msgstr "表无效"
+
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "'arrow'参数无效"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "'print'参数值无效"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "'x'参数必需是单元对象"

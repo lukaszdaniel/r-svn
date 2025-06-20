@@ -53,7 +53,7 @@ mccollect <- function(jobs, wait = TRUE, timeout = 0, intermediate = FALSE)
     pids <- if (inherits(jobs, "process") || is.list(jobs))
         processID(jobs) else jobs
     if (!length(pids)) return(NULL)
-    if (!is.numeric(pids)) stop("invalid 'jobs' argument")
+    if (!is.numeric(pids)) stop(gettextf("invalid '%s' argument", "jobs"))
     pids <- as.integer(pids)
     pnames <- as.character(pids)
     if (!inherits(jobs, "process") && is.list(jobs))

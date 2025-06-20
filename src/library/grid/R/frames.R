@@ -133,9 +133,9 @@ grid.place <- function(gPath, grob,
 placeGrob <- function(frame, grob,
                       row=NULL, col=NULL) {
   if (!inherits(frame, "frame"))
-    stop("invalid 'frame'")
+    stop(gettextf("invalid '%s' argument", "frame"))
   if (!is.grob(grob))
-    stop("invalid 'grob'")
+    stop(gettextf("invalid '%s' argument", "grob"))
   dim <- frameDim(frame)
   if (is.null(row))
     row <- c(1, dim[1L])
@@ -320,9 +320,9 @@ packGrob <- function(frame, grob,
                      force.width=FALSE, force.height=FALSE,
                      border=NULL, dynamic=FALSE) {
   if (!inherits(frame, "frame"))
-    stop("invalid 'frame'")
+    stop(gettextf("invalid '%s' argument", "frame"))
   if (!is.grob(grob))
-    stop("invalid 'grob'")
+    stop(gettextf("invalid '%s' argument", "grob"))
   # col/row can be given as a range, but I only want to know
   # about the min and max
   if (!is.null(col) && length(col) > 1) {

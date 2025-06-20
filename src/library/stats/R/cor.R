@@ -24,7 +24,7 @@ cor <- function(x, y = NULL, use = "everything",
     na.method <-
 	pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs",
 		      "everything", "na.or.complete"))
-    if(is.na(na.method)) stop("invalid 'use' argument")
+    if(is.na(na.method)) stop(gettextf("invalid '%s' argument", "use"))
     method <- match.arg(method)
     if(is.data.frame(y)) y <- as.matrix(y)
     if(is.data.frame(x)) x <- as.matrix(x)
@@ -127,7 +127,7 @@ cov <- function(x, y = NULL, use = "everything",
     na.method <-
 	pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs",
 		      "everything", "na.or.complete"))
-    if(is.na(na.method)) stop("invalid 'use' argument")
+    if(is.na(na.method)) stop(gettextf("invalid '%s' argument", "use"))
     method <- match.arg(method)
     if(is.data.frame(y)) y <- as.matrix(y)
     if(is.data.frame(x)) x <- as.matrix(x)
@@ -178,7 +178,7 @@ var <- function(x, y = NULL, na.rm = FALSE, use) {
     na.method <-
 	pmatch(use, c("all.obs", "complete.obs", "pairwise.complete.obs",
 		      "everything", "na.or.complete"))
-    if(is.na(na.method)) stop("invalid 'use' argument")
+    if(is.na(na.method)) stop(gettextf("invalid '%s' argument", "use"))
     if (is.data.frame(x)) x <- as.matrix(x) else if(!is.null(x)) stopifnot(is.atomic(x))
     if (is.data.frame(y)) y <- as.matrix(y) else if(!is.null(y)) stopifnot(is.atomic(y))
     .Call(C_cov, x, y, na.method, FALSE)

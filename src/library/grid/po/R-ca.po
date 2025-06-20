@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-04 19:56\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2024-03-19 03:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -622,6 +622,32 @@ msgstr "índex fora dels límits (\"unitat\" subajust)"
 msgid "invalid \"gTree\" class"
 msgstr "classe «gTree» no vàlida"
 
+#. R/frames.R: gettextf("invalid '%s' argument", "frame")
+#. R/frames.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "grob")
+#. R/grob.R: gettextf("invalid '%s' argument", "gPath")
+#. R/grob.R: gettextf("invalid '%s' argument", "grep")
+#. R/grob.R: gettextf("invalid '%s' argument", "result")
+#. R/ls.R: gettextf("invalid '%s' argument", "print")
+#. R/origin.R: gettextf("invalid '%s' argument", "origin")
+#. R/primitives.R: gettextf("invalid '%s' argument", "arrow")
+#. R/unit.R: gettextf("invalid '%s' argument", "theta")
+#. R/viewport.R: gettextf("invalid '%s' argument", "gp")
+#. R/viewport.R: gettextf("invalid '%s' argument", "clip")
+#. R/viewport.R: gettextf("invalid '%s' argument", "mask")
+#: R/frames.R:0 R/grob.R:0 R/ls.R:0 R/origin.R:0 R/primitives.R:0 R/unit.R:0
+#: R/viewport.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
+msgstr "argument «grob» no vàlid"
+
+#. R/ls.R: gettextf("invalid '%s' value", "listing")
+#. R/primitives.R: gettextf("invalid '%s' value", "rot")
+#: R/ls.R:0 R/primitives.R:0
+#, fuzzy
+msgid "invalid '%s' value"
+msgstr "el valor «mask» no és vàlid"
+
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
 #, fuzzy
@@ -634,12 +660,6 @@ msgstr "el valor «alpha» no és vàlid"
 msgid "invalid 'angle' in viewport"
 msgstr "«angle» no vàlid a l'àrea de visualització"
 
-#. R/primitives.R: stop("invalid 'arrow' argument")
-#: R/primitives.R:0
-#, fuzzy
-msgid "invalid 'arrow' argument"
-msgstr "argument «arrow» no vàlid"
-
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
 #, fuzzy
@@ -651,12 +671,6 @@ msgstr "posició «at» invàlida en «axis»"
 #, fuzzy
 msgid "invalid 'axis' or 'type'"
 msgstr "«axis» o «type» no vàlids"
-
-#. R/viewport.R: stop("invalid 'clip' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'clip' value"
-msgstr "el valor «clip» no és vàlid"
 
 #. R/frames.R: stop("invalid 'col' specification")
 #: R/frames.R:0
@@ -682,12 +696,6 @@ msgstr "argument «ends» o «type» no vàlid"
 msgid "invalid 'f'"
 msgstr "«f» no vàlid"
 
-#. R/frames.R: stop("invalid 'frame'")
-#: R/frames.R:0
-#, fuzzy
-msgid "invalid 'frame'"
-msgstr "«frame» no vàlid"
-
 #. R/grob.R: stop("invalid 'gPath'")
 #: R/grob.R:0
 #, fuzzy
@@ -700,29 +708,11 @@ msgstr "«gPath» no vàlid"
 msgid "invalid 'gp' slot"
 msgstr "ranura «gp» no vàlida"
 
-#. R/viewport.R: stop("invalid 'gp' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'gp' value"
-msgstr "el valor «gp» no és vàlid"
-
 #. R/grob.R: stop("invalid 'grep' value")
 #: R/grob.R:0
 #, fuzzy
 msgid "invalid 'grep' value"
 msgstr "valor «grep» no vàlid"
-
-#. R/frames.R: stop("invalid 'grob'")
-#: R/frames.R:0
-#, fuzzy
-msgid "invalid 'grob'"
-msgstr "«grob» no vàlid"
-
-#. R/grob.R: stop("invalid 'grob' argument")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid 'grob' argument"
-msgstr "argument «grob» no vàlid"
 
 #. R/grob.R: stop("invalid 'grob' class")
 #: R/grob.R:0
@@ -754,47 +744,11 @@ msgstr "«layout.pos.row» no és vàlid a l'àrea de visualització"
 msgid "invalid 'linemitre' value"
 msgstr "el valor «linemitre» no és vàlid"
 
-#. R/ls.R: stop("invalid 'listing'")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid 'listing'"
-msgstr "«listing» no vàlid"
-
-#. R/viewport.R: stop("invalid 'mask' value")
-#: R/viewport.R:0
-#, fuzzy
-msgid "invalid 'mask' value"
-msgstr "el valor «mask» no és vàlid"
-
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
 #, fuzzy
 msgid "invalid 'n'"
 msgstr "«n» no vàlid"
-
-#. R/origin.R: stop("invalid 'origin'")
-#: R/origin.R:0
-#, fuzzy
-msgid "invalid 'origin'"
-msgstr "«origin» no vàlid"
-
-#. R/ls.R: stop("invalid 'print' argument")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid 'print' argument"
-msgstr "argument «print» no vàlid"
-
-#. R/grob.R: stop("invalid 'result'")
-#: R/grob.R:0
-#, fuzzy
-msgid "invalid 'result'"
-msgstr "«resultat» no vàlid"
-
-#. R/primitives.R: stop("invalid 'rot' value")
-#: R/primitives.R:0
-#, fuzzy
-msgid "invalid 'rot' value"
-msgstr "el valor «rot» no és vàlid"
 
 #. R/frames.R: stop("invalid 'row' and/or 'col' (no such cell in frame layout)")
 #: R/frames.R:0
@@ -807,12 +761,6 @@ msgstr "«row» i/o «col» no vàlids (no existeix aquesta cel·la a la disposi
 #, fuzzy
 msgid "invalid 'row' specification"
 msgstr "especificació «row» no vàlida"
-
-#. R/unit.R: stop("invalid 'theta'")
-#: R/unit.R:0
-#, fuzzy
-msgid "invalid 'theta'"
-msgstr "«theta» no vàlid"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
@@ -861,12 +809,6 @@ msgstr "justificació horitzontal no vàlida"
 #, fuzzy
 msgid "invalid justification"
 msgstr "justificació no vàlida"
-
-#. R/ls.R: stop("invalid listing")
-#: R/ls.R:0
-#, fuzzy
-msgid "invalid listing"
-msgstr "llistat no vàlid"
 
 #. R/grid.R: stop("invalid modification of the display list")
 #: R/grid.R:0
@@ -1164,3 +1106,51 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "el nom de l'àrea de visualització no és vàlid"
 msgstr[1] "els noms de les àrees de visualització no són vàlids"
+
+#, fuzzy
+#~ msgid "invalid 'clip' value"
+#~ msgstr "el valor «clip» no és vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'frame'"
+#~ msgstr "«frame» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'gp' value"
+#~ msgstr "el valor «gp» no és vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'grob'"
+#~ msgstr "«grob» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'listing'"
+#~ msgstr "«listing» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'origin'"
+#~ msgstr "«origin» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'result'"
+#~ msgstr "«resultat» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'rot' value"
+#~ msgstr "el valor «rot» no és vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'theta'"
+#~ msgstr "«theta» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid listing"
+#~ msgstr "llistat no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "argument «arrow» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'print' argument"
+#~ msgstr "argument «print» no vàlid"

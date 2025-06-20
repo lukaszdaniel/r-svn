@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 16:44\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2018-04-09 12:05-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -157,6 +157,12 @@ msgstr "'%s'는 아직 구현되지 않았습니다"
 msgid "'%s' is not meaningful for ordered factors"
 msgstr "순서형 요인(ordered factors)에 대하여 의미가 있는 '%s'가 아닙니다."
 
+#. R/tapply.R: gettextf("'%s' is of length 0", "INDEX")
+#: R/tapply.R:0
+#, fuzzy
+msgid "'%s' is of length 0"
+msgstr "'by'는 반드시 길이가 1이어야 합니다"
+
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
 msgid "'%s' is only meaningful for ordered factors if all arguments have the same level sets"
@@ -260,11 +266,6 @@ msgstr "순서형 요인들에 정의되지 않은 '%s'입니다"
 #: R/library.R:0
 msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
 msgstr "'DESCRIPTION'은 'Encoding' 항목을 가지고 있으며 재인코딩은 불가능합니다"
-
-#. R/tapply.R: stop("'INDEX' is of length zero")
-#: R/tapply.R:0
-msgid "'INDEX' is of length zero"
-msgstr "'INDEX'의 길이가 0입니다"
 
 #. R/apply.R: stop("'MARGIN' does not match dim(X)")
 #. R/array.R: stop("'MARGIN' does not match dim(X)")
@@ -2871,6 +2872,12 @@ msgstr "잘못된 클래스입니다"
 msgid "wrong sign in 'by' argument"
 msgstr "'by'인자내에 잘못된 부호가 있습니다"
 
+#. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n",     domain = "R-base")
+#: R/dataframe.R:0
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n"
+msgid_plural " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n"
+msgstr[0] ""
+
 #. R/warnings.R: ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n",     domain = "R-base")
 #: R/warnings.R:0
 msgid "%d identical warning:\n"
@@ -2998,6 +3005,12 @@ msgid "non-numeric-alike variable in data frame: "
 msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0] "데이터 프레임에 수치형이 아닌 변수가 있습니다."
 
+#. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s",     "non-unique values when setting 'row.names': %s", domain = "R-base")
+#: R/dataframe.R:0
+msgid "non-unique value when setting 'row.names': %s"
+msgid_plural "non-unique values when setting 'row.names': %s"
+msgstr[0] ""
+
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
 #, fuzzy
@@ -3089,6 +3102,9 @@ msgstr[0] ""
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "호출된 패키지(들)가 없습니다."
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX'의 길이가 0입니다"
 
 #~ msgid "invalid 'digits'"
 #~ msgstr "유효하지 않은 'digits'입니다"

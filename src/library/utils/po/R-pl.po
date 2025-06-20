@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 15:02\n"
-"PO-Revision-Date: 2025-05-23 21:21+0200\n"
+"POT-Creation-Date: 2025-06-20 20:11\n"
+"PO-Revision-Date: 2025-06-20 20:08+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -529,11 +529,6 @@ msgstr "Jeśli przeglądarka uruchomiona przez '%s' już działa, *nie* zostanie
 #: R/indices.R:0
 msgid "Invalid \"Built\":"
 msgstr "Niepoprawne \"Built\":"
-
-#. R/aspell.R: stop("Invalid 'filter' argument.")
-#: R/aspell.R:0
-msgid "Invalid 'filter' argument."
-msgstr "niepoprawny argument 'filter'."
 
 #. R/widgets.R: gettext("Invalid input, please try again\n")
 #: R/widgets.R:0
@@ -1302,31 +1297,25 @@ msgstr "instalacja pakietu %s nie powiodła się"
 msgid "installation of package %s had non-zero exit status"
 msgstr "instalacja pakietu %s miała niezerowy status wyjścia"
 
-#. R/help.R: gettextf("invalid %s argument", sQuote("file"))
-#. R/packages2.R: gettextf("invalid %s argument", sQuote("keep_outputs"))
-#: R/help.R:0 R/packages2.R:0
-msgid "invalid %s argument"
+#. R/aspell.R: gettextf("invalid '%s' argument", "filter")
+#. R/edit.R: gettextf("invalid '%s' argument", "data")
+#. R/edit.R: gettextf("invalid '%s' argument", "modes")
+#. R/edit.R: gettextf("invalid '%s' argument", "x")
+#. R/help.R: gettextf("invalid '%s' argument", "file")
+#. R/packages.R: gettextf("invalid '%s' argument", "filters")
+#. R/packages.R: gettextf("invalid '%s' argument", "type")
+#. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
+#. R/sock.R: gettextf("invalid '%s' argument", "socket")
+#. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
+msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
 #. R/write.table.R: stop("invalid 'col.names' specification")
 #: R/write.table.R:0
 msgid "invalid 'col.names' specification"
 msgstr "niepoprawne określenie 'col.names'"
-
-#. R/edit.R: stop("invalid 'data' argument")
-#: R/edit.R:0
-msgid "invalid 'data' argument"
-msgstr "niepoprawny argument 'data'"
-
-#. R/packages.R: stop("invalid 'filters' argument.")
-#: R/packages.R:0
-msgid "invalid 'filters' argument."
-msgstr "niepoprawny argument 'filters'."
-
-#. R/edit.R: stop("invalid 'modes' argument")
-#: R/edit.R:0
-msgid "invalid 'modes' argument"
-msgstr "niepoprawny argument 'modes'"
 
 #. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
 #: R/head.R:0
@@ -1370,26 +1359,6 @@ msgstr "niepoprawna długość 'row.names'"
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 msgid "invalid 'row.names' specification"
 msgstr "niepoprawne określenie 'row.names'"
-
-#. R/sock.R: stop("invalid 'socket' argument")
-#: R/sock.R:0
-msgid "invalid 'socket' argument"
-msgstr "niepoprawny argument 'socket'"
-
-#. R/tar.R: stop("invalid 'tarfile' argument")
-#: R/tar.R:0
-msgid "invalid 'tarfile' argument"
-msgstr "niepoprawny argument 'tarfile'"
-
-#. R/packages.R: stop("invalid 'type'")
-#: R/packages.R:0
-msgid "invalid 'type'"
-msgstr "niepoprawny argument 'type'"
-
-#. R/edit.R: stop("invalid 'x' argument")
-#: R/edit.R:0
-msgid "invalid 'x' argument"
-msgstr "niepoprawny argument 'x'"
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -2348,6 +2317,33 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "pakiet %s nie jest dostępny (%s)"
 msgstr[1] "pakiety %s nie są dostępne (%s)"
 msgstr[2] "pakiety %s nie są dostępne (%s)"
+
+#~ msgid "Invalid 'filter' argument."
+#~ msgstr "niepoprawny argument 'filter'."
+
+#~ msgid "invalid 'type'"
+#~ msgstr "niepoprawny argument 'type'"
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "niepoprawny argument 'filters'."
+
+#~ msgid "invalid %s argument"
+#~ msgstr "niepoprawny argument '%s'"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "niepoprawny argument 'data'"
+
+#~ msgid "invalid 'modes' argument"
+#~ msgstr "niepoprawny argument 'modes'"
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "niepoprawny argument 'socket'"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "niepoprawny argument 'tarfile'"
+
+#~ msgid "invalid 'x' argument"
+#~ msgstr "niepoprawny argument 'x'"
 
 #~ msgid "cannot choose a"
 #~ msgstr "nie można wybrać serwera lustrzanego"

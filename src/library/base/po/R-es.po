@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 16:44\n"
+"POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2024-03-20 03:05+0000\n"
 "Last-Translator: \"Luis D. Verde Arregoitia\" <luisd@ciencias.unam.mx>\n"
 "Language-Team: none\n"
@@ -159,6 +159,12 @@ msgstr "'%s' no es una elección válida"
 msgid "'%s' is not meaningful for ordered factors"
 msgstr "'%s' no es significativo para factores ordenados"
 
+#. R/tapply.R: gettextf("'%s' is of length 0", "INDEX")
+#: R/tapply.R:0
+#, fuzzy
+msgid "'%s' is of length 0"
+msgstr "«by» debe ser de longitud 1"
+
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
 #, fuzzy
@@ -265,12 +271,6 @@ msgstr "'%s' no está definido para factores ordenados"
 #: R/library.R:0
 msgid "'DESCRIPTION' has an 'Encoding' field and re-encoding is not possible"
 msgstr "'DESCRIPTION' tiene un campo 'Encoding' y la re-codificación no es posible"
-
-#. R/tapply.R: stop("'INDEX' is of length zero")
-#: R/tapply.R:0
-#, fuzzy
-msgid "'INDEX' is of length zero"
-msgstr "«by» debe ser de longitud 1"
 
 #. R/apply.R: stop("'MARGIN' does not match dim(X)")
 #. R/array.R: stop("'MARGIN' does not match dim(X)")
@@ -2954,6 +2954,14 @@ msgstr "clase incorrecta"
 msgid "wrong sign in 'by' argument"
 msgstr "argumento 'name' es inválido"
 
+#. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n",     domain = "R-base")
+#: R/dataframe.R:0
+#, fuzzy
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n"
+msgid_plural " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n"
+msgstr[0] "'max' / getOption(\"max.print\") inválido:"
+msgstr[1] "'max' / getOption(\"max.print\") inválido:"
+
 #. R/warnings.R: ngettext(sum(cn), "%d identical warning:\n", "%d identical warnings:\n",     domain = "R-base")
 #: R/warnings.R:0
 msgid "%d identical warning:\n"
@@ -3098,6 +3106,13 @@ msgid_plural "non-numeric-alike variables in data frame: "
 msgstr[0] "Variable(s) no numérica(s) en el data frame:"
 msgstr[1] "Variable(s) no numérica(s) en el data frame:"
 
+#. R/dataframe.R: ngettext(length(nonuniq), "non-unique value when setting 'row.names': %s",     "non-unique values when setting 'row.names': %s", domain = "R-base")
+#: R/dataframe.R:0
+msgid "non-unique value when setting 'row.names': %s"
+msgid_plural "non-unique values when setting 'row.names': %s"
+msgstr[0] ""
+msgstr[1] ""
+
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
 msgid "object %s is not exported by 'namespace:%s'"
@@ -3203,6 +3218,10 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "no hay paquete llamado %s"
 msgstr[1] "no hay paquete llamado %s"
+
+#, fuzzy
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "«by» debe ser de longitud 1"
 
 #, fuzzy
 #~ msgid "invalid 'digits'"

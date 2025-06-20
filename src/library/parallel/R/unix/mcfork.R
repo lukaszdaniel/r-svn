@@ -47,7 +47,7 @@ readChildren <- function(timeout = 0)
 readChild <- function(child)
 {
     if (inherits(child, "process")) child <- processID(child)
-    if (!is.numeric(child)) stop("invalid 'child' argument")
+    if (!is.numeric(child)) stop(gettextf("invalid '%s' argument", "child"))
     .Call(C_mc_read_child, as.integer(child))
 }
 
@@ -70,7 +70,7 @@ selectChildren <- function(children = NULL, timeout = 0)
 rmChild <- function(child)
 {
     if (inherits(child, "process")) child <- processID(child)
-    if (!is.numeric(child)) stop("invalid 'child' argument")
+    if (!is.numeric(child)) stop(gettextf("invalid '%s' argument", "child"))
     .Call(C_mc_rm_child, as.integer(child))
 }
 

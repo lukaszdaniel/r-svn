@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-19 15:02\n"
+"POT-Creation-Date: 2025-06-20 20:11\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -540,11 +540,6 @@ msgstr "如果由 '%s' 開啟的瀏覽器已經在執行的話，它 * 不會 * 
 #: R/indices.R:0
 msgid "Invalid \"Built\":"
 msgstr "無效的 \"Built\"："
-
-#. R/aspell.R: stop("Invalid 'filter' argument.")
-#: R/aspell.R:0
-msgid "Invalid 'filter' argument."
-msgstr "'filter' 引數無效"
 
 #. R/widgets.R: gettext("Invalid input, please try again\n")
 #: R/widgets.R:0
@@ -1323,31 +1318,26 @@ msgstr "下載程式套件 %s 時出了問題"
 msgid "installation of package %s had non-zero exit status"
 msgstr "安裝程式套件 %s 時退離狀態的值不是 0"
 
-#. R/help.R: gettextf("invalid %s argument", sQuote("file"))
-#. R/packages2.R: gettextf("invalid %s argument", sQuote("keep_outputs"))
-#: R/help.R:0 R/packages2.R:0
-msgid "invalid %s argument"
+#. R/aspell.R: gettextf("invalid '%s' argument", "filter")
+#. R/edit.R: gettextf("invalid '%s' argument", "data")
+#. R/edit.R: gettextf("invalid '%s' argument", "modes")
+#. R/edit.R: gettextf("invalid '%s' argument", "x")
+#. R/help.R: gettextf("invalid '%s' argument", "file")
+#. R/packages.R: gettextf("invalid '%s' argument", "filters")
+#. R/packages.R: gettextf("invalid '%s' argument", "type")
+#. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
+#. R/sock.R: gettextf("invalid '%s' argument", "socket")
+#. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
+#, fuzzy
+msgid "invalid '%s' argument"
 msgstr "%s 引數無效"
 
 #. R/write.table.R: stop("invalid 'col.names' specification")
 #: R/write.table.R:0
 msgid "invalid 'col.names' specification"
 msgstr "'col.names' 設定得無效"
-
-#. R/edit.R: stop("invalid 'data' argument")
-#: R/edit.R:0
-msgid "invalid 'data' argument"
-msgstr "'data' 引數無效"
-
-#. R/packages.R: stop("invalid 'filters' argument.")
-#: R/packages.R:0
-msgid "invalid 'filters' argument."
-msgstr "'filters' 引數不對。"
-
-#. R/edit.R: stop("invalid 'modes' argument")
-#: R/edit.R:0
-msgid "invalid 'modes' argument"
-msgstr "'modes' 引數無效"
 
 #. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
 #: R/head.R:0
@@ -1391,27 +1381,6 @@ msgstr "'row.names' 的長度設定得無效"
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 msgid "invalid 'row.names' specification"
 msgstr "'row.names' 設定得無效"
-
-#. R/sock.R: stop("invalid 'socket' argument")
-#: R/sock.R:0
-msgid "invalid 'socket' argument"
-msgstr "'socket' 引數無效"
-
-#. R/tar.R: stop("invalid 'tarfile' argument")
-#: R/tar.R:0
-msgid "invalid 'tarfile' argument"
-msgstr "'tarfile' 引數無效"
-
-#. R/packages.R: stop("invalid 'type'")
-#: R/packages.R:0
-#, fuzzy
-msgid "invalid 'type'"
-msgstr "詢問無效"
-
-#. R/edit.R: stop("invalid 'x' argument")
-#: R/edit.R:0
-msgid "invalid 'x' argument"
-msgstr "'x' 引數無效"
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -2304,6 +2273,34 @@ msgstr[0] "正在使用 %s 這個程式套件，因此不會被安裝"
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
+
+#~ msgid "Invalid 'filter' argument."
+#~ msgstr "'filter' 引數無效"
+
+#, fuzzy
+#~ msgid "invalid 'type'"
+#~ msgstr "詢問無效"
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "'filters' 引數不對。"
+
+#~ msgid "invalid %s argument"
+#~ msgstr "%s 引數無效"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "'data' 引數無效"
+
+#~ msgid "invalid 'modes' argument"
+#~ msgstr "'modes' 引數無效"
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "'socket' 引數無效"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "'tarfile' 引數無效"
+
+#~ msgid "invalid 'x' argument"
+#~ msgstr "'x' 引數無效"
 
 #~ msgid "cannot choose a"
 #~ msgstr "無法選用一個"
