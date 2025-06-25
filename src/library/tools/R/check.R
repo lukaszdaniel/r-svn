@@ -6949,8 +6949,8 @@ add_dummies <- function(dir, Log)
         cat("Usage: R CMD check [options] pkgs",
             "",
             "Check R packages from package sources, which can be directories or",
-            "package 'tar' archives with extension '.tar.gz', '.tar.bz2',",
-            "'.tar.xz' or '.tgz'.",
+            "package 'tar' archives with extension '.tar', .tar.gz', '.tar.bz2',",
+            "'.tar.xz', '.tar.zstd' or '.tgz'.",
             "",
             "A variety of diagnostic checks on directory structure, index and",
             "control files are performed.  The package is installed into the log",
@@ -7552,8 +7552,25 @@ add_dummies <- function(dir, Log)
         } else if (file.exists(pkg)) {
             is_tar <- TRUE
             if (thispkg_subdirs == "default") thispkg_subdirs <- "yes-maybe"
-            pkgname0 <- sub("\\.(tar\\.gz|tgz|tar\\.bz2|tar\\.xz)$", "", pkgname0)
-            pkgname0 <- sub("_[0-9.-]*$", "", pkgname0)
+            ## pkgname0 <- sub("\\.(tar|tar\\.gz|tgz|tar\\.bz2|tar\\.xz|tar\\.zstd)$", "", pkgname0)
+            ## pkgname0 <- sub("_[0-9.-]*$", "", pkgname0)
+            ## look at the contents to find the package name
+            contents <- try(
+                utils::untar(pkg, list = TRUE,
+                             tar = Sys.getenv("R_INSTALL_TAR", "internal")))
+            if(inherits(contents, "try-error")) {
+                warning(sQuote(pkg), " is neither a tarball nor a directory, skipping\n",
+                        domain = NA, call. = FALSE, immediate. = TRUE)
+                next
+            }
+            if (length(contents) < 1L) {
+              warning(sQuote(pkg), " does not contain a directory, skipping\n",
+                      domain = NA, call. = FALSE, immediate. = TRUE)
+              next
+            } else {
+                ## some people omit the directory itself from the tarball
+                pkgname0 <- sub("/.*", "",  contents[1L])
+            }
         } else {
             warning(sQuote(pkg), " is neither a file nor directory, skipping\n",
                     domain = NA, call. = FALSE, immediate. = TRUE)
