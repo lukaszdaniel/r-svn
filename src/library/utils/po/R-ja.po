@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 20:11\n"
+"POT-Creation-Date: 2025-06-20 22:00\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1003,6 +1003,11 @@ msgstr "インポート名を決定することができません"
 msgid "cannot edit NULL row names"
 msgstr "NULL の行の名前は編集できません"
 
+#. R/tar.R: stop("cannot extract through symlink")
+#: R/tar.R:0
+msgid "cannot extract through symlink"
+msgstr ""
+
 #. R/unix/create.post.R: warning("cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'")
 #: R/unix/create.post.R:0
 msgid "cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
@@ -1035,6 +1040,11 @@ msgstr "MacOS X バイナリのパッケージをこのプラットフォーム�
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
 msgid "cannot remove prior installation of package %s"
 msgstr "パッケージ %s の既存のインストールを取り除くことが出来ませんでした"
+
+#. R/tar.R: gettextf("cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?",     sQuote(from), sQuote(fname))
+#: R/tar.R:0
+msgid "cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?"
+msgstr ""
 
 #. R/packages.R: stop("cannot set repositories non-interactively")
 #: R/packages.R:0
@@ -1169,7 +1179,8 @@ msgstr "引数 %s (%s) に対する表現式を評価中にエラー"
 msgid "every package depends on at least one other"
 msgstr "どのパッケージも少なくとも1つの他のパッケージに依存します"
 
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
 msgid "failed to copy %s to %s"
@@ -1183,6 +1194,7 @@ msgstr "%s を作成できませんでした"
 
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(exdir))
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(fname))
 #: R/tar.R:0
 msgid "failed to create directory %s"
 msgstr "ディレクトリ %s を作ることが出来ません"
@@ -1764,12 +1776,6 @@ msgstr ""
 msgid "path contains '..'"
 msgstr "%s へのパスは空白を含みます"
 
-#. R/tar.R: stop("path is empty")
-#: R/tar.R:0
-#, fuzzy
-msgid "path is empty"
-msgstr "'dump' が空です"
-
 #. R/tar.R: stop("path starts with '~'")
 #: R/tar.R:0
 msgid "path starts with '~'"
@@ -2279,6 +2285,10 @@ msgstr[0] "パッケージ %s は使用中のため、インストールされ�
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "パッケージ %s が利用できません (%s)"
+
+#, fuzzy
+#~ msgid "path is empty"
+#~ msgstr "'dump' が空です"
 
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "不正な 'filter' 引数"

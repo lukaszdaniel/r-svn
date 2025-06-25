@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 20:11\n"
+"POT-Creation-Date: 2025-06-20 22:00\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1000,6 +1000,11 @@ msgstr "無法決定匯入名稱"
 msgid "cannot edit NULL row names"
 msgstr "無法修改 NULL 列名稱"
 
+#. R/tar.R: stop("cannot extract through symlink")
+#: R/tar.R:0
+msgid "cannot extract through symlink"
+msgstr ""
+
 #. R/unix/create.post.R: warning("cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'")
 #: R/unix/create.post.R:0
 msgid "cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
@@ -1030,6 +1035,11 @@ msgstr "無法在此平臺下安裝 MacOS X 二進位程式套件"
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
 msgid "cannot remove prior installation of package %s"
 msgstr "無法將拆除原來安裝的程式套件 %s"
+
+#. R/tar.R: gettextf("cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?",     sQuote(from), sQuote(fname))
+#: R/tar.R:0
+msgid "cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?"
+msgstr ""
 
 #. R/packages.R: stop("cannot set repositories non-interactively")
 #: R/packages.R:0
@@ -1164,7 +1174,8 @@ msgstr "為引數 %s 評估表示式時發生了錯誤(%s)"
 msgid "every package depends on at least one other"
 msgstr "每個程式套件至少依賴其他另外一個程式字"
 
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
 msgid "failed to copy %s to %s"
@@ -1178,6 +1189,7 @@ msgstr "無法建立 %s"
 
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(exdir))
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(fname))
 #: R/tar.R:0
 msgid "failed to create directory %s"
 msgstr "無法建立目錄 %s"
@@ -1758,12 +1770,6 @@ msgstr ""
 msgid "path contains '..'"
 msgstr "參照 %s 的路徑裡不能有空格 ,"
 
-#. R/tar.R: stop("path is empty")
-#: R/tar.R:0
-#, fuzzy
-msgid "path is empty"
-msgstr "'dump' 是空的"
-
 #. R/tar.R: stop("path starts with '~'")
 #: R/tar.R:0
 msgid "path starts with '~'"
@@ -2273,6 +2279,10 @@ msgstr[0] "正在使用 %s 這個程式套件，因此不會被安裝"
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
+
+#, fuzzy
+#~ msgid "path is empty"
+#~ msgstr "'dump' 是空的"
 
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "'filter' 引數無效"

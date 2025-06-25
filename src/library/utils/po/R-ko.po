@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 20:11\n"
+"POT-Creation-Date: 2025-06-20 22:00\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -1002,6 +1002,11 @@ msgstr "사용가능한 이름을 결정할 수 없습니다"
 msgid "cannot edit NULL row names"
 msgstr "열의 이름이 NULL이면 편집할 수 없습니다"
 
+#. R/tar.R: stop("cannot extract through symlink")
+#: R/tar.R:0
+msgid "cannot extract through symlink"
+msgstr ""
+
 #. R/unix/create.post.R: warning("cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'")
 #: R/unix/create.post.R:0
 msgid "cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
@@ -1032,6 +1037,11 @@ msgstr "이 플랫폼에서는 macOS 바이너리 패키지들을  설치할 수
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
 msgid "cannot remove prior installation of package %s"
 msgstr "패키지 %s의 이전설치를 삭제할 수 없습니다"
+
+#. R/tar.R: gettextf("cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?",     sQuote(from), sQuote(fname))
+#: R/tar.R:0
+msgid "cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?"
+msgstr ""
 
 #. R/packages.R: stop("cannot set repositories non-interactively")
 #: R/packages.R:0
@@ -1166,7 +1176,8 @@ msgstr "인자 %s (%s)에 대한 표현식을 평가하려는데 에러가 발�
 msgid "every package depends on at least one other"
 msgstr "모든 패키지는 최소한 한 개이상의 다른 패키지들과 의존관계에 놓여있습니다"
 
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
 msgid "failed to copy %s to %s"
@@ -1180,6 +1191,7 @@ msgstr "%s를 생성하는데 실패했습니다"
 
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(exdir))
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(fname))
 #: R/tar.R:0
 msgid "failed to create directory %s"
 msgstr "디렉토리 %s를 생성하는데 실패했습니다"
@@ -1760,12 +1772,6 @@ msgstr ""
 msgid "path contains '..'"
 msgstr "%s의 위치를 지정하는 파일경로에 공백이 포함되어 있습니다."
 
-#. R/tar.R: stop("path is empty")
-#: R/tar.R:0
-#, fuzzy
-msgid "path is empty"
-msgstr "'dump'가 비어있습니다"
-
 #. R/tar.R: stop("path starts with '~'")
 #: R/tar.R:0
 msgid "path starts with '~'"
@@ -2279,6 +2285,10 @@ msgstr[0] "패키지 %s가 사용중이므로 설치되지 않을 것입니다"
 msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "패키지 %s(들)이 사용가능하지 않습니다 (그 이유는 %s 입니다)"
+
+#, fuzzy
+#~ msgid "path is empty"
+#~ msgstr "'dump'가 비어있습니다"
 
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "인자 'filter'가 올바르지 않습니다."

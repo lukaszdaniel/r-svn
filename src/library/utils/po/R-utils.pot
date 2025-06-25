@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 20:11\n"
+"POT-Creation-Date: 2025-06-20 22:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1301,6 +1301,13 @@ msgid "cannot edit NULL row names"
 msgstr ""
 
 
+#: R/tar.R: 0
+#. R/tar.R: stop("cannot extract through symlink")
+
+msgid "cannot extract through symlink"
+msgstr ""
+
+
 #: R/unix/create.post.R: 0
 #. R/unix/create.post.R: warning("cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'")
 
@@ -1342,6 +1349,13 @@ msgstr ""
 #. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 
 msgid "cannot remove prior installation of package %s"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: gettextf("cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?",     sQuote(from), sQuote(fname))
+
+msgid "cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?"
 msgstr ""
 
 
@@ -1533,7 +1547,8 @@ msgstr ""
 
 
 #: R/tar.R: 0
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 
 msgid "failed to copy %s to %s"
@@ -1551,6 +1566,7 @@ msgstr ""
 #: R/tar.R: 0
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(exdir))
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(fname))
 
 msgid "failed to create directory %s"
 msgstr ""
@@ -2341,13 +2357,6 @@ msgstr ""
 #. R/tar.R: stop("path contains '..'")
 
 msgid "path contains '..'"
-msgstr ""
-
-
-#: R/tar.R: 0
-#. R/tar.R: stop("path is empty")
-
-msgid "path is empty"
 msgstr ""
 
 

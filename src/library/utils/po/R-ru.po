@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 20:11\n"
+"POT-Creation-Date: 2025-06-20 22:00\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -995,6 +995,11 @@ msgstr "не могу определить имя, которое можно в�
 msgid "cannot edit NULL row names"
 msgstr "не могу редактировать NULL-имена строк"
 
+#. R/tar.R: stop("cannot extract through symlink")
+#: R/tar.R:0
+msgid "cannot extract through symlink"
+msgstr ""
+
 #. R/unix/create.post.R: warning("cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'")
 #: R/unix/create.post.R:0
 msgid "cannot find program to open 'mailto:' URIs: reverting to 'method=\"none\"'"
@@ -1025,6 +1030,11 @@ msgstr "не могу установить бинарные пакеты  macOS 
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
 msgid "cannot remove prior installation of package %s"
 msgstr "не могу удалить прежнюю установку пакета %s"
+
+#. R/tar.R: gettextf("cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?",     sQuote(from), sQuote(fname))
+#: R/tar.R:0
+msgid "cannot restore symbolic link from %s to %s as a file copy, because the source doesn't exist; try extracting again?"
+msgstr ""
 
 #. R/packages.R: stop("cannot set repositories non-interactively")
 #: R/packages.R:0
@@ -1159,7 +1169,8 @@ msgstr "ошибка при попытке выполнить выражение
 msgid "every package depends on at least one other"
 msgstr "каждый пакет зависит по меньшей мере от одного другого"
 
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(name))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
+#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
 msgid "failed to copy %s to %s"
@@ -1173,6 +1184,7 @@ msgstr "не удалось создать %s"
 
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(exdir))
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
+#. R/tar.R: gettextf("failed to create directory %s", sQuote(fname))
 #: R/tar.R:0
 msgid "failed to create directory %s"
 msgstr "не могу создать каталог %s"
@@ -1742,11 +1754,6 @@ msgstr ""
 #: R/tar.R:0
 msgid "path contains '..'"
 msgstr "путь содержит '..'"
-
-#. R/tar.R: stop("path is empty")
-#: R/tar.R:0
-msgid "path is empty"
-msgstr "путь пуст"
 
 #. R/tar.R: stop("path starts with '~'")
 #: R/tar.R:0
@@ -2332,6 +2339,9 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "пакет '%s' недоступен (%s)"
 msgstr[1] "пакеты %s недоступны (%s)"
 msgstr[2] "пакеты %s недоступны (%s)"
+
+#~ msgid "path is empty"
+#~ msgstr "путь пуст"
 
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Неправильный аргумент 'filter'."
