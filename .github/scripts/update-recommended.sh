@@ -2,8 +2,7 @@
 # This is a script to replace original rec packages with the ones suited for CXXR.
 
 # List of recommended packages
-#REC_PKGS = "boot class cluster codetools foreign KernSmooth lattice MASS Matrix mgcv nlme nnet rpart spatial survival"
-REC_PKGS="boot cluster foreign lattice MASS Matrix mgcv nlme spatial survival"
+REC_PKGS="boot class cluster codetools foreign KernSmooth lattice MASS Matrix mgcv nlme nnet rpart spatial survival"
 
 # Navigate to the recommended library directory
 cd src/library/Recommended || exit
