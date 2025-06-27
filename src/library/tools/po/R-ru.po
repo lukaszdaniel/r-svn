@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 19:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2025-04-01 17:06+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -1415,11 +1415,6 @@ msgstr "Неизвестная кодировка с не-ASCII данными: 
 msgid "Unsupported engine name"
 msgstr "Неподдерживаемое имя устройства"
 
-#. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
-#: R/QC.R:0
-msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
-msgstr "Использует лицензию ACM: применимо только к коду из ACM TOMS до 2013 года"
-
 #. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])
 #: R/QC.R:0
 msgid "Variables in data frame '%s'"
@@ -2657,6 +2652,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "не могу перекодировать %s строку %s"
 msgstr[1] "не могу перекодировать %s строки %s"
 msgstr[2] "не могу перекодировать %s строки %s"
+
+#~ msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
+#~ msgstr "Использует лицензию ACM: применимо только к коду из ACM TOMS до 2013 года"
 
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Rd-файлы должны иметь непустое %s."

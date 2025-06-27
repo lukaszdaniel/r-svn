@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 11:39+0200\n"
+"POT-Creation-Date: 2025-06-27 19:51+0200\n"
 "PO-Revision-Date: 2018-04-09 12:11-0600\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -71,17 +71,17 @@ msgstr "알 수 없는 포맷 지정 '%s'입니다"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2757 gramRd.cpp:3965
+#: gramLatex.cpp:2850 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "라인 %d에 있는 긴 문자열에 대한 버퍼를 할당할 수 없습니다"
 
-#: gramLatex.cpp:3014 gramRd.cpp:4460
+#: gramLatex.cpp:3119 gramRd.cpp:4460
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "라인 %d에 있는 긴 문자열에 대한 버퍼를 할당할 수 없습니다"
 
-#: gramLatex.cpp:3056 gramRd.cpp:4511
+#: gramLatex.cpp:3161 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "유효하지 않은 '%s' 값입니다"

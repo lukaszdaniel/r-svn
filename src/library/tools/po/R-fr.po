@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 19:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2021-02-10 17:55+0100\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1431,11 +1431,6 @@ msgstr "Encodage inconnu avec des données non-ASCII : conversion vers ASCII"
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
 msgstr "Module de traitement non supporté"
-
-#. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
-#: R/QC.R:0
-msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
-msgstr ""
 
 #. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])
 #: R/QC.R:0

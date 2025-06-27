@@ -625,7 +625,9 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 	    }
 	    Rprintf("\n");
 	    if(n_pr < ns)
-		Rprintf(" [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n",
+		Rprintf(n_(" [ reached 'max' / getOption(\"max.print\") -- omitted %lld entry ]\n",
+			   " [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n",
+			   (long long)ns - n_pr),
 			(long long)ns - n_pr);
 	}
 	else { /* ns = length(s) == 0 */

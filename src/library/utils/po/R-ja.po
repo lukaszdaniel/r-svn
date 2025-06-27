@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 22:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1826,9 +1826,9 @@ msgstr "不正な多バイト文字データを持つ全ての項目を取り除
 msgid "removing drive '%s'"
 msgstr ""
 
-#. R/tar.R: warning("removing leading '/'")
+#. R/tar.R: gettextf("removing leading '/' from '%s'", path)
 #: R/tar.R:0
-msgid "removing leading '/'"
+msgid "removing leading '/' from '%s'"
 msgstr ""
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))

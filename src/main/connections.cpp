@@ -2893,7 +2893,7 @@ static Rboolean clp_open(Rconnection con)
 	   OpenClipboard(NULL) &&
 	   (hglb = GetClipboardData(CF_UNICODETEXT)) &&
 	   (wpc = (wchar_t *)GlobalLock(hglb))) {
-	    
+
 	    int len = (int)wcslen(wpc) * sizeof(wchar_t);
 	    this_->buff = (char *)malloc(len + 1);
 	    this_->last = this_->len = len;

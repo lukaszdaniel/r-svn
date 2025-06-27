@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 11:39+0200\n"
+"POT-Creation-Date: 2025-06-27 19:51+0200\n"
 "PO-Revision-Date: 2018-09-16 23:38+0800\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -71,17 +71,17 @@ msgstr "不明的格式設定 '%s'"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "每一個轉換設定最多只支援一個星 '*'"
 
-#: gramLatex.cpp:2757 gramRd.cpp:3965
+#: gramLatex.cpp:2850 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "無法為 %d 列的長字串指派緩衝區"
 
-#: gramLatex.cpp:3014 gramRd.cpp:4460
+#: gramLatex.cpp:3119 gramRd.cpp:4460
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "無法為 %d 列的長字串指派緩衝區"
 
-#: gramLatex.cpp:3056 gramRd.cpp:4511
+#: gramLatex.cpp:3161 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 值無效"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 18:45+0200\n"
+"POT-Creation-Date: 2025-06-27 19:50+0200\n"
 "PO-Revision-Date: 2024-03-22 18:05+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -216,11 +216,11 @@ msgstr "problema ao mostrar '%ls'"
 #: src/main/saveload.cpp:2387 src/main/saveload.cpp:2489 src/main/scan.cpp:708
 #: src/main/scan.cpp:887 src/main/scan.cpp:900 src/main/scan.cpp:904
 #: src/main/scan.cpp:906 src/main/scan.cpp:917 src/main/scan.cpp:947
-#: src/main/scan.cpp:1007 src/main/seq.cpp:700 src/main/seq.cpp:707
-#: src/main/seq.cpp:717 src/main/seq.cpp:723 src/main/seq.cpp:767
-#: src/main/seq.cpp:772 src/main/seq.cpp:775 src/main/seq.cpp:779
-#: src/main/seq.cpp:784 src/main/seq.cpp:791 src/main/seq.cpp:795
-#: src/main/seq.cpp:801 src/main/sysutils.cpp:646 src/main/sysutils.cpp:650
+#: src/main/scan.cpp:1007 src/main/seq.cpp:717 src/main/seq.cpp:724
+#: src/main/seq.cpp:734 src/main/seq.cpp:740 src/main/seq.cpp:784
+#: src/main/seq.cpp:789 src/main/seq.cpp:792 src/main/seq.cpp:796
+#: src/main/seq.cpp:801 src/main/seq.cpp:808 src/main/seq.cpp:812
+#: src/main/seq.cpp:818 src/main/sysutils.cpp:646 src/main/sysutils.cpp:650
 #: src/main/sysutils.cpp:654 src/main/sysutils.cpp:2971
 #: src/main/unique.cpp:1886 src/main/unique.cpp:1890 src/main/unique.cpp:2285
 #: src/main/unique.cpp:2290 src/main/util.cpp:716 src/main/util.cpp:719
@@ -714,7 +714,7 @@ msgid "input string x[%d] is invalid in this locale"
 msgstr "string de entrada x[%d] é inválida nesse locale"
 
 #: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
-#: src/main/print.cpp:1194 src/main/util.cpp:3206
+#: src/main/print.cpp:1196 src/main/util.cpp:3206
 #: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
 #: src/modules/X11/dataentry.cpp:452
 #, fuzzy, c-format
@@ -744,8 +744,8 @@ msgstr ""
 msgid "compact sequences with increment %f not supported yet"
 msgstr ""
 
-#: src/main/altclasses.cpp:588 src/main/seq.cpp:119 src/main/seq.cpp:891
-#: src/main/seq.cpp:1139
+#: src/main/altclasses.cpp:588 src/main/seq.cpp:119 src/main/seq.cpp:908
+#: src/main/seq.cpp:1156
 msgid "result would be too long a vector"
 msgstr "resultado seria um vetor muito longo"
 
@@ -1700,10 +1700,10 @@ msgstr "strtrim() requer um vetor de caracteres"
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
 #: src/main/dotcode.cpp:235 src/main/errors.cpp:1176 src/main/errors.cpp:1198
 #: src/main/errors.cpp:1316 src/main/errors.cpp:1323 src/main/errors.cpp:1586
-#: src/main/errors.cpp:2268 src/main/platform.cpp:3859 src/main/seq.cpp:268
-#: src/main/seq.cpp:275 src/main/seq.cpp:279 src/main/seq.cpp:389
-#: src/main/seq.cpp:396 src/main/seq.cpp:399 src/main/seq.cpp:401
-#: src/main/seq.cpp:458 src/main/seq.cpp:462 src/main/seq.cpp:466
+#: src/main/errors.cpp:2268 src/main/platform.cpp:3859 src/main/seq.cpp:275
+#: src/main/seq.cpp:282 src/main/seq.cpp:286 src/main/seq.cpp:396
+#: src/main/seq.cpp:403 src/main/seq.cpp:406 src/main/seq.cpp:408
+#: src/main/seq.cpp:465 src/main/seq.cpp:469 src/main/seq.cpp:473
 #: src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591
 #: src/main/source.cpp:230 src/main/sysutils.cpp:282 src/main/util.cpp:1215
 #: src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611
@@ -3294,7 +3294,7 @@ msgstr ""
 msgid "no arguments supplied"
 msgstr "nenhum argumento fornecido"
 
-#: src/main/dotcode.cpp:503 src/main/seq.cpp:1081
+#: src/main/dotcode.cpp:503 src/main/seq.cpp:1098
 msgid "too many arguments"
 msgstr "argumentos demais"
 
@@ -6594,37 +6594,44 @@ msgstr ""
 msgid "tagbuf overflow"
 msgstr "estouro do buffer de entrada na linha %d"
 
-#: src/main/print.cpp:851
+#: src/main/print.cpp:628
+#, fuzzy, c-format
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %lld entry ]\n"
+msgid_plural " [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n"
+msgstr[0] " [ atingido getOption(\"max.print\") -- última linha omitida ]]\n"
+msgstr[1] " [ atingido getOption(\"max.print\") -- últimas %d linhas omitidas ]]\n"
+
+#: src/main/print.cpp:853
 #, c-format
 msgid "<S4 object of class \"%s\">\n"
 msgstr ""
 
-#: src/main/print.cpp:854
+#: src/main/print.cpp:856
 #, c-format
 msgid "<S4 object of class \"%s\" from package '%s'>\n"
 msgstr ""
 
-#: src/main/print.cpp:1011
+#: src/main/print.cpp:1013
 #, fuzzy
 msgid "print buffer overflow"
 msgstr "estouro do buffer de entrada na linha %d"
 
-#: src/main/print.cpp:1142
+#: src/main/print.cpp:1144
 #, fuzzy
 msgid "invalid character length in 'dblepr'"
 msgstr "comprimento de caractere inválido em dblepr"
 
-#: src/main/print.cpp:1163
+#: src/main/print.cpp:1165
 #, fuzzy
 msgid "invalid character length in 'intpr'"
 msgstr "comprimento de caractere inválido em intpr"
 
-#: src/main/print.cpp:1184
+#: src/main/print.cpp:1186
 #, fuzzy
 msgid "invalid character length in 'realpr'"
 msgstr "comprimento de caractere inválido em realpr"
 
-#: src/main/print.cpp:1227
+#: src/main/print.cpp:1229
 #, c-format
 msgid "BLAS/LAPACK routine '%6s' gave error code %d"
 msgstr "rotina BLAS/LAPACK '%6s' teve um erro de código %d"
@@ -7532,111 +7539,111 @@ msgstr[1] "expressão numérica tem %d elementos: somente o primeiro usado"
 msgid "NA/NaN argument"
 msgstr "Argumento NA/NaN"
 
-#: src/main/seq.cpp:378
+#: src/main/seq.cpp:385
 #, fuzzy, c-format
 msgid "invalid type (%s) for '%s' (must be a vector)"
 msgstr "tipo inválido (%s) para 'dimnames' (deve ser um vetor)"
 
-#: src/main/seq.cpp:382 src/main/seq.cpp:740
+#: src/main/seq.cpp:389 src/main/seq.cpp:757
 #, fuzzy, c-format
 msgid "attempt to replicate an object of type '%s'"
 msgstr "tentativa de replicar um objeto diferente de vetor"
 
-#: src/main/seq.cpp:454
+#: src/main/seq.cpp:461
 msgid "attempt to replicate non-vector"
 msgstr "tentativa de replicar um objeto diferente de vetor"
 
-#: src/main/seq.cpp:469
+#: src/main/seq.cpp:476
 #, fuzzy
 msgid "cannot replicate NULL to a non-zero length"
 msgstr "não foi possível alocar vetor de comprimento %d"
 
-#: src/main/seq.cpp:692
+#: src/main/seq.cpp:709
 msgid "replication of pairlists is defunct"
 msgstr ""
 
-#: src/main/seq.cpp:710 src/main/seq.cpp:726 src/main/seq.cpp:887
-#: src/main/seq.cpp:1131
+#: src/main/seq.cpp:727 src/main/seq.cpp:743 src/main/seq.cpp:904
+#: src/main/seq.cpp:1148
 #, c-format
 msgid "first element used of '%s' argument"
 msgstr ""
 
-#: src/main/seq.cpp:731
+#: src/main/seq.cpp:748
 msgid "'x' is NULL so the result will be NULL"
 msgstr ""
 
-#: src/main/seq.cpp:865 src/main/seq.cpp:883 src/main/seq.cpp:902
-#: src/main/seq.cpp:909 src/main/seq.cpp:995 src/main/seq.cpp:996
-#: src/main/seq.cpp:1041 src/main/seq.cpp:1042 src/main/seq.cpp:1063
-#: src/main/seq.cpp:1064
+#: src/main/seq.cpp:882 src/main/seq.cpp:900 src/main/seq.cpp:919
+#: src/main/seq.cpp:926 src/main/seq.cpp:1012 src/main/seq.cpp:1013
+#: src/main/seq.cpp:1058 src/main/seq.cpp:1059 src/main/seq.cpp:1080
+#: src/main/seq.cpp:1081
 #, fuzzy, c-format
 msgid "'%s' must be a finite number"
 msgstr "'pos' deve ser um inteiro"
 
-#: src/main/seq.cpp:885
+#: src/main/seq.cpp:902
 msgid "'length.out' must be a non-negative number"
 msgstr "'length.out' deve ser um número não negativo"
 
-#: src/main/seq.cpp:899 src/main/seq.cpp:906 src/main/seq.cpp:914
+#: src/main/seq.cpp:916 src/main/seq.cpp:923 src/main/seq.cpp:931
 #, fuzzy, c-format
 msgid "'%s' must be of length 1"
 msgstr "'%s' deve ter comprimento 1"
 
-#: src/main/seq.cpp:935
+#: src/main/seq.cpp:952
 msgid "invalid '(to - from)/by'"
 msgstr "'(to - from)/by' inválido"
 
-#: src/main/seq.cpp:947
+#: src/main/seq.cpp:964
 msgid "'by' argument is much too small"
 msgstr "argumento 'by' é muito pequeno"
 
-#: src/main/seq.cpp:949
+#: src/main/seq.cpp:966
 msgid "wrong sign in 'by' argument"
 msgstr "sinal errado para argumento 'by'"
 
-#: src/main/seq.cpp:1100
+#: src/main/seq.cpp:1117
 msgid "'length' is not a BUILTIN"
 msgstr ""
 
-#: src/main/seq.cpp:1137 src/main/seq.cpp:1144
+#: src/main/seq.cpp:1154 src/main/seq.cpp:1161
 msgid "argument must be coercible to non-negative integer"
 msgstr "argumento deve ser coercível para um inteiro não-negativo"
 
-#: src/main/seq.cpp:1164
+#: src/main/seq.cpp:1181
 #, fuzzy
 msgid "'lengths' is not of mode integer"
 msgstr "argumento não é de modo caractere"
 
-#: src/main/seq.cpp:1167
+#: src/main/seq.cpp:1184
 #, fuzzy
 msgid "'from' is not of mode integer"
 msgstr "argumento não é de modo caractere"
 
-#: src/main/seq.cpp:1170
+#: src/main/seq.cpp:1187
 #, fuzzy
 msgid "'by' is not of mode integer"
 msgstr "argumento não é de modo caractere"
 
-#: src/main/seq.cpp:1177
+#: src/main/seq.cpp:1194
 #, fuzzy
 msgid "'from' has length 0, but not 'lengths'"
 msgstr "Comprimento do grupo é zero mas o comprimento dos dados é maior que zero"
 
-#: src/main/seq.cpp:1179
+#: src/main/seq.cpp:1196
 #, fuzzy
 msgid "'by' has length 0, but not 'lengths'"
 msgstr "Comprimento do grupo é zero mas o comprimento dos dados é maior que zero"
 
-#: src/main/seq.cpp:1186
+#: src/main/seq.cpp:1203
 #, fuzzy
 msgid "'lengths' must be a vector of non-negative integers"
 msgstr "'gap' deve ser um inteiro não negativo"
 
-#: src/main/seq.cpp:1201
+#: src/main/seq.cpp:1218
 msgid "'from' contains NAs"
 msgstr ""
 
-#: src/main/seq.cpp:1206
+#: src/main/seq.cpp:1223
 msgid "'by' contains NAs"
 msgstr ""
 
@@ -10557,12 +10564,6 @@ msgstr "X11 não está disponível"
 #, c-format
 #~ msgid "cannot allocate vector of size %0.1f Mb"
 #~ msgstr "não é possível alocar vetor de tamanho %0.1f Mb"
-
-#, fuzzy, c-format
-#~ msgid " [ reached getOption(\"max.print\") -- omitted %d row ]\n"
-#~ msgid_plural " [ reached getOption(\"max.print\") -- omitted %d rows ]\n"
-#~ msgstr[0] " [ atingido getOption(\"max.print\") -- última linha omitida ]]\n"
-#~ msgstr[1] " [ atingido getOption(\"max.print\") -- últimas %d linhas omitidas ]]\n"
 
 #, fuzzy
 #~ msgid "argument 'multiple' must be TRUE or FALSE"

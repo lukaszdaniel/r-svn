@@ -977,7 +977,7 @@ void setup_Rmainloop(void)
       If LANG or LC_ALL has been set to a non-existing locale, we assume
       that the user wants to ne informed. */
 
-    const char *s;	
+    const char *s;
 
     bool quiet = !( ((s = getenv("LANG")) && *s) || ((s = getenv("LC_ALL")) && *s) );
 

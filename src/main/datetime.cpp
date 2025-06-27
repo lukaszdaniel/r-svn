@@ -1067,7 +1067,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
        It controls setting TZ, the use of gmtime vs localtime, forcing
        isdst = 0 and how the "tzone" attribute is set.
     */
-    bool isUTC = (streql(tz, "GMT")  || streql(tz, "UTC"));
+    bool isUTC = (streql(tz, "GMT") || streql(tz, "UTC"));
 
     tzset_info tzsi;
     prepare_reset_tz(&tzsi);

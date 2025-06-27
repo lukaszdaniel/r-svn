@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 19:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1442,11 +1442,6 @@ msgstr "非 ASCII データをもつ未知のエンコーディングです: ASC
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
 msgstr "未サポートのエンジン名"
-
-#. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
-#: R/QC.R:0
-msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
-msgstr ""
 
 #. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])
 #: R/QC.R:0

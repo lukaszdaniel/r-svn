@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 22:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -1805,9 +1805,10 @@ msgstr "удаляю все вхождения с неправильными м�
 msgid "removing drive '%s'"
 msgstr "удаляю диск '%s'"
 
-#. R/tar.R: warning("removing leading '/'")
+#. R/tar.R: gettextf("removing leading '/' from '%s'", path)
 #: R/tar.R:0
-msgid "removing leading '/'"
+#, fuzzy
+msgid "removing leading '/' from '%s'"
 msgstr "удаляю стартовую '/'"
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))

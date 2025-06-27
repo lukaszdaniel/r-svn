@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 22:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2431,9 +2431,9 @@ msgstr ""
 
 
 #: R/tar.R: 0
-#. R/tar.R: warning("removing leading '/'")
+#. R/tar.R: gettextf("removing leading '/' from '%s'", path)
 
-msgid "removing leading '/'"
+msgid "removing leading '/' from '%s'"
 msgstr ""
 
 

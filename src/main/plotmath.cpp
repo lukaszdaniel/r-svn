@@ -559,7 +559,7 @@ typedef struct {
 
 static bool NameMatch(SEXP expr, const char *aString)
 {
-    if (!isSymbol(expr)) return 0;
+    if (!isSymbol(expr)) return false;
     return streql(CHAR(PRINTNAME(expr)), aString);
 }
 

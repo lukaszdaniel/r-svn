@@ -360,7 +360,9 @@ attribute_hidden void R::printVector(SEXP x, int indx, int quote)
 	    break;
 	}
 	if(n_pr < n)
-	    Rprintf(" [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n",
+	    Rprintf(n_(" [ reached 'max' / getOption(\"max.print\") -- omitted %lld entry ]\n",
+			" [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n",
+			(long long)n - n_pr),
 		    (long long)n - n_pr);
     }
     else

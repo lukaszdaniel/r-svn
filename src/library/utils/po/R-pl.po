@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 22:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2025-06-20 22:01+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1319,7 +1319,8 @@ msgstr "instalacja pakietu %s miała niezerowy status wyjścia"
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0 R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
@@ -1792,9 +1793,10 @@ msgstr "usuwanie wszystkich wpisów z niepoprawnymi danymi o wielobajtowych znak
 msgid "removing drive '%s'"
 msgstr "usuwanie napędu '%s'"
 
-#. R/tar.R: warning("removing leading '/'")
+#. R/tar.R: gettextf("removing leading '/' from '%s'", path)
 #: R/tar.R:0
-msgid "removing leading '/'"
+#, fuzzy
+msgid "removing leading '/' from '%s'"
 msgstr "usuwanie wiodących '/'"
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))

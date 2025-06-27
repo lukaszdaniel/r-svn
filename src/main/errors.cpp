@@ -583,7 +583,6 @@ void Rf_warningcall_immediate(SEXP call, const char *format, ...)
 attribute_hidden
 void R::PrintWarnings(const char *hdr)
 {
-    const char *header = nullptr;
     SEXP names;
     GCStackRoot<> s, t;
 
@@ -599,7 +598,7 @@ void R::PrintWarnings(const char *hdr)
     }
 
     inPrintWarnings = 1;
-    header = hdr ? hdr : n_("Warning message:", "Warning messages:",
+    const char *header = hdr ? hdr : n_("Warning message:", "Warning messages:",
 		      R_CollectWarnings);
 
     /* set up a context which will restore inPrintWarnings if there is
@@ -668,8 +667,8 @@ void R::PrintWarnings(const char *hdr)
     } else {
 	if (R_CollectWarnings < R_nwarnings)
 	    RWprintf(n_("There was %d warning (use 'warnings()' to see it)",
-			      "There were %d warnings (use 'warnings()' to see them)",
-			      R_CollectWarnings),
+			"There were %d warnings (use 'warnings()' to see them)",
+			R_CollectWarnings),
 		     R_CollectWarnings);
 	else
 	    RWprintf(_("There were %d or more warnings (use 'warnings()' to see the first %d)"),

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 22:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2024-03-18 21:18+0000\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -1796,9 +1796,10 @@ msgstr "removing all entries with invalid multi-byte character data"
 msgid "removing drive '%s'"
 msgstr "removing drive '%s'"
 
-#. R/tar.R: warning("removing leading '/'")
+#. R/tar.R: gettextf("removing leading '/' from '%s'", path)
 #: R/tar.R:0
-msgid "removing leading '/'"
+#, fuzzy
+msgid "removing leading '/' from '%s'"
 msgstr "removing leading '/'"
 
 #. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))

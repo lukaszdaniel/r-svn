@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 19:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2024-07-13 03:05+0000\n"
 "Last-Translator: Binod Jung Bogati <m1s1ng@outlook.com>\n"
 "Language-Team: none\n"
@@ -1364,11 +1364,6 @@ msgstr ""
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
-msgstr ""
-
-#. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
-#: R/QC.R:0
-msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
 msgstr ""
 
 #. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])

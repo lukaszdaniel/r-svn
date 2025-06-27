@@ -75,13 +75,16 @@ namespace CXXR
         Allocator() throw()
         {
         }
+
         Allocator(const Allocator &) throw()
         {
         }
+
         template <class U>
         Allocator(const Allocator<U> &) throw()
         {
         }
+
         ~Allocator() throw()
         {
         }
@@ -126,6 +129,7 @@ namespace CXXR
     {
         return true;
     }
+
     template <typename T1, typename T2>
     bool operator!=(const Allocator<T1> &,
                     const Allocator<T2> &) throw()

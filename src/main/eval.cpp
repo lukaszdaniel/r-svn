@@ -7511,25 +7511,25 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
     OP(DUP, 0): BCNDUP(); NEXT();
     OP(PRINTVALUE, 0): PrintValue(BCNPOP()); NEXT();
     OP(STARTLOOPCNTXT, 2):
-	{
-	    SKIP_OP(); // skip dummy operand - needed to keep the same number (2) of arguments needed by STARTLOOPCNTXT
-	    SEXP code = GETCONST(constants, GETOP());
-	    loopWithContext(code, rho);
-	    NEXT();
-	}
+      {
+	SKIP_OP(); // skip dummy operand - needed to keep the same number (2) of arguments needed by STARTLOOPCNTXT
+	SEXP code = GETCONST(constants, GETOP());
+	loopWithContext(code, rho);
+	NEXT();
+      }
     OP(ENDLOOPCNTXT, 1):
-	{
-	    SKIP_OP(); // skip dummy operand - needed to keep the same number (1) of arguments needed by ENDLOOPCNTXT
-	    return R_NilValue;
-	}
+      {
+	SKIP_OP(); // skip dummy operand - needed to keep the same number (1) of arguments needed by ENDLOOPCNTXT
+	return R_NilValue;
+      }
     OP(DOLOOPNEXT, 0):
-	{
-	    findcontext(CTXT_NEXT, rho, R_NilValue);
-	}
+      {
+	findcontext(CTXT_NEXT, rho, R_NilValue);
+      }
     OP(DOLOOPBREAK, 0):
-	{
-	    findcontext(CTXT_BREAK, rho, R_NilValue);
-	}
+      {
+	findcontext(CTXT_BREAK, rho, R_NilValue);
+      }
     OP(STARTFOR, 3):
       {
 	bool iscompact = false;

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 11:39+0200\n"
+"POT-Creation-Date: 2025-06-27 19:51+0200\n"
 "PO-Revision-Date: 2022-10-14 10:45+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -71,17 +71,17 @@ msgstr "specificazione formato '%s' non riconosciuto"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "almeno un asterisco '*' è supportato in ogni specificazione di conversione"
 
-#: gramLatex.cpp:2757 gramRd.cpp:3965
+#: gramLatex.cpp:2850 gramRd.cpp:3965
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "non è possibile allocare un buffer stringhe long alla linea %d"
 
-#: gramLatex.cpp:3014 gramRd.cpp:4460
+#: gramLatex.cpp:3119 gramRd.cpp:4460
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "non è possibile allocare un buffer stringhe long alla linea %d"
 
-#: gramLatex.cpp:3056 gramRd.cpp:4511
+#: gramLatex.cpp:3161 gramRd.cpp:4511
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valore '%s' non valido"

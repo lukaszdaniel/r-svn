@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 19:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Caio Lente <lente@ime.usp.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1429,11 +1429,6 @@ msgstr "Codificação desconhecida com dados não ASCII: convertendo para ASCII"
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
 msgstr "Nome de motor não suportado"
-
-#. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
-#: R/QC.R:0
-msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
-msgstr ""
 
 #. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])
 #: R/QC.R:0

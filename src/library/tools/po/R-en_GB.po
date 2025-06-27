@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-14 19:00\n"
+"POT-Creation-Date: 2025-06-27 19:51\n"
 "PO-Revision-Date: 2024-01-20 16:20+0000\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -1410,11 +1410,6 @@ msgstr "Unknown encoding with non-ASCII data: converting to ASCII"
 msgid "Unsupported engine name"
 msgstr "Unsupported engine name"
 
-#. R/QC.R: gettext("Uses ACM license: only appropriate for pre-2013 ACM TOMS code")
-#: R/QC.R:0
-msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
-msgstr "Uses ACM licence: only appropriate for pre-2013 ACM TOMS code"
-
 #. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])
 #: R/QC.R:0
 msgid "Variables in data frame '%s'"
@@ -2611,6 +2606,9 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "unable to re-encode %s line %s"
 msgstr[1] "unable to re-encode %s lines %s"
+
+#~ msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
+#~ msgstr "Uses ACM licence: only appropriate for pre-2013 ACM TOMS code"
 
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Rd files must have a non-empty %s."

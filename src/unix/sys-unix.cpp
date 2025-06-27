@@ -38,6 +38,7 @@
 #endif
 
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <Localization.h>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -916,7 +917,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     int last_is_amp = 0;
     /* command ending with & is not supported by timeout */
-    const void *vmax = vmaxget();
+    CXXR::RAllocStack::Scope rscope;
     const char *c = trCharUTF8(STRING_ELT(CAR(args), 0));
     int len = 0;
     for(;*c; c += len) {
@@ -929,7 +930,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	} else
 	    last_is_amp = 0;
     }
-    vmaxset(vmax);
+
     if (last_is_amp && timeout > 0)
 	error("%s", _("Timeout with background running processes is not supported."));
 
