@@ -1395,7 +1395,6 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 	*/
 	GCStackRoot<> call, form_Ymd;
 	form_Ymd = mkString("%Y-%m-%d");
-	nprot += 2; /* form_Ymd, call */
 	if(D1) { // table := as.Date.character(itable, "%Y-%m-%d")
 	    call = lang3(install("as.Date.character"), itable, form_Ymd);
 	    table = eval(call, env);
@@ -1533,8 +1532,8 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 		}
 	    }
 	    if(useUTF8) {
-		x = PROTECT(asUTF8(x)); nprot++;
-		table = PROTECT(asUTF8(table)); nprot++;
+		x = asUTF8(x);
+		table = asUTF8(table);
 	    }
 	    data.useUTF8 = useUTF8;
 	    data.useCache = useCache;
