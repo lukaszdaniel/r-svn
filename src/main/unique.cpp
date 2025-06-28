@@ -628,7 +628,7 @@ static bool duplicatedInit(SEXP x, HashData *d)
     } else if (TYPEOF(x) == CLOSXP) {
 	if (duplicatedInit(BODY_EXPR(x), d))
 	    stop = TRUE;
-    }	
+    }
     return stop;
 }
 
@@ -830,7 +830,7 @@ static SEXP sorted_Duplicated(SEXP x, bool from_last, int nmax)
 		SORTED_DUP_NANS(PARTIAL, 0, i < nb, i++);
 	    } // from_last
 	} // numnas > 0
-	
+
 	if(numnas < n) {
 	    startpos = nas1st ? numnas : 0;
 	    SORTED_DUP_NONNANS(startpos, n - numnas - 1, rtmp, double, REAL);
@@ -847,7 +847,7 @@ static SEXP sorted_Duplicated(SEXP x, bool from_last, int nmax)
 #undef SORTED_DUP_NANS
 #undef DUP_DO_ONE
 
-/* to add sorted fastpass support for new SEXP types modify sorted_Duplicated 
+/* to add sorted fastpass support for new SEXP types modify sorted_Duplicated
    and sorted_any_Duplicated then add them here */
 #define DUP_KNOWN_SORTED(x)						\
     ((TYPEOF(x) == INTSXP && KNOWN_SORTED(INTEGER_IS_SORTED(x))) ||	\
@@ -863,7 +863,7 @@ static SEXP Duplicated(SEXP x, bool from_last, int nmax)
 	return allocVector(LGLSXP, 0);
     else if (n == 1)
 	return ScalarLogical(FALSE);
-    
+
     if(DUP_KNOWN_SORTED(x)) {
     	return sorted_Duplicated(x, from_last, nmax);
     }
@@ -973,7 +973,7 @@ attribute_hidden R_xlen_t sorted_any_duplicated(SEXP x, bool from_last) {
 	R_xlen_t numnas = sorted_real_count_NANs(x), napivot;
 	napivot = XLENGTH(x) - numnas;
 	na1st = KNOWN_NA_1ST(sorted);
-	
+
 	if(from_last) {
 	    if(na1st) {
 		SORTED_ANYDUP_NONNANS_FROM_LAST(numnas, napivot, rtmp, double,
@@ -1139,7 +1139,7 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* handle zero length vectors, and NULL */
     R_xlen_t n = xlength(x);
-    if (n == 0) 
+    if (n == 0)
 	return(PRIMVAL(op) <= 1
 	       ? allocVector(PRIMVAL(op) != 1 ? LGLSXP : TYPEOF(x), 0)
 	       : ScalarInteger(0));
@@ -1188,7 +1188,7 @@ attribute_hidden SEXP do_duplicated(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for(R_xlen_t j=0; j < nb; j++)
 		if(duptr[j] == 0) k++;
 	});
-    
+
     SEXP ans = PROTECT(allocVector(TYPEOF(x), k));
 
     k = 0;
@@ -1322,7 +1322,7 @@ static SEXP match_transform(SEXP s, SEXP env)
 	if(inherits(s, "factor")) return asCharacterFactor(s);
 	/*
 	else if(inherits(s, "POSIXlt")) { // and maybe more classes in the future:
-					  // Call R's (generic) as.character(s): 
+					  // Call R's (generic) as.character(s):
 	    SEXP call, r;
 	    PROTECT(call = lang2(R_AsCharacterSymbol, s));
 	    r = eval(call, env);
@@ -1382,10 +1382,37 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 	return ans;
     }
 
+    GCStackRoot<> x, table;
     int nprot = 0;
-    SEXP x     = PROTECT(match_transform(ix,     env)); nprot++;
-    SEXP table = PROTECT(match_transform(itable, env)); nprot++;
-    /* or should we use PROTECT_WITH_INDEX and REPROTECT below ? */
+
+    bool D1; /* special case  <Date> o <character> */
+    if ((D1 = isObject(ix)     && inherits(ix,     "Date") && isValidString(itable)) ||
+	(     isObject(itable) && inherits(itable, "Date") && isValidString(ix))) {
+	/* Do *not* translate the <Date> to integer below (which later would be coerced
+	 * to character: e.g, as.character(as.vector(as.Date("2025-06-26"))) |--> "20265"
+	 * but rather *do*  as.Date(<character>) for the other, and then compare (the numbers of)
+	 * as.vector(<Date>).
+	*/
+	GCStackRoot<> call, form_Ymd;
+	form_Ymd = mkString("%Y-%m-%d");
+	nprot += 2; /* form_Ymd, call */
+	if(D1) { // table := as.Date.character(itable, "%Y-%m-%d")
+	    call = lang3(install("as.Date.character"), itable, form_Ymd);
+	    table = eval(call, env);
+
+	    table = match_transform(table, env);
+	    x     = match_transform(ix,    env);
+	} else { // x := as.Date.character(ix, "%Y-%m-%d")
+	    call = lang3(install("as.Date.character"), ix, form_Ymd);
+	    x = eval(call, env);
+
+	    x     = match_transform(x,      env);
+	    table = match_transform(itable, env);
+	}
+    } else { /* regular cases */
+	x     = match_transform(ix,     env);
+    table = match_transform(itable, env);
+    }
 
     SEXPTYPE type;
     /* Coerce to a common type; type == NILSXP is ok here.
@@ -1394,8 +1421,8 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
      * (given that we have "Vector" or NULL) */
     if(TYPEOF(x) >= STRSXP || TYPEOF(table) >= STRSXP) type = STRSXP;
     else type = TYPEOF(x) < TYPEOF(table) ? TYPEOF(table) : TYPEOF(x);
-    PROTECT(x	  = coerceVector(x,	type)); nprot++;
-    PROTECT(table = coerceVector(table, type)); nprot++;
+    x	    = coerceVector(x,	  type);
+    table = coerceVector(table, type);
 
     // special case scalar x -- for speed only :
     if(XLENGTH(x) == 1 && !incomp) {
@@ -2430,7 +2457,7 @@ static void rehash(R_hashtab_type h, int resize)
 
     HT_COUNT(h) = 0;
     HT_VALIDATE(h);
-    
+
     SET_HT_TABLE(h, allocVector(VECSXP, new_size));
     if (resize) HT_TABLE_K(h)++;
 
@@ -2460,7 +2487,7 @@ static SEXP getcell(R_hashtab_type h, SEXP key, int *pidx)
 	chain = CDR(chain);
     }
     return R_NilValue;
-}    
+}
 
 
 /*
@@ -2582,7 +2609,7 @@ SEXP R_maphash(R_hashtab_type h, SEXP FUN)
     SEXP env = PROTECT(R_NewEnv(R_GlobalEnv, FALSE, 0));
     SEXP call = PROTECT(lang3(FUN_sym, key_sym, val_sym));
     defvar(FUN_sym, FUN, env);
-    
+
     SEXP table = PROTECT(HT_TABLE(h)); // PROTECT in case FUN causes a rehash
     int size = LENGTH(table);
     for (int i = 0; i < size; i++) {
