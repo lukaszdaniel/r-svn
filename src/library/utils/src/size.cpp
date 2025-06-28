@@ -55,7 +55,7 @@ static R_size_t objectsize(SEXP s)
 	break;
     case BCODESXP:
 	R_CheckStack();
-	for (bool done = FALSE; ! done; ) {
+	for (bool done = FALSE; !done;) {
 	    cnt += objectsize(EXPR(s));
 	    cnt += objectsize(CODE0(s));
 	    cnt += sizeof(RObject);
@@ -76,7 +76,7 @@ static R_size_t objectsize(SEXP s)
     case LANGSXP:
     case DOTSXP:
 	R_CheckStack();
-	for (bool done = false; ! done; ) {
+	for (bool done = false; !done;) {
 	    cnt += objectsize(TAG(s));
 	    cnt += objectsize(CAR(s));
 	    cnt += sizeof(RObject);

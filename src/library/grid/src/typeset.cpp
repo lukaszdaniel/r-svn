@@ -25,7 +25,7 @@
  * info is a "RGlyphInfo"
  */
 static void renderGlyphs(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y, 
-                         bool draw) 
+                         bool draw)
 {
     int i, n, nruns = LENGTH(runs);
     double *gx, *gy;
@@ -34,13 +34,13 @@ static void renderGlyphs(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y,
     LViewportContext vpc;
     LTransform transform;
     SEXP currentvp, currentgp;
-    /* Get the current device 
+    /* Get the current device
      */
     pGEDevDesc dd = getDevice();
     currentvp = gridStateElement(dd, GSS_VP);
     currentgp = gridStateElement(dd, GSS_GPAR);
     R_GE_gcontext gc;
-    gcontextFromgpar(currentgp, 0, &gc, dd);        
+    gcontextFromgpar(currentgp, 0, &gc, dd);
     /* This copy is used to store/cache resolved gp$fill to avoid
      * stupid amounts of pattern resolving (resolving a resolved
      * pattern is basically a no-op), WITHOUT touching current gp
@@ -61,7 +61,7 @@ static void renderGlyphs(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y,
     SEXP fonts = R_GE_glyphInfoFonts(glyphInfo);
     int *id = INTEGER(R_GE_glyphID(glyphs));
     n = LENGTH(R_GE_glyphID(glyphs));
-        
+
     CXXR::RAllocStack::Scope rscope;
     gx = (double *) R_alloc(n, sizeof(double));
     gy = (double *) R_alloc(n, sizeof(double));
@@ -108,5 +108,5 @@ static void renderGlyphs(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y,
 
 SEXP L_glyph(SEXP runs, SEXP glyphInfo, SEXP x, SEXP y) {
     renderGlyphs(runs, glyphInfo, x, y, TRUE);
-    return R_NilValue;    
+    return R_NilValue;
 }

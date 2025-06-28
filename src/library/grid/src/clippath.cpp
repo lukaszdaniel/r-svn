@@ -19,21 +19,24 @@
  */
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include "grid.h"
+
+using namespace CXXR;
 
 bool isClipPath(SEXP clip) {
     return Rf_inherits(clip, "GridClipPath");
 }
 
-SEXP resolveClipPath(SEXP path, pGEDevDesc dd) 
+SEXP resolveClipPath(SEXP path, pGEDevDesc dd)
 {
-    SEXP resolveFn, R_fcall, result;
+    GCStackRoot<> resolveFn, R_fcall;
     setGridStateElement(dd, GSS_RESOLVINGPATH, ScalarLogical(TRUE));
-    PROTECT(resolveFn = findFun(install("resolveClipPath"), R_gridEvalEnv));
-    PROTECT(R_fcall = lang2(resolveFn, path));
-    result = eval(R_fcall, R_gridEvalEnv);
+    resolveFn = findFun(install("resolveClipPath"), R_gridEvalEnv);
+    R_fcall = lang2(resolveFn, path);
+    SEXP result = eval(R_fcall, R_gridEvalEnv);
     setGridStateElement(dd, GSS_RESOLVINGPATH, ScalarLogical(FALSE));
-    UNPROTECT(2);
-    return result;    
+
+    return result;
 }
 

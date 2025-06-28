@@ -786,21 +786,20 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
     if(call != R_NilValue) {
 	char tmp[BUFSIZE], tmp2[BUFSIZE];
 	const char *head = _("Error in "), *tail = "\n  ";
-	SEXP srcloc = R_NilValue; // -Wall
+	GCStackRoot<> srcloc(R_NilValue); // -Wall
 	size_t len = 0;	// indicates if srcloc has been set
-	int nprotected = 0, show = 0;
+	bool show = false;
 	SEXP opt = GetOption1(install("show.error.locations"));
 	if (length(opt) == 1 &&
 	    (asLogical(opt) == 1 ||
 	     (TYPEOF(opt) == STRSXP &&
 	      pmatch(ScalarString(mkChar("top")), opt, 0))))
-	    	show = 1;
+	    	show = true;
 
 	const char *dcall = CHAR(STRING_ELT(deparse1s(call), 0));
 	Rsnprintf_mbcs(tmp2, BUFSIZE,  "%s", head);
 	if (show) {
-	    PROTECT(srcloc = GetSrcLoc(R_GetCurrentSrcref(NA_INTEGER)));
-	    nprotected++;
+	    srcloc = GetSrcLoc(R_GetCurrentSrcref(NA_INTEGER));
 	    len = strlen(CHAR(STRING_ELT(srcloc, 0)));
 	    if (len)
 		Rsnprintf_mbcs(tmp2, BUFSIZE,  _("Error in '%s' (from %s): "),
@@ -838,7 +837,6 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	    Rsnprintf_mbcs(errbuf, BUFSIZE, "%s", _("Error: "));
 	    ERRBUFCAT(tmp);
 	}
-	UNPROTECT(nprotected);
     }
     else {
 	Rsnprintf_mbcs(errbuf, BUFSIZE, "%s", _("Error: "));
@@ -983,7 +981,7 @@ static void jump_to_top_ex(bool traceback,
 			   bool resetConsole,
 			   bool ignoreRestartContexts)
 {
-    SEXP s;
+    GCStackRoot<> s;
     int haveHandler, oldInError;
     int *savedOldInError = &oldInError;
 
@@ -1061,11 +1059,10 @@ static void jump_to_top_ex(bool traceback,
 	   (which should not happen) */
 	if (traceback && inError < 2 && inError == oldInError) {
 	    inError = 2;
-	    PROTECT(s = R_GetTracebackOnly(0));
+	    s = R_GetTracebackOnly(0);
 	    SET_SYMVALUE(install(".Traceback"), s);
 	    /* should have been defineVar
 	       setVar(install(".Traceback"), s, R_GlobalEnv); */
-	    UNPROTECT(1);
 	    inError = oldInError;
 	}
     }
@@ -1134,7 +1131,7 @@ static const char * determine_domain_gettext(SEXP domain_, bool up)
 	}
 	GETT_PRINT(" .. rho1_domain_ => rho=%s\n", EncodeEnvironment(rho));
 
-	SEXP ns = R_NilValue;
+	GCStackRoot<> ns(R_NilValue);
 	int cnt = 0;
 	    while(rho != R_EmptyEnv) {
 		if (rho == R_GlobalEnv) break;
@@ -1150,17 +1147,14 @@ static const char * determine_domain_gettext(SEXP domain_, bool up)
 		rho = ENCLOS(rho);
 	    }
 	if (!isNull(ns)) {
-	    PROTECT(ns);
 	    domain = translateChar(STRING_ELT(ns, 0));
 	    if (strlen(domain)) {
 		size_t len = strlen(domain)+3;
 		buf = R_alloc(len, sizeof(char));
 		Rsnprintf_mbcs(buf, len, "R-%s", domain);
-		UNPROTECT(1); /* ns */
 		GETT_PRINT("Managed to determine 'domain' from environment as: '%s'\n", buf);
 		return (const char*) buf;
 	    }
-	    UNPROTECT(1); /* ns */
 	}
 	return NULL;
 
@@ -1824,33 +1818,29 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
     Rvsnprintf_mbcs(localbuf, BUFSIZE - 1, format, ap);
     while ((list = findSimpleErrorHandler()) != R_NilValue) {
 	char *buf = errbuf;
-	SEXP entry = CAR(list);
+	GCStackRoot<> entry;
+	entry = CAR(list);
 	R_HandlerStack = CDR(list);
 	Rstrncpy(buf, localbuf, BUFSIZE);
 	/*	Rvsnprintf(buf, BUFSIZE - 1, format, ap);*/
 	if (IS_CALLING_ENTRY(entry)) {
 	    if (ENTRY_HANDLER(entry) == R_RestartToken) {
-		UNPROTECT(1); /* oldstack */
 		break; /* go to default error handling */
 	    } else {
 		/* if we are in the process of handling a C stack
 		   overflow, treat all calling handlers as failed */
 		if (R_OldCStackLimit)
 		    continue;
-		SEXP hooksym, hcall, qcall, qfun;
-		PROTECT(entry); /* protect since no longer on the stack */
-		hooksym = install(".handleSimpleError");
+		GCStackRoot<> hcall, qcall, qfun;
+		SEXP hooksym = install(".handleSimpleError");
 		qfun = lang3(R_DoubleColonSymbol, R_BaseSymbol,
 		             R_QuoteSymbol);
-		PROTECT(qfun);
-		PROTECT(qcall = LCONS(qfun,
-				      LCONS(call, R_NilValue)));
-		PROTECT(hcall = LCONS(qcall, R_NilValue));
+		qcall = LCONS(qfun, LCONS(call, R_NilValue));
+		hcall = LCONS(qcall, R_NilValue);
 		hcall = LCONS(mkString(buf), hcall);
 		hcall = LCONS(ENTRY_HANDLER(entry), hcall);
-		PROTECT(hcall = LCONS(hooksym, hcall));
+		hcall = LCONS(hooksym, hcall);
 		eval(hcall, R_GlobalEnv);
-		UNPROTECT(5);
 	    }
 	}
 	else gotoExitingHandler(R_NilValue, call, entry);
@@ -1877,15 +1867,15 @@ static SEXP findConditionHandler(SEXP cond)
 
 attribute_hidden SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP list, cond, msg, ecall, oldstack;
-
     checkArity(op, args);
+    SEXP list, cond, msg, ecall;
+    GCStackRoot<> oldstack;
 
     cond = CAR(args);
     msg = CADR(args);
     ecall = CADDR(args);
 
-    PROTECT(oldstack = R_HandlerStack);
+    oldstack = R_HandlerStack;
     while ((list = findConditionHandler(cond)) != R_NilValue) {
 	SEXP entry = CAR(list);
 	R_HandlerStack = CDR(list);
@@ -1899,16 +1889,14 @@ attribute_hidden SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho
 		errorcall_dflt(ecall, "%s", msgstr);
 	    }
 	    else {
-		SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
-		PROTECT(hcall);
+		GCStackRoot<> hcall;
+		hcall = LCONS(h, CONS(cond, R_NilValue));
 		eval(hcall, R_GlobalEnv);
-		UNPROTECT(1);
 	    }
 	}
 	else gotoExitingHandler(cond, ecall, entry);
     }
     R_HandlerStack = oldstack;
-    UNPROTECT(1);
     return R_NilValue;
 }
 
@@ -1926,43 +1914,41 @@ static SEXP findInterruptHandler(void)
 static SEXP getInterruptCondition(void)
 {
     /**** FIXME: should probably pre-allocate this */
-    SEXP cond, klass;
-    PROTECT(cond = allocVector(VECSXP, 0));
-    PROTECT(klass = allocVector(STRSXP, 2));
+    GCStackRoot<> cond, klass;
+    cond = allocVector(VECSXP, 0);
+    klass = allocVector(STRSXP, 2);
     SET_STRING_ELT(klass, 0, mkChar("interrupt"));
     SET_STRING_ELT(klass, 1, mkChar("condition"));
     classgets(cond, klass);
-    UNPROTECT(2);
+
     return cond;
 }
 
 static void signalInterrupt(void)
 {
-    SEXP list, cond, oldstack;
+    SEXP list;
+    GCStackRoot<> cond, oldstack;
 
-    PROTECT(oldstack = R_HandlerStack);
+    oldstack = R_HandlerStack;
     while ((list = findInterruptHandler()) != R_NilValue) {
 	SEXP entry = CAR(list);
 	R_HandlerStack = CDR(list);
-	PROTECT(cond = getInterruptCondition());
+	cond = getInterruptCondition();
 	if (IS_CALLING_ENTRY(entry)) {
 	    SEXP h = ENTRY_HANDLER(entry);
-	    SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
-	    PROTECT(hcall);
+	    GCStackRoot<> hcall;
+	    hcall = LCONS(h, CONS(cond, R_NilValue));
 	    evalKeepVis(hcall, R_GlobalEnv);
-	    UNPROTECT(1);
 	}
 	else gotoExitingHandler(cond, R_NilValue, entry);
-	UNPROTECT(1);
     }
     R_HandlerStack = oldstack;
-    UNPROTECT(1);
 
     SEXP h = GetOption1(install("interrupt"));
     if (h != R_NilValue) {
-	SEXP call = PROTECT(LCONS(h, R_NilValue));
+	GCStackRoot<> call;
+	call = LCONS(h, R_NilValue);
 	evalKeepVis(call, R_GlobalEnv);
-	UNPROTECT(1);
     }
 }
 
@@ -1981,31 +1967,29 @@ static void checkRestartStacks(RCNTXT *cptr)
 static void addInternalRestart(RCNTXT *cptr, const char *cname)
 {
     checkRestartStacks(cptr);
-    SEXP entry, name;
+    GCStackRoot<> entry, name;
 
-    PROTECT(name = mkString(cname));
-    PROTECT(entry = allocVector(VECSXP, 2));
+    name = mkString(cname);
+    entry = allocVector(VECSXP, 2);
     SET_VECTOR_ELT(entry, 0, name);
     SET_VECTOR_ELT(entry, 1, R_MakeExternalPtr(cptr, R_NilValue, R_NilValue));
     setAttrib(entry, R_ClassSymbol, mkString("restart"));
     R_RestartStack = CONS(entry, R_RestartStack);
-    UNPROTECT(2);
 }
 
 attribute_hidden void R::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
-    SEXP klass, rho, entry;
-
+    SEXP rho, entry;
+    GCStackRoot<> klass;
     checkRestartStacks(cptr);
 
     /**** need more here to keep recursive errors in browser? */
     SEXP h = GetOption1(install("browser.error.handler"));
     if (!isFunction(h)) h = R_RestartToken;
     rho = cptr->cloenv;
-    PROTECT(klass = mkChar("error"));
+    klass = mkChar("error");
     entry = mkHandlerEntry(klass, rho, h, rho, R_NilValue, TRUE);
     R_HandlerStack = CONS(entry, R_HandlerStack);
-    UNPROTECT(1);
 
     addInternalRestart(cptr, cname);
 }
@@ -2042,10 +2026,9 @@ NORET attribute_hidden SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int i;
     SEXP list;
     checkArity(op, args);
-    i = asInteger(CAR(args));
+    int i = asInteger(CAR(args));
     for (list = R_RestartStack;
 	 list != R_NilValue && i > 1;
 	 list = CDR(list), i--);
@@ -2053,13 +2036,13 @@ attribute_hidden SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return CAR(list);
     else if (i == 1) {
 	/**** need to pre-allocate */
-	SEXP name, entry;
-	PROTECT(name = mkString("abort"));
-	PROTECT(entry = allocVector(VECSXP, 2));
+	GCStackRoot<> name, entry;
+	name = mkString("abort");
+	entry = allocVector(VECSXP, 2);
 	SET_VECTOR_ELT(entry, 0, name);
 	SET_VECTOR_ELT(entry, 1, R_NilValue);
 	setAttrib(entry, R_ClassSymbol, mkString("restart"));
-	UNPROTECT(2);
+
 	return entry;
     }
     else return R_NilValue;
@@ -2563,29 +2546,24 @@ SEXP R_withCallingErrorHandler(SEXP (*body)(void *), void *bdata,
     SEXP tcdptr = R_MakeExternalPtr(&tcd, R_NilValue, R_NilValue);
 
     /* create the R handler function closure */
-    SEXP env = CONS(tcdptr, R_NilValue);
+    GCStackRoot<> env, h;
+    env = CONS(tcdptr, R_NilValue);
     SET_TAG(env, addr_sym);
     env = NewEnvironment(R_NilValue, env, R_BaseNamespace);
-    PROTECT(env);
-    SEXP h = duplicate(wceh_callback);
+    h = duplicate(wceh_callback);
     SET_CLOENV(h, env);
-    UNPROTECT(1); /* env */
 
     /* push the handler on the handler stack */
-    SEXP oldstack = R_HandlerStack;
-    PROTECT(oldstack);
-    PROTECT(h);
+    GCStackRoot<> oldstack(R_HandlerStack);
     SEXP entry = mkHandlerEntry(wceh_class, R_GlobalEnv, h, R_NilValue,
 				R_NilValue, /* OK for a calling handler */
 				TRUE);
     R_HandlerStack = CONS(entry, R_HandlerStack);
-    UNPROTECT(1); /* h */
 
     SEXP val = body(bdata);
 
     /* restore the handler stack */
     R_HandlerStack = oldstack;
-    UNPROTECT(1); /* oldstack */
 
     return val;
 }
@@ -2631,11 +2609,9 @@ static void R_signalCondition(SEXP cond, SEXP call,
 			      int exitOnly)
 {
     if (restoreHandlerStack) {
-	SEXP oldstack = R_HandlerStack;
-	PROTECT(oldstack);
+	GCStackRoot<> oldstack(R_HandlerStack);
 	R_signalCondition(cond, call, FALSE, exitOnly);
 	R_HandlerStack = oldstack;
-	UNPROTECT(1); /* oldstack */
     }
     else {
 	SEXP list = findConditionHandler(cond);
@@ -2648,10 +2624,9 @@ static void R_signalCondition(SEXP cond, SEXP call,
 		    break;
 		else if (!exitOnly) {
 		    R_CheckStack();
-		    SEXP hcall = LCONS(h, CONS(cond, R_NilValue));
-		    PROTECT(hcall);
-		    eval(hcall, R_GlobalEnv);
-		    UNPROTECT(1); /* hcall */
+		    GCStackRoot<> hcall;
+		    hcall = LCONS(h, CONS(cond, R_NilValue));
+		    Evaluator::evaluate(hcall, Environment::global());
 		}
 	    }
 	    else gotoExitingHandler(cond, call, entry);
