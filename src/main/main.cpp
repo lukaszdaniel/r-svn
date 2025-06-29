@@ -983,7 +983,6 @@ void setup_Rmainloop(void)
 
     if(!setlocale(LC_CTYPE, "") && !quiet)
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
-
 		 "%s", _("Setting LC_CTYPE failed, using \"C\"\n"));
     if(!setlocale(LC_COLLATE, "") && !quiet)
 	snprintf(deferred_warnings[ndeferred_warnings++], 250,
@@ -1417,7 +1416,6 @@ static void R_browserRepl(SEXP rho)
  * ------- but also called from ./eval.c */
 attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    RCNTXT *cptr;
     size_t savestack;
     GCStackRoot<> ap;
     GCStackRoot<> topExp;
@@ -1488,9 +1486,9 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (!ENV_RDEBUG(rho)) {
 	int skipCalls = asInteger(CADDDR(argList));
-	cptr = R_GlobalContext;
+	RCNTXT *cptr = R_GlobalContext;
 #ifdef USE_BROWSER_HOOK
-	if (! ignoreHook)
+	if (!ignoreHook)
 	    /* skip over the hook closure on the stack */
 	    while ((!(cptr->callflag & CTXT_FUNCTION) || cptr->cloenv != rho)
 		   && cptr->callflag )
@@ -1732,9 +1730,9 @@ attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
 	return(FALSE); /* error("there are no task callbacks registered"); */
     }
 
-    while(el) {
+    while (el) {
 	if (streql(el->name, name)) {
-	    if(prev == NULL) {
+	    if (prev == NULL) {
 		Rf_ToplevelTaskHandlers = el->next;
 	    } else {
 		prev->next = el->next;
@@ -1746,7 +1744,7 @@ attribute_hidden Rboolean Rf_removeTaskCallbackByName(const char *name)
     }
     if (el)
 	removeToplevelHandler(el);
-    else 
+    else
 	status = FALSE;
 
     return (Rboolean) status;

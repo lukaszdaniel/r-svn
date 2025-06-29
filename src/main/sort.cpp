@@ -1656,19 +1656,22 @@ attribute_hidden SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_xtfrm(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP fn, prargs, ans;
-
     checkArity(op, args);
     check1arg(args, call, "x");
 
     /* DispatchOrEval internal generic: xtfrm */
-    if(DispatchOrEval(call, op, "xtfrm", args, rho, &ans, 0, 1)) return ans;
+    {
+        auto dispatched = DispatchOrEval(call, op, "xtfrm", args, rho, false, true);
+        if (dispatched.first)
+            return dispatched.second;
+    }
     /* otherwise dispatch the default method */
-    PROTECT(fn = findFun(install("xtfrm.default"), rho));
-    PROTECT(prargs = promiseArgs(args, R_GlobalEnv));
+    GCStackRoot<> fn, prargs;
+    fn = findFun(install("xtfrm.default"), rho);
+    prargs = promiseArgs(args, R_GlobalEnv);
     IF_PROMSXP_SET_PRVALUE(CAR(prargs), CAR(args));
-    ans = applyClosure(call, fn, prargs, rho, R_NilValue, true);
-    UNPROTECT(2);
+    SEXP ans = applyClosure(call, fn, prargs, rho, R_NilValue, true);
+
     return ans;
 
 }

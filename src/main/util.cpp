@@ -525,13 +525,13 @@ void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 	if (PRIMINTERNAL(op))
 	    error(n_("%d argument passed to .Internal(%s) which requires %d",
 		     "%d arguments passed to .Internal(%s) which requires %d",
-			   (unsigned long) length(args)),
+		     (unsigned long) length(args)),
 		  length(args), PRIMNAME(op), PRIMARITY(op));
 	else
 	    errorcall(call,
 		      n_("%d argument passed to '%s' which requires %d",
-			       "%d arguments passed to '%s' which requires %d",
-			       (unsigned long) length(args)),
+			"%d arguments passed to '%s' which requires %d",
+			(unsigned long) length(args)),
 		      length(args), PRIMNAME(op), PRIMARITY(op));
     }
 }

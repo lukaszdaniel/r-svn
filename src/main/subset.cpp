@@ -51,6 +51,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -698,7 +699,7 @@ static void ExtractDropArg(SEXP el, bool *drop)
 static int ExtractExactArg(SEXP args)
 {
     SEXP argval = ExtractArg(args, R_ExactSymbol);
-    if(isNull(argval)) return 1; /* Default is true as from R 2.7.0 */
+    if (isNull(argval)) return 1; /* Default is true as from R 2.7.0 */
     int exact = asLogical(argval);
     if (exact == NA_LOGICAL) exact = -1;
     return exact;
@@ -706,7 +707,7 @@ static int ExtractExactArg(SEXP args)
 
 /* Version of DispatchOrEval for "[" and friends that speeds up simple cases.
    Also defined in subassign.c */
-static R_INLINE int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
+static R_INLINE bool R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {
     SEXP prom = NULL;
@@ -714,7 +715,7 @@ static R_INLINE int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, 
 	SEXP x = eval(CAR(args), rho);
 	PROTECT(x);
 	INCREMENT_LINKS(x);
-	if (! OBJECT(x)) {
+	if (!OBJECT(x)) {
 	    *ans = CONS_NR(x, evalListKeepMissing(CDR(args), rho));
 	    DECREMENT_LINKS(x);
 	    UNPROTECT(1);
@@ -725,7 +726,7 @@ static R_INLINE int R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, 
 	UNPROTECT(1);
     }
     PROTECT(args);
-    int disp = DispatchOrEval(call, op, generic, args, rho, ans, 0, 0);
+    bool disp = DispatchOrEval(call, op, generic, args, rho, ans, 0, 0);
     if (prom) DECREMENT_LINKS(PRVALUE(prom));
     UNPROTECT(1);
     return disp;
@@ -745,7 +746,7 @@ attribute_hidden SEXP do_subset(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* retains any missing argument indicators. */
 
     /* DispatchOrEval internal generic: [ */
-    if(R_DispatchOrEvalSP(call, op, "[", args, rho, &ans)) {
+    if (R_DispatchOrEvalSP(call, op, "[", args, rho, &ans)) {
 /*     if(DispatchAnyOrEval(call, op, "[", args, rho, &ans, 0, 0)) */
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
@@ -999,7 +1000,7 @@ attribute_hidden SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* evaluation retains any missing argument indicators. */
 
     /* DispatchOrEval internal generic: [[ */
-    if(R_DispatchOrEvalSP(call, op, "[[", args, rho, &ans)) {
+    if (R_DispatchOrEvalSP(call, op, "[[", args, rho, &ans)) {
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
 	return ans;
@@ -1213,13 +1214,13 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP R::dispatch_subset2(SEXP x, R_xlen_t i, SEXP call, SEXP rho)
 {
     static SEXP bracket_op = NULL;
-    SEXP args, x_elt;
+    GCStackRoot<> args;
+    SEXP x_elt;
     if (isObject(x)) {
         if (bracket_op == NULL)
             bracket_op = R_Primitive("[[");
-        PROTECT(args = list2(x, ScalarReal((double)i + 1)));
+        args = list2(x, ScalarReal((double)i + 1));
         x_elt = do_subset2(call, bracket_op, args, rho);
-        UNPROTECT(1);
     } else {
       // FIXME: throw error if not a list
         x_elt = VECTOR_ELT(x, i);
@@ -1243,7 +1244,7 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
     const char *si = "";
     CXXR::RAllocStack::Scope rscope;
 
-    if(target == R_NilValue)
+    if (target == R_NilValue)
 	return NO_MATCH;
 
     switch (TYPEOF(target)) {
@@ -1257,8 +1258,8 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
 	break;
     }
     si = translateChar(input);
-    if(si[0] != '\0' && streqln(st, si, slen)) {
-	return (strlen(st) == slen) ?  EXACT_MATCH : PARTIAL_MATCH;
+    if (si[0] != '\0' && streqln(st, si, slen)) {
+	return (strlen(st) == slen) ? EXACT_MATCH : PARTIAL_MATCH;
     } else {
 	return NO_MATCH;
     }
@@ -1320,7 +1321,7 @@ attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
     /* evaluation retains any missing argument indicators. */
 
     /* DispatchOrEval internal generic: $ */
-    if(R_DispatchOrEvalSP(call, op, "$", args, env, &ans)) {
+    if (R_DispatchOrEvalSP(call, op, "$", args, env, &ans)) {
 	UNPROTECT(1); /* args */
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
@@ -1333,22 +1334,19 @@ attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 /* also used in eval.c */
-attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
+attribute_hidden SEXP R::R_subset3_dflt(SEXP x_, SEXP input_, SEXP call)
 {
-    SEXP y;
-    PROTECT(input);
-    PROTECT(x);
+    GCStackRoot<> y;
+    GCStackRoot<> input(input_);
+    GCStackRoot<> x(x_);
 
     /* Optimisation to prevent repeated recalculation */
     size_t slen = strlen(translateChar(input));
     /* The mechanism to allow a class extending "environment" */
-    if( IS_S4_OBJECT(x) && TYPEOF(x) == OBJSXP ){
+    if (IS_S4_OBJECT(x) && TYPEOF(x) == OBJSXP) {
 	x = R_getS4DataSlot(x, ANYSXP);
-	if(x == R_NilValue)
+	if (x == R_NilValue)
 	    errorcall(call, "%s", _("$ operator not defined for this S4 class"));
-
-	UNPROTECT(1); /* x */
-	PROTECT(x);
     }
 
     // isPairList(x)  but *not* <DOTSXP> :
@@ -1356,12 +1354,11 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	SEXP xmatch = R_NilValue;
 	int havematch;
 	havematch = 0;
-	for (y = x ; y != R_NilValue ; y = CDR(y)) {
-	    switch(pstrmatch(TAG(y), input, slen)) {
+	for (SEXP y = x ; y != R_NilValue ; y = CDR(y)) {
+	    switch (pstrmatch(TAG(y), input, slen)) {
 	    case EXACT_MATCH:
 		y = CAR(y);
 		RAISE_NAMED(y, NAMED(x));
-		UNPROTECT(2); /* input, x */
 		return y;
 	    case PARTIAL_MATCH:
 		havematch++;
@@ -1376,7 +1373,7 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	    }
 	}
 	if (havematch == 1) { /* unique partial match */
-	    if(R_warn_partial_match_dollar) {
+	    if (R_warn_partial_match_dollar) {
 		const char *st = "";
 		SEXP target = TAG(xmatch);
 		switch (TYPEOF(target)) {
@@ -1394,25 +1391,21 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	    }
 	    y = CAR(xmatch);
 	    RAISE_NAMED(y, NAMED(x));
-	    UNPROTECT(2); /* input, x */
 	    return y;
 	}
-	UNPROTECT(2); /* input, x */
 	return R_NilValue;
     }
     else if (isVectorList(x)) {
-	R_xlen_t i, n, imatch = -1;
-	int havematch;
+	R_xlen_t imatch = -1;
 	SEXP nlist = getAttrib(x, R_NamesSymbol);
 
-	n = xlength(nlist);
-	havematch = 0;
-	for (i = 0 ; i < n ; i = i + 1) {
-	    switch(pstrmatch(STRING_ELT(nlist, i), input, slen)) {
+	R_xlen_t n = xlength(nlist);
+	int havematch = 0;
+	for (R_xlen_t i = 0 ; i < n ; i = i + 1) {
+	    switch (pstrmatch(STRING_ELT(nlist, i), input, slen)) {
 	    case EXACT_MATCH:
 		y = VECTOR_ELT(x, i);
 		RAISE_NAMED(y, NAMED(x));
-		UNPROTECT(2); /* input, x */
 		return y;
 	    case PARTIAL_MATCH:
 		havematch++;
@@ -1435,8 +1428,8 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 		break;
 	    }
 	}
-	if(havematch == 1) { /* unique partial match */
-	    if(R_warn_partial_match_dollar) {
+	if (havematch == 1) { /* unique partial match */
+	    if (R_warn_partial_match_dollar) {
 		const char *st = "";
 		SEXP target = STRING_ELT(nlist, imatch);
 		switch (TYPEOF(target)) {
@@ -1454,21 +1447,16 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	    }
 	    y = VECTOR_ELT(x, imatch);
 	    RAISE_NAMED(y, NAMED(x));
-	    UNPROTECT(2); /* input, x */
 	    return y;
 	}
-	UNPROTECT(2); /* input, x */
 	return R_NilValue;
     }
-    else if( isEnvironment(x) ){
+    else if (isEnvironment(x)) {
 	y = R_findVarInFrame(x, installTrChar(input));
-	if( TYPEOF(y) == PROMSXP ) {
-	    PROTECT(y);
+	if (TYPEOF(y) == PROMSXP) {
 	    y = eval(y, R_GlobalEnv);
-	    UNPROTECT(1); /* y */
 	}
-	UNPROTECT(2); /* input, x */
-	if( y != R_UnboundValue ) {
+	if (y != R_UnboundValue) {
 	    if (NAMED(y))
 		ENSURE_NAMEDMAX(y);
 	    else RAISE_NAMED(y, NAMED(x));
@@ -1476,11 +1464,11 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x, SEXP input, SEXP call)
 	}
 	return R_NilValue;
     }
-    else if( isVectorAtomic(x) ){
+    else if (isVectorAtomic(x)) {
 	errorcall(call, "%s", _("$ operator is invalid for atomic vectors"));
     }
     else /* e.g. a function */
 	errorcallNotSubsettable(x, call);
-    UNPROTECT(2); /* input, x */
+
     return R_NilValue;
 }

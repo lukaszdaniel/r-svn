@@ -786,34 +786,33 @@ static SEXP coerceToString(SEXP v)
 static SEXP coerceToExpression(SEXP v)
 {
     SEXP ans;
-    R_xlen_t i, n;
     if (isVectorAtomic(v)) {
-	n = XLENGTH(v);
+	R_xlen_t n = XLENGTH(v);
 	PROTECT(ans = allocVector(EXPRSXP, n));
 	ans->maybeTraceMemory(v);
 	switch (TYPEOF(v)) {
 	case LGLSXP:
-	    for (i = 0; i < n; i++)
+	    for (R_xlen_t i = 0; i < n; i++)
 		SET_XVECTOR_ELT(ans, i, ScalarLogical(LOGICAL_ELT(v, i)));
 	    break;
 	case INTSXP:
-	    for (i = 0; i < n; i++)
+	    for (R_xlen_t i = 0; i < n; i++)
 		SET_XVECTOR_ELT(ans, i, ScalarInteger(INTEGER_ELT(v, i)));
 	    break;
 	case REALSXP:
-	    for (i = 0; i < n; i++)
+	    for (R_xlen_t i = 0; i < n; i++)
 		SET_XVECTOR_ELT(ans, i, ScalarReal(REAL_ELT(v, i)));
 	    break;
 	case CPLXSXP:
-	    for (i = 0; i < n; i++)
+	    for (R_xlen_t i = 0; i < n; i++)
 		SET_XVECTOR_ELT(ans, i, ScalarComplex(COMPLEX_ELT(v, i)));
 	    break;
 	case STRSXP:
-	    for (i = 0; i < n; i++)
+	    for (R_xlen_t i = 0; i < n; i++)
 		SET_XVECTOR_ELT(ans, i, ScalarString(STRING_ELT(v, i)));
 	    break;
 	case RAWSXP:
-	    for (i = 0; i < n; i++)
+	    for (R_xlen_t i = 0; i < n; i++)
 		SET_XVECTOR_ELT(ans, i, ScalarRaw(RAW_ELT(v, i)));
 	    break;
 	default:
@@ -831,43 +830,42 @@ static SEXP coerceToExpression(SEXP v)
 static SEXP coerceToVectorList(SEXP v)
 {
     SEXP ans, tmp;
-    R_xlen_t i, n;
-    n = xlength(v);
+    R_xlen_t n = xlength(v);
     PROTECT(ans = allocVector(VECSXP, n));
     ans->maybeTraceMemory(v);
     switch (TYPEOF(v)) {
     case LGLSXP:
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	    SET_VECTOR_ELT(ans, i, ScalarLogical(LOGICAL_ELT(v, i)));
 	}
 	break;
     case INTSXP:
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	    SET_VECTOR_ELT(ans, i, ScalarInteger(INTEGER_ELT(v, i)));
 	}
 	break;
     case REALSXP:
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	    SET_VECTOR_ELT(ans, i, ScalarReal(REAL_ELT(v, i)));
 	}
 	break;
     case CPLXSXP:
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	    SET_VECTOR_ELT(ans, i, ScalarComplex(COMPLEX_ELT(v, i)));
 	}
 	break;
     case STRSXP:
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	    SET_VECTOR_ELT(ans, i, ScalarString(STRING_ELT(v, i)));
 	}
 	break;
     case RAWSXP:
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	    SET_VECTOR_ELT(ans, i, ScalarRaw(RAW_ELT(v, i)));
 	}
@@ -875,7 +873,7 @@ static SEXP coerceToVectorList(SEXP v)
     case LISTSXP:
     case LANGSXP:
 	tmp = v;
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 	    SET_VECTOR_ELT(ans, i, CAR(tmp));
 	    tmp = CDR(tmp);
 	}
@@ -1019,7 +1017,7 @@ static SEXP coercePairList(SEXP v, SEXPTYPE type)
 static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 {
     int warn = 0, tmp;
-    R_xlen_t i, n;
+    R_xlen_t n;
     SEXP rval, names;
 
     names = v;
@@ -1043,7 +1041,7 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	n = xlength(v);
 	PROTECT(rval = allocVector(type, n));
 	rval->maybeTraceMemory(v);
-	for (i = 0; i < n;  i++) {
+	for (R_xlen_t i = 0; i < n;  i++) {
 	    if (isString(VECTOR_ELT(v, i)) && xlength(VECTOR_ELT(v, i)) == 1)
 		SET_STRING_ELT(rval, i, STRING_ELT(VECTOR_ELT(v, i), 0));
 #if 0
@@ -1069,31 +1067,31 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	PROTECT(rval = allocVector(type, n));
 	switch (type) {
 	case LGLSXP:
-	    for (i = 0; i < n; i++) {
+	    for (R_xlen_t i = 0; i < n; i++) {
 //		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		LOGICAL0(rval)[i] = asLogical(VECTOR_ELT(v, i));
 	    }
 	    break;
 	case INTSXP:
-	    for (i = 0; i < n; i++) {
+	    for (R_xlen_t i = 0; i < n; i++) {
 //		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		INTEGER0(rval)[i] = asInteger(VECTOR_ELT(v, i));
 	    }
 	    break;
 	case REALSXP:
-	    for (i = 0; i < n; i++) {
+	    for (R_xlen_t i = 0; i < n; i++) {
 //		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		REAL0(rval)[i] = asReal(VECTOR_ELT(v, i));
 	    }
 	    break;
 	case CPLXSXP:
-	    for (i = 0; i < n; i++) {
+	    for (R_xlen_t i = 0; i < n; i++) {
 //		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		COMPLEX0(rval)[i] = asComplex(VECTOR_ELT(v, i));
 	    }
 	    break;
 	case RAWSXP:
-	    for (i = 0; i < n; i++) {
+	    for (R_xlen_t i = 0; i < n; i++) {
 //		if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		tmp = asInteger(VECTOR_ELT(v, i));
 		if (tmp < 0 || tmp > 255) { /* includes NA_INTEGER */

@@ -2606,8 +2606,8 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 
     /* get the rest of the stuff we need from the current context,
        execute the method, and return the result */
-	call    = cptr->call,
-	arglist = cptr->promargs;
+    call    = cptr->call,
+    arglist = cptr->promargs;
     val = R_execClosure(call, newrho, callerenv, callerenv, arglist, op);
 #ifdef ADJUST_ENVIR_REFCNTS
     R_CleanupEnvir(newrho, val);
@@ -8211,7 +8211,8 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
       }
     OP(ISNULL, 0): DO_ISTEST(isNull);
     OP(ISLOGICAL, 0): DO_ISTYPE(LGLSXP);
-    OP(ISINTEGER, 0): {
+    OP(ISINTEGER, 0):
+      {
 	SEXP arg = GETSTACK(-1);
 	bool test = ((TYPEOF(arg) == INTSXP) && !inherits(arg, "factor"));
 	SETSTACK(-1, test ? R_TrueValue : R_FalseValue);
@@ -8228,7 +8229,8 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
     OP(MATSUBSET, 1): DO_MATSUBSET(rho, FALSE); NEXT();
     OP(VECSUBASSIGN, 1): DO_VECSUBASSIGN(rho, FALSE);
     OP(MATSUBASSIGN, 1): DO_MATSUBASSIGN(rho, FALSE); NEXT();
-    OP(AND1ST, 2): {
+    OP(AND1ST, 2):
+      {
 	int callidx = GETOP();
 	int label = GETOP();
 	FIXUP_SCALAR_LOGICAL(rho, callidx, "'x'", "&&", warn_lev);
@@ -8237,8 +8239,9 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	    pc = codebase + label;
 	Evaluator::enableResultPrinting(true);
 	NEXT();
-    }
-    OP(AND2ND, 1): {
+      }
+    OP(AND2ND, 1):
+      {
 	int callidx = GETOP();
 	FIXUP_SCALAR_LOGICAL(rho, callidx, "'y'", "&&", warn_lev);
 	int val = GETSTACK_LOGICAL(-1);
@@ -8251,8 +8254,9 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	CXXR_POP(1);
 	Evaluator::enableResultPrinting(true);
 	NEXT();
-    }
-    OP(OR1ST, 2):  {
+      }
+    OP(OR1ST, 2):
+      {
 	int callidx = GETOP();
 	int label = GETOP();
 	FIXUP_SCALAR_LOGICAL(rho, callidx, "'x'", "||", warn_lev);
@@ -8262,8 +8266,9 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	    pc = codebase + label;
 	Evaluator::enableResultPrinting(true);
 	NEXT();
-    }
-    OP(OR2ND, 1):  {
+      }
+    OP(OR2ND, 1):
+      {
 	int callidx = GETOP();
 	FIXUP_SCALAR_LOGICAL(rho, callidx, "'y'", "||", warn_lev);
 	int val = GETSTACK_LOGICAL(-1);
@@ -8440,7 +8445,8 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	POP_CALL_FRAME(value);
 	NEXT();
       }
-    OP(SWAP, 0): {
+    OP(SWAP, 0):
+      {
 	/* This instruction only occurs between accessor calls in
 	   complex assignments. [It should probably be renamed to
 	   reflect this.] It needs to make sure intermediate LHS
@@ -8476,7 +8482,8 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	NEXT();
     }
     OP(DUP2ND, 0): BCNDUP2ND(); NEXT();
-    OP(SWITCH, 4): {
+    OP(SWITCH, 4):
+      {
        SEXP call = GETCONST(constants, GETOP());
        SEXP names = GETCONST(constants, GETOP());
        SEXP coffsets = GETCONST(constants, GETOP());
@@ -8528,10 +8535,11 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
        }
        NEXT();
     }
-    OP(RETURNJMP, 0): {
+    OP(RETURNJMP, 0):
+      {
       SEXP value = BCNPOP();
       findcontext(CTXT_BROWSER | CTXT_FUNCTION, rho, value);
-    }
+      }
     OP(STARTSUBSET_N, 2): DO_STARTDISPATCH_N("[");
     OP(STARTSUBASSIGN_N, 2): DO_START_ASSIGN_DISPATCH_N("[<-");
     OP(VECSUBSET2, 1): DO_VECSUBSET(rho, TRUE);

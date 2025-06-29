@@ -40,6 +40,7 @@
 #include <cstdarg>
 #include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
@@ -2976,7 +2977,7 @@ static SEXP R_serialize(SEXP object, SEXP icon, SEXP ascii, SEXP Sversion, SEXP 
 
     if (icon == R_NilValue) {
 	struct membuf_st mbs;
-	GCRoot<> val;
+	GCStackRoot<> val;
 
 	/* set up a context which will free the buffer if there is an error */
 	try {
@@ -3270,7 +3271,7 @@ static SEXP R_getVarsFromFrame(SEXP vars, SEXP env, SEXP forcesxp)
 static SEXP R_lazyLoadDBinsertValue(SEXP val, SEXP file, SEXP ascii,
 			SEXP compsxp, SEXP hook)
 {
-    GCRoot<> value(val);
+    GCStackRoot<> value(val);
     int compress = asInteger(compsxp);
     SEXP key;
 
@@ -3296,7 +3297,7 @@ attribute_hidden SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env
     SEXP key, file, compsxp, hook;
     int compressed;
     bool err = false;
-    GCRoot<> val;
+    GCStackRoot<> val;
 
     checkArity(op, args);
     key = CAR(args); args = CDR(args);
