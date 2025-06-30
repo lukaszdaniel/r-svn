@@ -707,29 +707,36 @@ static int ExtractExactArg(SEXP args)
 
 /* Version of DispatchOrEval for "[" and friends that speeds up simple cases.
    Also defined in subassign.c */
+static R_INLINE std::pair<bool, RObject *> R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args_,
+    SEXP rho)
+{
+    SEXP ans = R_NilValue;
+    GCStackRoot<> args(args_);
+    SEXP prom = NULL;
+    if (args != R_NilValue && CAR(args) != R_DotsSymbol) {
+        GCStackRoot<> x;
+        x = eval(CAR(args), rho);
+        INCREMENT_LINKS(x);
+        if (!OBJECT(x)) {
+            ans = CONS_NR(x, evalListKeepMissing(CDR(args), rho));
+            DECREMENT_LINKS(x);
+            return std::pair<bool, RObject *>(false, ans);
+        }
+        prom = R_mkEVPROMISE_NR(CAR(args), x);
+        args = CONS(prom, CDR(args));
+    }
+    auto dispatched = DispatchOrEval(call, op, generic, args, rho, false, false);
+    if (prom) DECREMENT_LINKS(PRVALUE(prom));
+    return dispatched;
+}
+
 static R_INLINE bool R_DispatchOrEvalSP(SEXP call, SEXP op, const char *generic, SEXP args,
 		    SEXP rho, SEXP *ans)
 {
-    SEXP prom = NULL;
-    if (args != R_NilValue && CAR(args) != R_DotsSymbol) {
-	SEXP x = eval(CAR(args), rho);
-	PROTECT(x);
-	INCREMENT_LINKS(x);
-	if (!OBJECT(x)) {
-	    *ans = CONS_NR(x, evalListKeepMissing(CDR(args), rho));
-	    DECREMENT_LINKS(x);
-	    UNPROTECT(1);
-	    return FALSE;
-	}
-	prom = R_mkEVPROMISE_NR(CAR(args), x);
-	args = CONS(prom, CDR(args));
-	UNPROTECT(1);
-    }
-    PROTECT(args);
-    bool disp = DispatchOrEval(call, op, generic, args, rho, ans, 0, 0);
-    if (prom) DECREMENT_LINKS(PRVALUE(prom));
-    UNPROTECT(1);
-    return disp;
+    std::pair<bool, RObject *> result = R_DispatchOrEvalSP(call, op, generic, args, rho);
+
+    *ans = result.second;
+    return result.first;
 }
 
 /* The "[" subset operator.
@@ -1307,12 +1314,13 @@ attribute_hidden SEXP R::fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* sy
    We need to be sure to only evaluate the first argument.
    The second will be a symbol that needs to be matched, not evaluated.
 */
-attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
+attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args_, SEXP env)
 {
     SEXP ans;
+    GCStackRoot<> args(args_);
 
     checkArity(op, args);
-    PROTECT(args = fixSubset3Args(call, args, env, NULL));
+    args = fixSubset3Args(call, args, env, NULL);
 
     /* If the first argument is an object and there is */
     /* an appropriate method, we dispatch to that method, */
@@ -1322,15 +1330,13 @@ attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* DispatchOrEval internal generic: $ */
     if (R_DispatchOrEvalSP(call, op, "$", args, env, &ans)) {
-	UNPROTECT(1); /* args */
 	if (NAMED(ans))
 	    ENSURE_NAMEDMAX(ans);
 	return ans;
     }
-    PROTECT(ans);
-    ans = R_subset3_dflt(CAR(ans), STRING_ELT(CADR(args), 0), call);
-    UNPROTECT(2); /* args, ans */
-    return ans;
+    GCStackRoot<> ansrt(ans);
+    ansrt = R_subset3_dflt(CAR(ansrt), STRING_ELT(CADR(args), 0), call);
+    return ansrt;
 }
 
 /* also used in eval.c */
