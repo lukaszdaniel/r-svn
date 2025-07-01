@@ -96,6 +96,10 @@ const char *formatError(DWORD res);  /* extra.c */
 # include <sys/stat.h>
 #endif
 
+#ifdef HAVE_ZSTD
+#include <zstd.h>
+#endif
+
 using namespace R;
 using namespace CXXR;
 
@@ -3599,11 +3603,12 @@ extern void *dlsym(void *handle, const char *symbol);
    without loading any modules; libraries available via modules are
    treated individually (libcurlVersion(), La_version(), etc)
 */
+#define nr_softVersion 11
 attribute_hidden SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP ans = PROTECT(allocVector(STRSXP, 10));
-    SEXP nms = PROTECT(allocVector(STRSXP, 10));
+    SEXP ans = PROTECT(allocVector(STRSXP, nr_softVersion));
+    SEXP nms = PROTECT(allocVector(STRSXP, nr_softVersion));
     setAttrib(ans, R_NamesSymbol, nms);
     unsigned int i = 0;
     char p[256];
@@ -3623,6 +3628,14 @@ attribute_hidden SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_STRING_ELT(ans, i, mkChar(""));
 #endif
     SET_STRING_ELT(nms, i++, mkChar("libdeflate"));
+
+#ifdef HAVE_ZSTD
+    SET_STRING_ELT(ans, i, mkChar(ZSTD_versionString()));
+#else
+    SET_STRING_ELT(ans, i, mkChar(""));
+#endif
+    SET_STRING_ELT(nms, i++, mkChar("zstd"));
+
 #ifdef HAVE_PCRE2
     pcre2_config(PCRE2_CONFIG_VERSION, p);
 #else

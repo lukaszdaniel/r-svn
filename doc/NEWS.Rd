@@ -46,6 +46,14 @@
       \item \code{tcltk::tclVersion()} now only optionally includes the
       \sQuote{patch level}, as Tcl full versions can be of the form
       \code{8.7a5} or \code{9.0b1} without three clear components.
+
+      \item \code{untar(tar = "internal")} supports \code{extras =
+	"-P"} to use unchanged the recorded file paths (as many external
+      \command{tar} programs do).
+
+      \item \code{extSoftVersion()[["zstd"]]} now reports the version of
+      the \command{zstd} compression library if available, thanks to
+      \I{Trevor Davis}' patch proposal in \PR{18914}.
     }
   }
 
@@ -64,15 +72,11 @@
     }
   }
 
-  \subsection{INSTALLATION}{
+  \subsection{INSTALLATION on a UNIX-ALIKE}{
     \itemize{
       \item \command{configure} appends \command{bsdtar} to the list of
       command names it tries when finding a default for \env{TAR}.
-    }
-  }
 
-  \subsection{INSTALLATION on a UNIX-ALIKE}{
-    \itemize{
       \item Failures in building the documentation for the base packages,
       including from parsing their Rd files, are no longer ignored by
       \command{make docs}.
@@ -108,7 +112,7 @@
       Where \R is used via extensive \abbr{IDE}s such as \command{RStudio},
       their maintainers may need to adapt \file{R.css} files accordingly.
 
-      \command{R CMD check} when passed a tarball looks at its contents
+      \item \command{R CMD check} when passed a tarball looks at its contents
       and so no longer derives the package name from the tarball name
       (which can now be arbitrary).
     }
@@ -122,9 +126,9 @@
 
   \subsection{BUG FIXES}{
     \itemize{
-      \item Setting \code{attributes} on primitive functions is an
-      error now; previously, it modified without copying, as noticed by
-      \I{Henrik Bengtsson} on the R-devel mailing list.
+      \item Setting \code{attributes} on primitive functions is now an
+      error; previously it modified without copying (as noticed by
+      \I{Henrik Bengtsson} on the R-devel mailing list).
 
       \I{Relatedly}, changing the \code{environment()} of a primitive function
       does no longer happen and gives a warning (to become an error, later).
@@ -149,9 +153,10 @@
       Thanks to \I{Heather Turner}, \I{Ella Kaye}, and
       \I{Philippe Grosjean}.
 
-      \item \code{<Date> \%in\% set} has become as fast again, as it was
-      before \R 4.3.0, via new S3 method \code{mtfrm.Date}.
-      Additionally, \code{<character> \%in\% <Date>} and vice versa are
+      \item \code{<Date> \%in\% set} is again as fast as it was
+      before \R 4.3.0, \emph{via} a new S3 method \code{mtfrm.Date}.
+
+      \code{<character> \%in\% <Date>} and vice versa are now
       documented to work in concordance with \code{==} and as an exception
       to the typical \code{match()} behaviour which relies on
       \dQuote{univariate} \code{mtfrm()} alone.

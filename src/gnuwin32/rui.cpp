@@ -57,7 +57,7 @@ int   RguiMDI = RW_MDI | RW_TOOLBAR | RW_STATUSBAR;
 int   MDIset = 0;
 window RFrame = NULL; /* some compilers want initialized for export */
 rect MDIsize;
-extern int ConsoleAcceptCmd, R_is_running;
+extern bool ConsoleAcceptCmd, R_is_running;
 extern bool DebugMenuitem;
 bool R_LoadRconsole = TRUE; /* used in commandLineArgs */
 

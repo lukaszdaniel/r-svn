@@ -123,9 +123,27 @@ void unset_R_Tcldo(DO_FUNC ptr)
     return;
 }
 
+static int s_pedepth = 0;
+
 void R_ProcessEvents(void)
 {
-    while (peekevent()) doevent();
+    int old_depth = s_pedepth;
+
+    /* do not enter the graphapp message loop recursively */
+    if (!s_pedepth && peekevent()) {
+	s_pedepth++;
+    try
+    {
+        while (peekevent()) doevent();
+    }
+    catch (...)
+    {
+        s_pedepth = old_depth;
+        throw;
+    }
+	s_pedepth = old_depth;
+    }
+
     if (cpuLimit > 0.0 || elapsedLimit > 0.0) {
 #ifdef HAVE_CHECK_TIME_LIMITS
 	/* switch to using R_CheckTimeLimits after testing on Windows */
@@ -280,7 +298,7 @@ void R::R_WriteConsoleEx(const char *buf, int len, otype_t otype)
 
 
 /*1: from GUI console */
-int R_is_running = 0;
+bool R_is_running = false;
 
 void Rconsolesetwidth(int cols)
 {
@@ -296,12 +314,12 @@ static int GuiReadConsole(const char *prompt, unsigned char *buf, int len,
 	translateChar(STRING_ELT(GetOption1(install("prompt")), 0));
 
     if (!R_is_running) {
-	R_is_running = 1;
+	R_is_running = true;
 	Rconsolesetwidth(consolecols(RConsole));
     }
     ConsoleAcceptCmd = streql(prompt, NormalPrompt);
     int res = consolereads(RConsole, prompt, (char *)buf, len, addtohistory);
-    ConsoleAcceptCmd = 0;
+    ConsoleAcceptCmd = false;
 
     return !res;
 }
@@ -320,8 +338,7 @@ static void RunCompletion(void *dummy)
 
 
 /* runs in the main R thread */
-static LRESULT CALLBACK
-ReadMsgWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+static LRESULT CALLBACK ReadMsgWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     if (hwnd == ReadMsgWindow && uMsg == WM_RREADMSG_EVENT) {
 	int what = (int) lParam;
 	switch(what) {
@@ -674,13 +691,13 @@ static void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
 int R::R_ShowFiles(int nfile, const char **file, const char **headers,
 		const char *wtitle, Rboolean del, const char *pager)
 {
-    int   i, ll;
+    int   ll;
     char  buf[1024];
 
     if (nfile > 0) {
 	if (pager == NULL || strlen(pager) == 0)
 	    pager = "internal";
-	for (i = 0; i < nfile; i++) {
+	for (int i = 0; i < nfile; i++) {
 	    if (!access(file[i], R_OK)) {
 		if (streql(pager, "internal")) {
 		    newpager(wtitle, file[i], CE_NATIVE, headers[i], del);
@@ -742,13 +759,13 @@ int R::R_ShowFiles(int nfile, const char **file, const char **headers,
 int R::R_EditFiles(int nfile, const char **file, const char **title,
 		const char *editor)
 {
-    int   i, ll;
+    int   ll;
     char  buf[1024];
 
     if (nfile > 0) {
 	if (editor == NULL || strlen(editor) == 0)
 	    editor = "internal";
-	for (i = 0; i < nfile; i++) {
+	for (int i = 0; i < nfile; i++) {
 	    if (streql(editor, "internal")) {
 		Rgui_Edit(file[i], CE_UTF8, title[i], 0);
 	    } else {
@@ -1011,7 +1028,7 @@ char *PrintUsage(void)
 	msg2b[] =
 	"  --max-ppsize=N        Set max size of protect stack to N\n",
 	msg2c[] =
-	"-  -max-connections=N   Set max number of connections to N\n",
+	"  --max-connections=N   Set max number of connections to N\n",
 	msg3[] =
 	"  -q, --quiet           Don't print startup message\n  --silent              Same as --quiet\n  --no-echo             Make R run as quietly as possible\n  --verbose             Print more information about progress\n  --args                Skip the rest of the command line\n",
 	msg4[] =

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2004--2024  The R Core Team
+ *  Copyright (C) 2004--2025  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 1998--2003  Guido Masarotto and Brian Ripley
  *  Copyright (C) 2004        The R Foundation
@@ -676,7 +676,8 @@ static void SetFont(pGEcontext gc, double rot, gadesc *xd)
     if (size != xd->fontsize || face != xd->fontface ||
 	 rot != xd->fontangle || !streql(gc->fontfamily, xd->fontfamily)) {
 	if(xd->font) del(xd->font);
-	doevent();
+	/* do not call doevent(); here, as it could cause destruction
+	   of the device specific information and a crash below */
 	/*
 	 * If specify family = "", get family from face via Rdevga
 	 *
@@ -2264,6 +2265,9 @@ static void GA_Close(pDevDesc dd)
  */
     /* I think the concern is rather to run all pending events on the
        device (but also on the console and others) */
+    /* doevent() is called here to run the graphapp destructor for the
+       window object before freeing the device-specific information; the
+       destructor may need the information */
     doevent();
     free(xd);
     dd->deviceSpecific = NULL;
