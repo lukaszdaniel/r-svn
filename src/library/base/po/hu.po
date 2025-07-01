@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:50+0200\n"
+"POT-Creation-Date: 2025-06-30 22:49+0200\n"
 "PO-Revision-Date: 2023-09-01 11:37+0000\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -144,7 +144,7 @@ msgstr ""
 #: src/main/character.cpp:1470 src/main/character.cpp:1473
 #: src/main/character.cpp:1720 src/main/character.cpp:1724
 #: src/main/character.cpp:1791 src/main/character.cpp:1794
-#: src/main/coerce.cpp:1489 src/main/coerce.cpp:1553 src/main/coerce.cpp:2159
+#: src/main/coerce.cpp:1487 src/main/coerce.cpp:1551 src/main/coerce.cpp:2157
 #: src/main/connections.cpp:1612 src/main/connections.cpp:1618
 #: src/main/connections.cpp:1623 src/main/connections.cpp:1782
 #: src/main/connections.cpp:1798 src/main/connections.cpp:1803
@@ -177,10 +177,10 @@ msgstr ""
 #: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
 #: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
 #: src/main/envir.cpp:3159 src/main/envir.cpp:3173 src/main/envir.cpp:3180
-#: src/main/envir.cpp:3196 src/main/envir.cpp:3930 src/main/errors.cpp:1282
-#: src/main/errors.cpp:2793 src/main/eval.cpp:893 src/main/eval.cpp:903
-#: src/main/eval.cpp:906 src/main/eval.cpp:909 src/main/eval.cpp:917
-#: src/main/eval.cpp:924 src/main/grep.cpp:1292 src/main/grep.cpp:1297
+#: src/main/envir.cpp:3196 src/main/envir.cpp:3930 src/main/errors.cpp:1275
+#: src/main/errors.cpp:2767 src/main/eval.cpp:894 src/main/eval.cpp:904
+#: src/main/eval.cpp:907 src/main/eval.cpp:910 src/main/eval.cpp:918
+#: src/main/eval.cpp:925 src/main/grep.cpp:1292 src/main/grep.cpp:1297
 #: src/main/grep.cpp:1594 src/main/grep.cpp:1596 src/main/grep.cpp:1598
 #: src/main/grep.cpp:2131 src/main/grep.cpp:2135 src/main/grep.cpp:2140
 #: src/main/grep.cpp:2178 src/main/grep.cpp:2180 src/main/grep.cpp:2973
@@ -222,8 +222,8 @@ msgstr ""
 #: src/main/seq.cpp:801 src/main/seq.cpp:808 src/main/seq.cpp:812
 #: src/main/seq.cpp:818 src/main/sysutils.cpp:646 src/main/sysutils.cpp:650
 #: src/main/sysutils.cpp:654 src/main/sysutils.cpp:2971
-#: src/main/unique.cpp:1886 src/main/unique.cpp:1890 src/main/unique.cpp:2285
-#: src/main/unique.cpp:2290 src/main/util.cpp:716 src/main/util.cpp:719
+#: src/main/unique.cpp:1912 src/main/unique.cpp:1916 src/main/unique.cpp:2311
+#: src/main/unique.cpp:2316 src/main/util.cpp:716 src/main/util.cpp:719
 #: src/main/util.cpp:1711 src/main/util.cpp:1725 src/main/util.cpp:2542
 #: src/main/util.cpp:2800 src/main/util.cpp:2817 src/main/util.cpp:2860
 #: src/main/util.cpp:2902 src/main/util.cpp:2904 src/main/util.cpp:2906
@@ -239,7 +239,7 @@ msgstr ""
 #: src/modules/X11/devX11.cpp:3338 src/modules/X11/devX11.cpp:3341
 #: src/modules/X11/devX11.cpp:3344 src/modules/X11/devX11.cpp:3368
 #: src/unix/sys-std.cpp:1416 src/unix/sys-std.cpp:1439
-#: src/unix/sys-unix.cpp:913
+#: src/unix/sys-unix.cpp:914
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
@@ -254,13 +254,13 @@ msgid "cannot resolve current user or domain: '%s'"
 msgstr ""
 
 #: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879
-#: src/main/sysutils.cpp:690 src/main/unique.cpp:2183 src/main/util.cpp:1088
+#: src/main/sysutils.cpp:690 src/main/unique.cpp:2209 src/main/util.cpp:1088
 #, fuzzy, c-format
 msgid "'%s' must be a character vector"
 msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
 
-#: src/gnuwin32/extra.cpp:766 src/main/errors.cpp:1284 src/main/errors.cpp:1286
-#: src/main/options.cpp:484 src/main/unique.cpp:2187
+#: src/gnuwin32/extra.cpp:766 src/main/errors.cpp:1277 src/main/errors.cpp:1279
+#: src/main/options.cpp:484 src/main/unique.cpp:2213
 #: src/modules/lapack/Lapack.cpp:118 src/modules/lapack/Lapack.cpp:354
 #: src/modules/lapack/Lapack.cpp:383 src/modules/lapack/Lapack.cpp:434
 #: src/modules/lapack/Lapack.cpp:435 src/modules/lapack/Lapack.cpp:471
@@ -308,7 +308,7 @@ msgid "Child process not responding.  R will terminate it."
 msgstr ""
 
 #: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
-#: src/unix/sys-unix.cpp:934
+#: src/unix/sys-unix.cpp:935
 msgid "Timeout with background running processes is not supported."
 msgstr ""
 
@@ -398,9 +398,9 @@ msgstr ""
 #: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
 #: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
 #: src/main/connections.cpp:920 src/main/dounzip.cpp:239
-#: src/main/saveload.cpp:2110 src/main/serialize.cpp:3059
-#: src/main/serialize.cpp:3064 src/main/serialize.cpp:3158
-#: src/main/serialize.cpp:3210 src/unix/system.cpp:432
+#: src/main/saveload.cpp:2110 src/main/serialize.cpp:3060
+#: src/main/serialize.cpp:3065 src/main/serialize.cpp:3159
+#: src/main/serialize.cpp:3211 src/unix/system.cpp:432
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr ""
@@ -496,13 +496,13 @@ msgstr ""
 msgid "character string expected as third argument"
 msgstr ""
 
-#: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1036
-#: src/unix/sys-unix.cpp:1094
+#: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1037
+#: src/unix/sys-unix.cpp:1095
 #, c-format
 msgid "command '%s' timed out after %ds"
 msgstr ""
 
-#: src/gnuwin32/sys-win32.cpp:364 src/unix/sys-unix.cpp:874
+#: src/gnuwin32/sys-win32.cpp:364 src/unix/sys-unix.cpp:875
 #, c-format
 msgid "running command '%s' had status %d"
 msgstr ""
@@ -833,8 +833,8 @@ msgstr "minden argumentum nevesített kell hogy legyen"
 msgid "'FUN.VALUE' must be a vector"
 msgstr ""
 
-#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2018
-#: src/main/serialize.cpp:2036
+#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2019
+#: src/main/serialize.cpp:2037
 msgid "invalid length"
 msgstr ""
 
@@ -861,7 +861,7 @@ msgid ""
 msgstr ""
 
 #: src/main/apply.cpp:226 src/main/apply.cpp:254 src/main/sort.cpp:1277
-#: src/main/sort.cpp:1422 src/main/unique.cpp:1462
+#: src/main/sort.cpp:1422 src/main/unique.cpp:1488
 #, fuzzy
 msgid "invalid type"
 msgstr "hibás argumentum típus"
@@ -871,12 +871,12 @@ msgstr "hibás argumentum típus"
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr ""
 
-#: src/main/apply.cpp:363 src/main/coerce.cpp:2733
+#: src/main/apply.cpp:363 src/main/coerce.cpp:2731
 #, c-format
 msgid "'%s' must be a list or expression"
 msgstr ""
 
-#: src/main/arithmetic.cpp:70 src/main/eval.cpp:5119
+#: src/main/arithmetic.cpp:70 src/main/eval.cpp:5120
 msgid "NaNs produced"
 msgstr ""
 
@@ -1210,7 +1210,7 @@ msgstr ""
 msgid "'dimnames' applied to non-array"
 msgstr ""
 
-#: src/main/attrib.cpp:1110 src/main/coerce.cpp:2736 src/main/engine.cpp:3219
+#: src/main/attrib.cpp:1110 src/main/coerce.cpp:2734 src/main/engine.cpp:3219
 #, c-format
 msgid "'%s' must be a list"
 msgstr ""
@@ -1270,7 +1270,7 @@ msgstr ""
 msgid "all attributes must have names [%d does not]"
 msgstr ""
 
-#: src/main/attrib.cpp:1462 src/main/errors.cpp:1190
+#: src/main/attrib.cpp:1462 src/main/errors.cpp:1183
 msgid "either 2 or 3 arguments are required"
 msgstr ""
 
@@ -1400,19 +1400,19 @@ msgstr ""
 #: src/main/builtin.cpp:94 src/main/builtin.cpp:130 src/main/envir.cpp:1860
 #: src/main/envir.cpp:1971 src/main/envir.cpp:2072 src/main/envir.cpp:2203
 #: src/main/paste.cpp:121 src/main/paste.cpp:363 src/main/random.cpp:492
-#: src/main/random.cpp:521 src/main/unique.cpp:2289
+#: src/main/random.cpp:521 src/main/unique.cpp:2315
 msgid "invalid first argument"
 msgstr ""
 
 #: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313
 #: src/main/builtin.cpp:352 src/main/builtin.cpp:402 src/main/builtin.cpp:416
-#: src/main/coerce.cpp:1583 src/main/connections.cpp:3894
+#: src/main/coerce.cpp:1581 src/main/connections.cpp:3894
 #: src/main/engine.cpp:3221 src/main/envir.cpp:992 src/main/envir.cpp:1042
 #: src/main/envir.cpp:1208 src/main/envir.cpp:1246 src/main/envir.cpp:2007
 #: src/main/envir.cpp:2081 src/main/envir.cpp:2210 src/main/envir.cpp:2933
-#: src/main/envir.cpp:3017 src/main/Environment.cpp:112 src/main/eval.cpp:8904
+#: src/main/envir.cpp:3017 src/main/Environment.cpp:112 src/main/eval.cpp:8913
 #: src/main/objects.cpp:258 src/main/objects.cpp:266 src/main/saveload.cpp:2212
-#: src/main/saveload.cpp:2487 src/main/serialize.cpp:3231
+#: src/main/saveload.cpp:2487 src/main/serialize.cpp:3232
 msgid "use of NULL environment is defunct"
 msgstr ""
 
@@ -1428,9 +1428,9 @@ msgstr ""
 msgid "replacement object is not an environment"
 msgstr ""
 
-#: src/main/builtin.cpp:356 src/main/coerce.cpp:2740 src/main/engine.cpp:3225
+#: src/main/builtin.cpp:356 src/main/coerce.cpp:2738 src/main/engine.cpp:3225
 #: src/main/envir.cpp:1899 src/main/envir.cpp:2940 src/main/envir.cpp:3019
-#: src/main/unique.cpp:1894
+#: src/main/unique.cpp:1920
 #, fuzzy, c-format
 msgid "'%s' must be an environment"
 msgstr "minden argumentum nevesített kell hogy legyen"
@@ -1462,7 +1462,7 @@ msgstr ""
 #: src/main/connections.cpp:5353 src/main/connections.cpp:5416
 #: src/main/connections.cpp:5641 src/main/connections.cpp:5645
 #: src/main/connections.cpp:6098 src/main/deparse.cpp:422
-#: src/main/deparse.cpp:508 src/main/serialize.cpp:2505
+#: src/main/deparse.cpp:508 src/main/serialize.cpp:2506
 msgid "cannot write to this connection"
 msgstr ""
 
@@ -1493,7 +1493,7 @@ msgstr ""
 msgid "cannot set length of non-(vector or list)"
 msgstr ""
 
-#: src/main/builtin.cpp:831 src/main/character.cpp:679 src/main/coerce.cpp:3102
+#: src/main/builtin.cpp:831 src/main/character.cpp:679 src/main/coerce.cpp:3100
 msgid "invalid value"
 msgstr ""
 
@@ -1506,10 +1506,10 @@ msgstr ""
 msgid "wrong length for '%s' argument"
 msgstr ""
 
-#: src/main/builtin.cpp:983 src/main/coerce.cpp:2805 src/main/coerce.cpp:2848
-#: src/main/eval.cpp:1066 src/main/eval.cpp:1229 src/main/eval.cpp:3695
-#: src/main/eval.cpp:3778 src/main/eval.cpp:3845 src/main/eval.cpp:4191
-#: src/main/eval.cpp:7933 src/main/eval.cpp:8076
+#: src/main/builtin.cpp:983 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846
+#: src/main/eval.cpp:1067 src/main/eval.cpp:1230 src/main/eval.cpp:3696
+#: src/main/eval.cpp:3779 src/main/eval.cpp:3846 src/main/eval.cpp:4192
+#: src/main/eval.cpp:7934 src/main/eval.cpp:8077
 msgid "'...' used in an incorrect context"
 msgstr ""
 
@@ -1518,17 +1518,17 @@ msgstr ""
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr ""
 
-#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2690 src/main/dotcode.cpp:564
-#: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3713
+#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564
+#: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3714
 #, c-format
 msgid "'%s' is missing"
 msgstr ""
 
-#: src/main/builtin.cpp:1042 src/main/eval.cpp:8486
+#: src/main/builtin.cpp:1042 src/main/eval.cpp:8494
 msgid "EXPR must be a length 1 vector"
 msgstr ""
 
-#: src/main/builtin.cpp:1045 src/main/eval.cpp:8489
+#: src/main/builtin.cpp:1045 src/main/eval.cpp:8497
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1539,7 +1539,7 @@ msgstr ""
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1101 src/main/eval.cpp:8498 src/main/eval.cpp:8526
+#: src/main/builtin.cpp:1101 src/main/eval.cpp:8506 src/main/eval.cpp:8534
 msgid "'switch' with no alternatives"
 msgstr ""
 
@@ -1670,9 +1670,9 @@ msgstr ""
 #: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
 #: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
-#: src/main/dotcode.cpp:235 src/main/errors.cpp:1176 src/main/errors.cpp:1198
-#: src/main/errors.cpp:1316 src/main/errors.cpp:1323 src/main/errors.cpp:1586
-#: src/main/errors.cpp:2268 src/main/platform.cpp:3859 src/main/seq.cpp:275
+#: src/main/dotcode.cpp:235 src/main/errors.cpp:1169 src/main/errors.cpp:1191
+#: src/main/errors.cpp:1309 src/main/errors.cpp:1316 src/main/errors.cpp:1579
+#: src/main/errors.cpp:2250 src/main/platform.cpp:3859 src/main/seq.cpp:275
 #: src/main/seq.cpp:282 src/main/seq.cpp:286 src/main/seq.cpp:396
 #: src/main/seq.cpp:403 src/main/seq.cpp:406 src/main/seq.cpp:408
 #: src/main/seq.cpp:465 src/main/seq.cpp:469 src/main/seq.cpp:473
@@ -1702,7 +1702,7 @@ msgstr "érvénytelen argumentum"
 msgid "applies only to lists and vectors"
 msgstr ""
 
-#: src/main/coerce.cpp:103 src/main/errors.cpp:1437
+#: src/main/coerce.cpp:103 src/main/errors.cpp:1430
 msgid "NAs introduced by coercion"
 msgstr ""
 
@@ -1710,7 +1710,7 @@ msgstr ""
 msgid "NAs introduced by coercion to integer range"
 msgstr ""
 
-#: src/main/coerce.cpp:107 src/main/errors.cpp:1439
+#: src/main/coerce.cpp:107 src/main/errors.cpp:1432
 msgid "imaginary parts discarded in coercion"
 msgstr ""
 
@@ -1723,178 +1723,178 @@ msgstr ""
 msgid "invalid data of mode '%s' (too short)"
 msgstr ""
 
-#: src/main/coerce.cpp:994 src/main/coerce.cpp:1111 src/main/coerce.cpp:1134
+#: src/main/coerce.cpp:992 src/main/coerce.cpp:1109 src/main/coerce.cpp:1132
 #, c-format
 msgid "'%s' object cannot be coerced to type '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:1164 src/main/coerce.cpp:1534
+#: src/main/coerce.cpp:1162 src/main/coerce.cpp:1532
 msgid "no method for coercing this S4 class to a vector"
 msgstr ""
 
-#: src/main/coerce.cpp:1233
+#: src/main/coerce.cpp:1231
 msgid "environments cannot be coerced to other types"
 msgstr ""
 
-#: src/main/coerce.cpp:1242
+#: src/main/coerce.cpp:1240
 #, c-format
 msgid "cannot coerce type '%s' to vector of type '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:1392
+#: src/main/coerce.cpp:1390
 msgid "attempting to coerce non-factor"
 msgstr ""
 
-#: src/main/coerce.cpp:1397 src/main/coerce.cpp:1407
+#: src/main/coerce.cpp:1395 src/main/coerce.cpp:1405
 msgid "malformed factor"
 msgstr ""
 
-#: src/main/coerce.cpp:1579
+#: src/main/coerce.cpp:1577
 msgid "list argument expected"
 msgstr ""
 
-#: src/main/coerce.cpp:1586 src/main/dstruct.cpp:104 src/main/eval.cpp:8908
+#: src/main/coerce.cpp:1584 src/main/dstruct.cpp:104 src/main/eval.cpp:8917
 msgid "invalid environment"
 msgstr ""
 
-#: src/main/coerce.cpp:1590
+#: src/main/coerce.cpp:1588
 msgid "argument must have length at least 1"
 msgstr ""
 
-#: src/main/coerce.cpp:1613
+#: src/main/coerce.cpp:1611
 msgid "invalid body for function"
 msgstr ""
 
-#: src/main/coerce.cpp:1632
+#: src/main/coerce.cpp:1630
 msgid "argument must be character"
 msgstr ""
 
-#: src/main/coerce.cpp:1637
+#: src/main/coerce.cpp:1635
 msgid "argument must be a character string"
 msgstr ""
 
-#: src/main/coerce.cpp:1681
+#: src/main/coerce.cpp:1679
 #, c-format
 msgid "parsing result not of length one, but %d"
 msgstr ""
 
-#: src/main/coerce.cpp:1711
+#: src/main/coerce.cpp:1709
 msgid "invalid length 0 argument"
 msgstr ""
 
-#: src/main/coerce.cpp:1727
+#: src/main/coerce.cpp:1725
 msgid "as.call(<character>) not feasible; consider str2lang(<char.>)"
 msgstr ""
 
-#: src/main/coerce.cpp:1730
+#: src/main/coerce.cpp:1728
 msgid "invalid argument list"
 msgstr ""
 
-#: src/main/coerce.cpp:1748
+#: src/main/coerce.cpp:1746
 #, c-format
 msgid "'length = %lld' in coercion to '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:1775 src/main/debug.cpp:124 src/main/util.cpp:721
+#: src/main/coerce.cpp:1773 src/main/debug.cpp:124 src/main/util.cpp:721
 #: src/main/util.cpp:724
 #, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr ""
 
-#: src/main/coerce.cpp:1795 src/main/coerce.cpp:1803 src/main/coerce.cpp:1812
-#: src/main/coerce.cpp:1820
+#: src/main/coerce.cpp:1793 src/main/coerce.cpp:1801 src/main/coerce.cpp:1810
+#: src/main/coerce.cpp:1818
 msgid "NA in coercion to boolean"
 msgstr ""
 
-#: src/main/coerce.cpp:2140
+#: src/main/coerce.cpp:2138
 msgid "type \"single\" unimplemented in R"
 msgstr ""
 
-#: src/main/coerce.cpp:2142
+#: src/main/coerce.cpp:2140
 msgid "unimplemented predicate"
 msgstr ""
 
-#: src/main/coerce.cpp:2333
+#: src/main/coerce.cpp:2331
 #, c-format
 msgid "%s() applied to non-(list or vector) of type '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:2452
+#: src/main/coerce.cpp:2450
 #, c-format
 msgid "anyNA() applied to non-(list or vector) of type '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:2464
+#: src/main/coerce.cpp:2462
 #, fuzzy
 msgid "anyNA takes 1 or 2 arguments"
 msgstr "nincsenek argumentumok"
 
-#: src/main/coerce.cpp:2530 src/main/coerce.cpp:2594 src/main/coerce.cpp:2670
+#: src/main/coerce.cpp:2528 src/main/coerce.cpp:2592 src/main/coerce.cpp:2668
 #, c-format
 msgid "default method not implemented for type '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:2697
+#: src/main/coerce.cpp:2695
 msgid "first argument must be a character string"
 msgstr ""
 
-#: src/main/coerce.cpp:2699 src/main/coerce.cpp:2748 src/main/coerce.cpp:2752
+#: src/main/coerce.cpp:2697 src/main/coerce.cpp:2746 src/main/coerce.cpp:2750
 msgid "illegal usage"
 msgstr ""
 
-#: src/main/coerce.cpp:2729
+#: src/main/coerce.cpp:2727
 msgid "'what' must be a function or character string"
 msgstr ""
 
-#: src/main/coerce.cpp:2899
+#: src/main/coerce.cpp:2897
 msgid "invalid environment specified"
 msgstr ""
 
-#: src/main/coerce.cpp:2968
+#: src/main/coerce.cpp:2966
 msgid "Setting class(x) to NULL;   result will no longer be an S4 object"
 msgstr ""
 
-#: src/main/coerce.cpp:2971
+#: src/main/coerce.cpp:2969
 #, c-format
 msgid "Setting class(x) to multiple strings (\"%s\", \"%s\", ...); result will no longer be an S4 object"
 msgstr ""
 
-#: src/main/coerce.cpp:2975
+#: src/main/coerce.cpp:2973
 #, c-format
 msgid "Setting class(x) to \"%s\" sets attribute to NULL; result will no longer be an S4 object"
 msgstr ""
 
-#: src/main/coerce.cpp:3000
+#: src/main/coerce.cpp:2998
 msgid "invalid replacement object to be a class string"
 msgstr ""
 
-#: src/main/coerce.cpp:3006
+#: src/main/coerce.cpp:3004
 #, c-format
 msgid "invalid to set the class to matrix unless the dimension attribute is of length 2 (was %d)"
 msgstr ""
 
-#: src/main/coerce.cpp:3038
+#: src/main/coerce.cpp:3036
 #, c-format
 msgid "\"%s\" can only be set as the class if the object has this type; found \"%s\""
 msgstr ""
 
-#: src/main/coerce.cpp:3056
+#: src/main/coerce.cpp:3054
 msgid "cannot set class to \"array\" unless the dimension attribute has length > 0"
 msgstr ""
 
-#: src/main/coerce.cpp:3094
+#: src/main/coerce.cpp:3092
 msgid "'value' must be non-null character string"
 msgstr ""
 
-#: src/main/coerce.cpp:3098
+#: src/main/coerce.cpp:3096
 msgid "use of 'real' is defunct: use 'double' instead"
 msgstr ""
 
-#: src/main/coerce.cpp:3100
+#: src/main/coerce.cpp:3098
 msgid "use of 'single' is defunct: use mode<- instead"
 msgstr ""
 
-#: src/main/coerce.cpp:3106
+#: src/main/coerce.cpp:3104
 msgid "invalid to change the storage mode of a factor"
 msgstr "nem lehet változtatni a faktor tárolási módon"
 
@@ -2010,8 +2010,8 @@ msgstr ""
 msgid "closing unused connection %d (%s)\n"
 msgstr ""
 
-#: src/main/connections.cpp:313 src/main/serialize.cpp:1753
-#: src/main/serialize.cpp:1774 src/main/sysutils.cpp:739
+#: src/main/connections.cpp:313 src/main/serialize.cpp:1754
+#: src/main/serialize.cpp:1775 src/main/sysutils.cpp:739
 #: src/main/sysutils.cpp:761 src/main/sysutils.cpp:782
 #: src/main/sysutils.cpp:1729 src/main/sysutils.cpp:1744
 #: src/main/sysutils.cpp:1958 src/main/sysutils.cpp:2126
@@ -2149,8 +2149,8 @@ msgstr ""
 #: src/main/connections.cpp:5290 src/main/connections.cpp:5414
 #: src/main/connections.cpp:5637 src/main/dcf.cpp:105 src/main/deparse.cpp:419
 #: src/main/deparse.cpp:505 src/main/saveload.cpp:2395
-#: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2669
-#: src/main/serialize.cpp:2724 src/main/source.cpp:293
+#: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2670
+#: src/main/serialize.cpp:2725 src/main/source.cpp:293
 msgid "cannot open the connection"
 msgstr ""
 
@@ -2469,8 +2469,8 @@ msgid "cannot close 'message' sink connection"
 msgstr ""
 
 #: src/main/connections.cpp:4266 src/main/connections.cpp:6097
-#: src/main/connections.cpp:6105 src/main/serialize.cpp:2495
-#: src/main/serialize.cpp:2503
+#: src/main/connections.cpp:6105 src/main/serialize.cpp:2496
+#: src/main/serialize.cpp:2504
 msgid "connection is not open"
 msgstr ""
 
@@ -2492,7 +2492,7 @@ msgstr ""
 #: src/main/connections.cpp:4719 src/main/connections.cpp:5275
 #: src/main/connections.cpp:5293 src/main/connections.cpp:6106
 #: src/main/dcf.cpp:107 src/main/scan.cpp:969 src/main/scan.cpp:973
-#: src/main/serialize.cpp:2497 src/main/source.cpp:296
+#: src/main/serialize.cpp:2498 src/main/source.cpp:296
 msgid "cannot read from this connection"
 msgstr ""
 
@@ -3100,9 +3100,9 @@ msgid "'opts' should be small non-negative integer"
 msgstr ""
 
 #: src/main/deparse.cpp:477 src/main/envir.cpp:1997 src/main/envir.cpp:2121
-#: src/main/envir.cpp:2275 src/main/envir.cpp:3779 src/main/eval.cpp:1073
-#: src/main/eval.cpp:2644 src/main/eval.cpp:5792 src/main/saveload.cpp:2123
-#: src/main/saveload.cpp:2437 src/main/serialize.cpp:3249
+#: src/main/envir.cpp:2275 src/main/envir.cpp:3779 src/main/eval.cpp:1074
+#: src/main/eval.cpp:2645 src/main/eval.cpp:5793 src/main/saveload.cpp:2123
+#: src/main/saveload.cpp:2437 src/main/serialize.cpp:3250
 #, c-format
 msgid "object '%s' not found"
 msgstr ""
@@ -4025,557 +4025,557 @@ msgstr ""
 msgid "Warning in '%s':"
 msgstr "érvénytelen argumentum"
 
-#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:868
+#: src/main/errors.cpp:523 src/main/errors.cpp:538 src/main/errors.cpp:865
 msgid "Calls:"
 msgstr ""
 
-#: src/main/errors.cpp:596 src/main/errors.cpp:693 src/main/errors.cpp:770
+#: src/main/errors.cpp:595 src/main/errors.cpp:692 src/main/errors.cpp:769
 msgid "Lost warning messages\n"
 msgstr ""
 
-#: src/main/errors.cpp:602
+#: src/main/errors.cpp:601
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/errors.cpp:616 src/main/errors.cpp:645
+#: src/main/errors.cpp:615 src/main/errors.cpp:644
 #, c-format
 msgid "In '%s':"
 msgstr ""
 
-#: src/main/errors.cpp:670
+#: src/main/errors.cpp:669
 #, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/errors.cpp:675
+#: src/main/errors.cpp:674
 #, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr ""
 
-#: src/main/errors.cpp:761
+#: src/main/errors.cpp:760
 msgid "Error during wrapup: "
 msgstr ""
 
-#: src/main/errors.cpp:772
+#: src/main/errors.cpp:771
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr ""
 
-#: src/main/errors.cpp:789
+#: src/main/errors.cpp:788
 msgid "Error in "
 msgstr ""
 
-#: src/main/errors.cpp:807 src/main/errors.cpp:814
+#: src/main/errors.cpp:805 src/main/errors.cpp:812
 #, c-format
 msgid "Error in '%s' (from %s): "
 msgstr ""
 
-#: src/main/errors.cpp:816
+#: src/main/errors.cpp:814
 #, c-format
 msgid "Error in '%s': "
 msgstr ""
 
-#: src/main/errors.cpp:839 src/main/errors.cpp:845
+#: src/main/errors.cpp:837 src/main/errors.cpp:842
 msgid "Error: "
 msgstr ""
 
-#: src/main/errors.cpp:881 src/main/errors.cpp:1497
+#: src/main/errors.cpp:878 src/main/errors.cpp:1490
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/errors.cpp:1007
+#: src/main/errors.cpp:1004
 msgid "invalid option \"error\"\n"
 msgstr ""
 
-#: src/main/errors.cpp:1359 src/main/errors.cpp:1391
+#: src/main/errors.cpp:1352 src/main/errors.cpp:1384
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr "érvénytelen argumentum"
 
-#: src/main/errors.cpp:1407
+#: src/main/errors.cpp:1400
 #, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr ""
 
-#: src/main/errors.cpp:1413 src/main/errors.cpp:1428
+#: src/main/errors.cpp:1406 src/main/errors.cpp:1421
 #, c-format
 msgid "unimplemented feature in %s"
 msgstr ""
 
-#: src/main/errors.cpp:1422
+#: src/main/errors.cpp:1415
 msgid "invalid number of arguments"
 msgstr ""
 
-#: src/main/errors.cpp:1423 src/main/logic.cpp:213
+#: src/main/errors.cpp:1416 src/main/logic.cpp:213
 msgid "invalid argument type"
 msgstr "hibás argumentum típus"
 
-#: src/main/errors.cpp:1425
+#: src/main/errors.cpp:1418
 msgid "time-series/vector length mismatch"
 msgstr ""
 
-#: src/main/errors.cpp:1426
+#: src/main/errors.cpp:1419
 msgid "incompatible arguments"
 msgstr ""
 
-#: src/main/errors.cpp:1429
+#: src/main/errors.cpp:1422
 msgid "unknown error (report this!)"
 msgstr ""
 
-#: src/main/errors.cpp:1438
+#: src/main/errors.cpp:1431
 msgid "inaccurate integer conversion in coercion"
 msgstr ""
 
-#: src/main/errors.cpp:1441
+#: src/main/errors.cpp:1434
 msgid "unknown warning (report this!)"
 msgstr ""
 
-#: src/main/errors.cpp:1746
+#: src/main/errors.cpp:1739
 msgid "bad handler data"
 msgstr ""
 
-#: src/main/errors.cpp:1899
+#: src/main/errors.cpp:1888
 msgid "error message not a string"
 msgstr ""
 
-#: src/main/errors.cpp:1978
+#: src/main/errors.cpp:1963
 msgid "handler or restart stack mismatch in old restart"
 msgstr ""
 
-#: src/main/errors.cpp:2019 src/main/errors.cpp:2032
+#: src/main/errors.cpp:2002 src/main/errors.cpp:2015
 msgid "bad error message"
 msgstr ""
 
-#: src/main/errors.cpp:2073
+#: src/main/errors.cpp:2055
 msgid "bad restart"
 msgstr ""
 
-#: src/main/errors.cpp:2105
+#: src/main/errors.cpp:2087
 msgid "restart not on stack"
 msgstr ""
 
-#: src/main/errors.cpp:2122
+#: src/main/errors.cpp:2104
 msgid "not in a try context"
 msgstr ""
 
-#: src/main/errors.cpp:2133
+#: src/main/errors.cpp:2115
 msgid "error message must be a character string"
 msgstr ""
 
-#: src/main/errors.cpp:2453 src/main/errors.cpp:2548
+#: src/main/errors.cpp:2435 src/main/errors.cpp:2530
 msgid "body function is required"
 msgstr ""
 
-#: src/main/errors.cpp:2496
+#: src/main/errors.cpp:2478
 msgid "not an external pointer"
 msgstr ""
 
-#: src/main/errors.cpp:2606 src/main/errors.cpp:2621
+#: src/main/errors.cpp:2583 src/main/errors.cpp:2598
 msgid "should not be called with handlers on the stack"
 msgstr ""
 
-#: src/main/errors.cpp:2672
+#: src/main/errors.cpp:2646
 msgid "condition object must be a VECSXP of length at least one"
 msgstr ""
 
-#: src/main/errors.cpp:2675
+#: src/main/errors.cpp:2649
 msgid "first element of condition object must be a scalar string"
 msgstr ""
 
-#: src/main/errors.cpp:2770
+#: src/main/errors.cpp:2744
 #, c-format
 msgid "argument \"%s\" is missing, with no default"
 msgstr ""
 
-#: src/main/errors.cpp:2773
+#: src/main/errors.cpp:2747
 msgid "argument is missing, with no default"
 msgstr ""
 
-#: src/main/errors.cpp:2795
+#: src/main/errors.cpp:2769
 msgid "bad field index"
 msgstr ""
 
-#: src/main/errors.cpp:2798
+#: src/main/errors.cpp:2772
 msgid "bad names attribute on condition object"
 msgstr ""
 
-#: src/main/errors.cpp:2953
+#: src/main/errors.cpp:2927
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr ""
 
-#: src/main/errors.cpp:2965
+#: src/main/errors.cpp:2939
 msgid "protect(): protection stack overflow"
 msgstr ""
 
-#: src/main/errors.cpp:2966
+#: src/main/errors.cpp:2940
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr ""
 
-#: src/main/errors.cpp:2967
+#: src/main/errors.cpp:2941
 msgid "node stack overflow"
 msgstr ""
 
-#: src/main/eval.cpp:713
+#: src/main/eval.cpp:714
 msgid "samples too large for I/O buffer skipped by Rprof"
 msgstr ""
 
-#: src/main/eval.cpp:715
+#: src/main/eval.cpp:716
 #, c-format
 msgid "source files skipped by Rprof; please increase '%s'"
 msgstr ""
 
-#: src/main/eval.cpp:739 src/main/eval.cpp:748
+#: src/main/eval.cpp:740 src/main/eval.cpp:749
 #, c-format
 msgid "Rprof: cannot open profile file '%s'"
 msgstr ""
 
-#: src/main/eval.cpp:794 src/main/eval.cpp:827
+#: src/main/eval.cpp:795 src/main/eval.cpp:828
 msgid "unable to create profiling thread"
 msgstr ""
 
-#: src/main/eval.cpp:801
+#: src/main/eval.cpp:802
 msgid "profiling requires 'pthread' support"
 msgstr ""
 
-#: src/main/eval.cpp:870 src/main/eval.cpp:9137
+#: src/main/eval.cpp:871 src/main/eval.cpp:9146
 msgid "setting profile timer failed"
 msgstr ""
 
-#: src/main/eval.cpp:888
+#: src/main/eval.cpp:889
 msgid "cannot use R profiling while byte code profiling"
 msgstr ""
 
-#: src/main/eval.cpp:915
+#: src/main/eval.cpp:916
 #, c-format
 msgid "event type '%s' not supported on this platform"
 msgstr ""
 
-#: src/main/eval.cpp:930
+#: src/main/eval.cpp:931
 #, c-format
 msgid "interval too short for this platform, using '%f'"
 msgstr ""
 
-#: src/main/eval.cpp:935
+#: src/main/eval.cpp:936
 #, c-format
 msgid "interval too short, using '%f'"
 msgstr ""
 
-#: src/main/eval.cpp:951
+#: src/main/eval.cpp:952
 msgid "R profiling is not available on this system"
 msgstr ""
 
-#: src/main/eval.cpp:962
+#: src/main/eval.cpp:963
 #, c-format
 msgid "Warning: stack imbalance in '%s', %td then %td\n"
 msgstr ""
 
-#: src/main/eval.cpp:1096
+#: src/main/eval.cpp:1097
 msgid "promise already under evaluation: recursive default argument reference or earlier problems?"
 msgstr ""
 
-#: src/main/eval.cpp:1102
+#: src/main/eval.cpp:1103
 msgid "restarting interrupted promise evaluation"
 msgstr ""
 
-#: src/main/eval.cpp:1222 src/main/eval.cpp:2512 src/main/eval.cpp:7871
+#: src/main/eval.cpp:1223 src/main/eval.cpp:2513 src/main/eval.cpp:7872
 msgid "attempt to apply non-function"
 msgstr ""
 
-#: src/main/eval.cpp:1351
+#: src/main/eval.cpp:1352
 #, c-format
 msgid "%s at %s#%d: "
 msgstr ""
 
-#: src/main/eval.cpp:2277
+#: src/main/eval.cpp:2278
 msgid "'rho' cannot be C NULL: detected in C-level applyClosure"
 msgstr ""
 
-#: src/main/eval.cpp:2279
+#: src/main/eval.cpp:2280
 #, c-format
 msgid "'rho' must be an environment not %s: detected in C-level applyClosure"
 msgstr ""
 
-#: src/main/eval.cpp:2505 src/main/eval.cpp:3699 src/main/eval.cpp:6857
+#: src/main/eval.cpp:2506 src/main/eval.cpp:3700 src/main/eval.cpp:6858
 #, c-format
 msgid "argument %d is empty"
 msgstr ""
 
-#: src/main/eval.cpp:2506
+#: src/main/eval.cpp:2507
 msgid "something weird happened"
 msgstr ""
 
-#: src/main/eval.cpp:2554
+#: src/main/eval.cpp:2555
 #, c-format
 msgid "could not find symbol \"%s\" in environment of the generic function"
 msgstr ""
 
-#: src/main/eval.cpp:2572
+#: src/main/eval.cpp:2573
 #, c-format
 msgid "symbol \"%s\" not in environment of method"
 msgstr ""
 
-#: src/main/eval.cpp:2703
+#: src/main/eval.cpp:2704
 msgid "the condition has length > 1"
 msgstr ""
 
-#: src/main/eval.cpp:2720
+#: src/main/eval.cpp:2721
 msgid "missing value where TRUE/FALSE needed"
 msgstr ""
 
-#: src/main/eval.cpp:2721
+#: src/main/eval.cpp:2722
 msgid "argument is not interpretable as logical"
 msgstr ""
 
-#: src/main/eval.cpp:2722
+#: src/main/eval.cpp:2723
 msgid "argument is of length zero"
 msgstr ""
 
-#: src/main/eval.cpp:2823
+#: src/main/eval.cpp:2824
 msgid "non-symbol loop variable"
 msgstr ""
 
-#: src/main/eval.cpp:2916 src/main/eval.cpp:7568
+#: src/main/eval.cpp:2917 src/main/eval.cpp:7569
 msgid "invalid for() loop sequence"
 msgstr ""
 
-#: src/main/eval.cpp:3088
+#: src/main/eval.cpp:3089
 msgid "multi-argument returns are not permitted"
 msgstr ""
 
-#: src/main/eval.cpp:3140
+#: src/main/eval.cpp:3141
 msgid "\"expr\" must be a call expression"
 msgstr ""
 
-#: src/main/eval.cpp:3201
+#: src/main/eval.cpp:3202
 msgid "recompile eval.c with -DSUPPORT_TAILCALL to enable Exec and Tailcall"
 msgstr ""
 
-#: src/main/eval.cpp:3247
+#: src/main/eval.cpp:3248
 msgid "invalid (NULL) left side of assignment"
 msgstr ""
 
-#: src/main/eval.cpp:3283
+#: src/main/eval.cpp:3284
 msgid "target of assignment expands to non-language object"
 msgstr ""
 
-#: src/main/eval.cpp:3368
+#: src/main/eval.cpp:3369
 #, c-format
 msgid "overlong name in '%s'"
 msgstr ""
 
-#: src/main/eval.cpp:3492
+#: src/main/eval.cpp:3493
 msgid "cannot do complex assignments in base namespace"
 msgstr ""
 
-#: src/main/eval.cpp:3494
+#: src/main/eval.cpp:3495
 msgid "cannot do complex assignments in base environment"
 msgstr ""
 
-#: src/main/eval.cpp:3534 src/main/eval.cpp:3559
+#: src/main/eval.cpp:3535 src/main/eval.cpp:3560
 msgid "invalid function in complex assignment"
 msgstr ""
 
-#: src/main/eval.cpp:3634
+#: src/main/eval.cpp:3635
 msgid "invalid (do_set) left-hand side to assignment"
 msgstr ""
 
-#: src/main/eval.cpp:3873 src/main/eval.cpp:3876
+#: src/main/eval.cpp:3874 src/main/eval.cpp:3877
 #, fuzzy, c-format
 msgid "invalid formal argument list for \"%s\""
 msgstr "hibás argumentum típus"
 
-#: src/main/eval.cpp:3932 src/main/eval.cpp:3960 src/main/eval.cpp:3965
+#: src/main/eval.cpp:3933 src/main/eval.cpp:3961 src/main/eval.cpp:3966
 #, c-format
 msgid "invalid '%s' argument of type '%s'"
 msgstr ""
 
-#: src/main/eval.cpp:3957
+#: src/main/eval.cpp:3958
 msgid "numeric 'envir' arg not of length one"
 msgstr ""
 
-#: src/main/eval.cpp:4062 src/main/eval.cpp:4075
+#: src/main/eval.cpp:4063 src/main/eval.cpp:4076
 msgid "'Recall' called from outside a closure"
 msgstr ""
 
-#: src/main/eval.cpp:4184
+#: src/main/eval.cpp:4185
 msgid "value in '...' is not a promise"
 msgstr ""
 
-#: src/main/eval.cpp:4504
+#: src/main/eval.cpp:4505
 #, c-format
 msgid "Incompatible methods (\"%s\", \"%s\") for \"%s\""
 msgstr ""
 
-#: src/main/eval.cpp:4554
+#: src/main/eval.cpp:4555
 msgid "dispatch error in group dispatch"
 msgstr ""
 
-#: src/main/eval.cpp:4853
+#: src/main/eval.cpp:4854
 msgid "changing stack value below R_BCProt pointer"
 msgstr ""
 
-#: src/main/eval.cpp:5024
+#: src/main/eval.cpp:5025
 #, c-format
 msgid "\"%s\" is not a %s function"
 msgstr ""
 
-#: src/main/eval.cpp:5314
+#: src/main/eval.cpp:5315
 msgid "math1 compiler/interpreter mismatch"
 msgstr ""
 
-#: src/main/eval.cpp:5633
+#: src/main/eval.cpp:5634
 msgid "bad opcode"
 msgstr ""
 
-#: src/main/eval.cpp:6838 src/main/logic.cpp:307 src/main/logic.cpp:316
+#: src/main/eval.cpp:6839 src/main/logic.cpp:307 src/main/logic.cpp:316
 #, c-format
 msgid "invalid %s type in 'x %s y'"
 msgstr ""
 
-#: src/main/eval.cpp:6871
+#: src/main/eval.cpp:6872
 #, c-format
 msgid "argument %d is missing"
 msgstr ""
 
-#: src/main/eval.cpp:7481
+#: src/main/eval.cpp:7482
 msgid "byte code version mismatch"
 msgstr ""
 
-#: src/main/eval.cpp:7704
+#: src/main/eval.cpp:7705
 msgid "invalid sequence argument in for loop"
 msgstr ""
 
-#: src/main/eval.cpp:7861 src/main/names.cpp:1366
+#: src/main/eval.cpp:7862 src/main/names.cpp:1366
 #, c-format
 msgid "there is no .Internal function '%s'"
 msgstr ""
 
-#: src/main/eval.cpp:7976 src/main/eval.cpp:8397 src/main/eval.cpp:8438
+#: src/main/eval.cpp:7977 src/main/eval.cpp:8403 src/main/eval.cpp:8444
 msgid "bad function"
 msgstr ""
 
-#: src/main/eval.cpp:7989
+#: src/main/eval.cpp:7990
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "a 'by' argumentum túl kicsi"
 
-#: src/main/eval.cpp:8495 src/main/eval.cpp:8520
+#: src/main/eval.cpp:8503 src/main/eval.cpp:8528
 msgid "bad numeric 'switch' offsets"
 msgstr ""
 
-#: src/main/eval.cpp:8501
+#: src/main/eval.cpp:8509
 msgid "numeric EXPR required for 'switch' without named alternatives"
 msgstr ""
 
-#: src/main/eval.cpp:8504
+#: src/main/eval.cpp:8512
 msgid "bad character 'switch' offsets"
 msgstr ""
 
-#: src/main/eval.cpp:8506
+#: src/main/eval.cpp:8514
 msgid "bad 'switch' names"
 msgstr ""
 
-#: src/main/eval.cpp:8633
+#: src/main/eval.cpp:8642
 msgid "unknown instruction code"
 msgstr ""
 
-#: src/main/eval.cpp:8647
+#: src/main/eval.cpp:8656
 msgid "cannot find index for threaded code address"
 msgstr ""
 
-#: src/main/eval.cpp:8688
+#: src/main/eval.cpp:8697
 msgid "R_registerBC requires integer vector as bcBytes"
 msgstr ""
 
-#: src/main/eval.cpp:8690
+#: src/main/eval.cpp:8699
 msgid "R_registerBC requires BCODESXP object as bcode"
 msgstr ""
 
-#: src/main/eval.cpp:8769
+#: src/main/eval.cpp:8778
 msgid "ERROR: the modified value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8771
+#: src/main/eval.cpp:8780
 msgid "ERROR: the original value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8773
+#: src/main/eval.cpp:8782
 #, c-format
 msgid "ERROR: the modified constant is at index %d\n"
 msgstr ""
 
-#: src/main/eval.cpp:8774
+#: src/main/eval.cpp:8783
 msgid "ERROR: the modified constant is in this function body:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8777
+#: src/main/eval.cpp:8786
 msgid "ERROR: the modified constant is function body:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8779
+#: src/main/eval.cpp:8788
 msgid "ERROR: the body was originally:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8808 src/main/eval.cpp:8817
+#: src/main/eval.cpp:8817 src/main/eval.cpp:8826
 #, c-format
 msgid "ERROR: modification of compiler constant of type %s, length %d\n"
 msgstr ""
 
-#: src/main/eval.cpp:8831
+#: src/main/eval.cpp:8840
 msgid "compiler constants were modified!\n"
 msgstr ""
 
-#: src/main/eval.cpp:8901
+#: src/main/eval.cpp:8910
 msgid "invalid body"
 msgstr ""
 
-#: src/main/eval.cpp:8921
+#: src/main/eval.cpp:8930
 msgid "invalid symbol"
 msgstr ""
 
-#: src/main/eval.cpp:8962
+#: src/main/eval.cpp:8971
 msgid "argument is not a byte code object"
 msgstr ""
 
-#: src/main/eval.cpp:8990 src/main/eval.cpp:8997
+#: src/main/eval.cpp:8999 src/main/eval.cpp:9006
 msgid "R_CompiledFileName: buffer too small"
 msgstr ""
 
-#: src/main/eval.cpp:9028 src/main/eval.cpp:9044 src/main/eval.cpp:9077
+#: src/main/eval.cpp:9037 src/main/eval.cpp:9053 src/main/eval.cpp:9086
 msgid "constant buffer must be a generic vector"
 msgstr ""
 
-#: src/main/eval.cpp:9048
+#: src/main/eval.cpp:9057
 msgid "bad constCount value"
 msgstr ""
 
-#: src/main/eval.cpp:9079
+#: src/main/eval.cpp:9088
 msgid "bad constant count"
 msgstr ""
 
-#: src/main/eval.cpp:9115
+#: src/main/eval.cpp:9124
 msgid "profile timer in use"
 msgstr ""
 
-#: src/main/eval.cpp:9117
+#: src/main/eval.cpp:9126
 msgid "already byte code profiling"
 msgstr ""
 
-#: src/main/eval.cpp:9156
+#: src/main/eval.cpp:9165
 msgid "not byte code profiling"
 msgstr ""
 
-#: src/main/eval.cpp:9173 src/main/eval.cpp:9178 src/main/eval.cpp:9183
+#: src/main/eval.cpp:9182 src/main/eval.cpp:9187 src/main/eval.cpp:9192
 msgid "byte code profiling is not supported in this build"
 msgstr ""
 
-#: src/main/eval.cpp:9233
+#: src/main/eval.cpp:9241
 msgid "parse error"
 msgstr ""
 
@@ -5152,108 +5152,108 @@ msgstr ""
 msgid "Setting LC_TIME=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:987
+#: src/main/main.cpp:986
 msgid "Setting LC_CTYPE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:990
+#: src/main/main.cpp:989
 msgid "Setting LC_COLLATE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:993
+#: src/main/main.cpp:992
 msgid "Setting LC_TIME failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:997
+#: src/main/main.cpp:996
 msgid "Setting LC_MESSAGES failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1003
+#: src/main/main.cpp:1002
 msgid "Setting LC_MONETARY failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1008
+#: src/main/main.cpp:1007
 msgid "Setting LC_PAPER failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1013
+#: src/main/main.cpp:1012
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1046
+#: src/main/main.cpp:1045
 #, c-format
 msgid "Using locale code page other than %d%s may cause problems."
 msgstr ""
 
-#: src/main/main.cpp:1073
+#: src/main/main.cpp:1072
 msgid "unable to open the base package\n"
 msgstr ""
 
-#: src/main/main.cpp:1131
+#: src/main/main.cpp:1130
 msgid "allocation failure in setup_Rmainloop"
 msgstr ""
 
-#: src/main/main.cpp:1165
+#: src/main/main.cpp:1164
 #, c-format
 msgid "unable to restore saved data in %s\n"
 msgstr ""
 
-#: src/main/main.cpp:1219
+#: src/main/main.cpp:1218
 msgid "Warning message during startup:"
 msgid_plural "Warning messages during startup:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/main/main.cpp:1237
+#: src/main/main.cpp:1236
 msgid "unable to initialize the JIT\n"
 msgstr ""
 
-#: src/main/main.cpp:1478
+#: src/main/main.cpp:1476
 msgid "non-interactive browser() -- left over from debugging?"
 msgstr ""
 
-#: src/main/main.cpp:1610
+#: src/main/main.cpp:1608
 msgid "cannot quit from browser"
 msgstr ""
 
-#: src/main/main.cpp:1614
+#: src/main/main.cpp:1612
 msgid "one of \"yes\", \"no\", \"ask\" or \"default\" expected."
 msgstr ""
 
-#: src/main/main.cpp:1619
+#: src/main/main.cpp:1617
 msgid "save=\"ask\" in non-interactive use: command-line default will be used"
 msgstr ""
 
-#: src/main/main.cpp:1627
+#: src/main/main.cpp:1625
 msgid "unrecognized value of 'save'"
 msgstr ""
 
-#: src/main/main.cpp:1630
+#: src/main/main.cpp:1628
 msgid "invalid 'status', 0 assumed"
 msgstr ""
 
-#: src/main/main.cpp:1635
+#: src/main/main.cpp:1633
 msgid "invalid 'runLast', FALSE assumed"
 msgstr ""
 
-#: src/main/main.cpp:1679
+#: src/main/main.cpp:1677
 msgid "cannot allocate space for toplevel callback element"
 msgstr ""
 
-#: src/main/main.cpp:1765
+#: src/main/main.cpp:1763
 msgid "negative index passed to R_removeTaskCallbackByIndex"
 msgstr ""
 
-#: src/main/main.cpp:1884
+#: src/main/main.cpp:1882
 msgid "list of toplevel callbacks was corrupted"
 msgstr ""
 
-#: src/main/main.cpp:1889
+#: src/main/main.cpp:1887
 #, c-format
 msgid "warning messages from top-level task callback '%s'\n"
 msgstr ""
 
-#: src/main/main.cpp:1979
+#: src/main/main.cpp:1977
 msgid "top-level task callback did not return a logical value"
 msgstr ""
 
@@ -6995,11 +6995,11 @@ msgstr ""
 #: src/main/saveload.cpp:273 src/main/saveload.cpp:282
 #: src/main/saveload.cpp:1449 src/main/saveload.cpp:1454
 #: src/main/saveload.cpp:1497 src/main/saveload.cpp:1565
-#: src/main/saveload.cpp:1574 src/main/serialize.cpp:414
-#: src/main/serialize.cpp:421 src/main/serialize.cpp:434
-#: src/main/serialize.cpp:438 src/main/serialize.cpp:468
-#: src/main/serialize.cpp:484 src/main/serialize.cpp:2113
-#: src/main/serialize.cpp:2890 src/main/serialize.cpp:2898
+#: src/main/saveload.cpp:1574 src/main/serialize.cpp:415
+#: src/main/serialize.cpp:422 src/main/serialize.cpp:435
+#: src/main/serialize.cpp:439 src/main/serialize.cpp:469
+#: src/main/serialize.cpp:485 src/main/serialize.cpp:2114
+#: src/main/serialize.cpp:2891 src/main/serialize.cpp:2899
 msgid "read error"
 msgstr ""
 
@@ -7043,7 +7043,7 @@ msgid "mismatch on types"
 msgstr ""
 
 #: src/main/saveload.cpp:652 src/main/saveload.cpp:1348
-#: src/main/serialize.cpp:2026
+#: src/main/serialize.cpp:2027
 #, c-format
 msgid "unrecognized internal function name \"%s\""
 msgstr ""
@@ -7147,8 +7147,8 @@ msgstr ""
 msgid "an xdr complex data read error occurred"
 msgstr ""
 
-#: src/main/saveload.cpp:1859 src/main/serialize.cpp:2459
-#: src/main/serialize.cpp:3078 src/modules/internet/internet.cpp:403
+#: src/main/saveload.cpp:1859 src/main/serialize.cpp:2460
+#: src/main/serialize.cpp:3079 src/modules/internet/internet.cpp:403
 #: src/modules/internet/internet.cpp:473
 msgid "write failed"
 msgstr ""
@@ -7203,14 +7203,14 @@ msgid "first argument must be a file name"
 msgstr ""
 
 #: src/main/saveload.cpp:2247 src/main/saveload.cpp:2272
-#: src/main/serialize.cpp:926 src/main/serialize.cpp:967
-#: src/main/serialize.cpp:1009
+#: src/main/serialize.cpp:927 src/main/serialize.cpp:968
+#: src/main/serialize.cpp:1010
 msgid "XDR write failed"
 msgstr ""
 
 #: src/main/saveload.cpp:2259 src/main/saveload.cpp:2284
-#: src/main/serialize.cpp:1554 src/main/serialize.cpp:1589
-#: src/main/serialize.cpp:1626
+#: src/main/serialize.cpp:1555 src/main/serialize.cpp:1590
+#: src/main/serialize.cpp:1627
 msgid "XDR read failed"
 msgstr ""
 
@@ -7219,12 +7219,12 @@ msgstr ""
 msgid "cannot save data -- unable to open '%s': %s"
 msgstr ""
 
-#: src/main/saveload.cpp:2384 src/main/serialize.cpp:2655
+#: src/main/saveload.cpp:2384 src/main/serialize.cpp:2656
 #, c-format
 msgid "cannot save to connections in version %d format"
 msgstr ""
 
-#: src/main/saveload.cpp:2401 src/main/serialize.cpp:2675
+#: src/main/saveload.cpp:2401 src/main/serialize.cpp:2676
 msgid "connection not open for writing"
 msgstr ""
 
@@ -7232,13 +7232,13 @@ msgstr ""
 msgid "cannot save XDR format to a text-mode connection"
 msgstr ""
 
-#: src/main/saveload.cpp:2423 src/main/serialize.cpp:2564
-#: src/main/serialize.cpp:2578 src/main/serialize.cpp:2763
-#: src/main/serialize.cpp:2786
+#: src/main/saveload.cpp:2423 src/main/serialize.cpp:2565
+#: src/main/serialize.cpp:2579 src/main/serialize.cpp:2764
+#: src/main/serialize.cpp:2787
 msgid "error writing to connection"
 msgstr ""
 
-#: src/main/saveload.cpp:2481 src/main/serialize.cpp:2727
+#: src/main/saveload.cpp:2481 src/main/serialize.cpp:2728
 msgid "connection not open for reading"
 msgstr ""
 
@@ -7424,219 +7424,219 @@ msgstr ""
 msgid "'by' contains NAs"
 msgstr ""
 
-#: src/main/serialize.cpp:246
+#: src/main/serialize.cpp:247
 #, c-format
 msgid "assertion '%s' failed: file '%s', line %d\n"
 msgstr ""
 
-#: src/main/serialize.cpp:288 src/main/serialize.cpp:335
-#: src/main/serialize.cpp:359
+#: src/main/serialize.cpp:289 src/main/serialize.cpp:336
+#: src/main/serialize.cpp:360
 msgid "unknown or inappropriate output format"
 msgstr ""
 
-#: src/main/serialize.cpp:607
+#: src/main/serialize.cpp:608
 msgid "must specify ascii, binary, or xdr format"
 msgstr ""
 
-#: src/main/serialize.cpp:608
+#: src/main/serialize.cpp:609
 msgid "unknown output format"
 msgstr ""
 
-#: src/main/serialize.cpp:639 src/main/serialize.cpp:2382
+#: src/main/serialize.cpp:640 src/main/serialize.cpp:2383
 msgid "unknown input format"
 msgstr ""
 
-#: src/main/serialize.cpp:644
+#: src/main/serialize.cpp:645
 msgid "input format does not match specified format"
 msgstr ""
 
-#: src/main/serialize.cpp:844
+#: src/main/serialize.cpp:845
 msgid "no restore method available"
 msgstr ""
 
-#: src/main/serialize.cpp:892
+#: src/main/serialize.cpp:893
 msgid "names in persistent strings are currently ignored"
 msgstr ""
 
-#: src/main/serialize.cpp:1106
+#: src/main/serialize.cpp:1107
 #, c-format
 msgid "'%s' may not be available when loading"
 msgstr ""
 
-#: src/main/serialize.cpp:1113
+#: src/main/serialize.cpp:1114
 msgid "namespaces may not be available when loading"
 msgstr ""
 
-#: src/main/serialize.cpp:1281
+#: src/main/serialize.cpp:1282
 #, c-format
 msgid "WriteItem: unknown type %i"
 msgstr ""
 
-#: src/main/serialize.cpp:1466
+#: src/main/serialize.cpp:1467
 #, c-format
 msgid "version %d not supported"
 msgstr ""
 
-#: src/main/serialize.cpp:1500
+#: src/main/serialize.cpp:1501
 msgid "reference index out of range"
 msgstr ""
 
-#: src/main/serialize.cpp:1528
+#: src/main/serialize.cpp:1529
 msgid "names in persistent strings are not supported yet"
 msgstr ""
 
-#: src/main/serialize.cpp:1707
+#: src/main/serialize.cpp:1708
 #, c-format
 msgid "input string '%s' cannot be translated from '%s' to UTF-8, but is valid UTF-8"
 msgstr ""
 
-#: src/main/serialize.cpp:1711
+#: src/main/serialize.cpp:1712
 #, c-format
 msgid "input string '%s' cannot be translated to UTF-8, is it valid in '%s'?"
 msgstr ""
 
-#: src/main/serialize.cpp:1746
+#: src/main/serialize.cpp:1747
 #, c-format
 msgid "deserializing invalid UTF-8 string '%s'"
 msgstr ""
 
-#: src/main/serialize.cpp:1776
+#: src/main/serialize.cpp:1777
 msgid "strings not representable in native encoding will not be translated"
 msgstr ""
 
-#: src/main/serialize.cpp:1778
+#: src/main/serialize.cpp:1779
 msgid "strings not representable in native encoding will be translated to UTF-8"
 msgstr ""
 
-#: src/main/serialize.cpp:1795
+#: src/main/serialize.cpp:1796
 msgid "negative serialized length for vector"
 msgstr ""
 
-#: src/main/serialize.cpp:1803
+#: src/main/serialize.cpp:1804
 msgid "invalid upper part of serialized vector length"
 msgstr ""
 
-#: src/main/serialize.cpp:1808
+#: src/main/serialize.cpp:1809
 msgid ""
 "negative serialized vector length:\n"
 "perhaps long vector from 64-bit version of R?"
 msgstr ""
 
-#: src/main/serialize.cpp:2101
+#: src/main/serialize.cpp:2102
 msgid "this version of R cannot read class references"
 msgstr ""
 
-#: src/main/serialize.cpp:2103
+#: src/main/serialize.cpp:2104
 msgid "this version of R cannot read generic function references"
 msgstr ""
 
-#: src/main/serialize.cpp:2132
+#: src/main/serialize.cpp:2133
 #, c-format
 msgid "ReadItem: unknown type %i, perhaps written by later version of R"
 msgstr ""
 
-#: src/main/serialize.cpp:2298 src/main/serialize.cpp:2388
+#: src/main/serialize.cpp:2299 src/main/serialize.cpp:2389
 msgid "invalid length of encoding name"
 msgstr ""
 
-#: src/main/serialize.cpp:2308
+#: src/main/serialize.cpp:2309
 #, c-format
 msgid "cannot read unreleased workspace version %d written by experimental R %d.%d.%d"
 msgstr ""
 
-#: src/main/serialize.cpp:2312
+#: src/main/serialize.cpp:2313
 #, c-format
 msgid "cannot read workspace version %d written by R %d.%d.%d; need R %d.%d.%d or newer"
 msgstr ""
 
-#: src/main/serialize.cpp:2466
+#: src/main/serialize.cpp:2467
 msgid "read failed"
 msgstr ""
 
-#: src/main/serialize.cpp:2527
+#: src/main/serialize.cpp:2528
 msgid "error reading from ascii connection"
 msgstr ""
 
-#: src/main/serialize.cpp:2529
+#: src/main/serialize.cpp:2530
 msgid "unexpected format in ascii connection"
 msgstr ""
 
-#: src/main/serialize.cpp:2534 src/main/serialize.cpp:2548
+#: src/main/serialize.cpp:2535 src/main/serialize.cpp:2549
 msgid "error reading from connection"
 msgstr ""
 
-#: src/main/serialize.cpp:2590
+#: src/main/serialize.cpp:2591
 msgid "only ascii format can be written to text mode connections"
 msgstr ""
 
-#: src/main/serialize.cpp:2605
+#: src/main/serialize.cpp:2606
 msgid "only ascii format can be read from text mode connections"
 msgstr ""
 
-#: src/main/serialize.cpp:2653 src/main/serialize.cpp:2813
-#: src/main/serialize.cpp:2964
+#: src/main/serialize.cpp:2654 src/main/serialize.cpp:2814
+#: src/main/serialize.cpp:2965
 msgid "bad version value"
 msgstr ""
 
-#: src/main/serialize.cpp:2673
+#: src/main/serialize.cpp:2674
 msgid "binary-mode connection required for ascii=FALSE"
 msgstr ""
 
-#: src/main/serialize.cpp:2694
+#: src/main/serialize.cpp:2695
 msgid "cannot return a promise (PROMSXP) object"
 msgstr ""
 
-#: src/main/serialize.cpp:2841 src/main/serialize.cpp:2878
-#: src/main/serialize.cpp:2943
+#: src/main/serialize.cpp:2842 src/main/serialize.cpp:2879
+#: src/main/serialize.cpp:2944
 msgid "serialization is too large to store in a raw vector"
 msgstr ""
 
-#: src/main/serialize.cpp:2858
+#: src/main/serialize.cpp:2859
 msgid "cannot allocate buffer"
 msgstr ""
 
-#: src/main/serialize.cpp:3014
+#: src/main/serialize.cpp:3015
 msgid "character vectors are no longer accepted by unserialize()"
 msgstr ""
 
-#: src/main/serialize.cpp:3051 src/main/serialize.cpp:3129
+#: src/main/serialize.cpp:3052 src/main/serialize.cpp:3130
 msgid "not a proper file name"
 msgstr ""
 
-#: src/main/serialize.cpp:3055
+#: src/main/serialize.cpp:3056
 msgid "not a proper raw vector"
 msgstr ""
 
-#: src/main/serialize.cpp:3069 src/main/serialize.cpp:3161
-#: src/main/serialize.cpp:3176 src/main/serialize.cpp:3190
-#: src/main/serialize.cpp:3200 src/main/serialize.cpp:3213
+#: src/main/serialize.cpp:3070 src/main/serialize.cpp:3162
+#: src/main/serialize.cpp:3177 src/main/serialize.cpp:3191
+#: src/main/serialize.cpp:3201 src/main/serialize.cpp:3214
 #, c-format
 msgid "seek failed on %s"
 msgstr ""
 
-#: src/main/serialize.cpp:3079
+#: src/main/serialize.cpp:3080
 msgid "could not determine file position"
 msgstr ""
 
-#: src/main/serialize.cpp:3133
+#: src/main/serialize.cpp:3134
 msgid "bad offset/length argument"
 msgstr ""
 
-#: src/main/serialize.cpp:3180 src/main/serialize.cpp:3194
-#: src/main/serialize.cpp:3204 src/main/serialize.cpp:3217
+#: src/main/serialize.cpp:3181 src/main/serialize.cpp:3195
+#: src/main/serialize.cpp:3205 src/main/serialize.cpp:3218
 #, c-format
 msgid "read failed on %s"
 msgstr ""
 
-#: src/main/serialize.cpp:3235
+#: src/main/serialize.cpp:3236
 msgid "bad environment"
 msgstr ""
 
-#: src/main/serialize.cpp:3237
+#: src/main/serialize.cpp:3238
 msgid "bad variable names"
 msgstr ""
 
-#: src/main/serialize.cpp:3315
+#: src/main/serialize.cpp:3316
 #, c-format
 msgid "lazy-load database '%s' is corrupt"
 msgstr ""
@@ -7973,7 +7973,7 @@ msgstr ""
 msgid "incompatible types (from %s to %s) in matrix subset assignment"
 msgstr ""
 
-#: src/main/subassign.cpp:1225 src/main/subset.cpp:1051
+#: src/main/subassign.cpp:1225 src/main/subset.cpp:1049
 msgid "incorrect number of subscripts"
 msgstr ""
 
@@ -8056,7 +8056,7 @@ msgstr ""
 
 #: src/main/subscript.cpp:220 src/main/subscript.cpp:358
 #: src/main/subscript.cpp:1037 src/main/subscript.cpp:1119
-#: src/main/subset.cpp:1288
+#: src/main/subset.cpp:1287
 #, c-format
 msgid "invalid subscript type '%s'"
 msgstr ""
@@ -8071,7 +8071,7 @@ msgid "invalid negative subscript in %s"
 msgstr ""
 
 #: src/main/subscript.cpp:322 src/main/subscript.cpp:326
-#: src/main/subset.cpp:1392 src/main/subset.cpp:1452
+#: src/main/subset.cpp:1386 src/main/subset.cpp:1442
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr ""
@@ -8095,7 +8095,7 @@ msgstr ""
 msgid "no such index at level %d\n"
 msgstr ""
 
-#: src/main/subscript.cpp:391 src/main/subset.cpp:1168
+#: src/main/subscript.cpp:391 src/main/subset.cpp:1166
 #, fuzzy
 msgid "invalid subscript for pairlist"
 msgstr "hibás argumentum típus"
@@ -8139,20 +8139,20 @@ msgstr ""
 msgid "subscripting on non-vector"
 msgstr ""
 
-#: src/main/subset.cpp:255
+#: src/main/subset.cpp:254
 #, c-format
 msgid "object of type '%s' is not subsettable in CXXR"
 msgstr ""
 
-#: src/main/subset.cpp:378
+#: src/main/subset.cpp:374
 msgid "dimensions would exceed maximum size of array"
 msgstr ""
 
-#: src/main/subset.cpp:424
+#: src/main/subset.cpp:420
 msgid "matrix subscripting not handled for this type"
 msgstr ""
 
-#: src/main/subset.cpp:600
+#: src/main/subset.cpp:596
 msgid "array subscripting not handled for this type"
 msgstr ""
 
@@ -8160,28 +8160,28 @@ msgstr ""
 msgid "incorrect number of dimensions"
 msgstr ""
 
-#: src/main/subset.cpp:1036
+#: src/main/subset.cpp:1034
 msgid "no index specified"
 msgstr ""
 
-#: src/main/subset.cpp:1058
+#: src/main/subset.cpp:1056
 #, c-format
 msgid "this %s class is not subsettable"
 msgstr ""
 
-#: src/main/subset.cpp:1066
+#: src/main/subset.cpp:1064
 msgid "wrong arguments for subsetting an environment"
 msgstr ""
 
-#: src/main/subset.cpp:1284
+#: src/main/subset.cpp:1283
 msgid "invalid subscript length"
 msgstr ""
 
-#: src/main/subset.cpp:1348
+#: src/main/subset.cpp:1346
 msgid "$ operator not defined for this S4 class"
 msgstr ""
 
-#: src/main/subset.cpp:1480
+#: src/main/subset.cpp:1465
 msgid "$ operator is invalid for atomic vectors"
 msgstr ""
 
@@ -8283,7 +8283,7 @@ msgstr ""
 msgid "no 'fileext'"
 msgstr ""
 
-#: src/main/sysutils.cpp:360 src/unix/sys-unix.cpp:699
+#: src/main/sysutils.cpp:360 src/unix/sys-unix.cpp:700
 #, c-format
 msgid "system call failed: %s"
 msgstr ""
@@ -8445,63 +8445,63 @@ msgstr ""
 msgid "'nmax' must be positive"
 msgstr ""
 
-#: src/main/unique.cpp:1542
+#: src/main/unique.cpp:1568
 msgid "'match' requires vector arguments"
 msgstr ""
 
-#: src/main/unique.cpp:1583 src/main/unique.cpp:1725
+#: src/main/unique.cpp:1609 src/main/unique.cpp:1751
 msgid "argument is not of mode character"
 msgstr ""
 
-#: src/main/unique.cpp:1847
+#: src/main/unique.cpp:1873
 msgid "... used in a situation where it does not exist"
 msgstr ""
 
-#: src/main/unique.cpp:1853
+#: src/main/unique.cpp:1879
 msgid "... is not a pairlist"
 msgstr ""
 
-#: src/main/unique.cpp:2040
+#: src/main/unique.cpp:2066
 msgid "non-numeric matrix in rowsum(): this should not happen"
 msgstr ""
 
-#: src/main/unique.cpp:2042 src/main/unique.cpp:2116
+#: src/main/unique.cpp:2068 src/main/unique.cpp:2142
 msgid "row names are not character"
 msgstr ""
 
-#: src/main/unique.cpp:2077
+#: src/main/unique.cpp:2103
 msgid "non-numeric data frame in rowsum"
 msgstr ""
 
-#: src/main/unique.cpp:2112
+#: src/main/unique.cpp:2138
 msgid "this cannot happen"
 msgstr ""
 
-#: src/main/unique.cpp:2261
+#: src/main/unique.cpp:2287
 msgid "C function 'csduplicated' not called on a STRSXP"
 msgstr ""
 
-#: src/main/unique.cpp:2291
+#: src/main/unique.cpp:2317
 msgid "This algorithm is for size <= n/2"
 msgstr ""
 
-#: src/main/unique.cpp:2393 src/main/unique.cpp:2411 src/main/unique.cpp:2482
+#: src/main/unique.cpp:2419 src/main/unique.cpp:2437 src/main/unique.cpp:2508
 msgid "bad hash table type"
 msgstr ""
 
-#: src/main/unique.cpp:2422
+#: src/main/unique.cpp:2448
 msgid "invalid hash table meta data"
 msgstr ""
 
-#: src/main/unique.cpp:2429
+#: src/main/unique.cpp:2455
 msgid "hash size would exceed limit"
 msgstr ""
 
-#: src/main/unique.cpp:2647
+#: src/main/unique.cpp:2673
 msgid "not a proper hash table object"
 msgstr ""
 
-#: src/main/unique.cpp:2650
+#: src/main/unique.cpp:2676
 msgid "hash table object is corrupted"
 msgstr ""
 
@@ -9767,7 +9767,7 @@ msgstr ""
 msgid "cannot get working directory!"
 msgstr ""
 
-#: src/unix/sys-std.cpp:526 src/unix/sys-unix.cpp:176
+#: src/unix/sys-std.cpp:526 src/unix/sys-unix.cpp:177
 #, c-format
 msgid ""
 "expanded path length %lld would be too long for\n"
@@ -9790,8 +9790,8 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/unix/sys-std.cpp:1362 src/unix/system.cpp:594 src/unix/sys-unix.cpp:1031
-#: src/unix/sys-unix.cpp:1091
+#: src/unix/sys-std.cpp:1362 src/unix/system.cpp:594 src/unix/sys-unix.cpp:1032
+#: src/unix/sys-unix.cpp:1092
 msgid "error in running command"
 msgstr ""
 
@@ -9861,40 +9861,40 @@ msgstr ""
 msgid "WARNING: Only editing the first in the list of files"
 msgstr ""
 
-#: src/unix/sys-unix.cpp:586 src/unix/sys-unix.cpp:667
-#: src/unix/sys-unix.cpp:784
+#: src/unix/sys-unix.cpp:587 src/unix/sys-unix.cpp:668
+#: src/unix/sys-unix.cpp:785
 msgid "Cannot open /dev/null for reading:"
 msgstr ""
 
-#: src/unix/sys-unix.cpp:617
+#: src/unix/sys-unix.cpp:618
 msgid "Invalid file pointer in pclose"
 msgstr ""
 
-#: src/unix/sys-unix.cpp:871
+#: src/unix/sys-unix.cpp:872
 #, c-format
 msgid "running command '%s' had status %d and error message '%s'"
 msgstr ""
 
-#: src/unix/sys-unix.cpp:909
+#: src/unix/sys-unix.cpp:910
 msgid "non-empty character argument expected"
 msgstr ""
 
-#: src/unix/sys-unix.cpp:962
+#: src/unix/sys-unix.cpp:963
 #, c-format
 msgid "cannot popen '%s', probable reason '%s'"
 msgstr ""
 
-#: src/unix/sys-unix.cpp:976
+#: src/unix/sys-unix.cpp:977
 #, c-format
 msgid "line %d may be truncated in call to system(, intern = TRUE)"
 msgstr ""
 
-#: src/unix/sys-unix.cpp:1028
+#: src/unix/sys-unix.cpp:1029
 #, c-format
 msgid "error in running command: '%s'"
 msgstr ""
 
-#: src/unix/sys-unix.cpp:1170
+#: src/unix/sys-unix.cpp:1171
 msgid "Sys.info() is not implemented on this system"
 msgstr ""
 

@@ -523,10 +523,10 @@ void R::printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	if (max_reached) {
 	    Rprintf(" [ reached 'max' / getOption(\"max.print\") -- omitted");
 	    if (nb_pr < nb)
-		Rprintf(ngettext(" %d slice", " %d slices", nb - nb_pr), nb - nb_pr);
+		Rprintf(n_(" %d slice", " %d slices", nb - nb_pr), nb - nb_pr);
 	    else if (nb_pr == nb) {
-		if((nr -= nr_last) > 0) Rprintf(ngettext(" %d row",    " %d rows",    nr), nr);
-		if((nc -= nc_last) > 0) Rprintf(ngettext(" %d column", " %d columns", nc), nc);
+		if ((nr -= nr_last) > 0) Rprintf(n_(" %d row",    " %d rows",    nr), nr);
+		if ((nc -= nc_last) > 0) Rprintf(n_(" %d column", " %d columns", nc), nc);
 	    }
 	    Rprintf(" ] \n");
 	}

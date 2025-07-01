@@ -124,20 +124,18 @@ static R_INLINE SEXP XVECTOR_ELT_FIX_NAMED(SEXP y, R_xlen_t i) {
 
 NORET static void errorcallNotSubsettable(SEXP x, SEXP call)
 {
-    SEXP cond = R_makeNotSubsettableError(x, call);
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeNotSubsettableError(x, call);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 NORET static void errorcallMissingSubs(SEXP x, SEXP call)
 {
     if (call == R_NilValue)
 	call = R_CurrentExpression;
-    SEXP cond = R_makeMissingSubscriptError(x, call);
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeMissingSubscriptError(x, call);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 
@@ -307,21 +305,18 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 NORET static void errorcallOutOfBounds(SEXP x, int subscript,
 				       R_xlen_t index, SEXP call)
 {
-    SEXP sindex = ScalarReal((double) index);
-    PROTECT(sindex);
-    SEXP cond = R_makeOutOfBoundsError(x, subscript, sindex, call, NULL);
-    PROTECT(cond);
+    GCStackRoot<> sindex, cond;
+    sindex = ScalarReal((double) index);
+    cond = R_makeOutOfBoundsError(x, subscript, sindex, call, NULL);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(2); /* sindex, cond; not reached */
 }
 
 NORET static void errorcallOutOfBoundsSEXP(SEXP x, int subscript,
 					   SEXP sindex, SEXP call)
 {
-    SEXP cond = R_makeOutOfBoundsError(x, subscript, sindex, call, NULL);
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeOutOfBoundsError(x, subscript, sindex, call, NULL);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 // in ./subscript.c :
@@ -664,15 +659,15 @@ static SEXP ArraySubset(SEXP x, SEXP s, SEXP call, int drop)
 static SEXP ExtractArg(SEXP args, SEXP arg_sym)
 {
     SEXP arg, prev_arg;
-    int found = 0;
+    bool found = false;
 
     for (arg = prev_arg = args; arg != R_NilValue; arg = CDR(arg)) {
-	if(TAG(arg) == arg_sym) {
+	if (TAG(arg) == arg_sym) {
 	    if (arg == prev_arg) /* found at head of args */
 		args = CDR(args);
 	    else
 		SETCDR(prev_arg, CDR(arg));
-	    found = 1;
+	    found = true;
 	    break;
 	}
 	else  prev_arg = arg;
@@ -787,12 +782,13 @@ static R_INLINE R_xlen_t scalarIndex(SEXP s)
 }
 
 // called from (R `[` => ) do_subset, but also from R .subset() :
-attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args_, SEXP rho)
 {
     /* By default we drop extents of length 1 */
 
     /* Handle cases of extracting a single element from a simple vector
        or matrix directly to improve speed for these simple cases. */
+    GCStackRoot<> args(args_);
     SEXP x = CAR(args);
     SEXP cdrArgs = CDR(args);
     SEXP cddrArgs = CDR(cdrArgs);
@@ -874,8 +870,6 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 
-    PROTECT(args);
-
     bool drop = 1;
     ExtractDropArg(args, &drop);
 
@@ -884,7 +878,6 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* FIXME: replace the test by isNull ... ? */
 
     if (x == R_NilValue) {
-	UNPROTECT(1);
 	return x;
     }
 
@@ -895,21 +888,20 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Here coerce pair-based objects into generic vectors. */
     /* All subsetting takes place on the generic vector form. */
 
-    SEXP ax = x;
+    GCStackRoot<> ax(x);
     if (isVector(x))
     {
-	PROTECT(ax);
     }
     else if (type == LISTSXP || type == LANGSXP) { // *not* <DOTSXP>[]  :
 	SEXP dim = getAttrib(x, R_DimSymbol);
 	int ndim = length(dim);
 	if (ndim > 1) {
-	    PROTECT(ax = allocArray(VECSXP, dim));
+	    ax = allocArray(VECSXP, dim);
 	    setAttrib(ax, R_DimNamesSymbol, getAttrib(x, R_DimNamesSymbol));
 	    setAttrib(ax, R_NamesSymbol, getAttrib(x, R_DimNamesSymbol));
 	}
 	else {
-	    PROTECT(ax = allocVector(VECSXP, length(x)));
+	    ax = allocVector(VECSXP, length(x));
 	    setAttrib(ax, R_NamesSymbol, getAttrib(x, R_NamesSymbol));
 	}
 	int i = 0;
@@ -921,35 +913,35 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* This is the actual subsetting code. */
     /* The separation of arrays and matrices is purely an optimization. */
 
-    SEXP ans;
-    if(nsubs < 2) {
+    GCStackRoot<> ans;
+    if (nsubs < 2) {
 	SEXP dim = getAttrib(x, R_DimSymbol);
 	int ndim = length(dim);
-	PROTECT(ans = VectorSubset(ax, (nsubs == 1 ? CAR(subs) : R_MissingArg),
-				   call));
+	ans = VectorSubset(ax, (nsubs == 1 ? CAR(subs) : R_MissingArg),
+				   call);
 	/* one-dimensional arrays went through here, and they should
 	   have their dimensions dropped only if the result has
 	   length one and drop == TRUE
 	*/
-	if(ndim == 1) {
+	if (ndim == 1) {
 	    int len = length(ans);
 	    if(!drop || len > 1) {
 		// must grab these before the dim is set.
-		SEXP nm = PROTECT(getAttrib(ans, R_NamesSymbol));
-		SEXP attr = PROTECT(ScalarInteger(length(ans)));
+		GCStackRoot<> nm, attr;
+		nm = getAttrib(ans, R_NamesSymbol);
+		attr = ScalarInteger(length(ans));
 		if(!isNull(getAttrib(dim, R_NamesSymbol)))
 		    setAttrib(attr, R_NamesSymbol, getAttrib(dim, R_NamesSymbol));
 		setAttrib(ans, R_DimSymbol, attr);
 		SEXP attrib;
 		if((attrib = getAttrib(x, R_DimNamesSymbol)) != R_NilValue) {
 		    /* reinstate dimnames, include names of dimnames */
-		    SEXP nattrib = PROTECT(duplicate(attrib));
+		    GCStackRoot<> nattrib;
+		    nattrib = duplicate(attrib);
 		    SET_VECTOR_ELT(nattrib, 0, nm);
 		    setAttrib(ans, R_DimNamesSymbol, nattrib);
 		    setAttrib(ans, R_NamesSymbol, R_NilValue);
-		    UNPROTECT(1);
 		}
-		UNPROTECT(2);
 	    }
 	}
     } else {
@@ -959,7 +951,6 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    ans = MatrixSubset(ax, subs, call, drop);
 	else
 	    ans = ArraySubset(ax, subs, call, drop);
-	PROTECT(ans);
     }
 
     /* Note: we do not coerce back to pair-based lists. */
@@ -967,8 +958,8 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (type == LANGSXP) {
 	ax = ans;
-	PROTECT(ans = allocLang(LENGTH(ax)));
-	if ( LENGTH(ax) > 0 ) {
+	ans = allocLang(LENGTH(ax));
+	if (LENGTH(ax) > 0) {
 	    int i = 0;
 	    for (SEXP px = ans; px != R_NilValue; px = CDR(px))
 		SETCAR(px, VECTOR_ELT(ax, i++));
@@ -979,16 +970,15 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     else {
-	PROTECT(ans);
     }
     if (ATTRIB(ans) != R_NilValue) { /* remove probably erroneous attr's */
 	setAttrib(ans, R_TspSymbol, R_NilValue);
 #ifdef _S4_subsettable
-	if(!IS_S4_OBJECT(x))
+	if (!IS_S4_OBJECT(x))
 #endif
 	    setAttrib(ans, R_ClassSymbol, R_NilValue);
     }
-    UNPROTECT(4);
+
     return ans;
 }
 
@@ -1022,7 +1012,7 @@ attribute_hidden SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP ans, dims, dimnames, indx, subs, x;
-    int i, ndims, nsubs;
+    int ndims, nsubs;
     bool drop = 1;
     R_xlen_t offset = 0;
 
@@ -1096,7 +1086,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     named_x = NAMED(x);  /* x may change below; save this now.  See PR#13411 */
 #endif
 
-    if(nsubs == 1) { /* vector indexing */
+    if (nsubs == 1) { /* vector indexing */
 	SEXP thesub = CAR(subs);
 	int len = length(thesub);
 
@@ -1153,7 +1143,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	const int *pdims = INTEGER_RO(dims);
 	dimnames = getAttrib(x, R_DimNamesSymbol);
 	ndn = length(dimnames);
-	for (i = 0; i < nsubs; i++) {
+	for (int i = 0; i < nsubs; i++) {
 	    SEXP thesub = CAR(subs);
 	    pindx[i] = (int)
 		get1index(thesub,
@@ -1164,7 +1154,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 		errorcallOutOfBoundsSEXP(x, i, thesub, call);
 	}
 	offset = 0;
-	for (i = (nsubs - 1); i > 0; i--)
+	for (int i = (nsubs - 1); i > 0; i--)
 	    offset = (offset + pindx[i]) * pdims[i - 1];
 	offset += pindx[0];
 	UNPROTECT(1); /* indx */
@@ -1274,20 +1264,21 @@ static enum pmatch pstrmatch(SEXP target, SEXP input, size_t slen)
 
 attribute_hidden SEXP R::fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* syminp)
 {
-    SEXP input, nlist;
+    GCStackRoot<> input;
+    SEXP nlist;
 
     /* first translate CADR of args into a string so that we can
        pass it down to DispatchorEval and have it behave correctly */
 
-    PROTECT(input = allocVector(STRSXP, 1));
+    input = allocVector(STRSXP, 1);
     nlist = CADR(args);
     if (TYPEOF(nlist) == PROMSXP)
 	nlist = eval(nlist, env);
-    if(isSymbol(nlist)) {
+    if (isSymbol(nlist)) {
 	if (syminp != NULL)
 	    *syminp = nlist;
 	SET_STRING_ELT(input, 0, PRINTNAME(nlist));
-    } else if(isString(nlist) ) {
+    } else if (isString(nlist) ) {
 	if (LENGTH(nlist) != 1)
 	    error("%s", _("invalid subscript length"));
 	SET_STRING_ELT(input, 0, STRING_ELT(nlist, 0));
@@ -1306,7 +1297,7 @@ attribute_hidden SEXP R::fixSubset3Args(SEXP call, SEXP args, SEXP env, SEXP* sy
 
     args = shallow_duplicate(args);
     SETCADR(args, input);
-    UNPROTECT(1); /* input */
+
     return args;
 }
 

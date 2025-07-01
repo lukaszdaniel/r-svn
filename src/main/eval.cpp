@@ -61,6 +61,7 @@
 #include <Internal.h>
 #include <Rinterface.h>
 #include <Fileio.h>
+#include <Parse.h>
 #include <R_ext/Print.h>
 #include "arithmetic.h"
 
@@ -8984,7 +8985,7 @@ attribute_hidden SEXP do_bcversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* neither of these functions call R_ExpandFileName -- the caller
    should do that if it wants to */
-char *R_CompiledFileName(char *fname, char *buf, size_t bsize)
+const char *R_CompiledFileName(char *fname, char *buf, size_t bsize)
 {
     /* find the base name and the extension */
     const char *basename = Rf_strrchr(fname, FILESEP[0]);
@@ -9228,7 +9229,6 @@ attribute_hidden SEXP do_returnValue(SEXP call, SEXP op, SEXP args, SEXP rho)
     return CAR(args); /* default */
 }
 
-#include <Parse.h>
 SEXP R_ParseEvalString(const char *str, SEXP env)
 {
     SEXP s = PROTECT(mkString(str));

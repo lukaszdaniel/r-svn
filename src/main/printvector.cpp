@@ -514,8 +514,10 @@ void R::printNamedVector(SEXP x, SEXP names, int quote, const char *title)
 	default:
 	    break;
 	}
-	if(n_pr < n)
-	    Rprintf(" [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n",
+	if (n_pr < n)
+	    Rprintf(n_(" [ reached 'max' / getOption(\"max.print\") -- omitted %lld entry ]\n",
+			" [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n",
+			(long long)n - n_pr),
 		    (long long)n - n_pr);
     }
     else {
