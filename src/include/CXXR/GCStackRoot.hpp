@@ -118,7 +118,7 @@ namespace CXXR
          */
         static void visitRoots(GCNode::const_visitor *v);
 
-    // protected:
+    protected:
         /** @brief Primary constructor.
          *
          * @param node Pointer, possibly null, to the node to be protected.
@@ -163,7 +163,7 @@ namespace CXXR
             return (*s_roots)[m_index];
         }
 
-    // private:
+    private:
         friend class GCNode;
 
         // Note that we deliberately do not use CXXR::Allocator in

@@ -606,10 +606,10 @@ static R_size_t R_V_maxused=0;
 /* Node Generations. */
 
 #define NODE_GEN_IS_YOUNGER(s,g) \
-  (! NODE_IS_MARKED(s) || NODE_GENERATION(s) < (g))
+  (!NODE_IS_MARKED(s) || NODE_GENERATION(s) < (g))
 #define NODE_IS_OLDER(x, y) \
     (NODE_IS_MARKED(x) && (y) && \
-   (! NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
+   (!NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
 
 
 #define VHEAP_FREE() (R_VSize - MemoryBank::doublesAllocated())
@@ -786,7 +786,7 @@ static R_size_t R_V_maxused=0;
 
 #define FORWARD_NODE(s) do { \
   const GCNode *fn__n__ = (s); \
-  if (fn__n__ && ! NODE_IS_MARKED(fn__n__)) { \
+  if (fn__n__ && !NODE_IS_MARKED(fn__n__)) { \
     MARK_AND_UNSNAP_NODE(fn__n__); \
     forwarded_nodes.push_front(fn__n__); \
   } \
@@ -803,9 +803,9 @@ static R_size_t R_V_maxused=0;
 #define FORWARD_AND_PROCESS_ONE_NODE(s, tp) do {	\
 	GCNode *fpn__n__ = (s);				\
 	int __tp__ = (tp);				\
-	if (fpn__n__ && ! NODE_IS_MARKED(fpn__n__)) {	\
+	if (fpn__n__ && !NODE_IS_MARKED(fpn__n__)) {	\
 	    if (TYPEOF(fpn__n__) == __tp__ &&		\
-		! HAS_GENUINE_ATTRIB((SEXP)fpn__n__)) {	\
+		!HAS_GENUINE_ATTRIB((SEXP)fpn__n__)) {	\
 		MARK_AND_UNSNAP_NODE(fpn__n__);		\
 		PROCESS_ONE_NODE(fpn__n__);		\
 	    }						\
@@ -824,7 +824,7 @@ static R_size_t R_V_maxused=0;
 #ifdef PROTECTCHECK
 #define CHECK_FOR_FREE_NODE(s) { \
     const GCNode *cf__n__ = (s); \
-    if (TYPEOF(cf__n__) == FREESXP && ! GCManager::gc_inhibit_release()) \
+    if (TYPEOF(cf__n__) == FREESXP && !GCManager::gc_inhibit_release()) \
 	BadObject::register_bad_object(cf__n__, __LINE__); \
 }
 #else
@@ -869,7 +869,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 {
     REprintf("Node counts %s:\n", where);
     unsigned int NewCount = 0;
-	for (GCNode *s = NEXT_NODE(R_GenHeap->m_New);
+	for (const GCNode *s = NEXT_NODE(R_GenHeap->m_New);
 	     s != R_GenHeap->m_New.get();
 	     s = NEXT_NODE(s)) {
 	    NewCount++;
@@ -879,7 +879,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 	for (unsigned int gen = 0;
 	     gen < GCNode::numOldGenerations();
 	     gen++) {
-	    for (GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
+	    for (const GCNode *s = NEXT_NODE(R_GenHeap->m_Old[gen]);
 		 s != R_GenHeap->m_Old[gen].get();
 		 s = NEXT_NODE(s)) {
 		OldCount++;
@@ -887,7 +887,7 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 		    GCManager::gc_error(_("Inconsistent node generation\n"));
 		DO_CHILDREN(s, CheckNodeGeneration, gen);
 	    }
-	    for (GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
+	    for (const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
 		 s != R_GenHeap->m_OldToNew[gen].get();
 		 s = NEXT_NODE(s)) {
 		OldToNewCount++;
@@ -1189,7 +1189,7 @@ static void CheckFinalizers(void)
 {
     s_R_finalizers_pending = false;
     for (auto &s : s_R_weak_refs) {
-	if (s && WEAKREF_KEY(s) && !NODE_IS_MARKED(WEAKREF_KEY(s)) && ! IS_READY_TO_FINALIZE(s))
+	if (s && WEAKREF_KEY(s) && !NODE_IS_MARKED(WEAKREF_KEY(s)) && !IS_READY_TO_FINALIZE(s))
 	    SET_READY_TO_FINALIZE(s);
 	if (IS_READY_TO_FINALIZE(s))
 	    s_R_finalizers_pending = true;
@@ -1248,7 +1248,7 @@ void R_RunWeakRefFinalizer(SEXP w)
     SET_WEAKREF_KEY(w, R_NilValue);
     SET_WEAKREF_VALUE(w, R_NilValue);
     SET_WEAKREF_FINALIZER(w, R_NilValue);
-    if (! IS_READY_TO_FINALIZE(w))
+    if (!IS_READY_TO_FINALIZE(w))
 	SET_READY_TO_FINALIZE(w); /* insures removal from list on next gc */
     bool oldintrsusp = Evaluator::interruptsSuspended();
     Evaluator::setInterruptsSuspended(true);

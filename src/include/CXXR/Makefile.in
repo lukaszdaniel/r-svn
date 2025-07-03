@@ -15,7 +15,7 @@ distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 ## Partially included by the API (1) headers in .., but not part of the
 ## API per se. 
 CXXR_HEADERS = Allocator.hpp Browser.hpp BuiltInFunction.hpp ByteCode.hpp CellPool.hpp Closure.hpp CommandTerminated.hpp Complex.hpp \
-		ConsCell.hpp DottedArgs.hpp Environment.hpp Evaluator.hpp Expression.hpp ExternalPointer.hpp FunctionBase.hpp \
+		ConsCell.hpp DotInternal.hpp DottedArgs.hpp Environment.hpp Evaluator.hpp Expression.hpp ExternalPointer.hpp FunctionBase.hpp \
 		GCEdge.hpp GCManager.hpp GCNode.hpp GCRoot.hpp GCStackRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp \
 		NodeStack.hpp PairList.hpp Promise.hpp ProtectStack.hpp RAllocStack.hpp RContext.hpp RObject.hpp \
 		RTypes.hpp S4Object.hpp SEXPTYPE.hpp StackChecker.hpp String.hpp Symbol.hpp VectorBase.hpp \
