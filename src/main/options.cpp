@@ -66,6 +66,7 @@ using namespace CXXR;
  *	"width"
  *	"digits"
  *	"echo"
+ *	"quiet"
  *	"verbose"
  *	"keep.source"
  *	"keep.source.pkgs"
@@ -322,9 +323,9 @@ attribute_hidden void R::InitOptions(void)
 
     /* options set here should be included into mandatory[] in do_options */
 #ifdef HAVE_RL_COMPLETION_MATCHES
-    PROTECT(v = val = allocList(30));
+    PROTECT(v = val = allocList(31));
 #else
-    PROTECT(v = val = allocList(29));
+    PROTECT(v = val = allocList(30));
 #endif
 
     SET_TAG(v, install("prompt"));
@@ -353,6 +354,10 @@ attribute_hidden void R::InitOptions(void)
 
     SET_TAG(v, install("echo"));
     SETCAR(v, ScalarLogical(!R_NoEcho));
+    v = CDR(v);
+
+    SET_TAG(v, install("quiet"));
+    SETCAR(v, ScalarLogical(R_Quiet));
     v = CDR(v);
 
     SET_TAG(v, install("verbose"));
@@ -490,7 +495,7 @@ static bool warned_on_strings_as_fact = FALSE; // -> once-per-session warning
 
 static void check_TRUE_FALSE(SEXP arg, const char *chname) {
     if(TYPEOF(arg) != LGLSXP || LENGTH(arg) != 1 || LOGICAL(arg)[0] == NA_LOGICAL)
-	error(_("invalid value for '%s'"), chname);
+	error(_("invalid '%s' value"), chname);
 }
 
 /* This needs to manage Evaluator::resultPrinted() */
@@ -601,7 +606,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		   at startup, because otherwise one could not reliably restore
 		   previously saved options (see also PR#18372).*/
 		const char *mandatory[] = {"prompt", "continue", "expressions",
-		  "width", "deparse.cutoff", "digits", "echo", "verbose",
+		  "width", "deparse.cutoff", "digits", "echo", "quiet", "verbose",
 		  "check.bounds", "keep.source", "keep.source.pkgs",
 		  "keep.parse.data", "keep.parse.data.pkgs", "warning.length",
 		  "nwarnings", "OutDec", "CBoundsCheck",
@@ -645,7 +650,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "keep.source")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		bool k = asRbool(argi, call);
 		R_KeepSource = k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
@@ -653,13 +658,13 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if (streql(CHAR(namei), "editor") && isString(argi)) {
 		SEXP s =  asChar(argi);
 		if (s == NA_STRING || LENGTH(s) == 0)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarString(s)));
 	    }
 	    else if (streql(CHAR(namei), "continue")) {
 		SEXP s =  asChar(argi);
 		if (s == NA_STRING || LENGTH(s) == 0)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		/* We want to make sure these are in the native encoding */
 		SET_VECTOR_ELT(value, i,
 			       SetOption(tag, mkString(translateChar(s))));
@@ -667,26 +672,26 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if (streql(CHAR(namei), "prompt")) {
 		SEXP s =  asChar(argi);
 		if (s == NA_STRING || LENGTH(s) == 0)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		/* We want to make sure these are in the native encoding */
 		SET_VECTOR_ELT(value, i,
 			       SetOption(tag, mkString(translateChar(s))));
 	    }
 	    else if (streql(CHAR(namei), "contrasts")) {
 		if (TYPEOF(argi) != STRSXP || LENGTH(argi) != 2)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		SET_VECTOR_ELT(value, i, SetOption(tag, argi));
 	    }
 	    else if (streql(CHAR(namei), "check.bounds")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		int k = asLogical(argi);
 		/* R_CheckBounds = k; */
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
 	    else if (streql(CHAR(namei), "warn")) {
 		if (!isNumeric(argi) || LENGTH(argi) != 1)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		int k;
 		// k = asInteger(argi) wld give both error + warning
 		if(TYPEOF(argi) == REALSXP) {
@@ -696,7 +701,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    k = asInteger(argi);
 		}
 		if (k == NA_INTEGER)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 #ifdef _NOT_YET_
 		char *p = getenv("R_WARN_BOUNDS_OPT");
 		if ((p && (streql(p, "yes"))) && (k < -1 || k > 2)) {
@@ -711,18 +716,18 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if (streql(CHAR(namei), "warning.length")) {
 		int k = asInteger(argi);
 		if (k < 100 || k > 8170)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		R_WarnLength = k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, argi));
 	    }
 	    else if ( streql(CHAR(namei), "warning.expression") )  {
 		if( !isLanguage(argi) &&  ! isExpression(argi) )
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		SET_VECTOR_ELT(value, i, SetOption(tag, argi));
 	    }
 	    else if (streql(CHAR(namei), "max.print")) {
 		int k = asInteger(argi);
-		if (k < 1) error(_("invalid value for '%s'"), CHAR(namei));
+		if (k < 1) error(_("invalid '%s' value"), CHAR(namei));
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
 	    }
 	    else if (streql(CHAR(namei), "scipen")) {
@@ -731,7 +736,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "nwarnings")) {
 		int k = asInteger(argi);
-		if (k < 1) error(_("invalid value for '%s'"), CHAR(namei));
+		if (k < 1) error(_("invalid '%s' value"), CHAR(namei));
 		R_nwarnings = k;
 		R_CollectWarnings = 0; /* force a reset */
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
@@ -740,7 +745,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if(isFunction(argi))
 		  argi = makeErrorCall(argi);
 		else if( !isLanguage(argi) &&  !isExpression(argi) )
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		SET_VECTOR_ELT(value, i, SetOption(tag, argi));
 	    }
 /* handle this here to avoid GetOption during error handling */
@@ -755,7 +760,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "echo")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		bool k = asLogical(argi);
 		/* Should be quicker than checking options(echo)
 		   every time R prompts for input:
@@ -765,7 +770,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    else if (streql(CHAR(namei), "OutDec")) {
 		if (TYPEOF(argi) != STRSXP || LENGTH(argi) != 1)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		static char sdec[11];
 		if(R_nchar(STRING_ELT(argi, 0), Chars,
 			   /* allowNA = */ FALSE, /* keepNA = */ FALSE,
@@ -779,13 +784,13 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if (streql(CHAR(namei), "max.contour.segments")) {
 		int k = asInteger(argi);
 		if (k < 0) // also many times above: rely on  NA_INTEGER  <  <finite_int>
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		max_contour_segments = k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
 	    }
 	    else if (streql(CHAR(namei), "rl_word_breaks")) {
 		if (TYPEOF(argi) != STRSXP || LENGTH(argi) != 1)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 #ifdef HAVE_RL_COMPLETION_MATCHES
 		set_rl_word_breaks(CHAR(STRING_ELT(argi, 0)));
 #endif
@@ -819,7 +824,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if (streql(CHAR(namei), "showNCalls")) {
 		int k = asInteger(argi);
 		if (k < 30 || k > 500 || k == NA_INTEGER || LENGTH(argi) != 1)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		R_NShowCalls = k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
 	    }
@@ -839,7 +844,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    else if (streql(CHAR(namei), "matprod")) {
 		SEXP s = asChar(argi);
 		if (s == NA_STRING || LENGTH(s) == 0)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		if (streql(CHAR(s), "default"))
 		    R_Matprod = MATPROD_DEFAULT;
 		else if (streql(CHAR(s), "internal"))
@@ -852,7 +857,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    warning("%s", _("OpenMP SIMD is not supported in this build of R"));
 #endif
 		} else
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		SET_VECTOR_ELT(value, i, SetOption(tag, duplicate(argi)));
 	    }
 	    else if (streql(CHAR(namei), "PCRE_study")) {
@@ -893,7 +898,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		int strings_as_fact;
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1 ||
 		    (strings_as_fact = asLogical(argi)) == NA_LOGICAL)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		if(strings_as_fact && !warned_on_strings_as_fact) {
 		    warned_on_strings_as_fact = TRUE;
 		    warning(_("'%s' is deprecated and will be disabled"),
@@ -902,10 +907,21 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		SET_VECTOR_ELT(value, i,
 			       SetOption(tag, ScalarLogical(strings_as_fact)));
 	    }
+	    else if (streql(CHAR(namei), "quiet")) {
+		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
+		    error(_("invalid '%s' value"), CHAR(namei));
+		bool k = asRbool(argi, call);
+		if(k && R_Verbose)
+		    error("%s", _("cannot set both options 'quiet' and 'verbose' to TRUE"));
+		R_Quiet = k;
+		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
+	    }
 	    else if (streql(CHAR(namei), "verbose")) {
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
-		    error(_("invalid value for '%s'"), CHAR(namei));
+		    error(_("invalid '%s' value"), CHAR(namei));
 		bool k = asRbool(argi, call);
+		if(k && R_Quiet)
+		    error("%s", _("cannot set both options 'quiet' and 'verbose' to TRUE"));
 		R_Verbose = k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
