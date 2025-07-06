@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-30 22:49+0200\n"
-"PO-Revision-Date: 2024-08-31 22:44+0200\n"
+"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"PO-Revision-Date: 2025-07-06 14:41+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
@@ -11,7 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: src/appl/maxcol.cpp:94
 #, fuzzy
@@ -79,8 +80,7 @@ msgstr "La DLL ha intentat canviar la paraula de control FPU de %x a %x"
 msgid "cannot get working directory"
 msgstr "no s'ha pogut obtenir el directori de treball"
 
-#: src/gnuwin32/extra.cpp:75 src/gnuwin32/extra.cpp:104
-#: src/gnuwin32/extra.cpp:140
+#: src/gnuwin32/extra.cpp:75 src/gnuwin32/extra.cpp:104 src/gnuwin32/extra.cpp:140
 msgid "R_HOME not set"
 msgstr "R_HOME no ha estat definida"
 
@@ -124,118 +124,63 @@ msgstr "s'ha denegat l'accés a «%ls»"
 msgid "problem in displaying '%ls'"
 msgstr "problema en mostrar «%ls»"
 
-#: src/gnuwin32/extra.cpp:131 src/gnuwin32/extra.cpp:171
-#: src/gnuwin32/extra.cpp:387 src/gnuwin32/extra.cpp:940
-#: src/gnuwin32/extra.cpp:965 src/gnuwin32/sys-win32.cpp:285
-#: src/gnuwin32/sys-win32.cpp:335 src/main/agrep.cpp:140 src/main/agrep.cpp:144
-#: src/main/agrep.cpp:773 src/main/agrep.cpp:778 src/main/altclasses.cpp:1383
-#: src/main/apply.cpp:365 src/main/apply.cpp:367 src/main/apply.cpp:370
-#: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
-#: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
-#: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
-#: src/main/builtin.cpp:579 src/main/builtin.cpp:597 src/main/builtin.cpp:778
-#: src/main/builtin.cpp:780 src/main/builtin.cpp:782 src/main/character.cpp:339
-#: src/main/character.cpp:342 src/main/character.cpp:347
-#: src/main/character.cpp:946 src/main/character.cpp:1466
-#: src/main/character.cpp:1470 src/main/character.cpp:1473
-#: src/main/character.cpp:1720 src/main/character.cpp:1724
-#: src/main/character.cpp:1791 src/main/character.cpp:1794
-#: src/main/coerce.cpp:1487 src/main/coerce.cpp:1551 src/main/coerce.cpp:2157
-#: src/main/connections.cpp:1612 src/main/connections.cpp:1618
-#: src/main/connections.cpp:1623 src/main/connections.cpp:1782
-#: src/main/connections.cpp:1798 src/main/connections.cpp:1803
-#: src/main/connections.cpp:2763 src/main/connections.cpp:2769
-#: src/main/connections.cpp:2773 src/main/connections.cpp:2777
-#: src/main/connections.cpp:2782 src/main/connections.cpp:2787
-#: src/main/connections.cpp:3470 src/main/connections.cpp:3475
-#: src/main/connections.cpp:3478 src/main/connections.cpp:3481
-#: src/main/connections.cpp:3885 src/main/connections.cpp:3890
-#: src/main/connections.cpp:3896 src/main/connections.cpp:3899
-#: src/main/connections.cpp:3903 src/main/connections.cpp:3918
-#: src/main/connections.cpp:3969 src/main/connections.cpp:3974
-#: src/main/connections.cpp:3990 src/main/connections.cpp:3996
-#: src/main/connections.cpp:4051 src/main/connections.cpp:4057
-#: src/main/connections.cpp:4061 src/main/connections.cpp:4107
-#: src/main/connections.cpp:4421 src/main/connections.cpp:4542
-#: src/main/connections.cpp:4548 src/main/connections.cpp:4702
-#: src/main/connections.cpp:4705 src/main/connections.cpp:4821
-#: src/main/connections.cpp:5308 src/main/connections.cpp:5347
-#: src/main/connections.cpp:5368 src/main/connections.cpp:5394
-#: src/main/connections.cpp:5553 src/main/connections.cpp:5851
-#: src/main/connections.cpp:5900 src/main/connections.cpp:5908
-#: src/main/connections.cpp:6759 src/main/connections.cpp:6786
-#: src/main/connections.cpp:6793 src/main/context.cpp:696
-#: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
-#: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
-#: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
-#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
-#: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087
-#: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
-#: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
-#: src/main/envir.cpp:3159 src/main/envir.cpp:3173 src/main/envir.cpp:3180
-#: src/main/envir.cpp:3196 src/main/envir.cpp:3930 src/main/errors.cpp:1275
-#: src/main/errors.cpp:2767 src/main/eval.cpp:894 src/main/eval.cpp:904
-#: src/main/eval.cpp:907 src/main/eval.cpp:910 src/main/eval.cpp:918
-#: src/main/eval.cpp:925 src/main/grep.cpp:1292 src/main/grep.cpp:1297
-#: src/main/grep.cpp:1594 src/main/grep.cpp:1596 src/main/grep.cpp:1598
-#: src/main/grep.cpp:2131 src/main/grep.cpp:2135 src/main/grep.cpp:2140
-#: src/main/grep.cpp:2178 src/main/grep.cpp:2180 src/main/grep.cpp:2973
-#: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321
-#: src/main/internet.cpp:155 src/main/internet.cpp:169
-#: src/main/internet.cpp:194 src/main/internet.cpp:207
-#: src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4584
-#: src/main/objects.cpp:1800 src/main/objects.cpp:1802 src/main/paste.cpp:152
-#: src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
-#: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526
-#: src/main/paste.cpp:710 src/main/paste.cpp:715 src/main/platform.cpp:348
-#: src/main/platform.cpp:350 src/main/platform.cpp:352
-#: src/main/platform.cpp:364 src/main/platform.cpp:375
-#: src/main/platform.cpp:453 src/main/platform.cpp:455
-#: src/main/platform.cpp:749 src/main/platform.cpp:751
-#: src/main/platform.cpp:849 src/main/platform.cpp:1578
-#: src/main/platform.cpp:1584 src/main/platform.cpp:1661
-#: src/main/platform.cpp:1741 src/main/platform.cpp:1809
-#: src/main/platform.cpp:1812 src/main/platform.cpp:2067
-#: src/main/platform.cpp:2114 src/main/platform.cpp:2162
-#: src/main/platform.cpp:2198 src/main/platform.cpp:2200
-#: src/main/platform.cpp:2286 src/main/platform.cpp:2383
-#: src/main/platform.cpp:2650 src/main/platform.cpp:2708
-#: src/main/platform.cpp:2912 src/main/platform.cpp:2915
-#: src/main/platform.cpp:3162 src/main/platform.cpp:3165
-#: src/main/platform.cpp:3172 src/main/platform.cpp:3259
-#: src/main/platform.cpp:3301 src/main/platform.cpp:3345
-#: src/main/platform.cpp:3434 src/main/print.cpp:304 src/main/random.cpp:482
-#: src/main/random.cpp:485 src/main/random.cpp:494 src/main/random.cpp:522
-#: src/main/Rdynload.cpp:1428 src/main/saveload.cpp:2066
-#: src/main/saveload.cpp:2101 src/main/saveload.cpp:2104
-#: src/main/saveload.cpp:2214 src/main/saveload.cpp:2382
-#: src/main/saveload.cpp:2387 src/main/saveload.cpp:2489 src/main/scan.cpp:708
-#: src/main/scan.cpp:887 src/main/scan.cpp:900 src/main/scan.cpp:904
-#: src/main/scan.cpp:906 src/main/scan.cpp:917 src/main/scan.cpp:947
-#: src/main/scan.cpp:1007 src/main/seq.cpp:717 src/main/seq.cpp:724
-#: src/main/seq.cpp:734 src/main/seq.cpp:740 src/main/seq.cpp:784
-#: src/main/seq.cpp:789 src/main/seq.cpp:792 src/main/seq.cpp:796
-#: src/main/seq.cpp:801 src/main/seq.cpp:808 src/main/seq.cpp:812
-#: src/main/seq.cpp:818 src/main/sysutils.cpp:646 src/main/sysutils.cpp:650
-#: src/main/sysutils.cpp:654 src/main/sysutils.cpp:2971
-#: src/main/unique.cpp:1912 src/main/unique.cpp:1916 src/main/unique.cpp:2311
-#: src/main/unique.cpp:2316 src/main/util.cpp:716 src/main/util.cpp:719
-#: src/main/util.cpp:1711 src/main/util.cpp:1725 src/main/util.cpp:2542
-#: src/main/util.cpp:2800 src/main/util.cpp:2817 src/main/util.cpp:2860
-#: src/main/util.cpp:2902 src/main/util.cpp:2904 src/main/util.cpp:2906
-#: src/main/util.cpp:2909 src/main/util.cpp:2912 src/main/util.cpp:2916
-#: src/main/util.cpp:2918 src/main/util.cpp:2920 src/main/util.cpp:3215
-#: src/main/util.cpp:3217 src/main/util.cpp:3257 src/main/util.cpp:3259
-#: src/modules/internet/internet.cpp:340 src/modules/internet/internet.cpp:346
-#: src/modules/internet/internet.cpp:354 src/modules/internet/internet.cpp:362
-#: src/modules/internet/libcurl.cpp:364 src/modules/internet/libcurl.cpp:371
-#: src/modules/internet/libcurl.cpp:376 src/modules/internet/libcurl.cpp:409
-#: src/modules/internet/libcurl.cpp:869 src/modules/internet/libcurl.cpp:884
-#: src/modules/internet/libcurl.cpp:890 src/modules/internet/libcurl.cpp:895
-#: src/modules/X11/devX11.cpp:3338 src/modules/X11/devX11.cpp:3341
-#: src/modules/X11/devX11.cpp:3344 src/modules/X11/devX11.cpp:3368
-#: src/unix/sys-std.cpp:1416 src/unix/sys-std.cpp:1439
-#: src/unix/sys-unix.cpp:914
+#: src/gnuwin32/extra.cpp:131 src/gnuwin32/extra.cpp:171 src/gnuwin32/extra.cpp:387 src/gnuwin32/extra.cpp:940 src/gnuwin32/extra.cpp:965
+#: src/gnuwin32/sys-win32.cpp:285 src/gnuwin32/sys-win32.cpp:335 src/main/agrep.cpp:140 src/main/agrep.cpp:144 src/main/agrep.cpp:773
+#: src/main/agrep.cpp:778 src/main/altclasses.cpp:1383 src/main/apply.cpp:365 src/main/apply.cpp:367 src/main/apply.cpp:370
+#: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982 src/main/array.cpp:2362 src/main/attrib.cpp:229
+#: src/main/builtin.cpp:107 src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136 src/main/builtin.cpp:579
+#: src/main/builtin.cpp:597 src/main/builtin.cpp:778 src/main/builtin.cpp:780 src/main/builtin.cpp:782 src/main/character.cpp:339
+#: src/main/character.cpp:342 src/main/character.cpp:347 src/main/character.cpp:946 src/main/character.cpp:1466 src/main/character.cpp:1470
+#: src/main/character.cpp:1473 src/main/character.cpp:1720 src/main/character.cpp:1724 src/main/character.cpp:1791
+#: src/main/character.cpp:1794 src/main/coerce.cpp:1487 src/main/coerce.cpp:1551 src/main/coerce.cpp:2157 src/main/connections.cpp:1612
+#: src/main/connections.cpp:1618 src/main/connections.cpp:1623 src/main/connections.cpp:1782 src/main/connections.cpp:1798
+#: src/main/connections.cpp:1803 src/main/connections.cpp:2763 src/main/connections.cpp:2769 src/main/connections.cpp:2773
+#: src/main/connections.cpp:2777 src/main/connections.cpp:2782 src/main/connections.cpp:2787 src/main/connections.cpp:3470
+#: src/main/connections.cpp:3475 src/main/connections.cpp:3478 src/main/connections.cpp:3481 src/main/connections.cpp:3885
+#: src/main/connections.cpp:3890 src/main/connections.cpp:3896 src/main/connections.cpp:3899 src/main/connections.cpp:3903
+#: src/main/connections.cpp:3918 src/main/connections.cpp:3969 src/main/connections.cpp:3974 src/main/connections.cpp:3990
+#: src/main/connections.cpp:3996 src/main/connections.cpp:4051 src/main/connections.cpp:4057 src/main/connections.cpp:4061
+#: src/main/connections.cpp:4107 src/main/connections.cpp:4421 src/main/connections.cpp:4542 src/main/connections.cpp:4548
+#: src/main/connections.cpp:4702 src/main/connections.cpp:4705 src/main/connections.cpp:4821 src/main/connections.cpp:5308
+#: src/main/connections.cpp:5347 src/main/connections.cpp:5368 src/main/connections.cpp:5394 src/main/connections.cpp:5553
+#: src/main/connections.cpp:5851 src/main/connections.cpp:5900 src/main/connections.cpp:5908 src/main/connections.cpp:6759
+#: src/main/connections.cpp:6786 src/main/connections.cpp:6793 src/main/context.cpp:696 src/main/context.cpp:705 src/main/context.cpp:709
+#: src/main/datetime.cpp:1269 src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282 src/main/deparse.cpp:463
+#: src/main/dotcode.cpp:506 src/main/dotcode.cpp:510 src/main/dotcode.cpp:515 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
+#: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087 src/main/envir.cpp:2101 src/main/envir.cpp:2217
+#: src/main/envir.cpp:2225 src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896 src/main/envir.cpp:3159
+#: src/main/envir.cpp:3173 src/main/envir.cpp:3180 src/main/envir.cpp:3196 src/main/envir.cpp:3930 src/main/errors.cpp:1275
+#: src/main/errors.cpp:2767 src/main/eval.cpp:894 src/main/eval.cpp:904 src/main/eval.cpp:907 src/main/eval.cpp:910 src/main/eval.cpp:918
+#: src/main/eval.cpp:925 src/main/grep.cpp:1292 src/main/grep.cpp:1297 src/main/grep.cpp:1594 src/main/grep.cpp:1596 src/main/grep.cpp:1598
+#: src/main/grep.cpp:2131 src/main/grep.cpp:2135 src/main/grep.cpp:2140 src/main/grep.cpp:2178 src/main/grep.cpp:2180 src/main/grep.cpp:2973
+#: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321 src/main/internet.cpp:155 src/main/internet.cpp:169
+#: src/main/internet.cpp:194 src/main/internet.cpp:207 src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4584
+#: src/main/objects.cpp:1800 src/main/objects.cpp:1802 src/main/paste.cpp:152 src/main/paste.cpp:496 src/main/paste.cpp:501
+#: src/main/paste.cpp:506 src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526 src/main/paste.cpp:710 src/main/paste.cpp:715
+#: src/main/platform.cpp:352 src/main/platform.cpp:354 src/main/platform.cpp:356 src/main/platform.cpp:368 src/main/platform.cpp:379
+#: src/main/platform.cpp:457 src/main/platform.cpp:459 src/main/platform.cpp:753 src/main/platform.cpp:755 src/main/platform.cpp:853
+#: src/main/platform.cpp:1582 src/main/platform.cpp:1588 src/main/platform.cpp:1665 src/main/platform.cpp:1745 src/main/platform.cpp:1813
+#: src/main/platform.cpp:1816 src/main/platform.cpp:2071 src/main/platform.cpp:2118 src/main/platform.cpp:2166 src/main/platform.cpp:2202
+#: src/main/platform.cpp:2204 src/main/platform.cpp:2290 src/main/platform.cpp:2387 src/main/platform.cpp:2654 src/main/platform.cpp:2712
+#: src/main/platform.cpp:2916 src/main/platform.cpp:2919 src/main/platform.cpp:3166 src/main/platform.cpp:3169 src/main/platform.cpp:3176
+#: src/main/platform.cpp:3263 src/main/platform.cpp:3305 src/main/platform.cpp:3349 src/main/platform.cpp:3438 src/main/print.cpp:304
+#: src/main/random.cpp:482 src/main/random.cpp:485 src/main/random.cpp:494 src/main/random.cpp:522 src/main/Rdynload.cpp:1428
+#: src/main/saveload.cpp:2066 src/main/saveload.cpp:2101 src/main/saveload.cpp:2104 src/main/saveload.cpp:2214 src/main/saveload.cpp:2382
+#: src/main/saveload.cpp:2387 src/main/saveload.cpp:2489 src/main/scan.cpp:708 src/main/scan.cpp:887 src/main/scan.cpp:900
+#: src/main/scan.cpp:904 src/main/scan.cpp:906 src/main/scan.cpp:917 src/main/scan.cpp:947 src/main/scan.cpp:1007 src/main/seq.cpp:717
+#: src/main/seq.cpp:724 src/main/seq.cpp:734 src/main/seq.cpp:740 src/main/seq.cpp:784 src/main/seq.cpp:789 src/main/seq.cpp:792
+#: src/main/seq.cpp:796 src/main/seq.cpp:801 src/main/seq.cpp:808 src/main/seq.cpp:812 src/main/seq.cpp:818 src/main/sysutils.cpp:646
+#: src/main/sysutils.cpp:650 src/main/sysutils.cpp:654 src/main/sysutils.cpp:2971 src/main/unique.cpp:1912 src/main/unique.cpp:1916
+#: src/main/unique.cpp:2311 src/main/unique.cpp:2316 src/main/util.cpp:716 src/main/util.cpp:719 src/main/util.cpp:1711
+#: src/main/util.cpp:1725 src/main/util.cpp:2542 src/main/util.cpp:2800 src/main/util.cpp:2817 src/main/util.cpp:2860 src/main/util.cpp:2902
+#: src/main/util.cpp:2904 src/main/util.cpp:2906 src/main/util.cpp:2909 src/main/util.cpp:2912 src/main/util.cpp:2916 src/main/util.cpp:2918
+#: src/main/util.cpp:2920 src/main/util.cpp:3215 src/main/util.cpp:3217 src/main/util.cpp:3257 src/main/util.cpp:3259
+#: src/modules/internet/internet.cpp:340 src/modules/internet/internet.cpp:346 src/modules/internet/internet.cpp:354
+#: src/modules/internet/internet.cpp:362 src/modules/internet/libcurl.cpp:364 src/modules/internet/libcurl.cpp:371
+#: src/modules/internet/libcurl.cpp:376 src/modules/internet/libcurl.cpp:409 src/modules/internet/libcurl.cpp:869
+#: src/modules/internet/libcurl.cpp:884 src/modules/internet/libcurl.cpp:890 src/modules/internet/libcurl.cpp:895
+#: src/modules/X11/devX11.cpp:3338 src/modules/X11/devX11.cpp:3341 src/modules/X11/devX11.cpp:3344 src/modules/X11/devX11.cpp:3368
+#: src/unix/sys-std.cpp:1416 src/unix/sys-std.cpp:1439 src/unix/sys-unix.cpp:914
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"
@@ -249,27 +194,21 @@ msgstr "versió de Windows no admesa"
 msgid "cannot resolve current user or domain: '%s'"
 msgstr "no s'ha pogut obrir el fitxer «%ls»: %s"
 
-#: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879
-#: src/main/sysutils.cpp:690 src/main/unique.cpp:2209 src/main/util.cpp:1088
+#: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879 src/main/sysutils.cpp:690 src/main/unique.cpp:2209 src/main/util.cpp:1088
 #, fuzzy, c-format
 msgid "'%s' must be a character vector"
 msgstr "«x» ha de ser un vector de caràcters"
 
-#: src/gnuwin32/extra.cpp:766 src/main/errors.cpp:1277 src/main/errors.cpp:1279
-#: src/main/options.cpp:484 src/main/unique.cpp:2213
-#: src/modules/lapack/Lapack.cpp:118 src/modules/lapack/Lapack.cpp:354
-#: src/modules/lapack/Lapack.cpp:383 src/modules/lapack/Lapack.cpp:434
-#: src/modules/lapack/Lapack.cpp:435 src/modules/lapack/Lapack.cpp:471
-#: src/modules/lapack/Lapack.cpp:509 src/modules/lapack/Lapack.cpp:540
-#: src/modules/lapack/Lapack.cpp:595 src/modules/lapack/Lapack.cpp:632
-#: src/modules/lapack/Lapack.cpp:633 src/modules/lapack/Lapack.cpp:896
+#: src/gnuwin32/extra.cpp:766 src/main/errors.cpp:1277 src/main/errors.cpp:1279 src/main/options.cpp:489 src/main/unique.cpp:2213
+#: src/modules/lapack/Lapack.cpp:118 src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383 src/modules/lapack/Lapack.cpp:434
+#: src/modules/lapack/Lapack.cpp:435 src/modules/lapack/Lapack.cpp:471 src/modules/lapack/Lapack.cpp:509 src/modules/lapack/Lapack.cpp:540
+#: src/modules/lapack/Lapack.cpp:595 src/modules/lapack/Lapack.cpp:632 src/modules/lapack/Lapack.cpp:633 src/modules/lapack/Lapack.cpp:896
 #, fuzzy, c-format
 msgid "'%s' must be a character string"
 msgstr "«%s» ha de ser una cadena de caràcters"
 
-#: src/gnuwin32/extra.cpp:942 src/gnuwin32/extra.cpp:944
-#: src/gnuwin32/extra.cpp:967 src/gnuwin32/extra.cpp:969
-#: src/gnuwin32/extra.cpp:1004 src/main/gevents.cpp:70 src/main/gevents.cpp:111
+#: src/gnuwin32/extra.cpp:942 src/gnuwin32/extra.cpp:944 src/gnuwin32/extra.cpp:967 src/gnuwin32/extra.cpp:969 src/gnuwin32/extra.cpp:1004
+#: src/main/gevents.cpp:70 src/main/gevents.cpp:111
 msgid "invalid device"
 msgstr "dispositiu no vàlid"
 
@@ -277,8 +216,7 @@ msgstr "dispositiu no vàlid"
 msgid "requires SDI mode"
 msgstr "requereix el mode SDI"
 
-#: src/gnuwin32/extra.cpp:998 src/main/gevents.cpp:67 src/main/gevents.cpp:105
-#: src/main/gevents.cpp:108
+#: src/gnuwin32/extra.cpp:998 src/main/gevents.cpp:67 src/main/gevents.cpp:105 src/main/gevents.cpp:108
 msgid "invalid graphical device number"
 msgstr "el número de dispositiu gràfic no és vàlid"
 
@@ -290,7 +228,7 @@ msgstr "dispositiu incorrecte"
 msgid "Windows 2000 or later is required"
 msgstr ""
 
-#: src/gnuwin32/extra.cpp:1133 src/main/platform.cpp:1784
+#: src/gnuwin32/extra.cpp:1133 src/main/platform.cpp:1788
 msgid "file choice cancelled"
 msgstr "s'ha cancel·lat l'elecció del fitxer"
 
@@ -303,8 +241,7 @@ msgstr "«CreateProcess» no ha pogut executar «%s»"
 msgid "Child process not responding.  R will terminate it."
 msgstr "El procés fill no respon.  L'R el finalitzarà."
 
-#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
-#: src/unix/sys-unix.cpp:935
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:935
 #, fuzzy
 msgid "Timeout with background running processes is not supported."
 msgstr "els noms de les cadenes persistents encara no són compatibles"
@@ -335,16 +272,13 @@ msgstr "no està habilitat el truncament per a aquesta connexió"
 msgid "broken Windows pipe"
 msgstr ""
 
-#: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
-#: src/main/connections.cpp:539 src/main/connections.cpp:3735
+#: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521 src/main/connections.cpp:539 src/main/connections.cpp:3735
 #: src/main/printutils.cpp:966 src/main/printutils.cpp:981
 msgid "printing of extremely long output is truncated"
 msgstr "la impressió d'una sortida extremadament llarga està truncada"
 
-#: src/gnuwin32/run.cpp:1081 src/gnuwin32/run.cpp:1085
-#: src/gnuwin32/run.cpp:1098 src/gnuwin32/run.cpp:1126
-#: src/main/connections.cpp:1734 src/main/connections.cpp:1738
-#: src/main/connections.cpp:1745 src/main/connections.cpp:1760
+#: src/gnuwin32/run.cpp:1081 src/gnuwin32/run.cpp:1085 src/gnuwin32/run.cpp:1098 src/gnuwin32/run.cpp:1126 src/main/connections.cpp:1734
+#: src/main/connections.cpp:1738 src/main/connections.cpp:1745 src/main/connections.cpp:1760
 #, fuzzy
 msgid "allocation of pipe connection failed"
 msgstr "ha fallat l'assignació de la connexió de canonada"
@@ -362,128 +296,120 @@ msgstr ""
 msgid "Thief about! Something other than package tcltk has set or is attempting to unset R_Tcl_do"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:141 src/main/sysutils.cpp:2929
+#: src/gnuwin32/system.cpp:159 src/main/sysutils.cpp:2929
 msgid "reached session elapsed time limit"
 msgstr "s'ha arribat al límit de temps transcorregut de la sessió"
 
-#: src/gnuwin32/system.cpp:143 src/main/sysutils.cpp:2931
+#: src/gnuwin32/system.cpp:161 src/main/sysutils.cpp:2931
 msgid "reached elapsed time limit"
 msgstr "s'ha arribat al límit de temps transcorregut"
 
-#: src/gnuwin32/system.cpp:149 src/main/sysutils.cpp:2937
+#: src/gnuwin32/system.cpp:167 src/main/sysutils.cpp:2937
 msgid "reached session CPU time limit"
 msgstr "s'ha arribat al límit de temps de la CPU de la sessió"
 
-#: src/gnuwin32/system.cpp:151 src/main/sysutils.cpp:2939
+#: src/gnuwin32/system.cpp:169 src/main/sysutils.cpp:2939
 msgid "reached CPU time limit"
 msgstr "s'ha arribat al límit de temps de la CPU"
 
-#: src/gnuwin32/system.cpp:182 src/unix/sys-std.cpp:89
+#: src/gnuwin32/system.cpp:200 src/unix/sys-std.cpp:89
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "Error fatal: %s\n"
 
-#: src/gnuwin32/system.cpp:453 src/unix/sys-std.cpp:1027
+#: src/gnuwin32/system.cpp:470 src/unix/sys-std.cpp:1027
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "no es reconeix la codificació «%s»"
 
-#: src/gnuwin32/system.cpp:466 src/unix/sys-std.cpp:1040
+#: src/gnuwin32/system.cpp:483 src/unix/sys-std.cpp:1040
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<ERROR: ha fallat la recodificació des de la codificació «%s»>\n"
 
-#: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
-#: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:239
-#: src/main/saveload.cpp:2110 src/main/serialize.cpp:3060
-#: src/main/serialize.cpp:3065 src/main/serialize.cpp:3159
-#: src/main/serialize.cpp:3211 src/unix/system.cpp:432
+#: src/gnuwin32/system.cpp:720 src/gnuwin32/system.cpp:1272 src/gnuwin32/system.cpp:1284 src/main/connections.cpp:915
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:239 src/main/saveload.cpp:2110 src/main/serialize.cpp:3060 src/main/serialize.cpp:3065
+#: src/main/serialize.cpp:3159 src/main/serialize.cpp:3211 src/unix/system.cpp:432
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr "no es pot obrir el fitxer «%s»: %s"
 
-#: src/gnuwin32/system.cpp:718
+#: src/gnuwin32/system.cpp:735
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): el fitxer «%s» no existeix\n"
 
-#: src/gnuwin32/system.cpp:883 src/gnuwin32/system.cpp:1096
-#: src/gnuwin32/front-ends/rcmdfn.cpp:205
+#: src/gnuwin32/system.cpp:900 src/gnuwin32/system.cpp:1113 src/gnuwin32/front-ends/rcmdfn.cpp:205
 msgid "Invalid R_HOME"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:886 src/gnuwin32/system.cpp:902
-#: src/gnuwin32/front-ends/rcmdfn.cpp:265
-#: src/gnuwin32/front-ends/rcmdfn.cpp:351
-#: src/gnuwin32/front-ends/rcmdfn.cpp:414
-#: src/gnuwin32/front-ends/rcmdfn.cpp:432
+#: src/gnuwin32/system.cpp:903 src/gnuwin32/system.cpp:919 src/gnuwin32/front-ends/rcmdfn.cpp:265 src/gnuwin32/front-ends/rcmdfn.cpp:351
+#: src/gnuwin32/front-ends/rcmdfn.cpp:414 src/gnuwin32/front-ends/rcmdfn.cpp:432
 #, fuzzy
 msgid "Allocation error"
 msgstr "error d'assignació de besseli"
 
-#: src/gnuwin32/system.cpp:972
+#: src/gnuwin32/system.cpp:989
 #, fuzzy
 msgid "allocation failure in reading Renviron"
 msgstr "ha fallat l'assignació a R_tmpnam2"
 
-#: src/gnuwin32/system.cpp:1046 src/unix/system.cpp:131
+#: src/gnuwin32/system.cpp:1063 src/unix/system.cpp:131
 #, fuzzy
 msgid "WARNING: invalid R_HISTSIZE ignored;"
 msgstr "AVÍS: el valor «%s» no és vàlid: s'ignora"
 
-#: src/gnuwin32/system.cpp:1058
+#: src/gnuwin32/system.cpp:1075
 msgid "Not enough memory"
 msgstr "Memòria insuficient"
 
-#: src/gnuwin32/system.cpp:1074 src/unix/system.cpp:468
+#: src/gnuwin32/system.cpp:1091 src/unix/system.cpp:468
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr "S'ha __ignorat__ l'ARGUMENT «%s»\n"
 
-#: src/gnuwin32/system.cpp:1245
+#: src/gnuwin32/system.cpp:1262
 #, c-format
 msgid "option '%s' requires an argument"
 msgstr "l'opció «%s» requereix un argument"
 
-#: src/gnuwin32/system.cpp:1278
+#: src/gnuwin32/system.cpp:1295
 #, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr "l'opció «%s» requereix un argument no buit"
 
-#: src/gnuwin32/system.cpp:1286 src/unix/system.cpp:451
+#: src/gnuwin32/system.cpp:1303 src/unix/system.cpp:451
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr "AVÍS: «-e %s» s'ha omès perquè l'entrada és massa llarga\n"
 
-#: src/gnuwin32/system.cpp:1290 src/unix/system.cpp:464
+#: src/gnuwin32/system.cpp:1307 src/unix/system.cpp:464
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr "AVÍS: l'opció «%s» és desconeguda\n"
 
-#: src/gnuwin32/system.cpp:1303 src/unix/system.cpp:479
+#: src/gnuwin32/system.cpp:1320 src/unix/system.cpp:479
 msgid "cannot use -e with -f or --file"
 msgstr "no es pot utilitzar -e amb -f o --file"
 
-#: src/gnuwin32/system.cpp:1327
+#: src/gnuwin32/system.cpp:1344
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "ha fallat la creació de tmpfile -- estableixo un TMPDIR adequat?"
 
-#: src/gnuwin32/system.cpp:1331
+#: src/gnuwin32/system.cpp:1348
 #, fuzzy
 msgid "fwrite error in cmdlineoptions"
 msgstr "error d'escriptura en extreure del fitxer zip"
 
-#: src/gnuwin32/system.cpp:1353 src/unix/system.cpp:552
+#: src/gnuwin32/system.cpp:1370 src/unix/system.cpp:552
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr "heu d'especificar «--save», «--no-save» o «--vanilla»"
 
-#: src/gnuwin32/system.cpp:1385
+#: src/gnuwin32/system.cpp:1402
 msgid "impossible to create 'reader thread'; you must free some system resources"
 msgstr "no es pot crear «reader thread»; heu d'alliberar alguns recursos del sistema"
 
-#: src/gnuwin32/sys-win32.cpp:126 src/gnuwin32/sys-win32.cpp:144
-#: src/gnuwin32/sys-win32.cpp:155
+#: src/gnuwin32/sys-win32.cpp:126 src/gnuwin32/sys-win32.cpp:144 src/gnuwin32/sys-win32.cpp:155
 #, c-format
 msgid ""
 "expanded path length %llu would be too long for\n"
@@ -500,8 +426,7 @@ msgstr "s'esperava una cadena de caràcters com a primer argument"
 msgid "character string expected as third argument"
 msgstr "s'esperava una cadena de caràcters com a tercer argument"
 
-#: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1037
-#: src/unix/sys-unix.cpp:1095
+#: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1037 src/unix/sys-unix.cpp:1095
 #, c-format
 msgid "command '%s' timed out after %ds"
 msgstr "l'ordre «%s» ha excedit el temps després de %ds"
@@ -511,9 +436,8 @@ msgstr "l'ordre «%s» ha excedit el temps després de %ds"
 msgid "running command '%s' had status %d"
 msgstr "l'ordre en execució «%s» tenia l'estat %d i el missatge d'error «%s»"
 
-#: src/gnuwin32/getline/getline.cpp:422 src/gnuwin32/getline/getline.cpp:662
-#: src/gnuwin32/getline/getline.cpp:973 src/gnuwin32/getline/getline.cpp:1404
-#: src/gnuwin32/getline/getline.cpp:1428
+#: src/gnuwin32/getline/getline.cpp:422 src/gnuwin32/getline/getline.cpp:662 src/gnuwin32/getline/getline.cpp:973
+#: src/gnuwin32/getline/getline.cpp:1404 src/gnuwin32/getline/getline.cpp:1428
 msgid ""
 "\n"
 "*** Error: getline(): invalid multi-byte character.\n"
@@ -555,8 +479,7 @@ msgid ""
 "*** Error: minimum screen width is 21\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:936 src/gnuwin32/getline/getline.cpp:991
-#: src/gnuwin32/getline/getline.cpp:1069
+#: src/gnuwin32/getline/getline.cpp:936 src/gnuwin32/getline/getline.cpp:991 src/gnuwin32/getline/getline.cpp:1069
 #, fuzzy
 msgid ""
 "\n"
@@ -581,8 +504,7 @@ msgid ""
 "*** Error: hist_save() failed on malloc\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:1553
-#: src/gnuwin32/getline/wc_history.cpp:138
+#: src/gnuwin32/getline/getline.cpp:1553 src/gnuwin32/getline/wc_history.cpp:138
 #, fuzzy, c-format
 msgid "Unable to open %s"
 msgstr "no s'ha pogut obrir el fitxer"
@@ -640,22 +562,19 @@ msgstr ""
 msgid "cannot get data pointer of '%s' objects"
 msgstr "no es pot crear el directori «%ls», raó «%s»"
 
-#: src/include/Rinlinedfuns.h:159 src/include/Rinlinedfuns.h:163
-#: src/include/Rinlinedfuns.h:166 src/include/Rinlinedfuns.h:169
+#: src/include/Rinlinedfuns.h:159 src/include/Rinlinedfuns.h:163 src/include/Rinlinedfuns.h:166 src/include/Rinlinedfuns.h:169
 #: src/include/Rinlinedfuns.h:172
 #, fuzzy, c-format
 msgid "bad '%s' vector"
 msgstr "el valor «%s» no és vàlid"
 
-#: src/include/Rinlinedfuns.h:232 src/include/Rinlinedfuns.h:236
-#: src/include/Rinlinedfuns.h:240 src/include/Rinlinedfuns.h:244
+#: src/include/Rinlinedfuns.h:232 src/include/Rinlinedfuns.h:236 src/include/Rinlinedfuns.h:240 src/include/Rinlinedfuns.h:244
 #: src/include/Rinlinedfuns.h:248
 #, c-format
 msgid "bad standard '%s' vector"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:253 src/include/Rinlinedfuns.h:257
-#: src/include/Rinlinedfuns.h:261 src/include/Rinlinedfuns.h:265
+#: src/include/Rinlinedfuns.h:253 src/include/Rinlinedfuns.h:257 src/include/Rinlinedfuns.h:261 src/include/Rinlinedfuns.h:265
 #: src/include/Rinlinedfuns.h:269
 #, fuzzy, c-format
 msgid "bad '%s' scalar"
@@ -665,9 +584,8 @@ msgstr "el valor «%s» no és vàlid"
 msgid "cycle detected"
 msgstr ""
 
-#: src/main/agrep.cpp:142 src/main/agrep.cpp:775 src/main/character.cpp:1468
-#: src/main/character.cpp:1472 src/main/grep.cpp:1294 src/main/grep.cpp:2133
-#: src/main/grep.cpp:2137 src/main/grep.cpp:2975 src/main/grep.cpp:3318
+#: src/main/agrep.cpp:142 src/main/agrep.cpp:775 src/main/character.cpp:1468 src/main/character.cpp:1472 src/main/grep.cpp:1294
+#: src/main/grep.cpp:2133 src/main/grep.cpp:2137 src/main/grep.cpp:2975 src/main/grep.cpp:3318
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "l'argument «%s» té longitud > 1 i només s'utilitzarà el primer element"
@@ -677,32 +595,26 @@ msgstr "l'argument «%s» té longitud > 1 i només s'utilitzarà el primer elem
 msgid "'pattern' must be a non-empty character string"
 msgstr "«patró» ha de ser una cadena de caràcters no buida"
 
-#: src/main/agrep.cpp:210 src/main/agrep.cpp:826 src/main/grep.cpp:1346
-#: src/main/grep.cpp:3013 src/main/grep.cpp:3350
+#: src/main/agrep.cpp:210 src/main/agrep.cpp:826 src/main/grep.cpp:1346 src/main/grep.cpp:3013 src/main/grep.cpp:3350
 #, fuzzy
 msgid "regular expression is invalid in this locale"
 msgstr "l'expressió regular no és vàlida en aquesta configuració regional"
 
-#: src/main/agrep.cpp:216 src/main/agrep.cpp:626 src/main/agrep.cpp:832
-#: src/main/grep.cpp:3356
+#: src/main/agrep.cpp:216 src/main/agrep.cpp:626 src/main/agrep.cpp:832 src/main/grep.cpp:3356
 #, fuzzy, c-format
 msgid "regcomp error: '%s'"
 msgstr "error de regcomp: «%s»"
 
-#: src/main/agrep.cpp:248 src/main/agrep.cpp:872 src/main/grep.cpp:633
-#: src/main/grep.cpp:735 src/main/grep.cpp:851 src/main/grep.cpp:1059
-#: src/main/grep.cpp:1399 src/main/grep.cpp:2249 src/main/grep.cpp:2538
-#: src/main/grep.cpp:3133 src/main/grep.cpp:3222 src/main/grep.cpp:3382
+#: src/main/agrep.cpp:248 src/main/agrep.cpp:872 src/main/grep.cpp:633 src/main/grep.cpp:735 src/main/grep.cpp:851 src/main/grep.cpp:1059
+#: src/main/grep.cpp:1399 src/main/grep.cpp:2249 src/main/grep.cpp:2538 src/main/grep.cpp:3133 src/main/grep.cpp:3222 src/main/grep.cpp:3382
 #: src/main/grep.cpp:3389
 #, fuzzy, c-format
 msgid "input string %lld is invalid in this locale"
 msgstr "la cadena d'entrada %lld no és vàlida en aquesta configuració regional"
 
-#: src/main/agrep.cpp:527 src/main/agrep.cpp:763 src/main/connections.cpp:2886
-#: src/main/grep.cpp:569 src/main/grep.cpp:1285 src/main/grep.cpp:1287
-#: src/main/grep.cpp:1580 src/main/grep.cpp:1588 src/main/grep.cpp:2124
-#: src/main/grep.cpp:2126 src/main/grep.cpp:2965 src/main/grep.cpp:2967
-#: src/main/grep.cpp:3306
+#: src/main/agrep.cpp:527 src/main/agrep.cpp:763 src/main/connections.cpp:2886 src/main/grep.cpp:569 src/main/grep.cpp:1285
+#: src/main/grep.cpp:1287 src/main/grep.cpp:1580 src/main/grep.cpp:1588 src/main/grep.cpp:2124 src/main/grep.cpp:2126 src/main/grep.cpp:2965
+#: src/main/grep.cpp:2967 src/main/grep.cpp:3306
 #, fuzzy, c-format
 msgid "argument '%s' will be ignored"
 msgstr "s'ignorarà l'argument «%s = \"%s\"»"
@@ -712,10 +624,8 @@ msgstr "s'ignorarà l'argument «%s = \"%s\"»"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "la cadena d'entrada x[%d] no és vàlida en aquesta configuració regional"
 
-#: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
-#: src/main/print.cpp:1196 src/main/util.cpp:3206
-#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
-#: src/modules/X11/dataentry.cpp:452
+#: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482 src/main/print.cpp:1196 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301 src/modules/X11/dataentry.cpp:452
 #, fuzzy, c-format
 msgid "allocation error in '%s'"
 msgstr "error d'assignació de memòria a «realpr»"
@@ -725,8 +635,7 @@ msgstr "error d'assignació de memòria a «realpr»"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "la cadena d'entrada y[%d] no és vàlida en aquesta configuració regional"
 
-#: src/main/altclasses.cpp:113 src/main/altclasses.cpp:147
-#: src/main/altclasses.cpp:195 src/main/altclasses.cpp:248
+#: src/main/altclasses.cpp:113 src/main/altclasses.cpp:147 src/main/altclasses.cpp:195 src/main/altclasses.cpp:248
 #: src/main/altclasses.cpp:335
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
@@ -736,15 +645,13 @@ msgstr ""
 msgid "method should only handle unexpanded vectors"
 msgstr ""
 
-#: src/main/altclasses.cpp:380 src/main/altclasses.cpp:396
-#: src/main/altclasses.cpp:435 src/main/altclasses.cpp:484
+#: src/main/altclasses.cpp:380 src/main/altclasses.cpp:396 src/main/altclasses.cpp:435 src/main/altclasses.cpp:484
 #: src/main/altclasses.cpp:565
 #, c-format
 msgid "compact sequences with increment %f not supported yet"
 msgstr ""
 
-#: src/main/altclasses.cpp:588 src/main/seq.cpp:119 src/main/seq.cpp:908
-#: src/main/seq.cpp:1156
+#: src/main/altclasses.cpp:588 src/main/seq.cpp:119 src/main/seq.cpp:908 src/main/seq.cpp:1156
 #, fuzzy
 msgid "result would be too long a vector"
 msgstr "el resultat seria un vector massa llarg"
@@ -847,8 +754,7 @@ msgstr "els arguments han de ser simbòlics"
 msgid "'FUN.VALUE' must be a vector"
 msgstr "«FUN.VALUE» ha de ser un vector"
 
-#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2019
-#: src/main/serialize.cpp:2037
+#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2019 src/main/serialize.cpp:2037
 #, fuzzy
 msgid "invalid length"
 msgstr "longitud no vàlida"
@@ -880,8 +786,7 @@ msgstr ""
 "els valors han de ser de tipus '%s',\n"
 " però el resultat de FUN(X[[%lld]]) és el tipus «%s»"
 
-#: src/main/apply.cpp:226 src/main/apply.cpp:254 src/main/sort.cpp:1277
-#: src/main/sort.cpp:1422 src/main/unique.cpp:1488
+#: src/main/apply.cpp:226 src/main/apply.cpp:254 src/main/sort.cpp:1277 src/main/sort.cpp:1422 src/main/unique.cpp:1488
 #, fuzzy
 msgid "invalid type"
 msgstr "tipus de línia no vàlid"
@@ -959,8 +864,7 @@ msgstr "La longitud d'objecte més llarga no és múltiple la longitud d'objecte
 msgid "invalid argument to unary operator"
 msgstr "argument no vàlid per a un operador unari"
 
-#: src/main/arithmetic.cpp:709 src/main/arithmetic.cpp:737
-#: src/main/arithmetic.cpp:760
+#: src/main/arithmetic.cpp:709 src/main/arithmetic.cpp:737 src/main/arithmetic.cpp:760
 #, fuzzy
 msgid "invalid unary operator"
 msgstr "operador unari invàlid"
@@ -970,14 +874,12 @@ msgstr "operador unari invàlid"
 msgid "unimplemented real function of 1 argument"
 msgstr "funció real no implementada d'1 argument"
 
-#: src/main/arithmetic.cpp:1274 src/main/complex.cpp:700
-#: src/main/complex.cpp:771
+#: src/main/arithmetic.cpp:1274 src/main/complex.cpp:700 src/main/complex.cpp:771
 #, fuzzy
 msgid "unimplemented complex function"
 msgstr "funció complexa no implementada"
 
-#: src/main/arithmetic.cpp:1550 src/main/arithmetic.cpp:2011
-#: src/main/arithmetic.cpp:2178 src/main/arithmetic.cpp:2283
+#: src/main/arithmetic.cpp:1550 src/main/arithmetic.cpp:2011 src/main/arithmetic.cpp:2178 src/main/arithmetic.cpp:2283
 #, fuzzy, c-format
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "funció real no implementada de %d arguments numèrics"
@@ -1173,9 +1075,8 @@ msgstr "«x» ha de tenir una longitud positiva"
 msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "matriu singular a «backsolve». Primer zero en diagonal [%d]"
 
-#: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306
-#: src/main/attrib.cpp:324 src/main/attrib.cpp:456 src/main/attrib.cpp:503
-#: src/main/attrib.cpp:557 src/main/RObject.cpp:129
+#: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306 src/main/attrib.cpp:324 src/main/attrib.cpp:456
+#: src/main/attrib.cpp:503 src/main/attrib.cpp:557 src/main/RObject.cpp:129
 #, fuzzy
 msgid "attempt to set an attribute on NULL"
 msgstr "s'ha intentat establir un atribut a NULL"
@@ -1413,8 +1314,7 @@ msgstr "no hi ha cap mètode aplicable per a \" aplicat a un objecte de la class
 msgid "resulting vector exceeds vector length limit in '%s'"
 msgstr "el vector resultant excedeix el límit de longitud del vector a «%s»"
 
-#: src/main/bind.cpp:337 src/main/bind.cpp:375 src/main/bind.cpp:426
-#: src/main/bind.cpp:509 src/main/bind.cpp:539
+#: src/main/bind.cpp:337 src/main/bind.cpp:375 src/main/bind.cpp:426 src/main/bind.cpp:509 src/main/bind.cpp:539
 #, fuzzy, c-format
 msgid "type '%s' is unimplemented in '%s'"
 msgstr "el tipus «%s» no està implementat a «%s»"
@@ -1484,28 +1384,22 @@ msgstr "la mida del vector no pot ser NA/NaN"
 msgid "vector size cannot be infinite"
 msgstr "la mida del vector no pot ser infinita"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957
-#: src/main/sort.cpp:1578
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957 src/main/sort.cpp:1578
 #, fuzzy
 msgid "vector size specified is too large"
 msgstr "la mida del vector especificada és massa gran"
 
-#: src/main/builtin.cpp:94 src/main/builtin.cpp:130 src/main/envir.cpp:1860
-#: src/main/envir.cpp:1971 src/main/envir.cpp:2072 src/main/envir.cpp:2203
-#: src/main/paste.cpp:121 src/main/paste.cpp:363 src/main/random.cpp:492
-#: src/main/random.cpp:521 src/main/unique.cpp:2315
+#: src/main/builtin.cpp:94 src/main/builtin.cpp:130 src/main/envir.cpp:1860 src/main/envir.cpp:1971 src/main/envir.cpp:2072
+#: src/main/envir.cpp:2203 src/main/paste.cpp:121 src/main/paste.cpp:363 src/main/random.cpp:492 src/main/random.cpp:521
+#: src/main/unique.cpp:2315
 msgid "invalid first argument"
 msgstr "el primer argument no és vàlid"
 
-#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313
-#: src/main/builtin.cpp:352 src/main/builtin.cpp:402 src/main/builtin.cpp:416
-#: src/main/coerce.cpp:1581 src/main/connections.cpp:3894
-#: src/main/engine.cpp:3221 src/main/envir.cpp:992 src/main/envir.cpp:1042
-#: src/main/envir.cpp:1208 src/main/envir.cpp:1246 src/main/envir.cpp:2007
-#: src/main/envir.cpp:2081 src/main/envir.cpp:2210 src/main/envir.cpp:2933
-#: src/main/envir.cpp:3017 src/main/Environment.cpp:112 src/main/eval.cpp:8913
-#: src/main/objects.cpp:258 src/main/objects.cpp:266 src/main/saveload.cpp:2212
-#: src/main/saveload.cpp:2487 src/main/serialize.cpp:3232
+#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313 src/main/builtin.cpp:352 src/main/builtin.cpp:402
+#: src/main/builtin.cpp:416 src/main/coerce.cpp:1581 src/main/connections.cpp:3894 src/main/engine.cpp:3221 src/main/envir.cpp:992
+#: src/main/envir.cpp:1042 src/main/envir.cpp:1208 src/main/envir.cpp:1246 src/main/envir.cpp:2007 src/main/envir.cpp:2081
+#: src/main/envir.cpp:2210 src/main/envir.cpp:2933 src/main/envir.cpp:3017 src/main/Environment.cpp:112 src/main/eval.cpp:8913
+#: src/main/objects.cpp:258 src/main/objects.cpp:266 src/main/saveload.cpp:2212 src/main/saveload.cpp:2487 src/main/serialize.cpp:3232
 msgid "use of NULL environment is defunct"
 msgstr "l'ús de l'entorn NULL és obsolet"
 
@@ -1523,15 +1417,13 @@ msgstr ""
 msgid "replacement object is not an environment"
 msgstr "l'objecte de substitució no és un entorn"
 
-#: src/main/builtin.cpp:356 src/main/coerce.cpp:2738 src/main/engine.cpp:3225
-#: src/main/envir.cpp:1899 src/main/envir.cpp:2940 src/main/envir.cpp:3019
-#: src/main/unique.cpp:1920
+#: src/main/builtin.cpp:356 src/main/coerce.cpp:2738 src/main/engine.cpp:3225 src/main/envir.cpp:1899 src/main/envir.cpp:2940
+#: src/main/envir.cpp:3019 src/main/unique.cpp:1920
 #, fuzzy, c-format
 msgid "'%s' must be an environment"
 msgstr "«enclos» ha de ser un entorn"
 
-#: src/main/builtin.cpp:374 src/main/builtin.cpp:407 src/main/builtin.cpp:421
-#: src/main/memory.cpp:4387
+#: src/main/builtin.cpp:374 src/main/builtin.cpp:407 src/main/builtin.cpp:421 src/main/memory.cpp:4387
 #, fuzzy, c-format
 msgid "'%s' is not an environment"
 msgstr "'parent' no és un entorn"
@@ -1556,12 +1448,9 @@ msgstr "no es pot establir l'entorn pare d'un espai de noms"
 msgid "can not set the parent environment of package imports"
 msgstr "no es pot establir l'entorn pare de les importacions de paquets"
 
-#: src/main/builtin.cpp:566 src/main/connections.cpp:4560
-#: src/main/connections.cpp:4945 src/main/connections.cpp:4972
-#: src/main/connections.cpp:5353 src/main/connections.cpp:5416
-#: src/main/connections.cpp:5641 src/main/connections.cpp:5645
-#: src/main/connections.cpp:6098 src/main/deparse.cpp:422
-#: src/main/deparse.cpp:508 src/main/serialize.cpp:2506
+#: src/main/builtin.cpp:566 src/main/connections.cpp:4560 src/main/connections.cpp:4945 src/main/connections.cpp:4972
+#: src/main/connections.cpp:5353 src/main/connections.cpp:5416 src/main/connections.cpp:5641 src/main/connections.cpp:5645
+#: src/main/connections.cpp:6098 src/main/deparse.cpp:422 src/main/deparse.cpp:508 src/main/serialize.cpp:2506
 #, fuzzy
 msgid "cannot write to this connection"
 msgstr "no s'ha pogut escriure a aquesta connexió"
@@ -1611,10 +1500,8 @@ msgstr "no es pot canviar la longitud de NULL"
 msgid "wrong length for '%s' argument"
 msgstr "longitud incorrecta per a l'argument «%s»"
 
-#: src/main/builtin.cpp:983 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846
-#: src/main/eval.cpp:1067 src/main/eval.cpp:1230 src/main/eval.cpp:3696
-#: src/main/eval.cpp:3779 src/main/eval.cpp:3846 src/main/eval.cpp:4192
-#: src/main/eval.cpp:7934 src/main/eval.cpp:8077
+#: src/main/builtin.cpp:983 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846 src/main/eval.cpp:1067 src/main/eval.cpp:1230
+#: src/main/eval.cpp:3696 src/main/eval.cpp:3779 src/main/eval.cpp:3846 src/main/eval.cpp:4192 src/main/eval.cpp:7934 src/main/eval.cpp:8077
 #, fuzzy
 msgid "'...' used in an incorrect context"
 msgstr "'...' utilitzat en un context incorrecte"
@@ -1624,8 +1511,8 @@ msgstr "'...' utilitzat en un context incorrecte"
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "els valors per defecte de «commutar» són duplicats: «%s» i «%s»"
 
-#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564
-#: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3714
+#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564 src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678
+#: src/main/eval.cpp:3714
 #, fuzzy, c-format
 msgid "'%s' is missing"
 msgstr "falta «%s»"
@@ -1659,16 +1546,13 @@ msgid_plural "%d arguments passed to '%s' which requires %d to %d"
 msgstr[0] "S'ha passat %d argument a «%s» que requereix %d a %d"
 msgstr[1] "S'han passat %d arguments a «%s» que requereix %d a %d"
 
-#: src/main/character.cpp:143 src/main/character.cpp:146
-#: src/main/character.cpp:332 src/main/character.cpp:335
+#: src/main/character.cpp:143 src/main/character.cpp:146 src/main/character.cpp:332 src/main/character.cpp:335
 #, fuzzy, c-format
 msgid "'%s' requires a character vector"
 msgstr "«%s» requereix un vector de caràcters"
 
-#: src/main/character.cpp:195 src/main/character.cpp:221
-#: src/main/character.cpp:235 src/main/character.cpp:299
-#: src/main/character.cpp:407 src/main/character.cpp:609
-#: src/main/character.cpp:614
+#: src/main/character.cpp:195 src/main/character.cpp:221 src/main/character.cpp:235 src/main/character.cpp:299 src/main/character.cpp:407
+#: src/main/character.cpp:609 src/main/character.cpp:614
 #, fuzzy, c-format
 msgid "invalid multibyte string, %s"
 msgstr "cadena multibyte no vàlida, %s"
@@ -1788,31 +1672,26 @@ msgstr "cadena multibyte d'entrada no vàlida %lld"
 msgid "strtrim() requires a character vector"
 msgstr "strtrim() requereix un vector de caràcters"
 
-#: src/main/character.cpp:1852 src/main/connections.cpp:4425
-#: src/main/context.cpp:747 src/main/context.cpp:761 src/main/datetime.cpp:1020
-#: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
-#: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
-#: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
-#: src/main/dotcode.cpp:235 src/main/errors.cpp:1169 src/main/errors.cpp:1191
-#: src/main/errors.cpp:1309 src/main/errors.cpp:1316 src/main/errors.cpp:1579
-#: src/main/errors.cpp:2250 src/main/platform.cpp:3859 src/main/seq.cpp:275
-#: src/main/seq.cpp:282 src/main/seq.cpp:286 src/main/seq.cpp:396
-#: src/main/seq.cpp:403 src/main/seq.cpp:406 src/main/seq.cpp:408
-#: src/main/seq.cpp:465 src/main/seq.cpp:469 src/main/seq.cpp:473
-#: src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591
-#: src/main/source.cpp:230 src/main/sysutils.cpp:282 src/main/util.cpp:1215
-#: src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611
-#: src/modules/lapack/Lapack.cpp:1093 src/modules/X11/devX11.cpp:3231
-#: src/modules/X11/devX11.cpp:3258 src/modules/X11/devX11.cpp:3263
-#: src/modules/X11/devX11.cpp:3268 src/modules/X11/devX11.cpp:3278
-#: src/modules/X11/devX11.cpp:3283 src/modules/X11/devX11.cpp:3287
+#: src/main/character.cpp:1852 src/main/connections.cpp:4425 src/main/context.cpp:747 src/main/context.cpp:761 src/main/datetime.cpp:1020
+#: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157 src/main/datetime.cpp:1275 src/main/datetime.cpp:1497 src/main/datetime.cpp:1659
+#: src/main/datetime.cpp:1978 src/main/dotcode.cpp:235 src/main/errors.cpp:1169 src/main/errors.cpp:1191 src/main/errors.cpp:1309
+#: src/main/errors.cpp:1316 src/main/errors.cpp:1579 src/main/errors.cpp:2250 src/main/options.cpp:498 src/main/options.cpp:653
+#: src/main/options.cpp:661 src/main/options.cpp:667 src/main/options.cpp:675 src/main/options.cpp:682 src/main/options.cpp:687
+#: src/main/options.cpp:694 src/main/options.cpp:704 src/main/options.cpp:719 src/main/options.cpp:725 src/main/options.cpp:730
+#: src/main/options.cpp:739 src/main/options.cpp:748 src/main/options.cpp:763 src/main/options.cpp:773 src/main/options.cpp:787
+#: src/main/options.cpp:793 src/main/options.cpp:827 src/main/options.cpp:847 src/main/options.cpp:860 src/main/options.cpp:901
+#: src/main/options.cpp:912 src/main/options.cpp:921 src/main/platform.cpp:3872 src/main/seq.cpp:275 src/main/seq.cpp:282
+#: src/main/seq.cpp:286 src/main/seq.cpp:396 src/main/seq.cpp:403 src/main/seq.cpp:406 src/main/seq.cpp:408 src/main/seq.cpp:465
+#: src/main/seq.cpp:469 src/main/seq.cpp:473 src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591 src/main/source.cpp:230
+#: src/main/sysutils.cpp:282 src/main/util.cpp:1215 src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611
+#: src/modules/lapack/Lapack.cpp:1093 src/modules/X11/devX11.cpp:3231 src/modules/X11/devX11.cpp:3258 src/modules/X11/devX11.cpp:3263
+#: src/modules/X11/devX11.cpp:3268 src/modules/X11/devX11.cpp:3278 src/modules/X11/devX11.cpp:3283 src/modules/X11/devX11.cpp:3287
 #: src/modules/X11/devX11.cpp:3291 src/modules/X11/devX11.cpp:3296
 #, c-format
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
 
-#: src/main/character.cpp:1860 src/main/envir.cpp:3996 src/main/envir.cpp:4018
-#: src/main/envir.cpp:4027 src/main/grep.cpp:203
+#: src/main/character.cpp:1860 src/main/envir.cpp:3996 src/main/envir.cpp:4018 src/main/envir.cpp:4027 src/main/grep.cpp:203
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "els noms de les variables estan limitats a %d bytes"
@@ -1937,14 +1816,12 @@ msgstr "llista d'arguments no vàlida"
 msgid "'length = %lld' in coercion to '%s'"
 msgstr "«length = %lld» en coerció a «%s»"
 
-#: src/main/coerce.cpp:1773 src/main/debug.cpp:124 src/main/util.cpp:721
-#: src/main/util.cpp:724
+#: src/main/coerce.cpp:1773 src/main/debug.cpp:124 src/main/util.cpp:721 src/main/util.cpp:724
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "el tercer argument ha de ser «TRUE» o «FALSE»"
 
-#: src/main/coerce.cpp:1793 src/main/coerce.cpp:1801 src/main/coerce.cpp:1810
-#: src/main/coerce.cpp:1818
+#: src/main/coerce.cpp:1793 src/main/coerce.cpp:1801 src/main/coerce.cpp:1810 src/main/coerce.cpp:1818
 #, fuzzy
 msgid "NA in coercion to boolean"
 msgstr "SNA introduïts per coacció a un rang enter"
@@ -2049,8 +1926,7 @@ msgstr ""
 msgid "invalid to change the storage mode of a factor"
 msgstr ""
 
-#: src/main/colors.cpp:65 src/main/colors.cpp:79 src/main/colors.cpp:87
-#: src/main/colors.cpp:95
+#: src/main/colors.cpp:65 src/main/colors.cpp:79 src/main/colors.cpp:87 src/main/colors.cpp:95
 #, fuzzy
 msgid "package grDevices must be loaded"
 msgstr "no es poden carregar les rutines del sòcol"
@@ -2171,28 +2047,21 @@ msgstr "connexió no vàlida"
 msgid "closing unused connection %d (%s)\n"
 msgstr "s'està tancant la connexió no utilitzada %d (%s)\n"
 
-#: src/main/connections.cpp:313 src/main/serialize.cpp:1754
-#: src/main/serialize.cpp:1775 src/main/sysutils.cpp:739
-#: src/main/sysutils.cpp:761 src/main/sysutils.cpp:782
-#: src/main/sysutils.cpp:1729 src/main/sysutils.cpp:1744
-#: src/main/sysutils.cpp:1958 src/main/sysutils.cpp:2126
-#: src/main/sysutils.cpp:2135 src/main/sysutils.cpp:2147
-#: src/main/sysutils.cpp:2558
+#: src/main/connections.cpp:313 src/main/serialize.cpp:1754 src/main/serialize.cpp:1775 src/main/sysutils.cpp:739 src/main/sysutils.cpp:761
+#: src/main/sysutils.cpp:782 src/main/sysutils.cpp:1729 src/main/sysutils.cpp:1744 src/main/sysutils.cpp:1958 src/main/sysutils.cpp:2126
+#: src/main/sysutils.cpp:2135 src/main/sysutils.cpp:2147 src/main/sysutils.cpp:2558
 #, fuzzy, c-format
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "conversió no admesa de «%s» a «%s»"
 
-#: src/main/connections.cpp:374 src/main/connections.cpp:4624
-#: src/main/connections.cpp:4749 src/main/connections.cpp:4836
+#: src/main/connections.cpp:374 src/main/connections.cpp:4624 src/main/connections.cpp:4749 src/main/connections.cpp:4836
 #: src/main/connections.cpp:4865 src/main/connections.cpp:4898
 #, fuzzy
 msgid "error reading from the connection"
 msgstr "s'ha produït un error en llegir de la connexió"
 
-#: src/main/connections.cpp:474 src/main/connections.cpp:489
-#: src/main/connections.cpp:707 src/main/connections.cpp:712
-#: src/main/connections.cpp:717 src/main/connections.cpp:728
-#: src/main/connections.cpp:734
+#: src/main/connections.cpp:474 src/main/connections.cpp:489 src/main/connections.cpp:707 src/main/connections.cpp:712
+#: src/main/connections.cpp:717 src/main/connections.cpp:728 src/main/connections.cpp:734
 #, fuzzy, c-format
 msgid "%s not enabled for this connection"
 msgstr "%s no està habilitat per a aquesta connexió"
@@ -2207,7 +2076,7 @@ msgstr "cadena de caràcters no vàlida en la conversió de la sortida"
 msgid "invalid input found on input connection '%s'"
 msgstr "s'ha trobat una entrada no vàlida a la connexió d'entrada «%s»"
 
-#: src/main/connections.cpp:888 src/main/platform.cpp:958
+#: src/main/connections.cpp:888 src/main/platform.cpp:962
 #, fuzzy, c-format
 msgid "cannot open file '%ls': %s"
 msgstr "no s'ha pogut obrir el fitxer «%ls»: %s"
@@ -2222,8 +2091,7 @@ msgstr "no es pot obrir el fitxer «%ls»: és un directori"
 msgid "'fdopen' is not supported on this platform"
 msgstr "'dirmark ' TRUE' no està suportat en aquesta plataforma"
 
-#: src/main/connections.cpp:927 src/main/connections.cpp:1875
-#: src/main/connections.cpp:2027 src/main/connections.cpp:2232
+#: src/main/connections.cpp:927 src/main/connections.cpp:1875 src/main/connections.cpp:2027 src/main/connections.cpp:2232
 #: src/main/connections.cpp:2473
 #, fuzzy, c-format
 msgid "cannot open file '%s': it is a directory"
@@ -2254,8 +2122,7 @@ msgstr "no s'ha pogut truncar el fitxer"
 msgid "file truncation unavailable on this platform"
 msgstr "no està disponible el truncament del fitxer en aquesta plataforma"
 
-#: src/main/connections.cpp:1156 src/main/connections.cpp:1160
-#: src/main/connections.cpp:1167 src/main/connections.cpp:1185
+#: src/main/connections.cpp:1156 src/main/connections.cpp:1160 src/main/connections.cpp:1167 src/main/connections.cpp:1185
 #, fuzzy
 msgid "allocation of file connection failed"
 msgstr "ha fallat l'assignació de la connexió al fitxer"
@@ -2280,12 +2147,9 @@ msgstr "la fifo «%s» no està preparada"
 msgid "cannot open fifo '%s'"
 msgstr "no s'ha pogut obrir la fifo «%s»"
 
-#: src/main/connections.cpp:1299 src/main/connections.cpp:1310
-#: src/main/connections.cpp:1468 src/main/connections.cpp:1486
-#: src/main/connections.cpp:1941 src/main/connections.cpp:1951
-#: src/main/connections.cpp:2081 src/main/connections.cpp:2150
-#: src/main/connections.cpp:3031 src/main/connections.cpp:3047
-#: src/main/connections.cpp:3372 src/main/connections.cpp:6284
+#: src/main/connections.cpp:1299 src/main/connections.cpp:1310 src/main/connections.cpp:1468 src/main/connections.cpp:1486
+#: src/main/connections.cpp:1941 src/main/connections.cpp:1951 src/main/connections.cpp:2081 src/main/connections.cpp:2150
+#: src/main/connections.cpp:3031 src/main/connections.cpp:3047 src/main/connections.cpp:3372 src/main/connections.cpp:6284
 #: src/main/connections.cpp:6348
 #, fuzzy
 msgid "too large a block specified"
@@ -2311,26 +2175,20 @@ msgstr "Ha fallat l'assignació de la memòria intermèdia fifo"
 msgid "cannot write FIFO '%s'"
 msgstr "no es pot escriure FIFO «%s»"
 
-#: src/main/connections.cpp:1538 src/main/connections.cpp:1542
-#: src/main/connections.cpp:1549 src/main/connections.cpp:1566
+#: src/main/connections.cpp:1538 src/main/connections.cpp:1542 src/main/connections.cpp:1549 src/main/connections.cpp:1566
 #, fuzzy
 msgid "allocation of fifo connection failed"
 msgstr "Ha fallat l'assignació de la connexió fifo"
 
-#: src/main/connections.cpp:1596 src/main/connections.cpp:4115
-#: src/main/connections.cpp:4436 src/main/connections.cpp:4557
-#: src/main/connections.cpp:4716 src/main/connections.cpp:4970
-#: src/main/connections.cpp:5290 src/main/connections.cpp:5414
-#: src/main/connections.cpp:5637 src/main/dcf.cpp:105 src/main/deparse.cpp:419
-#: src/main/deparse.cpp:505 src/main/saveload.cpp:2395
-#: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2670
-#: src/main/serialize.cpp:2725 src/main/source.cpp:293
+#: src/main/connections.cpp:1596 src/main/connections.cpp:4115 src/main/connections.cpp:4436 src/main/connections.cpp:4557
+#: src/main/connections.cpp:4716 src/main/connections.cpp:4970 src/main/connections.cpp:5290 src/main/connections.cpp:5414
+#: src/main/connections.cpp:5637 src/main/dcf.cpp:105 src/main/deparse.cpp:419 src/main/deparse.cpp:505 src/main/saveload.cpp:2395
+#: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2670 src/main/serialize.cpp:2725 src/main/source.cpp:293
 #, fuzzy
 msgid "cannot open the connection"
 msgstr "no s'ha pogut obrir la connexió"
 
-#: src/main/connections.cpp:1614 src/main/connections.cpp:1784
-#: src/main/connections.cpp:2765 src/main/connections.cpp:4053
+#: src/main/connections.cpp:1614 src/main/connections.cpp:1784 src/main/connections.cpp:2765 src/main/connections.cpp:4053
 #: src/main/connections.cpp:5853
 #, fuzzy
 msgid "only first element of 'description' argument used"
@@ -2355,8 +2213,7 @@ msgstr "no es pot fer «pipe()» cmd «%ls»: %s"
 msgid "cannot open pipe() cmd '%s': %s"
 msgstr "no s'ha pogut obrir «pipe()» cmd «%s»: %s"
 
-#: src/main/connections.cpp:1880 src/main/connections.cpp:2226
-#: src/main/connections.cpp:2467
+#: src/main/connections.cpp:1880 src/main/connections.cpp:2226 src/main/connections.cpp:2467
 #, fuzzy, c-format
 msgid "cannot open compressed file '%s', probable reason '%s'"
 msgstr "no es pot obrir el fitxer comprimit «%s», raó probable «%s»"
@@ -2370,8 +2227,7 @@ msgstr "whence = end\" no està implementat per a les connexions gzfile"
 msgid "seek on a gzfile connection returned an internal error"
 msgstr "la cerca en una connexió gzfile ha retornat un error intern"
 
-#: src/main/connections.cpp:1960 src/main/connections.cpp:1964
-#: src/main/connections.cpp:1971 src/main/connections.cpp:1989
+#: src/main/connections.cpp:1960 src/main/connections.cpp:1964 src/main/connections.cpp:1971 src/main/connections.cpp:1989
 #, fuzzy
 msgid "allocation of gzfile connection failed"
 msgstr "ha fallat l'assignació de la connexió gzfile"
@@ -2401,8 +2257,7 @@ msgstr "Ha fallat l'assignació de la memòria intermèdia de desbordament per a
 msgid "file '%s' has trailing content that appears not to be compressed by bzip2"
 msgstr "el fitxer «%s» té contingut final que sembla no comprimit amb bzip2"
 
-#: src/main/connections.cpp:2161 src/main/connections.cpp:2165
-#: src/main/connections.cpp:2172 src/main/connections.cpp:2190
+#: src/main/connections.cpp:2161 src/main/connections.cpp:2165 src/main/connections.cpp:2172 src/main/connections.cpp:2190
 #, fuzzy
 msgid "allocation of bzfile connection failed"
 msgstr "ha fallat l'assignació de la connexió bzfile"
@@ -2412,8 +2267,7 @@ msgstr "ha fallat l'assignació de la connexió bzfile"
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "no s'ha pogut inicialitzar el descodificador lzma, error %d"
 
-#: src/main/connections.cpp:2253 src/main/connections.cpp:6810
-#: src/main/connections.cpp:7021
+#: src/main/connections.cpp:2253 src/main/connections.cpp:6810 src/main/connections.cpp:7021
 #, fuzzy
 msgid "problem setting presets"
 msgstr "problema amb establir la zona horària"
@@ -2423,8 +2277,7 @@ msgstr "problema amb establir la zona horària"
 msgid "cannot initialize lzma encoder, error %d"
 msgstr "no s'ha pogut inicialitzar el codificador lzma, error %d"
 
-#: src/main/connections.cpp:2286 src/main/connections.cpp:2379
-#: src/main/connections.cpp:2527 src/main/connections.cpp:2639
+#: src/main/connections.cpp:2286 src/main/connections.cpp:2379 src/main/connections.cpp:2527 src/main/connections.cpp:2639
 #, fuzzy
 msgid "fwrite error"
 msgstr "error de lectura"
@@ -2455,8 +2308,7 @@ msgstr ""
 msgid "lzma encoding result %d"
 msgstr ""
 
-#: src/main/connections.cpp:2388 src/main/connections.cpp:2392
-#: src/main/connections.cpp:2399 src/main/connections.cpp:2418
+#: src/main/connections.cpp:2388 src/main/connections.cpp:2392 src/main/connections.cpp:2399 src/main/connections.cpp:2418
 #, fuzzy
 msgid "allocation of xzfile connection failed"
 msgstr "ha fallat l'assignació de la connexió xzfile"
@@ -2480,14 +2332,12 @@ msgstr "no s'ha pogut inicialitzar el descodificador lzma, error %d"
 msgid "decompress error: %s"
 msgstr "error de regcomp: «%s»"
 
-#: src/main/connections.cpp:2651 src/main/connections.cpp:2655
-#: src/main/connections.cpp:2662 src/main/connections.cpp:2681
+#: src/main/connections.cpp:2651 src/main/connections.cpp:2655 src/main/connections.cpp:2662 src/main/connections.cpp:2681
 #, fuzzy
 msgid "allocation of zstdfile connection failed"
 msgstr "ha fallat l'assignació de la connexió gzfile"
 
-#: src/main/connections.cpp:2691 src/main/connections.cpp:6912
-#: src/main/connections.cpp:7061 src/main/connections.cpp:7293
+#: src/main/connections.cpp:2691 src/main/connections.cpp:6912 src/main/connections.cpp:7061 src/main/connections.cpp:7293
 msgid "Zstd compression support was not included in this R binary."
 msgstr ""
 
@@ -2501,8 +2351,7 @@ msgstr "aquest és un fitxer comprimit %s que aquesta construcció de R no admet
 msgid "memory allocation to copy clipboard failed"
 msgstr "ha fallat l'assignació de memòria per a copiar el porta-retalls"
 
-#: src/main/connections.cpp:2913 src/modules/X11/devX11.cpp:3451
-#: src/modules/X11/devX11.cpp:3456
+#: src/main/connections.cpp:2913 src/modules/X11/devX11.cpp:3451 src/modules/X11/devX11.cpp:3456
 #, fuzzy
 msgid "clipboard cannot be opened or contains no text"
 msgstr "no es pot obrir el porta-retalls o no conté text"
@@ -2547,14 +2396,12 @@ msgstr "«mode» per al porta-retalls ha de ser «r» o «w»"
 msgid "'mode' for the clipboard must be 'r' on Unix"
 msgstr "«mode» per al porta-retalls ha de ser «r» a Unix"
 
-#: src/main/connections.cpp:3104 src/main/connections.cpp:3110
-#: src/main/connections.cpp:3117 src/main/connections.cpp:3135
+#: src/main/connections.cpp:3104 src/main/connections.cpp:3110 src/main/connections.cpp:3117 src/main/connections.cpp:3135
 #, fuzzy
 msgid "allocation of clipboard connection failed"
 msgstr "ha fallat l'assignació de la connexió al porta-retalls"
 
-#: src/main/connections.cpp:3205 src/main/connections.cpp:3209
-#: src/main/connections.cpp:3216
+#: src/main/connections.cpp:3205 src/main/connections.cpp:3209 src/main/connections.cpp:3216
 #, fuzzy
 msgid "allocation of terminal connection failed"
 msgstr "ha fallat l'assignació de la connexió del terminal"
@@ -2569,8 +2416,7 @@ msgstr "s'està intentant afegir massa elements al vector RAW"
 msgid "attempt to seek outside the range of the raw connection"
 msgstr "s'intenta cercar fora del rang de la connexió RAW"
 
-#: src/main/connections.cpp:3412 src/main/connections.cpp:3416
-#: src/main/connections.cpp:3423 src/main/connections.cpp:3450
+#: src/main/connections.cpp:3412 src/main/connections.cpp:3416 src/main/connections.cpp:3423 src/main/connections.cpp:3450
 #, fuzzy
 msgid "allocation of raw connection failed"
 msgstr "ha fallat l'assignació de la connexió RAW"
@@ -2605,10 +2451,8 @@ msgstr "no s'ha pogut assignar memòria per a la connexió de text"
 msgid "seek is not relevant for text connection"
 msgstr "la cerca no és rellevant per a la connexió de text"
 
-#: src/main/connections.cpp:3623 src/main/connections.cpp:3627
-#: src/main/connections.cpp:3634 src/main/connections.cpp:3648
-#: src/main/connections.cpp:3833 src/main/connections.cpp:3837
-#: src/main/connections.cpp:3844 src/main/connections.cpp:3858
+#: src/main/connections.cpp:3623 src/main/connections.cpp:3627 src/main/connections.cpp:3634 src/main/connections.cpp:3648
+#: src/main/connections.cpp:3833 src/main/connections.cpp:3837 src/main/connections.cpp:3844 src/main/connections.cpp:3858
 #: src/main/connections.cpp:3866
 #, fuzzy
 msgid "allocation of text connection failed"
@@ -2639,10 +2483,8 @@ msgstr "mode no suportat"
 msgid "'con' is not an output textConnection"
 msgstr "«con» no és un text de sortidaConnection"
 
-#: src/main/connections.cpp:4097 src/main/connections.cpp:4144
-#: src/main/connections.cpp:4155 src/main/connections.cpp:4234
-#: src/main/connections.cpp:4264 src/main/connections.cpp:4286
-#: src/main/connections.cpp:4298 src/main/connections.cpp:4417
+#: src/main/connections.cpp:4097 src/main/connections.cpp:4144 src/main/connections.cpp:4155 src/main/connections.cpp:4234
+#: src/main/connections.cpp:4264 src/main/connections.cpp:4286 src/main/connections.cpp:4298 src/main/connections.cpp:4417
 #: src/main/connections.cpp:4544 src/main/connections.cpp:6388
 #, fuzzy
 msgid "'con' is not a connection"
@@ -2688,8 +2530,7 @@ msgstr "no s'ha pogut tancar la connexió «output» del conducte"
 msgid "cannot close 'message' sink connection"
 msgstr "no s'ha pogut tancar la connexió «missage» del conducte"
 
-#: src/main/connections.cpp:4266 src/main/connections.cpp:6097
-#: src/main/connections.cpp:6105 src/main/serialize.cpp:2496
+#: src/main/connections.cpp:4266 src/main/connections.cpp:6097 src/main/connections.cpp:6105 src/main/serialize.cpp:2496
 #: src/main/serialize.cpp:2504
 #, fuzzy
 msgid "connection is not open"
@@ -2710,10 +2551,8 @@ msgstr "S'ha produït un error en escriure a la connexió: %s"
 msgid "Error writing to connection"
 msgstr "Error en escriure a la connexió"
 
-#: src/main/connections.cpp:4438 src/main/connections.cpp:4440
-#: src/main/connections.cpp:4719 src/main/connections.cpp:5275
-#: src/main/connections.cpp:5293 src/main/connections.cpp:6106
-#: src/main/dcf.cpp:107 src/main/scan.cpp:969 src/main/scan.cpp:973
+#: src/main/connections.cpp:4438 src/main/connections.cpp:4440 src/main/connections.cpp:4719 src/main/connections.cpp:5275
+#: src/main/connections.cpp:5293 src/main/connections.cpp:6106 src/main/dcf.cpp:107 src/main/scan.cpp:969 src/main/scan.cpp:973
 #: src/main/serialize.cpp:2498 src/main/source.cpp:296
 #, fuzzy
 msgid "cannot read from this connection"
@@ -2764,10 +2603,8 @@ msgstr "només es pot llegir des d'una connexió binària"
 msgid "size changing is not supported for complex vectors"
 msgstr "el canvi de mida no és compatible amb vectors complexos"
 
-#: src/main/connections.cpp:4782 src/main/connections.cpp:4816
-#: src/main/connections.cpp:4860 src/main/connections.cpp:4891
-#: src/main/connections.cpp:4911 src/main/connections.cpp:5031
-#: src/main/connections.cpp:5089 src/main/connections.cpp:5120
+#: src/main/connections.cpp:4782 src/main/connections.cpp:4816 src/main/connections.cpp:4860 src/main/connections.cpp:4891
+#: src/main/connections.cpp:4911 src/main/connections.cpp:5031 src/main/connections.cpp:5089 src/main/connections.cpp:5120
 #, fuzzy, c-format
 msgid "size %d is unknown on this machine"
 msgstr "la mida %d és desconeguda en aquesta màquina"
@@ -2802,8 +2639,7 @@ msgstr "només es poden escriure 2-131-1 bytes a un vector RAW"
 msgid "only 2^31-1 bytes can be written in a single writeBin() call"
 msgstr "només 2-131-1 bytes es poden escriure en una sola crida writeBin()"
 
-#: src/main/connections.cpp:5008 src/main/connections.cpp:5150
-#: src/main/connections.cpp:5444 src/main/connections.cpp:5486
+#: src/main/connections.cpp:5008 src/main/connections.cpp:5150 src/main/connections.cpp:5444 src/main/connections.cpp:5486
 #, fuzzy
 msgid "problem writing to connection"
 msgstr "problema en escriure a la connexió"
@@ -2813,8 +2649,7 @@ msgstr "problema en escriure a la connexió"
 msgid "size changing is not supported for raw vectors"
 msgstr "el canvi de mida no és compatible amb vectors RAW"
 
-#: src/main/connections.cpp:5189 src/main/connections.cpp:5193
-#: src/main/connections.cpp:5237
+#: src/main/connections.cpp:5189 src/main/connections.cpp:5193 src/main/connections.cpp:5237
 #, fuzzy
 msgid "invalid UTF-8 input in readChar()"
 msgstr "entrada UTF-8 no vàlida a readChar()"
@@ -2858,8 +2693,7 @@ msgstr "writeChar: se sol·liciten més caràcters dels que hi ha a la cadena - 
 msgid "maximum number of pushback lines exceeded"
 msgstr "s'ha excedit el nombre màxim de línies de retrocés"
 
-#: src/main/connections.cpp:5528 src/main/connections.cpp:5532
-#: src/main/connections.cpp:5567 src/main/connections.cpp:5575
+#: src/main/connections.cpp:5528 src/main/connections.cpp:5532 src/main/connections.cpp:5567 src/main/connections.cpp:5575
 #, fuzzy
 msgid "could not allocate space for pushback"
 msgstr "no s'ha pogut assignar espai per al retrocés"
@@ -3003,8 +2837,7 @@ msgstr "l'ús d'una connexió «fitxer» en mode text pot no funcionar correctam
 msgid "cannot create a 'gzcon' connection from a writable textConnection; maybe use rawConnection"
 msgstr "no es pot crear una connexió «gzcon» des d'un text escrivibleConnection; potser utilitzeu rawConnection"
 
-#: src/main/connections.cpp:6412 src/main/connections.cpp:6416
-#: src/main/connections.cpp:6424 src/main/connections.cpp:6439
+#: src/main/connections.cpp:6412 src/main/connections.cpp:6416 src/main/connections.cpp:6424 src/main/connections.cpp:6439
 #, fuzzy
 msgid "allocation of 'gzcon' connection failed"
 msgstr "ha fallat l'assignació de la connexió «gzcon»"
@@ -3014,8 +2847,7 @@ msgstr "ha fallat l'assignació de la connexió «gzcon»"
 msgid "R_compress1 requires a raw vector"
 msgstr "«%s» requereix un vector de caràcters"
 
-#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
-#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531 src/main/connections.cpp:6967 src/main/connections.cpp:7116
 #, fuzzy, c-format
 msgid "allocation error in '%s' with libdeflate"
 msgstr "error d'assignació de memòria a «realpr»"
@@ -3034,16 +2866,11 @@ msgstr "«%s» requereix un vector de caràcters"
 msgid "internal error %d in '%s' with libdeflate"
 msgstr "error intern en l'ús de la indexació recursiva"
 
-#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
-#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
-#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
-#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
-#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#: src/main/connections.cpp:7282
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591 src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842 src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928 src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037 src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208 src/main/connections.cpp:7282
 #, fuzzy, c-format
 msgid "internal error %d in '%s'"
 msgstr "error intern a «dosys»"
@@ -3082,10 +2909,9 @@ msgstr "no es pot escriure a una connexió al sòcol del servidor"
 msgid "not a socket connection"
 msgstr "no és una connexió al sòcol"
 
-#: src/main/connections.cpp:6733 src/modules/internet/libcurl.cpp:694
-#: src/modules/internet/sockconn.cpp:59 src/modules/internet/sockconn.cpp:90
-#: src/modules/internet/sockconn.cpp:291 src/unix/sys-std.cpp:139
-#: src/unix/sys-std.cpp:251 src/unix/sys-std.cpp:406
+#: src/main/connections.cpp:6733 src/modules/internet/libcurl.cpp:694 src/modules/internet/sockconn.cpp:59
+#: src/modules/internet/sockconn.cpp:90 src/modules/internet/sockconn.cpp:291 src/unix/sys-std.cpp:139 src/unix/sys-std.cpp:251
+#: src/unix/sys-std.cpp:406
 #, fuzzy
 msgid "file descriptor is too large for select()"
 msgstr "la longitud %d és massa gran per al resum"
@@ -3148,8 +2974,7 @@ msgstr "error intern ('op ). %d' en dosummary).\t Truca a un gurú"
 msgid "internal error in memDecompress(%s)"
 msgstr "error intern a «dosys»"
 
-#: src/main/connections.cpp:7320 src/main/connections.cpp:7324
-#: src/main/connections.cpp:7331
+#: src/main/connections.cpp:7320 src/main/connections.cpp:7324 src/main/connections.cpp:7331
 #, fuzzy, c-format
 msgid "allocation of %s connection failed"
 msgstr "ha fallat l'assignació de la connexió %s"
@@ -3183,8 +3008,8 @@ msgstr "el context de destinació no és a la pila"
 msgid "NA argument is invalid"
 msgstr "L'argument NA no és vàlid"
 
-#: src/main/context.cpp:428 src/main/context.cpp:443 src/main/context.cpp:532
-#: src/main/context.cpp:544 src/main/context.cpp:555 src/main/context.cpp:567
+#: src/main/context.cpp:428 src/main/context.cpp:443 src/main/context.cpp:532 src/main/context.cpp:544 src/main/context.cpp:555
+#: src/main/context.cpp:567
 #, fuzzy
 msgid "not that many frames on the stack"
 msgstr "no tants fotogrames a la pila"
@@ -3219,8 +3044,7 @@ msgstr "l'indicador de depuració a la funció compilada no té cap efecte"
 msgid "debug will apply when function leaves compiled code"
 msgstr "la depuració s'aplicarà quan la funció deixi el codi compilat"
 
-#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215
-#: src/main/random.cpp:301
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215 src/main/random.cpp:301
 #, fuzzy, c-format
 msgid "internal error in '%s'"
 msgstr "error intern a «dosys»"
@@ -3250,8 +3074,7 @@ msgstr "'cummin' no està definit per als nombres complexos"
 msgid "unknown cumxxx function"
 msgstr "funció cumxxxx desconeguda"
 
-#: src/main/datetime.cpp:560 src/main/datetime.cpp:571
-#: src/main/datetime.cpp:615 src/main/datetime.cpp:627
+#: src/main/datetime.cpp:560 src/main/datetime.cpp:571 src/main/datetime.cpp:615 src/main/datetime.cpp:627
 #, fuzzy
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr "és possible que les dates anteriors a 1902 no siguin exactes: avisa una vegada per sessió"
@@ -3261,8 +3084,7 @@ msgstr "és possible que les dates anteriors a 1902 no siguin exactes: avisa una
 msgid "time zone specification is too long"
 msgstr "la cadena d'entrada és massa llarga"
 
-#: src/main/datetime.cpp:794 src/main/datetime.cpp:806
-#: src/main/datetime.cpp:825 src/main/datetime.cpp:830
+#: src/main/datetime.cpp:794 src/main/datetime.cpp:806 src/main/datetime.cpp:825 src/main/datetime.cpp:830
 #, fuzzy
 msgid "problem with setting timezone"
 msgstr "problema amb establir la zona horària"
@@ -3272,8 +3094,7 @@ msgstr "problema amb establir la zona horària"
 msgid "cannot set timezones on this system"
 msgstr "no es poden establir zones horàries en aquest sistema"
 
-#: src/main/datetime.cpp:836 src/main/datetime.cpp:838
-#: src/main/datetime.cpp:840
+#: src/main/datetime.cpp:836 src/main/datetime.cpp:838 src/main/datetime.cpp:840
 #, fuzzy
 msgid "problem with unsetting timezone"
 msgstr "problema amb el desajustament de la zona horària"
@@ -3421,10 +3242,9 @@ msgstr "argument de longitud zero"
 msgid "'opts' should be small non-negative integer"
 msgstr "«opts» ha de ser un enter petit no negatiu"
 
-#: src/main/deparse.cpp:477 src/main/envir.cpp:1997 src/main/envir.cpp:2121
-#: src/main/envir.cpp:2275 src/main/envir.cpp:3779 src/main/eval.cpp:1074
-#: src/main/eval.cpp:2645 src/main/eval.cpp:5793 src/main/saveload.cpp:2123
-#: src/main/saveload.cpp:2437 src/main/serialize.cpp:3250
+#: src/main/deparse.cpp:477 src/main/envir.cpp:1997 src/main/envir.cpp:2121 src/main/envir.cpp:2275 src/main/envir.cpp:3779
+#: src/main/eval.cpp:1074 src/main/eval.cpp:2645 src/main/eval.cpp:5793 src/main/saveload.cpp:2123 src/main/saveload.cpp:2437
+#: src/main/serialize.cpp:3250
 #, fuzzy, c-format
 msgid "object '%s' not found"
 msgstr "no s'ha trobat l'objecte «%s»"
@@ -3513,8 +3333,7 @@ msgstr ""
 msgid "\"%s\" not resolved from current namespace (%s)"
 msgstr ""
 
-#: src/main/dotcode.cpp:304 src/main/dotcode.cpp:309 src/main/dotcode.cpp:314
-#: src/main/dotcode.cpp:319
+#: src/main/dotcode.cpp:304 src/main/dotcode.cpp:309 src/main/dotcode.cpp:314 src/main/dotcode.cpp:319
 #, fuzzy, c-format
 msgid "\"%s\" not available for %s() for package \"%s\""
 msgstr "«%s» no està disponible per a %s() per al paquet «%s»"
@@ -3529,8 +3348,7 @@ msgstr "El nom del símbol «%s» de %s no és a DLL per al paquet «%s»"
 msgid "%s symbol name \"%s\" not in load table"
 msgstr "El nom del símbol %s «%s» no és a la taula de càrrega"
 
-#: src/main/dotcode.cpp:378 src/main/dotcode.cpp:380 src/main/dotcode.cpp:390
-#: src/main/dotcode.cpp:455 src/main/dotcode.cpp:462
+#: src/main/dotcode.cpp:378 src/main/dotcode.cpp:380 src/main/dotcode.cpp:390 src/main/dotcode.cpp:455 src/main/dotcode.cpp:462
 #, fuzzy, c-format
 msgid "'%s' used more than once"
 msgstr "«%s» s'ha utilitzat més d'una vegada"
@@ -3640,8 +3458,7 @@ msgstr ""
 msgid "passing a char vector to .Fortran is not portable"
 msgstr ""
 
-#: src/main/dotcode.cpp:1933 src/main/dotcode.cpp:1955
-#: src/main/dotcode.cpp:1966
+#: src/main/dotcode.cpp:1933 src/main/dotcode.cpp:1955 src/main/dotcode.cpp:1966
 #, fuzzy, c-format
 msgid "invalid mode (%s) to pass to Fortran (arg %d)"
 msgstr "mode no vàlid (%s) per passar a Fortran (arg %d)"
@@ -3661,16 +3478,12 @@ msgstr ""
 msgid "pairlists are passed as SEXP as from R 2.15.0"
 msgstr "les llistes de parelles es passen com a SEXP des de R 2.15.0"
 
-#: src/main/dotcode.cpp:2591 src/main/dotcode.cpp:2610
-#: src/main/dotcode.cpp:2633 src/main/dotcode.cpp:2664
-#: src/main/dotcode.cpp:2692
+#: src/main/dotcode.cpp:2591 src/main/dotcode.cpp:2610 src/main/dotcode.cpp:2633 src/main/dotcode.cpp:2664 src/main/dotcode.cpp:2692
 #, c-format
 msgid "array over-run in %s(\"%s\") in %s argument %d\n"
 msgstr ""
 
-#: src/main/dotcode.cpp:2597 src/main/dotcode.cpp:2616
-#: src/main/dotcode.cpp:2639 src/main/dotcode.cpp:2670
-#: src/main/dotcode.cpp:2698
+#: src/main/dotcode.cpp:2597 src/main/dotcode.cpp:2616 src/main/dotcode.cpp:2639 src/main/dotcode.cpp:2670 src/main/dotcode.cpp:2698
 #, c-format
 msgid "array under-run in %s(\"%s\") in %s argument %d\n"
 msgstr ""
@@ -3797,8 +3610,7 @@ msgstr "la impressió no està habilitada per a aquesta connexió"
 msgid "write not enabled for this connection"
 msgstr "no s'ha habilitat l'escriptura per a aquesta connexió"
 
-#: src/main/dounzip.cpp:554 src/main/dounzip.cpp:558 src/main/dounzip.cpp:565
-#: src/main/dounzip.cpp:583
+#: src/main/dounzip.cpp:554 src/main/dounzip.cpp:558 src/main/dounzip.cpp:565 src/main/dounzip.cpp:583
 #, fuzzy
 msgid "allocation of 'unz' connection failed"
 msgstr "ha fallat l'assignació de la connexió «unz»"
@@ -3898,22 +3710,20 @@ msgstr "s'han registrat massa sistemes gràfics"
 msgid "no graphics system to unregister"
 msgstr "no hi ha cap sistema de gràfics per a desregistrar"
 
-#: src/main/engine.cpp:464 src/main/engine.cpp:469 src/main/engine.cpp:477
-#: src/main/engine.cpp:484 src/main/engine.cpp:497
+#: src/main/engine.cpp:464 src/main/engine.cpp:469 src/main/engine.cpp:477 src/main/engine.cpp:484 src/main/engine.cpp:497
 #: src/modules/X11/devX11.cpp:1168
 #, fuzzy
 msgid "invalid line end"
 msgstr "final de línia no vàlid"
 
-#: src/main/engine.cpp:528 src/main/engine.cpp:533 src/main/engine.cpp:541
-#: src/main/engine.cpp:548 src/main/engine.cpp:561
+#: src/main/engine.cpp:528 src/main/engine.cpp:533 src/main/engine.cpp:541 src/main/engine.cpp:548 src/main/engine.cpp:561
 #: src/modules/X11/devX11.cpp:1186
 #, fuzzy
 msgid "invalid line join"
 msgstr "la unió de línia no és vàlida"
 
-#: src/main/engine.cpp:791 src/main/engine.cpp:898 src/main/engine.cpp:1236
-#: src/main/engine.cpp:1343 src/main/engine.cpp:1453 src/main/engine.cpp:1506
+#: src/main/engine.cpp:791 src/main/engine.cpp:898 src/main/engine.cpp:1236 src/main/engine.cpp:1343 src/main/engine.cpp:1453
+#: src/main/engine.cpp:1506
 #, fuzzy
 msgid "'lwd' must be non-negative and finite"
 msgstr "«lwd» ha de ser no negatiu i finit"
@@ -4186,9 +3996,8 @@ msgstr "no s'han pogut eliminar les variables de l'entorn buit"
 msgid "cannot remove variables from this database"
 msgstr "no s'han pogut eliminar les variables d'aquesta base de dades"
 
-#: src/main/envir.cpp:2013 src/main/envir.cpp:3338 src/main/envir.cpp:3357
-#: src/main/envir.cpp:3376 src/main/envir.cpp:3411 src/main/envir.cpp:3430
-#: src/main/envir.cpp:3470 src/main/envir.cpp:3554
+#: src/main/envir.cpp:2013 src/main/envir.cpp:3338 src/main/envir.cpp:3357 src/main/envir.cpp:3376 src/main/envir.cpp:3411
+#: src/main/envir.cpp:3430 src/main/envir.cpp:3470 src/main/envir.cpp:3554
 #, fuzzy
 msgid "not a symbol"
 msgstr "no és un símbol"
@@ -4292,15 +4101,14 @@ msgstr "L'objecte S4 no amplia la classe «entorn»"
 msgid "invalid object for 'as.environment'"
 msgstr "objecte no vàlid per a «as.environment»"
 
-#: src/main/envir.cpp:3293 src/main/envir.cpp:3316 src/main/envir.cpp:3341
-#: src/main/envir.cpp:3360 src/main/envir.cpp:3381 src/main/envir.cpp:3414
-#: src/main/envir.cpp:3433 src/main/envir.cpp:3473
+#: src/main/envir.cpp:3293 src/main/envir.cpp:3316 src/main/envir.cpp:3341 src/main/envir.cpp:3360 src/main/envir.cpp:3381
+#: src/main/envir.cpp:3414 src/main/envir.cpp:3433 src/main/envir.cpp:3473
 #, fuzzy
 msgid "not an environment"
 msgstr "no és un entorn"
 
-#: src/main/envir.cpp:3349 src/main/envir.cpp:3368 src/main/envir.cpp:3422
-#: src/main/envir.cpp:3441 src/main/envir.cpp:3477 src/main/envir.cpp:3486
+#: src/main/envir.cpp:3349 src/main/envir.cpp:3368 src/main/envir.cpp:3422 src/main/envir.cpp:3441 src/main/envir.cpp:3477
+#: src/main/envir.cpp:3486
 #, fuzzy, c-format
 msgid "no binding for \"%s\""
 msgstr "no hi ha cap vinculació per a «%s»"
@@ -5129,10 +4937,8 @@ msgstr "no s'admet l'ús recursiu de «getGraphicsEvent»"
 msgid "no graphics event handlers set"
 msgstr "no s'ha establert cap gestor d'esdeveniments gràfics"
 
-#: src/main/gram.cpp:417 src/main/gram.cpp:426 src/main/gram.cpp:2993
-#: src/main/gram.cpp:3000 src/main/gram.cpp:3078 src/main/gram.y:349
-#: src/main/gram.y:358 src/main/gram.y:684 src/main/gram.y:691
-#: src/main/gram.y:769
+#: src/main/gram.cpp:417 src/main/gram.cpp:426 src/main/gram.cpp:2993 src/main/gram.cpp:3000 src/main/gram.cpp:3078 src/main/gram.y:349
+#: src/main/gram.y:358 src/main/gram.y:684 src/main/gram.y:691 src/main/gram.y:769
 #, fuzzy, c-format
 msgid "invalid multibyte character in parser (%s:%d:%d)"
 msgstr "caràcter multioctet no vàlid a l'analitzador (%s:%d:%d)"
@@ -5147,8 +4953,7 @@ msgstr "desbordament de la memòria intermèdia d'entrada (%s:%d:%d)"
 msgid "function '%s' not supported in RHS call of a pipe (%s:%d:%d)"
 msgstr "la funció «%s» no està suportada en la crida RHS d'una canonada (%s:%d:%d)"
 
-#: src/main/gram.cpp:3554 src/main/gram.cpp:3586 src/main/gram.y:1245
-#: src/main/gram.y:1277
+#: src/main/gram.cpp:3554 src/main/gram.cpp:3586 src/main/gram.y:1245 src/main/gram.y:1277
 #, fuzzy, c-format
 msgid "pipe placeholder may only appear once (%s:%d:%d)"
 msgstr "el marcador de posició de la canonada només pot aparèixer una vegada (%s:%d:%d)"
@@ -5203,16 +5008,13 @@ msgstr "l'ús del símbol de lligadura de canonada (%s:%d:%d) no és vàlid"
 msgid "out of memory while parsing"
 msgstr "s'ha esgotat la memòria en analitzar"
 
-#: src/main/gram.cpp:4442 src/main/gram.cpp:6290 src/main/gram.cpp:6298
-#: src/main/gram.cpp:6305 src/main/gram.cpp:6313 src/main/gram.y:2133
-#: src/main/gram.y:3981 src/main/gram.y:3989 src/main/gram.y:3996
-#: src/main/gram.y:4004
+#: src/main/gram.cpp:4442 src/main/gram.cpp:6290 src/main/gram.cpp:6298 src/main/gram.cpp:6305 src/main/gram.cpp:6313 src/main/gram.y:2133
+#: src/main/gram.y:3981 src/main/gram.y:3989 src/main/gram.y:3996 src/main/gram.y:4004
 #, fuzzy, c-format
 msgid "contextstack overflow (%s:%d:%d)"
 msgstr "desbordament de la pila contextual (%s:%d:%d)"
 
-#: src/main/gram.cpp:4696 src/main/gram.cpp:4702 src/main/gram.cpp:4724
-#: src/main/gram.y:2387 src/main/gram.y:2393 src/main/gram.y:2415
+#: src/main/gram.cpp:4696 src/main/gram.cpp:4702 src/main/gram.cpp:4724 src/main/gram.y:2387 src/main/gram.y:2393 src/main/gram.y:2415
 #, fuzzy
 msgid "unexpected input"
 msgstr "entrada inesperada"
@@ -5247,8 +5049,7 @@ msgstr "assignació inesperada"
 msgid "unexpected end of line"
 msgstr "final de línia inesperat"
 
-#: src/main/gram.cpp:4727 src/main/gram.cpp:4735 src/main/gram.y:2418
-#: src/main/gram.y:2426
+#: src/main/gram.cpp:4727 src/main/gram.cpp:4735 src/main/gram.y:2418 src/main/gram.y:2426
 #, fuzzy, c-format
 msgid "unexpected %s"
 msgstr "%s inesperat"
@@ -5273,8 +5074,7 @@ msgstr "valor no enter %s qualificat amb L; utilitzant valor numèric"
 msgid "integer literal %s contains unnecessary decimal point"
 msgstr "literal sencer %s conté un punt decimal innecessari"
 
-#: src/main/gram.cpp:5084 src/main/gram.cpp:5092 src/main/gram.y:2775
-#: src/main/gram.y:2783
+#: src/main/gram.cpp:5084 src/main/gram.cpp:5092 src/main/gram.y:2775 src/main/gram.y:2783
 #, fuzzy, c-format
 msgid "invalid multibyte character (%s:%d:%d)"
 msgstr "caràcter multibyte no vàlid (%s:%d:%d)"
@@ -5284,8 +5084,7 @@ msgstr "caràcter multibyte no vàlid (%s:%d:%d)"
 msgid "bidi formatting not allowed, use escapes instead (\\u%04x) (%s:%d:%d)"
 msgstr "no es permet la formatació bidi, utilitzeu escapes en el seu lloc (\\u%04x) (%s:%d:%d)"
 
-#: src/main/gram.cpp:5235 src/main/gram.cpp:5266 src/main/gram.cpp:5313
-#: src/main/gram.cpp:5360 src/main/gram.y:2926 src/main/gram.y:2957
+#: src/main/gram.cpp:5235 src/main/gram.cpp:5266 src/main/gram.cpp:5313 src/main/gram.cpp:5360 src/main/gram.y:2926 src/main/gram.y:2957
 #: src/main/gram.y:3004 src/main/gram.y:3051
 #, fuzzy, c-format
 msgid "nul character not allowed (%s:%d:%d)"
@@ -5346,14 +5145,12 @@ msgstr "el valor %6x de \\Uxxxxxxxx no és vàlid (%s:%d:%d)"
 msgid "'\\%s' is an unrecognized escape in character string (%s:%d:%d)"
 msgstr "'\\%s' és una seqüència d'escapament no reconeguda a la cadena de caràcters (%s:%d:%d)"
 
-#: src/main/gram.cpp:5494 src/main/gram.cpp:5632 src/main/gram.y:3185
-#: src/main/gram.y:3323
+#: src/main/gram.cpp:5494 src/main/gram.cpp:5632 src/main/gram.y:3185 src/main/gram.y:3323
 #, fuzzy, c-format
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed (%s:%d:%d)"
 msgstr "no es permet barrejar escapades Unicode i octal/hex en una cadena (%s:%d:%d)"
 
-#: src/main/gram.cpp:5499 src/main/gram.cpp:5637 src/main/gram.y:3190
-#: src/main/gram.y:3328
+#: src/main/gram.cpp:5499 src/main/gram.cpp:5637 src/main/gram.y:3190 src/main/gram.y:3328
 #, fuzzy, c-format
 msgid ""
 "string containing Unicode escapes not in this locale\n"
@@ -5464,8 +5261,7 @@ msgstr ""
 "Error d'estudi del patró PCRE\n"
 "\t«%s»\n"
 
-#: src/main/grep.cpp:624 src/main/grep.cpp:726 src/main/grep.cpp:842
-#: src/main/grep.cpp:1391 src/main/grep.cpp:2244 src/main/grep.cpp:3124
+#: src/main/grep.cpp:624 src/main/grep.cpp:726 src/main/grep.cpp:842 src/main/grep.cpp:1391 src/main/grep.cpp:2244 src/main/grep.cpp:3124
 #: src/main/grep.cpp:3214
 #, fuzzy, c-format
 msgid "input string %lld is invalid UTF-8"
@@ -5486,14 +5282,12 @@ msgstr "la cadena «split» %lld no és vàlida en aquesta configuració regiona
 msgid "'split' string %lld is invalid"
 msgstr "la cadena «split» %lld no és vàlida"
 
-#: src/main/grep.cpp:969 src/main/grep.cpp:1383 src/main/grep.cpp:2240
-#: src/main/grep.cpp:2547 src/main/grep.cpp:3115
+#: src/main/grep.cpp:969 src/main/grep.cpp:1383 src/main/grep.cpp:2240 src/main/grep.cpp:2547 src/main/grep.cpp:3115
 #, fuzzy, c-format
 msgid "input string %lld is invalid"
 msgstr "la cadena d'entrada %lld no és vàlida"
 
-#: src/main/grep.cpp:1089 src/main/grep.cpp:1104 src/main/grep.cpp:1431
-#: src/main/grep.cpp:2413 src/main/grep.cpp:2598 src/main/grep.cpp:3192
+#: src/main/grep.cpp:1089 src/main/grep.cpp:1104 src/main/grep.cpp:1431 src/main/grep.cpp:2413 src/main/grep.cpp:2598 src/main/grep.cpp:3192
 #: src/main/grep.cpp:3416
 #, c-format
 msgid "Out-of-memory error in regexp matching for element %d"
@@ -5596,19 +5390,14 @@ msgstr "codificació desconeguda: %d"
 msgid "internet routines cannot be accessed in module"
 msgstr "no es pot accedir a les rutines d'internet al mòdul"
 
-#: src/main/internet.cpp:93 src/main/internet.cpp:105 src/main/internet.cpp:117
-#: src/main/internet.cpp:128 src/main/internet.cpp:139
-#: src/main/internet.cpp:149 src/main/internet.cpp:273
-#: src/main/internet.cpp:285 src/main/internet.cpp:297
-#: src/main/internet.cpp:308
+#: src/main/internet.cpp:93 src/main/internet.cpp:105 src/main/internet.cpp:117 src/main/internet.cpp:128 src/main/internet.cpp:139
+#: src/main/internet.cpp:149 src/main/internet.cpp:273 src/main/internet.cpp:285 src/main/internet.cpp:297 src/main/internet.cpp:308
 #, fuzzy
 msgid "internet routines cannot be loaded"
 msgstr "no es poden carregar les rutines d'internet"
 
-#: src/main/internet.cpp:163 src/main/internet.cpp:182
-#: src/main/internet.cpp:201 src/main/internet.cpp:213
-#: src/main/internet.cpp:227 src/main/internet.cpp:248
-#: src/main/internet.cpp:261
+#: src/main/internet.cpp:163 src/main/internet.cpp:182 src/main/internet.cpp:201 src/main/internet.cpp:213 src/main/internet.cpp:227
+#: src/main/internet.cpp:248 src/main/internet.cpp:261
 #, fuzzy
 msgid "socket routines cannot be loaded"
 msgstr "no es poden carregar les rutines del sòcol"
@@ -5862,8 +5651,7 @@ msgstr "argument més llarg no és un múltiple de longitud més curta"
 msgid "invalid partial string match"
 msgstr "coincidència parcial de cadena no vàlida"
 
-#: src/main/match.cpp:245 src/main/match.cpp:288 src/main/objects.cpp:70
-#: src/main/objects.cpp:81 src/main/summary.cpp:434
+#: src/main/match.cpp:245 src/main/match.cpp:288 src/main/objects.cpp:70 src/main/objects.cpp:81 src/main/summary.cpp:434
 #, fuzzy, c-format
 msgid "formal argument \"%s\" matched by multiple actual arguments"
 msgstr "l'argument formal «%s» coincideix amb múltiples arguments reals"
@@ -5963,8 +5751,7 @@ msgstr "no es permeten vectors de longitud negativa"
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.cpp:2721 src/main/memory.cpp:2726 src/main/memory.cpp:2731
-#: src/main/memory.cpp:2736 src/main/memory.cpp:2743
+#: src/main/memory.cpp:2721 src/main/memory.cpp:2726 src/main/memory.cpp:2731 src/main/memory.cpp:2736 src/main/memory.cpp:2743
 #, fuzzy, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr "no s'ha pogut assignar el vector de longitud %lld"
@@ -6088,13 +5875,11 @@ msgstr "SETLENGTH() només es pot aplicar a un vector estàndard, no a «%s»"
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr "SETLENGTH() només es pot aplicar a un vector estàndard, no a «%s»"
 
-#: src/main/memory.cpp:3728 src/main/memory.cpp:3736 src/main/memory.cpp:3753
-#: src/main/memory.cpp:3770 src/main/memory.cpp:3816 src/main/memory.cpp:3825
-#: src/main/memory.cpp:3835 src/main/memory.cpp:3844 src/main/memory.cpp:3853
-#: src/main/memory.cpp:3862 src/main/memory.cpp:3870 src/main/memory.cpp:3879
-#: src/main/memory.cpp:3888 src/main/memory.cpp:3896 src/main/memory.cpp:3904
-#: src/main/memory.cpp:3912 src/main/memory.cpp:3920 src/main/memory.cpp:3933
-#: src/main/memory.cpp:3942 src/main/memory.cpp:3967 src/main/memory.cpp:3986
+#: src/main/memory.cpp:3728 src/main/memory.cpp:3736 src/main/memory.cpp:3753 src/main/memory.cpp:3770 src/main/memory.cpp:3816
+#: src/main/memory.cpp:3825 src/main/memory.cpp:3835 src/main/memory.cpp:3844 src/main/memory.cpp:3853 src/main/memory.cpp:3862
+#: src/main/memory.cpp:3870 src/main/memory.cpp:3879 src/main/memory.cpp:3888 src/main/memory.cpp:3896 src/main/memory.cpp:3904
+#: src/main/memory.cpp:3912 src/main/memory.cpp:3920 src/main/memory.cpp:3933 src/main/memory.cpp:3942 src/main/memory.cpp:3967
+#: src/main/memory.cpp:3986
 #, fuzzy, c-format
 msgid "%s() can only be applied to a '%s', not a '%s'"
 msgstr "SETLENGTH() només es pot aplicar a un vector estàndard, no a «%s»"
@@ -6138,9 +5923,8 @@ msgstr "s'ha intentat establir l'índex %lld/%lld a SETVECTORELT"
 msgid "argument not tracking references"
 msgstr "l'argument no és un entorn"
 
-#: src/main/memory.cpp:4202 src/main/memory.cpp:4211 src/main/memory.cpp:4222
-#: src/main/memory.cpp:4238 src/main/memory.cpp:4252 src/main/memory.cpp:4267
-#: src/main/memory.cpp:4283
+#: src/main/memory.cpp:4202 src/main/memory.cpp:4211 src/main/memory.cpp:4222 src/main/memory.cpp:4238 src/main/memory.cpp:4252
+#: src/main/memory.cpp:4267 src/main/memory.cpp:4283
 #, fuzzy
 msgid "bad value"
 msgstr "valor incorrecte"
@@ -6475,125 +6259,116 @@ msgstr ""
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "l'objecte de la classe «%s» no correspon a un objecte S3 vàlid"
 
-#: src/main/options.cpp:125
+#: src/main/options.cpp:126
 #, c-format
 msgid "option %s has NULL value"
 msgstr ""
 
-#: src/main/options.cpp:150 src/main/options.cpp:254
+#: src/main/options.cpp:151 src/main/options.cpp:255
 #, fuzzy
 msgid "corrupted options list"
 msgstr "llista d'opcions corruptes"
 
-#: src/main/options.cpp:160
+#: src/main/options.cpp:161
 #, fuzzy, c-format
 msgid "invalid printing width %d, used 80"
 msgstr "l'amplada d'impressió %d no és vàlida, s'ha utilitzat 80"
 
-#: src/main/options.cpp:163
+#: src/main/options.cpp:164
 #, fuzzy
 msgid "invalid printing width"
 msgstr "l'amplada d'impressió no és vàlida"
 
-#: src/main/options.cpp:179
+#: src/main/options.cpp:180
 #, fuzzy, c-format
 msgid "invalid printing digits %d, used 7"
 msgstr "dígits d'impressió %d no vàlids, s'han utilitzat 7"
 
-#: src/main/options.cpp:182
+#: src/main/options.cpp:183
 #, fuzzy, c-format
 msgid "invalid printing digits %d"
 msgstr "dígits d'impressió %d no vàlids"
 
-#: src/main/options.cpp:197
+#: src/main/options.cpp:198
 #, fuzzy
 msgid "invalid 'scipen'"
 msgstr "accent no vàlid"
 
-#: src/main/options.cpp:203
+#: src/main/options.cpp:204
 #, fuzzy, c-format
 msgid "setting scipen=%g is out of range"
 msgstr "l'índex de referència està fora de rang"
 
-#: src/main/options.cpp:211
+#: src/main/options.cpp:212
 #, fuzzy, c-format
 msgid "invalid 'scipen' %d, used %d"
 msgstr "l'amplada d'impressió %d no és vàlida, s'ha utilitzat 80"
 
-#: src/main/options.cpp:214
+#: src/main/options.cpp:215
 #, fuzzy, c-format
 msgid "invalid 'scipen' %d"
 msgstr "final de línia no vàlid"
 
-#: src/main/options.cpp:227
+#: src/main/options.cpp:228
 #, fuzzy
 msgid "invalid 'deparse.cutoff', used 60"
 msgstr "«deparse.cutoff» no vàlid, s'utilitza 60"
 
-#: src/main/options.cpp:238
+#: src/main/options.cpp:239
 #, fuzzy
 msgid "invalid value for \"device.ask.default\", using FALSE"
 msgstr "valor no vàlid per a «device.ask.default», s'usarà FALSE"
 
-#: src/main/options.cpp:493 src/main/options.cpp:648 src/main/options.cpp:656
-#: src/main/options.cpp:662 src/main/options.cpp:670 src/main/options.cpp:677
-#: src/main/options.cpp:682 src/main/options.cpp:689 src/main/options.cpp:699
-#: src/main/options.cpp:714 src/main/options.cpp:720 src/main/options.cpp:725
-#: src/main/options.cpp:734 src/main/options.cpp:743 src/main/options.cpp:758
-#: src/main/options.cpp:768 src/main/options.cpp:782 src/main/options.cpp:788
-#: src/main/options.cpp:822 src/main/options.cpp:842 src/main/options.cpp:855
-#: src/main/options.cpp:896 src/main/options.cpp:907
-#, fuzzy, c-format
-msgid "invalid value for '%s'"
-msgstr "valor no vàlid per a «%s»"
-
-#: src/main/options.cpp:568
+#: src/main/options.cpp:573
 #, fuzzy
 msgid "list argument has no valid names"
 msgstr "l'argument de llista no té noms vàlids"
 
-#: src/main/options.cpp:620
+#: src/main/options.cpp:625
 #, fuzzy, c-format
 msgid "option '%s' cannot be deleted"
 msgstr "no es pot suprimir l'opció «%s»"
 
-#: src/main/options.cpp:626 src/main/options.cpp:637
+#: src/main/options.cpp:631 src/main/options.cpp:642
 #, fuzzy, c-format
 msgid "invalid '%s' parameter, allowed %d...%d"
 msgstr "el paràmetre «%s» no és vàlid, es permet %d...%d"
 
-#: src/main/options.cpp:704
+#: src/main/options.cpp:709
 #, fuzzy, c-format
 msgid "value for '%s' outside of -1:2 is set to %d\n"
 msgstr "el valor per a «%s» fora de -1:2 està establert a %d\n"
 
-#: src/main/options.cpp:773
+#: src/main/options.cpp:778
 #, fuzzy
 msgid "'OutDec' must be a string of one character"
 msgstr "«OutDec» ha de ser una cadena d'un caràcter"
 
-#: src/main/options.cpp:827 src/main/options.cpp:922
+#: src/main/options.cpp:832 src/main/options.cpp:938
 #, fuzzy
 msgid "\"par.ask.default\" has been replaced by \"device.ask.default\""
 msgstr "\"par.ask.default\" ha estat substituït per \"device.ask.default\""
 
-#: src/main/options.cpp:852
+#: src/main/options.cpp:857
 #, fuzzy
 msgid "OpenMP SIMD is not supported in this build of R"
 msgstr "OpenMP SIMD no està admès en aquesta construcció de l'R"
 
-#: src/main/options.cpp:876
+#: src/main/options.cpp:881
 #, fuzzy
 msgid "'PCRE_study' has no effect with PCRE2"
 msgstr "'PCREstudy' no té cap efecte amb PCRE2"
 
-#: src/main/options.cpp:899
+#: src/main/options.cpp:904
 #, fuzzy, c-format
 msgid "'%s' is deprecated and will be disabled"
 msgstr "«%s» està obsolet i es desactivarà"
 
-#: src/main/options.cpp:919 src/modules/X11/dataentry.cpp:319
-#: src/modules/X11/dataentry.cpp:460 src/modules/X11/dataentry.cpp:463
+#: src/main/options.cpp:915 src/main/options.cpp:924
+msgid "cannot set both options 'quiet' and 'verbose' to TRUE"
+msgstr ""
+
+#: src/main/options.cpp:935 src/modules/X11/dataentry.cpp:319 src/modules/X11/dataentry.cpp:460 src/modules/X11/dataentry.cpp:463
 #: src/modules/X11/dataentry.cpp:492
 msgid "invalid argument"
 msgstr "argument no vàlid"
@@ -6658,279 +6433,272 @@ msgstr "el patró no és un degradat radial"
 msgid "pattern is not a tiling pattern"
 msgstr "el patró no és un patró de mosaic"
 
-#: src/main/platform.cpp:346 src/main/platform.cpp:360
+#: src/main/platform.cpp:350 src/main/platform.cpp:364
 #, fuzzy
 msgid "invalid filename specification"
 msgstr "l'especificació del nom de fitxer no és vàlida"
 
-#: src/main/platform.cpp:430 src/main/platform.cpp:479
-#: src/main/platform.cpp:2871 src/main/platform.cpp:3121
+#: src/main/platform.cpp:434 src/main/platform.cpp:483 src/main/platform.cpp:2875 src/main/platform.cpp:3125
 #, fuzzy
 msgid "could not allocate copy buffer"
 msgstr "no s'ha pogut assignar la memòria intermèdia"
 
-#: src/main/platform.cpp:438 src/main/platform.cpp:494
+#: src/main/platform.cpp:442 src/main/platform.cpp:498
 #, fuzzy
 msgid "write error during file append"
 msgstr "error d'escriptura durant l'annex de fitxer"
 
-#: src/main/platform.cpp:458
+#: src/main/platform.cpp:462
 #, fuzzy
 msgid "nothing to append to"
 msgstr "res a afegir a"
 
-#: src/main/platform.cpp:523 src/main/platform.cpp:846
-#: src/main/platform.cpp:1125
+#: src/main/platform.cpp:527 src/main/platform.cpp:850 src/main/platform.cpp:1129
 #, fuzzy
 msgid "invalid filename argument"
 msgstr "argument de nom de fitxer no vàlid"
 
-#: src/main/platform.cpp:535
+#: src/main/platform.cpp:539
 #, fuzzy, c-format
 msgid "cannot create file '%s', reason '%s'"
 msgstr "no es pot crear el fitxer «%s», raó «%s»"
 
-#: src/main/platform.cpp:550 src/main/platform.cpp:590
-#: src/main/platform.cpp:667
+#: src/main/platform.cpp:554 src/main/platform.cpp:594 src/main/platform.cpp:671
 #, fuzzy
 msgid "invalid first filename"
 msgstr "el primer nom de fitxer no és vàlid"
 
-#: src/main/platform.cpp:562
+#: src/main/platform.cpp:566
 #, fuzzy, c-format
 msgid "cannot remove file '%s', reason '%s'"
 msgstr "no es pot suprimir el fitxer «%s», raó «%s»"
 
-#: src/main/platform.cpp:592 src/main/platform.cpp:669
+#: src/main/platform.cpp:596 src/main/platform.cpp:673
 #, fuzzy
 msgid "invalid second filename"
 msgstr "segon nom no vàlid"
 
-#: src/main/platform.cpp:595 src/main/platform.cpp:672
+#: src/main/platform.cpp:599 src/main/platform.cpp:676
 #, fuzzy
 msgid "nothing to link"
 msgstr "no hi ha res a enllaçar"
 
-#: src/main/platform.cpp:620
+#: src/main/platform.cpp:624
 #, fuzzy, c-format
 msgid "cannot symlink '%ls' to '%ls', reason '%s'"
 msgstr "no es pot enllaçar simbòlicament «%ls» a «%ls», raó «%s»"
 
-#: src/main/platform.cpp:642
+#: src/main/platform.cpp:646
 #, fuzzy, c-format
 msgid "cannot symlink '%s' to '%s', reason '%s'"
 msgstr "no es pot enllaçar simbòlicament «%s» a «%s», raó «%s»"
 
-#: src/main/platform.cpp:650
+#: src/main/platform.cpp:654
 #, fuzzy
 msgid "symbolic links are not supported on this platform"
 msgstr "els enllaços simbòlics no són compatibles amb aquesta plataforma"
 
-#: src/main/platform.cpp:691
+#: src/main/platform.cpp:695
 #, fuzzy, c-format
 msgid "cannot link '%ls' to '%ls', reason '%s'"
 msgstr "no es pot enllaçar «%ls» a «%ls», raó «%s»"
 
-#: src/main/platform.cpp:713
+#: src/main/platform.cpp:717
 #, fuzzy, c-format
 msgid "cannot link '%s' to '%s', reason '%s'"
 msgstr "no es pot enllaçar «%s» a «%s», raó «%s»"
 
-#: src/main/platform.cpp:722
+#: src/main/platform.cpp:726
 #, fuzzy
 msgid "(hard) links are not supported on this platform"
 msgstr "(dures) els enllaços no són compatibles amb aquesta plataforma"
 
-#: src/main/platform.cpp:754 src/main/sysutils.cpp:496
+#: src/main/platform.cpp:758 src/main/sysutils.cpp:496
 #, fuzzy, c-format
 msgid "'%s' and '%s' are of different lengths"
 msgstr "«%s» i «%s» tenen longituds diferents"
 
-#: src/main/platform.cpp:771
+#: src/main/platform.cpp:775
 #, fuzzy, c-format
 msgid "cannot rename file '%ls' to '%ls', reason '%s'"
 msgstr "no es pot canviar el nom del fitxer '%ls' a '%ls', raó '%s'"
 
-#: src/main/platform.cpp:778
+#: src/main/platform.cpp:782
 #, fuzzy
 msgid "expanded 'from' name too long"
 msgstr "el nom «des de» ampliat és massa llarg"
 
-#: src/main/platform.cpp:782
+#: src/main/platform.cpp:786
 #, fuzzy
 msgid "expanded 'to' name too long"
 msgstr "el nom «to» ampliat és massa llarg"
 
-#: src/main/platform.cpp:786
+#: src/main/platform.cpp:790
 #, fuzzy, c-format
 msgid "cannot rename file '%s' to '%s', reason '%s'"
 msgstr "no es pot canviar el nom del fitxer «%s» a «%s», raó «%s»"
 
-#: src/main/platform.cpp:1077
+#: src/main/platform.cpp:1081
 #, fuzzy, c-format
 msgid "cannot resolve owner of file '%ls': %s"
 msgstr "no s'ha pogut obrir el fitxer «%ls»: %s"
 
-#: src/main/platform.cpp:1293
+#: src/main/platform.cpp:1297
 #, fuzzy, c-format
 msgid "error while listing a directory: '%s'"
 msgstr "s'ha produït un error en llistar un directori: «%s»"
 
-#: src/main/platform.cpp:1446 src/main/platform.cpp:3036
-#: src/main/platform.cpp:3050 src/main/platform.cpp:3082
-#: src/main/platform.cpp:3103
+#: src/main/platform.cpp:1450 src/main/platform.cpp:3040 src/main/platform.cpp:3054 src/main/platform.cpp:3086 src/main/platform.cpp:3107
 #, fuzzy
 msgid "over-long path"
 msgstr "camí massa llarg"
 
-#: src/main/platform.cpp:1596
+#: src/main/platform.cpp:1600
 #, fuzzy
 msgid "invalid 'pattern' regular expression"
 msgstr "l'expressió regular «pattern» no és vàlida"
 
-#: src/main/platform.cpp:1723
+#: src/main/platform.cpp:1727
 #, fuzzy
 msgid "unable to determine R home location"
 msgstr "no s'ha pogut determinar la ubicació inicial de l'R"
 
-#: src/main/platform.cpp:1786
+#: src/main/platform.cpp:1790
 #, fuzzy
 msgid "file name too long"
 msgstr "nom de fitxer massa llarg"
 
-#: src/main/platform.cpp:1859 src/main/platform.cpp:3506
+#: src/main/platform.cpp:1863 src/main/platform.cpp:3510
 #, fuzzy, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr "no es pot obrir el fitxer de dest «%s», raó «%s»"
 
-#: src/main/platform.cpp:1871
+#: src/main/platform.cpp:1875
 #, fuzzy, c-format
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "no es pot crear el directori «%ls», raó «%s»"
 
-#: src/main/platform.cpp:1993 src/main/Rdynload.cpp:1184 src/main/util.cpp:932
-#: src/main/util.cpp:1042
+#: src/main/platform.cpp:1997 src/main/Rdynload.cpp:1184 src/main/util.cpp:932 src/main/util.cpp:1042
 #, fuzzy
 msgid "path too long"
 msgstr "camí massa llarg"
 
-#: src/main/platform.cpp:2081 src/main/platform.cpp:2138
-#: src/main/sysutils.cpp:2988 src/main/sysutils.cpp:3002
+#: src/main/platform.cpp:2085 src/main/platform.cpp:2142 src/main/sysutils.cpp:2988 src/main/sysutils.cpp:3002
 #, fuzzy
 msgid "internal out-of-memory condition"
 msgstr "condició interna fora de memòria"
 
-#: src/main/platform.cpp:2134 src/main/sysutils.cpp:2998
+#: src/main/platform.cpp:2138 src/main/sysutils.cpp:2998
 #, fuzzy, c-format
 msgid "read error on '%s'"
 msgstr "error de lectura a «%s»"
 
-#: src/main/platform.cpp:2244
+#: src/main/platform.cpp:2248
 #, fuzzy
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
 msgstr "establir «LC_NUMERIC» pot fer que l'R funcioni estranyament"
 
-#: src/main/platform.cpp:2257
+#: src/main/platform.cpp:2261
 #, fuzzy, c-format
 msgid "%s does not exist on Windows"
 msgstr "%s no existeix al Windows"
 
-#: src/main/platform.cpp:2293
+#: src/main/platform.cpp:2297
 #, fuzzy, c-format
 msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr "No es pot honrar la sol·licitud d'informes del sistema operatiu per establir la configuració regional a «%s»"
 
-#: src/main/platform.cpp:2304
+#: src/main/platform.cpp:2308
 #, fuzzy, c-format
 msgid "using locale code page other than %d%s may cause problems"
 msgstr "l'ús de la pàgina de codi local diferent de %d%s pot causar problemes"
 
-#: src/main/platform.cpp:2657 src/main/platform.cpp:2713
+#: src/main/platform.cpp:2661 src/main/platform.cpp:2717
 #, fuzzy
 msgid "zero-length 'path' argument"
 msgstr "argument de longitud zero"
 
-#: src/main/platform.cpp:2691
+#: src/main/platform.cpp:2695
 #, fuzzy, c-format
 msgid "'%s' already exists"
 msgstr "«%s» ja existeix"
 
-#: src/main/platform.cpp:2694
+#: src/main/platform.cpp:2698
 #, fuzzy, c-format
 msgid "cannot create dir '%s', reason '%s'"
 msgstr "no es pot crear el directori «%s», raó «%s»"
 
-#: src/main/platform.cpp:2745
+#: src/main/platform.cpp:2749
 #, fuzzy, c-format
 msgid "'%ls' already exists"
 msgstr "«%ls» ja existeix"
 
-#: src/main/platform.cpp:2747 src/main/platform.cpp:2753
+#: src/main/platform.cpp:2751 src/main/platform.cpp:2757
 #, fuzzy, c-format
 msgid "cannot create dir '%ls', reason '%s'"
 msgstr "no es pot crear el directori «%ls», raó «%s»"
 
-#: src/main/platform.cpp:2787 src/main/platform.cpp:3016
+#: src/main/platform.cpp:2791 src/main/platform.cpp:3020
 #, fuzzy
 msgid "too deep nesting"
 msgstr "nidificació massa profunda"
 
-#: src/main/platform.cpp:2819
+#: src/main/platform.cpp:2823
 #, fuzzy, c-format
 msgid "cannot overwrite non-directory %ls with directory %ls"
 msgstr "no es pot sobreescriure el no directori %ls amb el directori %ls"
 
-#: src/main/platform.cpp:2824
+#: src/main/platform.cpp:2828
 #, fuzzy, c-format
 msgid "problem creating directory %ls: %s"
 msgstr "s'ha produït un problema en crear el directori %ls: %s"
 
-#: src/main/platform.cpp:2845
+#: src/main/platform.cpp:2849
 #, fuzzy, c-format
 msgid "problem reading directory %ls: %s"
 msgstr "s'ha produït un problema en llegir el directori %ls: %s"
 
-#: src/main/platform.cpp:2862
+#: src/main/platform.cpp:2866
 #, fuzzy, c-format
 msgid "problem copying %ls to %ls: %s"
 msgstr "s'ha produït un problema en copiar %ls a %ls: %s"
 
-#: src/main/platform.cpp:3064
+#: src/main/platform.cpp:3068
 #, fuzzy, c-format
 msgid "cannot overwrite non-directory %s with directory %s"
 msgstr "no es pot sobreescriure el no directori %s amb el directori %s"
 
-#: src/main/platform.cpp:3069
+#: src/main/platform.cpp:3073
 #, fuzzy, c-format
 msgid "problem creating directory %s: %s"
 msgstr "s'ha produït un problema en crear el directori %s: %s"
 
-#: src/main/platform.cpp:3092
+#: src/main/platform.cpp:3096
 #, fuzzy, c-format
 msgid "problem reading directory %s: %s"
 msgstr "s'ha produït un problema en llegir el directori %s: %s"
 
-#: src/main/platform.cpp:3112
+#: src/main/platform.cpp:3116
 #, fuzzy, c-format
 msgid "problem copying %s to %s: %s"
 msgstr "s'ha produït un problema en copiar %s a %s: %s"
 
-#: src/main/platform.cpp:3264 src/main/platform.cpp:3438
+#: src/main/platform.cpp:3268 src/main/platform.cpp:3442
 #, fuzzy, c-format
 msgid "'%s' must be of length at least one"
 msgstr "«%s» ha de ser de longitud com a mínim una"
 
-#: src/main/platform.cpp:3303 src/main/platform.cpp:3330
+#: src/main/platform.cpp:3307 src/main/platform.cpp:3334
 #, fuzzy
 msgid "insufficient OS support on this platform"
 msgstr "suport insuficient del sistema operatiu en aquesta plataforma"
 
-#: src/main/platform.cpp:3357
+#: src/main/platform.cpp:3361
 #, fuzzy, c-format
 msgid "possible truncation of value for element %d"
 msgstr "no s'ha pogut truncar el fitxer"
 
-#: src/main/platform.cpp:3527
+#: src/main/platform.cpp:3531
 #, fuzzy, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr "no es pot crear el directori «%ls», raó «%s»"
@@ -7016,8 +6784,7 @@ msgstr "cadena multibyte no vàlida, %s"
 msgid "invalid character in current multibyte locale"
 msgstr "longitud de caràcter no vàlida a «dblepr»"
 
-#: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
-#: src/main/plotmath.cpp:2661
+#: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372 src/main/plotmath.cpp:2661
 #, fuzzy
 msgid "invalid mathematical annotation"
 msgstr "anotació matemàtica no vàlida"
@@ -7258,8 +7025,8 @@ msgstr "vectors llargs no suportats"
 msgid "invalid arguments"
 msgstr "arguments no vàlids"
 
-#: src/main/random.cpp:109 src/main/random.cpp:126 src/main/random.cpp:192
-#: src/main/random.cpp:218 src/main/random.cpp:290 src/main/random.cpp:304
+#: src/main/random.cpp:109 src/main/random.cpp:126 src/main/random.cpp:192 src/main/random.cpp:218 src/main/random.cpp:290
+#: src/main/random.cpp:304
 #, fuzzy
 msgid "NAs produced"
 msgstr "S'han produït els SNA"
@@ -7470,8 +7237,7 @@ msgstr "no s'ha pogut assignar espai per a «DllInfo»"
 msgid "character argument expected"
 msgstr "s'esperava un argument de caràcter"
 
-#: src/main/Rdynload.cpp:1219 src/main/Rdynload.cpp:1252
-#: src/main/Rdynload.cpp:1273
+#: src/main/Rdynload.cpp:1219 src/main/Rdynload.cpp:1252 src/main/Rdynload.cpp:1273
 #, fuzzy, c-format
 msgid ""
 "unable to load shared object '%s':\n"
@@ -7531,8 +7297,7 @@ msgstr "l'entrada de la taula ha de ser un punter extern"
 msgid "operator needs two arguments"
 msgstr "l'operador necessita un o dos arguments"
 
-#: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
-#: src/main/relop.cpp:204
+#: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189 src/main/relop.cpp:204
 #, fuzzy, c-format
 msgid "comparison (%s) is not possible for language types"
 msgstr "la comparació (%s) només és possible per als tipus atòmics i de llista"
@@ -7759,16 +7524,10 @@ msgstr "la cadena de format és massa llarga"
 msgid "invalid multibyte format string"
 msgstr "cadena de format multibyte no vàlida"
 
-#: src/main/saveload.cpp:228 src/main/saveload.cpp:233
-#: src/main/saveload.cpp:242 src/main/saveload.cpp:251
-#: src/main/saveload.cpp:260 src/main/saveload.cpp:269
-#: src/main/saveload.cpp:273 src/main/saveload.cpp:282
-#: src/main/saveload.cpp:1449 src/main/saveload.cpp:1454
-#: src/main/saveload.cpp:1497 src/main/saveload.cpp:1565
-#: src/main/saveload.cpp:1574 src/main/serialize.cpp:415
-#: src/main/serialize.cpp:422 src/main/serialize.cpp:435
-#: src/main/serialize.cpp:439 src/main/serialize.cpp:469
-#: src/main/serialize.cpp:485 src/main/serialize.cpp:2114
+#: src/main/saveload.cpp:228 src/main/saveload.cpp:233 src/main/saveload.cpp:242 src/main/saveload.cpp:251 src/main/saveload.cpp:260
+#: src/main/saveload.cpp:269 src/main/saveload.cpp:273 src/main/saveload.cpp:282 src/main/saveload.cpp:1449 src/main/saveload.cpp:1454
+#: src/main/saveload.cpp:1497 src/main/saveload.cpp:1565 src/main/saveload.cpp:1574 src/main/serialize.cpp:415 src/main/serialize.cpp:422
+#: src/main/serialize.cpp:435 src/main/serialize.cpp:439 src/main/serialize.cpp:469 src/main/serialize.cpp:485 src/main/serialize.cpp:2114
 #: src/main/serialize.cpp:2891 src/main/serialize.cpp:2899
 #, fuzzy
 msgid "read error"
@@ -7794,9 +7553,7 @@ msgstr "s'ha produït un error de lectura de C"
 msgid "a S read error occurred"
 msgstr "s'ha produït un error de lectura S"
 
-#: src/main/saveload.cpp:415 src/main/saveload.cpp:423
-#: src/main/saveload.cpp:431 src/main/saveload.cpp:1661
-#: src/main/saveload.cpp:1669
+#: src/main/saveload.cpp:415 src/main/saveload.cpp:423 src/main/saveload.cpp:431 src/main/saveload.cpp:1661 src/main/saveload.cpp:1669
 #, fuzzy
 msgid "a read error occurred"
 msgstr "s'ha produït un error de lectura"
@@ -7821,8 +7578,7 @@ msgstr "tipus SEXP incorrecte al fitxer de dades"
 msgid "mismatch on types"
 msgstr "no coincideix en els tipus"
 
-#: src/main/saveload.cpp:652 src/main/saveload.cpp:1348
-#: src/main/serialize.cpp:2027
+#: src/main/saveload.cpp:652 src/main/saveload.cpp:1348 src/main/serialize.cpp:2027
 #, fuzzy, c-format
 msgid "unrecognized internal function name \"%s\""
 msgstr "no s'ha reconegut el nom de la funció interna «%s»"
@@ -7947,8 +7703,7 @@ msgstr "s'ha produït un error d'escriptura de dades complex xdr"
 msgid "an xdr complex data read error occurred"
 msgstr "s'ha produït un error de lectura de dades complexes xdr"
 
-#: src/main/saveload.cpp:1859 src/main/serialize.cpp:2460
-#: src/main/serialize.cpp:3079 src/modules/internet/internet.cpp:403
+#: src/main/saveload.cpp:1859 src/main/serialize.cpp:2460 src/main/serialize.cpp:3079 src/modules/internet/internet.cpp:403
 #: src/modules/internet/internet.cpp:473
 #, fuzzy
 msgid "write failed"
@@ -8014,16 +7769,12 @@ msgstr "les dades carregades no són al formulari de la llista de parelles"
 msgid "first argument must be a file name"
 msgstr "el primer argument ha de ser un nom de fitxer"
 
-#: src/main/saveload.cpp:2247 src/main/saveload.cpp:2272
-#: src/main/serialize.cpp:927 src/main/serialize.cpp:968
-#: src/main/serialize.cpp:1010
+#: src/main/saveload.cpp:2247 src/main/saveload.cpp:2272 src/main/serialize.cpp:927 src/main/serialize.cpp:968 src/main/serialize.cpp:1010
 #, fuzzy
 msgid "XDR write failed"
 msgstr "Ha fallat l'escriptura de l'XDR"
 
-#: src/main/saveload.cpp:2259 src/main/saveload.cpp:2284
-#: src/main/serialize.cpp:1555 src/main/serialize.cpp:1590
-#: src/main/serialize.cpp:1627
+#: src/main/saveload.cpp:2259 src/main/saveload.cpp:2284 src/main/serialize.cpp:1555 src/main/serialize.cpp:1590 src/main/serialize.cpp:1627
 #, fuzzy
 msgid "XDR read failed"
 msgstr "Ha fallat la lectura de l'XDR"
@@ -8048,8 +7799,7 @@ msgstr "la connexió no està oberta per a escriptura"
 msgid "cannot save XDR format to a text-mode connection"
 msgstr "no s'ha pogut desar el format XDR a una connexió de mode de text"
 
-#: src/main/saveload.cpp:2423 src/main/serialize.cpp:2565
-#: src/main/serialize.cpp:2579 src/main/serialize.cpp:2764
+#: src/main/saveload.cpp:2423 src/main/serialize.cpp:2565 src/main/serialize.cpp:2579 src/main/serialize.cpp:2764
 #: src/main/serialize.cpp:2787
 #, fuzzy
 msgid "error writing to connection"
@@ -8180,8 +7930,7 @@ msgstr "no es pot replicar NULL a una longitud diferent de zero"
 msgid "replication of pairlists is defunct"
 msgstr ""
 
-#: src/main/seq.cpp:727 src/main/seq.cpp:743 src/main/seq.cpp:904
-#: src/main/seq.cpp:1148
+#: src/main/seq.cpp:727 src/main/seq.cpp:743 src/main/seq.cpp:904 src/main/seq.cpp:1148
 #, fuzzy, c-format
 msgid "first element used of '%s' argument"
 msgstr "primer element utilitzat de l'argument «%s»"
@@ -8190,10 +7939,8 @@ msgstr "primer element utilitzat de l'argument «%s»"
 msgid "'x' is NULL so the result will be NULL"
 msgstr ""
 
-#: src/main/seq.cpp:882 src/main/seq.cpp:900 src/main/seq.cpp:919
-#: src/main/seq.cpp:926 src/main/seq.cpp:1012 src/main/seq.cpp:1013
-#: src/main/seq.cpp:1058 src/main/seq.cpp:1059 src/main/seq.cpp:1080
-#: src/main/seq.cpp:1081
+#: src/main/seq.cpp:882 src/main/seq.cpp:900 src/main/seq.cpp:919 src/main/seq.cpp:926 src/main/seq.cpp:1012 src/main/seq.cpp:1013
+#: src/main/seq.cpp:1058 src/main/seq.cpp:1059 src/main/seq.cpp:1080 src/main/seq.cpp:1081
 #, fuzzy, c-format
 msgid "'%s' must be a finite number"
 msgstr "«%s» ha de ser un nombre finit"
@@ -8276,8 +8023,7 @@ msgstr "'by' conté NA"
 msgid "assertion '%s' failed: file '%s', line %d\n"
 msgstr ""
 
-#: src/main/serialize.cpp:289 src/main/serialize.cpp:336
-#: src/main/serialize.cpp:360
+#: src/main/serialize.cpp:289 src/main/serialize.cpp:336 src/main/serialize.cpp:360
 #, fuzzy
 msgid "unknown or inappropriate output format"
 msgstr "format de sortida desconegut o inadequat"
@@ -8446,8 +8192,7 @@ msgstr "només es pot escriure el format ascii a les connexions de mode text"
 msgid "only ascii format can be read from text mode connections"
 msgstr "només es pot llegir el format ascii des de les connexions de mode text"
 
-#: src/main/serialize.cpp:2654 src/main/serialize.cpp:2814
-#: src/main/serialize.cpp:2965
+#: src/main/serialize.cpp:2654 src/main/serialize.cpp:2814 src/main/serialize.cpp:2965
 #, fuzzy
 msgid "bad version value"
 msgstr "valor de versió incorrecte"
@@ -8461,8 +8206,7 @@ msgstr "es requereix una connexió en mode binari per a ascii forFALSE"
 msgid "cannot return a promise (PROMSXP) object"
 msgstr ""
 
-#: src/main/serialize.cpp:2842 src/main/serialize.cpp:2879
-#: src/main/serialize.cpp:2944
+#: src/main/serialize.cpp:2842 src/main/serialize.cpp:2879 src/main/serialize.cpp:2944
 #, fuzzy
 msgid "serialization is too large to store in a raw vector"
 msgstr "la serialització és massa gran per emmagatzemar-la en un vector RAW"
@@ -8486,8 +8230,7 @@ msgstr "no és un nom de fitxer adequat"
 msgid "not a proper raw vector"
 msgstr "no és un vector RAW adequat"
 
-#: src/main/serialize.cpp:3070 src/main/serialize.cpp:3162
-#: src/main/serialize.cpp:3177 src/main/serialize.cpp:3191
+#: src/main/serialize.cpp:3070 src/main/serialize.cpp:3162 src/main/serialize.cpp:3177 src/main/serialize.cpp:3191
 #: src/main/serialize.cpp:3201 src/main/serialize.cpp:3214
 #, fuzzy, c-format
 msgid "seek failed on %s"
@@ -8503,8 +8246,7 @@ msgstr "no s'ha pogut determinar la posició del fitxer"
 msgid "bad offset/length argument"
 msgstr "argument de desplaçament/longitud incorrecte"
 
-#: src/main/serialize.cpp:3181 src/main/serialize.cpp:3195
-#: src/main/serialize.cpp:3205 src/main/serialize.cpp:3218
+#: src/main/serialize.cpp:3181 src/main/serialize.cpp:3195 src/main/serialize.cpp:3205 src/main/serialize.cpp:3218
 #, fuzzy, c-format
 msgid "read failed on %s"
 msgstr "ha fallat la lectura a %s"
@@ -8539,8 +8281,7 @@ msgstr "només es poden ordenar els vectors atòmics"
 msgid "raw vectors cannot be sorted"
 msgstr "no es poden ordenar els vectors RAW"
 
-#: src/main/sort.cpp:605 src/main/sort.cpp:622 src/main/sort.cpp:639
-#: src/main/sort.cpp:662
+#: src/main/sort.cpp:605 src/main/sort.cpp:622 src/main/sort.cpp:639 src/main/sort.cpp:662
 msgid "'n >= 2' is required"
 msgstr ""
 
@@ -8659,8 +8400,7 @@ msgstr "la longitud «fmt» excedeix la longitud màxima de format %d"
 msgid "unrecognised format specification '%s'"
 msgstr "especificació de format no reconeguda «%s»"
 
-#: src/main/sprintf.cpp:191 src/main/sprintf.cpp:197 src/main/sprintf.cpp:210
-#: src/main/sprintf.cpp:217
+#: src/main/sprintf.cpp:191 src/main/sprintf.cpp:197 src/main/sprintf.cpp:210 src/main/sprintf.cpp:217
 #, fuzzy, c-format
 msgid "reference to non-existent argument %d"
 msgstr "referència a l'argument inexistent %d"
@@ -8684,8 +8424,7 @@ msgstr "l'argument per a l'especificació de conversió «*» ha de ser un nombr
 msgid "coercion has changed vector length to 0"
 msgstr "la coerció ha canviat la longitud del vector a 0"
 
-#: src/main/sprintf.cpp:370 src/main/sprintf.cpp:384 src/main/sprintf.cpp:398
-#: src/main/sprintf.cpp:433
+#: src/main/sprintf.cpp:370 src/main/sprintf.cpp:384 src/main/sprintf.cpp:398 src/main/sprintf.cpp:433
 #, fuzzy, c-format
 msgid "invalid format '%s'; %s"
 msgstr "el format «%s» no és vàlid; %s"
@@ -8856,20 +8595,17 @@ msgstr "tipus incompatibles (de %s a %s) en la correcció de tipus de subassigna
 msgid "Internal error: unexpected type in DeleteListElements"
 msgstr ""
 
-#: src/main/subassign.cpp:706 src/main/subassign.cpp:1020
-#: src/main/subassign.cpp:1263
+#: src/main/subassign.cpp:706 src/main/subassign.cpp:1020 src/main/subassign.cpp:1263
 #, fuzzy
 msgid "NAs are not allowed in subscripted assignments"
 msgstr "No es permeten NAs en les assignacions subscriptes"
 
-#: src/main/subassign.cpp:727 src/main/subassign.cpp:1030
-#: src/main/subassign.cpp:1255 src/main/subassign.cpp:1911
+#: src/main/subassign.cpp:727 src/main/subassign.cpp:1030 src/main/subassign.cpp:1255 src/main/subassign.cpp:1911
 #, fuzzy
 msgid "replacement has length zero"
 msgstr "la substitució té longitud zero"
 
-#: src/main/subassign.cpp:729 src/main/subassign.cpp:1032
-#: src/main/subassign.cpp:1257
+#: src/main/subassign.cpp:729 src/main/subassign.cpp:1032 src/main/subassign.cpp:1257
 #, fuzzy
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr "el nombre d'elements llegits no és múltiple del nombre de columnes"
@@ -8967,23 +8703,18 @@ msgstr "no hi ha cap mètode per a assignar subconjunts d'aquesta classe S4"
 msgid "Coercing LHS to a list"
 msgstr "S'està codificant el LHS a una llista"
 
-#: src/main/subscript.cpp:114 src/main/subscript.cpp:134
-#: src/main/subscript.cpp:155 src/main/subscript.cpp:249
-#: src/main/subscript.cpp:281
+#: src/main/subscript.cpp:114 src/main/subscript.cpp:134 src/main/subscript.cpp:155 src/main/subscript.cpp:249 src/main/subscript.cpp:281
 #, fuzzy, c-format
 msgid "attempt to select less than one element in %s"
 msgstr "s'ha intentat seleccionar menys d'un element a %s"
 
-#: src/main/subscript.cpp:118 src/main/subscript.cpp:131
-#: src/main/subscript.cpp:159 src/main/subscript.cpp:247
-#: src/main/subscript.cpp:288 src/main/subscript.cpp:380
+#: src/main/subscript.cpp:118 src/main/subscript.cpp:131 src/main/subscript.cpp:159 src/main/subscript.cpp:247 src/main/subscript.cpp:288
+#: src/main/subscript.cpp:380
 #, fuzzy, c-format
 msgid "attempt to select more than one element in %s"
 msgstr "s'ha intentat seleccionar més d'un element a %s"
 
-#: src/main/subscript.cpp:220 src/main/subscript.cpp:358
-#: src/main/subscript.cpp:1037 src/main/subscript.cpp:1119
-#: src/main/subset.cpp:1287
+#: src/main/subscript.cpp:220 src/main/subscript.cpp:358 src/main/subscript.cpp:1037 src/main/subscript.cpp:1119 src/main/subset.cpp:1287
 #, fuzzy, c-format
 msgid "invalid subscript type '%s'"
 msgstr "el tipus de subíndex «%s» no és vàlid"
@@ -8998,8 +8729,7 @@ msgstr "error intern en l'ús de la indexació recursiva"
 msgid "invalid negative subscript in %s"
 msgstr "subíndex negatiu no vàlid a %s"
 
-#: src/main/subscript.cpp:322 src/main/subscript.cpp:326
-#: src/main/subset.cpp:1386 src/main/subset.cpp:1442
+#: src/main/subscript.cpp:322 src/main/subscript.cpp:326 src/main/subset.cpp:1386 src/main/subset.cpp:1442
 #, fuzzy, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "coincidència parcial de «%s» a «%s»"
@@ -9033,8 +8763,7 @@ msgstr "subíndex no vàlid a la llista d'assignació"
 msgid "incorrect number of columns in matrix subscript"
 msgstr "nombre incorrecte de columnes en el subíndex de la matriu"
 
-#: src/main/subscript.cpp:464 src/main/subscript.cpp:483
-#: src/main/subscript.cpp:508
+#: src/main/subscript.cpp:464 src/main/subscript.cpp:483 src/main/subscript.cpp:508
 #, fuzzy
 msgid "negative values are not allowed in a matrix subscript"
 msgstr "no es permeten valors negatius en un subíndex de matriu"
@@ -9201,8 +8930,7 @@ msgstr "no es pot determinar l'hora de modificació del fitxer de «%s»"
 msgid "encoding of a filename cannot be 'bytes'"
 msgstr "la codificació d'un nom de fitxer no pot ser «bytes»"
 
-#: src/main/sysutils.cpp:196 src/main/sysutils.cpp:1726
-#: src/main/sysutils.cpp:1741 src/main/sysutils.cpp:1955
+#: src/main/sysutils.cpp:196 src/main/sysutils.cpp:1726 src/main/sysutils.cpp:1741 src/main/sysutils.cpp:1955
 #, fuzzy, c-format
 msgid "unsupported conversion from '%s' in codepage %d"
 msgstr "no es permet la conversió de «%s» a la pàgina de codi %d"
@@ -9247,9 +8975,7 @@ msgstr "no hi ha «fileext»"
 msgid "system call failed: %s"
 msgstr "ha fallat la crida al sistema: %s"
 
-#: src/main/sysutils.cpp:394 src/main/sysutils.cpp:397
-#: src/main/sysutils.cpp:491 src/main/sysutils.cpp:494
-#: src/main/sysutils.cpp:529
+#: src/main/sysutils.cpp:394 src/main/sysutils.cpp:397 src/main/sysutils.cpp:491 src/main/sysutils.cpp:494 src/main/sysutils.cpp:529
 #, fuzzy
 msgid "wrong type for argument"
 msgstr "tipus incorrecte per a l'argument"
@@ -9274,8 +9000,7 @@ msgstr "«Sys.unsetenv» no està disponible en aquest sistema"
 msgid "'x' must be a character vector or a list of NULL or raw vectors"
 msgstr "'x' ha de ser un vector de caràcters o una llista de vectors NUL o RAW"
 
-#: src/main/sysutils.cpp:726 src/main/sysutils.cpp:751
-#: src/main/sysutils.cpp:772
+#: src/main/sysutils.cpp:726 src/main/sysutils.cpp:751 src/main/sysutils.cpp:772
 #, fuzzy, c-format
 msgid "unsupported conversion from '%s' to '%s' in codepage %d"
 msgstr "no es permet la conversió de «%s» a «%s» a la pàgina de codi %d"
@@ -9285,8 +9010,7 @@ msgstr "no es permet la conversió de «%s» a «%s» a la pàgina de codi %d"
 msgid "'%s' must be called on a CHARSXP, but got '%s'"
 msgstr "«%s» s'ha de cridar a un CHARSXP, però s'ha obtingut «%s»"
 
-#: src/main/sysutils.cpp:1694 src/main/sysutils.cpp:1925
-#: src/main/sysutils.cpp:2063
+#: src/main/sysutils.cpp:1694 src/main/sysutils.cpp:1925 src/main/sysutils.cpp:2063
 #, fuzzy
 msgid "translating strings with \"bytes\" encoding is not allowed"
 msgstr "no es permet traduir cadenes amb la codificació «bytes»"
@@ -9346,8 +9070,7 @@ msgstr "'R_TempDir' conté espai"
 msgid "cannot create 'R_TempDir'"
 msgstr "no s'ha pogut crear «R_TempDir»"
 
-#: src/main/sysutils.cpp:2722 src/main/sysutils.cpp:2733
-#: src/main/sysutils.cpp:2738
+#: src/main/sysutils.cpp:2722 src/main/sysutils.cpp:2733 src/main/sysutils.cpp:2738
 #, fuzzy
 msgid "unable to set R_SESSION_TMPDIR"
 msgstr "no s'ha pogut establir R_SESSION_TMPDIR"
@@ -9382,8 +9105,7 @@ msgstr "la longitud %lld és massa gran per al resum"
 msgid "hash table is full"
 msgstr "la pila de l'enfonsament està plena"
 
-#: src/main/unique.cpp:675 src/main/unique.cpp:860 src/main/unique.cpp:1017
-#: src/main/unique.cpp:1047 src/main/unique.cpp:1086
+#: src/main/unique.cpp:675 src/main/unique.cpp:860 src/main/unique.cpp:1017 src/main/unique.cpp:1047 src/main/unique.cpp:1086
 #, fuzzy
 msgid "'duplicated' applies only to vectors"
 msgstr "'duplicated' només s'aplica als vectors"
@@ -9508,8 +9230,7 @@ msgstr "l'objecte no és una matriu"
 msgid "invalid type passed to internal function\n"
 msgstr "objecte no vàlid: ha de ser una funció primitiva"
 
-#: src/main/util.cpp:327 src/main/util.cpp:339 src/main/util.cpp:350
-#: src/main/util.cpp:379
+#: src/main/util.cpp:327 src/main/util.cpp:339 src/main/util.cpp:350 src/main/util.cpp:379
 #, fuzzy, c-format
 msgid "type %d is unimplemented in '%s'"
 msgstr "el tipus %d no està implementat a «%s»"
@@ -9566,8 +9287,7 @@ msgstr "el valor que falta no és vàlid"
 msgid "cannot change working directory"
 msgstr "no s'ha pogut canviar el directori de treball"
 
-#: src/main/util.cpp:893 src/main/util.cpp:923 src/main/util.cpp:971
-#: src/main/util.cpp:1033 src/main/util.cpp:1210 src/main/util.cpp:1288
+#: src/main/util.cpp:893 src/main/util.cpp:923 src/main/util.cpp:971 src/main/util.cpp:1033 src/main/util.cpp:1210 src/main/util.cpp:1288
 #: src/main/util.cpp:1312
 #, fuzzy
 msgid "a character vector argument expected"
@@ -9818,12 +9538,10 @@ msgstr "el mètode «wininet» de url() està obsolet per als URL ftp://"
 msgid "scheme not supported in URL '%s'"
 msgstr "l'esquema no està admès a l'URL «%s»"
 
-#: src/modules/internet/internet.cpp:215 src/modules/internet/internet.cpp:219
-#: src/modules/internet/internet.cpp:225 src/modules/internet/internet.cpp:246
-#: src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1347
-#: src/modules/internet/libcurl.cpp:1351 src/modules/internet/libcurl.cpp:1358
-#: src/modules/internet/libcurl.cpp:1372 src/modules/internet/libcurl.cpp:1381
-#: src/modules/internet/libcurl.cpp:1393
+#: src/modules/internet/internet.cpp:215 src/modules/internet/internet.cpp:219 src/modules/internet/internet.cpp:225
+#: src/modules/internet/internet.cpp:246 src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1347
+#: src/modules/internet/libcurl.cpp:1351 src/modules/internet/libcurl.cpp:1358 src/modules/internet/libcurl.cpp:1372
+#: src/modules/internet/libcurl.cpp:1381 src/modules/internet/libcurl.cpp:1393
 #, fuzzy
 msgid "allocation of url connection failed"
 msgstr "Ha fallat l'assignació de la connexió url"
@@ -9838,8 +9556,8 @@ msgstr "només s'ha utilitzat el primer element de l'argument «url»"
 msgid "only first element of 'destfile' argument used"
 msgstr "només s'ha utilitzat el primer element de l'argument «destfile»"
 
-#: src/modules/internet/internet.cpp:366 src/modules/internet/internet.cpp:465
-#: src/modules/internet/libcurl.cpp:715 src/modules/internet/libcurl.cpp:728
+#: src/modules/internet/internet.cpp:366 src/modules/internet/internet.cpp:465 src/modules/internet/libcurl.cpp:715
+#: src/modules/internet/libcurl.cpp:728
 #, fuzzy
 msgid "Download progress"
 msgstr "Progrés de la baixada"
@@ -9919,8 +9637,8 @@ msgstr "el mètode «wininet» per als URL ftp:// és obsolet"
 msgid "the 'internal' method for ftp:// URLs is defunct"
 msgstr "el mètode «intern» per als URL ftp:// és obsolet"
 
-#: src/modules/internet/internet.cpp:581 src/modules/internet/internet.cpp:595
-#: src/modules/internet/internet.cpp:686 src/modules/internet/internet.cpp:695
+#: src/modules/internet/internet.cpp:581 src/modules/internet/internet.cpp:595 src/modules/internet/internet.cpp:686
+#: src/modules/internet/internet.cpp:695
 #, fuzzy, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr "InternetOpenUrl ha fallat: «%s»"
@@ -9976,9 +9694,8 @@ msgstr "URL «%s»: l'estat era «%s»"
 msgid "curlGetHeaders is not supported on this platform"
 msgstr "curlGetHeaders no és compatible amb aquesta plataforma"
 
-#: src/modules/internet/libcurl.cpp:380 src/modules/internet/libcurl.cpp:656
-#: src/modules/internet/libcurl.cpp:938 src/modules/internet/libcurl.cpp:1275
-#: src/modules/internet/libcurl.cpp:1294
+#: src/modules/internet/libcurl.cpp:380 src/modules/internet/libcurl.cpp:656 src/modules/internet/libcurl.cpp:938
+#: src/modules/internet/libcurl.cpp:1275 src/modules/internet/libcurl.cpp:1294
 #, fuzzy
 msgid "could not create curl handle"
 msgstr "no s'ha pogut assignar espai per a la taula de DLL"
@@ -10094,8 +9811,7 @@ msgstr "no s'ha pogut assignar espai per a la taula de DLL"
 msgid "invalid bind address specification"
 msgstr "l'especificació del nom de fitxer no és vàlida"
 
-#: src/modules/internet/Rsock.cpp:71 src/modules/internet/Rsock.cpp:96
-#: src/modules/internet/Rsock.cpp:106 src/modules/internet/Rsock.cpp:120
+#: src/modules/internet/Rsock.cpp:71 src/modules/internet/Rsock.cpp:96 src/modules/internet/Rsock.cpp:106 src/modules/internet/Rsock.cpp:120
 #: src/modules/internet/Rsock.cpp:138 src/modules/internet/Rsock.cpp:161
 #, fuzzy, c-format
 msgid "socket error: %s\n"
@@ -10121,14 +9837,14 @@ msgstr "Problema tancant la connexió: %s"
 msgid "%s:%d cannot be opened"
 msgstr "no es pot obrir el fitxer zip «%s»"
 
-#: src/modules/internet/sockconn.cpp:213 src/modules/internet/sockconn.cpp:217
-#: src/modules/internet/sockconn.cpp:224 src/modules/internet/sockconn.cpp:238
+#: src/modules/internet/sockconn.cpp:213 src/modules/internet/sockconn.cpp:217 src/modules/internet/sockconn.cpp:224
+#: src/modules/internet/sockconn.cpp:238
 #, fuzzy
 msgid "allocation of socket connection failed"
 msgstr "ha fallat l'assignació de la connexió al sòcol"
 
-#: src/modules/internet/sockconn.cpp:254 src/modules/internet/sockconn.cpp:258
-#: src/modules/internet/sockconn.cpp:265 src/modules/internet/sockconn.cpp:273
+#: src/modules/internet/sockconn.cpp:254 src/modules/internet/sockconn.cpp:258 src/modules/internet/sockconn.cpp:265
+#: src/modules/internet/sockconn.cpp:273
 #, fuzzy
 msgid "allocation of server socket connection failed"
 msgstr "ha fallat l'assignació de la connexió al sòcol del servidor"
@@ -10138,8 +9854,7 @@ msgstr "ha fallat l'assignació de la connexió al sòcol del servidor"
 msgid "creation of server socket failed: port %d cannot be opened"
 msgstr "ha fallat la creació del sòcol del servidor: no es pot obrir el port %d"
 
-#: src/modules/lapack/Lapack.cpp:72 src/modules/lapack/Lapack.cpp:91
-#: src/modules/lapack/Lapack.cpp:106
+#: src/modules/lapack/Lapack.cpp:72 src/modules/lapack/Lapack.cpp:91 src/modules/lapack/Lapack.cpp:106
 #, c-format
 msgid "argument type[1]='%s' must be a character string of string length 1"
 msgstr "l'argument type[1]=«%s» ha de ser una cadena de caràcters de longitud 1"
@@ -10169,38 +9884,27 @@ msgstr "no enter x - %f"
 msgid "non-integer dim(vt)"
 msgstr "no enter x - %f"
 
-#: src/modules/lapack/Lapack.cpp:149 src/modules/lapack/Lapack.cpp:156
-#: src/modules/lapack/Lapack.cpp:214 src/modules/lapack/Lapack.cpp:225
-#: src/modules/lapack/Lapack.cpp:303 src/modules/lapack/Lapack.cpp:309
-#: src/modules/lapack/Lapack.cpp:403 src/modules/lapack/Lapack.cpp:420
-#: src/modules/lapack/Lapack.cpp:494 src/modules/lapack/Lapack.cpp:564
-#: src/modules/lapack/Lapack.cpp:577 src/modules/lapack/Lapack.cpp:613
-#: src/modules/lapack/Lapack.cpp:771 src/modules/lapack/Lapack.cpp:777
-#: src/modules/lapack/Lapack.cpp:831 src/modules/lapack/Lapack.cpp:838
-#: src/modules/lapack/Lapack.cpp:843 src/modules/lapack/Lapack.cpp:877
-#: src/modules/lapack/Lapack.cpp:884 src/modules/lapack/Lapack.cpp:932
-#: src/modules/lapack/Lapack.cpp:939 src/modules/lapack/Lapack.cpp:986
-#: src/modules/lapack/Lapack.cpp:992 src/modules/lapack/Lapack.cpp:1046
-#: src/modules/lapack/Lapack.cpp:1053 src/modules/lapack/Lapack.cpp:1297
-#: src/modules/lapack/Lapack.cpp:1303 src/modules/lapack/Lapack.cpp:1349
-#: src/modules/lapack/Lapack.cpp:1356 src/modules/lapack/Lapack.cpp:1361
-#: src/modules/lapack/Lapack.cpp:1388 src/modules/lapack/Lapack.cpp:1395
-#: src/modules/lapack/Lapack.cpp:1415
+#: src/modules/lapack/Lapack.cpp:149 src/modules/lapack/Lapack.cpp:156 src/modules/lapack/Lapack.cpp:214 src/modules/lapack/Lapack.cpp:225
+#: src/modules/lapack/Lapack.cpp:303 src/modules/lapack/Lapack.cpp:309 src/modules/lapack/Lapack.cpp:403 src/modules/lapack/Lapack.cpp:420
+#: src/modules/lapack/Lapack.cpp:494 src/modules/lapack/Lapack.cpp:564 src/modules/lapack/Lapack.cpp:577 src/modules/lapack/Lapack.cpp:613
+#: src/modules/lapack/Lapack.cpp:771 src/modules/lapack/Lapack.cpp:777 src/modules/lapack/Lapack.cpp:831 src/modules/lapack/Lapack.cpp:838
+#: src/modules/lapack/Lapack.cpp:843 src/modules/lapack/Lapack.cpp:877 src/modules/lapack/Lapack.cpp:884 src/modules/lapack/Lapack.cpp:932
+#: src/modules/lapack/Lapack.cpp:939 src/modules/lapack/Lapack.cpp:986 src/modules/lapack/Lapack.cpp:992 src/modules/lapack/Lapack.cpp:1046
+#: src/modules/lapack/Lapack.cpp:1053 src/modules/lapack/Lapack.cpp:1297 src/modules/lapack/Lapack.cpp:1303
+#: src/modules/lapack/Lapack.cpp:1349 src/modules/lapack/Lapack.cpp:1356 src/modules/lapack/Lapack.cpp:1361
+#: src/modules/lapack/Lapack.cpp:1388 src/modules/lapack/Lapack.cpp:1395 src/modules/lapack/Lapack.cpp:1415
 #, fuzzy, c-format
 msgid "error code %d from Lapack routine '%s'"
 msgstr "codi d'error %d de la rutina de Lapack «%s»"
 
-#: src/modules/lapack/Lapack.cpp:186 src/modules/lapack/Lapack.cpp:278
-#: src/modules/lapack/Lapack.cpp:1026
+#: src/modules/lapack/Lapack.cpp:186 src/modules/lapack/Lapack.cpp:278 src/modules/lapack/Lapack.cpp:1026
 #, fuzzy
 msgid "'x' must be a square numeric matrix"
 msgstr "«x» ha de ser una matriu numèrica quadrada"
 
-#: src/modules/lapack/Lapack.cpp:353 src/modules/lapack/Lapack.cpp:382
-#: src/modules/lapack/Lapack.cpp:433 src/modules/lapack/Lapack.cpp:470
-#: src/modules/lapack/Lapack.cpp:1079 src/modules/lapack/Lapack.cpp:1155
-#: src/modules/lapack/Lapack.cpp:1194 src/modules/lapack/Lapack.cpp:1277
-#: src/modules/lapack/Lapack.cpp:1332 src/modules/lapack/Lapack.cpp:1374
+#: src/modules/lapack/Lapack.cpp:353 src/modules/lapack/Lapack.cpp:382 src/modules/lapack/Lapack.cpp:433 src/modules/lapack/Lapack.cpp:470
+#: src/modules/lapack/Lapack.cpp:1079 src/modules/lapack/Lapack.cpp:1155 src/modules/lapack/Lapack.cpp:1194
+#: src/modules/lapack/Lapack.cpp:1277 src/modules/lapack/Lapack.cpp:1332 src/modules/lapack/Lapack.cpp:1374
 #: src/modules/lapack/Lapack.cpp:1407
 #, fuzzy, c-format
 msgid "'%s' must be a numeric matrix"
@@ -10211,8 +9915,7 @@ msgstr "«%s» ha de ser una matriu numèrica"
 msgid "exact singularity: U[%d,%d] = 0 in LU-decomposition {Lapack 'dgetrf()'}"
 msgstr "singularitat exacta: U[%d,%d] = 0 en descomposició LU {Lapack «dgetrf()»}"
 
-#: src/modules/lapack/Lapack.cpp:444 src/modules/lapack/Lapack.cpp:480
-#: src/modules/lapack/Lapack.cpp:545 src/modules/lapack/Lapack.cpp:601
+#: src/modules/lapack/Lapack.cpp:444 src/modules/lapack/Lapack.cpp:480 src/modules/lapack/Lapack.cpp:545 src/modules/lapack/Lapack.cpp:601
 #: src/modules/lapack/Lapack.cpp:637
 #, fuzzy
 msgid "'A' must be a *square* matrix"
@@ -10223,20 +9926,15 @@ msgstr "«A» ha de ser una matriu *quadrada*"
 msgid "error [%d] from Lapack 'dtrcon()'"
 msgstr "error [%d] de Lapack 'dtrcon()'"
 
-#: src/modules/lapack/Lapack.cpp:508 src/modules/lapack/Lapack.cpp:542
-#: src/modules/lapack/Lapack.cpp:597 src/modules/lapack/Lapack.cpp:631
-#: src/modules/lapack/Lapack.cpp:667 src/modules/lapack/Lapack.cpp:756
-#: src/modules/lapack/Lapack.cpp:816 src/modules/lapack/Lapack.cpp:862
+#: src/modules/lapack/Lapack.cpp:508 src/modules/lapack/Lapack.cpp:542 src/modules/lapack/Lapack.cpp:597 src/modules/lapack/Lapack.cpp:631
+#: src/modules/lapack/Lapack.cpp:667 src/modules/lapack/Lapack.cpp:756 src/modules/lapack/Lapack.cpp:816 src/modules/lapack/Lapack.cpp:862
 #, fuzzy, c-format
 msgid "'%s' must be a complex matrix"
 msgstr "«%s» ha de ser una matriu complexa"
 
-#: src/modules/lapack/Lapack.cpp:525 src/modules/lapack/Lapack.cpp:581
-#: src/modules/lapack/Lapack.cpp:616 src/modules/lapack/Lapack.cpp:653
-#: src/modules/lapack/Lapack.cpp:742 src/modules/lapack/Lapack.cpp:802
-#: src/modules/lapack/Lapack.cpp:847 src/modules/lapack/Lapack.cpp:888
-#: src/modules/lapack/Lapack.cpp:953 src/modules/lapack/Lapack.cpp:1009
-#: src/modules/lapack/Lapack.cpp:1070
+#: src/modules/lapack/Lapack.cpp:525 src/modules/lapack/Lapack.cpp:581 src/modules/lapack/Lapack.cpp:616 src/modules/lapack/Lapack.cpp:653
+#: src/modules/lapack/Lapack.cpp:742 src/modules/lapack/Lapack.cpp:802 src/modules/lapack/Lapack.cpp:847 src/modules/lapack/Lapack.cpp:888
+#: src/modules/lapack/Lapack.cpp:953 src/modules/lapack/Lapack.cpp:1009 src/modules/lapack/Lapack.cpp:1070
 #, fuzzy
 msgid "Fortran complex functions are not available on this platform"
 msgstr "Les funcions complexes de Fortran no estan disponibles en aquesta plataforma"
@@ -10261,15 +9959,13 @@ msgstr "'a' (%d x %d) ha de ser quadrat"
 msgid "no right-hand side in 'b'"
 msgstr "no hi ha cap costat dret a «b»"
 
-#: src/modules/lapack/Lapack.cpp:682 src/modules/lapack/Lapack.cpp:696
-#: src/modules/lapack/Lapack.cpp:1209 src/modules/lapack/Lapack.cpp:1225
+#: src/modules/lapack/Lapack.cpp:682 src/modules/lapack/Lapack.cpp:696 src/modules/lapack/Lapack.cpp:1209 src/modules/lapack/Lapack.cpp:1225
 #, fuzzy, c-format
 msgid "'b' (%d x %d) must be compatible with 'a' (%d x %d)"
 msgstr "'b' (%d x %d) ha de ser compatible amb 'a' (%d x %d)"
 
-#: src/modules/lapack/Lapack.cpp:717 src/modules/lapack/Lapack.cpp:1101
-#: src/modules/lapack/Lapack.cpp:1116 src/modules/lapack/Lapack.cpp:1172
-#: src/modules/lapack/Lapack.cpp:1247
+#: src/modules/lapack/Lapack.cpp:717 src/modules/lapack/Lapack.cpp:1101 src/modules/lapack/Lapack.cpp:1116
+#: src/modules/lapack/Lapack.cpp:1172 src/modules/lapack/Lapack.cpp:1247
 #, fuzzy, c-format
 msgid "argument %d of Lapack routine %s had invalid value"
 msgstr "l'argument %d de la rutina de Lapack %s té un valor no vàlid"
@@ -10284,8 +9980,7 @@ msgstr "Rutina de Lapack %s: el sistema és exactament singular: U[%d,%d] ] 0"
 msgid "system is computationally singular: reciprocal condition number = %g"
 msgstr "el sistema és computacionalment singular: nombre de condició recíproc : %g"
 
-#: src/modules/lapack/Lapack.cpp:824 src/modules/lapack/Lapack.cpp:870
-#: src/modules/lapack/Lapack.cpp:1341 src/modules/lapack/Lapack.cpp:1381
+#: src/modules/lapack/Lapack.cpp:824 src/modules/lapack/Lapack.cpp:870 src/modules/lapack/Lapack.cpp:1341 src/modules/lapack/Lapack.cpp:1381
 #, fuzzy, c-format
 msgid "right-hand side should have %d not %d rows"
 msgstr "la part dreta hauria de tenir %d no %d files"
@@ -10295,8 +9990,7 @@ msgstr "la part dreta hauria de tenir %d no %d files"
 msgid "matrices of 2^31 or more elements are not supported"
 msgstr "no s'admeten matrius de 23131 o més elements"
 
-#: src/modules/lapack/Lapack.cpp:923 src/modules/lapack/Lapack.cpp:926
-#: src/modules/lapack/Lapack.cpp:1083 src/modules/lapack/Lapack.cpp:1152
+#: src/modules/lapack/Lapack.cpp:923 src/modules/lapack/Lapack.cpp:926 src/modules/lapack/Lapack.cpp:1083 src/modules/lapack/Lapack.cpp:1152
 #, fuzzy
 msgid "non-integer dims"
 msgstr "no enter x - %f"
@@ -10464,8 +10158,7 @@ msgstr ""
 msgid "Unknown Visual\n"
 msgstr ""
 
-#: src/modules/X11/devX11.cpp:808 src/modules/X11/devX11.cpp:1659
-#: src/modules/X11/devX11.cpp:1667 src/modules/X11/devX11.cpp:1688
+#: src/modules/X11/devX11.cpp:808 src/modules/X11/devX11.cpp:1659 src/modules/X11/devX11.cpp:1667 src/modules/X11/devX11.cpp:1688
 #: src/modules/X11/devX11.cpp:1697 src/modules/X11/devX11.cpp:3352
 #, fuzzy, c-format
 msgid "cairo error '%s'"
@@ -10509,8 +10202,7 @@ msgstr "Error d'E/S de l'X11 en obrir la connexió de l'X11 a «%s»"
 msgid "no png support in this version of R"
 msgstr "no hi ha suport png en aquesta versió de R"
 
-#: src/modules/X11/devX11.cpp:1350 src/modules/X11/devX11.cpp:1376
-#: src/modules/X11/devX11.cpp:1400 src/modules/X11/devX11.cpp:1412
+#: src/modules/X11/devX11.cpp:1350 src/modules/X11/devX11.cpp:1376 src/modules/X11/devX11.cpp:1400 src/modules/X11/devX11.cpp:1412
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "nom de fitxer massa llarg a la crida png()"
@@ -10712,8 +10404,7 @@ msgstr "ha fallat l'assignació a R_tmpnam2"
 msgid "no TIFF support in this version of R"
 msgstr "no hi ha suport png en aquesta versió de R"
 
-#: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600
-#: src/modules/X11/rbitmap.cpp:609
+#: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600 src/modules/X11/rbitmap.cpp:609
 #, fuzzy
 msgid "Problems writing to 'bmp' file"
 msgstr "problema en escriure a la connexió"
@@ -10873,8 +10564,7 @@ msgstr "error d'assignació de la signatura"
 msgid "norm_rand(): invalid N01_kind: %d\n"
 msgstr "normrand(): N01kind no vàlid: %d\n"
 
-#: src/nmath/wilcox.cpp:83 src/nmath/wilcox.cpp:93 src/nmath/wilcox.cpp:149
-#: src/nmath/wilcox.cpp:307
+#: src/nmath/wilcox.cpp:83 src/nmath/wilcox.cpp:93 src/nmath/wilcox.cpp:149 src/nmath/wilcox.cpp:307
 #, fuzzy, c-format
 msgid "wilcox allocation error %d"
 msgstr "error d'assignació wilcox %d"
@@ -10932,8 +10622,7 @@ msgstr ""
 "No es pot obrir el fitxer «%s»: %s\n"
 "\n"
 
-#: src/unix/sys-std.cpp:1362 src/unix/system.cpp:594 src/unix/sys-unix.cpp:1032
-#: src/unix/sys-unix.cpp:1092
+#: src/unix/sys-std.cpp:1362 src/unix/system.cpp:594 src/unix/sys-unix.cpp:1032 src/unix/sys-unix.cpp:1092
 #, fuzzy
 msgid "error in running command"
 msgstr "error en executar l'ordre"
@@ -11014,8 +10703,7 @@ msgstr "error d'escriptura en extreure del fitxer zip"
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "AVÍS: només s'està editant el primer a la llista de fitxers"
 
-#: src/unix/sys-unix.cpp:587 src/unix/sys-unix.cpp:668
-#: src/unix/sys-unix.cpp:785
+#: src/unix/sys-unix.cpp:587 src/unix/sys-unix.cpp:668 src/unix/sys-unix.cpp:785
 #, fuzzy
 msgid "Cannot open /dev/null for reading:"
 msgstr "la connexió no està oberta per a lectura"
@@ -11065,17 +10753,19 @@ msgstr "El mòdul X11 no està disponible sota aquesta interfície gràfica"
 msgid "X11 routines cannot be accessed in module"
 msgstr "No es pot accedir a les rutines X11 al mòdul"
 
-#: src/unix/X11.cpp:82 src/unix/X11.cpp:94 src/unix/X11.cpp:106
-#: src/unix/X11.cpp:117
+#: src/unix/X11.cpp:82 src/unix/X11.cpp:94 src/unix/X11.cpp:106 src/unix/X11.cpp:117
 #, fuzzy
 msgid "X11 module cannot be loaded"
 msgstr "No es pot carregar el mòdul X11"
 
-#: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161
-#: src/unix/X11.cpp:167
+#: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161 src/unix/X11.cpp:167
 #, fuzzy
 msgid "X11 is not available"
 msgstr "X11 no està disponible"
+
+#, fuzzy, c-format
+#~ msgid "invalid value for '%s'"
+#~ msgstr "valor no vàlid per a «%s»"
 
 #, fuzzy
 #~ msgid "bad condition argument"

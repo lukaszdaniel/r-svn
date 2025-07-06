@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
+"POT-Creation-Date: 2025-07-06 11:20+0200\n"
 "PO-Revision-Date: 2025-04-01 16:58+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -128,64 +128,64 @@ msgstr "не могу сохранить состояние 'grid'. Открыт
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr "Не могу создать единичный скаляр из нулевого единичного вектора"
 
-#: unit.cpp:806 unit.cpp:1305
+#: unit.cpp:806 unit.cpp:1315
 msgid "invalid unit or unit not yet implemented"
 msgstr "неправильная или не разработанная единица"
 
-#: unit.cpp:1362 unit.cpp:1393
+#: unit.cpp:1268 unit.cpp:1372 unit.cpp:1403
 msgid "Viewport has zero dimension(s)"
 msgstr "Оконница имеет ноль измерений"
 
-#: unit.cpp:1425 unit.cpp:1440 unit.cpp:1455 unit.cpp:1470
+#: unit.cpp:1435 unit.cpp:1450 unit.cpp:1465 unit.cpp:1480
 msgid "Unsupported unit conversion"
 msgstr "Неподдерживаемая конверсия единиц измерения"
 
-#: unit.cpp:1562
+#: unit.cpp:1572
 msgid "Invalid unit"
 msgstr "Неправильная единица"
 
-#: unit.cpp:1577
+#: unit.cpp:1587
 msgid "'units' must be character"
 msgstr "единицы должен быть буквами"
 
-#: unit.cpp:1580
+#: unit.cpp:1590
 #, fuzzy, c-format
 msgid "'%s' must be of length > 0"
 msgstr "единицы должны быть длиной > 0"
 
-#: unit.cpp:1591
+#: unit.cpp:1601
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr "данные должны быть или NULL, или длиной 1, или соответствовать длине окончательного единичного вектора"
 
-#: unit.cpp:1603
+#: unit.cpp:1613
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr "нет сроки для единицы 'strwidth/height'"
 
-#: unit.cpp:1607
+#: unit.cpp:1617
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr "нет 'grob' для единицы 'grobwidth/height'"
 
-#: unit.cpp:1625
+#: unit.cpp:1635
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr "'gPath' должен быть единичной грубины в единицах 'grobwidth/height'"
 
-#: unit.cpp:1630
+#: unit.cpp:1640
 msgid "non-NULL value supplied for plain unit"
 msgstr "для plain единицы указано не-NULL значение"
 
-#: unit.cpp:1683 unit.cpp:1717 unit.cpp:1766
+#: unit.cpp:1693 unit.cpp:1727 unit.cpp:1776
 msgid "old version of unit class is no longer allowed"
 msgstr "старая версия единичного класса больше не разрешается"
 
-#: unit.cpp:1689
+#: unit.cpp:1699
 msgid "object is not coercible to a unit"
 msgstr "объект не конвертируется в вдиницу"
 
-#: unit.cpp:1715
+#: unit.cpp:1725
 msgid "object is not a unit"
 msgstr "объект не является единицей"
 
-#: unit.cpp:1850
+#: unit.cpp:1860
 msgid "units can only be multiplied with numerics and integers"
 msgstr "единицы можно умножать только на целые или десятичные числа"
 

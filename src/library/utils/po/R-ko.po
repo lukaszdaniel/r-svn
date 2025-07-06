@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-27 19:51\n"
-"PO-Revision-Date: 2024-03-18 21:18+0000\n"
+"PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
 "Language: ko\n"
@@ -17,7 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/modifyList.R: gettextf("%d errors caught in %s.  The error messages and their frequencies are",     sum(tt), e.call)
 #: R/modifyList.R:0
@@ -536,7 +537,9 @@ msgstr ""
 #. R/help.start.R: gettextf("If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window.",     browser)
 #: R/help.start.R:0
 msgid "If the browser launched by '%s' is already running, it is *not* restarted, and you must switch to its window."
-msgstr "만약 '%s'에 의하여 시작된 브라우저가 이미 실행중이라면, 다시 재시작되지 않을 것을 것입니다.  따라서, 당신은 반드시 해당 윈도우로 전환해야 합니다"
+msgstr ""
+"만약 '%s'에 의하여 시작된 브라우저가 이미 실행중이라면, 다시 재시작되지 않을 것을 것입니다.  따라서, 당신은 반드시 해당 윈도우로 전환해"
+"야 합니다"
 
 #. R/indices.R: warning("Invalid \"Built\": ", conditionMessage(e))
 #: R/indices.R:0
@@ -1342,8 +1345,7 @@ msgstr "패키지 %s의 설치가 0이 아닌 종료상태를 가졌습니다"
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
-#: R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0 R/tar.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "%s 인자는 잘못되었습니다"

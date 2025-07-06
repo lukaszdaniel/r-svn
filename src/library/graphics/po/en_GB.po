@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-12 17:52+0200\n"
-"PO-Revision-Date: 2024-01-29 03:05+0000\n"
+"PO-Revision-Date: 2025-07-06 15:16+0200\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: base.cpp:40
 msgid "no base graphics system is registered"
@@ -107,9 +108,9 @@ msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "invalid par(\"bty\") = '%c'; no box() drawn"
 
 #: graphics.cpp:3201
-#, fuzzy, c-format
+#, c-format
 msgid "invalid argument to '%s'"
-msgstr "invalid argument to GBox"
+msgstr "invalid argument to '%s'"
 
 #: graphics.cpp:3408
 msgid "metric information not available for this device"
@@ -437,9 +438,8 @@ msgid "invalid symbol coordinates"
 msgstr "invalid symbol coordinates"
 
 #: plot.cpp:3753
-#, fuzzy
 msgid "x/y parameter length mismatch"
-msgstr "x/y/parameter length mismatch"
+msgstr "x/y parameter length mismatch"
 
 #: plot.cpp:3772
 msgid "invalid circles data"
@@ -625,9 +625,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: stem.cpp:162
-#, fuzzy
 msgid "invalid input"
-msgstr "invalid units"
+msgstr "invalid input"
 
 #: stem.cpp:165
 #, c-format

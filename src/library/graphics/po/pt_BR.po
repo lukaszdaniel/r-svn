@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-12 17:52+0200\n"
-"PO-Revision-Date: 2024-03-19 03:05+0000\n"
+"PO-Revision-Date: 2025-07-06 15:28+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
 "Language: pt_BR\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: base.cpp:40
 msgid "no base graphics system is registered"
@@ -393,9 +394,9 @@ msgstr "'a' e 'b' devem ser finitos"
 
 #: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
 #: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
-#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
-#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
-#: stem.cpp:171 stem.cpp:172
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094 plot3d.cpp:1098
+#: plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169 stem.cpp:171
+#: stem.cpp:172
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argumento '%s' inválido"

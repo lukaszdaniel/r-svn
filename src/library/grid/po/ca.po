@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
-"PO-Revision-Date: 2024-03-19 03:05+0000\n"
+"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"PO-Revision-Date: 2025-07-06 15:34+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: gpar.cpp:634
 msgid "updateGContext must only be called after initGContext"
@@ -142,77 +143,77 @@ msgstr "no s'ha pogut emmagatzemar l'estat de la graella.  Hi ha massa dispositi
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr "No es pot crear un escalar d'unitat a partir del vector d'unitat de longitud 0"
 
-#: unit.cpp:806 unit.cpp:1305
+#: unit.cpp:806 unit.cpp:1315
 #, fuzzy
 msgid "invalid unit or unit not yet implemented"
 msgstr "unitat o unitat encara no implementada"
 
-#: unit.cpp:1362 unit.cpp:1393
+#: unit.cpp:1268 unit.cpp:1372 unit.cpp:1403
 #, fuzzy
 msgid "Viewport has zero dimension(s)"
 msgstr "L'àrea de visualització té dimensió zero"
 
-#: unit.cpp:1425 unit.cpp:1440 unit.cpp:1455 unit.cpp:1470
+#: unit.cpp:1435 unit.cpp:1450 unit.cpp:1465 unit.cpp:1480
 #, fuzzy
 msgid "Unsupported unit conversion"
 msgstr "Conversió d'unitat no suportada"
 
-#: unit.cpp:1562
+#: unit.cpp:1572
 #, fuzzy
 msgid "Invalid unit"
 msgstr "Unitat no vàlida"
 
-#: unit.cpp:1577
+#: unit.cpp:1587
 #, fuzzy
 msgid "'units' must be character"
 msgstr "'unitats' ha de ser un caràcter"
 
-#: unit.cpp:1580
+#: unit.cpp:1590
 #, fuzzy, c-format
 msgid "'%s' must be of length > 0"
 msgstr "'unitats' ha de ser de longitud of 0"
 
-#: unit.cpp:1591
+#: unit.cpp:1601
 #, fuzzy
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr "les dades han de ser NULL, tenir longitud 1, o coincidir amb la longitud del vector unitari final"
 
-#: unit.cpp:1603
+#: unit.cpp:1613
 #, fuzzy
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr "no s'ha proporcionat cap cadena per a la unitat «strwidth/height»"
 
-#: unit.cpp:1607
+#: unit.cpp:1617
 #, fuzzy
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr "no s'ha subministrat cap «grob» per a la unitat «grobwidth/height»"
 
-#: unit.cpp:1625
+#: unit.cpp:1635
 #, fuzzy
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr "«gPath» ha de tenir profunditat 1 en unitats «grobwidth/height»"
 
-#: unit.cpp:1630
+#: unit.cpp:1640
 #, fuzzy
 msgid "non-NULL value supplied for plain unit"
 msgstr "s'ha proporcionat un valor no nul per a la unitat plana"
 
-#: unit.cpp:1683 unit.cpp:1717 unit.cpp:1766
+#: unit.cpp:1693 unit.cpp:1727 unit.cpp:1776
 #, fuzzy
 msgid "old version of unit class is no longer allowed"
 msgstr "ja no es permet una versió antiga de la classe unitària"
 
-#: unit.cpp:1689
+#: unit.cpp:1699
 #, fuzzy
 msgid "object is not coercible to a unit"
 msgstr "l'objecte no és coercible amb una unitat"
 
-#: unit.cpp:1715
+#: unit.cpp:1725
 #, fuzzy
 msgid "object is not a unit"
 msgstr "l'objecte no és una unitat"
 
-#: unit.cpp:1850
+#: unit.cpp:1860
 #, fuzzy
 msgid "units can only be multiplied with numerics and integers"
 msgstr "les unitats només es poden multiplicar amb nombres i enters"

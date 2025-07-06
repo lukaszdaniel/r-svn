@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 08:23+0200\n"
-"PO-Revision-Date: 2024-03-18 21:18+0000\n"
+"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"PO-Revision-Date: 2025-07-06 15:34+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
 "Language: zh_CN\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: axis_scales.cpp:41 axis_scales.cpp:42 axis_scales.cpp:54
 #, c-format
@@ -83,8 +84,8 @@ msgstr "hsv颜色无效"
 msgid "invalid hcl color"
 msgstr "hcl颜色无效"
 
-#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#: colors.cpp:401 devWindows.cpp:3736 devWindows.cpp:3744 devWindows.cpp:3759
+#: devWindows.cpp:3766 devWindows.cpp:3775 cairo/cairoBM.cpp:622
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s'值无效"
@@ -286,11 +287,11 @@ msgstr "无法记录装置编码"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "对象'.ps.prolog'不是字符向量"
 
-#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:790
+#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:791
 msgid "invalid line end"
 msgstr "行尾出错"
 
-#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:803
+#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:804
 msgid "invalid line join"
 msgstr "行接連處出错"
 
@@ -304,8 +305,8 @@ msgstr "行斜接出错"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "不能用%d这个字体，代用一字体"
 
-#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
-#: devWindows.cpp:1864 devWindows.cpp:1896
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1798 devWindows.cpp:1835
+#: devWindows.cpp:1865 devWindows.cpp:1897
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "%s()調用里的文本名称太长"
@@ -354,7 +355,7 @@ msgstr "'postscript(print.it=TRUE)'不能用在空'print'命令里"
 msgid "invalid page type '%s' (postscript)"
 msgstr "页类别'%s'(postscript)无效"
 
-#: devPS.cpp:3599 devWindows.cpp:2326
+#: devPS.cpp:3599 devWindows.cpp:2330
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "此装置不支持半透明：每一页将被报告一次"
 
@@ -648,7 +649,7 @@ msgid "invalid 'fonts' parameter in %s"
 msgstr "%s里的'fonts'参数无效"
 
 #: devPS.cpp:9932 devPS.cpp:10030 devPicTeX.cpp:779 devPicTeX.cpp:784
-#: devWindows.cpp:3812
+#: devWindows.cpp:3816
 #, c-format
 msgid "unable to start %s() device"
 msgstr "无法启动%s()装置"
@@ -844,147 +845,147 @@ msgstr "字体设定无效"
 msgid "font family not found in Windows font database"
 msgstr "Windows字体数据库里没有这样的字体系列"
 
-#: devWindows.cpp:713
+#: devWindows.cpp:714
 msgid "unable to set or substitute a suitable font"
 msgstr ""
 
-#: devWindows.cpp:718
+#: devWindows.cpp:719
 #, fuzzy
 msgid "unable to set font: using Arial"
 msgstr "无法用编码'%s'"
 
-#: devWindows.cpp:1078
+#: devWindows.cpp:1079
 msgid "plot history seems corrupted"
 msgstr "绘图历史好象坏了"
 
-#: devWindows.cpp:1085
+#: devWindows.cpp:1086
 msgid "no plot history!"
 msgstr "没有绘图历史!"
 
-#: devWindows.cpp:1563
+#: devWindows.cpp:1564
 #, fuzzy
 msgid "unable to open window"
 msgstr "无法打开'%s'文本写入"
 
-#: devWindows.cpp:1790
+#: devWindows.cpp:1791
 #, fuzzy
 msgid "unable to open printer"
 msgstr "无法分配光栅图像"
 
-#: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
+#: devWindows.cpp:1803 devWindows.cpp:1838 devWindows.cpp:1868
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d'这样的像素值很可能不正确"
 
-#: devWindows.cpp:1810 devWindows.cpp:1815 devWindows.cpp:1840
-#: devWindows.cpp:1845 devWindows.cpp:1870 devWindows.cpp:1875
+#: devWindows.cpp:1811 devWindows.cpp:1816 devWindows.cpp:1841
+#: devWindows.cpp:1846 devWindows.cpp:1871 devWindows.cpp:1876
 msgid "unable to allocate bitmap"
 msgstr "无法分配bitmap"
 
-#: devWindows.cpp:1821 devWindows.cpp:1851 devWindows.cpp:2172
+#: devWindows.cpp:1822 devWindows.cpp:1852 devWindows.cpp:2173
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "无法打开'%s'文本写入"
 
-#: devWindows.cpp:1892
+#: devWindows.cpp:1893
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
 msgstr "win.metafile()調用里的文本名称太长"
 
-#: devWindows.cpp:1907
+#: devWindows.cpp:1908
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "无法打开元文本'%s'写入"
 
-#: devWindows.cpp:1909
+#: devWindows.cpp:1910
 msgid "unable to open clipboard to write metafile"
 msgstr "无法打开剪輯板来写入元文本"
 
-#: devWindows.cpp:2120
+#: devWindows.cpp:2121
 msgid "Insufficient memory for resize. Killing device"
 msgstr "内存不足，无法重新修改大小. 关闭装置"
 
-#: devWindows.cpp:2128
+#: devWindows.cpp:2129
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "内存不足，无法重新修改大小. 关闭alpha混合"
 
-#: devWindows.cpp:2157
+#: devWindows.cpp:2158
 msgid "a clipboard metafile can store only one figure."
 msgstr "剪輯板元文本只能保存一个图片。"
 
-#: devWindows.cpp:2163
+#: devWindows.cpp:2164
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "无法建立元文本'%s'"
 
-#: devWindows.cpp:3165 devWindows.cpp:3835
+#: devWindows.cpp:3169 devWindows.cpp:3839
 msgid "R Graphics"
 msgstr "R Graphics"
 
-#: devWindows.cpp:3178
+#: devWindows.cpp:3182
 msgid "attempt to use the locator after dev.hold()"
 msgstr "调用dev.hold()后不能再用定位器"
 
-#: devWindows.cpp:3204
+#: devWindows.cpp:3208
 msgid "graphics device closed during call to locator or identify"
 msgstr "图形设备在调用 locator 或 identify时关闭"
 
-#: devWindows.cpp:3304
+#: devWindows.cpp:3308
 msgid "allocation failed in GADeviceDriver"
 msgstr ""
 
-#: devWindows.cpp:3349
+#: devWindows.cpp:3353
 msgid "opening device failed"
 msgstr ""
 
-#: devWindows.cpp:3480
+#: devWindows.cpp:3484
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "'windowsTimeouts'选择项必需是整数"
 
-#: devWindows.cpp:3501
+#: devWindows.cpp:3505
 msgid "invalid device number in 'savePlot'"
 msgstr "'savePlot'里的装置数目出了错"
 
-#: devWindows.cpp:3503
+#: devWindows.cpp:3507
 msgid "invalid device in 'savePlot'"
 msgstr "'savePlot'装置出错"
 
-#: devWindows.cpp:3506
+#: devWindows.cpp:3510
 msgid "invalid filename argument in 'savePlot'"
 msgstr "'savePlot'文本名称参数无效"
 
-#: devWindows.cpp:3511
+#: devWindows.cpp:3515
 msgid "invalid type argument in 'savePlot'"
 msgstr "'savePlot'类别参数无效"
 
-#: devWindows.cpp:3538
+#: devWindows.cpp:3542
 msgid "unknown type in savePlot"
 msgstr "savePlot里没有类别"
 
-#: devWindows.cpp:3583 devWindows.cpp:3625 devWindows.cpp:3650
-#: devWindows.cpp:3677 devWindows.cpp:3698
+#: devWindows.cpp:3587 devWindows.cpp:3629 devWindows.cpp:3654
+#: devWindows.cpp:3681 devWindows.cpp:3702
 msgid "processing of the plot ran out of memory"
 msgstr "处理图象时内存用完了"
 
-#: devWindows.cpp:3594
+#: devWindows.cpp:3598
 #, fuzzy
 msgid "Not enough memory to create error message."
 msgstr "内存不足，无法拷贝图形窗"
 
-#: devWindows.cpp:3596
+#: devWindows.cpp:3600
 msgid "Impossible to open "
 msgstr "无法打开 "
 
-#: devWindows.cpp:3725
+#: devWindows.cpp:3729
 msgid "invalid 'width' or 'height'"
 msgstr "'width'或'height'的值无效"
 
-#: devWindows.cpp:3921
+#: devWindows.cpp:3925
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
 msgstr "内存不足，无法拷贝图形窗"
 
-#: devWindows.cpp:3962
+#: devWindows.cpp:3966
 #, fuzzy
 msgid "unable to load winCairo.dll: was it built?"
 msgstr "无法载入winCairo.dll: 构建了这个动态链接库没有？"

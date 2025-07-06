@@ -4,18 +4,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.5.0 \n"
+"Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-12 17:52+0200\n"
-"PO-Revision-Date: 2014-03-26 13:54+0200 \n"
-"Last-Translator: Masafumi  \n"
-"Language-Team: R-core <R-core@R-project.org> \n"
-"Language: ja \n"
-"MIME-Version: 1.0 \n"
-"Content-Type: text/plain; charset=UTF-8 \n"
-"Content-Transfer-Encoding: 8bit \n"
-"Plural-Forms: nplurals=1; plural=0; \n"
-"X-Generator: Pootle 2.0.5 \n"
+"PO-Revision-Date: 2025-07-06 15:17+0200\n"
+"Last-Translator: Masafumi\n"
+"Language-Team: R-core <R-core@R-project.org>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: base.cpp:40
 msgid "no base graphics system is registered"
@@ -84,7 +85,8 @@ msgstr "グラフィックスの状態が不正です"
 
 #: graphics.cpp:2604
 msgid "graphics device closed during call to locator or identify"
-msgstr "locatorまたはidentifyの呼び出し中にグラフィックデバイスが閉じられました"
+msgstr ""
+"locatorまたはidentifyの呼び出し中にグラフィックデバイスが閉じられました"
 
 #: graphics.cpp:2654
 msgid "No graphics device is active"
@@ -476,7 +478,9 @@ msgstr "'thermometers[, %s]' が不正です"
 #: plot.cpp:3897
 #, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
-msgstr "'thermometers[, %s]' が [0, 1] の範囲外にあります。表示がおかしいかも知れません"
+msgstr ""
+"'thermometers[, %s]' が [0, 1] の範囲外にあります。表示がおかしいかも知れ"
+"ません"
 
 #: plot.cpp:3900
 msgid "invalid 'thermometers[, 1:2]'"
@@ -488,7 +492,8 @@ msgstr "'boxplots' のデータが不正です (5 列必要です)"
 
 #: plot.cpp:3948
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
-msgstr "'boxplots[, 5]' が [0, 1] の範囲外にあります。表示がおかしいかも知れません"
+msgstr ""
+"'boxplots[, 5]' が [0, 1] の範囲外にあります。表示がおかしいかも知れません"
 
 #: plot.cpp:3950
 msgid "invalid 'boxplots[, 1:4]'"

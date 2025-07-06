@@ -3,15 +3,16 @@ msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-20 10:44\n"
-"PO-Revision-Date: 2021-10-15 18:44+0200\n"
+"PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && (n%100<11 || n%100>19) ? 0 : n%10>=2 && n%10<=9 && (n%100<11 || n%100>19) ? 1 : 2);\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/xtabs.R: gettextf("%s applies only to two-way tables", "xtabs(*, sparse=TRUE)")
 #: R/xtabs.R:0

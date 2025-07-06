@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-15 11:12\n"
-"PO-Revision-Date: 2024-01-29 03:05+0000\n"
+"PO-Revision-Date: 2025-07-06 15:40+0200\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -11,7 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -208,9 +209,8 @@ msgstr "--- caching class"
 
 #. R/RMethodUtils.R: gettextf("--- done caching class %s", sQuote(cl))
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "--- done caching class %s"
-msgstr "--- done caching class"
+msgstr "--- done caching class %s"
 
 #. R/RMethodUtils.R: message("--- done getting generic ", sQuote(f))
 #: R/RMethodUtils.R:0
@@ -219,9 +219,8 @@ msgstr "--- done getting generic"
 
 #. R/RMethodUtils.R: gettextf("--- getting generic %s (and methods)", sQuote(f))
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "--- getting generic %s (and methods)"
-msgstr "--- getting generic"
+msgstr "--- getting generic %s (and methods)"
 
 #. R/SClasses.R: gettextf("All %s names must be distinct in:\n(%s)", what, paste(sQuote(propNames),     collapse = ", "))
 #: R/SClasses.R:0
@@ -307,11 +306,12 @@ msgstr "Data part is undefined for general S4 object"
 
 #. R/RClassUtils.R: gettextf("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s",     what, format(cwhere), format(E <- environment()), format(parent.env(E)))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid ""
 "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
 "E := environment(): %s; parent.env(E): %s"
-msgstr "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);"
+msgstr ""
+"Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
+"E := environment(): %s; parent.env(E): %s"
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
 #: R/RClassUtils.R:0
@@ -366,7 +366,7 @@ msgstr "Methods inserted for function %s(): %s"
 #. R/RMethodUtils.R: gettextf("Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information",     sQuote(fdef@generic))
 #: R/RMethodUtils.R:0
 msgid "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
-msgstr ""
+msgstr "Methods list objects are not maintained in this version of R:  request for function %s may return incorrect information"
 
 #. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]),     collapse = ", "))
 #: R/refClass.R:0
@@ -1141,9 +1141,8 @@ msgstr "invalid 'source' argument: expected file names or a connection but got a
 
 #. R/oldClass.R: gettextf("invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s",     paste0("\"", bad, "\"", collapse = ", "))
 #: R/oldClass.R:0
-#, fuzzy
 msgid "invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s"
-msgstr "invalid S4 class corresponding to S3 class: slots in  S4 version must extend corresponding slots in S3 version: fails for %s"
+msgstr "invalid S4 class corresponding to S3 class: slots in S4 version must extend corresponding slots in S3 version: fails for %s"
 
 #. R/Methods.R: gettextf("invalid argument 'name': %s", .isSingleName(name))
 #: R/Methods.R:0
@@ -1197,9 +1196,8 @@ msgstr "invalid method definition: expected a function, got an object of class %
 
 #. R/methodsTable.R: gettextf("invalid method element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)",     sQuote(classes[[j]]), i, dQuote(class(el)))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "invalid method element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)"
-msgstr "invalid mlist element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)"
+msgstr "invalid method element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)"
 
 #. R/methodsTable.R: stop("invalid methods table request")
 #: R/methodsTable.R:0
@@ -1553,7 +1551,7 @@ msgstr "no suitable arguments to dispatch methods in this function"
 #. R/RMethodUtils.R: gettext("non-empty string; got \"\"")
 #: R/RMethodUtils.R:0
 msgid "non-empty string; got \"\""
-msgstr ""
+msgstr "non-empty string; got \"\""
 
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 #: R/RMethodUtils.R:0
@@ -1709,9 +1707,8 @@ msgstr "signatures differ:  (%s), (%s)"
 
 #. R/RMethodUtils.R: gettextf("single string; got a character vector of length %s",     length(what))
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "single string; got a character vector of length %s"
-msgstr "single string; got an object of class %s"
+msgstr "single string; got a character vector of length %s"
 
 #. R/RMethodUtils.R: gettextf("single string; got an object of class %s", dQuote(class(what)[[1L]]))
 #: R/RMethodUtils.R:0
@@ -1949,9 +1946,8 @@ msgstr "unable to find an inherited method for function %s for signature %s"
 
 #. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid "unable to load required package %s"
-msgstr "unable to find required package %s"
+msgstr "unable to load required package %s"
 
 #. R/as.R: stop("undefined 'coerce' method")
 #: R/as.R:0

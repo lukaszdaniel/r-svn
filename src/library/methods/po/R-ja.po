@@ -1,18 +1,19 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 2.5.0 \n"
+"Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-15 11:12\n"
-"PO-Revision-Date: 2015-03-27 14:52+0900 \n"
-"Last-Translator: Masafumi  \n"
-"Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp> \n"
-"Language: ja \n"
-"MIME-Version: 1.0 \n"
-"Content-Type: text/plain; charset=UTF-8 \n"
-"Content-Transfer-Encoding: 8bit \n"
-"Plural-Forms: nplurals=1; plural=0; \n"
-"X-Generator: Pootle 2.5.1.1 \n"
-"X-POOTLE-MTIME: 1427435556.000000 \n"
+"PO-Revision-Date: 2025-07-06 15:40+0200\n"
+"Last-Translator: Masafumi\n"
+"Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.6\n"
+"X-POOTLE-MTIME: 1427435556.000000\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
@@ -809,7 +810,8 @@ msgstr "クラス %s はクラスのユニオンです: クラスユニオンに
 #: R/is.R:0
 #, fuzzy
 msgid "class %s is defined (with package slot %s) but no metadata object found to revise %s information---not imported?  Making a copy in package %s"
-msgstr "クラス %s が（パッケージスロット %s とともに) 定義されていますが、%s の情報を改訂するためのメタデータオブジェクトがありません。エクスポートされていないのでは？  パッケージ %s 中にコピーを作成します"
+msgstr ""
+"クラス %s が（パッケージスロット %s とともに) 定義されていますが、%s の情報を改訂するためのメタデータオブジェクトがありません。エクスポートされていないのでは？  パッケージ %s 中にコピーを作成します"
 
 #. R/refClass.R: gettextf("class %s is defined but is not a reference class",     dQuote(Class))
 #: R/refClass.R:0
@@ -1639,7 +1641,9 @@ msgstr "オブジェクトは %s 型ではなく、クラス %s の有効なデ�
 #. R/MethodsList.R: gettextf("object to use as a method signature for function %s does not look like a legitimate signature (a vector of single class names): there were %d class names, but %d elements in the signature object",     sQuote(fun@generic), length(sigClasses), length(signature))
 #: R/MethodsList.R:0
 msgid "object to use as a method signature for function %s does not look like a legitimate signature (a vector of single class names): there were %d class names, but %d elements in the signature object"
-msgstr "関数 %s に対するメソッドシグナチャとして使用しようとしているオブジェクトは正しいシグナチャ (単一のクラス名のリスト) のようには見えません: %d 個のクラス名がありましたが、シグナチャオブジェクトには %d 個の要素があります"
+msgstr ""
+"関数 %s に対するメソッドシグナチャとして使用しようとしているオブジェクトは正しいシグナチャ (単一のクラス名のリスト) のようには見えません: %d 個のクラス名がありましたが、シグナチャオブジェクトには %d "
+"個の要素があります"
 
 #. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[[1L]])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
 #: R/trace.R:0

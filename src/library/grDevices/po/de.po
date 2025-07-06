@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 08:23+0200\n"
-"PO-Revision-Date: 2024-03-18 21:18+0000\n"
+"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"PO-Revision-Date: 2025-07-06 15:31+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
 "Language: de\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: axis_scales.cpp:41 axis_scales.cpp:42 axis_scales.cpp:54
 #, c-format
@@ -82,8 +83,8 @@ msgstr "unzulässige HSV Farbe"
 msgid "invalid hcl color"
 msgstr "unzulässige HCL Farbe"
 
-#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#: colors.cpp:401 devWindows.cpp:3736 devWindows.cpp:3744 devWindows.cpp:3759
+#: devWindows.cpp:3766 devWindows.cpp:3775 cairo/cairoBM.cpp:622
 #, c-format
 msgid "invalid '%s' value"
 msgstr "unzulässiger '%s' Wert"
@@ -285,11 +286,11 @@ msgstr "Speichern der Gerätekodierung fehlgeschlagen"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "Objekt '.ps.prolog' ist keine Zeichenkette"
 
-#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:790
+#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:791
 msgid "invalid line end"
 msgstr "unzulässiges Zeilenende"
 
-#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:803
+#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:804
 msgid "invalid line join"
 msgstr "unzulässige Zeilenverbindung"
 
@@ -303,8 +304,8 @@ msgstr "unzulässige Zeilenkappung"
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "Versuch den unzulässigen Zeichensatz %d zu benutzen, nutze stattdessen Zeichensatz 1"
 
-#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
-#: devWindows.cpp:1864 devWindows.cpp:1896
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1798 devWindows.cpp:1835
+#: devWindows.cpp:1865 devWindows.cpp:1897
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "Dateiname im Aufruf von %s() zu lang"
@@ -353,7 +354,7 @@ msgstr "'postscript(print.it=TRUE)' mit leerem 'print' Befehl benutzt"
 msgid "invalid page type '%s' (postscript)"
 msgstr "ungültiger Seitentyp '%s' (postscript)"
 
-#: devPS.cpp:3599 devWindows.cpp:2326
+#: devPS.cpp:3599 devWindows.cpp:2330
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "Semi-Transparenz ist für dieses Gerät nicht unterstützt; nur eine Meldung pro Seite"
 
@@ -645,7 +646,7 @@ msgid "invalid 'fonts' parameter in %s"
 msgstr "ungültiger 'fonts' Parameter in %s"
 
 #: devPS.cpp:9932 devPS.cpp:10030 devPicTeX.cpp:779 devPicTeX.cpp:784
-#: devWindows.cpp:3812
+#: devWindows.cpp:3816
 #, c-format
 msgid "unable to start %s() device"
 msgstr "kann %s()-Gerät nicht starten"
@@ -851,147 +852,147 @@ msgstr "unzulässige Zeichensatzspezifikation"
 msgid "font family not found in Windows font database"
 msgstr "Zeichensatzfamilie in der Windows Zeichensatzdatenbank nicht gefunden"
 
-#: devWindows.cpp:713
+#: devWindows.cpp:714
 msgid "unable to set or substitute a suitable font"
 msgstr ""
 
-#: devWindows.cpp:718
+#: devWindows.cpp:719
 #, fuzzy
 msgid "unable to set font: using Arial"
 msgstr "kann Kodierung '%s' nicht nutzen"
 
-#: devWindows.cpp:1078
+#: devWindows.cpp:1079
 msgid "plot history seems corrupted"
 msgstr "Grafikhistorie scheint beschädigt"
 
-#: devWindows.cpp:1085
+#: devWindows.cpp:1086
 msgid "no plot history!"
 msgstr "keine Plot-Historie"
 
-#: devWindows.cpp:1563
+#: devWindows.cpp:1564
 #, fuzzy
 msgid "unable to open window"
 msgstr "kann Datei '%s' nicht zum Schreiben öffnen"
 
-#: devWindows.cpp:1790
+#: devWindows.cpp:1791
 #, fuzzy
 msgid "unable to open printer"
 msgstr "kann Rasterimage nicht allozieren"
 
-#: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
+#: devWindows.cpp:1803 devWindows.cpp:1838 devWindows.cpp:1868
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d'sind unwahrscheinliche Pixelzahlen"
 
-#: devWindows.cpp:1810 devWindows.cpp:1815 devWindows.cpp:1840
-#: devWindows.cpp:1845 devWindows.cpp:1870 devWindows.cpp:1875
+#: devWindows.cpp:1811 devWindows.cpp:1816 devWindows.cpp:1841
+#: devWindows.cpp:1846 devWindows.cpp:1871 devWindows.cpp:1876
 msgid "unable to allocate bitmap"
 msgstr "kann Bitmap nicht allozieren"
 
-#: devWindows.cpp:1821 devWindows.cpp:1851 devWindows.cpp:2172
+#: devWindows.cpp:1822 devWindows.cpp:1852 devWindows.cpp:2173
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "kann Datei '%s' nicht zum Schreiben öffnen"
 
-#: devWindows.cpp:1892
+#: devWindows.cpp:1893
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
 msgstr "Dateiname zu lang in win.metafile() Aufruf"
 
-#: devWindows.cpp:1907
+#: devWindows.cpp:1908
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "kann Metafile '%s' nicht zum Schreiben öffnen"
 
-#: devWindows.cpp:1909
+#: devWindows.cpp:1910
 msgid "unable to open clipboard to write metafile"
 msgstr "kann die Zwischenablage nicht zum Schreiben eines Metafiles öffnen"
 
-#: devWindows.cpp:2120
+#: devWindows.cpp:2121
 msgid "Insufficient memory for resize. Killing device"
 msgstr "Zu wenig Speicher für Größenänderung. Schalte Gerät ab."
 
-#: devWindows.cpp:2128
+#: devWindows.cpp:2129
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "Zu wenig Speicher für Größenänderung. Schalte Alpha-Blending ab."
 
-#: devWindows.cpp:2157
+#: devWindows.cpp:2158
 msgid "a clipboard metafile can store only one figure."
 msgstr "ein Zwischenablagemetafile kann nur eine Grafik speichern."
 
-#: devWindows.cpp:2163
+#: devWindows.cpp:2164
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "Das Metafile '%s' kann nicht erzeugt werden"
 
-#: devWindows.cpp:3165 devWindows.cpp:3835
+#: devWindows.cpp:3169 devWindows.cpp:3839
 msgid "R Graphics"
 msgstr "R Grafiken"
 
-#: devWindows.cpp:3178
+#: devWindows.cpp:3182
 msgid "attempt to use the locator after dev.hold()"
 msgstr "Versuch den Lokator zu nutzen nach Aufruf von dev.hold()"
 
-#: devWindows.cpp:3204
+#: devWindows.cpp:3208
 msgid "graphics device closed during call to locator or identify"
 msgstr "Grafikdevice wurde während eines Aufrufs von locator oder identify geschlossen"
 
-#: devWindows.cpp:3304
+#: devWindows.cpp:3308
 msgid "allocation failed in GADeviceDriver"
 msgstr ""
 
-#: devWindows.cpp:3349
+#: devWindows.cpp:3353
 msgid "opening device failed"
 msgstr ""
 
-#: devWindows.cpp:3480
+#: devWindows.cpp:3484
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "Option 'windowsTimeouts' sollte ganzzahlig sein"
 
-#: devWindows.cpp:3501
+#: devWindows.cpp:3505
 msgid "invalid device number in 'savePlot'"
 msgstr "unzulässige Gerätenummer in 'savePlot'"
 
-#: devWindows.cpp:3503
+#: devWindows.cpp:3507
 msgid "invalid device in 'savePlot'"
 msgstr "unzulässiges Gerät in 'savePlot'"
 
-#: devWindows.cpp:3506
+#: devWindows.cpp:3510
 msgid "invalid filename argument in 'savePlot'"
 msgstr "unzulässiges Dateinamenargument in 'savePlot'"
 
-#: devWindows.cpp:3511
+#: devWindows.cpp:3515
 msgid "invalid type argument in 'savePlot'"
 msgstr "unzulässiges Typ Argument in 'savePlot'"
 
-#: devWindows.cpp:3538
+#: devWindows.cpp:3542
 msgid "unknown type in savePlot"
 msgstr "unbekannter Typ in savePlot"
 
-#: devWindows.cpp:3583 devWindows.cpp:3625 devWindows.cpp:3650
-#: devWindows.cpp:3677 devWindows.cpp:3698
+#: devWindows.cpp:3587 devWindows.cpp:3629 devWindows.cpp:3654
+#: devWindows.cpp:3681 devWindows.cpp:3702
 msgid "processing of the plot ran out of memory"
 msgstr "Bei Bearbeitung der Grafik ging der Speicher aus"
 
-#: devWindows.cpp:3594
+#: devWindows.cpp:3598
 #, fuzzy
 msgid "Not enough memory to create error message."
 msgstr "Nicht genug Hauptspeicher um das Grafikfenster zu kopieren"
 
-#: devWindows.cpp:3596
+#: devWindows.cpp:3600
 msgid "Impossible to open "
 msgstr "Kann nicht öffnen "
 
-#: devWindows.cpp:3725
+#: devWindows.cpp:3729
 msgid "invalid 'width' or 'height'"
 msgstr "unzulässige 'with' oder 'height'"
 
-#: devWindows.cpp:3921
+#: devWindows.cpp:3925
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
 msgstr "Nicht genug Hauptspeicher um das Grafikfenster zu kopieren"
 
-#: devWindows.cpp:3962
+#: devWindows.cpp:3966
 #, fuzzy
 msgid "unable to load winCairo.dll: was it built?"
 msgstr "Kann winCairo.dll nicht laden: wurde sie erstellt?"

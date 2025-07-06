@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-12 17:52+0200\n"
-"PO-Revision-Date: 2018-09-16 23:38+0800\n"
+"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"PO-Revision-Date: 2025-07-06 15:37+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -17,6 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: gpar.cpp:634
 msgid "updateGContext must only be called after initGContext"
@@ -125,64 +127,64 @@ msgstr "無法保留 'grid' 的狀況。是不是因為您開啟了太多的裝�
 msgid "Cannot create unit scalar from 0-length unit vector"
 msgstr ""
 
-#: unit.cpp:806 unit.cpp:1305
+#: unit.cpp:806 unit.cpp:1315
 msgid "invalid unit or unit not yet implemented"
 msgstr "要麼不明的單元，要麼這個單位目前沒有被實作"
 
-#: unit.cpp:1362 unit.cpp:1393
+#: unit.cpp:1268 unit.cpp:1372 unit.cpp:1403
 msgid "Viewport has zero dimension(s)"
 msgstr "檢視區的維度不可為零"
 
-#: unit.cpp:1425 unit.cpp:1440 unit.cpp:1455 unit.cpp:1470
+#: unit.cpp:1435 unit.cpp:1450 unit.cpp:1465 unit.cpp:1480
 msgid "Unsupported unit conversion"
 msgstr "不支援的單元轉換"
 
-#: unit.cpp:1562
+#: unit.cpp:1572
 msgid "Invalid unit"
 msgstr "單元無效"
 
-#: unit.cpp:1577
+#: unit.cpp:1587
 msgid "'units' must be character"
 msgstr "'units' 必須是字元"
 
-#: unit.cpp:1580
+#: unit.cpp:1590
 #, fuzzy, c-format
 msgid "'%s' must be of length > 0"
 msgstr "'units' 的長度必須大於零"
 
-#: unit.cpp:1591
+#: unit.cpp:1601
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
 msgstr ""
 
-#: unit.cpp:1603
+#: unit.cpp:1613
 msgid "no string supplied for 'strwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1607
+#: unit.cpp:1617
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1625
+#: unit.cpp:1635
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr ""
 
-#: unit.cpp:1630
+#: unit.cpp:1640
 msgid "non-NULL value supplied for plain unit"
 msgstr ""
 
-#: unit.cpp:1683 unit.cpp:1717 unit.cpp:1766
+#: unit.cpp:1693 unit.cpp:1727 unit.cpp:1776
 msgid "old version of unit class is no longer allowed"
 msgstr ""
 
-#: unit.cpp:1689
+#: unit.cpp:1699
 msgid "object is not coercible to a unit"
 msgstr ""
 
-#: unit.cpp:1715
+#: unit.cpp:1725
 msgid "object is not a unit"
 msgstr ""
 
-#: unit.cpp:1850
+#: unit.cpp:1860
 msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 

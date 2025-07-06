@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-20 10:44\n"
-"PO-Revision-Date: 2024-01-30 03:05+0000\n"
+"PO-Revision-Date: 2025-07-06 15:00+0200\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -11,7 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -232,8 +233,8 @@ msgstr "'%s' must be logical"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
+#: R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
 msgstr "'by' must be of length 1"
@@ -1816,9 +1817,8 @@ msgstr "input has been corrupted, with LF replaced by CR"
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
-#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
-#: R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
+#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "invalid 'name' argument"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 08:23+0200\n"
-"PO-Revision-Date: 2023-04-22 22:07+0200\n"
+"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"PO-Revision-Date: 2025-07-06 15:31+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
 "Language: da\n"
@@ -15,7 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: axis_scales.cpp:41 axis_scales.cpp:42 axis_scales.cpp:54
 #, c-format
@@ -82,8 +83,8 @@ msgstr ""
 msgid "invalid hcl color"
 msgstr ""
 
-#: colors.cpp:401 devWindows.cpp:3732 devWindows.cpp:3740 devWindows.cpp:3755
-#: devWindows.cpp:3762 devWindows.cpp:3771 cairo/cairoBM.cpp:622
+#: colors.cpp:401 devWindows.cpp:3736 devWindows.cpp:3744 devWindows.cpp:3759
+#: devWindows.cpp:3766 devWindows.cpp:3775 cairo/cairoBM.cpp:622
 #, fuzzy, c-format
 msgid "invalid '%s' value"
 msgstr "ugyldigt 'fil'-argument"
@@ -292,12 +293,12 @@ msgstr "Kunne ikke optage enhedskodning"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "Object.ps.prolog er ikke en tegnvektor"
 
-#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:790
+#: devPS.cpp:2753 devPS.cpp:7429 devWindows.cpp:791
 #, fuzzy
 msgid "invalid line end"
 msgstr "Ugyldig linjeafslutning"
 
-#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:803
+#: devPS.cpp:2772 devPS.cpp:7449 devWindows.cpp:804
 #, fuzzy
 msgid "invalid line join"
 msgstr "Ugyldig linjeforbindelse"
@@ -317,8 +318,8 @@ msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "forsøg på at bruge ugyldig skrifttype %d erstattet af skrifttype 1"
 
 # 83%
-#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1797 devWindows.cpp:1834
-#: devWindows.cpp:1864 devWindows.cpp:1896
+#: devPS.cpp:3219 devPS.cpp:6832 devWindows.cpp:1798 devWindows.cpp:1835
+#: devWindows.cpp:1865 devWindows.cpp:1897
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "filnavn er for langt i %s()-kald"
@@ -371,7 +372,7 @@ msgstr "postscript(print.it=TRUE) brugt med en tom print-kommando"
 msgid "invalid page type '%s' (postscript)"
 msgstr "ugyldig sidetype '%s' (postscript)"
 
-#: devPS.cpp:3599 devWindows.cpp:2326
+#: devPS.cpp:3599 devWindows.cpp:2330
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "semitransparens er ikke understøttet på denne enhed: kun rapporteret en gang per side"
 
@@ -679,7 +680,7 @@ msgstr "ugyldigt 'fonts'-parameter i %s"
 
 # 85%
 #: devPS.cpp:9932 devPS.cpp:10030 devPicTeX.cpp:779 devPicTeX.cpp:784
-#: devWindows.cpp:3812
+#: devWindows.cpp:3816
 #, c-format
 msgid "unable to start %s() device"
 msgstr "kan ikke starte %s()-enhed"
@@ -882,152 +883,152 @@ msgstr "Ugyldig skriftspecifikation"
 msgid "font family not found in Windows font database"
 msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
 
-#: devWindows.cpp:713
+#: devWindows.cpp:714
 msgid "unable to set or substitute a suitable font"
 msgstr ""
 
-#: devWindows.cpp:718
+#: devWindows.cpp:719
 #, fuzzy
 msgid "unable to set font: using Arial"
 msgstr "kan ikke bruge kodning '%s'"
 
-#: devWindows.cpp:1078
+#: devWindows.cpp:1079
 msgid "plot history seems corrupted"
 msgstr "plot-historik ser ud til at være ødelagt"
 
-#: devWindows.cpp:1085
+#: devWindows.cpp:1086
 msgid "no plot history!"
 msgstr "ingen plot-historik!"
 
-#: devWindows.cpp:1563
+#: devWindows.cpp:1564
 #, fuzzy
 msgid "unable to open window"
 msgstr "Kan ikke åbne fil '%s' for skrivning"
 
-#: devWindows.cpp:1790
+#: devWindows.cpp:1791
 #, fuzzy
 msgid "unable to open printer"
 msgstr "Kan ikke allokere raster-billede"
 
-#: devWindows.cpp:1802 devWindows.cpp:1837 devWindows.cpp:1867
+#: devWindows.cpp:1803 devWindows.cpp:1838 devWindows.cpp:1868
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'bredde=%d, højde=%d' er usandsynlige værdier i billedpunkter"
 
-#: devWindows.cpp:1810 devWindows.cpp:1815 devWindows.cpp:1840
-#: devWindows.cpp:1845 devWindows.cpp:1870 devWindows.cpp:1875
+#: devWindows.cpp:1811 devWindows.cpp:1816 devWindows.cpp:1841
+#: devWindows.cpp:1846 devWindows.cpp:1871 devWindows.cpp:1876
 #, fuzzy
 msgid "unable to allocate bitmap"
 msgstr "Kan ikke allokere bitmap"
 
-#: devWindows.cpp:1821 devWindows.cpp:1851 devWindows.cpp:2172
+#: devWindows.cpp:1822 devWindows.cpp:1852 devWindows.cpp:2173
 #, fuzzy, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "Kan ikke åbne fil '%s' for skrivning"
 
-#: devWindows.cpp:1892
+#: devWindows.cpp:1893
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
 msgstr "filnavn for langt i win.metafile()-kald"
 
-#: devWindows.cpp:1907
+#: devWindows.cpp:1908
 #, fuzzy, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "Kan ikke åben metafil '%s' for skrivning"
 
-#: devWindows.cpp:1909
+#: devWindows.cpp:1910
 #, fuzzy
 msgid "unable to open clipboard to write metafile"
 msgstr "Kan ikke åbne udklipsholder for at skrive metafil"
 
-#: devWindows.cpp:2120
+#: devWindows.cpp:2121
 msgid "Insufficient memory for resize. Killing device"
 msgstr "Ikke nok hukommelse for ændring af størrelse. Dræber enhed"
 
-#: devWindows.cpp:2128
+#: devWindows.cpp:2129
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "Ikke nok hukommelse for at ændre størrelse. Deaktiverer alfablanding"
 
-#: devWindows.cpp:2157
+#: devWindows.cpp:2158
 #, fuzzy
 msgid "a clipboard metafile can store only one figure."
 msgstr "En metafil for udklipsholderen kan kun lagre en figur."
 
 # 76%
-#: devWindows.cpp:2163
+#: devWindows.cpp:2164
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "metafilfil '%s' kunne ikke oprettes"
 
-#: devWindows.cpp:3165 devWindows.cpp:3835
+#: devWindows.cpp:3169 devWindows.cpp:3839
 msgid "R Graphics"
 msgstr "R-grafik"
 
-#: devWindows.cpp:3178
+#: devWindows.cpp:3182
 msgid "attempt to use the locator after dev.hold()"
 msgstr "forsøg på at bruge afgrænseren efter dev.hold()"
 
-#: devWindows.cpp:3204
+#: devWindows.cpp:3208
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: devWindows.cpp:3304
+#: devWindows.cpp:3308
 msgid "allocation failed in GADeviceDriver"
 msgstr ""
 
-#: devWindows.cpp:3349
+#: devWindows.cpp:3353
 msgid "opening device failed"
 msgstr ""
 
-#: devWindows.cpp:3480
+#: devWindows.cpp:3484
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "tilvalg 'windows Timeouts' skal være et heltal"
 
-#: devWindows.cpp:3501
+#: devWindows.cpp:3505
 msgid "invalid device number in 'savePlot'"
 msgstr "ugyldigt enhedstal i 'savePlot'"
 
-#: devWindows.cpp:3503
+#: devWindows.cpp:3507
 msgid "invalid device in 'savePlot'"
 msgstr "ugyldig enhed i 'savePlot'"
 
-#: devWindows.cpp:3506
+#: devWindows.cpp:3510
 #, fuzzy
 msgid "invalid filename argument in 'savePlot'"
 msgstr "ugyldigt filnavnsargument i savePlot"
 
-#: devWindows.cpp:3511
+#: devWindows.cpp:3515
 msgid "invalid type argument in 'savePlot'"
 msgstr "ugyldigt typeargument i 'savePlot'"
 
-#: devWindows.cpp:3538
+#: devWindows.cpp:3542
 msgid "unknown type in savePlot"
 msgstr "ukendt type i savePlot"
 
-#: devWindows.cpp:3583 devWindows.cpp:3625 devWindows.cpp:3650
-#: devWindows.cpp:3677 devWindows.cpp:3698
+#: devWindows.cpp:3587 devWindows.cpp:3629 devWindows.cpp:3654
+#: devWindows.cpp:3681 devWindows.cpp:3702
 msgid "processing of the plot ran out of memory"
 msgstr "behandlingem af plottet løb tør for hukommelse"
 
-#: devWindows.cpp:3594
+#: devWindows.cpp:3598
 #, fuzzy
 msgid "Not enough memory to create error message."
 msgstr "Ikke nok hukommelse til at kopiere grafikvindue"
 
-#: devWindows.cpp:3596
+#: devWindows.cpp:3600
 msgid "Impossible to open "
 msgstr "Umulig at åbne "
 
-#: devWindows.cpp:3725
+#: devWindows.cpp:3729
 msgid "invalid 'width' or 'height'"
 msgstr "ugyldig 'bredde' eller 'højde'"
 
-#: devWindows.cpp:3921
+#: devWindows.cpp:3925
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
 msgstr "Ikke nok hukommelse til at kopiere grafikvindue"
 
-#: devWindows.cpp:3962
+#: devWindows.cpp:3966
 #, fuzzy
 msgid "unable to load winCairo.dll: was it built?"
 msgstr "Kan ikke indlæse winCairo.dll: blev den bygget?"

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-20 10:44\n"
-"PO-Revision-Date: 2012-01-28 01:18+0200\n"
+"PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -11,7 +11,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.1.6\n"
+"X-Generator: Poedit 3.6\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/xtabs.R: gettextf("%s applies only to two-way tables", "xtabs(*, sparse=TRUE)")
 #: R/xtabs.R:0
@@ -549,7 +550,7 @@ msgstr "»acf« skal have længden to eller længere"
 msgid "'model' must be list"
 msgstr "»lag.max« skal være mindst 0"
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/model.tables.R: stop("'model.tables' is not implemented for multiple responses")
 #: R/model.tables.R:0
 #, fuzzy
@@ -738,7 +739,7 @@ msgstr ""
 msgid "'probs' outside [0,1]"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
 #, fuzzy
@@ -817,7 +818,7 @@ msgstr ""
 msgid "'scores' must all be different numbers"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/ar.R: warning("'se.fit' not yet implemented for multivariate models")
 #: R/ar.R:0
 #, fuzzy
@@ -1445,7 +1446,7 @@ msgstr ""
 msgid "MA part of model is not invertible"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/ar.R: stop("MLE only implemented for univariate series")
 #: R/ar.R:0
 #, fuzzy
@@ -3526,7 +3527,7 @@ msgstr ""
 msgid "only 1-4 predictors are allowed"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/StructTS.R: stop("only implemented for univariate time series")
 #. R/arima.R: stop("only implemented for univariate time series")
 #. R/arma0.R: stop("only implemented for univariate time series")
@@ -3716,7 +3717,7 @@ msgstr ""
 msgid "samples differ in location: cannot compute confidence set, returning NA"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/ts.R: stop("scatter plots only for univariate time series")
 #: R/ts.R:0
 #, fuzzy
@@ -3767,7 +3768,7 @@ msgstr ""
 msgid "setting df = 1 __use with care!__"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/lm.R: stop("simulate() is not yet implemented for multivariate lm()")
 #: R/lm.R:0
 #, fuzzy
@@ -4463,7 +4464,7 @@ msgstr ""
 msgid "wrong number of contrast matrix rows"
 msgstr ""
 
-# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable. 
+# In mathematics, univariate refers to an expression, equation, function or polynomial of only one variable.
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
 #, fuzzy

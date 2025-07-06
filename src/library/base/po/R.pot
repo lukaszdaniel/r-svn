@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-30 22:49+0200\n"
+"POT-Creation-Date: 2025-07-06 11:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -191,24 +191,24 @@ msgstr ""
 #: src/main/objects.cpp:1800 src/main/objects.cpp:1802 src/main/paste.cpp:152
 #: src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
 #: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526
-#: src/main/paste.cpp:710 src/main/paste.cpp:715 src/main/platform.cpp:348
-#: src/main/platform.cpp:350 src/main/platform.cpp:352
-#: src/main/platform.cpp:364 src/main/platform.cpp:375
-#: src/main/platform.cpp:453 src/main/platform.cpp:455
-#: src/main/platform.cpp:749 src/main/platform.cpp:751
-#: src/main/platform.cpp:849 src/main/platform.cpp:1578
-#: src/main/platform.cpp:1584 src/main/platform.cpp:1661
-#: src/main/platform.cpp:1741 src/main/platform.cpp:1809
-#: src/main/platform.cpp:1812 src/main/platform.cpp:2067
-#: src/main/platform.cpp:2114 src/main/platform.cpp:2162
-#: src/main/platform.cpp:2198 src/main/platform.cpp:2200
-#: src/main/platform.cpp:2286 src/main/platform.cpp:2383
-#: src/main/platform.cpp:2650 src/main/platform.cpp:2708
-#: src/main/platform.cpp:2912 src/main/platform.cpp:2915
-#: src/main/platform.cpp:3162 src/main/platform.cpp:3165
-#: src/main/platform.cpp:3172 src/main/platform.cpp:3259
-#: src/main/platform.cpp:3301 src/main/platform.cpp:3345
-#: src/main/platform.cpp:3434 src/main/print.cpp:304 src/main/random.cpp:482
+#: src/main/paste.cpp:710 src/main/paste.cpp:715 src/main/platform.cpp:352
+#: src/main/platform.cpp:354 src/main/platform.cpp:356
+#: src/main/platform.cpp:368 src/main/platform.cpp:379
+#: src/main/platform.cpp:457 src/main/platform.cpp:459
+#: src/main/platform.cpp:753 src/main/platform.cpp:755
+#: src/main/platform.cpp:853 src/main/platform.cpp:1582
+#: src/main/platform.cpp:1588 src/main/platform.cpp:1665
+#: src/main/platform.cpp:1745 src/main/platform.cpp:1813
+#: src/main/platform.cpp:1816 src/main/platform.cpp:2071
+#: src/main/platform.cpp:2118 src/main/platform.cpp:2166
+#: src/main/platform.cpp:2202 src/main/platform.cpp:2204
+#: src/main/platform.cpp:2290 src/main/platform.cpp:2387
+#: src/main/platform.cpp:2654 src/main/platform.cpp:2712
+#: src/main/platform.cpp:2916 src/main/platform.cpp:2919
+#: src/main/platform.cpp:3166 src/main/platform.cpp:3169
+#: src/main/platform.cpp:3176 src/main/platform.cpp:3263
+#: src/main/platform.cpp:3305 src/main/platform.cpp:3349
+#: src/main/platform.cpp:3438 src/main/print.cpp:304 src/main/random.cpp:482
 #: src/main/random.cpp:485 src/main/random.cpp:494 src/main/random.cpp:522
 #: src/main/Rdynload.cpp:1428 src/main/saveload.cpp:2066
 #: src/main/saveload.cpp:2101 src/main/saveload.cpp:2104
@@ -260,7 +260,7 @@ msgid "'%s' must be a character vector"
 msgstr ""
 
 #: src/gnuwin32/extra.cpp:766 src/main/errors.cpp:1277 src/main/errors.cpp:1279
-#: src/main/options.cpp:484 src/main/unique.cpp:2213
+#: src/main/options.cpp:489 src/main/unique.cpp:2213
 #: src/modules/lapack/Lapack.cpp:118 src/modules/lapack/Lapack.cpp:354
 #: src/modules/lapack/Lapack.cpp:383 src/modules/lapack/Lapack.cpp:434
 #: src/modules/lapack/Lapack.cpp:435 src/modules/lapack/Lapack.cpp:471
@@ -294,7 +294,7 @@ msgstr ""
 msgid "Windows 2000 or later is required"
 msgstr ""
 
-#: src/gnuwin32/extra.cpp:1133 src/main/platform.cpp:1784
+#: src/gnuwin32/extra.cpp:1133 src/main/platform.cpp:1788
 msgid "file choice cancelled"
 msgstr ""
 
@@ -368,39 +368,39 @@ msgid ""
 "unset R_Tcl_do"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:141 src/main/sysutils.cpp:2929
+#: src/gnuwin32/system.cpp:159 src/main/sysutils.cpp:2929
 msgid "reached session elapsed time limit"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:143 src/main/sysutils.cpp:2931
+#: src/gnuwin32/system.cpp:161 src/main/sysutils.cpp:2931
 msgid "reached elapsed time limit"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:149 src/main/sysutils.cpp:2937
+#: src/gnuwin32/system.cpp:167 src/main/sysutils.cpp:2937
 msgid "reached session CPU time limit"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:151 src/main/sysutils.cpp:2939
+#: src/gnuwin32/system.cpp:169 src/main/sysutils.cpp:2939
 msgid "reached CPU time limit"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:182 src/unix/sys-std.cpp:89
+#: src/gnuwin32/system.cpp:200 src/unix/sys-std.cpp:89
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:453 src/unix/sys-std.cpp:1027
+#: src/gnuwin32/system.cpp:470 src/unix/sys-std.cpp:1027
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:466 src/unix/sys-std.cpp:1040
+#: src/gnuwin32/system.cpp:483 src/unix/sys-std.cpp:1040
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
-#: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
+#: src/gnuwin32/system.cpp:720 src/gnuwin32/system.cpp:1272
+#: src/gnuwin32/system.cpp:1284 src/main/connections.cpp:915
 #: src/main/connections.cpp:920 src/main/dounzip.cpp:239
 #: src/main/saveload.cpp:2110 src/main/serialize.cpp:3060
 #: src/main/serialize.cpp:3065 src/main/serialize.cpp:3159
@@ -409,17 +409,17 @@ msgstr ""
 msgid "cannot open file '%s': %s"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:718
+#: src/gnuwin32/system.cpp:735
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:883 src/gnuwin32/system.cpp:1096
+#: src/gnuwin32/system.cpp:900 src/gnuwin32/system.cpp:1113
 #: src/gnuwin32/front-ends/rcmdfn.cpp:205
 msgid "Invalid R_HOME"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:886 src/gnuwin32/system.cpp:902
+#: src/gnuwin32/system.cpp:903 src/gnuwin32/system.cpp:919
 #: src/gnuwin32/front-ends/rcmdfn.cpp:265
 #: src/gnuwin32/front-ends/rcmdfn.cpp:351
 #: src/gnuwin32/front-ends/rcmdfn.cpp:414
@@ -427,60 +427,60 @@ msgstr ""
 msgid "Allocation error"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:972
+#: src/gnuwin32/system.cpp:989
 msgid "allocation failure in reading Renviron"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1046 src/unix/system.cpp:131
+#: src/gnuwin32/system.cpp:1063 src/unix/system.cpp:131
 msgid "WARNING: invalid R_HISTSIZE ignored;"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1058
+#: src/gnuwin32/system.cpp:1075
 msgid "Not enough memory"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1074 src/unix/system.cpp:468
+#: src/gnuwin32/system.cpp:1091 src/unix/system.cpp:468
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1245
+#: src/gnuwin32/system.cpp:1262
 #, c-format
 msgid "option '%s' requires an argument"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1278
+#: src/gnuwin32/system.cpp:1295
 #, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1286 src/unix/system.cpp:451
+#: src/gnuwin32/system.cpp:1303 src/unix/system.cpp:451
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1290 src/unix/system.cpp:464
+#: src/gnuwin32/system.cpp:1307 src/unix/system.cpp:464
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1303 src/unix/system.cpp:479
+#: src/gnuwin32/system.cpp:1320 src/unix/system.cpp:479
 msgid "cannot use -e with -f or --file"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1327
+#: src/gnuwin32/system.cpp:1344
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1331
+#: src/gnuwin32/system.cpp:1348
 msgid "fwrite error in cmdlineoptions"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1353 src/unix/system.cpp:552
+#: src/gnuwin32/system.cpp:1370 src/unix/system.cpp:552
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1385
+#: src/gnuwin32/system.cpp:1402
 msgid ""
 "impossible to create 'reader thread'; you must free some system resources"
 msgstr ""
@@ -1686,7 +1686,15 @@ msgstr ""
 #: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
 #: src/main/dotcode.cpp:235 src/main/errors.cpp:1169 src/main/errors.cpp:1191
 #: src/main/errors.cpp:1309 src/main/errors.cpp:1316 src/main/errors.cpp:1579
-#: src/main/errors.cpp:2250 src/main/platform.cpp:3859 src/main/seq.cpp:275
+#: src/main/errors.cpp:2250 src/main/options.cpp:498 src/main/options.cpp:653
+#: src/main/options.cpp:661 src/main/options.cpp:667 src/main/options.cpp:675
+#: src/main/options.cpp:682 src/main/options.cpp:687 src/main/options.cpp:694
+#: src/main/options.cpp:704 src/main/options.cpp:719 src/main/options.cpp:725
+#: src/main/options.cpp:730 src/main/options.cpp:739 src/main/options.cpp:748
+#: src/main/options.cpp:763 src/main/options.cpp:773 src/main/options.cpp:787
+#: src/main/options.cpp:793 src/main/options.cpp:827 src/main/options.cpp:847
+#: src/main/options.cpp:860 src/main/options.cpp:901 src/main/options.cpp:912
+#: src/main/options.cpp:921 src/main/platform.cpp:3872 src/main/seq.cpp:275
 #: src/main/seq.cpp:282 src/main/seq.cpp:286 src/main/seq.cpp:396
 #: src/main/seq.cpp:403 src/main/seq.cpp:406 src/main/seq.cpp:408
 #: src/main/seq.cpp:465 src/main/seq.cpp:469 src/main/seq.cpp:473
@@ -2064,7 +2072,7 @@ msgstr ""
 msgid "invalid input found on input connection '%s'"
 msgstr ""
 
-#: src/main/connections.cpp:888 src/main/platform.cpp:958
+#: src/main/connections.cpp:888 src/main/platform.cpp:962
 #, c-format
 msgid "cannot open file '%ls': %s"
 msgstr ""
@@ -5875,114 +5883,106 @@ msgstr ""
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr ""
 
-#: src/main/options.cpp:125
+#: src/main/options.cpp:126
 #, c-format
 msgid "option %s has NULL value"
 msgstr ""
 
-#: src/main/options.cpp:150 src/main/options.cpp:254
+#: src/main/options.cpp:151 src/main/options.cpp:255
 msgid "corrupted options list"
 msgstr ""
 
-#: src/main/options.cpp:160
+#: src/main/options.cpp:161
 #, c-format
 msgid "invalid printing width %d, used 80"
 msgstr ""
 
-#: src/main/options.cpp:163
+#: src/main/options.cpp:164
 msgid "invalid printing width"
 msgstr ""
 
-#: src/main/options.cpp:179
+#: src/main/options.cpp:180
 #, c-format
 msgid "invalid printing digits %d, used 7"
 msgstr ""
 
-#: src/main/options.cpp:182
+#: src/main/options.cpp:183
 #, c-format
 msgid "invalid printing digits %d"
 msgstr ""
 
-#: src/main/options.cpp:197
+#: src/main/options.cpp:198
 msgid "invalid 'scipen'"
 msgstr ""
 
-#: src/main/options.cpp:203
+#: src/main/options.cpp:204
 #, c-format
 msgid "setting scipen=%g is out of range"
 msgstr ""
 
-#: src/main/options.cpp:211
+#: src/main/options.cpp:212
 #, c-format
 msgid "invalid 'scipen' %d, used %d"
 msgstr ""
 
-#: src/main/options.cpp:214
+#: src/main/options.cpp:215
 #, c-format
 msgid "invalid 'scipen' %d"
 msgstr ""
 
-#: src/main/options.cpp:227
+#: src/main/options.cpp:228
 msgid "invalid 'deparse.cutoff', used 60"
 msgstr ""
 
-#: src/main/options.cpp:238
+#: src/main/options.cpp:239
 msgid "invalid value for \"device.ask.default\", using FALSE"
 msgstr ""
 
-#: src/main/options.cpp:493 src/main/options.cpp:648 src/main/options.cpp:656
-#: src/main/options.cpp:662 src/main/options.cpp:670 src/main/options.cpp:677
-#: src/main/options.cpp:682 src/main/options.cpp:689 src/main/options.cpp:699
-#: src/main/options.cpp:714 src/main/options.cpp:720 src/main/options.cpp:725
-#: src/main/options.cpp:734 src/main/options.cpp:743 src/main/options.cpp:758
-#: src/main/options.cpp:768 src/main/options.cpp:782 src/main/options.cpp:788
-#: src/main/options.cpp:822 src/main/options.cpp:842 src/main/options.cpp:855
-#: src/main/options.cpp:896 src/main/options.cpp:907
-#, c-format
-msgid "invalid value for '%s'"
-msgstr ""
-
-#: src/main/options.cpp:568
+#: src/main/options.cpp:573
 msgid "list argument has no valid names"
 msgstr ""
 
-#: src/main/options.cpp:620
+#: src/main/options.cpp:625
 #, c-format
 msgid "option '%s' cannot be deleted"
 msgstr ""
 
-#: src/main/options.cpp:626 src/main/options.cpp:637
+#: src/main/options.cpp:631 src/main/options.cpp:642
 #, c-format
 msgid "invalid '%s' parameter, allowed %d...%d"
 msgstr ""
 
-#: src/main/options.cpp:704
+#: src/main/options.cpp:709
 #, c-format
 msgid "value for '%s' outside of -1:2 is set to %d\n"
 msgstr ""
 
-#: src/main/options.cpp:773
+#: src/main/options.cpp:778
 msgid "'OutDec' must be a string of one character"
 msgstr ""
 
-#: src/main/options.cpp:827 src/main/options.cpp:922
+#: src/main/options.cpp:832 src/main/options.cpp:938
 msgid "\"par.ask.default\" has been replaced by \"device.ask.default\""
 msgstr ""
 
-#: src/main/options.cpp:852
+#: src/main/options.cpp:857
 msgid "OpenMP SIMD is not supported in this build of R"
 msgstr ""
 
-#: src/main/options.cpp:876
+#: src/main/options.cpp:881
 msgid "'PCRE_study' has no effect with PCRE2"
 msgstr ""
 
-#: src/main/options.cpp:899
+#: src/main/options.cpp:904
 #, c-format
 msgid "'%s' is deprecated and will be disabled"
 msgstr ""
 
-#: src/main/options.cpp:919 src/modules/X11/dataentry.cpp:319
+#: src/main/options.cpp:915 src/main/options.cpp:924
+msgid "cannot set both options 'quiet' and 'verbose' to TRUE"
+msgstr ""
+
+#: src/main/options.cpp:935 src/modules/X11/dataentry.cpp:319
 #: src/modules/X11/dataentry.cpp:460 src/modules/X11/dataentry.cpp:463
 #: src/modules/X11/dataentry.cpp:492
 msgid "invalid argument"
@@ -6038,257 +6038,257 @@ msgstr ""
 msgid "pattern is not a tiling pattern"
 msgstr ""
 
-#: src/main/platform.cpp:346 src/main/platform.cpp:360
+#: src/main/platform.cpp:350 src/main/platform.cpp:364
 msgid "invalid filename specification"
 msgstr ""
 
-#: src/main/platform.cpp:430 src/main/platform.cpp:479
-#: src/main/platform.cpp:2871 src/main/platform.cpp:3121
+#: src/main/platform.cpp:434 src/main/platform.cpp:483
+#: src/main/platform.cpp:2875 src/main/platform.cpp:3125
 msgid "could not allocate copy buffer"
 msgstr ""
 
-#: src/main/platform.cpp:438 src/main/platform.cpp:494
+#: src/main/platform.cpp:442 src/main/platform.cpp:498
 msgid "write error during file append"
 msgstr ""
 
-#: src/main/platform.cpp:458
+#: src/main/platform.cpp:462
 msgid "nothing to append to"
 msgstr ""
 
-#: src/main/platform.cpp:523 src/main/platform.cpp:846
-#: src/main/platform.cpp:1125
+#: src/main/platform.cpp:527 src/main/platform.cpp:850
+#: src/main/platform.cpp:1129
 msgid "invalid filename argument"
 msgstr ""
 
-#: src/main/platform.cpp:535
+#: src/main/platform.cpp:539
 #, c-format
 msgid "cannot create file '%s', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:550 src/main/platform.cpp:590
-#: src/main/platform.cpp:667
+#: src/main/platform.cpp:554 src/main/platform.cpp:594
+#: src/main/platform.cpp:671
 msgid "invalid first filename"
 msgstr ""
 
-#: src/main/platform.cpp:562
+#: src/main/platform.cpp:566
 #, c-format
 msgid "cannot remove file '%s', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:592 src/main/platform.cpp:669
+#: src/main/platform.cpp:596 src/main/platform.cpp:673
 msgid "invalid second filename"
 msgstr ""
 
-#: src/main/platform.cpp:595 src/main/platform.cpp:672
+#: src/main/platform.cpp:599 src/main/platform.cpp:676
 msgid "nothing to link"
 msgstr ""
 
-#: src/main/platform.cpp:620
+#: src/main/platform.cpp:624
 #, c-format
 msgid "cannot symlink '%ls' to '%ls', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:642
+#: src/main/platform.cpp:646
 #, c-format
 msgid "cannot symlink '%s' to '%s', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:650
+#: src/main/platform.cpp:654
 msgid "symbolic links are not supported on this platform"
 msgstr ""
 
-#: src/main/platform.cpp:691
+#: src/main/platform.cpp:695
 #, c-format
 msgid "cannot link '%ls' to '%ls', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:713
+#: src/main/platform.cpp:717
 #, c-format
 msgid "cannot link '%s' to '%s', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:722
+#: src/main/platform.cpp:726
 msgid "(hard) links are not supported on this platform"
 msgstr ""
 
-#: src/main/platform.cpp:754 src/main/sysutils.cpp:496
+#: src/main/platform.cpp:758 src/main/sysutils.cpp:496
 #, c-format
 msgid "'%s' and '%s' are of different lengths"
 msgstr ""
 
-#: src/main/platform.cpp:771
+#: src/main/platform.cpp:775
 #, c-format
 msgid "cannot rename file '%ls' to '%ls', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:778
+#: src/main/platform.cpp:782
 msgid "expanded 'from' name too long"
 msgstr ""
 
-#: src/main/platform.cpp:782
+#: src/main/platform.cpp:786
 msgid "expanded 'to' name too long"
 msgstr ""
 
-#: src/main/platform.cpp:786
+#: src/main/platform.cpp:790
 #, c-format
 msgid "cannot rename file '%s' to '%s', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:1077
+#: src/main/platform.cpp:1081
 #, c-format
 msgid "cannot resolve owner of file '%ls': %s"
 msgstr ""
 
-#: src/main/platform.cpp:1293
+#: src/main/platform.cpp:1297
 #, c-format
 msgid "error while listing a directory: '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:1446 src/main/platform.cpp:3036
-#: src/main/platform.cpp:3050 src/main/platform.cpp:3082
-#: src/main/platform.cpp:3103
+#: src/main/platform.cpp:1450 src/main/platform.cpp:3040
+#: src/main/platform.cpp:3054 src/main/platform.cpp:3086
+#: src/main/platform.cpp:3107
 msgid "over-long path"
 msgstr ""
 
-#: src/main/platform.cpp:1596
+#: src/main/platform.cpp:1600
 msgid "invalid 'pattern' regular expression"
 msgstr ""
 
-#: src/main/platform.cpp:1723
+#: src/main/platform.cpp:1727
 msgid "unable to determine R home location"
 msgstr ""
 
-#: src/main/platform.cpp:1786
+#: src/main/platform.cpp:1790
 msgid "file name too long"
 msgstr ""
 
-#: src/main/platform.cpp:1859 src/main/platform.cpp:3506
+#: src/main/platform.cpp:1863 src/main/platform.cpp:3510
 #, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:1871
+#: src/main/platform.cpp:1875
 #, c-format
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:1993 src/main/Rdynload.cpp:1184 src/main/util.cpp:932
+#: src/main/platform.cpp:1997 src/main/Rdynload.cpp:1184 src/main/util.cpp:932
 #: src/main/util.cpp:1042
 msgid "path too long"
 msgstr ""
 
-#: src/main/platform.cpp:2081 src/main/platform.cpp:2138
+#: src/main/platform.cpp:2085 src/main/platform.cpp:2142
 #: src/main/sysutils.cpp:2988 src/main/sysutils.cpp:3002
 msgid "internal out-of-memory condition"
 msgstr ""
 
-#: src/main/platform.cpp:2134 src/main/sysutils.cpp:2998
+#: src/main/platform.cpp:2138 src/main/sysutils.cpp:2998
 #, c-format
 msgid "read error on '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:2244
+#: src/main/platform.cpp:2248
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
 msgstr ""
 
-#: src/main/platform.cpp:2257
+#: src/main/platform.cpp:2261
 #, c-format
 msgid "%s does not exist on Windows"
 msgstr ""
 
-#: src/main/platform.cpp:2293
+#: src/main/platform.cpp:2297
 #, c-format
 msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr ""
 
-#: src/main/platform.cpp:2304
+#: src/main/platform.cpp:2308
 #, c-format
 msgid "using locale code page other than %d%s may cause problems"
 msgstr ""
 
-#: src/main/platform.cpp:2657 src/main/platform.cpp:2713
+#: src/main/platform.cpp:2661 src/main/platform.cpp:2717
 msgid "zero-length 'path' argument"
 msgstr ""
 
-#: src/main/platform.cpp:2691
+#: src/main/platform.cpp:2695
 #, c-format
 msgid "'%s' already exists"
 msgstr ""
 
-#: src/main/platform.cpp:2694
+#: src/main/platform.cpp:2698
 #, c-format
 msgid "cannot create dir '%s', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:2745
+#: src/main/platform.cpp:2749
 #, c-format
 msgid "'%ls' already exists"
 msgstr ""
 
-#: src/main/platform.cpp:2747 src/main/platform.cpp:2753
+#: src/main/platform.cpp:2751 src/main/platform.cpp:2757
 #, c-format
 msgid "cannot create dir '%ls', reason '%s'"
 msgstr ""
 
-#: src/main/platform.cpp:2787 src/main/platform.cpp:3016
+#: src/main/platform.cpp:2791 src/main/platform.cpp:3020
 msgid "too deep nesting"
 msgstr ""
 
-#: src/main/platform.cpp:2819
+#: src/main/platform.cpp:2823
 #, c-format
 msgid "cannot overwrite non-directory %ls with directory %ls"
 msgstr ""
 
-#: src/main/platform.cpp:2824
+#: src/main/platform.cpp:2828
 #, c-format
 msgid "problem creating directory %ls: %s"
 msgstr ""
 
-#: src/main/platform.cpp:2845
+#: src/main/platform.cpp:2849
 #, c-format
 msgid "problem reading directory %ls: %s"
 msgstr ""
 
-#: src/main/platform.cpp:2862
+#: src/main/platform.cpp:2866
 #, c-format
 msgid "problem copying %ls to %ls: %s"
 msgstr ""
 
-#: src/main/platform.cpp:3064
+#: src/main/platform.cpp:3068
 #, c-format
 msgid "cannot overwrite non-directory %s with directory %s"
 msgstr ""
 
-#: src/main/platform.cpp:3069
+#: src/main/platform.cpp:3073
 #, c-format
 msgid "problem creating directory %s: %s"
 msgstr ""
 
-#: src/main/platform.cpp:3092
+#: src/main/platform.cpp:3096
 #, c-format
 msgid "problem reading directory %s: %s"
 msgstr ""
 
-#: src/main/platform.cpp:3112
+#: src/main/platform.cpp:3116
 #, c-format
 msgid "problem copying %s to %s: %s"
 msgstr ""
 
-#: src/main/platform.cpp:3264 src/main/platform.cpp:3438
+#: src/main/platform.cpp:3268 src/main/platform.cpp:3442
 #, c-format
 msgid "'%s' must be of length at least one"
 msgstr ""
 
-#: src/main/platform.cpp:3303 src/main/platform.cpp:3330
+#: src/main/platform.cpp:3307 src/main/platform.cpp:3334
 msgid "insufficient OS support on this platform"
 msgstr ""
 
-#: src/main/platform.cpp:3357
+#: src/main/platform.cpp:3361
 #, c-format
 msgid "possible truncation of value for element %d"
 msgstr ""
 
-#: src/main/platform.cpp:3527
+#: src/main/platform.cpp:3531
 #, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr ""

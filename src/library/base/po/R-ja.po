@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-20 10:44\n"
-"PO-Revision-Date: 2024-03-19 03:05+0000\n"
+"PO-Revision-Date: 2025-07-06 14:56+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
 "Language: ja\n"
@@ -11,8 +11,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.16.4\n"
+"X-Generator: Poedit 3.6\n"
 "X-POOTLE-MTIME: 1427434951.000000\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -232,8 +233,8 @@ msgstr "'%s' は論理値でなければなりません"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
+#: R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
 msgstr "'by' は長さ 1 でなければなりません"
@@ -1128,7 +1129,9 @@ msgstr "因子が指定されていません"
 #. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
 #: R/namespace.R:0
 msgid "No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)"
-msgstr "%3$s ロード中 \"%1$s\" に対して要求されたインポートされたメソッド (パッケージ \"%2$s\" からの) に対応する総称的関数がありません (不正確なエクスポート？)"
+msgstr ""
+"%3$s ロード中 \"%1$s\" に対して要求されたインポートされたメソッド (パッケージ \"%2$s\" からの) に対応する総称的関数がありません (不"
+"正確なエクスポート？)"
 
 #. R/traceback.R: gettext("No traceback available")
 #: R/traceback.R:0
@@ -1841,9 +1844,8 @@ msgstr "入力は混乱しています。LF が CR で置き換えられてい�
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
-#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
-#: R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
+#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "無効な 'name' 引数です"
