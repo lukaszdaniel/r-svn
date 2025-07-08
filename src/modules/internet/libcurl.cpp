@@ -328,6 +328,14 @@ static void curlCommon(CURL *hnd, bool redirect, bool verify)
 
     // enable the cookie engine, keep cookies in memory
     curl_easy_setopt(hnd, CURLOPT_COOKIEFILE, "");
+
+    SEXP snetrc = GetOption1(install("netrc"));
+    if (TYPEOF(snetrc) == STRSXP && LENGTH(snetrc) == 1) {
+	CXXR::RAllocStack::Scope rscope;
+	const char *p = R_ExpandFileName(translateCharFP(STRING_ELT(snetrc, 0)));
+	curl_easy_setopt(hnd, CURLOPT_NETRC, CURL_NETRC_OPTIONAL);
+	curl_easy_setopt(hnd, CURLOPT_NETRC_FILE, p);
+    }
 }
 
 static char headers[500][2049]; // allow for terminator

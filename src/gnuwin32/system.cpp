@@ -123,26 +123,9 @@ void unset_R_Tcldo(DO_FUNC ptr)
     return;
 }
 
-static int s_pedepth = 0;
-
 void R_ProcessEvents(void)
 {
-    int old_depth = s_pedepth;
-
-    /* do not enter the graphapp message loop recursively */
-    if (!s_pedepth && peekevent()) {
-	s_pedepth++;
-    try
-    {
-        while (peekevent()) doevent();
-    }
-    catch (...)
-    {
-        s_pedepth = old_depth;
-        throw;
-    }
-	s_pedepth = old_depth;
-    }
+    while (peekevent()) doevent();
 
     if (cpuLimit > 0.0 || elapsedLimit > 0.0) {
 #ifdef HAVE_CHECK_TIME_LIMITS
