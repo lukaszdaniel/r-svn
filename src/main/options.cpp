@@ -911,8 +911,10 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid '%s' value"), CHAR(namei));
 		bool k = asRbool(argi, call);
+#ifdef NO_QUIET_AND_VERBOSE 
 		if(k && R_Verbose)
 		    error("%s", _("cannot set both options 'quiet' and 'verbose' to TRUE"));
+#endif
 		R_Quiet = k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
@@ -920,8 +922,10 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		if (TYPEOF(argi) != LGLSXP || LENGTH(argi) != 1)
 		    error(_("invalid '%s' value"), CHAR(namei));
 		bool k = asRbool(argi, call);
+#ifdef NO_QUIET_AND_VERBOSE 
 		if(k && R_Quiet)
 		    error("%s", _("cannot set both options 'quiet' and 'verbose' to TRUE"));
+#endif
 		R_Verbose = k;
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarLogical(k)));
 	    }
