@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-07-12 12:17\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -654,11 +654,6 @@ msgstr "Nur '*.zip' und '*.tar.gz' Dateien können installiert werden."
 #: R/help.start.R:0
 msgid "Otherwise, be patient ..."
 msgstr "Ansonsten: Geduld ..."
-
-#. R/Sweave.R: message("Output file:  ", output)
-#: R/Sweave.R:0
-msgid "Output file:"
-msgstr "Ausgabedateien:"
 
 #. R/help.R: gettext("Package")
 #: R/help.R:0
@@ -1340,7 +1335,8 @@ msgstr "Installation des Pakets %s hatte Exit-Status ungleich 0"
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0 R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "unzulässiges %s Argument"
@@ -2185,6 +2181,14 @@ msgid "Invalid role specification: %s."
 msgid_plural "Invalid role specifications: %s."
 msgstr[0] "unzulässige Spezifikation für role: %s."
 msgstr[1] "unzulässige Spezifikationen für role: %s."
+
+#. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
+#: R/Sweave.R:0
+#, fuzzy
+msgid "Output file:  "
+msgid_plural "Output files:  "
+msgstr[0] "Ausgabedateien:"
+msgstr[1] "Ausgabedateien:"
 
 #. R/Sweave.R: ngettext(length(output), "Output/used file:  ", "Output/used files:  ")
 #: R/Sweave.R:0

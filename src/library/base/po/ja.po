@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-12 12:16+0200\n"
 "PO-Revision-Date: 2025-07-06 14:56+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -85,7 +85,8 @@ msgstr "DLL が FPU の状態語を %x から %x に変えようとしました"
 msgid "cannot get working directory"
 msgstr "作業ディレクトリを得ることができません"
 
-#: src/gnuwin32/extra.cpp:75 src/gnuwin32/extra.cpp:104 src/gnuwin32/extra.cpp:140
+#: src/gnuwin32/extra.cpp:75 src/gnuwin32/extra.cpp:104
+#: src/gnuwin32/extra.cpp:140
 msgid "R_HOME not set"
 msgstr "R_HOME が設定されていません"
 
@@ -129,67 +130,118 @@ msgstr "'%ls' へのアクセスが拒否されました"
 msgid "problem in displaying '%ls'"
 msgstr "'%ls' の表示に問題があります"
 
-#: src/gnuwin32/extra.cpp:131 src/gnuwin32/extra.cpp:171 src/gnuwin32/extra.cpp:387 src/gnuwin32/extra.cpp:940
-#: src/gnuwin32/extra.cpp:965 src/gnuwin32/sys-win32.cpp:285 src/gnuwin32/sys-win32.cpp:335 src/main/agrep.cpp:140
-#: src/main/agrep.cpp:144 src/main/agrep.cpp:773 src/main/agrep.cpp:778 src/main/altclasses.cpp:1383 src/main/apply.cpp:365
-#: src/main/apply.cpp:367 src/main/apply.cpp:370 src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
-#: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107 src/main/builtin.cpp:116 src/main/builtin.cpp:134
-#: src/main/builtin.cpp:136 src/main/builtin.cpp:579 src/main/builtin.cpp:597 src/main/builtin.cpp:778 src/main/builtin.cpp:780
-#: src/main/builtin.cpp:782 src/main/character.cpp:339 src/main/character.cpp:342 src/main/character.cpp:347
-#: src/main/character.cpp:946 src/main/character.cpp:1466 src/main/character.cpp:1470 src/main/character.cpp:1473
-#: src/main/character.cpp:1720 src/main/character.cpp:1724 src/main/character.cpp:1791 src/main/character.cpp:1794
-#: src/main/coerce.cpp:1487 src/main/coerce.cpp:1551 src/main/coerce.cpp:2157 src/main/connections.cpp:1612
-#: src/main/connections.cpp:1618 src/main/connections.cpp:1623 src/main/connections.cpp:1782 src/main/connections.cpp:1798
-#: src/main/connections.cpp:1803 src/main/connections.cpp:2763 src/main/connections.cpp:2769 src/main/connections.cpp:2773
-#: src/main/connections.cpp:2777 src/main/connections.cpp:2782 src/main/connections.cpp:2787 src/main/connections.cpp:3470
-#: src/main/connections.cpp:3475 src/main/connections.cpp:3478 src/main/connections.cpp:3481 src/main/connections.cpp:3885
-#: src/main/connections.cpp:3890 src/main/connections.cpp:3896 src/main/connections.cpp:3899 src/main/connections.cpp:3903
-#: src/main/connections.cpp:3918 src/main/connections.cpp:3969 src/main/connections.cpp:3974 src/main/connections.cpp:3990
-#: src/main/connections.cpp:3996 src/main/connections.cpp:4051 src/main/connections.cpp:4057 src/main/connections.cpp:4061
-#: src/main/connections.cpp:4107 src/main/connections.cpp:4421 src/main/connections.cpp:4542 src/main/connections.cpp:4548
-#: src/main/connections.cpp:4702 src/main/connections.cpp:4705 src/main/connections.cpp:4821 src/main/connections.cpp:5308
-#: src/main/connections.cpp:5347 src/main/connections.cpp:5368 src/main/connections.cpp:5394 src/main/connections.cpp:5553
-#: src/main/connections.cpp:5851 src/main/connections.cpp:5900 src/main/connections.cpp:5908 src/main/connections.cpp:6759
-#: src/main/connections.cpp:6786 src/main/connections.cpp:6793 src/main/context.cpp:696 src/main/context.cpp:705
-#: src/main/context.cpp:709 src/main/datetime.cpp:1269 src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
-#: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510 src/main/dotcode.cpp:515 src/main/dounzip.cpp:393
-#: src/main/dounzip.cpp:400 src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087 src/main/envir.cpp:2101
-#: src/main/envir.cpp:2217 src/main/envir.cpp:2225 src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
-#: src/main/envir.cpp:3159 src/main/envir.cpp:3173 src/main/envir.cpp:3180 src/main/envir.cpp:3196 src/main/envir.cpp:3930
-#: src/main/errors.cpp:1275 src/main/errors.cpp:2767 src/main/eval.cpp:894 src/main/eval.cpp:904 src/main/eval.cpp:907
-#: src/main/eval.cpp:910 src/main/eval.cpp:918 src/main/eval.cpp:925 src/main/grep.cpp:1292 src/main/grep.cpp:1297
-#: src/main/grep.cpp:1594 src/main/grep.cpp:1596 src/main/grep.cpp:1598 src/main/grep.cpp:2131 src/main/grep.cpp:2135
-#: src/main/grep.cpp:2140 src/main/grep.cpp:2178 src/main/grep.cpp:2180 src/main/grep.cpp:2973 src/main/grep.cpp:2978
-#: src/main/grep.cpp:3316 src/main/grep.cpp:3321 src/main/internet.cpp:155 src/main/internet.cpp:169 src/main/internet.cpp:194
-#: src/main/internet.cpp:207 src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4584 src/main/objects.cpp:1800
-#: src/main/objects.cpp:1802 src/main/paste.cpp:152 src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
-#: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526 src/main/paste.cpp:710 src/main/paste.cpp:715
-#: src/main/platform.cpp:352 src/main/platform.cpp:354 src/main/platform.cpp:356 src/main/platform.cpp:368 src/main/platform.cpp:379
-#: src/main/platform.cpp:457 src/main/platform.cpp:459 src/main/platform.cpp:753 src/main/platform.cpp:755 src/main/platform.cpp:853
-#: src/main/platform.cpp:1582 src/main/platform.cpp:1588 src/main/platform.cpp:1665 src/main/platform.cpp:1745
-#: src/main/platform.cpp:1813 src/main/platform.cpp:1816 src/main/platform.cpp:2071 src/main/platform.cpp:2118
-#: src/main/platform.cpp:2166 src/main/platform.cpp:2202 src/main/platform.cpp:2204 src/main/platform.cpp:2290
-#: src/main/platform.cpp:2387 src/main/platform.cpp:2654 src/main/platform.cpp:2712 src/main/platform.cpp:2916
-#: src/main/platform.cpp:2919 src/main/platform.cpp:3166 src/main/platform.cpp:3169 src/main/platform.cpp:3176
-#: src/main/platform.cpp:3263 src/main/platform.cpp:3305 src/main/platform.cpp:3349 src/main/platform.cpp:3438
-#: src/main/print.cpp:304 src/main/random.cpp:482 src/main/random.cpp:485 src/main/random.cpp:494 src/main/random.cpp:522
-#: src/main/Rdynload.cpp:1428 src/main/saveload.cpp:2066 src/main/saveload.cpp:2101 src/main/saveload.cpp:2104
-#: src/main/saveload.cpp:2214 src/main/saveload.cpp:2382 src/main/saveload.cpp:2387 src/main/saveload.cpp:2489 src/main/scan.cpp:708
-#: src/main/scan.cpp:887 src/main/scan.cpp:900 src/main/scan.cpp:904 src/main/scan.cpp:906 src/main/scan.cpp:917
-#: src/main/scan.cpp:947 src/main/scan.cpp:1007 src/main/seq.cpp:717 src/main/seq.cpp:724 src/main/seq.cpp:734 src/main/seq.cpp:740
-#: src/main/seq.cpp:784 src/main/seq.cpp:789 src/main/seq.cpp:792 src/main/seq.cpp:796 src/main/seq.cpp:801 src/main/seq.cpp:808
-#: src/main/seq.cpp:812 src/main/seq.cpp:818 src/main/sysutils.cpp:646 src/main/sysutils.cpp:650 src/main/sysutils.cpp:654
-#: src/main/sysutils.cpp:2971 src/main/unique.cpp:1912 src/main/unique.cpp:1916 src/main/unique.cpp:2311 src/main/unique.cpp:2316
-#: src/main/util.cpp:716 src/main/util.cpp:719 src/main/util.cpp:1711 src/main/util.cpp:1725 src/main/util.cpp:2542
-#: src/main/util.cpp:2800 src/main/util.cpp:2817 src/main/util.cpp:2860 src/main/util.cpp:2902 src/main/util.cpp:2904
-#: src/main/util.cpp:2906 src/main/util.cpp:2909 src/main/util.cpp:2912 src/main/util.cpp:2916 src/main/util.cpp:2918
-#: src/main/util.cpp:2920 src/main/util.cpp:3215 src/main/util.cpp:3217 src/main/util.cpp:3257 src/main/util.cpp:3259
-#: src/modules/internet/internet.cpp:340 src/modules/internet/internet.cpp:346 src/modules/internet/internet.cpp:354
-#: src/modules/internet/internet.cpp:362 src/modules/internet/libcurl.cpp:364 src/modules/internet/libcurl.cpp:371
-#: src/modules/internet/libcurl.cpp:376 src/modules/internet/libcurl.cpp:409 src/modules/internet/libcurl.cpp:869
-#: src/modules/internet/libcurl.cpp:884 src/modules/internet/libcurl.cpp:890 src/modules/internet/libcurl.cpp:895
-#: src/modules/X11/devX11.cpp:3338 src/modules/X11/devX11.cpp:3341 src/modules/X11/devX11.cpp:3344 src/modules/X11/devX11.cpp:3368
-#: src/unix/sys-std.cpp:1416 src/unix/sys-std.cpp:1439 src/unix/sys-unix.cpp:914
+#: src/gnuwin32/extra.cpp:131 src/gnuwin32/extra.cpp:171
+#: src/gnuwin32/extra.cpp:387 src/gnuwin32/extra.cpp:940
+#: src/gnuwin32/extra.cpp:965 src/gnuwin32/sys-win32.cpp:285
+#: src/gnuwin32/sys-win32.cpp:335 src/main/agrep.cpp:140 src/main/agrep.cpp:144
+#: src/main/agrep.cpp:773 src/main/agrep.cpp:778 src/main/altclasses.cpp:1383
+#: src/main/apply.cpp:365 src/main/apply.cpp:367 src/main/apply.cpp:370
+#: src/main/array.cpp:1832 src/main/array.cpp:1980 src/main/array.cpp:1982
+#: src/main/array.cpp:2362 src/main/attrib.cpp:229 src/main/builtin.cpp:107
+#: src/main/builtin.cpp:116 src/main/builtin.cpp:134 src/main/builtin.cpp:136
+#: src/main/builtin.cpp:579 src/main/builtin.cpp:597 src/main/builtin.cpp:778
+#: src/main/builtin.cpp:780 src/main/builtin.cpp:782 src/main/character.cpp:339
+#: src/main/character.cpp:342 src/main/character.cpp:347
+#: src/main/character.cpp:946 src/main/character.cpp:1466
+#: src/main/character.cpp:1470 src/main/character.cpp:1473
+#: src/main/character.cpp:1720 src/main/character.cpp:1724
+#: src/main/character.cpp:1791 src/main/character.cpp:1794
+#: src/main/coerce.cpp:1487 src/main/coerce.cpp:1551 src/main/coerce.cpp:2157
+#: src/main/connections.cpp:1612 src/main/connections.cpp:1618
+#: src/main/connections.cpp:1623 src/main/connections.cpp:1782
+#: src/main/connections.cpp:1798 src/main/connections.cpp:1803
+#: src/main/connections.cpp:2763 src/main/connections.cpp:2769
+#: src/main/connections.cpp:2773 src/main/connections.cpp:2777
+#: src/main/connections.cpp:2782 src/main/connections.cpp:2787
+#: src/main/connections.cpp:3470 src/main/connections.cpp:3475
+#: src/main/connections.cpp:3478 src/main/connections.cpp:3481
+#: src/main/connections.cpp:3885 src/main/connections.cpp:3890
+#: src/main/connections.cpp:3896 src/main/connections.cpp:3899
+#: src/main/connections.cpp:3903 src/main/connections.cpp:3918
+#: src/main/connections.cpp:3969 src/main/connections.cpp:3974
+#: src/main/connections.cpp:3990 src/main/connections.cpp:3996
+#: src/main/connections.cpp:4051 src/main/connections.cpp:4057
+#: src/main/connections.cpp:4061 src/main/connections.cpp:4107
+#: src/main/connections.cpp:4421 src/main/connections.cpp:4542
+#: src/main/connections.cpp:4548 src/main/connections.cpp:4702
+#: src/main/connections.cpp:4705 src/main/connections.cpp:4821
+#: src/main/connections.cpp:5308 src/main/connections.cpp:5347
+#: src/main/connections.cpp:5368 src/main/connections.cpp:5394
+#: src/main/connections.cpp:5553 src/main/connections.cpp:5851
+#: src/main/connections.cpp:5900 src/main/connections.cpp:5908
+#: src/main/connections.cpp:6759 src/main/connections.cpp:6786
+#: src/main/connections.cpp:6793 src/main/context.cpp:696
+#: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
+#: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
+#: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
+#: src/main/dotcode.cpp:515 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
+#: src/main/envir.cpp:1870 src/main/envir.cpp:1976 src/main/envir.cpp:2087
+#: src/main/envir.cpp:2101 src/main/envir.cpp:2217 src/main/envir.cpp:2225
+#: src/main/envir.cpp:2506 src/main/envir.cpp:2625 src/main/envir.cpp:2896
+#: src/main/envir.cpp:3159 src/main/envir.cpp:3173 src/main/envir.cpp:3180
+#: src/main/envir.cpp:3196 src/main/envir.cpp:3930 src/main/errors.cpp:1275
+#: src/main/errors.cpp:2767 src/main/eval.cpp:894 src/main/eval.cpp:904
+#: src/main/eval.cpp:907 src/main/eval.cpp:910 src/main/eval.cpp:918
+#: src/main/eval.cpp:925 src/main/grep.cpp:1292 src/main/grep.cpp:1297
+#: src/main/grep.cpp:1594 src/main/grep.cpp:1596 src/main/grep.cpp:1598
+#: src/main/grep.cpp:2131 src/main/grep.cpp:2135 src/main/grep.cpp:2140
+#: src/main/grep.cpp:2178 src/main/grep.cpp:2180 src/main/grep.cpp:2973
+#: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321
+#: src/main/internet.cpp:155 src/main/internet.cpp:169
+#: src/main/internet.cpp:194 src/main/internet.cpp:207
+#: src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4584
+#: src/main/objects.cpp:1803 src/main/objects.cpp:1805 src/main/paste.cpp:152
+#: src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
+#: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526
+#: src/main/paste.cpp:710 src/main/paste.cpp:715 src/main/platform.cpp:352
+#: src/main/platform.cpp:354 src/main/platform.cpp:356
+#: src/main/platform.cpp:368 src/main/platform.cpp:379
+#: src/main/platform.cpp:457 src/main/platform.cpp:459
+#: src/main/platform.cpp:753 src/main/platform.cpp:755
+#: src/main/platform.cpp:853 src/main/platform.cpp:1582
+#: src/main/platform.cpp:1588 src/main/platform.cpp:1665
+#: src/main/platform.cpp:1745 src/main/platform.cpp:1813
+#: src/main/platform.cpp:1816 src/main/platform.cpp:2071
+#: src/main/platform.cpp:2118 src/main/platform.cpp:2166
+#: src/main/platform.cpp:2202 src/main/platform.cpp:2204
+#: src/main/platform.cpp:2290 src/main/platform.cpp:2387
+#: src/main/platform.cpp:2654 src/main/platform.cpp:2712
+#: src/main/platform.cpp:2916 src/main/platform.cpp:2919
+#: src/main/platform.cpp:3166 src/main/platform.cpp:3169
+#: src/main/platform.cpp:3176 src/main/platform.cpp:3263
+#: src/main/platform.cpp:3305 src/main/platform.cpp:3349
+#: src/main/platform.cpp:3438 src/main/print.cpp:304 src/main/random.cpp:482
+#: src/main/random.cpp:485 src/main/random.cpp:494 src/main/random.cpp:522
+#: src/main/Rdynload.cpp:1428 src/main/saveload.cpp:2066
+#: src/main/saveload.cpp:2101 src/main/saveload.cpp:2104
+#: src/main/saveload.cpp:2214 src/main/saveload.cpp:2382
+#: src/main/saveload.cpp:2387 src/main/saveload.cpp:2489 src/main/scan.cpp:708
+#: src/main/scan.cpp:887 src/main/scan.cpp:900 src/main/scan.cpp:904
+#: src/main/scan.cpp:906 src/main/scan.cpp:917 src/main/scan.cpp:947
+#: src/main/scan.cpp:1007 src/main/seq.cpp:717 src/main/seq.cpp:724
+#: src/main/seq.cpp:734 src/main/seq.cpp:740 src/main/seq.cpp:784
+#: src/main/seq.cpp:789 src/main/seq.cpp:792 src/main/seq.cpp:796
+#: src/main/seq.cpp:801 src/main/seq.cpp:808 src/main/seq.cpp:812
+#: src/main/seq.cpp:818 src/main/sysutils.cpp:646 src/main/sysutils.cpp:650
+#: src/main/sysutils.cpp:654 src/main/sysutils.cpp:2971
+#: src/main/unique.cpp:1912 src/main/unique.cpp:1916 src/main/unique.cpp:2311
+#: src/main/unique.cpp:2316 src/main/util.cpp:716 src/main/util.cpp:719
+#: src/main/util.cpp:1711 src/main/util.cpp:1725 src/main/util.cpp:2542
+#: src/main/util.cpp:2800 src/main/util.cpp:2817 src/main/util.cpp:2860
+#: src/main/util.cpp:2902 src/main/util.cpp:2904 src/main/util.cpp:2906
+#: src/main/util.cpp:2909 src/main/util.cpp:2912 src/main/util.cpp:2916
+#: src/main/util.cpp:2918 src/main/util.cpp:2920 src/main/util.cpp:3215
+#: src/main/util.cpp:3217 src/main/util.cpp:3257 src/main/util.cpp:3259
+#: src/modules/internet/internet.cpp:340 src/modules/internet/internet.cpp:346
+#: src/modules/internet/internet.cpp:354 src/modules/internet/internet.cpp:362
+#: src/modules/internet/libcurl.cpp:372 src/modules/internet/libcurl.cpp:379
+#: src/modules/internet/libcurl.cpp:384 src/modules/internet/libcurl.cpp:417
+#: src/modules/internet/libcurl.cpp:877 src/modules/internet/libcurl.cpp:892
+#: src/modules/internet/libcurl.cpp:898 src/modules/internet/libcurl.cpp:903
+#: src/modules/X11/devX11.cpp:3338 src/modules/X11/devX11.cpp:3341
+#: src/modules/X11/devX11.cpp:3344 src/modules/X11/devX11.cpp:3368
+#: src/unix/sys-std.cpp:1416 src/unix/sys-std.cpp:1439
+#: src/unix/sys-unix.cpp:914
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 引数が不正です"
@@ -203,21 +255,26 @@ msgstr "このバージョンの Windows はサポートされていません"
 msgid "cannot resolve current user or domain: '%s'"
 msgstr "ファイル '%ls' を開くことができません: %s"
 
-#: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879 src/main/sysutils.cpp:690 src/main/unique.cpp:2209 src/main/util.cpp:1088
+#: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879
+#: src/main/sysutils.cpp:690 src/main/unique.cpp:2209 src/main/util.cpp:1088
 #, fuzzy, c-format
 msgid "'%s' must be a character vector"
 msgstr "'x' は文字ベクトルでなくてはなりません"
 
-#: src/gnuwin32/extra.cpp:766 src/main/errors.cpp:1277 src/main/errors.cpp:1279 src/main/options.cpp:489 src/main/unique.cpp:2213
-#: src/modules/lapack/Lapack.cpp:118 src/modules/lapack/Lapack.cpp:354 src/modules/lapack/Lapack.cpp:383
-#: src/modules/lapack/Lapack.cpp:434 src/modules/lapack/Lapack.cpp:435 src/modules/lapack/Lapack.cpp:471
-#: src/modules/lapack/Lapack.cpp:509 src/modules/lapack/Lapack.cpp:540 src/modules/lapack/Lapack.cpp:595
-#: src/modules/lapack/Lapack.cpp:632 src/modules/lapack/Lapack.cpp:633 src/modules/lapack/Lapack.cpp:896
+#: src/gnuwin32/extra.cpp:766 src/main/errors.cpp:1277 src/main/errors.cpp:1279
+#: src/main/options.cpp:489 src/main/unique.cpp:2213
+#: src/modules/lapack/Lapack.cpp:118 src/modules/lapack/Lapack.cpp:354
+#: src/modules/lapack/Lapack.cpp:383 src/modules/lapack/Lapack.cpp:434
+#: src/modules/lapack/Lapack.cpp:435 src/modules/lapack/Lapack.cpp:471
+#: src/modules/lapack/Lapack.cpp:509 src/modules/lapack/Lapack.cpp:540
+#: src/modules/lapack/Lapack.cpp:595 src/modules/lapack/Lapack.cpp:632
+#: src/modules/lapack/Lapack.cpp:633 src/modules/lapack/Lapack.cpp:896
 #, c-format
 msgid "'%s' must be a character string"
 msgstr "'%s' は文字列でなければなりません"
 
-#: src/gnuwin32/extra.cpp:942 src/gnuwin32/extra.cpp:944 src/gnuwin32/extra.cpp:967 src/gnuwin32/extra.cpp:969
+#: src/gnuwin32/extra.cpp:942 src/gnuwin32/extra.cpp:944
+#: src/gnuwin32/extra.cpp:967 src/gnuwin32/extra.cpp:969
 #: src/gnuwin32/extra.cpp:1004 src/main/gevents.cpp:70 src/main/gevents.cpp:111
 msgid "invalid device"
 msgstr "不正な装置です"
@@ -226,7 +283,8 @@ msgstr "不正な装置です"
 msgid "requires SDI mode"
 msgstr "SDI モードが要求されます"
 
-#: src/gnuwin32/extra.cpp:998 src/main/gevents.cpp:67 src/main/gevents.cpp:105 src/main/gevents.cpp:108
+#: src/gnuwin32/extra.cpp:998 src/main/gevents.cpp:67 src/main/gevents.cpp:105
+#: src/main/gevents.cpp:108
 msgid "invalid graphical device number"
 msgstr "グラフィックスデバイス番号が不正です"
 
@@ -251,7 +309,8 @@ msgstr "'CreateProcess' が '%s' を実行できませんでした"
 msgid "Child process not responding.  R will terminate it."
 msgstr "子プロセスが応答しないため、強制終了させます。"
 
-#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287 src/unix/sys-unix.cpp:935
+#: src/gnuwin32/run.cpp:683 src/gnuwin32/sys-win32.cpp:287
+#: src/unix/sys-unix.cpp:935
 #, fuzzy
 msgid "Timeout with background running processes is not supported."
 msgstr "名前に対する永続的な文字列は、まだサポートされていません"
@@ -282,13 +341,16 @@ msgstr "このコネクションでは切りつめは有効ではありません
 msgid "broken Windows pipe"
 msgstr ""
 
-#: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521 src/main/connections.cpp:539 src/main/connections.cpp:3735
+#: src/gnuwin32/run.cpp:1068 src/main/connections.cpp:521
+#: src/main/connections.cpp:539 src/main/connections.cpp:3735
 #: src/main/printutils.cpp:966 src/main/printutils.cpp:981
 msgid "printing of extremely long output is truncated"
 msgstr "出力が長過ぎるのでプリントは切りつめられました"
 
-#: src/gnuwin32/run.cpp:1081 src/gnuwin32/run.cpp:1085 src/gnuwin32/run.cpp:1098 src/gnuwin32/run.cpp:1126
-#: src/main/connections.cpp:1734 src/main/connections.cpp:1738 src/main/connections.cpp:1745 src/main/connections.cpp:1760
+#: src/gnuwin32/run.cpp:1081 src/gnuwin32/run.cpp:1085
+#: src/gnuwin32/run.cpp:1098 src/gnuwin32/run.cpp:1126
+#: src/main/connections.cpp:1734 src/main/connections.cpp:1738
+#: src/main/connections.cpp:1745 src/main/connections.cpp:1760
 msgid "allocation of pipe connection failed"
 msgstr "パイプ接続の割り当てに失敗しました"
 
@@ -305,120 +367,128 @@ msgstr ""
 msgid "Thief about! Something other than package tcltk has set or is attempting to unset R_Tcl_do"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:159 src/main/sysutils.cpp:2929
+#: src/gnuwin32/system.cpp:142 src/main/sysutils.cpp:2929
 msgid "reached session elapsed time limit"
 msgstr "セッション時間が経過して上限に達しました"
 
-#: src/gnuwin32/system.cpp:161 src/main/sysutils.cpp:2931
+#: src/gnuwin32/system.cpp:144 src/main/sysutils.cpp:2931
 msgid "reached elapsed time limit"
 msgstr "時間が経過して上限に達しました"
 
-#: src/gnuwin32/system.cpp:167 src/main/sysutils.cpp:2937
+#: src/gnuwin32/system.cpp:150 src/main/sysutils.cpp:2937
 msgid "reached session CPU time limit"
 msgstr "セッション CPU 時間が経過して上限に達しました"
 
-#: src/gnuwin32/system.cpp:169 src/main/sysutils.cpp:2939
+#: src/gnuwin32/system.cpp:152 src/main/sysutils.cpp:2939
 msgid "reached CPU time limit"
 msgstr "CPU 時間が経過して上限に達しました"
 
-#: src/gnuwin32/system.cpp:200 src/unix/sys-std.cpp:89
+#: src/gnuwin32/system.cpp:183 src/unix/sys-std.cpp:89
 #, c-format
 msgid "Fatal error: %s\n"
 msgstr "致命的なエラーです: %s \n"
 
-#: src/gnuwin32/system.cpp:470 src/unix/sys-std.cpp:1027
+#: src/gnuwin32/system.cpp:453 src/unix/sys-std.cpp:1027
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "'%s' というエンコーディングは認識できません"
 
-#: src/gnuwin32/system.cpp:483 src/unix/sys-std.cpp:1040
+#: src/gnuwin32/system.cpp:466 src/unix/sys-std.cpp:1040
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<エラー: エンコーディング '%s' からの再エンコーディングに失敗しました> \n"
 
-#: src/gnuwin32/system.cpp:720 src/gnuwin32/system.cpp:1272 src/gnuwin32/system.cpp:1284 src/main/connections.cpp:915
-#: src/main/connections.cpp:920 src/main/dounzip.cpp:239 src/main/saveload.cpp:2110 src/main/serialize.cpp:3060
-#: src/main/serialize.cpp:3065 src/main/serialize.cpp:3159 src/main/serialize.cpp:3211 src/unix/system.cpp:432
+#: src/gnuwin32/system.cpp:703 src/gnuwin32/system.cpp:1255
+#: src/gnuwin32/system.cpp:1267 src/main/connections.cpp:915
+#: src/main/connections.cpp:920 src/main/dounzip.cpp:239
+#: src/main/saveload.cpp:2110 src/main/serialize.cpp:3060
+#: src/main/serialize.cpp:3065 src/main/serialize.cpp:3159
+#: src/main/serialize.cpp:3211 src/unix/system.cpp:432
 #, c-format
 msgid "cannot open file '%s': %s"
 msgstr "ファイル '%s' を開くことができません: %s"
 
-#: src/gnuwin32/system.cpp:735
+#: src/gnuwin32/system.cpp:718
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show(): ファイル '%s' は存在しません \n"
 
-#: src/gnuwin32/system.cpp:900 src/gnuwin32/system.cpp:1113 src/gnuwin32/front-ends/rcmdfn.cpp:205
+#: src/gnuwin32/system.cpp:883 src/gnuwin32/system.cpp:1096
+#: src/gnuwin32/front-ends/rcmdfn.cpp:205
 msgid "Invalid R_HOME"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:903 src/gnuwin32/system.cpp:919 src/gnuwin32/front-ends/rcmdfn.cpp:265
-#: src/gnuwin32/front-ends/rcmdfn.cpp:351 src/gnuwin32/front-ends/rcmdfn.cpp:414 src/gnuwin32/front-ends/rcmdfn.cpp:432
+#: src/gnuwin32/system.cpp:886 src/gnuwin32/system.cpp:902
+#: src/gnuwin32/front-ends/rcmdfn.cpp:265
+#: src/gnuwin32/front-ends/rcmdfn.cpp:351
+#: src/gnuwin32/front-ends/rcmdfn.cpp:414
+#: src/gnuwin32/front-ends/rcmdfn.cpp:432
 #, fuzzy
 msgid "Allocation error"
 msgstr "bessel_i で割り当てエラーがありました"
 
-#: src/gnuwin32/system.cpp:989
+#: src/gnuwin32/system.cpp:972
 #, fuzzy
 msgid "allocation failure in reading Renviron"
 msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 
-#: src/gnuwin32/system.cpp:1063 src/unix/system.cpp:131
+#: src/gnuwin32/system.cpp:1046 src/unix/system.cpp:131
 #, fuzzy
 msgid "WARNING: invalid R_HISTSIZE ignored;"
 msgstr "警告: '%s' 値が不正なので無視されました"
 
-#: src/gnuwin32/system.cpp:1075
+#: src/gnuwin32/system.cpp:1058
 msgid "Not enough memory"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:1091 src/unix/system.cpp:468
+#: src/gnuwin32/system.cpp:1074 src/unix/system.cpp:468
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr "引数 '%s' は無視されました \n"
 
-#: src/gnuwin32/system.cpp:1262
+#: src/gnuwin32/system.cpp:1245
 #, c-format
 msgid "option '%s' requires an argument"
 msgstr "オプション '%s' には引数が必要です"
 
-#: src/gnuwin32/system.cpp:1295
+#: src/gnuwin32/system.cpp:1278
 #, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr "オプション '%s' は空でない引数が必要です"
 
-#: src/gnuwin32/system.cpp:1303 src/unix/system.cpp:451
+#: src/gnuwin32/system.cpp:1286 src/unix/system.cpp:451
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr "警告: 入力が長すぎるため, '-e %s' は省略されました \n"
 
-#: src/gnuwin32/system.cpp:1307 src/unix/system.cpp:464
+#: src/gnuwin32/system.cpp:1290 src/unix/system.cpp:464
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr "警告: 未知の '%s' オプション \n"
 
-#: src/gnuwin32/system.cpp:1320 src/unix/system.cpp:479
+#: src/gnuwin32/system.cpp:1303 src/unix/system.cpp:479
 msgid "cannot use -e with -f or --file"
 msgstr "-e は-f や --file と併用することはできません"
 
-#: src/gnuwin32/system.cpp:1344
+#: src/gnuwin32/system.cpp:1327
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "一時ファイルの作成に失敗しました -- TMPDIRは正しく設定されていますか?"
 
-#: src/gnuwin32/system.cpp:1348
+#: src/gnuwin32/system.cpp:1331
 #, fuzzy
 msgid "fwrite error in cmdlineoptions"
 msgstr "zip ファイルから抽出中に書き込みエラーが生じました"
 
-#: src/gnuwin32/system.cpp:1370 src/unix/system.cpp:552
+#: src/gnuwin32/system.cpp:1353 src/unix/system.cpp:552
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr "'--save' , '--no-save', '--vanilla' のいずれかを指定してください"
 
-#: src/gnuwin32/system.cpp:1402
+#: src/gnuwin32/system.cpp:1385
 msgid "impossible to create 'reader thread'; you must free some system resources"
 msgstr "'reader thread' を作れません。システムのリソースを幾らか解放すべきです"
 
-#: src/gnuwin32/sys-win32.cpp:126 src/gnuwin32/sys-win32.cpp:144 src/gnuwin32/sys-win32.cpp:155
+#: src/gnuwin32/sys-win32.cpp:126 src/gnuwin32/sys-win32.cpp:144
+#: src/gnuwin32/sys-win32.cpp:155
 #, c-format
 msgid ""
 "expanded path length %llu would be too long for\n"
@@ -433,7 +503,8 @@ msgstr "最初の引数には文字列が期待されています"
 msgid "character string expected as third argument"
 msgstr "三番目の引数には文字列が期待されています"
 
-#: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1037 src/unix/sys-unix.cpp:1095
+#: src/gnuwin32/sys-win32.cpp:361 src/unix/sys-unix.cpp:1037
+#: src/unix/sys-unix.cpp:1095
 #, fuzzy, c-format
 msgid "command '%s' timed out after %ds"
 msgstr "命令 '%s' の実行は状態 %d を持ちました"
@@ -443,8 +514,9 @@ msgstr "命令 '%s' の実行は状態 %d を持ちました"
 msgid "running command '%s' had status %d"
 msgstr "命令 '%s' の実行は状態 %d を持ちました"
 
-#: src/gnuwin32/getline/getline.cpp:422 src/gnuwin32/getline/getline.cpp:662 src/gnuwin32/getline/getline.cpp:973
-#: src/gnuwin32/getline/getline.cpp:1404 src/gnuwin32/getline/getline.cpp:1428
+#: src/gnuwin32/getline/getline.cpp:422 src/gnuwin32/getline/getline.cpp:662
+#: src/gnuwin32/getline/getline.cpp:973 src/gnuwin32/getline/getline.cpp:1404
+#: src/gnuwin32/getline/getline.cpp:1428
 msgid ""
 "\n"
 "*** Error: getline(): invalid multi-byte character.\n"
@@ -486,7 +558,8 @@ msgid ""
 "*** Error: minimum screen width is 21\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:936 src/gnuwin32/getline/getline.cpp:991 src/gnuwin32/getline/getline.cpp:1069
+#: src/gnuwin32/getline/getline.cpp:936 src/gnuwin32/getline/getline.cpp:991
+#: src/gnuwin32/getline/getline.cpp:1069
 #, fuzzy
 msgid ""
 "\n"
@@ -511,7 +584,8 @@ msgid ""
 "*** Error: hist_save() failed on malloc\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:1553 src/gnuwin32/getline/wc_history.cpp:138
+#: src/gnuwin32/getline/getline.cpp:1553
+#: src/gnuwin32/getline/wc_history.cpp:138
 #, fuzzy, c-format
 msgid "Unable to open %s"
 msgstr "ファイルを開くことができません"
@@ -570,19 +644,22 @@ msgstr ""
 msgid "cannot get data pointer of '%s' objects"
 msgstr "ディレクトリ '%ls' を作成できません、理由は '%s' です"
 
-#: src/include/Rinlinedfuns.h:159 src/include/Rinlinedfuns.h:163 src/include/Rinlinedfuns.h:166 src/include/Rinlinedfuns.h:169
+#: src/include/Rinlinedfuns.h:159 src/include/Rinlinedfuns.h:163
+#: src/include/Rinlinedfuns.h:166 src/include/Rinlinedfuns.h:169
 #: src/include/Rinlinedfuns.h:172
 #, fuzzy, c-format
 msgid "bad '%s' vector"
 msgstr " 不正な名前ベクトルです "
 
-#: src/include/Rinlinedfuns.h:232 src/include/Rinlinedfuns.h:236 src/include/Rinlinedfuns.h:240 src/include/Rinlinedfuns.h:244
+#: src/include/Rinlinedfuns.h:232 src/include/Rinlinedfuns.h:236
+#: src/include/Rinlinedfuns.h:240 src/include/Rinlinedfuns.h:244
 #: src/include/Rinlinedfuns.h:248
 #, fuzzy, c-format
 msgid "bad standard '%s' vector"
 msgstr " 不正な名前ベクトルです "
 
-#: src/include/Rinlinedfuns.h:253 src/include/Rinlinedfuns.h:257 src/include/Rinlinedfuns.h:261 src/include/Rinlinedfuns.h:265
+#: src/include/Rinlinedfuns.h:253 src/include/Rinlinedfuns.h:257
+#: src/include/Rinlinedfuns.h:261 src/include/Rinlinedfuns.h:265
 #: src/include/Rinlinedfuns.h:269
 #, fuzzy, c-format
 msgid "bad '%s' scalar"
@@ -592,8 +669,9 @@ msgstr "'%s' の値が不正です"
 msgid "cycle detected"
 msgstr ""
 
-#: src/main/agrep.cpp:142 src/main/agrep.cpp:775 src/main/character.cpp:1468 src/main/character.cpp:1472 src/main/grep.cpp:1294
-#: src/main/grep.cpp:2133 src/main/grep.cpp:2137 src/main/grep.cpp:2975 src/main/grep.cpp:3318
+#: src/main/agrep.cpp:142 src/main/agrep.cpp:775 src/main/character.cpp:1468
+#: src/main/character.cpp:1472 src/main/grep.cpp:1294 src/main/grep.cpp:2133
+#: src/main/grep.cpp:2137 src/main/grep.cpp:2975 src/main/grep.cpp:3318
 #, c-format
 msgid "argument '%s' has length > 1 and only the first element will be used"
 msgstr "引数 '%s' は 1 を超える長さなので、最初の要素だけが使われます"
@@ -602,25 +680,31 @@ msgstr "引数 '%s' は 1 を超える長さなので、最初の要素だけが
 msgid "'pattern' must be a non-empty character string"
 msgstr "'pattern' は空でない文字列でなければなりません"
 
-#: src/main/agrep.cpp:210 src/main/agrep.cpp:826 src/main/grep.cpp:1346 src/main/grep.cpp:3013 src/main/grep.cpp:3350
+#: src/main/agrep.cpp:210 src/main/agrep.cpp:826 src/main/grep.cpp:1346
+#: src/main/grep.cpp:3013 src/main/grep.cpp:3350
 msgid "regular expression is invalid in this locale"
 msgstr "このロケールでは、正規表現は無効です"
 
-#: src/main/agrep.cpp:216 src/main/agrep.cpp:626 src/main/agrep.cpp:832 src/main/grep.cpp:3356
+#: src/main/agrep.cpp:216 src/main/agrep.cpp:626 src/main/agrep.cpp:832
+#: src/main/grep.cpp:3356
 #, c-format
 msgid "regcomp error: '%s'"
 msgstr "regcomp のエラー: '%s'"
 
-#: src/main/agrep.cpp:248 src/main/agrep.cpp:872 src/main/grep.cpp:633 src/main/grep.cpp:735 src/main/grep.cpp:851
-#: src/main/grep.cpp:1059 src/main/grep.cpp:1399 src/main/grep.cpp:2249 src/main/grep.cpp:2538 src/main/grep.cpp:3133
-#: src/main/grep.cpp:3222 src/main/grep.cpp:3382 src/main/grep.cpp:3389
+#: src/main/agrep.cpp:248 src/main/agrep.cpp:872 src/main/grep.cpp:633
+#: src/main/grep.cpp:735 src/main/grep.cpp:851 src/main/grep.cpp:1059
+#: src/main/grep.cpp:1399 src/main/grep.cpp:2249 src/main/grep.cpp:2538
+#: src/main/grep.cpp:3133 src/main/grep.cpp:3222 src/main/grep.cpp:3382
+#: src/main/grep.cpp:3389
 #, fuzzy, c-format
 msgid "input string %lld is invalid in this locale"
 msgstr "入力文字列 %lld はこのロケールでは不適切です"
 
-#: src/main/agrep.cpp:527 src/main/agrep.cpp:763 src/main/connections.cpp:2886 src/main/grep.cpp:569 src/main/grep.cpp:1285
-#: src/main/grep.cpp:1287 src/main/grep.cpp:1580 src/main/grep.cpp:1588 src/main/grep.cpp:2124 src/main/grep.cpp:2126
-#: src/main/grep.cpp:2965 src/main/grep.cpp:2967 src/main/grep.cpp:3306
+#: src/main/agrep.cpp:527 src/main/agrep.cpp:763 src/main/connections.cpp:2886
+#: src/main/grep.cpp:569 src/main/grep.cpp:1285 src/main/grep.cpp:1287
+#: src/main/grep.cpp:1580 src/main/grep.cpp:1588 src/main/grep.cpp:2124
+#: src/main/grep.cpp:2126 src/main/grep.cpp:2965 src/main/grep.cpp:2967
+#: src/main/grep.cpp:3306
 #, c-format
 msgid "argument '%s' will be ignored"
 msgstr "引数 '%s' は無視されます"
@@ -630,8 +714,10 @@ msgstr "引数 '%s' は無視されます"
 msgid "input string x[%d] is invalid in this locale"
 msgstr "入力文字列 x[%d] はこのロケールでは不適切です"
 
-#: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482 src/main/print.cpp:1196 src/main/util.cpp:3206
-#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301 src/modules/X11/dataentry.cpp:452
+#: src/main/agrep.cpp:631 src/main/agrep.cpp:838 src/main/grep.cpp:482
+#: src/main/print.cpp:1196 src/main/util.cpp:3206
+#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
+#: src/modules/X11/dataentry.cpp:452
 #, fuzzy, c-format
 msgid "allocation error in '%s'"
 msgstr "'realpr' 中でメモリ確保に失敗しました"
@@ -641,7 +727,8 @@ msgstr "'realpr' 中でメモリ確保に失敗しました"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "入力文字列 y[%d] はこのロケールでは不適切です"
 
-#: src/main/altclasses.cpp:113 src/main/altclasses.cpp:147 src/main/altclasses.cpp:195 src/main/altclasses.cpp:248
+#: src/main/altclasses.cpp:113 src/main/altclasses.cpp:147
+#: src/main/altclasses.cpp:195 src/main/altclasses.cpp:248
 #: src/main/altclasses.cpp:335
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
@@ -651,13 +738,15 @@ msgstr ""
 msgid "method should only handle unexpanded vectors"
 msgstr ""
 
-#: src/main/altclasses.cpp:380 src/main/altclasses.cpp:396 src/main/altclasses.cpp:435 src/main/altclasses.cpp:484
+#: src/main/altclasses.cpp:380 src/main/altclasses.cpp:396
+#: src/main/altclasses.cpp:435 src/main/altclasses.cpp:484
 #: src/main/altclasses.cpp:565
 #, c-format
 msgid "compact sequences with increment %f not supported yet"
 msgstr ""
 
-#: src/main/altclasses.cpp:588 src/main/seq.cpp:119 src/main/seq.cpp:908 src/main/seq.cpp:1156
+#: src/main/altclasses.cpp:588 src/main/seq.cpp:119 src/main/seq.cpp:908
+#: src/main/seq.cpp:1156
 msgid "result would be too long a vector"
 msgstr "結果のベクトルが長すぎます"
 
@@ -757,7 +846,8 @@ msgstr "引数はシンボルでなくてはいけません"
 msgid "'FUN.VALUE' must be a vector"
 msgstr "'FUN.VALUE' はベクトルでなければなりません"
 
-#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2019 src/main/serialize.cpp:2037
+#: src/main/apply.cpp:136 src/main/complex.cpp:818 src/main/serialize.cpp:2019
+#: src/main/serialize.cpp:2037
 msgid "invalid length"
 msgstr "長さが不正です"
 
@@ -787,7 +877,8 @@ msgstr ""
 "値の型は '%s' でなければなりません、\n"
 " しかし、FUN(X[[%lld]]) の結果の型が '%s' です"
 
-#: src/main/apply.cpp:226 src/main/apply.cpp:254 src/main/sort.cpp:1277 src/main/sort.cpp:1422 src/main/unique.cpp:1488
+#: src/main/apply.cpp:226 src/main/apply.cpp:254 src/main/sort.cpp:1277
+#: src/main/sort.cpp:1422 src/main/unique.cpp:1488
 #, fuzzy
 msgid "invalid type"
 msgstr "行のタイプが不正です"
@@ -850,7 +941,8 @@ msgstr "長いオブジェクトの長さが短いオブジェクトの長さの
 msgid "invalid argument to unary operator"
 msgstr "単項演算子に対する引数が不正です"
 
-#: src/main/arithmetic.cpp:709 src/main/arithmetic.cpp:737 src/main/arithmetic.cpp:760
+#: src/main/arithmetic.cpp:709 src/main/arithmetic.cpp:737
+#: src/main/arithmetic.cpp:760
 msgid "invalid unary operator"
 msgstr "不正な単項演算子です"
 
@@ -858,11 +950,13 @@ msgstr "不正な単項演算子です"
 msgid "unimplemented real function of 1 argument"
 msgstr "1 個の引数を持つ未実装の数値関数"
 
-#: src/main/arithmetic.cpp:1274 src/main/complex.cpp:700 src/main/complex.cpp:771
+#: src/main/arithmetic.cpp:1274 src/main/complex.cpp:700
+#: src/main/complex.cpp:771
 msgid "unimplemented complex function"
 msgstr "未実装の複素関数です"
 
-#: src/main/arithmetic.cpp:1550 src/main/arithmetic.cpp:2011 src/main/arithmetic.cpp:2178 src/main/arithmetic.cpp:2283
+#: src/main/arithmetic.cpp:1550 src/main/arithmetic.cpp:2011
+#: src/main/arithmetic.cpp:2178 src/main/arithmetic.cpp:2283
 #, c-format
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "%d 個の数値引数を持つ未実装の数値関数"
@@ -1038,8 +1132,9 @@ msgstr "'x' は正の長さを持たなければなりません"
 msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "'backsolve' 中に特異行列がありました。[%d] 番目の対角要素に最初の 0 があります。"
 
-#: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306 src/main/attrib.cpp:324 src/main/attrib.cpp:456
-#: src/main/attrib.cpp:503 src/main/attrib.cpp:557 src/main/RObject.cpp:129
+#: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306
+#: src/main/attrib.cpp:324 src/main/attrib.cpp:456 src/main/attrib.cpp:503
+#: src/main/attrib.cpp:557 src/main/RObject.cpp:129
 msgid "attempt to set an attribute on NULL"
 msgstr "NULL に対して属性を設定しようとしました"
 
@@ -1256,7 +1351,8 @@ msgstr "'%s' をクラス \"%s\" のオブジェクトに適用できるよう�
 msgid "resulting vector exceeds vector length limit in '%s'"
 msgstr "'%s' で出力されるベクタは、ベクタの長さの上限を超えています"
 
-#: src/main/bind.cpp:337 src/main/bind.cpp:375 src/main/bind.cpp:426 src/main/bind.cpp:509 src/main/bind.cpp:539
+#: src/main/bind.cpp:337 src/main/bind.cpp:375 src/main/bind.cpp:426
+#: src/main/bind.cpp:509 src/main/bind.cpp:539
 #, c-format
 msgid "type '%s' is unimplemented in '%s'"
 msgstr "'%s' 型 は '%s' 型には実装されていません"
@@ -1320,22 +1416,27 @@ msgstr "ベクトルのサイズは NA や NaN ではありえません"
 msgid "vector size cannot be infinite"
 msgstr "ベクトルのサイズは∞ではありえません"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957 src/main/sort.cpp:1578
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957
+#: src/main/sort.cpp:1578
 msgid "vector size specified is too large"
 msgstr "指定されたベクトルのサイズが長すぎます"
 
-#: src/main/builtin.cpp:94 src/main/builtin.cpp:130 src/main/envir.cpp:1860 src/main/envir.cpp:1971 src/main/envir.cpp:2072
-#: src/main/envir.cpp:2203 src/main/paste.cpp:121 src/main/paste.cpp:363 src/main/random.cpp:492 src/main/random.cpp:521
-#: src/main/unique.cpp:2315
+#: src/main/builtin.cpp:94 src/main/builtin.cpp:130 src/main/envir.cpp:1860
+#: src/main/envir.cpp:1971 src/main/envir.cpp:2072 src/main/envir.cpp:2203
+#: src/main/paste.cpp:121 src/main/paste.cpp:363 src/main/random.cpp:492
+#: src/main/random.cpp:521 src/main/unique.cpp:2315
 msgid "invalid first argument"
 msgstr "一番目の引数が不正です"
 
-#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313 src/main/builtin.cpp:352 src/main/builtin.cpp:402
-#: src/main/builtin.cpp:416 src/main/coerce.cpp:1581 src/main/connections.cpp:3894 src/main/engine.cpp:3221 src/main/envir.cpp:992
-#: src/main/envir.cpp:1042 src/main/envir.cpp:1208 src/main/envir.cpp:1246 src/main/envir.cpp:2007 src/main/envir.cpp:2081
-#: src/main/envir.cpp:2210 src/main/envir.cpp:2933 src/main/envir.cpp:3017 src/main/Environment.cpp:112 src/main/eval.cpp:8913
-#: src/main/objects.cpp:258 src/main/objects.cpp:266 src/main/saveload.cpp:2212 src/main/saveload.cpp:2487
-#: src/main/serialize.cpp:3232
+#: src/main/builtin.cpp:103 src/main/builtin.cpp:112 src/main/builtin.cpp:313
+#: src/main/builtin.cpp:352 src/main/builtin.cpp:402 src/main/builtin.cpp:416
+#: src/main/coerce.cpp:1581 src/main/connections.cpp:3894
+#: src/main/engine.cpp:3221 src/main/envir.cpp:992 src/main/envir.cpp:1042
+#: src/main/envir.cpp:1208 src/main/envir.cpp:1246 src/main/envir.cpp:2007
+#: src/main/envir.cpp:2081 src/main/envir.cpp:2210 src/main/envir.cpp:2933
+#: src/main/envir.cpp:3017 src/main/Environment.cpp:112 src/main/eval.cpp:8913
+#: src/main/objects.cpp:259 src/main/objects.cpp:267 src/main/saveload.cpp:2212
+#: src/main/saveload.cpp:2487 src/main/serialize.cpp:3232
 msgid "use of NULL environment is defunct"
 msgstr "NULL環境の使用は廃要素です"
 
@@ -1352,13 +1453,15 @@ msgstr ""
 msgid "replacement object is not an environment"
 msgstr "置き換えるオブジェクトが環境ではありません"
 
-#: src/main/builtin.cpp:356 src/main/coerce.cpp:2738 src/main/engine.cpp:3225 src/main/envir.cpp:1899 src/main/envir.cpp:2940
-#: src/main/envir.cpp:3019 src/main/unique.cpp:1920
+#: src/main/builtin.cpp:356 src/main/coerce.cpp:2738 src/main/engine.cpp:3225
+#: src/main/envir.cpp:1899 src/main/envir.cpp:2940 src/main/envir.cpp:3019
+#: src/main/unique.cpp:1920
 #, fuzzy, c-format
 msgid "'%s' must be an environment"
 msgstr "'enclos' は環境でなくてはなりません"
 
-#: src/main/builtin.cpp:374 src/main/builtin.cpp:407 src/main/builtin.cpp:421 src/main/memory.cpp:4387
+#: src/main/builtin.cpp:374 src/main/builtin.cpp:407 src/main/builtin.cpp:421
+#: src/main/memory.cpp:4387
 #, fuzzy, c-format
 msgid "'%s' is not an environment"
 msgstr "'parent' は環境ではありません"
@@ -1379,9 +1482,12 @@ msgstr "名前空間の親の環境は設定できません"
 msgid "can not set the parent environment of package imports"
 msgstr "パッケージのインポートの親の環境は設定できません"
 
-#: src/main/builtin.cpp:566 src/main/connections.cpp:4560 src/main/connections.cpp:4945 src/main/connections.cpp:4972
-#: src/main/connections.cpp:5353 src/main/connections.cpp:5416 src/main/connections.cpp:5641 src/main/connections.cpp:5645
-#: src/main/connections.cpp:6098 src/main/deparse.cpp:422 src/main/deparse.cpp:508 src/main/serialize.cpp:2506
+#: src/main/builtin.cpp:566 src/main/connections.cpp:4560
+#: src/main/connections.cpp:4945 src/main/connections.cpp:4972
+#: src/main/connections.cpp:5353 src/main/connections.cpp:5416
+#: src/main/connections.cpp:5641 src/main/connections.cpp:5645
+#: src/main/connections.cpp:6098 src/main/deparse.cpp:422
+#: src/main/deparse.cpp:508 src/main/serialize.cpp:2506
 msgid "cannot write to this connection"
 msgstr "このコネクションには書き出せません"
 
@@ -1427,9 +1533,10 @@ msgstr ""
 msgid "wrong length for '%s' argument"
 msgstr "'%s' 引数の長さが不正です"
 
-#: src/main/builtin.cpp:983 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846 src/main/eval.cpp:1067 src/main/eval.cpp:1230
-#: src/main/eval.cpp:3696 src/main/eval.cpp:3779 src/main/eval.cpp:3846 src/main/eval.cpp:4192 src/main/eval.cpp:7934
-#: src/main/eval.cpp:8077
+#: src/main/builtin.cpp:983 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846
+#: src/main/eval.cpp:1067 src/main/eval.cpp:1230 src/main/eval.cpp:3696
+#: src/main/eval.cpp:3779 src/main/eval.cpp:3846 src/main/eval.cpp:4192
+#: src/main/eval.cpp:7934 src/main/eval.cpp:8077
 msgid "'...' used in an incorrect context"
 msgstr "'...' が不適切な文脈で使われました"
 
@@ -1438,8 +1545,8 @@ msgstr "'...' が不適切な文脈で使われました"
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "重複する 'switch' 既定値: '%s' と '%s'"
 
-#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564 src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678
-#: src/main/eval.cpp:3714
+#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564
+#: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3714
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s' が見つかりません"
@@ -1470,13 +1577,16 @@ msgid "%d argument passed to '%s' which requires %d to %d"
 msgid_plural "%d arguments passed to '%s' which requires %d to %d"
 msgstr[0] "%d 個の引数が '%s' に渡されましたが、%d から%dが必要とされています"
 
-#: src/main/character.cpp:143 src/main/character.cpp:146 src/main/character.cpp:332 src/main/character.cpp:335
+#: src/main/character.cpp:143 src/main/character.cpp:146
+#: src/main/character.cpp:332 src/main/character.cpp:335
 #, c-format
 msgid "'%s' requires a character vector"
 msgstr "'%s' は文字ベクトルを要求します"
 
-#: src/main/character.cpp:195 src/main/character.cpp:221 src/main/character.cpp:235 src/main/character.cpp:299
-#: src/main/character.cpp:407 src/main/character.cpp:609 src/main/character.cpp:614
+#: src/main/character.cpp:195 src/main/character.cpp:221
+#: src/main/character.cpp:235 src/main/character.cpp:299
+#: src/main/character.cpp:407 src/main/character.cpp:609
+#: src/main/character.cpp:614
 #, fuzzy, c-format
 msgid "invalid multibyte string, %s"
 msgstr "%d は不正なマルチバイト文字です"
@@ -1583,27 +1693,39 @@ msgstr "不正なマルチバイト文字列入力 %lld です"
 msgid "strtrim() requires a character vector"
 msgstr "strtrim() 関数は文字ベクトルを要求します"
 
-#: src/main/character.cpp:1852 src/main/connections.cpp:4425 src/main/context.cpp:747 src/main/context.cpp:761
-#: src/main/datetime.cpp:1020 src/main/datetime.cpp:1050 src/main/datetime.cpp:1157 src/main/datetime.cpp:1275
-#: src/main/datetime.cpp:1497 src/main/datetime.cpp:1659 src/main/datetime.cpp:1978 src/main/dotcode.cpp:235
-#: src/main/errors.cpp:1169 src/main/errors.cpp:1191 src/main/errors.cpp:1309 src/main/errors.cpp:1316 src/main/errors.cpp:1579
-#: src/main/errors.cpp:2250 src/main/options.cpp:498 src/main/options.cpp:653 src/main/options.cpp:661 src/main/options.cpp:667
-#: src/main/options.cpp:675 src/main/options.cpp:682 src/main/options.cpp:687 src/main/options.cpp:694 src/main/options.cpp:704
-#: src/main/options.cpp:719 src/main/options.cpp:725 src/main/options.cpp:730 src/main/options.cpp:739 src/main/options.cpp:748
-#: src/main/options.cpp:763 src/main/options.cpp:773 src/main/options.cpp:787 src/main/options.cpp:793 src/main/options.cpp:827
-#: src/main/options.cpp:847 src/main/options.cpp:860 src/main/options.cpp:901 src/main/options.cpp:912 src/main/options.cpp:921
-#: src/main/platform.cpp:3872 src/main/seq.cpp:275 src/main/seq.cpp:282 src/main/seq.cpp:286 src/main/seq.cpp:396
-#: src/main/seq.cpp:403 src/main/seq.cpp:406 src/main/seq.cpp:408 src/main/seq.cpp:465 src/main/seq.cpp:469 src/main/seq.cpp:473
-#: src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591 src/main/source.cpp:230 src/main/sysutils.cpp:282
-#: src/main/util.cpp:1215 src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611 src/modules/lapack/Lapack.cpp:1093
-#: src/modules/X11/devX11.cpp:3231 src/modules/X11/devX11.cpp:3258 src/modules/X11/devX11.cpp:3263 src/modules/X11/devX11.cpp:3268
-#: src/modules/X11/devX11.cpp:3278 src/modules/X11/devX11.cpp:3283 src/modules/X11/devX11.cpp:3287 src/modules/X11/devX11.cpp:3291
-#: src/modules/X11/devX11.cpp:3296
+#: src/main/character.cpp:1852 src/main/connections.cpp:4425
+#: src/main/context.cpp:747 src/main/context.cpp:761 src/main/datetime.cpp:1020
+#: src/main/datetime.cpp:1050 src/main/datetime.cpp:1157
+#: src/main/datetime.cpp:1275 src/main/datetime.cpp:1497
+#: src/main/datetime.cpp:1659 src/main/datetime.cpp:1978
+#: src/main/dotcode.cpp:235 src/main/errors.cpp:1169 src/main/errors.cpp:1191
+#: src/main/errors.cpp:1309 src/main/errors.cpp:1316 src/main/errors.cpp:1579
+#: src/main/errors.cpp:2250 src/main/options.cpp:498 src/main/options.cpp:653
+#: src/main/options.cpp:661 src/main/options.cpp:667 src/main/options.cpp:675
+#: src/main/options.cpp:682 src/main/options.cpp:687 src/main/options.cpp:694
+#: src/main/options.cpp:704 src/main/options.cpp:719 src/main/options.cpp:725
+#: src/main/options.cpp:730 src/main/options.cpp:739 src/main/options.cpp:748
+#: src/main/options.cpp:763 src/main/options.cpp:773 src/main/options.cpp:787
+#: src/main/options.cpp:793 src/main/options.cpp:827 src/main/options.cpp:847
+#: src/main/options.cpp:860 src/main/options.cpp:901 src/main/options.cpp:912
+#: src/main/options.cpp:923 src/main/platform.cpp:3872 src/main/seq.cpp:275
+#: src/main/seq.cpp:282 src/main/seq.cpp:286 src/main/seq.cpp:396
+#: src/main/seq.cpp:403 src/main/seq.cpp:406 src/main/seq.cpp:408
+#: src/main/seq.cpp:465 src/main/seq.cpp:469 src/main/seq.cpp:473
+#: src/main/sort.cpp:1580 src/main/sort.cpp:1584 src/main/sort.cpp:1591
+#: src/main/source.cpp:230 src/main/sysutils.cpp:282 src/main/util.cpp:1215
+#: src/main/util.cpp:1220 src/main/util.cpp:1227 src/main/util.cpp:2611
+#: src/modules/lapack/Lapack.cpp:1093 src/modules/X11/devX11.cpp:3231
+#: src/modules/X11/devX11.cpp:3258 src/modules/X11/devX11.cpp:3263
+#: src/modules/X11/devX11.cpp:3268 src/modules/X11/devX11.cpp:3278
+#: src/modules/X11/devX11.cpp:3283 src/modules/X11/devX11.cpp:3287
+#: src/modules/X11/devX11.cpp:3291 src/modules/X11/devX11.cpp:3296
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' の値が不正です"
 
-#: src/main/character.cpp:1860 src/main/envir.cpp:3996 src/main/envir.cpp:4018 src/main/envir.cpp:4027 src/main/grep.cpp:203
+#: src/main/character.cpp:1860 src/main/envir.cpp:3996 src/main/envir.cpp:4018
+#: src/main/envir.cpp:4027 src/main/grep.cpp:203
 #, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "変数名は %d バイトが上限です"
@@ -1713,12 +1835,14 @@ msgstr "引数リストが不正です"
 msgid "'length = %lld' in coercion to '%s'"
 msgstr ""
 
-#: src/main/coerce.cpp:1773 src/main/debug.cpp:124 src/main/util.cpp:721 src/main/util.cpp:724
+#: src/main/coerce.cpp:1773 src/main/debug.cpp:124 src/main/util.cpp:721
+#: src/main/util.cpp:724
 #, fuzzy, c-format
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "三番目の引数は 'TRUE' か 'FALSE' でなくてはなりません"
 
-#: src/main/coerce.cpp:1793 src/main/coerce.cpp:1801 src/main/coerce.cpp:1810 src/main/coerce.cpp:1818
+#: src/main/coerce.cpp:1793 src/main/coerce.cpp:1801 src/main/coerce.cpp:1810
+#: src/main/coerce.cpp:1818
 #, fuzzy
 msgid "NA in coercion to boolean"
 msgstr "強制変換により NA が生成されました"
@@ -1816,7 +1940,8 @@ msgstr ""
 msgid "invalid to change the storage mode of a factor"
 msgstr "因子保管モードを変更するのは不正です"
 
-#: src/main/colors.cpp:65 src/main/colors.cpp:79 src/main/colors.cpp:87 src/main/colors.cpp:95
+#: src/main/colors.cpp:65 src/main/colors.cpp:79 src/main/colors.cpp:87
+#: src/main/colors.cpp:95
 #, fuzzy
 msgid "package grDevices must be loaded"
 msgstr " LAPACK ルーチンはロードできませんでした "
@@ -1934,22 +2059,28 @@ msgstr "コネクションが不正です"
 msgid "closing unused connection %d (%s)\n"
 msgstr "使われていないコネクション %d (%s) を閉じます \n"
 
-#: src/main/connections.cpp:313 src/main/serialize.cpp:1754 src/main/serialize.cpp:1775 src/main/sysutils.cpp:739
-#: src/main/sysutils.cpp:761 src/main/sysutils.cpp:782 src/main/sysutils.cpp:1729 src/main/sysutils.cpp:1744
-#: src/main/sysutils.cpp:1958 src/main/sysutils.cpp:2126 src/main/sysutils.cpp:2135 src/main/sysutils.cpp:2147
+#: src/main/connections.cpp:313 src/main/serialize.cpp:1754
+#: src/main/serialize.cpp:1775 src/main/sysutils.cpp:739
+#: src/main/sysutils.cpp:761 src/main/sysutils.cpp:782
+#: src/main/sysutils.cpp:1729 src/main/sysutils.cpp:1744
+#: src/main/sysutils.cpp:1958 src/main/sysutils.cpp:2126
+#: src/main/sysutils.cpp:2135 src/main/sysutils.cpp:2147
 #: src/main/sysutils.cpp:2558
 #, c-format
 msgid "unsupported conversion from '%s' to '%s'"
 msgstr "'%s' から '%s' へのサポートされていない変換です"
 
-#: src/main/connections.cpp:374 src/main/connections.cpp:4624 src/main/connections.cpp:4749 src/main/connections.cpp:4836
+#: src/main/connections.cpp:374 src/main/connections.cpp:4624
+#: src/main/connections.cpp:4749 src/main/connections.cpp:4836
 #: src/main/connections.cpp:4865 src/main/connections.cpp:4898
 #, fuzzy
 msgid "error reading from the connection"
 msgstr "コネクションからの読み取りエラーが発生しました"
 
-#: src/main/connections.cpp:474 src/main/connections.cpp:489 src/main/connections.cpp:707 src/main/connections.cpp:712
-#: src/main/connections.cpp:717 src/main/connections.cpp:728 src/main/connections.cpp:734
+#: src/main/connections.cpp:474 src/main/connections.cpp:489
+#: src/main/connections.cpp:707 src/main/connections.cpp:712
+#: src/main/connections.cpp:717 src/main/connections.cpp:728
+#: src/main/connections.cpp:734
 #, c-format
 msgid "%s not enabled for this connection"
 msgstr "このコネクションでは %s は有効になっていません"
@@ -1978,7 +2109,8 @@ msgstr "ファイル '%ls' を開くことができません: %s"
 msgid "'fdopen' is not supported on this platform"
 msgstr "'dirmark = TRUE' はこのプラットフォームではサポートされていません"
 
-#: src/main/connections.cpp:927 src/main/connections.cpp:1875 src/main/connections.cpp:2027 src/main/connections.cpp:2232
+#: src/main/connections.cpp:927 src/main/connections.cpp:1875
+#: src/main/connections.cpp:2027 src/main/connections.cpp:2232
 #: src/main/connections.cpp:2473
 #, fuzzy, c-format
 msgid "cannot open file '%s': it is a directory"
@@ -2004,7 +2136,8 @@ msgstr "ファイルの切りつめに失敗しました"
 msgid "file truncation unavailable on this platform"
 msgstr "このプラットフォームではファイルの切りつめはできません"
 
-#: src/main/connections.cpp:1156 src/main/connections.cpp:1160 src/main/connections.cpp:1167 src/main/connections.cpp:1185
+#: src/main/connections.cpp:1156 src/main/connections.cpp:1160
+#: src/main/connections.cpp:1167 src/main/connections.cpp:1185
 msgid "allocation of file connection failed"
 msgstr "ファイル接続の割り当てに失敗しました"
 
@@ -2028,9 +2161,12 @@ msgstr "fifo '%s' は準備ができていません"
 msgid "cannot open fifo '%s'"
 msgstr "fifo '%s' を開くことができません"
 
-#: src/main/connections.cpp:1299 src/main/connections.cpp:1310 src/main/connections.cpp:1468 src/main/connections.cpp:1486
-#: src/main/connections.cpp:1941 src/main/connections.cpp:1951 src/main/connections.cpp:2081 src/main/connections.cpp:2150
-#: src/main/connections.cpp:3031 src/main/connections.cpp:3047 src/main/connections.cpp:3372 src/main/connections.cpp:6284
+#: src/main/connections.cpp:1299 src/main/connections.cpp:1310
+#: src/main/connections.cpp:1468 src/main/connections.cpp:1486
+#: src/main/connections.cpp:1941 src/main/connections.cpp:1951
+#: src/main/connections.cpp:2081 src/main/connections.cpp:2150
+#: src/main/connections.cpp:3031 src/main/connections.cpp:3047
+#: src/main/connections.cpp:3372 src/main/connections.cpp:6284
 #: src/main/connections.cpp:6348
 msgid "too large a block specified"
 msgstr "指定されたブロックが大きすぎます"
@@ -2053,18 +2189,24 @@ msgstr "fifoバッファの割付に失敗しました"
 msgid "cannot write FIFO '%s'"
 msgstr "FIFO '%s' に書き込めません"
 
-#: src/main/connections.cpp:1538 src/main/connections.cpp:1542 src/main/connections.cpp:1549 src/main/connections.cpp:1566
+#: src/main/connections.cpp:1538 src/main/connections.cpp:1542
+#: src/main/connections.cpp:1549 src/main/connections.cpp:1566
 msgid "allocation of fifo connection failed"
 msgstr "fifo 接続の割り当てに失敗しました"
 
-#: src/main/connections.cpp:1596 src/main/connections.cpp:4115 src/main/connections.cpp:4436 src/main/connections.cpp:4557
-#: src/main/connections.cpp:4716 src/main/connections.cpp:4970 src/main/connections.cpp:5290 src/main/connections.cpp:5414
-#: src/main/connections.cpp:5637 src/main/dcf.cpp:105 src/main/deparse.cpp:419 src/main/deparse.cpp:505 src/main/saveload.cpp:2395
-#: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2670 src/main/serialize.cpp:2725 src/main/source.cpp:293
+#: src/main/connections.cpp:1596 src/main/connections.cpp:4115
+#: src/main/connections.cpp:4436 src/main/connections.cpp:4557
+#: src/main/connections.cpp:4716 src/main/connections.cpp:4970
+#: src/main/connections.cpp:5290 src/main/connections.cpp:5414
+#: src/main/connections.cpp:5637 src/main/dcf.cpp:105 src/main/deparse.cpp:419
+#: src/main/deparse.cpp:505 src/main/saveload.cpp:2395
+#: src/main/saveload.cpp:2476 src/main/scan.cpp:966 src/main/serialize.cpp:2670
+#: src/main/serialize.cpp:2725 src/main/source.cpp:293
 msgid "cannot open the connection"
 msgstr "コネクションを開くことができません"
 
-#: src/main/connections.cpp:1614 src/main/connections.cpp:1784 src/main/connections.cpp:2765 src/main/connections.cpp:4053
+#: src/main/connections.cpp:1614 src/main/connections.cpp:1784
+#: src/main/connections.cpp:2765 src/main/connections.cpp:4053
 #: src/main/connections.cpp:5853
 msgid "only first element of 'description' argument used"
 msgstr "'description' 引数の最初の要素だけが使われました"
@@ -2087,7 +2229,8 @@ msgstr "pipe() cmd '%ls' を開くことができません: %s"
 msgid "cannot open pipe() cmd '%s': %s"
 msgstr "pipe() コマンド '%s' を開くことができません: %s"
 
-#: src/main/connections.cpp:1880 src/main/connections.cpp:2226 src/main/connections.cpp:2467
+#: src/main/connections.cpp:1880 src/main/connections.cpp:2226
+#: src/main/connections.cpp:2467
 #, c-format
 msgid "cannot open compressed file '%s', probable reason '%s'"
 msgstr "圧縮されたファイル '%s' を開くことができません, 理由は '%s' です"
@@ -2100,7 +2243,8 @@ msgstr "gzfile コネクションに対しては、whence = \"end\" は未実装
 msgid "seek on a gzfile connection returned an internal error"
 msgstr "gzfile コネクションをシーク中に内部エラーを検出しました"
 
-#: src/main/connections.cpp:1960 src/main/connections.cpp:1964 src/main/connections.cpp:1971 src/main/connections.cpp:1989
+#: src/main/connections.cpp:1960 src/main/connections.cpp:1964
+#: src/main/connections.cpp:1971 src/main/connections.cpp:1989
 msgid "allocation of gzfile connection failed"
 msgstr "gzfile 接続の割り当てに失敗しました"
 
@@ -2128,7 +2272,8 @@ msgstr "bzfile のためのオーバーフローバッファの割り当ては�
 msgid "file '%s' has trailing content that appears not to be compressed by bzip2"
 msgstr "ファイル '%s' は bzip2 で圧縮されていないようです"
 
-#: src/main/connections.cpp:2161 src/main/connections.cpp:2165 src/main/connections.cpp:2172 src/main/connections.cpp:2190
+#: src/main/connections.cpp:2161 src/main/connections.cpp:2165
+#: src/main/connections.cpp:2172 src/main/connections.cpp:2190
 msgid "allocation of bzfile connection failed"
 msgstr "bzfile 接続の割り当てに失敗しました"
 
@@ -2137,7 +2282,8 @@ msgstr "bzfile 接続の割り当てに失敗しました"
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "lzma デコーダーを初期化できません、エラー %d"
 
-#: src/main/connections.cpp:2253 src/main/connections.cpp:6810 src/main/connections.cpp:7021
+#: src/main/connections.cpp:2253 src/main/connections.cpp:6810
+#: src/main/connections.cpp:7021
 #, fuzzy
 msgid "problem setting presets"
 msgstr "タイムゾーンの設定に問題があります"
@@ -2147,7 +2293,8 @@ msgstr "タイムゾーンの設定に問題があります"
 msgid "cannot initialize lzma encoder, error %d"
 msgstr "lzma エンコーダーを初期化できません、エラー %d"
 
-#: src/main/connections.cpp:2286 src/main/connections.cpp:2379 src/main/connections.cpp:2527 src/main/connections.cpp:2639
+#: src/main/connections.cpp:2286 src/main/connections.cpp:2379
+#: src/main/connections.cpp:2527 src/main/connections.cpp:2639
 #, fuzzy
 msgid "fwrite error"
 msgstr "読み込みエラーです"
@@ -2178,7 +2325,8 @@ msgstr ""
 msgid "lzma encoding result %d"
 msgstr ""
 
-#: src/main/connections.cpp:2388 src/main/connections.cpp:2392 src/main/connections.cpp:2399 src/main/connections.cpp:2418
+#: src/main/connections.cpp:2388 src/main/connections.cpp:2392
+#: src/main/connections.cpp:2399 src/main/connections.cpp:2418
 msgid "allocation of xzfile connection failed"
 msgstr "xzfile 接続の割り当てに失敗しました"
 
@@ -2201,12 +2349,14 @@ msgstr "lzma デコーダーを初期化できません、エラー %d"
 msgid "decompress error: %s"
 msgstr "regcomp のエラー: '%s'"
 
-#: src/main/connections.cpp:2651 src/main/connections.cpp:2655 src/main/connections.cpp:2662 src/main/connections.cpp:2681
+#: src/main/connections.cpp:2651 src/main/connections.cpp:2655
+#: src/main/connections.cpp:2662 src/main/connections.cpp:2681
 #, fuzzy
 msgid "allocation of zstdfile connection failed"
 msgstr "gzfile 接続の割り当てに失敗しました"
 
-#: src/main/connections.cpp:2691 src/main/connections.cpp:6912 src/main/connections.cpp:7061 src/main/connections.cpp:7293
+#: src/main/connections.cpp:2691 src/main/connections.cpp:6912
+#: src/main/connections.cpp:7061 src/main/connections.cpp:7293
 msgid "Zstd compression support was not included in this R binary."
 msgstr ""
 
@@ -2219,7 +2369,8 @@ msgstr "これは R のこのビルトがサポートしていない %s-圧縮�
 msgid "memory allocation to copy clipboard failed"
 msgstr "クリップボードのコピーでメモリ確保に失敗しました"
 
-#: src/main/connections.cpp:2913 src/modules/X11/devX11.cpp:3451 src/modules/X11/devX11.cpp:3456
+#: src/main/connections.cpp:2913 src/modules/X11/devX11.cpp:3451
+#: src/modules/X11/devX11.cpp:3456
 msgid "clipboard cannot be opened or contains no text"
 msgstr "クリップボードを開くことができないか、中身がありません"
 
@@ -2255,11 +2406,13 @@ msgstr "クリップボードの 'mode' は 'r' か 'w' でなければなりま
 msgid "'mode' for the clipboard must be 'r' on Unix"
 msgstr "Unix ではクリップボードの 'mode' は 'r' でなければなりません"
 
-#: src/main/connections.cpp:3104 src/main/connections.cpp:3110 src/main/connections.cpp:3117 src/main/connections.cpp:3135
+#: src/main/connections.cpp:3104 src/main/connections.cpp:3110
+#: src/main/connections.cpp:3117 src/main/connections.cpp:3135
 msgid "allocation of clipboard connection failed"
 msgstr "クリップボード接続の割り当てに失敗しました"
 
-#: src/main/connections.cpp:3205 src/main/connections.cpp:3209 src/main/connections.cpp:3216
+#: src/main/connections.cpp:3205 src/main/connections.cpp:3209
+#: src/main/connections.cpp:3216
 msgid "allocation of terminal connection failed"
 msgstr "ターミナル接続の割り当てに失敗しました"
 
@@ -2271,7 +2424,8 @@ msgstr "ベクトルに追加しようとした要素が多すぎます"
 msgid "attempt to seek outside the range of the raw connection"
 msgstr "raw コネクションの範囲を超えて探索しようとしました"
 
-#: src/main/connections.cpp:3412 src/main/connections.cpp:3416 src/main/connections.cpp:3423 src/main/connections.cpp:3450
+#: src/main/connections.cpp:3412 src/main/connections.cpp:3416
+#: src/main/connections.cpp:3423 src/main/connections.cpp:3450
 msgid "allocation of raw connection failed"
 msgstr "raw コネクションの割り当てに失敗しました"
 
@@ -2301,8 +2455,10 @@ msgstr "テキストコネクション用にメモリを割り当てることが
 msgid "seek is not relevant for text connection"
 msgstr "テキストコネクションにおいて seek は不適切です"
 
-#: src/main/connections.cpp:3623 src/main/connections.cpp:3627 src/main/connections.cpp:3634 src/main/connections.cpp:3648
-#: src/main/connections.cpp:3833 src/main/connections.cpp:3837 src/main/connections.cpp:3844 src/main/connections.cpp:3858
+#: src/main/connections.cpp:3623 src/main/connections.cpp:3627
+#: src/main/connections.cpp:3634 src/main/connections.cpp:3648
+#: src/main/connections.cpp:3833 src/main/connections.cpp:3837
+#: src/main/connections.cpp:3844 src/main/connections.cpp:3858
 #: src/main/connections.cpp:3866
 msgid "allocation of text connection failed"
 msgstr "テキスト接続の割り当てに失敗しました"
@@ -2329,8 +2485,10 @@ msgstr "サポートされていないモードです"
 msgid "'con' is not an output textConnection"
 msgstr "'con' は出力テキストコネクションではありません"
 
-#: src/main/connections.cpp:4097 src/main/connections.cpp:4144 src/main/connections.cpp:4155 src/main/connections.cpp:4234
-#: src/main/connections.cpp:4264 src/main/connections.cpp:4286 src/main/connections.cpp:4298 src/main/connections.cpp:4417
+#: src/main/connections.cpp:4097 src/main/connections.cpp:4144
+#: src/main/connections.cpp:4155 src/main/connections.cpp:4234
+#: src/main/connections.cpp:4264 src/main/connections.cpp:4286
+#: src/main/connections.cpp:4298 src/main/connections.cpp:4417
 #: src/main/connections.cpp:4544 src/main/connections.cpp:6388
 msgid "'con' is not a connection"
 msgstr "'con' はコネクションではありません"
@@ -2369,7 +2527,8 @@ msgstr "'output' sink コネクションを閉じることができません"
 msgid "cannot close 'message' sink connection"
 msgstr "'message' sink コネクションを閉じることができません"
 
-#: src/main/connections.cpp:4266 src/main/connections.cpp:6097 src/main/connections.cpp:6105 src/main/serialize.cpp:2496
+#: src/main/connections.cpp:4266 src/main/connections.cpp:6097
+#: src/main/connections.cpp:6105 src/main/serialize.cpp:2496
 #: src/main/serialize.cpp:2504
 msgid "connection is not open"
 msgstr "コネクションは開かれていません"
@@ -2389,8 +2548,10 @@ msgstr "コネクションへの書き込みエラーが発生しました"
 msgid "Error writing to connection"
 msgstr "コネクションへの書き込みエラーが発生しました"
 
-#: src/main/connections.cpp:4438 src/main/connections.cpp:4440 src/main/connections.cpp:4719 src/main/connections.cpp:5275
-#: src/main/connections.cpp:5293 src/main/connections.cpp:6106 src/main/dcf.cpp:107 src/main/scan.cpp:969 src/main/scan.cpp:973
+#: src/main/connections.cpp:4438 src/main/connections.cpp:4440
+#: src/main/connections.cpp:4719 src/main/connections.cpp:5275
+#: src/main/connections.cpp:5293 src/main/connections.cpp:6106
+#: src/main/dcf.cpp:107 src/main/scan.cpp:969 src/main/scan.cpp:973
 #: src/main/serialize.cpp:2498 src/main/source.cpp:296
 msgid "cannot read from this connection"
 msgstr "このコネクションから読み込みできません"
@@ -2433,8 +2594,10 @@ msgstr "バイナリコネクションからのみ入力できます"
 msgid "size changing is not supported for complex vectors"
 msgstr "複素ベクトルのサイズの変更はサポートされていません"
 
-#: src/main/connections.cpp:4782 src/main/connections.cpp:4816 src/main/connections.cpp:4860 src/main/connections.cpp:4891
-#: src/main/connections.cpp:4911 src/main/connections.cpp:5031 src/main/connections.cpp:5089 src/main/connections.cpp:5120
+#: src/main/connections.cpp:4782 src/main/connections.cpp:4816
+#: src/main/connections.cpp:4860 src/main/connections.cpp:4891
+#: src/main/connections.cpp:4911 src/main/connections.cpp:5031
+#: src/main/connections.cpp:5089 src/main/connections.cpp:5120
 #, c-format
 msgid "size %d is unknown on this machine"
 msgstr "このマシンでは %d というサイズは使われていません"
@@ -2463,7 +2626,8 @@ msgstr "raw ベクトルには 2^31-1 バイトしか書き込みできません
 msgid "only 2^31-1 bytes can be written in a single writeBin() call"
 msgstr "一つの writeBin() 呼び出しには 2^31-1 バイトしか書き込みできません"
 
-#: src/main/connections.cpp:5008 src/main/connections.cpp:5150 src/main/connections.cpp:5444 src/main/connections.cpp:5486
+#: src/main/connections.cpp:5008 src/main/connections.cpp:5150
+#: src/main/connections.cpp:5444 src/main/connections.cpp:5486
 msgid "problem writing to connection"
 msgstr "コネクションへの書き込みに問題があります"
 
@@ -2471,7 +2635,8 @@ msgstr "コネクションへの書き込みに問題があります"
 msgid "size changing is not supported for raw vectors"
 msgstr "raw ベクトルのサイズの変更はサポートされていません"
 
-#: src/main/connections.cpp:5189 src/main/connections.cpp:5193 src/main/connections.cpp:5237
+#: src/main/connections.cpp:5189 src/main/connections.cpp:5193
+#: src/main/connections.cpp:5237
 msgid "invalid UTF-8 input in readChar()"
 msgstr "readChar() 関数への不正な UTF-8 入力です"
 
@@ -2509,7 +2674,8 @@ msgstr "writeChar: 文字列中に今ある以上の文字が要求されてい�
 msgid "maximum number of pushback lines exceeded"
 msgstr "pushback 行の最大値を超えてしまいました"
 
-#: src/main/connections.cpp:5528 src/main/connections.cpp:5532 src/main/connections.cpp:5567 src/main/connections.cpp:5575
+#: src/main/connections.cpp:5528 src/main/connections.cpp:5532
+#: src/main/connections.cpp:5567 src/main/connections.cpp:5575
 msgid "could not allocate space for pushback"
 msgstr "pushｂack のための領域を割り当てられませんでした"
 
@@ -2566,7 +2732,7 @@ msgstr "このメソッドではURLスキームはサポートされていませ
 msgid "https:// URLs are not supported by the \"internal\" method"
 msgstr "このメソッドではURLスキームはサポートされていません"
 
-#: src/main/connections.cpp:5983 src/modules/internet/libcurl.cpp:1400
+#: src/main/connections.cpp:5983 src/modules/internet/libcurl.cpp:1408
 msgid "url(method = \"libcurl\") is not supported on this platform"
 msgstr "このプラットフォームでは url(method = \"libcurl\")はサポートされていません"
 
@@ -2633,7 +2799,8 @@ msgstr "テキストモード 'file' コネクションの使用は正しく機�
 msgid "cannot create a 'gzcon' connection from a writable textConnection; maybe use rawConnection"
 msgstr "書き込み可能な textConnection からの 'gzcon' コネクションを作成できません; rawConnection を使うべきかもしれません"
 
-#: src/main/connections.cpp:6412 src/main/connections.cpp:6416 src/main/connections.cpp:6424 src/main/connections.cpp:6439
+#: src/main/connections.cpp:6412 src/main/connections.cpp:6416
+#: src/main/connections.cpp:6424 src/main/connections.cpp:6439
 msgid "allocation of 'gzcon' connection failed"
 msgstr "'gzcon' コネクションで割り当てに失敗しました"
 
@@ -2642,7 +2809,8 @@ msgstr "'gzcon' コネクションで割り当てに失敗しました"
 msgid "R_compress1 requires a raw vector"
 msgstr "'%s' は文字ベクトルを要求します"
 
-#: src/main/connections.cpp:6500 src/main/connections.cpp:6531 src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
+#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
 #, fuzzy, c-format
 msgid "allocation error in '%s' with libdeflate"
 msgstr "'realpr' 中でメモリ確保に失敗しました"
@@ -2661,11 +2829,16 @@ msgstr "'%s' は文字ベクトルを要求します"
 msgid "internal error %d in '%s' with libdeflate"
 msgstr "再帰的インデックスの使用中に、内部エラーが起きました"
 
-#: src/main/connections.cpp:6570 src/main/connections.cpp:6591 src/main/connections.cpp:6623 src/main/connections.cpp:6655
-#: src/main/connections.cpp:6664 src/main/connections.cpp:6842 src/main/connections.cpp:6849 src/main/connections.cpp:6883
-#: src/main/connections.cpp:6920 src/main/connections.cpp:6928 src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037 src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208 src/main/connections.cpp:7282
+#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
+#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
+#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
+#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
+#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
+#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
+#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
+#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
+#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
+#: src/main/connections.cpp:7282
 #, fuzzy, c-format
 msgid "internal error %d in '%s'"
 msgstr "'do_sys' で内部エラーが起きました"
@@ -2701,14 +2874,15 @@ msgstr "ソケットルーチンがロードできません"
 msgid "not a socket connection"
 msgstr "ソケットコネクションではありません"
 
-#: src/main/connections.cpp:6733 src/modules/internet/libcurl.cpp:694 src/modules/internet/sockconn.cpp:59
-#: src/modules/internet/sockconn.cpp:90 src/modules/internet/sockconn.cpp:291 src/unix/sys-std.cpp:139 src/unix/sys-std.cpp:251
-#: src/unix/sys-std.cpp:406
+#: src/main/connections.cpp:6733 src/modules/internet/libcurl.cpp:702
+#: src/modules/internet/sockconn.cpp:59 src/modules/internet/sockconn.cpp:90
+#: src/modules/internet/sockconn.cpp:291 src/unix/sys-std.cpp:139
+#: src/unix/sys-std.cpp:251 src/unix/sys-std.cpp:406
 #, fuzzy
 msgid "file descriptor is too large for select()"
 msgstr "長さ %d は大きすぎてハッシュできません"
 
-#: src/main/connections.cpp:6739 src/modules/internet/libcurl.cpp:878
+#: src/main/connections.cpp:6739 src/modules/internet/libcurl.cpp:886
 msgid "too many file descriptors for select()"
 msgstr ""
 
@@ -2765,7 +2939,8 @@ msgstr "内部エラー (do_summary 中の 'op = %d')。\t R の達人に相談�
 msgid "internal error in memDecompress(%s)"
 msgstr "'do_sys' で内部エラーが起きました"
 
-#: src/main/connections.cpp:7320 src/main/connections.cpp:7324 src/main/connections.cpp:7331
+#: src/main/connections.cpp:7320 src/main/connections.cpp:7324
+#: src/main/connections.cpp:7331
 #, c-format
 msgid "allocation of %s connection failed"
 msgstr "%s コネクションの割り当てに失敗しました"
@@ -2799,8 +2974,8 @@ msgstr "目標の文脈 (context) はスタック上にありません"
 msgid "NA argument is invalid"
 msgstr "引数リストは有効な名前ではありません"
 
-#: src/main/context.cpp:428 src/main/context.cpp:443 src/main/context.cpp:532 src/main/context.cpp:544 src/main/context.cpp:555
-#: src/main/context.cpp:567
+#: src/main/context.cpp:428 src/main/context.cpp:443 src/main/context.cpp:532
+#: src/main/context.cpp:544 src/main/context.cpp:555 src/main/context.cpp:567
 msgid "not that many frames on the stack"
 msgstr "それはスタック上の多くのフレームではありません"
 
@@ -2828,7 +3003,8 @@ msgstr ""
 msgid "debug will apply when function leaves compiled code"
 msgstr ""
 
-#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215 src/main/random.cpp:301
+#: src/main/context.cpp:750 src/main/random.cpp:123 src/main/random.cpp:215
+#: src/main/random.cpp:301
 #, fuzzy, c-format
 msgid "internal error in '%s'"
 msgstr "'do_sys' で内部エラーが起きました"
@@ -2854,7 +3030,8 @@ msgstr "複素数に対しては 'cummin' 関数は定義されていません"
 msgid "unknown cumxxx function"
 msgstr "未知の cumxxx 関数です"
 
-#: src/main/datetime.cpp:560 src/main/datetime.cpp:571 src/main/datetime.cpp:615 src/main/datetime.cpp:627
+#: src/main/datetime.cpp:560 src/main/datetime.cpp:571
+#: src/main/datetime.cpp:615 src/main/datetime.cpp:627
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
@@ -2863,7 +3040,8 @@ msgstr ""
 msgid "time zone specification is too long"
 msgstr "入力文字列が長すぎます"
 
-#: src/main/datetime.cpp:794 src/main/datetime.cpp:806 src/main/datetime.cpp:825 src/main/datetime.cpp:830
+#: src/main/datetime.cpp:794 src/main/datetime.cpp:806
+#: src/main/datetime.cpp:825 src/main/datetime.cpp:830
 msgid "problem with setting timezone"
 msgstr "タイムゾーンの設定に問題があります"
 
@@ -2871,7 +3049,8 @@ msgstr "タイムゾーンの設定に問題があります"
 msgid "cannot set timezones on this system"
 msgstr "このシステムではタイムゾーンは設定できません"
 
-#: src/main/datetime.cpp:836 src/main/datetime.cpp:838 src/main/datetime.cpp:840
+#: src/main/datetime.cpp:836 src/main/datetime.cpp:838
+#: src/main/datetime.cpp:840
 msgid "problem with unsetting timezone"
 msgstr "タイムゾーンが未設定による問題です"
 
@@ -3001,9 +3180,10 @@ msgstr "長さゼロの引数です"
 msgid "'opts' should be small non-negative integer"
 msgstr "'opts' は、小さな非負の整数でなくてはなりません"
 
-#: src/main/deparse.cpp:477 src/main/envir.cpp:1997 src/main/envir.cpp:2121 src/main/envir.cpp:2275 src/main/envir.cpp:3779
-#: src/main/eval.cpp:1074 src/main/eval.cpp:2645 src/main/eval.cpp:5793 src/main/saveload.cpp:2123 src/main/saveload.cpp:2437
-#: src/main/serialize.cpp:3250
+#: src/main/deparse.cpp:477 src/main/envir.cpp:1997 src/main/envir.cpp:2121
+#: src/main/envir.cpp:2275 src/main/envir.cpp:3779 src/main/eval.cpp:1074
+#: src/main/eval.cpp:2645 src/main/eval.cpp:5793 src/main/saveload.cpp:2123
+#: src/main/saveload.cpp:2437 src/main/serialize.cpp:3250
 #, c-format
 msgid "object '%s' not found"
 msgstr "オブジェクト '%s' がありません"
@@ -3082,7 +3262,8 @@ msgstr ""
 msgid "\"%s\" not resolved from current namespace (%s)"
 msgstr ""
 
-#: src/main/dotcode.cpp:304 src/main/dotcode.cpp:309 src/main/dotcode.cpp:314 src/main/dotcode.cpp:319
+#: src/main/dotcode.cpp:304 src/main/dotcode.cpp:309 src/main/dotcode.cpp:314
+#: src/main/dotcode.cpp:319
 #, c-format
 msgid "\"%s\" not available for %s() for package \"%s\""
 msgstr "\"%s\" は %s() に対しては (パッケージ \"%s\" に対して) 使えません"
@@ -3097,7 +3278,8 @@ msgstr "%s シンボル名 \"%s\" はパッケージ \"%s\" の DLL の中にあ
 msgid "%s symbol name \"%s\" not in load table"
 msgstr "%s シンボル名 \"%s\" は load table にありません"
 
-#: src/main/dotcode.cpp:378 src/main/dotcode.cpp:380 src/main/dotcode.cpp:390 src/main/dotcode.cpp:455 src/main/dotcode.cpp:462
+#: src/main/dotcode.cpp:378 src/main/dotcode.cpp:380 src/main/dotcode.cpp:390
+#: src/main/dotcode.cpp:455 src/main/dotcode.cpp:462
 #, c-format
 msgid "'%s' used more than once"
 msgstr "'%s' が二回以上使われました"
@@ -3199,7 +3381,8 @@ msgstr " .Fortran に対する文字ベクトルとして、最初の文字列�
 msgid "passing a char vector to .Fortran is not portable"
 msgstr ""
 
-#: src/main/dotcode.cpp:1933 src/main/dotcode.cpp:1955 src/main/dotcode.cpp:1966
+#: src/main/dotcode.cpp:1933 src/main/dotcode.cpp:1955
+#: src/main/dotcode.cpp:1966
 #, c-format
 msgid "invalid mode (%s) to pass to Fortran (arg %d)"
 msgstr "Fortran に渡すには不正なモードです (%s) (arg %d)"
@@ -3218,12 +3401,16 @@ msgstr ""
 msgid "pairlists are passed as SEXP as from R 2.15.0"
 msgstr "ペアリストは R 2.15.0 以降では SEXP として引き渡されます"
 
-#: src/main/dotcode.cpp:2591 src/main/dotcode.cpp:2610 src/main/dotcode.cpp:2633 src/main/dotcode.cpp:2664 src/main/dotcode.cpp:2692
+#: src/main/dotcode.cpp:2591 src/main/dotcode.cpp:2610
+#: src/main/dotcode.cpp:2633 src/main/dotcode.cpp:2664
+#: src/main/dotcode.cpp:2692
 #, c-format
 msgid "array over-run in %s(\"%s\") in %s argument %d\n"
 msgstr ""
 
-#: src/main/dotcode.cpp:2597 src/main/dotcode.cpp:2616 src/main/dotcode.cpp:2639 src/main/dotcode.cpp:2670 src/main/dotcode.cpp:2698
+#: src/main/dotcode.cpp:2597 src/main/dotcode.cpp:2616
+#: src/main/dotcode.cpp:2639 src/main/dotcode.cpp:2670
+#: src/main/dotcode.cpp:2698
 #, c-format
 msgid "array under-run in %s(\"%s\") in %s argument %d\n"
 msgstr ""
@@ -3338,7 +3525,8 @@ msgstr "このコネクションに対してはプリントは利用可能にな
 msgid "write not enabled for this connection"
 msgstr "このコネクションには書き込みは有効になっていません"
 
-#: src/main/dounzip.cpp:554 src/main/dounzip.cpp:558 src/main/dounzip.cpp:565 src/main/dounzip.cpp:583
+#: src/main/dounzip.cpp:554 src/main/dounzip.cpp:558 src/main/dounzip.cpp:565
+#: src/main/dounzip.cpp:583
 msgid "allocation of 'unz' connection failed"
 msgstr "'unz' 接続の割り当てに失敗しました"
 
@@ -3426,18 +3614,20 @@ msgstr "登録されたグラフィックスシステムが多すぎます"
 msgid "no graphics system to unregister"
 msgstr "登録解除できるグラフィックスシステムがありません"
 
-#: src/main/engine.cpp:464 src/main/engine.cpp:469 src/main/engine.cpp:477 src/main/engine.cpp:484 src/main/engine.cpp:497
+#: src/main/engine.cpp:464 src/main/engine.cpp:469 src/main/engine.cpp:477
+#: src/main/engine.cpp:484 src/main/engine.cpp:497
 #: src/modules/X11/devX11.cpp:1168
 msgid "invalid line end"
 msgstr "行末が不正です"
 
-#: src/main/engine.cpp:528 src/main/engine.cpp:533 src/main/engine.cpp:541 src/main/engine.cpp:548 src/main/engine.cpp:561
+#: src/main/engine.cpp:528 src/main/engine.cpp:533 src/main/engine.cpp:541
+#: src/main/engine.cpp:548 src/main/engine.cpp:561
 #: src/modules/X11/devX11.cpp:1186
 msgid "invalid line join"
 msgstr "行をまとめられません"
 
-#: src/main/engine.cpp:791 src/main/engine.cpp:898 src/main/engine.cpp:1236 src/main/engine.cpp:1343 src/main/engine.cpp:1453
-#: src/main/engine.cpp:1506
+#: src/main/engine.cpp:791 src/main/engine.cpp:898 src/main/engine.cpp:1236
+#: src/main/engine.cpp:1343 src/main/engine.cpp:1453 src/main/engine.cpp:1506
 msgid "'lwd' must be non-negative and finite"
 msgstr "'lwd' は非負かつ有限でなくてはなりません"
 
@@ -3677,8 +3867,9 @@ msgstr "空の環境中から変数を除去することができません"
 msgid "cannot remove variables from this database"
 msgstr "このデータベースから変数を除去することができません"
 
-#: src/main/envir.cpp:2013 src/main/envir.cpp:3338 src/main/envir.cpp:3357 src/main/envir.cpp:3376 src/main/envir.cpp:3411
-#: src/main/envir.cpp:3430 src/main/envir.cpp:3470 src/main/envir.cpp:3554
+#: src/main/envir.cpp:2013 src/main/envir.cpp:3338 src/main/envir.cpp:3357
+#: src/main/envir.cpp:3376 src/main/envir.cpp:3411 src/main/envir.cpp:3430
+#: src/main/envir.cpp:3470 src/main/envir.cpp:3554
 msgid "not a symbol"
 msgstr "シンボルではありません"
 
@@ -3771,13 +3962,14 @@ msgstr "S4 オブジェクトはクラス \"environment\" に拡張されませ�
 msgid "invalid object for 'as.environment'"
 msgstr "'as.environment' に対する不正なオブジェクトです"
 
-#: src/main/envir.cpp:3293 src/main/envir.cpp:3316 src/main/envir.cpp:3341 src/main/envir.cpp:3360 src/main/envir.cpp:3381
-#: src/main/envir.cpp:3414 src/main/envir.cpp:3433 src/main/envir.cpp:3473
+#: src/main/envir.cpp:3293 src/main/envir.cpp:3316 src/main/envir.cpp:3341
+#: src/main/envir.cpp:3360 src/main/envir.cpp:3381 src/main/envir.cpp:3414
+#: src/main/envir.cpp:3433 src/main/envir.cpp:3473
 msgid "not an environment"
 msgstr "環境ではありません"
 
-#: src/main/envir.cpp:3349 src/main/envir.cpp:3368 src/main/envir.cpp:3422 src/main/envir.cpp:3441 src/main/envir.cpp:3477
-#: src/main/envir.cpp:3486
+#: src/main/envir.cpp:3349 src/main/envir.cpp:3368 src/main/envir.cpp:3422
+#: src/main/envir.cpp:3441 src/main/envir.cpp:3477 src/main/envir.cpp:3486
 #, c-format
 msgid "no binding for \"%s\""
 msgstr "\"%s\" にバインドされているものがありません。"
@@ -4518,8 +4710,10 @@ msgstr "'getGrapshicsEvent' の再帰的使用はサポートされていませ�
 msgid "no graphics event handlers set"
 msgstr "設定されたグラフィックス event handler がありません"
 
-#: src/main/gram.cpp:417 src/main/gram.cpp:426 src/main/gram.cpp:2993 src/main/gram.cpp:3000 src/main/gram.cpp:3078
-#: src/main/gram.y:349 src/main/gram.y:358 src/main/gram.y:684 src/main/gram.y:691 src/main/gram.y:769
+#: src/main/gram.cpp:417 src/main/gram.cpp:426 src/main/gram.cpp:2993
+#: src/main/gram.cpp:3000 src/main/gram.cpp:3078 src/main/gram.y:349
+#: src/main/gram.y:358 src/main/gram.y:684 src/main/gram.y:691
+#: src/main/gram.y:769
 #, fuzzy, c-format
 msgid "invalid multibyte character in parser (%s:%d:%d)"
 msgstr "構文解析中に不正なマルチバイト文字列がありました (%d 行)"
@@ -4534,7 +4728,8 @@ msgstr "入力バッファが溢れました (%d 行)"
 msgid "function '%s' not supported in RHS call of a pipe (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:3554 src/main/gram.cpp:3586 src/main/gram.y:1245 src/main/gram.y:1277
+#: src/main/gram.cpp:3554 src/main/gram.cpp:3586 src/main/gram.y:1245
+#: src/main/gram.y:1277
 #, c-format
 msgid "pipe placeholder may only appear once (%s:%d:%d)"
 msgstr ""
@@ -4589,14 +4784,16 @@ msgstr "引用符が不正です"
 msgid "out of memory while parsing"
 msgstr "polyline をクリッピングしている間にメモリが尽きました"
 
-#: src/main/gram.cpp:4442 src/main/gram.cpp:6290 src/main/gram.cpp:6298 src/main/gram.cpp:6305 src/main/gram.cpp:6313
-#: src/main/gram.y:2133 src/main/gram.y:3981 src/main/gram.y:3989 src/main/gram.y:3996 src/main/gram.y:4004
+#: src/main/gram.cpp:4442 src/main/gram.cpp:6290 src/main/gram.cpp:6298
+#: src/main/gram.cpp:6305 src/main/gram.cpp:6313 src/main/gram.y:2133
+#: src/main/gram.y:3981 src/main/gram.y:3989 src/main/gram.y:3996
+#: src/main/gram.y:4004
 #, fuzzy, c-format
 msgid "contextstack overflow (%s:%d:%d)"
 msgstr "コンテクストスタックが溢れました"
 
-#: src/main/gram.cpp:4696 src/main/gram.cpp:4702 src/main/gram.cpp:4724 src/main/gram.y:2387 src/main/gram.y:2393
-#: src/main/gram.y:2415
+#: src/main/gram.cpp:4696 src/main/gram.cpp:4702 src/main/gram.cpp:4724
+#: src/main/gram.y:2387 src/main/gram.y:2393 src/main/gram.y:2415
 msgid "unexpected input"
 msgstr "想定外の入力です"
 
@@ -4624,7 +4821,8 @@ msgstr "想定外の付値です"
 msgid "unexpected end of line"
 msgstr "想定外の行末です"
 
-#: src/main/gram.cpp:4727 src/main/gram.cpp:4735 src/main/gram.y:2418 src/main/gram.y:2426
+#: src/main/gram.cpp:4727 src/main/gram.cpp:4735 src/main/gram.y:2418
+#: src/main/gram.y:2426
 #, c-format
 msgid "unexpected %s"
 msgstr "予想外の %s です"
@@ -4649,7 +4847,8 @@ msgstr "非整数値 %s に L がついています; 実数値を使用します
 msgid "integer literal %s contains unnecessary decimal point"
 msgstr "整数リテラル %s は不要な小数点を含んでいます"
 
-#: src/main/gram.cpp:5084 src/main/gram.cpp:5092 src/main/gram.y:2775 src/main/gram.y:2783
+#: src/main/gram.cpp:5084 src/main/gram.cpp:5092 src/main/gram.y:2775
+#: src/main/gram.y:2783
 #, fuzzy, c-format
 msgid "invalid multibyte character (%s:%d:%d)"
 msgstr "構文解析中に不正なマルチバイト文字列がありました (%d 行)"
@@ -4659,8 +4858,9 @@ msgstr "構文解析中に不正なマルチバイト文字列がありました
 msgid "bidi formatting not allowed, use escapes instead (\\u%04x) (%s:%d:%d)"
 msgstr ""
 
-#: src/main/gram.cpp:5235 src/main/gram.cpp:5266 src/main/gram.cpp:5313 src/main/gram.cpp:5360 src/main/gram.y:2926
-#: src/main/gram.y:2957 src/main/gram.y:3004 src/main/gram.y:3051
+#: src/main/gram.cpp:5235 src/main/gram.cpp:5266 src/main/gram.cpp:5313
+#: src/main/gram.cpp:5360 src/main/gram.y:2926 src/main/gram.y:2957
+#: src/main/gram.y:3004 src/main/gram.y:3051
 #, fuzzy, c-format
 msgid "nul character not allowed (%s:%d:%d)"
 msgstr "ヌル文字は許されません (%d 行)"
@@ -4720,12 +4920,14 @@ msgstr "不正な \\U{xxxxxxxx} 系列です (%d 行)"
 msgid "'\\%s' is an unrecognized escape in character string (%s:%d:%d)"
 msgstr "\"%2$s\" で始まる文字列の中で '\\%1$c' は文字列で認識されないエスケープです"
 
-#: src/main/gram.cpp:5494 src/main/gram.cpp:5632 src/main/gram.y:3185 src/main/gram.y:3323
+#: src/main/gram.cpp:5494 src/main/gram.cpp:5632 src/main/gram.y:3185
+#: src/main/gram.y:3323
 #, fuzzy, c-format
 msgid "mixing Unicode and octal/hex escapes in a string is not allowed (%s:%d:%d)"
 msgstr "文字列中にユニコードや 8 進・16 進エスケープ文字は許されません"
 
-#: src/main/gram.cpp:5499 src/main/gram.cpp:5637 src/main/gram.y:3190 src/main/gram.y:3328
+#: src/main/gram.cpp:5499 src/main/gram.cpp:5637 src/main/gram.y:3190
+#: src/main/gram.y:3328
 #, fuzzy, c-format
 msgid ""
 "string containing Unicode escapes not in this locale\n"
@@ -4833,8 +5035,9 @@ msgstr ""
 "PCRE パターンの学習エラー\n"
 "\t'%s'\n"
 
-#: src/main/grep.cpp:624 src/main/grep.cpp:726 src/main/grep.cpp:842 src/main/grep.cpp:1391 src/main/grep.cpp:2244
-#: src/main/grep.cpp:3124 src/main/grep.cpp:3214
+#: src/main/grep.cpp:624 src/main/grep.cpp:726 src/main/grep.cpp:842
+#: src/main/grep.cpp:1391 src/main/grep.cpp:2244 src/main/grep.cpp:3124
+#: src/main/grep.cpp:3214
 #, fuzzy, c-format
 msgid "input string %lld is invalid UTF-8"
 msgstr "入力文字列 %lld は不正な UTF-8 文字列です"
@@ -4854,13 +5057,15 @@ msgstr "'分割された' 文字列 %lld はこのロケールでは不適切で
 msgid "'split' string %lld is invalid"
 msgstr "'分割された' 文字列 %lld は不正な UTF-8 文字列です"
 
-#: src/main/grep.cpp:969 src/main/grep.cpp:1383 src/main/grep.cpp:2240 src/main/grep.cpp:2547 src/main/grep.cpp:3115
+#: src/main/grep.cpp:969 src/main/grep.cpp:1383 src/main/grep.cpp:2240
+#: src/main/grep.cpp:2547 src/main/grep.cpp:3115
 #, fuzzy, c-format
 msgid "input string %lld is invalid"
 msgstr "入力文字列 %lld は不正な UTF-8 文字列です"
 
-#: src/main/grep.cpp:1089 src/main/grep.cpp:1104 src/main/grep.cpp:1431 src/main/grep.cpp:2413 src/main/grep.cpp:2598
-#: src/main/grep.cpp:3192 src/main/grep.cpp:3416
+#: src/main/grep.cpp:1089 src/main/grep.cpp:1104 src/main/grep.cpp:1431
+#: src/main/grep.cpp:2413 src/main/grep.cpp:2598 src/main/grep.cpp:3192
+#: src/main/grep.cpp:3416
 #, c-format
 msgid "Out-of-memory error in regexp matching for element %d"
 msgstr ""
@@ -4951,13 +5156,18 @@ msgstr "未知のエンコーディングです: %d"
 msgid "internet routines cannot be accessed in module"
 msgstr "モジュール中でインターネットルーチンがアクセスできません"
 
-#: src/main/internet.cpp:93 src/main/internet.cpp:105 src/main/internet.cpp:117 src/main/internet.cpp:128 src/main/internet.cpp:139
-#: src/main/internet.cpp:149 src/main/internet.cpp:273 src/main/internet.cpp:285 src/main/internet.cpp:297 src/main/internet.cpp:308
+#: src/main/internet.cpp:93 src/main/internet.cpp:105 src/main/internet.cpp:117
+#: src/main/internet.cpp:128 src/main/internet.cpp:139
+#: src/main/internet.cpp:149 src/main/internet.cpp:273
+#: src/main/internet.cpp:285 src/main/internet.cpp:297
+#: src/main/internet.cpp:308
 msgid "internet routines cannot be loaded"
 msgstr "インターネットルーチンがロードできません"
 
-#: src/main/internet.cpp:163 src/main/internet.cpp:182 src/main/internet.cpp:201 src/main/internet.cpp:213 src/main/internet.cpp:227
-#: src/main/internet.cpp:248 src/main/internet.cpp:261
+#: src/main/internet.cpp:163 src/main/internet.cpp:182
+#: src/main/internet.cpp:201 src/main/internet.cpp:213
+#: src/main/internet.cpp:227 src/main/internet.cpp:248
+#: src/main/internet.cpp:261
 msgid "socket routines cannot be loaded"
 msgstr "ソケットルーチンがロードできません"
 
@@ -5187,7 +5397,8 @@ msgstr "長い引数の長さが短いほうの長さの倍数になっていま
 msgid "invalid partial string match"
 msgstr "文字列の部分的マッチが不正です"
 
-#: src/main/match.cpp:245 src/main/match.cpp:288 src/main/objects.cpp:70 src/main/objects.cpp:81 src/main/summary.cpp:434
+#: src/main/match.cpp:245 src/main/match.cpp:288 src/main/objects.cpp:71
+#: src/main/objects.cpp:82 src/main/summary.cpp:434
 #, c-format
 msgid "formal argument \"%s\" matched by multiple actual arguments"
 msgstr "仮引数 \"%s\" が複数の実引数にマッチしました"
@@ -5278,7 +5489,8 @@ msgstr "負の長さのベクトルは許されません"
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.cpp:2721 src/main/memory.cpp:2726 src/main/memory.cpp:2731 src/main/memory.cpp:2736 src/main/memory.cpp:2743
+#: src/main/memory.cpp:2721 src/main/memory.cpp:2726 src/main/memory.cpp:2731
+#: src/main/memory.cpp:2736 src/main/memory.cpp:2743
 #, fuzzy, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr "長さ %lld のベクトルを割り当てることができません"
@@ -5396,11 +5608,13 @@ msgstr ""
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3728 src/main/memory.cpp:3736 src/main/memory.cpp:3753 src/main/memory.cpp:3770 src/main/memory.cpp:3816
-#: src/main/memory.cpp:3825 src/main/memory.cpp:3835 src/main/memory.cpp:3844 src/main/memory.cpp:3853 src/main/memory.cpp:3862
-#: src/main/memory.cpp:3870 src/main/memory.cpp:3879 src/main/memory.cpp:3888 src/main/memory.cpp:3896 src/main/memory.cpp:3904
-#: src/main/memory.cpp:3912 src/main/memory.cpp:3920 src/main/memory.cpp:3933 src/main/memory.cpp:3942 src/main/memory.cpp:3967
-#: src/main/memory.cpp:3986
+#: src/main/memory.cpp:3728 src/main/memory.cpp:3736 src/main/memory.cpp:3753
+#: src/main/memory.cpp:3770 src/main/memory.cpp:3816 src/main/memory.cpp:3825
+#: src/main/memory.cpp:3835 src/main/memory.cpp:3844 src/main/memory.cpp:3853
+#: src/main/memory.cpp:3862 src/main/memory.cpp:3870 src/main/memory.cpp:3879
+#: src/main/memory.cpp:3888 src/main/memory.cpp:3896 src/main/memory.cpp:3904
+#: src/main/memory.cpp:3912 src/main/memory.cpp:3920 src/main/memory.cpp:3933
+#: src/main/memory.cpp:3942 src/main/memory.cpp:3967 src/main/memory.cpp:3986
 #, fuzzy, c-format
 msgid "%s() can only be applied to a '%s', not a '%s'"
 msgstr "scan() 関数は '%s' を期待したのに、得られたのは '%s' でした"
@@ -5443,8 +5657,9 @@ msgstr "SET_VECTOR_ELT中で インデックス %lld/%lld を設定しようと�
 msgid "argument not tracking references"
 msgstr "引数が環境ではありません"
 
-#: src/main/memory.cpp:4202 src/main/memory.cpp:4211 src/main/memory.cpp:4222 src/main/memory.cpp:4238 src/main/memory.cpp:4252
-#: src/main/memory.cpp:4267 src/main/memory.cpp:4283
+#: src/main/memory.cpp:4202 src/main/memory.cpp:4211 src/main/memory.cpp:4222
+#: src/main/memory.cpp:4238 src/main/memory.cpp:4252 src/main/memory.cpp:4267
+#: src/main/memory.cpp:4283
 msgid "bad value"
 msgstr "不適切な値です"
 
@@ -5536,211 +5751,208 @@ msgstr "base 名前空間からは変数を取り除くことはできません"
 msgid ".Internal(%s()) called from namespace '%s'\n"
 msgstr ""
 
-#: src/main/objects.cpp:60
+#: src/main/objects.cpp:61
 msgid "generic 'function' is not a function"
 msgstr "総称的な 'function' は関数ではありません"
 
-#: src/main/objects.cpp:260
+#: src/main/objects.cpp:261
 msgid "bad generic call environment"
 msgstr "不正な総称的呼び出し環境 (generic call environment) です"
 
-#: src/main/objects.cpp:268
+#: src/main/objects.cpp:269
 msgid "bad generic definition environment"
 msgstr "不正な総称的定義環境 (generic definition environment) です"
 
-#: src/main/objects.cpp:324
+#: src/main/objects.cpp:325
 msgid "no '.S3MethodsClass' table, cannot use S4 objects with S3 methods ('methods' package not attached?)"
-msgstr ""
-"'.S3MethodsClass' テーブルがありません。S3 メソッドを持つ S4 オブジェクトは使用できません ('methods' パッケージが付加されていな"
-"い？)"
+msgstr "'.S3MethodsClass' テーブルがありません。S3 メソッドを持つ S4 オブジェクトは使用できません ('methods' パッケージが付加されていない？)"
 
-#: src/main/objects.cpp:413 src/main/objects.cpp:462
+#: src/main/objects.cpp:414 src/main/objects.cpp:463
 msgid "bad value for R_USEMETHOD_FORWARD_LOCALS"
 msgstr ""
 
-#: src/main/objects.cpp:565
+#: src/main/objects.cpp:568
 msgid "there must be a 'generic' argument"
 msgstr "'generic' 引数が必要です"
 
-#: src/main/objects.cpp:569
+#: src/main/objects.cpp:572
 msgid "'generic' argument must be a character string"
 msgstr "'generic' 引数は文字列でなくてはなりません"
 
-#: src/main/objects.cpp:576
+#: src/main/objects.cpp:579
 msgid "'UseMethod' used in an inappropriate fashion"
 msgstr "'UseMethod' が不適切な仕方で使われています"
 
-#: src/main/objects.cpp:606
+#: src/main/objects.cpp:609
 #, c-format
 msgid "illegal class of length 0 when using method for '%s'"
 msgstr ""
 
-#: src/main/objects.cpp:633
+#: src/main/objects.cpp:636
 #, c-format
 msgid "no applicable method for '%s' applied to an object of class \"%s\""
 msgstr "'%s' をクラス \"%s\" のオブジェクトに適用できるようなメソッドがありません"
 
-#: src/main/objects.cpp:729
+#: src/main/objects.cpp:732
 msgid "'NextMethod' called from outside a function"
 msgstr "'NextMethod' が関数の外から呼ばれました"
 
-#: src/main/objects.cpp:735
+#: src/main/objects.cpp:738
 msgid "'NextMethod' called from an anonymous function"
 msgstr "'NextMethod' が匿名関数から呼ばれました"
 
-#: src/main/objects.cpp:756
+#: src/main/objects.cpp:759
 msgid "no calling generic was found: was a method called directly?"
 msgstr "呼出した総称関数が見つかりません。メソッドが直接呼び出されましたか？"
 
-#: src/main/objects.cpp:759
+#: src/main/objects.cpp:762
 #, c-format
 msgid "'function' is not a function, but of type %d"
 msgstr "'function' は関数ではなく、単に %d 型です"
 
-#: src/main/objects.cpp:786
+#: src/main/objects.cpp:789
 msgid "wrong argument ..."
 msgstr "誤った引数です..."
 
-#: src/main/objects.cpp:798
+#: src/main/objects.cpp:801
 msgid "object not specified"
 msgstr "オブジェクトが指定されていません"
 
-#: src/main/objects.cpp:806 src/main/objects.cpp:813
+#: src/main/objects.cpp:809 src/main/objects.cpp:816
 msgid "generic function not specified"
 msgstr "総称的関数が指定されていません"
 
-#: src/main/objects.cpp:810
+#: src/main/objects.cpp:813
 msgid "invalid generic argument to 'NextMethod'"
 msgstr "'NextMethod' への総称的引数が不正です"
 
-#: src/main/objects.cpp:822
+#: src/main/objects.cpp:825
 msgid "invalid 'group' argument found in 'NextMethod'"
 msgstr "'NextMethod' 中に不正な 'group' 引数が見つかりました"
 
-#: src/main/objects.cpp:839
+#: src/main/objects.cpp:842
 msgid "wrong value for .Method"
 msgstr ".Method の値が不正です"
 
-#: src/main/objects.cpp:849
+#: src/main/objects.cpp:852
 msgid "Incompatible methods ignored"
 msgstr "相容れないメソッドが無視されました"
 
-#: src/main/objects.cpp:906 src/main/objects.cpp:913
+#: src/main/objects.cpp:909 src/main/objects.cpp:916
 msgid "no method to invoke"
 msgstr "起動すべきメソッドはありません"
 
-#: src/main/objects.cpp:963
+#: src/main/objects.cpp:966
 msgid "cannot unclass an environment"
 msgstr "基本環境のクラス属性は取り除けません"
 
-#: src/main/objects.cpp:966
+#: src/main/objects.cpp:969
 msgid "cannot unclass an external pointer"
 msgstr "外部ポインターのクラス属性は取り除けません"
 
-#: src/main/objects.cpp:1025
+#: src/main/objects.cpp:1028
 #, fuzzy
 msgid "'what' must be a character vector or an object with a nameOfClass() method"
 msgstr "'what' は文字列または関数でなければなりません"
 
-#: src/main/objects.cpp:1029
+#: src/main/objects.cpp:1032
 msgid "'which' must be a length 1 logical vector"
 msgstr "'which' は長さ 1 の論理ベクトルでなくてはなりません"
 
-#: src/main/objects.cpp:1140
+#: src/main/objects.cpp:1143
 msgid "could not find correct environment; please report!"
 msgstr "正しい環境を見つけられませんでした; 報告をお願いします!"
 
-#: src/main/objects.cpp:1236
+#: src/main/objects.cpp:1239
 msgid "R_isMethodsDispatchOn(TRUE) called -- may not work correctly"
 msgstr ""
 
-#: src/main/objects.cpp:1293
+#: src/main/objects.cpp:1296
 #, c-format
 msgid "unable to find a non-generic version of function \"%s\""
 msgstr "\"%s\" 関数の非総称的でないものが見つかりませんでした"
 
-#: src/main/objects.cpp:1326
+#: src/main/objects.cpp:1329
 msgid "'standardGeneric' called without 'methods' dispatch enabled (will be ignored)"
 msgstr "'methods' の適用が有効とされること無しに 'standardGeneric' が呼び出されました (無視します)"
 
-#: src/main/objects.cpp:1334
+#: src/main/objects.cpp:1337
 msgid "argument to 'standardGeneric' must be a non-empty character string"
 msgstr "'standardGeneric' に対する引数は空でない文字列でなければなりません"
 
-#: src/main/objects.cpp:1340
+#: src/main/objects.cpp:1343
 #, c-format
 msgid "call to standardGeneric(\"%s\") apparently not from the body of that generic function"
 msgstr "見たところ総称関数の本体からではない standardGeneric(\"%s\") の呼出しです"
 
-#: src/main/objects.cpp:1363 src/main/raw.cpp:214 src/main/Renviron.cpp:533
+#: src/main/objects.cpp:1366 src/main/raw.cpp:214 src/main/Renviron.cpp:533
 #, c-format
 msgid "argument '%s' must be a character string"
 msgstr "引数 '%s' は文字列でなくてはなりません"
 
-#: src/main/objects.cpp:1383
+#: src/main/objects.cpp:1386
 #, fuzzy, c-format
 msgid "'internal' slot does not name an internal function: %s"
 msgstr ".Internal 関数 '%s' がありません"
 
-#: src/main/objects.cpp:1438
+#: src/main/objects.cpp:1441
 #, c-format
 msgid "invalid primitive methods code (\"%s\"): should be \"clear\", \"reset\", \"set\", or \"suppress\""
-msgstr ""
-"不正な primitive メソッドコード (\"%s\") です: \"clear\", \"reset\", \"set\" または \"suppress\" のいずれかでなければなりません"
+msgstr "不正な primitive メソッドコード (\"%s\") です: \"clear\", \"reset\", \"set\" または \"suppress\" のいずれかでなければなりません"
 
-#: src/main/objects.cpp:1446
+#: src/main/objects.cpp:1449
 msgid "invalid object: must be a primitive function"
 msgstr "不正なオブジェクトです: プリミティブな関数でなくてはなりません"
 
-#: src/main/objects.cpp:1491
+#: src/main/objects.cpp:1494
 #, c-format
 msgid "the formal definition of a primitive generic must be a function object (got type '%s')"
 msgstr "primitive な総称関数の形式的定義は関数オブジェクトでなければなりません (型 '%s' です)"
 
-#: src/main/objects.cpp:1522
+#: src/main/objects.cpp:1525
 #, c-format
 msgid "object returned as generic function \"%s\" does not appear to be one"
 msgstr "総称的関数 \"%s\" として返されたオブジェクトが一つではないようです"
 
-#: src/main/objects.cpp:1609
+#: src/main/objects.cpp:1612
 msgid "invalid primitive operation given for dispatch"
 msgstr "ディスパッチ（dispatch）用に与えられた primitive 関数が不正です"
 
-#: src/main/objects.cpp:1639 src/main/objects.cpp:1665
+#: src/main/objects.cpp:1642 src/main/objects.cpp:1668
 msgid "dispatch error"
 msgstr "メソッド割り当てのエラーです"
 
-#: src/main/objects.cpp:1659
+#: src/main/objects.cpp:1662
 #, c-format
 msgid "primitive function \"%s\" has been set for methods but no generic function supplied"
 msgstr "primitive な関数 \"%s\" がメソッドに対して設定されましたが、総称関数が与えられていません"
 
-#: src/main/objects.cpp:1689
+#: src/main/objects.cpp:1692
 msgid "C level MAKE_CLASS macro called with NULL string pointer"
 msgstr "C level MAKE_CLASS のマクロが、NULL 文字ポインタを伴って呼び出されました"
 
-#: src/main/objects.cpp:1705
+#: src/main/objects.cpp:1708
 msgid "'methods' package not yet loaded"
 msgstr "'methods' パッケージがまだロードされていません"
 
-#: src/main/objects.cpp:1715
+#: src/main/objects.cpp:1718
 msgid "R_getClassDef(.) called with NULL string pointer"
 msgstr "R_getClassDef(.) が NULL 文字ポインタを伴って呼び出されました"
 
-#: src/main/objects.cpp:1762
+#: src/main/objects.cpp:1765
 msgid "C level NEW macro called with null class definition pointer"
 msgstr "C レベルの NEW マクロが、null クラスの定義ポインタを伴って呼び出されました"
 
-#: src/main/objects.cpp:1766
+#: src/main/objects.cpp:1769
 #, c-format
 msgid "trying to generate an object from a virtual class (\"%s\")"
 msgstr "仮想クラス (\"%s\") からオブジェクトを生成しようとしています"
 
-#: src/main/objects.cpp:1814
+#: src/main/objects.cpp:1817
 msgid "'R_get_primname' called on a non-primitive"
 msgstr " 'R_get_primname' がプリミティブでないものに対して呼び出されました "
 
-#: src/main/objects.cpp:1847
+#: src/main/objects.cpp:1850
 #, c-format
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "クラス \"%s\" のオブジェクトは適正な S3 オブジェクトに対応していません"
@@ -5826,7 +6038,7 @@ msgstr ""
 msgid "'OutDec' must be a string of one character"
 msgstr "'dec' は一文字でなければなりません"
 
-#: src/main/options.cpp:832 src/main/options.cpp:938
+#: src/main/options.cpp:832 src/main/options.cpp:942
 msgid "\"par.ask.default\" has been replaced by \"device.ask.default\""
 msgstr "\"par.ask.default\" は \"device.ask.default\" で置き換えられました"
 
@@ -5844,11 +6056,12 @@ msgstr ""
 msgid "'%s' is deprecated and will be disabled"
 msgstr ""
 
-#: src/main/options.cpp:915 src/main/options.cpp:924
+#: src/main/options.cpp:916 src/main/options.cpp:927
 msgid "cannot set both options 'quiet' and 'verbose' to TRUE"
 msgstr ""
 
-#: src/main/options.cpp:935 src/modules/X11/dataentry.cpp:319 src/modules/X11/dataentry.cpp:460 src/modules/X11/dataentry.cpp:463
+#: src/main/options.cpp:939 src/modules/X11/dataentry.cpp:319
+#: src/modules/X11/dataentry.cpp:460 src/modules/X11/dataentry.cpp:463
 #: src/modules/X11/dataentry.cpp:492
 msgid "invalid argument"
 msgstr "引数が不正です"
@@ -5913,7 +6126,8 @@ msgstr "rgb が行列ではありません（内部的に）"
 msgid "invalid filename specification"
 msgstr "ファイル名の指定が不正です"
 
-#: src/main/platform.cpp:434 src/main/platform.cpp:483 src/main/platform.cpp:2875 src/main/platform.cpp:3125
+#: src/main/platform.cpp:434 src/main/platform.cpp:483
+#: src/main/platform.cpp:2875 src/main/platform.cpp:3125
 #, fuzzy
 msgid "could not allocate copy buffer"
 msgstr "バッファを割り当てることができません"
@@ -5926,7 +6140,8 @@ msgstr "ファイル追加中に書き込みエラーが生じました"
 msgid "nothing to append to"
 msgstr "付け足す (append) べきものがありません"
 
-#: src/main/platform.cpp:527 src/main/platform.cpp:850 src/main/platform.cpp:1129
+#: src/main/platform.cpp:527 src/main/platform.cpp:850
+#: src/main/platform.cpp:1129
 msgid "invalid filename argument"
 msgstr "ファイル名引数が不正です"
 
@@ -5935,7 +6150,8 @@ msgstr "ファイル名引数が不正です"
 msgid "cannot create file '%s', reason '%s'"
 msgstr "fife '%s' を作れません、理由は '%s' です"
 
-#: src/main/platform.cpp:554 src/main/platform.cpp:594 src/main/platform.cpp:671
+#: src/main/platform.cpp:554 src/main/platform.cpp:594
+#: src/main/platform.cpp:671
 msgid "invalid first filename"
 msgstr "一番目のファイル名が不正です"
 
@@ -6013,7 +6229,8 @@ msgstr "ファイル '%ls' を開くことができません: %s"
 msgid "error while listing a directory: '%s'"
 msgstr "ディレクトリ %s の作成に問題があります: %s"
 
-#: src/main/platform.cpp:1450 src/main/platform.cpp:3040 src/main/platform.cpp:3054 src/main/platform.cpp:3086
+#: src/main/platform.cpp:1450 src/main/platform.cpp:3040
+#: src/main/platform.cpp:3054 src/main/platform.cpp:3086
 #: src/main/platform.cpp:3107
 msgid "over-long path"
 msgstr "長すぎるパス長"
@@ -6040,11 +6257,13 @@ msgstr "目標ファイル '%s' を開くことができません、理由は '%
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "ディレクトリ '%ls' を作成できません、理由は '%s' です"
 
-#: src/main/platform.cpp:1997 src/main/Rdynload.cpp:1184 src/main/util.cpp:932 src/main/util.cpp:1042
+#: src/main/platform.cpp:1997 src/main/Rdynload.cpp:1184 src/main/util.cpp:932
+#: src/main/util.cpp:1042
 msgid "path too long"
 msgstr "パスが長すぎます"
 
-#: src/main/platform.cpp:2085 src/main/platform.cpp:2142 src/main/sysutils.cpp:2988 src/main/sysutils.cpp:3002
+#: src/main/platform.cpp:2085 src/main/platform.cpp:2142
+#: src/main/sysutils.cpp:2988 src/main/sysutils.cpp:3002
 msgid "internal out-of-memory condition"
 msgstr "内部でアウトオブメモリーが発生しています"
 
@@ -6240,7 +6459,8 @@ msgstr "%d は不正なマルチバイト文字です"
 msgid "invalid character in current multibyte locale"
 msgstr "'dblepr' 中の文字列の長さが不正です"
 
-#: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372 src/main/plotmath.cpp:2661
+#: src/main/plotmath.cpp:1268 src/main/plotmath.cpp:1372
+#: src/main/plotmath.cpp:2661
 msgid "invalid mathematical annotation"
 msgstr "数式の注釈が不正です"
 
@@ -6271,6 +6491,11 @@ msgstr "行ラベルの数が少なすぎます"
 #: src/main/printarray.cpp:355
 msgid "too few column labels"
 msgstr "列ラベルの数が少なすぎます"
+
+#: src/main/printarray.cpp:395 src/main/printarray.cpp:524
+#, fuzzy
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted"
+msgstr " [ reached getOption(\"max.print\") -- %d 行を無視しました ] \n"
 
 #: src/main/printarray.cpp:397 src/main/printarray.cpp:528
 #, c-format
@@ -6456,8 +6681,8 @@ msgstr "long vector '%s' はサポートされていません"
 msgid "invalid arguments"
 msgstr "引数 (複数) が不正です"
 
-#: src/main/random.cpp:109 src/main/random.cpp:126 src/main/random.cpp:192 src/main/random.cpp:218 src/main/random.cpp:290
-#: src/main/random.cpp:304
+#: src/main/random.cpp:109 src/main/random.cpp:126 src/main/random.cpp:192
+#: src/main/random.cpp:218 src/main/random.cpp:290 src/main/random.cpp:304
 msgid "NAs produced"
 msgstr "NA が生成されました"
 
@@ -6655,7 +6880,8 @@ msgstr "'name' のための領域を割り当てられませんでした"
 msgid "character argument expected"
 msgstr "文字引数が期待されています"
 
-#: src/main/Rdynload.cpp:1219 src/main/Rdynload.cpp:1252 src/main/Rdynload.cpp:1273
+#: src/main/Rdynload.cpp:1219 src/main/Rdynload.cpp:1252
+#: src/main/Rdynload.cpp:1273
 #, c-format
 msgid ""
 "unable to load shared object '%s':\n"
@@ -6706,7 +6932,8 @@ msgstr "テーブルエントリは外部ポインタでなければなりませ
 msgid "operator needs two arguments"
 msgstr "演算子は一つまたは二つの引数を必要とします"
 
-#: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189 src/main/relop.cpp:204
+#: src/main/relop.cpp:160 src/main/relop.cpp:174 src/main/relop.cpp:189
+#: src/main/relop.cpp:204
 #, fuzzy, c-format
 msgid "comparison (%s) is not possible for language types"
 msgstr "比較 (%d) はアトミックおよびリスト型に対してだけ可能です"
@@ -6926,12 +7153,17 @@ msgstr "'destination' が長すぎます"
 msgid "invalid multibyte format string"
 msgstr "マルチバイト文字列が不正です"
 
-#: src/main/saveload.cpp:228 src/main/saveload.cpp:233 src/main/saveload.cpp:242 src/main/saveload.cpp:251 src/main/saveload.cpp:260
-#: src/main/saveload.cpp:269 src/main/saveload.cpp:273 src/main/saveload.cpp:282 src/main/saveload.cpp:1449
-#: src/main/saveload.cpp:1454 src/main/saveload.cpp:1497 src/main/saveload.cpp:1565 src/main/saveload.cpp:1574
-#: src/main/serialize.cpp:415 src/main/serialize.cpp:422 src/main/serialize.cpp:435 src/main/serialize.cpp:439
-#: src/main/serialize.cpp:469 src/main/serialize.cpp:485 src/main/serialize.cpp:2114 src/main/serialize.cpp:2891
-#: src/main/serialize.cpp:2899
+#: src/main/saveload.cpp:228 src/main/saveload.cpp:233
+#: src/main/saveload.cpp:242 src/main/saveload.cpp:251
+#: src/main/saveload.cpp:260 src/main/saveload.cpp:269
+#: src/main/saveload.cpp:273 src/main/saveload.cpp:282
+#: src/main/saveload.cpp:1449 src/main/saveload.cpp:1454
+#: src/main/saveload.cpp:1497 src/main/saveload.cpp:1565
+#: src/main/saveload.cpp:1574 src/main/serialize.cpp:415
+#: src/main/serialize.cpp:422 src/main/serialize.cpp:435
+#: src/main/serialize.cpp:439 src/main/serialize.cpp:469
+#: src/main/serialize.cpp:485 src/main/serialize.cpp:2114
+#: src/main/serialize.cpp:2891 src/main/serialize.cpp:2899
 msgid "read error"
 msgstr "読み込みエラーです"
 
@@ -6951,7 +7183,8 @@ msgstr "文字の入力エラーが起きました"
 msgid "a S read error occurred"
 msgstr "文字列の入力エラーが起きました"
 
-#: src/main/saveload.cpp:415 src/main/saveload.cpp:423 src/main/saveload.cpp:431 src/main/saveload.cpp:1661
+#: src/main/saveload.cpp:415 src/main/saveload.cpp:423
+#: src/main/saveload.cpp:431 src/main/saveload.cpp:1661
 #: src/main/saveload.cpp:1669
 msgid "a read error occurred"
 msgstr "入力エラーが起きました"
@@ -6973,7 +7206,8 @@ msgstr "データファイル中に不正な SEXP 型がありました"
 msgid "mismatch on types"
 msgstr "型が一致しません"
 
-#: src/main/saveload.cpp:652 src/main/saveload.cpp:1348 src/main/serialize.cpp:2027
+#: src/main/saveload.cpp:652 src/main/saveload.cpp:1348
+#: src/main/serialize.cpp:2027
 #, c-format
 msgid "unrecognized internal function name \"%s\""
 msgstr "内部関数 \"%s\" を見つけることができませんでした"
@@ -7077,7 +7311,8 @@ msgstr "xdr 複素数データの出力エラーが起きました"
 msgid "an xdr complex data read error occurred"
 msgstr "xdr 複素数データの入力エラーが起きました"
 
-#: src/main/saveload.cpp:1859 src/main/serialize.cpp:2460 src/main/serialize.cpp:3079 src/modules/internet/internet.cpp:403
+#: src/main/saveload.cpp:1859 src/main/serialize.cpp:2460
+#: src/main/serialize.cpp:3079 src/modules/internet/internet.cpp:403
 #: src/modules/internet/internet.cpp:473
 msgid "write failed"
 msgstr "書き込みに失敗しました"
@@ -7131,12 +7366,14 @@ msgstr "ロードされたデータはペアリストの形式ではありませ
 msgid "first argument must be a file name"
 msgstr "最初の引数はファイル名でなくてはなりません"
 
-#: src/main/saveload.cpp:2247 src/main/saveload.cpp:2272 src/main/serialize.cpp:927 src/main/serialize.cpp:968
+#: src/main/saveload.cpp:2247 src/main/saveload.cpp:2272
+#: src/main/serialize.cpp:927 src/main/serialize.cpp:968
 #: src/main/serialize.cpp:1010
 msgid "XDR write failed"
 msgstr "XDR 書式での書き出しに失敗しました"
 
-#: src/main/saveload.cpp:2259 src/main/saveload.cpp:2284 src/main/serialize.cpp:1555 src/main/serialize.cpp:1590
+#: src/main/saveload.cpp:2259 src/main/saveload.cpp:2284
+#: src/main/serialize.cpp:1555 src/main/serialize.cpp:1590
 #: src/main/serialize.cpp:1627
 msgid "XDR read failed"
 msgstr "XDR 書式での読み込みに失敗しました"
@@ -7159,7 +7396,8 @@ msgstr "コネクションは書き出しのために開かれていません"
 msgid "cannot save XDR format to a text-mode connection"
 msgstr "テキストモードのコネクションには XDR 書式では保存できません"
 
-#: src/main/saveload.cpp:2423 src/main/serialize.cpp:2565 src/main/serialize.cpp:2579 src/main/serialize.cpp:2764
+#: src/main/saveload.cpp:2423 src/main/serialize.cpp:2565
+#: src/main/serialize.cpp:2579 src/main/serialize.cpp:2764
 #: src/main/serialize.cpp:2787
 msgid "error writing to connection"
 msgstr "コネクションへの書き込みエラーが発生しました"
@@ -7271,7 +7509,8 @@ msgstr "NULL をゼロ長でないものに複製できません"
 msgid "replication of pairlists is defunct"
 msgstr ""
 
-#: src/main/seq.cpp:727 src/main/seq.cpp:743 src/main/seq.cpp:904 src/main/seq.cpp:1148
+#: src/main/seq.cpp:727 src/main/seq.cpp:743 src/main/seq.cpp:904
+#: src/main/seq.cpp:1148
 #, c-format
 msgid "first element used of '%s' argument"
 msgstr "'%s' 引数の最初の要素だけが使われました"
@@ -7280,8 +7519,10 @@ msgstr "'%s' 引数の最初の要素だけが使われました"
 msgid "'x' is NULL so the result will be NULL"
 msgstr ""
 
-#: src/main/seq.cpp:882 src/main/seq.cpp:900 src/main/seq.cpp:919 src/main/seq.cpp:926 src/main/seq.cpp:1012 src/main/seq.cpp:1013
-#: src/main/seq.cpp:1058 src/main/seq.cpp:1059 src/main/seq.cpp:1080 src/main/seq.cpp:1081
+#: src/main/seq.cpp:882 src/main/seq.cpp:900 src/main/seq.cpp:919
+#: src/main/seq.cpp:926 src/main/seq.cpp:1012 src/main/seq.cpp:1013
+#: src/main/seq.cpp:1058 src/main/seq.cpp:1059 src/main/seq.cpp:1080
+#: src/main/seq.cpp:1081
 #, fuzzy, c-format
 msgid "'%s' must be a finite number"
 msgstr "'pos' は整数でなければなりません"
@@ -7359,7 +7600,8 @@ msgstr ""
 msgid "assertion '%s' failed: file '%s', line %d\n"
 msgstr ""
 
-#: src/main/serialize.cpp:289 src/main/serialize.cpp:336 src/main/serialize.cpp:360
+#: src/main/serialize.cpp:289 src/main/serialize.cpp:336
+#: src/main/serialize.cpp:360
 msgid "unknown or inappropriate output format"
 msgstr "未知または不適切な出力書式です"
 
@@ -7479,9 +7721,7 @@ msgstr "試行的な R %2$d.%3$d.%4$d で書かれた未公開バージョン %1
 #: src/main/serialize.cpp:2313
 #, c-format
 msgid "cannot read workspace version %d written by R %d.%d.%d; need R %d.%d.%d or newer"
-msgstr ""
-"R %2$d.%3$d.%4$d により書かれたバージョン %1$d のワークスペースを読み取ることができません。R %5$d.%6$d.%7$d もしくはそれ以上が必要"
-"です"
+msgstr "R %2$d.%3$d.%4$d により書かれたバージョン %1$d のワークスペースを読み取ることができません。R %5$d.%6$d.%7$d もしくはそれ以上が必要です"
 
 #: src/main/serialize.cpp:2467
 msgid "read failed"
@@ -7507,7 +7747,8 @@ msgstr "テキストモードコネクションには ascii フォーマット�
 msgid "only ascii format can be read from text mode connections"
 msgstr "テキストモードコネクションからは ascii フォーマットだけが読み込めめます"
 
-#: src/main/serialize.cpp:2654 src/main/serialize.cpp:2814 src/main/serialize.cpp:2965
+#: src/main/serialize.cpp:2654 src/main/serialize.cpp:2814
+#: src/main/serialize.cpp:2965
 msgid "bad version value"
 msgstr "不適切なバージョン値です"
 
@@ -7519,7 +7760,8 @@ msgstr "ascii=FALSE に大してはバイナリコネクションが必要です
 msgid "cannot return a promise (PROMSXP) object"
 msgstr ""
 
-#: src/main/serialize.cpp:2842 src/main/serialize.cpp:2879 src/main/serialize.cpp:2944
+#: src/main/serialize.cpp:2842 src/main/serialize.cpp:2879
+#: src/main/serialize.cpp:2944
 msgid "serialization is too large to store in a raw vector"
 msgstr "線形化 (serialization) は raw ベクトルに保管するには大きすぎます"
 
@@ -7539,7 +7781,8 @@ msgstr "ファイル名が不適切です"
 msgid "not a proper raw vector"
 msgstr "適正な raw ベクトルではありません"
 
-#: src/main/serialize.cpp:3070 src/main/serialize.cpp:3162 src/main/serialize.cpp:3177 src/main/serialize.cpp:3191
+#: src/main/serialize.cpp:3070 src/main/serialize.cpp:3162
+#: src/main/serialize.cpp:3177 src/main/serialize.cpp:3191
 #: src/main/serialize.cpp:3201 src/main/serialize.cpp:3214
 #, c-format
 msgid "seek failed on %s"
@@ -7553,7 +7796,8 @@ msgstr "ファイルの位置を決定できませんでした"
 msgid "bad offset/length argument"
 msgstr "オフセット/長さ引数が不正です"
 
-#: src/main/serialize.cpp:3181 src/main/serialize.cpp:3195 src/main/serialize.cpp:3205 src/main/serialize.cpp:3218
+#: src/main/serialize.cpp:3181 src/main/serialize.cpp:3195
+#: src/main/serialize.cpp:3205 src/main/serialize.cpp:3218
 #, c-format
 msgid "read failed on %s"
 msgstr "%s で読み込みに失敗しました"
@@ -7583,7 +7827,8 @@ msgstr "並べ替えできるのはアトミックベクトルだけです"
 msgid "raw vectors cannot be sorted"
 msgstr "raw 型オブジェクトのベクトルはソートできません"
 
-#: src/main/sort.cpp:605 src/main/sort.cpp:622 src/main/sort.cpp:639 src/main/sort.cpp:662
+#: src/main/sort.cpp:605 src/main/sort.cpp:622 src/main/sort.cpp:639
+#: src/main/sort.cpp:662
 msgid "'n >= 2' is required"
 msgstr ""
 
@@ -7691,7 +7936,8 @@ msgstr "'fmt' の長さが書式の最大長 %d を超えました"
 msgid "unrecognised format specification '%s'"
 msgstr "理解不能なフォーマット指定 '%s'"
 
-#: src/main/sprintf.cpp:191 src/main/sprintf.cpp:197 src/main/sprintf.cpp:210 src/main/sprintf.cpp:217
+#: src/main/sprintf.cpp:191 src/main/sprintf.cpp:197 src/main/sprintf.cpp:210
+#: src/main/sprintf.cpp:217
 #, c-format
 msgid "reference to non-existent argument %d"
 msgstr "存在しない引数 %d を参照しました"
@@ -7712,7 +7958,8 @@ msgstr "'*' 変換指定に対する引数は数値でなければなりませ�
 msgid "coercion has changed vector length to 0"
 msgstr "変換によりベクトルの長さが 0 になりました"
 
-#: src/main/sprintf.cpp:370 src/main/sprintf.cpp:384 src/main/sprintf.cpp:398 src/main/sprintf.cpp:433
+#: src/main/sprintf.cpp:370 src/main/sprintf.cpp:384 src/main/sprintf.cpp:398
+#: src/main/sprintf.cpp:433
 #, c-format
 msgid "invalid format '%s'; %s"
 msgstr "不正な書式 '%s'; %s"
@@ -7881,15 +8128,18 @@ msgstr "部分代入における型のフィックスにおいて，両立しな
 msgid "Internal error: unexpected type in DeleteListElements"
 msgstr ""
 
-#: src/main/subassign.cpp:706 src/main/subassign.cpp:1020 src/main/subassign.cpp:1263
+#: src/main/subassign.cpp:706 src/main/subassign.cpp:1020
+#: src/main/subassign.cpp:1263
 msgid "NAs are not allowed in subscripted assignments"
 msgstr "添え字付きの付値で NA は許されていません"
 
-#: src/main/subassign.cpp:727 src/main/subassign.cpp:1030 src/main/subassign.cpp:1255 src/main/subassign.cpp:1911
+#: src/main/subassign.cpp:727 src/main/subassign.cpp:1030
+#: src/main/subassign.cpp:1255 src/main/subassign.cpp:1911
 msgid "replacement has length zero"
 msgstr "replacement (置き換え) の長さが 0 です"
 
-#: src/main/subassign.cpp:729 src/main/subassign.cpp:1032 src/main/subassign.cpp:1257
+#: src/main/subassign.cpp:729 src/main/subassign.cpp:1032
+#: src/main/subassign.cpp:1257
 msgid "number of items to replace is not a multiple of replacement length"
 msgstr "置き換えるべき項目数が、置き換える数の倍数ではありませんでした"
 
@@ -7974,19 +8224,22 @@ msgstr "この S4 クラスのサブセットを付値するメソッドはあ�
 msgid "Coercing LHS to a list"
 msgstr "左辺をリストに変換しました"
 
-#: src/main/subscript.cpp:114 src/main/subscript.cpp:134 src/main/subscript.cpp:155 src/main/subscript.cpp:249
+#: src/main/subscript.cpp:114 src/main/subscript.cpp:134
+#: src/main/subscript.cpp:155 src/main/subscript.cpp:249
 #: src/main/subscript.cpp:281
 #, fuzzy, c-format
 msgid "attempt to select less than one element in %s"
 msgstr "一つ未満の要素を選択しようとしました"
 
-#: src/main/subscript.cpp:118 src/main/subscript.cpp:131 src/main/subscript.cpp:159 src/main/subscript.cpp:247
+#: src/main/subscript.cpp:118 src/main/subscript.cpp:131
+#: src/main/subscript.cpp:159 src/main/subscript.cpp:247
 #: src/main/subscript.cpp:288 src/main/subscript.cpp:380
 #, fuzzy, c-format
 msgid "attempt to select more than one element in %s"
 msgstr "二つ以上の要素を選択しようとしました"
 
-#: src/main/subscript.cpp:220 src/main/subscript.cpp:358 src/main/subscript.cpp:1037 src/main/subscript.cpp:1119
+#: src/main/subscript.cpp:220 src/main/subscript.cpp:358
+#: src/main/subscript.cpp:1037 src/main/subscript.cpp:1119
 #: src/main/subset.cpp:1287
 #, c-format
 msgid "invalid subscript type '%s'"
@@ -8001,7 +8254,8 @@ msgstr "再帰的インデックスの使用中に、内部エラーが起きま
 msgid "invalid negative subscript in %s"
 msgstr "添え字の型 '%s' が不正です"
 
-#: src/main/subscript.cpp:322 src/main/subscript.cpp:326 src/main/subset.cpp:1386 src/main/subset.cpp:1442
+#: src/main/subscript.cpp:322 src/main/subscript.cpp:326
+#: src/main/subset.cpp:1386 src/main/subset.cpp:1442
 #, c-format
 msgid "partial match of '%s' to '%s'"
 msgstr "'%s' の '%s' への部分的マッチ"
@@ -8034,7 +8288,8 @@ msgstr "リストへの付値の添字が不正です"
 msgid "incorrect number of columns in matrix subscript"
 msgstr "添え字の数が正しくありません"
 
-#: src/main/subscript.cpp:464 src/main/subscript.cpp:483 src/main/subscript.cpp:508
+#: src/main/subscript.cpp:464 src/main/subscript.cpp:483
+#: src/main/subscript.cpp:508
 msgid "negative values are not allowed in a matrix subscript"
 msgstr "負の長さのベクトルは許されません"
 
@@ -8180,7 +8435,8 @@ msgstr "'%s' のファイル変更時刻を確定できません"
 msgid "encoding of a filename cannot be 'bytes'"
 msgstr "ファイル名のエンコーディングは 'bytes' は許されません"
 
-#: src/main/sysutils.cpp:196 src/main/sysutils.cpp:1726 src/main/sysutils.cpp:1741 src/main/sysutils.cpp:1955
+#: src/main/sysutils.cpp:196 src/main/sysutils.cpp:1726
+#: src/main/sysutils.cpp:1741 src/main/sysutils.cpp:1955
 #, c-format
 msgid "unsupported conversion from '%s' in codepage %d"
 msgstr "'%s' からのサポートされていない変換がコードページ %d にあります"
@@ -8218,7 +8474,9 @@ msgstr "'fileext' がありません"
 msgid "system call failed: %s"
 msgstr "システムコールが失敗しました: %s"
 
-#: src/main/sysutils.cpp:394 src/main/sysutils.cpp:397 src/main/sysutils.cpp:491 src/main/sysutils.cpp:494 src/main/sysutils.cpp:529
+#: src/main/sysutils.cpp:394 src/main/sysutils.cpp:397
+#: src/main/sysutils.cpp:491 src/main/sysutils.cpp:494
+#: src/main/sysutils.cpp:529
 msgid "wrong type for argument"
 msgstr "引数の型が不正です"
 
@@ -8239,7 +8497,8 @@ msgstr "'Sys.unsetenv' はこのシステムでは使えません"
 msgid "'x' must be a character vector or a list of NULL or raw vectors"
 msgstr "'x' は NULL または raw vector からなるリストでなくてはなりません"
 
-#: src/main/sysutils.cpp:726 src/main/sysutils.cpp:751 src/main/sysutils.cpp:772
+#: src/main/sysutils.cpp:726 src/main/sysutils.cpp:751
+#: src/main/sysutils.cpp:772
 #, c-format
 msgid "unsupported conversion from '%s' to '%s' in codepage %d"
 msgstr "'%s' から '%s' へのサポートされていない変換がコードページ %d 中にあります"
@@ -8249,7 +8508,8 @@ msgstr "'%s' から '%s' へのサポートされていない変換がコード�
 msgid "'%s' must be called on a CHARSXP, but got '%s'"
 msgstr "'%s' は CHARSXP 上で呼び出されなければなりません"
 
-#: src/main/sysutils.cpp:1694 src/main/sysutils.cpp:1925 src/main/sysutils.cpp:2063
+#: src/main/sysutils.cpp:1694 src/main/sysutils.cpp:1925
+#: src/main/sysutils.cpp:2063
 msgid "translating strings with \"bytes\" encoding is not allowed"
 msgstr "エンコーディングが \"bytes\" の文字列の翻訳は許されません"
 
@@ -8304,7 +8564,8 @@ msgstr ""
 msgid "cannot create 'R_TempDir'"
 msgstr "'R_TempDir' を作成することができません"
 
-#: src/main/sysutils.cpp:2722 src/main/sysutils.cpp:2733 src/main/sysutils.cpp:2738
+#: src/main/sysutils.cpp:2722 src/main/sysutils.cpp:2733
+#: src/main/sysutils.cpp:2738
 msgid "unable to set R_SESSION_TMPDIR"
 msgstr "R_SESSION_TMPDIR を設定することが出来ません"
 
@@ -8334,7 +8595,8 @@ msgstr "長さ %lld は大きすぎてハッシュできません"
 msgid "hash table is full"
 msgstr "sink のスタックが溢れました"
 
-#: src/main/unique.cpp:675 src/main/unique.cpp:860 src/main/unique.cpp:1017 src/main/unique.cpp:1047 src/main/unique.cpp:1086
+#: src/main/unique.cpp:675 src/main/unique.cpp:860 src/main/unique.cpp:1017
+#: src/main/unique.cpp:1047 src/main/unique.cpp:1086
 msgid "'duplicated' applies only to vectors"
 msgstr "'duplicated' はベクトルに対してだけ適用できます"
 
@@ -8450,7 +8712,8 @@ msgstr "オブジェクトが行列ではありません"
 msgid "invalid type passed to internal function\n"
 msgstr "不正なオブジェクトです: プリミティブな関数でなくてはなりません"
 
-#: src/main/util.cpp:327 src/main/util.cpp:339 src/main/util.cpp:350 src/main/util.cpp:379
+#: src/main/util.cpp:327 src/main/util.cpp:339 src/main/util.cpp:350
+#: src/main/util.cpp:379
 #, c-format
 msgid "type %d is unimplemented in '%s'"
 msgstr "型 %d は '%s' では未実装です"
@@ -8501,8 +8764,9 @@ msgstr "欠損値は不正です"
 msgid "cannot change working directory"
 msgstr "作業ディレクトリを変更できません"
 
-#: src/main/util.cpp:893 src/main/util.cpp:923 src/main/util.cpp:971 src/main/util.cpp:1033 src/main/util.cpp:1210
-#: src/main/util.cpp:1288 src/main/util.cpp:1312
+#: src/main/util.cpp:893 src/main/util.cpp:923 src/main/util.cpp:971
+#: src/main/util.cpp:1033 src/main/util.cpp:1210 src/main/util.cpp:1288
+#: src/main/util.cpp:1312
 msgid "a character vector argument expected"
 msgstr "文字ベクトルの引数が期待されています"
 
@@ -8719,7 +8983,7 @@ msgstr "少なくとも四つの制御点が必要です"
 msgid "There must be at least three control points"
 msgstr "少なくとも三つの制御点が必要です"
 
-#: src/modules/internet/internet.cpp:100 src/modules/internet/libcurl.cpp:1269
+#: src/modules/internet/internet.cpp:100 src/modules/internet/libcurl.cpp:1277
 #, fuzzy
 msgid "can only open URLs for reading"
 msgstr "コネクションは読み込みのために開かれていません"
@@ -8737,10 +9001,12 @@ msgstr ""
 msgid "scheme not supported in URL '%s'"
 msgstr "再実行機能は 'eval' 関数に対してはサポートされていません"
 
-#: src/modules/internet/internet.cpp:215 src/modules/internet/internet.cpp:219 src/modules/internet/internet.cpp:225
-#: src/modules/internet/internet.cpp:246 src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1347
-#: src/modules/internet/libcurl.cpp:1351 src/modules/internet/libcurl.cpp:1358 src/modules/internet/libcurl.cpp:1372
-#: src/modules/internet/libcurl.cpp:1381 src/modules/internet/libcurl.cpp:1393
+#: src/modules/internet/internet.cpp:215 src/modules/internet/internet.cpp:219
+#: src/modules/internet/internet.cpp:225 src/modules/internet/internet.cpp:246
+#: src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1355
+#: src/modules/internet/libcurl.cpp:1359 src/modules/internet/libcurl.cpp:1366
+#: src/modules/internet/libcurl.cpp:1380 src/modules/internet/libcurl.cpp:1389
+#: src/modules/internet/libcurl.cpp:1401
 msgid "allocation of url connection failed"
 msgstr "url 接続の割り当てに失敗しました"
 
@@ -8752,8 +9018,8 @@ msgstr "'url' 引数の最初の要素だけが使われました"
 msgid "only first element of 'destfile' argument used"
 msgstr "'destfile' 引数の最初の要素だけが使われました"
 
-#: src/modules/internet/internet.cpp:366 src/modules/internet/internet.cpp:465 src/modules/internet/libcurl.cpp:715
-#: src/modules/internet/libcurl.cpp:728
+#: src/modules/internet/internet.cpp:366 src/modules/internet/internet.cpp:465
+#: src/modules/internet/libcurl.cpp:723 src/modules/internet/libcurl.cpp:736
 msgid "Download progress"
 msgstr "ダウンロード実行中です"
 
@@ -8775,31 +9041,31 @@ msgstr ""
 msgid "the 'wininet' method is deprecated for http:// and https:// URLs"
 msgstr ""
 
-#: src/modules/internet/internet.cpp:433 src/modules/internet/libcurl.cpp:787
+#: src/modules/internet/internet.cpp:433 src/modules/internet/libcurl.cpp:795
 #, c-format
 msgid "trying URL '%s'\n"
 msgstr "URL '%s' を試しています \n"
 
-#: src/modules/internet/internet.cpp:486 src/modules/internet/libcurl.cpp:524
+#: src/modules/internet/internet.cpp:486 src/modules/internet/libcurl.cpp:532
 #, c-format
 msgid "%d%% downloaded"
 msgstr ""
 
-#: src/modules/internet/internet.cpp:501 src/modules/internet/libcurl.cpp:1058
+#: src/modules/internet/internet.cpp:501 src/modules/internet/libcurl.cpp:1066
 #, c-format
 msgid ""
 "downloaded %0.1f MB\n"
 "\n"
 msgstr ""
 
-#: src/modules/internet/internet.cpp:504 src/modules/internet/libcurl.cpp:1060
+#: src/modules/internet/internet.cpp:504 src/modules/internet/libcurl.cpp:1068
 #, c-format
 msgid ""
 "downloaded %d KB\n"
 "\n"
 msgstr ""
 
-#: src/modules/internet/internet.cpp:506 src/modules/internet/libcurl.cpp:1062
+#: src/modules/internet/internet.cpp:506 src/modules/internet/libcurl.cpp:1070
 #, c-format
 msgid ""
 "downloaded %d byte\n"
@@ -8809,12 +9075,12 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
-#: src/modules/internet/internet.cpp:519 src/modules/internet/libcurl.cpp:1070
+#: src/modules/internet/internet.cpp:519 src/modules/internet/libcurl.cpp:1078
 #, c-format
 msgid "downloaded length %0.f != reported length %0.f"
 msgstr "ダウンロードされた長さ %0.f != 報告された長さ %0.f です"
 
-#: src/modules/internet/internet.cpp:525 src/modules/internet/libcurl.cpp:1090
+#: src/modules/internet/internet.cpp:525 src/modules/internet/libcurl.cpp:1098
 #, c-format
 msgid "cannot open URL '%s'"
 msgstr "URL '%s' を開けません"
@@ -8827,8 +9093,8 @@ msgstr ""
 msgid "the 'internal' method for ftp:// URLs is defunct"
 msgstr ""
 
-#: src/modules/internet/internet.cpp:581 src/modules/internet/internet.cpp:595 src/modules/internet/internet.cpp:686
-#: src/modules/internet/internet.cpp:695
+#: src/modules/internet/internet.cpp:581 src/modules/internet/internet.cpp:595
+#: src/modules/internet/internet.cpp:686 src/modules/internet/internet.cpp:695
 #, c-format
 msgid "InternetOpenUrl failed: '%s'"
 msgstr "InternetOpenUrl の失敗: '%s'"
@@ -8838,19 +9104,19 @@ msgstr "InternetOpenUrl の失敗: '%s'"
 msgid "cannot open URL '%s': %s status was '%lu %s'"
 msgstr ""
 
-#: src/modules/internet/internet.cpp:626 src/modules/internet/libcurl.cpp:503
+#: src/modules/internet/internet.cpp:626 src/modules/internet/libcurl.cpp:511
 #, c-format
 msgid "Content type '%s' length %0.0f byte (%0.1f MB)\n"
 msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)\n"
 msgstr[0] ""
 
-#: src/modules/internet/internet.cpp:629 src/modules/internet/libcurl.cpp:506
+#: src/modules/internet/internet.cpp:629 src/modules/internet/libcurl.cpp:514
 #, c-format
 msgid "Content type '%s' length %d byte (%d KB)\n"
 msgid_plural "Content type '%s' length %d bytes (%d KB)\n"
 msgstr[0] ""
 
-#: src/modules/internet/internet.cpp:632 src/modules/internet/libcurl.cpp:509
+#: src/modules/internet/internet.cpp:632 src/modules/internet/libcurl.cpp:517
 #, c-format
 msgid "Content type '%s' length %d byte\n"
 msgid_plural "Content type '%s' length %d bytes\n"
@@ -8876,22 +9142,23 @@ msgstr ""
 msgid "URL '%s': status was '%s'"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:360
+#: src/modules/internet/libcurl.cpp:368
 msgid "curlGetHeaders is not supported on this platform"
 msgstr "このプラットフォームでは curlGetHeaders はサポートされていません"
 
-#: src/modules/internet/libcurl.cpp:380 src/modules/internet/libcurl.cpp:656 src/modules/internet/libcurl.cpp:938
-#: src/modules/internet/libcurl.cpp:1275 src/modules/internet/libcurl.cpp:1294
+#: src/modules/internet/libcurl.cpp:388 src/modules/internet/libcurl.cpp:664
+#: src/modules/internet/libcurl.cpp:946 src/modules/internet/libcurl.cpp:1283
+#: src/modules/internet/libcurl.cpp:1302
 #, fuzzy
 msgid "could not create curl handle"
 msgstr "'name' のための領域を割り当てられませんでした"
 
-#: src/modules/internet/libcurl.cpp:412
+#: src/modules/internet/libcurl.cpp:420
 #, fuzzy, c-format
 msgid "TLS argument is unsupported in this libcurl version %d.%d"
 msgstr "この R のバージョンには tiff のサポートはありません"
 
-#: src/modules/internet/libcurl.cpp:424
+#: src/modules/internet/libcurl.cpp:432
 #, c-format
 msgid ""
 "libcurl error code %d:\n"
@@ -8900,67 +9167,67 @@ msgstr ""
 "libcurl エラーコード %d\n"
 "\t%s\n"
 
-#: src/modules/internet/libcurl.cpp:426
+#: src/modules/internet/libcurl.cpp:434
 #, c-format
 msgid ""
 "libcurl error code %d:\n"
 "\tunable to access SSL/TLS CA certificates\n"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:428
+#: src/modules/internet/libcurl.cpp:436
 #, fuzzy, c-format
 msgid "libcurl error code %d\n"
 msgstr ""
 "libcurl エラーコード %d\n"
 "\t%s\n"
 
-#: src/modules/internet/libcurl.cpp:682
+#: src/modules/internet/libcurl.cpp:690
 #, fuzzy, c-format
 msgid "URL %s: cannot open destfile '%s', reason '%s'"
 msgstr "目標ファイル '%s' を開くことができません、理由は '%s' です"
 
-#: src/modules/internet/libcurl.cpp:858
+#: src/modules/internet/libcurl.cpp:866
 msgid "download.file(method = \"libcurl\") is not supported on this platform"
 msgstr "このプラットフォームでは download.file(method = \"libcurl\") はサポートされていません"
 
-#: src/modules/internet/libcurl.cpp:886
+#: src/modules/internet/libcurl.cpp:894
 msgid "lengths of 'url' and 'destfile' must match"
 msgstr "'url' と 'destfile' の長さは一致しなければなりません"
 
-#: src/modules/internet/libcurl.cpp:916 src/modules/internet/libcurl.cpp:932
+#: src/modules/internet/libcurl.cpp:924 src/modules/internet/libcurl.cpp:940
 msgid "out of memory"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:1000 src/modules/internet/libcurl.cpp:1200
+#: src/modules/internet/libcurl.cpp:1008 src/modules/internet/libcurl.cpp:1208
 #, c-format
 msgid "curl_multi_wait() failed, code %d"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:1086
+#: src/modules/internet/libcurl.cpp:1094
 #, fuzzy
 msgid "cannot download any files"
 msgstr "ファイル '%s' を開くことができません"
 
-#: src/modules/internet/libcurl.cpp:1087
+#: src/modules/internet/libcurl.cpp:1095
 #, fuzzy
 msgid "some files were not downloaded"
 msgstr "リストアしようとしたファイルは空の可能性、データは読み込まれませんでした"
 
-#: src/modules/internet/libcurl.cpp:1093
+#: src/modules/internet/libcurl.cpp:1101
 #, c-format
 msgid "download from '%s' failed"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:1168
+#: src/modules/internet/libcurl.cpp:1176
 msgid "Failure in re-allocation in rcvData"
 msgstr ""
 
-#: src/modules/internet/libcurl.cpp:1257
+#: src/modules/internet/libcurl.cpp:1265
 #, fuzzy
 msgid "cannot read from connection"
 msgstr "このコネクションから読み込みできません"
 
-#: src/modules/internet/libcurl.cpp:1319
+#: src/modules/internet/libcurl.cpp:1327
 #, fuzzy, c-format
 msgid "cannot open the connection to '%s'"
 msgstr "コネクションを開くことができません"
@@ -8993,8 +9260,9 @@ msgstr " メモリー限界を減らすことができません: 無視しまし
 msgid "invalid bind address specification"
 msgstr " 不正なバインドアドレスです "
 
-#: src/modules/internet/Rsock.cpp:71 src/modules/internet/Rsock.cpp:96 src/modules/internet/Rsock.cpp:106
-#: src/modules/internet/Rsock.cpp:120 src/modules/internet/Rsock.cpp:138 src/modules/internet/Rsock.cpp:161
+#: src/modules/internet/Rsock.cpp:71 src/modules/internet/Rsock.cpp:96
+#: src/modules/internet/Rsock.cpp:106 src/modules/internet/Rsock.cpp:120
+#: src/modules/internet/Rsock.cpp:138 src/modules/internet/Rsock.cpp:161
 #, fuzzy, c-format
 msgid "socket error: %s\n"
 msgstr "致命的なエラーです: %s \n"
@@ -9019,13 +9287,13 @@ msgstr "コネクションへの書き込みに問題があります"
 msgid "%s:%d cannot be opened"
 msgstr "zip ファイル '%s' を開くことができません"
 
-#: src/modules/internet/sockconn.cpp:213 src/modules/internet/sockconn.cpp:217 src/modules/internet/sockconn.cpp:224
-#: src/modules/internet/sockconn.cpp:238
+#: src/modules/internet/sockconn.cpp:213 src/modules/internet/sockconn.cpp:217
+#: src/modules/internet/sockconn.cpp:224 src/modules/internet/sockconn.cpp:238
 msgid "allocation of socket connection failed"
 msgstr "ソケット接続の割り当てに失敗しました"
 
-#: src/modules/internet/sockconn.cpp:254 src/modules/internet/sockconn.cpp:258 src/modules/internet/sockconn.cpp:265
-#: src/modules/internet/sockconn.cpp:273
+#: src/modules/internet/sockconn.cpp:254 src/modules/internet/sockconn.cpp:258
+#: src/modules/internet/sockconn.cpp:265 src/modules/internet/sockconn.cpp:273
 #, fuzzy
 msgid "allocation of server socket connection failed"
 msgstr "ソケット接続の割り当てに失敗しました"
@@ -9035,7 +9303,8 @@ msgstr "ソケット接続の割り当てに失敗しました"
 msgid "creation of server socket failed: port %d cannot be opened"
 msgstr ""
 
-#: src/modules/lapack/Lapack.cpp:72 src/modules/lapack/Lapack.cpp:91 src/modules/lapack/Lapack.cpp:106
+#: src/modules/lapack/Lapack.cpp:72 src/modules/lapack/Lapack.cpp:91
+#: src/modules/lapack/Lapack.cpp:106
 #, c-format
 msgid "argument type[1]='%s' must be a character string of string length 1"
 msgstr "type[1]='%s' の引数は長さ 1 の文字ベクトルでなくてはなりません"
@@ -9063,29 +9332,38 @@ msgstr ""
 msgid "non-integer dim(vt)"
 msgstr ""
 
-#: src/modules/lapack/Lapack.cpp:149 src/modules/lapack/Lapack.cpp:156 src/modules/lapack/Lapack.cpp:214
-#: src/modules/lapack/Lapack.cpp:225 src/modules/lapack/Lapack.cpp:303 src/modules/lapack/Lapack.cpp:309
-#: src/modules/lapack/Lapack.cpp:403 src/modules/lapack/Lapack.cpp:420 src/modules/lapack/Lapack.cpp:494
-#: src/modules/lapack/Lapack.cpp:564 src/modules/lapack/Lapack.cpp:577 src/modules/lapack/Lapack.cpp:613
-#: src/modules/lapack/Lapack.cpp:771 src/modules/lapack/Lapack.cpp:777 src/modules/lapack/Lapack.cpp:831
-#: src/modules/lapack/Lapack.cpp:838 src/modules/lapack/Lapack.cpp:843 src/modules/lapack/Lapack.cpp:877
-#: src/modules/lapack/Lapack.cpp:884 src/modules/lapack/Lapack.cpp:932 src/modules/lapack/Lapack.cpp:939
-#: src/modules/lapack/Lapack.cpp:986 src/modules/lapack/Lapack.cpp:992 src/modules/lapack/Lapack.cpp:1046
-#: src/modules/lapack/Lapack.cpp:1053 src/modules/lapack/Lapack.cpp:1297 src/modules/lapack/Lapack.cpp:1303
-#: src/modules/lapack/Lapack.cpp:1349 src/modules/lapack/Lapack.cpp:1356 src/modules/lapack/Lapack.cpp:1361
-#: src/modules/lapack/Lapack.cpp:1388 src/modules/lapack/Lapack.cpp:1395 src/modules/lapack/Lapack.cpp:1415
+#: src/modules/lapack/Lapack.cpp:149 src/modules/lapack/Lapack.cpp:156
+#: src/modules/lapack/Lapack.cpp:214 src/modules/lapack/Lapack.cpp:225
+#: src/modules/lapack/Lapack.cpp:303 src/modules/lapack/Lapack.cpp:309
+#: src/modules/lapack/Lapack.cpp:403 src/modules/lapack/Lapack.cpp:420
+#: src/modules/lapack/Lapack.cpp:494 src/modules/lapack/Lapack.cpp:564
+#: src/modules/lapack/Lapack.cpp:577 src/modules/lapack/Lapack.cpp:613
+#: src/modules/lapack/Lapack.cpp:771 src/modules/lapack/Lapack.cpp:777
+#: src/modules/lapack/Lapack.cpp:831 src/modules/lapack/Lapack.cpp:838
+#: src/modules/lapack/Lapack.cpp:843 src/modules/lapack/Lapack.cpp:877
+#: src/modules/lapack/Lapack.cpp:884 src/modules/lapack/Lapack.cpp:932
+#: src/modules/lapack/Lapack.cpp:939 src/modules/lapack/Lapack.cpp:986
+#: src/modules/lapack/Lapack.cpp:992 src/modules/lapack/Lapack.cpp:1046
+#: src/modules/lapack/Lapack.cpp:1053 src/modules/lapack/Lapack.cpp:1297
+#: src/modules/lapack/Lapack.cpp:1303 src/modules/lapack/Lapack.cpp:1349
+#: src/modules/lapack/Lapack.cpp:1356 src/modules/lapack/Lapack.cpp:1361
+#: src/modules/lapack/Lapack.cpp:1388 src/modules/lapack/Lapack.cpp:1395
+#: src/modules/lapack/Lapack.cpp:1415
 #, c-format
 msgid "error code %d from Lapack routine '%s'"
 msgstr "エラーコード %d が Lapack ルーチン '%s' から返されました"
 
-#: src/modules/lapack/Lapack.cpp:186 src/modules/lapack/Lapack.cpp:278 src/modules/lapack/Lapack.cpp:1026
+#: src/modules/lapack/Lapack.cpp:186 src/modules/lapack/Lapack.cpp:278
+#: src/modules/lapack/Lapack.cpp:1026
 msgid "'x' must be a square numeric matrix"
 msgstr "'x' は数値の正方行列でなければなりません"
 
-#: src/modules/lapack/Lapack.cpp:353 src/modules/lapack/Lapack.cpp:382 src/modules/lapack/Lapack.cpp:433
-#: src/modules/lapack/Lapack.cpp:470 src/modules/lapack/Lapack.cpp:1079 src/modules/lapack/Lapack.cpp:1155
-#: src/modules/lapack/Lapack.cpp:1194 src/modules/lapack/Lapack.cpp:1277 src/modules/lapack/Lapack.cpp:1332
-#: src/modules/lapack/Lapack.cpp:1374 src/modules/lapack/Lapack.cpp:1407
+#: src/modules/lapack/Lapack.cpp:353 src/modules/lapack/Lapack.cpp:382
+#: src/modules/lapack/Lapack.cpp:433 src/modules/lapack/Lapack.cpp:470
+#: src/modules/lapack/Lapack.cpp:1079 src/modules/lapack/Lapack.cpp:1155
+#: src/modules/lapack/Lapack.cpp:1194 src/modules/lapack/Lapack.cpp:1277
+#: src/modules/lapack/Lapack.cpp:1332 src/modules/lapack/Lapack.cpp:1374
+#: src/modules/lapack/Lapack.cpp:1407
 #, fuzzy, c-format
 msgid "'%s' must be a numeric matrix"
 msgstr "'A' は数値行列でなければなりません"
@@ -9095,8 +9373,9 @@ msgstr "'A' は数値行列でなければなりません"
 msgid "exact singularity: U[%d,%d] = 0 in LU-decomposition {Lapack 'dgetrf()'}"
 msgstr "LU-decomposition {Lapack 'dgetrf()'} の中の U[%d,%d] = 0 は正確に特異です"
 
-#: src/modules/lapack/Lapack.cpp:444 src/modules/lapack/Lapack.cpp:480 src/modules/lapack/Lapack.cpp:545
-#: src/modules/lapack/Lapack.cpp:601 src/modules/lapack/Lapack.cpp:637
+#: src/modules/lapack/Lapack.cpp:444 src/modules/lapack/Lapack.cpp:480
+#: src/modules/lapack/Lapack.cpp:545 src/modules/lapack/Lapack.cpp:601
+#: src/modules/lapack/Lapack.cpp:637
 msgid "'A' must be a *square* matrix"
 msgstr "'A' は正方行列でなければなりません"
 
@@ -9105,17 +9384,20 @@ msgstr "'A' は正方行列でなければなりません"
 msgid "error [%d] from Lapack 'dtrcon()'"
 msgstr "Lapack ルーチン 'dtrcon()' からエラー [%d] が返されました"
 
-#: src/modules/lapack/Lapack.cpp:508 src/modules/lapack/Lapack.cpp:542 src/modules/lapack/Lapack.cpp:597
-#: src/modules/lapack/Lapack.cpp:631 src/modules/lapack/Lapack.cpp:667 src/modules/lapack/Lapack.cpp:756
+#: src/modules/lapack/Lapack.cpp:508 src/modules/lapack/Lapack.cpp:542
+#: src/modules/lapack/Lapack.cpp:597 src/modules/lapack/Lapack.cpp:631
+#: src/modules/lapack/Lapack.cpp:667 src/modules/lapack/Lapack.cpp:756
 #: src/modules/lapack/Lapack.cpp:816 src/modules/lapack/Lapack.cpp:862
 #, fuzzy, c-format
 msgid "'%s' must be a complex matrix"
 msgstr "'A' は複素行列でなければなりません"
 
-#: src/modules/lapack/Lapack.cpp:525 src/modules/lapack/Lapack.cpp:581 src/modules/lapack/Lapack.cpp:616
-#: src/modules/lapack/Lapack.cpp:653 src/modules/lapack/Lapack.cpp:742 src/modules/lapack/Lapack.cpp:802
-#: src/modules/lapack/Lapack.cpp:847 src/modules/lapack/Lapack.cpp:888 src/modules/lapack/Lapack.cpp:953
-#: src/modules/lapack/Lapack.cpp:1009 src/modules/lapack/Lapack.cpp:1070
+#: src/modules/lapack/Lapack.cpp:525 src/modules/lapack/Lapack.cpp:581
+#: src/modules/lapack/Lapack.cpp:616 src/modules/lapack/Lapack.cpp:653
+#: src/modules/lapack/Lapack.cpp:742 src/modules/lapack/Lapack.cpp:802
+#: src/modules/lapack/Lapack.cpp:847 src/modules/lapack/Lapack.cpp:888
+#: src/modules/lapack/Lapack.cpp:953 src/modules/lapack/Lapack.cpp:1009
+#: src/modules/lapack/Lapack.cpp:1070
 msgid "Fortran complex functions are not available on this platform"
 msgstr "Fortran の複素数関数はこのプラットフォームでは使用できません"
 
@@ -9138,14 +9420,15 @@ msgstr "'a' (%d x %d) は正方行列である必要があります"
 msgid "no right-hand side in 'b'"
 msgstr "'b' に右辺項がありません"
 
-#: src/modules/lapack/Lapack.cpp:682 src/modules/lapack/Lapack.cpp:696 src/modules/lapack/Lapack.cpp:1209
-#: src/modules/lapack/Lapack.cpp:1225
+#: src/modules/lapack/Lapack.cpp:682 src/modules/lapack/Lapack.cpp:696
+#: src/modules/lapack/Lapack.cpp:1209 src/modules/lapack/Lapack.cpp:1225
 #, c-format
 msgid "'b' (%d x %d) must be compatible with 'a' (%d x %d)"
 msgstr "'d' (%d x %d) は 'a' (%d x %d) と整合性をもたなければなりません"
 
-#: src/modules/lapack/Lapack.cpp:717 src/modules/lapack/Lapack.cpp:1101 src/modules/lapack/Lapack.cpp:1116
-#: src/modules/lapack/Lapack.cpp:1172 src/modules/lapack/Lapack.cpp:1247
+#: src/modules/lapack/Lapack.cpp:717 src/modules/lapack/Lapack.cpp:1101
+#: src/modules/lapack/Lapack.cpp:1116 src/modules/lapack/Lapack.cpp:1172
+#: src/modules/lapack/Lapack.cpp:1247
 #, c-format
 msgid "argument %d of Lapack routine %s had invalid value"
 msgstr "Lapack ルーチン %2$s の %1$d 引数が不正な値を持っています"
@@ -9160,8 +9443,8 @@ msgstr "Lapack routine %s: システムは正確に特異です: U[%d,%d] = 0"
 msgid "system is computationally singular: reciprocal condition number = %g"
 msgstr "システムは数値的に特異です: 条件数の逆数 = %g"
 
-#: src/modules/lapack/Lapack.cpp:824 src/modules/lapack/Lapack.cpp:870 src/modules/lapack/Lapack.cpp:1341
-#: src/modules/lapack/Lapack.cpp:1381
+#: src/modules/lapack/Lapack.cpp:824 src/modules/lapack/Lapack.cpp:870
+#: src/modules/lapack/Lapack.cpp:1341 src/modules/lapack/Lapack.cpp:1381
 #, c-format
 msgid "right-hand side should have %d not %d rows"
 msgstr "右辺は %d 個の行を持つべきです（%d 行ではなくて）"
@@ -9170,8 +9453,8 @@ msgstr "右辺は %d 個の行を持つべきです（%d 行ではなくて）"
 msgid "matrices of 2^31 or more elements are not supported"
 msgstr "要素数が 2^31 以上の行列はサポートされていません"
 
-#: src/modules/lapack/Lapack.cpp:923 src/modules/lapack/Lapack.cpp:926 src/modules/lapack/Lapack.cpp:1083
-#: src/modules/lapack/Lapack.cpp:1152
+#: src/modules/lapack/Lapack.cpp:923 src/modules/lapack/Lapack.cpp:926
+#: src/modules/lapack/Lapack.cpp:1083 src/modules/lapack/Lapack.cpp:1152
 msgid "non-integer dims"
 msgstr ""
 
@@ -9328,7 +9611,8 @@ msgstr ""
 msgid "Unknown Visual\n"
 msgstr ""
 
-#: src/modules/X11/devX11.cpp:808 src/modules/X11/devX11.cpp:1659 src/modules/X11/devX11.cpp:1667 src/modules/X11/devX11.cpp:1688
+#: src/modules/X11/devX11.cpp:808 src/modules/X11/devX11.cpp:1659
+#: src/modules/X11/devX11.cpp:1667 src/modules/X11/devX11.cpp:1688
 #: src/modules/X11/devX11.cpp:1697 src/modules/X11/devX11.cpp:3352
 #, fuzzy, c-format
 msgid "cairo error '%s'"
@@ -9369,7 +9653,8 @@ msgstr "'%s' に対して X11 コネクションを開くのに X11 I/O エラ�
 msgid "no png support in this version of R"
 msgstr "この R のバージョンには png のサポートはありません"
 
-#: src/modules/X11/devX11.cpp:1350 src/modules/X11/devX11.cpp:1376 src/modules/X11/devX11.cpp:1400 src/modules/X11/devX11.cpp:1412
+#: src/modules/X11/devX11.cpp:1350 src/modules/X11/devX11.cpp:1376
+#: src/modules/X11/devX11.cpp:1400 src/modules/X11/devX11.cpp:1412
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "png() 関数の呼び出しでファイル名が長すぎます"
@@ -9555,7 +9840,8 @@ msgstr "R_tmpnam2 においてメモリ割り当てが失敗しました"
 msgid "no TIFF support in this version of R"
 msgstr "この R のバージョンには png のサポートはありません"
 
-#: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600 src/modules/X11/rbitmap.cpp:609
+#: src/modules/X11/rbitmap.cpp:587 src/modules/X11/rbitmap.cpp:600
+#: src/modules/X11/rbitmap.cpp:609
 #, fuzzy
 msgid "Problems writing to 'bmp' file"
 msgstr "コネクションへの書き込みに問題があります"
@@ -9711,7 +9997,8 @@ msgstr "signrank 割り当てエラーです"
 msgid "norm_rand(): invalid N01_kind: %d\n"
 msgstr "norm_rand(): N01_kind: %d は不正です \n"
 
-#: src/nmath/wilcox.cpp:83 src/nmath/wilcox.cpp:93 src/nmath/wilcox.cpp:149 src/nmath/wilcox.cpp:307
+#: src/nmath/wilcox.cpp:83 src/nmath/wilcox.cpp:93 src/nmath/wilcox.cpp:149
+#: src/nmath/wilcox.cpp:307
 #, c-format
 msgid "wilcox allocation error %d"
 msgstr "wilcox のメモリー割り当てエラー %d"
@@ -9761,7 +10048,8 @@ msgstr ""
 "ファイル '%s' を開くことができません: %s\n"
 "\n"
 
-#: src/unix/sys-std.cpp:1362 src/unix/system.cpp:594 src/unix/sys-unix.cpp:1032 src/unix/sys-unix.cpp:1092
+#: src/unix/sys-std.cpp:1362 src/unix/system.cpp:594 src/unix/sys-unix.cpp:1032
+#: src/unix/sys-unix.cpp:1092
 msgid "error in running command"
 msgstr "命令の実行中にエラーが起きました"
 
@@ -9833,7 +10121,8 @@ msgstr "zip ファイルから抽出中に書き込みエラーが生じまし�
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "警告: ファイルリストの最初のみを編集します"
 
-#: src/unix/sys-unix.cpp:587 src/unix/sys-unix.cpp:668 src/unix/sys-unix.cpp:785
+#: src/unix/sys-unix.cpp:587 src/unix/sys-unix.cpp:668
+#: src/unix/sys-unix.cpp:785
 #, fuzzy
 msgid "Cannot open /dev/null for reading:"
 msgstr "コネクションは読み込みのために開かれていません"
@@ -9879,11 +10168,13 @@ msgstr "この GUI のもとでは、X11 モジュールは利用できません
 msgid "X11 routines cannot be accessed in module"
 msgstr "X11 ルーチンはこのモジュールではアクセスできません"
 
-#: src/unix/X11.cpp:82 src/unix/X11.cpp:94 src/unix/X11.cpp:106 src/unix/X11.cpp:117
+#: src/unix/X11.cpp:82 src/unix/X11.cpp:94 src/unix/X11.cpp:106
+#: src/unix/X11.cpp:117
 msgid "X11 module cannot be loaded"
 msgstr "X11 モジュールをロードできません"
 
-#: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161 src/unix/X11.cpp:167
+#: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161
+#: src/unix/X11.cpp:167
 msgid "X11 is not available"
 msgstr "X11 が利用できません"
 

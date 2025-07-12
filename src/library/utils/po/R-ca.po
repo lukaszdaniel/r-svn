@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-07-12 12:17\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -757,12 +757,6 @@ msgstr "Només es poden instal·lar els fitxers «*.zip» i «*.tar.gz»."
 #, fuzzy
 msgid "Otherwise, be patient ..."
 msgstr "En cas contrari, sigues pacient..."
-
-#. R/Sweave.R: message("Output file:  ", output)
-#: R/Sweave.R:0
-#, fuzzy
-msgid "Output file:"
-msgstr "Fitxer de sortida:"
 
 #. R/help.R: gettext("Package")
 #: R/help.R:0
@@ -1545,7 +1539,8 @@ msgstr "la instal·lació del paquet %s té un estat de sortida diferent de zero
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0 R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "argument %s no vàlid"
@@ -2521,6 +2516,14 @@ msgid "Invalid role specification: %s."
 msgid_plural "Invalid role specifications: %s."
 msgstr[0] "Especificació de rol no vàlida: %s."
 msgstr[1] "Especificacions de rol no vàlides: %s."
+
+#. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
+#: R/Sweave.R:0
+#, fuzzy
+msgid "Output file:  "
+msgid_plural "Output files:  "
+msgstr[0] "Fitxer de sortida:"
+msgstr[1] "Fitxer de sortida:"
 
 #. R/Sweave.R: ngettext(length(output), "Output/used file:  ", "Output/used files:  ")
 #: R/Sweave.R:0

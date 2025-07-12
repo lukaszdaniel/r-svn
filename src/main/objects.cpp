@@ -36,6 +36,7 @@
 #include <config.h>
 #endif
 
+#include <cassert>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
@@ -501,6 +502,8 @@ std::pair<bool, RObject *> R::usemethod(const char *generic, SEXP obj, SEXP call
 {
     SEXP klass, method, sxp;
     RObject *ans = R_NilValue;
+
+    assert(generic != nullptr);
 
     /* Get the context which UseMethod was called from. */
 

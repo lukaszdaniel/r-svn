@@ -52,6 +52,8 @@ namespace CXXR
     bool Evaluator::s_bc_active = false;               // R_BCIntActive
     GCRoot<> Evaluator::s_current_expression(R_NilValue); // R_CurrentExpr
 
+    // Implementation of Evaluator::evaluate() is in eval.cpp (for the time being)
+
     void Evaluator::maybeCheckForUserInterrupts()
     {
         if (--s_countdown == 0)

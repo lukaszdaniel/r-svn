@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-07-12 12:17\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -655,11 +655,6 @@ msgstr "Можно устанавливать только файлы '*.zip' и
 #: R/help.start.R:0
 msgid "Otherwise, be patient ..."
 msgstr "Если нет, ждите..."
-
-#. R/Sweave.R: message("Output file:  ", output)
-#: R/Sweave.R:0
-msgid "Output file:"
-msgstr "Файл вывода:"
 
 #. R/help.R: gettext("Package")
 #: R/help.R:0
@@ -2186,6 +2181,15 @@ msgid_plural "Invalid role specifications: %s."
 msgstr[0] "Неправильное указание роли: %s."
 msgstr[1] "Неправильные указания ролей: %s."
 msgstr[2] "Неправильные указания ролей: %s."
+
+#. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
+#: R/Sweave.R:0
+#, fuzzy
+msgid "Output file:  "
+msgid_plural "Output files:  "
+msgstr[0] "Файл вывода:"
+msgstr[1] "Файл вывода:"
+msgstr[2] "Файл вывода:"
 
 #. R/Sweave.R: ngettext(length(output), "Output/used file:  ", "Output/used files:  ")
 #: R/Sweave.R:0

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-07-12 12:17\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -10,8 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > 19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 "
-"> 19)) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > 19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? 1 : 2);\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -654,11 +653,6 @@ msgstr "Galima įdiegti tik '*.zip' ir '*.tar.gz' failus."
 #: R/help.start.R:0
 msgid "Otherwise, be patient ..."
 msgstr "Priešingu atveju būkite kantrūs ..."
-
-#. R/Sweave.R: message("Output file:  ", output)
-#: R/Sweave.R:0
-msgid "Output file:"
-msgstr "Išvesties failas:"
 
 #. R/help.R: gettext("Package")
 #: R/help.R:0
@@ -1336,7 +1330,8 @@ msgstr "paketo %s diegimas turėjo ne nulinio išėjimo būseną"
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0 R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "neleistinas argumentas %s"
@@ -2187,6 +2182,15 @@ msgid_plural "Invalid role specifications: %s."
 msgstr[0] "Neteisinga rolės specifikacija: %s."
 msgstr[1] "Neteisingos rolės specifikacijos: %s."
 msgstr[2] "Neteisingos rolės specifikacijos: %s."
+
+#. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
+#: R/Sweave.R:0
+#, fuzzy
+msgid "Output file:  "
+msgid_plural "Output files:  "
+msgstr[0] "Išvesties failas:"
+msgstr[1] "Išvesties failas:"
+msgstr[2] "Išvesties failas:"
 
 #. R/Sweave.R: ngettext(length(output), "Output/used file:  ", "Output/used files:  ")
 #: R/Sweave.R:0

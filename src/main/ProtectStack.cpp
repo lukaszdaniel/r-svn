@@ -47,6 +47,8 @@ namespace CXXR
 
     void ProtectStack::restoreSize(size_t new_size)
     {
+        if (new_size > s_stack.size())
+            throw std::out_of_range("ProtectStack::restoreSize: requested size greater than current size.");
         s_stack.resize(new_size);
     }
 

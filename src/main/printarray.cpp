@@ -392,7 +392,7 @@ void R::printMatrix(SEXP x, int offset, SEXP dim, int quote, int right,
 	UNIMPLEMENTED_TYPE("printMatrix", x);
     }
     if (r_pr < r || c_pr < c) {
-	Rprintf(" [ reached 'max' / getOption(\"max.print\") -- omitted");
+	Rprintf("%s", _(" [ reached 'max' / getOption(\"max.print\") -- omitted"));
 	if (r_pr < r) {
     	    Rprintf(n_(" %d row", " %d rows", r - r_pr), r - r_pr);
 	}
@@ -521,7 +521,7 @@ void R::printArray(SEXP x, SEXP dim, int quote, int right, SEXP dimnames)
 	}
 
 	if (max_reached) {
-	    Rprintf(" [ reached 'max' / getOption(\"max.print\") -- omitted");
+	    Rprintf("%s", _(" [ reached 'max' / getOption(\"max.print\") -- omitted"));
 	    if (nb_pr < nb)
 		Rprintf(n_(" %d slice", " %d slices", nb - nb_pr), nb - nb_pr);
 	    else if (nb_pr == nb) {

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-07-12 12:17\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -871,13 +871,6 @@ msgstr ""
 #. R/help.start.R: gettext("Otherwise, be patient ...")
 
 msgid "Otherwise, be patient ..."
-msgstr ""
-
-
-#: R/Sweave.R: 0
-#. R/Sweave.R: message("Output file:  ", output)
-
-msgid "Output file:"
 msgstr ""
 
 
@@ -2886,6 +2879,15 @@ msgstr[1]    ""
 
 msgid        "Invalid role specification: %s."
 msgid_plural "Invalid role specifications: %s."
+msgstr[0]    ""
+msgstr[1]    ""
+
+
+#: R/Sweave.R: 0
+#. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
+
+msgid        "Output file:  "
+msgid_plural "Output files:  "
 msgstr[0]    ""
 msgstr[1]    ""
 

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
-"PO-Revision-Date: 2025-06-30 22:51+0200\n"
+"POT-Creation-Date: 2025-07-12 12:17\n"
+"PO-Revision-Date: 2025-07-12 12:59+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -645,11 +645,6 @@ msgstr "Tylko pliki '*.zip' oraz '*.tar.gz' mogą być zainstalowane."
 #: R/help.start.R:0
 msgid "Otherwise, be patient ..."
 msgstr "W przeciwnym razie, bądź cierpliwy ..."
-
-#. R/Sweave.R: message("Output file:  ", output)
-#: R/Sweave.R:0
-msgid "Output file:"
-msgstr "Plik wyjściowy:"
 
 #. R/help.R: gettext("Package")
 #: R/help.R:0
@@ -2169,6 +2164,14 @@ msgid_plural "Invalid role specifications: %s."
 msgstr[0] "Niepoprawna specyfikacja roli: %s."
 msgstr[1] "Niepoprawne specyfikacje ról: %s."
 msgstr[2] "Niepoprawne specyfikacje ról: %s."
+
+#. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
+#: R/Sweave.R:0
+msgid "Output file:  "
+msgid_plural "Output files:  "
+msgstr[0] "Plik wyjściowy:"
+msgstr[1] "Pliki wyjściowe:"
+msgstr[2] "Pliki wyjściowe:"
 
 #. R/Sweave.R: ngettext(length(output), "Output/used file:  ", "Output/used files:  ")
 #: R/Sweave.R:0
