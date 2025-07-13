@@ -52,11 +52,11 @@ namespace CXXR
         MemoryBank::deallocate(pointer, bytes);
     }
 
-    GCNode::GCNode() : sxpinfo(NILSXP), m_next(this), m_prev(this)
+    GCNode::GCNode(): sxpinfo(NILSXP), m_next(this), m_prev(this)
     {
     }
 
-    GCNode::GCNode(SEXPTYPE stype) : sxpinfo(stype), m_next(this), m_prev(this)
+    GCNode::GCNode(SEXPTYPE stype): sxpinfo(stype), m_next(this), m_prev(this)
     {
         ++s_num_nodes;
         R_GenHeap->m_New->splice(this);
@@ -70,11 +70,17 @@ namespace CXXR
 
     void GCNode::Ager::operator()(const GCNode *node)
     {
-        if (node->generation() < m_mingen) // node is younger than the minimum age required
+        if (!node->isMarked() || node->generation() < m_mingen) // node is younger than the minimum age required
         {
             // --s_gencount[node->generation()];
+            if (node->isMarked())
+                R_GenHeap->m_OldCount[node->generation()]--;
+            else
+                node->sxpinfo.m_mark = true;
             node->sxpinfo.m_gcgen = m_mingen;
+            R_GenHeap->m_Old[m_mingen]->splice(node);
             // ++s_gencount[m_mingen];
+            R_GenHeap->m_OldCount[m_mingen]++;
             node->visitReferents(this);
         }
     }

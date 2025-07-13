@@ -496,7 +496,7 @@ namespace CXXR
          * function will detach '*this' from its current list, and turn
          * it into a singleton list.
          */
-        void splice(GCNode *s)
+        void splice(const GCNode *s)
         {
             // Doing things in this order is innocuous if s is already
             // this node's predecessor:
