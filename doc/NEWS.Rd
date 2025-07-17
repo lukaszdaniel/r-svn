@@ -59,6 +59,10 @@
       false, set to \code{TRUE} by \R's command-line option
       \option{--quiet} (and similar), now can be switched during an \R
       session.  Prompted by \I{Dirk Eddelbuettel}'s proposal in \PR{18913}.
+
+      \item Credentials for basic HTTP authentication with download method
+      \code{"libcurl"} can now be provided in a \file{netrc} file.  The
+      path to the file can be specified in \code{options("netrc")}.
     }
   }
 
@@ -176,6 +180,17 @@
       \item \code{tools::checkReplaceFuns()} now deals better with
       replacement methods \emph{not} available as regular functions in the
       namespace.
+
+      \item \code{length(xpr) <- n} now also works for \code{expression}
+      vectors, the same as for \code{list}s, i.e., padding with \code{NULL}
+      entries if the length is increased.  Thanks to \I{Mikael Jagan}'s
+      \PR{18917}.
+
+      \item Fix for glyph rendering on the \code{quartz()} device when
+      there is other (\dQuote{normal}) text drawn on the device.  The
+      problem was that the text transformation matrix was not reset
+      so glyphs would be rendered incorrectly (often completely outside
+      the device, i.e., not visible).
     }
   }
 }
@@ -200,6 +215,18 @@
       instead of hardwired \code{1e-5}; consequently, \code{ts(.., ts.eps=*)}
       now passes \code{ts.eps} to the \code{"tsp"} setting C code;
       both fixing a long-standing \sQuote{\I{FIXME}}.
+
+      \item \code{insertSource()} now ignores the internal
+      \code{.packageName} object, avoiding a superfluous message.
+
+      \item In static HTML help, links to vignette files from the default
+      \file{doc/index.html} page now also work for packages not installed
+      in the default \code{.Library},
+      thanks to a report by \I{Patrice Kiener}.
+
+      \item %\code{assignInNamespace("\var{S3method}")} and thus
+      \code{fixInNamespace("\var{S3method}")} failed to update the S3
+      methods table when the generic was not on the search path.
     }
   }
 }

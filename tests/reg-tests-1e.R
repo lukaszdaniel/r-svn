@@ -2021,6 +2021,31 @@ stopifnot(ch %in% D, D %in% ch, !(c2 %in% D), !(D %in% c2))
 ## had failed in R-devel around 2025-06-26 (and before R 4.3.0)
 
 
+## length(<expression>) <- value
+x <- expression(.)
+length(x) <- 0L
+stopifnot(identical(x, expression()),
+          identical(`length<-`(x, 2L), expression(NULL, NULL)))
+
+
+## (fix|assign)InNamespace(<S3method>) when the generic is not in search()
+try(detach("package:tools"), silent = TRUE) # just in case
+assertValueIs <- function (value) stopifnot(exprs = {
+    identical(tools:::toRd.default(1), value)
+    identical(tools::toRd(1), value)
+})
+assertValueIs("1")
+## modify the default method to return an empty string:
+omethod <- tools:::toRd.default
+assignInNamespace("toRd.default", `body<-`(omethod, value = ""), "tools")
+## R <= 4.5.1 gave Error: object 'toRd' of mode 'function' was not found
+assertValueIs("")  # failed for tools::toRd(1): S3 table was not updated
+## now restore the original definition, testing fixInNamespace():
+fixInNamespace("toRd.default", "tools", editor = function (...) omethod)
+## failed in R <= 4.5.1
+assertValueIs("1")
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

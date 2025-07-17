@@ -908,6 +908,14 @@ SEXP Rf_xlengthgets(SEXP x, R_xlen_t len)
 		    SET_STRING_ELT(names, i, STRING_ELT(xnames, i));
 	    }
 	break;
+    case EXPRSXP:
+	for (i = 0; i < len; i++)
+	    if (i < lenx) {
+		SET_VECTOR_ELT(rval, i, XVECTOR_ELT(x, i));
+		if (xnames != R_NilValue)
+		    SET_STRING_ELT(names, i, STRING_ELT(xnames, i));
+	    }
+	break;
     case RAWSXP:
 	for (i = 0; i < len; i++)
 	    if (i < lenx) {
@@ -937,12 +945,10 @@ SEXP Rf_lengthgets(SEXP x, R_len_t len)
 
 attribute_hidden SEXP do_lengthgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP x, ans;
-
     checkArity(op, args);
     check1arg(args, call, "x");
 
-    x = CAR(args);
+    SEXP ans, x = CAR(args);
 
     /* DispatchOrEval internal generic: length<- */
     if(isObject(x) && DispatchOrEval(call, op, "length<-", args,
