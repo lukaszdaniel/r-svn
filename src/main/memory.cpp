@@ -1015,12 +1015,39 @@ static void AdjustHeapSize(R_size_t size_needed)
 
 /* Managing Old-to-New References. */
 
+#define AGE_NODE(s,g) do { \
+  GCNode *an__n__ = (s); \
+  int an__g__ = (g); \
+  if (an__n__ && NODE_GEN_IS_YOUNGER(an__n__, an__g__)) { \
+    if (NODE_IS_MARKED(an__n__)) \
+       R_GenHeap->m_OldCount[NODE_GENERATION(an__n__)]--; \
+    else \
+      MARK_NODE(an__n__); \
+    SET_NODE_GENERATION(an__n__, an__g__); \
+    UNSNAP_NODE(an__n__); \
+    forwarded_nodes.push_front(an__n__); \
+  } \
+} while (0)
+
+static void AgeNodeAndChildren(GCNode *s, int gen)
+{
+    std::forward_list<GCNode *> forwarded_nodes;
+    AGE_NODE(s, gen);
+    while (!forwarded_nodes.empty()) {
+	s = forwarded_nodes.front();
+	forwarded_nodes.pop_front();
+	if (NODE_GENERATION(s) != gen)
+	    GCManager::gc_error("****snapping into wrong generation\n");
+	SNAP_NODE(s, R_GenHeap->m_Old[gen].get());
+	R_GenHeap->m_OldCount[gen]++;
+	DO_CHILDREN(s, AGE_NODE, gen);
+    }
+}
 
 static void old_to_new(SEXP x, SEXP y)
 {
 #ifdef EXPEL_OLD_TO_NEW
-    GCNode::Ager ager(NODE_GENERATION(x));
-    ager(y);
+    AgeNodeAndChildren(y, NODE_GENERATION(x));
 #else
     UNSNAP_NODE(x);
     SNAP_NODE(x, R_GenHeap->m_OldToNew[NODE_GENERATION(x)].get());
@@ -1384,11 +1411,14 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-        GCNode::Ager ager(gen);
         const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
         while (s != R_GenHeap->m_OldToNew[gen].get()) {
             const GCNode *next = NEXT_NODE(s);
-            ager(s);
+            DO_CHILDREN(s, AgeNodeAndChildren, gen);
+            UNSNAP_NODE(s);
+            if (NODE_GENERATION(s) != gen)
+                GCManager::gc_error("****snapping into wrong generation\n");
+            SNAP_NODE(s, R_GenHeap->m_Old[gen].get());
             s = next;
         }
     }
