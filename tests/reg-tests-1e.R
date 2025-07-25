@@ -2046,6 +2046,44 @@ fixInNamespace("toRd.default", "tools", editor = function (...) omethod)
 assertValueIs("1")
 
 
+## No warnings for hist(.., log="x") -- PR#18921
+op <- options(warn = 2)
+hist(1:100, breaks = 2^(0:8), log = "x")
+options(op)
+## used to signal 3 warnings
+
+
+## subassigning from real to complex keeping zero imaginary part
+ll <- list(NA, 0L, NA_integer_, 0, NA_real_, NaN, -Inf, Inf,
+           0i, NA_complex_)
+rr <- vapply(ll, Re, 0)
+ii <- vapply(ll, Im, 0) # all 0, but the very last
+chk <- function (x, y = as.vector(x)) stopifnot(identical(Re(y), rr),
+                                                identical(Im(y), ii))
+chk(unlist(ll))
+a1 <- a2 <- complex(m <- length(ll))
+for (i in seq_len(m)) a1[i] <- a2[[i]] <- ll[[i]]
+chk(a1); chk(a2)
+a1 <- a2 <- array(0i, c(m))
+for (i in seq_len(m)) a1[i] <- a2[[i]] <- ll[[i]]
+chk(a1); chk(a2)
+a1 <- a2 <- array(0i, c(m, 1L))
+for (i in seq_len(m)) a1[i, 1L] <- a2[[i, 1L]] <- ll[[i]]
+chk(a1); chk(a2)
+a1 <- a2 <- array(0i, c(m, 1L, 1L))
+for (i in seq_len(m)) a1[i, 1L, 1L] <- a2[[i, 1L, 1L]] <- ll[[i]]
+chk(a1); chk(a2)
+## Im(.)s had more NA's than just at the end, in R <= 4.5.z
+
+
+## format(<list of objects>) -- now dispatches correctly
+dts <- seq(.Date(11100), .Date(11111))
+(fD <- format(Ldt <- as.list(dts)))
+stopifnot(is.list(Ldt), vapply(Ldt, inherits, NA, "Date"),
+          identical(fD, format.Date(dts)))
+# fD  was "11100" "11101" .... "11111" in R <= 4.5.z
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,
