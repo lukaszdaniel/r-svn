@@ -9,7 +9,7 @@
   \subsection{SIGNIFICANT USER-VISIBLE CHANGES}{
     \itemize{
       \item The R citation now provides a \abbr{DOI}
-      (\I{10.32614/R.manuals}): please update your 
+      (\I{10.32614/R.manuals}): please update your
       bibliographies accordingly.
     }
   }
@@ -198,6 +198,9 @@
       \code{NA}, consistently with the \code{as.complex(NA)} behaviour
       since \R 4.4.0; thanks to \I{Mikael Jagan}'s \PR{18918}.
 
+      \item \code{format(<list>)} calling \code{format.default()} now calls
+      generic \code{format()} on each list element (rather than
+      \code{format.default()}).
     }
   }
 }
@@ -241,9 +244,12 @@
       \item \code{hist(*, log = "x")} now works without a warning, thanks
       to \I{Martin Smith}'s \PR{18921}.
 
-      \item Subassigning \code{"POSIXlt"}, i.e., \code{<tdat>[i] <- val}
+      \item \I{Subassigning} \code{"POSIXlt"}, i.e., \code{<tdat>[i] <- val}
       and \code{<tdat>[[i]] <- val} now rebalance as they should,
       thanks to \I{Mikael Jagan}'s \PR{18919}.
+
+      \item \code{<POSIXlt>[*]} (re-)setting \code{"balanced"}, fixing
+      \PR{18681} comment #7, thanks to \I{Mikael Jagan}.
     }
   }
 }
