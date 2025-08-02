@@ -701,9 +701,15 @@ static R_size_t R_V_maxused=0;
   case INTSXP: \
   case REALSXP: \
   case CPLXSXP: \
-  case WEAKREFSXP: \
   case RAWSXP: \
+    break; \
   case OBJSXP: \
+    dc__action__(S4TAG(__n__), dc__extra__); \
+    break; \
+  case WEAKREFSXP: \
+    dc__action__(WEAKREF_KEY(__n__), dc__extra__); \
+    dc__action__(WEAKREF_VALUE(__n__), dc__extra__); \
+    dc__action__(WEAKREF_FINALIZER(__n__), dc__extra__); \
     break; \
   case STRSXP: \
     { \
@@ -1034,13 +1040,13 @@ static void AgeNodeAndChildren(GCNode *s, int gen)
     std::forward_list<GCNode *> forwarded_nodes;
     AGE_NODE(s, gen);
     while (!forwarded_nodes.empty()) {
-	s = forwarded_nodes.front();
-	forwarded_nodes.pop_front();
-	if (NODE_GENERATION(s) != gen)
-	    GCManager::gc_error("****snapping into wrong generation\n");
-	SNAP_NODE(s, R_GenHeap->m_Old[gen].get());
-	R_GenHeap->m_OldCount[gen]++;
-	DO_CHILDREN(s, AGE_NODE, gen);
+        s = forwarded_nodes.front();
+        forwarded_nodes.pop_front();
+        if (NODE_GENERATION(s) != gen)
+            GCManager::gc_error("****snapping into wrong generation\n");
+        SNAP_NODE(s, R_GenHeap->m_Old[gen].get());
+        R_GenHeap->m_OldCount[gen]++;
+        DO_CHILDREN(s, AGE_NODE, gen);
     }
 }
 
@@ -1745,6 +1751,7 @@ namespace CXXR
                         (*v)(el);
                 }
             }
+            break;
             case VECSXP:
             {
                 const RObject *el = R_NilValue;
@@ -1878,26 +1885,26 @@ namespace CXXR
 
 namespace
 {
-    void CXXR_detach(SEXP __n__)
+    void CXXR_detach(SEXP node)
     {
-        if (!__n__->refCountEnabled())
+        if (!node->refCountEnabled())
             return;
 
 #ifdef PROTECTCHECK
-        if (__n__->sexptype() == FREESXP)
+        if (node->sexptype() == FREESXP)
         {
-            __n__->sxpinfo.type = SEXPTYPE(__n__->sxpinfo.gp);
+            node->sxpinfo.type = SEXPTYPE(node->sxpinfo.gp);
         }
 #endif
-        __n__->m_attrib.detach();
-        if (ALTREP(__n__))
+        node->m_attrib.detach();
+        if (ALTREP(node))
         {
-            CLASS(__n__).detach();
-            DATA1(__n__).detach();
-            DATA2(__n__).detach();
+            CLASS(node).detach();
+            DATA1(node).detach();
+            DATA2(node).detach();
         }
         else
-            switch (TYPEOF(__n__))
+            switch (TYPEOF(node))
             {
             case NILSXP:
             case BUILTINSXP:
@@ -1910,75 +1917,76 @@ namespace
             case RAWSXP:
                 break;
             case OBJSXP:
-                S4TAG(__n__).detach();
+                S4TAG(node).detach();
                 break;
             case WEAKREFSXP:
-                WEAKREF_KEY(__n__).detach();
-                WEAKREF_VALUE(__n__).detach();
-                WEAKREF_FINALIZER(__n__).detach();
+                WEAKREF_KEY(node).detach();
+                WEAKREF_VALUE(node).detach();
+                WEAKREF_FINALIZER(node).detach();
                 break;
             case STRSXP:
             {
-                for (R_xlen_t i = 0; i < XLENGTH(__n__); i++)
-                    SET_STRING_ELT(__n__, i, R_BlankString);
+                for (R_xlen_t i = 0; i < XLENGTH(node); i++)
+                    SET_STRING_ELT(node, i, R_BlankString);
             }
             break;
             case EXPRSXP:
             {
-                for (R_xlen_t i = 0; i < XLENGTH(__n__); i++)
-                    SET_XVECTOR_ELT(__n__, i, R_NilValue);
+                for (R_xlen_t i = 0; i < XLENGTH(node); i++)
+                    SET_XVECTOR_ELT(node, i, R_NilValue);
             }
+            break;
             case VECSXP:
             {
-                for (R_xlen_t i = 0; i < XLENGTH(__n__); i++)
-                    SET_VECTOR_ELT(__n__, i, R_NilValue);
+                for (R_xlen_t i = 0; i < XLENGTH(node); i++)
+                    SET_VECTOR_ELT(node, i, R_NilValue);
             }
             break;
             case ENVSXP:
-                __n__->u.envsxp.m_frame.detach();
-                ENCLOS(__n__).detach();
-                __n__->u.envsxp.m_hashtab.detach();
+                node->u.envsxp.m_frame.detach();
+                ENCLOS(node).detach();
+                node->u.envsxp.m_hashtab.detach();
                 break;
             case LISTSXP:
-                if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP)
-                    __n__->u.listsxp.m_car.detach();
-                __n__->u.listsxp.m_tail.detach();
-                __n__->u.listsxp.m_tag.detach();
+                if (BOXED_BINDING_CELLS || BNDCELL_TAG(node) == NILSXP)
+                    node->u.listsxp.m_car.detach();
+                node->u.listsxp.m_tail.detach();
+                node->u.listsxp.m_tag.detach();
                 break;
             case LANGSXP:
             case DOTSXP:
-                __n__->u.listsxp.m_car.detach();
-                __n__->u.listsxp.m_tail.detach();
-                __n__->u.listsxp.m_tag.detach();
+                node->u.listsxp.m_car.detach();
+                node->u.listsxp.m_tail.detach();
+                node->u.listsxp.m_tag.detach();
                 break;
             case PROMSXP:
-                if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP)
-                    PRVALUE0(__n__).detach();
-                PRCODE(__n__).detach();
-                PRENV(__n__).detach();
+                if (BOXED_BINDING_CELLS || PROMISE_TAG(node) == NILSXP)
+                    PRVALUE0(node).detach();
+                PRCODE(node).detach();
+                PRENV(node).detach();
                 break;
             case CLOSXP:
-                FORMALS(__n__).detach();
-                BODY(__n__).detach();
-                CLOENV(__n__).detach();
+                FORMALS(node).detach();
+                BODY(node).detach();
+                CLOENV(node).detach();
                 break;
             case SYMSXP:
-                __n__->u.symsxp.m_pname.detach();
-                SYMVALUE(__n__).detach();
-                INTERNAL(__n__).detach();
+                node->u.symsxp.m_pname.detach();
+                SYMVALUE(node).detach();
+                INTERNAL(node).detach();
                 break;
             case BCODESXP:
-                CODE0(__n__).detach();
-                CONSTS(__n__).detach();
-                EXPR(__n__).detach();
+                CODE0(node).detach();
+                CONSTS(node).detach();
+                EXPR(node).detach();
                 break;
             case EXTPTRSXP:
-                EXTPTR_PTR(__n__) = NULL;
-                EXTPTR_PROT(__n__).detach();
-                EXTPTR_TAG(__n__).detach();
+                EXTPTR_PTR(node) = NULL;
+                EXTPTR_PROT(node).detach();
+                EXTPTR_TAG(node).detach();
                 break;
             default:
-                Rf_error(_("unexpected type %d in %s"), TYPEOF(__n__), __func__);
+                Rf_error(_("unexpected type %d in %s"), TYPEOF(node), __func__);
             }
     }
 } // anonymous namespace
