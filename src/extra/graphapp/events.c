@@ -854,6 +854,7 @@ static long handle_message(HWND hwnd, UINT message,
    procedure. */
 
 #include <setjmp.h>
+#include <stdbool.h>
 
 typedef void *SEXP;
 typedef bool Rboolean;
