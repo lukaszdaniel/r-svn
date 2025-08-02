@@ -680,7 +680,7 @@ msgstr "'.' a la fórmula i sense argument 'data'"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "«m» ha de ser una llista"
+msgstr "n ha de ser com a mínim dos"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1207,18 +1207,6 @@ msgid "ifault=%d. This should not happen"
 msgstr "això no hauria de passar"
 
 #, fuzzy
-#~ msgid "n must be at least two"
-#~ msgstr "n ha de ser com a mínim dos"
-
-#, fuzzy
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) ha de ser com a mínim dos"
-
-#, fuzzy
-#~ msgid "invalid value of lag.max"
-#~ msgstr "valor no vàlid de lag.max"
-
-#, fuzzy
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "fórmula de model no vàlida a ExtractVars"
 
@@ -1227,17 +1215,25 @@ msgstr "això no hauria de passar"
 #~ msgstr "fórmula de model no vàlida a EncodeVars"
 
 #, fuzzy
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) ha de ser com a mínim dos"
+
+#, fuzzy
 #~ msgid "'control' must be a list"
 #~ msgstr "«control» ha de ser una llista"
 
 #, fuzzy
-#~ msgid "m must be a list"
-#~ msgstr "m ha de ser una llista"
+#~ msgid "'central' is NA, but must be TRUE or FALSE"
+#~ msgstr "'central' és NA, però ha de ser cert o FALS"
 
 #, fuzzy
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf substituït pel valor màxim positiu"
 
 #, fuzzy
-#~ msgid "'central' is NA, but must be TRUE or FALSE"
-#~ msgstr "'central' és NA, però ha de ser cert o FALS"
+#~ msgid "invalid value of lag.max"
+#~ msgstr "valor no vàlid de lag.max"
+
+#, fuzzy
+#~ msgid "m must be a list"
+#~ msgstr "m ha de ser una llista"

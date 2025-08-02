@@ -425,9 +425,8 @@ msgstr ""
 
 #. R/news.R: stop("DESCRIPTION file not found")
 #: R/news.R:0
-#, fuzzy
 msgid "DESCRIPTION file not found"
-msgstr "फाइल '%s' फेला परेन"
+msgstr ""
 
 #. R/testing.R: if (res != 0L) "DIFFERED" else "OK"
 #: R/testing.R:0
@@ -861,9 +860,8 @@ msgstr ""
 
 #. R/news.R: stop("NEWS file not found")
 #: R/news.R:0
-#, fuzzy
 msgid "NEWS file not found"
-msgstr "फाइल '%s' फेला परेन"
+msgstr ""
 
 #. R/testing.R: message(" NOTE")
 #: R/testing.R:0
@@ -1288,9 +1286,8 @@ msgstr ""
 
 #. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 #: R/dynamicHelp.R:0
-#, fuzzy
 msgid "URL %s was not found"
-msgstr "फाइल '%s' फेला परेन"
+msgstr ""
 
 #. R/update_packages.R: message("Unable to update existing PACKAGES file. Calling write_PACKAGES directly.")
 #: R/update_packages.R:0
@@ -1638,7 +1635,8 @@ msgstr ""
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr ""
 
@@ -1734,9 +1732,8 @@ msgstr ""
 #. R/utils.R: gettextf("file '%s' does not exist", x)
 #. R/utils.R: gettextf("file '%s' does not exist", dfile)
 #: R/QC.R:0 R/translations.R:0 R/utils.R:0
-#, fuzzy
 msgid "file '%s' does not exist"
-msgstr "फाइल '%s' फेला परेन"
+msgstr ""
 
 #. R/utils.R: gettextf("file '%s' is not in valid DCF format", dfile)
 #: R/utils.R:0
@@ -2201,9 +2198,8 @@ msgstr ""
 
 #. R/Vignettes.R: gettextf("vignette builder '%s' not found", pkg)
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "vignette builder '%s' not found"
-msgstr "फाइल '%s' फेला परेन"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("vignette filename '%s' does not match any of the '%s' filename patterns",     file, paste(engine$package, engine$name, sep = "::"))
 #: R/Vignettes.R:0

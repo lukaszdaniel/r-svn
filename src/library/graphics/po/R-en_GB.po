@@ -814,17 +814,17 @@ msgstr[1] "arguments %s are not made use of"
 #~ msgid "invalid 'axp'"
 #~ msgstr "invalid 'axp'"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "invalid 'given.values'"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "invalid 'log'"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "invalid 'title'"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "invalid 'usr'"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "invalid 'given.values'"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "invalid 'title'"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

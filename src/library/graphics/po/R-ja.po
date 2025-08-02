@@ -818,17 +818,17 @@ msgstr[0] "引数 %s は使用されていません"
 #~ msgid "invalid 'axp'"
 #~ msgstr "無効な 'axp' です"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "'given.values' が無効です"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "無効な 'log' です"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "無効な 'title' です"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "無効な 'usr' です"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values' が無効です"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "無効な 'title' です"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

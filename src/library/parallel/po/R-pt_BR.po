@@ -21,9 +21,8 @@ msgstr "'X' deve ter dimnames nomeados"
 
 #. R/unix/mcfork.R: stop("'child' must be a valid child process")
 #: R/unix/mcfork.R:0
-#, fuzzy
 msgid "'child' must be a valid child process"
-msgstr "'children' deve ser uma lista de processos ou um único processo"
+msgstr ""
 
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 #: R/unix/mcfork.R:0
@@ -68,9 +67,8 @@ msgstr "'v' deve ser um vetor"
 
 #. R/unix/mcfork.R: stop("'what' must be a character or raw vector")
 #: R/unix/mcfork.R:0
-#, fuzzy
 msgid "'what' must be a character or raw vector"
-msgstr "'v' deve ser um vetor"
+msgstr ""
 
 #. R/unix/forkCluster.R: stop("Cluster setup failed.")
 #: R/unix/forkCluster.R:0
@@ -109,9 +107,8 @@ msgstr "dim(X) deve ter um comprimento positivo"
 
 #. R/windows/forkCluster.R: stop("fork clusters are not supported on Windows")
 #: R/windows/forkCluster.R:0
-#, fuzzy
 msgid "fork clusters are not supported on Windows"
-msgstr "'mc.cores' > 1 não é suportado no Windows"
+msgstr ""
 
 #. R/unix/mcfork.R: gettextf("invalid '%s' argument", "child")
 #. R/unix/mcparallel.R: gettextf("invalid '%s' argument", "jobs")
@@ -157,9 +154,8 @@ msgstr "'names' numéricos devem ser >= 1"
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
-#, fuzzy
 msgid "replacing registration for cluster type '%s'"
-msgstr "tipo de cluster desconhecido"
+msgstr ""
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0

@@ -165,7 +165,6 @@ msgstr "einige Ergebnisse könnten fehlen, brachen ab oder verursachten einen Fe
 
 #. R/snow.R: sprintf("unknown cluster type: '%s'", type)
 #: R/snow.R:0
-#, fuzzy
 msgid "unknown cluster type: '%s'"
 msgstr "unbekannter Clustertyp: '%s'"
 

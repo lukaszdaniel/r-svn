@@ -1602,9 +1602,8 @@ msgstr ""
 
 #. R/hclust.R: gettextf("ambiguous clustering method %s", method)
 #: R/hclust.R:0
-#, fuzzy
 msgid "ambiguous clustering method %s"
-msgstr "length(x) अमान्य है"
+msgstr ""
 
 #. R/dist.R: stop("ambiguous distance method")
 #: R/dist.R:0
@@ -1734,9 +1733,8 @@ msgstr ""
 
 #. R/ts.R: stop("bad value for 'start'")
 #: R/ts.R:0
-#, fuzzy
 msgid "bad value for 'start'"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/runmed.R: stop("bandwidth 'k' must be >= 1 and odd!")
 #: R/runmed.R:0
@@ -2395,9 +2393,8 @@ msgstr ""
 #: R/arima.R:0 R/bandwidths.R:0 R/chisq.test.R:0 R/cor.R:0 R/family.R:0
 #: R/glm.R:0 R/loess.R:0 R/models.R:0 R/nafns.R:0 R/r2dtable.R:0 R/runmed.R:0
 #: R/smooth.R:0 R/smspline.R:0 R/symnum.R:0
-#, fuzzy
 msgid "invalid '%s' argument"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/bandwidths.R: gettextf("invalid '%s' value", "length(x)")
 #. R/diffinv.R: gettextf("invalid '%s' value", "length(x)")
@@ -2444,15 +2441,14 @@ msgstr ""
 
 #. R/ks.test.R: stop("invalid arguments")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "invalid arguments"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/hclust.R: gettextf("invalid clustering method %s", method)
 #: R/hclust.R:0
 #, fuzzy
 msgid "invalid clustering method %s"
-msgstr "length(x) अमान्य है"
+msgstr "%1$s कि संख्या अमान्य है"
 
 #. R/hclust.R: stop("invalid dissimilarities")
 #: R/hclust.R:0
@@ -2477,9 +2473,8 @@ msgstr ""
 
 #. R/models.R: gettextf("invalid formula %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula %s"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x))
 #: R/models.R:0
@@ -2503,9 +2498,8 @@ msgstr ""
 
 #. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula: %s"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
@@ -2515,9 +2509,8 @@ msgstr ""
 
 #. R/hclust.R: stop("invalid length of members")
 #: R/hclust.R:0
-#, fuzzy
 msgid "invalid length of members"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
@@ -2538,15 +2531,13 @@ msgstr ""
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
-#, fuzzy
 msgid "invalid number of points"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/integrate.R: stop("invalid parameter values")
 #: R/integrate.R:0
-#, fuzzy
 msgid "invalid parameter values"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/models.R: stop("invalid response type")
 #: R/models.R:0
@@ -4546,55 +4537,3 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "invalid 'SSinit'"
-#~ msgstr "length(x) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid NCOL(X)"
-#~ msgstr "length(x) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid NROW(X)"
-#~ msgstr "length(x) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid argument 'span'"
-#~ msgstr "%1$s कि संख्या अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "%1$s कि संख्या अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "%1$s कि संख्या अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid argument 'c'"
-#~ msgstr "%1$s कि संख्या अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid argument 'n'"
-#~ msgstr "%1$s कि संख्या अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid argument 'r'"
-#~ msgstr "%1$s कि संख्या अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid 'nb'"
-#~ msgstr "length(x) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid 'x'"
-#~ msgstr "length(x) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid ncol(x)"
-#~ msgstr "length(x) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid nrow(x)"
-#~ msgstr "length(x) अमान्य है"

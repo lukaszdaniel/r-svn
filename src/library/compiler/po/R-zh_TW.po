@@ -22,19 +22,16 @@ msgstr ""
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
 #: R/cmp.R:0
-#, fuzzy
 msgid "'%s' is not a valid compiler option"
 msgstr "沒有 '%s' 這樣的編譯器選項"
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
-#, fuzzy
 msgid "'env' must be a top level environment"
 msgstr "'env' 必須是頂級環境"
 
 #. R/cmp.R: gettext("'switch' with no alternatives")
 #: R/cmp.R:0
-#, fuzzy
 msgid "'switch' with no alternatives"
 msgstr "'switch' 沒有任何替代方案"
 
@@ -50,9 +47,8 @@ msgstr "1 指派發生錯誤"
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
-#, fuzzy
 msgid "bad assignment 2"
-msgstr "1 指派發生錯誤"
+msgstr "2 指派發生錯誤"
 
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
@@ -61,13 +57,11 @@ msgstr "壞的指派：%s"
 
 #. R/cmp.R: gettext("bad namespace import frame")
 #: R/cmp.R:0
-#, fuzzy
 msgid "bad namespace import frame"
 msgstr "命名空間匯入框無效"
 
 #. R/cmp.R: stop("cannot compile a non-function")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot compile a non-function"
 msgstr "無法編譯非函式"
 
@@ -78,7 +72,6 @@ msgstr "不能在編碼裡編譯程式碼的位元組碼字面值"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot compile promise literals in code"
 msgstr "不能編譯程式碼中的承諾文字"
 
@@ -94,7 +87,6 @@ msgstr "無法對字面位元組碼物件進行不固定倍折疊"
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "無法對字面承諾進行不固定折疊"
 
@@ -115,7 +107,6 @@ msgstr "在數字交換機裡不能有空的替代"
 
 #. R/cmp.R: warning("empty input file; no output written")
 #: R/cmp.R:0
-#, fuzzy
 msgid "empty input file; no output written"
 msgstr "輸入檔案是空的，因此沒有寫任何輸出"
 
@@ -136,7 +127,6 @@ msgstr "輸入和輸出檔案的檔案名稱是一樣的"
 
 #. R/cmp.R: gettextf("invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2",     optimize, jitEnabled)
 #: R/cmp.R:0
-#, fuzzy
 msgid "invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2"
 msgstr "無效的編譯選項：optimize(==%d)<2 和 jitEnabled(==%d)>2"
 
@@ -152,7 +142,6 @@ msgstr "複雜指派裡的函式無效"
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0
-#, fuzzy
 msgid "missing arguments are not allowed"
 msgstr "不允許缺少參數"
 
@@ -173,13 +162,11 @@ msgstr "在本地環境中找到命名空間"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
-#, fuzzy
 msgid "no offset recorded for label \"%s\""
 msgstr "沒有給標籤\"%s\"記錄了偏移"
 
 #. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
 #: R/cmp.R:0
-#, fuzzy
 msgid "no visible binding for '<<-' assignment to '%s'"
 msgstr "看不到 '<<-' 指派到 '%s' 的連接"
 
@@ -190,7 +177,6 @@ msgstr "看不到全域變數 '%s' 的連接"
 
 #. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
 #: R/cmp.R:0
-#, fuzzy
 msgid "no visible global function definition for '%s'"
 msgstr "看不到 '%s' 的全域函式定義"
 
@@ -201,7 +187,6 @@ msgstr "在命名空間環境中找到非命名空間"
 
 #. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
-#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "不是一個正確的評估環境"
 
@@ -213,7 +198,6 @@ msgstr "'%s' 裡可能不正確: %s"
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", file)
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", outfile)
 #: R/cmp.R:0
-#, fuzzy
 msgid "saving to file \"%s\" ..."
 msgstr "儲存到檔案\"%s\" …"
 
@@ -227,19 +211,3 @@ msgstr "給 '%s' 的參數個數無效"
 msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "為句法函式作了本地指派： "
-
-#, fuzzy
-#~ msgid "gettext(\"bad assignment 2\")"
-#~ msgstr "2 指派發生錯誤"
-
-#, fuzzy
-#~ msgid "gettext(\"cannot compile this expression\")"
-#~ msgstr "無法編譯這段運算式"
-
-#, fuzzy
-#~ msgid "gettext(\"invalid function in complex assignment\")"
-#~ msgstr "複雜指派裡的函式無效"
-
-#, fuzzy
-#~ msgid "gettextf(\"saving to file \\\\\"%s\\\\\" ... \", outfile)"
-#~ msgstr "儲存到檔案\"%s\" …"

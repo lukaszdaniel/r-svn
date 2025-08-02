@@ -614,7 +614,7 @@ msgstr "'.' en la fórmula y sin argumento 'data'"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' debe ser una lista"
+msgstr "n debería ser al menos dos"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1065,26 +1065,23 @@ msgstr ""
 msgid "ifault=%d. This should not happen"
 msgstr "Esto no debería suceder"
 
-#~ msgid "n must be at least two"
-#~ msgstr "n debería ser al menos dos"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "la longitud(m) debe ser al menos dos"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "fórmula de modelo inválida en ExtractVars"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "fórmula de modelo inválida en ExtractVars"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "la longitud(m) debe ser al menos dos"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' debe ser una lista"
 
-#~ msgid "NA/Inf replaced by maximum positive value"
-#~ msgstr "NA/Inf reemplazada por el máximo valor positivo"
-
 #~ msgid "'central' is NA, but must be TRUE or FALSE"
 #~ msgstr "'central' es NA, pero debe ser VERDADERO o FALSO"
+
+#~ msgid "NA/Inf replaced by maximum positive value"
+#~ msgstr "NA/Inf reemplazada por el máximo valor positivo"
 
 #, fuzzy, c-format
 #~ msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"

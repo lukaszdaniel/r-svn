@@ -163,7 +163,7 @@ msgstr "순서형 요인(ordered factors)에 대하여 의미가 있는 '%s'가 
 #: R/tapply.R:0
 #, fuzzy
 msgid "'%s' is of length 0"
-msgstr "'by'는 반드시 길이가 1이어야 합니다"
+msgstr "'to'는 반드시 길이가 1 이어야 합니다"
 
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -209,7 +209,7 @@ msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합�
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
+msgstr "'file'은 반드시 비어있지 않은 문자열이어야 합니다"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
@@ -238,11 +238,11 @@ msgstr "'%s'은 반드시 논리형이어야 합니다"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
-msgstr "'by'는 반드시 길이가 1이어야 합니다"
+msgstr "'to'는 반드시 길이가 1 이어야 합니다"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
@@ -343,9 +343,8 @@ msgstr "'chdir = TRUE'는 URL인 경우에는 사용할 수 없습니다."
 
 #. R/source.R: warning("'chdir = TRUE' makes no sense for a connection")
 #: R/source.R:0
-#, fuzzy
 msgid "'chdir = TRUE' makes no sense for a connection"
-msgstr "'chdir = TRUE'는 URL인 경우에는 사용할 수 없습니다."
+msgstr ""
 
 #. R/load.R: gettextf("'compress = \"%s\"' is invalid", compress)
 #: R/load.R:0
@@ -467,9 +466,8 @@ msgstr "'from'은 반드시 raw 또는 문자이어야 합니다"
 
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
-#, fuzzy
 msgid "'from' must be a finite number"
-msgstr "'from'은 반드시 \"Date\" 객체이어야 합니다"
+msgstr ""
 
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
@@ -645,9 +643,8 @@ msgstr "'timeout'은 반드시 NULL 또는 음이 아닌 수이어야 합니다"
 
 #. R/seq.R: stop("'to' must be a finite number")
 #: R/seq.R:0
-#, fuzzy
 msgid "'to' must be a finite number"
-msgstr "'length.out'는 음수를 가질 수 없습니다."
+msgstr ""
 
 #. R/all.equal.R: stop("'tolerance' should be numeric")
 #: R/all.equal.R:0
@@ -810,9 +807,8 @@ msgstr "'zero.print'는 반드시 문자, 논리값, 또는 NULL이어야 합니
 
 #. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "- done loading %s"
-msgstr "%s를 삭제합니다"
+msgstr ""
 
 #. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
@@ -822,15 +818,13 @@ msgstr "%s를 삭제합니다"
 
 #. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing S4 stuff for %s"
-msgstr "잘못된 클래스입니다"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing imports for %s"
-msgstr "잘못된 클래스입니다"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
 #: R/namespace.R:0
@@ -903,9 +897,8 @@ msgstr "잘못된 클래스입니다"
 
 #. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "--- sealing exports for %s"
-msgstr "잘못된 클래스입니다"
+msgstr ""
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -1119,9 +1112,8 @@ msgstr ""
 
 #. R/traceback.R: gettext("No traceback available")
 #: R/traceback.R:0
-#, fuzzy
 msgid "No traceback available"
-msgstr "사용가능한 R 패키지들입니다"
+msgstr ""
 
 #. R/stop.R: stop("Only one of 'exprs', 'exprObject' or expressions, not more")
 #: R/stop.R:0
@@ -1130,11 +1122,10 @@ msgstr ""
 
 #. R/library.R: gettextf("Package %s version %s cannot be unloaded:\n %s", sQuote(package),     oldversion, paste0(P, conditionMessage(e), "\n"))
 #: R/library.R:0
-#, fuzzy
 msgid ""
 "Package %s version %s cannot be unloaded:\n"
 " %s"
-msgstr "패키지 %s는 로드되어질 수 없습니다"
+msgstr ""
 
 #. R/library.R: gettext("R packages available")
 #: R/library.R:0
@@ -1425,15 +1416,13 @@ msgstr "두개의 인자 모두가 \"difftime\" 객체 일 수는 없습니다."
 
 #. R/load.R: stop("can only save to a binary connection")
 #: R/load.R:0
-#, fuzzy
 msgid "can only save to a binary connection"
-msgstr "오로지 열려 있는 커넥션을 자를 수만 있습니다"
+msgstr ""
 
 #. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
 #: R/backquote.R:0
-#, fuzzy
 msgid "can only splice inside a call"
-msgstr "오로지 벡터 객체들을 기록할 수만 있습니다"
+msgstr ""
 
 #. R/backquote.R: stop("can only splice vectors")
 #: R/backquote.R:0
@@ -1503,9 +1492,8 @@ msgstr ""
 
 #. R/namespace.R: stop("cannot import into a sealed namespace")
 #: R/namespace.R:0
-#, fuzzy
 msgid "cannot import into a sealed namespace"
-msgstr "네임스페이스가 로딩되지 않았습니다"
+msgstr ""
 
 #. R/match.R: stop("cannot mtfrm")
 #: R/match.R:0
@@ -1525,9 +1513,8 @@ msgstr "메시지 커넥션을"
 
 #. R/sort.R: stop("cannot xtfrm 'x'")
 #: R/sort.R:0
-#, fuzzy
 msgid "cannot xtfrm 'x'"
-msgstr "데이터 프레임이 아닙니다"
+msgstr ""
 
 #. R/dataframe.R: stop("cannot xtfrm data frames")
 #: R/dataframe.R:0
@@ -1575,9 +1562,8 @@ msgstr "핸들러는 반드시 함수이어야 합니다"
 
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #: R/conditions.R:0
-#, fuzzy
 msgid "condition handlers must be specified with a condition class"
-msgstr "핸들러는 반드시 함수이어야 합니다"
+msgstr ""
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NAs")
 #: R/format.R:0
@@ -1619,9 +1605,8 @@ msgstr "중복되는 'row.names'의 값은 허용되지 않습니다"
 
 #. R/namespace.R: gettextf("duplicate import names %s", paste(sQuote(impnames[duplicated(impnames)]),     collapse = ", "))
 #: R/namespace.R:0
-#, fuzzy
 msgid "duplicate import names %s"
-msgstr "중복되는 row.names의 값들은 다음과 같습니다: %s"
+msgstr ""
 
 #. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
 #: R/dataframe.R:0
@@ -1660,9 +1645,8 @@ msgstr ""
 
 #. R/namespace.R: gettextf("empty name in directive '%s' in 'NAMESPACE' file",     as.character(e[[1L]]))
 #: R/namespace.R:0
-#, fuzzy
 msgid "empty name in directive '%s' in 'NAMESPACE' file"
-msgstr "패키지 %s는 'NAMESPACE' 파일을 가지고 있지 않습니다"
+msgstr ""
 
 #. R/source.R: gettextf("encoding = \"%s\" chosen", encoding)
 #: R/source.R:0
@@ -1831,8 +1815,9 @@ msgstr ""
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "유효한 'name' 인자가 아닙니다"
@@ -1901,9 +1886,8 @@ msgstr "요인의 수준(factor level)이 올바르지 않아 NA가 생성되었
 
 #. R/namespace.R: stop("invalid import target")
 #: R/namespace.R:0
-#, fuzzy
 msgid "invalid import target"
-msgstr "유효하지 않은 'path' 인자입니다"
+msgstr ""
 
 #. R/dataframe.R: stop("invalid list argument: all variables should have the same length")
 #: R/dataframe.R:0
@@ -1950,9 +1934,8 @@ msgstr "주어진 단위정보가 올바르지 않습니다."
 
 #. R/tabulate.R: gettextf("invalid value of %s", "'nbins'")
 #: R/tabulate.R:0
-#, fuzzy
 msgid "invalid value of %s"
-msgstr "유효하지 않은 'value'입니다"
+msgstr ""
 
 #. R/version.R: gettextf("invalid version specification %s", paste(sQuote(unique(x[!i])),     collapse = ", "))
 #: R/version.R:0
@@ -2017,9 +2000,8 @@ msgstr "잘못된 버전"
 
 #. R/grep.R: stop("match distance components must be non-negative")
 #: R/grep.R:0
-#, fuzzy
 msgid "match distance components must be non-negative"
-msgstr "cost component는 음의 값을 가질 수 없습니다."
+msgstr ""
 
 #. R/sort.R: stop("method = \"quick\" is only for numeric 'x'")
 #: R/sort.R:0
@@ -2033,9 +2015,8 @@ msgstr "데이터 프레임 인자의 행이름과 일치하지 않습니다. it
 
 #. R/grep.R: stop("missing replacement values are not allowed")
 #: R/grep.R:0
-#, fuzzy
 msgid "missing replacement values are not allowed"
-msgstr "'row.names'에는 결측값이 허용되지 않습니다"
+msgstr ""
 
 #. R/dataframe.R: stop("missing values are not allowed in subscripted assignments of data frames")
 #: R/dataframe.R:0
@@ -2070,9 +2051,8 @@ msgstr "%s에 대한 여러개의 메소드 테이블들을 찾았습니다"
 
 #. R/grep.R: stop("must have replacement values for matches")
 #: R/grep.R:0
-#, fuzzy
 msgid "must have replacement values for matches"
-msgstr "일치하는 항목들에 대하여 대체할 값들이 필요합니다."
+msgstr ""
 
 #. R/grep.R: stop("must have replacements for matches")
 #: R/grep.R:0
@@ -2131,9 +2111,8 @@ msgstr "네임스페이스 %s %s는 로드되었으나 %s %s가 필요합니다"
 
 #. R/namespace.R: gettextf("namespace %s is already sealed in 'loadNamespace'",     sQuote(getNamespaceName(ns)))
 #: R/namespace.R:0
-#, fuzzy
 msgid "namespace %s is already sealed in 'loadNamespace'"
-msgstr "네임스페이스가 이미 연결되어 있습니다."
+msgstr ""
 
 #. R/namespace.R: gettextf("namespace %s is imported by %s so cannot be unloaded",     sQuote(getNamespaceName(ns)), paste(sQuote(users), collapse = ", "))
 #: R/namespace.R:0
@@ -2248,9 +2227,8 @@ msgstr "패키지들을 찾을 수 없습니다"
 
 #. R/library.R: stop("no shared object was specified")
 #: R/library.R:0
-#, fuzzy
 msgid "no shared object was specified"
-msgstr "DLL이 지정되지 않았습니다"
+msgstr ""
 
 #. R/taskCallback.R: gettextf("no such element '%s'", which)
 #: R/taskCallback.R:0
@@ -2259,9 +2237,8 @@ msgstr "그런 구성요소 '%s'는 없습니다"
 
 #. R/dataframe.R: stop("non-existent rows not allowed")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "non-existent rows not allowed"
-msgstr "중복되는 'row.names'의 값은 허용되지 않습니다"
+msgstr ""
 
 #. R/sort.R: stop("non-finite 'partial'")
 #: R/sort.R:0
@@ -2419,9 +2396,8 @@ msgstr "유효한 호출들은 x[[j]] <- value 또는 x[[i,j]] <- value 입니�
 
 #. R/namespace.R: stop("operation not allowed on base namespace")
 #: R/namespace.R:0
-#, fuzzy
 msgid "operation not allowed on base namespace"
-msgstr "네임스페이스가 로딩되지 않았습니다"
+msgstr ""
 
 #. R/library.R: gettextf("package %s already present in search()", sQuote(package))
 #: R/library.R:0
@@ -2485,9 +2461,8 @@ msgstr "패키지 %s가 정상적으로 설치되지 않았습니다"
 
 #. R/library.R: gettextf("package %s is not installed for 'arch = %s'", sQuote(pkgname),     r_arch)
 #: R/library.R:0
-#, fuzzy
 msgid "package %s is not installed for 'arch = %s'"
-msgstr "패키지 %s가 정상적으로 설치되지 않았습니다"
+msgstr ""
 
 #. R/attach.R: gettextf("package %s is required by %s so will not be detached",     sQuote(pkgname), sQuote(.rmpkg(pkg)))
 #: R/attach.R:0
@@ -2846,9 +2821,8 @@ msgstr ""
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr "정확하게 두개의 'to', 'by' 그리고 'length.out' / 'along.with'가 반드시 지정되어야 합니다"
+msgstr ""
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -2887,10 +2861,9 @@ msgstr[0] ""
 
 #. R/dataframe.R: ngettext(nrowv, "%d row in value to replace %d rows", "%d rows in value to replace %d rows")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "%d row in value to replace %d rows"
 msgid_plural "%d rows in value to replace %d rows"
-msgstr[0] "대체하고자 하는 대각원소의 길이가 올바르지 않습니다."
+msgstr[0] ""
 
 #. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s",     "%s function may not have arguments named %s", domain = "R-base")
 #: R/mapply.R:0
@@ -2914,10 +2887,9 @@ msgstr[0] "'arg'은 반드시 %s 중 하나이어야 합니다"
 
 #. R/merge.R: ngettext(sum(bad), "'by' must specify a uniquely valid column",     "'by' must specify uniquely valid columns")
 #: R/merge.R:0
-#, fuzzy
 msgid "'by' must specify a uniquely valid column"
 msgid_plural "'by' must specify uniquely valid columns"
-msgstr[0] "by'는 반드시 열의 개수와 일치해야 합니다"
+msgstr[0] ""
 
 #. R/namespace.R: ngettext(length(bad), "Function found when exporting methods from the namespace %s which is not S4 generic: %s",     "Functions found when exporting methods from the namespace %s which are not S4 generic: %s")
 #: R/namespace.R:0
@@ -2944,10 +2916,9 @@ msgstr[0] ""
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in NAMESPACE but not found",     "S3 methods %s were declared in NAMESPACE but not found")
 #: R/namespace.R:0
-#, fuzzy
 msgid "S3 method %s was declared in NAMESPACE but not found"
 msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
-msgstr[0] "S3 메소드 %s가 선언되었으나 찾을 수 없습니다"
+msgstr[0] ""
 
 #. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:",     "The following objects are masked _by_ %s:")
 #: R/attach.R:0
@@ -2969,10 +2940,9 @@ msgstr[0] ""
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'",     "classes %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
-#, fuzzy
 msgid "class %s is not exported by 'namespace:%s'"
 msgid_plural "classes %s are not exported by 'namespace:%s'"
-msgstr[0] "'%s'는 'namespace:%s'로부터 내보내어진 객체가 아닙니다"
+msgstr[0] ""
 
 #. R/dataframe.R: ngettext(n, "data frame with 0 columns and %d row", "data frame with 0 columns and %d rows")
 #: R/dataframe.R:0
@@ -2988,10 +2958,9 @@ msgstr[0] ""
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row",     "invalid 'row.names', length %d for a data frame with %d rows")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "invalid 'row.names', length %d for a data frame with %d row"
 msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
-msgstr[0] "데이터프레임에 잘못된 'dimnames'이 주어졌습니다"
+msgstr[0] ""
 
 #. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages",     domain = "R-base")
 #: R/library.R:0
@@ -3014,24 +2983,21 @@ msgstr[0] ""
 
 #. R/namespace.R: ngettext(length(miss), "object %s is not exported by 'namespace:%s'",     "objects %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
-#, fuzzy
 msgid "object %s is not exported by 'namespace:%s'"
 msgid_plural "objects %s are not exported by 'namespace:%s'"
-msgstr[0] "'%s'는 'namespace:%s'로부터 내보내어진 객체가 아닙니다"
+msgstr[0] ""
 
 #. R/load.R: ngettext(n, "object %s not found", "objects %s not found")
 #: R/load.R:0
-#, fuzzy
 msgid "object %s not found"
 msgid_plural "objects %s not found"
-msgstr[0] "공유된 객체 %s를 찾을 수 없습니다"
+msgstr[0] ""
 
 #. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded")
 #: R/library.R:0
-#, fuzzy
 msgid "package %s is not loaded"
 msgid_plural "packages %s are not loaded"
-msgstr[0] "패키지 %s는 로드되어질 수 없습니다"
+msgstr[0] ""
 
 #. R/namespace.R: ngettext(sum(ex), "previous export '%s' is being replaced", "previous exports '%s' are being replaced")
 #: R/namespace.R:0
@@ -3047,24 +3013,21 @@ msgstr[0] ""
 
 #. R/dataframe.R: ngettext(nrowv, "replacement data has %d row to replace %d rows",     "replacement data has %d rows to replace %d rows")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "replacement data has %d row to replace %d rows"
 msgid_plural "replacement data has %d rows to replace %d rows"
-msgstr[0] "대체하고자 하는 대각원소의 길이가 올바르지 않습니다."
+msgstr[0] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d has %d row to replace %d rows",     "replacement element %d has %d rows to replace %d rows")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "replacement element %d has %d row to replace %d rows"
 msgid_plural "replacement element %d has %d rows to replace %d rows"
-msgstr[0] "대체하고자 하는 대각원소의 길이가 올바르지 않습니다."
+msgstr[0] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d has %d row, need %d", "replacement element %d has %d rows, need %d")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "replacement element %d has %d row, need %d"
 msgid_plural "replacement element %d has %d rows, need %d"
-msgstr[0] "대체하고자 하는 대각원소의 길이가 올바르지 않습니다."
+msgstr[0] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d is a matrix/data frame of %d row, need %d",     "replacement element %d is a matrix/data frame of %d rows, need %d")
 #: R/dataframe.R:0
@@ -3074,17 +3037,15 @@ msgstr[0] ""
 
 #. R/dataframe.R: ngettext(m, "replacement has %d item, need %d", "replacement has %d items, need %d")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "replacement has %d item, need %d"
 msgid_plural "replacement has %d items, need %d"
-msgstr[0] "대체하고자 하는 대각원소의 길이가 올바르지 않습니다."
+msgstr[0] ""
 
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
-msgstr[0] "대체하고자 하는 대각원소의 길이가 올바르지 않습니다."
+msgstr[0] ""
 
 #. R/namespace.R: ngettext(sum(!found), "requested method not found in environment/package %s: %s when loading %s",     "requested methods not found in environment/package %s: %s when loading %s")
 #: R/namespace.R:0
@@ -3104,91 +3065,37 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "호출된 패키지(들)가 없습니다."
 
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'INDEX'의 길이가 0입니다"
-
-#~ msgid "invalid 'digits'"
-#~ msgstr "유효하지 않은 'digits'입니다"
-
 #~ msgid "invalid 'dims'"
 #~ msgstr "유효하지 않은 'dims'가 아닙니다"
 
 #, fuzzy
-#~ msgid "invalid 'make.names'"
-#~ msgstr "유효하지 않은 패키지명입니다"
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "유효한 'name' 인자가 아닙니다"
 
-#~ msgid "invalid 'value'"
-#~ msgstr "유효하지 않은 'value'입니다"
+#~ msgid ","
+#~ msgstr ","
 
-#, fuzzy
-#~ msgid "invalid 'x'"
-#~ msgstr "유효하지 않은 'dims'가 아닙니다"
+#~ msgid "invalid string for 'by'"
+#~ msgstr "'by'에 유효하지 않은 문자열입니다"
 
-#~ msgid "invalid ncol(qr$qr)"
-#~ msgstr "유효하지 않은 ncol(qr$qr)입니다"
-
-#~ msgid "invalid ncol(qr$rank)"
-#~ msgstr "유효하지 않은 ncol(qr$rank)입니다"
-
-#~ msgid "invalid ncol(y)"
-#~ msgstr "유효하지 않은 ncol(y)입니다"
-
-#~ msgid "invalid nrow(qr$qr)"
-#~ msgstr "유효하지 않은 nrow(qr$qr)입니다"
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "단항연산자 '-'는 \"POSIXt\" 객체들에 대해서 정의되어 있지 않습니다"
 
 #~ msgid "invalid nrow(x)"
 #~ msgstr "유효하지 않은 nrow(x)입니다"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "유효하지 않은 'path' 인자입니다"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "유효하지 않은 'time' 인자입니다"
 
 #, fuzzy
 #~ msgid "invalid nrow(z)"
 #~ msgstr "유효하지 않은 nrow(x)입니다"
 
-#~ msgid "'by' must match numbers of columns"
-#~ msgstr "'by'는 반드시 열의 개수와 일치해야 합니다"
-
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'stderr'은 반드시 길이가 1이어야 합니다"
-
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'stdout'은 반드시 길이가 1이어야 합니다"
-
 #~ msgid "shared object '%s' not found"
 #~ msgstr "공유된 객체 '%s'를 찾을 수 없습니다"
-
-#~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "'ignore.stdout'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "'invisible'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "'minimized'는 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#, fuzzy
-#~ msgid "'receive.console.signals' must be TRUE or FALSE"
-#~ msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "'show.output.on.console'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#, fuzzy
-#~ msgid "invalid '(to - from)/by'"
-#~ msgstr "'by'에 유효하지 않은 모드입니다"
-
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "유효하지 않은 NCOL(R)입니다"
-
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "유효하지 않은 NCOL(y)입니다"
-
-#~ msgid "invalid ncol(x)"
-#~ msgstr "유효하지 않은 ncol(x)입니다"
 
 #~ msgid "bad 'file' argument"
 #~ msgstr "잘못된 'file'인자입니다"
@@ -3199,71 +3106,118 @@ msgstr[0] "호출된 패키지(들)가 없습니다."
 #~ msgid "invalid 'category' argument"
 #~ msgstr "유효하지 않은 'category' 인자입니다"
 
+#~ msgid "FUN"
+#~ msgstr "FUN"
+
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "'by'는 반드시 열의 개수와 일치해야 합니다"
+
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "패키지 %s는 당신이 수락해야만 하는 다음과 같은 종류의 라이센스를 가지고 있습니다:"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "유효하지 않은 ncol(x)입니다"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "유효하지 않은 nrow(qr$qr)입니다"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "유효하지 않은 ncol(qr$qr)입니다"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "유효하지 않은 ncol(qr$rank)입니다"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "유효하지 않은 ncol(y)입니다"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "유효하지 않은 NCOL(y)입니다"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "유효하지 않은 NCOL(R)입니다"
+
 #, fuzzy
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "유효한 'name' 인자가 아닙니다"
+#~ msgid "invalid 'x'"
+#~ msgstr "유효하지 않은 'dims'가 아닙니다"
 
-#~ msgid "invalid 'path' argument"
-#~ msgstr "유효하지 않은 'path' 인자입니다"
-
-#~ msgid "invalid 'time' argument"
-#~ msgstr "유효하지 않은 'time' 인자입니다"
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX'의 길이가 0입니다"
 
 #, fuzzy
 #~ msgid "invalid 'which' argument"
 #~ msgstr "유효하지 않은 'path' 인자입니다"
 
-#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
-#~ msgstr "단항연산자 '-'는 \"POSIXt\" 객체들에 대해서 정의되어 있지 않습니다"
+#~ msgid "invalid 'digits'"
+#~ msgstr "유효하지 않은 'digits'입니다"
 
-#~ msgid "invalid string for 'by'"
-#~ msgstr "'by'에 유효하지 않은 문자열입니다"
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "'ignore.stdout'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr'은 반드시 TRUE 또는 FALSE이어야 합니다"
 
 #, fuzzy
-#~ msgid "connections left open:"
-#~ msgstr "'connection'은 반드시 커넥션이어야 합니다"
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "'intern'은 반드시 TRUE 또는 FALSE이어야 합니다"
 
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg'는 반드시 길이가 1이어야 합니다"
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout'은 반드시 길이가 1이어야 합니다"
 
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from'은 반드시 \"POSIXt\" 객체이어야 합니다"
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr'은 반드시 길이가 1이어야 합니다"
 
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from'은 반드시 길이가 1이어야 합니다"
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "'show.output.on.console'은 반드시 TRUE 또는 FALSE이어야 합니다"
 
-#~ msgid "'from' must be specified"
-#~ msgstr "'from'은 반드시 지정되어야 합니다"
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "'minimized'는 반드시 TRUE 또는 FALSE이어야 합니다"
 
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out'은 반드시 길이가 1 이어야 합니다"
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "'invisible'은 반드시 TRUE 또는 FALSE이어야 합니다"
 
 #, fuzzy
 #~ msgid "'name' must be a single character string"
 #~ msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
 
-#~ msgid "'origin' must be of length one"
-#~ msgstr "'origin'의 길이는 반드시 1이어야 합니다"
+#~ msgid "'from' must be specified"
+#~ msgstr "'from'은 반드시 지정되어야 합니다"
 
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'package'는 반드시 길이가 1이어야 합니다"
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from'은 반드시 \"Date\" 객체이어야 합니다"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from'은 반드시 길이가 1이어야 합니다"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out'은 반드시 길이가 1 이어야 합니다"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "'by'는 반드시 길이가 1이어야 합니다"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from'은 반드시 \"POSIXt\" 객체이어야 합니다"
 
 #~ msgid "'to' must be a \"POSIXt\" object"
 #~ msgstr "'to'는 반드시 \"POSIXt\" 객체이어야 합니다"
 
-#~ msgid "'to' must be of length 1"
-#~ msgstr "'to'는 반드시 길이가 1 이어야 합니다"
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package'는 반드시 길이가 1이어야 합니다"
 
-#, fuzzy
-#~ msgid "'which' must be of length 1"
-#~ msgstr "'to'는 반드시 길이가 1 이어야 합니다"
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg'는 반드시 길이가 1이어야 합니다"
 
 #~ msgid "argument 'length.out' must be of length 1"
 #~ msgstr "인자 'length.out'은 반드시 길이가 1이어야 합니다"
 
 #, fuzzy
-#~ msgid "'%s' must be a non-empty string"
-#~ msgstr "'file'은 반드시 비어있지 않은 문자열이어야 합니다"
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'to'는 반드시 길이가 1 이어야 합니다"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind'는 반드시 길이가 1인 문자열이어야 합니다."
@@ -3271,18 +3225,6 @@ msgstr[0] "호출된 패키지(들)가 없습니다."
 #, fuzzy
 #~ msgid "'sample.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind'는 반드시 길이가 1인 문자열이어야 합니다."
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "package %s has a license that you need to accept:"
-#~ msgstr "패키지 %s는 당신이 수락해야만 하는 다음과 같은 종류의 라이센스를 가지고 있습니다:"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "FUN"
-#~ msgstr "FUN"
 
 #, fuzzy
 #~ msgid ", will be ignored"
@@ -3302,6 +3244,9 @@ msgstr[0] "호출된 패키지(들)가 없습니다."
 
 #~ msgid "argument 'object' must deparse to a single character string"
 #~ msgstr "'object'인자는 반드시 하나의 문자열로 만들어져야 합니다."
+
+#~ msgid "'%s' is not an exported object from 'namespace:%s'"
+#~ msgstr "'%s'는 'namespace:%s'로부터 내보내어진 객체가 아닙니다"
 
 #~ msgid "bad handler specification"
 #~ msgstr "잘못된 핸들러 지정입니다"

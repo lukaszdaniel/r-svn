@@ -603,7 +603,7 @@ msgstr "'.' na fórmula e nenhum argumento 'data'"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' deve ser uma lista"
+msgstr "n deve ser pelo menos dois"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1067,29 +1067,26 @@ msgstr "valor faltante nas últimas %d observações"
 msgid "ifault=%d. This should not happen"
 msgstr ""
 
-#~ msgid "n must be at least two"
-#~ msgstr "n deve ser pelo menos dois"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) deve ser pelo menos dois"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "valor inválido para lag.max"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "fórmula de modelo inválida em ExtractVars"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "fórmula de modelo inválida em EncodeVars"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) deve ser pelo menos dois"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' deve ser uma lista"
 
-#~ msgid "m must be a list"
-#~ msgstr "m deve ser uma lista"
-
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf substituido pelo máximo valor positivo"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "valor inválido para lag.max"
+
+#~ msgid "m must be a list"
+#~ msgstr "m deve ser uma lista"
 
 #, fuzzy
 #~ msgid "'x' is a factor"

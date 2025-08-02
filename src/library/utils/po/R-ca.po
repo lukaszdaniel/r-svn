@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -549,6 +549,12 @@ msgstr "Editeu el fitxer i moveu-lo al directori adequat."
 #, fuzzy
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "Assegureu-vos de no llistar un objecte reenumerable, o especifiqueu l'esquelet per separat."
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "Introduïu un número d'entorn, o 0 per a sortir"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -2678,23 +2684,8 @@ msgstr[0] "el paquet %s no està disponible %s"
 msgstr[1] "els paquets %s no estan disponibles %s"
 
 #, fuzzy
-#~ msgid "path is empty"
-#~ msgstr "el camí està buit"
-
-#, fuzzy
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Argument «filter» no vàlid."
-
-#, fuzzy
-#~ msgid "invalid 'type'"
-#~ msgstr "«type» no vàlid"
-
-#, fuzzy
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "argument «filters» no vàlid."
-
-#~ msgid "invalid %s argument"
-#~ msgstr "argument %s no vàlid"
 
 #, fuzzy
 #~ msgid "invalid 'data' argument"
@@ -2705,67 +2696,16 @@ msgstr[1] "els paquets %s no estan disponibles %s"
 #~ msgstr "argument «modes» no vàlid"
 
 #, fuzzy
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "argument «socket» no vàlid"
-
-#, fuzzy
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "argument «tarfile» no vàlid"
-
-#, fuzzy
 #~ msgid "invalid 'x' argument"
 #~ msgstr "argument «x» no vàlid"
-
-#, fuzzy
-#~ msgid "cannot choose a"
-#~ msgstr "no es pot triar un"
-
-#, fuzzy
-#~ msgid "mirror non-interactively"
-#~ msgstr "emmiralla no interactivament"
-
-#, fuzzy
-#~ msgid "'memory.limit()' is Windows-specific"
-#~ msgstr "«memory.limit()» és específic de Windows"
-
-#, fuzzy
-#~ msgid "'memory.size()' is Windows-specific"
-#~ msgstr "«memory.size()» és específic de Windows"
-
-#, fuzzy
-#~ msgid "argument %s must be a character string"
-#~ msgstr "l'argument %s ha de ser una cadena de caràcters"
-
-#, fuzzy
-#~ msgid "invalid 'type'; must be a character string"
-#~ msgstr "«type» no vàlid; ha de ser una cadena de caràcters"
-
-#, fuzzy
-#~ msgid ""
-#~ "tail(., addrownums = V) is deprecated.\n"
-#~ "Use"
-#~ msgstr ""
-#~ "tail(., addrownums = V) és obsolet.\n"
-#~ "Utilitza"
 
 #, fuzzy
 #~ msgid "tail(., keepnums = V) instead."
 #~ msgstr "tail(., keepnums = V) en el seu lloc."
 
 #, fuzzy
-#~ msgid "bzip2"
-#~ msgstr "bzip2"
-
-#, fuzzy
-#~ msgid "gzip"
-#~ msgstr "gzip"
-
-#, fuzzy
-#~ msgid "xz"
-#~ msgstr "xz"
-
-#~ msgid ","
-#~ msgstr ","
+#~ msgid "tail(., addrownums=.) is"
+#~ msgstr "tail(., addrownums=.) és"
 
 #, fuzzy
 #~ msgid ""
@@ -2776,16 +2716,71 @@ msgstr[1] "els paquets %s no estan disponibles %s"
 #~ "Utilitza"
 
 #, fuzzy
-#~ msgid "tail(., addrownums=.) is"
-#~ msgstr "tail(., addrownums=.) és"
-
-#, fuzzy
 #~ msgid "tail(., keepnums=.) instead."
 #~ msgstr "tail(., keepnums=.) en el seu lloc."
 
 #, fuzzy
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "argument «filters» no vàlid."
+
+#, fuzzy
+#~ msgid "invalid 'type'"
+#~ msgstr "«type» no vàlid"
+
+#, fuzzy
+#~ msgid "cannot choose a"
+#~ msgstr "no es pot triar un"
+
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "emmiralla no interactivament"
+
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "argument «socket» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "argument «tarfile» no vàlid"
+
+#, fuzzy
+#~ msgid "gzip"
+#~ msgstr "gzip"
+
+#, fuzzy
+#~ msgid "bzip2"
+#~ msgstr "bzip2"
+
+#, fuzzy
+#~ msgid "xz"
+#~ msgstr "xz"
+
+#, fuzzy
+#~ msgid "path is empty"
+#~ msgstr "el camí està buit"
+
+#, fuzzy
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "«memory.size()» és específic de Windows"
+
+#, fuzzy
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "«memory.limit()» és específic de Windows"
+
+#, fuzzy
 #~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 #~ msgstr "Es recomana utilitzar %s/%s en lloc de %s/%s/%s."
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "l'argument %s ha de ser una cadena de caràcters"
+
+#, fuzzy
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "«type» no vàlid; ha de ser una cadena de caràcters"
 
 #, fuzzy
 #~ msgid "file 'filelist' is missing for directory %s"

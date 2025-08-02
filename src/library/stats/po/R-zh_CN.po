@@ -885,9 +885,8 @@ msgstr "'ts'对象至少必需有一个或多个观察量"
 
 #. R/quantile.R: stop("'type' must be 1 or 3 for ordered factors")
 #: R/quantile.R:0
-#, fuzzy
 msgid "'type' must be 1 or 3 for ordered factors"
-msgstr "'relevel'只适用于因子"
+msgstr ""
 
 #. R/quantile.R: stop("'type' must be an integer in 1..9")
 #: R/quantile.R:0
@@ -4018,7 +4017,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true correlation is less than %s"
-msgstr "'r'小于零"
+msgstr "'r'小于一"
 
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4049,7 +4048,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true event rate is less than %s"
-msgstr "'r'小于零"
+msgstr "'r'小于一"
 
 #. R/poisson.test.R: gettextf("true event rate is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4065,7 +4064,7 @@ msgstr ""
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "true location is less than %s"
-msgstr "'r'小于零"
+msgstr "'r'小于一"
 
 #. R/wilcox.test.R: gettextf("true location is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
@@ -4111,7 +4110,7 @@ msgstr ""
 #: R/t.test.R:0
 #, fuzzy
 msgid "true mean is less than %s"
-msgstr "'m'小于一"
+msgstr "'r'小于一"
 
 #. R/t.test.R: gettextf("true mean is not equal to %s", mu, domain = "R-stats")
 #: R/t.test.R:0
@@ -4127,7 +4126,7 @@ msgstr ""
 #: R/fisher.test.R:0
 #, fuzzy
 msgid "true odds ratio is less than %s"
-msgstr "'r'小于零"
+msgstr "'r'小于一"
 
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
@@ -4141,9 +4140,8 @@ msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "true probability of success is less than %s"
-msgstr "'r'小于零"
+msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
 #: R/binom.test.R:0
@@ -4174,7 +4172,7 @@ msgstr ""
 #: R/prop.test.R:0
 #, fuzzy
 msgid "true proportion is less than %s"
-msgstr "'r'小于零"
+msgstr "'r'小于一"
 
 #. R/prop.test.R: gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats")
 #: R/prop.test.R:0
@@ -4190,7 +4188,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true rate ratio is less than %s"
-msgstr "'r'小于零"
+msgstr "'r'小于一"
 
 #. R/poisson.test.R: gettextf("true rate ratio is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4236,7 +4234,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true rho is less than %s"
-msgstr "'r'小于零"
+msgstr "'r'小于一"
 
 #. R/cor.test.R: gettextf("true rho is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4252,7 +4250,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true tau is less than %s"
-msgstr "'r'小于零"
+msgstr "'r'小于一"
 
 #. R/cor.test.R: gettextf("true tau is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4628,26 +4626,46 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "从组合拟合中用%d/%d行"
 
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "'contrast.obj'列必需设定对比(总和为零)"
+
 #, fuzzy
 #~ msgid "invalid 'SSinit'"
 #~ msgstr "'nb'无效"
 
-#, fuzzy
-#~ msgid "invalid 'keep.stuff'"
-#~ msgstr "'method'无效"
+#~ msgid "invalid 'x'"
+#~ msgstr "'x'无效"
 
-#~ msgid "invalid 'use' argument"
-#~ msgstr "'use'参数无效"
+#~ msgid "invalid 'nb'"
+#~ msgstr "'nb'无效"
 
-#~ msgid "medpolish() did not converge in %d iteration"
-#~ msgid_plural "medpolish() did not converge in %d iterations"
-#~ msgstr[0] "medpolish()经过%d个迭代仍没有聚合"
+#~ msgid "invalid argument 'lambda'"
+#~ msgstr "参数'lambda'无效"
 
-#~ msgid "invalid 'control' argument"
-#~ msgstr "'control'参数无效"
+#~ msgid "formula missing"
+#~ msgstr "缺失公式"
+
+#~ msgid "incorrect specification for 'formula'"
+#~ msgstr "'formula'设定不正确"
 
 #~ msgid "invalid 'method' argument"
 #~ msgstr "'method'参数无效"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x)无效"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x)无效"
+
+#, fuzzy
+#~ msgid "ignored"
+#~ msgstr "' 略过不用"
+
+#~ msgid "invalid 'control' argument"
+#~ msgstr "'control'参数无效"
 
 #~ msgid "invalid NCOL(X)"
 #~ msgstr "NCOL(X)无效"
@@ -4656,17 +4674,17 @@ msgstr[0] "从组合拟合中用%d/%d行"
 #~ msgid "invalid NROW(X)"
 #~ msgstr "NCOL(X)无效"
 
+#~ msgid "invalid 'y'"
+#~ msgstr "'y'无效"
+
+#~ msgid "invalid argument 'span'"
+#~ msgstr "参数'span'无效"
+
 #~ msgid "invalid argument 'cell'"
 #~ msgstr "参数'cell'无效"
 
 #~ msgid "invalid argument 'degree'"
 #~ msgstr "参数'degree'无效"
-
-#~ msgid "invalid argument 'lambda'"
-#~ msgstr "参数'lambda'无效"
-
-#~ msgid "invalid argument 'span'"
-#~ msgstr "参数'span'无效"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "'data'参数无效"
@@ -4674,30 +4692,8 @@ msgstr[0] "从组合拟合中用%d/%d行"
 #~ msgid "invalid argument 'omit'"
 #~ msgstr "参数'omit'无效"
 
-#~ msgid "invalid 'control.spar'"
-#~ msgstr "'control.spar'无效"
-
 #~ msgid "'formula' missing"
 #~ msgstr "缺失'formula'"
-
-#~ msgid "formula missing"
-#~ msgstr "缺失公式"
-
-#~ msgid "incorrect specification for 'formula'"
-#~ msgstr "'formula'设定不正确"
-
-#, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "'use'参数无效"
-
-#~ msgid "invalid 'abbr.colnames'"
-#~ msgstr "'abbr.colnames'无效"
-
-#~ msgid "invalid 'endrule' argument"
-#~ msgstr "'endrule'参数无效"
-
-#~ msgid "invalid argument 'c'"
-#~ msgstr "参数'c'无效"
 
 #~ msgid "invalid argument 'n'"
 #~ msgstr "参数'n'无效"
@@ -4705,33 +4701,28 @@ msgstr[0] "从组合拟合中用%d/%d行"
 #~ msgid "invalid argument 'r'"
 #~ msgstr "参数'r'无效"
 
-#~ msgid "invalid 'nb'"
-#~ msgstr "'nb'无效"
+#~ msgid "invalid argument 'c'"
+#~ msgstr "参数'c'无效"
 
-#~ msgid "invalid 'x'"
-#~ msgstr "'x'无效"
+#~ msgid "invalid 'endrule' argument"
+#~ msgstr "'endrule'参数无效"
 
-#~ msgid "invalid 'y'"
-#~ msgstr "'y'无效"
+#~ msgid "invalid 'control.spar'"
+#~ msgstr "'control.spar'无效"
 
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ncol(x)无效"
+#, fuzzy
+#~ msgid "invalid 'keep.stuff'"
+#~ msgstr "'method'无效"
 
-#~ msgid "invalid nrow(x)"
-#~ msgstr "nrow(x)无效"
+#~ msgid "invalid 'abbr.colnames'"
+#~ msgstr "'abbr.colnames'无效"
 
 #~ msgid "Requested conf.level not achievable"
 #~ msgstr "无法达到所要求的conf.level"
 
-#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-#~ msgstr "'contrast.obj'列必需设定对比(总和为零)"
-
-#~ msgid ","
-#~ msgstr ","
-
-#, fuzzy
-#~ msgid "ignored"
-#~ msgstr "' 略过不用"
+#~ msgid "medpolish() did not converge in %d iteration"
+#~ msgid_plural "medpolish() did not converge in %d iterations"
+#~ msgstr[0] "medpolish()经过%d个迭代仍没有聚合"
 
 #~ msgid "link \"%s\" not available for quasipoisson family; available links are %s"
 #~ msgstr "quasipoisson分布族里没有\"%s\"这一鏈結函数；可以用的鏈結是%s"

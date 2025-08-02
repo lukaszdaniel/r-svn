@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -63,18 +63,16 @@ msgstr "'%s' ist eine formale generische Funktion: S3 Methoden werden vermutlich
 #. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
 #: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
-#, fuzzy
 msgid "'%s' must be a character string"
-msgstr "'unzip' muss eine einzelne Zeichenkette sein"
+msgstr "'%s' muss eine einzelne Zeichenkette sein"
 
 #. R/help.start.R: gettextf("'%s' must be a non-empty character string", "url")
 #. R/help.start.R: gettextf("'%s' must be a non-empty character string", "browser")
 #. R/zip.R: gettextf("'%s' must be a non-empty character string", "unzip")
 #. R/zip.R: gettextf("'%s' must be a non-empty character string", "zip")
 #: R/help.start.R:0 R/zip.R:0
-#, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "'url' muss eine nicht-leere Zeichenkette sein"
+msgstr "'%s' muss eine nicht-leere Zeichenkette sein"
 
 #. R/indices.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #: R/indices.R:0
@@ -272,9 +270,8 @@ msgstr "'object' hat keine gültigen levels()"
 
 #. R/data.R: stop("'package' must be a character vector or NULL")
 #: R/data.R:0
-#, fuzzy
 msgid "'package' must be a character vector or NULL"
-msgstr "'package' muss eine Zeichenkette oder NULL sein"
+msgstr "'package' muss ein Zeichenkettenvektor oder NULL sein"
 
 #. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
 #. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
@@ -368,9 +365,8 @@ msgstr ""
 
 #. R/citation.R: gettextf("Arguments of person() should be character or NULL")
 #: R/citation.R:0
-#, fuzzy
 msgid "Arguments of person() should be character or NULL"
-msgstr "'priority' muss eine Zeichenkette oder NULL sein"
+msgstr "Die Argumente zu person() sollten eine Zeichenkette oder NULL sein"
 
 #. R/debugger.R: gettext("Available environments had calls:\n")
 #: R/debugger.R:0
@@ -478,6 +474,12 @@ msgstr "Bearbeite die Datei und verschiebe sie in das geeignete Verzeichnis."
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "Entweder ein wieder-listbares Objekt entlisten oder ein Gerüst separat angeben"
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "Geben Sie Umgebungsnummer oder 0 für Abbruch an"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -610,7 +612,7 @@ msgstr "Keine Dokumentation für %s in angegebenen Paketen und Bibliotheken:"
 #: R/packages.R:0
 #, fuzzy
 msgid "No matching repositories found for %s"
-msgstr "keine Hilfe für %s gefunden"
+msgstr "Keine passenden Repositories gefunden für"
 
 #. R/debugger.R: gettext("No suitable frames for recover()\n")
 #: R/debugger.R:0
@@ -668,7 +670,7 @@ msgstr "Paket %s: DESCRIPTION nicht gefunden"
 #. R/aspell.R: sprintf("Performing query %s", q)
 #: R/aspell.R:0
 msgid "Performing query %s"
-msgstr ""
+msgstr "Ausführen von Anfrage %s"
 
 #. R/aspell.R: gettextf("Processing file %s", fname)
 #. R/rtags.R: gettextf("Processing file %s", s)
@@ -711,9 +713,8 @@ msgstr "Sichere Hilfeseiten nach %s"
 
 #. R/mach-o.R: stop("Source must be a seekable connection")
 #: R/mach-o.R:0
-#, fuzzy
 msgid "Source must be a seekable connection"
-msgstr "'file' muss eine Zeichenkette oder eine Verbindung sein"
+msgstr "Die Quelle muss eine suchbare Verbindung sein"
 
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
 #: R/relist.R:0
@@ -868,7 +869,7 @@ msgstr "Warnung: unbekannte Option '--clean='%s"
 #. R/packages2.R: warning("Windows default 'timeout' command is not usable for parallel installs")
 #: R/packages2.R:0
 msgid "Windows default 'timeout' command is not usable for parallel installs"
-msgstr ""
+msgstr "Das Windows standard 'timout' Kommando kann nicht in parallels Installationen genutzt werden"
 
 #. R/packages2.R: gettextf("Would you like to create a personal library\n%s\nto install packages into?",     sQuote(userdir))
 #: R/packages2.R:0
@@ -924,7 +925,7 @@ msgstr "Argument 'compressed' wird für die interne Methode ignoriert"
 #. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
 #: R/RSiteSearch.R:0
 msgid "argument 'format' is deprecated and has no affect on search results"
-msgstr ""
+msgstr "Argument 'format' ist veraltet und hat keinen Einfluss auf Suchergebnisse"
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
 #: R/help.search.R:0
@@ -964,9 +965,8 @@ msgstr "kann keinen BioC-Spiegelserver nicht-interaktiv wählen"
 
 #. R/strcapture.R: gettextf("cannot coerce %s to TRUE or FALSE", sQuote(x))
 #: R/strcapture.R:0
-#, fuzzy
 msgid "cannot coerce %s to TRUE or FALSE"
-msgstr "kann %s nicht in booleschen Wert unwandeln"
+msgstr "kann %s nicht in TRUE oder FALSE umwandeln"
 
 #. R/roman.R: stop("cannot coerce 'x' to roman")
 #: R/roman.R:0
@@ -1298,7 +1298,6 @@ msgstr "leite 'repos = NULL' aus 'pkgs' ab"
 
 #. R/packages2.R: gettextf("installation of %d packages failed:\n  %s", n, msg)
 #: R/packages2.R:0
-#, fuzzy
 msgid ""
 "installation of %d packages failed:\n"
 "  %s"
@@ -1308,17 +1307,13 @@ msgstr ""
 
 #. R/packages2.R: gettextf("installation of %d packages failed:  %s", n, msg)
 #: R/packages2.R:0
-#, fuzzy
 msgid "installation of %d packages failed:  %s"
-msgstr ""
-"Installation eines oder mehrerer Pakete schlug fehl,\n"
-" vermutlich %s"
+msgstr "Installation von %d Paketen schlug fehl: %s"
 
 #. R/packages2.R: gettextf("installation of package %s failed", sQuote(failed))
 #: R/packages2.R:0
-#, fuzzy
 msgid "installation of package %s failed"
-msgstr "Download von Paket %s fehlgeschlagen"
+msgstr "Installation von Paket %s fehlgeschlagen"
 
 #. R/packages2.R: gettextf("installation of package %s had non-zero exit status",     sQuote(update[i, 1L]))
 #: R/packages2.R:0
@@ -1354,11 +1349,10 @@ msgstr "ungültiges 'n' - length(n) muss <= length(dim(x)), hat %d > %d"
 #. R/head.R: gettext("invalid 'n' - must be numeric, possibly NA.")
 #: R/head.R:0
 msgid "invalid 'n' - must be numeric, possibly NA."
-msgstr ""
+msgstr "ungültiges 'n' - muss numerisch sein, möglicherweise NA"
 
 #. R/head.R: gettext("invalid 'n' - must contain at least one non-missing element, got none.")
 #: R/head.R:0
-#, fuzzy
 msgid "invalid 'n' - must contain at least one non-missing element, got none."
 msgstr "ungültiges 'n' - muss mindestens ein nicht-fehlendes Element enthalten, hat keines"
 
@@ -1423,9 +1417,8 @@ msgstr "unzulässige Eingabematrix"
 #. R/unix/download.file.R: stop("invalid method: ", method)
 #. R/windows/download.file.R: stop("invalid method: ", method)
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-#, fuzzy
 msgid "invalid method:"
-msgstr "unzulässiges Format"
+msgstr "unzulässige Methode:"
 
 #. R/tar.R: stop("invalid name field in tarball")
 #: R/tar.R:0
@@ -1445,9 +1438,8 @@ msgstr "ungültige numerische 'as.is' Expression"
 
 #. R/hashtab.R: stop("invalid object for 'as.environment'")
 #: R/hashtab.R:0
-#, fuzzy
 msgid "invalid object for 'as.environment'"
-msgstr "ungültiges 'socket' Argument"
+msgstr "ungültiges Objekt für 'as.environment'"
 
 #. R/tar.R: stop("invalid octal digit")
 #: R/tar.R:0
@@ -1546,7 +1538,7 @@ msgstr "es muss 'max' > 'min' sein"
 #. R/citation.R: gettext("must have some non-empty fields")
 #: R/citation.R:0
 msgid "must have some non-empty fields"
-msgstr ""
+msgstr "muss nicht leere Felder haben"
 
 #. R/unix/create.post.R: stop("must specify 'address'")
 #. R/windows/create.post.R: stop("must specify 'address'")
@@ -1731,7 +1723,7 @@ msgstr "Paket %s hat leere hsearch Daten - seltsam"
 #. R/citation.R: gettextf("package %s has no %s file: only auto-generation is possible",     sQuote(package), sQuote("CITATION"))
 #: R/citation.R:0
 msgid "package %s has no %s file: only auto-generation is possible"
-msgstr ""
+msgstr "Paket %s hat keine %s Datei: nur Autogenerierung möglich"
 
 #. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
@@ -1849,12 +1841,12 @@ msgstr "socket nicht etabliert"
 #. R/objects.R: message("some methods may be unavailable outside of their namespace")
 #: R/objects.R:0
 msgid "some methods may be unavailable outside of their namespace"
-msgstr ""
+msgstr "einige Methoden sind eventuell niccht außerhalb ihres Namensraums verfügbar"
 
 #. R/RSiteSearch.R: warning("some options in argument 'restrict' were not recognized and hence ignored")
 #: R/RSiteSearch.R:0
 msgid "some options in argument 'restrict' were not recognized and hence ignored"
-msgstr ""
+msgstr "einige Optionen im Argument 'restrict' wurden nicht erkannt und deshalb ignoriert"
 
 #. R/packages2.R: message("source repository is unavailable to check versions")
 #: R/packages2.R:0
@@ -2164,15 +2156,16 @@ msgstr[1] ""
 #: R/citation.R:0
 msgid "Invalid ORCID iD: %s."
 msgid_plural "Invalid ORCID iDs: %s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ungültige ORCID ID: %s."
+msgstr[1] "Ungültige ORCID IDs: %s."
 
 #. R/citation.R: ngettext(length(bad), "Invalid ROR ID: %s.", "Invalid ROR IDs: %s.")
 #: R/citation.R:0
+#, fuzzy
 msgid "Invalid ROR ID: %s."
 msgid_plural "Invalid ROR IDs: %s."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ungültige ORCID ID: %s."
+msgstr[1] "Ungültige ORCID IDs: %s."
 
 #. R/citation.R: ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s.")
 #. R/citation.R: ngettext(length(pos[ind]), "Invalid role specification: %s.",     "Invalid role specifications: %s.")
@@ -2291,11 +2284,10 @@ msgstr[1] "Objekte '%s' nicht gefunden"
 
 #. R/packages.R: ngettext(sum(base), "package %s is a base package, and cannot be removed",     "packages %s are base packages, and cannot be removed")
 #: R/packages.R:0
-#, fuzzy
 msgid "package %s is a base package, and cannot be removed"
 msgid_plural "packages %s are base packages, and cannot be removed"
-msgstr[0] "Paket %s ist ein Basispaket und sollte nicht aktualisiert werden"
-msgstr[1] "Pakete %s sind Basispakete und sollten nicht aktualisiert werden"
+msgstr[0] "Paket %s ist ein Basispaket und kann nicht entfernt werden"
+msgstr[1] "Pakete %s sind Basispakete und können nicht entfernt werden"
 
 #. R/packages2.R: ngettext(sum(base), "package %s is a base package, and should not be updated",     "packages %s are base packages, and should not be updated")
 #: R/packages2.R:0
@@ -2325,20 +2317,8 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "Paket %s ist nicht verfügbar %s"
 msgstr[1] "Pakete %s sind nicht verfügbar %s"
 
-#~ msgid "path is empty"
-#~ msgstr "Pfad ist leer"
-
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "unzulässiges 'filter' Argument"
-
-#~ msgid "invalid 'type'"
-#~ msgstr "ungültiger 'type'"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "unzulässiges 'filters' Argument"
-
-#~ msgid "invalid %s argument"
-#~ msgstr "unzulässiges %s Argument"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "unzulässiges 'data' Argument"
@@ -2346,55 +2326,14 @@ msgstr[1] "Pakete %s sind nicht verfügbar %s"
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "unzuässiges 'modes' Argument"
 
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "ungültiges 'socket' Argument"
-
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "unzulässiges 'tarfile' Argument"
-
 #~ msgid "invalid 'x' argument"
 #~ msgstr "unzulässiges 'x' Argument"
-
-#~ msgid "cannot choose a"
-#~ msgstr "kann nicht wählen"
-
-#~ msgid "mirror non-interactively"
-#~ msgstr "mirror nicht interaktiv"
-
-#~ msgid "'memory.limit()' is Windows-specific"
-#~ msgstr "'memory.limit()' ist spezifisch für Windows"
-
-#~ msgid "'memory.size()' is Windows-specific"
-#~ msgstr "'memory.size()' ist spezifisch für Windows"
-
-#, fuzzy
-#~ msgid "argument %s must be a character string"
-#~ msgstr "Argument %s muss einzelne Zeichkette sein"
-
-#~ msgid "invalid 'type'; must be a character string"
-#~ msgstr "ungültiger 'type'; muss eine Zeichenkette sein"
-
-#~ msgid ""
-#~ "tail(., addrownums = V) is deprecated.\n"
-#~ "Use"
-#~ msgstr ""
-#~ "tail(., addrownums = V) ist veraltet.\n"
-#~ "Nutze"
 
 #~ msgid "tail(., keepnums = V) instead."
 #~ msgstr "stattdessen tail(., keepnums = V)."
 
-#~ msgid "bzip2"
-#~ msgstr "bzip2"
-
-#~ msgid "gzip"
-#~ msgstr "gzip"
-
-#~ msgid "xz"
-#~ msgstr "xz"
-
-#~ msgid ","
-#~ msgstr ","
+#~ msgid "tail(., addrownums=.) is"
+#~ msgstr "tail(., addrownums=.) ist"
 
 #~ msgid ""
 #~ "deprecated.\n"
@@ -2403,14 +2342,57 @@ msgstr[1] "Pakete %s sind nicht verfügbar %s"
 #~ "veraltet.\n"
 #~ "Nutze"
 
-#~ msgid "tail(., addrownums=.) is"
-#~ msgstr "tail(., addrownums=.) ist"
-
 #~ msgid "tail(., keepnums=.) instead."
 #~ msgstr "stattdessen tail(., keepnums=.)."
 
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "unzulässiges 'filters' Argument"
+
+#~ msgid "invalid 'type'"
+#~ msgstr "ungültiger 'type'"
+
+#~ msgid "cannot choose a"
+#~ msgstr "kann nicht wählen"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "mirror nicht interaktiv"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "ungültiges 'socket' Argument"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "unzulässiges 'tarfile' Argument"
+
+#~ msgid "gzip"
+#~ msgstr "gzip"
+
+#~ msgid "bzip2"
+#~ msgstr "bzip2"
+
+#~ msgid "xz"
+#~ msgstr "xz"
+
+#~ msgid "path is empty"
+#~ msgstr "Pfad ist leer"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()' ist spezifisch für Windows"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' ist spezifisch für Windows"
+
 #~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 #~ msgstr "Es ist empfohlen %s/%s anstelle von %s/%s/%s zu nutzen."
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "Argument %s muss einzelne Zeichkette sein"
+
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "ungültiger 'type'; muss eine Zeichenkette sein"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr "Datei 'filelist' fehlt für Verzeichnis %s"

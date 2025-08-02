@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:31+0200\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -800,12 +800,12 @@ msgstr "Tentative de libération d'un masque inexistant"
 msgid "Invalid font path: \"%s\""
 msgstr "paramètre 'fonts' incorrect dans %s"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "échec d'allocation de la liste de polices"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -814,19 +814,19 @@ msgstr "échec d'allocation de la liste de polices"
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "taille de périphérique quartz() incorrecte"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "impossible de créer une description du périphérique"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "impossible de créer le périphérique cible quartz(), le type fourni n'est peut-être pas supporté"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "Périphérique Quartz non disponible sur cette architecture"
 
@@ -1144,28 +1144,12 @@ msgstr "échec d'allocation de définitions"
 msgid "Font file not found; matching font family and face"
 msgstr "famille de police introuvable dans la base de données des polices Windows"
 
-#~ msgid "invalid 'file' argument"
-#~ msgstr "argument 'file' incorrect"
-
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "valeur incorrecte de 'maxColorValue'"
 
 #, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "nom de fichier trop long dans %s()"
-
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "nom de fichier trop long dans l'appel à jpeg()"
-
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "nom de fichier trop long dans l'appel tiff()"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "nom de fichier trop long dans l'appel à win.metafile()"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "valeur incorrecte de '%s'"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "trop de couleurs pour xfig()"
@@ -1199,8 +1183,17 @@ msgstr "famille de police introuvable dans la base de données des polices Windo
 #~ msgstr "nom de fichier vide"
 
 #, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "impossible d'utiliser l'encodage '%s'"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "valeur incorrecte de '%s'"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "argument 'file' incorrect"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nom de fichier trop long dans l'appel à jpeg()"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nom de fichier trop long dans l'appel tiff()"
 
 #~ msgid "invalid argument"
 #~ msgstr "argument incorrect"

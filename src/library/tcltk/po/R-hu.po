@@ -16,7 +16,6 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
-#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "a 'filters' egy kétoszlopos karakter mátrix kell hogy legyen"
 
@@ -62,7 +61,6 @@ msgstr "Súgó"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Help topic:"
 msgstr "Súgó téma:"
 
@@ -73,7 +71,6 @@ msgstr "Csomagok telepítése a CRAN-ról"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "Interaktív lineáris illesztés"
 
@@ -84,7 +81,6 @@ msgstr "Betölt"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Load packages"
 msgstr "Csomagok betöltése"
 
@@ -115,25 +111,21 @@ msgstr "R-GYIK"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Save workspace"
-msgstr "Ne mentse a munkafolyamatot"
+msgstr "Munkafolyamat mentése"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Source R code"
 msgstr "R forráskód"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
-#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "A(z) '%s' Tcl csomag nem található"
 
 #. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
 #: R/windows/zzz.R:0
-#, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "A Tcl/Tk támogatás fájljai nincsenek telepítve"
 
@@ -149,7 +141,6 @@ msgstr "A tkGUI nem elérhető Windows-on"
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
-#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "nem változtathatók meg a Tcl tömb nevei"
 
@@ -172,7 +163,3 @@ msgstr "t-próba"
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr ""
-
-#, fuzzy
-#~ msgid "gettext(\"Save workspace\")"
-#~ msgstr "Munkafolyamat mentése"

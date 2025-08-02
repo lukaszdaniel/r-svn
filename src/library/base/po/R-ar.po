@@ -38,9 +38,8 @@ msgstr ""
 
 #. R/attach.R: gettextf("%s converted to character string", sQuote(name))
 #: R/attach.R:0
-#, fuzzy
 msgid "%s converted to character string"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".onDetach", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
 #. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".Last.lib", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
@@ -132,15 +131,13 @@ msgstr "\"‎%s\" ليس اختصارا صالحا ل RNG"
 #. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
 #. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
 #: R/RNG.R:0
-#, fuzzy
 msgid "'%s' is not a valid choice"
-msgstr "\"‎%s\" ليس اختصارا صالحا ل RNG"
+msgstr ""
 
 #. R/source.R: gettextf("'%s' is not an existing file", file)
 #: R/source.R:0
-#, fuzzy
 msgid "'%s' is not an existing file"
-msgstr "\"‎%s\" ليس اختصارا صالحا ل RNG"
+msgstr ""
 
 #. R/notyet.R: gettextf("'%s' is not implemented yet", as.character(sys.call(sys.parent())[[1L]]))
 #: R/notyet.R:0
@@ -184,9 +181,8 @@ msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "to", "POSIXt")
 #. R/datetime.R: gettextf("'%s' must be a \"%s\" object", "from", "POSIXt")
 #: R/datetime.R:0
-#, fuzzy
 msgid "'%s' must be a \"%s\" object"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
@@ -208,9 +204,8 @@ msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.names")
 #: R/all.equal.R:0
-#, fuzzy
 msgid "'%s' must be logical"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/dates.R: gettextf("'%s' must be of length 1", "length.out")
 #. R/dates.R: gettextf("'%s' must be of length 1", "by")
@@ -232,8 +227,8 @@ msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
 msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
@@ -281,15 +276,13 @@ msgstr ""
 
 #. R/match.R: stop("'arg' must be NULL or a character vector")
 #: R/match.R:0
-#, fuzzy
 msgid "'arg' must be NULL or a character vector"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
-#, fuzzy
 msgid "'arg' must be of length >= 1"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/format.R: gettextf("'big.mark' and 'decimal.mark' are both '%s', which could be confusing",     big.mark)
 #: R/format.R:0
@@ -298,9 +291,8 @@ msgstr ""
 
 #. R/tabulate.R: stop("'bin' must be numeric or a factor")
 #: R/tabulate.R:0
-#, fuzzy
 msgid "'bin' must be numeric or a factor"
-msgstr "الوسيط إلى \"La.svd\" يجب أن يكون رقمي أو معقد"
+msgstr ""
 
 #. R/cut.R: stop("'breaks' are not unique")
 #: R/cut.R:0
@@ -355,15 +347,13 @@ msgstr ""
 
 #. R/load.R: stop("'compress' must be logical or character")
 #: R/load.R:0
-#, fuzzy
 msgid "'compress' must be logical or character"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/serialize.R: stop("'connection' must be a connection")
 #: R/serialize.R:0
-#, fuzzy
 msgid "'connection' must be a connection"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/sort.R: stop("'decreasing' must be a length-1 logical vector.\nDid you intend to set 'partial'?")
 #: R/sort.R:0
@@ -394,9 +384,8 @@ msgstr ""
 
 #. R/array.R: stop("'dim' cannot be of length 0")
 #: R/array.R:0
-#, fuzzy
 msgid "'dim' cannot be of length 0"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/array.R: stop("'dim' specifies too large an array")
 #: R/array.R:0
@@ -430,16 +419,14 @@ msgstr ""
 
 #. R/sink.R: stop("'file' must be NULL, a connection or a character string")
 #: R/sink.R:0
-#, fuzzy
 msgid "'file' must be NULL, a connection or a character string"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/dcf.R: stop("'file' must be a character string or connection")
 #. R/scan.R: stop("'file' must be a character string or connection")
 #: R/dcf.R:0 R/scan.R:0
-#, fuzzy
 msgid "'file' must be a character string or connection"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/load.R: stop("'file' must be specified")
 #: R/load.R:0
@@ -468,9 +455,8 @@ msgstr ""
 
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
-#, fuzzy
 msgid "'from' must be raw or character"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/formals.R: warning("'fun' is not a function")
 #: R/formals.R:0
@@ -509,15 +495,13 @@ msgstr ""
 
 #. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
 #: R/unix/system.unix.R:0
-#, fuzzy
 msgid "'input' must be a character vector or 'NULL'"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/match.R: stop("'input' must have length 1")
 #: R/match.R:0
-#, fuzzy
 msgid "'input' must have length 1"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/format.R: stop("'input.d.mark' has no characters")
 #: R/format.R:0
@@ -595,9 +579,8 @@ msgstr ""
 
 #. R/unlist.R: stop("'recursive' must be a length-1 vector")
 #: R/unlist.R:0
-#, fuzzy
 msgid "'recursive' must be a length-1 vector"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
@@ -627,9 +610,8 @@ msgstr ""
 
 #. R/warnings.R: stop("'tags' must be a character vector of the same length as 'x'")
 #: R/warnings.R:0
-#, fuzzy
 msgid "'tags' must be a character vector of the same length as 'x'"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/datetime.R: stop("'tim' is not character or numeric")
 #: R/datetime.R:0
@@ -653,9 +635,8 @@ msgstr ""
 
 #. R/mean.R: stop("'trim' must be numeric of length one")
 #: R/mean.R:0
-#, fuzzy
 msgid "'trim' must be numeric of length one"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
@@ -674,9 +655,8 @@ msgstr ""
 
 #. R/attr.R: stop("'value' must be a list")
 #: R/attr.R:0
-#, fuzzy
 msgid "'value' must be a list"
-msgstr "الوسيطة الثاني يجب أن يكون قائمة"
+msgstr ""
 
 #. R/findInt.R: stop("'vec' must be sorted non-decreasingly and not contain NAs")
 #: R/findInt.R:0
@@ -695,9 +675,8 @@ msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
-#, fuzzy
 msgid "'which' must be character or numeric"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -747,9 +726,8 @@ msgstr ""
 
 #. R/det.R: stop("'x' must be a square matrix")
 #: R/det.R:0
-#, fuzzy
 msgid "'x' must be a square matrix"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/rle.R: stop("'x' must be a vector of an atomic type")
 #: R/rle.R:0
@@ -908,9 +886,8 @@ msgstr ""
 
 #. R/rm.R: stop("... must contain names or character strings")
 #: R/rm.R:0
-#, fuzzy
 msgid "... must contain names or character strings"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/eigen.R: stop("0 x 0 matrix")
 #: R/eigen.R:0
@@ -1265,15 +1242,13 @@ msgstr ""
 
 #. R/getenv.R: stop("all arguments must be named")
 #: R/getenv.R:0
-#, fuzzy
 msgid "all arguments must be named"
-msgstr "الوسيطة الثاني يجب أن يكون قائمة"
+msgstr ""
 
 #. R/table.R: stop("all arguments must have the same length")
 #: R/table.R:0
-#, fuzzy
 msgid "all arguments must have the same length"
-msgstr "الوسيطة الثاني يجب أن يكون قائمة"
+msgstr ""
 
 #. R/dataframe.R: stop("all variables should have the same length")
 #: R/dataframe.R:0
@@ -1342,9 +1317,8 @@ msgstr ""
 
 #. R/tapply.R: stop("arguments must have same length")
 #: R/tapply.R:0
-#, fuzzy
 msgid "arguments must have same length"
-msgstr "الوسيطة الثاني يجب أن يكون قائمة"
+msgstr ""
 
 #. R/datetime.R: warning("as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?")
 #: R/datetime.R:0
@@ -1540,9 +1514,8 @@ msgstr ""
 
 #. R/datetime.R: stop("component subscript must be a character string")
 #: R/datetime.R:0
-#, fuzzy
 msgid "component subscript must be a character string"
-msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
+msgstr ""
 
 #. R/conditions.R: stop("condition handlers must be functions")
 #: R/conditions.R:0
@@ -1708,9 +1681,8 @@ msgstr ""
 
 #. R/qr.R: stop("first argument must be a QR decomposition")
 #: R/qr.R:0
-#, fuzzy
 msgid "first argument must be a QR decomposition"
-msgstr "الوسيطة الثاني يجب أن يكون قائمة"
+msgstr ""
 
 #. R/seq.R: warning("first element used of 'length.out' argument")
 #: R/seq.R:0
@@ -1802,11 +1774,11 @@ msgstr ""
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
-#, fuzzy
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(z)")
@@ -1883,9 +1855,8 @@ msgstr ""
 #. R/dates.R: stop("invalid mode for 'by'")
 #. R/datetime.R: stop("invalid mode for 'by'")
 #: R/dates.R:0 R/datetime.R:0
-#, fuzzy
 msgid "invalid mode for 'by'"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
@@ -1894,9 +1865,8 @@ msgstr ""
 
 #. R/cut.R: stop("invalid number of intervals")
 #: R/cut.R:0
-#, fuzzy
 msgid "invalid number of intervals"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/library.R: stop("invalid package name")
 #: R/library.R:0
@@ -2012,9 +1982,8 @@ msgstr ""
 
 #. R/rowsum.R: warning("missing values for 'group'")
 #: R/rowsum.R:0
-#, fuzzy
 msgid "missing values for 'group'"
-msgstr "القيم لانهائية أو مفقودة في 'x'"
+msgstr ""
 
 #. R/dataframe.R: stop("missing values in 'row.names' are not allowed")
 #: R/dataframe.R:0
@@ -2562,9 +2531,8 @@ msgstr "الوسيطة الثاني يجب أن يكون قائمة"
 
 #. R/datetime.R: stop("second argument of / cannot be a \"difftime\" object")
 #: R/datetime.R:0
-#, fuzzy
 msgid "second argument of / cannot be a \"difftime\" object"
-msgstr "الوسيطة الثاني يجب أن يكون قائمة"
+msgstr ""
 
 #. R/unix/system.unix.R: warning("setting 'stdout = TRUE'")
 #: R/unix/system.unix.R:0
@@ -2850,10 +2818,6 @@ msgid "%d row in value to replace %d rows"
 msgid_plural "%d rows in value to replace %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s",     "%s function may not have arguments named %s", domain = "R-base")
 #: R/mapply.R:0
@@ -2872,10 +2836,6 @@ msgid "%s is not TRUE"
 msgid_plural "%s are not all TRUE"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/match.R: ngettext(length(chs <- unique(choices[nzchar(choices)])), "'arg' should be %s",     "'arg' should be one of %s")
 #: R/match.R:0
@@ -2894,10 +2854,6 @@ msgid "'by' must specify a uniquely valid column"
 msgid_plural "'by' must specify uniquely valid columns"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/namespace.R: ngettext(length(bad), "Function found when exporting methods from the namespace %s which is not S4 generic: %s",     "Functions found when exporting methods from the namespace %s which are not S4 generic: %s")
 #: R/namespace.R:0
@@ -2905,10 +2861,6 @@ msgid "Function found when exporting methods from the namespace %s which is not 
 msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/warnings.R: ngettext(nx, "In '%s':\n extra argument %s will be disregarded",     "In '%s':\n extra arguments %s will be disregarded", domain = "R-base")
 #: R/warnings.R:0
@@ -2931,10 +2883,6 @@ msgid "No methods found in package %s for request: %s when loading %s"
 msgid_plural "No methods found in package %s for requests: %s when loading %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in NAMESPACE but not found",     "S3 methods %s were declared in NAMESPACE but not found")
 #: R/namespace.R:0
@@ -2942,10 +2890,6 @@ msgid "S3 method %s was declared in NAMESPACE but not found"
 msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:",     "The following objects are masked _by_ %s:")
 #: R/attach.R:0
@@ -2953,10 +2897,6 @@ msgid "The following object is masked _by_ %s:"
 msgid_plural "The following objects are masked _by_ %s:"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/attach.R: ngettext(length(same), "The following object is masked from %s:",     "The following objects are masked from %s:")
 #: R/attach.R:0
@@ -2964,10 +2904,6 @@ msgid "The following object is masked from %s:"
 msgid_plural "The following objects are masked from %s:"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/warnings.R: ngettext(n, "Warning message:\n", "Warning messages:\n", domain = "R-base")
 #: R/warnings.R:0
@@ -2975,10 +2911,6 @@ msgid "Warning message:\n"
 msgid_plural "Warning messages:\n"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'",     "classes %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
@@ -2986,10 +2918,6 @@ msgid "class %s is not exported by 'namespace:%s'"
 msgid_plural "classes %s are not exported by 'namespace:%s'"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(n, "data frame with 0 columns and %d row", "data frame with 0 columns and %d rows")
 #: R/dataframe.R:0
@@ -2997,10 +2925,6 @@ msgid "data frame with 0 columns and %d row"
 msgid_plural "data frame with 0 columns and %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/New-Internal.R: ngettext(as.integer(sum(is.na(opts))), "deparse option %s is not recognized",     "deparse options %s are not recognized", domain = "R-base")
 #: R/New-Internal.R:0
@@ -3008,10 +2932,6 @@ msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row",     "invalid 'row.names', length %d for a data frame with %d rows")
 #: R/dataframe.R:0
@@ -3019,10 +2939,6 @@ msgid "invalid 'row.names', length %d for a data frame with %d row"
 msgid_plural "invalid 'row.names', length %d for a data frame with %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/library.R: ngettext(length(nopkgs), "library %s contains no packages", "libraries %s contain no packages",     domain = "R-base")
 #: R/library.R:0
@@ -3030,10 +2946,6 @@ msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ",     "non-numeric-alike variables in data frame: ", domain = "R-base")
 #: R/dataframe.R:0
@@ -3063,10 +2975,6 @@ msgid "object %s is not exported by 'namespace:%s'"
 msgid_plural "objects %s are not exported by 'namespace:%s'"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/load.R: ngettext(n, "object %s not found", "objects %s not found")
 #: R/load.R:0
@@ -3074,10 +2982,6 @@ msgid "object %s not found"
 msgid_plural "objects %s not found"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded")
 #: R/library.R:0
@@ -3085,10 +2989,6 @@ msgid "package %s is not loaded"
 msgid_plural "packages %s are not loaded"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/namespace.R: ngettext(sum(ex), "previous export '%s' is being replaced", "previous exports '%s' are being replaced")
 #: R/namespace.R:0
@@ -3096,10 +2996,6 @@ msgid "previous export '%s' is being replaced"
 msgid_plural "previous exports '%s' are being replaced"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(ncolv, "provided %d variable to replace %d variables",     "provided %d variables to replace %d variables")
 #: R/dataframe.R:0
@@ -3107,10 +3003,6 @@ msgid "provided %d variable to replace %d variables"
 msgid_plural "provided %d variables to replace %d variables"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(nrowv, "replacement data has %d row to replace %d rows",     "replacement data has %d rows to replace %d rows")
 #: R/dataframe.R:0
@@ -3118,10 +3010,6 @@ msgid "replacement data has %d row to replace %d rows"
 msgid_plural "replacement data has %d rows to replace %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d has %d row to replace %d rows",     "replacement element %d has %d rows to replace %d rows")
 #: R/dataframe.R:0
@@ -3129,10 +3017,6 @@ msgid "replacement element %d has %d row to replace %d rows"
 msgid_plural "replacement element %d has %d rows to replace %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d has %d row, need %d", "replacement element %d has %d rows, need %d")
 #: R/dataframe.R:0
@@ -3140,10 +3024,6 @@ msgid "replacement element %d has %d row, need %d"
 msgid_plural "replacement element %d has %d rows, need %d"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(N, "replacement element %d is a matrix/data frame of %d row, need %d",     "replacement element %d is a matrix/data frame of %d rows, need %d")
 #: R/dataframe.R:0
@@ -3151,10 +3031,6 @@ msgid "replacement element %d is a matrix/data frame of %d row, need %d"
 msgid_plural "replacement element %d is a matrix/data frame of %d rows, need %d"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(m, "replacement has %d item, need %d", "replacement has %d items, need %d")
 #: R/dataframe.R:0
@@ -3162,10 +3038,6 @@ msgid "replacement has %d item, need %d"
 msgid_plural "replacement has %d items, need %d"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(N, "replacement has %d row, data has %d", "replacement has %d rows, data has %d")
 #: R/dataframe.R:0
@@ -3173,10 +3045,6 @@ msgid "replacement has %d row, data has %d"
 msgid_plural "replacement has %d rows, data has %d"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/namespace.R: ngettext(sum(!found), "requested method not found in environment/package %s: %s when loading %s",     "requested methods not found in environment/package %s: %s when loading %s")
 #: R/namespace.R:0
@@ -3184,10 +3052,6 @@ msgid "requested method not found in environment/package %s: %s when loading %s"
 msgid_plural "requested methods not found in environment/package %s: %s when loading %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dataframe.R: ngettext(length(row.names), "supplied %d row name for %d rows",     "supplied %d row names for %d rows")
 #: R/dataframe.R:0
@@ -3195,10 +3059,6 @@ msgid "supplied %d row name for %d rows"
 msgid_plural "supplied %d row names for %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/library.R: ngettext(length(package), "there is no package called", "there are no packages called")
 #: R/library.R:0
@@ -3206,23 +3066,3 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, fuzzy
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
-
-#, fuzzy
-#~ msgid "invalid 'value'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"
-
-#, fuzzy
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "يجب أن يكون \"normal.kind\" سلسلة أحرف بطول 1"

@@ -145,9 +145,8 @@ msgstr "%s()는 대상 환경내에서 제네릭 함수가 아닙니다 -- 메�
 
 #. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is defunct.",     dQuote(this))
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "%s, along with other use of the \"MethodsList\" metadata objects, is defunct."
-msgstr "\"MethodsList\" 메타데이터 객체의 다른 용도에 함께 이용되는 %s는 더 이상 제공되지 않습니다."
+msgstr ""
 
 #. R/MethodsList.R: gettextf("%s, along with other use of the \"MethodsList\" metadata objects, is deprecated.",     dQuote(this))
 #: R/MethodsList.R:0
@@ -166,15 +165,13 @@ msgstr "'Class'는 반드시 유효한 클래스 정의 또는 클래스 이어�
 
 #. R/oldClass.R: gettextf("'S3Class' can only assign to S4 objects that extend \"oldClass\"; not true of class %s",     dQuote(class(object)))
 #: R/oldClass.R:0
-#, fuzzy
 msgid "'S3Class' can only assign to S4 objects that extend \"oldClass\"; not true of class %s"
-msgstr "'S3Class' 인자는 반드시 슈퍼클래스 %1$s이어야 합니다; 그러나 클래스 %2$s는 그렇지 않습니다"
+msgstr ""
 
 #. R/oldClass.R: gettextf("'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s",     dQuote("oldClass"), dQuote(class(object)))
 #: R/oldClass.R:0
-#, fuzzy
 msgid "'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s"
-msgstr "S3Part()는 setOldCLass(), 기본 클래스, 그리고 이들의 서브클래스들에 의해서 정의된 클래스들을 위해서만 정의되어 집니다; 그러나 클래스 %s는 그렇지 않습니다"
+msgstr ""
 
 #. R/as.R: gettextf("'as' method should have one argument, or match the arguments of coerce(): got  (%s)",     paste(formalArgs(def), collapse = ", "))
 #: R/as.R:0
@@ -380,15 +377,13 @@ msgstr ""
 
 #. R/refClass.R: gettextf("Methods not found: %s", paste(dQuote(methods[missing]),     collapse = ", "))
 #: R/refClass.R:0
-#, fuzzy
 msgid "Methods not found: %s"
-msgstr "객체 %s를 찾을 수 없습니다"
+msgstr ""
 
 #. R/trace.R: gettextf("Modified functions inserted through trace(): %s", paste(objectsDone,     collapse = ", "))
 #: R/trace.R:0
-#, fuzzy
 msgid "Modified functions inserted through trace(): %s"
-msgstr "다음과 같은 새로운 함수들은 현재 삽입될 수 없습니다 (추적되어지기 때문입니다): %s"
+msgstr ""
 
 #. R/trace.R: gettextf("New functions are not currently inserted (not untraceable): %s",     paste(newObjects, collapse = ", "))
 #: R/trace.R:0
@@ -407,9 +402,8 @@ msgstr ""
 
 #. R/methodsTable.R: gettextf("No simply inherited methods found for function %s; using non-simple method",     sQuote(fdef@generic))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "No simply inherited methods found for function %s; using non-simple method"
-msgstr "함수 %s와 서명 %s를 위한 메소드를 찾을 수 없습니다"
+msgstr ""
 
 #. R/trace.R: gettextf("Non-function objects are not currently inserted (not traceable): %s",     paste(notTraceable, collapse = ", "))
 #: R/trace.R:0
@@ -418,12 +412,11 @@ msgstr "다음과 같은 함수가 아닌 객체는 현재 삽입될 수 없습�
 
 #. R/methodsTable.R: gettextf("Note: method with signature %s chosen for function %s,\n target signature %s.\n %s would also be valid",     sQuote(selected), sQuote(attr(cond, "generic")), sQuote(attr(cond,         "target")), paste0("\"", possible[is.na(match(possible,         selected))], "\"", collapse = ", "))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid ""
 "Note: method with signature %s chosen for function %s,\n"
 " target signature %s.\n"
 " %s would also be valid"
-msgstr "함수 %s와 서명 %s를 위한 메소드는 확정되어 있고 재정의 될 수 없습니다"
+msgstr ""
 
 #. R/RClassUtils.R: gettextf("Note: some superclasses of class %s in package %s have duplicate definitions.  This definition is not being treated as equivalent to that from package %s",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 #: R/RClassUtils.R:0
@@ -637,9 +630,8 @@ msgstr "인자 'names'와 'signature'는 같은 길이를 가져야 합니다"
 
 #. R/refClass.R: stop("arguments must all be character string names of fields")
 #: R/refClass.R:0
-#, fuzzy
 msgid "arguments must all be character string names of fields"
-msgstr "인자 %1$s는 반드시 리스트 또는 문자형 벡터이어야 합니다; 그러나 클래스 %2$s 객체를 가집니다"
+msgstr ""
 
 #. R/refClass.R: stop("arguments to methods() must be named, or one named list")
 #: R/refClass.R:0
@@ -653,9 +645,8 @@ msgstr ""
 
 #. R/trace.R: gettextf("assigning over the binding of symbol %s in environment/package %s",     sQuote(what), sQuote(pname))
 #: R/trace.R:0
-#, fuzzy
 msgid "assigning over the binding of symbol %s in environment/package %s"
-msgstr "잠겨있는 환경/패키지 %2$s내에서 %1$s에 대한 메소드를 제거할 수 없습니다"
+msgstr ""
 
 #. R/SClasses.R: gettextf("assignment of an object of class %s is not valid for @%s in an object of class %s; is(value, \"%s\") is not TRUE",     dQuote(valueClass), sQuote(name), dQuote(cl), slotClass)
 #: R/SClasses.R:0
@@ -674,15 +665,13 @@ msgstr "요소 %d에 정의된 클래스가 올바르지 않습니다 (단일 �
 
 #. R/methodsTable.R: gettextf("bad method object stored in method table, class %s",     dQuote(class(current)))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "bad method object stored in method table, class %s"
-msgstr "%s에 대하여 클래스 %s에 일치하는 메소드가 없습니다"
+msgstr ""
 
 #. R/NextMethod.R: gettextf("bad object found as method (class %s)", dQuote(class(method)))
 #: R/NextMethod.R:0
-#, fuzzy
 msgid "bad object found as method (class %s)"
-msgstr "클래스 %s의 객체"
+msgstr ""
 
 #. R/is.R: gettext("both classes must be defined")
 #: R/is.R:0
@@ -741,9 +730,8 @@ msgstr "'.Data'를 지정할 때는 matrix() 인자들을 지정할 수 없습�
 
 #. R/trace.R: gettextf("cannot untrace method for %s; no method defined for this signature: %s",     sQuote(what), paste(signature, collapse = ", "))
 #: R/trace.R:0
-#, fuzzy
 msgid "cannot untrace method for %s; no method defined for this signature: %s"
-msgstr "다음의 함수들에 대하여 메소드들을 삽입할 수 없습니다 (소스에서 메소드표를 찾을 수 없기 때문입니다): %s"
+msgstr ""
 
 #. R/trace.R: stop("cannot use 'at' argument unless the function body has the form '{ ... }'")
 #: R/trace.R:0
@@ -943,9 +931,8 @@ msgstr ""
 
 #. R/SClasses.R: gettextf("error in contained classes (%s) for class %s; class definition removed from %s",     msg, dQuote(Class), sQuote(getPackageName(where)))
 #: R/SClasses.R:0
-#, fuzzy
 msgid "error in contained classes (%s) for class %s; class definition removed from %s"
-msgstr "클래스 %2$s의 서브 클래스 %1$s가 정의되지 않았습니다; 업데이트된 정의가 아닙니다"
+msgstr ""
 
 #. R/SClasses.R: gettextf("error in contained classes (%s) for class %s; previous definition restored to %s",     msg, dQuote(Class), sQuote(getPackageName(where)))
 #: R/SClasses.R:0
@@ -954,9 +941,8 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("error in load action %s for package %s: %s: %s", aname,     getPackageName(where), callString, value$message)
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "error in load action %s for package %s: %s: %s"
-msgstr "%3$s내에 있는 패키지 %2$s로부터 %1$s를 위한 제네릭 함수를 생성합니다"
+msgstr ""
 
 #. R/Methods.R: gettextf("error in updating S4 generic function %s; the function definition is not an S4 generic function (class %s)",     sQuote(f), dQuote(class(fdef)))
 #: R/Methods.R:0
@@ -965,9 +951,8 @@ msgstr "S4 제네릭 함수 %s를 업데이트 하던 중 에러가 발생했습
 
 #. R/RMethodUtils.R: gettextf("expanding the signature to include omitted arguments in definition: %s",     paste(sigNames[omittedSig], "= \"missing\"", collapse = ", "))
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "expanding the signature to include omitted arguments in definition: %s"
-msgstr "함수 %s와 서명 %s를 위한 메소드를 찾을 수 없습니다"
+msgstr ""
 
 #. R/addedFunctions.R: gettextf("expected a non-empty character string for argument 'name'")
 #: R/addedFunctions.R:0
@@ -987,15 +972,13 @@ msgstr ""
 
 #. R/oldClass.R: gettextf("explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s",     to, dQuote(class(from)[1L]))
 #: R/oldClass.R:0
-#, fuzzy
 msgid "explicit replacement not defined for as(x, \"%s\") <- value for old-style class %s"
-msgstr "클래스 %s에 대하여 'as(x, \"%s\") <- value'이기 때문에 'replace' 메소드는 정의되지 않았습니다"
+msgstr ""
 
 #. R/methodsTable.R: stop("failed to find expected group generic function: ", what)
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "failed to find expected group generic function:"
-msgstr "원래의 함수는 제네릭함수이기 때문에 사용될 수 없습니다"
+msgstr ""
 
 #. R/Methods.R: gettextf("fdef appears to be a generic function, but with generic name %s instead of %s",     sQuote(gen), sQuote(f))
 #: R/Methods.R:0
@@ -1020,9 +1003,8 @@ msgstr "항목 %1$s는 클래스 %2$s의 객체로서 제공되지 않았습니�
 
 #. R/Methods.R: gettextf("first argument should be the names of one of more generic functions (got object of class %s)",     dQuote(class(f)))
 #: R/Methods.R:0
-#, fuzzy
 msgid "first argument should be the names of one of more generic functions (got object of class %s)"
-msgstr "%s 인자는 반드시 NULL 또는 제네릭 함수의 객체이어야 합니다; 그러나 클래스 %s인 객체를 가집니다"
+msgstr ""
 
 #. R/RMethodUtils.R: gettextf("formal arguments (%s) omitted in the method definition cannot be in the signature",     bad2)
 #: R/RMethodUtils.R:0
@@ -1087,9 +1069,8 @@ msgstr "%1$s내에 있는 형식인자들을 변경하던 중, 기존의 인자�
 
 #. R/RClassUtils.R: gettextf("in constructing the prototype for class %s, slots in prototype and not in class: %s",     dQuote(className), paste(extra, collapse = ", "))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid "in constructing the prototype for class %s, slots in prototype and not in class: %s"
-msgstr "클래스 %s에 대한 프로토타입을 구축하는 과정에서: 프로토타입은 클래스 %s를 가집니다, 그러나 데이터 파트는 클래스 %s를 명시하고 있습니다"
+msgstr ""
 
 #. R/RClassUtils.R: gettextf("in constructing the prototype for class %s: prototype has class %s, but the data part specifies class %s",     dQuote(className), dQuote(.class1(prototype)), dQuote(dataPartClass))
 #: R/RClassUtils.R:0
@@ -1108,9 +1089,8 @@ msgstr "클래스 %s의 정의내에서, 슈퍼클래스 %s에 대한 정보가 
 
 #. R/RClassUtils.R: gettextf("in making the prototype for class %s elements of the prototype failed to match the corresponding slot class: %s",     dQuote(className), paste(pnames[check], "(class", .dQ(slotDefs[match(pnames[check],         slotNames)]), ")", collapse = ", "))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid "in making the prototype for class %s elements of the prototype failed to match the corresponding slot class: %s"
-msgstr "클래스 %s에 대한 프로토타입을 구축하는 과정에서: 프로토타입은 클래스 %s를 가집니다, 그러나 데이터 파트는 클래스 %s를 명시하고 있습니다"
+msgstr ""
 
 #. R/RMethodUtils.R: gettextf("in method for %s with signature %s: ", sQuote(f), sQuote(msig))
 #: R/RMethodUtils.R:0
@@ -1209,9 +1189,8 @@ msgstr "첫번째 인자가 잘못되었습니다: 디스패치내의 첫 번째
 
 #. R/methodsTable.R: gettextf("invalid group generic function in search for inherited method (class %s)",     dQuote(class(gen)))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "invalid group generic function in search for inherited method (class %s)"
-msgstr "다음의 상속된 클래스에 대한 정의를 찾을 수 없습니다: %s"
+msgstr ""
 
 #. R/languageEl.R: stop("invalid index for function argument")
 #: R/languageEl.R:0
@@ -1231,9 +1210,8 @@ msgstr "\"signature\" 인자에 대한 리스트내에 잘못된 구성요소가
 
 #. R/methodsTable.R: stop("invalid methods table request")
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "invalid methods table request"
-msgstr "메소드 부분리스트가 잘못되었습니다"
+msgstr ""
 
 #. R/MethodsListClass.R: gettextf("invalid object for formal method definition: type %s",     dQuote(typeof(def)))
 #: R/MethodsListClass.R:0
@@ -1242,9 +1220,8 @@ msgstr "형식 메소드 정의에 대한 객체가 올바르지 않습니다: �
 
 #. R/methodsTable.R: gettextf("invalid object in meta table of methods for %s, label %s, had class %s",     sQuote(generic@generic), sQuote(what), dQuote(class(obj)))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "invalid object in meta table of methods for %s, label %s, had class %s"
-msgstr "메소드 테이블 (%s)내에 잘못된 객체가 있습니다, 메소드가 와야 하는데, 클래스 %s 객체를 가집니다"
+msgstr ""
 
 #. R/methodsTable.R: gettextf("invalid object in methods table (%s), expected a method, got an object of class %s",     sQuote(what), dQuote(class(method)))
 #: R/methodsTable.R:0
@@ -1363,9 +1340,8 @@ msgstr "%s에 대한 여러개의 정의를 찾았습니다; 따라서 %s에 관
 
 #. R/RMethodUtils.R: gettextf("multiple direct matches: %s; using the first of these",     .pasteC(classes))
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "multiple direct matches: %s; using the first of these"
-msgstr "%s에 대한 여러개의 정의를 찾았습니다; 따라서 %s에 관계된 하나를 이용합니다"
+msgstr ""
 
 #. R/RMethodUtils.R: gettextf("multiple equivalent inherited matches: %s; using the first of these",     .pasteC(classes))
 #: R/RMethodUtils.R:0
@@ -1419,9 +1395,8 @@ msgstr "클래스 %s에 대하여 'as(x, \"%s\") <- value'이기 때문에 'repl
 
 #. R/trace.R: gettextf("no definition for object %s found in tracing environment",     sQuote(what))
 #: R/trace.R:0
-#, fuzzy
 msgid "no definition for object %s found in tracing environment"
-msgstr "%s에 대한 클래스 정의를 찾을 수 없습니다 (취해진 액션이 없습니다)"
+msgstr ""
 
 #. R/fixPrevious.R: gettextf("no definition for the class of %s (class %s) found",     sQuote(what), dQuote(class))
 #: R/fixPrevious.R:0
@@ -1534,15 +1509,13 @@ msgstr "서명 %s에 대한 메소드를 찾을 수 없습니다"
 
 #. R/trace.R: gettextf("no method in methods table for %s for signature %s",     sQuote(what), sQuote(signature))
 #: R/trace.R:0
-#, fuzzy
 msgid "no method in methods table for %s for signature %s"
-msgstr "서명 %s에 대한 메소드를 찾을 수 없습니다"
+msgstr ""
 
 #. R/as.R: gettextf("no method or default for as() replacement of %s with Class=\"%s\"",     dQuote(thisClass), Class)
 #: R/as.R:0
-#, fuzzy
 msgid "no method or default for as() replacement of %s with Class=\"%s\""
-msgstr "%1$s을 %2$s로 강제변환하는 메소드 또는 디폴트가 없습니다"
+msgstr ""
 
 #. R/as.R: gettextf("no method or default for coercing %s to %s", dQuote(thisClass),     dQuote(Class))
 #: R/as.R:0
@@ -1561,15 +1534,13 @@ msgstr "%s에 대한 메소드를 찾을 수 없습니다; 따라서 cacheGeneri
 
 #. R/methodsTable.R: gettextf("no methods table for generic %s from package %s in package %s",     sQuote(generic@generic), sQuote(generic@package), sQuote(getPackageName(where)))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "no methods table for generic %s from package %s in package %s"
-msgstr "%3$s내에 있는 패키지 %2$s로부터 %1$s를 위한 제네릭 함수를 생성합니다"
+msgstr ""
 
 #. R/addedFunctions.R: gettextf("no non-generic function %s found", sQuote(name))
 #: R/addedFunctions.R:0
-#, fuzzy
 msgid "no non-generic function %s found"
-msgstr "제네릭 함수 %s를 찾을 수 없습니다"
+msgstr ""
 
 #. R/SClasses.R: gettextf("no package name supplied and no class definition found for %s",     dQuote(className))
 #: R/SClasses.R:0
@@ -1588,9 +1559,8 @@ msgstr ""
 
 #. R/RMethodUtils.R: gettextf("non-function action: %s", sQuote(fname))
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "non-function action: %s"
-msgstr "로드 액션에 대하여 다음 함수들이 누락되었습니다: %s"
+msgstr ""
 
 #. R/Methods.R: gettextf("non-generic function '%s' given to findMethods()",     f)
 #: R/Methods.R:0
@@ -1725,9 +1695,8 @@ msgstr "클래스 %s의 정의를 복원합니다"
 
 #. R/trace.R: gettextf("setting a method over the binding of symbol %s in environment/package %s",     sQuote(what), sQuote(getPackageName(where)))
 #: R/trace.R:0
-#, fuzzy
 msgid "setting a method over the binding of symbol %s in environment/package %s"
-msgstr "잠겨있는 환경/패키지 %2$s내에서 %1$s에 대한 메소드를 제거할 수 없습니다"
+msgstr ""
 
 #. R/Methods.R: gettextf("signatures differ:  (%s), (%s)", paste(f1@signature,     collapse = ", "), paste(f2@signature, collapse = ", "))
 #: R/Methods.R:0
@@ -1762,9 +1731,8 @@ msgstr "제공된 패키지, %s,는 소스, %s로 부터 만들어진 패키지�
 
 #. R/methodsTable.R: gettextf("the \"ambiguousMethodSelection\" option should be a function to be called as the condition action; got an object of class %s",     dQuote(class(condAction)))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "the \"ambiguousMethodSelection\" option should be a function to be called as the condition action; got an object of class %s"
-msgstr "'setIs'에 전달되는 'coerce' 인자는 하나의 인자를 가지는 함수이어야 하는데, 클래스 %s인 객체를 가집니다"
+msgstr ""
 
 #. R/RMethodUtils.R: gettextf("the %s argument must be NULL or a generic function object; got an object of class %s",     sQuote("genericFunction"), dQuote(class(genericFunction)))
 #: R/RMethodUtils.R:0
@@ -1773,9 +1741,8 @@ msgstr "%s 인자는 반드시 NULL 또는 제네릭 함수의 객체이어야 �
 
 #. R/RClassUtils.R: gettextf("the '%s' list for class %s, includes an undefined class %s",     if (superClassCase) "superClass" else "subClass", dQuote(className),     dQuote(.className(by)))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid "the '%s' list for class %s, includes an undefined class %s"
-msgstr "클래스 %s는 정의되지 않은 클래스, %s를 확장합니다"
+msgstr ""
 
 #. R/ClassExtensions.R: gettextf("the 'S3Class' argument must be a superclass of %s:  not true of class %s",     dQuote(class(object)), dQuote(S3Class))
 #: R/ClassExtensions.R:0
@@ -1839,9 +1806,8 @@ msgstr ""
 
 #. R/trace.R: gettextf("the editing in trace() can only change the body of the function; got an object of class %s",     dQuote(class(def2)))
 #: R/trace.R:0
-#, fuzzy
 msgid "the editing in trace() can only change the body of the function; got an object of class %s"
-msgstr "메소드 정의가 올바르지 않습니다: 함수가 와야하는데, 클래스 %s를 가지고 있습니다"
+msgstr ""
 
 #. R/Methods.R: gettextf("the environment %s is locked; cannot assign methods for function %s",     sQuote(getPackageName(where)), sQuote(f))
 #: R/Methods.R:0
@@ -1929,21 +1895,18 @@ msgstr "%1$s내에 있는 형식인자들을 변경하고자 시도합니다, �
 
 #. R/methodsTable.R: gettextf("trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s",     what, i, paste(unlist(funs), collapse = ", "), paste(as.character(gnames),         collapse = ", "))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "trying to check signature length of generic '%s', but it is not a generic function: i = %d, funs = %s, gnames = %s"
-msgstr "메소드 서명을 제네릭 함수가 아닌 객체 (클래스 %s)에 매칭을 시도했습니다"
+msgstr ""
 
 #. R/methodsTable.R: gettextf("trying to check signature length of group generic '%s', but it is not a group generic",     what)
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "trying to check signature length of group generic '%s', but it is not a group generic"
-msgstr "메소드 서명을 제네릭 함수가 아닌 객체 (클래스 %s)에 매칭을 시도했습니다"
+msgstr ""
 
 #. R/methodsTable.R: stop("trying to find a methods table in a non-generic function")
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "trying to find a methods table in a non-generic function"
-msgstr "제네릭 함수 %s내에 있는 메소드 테이블이 올바르지 않거나 설정되지 않았습니다."
+msgstr ""
 
 #. R/MethodsList.R: gettextf("trying to match a method signature of class %s; expects a list or a character vector",     dQuote(class(signature)))
 #: R/MethodsList.R:0
@@ -1977,9 +1940,8 @@ msgstr "클래스 %s를 포함하고 있는 환경을 찾을 수 없습니다"
 
 #. R/methodsTable.R: gettextf("unable to find an inherited method for function %s for signature %s",     sQuote(fdef@generic), sQuote(cnames))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "unable to find an inherited method for function %s for signature %s"
-msgstr "함수 %s와 서명 %s를 위한 메소드를 찾을 수 없습니다"
+msgstr ""
 
 #. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 #: R/RClassUtils.R:0
@@ -2080,10 +2042,9 @@ msgstr[0] "클래스 %s는 클래스 %s (%s)로부터 누락된 슬롯입니다,
 
 #. R/SClasses.R: ngettext(length(dslots), "duplicated slot name: %s", "duplicated slot names: %s")
 #: R/SClasses.R:0
-#, fuzzy
 msgid "duplicated slot name: %s"
 msgid_plural "duplicated slot names: %s"
-msgstr[0] "다음과 같은 슬롯명이 중복되었습니다: %s"
+msgstr[0] ""
 
 #. R/methodsTable.R: ngettext(length(methods), "found %d equally good next method",     "found %d equally good next methods")
 #: R/methodsTable.R:0
@@ -2093,28 +2054,25 @@ msgstr[0] ""
 
 #. R/MethodsList.R: ngettext(sum(is.na(which)), "in the method signature for function %s invalid argument name in the signature: %s",     "in the method signature for function %s invalid argument names in the signature: %s")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "in the method signature for function %s invalid argument name in the signature: %s"
 msgid_plural "in the method signature for function %s invalid argument names in the signature: %s"
-msgstr[0] "함수 %s와 서명 %s를 위한 메소드를 찾을 수 없습니다"
+msgstr[0] ""
 
 #. R/SClasses.R: ngettext(sum(is.na(which)), "invalid name for slot of class %s: %s",     "invalid names for slots of class %s: %s")
 #: R/SClasses.R:0
-#, fuzzy
 msgid "invalid name for slot of class %s: %s"
 msgid_plural "invalid names for slots of class %s: %s"
-msgstr[0] "\"groupMembers\" 슬롯 (클래스 %s)내의 구성요소가 잘못되었습니다"
+msgstr[0] ""
 
 #. R/SClasses.R: ngettext(length(pkgs), "multiple definition of class %s visible (%s); using the definition\n   in package %s for %s",     "multiple definitions of class %s visible (%s); using the definition\n   in package %s for %s")
 #: R/SClasses.R:0
-#, fuzzy
 msgid ""
 "multiple definition of class %s visible (%s); using the definition\n"
 "   in package %s for %s"
 msgid_plural ""
 "multiple definitions of class %s visible (%s); using the definition\n"
 "   in package %s for %s"
-msgstr[0] "%s에 대한 여러개의 정의를 찾았습니다; 따라서 %s에 관계된 하나를 이용합니다"
+msgstr[0] ""
 
 #. R/RClassUtils.R: ngettext(sum(is.na(match(pnames, slots))), "named elements of prototype do not correspond to slot name: %s",     "named elements of prototype do not correspond to slot names: %s")
 #: R/RClassUtils.R:0
@@ -2124,24 +2082,21 @@ msgstr[0] ""
 
 #. R/MethodsList.R: ngettext(length(unknown), "no definition for class %s", "no definition for classes %s")
 #: R/MethodsList.R:0
-#, fuzzy
 msgid "no definition for class %s"
 msgid_plural "no definition for classes %s"
-msgstr[0] "클래스 %s에 대한 정의를 찾을 수 없습니다"
+msgstr[0] ""
 
 #. R/promptClass.R: ngettext(length(whereClass), "no definition of class %s in the specified position, %s, definition on : %s",     "no definition of class %s in the specified position, %s, definitions on : %s")
 #: R/promptClass.R:0
-#, fuzzy
 msgid "no definition of class %s in the specified position, %s, definition on : %s"
 msgid_plural "no definition of class %s in the specified position, %s, definitions on : %s"
-msgstr[0] "클래스 %2$s의 상세정의에서 슈퍼클래스 %1$s에 대한 정의를 찾을 수 없습니다"
+msgstr[0] ""
 
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #: R/RMethodUtils.R:0
-#, fuzzy
 msgid "non-argument found in the signature: %s"
 msgid_plural "non-arguments found in the signature: %s"
-msgstr[0] "서명 %s에 대한 메소드를 찾을 수 없습니다"
+msgstr[0] ""
 
 #. R/is.R: ngettext(length(bad), "slot in class %s must extend corresponding slot in class %s: fails for %s",     "slots in class %s must extend corresponding slots in class %s: fails for %s")
 #: R/is.R:0
@@ -2154,6 +2109,9 @@ msgstr[0] ""
 msgid "the formal argument of the generic function for %s (%s) differs from that of the non-generic to be used as the default (%s)"
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] ""
+
+#~ msgid "invalid method sublist"
+#~ msgstr "메소드 부분리스트가 잘못되었습니다"
 
 #~ msgid "%f is not a valid generic function: methods list was an object of class %s"
 #~ msgstr "%f는 유효한 제네릭 함수가 아닙니다: 메소드 리스트가 클래스 %s의 객체이기 때문입니다"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:16+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 14:56+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -170,8 +170,8 @@ msgstr "'%ls'를 표시하는데 문제가 발생했습니다"
 #: src/main/connections.cpp:5368 src/main/connections.cpp:5394
 #: src/main/connections.cpp:5553 src/main/connections.cpp:5851
 #: src/main/connections.cpp:5900 src/main/connections.cpp:5908
-#: src/main/connections.cpp:6759 src/main/connections.cpp:6786
-#: src/main/connections.cpp:6793 src/main/context.cpp:696
+#: src/main/connections.cpp:6773 src/main/connections.cpp:6800
+#: src/main/connections.cpp:6807 src/main/context.cpp:696
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
@@ -190,7 +190,7 @@ msgstr "'%ls'를 표시하는데 문제가 발생했습니다"
 #: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321
 #: src/main/internet.cpp:155 src/main/internet.cpp:169
 #: src/main/internet.cpp:194 src/main/internet.cpp:207
-#: src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4584
+#: src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4592
 #: src/main/objects.cpp:1803 src/main/objects.cpp:1805 src/main/paste.cpp:152
 #: src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
 #: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526
@@ -254,7 +254,7 @@ msgstr "지원되지 않는 Windows (윈도우즈) 버전입니다."
 #: src/gnuwin32/extra.cpp:341
 #, fuzzy, c-format
 msgid "cannot resolve current user or domain: '%s'"
-msgstr "파일 '%ls'를 열 수 없습니다: %s"
+msgstr "파일 '%s'을 지울 수 없습니다, 그 이유는 '%s'입니다"
 
 #: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879
 #: src/main/sysutils.cpp:690 src/main/unique.cpp:2209 src/main/util.cpp:1088
@@ -425,7 +425,7 @@ msgstr ""
 #: src/gnuwin32/front-ends/rcmdfn.cpp:432
 #, fuzzy
 msgid "Allocation error"
-msgstr "regcomp 에러: '%s'"
+msgstr "유효하지 않은 옵션 \"error\"입니다\n"
 
 #: src/gnuwin32/system.cpp:972
 #, fuzzy
@@ -477,7 +477,7 @@ msgstr "tmpfile 생성에 실패했습니다 -- TMPDIR 를 올바르게 지정�
 #: src/gnuwin32/system.cpp:1331
 #, fuzzy
 msgid "fwrite error in cmdlineoptions"
-msgstr "zip 파일로부터 추출중 쓰기 에러가 발생했습니다"
+msgstr "'gzcon' 커넥션에 쓰기 에러가 발생했습니다"
 
 #: src/gnuwin32/system.cpp:1353 src/unix/system.cpp:552
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
@@ -640,7 +640,7 @@ msgstr ""
 #: src/include/Rinlinedfuns.h:116
 #, fuzzy, c-format
 msgid "cannot get data pointer of '%s' objects"
-msgstr "디렉토리 '%ls'를 만들 수 없습니다. 그 이유는 '%s'입니다."
+msgstr "데이터를 저장할 수 없습니다 -- '%1$s'를 열 수 없습니다: %2$s"
 
 #: src/include/Rinlinedfuns.h:159 src/include/Rinlinedfuns.h:163
 #: src/include/Rinlinedfuns.h:166 src/include/Rinlinedfuns.h:169
@@ -773,7 +773,7 @@ msgstr ""
 #: src/main/altclasses.cpp:1282
 #, fuzzy
 msgid "mmap objects not supported on Windows yet"
-msgstr "아직까지는 지원되지 않는 긴 벡터들입니다: %s:%d"
+msgstr "'exdir'이 존재하지 않습니다"
 
 #: src/main/altclasses.cpp:1329
 #, fuzzy, c-format
@@ -1412,7 +1412,7 @@ msgstr "벡터의 크기는 NA 또는 NaN 일 수 없습니다"
 msgid "vector size cannot be infinite"
 msgstr "벡터의 크기는 무한할 수 없습니다"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:963
 #: src/main/sort.cpp:1578
 msgid "vector size specified is too large"
 msgstr "지정된 벡터의 크기가 너무 큽니다"
@@ -1456,7 +1456,7 @@ msgid "'%s' must be an environment"
 msgstr "'enclos'는 반드시 인바이런먼트이어야 합니다"
 
 #: src/main/builtin.cpp:374 src/main/builtin.cpp:407 src/main/builtin.cpp:421
-#: src/main/memory.cpp:4387
+#: src/main/memory.cpp:4395
 #, fuzzy, c-format
 msgid "'%s' is not an environment"
 msgstr "'parent'는 인바이런먼트가 아닙니다"
@@ -1522,34 +1522,34 @@ msgstr "유효하지 않은 값입니다"
 msgid "length of NULL cannot be changed"
 msgstr ""
 
-#: src/main/builtin.cpp:953 src/main/envir.cpp:2220 src/main/envir.cpp:2228
+#: src/main/builtin.cpp:959 src/main/envir.cpp:2220 src/main/envir.cpp:2228
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "'%s' 인수의 길이가 잘못되었습니다"
 
-#: src/main/builtin.cpp:983 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846
+#: src/main/builtin.cpp:989 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846
 #: src/main/eval.cpp:1067 src/main/eval.cpp:1230 src/main/eval.cpp:3696
 #: src/main/eval.cpp:3779 src/main/eval.cpp:3846 src/main/eval.cpp:4192
 #: src/main/eval.cpp:7934 src/main/eval.cpp:8077
 msgid "'...' used in an incorrect context"
 msgstr "'...'가 잘못된 맥락에서 사용되었습니다"
 
-#: src/main/builtin.cpp:1005
+#: src/main/builtin.cpp:1011
 #, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "'switch'의 기본값으로 '%1$s'와 '%2$s'가 중복됩니다"
 
-#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564
+#: src/main/builtin.cpp:1044 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564
 #: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3714
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s'가 누락되어 있습니다"
 
-#: src/main/builtin.cpp:1042 src/main/eval.cpp:8494
+#: src/main/builtin.cpp:1048 src/main/eval.cpp:8494
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR은 반드시 길이가 1인 벡터이어야 합니다"
 
-#: src/main/builtin.cpp:1045 src/main/eval.cpp:8497
+#: src/main/builtin.cpp:1051 src/main/eval.cpp:8497
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1558,11 +1558,11 @@ msgstr ""
 "EXPR는 정수로서 다루어지는 \"factor\"입니다.\n"
 " 대신 '%s'을 사용해보세요."
 
-#: src/main/builtin.cpp:1092
+#: src/main/builtin.cpp:1098
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1101 src/main/eval.cpp:8506 src/main/eval.cpp:8534
+#: src/main/builtin.cpp:1107 src/main/eval.cpp:8506 src/main/eval.cpp:8534
 msgid "'switch' with no alternatives"
 msgstr ""
 
@@ -2063,6 +2063,7 @@ msgstr "'%1$s'에서 '%2$s'로의 변환은 지원되지 않습니다"
 #: src/main/connections.cpp:374 src/main/connections.cpp:4624
 #: src/main/connections.cpp:4749 src/main/connections.cpp:4836
 #: src/main/connections.cpp:4865 src/main/connections.cpp:4898
+#: src/main/connections.cpp:6130 src/main/connections.cpp:6166
 #, fuzzy
 msgid "error reading from the connection"
 msgstr "커넥션으로부터 읽기 에러가 발생했습니다"
@@ -2156,8 +2157,8 @@ msgstr "fifo '%s'를 열 수 없습니다"
 #: src/main/connections.cpp:1941 src/main/connections.cpp:1951
 #: src/main/connections.cpp:2081 src/main/connections.cpp:2150
 #: src/main/connections.cpp:3031 src/main/connections.cpp:3047
-#: src/main/connections.cpp:3372 src/main/connections.cpp:6284
-#: src/main/connections.cpp:6348
+#: src/main/connections.cpp:3372 src/main/connections.cpp:6292
+#: src/main/connections.cpp:6362
 msgid "too large a block specified"
 msgstr "지정된 블록이 너무 큽니다"
 
@@ -2267,13 +2268,13 @@ msgstr "파일 '%s'는 bzip2로 압축되지 않은 것 같은 긴 분량의 내
 msgid "allocation of bzfile connection failed"
 msgstr "bzfile 커넥션 할당을 할 수 없습니다"
 
-#: src/main/connections.cpp:2244 src/main/connections.cpp:7231
+#: src/main/connections.cpp:2244 src/main/connections.cpp:7245
 #, c-format
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "lzma 디코더를 초기화 할 수 없습니다, 에러 %d입니다"
 
-#: src/main/connections.cpp:2253 src/main/connections.cpp:6810
-#: src/main/connections.cpp:7021
+#: src/main/connections.cpp:2253 src/main/connections.cpp:6824
+#: src/main/connections.cpp:7035
 #, fuzzy
 msgid "problem setting presets"
 msgstr "시간대를 설정하는 도중 문제가 발생했습니다"
@@ -2345,8 +2346,8 @@ msgstr "regcomp 에러: '%s'"
 msgid "allocation of zstdfile connection failed"
 msgstr "gzfile 커넥션 할당을 할 수 없습니다"
 
-#: src/main/connections.cpp:2691 src/main/connections.cpp:6912
-#: src/main/connections.cpp:7061 src/main/connections.cpp:7293
+#: src/main/connections.cpp:2691 src/main/connections.cpp:6926
+#: src/main/connections.cpp:7075 src/main/connections.cpp:7307
 msgid "Zstd compression support was not included in this R binary."
 msgstr ""
 
@@ -2456,7 +2457,7 @@ msgstr "텍스트 커넥션 할당을 할 수 없습니다"
 #: src/main/connections.cpp:3764
 #, fuzzy
 msgid "last line is too long"
-msgstr "zip 경로가 너무 깁니다"
+msgstr "포맷문자열이 너무 깁니다"
 
 #: src/main/connections.cpp:3770
 #, fuzzy
@@ -2479,7 +2480,7 @@ msgstr "'con'은 출력 textConnection이 아닙니다"
 #: src/main/connections.cpp:4155 src/main/connections.cpp:4234
 #: src/main/connections.cpp:4264 src/main/connections.cpp:4286
 #: src/main/connections.cpp:4298 src/main/connections.cpp:4417
-#: src/main/connections.cpp:4544 src/main/connections.cpp:6388
+#: src/main/connections.cpp:4544 src/main/connections.cpp:6402
 msgid "'con' is not a connection"
 msgstr "'con'은 연결이 아닙니다"
 
@@ -2746,123 +2747,123 @@ msgstr ""
 msgid "URL scheme unsupported by this method"
 msgstr "이 메소드에 의하여 지원되는 URL scheme이 아닙니다."
 
-#: src/main/connections.cpp:6152
+#: src/main/connections.cpp:6169
 msgid "file stream does not have gzip magic number"
 msgstr "파일 스트림은 gzip 매직넘버를 가지고 있지 않습니다"
 
-#: src/main/connections.cpp:6163
+#: src/main/connections.cpp:6186
 msgid "file stream does not have valid gzip header"
 msgstr "파일 스트림은 유효한 gzip 헤더를 가지고 있지 않습니다"
 
-#: src/main/connections.cpp:6228
+#: src/main/connections.cpp:6252
 msgid "writing error whilst flushing 'gzcon' connection"
 msgstr "'gzcon' 커넥션을 플러싱 하는 동안에 쓰기 에러가 발생했습니다"
 
-#: src/main/connections.cpp:6330
+#: src/main/connections.cpp:6344
 #, fuzzy, c-format
 msgid "crc error %lx %lx\n"
 msgstr "crc 에러 %lx %lx\n"
 
-#: src/main/connections.cpp:6357
+#: src/main/connections.cpp:6371
 msgid "write error on 'gzcon' connection"
 msgstr "'gzcon' 커넥션에 쓰기 에러가 발생했습니다"
 
-#: src/main/connections.cpp:6392
+#: src/main/connections.cpp:6406
 msgid "'level' must be one of 0 ... 9"
 msgstr "'level'은 반드시 0 ... 9 중 하나이어야 합니다"
 
-#: src/main/connections.cpp:6397
+#: src/main/connections.cpp:6411
 msgid "this is already a 'gzcon' connection"
 msgstr "이미 'gzcon' 커넥션입니다"
 
-#: src/main/connections.cpp:6403
+#: src/main/connections.cpp:6417
 msgid "can only use read- or write- binary connections"
 msgstr "읽기 또는 쓰기를 위한 바이너리 커넥션들만을 사용할 수 있습니다"
 
-#: src/main/connections.cpp:6406
+#: src/main/connections.cpp:6420
 msgid "using a text-mode 'file' connection may not work correctly"
 msgstr "텍스트 모드 'file' 커넥션을 이용하는 것은 제대로 작동하지 않을 수 있습니다"
 
-#: src/main/connections.cpp:6409
+#: src/main/connections.cpp:6423
 msgid "cannot create a 'gzcon' connection from a writable textConnection; maybe use rawConnection"
 msgstr "쓰기가 가능한 textConnection으로부터 'gzcon' 커넥션을 생성할 수 없습니다.  아마도 rawConnection을 사용해야 할 것 같습니다"
 
-#: src/main/connections.cpp:6412 src/main/connections.cpp:6416
-#: src/main/connections.cpp:6424 src/main/connections.cpp:6439
+#: src/main/connections.cpp:6426 src/main/connections.cpp:6430
+#: src/main/connections.cpp:6438 src/main/connections.cpp:6453
 msgid "allocation of 'gzcon' connection failed"
 msgstr "'gzcon' 커넥션 할당을 할 수 없습니다"
 
-#: src/main/connections.cpp:6494 src/main/connections.cpp:6560
+#: src/main/connections.cpp:6508 src/main/connections.cpp:6574
 #, fuzzy
 msgid "R_compress1 requires a raw vector"
 msgstr "'%s'은 문자형 벡터를 필요로 합니다"
 
-#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
-#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#: src/main/connections.cpp:6514 src/main/connections.cpp:6545
+#: src/main/connections.cpp:6981 src/main/connections.cpp:7130
 #, fuzzy, c-format
 msgid "allocation error in '%s' with libdeflate"
 msgstr "'realpr' 내에 메모리 할당 에러입니다"
 
-#: src/main/connections.cpp:6513
+#: src/main/connections.cpp:6527
 msgid "internal libdeflate error in R_compress1 with libdeflate"
 msgstr ""
 
-#: src/main/connections.cpp:6523 src/main/connections.cpp:6581
+#: src/main/connections.cpp:6537 src/main/connections.cpp:6595
 #, fuzzy
 msgid "R_decompress1 requires a raw vector"
 msgstr "'%s'은 문자형 벡터를 필요로 합니다"
 
-#: src/main/connections.cpp:6544
+#: src/main/connections.cpp:6558
 #, fuzzy, c-format
 msgid "internal error %d in '%s' with libdeflate"
-msgstr "'realpr' 내에 메모리 할당 에러입니다"
+msgstr "'do_sys'에서 내부오류가 발생했습니다"
 
-#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
-#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
-#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
-#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
-#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#: src/main/connections.cpp:7282
+#: src/main/connections.cpp:6584 src/main/connections.cpp:6605
+#: src/main/connections.cpp:6637 src/main/connections.cpp:6669
+#: src/main/connections.cpp:6678 src/main/connections.cpp:6856
+#: src/main/connections.cpp:6863 src/main/connections.cpp:6897
+#: src/main/connections.cpp:6934 src/main/connections.cpp:6942
+#: src/main/connections.cpp:7002 src/main/connections.cpp:7018
+#: src/main/connections.cpp:7041 src/main/connections.cpp:7051
+#: src/main/connections.cpp:7152 src/main/connections.cpp:7166
+#: src/main/connections.cpp:7195 src/main/connections.cpp:7222
+#: src/main/connections.cpp:7296
 #, fuzzy, c-format
 msgid "internal error %d in '%s'"
 msgstr "'do_sys'에서 내부오류가 발생했습니다"
 
-#: src/main/connections.cpp:6613
+#: src/main/connections.cpp:6627
 #, fuzzy
 msgid "R_compress2 requires a raw vector"
 msgstr "'%s'은 문자형 벡터를 필요로 합니다"
 
-#: src/main/connections.cpp:6647
+#: src/main/connections.cpp:6661
 #, fuzzy
 msgid "R_decompress2 requires a raw vector"
 msgstr "'%s'은 문자형 벡터를 필요로 합니다"
 
-#: src/main/connections.cpp:6671
+#: src/main/connections.cpp:6685
 msgid "unknown type in R_decompress2"
 msgstr ""
 
-#: src/main/connections.cpp:6701
+#: src/main/connections.cpp:6715
 msgid "not a list of sockets"
 msgstr "소켓들의 목록이 아닙니다"
 
-#: src/main/connections.cpp:6706
+#: src/main/connections.cpp:6720
 msgid "bad write indicators"
 msgstr "잘못된 쓰기 지시자들입니다"
 
-#: src/main/connections.cpp:6728
+#: src/main/connections.cpp:6742
 #, fuzzy
 msgid "a server socket connection cannot be writeable"
 msgstr "소켓 루틴들을 로드할 수 없습니다"
 
-#: src/main/connections.cpp:6730
+#: src/main/connections.cpp:6744
 msgid "not a socket connection"
 msgstr "소켓 커넥션이 아닙니다"
 
-#: src/main/connections.cpp:6733 src/modules/internet/libcurl.cpp:702
+#: src/main/connections.cpp:6747 src/modules/internet/libcurl.cpp:702
 #: src/modules/internet/sockconn.cpp:59 src/modules/internet/sockconn.cpp:90
 #: src/modules/internet/sockconn.cpp:291 src/unix/sys-std.cpp:139
 #: src/unix/sys-std.cpp:251 src/unix/sys-std.cpp:406
@@ -2870,65 +2871,65 @@ msgstr "소켓 커넥션이 아닙니다"
 msgid "file descriptor is too large for select()"
 msgstr "해싱을 하기에는 길이 %d가 너무 큽니다"
 
-#: src/main/connections.cpp:6739 src/modules/internet/libcurl.cpp:886
+#: src/main/connections.cpp:6753 src/modules/internet/libcurl.cpp:886
 msgid "too many file descriptors for select()"
 msgstr ""
 
-#: src/main/connections.cpp:6832
+#: src/main/connections.cpp:6846
 #, fuzzy
 msgid "R_compress3 requires a raw vector"
 msgstr "'%s'은 문자형 벡터를 필요로 합니다"
 
-#: src/main/connections.cpp:6872
+#: src/main/connections.cpp:6886
 #, fuzzy
 msgid "R_decompress3 requires a raw vector"
 msgstr "'%s'은 문자형 벡터를 필요로 합니다"
 
-#: src/main/connections.cpp:6893
+#: src/main/connections.cpp:6907
 #, fuzzy, c-format
 msgid "internal error %d in R_decompress3 %llu"
 msgstr "'do_sys'에서 내부오류가 발생했습니다"
 
-#: src/main/connections.cpp:6907
+#: src/main/connections.cpp:6921
 #, fuzzy
 msgid "internal error in zstd R_decompress3"
 msgstr "'do_sys'에서 내부오류가 발생했습니다"
 
-#: src/main/connections.cpp:6935
+#: src/main/connections.cpp:6949
 msgid "unknown type in R_decompress3"
 msgstr ""
 
-#: src/main/connections.cpp:6956
+#: src/main/connections.cpp:6970
 #, fuzzy
 msgid "'from' must be raw or character"
 msgstr "'norm'는 반드시 문자열이어야 합니다"
 
-#: src/main/connections.cpp:6975
+#: src/main/connections.cpp:6989
 #, fuzzy
 msgid "internal libdeflate error in memCompress"
 msgstr "'do_sys'에서 내부오류가 발생했습니다"
 
-#: src/main/connections.cpp:7055
+#: src/main/connections.cpp:7069
 #, fuzzy, c-format
 msgid "internal libzstd error (%s) in memCompress"
 msgstr "'do_sys'에서 내부오류가 발생했습니다"
 
-#: src/main/connections.cpp:7101
+#: src/main/connections.cpp:7115
 msgid "unknown compression, assuming none"
 msgstr "알 수 없는 종류의 압축이 사용되었으므로 압축되지 않을 것으로 가정합니다"
 
-#: src/main/connections.cpp:7256
+#: src/main/connections.cpp:7270
 #, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr ""
 
-#: src/main/connections.cpp:7286
+#: src/main/connections.cpp:7300
 #, fuzzy, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr "'do_sys'에서 내부오류가 발생했습니다"
 
-#: src/main/connections.cpp:7320 src/main/connections.cpp:7324
-#: src/main/connections.cpp:7331
+#: src/main/connections.cpp:7334 src/main/connections.cpp:7338
+#: src/main/connections.cpp:7345
 #, c-format
 msgid "allocation of %s connection failed"
 msgstr "%s 커넥션의 할당이 실패했습니다"
@@ -4047,7 +4048,7 @@ msgstr "유효하지 않은 부분문자열 인자들입니다"
 #: src/main/envir.cpp:4101 src/main/envir.cpp:4103
 #, fuzzy, c-format
 msgid "invalid string %s"
-msgstr " [유효하지 않은 문자열이 stop(.)내에 있습니다]"
+msgstr "잘못된 UTF-8 문자열입니다"
 
 #: src/main/envir.cpp:4115
 #, c-format
@@ -5151,9 +5152,8 @@ msgid "maxlen must be non-negative"
 msgstr "'gap'은 반드시 음이 아닌 정수이어야 합니다"
 
 #: src/main/internet.cpp:184
-#, fuzzy
 msgid "Error reading data in Rsockread"
-msgstr "zip 파일에서 CRC 에러입니다"
+msgstr ""
 
 #: src/main/internet.cpp:196
 msgid "attempt to close invalid socket"
@@ -5396,299 +5396,298 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-#: src/main/memory.cpp:840
+#: src/main/memory.cpp:846
 #, fuzzy
 msgid "vector memory exhausted"
 msgstr "벡터 메모리가 모두 사용되었습니다 (한계에 도달했나요?)"
 
-#: src/main/memory.cpp:853
+#: src/main/memory.cpp:859
 #, c-format
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
-#: src/main/memory.cpp:864
+#: src/main/memory.cpp:870
 #, fuzzy
 msgid "untraced old-to-new reference\n"
 msgstr "weak reference가 아닙니다"
 
-#: src/main/memory.cpp:887 src/main/memory.cpp:895
+#: src/main/memory.cpp:893 src/main/memory.cpp:901
 msgid "Inconsistent node generation\n"
 msgstr ""
 
-#: src/main/memory.cpp:1141
+#: src/main/memory.cpp:1147
 msgid "can only weakly reference/finalize reference objects"
 msgstr ""
 
-#: src/main/memory.cpp:1173
+#: src/main/memory.cpp:1179
 msgid "finalizer must be a function or NULL"
 msgstr "파이널라이저는 반드시 함수 또는 NULL이어야 합니다"
 
-#: src/main/memory.cpp:1227 src/main/memory.cpp:1234 src/main/memory.cpp:1244
+#: src/main/memory.cpp:1233 src/main/memory.cpp:1240 src/main/memory.cpp:1250
 msgid "not a weak reference"
 msgstr "weak reference가 아닙니다"
 
-#: src/main/memory.cpp:1386
+#: src/main/memory.cpp:1392
 msgid "first argument must be environment or external pointer"
 msgstr "첫번째 인자는 반드시 인바이런먼트 또는 외부포인터이어야 합니다"
 
-#: src/main/memory.cpp:1388
+#: src/main/memory.cpp:1394
 msgid "second argument must be a function"
 msgstr "두번째 인자는 반드시 함수이어야 합니다"
 
-#: src/main/memory.cpp:1874 src/main/memory.cpp:1981
+#: src/main/memory.cpp:1881 src/main/memory.cpp:1989
 #, fuzzy, c-format
 msgid "unexpected type %d in %s"
 msgstr "%d은 '%s'에서 구현되지 않은 유형입니다\n"
 
-#: src/main/memory.cpp:2368
+#: src/main/memory.cpp:2376
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f %s"
 msgstr "크기가 %0.f Tb인 메모리 블락을 할당할 수 없습니다"
 
-#: src/main/memory.cpp:2372
+#: src/main/memory.cpp:2380
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.1f %s"
 msgstr "크기가 %0.1f GB인 메모리 블락을 할당할 수 없습니다"
 
-#: src/main/memory.cpp:2706 src/main/memory.cpp:2770
+#: src/main/memory.cpp:2714 src/main/memory.cpp:2778
 msgid "vector is too large"
 msgstr "벡터가 너무 큽니다"
 
-#: src/main/memory.cpp:2708 src/main/memory.cpp:2772
+#: src/main/memory.cpp:2716 src/main/memory.cpp:2780
 msgid "negative length vectors are not allowed"
 msgstr "길이가 음수인 벡터는 허용되지 않습니다"
 
-#: src/main/memory.cpp:2717
+#: src/main/memory.cpp:2725
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.cpp:2721 src/main/memory.cpp:2726 src/main/memory.cpp:2731
-#: src/main/memory.cpp:2736 src/main/memory.cpp:2743
+#: src/main/memory.cpp:2729 src/main/memory.cpp:2734 src/main/memory.cpp:2739
+#: src/main/memory.cpp:2744 src/main/memory.cpp:2751
 #, fuzzy, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr "길이가 %lld인 벡터를 할당할 수 없습니다"
 
-#: src/main/memory.cpp:2748 src/main/memory.cpp:2753
+#: src/main/memory.cpp:2756 src/main/memory.cpp:2761
 #, fuzzy
 msgid "invalid length for pairlist"
-msgstr "유효하지 않은 'strip.white' 길이입니다"
+msgstr "길이가 0인 유효하지 않은 인자입니다"
 
-#: src/main/memory.cpp:2757
+#: src/main/memory.cpp:2765
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "벡터할당에 유효한 타입/길이 (%s/%lld)가 아닙니다"
 
-#: src/main/memory.cpp:3011
+#: src/main/memory.cpp:3019
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:3015
+#: src/main/memory.cpp:3023
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:3020
+#: src/main/memory.cpp:3028
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:3071
+#: src/main/memory.cpp:3079
 msgid "R_signal_protect_error() is no-op in CXXR"
 msgstr ""
 
-#: src/main/memory.cpp:3076
+#: src/main/memory.cpp:3084
 #, c-format
 msgid "unprotect(): only %td protected item"
 msgid_plural "unprotect(): only %td protected items"
 msgstr[0] ""
 
-#: src/main/memory.cpp:3115
+#: src/main/memory.cpp:3123
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr: 포인터를 찾을 수 없습니다"
 
-#: src/main/memory.cpp:3137
+#: src/main/memory.cpp:3145
 #, c-format
 msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
 msgstr[0] ""
 
-#: src/main/memory.cpp:3189
+#: src/main/memory.cpp:3197
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
 msgstr "'R_Calloc'은 메모리 (%llu of %llu 바이트)를 할당할 수 없습니다"
 
-#: src/main/memory.cpp:3200
+#: src/main/memory.cpp:3208
 #, fuzzy, c-format
 msgid "'R_Realloc' could not re-allocate memory (%llu byte)"
 msgid_plural "'R_Realloc' could not re-allocate memory (%llu bytes)"
 msgstr[0] "'R_Realloc'은 메모리 (%llu 바이트)를 재할당 할 수 없습니다"
 
-#: src/main/memory.cpp:3217 src/main/memory.cpp:3224
+#: src/main/memory.cpp:3225 src/main/memory.cpp:3232
 #, fuzzy, c-format
 msgid "object is too large (%llu byte)"
 msgid_plural "object is too large (%llu bytes)"
 msgstr[0] "벡터가 너무 큽니다"
 
-#: src/main/memory.cpp:3305
+#: src/main/memory.cpp:3313
 #, fuzzy
 msgid "'initialSize' must be non-negative"
 msgstr "'gap'은 반드시 음이 아닌 정수이어야 합니다"
 
-#: src/main/memory.cpp:3324
+#: src/main/memory.cpp:3332
 #, fuzzy
 msgid "Invalid mset"
 msgstr "유효하지 않은 커넥션입니다"
 
-#: src/main/memory.cpp:3348
-#, fuzzy
+#: src/main/memory.cpp:3356
 msgid "Multi-set overflow"
-msgstr "노드 스택 오버플로우입니다"
+msgstr ""
 
-#: src/main/memory.cpp:3414
+#: src/main/memory.cpp:3422
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "첫번째 인자는 반드시 인바이런먼트 또는 외부포인터이어야 합니다"
 
-#: src/main/memory.cpp:3540
+#: src/main/memory.cpp:3548
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3577
+#: src/main/memory.cpp:3585
 #, c-format
 msgid "can't change type from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3585
+#: src/main/memory.cpp:3593
 #, c-format
 msgid "can't change the type of an ALTREP object from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3592
+#: src/main/memory.cpp:3600
 #, fuzzy
 msgid "can't change the type of a binding cell"
 msgstr "바인딩이 잠겨있다면 활성화 되어 있는 바인딩을 변경할 수 없습니다"
 
-#: src/main/memory.cpp:3695 src/main/memory.cpp:4020
+#: src/main/memory.cpp:3703 src/main/memory.cpp:4028
 #, c-format
 msgid "'%s' or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.cpp:3708
+#: src/main/memory.cpp:3716
 msgid "SETLENGTH() cannot be applied to an ALTVEC object."
 msgstr ""
 
-#: src/main/memory.cpp:3710
+#: src/main/memory.cpp:3718
 #, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3728 src/main/memory.cpp:3736 src/main/memory.cpp:3753
-#: src/main/memory.cpp:3770 src/main/memory.cpp:3816 src/main/memory.cpp:3825
-#: src/main/memory.cpp:3835 src/main/memory.cpp:3844 src/main/memory.cpp:3853
-#: src/main/memory.cpp:3862 src/main/memory.cpp:3870 src/main/memory.cpp:3879
-#: src/main/memory.cpp:3888 src/main/memory.cpp:3896 src/main/memory.cpp:3904
-#: src/main/memory.cpp:3912 src/main/memory.cpp:3920 src/main/memory.cpp:3933
-#: src/main/memory.cpp:3942 src/main/memory.cpp:3967 src/main/memory.cpp:3986
+#: src/main/memory.cpp:3736 src/main/memory.cpp:3744 src/main/memory.cpp:3761
+#: src/main/memory.cpp:3778 src/main/memory.cpp:3824 src/main/memory.cpp:3833
+#: src/main/memory.cpp:3843 src/main/memory.cpp:3852 src/main/memory.cpp:3861
+#: src/main/memory.cpp:3870 src/main/memory.cpp:3878 src/main/memory.cpp:3887
+#: src/main/memory.cpp:3896 src/main/memory.cpp:3904 src/main/memory.cpp:3912
+#: src/main/memory.cpp:3920 src/main/memory.cpp:3928 src/main/memory.cpp:3941
+#: src/main/memory.cpp:3950 src/main/memory.cpp:3975 src/main/memory.cpp:3994
 #, fuzzy, c-format
 msgid "%s() can only be applied to a '%s', not a '%s'"
 msgstr "scan()은 '%s'를 입력받아야 하는데, '%s'를 받았습니다"
 
-#: src/main/memory.cpp:3805
+#: src/main/memory.cpp:3813
 msgid "cannot get STDVEC_DATAPTR from ALTREP object"
 msgstr ""
 
-#: src/main/memory.cpp:3807
+#: src/main/memory.cpp:3815
 #, c-format
 msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3928
+#: src/main/memory.cpp:3936
 msgid "not safe to return vector pointer"
 msgstr "벡터포인터를 반환하기에 안전하지 않습니다"
 
-#: src/main/memory.cpp:3945
+#: src/main/memory.cpp:3953
 #, c-format
 msgid "Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3948
+#: src/main/memory.cpp:3956
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_STRING_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:3971
+#: src/main/memory.cpp:3979
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_VECTOR_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:3990
+#: src/main/memory.cpp:3998
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:4134
+#: src/main/memory.cpp:4142
 #, fuzzy
 msgid "argument not tracking references"
 msgstr "인자는 인바이런먼트이 아닙니다"
 
-#: src/main/memory.cpp:4202 src/main/memory.cpp:4211 src/main/memory.cpp:4222
-#: src/main/memory.cpp:4238 src/main/memory.cpp:4252 src/main/memory.cpp:4267
-#: src/main/memory.cpp:4283
+#: src/main/memory.cpp:4210 src/main/memory.cpp:4219 src/main/memory.cpp:4230
+#: src/main/memory.cpp:4246 src/main/memory.cpp:4260 src/main/memory.cpp:4275
+#: src/main/memory.cpp:4291
 msgid "bad value"
 msgstr "잘못된 값입니다"
 
-#: src/main/memory.cpp:4227
+#: src/main/memory.cpp:4235
 msgid "inserting non-tracking CDR in tracking cell"
 msgstr ""
 
-#: src/main/memory.cpp:4303
+#: src/main/memory.cpp:4311
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not a closure"
 msgstr "인자 %d는 벡터가 아닙니다"
 
-#: src/main/memory.cpp:4335
+#: src/main/memory.cpp:4343
 #, c-format
 msgid "%s: argument of type %s is not a symbol or NULL"
 msgstr ""
 
-#: src/main/memory.cpp:4369
+#: src/main/memory.cpp:4377
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an environment or NULL"
 msgstr "'%s'에 대한 인자는 인바이런먼트가 아닙니다"
 
-#: src/main/memory.cpp:4390
+#: src/main/memory.cpp:4398
 #, fuzzy
 msgid "cycles in parent chains are not allowed"
 msgstr "길이가 음수인 벡터는 허용되지 않습니다"
 
-#: src/main/memory.cpp:4420
+#: src/main/memory.cpp:4428
 #, c-format
 msgid "expecting a 'PROMSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4452
+#: src/main/memory.cpp:4460
 #, c-format
 msgid "value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4530
+#: src/main/memory.cpp:4538
 msgid "memory profiling is not available on this system"
 msgstr "이 시스템에서는 메모리 프로파일링 기능을 이용가능하지 않습니다"
 
-#: src/main/memory.cpp:4573
+#: src/main/memory.cpp:4581
 #, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr "Rprofmem: 출력파일 '%s'을 열 수 없습니다"
 
-#: src/main/memory.cpp:4613
+#: src/main/memory.cpp:4621
 msgid "R_AllocStringBuffer( (size_t)-1 ) is no longer allowed"
 msgstr ""
 
-#: src/main/memory.cpp:4632
+#: src/main/memory.cpp:4640
 #, fuzzy, c-format
 msgid "could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'"
 msgstr "'read.dcf'에 메모리를 할당할 수 없습니다"
 
-#: src/main/memory.cpp:4687
+#: src/main/memory.cpp:4695
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr "아직까지는 지원되지 않는 긴 벡터들입니다: %s:%d"
@@ -5962,7 +5961,7 @@ msgstr "유효하지 않은 프린팅 자릿수이므로 7이 사용되었습니
 #: src/main/options.cpp:198
 #, fuzzy
 msgid "invalid 'scipen'"
-msgstr "엑센트가 잘못되었습니다"
+msgstr "'%s'의 값이 잘못되었습니다"
 
 #: src/main/options.cpp:204
 #, c-format
@@ -5977,7 +5976,7 @@ msgstr "유효하지 않은 프린팅 너비이므로 80이 사용되었습니�
 #: src/main/options.cpp:215
 #, fuzzy, c-format
 msgid "invalid 'scipen' %d"
-msgstr "라인의 끝이 잘못되었습니다"
+msgstr "'%s'의 값이 잘못되었습니다"
 
 #: src/main/options.cpp:228
 msgid "invalid 'deparse.cutoff', used 60"
@@ -6510,9 +6509,8 @@ msgid "'print.gap' must be less than %d"
 msgstr "'fromLast'는 반드시 길이가 1 이어야 합니다"
 
 #: src/main/print.cpp:357
-#, fuzzy
 msgid "missing methods namespace: this should not happen"
-msgstr "rank()에 대해서 유효하지 않은 ties.method입니다 [일어나서는 안되는 경우입니다]"
+msgstr ""
 
 #: src/main/print.cpp:366
 msgid "missing show() in methods namespace: this should not happen"
@@ -7980,7 +7978,7 @@ msgstr "R_LibraryFileName: 버퍼가 너무 작습니다"
 #: src/main/startup.cpp:251
 #, fuzzy
 msgid "WARNING: invalid R_MAX_VSIZE ignored\n"
-msgstr "경고: '%s'의 값이 유효하지 않아 무시됩니다"
+msgstr "경고: R_MAX_MEM_SIZE 값이 유효하지 않아 무시됩니다\n"
 
 #: src/main/startup.cpp:254
 #, fuzzy, c-format
@@ -8092,7 +8090,7 @@ msgid "NAs are not allowed in subscripted assignments"
 msgstr ""
 
 #: src/main/subassign.cpp:727 src/main/subassign.cpp:1030
-#: src/main/subassign.cpp:1255 src/main/subassign.cpp:1911
+#: src/main/subassign.cpp:1255 src/main/subassign.cpp:1910
 msgid "replacement has length zero"
 msgstr ""
 
@@ -8140,44 +8138,44 @@ msgstr ""
 msgid "SubAssignArgs: invalid number of arguments"
 msgstr ""
 
-#: src/main/subassign.cpp:1738
+#: src/main/subassign.cpp:1737
 msgid "result is zero-length and so cannot be a language object"
 msgstr ""
 
-#: src/main/subassign.cpp:1776
+#: src/main/subassign.cpp:1775
 msgid "Internal error: unexpected type in DeleteOneVectorListItem"
 msgstr ""
 
-#: src/main/subassign.cpp:1862
+#: src/main/subassign.cpp:1861
 msgid "[[<- defined for objects of type \"S4\" only for subclasses of environment"
 msgstr ""
 
-#: src/main/subassign.cpp:1876
+#: src/main/subassign.cpp:1875
 msgid "improper dimensions"
 msgstr ""
 
-#: src/main/subassign.cpp:1882
+#: src/main/subassign.cpp:1881
 msgid "wrong args for environment subassignment"
 msgstr ""
 
-#: src/main/subassign.cpp:1913
+#: src/main/subassign.cpp:1912
 msgid "more elements supplied than there are to replace"
 msgstr ""
 
-#: src/main/subassign.cpp:1945 src/main/subassign.cpp:2139
+#: src/main/subassign.cpp:1944 src/main/subassign.cpp:2138
 msgid "[[ ]] improper number of subscripts"
 msgstr ""
 
-#: src/main/subassign.cpp:2102
+#: src/main/subassign.cpp:2101
 #, c-format
 msgid "incompatible types (from %s to %s) in [[ assignment"
 msgstr ""
 
-#: src/main/subassign.cpp:2233
+#: src/main/subassign.cpp:2232
 msgid "no method for assigning subsets of this S4 class"
 msgstr ""
 
-#: src/main/subassign.cpp:2300
+#: src/main/subassign.cpp:2299
 msgid "Coercing LHS to a list"
 msgstr "좌변을 리스트로 강제형변환합니다"
 
@@ -8561,9 +8559,8 @@ msgid "sorted_real_count_NANs got unsorted vector: this should not happen"
 msgstr ""
 
 #: src/main/unique.cpp:815 src/main/unique.cpp:821
-#, fuzzy
 msgid "sorted_Duplicated got unsorted vector: this should not happen"
-msgstr "rank()에 대해서 유효하지 않은 ties.method입니다 [일어나서는 안되는 경우입니다]"
+msgstr ""
 
 #: src/main/unique.cpp:840 src/main/unique.cpp:1001
 #, c-format
@@ -8609,9 +8606,8 @@ msgid "... is not a pairlist"
 msgstr "...는 pairlist가 아닙니다."
 
 #: src/main/unique.cpp:2066
-#, fuzzy
 msgid "non-numeric matrix in rowsum(): this should not happen"
-msgstr "rank()에 대해서 유효하지 않은 ties.method입니다 [일어나서는 안되는 경우입니다]"
+msgstr ""
 
 #: src/main/unique.cpp:2068 src/main/unique.cpp:2142
 #, fuzzy
@@ -8665,7 +8661,7 @@ msgstr "객체가 행렬이 아닙니다"
 #: src/main/util.cpp:135
 #, fuzzy
 msgid "invalid type passed to internal function\n"
-msgstr "유효하지 않은 객체입니다: 반드시 프리미티브 함수이어야 합니다"
+msgstr "올바르지 않은 컬러타입이 X11 장치에 전달되었습니다"
 
 #: src/main/util.cpp:327 src/main/util.cpp:339 src/main/util.cpp:350
 #: src/main/util.cpp:379
@@ -8853,9 +8849,8 @@ msgid "'x' must be a vector"
 msgstr "'x'는 반드시 벡터이어야 합니다"
 
 #: src/main/util.cpp:3066
-#, fuzzy
 msgid "width cannot be zero"
-msgstr "zip 파일 '%s'를 열 수 없습니다"
+msgstr ""
 
 #: src/main/util.cpp:3081
 #, fuzzy
@@ -8865,7 +8860,7 @@ msgstr "'pos'는 반드시 정수이어야 합니다"
 #: src/main/util.cpp:3166
 #, fuzzy
 msgid "'type' must be \"real\" for this format"
-msgstr "'pos'는 반드시 정수이어야 합니다"
+msgstr "'%s'는 반드시 리스트 또는 원형벡터이어야 합니다."
 
 #: src/main/VectorBase.cpp:123 src/main/VectorBase.cpp:127
 #, fuzzy, c-format
@@ -9931,7 +9926,7 @@ msgstr "rbinom: 모든 확률값들의 합은 1이어야 하는데 %g 입니다.
 #: src/nmath/signrank.cpp:75
 #, fuzzy
 msgid "'signrank' allocation error"
-msgstr "regcomp 에러: '%s'"
+msgstr "유효하지 않은 옵션 \"error\"입니다\n"
 
 #: src/nmath/snorm.cpp:326
 #, c-format
@@ -10118,21 +10113,81 @@ msgstr "X11 모듈이 로드되어질 수 없습니다"
 msgid "X11 is not available"
 msgstr "X11을 사용할 수 없습니다"
 
+#~ msgid "unknown 'type' in \"CG\" method of 'optim'"
+#~ msgstr "'optim'에서 사용되는 \"CG\"라는 method에서 지원하는 'type'이 아닙니다"
+
+#~ msgid "Function cannot be evaluated at initial parameters"
+#~ msgstr "파라미터의 초기값으로 함수를 계산할 수는 없습니다"
+
+#~ msgid "'path' must be a character vector"
+#~ msgstr "'path'는 반드시 문자형 벡터이어야 합니다."
+
 #, c-format
-#~ msgid "invalid value for '%s'"
-#~ msgstr "'%s'의 값이 유효하지 않습니다"
+#~ msgid "invalid %s argument"
+#~ msgstr "인자 '%s'가 올바르지 않습니다."
 
-#, fuzzy
-#~ msgid "bad condition argument"
-#~ msgstr "불러오기 인바이런먼트 인자가 잘못되었습니다"
+#, c-format
+#~ msgid "regcomp error:  '%s'"
+#~ msgstr "regcomp 에러:  '%s'"
 
-#, fuzzy
-#~ msgid "invalid 'socket' argument"
+#~ msgid "'resize' must be TRUE or FALSE"
+#~ msgstr "'resize'는 반드시 TRUE 또는 FALSE 이어야 합니다"
+
+#~ msgid "'EXPR' is missing"
+#~ msgstr "'EXPR'이 없습니다"
+
+#~ msgid "invalid 'mode' argument"
 #~ msgstr "유효하지 않은 'mode' 인자입니다"
 
-#, fuzzy
-#~ msgid "invalid 'port' argument"
-#~ msgstr "유효하지 않은 'mode' 인자입니다"
+#~ msgid "'name' is missing"
+#~ msgstr "'name'이 없습니다"
+
+#~ msgid "'envir' must be an environment"
+#~ msgstr "'envir'는 반드시 인바이런먼트이어야 합니다"
+
+#~ msgid "'allowNonCompression' must be TRUE or FALSE"
+#~ msgstr "'allowNonCompression'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'text' must be TRUE or FALSE"
+#~ msgstr "'text'는 반드시 TRUE 또는 FALSE이어야 합니다."
+
+#~ msgid "not that many calls to browser are active"
+#~ msgstr "활성화된 브라우저 호출이 많지는 않습니다."
+
+#, c-format
+#~ msgid "Value for '%s' must be TRUE or FALSE"
+#~ msgstr "'%s'에 대한 값은 반드시 TRUE 또는 FALSE 이어야 합니다."
+
+#~ msgid "'.NAME' is missing"
+#~ msgstr "'.NAME'이 없습니다"
+
+#~ msgid "invalid formal arguments for 'function'"
+#~ msgstr "'function'에 대한 formal arguments들이 유효하지 않습니다"
+
+#~ msgid "invalid argument to edit()"
+#~ msgstr "edit()에 전달되는 인수가 유효하지 않습니다"
+
+#~ msgid "'list' argument must be a list"
+#~ msgstr "'list' 인자는 반드시 리스트이어야 합니다"
+
+#~ msgid "'env' argument must be an environment"
+#~ msgstr "'env' 인자는 반드시 인바이런먼트이어야 합니다"
+
+#~ msgid "'envir' argument must be an environment"
+#~ msgstr "'envir' 인자는 반드시 인바이런먼트이어야 합니다"
+
+#, c-format
+#~ msgid "In %s :"
+#~ msgstr "%s에서:"
+
+#~ msgid "In addition: "
+#~ msgstr "추가정보: "
+
+#~ msgid " [invalid string in warning(.)]"
+#~ msgstr " [유효하지 않은 문자열이 warning(.)내에 있습니다]"
+
+#~ msgid "not a BUILTIN function"
+#~ msgstr "BUILTIN 함수가 아닙니다"
 
 #, fuzzy
 #~ msgid "'pattern' is invalid"
@@ -10142,8 +10197,64 @@ msgstr "X11을 사용할 수 없습니다"
 #~ msgid "'replacement' is invalid"
 #~ msgstr "'replacement'가 유효하지 않는 UTF-8로 되어 있습니다"
 
-#~ msgid "argument must be an environment"
-#~ msgstr "인자는 반드시 인바이런먼트이어야 합니다"
+#, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "'x' 유형은 'x %s y'에 유효하지 않습니다"
+
+#, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "'y' 유형은 'x %s y'에 유효하지 않습니다"
+
+#~ msgid "During startup - "
+#~ msgstr "스타트업을 하는 동안 - "
+
+#, fuzzy
+#~ msgid "cons memory exhausted"
+#~ msgstr "cons 메모리가 모두 사용되었습니다 (한계에 도달했나요?)"
+
+#, fuzzy
+#~ msgid "memory exhausted"
+#~ msgstr "메모리가 모두 사용되었습니다 (한계에 도달했나요?)"
+
+#, c-format
+#~ msgid "invalid value for '%s'"
+#~ msgstr "'%s'의 값이 유효하지 않습니다"
+
+#~ msgid "'mode' must be of length at least one"
+#~ msgstr "'mode'의 길이는 반드시 최소한 1이상이어야 합니다"
+
+#~ msgid "argument 'multiple' must be TRUE or FALSE"
+#~ msgstr "인자 'multiple'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#, fuzzy
+#~ msgid "argument 'x' must be a numeric vector"
+#~ msgstr "인자 'x'는 반드시 raw 벡터이어야 합니다"
+
+#~ msgid "argument 'allow_surrogate_pairs' must be TRUE or FALSE"
+#~ msgstr "인자 'allow_surrogate_pairs'은 TRUE 또는 FALSE 이어야 합니다."
+
+#, fuzzy, c-format
+#~ msgid "comparison (%s) is not possible language types"
+#~ msgstr "atomic과 리스트 타입들에 대해서만 비교(%d)가 가능합니다"
+
+#~ msgid "'decreasing' must be TRUE or FALSE"
+#~ msgstr "'decreasing'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'fmt' is not a character vector"
+#~ msgstr "'fmt'은 문자형 벡터가 아닙니다"
+
+#, c-format
+#~ msgid "length %d is too large for hashing"
+#~ msgstr "해싱을 하기에는 길이 %d가 너무 큽니다"
+
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "'fromLast'는 반드시 길이가 1 이어야 합니다"
+
+#~ msgid "'fromLast' must be TRUE or FALSE"
+#~ msgstr "'fromLast'은 반드시 TRUE 또는 FALSE이어야 합니다"
+
+#~ msgid "'names' must be a character vector"
+#~ msgstr "'names' must be a character vector"
 
 #~ msgid "'all.x' must be TRUE or FALSE"
 #~ msgstr "'all.x'는 반드시 TRUE 또는 FALSE이어야 합니다"
@@ -10151,27 +10262,9 @@ msgstr "X11을 사용할 수 없습니다"
 #~ msgid "'all.y' must be TRUE or FALSE"
 #~ msgstr "'all.y'는 반드시 TRUE 또는 FALSE이어야 합니다"
 
-#~ msgid "argument is not an environment"
-#~ msgstr "인자는 인바이런먼트이 아닙니다"
-
-#~ msgid "'envir' must be an environment"
-#~ msgstr "'envir'는 반드시 인바이런먼트이어야 합니다"
-
-#~ msgid "invalid argument to edit()"
-#~ msgstr "edit()에 전달되는 인수가 유효하지 않습니다"
-
-#~ msgid "'env' argument must be an environment"
-#~ msgstr "'env' 인자는 반드시 인바이런먼트이어야 합니다"
-
-#~ msgid "'envir' argument must be an environment"
-#~ msgstr "'envir' 인자는 반드시 인바이런먼트이어야 합니다"
-
-#, fuzzy, c-format
-#~ msgid "invalid value of %s"
-#~ msgstr "'%s'의 값이 유효하지 않습니다"
-
-#~ msgid "'mode' must be of length at least one"
-#~ msgstr "'mode'의 길이는 반드시 최소한 1이상이어야 합니다"
+#, fuzzy
+#~ msgid "'bounds' must be TRUE or FALSE"
+#~ msgstr "'onOff'는 반드시 TRUE 또는 FALSE이어야 합니다"
 
 #~ msgid "filename too long in jpeg() call"
 #~ msgstr "jpeg() 호출에 사용된 파일명이 너무 깁니다"
@@ -10182,250 +10275,18 @@ msgstr "X11을 사용할 수 없습니다"
 #~ msgid "filename too long in bmp() call"
 #~ msgstr "bmp() 호출에 사용된 파일명이 너무 깁니다"
 
-#~ msgid "'list' argument must be a list"
-#~ msgstr "'list' 인자는 반드시 리스트이어야 합니다"
+#~ msgid "argument 'logarithm' must be logical"
+#~ msgstr "'logarithm' 인자는 반드시 논리형이어야 합니다."
+
+#~ msgid "'intern' must be logical and not NA"
+#~ msgstr "'intern'은 반드시 논리적이어야 하며 NA이어서는 안됩니다"
 
 #, fuzzy
-#~ msgid "allocation error in R_compress1 with libdeflate"
-#~ msgstr "'realpr' 내에 메모리 할당 에러입니다"
-
-#, fuzzy
-#~ msgid "allocation error in R_decompress1 with libdeflate"
-#~ msgstr "'realpr' 내에 메모리 할당 에러입니다"
-
-#, fuzzy
-#~ msgid "allocation error in memDecompress with libdeflate"
-#~ msgstr "'realpr' 내에 메모리 할당 에러입니다"
-
-#~ msgid "memory allocation error in 'realpr'"
-#~ msgstr "'realpr' 내에 메모리 할당 에러입니다"
-
-#, fuzzy
-#~ msgid "unsupported type "
-#~ msgstr "지원되지 않는 타입입니다"
-
-#~ msgid "'fromLast' must be length 1"
-#~ msgstr "'fromLast'는 반드시 길이가 1 이어야 합니다"
-
-#~ msgid "'fmt' is not a character vector"
-#~ msgstr "'fmt'은 문자형 벡터가 아닙니다"
-
-#, fuzzy
-#~ msgid "argument is not a character vector"
-#~ msgstr "'names'는 문자형 벡터가 아닙니다"
-
-#~ msgid "internal error in 'do_sys'"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy
-#~ msgid "internal error in do_random1"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy
-#~ msgid "internal error in do_random2"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy
-#~ msgid "internal error in do_random3"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_compress1"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_decompress1"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_compress2"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_decompress2"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_compress3"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_decompress3"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in memCompress"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in memDecompress(%s)"
-#~ msgstr "'do_sys'에서 내부오류가 발생했습니다"
-
-#~ msgid "'path' must be a character vector"
-#~ msgstr "'path'는 반드시 문자형 벡터이어야 합니다."
-
-#~ msgid "'names' must be a character vector"
-#~ msgstr "'names' must be a character vector"
-
-#, fuzzy
-#~ msgid "'winslash' must be a character string"
-#~ msgstr "'%s'는 반드시 문자열(character string)이어야 합니다."
-
-#, fuzzy, c-format
-#~ msgid "allocation failure in '%s'"
-#~ msgstr "R_tmpnam2내에 할당이 실패했습니다"
-
-#, fuzzy
-#~ msgid "allocation failure in aregexec"
-#~ msgstr "R_tmpnam2내에 할당이 실패했습니다"
-
-#, fuzzy
-#~ msgid "allocation failure in set_pcre_recursion_limit"
-#~ msgstr "R_tmpnam2내에 할당이 실패했습니다"
-
-#, fuzzy
-#~ msgid "allocation error in memCompress with libdeflate"
-#~ msgstr "'realpr' 내에 메모리 할당 에러입니다"
-
-#, fuzzy
-#~ msgid "allocation error in srv_input_handler"
-#~ msgstr "'realpr' 내에 메모리 할당 에러입니다"
-
-#, fuzzy
-#~ msgid "allocation failed in in_R_X11_dataviewer"
-#~ msgstr "R_tmpnam2내에 할당이 실패했습니다"
-
-#, fuzzy
-#~ msgid "cannot set an attribute on a CHARSXP"
-#~ msgstr "타입 '%s'으로부터 행렬을 생성할 수 없습니다"
-
-#, c-format
-#~ msgid "invalid 'x' type in 'x %s y'"
-#~ msgstr "'x' 유형은 'x %s y'에 유효하지 않습니다"
-
-#, c-format
-#~ msgid "invalid 'y' type in 'x %s y'"
-#~ msgstr "'y' 유형은 'x %s y'에 유효하지 않습니다"
-
-#, fuzzy
-#~ msgid "couldn't allocate node stack"
-#~ msgstr "푸쉬백을 위한 공간을 할당할 수 없습니다"
-
-#~ msgid "not a BUILTIN function"
-#~ msgstr "BUILTIN 함수가 아닙니다"
-
-#, fuzzy
-#~ msgid "argument 'x' must be a numeric vector"
-#~ msgstr "인자 'x'는 반드시 raw 벡터이어야 합니다"
-
-#~ msgid "unknown 'type' in \"CG\" method of 'optim'"
-#~ msgstr "'optim'에서 사용되는 \"CG\"라는 method에서 지원하는 'type'이 아닙니다"
-
-#~ msgid "Function cannot be evaluated at initial parameters"
-#~ msgstr "파라미터의 초기값으로 함수를 계산할 수는 없습니다"
-
-#~ msgid "not that many calls to browser are active"
-#~ msgstr "활성화된 브라우저 호출이 많지는 않습니다."
-
-#~ msgid "invalid formal arguments for 'function'"
-#~ msgstr "'function'에 대한 formal arguments들이 유효하지 않습니다"
-
-#, fuzzy
-#~ msgid "cons memory exhausted"
-#~ msgstr "cons 메모리가 모두 사용되었습니다 (한계에 도달했나요?)"
-
-#, fuzzy
-#~ msgid "memory exhausted"
-#~ msgstr "메모리가 모두 사용되었습니다 (한계에 도달했나요?)"
-
-#, fuzzy, c-format
-#~ msgid "comparison (%s) is not possible language types"
-#~ msgstr "atomic과 리스트 타입들에 대해서만 비교(%d)가 가능합니다"
-
-#~ msgid "'from' and 'to' are of different lengths"
-#~ msgstr "'from'과 'to'의 길이가 다릅니다"
-
-#, c-format
-#~ msgid "In %s :"
-#~ msgstr "%s에서:"
-
-#, c-format
-#~ msgid "Value for '%s' must be TRUE or FALSE"
-#~ msgstr "'%s'에 대한 값은 반드시 TRUE 또는 FALSE 이어야 합니다."
-
-#~ msgid "In addition: "
-#~ msgstr "추가정보: "
-
-#~ msgid " [invalid string in warning(.)]"
-#~ msgstr " [유효하지 않은 문자열이 warning(.)내에 있습니다]"
-
-#~ msgid "During startup - "
-#~ msgstr "스타트업을 하는 동안 - "
+#~ msgid "'receive.console.signals' must be logical and not NA"
+#~ msgstr "'intern'은 반드시 논리적이어야 하며 NA이어서는 안됩니다"
 
 #~ msgid "'.Random.seed' is a missing argument with no default"
 #~ msgstr "'.Random.seed'는 디폴트 없이 누락된 인자입니다"
-
-#, c-format
-#~ msgid "invalid %s argument"
-#~ msgstr "인자 '%s'가 올바르지 않습니다."
-
-#~ msgid "'EXPR' is missing"
-#~ msgstr "'EXPR'이 없습니다"
-
-#~ msgid "'name' is missing"
-#~ msgstr "'name'이 없습니다"
-
-#~ msgid "'.NAME' is missing"
-#~ msgstr "'.NAME'이 없습니다"
-
-#, fuzzy
-#~ msgid "No error"
-#~ msgstr "읽기 오류입니다"
-
-#, fuzzy
-#~ msgid "Invalid regexp"
-#~ msgstr "유효하지 않은 인자입니다"
-
-#, fuzzy
-#~ msgid "Unknown character class name"
-#~ msgstr "문자로 이루어지지 않은 이름들입니다"
-
-#, fuzzy
-#~ msgid "Invalid back reference"
-#~ msgstr "weak reference가 아닙니다"
-
-#, fuzzy
-#~ msgid "Invalid contents of {}"
-#~ msgstr "유효하지 않은 커넥션입니다"
-
-#, fuzzy
-#~ msgid "Invalid character range"
-#~ msgstr "'dblepr' 내에 문자의 길이가 올바르지 않습니다"
-
-#, fuzzy
-#~ msgid "Out of memory"
-#~ msgstr "polyline을 클립핑하는 동안에 메모리가 부족해졌습니다"
-
-#, fuzzy
-#~ msgid "Invalid use of repetition operators"
-#~ msgstr "단항연산자에 유효한 인자가 아닙니다"
-
-#, fuzzy
-#~ msgid "Unknown error"
-#~ msgstr "알 수 없는 op입니다"
-
-#, c-format
-#~ msgid "regcomp error:  '%s'"
-#~ msgstr "regcomp 에러:  '%s'"
-
-#~ msgid "'resize' must be TRUE or FALSE"
-#~ msgstr "'resize'는 반드시 TRUE 또는 FALSE 이어야 합니다"
-
-#~ msgid "'allowNonCompression' must be TRUE or FALSE"
-#~ msgstr "'allowNonCompression'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#~ msgid "'text' must be TRUE or FALSE"
-#~ msgstr "'text'는 반드시 TRUE 또는 FALSE이어야 합니다."
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"
@@ -10439,35 +10300,8 @@ msgstr "X11을 사용할 수 없습니다"
 #~ msgid "cannot allocate vector of size %0.1f Mb"
 #~ msgstr "크기가 %0.1f Mb인 벡터를 할당할 수 없습니다"
 
-#~ msgid "argument 'multiple' must be TRUE or FALSE"
-#~ msgstr "인자 'multiple'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#~ msgid "argument 'allow_surrogate_pairs' must be TRUE or FALSE"
-#~ msgstr "인자 'allow_surrogate_pairs'은 TRUE 또는 FALSE 이어야 합니다."
-
-#~ msgid "'decreasing' must be TRUE or FALSE"
-#~ msgstr "'decreasing'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#, c-format
-#~ msgid "length %d is too large for hashing"
-#~ msgstr "해싱을 하기에는 길이 %d가 너무 큽니다"
-
-#~ msgid "'fromLast' must be TRUE or FALSE"
-#~ msgstr "'fromLast'은 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#, fuzzy
-#~ msgid "'bounds' must be TRUE or FALSE"
-#~ msgstr "'onOff'는 반드시 TRUE 또는 FALSE이어야 합니다"
-
-#~ msgid "argument 'logarithm' must be logical"
-#~ msgstr "'logarithm' 인자는 반드시 논리형이어야 합니다."
-
-#~ msgid "'intern' must be logical and not NA"
-#~ msgstr "'intern'은 반드시 논리적이어야 하며 NA이어서는 안됩니다"
-
-#, fuzzy
-#~ msgid "'receive.console.signals' must be logical and not NA"
-#~ msgstr "'intern'은 반드시 논리적이어야 하며 NA이어서는 안됩니다"
+#~ msgid "'from' and 'to' are of different lengths"
+#~ msgstr "'from'과 'to'의 길이가 다릅니다"
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr "반환될 함수가 없기 때문에 최상위레벨로 이동합니다"

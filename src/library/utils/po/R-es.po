@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -58,18 +58,16 @@ msgstr ""
 #. R/packages.R: gettextf("'%s' must be a character string", "type")
 #. R/packages2.R: gettextf("'%s' must be a character string", "type")
 #: R/help.search.R:0 R/packages.R:0 R/packages2.R:0
-#, fuzzy
 msgid "'%s' must be a character string"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/help.start.R: gettextf("'%s' must be a non-empty character string", "url")
 #. R/help.start.R: gettextf("'%s' must be a non-empty character string", "browser")
 #. R/zip.R: gettextf("'%s' must be a non-empty character string", "unzip")
 #. R/zip.R: gettextf("'%s' must be a non-empty character string", "zip")
 #: R/help.start.R:0 R/zip.R:0
-#, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/indices.R: warning("'DESCRIPTION' file has an 'Encoding' field and re-encoding is not possible",     call. = FALSE)
 #: R/indices.R:0
@@ -110,9 +108,8 @@ msgstr ""
 
 #. R/package.skeleton.R: stop("'code_files' must be a character vector")
 #: R/package.skeleton.R:0
-#, fuzzy
 msgid "'code_files' must be a character vector"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
 #: R/write.table.R:0
@@ -138,9 +135,8 @@ msgstr ""
 #. R/unix/download.file.R: stop("'destfile' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'destfile' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-#, fuzzy
 msgid "'destfile' must be a length-one character vector"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/str.R: warning("'digits' and 'digits.d' are both specified and the latter is not used")
 #: R/str.R:0
@@ -159,9 +155,8 @@ msgstr ""
 
 #. R/debugger.R: gettextf("'dump' is not an object of class %s\n", dQuote("dump.frames"))
 #: R/debugger.R:0
-#, fuzzy
 msgid "'dump' is not an object of class %s"
-msgstr "la sintaxis de destino no es de la clase %s"
+msgstr ""
 
 #. R/packages2.R: stop("'env' must be an environment")
 #: R/packages2.R:0
@@ -170,15 +165,13 @@ msgstr ""
 
 #. R/progressBar.R: stop("'file' must be \"\" or an open connection object")
 #: R/progressBar.R:0
-#, fuzzy
 msgid "'file' must be \"\" or an open connection object"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/capture.output.R: stop("'file' must be NULL, a character string or a connection")
 #: R/capture.output.R:0
-#, fuzzy
 msgid "'file' must be NULL, a character string or a connection"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/write.table.R: stop("'file' must be a character string or connection")
@@ -188,9 +181,8 @@ msgstr "'file' debe ser una conexión o cadena de caracteres"
 
 #. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
 #: R/zip.R:0
-#, fuzzy
 msgid "'files' must be a character vector specifying one or more filepaths"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/fix.R: stop("'fix' requires a name")
 #: R/fix.R:0
@@ -225,9 +217,8 @@ msgstr "'headers' debe tener nombres y no deben ser NA"
 
 #. R/sock.R: stop("'host' must be character of length 1")
 #: R/sock.R:0
-#, fuzzy
 msgid "'host' must be character of length 1"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/packages2.R: gettextf("'lib = \"%s\"' is not writable", lib)
 #: R/packages2.R:0
@@ -236,9 +227,8 @@ msgstr ""
 
 #. R/package.skeleton.R: stop("'list' must be a character vector naming R objects")
 #: R/package.skeleton.R:0
-#, fuzzy
 msgid "'list' must be a character vector naming R objects"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/unix/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
@@ -269,22 +259,19 @@ msgstr ""
 
 #. R/str.R: warning("'object' does not have valid levels()")
 #: R/str.R:0
-#, fuzzy
 msgid "'object' does not have valid levels()"
-msgstr "el objeto %s no tiene clase \"SweaveSyntax\""
+msgstr ""
 
 #. R/data.R: stop("'package' must be a character vector or NULL")
 #: R/data.R:0
-#, fuzzy
 msgid "'package' must be a character vector or NULL"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
 #. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #: R/progressBar.R:0 R/windows/winDialog.R:0
-#, fuzzy
 msgid "'pb' is not from class %s"
-msgstr "la sintaxis de destino no es de la clase %s"
+msgstr ""
 
 #. R/sock.R: stop("'port' must be integer of length 1")
 #: R/sock.R:0
@@ -293,9 +280,8 @@ msgstr ""
 
 #. R/packages.R: stop("'priority' must be character or NULL")
 #: R/packages.R:0
-#, fuzzy
 msgid "'priority' must be character or NULL"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/write.table.R: stop("'quote' must be 'TRUE', 'FALSE' or numeric")
 #: R/write.table.R:0
@@ -319,15 +305,13 @@ msgstr ""
 
 #. R/tar.R: stop("'tarfile' must be a character string or a connection")
 #: R/tar.R:0
-#, fuzzy
 msgid "'tarfile' must be a character string or a connection"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/widgets.R: stop("'title' must be NULL or a length-1 character vector")
 #: R/widgets.R:0
-#, fuzzy
 msgid "'title' must be NULL or a length-1 character vector"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/help.R: stop("'topic' should be a name, length-one character vector or reserved word")
 #: R/help.R:0
@@ -337,9 +321,8 @@ msgstr ""
 #. R/unix/download.file.R: stop("'url' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'url' must be a length-one character vector")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-#, fuzzy
 msgid "'url' must be a length-one character vector"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/unix/download.file.R: stop("'wget' call had nonzero exit status")
 #. R/windows/download.file.R: stop("'wget' call had nonzero exit status")
@@ -478,6 +461,11 @@ msgstr ""
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr ""
 
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+msgid "Enter a frame number, or 0 to exit"
+msgstr ""
+
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
 msgid "Enter an environment number, or 0 to exit"
@@ -587,9 +575,8 @@ msgstr "No"
 #. R/tar.R: gettextf("No %s command found", sQuote("xz"))
 #. R/tar.R: gettextf("No %s command found", sQuote("zstd"))
 #: R/tar.R:0
-#, fuzzy
 msgid "No %s command found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/read.DIF.R: stop("No DIF data on clipboard")
 #: R/read.DIF.R:0
@@ -603,9 +590,8 @@ msgstr ""
 
 #. R/help.R: gettextf("No documentation for %s in specified packages and libraries:",     sQuote(topic))
 #: R/help.R:0
-#, fuzzy
 msgid "No documentation for %s in specified packages and libraries:"
-msgstr "no se ha encontrado documentación para %s en el paquete %s"
+msgstr ""
 
 #. R/packages.R: gettextf("No matching repositories found for %s", paste(name[is.na(m)],     collapse = ", "))
 #: R/packages.R:0
@@ -697,9 +683,8 @@ msgstr ""
 
 #. R/objects.R: gettextf("S3 method '%s' not found", method)
 #: R/objects.R:0
-#, fuzzy
 msgid "S3 method '%s' not found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/help.R: gettextf("Saving help page to %s", sQuote(ofile))
 #: R/help.R:0
@@ -708,9 +693,8 @@ msgstr ""
 
 #. R/mach-o.R: stop("Source must be a seekable connection")
 #: R/mach-o.R:0
-#, fuzzy
 msgid "Source must be a seekable connection"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
 #: R/relist.R:0
@@ -799,15 +783,13 @@ msgstr "Respuesta desconocida"
 
 #. R/read.DIF.R: stop("Unrecognized special data value")
 #: R/read.DIF.R:0
-#, fuzzy
 msgid "Unrecognized special data value"
-msgstr "Respuesta desconocida"
+msgstr ""
 
 #. R/read.DIF.R: stop("Unrecognized value indicator")
 #: R/read.DIF.R:0
-#, fuzzy
 msgid "Unrecognized value indicator"
-msgstr "Respuesta desconocida"
+msgstr ""
 
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
 #. R/packages2.R: message("Updating HTML index of packages in '.Library'")
@@ -882,9 +864,8 @@ msgstr ""
 
 #. R/citation.R: gettextf("all arguments must be of class %s", dQuote("person"))
 #: R/citation.R:0
-#, fuzzy
 msgid "all arguments must be of class %s"
-msgstr "la sintaxis de destino no es de la clase %s"
+msgstr ""
 
 #. R/citation.R: stop("all fields have to be named")
 #: R/citation.R:0
@@ -1074,9 +1055,8 @@ msgstr ""
 
 #. R/data.R: gettextf("data set %s not found", sQuote(name))
 #: R/data.R:0
-#, fuzzy
 msgid "data set %s not found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/de.R: warning("did not assign() anything")
 #: R/de.R:0
@@ -1318,9 +1298,8 @@ msgstr "longitud de 'row.names' inválida"
 
 #. R/write.table.R: stop("invalid 'col.names' specification")
 #: R/write.table.R:0
-#, fuzzy
 msgid "invalid 'col.names' specification"
-msgstr "longitud de 'row.names' inválida"
+msgstr ""
 
 #. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
 #: R/head.R:0
@@ -1362,9 +1341,8 @@ msgstr "longitud de 'row.names' inválida"
 #. R/readtable.R: stop("invalid 'row.names' specification")
 #. R/write.table.R: stop("invalid 'row.names' specification")
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
-#, fuzzy
 msgid "invalid 'row.names' specification"
-msgstr "longitud de 'row.names' inválida"
+msgstr ""
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -1550,9 +1528,8 @@ msgstr "no se ha encontrado documentación para %s en el paquete %s"
 
 #. R/question.R: gettextf("no documentation for function %s and signature %s",     sQuote(f), sQuote(sigFormat(sigNames, sigClasses)))
 #: R/question.R:0
-#, fuzzy
 msgid "no documentation for function %s and signature %s"
-msgstr "no se ha encontrado documentación para %s en el paquete %s"
+msgstr ""
 
 #. R/question.R: gettextf("no documentation of type %s and topic %s (or error in processing help)",     sQuote(type), sQuote(topicExpr))
 #: R/question.R:0
@@ -1566,9 +1543,8 @@ msgstr ""
 
 #. R/objects.R: gettextf("no function '%s' could be found", f)
 #: R/objects.R:0
-#, fuzzy
 msgid "no function '%s' could be found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/objects.R: gettextf("no function '%s' is visible", generic.function)
 #: R/objects.R:0
@@ -1624,9 +1600,8 @@ msgstr ""
 
 #. R/page.R: gettextf("no object named '%s' to show", x)
 #: R/page.R:0
-#, fuzzy
 msgid "no object named '%s' to show"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/packages.R: gettextf("no package %s at the repositories", sQuote(p))
 #: R/packages.R:0
@@ -1635,9 +1610,8 @@ msgstr ""
 
 #. R/indices.R: gettextf("no package '%s' was found", pkg)
 #: R/indices.R:0
-#, fuzzy
 msgid "no package '%s' was found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/packages2.R: stop("no packages were specified")
 #: R/packages2.R:0
@@ -1804,9 +1778,8 @@ msgstr ""
 
 #. R/read.DIF.R: stop("row and column counts not found")
 #: R/read.DIF.R:0
-#, fuzzy
 msgid "row and column counts not found"
-msgstr "El documento no se ha encontrado"
+msgstr ""
 
 #. R/read.DIF.R: stop("rows are empty: giving up")
 #: R/read.DIF.R:0
@@ -2022,9 +1995,8 @@ msgstr ""
 
 #. R/vignette.R: gettextf("vignette %s not found", sQuote(topic))
 #: R/vignette.R:0
-#, fuzzy
 msgid "vignette %s not found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/windows/winDialog.R: stop("winDialog() cannot be used non-interactively")
 #: R/windows/winDialog.R:0
@@ -2053,17 +2025,15 @@ msgstr ""
 
 #. R/windows/install.packages.R: gettextf("zip file %s not found", sQuote(zipname))
 #: R/windows/install.packages.R:0
-#, fuzzy
 msgid "zip file %s not found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/Sweave.R: ngettext(length(f), "%d Sweave file for basename %s found", "%d Sweave files for basename %s found",     domain = "R-utils")
 #: R/Sweave.R:0
-#, fuzzy
 msgid "%d Sweave file for basename %s found"
 msgid_plural "%d Sweave files for basename %s found"
-msgstr[0] "Ningún archivo Sweave con nombre %s encontrado"
-msgstr[1] "Ningún archivo Sweave con nombre %s encontrado"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
 #: R/modifyList.R:0
@@ -2139,11 +2109,10 @@ msgstr[1] ""
 #. R/citation.R: ngettext(length(role), "Invalid role specification: %s.", "Invalid role specifications: %s.")
 #. R/citation.R: ngettext(length(pos[ind]), "Invalid role specification: %s.",     "Invalid role specifications: %s.")
 #: R/citation.R:0
-#, fuzzy
 msgid "Invalid role specification: %s."
 msgid_plural "Invalid role specifications: %s."
-msgstr[0] "longitud de 'row.names' inválida"
-msgstr[1] "longitud de 'row.names' inválida"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
 #: R/Sweave.R:0
@@ -2243,11 +2212,10 @@ msgstr[1] ""
 
 #. R/package.skeleton.R: ngettext(sum(!have), "object '%s' not found", "objects '%s' not found")
 #: R/package.skeleton.R:0
-#, fuzzy
 msgid "object '%s' not found"
 msgid_plural "objects '%s' not found"
-msgstr[0] "archivo '%s' no encontrado"
-msgstr[1] "archivo '%s' no encontrado"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/packages.R: ngettext(sum(base), "package %s is a base package, and cannot be removed",     "packages %s are base packages, and cannot be removed")
 #: R/packages.R:0
@@ -2283,23 +2251,3 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "longitud de 'row.names' inválida"
-
-#, fuzzy
-#~ msgid "invalid 'data' argument"
-#~ msgstr "longitud de 'row.names' inválida"
-
-#, fuzzy
-#~ msgid "invalid 'modes' argument"
-#~ msgstr "longitud de 'row.names' inválida"
-
-#, fuzzy
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "longitud de 'row.names' inválida"
-
-#, fuzzy
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "longitud de 'row.names' inválida"

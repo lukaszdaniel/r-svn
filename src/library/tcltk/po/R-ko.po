@@ -22,7 +22,6 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
-#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "'filters'는 반드시 2개의 열로 이루어진 문자형 행렬이어야 합니다."
 
@@ -68,7 +67,6 @@ msgstr "도움말"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Help topic:"
 msgstr "도움말 주제:"
 
@@ -79,7 +77,6 @@ msgstr "CRAN으로부터 패키지 설치하기"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "대화식 선형적합"
 
@@ -90,7 +87,6 @@ msgstr "불러오기"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Load packages"
 msgstr "패키지 불러오기"
 
@@ -121,25 +117,21 @@ msgstr "R 자주 찾는 질문들"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Save workspace"
-msgstr "작업공간을 저장하지 않습니다"
+msgstr "작업공간을 저장합니다"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Source R code"
 msgstr "R 코드 읽어오기"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
-#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "Tcl 패키지 '%s'를 찾을 수 없습니다"
 
 #. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
 #: R/windows/zzz.R:0
-#, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "Tcl/Tk을 사용하는데 필요한 파일들이 설치되지 않았습니다."
 
@@ -155,7 +147,6 @@ msgstr "tkGUI는 윈도우즈에서 사용할 수 없습니다."
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
-#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "Tcl 배열에 있는 이름을 변경할 수 없습니다."
 
@@ -178,7 +169,3 @@ msgstr "t 테스트"
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr ""
-
-#, fuzzy
-#~ msgid "gettext(\"Save workspace\")"
-#~ msgstr "작업공간을 저장합니다"

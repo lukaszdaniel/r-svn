@@ -690,9 +690,8 @@ msgstr "오로지 1차원에서만 이용가능합니다"
 
 #. R/pairs.R: stop("only one column in the argument to 'pairs'")
 #: R/pairs.R:0
-#, fuzzy
 msgid "only one column in the argument to 'pairs'"
-msgstr "'pairs'에 숫자가 아닌 인자가 전달되었습니다"
+msgstr ""
 
 #. R/abline.R: gettextf("only using the first two of %d regression coefficients",     p)
 #: R/abline.R:0
@@ -821,14 +820,14 @@ msgstr[0] ""
 #~ msgid "invalid 'axp'"
 #~ msgstr "유효한 'axp'가 아닙니다"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "유효하지 않은 'given.values'입니다"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "유효한 'log'가 아닙니다"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "유효하지 않은 'title'입니다"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "유효한 'usr'이 아닙니다"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "유효하지 않은 'given.values'입니다"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "유효하지 않은 'title'입니다"

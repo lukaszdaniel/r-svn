@@ -58,15 +58,13 @@ msgstr ""
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
 #: R/models.R:0 R/reshape.R:0
-#, fuzzy
 msgid "'%s' must be a character string"
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+msgstr ""
 
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 #: R/power.R:0
-#, fuzzy
 msgid "'%s' must be numeric in [0, 1]"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 #: R/addmargins.R:0
@@ -75,9 +73,8 @@ msgstr ""
 
 #. R/dendrogram.R: stop("'ColSideColors' must be a character vector of length ncol(x)")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "'ColSideColors' must be a character vector of length ncol(x)"
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+msgstr ""
 
 #. R/anova.R: stop("'P.values' is TRUE, but 'has.Pvalue' is not")
 #: R/anova.R:0
@@ -86,15 +83,13 @@ msgstr ""
 
 #. R/dendrogram.R: stop("'RowSideColors' must be a character vector of length nrow(x)")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "'RowSideColors' must be a character vector of length nrow(x)"
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+msgstr ""
 
 #. R/poisson.test.R: stop("'T' must be nonnegative")
 #: R/poisson.test.R:0
-#, fuzzy
 msgid "'T' must be nonnegative"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/cor.R: stop("'V' is not a square numeric matrix")
 #: R/cor.R:0
@@ -158,9 +153,8 @@ msgstr ""
 
 #. R/aggregate.R: stop("'by' must be a list")
 #: R/aggregate.R:0
-#, fuzzy
 msgid "'by' must be a list"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/kmeans.R: stop("'centers' must be a number or a matrix")
 #: R/kmeans.R:0
@@ -174,15 +168,13 @@ msgstr ""
 
 #. R/kernel.R: stop("'coef' does not have the correct length")
 #: R/kernel.R:0
-#, fuzzy
 msgid "'coef' does not have the correct length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/kernel.R: stop("'coef' must be a vector")
 #: R/kernel.R:0
-#, fuzzy
 msgid "'coef' must be a vector"
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+msgstr ""
 
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
@@ -227,9 +219,8 @@ msgstr ""
 #. R/nlminb.R: stop("'control' argument must be a named list")
 #. R/nls.R: stop("'control' argument must be a named list")
 #: R/nlminb.R:0 R/nls.R:0
-#, fuzzy
 msgid "'control' argument must be a named list"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/nlminb.R: gettextf("'control' component '%s' = %g, is out of range", names(port_cpos)[B],     v[iv1])
 #: R/nlminb.R:0
@@ -414,9 +405,8 @@ msgstr ""
 
 #. R/nlm.R: stop("'interval' must be a vector of length 2")
 #: R/nlm.R:0
-#, fuzzy
 msgid "'interval' must be a vector of length 2"
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+msgstr ""
 
 #. R/kmeans.R: stop("'iter.max' must be positive")
 #: R/kmeans.R:0
@@ -425,9 +415,8 @@ msgstr ""
 
 #. R/identify.hclust.R: stop("'k' and 'h' must be a scalar")
 #: R/identify.hclust.R:0
-#, fuzzy
 msgid "'k' and 'h' must be a scalar"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/runmed.R: gettextf("'k' is bigger than 'n'!  Changing 'k' to %d", k <- as.integer(1 +     2 * ((n - 1)%/%2)))
 #: R/runmed.R:0
@@ -456,9 +445,8 @@ msgstr ""
 
 #. R/runmed.R: stop("'k' must be positive")
 #: R/runmed.R:0
-#, fuzzy
 msgid "'k' must be positive"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/kernel.R: stop("'kernapply' is not available for object 'x'")
 #: R/kernel.R:0
@@ -507,9 +495,8 @@ msgstr ""
 
 #. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #: R/termplot.R:0
-#, fuzzy
 msgid "'main' must be TRUE, FALSE, NULL or character (vector)."
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+msgstr ""
 
 #. R/loglin.R: stop("'margin' must contain names or numbers corresponding to 'table'")
 #: R/loglin.R:0
@@ -533,9 +520,8 @@ msgstr ""
 
 #. R/ts.R: stop("'model' must be list")
 #: R/ts.R:0
-#, fuzzy
 msgid "'model' must be list"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/model.tables.R: stop("'model.tables' is not implemented for multiple responses")
 #: R/model.tables.R:0
@@ -545,9 +531,8 @@ msgstr ""
 #. R/t.test.R: stop("'mu' must be a single number")
 #. R/wilcox.test.R: stop("'mu' must be a single number")
 #: R/t.test.R:0 R/wilcox.test.R:0
-#, fuzzy
 msgid "'mu' must be a single number"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/fisher.test.R: stop("'mult' must be integer >= 2, typically = 30")
 #: R/fisher.test.R:0
@@ -599,9 +584,8 @@ msgstr ""
 
 #. R/smspline.R: stop("'nknots' must be numeric (in {1,..,n})")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'nknots' must be numeric (in {1,..,n})"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/ppr.R: stop("'nterms' is missing with no default")
 #: R/ppr.R:0
@@ -620,9 +604,8 @@ msgstr ""
 
 #. R/models.R: stop("'offset' must be numeric")
 #: R/models.R:0
-#, fuzzy
 msgid "'offset' must be numeric"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/fisher.test.R: stop("'or' must be a single number between 0 and Inf")
 #: R/fisher.test.R:0
@@ -647,9 +630,8 @@ msgstr ""
 
 #. R/ar.R: stop("'order.max' must be < 'n.used'")
 #: R/ar.R:0
-#, fuzzy
 msgid "'order.max' must be < 'n.used'"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/ar.R: stop("'order.max' must be >= 0")
 #: R/ar.R:0
@@ -673,9 +655,8 @@ msgstr ""
 
 #. R/prop.test.R: stop("'p' must have the same length as 'x' and 'n'")
 #: R/prop.test.R:0
-#, fuzzy
 msgid "'p' must have the same length as 'x' and 'n'"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/nls-profile.R: stop("'params' has wrong length")
 #: R/nls-profile.R:0
@@ -832,9 +813,8 @@ msgstr ""
 
 #. R/loglin.R: stop("'start' and 'table' must be same length")
 #: R/loglin.R:0
-#, fuzzy
 msgid "'start' and 'table' must be same length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/ts.R: stop("'start' cannot be after 'end'")
 #: R/ts.R:0
@@ -899,9 +879,8 @@ msgstr ""
 
 #. R/reshape.R: stop("'varying' arguments must be the same length")
 #: R/reshape.R:0
-#, fuzzy
 msgid "'varying' arguments must be the same length"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/nls-profile.R: stop("'varying' has wrong length")
 #: R/nls-profile.R:0
@@ -936,9 +915,8 @@ msgstr ""
 #. R/glm.R: stop("'weights' must be a numeric vector")
 #. R/lm.R: stop("'weights' must be a numeric vector")
 #: R/glm.R:0 R/lm.R:0
-#, fuzzy
 msgid "'weights' must be a numeric vector"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/density.R: stop("'weights' must not be negative")
 #: R/density.R:0
@@ -962,50 +940,43 @@ msgstr ""
 
 #. R/poisson.test.R: stop("'x' and 'T' have incompatible length")
 #: R/poisson.test.R:0
-#, fuzzy
 msgid "'x' and 'T' have incompatible length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/bartlett.test.R: stop("'x' and 'g' must have the same length")
 #. R/fligner.test.R: stop("'x' and 'g' must have the same length")
 #. R/kruskal.test.R: stop("'x' and 'g' must have the same length")
 #: R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
-#, fuzzy
 msgid "'x' and 'g' must have the same length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/pairwise.R: stop("'x' and 'n' must have the same length")
 #. R/prop.test.R: stop("'x' and 'n' must have the same length")
 #: R/pairwise.R:0 R/prop.test.R:0
-#, fuzzy
 msgid "'x' and 'n' must have the same length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/chisq.test.R: stop("'x' and 'p' must have the same number of elements")
 #: R/chisq.test.R:0
-#, fuzzy
 msgid "'x' and 'p' must have the same number of elements"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/weighted.mean.R: stop("'x' and 'w' must have the same length")
 #: R/weighted.mean.R:0
-#, fuzzy
 msgid "'x' and 'w' must have the same length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/density.R: stop("'x' and 'weights' have unequal length")
 #: R/density.R:0
-#, fuzzy
 msgid "'x' and 'weights' have unequal length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/chisq.test.R: stop("'x' and 'y' must have at least 2 levels")
 #. R/fisher.test.R: stop("'x' and 'y' must have at least 2 levels")
 #. R/mantelhaen.test.R: stop("'x' and 'y' must have at least 2 levels")
 #: R/chisq.test.R:0 R/fisher.test.R:0 R/mantelhaen.test.R:0
-#, fuzzy
 msgid "'x' and 'y' must have at least 2 levels"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/chisq.test.R: stop("'x' and 'y' must have the same length")
 #. R/cor.test.R: stop("'x' and 'y' must have the same length")
@@ -1019,9 +990,8 @@ msgstr "'x' és 'y' azonos hosszúságú kell legyen"
 
 #. R/mcnemar.test.R: stop("'x' and 'y' must have the same number of levels (minimum 2)")
 #: R/mcnemar.test.R:0
-#, fuzzy
 msgid "'x' and 'y' must have the same number of levels (minimum 2)"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/density.R: stop("'x' contains missing values")
 #: R/density.R:0
@@ -1099,9 +1069,8 @@ msgstr ""
 
 #. R/lm.R: stop("'x' must be a matrix")
 #: R/lm.R:0
-#, fuzzy
 msgid "'x' must be a matrix"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/cov.wt.R: stop("'x' must be a matrix or a data frame")
 #: R/cov.wt.R:0
@@ -1110,15 +1079,13 @@ msgstr ""
 
 #. R/dendrogram.R: stop("'x' must be a numeric matrix")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "'x' must be a numeric matrix"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/cor.test.R: stop("'x' must be a numeric vector")
 #: R/cor.test.R:0
-#, fuzzy
 msgid "'x' must be a numeric vector"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/spectrum.R: stop("'x' must be a time series or an ar() fit")
 #: R/spectrum.R:0
@@ -1127,9 +1094,8 @@ msgstr ""
 
 #. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #: R/ftable.R:0
-#, fuzzy
 msgid "'x' must be an \"ftable\" object"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/symnum.R: gettextf("'x' must be between %s and %s", format(minc), format(maxc))
 #: R/symnum.R:0
@@ -1158,9 +1124,8 @@ msgstr ""
 
 #. R/distn.R: stop("'x' must be non-negative")
 #: R/distn.R:0
-#, fuzzy
 msgid "'x' must be non-negative"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/binom.test.R: stop("'x' must be nonnegative and integer")
 #: R/binom.test.R:0
@@ -1197,9 +1162,8 @@ msgstr ""
 #. R/pairwise.R: stop("'x' must have 2 columns")
 #. R/prop.test.R: stop("'x' must have 2 columns")
 #: R/pairwise.R:0 R/prop.test.R:0
-#, fuzzy
 msgid "'x' must have 2 columns"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/dendrogram.R: stop("'x' must have at least 2 rows and 2 columns")
 #: R/dendrogram.R:0
@@ -1213,21 +1177,18 @@ msgstr ""
 
 #. R/stepfun.R: stop("'x' must have length >= 1")
 #: R/stepfun.R:0
-#, fuzzy
 msgid "'x' must have length >= 1"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/mantelhaen.test.R: stop("'x', 'y', and 'z' must have the same length")
 #: R/mantelhaen.test.R:0
-#, fuzzy
 msgid "'x', 'y', and 'z' must have the same length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/diffinv.R: stop("'xi' does not have the right length")
 #: R/diffinv.R:0
-#, fuzzy
 msgid "'xi' does not have the right length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/arima.R: stop("'xreg' and 'newxreg' have different numbers of columns")
 #. R/arma0.R: stop("'xreg' and 'newxreg' have different numbers of columns")
@@ -1242,9 +1203,8 @@ msgstr ""
 
 #. R/ts.R: stop("'xy.labels' must be logical or character")
 #: R/ts.R:0
-#, fuzzy
 msgid "'xy.labels' must be logical or character"
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+msgstr ""
 
 #. R/cancor.R: stop("'y' has rank 0")
 #: R/cancor.R:0
@@ -1259,23 +1219,20 @@ msgstr ""
 
 #. R/cor.test.R: stop("'y' must be a numeric vector")
 #: R/cor.test.R:0
-#, fuzzy
 msgid "'y' must be a numeric vector"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/spline.R: stop("'y' must be increasing or decreasing")
 #. R/splinefun.R: stop("'y' must be increasing or decreasing")
 #: R/spline.R:0 R/splinefun.R:0
-#, fuzzy
 msgid "'y' must be increasing or decreasing"
-msgstr "'file' karakterlánc vagy összeköttetés kell hogy legyen"
+msgstr ""
 
 #. R/cor.R: stop("'y' must be numeric")
 #. R/wilcox.test.R: stop("'y' must be numeric")
 #: R/cor.R:0 R/wilcox.test.R:0
-#, fuzzy
 msgid "'y' must be numeric"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/ks.test.R: stop("'y' must be numeric or a function or a string naming a valid function")
 #: R/ks.test.R:0
@@ -1284,9 +1241,8 @@ msgstr ""
 
 #. R/smspline.R: stop("'y' must be numeric vector")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'y' must be numeric vector"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/stepfun.R: stop("'y' must be one longer than 'x'")
 #: R/stepfun.R:0
@@ -1296,9 +1252,8 @@ msgstr ""
 #. R/friedman.test.R: stop("'y', 'groups' and 'blocks' must have the same length")
 #. R/quade.test.R: stop("'y', 'groups' and 'blocks' must have the same length")
 #: R/friedman.test.R:0 R/quade.test.R:0
-#, fuzzy
 msgid "'y', 'groups' and 'blocks' must have the same length"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
@@ -1441,9 +1396,8 @@ msgstr ""
 
 #. R/ar.R: stop("NAs in 'x' must be the same row-wise")
 #: R/ar.R:0
-#, fuzzy
 msgid "NAs in 'x' must be the same row-wise"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
@@ -1669,21 +1623,18 @@ msgstr ""
 
 #. R/selfStart.R: stop("argument 'object' has an impossible length")
 #: R/selfStart.R:0
-#, fuzzy
 msgid "argument 'object' has an impossible length"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/ks.test.R: stop("argument 'p' must be numeric")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'p' must be numeric"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/ks.test.R: stop("argument 'q' must be numeric")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'q' must be numeric"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/filter.R: stop("argument 'sides' must be 1 or 2")
 #: R/filter.R:0
@@ -1692,9 +1643,8 @@ msgstr ""
 
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'sizes' must be a vector of length 2"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/nls.R: warning("argument 'subset' will be ignored")
 #: R/nls.R:0
@@ -1703,27 +1653,23 @@ msgstr ""
 
 #. R/hclust.R: gettextf("argument 'x' cannot be coerced to class %s", dQuote("hclust"))
 #: R/hclust.R:0
-#, fuzzy
 msgid "argument 'x' cannot be coerced to class %s"
-msgstr "a töblet argumentumok figyelmen kívül lettek hagyva"
+msgstr ""
 
 #. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
-#, fuzzy
 msgid "argument 'x' is missing -- it has been renamed from 'formula'"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
-#, fuzzy
 msgid "argument 'x' must be a formula"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/density.R: stop("argument 'x' must be numeric")
 #: R/density.R:0
-#, fuzzy
 msgid "argument 'x' must be numeric"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/proj.R: stop("argument does not include a 'qr' component")
 #: R/proj.R:0
@@ -1737,9 +1683,8 @@ msgstr ""
 
 #. R/r2dtable.R: stop("arguments 'r' and 'c' must have the same sums")
 #: R/r2dtable.R:0
-#, fuzzy
 msgid "arguments 'r' and 'c' must have the same sums"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/aggregate.R: stop("arguments must have same length")
 #: R/aggregate.R:0
@@ -1748,9 +1693,8 @@ msgstr "minden argumentum hossza azonos kell legyen"
 
 #. R/contr.poly.R: stop("arguments must have the same length")
 #: R/contr.poly.R:0
-#, fuzzy
 msgid "arguments must have the same length"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/lm.R: warning("assuming prediction variance inversely proportional to weights used for fitting\n")
 #: R/lm.R:0
@@ -1820,9 +1764,8 @@ msgstr ""
 
 #. R/cor.R: stop("both 'x' and 'y' must be non-empty")
 #: R/cor.R:0
-#, fuzzy
 msgid "both 'x' and 'y' must be non-empty"
-msgstr "'x' és 'y' azonos hosszúságú kell legyen"
+msgstr ""
 
 #. R/optim.R: warning("bounds can only be used with method L-BFGS-B (or Brent)")
 #: R/optim.R:0
@@ -2256,9 +2199,8 @@ msgstr ""
 
 #. R/loess.R: stop("first argument must be a \"loess\" object")
 #: R/loess.R:0
-#, fuzzy
 msgid "first argument must be a \"loess\" object"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/glm.R: warning("fitting to calculate the null deviance did not converge -- increase 'maxit'?")
 #: R/glm.R:0
@@ -3532,9 +3474,8 @@ msgstr ""
 
 #. R/loess.R: stop("predictors must all be numeric")
 #: R/loess.R:0
-#, fuzzy
 msgid "predictors must all be numeric"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/distn.R: stop("probabilities must be finite, non-negative and not all 0")
 #: R/distn.R:0
@@ -3822,9 +3763,8 @@ msgstr ""
 
 #. R/aov.R: stop("the 'split' argument must be a list")
 #: R/aov.R:0
-#, fuzzy
 msgid "the 'split' argument must be a list"
-msgstr "minden argumentum hossza azonos kell legyen"
+msgstr ""
 
 #. R/poisson.test.R: stop("the case k > 2 is unimplemented")
 #: R/poisson.test.R:0
@@ -4519,11 +4459,10 @@ msgstr[1] ""
 
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"%s\"",     "extra arguments %s are not of class \"%s\"")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "extra argument %s is not of class \"%s\""
 msgid_plural "extra arguments %s are not of class \"%s\""
-msgstr[0] "a töblet argumentumok figyelmen kívül lettek hagyva"
-msgstr[1] "a töblet argumentumok figyelmen kívül lettek hagyva"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/models.R: ngettext(length(m), "factor %s has new level %s", "factor %s has new levels %s",     domain = "R-stats")
 #: R/models.R:0

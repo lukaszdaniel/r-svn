@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/modifyList.R: gettextf("%d errors caught in %s.  The error messages and their frequencies are",     sum(tt), e.call)
@@ -479,6 +479,12 @@ msgstr "Отредактируйте файл и поместите его в п
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "Либо убедитесь в том, что Вы преобразовали из списка объект, который можно восстановить, либо определите 'skeleton' отдельно."
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "Введите номер окружения или 0 для выхода"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -2345,20 +2351,8 @@ msgstr[0] "пакет '%s' недоступен (%s)"
 msgstr[1] "пакеты %s недоступны (%s)"
 msgstr[2] "пакеты %s недоступны (%s)"
 
-#~ msgid "path is empty"
-#~ msgstr "путь пуст"
-
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Неправильный аргумент 'filter'."
-
-#~ msgid "invalid 'type'"
-#~ msgstr "неправильный 'type'"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "неправильный аргумент 'filter'."
-
-#~ msgid "invalid %s argument"
-#~ msgstr "неправильный аргумент %s"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "неправильный аргумент 'data'"
@@ -2366,54 +2360,14 @@ msgstr[2] "пакеты %s недоступны (%s)"
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "неправильный аргумент 'modes'"
 
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "неправильный аргумент 'socket'"
-
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "неправильный аргумент 'tarfile'"
-
 #~ msgid "invalid 'x' argument"
 #~ msgstr "неправильный аргумент 'x'"
-
-#~ msgid "cannot choose a"
-#~ msgstr "не могу выбрать"
-
-#~ msgid "mirror non-interactively"
-#~ msgstr "использую зеркало неинтерактивно"
-
-#~ msgid "'memory.limit()' is Windows-specific"
-#~ msgstr "'memory.limit()' -- Windows-специфичный"
-
-#~ msgid "'memory.size()' is Windows-specific"
-#~ msgstr "'memory.size()' -- Windows-специфичный"
-
-#~ msgid "argument %s must be a character string"
-#~ msgstr "аргумент %s должен быть текстовой строкой"
-
-#~ msgid "invalid 'type'; must be a character string"
-#~ msgstr "неправильный 'type'; должен быть текстовой строкой"
-
-#~ msgid ""
-#~ "tail(., addrownums = V) is deprecated.\n"
-#~ "Use"
-#~ msgstr ""
-#~ "tail(., addrownums = V) не разрешается.\n"
-#~ "Используйте"
 
 #~ msgid "tail(., keepnums = V) instead."
 #~ msgstr "вместо этого tail(., keepnums = V)."
 
-#~ msgid "bzip2"
-#~ msgstr "bzip2"
-
-#~ msgid "gzip"
-#~ msgstr "gzip"
-
-#~ msgid "xz"
-#~ msgstr "xz"
-
-#~ msgid ","
-#~ msgstr ","
+#~ msgid "tail(., addrownums=.) is"
+#~ msgstr "tail(., addrownums=.)"
 
 #~ msgid ""
 #~ "deprecated.\n"
@@ -2422,14 +2376,56 @@ msgstr[2] "пакеты %s недоступны (%s)"
 #~ "не разрешается.\n"
 #~ "Используйте"
 
-#~ msgid "tail(., addrownums=.) is"
-#~ msgstr "tail(., addrownums=.)"
-
 #~ msgid "tail(., keepnums=.) instead."
 #~ msgstr "вместо этого tail(., keepnums=.)."
 
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "неправильный аргумент 'filter'."
+
+#~ msgid "invalid 'type'"
+#~ msgstr "неправильный 'type'"
+
+#~ msgid "cannot choose a"
+#~ msgstr "не могу выбрать"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "использую зеркало неинтерактивно"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "неправильный аргумент 'socket'"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "неправильный аргумент 'tarfile'"
+
+#~ msgid "gzip"
+#~ msgstr "gzip"
+
+#~ msgid "bzip2"
+#~ msgstr "bzip2"
+
+#~ msgid "xz"
+#~ msgstr "xz"
+
+#~ msgid "path is empty"
+#~ msgstr "путь пуст"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()' -- Windows-специфичный"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' -- Windows-специфичный"
+
 #~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 #~ msgstr "Рекомендуется использовать %s/%s вместо %s/%s/%s."
+
+#~ msgid "argument %s must be a character string"
+#~ msgstr "аргумент %s должен быть текстовой строкой"
+
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "неправильный 'type'; должен быть текстовой строкой"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr "файл 'filelist' в папке %s не найден"

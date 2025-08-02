@@ -92,9 +92,8 @@ msgstr "'hgap' doit contenir une seule unité"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr "'x' et 'y' doivent être de longueur unitaire"
+msgstr ""
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -414,9 +413,8 @@ msgstr "Le modèle doit être basé sur le grob"
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr "justification horizontale incorrecte"
+msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -436,9 +434,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown width; using first width"
-msgstr "justification horizontale incorrecte"
+msgstr ""
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -959,17 +956,20 @@ msgid_plural "invalid viewport names"
 msgstr[0] "nom de vue incorrect"
 msgstr[1] "noms de vues incorrects"
 
-#~ msgid "invalid 'clip' value"
-#~ msgstr "valeur 'clip' incorrecte"
-
 #~ msgid "invalid 'frame'"
 #~ msgstr "'frame' incorrect"
 
-#~ msgid "invalid 'gp' value"
-#~ msgstr "valeur 'gp' incorrecte"
-
 #~ msgid "invalid 'grob'"
 #~ msgstr "'grob' incorrect"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "'result' incorrect"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "argument 'print' incorrect"
+
+#~ msgid "invalid listing"
+#~ msgstr "listing incorrect"
 
 #~ msgid "invalid 'listing'"
 #~ msgstr "'listing' incorrect"
@@ -977,8 +977,8 @@ msgstr[1] "noms de vues incorrects"
 #~ msgid "invalid 'origin'"
 #~ msgstr "'origin' incorrecte"
 
-#~ msgid "invalid 'result'"
-#~ msgstr "'result' incorrect"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "argument 'arrow' incorrect"
 
 #~ msgid "invalid 'rot' value"
 #~ msgstr "valeur 'rot' incorrecte"
@@ -986,14 +986,11 @@ msgstr[1] "noms de vues incorrects"
 #~ msgid "invalid 'theta'"
 #~ msgstr "'theta' incorrect"
 
-#~ msgid "invalid listing"
-#~ msgstr "listing incorrect"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "valeur 'gp' incorrecte"
 
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "argument 'arrow' incorrect"
-
-#~ msgid "invalid 'print' argument"
-#~ msgstr "argument 'print' incorrect"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "valeur 'clip' incorrecte"
 
 #~ msgid "Invalid compositing operator"
 #~ msgstr "Opérateur de composition invalide"

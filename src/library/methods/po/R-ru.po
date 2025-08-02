@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
@@ -2161,14 +2161,14 @@ msgstr[0] "формальный аргумент общей функции дл�
 msgstr[1] "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, используемых по умолчанию (%s)"
 msgstr[2] "формальные аргументы общей функции для \"%s\" (%s) отличаются от не-общих, используемых по умолчанию (%s)"
 
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "Функция должна быть S4 общей"
-
 #~ msgid "E := environment(): %s; parent.env(E): %s"
 #~ msgstr "E := environment(): %s; parent.env(E): %s"
 
 #~ msgid "(and methods)"
 #~ msgstr "(и методы)"
+
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "Функция должна быть S4 общей"
 
 #~ msgid "invalid method sublist"
 #~ msgstr "неверный подсписок методов"

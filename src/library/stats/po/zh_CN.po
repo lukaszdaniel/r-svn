@@ -600,7 +600,7 @@ msgstr "公式里有'.'，而没有'data'这一参数"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m'的值必需是列表"
+msgstr "n至少需要是二"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1057,29 +1057,26 @@ msgstr "最后%d个观测值里出现了缺省值"
 msgid "ifault=%d. This should not happen"
 msgstr "这不应该发生"
 
-#~ msgid "n must be at least two"
-#~ msgstr "n至少需要是二"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m)的值必需为二"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "lag.max的值无效"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "ExtractVars里的模型公式无效"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "EncodeVars中的模型公式无效"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m)的值必需为二"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control'的值必需为列表"
 
-#~ msgid "m must be a list"
-#~ msgstr "m必需为列表"
-
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf被换成最大的正值"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "lag.max的值无效"
+
+#~ msgid "m must be a list"
+#~ msgstr "m必需为列表"
 
 #, fuzzy
 #~ msgid "'x' is a factor"

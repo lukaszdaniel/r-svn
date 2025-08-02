@@ -21,7 +21,6 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
-#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "'filters' dev'essere una matrice di caratteri a 2 colonne"
 
@@ -67,7 +66,6 @@ msgstr "Aiuto"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Help topic:"
 msgstr "Argomento guida:"
 
@@ -78,7 +76,6 @@ msgstr "Installa pacchetti da CRAN"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "Linear fitting interattivo"
 
@@ -89,7 +86,6 @@ msgstr "Carica"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Load packages"
 msgstr "Carica pacchetti"
 
@@ -120,25 +116,21 @@ msgstr "R FAQ"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Save workspace"
-msgstr "Non salvare il workspace"
+msgstr "Salva workspace"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Source R code"
 msgstr "Codice sorgente R"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
-#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "Pacchetto Tcl '%s' non trovato"
 
 #. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
 #: R/windows/zzz.R:0
-#, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "I file di supporto a Tcl/Tk non sono stati installati"
 
@@ -154,7 +146,6 @@ msgstr "La tkGUI non è disponibile su Windows"
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
-#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "non è possibile cambiare i nomi di un array Tcl"
 
@@ -177,11 +168,3 @@ msgstr "test t"
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr "tcltk DLL è linkato a"
-
-#, fuzzy
-#~ msgid "gettext(\"Save workspace\")"
-#~ msgstr "Salva workspace"
-
-#, fuzzy
-#~ msgid "message(\"tcltk DLL is linked to \", shQuote(this))"
-#~ msgstr "tcltk DLL è linkato a"

@@ -38,25 +38,21 @@ msgstr "'deriv' 的值必須在零和 %d 之間"
 #. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
 #. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
 #: R/splines.R:0
-#, fuzzy
 msgid "'df' was too small; have used %d"
 msgstr "'df' 太小了；用過的值為 %d"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' 的格式必須為\"y ~ x\""
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' 的值必須大於等於二"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "'ord' 必須為正整數，最多不能超過結的數目"
 
@@ -89,19 +85,16 @@ msgstr "結的位置值必須為非遞減"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "結的位置值必須嚴格遞增"
 
 #. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "'derivs' 的長度必須大於 'x' 的長度"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "'x' 和 'y' 的長度必須一樣"
 
@@ -142,13 +135,11 @@ msgstr "一些在結值界外的 'x' 資料有可能會引起病態底數"
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "spline must be monotone"
 msgstr "樣條必須是單凋的"
 
 #. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'",     knots[ord], knots[nk - degree], "outer.ok = TRUE")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr "除非您設定 '%3$s'，'x' 資料值必須在 %1$g 到 %2$g 範圍之間"
 
@@ -159,7 +150,6 @@ msgstr "'x' 值的範圍超過了一個周期"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "'x' 的值不能有重複"
 
@@ -167,11 +157,3 @@ msgstr "'x' 的值不能有重複"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "'x' 的值必須嚴格遞增"
-
-#, fuzzy
-#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
-#~ msgstr "'df' 太小了；用過的值為 %d"
-
-#, fuzzy
-#~ msgid "stop(\"knot positions must be non-decreasing\")"
-#~ msgstr "結的位置值必須為非遞減"

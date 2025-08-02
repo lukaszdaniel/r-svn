@@ -28,7 +28,6 @@ msgstr ""
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
-#, fuzzy
 msgid "extra arguments discarded"
 msgstr "ekstra argümanlar çıkarıldı"
 
@@ -49,7 +48,6 @@ msgstr ""
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
-#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "profilleme daha iyi bir çözüm buldu, özgün uyum yakınsamadı"
 

@@ -16,7 +16,6 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
-#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "يجب أن تكون 'filters' عبارة عن مصفوفة أحرف مكونة من عامودين"
 
@@ -63,7 +62,6 @@ msgstr "المساعدة"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Help topic:"
 msgstr "موضوع المساعدة:"
 
@@ -74,7 +72,6 @@ msgstr "تثبيت الحزم من CRAN"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "تركيب خطي تفاعلي"
 
@@ -86,7 +83,6 @@ msgstr "حمل"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Load packages"
 msgstr "تحميل الحزم"
 
@@ -118,19 +114,16 @@ msgstr "R التعليمات"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Save workspace"
-msgstr "لا تحفظ مساحة العمل"
+msgstr "حفظ مساحة العمل"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Source R code"
 msgstr "شفرة المصدر R"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
-#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "لم يتم العثور على حزمة‪ Tcl ‪'%s'"
 
@@ -152,7 +145,6 @@ msgstr "لا يتوفر tkGUI ضمن Windows"
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
-#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "لا يمكن تغيير الأسماء على مصفوفه Tcl"
 
@@ -175,11 +167,3 @@ msgstr "اختبار ت"
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr "يرتبط tcltk DLL ب"
-
-#, fuzzy
-#~ msgid "gettext(\"Save workspace\")"
-#~ msgstr "حفظ مساحة العمل"
-
-#, fuzzy
-#~ msgid "message(\"tcltk DLL is linked to \", shQuote(this))"
-#~ msgstr "يرتبط tcltk DLL ب"

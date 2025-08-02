@@ -21,9 +21,8 @@ msgstr ""
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
-#, fuzzy
 msgid "'env' must be a top level environment"
-msgstr "उचित मूल्याङ्कनको इन्वरोन्मेन्ट छैन"
+msgstr ""
 
 #. R/cmp.R: gettext("'switch' with no alternatives")
 #: R/cmp.R:0
@@ -37,15 +36,13 @@ msgstr ""
 
 #. R/cmp.R: gettext("bad assignment 1")
 #: R/cmp.R:0
-#, fuzzy
 msgid "bad assignment 1"
-msgstr "खराब असाइनमेन्ट: %s"
+msgstr ""
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
-#, fuzzy
 msgid "bad assignment 2"
-msgstr "खराब असाइनमेन्ट: %s"
+msgstr ""
 
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
@@ -64,9 +61,8 @@ msgstr ""
 
 #. R/cmp.R: gettext("cannot compile byte code literals in code")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot compile byte code literals in code"
-msgstr "लिटेरल प्रोमिसेस निरन्तर फोल्ड गर्न सक्दैन"
+msgstr ""
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
@@ -80,13 +76,11 @@ msgstr ""
 
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot constant fold literal bytecode objects"
-msgstr "लिटेरल प्रोमिसेस निरन्तर फोल्ड गर्न सक्दैन"
+msgstr ""
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "लिटेरल प्रोमिसेस निरन्तर फोल्ड गर्न सक्दैन"
 
@@ -187,7 +181,6 @@ msgstr "गैरनेम्स्पेस लोक्क्ल इन्व�
 
 #. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
-#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "उचित मूल्याङ्कनको इन्वरोन्मेन्ट छैन"
 
@@ -213,7 +206,3 @@ msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "gettext(\"bad assignment 2\")"
-#~ msgstr "खराब असाइनमेन्ट: %s"

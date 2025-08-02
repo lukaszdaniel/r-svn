@@ -1708,7 +1708,8 @@ msgstr "contient une ligne blanche"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "le répertoire de travail actuel ne peut être déterminé"
 
@@ -2056,9 +2057,8 @@ msgstr "analyse de '%s'"
 
 #. R/install.R: stop("patch utility is needed for installation-time patching")
 #: R/install.R:0
-#, fuzzy
 msgid "patch utility is needed for installation-time patching"
-msgstr "installation packagée de"
+msgstr ""
 
 #. R/admin.R: gettextf("processing %s", sQuote(basename(file)))
 #. R/doitools.R: sprintf("processing %s", p)
@@ -2502,7 +2502,6 @@ msgstr[1] "Note : %d chaînes de caractères marquées UTF-8 trouvées"
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "Note : %d chaîne de caractères marquée comme \"bytes\" trouvée"
@@ -2632,54 +2631,49 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossible de réencoder %s ligne %s"
 msgstr[1] "impossible de réencoder %s lignes %s"
 
+#~ msgid "..."
+#~ msgstr "..."
+
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Les fichiers Rd doivent avoir un %s non vide."
 
+#~ msgid "+-+"
+#~ msgstr "+-+"
+
+#~ msgid "inst/doc"
+#~ msgstr "inst/doc"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "ignored as vignettes have been rebuilt."
+#~ msgstr "ignoré puisque la vignette a été reconstruite."
+
+#~ msgid "="
+#~ msgstr "="
+
+#~ msgid "invalid value"
+#~ msgstr "valeur incorrecte"
+
 #, fuzzy
-#~ msgid "inferiorCallError"
-#~ msgstr "erreur interne"
+#~ msgid "Applied installation-time patch"
+#~ msgstr "installation packagée de"
 
 #, fuzzy
 #~ msgid "in package installation"
 #~ msgstr "installation packagée de"
 
-#~ msgid "invalid value"
-#~ msgstr "valeur incorrecte"
+#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+#~ msgstr "Les fichiers PACKAGES n’incluent pas de sommes MD5 dans le cas win.binary"
 
-#~ msgid "+-+"
-#~ msgstr "+-+"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "="
-#~ msgstr "="
-
-#~ msgid "ignored as vignettes have been rebuilt."
-#~ msgstr "ignoré puisque la vignette a été reconstruite."
-
-#~ msgid "inst/doc"
-#~ msgstr "inst/doc"
-
-#~ msgid "%s file\n"
-#~ msgid_plural "%s files\n"
-#~ msgstr[0] "fichier %s\n"
-#~ msgstr[1] "fichiers %s\n"
-
-#~ msgid "Found"
-#~ msgstr "Trouvé(s)"
-
-#~ msgid "OFF"
-#~ msgstr "OFF"
+#~ msgid "directly."
+#~ msgstr "directement."
 
 #~ msgid "ON"
 #~ msgstr "ON"
 
-#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
-#~ msgstr "Les fichiers PACKAGES n’incluent pas de sommes MD5 dans le cas win.binary"
+#~ msgid "OFF"
+#~ msgstr "OFF"
 
 #~ msgid ""
 #~ "]\n"
@@ -2688,11 +2682,20 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 #~ "]\n"
 #~ "Fichier PACKAGES détecté avec"
 
-#~ msgid "directly."
-#~ msgstr "directement."
-
 #~ msgid "entries at"
 #~ msgstr "entrées à"
+
+#~ msgid "Found"
+#~ msgstr "Trouvé(s)"
+
+#, fuzzy
+#~ msgid "inferiorCallError"
+#~ msgstr "erreur interne"
+
+#~ msgid "%s file\n"
+#~ msgid_plural "%s files\n"
+#~ msgstr[0] "fichier %s\n"
+#~ msgstr[1] "fichiers %s\n"
 
 #, fuzzy
 #~ msgid "one of 'package' and 'dir' must be specified."

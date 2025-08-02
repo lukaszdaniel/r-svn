@@ -21,19 +21,16 @@ msgstr ""
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
 #: R/cmp.R:0
-#, fuzzy
 msgid "'%s' is not a valid compiler option"
 msgstr "'%s' ist keine zulässige Compiler-Option"
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
-#, fuzzy
 msgid "'env' must be a top level environment"
 msgstr "'env' muss eine Toplevel-Umgebung sein"
 
 #. R/cmp.R: gettext("'switch' with no alternatives")
 #: R/cmp.R:0
-#, fuzzy
 msgid "'switch' with no alternatives"
 msgstr "'switch' ohne Alternativen"
 
@@ -49,9 +46,8 @@ msgstr "unzulässige Zuweisung 1"
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
-#, fuzzy
 msgid "bad assignment 2"
-msgstr "unzulässige Zuweisung 1"
+msgstr "unzulässige Zuweisung 2"
 
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
@@ -60,13 +56,11 @@ msgstr "unzulässige Zuweisung: %s"
 
 #. R/cmp.R: gettext("bad namespace import frame")
 #: R/cmp.R:0
-#, fuzzy
 msgid "bad namespace import frame"
 msgstr "unzulässiger Rahmen für Namensraumimport"
 
 #. R/cmp.R: stop("cannot compile a non-function")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot compile a non-function"
 msgstr "kann keine Nicht-Funktion kompilieren"
 
@@ -77,7 +71,6 @@ msgstr "kann Bytecode Literale im Code nicht kompilieren"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot compile promise literals in code"
 msgstr "kann literale promises nicht in Programm kompilieren"
 
@@ -93,7 +86,6 @@ msgstr "kann literale Bytecode-Objekte nicht konstant falten"
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "kann literale Promises nicht konstant falten"
 
@@ -114,7 +106,6 @@ msgstr "leere Alternative in numerischen switch"
 
 #. R/cmp.R: warning("empty input file; no output written")
 #: R/cmp.R:0
-#, fuzzy
 msgid "empty input file; no output written"
 msgstr "leere Eingabedatei; keine Ausgabe geschrieben"
 
@@ -135,7 +126,6 @@ msgstr "Eingabe- und Ausgabedateinamen sind identisch"
 
 #. R/cmp.R: gettextf("invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2",     optimize, jitEnabled)
 #: R/cmp.R:0
-#, fuzzy
 msgid "invalid compiler options: optimize(==%d)<2 and jitEnabled(==%d)>2"
 msgstr "unzulässige Kompileroptionen: optimize(==%d)<2 und jitEnabled(==%d)>2"
 
@@ -151,7 +141,6 @@ msgstr "unzulässige Funktion in komplexer Zuweisung"
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0
-#, fuzzy
 msgid "missing arguments are not allowed"
 msgstr "fehlende Argumente sind nicht zugelassen"
 
@@ -172,13 +161,11 @@ msgstr "Namensraum in lokalen Umgebungen gefunden"
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
-#, fuzzy
 msgid "no offset recorded for label \"%s\""
 msgstr "kein Offset aufgezeichnet für Label \"%s\""
 
 #. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
 #: R/cmp.R:0
-#, fuzzy
 msgid "no visible binding for '<<-' assignment to '%s'"
 msgstr "keine sichtbare Bindung für '<<-' Zuweisung zu '%s'"
 
@@ -189,7 +176,6 @@ msgstr "keine sichtbare Bindung für globale Variable '%s'"
 
 #. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
 #: R/cmp.R:0
-#, fuzzy
 msgid "no visible global function definition for '%s'"
 msgstr "keine sichtbare globale Funktionsdefinition für '%s'"
 
@@ -200,7 +186,6 @@ msgstr "ein Nicht-Namensraum innerhalb einer Namensraumumgebung gefunden"
 
 #. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
-#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "keine geeignete Evaluationsumgebung"
 
@@ -212,7 +197,6 @@ msgstr "möglicher Fehler in '%s': %s"
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", file)
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", outfile)
 #: R/cmp.R:0
-#, fuzzy
 msgid "saving to file \"%s\" ..."
 msgstr "sichere in Datei \"%s\" ..."
 
@@ -227,22 +211,6 @@ msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "lokale Zuweisung an syntaktische Funktion: "
 msgstr[1] "lokale Zuweisungen an syntaktische Funktionen: "
-
-#, fuzzy
-#~ msgid "gettext(\"bad assignment 2\")"
-#~ msgstr "unzulässige Zuweisung 2"
-
-#, fuzzy
-#~ msgid "gettext(\"cannot compile this expression\")"
-#~ msgstr "kann diesen Ausdruck nicht kompilieren"
-
-#, fuzzy
-#~ msgid "gettext(\"invalid function in complex assignment\")"
-#~ msgstr "unzulässige Funktion in komplexer Zuweisung"
-
-#, fuzzy
-#~ msgid "gettextf(\"saving to file \\\\\"%s\\\\\" ... \", outfile)"
-#~ msgstr "sichere in Datei \"%s\" ..."
 
 #~ msgid "%s is not a registered math1 function"
 #~ msgstr "%S ist keine registrierte math1 Funktion"

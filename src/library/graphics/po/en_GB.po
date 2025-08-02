@@ -108,9 +108,9 @@ msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "invalid par(\"bty\") = '%c'; no box() drawn"
 
 #: graphics.cpp:3201
-#, c-format
+#, fuzzy, c-format
 msgid "invalid argument to '%s'"
-msgstr "invalid argument to '%s'"
+msgstr "invalid argument to GBox"
 
 #: graphics.cpp:3408
 msgid "metric information not available for this device"
@@ -438,8 +438,9 @@ msgid "invalid symbol coordinates"
 msgstr "invalid symbol coordinates"
 
 #: plot.cpp:3753
+#, fuzzy
 msgid "x/y parameter length mismatch"
-msgstr "x/y parameter length mismatch"
+msgstr "x/y/parameter length mismatch"
 
 #: plot.cpp:3772
 msgid "invalid circles data"
@@ -625,8 +626,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: stem.cpp:162
+#, fuzzy
 msgid "invalid input"
-msgstr "invalid input"
+msgstr "invalid units"
 
 #: stem.cpp:165
 #, c-format

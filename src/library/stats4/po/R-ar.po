@@ -21,13 +21,11 @@ msgstr "عدم التطابق في طول قيم البدء"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
-#, fuzzy
 msgid "extra arguments discarded"
 msgstr "تم تجاهل الحجج الإضافية"
 
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
-#, fuzzy
 msgid "fixed values violate constraints"
 msgstr "القيم الثابتة تنتهك القيود"
 
@@ -43,13 +41,11 @@ msgstr "القائمة المسماة متوقعة"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
-#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "لقد وجد التنميط حلا أفضل ، لذلك لم يتقارب الملاءمة الأصلية"
 
 #. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
-#, fuzzy
 msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr "بعض القيم المسماة ليست وسيطات لاحتمال السجل المتوفر"
 

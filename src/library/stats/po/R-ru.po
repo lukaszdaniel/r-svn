@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/xtabs.R: gettextf("%s applies only to two-way tables", "xtabs(*, sparse=TRUE)")
@@ -1483,6 +1483,7 @@ msgstr "Страница [%d,%d]: i =%s; j =%s"
 msgid "Parameter(s) %s ignored"
 msgstr "Параметр(ы)"
 
+# TODO: reword glm-profile.R:78
 #. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #: R/glm-profile.R:0
 msgid "Parameter:"
@@ -3969,7 +3970,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true correlation is less than %s"
-msgstr "'r' < 0"
+msgstr "'r' < 1"
 
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4000,7 +4001,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true event rate is less than %s"
-msgstr "'r' < 0"
+msgstr "'r' < 1"
 
 #. R/poisson.test.R: gettextf("true event rate is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4016,7 +4017,7 @@ msgstr ""
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "true location is less than %s"
-msgstr "'r' < 0"
+msgstr "'r' < 1"
 
 #. R/wilcox.test.R: gettextf("true location is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
@@ -4062,7 +4063,7 @@ msgstr ""
 #: R/t.test.R:0
 #, fuzzy
 msgid "true mean is less than %s"
-msgstr "'m' < 1"
+msgstr "'r' < 1"
 
 #. R/t.test.R: gettextf("true mean is not equal to %s", mu, domain = "R-stats")
 #: R/t.test.R:0
@@ -4078,7 +4079,7 @@ msgstr ""
 #: R/fisher.test.R:0
 #, fuzzy
 msgid "true odds ratio is less than %s"
-msgstr "'r' < 0"
+msgstr "'r' < 1"
 
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
@@ -4092,9 +4093,8 @@ msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "true probability of success is less than %s"
-msgstr "'r' < 0"
+msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
 #: R/binom.test.R:0
@@ -4125,7 +4125,7 @@ msgstr ""
 #: R/prop.test.R:0
 #, fuzzy
 msgid "true proportion is less than %s"
-msgstr "'r' < 0"
+msgstr "'r' < 1"
 
 #. R/prop.test.R: gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats")
 #: R/prop.test.R:0
@@ -4141,7 +4141,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true rate ratio is less than %s"
-msgstr "'r' < 0"
+msgstr "'r' < 1"
 
 #. R/poisson.test.R: gettextf("true rate ratio is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4187,7 +4187,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true rho is less than %s"
-msgstr "'r' < 0"
+msgstr "'r' < 1"
 
 #. R/cor.test.R: gettextf("true rho is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4203,7 +4203,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true tau is less than %s"
-msgstr "'r' < 0"
+msgstr "'r' < 1"
 
 #. R/cor.test.R: gettextf("true tau is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4626,60 +4626,20 @@ msgstr[0] "использую %d/%d строку из комбинированн
 msgstr[1] "использую %d/%d строки из комбинированного выравнивания"
 msgstr[2] "использую %d/%d строк из комбинированного выравнивания"
 
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "колонки 'контраст.obj' должны определять контраст (с нулевой суммой)"
+
 #~ msgid "invalid 'SSinit'"
 #~ msgstr "неправильный 'SSinit'"
 
-#, fuzzy
-#~ msgid "invalid 'attr(rhs, \"gradient\")'"
-#~ msgstr "неправильный 'attr(rhs, \"gradient\")'"
+#~ msgid "invalid 'x'"
+#~ msgstr "неправильный 'x'"
 
-#~ msgid "invalid 'keep.stuff'"
-#~ msgstr "неправильный 'keep.stuff'"
-
-#~ msgid "invalid 'use' argument"
-#~ msgstr "недопустимый аргумент 'use'"
-
-#~ msgid "medpolish() did not converge in %d iteration"
-#~ msgid_plural "medpolish() did not converge in %d iterations"
-#~ msgstr[0] "medpolish() не сошелся в %d итерацию"
-#~ msgstr[1] "medpolish() не сошелся в %d итерации"
-#~ msgstr[2] "medpolish() не сошелся в %d итераций"
-
-#~ msgid "invalid 'control' argument"
-#~ msgstr "неправильный аргумент 'control'"
-
-#~ msgid "invalid 'method' argument"
-#~ msgstr "недопустимый аргумент 'method'"
-
-#~ msgid "invalid NCOL(X)"
-#~ msgstr "неправильный NCOL(X)"
-
-#~ msgid "invalid NROW(X)"
-#~ msgstr "неправильный NROW(X)"
-
-#~ msgid "invalid argument 'cell'"
-#~ msgstr "неправильный аргумент 'cell'"
-
-#~ msgid "invalid argument 'degree'"
-#~ msgstr "неправильный аргумент 'degree'"
+#~ msgid "invalid 'nb'"
+#~ msgstr "неправильный 'nb'"
 
 #~ msgid "invalid argument 'lambda'"
 #~ msgstr "неправильный аргумент 'lambda'"
-
-#~ msgid "invalid argument 'span'"
-#~ msgstr "неправильный аргумент 'span'"
-
-#~ msgid "invalid 'data' argument"
-#~ msgstr "недопустимый аргумент 'data'"
-
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "недопустимый аргумент 'omit'"
-
-#~ msgid "invalid 'control.spar'"
-#~ msgstr "неправильный 'control.spar'"
-
-#~ msgid "'formula' missing"
-#~ msgstr "'formula' пропущена"
 
 #~ msgid "formula missing"
 #~ msgstr "'formula' пропущена"
@@ -4687,18 +4647,53 @@ msgstr[2] "использую %d/%d строк из комбинированно
 #~ msgid "incorrect specification for 'formula'"
 #~ msgstr "неправильное определение 'formula'"
 
-#, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "недопустимый аргумент 'use'"
+#~ msgid "invalid 'method' argument"
+#~ msgstr "недопустимый аргумент 'method'"
 
-#~ msgid "invalid 'abbr.colnames'"
-#~ msgstr "неправильный 'abbr.colnames'"
+#~ msgid ","
+#~ msgstr ","
 
-#~ msgid "invalid 'endrule' argument"
-#~ msgstr "недопустимый аргумент 'endrule'"
+#~ msgid "invalid nrow(x)"
+#~ msgstr "неправильный nrow(x)"
 
-#~ msgid "invalid argument 'c'"
-#~ msgstr "неправильный аргумент 'c'"
+#~ msgid "invalid ncol(x)"
+#~ msgstr "неправильный ncol(x)"
+
+#~ msgid "ignored"
+#~ msgstr "пропущен(ы)"
+
+#~ msgid "invalid 'control' argument"
+#~ msgstr "неправильный аргумент 'control'"
+
+#~ msgid "invalid NCOL(X)"
+#~ msgstr "неправильный NCOL(X)"
+
+#~ msgid "invalid NROW(X)"
+#~ msgstr "неправильный NROW(X)"
+
+#~ msgid "invalid 'y'"
+#~ msgstr "недопустимый y"
+
+#~ msgid "invalid argument 'span'"
+#~ msgstr "неправильный аргумент 'span'"
+
+#~ msgid "invalid argument 'cell'"
+#~ msgstr "неправильный аргумент 'cell'"
+
+#~ msgid "invalid argument 'degree'"
+#~ msgstr "неправильный аргумент 'degree'"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "недопустимый аргумент 'data'"
+
+#~ msgid "invalid argument 'omit'"
+#~ msgstr "недопустимый аргумент 'omit'"
+
+#~ msgid "invalid  'attr(rhs, \"gradient\")'"
+#~ msgstr "неправильный 'attr(rhs, \"gradient\")'"
+
+#~ msgid "'formula' missing"
+#~ msgstr "'formula' пропущена"
 
 #~ msgid "invalid argument 'n'"
 #~ msgstr "неправильный аргумент 'n'"
@@ -4706,38 +4701,29 @@ msgstr[2] "использую %d/%d строк из комбинированно
 #~ msgid "invalid argument 'r'"
 #~ msgstr "неправильный аргумент 'r'"
 
-#~ msgid "invalid 'nb'"
-#~ msgstr "неправильный 'nb'"
+#~ msgid "invalid argument 'c'"
+#~ msgstr "неправильный аргумент 'c'"
 
-#~ msgid "invalid 'x'"
-#~ msgstr "неправильный 'x'"
+#~ msgid "invalid 'endrule' argument"
+#~ msgstr "недопустимый аргумент 'endrule'"
 
-#~ msgid "invalid 'y'"
-#~ msgstr "недопустимый y"
+#~ msgid "invalid 'control.spar'"
+#~ msgstr "неправильный 'control.spar'"
 
-#~ msgid "invalid ncol(x)"
-#~ msgstr "неправильный ncol(x)"
+#~ msgid "invalid 'keep.stuff'"
+#~ msgstr "неправильный 'keep.stuff'"
 
-#~ msgid "invalid nrow(x)"
-#~ msgstr "неправильный nrow(x)"
+#~ msgid "invalid 'abbr.colnames'"
+#~ msgstr "неправильный 'abbr.colnames'"
 
 #~ msgid "Requested conf.level not achievable"
 #~ msgstr "Заданный доверительный интервал не достигнут"
 
-#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-#~ msgstr "колонки 'контраст.obj' должны определять контраст (с нулевой суммой)"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "ignored"
-#~ msgstr "пропущен(ы)"
-
-#~ msgid "deprecatedWarning"
-#~ msgstr "deprecatedWarning"
-
-#~ msgid "reformulate"
-#~ msgstr "reformulate"
+#~ msgid "medpolish() did not converge in %d iteration"
+#~ msgid_plural "medpolish() did not converge in %d iterations"
+#~ msgstr[0] "medpolish() не сошелся в %d итерацию"
+#~ msgstr[1] "medpolish() не сошелся в %d итерации"
+#~ msgstr[2] "medpolish() не сошелся в %d итераций"
 
 #~ msgid "diag(.) had 0 or NA entries; non-finite result is doubtful"
 #~ msgstr "у diag(.) 0 или NA вхождений; не-конечный результат сомнителен"
@@ -4747,6 +4733,12 @@ msgstr[2] "использую %d/%d строк из комбинированно
 
 #~ msgid "package 'MASS' must be installed"
 #~ msgstr "нужно установить пакет 'MASS'"
+
+#~ msgid "reformulate"
+#~ msgstr "reformulate"
+
+#~ msgid "deprecatedWarning"
+#~ msgstr "deprecatedWarning"
 
 #~ msgid "link \"%s\" not available for quasipoisson family; available links are %s"
 #~ msgstr "функция связи \"%s\" недоступна для квази-пуассоновского семейства; доступны функции %s"

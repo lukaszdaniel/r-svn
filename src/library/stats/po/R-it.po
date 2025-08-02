@@ -3971,7 +3971,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true correlation is less than %s"
-msgstr "'r' è minori di 0"
+msgstr "'r' è minori di 1"
 
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4002,7 +4002,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true event rate is less than %s"
-msgstr "'r' è minori di 0"
+msgstr "'r' è minori di 1"
 
 #. R/poisson.test.R: gettextf("true event rate is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4018,7 +4018,7 @@ msgstr ""
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "true location is less than %s"
-msgstr "'r' è minori di 0"
+msgstr "'r' è minori di 1"
 
 #. R/wilcox.test.R: gettextf("true location is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
@@ -4064,7 +4064,7 @@ msgstr ""
 #: R/t.test.R:0
 #, fuzzy
 msgid "true mean is less than %s"
-msgstr "'m' è minore di 1"
+msgstr "'r' è minori di 1"
 
 #. R/t.test.R: gettextf("true mean is not equal to %s", mu, domain = "R-stats")
 #: R/t.test.R:0
@@ -4080,7 +4080,7 @@ msgstr ""
 #: R/fisher.test.R:0
 #, fuzzy
 msgid "true odds ratio is less than %s"
-msgstr "'r' è minori di 0"
+msgstr "'r' è minori di 1"
 
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
@@ -4094,9 +4094,8 @@ msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "true probability of success is less than %s"
-msgstr "'r' è minori di 0"
+msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
 #: R/binom.test.R:0
@@ -4127,7 +4126,7 @@ msgstr ""
 #: R/prop.test.R:0
 #, fuzzy
 msgid "true proportion is less than %s"
-msgstr "'r' è minori di 0"
+msgstr "'r' è minori di 1"
 
 #. R/prop.test.R: gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats")
 #: R/prop.test.R:0
@@ -4143,7 +4142,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true rate ratio is less than %s"
-msgstr "'r' è minori di 0"
+msgstr "'r' è minori di 1"
 
 #. R/poisson.test.R: gettextf("true rate ratio is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4189,7 +4188,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true rho is less than %s"
-msgstr "'r' è minori di 0"
+msgstr "'r' è minori di 1"
 
 #. R/cor.test.R: gettextf("true rho is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4205,7 +4204,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true tau is less than %s"
-msgstr "'r' è minori di 0"
+msgstr "'r' è minori di 1"
 
 #. R/cor.test.R: gettextf("true tau is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4602,59 +4601,20 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilizzo la riga %d/%d da una stima combinata"
 msgstr[1] "utilizzo le righe %d/%d da una stima combinata"
 
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "le colonne di 'contrast.obj' devono definire un contrasto (sommare a zero)"
+
 #~ msgid "invalid 'SSinit'"
 #~ msgstr "'SSinit' non valido"
 
-#, fuzzy
-#~ msgid "invalid 'attr(rhs, \"gradient\")'"
-#~ msgstr "'attr(rhs, \"gradient\")' non valido"
+#~ msgid "invalid 'x'"
+#~ msgstr "'x' non valida"
 
-#~ msgid "invalid 'keep.stuff'"
-#~ msgstr "'keep.stuff' non valido"
-
-#~ msgid "invalid 'use' argument"
-#~ msgstr "argomento 'use' non valido"
-
-#~ msgid "medpolish() did not converge in %d iteration"
-#~ msgid_plural "medpolish() did not converge in %d iterations"
-#~ msgstr[0] "medpolish() non converge in %d iterazione"
-#~ msgstr[1] "medpolish() non converge in %d iterazioni"
-
-#~ msgid "invalid 'control' argument"
-#~ msgstr "argomento 'control' non valido"
-
-#~ msgid "invalid 'method' argument"
-#~ msgstr "argomento 'method' non valido"
-
-#~ msgid "invalid NCOL(X)"
-#~ msgstr "non valido NCOL(X)"
-
-#~ msgid "invalid NROW(X)"
-#~ msgstr "non valido NROW(X)"
-
-#~ msgid "invalid argument 'cell'"
-#~ msgstr "argomento 'cell' non valido"
-
-#~ msgid "invalid argument 'degree'"
-#~ msgstr "argomento 'degree' non valido"
+#~ msgid "invalid 'nb'"
+#~ msgstr "'nb' non valido"
 
 #~ msgid "invalid argument 'lambda'"
 #~ msgstr "argomento 'lambda' non valido"
-
-#~ msgid "invalid argument 'span'"
-#~ msgstr "argomento 'span' non valido"
-
-#~ msgid "invalid 'data' argument"
-#~ msgstr "argomento 'data' non valido"
-
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "argomento 'omit' non valido"
-
-#~ msgid "invalid 'control.spar'"
-#~ msgstr "'control.spar' non valido"
-
-#~ msgid "'formula' missing"
-#~ msgstr "'formula' assente"
 
 #~ msgid "formula missing"
 #~ msgstr "formula assente"
@@ -4662,18 +4622,53 @@ msgstr[1] "utilizzo le righe %d/%d da una stima combinata"
 #~ msgid "incorrect specification for 'formula'"
 #~ msgstr "specificazione di 'formula' non valida"
 
-#, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "argomento 'use' non valido"
+#~ msgid "invalid 'method' argument"
+#~ msgstr "argomento 'method' non valido"
 
-#~ msgid "invalid 'abbr.colnames'"
-#~ msgstr "'abbr.colnames' non valida"
+#~ msgid ","
+#~ msgstr ","
 
-#~ msgid "invalid 'endrule' argument"
-#~ msgstr "argomento 'endrule' non valido"
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x) non valido"
 
-#~ msgid "invalid argument 'c'"
-#~ msgstr "argomento 'c' non valido"
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) non valido"
+
+#~ msgid "ignored"
+#~ msgstr "ignorato"
+
+#~ msgid "invalid 'control' argument"
+#~ msgstr "argomento 'control' non valido"
+
+#~ msgid "invalid NCOL(X)"
+#~ msgstr "non valido NCOL(X)"
+
+#~ msgid "invalid NROW(X)"
+#~ msgstr "non valido NROW(X)"
+
+#~ msgid "invalid 'y'"
+#~ msgstr "'y' non valida"
+
+#~ msgid "invalid argument 'span'"
+#~ msgstr "argomento 'span' non valido"
+
+#~ msgid "invalid argument 'cell'"
+#~ msgstr "argomento 'cell' non valido"
+
+#~ msgid "invalid argument 'degree'"
+#~ msgstr "argomento 'degree' non valido"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "argomento 'data' non valido"
+
+#~ msgid "invalid argument 'omit'"
+#~ msgstr "argomento 'omit' non valido"
+
+#~ msgid "invalid  'attr(rhs, \"gradient\")'"
+#~ msgstr "'attr(rhs, \"gradient\")' non valido"
+
+#~ msgid "'formula' missing"
+#~ msgstr "'formula' assente"
 
 #~ msgid "invalid argument 'n'"
 #~ msgstr "argomento 'n' non valido"
@@ -4681,38 +4676,28 @@ msgstr[1] "utilizzo le righe %d/%d da una stima combinata"
 #~ msgid "invalid argument 'r'"
 #~ msgstr "argomento 'r' non valido"
 
-#~ msgid "invalid 'nb'"
-#~ msgstr "'nb' non valido"
+#~ msgid "invalid argument 'c'"
+#~ msgstr "argomento 'c' non valido"
 
-#~ msgid "invalid 'x'"
-#~ msgstr "'x' non valida"
+#~ msgid "invalid 'endrule' argument"
+#~ msgstr "argomento 'endrule' non valido"
 
-#~ msgid "invalid 'y'"
-#~ msgstr "'y' non valida"
+#~ msgid "invalid 'control.spar'"
+#~ msgstr "'control.spar' non valido"
 
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ncol(x) non valido"
+#~ msgid "invalid 'keep.stuff'"
+#~ msgstr "'keep.stuff' non valido"
 
-#~ msgid "invalid nrow(x)"
-#~ msgstr "nrow(x) non valido"
+#~ msgid "invalid 'abbr.colnames'"
+#~ msgstr "'abbr.colnames' non valida"
 
 #~ msgid "Requested conf.level not achievable"
 #~ msgstr "Livello di conf.level richiesto non raggiungibile"
 
-#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-#~ msgstr "le colonne di 'contrast.obj' devono definire un contrasto (sommare a zero)"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "ignored"
-#~ msgstr "ignorato"
-
-#~ msgid "deprecatedWarning"
-#~ msgstr "deprecatedWarning"
-
-#~ msgid "reformulate"
-#~ msgstr "riformulazione"
+#~ msgid "medpolish() did not converge in %d iteration"
+#~ msgid_plural "medpolish() did not converge in %d iterations"
+#~ msgstr[0] "medpolish() non converge in %d iterazione"
+#~ msgstr[1] "medpolish() non converge in %d iterazioni"
 
 #~ msgid ".nknots.smspl() is now exported; use it instead of n.knots()"
 #~ msgstr ".nknots.smspl() è ora esportato; utilizzalo al posto di n.knots()"
@@ -4722,6 +4707,12 @@ msgstr[1] "utilizzo le righe %d/%d da una stima combinata"
 
 #~ msgid "Possibly rank-deficient fit; the default rankdeficient = \"simple\" may change"
 #~ msgstr "Possibile fit con carenza di rango; il valore predefinito rankdeficient=\"simple\" potrebbe cambiare"
+
+#~ msgid "reformulate"
+#~ msgstr "riformulazione"
+
+#~ msgid "deprecatedWarning"
+#~ msgstr "deprecatedWarning"
 
 #~ msgid "'sep' must be a character string"
 #~ msgstr "'sep' dev'essere una stringa di caratteri"

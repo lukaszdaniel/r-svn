@@ -25,7 +25,6 @@ msgstr "'%s' ist veraltet"
 
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
-#, fuzzy
 msgid "'%s' must be a non-empty character string"
 msgstr "'%s' muss eine nicht-leere Zeichenkette sein"
 
@@ -83,9 +82,8 @@ msgstr "'file' muss eine nicht-leere Zeichenkette sein"
 
 #. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #: R/unix/png.R:0
-#, fuzzy
 msgid "'filename' must be a non-empty character string"
-msgstr "'file' muss eine nicht-leere Zeichenkette sein"
+msgstr "'filename' muss eine nicht-leere Zeichenkette sein"
 
 #. R/convertColor.R: stop("'from' must be a \"colorConverter\" object or a string")
 #: R/convertColor.R:0
@@ -236,17 +234,17 @@ msgstr ""
 #. R/glyph.R: warning("Font family longer than 200 will be truncated")
 #: R/glyph.R:0
 msgid "Font family longer than 200 will be truncated"
-msgstr ""
+msgstr "Zeichensatzfamilie länger als 200 wird abgeschnitten"
 
 #. R/glyph.R: warning("Font file longer than 500 will be truncated")
 #: R/glyph.R:0
 msgid "Font file longer than 500 will be truncated"
-msgstr ""
+msgstr "Zeichensatz Datei länger als 500 wird abgeschnitten"
 
 #. R/glyph.R: stop("Font information is inconsistent")
 #: R/glyph.R:0
 msgid "Font information is inconsistent"
-msgstr ""
+msgstr "Zeichensatzinformation ist inkonsistent"
 
 #. R/postscript.R: stop("GhostScript was not found")
 #. R/unix/dev2bitmap.R: stop("GhostScript was not found")
@@ -262,20 +260,18 @@ msgstr "unzulässiger 'extend' Wert"
 
 #. R/postscript.R: stop("Invalid 'glyphInfo'")
 #: R/postscript.R:0
-#, fuzzy
 msgid "Invalid 'glyphInfo'"
-msgstr "ungültiges 'file' Argument"
+msgstr "ungültige 'glyphInfo'"
 
 #. R/device.R: stop("Invalid capabilities - alert the device maintainer")
 #: R/device.R:0
 msgid "Invalid capabilities - alert the device maintainer"
-msgstr ""
+msgstr "Ugültige Fähigkeiten - benachrichtige den Maintainer des Gerätes"
 
 #. R/group.R: stop("Invalid compositing operator")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid compositing operator"
-msgstr "ungültiges Ausgabeformat"
+msgstr "ungültige compositing Operator"
 
 #. R/path.R: stop("Invalid fill rule")
 #: R/path.R:0
@@ -289,9 +285,8 @@ msgstr "Ungültiger Zeichensatzdatenbankname"
 
 #. R/glyph.R: stop("Invalid font list")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid font list"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "ungültige Zeichensatzliste"
 
 #. R/postscript.R: stop("Invalid font type")
 #: R/postscript.R:0
@@ -300,51 +295,43 @@ msgstr "ungültiger Zeichensatztyp"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "Ungültiger Glyh-Anker"
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph font"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "ungültiger Glyph-Zeichensatz"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "Ungültige Glyph-Höhe"
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "Ungültige Glyph-Höhe(n)"
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "Ungültige Glyph-Info"
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "ungültige Glyph-Breite"
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "ungültige Glyph-Breite(n)"
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
-#, fuzzy
 msgid "Invalid mask type"
-msgstr "ungültiger Zeichensatztyp"
+msgstr "ungültiger Maskentyp"
 
 #. R/patterns.R: stop("Invalid pattern type")
 #: R/patterns.R:0
@@ -353,14 +340,13 @@ msgstr "ungültiger Patterntyp"
 
 #. R/glyph.R: stop("Invalid span weight")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid span weight"
-msgstr "ungültiger Patterntyp"
+msgstr "ungültiges span Gewicht"
 
 #. R/glyph.R: stop("List must include at least one font")
 #: R/glyph.R:0
 msgid "List must include at least one font"
-msgstr ""
+msgstr "Liste muss mindestens einen Zeichensatz enthalten"
 
 #. R/smooth2d.R: stop("Must have the ('Recommended') package \"KernSmooth\" installed")
 #: R/smooth2d.R:0
@@ -386,7 +372,7 @@ msgstr "Kein CID Zeichensatz"
 #. R/glyph.R: warning("PostScript font name longer than 200 will be truncated")
 #: R/glyph.R:0
 msgid "PostScript font name longer than 200 will be truncated"
-msgstr ""
+msgstr "PostScript Zeichensatzname länger als 200 wird abgeschnitten"
 
 #. R/convertColor.R: gettextf("Reference white: %s", x$reference.white)
 #: R/convertColor.R:0
@@ -401,23 +387,22 @@ msgstr ""
 #. R/glyph.R: stop("There must be anchors named \"left\" and \"bottom\"")
 #: R/glyph.R:0
 msgid "There must be anchors named \"left\" and \"bottom\""
-msgstr ""
+msgstr "Es muss Anker namens \"left\" und \"right\" geben"
 
 #. R/glyph.R: stop("Unknown font")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Unknown font"
 msgstr "unbekannter Zeichensatz"
 
 #. R/glyph.R: warning("Unknown height; using bottom anchor")
 #: R/glyph.R:0
 msgid "Unknown height; using bottom anchor"
-msgstr ""
+msgstr "Unbekannte Höhe; nutze unteren Anker"
 
 #. R/glyph.R: warning("Unknown width; using left anchor")
 #: R/glyph.R:0
 msgid "Unknown width; using left anchor"
-msgstr ""
+msgstr "Unbekannte Breite; nutze linken Anker"
 
 #. R/raster.R: stop("a raster array must be numeric")
 #: R/raster.R:0
@@ -545,7 +530,7 @@ msgstr "Farbräume nutzen unterschiedliches Referenz-Weiß"
 #. R/unix/png.R: warning("compression is not supported for type = \"quartz\"")
 #: R/unix/png.R:0
 msgid "compression is not supported for type = \"quartz\""
-msgstr ""
+msgstr "Kompression ist für type = \"quartz\" nicht unterstützt"
 
 #. R/device.R: stop("dev.control() called without an open graphics device")
 #: R/device.R:0
@@ -737,9 +722,8 @@ msgstr "ungültiges erstes Argument [schlechtes Sprachobjekt]"
 
 #. R/unix/png.R: stop("invalid height")
 #: R/unix/png.R:0
-#, fuzzy
 msgid "invalid height"
-msgstr "unzulässiger 'title'"
+msgstr "unzulässiger Höhe"
 
 #. R/postscript.R: stop("invalid metric information in font specification")
 #: R/postscript.R:0
@@ -778,14 +762,13 @@ msgstr "unzulässiger Wert für 'rescale'"
 
 #. R/unix/png.R: stop("invalid width")
 #: R/unix/png.R:0
-#, fuzzy
 msgid "invalid width"
-msgstr "unzulässiger 'title'"
+msgstr "unzulässiger Breite"
 
 #. R/glyph.R: stop("length of arguments must match (and be greater than 0)")
 #: R/glyph.R:0
 msgid "length of arguments must match (and be greater than 0)"
-msgstr ""
+msgstr "Länge der Argumente muss passen (und größer 0 sein)"
 
 #. R/device.R: warning("need to specify one of 'width' and 'height'")
 #: R/device.R:0
@@ -843,7 +826,7 @@ msgstr "Operator hat für Rasterobjekte keine Bedeutung"
 #. R/utils.R: sprintf("points cut off after point[%d]", last)
 #: R/utils.R:0
 msgid "points cut off after point[%d]"
-msgstr ""
+msgstr "Punkte naxh point[%d] abgeschnitten"
 
 #. R/colorstuff.R: stop("rgb matrix must be numeric")
 #: R/colorstuff.R:0
@@ -943,7 +926,6 @@ msgstr "falscher 'type'; sollte nie passieren, bitte melden!"
 
 #. R/xyz.coords.R: ngettext(n, "%d %s value <= 0 omitted from logarithmic plot",     "%d %s values <= 0 omitted from logarithmic plot")
 #: R/xyz.coords.R:0
-#, fuzzy
 msgid "%d %s value <= 0 omitted from logarithmic plot"
 msgid_plural "%d %s values <= 0 omitted from logarithmic plot"
 msgstr[0] "%d %s Wert <= 0 ausgelassen in logarithmischem Plot"
@@ -966,14 +948,14 @@ msgstr[1] "ungültige Argumentnamen %s in '%s'"
 #~ msgid "invalid 'filename'"
 #~ msgstr "unzulässiges 'filename' Argument"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "ungültiges 'file' Argument"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "ungültiges 'family' Argument"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "unzulässiger 'title'"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "ungültiges 'family' Argument"
+#~ msgid "invalid 'file'"
+#~ msgstr "ungültiges 'file' Argument"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

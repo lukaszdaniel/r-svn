@@ -75,9 +75,8 @@ msgstr ""
 
 #. R/namespace.R: gettextf("%s not found", sQuote(x))
 #: R/namespace.R:0
-#, fuzzy
 msgid "%s not found"
-msgstr "فائل '%s' نہیں ملی"
+msgstr ""
 
 #. R/library.R: gettextf("%s not found on search path, using pos = 2", sQuote(pos))
 #: R/library.R:0
@@ -224,8 +223,8 @@ msgstr ""
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'%s' must be of length 1"
 msgstr ""
 
@@ -922,9 +921,8 @@ msgstr ""
 
 #. R/library.R: gettextf("DLL %s not found", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "DLL %s not found"
-msgstr "فائل '%s' نہیں ملی"
+msgstr ""
 
 #. R/library.R: gettextf("DLL %s not found: maybe not installed for this architecture?",     sQuote(chname))
 #: R/library.R:0
@@ -1768,8 +1766,9 @@ msgstr ""
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
 msgstr ""
 
@@ -2128,9 +2127,8 @@ msgstr ""
 
 #. R/files.R: stop("no file found")
 #: R/files.R:0
-#, fuzzy
 msgid "no file found"
-msgstr "فائل '%s' نہیں ملی"
+msgstr ""
 
 #. R/files.R: stop("no files to copy to")
 #: R/files.R:0
@@ -2534,15 +2532,13 @@ msgstr ""
 
 #. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "shared object %s not found"
-msgstr "فائل '%s' نہیں ملی"
+msgstr ""
 
 #. R/library.R: gettextf("shared object %s was not loaded", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "shared object %s was not loaded"
-msgstr "فائل '%s' نہیں ملی"
+msgstr ""
 
 #. R/library.R: gettextf("shared object '%s' already loaded", sQuote(chname1))
 #: R/library.R:0
@@ -2750,9 +2746,8 @@ msgstr ""
 
 #. R/get.R: gettextf("value for %s not found", sQuote(x))
 #: R/get.R:0
-#, fuzzy
 msgid "value for %s not found"
-msgstr "فائل '%s' نہیں ملی"
+msgstr ""
 
 #. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
 #: R/library.R:0
@@ -2946,11 +2941,10 @@ msgstr[1] ""
 
 #. R/load.R: ngettext(n, "object %s not found", "objects %s not found")
 #: R/load.R:0
-#, fuzzy
 msgid "object %s not found"
 msgid_plural "objects %s not found"
-msgstr[0] "فائل '%s' نہیں ملی"
-msgstr[1] "فائل '%s' نہیں ملی"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded")
 #: R/library.R:0
@@ -3035,7 +3029,3 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "shared object '%s' not found"
-#~ msgstr "فائل '%s' نہیں ملی"

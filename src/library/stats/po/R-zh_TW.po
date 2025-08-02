@@ -4000,7 +4000,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true correlation is less than %s"
-msgstr "'r' 小於零"
+msgstr "'r' 小於一"
 
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4031,7 +4031,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true event rate is less than %s"
-msgstr "'r' 小於零"
+msgstr "'r' 小於一"
 
 #. R/poisson.test.R: gettextf("true event rate is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4047,7 +4047,7 @@ msgstr ""
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "true location is less than %s"
-msgstr "'r' 小於零"
+msgstr "'r' 小於一"
 
 #. R/wilcox.test.R: gettextf("true location is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
@@ -4093,7 +4093,7 @@ msgstr ""
 #: R/t.test.R:0
 #, fuzzy
 msgid "true mean is less than %s"
-msgstr "'m' 小於一"
+msgstr "'r' 小於一"
 
 #. R/t.test.R: gettextf("true mean is not equal to %s", mu, domain = "R-stats")
 #: R/t.test.R:0
@@ -4109,7 +4109,7 @@ msgstr ""
 #: R/fisher.test.R:0
 #, fuzzy
 msgid "true odds ratio is less than %s"
-msgstr "'r' 小於零"
+msgstr "'r' 小於一"
 
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
@@ -4123,9 +4123,8 @@ msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "true probability of success is less than %s"
-msgstr "'r' 小於零"
+msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
 #: R/binom.test.R:0
@@ -4156,7 +4155,7 @@ msgstr ""
 #: R/prop.test.R:0
 #, fuzzy
 msgid "true proportion is less than %s"
-msgstr "'r' 小於零"
+msgstr "'r' 小於一"
 
 #. R/prop.test.R: gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats")
 #: R/prop.test.R:0
@@ -4172,7 +4171,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true rate ratio is less than %s"
-msgstr "'r' 小於零"
+msgstr "'r' 小於一"
 
 #. R/poisson.test.R: gettextf("true rate ratio is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4218,7 +4217,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true rho is less than %s"
-msgstr "'r' 小於零"
+msgstr "'r' 小於一"
 
 #. R/cor.test.R: gettextf("true rho is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4234,7 +4233,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true tau is less than %s"
-msgstr "'r' 小於零"
+msgstr "'r' 小於一"
 
 #. R/cor.test.R: gettextf("true tau is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4604,54 +4603,20 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "從組合擬合中用 %d/%d 列"
 
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "'contrast.obj' 行必須設定對比(總和為零)"
+
 #~ msgid "invalid 'SSinit'"
 #~ msgstr "無效的 'SSinit'"
 
-#~ msgid "invalid 'keep.stuff'"
-#~ msgstr "'keep.stuff' 無效"
+#~ msgid "invalid 'x'"
+#~ msgstr "'x' 無效"
 
-#~ msgid "invalid 'use' argument"
-#~ msgstr "'use' 引數無效"
-
-#~ msgid "medpolish() did not converge in %d iteration"
-#~ msgid_plural "medpolish() did not converge in %d iterations"
-#~ msgstr[0] "medpolish()經過 %d 個迭代仍沒有聚合"
-
-#~ msgid "invalid 'control' argument"
-#~ msgstr "'control' 引數無效"
-
-#~ msgid "invalid 'method' argument"
-#~ msgstr "'method' 引數無效"
-
-#~ msgid "invalid NCOL(X)"
-#~ msgstr "NCOL(X)無效"
-
-#~ msgid "invalid NROW(X)"
-#~ msgstr "NROW(X) 無效"
-
-#~ msgid "invalid argument 'cell'"
-#~ msgstr "引數 'cell' 無效"
-
-#~ msgid "invalid argument 'degree'"
-#~ msgstr "引數 'degree' 無效"
+#~ msgid "invalid 'nb'"
+#~ msgstr "'nb' 無效"
 
 #~ msgid "invalid argument 'lambda'"
 #~ msgstr "引數 'lambda' 無效"
-
-#~ msgid "invalid argument 'span'"
-#~ msgstr "引數 'span' 無效"
-
-#~ msgid "invalid 'data' argument"
-#~ msgstr "'data' 引數無效"
-
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "引數 'omit' 無效"
-
-#~ msgid "invalid 'control.spar'"
-#~ msgstr "'control.spar' 無效"
-
-#~ msgid "'formula' missing"
-#~ msgstr "沒有 'formula'"
 
 #~ msgid "formula missing"
 #~ msgstr "沒有公式"
@@ -4659,18 +4624,47 @@ msgstr[0] "從組合擬合中用 %d/%d 列"
 #~ msgid "incorrect specification for 'formula'"
 #~ msgstr "'formula' 設定無效"
 
-#, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "'use' 引數無效"
+#~ msgid "invalid 'method' argument"
+#~ msgstr "'method' 引數無效"
 
-#~ msgid "invalid 'abbr.colnames'"
-#~ msgstr "'abbr.colnames' 無效"
+#~ msgid ","
+#~ msgstr ","
 
-#~ msgid "invalid 'endrule' argument"
-#~ msgstr "'endrule' 引數無效"
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x) 無效"
 
-#~ msgid "invalid argument 'c'"
-#~ msgstr "引數 'c' 無效"
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) 無效"
+
+#~ msgid "invalid 'control' argument"
+#~ msgstr "'control' 引數無效"
+
+#~ msgid "invalid NCOL(X)"
+#~ msgstr "NCOL(X)無效"
+
+#~ msgid "invalid NROW(X)"
+#~ msgstr "NROW(X) 無效"
+
+#~ msgid "invalid 'y'"
+#~ msgstr "'y' 無效"
+
+#~ msgid "invalid argument 'span'"
+#~ msgstr "引數 'span' 無效"
+
+#~ msgid "invalid argument 'cell'"
+#~ msgstr "引數 'cell' 無效"
+
+#~ msgid "invalid argument 'degree'"
+#~ msgstr "引數 'degree' 無效"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "'data' 引數無效"
+
+#~ msgid "invalid argument 'omit'"
+#~ msgstr "引數 'omit' 無效"
+
+#~ msgid "'formula' missing"
+#~ msgstr "沒有 'formula'"
 
 #~ msgid "invalid argument 'n'"
 #~ msgstr "引數 'n' 無效"
@@ -4678,29 +4672,27 @@ msgstr[0] "從組合擬合中用 %d/%d 列"
 #~ msgid "invalid argument 'r'"
 #~ msgstr "引數 'r' 無效"
 
-#~ msgid "invalid 'nb'"
-#~ msgstr "'nb' 無效"
+#~ msgid "invalid argument 'c'"
+#~ msgstr "引數 'c' 無效"
 
-#~ msgid "invalid 'x'"
-#~ msgstr "'x' 無效"
+#~ msgid "invalid 'endrule' argument"
+#~ msgstr "'endrule' 引數無效"
 
-#~ msgid "invalid 'y'"
-#~ msgstr "'y' 無效"
+#~ msgid "invalid 'control.spar'"
+#~ msgstr "'control.spar' 無效"
 
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ncol(x) 無效"
+#~ msgid "invalid 'keep.stuff'"
+#~ msgstr "'keep.stuff' 無效"
 
-#~ msgid "invalid nrow(x)"
-#~ msgstr "nrow(x) 無效"
+#~ msgid "invalid 'abbr.colnames'"
+#~ msgstr "'abbr.colnames' 無效"
 
 #~ msgid "Requested conf.level not achievable"
 #~ msgstr "無法達到所要求的 conf.level"
 
-#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-#~ msgstr "'contrast.obj' 行必須設定對比(總和為零)"
-
-#~ msgid ","
-#~ msgstr ","
+#~ msgid "medpolish() did not converge in %d iteration"
+#~ msgid_plural "medpolish() did not converge in %d iterations"
+#~ msgstr[0] "medpolish()經過 %d 個迭代仍沒有聚合"
 
 #~ msgid ".nknots.smspl() is now exported; use it instead of n.knots()"
 #~ msgstr ".nknots.smspl() 目前已匯出；用它來替代 n.knots()"

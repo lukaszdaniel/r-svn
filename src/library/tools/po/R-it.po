@@ -249,9 +249,8 @@ msgstr "Tutte le tag del campo devono essere ASCII."
 
 #. R/install.R: gettextf("Applied installation-time patch %s and saved it as %s in package installation\n",     purl, fname)
 #: R/install.R:0
-#, fuzzy
 msgid "Applied installation-time patch %s and saved it as %s in package installation"
-msgstr "Annullata patch durante l'installazione"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("Argument %s must be a character vector or NULL and not %s",     sQuote("pattern"), sQuote(class(pattern)[1L]))
 #: R/Vignettes.R:0
@@ -1710,7 +1709,8 @@ msgstr "contiene una linea vuota"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "la directory di lavoro corrente non può essere accertata"
 
@@ -2503,7 +2503,6 @@ msgstr[1] "Nota: trovate %d stringhe marcate UTF-8"
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "Nota: trovata %d stringa contrassegnata come \"bytes\""
@@ -2636,79 +2635,68 @@ msgstr[1] "non è possibile ricodificare %s linee %s"
 #~ msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
 #~ msgstr "Utilizza una licenza ACM: appropriata unicamente per codice pre-2013 ACM TOMS"
 
-#~ msgid "Rd files must have a non-empty %s."
-#~ msgstr "I file Rd devono avere un non-vuoto %s."
-
-#~ msgid "inferiorCallError"
-#~ msgstr "inferiorCallError"
-
-#~ msgid "HTTPD-DEMO %s::%s"
-#~ msgstr "HTTPD-DEMO %s::%s"
-
-#~ msgid "in package installation"
-#~ msgstr "durante l'installazione del pacchetto"
-
-#~ msgid "WARNING: failed to apply patch"
-#~ msgstr "AVVERTIMENTO: applicazione patch fallita"
-
-#~ msgid "invalid value"
-#~ msgstr "valore non valido"
-
-#~ msgid "HTTPD-ERROR %s %s"
-#~ msgstr "HTTPD-ERROR %s %s"
-
-#~ msgid "HTTPD-EXAMPLE %s::%s"
-#~ msgstr "HTTPD-ESEMPIO %s::%s"
-
-#~ msgid "+-+"
-#~ msgstr "+-+"
-
-#~ msgid ","
-#~ msgstr ","
-
 #~ msgid "..."
 #~ msgstr "..."
 
-#~ msgid "="
-#~ msgstr "="
-
-#~ msgid "Applied installation-time patch"
-#~ msgstr "Applicata patch durante l'installazione"
-
-#~ msgid "HTTPD-REQUEST %s%s"
-#~ msgstr "HTTPD-REQUEST %s%s"
-
-#~ msgid "and saved it as"
-#~ msgstr "e salvata come"
-
-#~ msgid "ignored as vignettes have been rebuilt."
-#~ msgstr "ignorata perché le vignette sono state ricreate."
-
-#~ msgid "inst/doc"
-#~ msgstr "inst/doc"
-
-#~ msgid "which seems to be already applied."
-#~ msgstr "il quale sembra già stato applicato."
-
-#~ msgid "%s file\n"
-#~ msgid_plural "%s files\n"
-#~ msgstr[0] "%s file\n"
-#~ msgstr[1] "%s file\n"
+#~ msgid "Rd files must have a non-empty %s."
+#~ msgstr "I file Rd devono avere un non-vuoto %s."
 
 #~ msgid "alias:"
 #~ msgstr "alias:"
 
-#~ msgid "Found"
-#~ msgstr "Trovato"
+#~ msgid "+-+"
+#~ msgstr "+-+"
 
-#~ msgid "OFF"
-#~ msgstr "OFF"
+#~ msgid "inst/doc"
+#~ msgstr "inst/doc"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "ignored as vignettes have been rebuilt."
+#~ msgstr "ignorata perché le vignette sono state ricreate."
+
+#~ msgid "HTTPD-REQUEST %s%s"
+#~ msgstr "HTTPD-REQUEST %s%s"
+
+#~ msgid "="
+#~ msgstr "="
+
+#~ msgid "HTTPD-ERROR %s %s"
+#~ msgstr "HTTPD-ERROR %s %s"
+
+#~ msgid "HTTPD-DEMO %s::%s"
+#~ msgstr "HTTPD-DEMO %s::%s"
+
+#~ msgid "HTTPD-EXAMPLE %s::%s"
+#~ msgstr "HTTPD-ESEMPIO %s::%s"
+
+#~ msgid "invalid value"
+#~ msgstr "valore non valido"
+
+#~ msgid "which seems to be already applied."
+#~ msgstr "il quale sembra già stato applicato."
+
+#~ msgid "Applied installation-time patch"
+#~ msgstr "Applicata patch durante l'installazione"
+
+#~ msgid "and saved it as"
+#~ msgstr "e salvata come"
+
+#~ msgid "in package installation"
+#~ msgstr "durante l'installazione del pacchetto"
+
+#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+#~ msgstr "I file PACKAGES non includono somme MD5 nel caso win.binary"
+
+#~ msgid "directly."
+#~ msgstr "direttamente."
 
 #~ msgid "ON"
 #~ msgstr "ON"
 
-#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
-#~ msgstr "I file PACKAGES non includono somme MD5 nel caso win.binary"
+#~ msgid "OFF"
+#~ msgstr "OFF"
 
 #~ msgid ""
 #~ "]\n"
@@ -2717,11 +2705,19 @@ msgstr[1] "non è possibile ricodificare %s linee %s"
 #~ "]\n"
 #~ "Rilevati file PACKAGES con"
 
-#~ msgid "directly."
-#~ msgstr "direttamente."
-
 #~ msgid "entries at"
 #~ msgstr "voci in"
+
+#~ msgid "Found"
+#~ msgstr "Trovato"
+
+#~ msgid "inferiorCallError"
+#~ msgstr "inferiorCallError"
+
+#~ msgid "%s file\n"
+#~ msgid_plural "%s files\n"
+#~ msgstr[0] "%s file\n"
+#~ msgstr[1] "%s file\n"
 
 #, fuzzy
 #~ msgid "one of 'package' and 'dir' must be specified."

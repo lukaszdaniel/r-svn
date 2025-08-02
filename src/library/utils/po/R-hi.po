@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Weblate Admin <gergely@rx.studio>\n"
 "Language-Team: none\n"
@@ -459,6 +459,11 @@ msgstr ""
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
+msgstr ""
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+msgid "Enter a frame number, or 0 to exit"
 msgstr ""
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
@@ -1354,9 +1359,8 @@ msgstr ""
 
 #. R/read.fortran.R: stop("invalid format")
 #: R/read.fortran.R:0
-#, fuzzy
 msgid "invalid format"
-msgstr "अमान्य '%s' आर्गुमेंट"
+msgstr ""
 
 #. R/tar.R: warning("invalid gid value replaced by that for user 'nobody'",     call. = FALSE)
 #: R/tar.R:0
@@ -1371,9 +1375,8 @@ msgstr ""
 #. R/unix/download.file.R: stop("invalid method: ", method)
 #. R/windows/download.file.R: stop("invalid method: ", method)
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-#, fuzzy
 msgid "invalid method:"
-msgstr "अमान्य '%s' आर्गुमेंट"
+msgstr ""
 
 #. R/tar.R: stop("invalid name field in tarball")
 #: R/tar.R:0
@@ -1413,9 +1416,8 @@ msgstr ""
 
 #. R/news.R: stop("invalid query")
 #: R/news.R:0
-#, fuzzy
 msgid "invalid query"
-msgstr "अमान्य '%s' आर्गुमेंट"
+msgstr ""
 
 #. R/tar.R: warning("invalid uid value replaced by that for user 'nobody'",     call. = FALSE)
 #: R/tar.R:0
@@ -2244,34 +2246,3 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "Invalid 'filter' argument."
-#~ msgstr "अमान्य '%s' आर्गुमेंट"
-
-#, fuzzy
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "अमान्य '%s' आर्गुमेंट"
-
-#~ msgid "invalid %s argument"
-#~ msgstr "अमान्य '%s' आर्गुमेंट"
-
-#, fuzzy
-#~ msgid "invalid 'data' argument"
-#~ msgstr "अमान्य '%s' आर्गुमेंट"
-
-#, fuzzy
-#~ msgid "invalid 'modes' argument"
-#~ msgstr "अमान्य '%s' आर्गुमेंट"
-
-#, fuzzy
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "अमान्य '%s' आर्गुमेंट"
-
-#, fuzzy
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "अमान्य '%s' आर्गुमेंट"
-
-#, fuzzy
-#~ msgid "invalid 'x' argument"
-#~ msgstr "अमान्य '%s' आर्गुमेंट"

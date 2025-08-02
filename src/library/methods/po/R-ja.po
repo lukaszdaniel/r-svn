@@ -810,8 +810,7 @@ msgstr "クラス %s はクラスのユニオンです: クラスユニオンに
 #: R/is.R:0
 #, fuzzy
 msgid "class %s is defined (with package slot %s) but no metadata object found to revise %s information---not imported?  Making a copy in package %s"
-msgstr ""
-"クラス %s が（パッケージスロット %s とともに) 定義されていますが、%s の情報を改訂するためのメタデータオブジェクトがありません。エクスポートされていないのでは？  パッケージ %s 中にコピーを作成します"
+msgstr "クラス %s が（パッケージスロット %s とともに) 定義されていますが、%s の情報を改訂するためのメタデータオブジェクトがありません。エクスポートされていないのでは？  パッケージ %s 中にコピーを作成します"
 
 #. R/refClass.R: gettextf("class %s is defined but is not a reference class",     dQuote(Class))
 #: R/refClass.R:0
@@ -1641,9 +1640,7 @@ msgstr "オブジェクトは %s 型ではなく、クラス %s の有効なデ�
 #. R/MethodsList.R: gettextf("object to use as a method signature for function %s does not look like a legitimate signature (a vector of single class names): there were %d class names, but %d elements in the signature object",     sQuote(fun@generic), length(sigClasses), length(signature))
 #: R/MethodsList.R:0
 msgid "object to use as a method signature for function %s does not look like a legitimate signature (a vector of single class names): there were %d class names, but %d elements in the signature object"
-msgstr ""
-"関数 %s に対するメソッドシグナチャとして使用しようとしているオブジェクトは正しいシグナチャ (単一のクラス名のリスト) のようには見えません: %d 個のクラス名がありましたが、シグナチャオブジェクトには %d "
-"個の要素があります"
+msgstr "関数 %s に対するメソッドシグナチャとして使用しようとしているオブジェクトは正しいシグナチャ (単一のクラス名のリスト) のようには見えません: %d 個のクラス名がありましたが、シグナチャオブジェクトには %d 個の要素があります"
 
 #. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[[1L]])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
 #: R/trace.R:0
@@ -2130,12 +2127,12 @@ msgid_plural "the formal arguments of the generic function for %s (%s) differ fr
 msgstr[0] "%s (%s) に対する総称的関数の形式的引数は、既定 (%s) として使われる非総称的なそれと異なります"
 
 #, fuzzy
-#~ msgid "Function must be an S4 generic"
-#~ msgstr ".getGeneric の中に空の関数名"
-
-#, fuzzy
 #~ msgid "(and methods)"
 #~ msgstr "メソッド %s()　用"
+
+#, fuzzy
+#~ msgid "Function must be an S4 generic"
+#~ msgstr ".getGeneric の中に空の関数名"
 
 #~ msgid "invalid method sublist"
 #~ msgstr "不正なメソッドサブリスト"

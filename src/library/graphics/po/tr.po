@@ -225,9 +225,9 @@ msgstr "geçersiz grafik sembolü"
 msgid "invalid font specification"
 msgstr "geçersiz yazıtipi özelliği"
 
-#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193 plot.cpp:2200
-#: plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167 plot3d.cpp:1169
-#: plot3d.cpp:1898
+#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193
+#: plot.cpp:2200 plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167
+#: plot3d.cpp:1169 plot3d.cpp:1898
 #, c-format
 msgid "invalid '%s' value"
 msgstr "geçersiz '%s' değeri"
@@ -397,9 +397,9 @@ msgstr "'a' ve 'b' sonlu olmalıdır"
 
 #: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
 #: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
-#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094 plot3d.cpp:1098
-#: plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169 stem.cpp:171
-#: stem.cpp:172
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
+#: stem.cpp:171 stem.cpp:172
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "hatalı '%s' argümanı"

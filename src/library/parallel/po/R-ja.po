@@ -151,9 +151,8 @@ msgstr "数値 'names' は 1 以上でなければなりません"
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
-#, fuzzy
 msgid "replacing registration for cluster type '%s'"
-msgstr "不明なクラスター型です"
+msgstr ""
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0

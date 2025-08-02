@@ -1721,7 +1721,8 @@ msgstr "空白行があります"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "現在の作業ディレクトリを確認することができません。"
 
@@ -2068,9 +2069,8 @@ msgstr "'%s' を構文解析中"
 
 #. R/install.R: stop("patch utility is needed for installation-time patching")
 #: R/install.R:0
-#, fuzzy
 msgid "patch utility is needed for installation-time patching"
-msgstr "以下のパッケージ化されたインストール"
+msgstr ""
 
 #. R/admin.R: gettextf("processing %s", sQuote(basename(file)))
 #. R/doitools.R: sprintf("processing %s", p)
@@ -2488,7 +2488,6 @@ msgstr[0] "注意: %d 個の UTF-8 コードの文字が見つかりました"
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "注意: %d 個の \"bytes\" コードの文字が見つかりました"
@@ -2598,37 +2597,41 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "%s (%s行) を再エンコード出来ません"
 
+#~ msgid "..."
+#~ msgstr "..."
+
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Rd ファイルは空でない %s を持たなければなりません"
 
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "="
+#~ msgstr "="
+
 #, fuzzy
-#~ msgid "inferiorCallError"
-#~ msgstr " 内部エラー "
+#~ msgid "invalid value"
+#~ msgstr "不正なパッケージです"
+
+#, fuzzy
+#~ msgid "Applied installation-time patch"
+#~ msgstr "以下のパッケージ化されたインストール"
 
 #, fuzzy
 #~ msgid "in package installation"
 #~ msgstr "以下のパッケージ化されたインストール"
 
 #, fuzzy
-#~ msgid "invalid value"
-#~ msgstr "不正なパッケージです"
+#~ msgid "Found"
+#~ msgstr "%s が見つかりました"
 
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "="
-#~ msgstr "="
+#, fuzzy
+#~ msgid "inferiorCallError"
+#~ msgstr " 内部エラー "
 
 #~ msgid "%s file\n"
 #~ msgid_plural "%s files\n"
 #~ msgstr[0] "%s ファイル\n"
-
-#, fuzzy
-#~ msgid "Found"
-#~ msgstr "%s が見つかりました"
 
 #, fuzzy
 #~ msgid "one of 'package' and 'dir' must be specified."

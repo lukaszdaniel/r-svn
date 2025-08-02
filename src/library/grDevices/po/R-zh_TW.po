@@ -304,9 +304,8 @@ msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr "字型種類無效"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -316,33 +315,28 @@ msgstr "字型種類無效"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height"
-msgstr "字型種類無效"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr "字型種類無效"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "字型種類無效"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width"
-msgstr "字型種類無效"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr "字型種類無效"
+msgstr ""
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -966,14 +960,14 @@ msgstr[0] "'%2$s' 裡的 %1$s 引數名稱無效"
 #~ msgid "invalid 'filename'"
 #~ msgstr "'filename' 無效"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "'file' 無效"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "'family' 引數無效"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "'title' 無效"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "'family' 引數無效"
+#~ msgid "invalid 'file'"
+#~ msgstr "'file' 無效"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

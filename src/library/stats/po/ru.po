@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: Srunmed.cpp:65
@@ -618,7 +618,7 @@ msgstr "'.' в формуле и нет аргумента 'data'"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' должен быть списком"
+msgstr "m должен быть по крайней мере 2"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1080,32 +1080,29 @@ msgstr "пропущенное значение в последних %d наб�
 msgid "ifault=%d. This should not happen"
 msgstr "быть такого не может"
 
-#~ msgid "n must be at least two"
-#~ msgstr "m должен быть по крайней мере 2"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) должна быть по меньшей мере 2"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "неправильное значение 'lag.max'"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "неправильная модельная формула в ExtractVars"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "неправильная модельная формула в EncodeVars"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) должна быть по меньшей мере 2"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' должен быть списком"
 
-#~ msgid "m must be a list"
-#~ msgstr "m должен быть списком"
+#~ msgid "'central' is NA, but must be TRUE or FALSE"
+#~ msgstr "'central' является NA, а должна быть TRUE или FALSE"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf заменены максимальным положительным значением"
 
-#~ msgid "'central' is NA, but must be TRUE or FALSE"
-#~ msgstr "'central' является NA, а должна быть TRUE или FALSE"
+#~ msgid "invalid value of lag.max"
+#~ msgstr "неправильное значение 'lag.max'"
+
+#~ msgid "m must be a list"
+#~ msgstr "m должен быть списком"
 
 #~ msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"
 #~ msgstr "Ошибка в fexact3, it[i=%d]=%d: отрицательный ключ %d (kyy=%d)\n"

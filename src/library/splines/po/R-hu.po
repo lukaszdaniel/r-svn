@@ -37,19 +37,16 @@ msgstr ""
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "\"y ~ x\" formában kell megadni a 'formula'-t"
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' értéke 2 vagy nagyobb kell hogy legyen"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "az 'ord' pozitív egész szám, maximális értéke a knots vektor hossza lehet"
 
@@ -82,7 +79,6 @@ msgstr "nem csökkenők kell legyenek a knot pozíciók"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "a knot pozíciók szigorúan növekvők kell hogy legyenek"
 
@@ -93,7 +89,6 @@ msgstr ""
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "'x' és 'y' hossza meg kell, hogy egyezzen"
 
@@ -109,15 +104,13 @@ msgstr "a knots vektor hosszának legalább olyan hosszúnak kell lennie, mint a
 
 #. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "must have at least 'ord'=%d points"
-msgstr "a knots vektor hosszának legalább olyan hosszúnak kell lennie, mint az 'ord' értéke"
+msgstr ""
 
 #. R/splineClasses.R: gettextf("need at least %s (=%d) knots", "2*ord -1", 2 * ord -     1)
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "need at least %s (=%d) knots"
-msgstr "a knots vektor hosszának legalább olyan hosszúnak kell lennie, mint az 'ord' értéke"
+msgstr ""
 
 #. R/splines.R: stop("non-finite knots")
 #: R/splines.R:0
@@ -137,7 +130,6 @@ msgstr "egyes határ csomókon túli 'x' értékek rosszul kondícionált bázis
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "spline must be monotone"
 msgstr "a spline monotonnak kell lennie"
 
@@ -153,7 +145,6 @@ msgstr "'x' értékeinek tartománya meghalad egy periódust"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "'x' értékeinek különbözőknek kell lennie"
 
@@ -161,7 +152,3 @@ msgstr "'x' értékeinek különbözőknek kell lennie"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "'x' értékeinek szigorúan növekvőnek kell lenniük"
-
-#, fuzzy
-#~ msgid "stop(\"knot positions must be non-decreasing\")"
-#~ msgstr "nem csökkenők kell legyenek a knot pozíciók"

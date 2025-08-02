@@ -26,7 +26,6 @@ msgstr ""
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
-#, fuzzy
 msgid "extra arguments discarded"
 msgstr "多余的参数忽略不用"
 
@@ -47,7 +46,6 @@ msgstr ""
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
-#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "通过靠模切削找到了一个更好的答案，因此原来的拟合没有收敛"
 

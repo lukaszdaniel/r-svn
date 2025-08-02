@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. R/image.R: gettextf("%s can only be used with a regular grid", sQuote("useRaster = TRUE"))
 #: R/image.R:0
@@ -824,17 +824,17 @@ msgstr[2] "аргументы %s не для использования"
 #~ msgid "invalid 'axp'"
 #~ msgstr "неправильный 'axp'"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "неправильные 'given.values'"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "неправильный 'log'"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "неправильный 'title'"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "неправильный 'usr'"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "неправильные 'given.values'"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "неправильный 'title'"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

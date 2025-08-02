@@ -58,15 +58,13 @@ msgstr ""
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
 #: R/models.R:0 R/reshape.R:0
-#, fuzzy
 msgid "'%s' must be a character string"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 #: R/power.R:0
-#, fuzzy
 msgid "'%s' must be numeric in [0, 1]"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 #: R/addmargins.R:0
@@ -76,9 +74,8 @@ msgstr "'A' debe ser una matriz o tabla"
 
 #. R/dendrogram.R: stop("'ColSideColors' must be a character vector of length ncol(x)")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "'ColSideColors' must be a character vector of length ncol(x)"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/anova.R: stop("'P.values' is TRUE, but 'has.Pvalue' is not")
 #: R/anova.R:0
@@ -87,15 +84,13 @@ msgstr ""
 
 #. R/dendrogram.R: stop("'RowSideColors' must be a character vector of length nrow(x)")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "'RowSideColors' must be a character vector of length nrow(x)"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/poisson.test.R: stop("'T' must be nonnegative")
 #: R/poisson.test.R:0
-#, fuzzy
 msgid "'T' must be nonnegative"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/cor.R: stop("'V' is not a square numeric matrix")
 #: R/cor.R:0
@@ -139,9 +134,8 @@ msgstr ""
 
 #. R/anova.R: stop("'anova' object must have colnames")
 #: R/anova.R:0
-#, fuzzy
 msgid "'anova' object must have colnames"
-msgstr "x$lag debe tener al menos 1 columna"
+msgstr ""
 
 #. R/approx.R: stop("'approx' requires n >= 1")
 #: R/approx.R:0
@@ -181,9 +175,8 @@ msgstr ""
 
 #. R/kernel.R: stop("'coef' must be a vector")
 #: R/kernel.R:0
-#, fuzzy
 msgid "'coef' must be a vector"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
@@ -228,9 +221,8 @@ msgstr ""
 #. R/nlminb.R: stop("'control' argument must be a named list")
 #. R/nls.R: stop("'control' argument must be a named list")
 #: R/nlminb.R:0 R/nls.R:0
-#, fuzzy
 msgid "'control' argument must be a named list"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/nlminb.R: gettextf("'control' component '%s' = %g, is out of range", names(port_cpos)[B],     v[iv1])
 #: R/nlminb.R:0
@@ -291,9 +283,8 @@ msgstr ""
 
 #. R/contr.poly.R: stop("'degree' must be at least 1")
 #: R/contr.poly.R:0
-#, fuzzy
 msgid "'degree' must be at least 1"
-msgstr "'lag.max' debe ser al menos 1"
+msgstr ""
 
 #. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 #: R/contr.poly.R:0
@@ -416,15 +407,13 @@ msgstr ""
 
 #. R/nlm.R: stop("'interval' must be a vector of length 2")
 #: R/nlm.R:0
-#, fuzzy
 msgid "'interval' must be a vector of length 2"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/kmeans.R: stop("'iter.max' must be positive")
 #: R/kmeans.R:0
-#, fuzzy
 msgid "'iter.max' must be positive"
-msgstr "'lag.max' debe ser al menos 0"
+msgstr ""
 
 #. R/identify.hclust.R: stop("'k' and 'h' must be a scalar")
 #: R/identify.hclust.R:0
@@ -458,9 +447,8 @@ msgstr ""
 
 #. R/runmed.R: stop("'k' must be positive")
 #: R/runmed.R:0
-#, fuzzy
 msgid "'k' must be positive"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/kernel.R: stop("'kernapply' is not available for object 'x'")
 #: R/kernel.R:0
@@ -494,9 +482,8 @@ msgstr ""
 
 #. R/optim.R: stop("'lower' and 'upper' must be finite values")
 #: R/optim.R:0
-#, fuzzy
 msgid "'lower' and 'upper' must be finite values"
-msgstr "Las variables 'sampleT y 'nser' deben ser enteros"
+msgstr ""
 
 #. R/kernel.R: stop("'m' is less than 1")
 #: R/kernel.R:0
@@ -510,9 +497,8 @@ msgstr ""
 
 #. R/termplot.R: stop("'main' must be TRUE, FALSE, NULL or character (vector).")
 #: R/termplot.R:0
-#, fuzzy
 msgid "'main' must be TRUE, FALSE, NULL or character (vector)."
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/loglin.R: stop("'margin' must contain names or numbers corresponding to 'table'")
 #: R/loglin.R:0
@@ -531,15 +517,13 @@ msgstr ""
 
 #. R/ts.R: stop("'model$order' must be of length 3")
 #: R/ts.R:0
-#, fuzzy
 msgid "'model$order' must be of length 3"
-msgstr "«ACF» debe tener longitud de dos o más"
+msgstr ""
 
 #. R/ts.R: stop("'model' must be list")
 #: R/ts.R:0
-#, fuzzy
 msgid "'model' must be list"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/model.tables.R: stop("'model.tables' is not implemented for multiple responses")
 #: R/model.tables.R:0
@@ -549,9 +533,8 @@ msgstr ""
 #. R/t.test.R: stop("'mu' must be a single number")
 #. R/wilcox.test.R: stop("'mu' must be a single number")
 #: R/t.test.R:0 R/wilcox.test.R:0
-#, fuzzy
 msgid "'mu' must be a single number"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/fisher.test.R: stop("'mult' must be integer >= 2, typically = 30")
 #: R/fisher.test.R:0
@@ -560,9 +543,8 @@ msgstr ""
 
 #. R/binom.test.R: stop("'n' must be a positive integer >= 'x'")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "'n' must be a positive integer >= 'x'"
-msgstr "la frecuencia debe ser un entero positivo >= 2 para BSM"
+msgstr ""
 
 #. R/ts.R: stop("'n' must be strictly positive")
 #: R/ts.R:0
@@ -571,9 +553,8 @@ msgstr ""
 
 #. R/ar.R: stop("'n.ahead' must be at least 1")
 #: R/ar.R:0
-#, fuzzy
 msgid "'n.ahead' must be at least 1"
-msgstr "'lag.max' debe ser al menos 1"
+msgstr ""
 
 #. R/fisher.test.R: stop("'names(hybridPars)' should be NULL or be identical to the default's")
 #: R/fisher.test.R:0
@@ -595,21 +576,18 @@ msgstr ""
 #. R/prcomp.R: stop("'newdata' must be a matrix or data frame")
 #. R/princomp-add.R: stop("'newdata' must be a matrix or data frame")
 #: R/prcomp.R:0 R/princomp-add.R:0
-#, fuzzy
 msgid "'newdata' must be a matrix or data frame"
-msgstr "'A' debe ser una matriz o tabla"
+msgstr ""
 
 #. R/smspline.R: stop("'nknots' must be at least 1")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'nknots' must be at least 1"
-msgstr "'lag.max' debe ser al menos 1"
+msgstr ""
 
 #. R/smspline.R: stop("'nknots' must be numeric (in {1,..,n})")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'nknots' must be numeric (in {1,..,n})"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/ppr.R: stop("'nterms' is missing with no default")
 #: R/ppr.R:0
@@ -628,9 +606,8 @@ msgstr ""
 
 #. R/models.R: stop("'offset' must be numeric")
 #: R/models.R:0
-#, fuzzy
 msgid "'offset' must be numeric"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/fisher.test.R: stop("'or' must be a single number between 0 and Inf")
 #: R/fisher.test.R:0
@@ -655,33 +632,28 @@ msgstr ""
 
 #. R/ar.R: stop("'order.max' must be < 'n.used'")
 #: R/ar.R:0
-#, fuzzy
 msgid "'order.max' must be < 'n.used'"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/ar.R: stop("'order.max' must be >= 0")
 #: R/ar.R:0
-#, fuzzy
 msgid "'order.max' must be >= 0"
-msgstr "'lag.max' debe ser al menos 0"
+msgstr ""
 
 #. R/ar.R: stop("'order.max' must be >= 1")
 #: R/ar.R:0
-#, fuzzy
 msgid "'order.max' must be >= 1"
-msgstr "'lag.max' debe ser al menos 1"
+msgstr ""
 
 #. R/binom.test.R: stop("'p' must be a single number between 0 and 1")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "'p' must be a single number between 0 and 1"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/spectrum.R: stop("'p' must be between 0 and 0.5")
 #: R/spectrum.R:0
-#, fuzzy
 msgid "'p' must be between 0 and 0.5"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/prop.test.R: stop("'p' must have the same length as 'x' and 'n'")
 #: R/prop.test.R:0
@@ -750,15 +722,13 @@ msgstr ""
 
 #. R/relevel.R: stop("'ref' must be an existing level")
 #: R/relevel.R:0
-#, fuzzy
 msgid "'ref' must be an existing level"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/relevel.R: stop("'ref' must be of length one")
 #: R/relevel.R:0
-#, fuzzy
 msgid "'ref' must be of length one"
-msgstr "«ACF» debe tener longitud de dos o más"
+msgstr ""
 
 #. R/relevel.R: stop("'relevel' only for (unordered) factors")
 #: R/relevel.R:0
@@ -802,9 +772,8 @@ msgstr ""
 
 #. R/ar.R: warning("'se.fit' not yet implemented for multivariate models")
 #: R/ar.R:0
-#, fuzzy
 msgid "'se.fit' not yet implemented for multivariate models"
-msgstr "solo implementado para series temporales univariadas"
+msgstr ""
 
 #. R/arima.R: stop("'seasonal$order' must be a non-negative numeric vector of length 3")
 #. R/arma0.R: stop("'seasonal$order' must be a non-negative numeric vector of length 3")
@@ -826,15 +795,13 @@ msgstr ""
 
 #. R/smspline.R: stop("'span' must be between 0 and 1.")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'span' must be between 0 and 1."
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/smspline.R: stop("'spar' must be of length 1")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'spar' must be of length 1"
-msgstr "«ACF» debe tener longitud de dos o más"
+msgstr ""
 
 #. R/spline.R: stop("'spline' requires n >= 1")
 #: R/spline.R:0
@@ -848,9 +815,8 @@ msgstr ""
 
 #. R/loglin.R: stop("'start' and 'table' must be same length")
 #: R/loglin.R:0
-#, fuzzy
 msgid "'start' and 'table' must be same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/ts.R: stop("'start' cannot be after 'end'")
 #: R/ts.R:0
@@ -916,9 +882,8 @@ msgstr ""
 
 #. R/reshape.R: stop("'varying' arguments must be the same length")
 #: R/reshape.R:0
-#, fuzzy
 msgid "'varying' arguments must be the same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/nls-profile.R: stop("'varying' has wrong length")
 #: R/nls-profile.R:0
@@ -937,9 +902,8 @@ msgstr ""
 
 #. R/reshape.R: stop("'varying' must be nonempty list or vector")
 #: R/reshape.R:0
-#, fuzzy
 msgid "'varying' must be nonempty list or vector"
-msgstr "«ACF» debe tener longitud de dos o más"
+msgstr ""
 
 #. R/lm.R: stop("'weights' as formula should be one-sided")
 #: R/lm.R:0
@@ -954,9 +918,8 @@ msgstr ""
 #. R/glm.R: stop("'weights' must be a numeric vector")
 #. R/lm.R: stop("'weights' must be a numeric vector")
 #: R/glm.R:0 R/lm.R:0
-#, fuzzy
 msgid "'weights' must be a numeric vector"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/density.R: stop("'weights' must not be negative")
 #: R/density.R:0
@@ -987,16 +950,14 @@ msgstr ""
 #. R/fligner.test.R: stop("'x' and 'g' must have the same length")
 #. R/kruskal.test.R: stop("'x' and 'g' must have the same length")
 #: R/bartlett.test.R:0 R/fligner.test.R:0 R/kruskal.test.R:0
-#, fuzzy
 msgid "'x' and 'g' must have the same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/pairwise.R: stop("'x' and 'n' must have the same length")
 #. R/prop.test.R: stop("'x' and 'n' must have the same length")
 #: R/pairwise.R:0 R/prop.test.R:0
-#, fuzzy
 msgid "'x' and 'n' must have the same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/chisq.test.R: stop("'x' and 'p' must have the same number of elements")
 #: R/chisq.test.R:0
@@ -1005,9 +966,8 @@ msgstr ""
 
 #. R/weighted.mean.R: stop("'x' and 'w' must have the same length")
 #: R/weighted.mean.R:0
-#, fuzzy
 msgid "'x' and 'w' must have the same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/density.R: stop("'x' and 'weights' have unequal length")
 #: R/density.R:0
@@ -1018,9 +978,8 @@ msgstr ""
 #. R/fisher.test.R: stop("'x' and 'y' must have at least 2 levels")
 #. R/mantelhaen.test.R: stop("'x' and 'y' must have at least 2 levels")
 #: R/chisq.test.R:0 R/fisher.test.R:0 R/mantelhaen.test.R:0
-#, fuzzy
 msgid "'x' and 'y' must have at least 2 levels"
-msgstr "x$lag debe tener al menos 1 columna"
+msgstr ""
 
 #. R/chisq.test.R: stop("'x' and 'y' must have the same length")
 #. R/cor.test.R: stop("'x' and 'y' must have the same length")
@@ -1029,9 +988,8 @@ msgstr "x$lag debe tener al menos 1 columna"
 #. R/wilcox.test.R: stop("'x' and 'y' must have the same length")
 #: R/chisq.test.R:0 R/cor.test.R:0 R/fisher.test.R:0 R/mcnemar.test.R:0
 #: R/wilcox.test.R:0
-#, fuzzy
 msgid "'x' and 'y' must have the same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/mcnemar.test.R: stop("'x' and 'y' must have the same number of levels (minimum 2)")
 #: R/mcnemar.test.R:0
@@ -1092,9 +1050,8 @@ msgstr ""
 
 #. R/chisq.test.R: stop("'x' must at least have 2 elements")
 #: R/chisq.test.R:0
-#, fuzzy
 msgid "'x' must at least have 2 elements"
-msgstr "x$lag debe tener al menos 1 columna"
+msgstr ""
 
 #. R/splinefun.R: stop("'x' must be *strictly* increasing (non - NA)")
 #: R/splinefun.R:0
@@ -1103,9 +1060,8 @@ msgstr ""
 
 #. R/mantelhaen.test.R: stop("'x' must be a 3-dimensional array")
 #: R/mantelhaen.test.R:0
-#, fuzzy
 msgid "'x' must be a 3-dimensional array"
-msgstr "'A' debe ser una matriz o tabla"
+msgstr ""
 
 #. R/bartlett.test.R: stop("'x' must be a list with at least 2 elements")
 #. R/fligner.test.R: stop("'x' must be a list with at least 2 elements")
@@ -1116,27 +1072,23 @@ msgstr ""
 
 #. R/lm.R: stop("'x' must be a matrix")
 #: R/lm.R:0
-#, fuzzy
 msgid "'x' must be a matrix"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/cov.wt.R: stop("'x' must be a matrix or a data frame")
 #: R/cov.wt.R:0
-#, fuzzy
 msgid "'x' must be a matrix or a data frame"
-msgstr "'A' debe ser una matriz o tabla"
+msgstr ""
 
 #. R/dendrogram.R: stop("'x' must be a numeric matrix")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "'x' must be a numeric matrix"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/cor.test.R: stop("'x' must be a numeric vector")
 #: R/cor.test.R:0
-#, fuzzy
 msgid "'x' must be a numeric vector"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/spectrum.R: stop("'x' must be a time series or an ar() fit")
 #: R/spectrum.R:0
@@ -1145,9 +1097,8 @@ msgstr ""
 
 #. R/ftable.R: stop("'x' must be an \"ftable\" object")
 #: R/ftable.R:0
-#, fuzzy
 msgid "'x' must be an \"ftable\" object"
-msgstr "'A' debe ser una matriz o tabla"
+msgstr ""
 
 #. R/symnum.R: gettextf("'x' must be between %s and %s", format(minc), format(maxc))
 #: R/symnum.R:0
@@ -1156,9 +1107,8 @@ msgstr ""
 
 #. R/symnum.R: gettext("'x' must be between -1 and 1")
 #: R/symnum.R:0
-#, fuzzy
 msgid "'x' must be between -1 and 1"
-msgstr "'lag.max' debe ser al menos 1"
+msgstr ""
 
 #. R/smspline.R: stop("'x' must be between 0 and 1 for periodic smooth")
 #: R/smspline.R:0
@@ -1177,15 +1127,13 @@ msgstr ""
 
 #. R/distn.R: stop("'x' must be non-negative")
 #: R/distn.R:0
-#, fuzzy
 msgid "'x' must be non-negative"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/binom.test.R: stop("'x' must be nonnegative and integer")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "'x' must be nonnegative and integer"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/StructTS.R: stop("'x' must be numeric")
 #. R/acf.R: stop("'x' must be numeric")
@@ -1201,9 +1149,8 @@ msgstr "'x' debe ser numérico"
 
 #. R/mcnemar.test.R: stop("'x' must be square with at least two rows and columns")
 #: R/mcnemar.test.R:0
-#, fuzzy
 msgid "'x' must be square with at least two rows and columns"
-msgstr "x$lag debe tener al menos 1 columna"
+msgstr ""
 
 #. R/cov.wt.R: stop("'x' must contain finite values only")
 #: R/cov.wt.R:0
@@ -1218,33 +1165,28 @@ msgstr ""
 #. R/pairwise.R: stop("'x' must have 2 columns")
 #. R/prop.test.R: stop("'x' must have 2 columns")
 #: R/pairwise.R:0 R/prop.test.R:0
-#, fuzzy
 msgid "'x' must have 2 columns"
-msgstr "x$lag debe tener al menos 1 columna"
+msgstr ""
 
 #. R/dendrogram.R: stop("'x' must have at least 2 rows and 2 columns")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "'x' must have at least 2 rows and 2 columns"
-msgstr "x$lag debe tener al menos 1 columna"
+msgstr ""
 
 #. R/fisher.test.R: stop("'x' must have at least 2 rows and columns")
 #: R/fisher.test.R:0
-#, fuzzy
 msgid "'x' must have at least 2 rows and columns"
-msgstr "x$lag debe tener al menos 1 columna"
+msgstr ""
 
 #. R/stepfun.R: stop("'x' must have length >= 1")
 #: R/stepfun.R:0
-#, fuzzy
 msgid "'x' must have length >= 1"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/mantelhaen.test.R: stop("'x', 'y', and 'z' must have the same length")
 #: R/mantelhaen.test.R:0
-#, fuzzy
 msgid "'x', 'y', and 'z' must have the same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/diffinv.R: stop("'xi' does not have the right length")
 #: R/diffinv.R:0
@@ -1264,9 +1206,8 @@ msgstr ""
 
 #. R/ts.R: stop("'xy.labels' must be logical or character")
 #: R/ts.R:0
-#, fuzzy
 msgid "'xy.labels' must be logical or character"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/cancor.R: stop("'y' has rank 0")
 #: R/cancor.R:0
@@ -1281,23 +1222,20 @@ msgstr ""
 
 #. R/cor.test.R: stop("'y' must be a numeric vector")
 #: R/cor.test.R:0
-#, fuzzy
 msgid "'y' must be a numeric vector"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/spline.R: stop("'y' must be increasing or decreasing")
 #. R/splinefun.R: stop("'y' must be increasing or decreasing")
 #: R/spline.R:0 R/splinefun.R:0
-#, fuzzy
 msgid "'y' must be increasing or decreasing"
-msgstr "'file' debe ser una conexión o cadena de caracteres"
+msgstr ""
 
 #. R/cor.R: stop("'y' must be numeric")
 #. R/wilcox.test.R: stop("'y' must be numeric")
 #: R/cor.R:0 R/wilcox.test.R:0
-#, fuzzy
 msgid "'y' must be numeric"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/ks.test.R: stop("'y' must be numeric or a function or a string naming a valid function")
 #: R/ks.test.R:0
@@ -1306,22 +1244,19 @@ msgstr ""
 
 #. R/smspline.R: stop("'y' must be numeric vector")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'y' must be numeric vector"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/stepfun.R: stop("'y' must be one longer than 'x'")
 #: R/stepfun.R:0
-#, fuzzy
 msgid "'y' must be one longer than 'x'"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/friedman.test.R: stop("'y', 'groups' and 'blocks' must have the same length")
 #. R/quade.test.R: stop("'y', 'groups' and 'blocks' must have the same length")
 #: R/friedman.test.R:0 R/quade.test.R:0
-#, fuzzy
 msgid "'y', 'groups' and 'blocks' must have the same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
@@ -1350,9 +1285,8 @@ msgstr "La AIC no está definida para este modelo, entonces 'step' no puede proc
 
 #. R/lm.R: warning("ANOVA F-tests on an essentially perfect fit are unreliable")
 #: R/lm.R:0
-#, fuzzy
 msgid "ANOVA F-tests on an essentially perfect fit are unreliable"
-msgstr "no tiene sentido intentar seleccionar un modelo en un ajuste esencialmente perfecto"
+msgstr ""
 
 #. R/lm.R: warning("Assuming constant prediction variance even though model fit is weighted\n")
 #: R/lm.R:0
@@ -1423,9 +1357,8 @@ msgstr ""
 
 #. R/ar.R: stop("MLE only implemented for univariate series")
 #: R/ar.R:0
-#, fuzzy
 msgid "MLE only implemented for univariate series"
-msgstr "solo implementado para series temporales univariadas"
+msgstr ""
 
 #. R/smspline.R: stop("NA lev[]; probably smoothing parameter 'spar' way too large!")
 #: R/smspline.R:0
@@ -1455,9 +1388,8 @@ msgstr ""
 #. R/arima.R: gettextf("NAs in '%s'", "phi")
 #. R/arima.R: gettextf("NAs in '%s'", "theta")
 #: R/arima.R:0
-#, fuzzy
 msgid "NAs in '%s'"
-msgstr "NAs en 'x'"
+msgstr ""
 
 #. R/acf.R: stop("NAs in 'x'")
 #. R/ar.R: stop("NAs in 'x'")
@@ -1473,9 +1405,8 @@ msgstr ""
 
 #. R/glm.R: stop("NAs in V(mu)")
 #: R/glm.R:0
-#, fuzzy
 msgid "NAs in V(mu)"
-msgstr "NAs en 'x'"
+msgstr ""
 
 #. R/glm.R: stop("NAs in d(mu)/d(eta)")
 #: R/glm.R:0
@@ -1676,9 +1607,8 @@ msgstr ""
 
 #. R/hclust.R: gettextf("ambiguous clustering method %s", method)
 #: R/hclust.R:0
-#, fuzzy
 msgid "ambiguous clustering method %s"
-msgstr "Longitud no válida para x: length(x)"
+msgstr ""
 
 #. R/dist.R: stop("ambiguous distance method")
 #: R/dist.R:0
@@ -1697,21 +1627,18 @@ msgstr ""
 
 #. R/selfStart.R: stop("argument 'object' has an impossible length")
 #: R/selfStart.R:0
-#, fuzzy
 msgid "argument 'object' has an impossible length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/ks.test.R: stop("argument 'p' must be numeric")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'p' must be numeric"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/ks.test.R: stop("argument 'q' must be numeric")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'q' must be numeric"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/filter.R: stop("argument 'sides' must be 1 or 2")
 #: R/filter.R:0
@@ -1720,9 +1647,8 @@ msgstr ""
 
 #. R/ks.test.R: stop("argument 'sizes' must be a vector of length 2")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "argument 'sizes' must be a vector of length 2"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/nls.R: warning("argument 'subset' will be ignored")
 #: R/nls.R:0
@@ -1736,21 +1662,18 @@ msgstr ""
 
 #. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
-#, fuzzy
 msgid "argument 'x' is missing -- it has been renamed from 'formula'"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/aggregate.R: stop("argument 'x' must be a formula")
 #: R/aggregate.R:0
-#, fuzzy
 msgid "argument 'x' must be a formula"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/density.R: stop("argument 'x' must be numeric")
 #: R/density.R:0
-#, fuzzy
 msgid "argument 'x' must be numeric"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/proj.R: stop("argument does not include a 'qr' component")
 #: R/proj.R:0
@@ -1764,9 +1687,8 @@ msgstr ""
 
 #. R/r2dtable.R: stop("arguments 'r' and 'c' must have the same sums")
 #: R/r2dtable.R:0
-#, fuzzy
 msgid "arguments 'r' and 'c' must have the same sums"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/aggregate.R: stop("arguments must have same length")
 #: R/aggregate.R:0
@@ -1775,9 +1697,8 @@ msgstr "los argumentos deben tener la misma longitud"
 
 #. R/contr.poly.R: stop("arguments must have the same length")
 #: R/contr.poly.R:0
-#, fuzzy
 msgid "arguments must have the same length"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/lm.R: warning("assuming prediction variance inversely proportional to weights used for fitting\n")
 #: R/lm.R:0
@@ -1817,9 +1738,8 @@ msgstr ""
 
 #. R/ts.R: stop("bad value for 'start'")
 #: R/ts.R:0
-#, fuzzy
 msgid "bad value for 'start'"
-msgstr "valor invalido de %s"
+msgstr ""
 
 #. R/runmed.R: stop("bandwidth 'k' must be >= 1 and odd!")
 #: R/runmed.R:0
@@ -2282,9 +2202,8 @@ msgstr ""
 
 #. R/loess.R: stop("first argument must be a \"loess\" object")
 #: R/loess.R:0
-#, fuzzy
 msgid "first argument must be a \"loess\" object"
-msgstr "los argumentos deben tener la misma longitud"
+msgstr ""
 
 #. R/glm.R: warning("fitting to calculate the null deviance did not converge -- increase 'maxit'?")
 #: R/glm.R:0
@@ -2480,9 +2399,8 @@ msgstr ""
 #: R/arima.R:0 R/bandwidths.R:0 R/chisq.test.R:0 R/cor.R:0 R/family.R:0
 #: R/glm.R:0 R/loess.R:0 R/models.R:0 R/nafns.R:0 R/r2dtable.R:0 R/runmed.R:0
 #: R/smooth.R:0 R/smspline.R:0 R/symnum.R:0
-#, fuzzy
 msgid "invalid '%s' argument"
-msgstr "valor invalido de %s"
+msgstr ""
 
 #. R/bandwidths.R: gettextf("invalid '%s' value", "length(x)")
 #. R/diffinv.R: gettextf("invalid '%s' value", "length(x)")
@@ -2529,15 +2447,14 @@ msgstr ""
 
 #. R/ks.test.R: stop("invalid arguments")
 #: R/ks.test.R:0
-#, fuzzy
 msgid "invalid arguments"
-msgstr "valor invalido de %s"
+msgstr ""
 
 #. R/hclust.R: gettextf("invalid clustering method %s", method)
 #: R/hclust.R:0
 #, fuzzy
 msgid "invalid clustering method %s"
-msgstr "Longitud no válida para x: length(x)"
+msgstr "valor invalido de %s"
 
 #. R/hclust.R: stop("invalid dissimilarities")
 #: R/hclust.R:0
@@ -2562,9 +2479,8 @@ msgstr ""
 
 #. R/models.R: gettextf("invalid formula %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula %s"
-msgstr "valor invalido de %s"
+msgstr ""
 
 #. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x))
 #: R/models.R:0
@@ -2588,9 +2504,8 @@ msgstr ""
 
 #. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula: %s"
-msgstr "valor invalido de %s"
+msgstr ""
 
 #. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
@@ -2600,9 +2515,8 @@ msgstr ""
 
 #. R/hclust.R: stop("invalid length of members")
 #: R/hclust.R:0
-#, fuzzy
 msgid "invalid length of members"
-msgstr "valor invalido de %s"
+msgstr ""
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
@@ -2623,15 +2537,13 @@ msgstr ""
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
-#, fuzzy
 msgid "invalid number of points"
-msgstr "valor invalido de %s"
+msgstr ""
 
 #. R/integrate.R: stop("invalid parameter values")
 #: R/integrate.R:0
-#, fuzzy
 msgid "invalid parameter values"
-msgstr "valor invalido de %s"
+msgstr ""
 
 #. R/models.R: stop("invalid response type")
 #: R/models.R:0
@@ -2849,9 +2761,8 @@ msgstr "No todos los modelos se han ajustado usando el mismo número de observac
 #. R/lm.R: stop("models were not all fitted to the same size of dataset")
 #. R/mlm.R: stop("models were not all fitted to the same size of dataset")
 #: R/glm.R:0 R/lm.R:0 R/mlm.R:0
-#, fuzzy
 msgid "models were not all fitted to the same size of dataset"
-msgstr "No todos los modelos se han ajustado usando el mismo número de observaciones"
+msgstr ""
 
 #. R/glm.R: gettextf("models with response %s removed because response differs from model 1",     sQuote(deparse(responses[!sameresp])))
 #. R/lm.R: gettextf("models with response %s removed because response differs from model 1",     sQuote(deparse(responses[!sameresp])))
@@ -3040,9 +2951,8 @@ msgstr "no hay método 'drop1' para los modelos \"mlm\""
 
 #. R/selfStart.R: gettextf("no 'getInitial' method found for \"%s\" objects", data.class(object))
 #: R/selfStart.R:0
-#, fuzzy
 msgid "no 'getInitial' method found for \"%s\" objects"
-msgstr "no se implementó el método 'add1' para los modelos \"mlm”"
+msgstr ""
 
 #. R/logLik.R: warning("no 'nobs' method is available")
 #. R/logLik.R: stop("no 'nobs' method is available")
@@ -3072,9 +2982,8 @@ msgstr ""
 
 #. R/loess.R: stop("no models to compare")
 #: R/loess.R:0
-#, fuzzy
 msgid "no models to compare"
-msgstr "no hay filas para combinar"
+msgstr ""
 
 #. R/glm.R: gettextf("no observations informative at iteration %d", iter)
 #: R/glm.R:0
@@ -3083,9 +2992,8 @@ msgstr ""
 
 #. R/nls.R: stop("no parameters to fit")
 #: R/nls.R:0
-#, fuzzy
 msgid "no parameters to fit"
-msgstr "todos los parámetros se fijaron"
+msgstr ""
 
 #. R/ts.R: stop("no replacement values supplied")
 #: R/ts.R:0
@@ -3134,15 +3042,13 @@ msgstr "Sin términos en el ámbito de trabajo"
 
 #. R/add.R: stop("no terms in scope for adding to object")
 #: R/add.R:0
-#, fuzzy
 msgid "no terms in scope for adding to object"
-msgstr "Sin términos en el ámbito de trabajo"
+msgstr ""
 
 #. R/ts.R: stop("no time series supplied")
 #: R/ts.R:0
-#, fuzzy
 msgid "no time series supplied"
-msgstr "solo series temporales univariantes"
+msgstr ""
 
 #. R/glm.R: stop("no valid set of coefficients has been found: please supply starting values",     call. = FALSE)
 #: R/glm.R:0
@@ -3366,15 +3272,13 @@ msgstr ""
 
 #. R/ts.R: stop("number of differences must be a positive integer")
 #: R/ts.R:0
-#, fuzzy
 msgid "number of differences must be a positive integer"
-msgstr "la frecuencia debe ser un entero positivo >= 2 para BSM"
+msgstr ""
 
 #. R/power.anova.test.R: stop("number of groups must be at least 2")
 #: R/power.anova.test.R:0
-#, fuzzy
 msgid "number of groups must be at least 2"
-msgstr "'lag.max' debe ser al menos 0"
+msgstr ""
 
 #. R/smspline.R: stop("number of observations in 'x' and 'y' must match.")
 #: R/smspline.R:0
@@ -3418,9 +3322,8 @@ msgstr ""
 
 #. R/smspline.R: stop("number of weights must match number of observations.")
 #: R/smspline.R:0
-#, fuzzy
 msgid "number of weights must match number of observations."
-msgstr "No todos los modelos se han ajustado usando el mismo número de observaciones"
+msgstr ""
 
 #. R/smspline.R: stop("numeric 'all.knots' must cover [0,1] (= the transformed data-range)")
 #: R/smspline.R:0
@@ -3501,9 +3404,8 @@ msgstr ""
 
 #. R/stl.R: stop("only univariate series are allowed")
 #: R/stl.R:0
-#, fuzzy
 msgid "only univariate series are allowed"
-msgstr "solo series temporales univariantes"
+msgstr ""
 
 #. R/HoltWinters.R: gettextf("optimization difficulties: %s", sol$message)
 #: R/HoltWinters.R:0
@@ -3564,9 +3466,8 @@ msgstr "posible problema de convergencia: 'optim' ha dado código = %d y mensaje
 #. R/arima.R: gettextf("possible convergence problem: optim gave code = %d",     res$convergence)
 #. R/arma0.R: gettextf("possible convergence problem: optim gave code = %d",     code)
 #: R/arima.R:0 R/arma0.R:0
-#, fuzzy
 msgid "possible convergence problem: optim gave code = %d"
-msgstr "posible problema de convergencia: 'optim' ha dado código = %d y mensaje %s"
+msgstr ""
 
 #. R/lm.R: gettext("prediction from rank-deficient fit")
 #: R/lm.R:0
@@ -3580,9 +3481,8 @@ msgstr ""
 
 #. R/loess.R: stop("predictors must all be numeric")
 #: R/loess.R:0
-#, fuzzy
 msgid "predictors must all be numeric"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/distn.R: stop("probabilities must be finite, non-negative and not all 0")
 #: R/distn.R:0
@@ -3674,9 +3574,8 @@ msgstr ""
 
 #. R/ts.R: stop("scatter plots only for univariate time series")
 #: R/ts.R:0
-#, fuzzy
 msgid "scatter plots only for univariate time series"
-msgstr "solo implementado para series temporales univariadas"
+msgstr ""
 
 #. R/add.R: stop("scope is not a subset of term labels")
 #: R/add.R:0
@@ -3702,9 +3601,8 @@ msgstr ""
 
 #. R/stl.R: stop("series is not periodic or has less than two periods")
 #: R/stl.R:0
-#, fuzzy
 msgid "series is not periodic or has less than two periods"
-msgstr "la serie temporal no tiene periodos o tiene menos de 2 periodos"
+msgstr ""
 
 #. R/nls.R: stop("setVarying : 'vary' length must match length of parameters")
 #: R/nls.R:0
@@ -3724,9 +3622,8 @@ msgstr ""
 
 #. R/lm.R: stop("simulate() is not yet implemented for multivariate lm()")
 #: R/lm.R:0
-#, fuzzy
 msgid "simulate() is not yet implemented for multivariate lm()"
-msgstr "solo implementado para series temporales univariadas"
+msgstr ""
 
 #. R/contrast.R: stop("singular contrast matrix")
 #: R/contrast.R:0
@@ -3867,15 +3764,13 @@ msgstr ""
 
 #. R/lm.R: stop("the 'se.fit' argument is not yet implemented for \"mlm\" objects")
 #: R/lm.R:0
-#, fuzzy
 msgid "the 'se.fit' argument is not yet implemented for \"mlm\" objects"
-msgstr "no se implementó el método 'add1' para los modelos \"mlm”"
+msgstr ""
 
 #. R/aov.R: stop("the 'split' argument must be a list")
 #: R/aov.R:0
-#, fuzzy
 msgid "the 'split' argument must be a list"
-msgstr "'by' debe ser una lista"
+msgstr ""
 
 #. R/poisson.test.R: stop("the case k > 2 is unimplemented")
 #: R/poisson.test.R:0
@@ -3924,9 +3819,8 @@ msgstr ""
 
 #. R/ts.R: stop("time series contains internal NAs")
 #: R/ts.R:0
-#, fuzzy
 msgid "time series contains internal NAs"
-msgstr "la serie está compuesta totalmente por NA"
+msgstr ""
 
 #. R/HoltWinters.R: stop("time series has no or less than 2 periods")
 #: R/HoltWinters.R:0
@@ -4010,9 +3904,8 @@ msgstr ""
 
 #. R/arma0.R: warning("transformed ARMA parameters were fixed")
 #: R/arma0.R:0
-#, fuzzy
 msgid "transformed ARMA parameters were fixed"
-msgstr "todos los parámetros se fijaron"
+msgstr ""
 
 #. R/mantelhaen.test.R: gettextf("true common odds ratio is greater than %s", NVAL, domain = "R-stats")
 #: R/mantelhaen.test.R:0
@@ -4418,9 +4311,8 @@ msgstr ""
 
 #. R/ts-tests.R: stop("x is not a vector or univariate time series")
 #: R/ts-tests.R:0
-#, fuzzy
 msgid "x is not a vector or univariate time series"
-msgstr "solo implementado para series temporales univariadas"
+msgstr ""
 
 #. R/acf.R: stop("x$lag must have at least 1 column")
 #: R/acf.R:0
@@ -4518,11 +4410,10 @@ msgstr[1] ""
 
 #. R/filter.R: ngettext(nser, "'init' must have %d column", "'init' must have 1 or %d columns",     domain = "R-stats")
 #: R/filter.R:0
-#, fuzzy
 msgid "'init' must have %d column"
 msgid_plural "'init' must have 1 or %d columns"
-msgstr[0] "x$lag debe tener al menos 1 columna"
-msgstr[1] "x$lag debe tener al menos 1 columna"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/models.R: ngettext(nr, "'newdata' had %d row", "'newdata' had %d rows",     domain = "R-stats")
 #: R/models.R:0
@@ -4533,11 +4424,10 @@ msgstr[1] ""
 
 #. R/factanal.R: ngettext(p, "'start' must have %d row", "'start' must have %d rows",     domain = "R-stats")
 #: R/factanal.R:0
-#, fuzzy
 msgid "'start' must have %d row"
 msgid_plural "'start' must have %d rows"
-msgstr[0] "x$lag debe tener al menos 1 columna"
-msgstr[1] "x$lag debe tener al menos 1 columna"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/ts.R: ngettext(n.start, "'start.innov' is too short: need %d point",     "'start.innov' is too short: need %d points")
 #: R/ts.R:0
@@ -4658,55 +4548,3 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "invalid 'SSinit'"
-#~ msgstr "Longitud no válida para x: length(x)"
-
-#, fuzzy
-#~ msgid "invalid NCOL(X)"
-#~ msgstr "Longitud no válida para x: length(x)"
-
-#, fuzzy
-#~ msgid "invalid NROW(X)"
-#~ msgstr "Longitud no válida para x: length(x)"
-
-#, fuzzy
-#~ msgid "invalid argument 'span'"
-#~ msgstr "valor invalido de %s"
-
-#, fuzzy
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "valor invalido de %s"
-
-#, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "valor invalido de %s"
-
-#, fuzzy
-#~ msgid "invalid argument 'c'"
-#~ msgstr "valor invalido de %s"
-
-#, fuzzy
-#~ msgid "invalid argument 'n'"
-#~ msgstr "valor invalido de %s"
-
-#, fuzzy
-#~ msgid "invalid argument 'r'"
-#~ msgstr "valor invalido de %s"
-
-#, fuzzy
-#~ msgid "invalid 'nb'"
-#~ msgstr "Longitud no válida para x: length(x)"
-
-#, fuzzy
-#~ msgid "invalid 'x'"
-#~ msgstr "Longitud no válida para x: length(x)"
-
-#, fuzzy
-#~ msgid "invalid ncol(x)"
-#~ msgstr "Longitud no válida para x: length(x)"
-
-#, fuzzy
-#~ msgid "invalid nrow(x)"
-#~ msgstr "Longitud no válida para x: length(x)"

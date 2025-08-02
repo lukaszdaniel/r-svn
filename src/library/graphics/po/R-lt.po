@@ -820,17 +820,17 @@ msgstr[2] "argumentų %s nėra sukurta naudoti"
 #~ msgid "invalid 'axp'"
 #~ msgstr "neteisinga 'axp'"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "neteisinga 'given.values'"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "neteisinga 'log'"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "neteisingas 'title'"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "neteisingas 'usr'"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "neteisinga 'given.values'"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "neteisingas 'title'"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

@@ -34,12 +34,12 @@ msgid "md5 failed on file '%s'"
 msgstr "md5 für Datei '%s' fehlgeschlagen"
 
 #: Rsha256.cpp:88
-#, fuzzy, c-format
+#, c-format
 msgid "sha256 failed on file '%ls'"
 msgstr "sha256 für Datei '%ls' fehlgeschlagen"
 
 #: Rsha256.cpp:90
-#, fuzzy, c-format
+#, c-format
 msgid "sha256 failed on file '%s'"
 msgstr "sha256 für Datei '%s' fehlgeschlagen"
 

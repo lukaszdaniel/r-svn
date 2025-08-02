@@ -163,7 +163,7 @@ msgstr "«%s» gjev ikkje meining for ordna faktorar"
 #: R/tapply.R:0
 #, fuzzy
 msgid "'%s' is of length 0"
-msgstr "«by» må ha lengd 1"
+msgstr "«to» må ha lengd 1"
 
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -209,7 +209,7 @@ msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
+msgstr "«file» må vera ein ikkje-tom teiknstreng"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
@@ -239,11 +239,11 @@ msgstr "«subset» må vera ein logisk vektor"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
-msgstr "«by» må ha lengd 1"
+msgstr "«to» må ha lengd 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
@@ -838,9 +838,8 @@ msgstr "«zero.print» må vera ein teiknstreng, ein boolsk verdi eller NULL"
 
 #. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "- done loading %s"
-msgstr "Fjernar"
+msgstr ""
 
 #. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
@@ -850,15 +849,13 @@ msgstr "Fjernar"
 
 #. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing S4 stuff for %s"
-msgstr "feil klasse"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing imports for %s"
-msgstr "feil klasse"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
 #: R/namespace.R:0
@@ -931,9 +928,8 @@ msgstr "feil klasse"
 
 #. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "--- sealing exports for %s"
-msgstr "feil klasse"
+msgstr ""
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -1477,9 +1473,8 @@ msgstr "kan berre lagra til binærsamband"
 
 #. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
 #: R/backquote.R:0
-#, fuzzy
 msgid "can only splice inside a call"
-msgstr "kan berre skriva vektorobjekt"
+msgstr ""
 
 #. R/backquote.R: stop("can only splice vectors")
 #: R/backquote.R:0
@@ -1577,9 +1572,8 @@ msgstr "kan ikkje dela opp meldingssamband"
 
 #. R/sort.R: stop("cannot xtfrm 'x'")
 #: R/sort.R:0
-#, fuzzy
 msgid "cannot xtfrm 'x'"
-msgstr "ikkje ei dataramme"
+msgstr ""
 
 #. R/dataframe.R: stop("cannot xtfrm data frames")
 #: R/dataframe.R:0
@@ -1627,9 +1621,8 @@ msgstr "handsamaren må vera ein funksjon"
 
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #: R/conditions.R:0
-#, fuzzy
 msgid "condition handlers must be specified with a condition class"
-msgstr "handsamaren må vera ein funksjon"
+msgstr ""
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NAs")
 #: R/format.R:0
@@ -1737,15 +1730,13 @@ msgstr "nøyaktig to av «to», «by» og «length.out»/«along.with» må opp
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace",     origVarName, varName, sQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "failed to assign NativeSymbolInfo for %s since %s is already defined in the %s namespace"
-msgstr "klarte ikkje tildela RegisteredNativeSymbol for"
+msgstr ""
 
 #. R/namespace.R: gettextf("failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace",     origVarName, varName, varName, sQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "failed to assign NativeSymbolInfo for %s to %s since %s is already defined in the %s namespace"
-msgstr "klarte ikkje tildela RegisteredNativeSymbol for"
+msgstr ""
 
 #. R/namespace.R: gettextf("failed to assign RegisteredNativeSymbol for %s to %s since %s is already defined in the %s namespace",     sym$name, varName, varName, sQuote(package))
 #: R/namespace.R:0
@@ -1890,8 +1881,9 @@ msgstr "ugyldig inndata, men LF erstatta med CR"
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "ugyldig «name»-argument"
@@ -2930,9 +2922,8 @@ msgstr ""
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr "nøyaktig to av «to», «by» og «length.out»/«along.with» må oppgjevast"
+msgstr ""
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3224,92 +3215,41 @@ msgid_plural "there are no packages called"
 msgstr[0] "det finst ikkje nokon pakke med namnet"
 msgstr[1] "det finst ikkje nokon pakkar med namna"
 
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "«INDEX» har lengd 0"
-
-#~ msgid "invalid 'digits'"
-#~ msgstr "ugyldig «digits»-verdi"
-
 #~ msgid "invalid 'dims'"
 #~ msgstr "ugyldige «dims»-verdiar"
+
+#, fuzzy
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "ugyldig «name»-argument"
 
 #, fuzzy
 #~ msgid "invalid 'make.names'"
 #~ msgstr "ugyldig pakkenamn"
 
-#, fuzzy
-#~ msgid "invalid 'value'"
-#~ msgstr "ugyldig verdi"
+#~ msgid ","
+#~ msgstr ","
 
-#, fuzzy
-#~ msgid "invalid 'x'"
-#~ msgstr "ugyldige «dims»-verdiar"
+#~ msgid "invalid string for 'by'"
+#~ msgstr "ugyldig verdi for «by»"
 
-#~ msgid "invalid ncol(qr$qr)"
-#~ msgstr "ugyldig ncol(qr$qr)"
-
-#~ msgid "invalid ncol(qr$rank)"
-#~ msgstr "ugyldig ncol(qr$rank)"
-
-#~ msgid "invalid ncol(y)"
-#~ msgstr "ugyldig ncol(y)"
-
-#~ msgid "invalid nrow(qr$qr)"
-#~ msgstr "ugyldig nrow(qr$qr)"
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "unær-«-» er ikkje definert for «POSIXt»-objekt"
 
 #~ msgid "invalid nrow(x)"
 #~ msgstr "ugyldig nrow(x)"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "ugyldig «path»-argument"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "ugyldig «time»-argument"
 
 #, fuzzy
 #~ msgid "invalid nrow(z)"
 #~ msgstr "ugyldig nrow(x)"
 
-#~ msgid "'by' must match numbers of columns"
-#~ msgstr "«by» må vera i samsvar med talet på kolonnar"
-
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "«stderr» må ha lengd 1"
-
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "«stdout» må ha lengd 1"
-
 #~ msgid "shared object '%s' not found"
 #~ msgstr "fann ikkje det delte objektet «%s»"
-
-#~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "«ignore.stderr» må vera TRUE eller FALSE"
-
-#~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "«ignore.stdout» må vera TRUE eller FALSE"
-
-#~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "«intern» må vera TRUE eller FALSE"
-
-#~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "«invisible» må vera TRUE eller FALSE"
-
-#~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "«minimized» må vera TRUE eller FALSE"
-
-#, fuzzy
-#~ msgid "'receive.console.signals' must be TRUE or FALSE"
-#~ msgstr "«intern» må vera TRUE eller FALSE"
-
-#~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "«show.output.on.console» må vera TRUE eller FALSE"
-
-#, fuzzy
-#~ msgid "invalid '(to - from)/by'"
-#~ msgstr "ugyldig (to - from)/by i seq(.)"
-
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "ugyldig NCOL(R)"
-
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "ugyldig NCOL(y)"
-
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ugyldig ncol(x)"
 
 #~ msgid "bad 'file' argument"
 #~ msgstr "ugyldig «file»-argument"
@@ -3320,81 +3260,12 @@ msgstr[1] "det finst ikkje nokon pakkar med namna"
 #~ msgid "invalid 'category' argument"
 #~ msgstr "ugyldig «category»-argument"
 
-#, fuzzy
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "ugyldig «name»-argument"
-
-#~ msgid "invalid 'path' argument"
-#~ msgstr "ugyldig «path»-argument"
-
-#~ msgid "invalid 'time' argument"
-#~ msgstr "ugyldig «time»-argument"
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "«by» må vera i samsvar med talet på kolonnar"
 
 #, fuzzy
-#~ msgid "invalid 'which' argument"
-#~ msgstr "ugyldig «path»-argument"
-
-#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
-#~ msgstr "unær-«-» er ikkje definert for «POSIXt»-objekt"
-
-#~ msgid "invalid string for 'by'"
-#~ msgstr "ugyldig verdi for «by»"
-
-#, fuzzy
-#~ msgid "connections left open:"
-#~ msgstr "«connection» må vera eit samband"
-
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "«arg» må ha eitt element"
-
-#, fuzzy
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "«from» må vera eit «Date»-objekt"
-
-#, fuzzy
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "«from» må vera eit «POSIXt»-objekt"
-
-#~ msgid "'from' must be of length 1"
-#~ msgstr "«from» må ha lengd 1"
-
-#~ msgid "'from' must be specified"
-#~ msgstr "«from» må oppgjevast"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "«length.out» må ha lengd 1"
-
-#, fuzzy
-#~ msgid "'name' must be a single character string"
-#~ msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
-
-#~ msgid "'package' must be of length 1"
-#~ msgstr "«package» må ha lengd 1"
-
-#, fuzzy
-#~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "«to» må vera eit «POSIXt»-objekt"
-
-#~ msgid "'to' must be of length 1"
-#~ msgstr "«to» må ha lengd 1"
-
-#, fuzzy
-#~ msgid "'which' must be of length 1"
-#~ msgstr "«to» må ha lengd 1"
-
-#~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "argumentet «length.out» må ha lengd 1"
-
-#, fuzzy
-#~ msgid "'%s' must be a non-empty string"
-#~ msgstr "«file» må vera ein ikkje-tom teiknstreng"
-
-#~ msgid "'normal.kind' must be a character string of length 1"
-#~ msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
-
-#, fuzzy
-#~ msgid "'sample.kind' must be a character string of length 1"
-#~ msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "Pakken %s har lisensvilkår som du må godta etter at du har lese"
 
 #, fuzzy
 #~ msgid "according to the DESCRIPTION file it is"
@@ -3402,12 +3273,120 @@ msgstr[1] "det finst ikkje nokon pakkar med namna"
 #~ "Pakken %s har lisensvilkår som du må godta:\n"
 #~ "Ifølgje DESCRIPTION-fila er vilkåra"
 
-#, fuzzy
-#~ msgid "package %s has a license that you need to accept:"
-#~ msgstr "Pakken %s har lisensvilkår som du må godta etter at du har lese"
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ugyldig ncol(x)"
 
-#~ msgid ","
-#~ msgstr ","
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "ugyldig nrow(qr$qr)"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "ugyldig ncol(qr$qr)"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "ugyldig ncol(qr$rank)"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "ugyldig ncol(y)"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "ugyldig NCOL(y)"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "ugyldig NCOL(R)"
+
+#, fuzzy
+#~ msgid "invalid 'x'"
+#~ msgstr "ugyldige «dims»-verdiar"
+
+#, fuzzy
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "ugyldig (to - from)/by i seq(.)"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "«INDEX» har lengd 0"
+
+#, fuzzy
+#~ msgid "invalid 'which' argument"
+#~ msgstr "ugyldig «path»-argument"
+
+#~ msgid "invalid 'digits'"
+#~ msgstr "ugyldig «digits»-verdi"
+
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "«intern» må vera TRUE eller FALSE"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "«ignore.stdout» må vera TRUE eller FALSE"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "«ignore.stderr» må vera TRUE eller FALSE"
+
+#, fuzzy
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "«intern» må vera TRUE eller FALSE"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "«stdout» må ha lengd 1"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "«stderr» må ha lengd 1"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "«show.output.on.console» må vera TRUE eller FALSE"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "«minimized» må vera TRUE eller FALSE"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "«invisible» må vera TRUE eller FALSE"
+
+#, fuzzy
+#~ msgid "'name' must be a single character string"
+#~ msgstr "argumentet «object» må deparsast til ein enkelt tekststreng"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "«from» må oppgjevast"
+
+#, fuzzy
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "«from» må vera eit «Date»-objekt"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "«from» må ha lengd 1"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "«length.out» må ha lengd 1"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "«by» må ha lengd 1"
+
+#, fuzzy
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "«from» må vera eit «POSIXt»-objekt"
+
+#, fuzzy
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "«to» må vera eit «POSIXt»-objekt"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "«package» må ha lengd 1"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "«arg» må ha eitt element"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "argumentet «length.out» må ha lengd 1"
+
+#, fuzzy
+#~ msgid "'which' must be of length 1"
+#~ msgstr "«to» må ha lengd 1"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
+
+#, fuzzy
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "«normal.kind» må vera ein teiknstreng av lengd 1"
 
 #, fuzzy
 #~ msgid "'flag' must be a string, i.e., of length 1"

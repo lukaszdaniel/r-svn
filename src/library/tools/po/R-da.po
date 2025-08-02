@@ -258,9 +258,8 @@ msgstr ""
 
 #. R/QC.R: gettextf("Argument items with no description in Rd file '%s':",     nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Argument items with no description in Rd file '%s':"
-msgstr "Tildelinger i \\usage i dokumentationsobjekt »%s«:"
+msgstr ""
 
 #. R/QC.R: gettext("  Argument names in code not in docs:")
 #: R/QC.R:0
@@ -330,9 +329,8 @@ msgstr ""
 
 #. R/QC.R: gettextf("Auto-generated content requiring editing in Rd file '%s':",     nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Auto-generated content requiring editing in Rd file '%s':"
-msgstr "Dokumenterede argumenter ikke i \\usage i dokumentationsobjekt »%s«:"
+msgstr ""
 
 #. R/QC.R: gettextf("Bad \\usage lines found in Rd file '%s':", nm)
 #: R/QC.R:0
@@ -500,9 +498,8 @@ msgstr ""
 
 #. R/install.R: stop("ERROR: no packages specified", call. = FALSE)
 #: R/install.R:0
-#, fuzzy
 msgid "ERROR: no packages specified"
-msgstr "Vignette afhængigheder ikke krævet:"
+msgstr ""
 
 #. R/install.R: stop("ERROR: no permission to install to directory ", sQuote(lib),     call. = FALSE)
 #: R/install.R:0
@@ -521,9 +518,8 @@ msgstr ""
 
 #. R/QC.R: gettextf("Encoding '%s' is not portable", x$non_portable_encoding)
 #: R/QC.R:0
-#, fuzzy
 msgid "Encoding '%s' is not portable"
-msgstr "mappe »%s« findes ikke"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("Engine name %s and package %s do not match", sQuote(name),     sQuote(package))
 #: R/Vignettes.R:0
@@ -557,15 +553,13 @@ msgstr ""
 
 #. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
 #: R/build.R:0
-#, fuzzy
 msgid "Error: cannot rename directory to %s"
-msgstr "kan ikke oprette"
+msgstr ""
 
 #. R/check.R: message("Error: no packages were specified")
 #: R/check.R:0
-#, fuzzy
 msgid "Error: no packages were specified"
-msgstr "Vignette afhængigheder ikke krævet:"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("Error: processing vignette '%s' failed with diagnostics:\n%s",     file, conditionMessage(e))
 #: R/Vignettes.R:0
@@ -634,9 +628,8 @@ msgstr "Felter med ikke-ASCII-værdier:"
 #. R/QC.R: gettextf("File %s:", sQuote(f))
 #. R/sotools.R: gettextf("File %s:", sQuote(attr(x, "file")))
 #: R/QC.R:0 R/sotools.R:0
-#, fuzzy
 msgid "File %s:"
-msgstr "Fil »%s«:"
+msgstr ""
 
 #. R/QC.R: gettextf("File '%s':", fname)
 #: R/QC.R:0
@@ -763,9 +756,8 @@ msgstr ""
 
 #. R/QC.R: gettext("Malformed Authors@R field:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Malformed Authors@R field:"
-msgstr "Forkert udformet vedligeholderfelt."
+msgstr ""
 
 #. R/QC.R: gettext("Malformed Depends or Suggests or Imports or Enhances field.")
 #: R/QC.R:0
@@ -920,9 +912,8 @@ msgstr "Navnerumsafhængighed ikke krævet: %s"
 
 #. R/QC.R: gettext("Namespaces in Imports field not imported from:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Namespaces in Imports field not imported from:"
-msgstr "Navnerumsafhængighed ikke krævet: %s"
+msgstr ""
 
 #. R/dynamicHelp.R: gettextf("No NEWS found for package %s", mono(pkg))
 #: R/dynamicHelp.R:0
@@ -1002,9 +993,8 @@ msgstr "fortolkningsfejl i fil »%s«:"
 
 #. R/QC.R: gettextf("Non-portable flags in variable '%s':", names(x))
 #: R/QC.R:0
-#, fuzzy
 msgid "Non-portable flags in variable '%s':"
-msgstr "fortolkningsfejl i fil »%s«:"
+msgstr ""
 
 #. R/QC.R: gettext("Non-standard license specification:")
 #: R/QC.R:0
@@ -1076,9 +1066,8 @@ msgstr ""
 
 #. R/QC.R: gettextf("Package in Depends field not imported from: %s", sQuote(xx))
 #: R/QC.R:0
-#, fuzzy
 msgid "Package in Depends field not imported from: %s"
-msgstr "Navnerumsafhængighed ikke krævet: %s"
+msgstr ""
 
 #. R/QC.R: gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.",     sQuote("lib"), sQuote("pkg"))
 #: R/QC.R:0
@@ -1102,9 +1091,8 @@ msgstr ""
 
 #. R/QC.R: gettext("Packages in Depends field not imported from:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Packages in Depends field not imported from:"
-msgstr "Navnerumsafhængighed ikke krævet: %s"
+msgstr ""
 
 #. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
 #: R/QC.R:0
@@ -1155,9 +1143,8 @@ msgstr ""
 
 #. R/QC.R: gettextf("Rd files with duplicated name '%s':", nm)
 #: R/QC.R:0
-#, fuzzy
 msgid "Rd files with duplicated name '%s':"
-msgstr "Variabler i dataramme »%s«"
+msgstr ""
 
 #. R/QC.R: gettext("Rd files without \\alias:")
 #: R/QC.R:0
@@ -1382,9 +1369,8 @@ msgstr "Ukendt kodning"
 
 #. R/QC.R: gettext("Unknown encoding with non-ASCII data")
 #: R/QC.R:0
-#, fuzzy
 msgid "Unknown encoding with non-ASCII data"
-msgstr "Felter med ikke-ASCII-mærker:"
+msgstr ""
 
 #. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
 #: R/utils.R:0
@@ -1441,9 +1427,8 @@ msgstr "Vignette afhængigheder ikke krævet:"
 
 #. R/Vignettes.R: gettextf("Vignette engine %s is not registered by any of the packages %s",     sQuote(name), paste(sQuote(package), collapse = ", "))
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "Vignette engine %s is not registered by any of the packages %s"
-msgstr "Vignette afhængigheder ikke krævet:"
+msgstr ""
 
 #. R/Vignettes.R: stop("Vignette engine package not specified", call. = FALSE)
 #: R/Vignettes.R:0
@@ -1581,15 +1566,13 @@ msgstr ""
 
 #. R/admin.R: gettextf("cannot create directory '%s'", buildDir)
 #: R/admin.R:0
-#, fuzzy
 msgid "cannot create directory '%s'"
-msgstr "kan ikke oprette"
+msgstr ""
 
 #. R/install.R: stop("cannot create temporary directory")
 #: R/install.R:0
-#, fuzzy
 msgid "cannot create temporary directory"
-msgstr "kan ikke oprette"
+msgstr ""
 
 #. R/install.R: stop("cannot create unique directory for build")
 #: R/install.R:0
@@ -1612,9 +1595,8 @@ msgstr ""
 #. R/admin.R: gettextf("cannot open directory '%s'", outCodeDir)
 #. R/admin.R: gettextf("cannot open directory '%s'", outVignetteDir)
 #: R/admin.R:0
-#, fuzzy
 msgid "cannot open directory '%s'"
-msgstr "kan ikke oprette"
+msgstr ""
 
 #. R/index.R: gettextf("cannot read index information in file '%s'", INDEX)
 #. R/index.R: gettextf("cannot read index information in file '%s'", file.path(demoDir,     "00Index"))
@@ -1675,7 +1657,8 @@ msgstr ""
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr ""
 
@@ -1749,9 +1732,8 @@ msgstr ""
 
 #. R/install.R: gettextf("error reading file '%s'", fd)
 #: R/install.R:0
-#, fuzzy
 msgid "error reading file '%s'"
-msgstr "fortolkningsfejl i fil »%s«:"
+msgstr ""
 
 #. R/Rd2pdf.R: stop("exactly one Rd file must be specified", call. = FALSE)
 #: R/Rd2pdf.R:0
@@ -1778,15 +1760,13 @@ msgstr "fil »%s« findes ikke"
 
 #. R/utils.R: gettextf("file '%s' is not in valid DCF format", dfile)
 #: R/utils.R:0
-#, fuzzy
 msgid "file '%s' is not in valid DCF format"
-msgstr "fil »%s« findes ikke"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("file '%s' not found", file)
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "file '%s' not found"
-msgstr "erklæret S3-metode »%s« blev ikke fundet"
+msgstr ""
 
 #. R/admin.R: gettextf("\nfiles in '%s' field missing from '%s':", collationField,     codeDir)
 #: R/admin.R:0
@@ -1830,15 +1810,13 @@ msgstr ""
 
 #. R/install.R: warning("invalid package ", sQuote(pkg), call. = FALSE)
 #: R/install.R:0
-#, fuzzy
 msgid "invalid package"
-msgstr "Ugyldigt pakkenavn."
+msgstr ""
 
 #. R/utils.R: stop("invalid package layout")
 #: R/utils.R:0
-#, fuzzy
 msgid "invalid package layout"
-msgstr "Ugyldigt pakkenavn."
+msgstr ""
 
 #. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
 #: R/install.R:0
@@ -2116,9 +2094,8 @@ msgstr ""
 
 #. R/utils.R: gettextf("test '%s' is not available", op)
 #: R/utils.R:0
-#, fuzzy
 msgid "test '%s' is not available"
-msgstr "mappe »%s« findes ikke"
+msgstr ""
 
 #. R/testing.R: gettextf("testing '%s' failed", pkgs[i])
 #. R/testing.R: gettextf("testing '%s' failed", pkg)
@@ -2165,9 +2142,8 @@ msgstr "kan ikke oprette"
 
 #. R/admin.R: gettextf("unable to create '%s'", outFile)
 #: R/admin.R:0
-#, fuzzy
 msgid "unable to create '%s'"
-msgstr "kan ikke oprette"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("unable to create temp directory %s", sQuote(tmpd))
 #: R/Vignettes.R:0
@@ -2189,15 +2165,13 @@ msgstr ""
 
 #. R/utils.R: gettextf("unable to run %s on '%s'", latex, file)
 #: R/utils.R:0
-#, fuzzy
 msgid "unable to run %s on '%s'"
-msgstr "kan ikke skrive kodefiler"
+msgstr ""
 
 #. R/utils.R: gettextf("unable to run '%s' on '%s'", makeindex, idxfile)
 #: R/utils.R:0
-#, fuzzy
 msgid "unable to run '%s' on '%s'"
-msgstr "kan ikke skrive kodefiler"
+msgstr ""
 
 #. R/QC.R: stop("unable to write code files")
 #. R/admin.R: stop("unable to write code files")
@@ -2273,9 +2247,8 @@ msgstr ""
 
 #. R/Rd.R: stop("you must specify 'dir' or 'files'")
 #: R/Rd.R:0
-#, fuzzy
 msgid "you must specify 'dir' or 'files'"
-msgstr "du skal angive »package«, »dir« eller »file«"
+msgstr ""
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
 #. R/Rd.R: stop("you must specify 'package' or 'dir'")
@@ -2527,19 +2500,17 @@ msgstr[1] ""
 
 #. R/QC.R: ngettext(length(y), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs")
 #: R/QC.R:0
-#, fuzzy
 msgid "Undeclared package %s in Rd xrefs"
 msgid_plural "Undeclared packages %s in Rd xrefs"
-msgstr[0] "fortolkningsfejl i fil »%s«:"
-msgstr[1] "fortolkningsfejl i fil »%s«:"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/QC.R: ngettext(length(y), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
 #: R/QC.R:0
-#, fuzzy
 msgid "Unknown package %s in Rd xrefs"
 msgid_plural "Unknown packages %s in Rd xrefs"
-msgstr[0] "fortolkningsfejl i fil »%s«:"
-msgstr[1] "fortolkningsfejl i fil »%s«:"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entry at %s",     "Updating existing repository [strict mode: OFF]\nDetected PACKAGES file with %d entries at %s",     domain = "R-tools")
 #: R/update_packages.R:0
@@ -2597,9 +2568,19 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kan ikke skrive kodefiler"
 msgstr[1] "kan ikke skrive kodefiler"
 
+#~ msgid "parse error in file '%s':"
+#~ msgstr "fortolkningsfejl i fil »%s«:"
+
+#~ msgid "declared S3 method '%s' not found"
+#~ msgstr "erklæret S3-metode »%s« blev ikke fundet"
+
 #, fuzzy
 #~ msgid "Failed to locate the"
 #~ msgstr "kan ikke oprette"
+
+#, fuzzy
+#~ msgid "and package"
+#~ msgstr "Ugyldigt pakkenavn."
 
 #, fuzzy
 #~ msgid "Foreign function call without 'PACKAGE' argument:"

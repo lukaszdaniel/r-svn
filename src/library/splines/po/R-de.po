@@ -37,34 +37,29 @@ msgstr "'deriv' muss zwischen 0 und %d sein"
 #. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
 #. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
 #: R/splines.R:0
-#, fuzzy
 msgid "'df' was too small; have used %d"
 msgstr "'df' war zu klein; habe %d benutzt"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' muss von der Form \"y ~ x\" sein"
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' muss >=2 sein"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "'ord' muss eine positive ganze Zahl sein, maximal die Anzahl der Knoten"
 
 #. R/splines.R: warning("all interior knots match left boundary knot")
 #. R/splines.R: stop("all interior knots match left boundary knot")
 #: R/splines.R:0
-#, fuzzy
 msgid "all interior knots match left boundary knot"
-msgstr "alle inneren Knoten fallen auf den rechten Randknoten"
+msgstr "alle inneren Knoten fallen auf den linken Randknoten"
 
 #. R/splines.R: warning("all interior knots match right boundary knot")
 #. R/splines.R: stop("all interior knots match right boundary knot")
@@ -89,19 +84,16 @@ msgstr "Knotenpositionen dürfen nicht kleiner werden"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "Knotenpositionen müssen streng monoton ansteigen"
 
 #. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "Länge von 'derivs' ist größer als Länge von 'x'"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "Längen von 'x' und 'y' müssen gleich sein"
 
@@ -128,11 +120,10 @@ msgstr "brauche mindestens %s (=%d) Knoten"
 #. R/splines.R: stop("non-finite knots")
 #: R/splines.R:0
 msgid "non-finite knots"
-msgstr ""
+msgstr "nicht-endliche Knoten"
 
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
-#, fuzzy
 msgid "shoving 'interior' knots matching boundary knots to inside"
 msgstr "schiebe 'interior' Knoten, die auf Randknoten fallen ins Innere"
 
@@ -143,13 +134,11 @@ msgstr "einige 'x' Werte ausserhalb der Begrenzungsknoten erzeugen eventuell sch
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "spline must be monotone"
 msgstr "spline muss monoton sein"
 
 #. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'",     knots[ord], knots[nk - degree], "outer.ok = TRUE")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr "die 'x' Daten müssen im Bereich %g bis %g liegen, außer es ist %s gesetzt"
 
@@ -160,7 +149,6 @@ msgstr "der Bereich der 'x'-Werte überschreitet eine Periode"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "Werte von 'x' müssen verschieden sein"
 
@@ -168,19 +156,3 @@ msgstr "Werte von 'x' müssen verschieden sein"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "Werte von 'x' müssen streng monoton steigen"
-
-#, fuzzy
-#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
-#~ msgstr "'df' war zu klein; habe %d benutzt"
-
-#, fuzzy
-#~ msgid "stop(\"all interior knots match left boundary knot\")"
-#~ msgstr "alle inneren Knoten fallen auf den linken Randknoten"
-
-#, fuzzy
-#~ msgid "stop(\"knot positions must be non-decreasing\")"
-#~ msgstr "Knotenpositionen dürfen nicht kleiner werden"
-
-#, fuzzy
-#~ msgid "warning(\"all interior knots match left boundary knot\")"
-#~ msgstr "alle inneren Knoten fallen auf den linken Randknoten"

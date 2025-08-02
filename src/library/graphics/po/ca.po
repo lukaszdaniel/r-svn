@@ -213,9 +213,9 @@ msgstr "el símbol gràfic no és vàlid"
 msgid "invalid font specification"
 msgstr "especificació de tipus de lletra no vàlida"
 
-#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193 plot.cpp:2200
-#: plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167 plot3d.cpp:1169
-#: plot3d.cpp:1898
+#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193
+#: plot.cpp:2200 plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167
+#: plot3d.cpp:1169 plot3d.cpp:1898
 #, c-format
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
@@ -271,9 +271,10 @@ msgstr "L'eix logarítmic ha de tenir límits positius"
 msgid "invalid type for axis labels"
 msgstr "tipus no vàlid per a les etiquetes dels eixos"
 
-#: plot.cpp:787 plot.cpp:1394 plot.cpp:1706 plot.cpp:1771 plot.cpp:1845 plot.cpp:1909
-#: plot.cpp:1982 plot.cpp:2077 plot.cpp:2153 plot.cpp:2431 plot.cpp:2605 plot.cpp:2820
-#: plot.cpp:3364 plot.cpp:3507 plot.cpp:3578 plot.cpp:3740 plot.cpp:4020 plot3d.cpp:1867
+#: plot.cpp:787 plot.cpp:1394 plot.cpp:1706 plot.cpp:1771 plot.cpp:1845
+#: plot.cpp:1909 plot.cpp:1982 plot.cpp:2077 plot.cpp:2153 plot.cpp:2431
+#: plot.cpp:2605 plot.cpp:2820 plot.cpp:3364 plot.cpp:3507 plot.cpp:3578
+#: plot.cpp:3740 plot.cpp:4020 plot3d.cpp:1867
 msgid "too few arguments"
 msgstr "massa pocs arguments"
 
@@ -287,9 +288,9 @@ msgstr "el número d'eix %d no és vàlid"
 msgid "'%s' must be of length 1"
 msgstr "«hadj» ha de ser de longitud 1"
 
-#: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455 plot.cpp:2463
-#: plot.cpp:2470 plot.cpp:2477 plot.cpp:2484 plot.cpp:2491 plot.cpp:2499 plot.cpp:2506
-#: plot.cpp:3226
+#: plot.cpp:889 plot.cpp:2165 plot.cpp:2442 plot.cpp:2448 plot.cpp:2455
+#: plot.cpp:2463 plot.cpp:2470 plot.cpp:2477 plot.cpp:2484 plot.cpp:2491
+#: plot.cpp:2499 plot.cpp:2506 plot.cpp:3226
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "s'ha especificat «%s» de longitud zero"
@@ -381,10 +382,11 @@ msgstr "especificació a=, b= no vàlida"
 msgid "'a' and 'b' must be finite"
 msgstr "«a» i «b» han de ser finits"
 
-#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120 plot.cpp:4140
-#: plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171 plot.cpp:4174 plot3d.cpp:1085
-#: plot3d.cpp:1089 plot3d.cpp:1094 plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106
-#: stem.cpp:168 stem.cpp:169 stem.cpp:171 stem.cpp:172
+#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
+#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
+#: stem.cpp:171 stem.cpp:172
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"

@@ -22,49 +22,45 @@ msgstr ""
 #. R/mle.R: stop("Mismatch in length of start values")
 #: R/mle.R:0
 msgid "Mismatch in length of start values"
-msgstr "Incohï¿½rence dans la longueur des valeurs de dï¿½part"
+msgstr "Incoh�rence dans la longueur des valeurs de d�part"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
-#, fuzzy
 msgid "extra arguments discarded"
-msgstr "arguments supplï¿½mentaires ï¿½liminï¿½s"
+msgstr "arguments suppl�mentaires �limin�s"
 
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
-#, fuzzy
 msgid "fixed values violate constraints"
-msgstr "des valeurs fixï¿½es sont incompatibles avec les contraintes"
+msgstr "des valeurs fix�es sont incompatibles avec les contraintes"
 
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
-msgstr "les seuils sont nivelï¿½s ï¿½ des valeurs positives uniquement"
+msgstr "les seuils sont nivel�s � des valeurs positives uniquement"
 
 #. R/mle.R: stop("named list expected")
 #: R/mle.R:0
 msgid "named list expected"
-msgstr "liste nommï¿½e attendue"
+msgstr "liste nomm�e attendue"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
-#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
-msgstr "le profilage a trouvï¿½ une meilleure solution, l'ajustement original n'a donc pas convergï¿½"
+msgstr "le profilage a trouv� une meilleure solution, l'ajustement original n'a donc pas converg�"
 
 #. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
-#, fuzzy
 msgid "some named values are not arguments to the supplied log-likelihood"
-msgstr "quelques valeurs nommï¿½es ne sont pas des arguments correspondant au maximum de vraissemblance fourni"
+msgstr "quelques valeurs nomm�es ne sont pas des arguments correspondant au maximum de vraissemblance fourni"
 
 #. R/mle.R: warning("start values do not satisfy constraints")
 #: R/mle.R:0
 msgid "start values do not satisfy constraints"
-msgstr "les valeurs de dï¿½part ne sont pas cohï¿½rentes par rapport aux contraintes"
+msgstr "les valeurs de d�part ne sont pas coh�rentes par rapport aux contraintes"
 
 #~ msgid "'start' must be a named list"
-#~ msgstr "'start' doit ï¿½tre une liste nommï¿½e"
+#~ msgstr "'start' doit �tre une liste nomm�e"
 
 #~ msgid "some named arguments in 'start' are not arguments to the supplied log-likelihood"
-#~ msgstr "quelques arguments nommï¿½s dans 'start' ne sont pas les arguments correspondants au maximum de vraissemblance fourni"
+#~ msgstr "quelques arguments nomm�s dans 'start' ne sont pas les arguments correspondants au maximum de vraissemblance fourni"

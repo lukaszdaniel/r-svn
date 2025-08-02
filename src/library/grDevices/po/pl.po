@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -772,11 +772,11 @@ msgstr "Próba zwolnienia nieistniejącej maski"
 msgid "Invalid font path: \"%s\""
 msgstr "Nieprawidłowa ścieżka czcionki: \"%s\""
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 msgid "failed to load font"
 msgstr "nie udało się załadować czcionki"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -785,19 +785,19 @@ msgstr "nie udało się załadować czcionki"
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "niepoprawny rozmiar urządzenia 'quartz()'"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "nie można utworzyć opisu urządzenia"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "nie można utworzyć urządzenia 'quartz()', podany typ może nie być wspierany"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "urządzenie Quartz nie jest dostępne na tej platformie"
 

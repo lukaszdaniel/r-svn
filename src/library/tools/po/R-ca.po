@@ -276,9 +276,8 @@ msgstr "Totes les etiquetes de camp han de ser ASCII."
 
 #. R/install.R: gettextf("Applied installation-time patch %s and saved it as %s in package installation\n",     purl, fname)
 #: R/install.R:0
-#, fuzzy
 msgid "Applied installation-time patch %s and saved it as %s in package installation"
-msgstr "S'ha revertit el pedaç del temps d'instal·lació"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("Argument %s must be a character vector or NULL and not %s",     sQuote("pattern"), sQuote(class(pattern)[1L]))
 #: R/Vignettes.R:0
@@ -1887,7 +1886,8 @@ msgstr "conté una línia en blanc"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 #, fuzzy
 msgid "current working directory cannot be ascertained"
 msgstr "no s'ha pogut determinar el directori de treball actual"
@@ -2922,97 +2922,87 @@ msgstr[1] "no s'ha pogut tornar a codificar %s línies %s"
 #~ msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
 #~ msgstr "Usa la llicència ACM: només és apropiat per al codi TOMS d'ACM anterior a 2013"
 
-#, fuzzy
-#~ msgid "Rd files must have a non-empty %s."
-#~ msgstr "Els fitxers Rd han de tenir un %s no buit."
-
-#, fuzzy
-#~ msgid "HTTPD-DEMO %s::%s"
-#~ msgstr "HTTPD-DEMO %s::%s"
-
-#, fuzzy
-#~ msgid "in package installation"
-#~ msgstr "en la instal·lació del paquet"
-
-#, fuzzy
-#~ msgid "WARNING: failed to apply patch"
-#~ msgstr "AVÍS: no s'ha pogut aplicar el pedaç"
-
-#, fuzzy
-#~ msgid "invalid value"
-#~ msgstr "valor no vàlid"
-
-#, fuzzy
-#~ msgid "HTTPD-ERROR %s %s"
-#~ msgstr "HTTPD-ERROR %s %s"
-
-#, fuzzy
-#~ msgid "HTTPD-EXAMPLE %s::%s"
-#~ msgstr "HTTPD-EXEMPLE %s::%s"
-
-#, fuzzy
-#~ msgid "+-+"
-#~ msgstr "+-+"
-
-#~ msgid ","
-#~ msgstr ","
-
 #~ msgid "..."
 #~ msgstr "..."
 
 #, fuzzy
-#~ msgid "="
-#~ msgstr "="
-
-#, fuzzy
-#~ msgid "Applied installation-time patch"
-#~ msgstr "S'ha aplicat el pedaç de temps d'instal·lació"
-
-#, fuzzy
-#~ msgid "HTTPD-REQUEST %s%s"
-#~ msgstr "HTTPD-REQUESTA %s%s"
-
-#, fuzzy
-#~ msgid "and saved it as"
-#~ msgstr "i l'ha desat com a"
-
-#, fuzzy
-#~ msgid "ignored as vignettes have been rebuilt."
-#~ msgstr "s'ha ignorat ja que s'han reconstruït vinyetes."
-
-#, fuzzy
-#~ msgid "inst/doc"
-#~ msgstr "inst/doc"
-
-#, fuzzy
-#~ msgid "which seems to be already applied."
-#~ msgstr "que sembla que ja s'aplica."
-
-#, fuzzy
-#~ msgid "%s file\n"
-#~ msgid_plural "%s files\n"
-#~ msgstr[0] "Fitxer %s\n"
-#~ msgstr[1] "%s fitxers\n"
+#~ msgid "Rd files must have a non-empty %s."
+#~ msgstr "Els fitxers Rd han de tenir un %s no buit."
 
 #, fuzzy
 #~ msgid "alias:"
 #~ msgstr "àlies:"
 
 #, fuzzy
-#~ msgid "Found"
-#~ msgstr "S'ha trobat"
+#~ msgid "+-+"
+#~ msgstr "+-+"
 
 #, fuzzy
-#~ msgid "OFF"
-#~ msgstr "DESACTIVAT"
+#~ msgid "inst/doc"
+#~ msgstr "inst/doc"
+
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "ignored as vignettes have been rebuilt."
+#~ msgstr "s'ha ignorat ja que s'han reconstruït vinyetes."
+
+#, fuzzy
+#~ msgid "HTTPD-REQUEST %s%s"
+#~ msgstr "HTTPD-REQUESTA %s%s"
+
+#, fuzzy
+#~ msgid "="
+#~ msgstr "="
+
+#, fuzzy
+#~ msgid "HTTPD-ERROR %s %s"
+#~ msgstr "HTTPD-ERROR %s %s"
+
+#, fuzzy
+#~ msgid "HTTPD-DEMO %s::%s"
+#~ msgstr "HTTPD-DEMO %s::%s"
+
+#, fuzzy
+#~ msgid "HTTPD-EXAMPLE %s::%s"
+#~ msgstr "HTTPD-EXEMPLE %s::%s"
+
+#, fuzzy
+#~ msgid "invalid value"
+#~ msgstr "valor no vàlid"
+
+#, fuzzy
+#~ msgid "which seems to be already applied."
+#~ msgstr "que sembla que ja s'aplica."
+
+#, fuzzy
+#~ msgid "Applied installation-time patch"
+#~ msgstr "S'ha aplicat el pedaç de temps d'instal·lació"
+
+#, fuzzy
+#~ msgid "and saved it as"
+#~ msgstr "i l'ha desat com a"
+
+#, fuzzy
+#~ msgid "in package installation"
+#~ msgstr "en la instal·lació del paquet"
+
+#, fuzzy
+#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+#~ msgstr "Els fitxers de PAQUETS no inclouen sumes MD5 en el cas win.binary"
+
+#, fuzzy
+#~ msgid "directly."
+#~ msgstr "DIRECTAMENT."
 
 #, fuzzy
 #~ msgid "ON"
 #~ msgstr "EL"
 
 #, fuzzy
-#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
-#~ msgstr "Els fitxers de PAQUETS no inclouen sumes MD5 en el cas win.binary"
+#~ msgid "OFF"
+#~ msgstr "DESACTIVAT"
 
 #, fuzzy
 #~ msgid ""
@@ -3023,12 +3013,18 @@ msgstr[1] "no s'ha pogut tornar a codificar %s línies %s"
 #~ "S'ha detectat un fitxer de paquets amb"
 
 #, fuzzy
-#~ msgid "directly."
-#~ msgstr "DIRECTAMENT."
-
-#, fuzzy
 #~ msgid "entries at"
 #~ msgstr "entrades a"
+
+#, fuzzy
+#~ msgid "Found"
+#~ msgstr "S'ha trobat"
+
+#, fuzzy
+#~ msgid "%s file\n"
+#~ msgid_plural "%s files\n"
+#~ msgstr[0] "Fitxer %s\n"
+#~ msgstr[1] "%s fitxers\n"
 
 #, fuzzy
 #~ msgid "parse error in file '%s':"

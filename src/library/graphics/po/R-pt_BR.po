@@ -837,18 +837,18 @@ msgstr[1] "argumentos %s não estão sendo utilizados"
 #~ msgid "invalid 'axp'"
 #~ msgstr "'axp' inválido"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "'given.values' inválidos"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "'log' inválido"
+
+#~ msgid "invalid 'usr'"
+#~ msgstr "'usr' inválido"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values' inválidos"
 
 #, fuzzy
 #~ msgid "invalid 'title'"
 #~ msgstr "título inválido"
-
-#~ msgid "invalid 'usr'"
-#~ msgstr "'usr' inválido"
 
 #~ msgid "negative 'counts'. Internal Error in C-code for \"bincount\""
 #~ msgstr "'counts' negativo. Erro interno no código C para \"bincount\""

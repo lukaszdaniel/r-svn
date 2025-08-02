@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:31+0200\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -875,12 +875,12 @@ msgstr "S'ha intentat alliberar una màscara inexistent"
 msgid "Invalid font path: \"%s\""
 msgstr "argument 'fonts' no vàlid a %s"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "No s'ha pogut carregar el tipus de lletra"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -889,22 +889,22 @@ msgstr "No s'ha pogut carregar el tipus de lletra"
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "la mida del dispositiu de quartz() no és vàlida"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 #, fuzzy
 msgid "unable to create device description"
 msgstr "no s'ha pogut crear la descripció del dispositiu"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 #, fuzzy
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "no s'ha pogut crear la destinació del dispositiu quartz(), és possible que no s'admeti el tipus indicat"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 #, fuzzy
 msgid "Quartz device is not available on this platform"
 msgstr "El dispositiu Quartz no està disponible en aquesta plataforma"
@@ -1260,32 +1260,12 @@ msgid "Font file not found; matching font family and face"
 msgstr "No s'ha trobat el fitxer de tipus de lletra; s'aparellen la família i la cara del tipus de lletra"
 
 #, fuzzy
-#~ msgid "invalid 'file' argument"
-#~ msgstr "argument «file» no vàlid"
-
-#, fuzzy
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "valor no vàlid de «maxColorValue»"
 
 #, fuzzy, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "el nom del fitxer és massa llarg a %s()"
-
-#, fuzzy
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "nom de fitxer massa llarg a la crida jpeg()"
-
-#, fuzzy
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "nom de fitxer massa llarg a la crida tiff()"
-
-#, fuzzy
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "nom de fitxer massa llarg a la crida win.metafile()"
-
-#, fuzzy, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "valor no vàlid de «%s»"
 
 #, fuzzy
 #~ msgid "ran out of colors in xfig()"
@@ -1324,8 +1304,20 @@ msgstr "No s'ha trobat el fitxer de tipus de lletra; s'aparellen la família i l
 #~ msgstr "nom de fitxer buit"
 
 #, fuzzy, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "no es pot utilitzar la codificació «%s»"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "valor no vàlid de «%s»"
+
+#, fuzzy
+#~ msgid "invalid 'file' argument"
+#~ msgstr "argument «file» no vàlid"
+
+#, fuzzy
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nom de fitxer massa llarg a la crida jpeg()"
+
+#, fuzzy
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nom de fitxer massa llarg a la crida tiff()"
 
 #~ msgid "invalid argument"
 #~ msgstr "argument no vàlid"

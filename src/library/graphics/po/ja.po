@@ -85,8 +85,7 @@ msgstr "グラフィックスの状態が不正です"
 
 #: graphics.cpp:2604
 msgid "graphics device closed during call to locator or identify"
-msgstr ""
-"locatorまたはidentifyの呼び出し中にグラフィックデバイスが閉じられました"
+msgstr "locatorまたはidentifyの呼び出し中にグラフィックデバイスが閉じられました"
 
 #: graphics.cpp:2654
 msgid "No graphics device is active"
@@ -478,9 +477,7 @@ msgstr "'thermometers[, %s]' が不正です"
 #: plot.cpp:3897
 #, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
-msgstr ""
-"'thermometers[, %s]' が [0, 1] の範囲外にあります。表示がおかしいかも知れ"
-"ません"
+msgstr "'thermometers[, %s]' が [0, 1] の範囲外にあります。表示がおかしいかも知れません"
 
 #: plot.cpp:3900
 msgid "invalid 'thermometers[, 1:2]'"
@@ -492,8 +489,7 @@ msgstr "'boxplots' のデータが不正です (5 列必要です)"
 
 #: plot.cpp:3948
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
-msgstr ""
-"'boxplots[, 5]' が [0, 1] の範囲外にあります。表示がおかしいかも知れません"
+msgstr "'boxplots[, 5]' が [0, 1] の範囲外にあります。表示がおかしいかも知れません"
 
 #: plot.cpp:3950
 msgid "invalid 'boxplots[, 1:4]'"

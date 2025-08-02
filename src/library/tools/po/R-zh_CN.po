@@ -985,9 +985,8 @@ msgstr "不需要命名空间从属: %s"
 
 #. R/QC.R: gettext("Namespaces in Imports field not imported from:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Namespaces in Imports field not imported from:"
-msgstr "不需要命名空间从属: %s"
+msgstr ""
 
 #. R/dynamicHelp.R: gettextf("No NEWS found for package %s", mono(pkg))
 #: R/dynamicHelp.R:0
@@ -1145,9 +1144,8 @@ msgstr "程序包'%s'里没有.rda文件"
 
 #. R/QC.R: gettextf("Package in Depends field not imported from: %s", sQuote(xx))
 #: R/QC.R:0
-#, fuzzy
 msgid "Package in Depends field not imported from: %s"
-msgstr "不需要命名空间从属: %s"
+msgstr ""
 
 #. R/QC.R: gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.",     sQuote("lib"), sQuote("pkg"))
 #: R/QC.R:0
@@ -1171,9 +1169,8 @@ msgstr "程序包启动函数应该用%s来生成消息"
 
 #. R/QC.R: gettext("Packages in Depends field not imported from:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Packages in Depends field not imported from:"
-msgstr "不需要命名空间从属: %s"
+msgstr ""
 
 #. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
 #: R/QC.R:0
@@ -1750,7 +1747,8 @@ msgstr "带空行"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "不能确定的当前工作目录"
 
@@ -2099,9 +2097,8 @@ msgstr "文名分析'%s'"
 
 #. R/install.R: stop("patch utility is needed for installation-time patching")
 #: R/install.R:0
-#, fuzzy
 msgid "patch utility is needed for installation-time patching"
-msgstr "程辑包安装"
+msgstr ""
 
 #. R/admin.R: gettextf("processing %s", sQuote(basename(file)))
 #. R/doitools.R: sprintf("processing %s", p)
@@ -2524,7 +2521,6 @@ msgstr[0] "注意：发现%d个标志着UTF-8的字符串"
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "注意：发现%d个标志为\"bytes\"的字符串"
@@ -2638,36 +2634,40 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码%s行%s"
 
+#~ msgid "..."
+#~ msgstr "…"
+
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Rd文件里必需要有非空白的%s。"
 
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "="
+#~ msgstr "="
+
+#~ msgid "invalid value"
+#~ msgstr "无效值"
+
 #, fuzzy
-#~ msgid "inferiorCallError"
-#~ msgstr "内部错误"
+#~ msgid "Applied installation-time patch"
+#~ msgstr "程辑包安装"
 
 #, fuzzy
 #~ msgid "in package installation"
 #~ msgstr "程辑包安装"
 
-#~ msgid "invalid value"
-#~ msgstr "无效值"
+#, fuzzy
+#~ msgid "Found"
+#~ msgstr "找到了%s"
 
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "..."
-#~ msgstr "…"
-
-#~ msgid "="
-#~ msgstr "="
+#, fuzzy
+#~ msgid "inferiorCallError"
+#~ msgstr "内部错误"
 
 #~ msgid "%s file\n"
 #~ msgid_plural "%s files\n"
 #~ msgstr[0] "%s文件\n"
-
-#, fuzzy
-#~ msgid "Found"
-#~ msgstr "找到了%s"
 
 #~ msgid "Bad \\usage lines found in documentation object '%s':"
 #~ msgstr "使用文档对象'%s'有些\\usage不正确:"

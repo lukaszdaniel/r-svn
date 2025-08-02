@@ -2529,16 +2529,16 @@ msgstr[0] "l'argument formal de la funció genèrica per a %s (%s) difereix de l
 msgstr[1] "els arguments formals de la funció genèrica per a %s (%s) difereixen dels no genèrics que s'utilitzaran per defecte (%s)"
 
 #, fuzzy
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "La funció ha de ser un genèric S4"
-
-#, fuzzy
 #~ msgid "E := environment(): %s; parent.env(E): %s"
 #~ msgstr "E := environment(): %s; parent.env(E): %s"
 
 #, fuzzy
 #~ msgid "(and methods)"
 #~ msgstr "(i mètodes)"
+
+#, fuzzy
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "La funció ha de ser un genèric S4"
 
 #, fuzzy
 #~ msgid "invalid method sublist"

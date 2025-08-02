@@ -163,7 +163,7 @@ msgstr "'%s' nėra reikšmingas sutvarkytiesiems faktoriams"
 #: R/tapply.R:0
 #, fuzzy
 msgid "'%s' is of length 0"
-msgstr "'by' ilgis turi būti 1"
+msgstr "'to' ilgis turi būti 1"
 
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -209,7 +209,7 @@ msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eil
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
+msgstr "'file' turi būti netuščia eilutė"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
@@ -238,10 +238,11 @@ msgstr "'%s' turi būti loginė reikšmė"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
-msgstr "'by' ilgis turi būti 1"
+msgstr "'to' ilgis turi būti 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
@@ -804,9 +805,8 @@ msgstr "'zero.print' turi būti ženklas, loginė reikšmė arba NULL"
 
 #. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "- done loading %s"
-msgstr "Pašalinimas %s"
+msgstr ""
 
 #. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
@@ -816,15 +816,13 @@ msgstr "Pašalinimas %s"
 
 #. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing S4 stuff for %s"
-msgstr "neteisinga klasė"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing imports for %s"
-msgstr "neteisinga klasė"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
 #: R/namespace.R:0
@@ -897,9 +895,8 @@ msgstr "neteisinga klasė"
 
 #. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "--- sealing exports for %s"
-msgstr "neteisinga klasė"
+msgstr ""
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -1021,9 +1018,8 @@ msgstr "klaida: %s"
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
-#, fuzzy
 msgid "F used instead of FALSE"
-msgstr "%s nėra TRUE"
+msgstr ""
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1527,9 +1523,8 @@ msgstr "negalima skaidyti pranešimo ryšio"
 
 #. R/sort.R: stop("cannot xtfrm 'x'")
 #: R/sort.R:0
-#, fuzzy
 msgid "cannot xtfrm 'x'"
-msgstr "nėra duomenų sistemos"
+msgstr ""
 
 #. R/dataframe.R: stop("cannot xtfrm data frames")
 #: R/dataframe.R:0
@@ -1827,8 +1822,9 @@ msgstr "įvestis sugadinta su LF, kuris pakeistas CR"
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "netaisyklingas 'name' argumentas"
@@ -2838,9 +2834,8 @@ msgstr "%s versija %s, kurią užmaskavo %s %s"
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr "tiksliai du iš 'to', 'by' ir 'length.out' / 'along.with' turi būti nurodyti"
+msgstr ""
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3160,89 +3155,39 @@ msgstr[0] "nėra paketo, vadinamo"
 msgstr[1] "nėra paketų, vadinamų"
 msgstr[2] "nėra paketų, vadinamų"
 
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'INDEX' ilgis yra nulinis"
-
-#~ msgid "invalid 'digits'"
-#~ msgstr "netaisyklingi 'digits'"
-
 #~ msgid "invalid 'dims'"
 #~ msgstr "netaisyklinga 'dims'"
+
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "netaisyklingas 'endian' argumentas"
 
 #~ msgid "invalid 'make.names'"
 #~ msgstr "netaisyklingas 'make.names'"
 
-#~ msgid "invalid 'value'"
-#~ msgstr "neteisinga 'value'"
+#~ msgid ","
+#~ msgstr ","
 
-#, fuzzy
-#~ msgid "invalid 'x'"
-#~ msgstr "netaisyklinga 'dims'"
+#~ msgid "invalid string for 'by'"
+#~ msgstr "netaisyklinga 'by' eilutė"
 
-#~ msgid "invalid ncol(qr$qr)"
-#~ msgstr "neteisingas ncol(qr$qr)"
-
-#~ msgid "invalid ncol(qr$rank)"
-#~ msgstr "neteisingas ncol(qr$rank)"
-
-#~ msgid "invalid ncol(y)"
-#~ msgstr "neteisingas ncol(y)"
-
-#~ msgid "invalid nrow(qr$qr)"
-#~ msgstr "neteisingas nrow(qr$qr)"
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "vienvietis '-' neapibrėžtas \"POSIXt\" objektams"
 
 #~ msgid "invalid nrow(x)"
 #~ msgstr "neteisingas nrow(x)"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "netaisyklingas 'path' argumentas"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "netaisyklingas 'time' argumentas"
 
 #, fuzzy
 #~ msgid "invalid nrow(z)"
 #~ msgstr "neteisingas nrow(x)"
 
-#~ msgid "'by' must match numbers of columns"
-#~ msgstr "'by' turi atitikti stulpelių skaičius"
-
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'stderr' ilgis turi būti 1"
-
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'stdout' ilgis turi būti 1"
-
 #~ msgid "shared object '%s' not found"
 #~ msgstr "bendrintas objektas '%s' nerastas"
-
-#~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr' turi būti TRUE arba FALSE"
-
-#~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "'ignore.stdout' turi būti TRUE arba FALSE"
-
-#~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "'intern' turi būti TRUE arba FALSE"
-
-#~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "'invisible' turi būti TRUE arba FALSE"
-
-#~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "'minimized' turi būti TRUE arba FALSE"
-
-#, fuzzy
-#~ msgid "'receive.console.signals' must be TRUE or FALSE"
-#~ msgstr "'intern' turi būti TRUE arba FALSE"
-
-#~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "'show.output.on.console' turi būti TRUE arba FALSE"
-
-#~ msgid "invalid '(to - from)/by'"
-#~ msgstr "neteisinga '(to - from)/by'"
-
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "netaisyklingas NCOL(R)"
-
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "neteisingas NCOL(y)"
-
-#~ msgid "invalid ncol(x)"
-#~ msgstr "neteisingas ncol(x)"
 
 #~ msgid "bad 'file' argument"
 #~ msgstr "netinkamas 'file' argumentas"
@@ -3253,23 +3198,119 @@ msgstr[2] "nėra paketų, vadinamų"
 #~ msgid "invalid 'category' argument"
 #~ msgstr "netaisyklingas 'category' argumentas"
 
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "netaisyklingas 'endian' argumentas"
+#~ msgid "FUN"
+#~ msgstr "FUN"
 
-#~ msgid "invalid 'path' argument"
-#~ msgstr "netaisyklingas 'path' argumentas"
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "'by' turi atitikti stulpelių skaičius"
 
-#~ msgid "invalid 'time' argument"
-#~ msgstr "netaisyklingas 'time' argumentas"
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "pakete %s yra licencija, su kuria turite sutikti:"
+
+#~ msgid "according to the DESCRIPTION file it is"
+#~ msgstr "pagal failą DESCRIPTION tai yra"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "neteisingas ncol(x)"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "neteisingas nrow(qr$qr)"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "neteisingas ncol(qr$qr)"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "neteisingas ncol(qr$rank)"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "neteisingas ncol(y)"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "neteisingas NCOL(y)"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "netaisyklingas NCOL(R)"
+
+#, fuzzy
+#~ msgid "invalid 'x'"
+#~ msgstr "netaisyklinga 'dims'"
+
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "neteisinga '(to - from)/by'"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX' ilgis yra nulinis"
 
 #~ msgid "invalid 'which' argument"
 #~ msgstr "netaisyklingas 'which' argumentas"
 
-#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
-#~ msgstr "vienvietis '-' neapibrėžtas \"POSIXt\" objektams"
+#~ msgid "invalid 'digits'"
+#~ msgstr "netaisyklingi 'digits'"
 
-#~ msgid "invalid string for 'by'"
-#~ msgstr "netaisyklinga 'by' eilutė"
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "'intern' turi būti TRUE arba FALSE"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "'ignore.stdout' turi būti TRUE arba FALSE"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr' turi būti TRUE arba FALSE"
+
+#, fuzzy
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "'intern' turi būti TRUE arba FALSE"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout' ilgis turi būti 1"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr' ilgis turi būti 1"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "'show.output.on.console' turi būti TRUE arba FALSE"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "'minimized' turi būti TRUE arba FALSE"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "'invisible' turi būti TRUE arba FALSE"
+
+#, fuzzy
+#~ msgid "'name' must be a single character string"
+#~ msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from' turi būti apibrėžtas"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' turi būti \"Date\" objektas"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' ilgis turi būti 1"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' ilgis turi būti 1"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "'by' ilgis turi būti 1"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' turi būti \"POSIXt\" objektas"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to' turi būti \"POSIXt\" objektas"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' ilgis turi būti 1"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' ilgis turi būti 1"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "argumento 'lenght.out' ilgis turi būti 1"
 
 #~ msgid ""
 #~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
@@ -3278,80 +3319,14 @@ msgstr[2] "nėra paketų, vadinamų"
 #~ "Iškvietimas 'structure(NULL, *)' yra nebenaudojamas, nes NULL negali turėti atributų.\n"
 #~ "  Vietoj to apsvarstykite 'structure(list(), *)'."
 
-#, fuzzy
-#~ msgid "connections left open:"
-#~ msgstr "'connection' turi būti ryšys"
-
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg' ilgis turi būti 1"
-
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from' turi būti \"Date\" objektas"
-
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from' turi būti \"POSIXt\" objektas"
-
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from' ilgis turi būti 1"
-
-#~ msgid "'from' must be specified"
-#~ msgstr "'from' turi būti apibrėžtas"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out' ilgis turi būti 1"
-
-#, fuzzy
-#~ msgid "'name' must be a single character string"
-#~ msgstr "argumentas 'object' turi būti išnagrinėtas iki atskiros simbolių eilutės"
-
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'package' ilgis turi būti 1"
-
-#~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "'to' turi būti \"POSIXt\" objektas"
-
-#~ msgid "'to' must be of length 1"
-#~ msgstr "'to' ilgis turi būti 1"
-
 #~ msgid "'which' must be of length 1"
 #~ msgstr "'which' ilgis turi būti 1"
-
-#~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "argumento 'lenght.out' ilgis turi būti 1"
-
-#, fuzzy
-#~ msgid "'%s' must be a non-empty string"
-#~ msgstr "'file' turi būti netuščia eilutė"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "normal.kind' turi būti simbolių eilutė, kurios ilgis 1"
 
 #~ msgid "'sample.kind' must be a character string of length 1"
 #~ msgstr "'sample.kind' turi būti simbolių eilutė, kurios ilgis 1"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "according to the DESCRIPTION file it is"
-#~ msgstr "pagal failą DESCRIPTION tai yra"
-
-#~ msgid "package %s has a license that you need to accept:"
-#~ msgstr "pakete %s yra licencija, su kuria turite sutikti:"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "FUN"
-#~ msgstr "FUN"
-
-#~ msgid "defunctError"
-#~ msgstr "defunctError"
-
-#~ msgid "deprecatedWarning"
-#~ msgstr "deprecatedWarning"
-
-#~ msgid "packageConflictError"
-#~ msgstr "packageConflictError"
 
 #~ msgid "'flag' must be a string, i.e., of length 1"
 #~ msgstr "'arg' ilgis turi būti eilutė, pvz., 1 ilgio"
@@ -3363,11 +3338,20 @@ msgstr[2] "nėra paketų, vadinamų"
 #~ msgid "norm '%s' currently always uses exact = FALSE"
 #~ msgstr "norma '%s' šiuo metu visada naudoja exact = FALSE"
 
+#~ msgid "defunctError"
+#~ msgstr "defunctError"
+
+#~ msgid "deprecatedWarning"
+#~ msgstr "deprecatedWarning"
+
 #~ msgid "options(\"stringsAsFactors\") not set to TRUE or FALSE"
 #~ msgstr "options(\"stringsAsFactors\") nėra nustatyti TRUE arba FALSE"
 
 #~ msgid "'origin' must be supplied"
 #~ msgstr "origin' turi būti pateikta"
+
+#~ msgid "packageConflictError"
+#~ msgstr "packageConflictError"
 
 #~ msgid "package %s does not have a namespace and should be re-installed"
 #~ msgstr "pakete %s nėra vardų erdvės, turi būti įdiegtas iš naujo"

@@ -600,7 +600,7 @@ msgstr "formula 안에  '.'가 사용되었는데 'data' 인자가 없습니다"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m'은 반드시 리스트이어야 합니다"
+msgstr "n은 반드시 최소 2이상이어야 합니다"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1057,29 +1057,26 @@ msgstr "마지막 %d개의 관측치들이 결측입니다."
 msgid "ifault=%d. This should not happen"
 msgstr "이것은 일어날 수 없는 경우입니다"
 
-#~ msgid "n must be at least two"
-#~ msgstr "n은 반드시 최소 2이상이어야 합니다"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m)은 반드시 최소 2이어야 합니다"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "lag.max의 값이 올바르지 않습니다."
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "ExtractVars에 유효하지 않은 모델식이 있습니다"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "EncodeVars내에 유효하지 않은 모델식이 발견되었습니다"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m)은 반드시 최소 2이어야 합니다"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control'은 반드시 리스트이어야 합니다"
 
-#~ msgid "m must be a list"
-#~ msgstr "m은 반드시 리스트(list)이어야 합니다."
-
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf가 양의 최대값으로 대체되었습니다"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "lag.max의 값이 올바르지 않습니다."
+
+#~ msgid "m must be a list"
+#~ msgstr "m은 반드시 리스트(list)이어야 합니다."
 
 #~ msgid "'x' is a factor"
 #~ msgstr "'x'는 요인입니다."

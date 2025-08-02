@@ -225,9 +225,8 @@ msgstr ""
 
 #. R/fourfoldplot.R: stop("'x' must be 2- or 3-dimensional")
 #: R/fourfoldplot.R:0
-#, fuzzy
 msgid "'x' must be 2- or 3-dimensional"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/assocplot.R: stop("'x' must be a 2-d contingency table")
 #: R/assocplot.R:0
@@ -236,9 +235,8 @@ msgstr ""
 
 #. R/plot.design.R: stop("'x' must be a data frame")
 #: R/plot.design.R:0
-#, fuzzy
 msgid "'x' must be a data frame"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/plot.design.R: stop("'x' must be a dataframe or a formula")
 #: R/plot.design.R:0
@@ -252,15 +250,13 @@ msgstr ""
 
 #. R/dotchart.R: stop("'x' must be a numeric vector or matrix")
 #: R/dotchart.R:0
-#, fuzzy
 msgid "'x' must be a numeric vector or matrix"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/fourfoldplot.R: stop("'x' must be an array")
 #: R/fourfoldplot.R:0
-#, fuzzy
 msgid "'x' must be an array"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/hist.R: stop("'x' must be numeric")
 #. R/stem.R: stop("'x' must be numeric")
@@ -280,21 +276,18 @@ msgstr ""
 
 #. R/plot.design.R: stop("'y' must be a numeric vector")
 #: R/plot.design.R:0
-#, fuzzy
 msgid "'y' must be a numeric vector"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/image.R: stop("'z' must be a matrix")
 #: R/image.R:0
-#, fuzzy
 msgid "'z' must be a matrix"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/image.R: stop("'z' must be numeric or logical")
 #: R/image.R:0
-#, fuzzy
 msgid "'z' must be numeric or logical"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
 #: R/barplot.R:0
@@ -368,9 +361,8 @@ msgstr ""
 
 #. R/stars.R: stop("data in 'x' must be numeric")
 #: R/stars.R:0
-#, fuzzy
 msgid "data in 'x' must be numeric"
-msgstr "'x' numerikus kell legyen"
+msgstr ""
 
 #. R/matplot.R: warning("default 'pch' is smaller than number of columns and hence recycled")
 #: R/matplot.R:0
@@ -473,9 +465,8 @@ msgstr ""
 
 #. R/mosaicplot.R: stop("invalid 'shade' specification")
 #: R/mosaicplot.R:0
-#, fuzzy
 msgid "invalid 'shade' specification"
-msgstr "'breaks' érvénytelen specifikációja"
+msgstr ""
 
 #. R/pairs.R: stop("invalid argument 'horInd'")
 #: R/pairs.R:0
@@ -522,9 +513,8 @@ msgstr ""
 #. R/hist.R: stop("invalid number of 'breaks'")
 #. R/spineplot.R: stop("invalid number of 'breaks'")
 #: R/hist.R:0 R/spineplot.R:0
-#, fuzzy
 msgid "invalid number of 'breaks'"
-msgstr "'breaks' érvénytelen specifikációja"
+msgstr ""
 
 #. R/plot.R: gettextf("invalid plot type")
 #: R/plot.R:0
@@ -548,9 +538,8 @@ msgstr ""
 
 #. R/rect.R: stop("invalid rectangle specification")
 #: R/rect.R:0
-#, fuzzy
 msgid "invalid rectangle specification"
-msgstr "'breaks' érvénytelen specifikációja"
+msgstr ""
 
 #. R/screen.R: stop("invalid screen number")
 #: R/screen.R:0

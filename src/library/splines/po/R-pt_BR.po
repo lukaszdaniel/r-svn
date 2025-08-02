@@ -42,19 +42,16 @@ msgstr "'df' muito pequeno; foi usado"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' deve ser da forma \"y ~ x\""
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' deve ser >= 2"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "'ord' deve ser um inteiro positivo, sendo no máximo igual ao número de nós"
 
@@ -87,7 +84,6 @@ msgstr "posições dos nós devem ser não decrescentes"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "posições dos nós devem ser estritamente crescentes"
 
@@ -99,7 +95,6 @@ msgstr "comprimento de 'derivs' deve ser igual ao comprimento de 'x'"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "comprimentos de 'x' e 'y' devem ser iguais"
 
@@ -142,7 +137,6 @@ msgstr "alguns valores de 'x' depois dos nós de fronteira podem causar bases m�
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "spline must be monotone"
 msgstr "spline deve ser monótono"
 
@@ -159,7 +153,6 @@ msgstr "a faixa de variação dos valores de 'x' escede um período"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "valores de 'x' devem ser distintos"
 
@@ -167,11 +160,3 @@ msgstr "valores de 'x' devem ser distintos"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "valores de 'x' devem ser estritamente crescentes"
-
-#, fuzzy
-#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
-#~ msgstr "'df' muito pequeno; foi usado"
-
-#, fuzzy
-#~ msgid "stop(\"knot positions must be non-decreasing\")"
-#~ msgstr "posições dos nós devem ser não decrescentes"

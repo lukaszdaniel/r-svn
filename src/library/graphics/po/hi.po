@@ -614,14 +614,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: stem.cpp:125
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
 "\n"
 msgid_plural ""
 "  The decimal point is %d digits to the left of the |\n"
 "\n"
-msgstr[0] "\n"
+msgstr[0] ""
 msgstr[1] ""
 
 #: stem.cpp:162

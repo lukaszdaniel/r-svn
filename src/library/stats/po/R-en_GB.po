@@ -3962,7 +3962,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true correlation is less than %s"
-msgstr "'r' is less than 0"
+msgstr "'r' is less than 1"
 
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -3993,7 +3993,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true event rate is less than %s"
-msgstr "'r' is less than 0"
+msgstr "'r' is less than 1"
 
 #. R/poisson.test.R: gettextf("true event rate is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4009,7 +4009,7 @@ msgstr ""
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "true location is less than %s"
-msgstr "'r' is less than 0"
+msgstr "'r' is less than 1"
 
 #. R/wilcox.test.R: gettextf("true location is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
@@ -4055,7 +4055,7 @@ msgstr ""
 #: R/t.test.R:0
 #, fuzzy
 msgid "true mean is less than %s"
-msgstr "'m' is less than 1"
+msgstr "'r' is less than 1"
 
 #. R/t.test.R: gettextf("true mean is not equal to %s", mu, domain = "R-stats")
 #: R/t.test.R:0
@@ -4071,7 +4071,7 @@ msgstr ""
 #: R/fisher.test.R:0
 #, fuzzy
 msgid "true odds ratio is less than %s"
-msgstr "'r' is less than 0"
+msgstr "'r' is less than 1"
 
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
@@ -4085,9 +4085,8 @@ msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "true probability of success is less than %s"
-msgstr "'r' is less than 0"
+msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
 #: R/binom.test.R:0
@@ -4118,7 +4117,7 @@ msgstr ""
 #: R/prop.test.R:0
 #, fuzzy
 msgid "true proportion is less than %s"
-msgstr "'r' is less than 0"
+msgstr "'r' is less than 1"
 
 #. R/prop.test.R: gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats")
 #: R/prop.test.R:0
@@ -4134,7 +4133,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true rate ratio is less than %s"
-msgstr "'r' is less than 0"
+msgstr "'r' is less than 1"
 
 #. R/poisson.test.R: gettextf("true rate ratio is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4180,7 +4179,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true rho is less than %s"
-msgstr "'r' is less than 0"
+msgstr "'r' is less than 1"
 
 #. R/cor.test.R: gettextf("true rho is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4196,7 +4195,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true tau is less than %s"
-msgstr "'r' is less than 0"
+msgstr "'r' is less than 1"
 
 #. R/cor.test.R: gettextf("true tau is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4593,59 +4592,23 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "using the %d/%d row from a combined fit"
 msgstr[1] "using the %d/%d rows from a combined fit"
 
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "columns of 'contrast.obj' must define a contrast(sum to zero)"
+
 #~ msgid "invalid 'SSinit'"
 #~ msgstr "invalid 'SSinit'"
 
-#, fuzzy
-#~ msgid "invalid 'attr(rhs, \"gradient\")'"
-#~ msgstr "invalid  'attr(rhs, \"gradient\")'"
+#~ msgid "invalid 'x'"
+#~ msgstr "invalid 'x'"
 
-#~ msgid "invalid 'keep.stuff'"
-#~ msgstr "invalid 'keep.stuff'"
+#~ msgid "invalid 'nb'"
+#~ msgstr "invalid 'nb'"
 
-#~ msgid "invalid 'use' argument"
-#~ msgstr "invalid 'use' argument"
-
-#~ msgid "medpolish() did not converge in %d iteration"
-#~ msgid_plural "medpolish() did not converge in %d iterations"
-#~ msgstr[0] "medpolish() did not converge in %d iteration"
-#~ msgstr[1] "medpolish() did not converge in %d iterations"
-
-#~ msgid "invalid 'control' argument"
-#~ msgstr "invalid 'control' argument"
-
-#~ msgid "invalid 'method' argument"
-#~ msgstr "invalid 'method' argument"
-
-#~ msgid "invalid NCOL(X)"
-#~ msgstr "invalid NCOL(X)"
-
-#~ msgid "invalid NROW(X)"
-#~ msgstr "invalid NROW(X)"
-
-#~ msgid "invalid argument 'cell'"
-#~ msgstr "invalid argument 'cell'"
-
-#~ msgid "invalid argument 'degree'"
-#~ msgstr "invalid argument 'degree'"
+#~ msgid "Reprofiling for"
+#~ msgstr "Reprofiling for"
 
 #~ msgid "invalid argument 'lambda'"
 #~ msgstr "invalid argument 'lambda'"
-
-#~ msgid "invalid argument 'span'"
-#~ msgstr "invalid argument 'span'"
-
-#~ msgid "invalid 'data' argument"
-#~ msgstr "invalid 'data' argument"
-
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "invalid argument 'omit'"
-
-#~ msgid "invalid 'control.spar'"
-#~ msgstr "invalid 'control.spar'"
-
-#~ msgid "'formula' missing"
-#~ msgstr "'formula' missing"
 
 #~ msgid "formula missing"
 #~ msgstr "formula missing"
@@ -4653,18 +4616,59 @@ msgstr[1] "using the %d/%d rows from a combined fit"
 #~ msgid "incorrect specification for 'formula'"
 #~ msgstr "incorrect specification for 'formula'"
 
-#, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "invalid 'use' argument"
+#~ msgid "down"
+#~ msgstr "down"
 
-#~ msgid "invalid 'abbr.colnames'"
-#~ msgstr "invalid 'abbr.colnames'"
+#~ msgid "up"
+#~ msgstr "up"
 
-#~ msgid "invalid 'endrule' argument"
-#~ msgstr "invalid 'endrule' argument"
+#~ msgid "invalid 'method' argument"
+#~ msgstr "invalid 'method' argument"
 
-#~ msgid "invalid argument 'c'"
-#~ msgstr "invalid argument 'c'"
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "invalid nrow(x)"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "invalid ncol(x)"
+
+#~ msgid "ignored"
+#~ msgstr "ignored"
+
+#~ msgid "invalid 'control' argument"
+#~ msgstr "invalid 'control' argument"
+
+#~ msgid "invalid NCOL(X)"
+#~ msgstr "invalid NCOL(X)"
+
+#~ msgid "invalid NROW(X)"
+#~ msgstr "invalid NROW(X)"
+
+#~ msgid "invalid 'y'"
+#~ msgstr "invalid 'y'"
+
+#~ msgid "invalid argument 'span'"
+#~ msgstr "invalid argument 'span'"
+
+#~ msgid "invalid argument 'cell'"
+#~ msgstr "invalid argument 'cell'"
+
+#~ msgid "invalid argument 'degree'"
+#~ msgstr "invalid argument 'degree'"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "invalid 'data' argument"
+
+#~ msgid "invalid argument 'omit'"
+#~ msgstr "invalid argument 'omit'"
+
+#~ msgid "invalid  'attr(rhs, \"gradient\")'"
+#~ msgstr "invalid  'attr(rhs, \"gradient\")'"
+
+#~ msgid "'formula' missing"
+#~ msgstr "'formula' missing"
 
 #~ msgid "invalid argument 'n'"
 #~ msgstr "invalid argument 'n'"
@@ -4672,38 +4676,25 @@ msgstr[1] "using the %d/%d rows from a combined fit"
 #~ msgid "invalid argument 'r'"
 #~ msgstr "invalid argument 'r'"
 
-#~ msgid "invalid 'nb'"
-#~ msgstr "invalid 'nb'"
+#~ msgid "invalid argument 'c'"
+#~ msgstr "invalid argument 'c'"
 
-#~ msgid "invalid 'x'"
-#~ msgstr "invalid 'x'"
+#~ msgid "invalid 'endrule' argument"
+#~ msgstr "invalid 'endrule' argument"
 
-#~ msgid "invalid 'y'"
-#~ msgstr "invalid 'y'"
+#~ msgid "invalid 'control.spar'"
+#~ msgstr "invalid 'control.spar'"
 
-#~ msgid "invalid ncol(x)"
-#~ msgstr "invalid ncol(x)"
+#~ msgid "invalid 'keep.stuff'"
+#~ msgstr "invalid 'keep.stuff'"
 
-#~ msgid "invalid nrow(x)"
-#~ msgstr "invalid nrow(x)"
+#~ msgid "invalid 'abbr.colnames'"
+#~ msgstr "invalid 'abbr.colnames'"
 
 #~ msgid "Requested conf.level not achievable"
 #~ msgstr "Requested conf.level not achievable"
 
-#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-#~ msgstr "columns of 'contrast.obj' must define a contrast(sum to zero)"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "down"
-#~ msgstr "down"
-
-#~ msgid "ignored"
-#~ msgstr "ignored"
-
-#~ msgid "up"
-#~ msgstr "up"
-
-#~ msgid "Reprofiling for"
-#~ msgstr "Reprofiling for"
+#~ msgid "medpolish() did not converge in %d iteration"
+#~ msgid_plural "medpolish() did not converge in %d iterations"
+#~ msgstr[0] "medpolish() did not converge in %d iteration"
+#~ msgstr[1] "medpolish() did not converge in %d iterations"

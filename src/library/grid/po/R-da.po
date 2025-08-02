@@ -36,9 +36,8 @@ msgstr "»arrow« skal være et arrow-objekt eller NULL"
 
 #. R/grob.R: stop("'children' must be a \"gList\"")
 #: R/grob.R:0
-#, fuzzy
 msgid "'children' must be a \"gList\""
-msgstr "»arrow« skal være et arrow-objekt eller NULL"
+msgstr ""
 
 #. R/frames.R: stop("'col' can only be a range of existing columns")
 #: R/frames.R:0
@@ -78,21 +77,18 @@ msgstr ""
 
 #. R/gpar.R: gettextf("'gpar' element '%s' must not be length 0", gparname)
 #: R/gpar.R:0
-#, fuzzy
 msgid "'gpar' element '%s' must not be length 0"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/highlevel.R: stop("'hgap' must be single unit")
 #: R/highlevel.R:0
-#, fuzzy
 msgid "'hgap' must be single unit"
-msgstr "»arrow« skal være et arrow-objekt eller NULL"
+msgstr ""
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr "»labels«- og »at«-placeringer skal have samme længde"
+msgstr ""
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -102,9 +98,8 @@ msgstr "»labels«- og »at«-placeringer skal have samme længde"
 
 #. R/highlevel.R: stop("'l' must be a layout")
 #: R/highlevel.R:0
-#, fuzzy
 msgid "'l' must be a layout"
-msgstr "»arrow« skal være et arrow-objekt eller NULL"
+msgstr ""
 
 #. R/components.R: stop("'labels' and 'at' locations must have same length")
 #: R/components.R:0
@@ -134,9 +129,8 @@ msgstr ""
 
 #. R/highlevel.R: stop("'pch' and 'labels' not the same length")
 #: R/highlevel.R:0
-#, fuzzy
 msgid "'pch' and 'labels' not the same length"
-msgstr "»labels«- og »at«-placeringer skal have samme længde"
+msgstr ""
 
 #. R/roundRect.R: stop("'r' must be a 'unit' object")
 #: R/roundRect.R:0
@@ -146,9 +140,8 @@ msgstr "»arrow« skal være et arrow-objekt eller NULL"
 
 #. R/util.R: stop("'range' must be numeric")
 #: R/util.R:0
-#, fuzzy
 msgid "'range' must be numeric"
-msgstr "»arrow« skal være et arrow-objekt eller NULL"
+msgstr ""
 
 #. R/layout.R: stop("'respect' must be logical or an 'nrow' by 'ncol' matrix")
 #: R/layout.R:0
@@ -173,9 +166,8 @@ msgstr "»squareShape« skal være mellem -1 og 1"
 
 #. R/highlevel.R: stop("'vgap' must be single unit")
 #: R/highlevel.R:0
-#, fuzzy
 msgid "'vgap' must be single unit"
-msgstr "»arrow« skal være et arrow-objekt eller NULL"
+msgstr ""
 
 #. R/unit.R: stop("'w' and 'h' must be units and 'device' must be logical")
 #: R/unit.R:0
@@ -185,21 +177,18 @@ msgstr "»labels«- og »at«-placeringer skal have samme længde"
 
 #. R/unit.R: stop("'x' and 'units' must have length > 0")
 #: R/unit.R:0
-#, fuzzy
 msgid "'x' and 'units' must have length > 0"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/primitives.R: stop("'x' and 'y' and 'id' must all be same length")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x' and 'y' and 'id' must all be same length"
-msgstr "»labels«- og »at«-placeringer skal have samme længde"
+msgstr ""
 
 #. R/primitives.R: stop("'x' and 'y' and 'id.lengths' must specify same overall length")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x' and 'y' and 'id.lengths' must specify same overall length"
-msgstr "»labels«- og »at«-placeringer skal have samme længde"
+msgstr ""
 
 #. R/primitives.R: stop("'x' and 'y' and 'pathId.lengths' must specify same overall length")
 #: R/primitives.R:0
@@ -208,9 +197,8 @@ msgstr ""
 
 #. R/primitives.R: stop("'x' and 'y' must all be units of length 1")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x' and 'y' must all be units of length 1"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/primitives.R: stop("'x' and 'y' must be 'unit' objects and have the same length")
 #: R/primitives.R:0
@@ -220,16 +208,14 @@ msgstr "»labels«- og »at«-placeringer skal have samme længde"
 
 #. R/primitives.R: stop("'x' and 'y' must be same length")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x' and 'y' must be same length"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/primitives.R: stop("'x' and 'y' must be units")
 #. R/typeset.R: stop("'x' and 'y' must be units")
 #: R/primitives.R:0 R/typeset.R:0
-#, fuzzy
 msgid "'x' and 'y' must be units"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/unit.R: stop("'x' and 'y' must be units and 'device' must be logical")
 #: R/unit.R:0
@@ -239,15 +225,13 @@ msgstr "»labels«- og »at«-placeringer skal have samme længde"
 
 #. R/primitives.R: stop("'x' and 'y' must be units or NULL")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x' and 'y' must be units or NULL"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/primitives.R: stop("'x' and 'y' must have length 1")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x' and 'y' must have length 1"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/typeset.R: stop("'x' and 'y' must have length > 0")
 #: R/typeset.R:0
@@ -257,41 +241,35 @@ msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
 
 #. R/primitives.R: stop("'x', 'y' and 'size' must be units")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x', 'y' and 'size' must be units"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/primitives.R: stop("'x', 'y', 'width', and 'height' must all be units of length 1")
 #. R/viewport.R: stop("'x', 'y', 'width', and 'height' must all be units of length 1")
 #: R/primitives.R:0 R/viewport.R:0
-#, fuzzy
 msgid "'x', 'y', 'width', and 'height' must all be units of length 1"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/primitives.R: stop("'x', 'y', 'width', and 'height' must be units")
 #. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must be units")
 #: R/primitives.R:0 R/roundRect.R:0
-#, fuzzy
 msgid "'x', 'y', 'width', and 'height' must be units"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/roundRect.R: stop("'x', 'y', 'width', and 'height' must have length 1")
 #: R/roundRect.R:0
-#, fuzzy
 msgid "'x', 'y', 'width', and 'height' must have length 1"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/primitives.R: stop("'x', 'y', and 'r' must be units")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x', 'y', and 'r' must be units"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/primitives.R: stop("'x0', 'y0', 'x1', and 'y1' must be units")
 #: R/primitives.R:0
-#, fuzzy
 msgid "'x0', 'y0', 'x1', and 'y1' must be units"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/curve.R: stop("'x1', 'y1', 'x2', and 'y2' must be units")
 #: R/curve.R:0
@@ -374,9 +352,8 @@ msgstr "Ugyldig »grob«"
 
 #. R/grid.R: stop("Invalid number of generations")
 #: R/grid.R:0
-#, fuzzy
 msgid "Invalid number of generations"
-msgstr "Ugyldig »col-specifikation«"
+msgstr ""
 
 #. R/grob.R: stop("Invalid revert target")
 #: R/grob.R:0
@@ -399,9 +376,8 @@ msgstr "Ugyldig »frame«"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid transform (nothing drawn)"
-msgstr "Ugyldig »frame«"
+msgstr ""
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
@@ -441,9 +417,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr "Ugyldig »col-specifikation«"
+msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -463,9 +438,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown width; using first width"
-msgstr "Ugyldig »col-specifikation«"
+msgstr ""
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -511,9 +485,8 @@ msgstr "Kan ikke angive mere end en af »side=[\"left\", \"right\"]«, »col«, 
 
 #. R/patterns.R: stop("colours and stops must be at least length 1")
 #: R/patterns.R:0
-#, fuzzy
 msgid "colours and stops must be at least length 1"
-msgstr "»labels«- og »at«-placeringer skal have samme længde"
+msgstr ""
 
 #. R/primitives.R: stop("corrupt 'arrows' object")
 #: R/primitives.R:0
@@ -605,9 +578,8 @@ msgstr "Ugyldig »grob«"
 
 #. R/gpar.R: stop("invalid 'alpha' value")
 #: R/gpar.R:0
-#, fuzzy
 msgid "invalid 'alpha' value"
-msgstr "Ugyldig »grob«"
+msgstr ""
 
 #. R/viewport.R: stop("invalid 'angle' in viewport")
 #: R/viewport.R:0
@@ -683,21 +655,18 @@ msgstr "Ugyldig »edit-information«"
 
 #. R/viewport.R: stop("invalid 'layout.pos.col' in viewport")
 #: R/viewport.R:0
-#, fuzzy
 msgid "invalid 'layout.pos.col' in viewport"
-msgstr "Ugyldig »edit-information«"
+msgstr ""
 
 #. R/viewport.R: stop("invalid 'layout.pos.row' in viewport")
 #: R/viewport.R:0
-#, fuzzy
 msgid "invalid 'layout.pos.row' in viewport"
-msgstr "Ugyldig »edit-information«"
+msgstr ""
 
 #. R/gpar.R: stop("invalid 'linemitre' value")
 #: R/gpar.R:0
-#, fuzzy
 msgid "invalid 'linemitre' value"
-msgstr "Ugyldig »grob«"
+msgstr ""
 
 #. R/function.R: stop("invalid 'n'")
 #: R/function.R:0
@@ -719,9 +688,8 @@ msgstr "Ugyldig »row-specifikation«"
 
 #. R/grob.R: stop("invalid 'vp' slot")
 #: R/grob.R:0
-#, fuzzy
 msgid "invalid 'vp' slot"
-msgstr "Ugyldig »grob«"
+msgstr ""
 
 #. R/viewport.R: stop("invalid 'xscale' in viewport")
 #: R/viewport.R:0
@@ -737,9 +705,8 @@ msgstr "Ugyldig »edit-information«"
 
 #. R/grab.R: stop("invalid display list element")
 #: R/grab.R:0
-#, fuzzy
 msgid "invalid display list element"
-msgstr "Ugyldig »grob«"
+msgstr ""
 
 #. R/grob.R: stop("invalid element to add to \"gList\"")
 #: R/grob.R:0
@@ -777,9 +744,8 @@ msgstr "Ugyldig »edit-information«"
 
 #. R/grid.R: stop("invalid object inserted on the display list")
 #: R/grid.R:0
-#, fuzzy
 msgid "invalid object inserted on the display list"
-msgstr "Ugyldig »edit-information«"
+msgstr ""
 
 #. R/components.R: stop("invalid to specify axis labels when 'at' is NULL")
 #: R/components.R:0
@@ -989,15 +955,13 @@ msgstr ""
 
 #. R/primitives.R: stop("x and y must be units")
 #: R/primitives.R:0
-#, fuzzy
 msgid "x and y must be units"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/patterns.R: stop("x, y, width, and height must all be length 1")
 #: R/patterns.R:0
-#, fuzzy
 msgid "x, y, width, and height must all be length 1"
-msgstr "»x1«, »y1« ,»x2« og »y2« skal være enheder"
+msgstr ""
 
 #. R/patterns.R: stop("x1, y1, x2, and y2 must all be length 1")
 #: R/patterns.R:0
@@ -1027,19 +991,23 @@ msgstr[0] "Ugyldig »frame«"
 msgstr[1] "Ugyldig »frame«"
 
 #, fuzzy
-#~ msgid "invalid 'clip' value"
-#~ msgstr "Ugyldig »grob«"
-
-#, fuzzy
 #~ msgid "invalid 'frame'"
 #~ msgstr "Ugyldig »frame«"
 
 #, fuzzy
-#~ msgid "invalid 'gp' value"
+#~ msgid "invalid 'grob'"
 #~ msgstr "Ugyldig »grob«"
 
 #, fuzzy
-#~ msgid "invalid 'grob'"
+#~ msgid "invalid 'result'"
+#~ msgstr "Ugyldig »frame«"
+
+#, fuzzy
+#~ msgid "invalid 'print' argument"
+#~ msgstr "Ugyldig »grob«"
+
+#, fuzzy
+#~ msgid "invalid listing"
 #~ msgstr "Ugyldig »grob«"
 
 #, fuzzy
@@ -1051,10 +1019,6 @@ msgstr[1] "Ugyldig »frame«"
 #~ msgstr "Ugyldig »grob«"
 
 #, fuzzy
-#~ msgid "invalid 'result'"
-#~ msgstr "Ugyldig »frame«"
-
-#, fuzzy
 #~ msgid "invalid 'rot' value"
 #~ msgstr "Ugyldig »grob«"
 
@@ -1063,15 +1027,11 @@ msgstr[1] "Ugyldig »frame«"
 #~ msgstr "Ugyldig »grob«"
 
 #, fuzzy
-#~ msgid "invalid listing"
+#~ msgid "invalid 'gp' value"
 #~ msgstr "Ugyldig »grob«"
 
 #, fuzzy
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "Ugyldig »grob«"
-
-#, fuzzy
-#~ msgid "invalid 'print' argument"
+#~ msgid "invalid 'clip' value"
 #~ msgstr "Ugyldig »grob«"
 
 #, fuzzy

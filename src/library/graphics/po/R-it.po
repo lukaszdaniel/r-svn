@@ -819,17 +819,17 @@ msgstr[1] "gli argomenti %s non hanno fatto uso di"
 #~ msgid "invalid 'axp'"
 #~ msgstr "'axp' non valido"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "'given.values' non valido"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "'log' non valido"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "'title' non valido"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "'usr' non valido"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values' non valido"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "'title' non valido"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

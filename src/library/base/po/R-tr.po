@@ -82,9 +82,8 @@ msgstr ""
 
 #. R/namespace.R: gettextf("%s not found", sQuote(x))
 #: R/namespace.R:0
-#, fuzzy
 msgid "%s not found"
-msgstr "bulunamadı"
+msgstr ""
 
 #. R/library.R: gettextf("%s not found on search path, using pos = 2", sQuote(pos))
 #: R/library.R:0
@@ -231,8 +230,8 @@ msgstr ""
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'%s' must be of length 1"
 msgstr ""
 
@@ -942,9 +941,8 @@ msgstr ""
 
 #. R/library.R: gettextf("DLL %s was not loaded", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "DLL %s was not loaded"
-msgstr "bulunamadı"
+msgstr ""
 
 #. R/library.R: gettext("Description:")
 #: R/library.R:0
@@ -1678,9 +1676,8 @@ msgstr ""
 
 #. R/attach.R: gettextf("file '%s' not found", what)
 #: R/attach.R:0
-#, fuzzy
 msgid "file '%s' not found"
-msgstr "bulunamadı"
+msgstr ""
 
 #. R/files.R: stop("file can not be copied both 'from' and 'to'")
 #: R/files.R:0
@@ -1744,9 +1741,8 @@ msgstr ""
 
 #. R/rowsum.R: stop("incorrect length for 'group'")
 #: R/rowsum.R:0
-#, fuzzy
 msgid "incorrect length for 'group'"
-msgstr "'MARGIN' için geçersiz değer"
+msgstr ""
 
 #. R/array.R: stop("incorrect value for 'MARGIN'")
 #: R/array.R:0
@@ -1755,9 +1751,8 @@ msgstr "'MARGIN' için geçersiz değer"
 
 #. R/strwrap.R: stop("incorrect value for 'x'")
 #: R/strwrap.R:0
-#, fuzzy
 msgid "incorrect value for 'x'"
-msgstr "'MARGIN' için geçersiz değer"
+msgstr ""
 
 #. R/LAPACK.R: stop("infinite or missing values in 'x'")
 #. R/eigen.R: stop("infinite or missing values in 'x'")
@@ -1784,8 +1779,9 @@ msgstr ""
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "geçersiz paket ismi"
@@ -1814,9 +1810,8 @@ msgstr ""
 #. R/dates.R: stop("invalid 'by' string")
 #. R/datetime.R: stop("invalid 'by' string")
 #: R/dates.R:0 R/datetime.R:0
-#, fuzzy
 msgid "invalid 'by' string"
-msgstr "geçersiz paket ismi"
+msgstr ""
 
 #. R/serialize.R: stop("invalid 'compress' argument: ", compress)
 #: R/serialize.R:0
@@ -1841,15 +1836,13 @@ msgstr ""
 
 #. R/rle.R: stop("invalid 'rle' structure")
 #: R/rle.R:0
-#, fuzzy
 msgid "invalid 'rle' structure"
-msgstr "geçersiz paket ismi"
+msgstr ""
 
 #. R/dataframe.R: stop("invalid 'row.names' length")
 #: R/dataframe.R:0
-#, fuzzy
 msgid "invalid 'row.names' length"
-msgstr "geçersiz paket ismi"
+msgstr ""
 
 #. R/factor.R: warning("invalid factor level, NA generated")
 #: R/factor.R:0
@@ -1858,9 +1851,8 @@ msgstr ""
 
 #. R/namespace.R: stop("invalid import target")
 #: R/namespace.R:0
-#, fuzzy
 msgid "invalid import target"
-msgstr "geçersiz paket ismi"
+msgstr ""
 
 #. R/dataframe.R: stop("invalid list argument: all variables should have the same length")
 #: R/dataframe.R:0
@@ -1870,9 +1862,8 @@ msgstr ""
 #. R/dates.R: stop("invalid mode for 'by'")
 #. R/datetime.R: stop("invalid mode for 'by'")
 #: R/dates.R:0 R/datetime.R:0
-#, fuzzy
 msgid "invalid mode for 'by'"
-msgstr "geçersiz paket ismi"
+msgstr ""
 
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
@@ -1881,9 +1872,8 @@ msgstr ""
 
 #. R/cut.R: stop("invalid number of intervals")
 #: R/cut.R:0
-#, fuzzy
 msgid "invalid number of intervals"
-msgstr "geçersiz paket ismi"
+msgstr ""
 
 #. R/library.R: stop("invalid package name")
 #: R/library.R:0
@@ -2154,9 +2144,8 @@ msgstr ""
 
 #. R/files.R: stop("no file found")
 #: R/files.R:0
-#, fuzzy
 msgid "no file found"
-msgstr "bulunamadı"
+msgstr ""
 
 #. R/files.R: stop("no files to copy to")
 #: R/files.R:0
@@ -2196,9 +2185,8 @@ msgstr ""
 
 #. R/library.R: message("no packages found")
 #: R/library.R:0
-#, fuzzy
 msgid "no packages found"
-msgstr "bulunamadı"
+msgstr ""
 
 #. R/library.R: stop("no shared object was specified")
 #: R/library.R:0
@@ -2279,9 +2267,8 @@ msgstr ""
 
 #. R/namespace.R: stop("not loading a namespace")
 #: R/namespace.R:0
-#, fuzzy
 msgid "not loading a namespace"
-msgstr "isim alanı"
+msgstr ""
 
 #. R/qr.R: stop("not supported for LAPACK QR")
 #: R/qr.R:0
@@ -2335,9 +2322,8 @@ msgstr ""
 
 #. R/namespace.R: gettextf("object '%s' not found whilst loading namespace '%s'",     genname, package)
 #: R/namespace.R:0
-#, fuzzy
 msgid "object '%s' not found whilst loading namespace '%s'"
-msgstr "isim alanı"
+msgstr ""
 
 #. R/dataframe.R: stop("only a single element should be replaced")
 #: R/dataframe.R:0
@@ -2565,15 +2551,13 @@ msgstr ""
 
 #. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "shared object %s not found"
-msgstr "bulunamadı"
+msgstr ""
 
 #. R/library.R: gettextf("shared object %s was not loaded", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "shared object %s was not loaded"
-msgstr "bulunamadı"
+msgstr ""
 
 #. R/library.R: gettextf("shared object '%s' already loaded", sQuote(chname1))
 #: R/library.R:0
@@ -2681,9 +2665,8 @@ msgstr ""
 
 #. R/namespace.R: gettextf("unable to load R code in package %s", sQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "unable to load R code in package %s"
-msgstr "Zorunlu paket yükleniyor: %s"
+msgstr ""
 
 #. R/namespace.R: stop("unable to re-encode some lines in NAMESPACE file")
 #: R/namespace.R:0
@@ -2816,9 +2799,8 @@ msgstr ""
 
 #. R/seq.R: stop("wrong sign in 'by' argument")
 #: R/seq.R:0
-#, fuzzy
 msgid "wrong sign in 'by' argument"
-msgstr "geçersiz paket ismi"
+msgstr ""
 
 #. R/dataframe.R: ngettext(n - n0, " [ reached 'max' / getOption(\"max.print\") -- omitted %d row ]\n",     " [ reached 'max' / getOption(\"max.print\") -- omitted %d rows ]\n",     domain = "R-base")
 #: R/dataframe.R:0
@@ -2889,6 +2871,7 @@ msgstr[0] ""
 msgid "S3 method %s was declared in NAMESPACE but not found"
 msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
 msgstr[0] ""
+msgstr[1] ""
 
 #. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:",     "The following objects are masked _by_ %s:")
 #: R/attach.R:0
@@ -2907,12 +2890,14 @@ msgstr[0] ""
 msgid "Warning message:\n"
 msgid_plural "Warning messages:\n"
 msgstr[0] ""
+msgstr[1] ""
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'",     "classes %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0
 msgid "class %s is not exported by 'namespace:%s'"
 msgid_plural "classes %s are not exported by 'namespace:%s'"
 msgstr[0] ""
+msgstr[1] ""
 
 #. R/dataframe.R: ngettext(n, "data frame with 0 columns and %d row", "data frame with 0 columns and %d rows")
 #: R/dataframe.R:0
@@ -2925,6 +2910,7 @@ msgstr[0] ""
 msgid "deparse option %s is not recognized"
 msgid_plural "deparse options %s are not recognized"
 msgstr[0] ""
+msgstr[1] ""
 
 #. R/dataframe.R: ngettext(nr, "invalid 'row.names', length %d for a data frame with %d row",     "invalid 'row.names', length %d for a data frame with %d rows")
 #: R/dataframe.R:0
@@ -2937,6 +2923,7 @@ msgstr[0] ""
 msgid "library %s contains no packages"
 msgid_plural "libraries %s contain no packages"
 msgstr[0] ""
+msgstr[1] ""
 
 #. R/dataframe.R: ngettext(sum(!mode.ok), "non-numeric-alike variable in data frame: ",     "non-numeric-alike variables in data frame: ", domain = "R-base")
 #: R/dataframe.R:0
@@ -2955,25 +2942,28 @@ msgstr[0] ""
 msgid "object %s is not exported by 'namespace:%s'"
 msgid_plural "objects %s are not exported by 'namespace:%s'"
 msgstr[0] ""
+msgstr[1] ""
 
 #. R/load.R: ngettext(n, "object %s not found", "objects %s not found")
 #: R/load.R:0
-#, fuzzy
 msgid "object %s not found"
 msgid_plural "objects %s not found"
-msgstr[0] "bulunamadı"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded")
 #: R/library.R:0
 msgid "package %s is not loaded"
 msgid_plural "packages %s are not loaded"
 msgstr[0] ""
+msgstr[1] ""
 
 #. R/namespace.R: ngettext(sum(ex), "previous export '%s' is being replaced", "previous exports '%s' are being replaced")
 #: R/namespace.R:0
 msgid "previous export '%s' is being replaced"
 msgid_plural "previous exports '%s' are being replaced"
 msgstr[0] ""
+msgstr[1] ""
 
 #. R/dataframe.R: ngettext(ncolv, "provided %d variable to replace %d variables",     "provided %d variables to replace %d variables")
 #: R/dataframe.R:0
@@ -3031,17 +3021,13 @@ msgstr[0] ""
 
 #. R/library.R: ngettext(length(package), "there is no package called", "there are no packages called")
 #: R/library.R:0
-#, fuzzy
 msgid "there is no package called"
 msgid_plural "there are no packages called"
-msgstr[0] "Zorunlu paket yükleniyor: %s"
+msgstr[0] ""
+msgstr[1] ""
 
 #, fuzzy
-#~ msgid "invalid 'digits'"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid 'dims'"
+#~ msgid "invalid 'endian' argument"
 #~ msgstr "geçersiz paket ismi"
 
 #, fuzzy
@@ -3049,63 +3035,11 @@ msgstr[0] "Zorunlu paket yükleniyor: %s"
 #~ msgstr "geçersiz paket ismi"
 
 #, fuzzy
-#~ msgid "invalid 'value'"
+#~ msgid "invalid 'time' argument"
 #~ msgstr "geçersiz paket ismi"
 
 #, fuzzy
 #~ msgid "invalid 'x'"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid ncol(y)"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid nrow(x)"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid nrow(z)"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "shared object '%s' not found"
-#~ msgstr "bulunamadı"
-
-#, fuzzy
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid ncol(x)"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "bad 'file' argument"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "bad file argument"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid 'category' argument"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid 'path' argument"
-#~ msgstr "geçersiz paket ismi"
-
-#, fuzzy
-#~ msgid "invalid 'time' argument"
 #~ msgstr "geçersiz paket ismi"
 
 #, fuzzy
@@ -3114,3 +3048,6 @@ msgstr[0] "Zorunlu paket yükleniyor: %s"
 
 #~ msgid "namespace"
 #~ msgstr "isim alanı"
+
+#~ msgid "not found"
+#~ msgstr "bulunamadı"

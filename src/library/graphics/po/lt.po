@@ -15,8 +15,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -214,9 +213,9 @@ msgstr "neleistinas braižymo simbolis"
 msgid "invalid font specification"
 msgstr "netinkama šrifto specifikacija"
 
-#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193 plot.cpp:2200
-#: plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167 plot3d.cpp:1169
-#: plot3d.cpp:1898
+#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2193
+#: plot.cpp:2200 plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167
+#: plot3d.cpp:1169 plot3d.cpp:1898
 #, c-format
 msgid "invalid '%s' value"
 msgstr "neteisinga '%s' reikšmė"
@@ -385,9 +384,9 @@ msgstr "‘a’ ir ‘b’ turi būti baigtiniai"
 
 #: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
 #: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
-#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094 plot3d.cpp:1098
-#: plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169 stem.cpp:171
-#: stem.cpp:172
+#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
+#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:168 stem.cpp:169
+#: stem.cpp:171 stem.cpp:172
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "neteisingas argumentas '%s'"
@@ -617,14 +616,14 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: stem.cpp:125
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
 "\n"
 msgid_plural ""
 "  The decimal point is %d digits to the left of the |\n"
 "\n"
-msgstr[0] "\n"
+msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 

@@ -21,13 +21,11 @@ msgstr "No coincideix en la longitud dels valors inicials"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
-#, fuzzy
 msgid "extra arguments discarded"
 msgstr "els arguments addicionals s'han descartat"
 
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
-#, fuzzy
 msgid "fixed values violate constraints"
 msgstr "els valors fixats violen les restriccions"
 
@@ -43,7 +41,6 @@ msgstr "s'espera una llista amb noms"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
-#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "el perfilador ha trobat una solució millor, de manera que l'ajust original no ha convergit"
 

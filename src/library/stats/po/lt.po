@@ -609,7 +609,7 @@ msgstr "'.' formulėje ir nėra argumento 'data'"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' turi būti sąrašas"
+msgstr "n turi būti ne mažiau kaip du"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1071,29 +1071,26 @@ msgstr "trūkstama reikšmė paskutiniuose %d stebėjimuose"
 msgid "ifault=%d. This should not happen"
 msgstr "tai neturėtų įvykti"
 
-#~ msgid "n must be at least two"
-#~ msgstr "n turi būti ne mažiau kaip du"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) turi būti ne mažesnis kaip du"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "neleistina lag.max reikšmė"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "netinkama modelio formulė, esanti ExtractVars"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "netinkama modelio formulė, esanti EncodeVars"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) turi būti ne mažesnis kaip du"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' turi būti sąrašas"
 
-#~ msgid "m must be a list"
-#~ msgstr "m turi būti sąrašas"
-
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf pakeista didžiausia teigiama reikšme"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "neleistina lag.max reikšmė"
+
+#~ msgid "m must be a list"
+#~ msgstr "m turi būti sąrašas"
 
 #, c-format
 #~ msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"

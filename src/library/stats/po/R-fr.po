@@ -3980,7 +3980,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true correlation is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr "'r' est inférieur à 1"
 
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4011,7 +4011,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true event rate is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr "'r' est inférieur à 1"
 
 #. R/poisson.test.R: gettextf("true event rate is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4027,7 +4027,7 @@ msgstr ""
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "true location is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr "'r' est inférieur à 1"
 
 #. R/wilcox.test.R: gettextf("true location is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
@@ -4073,7 +4073,7 @@ msgstr ""
 #: R/t.test.R:0
 #, fuzzy
 msgid "true mean is less than %s"
-msgstr "'m' est inférieur à 1"
+msgstr "'r' est inférieur à 1"
 
 #. R/t.test.R: gettextf("true mean is not equal to %s", mu, domain = "R-stats")
 #: R/t.test.R:0
@@ -4089,7 +4089,7 @@ msgstr ""
 #: R/fisher.test.R:0
 #, fuzzy
 msgid "true odds ratio is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr "'r' est inférieur à 1"
 
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
@@ -4103,9 +4103,8 @@ msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "true probability of success is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
 #: R/binom.test.R:0
@@ -4136,7 +4135,7 @@ msgstr ""
 #: R/prop.test.R:0
 #, fuzzy
 msgid "true proportion is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr "'r' est inférieur à 1"
 
 #. R/prop.test.R: gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats")
 #: R/prop.test.R:0
@@ -4152,7 +4151,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true rate ratio is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr "'r' est inférieur à 1"
 
 #. R/poisson.test.R: gettextf("true rate ratio is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4198,7 +4197,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true rho is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr "'r' est inférieur à 1"
 
 #. R/cor.test.R: gettextf("true rho is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4214,7 +4213,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true tau is less than %s"
-msgstr "'r' est inférieur à 0"
+msgstr "'r' est inférieur à 1"
 
 #. R/cor.test.R: gettextf("true tau is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4611,59 +4610,20 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilisation de %d/%d ligne d'un ajustement combiné"
 msgstr[1] "utilisation des %d/%d lignes d'un ajustement combiné"
 
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "les colonnes de 'contrast.obj' doivent définir un contraste (somme nulle)"
+
 #~ msgid "invalid 'SSinit'"
 #~ msgstr "'SSinit' incorrect"
 
-#, fuzzy
-#~ msgid "invalid 'attr(rhs, \"gradient\")'"
-#~ msgstr "'attr(rhs, \"gradient\")' incorrect"
+#~ msgid "invalid 'x'"
+#~ msgstr "'x' incorrect"
 
-#~ msgid "invalid 'keep.stuff'"
-#~ msgstr "'keep.stuff' incorrect"
-
-#~ msgid "invalid 'use' argument"
-#~ msgstr "argument 'use' incorrect"
-
-#~ msgid "medpolish() did not converge in %d iteration"
-#~ msgid_plural "medpolish() did not converge in %d iterations"
-#~ msgstr[0] "medpolish() n'a pas convergé en %d itération"
-#~ msgstr[1] "medpolish() n'a pas convergé en %d itérations"
-
-#~ msgid "invalid 'control' argument"
-#~ msgstr "argument 'control' incorrect"
-
-#~ msgid "invalid 'method' argument"
-#~ msgstr "argument 'method' incorrect"
-
-#~ msgid "invalid NCOL(X)"
-#~ msgstr "incorrect NCOL(X)"
-
-#~ msgid "invalid NROW(X)"
-#~ msgstr "la valeur de NROW(X) est incorrecte"
-
-#~ msgid "invalid argument 'cell'"
-#~ msgstr "argument 'cell' incorrect"
-
-#~ msgid "invalid argument 'degree'"
-#~ msgstr "argument 'degree' incorrect"
+#~ msgid "invalid 'nb'"
+#~ msgstr "'nb' incorrect"
 
 #~ msgid "invalid argument 'lambda'"
 #~ msgstr "argument 'lambda' incorrect"
-
-#~ msgid "invalid argument 'span'"
-#~ msgstr "argument 'span' incorrect"
-
-#~ msgid "invalid 'data' argument"
-#~ msgstr "argument 'data' incorrect"
-
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "argument 'omit' incorrect"
-
-#~ msgid "invalid 'control.spar'"
-#~ msgstr "'control.spar' incorrect"
-
-#~ msgid "'formula' missing"
-#~ msgstr "'formula' manquante"
 
 #~ msgid "formula missing"
 #~ msgstr "formule manquante"
@@ -4671,18 +4631,54 @@ msgstr[1] "utilisation des %d/%d lignes d'un ajustement combiné"
 #~ msgid "incorrect specification for 'formula'"
 #~ msgstr "'formula' incorrecte"
 
+#~ msgid "invalid 'method' argument"
+#~ msgstr "argument 'method' incorrect"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x) incorrect"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) incorrect"
+
 #, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "argument 'use' incorrect"
+#~ msgid "ignored"
+#~ msgstr "' et ignoré(s)"
 
-#~ msgid "invalid 'abbr.colnames'"
-#~ msgstr "'abbr.colnames' incorrect"
+#~ msgid "invalid 'control' argument"
+#~ msgstr "argument 'control' incorrect"
 
-#~ msgid "invalid 'endrule' argument"
-#~ msgstr "argument 'endrule' incorrect"
+#~ msgid "invalid NCOL(X)"
+#~ msgstr "incorrect NCOL(X)"
 
-#~ msgid "invalid argument 'c'"
-#~ msgstr "argument 'c' incorrect"
+#~ msgid "invalid NROW(X)"
+#~ msgstr "la valeur de NROW(X) est incorrecte"
+
+#~ msgid "invalid 'y'"
+#~ msgstr "'y' incorrect"
+
+#~ msgid "invalid argument 'span'"
+#~ msgstr "argument 'span' incorrect"
+
+#~ msgid "invalid argument 'cell'"
+#~ msgstr "argument 'cell' incorrect"
+
+#~ msgid "invalid argument 'degree'"
+#~ msgstr "argument 'degree' incorrect"
+
+#~ msgid "invalid 'data' argument"
+#~ msgstr "argument 'data' incorrect"
+
+#~ msgid "invalid argument 'omit'"
+#~ msgstr "argument 'omit' incorrect"
+
+#~ msgid "invalid  'attr(rhs, \"gradient\")'"
+#~ msgstr "'attr(rhs, \"gradient\")' incorrect"
+
+#~ msgid "'formula' missing"
+#~ msgstr "'formula' manquante"
 
 #~ msgid "invalid argument 'n'"
 #~ msgstr "argument 'n' incorrect"
@@ -4690,45 +4686,40 @@ msgstr[1] "utilisation des %d/%d lignes d'un ajustement combiné"
 #~ msgid "invalid argument 'r'"
 #~ msgstr "argument 'r' incorrect"
 
-#~ msgid "invalid 'nb'"
-#~ msgstr "'nb' incorrect"
+#~ msgid "invalid argument 'c'"
+#~ msgstr "argument 'c' incorrect"
 
-#~ msgid "invalid 'x'"
-#~ msgstr "'x' incorrect"
+#~ msgid "invalid 'endrule' argument"
+#~ msgstr "argument 'endrule' incorrect"
 
-#~ msgid "invalid 'y'"
-#~ msgstr "'y' incorrect"
+#~ msgid "invalid 'control.spar'"
+#~ msgstr "'control.spar' incorrect"
 
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ncol(x) incorrect"
+#~ msgid "invalid 'keep.stuff'"
+#~ msgstr "'keep.stuff' incorrect"
 
-#~ msgid "invalid nrow(x)"
-#~ msgstr "nrow(x) incorrect"
+#~ msgid "invalid 'abbr.colnames'"
+#~ msgstr "'abbr.colnames' incorrect"
 
 #~ msgid "Requested conf.level not achievable"
 #~ msgstr "Requête 'conf.level' impossible à atteindre"
 
-#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-#~ msgstr "les colonnes de 'contrast.obj' doivent définir un contraste (somme nulle)"
-
-#~ msgid ","
-#~ msgstr ","
-
-#, fuzzy
-#~ msgid "ignored"
-#~ msgstr "' et ignoré(s)"
-
-#~ msgid "deprecatedWarning"
-#~ msgstr "deprecatedWarning"
-
-#~ msgid "reformulate"
-#~ msgstr "reformulez"
+#~ msgid "medpolish() did not converge in %d iteration"
+#~ msgid_plural "medpolish() did not converge in %d iterations"
+#~ msgstr[0] "medpolish() n'a pas convergé en %d itération"
+#~ msgstr[1] "medpolish() n'a pas convergé en %d itérations"
 
 #~ msgid ".nknots.smspl() is now exported; use it instead of n.knots()"
 #~ msgstr ".nknots.smspl() est maintenant exporté ; utilisez-le à la place de n.knots()"
 
 #~ msgid "package 'MASS' must be installed"
 #~ msgstr "le package 'MASS' doit être installé"
+
+#~ msgid "reformulate"
+#~ msgstr "reformulez"
+
+#~ msgid "deprecatedWarning"
+#~ msgstr "deprecatedWarning"
 
 #~ msgid "link \"%s\" not available for quasipoisson family; available links are %s"
 #~ msgstr "le lien \"%s\" n'est pas disponible pour la famille 'quasipoisson' ; les liens possibles sont %s"

@@ -21,13 +21,11 @@ msgstr "Discordancia en la longitud de los valores de inicio"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
-#, fuzzy
 msgid "extra arguments discarded"
 msgstr "descartados los argumentos extra"
 
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
-#, fuzzy
 msgid "fixed values violate constraints"
 msgstr "Los valores fijados no cumplen con las restricciones"
 
@@ -43,13 +41,11 @@ msgstr "se espera lista con nombres"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
-#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "El perfilador encontró una mejor solución, por lo que el modelo original no había convergido"
 
 #. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
-#, fuzzy
 msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr "algunos valores con nombres no son argumentos para la verosimilitud logarítmica brindada"
 

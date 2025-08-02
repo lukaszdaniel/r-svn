@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:32+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -787,12 +787,12 @@ msgstr ""
 msgid "Invalid font path: \"%s\""
 msgstr "neteisingas 'fonts' parametras, esantis %s"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "nepavyko paskirti šriftų sąrašo"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -801,19 +801,19 @@ msgstr "nepavyko paskirti šriftų sąrašo"
 msgid "invalid '%s' argument"
 msgstr "neteisingas '%s' argumentas"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "netinkamas quartz() įrenginio dydis"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "nepavyko sukurti įrenginio aprašo"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "nepavyko sukurti quartz() paskirties įrenginio, nurodytas tipas gali būti nepalaikomas"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "Šioje platformoje nėra Quartz įrenginio"
 
@@ -1130,28 +1130,12 @@ msgstr "nepavyko priskirti apibrėžimų"
 msgid "Font file not found; matching font family and face"
 msgstr "šrifto šeima nerasta Windows šriftų duomenų bazėje"
 
-#~ msgid "invalid 'file' argument"
-#~ msgstr "neteisingas 'file' argumentas"
-
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "neteisinga 'maxColorValue' reikšmė"
 
 #, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "failo vardas yra per ilgas %s()"
-
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "failo vardas per ilgas jpeg() kreipinyje"
-
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "failo vardas per ilgas tiff() kreipinyje"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "failo vardas yra per ilgas win.metafile() kreipinyje"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "neteisinga '%s' reikšmė"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "xfig() trūksta spalvų"
@@ -1185,8 +1169,17 @@ msgstr "šrifto šeima nerasta Windows šriftų duomenų bazėje"
 #~ msgstr "tuščias failo vardas"
 
 #, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "negalima naudoti koduotės '%s'"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "neteisinga '%s' reikšmė"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "neteisingas 'file' argumentas"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "failo vardas per ilgas jpeg() kreipinyje"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "failo vardas per ilgas tiff() kreipinyje"
 
 #~ msgid "invalid argument"
 #~ msgstr "neteisingas argumentas"

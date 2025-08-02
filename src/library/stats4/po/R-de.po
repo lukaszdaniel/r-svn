@@ -25,13 +25,11 @@ msgstr "Unterschiedliche Längen der Startwerte"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
-#, fuzzy
 msgid "extra arguments discarded"
 msgstr "zusätzliche Argumente verworfen"
 
 #. R/mle.R: stop("fixed values violate constraints")
 #: R/mle.R:0
-#, fuzzy
 msgid "fixed values violate constraints"
 msgstr "fixierte Werte verletzen die Randbedingungen"
 
@@ -47,13 +45,11 @@ msgstr "benannte Liste erwartet"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
-#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "Profiling fand eine bessere Lösung, also hatte der Originalfit nicht konvergiert"
 
 #. R/mle.R: stop("some named values are not arguments to the supplied log-likelihood")
 #: R/mle.R:0
-#, fuzzy
 msgid "some named values are not arguments to the supplied log-likelihood"
 msgstr "einige benannte Werte sind keine Argumente für die angegebene Log-Likelihood"
 

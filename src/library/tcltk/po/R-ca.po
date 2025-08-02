@@ -125,9 +125,8 @@ msgstr "PMF DE L'R"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Save workspace"
-msgstr "No desis l'espai de treball"
+msgstr "Desa l'espai de treball"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
@@ -187,11 +186,3 @@ msgstr "test t"
 #, fuzzy
 msgid "tcltk DLL is linked to"
 msgstr "Tcltk DLL està enllaçat a"
-
-#, fuzzy
-#~ msgid "gettext(\"Save workspace\")"
-#~ msgstr "Desa l'espai de treball"
-
-#, fuzzy
-#~ msgid "message(\"tcltk DLL is linked to \", shQuote(this))"
-#~ msgstr "Tcltk DLL està enllaçat a"

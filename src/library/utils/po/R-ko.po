@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -134,9 +134,8 @@ msgstr "'compressed'는 반드시 논리값 또는 문자이어야 합니다"
 #. R/unix/download.file.R: stop("'curl' call had nonzero exit status")
 #. R/windows/download.file.R: stop("'curl' call had nonzero exit status")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-#, fuzzy
 msgid "'curl' call had nonzero exit status"
-msgstr "다운로드의 종료상태(exit status)가 0이 아닙니다."
+msgstr ""
 
 #. R/packages.R: stop("'destdir' is not a directory")
 #: R/packages.R:0
@@ -342,9 +341,8 @@ msgstr "'url'은 반드시 길이가 1인 문자형 벡터이어야 합니다."
 #. R/unix/download.file.R: stop("'wget' call had nonzero exit status")
 #. R/windows/download.file.R: stop("'wget' call had nonzero exit status")
 #: R/unix/download.file.R:0 R/windows/download.file.R:0
-#, fuzzy
 msgid "'wget' call had nonzero exit status"
-msgstr "다운로드의 종료상태(exit status)가 0이 아닙니다."
+msgstr ""
 
 #. R/packages.R: gettext("--- Please select a CRAN mirror for use in this session ---")
 #: R/packages.R:0
@@ -384,9 +382,8 @@ msgstr "사용가능한 environments가 다음의 호출을 가집니다:"
 
 #. R/debugger.R: gettext("Browsing in the environment with call:\n   ")
 #: R/debugger.R:0
-#, fuzzy
 msgid "Browsing in the environment with call:"
-msgstr "사용가능한 environments가 다음의 호출을 가집니다:"
+msgstr ""
 
 #. R/askYesNo.R: c("Yes", "No", "Cancel")
 #: R/askYesNo.R:0
@@ -462,9 +459,8 @@ msgstr ""
 #. R/unix/mac.install.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
 #. R/windows/install.packages.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-#, fuzzy
 msgid "ERROR: failed to create lock directory %s"
-msgstr "디렉토리 %s를 생성하는데 실패했습니다"
+msgstr ""
 
 #. R/unix/mac.install.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
 #. R/windows/install.packages.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
@@ -483,6 +479,12 @@ msgstr "파일을 편집한 뒤 적절한 디렉토리로 이동시켜주세요.
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr ""
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "환경번호를 입력하시거나, 종료하기 위해서는 0을 입력하세요"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -812,9 +814,8 @@ msgstr ""
 
 #. R/askYesNo.R: stop("Unrecognized response ", dQuote(ans))
 #: R/askYesNo.R:0
-#, fuzzy
 msgid "Unrecognized response"
-msgstr "인식할 수 없는 특수한 데이터 값입니다"
+msgstr ""
 
 #. R/read.DIF.R: stop("Unrecognized special data value")
 #: R/read.DIF.R:0
@@ -823,9 +824,8 @@ msgstr "인식할 수 없는 특수한 데이터 값입니다"
 
 #. R/read.DIF.R: stop("Unrecognized value indicator")
 #: R/read.DIF.R:0
-#, fuzzy
 msgid "Unrecognized value indicator"
-msgstr "인식할 수 없는 특수한 데이터 값입니다"
+msgstr ""
 
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
 #. R/packages2.R: message("Updating HTML index of packages in '.Library'")
@@ -989,9 +989,8 @@ msgstr "사용가능한 이름을 결정할 수 없습니다"
 
 #. R/prompt.R: stop("cannot determine import name")
 #: R/prompt.R:0
-#, fuzzy
 msgid "cannot determine import name"
-msgstr "사용가능한 이름을 결정할 수 없습니다"
+msgstr ""
 
 #. R/edit.R: stop("cannot edit NULL row names")
 #: R/edit.R:0
@@ -2087,10 +2086,9 @@ msgstr "zip 파일 %s를 찾을 수 없습니다"
 
 #. R/Sweave.R: ngettext(length(f), "%d Sweave file for basename %s found", "%d Sweave files for basename %s found",     domain = "R-utils")
 #: R/Sweave.R:0
-#, fuzzy
 msgid "%d Sweave file for basename %s found"
 msgid_plural "%d Sweave files for basename %s found"
-msgstr[0] "%s이라는 이름을 가진 Sweave 파일을 찾을 수 없습니다."
+msgstr[0] ""
 
 #. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
 #: R/modifyList.R:0
@@ -2202,10 +2200,9 @@ msgstr[0] "바이너리 버전을 이용할 수 있습니다 (그리고 설치�
 
 #. R/packages2.R: ngettext(sum(later), "There is a binary version available but the source version is later",     "There are binary versions available but the source versions are later")
 #: R/packages2.R:0
-#, fuzzy
 msgid "There is a binary version available but the source version is later"
 msgid_plural "There are binary versions available but the source versions are later"
-msgstr[0] "바이너리 버전을 이용할 수 있습니다 (그리고 설치되어질 것입니다) 그러나 소스 버전은 추후에 제공될 것입니다"
+msgstr[0] ""
 
 #. R/packages2.R: ngettext(length(added), "also installing the dependency %s",     "also installing the dependencies %s")
 #: R/packages2.R:0
@@ -2233,10 +2230,9 @@ msgstr[0] "소스형태의 패키지 %s(들)를 설치합니다."
 
 #. R/roman.R: ngettext(sum(!ok), "invalid roman numeral: %s", "invalid roman numerals: %s")
 #: R/roman.R:0
-#, fuzzy
 msgid "invalid roman numeral: %s"
 msgid_plural "invalid roman numerals: %s"
-msgstr[0] "%1$s에 대한 값이 올바르지 않습니다: %2$s"
+msgstr[0] ""
 
 #. R/read.fwf.R: ngettext(nread%%recordlength, "last record incomplete, %d line discarded",     "last record incomplete, %d lines discarded")
 #: R/read.fwf.R:0
@@ -2265,10 +2261,9 @@ msgstr[0] "패키지 %s가 사용중이므로 설치되지 않을 것입니다"
 
 #. R/packages2.R: ngettext(sum(base), "package %s is a base package, and should not be updated",     "packages %s are base packages, and should not be updated")
 #: R/packages2.R:0
-#, fuzzy
 msgid "package %s is a base package, and should not be updated"
 msgid_plural "packages %s are base packages, and should not be updated"
-msgstr[0] "패키지 %s가 사용중이므로 설치되지 않을 것입니다"
+msgstr[0] ""
 
 #. R/packages2.R: ngettext(length(na), "package %s is available as a source package but not as a binary",     "packages %s are available as source packages but not as binaries")
 #: R/packages2.R:0
@@ -2289,22 +2284,8 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "패키지 %s(들)이 사용가능하지 않습니다 (그 이유는 %s 입니다)"
 
-#, fuzzy
-#~ msgid "path is empty"
-#~ msgstr "'dump'가 비어있습니다"
-
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "인자 'filter'가 올바르지 않습니다."
-
-#, fuzzy
-#~ msgid "invalid 'type'"
-#~ msgstr "잘못된 쿼리입니다"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "'filters' 인자가 잘못되었습니다"
-
-#~ msgid "invalid %s argument"
-#~ msgstr "%s 인자는 잘못되었습니다"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "'data' 인자가 잘못되었습니다"
@@ -2312,24 +2293,34 @@ msgstr[0] "패키지 %s(들)이 사용가능하지 않습니다 (그 이유는 %
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "'modes' 인자가 잘못되었습니다"
 
+#~ msgid "invalid 'x' argument"
+#~ msgstr "'x' 인자가 잘못되었습니다"
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "'filters' 인자가 잘못되었습니다"
+
+#, fuzzy
+#~ msgid "invalid 'type'"
+#~ msgstr "잘못된 쿼리입니다"
+
 #~ msgid "invalid 'socket' argument"
 #~ msgstr "'socket' 인자가 잘못되었습니다"
 
 #~ msgid "invalid 'tarfile' argument"
 #~ msgstr "'tarfile' 인자가 잘못되었습니다"
 
-#~ msgid "invalid 'x' argument"
-#~ msgstr "'x' 인자가 잘못되었습니다"
-
 #, fuzzy
-#~ msgid "mirror non-interactively"
-#~ msgstr "비대화식으로 저장소드을 설정할 수 없습니다"
+#~ msgid "path is empty"
+#~ msgstr "'dump'가 비어있습니다"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()'는 윈도우즈 전용입니다"
 
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()'은 윈도우즈 전용입니다"
 
-#~ msgid "'memory.size()' is Windows-specific"
-#~ msgstr "'memory.size()'는 윈도우즈 전용입니다"
+#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
+#~ msgstr "%3$s/%4$s/%5$s 대신에 %1$s/%2$s를 사용하는 것이 권장됩니다."
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"
@@ -2338,9 +2329,6 @@ msgstr[0] "패키지 %s(들)이 사용가능하지 않습니다 (그 이유는 %
 #, fuzzy
 #~ msgid "invalid 'type'; must be a character string"
 #~ msgstr "'unzip'은 반드시 단일 문자열이어야 합니다"
-
-#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
-#~ msgstr "%3$s/%4$s/%5$s 대신에 %1$s/%2$s를 사용하는 것이 권장됩니다."
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr "파일 'filelist'이 디렉토리 %s에 빠져있습니다"

@@ -302,9 +302,8 @@ msgstr "Type de police incorrect"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr "Type de police incorrect"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -314,33 +313,28 @@ msgstr "Type de police incorrect"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height"
-msgstr "Type de police incorrect"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr "Type de police incorrect"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "Type de police incorrect"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width"
-msgstr "Type de police incorrect"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr "Type de police incorrect"
+msgstr ""
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -966,14 +960,14 @@ msgstr[1] "noms d'arguments %s incorrects dans '%s'"
 #~ msgid "invalid 'filename'"
 #~ msgstr "argument 'filename' incorrect"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "argument 'file' incorrect"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "argument 'family' incorrect"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "'title' incorrect"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "argument 'family' incorrect"
+#~ msgid "invalid 'file'"
+#~ msgstr "argument 'file' incorrect"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

@@ -158,7 +158,7 @@ msgstr "'%s' は順序因子に対しては無意味です"
 #: R/tapply.R:0
 #, fuzzy
 msgid "'%s' is of length 0"
-msgstr "'by' は長さ 1 でなければなりません"
+msgstr "'to' は長さ 1 でなければなりません"
 
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -204,7 +204,7 @@ msgstr "引数 'object' は空でない単一の文字列でなければなり�
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "引数 'object' は空でない単一の文字列でなければなりません"
+msgstr "'file' は空でない文字列でなければなりません"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
@@ -233,11 +233,11 @@ msgstr "'%s' は論理値でなければなりません"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
-msgstr "'by' は長さ 1 でなければなりません"
+msgstr "'to' は長さ 1 でなければなりません"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
@@ -815,9 +815,8 @@ msgstr "'zero.print' は文字、論理値、または NULL でなければな�
 
 #. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "- done loading %s"
-msgstr "%s を取除きます"
+msgstr ""
 
 #. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
@@ -827,15 +826,13 @@ msgstr "%s を取除きます"
 
 #. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing S4 stuff for %s"
-msgstr "間違ったクラスです"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing imports for %s"
-msgstr "間違ったクラスです"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
 #: R/namespace.R:0
@@ -908,9 +905,8 @@ msgstr "間違ったクラスです"
 
 #. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "--- sealing exports for %s"
-msgstr "間違ったクラスです"
+msgstr ""
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -1129,9 +1125,7 @@ msgstr "因子が指定されていません"
 #. R/namespace.R: gettextf("No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)",     sQuote(g), sQuote(pkg), sQuote(from))
 #: R/namespace.R:0
 msgid "No generic function %s found corresponding to requested imported methods from package %s when loading %s (malformed exports?)"
-msgstr ""
-"%3$s ロード中 \"%1$s\" に対して要求されたインポートされたメソッド (パッケージ \"%2$s\" からの) に対応する総称的関数がありません (不"
-"正確なエクスポート？)"
+msgstr "%3$s ロード中 \"%1$s\" に対して要求されたインポートされたメソッド (パッケージ \"%2$s\" からの) に対応する総称的関数がありません (不正確なエクスポート？)"
 
 #. R/traceback.R: gettext("No traceback available")
 #: R/traceback.R:0
@@ -1445,9 +1439,8 @@ msgstr "バイナリコネクションへしかセーブできません"
 
 #. R/backquote.R: stop("can only splice inside a call", call. = FALSE)
 #: R/backquote.R:0
-#, fuzzy
 msgid "can only splice inside a call"
-msgstr "ベクトルオブジェクトしか書き込めません"
+msgstr ""
 
 #. R/backquote.R: stop("can only splice vectors")
 #: R/backquote.R:0
@@ -1540,9 +1533,8 @@ msgstr "メッセージコネクションを分割できません"
 
 #. R/sort.R: stop("cannot xtfrm 'x'")
 #: R/sort.R:0
-#, fuzzy
 msgid "cannot xtfrm 'x'"
-msgstr "データフレームではありません"
+msgstr ""
 
 #. R/dataframe.R: stop("cannot xtfrm data frames")
 #: R/dataframe.R:0
@@ -1590,9 +1582,8 @@ msgstr "ハンドラーは関数でなければなりません"
 
 #. R/conditions.R: stop("condition handlers must be specified with a condition class")
 #: R/conditions.R:0
-#, fuzzy
 msgid "condition handlers must be specified with a condition class"
-msgstr "ハンドラーは関数でなければなりません"
+msgstr ""
 
 #. R/format.R: warning("corrupt data frame: columns will be truncated or padded with NAs")
 #: R/format.R:0
@@ -1844,8 +1835,9 @@ msgstr "入力は混乱しています。LF が CR で置き換えられてい�
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "無効な 'name' 引数です"
@@ -2859,9 +2851,8 @@ msgstr "%2$s の バージョン %1$s は，%4$s 中の %3$s によってマス�
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr "'to', 'by', 'length.out' かまたは 'along.with' の内丁度二つを指定しなければなりません"
+msgstr ""
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3104,91 +3095,41 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "呼び出されたパッケージがありません"
 
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'INDEX' の長さが 0 です"
-
-#~ msgid "invalid 'digits'"
-#~ msgstr "無効な 'digits' です"
-
 #~ msgid "invalid 'dims'"
 #~ msgstr "無効な 'dims' です"
+
+#, fuzzy
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "無効な 'name' 引数です"
 
 #, fuzzy
 #~ msgid "invalid 'make.names'"
 #~ msgstr "不当なパッケージ名"
 
-#~ msgid "invalid 'value'"
-#~ msgstr "無効な 'value' です"
+#~ msgid ","
+#~ msgstr ","
 
-#, fuzzy
-#~ msgid "invalid 'x'"
-#~ msgstr "無効な 'dims' です"
+#~ msgid "invalid string for 'by'"
+#~ msgstr "'by' に対する無効な文字列です"
 
-#~ msgid "invalid ncol(qr$qr)"
-#~ msgstr "ncol(qr$qr) が不正です"
-
-#~ msgid "invalid ncol(qr$rank)"
-#~ msgstr "ncol(qr$rank) が不正です"
-
-#~ msgid "invalid ncol(y)"
-#~ msgstr "ncol(y) が不正です"
-
-#~ msgid "invalid nrow(qr$qr)"
-#~ msgstr "nrow(qr$qr) が不正です"
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "単項演算 '-' は \"POSIXt\" オブジェクトに対しては定義されていません"
 
 #~ msgid "invalid nrow(x)"
 #~ msgstr "nrow(x) が不正です"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "無効な 'path' 引数です"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "無効な 'time' 引数です"
 
 #, fuzzy
 #~ msgid "invalid nrow(z)"
 #~ msgstr "nrow(x) が不正です"
 
-#~ msgid "'by' must match numbers of columns"
-#~ msgstr "'by' は列数にマッチしなければなりません"
-
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'stderr' は長さ 1 でなければなりません"
-
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'stdout' は長さ 1 でなければなりません"
-
 #~ msgid "shared object '%s' not found"
 #~ msgstr "共有オブジェクト '%s' を見付けることができません"
-
-#~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr' は TRUE か FALSE でなければなりません"
-
-#~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr' は TRUE か FALSE でなければなりません"
-
-#~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "'intern' は TRUE か FALSE でなければなりません"
-
-#~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "'invisible' は TRUE か FALSE でなければなりません"
-
-#~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "'minimiized' は TRUE か FALSE でなければなりません"
-
-#, fuzzy
-#~ msgid "'receive.console.signals' must be TRUE or FALSE"
-#~ msgstr "'intern' は TRUE か FALSE でなければなりません"
-
-#~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "'show.output.on.console' は TRUE か FALSE でなければなりません"
-
-#, fuzzy
-#~ msgid "invalid '(to - from)/by'"
-#~ msgstr "seq(.) 中の (to - from)/by が不正です"
-
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "NCOL(R) が不正です"
-
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "NCOL(y) が不正です"
-
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ncol(x) が不正です"
 
 #~ msgid "bad 'file' argument"
 #~ msgstr "誤った 'file' 引数です"
@@ -3199,71 +3140,121 @@ msgstr[0] "呼び出されたパッケージがありません"
 #~ msgid "invalid 'category' argument"
 #~ msgstr "無効な 'category' 引数です"
 
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "'by' は列数にマッチしなければなりません"
+
 #, fuzzy
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "無効な 'name' 引数です"
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "パッケージ %s を使うにはライセンスを確認して受諾する必要があります"
 
-#~ msgid "invalid 'path' argument"
-#~ msgstr "無効な 'path' 引数です"
+#, fuzzy
+#~ msgid "according to the DESCRIPTION file it is"
+#~ msgstr "パッケージ %s を使うにはライセンスを受諾する必要があります。以下をご確認ください。:"
 
-#~ msgid "invalid 'time' argument"
-#~ msgstr "無効な 'time' 引数です"
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) が不正です"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "nrow(qr$qr) が不正です"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "ncol(qr$qr) が不正です"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "ncol(qr$rank) が不正です"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "ncol(y) が不正です"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "NCOL(y) が不正です"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "NCOL(R) が不正です"
+
+#, fuzzy
+#~ msgid "invalid 'x'"
+#~ msgstr "無効な 'dims' です"
+
+#, fuzzy
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "seq(.) 中の (to - from)/by が不正です"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX' の長さが 0 です"
 
 #, fuzzy
 #~ msgid "invalid 'which' argument"
 #~ msgstr "無効な 'path' 引数です"
 
-#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
-#~ msgstr "単項演算 '-' は \"POSIXt\" オブジェクトに対しては定義されていません"
+#~ msgid "invalid 'digits'"
+#~ msgstr "無効な 'digits' です"
 
-#~ msgid "invalid string for 'by'"
-#~ msgstr "'by' に対する無効な文字列です"
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "'intern' は TRUE か FALSE でなければなりません"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr' は TRUE か FALSE でなければなりません"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr' は TRUE か FALSE でなければなりません"
 
 #, fuzzy
-#~ msgid "connections left open:"
-#~ msgstr "'connection' はコネクションでなければなりません"
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "'intern' は TRUE か FALSE でなければなりません"
 
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg' は長さ 1 でなければなりません"
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout' は長さ 1 でなければなりません"
 
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from' は \"Date\" オブジェクトでなければなりません"
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr' は長さ 1 でなければなりません"
 
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from' は \"POSIXt\" オブジェクトでなければなりません"
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "'show.output.on.console' は TRUE か FALSE でなければなりません"
 
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from' は長さ 1 でなければなりません"
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "'minimiized' は TRUE か FALSE でなければなりません"
 
-#~ msgid "'from' must be specified"
-#~ msgstr "'from' を指定しなければなりません"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out' は長さ 1 でなければなりません"
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "'invisible' は TRUE か FALSE でなければなりません"
 
 #, fuzzy
 #~ msgid "'name' must be a single character string"
 #~ msgstr "引数 'object' は空でない単一の文字列でなければなりません"
 
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'package' は長さ 1 でなければなりません"
+#~ msgid "'from' must be specified"
+#~ msgstr "'from' を指定しなければなりません"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' は \"Date\" オブジェクトでなければなりません"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' は長さ 1 でなければなりません"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' は長さ 1 でなければなりません"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "'by' は長さ 1 でなければなりません"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' は \"POSIXt\" オブジェクトでなければなりません"
 
 #~ msgid "'to' must be a \"POSIXt\" object"
 #~ msgstr "'to' は \"POSIXt\" のオブジェクトでなければなりません"
 
-#~ msgid "'to' must be of length 1"
-#~ msgstr "'to' は長さ 1 でなければなりません"
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' は長さ 1 でなければなりません"
 
-#, fuzzy
-#~ msgid "'which' must be of length 1"
-#~ msgstr "'to' は長さ 1 でなければなりません"
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' は長さ 1 でなければなりません"
 
 #~ msgid "argument 'length.out' must be of length 1"
 #~ msgstr "引数 'length.out' は長さ 1 でなければなりません"
 
 #, fuzzy
-#~ msgid "'%s' must be a non-empty string"
-#~ msgstr "'file' は空でない文字列でなければなりません"
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'to' は長さ 1 でなければなりません"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' は長さ 1 の文字列でなければなりません"
@@ -3271,17 +3262,6 @@ msgstr[0] "呼び出されたパッケージがありません"
 #, fuzzy
 #~ msgid "'sample.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' は長さ 1 の文字列でなければなりません"
-
-#, fuzzy
-#~ msgid "according to the DESCRIPTION file it is"
-#~ msgstr "パッケージ %s を使うにはライセンスを受諾する必要があります。以下をご確認ください。:"
-
-#, fuzzy
-#~ msgid "package %s has a license that you need to accept:"
-#~ msgstr "パッケージ %s を使うにはライセンスを確認して受諾する必要があります"
-
-#~ msgid ","
-#~ msgstr ","
 
 #, fuzzy
 #~ msgid "'flag' must be a string, i.e., of length 1"

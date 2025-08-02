@@ -200,9 +200,8 @@ msgstr "'side' muss in {1:4} liegen"
 
 #. R/legend.R: stop("'text.width' must be numeric, >= 0, or a scalar NA")
 #: R/legend.R:0
-#, fuzzy
 msgid "'text.width' must be numeric, >= 0, or a scalar NA"
-msgstr "'text.width' muss numerisch >= 0 sein"
+msgstr "'text.width' muss numerisch >= 0  oder ein Skalar sein"
 
 #. R/matplot.R: stop("'x' and 'y' must have only 1 or the same number of columns")
 #: R/matplot.R:0
@@ -767,7 +766,7 @@ msgstr "unsortierte 'breaks' werden vor der Nutzung sortiert"
 #. R/spineplot.R: stop("weights are not supported for 2-way table specification")
 #: R/spineplot.R:0
 msgid "weights are not supported for 2-way table specification"
-msgstr ""
+msgstr "Gewichte werden für die 2-Wege-Tafel Spezifikation nicht unterstützt"
 
 #. R/datetime.R: stop("wrong method")
 #: R/datetime.R:0
@@ -819,17 +818,17 @@ msgstr[1] "Argumente (%s) werden nicht benutzt"
 #~ msgid "invalid 'axp'"
 #~ msgstr "ungültiger Wert für 'axp'"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "ungültige 'given.values'"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "ungültiger Wert für 'axp'"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "unzulässiger 'title'"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "ungültiger Wert für 'usr'"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "ungültige 'given.values'"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "unzulässiger 'title'"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

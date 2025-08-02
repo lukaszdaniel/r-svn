@@ -938,17 +938,20 @@ msgid_plural "invalid viewport names"
 msgstr[0] "invalid viewport name"
 msgstr[1] "invalid viewport names"
 
-#~ msgid "invalid 'clip' value"
-#~ msgstr "invalid 'clip' value"
-
 #~ msgid "invalid 'frame'"
 #~ msgstr "invalid 'frame'"
 
-#~ msgid "invalid 'gp' value"
-#~ msgstr "invalid 'gp' value"
-
 #~ msgid "invalid 'grob'"
 #~ msgstr "invalid 'grob'"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "invalid 'result'"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "invalid 'print' argument"
+
+#~ msgid "invalid listing"
+#~ msgstr "invalid listing"
 
 #~ msgid "invalid 'listing'"
 #~ msgstr "invalid 'listing'"
@@ -956,8 +959,8 @@ msgstr[1] "invalid viewport names"
 #~ msgid "invalid 'origin'"
 #~ msgstr "invalid 'origin'"
 
-#~ msgid "invalid 'result'"
-#~ msgstr "invalid 'result'"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "invalid 'arrow' argument"
 
 #~ msgid "invalid 'rot' value"
 #~ msgstr "invalid 'rot' value"
@@ -965,11 +968,8 @@ msgstr[1] "invalid viewport names"
 #~ msgid "invalid 'theta'"
 #~ msgstr "invalid 'theta'"
 
-#~ msgid "invalid listing"
-#~ msgstr "invalid listing"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "invalid 'gp' value"
 
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "invalid 'arrow' argument"
-
-#~ msgid "invalid 'print' argument"
-#~ msgstr "invalid 'print' argument"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "invalid 'clip' value"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:16+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 14:58+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -171,8 +171,8 @@ msgstr "feil ved vising av «%ls»"
 #: src/main/connections.cpp:5368 src/main/connections.cpp:5394
 #: src/main/connections.cpp:5553 src/main/connections.cpp:5851
 #: src/main/connections.cpp:5900 src/main/connections.cpp:5908
-#: src/main/connections.cpp:6759 src/main/connections.cpp:6786
-#: src/main/connections.cpp:6793 src/main/context.cpp:696
+#: src/main/connections.cpp:6773 src/main/connections.cpp:6800
+#: src/main/connections.cpp:6807 src/main/context.cpp:696
 #: src/main/context.cpp:705 src/main/context.cpp:709 src/main/datetime.cpp:1269
 #: src/main/datetime.cpp:1493 src/main/datetime.cpp:1495 src/main/debug.cpp:282
 #: src/main/deparse.cpp:463 src/main/dotcode.cpp:506 src/main/dotcode.cpp:510
@@ -191,7 +191,7 @@ msgstr "feil ved vising av «%ls»"
 #: src/main/grep.cpp:2978 src/main/grep.cpp:3316 src/main/grep.cpp:3321
 #: src/main/internet.cpp:155 src/main/internet.cpp:169
 #: src/main/internet.cpp:194 src/main/internet.cpp:207
-#: src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4584
+#: src/main/internet.cpp:219 src/main/internet.cpp:239 src/main/memory.cpp:4592
 #: src/main/objects.cpp:1803 src/main/objects.cpp:1805 src/main/paste.cpp:152
 #: src/main/paste.cpp:496 src/main/paste.cpp:501 src/main/paste.cpp:506
 #: src/main/paste.cpp:512 src/main/paste.cpp:521 src/main/paste.cpp:526
@@ -255,7 +255,7 @@ msgstr "denne Windows-versjonen er ikkje støtta"
 #: src/gnuwin32/extra.cpp:341
 #, fuzzy, c-format
 msgid "cannot resolve current user or domain: '%s'"
-msgstr "klarte ikkje opna fila «%s»: %s"
+msgstr "kan ikkje fjerna fila «%s», av grunnen «%s»"
 
 #: src/gnuwin32/extra.cpp:762 src/gnuwin32/extra.cpp:879
 #: src/main/sysutils.cpp:690 src/main/unique.cpp:2209 src/main/util.cpp:1088
@@ -479,7 +479,7 @@ msgstr "klarte ikkje lagra «tmpfile». Prøv å definera «TMPDIR»."
 #: src/gnuwin32/system.cpp:1331
 #, fuzzy
 msgid "fwrite error in cmdlineoptions"
-msgstr "skrivefeil ved utpakking av zip-fil"
+msgstr "feil ved skriving til gzcon-samband"
 
 #: src/gnuwin32/system.cpp:1353 src/unix/system.cpp:552
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
@@ -644,7 +644,7 @@ msgstr ""
 #: src/include/Rinlinedfuns.h:116
 #, fuzzy, c-format
 msgid "cannot get data pointer of '%s' objects"
-msgstr "kan ikkje oppretta mappa «%s», av grunnen «%s»"
+msgstr "klarte ikkje lagra data – klarte ikkje opna «%s»: %s"
 
 #: src/include/Rinlinedfuns.h:159 src/include/Rinlinedfuns.h:163
 #: src/include/Rinlinedfuns.h:166 src/include/Rinlinedfuns.h:169
@@ -778,7 +778,7 @@ msgstr ""
 #: src/main/altclasses.cpp:1282
 #, fuzzy
 msgid "mmap objects not supported on Windows yet"
-msgstr "typen «%s» er ikkje støtta"
+msgstr "menyen finst ikkje"
 
 #: src/main/altclasses.cpp:1329
 #, fuzzy, c-format
@@ -1426,7 +1426,7 @@ msgstr "vektorstorleiken kan ikkje vera NA/NaN"
 msgid "vector size cannot be infinite"
 msgstr "vektorstorleiken kan ikkje vera uendeleg"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:957
+#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/builtin.cpp:963
 #: src/main/sort.cpp:1578
 msgid "vector size specified is too large"
 msgstr "den oppgjevne vektorstorleiken er for stor"
@@ -1471,7 +1471,7 @@ msgid "'%s' must be an environment"
 msgstr "«enclos» må vera ein omgjevnad"
 
 #: src/main/builtin.cpp:374 src/main/builtin.cpp:407 src/main/builtin.cpp:421
-#: src/main/memory.cpp:4387
+#: src/main/memory.cpp:4395
 #, fuzzy, c-format
 msgid "'%s' is not an environment"
 msgstr "«parent» er ikkje ein omgjevnad"
@@ -1540,45 +1540,45 @@ msgstr "ugyldig verdi"
 msgid "length of NULL cannot be changed"
 msgstr ""
 
-#: src/main/builtin.cpp:953 src/main/envir.cpp:2220 src/main/envir.cpp:2228
+#: src/main/builtin.cpp:959 src/main/envir.cpp:2220 src/main/envir.cpp:2228
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "feil lengd på «%s»-argumentet"
 
-#: src/main/builtin.cpp:983 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846
+#: src/main/builtin.cpp:989 src/main/coerce.cpp:2803 src/main/coerce.cpp:2846
 #: src/main/eval.cpp:1067 src/main/eval.cpp:1230 src/main/eval.cpp:3696
 #: src/main/eval.cpp:3779 src/main/eval.cpp:3846 src/main/eval.cpp:4192
 #: src/main/eval.cpp:7934 src/main/eval.cpp:8077
 msgid "'...' used in an incorrect context"
 msgstr "«...» brukt i feil samanheng"
 
-#: src/main/builtin.cpp:1005
+#: src/main/builtin.cpp:1011
 #, fuzzy, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "duplikat standardverdi i «switch»: «%s» og «%s»"
 
-#: src/main/builtin.cpp:1038 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564
+#: src/main/builtin.cpp:1044 src/main/coerce.cpp:2688 src/main/dotcode.cpp:564
 #: src/main/dotcode.cpp:1426 src/main/dotcode.cpp:1678 src/main/eval.cpp:3714
 #, c-format
 msgid "'%s' is missing"
 msgstr "«%s» manglar"
 
-#: src/main/builtin.cpp:1042 src/main/eval.cpp:8494
+#: src/main/builtin.cpp:1048 src/main/eval.cpp:8494
 msgid "EXPR must be a length 1 vector"
 msgstr "«EXPR» må vera ein vektor av lengd 1"
 
-#: src/main/builtin.cpp:1045 src/main/eval.cpp:8497
+#: src/main/builtin.cpp:1051 src/main/eval.cpp:8497
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
 " Consider using '%s' instead."
 msgstr ""
 
-#: src/main/builtin.cpp:1092
+#: src/main/builtin.cpp:1098
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1101 src/main/eval.cpp:8506 src/main/eval.cpp:8534
+#: src/main/builtin.cpp:1107 src/main/eval.cpp:8506 src/main/eval.cpp:8534
 msgid "'switch' with no alternatives"
 msgstr ""
 
@@ -2082,6 +2082,7 @@ msgstr "ikkje-støtta omgjering frå «%s» til «%s»"
 #: src/main/connections.cpp:374 src/main/connections.cpp:4624
 #: src/main/connections.cpp:4749 src/main/connections.cpp:4836
 #: src/main/connections.cpp:4865 src/main/connections.cpp:4898
+#: src/main/connections.cpp:6130 src/main/connections.cpp:6166
 #, fuzzy
 msgid "error reading from the connection"
 msgstr "feil ved lesing frå samband"
@@ -2116,7 +2117,7 @@ msgstr "klarte ikkje opna fila «%s»: %s"
 #: src/main/connections.cpp:916
 #, fuzzy
 msgid "'fdopen' is not supported on this platform"
-msgstr "«dirmark = TRUE» er ikkje støtta på denne plattforma"
+msgstr "nsl() er ikkje støtta på denne plattforma"
 
 #: src/main/connections.cpp:927 src/main/connections.cpp:1875
 #: src/main/connections.cpp:2027 src/main/connections.cpp:2232
@@ -2175,8 +2176,8 @@ msgstr "klarte ikkje opna fifo-en «%s»"
 #: src/main/connections.cpp:1941 src/main/connections.cpp:1951
 #: src/main/connections.cpp:2081 src/main/connections.cpp:2150
 #: src/main/connections.cpp:3031 src/main/connections.cpp:3047
-#: src/main/connections.cpp:3372 src/main/connections.cpp:6284
-#: src/main/connections.cpp:6348
+#: src/main/connections.cpp:3372 src/main/connections.cpp:6292
+#: src/main/connections.cpp:6362
 msgid "too large a block specified"
 msgstr "for stor blokk oppgjeven"
 
@@ -2289,13 +2290,13 @@ msgstr "fila «%s» ser ikkje ut til å vera komprimert med bzip2"
 msgid "allocation of bzfile connection failed"
 msgstr "feil ved reservering av bzfile-samband"
 
-#: src/main/connections.cpp:2244 src/main/connections.cpp:7231
+#: src/main/connections.cpp:2244 src/main/connections.cpp:7245
 #, c-format
 msgid "cannot initialize lzma decoder, error %d"
 msgstr "klarte ikkje starta lzma-dekodaren (feil %d)"
 
-#: src/main/connections.cpp:2253 src/main/connections.cpp:6810
-#: src/main/connections.cpp:7021
+#: src/main/connections.cpp:2253 src/main/connections.cpp:6824
+#: src/main/connections.cpp:7035
 #, fuzzy
 msgid "problem setting presets"
 msgstr "feil ved setjing av tidssone"
@@ -2367,8 +2368,8 @@ msgstr "regcomp-feil: «%s»"
 msgid "allocation of zstdfile connection failed"
 msgstr "feil ved reservering av gzfile-samband"
 
-#: src/main/connections.cpp:2691 src/main/connections.cpp:6912
-#: src/main/connections.cpp:7061 src/main/connections.cpp:7293
+#: src/main/connections.cpp:2691 src/main/connections.cpp:6926
+#: src/main/connections.cpp:7075 src/main/connections.cpp:7307
 msgid "Zstd compression support was not included in this R binary."
 msgstr ""
 
@@ -2481,7 +2482,7 @@ msgstr "feil ved reservering av tekstsamband"
 #: src/main/connections.cpp:3764
 #, fuzzy
 msgid "last line is too long"
-msgstr "zip-adressa er for lang"
+msgstr "formateringsteksten er for lang"
 
 #: src/main/connections.cpp:3770
 #, fuzzy
@@ -2504,7 +2505,7 @@ msgstr "«con» er ikkje ein ut-«textConnection»"
 #: src/main/connections.cpp:4155 src/main/connections.cpp:4234
 #: src/main/connections.cpp:4264 src/main/connections.cpp:4286
 #: src/main/connections.cpp:4298 src/main/connections.cpp:4417
-#: src/main/connections.cpp:4544 src/main/connections.cpp:6388
+#: src/main/connections.cpp:4544 src/main/connections.cpp:6402
 msgid "'con' is not a connection"
 msgstr "«con» er ikkje eit samband"
 
@@ -2782,125 +2783,125 @@ msgstr ""
 msgid "URL scheme unsupported by this method"
 msgstr "ICU er ikkje støtte på dette bygget"
 
-#: src/main/connections.cpp:6152
+#: src/main/connections.cpp:6169
 msgid "file stream does not have gzip magic number"
 msgstr "filstraumen har ikkje det magiske talet til gzip"
 
-#: src/main/connections.cpp:6163
+#: src/main/connections.cpp:6186
 msgid "file stream does not have valid gzip header"
 msgstr "filstraumen har ikkje eit gyldig gzip-hovud"
 
-#: src/main/connections.cpp:6228
+#: src/main/connections.cpp:6252
 msgid "writing error whilst flushing 'gzcon' connection"
 msgstr "feil ved tømming av gzon-samband"
 
-#: src/main/connections.cpp:6330
+#: src/main/connections.cpp:6344
 #, fuzzy, c-format
 msgid "crc error %lx %lx\n"
 msgstr "CRC-feil %lx %lx\n"
 
-#: src/main/connections.cpp:6357
+#: src/main/connections.cpp:6371
 msgid "write error on 'gzcon' connection"
 msgstr "feil ved skriving til gzcon-samband"
 
-#: src/main/connections.cpp:6392
+#: src/main/connections.cpp:6406
 msgid "'level' must be one of 0 ... 9"
 msgstr "«level» må vera éin av 0, 1, ..., 9"
 
-#: src/main/connections.cpp:6397
+#: src/main/connections.cpp:6411
 #, fuzzy
 msgid "this is already a 'gzcon' connection"
 msgstr "dette er alt eit gzcon-samband"
 
-#: src/main/connections.cpp:6403
+#: src/main/connections.cpp:6417
 msgid "can only use read- or write- binary connections"
 msgstr "kan berre bruka lese- eller skrive-binærsamband"
 
-#: src/main/connections.cpp:6406
+#: src/main/connections.cpp:6420
 msgid "using a text-mode 'file' connection may not work correctly"
 msgstr "bruk av tekstmodus-«file»-samband vil kanskje ikkje fungera skikkeleg"
 
-#: src/main/connections.cpp:6409
+#: src/main/connections.cpp:6423
 #, fuzzy
 msgid "cannot create a 'gzcon' connection from a writable textConnection; maybe use rawConnection"
 msgstr "kan ikkje oppretta eit gzcon-samband frå ein skrivar «textConnection» (du kan prøva å bruka «rawConnection»)"
 
-#: src/main/connections.cpp:6412 src/main/connections.cpp:6416
-#: src/main/connections.cpp:6424 src/main/connections.cpp:6439
+#: src/main/connections.cpp:6426 src/main/connections.cpp:6430
+#: src/main/connections.cpp:6438 src/main/connections.cpp:6453
 msgid "allocation of 'gzcon' connection failed"
 msgstr "feil ved reservering av gzcon-samband"
 
-#: src/main/connections.cpp:6494 src/main/connections.cpp:6560
+#: src/main/connections.cpp:6508 src/main/connections.cpp:6574
 #, fuzzy
 msgid "R_compress1 requires a raw vector"
 msgstr "«%s» tek berre ein teiknvektor"
 
-#: src/main/connections.cpp:6500 src/main/connections.cpp:6531
-#: src/main/connections.cpp:6967 src/main/connections.cpp:7116
+#: src/main/connections.cpp:6514 src/main/connections.cpp:6545
+#: src/main/connections.cpp:6981 src/main/connections.cpp:7130
 #, fuzzy, c-format
 msgid "allocation error in '%s' with libdeflate"
 msgstr "minnereserveringsfeil i realpr"
 
-#: src/main/connections.cpp:6513
+#: src/main/connections.cpp:6527
 msgid "internal libdeflate error in R_compress1 with libdeflate"
 msgstr ""
 
-#: src/main/connections.cpp:6523 src/main/connections.cpp:6581
+#: src/main/connections.cpp:6537 src/main/connections.cpp:6595
 #, fuzzy
 msgid "R_decompress1 requires a raw vector"
 msgstr "«%s» tek berre ein teiknvektor"
 
-#: src/main/connections.cpp:6544
+#: src/main/connections.cpp:6558
 #, fuzzy, c-format
 msgid "internal error %d in '%s' with libdeflate"
-msgstr "intern feil ved bruk av rekursiv indeksering"
+msgstr "intern feil i «do_sys»"
 
-#: src/main/connections.cpp:6570 src/main/connections.cpp:6591
-#: src/main/connections.cpp:6623 src/main/connections.cpp:6655
-#: src/main/connections.cpp:6664 src/main/connections.cpp:6842
-#: src/main/connections.cpp:6849 src/main/connections.cpp:6883
-#: src/main/connections.cpp:6920 src/main/connections.cpp:6928
-#: src/main/connections.cpp:6988 src/main/connections.cpp:7004
-#: src/main/connections.cpp:7027 src/main/connections.cpp:7037
-#: src/main/connections.cpp:7138 src/main/connections.cpp:7152
-#: src/main/connections.cpp:7181 src/main/connections.cpp:7208
-#: src/main/connections.cpp:7282
+#: src/main/connections.cpp:6584 src/main/connections.cpp:6605
+#: src/main/connections.cpp:6637 src/main/connections.cpp:6669
+#: src/main/connections.cpp:6678 src/main/connections.cpp:6856
+#: src/main/connections.cpp:6863 src/main/connections.cpp:6897
+#: src/main/connections.cpp:6934 src/main/connections.cpp:6942
+#: src/main/connections.cpp:7002 src/main/connections.cpp:7018
+#: src/main/connections.cpp:7041 src/main/connections.cpp:7051
+#: src/main/connections.cpp:7152 src/main/connections.cpp:7166
+#: src/main/connections.cpp:7195 src/main/connections.cpp:7222
+#: src/main/connections.cpp:7296
 #, fuzzy, c-format
 msgid "internal error %d in '%s'"
 msgstr "intern feil i «do_sys»"
 
-#: src/main/connections.cpp:6613
+#: src/main/connections.cpp:6627
 #, fuzzy
 msgid "R_compress2 requires a raw vector"
 msgstr "«%s» tek berre ein teiknvektor"
 
-#: src/main/connections.cpp:6647
+#: src/main/connections.cpp:6661
 #, fuzzy
 msgid "R_decompress2 requires a raw vector"
 msgstr "«%s» tek berre ein teiknvektor"
 
-#: src/main/connections.cpp:6671
+#: src/main/connections.cpp:6685
 msgid "unknown type in R_decompress2"
 msgstr ""
 
-#: src/main/connections.cpp:6701
+#: src/main/connections.cpp:6715
 msgid "not a list of sockets"
 msgstr "ikkje ei liste over soklar"
 
-#: src/main/connections.cpp:6706
+#: src/main/connections.cpp:6720
 msgid "bad write indicators"
 msgstr "ugyldig skriveindikatorar"
 
-#: src/main/connections.cpp:6728
+#: src/main/connections.cpp:6742
 #, fuzzy
 msgid "a server socket connection cannot be writeable"
 msgstr "kan ikkje lasta sokkelrutinar"
 
-#: src/main/connections.cpp:6730
+#: src/main/connections.cpp:6744
 msgid "not a socket connection"
 msgstr "ikkje eit sokkelsamband"
 
-#: src/main/connections.cpp:6733 src/modules/internet/libcurl.cpp:702
+#: src/main/connections.cpp:6747 src/modules/internet/libcurl.cpp:702
 #: src/modules/internet/sockconn.cpp:59 src/modules/internet/sockconn.cpp:90
 #: src/modules/internet/sockconn.cpp:291 src/unix/sys-std.cpp:139
 #: src/unix/sys-std.cpp:251 src/unix/sys-std.cpp:406
@@ -2908,65 +2909,65 @@ msgstr "ikkje eit sokkelsamband"
 msgid "file descriptor is too large for select()"
 msgstr "lengda %d er for lang for hashing"
 
-#: src/main/connections.cpp:6739 src/modules/internet/libcurl.cpp:886
+#: src/main/connections.cpp:6753 src/modules/internet/libcurl.cpp:886
 msgid "too many file descriptors for select()"
 msgstr ""
 
-#: src/main/connections.cpp:6832
+#: src/main/connections.cpp:6846
 #, fuzzy
 msgid "R_compress3 requires a raw vector"
 msgstr "«%s» tek berre ein teiknvektor"
 
-#: src/main/connections.cpp:6872
+#: src/main/connections.cpp:6886
 #, fuzzy
 msgid "R_decompress3 requires a raw vector"
 msgstr "«%s» tek berre ein teiknvektor"
 
-#: src/main/connections.cpp:6893
+#: src/main/connections.cpp:6907
 #, fuzzy, c-format
 msgid "internal error %d in R_decompress3 %llu"
 msgstr "intern feil i do_random3"
 
-#: src/main/connections.cpp:6907
+#: src/main/connections.cpp:6921
 #, fuzzy
 msgid "internal error in zstd R_decompress3"
 msgstr "intern feil i do_random3"
 
-#: src/main/connections.cpp:6935
+#: src/main/connections.cpp:6949
 msgid "unknown type in R_decompress3"
 msgstr ""
 
-#: src/main/connections.cpp:6956
+#: src/main/connections.cpp:6970
 #, fuzzy
 msgid "'from' must be raw or character"
 msgstr "«norm» må vera ein teiknstreng"
 
-#: src/main/connections.cpp:6975
+#: src/main/connections.cpp:6989
 #, fuzzy
 msgid "internal libdeflate error in memCompress"
-msgstr "intern feil i do_random1"
+msgstr "intern feil i «do_sys»"
 
-#: src/main/connections.cpp:7055
+#: src/main/connections.cpp:7069
 #, fuzzy, c-format
 msgid "internal libzstd error (%s) in memCompress"
 msgstr "intern feil i «do_sys»"
 
-#: src/main/connections.cpp:7101
+#: src/main/connections.cpp:7115
 msgid "unknown compression, assuming none"
 msgstr "ukjend komprimering – antek ukomprimerte data"
 
-#: src/main/connections.cpp:7256
+#: src/main/connections.cpp:7270
 #, fuzzy, c-format
 msgid "internal error %d in memDecompress(%s) at %llu"
 msgstr "internfeil («op = %d» i do_summary).\t Ta kontakt med ein Guru."
 
-#: src/main/connections.cpp:7286
+#: src/main/connections.cpp:7300
 #, fuzzy, c-format
 msgid "internal error in memDecompress(%s)"
 msgstr "intern feil i «do_sys»"
 
-#: src/main/connections.cpp:7320 src/main/connections.cpp:7324
-#: src/main/connections.cpp:7331
+#: src/main/connections.cpp:7334 src/main/connections.cpp:7338
+#: src/main/connections.cpp:7345
 #, fuzzy, c-format
 msgid "allocation of %s connection failed"
 msgstr "feil ved reservering av råsamband"
@@ -3799,7 +3800,7 @@ msgstr ""
 #: src/main/engine.cpp:3904 src/main/engine.cpp:3922 src/main/engine.cpp:3939
 #, fuzzy
 msgid "Index out of bounds"
-msgstr "indeksen ligg utanfor grensene"
+msgstr "indeksen %d ligg utanfor gyldig verdiområde"
 
 #: src/main/envir.cpp:155 src/main/envir.cpp:169
 #, c-format
@@ -4112,7 +4113,7 @@ msgstr "ugyldig(e) delstreng-argument"
 #: src/main/envir.cpp:4101 src/main/envir.cpp:4103
 #, fuzzy, c-format
 msgid "invalid string %s"
-msgstr " [ugyldig streng i stop(.)]"
+msgstr "ugyldig UTF-8-streng: «old»"
 
 #: src/main/envir.cpp:4115
 #, c-format
@@ -5240,9 +5241,8 @@ msgid "maxlen must be non-negative"
 msgstr "«gap» må vera eit heiltal større enn null"
 
 #: src/main/internet.cpp:184
-#, fuzzy
 msgid "Error reading data in Rsockread"
-msgstr "CRC-feil i zip-fil"
+msgstr ""
 
 #: src/main/internet.cpp:196
 #, fuzzy
@@ -5490,304 +5490,304 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-#: src/main/memory.cpp:840
+#: src/main/memory.cpp:846
 #, fuzzy
 msgid "vector memory exhausted"
 msgstr "ikkje nok vektorminne (nådde grensa?)"
 
-#: src/main/memory.cpp:853
+#: src/main/memory.cpp:859
 #, c-format
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
-#: src/main/memory.cpp:864
+#: src/main/memory.cpp:870
 #, fuzzy
 msgid "untraced old-to-new reference\n"
 msgstr "ikkje ein svak referanse"
 
-#: src/main/memory.cpp:887 src/main/memory.cpp:895
+#: src/main/memory.cpp:893 src/main/memory.cpp:901
 msgid "Inconsistent node generation\n"
 msgstr ""
 
-#: src/main/memory.cpp:1141
+#: src/main/memory.cpp:1147
 msgid "can only weakly reference/finalize reference objects"
 msgstr "kan berre svakt referera/finalisera referanseobjekt"
 
-#: src/main/memory.cpp:1173
+#: src/main/memory.cpp:1179
 msgid "finalizer must be a function or NULL"
 msgstr "finalisatoren må vera ein funksjon eller NULL"
 
-#: src/main/memory.cpp:1227 src/main/memory.cpp:1234 src/main/memory.cpp:1244
+#: src/main/memory.cpp:1233 src/main/memory.cpp:1240 src/main/memory.cpp:1250
 msgid "not a weak reference"
 msgstr "ikkje ein svak referanse"
 
-#: src/main/memory.cpp:1386
+#: src/main/memory.cpp:1392
 msgid "first argument must be environment or external pointer"
 msgstr "det første argumentet må vera ein omgjevnad eller ein ekstern peikar"
 
-#: src/main/memory.cpp:1388
+#: src/main/memory.cpp:1394
 msgid "second argument must be a function"
 msgstr "det andre argumentet må vera ein funksjon"
 
-#: src/main/memory.cpp:1874 src/main/memory.cpp:1981
+#: src/main/memory.cpp:1881 src/main/memory.cpp:1989
 #, fuzzy, c-format
 msgid "unexpected type %d in %s"
 msgstr "ikkje-implementert type (%d) i «%s»\n"
 
-#: src/main/memory.cpp:2368
+#: src/main/memory.cpp:2376
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.f %s"
 msgstr "klarte ikkje reservera minneblokk av storleik %0.1f Gb"
 
-#: src/main/memory.cpp:2372
+#: src/main/memory.cpp:2380
 #, fuzzy, c-format
 msgid "cannot allocate memory block of size %0.1f %s"
 msgstr "klarte ikkje reservera minneblokk av storleik %0.1f Gb"
 
-#: src/main/memory.cpp:2706 src/main/memory.cpp:2770
+#: src/main/memory.cpp:2714 src/main/memory.cpp:2778
 #, fuzzy
 msgid "vector is too large"
 msgstr "den oppgjevne vektorstorleiken er for stor"
 
-#: src/main/memory.cpp:2708 src/main/memory.cpp:2772
+#: src/main/memory.cpp:2716 src/main/memory.cpp:2780
 msgid "negative length vectors are not allowed"
 msgstr "kan ikkje ha vektorar av negativ lengd"
 
-#: src/main/memory.cpp:2717
+#: src/main/memory.cpp:2725
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
 
-#: src/main/memory.cpp:2721 src/main/memory.cpp:2726 src/main/memory.cpp:2731
-#: src/main/memory.cpp:2736 src/main/memory.cpp:2743
+#: src/main/memory.cpp:2729 src/main/memory.cpp:2734 src/main/memory.cpp:2739
+#: src/main/memory.cpp:2744 src/main/memory.cpp:2751
 #, fuzzy, c-format
 msgid "cannot allocate vector of length %lld"
 msgstr "kan ikkje reservera vektor av lengd %lld"
 
-#: src/main/memory.cpp:2748 src/main/memory.cpp:2753
+#: src/main/memory.cpp:2756 src/main/memory.cpp:2761
 #, fuzzy
 msgid "invalid length for pairlist"
-msgstr "ugyldig tal på indeks i listetildeling"
+msgstr "ugyldig argument av lengd 0"
 
-#: src/main/memory.cpp:2757
+#: src/main/memory.cpp:2765
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "ugyldig type/lengd (%s/%lld) ved vektorreservering"
 
-#: src/main/memory.cpp:3011
+#: src/main/memory.cpp:3019
 msgid "internal TRUE value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:3015
+#: src/main/memory.cpp:3023
 msgid "internal FALSE value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:3020
+#: src/main/memory.cpp:3028
 msgid "internal logical NA value has been modified"
 msgstr ""
 
-#: src/main/memory.cpp:3071
+#: src/main/memory.cpp:3079
 msgid "R_signal_protect_error() is no-op in CXXR"
 msgstr ""
 
-#: src/main/memory.cpp:3076
+#: src/main/memory.cpp:3084
 #, fuzzy, c-format
 msgid "unprotect(): only %td protected item"
 msgid_plural "unprotect(): only %td protected items"
 msgstr[0] "unprotect(): berre %d verna objekt"
 msgstr[1] "unprotect(): berre %d verna objekt"
 
-#: src/main/memory.cpp:3115
+#: src/main/memory.cpp:3123
 msgid "unprotect_ptr: pointer not found"
 msgstr "unprotect_ptr: fann ikkje peikar"
 
-#: src/main/memory.cpp:3137
+#: src/main/memory.cpp:3145
 #, fuzzy, c-format
 msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
 msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
 msgstr[0] "unprotect(): berre %d verna objekt"
 msgstr[1] "unprotect(): berre %d verna objekt"
 
-#: src/main/memory.cpp:3189
+#: src/main/memory.cpp:3197
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
 msgstr "R_Calloc klarte ikkje reservera (%llu av %llu) minne"
 
-#: src/main/memory.cpp:3200
+#: src/main/memory.cpp:3208
 #, fuzzy, c-format
 msgid "'R_Realloc' could not re-allocate memory (%llu byte)"
 msgid_plural "'R_Realloc' could not re-allocate memory (%llu bytes)"
 msgstr[0] "R_Realloc klarte ikkje endra storleik (%llu) på reservert minne"
 msgstr[1] "R_Realloc klarte ikkje endra storleik (%llu) på reservert minne"
 
-#: src/main/memory.cpp:3217 src/main/memory.cpp:3224
+#: src/main/memory.cpp:3225 src/main/memory.cpp:3232
 #, fuzzy, c-format
 msgid "object is too large (%llu byte)"
 msgid_plural "object is too large (%llu bytes)"
 msgstr[0] "den oppgjevne vektorstorleiken er for stor"
 msgstr[1] "den oppgjevne vektorstorleiken er for stor"
 
-#: src/main/memory.cpp:3305
+#: src/main/memory.cpp:3313
 #, fuzzy
 msgid "'initialSize' must be non-negative"
 msgstr "«gap» må vera eit heiltal større enn null"
 
-#: src/main/memory.cpp:3324
+#: src/main/memory.cpp:3332
 #, fuzzy
 msgid "Invalid mset"
 msgstr "ugyldig samband"
 
-#: src/main/memory.cpp:3348
+#: src/main/memory.cpp:3356
 #, fuzzy
 msgid "Multi-set overflow"
 msgstr "«default» er for lang"
 
-#: src/main/memory.cpp:3414
+#: src/main/memory.cpp:3422
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "det første argumentet må vera ein omgjevnad eller ein ekstern peikar"
 
-#: src/main/memory.cpp:3540
+#: src/main/memory.cpp:3548
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3577
+#: src/main/memory.cpp:3585
 #, c-format
 msgid "can't change type from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3585
+#: src/main/memory.cpp:3593
 #, c-format
 msgid "can't change the type of an ALTREP object from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:3592
+#: src/main/memory.cpp:3600
 #, fuzzy
 msgid "can't change the type of a binding cell"
 msgstr "kan ikkje endra verksam binding viss binding er låst"
 
-#: src/main/memory.cpp:3695 src/main/memory.cpp:4020
+#: src/main/memory.cpp:3703 src/main/memory.cpp:4028
 #, c-format
 msgid "'%s' or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.cpp:3708
+#: src/main/memory.cpp:3716
 msgid "SETLENGTH() cannot be applied to an ALTVEC object."
 msgstr ""
 
-#: src/main/memory.cpp:3710
+#: src/main/memory.cpp:3718
 #, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3728 src/main/memory.cpp:3736 src/main/memory.cpp:3753
-#: src/main/memory.cpp:3770 src/main/memory.cpp:3816 src/main/memory.cpp:3825
-#: src/main/memory.cpp:3835 src/main/memory.cpp:3844 src/main/memory.cpp:3853
-#: src/main/memory.cpp:3862 src/main/memory.cpp:3870 src/main/memory.cpp:3879
-#: src/main/memory.cpp:3888 src/main/memory.cpp:3896 src/main/memory.cpp:3904
-#: src/main/memory.cpp:3912 src/main/memory.cpp:3920 src/main/memory.cpp:3933
-#: src/main/memory.cpp:3942 src/main/memory.cpp:3967 src/main/memory.cpp:3986
+#: src/main/memory.cpp:3736 src/main/memory.cpp:3744 src/main/memory.cpp:3761
+#: src/main/memory.cpp:3778 src/main/memory.cpp:3824 src/main/memory.cpp:3833
+#: src/main/memory.cpp:3843 src/main/memory.cpp:3852 src/main/memory.cpp:3861
+#: src/main/memory.cpp:3870 src/main/memory.cpp:3878 src/main/memory.cpp:3887
+#: src/main/memory.cpp:3896 src/main/memory.cpp:3904 src/main/memory.cpp:3912
+#: src/main/memory.cpp:3920 src/main/memory.cpp:3928 src/main/memory.cpp:3941
+#: src/main/memory.cpp:3950 src/main/memory.cpp:3975 src/main/memory.cpp:3994
 #, fuzzy, c-format
 msgid "%s() can only be applied to a '%s', not a '%s'"
 msgstr "scan() venta «%s», men fekk «%s»"
 
-#: src/main/memory.cpp:3805
+#: src/main/memory.cpp:3813
 msgid "cannot get STDVEC_DATAPTR from ALTREP object"
 msgstr ""
 
-#: src/main/memory.cpp:3807
+#: src/main/memory.cpp:3815
 #, c-format
 msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3928
+#: src/main/memory.cpp:3936
 msgid "not safe to return vector pointer"
 msgstr "ikkje trygt å returnera vektorpeikar"
 
-#: src/main/memory.cpp:3945
+#: src/main/memory.cpp:3953
 #, c-format
 msgid "Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3948
+#: src/main/memory.cpp:3956
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_STRING_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:3971
+#: src/main/memory.cpp:3979
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_VECTOR_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:3990
+#: src/main/memory.cpp:3998
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr ""
 
-#: src/main/memory.cpp:4134
+#: src/main/memory.cpp:4142
 #, fuzzy
 msgid "argument not tracking references"
 msgstr "argumentet er ikkje ein omgjevnad"
 
-#: src/main/memory.cpp:4202 src/main/memory.cpp:4211 src/main/memory.cpp:4222
-#: src/main/memory.cpp:4238 src/main/memory.cpp:4252 src/main/memory.cpp:4267
-#: src/main/memory.cpp:4283
+#: src/main/memory.cpp:4210 src/main/memory.cpp:4219 src/main/memory.cpp:4230
+#: src/main/memory.cpp:4246 src/main/memory.cpp:4260 src/main/memory.cpp:4275
+#: src/main/memory.cpp:4291
 msgid "bad value"
 msgstr "ugyldig verdi"
 
-#: src/main/memory.cpp:4227
+#: src/main/memory.cpp:4235
 msgid "inserting non-tracking CDR in tracking cell"
 msgstr ""
 
-#: src/main/memory.cpp:4303
+#: src/main/memory.cpp:4311
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not a closure"
 msgstr "argumentet %d er ikkje ein vektor"
 
-#: src/main/memory.cpp:4335
+#: src/main/memory.cpp:4343
 #, c-format
 msgid "%s: argument of type %s is not a symbol or NULL"
 msgstr ""
 
-#: src/main/memory.cpp:4369
+#: src/main/memory.cpp:4377
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an environment or NULL"
 msgstr "argumentet til «%s» er ikkje ein omgjevnad"
 
-#: src/main/memory.cpp:4390
+#: src/main/memory.cpp:4398
 #, fuzzy
 msgid "cycles in parent chains are not allowed"
 msgstr "kan ikkje ha vektorar av negativ lengd"
 
-#: src/main/memory.cpp:4420
+#: src/main/memory.cpp:4428
 #, c-format
 msgid "expecting a 'PROMSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4452
+#: src/main/memory.cpp:4460
 #, c-format
 msgid "value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:4530
+#: src/main/memory.cpp:4538
 msgid "memory profiling is not available on this system"
 msgstr "minneprofilering er ikkje tilgjengeleg på dette systemet"
 
-#: src/main/memory.cpp:4573
+#: src/main/memory.cpp:4581
 #, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr "Rprofmem: klarte ikkje opna utfila «%s»"
 
-#: src/main/memory.cpp:4613
+#: src/main/memory.cpp:4621
 msgid "R_AllocStringBuffer( (size_t)-1 ) is no longer allowed"
 msgstr ""
 
-#: src/main/memory.cpp:4632
+#: src/main/memory.cpp:4640
 #, fuzzy, c-format
 msgid "could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'"
 msgstr "klarte ikkje reservera minne til «read.dcf»"
 
-#: src/main/memory.cpp:4687
+#: src/main/memory.cpp:4695
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr ""
@@ -6067,7 +6067,7 @@ msgstr "ugyldig tal på siffer (brukar 7)"
 #: src/main/options.cpp:198
 #, fuzzy
 msgid "invalid 'scipen'"
-msgstr "ugyldig aksentteikn"
+msgstr "ugyldig «%s»-verdi"
 
 #: src/main/options.cpp:204
 #, fuzzy, c-format
@@ -6082,7 +6082,7 @@ msgstr "ugyldig tekstbreidd (brukar 80)"
 #: src/main/options.cpp:215
 #, fuzzy, c-format
 msgid "invalid 'scipen' %d"
-msgstr "ugyldig linjeslutt"
+msgstr "ugyldig «%s»-verdi"
 
 #: src/main/options.cpp:228
 msgid "invalid 'deparse.cutoff', used 60"
@@ -6627,9 +6627,8 @@ msgid "'print.gap' must be less than %d"
 msgstr "«%s» må ha lengd 1"
 
 #: src/main/print.cpp:357
-#, fuzzy
 msgid "missing methods namespace: this should not happen"
-msgstr "ugyldig ties.method for rank() [skal aldri skje]"
+msgstr ""
 
 #: src/main/print.cpp:366
 msgid "missing show() in methods namespace: this should not happen"
@@ -8134,7 +8133,7 @@ msgstr "R_LibraryFileName: for liten buffer"
 #: src/main/startup.cpp:251
 #, fuzzy
 msgid "WARNING: invalid R_MAX_VSIZE ignored\n"
-msgstr "ÅTVARING: «%s»-verdien er ugyldig, og vert ikkje brukt"
+msgstr "ÅTVARING: «%s»-verdien er ugyldig, og vert ikkje brukt\n"
 
 #: src/main/startup.cpp:254
 #, fuzzy, c-format
@@ -8247,7 +8246,7 @@ msgid "NAs are not allowed in subscripted assignments"
 msgstr "NA-verdiar er ikkje tillatne i indeks-tildelingar"
 
 #: src/main/subassign.cpp:727 src/main/subassign.cpp:1030
-#: src/main/subassign.cpp:1255 src/main/subassign.cpp:1911
+#: src/main/subassign.cpp:1255 src/main/subassign.cpp:1910
 msgid "replacement has length zero"
 msgstr "«replacement» har lengd null"
 
@@ -8281,7 +8280,7 @@ msgstr "ikkje-kompatible typar (frå %s til %s) i delarray-tildeling"
 #: src/main/subassign.cpp:1431
 #, fuzzy, c-format
 msgid "internal error: index %d from length %d"
-msgstr "intern feil i do_random2"
+msgstr "intern feil i do_random1"
 
 #: src/main/subassign.cpp:1444 src/main/subassign.cpp:1466
 msgid "invalid subscript in list assign"
@@ -8295,46 +8294,46 @@ msgstr "ugyldig tal på indeks i listetildeling"
 msgid "SubAssignArgs: invalid number of arguments"
 msgstr "SubAssignArgs: ugyldig tal på argument"
 
-#: src/main/subassign.cpp:1738
+#: src/main/subassign.cpp:1737
 msgid "result is zero-length and so cannot be a language object"
 msgstr "resultatet har lengd null, og kan derfor ikkje vera eit språkobjekt"
 
-#: src/main/subassign.cpp:1776
+#: src/main/subassign.cpp:1775
 msgid "Internal error: unexpected type in DeleteOneVectorListItem"
 msgstr ""
 
-#: src/main/subassign.cpp:1862
+#: src/main/subassign.cpp:1861
 #, fuzzy
 msgid "[[<- defined for objects of type \"S4\" only for subclasses of environment"
 msgstr "[[<- for S4-objekt er berre definert for underklassar av omgjevnad"
 
-#: src/main/subassign.cpp:1876
+#: src/main/subassign.cpp:1875
 #, fuzzy
 msgid "improper dimensions"
 msgstr "feil tal på dimensjonar"
 
-#: src/main/subassign.cpp:1882
+#: src/main/subassign.cpp:1881
 msgid "wrong args for environment subassignment"
 msgstr "feil argument for omgjevnads-deltildeling"
 
-#: src/main/subassign.cpp:1913
+#: src/main/subassign.cpp:1912
 msgid "more elements supplied than there are to replace"
 msgstr "fleire element oppgjevne enn det er element å byta ut"
 
-#: src/main/subassign.cpp:1945 src/main/subassign.cpp:2139
+#: src/main/subassign.cpp:1944 src/main/subassign.cpp:2138
 msgid "[[ ]] improper number of subscripts"
 msgstr "[[ ]] feil tal på indeksar"
 
-#: src/main/subassign.cpp:2102
+#: src/main/subassign.cpp:2101
 #, c-format
 msgid "incompatible types (from %s to %s) in [[ assignment"
 msgstr "ikkje-kompatible typar (frå %s til %s) i [[-tildeling"
 
-#: src/main/subassign.cpp:2233
+#: src/main/subassign.cpp:2232
 msgid "no method for assigning subsets of this S4 class"
 msgstr "ingen metode for tildeling av delmengder av denne S4-klassen"
 
-#: src/main/subassign.cpp:2300
+#: src/main/subassign.cpp:2299
 msgid "Coercing LHS to a list"
 msgstr "Gjer om venstresida til ei liste"
 
@@ -8727,9 +8726,8 @@ msgid "sorted_real_count_NANs got unsorted vector: this should not happen"
 msgstr ""
 
 #: src/main/unique.cpp:815 src/main/unique.cpp:821
-#, fuzzy
 msgid "sorted_Duplicated got unsorted vector: this should not happen"
-msgstr "ugyldig ties.method for rank() [skal aldri skje]"
+msgstr ""
 
 #: src/main/unique.cpp:840 src/main/unique.cpp:1001
 #, c-format
@@ -8835,7 +8833,7 @@ msgstr "objektet er ikkje ei matrise"
 #: src/main/util.cpp:135
 #, fuzzy
 msgid "invalid type passed to internal function\n"
-msgstr "ugyldig objekt: må vera ein primitiv funksjon"
+msgstr "ugyldig colortype sendt til X11-drivaren"
 
 #: src/main/util.cpp:327 src/main/util.cpp:339 src/main/util.cpp:350
 #: src/main/util.cpp:379
@@ -9369,7 +9367,7 @@ msgstr "klarte ikkje opna sambandet"
 #: src/modules/internet/Rhttpd.cpp:1362
 #, fuzzy
 msgid "unable to create socket"
-msgstr "feil ved namneoppslag på «%s»"
+msgstr "klarte ikkje laga pixmap"
 
 #: src/modules/internet/Rhttpd.cpp:1384
 #, fuzzy, c-format
@@ -10313,21 +10311,82 @@ msgstr "X11-modulen kan ikkje lastast"
 msgid "X11 is not available"
 msgstr "X11 er ikkje tilgjengeleg"
 
+#, fuzzy
+#~ msgid "unknown 'type' in \"CG\" method of 'optim'"
+#~ msgstr "ukjend «type» i CG-metoden til optim"
+
+#~ msgid "Function cannot be evaluated at initial parameters"
+#~ msgstr "Funksjonen kan ikkje evaluerast med startverdiane"
+
+#~ msgid "'path' must be a character vector"
+#~ msgstr "«path» må vera ein teiknvektor"
+
+#, fuzzy, c-format
+#~ msgid "invalid %s argument"
+#~ msgstr "ugyldig «%s»-argument"
+
 #, c-format
-#~ msgid "invalid value for '%s'"
-#~ msgstr "ugyldig verdi for «%s»"
+#~ msgid "regcomp error:  '%s'"
+#~ msgstr "regcomp-feil: «%s»"
 
-#, fuzzy
-#~ msgid "bad condition argument"
-#~ msgstr "ugyldig argument til importeringsomgjevnad"
+#~ msgid "'resize' must be TRUE or FALSE"
+#~ msgstr "«resize» må vera TRUE eller FALSE"
 
-#, fuzzy
-#~ msgid "invalid 'socket' argument"
+#~ msgid "'EXPR' is missing"
+#~ msgstr "«EXPR» manglar"
+
+#~ msgid "invalid 'mode' argument"
 #~ msgstr "ugyldig «modus»-argument"
 
+#~ msgid "'name' is missing"
+#~ msgstr "«name» manglar"
+
+#~ msgid "'envir' must be an environment"
+#~ msgstr "«envir» må vera ein omgjevnad"
+
+#~ msgid "'allowNonCompression' must be TRUE or FALSE"
+#~ msgstr "«allowNonCompression» må vera «TRUE» (sann) eller «FALSE» (usann)"
+
 #, fuzzy
-#~ msgid "invalid 'port' argument"
-#~ msgstr "ugyldig «modus»-argument"
+#~ msgid "'text' must be TRUE or FALSE"
+#~ msgstr "«all.x» må vera TRUE eller FALSE"
+
+#~ msgid "not that many calls to browser are active"
+#~ msgstr "ikkje så mange kall til browser er aktive"
+
+#, fuzzy, c-format
+#~ msgid "Value for '%s' must be TRUE or FALSE"
+#~ msgstr "«all.x» må vera TRUE eller FALSE"
+
+#, fuzzy
+#~ msgid "'.NAME' is missing"
+#~ msgstr "«EXPR» manglar"
+
+#, fuzzy
+#~ msgid "invalid formal arguments for 'function'"
+#~ msgstr "ugyldige formelle argument for «function»"
+
+#~ msgid "invalid argument to edit()"
+#~ msgstr "ugyldig argument til edit()"
+
+#~ msgid "'list' argument must be a list"
+#~ msgstr "«list»-argumentet må vera ei liste"
+
+#~ msgid "'env' argument must be an environment"
+#~ msgstr "«env»-argumentet må vera ein omgjevnad"
+
+#, fuzzy
+#~ msgid "'envir' argument must be an environment"
+#~ msgstr "«env»-argumentet må vera ein omgjevnad"
+
+#~ msgid "In addition: "
+#~ msgstr "I tillegg: "
+
+#~ msgid " [invalid string in warning(.)]"
+#~ msgstr " [ugyldig streng i warning(.)]"
+
+#~ msgid "not a BUILTIN function"
+#~ msgstr "ikkje ein BUIILTIN-funksjon"
 
 #, fuzzy
 #~ msgid "'pattern' is invalid"
@@ -10337,8 +10396,68 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "'replacement' is invalid"
 #~ msgstr "«replacement» er ugyldig UTF-8"
 
-#~ msgid "argument must be an environment"
-#~ msgstr "argumentet må vera ein omgjevnad"
+#, c-format
+#~ msgid "invalid 'x' type in 'x %s y'"
+#~ msgstr "ugyldig «x»-type i «x %s y»"
+
+#, c-format
+#~ msgid "invalid 'y' type in 'x %s y'"
+#~ msgstr "ugyldig «y»-type i «x %s y»"
+
+#~ msgid "During startup - "
+#~ msgstr "Ved oppstart – "
+
+#, fuzzy
+#~ msgid "cons memory exhausted"
+#~ msgstr "ikkje nok konstantminne (nådde grensa?)"
+
+#, fuzzy
+#~ msgid "memory exhausted"
+#~ msgstr "ikkje nok minne (nådde grensa?)"
+
+#, c-format
+#~ msgid "invalid value for '%s'"
+#~ msgstr "ugyldig verdi for «%s»"
+
+#~ msgid "'mode' must be of length at least one"
+#~ msgstr "«mode» må ha minst eitt element"
+
+#, fuzzy
+#~ msgid "argument 'multiple' must be TRUE or FALSE"
+#~ msgstr "«resize» må vera TRUE eller FALSE"
+
+#, fuzzy
+#~ msgid "argument 'x' must be a numeric vector"
+#~ msgstr "det første argumentet må vera ein vektor"
+
+#, fuzzy
+#~ msgid "argument 'allow_surrogate_pairs' must be TRUE or FALSE"
+#~ msgstr "«resize» må vera TRUE eller FALSE"
+
+#, fuzzy, c-format
+#~ msgid "comparison (%s) is not possible language types"
+#~ msgstr "samanlikning (%d) er berre mogleg for atomske og liste-typar"
+
+#~ msgid "'decreasing' must be TRUE or FALSE"
+#~ msgstr "«decreasing» må vera TRUE eller FALSE"
+
+#~ msgid "'fmt' is not a character vector"
+#~ msgstr "«fmt» må vera ein teiknvektor"
+
+#, c-format
+#~ msgid "length %d is too large for hashing"
+#~ msgstr "lengda %d er for lang for hashing"
+
+#, fuzzy
+#~ msgid "'fromLast' must be length 1"
+#~ msgstr "«%s» må ha lengd 1"
+
+#, fuzzy
+#~ msgid "'fromLast' must be TRUE or FALSE"
+#~ msgstr "«resize» må vera TRUE eller FALSE"
+
+#~ msgid "'names' must be a character vector"
+#~ msgstr "«names» må vera ein teiknvektor"
 
 #~ msgid "'all.x' must be TRUE or FALSE"
 #~ msgstr "«all.x» må vera TRUE eller FALSE"
@@ -10346,28 +10465,9 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "'all.y' must be TRUE or FALSE"
 #~ msgstr "«all.y» må vera TRUE eller FALSE"
 
-#~ msgid "argument is not an environment"
-#~ msgstr "argumentet er ikkje ein omgjevnad"
-
-#~ msgid "'envir' must be an environment"
-#~ msgstr "«envir» må vera ein omgjevnad"
-
-#~ msgid "invalid argument to edit()"
-#~ msgstr "ugyldig argument til edit()"
-
-#~ msgid "'env' argument must be an environment"
-#~ msgstr "«env»-argumentet må vera ein omgjevnad"
-
 #, fuzzy
-#~ msgid "'envir' argument must be an environment"
-#~ msgstr "«env»-argumentet må vera ein omgjevnad"
-
-#, fuzzy, c-format
-#~ msgid "invalid value of %s"
-#~ msgstr "ugyldig verdi for «%s»"
-
-#~ msgid "'mode' must be of length at least one"
-#~ msgstr "«mode» må ha minst eitt element"
+#~ msgid "'bounds' must be TRUE or FALSE"
+#~ msgstr "«all.x» må vera TRUE eller FALSE"
 
 #~ msgid "filename too long in jpeg() call"
 #~ msgstr "filnamnet i jpeg()-kallet er for langt"
@@ -10378,253 +10478,19 @@ msgstr "X11 er ikkje tilgjengeleg"
 #~ msgid "filename too long in bmp() call"
 #~ msgstr "filnamnet i bmp()-kallet er for langt"
 
-#~ msgid "'list' argument must be a list"
-#~ msgstr "«list»-argumentet må vera ei liste"
+#~ msgid "argument 'logarithm' must be logical"
+#~ msgstr "argumentet «logarithm» må vera logisk"
+
+#~ msgid "'intern' must be logical and not NA"
+#~ msgstr "«intern» må vera logisk og ikkje NA"
 
 #, fuzzy
-#~ msgid "allocation error in R_compress1 with libdeflate"
-#~ msgstr "minnereserveringsfeil i realpr"
-
-#, fuzzy
-#~ msgid "allocation error in R_decompress1 with libdeflate"
-#~ msgstr "minnereserveringsfeil i realpr"
-
-#, fuzzy
-#~ msgid "allocation error in memDecompress with libdeflate"
-#~ msgstr "minnereserveringsfeil i realpr"
-
-#, fuzzy
-#~ msgid "memory allocation error in 'realpr'"
-#~ msgstr "minnereserveringsfeil i realpr"
-
-#, fuzzy
-#~ msgid "unsupported type "
-#~ msgstr "ikkje-støtta type"
-
-#, fuzzy
-#~ msgid "'fromLast' must be length 1"
-#~ msgstr "«%s» må ha lengd 1"
-
-#~ msgid "'fmt' is not a character vector"
-#~ msgstr "«fmt» må vera ein teiknvektor"
-
-#, fuzzy
-#~ msgid "argument is not a character vector"
-#~ msgstr "«fmt» må vera ein teiknvektor"
-
-#~ msgid "internal error in 'do_sys'"
-#~ msgstr "intern feil i «do_sys»"
-
-#, fuzzy
-#~ msgid "internal error in do_random1"
-#~ msgstr "intern feil i do_random2"
-
-#, fuzzy
-#~ msgid "internal error in do_random2"
-#~ msgstr "intern feil i do_random2"
-
-#~ msgid "internal error in do_random3"
-#~ msgstr "intern feil i do_random3"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_compress1"
-#~ msgstr "intern feil i do_random2"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_decompress1"
-#~ msgstr "intern feil i do_random2"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_compress2"
-#~ msgstr "intern feil i «do_sys»"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_decompress2"
-#~ msgstr "intern feil i «do_sys»"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_compress3"
-#~ msgstr "intern feil i do_random3"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in R_decompress3"
-#~ msgstr "intern feil i do_random3"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in memCompress"
-#~ msgstr "intern feil i «do_sys»"
-
-#, fuzzy, c-format
-#~ msgid "internal error %d in memDecompress(%s)"
-#~ msgstr "intern feil i «do_sys»"
-
-#~ msgid "'path' must be a character vector"
-#~ msgstr "«path» må vera ein teiknvektor"
-
-#~ msgid "'names' must be a character vector"
-#~ msgstr "«names» må vera ein teiknvektor"
-
-#, fuzzy
-#~ msgid "'winslash' must be a character string"
-#~ msgstr "«sep» må vera ein teiknvektor"
-
-#, fuzzy, c-format
-#~ msgid "allocation failure in '%s'"
-#~ msgstr "reserveringsfeil i «R_tmpnam»"
-
-#, fuzzy
-#~ msgid "allocation failure in aregexec"
-#~ msgstr "reserveringsfeil i «R_tmpnam»"
-
-#, fuzzy
-#~ msgid "allocation failure in set_pcre_recursion_limit"
-#~ msgstr "reserveringsfeil i «R_tmpnam»"
-
-#, fuzzy
-#~ msgid "allocation error in memCompress with libdeflate"
-#~ msgstr "minnereserveringsfeil i realpr"
-
-#, fuzzy
-#~ msgid "allocation error in srv_input_handler"
-#~ msgstr "minnereserveringsfeil i realpr"
-
-#, fuzzy
-#~ msgid "allocation failed in in_R_X11_dataviewer"
-#~ msgstr "reserveringsfeil i «R_tmpnam»"
-
-#, fuzzy
-#~ msgid "cannot set an attribute on a CHARSXP"
-#~ msgstr "kan ikkje setja tidssonar på dette systemet"
-
-#, c-format
-#~ msgid "invalid 'x' type in 'x %s y'"
-#~ msgstr "ugyldig «x»-type i «x %s y»"
-
-#, c-format
-#~ msgid "invalid 'y' type in 'x %s y'"
-#~ msgstr "ugyldig «y»-type i «x %s y»"
-
-#, fuzzy
-#~ msgid "cannot set attribute on a symbol"
-#~ msgstr "kan ikkje setja tidssonar på dette systemet"
-
-#, fuzzy
-#~ msgid "couldn't allocate node stack"
-#~ msgstr "klarte ikkje reservera plass til pushBack"
-
-#~ msgid "not a BUILTIN function"
-#~ msgstr "ikkje ein BUIILTIN-funksjon"
-
-#, fuzzy
-#~ msgid "argument 'x' must be a numeric vector"
-#~ msgstr "det første argumentet må vera ein vektor"
-
-#, fuzzy
-#~ msgid "unknown 'type' in \"CG\" method of 'optim'"
-#~ msgstr "ukjend «type» i CG-metoden til optim"
-
-#~ msgid "Function cannot be evaluated at initial parameters"
-#~ msgstr "Funksjonen kan ikkje evaluerast med startverdiane"
-
-#~ msgid "not that many calls to browser are active"
-#~ msgstr "ikkje så mange kall til browser er aktive"
-
-#, fuzzy
-#~ msgid "invalid formal arguments for 'function'"
-#~ msgstr "ugyldige formelle argument for «function»"
-
-#, fuzzy
-#~ msgid "cons memory exhausted"
-#~ msgstr "ikkje nok konstantminne (nådde grensa?)"
-
-#, fuzzy
-#~ msgid "memory exhausted"
-#~ msgstr "ikkje nok minne (nådde grensa?)"
-
-#, fuzzy, c-format
-#~ msgid "comparison (%s) is not possible language types"
-#~ msgstr "samanlikning (%d) er berre mogleg for atomske og liste-typar"
-
-#, fuzzy, c-format
-#~ msgid "Value for '%s' must be TRUE or FALSE"
-#~ msgstr "«all.x» må vera TRUE eller FALSE"
-
-#~ msgid "In addition: "
-#~ msgstr "I tillegg: "
-
-#~ msgid " [invalid string in warning(.)]"
-#~ msgstr " [ugyldig streng i warning(.)]"
-
-#~ msgid "During startup - "
-#~ msgstr "Ved oppstart – "
+#~ msgid "'receive.console.signals' must be logical and not NA"
+#~ msgstr "«intern» må vera logisk og ikkje NA"
 
 #, fuzzy
 #~ msgid "'.Random.seed' is a missing argument with no default"
 #~ msgstr ".Random.seed er eit manglande argument utan nokon standardverdi"
-
-#, fuzzy, c-format
-#~ msgid "invalid %s argument"
-#~ msgstr "ugyldig «%s»-argument"
-
-#~ msgid "'EXPR' is missing"
-#~ msgstr "«EXPR» manglar"
-
-#~ msgid "'name' is missing"
-#~ msgstr "«name» manglar"
-
-#, fuzzy
-#~ msgid "'.NAME' is missing"
-#~ msgstr "«EXPR» manglar"
-
-#, fuzzy
-#~ msgid "No error"
-#~ msgstr "lesefeil"
-
-#, fuzzy
-#~ msgid "Invalid regexp"
-#~ msgstr "ugyldig argument"
-
-#, fuzzy
-#~ msgid "Unknown character class name"
-#~ msgstr "ikkjeteikn-namn"
-
-#, fuzzy
-#~ msgid "Invalid back reference"
-#~ msgstr "ikkje ein svak referanse"
-
-#, fuzzy
-#~ msgid "Invalid contents of {}"
-#~ msgstr "ugyldig samband"
-
-#, fuzzy
-#~ msgid "Invalid character range"
-#~ msgstr "ugyldig teiknlengd i dblepr"
-
-#, fuzzy
-#~ msgid "Out of memory"
-#~ msgstr "ikkje nok minne til klipping av polylinje"
-
-#, fuzzy
-#~ msgid "Invalid use of repetition operators"
-#~ msgstr "ugyldig argument til unæroperator"
-
-#, fuzzy
-#~ msgid "Unknown error"
-#~ msgstr "ukjend op"
-
-#, c-format
-#~ msgid "regcomp error:  '%s'"
-#~ msgstr "regcomp-feil: «%s»"
-
-#~ msgid "'resize' must be TRUE or FALSE"
-#~ msgstr "«resize» må vera TRUE eller FALSE"
-
-#~ msgid "'allowNonCompression' must be TRUE or FALSE"
-#~ msgstr "«allowNonCompression» må vera «TRUE» (sann) eller «FALSE» (usann)"
-
-#, fuzzy
-#~ msgid "'text' must be TRUE or FALSE"
-#~ msgstr "«all.x» må vera TRUE eller FALSE"
 
 #, c-format
 #~ msgid "type \"%s\" not supported in interlanguage calls"
@@ -10637,39 +10503,6 @@ msgstr "X11 er ikkje tilgjengeleg"
 #, c-format
 #~ msgid "cannot allocate vector of size %0.1f Mb"
 #~ msgstr "kan ikkje reservera vektor av storleik %0.1f Mb"
-
-#, fuzzy
-#~ msgid "argument 'multiple' must be TRUE or FALSE"
-#~ msgstr "«resize» må vera TRUE eller FALSE"
-
-#, fuzzy
-#~ msgid "argument 'allow_surrogate_pairs' must be TRUE or FALSE"
-#~ msgstr "«resize» må vera TRUE eller FALSE"
-
-#~ msgid "'decreasing' must be TRUE or FALSE"
-#~ msgstr "«decreasing» må vera TRUE eller FALSE"
-
-#, c-format
-#~ msgid "length %d is too large for hashing"
-#~ msgstr "lengda %d er for lang for hashing"
-
-#, fuzzy
-#~ msgid "'fromLast' must be TRUE or FALSE"
-#~ msgstr "«resize» må vera TRUE eller FALSE"
-
-#, fuzzy
-#~ msgid "'bounds' must be TRUE or FALSE"
-#~ msgstr "«all.x» må vera TRUE eller FALSE"
-
-#~ msgid "argument 'logarithm' must be logical"
-#~ msgstr "argumentet «logarithm» må vera logisk"
-
-#~ msgid "'intern' must be logical and not NA"
-#~ msgstr "«intern» må vera logisk og ikkje NA"
-
-#, fuzzy
-#~ msgid "'receive.console.signals' must be logical and not NA"
-#~ msgstr "«intern» må vera logisk og ikkje NA"
 
 #~ msgid "No function to return from, jumping to top level"
 #~ msgstr "Ingen funksjon å venda tilbake frå. Hoppar til toppnivå."
@@ -11159,6 +10992,9 @@ msgstr "X11 er ikkje tilgjengeleg"
 
 #~ msgid "'UseMethod' called from outside a closure"
 #~ msgstr "«UseMethod» kalla utanfrå ei omslutting"
+
+#~ msgid "internal error in do_random2"
+#~ msgstr "intern feil i do_random2"
 
 #~ msgid "%s%d:%d: %s"
 #~ msgstr "%s%d:%d: %s"

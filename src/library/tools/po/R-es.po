@@ -425,9 +425,8 @@ msgstr ""
 
 #. R/news.R: stop("DESCRIPTION file not found")
 #: R/news.R:0
-#, fuzzy
 msgid "DESCRIPTION file not found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/testing.R: if (res != 0L) "DIFFERED" else "OK"
 #: R/testing.R:0
@@ -861,9 +860,8 @@ msgstr ""
 
 #. R/news.R: stop("NEWS file not found")
 #: R/news.R:0
-#, fuzzy
 msgid "NEWS file not found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/testing.R: message(" NOTE")
 #: R/testing.R:0
@@ -1096,9 +1094,8 @@ msgstr "Procesando %s ..."
 
 #. R/packages.R: message("Processing packages:")
 #: R/packages.R:0
-#, fuzzy
 msgid "Processing packages:"
-msgstr "Procesando %s ..."
+msgstr ""
 
 #. R/QC.R: gettext("Prototyped non-primitives:")
 #: R/QC.R:0
@@ -1274,9 +1271,8 @@ msgstr ""
 
 #. R/QC.R: stop("The package 'dir' argument must be of length 1")
 #: R/QC.R:0
-#, fuzzy
 msgid "The package 'dir' argument must be of length 1"
-msgstr "argumento 'package' debe ser de longitud 1"
+msgstr ""
 
 #. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
@@ -1290,9 +1286,8 @@ msgstr ""
 
 #. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 #: R/dynamicHelp.R:0
-#, fuzzy
 msgid "URL %s was not found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/update_packages.R: message("Unable to update existing PACKAGES file. Calling write_PACKAGES directly.")
 #: R/update_packages.R:0
@@ -1311,9 +1306,8 @@ msgstr ""
 
 #. R/QC.R: gettextf("Undocumented %s:", tag)
 #: R/QC.R:0
-#, fuzzy
 msgid "Undocumented %s:"
-msgstr "Conjunto de datos no documentados:"
+msgstr ""
 
 #. R/QC.R: gettext("Undocumented S4 classes:")
 #: R/QC.R:0
@@ -1322,9 +1316,8 @@ msgstr "$4 clases indocumentadas:"
 
 #. R/QC.R: gettext("Undocumented S4 methods:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Undocumented S4 methods:"
-msgstr "$4 clases indocumentadas:"
+msgstr ""
 
 #. R/QC.R: gettextf("Undocumented arguments in Rd file '%s'", nm)
 #: R/QC.R:0
@@ -1601,9 +1594,8 @@ msgstr ""
 
 #. R/checktools.R: sprintf("checking %s ...", pfile)
 #: R/checktools.R:0
-#, fuzzy
 msgid "checking %s ..."
-msgstr "Comprobando %s"
+msgstr ""
 
 #. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(savefile)))
 #. R/testing.R: gettextf("  comparing %s to %s ...", sQuote(outfile), sQuote(basename(prevfile)))
@@ -1643,7 +1635,8 @@ msgstr ""
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr ""
 
@@ -1682,9 +1675,8 @@ msgstr ""
 
 #. R/checktools.R: sprintf("downloading %s ... ", rfiles[i])
 #: R/checktools.R:0
-#, fuzzy
 msgid "downloading %s ..."
-msgstr "Procesando %s ..."
+msgstr ""
 
 #. R/checktools.R: message("downloading reverse dependencies ...")
 #: R/checktools.R:0
@@ -1740,9 +1732,8 @@ msgstr ""
 #. R/utils.R: gettextf("file '%s' does not exist", x)
 #. R/utils.R: gettextf("file '%s' does not exist", dfile)
 #: R/QC.R:0 R/translations.R:0 R/utils.R:0
-#, fuzzy
 msgid "file '%s' does not exist"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/utils.R: gettextf("file '%s' is not in valid DCF format", dfile)
 #: R/utils.R:0
@@ -2001,9 +1992,8 @@ msgstr ""
 #. R/utils.R: sprintf("processing %s", basename(p))
 #. R/utils.R: sprintf("processing %s", f)
 #: R/admin.R:0 R/doitools.R:0 R/urltools.R:0 R/utils.R:0
-#, fuzzy
 msgid "processing %s"
-msgstr "Procesando %s ..."
+msgstr ""
 
 #. R/packages.R: gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",     sQuote(basename(dirname(p))), conditionMessage(temp))
 #. R/packages.R: gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",     sQuote(basename(paths[i])), conditionMessage(temp))
@@ -2208,9 +2198,8 @@ msgstr ""
 
 #. R/Vignettes.R: gettextf("vignette builder '%s' not found", pkg)
 #: R/Vignettes.R:0
-#, fuzzy
 msgid "vignette builder '%s' not found"
-msgstr "archivo '%s' no encontrado"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("vignette filename '%s' does not match any of the '%s' filename patterns",     file, paste(engine$package, engine$name, sep = "::"))
 #: R/Vignettes.R:0
@@ -2229,9 +2218,8 @@ msgstr ""
 
 #. R/Rd.R: stop("you must specify 'dir' or 'files'")
 #: R/Rd.R:0
-#, fuzzy
 msgid "you must specify 'dir' or 'files'"
-msgstr "Debes especificar 'package' o 'dir'"
+msgstr ""
 
 #. R/QC.R: stop("you must specify 'package' or 'dir'")
 #. R/Rd.R: stop("you must specify 'package' or 'dir'")
@@ -2243,9 +2231,8 @@ msgstr "Debes especificar 'package' o 'dir'"
 
 #. R/QC.R: stop("you must specify 'package', 'dir' or 'file'")
 #: R/QC.R:0
-#, fuzzy
 msgid "you must specify 'package', 'dir' or 'file'"
-msgstr "Debes especificar 'package' o 'dir'"
+msgstr ""
 
 #. R/update_packages.R: ngettext(sum(retdat$IsNew), "%d entry added or updated", "%d entries added or updated",     domain = "R-tools")
 #: R/update_packages.R:0

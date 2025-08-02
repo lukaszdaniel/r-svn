@@ -92,9 +92,8 @@ msgstr "'hgap'的值必需是单元"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr "'x'和'y'的长度必需为一"
+msgstr ""
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -357,9 +356,8 @@ msgstr "无效的grob坐标"
 
 #. R/grid.R: stop("Invalid number of generations")
 #: R/grid.R:0
-#, fuzzy
 msgid "Invalid number of generations"
-msgstr "定位无效"
+msgstr ""
 
 #. R/grob.R: stop("Invalid revert target")
 #: R/grob.R:0
@@ -382,9 +380,8 @@ msgstr "'order'的值无效"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid transform (nothing drawn)"
-msgstr "'order'的值无效"
+msgstr ""
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
@@ -424,9 +421,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr "水平定位无效"
+msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -446,9 +442,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown width; using first width"
-msgstr "水平定位无效"
+msgstr ""
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -972,17 +967,20 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "视口名称无效"
 
-#~ msgid "invalid 'clip' value"
-#~ msgstr "'clip'值无效"
-
 #~ msgid "invalid 'frame'"
 #~ msgstr "'frame'的值无效"
 
-#~ msgid "invalid 'gp' value"
-#~ msgstr "'gp'的值无效"
-
 #~ msgid "invalid 'grob'"
 #~ msgstr "'grob'的值无效"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "'result'的值无效"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "'print'参数值无效"
+
+#~ msgid "invalid listing"
+#~ msgstr "表无效"
 
 #~ msgid "invalid 'listing'"
 #~ msgstr "'listing'无效"
@@ -990,8 +988,8 @@ msgstr[0] "视口名称无效"
 #~ msgid "invalid 'origin'"
 #~ msgstr "'origin'的值无效"
 
-#~ msgid "invalid 'result'"
-#~ msgstr "'result'的值无效"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "'arrow'参数无效"
 
 #~ msgid "invalid 'rot' value"
 #~ msgstr "'rot'的值无效"
@@ -999,14 +997,11 @@ msgstr[0] "视口名称无效"
 #~ msgid "invalid 'theta'"
 #~ msgstr "'theta'值无效"
 
-#~ msgid "invalid listing"
-#~ msgstr "表无效"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "'gp'的值无效"
 
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "'arrow'参数无效"
-
-#~ msgid "invalid 'print' argument"
-#~ msgstr "'print'参数值无效"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "'clip'值无效"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "'x'参数必需是单元对象"

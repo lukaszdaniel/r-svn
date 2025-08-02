@@ -87,9 +87,8 @@ msgstr "'hgap' turi būti vienas vienetas"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr "'x' ir 'y' turi būti 1 ilgio"
+msgstr ""
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -370,9 +369,8 @@ msgstr "Netinkamas 'order'"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid transform (nothing drawn)"
-msgstr "Netinkamas 'order'"
+msgstr ""
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
@@ -412,9 +410,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr "neleistina horizontali lygiuotė"
+msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -434,9 +431,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown width; using first width"
-msgstr "neleistina horizontali lygiuotė"
+msgstr ""
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -959,17 +955,20 @@ msgstr[0] "neleistinas peržiūros srities pavadinimas"
 msgstr[1] "neleistini peržiūros srities pavadinimai"
 msgstr[2] "neleistinų peržiūros srities pavadinimų"
 
-#~ msgid "invalid 'clip' value"
-#~ msgstr "neleistina 'clip' reikšmė"
-
 #~ msgid "invalid 'frame'"
 #~ msgstr "neleistinas 'frame'"
 
-#~ msgid "invalid 'gp' value"
-#~ msgstr "neleistina 'gp' reikšmė"
-
 #~ msgid "invalid 'grob'"
 #~ msgstr "netinkama 'grob'"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "neteisingas 'result'"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "neteisingas 'print' argumentas"
+
+#~ msgid "invalid listing"
+#~ msgstr "netinkamas sąrašas"
 
 #~ msgid "invalid 'listing'"
 #~ msgstr "netinkamas 'listing'"
@@ -977,8 +976,8 @@ msgstr[2] "neleistinų peržiūros srities pavadinimų"
 #~ msgid "invalid 'origin'"
 #~ msgstr "netinkamas 'origin'"
 
-#~ msgid "invalid 'result'"
-#~ msgstr "neteisingas 'result'"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "neleistinas 'arrow' argumentas"
 
 #~ msgid "invalid 'rot' value"
 #~ msgstr "netinkama 'rot' reikšmė"
@@ -986,14 +985,11 @@ msgstr[2] "neleistinų peržiūros srities pavadinimų"
 #~ msgid "invalid 'theta'"
 #~ msgstr "neteisingas 'theta'"
 
-#~ msgid "invalid listing"
-#~ msgstr "netinkamas sąrašas"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "neleistina 'gp' reikšmė"
 
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "neleistinas 'arrow' argumentas"
-
-#~ msgid "invalid 'print' argument"
-#~ msgstr "neteisingas 'print' argumentas"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "neleistina 'clip' reikšmė"
 
 #~ msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 #~ msgstr "'gPath' gylis turi būti 1 'grobwidth/height' vienetais"

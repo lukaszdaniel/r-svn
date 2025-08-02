@@ -64,9 +64,8 @@ msgstr "'v' एक वेक्टर (vector) होना चाहिये"
 
 #. R/unix/mcfork.R: stop("'what' must be a character or raw vector")
 #: R/unix/mcfork.R:0
-#, fuzzy
 msgid "'what' must be a character or raw vector"
-msgstr "'v' एक वेक्टर (vector) होना चाहिये"
+msgstr ""
 
 #. R/unix/forkCluster.R: stop("Cluster setup failed.")
 #: R/unix/forkCluster.R:0
@@ -152,9 +151,8 @@ msgstr "संखीकीय 'names' >= 1 हो ना अनिवार्�
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
-#, fuzzy
 msgid "replacing registration for cluster type '%s'"
-msgstr "अज्ञात प्रकार का समूह"
+msgstr ""
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0

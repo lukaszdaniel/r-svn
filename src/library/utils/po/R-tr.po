@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -454,11 +454,10 @@ msgstr "oluşturulamadı"
 #. R/unix/mac.install.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
 #. R/windows/install.packages.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-#, fuzzy
 msgid ""
 "ERROR: failed to lock directory %s for modifying\n"
 "Try removing %s"
-msgstr "oluşturulamadı"
+msgstr ""
 
 #. R/prompt.R: gettext("Edit the file and move it to the appropriate directory.")
 #: R/prompt.R:0
@@ -468,6 +467,11 @@ msgstr ""
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
+msgstr ""
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+msgid "Enter a frame number, or 0 to exit"
 msgstr ""
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
@@ -941,9 +945,8 @@ msgstr ""
 
 #. R/package.skeleton.R: gettextf("cannot create directory '%s'", path)
 #: R/package.skeleton.R:0
-#, fuzzy
 msgid "cannot create directory '%s'"
-msgstr "oluşturulamadı"
+msgstr ""
 
 #. R/prompt.R: stop("cannot determine a usable name")
 #: R/prompt.R:0
@@ -1095,9 +1098,8 @@ msgstr ""
 #. R/packages.R: gettextf("download of package %s failed", sQuote(p))
 #. R/packages.R: gettextf("download of package %s failed", sQuote(ps[i]))
 #: R/packages.R:0
-#, fuzzy
 msgid "download of package %s failed"
-msgstr "paketler yüklenemedi"
+msgstr ""
 
 #. R/read.DIF.R: stop("duplicate 'row.names' are not allowed")
 #. R/readtable.R: stop("duplicate 'row.names' are not allowed")
@@ -1139,9 +1141,8 @@ msgstr ""
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 #: R/tar.R:0
-#, fuzzy
 msgid "failed to copy %s to %s"
-msgstr "oluşturulamadı"
+msgstr ""
 
 #. R/windows/install.packages.R: gettextf("failed to create %s", sQuote(path))
 #. R/windows/install.packages.R: gettextf("failed to create %s", paste(sQuote(mos[!res]), collapse = ","))
@@ -1154,9 +1155,8 @@ msgstr "oluşturulamadı"
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(path))
 #. R/tar.R: gettextf("failed to create directory %s", sQuote(fname))
 #: R/tar.R:0
-#, fuzzy
 msgid "failed to create directory %s"
-msgstr "oluşturulamadı"
+msgstr ""
 
 #. R/packages.R: gettextf("failed to download mirrors file (%s); using local file '%s'",     conditionMessage(err), local.file)
 #: R/packages.R:0
@@ -1941,9 +1941,8 @@ msgstr "oluşturulamadı"
 #. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpDir,     mustWork = FALSE)))
 #. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpd,     mustWork = FALSE)))
 #: R/packages2.R:0 R/unix/mac.install.R:0 R/windows/install.packages.R:0
-#, fuzzy
 msgid "unable to create temporary directory %s"
-msgstr "oluşturulamadı"
+msgstr ""
 
 #. R/packages2.R: stop("unable to install packages")
 #: R/packages2.R:0
@@ -2256,6 +2255,10 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "could not find package %s"
+#~ msgstr "paketler yüklenemedi"
 
 #~ msgid ":"
 #~ msgstr ":"

@@ -23,7 +23,7 @@ msgid "bandwidth/span of running medians is larger than n"
 msgstr "Bandbreite/Spannweite der gleitenden Mediane größer als n"
 
 #: Srunmed.cpp:265
-#, fuzzy, c-format
+#, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
 msgstr "runmed(x, .., na.action=\"na.fail\"): es gibt NAs beginnend bei x[%lld]"
 
@@ -169,7 +169,6 @@ msgid "invalid expression in '%s'"
 msgstr "ungültiger Ausdruck in '%s'"
 
 #: deriv.cpp:864
-#, fuzzy
 msgid "too many variables"
 msgstr "zu viele Variablen"
 
@@ -322,7 +321,7 @@ msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ 
 msgstr "nextn() fand keine Lösung < %d = INT_MAX (größte ganze Zahl); übergebe '0+ n' statt 'n'"
 
 #: fourier.cpp:218
-#, fuzzy, c-format
+#, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr "nextn<64>() fand keine Lösung < %llu = UINT64_MAX (größte ganze Zahl)"
 
@@ -368,7 +367,7 @@ msgstr "'%s' muss Länge 1 haben"
 #: isoreg.cpp:57
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
-msgstr ""
+msgstr "nicht-endliche sum(y) == %g ist nicht erlaubt"
 
 #: ks.cpp:516
 msgid "Smirnov statistic only defined for two groups"
@@ -392,7 +391,7 @@ msgid "'x' is not a matrix"
 msgstr "'x' ist keine Matrix"
 
 #: lm.cpp:60
-#, fuzzy, c-format
+#, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%lld) do not match"
 msgstr "Dimensionen von 'x' (%d,%d) und 'y' (%lld) passen nicht zueinander"
 
@@ -615,7 +614,7 @@ msgstr "'.' erscheint in der Formel und 'data' Argument ist ungültig"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' muss eine Liste sein"
+msgstr "n muss mindestes zwei sein"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1077,32 +1076,29 @@ msgstr "Fehlende Werte in den letzten %d Beobachtungen"
 msgid "ifault=%d. This should not happen"
 msgstr "das sollte nicht sein"
 
-#~ msgid "n must be at least two"
-#~ msgstr "n muss mindestes zwei sein"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) nuss mindestens zwei sein"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "unzulässiger Wert von lag.max"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "ungültige Modellformel in ExtractVars"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "ungültige Modellformel in EncodeVars"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) nuss mindestens zwei sein"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' muss eine Liste sein"
+
+#~ msgid "'central' is NA, but must be TRUE or FALSE"
+#~ msgstr "'central' ist NA, muss aber TRUE oder FALSE sein"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "unzulässiger Wert von lag.max"
 
 #~ msgid "m must be a list"
 #~ msgstr "m nuss eine Liste sein"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf durch größte positive Zahl ersetzt"
-
-#~ msgid "'central' is NA, but must be TRUE or FALSE"
-#~ msgstr "'central' ist NA, muss aber TRUE oder FALSE sein"
 
 #, c-format
 #~ msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"

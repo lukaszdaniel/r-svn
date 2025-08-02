@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:32+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -791,12 +791,12 @@ msgstr ""
 msgid "Invalid font path: \"%s\""
 msgstr "%s 中に不正な 'fonts' パラメータ"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "フォントリストを割り当てることができませんでした"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -805,19 +805,19 @@ msgstr "フォントリストを割り当てることができませんでした
 msgid "invalid '%s' argument"
 msgstr "引数 '%s' が不正です"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "quartz() デバイスのサイズが不正です"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "デバイスの内容を作成できませんでした"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "quartz() デバイスを作成できません。与えられた型はサポートされていません"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz デバイスはこのプラットフォームでは利用できません"
 
@@ -1136,28 +1136,12 @@ msgstr "フォントリストを割り当てることができませんでした
 msgid "Font file not found; matching font family and face"
 msgstr "Quartz フォントのデータベースにフォントファミリが見付かりません"
 
-#~ msgid "invalid 'file' argument"
-#~ msgstr "不正な 'file' 引数"
-
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "'maxColorValue' の値が不正です"
 
 #, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "%s() 中のファイル名が長すぎます"
-
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "呼出し jpeg() 中に長すぎるファイル名"
-
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "呼出し tiff() 中に長すぎるファイル名"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "呼出し win.metafile() 中に長すぎるファイル名"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "'%s' の値が不正です"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "xfig() 中の色数が多すぎました"
@@ -1191,8 +1175,17 @@ msgstr "Quartz フォントのデータベースにフォントファミリが�
 #~ msgstr "ファイル名がありません"
 
 #, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "エンコーディング '%s' を使うことができません"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "'%s' の値が不正です"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "不正な 'file' 引数"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "呼出し jpeg() 中に長すぎるファイル名"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "呼出し tiff() 中に長すぎるファイル名"
 
 #~ msgid "invalid argument"
 #~ msgstr "引数が不正です"

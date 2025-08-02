@@ -157,9 +157,8 @@ msgstr "'names'는 반드시 1보다 크거나 같아야 합니다."
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
-#, fuzzy
 msgid "replacing registration for cluster type '%s'"
-msgstr "알 수 없는 클러스터 유형입니다"
+msgstr ""
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0
@@ -204,17 +203,15 @@ msgstr[0] ""
 
 #. R/unix/mclapply.R: ngettext(nores, "scheduled core %s did not deliver a result, all values of the job will be affected",     "scheduled cores %s did not deliver results, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0
-#, fuzzy
 msgid "scheduled core %s did not deliver a result, all values of the job will be affected"
 msgid_plural "scheduled cores %s did not deliver results, all values of the jobs will be affected"
-msgstr[0] "모든 예약된 코어들은 사용자코드내 에러를 접했습니다"
+msgstr[0] ""
 
 #. R/unix/mclapply.R: ngettext(length(has.errors), "scheduled core %s encountered error in user code, all values of the job will be affected",     "scheduled cores %s encountered errors in user code, all values of the jobs will be affected")
 #: R/unix/mclapply.R:0
-#, fuzzy
 msgid "scheduled core %s encountered error in user code, all values of the job will be affected"
 msgid_plural "scheduled cores %s encountered errors in user code, all values of the jobs will be affected"
-msgstr[0] "모든 예약된 코어들은 사용자코드내 에러를 접했습니다"
+msgstr[0] ""
 
 #. R/snowSOCK.R: ngettext(length(hosts), "socket cluster with %d nodes on host %s",     "socket cluster with %d nodes on hosts %s")
 #: R/snowSOCK.R:0

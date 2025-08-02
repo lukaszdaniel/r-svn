@@ -164,9 +164,8 @@ msgstr ""
 
 #. R/oldClass.R: gettextf("'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s",     dQuote("oldClass"), dQuote(class(object)))
 #: R/oldClass.R:0
-#, fuzzy
 msgid "'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s"
-msgstr "argumento sin nombre debe extender la clase S3 o la clase de parte de los datos; no es el caso de  clase %s"
+msgstr ""
 
 #. R/as.R: gettextf("'as' method should have one argument, or match the arguments of coerce(): got  (%s)",     paste(formalArgs(def), collapse = ", "))
 #: R/as.R:0
@@ -1720,9 +1719,8 @@ msgstr ""
 
 #. R/ClassExtensions.R: gettextf("the 'S3Class' argument must be a superclass of %s:  not true of class %s",     dQuote(class(object)), dQuote(S3Class))
 #: R/ClassExtensions.R:0
-#, fuzzy
 msgid "the 'S3Class' argument must be a superclass of %s:  not true of class %s"
-msgstr "argumento sin nombre debe extender la clase S3 o la clase de parte de los datos; no es el caso de  clase %s"
+msgstr ""
 
 #. R/ClassExtensions.R: gettextf("the 'coerce' argument to 'setIs' should be a function of one argument, got an object of class %s",     dQuote(class(coerce)))
 #: R/ClassExtensions.R:0
@@ -1963,9 +1961,8 @@ msgstr ""
 
 #. R/refClass.R: gettextf("unnamed arguments to $new() must be objects from a reference class; got an object of class %s",     dQuote(class(super)))
 #: R/refClass.R:0
-#, fuzzy
 msgid "unnamed arguments to $new() must be objects from a reference class; got an object of class %s"
-msgstr "argumento sin nombre debe extender la clase S3 o la clase de parte de los datos; no es el caso de  clase %s"
+msgstr ""
 
 #. R/SClasses.R: stop("validity method must be NULL or a function of one argument")
 #: R/SClasses.R:0

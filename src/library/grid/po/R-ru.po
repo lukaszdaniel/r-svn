@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/unit.R: stop("'*' or '/' cannot be used as a unary operator")
@@ -947,17 +947,20 @@ msgstr[0] "неправильное имя оконницы"
 msgstr[1] "неправильные имена оконниц"
 msgstr[2] "неправильные имена оконниц"
 
-#~ msgid "invalid 'clip' value"
-#~ msgstr "неправильное значение 'clip'"
-
 #~ msgid "invalid 'frame'"
 #~ msgstr "неправильная 'frame'"
 
-#~ msgid "invalid 'gp' value"
-#~ msgstr "неправильное значение 'gp'"
-
 #~ msgid "invalid 'grob'"
 #~ msgstr "неправильный 'grob'"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "неправильный 'result'"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "неправильный аргумент 'print'"
+
+#~ msgid "invalid listing"
+#~ msgstr "неправильный 'listing'"
 
 #~ msgid "invalid 'listing'"
 #~ msgstr "неправильный список"
@@ -965,8 +968,8 @@ msgstr[2] "неправильные имена оконниц"
 #~ msgid "invalid 'origin'"
 #~ msgstr "неправильный 'origin'"
 
-#~ msgid "invalid 'result'"
-#~ msgstr "неправильный 'result'"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "неправильный аргумент 'arrow'"
 
 #~ msgid "invalid 'rot' value"
 #~ msgstr "неправильное значение 'rot'"
@@ -974,14 +977,11 @@ msgstr[2] "неправильные имена оконниц"
 #~ msgid "invalid 'theta'"
 #~ msgstr "неправильная theta"
 
-#~ msgid "invalid listing"
-#~ msgstr "неправильный 'listing'"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "неправильное значение 'gp'"
 
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "неправильный аргумент 'arrow'"
-
-#~ msgid "invalid 'print' argument"
-#~ msgstr "неправильный аргумент 'print'"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "неправильное значение 'clip'"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "аргумент 'x' должен быть объектом-единицей"

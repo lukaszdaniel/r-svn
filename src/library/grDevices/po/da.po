@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:31+0200\n"
 "Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -822,12 +822,12 @@ msgstr ""
 msgid "Invalid font path: \"%s\""
 msgstr "ugyldigt 'fonts'-parameter i %s"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "kunne ikke allokere skriftliste"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -836,22 +836,22 @@ msgstr "kunne ikke allokere skriftliste"
 msgid "invalid '%s' argument"
 msgstr "ugyldigt 'fil'-argument"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 #, fuzzy
 msgid "invalid quartz() device size"
 msgstr "ugyldig Quartz-enhedsstørrelse"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 #, fuzzy
 msgid "unable to create device description"
 msgstr "Kan ikke oprette enhedsbeskrivelse."
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 #, fuzzy
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "Kan ikke oprette Quartz-enhedsmål, angivet type er måske ikke understøttet."
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "Quartz-enhed er ikke tilgængelig på denne platform"
 
@@ -1180,9 +1180,6 @@ msgstr "kunne ikke allokere skriftliste"
 msgid "Font file not found; matching font family and face"
 msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
 
-#~ msgid "invalid 'file' argument"
-#~ msgstr "ugyldigt 'fil'-argument"
-
 #, fuzzy
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "ugyldig værdi for '%s'"
@@ -1190,19 +1187,6 @@ msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
 #, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "filnavn er for langt i %s()"
-
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "filnavn for langt i jpeg()-kald"
-
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "filnavn for langt i tiff()-kald"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "filnavn for langt i win.metafile()-kald"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "ugyldig værdi for '%s'"
 
 #, fuzzy
 #~ msgid "ran out of colors in xfig()"
@@ -1241,8 +1225,17 @@ msgstr "Skriftfamilie ikke fundet i Windows-skriftdatabasen"
 #~ msgstr "tomt filnavn"
 
 #, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "kan ikke bruge kodning '%s'"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "ugyldig værdi for '%s'"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "ugyldigt 'fil'-argument"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "filnavn for langt i jpeg()-kald"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "filnavn for langt i tiff()-kald"
 
 #, fuzzy
 #~ msgid "invalid argument"

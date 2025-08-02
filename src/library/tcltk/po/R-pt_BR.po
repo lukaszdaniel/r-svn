@@ -20,7 +20,6 @@ msgstr ""
 
 #. R/utils.R: stop("'filters' must be a 2-column character matrix")
 #: R/utils.R:0
-#, fuzzy
 msgid "'filters' must be a 2-column character matrix"
 msgstr "'filters' deve ser uma matriz caractere com 2 colunas"
 
@@ -66,7 +65,6 @@ msgstr "Ajuda"
 
 #. R/tkGUI.R: gettext("Help topic:")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Help topic:"
 msgstr "Tópico da ajuda:"
 
@@ -77,7 +75,6 @@ msgstr "Instalar pacotes via CRAN"
 
 #. R/tkGUI.R: gettext("Interactive linear fitting")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Interactive linear fitting"
 msgstr "Ajuste interativo linear"
 
@@ -88,7 +85,6 @@ msgstr "Carregar"
 
 #. R/tkGUI.R: gettext("Load packages")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Load packages"
 msgstr "Carregar pacotes"
 
@@ -119,25 +115,21 @@ msgstr "R FAQ"
 
 #. R/tkGUI.R: gettext("Save workspace")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Save workspace"
-msgstr "Não salvar área de trabalho"
+msgstr "Salvar área de trabalho"
 
 #. R/tkGUI.R: gettext("Source R code")
 #: R/tkGUI.R:0
-#, fuzzy
 msgid "Source R code"
 msgstr "Carregar código R"
 
 #. R/tclsearch.R: gettextf("Tcl package '%s' not found", package)
 #: R/tclsearch.R:0
-#, fuzzy
 msgid "Tcl package '%s' not found"
 msgstr "pacote Tcl '%s' não encontrado"
 
 #. R/windows/zzz.R: stop("Tcl/Tk support files were not installed", call. = FALSE)
 #: R/windows/zzz.R:0
-#, fuzzy
 msgid "Tcl/Tk support files were not installed"
 msgstr "Arquivos de suporte a Tcl/Tk não foram instalados"
 
@@ -153,7 +145,6 @@ msgstr "A interface tkGUI não está disponível no Windows"
 
 #. R/tclarray.R: stop("cannot change names on Tcl array")
 #: R/tclarray.R:0
-#, fuzzy
 msgid "cannot change names on Tcl array"
 msgstr "não é possível mudar nomes em um array Tcl"
 
@@ -176,10 +167,6 @@ msgstr "teste t"
 #: R/unix/zzz.R:0
 msgid "tcltk DLL is linked to"
 msgstr ""
-
-#, fuzzy
-#~ msgid "gettext(\"Save workspace\")"
-#~ msgstr "Salvar área de trabalho"
 
 #~ msgid "Loading Tcl/Tk interface ..."
 #~ msgstr "Carregando a interface Tcl/Tk ..."

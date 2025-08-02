@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:32+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -797,12 +797,12 @@ msgstr "Tentato rilascio di una maschera inesistente"
 msgid "Invalid font path: \"%s\""
 msgstr "parametro 'fonts' non valido in %s"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "allocazione lista font fallita"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -811,19 +811,19 @@ msgstr "allocazione lista font fallita"
 msgid "invalid '%s' argument"
 msgstr "argomento '%s' non valido"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "dimensione dispositivo quartz() non valida"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "non è possibile creare una descrizione per il dispositivo"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "non è possibile creare il dispositivo quartz(), quest'ultimo potrebber non essere supportato"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "Il dispositivo Quartz non è disponibile su questa piattaforma"
 
@@ -1140,28 +1140,12 @@ msgstr "allocazione fallita per le definizioni"
 msgid "Font file not found; matching font family and face"
 msgstr "famiglia di caratteri non trovata nel database dei caratteri di Windows"
 
-#~ msgid "invalid 'file' argument"
-#~ msgstr "argomento 'file' non valido"
-
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "valore di 'maxColorValue' non valido"
 
 #, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "nome file troppo lungo in %s()"
-
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "nome file troppo lungo in jpeg()"
-
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "nome file troppo lungo nella chiamata tiff()"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "nome file troppo lungo in win.metafile()"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "valore di '%s' non valido"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "a corto di colori in xfig()"
@@ -1195,8 +1179,17 @@ msgstr "famiglia di caratteri non trovata nel database dei caratteri di Windows"
 #~ msgstr "nome file vuoto"
 
 #, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "non è possibile utilizzare la codifica '%s'"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "valore di '%s' non valido"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "argomento 'file' non valido"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "nome file troppo lungo in jpeg()"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "nome file troppo lungo nella chiamata tiff()"
 
 #~ msgid "invalid argument"
 #~ msgstr "argomento non valido"

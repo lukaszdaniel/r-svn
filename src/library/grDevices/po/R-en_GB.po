@@ -942,11 +942,11 @@ msgstr[1] "invalid argument names %s in '%s'"
 #~ msgid "invalid 'filename'"
 #~ msgstr "invalid 'filename'"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "invalid 'file'"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "invalid 'family' argument"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "invalid 'title'"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "invalid 'family' argument"
+#~ msgid "invalid 'file'"
+#~ msgstr "invalid 'file'"

@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
@@ -165,7 +165,7 @@ msgstr "'%s' не значим для упорядоченных факторо�
 #: R/tapply.R:0
 #, fuzzy
 msgid "'%s' is of length 0"
-msgstr "'by' должен быть длиной 1"
+msgstr "'to' должен быть длиной 1"
 
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -211,7 +211,7 @@ msgstr "'name' должно быть строкой-скаляром"
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "'name' должно быть строкой-скаляром"
+msgstr "'%s' должен быть непустой строкой"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
@@ -244,7 +244,7 @@ msgstr "'%s' должен быть логическим"
 #: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
-msgstr "'by' должен быть длиной 1"
+msgstr "'to' должен быть длиной 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
@@ -803,9 +803,8 @@ msgstr "'zero.print' должен быть символом, логически�
 
 #. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "- done loading %s"
-msgstr "Удаление %s"
+msgstr ""
 
 #. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
@@ -815,15 +814,13 @@ msgstr "Удаление %s"
 
 #. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing S4 stuff for %s"
-msgstr "--- обработка классов"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing imports for %s"
-msgstr "--- обработка классов"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
 #: R/namespace.R:0
@@ -895,9 +892,8 @@ msgstr "--- обработка классов"
 
 #. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "--- sealing exports for %s"
-msgstr "--- обработка классов"
+msgstr ""
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -2826,9 +2822,8 @@ msgstr "версия %s %s замаскирована %s из %s"
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr "нужно указать в точности два из: 'to', 'by' и 'length.out' / 'along.with'"
+msgstr ""
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3149,86 +3144,38 @@ msgstr[0] "нет пакета под названием"
 msgstr[1] "нет пакетов под названиями"
 msgstr[2] "нет пакетов под названиями"
 
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'INDEX' нулевой длины"
-
-#~ msgid "invalid 'digits'"
-#~ msgstr "неправильные 'digits'"
-
 #~ msgid "invalid 'dims'"
 #~ msgstr "неправильные 'dims'"
+
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "неправильный аргумент 'endian'"
 
 #~ msgid "invalid 'make.names'"
 #~ msgstr "неправильное'make.names'"
 
-#~ msgid "invalid 'value'"
-#~ msgstr "неправильное 'value'"
+#~ msgid ","
+#~ msgstr ","
 
-#~ msgid "invalid 'x'"
-#~ msgstr "неправильный 'x'"
+#~ msgid "invalid string for 'by'"
+#~ msgstr "неправильная строка для 'by'"
 
-#~ msgid "invalid ncol(qr$qr)"
-#~ msgstr "неправильное ncol(qr$qr)"
-
-#~ msgid "invalid ncol(qr$rank)"
-#~ msgstr "неправильное ncol(qr$rank)"
-
-#~ msgid "invalid ncol(y)"
-#~ msgstr "неправильное ncol(y)"
-
-#~ msgid "invalid nrow(qr$qr)"
-#~ msgstr "неправильное nrow(qr$qr)"
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "унарный '-' не определен для объектов \"POSIXt\""
 
 #~ msgid "invalid nrow(x)"
 #~ msgstr "неправильное nrow(x)"
 
+#~ msgid "invalid 'path' argument"
+#~ msgstr "неправильный аргумент 'path'"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "неправильный аргумент 'time'"
+
 #~ msgid "invalid nrow(z)"
 #~ msgstr "неправильное nrow(z)"
 
-#~ msgid "'by' must match numbers of columns"
-#~ msgstr "'by' должен соответствовать номерам колонок"
-
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'stderr' должен быть длиной 1"
-
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'stdout' должен быть длиной 1"
-
 #~ msgid "shared object '%s' not found"
 #~ msgstr "разделяемый объект '%s' не найден"
-
-#~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr' должен быть TRUE или FALSE"
-
-#~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "'ignore.stdout' должен быть TRUE или FALSE"
-
-#~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "'intern' должен быть TRUE или FALSE"
-
-#~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "'invisible' должен быть TRUE или FALSE"
-
-#~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "'minimized' должен быть TRUE или FALSE"
-
-#~ msgid "'receive.console.signals' must be TRUE or FALSE"
-#~ msgstr "'receive.console.signals' должен быть TRUE или FALSE"
-
-#~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "'show.output.on.console' должен быть TRUE или FALSE"
-
-#~ msgid "invalid '(to - from)/by'"
-#~ msgstr "неправильное '(to - from)/by'"
-
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "неправильное NCOL(R)"
-
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "неправильное NCOL(y)"
-
-#~ msgid "invalid ncol(x)"
-#~ msgstr "неправильное ncol(x)"
 
 #~ msgid "bad 'file' argument"
 #~ msgstr "неправильный аргумент 'file'"
@@ -3239,23 +3186,116 @@ msgstr[2] "нет пакетов под названиями"
 #~ msgid "invalid 'category' argument"
 #~ msgstr "неправильный аргумент 'category'"
 
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "неправильный аргумент 'endian'"
+#~ msgid "FUN"
+#~ msgstr "FUN"
 
-#~ msgid "invalid 'path' argument"
-#~ msgstr "неправильный аргумент 'path'"
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "'by' должен соответствовать номерам колонок"
 
-#~ msgid "invalid 'time' argument"
-#~ msgstr "неправильный аргумент 'time'"
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "пакет %s имеет лицензию, которую Вам нужно принять:"
+
+#~ msgid "according to the DESCRIPTION file it is"
+#~ msgstr "в соответствии с файлом DESCRIPTION это"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "неправильное ncol(x)"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "неправильное nrow(qr$qr)"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "неправильное ncol(qr$qr)"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "неправильное ncol(qr$rank)"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "неправильное ncol(y)"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "неправильное NCOL(y)"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "неправильное NCOL(R)"
+
+#~ msgid "invalid 'x'"
+#~ msgstr "неправильный 'x'"
+
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "неправильное '(to - from)/by'"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX' нулевой длины"
 
 #~ msgid "invalid 'which' argument"
 #~ msgstr "неправильный аргумент 'which'"
 
-#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
-#~ msgstr "унарный '-' не определен для объектов \"POSIXt\""
+#~ msgid "invalid 'digits'"
+#~ msgstr "неправильные 'digits'"
 
-#~ msgid "invalid string for 'by'"
-#~ msgstr "неправильная строка для 'by'"
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "'intern' должен быть TRUE или FALSE"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "'ignore.stdout' должен быть TRUE или FALSE"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr' должен быть TRUE или FALSE"
+
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "'receive.console.signals' должен быть TRUE или FALSE"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout' должен быть длиной 1"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr' должен быть длиной 1"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "'show.output.on.console' должен быть TRUE или FALSE"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "'minimized' должен быть TRUE или FALSE"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "'invisible' должен быть TRUE или FALSE"
+
+#~ msgid "'name' must be a single character string"
+#~ msgstr "'name' должно быть строкой-скаляром"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "должен быть указан 'from'"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' должен быть объектом \"Date\""
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' должен быть длиной 1"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' должен быть длиной 1"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "'by' должен быть длиной 1"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' должен быть объектом \"POSIXt\""
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to' должен быть объектом \"POSIXt\""
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'пакет' должен быть длиной 1"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' должен быть длиной 1"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "аргумент 'length.out' должен быть длиной 1"
 
 #~ msgid ""
 #~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
@@ -3264,78 +3304,14 @@ msgstr[2] "нет пакетов под названиями"
 #~ "'structure(NULL, *)' не рекомендуется, потому что NULL не может иметь атрибутов.\n"
 #~ "  Попробуйте 'structure(list(), *)'."
 
-#, fuzzy
-#~ msgid "connections left open:"
-#~ msgstr "'connection' должно быть соединением"
-
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg' должен быть длиной 1"
-
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from' должен быть объектом \"Date\""
-
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from' должен быть объектом \"POSIXt\""
-
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from' должен быть длиной 1"
-
-#~ msgid "'from' must be specified"
-#~ msgstr "должен быть указан 'from'"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out' должен быть длиной 1"
-
-#~ msgid "'name' must be a single character string"
-#~ msgstr "'name' должно быть строкой-скаляром"
-
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'пакет' должен быть длиной 1"
-
-#~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "'to' должен быть объектом \"POSIXt\""
-
-#~ msgid "'to' must be of length 1"
-#~ msgstr "'to' должен быть длиной 1"
-
 #~ msgid "'which' must be of length 1"
 #~ msgstr "'which' должен быть длиной 1"
-
-#~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "аргумент 'length.out' должен быть длиной 1"
-
-#~ msgid "'%s' must be a non-empty string"
-#~ msgstr "'%s' должен быть непустой строкой"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' должен быть текстовой строкой длины 1"
 
 #~ msgid "'sample.kind' must be a character string of length 1"
 #~ msgstr "'sample.kind' должен быть текстовой строкой длины 1"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "according to the DESCRIPTION file it is"
-#~ msgstr "в соответствии с файлом DESCRIPTION это"
-
-#~ msgid "package %s has a license that you need to accept:"
-#~ msgstr "пакет %s имеет лицензию, которую Вам нужно принять:"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "FUN"
-#~ msgstr "FUN"
-
-#~ msgid "defunctError"
-#~ msgstr "defunctError"
-
-#~ msgid "deprecatedWarning"
-#~ msgstr "deprecatedWarning"
-
-#~ msgid "packageConflictError"
-#~ msgstr "packageConflictError"
 
 #~ msgid "'flag' must be a string, i.e., of length 1"
 #~ msgstr "'flag' должен быть строкой, например, единичной длины"
@@ -3352,11 +3328,20 @@ msgstr[2] "нет пакетов под названиями"
 #~ msgid "norm '%s' currently always uses exact = FALSE"
 #~ msgstr "norm '%s' сейчас всегда использует exact = FALSE"
 
+#~ msgid "defunctError"
+#~ msgstr "defunctError"
+
+#~ msgid "deprecatedWarning"
+#~ msgstr "deprecatedWarning"
+
 #~ msgid "options(\"stringsAsFactors\") not set to TRUE or FALSE"
 #~ msgstr "options(\"stringsAsFactors\") не установлены в TRUE или FALSE"
 
 #~ msgid "'origin' must be supplied"
 #~ msgstr "надо указать 'origin'"
+
+#~ msgid "packageConflictError"
+#~ msgstr "packageConflictError"
 
 #~ msgid "package %s does not have a namespace and should be re-installed"
 #~ msgstr "пакет %s не имеет пространства имен и должен быть инсталлирован заново"

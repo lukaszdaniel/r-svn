@@ -82,7 +82,7 @@ msgstr "Empty raster"
 
 #: grid.cpp:4022
 msgid "use of negative pch with symbol font is invalid"
-msgstr "use of negative pch with symbol font is invalid"
+msgstr ""
 
 #: grid.cpp:4028 grid.cpp:4084
 msgid "Coordinates for text pch not yet supported"
@@ -147,9 +147,9 @@ msgid "'units' must be character"
 msgstr "'units' must be character"
 
 #: unit.cpp:1590
-#, c-format
+#, fuzzy, c-format
 msgid "'%s' must be of length > 0"
-msgstr "'%s' must be of length > 0"
+msgstr "'units' must be of length > 0"
 
 #: unit.cpp:1601
 msgid "data must be either NULL, have length 1, or match the length of the final unit vector"
@@ -193,7 +193,7 @@ msgstr "Unable to calculate text width/height (using zero)"
 
 #: util.cpp:308 util.cpp:320
 msgid "grid grob object is empty"
-msgstr "grid grob object is empty"
+msgstr ""
 
 #: viewport.cpp:59
 msgid "Mask is not logical value ('none' or 'inherit')"

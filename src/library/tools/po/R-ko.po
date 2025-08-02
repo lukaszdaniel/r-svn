@@ -293,21 +293,18 @@ msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자�
 
 #. R/QC.R: gettext("Authors@R field gives no person with maintainer role, valid email address and non-empty name.")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives no person with maintainer role, valid email address and non-empty name."
-msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
+msgstr ""
 
 #. R/QC.R: gettext("Authors@R field gives no person with name and author role")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives no person with name and author role"
-msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
+msgstr ""
 
 #. R/QC.R: gettext("Authors@R field gives no person with name and roles.")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives no person with name and roles."
-msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
+msgstr ""
 
 #. R/QC.R: gettext("Authors@R field gives persons with duplicated ORCID identifiers:")
 #: R/QC.R:0
@@ -335,15 +332,13 @@ msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자�
 
 #. R/QC.R: gettext("Authors@R field gives persons with no name:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives persons with no name:"
-msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
+msgstr ""
 
 #. R/QC.R: gettext("Authors@R field gives persons with no role:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Authors@R field gives persons with no role:"
-msgstr "Authors@R 항목에서 메인테이너의 역할을 담당하는 저자의 수가 한명이상임을 확인하게 되었습니다:"
+msgstr ""
 
 #. R/QC.R: gettextf("Auto-generated content requiring editing in Rd file '%s':",     nm)
 #: R/QC.R:0
@@ -438,9 +433,8 @@ msgstr "Rd 파일들을 LaTeX 로 변환하고 있습니다..."
 
 #. R/news.R: stop("Could not extract news from the following text chunks:\n",     paste(sprintf("\nChunk %s:\n%s", format(seq_along(bad)),         bad), collapse = "\n"))
 #: R/news.R:0
-#, fuzzy
 msgid "Could not extract news from the following text chunks:"
-msgstr "다음의 섹션 제목으로부터 버전정보를 추출할 수 없습니다:"
+msgstr ""
 
 #. R/RdHelpers.R: gettextf("DESCRIPTION file is for package '%s', not '%s'", desc["Package"],     pkg)
 #: R/RdHelpers.R:0
@@ -755,9 +749,8 @@ msgstr "파일 '%s'에서 파싱에러가 발생했습니다:"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
-#, fuzzy
 msgid "License components which are templates and need '+ file LICENSE':"
-msgstr "다음은 허용되지 않는 제한을 가지고 있는 라이센스 구성요소들입니다:"
+msgstr ""
 
 #. R/QC.R: gettext("License components with restrictions not permitted:")
 #: R/QC.R:0
@@ -1030,9 +1023,8 @@ msgstr "파일 '%s'에서 파싱에러가 발생했습니다:"
 
 #. R/QC.R: gettextf("Non-portable flags in variable '%s':", names(x))
 #: R/QC.R:0
-#, fuzzy
 msgid "Non-portable flags in variable '%s':"
-msgstr "파일 '%s'에서 파싱에러가 발생했습니다:"
+msgstr ""
 
 #. R/QC.R: gettext("Non-standard license specification:")
 #: R/QC.R:0
@@ -1200,9 +1192,8 @@ msgstr "다음은 중복된 에일리어스 '%s'를 가진 Rd 파일들입니다
 
 #. R/Rd.R: gettextf("Rd macro package '%s' is not installed.", p)
 #: R/Rd.R:0
-#, fuzzy
 msgid "Rd macro package '%s' is not installed."
-msgstr "패키지 %s로부터 Rd macro를 찾을 수 없습니다."
+msgstr ""
 
 #. R/Rd.R: stop("Rd object required")
 #: R/Rd.R:0
@@ -1698,7 +1689,8 @@ msgstr "비어있는 라인을 포함하고 있습니다"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "현재의 작업디렉토리를 확인할 수 없습니다"
 
@@ -1743,9 +1735,8 @@ msgstr "%s을 다운로드 하고 있습니다  ..."
 
 #. R/checktools.R: message("downloading reverse dependencies ...")
 #: R/checktools.R:0
-#, fuzzy
 msgid "downloading reverse dependencies ..."
-msgstr "%s을 다운로드 하고 있습니다  ..."
+msgstr ""
 
 #. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
 #: R/admin.R:0
@@ -1947,9 +1938,8 @@ msgstr "체크할 패키지들이 없습니다"
 
 #. R/testing.R: message("no parsed files found")
 #: R/testing.R:0
-#, fuzzy
 msgid "no parsed files found"
-msgstr "소스파일들을 찾을 수 없습니다"
+msgstr ""
 
 #. R/dynamicHelp.R: stop("no running server to stop")
 #: R/dynamicHelp.R:0
@@ -2066,13 +2056,10 @@ msgstr "%s를 처리중입니다"
 #. R/packages.R: gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",     sQuote(basename(dirname(p))), conditionMessage(temp))
 #. R/packages.R: gettextf("reading DESCRIPTION for package %s failed with message:\n  %s",     sQuote(basename(paths[i])), conditionMessage(temp))
 #: R/packages.R:0
-#, fuzzy
 msgid ""
 "reading DESCRIPTION for package %s failed with message:\n"
 "  %s"
 msgstr ""
-"TeX 파일 %s를 컴파일하는데 실패했습니다:\n"
-"%s"
 
 #. R/install.R: message("  restoration failed\n")
 #: R/install.R:0
@@ -2233,9 +2220,8 @@ msgstr "구현되지 않은 인코딩입니다"
 
 #. R/toHTML.R: warning("unknown header specification")
 #: R/toHTML.R:0
-#, fuzzy
 msgid "unknown header specification"
-msgstr "비표준 라이센스 지정(non-standard license specification)입니다:"
+msgstr ""
 
 #. R/dynamicHelp.R: gettextf("unsupported URL %s", mono(path))
 #: R/dynamicHelp.R:0
@@ -2395,38 +2381,33 @@ msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
 
 #. R/QC.R: ngettext(length(x$bad_S4methods), "Found an obsolete/platform-specific call in methods for the following S4 generic:",     "Found an obsolete/platform-specific call in methods for the following S4 generics:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Found an obsolete/platform-specific call in methods for the following S4 generic:"
 msgid_plural "Found an obsolete/platform-specific call in methods for the following S4 generics:"
-msgstr[0] "다음의 S4 제네릭에 대하여 메소드로부터 .Internal 호출을 찾았습니다:"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(x$bad_refs), "Found an obsolete/platform-specific call in methods for the following reference class:",     "Found an obsolete/platform-specific call in methods for the following reference classes:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Found an obsolete/platform-specific call in methods for the following reference class:"
 msgid_plural "Found an obsolete/platform-specific call in methods for the following reference classes:"
-msgstr[0] "다음과 같은 레퍼런스 클래스에 대하여 메소들로부터 .Internal 호출을 찾았습니다:"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(x$bad_closures), "Found an obsolete/platform-specific call in the following function:",     "Found an obsolete/platform-specific call in the following functions:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Found an obsolete/platform-specific call in the following function:"
 msgid_plural "Found an obsolete/platform-specific call in the following functions:"
-msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(x$bad_examples), "Found possibly global 'T' or 'F' in the examples of the following Rd file:",     "Found possibly global 'T' or 'F' in the examples of the following Rd files:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Found possibly global 'T' or 'F' in the examples of the following Rd file:"
 msgid_plural "Found possibly global 'T' or 'F' in the examples of the following Rd files:"
-msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(x$bad_closures), "Found possibly global 'T' or 'F' in the following function:",     "Found possibly global 'T' or 'F' in the following functions:")
 #: R/QC.R:0
-#, fuzzy
 msgid "Found possibly global 'T' or 'F' in the following function:"
 msgid_plural "Found possibly global 'T' or 'F' in the following functions:"
-msgstr[0] "다음의 함수로부터 .Internal 호출을 찾았습니다:"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(x$defunct), "Found the defunct/removed function:",     "Found the defunct/removed functions:")
 #: R/QC.R:0
@@ -2472,7 +2453,6 @@ msgstr[0] "노트: UTF-8 문자열로 표시된 %d을 찾았습니다"
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "노트: \"bytes\"로서 표시된 %d 문자열을 찾았습니다"
@@ -2562,14 +2542,13 @@ msgstr[0] "파일 %s내에 다음과 같은 경고를 발견했습니다:"
 
 #. R/Rd.R: ngettext(sum(idx), "missing/empty \\name field in Rd file\n%s",     "missing/empty \\name field in Rd files\n%s")
 #: R/Rd.R:0
-#, fuzzy
 msgid ""
 "missing/empty \\name field in Rd file\n"
 "%s"
 msgid_plural ""
 "missing/empty \\name field in Rd files\n"
 "%s"
-msgstr[0] "'%s'내에 \\title 항목이 비어있습니다"
+msgstr[0] ""
 
 #. R/makeLazyLoad.R: ngettext(sum(dup), "object %s is created by more than one data call",     "objects %s are created by more than one data call")
 #: R/makeLazyLoad.R:0
@@ -2579,24 +2558,23 @@ msgstr[0] "객체 %s는 하나 이상의 데이터 호출로부터 생성되었�
 
 #. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s")
 #: R/admin.R:0
-#, fuzzy
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
-msgstr[0] "'%2$s'에 %1$s를 실행할 수 없습니다"
+msgstr[0] ""
 
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Rd 파일들은 반드시 비어있지 않은 %s를 가져야 합니다."
 
-#, fuzzy
-#~ msgid "in package installation"
-#~ msgstr "올바른 패키지 레이아웃(package layout)이 아닙니다."
+#~ msgid ","
+#~ msgstr ","
 
 #, fuzzy
 #~ msgid "invalid value"
 #~ msgstr "패키지가 잘못되었습니다"
 
-#~ msgid ","
-#~ msgstr ","
+#, fuzzy
+#~ msgid "in package installation"
+#~ msgstr "올바른 패키지 레이아웃(package layout)이 아닙니다."
 
 #, fuzzy
 #~ msgid "one of 'package' and 'dir' must be specified."

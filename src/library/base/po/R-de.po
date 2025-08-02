@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-20 10:44\n"
 "PO-Revision-Date: 2025-07-06 15:00+0200\n"
-"Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
+"Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -164,7 +164,7 @@ msgstr "'%s' ist nicht sinnvoll für geordnete Faktoren"
 #: R/tapply.R:0
 #, fuzzy
 msgid "'%s' is of length 0"
-msgstr "'by' muss Länge 1 haben"
+msgstr "'to' muss Länge 1 haben"
 
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -201,16 +201,14 @@ msgstr "'to' muss \"Date\" Objekt sein"
 #. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
 #: R/RNG.R:0 R/connections.R:0 R/format.R:0
-#, fuzzy
 msgid "'%s' must be a character string"
-msgstr "'name' muss eine einzelne Zeichenkette sein"
+msgstr "'%s' muss eine Zeichenkette sein"
 
 #. R/load.R: gettextf("'%s' must be a non-empty character string", "file")
 #. R/serialize.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/load.R:0 R/serialize.R:0
-#, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "'name' muss eine einzelne Zeichenkette sein"
+msgstr "'%s' muss nicht-leere Zeichenkette sein"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
@@ -239,10 +237,11 @@ msgstr "'%s' muss boolesch sein"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
-msgstr "'by' muss Länge 1 haben"
+msgstr "'to' muss Länge 1 haben"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
@@ -278,7 +277,7 @@ msgstr "'MARGIN' passt nicht zu dim(X)"
 #. R/tapply.R: stop("'X' must be a data frame when 'INDEX' is a formula")
 #: R/tapply.R:0
 msgid "'X' must be a data frame when 'INDEX' is a formula"
-msgstr ""
+msgstr "'X' muss ein data frame sein, wenn 'INDEX' eine Formel ist"
 
 #. R/apply.R: stop("'X' must have named dimnames")
 #: R/apply.R:0
@@ -378,7 +377,7 @@ msgstr ""
 #. R/sort.R: stop("'decreasing' of length > 1 is only for method = \"radix\"")
 #: R/sort.R:0
 msgid "'decreasing' of length > 1 is only for method = \"radix\""
-msgstr ""
+msgstr "'decreasing' mit Länge > 1 ist nur für method = \"radix\""
 
 #. R/det.R: stop("'determinant' not currently defined for complex matrices")
 #: R/det.R:0
@@ -387,7 +386,6 @@ msgstr "'determinant' für komplexe Matrizen nicht definiert"
 
 #. R/datetime.R: stop("'digits' must be numeric, integer valued")
 #: R/datetime.R:0
-#, fuzzy
 msgid "'digits' must be numeric, integer valued"
 msgstr "'digits' muss nummerisch ganzzahlig sein"
 
@@ -459,9 +457,8 @@ msgstr "'format' muss eins aus {\"f\",\"e\",\"E\",\"g\",\"G\", \"fg\", \"s\"} se
 
 #. R/split.R: stop("'formula' must be a formula")
 #: R/split.R:0
-#, fuzzy
 msgid "'formula' must be a formula"
-msgstr "'from' muss entweder raw oder character sein"
+msgstr "'formula' muss eine Formel sein"
 
 #. R/seq.R: stop("'from' must be a finite number")
 #: R/seq.R:0
@@ -530,9 +527,8 @@ msgstr "'k' ist zu groß"
 
 #. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
-#, fuzzy
 msgid "'kind' must be a character string (RNG to be used)."
-msgstr "'kind' muss eine Zeichenkette der Länge 1 sein (zu nutzender RNG)."
+msgstr "'kind' muss eine Zeichenkette sein (zu nutzender RNG)."
 
 #. R/dates.R: stop("'lag' and 'differences' must be integers >= 1")
 #. R/datetime.R: stop("'lag' and 'differences' must be integers >= 1")
@@ -607,9 +603,8 @@ msgstr ""
 
 #. R/dataframe.R: gettextf("'row.names' is not a character or integer vector of length %d",     nrows)
 #: R/dataframe.R:0
-#, fuzzy
 msgid "'row.names' is not a character or integer vector of length %d"
-msgstr "'row.names' ist kein Zeichenkettenvektor der Länge %d -- wird ausgelassen. Wird einen Fehler ergeben!"
+msgstr "'row.names' ist kein Zeichenketten- oder Ganzahlvektor der Länge %d"
 
 #. R/dataframe.R: stop("'row.names' should specify one of the variables")
 #: R/dataframe.R:0
@@ -663,9 +658,8 @@ msgstr "'tzone' Attribute sind inkonsistent"
 
 #. R/kappa.R: stop("'uplo' must be \"U\" or \"L\"")
 #: R/kappa.R:0
-#, fuzzy
 msgid "'uplo' must be \"U\" or \"L\""
-msgstr "'wait' muss TRUE oder FALSE sein"
+msgstr "'uplo' muss \"U\" oder \"L\" sein"
 
 #. R/dataframe.R: stop("'value' is the wrong length")
 #: R/dataframe.R:0
@@ -987,7 +981,7 @@ msgstr "Description:"
 #. R/zzz.R: gettextf("Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead",     "PLACEHOLDER", "as.data.frame.vector", "as.data.frame")
 #: R/zzz.R:0
 msgid "Direct call of '%s()' is deprecated.  Use '%s()' or '%s()' instead"
-msgstr ""
+msgstr "Direkter Aufruf von '%s()' ist veraltet.  Nutze '%s()' oder '%s()' stattdessen"
 
 #. R/library.R: gettextf("Documentation for package %s", sQuote(x$name))
 #: R/library.R:0
@@ -1117,7 +1111,7 @@ msgstr "Im Moment keine DLL geladen mit Namen oder Pfad %s"
 #. R/datetime.R: gettextf("No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?",     i)
 #: R/datetime.R:0
 msgid "No element named \"%s\" found in x, did you mean x[, \"%1$s\"] instead?"
-msgstr ""
+msgstr "Kein Element namens %s in x gefunden, meinten Sie x[, \"51$s\"] stattdessen?"
 
 #. R/interaction.R: stop("No factors specified")
 #: R/interaction.R:0
@@ -1249,12 +1243,12 @@ msgstr "Zeitnahme beendet um:"
 #. R/split.R: warning("Unexpected LHS in 'formula' has been combined with RHS.")
 #: R/split.R:0
 msgid "Unexpected LHS in 'formula' has been combined with RHS."
-msgstr ""
+msgstr "Unerwartete LHS in 'formula' wurde mit der RHS kombiniert"
 
 #. R/split.R: warning("Unexpected LHS in 'formula' has been ignored.")
 #: R/split.R:0
 msgid "Unexpected LHS in 'formula' has been ignored."
-msgstr ""
+msgstr "Unerwartete LHS in 'formula' wurde ignoriert"
 
 #. R/Defunct.R: gettextf("Use '%s' instead.\n", new)
 #. R/Deprecated.R: gettextf("Use '%s' instead.\n", new)
@@ -1376,7 +1370,7 @@ msgstr "Argumente müssen die selbe Länge haben"
 #. R/datetime.R: warning("as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?")
 #: R/datetime.R:0
 msgid "as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?"
-msgstr ""
+msgstr "as.character(td, ..) gehorcht keinem 'format' Argument mehr; nutze format(td, ..) ?"
 
 #. R/files.R: stop("attempt to copy a directory to itself")
 #: R/files.R:0
@@ -1604,7 +1598,7 @@ msgstr "dim(x) muss positive Länge haben"
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
 msgid "directories are omitted unless 'recursive = TRUE'"
-msgstr ""
+msgstr "Verzeichnisse werden ausgelassen, wenn nicht 'recursive = TRUE'"
 
 #. R/dates.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("Date"))
 #. R/datetime.R: gettextf("do not know how to convert '%s' to class %s", deparse1(substitute(x)),     dQuote("POSIXlt"))
@@ -1656,7 +1650,7 @@ msgstr "leere (Null Bytes) Eingabedatei"
 #. R/source.R: stop("empty file/url name")
 #: R/source.R:0
 msgid "empty file/url name"
-msgstr ""
+msgstr "leerer Datei/URL Name"
 
 #. R/namespace.R: gettextf("empty name in directive '%s' in 'NAMESPACE' file",     as.character(e[[1L]]))
 #: R/namespace.R:0
@@ -1832,8 +1826,9 @@ msgstr "Eingabe wurde beschädigt, LF wurde ersetzt durch CR"
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "ungültiges 'name' Argument"
@@ -1856,9 +1851,8 @@ msgstr "ungültiger 'value'"
 
 #. R/kappa.R: gettextf("invalid '%s': type \"%s\"", "x", typeof(x))
 #: R/kappa.R:0
-#, fuzzy
 msgid "invalid '%s': type \"%s\""
-msgstr "ungültiger Wert für 'n'"
+msgstr "ungültiges '%s': Typ \"%s\""
 
 #. R/dates.R: stop("invalid 'by' string")
 #. R/datetime.R: stop("invalid 'by' string")
@@ -1919,9 +1913,8 @@ msgstr "ungültiger Modus für 'by'"
 
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
-#, fuzzy
 msgid "invalid non-character version specification 'x' (type: %s)"
-msgstr "ungültige Versionsspezifikation %s"
+msgstr "ungültige, nicht-zeichenketten Versionsspezifikation 'x' (Typ %s)"
 
 #. R/cut.R: stop("invalid number of intervals")
 #: R/cut.R:0
@@ -2274,7 +2267,7 @@ msgstr "keines der Pakete ist geladen"
 #. R/kappa.R: gettextf("norm=\"%s\" not available here; using norm=\"1\"",     norm)
 #: R/kappa.R:0
 msgid "norm=\"%s\" not available here; using norm=\"1\""
-msgstr ""
+msgstr "norm=%s hier nicht verfügbar; nutze norm=\"1\""
 
 #. R/rowsum.R: stop("not a data frame")
 #: R/rowsum.R:0
@@ -2352,15 +2345,13 @@ msgstr "nun dyn.unload(\"%s\") ..."
 
 #. R/dataframe.R: gettextf("number of columns of result, %d, is not a multiple of vector length %d of arg %d",     nvar, ni, i)
 #: R/dataframe.R:0
-#, fuzzy
 msgid "number of columns of result, %d, is not a multiple of vector length %d of arg %d"
-msgstr "Anzahl der zu erseztenden Elemente ist kein Vielfaches der Ersetzungslänge"
+msgstr "Anzahl der Spalten des Ergebnisses, %d, ist kein Vielfaches der Vektorlänge %d des Arguments %d"
 
 #. R/cut.R: stop("number of intervals and length of 'labels' differ")
 #: R/cut.R:0
-#, fuzzy
 msgid "number of intervals and length of 'labels' differ"
-msgstr "Längen von 'breaks' und 'labels' unterschiedlich"
+msgstr "Anzahl der Intervalle und Länge von 'labels' unterschiedlich"
 
 #. R/dataframe.R: warning("number of items to replace is not a multiple of replacement length")
 #: R/dataframe.R:0
@@ -2818,7 +2809,7 @@ msgstr "... mit FUN \"*\" zu nutzen ist ein Fehler"
 #. R/kappa.R: warning("using 1-norm approximation for approximate 2-norm")
 #: R/kappa.R:0
 msgid "using 1-norm approximation for approximate 2-norm"
-msgstr ""
+msgstr "nutze die 1-Norm Approximation um die 2-Norm zu approximieren"
 
 #. R/formals.R: warning("using the first element of 'value' of type \"expression\"")
 #: R/formals.R:0
@@ -2842,9 +2833,8 @@ msgstr "Version %s von %s sind maskiert von %s in %s"
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr "genau zwei aus 'to', 'by' und 'length.out' / 'along.with' müssen angegeben sein"
+msgstr ""
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3130,89 +3120,38 @@ msgid_plural "there are no packages called"
 msgstr[0] "es gibt kein Paket mit Namen"
 msgstr[1] "es gibt keine Pakete mit Namen"
 
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'INDEX' hat Länge 0"
-
-#~ msgid "invalid 'digits'"
-#~ msgstr "ungültige 'digits'"
-
 #~ msgid "invalid 'dims'"
 #~ msgstr "ungültige 'dims'"
+
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "ungültiges 'endian' Argument"
 
 #~ msgid "invalid 'make.names'"
 #~ msgstr "ungültige 'make.names'"
 
-#~ msgid "invalid 'value'"
-#~ msgstr "ungültiger 'value'"
+#~ msgid ","
+#~ msgstr ","
 
-#, fuzzy
-#~ msgid "invalid 'x'"
-#~ msgstr "ungültige 'dims'"
+#~ msgid "invalid string for 'by'"
+#~ msgstr "ungültige Zeichenkette für 'by'"
 
-#~ msgid "invalid ncol(qr$qr)"
-#~ msgstr "unzulässige ncol(qr$qr)"
-
-#~ msgid "invalid ncol(qr$rank)"
-#~ msgstr "ungültige ncol(qr$rank)"
-
-#~ msgid "invalid ncol(y)"
-#~ msgstr "ungültige ncol(y)"
-
-#~ msgid "invalid nrow(qr$qr)"
-#~ msgstr "unzulässige nrow(qr$qr)"
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "unäres '-' ist für \"POSIXt\" Objekte nicht definiert"
 
 #~ msgid "invalid nrow(x)"
 #~ msgstr "ungültige nrow(x)"
 
-#, fuzzy
+#~ msgid "invalid 'path' argument"
+#~ msgstr "ungültiges 'path' Argument"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "ungültiges 'time' Argument"
+
 #~ msgid "invalid nrow(z)"
-#~ msgstr "ungültige nrow(x)"
-
-#~ msgid "'by' must match numbers of columns"
-#~ msgstr "'by' muss zu den Anzahlen der Spalten passen"
-
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'stderr' muss Länge 1 haben"
-
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'stdout' muss Länge 1 haben"
+#~ msgstr "ungültige nrow(z)"
 
 #~ msgid "shared object '%s' not found"
 #~ msgstr "shared object %s nicht gefunden"
-
-#~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr' muss TRUE oder FALSE sein"
-
-#~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "'ignore.stdout' muss TRUE oder FALSE sein"
-
-#~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "'intern' muss TRUE oder FALSE sein"
-
-#~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "'invisible' muss TRUE oder FALSE sein"
-
-#~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "'minimized' muss TRUE oder FALSE sein"
-
-#, fuzzy
-#~ msgid "'receive.console.signals' must be TRUE or FALSE"
-#~ msgstr "'intern' muss TRUE oder FALSE sein"
-
-#~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "'show.output.on.console' muss TRUE oder FALSE sein"
-
-#~ msgid "invalid '(to - from)/by'"
-#~ msgstr "unzulässiges '(to - from)/by'"
-
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "unzulässige NCOL(R)"
-
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "unzulässige NCOL(y)"
-
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ungültige ncol(x)"
 
 #~ msgid "bad 'file' argument"
 #~ msgstr "unbrauchbares 'file' Argument"
@@ -3223,23 +3162,125 @@ msgstr[1] "es gibt keine Pakete mit Namen"
 #~ msgid "invalid 'category' argument"
 #~ msgstr "ungültiges Argument für 'category'"
 
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "ungültiges 'endian' Argument"
+#~ msgid "FUN"
+#~ msgstr "FUN"
 
-#~ msgid "invalid 'path' argument"
-#~ msgstr "ungültiges 'path' Argument"
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "'by' muss zu den Anzahlen der Spalten passen"
 
-#~ msgid "invalid 'time' argument"
-#~ msgstr "ungültiges 'time' Argument"
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "Paket %s unterliegt einer Lizenz, welche akzeptiert werden muss:"
+
+#~ msgid "according to the DESCRIPTION file it is"
+#~ msgstr "Gemäß DESCRIPTION handelt es sich um"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ungültige ncol(x)"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "unzulässige nrow(qr$qr)"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "unzulässige ncol(qr$qr)"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "ungültige ncol(qr$rank)"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "ungültige ncol(y)"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "unzulässige NCOL(y)"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "unzulässige NCOL(R)"
+
+#~ msgid "invalid 'x'"
+#~ msgstr "ungültige 'x'"
+
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "unzulässiges '(to - from)/by'"
+
+#~ msgid "no natural language support or missing translations"
+#~ msgstr "keine Unterstützung für natürliche Sprache oder fehlende Übersetzung"
+
+#~ msgid "In bare C locale: LANGUAGE reset, but message language may be unchanged"
+#~ msgstr "In reiner C Lokalisierung: LANGUAGE reset, aber Sprache der Nachricht vielleicht unverändert"
+
+#~ msgid "In bare C locale, not forcing locale; possibly use 'force = TRUE'?"
+#~ msgstr "In reiner C Lokalisierung, keine Erzwingen der Lokalisierung; evtl nutze 'force = TRUE'?"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX' hat Länge 0"
 
 #~ msgid "invalid 'which' argument"
 #~ msgstr "ungültiges 'which' Argument"
 
-#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
-#~ msgstr "unäres '-' ist für \"POSIXt\" Objekte nicht definiert"
+#~ msgid "invalid 'digits'"
+#~ msgstr "ungültige 'digits'"
 
-#~ msgid "invalid string for 'by'"
-#~ msgstr "ungültige Zeichenkette für 'by'"
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "'intern' muss TRUE oder FALSE sein"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "'ignore.stdout' muss TRUE oder FALSE sein"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr' muss TRUE oder FALSE sein"
+
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "'receive.console.signals' muss TRUE oder FALSE sein"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout' muss Länge 1 haben"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr' muss Länge 1 haben"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "'show.output.on.console' muss TRUE oder FALSE sein"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "'minimized' muss TRUE oder FALSE sein"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "'invisible' muss TRUE oder FALSE sein"
+
+#~ msgid "'name' must be a single character string"
+#~ msgstr "'name' muss eine einzelne Zeichenkette sein"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from' muss angegeben werden"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' muss \"Date\" Objekt sein"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' muss Länge 1 haben"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' muss Länge 1 haben"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "'by' muss Länge 1 haben"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' muss ein \"POSIXt\" Objekt sein"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to' muss ein \"POSIXt\" Objekt sein"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' muss Länge 1 haben"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' muss Länge 1 haben"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "Argument 'length.out' muss Länge 1 haben"
 
 #~ msgid ""
 #~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
@@ -3248,79 +3289,14 @@ msgstr[1] "es gibt keine Pakete mit Namen"
 #~ "Der Aufruf 'struture(NULL, *)' ist veraltet, da NULL keine Attribute haben kann.\n"
 #~ " Evtl. geht stattdessen 'structure(list(), *)."
 
-#, fuzzy
-#~ msgid "connections left open:"
-#~ msgstr "'connection' muss eine Verbindung sein"
-
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg' muss Länge 1 haben"
-
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from' muss \"Date\" Objekt sein"
-
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from' muss ein \"POSIXt\" Objekt sein"
-
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from' muss Länge 1 haben"
-
-#~ msgid "'from' must be specified"
-#~ msgstr "'from' muss angegeben werden"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out' muss Länge 1 haben"
-
-#~ msgid "'name' must be a single character string"
-#~ msgstr "'name' muss eine einzelne Zeichenkette sein"
-
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'package' muss Länge 1 haben"
-
-#~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "'to' muss ein \"POSIXt\" Objekt sein"
-
-#~ msgid "'to' must be of length 1"
-#~ msgstr "'to' muss Länge 1 haben"
-
 #~ msgid "'which' must be of length 1"
 #~ msgstr "'which' muss Länge 1 haben"
-
-#~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "Argument 'length.out' muss Länge 1 haben"
-
-#, fuzzy
-#~ msgid "'%s' must be a non-empty string"
-#~ msgstr "'file' muss nicht-leere Zeichenkette sein"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' muss eine Zeichenkette der Länge 1 sein."
 
 #~ msgid "'sample.kind' must be a character string of length 1"
 #~ msgstr "'sample.kind' muss eine Zeichenkette der Länge 1 sein."
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "according to the DESCRIPTION file it is"
-#~ msgstr "Gemäß DESCRIPTION handelt es sich um"
-
-#~ msgid "package %s has a license that you need to accept:"
-#~ msgstr "Paket %s unterliegt einer Lizenz, welche akzeptiert werden muss:"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "FUN"
-#~ msgstr "FUN"
-
-#~ msgid "defunctError"
-#~ msgstr "defunctError"
-
-#~ msgid "deprecatedWarning"
-#~ msgstr "deprecatedWarning"
-
-#~ msgid "packageConflictError"
-#~ msgstr "packageConflictError"
 
 #~ msgid "'flag' must be a string, i.e., of length 1"
 #~ msgstr "'flag' muss Zeichenkette sein, insbesondere mit Länge 1"
@@ -3332,11 +3308,20 @@ msgstr[1] "es gibt keine Pakete mit Namen"
 #~ msgid "norm '%s' currently always uses exact = FALSE"
 #~ msgstr "Norm '%s' nutzt aktuell immer exact = FALSE"
 
+#~ msgid "defunctError"
+#~ msgstr "defunctError"
+
+#~ msgid "deprecatedWarning"
+#~ msgstr "deprecatedWarning"
+
 #~ msgid "options(\"stringsAsFactors\") not set to TRUE or FALSE"
 #~ msgstr "options(\"stringsAsFactors\") weder TRUE noch FALSE gesetzt"
 
 #~ msgid "'origin' must be supplied"
 #~ msgstr "'origin' muss angegeben werden"
+
+#~ msgid "packageConflictError"
+#~ msgstr "packageConflictError"
 
 #~ msgid "package %s does not have a namespace and should be re-installed"
 #~ msgstr "Paket %s hat keinen Namensraum und sollte neu installiert werden"

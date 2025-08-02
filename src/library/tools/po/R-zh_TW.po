@@ -1714,7 +1714,8 @@ msgstr "帶空列"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "不能確定的目前工作目錄"
 
@@ -2481,7 +2482,6 @@ msgstr[0] "注意：發現 %d 個標記着 UTF-8 的字串"
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "注意：發現 %d 個標記為\"bytes\"的字串"
@@ -2596,13 +2596,8 @@ msgstr[0] "無法重新編碼 %s 行 %s"
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Rd 檔案裡必須要有非空白的 %s。"
 
-#, fuzzy
-#~ msgid "in package installation"
-#~ msgstr "套件版面設置無效"
-
-#, fuzzy
-#~ msgid "invalid value"
-#~ msgstr "套件無效。"
+#~ msgid "inst/doc"
+#~ msgstr "inst/doc"
 
 #~ msgid ","
 #~ msgstr ","
@@ -2610,8 +2605,13 @@ msgstr[0] "無法重新編碼 %s 行 %s"
 #~ msgid "ignored as vignettes have been rebuilt."
 #~ msgstr "由於簡介已經重新組建因而忽略。"
 
-#~ msgid "inst/doc"
-#~ msgstr "inst/doc"
+#, fuzzy
+#~ msgid "invalid value"
+#~ msgstr "套件無效。"
+
+#, fuzzy
+#~ msgid "in package installation"
+#~ msgstr "套件版面設置無效"
 
 #, fuzzy
 #~ msgid "%s file\n"

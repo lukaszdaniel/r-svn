@@ -33,9 +33,8 @@ msgstr ""
 
 #. R/grep.R: gettextf("%s and %s must have the same length", sQuote("x"),     sQuote("m"))
 #: R/grep.R:0
-#, fuzzy
 msgid "%s and %s must have the same length"
-msgstr "dim(X) की लंबाई की संख्या धनात्मक होनी चाहिए"
+msgstr ""
 
 #. R/attach.R: gettextf("%s converted to character string", sQuote(name))
 #: R/attach.R:0
@@ -116,9 +115,8 @@ msgstr "'%s' निष्क्रिय है|"
 
 #. R/Deprecated.R: gettextf("'%s' is deprecated.\n", old)
 #: R/Deprecated.R:0
-#, fuzzy
 msgid "'%s' is deprecated."
-msgstr "'%s' निष्क्रिय है|"
+msgstr ""
 
 #. R/match.fun.R: gettextf("'%s' is not a function, character or symbol", deparse(FUN))
 #: R/match.fun.R:0
@@ -226,8 +224,8 @@ msgstr ""
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'%s' must be of length 1"
 msgstr ""
 
@@ -463,9 +461,8 @@ msgstr ""
 
 #. R/connections.R: stop("'headers' must have names and must not be NA")
 #: R/connections.R:0
-#, fuzzy
 msgid "'headers' must have names and must not be NA"
-msgstr "'X' के dimnames का नाम दिया होना चाहिये"
+msgstr ""
 
 #. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #: R/New-Internal.R:0
@@ -499,9 +496,8 @@ msgstr ""
 
 #. R/match.R: stop("'input' must have length 1")
 #: R/match.R:0
-#, fuzzy
 msgid "'input' must have length 1"
-msgstr "dim(X) की लंबाई की संख्या धनात्मक होनी चाहिए"
+msgstr ""
 
 #. R/format.R: stop("'input.d.mark' has no characters")
 #: R/format.R:0
@@ -693,9 +689,8 @@ msgstr ""
 
 #. R/strwrap.R: stop("'x' and 'y' must have the same length")
 #: R/strwrap.R:0
-#, fuzzy
 msgid "'x' and 'y' must have the same length"
-msgstr "dim(X) की लंबाई की संख्या धनात्मक होनी चाहिए"
+msgstr ""
 
 #. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
 #: R/octhex.R:0
@@ -760,9 +755,8 @@ msgstr ""
 #. R/array.R: stop("'x' must have named dimnames")
 #. R/sweep.R: stop("'x' must have named dimnames")
 #: R/array.R:0 R/sweep.R:0
-#, fuzzy
 msgid "'x' must have named dimnames"
-msgstr "'X' के dimnames का नाम दिया होना चाहिये"
+msgstr ""
 
 #. R/table.R: gettextf("'x' must inherit from class %s", dQuote("summary.table"))
 #: R/table.R:0
@@ -1246,9 +1240,8 @@ msgstr ""
 
 #. R/table.R: stop("all arguments must have the same length")
 #: R/table.R:0
-#, fuzzy
 msgid "all arguments must have the same length"
-msgstr "dim(X) की लंबाई की संख्या धनात्मक होनी चाहिए"
+msgstr ""
 
 #. R/dataframe.R: stop("all variables should have the same length")
 #: R/dataframe.R:0
@@ -1317,9 +1310,8 @@ msgstr "तर्क अलग-अलग पंक्तियों की स�
 
 #. R/tapply.R: stop("arguments must have same length")
 #: R/tapply.R:0
-#, fuzzy
 msgid "arguments must have same length"
-msgstr "dim(X) की लंबाई की संख्या धनात्मक होनी चाहिए"
+msgstr ""
 
 #. R/datetime.R: warning("as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?")
 #: R/datetime.R:0
@@ -1545,9 +1537,8 @@ msgstr "dim(X) की लंबाई की संख्या धनात्�
 
 #. R/array.R: stop("dim(x) must have a positive length")
 #: R/array.R:0
-#, fuzzy
 msgid "dim(x) must have a positive length"
-msgstr "dim(X) की लंबाई की संख्या धनात्मक होनी चाहिए"
+msgstr ""
 
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
@@ -1776,11 +1767,11 @@ msgstr ""
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
-#, fuzzy
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/eigen.R: gettextf("invalid '%s' value", "nrow(x)")
 #. R/kappa.R: gettextf("invalid '%s' value", "nrow(z)")
@@ -1857,9 +1848,8 @@ msgstr ""
 #. R/dates.R: stop("invalid mode for 'by'")
 #. R/datetime.R: stop("invalid mode for 'by'")
 #: R/dates.R:0 R/datetime.R:0
-#, fuzzy
 msgid "invalid mode for 'by'"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/version.R: gettextf("invalid non-character version specification 'x' (type: %s)",     typeof(x))
 #: R/version.R:0
@@ -1868,9 +1858,8 @@ msgstr ""
 
 #. R/cut.R: stop("invalid number of intervals")
 #: R/cut.R:0
-#, fuzzy
 msgid "invalid number of intervals"
-msgstr "%1$s कि संख्या अमान्य है"
+msgstr ""
 
 #. R/library.R: stop("invalid package name")
 #: R/library.R:0
@@ -3042,7 +3031,3 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "invalid 'value'"
-#~ msgstr "%1$s कि संख्या अमान्य है"

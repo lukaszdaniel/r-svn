@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "First-Translator: Dmitri I GOULIAEV <dmitri.gouliaev@telkel.net\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/splineClasses.R: gettextf("%s needs package 'Matrix' correctly installed", "splineDesign(*, sparse=TRUE)")
@@ -40,34 +40,29 @@ msgstr "'deriv' должно быть между 0 и %d"
 #. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
 #. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
 #: R/splines.R:0
-#, fuzzy
 msgid "'df' was too small; have used %d"
 msgstr "'df' был слишком мал; использован %d"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula' должна быть в виде \"y ~ x\""
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord' должен быть >= 2"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "'ord' должен быть положительным целым, максимум количеством узлов"
 
 #. R/splines.R: warning("all interior knots match left boundary knot")
 #. R/splines.R: stop("all interior knots match left boundary knot")
 #: R/splines.R:0
-#, fuzzy
 msgid "all interior knots match left boundary knot"
-msgstr "все внутренние узлы совпадают с правым граничным узлом"
+msgstr "все внутренние узлы совпадают с левым граничным узлом"
 
 #. R/splines.R: warning("all interior knots match right boundary knot")
 #. R/splines.R: stop("all interior knots match right boundary knot")
@@ -92,19 +87,16 @@ msgstr "позиции узлов не должны убывать"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "позиции узлов должны постоянно возрастать"
 
 #. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "длина 'derivs' должна быть больше длины 'x'"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "длины 'x' и 'y' должны быть одинаковы"
 
@@ -135,7 +127,6 @@ msgstr "не-конечные координаты узлов"
 
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
-#, fuzzy
 msgid "shoving 'interior' knots matching boundary knots to inside"
 msgstr "пододвигаю 'внутренние' узлы, которые совпали с граничными, внутрь"
 
@@ -146,13 +137,11 @@ msgstr "некоторые значения 'x' за граничными узл
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "spline must be monotone"
 msgstr "кривая должна быть монотонной"
 
 #. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'",     knots[ord], knots[nk - degree], "outer.ok = TRUE")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr "данные 'x' должны быть в промежутке от %g до %g пока Вы не установите %s"
 
@@ -163,7 +152,6 @@ msgstr "размах значений 'x' превышает один перио
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "значения 'x' должны бить разными"
 
@@ -171,19 +159,3 @@ msgstr "значения 'x' должны бить разными"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "значения 'x' должны постоянно возрастать"
-
-#, fuzzy
-#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
-#~ msgstr "'df' был слишком мал; использован %d"
-
-#, fuzzy
-#~ msgid "stop(\"all interior knots match left boundary knot\")"
-#~ msgstr "все внутренние узлы совпадают с левым граничным узлом"
-
-#, fuzzy
-#~ msgid "stop(\"knot positions must be non-decreasing\")"
-#~ msgstr "позиции узлов не должны убывать"
-
-#, fuzzy
-#~ msgid "warning(\"all interior knots match left boundary knot\")"
-#~ msgstr "все внутренние узлы совпадают с левым граничным узлом"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-04-01 16:55+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: axis_scales.cpp:41 axis_scales.cpp:42 axis_scales.cpp:54
@@ -785,12 +785,12 @@ msgstr "Попытка закрыть несуществующую маску"
 msgid "Invalid font path: \"%s\""
 msgstr "неправильный параметр 'fonts' в %s"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "Не могу загрузить шрифт"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -799,19 +799,19 @@ msgstr "Не могу загрузить шрифт"
 msgid "invalid '%s' argument"
 msgstr "неправильный аргумент %s"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "неправильный размер устройства quartz()"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "не могу создать описание устройства"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "не могу создать целевое устройство quartz(), указанный тип не может быть поддержан"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "Устройство Quartz на этой платформе недоступно"
 
@@ -1128,28 +1128,12 @@ msgstr "не могу разместить определения"
 msgid "Font file not found; matching font family and face"
 msgstr "Файл шрифта не найден; ищу по семейству и названию шрифта"
 
-#~ msgid "invalid 'file' argument"
-#~ msgstr "неправильный аргумент 'file'"
-
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "неправильное значение 'maxColorValue'"
 
 #, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "слишком длинное имя файла в вызове %s()"
-
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "слишком длинное имя файла в вызове jpeg()"
-
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "слишком длинное имя файла в вызове tiff()"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "слишком длинное имя файла в вызове win.metafile()"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "неправильное значение '%s'"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "не хватило цветов в xfig()"
@@ -1183,8 +1167,17 @@ msgstr "Файл шрифта не найден; ищу по семейству 
 #~ msgstr "пустое имя файла"
 
 #, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "не могу использовать кодировку '%s'"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "неправильное значение '%s'"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "неправильный аргумент 'file'"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "слишком длинное имя файла в вызове jpeg()"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "слишком длинное имя файла в вызове tiff()"
 
 #~ msgid "invalid argument"
 #~ msgstr "неправильный аргумент"

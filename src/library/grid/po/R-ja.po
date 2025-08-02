@@ -87,9 +87,8 @@ msgstr "'hgap' は 1 つの単位 (unit) でなければなりません"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr "'x' と 'y' は長さ 1 でなければならない"
+msgstr ""
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -371,9 +370,8 @@ msgstr "不正な 'order' です"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid transform (nothing drawn)"
-msgstr "不正な 'order' です"
+msgstr ""
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
@@ -413,9 +411,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr "不正な水平方向の位置決め指定 (justification) です"
+msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -435,9 +432,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown width; using first width"
-msgstr "不正な水平方向の位置決め指定 (justification) です"
+msgstr ""
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -960,17 +956,20 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "不正な viewport 名です"
 
-#~ msgid "invalid 'clip' value"
-#~ msgstr "不正な 'clip' 値です"
-
 #~ msgid "invalid 'frame'"
 #~ msgstr "不正な 'frame' です"
 
-#~ msgid "invalid 'gp' value"
-#~ msgstr "不正な 'gp' 値です"
-
 #~ msgid "invalid 'grob'"
 #~ msgstr "不正な 'grob' です"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "不正な 'result' です"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "不正な 'print' 引数です"
+
+#~ msgid "invalid listing"
+#~ msgstr "不正なリスティング"
 
 #~ msgid "invalid 'listing'"
 #~ msgstr "不正な 'listing'"
@@ -978,8 +977,8 @@ msgstr[0] "不正な viewport 名です"
 #~ msgid "invalid 'origin'"
 #~ msgstr "不正な 'origin' です"
 
-#~ msgid "invalid 'result'"
-#~ msgstr "不正な 'result' です"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "不正な 'arrow' 引数です"
 
 #~ msgid "invalid 'rot' value"
 #~ msgstr "不正な 'rot' 値です"
@@ -987,14 +986,11 @@ msgstr[0] "不正な viewport 名です"
 #~ msgid "invalid 'theta'"
 #~ msgstr "不正な 'theta' です"
 
-#~ msgid "invalid listing"
-#~ msgstr "不正なリスティング"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "不正な 'gp' 値です"
 
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "不正な 'arrow' 引数です"
-
-#~ msgid "invalid 'print' argument"
-#~ msgstr "不正な 'print' 引数です"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "不正な 'clip' 値です"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr " 引数 'x' は単位 (units) オブジェクトでなければなりません "

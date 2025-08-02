@@ -38,25 +38,21 @@ msgstr "'deriv'는 반드시 0과 %d 사이에 있어야 합니다"
 #. R/splines.R: gettextf("'df' was too small; have used %d", ord - (1L - intercept))
 #. R/splines.R: gettextf("'df' was too small; have used %d", 1L + intercept)
 #: R/splines.R:0
-#, fuzzy
 msgid "'df' was too small; have used %d"
 msgstr "'df'가 너무 작아 %d의 값이 사용되고 있습니다"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "'formula'는 반드시 \"y ~ x\"와 같은 형식을 가지고 있어야 합니다"
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "'ord'는 반드시 2 보다 크거나 같아야 합니다"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "'ord'는 반드시 양의 정수이며 최대 놋트의 수만큼입니다"
 
@@ -89,19 +85,16 @@ msgstr "놋트 위치들은 반드시 감소하지 말아야 합니다"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "놋트 위치들은 반드시 감소없이 증가해야만 합니다"
 
 #. R/splineClasses.R: stop("length of 'derivs' is larger than length of 'x'")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "length of 'derivs' is larger than length of 'x'"
 msgstr "'derivs'의 길이가 'x'의 길이보다 깁니다."
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "'x'와 'y'의 길이는 반드시 같아야 합니다"
 
@@ -117,9 +110,8 @@ msgstr "반드시 적어도 'ord' 놋트를 가져야 합니다"
 
 #. R/splineClasses.R: gettextf("must have at least 'ord'=%d points", ord)
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "must have at least 'ord'=%d points"
-msgstr "반드시 적어도 'ord' 놋트를 가져야 합니다"
+msgstr ""
 
 #. R/splineClasses.R: gettextf("need at least %s (=%d) knots", "2*ord -1", 2 * ord -     1)
 #: R/splineClasses.R:0
@@ -143,13 +135,11 @@ msgstr "boundary knots를 넘어서는 일부 'x'값들은 올바르지 ill-cond
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "spline must be monotone"
 msgstr "spline은 반드시 monotone해야 합니다"
 
 #. R/splineClasses.R: gettextf("the 'x' data must be in the range %g to %g unless you set '%s'",     knots[ord], knots[nk - degree], "outer.ok = TRUE")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "the 'x' data must be in the range %g to %g unless you set '%s'"
 msgstr "만약 '%3$s'를 정하지 않았다면, 'x' 데이터는 반드시 %1$g에서 %2$g 범위내에 있어야 합니다"
 
@@ -160,7 +150,6 @@ msgstr "'x' 값들에 대한 범위는 한 주기를 초과해야 합니다"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "'x'의 값들은 반드시 고유하게 구별되어야 합니다"
 
@@ -168,11 +157,3 @@ msgstr "'x'의 값들은 반드시 고유하게 구별되어야 합니다"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "'x'의 값들은 반드시 감소없이 증가해야만 합니다"
-
-#, fuzzy
-#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
-#~ msgstr "'df'가 너무 작아 %d의 값이 사용되고 있습니다"
-
-#, fuzzy
-#~ msgid "stop(\"knot positions must be non-decreasing\")"
-#~ msgstr "놋트 위치들은 반드시 감소하지 말아야 합니다"

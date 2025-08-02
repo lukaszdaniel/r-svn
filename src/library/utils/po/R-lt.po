@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -477,6 +477,12 @@ msgstr "Redaguokite failą ir perkelkite jį į atitinkamą katalogą."
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "Įsitikinkite, kad neįtraukiate į sąrašą relistable objekto, arba atskirai nurodykite struktūrą."
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "Įveskite aplinkos numerį arba 0, kad išeitumėte"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -2348,20 +2354,8 @@ msgstr[0] "paketas %s negalimas (%s)"
 msgstr[1] "paketai %s negalimi (%s)"
 msgstr[2] "%s paketų yra negalimi (%s)"
 
-#~ msgid "path is empty"
-#~ msgstr "kelias yra tuščias"
-
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Neleistinas 'filter' argumentas."
-
-#~ msgid "invalid 'type'"
-#~ msgstr "neleistinas 'type'"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "netinkamas 'filters' argumentas."
-
-#~ msgid "invalid %s argument"
-#~ msgstr "neleistinas argumentas %s"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "neleistinas 'data' argumentas"
@@ -2369,52 +2363,14 @@ msgstr[2] "%s paketų yra negalimi (%s)"
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "netinkamas 'modes' argumentas"
 
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "neleistinas 'socket' argumentas"
-
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "netinkamas 'tarfile' argumentas"
-
 #~ msgid "invalid 'x' argument"
 #~ msgstr "neleistinas 'x' argumentas"
-
-#~ msgid "cannot choose a"
-#~ msgstr "negali pasirinkti"
-
-#~ msgid "mirror non-interactively"
-#~ msgstr "veidrodis neinteraktyviai"
-
-#~ msgid "'memory.limit()' is Windows-specific"
-#~ msgstr "'memory.limit()' yra skirtas Windows"
-
-#~ msgid "'memory.size()' is Windows-specific"
-#~ msgstr "'memory.size()' yra skirtas Windows"
-
-#, fuzzy
-#~ msgid "argument %s must be a character string"
-#~ msgstr "argumentas %s turi būti viena simbolių eilutė"
-
-#~ msgid "invalid 'type'; must be a character string"
-#~ msgstr "neleistinas 'type'; turi būti simbolių eilutė"
-
-#~ msgid ""
-#~ "tail(., addrownums = V) is deprecated.\n"
-#~ "Use"
-#~ msgstr ""
-#~ "tail(., addrownums = V) yra pasenusi.\n"
-#~ "Naudoti"
 
 #~ msgid "tail(., keepnums = V) instead."
 #~ msgstr "tail(., keepnums = V) vietoj."
 
-#~ msgid "bzip2"
-#~ msgstr "bzip2"
-
-#~ msgid "gzip"
-#~ msgstr "gzip"
-
-#~ msgid "xz"
-#~ msgstr "xz"
+#~ msgid "tail(., addrownums=.) is"
+#~ msgstr "tail(., addrownums=.) yra"
 
 #~ msgid ""
 #~ "deprecated.\n"
@@ -2423,14 +2379,54 @@ msgstr[2] "%s paketų yra negalimi (%s)"
 #~ "šalinta.\n"
 #~ "Naudoti"
 
-#~ msgid "tail(., addrownums=.) is"
-#~ msgstr "tail(., addrownums=.) yra"
-
 #~ msgid "tail(., keepnums=.) instead."
 #~ msgstr "tail(., keepnums=.) vietoj."
 
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "netinkamas 'filters' argumentas."
+
+#~ msgid "invalid 'type'"
+#~ msgstr "neleistinas 'type'"
+
+#~ msgid "cannot choose a"
+#~ msgstr "negali pasirinkti"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "veidrodis neinteraktyviai"
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "neleistinas 'socket' argumentas"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "netinkamas 'tarfile' argumentas"
+
+#~ msgid "gzip"
+#~ msgstr "gzip"
+
+#~ msgid "bzip2"
+#~ msgstr "bzip2"
+
+#~ msgid "xz"
+#~ msgstr "xz"
+
+#~ msgid "path is empty"
+#~ msgstr "kelias yra tuščias"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()' yra skirtas Windows"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' yra skirtas Windows"
+
 #~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 #~ msgstr "Rekomenduojama naudoti %s/%s vietoj %s/%s/%s."
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "argumentas %s turi būti viena simbolių eilutė"
+
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "neleistinas 'type'; turi būti simbolių eilutė"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr "trūksta katalogo %s failo 'filelist'"

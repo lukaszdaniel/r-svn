@@ -314,10 +314,11 @@ msgstr "Der Datenteil ist für ein allgemeines S4 Objekt undefiniert"
 
 #. R/RClassUtils.R: gettextf("Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\nE := environment(): %s; parent.env(E): %s",     what, format(cwhere), format(E <- environment()), format(parent.env(E)))
 #: R/RClassUtils.R:0
+#, fuzzy
 msgid ""
 "Debugging .checkSubclasses(): assignClassDef(what=\"%s\", *, where=%s, force=TRUE);\n"
 "E := environment(): %s; parent.env(E): %s"
-msgstr ""
+msgstr "Debuggen von .checkSubclasses(): assignClassDef(what=\\\"%s\\\", *, where=%s, force=TRUE);"
 
 #. R/RClassUtils.R: gettextf("Definition of slot %s, in class %s, as %s conflicts with definition, inherited from class %s, as %s",     sQuote(dup), dQuote(name), dQuote(elNamed(allProps, dup)),     dQuote(cl), dQuote(elNamed(theseProperties, dup)))
 #: R/RClassUtils.R:0
@@ -960,9 +961,8 @@ msgstr "erweitere Signatur um ausgelassene Argumente in Definition: %s"
 
 #. R/addedFunctions.R: gettextf("expected a non-empty character string for argument 'name'")
 #: R/addedFunctions.R:0
-#, fuzzy
 msgid "expected a non-empty character string for argument 'name'"
-msgstr "erwarte nicht-leere Zeichenkette als Argumentnamen"
+msgstr "erwarte nicht-leere Zeichenkette als Argument 'name'"
 
 #. R/Methods.R: gettextf("expected a non-empty character string for argument name")
 #: R/Methods.R:0
@@ -986,9 +986,8 @@ msgstr "konnte die erwartete gruppengenerische Funktion nicht finden"
 
 #. R/Methods.R: gettextf("fdef appears to be a generic function, but with generic name %s instead of %s",     sQuote(gen), sQuote(f))
 #: R/Methods.R:0
-#, fuzzy
 msgid "fdef appears to be a generic function, but with generic name %s instead of %s"
-msgstr "Funktion %s scheint eine generische Funktion zu sein, aber mit dem generischen Namen %s"
+msgstr "fdef scheint eine generische Funktion zu sein, aber mit dem generischen Namen %s anstelle von %s"
 
 #. R/refClass.R: gettextf("field %s is already locked", sQuote(what))
 #: R/refClass.R:0
@@ -1209,9 +1208,8 @@ msgstr "ungültie Methodendefinition; Funktion erwartet, Objekt der Klasse %s be
 
 #. R/methodsTable.R: gettextf("invalid method element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)",     sQuote(classes[[j]]), i, dQuote(class(el)))
 #: R/methodsTable.R:0
-#, fuzzy
 msgid "invalid method element for signature %s at level %d (should be MethodDefinition or .Primitive, had class %s)"
-msgstr "ungültiges mlist Element für die Signatur %s auf Stufe %d (sollte MethodDefinition oder .Primitive sein, hat Klasse %s)"
+msgstr "ungültiges method Element für die Signatur %s auf Stufe %d (sollte MethodDefinition oder .Primitive sein, hat Klasse %s)"
 
 #. R/methodsTable.R: stop("invalid methods table request")
 #: R/methodsTable.R:0
@@ -1967,9 +1965,8 @@ msgstr "kann keine vererbte Methode finden für Funktion %s für Signatur %s"
 
 #. R/RClassUtils.R: gettextf("unable to load required package %s", sQuote(package))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid "unable to load required package %s"
-msgstr "kann benötigtes Paket %s nicht finden"
+msgstr "kann benötigtes Paket %s nicht laden"
 
 #. R/as.R: stop("undefined 'coerce' method")
 #: R/as.R:0
@@ -2149,11 +2146,14 @@ msgid_plural "the formal arguments of the generic function for %s (%s) differ fr
 msgstr[0] "das formale Argument der generischen Funktion für \"%s\" (%s) unterscheidet sich von dem der nicht-generischen Funktion, die als Standard genutzt wird (%s)"
 msgstr[1] "die formalen Argumente der generischen Funktion für \"%s\" (%s) unterscheiden sich von denen der nicht-generischen Funktion, die als Standard genutzt wird (%s)"
 
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "Funktion muss eine S4 Generische sein"
+#~ msgid "E := environment(): %s; parent.env(E): %s"
+#~ msgstr "E := environment(): %s; parent.env(E): %s"
 
 #~ msgid "(and methods)"
 #~ msgstr "(und Methoden)"
+
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "Funktion muss eine S4 Generische sein"
 
 #~ msgid "invalid method sublist"
 #~ msgstr "unzulässige Methodenteilliste"

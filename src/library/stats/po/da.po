@@ -605,7 +605,7 @@ msgstr ""
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' skal være en liste"
+msgstr "n skal mindst være to"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1065,15 +1065,6 @@ msgstr "manglende værdi i sidste %d observationer"
 msgid "ifault=%d. This should not happen"
 msgstr ""
 
-#~ msgid "n must be at least two"
-#~ msgstr "n skal mindst være to"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) skal være mindst to"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "ugyldig værdi for lag.max"
-
 #, fuzzy
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "ugyldig værdi for lag.max"
@@ -1082,8 +1073,14 @@ msgstr ""
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "ugyldig værdi for lag.max"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) skal være mindst to"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' skal være en liste"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "ugyldig værdi for lag.max"
 
 #~ msgid "m must be a list"
 #~ msgstr "m skal være en liste"

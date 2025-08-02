@@ -33,15 +33,13 @@ msgstr ""
 
 #. R/grep.R: gettextf("%s and %s must have the same length", sQuote("x"),     sQuote("m"))
 #: R/grep.R:0
-#, fuzzy
 msgid "%s and %s must have the same length"
-msgstr "Dimensionet e dim(x) duhet të kenë gjatësi pozitive"
+msgstr ""
 
 #. R/attach.R: gettextf("%s converted to character string", sQuote(name))
 #: R/attach.R:0
-#, fuzzy
 msgid "%s converted to character string"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".onDetach", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
 #. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".Last.lib", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
@@ -57,9 +55,8 @@ msgstr ""
 
 #. R/library.R: gettextf("%s is not a valid installed package", sQuote(package))
 #: R/library.R:0
-#, fuzzy
 msgid "%s is not a valid installed package"
-msgstr "'%s' nuk është zgjedhje e saktë"
+msgstr ""
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:\n  ", sQuote(pkgname))
 #: R/attach.R:0
@@ -139,15 +136,13 @@ msgstr "'%s' nuk është zgjedhje e saktë"
 
 #. R/source.R: gettextf("'%s' is not an existing file", file)
 #: R/source.R:0
-#, fuzzy
 msgid "'%s' is not an existing file"
-msgstr "'%s' nuk është zgjedhje e saktë"
+msgstr ""
 
 #. R/notyet.R: gettextf("'%s' is not implemented yet", as.character(sys.call(sys.parent())[[1L]]))
 #: R/notyet.R:0
-#, fuzzy
 msgid "'%s' is not implemented yet"
-msgstr "'%s' nuk është zgjedhje e saktë"
+msgstr ""
 
 #. R/factor.R: sprintf("'%s' is not meaningful for ordered factors", .Generic)
 #: R/factor.R:0
@@ -233,17 +228,16 @@ msgstr "'%s' duhet të jetë logjike"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
 msgstr "'dim' nuk mund të ketë gjatësi 0"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
-#, fuzzy
 msgid "'%s' not defined for \"POSIXt\" objects"
-msgstr "'%s' duhet të jetë logjike"
+msgstr ""
 
 #. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
 #: R/datetime.R:0
@@ -283,15 +277,13 @@ msgstr "'X' duhet të ketë dimensione të emëruara"
 
 #. R/match.R: stop("'arg' must be NULL or a character vector")
 #: R/match.R:0
-#, fuzzy
 msgid "'arg' must be NULL or a character vector"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
-#, fuzzy
 msgid "'arg' must be of length >= 1"
-msgstr "'dim' nuk mund të ketë gjatësi 0"
+msgstr ""
 
 #. R/format.R: gettextf("'big.mark' and 'decimal.mark' are both '%s', which could be confusing",     big.mark)
 #: R/format.R:0
@@ -300,9 +292,8 @@ msgstr ""
 
 #. R/tabulate.R: stop("'bin' must be numeric or a factor")
 #: R/tabulate.R:0
-#, fuzzy
 msgid "'bin' must be numeric or a factor"
-msgstr "argumentet e 'La.svd'-së duhet të jenë numerike apo komplekse"
+msgstr ""
 
 #. R/cut.R: stop("'breaks' are not unique")
 #: R/cut.R:0
@@ -357,15 +348,13 @@ msgstr ""
 
 #. R/load.R: stop("'compress' must be logical or character")
 #: R/load.R:0
-#, fuzzy
 msgid "'compress' must be logical or character"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/serialize.R: stop("'connection' must be a connection")
 #: R/serialize.R:0
-#, fuzzy
 msgid "'connection' must be a connection"
-msgstr "'dim' nuk mund të ketë gjatësi 0"
+msgstr ""
 
 #. R/sort.R: stop("'decreasing' must be a length-1 logical vector.\nDid you intend to set 'partial'?")
 #: R/sort.R:0
@@ -411,9 +400,8 @@ msgstr ""
 
 #. R/source.R: stop("'echo' must be logical")
 #: R/source.R:0
-#, fuzzy
 msgid "'echo' must be logical"
-msgstr "'%s' duhet të jetë logjike"
+msgstr ""
 
 #. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
 #: R/table.R:0
@@ -432,16 +420,14 @@ msgstr ""
 
 #. R/sink.R: stop("'file' must be NULL, a connection or a character string")
 #: R/sink.R:0
-#, fuzzy
 msgid "'file' must be NULL, a connection or a character string"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/dcf.R: stop("'file' must be a character string or connection")
 #. R/scan.R: stop("'file' must be a character string or connection")
 #: R/dcf.R:0 R/scan.R:0
-#, fuzzy
 msgid "'file' must be a character string or connection"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/load.R: stop("'file' must be specified")
 #: R/load.R:0
@@ -470,9 +456,8 @@ msgstr ""
 
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
-#, fuzzy
 msgid "'from' must be raw or character"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/formals.R: warning("'fun' is not a function")
 #: R/formals.R:0
@@ -481,9 +466,8 @@ msgstr ""
 
 #. R/connections.R: stop("'headers' must have names and must not be NA")
 #: R/connections.R:0
-#, fuzzy
 msgid "'headers' must have names and must not be NA"
-msgstr "'X' duhet të ketë dimensione të emëruara"
+msgstr ""
 
 #. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #: R/New-Internal.R:0
@@ -512,15 +496,13 @@ msgstr ""
 
 #. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
 #: R/unix/system.unix.R:0
-#, fuzzy
 msgid "'input' must be a character vector or 'NULL'"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/match.R: stop("'input' must have length 1")
 #: R/match.R:0
-#, fuzzy
 msgid "'input' must have length 1"
-msgstr "'dim' nuk mund të ketë gjatësi 0"
+msgstr ""
 
 #. R/format.R: stop("'input.d.mark' has no characters")
 #: R/format.R:0
@@ -529,9 +511,8 @@ msgstr ""
 
 #. R/qr.R: stop("'k' is too large")
 #: R/qr.R:0
-#, fuzzy
 msgid "'k' is too large"
-msgstr "'dim' cilëson një sërë tepër të madhe"
+msgstr ""
 
 #. R/RNG.R: stop("'kind' must be a character string (RNG to be used).")
 #: R/RNG.R:0
@@ -599,9 +580,8 @@ msgstr ""
 
 #. R/unlist.R: stop("'recursive' must be a length-1 vector")
 #: R/unlist.R:0
-#, fuzzy
 msgid "'recursive' must be a length-1 vector"
-msgstr "'dim' nuk mund të ketë gjatësi 0"
+msgstr ""
 
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
@@ -626,15 +606,13 @@ msgstr "'scale' duhet të numerike apo nul"
 
 #. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
-#, fuzzy
 msgid "'subset' must be logical"
-msgstr "'%s' duhet të jetë logjike"
+msgstr ""
 
 #. R/warnings.R: stop("'tags' must be a character vector of the same length as 'x'")
 #: R/warnings.R:0
-#, fuzzy
 msgid "'tags' must be a character vector of the same length as 'x'"
-msgstr "'normal.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/datetime.R: stop("'tim' is not character or numeric")
 #: R/datetime.R:0
@@ -658,9 +636,8 @@ msgstr "'tolerance' duhet të jetë numerike"
 
 #. R/mean.R: stop("'trim' must be numeric of length one")
 #: R/mean.R:0
-#, fuzzy
 msgid "'trim' must be numeric of length one"
-msgstr "'dim' nuk mund të ketë gjatësi 0"
+msgstr ""
 
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
@@ -679,9 +656,8 @@ msgstr ""
 
 #. R/attr.R: stop("'value' must be a list")
 #: R/attr.R:0
-#, fuzzy
 msgid "'value' must be a list"
-msgstr "Argumenti i dytë duhet të jetë listë"
+msgstr ""
 
 #. R/findInt.R: stop("'vec' must be sorted non-decreasingly and not contain NAs")
 #: R/findInt.R:0
@@ -700,9 +676,8 @@ msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
-#, fuzzy
 msgid "'which' must be character or numeric"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -721,9 +696,8 @@ msgstr ""
 
 #. R/strwrap.R: stop("'x' and 'y' must have the same length")
 #: R/strwrap.R:0
-#, fuzzy
 msgid "'x' and 'y' must have the same length"
-msgstr "Dimensionet e dim(x) duhet të kenë gjatësi pozitive"
+msgstr ""
 
 #. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
 #: R/octhex.R:0
@@ -742,22 +716,19 @@ msgstr ""
 
 #. R/table.R: stop("'x' is not an array")
 #: R/table.R:0
-#, fuzzy
 msgid "'x' is not an array"
-msgstr "'dim' cilëson një sërë tepër të madhe"
+msgstr ""
 
 #. R/dates.R: stop("'x' must be a date-time object")
 #. R/datetime.R: stop("'x' must be a date-time object")
 #: R/dates.R:0 R/datetime.R:0
-#, fuzzy
 msgid "'x' must be a date-time object"
-msgstr "'%s' duhet të jetë logjike"
+msgstr ""
 
 #. R/det.R: stop("'x' must be a square matrix")
 #: R/det.R:0
-#, fuzzy
 msgid "'x' must be a square matrix"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/rle.R: stop("'x' must be a vector of an atomic type")
 #: R/rle.R:0
@@ -771,9 +742,8 @@ msgstr ""
 
 #. R/sort.R: stop("'x' must be atomic")
 #: R/sort.R:0
-#, fuzzy
 msgid "'x' must be atomic"
-msgstr "'%s' duhet të jetë logjike"
+msgstr ""
 
 #. R/sort.R: stop("'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\nHave you called 'sort' on a list?")
 #: R/sort.R:0
@@ -786,9 +756,8 @@ msgstr ""
 #. R/jitter.R: stop("'x' must be numeric")
 #. R/rowsum.R: stop("'x' must be numeric")
 #: R/cut.R:0 R/jitter.R:0 R/rowsum.R:0
-#, fuzzy
 msgid "'x' must be numeric"
-msgstr "'%s' duhet të jetë logjike"
+msgstr ""
 
 #. R/array.R: stop("'x' must have named dimnames")
 #. R/sweep.R: stop("'x' must have named dimnames")
@@ -918,9 +887,8 @@ msgstr ""
 
 #. R/rm.R: stop("... must contain names or character strings")
 #: R/rm.R:0
-#, fuzzy
 msgid "... must contain names or character strings"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/eigen.R: stop("0 x 0 matrix")
 #: R/eigen.R:0
@@ -1274,15 +1242,13 @@ msgstr ""
 
 #. R/getenv.R: stop("all arguments must be named")
 #: R/getenv.R:0
-#, fuzzy
 msgid "all arguments must be named"
-msgstr "Argumenti i dytë duhet të jetë listë"
+msgstr ""
 
 #. R/table.R: stop("all arguments must have the same length")
 #: R/table.R:0
-#, fuzzy
 msgid "all arguments must have the same length"
-msgstr "Argumenti i dytë duhet të jetë listë"
+msgstr ""
 
 #. R/dataframe.R: stop("all variables should have the same length")
 #: R/dataframe.R:0
@@ -1311,9 +1277,8 @@ msgstr ""
 
 #. R/conflicts.R: stop("argument 'where' of length 0")
 #: R/conflicts.R:0
-#, fuzzy
 msgid "argument 'where' of length 0"
-msgstr "'dim' nuk mund të ketë gjatësi 0"
+msgstr ""
 
 #. R/qr.R: stop("argument is not a QR decomposition")
 #: R/qr.R:0
@@ -1352,9 +1317,8 @@ msgstr ""
 
 #. R/tapply.R: stop("arguments must have same length")
 #: R/tapply.R:0
-#, fuzzy
 msgid "arguments must have same length"
-msgstr "Argumenti i dytë duhet të jetë listë"
+msgstr ""
 
 #. R/datetime.R: warning("as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?")
 #: R/datetime.R:0
@@ -1550,9 +1514,8 @@ msgstr ""
 
 #. R/datetime.R: stop("component subscript must be a character string")
 #: R/datetime.R:0
-#, fuzzy
 msgid "component subscript must be a character string"
-msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+msgstr ""
 
 #. R/conditions.R: stop("condition handlers must be functions")
 #: R/conditions.R:0
@@ -1718,9 +1681,8 @@ msgstr ""
 
 #. R/qr.R: stop("first argument must be a QR decomposition")
 #: R/qr.R:0
-#, fuzzy
 msgid "first argument must be a QR decomposition"
-msgstr "Argumenti i dytë duhet të jetë listë"
+msgstr ""
 
 #. R/seq.R: warning("first element used of 'length.out' argument")
 #: R/seq.R:0
@@ -1774,9 +1736,8 @@ msgstr ""
 
 #. R/rowsum.R: stop("incorrect length for 'group'")
 #: R/rowsum.R:0
-#, fuzzy
 msgid "incorrect length for 'group'"
-msgstr "vlerë jo e vlefshme për 'MARGIN'"
+msgstr ""
 
 #. R/array.R: stop("incorrect value for 'MARGIN'")
 #: R/array.R:0
@@ -1785,9 +1746,8 @@ msgstr "vlerë jo e vlefshme për 'MARGIN'"
 
 #. R/strwrap.R: stop("incorrect value for 'x'")
 #: R/strwrap.R:0
-#, fuzzy
 msgid "incorrect value for 'x'"
-msgstr "vlerë jo e vlefshme për 'MARGIN'"
+msgstr ""
 
 #. R/LAPACK.R: stop("infinite or missing values in 'x'")
 #. R/eigen.R: stop("infinite or missing values in 'x'")
@@ -1814,8 +1774,9 @@ msgstr ""
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
 msgstr ""
 
@@ -2020,9 +1981,8 @@ msgstr ""
 
 #. R/rowsum.R: warning("missing values for 'group'")
 #: R/rowsum.R:0
-#, fuzzy
 msgid "missing values for 'group'"
-msgstr "Infinit apo 'x'-it i mungojnë vlerat"
+msgstr ""
 
 #. R/dataframe.R: stop("missing values in 'row.names' are not allowed")
 #: R/dataframe.R:0
@@ -2570,9 +2530,8 @@ msgstr "Argumenti i dytë duhet të jetë listë"
 
 #. R/datetime.R: stop("second argument of / cannot be a \"difftime\" object")
 #: R/datetime.R:0
-#, fuzzy
 msgid "second argument of / cannot be a \"difftime\" object"
-msgstr "Argumenti i dytë duhet të jetë listë"
+msgstr ""
 
 #. R/unix/system.unix.R: warning("setting 'stdout = TRUE'")
 #: R/unix/system.unix.R:0
@@ -2704,9 +2663,8 @@ msgstr ""
 
 #. R/dates.R: gettextf("unary '%s' not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
-#, fuzzy
 msgid "unary '%s' not defined for \"Date\" objects"
-msgstr "'%s' duhet të jetë logjike"
+msgstr ""
 
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", "-")
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
@@ -3080,20 +3038,8 @@ msgid_plural "there are no packages called"
 msgstr[0] ""
 msgstr[1] ""
 
-#, fuzzy
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'dim' nuk mund të ketë gjatësi 0"
-
-#, fuzzy
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'dim' nuk mund të ketë gjatësi 0"
-
-#, fuzzy
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'dim' nuk mund të ketë gjatësi 0"
-
-#~ msgid "'sample.kind' must be a character string of length 1"
-#~ msgstr "'sample.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' duhet të jetë varg karakteresh të gjatësisë 1"
 
 #~ msgid "defunctError"
 #~ msgstr "Gabim në defunct"

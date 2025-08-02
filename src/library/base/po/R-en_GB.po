@@ -158,7 +158,7 @@ msgstr "'%s' is not meaningful for ordered factors"
 #: R/tapply.R:0
 #, fuzzy
 msgid "'%s' is of length 0"
-msgstr "'by' must be of length 1"
+msgstr "'to' must be of length 1"
 
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -204,7 +204,7 @@ msgstr "'name' must be a single character string"
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "'name' must be a single character string"
+msgstr "'%s' must be a non-empty string"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
@@ -233,11 +233,11 @@ msgstr "'%s' must be logical"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
-msgstr "'by' must be of length 1"
+msgstr "'to' must be of length 1"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
@@ -1017,9 +1017,8 @@ msgstr ""
 
 #. R/../../../../share/R/examples-header.R: stop("F used instead of FALSE", domain = "R-base")
 #: R/../../../../share/R/examples-header.R:0
-#, fuzzy
 msgid "F used instead of FALSE"
-msgstr "%s is not TRUE"
+msgstr ""
 
 #. R/format.R: gettextf("Found no format() method for class \"%s\"", class(x))
 #: R/format.R:0
@@ -1817,8 +1816,9 @@ msgstr "input has been corrupted, with LF replaced by CR"
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "invalid 'name' argument"
@@ -2824,9 +2824,8 @@ msgstr "version %s of %s masked by %s in %s"
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr "exactly two of 'to', 'by' and 'length.out' / 'along.with' must be specified"
+msgstr ""
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3108,86 +3107,38 @@ msgid_plural "there are no packages called"
 msgstr[0] "there is no package called"
 msgstr[1] "there are no packages called"
 
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'INDEX' is of length zero"
-
-#~ msgid "invalid 'digits'"
-#~ msgstr "invalid 'digits'"
-
 #~ msgid "invalid 'dims'"
 #~ msgstr "invalid 'dims'"
+
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "invalid 'endian' argument"
 
 #~ msgid "invalid 'make.names'"
 #~ msgstr "invalid 'make.names'"
 
-#~ msgid "invalid 'value'"
-#~ msgstr "invalid 'value'"
+#~ msgid ","
+#~ msgstr ","
 
-#~ msgid "invalid 'x'"
-#~ msgstr "invalid 'x'"
+#~ msgid "invalid string for 'by'"
+#~ msgstr "invalid string for 'by'"
 
-#~ msgid "invalid ncol(qr$qr)"
-#~ msgstr "invalid ncol(qr$qr)"
-
-#~ msgid "invalid ncol(qr$rank)"
-#~ msgstr "invalid ncol(qr$rank)"
-
-#~ msgid "invalid ncol(y)"
-#~ msgstr "invalid ncol(y)"
-
-#~ msgid "invalid nrow(qr$qr)"
-#~ msgstr "invalid nrow(qr$qr)"
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "unary '-' is not defined for \"POSIXt\" objects"
 
 #~ msgid "invalid nrow(x)"
 #~ msgstr "invalid nrow(x)"
 
+#~ msgid "invalid 'path' argument"
+#~ msgstr "invalid 'path' argument"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "invalid 'time' argument"
+
 #~ msgid "invalid nrow(z)"
 #~ msgstr "invalid nrow(z)"
 
-#~ msgid "'by' must match numbers of columns"
-#~ msgstr "'by' must match numbers of columns"
-
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'stderr' must be of length 1"
-
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'stdout' must be of length 1"
-
 #~ msgid "shared object '%s' not found"
 #~ msgstr "shared object '%s' not found"
-
-#~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr' must be TRUE or FALSE"
-
-#~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "'ignore.stdout' must be TRUE or FALSE"
-
-#~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "'intern' must be TRUE or FALSE"
-
-#~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "'invisible' must be TRUE or FALSE"
-
-#~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "'minimized' must be TRUE or FALSE"
-
-#~ msgid "'receive.console.signals' must be TRUE or FALSE"
-#~ msgstr "'receive.console.signals' must be TRUE or FALSE"
-
-#~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "'show.output.on.console' must be TRUE or FALSE"
-
-#~ msgid "invalid '(to - from)/by'"
-#~ msgstr "invalid '(to - from)/by'"
-
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "invalid NCOL(R)"
-
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "invalid NCOL(y)"
-
-#~ msgid "invalid ncol(x)"
-#~ msgstr "invalid ncol(x)"
 
 #~ msgid "bad 'file' argument"
 #~ msgstr "bad 'file' argument"
@@ -3198,23 +3149,116 @@ msgstr[1] "there are no packages called"
 #~ msgid "invalid 'category' argument"
 #~ msgstr "invalid 'category' argument"
 
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "invalid 'endian' argument"
+#~ msgid "FUN"
+#~ msgstr "FUN"
 
-#~ msgid "invalid 'path' argument"
-#~ msgstr "invalid 'path' argument"
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "'by' must match numbers of columns"
 
-#~ msgid "invalid 'time' argument"
-#~ msgstr "invalid 'time' argument"
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "package %s has a license that you need to accept:"
+
+#~ msgid "according to the DESCRIPTION file it is"
+#~ msgstr "according to the DESCRIPTION file it is"
+
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "invalid ncol(x)"
+
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "invalid nrow(qr$qr)"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "invalid ncol(qr$qr)"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "invalid ncol(qr$rank)"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "invalid ncol(y)"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "invalid NCOL(y)"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "invalid NCOL(R)"
+
+#~ msgid "invalid 'x'"
+#~ msgstr "invalid 'x'"
+
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "invalid '(to - from)/by'"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX' is of length zero"
 
 #~ msgid "invalid 'which' argument"
 #~ msgstr "invalid 'which' argument"
 
-#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
-#~ msgstr "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgid "invalid 'digits'"
+#~ msgstr "invalid 'digits'"
 
-#~ msgid "invalid string for 'by'"
-#~ msgstr "invalid string for 'by'"
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "'intern' must be TRUE or FALSE"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "'ignore.stdout' must be TRUE or FALSE"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr' must be TRUE or FALSE"
+
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "'receive.console.signals' must be TRUE or FALSE"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout' must be of length 1"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr' must be of length 1"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "'show.output.on.console' must be TRUE or FALSE"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "'minimized' must be TRUE or FALSE"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "'invisible' must be TRUE or FALSE"
+
+#~ msgid "'name' must be a single character string"
+#~ msgstr "'name' must be a single character string"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from' must be specified"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from' must be a \"Date\" object"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from' must be of length 1"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out' must be of length 1"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "'by' must be of length 1"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from' must be a \"POSIXt\" object"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to' must be a \"POSIXt\" object"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package' must be of length 1"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg' must be of length 1"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "argument 'length.out' must be of length 1"
 
 #~ msgid ""
 #~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
@@ -3223,69 +3267,14 @@ msgstr[1] "there are no packages called"
 #~ "Calling 'structure(NULL, *)' is deprecated, as NULL cannot have attributes.\n"
 #~ "  Consider 'structure(list(), *)' instead."
 
-#, fuzzy
-#~ msgid "connections left open:"
-#~ msgstr "'connection' must be a connection"
-
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg' must be of length 1"
-
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from' must be a \"Date\" object"
-
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from' must be a \"POSIXt\" object"
-
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from' must be of length 1"
-
-#~ msgid "'from' must be specified"
-#~ msgstr "'from' must be specified"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out' must be of length 1"
-
-#~ msgid "'name' must be a single character string"
-#~ msgstr "'name' must be a single character string"
-
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'package' must be of length 1"
-
-#~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "'to' must be a \"POSIXt\" object"
-
-#~ msgid "'to' must be of length 1"
-#~ msgstr "'to' must be of length 1"
-
 #~ msgid "'which' must be of length 1"
 #~ msgstr "'which' must be of length 1"
-
-#~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "argument 'length.out' must be of length 1"
-
-#~ msgid "'%s' must be a non-empty string"
-#~ msgstr "'%s' must be a non-empty string"
 
 #~ msgid "'normal.kind' must be a character string of length 1"
 #~ msgstr "'normal.kind' must be a character string of length 1"
 
 #~ msgid "'sample.kind' must be a character string of length 1"
 #~ msgstr "'sample.kind' must be a character string of length 1"
-
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid "according to the DESCRIPTION file it is"
-#~ msgstr "according to the DESCRIPTION file it is"
-
-#~ msgid "package %s has a license that you need to accept:"
-#~ msgstr "package %s has a license that you need to accept:"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "FUN"
-#~ msgstr "FUN"
 
 #~ msgid "'flag' must be a string, i.e., of length 1"
 #~ msgstr "'flag' must be a string, i.e., of length 1"

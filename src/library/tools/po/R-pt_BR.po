@@ -473,9 +473,8 @@ msgstr "Detectados arquivos fonte de vignette (%s) com nomes compartilhados (%s)
 #. R/QC.R: gettextf("Docs: %s", format_args(ffd))
 #. R/QC.R: gettextf("Docs: %s", format_args(docObj[["docs"]]))
 #: R/QC.R:0
-#, fuzzy
 msgid "Docs: %s"
-msgstr "Código: %s"
+msgstr ""
 
 #. R/QC.R: gettextf("Documented arguments not in \\usage in Rd file '%s':",     nm)
 #: R/QC.R:0
@@ -1705,7 +1704,8 @@ msgstr "contém uma linha em branco"
 #. R/md5.R: stop("current working directory cannot be ascertained")
 #. R/packages.R: stop("current working directory cannot be ascertained")
 #. R/sha256.R: stop("current working directory cannot be ascertained")
-#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0 R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
+#: R/Rd2pdf.R:0 R/Vignettes.R:0 R/admin.R:0 R/build.R:0 R/check.R:0
+#: R/install.R:0 R/md5.R:0 R/packages.R:0 R/sha256.R:0
 msgid "current working directory cannot be ascertained"
 msgstr "diretório de trabalho atual não pode ser determinado"
 
@@ -2499,7 +2499,6 @@ msgstr[1] "Nota: %d strings marcadas como UTF-8 foram encontradas"
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "Nota: %d string marcada como \"bytes\" foi encontrada"
@@ -2629,47 +2628,42 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "não é possível recodificar %s linha %s"
 msgstr[1] "não é possível recodificar %s linhas %s"
 
+#~ msgid "..."
+#~ msgstr "..."
+
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Arquivos Rd devem ter um(a) %s não vazio(a)."
+
+#~ msgid "+-+"
+#~ msgstr "+-+"
+
+#~ msgid "inst/doc"
+#~ msgstr "inst/doc"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "ignored as vignettes have been rebuilt."
+#~ msgstr "ignorado já que as vignettes foram recompiladas."
+
+#~ msgid "invalid value"
+#~ msgstr "valor inválido"
 
 #, fuzzy
 #~ msgid "in package installation"
 #~ msgstr "layout de pacote inválido"
 
-#~ msgid "invalid value"
-#~ msgstr "valor inválido"
+#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+#~ msgstr "Arquivo PACKAGES não inclui soma MD5 in caso win.binary"
 
-#~ msgid "+-+"
-#~ msgstr "+-+"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "..."
-#~ msgstr "..."
-
-#~ msgid "ignored as vignettes have been rebuilt."
-#~ msgstr "ignorado já que as vignettes foram recompiladas."
-
-#~ msgid "inst/doc"
-#~ msgstr "inst/doc"
-
-#~ msgid "%s file\n"
-#~ msgid_plural "%s files\n"
-#~ msgstr[0] "%s arquivo\n"
-#~ msgstr[1] "%s arquivos\n"
-
-#~ msgid "Found"
-#~ msgstr "Encontrado"
-
-#~ msgid "OFF"
-#~ msgstr "OFF"
+#~ msgid "directly."
+#~ msgstr "diretamente."
 
 #~ msgid "ON"
 #~ msgstr "ON"
 
-#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
-#~ msgstr "Arquivo PACKAGES não inclui soma MD5 in caso win.binary"
+#~ msgid "OFF"
+#~ msgstr "OFF"
 
 #~ msgid ""
 #~ "]\n"
@@ -2678,11 +2672,16 @@ msgstr[1] "não é possível recodificar %s linhas %s"
 #~ "]\n"
 #~ "Arquivo PACKAGES detectado com"
 
-#~ msgid "directly."
-#~ msgstr "diretamente."
-
 #~ msgid "entries at"
 #~ msgstr "registros em"
+
+#~ msgid "Found"
+#~ msgstr "Encontrado"
+
+#~ msgid "%s file\n"
+#~ msgid_plural "%s files\n"
+#~ msgstr[0] "%s arquivo\n"
+#~ msgstr[1] "%s arquivos\n"
 
 #, fuzzy
 #~ msgid "one of 'package' and 'dir' must be specified."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:14+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -484,6 +484,12 @@ msgstr "修改檔案再把它放到合適的目錄中去。"
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "您要麼得保證您解串列了一個可重新串列的目標物件，要麼您得分別設定一個骨架"
 
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "請輸入一個環境號，要退離的話輸入 0"
+
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
 msgid "Enter an environment number, or 0 to exit"
@@ -769,9 +775,8 @@ msgstr "在 'pattern' != 'length(proto)' 中的擷取數量"
 
 #. R/strcapture.R: stop("The number of tokens is not consistent across 'x'")
 #: R/strcapture.R:0
-#, fuzzy
 msgid "The number of tokens is not consistent across 'x'"
-msgstr "在 'pattern' != 'length(proto)' 中的擷取數量"
+msgstr ""
 
 #. R/RSiteSearch.R: gettext("The results page should open in your browser shortly\n")
 #: R/RSiteSearch.R:0
@@ -2283,22 +2288,8 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
 
-#, fuzzy
-#~ msgid "path is empty"
-#~ msgstr "'dump' 是空的"
-
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "'filter' 引數無效"
-
-#, fuzzy
-#~ msgid "invalid 'type'"
-#~ msgstr "詢問無效"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "'filters' 引數不對。"
-
-#~ msgid "invalid %s argument"
-#~ msgstr "%s 引數無效"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "'data' 引數無效"
@@ -2306,14 +2297,15 @@ msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "'modes' 引數無效"
 
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "'socket' 引數無效"
-
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "'tarfile' 引數無效"
-
 #~ msgid "invalid 'x' argument"
 #~ msgstr "'x' 引數無效"
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "'filters' 引數不對。"
+
+#, fuzzy
+#~ msgid "invalid 'type'"
+#~ msgstr "詢問無效"
 
 #~ msgid "cannot choose a"
 #~ msgstr "無法選用一個"
@@ -2321,11 +2313,24 @@ msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
 #~ msgid "mirror non-interactively"
 #~ msgstr "鏡像而在非交互的情況下"
 
-#~ msgid "'memory.limit()' is Windows-specific"
-#~ msgstr "'memory.limit()' 只在 Windows 上有用"
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "'socket' 引數無效"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "'tarfile' 引數無效"
+
+#, fuzzy
+#~ msgid "path is empty"
+#~ msgstr "'dump' 是空的"
 
 #~ msgid "'memory.size()' is Windows-specific"
 #~ msgstr "'memory.size()' 只在 Windows 上有用"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' 只在 Windows 上有用"
+
+#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
+#~ msgstr "建議您用 %s/%s 而不用 %s/%s/%s。"
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"
@@ -2334,9 +2339,6 @@ msgstr[0] "沒有 %s 這個程式套件 (給 %s 用)"
 #, fuzzy
 #~ msgid "invalid 'type'; must be a character string"
 #~ msgstr "'unzip' 必須是單字串"
-
-#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
-#~ msgstr "建議您用 %s/%s 而不用 %s/%s/%s。"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr "目錄 %s 裡沒有 'filelist' 此一檔案"

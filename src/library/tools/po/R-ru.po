@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #. R/QC.R: gettextf("  %s calls:", f)
@@ -1486,6 +1486,7 @@ msgstr ""
 msgid "WARNING: failed to revert patch"
 msgstr ""
 
+# not translating installation-time patches
 #. R/install.R: message("WARNING: installation-time patches will not be applied, could not get the patches index")
 #: R/install.R:0
 msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
@@ -2505,7 +2506,6 @@ msgstr[2] "Замечание: найдена %d строк, отмеченны�
 
 #. R/QC.R: ngettext(n, "Note: found %d string marked as \"bytes\"", "Note: found %d strings marked as \"bytes\"")
 #: R/QC.R:0
-#, fuzzy
 msgid "Note: found %d string marked as \"bytes\""
 msgid_plural "Note: found %d strings marked as \"bytes\""
 msgstr[0] "Замечание: найдена %d строка, отмеченная как \"bytes\""
@@ -2656,55 +2656,45 @@ msgstr[2] "не могу перекодировать %s строки %s"
 #~ msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
 #~ msgstr "Использует лицензию ACM: применимо только к коду из ACM TOMS до 2013 года"
 
-#~ msgid "Rd files must have a non-empty %s."
-#~ msgstr "Rd-файлы должны иметь непустое %s."
-
-#, fuzzy
-#~ msgid "inferiorCallError"
-#~ msgstr "внутренняя ошибка"
-
-#~ msgid "invalid value"
-#~ msgstr "неправильное значение"
-
-#~ msgid "+-+"
-#~ msgstr "+-+"
-
-#~ msgid ","
-#~ msgstr ","
-
 #~ msgid "..."
 #~ msgstr "..."
 
-#~ msgid "="
-#~ msgstr "="
-
-#~ msgid "ignored as vignettes have been rebuilt."
-#~ msgstr "проигнорировано, потому что очерки будут сделаны заново."
-
-#~ msgid "inst/doc"
-#~ msgstr "inst/doc"
-
-#~ msgid "%s file\n"
-#~ msgid_plural "%s files\n"
-#~ msgstr[0] "%s файл\n"
-#~ msgstr[1] "%s файлы\n"
-#~ msgstr[2] "%s файлы\n"
+#~ msgid "Rd files must have a non-empty %s."
+#~ msgstr "Rd-файлы должны иметь непустое %s."
 
 # Rd2latex.R:337
 #~ msgid "alias:"
 #~ msgstr "alias:"
 
-#~ msgid "Found"
-#~ msgstr "Найден"
+#~ msgid "+-+"
+#~ msgstr "+-+"
 
-#~ msgid "OFF"
-#~ msgstr "ВЫКЛ"
+#~ msgid "inst/doc"
+#~ msgstr "inst/doc"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "ignored as vignettes have been rebuilt."
+#~ msgstr "проигнорировано, потому что очерки будут сделаны заново."
+
+#~ msgid "="
+#~ msgstr "="
+
+#~ msgid "invalid value"
+#~ msgstr "неправильное значение"
+
+#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
+#~ msgstr "PACKAGES файлы не включают MD5-сумм в случае win.binary"
+
+#~ msgid "directly."
+#~ msgstr "напрямую."
 
 #~ msgid "ON"
 #~ msgstr "ВКЛ"
 
-#~ msgid "PACKAGES files do not include MD5 sums in the win.binary case"
-#~ msgstr "PACKAGES файлы не включают MD5-сумм в случае win.binary"
+#~ msgid "OFF"
+#~ msgstr "ВЫКЛ"
 
 #~ msgid ""
 #~ "]\n"
@@ -2713,11 +2703,21 @@ msgstr[2] "не могу перекодировать %s строки %s"
 #~ "]\n"
 #~ "Обнаружен файл PACKAGES с"
 
-#~ msgid "directly."
-#~ msgstr "напрямую."
-
 #~ msgid "entries at"
 #~ msgstr "элементами в"
+
+#~ msgid "Found"
+#~ msgstr "Найден"
+
+#, fuzzy
+#~ msgid "inferiorCallError"
+#~ msgstr "внутренняя ошибка"
+
+#~ msgid "%s file\n"
+#~ msgid_plural "%s files\n"
+#~ msgstr[0] "%s файл\n"
+#~ msgstr[1] "%s файлы\n"
+#~ msgstr[2] "%s файлы\n"
 
 #~ msgid "one of 'package' and 'dir' must be specified."
 #~ msgstr "в точности один аргумент из 'package' и 'dir' должен быть указан"

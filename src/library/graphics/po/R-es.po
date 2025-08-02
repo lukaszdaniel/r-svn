@@ -225,9 +225,8 @@ msgstr ""
 
 #. R/fourfoldplot.R: stop("'x' must be 2- or 3-dimensional")
 #: R/fourfoldplot.R:0
-#, fuzzy
 msgid "'x' must be 2- or 3-dimensional"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/assocplot.R: stop("'x' must be a 2-d contingency table")
 #: R/assocplot.R:0
@@ -236,9 +235,8 @@ msgstr ""
 
 #. R/plot.design.R: stop("'x' must be a data frame")
 #: R/plot.design.R:0
-#, fuzzy
 msgid "'x' must be a data frame"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/plot.design.R: stop("'x' must be a dataframe or a formula")
 #: R/plot.design.R:0
@@ -252,15 +250,13 @@ msgstr ""
 
 #. R/dotchart.R: stop("'x' must be a numeric vector or matrix")
 #: R/dotchart.R:0
-#, fuzzy
 msgid "'x' must be a numeric vector or matrix"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/fourfoldplot.R: stop("'x' must be an array")
 #: R/fourfoldplot.R:0
-#, fuzzy
 msgid "'x' must be an array"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/hist.R: stop("'x' must be numeric")
 #. R/stem.R: stop("'x' must be numeric")
@@ -280,21 +276,18 @@ msgstr ""
 
 #. R/plot.design.R: stop("'y' must be a numeric vector")
 #: R/plot.design.R:0
-#, fuzzy
 msgid "'y' must be a numeric vector"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/image.R: stop("'z' must be a matrix")
 #: R/image.R:0
-#, fuzzy
 msgid "'z' must be a matrix"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/image.R: stop("'z' must be numeric or logical")
 #: R/image.R:0
-#, fuzzy
 msgid "'z' must be numeric or logical"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/barplot.R: stop("Cannot use shading lines in bars when log scale is used")
 #: R/barplot.R:0
@@ -368,9 +361,8 @@ msgstr ""
 
 #. R/stars.R: stop("data in 'x' must be numeric")
 #: R/stars.R:0
-#, fuzzy
 msgid "data in 'x' must be numeric"
-msgstr "'x' debe ser numérico"
+msgstr ""
 
 #. R/matplot.R: warning("default 'pch' is smaller than number of columns and hence recycled")
 #: R/matplot.R:0
@@ -498,9 +490,8 @@ msgstr ""
 
 #. R/legend.R: stop("invalid coordinate lengths")
 #: R/legend.R:0
-#, fuzzy
 msgid "invalid coordinate lengths"
-msgstr "Longitud no válida para x: length(x)"
+msgstr ""
 
 #. R/boxplot.R: stop("invalid first argument")
 #. R/stripchart.R: stop("invalid first argument")
@@ -510,9 +501,8 @@ msgstr ""
 
 #. R/hist.R: stop("invalid length(breaks)")
 #: R/hist.R:0
-#, fuzzy
 msgid "invalid length(breaks)"
-msgstr "Longitud no válida para x: length(x)"
+msgstr ""
 
 #. R/hist.R: stop("invalid length(x)")
 #. R/stem.R: stop("invalid length(x)")
@@ -538,9 +528,8 @@ msgstr ""
 
 #. R/stripchart.R: stop("invalid plotting method")
 #: R/stripchart.R:0
-#, fuzzy
 msgid "invalid plotting method"
-msgstr "Longitud no válida para x: length(x)"
+msgstr ""
 
 #. R/axis.R: stop("invalid positive 'axp[3]'")
 #: R/axis.R:0
@@ -564,15 +553,13 @@ msgstr ""
 
 #. R/plot.R: stop("invalid table 'x'")
 #: R/plot.R:0
-#, fuzzy
 msgid "invalid table 'x'"
-msgstr "Longitud no válida para x: length(x)"
+msgstr ""
 
 #. R/image.R: stop("invalid z limits")
 #: R/image.R:0
-#, fuzzy
 msgid "invalid z limits"
-msgstr "Longitud no válida para x: length(x)"
+msgstr ""
 
 #. R/stars.R: warning("labels do not make sense for a single location")
 #: R/stars.R:0
@@ -819,15 +806,3 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "invalid 'axp'"
-#~ msgstr "Longitud no válida para x: length(x)"
-
-#, fuzzy
-#~ msgid "invalid 'log'"
-#~ msgstr "Longitud no válida para x: length(x)"
-
-#, fuzzy
-#~ msgid "invalid 'title'"
-#~ msgstr "Longitud no válida para x: length(x)"

@@ -301,9 +301,8 @@ msgstr "Tipo de fonte inválido"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr "Tipo de fonte inválido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -313,33 +312,28 @@ msgstr "Tipo de fonte inválido"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height"
-msgstr "Tipo de fonte inválido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr "Tipo de fonte inválido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "Tipo de fonte inválido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width"
-msgstr "Tipo de fonte inválido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr "Tipo de fonte inválido"
+msgstr ""
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -775,15 +769,13 @@ msgstr "formato de saída inválido"
 
 #. R/raster.R: stop("invalid raster subassignment")
 #: R/raster.R:0
-#, fuzzy
 msgid "invalid raster subassignment"
-msgstr "primeiro argumento inválido"
+msgstr ""
 
 #. R/raster.R: stop("invalid raster subsetting")
 #: R/raster.R:0
-#, fuzzy
 msgid "invalid raster subsetting"
-msgstr "primeiro argumento inválido"
+msgstr ""
 
 #. R/device.R: stop("invalid setting for 'getOption(\"device\")'")
 #: R/device.R:0
@@ -987,14 +979,14 @@ msgstr[1] "nomes de argumentos inválidos %s em '%s'"
 #~ msgid "invalid 'filename'"
 #~ msgstr "'filename' inválido"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "'file' inválido"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "argumento 'family' inválido"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "'title' inválido"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "argumento 'family' inválido"
+#~ msgid "invalid 'file'"
+#~ msgstr "'file' inválido"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

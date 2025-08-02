@@ -814,17 +814,17 @@ msgstr[1] "els arguments %s no s'han utilitzat"
 #~ msgid "invalid 'axp'"
 #~ msgstr "«axp» no vàlid"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "«given.values» no vàlid"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "«log» no vàlid"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "«title» no vàlid"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "«usr» no vàlid"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "«given.values» no vàlid"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "«title» no vàlid"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

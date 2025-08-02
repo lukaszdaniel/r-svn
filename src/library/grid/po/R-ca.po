@@ -1109,20 +1109,24 @@ msgstr[0] "el nom de l'àrea de visualització no és vàlid"
 msgstr[1] "els noms de les àrees de visualització no són vàlids"
 
 #, fuzzy
-#~ msgid "invalid 'clip' value"
-#~ msgstr "el valor «clip» no és vàlid"
-
-#, fuzzy
 #~ msgid "invalid 'frame'"
 #~ msgstr "«frame» no vàlid"
 
 #, fuzzy
-#~ msgid "invalid 'gp' value"
-#~ msgstr "el valor «gp» no és vàlid"
-
-#, fuzzy
 #~ msgid "invalid 'grob'"
 #~ msgstr "«grob» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'result'"
+#~ msgstr "«resultat» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'print' argument"
+#~ msgstr "argument «print» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid listing"
+#~ msgstr "llistat no vàlid"
 
 #, fuzzy
 #~ msgid "invalid 'listing'"
@@ -1133,8 +1137,8 @@ msgstr[1] "els noms de les àrees de visualització no són vàlids"
 #~ msgstr "«origin» no vàlid"
 
 #, fuzzy
-#~ msgid "invalid 'result'"
-#~ msgstr "«resultat» no vàlid"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "argument «arrow» no vàlid"
 
 #, fuzzy
 #~ msgid "invalid 'rot' value"
@@ -1145,13 +1149,9 @@ msgstr[1] "els noms de les àrees de visualització no són vàlids"
 #~ msgstr "«theta» no vàlid"
 
 #, fuzzy
-#~ msgid "invalid listing"
-#~ msgstr "llistat no vàlid"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "el valor «gp» no és vàlid"
 
 #, fuzzy
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "argument «arrow» no vàlid"
-
-#, fuzzy
-#~ msgid "invalid 'print' argument"
-#~ msgstr "argument «print» no vàlid"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "el valor «clip» no és vàlid"

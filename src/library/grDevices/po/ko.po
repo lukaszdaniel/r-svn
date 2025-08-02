@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:32+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -786,12 +786,12 @@ msgstr ""
 msgid "Invalid font path: \"%s\""
 msgstr "%s에 유효하지 않은 'fonts' 파라미터가 있습니다"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "폰트 리스트를 할당하는데 실패했습니다"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -800,19 +800,19 @@ msgstr "폰트 리스트를 할당하는데 실패했습니다"
 msgid "invalid '%s' argument"
 msgstr "유효하지 않은 '%s' 인자입니다."
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "유효하지 않은 quartz()장치 크기입니다"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "device description을 생성할 수 없습니다"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "quartz() 장치대상을 생성할 수 없었습니다.  아마도 타입이 지원되지 않는 것 같습니다"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "이 플랫폼에서는 Quartz장치를 사용할 수 없습니다"
 
@@ -1129,28 +1129,12 @@ msgstr "폰트 리스트를 할당하는데 실패했습니다"
 msgid "Font file not found; matching font family and face"
 msgstr "윈도우즈 폰트데이터베이스에서 찾을 수 없는 폰트페밀리입니다"
 
-#~ msgid "invalid 'file' argument"
-#~ msgstr "유효하지 않은 'file' 인자입니다"
-
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "'maxColorValue'의 값이 올바르지 않습니다"
 
 #, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "%s()에 있는 파일명이 너무 깁니다"
-
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "jpeg() 호출에 파일명이 너무 깁니다"
-
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "tiff() 호출에 파일명이 너무 깁니다"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "win.metafile() 호출에 파일명이 너무 깁니다"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "유효하지 않은 '%s'의 값입니다"
 
 #, c-format
 #~ msgid "unimplemented line texture %08x: using Dash-double-dotted"
@@ -1181,8 +1165,17 @@ msgstr "윈도우즈 폰트데이터베이스에서 찾을 수 없는 폰트페�
 #~ msgstr "비어있는 파일명입니다"
 
 #, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "인코딩 '%s'를 사용할 수 없습니다"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "유효하지 않은 '%s'의 값입니다"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "유효하지 않은 'file' 인자입니다"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "jpeg() 호출에 파일명이 너무 깁니다"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "tiff() 호출에 파일명이 너무 깁니다"
 
 #~ msgid "invalid argument"
 #~ msgstr "유효하지 않은 인자입니다"

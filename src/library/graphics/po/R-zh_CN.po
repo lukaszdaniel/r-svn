@@ -823,17 +823,17 @@ msgstr[0] "没有用%s这个参数"
 #~ msgid "invalid 'axp'"
 #~ msgstr "'axp'无效"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "'given.values'值无效"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "'log'无效"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "'title'无效"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "'usr'无效"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values'值无效"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "'title'无效"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

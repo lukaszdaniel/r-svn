@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -481,6 +481,12 @@ msgstr "Éditez le fichier et déplacez-le dans le répertoire approprié."
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "Faites en sorte de délister un objet relistable, ou spécifiez le squelette séparément."
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "Entrer un numéro d'environnement, ou 0 pour sortir"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -2321,20 +2327,8 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "le package %s n'est pas disponible %s"
 msgstr[1] "les packages %s ne sont pas disponibles %s"
 
-#~ msgid "path is empty"
-#~ msgstr "le chemin est vide"
-
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Argument 'filter' incorrect."
-
-#~ msgid "invalid 'type'"
-#~ msgstr "'type' incorrect"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "argument 'filters' incorrect."
-
-#~ msgid "invalid %s argument"
-#~ msgstr "argument %s incorrect"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "argument 'data' incorrect"
@@ -2342,55 +2336,14 @@ msgstr[1] "les packages %s ne sont pas disponibles %s"
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "argument 'modes' incorrect"
 
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "argument 'socket' incorrect"
-
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "argument 'tarfile' incorrect"
-
 #~ msgid "invalid 'x' argument"
 #~ msgstr "argument 'x' incorrect"
-
-#~ msgid "cannot choose a"
-#~ msgstr "impossible de choisir un"
-
-#~ msgid "mirror non-interactively"
-#~ msgstr "site miroir en mode non interactif"
-
-#~ msgid "'memory.limit()' is Windows-specific"
-#~ msgstr "'memory.limit()' est spécifique à Windows"
-
-#~ msgid "'memory.size()' is Windows-specific"
-#~ msgstr "'memory.size()' est spécifique à Windows"
-
-#, fuzzy
-#~ msgid "argument %s must be a character string"
-#~ msgstr "l'argument %s doit être une seule chaîne de caractères"
-
-#~ msgid "invalid 'type'; must be a character string"
-#~ msgstr "'type' incorrect ; doit être une chaîne de caractères"
-
-#~ msgid ""
-#~ "tail(., addrownums = V) is deprecated.\n"
-#~ "Use"
-#~ msgstr ""
-#~ "tail(., addrownums = V) est obsolète.\n"
-#~ "Utilisez"
 
 #~ msgid "tail(., keepnums = V) instead."
 #~ msgstr "tail(., keepnums = V) à la place."
 
-#~ msgid "bzip2"
-#~ msgstr "bzip2"
-
-#~ msgid "gzip"
-#~ msgstr "gzip"
-
-#~ msgid "xz"
-#~ msgstr "xz"
-
-#~ msgid ","
-#~ msgstr ","
+#~ msgid "tail(., addrownums=.) is"
+#~ msgstr "tail(., addrownums=.) est"
 
 #~ msgid ""
 #~ "deprecated.\n"
@@ -2399,14 +2352,57 @@ msgstr[1] "les packages %s ne sont pas disponibles %s"
 #~ "obsolète.\n"
 #~ "Utilisez"
 
-#~ msgid "tail(., addrownums=.) is"
-#~ msgstr "tail(., addrownums=.) est"
-
 #~ msgid "tail(., keepnums=.) instead."
 #~ msgstr "tail(., keepnums=.) à la place."
 
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "argument 'filters' incorrect."
+
+#~ msgid "invalid 'type'"
+#~ msgstr "'type' incorrect"
+
+#~ msgid "cannot choose a"
+#~ msgstr "impossible de choisir un"
+
+#~ msgid "mirror non-interactively"
+#~ msgstr "site miroir en mode non interactif"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "argument 'socket' incorrect"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "argument 'tarfile' incorrect"
+
+#~ msgid "gzip"
+#~ msgstr "gzip"
+
+#~ msgid "bzip2"
+#~ msgstr "bzip2"
+
+#~ msgid "xz"
+#~ msgstr "xz"
+
+#~ msgid "path is empty"
+#~ msgstr "le chemin est vide"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()' est spécifique à Windows"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' est spécifique à Windows"
+
 #~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
 #~ msgstr "Il est recommandé d'utiliser %s/%s à la place de %s/%s/%s."
+
+#, fuzzy
+#~ msgid "argument %s must be a character string"
+#~ msgstr "l'argument %s doit être une seule chaîne de caractères"
+
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "'type' incorrect ; doit être une chaîne de caractères"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr "fichier 'filelist' introuvable pour le répertoire %s"

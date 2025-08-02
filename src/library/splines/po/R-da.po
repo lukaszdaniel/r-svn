@@ -38,19 +38,16 @@ msgstr "»df« var for lille; har brugt"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'formula' must be of the form \"y ~ x\""
 msgstr "»formula« skal være i formen »y ~ x«"
 
 #. R/splineClasses.R: stop("'ord' must be >= 2")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be >= 2"
 msgstr "»ord« skal være >= 2"
 
 #. R/splineClasses.R: stop("'ord' must be positive integer, at most the number of knots")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "'ord' must be positive integer, at most the number of knots"
 msgstr "»ord« skal være et positivt heltal, højst antallet af knob"
 
@@ -83,7 +80,6 @@ msgstr "knobplacering skal være ikkefaldende"
 
 #. R/splineClasses.R: stop("knot positions must be strictly increasing")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "knot positions must be strictly increasing"
 msgstr "knobplaceringer skal være strengt øgende"
 
@@ -95,7 +91,6 @@ msgstr "længden for »drivs« skal matche længden for »x«"
 
 #. R/splineClasses.R: stop("lengths of 'x' and 'y' must be the same")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "lengths of 'x' and 'y' must be the same"
 msgstr "længden for »x«og »y« skal være den samme"
 
@@ -138,7 +133,6 @@ msgstr "nogle »x-værdier« udenfor grænseknob kan medføre ugyldigt betingede
 
 #. R/splineClasses.R: stop("spline must be monotone")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "spline must be monotone"
 msgstr "kurve skal være monoton"
 
@@ -155,7 +149,6 @@ msgstr "intervallet for »x«-værdier er større end en periode"
 
 #. R/splineClasses.R: stop("values of 'x' must be distinct")
 #: R/splineClasses.R:0
-#, fuzzy
 msgid "values of 'x' must be distinct"
 msgstr "værdier for »x« skal være unikke"
 
@@ -163,11 +156,3 @@ msgstr "værdier for »x« skal være unikke"
 #: R/splineClasses.R:0
 msgid "values of 'x' must be strictly increasing"
 msgstr "værdier for »x« skal være stringent øgende"
-
-#, fuzzy
-#~ msgid "gettextf(\"'df' was too small; have used %d\", ord - (1L - intercept))"
-#~ msgstr "»df« var for lille; har brugt"
-
-#, fuzzy
-#~ msgid "stop(\"knot positions must be non-decreasing\")"
-#~ msgstr "knobplacering skal være ikkefaldende"

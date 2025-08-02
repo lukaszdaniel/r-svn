@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
 "POT-Creation-Date: 2025-06-20 10:44\n"
-"PO-Revision-Date: 2025-07-06 14:48+0200\n"
+"PO-Revision-Date: 2023-12-20 13:03+0000\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
 "Language: zh_CN\n"
@@ -161,7 +161,7 @@ msgstr "'%s'对順序化的因子没有意义"
 #: R/tapply.R:0
 #, fuzzy
 msgid "'%s' is of length 0"
-msgstr "'by'的长度必需为一"
+msgstr "'to'的长度必需为一"
 
 #. R/factor.R: gettextf("'%s' is only meaningful for ordered factors if all arguments have the same level sets",     .Generic)
 #: R/factor.R:0
@@ -207,7 +207,7 @@ msgstr "“name”必须是单个字符串"
 #: R/load.R:0 R/serialize.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "“name”必须是单个字符串"
+msgstr "'file'的值必需是长度大于零的字符串"
 
 #. R/all.equal.R: gettextf("'%s' must be logical", "check.attributes")
 #. R/all.equal.R: gettextf("'%s' must be logical", "use.names")
@@ -236,11 +236,11 @@ msgstr "'%s' 必需是逻辑值"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
-msgstr "'by'的长度必需为一"
+msgstr "'to'的长度必需为一"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
@@ -807,9 +807,8 @@ msgstr "'zero.print'只能取字符，逻辑或NULL值"
 
 #. R/namespace.R: gettextf("- done loading %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "- done loading %s"
-msgstr "删除 %s"
+msgstr ""
 
 #. R/namespace.R: gettextf("- loading %s", dQuote(package))
 #: R/namespace.R:0
@@ -819,15 +818,13 @@ msgstr "删除 %s"
 
 #. R/namespace.R: gettextf("-- done processing S4 stuff for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing S4 stuff for %s"
-msgstr "类别不正确"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done processing imports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "-- done processing imports for %s"
-msgstr "类别不正确"
+msgstr ""
 
 #. R/namespace.R: gettextf("-- done registerS3methods for %s", dQuote(package))
 #: R/namespace.R:0
@@ -900,9 +897,8 @@ msgstr "类别不正确"
 
 #. R/namespace.R: gettextf("--- sealing exports for %s", dQuote(package))
 #: R/namespace.R:0
-#, fuzzy
 msgid "--- sealing exports for %s"
-msgstr "类别不正确"
+msgstr ""
 
 #. R/namespace.R: message("---- export method ", sQuote(mi))
 #: R/namespace.R:0
@@ -1525,9 +1521,8 @@ msgstr "无法将消息链结分割"
 
 #. R/sort.R: stop("cannot xtfrm 'x'")
 #: R/sort.R:0
-#, fuzzy
 msgid "cannot xtfrm 'x'"
-msgstr "不是数据框"
+msgstr ""
 
 #. R/dataframe.R: stop("cannot xtfrm data frames")
 #: R/dataframe.R:0
@@ -1825,8 +1820,9 @@ msgstr "输入有破损，LF被CR取代"
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 #, fuzzy
 msgid "invalid '%s' argument"
 msgstr "'name'参数无效"
@@ -2840,9 +2836,8 @@ msgstr ""
 
 #. R/dates.R: stop("without 'by', at least one of 'to' and 'from' must be specified")
 #: R/dates.R:0
-#, fuzzy
 msgid "without 'by', at least one of 'to' and 'from' must be specified"
-msgstr "'to'，'by'，'length.out'/'along.with'中四个只能同时选两个"
+msgstr ""
 
 #. R/dates.R: stop("without 'by', when one of 'to', 'from' is missing, 'length.out' / 'along.with' must be specified")
 #: R/dates.R:0
@@ -3090,90 +3085,39 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "不存在叫这个名称的程序包"
 
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'INDEX'的长度必需为一"
-
-#~ msgid "invalid 'digits'"
-#~ msgstr "'digits'的值无效"
-
 #~ msgid "invalid 'dims'"
 #~ msgstr "'dims'无效"
+
+#~ msgid "invalid 'endian' argument"
+#~ msgstr "无效的“endian”参数"
 
 #~ msgid "invalid 'make.names'"
 #~ msgstr "无效的“make.names”"
 
-#~ msgid "invalid 'value'"
-#~ msgstr "'value'无效"
+#~ msgid ","
+#~ msgstr "，"
 
-#, fuzzy
-#~ msgid "invalid 'x'"
-#~ msgstr "'dims'无效"
+#~ msgid "invalid string for 'by'"
+#~ msgstr "'by'的字符串有错误"
 
-#~ msgid "invalid ncol(qr$qr)"
-#~ msgstr "ncol(qr$qr)无效"
-
-#~ msgid "invalid ncol(qr$rank)"
-#~ msgstr "ncol(qr$rank)无效"
-
-#~ msgid "invalid ncol(y)"
-#~ msgstr "ncol(y)无效"
-
-#~ msgid "invalid nrow(qr$qr)"
-#~ msgstr "nrow(qr$qr)无效"
+#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
+#~ msgstr "一进列的'-'法对\"POSIXt\"对象不适用"
 
 #~ msgid "invalid nrow(x)"
 #~ msgstr "nrow(x)无效"
+
+#~ msgid "invalid 'path' argument"
+#~ msgstr "'path'参数无效"
+
+#~ msgid "invalid 'time' argument"
+#~ msgstr "'time'参数无效"
 
 #, fuzzy
 #~ msgid "invalid nrow(z)"
 #~ msgstr "nrow(x)无效"
 
-#~ msgid "'by' must match numbers of columns"
-#~ msgstr "'by'的长度一定得和列的长度相同"
-
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'stderr'的长度必需为一"
-
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'stdout'的长度必需为一"
-
 #~ msgid "shared object '%s' not found"
 #~ msgstr "共享目标对象'%s'不存在"
-
-#~ msgid "'ignore.stderr' must be TRUE or FALSE"
-#~ msgstr "'ignore.stderr'的值必需是'TRUE'或'FALSE'值"
-
-#~ msgid "'ignore.stdout' must be TRUE or FALSE"
-#~ msgstr "'ignore.stdout'的值必需是'TRUE'或'FALSE'值"
-
-#~ msgid "'intern' must be TRUE or FALSE"
-#~ msgstr "'intern'的值必需是'TRUE'或'FALSE'值"
-
-#~ msgid "'invisible' must be TRUE or FALSE"
-#~ msgstr "'invisible'的值必需是'TRUE'或'FALSE'值"
-
-#~ msgid "'minimized' must be TRUE or FALSE"
-#~ msgstr "'minimized'的值必需是'TRUE'或'FALSE'值"
-
-#, fuzzy
-#~ msgid "'receive.console.signals' must be TRUE or FALSE"
-#~ msgstr "'intern'的值必需是'TRUE'或'FALSE'值"
-
-#~ msgid "'show.output.on.console' must be TRUE or FALSE"
-#~ msgstr "'show.output.on.console'的值必需是'TRUE'或'FALSE'值"
-
-#, fuzzy
-#~ msgid "invalid '(to - from)/by'"
-#~ msgstr "'seq'内的'(to - from)/by'值设得无效"
-
-#~ msgid "invalid NCOL(R)"
-#~ msgstr "NCOL(R)无效"
-
-#~ msgid "invalid NCOL(y)"
-#~ msgstr "NCOL(y)无效"
-
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ncol(x)无效"
 
 #~ msgid "bad 'file' argument"
 #~ msgstr "'file'参数不正确"
@@ -3184,75 +3128,12 @@ msgstr[0] "不存在叫这个名称的程序包"
 #~ msgid "invalid 'category' argument"
 #~ msgstr "'category'参数有错误"
 
-#~ msgid "invalid 'endian' argument"
-#~ msgstr "无效的“endian”参数"
-
-#~ msgid "invalid 'path' argument"
-#~ msgstr "'path'参数无效"
-
-#~ msgid "invalid 'time' argument"
-#~ msgstr "'time'参数无效"
+#~ msgid "'by' must match numbers of columns"
+#~ msgstr "'by'的长度一定得和列的长度相同"
 
 #, fuzzy
-#~ msgid "invalid 'which' argument"
-#~ msgstr "'path'参数无效"
-
-#~ msgid "unary '-' is not defined for \"POSIXt\" objects"
-#~ msgstr "一进列的'-'法对\"POSIXt\"对象不适用"
-
-#~ msgid "invalid string for 'by'"
-#~ msgstr "'by'的字符串有错误"
-
-#, fuzzy
-#~ msgid "connections left open:"
-#~ msgstr "'connection'必需是个链结"
-
-#~ msgid "'arg' must be of length 1"
-#~ msgstr "'arg'的长度必需为一"
-
-#~ msgid "'from' must be a \"Date\" object"
-#~ msgstr "'from'一定得是\"Date\"对象"
-
-#~ msgid "'from' must be a \"POSIXt\" object"
-#~ msgstr "'from'一定得是\"POSIXt\"对象"
-
-#~ msgid "'from' must be of length 1"
-#~ msgstr "'from'的长度必需为一"
-
-#~ msgid "'from' must be specified"
-#~ msgstr "'from'一定得给值"
-
-#~ msgid "'length.out' must be of length 1"
-#~ msgstr "'length.out'的长度必需为一"
-
-#~ msgid "'name' must be a single character string"
-#~ msgstr "“name”必须是单个字符串"
-
-#~ msgid "'package' must be of length 1"
-#~ msgstr "'package'的长度必需为一"
-
-#~ msgid "'to' must be a \"POSIXt\" object"
-#~ msgstr "'to'一定得是\"POSIXt\"对象"
-
-#~ msgid "'to' must be of length 1"
-#~ msgstr "'to'的长度必需为一"
-
-#, fuzzy
-#~ msgid "'which' must be of length 1"
-#~ msgstr "'to'的长度必需为一"
-
-#~ msgid "argument 'length.out' must be of length 1"
-#~ msgstr "'length.out'参数的长度必需为一"
-
-#, fuzzy
-#~ msgid "'%s' must be a non-empty string"
-#~ msgstr "'file'的值必需是长度大于零的字符串"
-
-#~ msgid "'normal.kind' must be a character string of length 1"
-#~ msgstr "“normal.kind”必须是长度为 1 的字符串"
-
-#~ msgid "'sample.kind' must be a character string of length 1"
-#~ msgstr "“sample.kind”必须是长度为 1 的字符串"
+#~ msgid "package %s has a license that you need to accept:"
+#~ msgstr "程序包%s的使用许可证要求你在看完后接受它"
 
 #, fuzzy
 #~ msgid "according to the DESCRIPTION file it is"
@@ -3260,12 +3141,115 @@ msgstr[0] "不存在叫这个名称的程序包"
 #~ "程序包%s的使用许可证要求你接受它:\n"
 #~ "按照DESCRIPTION文件它是"
 
-#, fuzzy
-#~ msgid "package %s has a license that you need to accept:"
-#~ msgstr "程序包%s的使用许可证要求你在看完后接受它"
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x)无效"
 
-#~ msgid ","
-#~ msgstr "，"
+#~ msgid "invalid nrow(qr$qr)"
+#~ msgstr "nrow(qr$qr)无效"
+
+#~ msgid "invalid ncol(qr$qr)"
+#~ msgstr "ncol(qr$qr)无效"
+
+#~ msgid "invalid ncol(qr$rank)"
+#~ msgstr "ncol(qr$rank)无效"
+
+#~ msgid "invalid ncol(y)"
+#~ msgstr "ncol(y)无效"
+
+#~ msgid "invalid NCOL(y)"
+#~ msgstr "NCOL(y)无效"
+
+#~ msgid "invalid NCOL(R)"
+#~ msgstr "NCOL(R)无效"
+
+#, fuzzy
+#~ msgid "invalid 'x'"
+#~ msgstr "'dims'无效"
+
+#, fuzzy
+#~ msgid "invalid '(to - from)/by'"
+#~ msgstr "'seq'内的'(to - from)/by'值设得无效"
+
+#~ msgid "'INDEX' is of length zero"
+#~ msgstr "'INDEX'的长度必需为一"
+
+#, fuzzy
+#~ msgid "invalid 'which' argument"
+#~ msgstr "'path'参数无效"
+
+#~ msgid "invalid 'digits'"
+#~ msgstr "'digits'的值无效"
+
+#~ msgid "'intern' must be TRUE or FALSE"
+#~ msgstr "'intern'的值必需是'TRUE'或'FALSE'值"
+
+#~ msgid "'ignore.stdout' must be TRUE or FALSE"
+#~ msgstr "'ignore.stdout'的值必需是'TRUE'或'FALSE'值"
+
+#~ msgid "'ignore.stderr' must be TRUE or FALSE"
+#~ msgstr "'ignore.stderr'的值必需是'TRUE'或'FALSE'值"
+
+#, fuzzy
+#~ msgid "'receive.console.signals' must be TRUE or FALSE"
+#~ msgstr "'intern'的值必需是'TRUE'或'FALSE'值"
+
+#~ msgid "'stdout' must be of length 1"
+#~ msgstr "'stdout'的长度必需为一"
+
+#~ msgid "'stderr' must be of length 1"
+#~ msgstr "'stderr'的长度必需为一"
+
+#~ msgid "'show.output.on.console' must be TRUE or FALSE"
+#~ msgstr "'show.output.on.console'的值必需是'TRUE'或'FALSE'值"
+
+#~ msgid "'minimized' must be TRUE or FALSE"
+#~ msgstr "'minimized'的值必需是'TRUE'或'FALSE'值"
+
+#~ msgid "'invisible' must be TRUE or FALSE"
+#~ msgstr "'invisible'的值必需是'TRUE'或'FALSE'值"
+
+#~ msgid "'name' must be a single character string"
+#~ msgstr "“name”必须是单个字符串"
+
+#~ msgid "'from' must be specified"
+#~ msgstr "'from'一定得给值"
+
+#~ msgid "'from' must be a \"Date\" object"
+#~ msgstr "'from'一定得是\"Date\"对象"
+
+#~ msgid "'from' must be of length 1"
+#~ msgstr "'from'的长度必需为一"
+
+#~ msgid "'length.out' must be of length 1"
+#~ msgstr "'length.out'的长度必需为一"
+
+#~ msgid "'by' must be of length 1"
+#~ msgstr "'by'的长度必需为一"
+
+#~ msgid "'from' must be a \"POSIXt\" object"
+#~ msgstr "'from'一定得是\"POSIXt\"对象"
+
+#~ msgid "'to' must be a \"POSIXt\" object"
+#~ msgstr "'to'一定得是\"POSIXt\"对象"
+
+#~ msgid "'package' must be of length 1"
+#~ msgstr "'package'的长度必需为一"
+
+#~ msgid "'arg' must be of length 1"
+#~ msgstr "'arg'的长度必需为一"
+
+#~ msgid "argument 'length.out' must be of length 1"
+#~ msgstr "'length.out'参数的长度必需为一"
+
+#, fuzzy
+#~ msgid "'which' must be of length 1"
+#~ msgstr "'to'的长度必需为一"
+
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "“normal.kind”必须是长度为 1 的字符串"
+
+#~ msgid "'sample.kind' must be a character string of length 1"
+#~ msgstr "“sample.kind”必须是长度为 1 的字符串"
 
 #~ msgid "'flag' must be a string, i.e., of length 1"
 #~ msgstr "'flag' 必须是字符串，即长度为 1"

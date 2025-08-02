@@ -2143,14 +2143,14 @@ msgid_plural "the formal arguments of the generic function for %s (%s) differ fr
 msgstr[0] "l'argument formel de la fonction générique pour %s (%s) diffère de celui de la fonction non générique à utiliser par défaut (%s)"
 msgstr[1] "les arguments formels de la fonction générique pour %s (%s) diffèrent de ceux de la fonction non générique à utiliser par défaut (%s)"
 
-#~ msgid "Function must be an S4 generic"
-#~ msgstr "La fonction doit être un générique S4"
-
 #~ msgid "E := environment(): %s; parent.env(E): %s"
 #~ msgstr "E := environment(): %s; parent.env(E): %s"
 
 #~ msgid "(and methods)"
 #~ msgstr "(et des méthodes)"
+
+#~ msgid "Function must be an S4 generic"
+#~ msgstr "La fonction doit être un générique S4"
 
 #~ msgid "invalid method sublist"
 #~ msgstr "liste de méthodes incorrecte"

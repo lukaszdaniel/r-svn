@@ -33,15 +33,13 @@ msgstr ""
 
 #. R/grep.R: gettextf("%s and %s must have the same length", sQuote("x"),     sQuote("m"))
 #: R/grep.R:0
-#, fuzzy
 msgid "%s and %s must have the same length"
-msgstr "dim(x) ধনাত্মক হওয়া প্রয়োজন"
+msgstr ""
 
 #. R/attach.R: gettextf("%s converted to character string", sQuote(name))
 #: R/attach.R:0
-#, fuzzy
 msgid "%s converted to character string"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".onDetach", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
 #. R/attach.R: gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s",     ".Last.lib", "detach", pkgname, deparse(conditionCall(res))[1L],     conditionMessage(res))
@@ -57,9 +55,8 @@ msgstr ""
 
 #. R/library.R: gettextf("%s is not a valid installed package", sQuote(package))
 #: R/library.R:0
-#, fuzzy
 msgid "%s is not a valid installed package"
-msgstr "'%s' বৈধ বিকল্প নয়"
+msgstr ""
 
 #. R/attach.R: gettextf("%s namespace cannot be unloaded:\n  ", sQuote(pkgname))
 #: R/attach.R:0
@@ -78,9 +75,8 @@ msgstr ""
 
 #. R/namespace.R: gettextf("%s not found", sQuote(x))
 #: R/namespace.R:0
-#, fuzzy
 msgid "%s not found"
-msgstr "ফাইল '%s' পাওয়া যায়নি"
+msgstr ""
 
 #. R/library.R: gettextf("%s not found on search path, using pos = 2", sQuote(pos))
 #: R/library.R:0
@@ -140,15 +136,13 @@ msgstr "'%s' বৈধ বিকল্প নয়"
 
 #. R/source.R: gettextf("'%s' is not an existing file", file)
 #: R/source.R:0
-#, fuzzy
 msgid "'%s' is not an existing file"
-msgstr "'%s' বৈধ বিকল্প নয়"
+msgstr ""
 
 #. R/notyet.R: gettextf("'%s' is not implemented yet", as.character(sys.call(sys.parent())[[1L]]))
 #: R/notyet.R:0
-#, fuzzy
 msgid "'%s' is not implemented yet"
-msgstr "'%s' বৈধ বিকল্প নয়"
+msgstr ""
 
 #. R/factor.R: sprintf("'%s' is not meaningful for ordered factors", .Generic)
 #: R/factor.R:0
@@ -234,17 +228,16 @@ msgstr "'%s' লজিক্যাল হওয়া উচিত"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0
-#: R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
+#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 #, fuzzy
 msgid "'%s' must be of length 1"
 msgstr "'%s' লজিক্যাল হওয়া উচিত"
 
 #. R/datetime.R: gettextf("'%s' not defined for \"POSIXt\" objects", .Generic)
 #: R/datetime.R:0
-#, fuzzy
 msgid "'%s' not defined for \"POSIXt\" objects"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/datetime.R: gettextf("'%s' not defined for \"difftime\" objects", .Generic)
 #: R/datetime.R:0
@@ -284,15 +277,13 @@ msgstr "'X' এর dimnames এ নাম থাকতে হবে"
 
 #. R/match.R: stop("'arg' must be NULL or a character vector")
 #: R/match.R:0
-#, fuzzy
 msgid "'arg' must be NULL or a character vector"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/match.R: stop("'arg' must be of length >= 1")
 #: R/match.R:0
-#, fuzzy
 msgid "'arg' must be of length >= 1"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/format.R: gettextf("'big.mark' and 'decimal.mark' are both '%s', which could be confusing",     big.mark)
 #: R/format.R:0
@@ -301,9 +292,8 @@ msgstr ""
 
 #. R/tabulate.R: stop("'bin' must be numeric or a factor")
 #: R/tabulate.R:0
-#, fuzzy
 msgid "'bin' must be numeric or a factor"
-msgstr "'La.svd' এর আর্গুমেন্ট অবশ্যই সংখ্যাসূচক অথবা জটিল সংখ্যা হতে হবে"
+msgstr ""
 
 #. R/cut.R: stop("'breaks' are not unique")
 #: R/cut.R:0
@@ -358,15 +348,13 @@ msgstr ""
 
 #. R/load.R: stop("'compress' must be logical or character")
 #: R/load.R:0
-#, fuzzy
 msgid "'compress' must be logical or character"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/serialize.R: stop("'connection' must be a connection")
 #: R/serialize.R:0
-#, fuzzy
 msgid "'connection' must be a connection"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/sort.R: stop("'decreasing' must be a length-1 logical vector.\nDid you intend to set 'partial'?")
 #: R/sort.R:0
@@ -397,9 +385,8 @@ msgstr ""
 
 #. R/array.R: stop("'dim' cannot be of length 0")
 #: R/array.R:0
-#, fuzzy
 msgid "'dim' cannot be of length 0"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/array.R: stop("'dim' specifies too large an array")
 #: R/array.R:0
@@ -413,9 +400,8 @@ msgstr ""
 
 #. R/source.R: stop("'echo' must be logical")
 #: R/source.R:0
-#, fuzzy
 msgid "'echo' must be logical"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/table.R: warning("'exclude' containing NA and 'useNA' != \"no\"' are a bit contradicting")
 #: R/table.R:0
@@ -434,16 +420,14 @@ msgstr ""
 
 #. R/sink.R: stop("'file' must be NULL, a connection or a character string")
 #: R/sink.R:0
-#, fuzzy
 msgid "'file' must be NULL, a connection or a character string"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/dcf.R: stop("'file' must be a character string or connection")
 #. R/scan.R: stop("'file' must be a character string or connection")
 #: R/dcf.R:0 R/scan.R:0
-#, fuzzy
 msgid "'file' must be a character string or connection"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/load.R: stop("'file' must be specified")
 #: R/load.R:0
@@ -472,9 +456,8 @@ msgstr ""
 
 #. R/connections.R: stop("'from' must be raw or character")
 #: R/connections.R:0
-#, fuzzy
 msgid "'from' must be raw or character"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/formals.R: warning("'fun' is not a function")
 #: R/formals.R:0
@@ -483,9 +466,8 @@ msgstr ""
 
 #. R/connections.R: stop("'headers' must have names and must not be NA")
 #: R/connections.R:0
-#, fuzzy
 msgid "'headers' must have names and must not be NA"
-msgstr "'X' এর dimnames এ নাম থাকতে হবে"
+msgstr ""
 
 #. R/New-Internal.R: stop("'iconvlist' is not available on this system")
 #: R/New-Internal.R:0
@@ -514,15 +496,13 @@ msgstr ""
 
 #. R/unix/system.unix.R: stop("'input' must be a character vector or 'NULL'")
 #: R/unix/system.unix.R:0
-#, fuzzy
 msgid "'input' must be a character vector or 'NULL'"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/match.R: stop("'input' must have length 1")
 #: R/match.R:0
-#, fuzzy
 msgid "'input' must have length 1"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/format.R: stop("'input.d.mark' has no characters")
 #: R/format.R:0
@@ -600,9 +580,8 @@ msgstr ""
 
 #. R/unlist.R: stop("'recursive' must be a length-1 vector")
 #: R/unlist.R:0
-#, fuzzy
 msgid "'recursive' must be a length-1 vector"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/files.R: warning("'recursive' will be ignored as 'to' is not a single existing directory")
 #: R/files.R:0
@@ -627,15 +606,13 @@ msgstr "'scale' সংখ্যাসূচক অথবা NULL হওয়া
 
 #. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
-#, fuzzy
 msgid "'subset' must be logical"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/warnings.R: stop("'tags' must be a character vector of the same length as 'x'")
 #: R/warnings.R:0
-#, fuzzy
 msgid "'tags' must be a character vector of the same length as 'x'"
-msgstr "'normal.kind' একটি একক অক্ষর হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/datetime.R: stop("'tim' is not character or numeric")
 #: R/datetime.R:0
@@ -659,9 +636,8 @@ msgstr "'tolerance' সংখ্যাসূচক হওয়া উচিত"
 
 #. R/mean.R: stop("'trim' must be numeric of length one")
 #: R/mean.R:0
-#, fuzzy
 msgid "'trim' must be numeric of length one"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/datetime.R: warning("'tzone' attributes are inconsistent")
 #: R/datetime.R:0
@@ -680,9 +656,8 @@ msgstr ""
 
 #. R/attr.R: stop("'value' must be a list")
 #: R/attr.R:0
-#, fuzzy
 msgid "'value' must be a list"
-msgstr "দ্বিতীয় আর্গুমেন্ট লিস্ট হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/findInt.R: stop("'vec' must be sorted non-decreasingly and not contain NAs")
 #: R/findInt.R:0
@@ -701,9 +676,8 @@ msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
-#, fuzzy
 msgid "'which' must be character or numeric"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/unix/system.unix.R: warning("'which' was not found on this platform")
 #: R/unix/system.unix.R:0
@@ -722,9 +696,8 @@ msgstr ""
 
 #. R/strwrap.R: stop("'x' and 'y' must have the same length")
 #: R/strwrap.R:0
-#, fuzzy
 msgid "'x' and 'y' must have the same length"
-msgstr "dim(x) ধনাত্মক হওয়া প্রয়োজন"
+msgstr ""
 
 #. R/octhex.R: stop("'x' cannot be coerced to class \"hexmode\"")
 #: R/octhex.R:0
@@ -749,15 +722,13 @@ msgstr ""
 #. R/dates.R: stop("'x' must be a date-time object")
 #. R/datetime.R: stop("'x' must be a date-time object")
 #: R/dates.R:0 R/datetime.R:0
-#, fuzzy
 msgid "'x' must be a date-time object"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/det.R: stop("'x' must be a square matrix")
 #: R/det.R:0
-#, fuzzy
 msgid "'x' must be a square matrix"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/rle.R: stop("'x' must be a vector of an atomic type")
 #: R/rle.R:0
@@ -771,9 +742,8 @@ msgstr ""
 
 #. R/sort.R: stop("'x' must be atomic")
 #: R/sort.R:0
-#, fuzzy
 msgid "'x' must be atomic"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/sort.R: stop("'x' must be atomic for 'sort.list', method \"shell\" and \"quick\"\nHave you called 'sort' on a list?")
 #: R/sort.R:0
@@ -786,16 +756,14 @@ msgstr ""
 #. R/jitter.R: stop("'x' must be numeric")
 #. R/rowsum.R: stop("'x' must be numeric")
 #: R/cut.R:0 R/jitter.R:0 R/rowsum.R:0
-#, fuzzy
 msgid "'x' must be numeric"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/array.R: stop("'x' must have named dimnames")
 #. R/sweep.R: stop("'x' must have named dimnames")
 #: R/array.R:0 R/sweep.R:0
-#, fuzzy
 msgid "'x' must have named dimnames"
-msgstr "'X' এর dimnames এ নাম থাকতে হবে"
+msgstr ""
 
 #. R/table.R: gettextf("'x' must inherit from class %s", dQuote("summary.table"))
 #: R/table.R:0
@@ -919,9 +887,8 @@ msgstr ""
 
 #. R/rm.R: stop("... must contain names or character strings")
 #: R/rm.R:0
-#, fuzzy
 msgid "... must contain names or character strings"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/eigen.R: stop("0 x 0 matrix")
 #: R/eigen.R:0
@@ -962,9 +929,8 @@ msgstr ""
 
 #. R/library.R: gettextf("DLL %s not found", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "DLL %s not found"
-msgstr "ফাইল '%s' পাওয়া যায়নি"
+msgstr ""
 
 #. R/library.R: gettextf("DLL %s not found: maybe not installed for this architecture?",     sQuote(chname))
 #: R/library.R:0
@@ -1276,15 +1242,13 @@ msgstr ""
 
 #. R/getenv.R: stop("all arguments must be named")
 #: R/getenv.R:0
-#, fuzzy
 msgid "all arguments must be named"
-msgstr "দ্বিতীয় আর্গুমেন্ট লিস্ট হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/table.R: stop("all arguments must have the same length")
 #: R/table.R:0
-#, fuzzy
 msgid "all arguments must have the same length"
-msgstr "দ্বিতীয় আর্গুমেন্ট লিস্ট হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/dataframe.R: stop("all variables should have the same length")
 #: R/dataframe.R:0
@@ -1353,9 +1317,8 @@ msgstr ""
 
 #. R/tapply.R: stop("arguments must have same length")
 #: R/tapply.R:0
-#, fuzzy
 msgid "arguments must have same length"
-msgstr "দ্বিতীয় আর্গুমেন্ট লিস্ট হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/datetime.R: warning("as.character(td, ..) no longer obeys a 'format' argument; use format(td, ..) ?")
 #: R/datetime.R:0
@@ -1551,9 +1514,8 @@ msgstr ""
 
 #. R/datetime.R: stop("component subscript must be a character string")
 #: R/datetime.R:0
-#, fuzzy
 msgid "component subscript must be a character string"
-msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/conditions.R: stop("condition handlers must be functions")
 #: R/conditions.R:0
@@ -1582,9 +1544,8 @@ msgstr "dim(x) ধনাত্মক হওয়া প্রয়োজন"
 
 #. R/array.R: stop("dim(x) must have a positive length")
 #: R/array.R:0
-#, fuzzy
 msgid "dim(x) must have a positive length"
-msgstr "dim(x) ধনাত্মক হওয়া প্রয়োজন"
+msgstr ""
 
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
@@ -1720,9 +1681,8 @@ msgstr ""
 
 #. R/qr.R: stop("first argument must be a QR decomposition")
 #: R/qr.R:0
-#, fuzzy
 msgid "first argument must be a QR decomposition"
-msgstr "দ্বিতীয় আর্গুমেন্ট লিস্ট হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/seq.R: warning("first element used of 'length.out' argument")
 #: R/seq.R:0
@@ -1814,8 +1774,9 @@ msgstr ""
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0
-#: R/taskCallback.R:0 R/version.R:0 R/zapsmall.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
+#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/version.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
 msgstr ""
 
@@ -2020,9 +1981,8 @@ msgstr ""
 
 #. R/rowsum.R: warning("missing values for 'group'")
 #: R/rowsum.R:0
-#, fuzzy
 msgid "missing values for 'group'"
-msgstr "'x' অসীম অথবা এর কিছু সংখ্যা অনুপস্থিত"
+msgstr ""
 
 #. R/dataframe.R: stop("missing values in 'row.names' are not allowed")
 #: R/dataframe.R:0
@@ -2175,9 +2135,8 @@ msgstr ""
 
 #. R/files.R: stop("no file found")
 #: R/files.R:0
-#, fuzzy
 msgid "no file found"
-msgstr "ফাইল '%s' পাওয়া যায়নি"
+msgstr ""
 
 #. R/files.R: stop("no files to copy to")
 #: R/files.R:0
@@ -2571,9 +2530,8 @@ msgstr "দ্বিতীয় আর্গুমেন্ট লিস্ট 
 
 #. R/datetime.R: stop("second argument of / cannot be a \"difftime\" object")
 #: R/datetime.R:0
-#, fuzzy
 msgid "second argument of / cannot be a \"difftime\" object"
-msgstr "দ্বিতীয় আর্গুমেন্ট লিস্ট হওয়া বাধ্যতামূলক"
+msgstr ""
 
 #. R/unix/system.unix.R: warning("setting 'stdout = TRUE'")
 #: R/unix/system.unix.R:0
@@ -2582,15 +2540,13 @@ msgstr ""
 
 #. R/library.R: gettextf("shared object %s not found", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "shared object %s not found"
-msgstr "ফাইল '%s' পাওয়া যায়নি"
+msgstr ""
 
 #. R/library.R: gettextf("shared object %s was not loaded", sQuote(chname1))
 #: R/library.R:0
-#, fuzzy
 msgid "shared object %s was not loaded"
-msgstr "ফাইল '%s' পাওয়া যায়নি"
+msgstr ""
 
 #. R/library.R: gettextf("shared object '%s' already loaded", sQuote(chname1))
 #: R/library.R:0
@@ -2707,9 +2663,8 @@ msgstr ""
 
 #. R/dates.R: gettextf("unary '%s' not defined for \"Date\" objects", .Generic)
 #: R/dates.R:0
-#, fuzzy
 msgid "unary '%s' not defined for \"Date\" objects"
-msgstr "'%s' লজিক্যাল হওয়া উচিত"
+msgstr ""
 
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", "-")
 #. R/datetime.R: gettextf("unary '%s' not defined for \"POSIXt\" objects", .Generic)
@@ -2799,9 +2754,8 @@ msgstr ""
 
 #. R/get.R: gettextf("value for %s not found", sQuote(x))
 #: R/get.R:0
-#, fuzzy
 msgid "value for %s not found"
-msgstr "ফাইল '%s' পাওয়া যায়নি"
+msgstr ""
 
 #. R/library.R: gettextf("version %s of %s masked by %s in %s", versions[which(sufficient)[1L]],     sQuote(pkg), current, lib.loc[iV[!sufficient][1L]])
 #: R/library.R:0
@@ -2995,11 +2949,10 @@ msgstr[1] ""
 
 #. R/load.R: ngettext(n, "object %s not found", "objects %s not found")
 #: R/load.R:0
-#, fuzzy
 msgid "object %s not found"
 msgid_plural "objects %s not found"
-msgstr[0] "ফাইল '%s' পাওয়া যায়নি"
-msgstr[1] "ফাইল '%s' পাওয়া যায়নি"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/library.R: ngettext(as.integer(sum(m)), "package %s is not loaded", "packages %s are not loaded")
 #: R/library.R:0
@@ -3085,24 +3038,8 @@ msgid_plural "there are no packages called"
 msgstr[0] ""
 msgstr[1] ""
 
-#, fuzzy
-#~ msgid "'INDEX' is of length zero"
-#~ msgstr "'%s' লজিক্যাল হওয়া উচিত"
-
-#, fuzzy
-#~ msgid "'stderr' must be of length 1"
-#~ msgstr "'%s' লজিক্যাল হওয়া উচিত"
-
-#, fuzzy
-#~ msgid "'stdout' must be of length 1"
-#~ msgstr "'%s' লজিক্যাল হওয়া উচিত"
-
-#, fuzzy
-#~ msgid "shared object '%s' not found"
-#~ msgstr "ফাইল '%s' পাওয়া যায়নি"
-
-#~ msgid "'sample.kind' must be a character string of length 1"
-#~ msgstr "'sample.kind' একক character হওয়া বাধ্যতামূলক"
+#~ msgid "'normal.kind' must be a character string of length 1"
+#~ msgstr "'normal.kind' একটি একক অক্ষর হওয়া বাধ্যতামূলক"
 
 #~ msgid "defunctError"
 #~ msgstr "বিলুপ্ত ত্রুটি"

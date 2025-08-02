@@ -47,7 +47,7 @@ msgstr "tentativa de gráficar en un dispositivo nulo"
 
 #: graphics.cpp:1858
 msgid "outer margins too large (figure region too small)"
-msgstr "márgenes externos demasiado grandes (región de la figura demasiado pequeña)"
+msgstr "márgenes externos demasiado grandes (región de la figura demasiado pequeńa)"
 
 #: graphics.cpp:1860
 msgid "figure region too large"
@@ -120,7 +120,7 @@ msgstr "Información de métrica no disponible para este dispositivo"
 
 #: par-common.cpp:150
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
-msgstr "la familia de parámetros gráficos tiene un tamaño máximo de 200 bytes"
+msgstr "la familia de parámetros gráficos tiene un tamańo máximo de 200 bytes"
 
 #: par.cpp:164
 #, c-format
@@ -130,7 +130,7 @@ msgstr "el valor especificado del parámetro del gráfico \"%s\" es inválido"
 #: par.cpp:171
 #, c-format
 msgid "graphical parameter \"%s\" has the wrong length"
-msgstr "el parámetro del gráfico \"%s\" tiene tamaño incorrecto"
+msgstr "el parámetro del gráfico \"%s\" tiene tamańo incorrecto"
 
 #: par.cpp:263 par.cpp:670
 #, c-format
@@ -139,7 +139,7 @@ msgstr "el parámetro del gráfico \"%s\" no puede ser especificado"
 
 #: par.cpp:435
 msgid "parameter \"mfg\" has the wrong length"
-msgstr "el parámetro \"mfg\" tiene tamaño incorrecto"
+msgstr "el parámetro \"mfg\" tiene tamańo incorrecto"
 
 #: par.cpp:443
 msgid "parameter \"i\" in \"mfg\" is out of range"
@@ -659,7 +659,7 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "relative range of values (%4.0f * EPS) is small (axis %d)"
-#~ msgstr "amplitud relativa de valores =%4.0f * EPS, es pequeño (eixo %d)"
+#~ msgstr "amplitud relativa de valores =%4.0f * EPS, es pequeńo (eixo %d)"
 
 #~ msgid "invalid NA contour values"
 #~ msgstr "valores de contorno NA no válidos"
@@ -671,7 +671,7 @@ msgstr ""
 #~ msgstr "'padj' de longitud cero especificado"
 
 #~ msgid "zero length 'labels'"
-#~ msgstr "'labels' de tamaño cero"
+#~ msgstr "'labels' de tamańo cero"
 
 #~ msgid "zero length 'text' specified"
 #~ msgstr "'text' de longitud cero fue especificado"

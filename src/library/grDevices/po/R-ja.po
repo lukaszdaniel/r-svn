@@ -299,9 +299,8 @@ msgstr "不正なフォント型です"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr "不正なフォント型です"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -311,33 +310,28 @@ msgstr "不正なフォント型です"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height"
-msgstr "不正なフォント型です"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr "不正なフォント型です"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "不正なフォント型です"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width"
-msgstr "不正なフォント型です"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr "不正なフォント型です"
+msgstr ""
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -962,14 +956,14 @@ msgstr[0] "'%2$s' 中の %1$s は不正な引数名です"
 #~ msgid "invalid 'filename'"
 #~ msgstr "不正な 'filename' 引数です"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "不正な 'file' です"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "不正な 'family' 引数です"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "不正な 'title' です"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "不正な 'family' 引数です"
+#~ msgid "invalid 'file'"
+#~ msgstr "不正な 'file' です"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

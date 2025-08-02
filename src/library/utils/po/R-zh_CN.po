@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:14+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -488,6 +488,12 @@ msgstr "修改文件再把它放到合适的目录中去。"
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "你要么得保证你解列表了一个可重新列表的目标对象，要么你得分别指定一个骨架"
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "请输入一个环境号，要退出的话输入0"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -2310,21 +2316,28 @@ msgstr[0] "没有%s这个程序包(给%s用)"
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "'filter'参数无效"
 
-#, fuzzy
-#~ msgid "invalid 'type'"
-#~ msgstr "询问无效"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "'filters'参数无效。"
-
-#~ msgid "invalid %s argument"
-#~ msgstr "无效的 %s 参数"
-
 #~ msgid "invalid 'data' argument"
 #~ msgstr "'data'参数无效"
 
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "'modes'参数无效"
+
+#~ msgid "invalid 'x' argument"
+#~ msgstr "'x'参数无效"
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "'filters'参数无效。"
+
+#, fuzzy
+#~ msgid "invalid 'type'"
+#~ msgstr "询问无效"
+
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "无法在非互交的情况下选用CRAN镜像"
+
+#~ msgid ","
+#~ msgstr ","
 
 #~ msgid "invalid 'socket' argument"
 #~ msgstr "'socket'参数无效"
@@ -2332,18 +2345,14 @@ msgstr[0] "没有%s这个程序包(给%s用)"
 #~ msgid "invalid 'tarfile' argument"
 #~ msgstr "'tarfile'参数无效"
 
-#~ msgid "invalid 'x' argument"
-#~ msgstr "'x'参数无效"
-
-#, fuzzy
-#~ msgid "mirror non-interactively"
-#~ msgstr "无法在非互交的情况下选用CRAN镜像"
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()'只在Windows上有用"
 
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()'只在Windows上有用"
 
-#~ msgid "'memory.size()' is Windows-specific"
-#~ msgstr "'memory.size()'只在Windows上有用"
+#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
+#~ msgstr "建议你用%s/%s而不用%s/%s/%s。"
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"
@@ -2352,12 +2361,6 @@ msgstr[0] "没有%s这个程序包(给%s用)"
 #, fuzzy
 #~ msgid "invalid 'type'; must be a character string"
 #~ msgstr "'unzip'必需是单字符串"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
-#~ msgstr "建议你用%s/%s而不用%s/%s/%s。"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr "目录%s里缺失'filelist'这一文件"

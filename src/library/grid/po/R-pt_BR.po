@@ -90,9 +90,8 @@ msgstr "'hgap' deve ser uma única unidade"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr "'x' e 'y' devem ter comprimento 1"
+msgstr ""
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -361,9 +360,8 @@ msgstr "Nome(s) de 'grob' inválido(s)"
 
 #. R/grid.R: stop("Invalid number of generations")
 #: R/grid.R:0
-#, fuzzy
 msgid "Invalid number of generations"
-msgstr "Justificação inválida"
+msgstr ""
 
 #. R/grob.R: stop("Invalid revert target")
 #: R/grob.R:0
@@ -386,9 +384,8 @@ msgstr "'frame' inválido"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid transform (nothing drawn)"
-msgstr "'frame' inválido"
+msgstr ""
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
@@ -428,9 +425,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr "Justificação horizontal inválida"
+msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -450,9 +446,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown width; using first width"
-msgstr "Justificação horizontal inválida"
+msgstr ""
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -1051,20 +1046,24 @@ msgstr[0] "Nome de vista inválido"
 msgstr[1] "Nomes de vista inválidos"
 
 #, fuzzy
-#~ msgid "invalid 'clip' value"
-#~ msgstr "Valor 'clip' inválido"
-
-#, fuzzy
 #~ msgid "invalid 'frame'"
 #~ msgstr "'frame' inválido"
 
 #, fuzzy
-#~ msgid "invalid 'gp' value"
-#~ msgstr "Valor 'grep' inválido"
-
-#, fuzzy
 #~ msgid "invalid 'grob'"
 #~ msgstr "'grob' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'result'"
+#~ msgstr "'result' inválido"
+
+#, fuzzy
+#~ msgid "invalid 'print' argument"
+#~ msgstr "argumento 'print' inválido"
+
+#, fuzzy
+#~ msgid "invalid listing"
+#~ msgstr "listing inválido"
 
 #, fuzzy
 #~ msgid "invalid 'listing'"
@@ -1074,9 +1073,8 @@ msgstr[1] "Nomes de vista inválidos"
 #~ msgid "invalid 'origin'"
 #~ msgstr "'origin' inválido"
 
-#, fuzzy
-#~ msgid "invalid 'result'"
-#~ msgstr "'result' inválido"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "argumento 'arrow' inválido"
 
 #, fuzzy
 #~ msgid "invalid 'rot' value"
@@ -1087,15 +1085,12 @@ msgstr[1] "Nomes de vista inválidos"
 #~ msgstr "theta inválido"
 
 #, fuzzy
-#~ msgid "invalid listing"
-#~ msgstr "listing inválido"
-
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "argumento 'arrow' inválido"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "Valor 'grep' inválido"
 
 #, fuzzy
-#~ msgid "invalid 'print' argument"
-#~ msgstr "argumento 'print' inválido"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "Valor 'clip' inválido"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "argumento 'x' deve ser um objeto unitário"

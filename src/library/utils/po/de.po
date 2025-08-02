@@ -47,12 +47,11 @@ msgstr ""
 #: windows/dialogs.cpp:293 windows/dialogs.cpp:317 windows/dialogs.cpp:325
 #: windows/util.cpp:139 windows/widgets.cpp:90 windows/widgets.cpp:93
 #: windows/widgets.cpp:97
-#, fuzzy, c-format
+#, c-format
 msgid "invalid '%s' argument"
 msgstr "ungültiges '%s' Argument"
 
 #: io.cpp:347 io.cpp:836
-#, fuzzy
 msgid "invalid quote symbol set"
 msgstr "ungültige Menge von quote Symbolen"
 
@@ -61,7 +60,6 @@ msgid "cannot open the connection"
 msgstr "kann die Verbindung nicht öffnen"
 
 #: io.cpp:362 io.cpp:366
-#, fuzzy
 msgid "cannot read from this connection"
 msgstr "kann aus dieser Verbindung nicht lesen"
 
@@ -75,7 +73,7 @@ msgid "the first argument must be of mode character"
 msgstr "das erste Argument muss vom Modus character sein"
 
 #: io.cpp:595
-#, fuzzy, c-format
+#, c-format
 msgid "invalid 'numerals' string: \"%s\""
 msgstr "unzulässige 'numerals' Zeichenkette \"%s\""
 
@@ -115,7 +113,6 @@ msgid "Problem closing connection"
 msgstr "Problem beim Schließen der Verbindung"
 
 #: io.cpp:1069
-#, fuzzy
 msgid "'file' is not a connection"
 msgstr "'file' ist keine Verbindung"
 
@@ -124,7 +121,6 @@ msgid "cannot write to this connection"
 msgstr "kann in diese Verbindung nicht schreiben"
 
 #: io.cpp:1101
-#, fuzzy
 msgid "'dec' must be a single character"
 msgstr "'dec' muss ein einzelnes Zeichen sein"
 
@@ -134,7 +130,7 @@ msgid "corrupt data frame -- length of column %d does not match nrows"
 msgstr "beschädigter Dataframe -- Länge der Spalte %d entspricht nicht der Anzahl Zeilen"
 
 #: io.cpp:1159
-#, fuzzy, c-format
+#, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
 msgstr "Spalte %d behauptet ein Faktor zu sein, hat aber keine numerischen Kodes"
 
@@ -151,7 +147,6 @@ msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr "'loadhistory' kann nur in Rgui und Rterm genutzt werden"
 
 #: stubs.cpp:85
-#, fuzzy
 msgid "invalid timestamp"
 msgstr "ungültiger Zeitstempel"
 
@@ -160,12 +155,11 @@ msgid "X11 dataentry cannot be loaded"
 msgstr "X11 Dateneintrag kann nicht geladen werden"
 
 #: stubs.cpp:154 stubs.cpp:183 stubs.cpp:189
-#, fuzzy
 msgid "X11 is not available"
 msgstr "X11 nicht verfügbar"
 
 #: stubs.cpp:247 stubs.cpp:250
-#, fuzzy, c-format
+#, c-format
 msgid "invalid '%s' specification"
 msgstr "ungültige '%s' Spezifikation"
 
@@ -179,7 +173,6 @@ msgid "size must be finite and >= 0"
 msgstr ""
 
 #: utils.cpp:75
-#, fuzzy
 msgid "argument 'class' must be a character string"
 msgstr "Argument 'class' muss eine Zeichenkette sein"
 
@@ -189,7 +182,6 @@ msgid "character class \"%s\" is invalid"
 msgstr ""
 
 #: utils.cpp:85
-#, fuzzy
 msgid "argument 'x' must be a length-1 character vector"
 msgstr "Argument 'x'  muss Zeichenkettenvektor der Länge 1 sein"
 
@@ -205,7 +197,7 @@ msgstr "nsl() ist auf dieser Plattform nicht unterstützt"
 #: utils.cpp:131
 #, fuzzy
 msgid "input must be a character string"
-msgstr "'text' muss eine Zeichenkette sein"
+msgstr "'title' muss eine Zeichenkette sein"
 
 #: utils.cpp:154
 #, fuzzy, c-format
@@ -222,7 +214,6 @@ msgid "unknown format returned by 'gethostbyname'"
 msgstr "unbekanntes Format von 'gethostbyname' zurückgegeben"
 
 #: utils.cpp:176
-#, fuzzy
 msgid "nsl() is not supported on this platform"
 msgstr "nsl() ist auf dieser Plattform nicht unterstützt"
 
@@ -245,12 +236,12 @@ msgid "menu functions can only be used in the GUI"
 msgstr "Menüfunktionen können nur im GUI genutzt werden"
 
 #: windows/dialogs.cpp:249
-#, fuzzy, c-format
+#, c-format
 msgid "unable to retrieve items for %s (%s)"
 msgstr "kann Einträge für %snicht abrufen (%s)"
 
 #: windows/dialogs.cpp:287
-#, fuzzy, c-format
+#, c-format
 msgid "unable to add menu (%s)"
 msgstr "kann Menü nicht hinzufügen (%s)"
 
@@ -290,7 +281,7 @@ msgid "RegQueryInfoKey error code %d: '%s'"
 msgstr ""
 
 #: windows/registry.cpp:265
-#, fuzzy, c-format
+#, c-format
 msgid "Registry key '%ls' not found"
 msgstr "Registryeintrag '%ls' nicht gefunden"
 
@@ -308,7 +299,6 @@ msgid "'raw = FALSE' and format is a not a known text format"
 msgstr ""
 
 #: windows/util.cpp:303
-#, fuzzy
 msgid "argument must be a character vector or a raw vector"
 msgstr "Argument muss ein Zeichenkettenvektor oder ein raw Vektor sein"
 
@@ -321,28 +311,26 @@ msgid "unable to write to the clipboard"
 msgstr "kann nicht in die Zwischenablage schreiben"
 
 #: windows/util.cpp:429
-#, fuzzy
 msgid "'title' must be a character string"
 msgstr "'title' muss eine Zeichenkette sein"
 
 #: windows/util.cpp:438
-#, fuzzy
 msgid "'text' must be a character string"
 msgstr "'text' muss eine Zeichenkette sein"
 
 #: windows/util.cpp:477
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' must be length 1"
 msgstr "'%s' muss Länge 1 haben"
 
 #: windows/util.cpp:587
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' muss eine Liste sein"
 
 # +
 #: windows/util.cpp:591
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr "'%s' Element %d ist keine Fenster-Handle"
 
@@ -355,7 +343,6 @@ msgid "Select one"
 msgstr "Wähle eins"
 
 #: windows/widgets.cpp:203 windows/widgets.cpp:270
-#, fuzzy
 msgid "'default' must be a character string"
 msgstr "'default' muss eine Zeichenkette sein"
 
@@ -364,7 +351,6 @@ msgid "'default' is overlong"
 msgstr "'default' ist überlang"
 
 #: windows/widgets.cpp:209 windows/widgets.cpp:276
-#, fuzzy
 msgid "'caption' must be a character string"
 msgstr "'caption' muss eine Zeichenkette sein"
 

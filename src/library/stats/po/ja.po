@@ -601,7 +601,7 @@ msgstr "'.' が式中にありますが, 'data' 引数がありません"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' はリストでなければなりません"
+msgstr "n は最低でも 2 でなければなりません"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1062,29 +1062,26 @@ msgstr "直前の %d 個の観測値中に欠損値があります"
 msgid "ifault=%d. This should not happen"
 msgstr "これは起こるべきではありません"
 
-#~ msgid "n must be at least two"
-#~ msgstr "n は最低でも 2 でなければなりません"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) は少なくとも 2 でなければなりません"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "不正な lag.max 値です"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "ExtractVars 中のモデル式が不正です"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "EncodeVars 中のモデル式が不正です"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) は少なくとも 2 でなければなりません"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' はリストでなければなりません"
 
-#~ msgid "m must be a list"
-#~ msgstr "m はリストでなければなりません"
-
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf は正の最大値で置き換えられました"
+
+#~ msgid "invalid value of lag.max"
+#~ msgstr "不正な lag.max 値です"
+
+#~ msgid "m must be a list"
+#~ msgstr "m はリストでなければなりません"
 
 #, fuzzy
 #~ msgid "'x' is a factor"

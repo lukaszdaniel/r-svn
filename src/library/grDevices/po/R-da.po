@@ -302,9 +302,8 @@ msgstr "ugyldig skrifttype"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr "ugyldig skrifttype"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -314,33 +313,28 @@ msgstr "ugyldig skrifttype"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height"
-msgstr "ugyldig skrifttype"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr "ugyldig skrifttype"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "ugyldig skrifttype"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width"
-msgstr "ugyldig skrifttype"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr "ugyldig skrifttype"
+msgstr ""
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -985,14 +979,14 @@ msgstr[1] "ugyldige argumentnavne %s i »%s«"
 #~ msgid "invalid 'filename'"
 #~ msgstr "ugyldig »filename«"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "ugyldig »file«"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "ugyldigt argument for »family«"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "ugyldig »title«"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "ugyldigt argument for »family«"
+#~ msgid "invalid 'file'"
+#~ msgstr "ugyldig »file«"
 
 #~ msgid "%d y value <= 0 omitted from logarithmic plot"
 #~ msgid_plural "%d y values <= 0 omitted from logarithmic plot"

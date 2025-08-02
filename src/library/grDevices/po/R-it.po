@@ -300,9 +300,8 @@ msgstr "Tipo di carattere non valido"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr "Tipo di carattere non valido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -312,33 +311,28 @@ msgstr "Tipo di carattere non valido"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height"
-msgstr "Tipo di carattere non valido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr "Tipo di carattere non valido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "Tipo di carattere non valido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width"
-msgstr "Tipo di carattere non valido"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr "Tipo di carattere non valido"
+msgstr ""
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -962,14 +956,14 @@ msgstr[1] "nomi argomenti %s non validi in '%s'"
 #~ msgid "invalid 'filename'"
 #~ msgstr "'filename' non valido"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "'file' non valido"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "argomento 'family' non valido"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "'title' non valido"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "argomento 'family' non valido"
+#~ msgid "invalid 'file'"
+#~ msgstr "'file' non valido"
 
 #~ msgid "log_le_0"
 #~ msgstr "log_le_0"

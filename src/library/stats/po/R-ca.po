@@ -4495,7 +4495,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true correlation is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr "«r» és inferior a 1"
 
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4526,7 +4526,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true event rate is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr "«r» és inferior a 1"
 
 #. R/poisson.test.R: gettextf("true event rate is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4542,7 +4542,7 @@ msgstr ""
 #: R/wilcox.test.R:0
 #, fuzzy
 msgid "true location is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr "«r» és inferior a 1"
 
 #. R/wilcox.test.R: gettextf("true location is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
@@ -4588,7 +4588,7 @@ msgstr ""
 #: R/t.test.R:0
 #, fuzzy
 msgid "true mean is less than %s"
-msgstr "«m» és inferior a 1"
+msgstr "«r» és inferior a 1"
 
 #. R/t.test.R: gettextf("true mean is not equal to %s", mu, domain = "R-stats")
 #: R/t.test.R:0
@@ -4604,7 +4604,7 @@ msgstr ""
 #: R/fisher.test.R:0
 #, fuzzy
 msgid "true odds ratio is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr "«r» és inferior a 1"
 
 #. R/fisher.test.R: gettextf("true odds ratio is not equal to %s", NVAL, domain = "R-stats")
 #: R/fisher.test.R:0
@@ -4618,9 +4618,8 @@ msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is less than %s", p, domain = "R-stats")
 #: R/binom.test.R:0
-#, fuzzy
 msgid "true probability of success is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr ""
 
 #. R/binom.test.R: gettextf("true probability of success is not equal to %s", p,     domain = "R-stats")
 #: R/binom.test.R:0
@@ -4651,7 +4650,7 @@ msgstr ""
 #: R/prop.test.R:0
 #, fuzzy
 msgid "true proportion is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr "«r» és inferior a 1"
 
 #. R/prop.test.R: gettextf("true proportion is not equal to %s", NVAL, domain = "R-stats")
 #: R/prop.test.R:0
@@ -4667,7 +4666,7 @@ msgstr ""
 #: R/poisson.test.R:0
 #, fuzzy
 msgid "true rate ratio is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr "«r» és inferior a 1"
 
 #. R/poisson.test.R: gettextf("true rate ratio is not equal to %s", r, domain = "R-stats")
 #: R/poisson.test.R:0
@@ -4713,7 +4712,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true rho is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr "«r» és inferior a 1"
 
 #. R/cor.test.R: gettextf("true rho is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -4729,7 +4728,7 @@ msgstr ""
 #: R/cor.test.R:0
 #, fuzzy
 msgid "true tau is less than %s"
-msgstr "«r» és inferior a 0"
+msgstr "«r» és inferior a 1"
 
 #. R/cor.test.R: gettextf("true tau is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
@@ -5172,74 +5171,24 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilitzant la fila %d/%d d'un ajust combinat"
 msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
 
+#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
+#~ msgstr "les columnes de «contrast.obj» han de definir un contrast(han de sumar zero)"
+
 #~ msgid "invalid 'SSinit'"
 #~ msgstr "«SSinit» no vàlid"
 
-#, fuzzy
-#~ msgid "invalid 'attr(rhs, \"gradient\")'"
-#~ msgstr "'attr(rhs, \"gradient\") no vàlid"
+#~ msgid "invalid 'x'"
+#~ msgstr "«x» no vàlid"
 
-#, fuzzy
-#~ msgid "invalid 'keep.stuff'"
-#~ msgstr "«keep.stuff» no vàlid"
+#~ msgid "invalid 'nb'"
+#~ msgstr "«nb» no vàlid"
 
-#, fuzzy
-#~ msgid "invalid 'use' argument"
-#~ msgstr "argument «use» no vàlid"
-
-#, fuzzy
-#~ msgid "medpolish() did not converge in %d iteration"
-#~ msgid_plural "medpolish() did not converge in %d iterations"
-#~ msgstr[0] "medpolish() no ha convergit en la iteració %d"
-#~ msgstr[1] "medpolish() no ha convergit en %d iteracions"
-
-#, fuzzy
-#~ msgid "invalid 'control' argument"
-#~ msgstr "argument «control» no vàlid"
-
-#, fuzzy
-#~ msgid "invalid 'method' argument"
-#~ msgstr "argument «method» no vàlid"
-
-#, fuzzy
-#~ msgid "invalid NCOL(X)"
-#~ msgstr "NCOL(X) no vàlid"
-
-#, fuzzy
-#~ msgid "invalid NROW(X)"
-#~ msgstr "NROW(X) no vàlid"
-
-#, fuzzy
-#~ msgid "invalid argument 'cell'"
-#~ msgstr "l'argument «cell» no és vàlid"
-
-#, fuzzy
-#~ msgid "invalid argument 'degree'"
-#~ msgstr "l'argument «grau» no és vàlid"
+#~ msgid "Reprofiling for"
+#~ msgstr "S'està tornant a perfilar per"
 
 #, fuzzy
 #~ msgid "invalid argument 'lambda'"
 #~ msgstr "l'argument «lambda» no és vàlid"
-
-#, fuzzy
-#~ msgid "invalid argument 'span'"
-#~ msgstr "argument «span» no vàlid"
-
-#, fuzzy
-#~ msgid "invalid 'data' argument"
-#~ msgstr "argument «data» no vàlid"
-
-#, fuzzy
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "l'argument «omit» no és vàlid"
-
-#, fuzzy
-#~ msgid "invalid 'control.spar'"
-#~ msgstr "«control.spar» no vàlid"
-
-#, fuzzy
-#~ msgid "'formula' missing"
-#~ msgstr "Manca la «fórmula»"
 
 #, fuzzy
 #~ msgid "formula missing"
@@ -5250,20 +5199,73 @@ msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
 #~ msgstr "especificació incorrecta per a «fórmula»"
 
 #, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "argument «use» no vàlid"
+#~ msgid "down"
+#~ msgstr "avall"
 
 #, fuzzy
-#~ msgid "invalid 'abbr.colnames'"
-#~ msgstr "'abbr.colnames' no vàlid"
+#~ msgid "up"
+#~ msgstr "amunt"
 
 #, fuzzy
-#~ msgid "invalid 'endrule' argument"
-#~ msgstr "argument «endrule» no vàlid"
+#~ msgid "invalid 'method' argument"
+#~ msgstr "argument «method» no vàlid"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "invalid nrow(x)"
+#~ msgstr "nrow(x) no vàlid"
+
+#~ msgid "invalid ncol(x)"
+#~ msgstr "ncol(x) no vàlid"
 
 #, fuzzy
-#~ msgid "invalid argument 'c'"
-#~ msgstr "l'argument «c» no és vàlid"
+#~ msgid "ignored"
+#~ msgstr "ignorat"
+
+#, fuzzy
+#~ msgid "invalid 'control' argument"
+#~ msgstr "argument «control» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid NCOL(X)"
+#~ msgstr "NCOL(X) no vàlid"
+
+#, fuzzy
+#~ msgid "invalid NROW(X)"
+#~ msgstr "NROW(X) no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'y'"
+#~ msgstr "«y» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid argument 'span'"
+#~ msgstr "argument «span» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid argument 'cell'"
+#~ msgstr "l'argument «cell» no és vàlid"
+
+#, fuzzy
+#~ msgid "invalid argument 'degree'"
+#~ msgstr "l'argument «grau» no és vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'data' argument"
+#~ msgstr "argument «data» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid argument 'omit'"
+#~ msgstr "l'argument «omit» no és vàlid"
+
+#, fuzzy
+#~ msgid "invalid  'attr(rhs, \"gradient\")'"
+#~ msgstr "'attr(rhs, \"gradient\") no vàlid"
+
+#, fuzzy
+#~ msgid "'formula' missing"
+#~ msgstr "Manca la «fórmula»"
 
 #, fuzzy
 #~ msgid "invalid argument 'n'"
@@ -5273,46 +5275,35 @@ msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
 #~ msgid "invalid argument 'r'"
 #~ msgstr "l'argument «r» no és vàlid"
 
-#~ msgid "invalid 'nb'"
-#~ msgstr "«nb» no vàlid"
-
-#~ msgid "invalid 'x'"
-#~ msgstr "«x» no vàlid"
+#, fuzzy
+#~ msgid "invalid argument 'c'"
+#~ msgstr "l'argument «c» no és vàlid"
 
 #, fuzzy
-#~ msgid "invalid 'y'"
-#~ msgstr "«y» no vàlid"
+#~ msgid "invalid 'endrule' argument"
+#~ msgstr "argument «endrule» no vàlid"
 
-#~ msgid "invalid ncol(x)"
-#~ msgstr "ncol(x) no vàlid"
+#, fuzzy
+#~ msgid "invalid 'control.spar'"
+#~ msgstr "«control.spar» no vàlid"
 
-#~ msgid "invalid nrow(x)"
-#~ msgstr "nrow(x) no vàlid"
+#, fuzzy
+#~ msgid "invalid 'keep.stuff'"
+#~ msgstr "«keep.stuff» no vàlid"
+
+#, fuzzy
+#~ msgid "invalid 'abbr.colnames'"
+#~ msgstr "'abbr.colnames' no vàlid"
 
 #, fuzzy
 #~ msgid "Requested conf.level not achievable"
 #~ msgstr "El conf.level sol·licitat no és assolible"
 
-#~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
-#~ msgstr "les columnes de «contrast.obj» han de definir un contrast(han de sumar zero)"
-
-#~ msgid ","
-#~ msgstr ","
-
 #, fuzzy
-#~ msgid "down"
-#~ msgstr "avall"
-
-#, fuzzy
-#~ msgid "ignored"
-#~ msgstr "ignorat"
-
-#, fuzzy
-#~ msgid "up"
-#~ msgstr "amunt"
-
-#~ msgid "Reprofiling for"
-#~ msgstr "S'està tornant a perfilar per"
+#~ msgid "medpolish() did not converge in %d iteration"
+#~ msgid_plural "medpolish() did not converge in %d iterations"
+#~ msgstr[0] "medpolish() no ha convergit en la iteració %d"
+#~ msgstr[1] "medpolish() no ha convergit en %d iteracions"
 
 #, fuzzy
 #~ msgid ".nknots.smspl() is now exported; use it instead of n.knots()"

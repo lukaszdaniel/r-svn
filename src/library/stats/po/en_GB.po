@@ -615,7 +615,7 @@ msgstr "'.' in formula and no 'data' argument"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' must be a list"
+msgstr "n must be at least two"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1077,29 +1077,26 @@ msgstr "missing value in last %d observations"
 msgid "ifault=%d. This should not happen"
 msgstr "this should not happen"
 
-#~ msgid "n must be at least two"
-#~ msgstr "n must be at least two"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) must be at least two"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "invalid value of lag.max"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "invalid model formula in ExtractVars"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "invalid model formula in EncodeVars"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) must be at least two"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' must be a list"
 
-#~ msgid "m must be a list"
-#~ msgstr "m must be a list"
+#~ msgid "'central' is NA, but must be TRUE or FALSE"
+#~ msgstr "'central' is NA, but must be TRUE or FALSE"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA/Inf replaced by maximum positive value"
 
-#~ msgid "'central' is NA, but must be TRUE or FALSE"
-#~ msgstr "'central' is NA, but must be TRUE or FALSE"
+#~ msgid "invalid value of lag.max"
+#~ msgstr "invalid value of lag.max"
+
+#~ msgid "m must be a list"
+#~ msgstr "m must be a list"

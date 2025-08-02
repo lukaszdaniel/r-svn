@@ -21,7 +21,6 @@ msgstr ""
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
-#, fuzzy
 msgid "extra arguments discarded"
 msgstr "余分な引数が破棄されました"
 
@@ -42,7 +41,6 @@ msgstr ""
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0
-#, fuzzy
 msgid "profiling has found a better solution, so original fit had not converged"
 msgstr "プロファイリング (profiling) がより適した解を見つけましたので、最初の fit は収束していなかったことになります"
 

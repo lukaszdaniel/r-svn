@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:11+0200\n"
 "Last-Translator: Abdulrahman Alswaji <alswajiab@gmail.com>\n"
 "Language-Team: none\n"
@@ -155,9 +155,8 @@ msgstr ""
 
 #. R/debugger.R: gettextf("'dump' is not an object of class %s\n", dQuote("dump.frames"))
 #: R/debugger.R:0
-#, fuzzy
 msgid "'dump' is not an object of class %s"
-msgstr "\"pb\" ليس من الفئة ‫‪%s"
+msgstr ""
 
 #. R/packages2.R: stop("'env' must be an environment")
 #: R/packages2.R:0
@@ -460,6 +459,11 @@ msgstr ""
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
+msgstr ""
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+msgid "Enter a frame number, or 0 to exit"
 msgstr ""
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
@@ -1845,9 +1849,8 @@ msgstr ""
 
 #. R/Sweave.R: gettextf("target syntax not of class %s", dQuote("SweaveSyntax"))
 #: R/Sweave.R:0
-#, fuzzy
 msgid "target syntax not of class %s"
-msgstr "\"pb\" ليس من الفئة ‫‪%s"
+msgstr ""
 
 #. R/question.R: gettextf("the object of class %s in the function call %s could not be used as a documentation topic",     dQuote(class(f)), sQuote(deparse(expr)))
 #: R/question.R:0
@@ -2026,10 +2029,6 @@ msgid "%d Sweave file for basename %s found"
 msgid_plural "%d Sweave files for basename %s found"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
 #: R/modifyList.R:0
@@ -2037,10 +2036,6 @@ msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s")
 #: R/apropos.R:0
@@ -2048,10 +2043,6 @@ msgid "%d occurrence in %s"
 msgid_plural "%d occurrences in %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(!ok), "'lib' element %s is not a writable directory",     "'lib' elements %s are not writable directories")
 #: R/packages2.R:0
@@ -2059,10 +2050,6 @@ msgid "'lib' element %s is not a writable directory"
 msgid_plural "'lib' elements %s are not writable directories"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/citation.R: ngettext(sum(!ok), "A bibentry of bibtype %s has to specify the field: %s",     "A bibentry of bibtype %s has to specify the fields: %s")
 #: R/citation.R:0
@@ -2070,10 +2057,6 @@ msgid "A bibentry of bibtype %s has to specify the field: %s"
 msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
 #: R/packages2.R:0
@@ -2085,10 +2068,6 @@ msgid_plural ""
 "see the ideas at\n"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(later & hasSrc), "Do you want to install from sources the package which needs compilation?",     "Do you want to install from sources the packages which need compilation?")
 #: R/packages2.R:0
@@ -2096,10 +2075,6 @@ msgid "Do you want to install from sources the package which needs compilation?"
 msgid_plural "Do you want to install from sources the packages which need compilation?"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(length(pkgs), "Installing package into %s\n(as %s is unspecified)",     "Installing packages into %s\n(as %s is unspecified)")
 #: R/packages2.R:0
@@ -2111,10 +2086,6 @@ msgid_plural ""
 "(as %s is unspecified)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/citation.R: ngettext(length(bad), "Invalid ORCID iD: %s.", "Invalid ORCID iDs: %s.")
 #: R/citation.R:0
@@ -2145,10 +2116,6 @@ msgid "Invalid role specification: %s."
 msgid_plural "Invalid role specifications: %s."
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
 #: R/Sweave.R:0
@@ -2178,10 +2145,6 @@ msgid "Package which is only available in source form, and may need compilation 
 msgid_plural "Packages which are only available in source form, and may need compilation of C/C++/Fortran"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages.R: ngettext(length(pkgs), "Removing package from %s\n(as %s is unspecified)",     "Removing packages from %s\n(as %s is unspecified)")
 #: R/packages.R:0
@@ -2193,10 +2156,6 @@ msgid_plural ""
 "(as %s is unspecified)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(later), "There is a binary version available (and will be installed) but the source version is later",     "There are binary versions available (and will be installed) but the source versions are later")
 #: R/packages2.R:0
@@ -2204,10 +2163,6 @@ msgid "There is a binary version available (and will be installed) but the sourc
 msgid_plural "There are binary versions available (and will be installed) but the source versions are later"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(later), "There is a binary version available but the source version is later",     "There are binary versions available but the source versions are later")
 #: R/packages2.R:0
@@ -2215,10 +2170,6 @@ msgid "There is a binary version available but the source version is later"
 msgid_plural "There are binary versions available but the source versions are later"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(length(added), "also installing the dependency %s",     "also installing the dependencies %s")
 #: R/packages2.R:0
@@ -2226,10 +2177,6 @@ msgid "also installing the dependency %s"
 msgid_plural "also installing the dependencies %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/edit.R: ngettext(sum(has_class), "class discarded from column %s", "classes discarded from columns %s")
 #: R/edit.R:0
@@ -2237,10 +2184,6 @@ msgid "class discarded from column %s"
 msgid_plural "classes discarded from columns %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(length(not_avail), "dependency %s is not available",     "dependencies %s are not available")
 #: R/packages2.R:0
@@ -2248,10 +2191,6 @@ msgid "dependency %s is not available"
 msgid_plural "dependencies %s are not available"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(length(pkgs), "installing the source package %s", "installing the source packages %s")
 #: R/packages2.R:0
@@ -2259,10 +2198,6 @@ msgid "installing the source package %s"
 msgid_plural "installing the source packages %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/roman.R: ngettext(sum(!ok), "invalid roman numeral: %s", "invalid roman numerals: %s")
 #: R/roman.R:0
@@ -2270,10 +2205,6 @@ msgid "invalid roman numeral: %s"
 msgid_plural "invalid roman numerals: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/read.fwf.R: ngettext(nread%%recordlength, "last record incomplete, %d line discarded",     "last record incomplete, %d lines discarded")
 #: R/read.fwf.R:0
@@ -2281,10 +2212,6 @@ msgid "last record incomplete, %d line discarded"
 msgid_plural "last record incomplete, %d lines discarded"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/help.search.R: ngettext(n_of_objects_matched, "matched %d object.", "matched %d objects.")
 #: R/help.search.R:0
@@ -2292,10 +2219,6 @@ msgid "matched %d object."
 msgid_plural "matched %d objects."
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/package.skeleton.R: ngettext(sum(!have), "object '%s' not found", "objects '%s' not found")
 #: R/package.skeleton.R:0
@@ -2303,10 +2226,6 @@ msgid "object '%s' not found"
 msgid_plural "objects '%s' not found"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages.R: ngettext(sum(base), "package %s is a base package, and cannot be removed",     "packages %s are base packages, and cannot be removed")
 #: R/packages.R:0
@@ -2325,10 +2244,6 @@ msgid "package %s is a base package, and should not be updated"
 msgid_plural "packages %s are base packages, and should not be updated"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(length(na), "package %s is available as a source package but not as a binary",     "packages %s are available as source packages but not as binaries")
 #: R/packages2.R:0
@@ -2336,10 +2251,6 @@ msgid "package %s is available as a source package but not as a binary"
 msgid_plural "packages %s are available as source packages but not as binaries"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(inuse), "package %s is in use and will not be installed",     "packages %s are in use and will not be installed")
 #: R/packages2.R:0
@@ -2347,10 +2258,6 @@ msgid "package %s is in use and will not be installed"
 msgid_plural "packages %s are in use and will not be installed"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
 #: R/packages2.R:0
@@ -2358,7 +2265,3 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""

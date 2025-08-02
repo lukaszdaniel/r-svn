@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -471,6 +471,12 @@ msgstr "Edit the file and move it to the appropriate directory."
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "Either ensure you unlist a relistable object, or specify the skeleton separately."
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "Enter an environment number, or 0 to exit"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -2300,20 +2306,8 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "package %s is not available %s"
 msgstr[1] "packages %s are not available %s"
 
-#~ msgid "path is empty"
-#~ msgstr "path is empty"
-
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Invalid 'filter' argument."
-
-#~ msgid "invalid 'type'"
-#~ msgstr "invalid 'type'"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "invalid 'filters' argument."
-
-#~ msgid "invalid %s argument"
-#~ msgstr "invalid %s argument"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "invalid 'data' argument"
@@ -2321,14 +2315,30 @@ msgstr[1] "packages %s are not available %s"
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "invalid 'modes' argument"
 
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "invalid 'socket' argument"
-
-#~ msgid "invalid 'tarfile' argument"
-#~ msgstr "invalid 'tarfile' argument"
-
 #~ msgid "invalid 'x' argument"
 #~ msgstr "invalid 'x' argument"
+
+#~ msgid "tail(., keepnums = V) instead."
+#~ msgstr "tail(., keepnums = V) instead."
+
+#~ msgid "tail(., addrownums=.) is"
+#~ msgstr "tail(., addrownums=.) is"
+
+#~ msgid ""
+#~ "deprecated.\n"
+#~ "Use"
+#~ msgstr ""
+#~ "deprecated.\n"
+#~ "Use"
+
+#~ msgid "tail(., keepnums=.) instead."
+#~ msgstr "tail(., keepnums=.) instead."
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "invalid 'filters' argument."
+
+#~ msgid "invalid 'type'"
+#~ msgstr "invalid 'type'"
 
 #~ msgid "cannot choose a"
 #~ msgstr "cannot choose a"
@@ -2336,52 +2346,38 @@ msgstr[1] "packages %s are not available %s"
 #~ msgid "mirror non-interactively"
 #~ msgstr "mirror non-interactively"
 
-#~ msgid "'memory.limit()' is Windows-specific"
-#~ msgstr "'memory.limit()' is Windows-specific"
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "invalid 'socket' argument"
+#~ msgstr "invalid 'socket' argument"
+
+#~ msgid "invalid 'tarfile' argument"
+#~ msgstr "invalid 'tarfile' argument"
+
+#~ msgid "gzip"
+#~ msgstr "gzip"
+
+#~ msgid "bzip2"
+#~ msgstr "bzip2"
+
+#~ msgid "xz"
+#~ msgstr "xz"
+
+#~ msgid "path is empty"
+#~ msgstr "path is empty"
 
 #~ msgid "'memory.size()' is Windows-specific"
 #~ msgstr "'memory.size()' is Windows-specific"
+
+#~ msgid "'memory.limit()' is Windows-specific"
+#~ msgstr "'memory.limit()' is Windows-specific"
+
+#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
+#~ msgstr "It is recommended to use %s/%s instead of %s/%s/%s."
 
 #~ msgid "argument %s must be a character string"
 #~ msgstr "argument %s must be a character string"
 
 #~ msgid "invalid 'type'; must be a character string"
 #~ msgstr "invalid 'type'; must be a character string"
-
-#~ msgid ""
-#~ "tail(., addrownums = V) is deprecated.\n"
-#~ "Use"
-#~ msgstr ""
-#~ "tail(., addrownums = V) is deprecated.\n"
-#~ "Use"
-
-#~ msgid "tail(., keepnums = V) instead."
-#~ msgstr "tail(., keepnums = V) instead."
-
-#~ msgid "bzip2"
-#~ msgstr "bzip2"
-
-#~ msgid "gzip"
-#~ msgstr "gzip"
-
-#~ msgid "xz"
-#~ msgstr "xz"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid ""
-#~ "deprecated.\n"
-#~ "Use"
-#~ msgstr ""
-#~ "deprecated.\n"
-#~ "Use"
-
-#~ msgid "tail(., addrownums=.) is"
-#~ msgstr "tail(., addrownums=.) is"
-
-#~ msgid "tail(., keepnums=.) instead."
-#~ msgstr "tail(., keepnums=.) instead."
-
-#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
-#~ msgstr "It is recommended to use %s/%s instead of %s/%s/%s."

@@ -266,9 +266,8 @@ msgstr ""
 
 #. R/path.R: stop("Invalid fill rule")
 #: R/path.R:0
-#, fuzzy
 msgid "Invalid fill rule"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/postscript.R: stop("Invalid font database name")
 #: R/postscript.R:0
@@ -613,9 +612,8 @@ msgstr ""
 
 #. R/postscript.R: gettextf("invalid 'file' argument '%s'", file)
 #: R/postscript.R:0
-#, fuzzy
 msgid "invalid 'file' argument '%s'"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/postscript.R: stop("invalid CMap name in font specification")
 #: R/postscript.R:0
@@ -707,15 +705,13 @@ msgstr "पेहली आर्गुमेंट (argument) अमान्�
 
 #. R/xyz.coords.R: stop("invalid first argument [bad language object]")
 #: R/xyz.coords.R:0
-#, fuzzy
 msgid "invalid first argument [bad language object]"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/unix/png.R: stop("invalid height")
 #: R/unix/png.R:0
-#, fuzzy
 msgid "invalid height"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/postscript.R: stop("invalid metric information in font specification")
 #: R/postscript.R:0
@@ -729,21 +725,18 @@ msgstr ""
 
 #. R/postscript.R: stop("invalid output format")
 #: R/postscript.R:0
-#, fuzzy
 msgid "invalid output format"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/raster.R: stop("invalid raster subassignment")
 #: R/raster.R:0
-#, fuzzy
 msgid "invalid raster subassignment"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/raster.R: stop("invalid raster subsetting")
 #: R/raster.R:0
-#, fuzzy
 msgid "invalid raster subsetting"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/device.R: stop("invalid setting for 'getOption(\"device\")'")
 #: R/device.R:0
@@ -934,20 +927,7 @@ msgstr[1] ""
 
 #. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'", domain = "R-grDevices")
 #: R/postscript.R:0
-#, fuzzy
 msgid "invalid argument name %s in '%s'"
 msgid_plural "invalid argument names %s in '%s'"
-msgstr[0] "पेहली आर्गुमेंट (argument) अमान्य है"
-msgstr[1] "पेहली आर्गुमेंट (argument) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid 'filename'"
-#~ msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid 'file'"
-#~ msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid 'family' argument"
-#~ msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr[0] ""
+msgstr[1] ""

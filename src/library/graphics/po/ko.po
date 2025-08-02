@@ -457,8 +457,7 @@ msgstr ""
 
 #: plot.cpp:3818
 msgid "invalid rectangles data (need 2 columns)"
-msgstr ""
-"사각형을 그리는데 유효한 데이터가 아닙니다 (2개의 열들이 필요합니다)"
+msgstr "사각형을 그리는데 유효한 데이터가 아닙니다 (2개의 열들이 필요합니다)"
 
 #: plot.cpp:3849
 msgid "invalid stars data"

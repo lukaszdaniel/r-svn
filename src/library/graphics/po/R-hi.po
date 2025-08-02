@@ -471,15 +471,13 @@ msgstr ""
 
 #. R/pairs.R: stop("invalid argument 'horInd'")
 #: R/pairs.R:0
-#, fuzzy
 msgid "invalid argument 'horInd'"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/pairs.R: stop("invalid argument 'verInd'")
 #: R/pairs.R:0
-#, fuzzy
 msgid "invalid argument 'verInd'"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/boxplot.R: stop("invalid boxplot widths")
 #: R/boxplot.R:0
@@ -493,9 +491,8 @@ msgstr ""
 
 #. R/legend.R: stop("invalid coordinate lengths")
 #: R/legend.R:0
-#, fuzzy
 msgid "invalid coordinate lengths"
-msgstr "length(x) अमान्य है"
+msgstr ""
 
 #. R/boxplot.R: stop("invalid first argument")
 #. R/stripchart.R: stop("invalid first argument")
@@ -505,9 +502,8 @@ msgstr "पेहली आर्गुमेंट (argument) अमान्�
 
 #. R/hist.R: stop("invalid length(breaks)")
 #: R/hist.R:0
-#, fuzzy
 msgid "invalid length(breaks)"
-msgstr "length(x) अमान्य है"
+msgstr ""
 
 #. R/hist.R: stop("invalid length(x)")
 #. R/stem.R: stop("invalid length(x)")
@@ -533,9 +529,8 @@ msgstr ""
 
 #. R/stripchart.R: stop("invalid plotting method")
 #: R/stripchart.R:0
-#, fuzzy
 msgid "invalid plotting method"
-msgstr "length(x) अमान्य है"
+msgstr ""
 
 #. R/axis.R: stop("invalid positive 'axp[3]'")
 #: R/axis.R:0
@@ -549,9 +544,8 @@ msgstr ""
 
 #. R/screen.R: stop("invalid screen number")
 #: R/screen.R:0
-#, fuzzy
 msgid "invalid screen number"
-msgstr "पेहली आर्गुमेंट (argument) अमान्य है"
+msgstr ""
 
 #. R/datetime.R: stop("invalid specification of 'breaks'")
 #: R/datetime.R:0
@@ -560,15 +554,13 @@ msgstr ""
 
 #. R/plot.R: stop("invalid table 'x'")
 #: R/plot.R:0
-#, fuzzy
 msgid "invalid table 'x'"
-msgstr "length(x) अमान्य है"
+msgstr ""
 
 #. R/image.R: stop("invalid z limits")
 #: R/image.R:0
-#, fuzzy
 msgid "invalid z limits"
-msgstr "length(x) अमान्य है"
+msgstr ""
 
 #. R/stars.R: warning("labels do not make sense for a single location")
 #: R/stars.R:0
@@ -815,15 +807,3 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] ""
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "invalid 'axp'"
-#~ msgstr "length(x) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid 'log'"
-#~ msgstr "length(x) अमान्य है"
-
-#, fuzzy
-#~ msgid "invalid 'title'"
-#~ msgstr "length(x) अमान्य है"

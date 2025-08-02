@@ -820,17 +820,17 @@ msgstr[0] "沒有用 %s 這個引數"
 #~ msgid "invalid 'axp'"
 #~ msgstr "'axp' 無效"
 
-#~ msgid "invalid 'given.values'"
-#~ msgstr "'given.values' 值無效"
-
 #~ msgid "invalid 'log'"
 #~ msgstr "'log' 無效"
 
-#~ msgid "invalid 'title'"
-#~ msgstr "'title' 無效"
-
 #~ msgid "invalid 'usr'"
 #~ msgstr "'usr' 無效"
+
+#~ msgid "invalid 'given.values'"
+#~ msgstr "'given.values' 值無效"
+
+#~ msgid "invalid 'title'"
+#~ msgstr "'title' 無效"
 
 #, fuzzy
 #~ msgid "fuzz must be non-negative"

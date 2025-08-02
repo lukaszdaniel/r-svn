@@ -173,9 +173,8 @@ msgstr ""
 
 #. R/kernel.R: stop("'coef' must be a vector")
 #: R/kernel.R:0
-#, fuzzy
 msgid "'coef' must be a vector"
-msgstr "يجب أن يكون طول 'acf' اثنين أو أكثر"
+msgstr ""
 
 #. R/aov.R: stop("'coef' must define a contrast, i.e., sum to 0")
 #: R/aov.R:0
@@ -516,9 +515,8 @@ msgstr ""
 
 #. R/ts.R: stop("'model$order' must be of length 3")
 #: R/ts.R:0
-#, fuzzy
 msgid "'model$order' must be of length 3"
-msgstr "يجب أن يكون طول 'acf' اثنين أو أكثر"
+msgstr ""
 
 #. R/ts.R: stop("'model' must be list")
 #: R/ts.R:0
@@ -727,9 +725,8 @@ msgstr ""
 
 #. R/relevel.R: stop("'ref' must be of length one")
 #: R/relevel.R:0
-#, fuzzy
 msgid "'ref' must be of length one"
-msgstr "يجب أن يكون طول 'acf' اثنين أو أكثر"
+msgstr ""
 
 #. R/relevel.R: stop("'relevel' only for (unordered) factors")
 #: R/relevel.R:0
@@ -801,9 +798,8 @@ msgstr ""
 
 #. R/smspline.R: stop("'spar' must be of length 1")
 #: R/smspline.R:0
-#, fuzzy
 msgid "'spar' must be of length 1"
-msgstr "يجب أن يكون طول 'acf' اثنين أو أكثر"
+msgstr ""
 
 #. R/spline.R: stop("'spline' requires n >= 1")
 #: R/spline.R:0
@@ -902,9 +898,8 @@ msgstr ""
 
 #. R/reshape.R: stop("'varying' must be nonempty list or vector")
 #: R/reshape.R:0
-#, fuzzy
 msgid "'varying' must be nonempty list or vector"
-msgstr "يجب أن يكون طول 'acf' اثنين أو أكثر"
+msgstr ""
 
 #. R/lm.R: stop("'weights' as formula should be one-sided")
 #: R/lm.R:0
@@ -1181,9 +1176,8 @@ msgstr ""
 
 #. R/stepfun.R: stop("'x' must have length >= 1")
 #: R/stepfun.R:0
-#, fuzzy
 msgid "'x' must have length >= 1"
-msgstr "يجب أن يكون طول 'acf' اثنين أو أكثر"
+msgstr ""
 
 #. R/mantelhaen.test.R: stop("'x', 'y', and 'z' must have the same length")
 #: R/mantelhaen.test.R:0
@@ -1608,9 +1602,8 @@ msgstr ""
 
 #. R/hclust.R: gettextf("ambiguous clustering method %s", method)
 #: R/hclust.R:0
-#, fuzzy
 msgid "ambiguous clustering method %s"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/dist.R: stop("ambiguous distance method")
 #: R/dist.R:0
@@ -1659,9 +1652,8 @@ msgstr ""
 
 #. R/hclust.R: gettextf("argument 'x' cannot be coerced to class %s", dQuote("hclust"))
 #: R/hclust.R:0
-#, fuzzy
 msgid "argument 'x' cannot be coerced to class %s"
-msgstr "تم تجاهل الحجج الإضافية"
+msgstr ""
 
 #. R/aggregate.R: stop("argument 'x' is missing -- it has been renamed from 'formula'")
 #: R/aggregate.R:0
@@ -1741,9 +1733,8 @@ msgstr ""
 
 #. R/ts.R: stop("bad value for 'start'")
 #: R/ts.R:0
-#, fuzzy
 msgid "bad value for 'start'"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/runmed.R: stop("bandwidth 'k' must be >= 1 and odd!")
 #: R/runmed.R:0
@@ -2446,9 +2437,8 @@ msgstr ""
 
 #. R/nls-profile.R: stop("invalid argument to 'getProfile'")
 #: R/nls-profile.R:0
-#, fuzzy
 msgid "invalid argument to 'getProfile'"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/ks.test.R: stop("invalid arguments")
 #: R/ks.test.R:0
@@ -2464,15 +2454,13 @@ msgstr "قيمة غير صالحة %sس"
 
 #. R/hclust.R: stop("invalid dissimilarities")
 #: R/hclust.R:0
-#, fuzzy
 msgid "invalid dissimilarities"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/dist.R: stop("invalid distance method")
 #: R/dist.R:0
-#, fuzzy
 msgid "invalid distance method"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/glm.R: stop("invalid fitted means in empty model", call. = FALSE)
 #: R/glm.R:0
@@ -2482,15 +2470,13 @@ msgstr ""
 #. R/cor.test.R: stop("invalid formula")
 #. R/models.R: stop("invalid formula")
 #: R/cor.test.R:0 R/models.R:0
-#, fuzzy
 msgid "invalid formula"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/models.R: gettextf("invalid formula %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula %s"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/models.R: gettextf("invalid formula %s: assignment is deprecated", deparse2(x))
 #: R/models.R:0
@@ -2514,9 +2500,8 @@ msgstr ""
 
 #. R/models.R: gettextf("invalid formula: %s", deparse2(x))
 #: R/models.R:0
-#, fuzzy
 msgid "invalid formula: %s"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/approx.R: stop("invalid interpolation method")
 #. R/spline.R: stop("invalid interpolation method")
@@ -2526,17 +2511,15 @@ msgstr ""
 
 #. R/hclust.R: stop("invalid length of members")
 #: R/hclust.R:0
-#, fuzzy
 msgid "invalid length of members"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/HoltWinters.R: stop("invalid length(x)")
 #. R/approx.R: stop("invalid length(x)")
 #. R/bandwidths.R: stop("invalid length(x)")
 #: R/HoltWinters.R:0 R/approx.R:0 R/bandwidths.R:0
-#, fuzzy
 msgid "invalid length(x)"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/glm.R: stop("invalid linear predictor values in empty model", call. = FALSE)
 #: R/glm.R:0
@@ -2550,21 +2533,18 @@ msgstr ""
 
 #. R/smspline.R: stop("invalid number of points")
 #: R/smspline.R:0
-#, fuzzy
 msgid "invalid number of points"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/integrate.R: stop("invalid parameter values")
 #: R/integrate.R:0
-#, fuzzy
 msgid "invalid parameter values"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/models.R: stop("invalid response type")
 #: R/models.R:0
-#, fuzzy
 msgid "invalid response type"
-msgstr "قيمة غير صالحة %sس"
+msgstr ""
 
 #. R/cmdscale.R: gettextf("invalid value of %s", "'n'")
 #. R/density.R: gettextf("invalid value of %s", "length(x)")
@@ -2774,9 +2754,8 @@ msgstr "لا يتم تركيب جميع النماذج على نفس العدد 
 #. R/lm.R: stop("models were not all fitted to the same size of dataset")
 #. R/mlm.R: stop("models were not all fitted to the same size of dataset")
 #: R/glm.R:0 R/lm.R:0 R/mlm.R:0
-#, fuzzy
 msgid "models were not all fitted to the same size of dataset"
-msgstr "لا يتم تركيب جميع النماذج على نفس العدد من الملاحظات"
+msgstr ""
 
 #. R/glm.R: gettextf("models with response %s removed because response differs from model 1",     sQuote(deparse(responses[!sameresp])))
 #. R/lm.R: gettextf("models with response %s removed because response differs from model 1",     sQuote(deparse(responses[!sameresp])))
@@ -3336,9 +3315,8 @@ msgstr ""
 
 #. R/smspline.R: stop("number of weights must match number of observations.")
 #: R/smspline.R:0
-#, fuzzy
 msgid "number of weights must match number of observations."
-msgstr "لا يتم تركيب جميع النماذج على نفس العدد من الملاحظات"
+msgstr ""
 
 #. R/smspline.R: stop("numeric 'all.knots' must cover [0,1] (= the transformed data-range)")
 #: R/smspline.R:0
@@ -4377,10 +4355,6 @@ msgid "%d factor is too many for %d variables"
 msgid_plural "%d factors are too many for %d variables"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/lsfit.R: ngettext(sum(!good), "%d missing value deleted", "%d missing values deleted",     domain = "R-stats")
 #: R/lsfit.R:0
@@ -4388,10 +4362,6 @@ msgid "%d missing value deleted"
 msgid_plural "%d missing values deleted"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/nafns.R: ngettext(n <- length(x), "%d observation deleted due to missingness",     "%d observations deleted due to missingness")
 #: R/nafns.R:0
@@ -4399,10 +4369,6 @@ msgid "%d observation deleted due to missingness"
 msgid_plural "%d observations deleted due to missingness"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/smspline.R: ngettext(diff, "%d observation with NA, NaN or Inf deleted",     "%d observations with NAs, NaNs and/or Infs deleted", domain = "R-stats")
 #: R/smspline.R:0
@@ -4410,10 +4376,6 @@ msgid "%d observation with NA, NaN or Inf deleted"
 msgid_plural "%d observations with NAs, NaNs and/or Infs deleted"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/kmeans.R: ngettext(iter.max, "'%s' did not converge in %d iteration", "'%s' did not converge in %d iterations",     domain = "R-stats")
 #. R/medpolish.R: ngettext(maxiter, "'%s' did not converge in %d iteration", "'%s' did not converge in %d iterations",     domain = "R-stats")
@@ -4433,10 +4395,6 @@ msgid "'X' matrix has %d case (row)"
 msgid_plural "'X' matrix has %d cases (rows)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/lsfit.R: ngettext(nry, "'Y' has %d case (row)", "'Y' has %d cases (rows)",     domain = "R-stats")
 #: R/lsfit.R:0
@@ -4444,10 +4402,6 @@ msgid "'Y' has %d case (row)"
 msgid_plural "'Y' has %d cases (rows)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/filter.R: ngettext(nser, "'init' must have %d column", "'init' must have 1 or %d columns",     domain = "R-stats")
 #: R/filter.R:0
@@ -4455,10 +4409,6 @@ msgid "'init' must have %d column"
 msgid_plural "'init' must have 1 or %d columns"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/models.R: ngettext(nr, "'newdata' had %d row", "'newdata' had %d rows",     domain = "R-stats")
 #: R/models.R:0
@@ -4466,10 +4416,6 @@ msgid "'newdata' had %d row"
 msgid_plural "'newdata' had %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/factanal.R: ngettext(p, "'start' must have %d row", "'start' must have %d rows",     domain = "R-stats")
 #: R/factanal.R:0
@@ -4477,10 +4423,6 @@ msgid "'start' must have %d row"
 msgid_plural "'start' must have %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/ts.R: ngettext(n.start, "'start.innov' is too short: need %d point",     "'start.innov' is too short: need %d points")
 #: R/ts.R:0
@@ -4488,10 +4430,6 @@ msgid "'start.innov' is too short: need %d point"
 msgid_plural "'start.innov' is too short: need %d points"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/glm.R: ngettext(nobs, "X matrix has rank %d, but only %d observation",     "X matrix has rank %d, but only %d observations", domain = "R-stats")
 #: R/glm.R:0
@@ -4499,10 +4437,6 @@ msgid "X matrix has rank %d, but only %d observation"
 msgid_plural "X matrix has rank %d, but only %d observations"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/nlm.R: ngettext(maxiter, "_NOT_ converged in %d iteration", "_NOT_ converged in %d iterations",     domain = "R-stats")
 #: R/nlm.R:0
@@ -4510,10 +4444,6 @@ msgid "_NOT_ converged in %d iteration"
 msgid_plural "_NOT_ converged in %d iterations"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/lsfit.R: ngettext(ncx, "but %d variable", "but %d variables", domain = "R-stats")
 #: R/lsfit.R:0
@@ -4521,10 +4451,6 @@ msgid "but %d variable"
 msgid_plural "but %d variables"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/models.R: ngettext(nr2, "but variable found had %d row", "but variables found have %d rows",     domain = "R-stats")
 #: R/models.R:0
@@ -4532,22 +4458,13 @@ msgid "but variable found had %d row"
 msgid_plural "but variables found have %d rows"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"%s\"",     "extra arguments %s are not of class \"%s\"")
 #: R/dendrogram.R:0
-#, fuzzy
 msgid "extra argument %s is not of class \"%s\""
 msgid_plural "extra arguments %s are not of class \"%s\""
-msgstr[0] "تم تجاهل الحجج الإضافية"
-msgstr[1] "تم تجاهل الحجج الإضافية"
-msgstr[2] "تم تجاهل الحجج الإضافية"
-msgstr[3] "تم تجاهل الحجج الإضافية"
-msgstr[4] "تم تجاهل الحجج الإضافية"
-msgstr[5] "تم تجاهل الحجج الإضافية"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/models.R: ngettext(length(m), "factor %s has new level %s", "factor %s has new levels %s",     domain = "R-stats")
 #: R/models.R:0
@@ -4555,10 +4472,6 @@ msgid "factor %s has new level %s"
 msgid_plural "factor %s has new levels %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/nls.R: ngettext(sum(np == -1), "fitting parameter %s without any variables",     "fitting parameters %s without any variables", domain = "R-stats")
 #: R/nls.R:0
@@ -4566,10 +4479,6 @@ msgid "fitting parameter %s without any variables"
 msgid_plural "fitting parameters %s without any variables"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/add.R: ngettext(sum(where == 0), "lower scope has term %s not included in model",     "lower scope has terms %s not included in model")
 #: R/add.R:0
@@ -4577,10 +4486,6 @@ msgid "lower scope has term %s not included in model"
 msgid_plural "lower scope has terms %s not included in model"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/lsfit.R: ngettext(nry, "only %d case", "only %d cases", domain = "R-stats")
 #: R/lsfit.R:0
@@ -4588,10 +4493,6 @@ msgid "only %d case"
 msgid_plural "only %d cases"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/selfStart.R: ngettext(sum(msng), "parameter %s does not occur in the model formula",     "parameters %s do not occur in the model formula", domain = "R-stats")
 #: R/selfStart.R:0
@@ -4599,10 +4500,6 @@ msgid "parameter %s does not occur in the model formula"
 msgid_plural "parameters %s do not occur in the model formula"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/aov.R: ngettext(length(indError), "there is %d Error term: only 1 is allowed",     "there are %d Error terms: only 1 is allowed", domain = "R-stats")
 #: R/aov.R:0
@@ -4621,10 +4518,6 @@ msgid "unable to optimize from this starting value"
 msgid_plural "unable to optimize from these starting values"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/aov.R: ngettext(na, "unknown name %s in the 'split' list", "unknown names %s in the 'split' list")
 #: R/aov.R:0
@@ -4632,10 +4525,6 @@ msgid "unknown name %s in the 'split' list"
 msgid_plural "unknown names %s in the 'split' list"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/nlminb.R: ngettext(length(nap), "unrecognized control element named %s ignored",     "unrecognized control elements named %s ignored", domain = "R-stats")
 #. R/nls.R: ngettext(length(nap), "unrecognized control element named %s ignored",     "unrecognized control elements named %s ignored", domain = "R-stats")
@@ -4644,10 +4533,6 @@ msgid "unrecognized control element named %s ignored"
 msgid_plural "unrecognized control elements named %s ignored"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/add.R: ngettext(sum(where == 0), "upper scope has term %s not included in model",     "upper scope has terms %s not included in model")
 #: R/add.R:0
@@ -4655,10 +4540,6 @@ msgid "upper scope has term %s not included in model"
 msgid_plural "upper scope has terms %s not included in model"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/add.R: ngettext(newn, "using the %d/%d row from a combined fit", "using the %d/%d rows from a combined fit")
 #: R/add.R:0
@@ -4666,75 +4547,3 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
-
-#, fuzzy
-#~ msgid "invalid 'SSinit'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid 'use' argument"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid 'control' argument"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid 'method' argument"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid argument 'cell'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid argument 'degree'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid argument 'lambda'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid argument 'span'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid 'data' argument"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid argument 'omit'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid '%s' attribute"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid 'abbr.colnames'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid 'endrule' argument"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid argument 'c'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid argument 'n'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid argument 'r'"
-#~ msgstr "قيمة غير صالحة %sس"
-
-#, fuzzy
-#~ msgid "invalid 'nb'"
-#~ msgstr "قيمة غير صالحة %sس"

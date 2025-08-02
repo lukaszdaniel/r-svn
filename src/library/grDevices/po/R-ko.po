@@ -304,9 +304,8 @@ msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph anchor")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph anchor"
-msgstr "유효하지 않은 폰트 타입입니다"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph font")
 #: R/glyph.R:0
@@ -316,33 +315,28 @@ msgstr "유효하지 않은 폰트 타입입니다"
 
 #. R/glyph.R: stop("Invalid glyph height")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height"
-msgstr "유효하지 않은 폰트 타입입니다"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph height(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph height(s)"
-msgstr "유효하지 않은 폰트 타입입니다"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph info")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph info"
-msgstr "유효하지 않은 폰트 타입입니다"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width"
-msgstr "유효하지 않은 폰트 타입입니다"
+msgstr ""
 
 #. R/glyph.R: stop("Invalid glyph width(s)")
 #: R/glyph.R:0
-#, fuzzy
 msgid "Invalid glyph width(s)"
-msgstr "유효하지 않은 폰트 타입입니다"
+msgstr ""
 
 #. R/mask.R: stop("Invalid mask type")
 #: R/mask.R:0
@@ -965,11 +959,11 @@ msgstr[0] "'%2$s'에 유효하지 않은 인수명 %1$s이 있습니다"
 #~ msgid "invalid 'filename'"
 #~ msgstr "유효하지 않은 'filename'입니다"
 
-#~ msgid "invalid 'file'"
-#~ msgstr "유효하지 않은 'file'입니다"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "유효하지 않은 'family' 인자입니다"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "유효하지 않은 'title'입니다"
 
-#~ msgid "invalid 'family' argument"
-#~ msgstr "유효하지 않은 'family' 인자입니다"
+#~ msgid "invalid 'file'"
+#~ msgstr "유효하지 않은 'file'입니다"

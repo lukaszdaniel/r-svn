@@ -93,9 +93,8 @@ msgstr "'hgap' 的值必須是單元"
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must be glyphJust() values")
 #: R/typeset.R:0
-#, fuzzy
 msgid "'hjust' and 'vjust' must be glyphJust() values"
-msgstr "'x' 和 'y' 的長度必須為一"
+msgstr ""
 
 #. R/typeset.R: stop("'hjust' and 'vjust' must have length 1")
 #: R/typeset.R:0
@@ -377,9 +376,8 @@ msgstr "'order' 的值無效"
 
 #. R/group.R: warning("Invalid transform (nothing drawn)")
 #: R/group.R:0
-#, fuzzy
 msgid "Invalid transform (nothing drawn)"
-msgstr "'order' 的值無效"
+msgstr ""
 
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
@@ -419,9 +417,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using bottom justification")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown anchor; using bottom justification"
-msgstr "水平定位無效"
+msgstr ""
 
 #. R/typeset.R: warning("Unknown anchor; using left justification")
 #: R/typeset.R:0
@@ -441,9 +438,8 @@ msgstr ""
 
 #. R/typeset.R: warning("Unknown width; using first width")
 #: R/typeset.R:0
-#, fuzzy
 msgid "Unknown width; using first width"
-msgstr "水平定位無效"
+msgstr ""
 
 #. R/grob.R: stop("a 'grob' path must contain at least one 'grob' name")
 #: R/grob.R:0
@@ -966,17 +962,20 @@ msgid "invalid viewport name"
 msgid_plural "invalid viewport names"
 msgstr[0] "檢視區名稱無效"
 
-#~ msgid "invalid 'clip' value"
-#~ msgstr "'clip' 值無效"
-
 #~ msgid "invalid 'frame'"
 #~ msgstr "'frame' 的值無效"
 
-#~ msgid "invalid 'gp' value"
-#~ msgstr "'gp' 的值無效"
-
 #~ msgid "invalid 'grob'"
 #~ msgstr "'grob' 的值無效"
+
+#~ msgid "invalid 'result'"
+#~ msgstr "'result' 的值無效"
+
+#~ msgid "invalid 'print' argument"
+#~ msgstr "'print' 引數值無效"
+
+#~ msgid "invalid listing"
+#~ msgstr "表無效"
 
 #~ msgid "invalid 'listing'"
 #~ msgstr "'listing' 無效"
@@ -984,8 +983,8 @@ msgstr[0] "檢視區名稱無效"
 #~ msgid "invalid 'origin'"
 #~ msgstr "'origin' 的值無效"
 
-#~ msgid "invalid 'result'"
-#~ msgstr "'result' 的值無效"
+#~ msgid "invalid 'arrow' argument"
+#~ msgstr "'arrow' 引數無效"
 
 #~ msgid "invalid 'rot' value"
 #~ msgstr "'rot' 的值無效"
@@ -993,14 +992,11 @@ msgstr[0] "檢視區名稱無效"
 #~ msgid "invalid 'theta'"
 #~ msgstr "'theta' 值無效"
 
-#~ msgid "invalid listing"
-#~ msgstr "表無效"
+#~ msgid "invalid 'gp' value"
+#~ msgstr "'gp' 的值無效"
 
-#~ msgid "invalid 'arrow' argument"
-#~ msgstr "'arrow' 引數無效"
-
-#~ msgid "invalid 'print' argument"
-#~ msgstr "'print' 引數值無效"
+#~ msgid "invalid 'clip' value"
+#~ msgstr "'clip' 值無效"
 
 #~ msgid "'x' argument must be a unit object"
 #~ msgstr "'x' 引數必須是單元物件"

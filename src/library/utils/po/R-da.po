@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -111,9 +111,8 @@ msgstr ""
 
 #. R/package.skeleton.R: stop("'code_files' must be a character vector")
 #: R/package.skeleton.R:0
-#, fuzzy
 msgid "'code_files' must be a character vector"
-msgstr "»package« skal være en tegnstreng eller NULL"
+msgstr ""
 
 #. R/write.table.R: stop("'col.names = NA' makes no sense when 'row.names = FALSE'")
 #: R/write.table.R:0
@@ -122,9 +121,8 @@ msgstr ""
 
 #. R/tar.R: stop("'compressed' must be logical or character")
 #: R/tar.R:0
-#, fuzzy
 msgid "'compressed' must be logical or character"
-msgstr "»package« skal være en tegnstreng eller NULL"
+msgstr ""
 
 #. R/unix/download.file.R: stop("'curl' call had nonzero exit status")
 #. R/windows/download.file.R: stop("'curl' call had nonzero exit status")
@@ -161,9 +159,8 @@ msgstr ""
 
 #. R/debugger.R: gettextf("'dump' is not an object of class %s\n", dQuote("dump.frames"))
 #: R/debugger.R:0
-#, fuzzy
 msgid "'dump' is not an object of class %s"
-msgstr "målsyntaks er ikke af klasse »SweaveSyntax«"
+msgstr ""
 
 #. R/packages2.R: stop("'env' must be an environment")
 #: R/packages2.R:0
@@ -172,9 +169,8 @@ msgstr ""
 
 #. R/progressBar.R: stop("'file' must be \"\" or an open connection object")
 #: R/progressBar.R:0
-#, fuzzy
 msgid "'file' must be \"\" or an open connection object"
-msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
+msgstr ""
 
 #. R/capture.output.R: stop("'file' must be NULL, a character string or a connection")
 #: R/capture.output.R:0
@@ -184,9 +180,8 @@ msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
 #. R/readtable.R: stop("'file' must be a character string or connection")
 #. R/write.table.R: stop("'file' must be a character string or connection")
 #: R/readtable.R:0 R/write.table.R:0
-#, fuzzy
 msgid "'file' must be a character string or connection"
-msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
+msgstr ""
 
 #. R/zip.R: stop("'files' must be a character vector specifying one or more filepaths")
 #: R/zip.R:0
@@ -227,21 +222,18 @@ msgstr ""
 
 #. R/sock.R: stop("'host' must be character of length 1")
 #: R/sock.R:0
-#, fuzzy
 msgid "'host' must be character of length 1"
-msgstr "»package« skal være en tegnstreng eller NULL"
+msgstr ""
 
 #. R/packages2.R: gettextf("'lib = \"%s\"' is not writable", lib)
 #: R/packages2.R:0
-#, fuzzy
 msgid "'lib = \"%s\"' is not writable"
-msgstr "Filter »%s« er ikke tilgængelig."
+msgstr ""
 
 #. R/package.skeleton.R: stop("'list' must be a character vector naming R objects")
 #: R/package.skeleton.R:0
-#, fuzzy
 msgid "'list' must be a character vector naming R objects"
-msgstr "»package« skal være en tegnstreng eller NULL"
+msgstr ""
 
 #. R/unix/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
 #. R/windows/sysutils.R: warning("'memory.limit()' is no longer supported", call. = FALSE)
@@ -272,9 +264,8 @@ msgstr ""
 
 #. R/str.R: warning("'object' does not have valid levels()")
 #: R/str.R:0
-#, fuzzy
 msgid "'object' does not have valid levels()"
-msgstr "objekt %s har ikke en klasse »SweaveSyntax«"
+msgstr ""
 
 #. R/data.R: stop("'package' must be a character vector or NULL")
 #: R/data.R:0
@@ -285,9 +276,8 @@ msgstr "»package« skal være en tegnstreng eller NULL"
 #. R/progressBar.R: gettextf("'pb' is not from class %s", dQuote("txtProgressBar"))
 #. R/windows/winDialog.R: gettextf("'pb' is not from class %s", dQuote("winProgressBar"))
 #: R/progressBar.R:0 R/windows/winDialog.R:0
-#, fuzzy
 msgid "'pb' is not from class %s"
-msgstr "målsyntaks er ikke af klasse »SweaveSyntax«"
+msgstr ""
 
 #. R/sock.R: stop("'port' must be integer of length 1")
 #: R/sock.R:0
@@ -296,9 +286,8 @@ msgstr ""
 
 #. R/packages.R: stop("'priority' must be character or NULL")
 #: R/packages.R:0
-#, fuzzy
 msgid "'priority' must be character or NULL"
-msgstr "»package« skal være en tegnstreng eller NULL"
+msgstr ""
 
 #. R/write.table.R: stop("'quote' must be 'TRUE', 'FALSE' or numeric")
 #: R/write.table.R:0
@@ -322,21 +311,18 @@ msgstr ""
 
 #. R/tar.R: stop("'tarfile' must be a character string or a connection")
 #: R/tar.R:0
-#, fuzzy
 msgid "'tarfile' must be a character string or a connection"
-msgstr "»file« skal være NULL, en tegnstreng eller en forbindelse"
+msgstr ""
 
 #. R/widgets.R: stop("'title' must be NULL or a length-1 character vector")
 #: R/widgets.R:0
-#, fuzzy
 msgid "'title' must be NULL or a length-1 character vector"
-msgstr "»package« skal være en tegnstreng eller NULL"
+msgstr ""
 
 #. R/help.R: stop("'topic' should be a name, length-one character vector or reserved word")
 #: R/help.R:0
-#, fuzzy
 msgid "'topic' should be a name, length-one character vector or reserved word"
-msgstr "»package« skal være en tegnstreng eller NULL"
+msgstr ""
 
 #. R/unix/download.file.R: stop("'url' must be a length-one character vector")
 #. R/windows/download.file.R: stop("'url' must be a length-one character vector")
@@ -426,21 +412,18 @@ msgstr ""
 
 #. R/prompt.R: gettextf("Created file named %s.", sQuote(filename))
 #: R/prompt.R:0
-#, fuzzy
 msgid "Created file named %s."
-msgstr "Oprettet PDF-dokument"
+msgstr ""
 
 #. R/indices.R: gettextf("DESCRIPTION file of package '%s' is corrupt", pkg)
 #: R/indices.R:0
-#, fuzzy
 msgid "DESCRIPTION file of package '%s' is corrupt"
-msgstr "intet datofelt i DESCRIPTION-fil for pakke %s"
+msgstr ""
 
 #. R/indices.R: gettextf("DESCRIPTION file of package '%s' is missing or broken",     pkg)
 #: R/indices.R:0
-#, fuzzy
 msgid "DESCRIPTION file of package '%s' is missing or broken"
-msgstr "intet datofelt i DESCRIPTION-fil for pakke %s"
+msgstr ""
 
 #. R/demo.R: gettextf("Demo for topic %s' found more than once,\nusing the one found in %s",     sQuote(topic), sQuote(dirname(available[1L])))
 #: R/demo.R:0
@@ -485,6 +468,11 @@ msgstr ""
 #. R/relist.R: stop("The 'flesh' argument does not contain a skeleton attribute.\n",     "Either ensure you unlist a relistable object, or specify the skeleton separately.")
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
+msgstr ""
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+msgid "Enter a frame number, or 0 to exit"
 msgstr ""
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
@@ -596,9 +584,8 @@ msgstr ""
 #. R/tar.R: gettextf("No %s command found", sQuote("xz"))
 #. R/tar.R: gettextf("No %s command found", sQuote("zstd"))
 #: R/tar.R:0
-#, fuzzy
 msgid "No %s command found"
-msgstr "datasæt %s blev ikke fundet"
+msgstr ""
 
 #. R/read.DIF.R: stop("No DIF data on clipboard")
 #: R/read.DIF.R:0
@@ -612,9 +599,8 @@ msgstr ""
 
 #. R/help.R: gettextf("No documentation for %s in specified packages and libraries:",     sQuote(topic))
 #: R/help.R:0
-#, fuzzy
 msgid "No documentation for %s in specified packages and libraries:"
-msgstr "ingen dokumentation for %s fundet i pakke %s"
+msgstr ""
 
 #. R/packages.R: gettextf("No matching repositories found for %s", paste(name[is.na(m)],     collapse = ", "))
 #: R/packages.R:0
@@ -713,9 +699,8 @@ msgstr ""
 
 #. R/objects.R: gettextf("S3 method '%s' not found", method)
 #: R/objects.R:0
-#, fuzzy
 msgid "S3 method '%s' not found"
-msgstr "datasæt %s blev ikke fundet"
+msgstr ""
 
 #. R/help.R: gettextf("Saving help page to %s", sQuote(ofile))
 #: R/help.R:0
@@ -1142,9 +1127,8 @@ msgstr ""
 
 #. R/edit.R: warning("edited row names contain duplicates and will be ignored")
 #: R/edit.R:0
-#, fuzzy
 msgid "edited row names contain duplicates and will be ignored"
-msgstr "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
+msgstr ""
 
 #. R/apropos.R: warning("elements of 'what' after the first will be ignored")
 #: R/apropos.R:0
@@ -1208,9 +1192,8 @@ msgstr ""
 
 #. R/tar.R: gettextf("file '%s' not found", f)
 #: R/tar.R:0
-#, fuzzy
 msgid "file '%s' not found"
-msgstr "pakke %s blev ikke fundet"
+msgstr ""
 
 #. R/read.DIF.R: stop("file had no lines")
 #: R/read.DIF.R:0
@@ -1339,9 +1322,8 @@ msgstr "Ugyldigt argument for »filter«."
 
 #. R/write.table.R: stop("invalid 'col.names' specification")
 #: R/write.table.R:0
-#, fuzzy
 msgid "invalid 'col.names' specification"
-msgstr "Ugyldige rollespecifikationer: %s."
+msgstr ""
 
 #. R/head.R: gettextf("invalid 'n' - length(n) must be <= length(dim(x)), got %d > %d",     len, length(d))
 #: R/head.R:0
@@ -1365,30 +1347,26 @@ msgstr ""
 
 #. R/packages.R: stop("invalid 'oldPkgs'; must be a character vector or a result from old.packages()")
 #: R/packages.R:0
-#, fuzzy
 msgid "invalid 'oldPkgs'; must be a character vector or a result from old.packages()"
-msgstr "»package« skal være en tegnstreng eller NULL"
+msgstr ""
 
 #. R/write.table.R: stop("invalid 'quote' specification")
 #: R/write.table.R:0
-#, fuzzy
 msgid "invalid 'quote' specification"
-msgstr "Ugyldige rollespecifikationer: %s."
+msgstr ""
 
 #. R/read.DIF.R: stop("invalid 'row.names' length")
 #. R/readtable.R: stop("invalid 'row.names' length")
 #: R/read.DIF.R:0 R/readtable.R:0
-#, fuzzy
 msgid "invalid 'row.names' length"
-msgstr "Ugyldigt argument for »filter«."
+msgstr ""
 
 #. R/read.DIF.R: stop("invalid 'row.names' specification")
 #. R/readtable.R: stop("invalid 'row.names' specification")
 #. R/write.table.R: stop("invalid 'row.names' specification")
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
-#, fuzzy
 msgid "invalid 'row.names' specification"
-msgstr "Ugyldige rollespecifikationer: %s."
+msgstr ""
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -1402,15 +1380,13 @@ msgstr ""
 
 #. R/edit.R: gettextf("invalid factor levels in '%s'", names(out)[i])
 #: R/edit.R:0
-#, fuzzy
 msgid "invalid factor levels in '%s'"
-msgstr "ugyldig værdi for %s: %s"
+msgstr ""
 
 #. R/read.fortran.R: stop("invalid format")
 #: R/read.fortran.R:0
-#, fuzzy
 msgid "invalid format"
-msgstr "Ugyldigt argument for »filter«."
+msgstr ""
 
 #. R/tar.R: warning("invalid gid value replaced by that for user 'nobody'",     call. = FALSE)
 #: R/tar.R:0
@@ -1436,9 +1412,8 @@ msgstr ""
 
 #. R/write.table.R: stop("invalid numbers in 'quote'")
 #: R/write.table.R:0
-#, fuzzy
 msgid "invalid numbers in 'quote'"
-msgstr "Ugyldigt argument for »filter«."
+msgstr ""
 
 #. R/read.DIF.R: stop("invalid numeric 'as.is' expression")
 #. R/readtable.R: stop("invalid numeric 'as.is' expression")
@@ -1453,9 +1428,8 @@ msgstr ""
 
 #. R/tar.R: stop("invalid octal digit")
 #: R/tar.R:0
-#, fuzzy
 msgid "invalid octal digit"
-msgstr "Ugyldigt argument for »filter«."
+msgstr ""
 
 #. R/packages.R: stop("invalid options(\"pkgType\"); must be a character string")
 #: R/packages.R:0
@@ -1470,9 +1444,8 @@ msgstr ""
 
 #. R/news.R: stop("invalid query")
 #: R/news.R:0
-#, fuzzy
 msgid "invalid query"
-msgstr "Ugyldigt argument for »filter«."
+msgstr ""
 
 #. R/tar.R: warning("invalid uid value replaced by that for user 'nobody'",     call. = FALSE)
 #: R/tar.R:0
@@ -1582,9 +1555,8 @@ msgstr "ingen dokumentation for %s fundet i pakke %s"
 
 #. R/question.R: gettextf("no documentation for function %s and signature %s",     sQuote(f), sQuote(sigFormat(sigNames, sigClasses)))
 #: R/question.R:0
-#, fuzzy
 msgid "no documentation for function %s and signature %s"
-msgstr "ingen dokumentation for %s fundet i pakke %s"
+msgstr ""
 
 #. R/question.R: gettextf("no documentation of type %s and topic %s (or error in processing help)",     sQuote(type), sQuote(topicExpr))
 #: R/question.R:0
@@ -1598,9 +1570,8 @@ msgstr ""
 
 #. R/objects.R: gettextf("no function '%s' could be found", f)
 #: R/objects.R:0
-#, fuzzy
 msgid "no function '%s' could be found"
-msgstr "datasæt %s blev ikke fundet"
+msgstr ""
 
 #. R/objects.R: gettextf("no function '%s' is visible", generic.function)
 #: R/objects.R:0
@@ -1609,9 +1580,8 @@ msgstr ""
 
 #. R/example.R: gettextf("no help found for %s", sQuote(topic))
 #: R/example.R:0
-#, fuzzy
 msgid "no help found for %s"
-msgstr "Ingen vignetter fundet af"
+msgstr ""
 
 #. R/help.search.R: gettextf("no information in the database for package %s: need 'rebuild = TRUE'?",     sQuote(package[pos_in_hsearch_db == 0][1L]))
 #: R/help.search.R:0
@@ -1631,9 +1601,8 @@ msgstr ""
 
 #. R/summRprof.R: gettextf("no lines found in %s", sQuote(filename))
 #: R/summRprof.R:0
-#, fuzzy
 msgid "no lines found in %s"
-msgstr "Ingen vignetter fundet af"
+msgstr ""
 
 #. R/question.R: gettextf("no method defined for function %s and signature %s",     sQuote(f), sQuote(sigFormat(sigNames, sigClasses)))
 #: R/question.R:0
@@ -1653,15 +1622,13 @@ msgstr ""
 
 #. R/packages.R: message("no new packages are available")
 #: R/packages.R:0
-#, fuzzy
 msgid "no new packages are available"
-msgstr "Filter »%s« er ikke tilgængelig."
+msgstr ""
 
 #. R/page.R: gettextf("no object named '%s' to show", x)
 #: R/page.R:0
-#, fuzzy
 msgid "no object named '%s' to show"
-msgstr "datasæt %s blev ikke fundet"
+msgstr ""
 
 #. R/packages.R: gettextf("no package %s at the repositories", sQuote(p))
 #: R/packages.R:0
@@ -1670,9 +1637,8 @@ msgstr ""
 
 #. R/indices.R: gettextf("no package '%s' was found", pkg)
 #: R/indices.R:0
-#, fuzzy
 msgid "no package '%s' was found"
-msgstr "pakke %s blev ikke fundet"
+msgstr ""
 
 #. R/packages2.R: stop("no packages were specified")
 #: R/packages2.R:0
@@ -1696,9 +1662,8 @@ msgstr ""
 
 #. R/frametools.R: warning("non-vector elements will be ignored")
 #: R/frametools.R:0
-#, fuzzy
 msgid "non-vector elements will be ignored"
-msgstr "mindst et felt skal angives"
+msgstr ""
 
 #. R/read.DIF.R: warning("not all columns named in 'as.is' exist")
 #. R/readtable.R: warning("not all columns named in 'as.is' exist")
@@ -1755,9 +1720,8 @@ msgstr ""
 
 #. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
 #: R/packages.R:0
-#, fuzzy
 msgid "package '%s' in library '%s' will not be updated"
-msgstr "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
+msgstr ""
 
 #. R/packages.R: gettextf("packages %s are mutually dependent", paste(sQuote(names(DL)),     collapse = ", "))
 #: R/packages.R:0
@@ -1842,9 +1806,8 @@ msgstr ""
 
 #. R/read.DIF.R: stop("row and column counts not found")
 #: R/read.DIF.R:0
-#, fuzzy
 msgid "row and column counts not found"
-msgstr "dokument blev ikke fundet"
+msgstr ""
 
 #. R/read.DIF.R: stop("rows are empty: giving up")
 #: R/read.DIF.R:0
@@ -2061,9 +2024,8 @@ msgstr ""
 
 #. R/vignette.R: gettextf("vignette %s not found", sQuote(topic))
 #: R/vignette.R:0
-#, fuzzy
 msgid "vignette %s not found"
-msgstr "pakke %s blev ikke fundet"
+msgstr ""
 
 #. R/windows/winDialog.R: stop("winDialog() cannot be used non-interactively")
 #: R/windows/winDialog.R:0
@@ -2121,11 +2083,10 @@ msgstr[1] "%d tilfælde i %s"
 
 #. R/packages2.R: ngettext(sum(!ok), "'lib' element %s is not a writable directory",     "'lib' elements %s are not writable directories")
 #: R/packages2.R:0
-#, fuzzy
 msgid "'lib' element %s is not a writable directory"
 msgid_plural "'lib' elements %s are not writable directories"
-msgstr[0] "Filter »%s« er ikke tilgængelig."
-msgstr[1] "Filter »%s« er ikke tilgængelig."
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/citation.R: ngettext(sum(!ok), "A bibentry of bibtype %s has to specify the field: %s",     "A bibentry of bibtype %s has to specify the fields: %s")
 #: R/citation.R:0
@@ -2248,11 +2209,10 @@ msgstr[1] ""
 
 #. R/packages2.R: ngettext(length(not_avail), "dependency %s is not available",     "dependencies %s are not available")
 #: R/packages2.R:0
-#, fuzzy
 msgid "dependency %s is not available"
 msgid_plural "dependencies %s are not available"
-msgstr[0] "Filter »%s« er ikke tilgængelig."
-msgstr[1] "Filter »%s« er ikke tilgængelig."
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/packages2.R: ngettext(length(pkgs), "installing the source package %s", "installing the source packages %s")
 #: R/packages2.R:0
@@ -2285,43 +2245,38 @@ msgstr[1] ""
 
 #. R/package.skeleton.R: ngettext(sum(!have), "object '%s' not found", "objects '%s' not found")
 #: R/package.skeleton.R:0
-#, fuzzy
 msgid "object '%s' not found"
 msgid_plural "objects '%s' not found"
-msgstr[0] "datasæt %s blev ikke fundet"
-msgstr[1] "datasæt %s blev ikke fundet"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/packages.R: ngettext(sum(base), "package %s is a base package, and cannot be removed",     "packages %s are base packages, and cannot be removed")
 #: R/packages.R:0
-#, fuzzy
 msgid "package %s is a base package, and cannot be removed"
 msgid_plural "packages %s are base packages, and cannot be removed"
-msgstr[0] "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
-msgstr[1] "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/packages2.R: ngettext(sum(base), "package %s is a base package, and should not be updated",     "packages %s are base packages, and should not be updated")
 #: R/packages2.R:0
-#, fuzzy
 msgid "package %s is a base package, and should not be updated"
 msgid_plural "packages %s are base packages, and should not be updated"
-msgstr[0] "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
-msgstr[1] "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/packages2.R: ngettext(length(na), "package %s is available as a source package but not as a binary",     "packages %s are available as source packages but not as binaries")
 #: R/packages2.R:0
-#, fuzzy
 msgid "package %s is available as a source package but not as a binary"
 msgid_plural "packages %s are available as source packages but not as binaries"
-msgstr[0] "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
-msgstr[1] "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/packages2.R: ngettext(sum(inuse), "package %s is in use and will not be installed",     "packages %s are in use and will not be installed")
 #: R/packages2.R:0
-#, fuzzy
 msgid "package %s is in use and will not be installed"
 msgid_plural "packages %s are in use and will not be installed"
-msgstr[0] "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
-msgstr[1] "dataindeks for pakke %s er ugyldig og vil blive ignoreret"
+msgstr[0] ""
+msgstr[1] ""
 
 #. R/packages2.R: ngettext(sum(m0), "package %s is not available %s", "packages %s are not available %s")
 #: R/packages2.R:0
@@ -2339,46 +2294,29 @@ msgstr[1] "Filter »%s« er ikke tilgængelig."
 #~ msgstr "Ugyldigt argument for »filter«."
 
 #, fuzzy
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "Ugyldigt argument for »filter«."
-
-#, fuzzy
-#~ msgid "invalid %s argument"
-#~ msgstr "Ugyldigt argument for »filter«."
-
-#, fuzzy
-#~ msgid "invalid 'data' argument"
-#~ msgstr "Ugyldigt argument for »filter«."
-
-#, fuzzy
-#~ msgid "invalid 'modes' argument"
-#~ msgstr "Ugyldigt argument for »filter«."
-
-#, fuzzy
-#~ msgid "invalid 'socket' argument"
-#~ msgstr "Ugyldigt argument for »filter«."
+#~ msgid ","
+#~ msgstr ","
 
 #, fuzzy
 #~ msgid "invalid 'tarfile' argument"
 #~ msgstr "Ugyldigt argument for »filter«."
 
-#, fuzzy
-#~ msgid "invalid 'x' argument"
-#~ msgstr "Ugyldigt argument for »filter«."
+#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
+#~ msgstr "Det anbefales at bruge %s/%s i stedet for %s/%s/%s."
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"
 #~ msgstr "»package« skal være en tegnstreng eller NULL"
 
 #, fuzzy
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
-#~ msgstr "Det anbefales at bruge %s/%s i stedet for %s/%s/%s."
+#~ msgid "invalid 'type'; must be a character string"
+#~ msgstr "»package« skal være en tegnstreng eller NULL"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr "fil »filelist« mangler for mappe %s"
+
+#~ msgid "no date field in DESCRIPTION file of package %s"
+#~ msgstr "intet datofelt i DESCRIPTION-fil for pakke %s"
 
 #~ msgid "datasets have been moved from package 'base' to package 'datasets'"
 #~ msgstr "datasæt er blevet flyttet fra pakke »base« til pakke »datasets«"
@@ -2389,8 +2327,15 @@ msgstr[1] "Filter »%s« er ikke tilgængelig."
 #~ msgid "bad argument"
 #~ msgstr "ugyldigt argument"
 
+#~ msgid "package %s not found"
+#~ msgstr "pakke %s blev ikke fundet"
+
 #~ msgid "broken installation, no CITATION file in the base package."
 #~ msgstr "ødelagt installation, ingen CITATION-fil i basispakken."
+
+#, fuzzy
+#~ msgid "Created PDF document %s"
+#~ msgstr "Oprettet PDF-dokument"
 
 #~ msgid "at least one field has to be specified"
 #~ msgstr "mindst et felt skal angives"

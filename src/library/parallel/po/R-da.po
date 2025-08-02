@@ -154,9 +154,8 @@ msgstr "»nnodes« skal være >= 1"
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
-#, fuzzy
 msgid "replacing registration for cluster type '%s'"
-msgstr "ukendt klyngetype"
+msgstr ""
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:34+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -790,12 +790,12 @@ msgstr ""
 msgid "Invalid font path: \"%s\""
 msgstr "%s里的'fonts'参数无效"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "无法分配字体列"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -804,19 +804,19 @@ msgstr "无法分配字体列"
 msgid "invalid '%s' argument"
 msgstr "'%s'参数无效"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "quartz()装置大小无效"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "无法建立设备描述文件"
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "无法建立quartz()装置，可能不支持所提供的类型"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "这个平台上没有石英装置"
 
@@ -1135,28 +1135,12 @@ msgstr "无法分配字体列"
 msgid "Font file not found; matching font family and face"
 msgstr "石英字体数据库里找不到字体系列"
 
-#~ msgid "invalid 'file' argument"
-#~ msgstr "'file'参数无效"
-
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "“maxColorValue”的值无效"
 
 #, c-format
 #~ msgid "filename too long in %s()"
 #~ msgstr "%s()里的文本名称太长"
-
-#~ msgid "filename too long in jpeg() call"
-#~ msgstr "jpeg()调用时文件名称太长"
-
-#~ msgid "filename too long in tiff() call"
-#~ msgstr "tiff()调用时文件名称太长"
-
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "win.metafile()調用里的文本名称太长"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "'%s'的值无效"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "xfig()里的颜色不足用"
@@ -1190,8 +1174,17 @@ msgstr "石英字体数据库里找不到字体系列"
 #~ msgstr "空文本名称"
 
 #, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "无法用编码'%s'"
+#~ msgid "invalid value of '%s'"
+#~ msgstr "'%s'的值无效"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "'file'参数无效"
+
+#~ msgid "filename too long in jpeg() call"
+#~ msgstr "jpeg()调用时文件名称太长"
+
+#~ msgid "filename too long in tiff() call"
+#~ msgstr "tiff()调用时文件名称太长"
 
 #~ msgid "invalid argument"
 #~ msgstr "参数无效"

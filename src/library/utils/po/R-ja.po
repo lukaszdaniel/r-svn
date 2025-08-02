@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-12 12:17\n"
+"POT-Creation-Date: 2025-07-27 16:03\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -481,6 +481,12 @@ msgstr "ファイルを編集してきとうなディレクトリに移動して
 #: R/relist.R:0
 msgid "Either ensure you unlist a relistable object, or specify the skeleton separately."
 msgstr "再リスト化可能なオブジェクトを非リスト化したのか確認するか、スケルトンを別個に指定してください。"
+
+#. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
+#: R/debugger.R:0
+#, fuzzy
+msgid "Enter a frame number, or 0 to exit"
+msgstr "環境ナンバーを入力してください。0 を入力すると終了します"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -2289,22 +2295,8 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "パッケージ %s が利用できません (%s)"
 
-#, fuzzy
-#~ msgid "path is empty"
-#~ msgstr "'dump' が空です"
-
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "不正な 'filter' 引数"
-
-#, fuzzy
-#~ msgid "invalid 'type'"
-#~ msgstr "不正な問い合わせ"
-
-#~ msgid "invalid 'filters' argument."
-#~ msgstr "不正な 'filters' 引数"
-
-#~ msgid "invalid %s argument"
-#~ msgstr "不正な %s 引数"
 
 #~ msgid "invalid 'data' argument"
 #~ msgstr "不正な 'data' 引数"
@@ -2312,24 +2304,41 @@ msgstr[0] "パッケージ %s が利用できません (%s)"
 #~ msgid "invalid 'modes' argument"
 #~ msgstr "不正な 'modes' 引数"
 
+#~ msgid "invalid 'x' argument"
+#~ msgstr "不正な 'x' 引数"
+
+#~ msgid "invalid 'filters' argument."
+#~ msgstr "不正な 'filters' 引数"
+
+#, fuzzy
+#~ msgid "invalid 'type'"
+#~ msgstr "不正な問い合わせ"
+
+#, fuzzy
+#~ msgid "mirror non-interactively"
+#~ msgstr "CRAN ミラーの選択は対話的にしかできません"
+
+#~ msgid ","
+#~ msgstr ","
+
 #~ msgid "invalid 'socket' argument"
 #~ msgstr "不正な 'socket' 引数"
 
 #~ msgid "invalid 'tarfile' argument"
 #~ msgstr "不正な 'tarfile' 引数"
 
-#~ msgid "invalid 'x' argument"
-#~ msgstr "不正な 'x' 引数"
-
 #, fuzzy
-#~ msgid "mirror non-interactively"
-#~ msgstr "CRAN ミラーの選択は対話的にしかできません"
+#~ msgid "path is empty"
+#~ msgstr "'dump' が空です"
+
+#~ msgid "'memory.size()' is Windows-specific"
+#~ msgstr "'memory.size()' は Windows 固有の関数です"
 
 #~ msgid "'memory.limit()' is Windows-specific"
 #~ msgstr "'memory.limit()' は Windows 固有の関数です"
 
-#~ msgid "'memory.size()' is Windows-specific"
-#~ msgstr "'memory.size()' は Windows 固有の関数です"
+#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
+#~ msgstr "%s/%s の代わりに %s/%s/%s を使うことをおすすめします。"
 
 #, fuzzy
 #~ msgid "argument %s must be a character string"
@@ -2338,12 +2347,6 @@ msgstr[0] "パッケージ %s が利用できません (%s)"
 #, fuzzy
 #~ msgid "invalid 'type'; must be a character string"
 #~ msgstr "'unzip' は単一の文字列でなければなりません"
-
-#~ msgid ","
-#~ msgstr ","
-
-#~ msgid "It is recommended to use %s/%s instead of %s/%s/%s."
-#~ msgstr "%s/%s の代わりに %s/%s/%s を使うことをおすすめします。"
 
 #~ msgid "file 'filelist' is missing for directory %s"
 #~ msgstr " ディレクトリ %s に対するファイル 'filelist' がありません "

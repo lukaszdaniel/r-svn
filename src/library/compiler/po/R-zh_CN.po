@@ -21,13 +21,11 @@ msgstr ""
 
 #. R/cmp.R: gettextf("'%s' is not a valid compiler option", n)
 #: R/cmp.R:0
-#, fuzzy
 msgid "'%s' is not a valid compiler option"
 msgstr "没有'%s'这样的编译器选项"
 
 #. R/cmp.R: stop("'env' must be a top level environment")
 #: R/cmp.R:0
-#, fuzzy
 msgid "'env' must be a top level environment"
 msgstr "'env'必需是顶层环境"
 
@@ -48,9 +46,8 @@ msgstr "1赋值出了错"
 
 #. R/cmp.R: gettext("bad assignment 2")
 #: R/cmp.R:0
-#, fuzzy
 msgid "bad assignment 2"
-msgstr "1赋值出了错"
+msgstr "2赋值出了错"
 
 #. R/cmp.R: gettextf("bad assignment: %s", pasteExpr(e))
 #: R/cmp.R:0
@@ -59,13 +56,11 @@ msgstr "坏的赋值：%s"
 
 #. R/cmp.R: gettext("bad namespace import frame")
 #: R/cmp.R:0
-#, fuzzy
 msgid "bad namespace import frame"
 msgstr "命名空间导入框不正确"
 
 #. R/cmp.R: stop("cannot compile a non-function")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot compile a non-function"
 msgstr "无法编译非函数"
 
@@ -76,7 +71,6 @@ msgstr "不能在编码里编译代码的字节码字面值"
 
 #. R/cmp.R: gettext("cannot compile promise literals in code")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot compile promise literals in code"
 msgstr "不能编译代码中的承诺文字"
 
@@ -93,7 +87,6 @@ msgstr "无法对字面字节码对象进行不恒定倍折叠"
 
 #. R/cmp.R: gettext("cannot constant fold literal promises")
 #: R/cmp.R:0
-#, fuzzy
 msgid "cannot constant fold literal promises"
 msgstr "无法对字面承诺进行不恒定折叠"
 
@@ -114,7 +107,6 @@ msgstr "在数字交换机里不能有空的替代"
 
 #. R/cmp.R: warning("empty input file; no output written")
 #: R/cmp.R:0
-#, fuzzy
 msgid "empty input file; no output written"
 msgstr "输入文件是空的，因此没有写任何输出"
 
@@ -150,7 +142,6 @@ msgstr "复杂赋值里的函数无效"
 
 #. R/cmp.R: gettext("missing arguments are not allowed")
 #: R/cmp.R:0
-#, fuzzy
 msgid "missing arguments are not allowed"
 msgstr "不允许缺少参数"
 
@@ -161,25 +152,21 @@ msgstr "调用switch()时只能有一个默认值"
 
 #. R/cmp.R: stop("namespace found within global environments")
 #: R/cmp.R:0
-#, fuzzy
 msgid "namespace found within global environments"
-msgstr "'ns'必须是一个命名空间或命名空间的进口环境"
+msgstr ""
 
 #. R/cmp.R: stop("namespace found within local environments")
 #: R/cmp.R:0
-#, fuzzy
 msgid "namespace found within local environments"
-msgstr "'ns'必须是一个命名空间或命名空间的进口环境"
+msgstr ""
 
 #. R/cmp.R: gettextf("no offset recorded for label \"%s\"", lbl)
 #: R/cmp.R:0
-#, fuzzy
 msgid "no offset recorded for label \"%s\""
 msgstr "没有给标签\"%s\"记录了偏移"
 
 #. R/cmp.R: gettextf("no visible binding for '<<-' assignment to '%s'", as.character(symbol))
 #: R/cmp.R:0
-#, fuzzy
 msgid "no visible binding for '<<-' assignment to '%s'"
 msgstr "看不到'<<-'赋值到'%s'的连接"
 
@@ -190,7 +177,6 @@ msgstr "看不到全局变量'%s'的连接"
 
 #. R/cmp.R: gettextf("no visible global function definition for '%s'", as.character(fun))
 #: R/cmp.R:0
-#, fuzzy
 msgid "no visible global function definition for '%s'"
 msgstr "看不到'%s'的全局函数定义"
 
@@ -202,7 +188,6 @@ msgstr "'ns'必须是一个命名空间或命名空间的进口环境"
 
 #. R/cmp.R: stop("not a proper evaluation environment")
 #: R/cmp.R:0
-#, fuzzy
 msgid "not a proper evaluation environment"
 msgstr "不是一个正确的评估环境"
 
@@ -214,7 +199,6 @@ msgstr "'%s'里可能有错误: %s"
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", file)
 #. R/cmp.R: gettextf("saving to file \"%s\" ... ", outfile)
 #: R/cmp.R:0
-#, fuzzy
 msgid "saving to file \"%s\" ..."
 msgstr "保存到文件\"%s\" ..."
 
@@ -229,22 +213,6 @@ msgid "local assignment to syntactic function: "
 msgid_plural "local assignments to syntactic functions: "
 msgstr[0] "为句法函数作了本地赋值: "
 msgstr[1] ""
-
-#, fuzzy
-#~ msgid "gettext(\"bad assignment 2\")"
-#~ msgstr "2赋值出了错"
-
-#, fuzzy
-#~ msgid "gettext(\"cannot compile this expression\")"
-#~ msgstr "不能编译代码中的承诺文字"
-
-#, fuzzy
-#~ msgid "gettext(\"invalid function in complex assignment\")"
-#~ msgstr "复杂赋值里的函数无效"
-
-#, fuzzy
-#~ msgid "gettextf(\"saving to file \\\\\"%s\\\\\" ... \", outfile)"
-#~ msgstr "保存到文件\"%s\" ..."
 
 #~ msgid "'ns' must be a namespace or a namespace imports environment"
 #~ msgstr "'ns'必须是一个命名空间或命名空间的进口环境"

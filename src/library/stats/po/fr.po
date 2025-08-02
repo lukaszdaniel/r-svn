@@ -614,7 +614,7 @@ msgstr "'.' dans la formule et pas d'argument 'data'"
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
-msgstr "'m' doit être une liste"
+msgstr "n doit valoir deux ou plus"
 
 #: monoSpl.cpp:71
 #, fuzzy, c-format
@@ -1076,32 +1076,29 @@ msgstr "valeur manquante dans les %d dernières observations"
 msgid "ifault=%d. This should not happen"
 msgstr "ceci ne devrait pas se produire"
 
-#~ msgid "n must be at least two"
-#~ msgstr "n doit valoir deux ou plus"
-
-#~ msgid "length(m) must be at least two"
-#~ msgstr "length(m) doit valoir deux ou plus"
-
-#~ msgid "invalid value of lag.max"
-#~ msgstr "valeur incorrecte de 'lag.max'"
-
 #~ msgid "invalid model formula in ExtractVars"
 #~ msgstr "formule de modèle incorrecte dans ExtractVars"
 
 #~ msgid "invalid model formula in EncodeVars"
 #~ msgstr "formule de modèle incorrecte dans EncodeVars"
 
+#~ msgid "length(m) must be at least two"
+#~ msgstr "length(m) doit valoir deux ou plus"
+
 #~ msgid "'control' must be a list"
 #~ msgstr "'control' doit être une liste"
 
-#~ msgid "m must be a list"
-#~ msgstr "'m' doit être une liste"
+#~ msgid "'central' is NA, but must be TRUE or FALSE"
+#~ msgstr "'central' est NA, mais il devrait être TRUE ou FALSE"
 
 #~ msgid "NA/Inf replaced by maximum positive value"
 #~ msgstr "NA / Inf remplacé par la valeur maximale positive"
 
-#~ msgid "'central' is NA, but must be TRUE or FALSE"
-#~ msgstr "'central' est NA, mais il devrait être TRUE ou FALSE"
+#~ msgid "invalid value of lag.max"
+#~ msgstr "valeur incorrecte de 'lag.max'"
+
+#~ msgid "m must be a list"
+#~ msgstr "'m' doit être une liste"
 
 #, c-format
 #~ msgid "Bug in fexact3, it[i=%d]=%d: negative key %d (kyy=%d)\n"

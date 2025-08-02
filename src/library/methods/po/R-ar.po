@@ -164,9 +164,8 @@ msgstr ""
 
 #. R/oldClass.R: gettextf("'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s",     dQuote("oldClass"), dQuote(class(object)))
 #: R/oldClass.R:0
-#, fuzzy
 msgid "'S3Class' only defined for extensions of %s or classes with a data part:  not true of class %s"
-msgstr "يجب أن يمتد الوسيط غير المسمى إما لفئة S3 أو لفئة جزء من البيانات ؛ لا ينطبق على الفئة %s"
+msgstr ""
 
 #. R/as.R: gettextf("'as' method should have one argument, or match the arguments of coerce(): got  (%s)",     paste(formalArgs(def), collapse = ", "))
 #: R/as.R:0
@@ -736,9 +735,8 @@ msgstr ""
 
 #. R/RClassUtils.R: gettextf("class %s does not have a data part (a .Data slot) defined",     dQuote(class(object)))
 #: R/RClassUtils.R:0
-#, fuzzy
 msgid "class %s does not have a data part (a .Data slot) defined"
-msgstr "لا تحتوي الفئة %s على جزء بيانات S3 ، وكذلك من النوع \"S4\" ؛ لا يوجد ما يعادل S3"
+msgstr ""
 
 #. R/BasicClasses.R: gettextf("class %s does not have an S3 data part, and so is of type \"S4\"; no S3 equivalent",     dQuote(class(from)))
 #: R/BasicClasses.R:0
@@ -1721,9 +1719,8 @@ msgstr ""
 
 #. R/ClassExtensions.R: gettextf("the 'S3Class' argument must be a superclass of %s:  not true of class %s",     dQuote(class(object)), dQuote(S3Class))
 #: R/ClassExtensions.R:0
-#, fuzzy
 msgid "the 'S3Class' argument must be a superclass of %s:  not true of class %s"
-msgstr "يجب أن يمتد الوسيط غير المسمى إما لفئة S3 أو لفئة جزء من البيانات ؛ لا ينطبق على الفئة %s"
+msgstr ""
 
 #. R/ClassExtensions.R: gettextf("the 'coerce' argument to 'setIs' should be a function of one argument, got an object of class %s",     dQuote(class(coerce)))
 #: R/ClassExtensions.R:0
@@ -1964,9 +1961,8 @@ msgstr ""
 
 #. R/refClass.R: gettextf("unnamed arguments to $new() must be objects from a reference class; got an object of class %s",     dQuote(class(super)))
 #: R/refClass.R:0
-#, fuzzy
 msgid "unnamed arguments to $new() must be objects from a reference class; got an object of class %s"
-msgstr "يجب أن يمتد الوسيط غير المسمى إما لفئة S3 أو لفئة جزء من البيانات ؛ لا ينطبق على الفئة %s"
+msgstr ""
 
 #. R/SClasses.R: stop("validity method must be NULL or a function of one argument")
 #: R/SClasses.R:0
@@ -1984,10 +1980,6 @@ msgid "Choosing method %s from %d ambiguous possibility"
 msgid_plural "Choosing method %s from %d ambiguous possibilities"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/MethodsListClass.R: ngettext(nreport, "Reported %d ambiguous selection out of %d for function %s\n",     "Reported %d ambiguous selections out of %d for function %s\n")
 #: R/MethodsListClass.R:0
@@ -1995,10 +1987,6 @@ msgid "Reported %d ambiguous selection out of %d for function %s\n"
 msgid_plural "Reported %d ambiguous selections out of %d for function %s\n"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/methodsTable.R: ngettext(which2, "Selecting %d method of minimum distance", "Selecting %d methods of minimum distance")
 #: R/methodsTable.R:0
@@ -2006,10 +1994,6 @@ msgid "Selecting %d method of minimum distance"
 msgid_plural "Selecting %d methods of minimum distance"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/methodsTable.R: ngettext(length(which), "Selecting %d non-group method", "Selecting %d non-group methods")
 #: R/methodsTable.R:0
@@ -2017,10 +2001,6 @@ msgid "Selecting %d non-group method"
 msgid_plural "Selecting %d non-group methods"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/methodsTable.R: ngettext(length(which), "Selecting %d partially exact-matching method",     "Selecting %d partially exact-matching methods")
 #: R/methodsTable.R:0
@@ -2028,10 +2008,6 @@ msgid "Selecting %d partially exact-matching method"
 msgid_plural "Selecting %d partially exact-matching methods"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/is.R: ngettext(sum(is.na(match(n2, n1))), "class %s is missing slot from class %s (%s), and no coerce method was supplied",     "class %s is missing slots from class %s (%s), and no coerce method was supplied")
 #: R/is.R:0
@@ -2039,10 +2015,6 @@ msgid "class %s is missing slot from class %s (%s), and no coerce method was sup
 msgid_plural "class %s is missing slots from class %s (%s), and no coerce method was supplied"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/SClasses.R: ngettext(length(dslots), "duplicated slot name: %s", "duplicated slot names: %s")
 #: R/SClasses.R:0
@@ -2050,10 +2022,6 @@ msgid "duplicated slot name: %s"
 msgid_plural "duplicated slot names: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/methodsTable.R: ngettext(length(methods), "found %d equally good next method",     "found %d equally good next methods")
 #: R/methodsTable.R:0
@@ -2061,10 +2029,6 @@ msgid "found %d equally good next method"
 msgid_plural "found %d equally good next methods"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/MethodsList.R: ngettext(sum(is.na(which)), "in the method signature for function %s invalid argument name in the signature: %s",     "in the method signature for function %s invalid argument names in the signature: %s")
 #: R/MethodsList.R:0
@@ -2072,10 +2036,6 @@ msgid "in the method signature for function %s invalid argument name in the sign
 msgid_plural "in the method signature for function %s invalid argument names in the signature: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/SClasses.R: ngettext(sum(is.na(which)), "invalid name for slot of class %s: %s",     "invalid names for slots of class %s: %s")
 #: R/SClasses.R:0
@@ -2083,10 +2043,6 @@ msgid "invalid name for slot of class %s: %s"
 msgid_plural "invalid names for slots of class %s: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/SClasses.R: ngettext(length(pkgs), "multiple definition of class %s visible (%s); using the definition\n   in package %s for %s",     "multiple definitions of class %s visible (%s); using the definition\n   in package %s for %s")
 #: R/SClasses.R:0
@@ -2098,10 +2054,6 @@ msgid_plural ""
 "   in package %s for %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/RClassUtils.R: ngettext(sum(is.na(match(pnames, slots))), "named elements of prototype do not correspond to slot name: %s",     "named elements of prototype do not correspond to slot names: %s")
 #: R/RClassUtils.R:0
@@ -2109,10 +2061,6 @@ msgid "named elements of prototype do not correspond to slot name: %s"
 msgid_plural "named elements of prototype do not correspond to slot names: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/MethodsList.R: ngettext(length(unknown), "no definition for class %s", "no definition for classes %s")
 #: R/MethodsList.R:0
@@ -2120,10 +2068,6 @@ msgid "no definition for class %s"
 msgid_plural "no definition for classes %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/promptClass.R: ngettext(length(whereClass), "no definition of class %s in the specified position, %s, definition on : %s",     "no definition of class %s in the specified position, %s, definitions on : %s")
 #: R/promptClass.R:0
@@ -2131,10 +2075,6 @@ msgid "no definition of class %s in the specified position, %s, definition on : 
 msgid_plural "no definition of class %s in the specified position, %s, definitions on : %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/RMethodUtils.R: ngettext(sum(not.s.in.a), "non-argument found in the signature: %s",     "non-arguments found in the signature: %s")
 #: R/RMethodUtils.R:0
@@ -2142,10 +2082,6 @@ msgid "non-argument found in the signature: %s"
 msgid_plural "non-arguments found in the signature: %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/is.R: ngettext(length(bad), "slot in class %s must extend corresponding slot in class %s: fails for %s",     "slots in class %s must extend corresponding slots in class %s: fails for %s")
 #: R/is.R:0
@@ -2153,10 +2089,6 @@ msgid "slot in class %s must extend corresponding slot in class %s: fails for %s
 msgid_plural "slots in class %s must extend corresponding slots in class %s: fails for %s"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
 
 #. R/RMethodUtils.R: ngettext(length(fdef), "the formal argument of the generic function for %s (%s) differs from that of the non-generic to be used as the default (%s)",     "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)")
 #: R/RMethodUtils.R:0
@@ -2164,7 +2096,3 @@ msgid "the formal argument of the generic function for %s (%s) differs from that
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""

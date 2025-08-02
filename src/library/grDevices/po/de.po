@@ -6,9 +6,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-07-27 16:02+0200\n"
 "PO-Revision-Date: 2025-07-06 15:31+0200\n"
-"Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
+"Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -152,7 +152,7 @@ msgstr ""
 #: devCairo.cpp:50 devCairo.cpp:61
 #, fuzzy
 msgid "failed to load cairo DLL"
-msgstr "konnte Zeichensatzliste nicht allozieren"
+msgstr "konnte Zeichensatz nicht laden"
 
 #: devPS.cpp:587
 #, c-format
@@ -180,12 +180,12 @@ msgid "invalid string in '%s'"
 msgstr "ungültige Zeichenkette in '%s'"
 
 #: devPS.cpp:806
-#, fuzzy, c-format
+#, c-format
 msgid "font width unknown for character 0x%02x in encoding %s"
 msgstr "Zeichenbreite unbekannt für das Zeichen 0x%02x in Kodierung %s"
 
 #: devPS.cpp:865
-#, fuzzy, c-format
+#, c-format
 msgid "font metrics unknown for Unicode character U+%04X"
 msgstr "Fontmetrik ist für das Unicode-Zeichen U+%04X unbekannt"
 
@@ -200,12 +200,12 @@ msgid "Unicode character %lc (U+%04X) cannot be converted"
 msgstr "Unicode Zeichen %lc (U+%04X) kann nicht konvertiert werden"
 
 #: devPS.cpp:912 devPS.cpp:966
-#, fuzzy, c-format
+#, c-format
 msgid "font metrics unknown for character 0x%02x in encoding %s"
 msgstr "Fontmetrik unbekannt für das Zeichen 0x%02x in Kodierung %s"
 
 #: devPS.cpp:980
-#, fuzzy, c-format
+#, c-format
 msgid "invalid character (%04X) sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
 msgstr "ungültiges Zeichen (%04X) an 'PostScriptCIDMetricInfo' in einer Ein-Byte-Lokalisierung gesendet"
 
@@ -395,7 +395,7 @@ msgstr "unbekannte Kodierung '%s' in 'mbcsToSbcs'"
 #: devPS.cpp:4592 devPS.cpp:4594
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
-msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
+msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': für <%02x>"
 
 #: devPS.cpp:4597
 #, fuzzy, c-format
@@ -403,7 +403,7 @@ msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
 msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
 
 #: devPS.cpp:4603 devPS.cpp:4610
-#, fuzzy, c-format
+#, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
 msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': für <%02x>"
 
@@ -415,7 +415,7 @@ msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
 #: devPS.cpp:4622
 #, fuzzy, c-format
 msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
-msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': Punkt ersetzt <%02x>"
+msgstr "Konvertierungsfehler für '%s' in 'mbcsToSbcs': für <%02x>"
 
 #: devPS.cpp:4694
 #, c-format
@@ -440,8 +440,9 @@ msgid "failed to increase 'maxDefns'"
 msgstr "konnte 'maxDefns' nicht erhöhen"
 
 #: devPS.cpp:5388 devPS.cpp:5441
+#, fuzzy
 msgid "Repeat or reflect pattern not supported on PDF device"
-msgstr ""
+msgstr "Ignorierte alpha-Maske (auf diesem Gerät nicht unterstützt)"
 
 #: devPS.cpp:5497 devPS.cpp:5585
 msgid "Shading type not yet supported"
@@ -631,7 +632,7 @@ msgid "failed to find or load PDF CID font"
 msgstr "Konnte PDF CID Zeichensatz nicht finden oder nicht laden"
 
 #: devPS.cpp:9887 devPicTeX.cpp:767
-#, fuzzy, c-format
+#, c-format
 msgid "invalid 'file' parameter in %s"
 msgstr "ungültiger 'file' Parameter in %s"
 
@@ -656,12 +657,10 @@ msgid "Tried to restore an empty snapshot?"
 msgstr ""
 
 #: devQuartz.cpp:482
-#, fuzzy
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
 msgstr "Quartz Gradienten ausgeschöpft (Erhöhung von maxPatterns fehlgeschlagen)"
 
 #: devQuartz.cpp:488
-#, fuzzy
 msgid "Quartz patterns exhausted (failed to increase maxPatterns)"
 msgstr "Quartz Muster ausgeschöpft (Erhöhung von maxPatterns fehlgeschlagen)"
 
@@ -670,13 +669,11 @@ msgid "Attempt to release non-existent pattern"
 msgstr "Versuch ein nicht existierendes Muster freizugeben"
 
 #: devQuartz.cpp:566
-#, fuzzy
 msgid "Quartz patterns exhausted"
 msgstr "Quartz Muster ausgeschöpft"
 
 #: devQuartz.cpp:632 devQuartz.cpp:647 devQuartz.cpp:649 devQuartz.cpp:680
 #: devQuartz.cpp:682
-#, fuzzy
 msgid "Failed to create gradient"
 msgstr "Erzeugung eines Gradienten fehlgeschlagen"
 
@@ -685,7 +682,6 @@ msgid "Unsupported gradient fill extend type; using 'pad'"
 msgstr "Nicht unterstützter Typ für Füllungsgradientenerweiterung; Nutze 'pad'"
 
 #: devQuartz.cpp:740 devQuartz.cpp:773
-#, fuzzy
 msgid "Failed to create pattern"
 msgstr "Erzeugen eines Musters fehlgeschlagen"
 
@@ -694,37 +690,30 @@ msgid "Unsupported pattern extend mode;  using \"repeat\""
 msgstr "Nicht unterstützter Musterfortsetzungsmodus; nutze \"repeat\""
 
 #: devQuartz.cpp:825
-#, fuzzy
 msgid "Quartz clipping paths exhausted (failed to increase maxClipPaths)"
 msgstr "Quartz Clipping-Pfade ausgeschöpft (Erhöhung von maxClipPaths fehlgeschlagen)"
 
 #: devQuartz.cpp:874
-#, fuzzy
 msgid "Quartz clipping paths exhausted"
 msgstr "Quartz Clipping-Pfade ausgeschöpft"
 
 #: devQuartz.cpp:882
-#, fuzzy
 msgid "Failed to create clipping path"
 msgstr "Erzeugen des Clipping-Pfades fehlgeschlagen"
 
 #: devQuartz.cpp:975
-#, fuzzy
 msgid "Quartz masks exhausted (failed to increase maxMasks)"
 msgstr "Quartz Masken ausgeschöpft (Erhöhung von maxMasks fehlgeschlagen)"
 
 #: devQuartz.cpp:1026
-#, fuzzy
 msgid "Quartz masks exhausted"
 msgstr "Quartz Masken ausgeschöpft"
 
 #: devQuartz.cpp:1042
-#, fuzzy
 msgid "Failed to create Quartz mask"
 msgstr "Erzeugen der Quartz-Maske fehlgeschlagen"
 
 #: devQuartz.cpp:1142
-#, fuzzy
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
 msgstr "Quartz Gruppen ausgeschöpft (Erhöhung von maxGroups fehlgeschlagen)"
 
@@ -733,12 +722,10 @@ msgid "Attempt to release non-existent group"
 msgstr "Versuch eine nicht-existierende Gruppe freizugeben"
 
 #: devQuartz.cpp:1199
-#, fuzzy
 msgid "Quartz groups exhausted"
 msgstr "Quartz Gruppen ausgeschöpft"
 
 #: devQuartz.cpp:1219
-#, fuzzy
 msgid "Add compositing operator not supported; falling back to over"
 msgstr "Hinzufügen eines compositing OOperators nicht unterstützt; Rückgriff auf over"
 
@@ -793,16 +780,16 @@ msgid "Attempt to release non-existent mask"
 msgstr "Versuch nicht-existierende Maske freizugeben"
 
 #: devQuartz.cpp:3174
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "ungültiger Zeichensatzpfad %s"
 
-#: devQuartz.cpp:3217
+#: devQuartz.cpp:3218
 #, fuzzy
 msgid "failed to load font"
 msgstr "konnte Zeichensatz nicht laden"
 
-#: devQuartz.cpp:3310 devQuartz.cpp:3315 cairo/cairoBM.cpp:599
+#: devQuartz.cpp:3311 devQuartz.cpp:3316 cairo/cairoBM.cpp:599
 #: cairo/cairoBM.cpp:602 cairo/cairoBM.cpp:606 cairo/cairoBM.cpp:610
 #: cairo/cairoBM.cpp:614 cairo/cairoBM.cpp:618 cairo/cairoBM.cpp:629
 #: cairo/cairoBM.cpp:634 cairo/cairoBM.cpp:637 cairo/cairoBM.cpp:641
@@ -811,19 +798,19 @@ msgstr "konnte Zeichensatz nicht laden"
 msgid "invalid '%s' argument"
 msgstr "unzulässiges '%s' Argument"
 
-#: devQuartz.cpp:3342
+#: devQuartz.cpp:3343
 msgid "invalid quartz() device size"
 msgstr "unzulässige Größe für quartz() Gerät"
 
-#: devQuartz.cpp:3370
+#: devQuartz.cpp:3371
 msgid "unable to create device description"
 msgstr "kann keine Gerätebeschreibung erzeugen."
 
-#: devQuartz.cpp:3419
+#: devQuartz.cpp:3420
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "kann das quartz() Gerät als Ziel nicht erzeugen, angegebener Typ evtl. nicht unterstützt"
 
-#: devQuartz.cpp:3552
+#: devQuartz.cpp:3553
 msgid "Quartz device is not available on this platform"
 msgstr "Auf dieser Platform ist kein Quartz-Gerät verfügbar"
 
@@ -1138,12 +1125,8 @@ msgid "Failed to apply font variations"
 msgstr "konnte Definitionen nicht allozieren"
 
 #: cairo/cairoFns.cpp:2462
-#, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "Zeichensatz Datei nicht gefunden; passende Zeichensatzfamilie und -face"
-
-#~ msgid "invalid 'file' argument"
-#~ msgstr "unzulässiges 'file' Argument"
 
 #~ msgid "invalid value of 'maxColorValue'"
 #~ msgstr "unzulässiger Wert von 'maxColorValue'"
@@ -1152,18 +1135,21 @@ msgstr "Zeichensatz Datei nicht gefunden; passende Zeichensatzfamilie und -face"
 #~ msgid "filename too long in %s()"
 #~ msgstr "Dateiname in %s() zu lang"
 
+#, c-format
+#~ msgid "invalid value of '%s'"
+#~ msgstr "unzulässiger Wert von '%s'"
+
+#~ msgid "invalid 'file' argument"
+#~ msgstr "unzulässiges 'file' Argument"
+
 #~ msgid "filename too long in jpeg() call"
 #~ msgstr "Dateiname zu lang in jpeg() Aufruf"
 
 #~ msgid "filename too long in tiff() call"
 #~ msgstr "Dateiname zu lang in tiff() Aufruf"
 
-#~ msgid "filename too long in win.metafile() call"
-#~ msgstr "Dateiname zu lang in win.metafile() Aufruf"
-
-#, c-format
-#~ msgid "invalid value of '%s'"
-#~ msgstr "unzulässiger Wert von '%s'"
+#~ msgid "invalid argument"
+#~ msgstr "unzulässiges Argument"
 
 #~ msgid "ran out of colors in xfig()"
 #~ msgstr "keine Farben mehr übrig in xfig()"
@@ -1195,13 +1181,6 @@ msgstr "Zeichensatz Datei nicht gefunden; passende Zeichensatzfamilie und -face"
 
 #~ msgid "empty file name"
 #~ msgstr "leerer Dateinamen"
-
-#, c-format
-#~ msgid "unable to use encoding '%s'"
-#~ msgstr "kann Kodierung '%s' nicht nutzen"
-
-#~ msgid "invalid argument"
-#~ msgstr "unzulässiges Argument"
 
 #~ msgid "Impossible to load Rbitmap.dll"
 #~ msgstr "Kann Rbitmap.dll nicht laden"

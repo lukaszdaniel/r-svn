@@ -1099,12 +1099,12 @@ msgstr[1] "els noms d'argument %s a «%s» no són vàlids"
 #~ msgstr "'filename' és not vàlid"
 
 #, fuzzy
-#~ msgid "invalid 'file'"
-#~ msgstr "'fitxer' no vàlid"
+#~ msgid "invalid 'family' argument"
+#~ msgstr "argument «family» no vàlid"
 
 #~ msgid "invalid 'title'"
 #~ msgstr "«title» no vàlid"
 
 #, fuzzy
-#~ msgid "invalid 'family' argument"
-#~ msgstr "argument «family» no vàlid"
+#~ msgid "invalid 'file'"
+#~ msgstr "'fitxer' no vàlid"
