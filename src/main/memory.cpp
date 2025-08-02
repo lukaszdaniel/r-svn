@@ -145,7 +145,7 @@ using namespace CXXR;
 
 /* These are used in profiling to separate out time in GC */
 attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
-
+#define TESTING_WRITE_BARRIER
 #ifdef TESTING_WRITE_BARRIER
 # define PROTECTCHECK
 #endif
@@ -4025,7 +4025,7 @@ static R_INLINE SEXP CHKCONS(SEXP e)
     case EXTPTRSXP: /**** use separate accessors? */
 	return CHK(e);
     default:
-	error(_("'%s' or similar applied to %s object"), "CAR/CDR/TAG"
+	error(_("'%s' or similar applied to %s object"), "CAR/CDR/TAG",
 	      R_typeToChar(e));
     }
 }
