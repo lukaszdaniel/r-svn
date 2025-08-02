@@ -49,6 +49,7 @@ foo(<var>x</var>, <var>y</var>, ...)
 <p>Included
 
 conditional content.
+End(<code style="white-space: pre;">&#8288;#ifdef&#8288;</code>).
 </p>
 <p>Escaped backslash <code>\x</code>.
 </p>
@@ -99,6 +100,17 @@ output
 </p>
 <p><code style="white-space: pre;">&#8288;
 &gt; x&lt;-007
+&#8288;</code>
+</p>
+<p>Georgi Boshnakov's example of generated paragraphs:
+a
+</p>
+<p>b
+</p>
+<p>c
+</p>
+<p><code style="white-space: pre;">&#8288;
+[1] "a\n    b\n    c"
 &#8288;</code>
 </p>
 

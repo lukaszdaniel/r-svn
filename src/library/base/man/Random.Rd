@@ -142,8 +142,12 @@ set.seed(seed, kind = NULL, normal.kind = NULL, sample.kind = NULL)
       (\emph{\I{L'Ecuyer}}, 2007).
     }
     \item{\code{"L'Ecuyer-CMRG"}:}{
-      A \sQuote{combined multiple-recursive generator} from \I{L'Ecuyer}
-      (1999), each element of which is a feedback multiplicative
+      A \sQuote{combined multiple-recursive generator} from
+      %% <FIXME: bibcite>
+      %% \I{L'Ecuyer} (1999),
+      \bibcitet{R:L_Ecuyer:1999},
+      %% </FIXME>
+      each element of which is a feedback multiplicative
       generator with three integer elements: thus the seed is a (signed)
       integer vector of length 6. The period is around
       \eqn{2^{191}}{2^191}.
@@ -293,13 +297,24 @@ set.seed(seed, kind = NULL, normal.kind = NULL, sample.kind = NULL)
   \emph{Operations Research}, \bold{47}, 159--164.
   \doi{10.1287/opre.47.1.159}.
 
-  \I{L'Ecuyer}, P. and Simard, R. (2007).
-  \I{TestU01}: A C Library for Empirical Testing of Random Number Generators
-  \emph{ACM Transactions on Mathematical Software}, \bold{33}, Article 22.
-  \doi{10.1145/1268776.1268777}.
-  \cr The \I{TestU01} C library is available from
-  \url{https://simul.iro.umontreal.ca/testu01/tu01.html} or also
-  \url{https://github.com/umontreal-simul/TestU01-2009}.
+  %% <FIXME bibcite>  
+  %% \I{L'Ecuyer}, P. and Simard, R. (2007).
+  %% \I{TestU01}: A C Library for Empirical Testing of Random Number Generators
+  %% \emph{ACM Transactions on Mathematical Software}, \bold{33}, Article 22.
+  %% \doi{10.1145/1268776.1268777}.
+  %% \cr The \I{TestU01} C library is available from
+  %% \url{https://simul.iro.umontreal.ca/testu01/tu01.html} or also
+  %% \url{https://github.com/umontreal-simul/TestU01-2009}.
+  %% </FIXME>
+  
+  %% <FIXME bibcite>
+  \bibinfo{R:Simard+L_Ecuyer:2007}{footer}{
+    The \\\\\\I{TestU01} C library is available from
+    \\\\\\url{https://simul.iro.umontreal.ca/testu01/tu01.html} or also
+    \\\\\\url{https://github.com/umontreal-simul/TestU01-2009}.
+  }
+  \bibshow{R:Simard+L_Ecuyer:2007}
+  %% </FIXME>
 
   Marsaglia, G. (1997).
   \emph{A random number generator for C}.
@@ -329,6 +344,10 @@ set.seed(seed, kind = NULL, normal.kind = NULL, sample.kind = NULL)
   \emph{Applied Statistics}, \bold{31}, 188--190; Remarks:
   \bold{34}, 198 and \bold{35}, 89.
   \doi{10.2307/2347988}.
+
+  %% <FIXME bibcite>
+  \bibshow{*}
+  %% </FIXME>
 }
 \author{of RNGkind: Martin Maechler. Current implementation, B. D. Ripley
   with modifications by Duncan Murdoch.}

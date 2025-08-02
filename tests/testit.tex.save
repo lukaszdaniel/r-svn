@@ -23,6 +23,7 @@ paragraph
 \begin{Details}
 Included
 conditional content.
+End(\AsIs{\texttt{\#ifdef}}).
 
 Escaped backslash \code{\bsl{}x}.
 
@@ -70,6 +71,17 @@ output
 
 \AsIs{\texttt{
 > x<-007
+}}
+
+Georgi Boshnakov's example of generated paragraphs:
+a
+
+b
+
+c
+
+\AsIs{\texttt{
+[1] "a\bsl{}n    b\bsl{}n    c"
 }}
 \end{Section}
 %

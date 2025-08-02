@@ -28,6 +28,7 @@ foo(\var{x}, \var{y}, ...)
 #ifdef nonexistent
   This is not included.
 #endif
+  End(\verb{#ifdef}).
 
   Escaped backslash \code{\\x}.
 
@@ -63,6 +64,12 @@ foo(\var{x}, \var{y}, ...)
   --
 
   \Sexpr[echo=TRUE,results=verbatim,keep.source=TRUE]{x<-007}
+
+  Georgi Boshnakov's example of generated paragraphs:
+  \Sexpr[results=rd]{paste(letters[1:3], collapse="\n\n")}
+
+  \Sexpr[results=verbatim]{"a
+    b\n    c"}
 }
 \value{
   [NULL]\cr\cr\dots

@@ -16,7 +16,7 @@ _A_r_g_u_m_e_n_t_s:
 
 _D_e_t_a_i_l_s:
 
-     Included conditional content.
+     Included conditional content.  End(#ifdef).
 
      Escaped backslash '\x'.
 
@@ -61,6 +61,14 @@ _V_a_l_u_e:
      -
 
      > x<-007
+
+     Georgi Boshnakov's example of generated paragraphs: a
+
+     b
+
+     c
+
+     [1] "a\n    b\n    c"
 
 \_t_a_b_u_l_a_r:
 
