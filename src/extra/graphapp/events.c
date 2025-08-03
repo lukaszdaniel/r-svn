@@ -866,15 +866,24 @@ SEXP R_MakeUnwindCont(void);
 SEXP Rf_protect(SEXP);
 void Rf_unprotect(int);
 void R_ContinueUnwind(SEXP cont);
-extern LibImport SEXP R_NilValue;
+#ifndef R_NilValue
+#define R_NilValue NULL
+#endif
 
-static SEXP wndproc_cont_token;
+// Try-catch macros from TryCatch.h
+#define TRY do { jmp_buf jmpbuf; switch(setjmp(jmpbuf)) { case 0: do {
+#define CATCH(x) }while(0); break; case x: do {
+#define CATCH_ }while(0); break; default: do {
+#define ETRY }while(0); } }while(0)
+#define THROW(x) longjmp(*((jmp_buf *)data), x)
+
+static SEXP s_wndproc_cont_token;
 
 static void wndproc_rethrow_error(void)
 {
-    if (wndproc_cont_token) {
-	SEXP token = wndproc_cont_token;
-	wndproc_cont_token = NULL;
+    if (s_wndproc_cont_token) {
+	SEXP token = s_wndproc_cont_token;
+	s_wndproc_cont_token = NULL;
 	R_ContinueUnwind(token);
     }
 }
@@ -890,45 +899,52 @@ typedef struct {
 
 SEXP wndproc_unwind_fun(void *data)
 {
-    wndproc_call *w = data;
+    wndproc_call *w = (wndproc_call *) data;
     w->res = w->proc_real(w->hwnd, w->message, w->wParam, w->lParam);
     return NULL;
 }
 
 void wndproc_unwind_clean(void *data, Rboolean jump)
 {
-    if (jump) 
-	longjmp(*(jmp_buf *)data, 1);
+    if (jump)
+        THROW(1);
 }
 
 LRESULT WINAPI wndproc_unwind (WNDPROC proc_real, HWND hwnd, UINT message,
                                WPARAM wParam, LPARAM lParam)
 {
-    jmp_buf jmpbuf;
     wndproc_call w;
     volatile SEXP token;
+    static bool s_initialized = false;
 
-    if (R_NilValue == NULL) {
+// TODO: instead of if (R_NilValue == NULL && !s_initialized), better use if (R_Is_Running > 0)
+    if (R_NilValue == NULL && !s_initialized) {
 	/* when R heap hasn't been initialized yet */
-	wndproc_cont_token = NULL;
+	s_wndproc_cont_token = NULL;
+	s_initialized = true;
 	return proc_real(hwnd, message, wParam, lParam);
     }
-    if (setjmp(jmpbuf) == 1) {
-	/* long jump */
-	wndproc_cont_token = token;
-	return 0;
+    TRY
+    {
+        w.hwnd = hwnd;
+        w.message = message;
+        w.wParam = wParam;
+        w.lParam = lParam;
+        w.proc_real = proc_real;
+        SEXP saved_token = s_wndproc_cont_token;
+        token = Rf_protect(R_MakeUnwindCont());
+        R_UnwindProtect(wndproc_unwind_fun, &w, wndproc_unwind_clean, jmpbuf, token);
+        Rf_unprotect(1);
+        s_wndproc_cont_token = saved_token;
+        return w.res;
     }
-    w.hwnd = hwnd;
-    w.message = message;
-    w.wParam = wParam;
-    w.lParam = lParam;
-    w.proc_real = proc_real;
-    SEXP saved_token = wndproc_cont_token;
-    token = Rf_protect(R_MakeUnwindCont());
-    R_UnwindProtect(wndproc_unwind_fun, &w, wndproc_unwind_clean, jmpbuf, token);
-    Rf_unprotect(1);
-    wndproc_cont_token = saved_token;
-    return w.res;
+    CATCH_
+    {
+        /* long jump */
+        s_wndproc_cont_token = token;
+        return 0;
+    }
+    ETRY;
 }
 
 /* end of R modification */

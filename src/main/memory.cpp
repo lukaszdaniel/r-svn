@@ -145,7 +145,7 @@ using namespace CXXR;
 
 /* These are used in profiling to separate out time in GC */
 attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
-#define TESTING_WRITE_BARRIER
+
 #ifdef TESTING_WRITE_BARRIER
 # define PROTECTCHECK
 #endif
