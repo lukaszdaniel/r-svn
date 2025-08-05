@@ -146,12 +146,12 @@ static void handle_mouse(object obj, HWND hwnd, UINT message,
 		wp.x = x; wp.y = y;
 		ClientToScreen(hw, (LPPOINT) &wp);
 		if (m->action) m->action(m);
-		TrackPopupMenu(m->handle,
+		TrackPopupMenu((HMENU) (m->handle),
 			       TPM_LEFTALIGN|
 			       TPM_LEFTBUTTON|TPM_RIGHTBUTTON,
 			       wp.x,wp.y,
 			       0,
-			       obj->handle,
+			       (HWND) (obj->handle),
 			       NULL);
 		break;
 	    }
@@ -176,7 +176,7 @@ static void handle_mouse(object obj, HWND hwnd, UINT message,
  */
 static void handle_virtual_keydown(object obj, int param)
 {
-    if ((! obj->call) || (! obj->call->keyaction))
+    if ((!obj->call) || (!obj->call->keyaction))
 	return;
 
     /* translate arrow key combinations into Unicode arrow symbols */
@@ -349,7 +349,7 @@ static void handle_focus(object obj, int gained_focus)
 		/* redraw the caret in case it has been destroyed by a recursive redraw
 		   of the screen, e.g. via disable() when using the menu; such a redraw
 		   can happen while waiting for keyboard input */
-	        ShowCaret(obj->handle);
+	        ShowCaret((HWND) (obj->handle));
 	}
     } else {
 	obj->state &= ~GA_Focus;
@@ -357,8 +357,8 @@ static void handle_focus(object obj, int gained_focus)
 	    /* destroys the caret object and preserves obj->caretshowing */	
 	    setcaret(obj, obj->caretx, obj->carety, -obj->caretwidth, obj->caretheight);
     }
-    if ((! USE_NATIVE_BUTTONS) && (obj->kind == ButtonObject))
-	InvalidateRect(obj->handle, NULL, 0);
+    if ((!USE_NATIVE_BUTTONS) && (obj->kind == ButtonObject))
+	InvalidateRect((HWND) (obj->handle), NULL, 0);
     if (obj->call && obj->call->focus)
 	obj->call->focus(obj);
 }
@@ -463,14 +463,14 @@ static void handle_colour(HDC dc, object obj)
 static void handle_drop(object obj, HANDLE dropstruct)
 {
     if (obj->call && obj->call->drop) {
-	int len = DragQueryFile(dropstruct, 0, NULL, 0);
+	int len = DragQueryFile((HDROP) dropstruct, 0, NULL, 0);
 	char *dfilename = (char*)malloc(len + 1);
 	if (!dfilename) {
-	    DragFinish(dropstruct);
+	    DragFinish((HDROP) dropstruct);
 	    return;
 	}
-	DragQueryFile(dropstruct, 0, dfilename, len + 1);
-	DragFinish(dropstruct);
+	DragQueryFile((HDROP) dropstruct, 0, dfilename, len + 1);
+	DragFinish((HDROP) dropstruct);
 	obj->call->drop(obj, dfilename);
 	free(dfilename);
     }
@@ -490,7 +490,7 @@ static void handle_context_menu(object obj, HWND hwnd, int x, int y)
     if (m) {
 	wp.x = x; wp.y = y;
 	if (m->action) m->action(m);
-	TrackPopupMenu(m->handle,
+	TrackPopupMenu((HMENU) (m->handle),
 		       TPM_LEFTALIGN|TPM_LEFTBUTTON|TPM_RIGHTBUTTON,
 		       wp.x, wp.y, 0, hw, NULL);
     }
@@ -511,7 +511,7 @@ static long handle_message(HWND hwnd, UINT message,
     /* Find the library object associated with the hwnd. */
     obj = find_by_handle(hwnd);
 
-    if (! obj) { /* Not a library object ... */
+    if (!obj) { /* Not a library object ... */
 	*pass = 1; /* ... so pass the event. */
 	return 0;
     }
@@ -690,7 +690,7 @@ static long handle_message(HWND hwnd, UINT message,
 	    if(obj->flags & UseUnicode) {
 		/* len is GAbyte */
 		len = ImmGetCompositionStringW(himc, GCS_RESULTSTR, NULL,0);
-		if(NULL == (p=( len > sizeof(buf)-1) ? calloc(len,sizeof(char)) : buf)) {
+		if(NULL == (p= (wchar_t *) (( len > sizeof(buf)-1) ? calloc(len,sizeof(char)) : buf))) {
 		    len = sizeof(buf);
 		    p = buf;
 		}
@@ -784,7 +784,7 @@ static long handle_message(HWND hwnd, UINT message,
 	    hwnd = (HWND) HIWORD(lParam);
 #endif /* WIN32 */
 	    obj = find_by_handle(hwnd);
-	    if (! obj)
+	    if (!obj)
 		return 0;
 	}
 	handle_scroll(obj, hwnd, message, wParam, lParam);
@@ -800,7 +800,7 @@ static long handle_message(HWND hwnd, UINT message,
 #endif  /* WIN32 */
 
 	obj = find_by_handle(hwnd);
-	if (! obj)
+	if (!obj)
 	    break;
 	if ((obj->kind != CheckboxObject) && (obj->kind != RadioObject))
 	    break;
@@ -816,7 +816,7 @@ static long handle_message(HWND hwnd, UINT message,
 	    COMPOSITIONFORM cf;
 
 	    himc = ImmGetContext(hwnd);
-	    obj->call->im(obj, &f, (void *) &cf.ptCurrentPos);
+	    obj->call->im(obj, &f, (point *) &cf.ptCurrentPos);
 	    GetObject(f->handle, sizeof(LOGFONT), &lf);
 	    ImmSetCompositionFont(himc, &lf);
 		cf.dwStyle = CFS_POINT;
@@ -1061,7 +1061,7 @@ static void send_char(object obj, int ch)
 	    break;
 	obj = obj->parent;
     }
-    if (! obj)
+    if (!obj)
 	return;
     if (ch == '\r')
 	ch = '\n';
@@ -1082,9 +1082,9 @@ app_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lPara
     obj = find_by_handle(hwnd);
     key = LOWORD(wParam);
 
-    if (! obj) /* Not a library object ... */
+    if (!obj) /* Not a library object ... */
 	return 0; /* ... so do nothing. */
-    if (! obj->winproc)
+    if (!obj->winproc)
 	return 0; /* Nowhere to send events! */
 
     next = find_next_valid_sibling(obj->next);
@@ -1102,10 +1102,10 @@ app_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lPara
 	    handle_virtual_keydown(obj, key); /* call user's virtual key handler */
 	    if (key == VK_TAB) {
 		if (keystate & ShiftKey) {
-		    SetFocus(prev->handle);
+		    SetFocus((HWND) (prev->handle));
 		    return 0;
 		} else if (keystate & CtrlKey) {
-		    SetFocus(next->handle);
+		    SetFocus((HWND) (next->handle));
 		    return 0;
 		}
 	    }
@@ -1113,9 +1113,9 @@ app_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lPara
 	}
 	if (key == VK_TAB) {
 	    if (keystate & ShiftKey)
-		SetFocus(prev->handle);
+		SetFocus((HWND) (prev->handle));
 	    else
-		SetFocus(next->handle);
+		SetFocus((HWND) (next->handle));
 	    return 0;
 	}
 	else if ((key == VK_RETURN) || (key == VK_ESCAPE)) {
@@ -1210,14 +1210,14 @@ edit_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
     /* Find the library (dropfield/combo box) object associated
        with the hwnd. */
     hwndCombo = GetParent(hwnd);
-    if (! hwndCombo)
+    if (!hwndCombo)
 	return 0;
     obj = find_by_handle(hwndCombo);
     key = LOWORD(wParam);
 
-    if (! obj) /* Not a library object ... */
+    if (!obj) /* Not a library object ... */
 	return 0; /* ... so do nothing. */
-    if (! obj->edit_winproc)
+    if (!obj->edit_winproc)
 	return 0; /* Nowhere to send events! */
 
     next = find_next_valid_sibling(obj->next);
@@ -1233,9 +1233,9 @@ edit_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
     case WM_KEYDOWN:
 	if (key == VK_TAB) {
 	    if (keystate & ShiftKey)
-		SetFocus(prev->handle);
+		SetFocus((HWND) (prev->handle));
 	    else
-		SetFocus(next->handle);
+		SetFocus((HWND) (next->handle));
 	    return 0;
 	}
 	break;
@@ -1281,8 +1281,8 @@ app_timer_procedure(HWND hwnd, UINT message, UINT tid, DWORD time)
 
     if (id == mouse_timer_id) {
 	obj = frontwindow;
-	if ((buttons == 0) || (! obj) || (! obj->call)
-	    || (! obj->call->mouserepeat))
+	if ((buttons == 0) || (!obj) || (!obj->call)
+	    || (!obj->call->mouserepeat))
 	    setmousetimer(0);
 	else
 	    obj->call->mouserepeat(obj, buttons, xy);

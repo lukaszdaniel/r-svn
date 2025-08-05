@@ -41,7 +41,7 @@ static object get_bitmap_base(void)
 {
     static object bitmap_base = NULL;
 
-    if (! bitmap_base)
+    if (!bitmap_base)
 	bitmap_base = new_object(BaseObject, 0, NULL);
     return bitmap_base;
 }
@@ -66,13 +66,13 @@ bitmap newbitmap(int width, int height, int depth)
 	hb = CreateCompatibleBitmap(screendc, width, height);
     }
 
-    if (! hb) {
+    if (!hb) {
 	ReleaseDC(0, screendc);
 	return NULL;
     }
 
     dc = CreateCompatibleDC(screendc);
-    old = SelectObject(dc, hb);
+    old = (HBITMAP) SelectObject(dc, hb);
     PatBlt(dc, 0, 0, width, height, WHITENESS);
     SelectObject(dc, old);
     DeleteDC(dc);
@@ -82,7 +82,7 @@ bitmap newbitmap(int width, int height, int depth)
     GetObject(hb, sizeof(BITMAP), (LPSTR) &bm);
 
     bitmap obj = new_object(BitmapObject, hb, get_bitmap_base());
-    if (! obj) {
+    if (!obj) {
 	DeleteObject(hb);
 	return NULL;
     }
@@ -106,7 +106,7 @@ int has_transparent_pixels(image img)
     rgb *pixel32;
     rgb col;
 
-    if (! img)
+    if (!img)
 	return 0;
 
     width = getwidth(img);
@@ -327,7 +327,7 @@ void setbitmapdata(bitmap obj, unsigned char *data)
 	/* Odd number of bytes, must assign into new array. */
 	size = (row_bytes+1) * r.height;
 	newdata = array (size, GAbyte);
-	if (! newdata)
+	if (!newdata)
 	    return;
 	for (y=0; y<r.height; y++) {
 	    for (x=0; x<row_bytes; x++) {
@@ -362,7 +362,7 @@ void getbitmapdata(bitmap obj, unsigned char *data)
 	/* Odd number of bytes, must assign into new array. */
 	size = (row_bytes+1) * r.height;
 	newdata = array (size, GAbyte);
-	if (! newdata)
+	if (!newdata)
 	    return;
 	GetBitmapBits((HBITMAP)obj->handle, size,
 		      (LPSTR)newdata);

@@ -54,7 +54,7 @@ void init_objects(void)
 
     base_object = create(objinfo);
 
-    if (! base_object)
+    if (!base_object)
 	apperror("Out of memory (init_objects)!");
 
     base_object->kind = BaseObject;
@@ -65,7 +65,7 @@ void init_objects(void)
 static void add_object(object obj, object parent)
 {
     /* All objects have a parent. */
-    if (! parent)
+    if (!parent)
 	parent = base_object;
 
     if (parent->child)
@@ -163,7 +163,7 @@ void decrease_refcount(object obj)
 {
     delnode *new_node;
 
-    if (! obj)
+    if (!obj)
 	return;
     if (obj->refcount <= 0)
 	return;	/* cannot delete this object */
@@ -240,7 +240,7 @@ static void remove_deleted_object(object obj)
     delnode *next;
     delnode *n;
 
-    if (! del_base)
+    if (!del_base)
 	return;
     next = del_base;
     last = del_base->prev;
@@ -397,14 +397,14 @@ object new_object(int kind, HANDLE handle, object parent)
 
     /* create the object */
     obj = create(objinfo);
-    if (! obj)
+    if (!obj)
 	return NULL;
     obj->menubar = obj->popup = obj->toolbar = NULL;
     obj->status[0] = '\0';
     if (kind & ControlObject)
     {
 	obj->call = create(callinfo);
-	if (! obj->call) {
+	if (!obj->call) {
 	    discard(obj);
 	    return NULL;
 	}
@@ -442,7 +442,7 @@ object tree_search(object top, HANDLE handle, int id, int key)
 {
     object obj, first_object, found = NULL;
 
-    if ((! top) || (! top->child))
+    if ((!top) || (!top->child))
 	return NULL;
 
     first_object = top->child;
@@ -498,7 +498,7 @@ static void print_drawstate(FILE *f, drawstate d, object obj)
     fprintf(f, "%lu: [", ((unsigned long)d));
     if (!d)
 	return;
-    fprintf(f, "drawto=%s", (! d->drawing) ? "null" :
+    fprintf(f, "drawto=%s", (!d->drawing) ? "null" :
 	    (d->drawing == obj) ? "this" : "??");
     fprintf(f, ", 0x%8.8lX", (unsigned long)d->rgb);
     fprintf(f, ", %s", getname(d->font));
@@ -516,7 +516,7 @@ static void print_objects(FILE *f, object obj, int indent)
 
     for (i=0; i<indent; i++)
 	fprintf(f, " ");
-    if (! obj) {
+    if (!obj) {
 	fprintf(f, "Null Object\n");
 	return;
     }
@@ -549,10 +549,10 @@ static void print_objects(FILE *f, object obj, int indent)
     if (obj->text)
 	fprintf(f, ", text: \"%s\"", obj->text);
     /*
-      if (! obj->child)
+      if (!obj->child)
       fprintf(f, ", child: null");
     */
-    if (! obj->handle)
+    if (!obj->handle)
 	fprintf(f, ", handle: null");
     if (obj->drawstate) {
 	fprintf(f, ", drawstate ");
@@ -578,7 +578,7 @@ void print_object_list(void)
     char *mode = "at"; /* to ensure text mode */
     FILE *f;
 
-    if (! app_initialised)
+    if (!app_initialised)
 	return;
     if (start_again) {
 	mode = "w";

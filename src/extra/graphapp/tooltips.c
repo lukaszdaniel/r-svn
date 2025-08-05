@@ -43,7 +43,7 @@ int addtooltip(control c, const char *tp)
     	hwndToolTip = CreateWindowEx(
            0,TOOLTIPS_CLASS,NULL,WS_POPUP|TTS_ALWAYSTIP,
            CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,
-           hwndFrame,NULL,this_instance,NULL);
+           hwndFrame,NULL,(HINSTANCE) this_instance,NULL);
         if(!hwndToolTip) return 0;
     }
     ti.cbSize = sizeof(ti);

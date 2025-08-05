@@ -86,7 +86,7 @@ static point hand_hotspot = {7,0};
  */
 static void private_delcursor(cursor c)
 {
-    DestroyCursor(c->handle);
+    DestroyCursor((HCURSOR) (c->handle));
 }
 
 /*
@@ -96,7 +96,7 @@ static object get_cursor_base(void)
 {
     static object cursor_base = NULL;
 
-    if (! cursor_base)
+    if (!cursor_base)
 	cursor_base = new_object(BaseObject, 0, NULL);
     return cursor_base;
 }
@@ -151,7 +151,7 @@ cursor createcursor(point offset, GAbyte *white, GAbyte *black)
     }
 
     /* Create the cursor: */
-    hc = CreateCursor (this_instance, -offset.x, -offset.y,
+    hc = CreateCursor ((HINSTANCE) this_instance, -offset.x, -offset.y,
 		       max_width, max_height,
 		       (void FAR *) andmask, (void FAR *) xormask);
 
@@ -203,7 +203,7 @@ cursor newcursor(point p, image img)
     int w, y;
     int max_width, max_height, row_bytes;
 
-    if (! img) return NULL;
+    if (!img) return NULL;
 
     /* Determine the best cursor size: */
     max_width  = GetSystemMetrics(SM_CXCURSOR);
@@ -223,7 +223,7 @@ cursor newcursor(point p, image img)
     }
 
     /* Create the cursor: */
-    hc = CreateCursor (this_instance, p.x, p.y,
+    hc = CreateCursor ((HINSTANCE) this_instance, p.x, p.y,
 		       max_width, max_height,
 		       (void FAR *) andmask, (void FAR *) xormask);
 
@@ -249,17 +249,17 @@ static point load_hotspot(const char *filename)
 
     file = fopen(filename, "rt");
     while (fgets(line, sizeof(line)-2, file)) {
-	if ( (! strncmp(line, "point", 5))
-	     || (! strncmp(line, "/* point", 8)) )
+	if ( (!strncmp(line, "point", 5))
+	     || (!strncmp(line, "/* point", 8)) )
 	{
 	    i = 5;
 	    x = y = 0;
-	    while (line[i] && (! isdigit(line[i])) )
+	    while (line[i] && (!isdigit(line[i])) )
 		i++; /* skip "hotspot = {" */
 	    x = atoi(line+i);
 	    while (line[i] && isdigit(line[i]))
 		i++; /* skip x-location */
-	    while (line[i] && (! isdigit(line[i])) )
+	    while (line[i] && (!isdigit(line[i])) )
 		i++; /* skip comma */
 	    y = atoi(line+i);
 	    p = pt(x,y);

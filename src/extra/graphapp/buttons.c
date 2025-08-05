@@ -64,7 +64,7 @@
  */
 static void ensure_window(void)
 {
-    if (! current_window) {
+    if (!current_window) {
 	current_window = simple_window();
 	show(current_window);
     }
@@ -76,7 +76,7 @@ static void ensure_window(void)
 static void set_new_winproc(object obj)
 {
     HWND hwnd;
-    hwnd = obj->handle;
+    hwnd = (HWND) (obj->handle);
 #ifdef _WIN64
     obj->winproc = (WNDPROC) GetWindowLongPtr(hwnd, GWLP_WNDPROC);
     SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR) app_control_proc);
@@ -91,12 +91,12 @@ static void set_new_winproc(object obj)
  */
 static void private_delcontrol(control obj)
 {
-    ShowWindow(obj->handle, SW_HIDE);
+    ShowWindow((HWND) (obj->handle), SW_HIDE);
 #if USE_NATIVE_CONTROLS
     if (obj->bgbrush)
 	DeleteObject(obj->bgbrush);
 #endif
-    DestroyWindow(obj->handle);
+    DestroyWindow((HWND) (obj->handle));
 }
 
 /*
@@ -146,18 +146,18 @@ static object newchildwin(const char *kind, const char *text,
 	hwnd = CreateWindowW(wkind, wc,
 			     (WS_CHILD | WS_VISIBLE) | style,
 			     r.x, r.y, r.width, r.height,
-			     current_window->handle,
-			     (HMENU) child_id, this_instance, NULL);
+			     (HWND) (current_window->handle),
+			     (HMENU) child_id, (HINSTANCE) this_instance, NULL);
     } else
 	hwnd = CreateWindow(kind, text,
 			    (WS_CHILD | WS_VISIBLE) | style,
 			    r.x, r.y, r.width, r.height,
-			    current_window->handle,
-			    (HMENU) child_id, this_instance, NULL);
+			    (HWND) (current_window->handle),
+			    (HMENU) child_id, (HINSTANCE) this_instance, NULL);
 
 
     obj = new_object(ControlObject, hwnd, current_window);
-    if (! obj) {
+    if (!obj) {
 	DestroyWindow(hwnd);
 	return NULL;
     }
@@ -350,11 +350,11 @@ static void checkbox_mousemove(control c, int buttons, point xy)
 
 static void checkbox_mouseup(control c, int buttons, point xy)
 {
-    if (! isenabled(c))
+    if (!isenabled(c))
 	return;
     disarm(c);
     unhighlight(c);
-    if (! ptinr(xy, getrect(c)))
+    if (!ptinr(xy, getrect(c)))
 	return;
     if (ischecked(c))
 	uncheck(c);
@@ -448,7 +448,7 @@ button newimagebutton(image img, rect r, actionfn fn)
     button obj;
 
     obj = newcontrol(NULL, r);
-    if (! obj)
+    if (!obj)
 	return NULL;
 
     setredraw(obj, draw_image_button);
@@ -505,7 +505,7 @@ control newpicture(image img, rect r)
     control obj;
 
     obj = newcontrol(NULL, r);
-    if (! obj)
+    if (!obj)
 	return NULL;
 
     setredraw(obj, draw_picture);
@@ -521,7 +521,7 @@ button newimagecheckbox(image img, rect r, actionfn fn)
     button obj;
 
     obj = newdrawing(r, draw_image_button);
-    if (! obj)
+    if (!obj)
 	return NULL;
 
     setmousedown(obj, checkbox_mousedown);
@@ -794,11 +794,11 @@ static void radio_hit(control c)
 
 static void radio_mouseup(control c, int buttons, point xy)
 {
-    if (! isarmed(c))
+    if (!isarmed(c))
 	return;
     disarm(c);
     unhighlight(c);
-    if (! ptinr(xy, getrect(c)))
+    if (!ptinr(xy, getrect(c)))
 	return;
     radio_hit(c);
 }
@@ -831,7 +831,7 @@ radiobutton newradiobutton(const char *text, rect r, actionfn fn)
 
 void undotext(control obj)  /* Why was this previously commented out? CJ */
 {
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
@@ -840,7 +840,7 @@ void undotext(control obj)  /* Why was this previously commented out? CJ */
 
 void cuttext(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
@@ -849,7 +849,7 @@ void cuttext(control obj)
 
 void copytext(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
@@ -858,7 +858,7 @@ void copytext(control obj)
 
 void cleartext(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
@@ -867,7 +867,7 @@ void cleartext(control obj)
 
 void pastetext(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
@@ -876,7 +876,7 @@ void pastetext(control obj)
 
 void inserttext(control obj, const char *text)
 {
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
@@ -891,11 +891,11 @@ void selecttext(control obj, long start, long end)
     int left, right;
     long length;
 
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
-    length = GetWindowTextLength(obj->handle);
+    length = GetWindowTextLength((HWND) (obj->handle));
     left = (start < 0) ? length : start;
     right = (end < 0) ? length : end;
 #ifdef WIN32
@@ -909,7 +909,7 @@ void textselection(control obj, long *start, long *end)
 {
     unsigned long sel;
 
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
@@ -1028,7 +1028,7 @@ scrollbar newscrollbar(rect r, int max, int pagesize, scrollfn fn)
 	obj->max = max;
 	obj->size = pagesize;
 
-	hwnd = obj->handle;
+	hwnd = (HWND) (obj->handle);
 	si.cbSize = sizeof(si);
 	si.fMask = SIF_ALL;
 	si.nMin = 0;
@@ -1044,9 +1044,9 @@ void changescrollbar(scrollbar obj, int where, int max, int pagesize)
 {
     HWND hwnd;
 
-    if (! obj)
+    if (!obj)
 	return;
-    hwnd = obj->handle;
+    hwnd = (HWND) (obj->handle);
     obj->max = max;
     obj->size = pagesize;
 
@@ -1067,7 +1067,7 @@ listbox newlistbox(const char *list[], rect r, scrollfn fn, actionfn dble)
 		      LBS_NOTIFY | WS_BORDER |
 		      WS_VSCROLL | WS_HSCROLL,
 		      r, NULL);
-    if (! obj)
+    if (!obj)
 	return obj;
     obj->kind = ListboxObject;
     obj->hit = fn;
@@ -1088,7 +1088,7 @@ listbox newmultilist(const char *list[], rect r, scrollfn fn, actionfn dble)
 		      WS_BORDER |
 		      WS_VSCROLL | WS_HSCROLL,
 		      r, NULL);
-    if (! obj)
+    if (!obj)
 	return obj;
     obj->kind = MultilistObject;
     obj->hit = fn;
@@ -1116,7 +1116,7 @@ listbox newdroplist(const char *list[], rect r, scrollfn fn)
 		      WS_BORDER |
 		      WS_VSCROLL | WS_HSCROLL,
 		      r, NULL);
-    if (! obj)
+    if (!obj)
 	return obj;
     obj->kind = DroplistObject;
     obj->hit = fn;
@@ -1143,21 +1143,21 @@ listbox newdropfield(const char *list[], rect r, scrollfn fn)
 		      WS_BORDER |
 		      WS_VSCROLL | WS_HSCROLL,
 		      r, NULL);
-    if (! obj)
+    if (!obj)
 	return obj;
 
     /* subclass the edit control to handle TAB */
     HANDLE hwndCombo = obj->handle;
     COMBOBOXINFO cbInfo;
     cbInfo.cbSize = sizeof(COMBOBOXINFO);
-    BOOL ret = GetComboBoxInfo(hwndCombo, &cbInfo);
+    BOOL ret = GetComboBoxInfo((HWND) hwndCombo, &cbInfo);
     if (ret) {
 	HANDLE hwndEdit = cbInfo.hwndItem; /* the edit control */
-	if (GetParent(hwndEdit) == hwndCombo) {
+	if (GetParent((HWND) hwndEdit) == hwndCombo) {
 #ifdef _WIN64
-	    obj->edit_winproc = (WNDPROC) GetWindowLongPtr(hwndEdit,
+	    obj->edit_winproc = (WNDPROC) GetWindowLongPtr((HWND) hwndEdit,
 	                                                   GWLP_WNDPROC);
-	    SetWindowLongPtr(hwndEdit, GWLP_WNDPROC,
+	    SetWindowLongPtr((HWND) hwndEdit, GWLP_WNDPROC,
 	                     (LONG_PTR) edit_control_proc);
 #else
 	    obj->edit_winproc = (WNDPROC) GetWindowLong(hwndEdit,
@@ -1180,7 +1180,7 @@ void setlistitem(listbox obj, int index)
 {
     int count;
 
-    if (! obj)
+    if (!obj)
 	return;
     if (index < 0)
 	index = -1;
@@ -1207,7 +1207,7 @@ void setlistitem(listbox obj, int index)
 
 int isselected(listbox obj, int index)
 {
-    if (! obj)
+    if (!obj)
 	return -1;
     switch (obj->kind)
     {
@@ -1227,7 +1227,7 @@ int getlistitem(listbox obj)
 {
     int index, count;
 
-    if (! obj)
+    if (!obj)
 	return -1;
     switch (obj->kind)
     {
@@ -1253,9 +1253,9 @@ void changelistbox(listbox obj, const char **list)
     HWND hwnd;
     UINT reset_msg, add_msg;
 
-    if (! obj)
+    if (!obj)
 	return;
-    hwnd = obj->handle;
+    hwnd = (HWND) (obj->handle);
 
     switch (obj->kind) {
     case ListboxObject: case MultilistObject:
@@ -1294,7 +1294,7 @@ void handle_control(HWND hwnd, UINT message)
 
     obj = find_by_handle(hwnd);
 
-    if ((! obj) || (! (obj->state & GA_Enabled)))
+    if ((!obj) || (!(obj->state & GA_Enabled)))
 	return;
 
     /* Only let certain events cause activation. */
@@ -1336,7 +1336,7 @@ void handle_control(HWND hwnd, UINT message)
 	    return;
 	index = (INT) sendmessage(hwnd, LB_GETCARETINDEX, 0, 0L);
 	/* We do want to see de-selection events too
-	   if (! (INT) sendmessage(hwnd, LB_GETSEL, index, 0L))
+	   if (!(INT) sendmessage(hwnd, LB_GETSEL, index, 0L))
 	   return;*/
 	obj->value = index;
 	break;
@@ -1384,10 +1384,10 @@ progressbar newprogressbar(rect r, int pbmin, int pbmax, int incr, int smooth)
     hwnd = CreateWindowEx(0, PROGRESS_CLASS, NULL,
 			  (WS_CHILD | WS_VISIBLE | sm),
 			  r.x, r.y, r.width, r.height,
-			  current_window->handle,
-			  (HMENU) child_id, this_instance, NULL);
+			  (HWND) (current_window->handle),
+			  (HMENU) child_id, (HINSTANCE) this_instance, NULL);
     obj = new_object(ControlObject, hwnd, current_window);
-    if (! obj) {
+    if (!obj) {
 	DestroyWindow(hwnd);
 	return NULL;
     }
@@ -1408,19 +1408,19 @@ progressbar newprogressbar(rect r, int pbmin, int pbmax, int incr, int smooth)
 
 void setprogressbar(progressbar obj, int n)
 {
-    if (! obj) return;
+    if (!obj) return;
     sendmessage(obj->handle, PBM_SETPOS, (WPARAM) n, 0);
 }
 
 void stepprogressbar(progressbar obj, int n)
 {
-    if (! obj) return;
+    if (!obj) return;
     sendmessage(obj->handle, PBM_STEPIT, 0, 0);
 }
 
 void setprogressbarrange(progressbar obj, int pbmin, int pbmax)
 {
-    if (! obj) return;
+    if (!obj) return;
     sendmessage(obj->handle, PBM_SETRANGE32, (WPARAM) pbmin,
 		(LPARAM) pbmax);
 }

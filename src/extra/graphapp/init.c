@@ -32,7 +32,7 @@
  *  Windows implementation globals.
  */
 
-PROTECTED char * app_name = "GraphApp";
+PROTECTED char * app_name = (char *) "GraphApp";
 PROTECTED int    app_initialised = 0;
 PROTECTED HANDLE this_instance = NULL;
 PROTECTED HANDLE prev_instance = NULL;
@@ -52,7 +52,7 @@ void gabeep(void);
  */
 int initapp(int argc, char **argv)
 {
-    if (! app_initialised)
+    if (!app_initialised)
     {
 	app_initialised = 1;
 	init_objects();
@@ -131,7 +131,7 @@ static void setappname(char *title)
 	title[len] = tolower(c);
     if ((len-=4)<0)
 	len = 0;
-    if (! string_diff(title+len, ".exe"))
+    if (!string_diff(title+len, ".exe"))
 	title[len] = '\0';
 
     app_name = new_string(title);
@@ -154,7 +154,7 @@ static void getappname(HANDLE Instance)
 	exename = (char *)malloc(size);
 	if (!exename)
             return;
-        DWORD rc = GetModuleFileName(Instance, exename, size);
+        DWORD rc = GetModuleFileName((HMODULE) Instance, exename, size);
         if (rc > 0 && rc < size) /* success */
             break;
         free(exename);

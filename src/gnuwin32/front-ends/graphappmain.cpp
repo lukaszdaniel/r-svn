@@ -17,11 +17,10 @@ WinMain (HINSTANCE Instance, HINSTANCE PrevInstance, LPSTR CmdLine,
 {
     extern void AppMain(int argc, char **argv);
 
-#ifdef _W64
     GA_startgraphapp(Instance, PrevInstance, CmdShow);
+#ifdef _W64
     AppMain(__argc, __argv);
 #else
-    GA_startgraphapp(Instance, PrevInstance, CmdShow);
     AppMain(_argc, _argv);
 #endif
     return 0;

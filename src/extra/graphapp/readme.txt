@@ -4,10 +4,13 @@ for MsWindows). Extensions and changes are copyrighted by
 Guido Masarotto (guido@stat.unipd.it) and Brian D. Ripley
 (ripley@stats.ox.ac.uk).
 
+New location of GraphApp:
+https://enchantia.com/software/graphapp/
+
 The COPYLIB.TXT was a copy of the GNU Library General Public License,
 as in file ../../../share/licenses/LGPL-2
 
-Extesion include:
+Extension include:
 (1) Better support for MDI applications (MDI clients can have
     menus, toolbar and status bar which are displayed, in the
     standard way, on the MDI frame).

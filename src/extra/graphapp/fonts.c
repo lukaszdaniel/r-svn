@@ -66,7 +66,7 @@ static object get_font_base(void)
 {
     static object font_base = NULL;
 
-    if (! font_base)
+    if (!font_base)
 	font_base = new_object(BaseObject, 0, NULL);
     return font_base;
 }
@@ -79,14 +79,14 @@ PROTECTED font new_font_object(HFONT hf)
     object obj;
 
     obj = new_object(FontObject, hf, get_font_base());
-    if (! obj) {
+    if (!obj) {
 	DeleteObject(hf);
 	return NULL;
     }
     obj->die = private_delfont;
 
     dc = GetDC(0);
-    old = SelectObject(dc, hf);
+    old = (HFONT) SelectObject(dc, hf);
     GetTextMetrics(dc, &tm);
 
     obj->depth = 1;
@@ -134,7 +134,7 @@ void init_fonts(void)
     SystemFont = new_font_object(CreateFontIndirect(&ncm.lfMenuFont));
     if (SystemFont) SystemFont->text = new_string("SystemFont");
 
-    FixedFont = new_font_object(GetStockObject(OEM_FIXED_FONT));
+    FixedFont = new_font_object((HFONT) GetStockObject(OEM_FIXED_FONT));
     Times = newfont("Times New Roman", Plain, -10);
     Helvetica = newfont("Arial", SansSerif, -10);
     Courier = newfont("Courier New", FixedWidth, -10);
@@ -192,10 +192,10 @@ font newfont(const char *name, int style, int size)
     lf.lfWeight = FW_NORMAL;
     lf.lfItalic = lf.lfUnderline = lf.lfStrikeOut = 0;
     lf.lfCharSet = default_font_charset(); /* used to be ANSI_CHARSET */
-    if ((! string_diff(name, "Symbol"))
-	|| (! string_diff(name, "Wingdings"))
-	|| (! string_diff(name, "TT Symbol"))
-	|| (! string_diff(name, "TT Wingdings")))
+    if ((!string_diff(name, "Symbol"))
+	|| (!string_diff(name, "Wingdings"))
+	|| (!string_diff(name, "TT Symbol"))
+	|| (!string_diff(name, "TT Wingdings")))
 	lf.lfCharSet = SYMBOL_CHARSET;
     lf.lfOutPrecision = OUT_DEFAULT_PRECIS;
     lf.lfClipPrecision = CLIP_DEFAULT_PRECIS;

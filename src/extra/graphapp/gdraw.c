@@ -409,7 +409,7 @@ void goldfillellipse(drawing d, rgb fill, rect r)
 
 void gfillellipse(drawing d, rgb fill, rect r)
 {			/* e(x,y) = b*b*x*x + a*a*y*y - a*a*b*b */
-    register long mode = PATCOPY;
+    long mode = PATCOPY;
     int w_odd = (r.width & 0x0001);
     int h_odd = (r.height & 0x0001);
     int a = r.width >> 1;
@@ -540,7 +540,7 @@ void gdrawimage(drawing d, image img, rect dr, rect sr)
     bitmap b;
     image i = img;
 
-    if (! img)
+    if (!img)
 	return;
     dr = rcanon(dr);
     if ((dr.width != img->width) || (dr.height != img->height)) {
@@ -580,7 +580,7 @@ void gmaskimage(drawing d, image img, rect dr, rect sr, image mask)
     image i = img;
     image m = mask;
 
-    if (! img  || ! mask)
+    if (!img  || !mask)
 	return;
     dr = rcanon(dr);
     if ((dr.width != img->width) || (dr.height != img->height)) {
@@ -626,7 +626,7 @@ int gdrawstr(drawing d, font f, rgb c, point p, const char *s)
     HDC dc = GETHDC(d);
 
     SetTextColor(dc, getwinrgb(d,c));
-    old = SelectObject(dc, f->handle);
+    old = (HFONT) SelectObject(dc, f->handle);
     MoveToEx(dc, p.x, p.y, NULL);
     SetBkMode(dc, TRANSPARENT);
     SetTextAlign(dc, TA_TOP | TA_LEFT | TA_UPDATECP);
@@ -634,7 +634,7 @@ int gdrawstr(drawing d, font f, rgb c, point p, const char *s)
     if (localeCP > 0 && (localeCP != GetACP())) {
 	/* This allows us to change locales and output in the new locale */
 	wchar_t *wc; int n = strlen(s), cnt;
-	wc = alloca((n+1) * sizeof(wchar_t));
+	wc = (wchar_t *) alloca((n+1) * sizeof(wchar_t));
 	cnt = mbstowcs(wc, s, n);
 	TextOutW(dc, p.x, p.y, wc, cnt);
     } else
@@ -655,7 +655,7 @@ int gdrawwcs(drawing d, font f, rgb c, point p, const wchar_t *s)
     HDC dc = GETHDC(d);
 
     SetTextColor(dc, getwinrgb(d,c));
-    old = SelectObject(dc, f->handle);
+    old = (HFONT) SelectObject(dc, f->handle);
     MoveToEx(dc, p.x, p.y, NULL);
     SetBkMode(dc, TRANSPARENT);
     SetTextAlign(dc, TA_TOP | TA_LEFT | TA_UPDATECP);
@@ -681,7 +681,7 @@ void gdrawstr1(drawing d, font f, rgb c, point p, const char *s, double hadj)
     UINT flags = TA_BASELINE | TA_UPDATECP;
 
     SetTextColor(dc, getwinrgb(d,c));
-    old = SelectObject(dc, f->handle);
+    old = (HFONT) SelectObject(dc, f->handle);
     MoveToEx(dc, p.x, p.y, NULL);
     SetBkMode(dc, TRANSPARENT);
     if (hadj < 0.25) flags |= TA_LEFT;
@@ -701,7 +701,7 @@ void gwdrawstr1(drawing d, font f, rgb c, point p,
     UINT flags = TA_BASELINE | TA_UPDATECP;
 
     SetTextColor(dc, getwinrgb(d,c));
-    old = SelectObject(dc, f->handle);
+    old = (HFONT) SelectObject(dc, f->handle);
     MoveToEx(dc, p.x, p.y, NULL);
     SetBkMode(dc, TRANSPARENT);
     if (hadj < 0.25) flags |= TA_LEFT;
@@ -717,13 +717,13 @@ rect gstrrect(drawing d, font f, const char *s)
     SIZE size;
     HFONT old;
     HDC dc;
-    if (! f)
+    if (!f)
 	f = SystemFont;
     if (d)
 	dc = GETHDC(d);
     else
 	dc = GetDC(0);
-    old = SelectObject(dc, f->handle);
+    old = (HFONT) SelectObject(dc, f->handle);
     GetTextExtentPoint32(dc, (LPSTR)s, strlen(s), &size);
     SelectObject(dc, old);
     if (!d) ReleaseDC(0,dc);
@@ -747,9 +747,9 @@ static rect gwcsrect(drawing d, font f, const wchar_t *s)
     SIZE size;
     HFONT old;
     HDC dc;
-    if (! f) f = SystemFont;
+    if (!f) f = SystemFont;
     if (d) dc = GETHDC(d); else dc = GetDC(0);
-    old = SelectObject(dc, f->handle);
+    old = (HFONT) SelectObject(dc, f->handle);
     GetTextExtentPoint32W(dc, (LPWSTR)s, wcslen(s), &size);
     SelectObject(dc, old);
     if (!d) ReleaseDC(0,dc);
@@ -768,7 +768,7 @@ int gstrwidth1(drawing d, font f, const char *s, int enc)
     if (enc == CE_UTF8) {
 	wchar_t *wc;
 	int n = strlen(s);
-	wc = alloca((n+1) * sizeof(wchar_t));
+	wc = (wchar_t *) alloca((n+1) * sizeof(wchar_t));
 	Rf_utf8towcs(wc, s, n+1);
 	r = gwcsrect(d, f, wc);
     } else
@@ -782,7 +782,7 @@ int ghasfixedwidth(font f)
     TEXTMETRIC tm;
     HFONT old;
     HDC dc = GetDC(0);
-    old = SelectObject(dc, (HFONT)f->handle);
+    old = (HFONT) SelectObject(dc, (HFONT)f->handle);
     GetTextMetrics(dc, &tm);
     SelectObject(dc, old);
     ReleaseDC(0,dc);
@@ -797,14 +797,14 @@ void gcharmetric(drawing d, font f, int c, int *ascent, int *descent,
     TEXTMETRIC tm;
     HFONT old;
     HDC dc = GETHDC(d);
-    old = SelectObject(dc, (HFONT)f->handle);
+    old = (HFONT) SelectObject(dc, (HFONT)f->handle);
     GetTextMetrics(dc, &tm);
     first = tm.tmFirstChar;
     last = tm.tmLastChar;
     extra = tm.tmExternalLeading + tm.tmInternalLeading - 1;
     if (c < 0) { /* used for setting cra */
 	SIZE size;
-	char *cc = "M";
+	char *cc = (char *) "M";
 	GetTextExtentPoint32(dc,(LPSTR) cc, 1, &size);
 	*descent = tm.tmDescent ;
 	*ascent = size.cy - *descent;
@@ -854,14 +854,14 @@ void gwcharmetric(drawing d, font f, int c, int *ascent, int *descent,
     TEXTMETRICW tm;
     HFONT old;
     HDC dc = GETHDC(d);
-    old = SelectObject(dc, (HFONT)f->handle);
+    old = (HFONT) SelectObject(dc, (HFONT)f->handle);
     GetTextMetricsW(dc, &tm);
     first = tm.tmFirstChar;
     last = tm.tmLastChar;
     extra = tm.tmExternalLeading + tm.tmInternalLeading - 1;
     if (c < 0) { /* used for setting cra */
 	SIZE size;
-	char *cc = "M";
+	char *cc = (char *) "M";
 	GetTextExtentPoint32(dc,(LPSTR) cc, 1, &size);
 	*descent = tm.tmDescent ;
 	*ascent = size.cy - *descent;
@@ -923,8 +923,8 @@ font gnewfont2(drawing d, const char *face, int style, int size,
     lf.lfEscapement = lf.lfOrientation = (int) 10*rot;
     lf.lfWeight = FW_NORMAL;
     lf.lfItalic = lf.lfUnderline = lf.lfStrikeOut = 0;
-    if ((! strcmp(face, "Symbol")) || (! strcmp(face, "Wingdings"))
-        || (! strcmp(face, "TT Symbol")) || (! strcmp(face, "TT Wingdings")))
+    if ((!strcmp(face, "Symbol")) || (!strcmp(face, "Wingdings"))
+        || (!strcmp(face, "TT Symbol")) || (!strcmp(face, "TT Wingdings")))
 	lf.lfCharSet = SYMBOL_CHARSET;
     else
 	lf.lfCharSet = default_font_charset();
@@ -959,7 +959,7 @@ font gnewfont2(drawing d, const char *face, int style, int size,
     if (d && ((d->kind == PrinterObject) ||
 	      (d->kind == MetafileObject))) {
 	TEXTMETRIC tm;
-	HFONT old = SelectObject((HDC)d->handle, hf);
+	HFONT old = (HFONT) SelectObject((HDC)d->handle, hf);
 	GetTextMetrics((HDC)d->handle, &tm);
 	obj->rect.width = tm.tmAveCharWidth;
 	obj->rect.height = tm.tmHeight;
@@ -1003,7 +1003,7 @@ int devicepixelsy(drawing dev) MEASUREDEV(LOGPIXELSY)
 
 int isTopmost(window c)
 {
-    return GetWindowLong(c->handle, GWL_EXSTYLE) & WS_EX_TOPMOST;
+    return GetWindowLong((HWND) (c->handle), GWL_EXSTYLE) & WS_EX_TOPMOST;
 }
 
 static void setMessageBoxTopmost(window obj)
@@ -1019,15 +1019,15 @@ void * getHandle(window c)
 
 void BringToTop(window c, int stay) /* stay=0 for regular, 1 for topmost, 2 for toggle */
 {
-    SetForegroundWindow(c->handle); /* needed in Rterm */
+    SetForegroundWindow((HWND) (c->handle)); /* needed in Rterm */
     if (ismdi()) BringWindowToTop(hwndFrame);
-    BringWindowToTop(c->handle);
+    BringWindowToTop((HWND) (c->handle));
 
     if (stay == 2) stay = !isTopmost(c);
 
-    if (stay) SetWindowPos(c->handle, HWND_TOPMOST, 0, 0, 0, 0,
+    if (stay) SetWindowPos((HWND) (c->handle), HWND_TOPMOST, 0, 0, 0, 0,
 			   SWP_NOMOVE | SWP_NOSIZE);
-    else SetWindowPos(c->handle, HWND_NOTOPMOST, 0, 0, 0, 0,
+    else SetWindowPos((HWND) (c->handle), HWND_NOTOPMOST, 0, 0, 0, 0,
 		      SWP_NOMOVE | SWP_NOSIZE);
     TopmostDialogs &= !MB_TOPMOST;
     apply_to_list(c->parent->child, setMessageBoxTopmost);
@@ -1048,6 +1048,6 @@ void GA_msgWindow(window c, int type)
     case 4: state = SW_HIDE; break;
     default: break;
     }
-    if (state >= 0) ShowWindow(c->handle, state);
+    if (state >= 0) ShowWindow((HWND) (c->handle), state);
 
 }

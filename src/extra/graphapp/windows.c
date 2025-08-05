@@ -119,10 +119,10 @@ rect screen_coords(object obj)
     POINT p;
 
     r = getrect(obj);
-    if (! obj->handle)
+    if (!obj->handle)
 	return r;
     p.x = p.y = 0;
-    ClientToScreen(obj->handle, &p);
+    ClientToScreen((HWND) (obj->handle), &p);
     r.x = p.x;
     r.y = p.y;
     return r;
@@ -138,8 +138,8 @@ static void fix_sys_menu(HWND hwnd, unsigned long win_style)
 
     sys_menu = GetSystemMenu(hwnd, FALSE);
 
-    if ((! (win_style & WS_MINIMIZEBOX)) &&
-	(! (win_style & WS_MAXIMIZEBOX)))
+    if ((!(win_style & WS_MINIMIZEBOX)) &&
+	(!(win_style & WS_MAXIMIZEBOX)))
     {	/* remove the separator above and below Close */
 	RemoveMenu(sys_menu, 7, MF_BYPOSITION);
 	RemoveMenu(sys_menu, 5, MF_BYPOSITION);
@@ -148,11 +148,11 @@ static void fix_sys_menu(HWND hwnd, unsigned long win_style)
 	RemoveMenu(sys_menu, SC_TASKLIST, MF_BYCOMMAND);
     }
     /* remove the un-needed commands */
-    if (! (win_style & WS_MINIMIZEBOX))
+    if (!(win_style & WS_MINIMIZEBOX))
 	RemoveMenu(sys_menu, SC_MINIMIZE, MF_BYCOMMAND);
-    if (! (win_style & WS_MAXIMIZEBOX))
+    if (!(win_style & WS_MAXIMIZEBOX))
 	RemoveMenu(sys_menu, SC_MAXIMIZE, MF_BYCOMMAND);
-    if (! (win_style & WS_THICKFRAME))
+    if (!(win_style & WS_THICKFRAME))
 	RemoveMenu(sys_menu, SC_SIZE, MF_BYCOMMAND);
 }
 
@@ -175,7 +175,7 @@ static void make_client_window(HWND hwnd)
 		     CW_USEDEFAULT,
 		     CW_USEDEFAULT,
 		     CW_USEDEFAULT,
-		     hwnd, 0 , this_instance,
+		     hwnd, 0 , (HINSTANCE) this_instance,
 		     (void *) & clientcreate);
 }
 
@@ -195,16 +195,16 @@ static char *register_new_class(const char *extra, WNDPROC proc)
     new_class_name = array (length, char);
     strcpy(new_class_name, app_name);
     strcat(new_class_name, extra);
-    if (! prev_instance)
+    if (!prev_instance)
     {
 
-	if ((AppIcon = LoadIcon(this_instance,app_name)) == 0)
+	if ((AppIcon = LoadIcon((HINSTANCE) this_instance,app_name)) == 0)
 	    AppIcon = LoadIcon(0, IDI_APPLICATION);
 	wndclass.style         = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
 	wndclass.lpfnWndProc   = proc;
 	wndclass.cbClsExtra    = 0;
 	wndclass.cbWndExtra    = 0;
-	wndclass.hInstance     = this_instance;
+	wndclass.hInstance     = (HINSTANCE) this_instance;
 	wndclass.hIcon         = AppIcon;
 	wndclass.hCursor       = 0;
 	wndclass.hbrBackground = 0;
@@ -221,14 +221,14 @@ static HWND new_mdi_window(const char *name, rect r, unsigned long sty)
 {
     HWND hwnd;
     MDICREATESTRUCT mdi;
-    if (! hwndClient)
+    if (!hwndClient)
 	return NULL;
-    if (! mdi_class_name)
+    if (!mdi_class_name)
 	mdi_class_name = register_new_class(" Document", app_doc_proc);
 
     mdi.szClass	= mdi_class_name;
     mdi.szTitle	= name;
-    mdi.hOwner	= this_instance;
+    mdi.hOwner	= (HINSTANCE) this_instance;
     mdi.x		= r.x;
     mdi.y		= r.y;
     mdi.cx		= r.width;
@@ -274,7 +274,7 @@ static rect fix_win_rect(rect r, long flags)
 	GetClientRect(hwndClient, rect2RECT(&max_rect));
     }
     else if ((flags & ChildWindow) && (current_window)) {
-	GetClientRect(current_window->handle, rect2RECT(&max_rect));
+	GetClientRect((HWND) (current_window->handle), rect2RECT(&max_rect));
     }
     else {
 	max_rect = rect(0,0,screen_dx,screen_dy);
@@ -386,7 +386,7 @@ static void private_delwindow(window obj)
     if (obj->flags & Document)
 	sendmessage(hwndClient, WM_MDIDESTROY, obj->handle, 0L);
     else
-	DestroyWindow(obj->handle);
+	DestroyWindow((HWND) (obj->handle));
 }
 
 /*
@@ -430,7 +430,7 @@ window newwindow(const char *name, rect r, long flags)
     long state = flags & 0x0F;
 
     initapp(0,0);
-    if ((flags & Document) && (! hwndClient))
+    if ((flags & Document) && (!hwndClient))
 	flags &= ~Document;
     if ((flags & Menubar) && (flags & Document))
 	flags &= ~Menubar;
@@ -447,10 +447,10 @@ window newwindow(const char *name, rect r, long flags)
 	hwnd = new_mdi_window(name, r, win_style);
     }
     else {
-	if ((flags & Workspace) && (! work_class_name)) {
+	if ((flags & Workspace) && (!work_class_name)) {
 	    work_class_name = register_new_class(" Workspace", app_work_proc);
 	}
-	else if (! win_class_name)
+	else if (!win_class_name)
 	    win_class_name = register_new_class("", app_win_proc);
 
 	if(localeCP > 0 && (localeCP != GetACP())) {
@@ -467,7 +467,7 @@ window newwindow(const char *name, rect r, long flags)
 		(HWND) ((flags & ChildWindow) ?
 			current_window->handle : 0),
 		((HMENU) ((flags & ChildWindow) ? child_id : 0)),
-		this_instance, NULL);
+		(HINSTANCE) this_instance, NULL);
 	} else {
 	    hwnd = CreateWindowEx(
 		ex_style,
@@ -477,10 +477,10 @@ window newwindow(const char *name, rect r, long flags)
 		(HWND) ((flags & ChildWindow) ?
 			current_window->handle : 0),
 		((HMENU) ((flags & ChildWindow) ? child_id : 0)),
-		this_instance, NULL);
+		(HINSTANCE) this_instance, NULL);
 	}
     }
-    if (! hwnd)
+    if (!hwnd)
 	return NULL;
     if (flags & Closebox)
 	fix_sys_menu(hwnd, win_style);
@@ -502,7 +502,7 @@ static object find_valid_sibling(object obj, int next)
 {
     object first = obj;
 
-    if (! obj)
+    if (!obj)
 	return NULL;
     do {
 	if ((obj->kind & ControlObject)
@@ -546,7 +546,7 @@ static void select_sibling(object obj)
 	    sendmessage(hwndClient, WM_MDIACTIVATE,
 			obj->handle, 0L);
 	else
-	    SetFocus(obj->handle);
+	    SetFocus((HWND) (obj->handle));
     }
 }
 
@@ -627,16 +627,16 @@ static int MDIFrameFirstTime = 1;
 PROTECTED
 void show_window(object obj)
 {
-    HWND hwnd = obj->handle;
+    HWND hwnd = (HWND) (obj->handle);
     int incremented_aw = 0;
 
-    if (! mainloop_started) {
+    if (!mainloop_started) {
 	mainloop_started = 1;
 	atexit(app_cleanup);
 	atexit(gamainloop);
     }
 
-    if (! IsWindowVisible(hwnd))
+    if (!IsWindowVisible(hwnd))
     {
 	/* Disable windows behind a modal window. */
 	disablewindows(obj);
@@ -683,7 +683,7 @@ void show_window(object obj)
 PROTECTED
 void hide_window(object obj)
 {
-    HWND hwnd = obj->handle;
+    HWND hwnd = (HWND) (obj->handle);
 
     if (IsWindowVisible(hwnd))
     {
@@ -719,7 +719,7 @@ int isUnicodeWindow(object obj)
 
 int isiconic(window w)
 {
-    return IsIconic(w->handle);
+    return IsIconic((HWND) (w->handle));
 }
 
 PROTECTED
@@ -728,9 +728,9 @@ rect GetCurrentWinPos(object obj)
     rect r;
     WINDOWPLACEMENT W;
 
-    if (! obj || obj->kind != WindowObject) return rect(0,0,0,0);
+    if (!obj || obj->kind != WindowObject) return rect(0,0,0,0);
     W.length = sizeof(WINDOWPLACEMENT);
-    GetWindowPlacement(obj->handle, &W);
+    GetWindowPlacement((HWND) (obj->handle), &W);
     r.x = W.rcNormalPosition.left;
     r.y = W.rcNormalPosition.top;
     r.width = W.rcNormalPosition.right - r.x;

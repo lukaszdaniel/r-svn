@@ -196,9 +196,9 @@ void fix_brush(HDC dc, drawing obj, HBRUSH brush)
     drawing parent;
 
     parent = parentwindow(obj);
-    if (! parent)
+    if (!parent)
 	return;
-    hwnd = parent->handle;
+    hwnd = (HWND) (parent->handle);
     p.x = p.y = 0;
     ClientToScreen(hwnd, &p);
     if (brush)
@@ -218,13 +218,13 @@ void fix_brush(HDC dc, drawing obj, HBRUSH brush)
  */
 static void enable_drawing(void)
 {
-    if (! current->dest) {
-	if (! current_window)
+    if (!current->dest) {
+	if (!current_window)
 	    current_window = simple_window();
 	show(current_window);
 	drawto(current_window);
     }
-    if (! dc)
+    if (!dc)
 	dc = get_context(current->dest);
 
     fix_brush(dc, current->dest, the_brush);
@@ -466,7 +466,7 @@ void oldfillellipse(rect r)
 
 void fillellipse(rect r)
 {			/* e(x,y) = b*b*x*x + a*a*y*y - a*a*b*b */
-    register long mode = pat_mode[current->mode];
+    long mode = pat_mode[current->mode];
 
     int w_odd = (r.width & 0x0001);
     int h_odd = (r.height & 0x0001);
@@ -625,9 +625,9 @@ int drawstr(point p, const char *s)
 
     enable_drawing();
     SetTextColor(dc, win_rgb); /* set colour */
-    if (! current->fnt)
+    if (!current->fnt)
 	current->fnt = SystemFont;
-    old = SelectObject(dc, current->fnt->handle);
+    old = (HFONT) SelectObject(dc, current->fnt->handle);
     MoveToEx(dc, p.x, p.y, NULL);
     SetBkMode(dc, TRANSPARENT);
     SetTextAlign(dc, TA_LEFT | TA_UPDATECP);
@@ -649,13 +649,13 @@ rect strrect(font f, const char *s)
     HFONT old;
     HDC dc;
 
-    if (! f)
+    if (!f)
 	f = SystemFont;
 
     h = getheight(f);
 
     dc = GetDC(0); /* get screen dc */
-    old = SelectObject(dc, f->handle);
+    old = (HFONT) SelectObject(dc, f->handle);
     GetTextExtentPoint(dc, (LPSTR) s, strlen(s), &size);
     SelectObject(dc, old);
     ReleaseDC(0, dc);
@@ -683,7 +683,7 @@ void drawimage(image img, rect dr, rect sr)
     bitmap b;
     image i = img;
 
-    if (! img)
+    if (!img)
 	return;
     enable_drawing();
     dr = rcanon(dr);

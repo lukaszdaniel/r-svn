@@ -25,8 +25,8 @@ gchangescrollbar(scrollbar obj, int which, int where, int max, int pagesize,
     HWND hwnd;
     SCROLLINFO si;
 
-    if (! obj) return;
-    hwnd = obj->handle;
+    if (!obj) return;
+    hwnd = (HWND) (obj->handle);
     switch (which) {
     case HWINSB:
 	obj->xmax = max;
@@ -197,7 +197,7 @@ long getlimittext(textbox t)
 void checklimittext(textbox t, long n)
 {
     long limit = getlimittext(t);
-    long len =  GetWindowTextLength(t->handle);
+    long len =  GetWindowTextLength((HWND) (t->handle));
     if (len + n >= limit)
 	setlimittext(t, len + n + 0x8000);
 }
@@ -226,7 +226,7 @@ long getpastelength(void)
 void textselectionex(control obj, long *start, long *end)
 {
     CHARRANGE sel;
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
@@ -240,11 +240,11 @@ void selecttextex(control obj, long start, long end)
     CHARRANGE sel;
     long length;
 
-    if (! obj)
+    if (!obj)
 	return;
     if ((obj->kind != FieldObject) && (obj->kind != TextboxObject))
 	return;
-    length = GetWindowTextLength(obj->handle);
+    length = GetWindowTextLength((HWND) (obj->handle));
     sel.cpMin = (start < 0) ? length : start;
     sel.cpMax = (end < 0) ? length : end;
     sendmessage(obj->handle, EM_EXSETSEL, 0, &sel);

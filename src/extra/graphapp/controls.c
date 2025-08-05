@@ -141,7 +141,7 @@ void setdrop(control obj, dropfn fn)
 {
     if (obj)
 	if (obj->call) {
-	    DragAcceptFiles(obj->handle, TRUE);
+	    DragAcceptFiles((HWND) (obj->handle), TRUE);
 	    obj->call->drop = fn;
 	}
 }
@@ -166,11 +166,11 @@ void clear(control obj)
     drawing prev;
     rgb old;
 
-    if (! obj)
+    if (!obj)
 	return;
-    if (! isvisible(obj))
+    if (!isvisible(obj))
 	return;
-    if (! isvisible(parentwindow(obj)))
+    if (!isvisible(parentwindow(obj)))
 	return;
     if (obj->bg == Transparent)
 	return;
@@ -190,16 +190,16 @@ void draw(control obj)
     drawing prev;
     drawstate old = NULL;
 
-    if (! obj)
+    if (!obj)
 	return;
     if (obj->kind == MenubarObject) {
-	DrawMenuBar(obj->parent->handle);
+	DrawMenuBar((HWND) (obj->parent->handle));
 	return;
     }
 
-    if (! isvisible(obj))
+    if (!isvisible(obj))
 	return;
-    if (! isvisible(parentwindow(obj)))
+    if (!isvisible(parentwindow(obj)))
 	return;
     if ((obj->call == NULL) || (obj->call->redraw == NULL))
 	return;
@@ -223,7 +223,7 @@ void redraw(control obj)
 /*  void getscreenrect(control obj, rect *r) */
 /*  { */
 /*      RECT W; */
-/*      GetWindowRect(obj->handle, &W); */
+/*      GetWindowRect((HWND) (obj->handle), &W); */
 /*      r->x = W.left; */
 /*      r->y = W.top; */
 /*      r->width = W.right - W.left; */
@@ -242,7 +242,7 @@ void resize(control obj, rect r)
     WINDOWPLACEMENT W;
     int dw, dh, dx, dy;
 
-    if (! obj)
+    if (!obj)
 	return;
     r = rcanon(r);
     if (obj->kind == WindowObject) {
@@ -250,7 +250,7 @@ void resize(control obj, rect r)
 	r.x = obj->rect.x;
 	r.y = obj->rect.y;
 	if (!equalr(r, obj->rect)) {
-	    GetWindowPlacement(obj->handle, &W);
+	    GetWindowPlacement((HWND) (obj->handle), &W);
 	    if (!isvisible(obj)) W.showCmd = SW_HIDE;  /* stops the resize from revealing the window */
 	    dx = r.x - obj->rect.x;
 	    dy = r.y - obj->rect.y;
@@ -258,19 +258,19 @@ void resize(control obj, rect r)
 	       dw = r.width - obj->rect.width;
 	       dh = r.height - obj->rect.height;
 	       Rprintf("dw %d dh %d\n", dw, dh); */
-	    GetClientRect(obj->handle, &R);
+	    GetClientRect((HWND) (obj->handle), &R);
 	    dw = r.width - (R.right - R.left);
 	    dh = r.height - (R.bottom - R.top);
 	    W.rcNormalPosition.left += dx;
 	    W.rcNormalPosition.top += dy;
 	    W.rcNormalPosition.right += dx + dw;
 	    W.rcNormalPosition.bottom += dy + dh;
-	    SetWindowPlacement(obj->handle, &W);
+	    SetWindowPlacement((HWND) (obj->handle), &W);
 	}
     }
     else {
-	if (! equalr(r, obj->rect))
-	    MoveWindow(obj->handle, r.x, r.y, r.width, r.height, 1);
+	if (!equalr(r, obj->rect))
+	    MoveWindow((HWND) (obj->handle), r.x, r.y, r.width, r.height, 1);
 	obj->rect.x = r.x;
 	obj->rect.y = r.y;
     }
@@ -283,7 +283,7 @@ void resize(control obj, rect r)
  */
 void show(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case CursorObject: case FontObject: case BitmapObject:
@@ -294,16 +294,16 @@ void show(control obj)
 	show_window(obj);
 	break;
     default:
-	ShowWindow(obj->handle, SW_SHOWNORMAL);
-	SetFocus(obj->handle);
-	UpdateWindow(obj->handle);
+	ShowWindow((HWND) (obj->handle), SW_SHOWNORMAL);
+	SetFocus((HWND) (obj->handle));
+	UpdateWindow((HWND) (obj->handle));
     }
     obj->state |= GA_Visible;
 }
 
 void hide(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case CursorObject: case FontObject: case BitmapObject:
@@ -313,14 +313,14 @@ void hide(control obj)
 	hide_window(obj);
 	break;
     default:
-	ShowWindow(obj->handle, SW_HIDE);
+	ShowWindow((HWND) (obj->handle), SW_HIDE);
     }
     obj->state &= ~GA_Visible;
 }
 
 int isvisible(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return 0;
     return (obj->state & GA_Visible) ? 1 : 0;
 }
@@ -330,22 +330,22 @@ int isvisible(control obj)
  */
 void enable(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case CursorObject: case FontObject: case BitmapObject:
     case MenubarObject:
 	break;
     case MenuObject: case MenuitemObject:
-	EnableMenuItem(obj->parent->handle,
+	EnableMenuItem((HMENU) (obj->parent->handle),
 		       obj->id, MF_ENABLED | MF_BYCOMMAND);
 	break;
     case FieldObject: case TextboxObject:
 	sendmessage(obj->handle, EM_SETREADONLY, FALSE, 0L);
 	break;
     default:
-	if (! isenabled(obj)) {
-	    EnableWindow(obj->handle, 1);
+	if (!isenabled(obj)) {
+	    EnableWindow((HWND) (obj->handle), 1);
 	    obj->state |= GA_Enabled;
 	    draw(obj);
 	}
@@ -355,14 +355,14 @@ void enable(control obj)
 
 void disable(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case CursorObject: case FontObject: case BitmapObject:
     case MenubarObject: case MenuObject:
 	break;
     case MenuitemObject:
-	EnableMenuItem(obj->parent->handle,
+	EnableMenuItem((HMENU) (obj->parent->handle),
 		       obj->id, MF_GRAYED | MF_BYCOMMAND);
 	break;
     case FieldObject: case TextboxObject:
@@ -370,7 +370,7 @@ void disable(control obj)
 	break;
     default:
 	if (isenabled(obj)) {
-	    EnableWindow(obj->handle, 0);
+	    EnableWindow((HWND) (obj->handle), 0);
 	    obj->state &= ~GA_Enabled;
 	    draw(obj);
 	}
@@ -380,7 +380,7 @@ void disable(control obj)
 
 int isenabled(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return 0;
     return (obj->state & GA_Enabled) ? 1 : 0;
 }
@@ -390,14 +390,14 @@ int isenabled(control obj)
  */
 void check(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case CursorObject: case FontObject: case BitmapObject:
     case MenubarObject: case MenuObject:
 	break;
     case MenuitemObject:
-	CheckMenuItem(obj->parent->handle, obj->id,
+	CheckMenuItem((HMENU) (obj->parent->handle), obj->id,
 		      MF_CHECKED | MF_BYCOMMAND);
 	break;
 #if USE_NATIVE_BUTTONS
@@ -411,7 +411,7 @@ void check(control obj)
 	break;
 #endif
     default:
-	if (! ischecked(obj)) {
+	if (!ischecked(obj)) {
 	    obj->state |= GA_Checked;
 	    draw(obj);
 	}
@@ -422,14 +422,14 @@ void check(control obj)
 
 void uncheck(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case CursorObject: case FontObject: case BitmapObject:
     case MenubarObject: case MenuObject:
 	break;
     case MenuitemObject:
-	CheckMenuItem(obj->parent->handle, obj->id,
+	CheckMenuItem((HMENU) (obj->parent->handle), obj->id,
 		      MF_UNCHECKED | MF_BYCOMMAND);
 	break;
 #if USE_NATIVE_BUTTONS
@@ -453,7 +453,7 @@ void uncheck(control obj)
 
 int ischecked(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return 0;
     return (obj->state & GA_Checked) ? 1 : 0;
 }
@@ -463,7 +463,7 @@ int ischecked(control obj)
  */
 void highlight(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case CursorObject: case FontObject: case BitmapObject:
@@ -483,7 +483,7 @@ void highlight(control obj)
 	sendmessage(obj->handle, EM_SETSEL, 0, MAKELONG(0,-1));
 	break;
     default:
-	if (! ishighlighted(obj)) {
+	if (!ishighlighted(obj)) {
 	    obj->state |= GA_Highlighted;
 	    draw(obj);
 	}
@@ -493,7 +493,7 @@ void highlight(control obj)
 
 void unhighlight(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case CursorObject: case FontObject: case BitmapObject:
@@ -523,7 +523,7 @@ void unhighlight(control obj)
 
 int ishighlighted(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return 0;
     return (obj->state & GA_Highlighted) ? 1 : 0;
 }
@@ -559,7 +559,7 @@ void flashcontrol(control obj)
  */
 void activatecontrol(control obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     drawto(obj);
     if (obj->action != NULL)
@@ -604,7 +604,7 @@ int getvalue(control obj)
 
 void setforeground(control obj, rgb fg)
 {
-    if (! obj)
+    if (!obj)
 	return;
     obj->fg = fg;
     if (obj->kind == TextboxObject) {
@@ -619,7 +619,7 @@ void setforeground(control obj, rgb fg)
 	    sendmessage(obj->handle, EM_SETCHARFORMAT, 0, (LPARAM)&format);
 	}
     } else {
-    	InvalidateRect(obj->handle, NULL, TRUE);
+    	InvalidateRect((HWND) (obj->handle), NULL, TRUE);
     	redraw(obj);
     }
 }
@@ -636,7 +636,7 @@ void setbackground(control obj, rgb bg)
 {
     COLORREF wincolour = RGB((bg&gaRed)>>16,(bg&gaGreen)>>8,(bg&gaBlue));
 
-    if (! obj)
+    if (!obj)
 	return;
     obj->bg = bg;
     if (obj->kind == TextboxObject) {
@@ -647,7 +647,7 @@ void setbackground(control obj, rgb bg)
 	    DeleteObject(obj->bgbrush);
     	obj->bgbrush = CreateSolidBrush(wincolour);
 
-    	InvalidateRect(obj->handle, NULL, TRUE);
+    	InvalidateRect((HWND) (obj->handle), NULL, TRUE);
     	redraw(obj);
     }
 }
@@ -700,9 +700,9 @@ void settext(control obj, const char *text)
 {
     char *old_text;
 
-    if (! obj)
+    if (!obj)
 	return;
-    if (! text)
+    if (!text)
 	text = "";
     old_text = GA_gettext(obj);
     if (old_text && strcmp(old_text, text) == 0)
@@ -723,8 +723,8 @@ void settext(control obj, const char *text)
 		int nc = strlen(text) + 1;
 		wc = (wchar_t*) alloca(nc*sizeof(wchar_t));
 		mbstowcs(wc, text, nc);
-		SetWindowTextW(obj->handle, wc);
-	    } else SetWindowText(obj->handle, text);
+		SetWindowTextW((HWND) (obj->handle), wc);
+	    } else SetWindowText((HWND) (obj->handle), text);
 	    discard(text);
 	}
 	if (obj->kind == MenuitemObject) {
@@ -732,11 +732,11 @@ void settext(control obj, const char *text)
 		/* But this does */
 		wchar_t wc[1000];
 		mbstowcs(wc, text, 1000);
-		ModifyMenuW(obj->parent->handle, obj->id,
+		ModifyMenuW((HMENU) (obj->parent->handle), obj->id,
 			    MF_BYCOMMAND|MF_STRING, obj->id, wc);
 
 	    } else
-		ModifyMenu(obj->parent->handle, obj->id,
+		ModifyMenu((HMENU) (obj->parent->handle), obj->id,
 			   MF_BYCOMMAND|MF_STRING, obj->id, text);
 	}
 
@@ -753,19 +753,19 @@ void settext(control obj, const char *text)
  */
 char *GA_gettext(control obj)
 {
-    static char *empty = "";
+    static char *empty = (char *) "";
     char *text;
     int length, index;
     HWND hwnd;
     UINT len_msg, gettext_msg;
     WPARAM arg1, arg2;
 
-    if (! obj)
+    if (!obj)
 	return empty;
     if ((obj->kind & ControlObject) == 0)
 	return obj->text ? obj->text : empty;
 
-    hwnd = obj->handle;
+    hwnd = (HWND) (obj->handle);
 
     switch (obj->kind) {
     case ListboxObject:
@@ -808,7 +808,7 @@ char *GA_gettext(control obj)
     obj->text = to_c_string(text);
     discard(text);
     /* Return the resultant string. */
-    if (! obj->text)
+    if (!obj->text)
 	obj->text = new_string(NULL);
     return obj->text;
 }
@@ -818,9 +818,9 @@ char *GA_gettext(control obj)
  */
 void settextfont(object obj, font f)
 {
-    if (! obj)
+    if (!obj)
 	return;
-    if (! f)
+    if (!f)
 	f = SystemFont;
     if (obj->drawstate) {
 	decrease_refcount(obj->drawstate->fnt);
@@ -842,7 +842,7 @@ font gettextfont(object obj)
 	if (obj->drawstate)
 	    f = obj->drawstate->fnt;
     }
-    if (! f)
+    if (!f)
 	f = SystemFont;
     return f;
 }
@@ -869,7 +869,7 @@ rect objrect(object obj)
     rect r;
     image img;
 
-    if (! obj)
+    if (!obj)
 	return rect(0,0,0,0);
 
     switch (obj->kind)
@@ -888,7 +888,7 @@ rect objrect(object obj)
 	r = obj->rect;
 	break;
     default:
-	GetClientRect(obj->handle, rect2RECT(&r));
+	GetClientRect((HWND) (obj->handle), rect2RECT(&r));
 	break;
     }
     return r;
@@ -911,7 +911,7 @@ int objdepth(object obj)
     HDC screendc;
     int depth;
 
-    if (! obj)
+    if (!obj)
 	return 0;
 
     switch (obj->kind)
@@ -936,7 +936,7 @@ int objdepth(object obj)
 
 void delobj(object obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind)
     {
@@ -953,7 +953,7 @@ void delobj(object obj)
 
 void setcaret(object obj, int x, int y, int width, int height)
 {
-    if (! obj)
+    if (!obj)
     	return;
     if (width > 0 && !(obj->state & GA_Focus)) {
 	/* prevent against accidental corruption of caret data while not in focus,
@@ -964,7 +964,7 @@ void setcaret(object obj, int x, int y, int width, int height)
     if (width != obj->caretwidth || height != obj->caretheight) {
 	if (obj->caretwidth > 0) {
 	  if (obj->caretshowing) /* preserve caretshowing */
-              HideCaret(obj->handle);
+              HideCaret((HWND) (obj->handle));
 	  /* we destroy the WinAPI caret also when loosing focus, as suggested */
 	  /* in Microsoft documentation */
 	  DestroyCaret();
@@ -974,11 +974,11 @@ void setcaret(object obj, int x, int y, int width, int height)
 	obj->caretheight = height;
 	if (width > 0) {
 	    if (obj->state & GA_Focus) {
-		CreateCaret(obj->handle, (HBITMAP) NULL, width, height);
+		CreateCaret((HWND) (obj->handle), (HBITMAP) NULL, width, height);
 		obj->caretexists = 1;
 	        if (obj->caretshowing)
 		    /* match preserved caretshowing */
-		    ShowCaret(obj->handle);
+		    ShowCaret((HWND) (obj->handle));
             }
 	}
     }
@@ -991,11 +991,11 @@ void setcaret(object obj, int x, int y, int width, int height)
 
 void showcaret(object obj, int showing)
 {
-    if (! obj || ! obj->caretexists || showing == obj->caretshowing)
+    if (!obj || !obj->caretexists || showing == obj->caretshowing)
     	return;
     obj->caretshowing = showing;
     if (showing)
-    	ShowCaret(obj->handle);
+    	ShowCaret((HWND) (obj->handle));
     else
-    	HideCaret(obj->handle);
+    	HideCaret((HWND) (obj->handle));
 }

@@ -66,7 +66,7 @@ PROTECTED
 void init_menus(void)
 {
     if (this_instance != 0)
-	hAccel = LoadAccelerators(this_instance, "ACCELS");
+	hAccel = LoadAccelerators((HINSTANCE) this_instance, "ACCELS");
 }
 
 /*
@@ -97,16 +97,16 @@ static void private_delmenu(menu m)
 {
     window w = parentwindow(m);
     if (m->kind == MenuitemObject)
-	RemoveMenu(m->parent->handle, m->id, MF_BYCOMMAND);
+	RemoveMenu((HMENU) (m->parent->handle), m->id, MF_BYCOMMAND);
     else if (m->kind == MenuObject) {
-	DeleteMenu(m->parent->handle,
+	DeleteMenu((HMENU) (m->parent->handle),
 		   find_menu_position(m->parent, m->text),
 		   MF_BYPOSITION);
     }
     else
-	DestroyMenu(m->handle);
+	DestroyMenu((HMENU) (m->handle));
     if (w)
-	DrawMenuBar(w->handle);
+	DrawMenuBar((HWND) (w->handle));
 }
 
 /*
@@ -141,9 +141,9 @@ static void set_search_string(char *search, const char *name, int key)
     mbstate_t mb_st;
 
     /* handle a couple of special cases first */
-    if (! string_diff(name, "Cut"))  search[dest++] = 't';
-    if (! string_diff(name, "Exit")) search[dest++] = 'x';
-    if (! string_diff(name, "?")) search[dest++] = '?';
+    if (!string_diff(name, "Cut"))  search[dest++] = 't';
+    if (!string_diff(name, "Exit")) search[dest++] = 'x';
+    if (!string_diff(name, "?")) search[dest++] = '?';
 
     {
 	/* If there is an '&' in the string, use the next letter first */
@@ -239,7 +239,7 @@ static void setmenustring(object obj, char *buf, const char *name, int key)
 {
     char search[256];
     int ch, where, source, dest = 0;
-    char *extra = "\tCtrl+";
+    char *extra = (char *) "\tCtrl+";
 
     set_search_string(search, name, key);
     ch = find_shortcut(obj, search);
@@ -292,7 +292,7 @@ menubar newmenubar(actionfn adjust_menus)
     object obj;
     HMENU hm;
 
-    if (! current_window) {
+    if (!current_window) {
 	current_window = simple_window();
 	show(current_window);
     }
@@ -307,7 +307,7 @@ menubar newmenubar(actionfn adjust_menus)
 	obj->action = adjust_menus;
 	obj->text = new_string("Menubar");
 	current_menubar = obj;
-	SetMenu(current_window->handle, hm);
+	SetMenu((HWND) (current_window->handle), hm);
     }
     return (menubar) obj;
 }
@@ -329,15 +329,15 @@ menu newsubmenu(menu parent, const char *name)
     HMENU hm;
     UINT flags = MF_POPUP;
     char str[256];
-    if (! parent) {
-	if (! current_menubar)
+    if (!parent) {
+	if (!current_menubar)
 	    current_menubar = newmenubar(NULL);
 	parent = current_menubar;
     }
 
-    if (! parent)
+    if (!parent)
 	return NULL;
-    if (! name)
+    if (!name)
 	name = "";
     if (name[0] == '\t') {
 	name += 1;
@@ -358,9 +358,9 @@ menu newsubmenu(menu parent, const char *name)
 	current_menu = obj;
     }
     if (parent->kind != WindowObject)
-	myAppendMenu(parent->handle, flags, (UINT_PTR) hm, name);
+	myAppendMenu((HMENU) (parent->handle), flags, (UINT_PTR) hm, name);
     if (parent == current_menubar)
-	DrawMenuBar(current_menubar->parent->handle);
+	DrawMenuBar((HWND) (current_menubar->parent->handle));
 
     return (menu) obj;
 }
@@ -377,11 +377,11 @@ menuitem newmenuitem(const char *name, int key, menufn fn)
     UINT flags;
     char str[256];
 
-    if (! current_menu)
+    if (!current_menu)
 	current_menu = newmenu("Special");
-    if (! current_menu)
+    if (!current_menu)
 	return NULL;
-    if (! name)
+    if (!name)
 	name = "-"; /* separator */
 
     key = toupper(key); /* make it uppercase */
@@ -405,7 +405,7 @@ menuitem newmenuitem(const char *name, int key, menufn fn)
 	    name = str;
 	}
 
-	myAppendMenu(current_menu->handle, flags, obj->id, name);
+	myAppendMenu((HMENU) (current_menu->handle), flags, obj->id, name);
     }
     return (menuitem) obj;
 }
@@ -452,7 +452,7 @@ void adjust_menu(WPARAM wParam)
     if (obj) {
 	activatecontrol(obj);
 	if (obj->kind == MenubarObject)
-	    DrawMenuBar(obj->parent->handle);
+	    DrawMenuBar((HWND) (obj->parent->handle));
     }
 }
 
@@ -481,14 +481,14 @@ void handle_menu_id (WPARAM wParam)
 static void adjust_menus_top_down(object obj)
 {
     /* Recursively step up the list. */
-    if (! obj)
+    if (!obj)
 	return;
     adjust_menus_top_down(obj->parent);
 
     /* Adjust menubar then child menus as we descend. */
     if (obj->kind == MenubarObject) {
 	activatecontrol(obj);
-	DrawMenuBar(obj->parent->handle);
+	DrawMenuBar((HWND) (obj->parent->handle));
     }
     else if (obj->kind == MenuObject)
 	activatecontrol(obj);

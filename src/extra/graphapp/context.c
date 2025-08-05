@@ -127,7 +127,7 @@ static void create_pen_and_brush(rgb c, unsigned long winrgb,
     the_pen = CreatePen(PS_INSIDEFRAME, width, winrgb);
 
     if ((depth == 1) && (c == Grey))
-	the_brush = CreatePatternBrush(grey_bitmap->handle);
+	the_brush = CreatePatternBrush((HBITMAP) (grey_bitmap->handle));
     else
 	the_brush = CreateSolidBrush(winrgb);
 }
@@ -160,14 +160,14 @@ void init_contexts(void)
 
 static void free_context(contextinfo *c)
 {
-    if (! c->dc)
+    if (!c->dc)
 	return; /* already been deleted */
 
     SelectObject(c->dc, GetStockObject(NULL_PEN));
     SelectObject(c->dc, GetStockObject(NULL_BRUSH));
 
     if (c->obj->kind & ControlObject)
-	ReleaseDC(c->obj->handle, c->dc);
+	ReleaseDC((HWND) (c->obj->handle), c->dc);
     else if (c->obj->kind == BitmapObject) {
 	SelectObject(c->dc, c->old_bitmap);
 	DeleteDC(c->dc);
@@ -231,7 +231,7 @@ HDC get_context(object obj)
 
     /* Use GetDC or CreateCompatibleDC to return a DC. */
     if (obj->kind & ControlObject) {
-	dc = GetDC(obj->handle);
+	dc = GetDC((HWND) (obj->handle));
 	add_context(obj, dc, 0);
     }
     else if (obj->kind == BitmapObject) {
@@ -437,7 +437,7 @@ void setlinewidth(int width)
  */
 void addto(object obj)
 {
-    if (! obj)
+    if (!obj)
 	return;
     switch (obj->kind) {
     case WindowObject:	current_window = obj;	break;
@@ -451,7 +451,7 @@ void addto(object obj)
  */
 void drawto(drawing d)
 {
-    if (! d) {
+    if (!d) {
 	current = & app_drawstate;
 	current->dest = NULL;
 	return;
@@ -476,7 +476,7 @@ void drawto(drawing d)
  */
 void setdrawstate(drawstate s)
 {
-    if (! s)
+    if (!s)
 	return;
     moveto(s->p);
     setdrawmode(s->mode);
@@ -491,7 +491,7 @@ void setdrawstate(drawstate s)
  */
 void restoredrawstate(drawstate s)
 {
-    if (! s)
+    if (!s)
 	return;
     setdrawstate(s);
     discard(s);

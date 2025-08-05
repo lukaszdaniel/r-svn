@@ -120,7 +120,7 @@ int myMessageBox(HWND h, const char *text, const char *caption, UINT type)
  */
 void apperror(const char *errstr)
 {
-    if (! errstr)
+    if (!errstr)
 	errstr = "Unspecified error";
     myMessageBox(0, errstr, "Graphics Library Error",
 		 MB_TASKMODAL | MB_ICONSTOP | MB_OK | TopmostDialogs);
@@ -129,7 +129,7 @@ void apperror(const char *errstr)
 
 void askok(const char *info)
 {
-    if (! info)
+    if (!info)
 	info = "";
     myMessageBox(0, info, "Information",
 		 MB_TASKMODAL | MB_ICONINFORMATION | MB_OK | TopmostDialogs);
@@ -139,7 +139,7 @@ int askokcancel(const char *question)
 {
     int result;
 
-    if (! question)
+    if (!question)
 	question = "";
     result = myMessageBox(0, question, G_("Question"),
 			  MB_TASKMODAL | MB_ICONQUESTION | MB_OKCANCEL | TopmostDialogs);
@@ -156,7 +156,7 @@ int askyesno(const char *question)
 {
     int result;
 
-    if (! question)
+    if (!question)
 	question = "";
     result = myMessageBox(0, question, G_("Question"),
 			  MB_TASKMODAL | MB_ICONQUESTION | MB_YESNO | TopmostDialogs);
@@ -173,7 +173,7 @@ int askyesnocancel(const char *question)
 {
     int result;
 
-    if (! question)
+    if (!question)
 	question = "";
     result = myMessageBox(0, question, G_("Question"),
 			  MB_TASKMODAL | MB_ICONQUESTION | MB_YESNOCANCEL | MB_SETFOREGROUND | TopmostDialogs);
@@ -294,7 +294,7 @@ char *askfilenames(const char *title, const char *default_name, int multi,
     if (!cod) savecod();
 
     ofn.lStructSize     = sizeof(OPENFILENAME);
-    ofn.hwndOwner       = current_window ? current_window->handle : 0;
+    ofn.hwndOwner       = (HWND) (current_window ? current_window->handle : 0);
     ofn.hInstance       = 0;
     ofn.lpstrFilter     = filters;
     ofn.lpstrCustomFilter = NULL;
@@ -380,7 +380,7 @@ wchar_t *askfilenamesW(const wchar_t *title, const wchar_t *default_name,
     }
 
     ofn.lStructSize     = sizeof(OPENFILENAME);
-    ofn.hwndOwner       = current_window ? current_window->handle : 0;
+    ofn.hwndOwner       = (HWND) (current_window ? current_window->handle : 0);
     ofn.hInstance       = 0;
     ofn.lpstrFilter     = filters;
     ofn.lpstrCustomFilter = NULL;
@@ -452,7 +452,7 @@ wchar_t *askfilesaveW(const char *title, const char *default_name)
     mbstowcs(wtitle, title, 1000);
 
     ofn.lStructSize     = sizeof(OPENFILENAME);
-    ofn.hwndOwner       = current_window ? current_window->handle : 0;
+    ofn.hwndOwner       = (HWND) (current_window ? current_window->handle : 0);
     ofn.hInstance       = 0;
     ofn.lpstrFilter     = userfilterW ? userfilterW : wfilter[0];
     ofn.lpstrCustomFilter = NULL;
@@ -504,7 +504,7 @@ char *askfilesavewithdir(const char *title, const char *default_name,
     strcpy(strbuf, default_name);
 
     ofn.lStructSize     = sizeof(OPENFILENAME);
-    ofn.hwndOwner       = current_window ? current_window->handle : 0;
+    ofn.hwndOwner       = (HWND) (current_window ? current_window->handle : 0);
     ofn.hInstance       = 0;
     ofn.lpstrFilter     = userfilter?userfilter:filter[0];
     ofn.lpstrCustomFilter = NULL;
@@ -581,7 +581,7 @@ static void add_data(window w)
     dialog_data *d;
 
     d = create (dialog_data);
-    if (! d)
+    if (!d)
 	return;
     d->hit = NOT_CHOSEN_YET;
 
@@ -678,7 +678,7 @@ static int handle_message_dialog(window w)
 
 void clickbutton(window w, button b) {
     sendmessage(w->handle, WM_COMMAND,
-	(BN_CLICKED << 16) | GetWindowLong(b->handle, GWL_ID),
+	(BN_CLICKED << 16) | GetWindowLong((HWND) (b->handle), GWL_ID),
 	b->handle);
 }
 
@@ -697,9 +697,9 @@ static window init_askstr_dialog(const char *title, const char *question,
     dialog_data *d;
     int tw, bw, h, middle;
 
-    if (! question)
+    if (!question)
 	question= "";
-    if (! default_str)
+    if (!default_str)
 	default_str = "";
 
     tw = strwidth(SystemFont, G_("Cancel")) * 8;
@@ -741,7 +741,7 @@ char *askstring(const char *question, const char *default_str)
     static window win = NULL;
     window prev = current_window;
 
-    if (! win)
+    if (!win)
 	win = init_askstr_dialog(QUESTION_TITLE, question, default_str);
     else {
 	settext(data(win)->question, question);
@@ -770,7 +770,7 @@ char *askcdstring(const char *question, const char *default_str)
 
     res = CoCreateInstance(&CLSID_FileOpenDialog, NULL, CLSCTX_INPROC_SERVER,
                      &IID_IFileOpenDialog, (void **)&fileOpen);
-    
+
     if (SUCCEEDED(res) && fileOpen && wquestion && wdefault_str) {
 	ok = SUCCEEDED(fileOpen->lpVtbl->GetOptions(fileOpen, &flags));
 	flags |= FOS_PICKFOLDERS | FOS_FILEMUSTEXIST |
@@ -790,7 +790,7 @@ char *askcdstring(const char *question, const char *default_str)
 	if (ok && dirsi) {
 	    nb = wcstombs(strbuf, wdir, BUFSIZE);
 	    if (nb == (size_t)-1 || nb >= BUFSIZE) {
-		strbuf[0] = 0;
+		strbuf[0] = '\0';
 		ok = 0;
 	    }
 	}
@@ -805,7 +805,7 @@ char *askcdstring(const char *question, const char *default_str)
 	free(wquestion);
     if (wdefault_str)
 	free(wdefault_str);
-    return ok ? strbuf : NULL; 
+    return ok ? strbuf : NULL;
 }
 
 char *askpassword(const char *question, const char *default_str)
@@ -813,7 +813,7 @@ char *askpassword(const char *question, const char *default_str)
     static window win = NULL;
     window prev = current_window;
 
-    if (! win)
+    if (!win)
 	win = init_askstr_dialog(PASSWORD_TITLE, question, default_str);
     else {
 	settext(data(win)->question, question);
@@ -833,7 +833,7 @@ char *askUserPass(const char *title)
     dialog_data *d;
     window prev = current_window;
 
-    if (! win) {
+    if (!win) {
 	int tw, bw, h, middle;
 
 	tw = strwidth(SystemFont, G_("Cancel")) * 8;
@@ -873,15 +873,15 @@ char *askUserPass(const char *title)
     {
 	char *user, *pass;
 	static char buf[1000];
-	if (d->hit < YES) /* cancelled */ return "";
+	if (d->hit < YES) /* cancelled */ return (char *) "";
 	if (d->text) user = new_string(GA_gettext(d->text));
-	else return "";
+	else return (char *) "";
 	if (d->pass) pass = new_string(GA_gettext(d->pass));
-	else return "";
+	else return (char *) "";
 	snprintf(buf, 1000, "%s:%s", user, pass);
 	return buf;
     }
-    return ""; /* -Wall */
+    return (char *) ""; /* -Wall */
 }
 
 int modeless_active(void)
@@ -903,7 +903,7 @@ void finddialog(textbox t)
     static char szFindWhat[80];
 
     fr.lStructSize = sizeof(fr);
-    fr.hwndOwner = t->handle;
+    fr.hwndOwner = (HWND) (t->handle);
     fr.lpstrFindWhat = szFindWhat;
     fr.wFindWhatLen = 80;
     fr.Flags = FR_DOWN;
@@ -921,7 +921,7 @@ void replacedialog(textbox t)
     static char szReplaceWith[80];
 
     fr.lStructSize = sizeof(fr);
-    fr.hwndOwner = t->handle;
+    fr.hwndOwner = (HWND) (t->handle);
     fr.lpstrFindWhat = szFindWhat;
     fr.lpstrReplaceWith = szReplaceWith;
     fr.wFindWhatLen = 80;

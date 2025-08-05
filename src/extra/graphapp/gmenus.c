@@ -79,7 +79,7 @@ void gchangemenubar(menubar mb)
     window w = current_window;
     if (!w) return;
     w->menubar = mb;
-    SetMenu(w->handle, mb->handle);
+    SetMenu((HWND) (w->handle), (HMENU) (mb->handle));
     if (ismdi()) {
 	menu mdi = (w->menubar)->menubar;
 	sendmessage(hwndClient, WM_MDISETMENU,
@@ -87,7 +87,7 @@ void gchangemenubar(menubar mb)
 		    (LPARAM)(mdi ? (mdi->handle) : 0));
 	DrawMenuBar(hwndFrame);
     } else
-	DrawMenuBar(w->handle);
+	DrawMenuBar((HWND) (w->handle));
 }
 
 /* FIXME: only one level of sub-menu - no checks -*/
