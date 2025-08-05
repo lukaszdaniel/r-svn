@@ -39,6 +39,9 @@
 /*#include "config.h" */
 #include <wchar.h>
 #define mbs_init(x) memset(&x,0,sizeof(x))
+#ifdef __cplusplus
+extern "C"
+#endif
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 
 /*
@@ -111,6 +114,9 @@ static void private_delmenu(menu m)
  *  Return -1 if not found, or a number from 0 to strlen(str)-1
  *  to indicate where the char is.
  */
+#ifdef __cplusplus
+extern "C"
+#endif
 char *Rf_strchr(const char *s, int c); /* from util.c, MBCS-aware */
 
 static int find_char(int ch, const char *str)

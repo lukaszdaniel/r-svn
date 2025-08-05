@@ -12,5 +12,4 @@ EXPORTS
  R_ContinueUnwind
  Rf_protect
  Rf_unprotect
- R_NilValue
 

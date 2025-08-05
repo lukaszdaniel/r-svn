@@ -858,7 +858,9 @@ static long handle_message(HWND hwnd, UINT message,
 
 typedef void *SEXP;
 typedef bool Rboolean;
-
+#ifdef __cplusplus
+extern "C" {
+#endif
 SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
                      void (*clean)(void *data, Rboolean jump), void *cdata,
                      SEXP cont);
@@ -866,6 +868,9 @@ SEXP R_MakeUnwindCont(void);
 SEXP Rf_protect(SEXP);
 void Rf_unprotect(int);
 void R_ContinueUnwind(SEXP cont);
+#ifdef __cplusplus
+} // extern "C"
+#endif
 #ifndef R_NilValue
 #define R_NilValue NULL
 #endif
@@ -921,7 +926,7 @@ LRESULT WINAPI wndproc_unwind (WNDPROC proc_real, HWND hwnd, UINT message,
     if (R_NilValue == NULL && !s_initialized) {
 	/* when R heap hasn't been initialized yet */
 	s_wndproc_cont_token = NULL;
-	s_initialized = true;
+	s_initialized = false; // for now
 	return proc_real(hwnd, message, wParam, lParam);
     }
     TRY
