@@ -177,6 +177,7 @@ for rgui/rterm/Rscript
 Rf_mbrtowc
 Rf_strchr
 localeCP
+win_R_Is_Running
 
 for graphapp.dll
 
