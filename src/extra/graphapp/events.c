@@ -684,8 +684,8 @@ static long handle_message(HWND hwnd, UINT message,
 	    HIMC            himc = ImmGetContext(hwnd);
 	    wchar_t         buf[80];
 	    wchar_t         *p;
-	    int             i;
-	    int             len;
+	    unsigned int    i;
+	    unsigned int    len;
 
 	    if(obj->flags & UseUnicode) {
 		/* len is GAbyte */
@@ -866,7 +866,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
                      SEXP cont);
 SEXP R_MakeUnwindCont(void);
 SEXP Rf_protect(SEXP);
-void Rf_unprotect(int);
+void Rf_unprotect(unsigned int);
 void R_ContinueUnwind(SEXP cont);
 #ifdef __cplusplus
 } // extern "C"
@@ -882,7 +882,7 @@ void R_ContinueUnwind(SEXP cont);
 #define ETRY }while(0); } }while(0)
 #define THROW(x) longjmp(*((jmp_buf *)data), x)
 
-static SEXP s_wndproc_cont_token;
+static SEXP s_wndproc_cont_token = NULL;
 
 static void wndproc_rethrow_error(void)
 {
@@ -920,13 +920,11 @@ LRESULT WINAPI wndproc_unwind (WNDPROC proc_real, HWND hwnd, UINT message,
 {
     wndproc_call w;
     volatile SEXP token;
-    static bool s_initialized = false;
+    bool is_initialized = (win_R_Is_Running > 0);
 
-// TODO: instead of if (R_NilValue == NULL && !s_initialized), better use if (R_Is_Running > 0)
-    if (R_NilValue == NULL && !s_initialized) {
+    if (!is_initialized) {
 	/* when R heap hasn't been initialized yet */
 	s_wndproc_cont_token = NULL;
-	s_initialized = false; // for now
 	return proc_real(hwnd, message, wParam, lParam);
     }
     TRY

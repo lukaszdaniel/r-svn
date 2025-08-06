@@ -69,6 +69,7 @@
         "iomanip": "cpp",
         "bitset": "cpp",
         "set": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "libextern.h": "c"
     }
 }

@@ -101,7 +101,7 @@ using namespace R;
 
 static void Renviron_warning(const char *msg)
 {
-    if (R_Is_Running > 1)
+    if (R_Is_Running == RStatus::STARTED)
 	warningcall(R_NilValue, "%s", msg);
     else
 	R_ShowMessage(msg);
@@ -109,7 +109,7 @@ static void Renviron_warning(const char *msg)
 
 static void Renviron_error(const char *msg)
 {
-    if (R_Is_Running > 1)
+    if (R_Is_Running == RStatus::STARTED)
 	errorcall(R_NilValue, "%s", msg);
     else
 	R_Suicide(msg);

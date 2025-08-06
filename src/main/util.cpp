@@ -1618,7 +1618,7 @@ size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
     used = mbrtowc(wc, s, n, ps);
     if((int) used < 0) {
 	/* This gets called from the menu setup in RGui */
-	if (!R_Is_Running) return (size_t)-1;
+	if (R_Is_Running == RStatus::NOT_STARTED) return (size_t)-1;
 	/* let's try to print out a readable version */
 	R_CheckStack2(4*strlen(s) + 10);
 	size_t sz = 4*strlen(s) + 1;
