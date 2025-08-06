@@ -977,13 +977,19 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
     }
     catch (JMPException &e)
     {
-        if (e.context() != &thiscontext)
-            throw;
+        // We want to intercept the jump to unwind
+        // so that R_ContinueUnwind() can be called
+        // to continue the unwind process.
+        // This is a bit of a hack to comply with CR's approach,
+        // but it allows us to handle the unwind in a controlled manner.
+        // Normally, we would have used below code:
+        // if (e.context() != &thiscontext)
+        //     throw;
         jump = TRUE;
         SETCAR(cont, e.value());
         unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
-        u->jumpmask = thiscontext.jumpmask;
-        u->jumptarget = nullptr;
+        u->jumpmask = e.mask();
+        u->jumptarget = e.context();
     }
 
     endcontext(&thiscontext);
