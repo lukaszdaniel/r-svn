@@ -1,3 +1,19 @@
+bibentry(bibtype = "Book",
+         key = "R:Box+Hunter+Hunter:2005",
+         title = "Statistics for Experimenters: Design, Innovation, and Discovery",
+         author = c(person(given = c("George", "Edward", "Pelham"),
+                           family = "Box"),
+                    person(given = c("J.", "Stuart"),
+                           family = "Hunter"),
+                    person(given = c("William", "G."),
+                           family = "Hunter")),
+         isbn = "978-0-471-71813-0",
+         lccn = "2004063780",
+         series = "Wiley Series in Probability and Statistics",
+         url = "https://books.google.at/books?id=oYUpAQAAMAAJ",
+         year = "2005",
+         publisher = "Wiley")
+
 bibentry(bibtype = "Article",
          key = "R:Cohen:1980",
          title = "On the Graphical Display of the Significant Components in Two-way Contingency Tables",
@@ -11,6 +27,29 @@ bibentry(bibtype = "Article",
                          family = "Cohen"),
          year = "1980",
          pages = "1025--1041")
+
+bibentry(bibtype = "Article",
+         key = "R:Emerson:1998",
+         author = person(given = c("J.", "W."),
+                         family = "Emerson"),
+         title = "Mosaic Displays in {S-PLUS}: A General Implementation and a Case Study",
+         journal = "ASA Statistical Computing and Statistical Graphics Newsletter",
+         year = "1998",
+         volume = "9",
+         number = "1",
+         pages = "17--23")
+
+bibentry(bibtype = "InProceedings",
+         key = "R:Friendly:1992",
+         author = person(given = "Michael",
+                         family = "Friendly"),
+         title = "Graphical Methods for Categorical Data",
+         booktitle = "Proceedings of the Seventeenth Annual SAS User's Group International Conference",
+         year = "1992",
+         pages = "1367--1373",
+         publisher = "SAS Publishing",
+         url = "http://datavis.ca/papers/sugi/sugi17.pdf",
+         publisherurl = "https://support.sas.com/resources/papers/proceedings-archive/SUGI92/Sugi-92-233\\%20Friendly.pdf")
 
 bibentry(bibtype = "Article",
          key = "R:Friendly:1994",
@@ -45,6 +84,16 @@ bibentry(bibtype = "Article",
          month = "feb",
          pages = "32--35",
          .doi = "10.2307/2683556")
+
+bibentry(bibtype = "Article",
+         key = "R:Hummel:1996",
+         author = person(given = "J.",
+                         family = "Hummel"),
+         title = "Linked Bar Charts: Analysing Categorical Data Graphically",
+         journal = "Computational Statistics",
+         year = "1996",
+         volume = "11",
+         pages = "23--33")
 
 bibentry(bibtype = "Article",
          key = "R:Meyer+Zeileis+Hornik:2006",
@@ -100,3 +149,14 @@ bibentry(bibtype = "Article",
          month = "nov",
          pages = "303--305",
          .doi = "10.2307/2684839")
+
+bibentry(bibtype = "Book",
+         key = "R:Wild+Seber:1999",
+         title = "Chance Encounters: A First Course in Data Analysis and Inference",
+         author = c(person(given = c("Christopher", "J."),
+                           family = "Wild"),
+                    person(given = c("George", "A.", "F."),
+                           family = "Seber")),
+         isbn = "0-471-32936-3",
+         year = "1999",
+         publisher = "John Wiley and Sons")
