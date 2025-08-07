@@ -985,7 +985,8 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
         // Normally, we would have used below code:
         // if (e.context() != &thiscontext)
         //     throw;
-        jump = TRUE;
+        if (e.context() != &thiscontext)
+            jump = TRUE;
         SETCAR(cont, e.value());
         unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
         u->jumpmask = e.mask();
