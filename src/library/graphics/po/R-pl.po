@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-08-08 09:52\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -805,7 +805,7 @@ msgstr[0] "Wartość oddalona (%s) na wykresie pudełkowym %d nie została narys
 msgstr[1] "Wartości oddalone (%s) na wykresie pudełkowym %d nie zostały narysowane"
 msgstr[2] "Wartości oddalone (%s) na wykresie pudełkowym %d nie zostały narysowane"
 
-#. R/hist.R: ngettext(sum(not.miss), "argument %s is not made use of", "arguments %s are not made use of")
+#. R/hist.R: ngettext(nnmiss, "argument %s is not made use of", "arguments %s are not made use of")
 #: R/hist.R:0
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"

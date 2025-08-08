@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-27 16:02+0200\n"
+"POT-Creation-Date: 2025-08-08 09:51+0200\n"
 "PO-Revision-Date: 2025-07-06 14:58+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1137,7 +1137,7 @@ msgstr "matriz singular em 'backsolve'. Primeiro zero na diagonal [%d]"
 
 #: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306
 #: src/main/attrib.cpp:324 src/main/attrib.cpp:456 src/main/attrib.cpp:503
-#: src/main/attrib.cpp:557 src/main/RObject.cpp:129
+#: src/main/attrib.cpp:557 src/main/RObject.cpp:130
 msgid "attempt to set an attribute on NULL"
 msgstr "tentativa de especificar um atributo em um NULL"
 
@@ -4814,7 +4814,7 @@ msgstr "estouro da pilha de contexto"
 msgid "unexpected input"
 msgstr "%s inesperado"
 
-#: src/main/gram.cpp:4699 src/main/gram.y:2390 src/main/main.cpp:349
+#: src/main/gram.cpp:4699 src/main/gram.y:2390 src/main/main.cpp:348
 #, fuzzy
 msgid "unexpected end of input"
 msgstr "fim da entrada"
@@ -5245,89 +5245,89 @@ msgstr "coerção de argumento de tipo '%s' para lógico"
 msgid "dummy - do not translate"
 msgstr "dummy"
 
-#: src/main/main.cpp:388
+#: src/main/main.cpp:387
 msgid "error during cleanup\n"
 msgstr "Erros durante o embrulho\n"
 
-#: src/main/main.cpp:397
+#: src/main/main.cpp:396
 msgid "Execution halted\n"
 msgstr "Execução interrompida\n"
 
-#: src/main/main.cpp:515
+#: src/main/main.cpp:514
 msgid "ignoring 'SIGPIPE' signal"
 msgstr ""
 
-#: src/main/main.cpp:531
+#: src/main/main.cpp:530
 msgid "caught access violation - continue with care"
 msgstr ""
 
-#: src/main/main.cpp:564
+#: src/main/main.cpp:563
 msgid "Error: segfault from C stack overflow\n"
 msgstr "Erro: falha de segmentação na pilha C\n"
 
-#: src/main/main.cpp:717
+#: src/main/main.cpp:716
 msgid "failed to set alternate signal stack"
 msgstr ""
 
-#: src/main/main.cpp:719
+#: src/main/main.cpp:718
 msgid "failed to allocate alternate signal stack"
 msgstr ""
 
-#: src/main/main.cpp:788
+#: src/main/main.cpp:787
 #, fuzzy
 msgid "allocation failure in BindDomain"
 msgstr "falha de alocação em R_tmpnam2"
 
-#: src/main/main.cpp:842
+#: src/main/main.cpp:841
 #, fuzzy
 msgid "invalid parameter passed to a C runtime function"
 msgstr "objeto inválido: deve ser uma função primitiva"
 
-#: src/main/main.cpp:943
+#: src/main/main.cpp:942
 #, c-format
 msgid "Setting LC_COLLATE=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:948
+#: src/main/main.cpp:947
 #, c-format
 msgid "Setting LC_CTYPE=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:953
+#: src/main/main.cpp:952
 #, c-format
 msgid "Setting LC_MONETARY=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:958
+#: src/main/main.cpp:957
 #, c-format
 msgid "Setting LC_TIME=%.200s failed\n"
 msgstr ""
 
-#: src/main/main.cpp:986
+#: src/main/main.cpp:985
 msgid "Setting LC_CTYPE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:989
+#: src/main/main.cpp:988
 msgid "Setting LC_COLLATE failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:992
+#: src/main/main.cpp:991
 msgid "Setting LC_TIME failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:996
+#: src/main/main.cpp:995
 msgid "Setting LC_MESSAGES failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1002
+#: src/main/main.cpp:1001
 msgid "Setting LC_MONETARY failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1007
+#: src/main/main.cpp:1006
 msgid "Setting LC_PAPER failed, using \"C\"\n"
 msgstr ""
 
-#: src/main/main.cpp:1012
+#: src/main/main.cpp:1011
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr ""
 
@@ -5922,7 +5922,7 @@ msgstr "argumento para standardGeneric deve ser uma string de caracteres não va
 msgid "call to standardGeneric(\"%s\") apparently not from the body of that generic function"
 msgstr "chamada de standardGeneric(\"%s\") aparentemente não originada do corpo de uma função genérica"
 
-#: src/main/objects.cpp:1366 src/main/raw.cpp:214 src/main/Renviron.cpp:533
+#: src/main/objects.cpp:1366 src/main/raw.cpp:214 src/main/Renviron.cpp:535
 #, c-format
 msgid "argument '%s' must be a character string"
 msgstr "argumento '%s' deve ser uma string"
@@ -7028,37 +7028,37 @@ msgstr "comparação inválida com valores complexos"
 msgid "'a' and 'b' must have the same type"
 msgstr "'data' deve ser de tipo vetor"
 
-#: src/main/Renviron.cpp:280
+#: src/main/Renviron.cpp:282
 #, c-format
 msgid "problem in setting variable '%s' in Renviron"
 msgstr "problema ao configurar a variável '%s' no Renviron"
 
-#: src/main/Renviron.cpp:387
+#: src/main/Renviron.cpp:389
 msgid "path to system Renviron is too long: skipping"
 msgstr ""
 
-#: src/main/Renviron.cpp:405
+#: src/main/Renviron.cpp:407
 #, fuzzy
 msgid "cannot find system Renviron"
 msgstr "não é possível remover a classe de um ambiente"
 
-#: src/main/Renviron.cpp:427
+#: src/main/Renviron.cpp:429
 msgid "path to arch-specific Renviron.site is too long: skipping"
 msgstr ""
 
-#: src/main/Renviron.cpp:446
+#: src/main/Renviron.cpp:448
 msgid "path to Renviron.site is too long: skipping"
 msgstr ""
 
-#: src/main/Renviron.cpp:463
+#: src/main/Renviron.cpp:465
 msgid "path to arch-specific user Renviron is too long: skipping"
 msgstr ""
 
-#: src/main/Renviron.cpp:497
+#: src/main/Renviron.cpp:499
 msgid "path to user Renviron is too long: skipping"
 msgstr ""
 
-#: src/main/Renviron.cpp:537
+#: src/main/Renviron.cpp:539
 #, c-format
 msgid "file '%s' cannot be opened for reading"
 msgstr "arquivo '%s' não pode ser aberto para leitura"
@@ -7160,12 +7160,12 @@ msgstr "semente especificada não é um inteiro válido"
 msgid "function '.TAOCP1997init' is missing"
 msgstr ""
 
-#: src/main/RObject.cpp:132
+#: src/main/RObject.cpp:133
 #, fuzzy
 msgid "cannot set attribute on a 'CHARSXP'"
 msgstr "não é possível definir atributo em um símbolo"
 
-#: src/main/RObject.cpp:137
+#: src/main/RObject.cpp:138
 #, fuzzy, c-format
 msgid "cannot set attribute on a '%s'"
 msgstr "não é possível definir atributo em um símbolo"

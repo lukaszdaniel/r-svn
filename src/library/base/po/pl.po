@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-27 16:02+0200\n"
+"POT-Creation-Date: 2025-08-08 09:51+0200\n"
 "PO-Revision-Date: 2025-07-12 12:19+0200\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1141,7 +1141,7 @@ msgstr "osobliwa macierz w 'backsolve()'. Pierwsze zero na diagonali [%d]"
 
 #: src/main/attrib.cpp:65 src/main/attrib.cpp:276 src/main/attrib.cpp:306
 #: src/main/attrib.cpp:324 src/main/attrib.cpp:456 src/main/attrib.cpp:503
-#: src/main/attrib.cpp:557 src/main/RObject.cpp:129
+#: src/main/attrib.cpp:557 src/main/RObject.cpp:130
 msgid "attempt to set an attribute on NULL"
 msgstr "próba ustawienia atrybutu na wartości NULL"
 
@@ -4730,7 +4730,7 @@ msgstr "przepełniony stos kontekstu (%s:%d:%d)"
 msgid "unexpected input"
 msgstr "nieoczekiwane wejście"
 
-#: src/main/gram.cpp:4699 src/main/gram.y:2390 src/main/main.cpp:349
+#: src/main/gram.cpp:4699 src/main/gram.y:2390 src/main/main.cpp:348
 msgid "unexpected end of input"
 msgstr "nieoczekiwany koniec wejścia"
 
@@ -5152,87 +5152,87 @@ msgstr "przekształcenie argumentu typu '%s' w logiczny"
 msgid "dummy - do not translate"
 msgstr "wydmuszka - nie tłumacz tego"
 
-#: src/main/main.cpp:388
+#: src/main/main.cpp:387
 msgid "error during cleanup\n"
 msgstr "błąd podczas czyszczenia\n"
 
-#: src/main/main.cpp:397
+#: src/main/main.cpp:396
 msgid "Execution halted\n"
 msgstr "Wykonywanie wstrzymane\n"
 
-#: src/main/main.cpp:515
+#: src/main/main.cpp:514
 msgid "ignoring 'SIGPIPE' signal"
 msgstr "ignorowanie sygnału 'SIGPIPE'"
 
-#: src/main/main.cpp:531
+#: src/main/main.cpp:530
 msgid "caught access violation - continue with care"
 msgstr "wychwycono naruszenie zasad dostępu - kontynuuj z ostrożnością"
 
-#: src/main/main.cpp:564
+#: src/main/main.cpp:563
 msgid "Error: segfault from C stack overflow\n"
 msgstr "Błąd: błąd segmentacji z przepełnionego stosu C\n"
 
-#: src/main/main.cpp:717
+#: src/main/main.cpp:716
 msgid "failed to set alternate signal stack"
 msgstr "nie udało się ustawić alternatywnego stosu sygnału"
 
-#: src/main/main.cpp:719
+#: src/main/main.cpp:718
 msgid "failed to allocate alternate signal stack"
 msgstr "nie udało się przydzielić alternatywnego stosu sygnału"
 
-#: src/main/main.cpp:788
+#: src/main/main.cpp:787
 msgid "allocation failure in BindDomain"
 msgstr "błąd przydziału pamięci w 'BindDomain'"
 
-#: src/main/main.cpp:842
+#: src/main/main.cpp:841
 msgid "invalid parameter passed to a C runtime function"
 msgstr "niepoprawny parametr przekazany do funkcji środowiska wykonawczego C"
 
-#: src/main/main.cpp:943
+#: src/main/main.cpp:942
 #, c-format
 msgid "Setting LC_COLLATE=%.200s failed\n"
 msgstr "Ustawianie LC_COLLATE=%.200s nie powiodło się\n"
 
-#: src/main/main.cpp:948
+#: src/main/main.cpp:947
 #, c-format
 msgid "Setting LC_CTYPE=%.200s failed\n"
 msgstr "Ustawianie LC_CTYPE=%.200s nie powiodło się\n"
 
-#: src/main/main.cpp:953
+#: src/main/main.cpp:952
 #, c-format
 msgid "Setting LC_MONETARY=%.200s failed\n"
 msgstr "Ustawianie LC_MONETARY=%.200s nie powiodło się\n"
 
-#: src/main/main.cpp:958
+#: src/main/main.cpp:957
 #, c-format
 msgid "Setting LC_TIME=%.200s failed\n"
 msgstr "Ustawianie LC_TIME=%.200s nie powiodło się\n"
 
-#: src/main/main.cpp:986
+#: src/main/main.cpp:985
 msgid "Setting LC_CTYPE failed, using \"C\"\n"
 msgstr "Ustawianie LC_CTYPE nie powiodło się, używanie \"C\"\n"
 
-#: src/main/main.cpp:989
+#: src/main/main.cpp:988
 msgid "Setting LC_COLLATE failed, using \"C\"\n"
 msgstr "Ustawianie LC_COLLATE nie powiodło się, używanie \"C\"\n"
 
-#: src/main/main.cpp:992
+#: src/main/main.cpp:991
 msgid "Setting LC_TIME failed, using \"C\"\n"
 msgstr "Ustawianie LC_TIME nie powiodło się, używanie \"C\"\n"
 
-#: src/main/main.cpp:996
+#: src/main/main.cpp:995
 msgid "Setting LC_MESSAGES failed, using \"C\"\n"
 msgstr "Ustawianie LC_MESSAGES nie powiodło się, używanie \"C\"\n"
 
-#: src/main/main.cpp:1002
+#: src/main/main.cpp:1001
 msgid "Setting LC_MONETARY failed, using \"C\"\n"
 msgstr "Ustawianie LC_MONETARY nie powiodło się, używanie \"C\"\n"
 
-#: src/main/main.cpp:1007
+#: src/main/main.cpp:1006
 msgid "Setting LC_PAPER failed, using \"C\"\n"
 msgstr "Ustawianie LC_PAPER nie powiodło się, używanie \"C\"\n"
 
-#: src/main/main.cpp:1012
+#: src/main/main.cpp:1011
 msgid "Setting LC_MEASUREMENT failed, using \"C\"\n"
 msgstr "Ustawianie LC_MEASUREMENT nie powiodło się, używanie \"C\"\n"
 
@@ -5814,7 +5814,7 @@ msgstr "argument przekazywany do 'standardGeneric()' musi być niepustym ciągie
 msgid "call to standardGeneric(\"%s\") apparently not from the body of that generic function"
 msgstr "wywołanie dla 'standardGeneric' (\"%s\") najwyraźniej nie zostało wysłane z ciała funkcji ogólnej"
 
-#: src/main/objects.cpp:1366 src/main/raw.cpp:214 src/main/Renviron.cpp:533
+#: src/main/objects.cpp:1366 src/main/raw.cpp:214 src/main/Renviron.cpp:535
 #, c-format
 msgid "argument '%s' must be a character string"
 msgstr "argument '%s' musi być ciągiem znaków"
@@ -6881,36 +6881,36 @@ msgstr "niepoprawne porównanie wartości zespolonych"
 msgid "'a' and 'b' must have the same type"
 msgstr "'A' oraz 'B' muszą mieć ten sam typ"
 
-#: src/main/Renviron.cpp:280
+#: src/main/Renviron.cpp:282
 #, c-format
 msgid "problem in setting variable '%s' in Renviron"
 msgstr "problem z ustawieniem zmiennej '%s' w środowisku R"
 
-#: src/main/Renviron.cpp:387
+#: src/main/Renviron.cpp:389
 msgid "path to system Renviron is too long: skipping"
 msgstr "ścieżka do systemowego Renviron jest zbyt długa: pomijanie"
 
-#: src/main/Renviron.cpp:405
+#: src/main/Renviron.cpp:407
 msgid "cannot find system Renviron"
 msgstr "nie można znaleźć systemowego środowiska R"
 
-#: src/main/Renviron.cpp:427
+#: src/main/Renviron.cpp:429
 msgid "path to arch-specific Renviron.site is too long: skipping"
 msgstr "ścieżka do Renviron.site zależnego od architektury jest zbyt długa: pomijanie"
 
-#: src/main/Renviron.cpp:446
+#: src/main/Renviron.cpp:448
 msgid "path to Renviron.site is too long: skipping"
 msgstr "ścieżka do Renviron.site jest zbyt długa: pomijanie"
 
-#: src/main/Renviron.cpp:463
+#: src/main/Renviron.cpp:465
 msgid "path to arch-specific user Renviron is too long: skipping"
 msgstr "ścieżka do pliku Renviron zależnego od architektury jest zbyt długa: pomijanie"
 
-#: src/main/Renviron.cpp:497
+#: src/main/Renviron.cpp:499
 msgid "path to user Renviron is too long: skipping"
 msgstr "ścieżka do pliku Renviron użytkownika jest zbyt długa: pomijanie"
 
-#: src/main/Renviron.cpp:537
+#: src/main/Renviron.cpp:539
 #, c-format
 msgid "file '%s' cannot be opened for reading"
 msgstr "plik '%s' nie może zostać otwarty do odczytu"
@@ -7012,11 +7012,11 @@ msgstr "podane ziarno nie jest poprawną liczbą całkowitą"
 msgid "function '.TAOCP1997init' is missing"
 msgstr "brakuje funkcji '.TAOCP1997init'"
 
-#: src/main/RObject.cpp:132
+#: src/main/RObject.cpp:133
 msgid "cannot set attribute on a 'CHARSXP'"
 msgstr "nie można ustawić atrybutu na 'CHARSXP'"
 
-#: src/main/RObject.cpp:137
+#: src/main/RObject.cpp:138
 #, c-format
 msgid "cannot set attribute on a '%s'"
 msgstr "nie można ustawić atrybutu na '%s'"

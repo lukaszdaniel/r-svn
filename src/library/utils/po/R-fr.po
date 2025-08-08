@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-27 16:03\n"
+"POT-Creation-Date: 2025-08-08 09:52\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -999,6 +999,11 @@ msgstr "impossible de déterminer le nom d’importation"
 #: R/edit.R:0
 msgid "cannot edit NULL row names"
 msgstr "impossible d'éditer des noms de lignes NULL"
+
+#. R/windows/install.packages.R: gettextf("cannot extract package from %s", sQuote(pkg))
+#: R/windows/install.packages.R:0
+msgid "cannot extract package from %s"
+msgstr ""
 
 #. R/tar.R: stop("cannot extract through symlink")
 #: R/tar.R:0

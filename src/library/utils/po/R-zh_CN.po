@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-27 16:03\n"
+"POT-Creation-Date: 2025-08-08 09:52\n"
 "PO-Revision-Date: 2025-07-06 16:14+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1013,6 +1013,12 @@ msgstr "无法指定一个可以用的名称"
 #: R/edit.R:0
 msgid "cannot edit NULL row names"
 msgstr "无法修改NULL行名"
+
+#. R/windows/install.packages.R: gettextf("cannot extract package from %s", sQuote(pkg))
+#: R/windows/install.packages.R:0
+#, fuzzy
+msgid "cannot extract package from %s"
+msgstr "无法建立HTML程序包索引"
 
 #. R/tar.R: stop("cannot extract through symlink")
 #: R/tar.R:0
@@ -2672,9 +2678,6 @@ msgstr[0] "没有%s这个程序包(给%s用)"
 
 #~ msgid "Making links in per-session dir ..."
 #~ msgstr "在每會期文件目录里建立联结…"
-
-#~ msgid "cannot create HTML package index"
-#~ msgstr "无法建立HTML程序包索引"
 
 #~ msgid "cannot create HTML search index"
 #~ msgstr "无法建立HTML搜索索引"
