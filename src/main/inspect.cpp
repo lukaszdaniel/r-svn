@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2009-2023 The R Core Team.
+ *  Copyright (C) 2009-2025 The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -154,7 +154,7 @@ static void inspect_tree(int pre, SEXP v, int deep, int pvec) {
     switch (TYPEOF(v)) {
     case VECSXP: case STRSXP: case LGLSXP: case INTSXP: case RAWSXP:
     case REALSXP: case CPLXSXP: case EXPRSXP:
-	Rprintf("(len=%ld, tl=%ld)", (long)XLENGTH(v), (long)XTRUELENGTH(v));
+	Rprintf("(len=%lld, tl=%lld)", (long long)XLENGTH(v), (long long)XTRUELENGTH(v));
     default:
 	break;
     }
