@@ -547,15 +547,24 @@ namespace CXXR
 #endif
     };
 
+    enum RStatus
+    {
+        NOT_STARTED = 0,
+        INITIALIZED = 1,
+        STARTED = 2
+    };
+
     class GlobalParameter
     {
     public:
+        static enum RStatus s_R_Is_Running; /* for Windows memory manager */
         static bool s_mbcslocale;
 #ifdef _WIN32
         static bool s_UserBreak;
 #endif
         GlobalParameter() = delete;
     };
+#define R_Is_Running CXXR::GlobalParameter::s_R_Is_Running
 #define UserBreak CXXR::GlobalParameter::s_UserBreak
 } // namespace CXXR
 
@@ -852,6 +861,15 @@ extern "C"
     Rboolean Rf_inherits(SEXP s, const char *name);
 
     void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);
+
+    /** @brief Get the status of R.
+     *
+     * @return The status of R, as an unsigned int.  The value is one
+     * of the RStatus enum values.
+     *
+     * @note Used in graphapp/event.c
+     */
+    unsigned int R_status(void);
 } // extern "C"
 
 #endif /* ROBJECT_HPP */

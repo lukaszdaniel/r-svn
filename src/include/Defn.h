@@ -1198,13 +1198,6 @@ extern0 R_size_t R_VSize  INI_as(R_VSIZE);/* Size of the vector heap */
 // extern0 SEXP	R_NHeap;	    /* Start of the cons cell heap */
 extern0 SEXP	R_FreeSEXP;	    /* Cons cell free list */
 // extern0 R_size_t R_Collected;	    /* Number of free cons cells (after gc) */
-enum RStatus
-{
-    NOT_STARTED = 0,
-    INITIALIZED = 1,
-    STARTED = 2
-};
-extern0 RStatus R_Is_Running INI_as(RStatus::NOT_STARTED);	    /* for Windows memory manager */
 
 /* The Pointer Protection Stack */
 // LibExtern size_t	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) */
@@ -2191,7 +2184,6 @@ extern bool R_isForkedChild		INI_as(FALSE); /* was this forked? */
 
 #ifdef Win32
 LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */ // declared in internal.h
-LibExtern unsigned int win_R_Is_Running INI_as(0);	    /* for Windows memory manager */ // used in graphapp/event.c
 #endif
 
 /* pre-allocated boolean values */

@@ -1035,9 +1035,7 @@ void setup_Rmainloop(void)
     R_InitConditions();
 
     R_Is_Running = RStatus::INITIALIZED;
-#ifdef Win32
-    win_R_Is_Running = 1;
-#endif
+
     R_check_locale();
 #ifdef Win32
     if (localeCP && systemCP != localeCP)
@@ -1239,9 +1237,6 @@ void setup_Rmainloop(void)
     }
 
     R_Is_Running = RStatus::STARTED;
-#ifdef Win32
-    win_R_Is_Running = 2;
-#endif
 }
 
 extern SA_TYPE SaveAction; /* from src/main/startup.c */

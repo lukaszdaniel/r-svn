@@ -58,6 +58,7 @@ namespace CXXR
         const auto &SETLEVELSptr = SETLEVELS;
     } // namespace ForceNonInline
 
+    RStatus GlobalParameter::s_R_Is_Running = RStatus::NOT_STARTED;
     bool GlobalParameter::s_mbcslocale = false;
 #ifdef _WIN32
     bool GlobalParameter::s_UserBreak = false;
@@ -242,3 +243,7 @@ namespace R
 
 // ***** C interface *****
 
+unsigned int R_status(void)
+{
+    return R_Is_Running;
+}

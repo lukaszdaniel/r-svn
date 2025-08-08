@@ -12,5 +12,5 @@ EXPORTS
  R_ContinueUnwind
  Rf_protect
  Rf_unprotect
- win_R_Is_Running
+ R_status
 

@@ -861,6 +861,7 @@ typedef bool Rboolean;
 #ifdef __cplusplus
 extern "C" {
 #endif
+unsigned int R_status(void);
 SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
                      void (*clean)(void *data, Rboolean jump), void *cdata,
                      SEXP cont);
@@ -920,7 +921,7 @@ LRESULT WINAPI wndproc_unwind (WNDPROC proc_real, HWND hwnd, UINT message,
 {
     wndproc_call w;
     volatile SEXP token;
-    bool is_initialized = (win_R_Is_Running > 0);
+    bool is_initialized = (R_status() > 0);
 
     if (!is_initialized) {
 	/* when R heap hasn't been initialized yet */

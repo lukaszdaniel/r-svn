@@ -85,6 +85,7 @@ static void Renviron_error(const char *msg)
 #  include <config.h>
 # endif
 
+#include <CXXR/RObject.hpp> // for R_Is_Running
 # include <Defn.h>
 # include <Rembedded.h>
 # include <Fileio.h>
@@ -95,6 +96,7 @@ static void Renviron_error(const char *msg)
 # endif
 
 using namespace R;
+using namespace CXXR;
 
 # define Renviron_strchr Rf_strchr
 # define Renviron_snprintf Rsnprintf_mbcs
@@ -128,7 +130,7 @@ static void *Renviron_malloc(size_t size)
 /* remove leading and trailing space */
 static char *rmspace(char *s)
 {
-    ssize_t i; // to be safe
+    ssize_t i = 0; // to be safe
 
     for (i = strlen(s) - 1; i >= 0 && isspace((int)s[i]); i--) s[i] = '\0';
     for (i = 0; isspace((int)s[i]); i++);
