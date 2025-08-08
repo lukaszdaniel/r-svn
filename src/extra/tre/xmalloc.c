@@ -342,7 +342,7 @@ void *xrealloc_impl(void *ptr, size_t new_size, const char *file, int line,
     xmalloc_fail_after--;
 
   new_ptr = realloc(ptr, new_size);
-  if (new_ptr != NULL)
+  if (new_ptr != NULL && new_ptr != ptr)
     {
       hash_table_del(xmalloc_table, ptr); /* -Wuse-after-free is false alarm */
       hash_table_add(xmalloc_table, new_ptr, (int)new_size, file, line, func);
