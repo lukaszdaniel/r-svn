@@ -2201,7 +2201,6 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
     int n, len, maxlen = 0;
     HashData data = { 0 };
     const char *csep, *ss;
-    const void *vmax;
 
     checkArity(op, args);
     names = CAR(args);
@@ -2213,12 +2212,11 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("'%s' must be a character string"), "sep");
     csep = translateChar(STRING_ELT(sep, 0));
     PROTECT(ans = allocVector(STRSXP, n));
-    vmax = vmaxget();
     for(i = 0; i < n; i++) {
+	CXXR::RAllocStack::Scope rscope;
 	SET_STRING_ELT(ans, i, STRING_ELT(names, i));
 	len = (int) strlen(translateChar(STRING_ELT(names, i)));
 	if(len > maxlen) maxlen = len;
-	vmaxset(vmax);
     }
     if(n > 1) {
 	/* +2 for terminator and rounding error */

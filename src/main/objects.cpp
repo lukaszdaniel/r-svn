@@ -513,10 +513,9 @@ std::pair<bool, RObject *> R::usemethod(const char *generic, SEXP obj, SEXP call
 
     int nclass = length(klass);
     for (int i = 0; i < nclass; i++) {
-	const void *vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	const char *ss = translateChar(STRING_ELT(klass, i));
 	method = installS3Signature(generic, ss);
-	vmaxset(vmax);
 	sxp = R_LookupMethod(method, rho, callrho, defrho);
 	if (isFunction(sxp)) {
 	    if(method == R_SortListSymbol && CLOENV(sxp) == R_BaseNamespace)

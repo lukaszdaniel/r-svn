@@ -94,6 +94,9 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #endif
 
 #include <cerrno>
+#include <array>
+#include <algorithm>
+#include <utility>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -321,13 +324,13 @@ attribute_hidden SEXP do_nchar(SEXP call, SEXP op, SEXP args, SEXP env)
     // will work also for code byte-compiled *before* 'keepNA' was introduced
     if (nargs < 3 || nargs > 4)
 	error(n_("%d argument passed to '%s' which requires %d to %d",
-		       "%d arguments passed to '%s' which requires %d to %d",
+		 "%d arguments passed to '%s' which requires %d to %d",
 			   (unsigned long) nargs),
 	      nargs, PRIMNAME(op), 3, 4);
 #endif
     /* DispatchOrEval internal generic: nchar */
     if (DispatchOrEval(call, op, "nchar", args, env, &ans, 0, 1))
-      return(ans);
+      return ans;
     if (isFactor(CAR(args)))
 	error(_("'%s' requires a character vector"), "nchar()");
     PROTECT(x = coerceVector(CAR(args), STRSXP));
@@ -651,7 +654,6 @@ attribute_hidden SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
     cetype_t ienc, venc;
     const char *ss, *v_ss;
     char *buf;
-    const void *vmax;
 
     checkArity(op, args);
     x = CAR(args);
@@ -672,8 +674,8 @@ attribute_hidden SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	v = LENGTH(value);
 	if (!isString(value) || v == 0) error("%s", _("invalid value"));
 
-	vmax = vmaxget();
 	for (i = 0; i < len; i++) {
+	    CXXR::RAllocStack::Scope rscope;
 	    el = STRING_ELT(x, i);
 	    v_el = STRING_ELT(value, i % v);
 	    start = INTEGER(sa)[i % k];
@@ -710,7 +712,6 @@ attribute_hidden SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 		substrset(buf, v_ss, ienc2, start, stop, i, i % v);
 		SET_STRING_ELT(s, i, mkCharCE(buf, ienc2));
 	    }
-	    vmaxset(vmax);
 	}
 	R_FreeStringBufferL(&cbuff);
     }
@@ -830,26 +831,24 @@ donesc:
 #define LASTCHARW(i) (!iswspace((int)wc[i-1]) && (!wc[i+1] || iswspace((int)wc[i+1])))
 #define WUP (int)(wcslen(wc) - 1)
 
-// lower-case vowels in English plus accented versions
-static int vowels[] = {
-    0x61, 0x65, 0x69, 0x6f, 0x75,
-    0xe0, 0xe1, 0x2e, 0xe3, 0xe4, 0xe5,
-    0xe8, 0xe9, 0xea, 0xeb, 0xec, 0xed, 0xee, 0xef,
-    0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf8, 0xf9, 0xfa, 0xfb, 0xfc,
-    0x101, 0x103, 0x105, 0x113, 0x115, 0x117, 0x118, 0x11b,
-    0x129, 0x12b, 0x12d, 0x12f, 0x131, 0x14d, 0x14f, 0x151,
-    0x169, 0x16b, 0x16d, 0x16f, 0x171, 0x173
-};
-
-static bool iswvowel(wchar_t w)
+namespace
 {
-    int v = (int) w, n = sizeof(vowels)/sizeof(int);
-    bool found = FALSE;
-    for(int i = 0; i < n; i++)
-	if(v == vowels[i]) {found = TRUE; break;}
+    // lower-case vowels in English plus accented versions
+    constexpr std::array<wchar_t, 51> vowels_sorted_unique = {
+        L'\x61', L'\x65', L'\x69', L'\x6f', L'\x75', // a, e, i, o, u
+        L'\xe0', L'\xe1', L'\xe2', L'\xe3', L'\xe4', L'\xe5', // a variants
+        L'\xe8', L'\xe9', L'\xea', L'\xeb', L'\xec', L'\xed', L'\xee', L'\xef', // e, i variants
+        L'\xf2', L'\xf3', L'\xf4', L'\xf5', L'\xf6', L'\xf8', L'\xf9', L'\xfa', L'\xfb', L'\xfc', // o, u variants
+        L'\x101', L'\x103', L'\x105', L'\x113', L'\x115', L'\x117', L'\x118', L'\x11b', // a, e variants
+        L'\x129', L'\x12b', L'\x12d', L'\x12f', L'\x131', L'\x14d', L'\x14f', L'\x151', // i, o variants
+        L'\x169', L'\x16b', L'\x16d', L'\x16f', L'\x171', L'\x173' // u variants
+    };
 
-    return found;
-}
+    bool iswvowel(wchar_t w) {
+        return std::binary_search(vowels_sorted_unique.begin(),
+            vowels_sorted_unique.end(), w);
+    }
+} // anonymous namespace
 
 static void mywcscpy(wchar_t *dest, const wchar_t *src)
 {
@@ -942,9 +941,9 @@ attribute_hidden SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_xlen_t len = XLENGTH(x);
     SEXP ans = PROTECT(allocVector(STRSXP, len));
-    const void *vmax = vmaxget();
     bool warn = FALSE;
     for (R_xlen_t i = 0 ; i < len ; i++) {
+	CXXR::RAllocStack::Scope rscope;
 	SEXP el = STRING_ELT(x, i);
 	if (el  == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
@@ -967,7 +966,6 @@ attribute_hidden SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else SET_STRING_ELT(ans, i, el);
 	    }
 	}
-	vmaxset(vmax); // this throws away the result of wtransChar
     }
     if (usecl && warn) warning("%s", _("abbreviate used with non-ASCII chars"));
     SHALLOW_DUPLICATE_ATTRIB(ans, x);
@@ -985,7 +983,6 @@ attribute_hidden SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
     char *p, *tmp = NULL, *cbuf;
     const char *This;
     bool need_prefix;
-    const void *vmax;
 
     checkArity(op ,args);
     arg = CAR(args);
@@ -994,8 +991,8 @@ attribute_hidden SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
     n = XLENGTH(arg);
     bool allow_ = asLogicalNoNA(CADR(args), "allow_");
     PROTECT(ans = allocVector(STRSXP, n));
-    vmax = vmaxget();
     for (i = 0 ; i < n ; i++) {
+	CXXR::RAllocStack::Scope rscope;
 	This = translateChar(STRING_ELT(arg, i));
 	l = (int) strlen(This);
 	/* need to prefix names not beginning with alpha or ., as
@@ -1060,7 +1057,6 @@ attribute_hidden SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
 	    R_Free(cbuf);
 	}
 	R_Free(tmp);
-	vmaxset(vmax);
     }
     UNPROTECT(1);
     return ans;
@@ -1076,7 +1072,6 @@ attribute_hidden SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP el;
     cetype_t ienc;
     bool use_UTF8 = FALSE;
-    const void *vmax;
 
     checkArity(op, args);
     ul = PRIMVAL(op); /* 0 = tolower, 1 = toupper */
@@ -1099,9 +1094,9 @@ attribute_hidden SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 	wchar_t * wc;
 	char * cbuf;
 
-	vmax = vmaxget();
 	/* the translated string need not be the same length in bytes */
 	for (i = 0; i < n; i++) {
+	    CXXR::RAllocStack::Scope rscope;
 	    el = STRING_ELT(x, i);
 	    if (el == NA_STRING) SET_STRING_ELT(y, i, NA_STRING);
 	    else {
@@ -1173,13 +1168,12 @@ attribute_hidden SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 		    error(_("invalid multibyte string %lld"), (long long)i+1);
 		}
 	    }
-	    vmaxset(vmax);
 	}
 	R_FreeStringBufferL(&cbuff);
     } else {
 	char *xi;
-	vmax = vmaxget();
 	for (i = 0; i < n; i++) {
+	    CXXR::RAllocStack::Scope rscope;
 	    if (STRING_ELT(x, i) == NA_STRING)
 		SET_STRING_ELT(y, i, NA_STRING);
 	    else {
@@ -1190,7 +1184,6 @@ attribute_hidden SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 		SET_STRING_ELT(y, i, markKnown(xi, STRING_ELT(x, i)));
 		R_Free(xi);
 	    }
-	    vmaxset(vmax);
 	}
     }
     SHALLOW_DUPLICATE_ATTRIB(y, x);
@@ -1379,33 +1372,25 @@ static R_INLINE int xtable_key_comp(const void *a, const void *b)
     return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
 }
 
-#define SWAP(_a, _b, _TYPE)                                    \
-{                                                              \
-    _TYPE _t;                                                  \
-    _t    = *(_a);                                             \
-    *(_a) = *(_b);                                             \
-    *(_b) = _t;                                                \
-}
-
 #define ISORT(_base,_num,_TYPE,_comp)                          \
 {                                                              \
 /* insert sort */                                              \
 /* require stable data */                                      \
-    int _i, _j ;                                               \
-    for ( _i = 1 ; _i < _num ; _i++ )                          \
+    int _j ;                                                   \
+    for (int _i = 1 ; _i < _num ; _i++ )                       \
 	for ( _j = _i; _j > 0 &&                               \
 		      (*_comp)(_base+_j-1, _base+_j)>0; _j--)  \
-	   SWAP(_base+_j-1, _base+_j, _TYPE);                  \
+	   std::swap(*(_base+_j-1), *(_base+_j));              \
 }
 
 #define COMPRESS(_base,_num,_TYPE,_comp)                       \
 {                                                              \
-/* suppress even c_old. last use */                             \
-    int _i,_j ;                                                \
-    for ( _i = 0 ; _i < (*(_num)) - 1 ; _i++ ){                \
+/* suppress even c_old. last use */                            \
+    int _j ;                                                   \
+    for (int _i = 0 ; _i < (*(_num)) - 1 ; _i++ ){             \
 	int rc = (*_comp)(_base+_i, _base+_i+1);               \
 	if (rc == 0){                                          \
-	   for ( _j = _i, _i-- ; _j < (*(_num)) - 1; _j++ )     \
+	   for ( _j = _i, _i-- ; _j < (*(_num)) - 1; _j++ )    \
 		*((_base)+_j) = *((_base)+_j+1);               \
 	    (*(_num))--;                                       \
 	}                                                      \
@@ -1449,7 +1434,6 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP el;
     cetype_t ienc;
     bool use_WC = FALSE;
-    const void *vmax;
 
     checkArity(op, args);
     old = CAR(args); args = CDR(args);
@@ -1582,8 +1566,8 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	COMPRESS(xtable, &xtable_cnt, xtable_t, xtable_comp);
 
 	PROTECT(y = allocVector(STRSXP, n));
-	vmax = vmaxget();
 	for (i = 0; i < n; i++) {
+	    CXXR::RAllocStack::Scope rscope;
 	    el = STRING_ELT(x,i);
 	    if (el == NA_STRING)
 		SET_STRING_ELT(y, i, NA_STRING);
@@ -1621,7 +1605,6 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		R_Free(cbuf);
 	    }
-	    vmaxset(vmax);
 	}
 	R_FreeStringBufferL(&cbuff);
     } else {
@@ -1666,7 +1649,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	n = LENGTH(x);
 	PROTECT(y = allocVector(STRSXP, n));
-	vmax = vmaxget();
+	CXXR::RAllocStack::Scope rscope;
 	for (i = 0; i < n; i++) {
 	    if (STRING_ELT(x,i) == NA_STRING)
 		SET_STRING_ELT(y, i, NA_STRING);
@@ -1680,7 +1663,6 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		R_Free(cbuf);
 	    }
 	}
-	vmaxset(vmax);
     }
 
     SHALLOW_DUPLICATE_ATTRIB(y, x);
@@ -1699,7 +1681,6 @@ attribute_hidden SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *p; char *q;
     int w0, wsum, k, nb;
     mbstate_t mb_st;
-    const void *vmax;
 
     checkArity(op, args);
     /* as.character happens at R level now */
@@ -1716,8 +1697,8 @@ attribute_hidden SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (INTEGER(width)[i] == NA_INTEGER ||
 		INTEGER(width)[i] < 0)
 		error(_("invalid '%s' argument"), "width");
-	vmax = vmaxget();
 	for (i = 0; i < len; i++) {
+	    CXXR::RAllocStack::Scope rscope;
 	    if (STRING_ELT(x, i) == NA_STRING) {
 		SET_STRING_ELT(s, i, STRING_ELT(x, i));
 		continue;
@@ -1745,7 +1726,6 @@ attribute_hidden SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    *q = '\0';
 	    SET_STRING_ELT(s, i, markKnown(buf, STRING_ELT(x, i)));
-	    vmaxset(vmax);
 	}
 	R_FreeStringBufferL(&cbuff);
 	UNPROTECT(1);
@@ -1758,7 +1738,7 @@ attribute_hidden SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static int strtoi(SEXP s, int base)
 {
-    if(s == NA_STRING || CHAR(s)[0] == '\0') return(NA_INTEGER);
+    if(s == NA_STRING || CHAR(s)[0] == '\0') return NA_INTEGER;
 
     /* strtol might return extreme values on error */
     errno = 0;

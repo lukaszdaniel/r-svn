@@ -35,9 +35,6 @@
 #include <CXXR/String.hpp>
 #include <Defn.h> // for LATIN1_MASK, etc
 
-using namespace std;
-using namespace CXXR;
-
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable

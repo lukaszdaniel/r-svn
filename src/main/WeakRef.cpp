@@ -31,8 +31,6 @@
 
 #include <CXXR/WeakRef.hpp>
 
-using namespace CXXR;
-
 namespace CXXR
 {
 } // namespace CXXR

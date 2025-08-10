@@ -70,6 +70,7 @@
         "bitset": "cpp",
         "set": "cpp",
         "fstream": "cpp",
-        "libextern.h": "c"
+        "libextern.h": "c",
+        "cerrno": "cpp"
     }
 }
