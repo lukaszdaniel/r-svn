@@ -29,6 +29,7 @@
  * Class GCNode and associated C-callable functions.
  */
 
+#include <iostream>
 #include <stdexcept>
 #include <CXXR/GCNode.hpp>
 #include <CXXR/MemoryBank.hpp>
@@ -82,6 +83,29 @@ namespace CXXR
             // ++s_gencount[m_mingen];
             R_GenHeap->m_OldCount[m_mingen]++;
             node->visitReferents(this);
+        }
+    }
+
+    void GCNode::Marker::operator()(const GCNode *node)
+    {
+        if (node->isMarked())
+        {
+            return;
+        }
+
+        if (node->generation() <= m_maxgen) // node is below the number of generations to be collected
+        {
+            node->sxpinfo.m_mark = true;
+            node->visitReferents(this);
+        }
+    }
+
+    void GCNode::OldToNewChecker::operator()(const GCNode *node)
+    {
+        if (node && (node->generation() < m_mingen)) // node is younger than the minimum gen
+        {
+            std::cerr << "GCNode: old to new reference found (node's gen = " << node->generation() << ", mingen = " << m_mingen << ").\n";
+            abort();
         }
     }
 

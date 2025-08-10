@@ -445,7 +445,7 @@ namespace CXXR
          * specified minimum value, and is used in implementing the
          * write barrier in the generational garbage collector.
          */
-        class Ager : public const_visitor
+        class Ager: public const_visitor
         {
         public:
             /**
@@ -458,6 +458,57 @@ namespace CXXR
             }
 
             unsigned int mingen() const { return m_mingen; }
+
+            // Virtual function of const_visitor:
+            void operator()(const GCNode *node) override;
+
+        private:
+            unsigned int m_mingen;
+        };
+
+        /** Visitor class used to mark nodes.
+         *
+         * This visitor class is used during the mark phase of garbage
+         * collection to ensure that a node and its descendants are
+         * marked.  However, nodes with generation numbers exceeding a
+         * specified level are left unmarked.  It is assumed that no
+         * node references a node with a younger generation number.
+         */
+        class Marker: public const_visitor
+        {
+        public:
+            /**
+             * @param max_gen Nodes with a generation number exceeding
+             *          this are not to be marked.
+             */
+            Marker(unsigned int max_gen)
+                : m_maxgen(max_gen)
+            {
+            }
+
+            unsigned int maxgen() const { return m_maxgen; }
+
+            // Virtual function of const_visitor:
+            void operator()(const GCNode *node) override;
+
+        private:
+            unsigned int m_maxgen;
+        };
+
+        /** Visitor class used to abort the program if old-to-new
+         * references are found.
+         */
+        class OldToNewChecker: public const_visitor
+        {
+        public:
+            /**
+             * @param min_gen The minimum generation number that is
+             * acceptable in visited nodes.
+             */
+            OldToNewChecker(unsigned int min_gen)
+                : m_mingen(min_gen)
+            {
+            }
 
             // Virtual function of const_visitor:
             void operator()(const GCNode *node) override;

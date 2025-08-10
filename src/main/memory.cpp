@@ -864,13 +864,6 @@ NORET static void mem_err_heap()
 /* Debugging Routines. */
 
 #ifdef DEBUG_GC
-static void CheckNodeGeneration(SEXP x, int g)
-{
-    if (x && NODE_GENERATION(x) < g) {
-	GCManager::gc_error(_("untraced old-to-new reference\n"));
-    }
-}
-
 static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 {
     REprintf("Node counts %s:\n", where);
@@ -891,7 +884,8 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 		OldCount++;
 		if (gen != NODE_GENERATION(s))
 		    GCManager::gc_error(_("Inconsistent node generation\n"));
-		DO_CHILDREN(s, CheckNodeGeneration, gen);
+		GCNode::OldToNewChecker o2n(gen);
+		s->visitReferents(&o2n);
 	    }
 	    for (const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
 		 s != R_GenHeap->m_OldToNew[gen].get();
@@ -1020,7 +1014,7 @@ static void AdjustHeapSize(R_size_t size_needed)
 
 
 /* Managing Old-to-New References. */
-
+#if CXXR_FALSE
 #define AGE_NODE(s,g) do { \
   GCNode *an__n__ = (s); \
   int an__g__ = (g); \
@@ -1049,11 +1043,13 @@ static void AgeNodeAndChildren(GCNode *s, int gen)
         DO_CHILDREN(s, AGE_NODE, gen);
     }
 }
-
+#endif
 static void old_to_new(SEXP x, SEXP y)
 {
 #ifdef EXPEL_OLD_TO_NEW
-    AgeNodeAndChildren(y, NODE_GENERATION(x));
+    GCNode::Ager age(NODE_GENERATION(x));
+    age(y);
+    // AgeNodeAndChildren(y, NODE_GENERATION(x));
 #else
     UNSNAP_NODE(x);
     SNAP_NODE(x, R_GenHeap->m_OldToNew[NODE_GENERATION(x)].get());
@@ -1417,14 +1413,12 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
     for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
+        Ager ager(gen);
         const GCNode *s = NEXT_NODE(R_GenHeap->m_OldToNew[gen]);
         while (s != R_GenHeap->m_OldToNew[gen].get()) {
             const GCNode *next = NEXT_NODE(s);
-            DO_CHILDREN(s, AgeNodeAndChildren, gen);
-            UNSNAP_NODE(s);
-            if (NODE_GENERATION(s) != gen)
-                GCManager::gc_error("****snapping into wrong generation\n");
-            SNAP_NODE(s, R_GenHeap->m_Old[gen].get());
+            s->visitReferents(&ager);
+            R_GenHeap->m_Old[gen]->splice(s);
             s = next;
         }
     }
