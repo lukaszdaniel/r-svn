@@ -137,10 +137,10 @@
 
   \subsection{BUG FIXES}{
     \itemize{
-      \item Profiling \code{"mle"} objects (\pkg{stats4} package) could fail 
+      \item Profiling \code{"mle"} objects (\pkg{stats4} package) could fail
       because profile MLE used starting value from full MLE. Now starts from profile MLE
-      from previous step. 
- 
+      from previous step.
+
       \item Setting \code{attributes} on primitive functions is now an
       error; previously it modified without copying (as noticed by
       \I{Henrik Bengtsson} on the R-devel mailing list).
@@ -213,6 +213,11 @@
 
       \item Parsing a multi-line string from Rd \verb{\Sexpr} code no
       longer doubles the newlines.
+
+      \item \code{loadNamespace(.., versionCheck = *)} and hence
+      \code{requireNamespace(..)} now show an error and/or return
+      \code{FALSE} when the package version check is not fulfilled, thanks
+      to \I{Iris Simmons} and \I{Trevor Davis}'s \PR{18522}.
     }
   }
 }

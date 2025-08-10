@@ -187,7 +187,14 @@ function(x)
     if(any(given == "*"))
         given <- c(given[given != "*"], cited)
     Rd_expr_bibcite_keys_cited(setdiff(cited, given))
-    y <- sort(unique(bib[.bibentry_get_key(bib) %in% given]))
+    pos <- match(given, .bibentry_get_key(bib), nomatch = 0L)
+    if(any(ind <- (pos == 0L))) {
+        msg <-
+            sprintf("Could not find bibentries for the following keys:\n%s",
+                    .strwrap22(sQuote(given[ind])))
+        warning(msg)
+    }
+    y <- sort(unique(bib[pos]))
     ## Merge bibinfo data.
     keys <- .bibentry_get_key(y)
     store <- Rd_expr_bibinfo_data_store()
@@ -236,7 +243,7 @@ function(x, textual = FALSE)
 {
     x <- trimws(x)
     bib <- R_bibentries()
-    given <- strsplit(x, ",[[:space:]]*")[[1L]]
+    given <- strsplit(x, "[^\\],[[:space:]]*")[[1L]]
     parts <- strsplit(given, "|", fixed = TRUE)
     parts <- parts[lengths(parts) %in% c(1L, 3L)]
     ## Could complain about the others ...?
@@ -246,8 +253,12 @@ function(x, textual = FALSE)
     }
     if(any(ind <- (lengths(parts) == 3L))) {
         keys[ind] <- vapply(parts, `[`, "", 2L)
-        after[ind] <- vapply(parts, `[`, "", 3L)
-        before[ind] <- vapply(parts, `[`, "", 1L)
+        after[ind] <- gsub("\\,", ",",
+                           vapply(parts, `[`, "", 3L),
+                           fixed = TRUE)
+        before[ind] <- gsub("\\,", ",",
+                            vapply(parts, `[`, "", 1L),
+                            fixed = TRUE)
     }
     ind <- keys %in% .bibentry_get_key(bib)
     if(!all(ind)) {
@@ -273,7 +284,7 @@ function(x, textual = FALSE)
         if(any(ind <- nzchar(before)))
             before[ind] <- paste0(before[ind], " ")
         y <- paste0(before,
-                    sprintf("\\if{html}{\\out{<a href=\"#reference+%s+%s\">}}",
+                    sprintf("\\if{html}{\u2060\\out{<a href=\"#reference+%s+%s\">}}",
                             rdpath,
                             string2id(keys)),
                     y,
