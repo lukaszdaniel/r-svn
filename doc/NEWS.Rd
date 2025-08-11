@@ -65,6 +65,13 @@
       \item Credentials for basic HTTP authentication with download method
       \code{"libcurl"} can now be provided in a \file{netrc} file.  The
       path to the file can be specified in \code{options("netrc")}.
+
+      \item \code{tools::deparseLatex()} gains a \code{math} argument,
+      now used by the default \code{bibstyle} to format \code{bibentry()} 
+      fields with \samp{$...$} syntax via Rd \verb{\eqn} markup.
+
+      \item \code{gzcon()} can now decompress a concatenation of compressed
+      streams \PR{18887}.
     }
   }
 
@@ -214,10 +221,10 @@
       \item Parsing a multi-line string from Rd \verb{\Sexpr} code no
       longer doubles the newlines.
 
-      \item \code{loadNamespace(.., versionCheck = *)} and hence
-      \code{requireNamespace(..)} now show an error and/or return
-      \code{FALSE} when the package version check is not fulfilled, thanks
-      to \I{Iris Simmons} and \I{Trevor Davis}'s \PR{18522}.
+      \item \code{requireNamespace(.., versionCheck = *)} now shows an
+      error and returns \code{FALSE} when the package version check is not
+      fulfilled, thanks to \I{Iris Simmons} and \I{Trevor Davis}'s
+      \PR{18255}.
     }
   }
 }
