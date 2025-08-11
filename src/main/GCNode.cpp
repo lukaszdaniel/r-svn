@@ -41,7 +41,11 @@ namespace CXXR
 {
     unsigned int GCNode::SchwarzCounter::s_count = 0;
     size_t GCNode::s_num_nodes = 0;
-    std::unique_ptr<struct GCNode::R_GenHeap_t> GCNode::s_R_GenHeap;
+    std::unique_ptr<CXXR::GCNode> GCNode::s_Old[1 + GCNode::s_num_old_generations];
+#ifndef EXPEL_OLD_TO_NEW
+    std::unique_ptr<CXXR::GCNode> GCNode::s_OldToNew[GCNode::s_num_old_generations];
+#endif
+    unsigned int GCNode::s_gencount[GCNode::s_num_old_generations];
 
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
     {
@@ -60,7 +64,7 @@ namespace CXXR
     GCNode::GCNode(SEXPTYPE stype): sxpinfo(stype), m_next(this), m_prev(this)
     {
         ++s_num_nodes;
-        R_GenHeap->m_New->splice(this);
+        s_New->splice(this);
     }
 
     GCNode::~GCNode()
@@ -73,15 +77,13 @@ namespace CXXR
     {
         if (!node->isMarked() || node->generation() < m_mingen) // node is younger than the minimum age required
         {
-            // --s_gencount[node->generation()];
             if (node->isMarked())
-                R_GenHeap->m_OldCount[node->generation()]--;
+                --s_gencount[node->generation()];
             else
                 node->sxpinfo.m_mark = true;
             node->sxpinfo.m_gcgen = m_mingen;
-            R_GenHeap->m_Old[m_mingen]->splice(node);
-            // ++s_gencount[m_mingen];
-            R_GenHeap->m_OldCount[m_mingen]++;
+            s_Old[m_mingen]->splice(node);
+            ++s_gencount[m_mingen];
             node->visitReferents(this);
         }
     }
@@ -129,21 +131,22 @@ namespace CXXR
 
     void GCNode::initialize()
     {
-        if (s_R_GenHeap)
+        static bool s_initialized = false;
+        if (s_initialized)
         {
             throw std::runtime_error("R_GenHeap is already initialized.");
         }
-        s_R_GenHeap = std::make_unique<struct GCNode::R_GenHeap_t>();
+        s_initialized = true;
 
         for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
         {
-            R_GenHeap->m_Old[gen] = std::make_unique<GCNode>(/* OldPeg constructor */);
+            s_Old[gen] = std::make_unique<GCNode>(/* OldPeg constructor */);
 #ifndef EXPEL_OLD_TO_NEW
-            R_GenHeap->m_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNewPeg constructor */);
+            s_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNewPeg constructor */);
 #endif
 
-            R_GenHeap->m_OldCount[gen] = 0;
+            s_gencount[gen] = 0;
         }
-        R_GenHeap->m_New = std::make_unique<GCNode>(/* NewPeg constructor */);
+        s_New = std::make_unique<GCNode>(/* NewPeg constructor */);
     }
 } // namespace CXXR

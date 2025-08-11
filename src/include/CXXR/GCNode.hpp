@@ -647,18 +647,12 @@ namespace CXXR
          * both counts.
          */
 // #define EXPEL_OLD_TO_NEW
-#define R_GenHeap CXXR::GCNode::s_R_GenHeap
-#define m_New m_Old[2]
-        struct R_GenHeap_t
-        {
-            std::unique_ptr<CXXR::GCNode> m_Old[1 + GCNode::s_num_old_generations];
+#define s_New s_Old[2]
+        static std::unique_ptr<CXXR::GCNode> s_Old[1 + GCNode::s_num_old_generations];
 #ifndef EXPEL_OLD_TO_NEW
-            std::unique_ptr<CXXR::GCNode> m_OldToNew[GCNode::s_num_old_generations];
+        static std::unique_ptr<CXXR::GCNode> s_OldToNew[GCNode::s_num_old_generations];
 #endif
-            unsigned int m_OldCount[GCNode::s_num_old_generations];
-        };
-
-        static std::unique_ptr<struct R_GenHeap_t> s_R_GenHeap;
+        static unsigned int s_gencount[GCNode::s_num_old_generations];
     };
 
     /** @brief Initialize the entire memory subsystem.

@@ -71,6 +71,7 @@
         "set": "cpp",
         "fstream": "cpp",
         "libextern.h": "c",
-        "cerrno": "cpp"
+        "cerrno": "cpp",
+        "unordered_set": "cpp"
     }
 }
