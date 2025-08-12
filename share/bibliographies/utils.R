@@ -12,20 +12,6 @@ bibentry(bibtype = "InCollection",
                            family = "Hastie")),
          chapter = "3")
 
-bibentry(bibtype = "InCollection",
-         key = "R:Chambers:1992b",
-         author = person(given = c("John", "M."),
-                           family = "Chambers"),
-         title = "Classes and Methods: Object-Oriented Programming in {S}",
-         booktitle = "Statistical Models in {S}",
-         publisher = "Wadsworth & Brooks/Cole",
-         year = "1992",
-         editor = c(person(given = c("John", "M."),
-                           family = "Chambers"),
-                    person(given = c("Trevor", "J."),
-                           family = "Hastie")),
-         note = "Appendix A")
-
 bibentry(bibtype = "Manual",
          key = "R:Francois:2012",
          title = "parser: Detailed {R} source code parser",
@@ -50,7 +36,7 @@ bibentry(bibtype = "InProceedings",
                            family = "Rönz")),
          publisher = "Physica Verlag, Heidelberg",
          isbn = "3-7908-1517-9",
-         eprint = "https://epub.wu.ac.at/id/eprint/1788")
+         url = "https://epub.wu.ac.at/id/eprint/1788")
 
 bibentry(bibtype = "Article",
          key = "R:Hornik+Murdoch:2011",
