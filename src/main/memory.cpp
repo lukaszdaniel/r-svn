@@ -1051,8 +1051,7 @@ static void old_to_new(SEXP x, SEXP y)
     age(y);
     // AgeNodeAndChildren(y, NODE_GENERATION(x));
 #else
-    UNSNAP_NODE(x);
-    SNAP_NODE(x, GCNode::s_OldToNew[NODE_GENERATION(x)].get());
+    GCNode::s_OldToNew[NODE_GENERATION(x)]->splice(x);
 #endif
 }
 
