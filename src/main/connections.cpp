@@ -6377,7 +6377,7 @@ static size_t gzcon_read(void *ptr, size_t size, size_t nitems,
 		for (n = 0; n < 4; n++) gzcon_byte(priv);
 		gzcon_check_header(priv);
 		if (priv->transparent || priv->z_err == Z_DATA_ERROR) {
-		    warning(_("file stream has trailing content that appears not to be compressed by gzip"));
+		    warning("%s", _("file stream has trailing content that appears not to be compressed by gzip"));
 		    priv->z_err = Z_DATA_ERROR;
 		} else if (priv->z_err == Z_OK) {
 		    inflateReset(&(priv->s));
