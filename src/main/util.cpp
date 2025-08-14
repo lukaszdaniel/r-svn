@@ -98,18 +98,15 @@ NORET void F77_SUB(rexitc)(const char *msg, int *nchar);
 
 /* Many small functions are included from ../include/Rinlinedfuns.h */
 
-int Rf_nrows(SEXP s) // ~== NROW(.)  in R
+int Rf_nrows(SEXP s) // ~== NROW(.)  in R (except data frames)
 {
     SEXP t;
     if (isVector(s) || isList(s)) {
 	t = getAttrib(s, R_DimSymbol);
 	if (t == R_NilValue) return LENGTH(s);
 	return INTEGER(t)[0];
-    }
-    else if (isDataFrame(s)) {
-	return nrows(CAR(s));
-    }
-    else error("%s", _("object is not a matrix"));
+    } else
+	error("%s", _("object is not a matrix"));
     return -1;
 }
 
@@ -123,11 +120,8 @@ int Rf_ncols(SEXP s) // ~== NCOL(.)  in R
 	if (LENGTH(t) >= 2) return INTEGER(t)[1];
 	/* This is a 1D (or possibly 0D array) */
 	return 1;
-    }
-    else if (isDataFrame(s)) {
-	return length(s);
-    }
-    else error("%s", _("object is not a matrix"));
+    } else
+	error("%s", _("object is not a matrix"));
     return -1;/*NOTREACHED*/
 }
 
@@ -550,7 +544,7 @@ attribute_hidden void R::check1arg(SEXP arg, SEXP call, const char *formal)
 
 SEXP Rf_nthcdr(SEXP s, int n)
 {
-    if (isList(s) || isLanguage(s) || isDataFrame(s) || TYPEOF(s) == DOTSXP ) {
+    if (isPairList(s)) {
 	while( n-- > 0 ) {
 	    if (s == R_NilValue)
 		error(_("'nthcdr' list shorter than %d"), n);
