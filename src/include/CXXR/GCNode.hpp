@@ -413,7 +413,7 @@ namespace CXXR
         /** @brief Carry out the sweep phase of garbage collection.
          *
          */
-        static void sweep();
+        static void sweep(unsigned int num_old_gens_to_collect);
 
         /** @brief Number of GCNode objects in existence.
          *

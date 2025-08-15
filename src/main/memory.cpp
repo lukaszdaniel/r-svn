@@ -783,26 +783,21 @@ static R_size_t R_V_maxused=0;
    to be in a local variable of the caller named
    forwarded_nodes. */
 
-#define MARK_AND_UNSNAP_NODE(s) do {		\
+#define CHECK_AND_MARK_NODE(s) do {		\
 	const GCNode *mu__n__ = (s);			\
 	CHECK_FOR_FREE_NODE(mu__n__);		\
 	MARK_NODE(mu__n__);			\
-	UNSNAP_NODE(mu__n__);			\
     } while (0)
 
 #define FORWARD_NODE(s) do { \
   const GCNode *fn__n__ = (s); \
   if (fn__n__ && !NODE_IS_MARKED(fn__n__)) { \
-    MARK_AND_UNSNAP_NODE(fn__n__); \
+    CHECK_AND_MARK_NODE(fn__n__); \
     forwarded_nodes.push_front(fn__n__); \
   } \
 } while (0)
 
-#define PROCESS_ONE_NODE(s) do {				\
-	const GCNode *pn__n__ = (s);					\
-	int __gen__ = NODE_GENERATION(pn__n__);			\
-	SNAP_NODE(pn__n__, GCNode::s_Old[__gen__].get());	\
-	GCNode::s_gencount[__gen__]++;			\
+#define PROCESS_ONE_NODE(s) do { \
     } while (0)
 
 /* avoid pushing on the forwarding stack when possible */
@@ -812,7 +807,7 @@ static R_size_t R_V_maxused=0;
 	if (fpn__n__ && !NODE_IS_MARKED(fpn__n__)) {	\
 	    if (TYPEOF(fpn__n__) == __tp__ &&		\
 		!HAS_GENUINE_ATTRIB((SEXP)fpn__n__)) {	\
-		MARK_AND_UNSNAP_NODE(fpn__n__);		\
+		CHECK_AND_MARK_NODE(fpn__n__);		\
 		PROCESS_ONE_NODE(fpn__n__);		\
 	    }						\
 	    else FORWARD_NODE(fpn__n__);		\
@@ -1014,36 +1009,6 @@ static void AdjustHeapSize(R_size_t size_needed)
 
 
 /* Managing Old-to-New References. */
-#if CXXR_FALSE
-#define AGE_NODE(s,g) do { \
-  GCNode *an__n__ = (s); \
-  int an__g__ = (g); \
-  if (an__n__ && NODE_GEN_IS_YOUNGER(an__n__, an__g__)) { \
-    if (NODE_IS_MARKED(an__n__)) \
-       GCNode::s_gencount[NODE_GENERATION(an__n__)]--; \
-    else \
-      MARK_NODE(an__n__); \
-    SET_NODE_GENERATION(an__n__, an__g__); \
-    UNSNAP_NODE(an__n__); \
-    forwarded_nodes.push_front(an__n__); \
-  } \
-} while (0)
-
-static void AgeNodeAndChildren(GCNode *s, int gen)
-{
-    std::forward_list<GCNode *> forwarded_nodes;
-    AGE_NODE(s, gen);
-    while (!forwarded_nodes.empty()) {
-        s = forwarded_nodes.front();
-        forwarded_nodes.pop_front();
-        if (NODE_GENERATION(s) != gen)
-            GCManager::gc_error("****snapping into wrong generation\n");
-        SNAP_NODE(s, GCNode::s_Old[gen].get());
-        GCNode::s_gencount[gen]++;
-        DO_CHILDREN(s, AGE_NODE, gen);
-    }
-}
-#endif
 static void old_to_new(SEXP x, SEXP y)
 {
 #ifdef EXPEL_OLD_TO_NEW
@@ -1457,8 +1422,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
         const GCNode *s = NEXT_NODE(s_Old[gen]);
         while (s != s_Old[gen].get()) {
             const GCNode *next = NEXT_NODE(s);
-            if (gen < s_num_old_generations - 1)
-                SET_NODE_GENERATION(s, gen + 1);
             UNMARK_NODE(s);
             s = next;
         }
@@ -1984,14 +1947,28 @@ namespace
     }
 } // anonymous namespace
 
-void GCNode::sweep()
+void GCNode::sweep(unsigned int num_old_gens_to_collect)
 {
     const GCNode *s = NEXT_NODE(s_New);
     while (s != s_New.get())
     {
         const GCNode *next = NEXT_NODE(s);
-        CXXR_detach((SEXP)s);
-        delete s;
+        if (!s->isMarked())
+        {
+            CXXR_detach((SEXP)s);
+            delete s;
+        }
+        else
+        {
+            unsigned int gen = NODE_GENERATION(s);
+            if ((gen < num_old_gens_to_collect) && (gen < s_num_old_generations - 1))
+            {
+                ++gen;
+                SET_NODE_GENERATION(s, gen);
+            }
+            s_Old[gen]->splice(s);
+            s_gencount[gen]++;
+        }
         s = next;
     }
 }
@@ -2006,7 +1983,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
 
     DEBUG_CHECK_NODE_COUNTS("after processing forwarded list");
 
-    sweep();
+    sweep(num_old_gens_to_collect);
 
     DEBUG_CHECK_NODE_COUNTS("after releasing large allocated nodes");
 }
