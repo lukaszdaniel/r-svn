@@ -93,7 +93,9 @@ static Rboolean sock_open(Rconnection con)
 #endif
 	free(con->description);
 	size_t sz = strlen(buf) + 10;
-	con->description = (char *) malloc(sz); // FIXME check allocation 
+	con->description = (char *) malloc(sz);
+	if (!con->description)
+	    error("%s", _("allocation of socket connection failed"));
 	snprintf(con->description, sz, "<-%s:%d", buf, this_->port);
     } else {
 	sock = R_SockConnect(this_->port, con->description, timeout);

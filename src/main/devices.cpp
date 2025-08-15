@@ -55,14 +55,6 @@ using namespace CXXR;
 
 int baseRegisterIndex = -1;
 
-attribute_hidden
-GPar* Rf_dpptr(pGEDevDesc dd) {
-    if (baseRegisterIndex == -1)
-	error("%s", _("the base graphics system is not registered"));
-    baseSystemState *bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
-    return &(bss->dp);
-}
-
 static SEXP R_INLINE getSymbolValue(SEXP symbol)
 {
     if (TYPEOF(symbol) != SYMSXP)

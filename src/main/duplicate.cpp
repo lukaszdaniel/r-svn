@@ -2,7 +2,7 @@
  *  R : A Computer Language for Statistical Data Analysis
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *            (C) 2004  The R Foundation
- *  Copyright (C) 1998-2015 The R Core Team.
+ *  Copyright (C) 1998-2025 The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -414,7 +414,7 @@ void Rf_copyVector(SEXP s, SEXP t)
     }
 }
 
-// In Rinternals.h
+// In Rinternals.h, but no longer used by R
 void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
 {
     int nr = nrows(s), nc = ncols(s);
@@ -422,15 +422,15 @@ void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
     SEXP pt = t;
     if(byrow) {
 	R_xlen_t NR = nr;
-	SEXP tmp = PROTECT(allocVector(STRSXP, ns));
+	SEXP tmp = PROTECT(allocVector(VECSXP, ns));
 	for (int i = 0; i < nr; i++)
 	    for (int j = 0; j < nc; j++) {
-		SET_STRING_ELT(tmp, i + j * NR, duplicate(CAR(pt)));
+		SET_VECTOR_ELT(tmp, i + j * NR, duplicate(CAR(pt)));
 		pt = CDR(pt);
 		if(pt == R_NilValue) pt = t;
 	    }
 	for (int i = 0; i < ns; i++) {
-	    SETCAR(s, STRING_ELT(tmp, i++));
+	    SETCAR(s, VECTOR_ELT(tmp, i++));
 	    s = CDR(s);
 	}
 	UNPROTECT(1);

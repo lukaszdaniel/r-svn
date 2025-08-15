@@ -243,7 +243,6 @@ InputHandler *addInputHandler(InputHandler *handlers, int fd, InputHandlerProc h
 		int activity)
 {
     InputHandler *input, *tmp;
-//    input = (InputHandler*) calloc(1, sizeof(InputHandler));
     input = R_Calloc(1, InputHandler);
 
     input->activity = activity;

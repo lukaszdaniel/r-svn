@@ -885,6 +885,7 @@ static R_XFont *R_XLoadQueryFont(Display *display, char *name)
 {
     R_XFont *tmp;
     tmp = (R_XFont *) malloc(sizeof(R_XFont));
+    if(!tmp) error("%s", _("allocation failed in R_XLoadQueryFont"));
     tmp->type = One_Font;
     tmp->font = XLoadQueryFont(display, name);
     if(tmp->font)
@@ -910,6 +911,7 @@ static R_XFont *R_XLoadQueryFontSet(Display *display,
 				    const char *fontset_name)
 {
     R_XFont *tmp = (R_XFont *) malloc(sizeof(R_XFont));
+    if(!tmp) error("%s", _("allocation failed in R_XLoadQueryFontSet"));
     XFontSet fontset;
     int  /*i,*/ missing_charset_count;
     char **missing_charset_list, *def_string;
