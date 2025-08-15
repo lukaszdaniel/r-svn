@@ -53,6 +53,7 @@
 #include <map>
 #include <unordered_map>
 #include <utility>
+#include <array>
 #include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
@@ -1201,30 +1202,6 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 #endif
 }
 
-namespace
-{
-#ifdef PROTECTCHECK
-    bool isVectorType(const GCNode *s)
-    {
-        switch (TYPEOF(s))
-        {
-        case RAWSXP:
-        case VECSXP:
-        case EXPRSXP:
-        case CHARSXP:
-        case LGLSXP:
-        case INTSXP:
-        case REALSXP:
-        case CPLXSXP:
-        case STRSXP:
-            return true;
-        default:
-            return false;
-        }
-    }
-#endif
-} // anonymous namespace
-
 #define MARK_THRU(s) if (s != R_NilValue) marker(s);
 
 void GCNode::mark(unsigned int num_old_gens_to_collect)
@@ -1243,7 +1220,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             BULK_MOVE(s_Old[gen].get(), s_New.get());
     }
 
-    std::forward_list<const GCNode *> forwarded_nodes;
     Marker marker(num_old_gens_to_collect);
 
 #ifndef EXPEL_OLD_TO_NEW
@@ -1256,9 +1232,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #endif
 
     /* forward all roots */
-    MARK_THRU(R_NilValue);	           /* Builtin constants */
-    // MARK_THRU(NA_STRING);
-    // MARK_THRU(R_BlankString);
     MARK_THRU(R_BlankScalarString);
     MARK_THRU(R_CurrentExpression);
     MARK_THRU(R_UnboundValue);
@@ -1274,7 +1247,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     MARK_THRU(R_HandlerStack);          /* Condition handler stack */
     MARK_THRU(R_RestartStack);          /* Available restarts stack */
 
-    // MARK_THRU(R_BCbody);                /* Current byte code object */
     MARK_THRU(R_Srcref);                /* Current source reference */
 
     MARK_THRU(R_TrueValue);
@@ -1291,32 +1263,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
         MARK_THRU(symbol);
     }
 
-    // if (R_CurrentExpr != NULL)	           /* Current expression */
-    //     MARK_THRU(R_CurrentExpr);
-
-#if CXXR_FALSE
-    for (int i = 0; i < R_MaxDevices; i++) {   /* Device display lists */
-        pGEDevDesc gdd = GEgetDevice(i);
-        if (gdd) {
-            MARK_THRU(gdd->displayList);
-            MARK_THRU(gdd->savedSnapshot);
-            if (gdd->dev)
-                MARK_THRU(gdd->dev->eventEnv);
-        }
-    }
-#endif
-
     for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL; ctxt = ctxt->nextcontext) {
-        // MARK_THRU(ctxt->conexit);       /* on.exit expressions */
-        // MARK_THRU(ctxt->promargs);	   /* promises supplied to closure */
-        // MARK_THRU(ctxt->callfun);       /* the closure called */
-        // MARK_THRU(ctxt->sysparent);     /* calling environment */
-        // MARK_THRU(ctxt->call);          /* the call */
-        // MARK_THRU(ctxt->cloenv);        /* the closure environment */
-        // MARK_THRU(ctxt->bcbody);        /* the current byte code object */
-        // MARK_THRU(ctxt->handlerstack);  /* the condition handler stack */
-        // MARK_THRU(ctxt->restartstack);  /* the available restarts stack */
-        // MARK_THRU(ctxt->srcref);	   /* the current source reference */
         if (ctxt->returnValue.tag == 0)    /* For on.exit calls */
             MARK_THRU(ctxt->returnValue.u.sxpval);
     }
@@ -1382,10 +1329,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
         {
             to_delete.push_back(key);
         }
-        else
-        {
-            MARK_THRU(charsxp);
-        }
     }
     for (auto &key : to_delete)
     {
@@ -1394,6 +1337,14 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 
 #ifdef PROTECTCHECK
+    auto isVectorType = [](const GCNode *node) -> bool
+        {
+            static constexpr std::array<unsigned int, 9> types = {
+                RAWSXP, VECSXP, EXPRSXP, CHARSXP,
+                LGLSXP, INTSXP, REALSXP, CPLXSXP, STRSXP
+            };
+            return std::find(types.begin(), types.end(), TYPEOF(node)) != types.end();
+        };
     const GCNode *s = NEXT_NODE(s_New);
     while (s != s_New.get())
     {
