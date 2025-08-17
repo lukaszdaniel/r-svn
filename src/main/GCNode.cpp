@@ -40,10 +40,10 @@
 namespace CXXR
 {
     unsigned int GCNode::SchwarzCounter::s_count = 0;
-    GCNode::Table GCNode::s_for_deletion;
-    GCNode::Table GCNode::s_GCNodeTable;
+    size_t GCNode::s_num_nodes = 0;
+    std::unique_ptr<CXXR::GCNode> GCNode::s_Old[1 + GCNode::s_num_old_generations];
 #ifndef EXPEL_OLD_TO_NEW
-    GCNode::Table GCNode::s_OldToNew[GCNode::s_num_old_generations];
+    std::unique_ptr<CXXR::GCNode> GCNode::s_OldToNew[GCNode::s_num_old_generations];
 #endif
     unsigned int GCNode::s_gencount[GCNode::s_num_old_generations];
 
@@ -57,15 +57,20 @@ namespace CXXR
         MemoryBank::deallocate(pointer, bytes);
     }
 
-    GCNode::GCNode(SEXPTYPE stype): sxpinfo(stype)
+    GCNode::GCNode(): sxpinfo(NILSXP), m_next(this), m_prev(this)
     {
-        s_GCNodeTable.insert(this);
-        s_for_deletion.insert(this);
+    }
+
+    GCNode::GCNode(SEXPTYPE stype): sxpinfo(stype), m_next(this), m_prev(this)
+    {
+        ++s_num_nodes;
+        s_New->splice(this);
     }
 
     GCNode::~GCNode()
     {
-        s_GCNodeTable.erase(this);
+        unsnap();
+        --s_num_nodes;
     }
 
     void GCNode::Ager::operator()(const GCNode *node)
@@ -77,6 +82,7 @@ namespace CXXR
             else
                 node->sxpinfo.m_mark = true;
             node->sxpinfo.m_gcgen = m_mingen;
+            s_Old[m_mingen]->splice(node);
             ++s_gencount[m_mingen];
             node->visitReferents(this);
         }
@@ -134,12 +140,12 @@ namespace CXXR
 
         for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
         {
-            s_gencount[gen] = 0;
+            s_Old[gen] = std::make_unique<GCNode>(/* OldPeg constructor */);
 #ifndef EXPEL_OLD_TO_NEW
-            s_OldToNew[gen].reserve(200); // Reserve space for 200 old-to-new references initially
+            s_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNewPeg constructor */);
 #endif
+            s_gencount[gen] = 0;
         }
-        s_GCNodeTable.reserve(400000); // Reserve space for 400k nodes initially
-        s_for_deletion.reserve(400000); // Reserve space for 400k nodes initially       
+        s_New = std::make_unique<GCNode>(/* NewPeg constructor */);
     }
 } // namespace CXXR

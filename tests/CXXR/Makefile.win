@@ -102,7 +102,7 @@ splice_test.ts: splice_test splice_test.save
 	touch $@
 
 # RObject_sizer build and test
-RObject_sizer_objs := RObject_sizer.o MemoryBank.o CellPool.o
+RObject_sizer_objs := RObject_sizer.o
 
 RObject_sizer: $(RObject_sizer_objs)
 	$(LINK.cc) -o $@ $^
