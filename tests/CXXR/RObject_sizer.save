@@ -13,7 +13,7 @@ sizeof(double): 8
 sizeof(Rcomplex): 16
 sizeof(Complex): 16
 sizeof(RObject*): 8
-sizeof(GCNode): 32
-sizeof(RObject): 64
-sizeof(VectorBase): 64
+sizeof(GCNode): 16
+sizeof(RObject): 48
+sizeof(VectorBase): 48
 GCNode::cleanup()

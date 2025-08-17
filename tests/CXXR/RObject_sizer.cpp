@@ -28,7 +28,7 @@ using namespace CXXR;
 
 // Stubs for members of GCNode:
 
-void GCNode::cleanup()
+void CXXR::GCNode::cleanup()
 {
     std::cout << "GCNode::cleanup()\n";
 }
@@ -36,6 +36,11 @@ void GCNode::cleanup()
 void CXXR::GCNode::initialize()
 {
     std::cout << "GCNode::initialize()\n";
+}
+
+bool CXXR::GCManager::FORCE_GC()
+{
+    return false;
 }
 
 int main()
