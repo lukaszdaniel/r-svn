@@ -75,6 +75,13 @@
 
       \item \code{gzcon()} can now decompress a concatenation of compressed
       streams \PR{18887}.
+
+      \item Bibliographic citations and references in Rd files can now
+      be auto-generated from bibentries in bibliographic databases in R
+      or BibTeX formats. 
+      See
+      \code{\link{RShowDoc}("R-exts#Bibliographic-citations-and-references")}
+      for more information.
     }
   }
 
@@ -230,11 +237,14 @@
       error and returns \code{FALSE} when the package version check is not
       fulfilled, thanks to \I{Iris Simmons} and \I{Trevor Davis}'s
       \PR{18255}.
+      Additionally, the \code{versionCheck} argument is checked and when
+      invalid, an error is signalled to avoid subsequent confusing error
+      messages.
 
       \item \code{requireNamespace()} now throws an error even if the
       name space is already loaded if it is called with an unmatched
       argument such as \code{quitely = TRUE} or \code{quiet = TRUE}
-      (arguemnt \code{quietly} cannot be abbreviated as it follows
+      (argument \code{quietly} cannot be abbreviated as it follows
       \code{\dots}).
       %% side effect of c88540
     }
