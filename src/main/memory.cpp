@@ -685,46 +685,46 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
 {
     REprintf("Node counts %s:\n", where);
     unsigned int NewCount = 0;
-	for (const GCNode *s = NEXT_NODE(GCNode::s_New);
-	     s != GCNode::s_New.get();
-	     s = NEXT_NODE(s)) {
-	    NewCount++;
-	}
-	unsigned int OldCount = 0;
-	unsigned int OldToNewCount = 0;
-	for (unsigned int gen = 0;
-	     gen < GCNode::numOldGenerations();
-	     gen++) {
-	    for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
-		 s != GCNode::s_Old[gen].get();
-		 s = NEXT_NODE(s)) {
-		OldCount++;
-		if (gen != NODE_GENERATION(s))
-		    GCManager::gc_error(_("Inconsistent node generation\n"));
-		GCNode::OldToNewChecker o2n(gen);
-		s->visitReferents(&o2n);
-	    }
-	    for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[gen]);
-		 s != GCNode::s_OldToNew[gen].get();
-		 s = NEXT_NODE(s)) {
-		OldToNewCount++;
-		if (gen != NODE_GENERATION(s))
-		    GCManager::gc_error(_("Inconsistent node generation\n"));
-	    }
-	}
-	REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
-		 NewCount, OldCount, OldToNewCount,
-		 NewCount + OldCount + OldToNewCount);
+    unsigned int OldCount = 0;
+    unsigned int OldToNewCount = 0;
+    for (const GCNode *s = NEXT_NODE(GCNode::s_New);
+        s != GCNode::s_New.get();
+        s = NEXT_NODE(s)) {
+        NewCount++;
+    }
+    for (unsigned int gen = 0;
+        gen < GCNode::numOldGenerations();
+        gen++) {
+        for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
+            s != GCNode::s_Old[gen].get();
+            s = NEXT_NODE(s)) {
+            OldCount++;
+            if (gen != NODE_GENERATION(s))
+                GCManager::gc_error(_("Inconsistent node generation\n"));
+            GCNode::OldToNewChecker o2n(gen);
+            s->visitReferents(&o2n);
+        }
+        for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[gen]);
+            s != GCNode::s_OldToNew[gen].get();
+            s = NEXT_NODE(s)) {
+            OldToNewCount++;
+            if (gen != NODE_GENERATION(s))
+                GCManager::gc_error(_("Inconsistent node generation\n"));
+        }
+    }
+    REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
+        NewCount, OldCount, OldToNewCount,
+        NewCount + OldCount + OldToNewCount);
 }
 
 static void DEBUG_GC_SUMMARY(int full_gc)
 {
     REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
-	     MemoryBank::doublesAllocated());
-	unsigned int OldCount = 0;
-	for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
-	    OldCount += GCNode::s_gencount[gen];
-	REprintf(": %d", OldCount);
+        MemoryBank::doublesAllocated());
+    unsigned int OldCount = 0;
+    for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
+        OldCount += GCNode::s_gencount[gen];
+    REprintf(": %d", OldCount);
 }
 #else
 #define DEBUG_CHECK_NODE_COUNTS(s)
