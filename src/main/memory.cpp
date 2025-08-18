@@ -1730,6 +1730,8 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
 
 void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
 {
+    DEBUG_CHECK_NODE_COUNTS("before propagating");
+
     propagateAges(num_old_gens_to_collect);
 
     DEBUG_CHECK_NODE_COUNTS("at start");
@@ -1740,7 +1742,7 @@ void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
 
     sweep(num_old_gens_to_collect);
 
-    DEBUG_CHECK_NODE_COUNTS("after releasing large allocated nodes");
+    DEBUG_CHECK_NODE_COUNTS("after releasing allocated nodes");
 }
 
 unsigned int GCManager::genRota(unsigned int num_old_gens_to_collect)
