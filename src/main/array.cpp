@@ -180,7 +180,10 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    warning("%s", _("non-empty data for zero-extent matrix"));
     }
 
-#ifndef LONG_VECTOR_SUPPORT
+#ifdef LONG_VECTOR_SUPPORT
+    if ((double)nr * (double)nc > R_XLEN_T_MAX)
+	error("%s", _("too many elements specified"));
+#else
     if ((double)nr * (double)nc > INT_MAX)
 	error("%s", _("too many elements specified"));
 #endif
@@ -237,7 +240,10 @@ SEXP Rf_allocMatrix(SEXPTYPE mode, int nrow, int ncol)
 
     if (nrow < 0 || ncol < 0)
 	error("%s", _("negative extents to matrix"));
-#ifndef LONG_VECTOR_SUPPORT
+#ifdef LONG_VECTOR_SUPPORT
+    if ((double)nrow * (double)ncol > R_XLEN_T_MAX)
+	error("%s", _("allocMatrix: too many elements specified"));
+#else
     if ((double)nrow * (double)ncol > INT_MAX)
 	error("%s", _("allocMatrix: too many elements specified"));
 #endif
@@ -268,7 +274,10 @@ SEXP Rf_alloc3DArray(SEXPTYPE mode, int nrow, int ncol, int nface)
 
     if (nrow < 0 || ncol < 0 || nface < 0)
 	error("%s", _("negative extents to 3D array"));
-#ifndef LONG_VECTOR_SUPPORT
+#ifdef LONG_VECTOR_SUPPORT
+    if ((double)nrow * (double)ncol * (double)nface > R_XLEN_T_MAX)
+	error("%s", _("'alloc3DArray': too many elements specified"));
+#else
     if ((double)nrow * (double)ncol * (double)nface > INT_MAX)
 	error("%s", _("'alloc3DArray': too many elements specified"));
 #endif
@@ -288,13 +297,14 @@ SEXP Rf_allocArray(SEXPTYPE mode, SEXP dims)
 {
     SEXP array;
     R_xlen_t n = 1;
-#ifndef LONG_VECTOR_SUPPORT
     double dn = 1;
-#endif
 
     for (int i = 0; i < LENGTH(dims); i++) {
-#ifndef LONG_VECTOR_SUPPORT
 	dn *= INTEGER(dims)[i];
+#ifdef LONG_VECTOR_SUPPORT
+	if(dn > R_XLEN_T_MAX)
+	    error("%s", _("'allocArray': too many elements specified by 'dims'"));
+#else
 	if(dn > INT_MAX)
 	    error("%s", _("'allocArray': too many elements specified by 'dims'"));
 #endif
@@ -2153,7 +2163,9 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (nd == 0) error("%s", _("'dims' cannot be of length 0"));
     double d = 1.0;
     for (int j = 0; j < nd; j++) d *= INTEGER(dims)[j];
-#ifndef LONG_VECTOR_SUPPORT
+#ifdef LONG_VECTOR_SUPPORT
+    if (d > R_XLEN_T_MAX) error("%s", _("too many elements specified"));
+#else
     if (d > INT_MAX) error("%s", _("too many elements specified"));
 #endif
     nans = (R_xlen_t) d;
@@ -2259,7 +2271,10 @@ attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (mn > 0 && length(x) == 0)
 	error("%s", _("'x' must have positive length"));
 
-#ifndef LONG_VECTOR_SUPPORT
+#ifdef LONG_VECTOR_SUPPORT
+   if ((double)nr * (double)nc > R_XLEN_T_MAX)
+	error("%s", _("too many elements specified"));
+#else
    if ((double)nr * (double)nc > INT_MAX)
 	error("%s", _("too many elements specified"));
 #endif

@@ -2438,7 +2438,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 		   require several casts below... */
 
     if (n_elem > R_XLEN_T_MAX)
-	error("%s", _("vector is too large")); /**** put n_elem into message */
+	error(_("cannot allocate vector of length %lld"), (long long)length);
     else if (n_elem < 0 )
 	error("%s", _("negative length vectors are not allowed"));
 
@@ -2502,7 +2502,7 @@ String *CXXR::CXXR_allocCharsxp(const std::string &name, cetype_t encoding, bool
 {
     size_t n_elem = name.length();
     if (n_elem > R_XLEN_T_MAX)
-        error("%s", _("vector is too large")); /**** put n_elem into message */
+        error(_("cannot allocate vector of length %lld"), (long long)length);
     else if (n_elem < 0)
         error("%s", _("negative length vectors are not allowed"));
 
