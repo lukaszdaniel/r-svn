@@ -170,6 +170,12 @@ namespace CXXR
          */
         static String *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
+        /** @brief Visit the String hash table.
+         *
+         * This function is used to visit the String hash table,
+         */
+        static void visitTable();
+
         /** @brief used in package utils and graphics
          */
         static bool s_known_to_be_latin1;

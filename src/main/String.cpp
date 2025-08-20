@@ -122,10 +122,22 @@ namespace CXXR
         return new String(name, enc, is_ascii);
     }
 
+    void String::visitTable()
+    {
+        for (auto it = String::s_hash_table.begin(); it != String::s_hash_table.end(); )
+        {
+            if (!it->second->isMarked())
+                it = String::s_hash_table.erase(it);  // erase returns the next iterator
+            else
+                ++it;
+        }
+    }
+
+
     bool isASCII(const std::string &str)
     {
         return !std::any_of(str.begin(), str.end(), [](char c)
-                            { return static_cast<unsigned char>(c) > 127; });
+            { return static_cast<unsigned char>(c) > 127; });
     }
 } // namespace CXXR
 

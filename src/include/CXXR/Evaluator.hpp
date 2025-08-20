@@ -155,6 +155,17 @@ namespace CXXR
             return m_innermost_context;
         }
 
+        /** @brief Next Evaluator down the stack
+         *
+         * @return Pointer to the next Evaluator down the stack, or a
+         * null pointer if this is the innermost Evaluator (i.e. the
+         * one at the top of the stack).
+         */
+        Evaluator *next() const
+        {
+            return m_next;
+        }
+
         /** @brief Is profiling currently enabled?
          *
          * @return true iff profiling is currently in progress.

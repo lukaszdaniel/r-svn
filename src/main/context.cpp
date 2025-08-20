@@ -182,7 +182,7 @@ namespace CXXR
                 cptr = cptr->nextcontext;
             }
             std::cerr << "o\n";
-            evl = evl->m_next;
+            evl = evl->next();
         }
     }
 } // namespace CXXR

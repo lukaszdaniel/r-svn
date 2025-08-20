@@ -54,7 +54,7 @@ namespace CXXR
          */
         static void visitRoots(GCNode::const_visitor *v);
 
-    // protected:
+    protected:
         /** @brief Primary constructor.
          *
          * @param node Pointer, possibly null, to the node to be protected.
@@ -98,7 +98,7 @@ namespace CXXR
             return m_pointer;
         }
 
-    // private:
+    private:
         const GCNode *m_pointer;
 
         // GCRoots form an intrusive doubly-linked list.  This structure

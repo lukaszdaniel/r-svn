@@ -1218,6 +1218,8 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     }
 
     Marker marker(num_old_gens_to_collect);
+    GCRootBase::visitRoots(&marker);
+    GCStackRootBase::visitRoots(&marker);
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
@@ -1268,18 +1270,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
         MARK_THRU(R_PPStack[i]);
 
-    for (auto &node : *(GCStackRootBase::s_roots.get()))
-    {
-        if (node)
-            MARK_THRU(node);
-    }
-
-    for (GCRootBase *node = GCRootBase::s_list_head; node; node = node->m_next)
-    {
-        if (node->ptr())
-            MARK_THRU(node->ptr());
-    }
-
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
         if (sp->tag == RAWMEM_TAG)
             sp += sp->u.ival;
@@ -1319,18 +1309,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     }
 
     /* process CHARSXP cache */
-    std::vector<String::key> to_delete;
-    for (auto &[key, charsxp] : String::s_hash_table)
-    {
-        if (!NODE_IS_MARKED(charsxp))
-        {
-            to_delete.push_back(key);
-        }
-    }
-    for (auto &key : to_delete)
-    {
-        String::s_hash_table.erase(key);
-    }
+    String::visitTable();
 
 
 #ifdef PROTECTCHECK
