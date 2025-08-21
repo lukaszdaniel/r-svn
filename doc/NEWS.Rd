@@ -82,6 +82,12 @@
       See
       \code{\link{RShowDoc}("R-exts#Bibliographic-citations-and-references")}
       for more information.
+
+      \item Arguments to \code{loadNamespace()} which will be ignored
+      because the namespace is already loaded are now noted.
+
+      \item \code{chkDots()}' optional argument \code{allowed} has been
+      implemented thanks to \I{Trevor Davis}' proposal in \PR{18936}.
     }
   }
 
@@ -251,6 +257,13 @@
       using both \code{times} and \code{each} optional arguments.  Fixes
       \PR{18926}, thanks to \I{Ella Kaye} and collaborators at \I{useR! 2025}'s
       \sQuote{\I{R Dev Day}}.
+
+      \item \I{Tanguy Barthelemy} and colleagues at the
+      \sQuote{\I{R Dev Day}} following \I{Rencontres R} in May 2025
+      extended the help page of \code{lm()}, fixing \PR{18058}.
+      As suggested by \I{Thomas Soeiro}, such notes were also added to the
+      \code{glm()}, \code{poly()} and \code{splines::bs()} and \code{ns()}
+      pages.
     }
   }
 }
