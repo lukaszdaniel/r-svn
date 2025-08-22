@@ -149,8 +149,8 @@ namespace R {
 /* General GCNode Attributes */
 #define NODE_GENERATION(s) ((s)->sxpinfo.m_gcgen)
 #define SET_NODE_GENERATION(s,g) ((s)->sxpinfo.m_gcgen=(g))
-#define NODE_CLASS(s) ((s)->sxpinfo.gccls)
-#define SET_NODE_CLASS(s,v) (((s)->sxpinfo.gccls) = (v))
+#define EXT_ALLOCATOR(s) ((s)->sxpinfo.m_ext_allocator)
+#define SET_EXT_ALLOCATOR(s,v) (((s)->sxpinfo.m_ext_allocator) = (v))
 
 /* General Cons Cell Attributes */
 #define ATTRIB(x)	CXXR_EXPAND((x), (x)->m_attrib)

@@ -110,7 +110,7 @@ namespace CXXR
         if (u.vecsxp.m_data)
         {
             R_size_t databytes = getVecSizeInBytes(this);
-            MemoryBank::deallocate(u.vecsxp.m_data, databytes, sxpinfo.gccls);
+            MemoryBank::deallocate(u.vecsxp.m_data, databytes, sxpinfo.m_ext_allocator);
         }
     }
 

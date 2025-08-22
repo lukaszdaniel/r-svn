@@ -2383,7 +2383,7 @@ namespace CXXR
             VectorBase::tooBig(actual_size);
         }
 
-        SET_NODE_CLASS(this, (allocator != nullptr));
+        SET_EXT_ALLOCATOR(this, (allocator != nullptr));
         u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, allocator));
         SET_STDVEC_LENGTH(this, n_elem);
 

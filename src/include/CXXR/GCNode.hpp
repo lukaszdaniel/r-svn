@@ -58,7 +58,7 @@ namespace CXXR
         sxpinfo_struct(SEXPTYPE stype = NILSXP): type(stype), scalar(false), obj(false),
             alt(false), gp(0), m_mark(false), debug(false),
             trace(false), m_refcnt_enabled(true), m_rstep(false), m_gcgen(0),
-            gccls(0), m_refcnt(0), m_binding_tag(NILSXP), extra(0)
+            m_ext_allocator(false), m_refcnt(0), m_binding_tag(NILSXP), extra(0)
         {
         }
 
@@ -75,7 +75,7 @@ namespace CXXR
             m_refcnt_enabled = true;
             m_rstep = false;
             m_gcgen = 0;
-            gccls = 0;
+            m_ext_allocator = false;
             m_refcnt = 0;
             m_binding_tag = NILSXP;
             extra = 0;
@@ -92,7 +92,7 @@ namespace CXXR
         unsigned int m_refcnt_enabled : 1;  /* used on closures and when REFCNT is defined */
         unsigned int m_rstep : 1;
         unsigned int m_gcgen : 1;  /* old generation number */
-        unsigned int gccls : 1;  /* was external allocator used? */
+        unsigned int m_ext_allocator : 1;  /* was external allocator used? */
         unsigned int m_refcnt : NAMED_BITS;
         SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
         unsigned int extra : 6; /* unused bits */
