@@ -237,7 +237,13 @@ topic2href <- function(x, destpkg = NULL, hooks = list())
     else {
         FUN <- hooks$pkg_href
         if (is.null(FUN)) FUN <- function(pkg) sprintf("%s.html", pkg)
-        sprintf("%s#%s", FUN(destpkg), topic2id(x))
+        ## Need a way to turn links to unavailable packages into
+        ## "nothing", e.g. when building package HTML refmans.
+        ## We do so if FUN() gave "nothing" or the special '#'.
+        if(!length(s <- FUN(destpkg)) || (s == "#"))
+            "#"
+        else
+            sprintf("%s#%s", s, topic2id(x))
     }
 }
 
@@ -276,7 +282,7 @@ tag2id <- function(tag, name = NULL, tagid = section2id[tag])
           "\\value"       = "_sec_value")
     if (anyNA(tagid)) return(NULL) # or "" ?
     id <- if (is.null(name)) tagid
-          else paste(name2id(name), tolower(tagid), sep = "_:_")
+          else paste(name2id(name), tagid, sep = "_:_")
     string2id(gsub("[[:space:]]+", "-", id))
 }
 
@@ -488,7 +494,7 @@ Rd2HTML <-
                   "\\var"="var")
     # These have simple substitutions
     HTMLEscapes <- c("\\R"='<span class="rlang"><b>R</b></span>',
-    		     "\\cr"="<br />",
+    		     "\\cr"="<br>",
     		     "\\dots"="...",
     		     "\\ldots"="...")
     ## These correspond to idiosyncratic wrappers
@@ -901,7 +907,7 @@ Rd2HTML <-
 		       writeContent(block[[length(block)]], tag)
 		       of1('"')
                    }
-                   of1(' />')
+                   of1('>')
                },
                "\\dontshow" =,
                "\\testonly" = {}, # do nothing
@@ -943,6 +949,23 @@ Rd2HTML <-
 	    conc$saveSrcref(table)
         newrow <- TRUE
         newcol <- TRUE
+        ## Argh.  As of 2025-08, about 3000 CRAN packages have \\tabular
+        ## with a trailing \cr ending the last row, which is invalid as
+        ## per R-exts (the \cr starts another row which has a different
+        ## number of fields than the other rows), and when processed
+        ## results in bad HTML (spotted by v.NU but not HTML Tidy).  We
+        ## could have checkRd() complain, but given the number of
+        ## offenders let's drop such trainling \cr before processing, at
+        ## least for the time being. 
+        if(any(ind <- (tags == "\\cr"))) {
+            i <- max(which(ind))
+            j <- seq.int(i + 1L, length.out = length(content) - i)
+            if(all(grepl("^[[:space:]]*$",
+                         vapply(content[j], .Rd_deparse, "")))) {
+                content <- content[-i]
+                tags <- tags[-i]
+            }
+        }
         for (i in seq_along(tags)) {
             if (concordance)
                 conc$saveSrcref(content[[i]])
@@ -1317,7 +1340,7 @@ Rd2HTML <-
 	of1('\n')
         if (standalone) {
             if(nzchar(version))
-                of0('<hr /><div style="text-align: center;">[', version,
+                of0('<hr><div style="text-align: center;">[', version,
                     if (!no_links) '<a href="00Index.html">Index</a>',
                     ']</div>')
             of1('</main>\n')
@@ -1708,7 +1731,7 @@ function(dir)
                         else
                             " src=\"https://cloud.R-project.org/web/resources/orcid.svg\" ",
                         "style=\"width:16px; height:16px; margin-left:4px; margin-right:4px; vertical-align:middle\"",
-                        " /></a>"),
+                        "></a>"),
                  desc["Author"])
         desc["Author"] <-
             gsub(sprintf("&lt;https://replace.me.by.ror.org/(%s)&gt;",
@@ -1720,7 +1743,7 @@ function(dir)
                         else
                             " src=\"https://cloud.R-project.org/web/resources/ror.svg\" ",
                         "style=\"width:20px; height:20px; margin-left:4px; margin-right:4px; vertical-align:middle\"",
-                        " /></a>"),
+                        "></a>"),
                  desc["Author"])
     }
 
