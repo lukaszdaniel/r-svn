@@ -1180,190 +1180,6 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
 /* The Generational Collector. */
-
-void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
-{
-#ifndef EXPEL_OLD_TO_NEW
-    /* eliminate old-to-new references in generations to collect by
-       transferring referenced nodes to referring generation */
-    for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-        Ager ager(gen);
-        const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
-        while (s != s_OldToNew[gen].get()) {
-            const GCNode *next = NEXT_NODE(s);
-            s->visitReferents(&ager);
-            s_Old[gen]->splice(s);
-            s = next;
-        }
-    }
-#endif
-}
-
-#define MARK_THRU(s) if (s != R_NilValue) marker(s);
-
-void GCNode::mark(unsigned int num_old_gens_to_collect)
-{
-    /* unmark all marked nodes in old generations to be collected and
-       move to New space */
-    for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-        s_gencount[gen] = 0;
-        const GCNode *s = NEXT_NODE(s_Old[gen]);
-        while (s != s_Old[gen].get()) {
-            const GCNode *next = NEXT_NODE(s);
-            UNMARK_NODE(s);
-            s = next;
-        }
-        if (NEXT_NODE(s_Old[gen]) != s_Old[gen].get())
-            BULK_MOVE(s_Old[gen].get(), s_New.get());
-    }
-
-    Marker marker(num_old_gens_to_collect);
-    GCRootBase::visitRoots(&marker);
-    GCStackRootBase::visitRoots(&marker);
-
-#ifndef EXPEL_OLD_TO_NEW
-    /* scan nodes in uncollected old generations with old-to-new pointers */
-    for (unsigned int gen = num_old_gens_to_collect; gen < s_num_old_generations; gen++)
-        for (const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
-            s != s_OldToNew[gen].get();
-            s = NEXT_NODE(s))
-            s->visitReferents(&marker);
-#endif
-
-    /* forward all roots */
-    MARK_THRU(R_BlankScalarString);
-    MARK_THRU(R_CurrentExpression);
-    MARK_THRU(R_UnboundValue);
-    MARK_THRU(R_RestartToken);
-    MARK_THRU(R_MissingArg);
-    MARK_THRU(R_InBCInterpreter);
-
-    MARK_THRU(R_GlobalEnv);	           /* Global environment */
-    MARK_THRU(R_BaseEnv);
-    MARK_THRU(R_EmptyEnv);
-    MARK_THRU(R_Warnings);	           /* Warnings, if any */
-
-    MARK_THRU(R_HandlerStack);          /* Condition handler stack */
-    MARK_THRU(R_RestartStack);          /* Available restarts stack */
-
-    MARK_THRU(R_Srcref);                /* Current source reference */
-
-    MARK_THRU(R_TrueValue);
-    MARK_THRU(R_FalseValue);
-    MARK_THRU(R_LogicalNAValue);
-
-    MARK_THRU(R_print.na_string);
-    MARK_THRU(R_print.na_string_noquote);
-
-    for (auto &[key, symbol] : Symbol::s_symbol_table)
-    {
-        if (ATTRIB(symbol) != R_NilValue)
-            GCManager::gc_error("****found a symbol with attributes\n");
-        MARK_THRU(symbol);
-    }
-
-    for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL; ctxt = ctxt->nextcontext) {
-        if (ctxt->returnValue.tag == 0)    /* For on.exit calls */
-            MARK_THRU(ctxt->returnValue.u.sxpval);
-    }
-
-    for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
-        MARK_THRU(R_PPStack[i]);
-
-    for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
-        if (sp->tag == RAWMEM_TAG)
-            sp += sp->u.ival;
-        else if (sp->tag == 0 || IS_PARTIAL_SXP_TAG(sp->tag))
-            MARK_THRU(sp->u.sxpval);
-    }
-
-    /* identify weakly reachable nodes */
-    {
-        bool recheck_weak_refs;
-        do {
-            recheck_weak_refs = false;
-            for (auto &s : s_R_weak_refs) {
-                if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
-                    if (WEAKREF_VALUE(s) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
-                        recheck_weak_refs = true;
-                        MARK_THRU(WEAKREF_VALUE(s));
-                    }
-                    if (WEAKREF_FINALIZER(s) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
-                        recheck_weak_refs = true;
-                        MARK_THRU(WEAKREF_FINALIZER(s));
-                    }
-                }
-            }
-        } while (recheck_weak_refs);
-    }
-
-    /* mark nodes ready for finalizing */
-    CheckFinalizers();
-
-    /* process the weak reference chain */
-    for (auto &s : s_R_weak_refs) {
-        MARK_THRU(s);
-        MARK_THRU(WEAKREF_KEY(s));
-        MARK_THRU(WEAKREF_VALUE(s));
-        MARK_THRU(WEAKREF_FINALIZER(s));
-    }
-
-    /* process CHARSXP cache */
-    String::visitTable();
-
-
-#ifdef PROTECTCHECK
-    auto isVectorType = [](const GCNode *node) -> bool
-        {
-            static constexpr std::array<unsigned int, 9> types = {
-                RAWSXP, VECSXP, EXPRSXP, CHARSXP,
-                LGLSXP, INTSXP, REALSXP, CPLXSXP, STRSXP
-            };
-            return std::find(types.begin(), types.end(), TYPEOF(node)) != types.end();
-        };
-    const GCNode *s = NEXT_NODE(s_New);
-    while (s != s_New.get())
-    {
-        const GCNode *next = NEXT_NODE(s);
-        if (TYPEOF(s) != NEWSXP)
-        {
-            if (TYPEOF(s) != FREESXP)
-            {
-                if (isVectorType(s) && !ALTREP(s))
-                {
-                    {
-                        VectorBase *vec = static_cast<VectorBase *>(const_cast<GCNode *>(s));
-                        if (IS_GROWABLE(vec))
-                            SET_STDVEC_LENGTH(vec, XTRUELENGTH(vec));
-                    }
-
-                    switch (TYPEOF(s))
-                    {
-                    case CHARSXP:
-                    case RAWSXP:
-                    case LGLSXP:
-                    case INTSXP:
-                    case REALSXP:
-                    case CPLXSXP:
-                    case STRSXP:
-                    case EXPRSXP:
-                    case VECSXP:
-                        break;
-                    default:
-                        BadObject::register_bad_object(s, __LINE__);
-                    }
-                }
-                SETOLDTYPE(s, TYPEOF(s));
-                SET_TYPEOF(s, FREESXP);
-            }
-            if (GCManager::gc_inhibit_release())
-                MARK_THRU(s);
-        }
-        s = next;
-    }
-#endif
-}
-
 namespace CXXR
 {
     void RObject::visitReferents(const_visitor *v) const
@@ -1680,6 +1496,189 @@ namespace
             }
     }
 } // anonymous namespace
+
+void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
+{
+#ifndef EXPEL_OLD_TO_NEW
+    /* eliminate old-to-new references in generations to collect by
+       transferring referenced nodes to referring generation */
+    for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
+        Ager ager(gen);
+        const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
+        while (s != s_OldToNew[gen].get()) {
+            const GCNode *next = NEXT_NODE(s);
+            s->visitReferents(&ager);
+            s_Old[gen]->splice(s);
+            s = next;
+        }
+    }
+#endif
+}
+
+#define MARK_THRU(s) if (s != R_NilValue) marker(s);
+
+void GCNode::mark(unsigned int num_old_gens_to_collect)
+{
+    /* unmark all marked nodes in old generations to be collected and
+       move to New space */
+    for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
+        s_gencount[gen] = 0;
+        const GCNode *s = NEXT_NODE(s_Old[gen]);
+        while (s != s_Old[gen].get()) {
+            const GCNode *next = NEXT_NODE(s);
+            UNMARK_NODE(s);
+            s = next;
+        }
+        if (NEXT_NODE(s_Old[gen]) != s_Old[gen].get())
+            BULK_MOVE(s_Old[gen].get(), s_New.get());
+    }
+
+    Marker marker(num_old_gens_to_collect);
+    GCRootBase::visitRoots(&marker);
+    GCStackRootBase::visitRoots(&marker);
+
+#ifndef EXPEL_OLD_TO_NEW
+    /* scan nodes in uncollected old generations with old-to-new pointers */
+    for (unsigned int gen = num_old_gens_to_collect; gen < s_num_old_generations; gen++)
+        for (const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
+            s != s_OldToNew[gen].get();
+            s = NEXT_NODE(s))
+            s->visitReferents(&marker);
+#endif
+
+    /* forward all roots */
+    MARK_THRU(R_BlankScalarString);
+    MARK_THRU(R_CurrentExpression);
+    MARK_THRU(R_UnboundValue);
+    MARK_THRU(R_RestartToken);
+    MARK_THRU(R_MissingArg);
+    MARK_THRU(R_InBCInterpreter);
+
+    MARK_THRU(R_GlobalEnv);	           /* Global environment */
+    MARK_THRU(R_BaseEnv);
+    MARK_THRU(R_EmptyEnv);
+    MARK_THRU(R_Warnings);	           /* Warnings, if any */
+
+    MARK_THRU(R_HandlerStack);          /* Condition handler stack */
+    MARK_THRU(R_RestartStack);          /* Available restarts stack */
+
+    MARK_THRU(R_Srcref);                /* Current source reference */
+
+    MARK_THRU(R_TrueValue);
+    MARK_THRU(R_FalseValue);
+    MARK_THRU(R_LogicalNAValue);
+
+    MARK_THRU(R_print.na_string);
+    MARK_THRU(R_print.na_string_noquote);
+
+    for (auto &[key, symbol] : Symbol::s_symbol_table)
+    {
+        if (ATTRIB(symbol) != R_NilValue)
+            GCManager::gc_error("****found a symbol with attributes\n");
+        MARK_THRU(symbol);
+    }
+
+    for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL; ctxt = ctxt->nextcontext) {
+        if (ctxt->returnValue.tag == 0)    /* For on.exit calls */
+            MARK_THRU(ctxt->returnValue.u.sxpval);
+    }
+
+    for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
+        MARK_THRU(R_PPStack[i]);
+
+    for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
+        if (sp->tag == RAWMEM_TAG)
+            sp += sp->u.ival;
+        else if (sp->tag == 0 || IS_PARTIAL_SXP_TAG(sp->tag))
+            MARK_THRU(sp->u.sxpval);
+    }
+
+    /* identify weakly reachable nodes */
+    {
+        bool recheck_weak_refs;
+        do {
+            recheck_weak_refs = false;
+            for (auto &s : s_R_weak_refs) {
+                if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
+                    if (WEAKREF_VALUE(s) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
+                        recheck_weak_refs = true;
+                        MARK_THRU(WEAKREF_VALUE(s));
+                    }
+                    if (WEAKREF_FINALIZER(s) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
+                        recheck_weak_refs = true;
+                        MARK_THRU(WEAKREF_FINALIZER(s));
+                    }
+                }
+            }
+        } while (recheck_weak_refs);
+    }
+
+    /* mark nodes ready for finalizing */
+    CheckFinalizers();
+
+    /* process the weak reference chain */
+    for (auto &s : s_R_weak_refs) {
+        MARK_THRU(s);
+        MARK_THRU(WEAKREF_KEY(s));
+        MARK_THRU(WEAKREF_VALUE(s));
+        MARK_THRU(WEAKREF_FINALIZER(s));
+    }
+
+    /* process CHARSXP cache */
+    String::visitTable();
+
+
+#ifdef PROTECTCHECK
+    auto isVectorType = [](const GCNode *node) -> bool
+        {
+            static constexpr std::array<unsigned int, 9> types = {
+                RAWSXP, VECSXP, EXPRSXP, CHARSXP,
+                LGLSXP, INTSXP, REALSXP, CPLXSXP, STRSXP
+            };
+            return std::find(types.begin(), types.end(), TYPEOF(node)) != types.end();
+        };
+    const GCNode *s = NEXT_NODE(s_New);
+    while (s != s_New.get())
+    {
+        const GCNode *next = NEXT_NODE(s);
+        if (TYPEOF(s) != NEWSXP)
+        {
+            if (TYPEOF(s) != FREESXP)
+            {
+                if (isVectorType(s) && !ALTREP(s))
+                {
+                    {
+                        VectorBase *vec = static_cast<VectorBase *>(const_cast<GCNode *>(s));
+                        if (IS_GROWABLE(vec))
+                            SET_STDVEC_LENGTH(vec, XTRUELENGTH(vec));
+                    }
+
+                    switch (TYPEOF(s))
+                    {
+                    case CHARSXP:
+                    case RAWSXP:
+                    case LGLSXP:
+                    case INTSXP:
+                    case REALSXP:
+                    case CPLXSXP:
+                    case STRSXP:
+                    case EXPRSXP:
+                    case VECSXP:
+                        break;
+                    default:
+                        BadObject::register_bad_object(s, __LINE__);
+                    }
+                }
+                SETOLDTYPE(s, TYPEOF(s));
+                SET_TYPEOF(s, FREESXP);
+            }
+            if (GCManager::gc_inhibit_release())
+                MARK_THRU(s);
+        }
+        s = next;
+    }
+#endif
+}
 
 void GCNode::sweep(unsigned int num_old_gens_to_collect)
 {
