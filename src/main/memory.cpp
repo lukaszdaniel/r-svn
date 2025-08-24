@@ -609,9 +609,7 @@ static R_size_t R_V_maxused=0;
 #define NODE_GEN_IS_YOUNGER(s,g) \
   (!NODE_IS_MARKED(s) || NODE_GENERATION(s) < (g))
 // We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
-#define NODE_IS_OLDER(x, y) \
-    (NODE_IS_MARKED(x) && (y) && \
-   (!NODE_IS_MARKED(y) || (NODE_GENERATION(x) + y->isInfant()) > NODE_GENERATION(y)))
+#define NODE_IS_OLDER(x, y) ((x) && (y) && ((NODE_GENERATION(x) + y->isInfant()) > (NODE_GENERATION(y) + x->isInfant())))
 
 
 #define VHEAP_FREE() (R_VSize - MemoryBank::doublesAllocated())

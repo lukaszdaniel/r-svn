@@ -77,16 +77,13 @@ namespace CXXR
     void GCNode::Ager::operator()(const GCNode *node)
     {
         // We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
-        if (!node->isMarked() || node->generation() < (m_mingen + node->isInfant())) // node is younger than the minimum age required
+        if (node->generation() < (m_mingen + node->isInfant())) // node is younger than the minimum age required
         {
-            if (node->isMarked())
-                --s_gencount[node->generation()];
-            else
-                node->sxpinfo.m_mark = true;
+            --s_gencount[node->generation()];
             node->sxpinfo.m_gcgen = m_mingen;
             s_Old[m_mingen]->splice(node);
-            ++s_gencount[m_mingen];
             node->sxpinfo.m_still_in_new = false;
+            ++s_gencount[m_mingen];
             node->visitReferents(this);
         }
     }
