@@ -138,14 +138,17 @@ namespace CXXR
         }
         s_initialized = true;
 
+        for (unsigned int gen = 0; gen < GCNode::numGenerations(); gen++)
+        {
+            s_Old[gen] = std::make_unique<GCNode>(/* Peg constructor */);
+        }
+
         for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
         {
-            s_Old[gen] = std::make_unique<GCNode>(/* OldPeg constructor */);
 #ifndef EXPEL_OLD_TO_NEW
-            s_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNewPeg constructor */);
+            s_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNew peg constructor */);
 #endif
             s_gencount[gen] = 0;
         }
-        s_New = std::make_unique<GCNode>(/* NewPeg constructor */);
     }
 } // namespace CXXR

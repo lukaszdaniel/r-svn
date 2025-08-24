@@ -1600,11 +1600,11 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             recheck_weak_refs = false;
             for (auto &s : s_R_weak_refs) {
                 if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
-                    if (WEAKREF_VALUE(s) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
+                    if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) <= num_old_gens_to_collect) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
                         recheck_weak_refs = true;
                         MARK_THRU(WEAKREF_VALUE(s));
                     }
-                    if (WEAKREF_FINALIZER(s) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
+                    if (WEAKREF_FINALIZER(s) && (NODE_GENERATION(WEAKREF_FINALIZER(s)) <= num_old_gens_to_collect) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
                         recheck_weak_refs = true;
                         MARK_THRU(WEAKREF_FINALIZER(s));
                     }
