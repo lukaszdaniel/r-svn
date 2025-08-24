@@ -59,6 +59,7 @@ namespace CXXR
 
     GCNode::GCNode(): sxpinfo(NILSXP), m_next(this), m_prev(this)
     {
+        sxpinfo.m_still_in_new = false;
     }
 
     GCNode::GCNode(SEXPTYPE stype): sxpinfo(stype), m_next(this), m_prev(this)
@@ -75,7 +76,8 @@ namespace CXXR
 
     void GCNode::Ager::operator()(const GCNode *node)
     {
-        if (!node->isMarked() || node->generation() < m_mingen) // node is younger than the minimum age required
+        // We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
+        if (!node->isMarked() || node->generation() < (m_mingen + node->isInfant())) // node is younger than the minimum age required
         {
             if (node->isMarked())
                 --s_gencount[node->generation()];
@@ -84,6 +86,7 @@ namespace CXXR
             node->sxpinfo.m_gcgen = m_mingen;
             s_Old[m_mingen]->splice(node);
             ++s_gencount[m_mingen];
+            node->sxpinfo.m_still_in_new = false;
             node->visitReferents(this);
         }
     }
@@ -95,7 +98,8 @@ namespace CXXR
             return;
         }
 
-        if (node->generation() <= m_maxgen) // node is below the number of generations to be collected
+        // We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
+        if (node->generation() < (m_maxgen + node->isInfant())) // node is below the number of generations to be collected
         {
             node->sxpinfo.m_mark = true;
             node->visitReferents(this);

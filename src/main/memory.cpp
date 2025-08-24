@@ -608,9 +608,10 @@ static R_size_t R_V_maxused=0;
 
 #define NODE_GEN_IS_YOUNGER(s,g) \
   (!NODE_IS_MARKED(s) || NODE_GENERATION(s) < (g))
+// We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
 #define NODE_IS_OLDER(x, y) \
     (NODE_IS_MARKED(x) && (y) && \
-   (!NODE_IS_MARKED(y) || NODE_GENERATION(x) > NODE_GENERATION(y)))
+   (!NODE_IS_MARKED(y) || (NODE_GENERATION(x) + y->isInfant()) > NODE_GENERATION(y)))
 
 
 #define VHEAP_FREE() (R_VSize - MemoryBank::doublesAllocated())
@@ -1509,6 +1510,7 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
             const GCNode *next = NEXT_NODE(s);
             s->visitReferents(&ager);
             s_Old[gen]->splice(s);
+            s->sxpinfo.m_still_in_new = false;
             s = next;
         }
     }
@@ -1600,11 +1602,13 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             recheck_weak_refs = false;
             for (auto &s : s_R_weak_refs) {
                 if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
-                    if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) <= num_old_gens_to_collect) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
+                    // We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
+                    if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) < (num_old_gens_to_collect + WEAKREF_VALUE(s)->isInfant())) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
                         recheck_weak_refs = true;
                         MARK_THRU(WEAKREF_VALUE(s));
                     }
-                    if (WEAKREF_FINALIZER(s) && (NODE_GENERATION(WEAKREF_FINALIZER(s)) <= num_old_gens_to_collect) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
+                    // We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
+                    if (WEAKREF_FINALIZER(s) && (NODE_GENERATION(WEAKREF_FINALIZER(s)) < (num_old_gens_to_collect + WEAKREF_FINALIZER(s)->isInfant())) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
                         recheck_weak_refs = true;
                         MARK_THRU(WEAKREF_FINALIZER(s));
                     }
@@ -1700,6 +1704,7 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
                 SET_NODE_GENERATION(s, gen);
             }
             s_Old[gen]->splice(s);
+            s->sxpinfo.m_still_in_new = false;
             s_gencount[gen]++;
         }
         s = next;

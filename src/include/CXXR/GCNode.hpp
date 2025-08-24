@@ -58,7 +58,7 @@ namespace CXXR
         sxpinfo_struct(SEXPTYPE stype = NILSXP): type(stype), scalar(false), obj(false),
             alt(false), gp(0), m_mark(false), debug(false),
             trace(false), m_refcnt_enabled(true), m_rstep(false), m_gcgen(0),
-            m_ext_allocator(false), m_refcnt(0), m_binding_tag(NILSXP), extra(0)
+            m_ext_allocator(false), m_refcnt(0), m_binding_tag(NILSXP), m_still_in_new(true), extra(0)
         {
         }
 
@@ -78,6 +78,7 @@ namespace CXXR
             m_ext_allocator = false;
             m_refcnt = 0;
             m_binding_tag = NILSXP;
+            m_still_in_new = true;
             extra = 0;
         }
 
@@ -95,7 +96,8 @@ namespace CXXR
         unsigned int m_ext_allocator : 1;  /* was external allocator used? */
         unsigned int m_refcnt : NAMED_BITS;
         SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
-        unsigned int extra : 6; /* unused bits */
+        unsigned int m_still_in_new : 1;
+        unsigned int extra : 5; /* unused bits */
     }; /*		    Tot: 64 bits, 1 double */
 
     /** @brief Base class for objects managed by the garbage collector.
@@ -431,6 +433,8 @@ namespace CXXR
         static constexpr unsigned int numOldGenerations() { return s_num_old_generations; }
 
         unsigned int generation() const { return sxpinfo.m_gcgen; }
+
+        bool isInfant() const { return sxpinfo.m_still_in_new; }
 
         bool isMarked() const { return sxpinfo.m_mark; }
 
