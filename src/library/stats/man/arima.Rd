@@ -129,7 +129,7 @@ arima(x, order = c(0L, 0L, 0L),
   The exact likelihood is computed via a state-space representation of
   the ARIMA process, and the innovations and their variance found by a
   \I{Kalman} filter.  The initialization of the differenced ARMA process uses
-  stationarity and is based on Gardner \abbr{et al.}\sspace(1980).  For a
+  stationarity and is based on \bibcitet{R:Gardner+Harvey+Phillips:1980}.  For a
   differenced process the non-stationary components are given a diffuse
   prior (controlled by \code{kappa}).  Observations which are still
   controlled by the diffuse prior (determined by having a \I{Kalman} gain of
@@ -142,7 +142,8 @@ arima(x, order = c(0L, 0L, 0L),
 
   If \code{transform.pars} is true, the optimization is done using an
   alternative parametrization which is a variation on that suggested by
-  Jones (1980) and ensures that the model is stationary.  For an AR(p)
+  \bibcitet{R:Jones:1980} and ensures that the model is stationary.
+  For an AR(p)
   model the parametrization is via the inverse tanh of the partial
   autocorrelations: the same procedure is applied (separately) to the
   AR and seasonal AR terms.  The MA terms are not constrained to be

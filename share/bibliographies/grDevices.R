@@ -64,6 +64,21 @@ bibentry(bibtype = "Article",
          pages = "453--476",
          .doi = "10.1007/bf01025868")
 
+bibentry(bibtype = "Book",
+         key = "R:Goossens+Mittelbach+Samarin:1994",
+         author = c(person(given = "Michel",
+                           family = "Goossens"),
+                    person(given = "Frank",
+                           family = "Mittelbach"),
+                    person(given = "Alexander",
+                           family = "Samarin")),
+         title = "The LaTeX Companion",
+         publisher = "Addison-Wesley",
+         year = "1994",
+         address = "Reading, MA",
+         isbn = "0201541998",
+         pointers = "https://permalink.obvsg.at/AC00793798")
+
 bibentry(bibtype = "InProceedings",
          key = "R:Ihaka:2003",
          author = person(given = "Ross",
@@ -75,6 +90,28 @@ bibentry(bibtype = "InProceedings",
          address = "Vienna, Austria",
          organization = "Technische Universität Wien",
          url = "https://www.R-project.org/conferences/DSC-2003")
+
+bibentry(bibtype = "Book",
+         key = "R:Knuth:1984",
+         author = person(given = c("Donald", "Ervin"),
+                         family = "Knuth"),
+         title = "The TeXbook",
+         publisher = "Addison-Wesley",
+         year = "1984",
+         address = "Reading, MA",
+         isbn = "0201134489",
+         pointers = "https://permalink.obvsg.at/AC00224444")
+
+bibentry(bibtype = "Book",
+         key = "R:Lamport:1994",
+         author = person(given = "Leslie",
+                         family = "Lamport"),
+         title = "LaTeX: A Document Preparation System",
+         publisher = "Addison-Wesley",
+         year = "1994",
+         address = "Reading, MA",
+         isbn = "0201529831",
+         pointers = "https://permalink.obvsg.at/AC00921380")
 
 bibentry(bibtype = "Article",
          key = "R:Mcgill+Tukey+Larsen:1978",
@@ -173,6 +210,18 @@ bibentry(bibtype = "Article",
          year = "1926",
          month = "mar",
          pages = "65--66")
+
+bibentry(bibtype = "Article",
+         key = "R:Wand:1997",
+         author = person(given = c("Matt", "P."),
+                         family = "Wand"),
+         title = "Data-Based Choice of Histogram Bin Width",
+         journal = "The American Statistician",
+         volume = "51",
+         number = "1",
+         pages = "59--64",
+         year = "1997",
+         doi = "10.1080/00031305.1997.10473591")
 
 bibentry(bibtype = "Misc",
          key = "R:Wikipedia_contributors:2019",
