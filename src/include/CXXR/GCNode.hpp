@@ -58,7 +58,7 @@ namespace CXXR
         sxpinfo_struct(SEXPTYPE stype = NILSXP): type(stype), scalar(false), obj(false),
             alt(false), gp(0), m_mark(false), debug(false),
             trace(false), m_refcnt_enabled(true), m_rstep(false), m_gcgen(0),
-            m_ext_allocator(false), m_refcnt(0), m_binding_tag(NILSXP), m_still_in_new(true), extra(0)
+            m_ext_allocator(false), m_refcnt(0), m_binding_tag(NILSXP), extra(0)
         {
         }
 
@@ -78,7 +78,6 @@ namespace CXXR
             m_ext_allocator = false;
             m_refcnt = 0;
             m_binding_tag = NILSXP;
-            m_still_in_new = true;
             extra = 0;
         }
 
@@ -92,11 +91,10 @@ namespace CXXR
         unsigned int trace : 1;  /* functions and memory tracing */
         unsigned int m_refcnt_enabled : 1;  /* used on closures and when REFCNT is defined */
         unsigned int m_rstep : 1;
-        unsigned int m_gcgen : 1;  /* old generation number */
+        unsigned int m_gcgen : 2;  /* old generation number */
         unsigned int m_ext_allocator : 1;  /* was external allocator used? */
         unsigned int m_refcnt : NAMED_BITS;
         SEXPTYPE m_binding_tag : TYPE_BITS; /* used for immediate bindings */
-        unsigned int m_still_in_new : 1;
         unsigned int extra : 5; /* unused bits */
     }; /*		    Tot: 64 bits, 1 double */
 
@@ -427,14 +425,35 @@ namespace CXXR
         // 2 old + 1 new
         static constexpr unsigned int numGenerations() { return s_num_old_generations + 1; }
 
-        /** sxpinfo allocates one bit for the old generation count, so only 1
-         * or 2 is allowed
+        /** sxpinfo allocates 2 bits for the old generation count, so only 0, 1, 2
+         * or 3 (max) is allowed
          */
         static constexpr unsigned int numOldGenerations() { return s_num_old_generations; }
 
         unsigned int generation() const { return sxpinfo.m_gcgen; }
 
-        bool isInfant() const { return sxpinfo.m_still_in_new; }
+        /** @brief Map an old generation number to an index.
+         *
+         * This function maps generation (3 possible values)
+         * to an array index (2 possible values) needed by
+         * s_OldToNew and s_gencount.
+         *
+         * Node generations in CR:
+         * | Node level | Generation | Old array | OldToNew array |
+         * | "New"      | 0          | s_Old[2]  | s_OldToNew[0]  |
+         * | "0"        | 0          | s_Old[0]  | s_OldToNew[0]  |
+         * | "1"        | 1          | s_Old[1]  | s_OldToNew[1]  |
+         *
+         * Node generations in CXXR:
+         * | Node level | Generation | Old array | OldToNew array |
+         * | "New"      | 0          | s_Old[0]  |       -        |
+         * | "0"        | 1          | s_Old[1]  | s_OldToNew[0]  |
+         * | "1"        | 2          | s_Old[2]  | s_OldToNew[1]  |
+         */
+        static unsigned int remap(unsigned int generation)
+        {
+            return (generation > 0) ? (generation - 1) : generation;
+        }
 
         bool isMarked() const { return sxpinfo.m_mark; }
 
@@ -651,7 +670,7 @@ namespace CXXR
          * both counts.
          */
 // #define EXPEL_OLD_TO_NEW
-#define s_New s_Old[2]
+#define s_New s_Old[0]
         static std::unique_ptr<CXXR::GCNode> s_Old[1 + GCNode::s_num_old_generations];
 #ifndef EXPEL_OLD_TO_NEW
         static std::unique_ptr<CXXR::GCNode> s_OldToNew[GCNode::s_num_old_generations];

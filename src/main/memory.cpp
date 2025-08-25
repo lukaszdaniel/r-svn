@@ -608,8 +608,7 @@ static R_size_t R_V_maxused=0;
 
 #define NODE_GEN_IS_YOUNGER(s,g) \
   (!NODE_IS_MARKED(s) || NODE_GENERATION(s) < (g))
-// We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
-#define NODE_IS_OLDER(x, y) ((x) && (y) && ((NODE_GENERATION(x) + y->isInfant()) > (NODE_GENERATION(y) + x->isInfant())))
+#define NODE_IS_OLDER(x, y) ((x) && (y) && (NODE_GENERATION(x) > NODE_GENERATION(y)))
 
 
 #define VHEAP_FREE() (R_VSize - MemoryBank::doublesAllocated())
@@ -691,22 +690,22 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
         s = NEXT_NODE(s)) {
         NewCount++;
     }
-    for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
+    for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
         for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
             s != GCNode::s_Old[gen].get();
             s = NEXT_NODE(s)) {
             OldCount++;
             if (gen != NODE_GENERATION(s))
-                GCManager::gc_error(_("Inconsistent node generation\n"));
+                GCManager::gc_error(_("Inconsistent node generation in s_Old\n"));
             GCNode::OldToNewChecker o2n(gen);
             s->visitReferents(&o2n);
         }
-        for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[gen]);
-            s != GCNode::s_OldToNew[gen].get();
+        for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[GCNode::remap(gen)]);
+            s != GCNode::s_OldToNew[GCNode::remap(gen)].get();
             s = NEXT_NODE(s)) {
             OldToNewCount++;
             if (gen != NODE_GENERATION(s))
-                GCManager::gc_error(_("Inconsistent node generation\n"));
+                GCManager::gc_error(_("Inconsistent node generation in s_OldToNew\n"));
         }
     }
     REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
@@ -719,8 +718,8 @@ static void DEBUG_GC_SUMMARY(int full_gc)
     REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
         MemoryBank::doublesAllocated());
     unsigned int OldCount = 0;
-    for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
-        OldCount += GCNode::s_gencount[gen];
+    for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++)
+        OldCount += GCNode::s_gencount[GCNode::remap(gen)];
     REprintf(": %d", OldCount);
 }
 #else
@@ -834,7 +833,7 @@ static void old_to_new(SEXP x, SEXP y)
     GCNode::Ager age(NODE_GENERATION(x));
     age(y);
 #else
-    GCNode::s_OldToNew[NODE_GENERATION(x)]->splice(x);
+    GCNode::s_OldToNew[GCNode::remap(NODE_GENERATION(x))]->splice(x);
 #endif
 }
 
@@ -1501,14 +1500,13 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 #ifndef EXPEL_OLD_TO_NEW
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
-    for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
+    for (unsigned int gen = 1; gen < num_old_gens_to_collect; gen++) {
         Ager ager(gen);
-        const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
-        while (s != s_OldToNew[gen].get()) {
+        const GCNode *s = NEXT_NODE(s_OldToNew[remap(gen)]);
+        while (s != s_OldToNew[remap(gen)].get()) {
             const GCNode *next = NEXT_NODE(s);
             s->visitReferents(&ager);
             s_Old[gen]->splice(s);
-            s->sxpinfo.m_still_in_new = false;
             s = next;
         }
     }
@@ -1521,8 +1519,8 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 {
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
-    for (unsigned int gen = 0; gen < num_old_gens_to_collect; gen++) {
-        s_gencount[gen] = 0;
+    for (unsigned int gen = 1; gen < num_old_gens_to_collect; gen++) {
+        s_gencount[remap(gen)] = 0;
         const GCNode *s = NEXT_NODE(s_Old[gen]);
         while (s != s_Old[gen].get()) {
             const GCNode *next = NEXT_NODE(s);
@@ -1539,9 +1537,9 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
-    for (unsigned int gen = num_old_gens_to_collect; gen < s_num_old_generations; gen++)
-        for (const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
-            s != s_OldToNew[gen].get();
+    for (unsigned int gen = num_old_gens_to_collect; gen < numGenerations(); gen++)
+        for (const GCNode *s = NEXT_NODE(s_OldToNew[remap(gen)]);
+            s != s_OldToNew[remap(gen)].get();
             s = NEXT_NODE(s))
             s->visitReferents(&marker);
 #endif
@@ -1600,13 +1598,11 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             recheck_weak_refs = false;
             for (auto &s : s_R_weak_refs) {
                 if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
-                    // We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
-                    if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) < (num_old_gens_to_collect + WEAKREF_VALUE(s)->isInfant())) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
+                    if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) < (num_old_gens_to_collect)) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
                         recheck_weak_refs = true;
                         MARK_THRU(WEAKREF_VALUE(s));
                     }
-                    // We artificially treat infant nodes (gen 0) as being younger than gen 0 from s_Old by adding extra +1
-                    if (WEAKREF_FINALIZER(s) && (NODE_GENERATION(WEAKREF_FINALIZER(s)) < (num_old_gens_to_collect + WEAKREF_FINALIZER(s)->isInfant())) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
+                    if (WEAKREF_FINALIZER(s) && (NODE_GENERATION(WEAKREF_FINALIZER(s)) < (num_old_gens_to_collect)) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
                         recheck_weak_refs = true;
                         MARK_THRU(WEAKREF_FINALIZER(s));
                     }
@@ -1696,14 +1692,13 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
         else
         {
             unsigned int gen = NODE_GENERATION(s);
-            if ((gen < num_old_gens_to_collect) && (gen < s_num_old_generations - 1))
+            if ((gen < num_old_gens_to_collect) && (gen < numGenerations() - 1))
             {
                 ++gen;
                 SET_NODE_GENERATION(s, gen);
             }
             s_Old[gen]->splice(s);
-            s->sxpinfo.m_still_in_new = false;
-            s_gencount[gen]++;
+            s_gencount[remap(gen)]++;
         }
         s = next;
     }
@@ -1711,6 +1706,9 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
 
 void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
 {
+    // All nodes which generation is less than below num_old_gens_to_collect are to be collected.
+    ++num_old_gens_to_collect;
+
     DEBUG_CHECK_NODE_COUNTS("before propagating");
 
     propagateAges(num_old_gens_to_collect);
@@ -2789,7 +2787,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
-      for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++) {
+      for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
 	  for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
 	       s != GCNode::s_Old[gen].get();
 	       s = NEXT_NODE(s)) {
