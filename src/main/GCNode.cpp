@@ -43,9 +43,9 @@ namespace CXXR
     size_t GCNode::s_num_nodes = 0;
     std::unique_ptr<CXXR::GCNode> GCNode::s_Old[1 + GCNode::s_num_old_generations];
 #ifndef EXPEL_OLD_TO_NEW
-    std::unique_ptr<CXXR::GCNode> GCNode::s_OldToNew[GCNode::s_num_old_generations];
+    std::unique_ptr<CXXR::GCNode> GCNode::s_OldToNew[1 + GCNode::s_num_old_generations];
 #endif
-    unsigned int GCNode::s_gencount[GCNode::s_num_old_generations];
+    unsigned int GCNode::s_gencount[1 + GCNode::s_num_old_generations];
 
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
     {
@@ -64,12 +64,14 @@ namespace CXXR
     GCNode::GCNode(SEXPTYPE stype): sxpinfo(stype), m_next(this), m_prev(this)
     {
         ++s_num_nodes;
+        ++s_gencount[0];
         s_New->splice(this);
     }
 
     GCNode::~GCNode()
     {
         unsnap();
+        --s_gencount[generation()];
         --s_num_nodes;
     }
 
@@ -77,10 +79,10 @@ namespace CXXR
     {
         if (node->generation() < m_mingen) // node is younger than the minimum age required
         {
-            --s_gencount[remap(node->generation())];
+            --s_gencount[node->generation()];
             node->sxpinfo.m_gcgen = m_mingen;
             s_Old[m_mingen]->splice(node);
-            ++s_gencount[remap(m_mingen)];
+            ++s_gencount[m_mingen];
             node->visitReferents(this);
         }
     }
@@ -138,10 +140,6 @@ namespace CXXR
         for (unsigned int gen = 0; gen < GCNode::numGenerations(); gen++)
         {
             s_Old[gen] = std::make_unique<GCNode>(/* Peg constructor */);
-        }
-
-        for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); gen++)
-        {
 #ifndef EXPEL_OLD_TO_NEW
             s_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNew peg constructor */);
 #endif

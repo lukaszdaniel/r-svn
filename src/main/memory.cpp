@@ -700,8 +700,8 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
             GCNode::OldToNewChecker o2n(gen);
             s->visitReferents(&o2n);
         }
-        for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[GCNode::remap(gen)]);
-            s != GCNode::s_OldToNew[GCNode::remap(gen)].get();
+        for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[gen]);
+            s != GCNode::s_OldToNew[gen].get();
             s = NEXT_NODE(s)) {
             OldToNewCount++;
             if (gen != NODE_GENERATION(s))
@@ -719,7 +719,7 @@ static void DEBUG_GC_SUMMARY(int full_gc)
         MemoryBank::doublesAllocated());
     unsigned int OldCount = 0;
     for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++)
-        OldCount += GCNode::s_gencount[GCNode::remap(gen)];
+        OldCount += GCNode::s_gencount[gen];
     REprintf(": %d", OldCount);
 }
 #else
@@ -833,7 +833,7 @@ static void old_to_new(SEXP x, SEXP y)
     GCNode::Ager age(NODE_GENERATION(x));
     age(y);
 #else
-    GCNode::s_OldToNew[GCNode::remap(NODE_GENERATION(x))]->splice(x);
+    GCNode::s_OldToNew[NODE_GENERATION(x)]->splice(x);
 #endif
 }
 
@@ -1502,8 +1502,8 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
        transferring referenced nodes to referring generation */
     for (unsigned int gen = 1; gen < num_old_gens_to_collect; gen++) {
         Ager ager(gen);
-        const GCNode *s = NEXT_NODE(s_OldToNew[remap(gen)]);
-        while (s != s_OldToNew[remap(gen)].get()) {
+        const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
+        while (s != s_OldToNew[gen].get()) {
             const GCNode *next = NEXT_NODE(s);
             s->visitReferents(&ager);
             s_Old[gen]->splice(s);
@@ -1520,7 +1520,6 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
     for (unsigned int gen = 1; gen < num_old_gens_to_collect; gen++) {
-        s_gencount[remap(gen)] = 0;
         const GCNode *s = NEXT_NODE(s_Old[gen]);
         while (s != s_Old[gen].get()) {
             const GCNode *next = NEXT_NODE(s);
@@ -1538,8 +1537,8 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
     for (unsigned int gen = num_old_gens_to_collect; gen < numGenerations(); gen++)
-        for (const GCNode *s = NEXT_NODE(s_OldToNew[remap(gen)]);
-            s != s_OldToNew[remap(gen)].get();
+        for (const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
+            s != s_OldToNew[gen].get();
             s = NEXT_NODE(s))
             s->visitReferents(&marker);
 #endif
@@ -1692,13 +1691,14 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
         else
         {
             unsigned int gen = NODE_GENERATION(s);
+            --s_gencount[gen];
             if ((gen < num_old_gens_to_collect) && (gen < numGenerations() - 1))
             {
                 ++gen;
                 SET_NODE_GENERATION(s, gen);
             }
             s_Old[gen]->splice(s);
-            s_gencount[remap(gen)]++;
+            ++s_gencount[gen];
         }
         s = next;
     }

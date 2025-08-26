@@ -432,29 +432,6 @@ namespace CXXR
 
         unsigned int generation() const { return sxpinfo.m_gcgen; }
 
-        /** @brief Map an old generation number to an index.
-         *
-         * This function maps generation (3 possible values)
-         * to an array index (2 possible values) needed by
-         * s_OldToNew and s_gencount.
-         *
-         * Node generations in CR:
-         * | Node level | Generation | Old array | OldToNew array |
-         * | "New"      | 0          | s_Old[2]  | s_OldToNew[0]  |
-         * | "0"        | 0          | s_Old[0]  | s_OldToNew[0]  |
-         * | "1"        | 1          | s_Old[1]  | s_OldToNew[1]  |
-         *
-         * Node generations in CXXR:
-         * | Node level | Generation | Old array | OldToNew array |
-         * | "New"      | 0          | s_Old[0]  |       -        |
-         * | "0"        | 1          | s_Old[1]  | s_OldToNew[0]  |
-         * | "1"        | 2          | s_Old[2]  | s_OldToNew[1]  |
-         */
-        static unsigned int remap(unsigned int generation)
-        {
-            return (generation > 0) ? (generation - 1) : generation;
-        }
-
         bool isMarked() const { return sxpinfo.m_mark; }
 
         const GCNode *next() const { return m_next; }
@@ -673,9 +650,9 @@ namespace CXXR
 #define s_New s_Old[0]
         static std::unique_ptr<CXXR::GCNode> s_Old[1 + GCNode::s_num_old_generations];
 #ifndef EXPEL_OLD_TO_NEW
-        static std::unique_ptr<CXXR::GCNode> s_OldToNew[GCNode::s_num_old_generations];
+        static std::unique_ptr<CXXR::GCNode> s_OldToNew[1 + GCNode::s_num_old_generations];
 #endif
-        static unsigned int s_gencount[GCNode::s_num_old_generations];
+        static unsigned int s_gencount[1 + GCNode::s_num_old_generations];
     };
 
     /** @brief Initialize the entire memory subsystem.
