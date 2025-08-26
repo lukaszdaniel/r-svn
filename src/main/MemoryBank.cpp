@@ -138,7 +138,7 @@ namespace CXXR
         return p;
     }
 
-    void MemoryBank::deallocate(void *p, size_t bytes, bool allocator)
+    void MemoryBank::deallocate(void *p, size_t bytes, bool use_allocator)
     {
         if (!p)
             return;
@@ -148,7 +148,7 @@ namespace CXXR
         memset(p, 0x55, bytes);
 #endif
 
-        if (allocator)
+        if (use_allocator)
         {
             custom_node_free(p, bytes);
         }
@@ -161,7 +161,7 @@ namespace CXXR
             s_pools[s_pooltab[(bytes + 7) >> 3]].deallocate(p);
         }
 
-        if (!allocator)
+        if (!use_allocator)
         {
             notifyDeallocation(bytes);
         }

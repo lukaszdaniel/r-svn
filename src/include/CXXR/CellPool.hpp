@@ -83,7 +83,7 @@ namespace CXXR
          * Note that CellPool objects must be initialized by calling
          * initialize() before being used.
          */
-        CellPool() : m_free_cells(nullptr)
+        CellPool() : m_admin(nullptr), m_free_cells(nullptr)
         {
 #if VALGRIND_LEVEL >= 2
             VALGRIND_CREATE_MEMPOOL(this, 0, 0);
@@ -162,7 +162,7 @@ namespace CXXR
 #endif
 #if VALGRIND_LEVEL >= 2
             VALGRIND_MEMPOOL_FREE(this, ptr);
-            VALGRIND_MAKE_MEM_UNDEFINED(p, sizeof(Cell));
+            VALGRIND_MAKE_MEM_UNDEFINED(ptr, sizeof(Cell));
 #endif
             // check();
             Cell *cell = static_cast<Cell *>(ptr);
@@ -313,9 +313,9 @@ namespace CXXR
         /** @brief Allocates a new superblock if needed and returns a pointer to the first available cell. */
         void *seekMemory();
 
-        CellPool(CellPool &) = delete;
+        CellPool(const CellPool &) = delete;
         CellPool(CellPool &&) = delete;
-        CellPool &operator=(CellPool &) = delete;
+        CellPool &operator=(const CellPool &) = delete;
         CellPool &operator=(CellPool &&) = delete;
     };
 } // namespace CXXR

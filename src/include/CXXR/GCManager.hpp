@@ -225,6 +225,10 @@ namespace CXXR
         static void (*s_post_gc)();
 
         GCManager() = delete;
+        GCManager(const GCManager &) = delete;
+        GCManager(GCManager &&) = delete;
+        GCManager &operator=(const GCManager &) = delete;
+        GCManager &operator=(GCManager &&) = delete;
     };
 } // namespace CXXR
 

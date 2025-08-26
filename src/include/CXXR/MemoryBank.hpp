@@ -111,7 +111,7 @@ namespace CXXR
          *
          * @param bytes Required size in bytes of the block.
          *
-         * @param alloc_gc If false, the call will under no
+         * @param allow_gc If false, the call will under no
          *          circumstances cue garbage collection.
          *
          * @param allocator Pointer to the custom allocator.
@@ -131,8 +131,12 @@ namespace CXXR
          * @param bytes The number of bytes in the memory block,
          *          i.e. the number of bytes requested in the
          *          corresponding call to allocate().
+         *
+         * @param use_allocator If true, deallocation uses the custom
+         *          allocator associated with the memory block.
+         *          Otherwise, standard deallocation is used.
          */
-        static void deallocate(void *p = nullptr, size_t bytes = 0, bool allocator = false);
+        static void deallocate(void *p = nullptr, size_t bytes = 0, bool use_allocator = false);
 
         /** @brief Number of blocks currently allocated.
          *
@@ -270,9 +274,9 @@ namespace CXXR
 
         // friend class SchwarzCounter<MemoryBank>;
         MemoryBank() = delete;
-        MemoryBank(MemoryBank &) = delete;
+        MemoryBank(const MemoryBank &) = delete;
         MemoryBank(MemoryBank &&) = delete;
-        MemoryBank &operator=(MemoryBank &) = delete;
+        MemoryBank &operator=(const MemoryBank &) = delete;
         MemoryBank &operator=(MemoryBank &&) = delete;
     };
 } // namespace CXXR
