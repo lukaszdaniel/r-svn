@@ -653,6 +653,13 @@ namespace CXXR
         static std::unique_ptr<CXXR::GCNode> s_OldToNew[1 + GCNode::s_num_old_generations];
 #endif
         static unsigned int s_gencount[1 + GCNode::s_num_old_generations];
+
+        /** @brief Next generation table.
+        *
+        * Look-up table used to advance generation number
+        * following a garbage collection.
+        */
+        static unsigned int s_next_gen[1 + GCNode::s_num_old_generations];
     };
 
     /** @brief Initialize the entire memory subsystem.

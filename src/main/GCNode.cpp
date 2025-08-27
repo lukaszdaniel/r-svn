@@ -46,6 +46,7 @@ namespace CXXR
     std::unique_ptr<CXXR::GCNode> GCNode::s_OldToNew[1 + GCNode::s_num_old_generations];
 #endif
     unsigned int GCNode::s_gencount[1 + GCNode::s_num_old_generations];
+    unsigned int GCNode::s_next_gen[1 + GCNode::s_num_old_generations];
 
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
     {
@@ -137,13 +138,15 @@ namespace CXXR
         }
         s_initialized = true;
 
-        for (unsigned int gen = 0; gen < GCNode::numGenerations(); gen++)
+        for (unsigned int gen = 0; gen < GCNode::numGenerations(); ++gen)
         {
             s_Old[gen] = std::make_unique<GCNode>(/* Peg constructor */);
 #ifndef EXPEL_OLD_TO_NEW
             s_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNew peg constructor */);
 #endif
             s_gencount[gen] = 0;
+            s_next_gen[gen] = gen + 1;
         }
+        s_next_gen[s_num_old_generations] = s_num_old_generations;
     }
 } // namespace CXXR
