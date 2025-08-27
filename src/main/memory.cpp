@@ -1691,12 +1691,12 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
         else
         {
             unsigned int gen = NODE_GENERATION(s);
-            if (gen < num_old_gens_to_collect)
+            if ((gen < num_old_gens_to_collect) && (gen < numGenerations() - 1))
             {
-                // Advance generation:
                 --s_gencount[gen];
-                s->sxpinfo.m_gcgen = s_next_gen[gen];
-                ++s_gencount[s->generation()];
+                ++gen;
+                SET_NODE_GENERATION(s, gen);
+                ++s_gencount[gen];
             }
             s_Old[gen]->splice(s);
         }
