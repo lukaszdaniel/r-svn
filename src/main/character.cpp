@@ -833,12 +833,12 @@ donesc:
 namespace
 {
     // lower-case vowels in English plus accented versions
-    constexpr std::array<wchar_t, 51> vowels_sorted_unique = {
+    constexpr std::array<wchar_t, 52> vowels_sorted_unique = {
         L'\x61', L'\x65', L'\x69', L'\x6f', L'\x75', // a, e, i, o, u
         L'\xe0', L'\xe1', L'\xe2', L'\xe3', L'\xe4', L'\xe5', // a variants
         L'\xe8', L'\xe9', L'\xea', L'\xeb', L'\xec', L'\xed', L'\xee', L'\xef', // e, i variants
-        L'\xf2', L'\xf3', L'\xf4', L'\xf5', L'\xf6', L'\xf8', L'\xf9', L'\xfa', L'\xfb', L'\xfc', // o, u variants
-        L'\x101', L'\x103', L'\x105', L'\x113', L'\x115', L'\x117', L'\x118', L'\x11b', // a, e variants
+        L'\xf2', L'\xf3', L'\xf4', L'\xf5', L'\xf6', L'\xf8', L'\xf9', L'\xfa', L'\xfb', L'\xfc', L'\xfd', // o, u variants
+        L'\x101', L'\x103', L'\x105', L'\x113', L'\x115', L'\x117', L'\x119', L'\x11b', // a, e variants
         L'\x129', L'\x12b', L'\x12d', L'\x12f', L'\x131', L'\x14d', L'\x14f', L'\x151', // i, o variants
         L'\x169', L'\x16b', L'\x16d', L'\x16f', L'\x171', L'\x173' // u variants
     };

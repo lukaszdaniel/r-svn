@@ -182,7 +182,7 @@ static void setActiveValue(SEXP fun, SEXP val)
     SEXP arg = lang2(qfun, val);
     SEXP expr = lang2(fun, arg);
     PROTECT(expr);
-    eval(expr, R_GlobalEnv);
+    eval(expr, R_BaseEnv);
     UNPROTECT(1);
 }
 
@@ -3628,7 +3628,7 @@ attribute_hidden SEXP R_FindPackageEnv(SEXP info)
     PROTECT(info);
     SEXP s_findPackageEnv = install("findPackageEnv");
     PROTECT(expr = LCONS(s_findPackageEnv, CONS(info, R_NilValue)));
-    val = eval(expr, R_GlobalEnv);
+    val = eval(expr, R_BaseEnv);
     UNPROTECT(2);
     return val;
 }
@@ -3690,7 +3690,7 @@ SEXP R_FindNamespace(SEXP info)
     PROTECT(info);
     SEXP s_getNamespace = install("getNamespace");
     PROTECT(expr = LCONS(s_getNamespace, CONS(info, R_NilValue)));
-    val = eval(expr, R_GlobalEnv);
+    val = eval(expr, R_BaseEnv);
     UNPROTECT(2);
     return val;
 }

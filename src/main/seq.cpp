@@ -1180,7 +1180,7 @@ attribute_hidden SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     lengths = CAR(args);
     if (!isInteger(lengths))
-	error("%s", _("'lengths' is not of mode integer"));
+	error("%s", _("'nvec' is not of mode integer"));
     from = CADR(args);
     if (!isInteger(from))
 	error("%s", _("'from' is not of mode integer"));
@@ -1193,19 +1193,19 @@ attribute_hidden SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
     by_len = Rf_length(by);
     if (lengths_len != 0) {
 	if (from_len == 0)
-	    error("%s", _("'from' has length 0, but not 'lengths'"));
+	    error("%s", _("'from' has length 0, but not 'nvec'"));
 	if (by_len == 0)
-	    error("%s", _("'by' has length 0, but not 'lengths'"));
+	    error("%s", _("'by' has length 0, but not 'nvec'"));
     }
     ans_len = 0;
     lengths_elt = INTEGER(lengths);
     for (i = 0; i < lengths_len; i++, lengths_elt++) {
 	length = *lengths_elt;
 	if (length == NA_INTEGER || length < 0)
-	    error("%s", _("'lengths' must be a vector of non-negative integers"));
+	    error("%s", _("'nvec' must be a vector of non-negative integers"));
 	ans_len += length;
     }
-    PROTECT(ans = allocVector(INTSXP, ans_len));
+    ans = allocVector(INTSXP, ans_len);
     ans_elt = INTEGER(ans);
     lengths_elt = INTEGER(lengths);
     for (i = i2 = i3 = 0; i < lengths_len; i++, i2++, i3++, lengths_elt++) {
@@ -1215,19 +1215,14 @@ attribute_hidden SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    i3 = 0; /* recycle */
 	length = *lengths_elt;
 	from_elt = INTEGER(from)[i2];
-	if (length != 0 && from_elt == NA_INTEGER) {
-	    UNPROTECT(1);
+	if (length != 0 && from_elt == NA_INTEGER)
 	    error("%s", _("'from' contains NAs"));
-	}
 	by_elt = INTEGER(by)[i3];
-	if (length >= 2 && by_elt == NA_INTEGER) {
-	    UNPROTECT(1);
+	if (length >= 2 && by_elt == NA_INTEGER)
 	    error("%s", _("'by' contains NAs"));
-	}
 	// int to = from_elt + (length - 1) * by_elt;
 	for (k = 0, j = from_elt; k < length; j += by_elt, k++)
 	    *(ans_elt++) = j;
     }
-    UNPROTECT(1);
     return ans;
 }

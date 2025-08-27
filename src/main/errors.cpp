@@ -1792,7 +1792,7 @@ static void vsignalWarning(SEXP call, const char *format, va_list ap)
 	Rvsnprintf_mbcs(buf, BUFSIZE - 1, format, ap);
 	hcall = LCONS(mkString(buf), hcall);
 	hcall = LCONS(hooksym, hcall);
-	evalKeepVis(hcall, R_GlobalEnv);
+	evalKeepVis(hcall, R_BaseEnv);
     }
     else vwarningcall_dflt(call, format, ap);
 }
@@ -1840,7 +1840,7 @@ static void vsignalError(SEXP call, const char *format, va_list ap)
 		hcall = LCONS(mkString(buf), hcall);
 		hcall = LCONS(ENTRY_HANDLER(entry), hcall);
 		hcall = LCONS(hooksym, hcall);
-		eval(hcall, R_GlobalEnv);
+		eval(hcall, R_BaseEnv);
 	    }
 	}
 	else gotoExitingHandler(R_NilValue, call, entry);

@@ -1458,12 +1458,9 @@ static R_exprhash_t hashfun(SEXP f)
 
 static void loadCompilerNamespace(void)
 {
-    GCStackRoot<> fun, arg, expr;
-
-    fun = install("getNamespace");
+    GCStackRoot<> arg;
     arg = mkString("compiler");
-    expr = lang2(fun, arg);
-    Evaluator::evaluate(expr, Environment::global());
+    R_FindNamespace(arg);
 }
 
 static void checkCompilerOptions(int jitEnabled)
@@ -1478,7 +1475,7 @@ static void checkCompilerOptions(int jitEnabled)
     arg = ScalarInteger(jitEnabled);
     fcall = lang3(R_TripleColonSymbol, packsym, funsym);
     call = lang2(fcall, arg);
-    Evaluator::evaluate(call, Environment::global());
+    Evaluator::evaluate(call, Environment::base());
     Evaluator::enableResultPrinting(old_visible);
 }
 
@@ -1873,7 +1870,7 @@ attribute_hidden SEXP R::R_cmpfun1(SEXP fun)
 
     fcall = lang3(R_TripleColonSymbol, packsym, funsym);
     call = lang2(fcall, fun);
-    val = eval(call, R_GlobalEnv);
+    val = eval(call, R_BaseEnv);
     if (TYPEOF(BODY(val)) != BCODESXP)
 	/* Compilation may have failed because R allocator could not malloc
 	   memory to extend the R heap, so we run GC to release some pages.
@@ -1962,7 +1959,7 @@ static SEXP R_compileExpr(SEXP expr, SEXP rho)
     qexpr = lang2(quotesym, expr);
     /* compile(e, env, options, srcref) */
     call = lang5(fcall, qexpr, rho, R_NilValue, R_getCurrentSrcref());
-    SEXP val = Evaluator::evaluate(call, Environment::global());
+    SEXP val = Evaluator::evaluate(call, Environment::base());
     Evaluator::enableResultPrinting(old_visible);
     return val;
 }
