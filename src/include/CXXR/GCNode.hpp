@@ -38,6 +38,7 @@
 #include <string>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/SEXPTYPE.hpp>
+#include <CXXR/GCManager.hpp>
 
 #define NAMED_BITS 16
 #define GP_BITS 16
@@ -423,12 +424,12 @@ namespace CXXR
         static size_t numNodes() { return s_num_nodes; }
 
         // 2 old + 1 new
-        static constexpr unsigned int numGenerations() { return s_num_old_generations + 1; }
+        static constexpr unsigned int numGenerations() { return GCManager::numOldGenerations() + 1; }
 
         /** sxpinfo allocates 2 bits for the old generation count, so only 0, 1, 2
          * or 3 (max) is allowed
          */
-        static constexpr unsigned int numOldGenerations() { return s_num_old_generations; }
+        static constexpr unsigned int numOldGenerations() { return GCManager::numOldGenerations(); }
 
         unsigned int generation() const { return sxpinfo.m_gcgen; }
 
@@ -613,10 +614,6 @@ namespace CXXR
 
         static size_t s_num_nodes; // Number of nodes in existence
 
-        /* sxpinfo allocates one bit for the old generation count, so only 1
-           or 2 is allowed */
-        static constexpr unsigned int s_num_old_generations = 2;
-
         /** @brief The Heap Structure.
          *
          * Nodes for each class/generation combination
@@ -648,18 +645,18 @@ namespace CXXR
          */
 // #define EXPEL_OLD_TO_NEW
 #define s_New s_Old[0]
-        static std::unique_ptr<CXXR::GCNode> s_Old[1 + GCNode::s_num_old_generations];
+        static std::unique_ptr<CXXR::GCNode> s_Old[1 + GCManager::numOldGenerations()];
 #ifndef EXPEL_OLD_TO_NEW
-        static std::unique_ptr<CXXR::GCNode> s_OldToNew[1 + GCNode::s_num_old_generations];
+        static std::unique_ptr<CXXR::GCNode> s_OldToNew[1 + GCManager::numOldGenerations()];
 #endif
-        static unsigned int s_gencount[1 + GCNode::s_num_old_generations];
+        static unsigned int s_gencount[1 + GCManager::numOldGenerations()];
 
         /** @brief Next generation table.
         *
         * Look-up table used to advance generation number
         * following a garbage collection.
         */
-        static unsigned int s_next_gen[1 + GCNode::s_num_old_generations];
+        static unsigned int s_next_gen[1 + GCManager::numOldGenerations()];
     };
 
     /** @brief Initialize the entire memory subsystem.

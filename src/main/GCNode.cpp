@@ -41,12 +41,12 @@ namespace CXXR
 {
     unsigned int GCNode::SchwarzCounter::s_count = 0;
     size_t GCNode::s_num_nodes = 0;
-    std::unique_ptr<CXXR::GCNode> GCNode::s_Old[1 + GCNode::s_num_old_generations];
+    std::unique_ptr<CXXR::GCNode> GCNode::s_Old[1 + GCManager::numOldGenerations()];
 #ifndef EXPEL_OLD_TO_NEW
-    std::unique_ptr<CXXR::GCNode> GCNode::s_OldToNew[1 + GCNode::s_num_old_generations];
+    std::unique_ptr<CXXR::GCNode> GCNode::s_OldToNew[1 + GCManager::numOldGenerations()];
 #endif
-    unsigned int GCNode::s_gencount[1 + GCNode::s_num_old_generations];
-    unsigned int GCNode::s_next_gen[1 + GCNode::s_num_old_generations];
+    unsigned int GCNode::s_gencount[1 + GCManager::numOldGenerations()];
+    unsigned int GCNode::s_next_gen[1 + GCManager::numOldGenerations()];
 
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
     {
@@ -147,6 +147,6 @@ namespace CXXR
             s_gencount[gen] = 0;
             s_next_gen[gen] = gen + 1;
         }
-        s_next_gen[s_num_old_generations] = s_num_old_generations;
+        s_next_gen[GCNode::numOldGenerations()] = GCNode::numOldGenerations();
     }
 } // namespace CXXR

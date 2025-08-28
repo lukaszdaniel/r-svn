@@ -378,7 +378,7 @@ static void mem_err_heap();
    is a level 2 collection.  */
 #define LEVEL_0_FREQ 20
 #define LEVEL_1_FREQ 5
-static unsigned int s_collect_counts_max[] = { LEVEL_0_FREQ, LEVEL_1_FREQ };
+static unsigned int s_collect_counts_max[GCManager::numOldGenerations()] = { LEVEL_0_FREQ, LEVEL_1_FREQ };
 
 /* When a level N collection fails to produce at least MinFreeFrac *
    R_NSize free nodes and MinFreeFrac * R_VSize free vector space, the
@@ -1693,6 +1693,7 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
             unsigned int gen = NODE_GENERATION(s);
             if ((gen < num_old_gens_to_collect) && (gen < numGenerations() - 1))
             {
+                // Advance generation:
                 --s_gencount[gen];
                 ++gen;
                 SET_NODE_GENERATION(s, gen);
@@ -1726,15 +1727,15 @@ void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
 
 unsigned int GCManager::genRota(unsigned int num_old_gens_to_collect)
 {
-    static unsigned int s_collect_counts[GCNode::numOldGenerations()] = { 0 };
+    static unsigned int s_collect_counts[s_num_old_generations] = { 0 };
     static unsigned int s_level = 0;
 
     auto reset_counters = [](unsigned int *counters) {
-        std::fill(counters, counters + GCNode::numOldGenerations(), 0);
+        std::fill(counters, counters + s_num_old_generations, 0);
         };
 
         // Full reset request: collect everything and reset counters
-    if (num_old_gens_to_collect >= GCNode::numOldGenerations()) {
+    if (num_old_gens_to_collect >= s_num_old_generations) {
         reset_counters(s_collect_counts);
         return s_level = num_old_gens_to_collect;
     }
@@ -1748,14 +1749,14 @@ unsigned int GCManager::genRota(unsigned int num_old_gens_to_collect)
             s_collect_counts[gen] = 0;
 
         // Increment the target level counter if within range
-        if (s_level < GCNode::numOldGenerations())
+        if (s_level < s_num_old_generations)
             ++s_collect_counts[s_level];
 
         return s_level;
     }
 
     // Normal escalation through all generations
-    for (unsigned int gen = 0; gen < GCNode::numOldGenerations(); ++gen) {
+    for (unsigned int gen = 0; gen < s_num_old_generations; ++gen) {
         ++s_collect_counts[gen];
 
         // If we just escalated to a higher gen, reset the lower one
@@ -1769,7 +1770,7 @@ unsigned int GCManager::genRota(unsigned int num_old_gens_to_collect)
 
     // We've exceeded all thresholds → full collection
     reset_counters(s_collect_counts);
-    return s_level = GCNode::numOldGenerations();
+    return s_level = s_num_old_generations;
 }
 
 // former RunGenCollect()
