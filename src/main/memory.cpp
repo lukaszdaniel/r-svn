@@ -367,19 +367,6 @@ static void mem_err_heap();
    memory; much less frequent releasing and larger increments to
    increase speed). */
 
-/* There are three levels of collections.  Level 0 collects only the
-   youngest generation, level 1 collects the two youngest generations,
-   and level 2 collects all generations.  Higher level collections
-   occur at least after specified numbers of lower level ones.  After
-   LEVEL_0_FREQ level zero collections a level 1 collection is done;
-   after every LEVEL_1_FREQ level 1 collections a level 2 collection
-   occurs.  Thus, roughly, every LEVEL_0_FREQ-th collection is a level
-   1 collection and every (LEVEL_0_FREQ * LEVEL_1_FREQ)-th collection
-   is a level 2 collection.  */
-#define LEVEL_0_FREQ 20
-#define LEVEL_1_FREQ 5
-static unsigned int s_collect_counts_max[GCManager::numOldGenerations()] = { LEVEL_0_FREQ, LEVEL_1_FREQ };
-
 /* When a level N collection fails to produce at least MinFreeFrac *
    R_NSize free nodes and MinFreeFrac * R_VSize free vector space, the
    next collection will be a level N + 1 collection.
@@ -1495,12 +1482,12 @@ namespace
     }
 } // anonymous namespace
 
-void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
+void GCNode::propagateAges(unsigned int max_generation)
 {
 #ifndef EXPEL_OLD_TO_NEW
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
-    for (unsigned int gen = 1; gen < num_old_gens_to_collect; gen++) {
+    for (unsigned int gen = 1; gen < max_generation; gen++) {
         Ager ager(gen);
         const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
         while (s != s_OldToNew[gen].get()) {
@@ -1515,11 +1502,11 @@ void GCNode::propagateAges(unsigned int num_old_gens_to_collect)
 
 #define MARK_THRU(s) if (s != R_NilValue) marker(s);
 
-void GCNode::mark(unsigned int num_old_gens_to_collect)
+void GCNode::mark(unsigned int max_generation)
 {
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
-    for (unsigned int gen = 1; gen < num_old_gens_to_collect; gen++) {
+    for (unsigned int gen = 1; gen < max_generation; gen++) {
         const GCNode *s = NEXT_NODE(s_Old[gen]);
         while (s != s_Old[gen].get()) {
             const GCNode *next = NEXT_NODE(s);
@@ -1530,13 +1517,13 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             BULK_MOVE(s_Old[gen].get(), s_New.get());
     }
 
-    Marker marker(num_old_gens_to_collect);
+    Marker marker(max_generation);
     GCRootBase::visitRoots(&marker);
     GCStackRootBase::visitRoots(&marker);
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
-    for (unsigned int gen = num_old_gens_to_collect; gen < numGenerations(); gen++)
+    for (unsigned int gen = max_generation; gen < numGenerations(); gen++)
         for (const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
             s != s_OldToNew[gen].get();
             s = NEXT_NODE(s))
@@ -1597,11 +1584,11 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
             recheck_weak_refs = false;
             for (auto &s : s_R_weak_refs) {
                 if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
-                    if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) < (num_old_gens_to_collect)) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
+                    if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) < (max_generation)) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
                         recheck_weak_refs = true;
                         MARK_THRU(WEAKREF_VALUE(s));
                     }
-                    if (WEAKREF_FINALIZER(s) && (NODE_GENERATION(WEAKREF_FINALIZER(s)) < (num_old_gens_to_collect)) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
+                    if (WEAKREF_FINALIZER(s) && (NODE_GENERATION(WEAKREF_FINALIZER(s)) < (max_generation)) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
                         recheck_weak_refs = true;
                         MARK_THRU(WEAKREF_FINALIZER(s));
                     }
@@ -1677,7 +1664,7 @@ void GCNode::mark(unsigned int num_old_gens_to_collect)
 #endif
 }
 
-void GCNode::sweep(unsigned int num_old_gens_to_collect)
+void GCNode::sweep(unsigned int max_generation)
 {
     const GCNode *s = NEXT_NODE(s_New);
     while (s != s_New.get())
@@ -1691,7 +1678,7 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
         else
         {
             unsigned int gen = NODE_GENERATION(s);
-            if ((gen < num_old_gens_to_collect) && (gen < numGenerations() - 1))
+            if ((gen < max_generation) && (gen < numGenerations() - 1))
             {
                 // Advance generation:
                 --s_gencount[gen];
@@ -1707,70 +1694,22 @@ void GCNode::sweep(unsigned int num_old_gens_to_collect)
 
 void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
 {
-    // All nodes which generation is less than below num_old_gens_to_collect are to be collected.
-    ++num_old_gens_to_collect;
+    // max_generation is a cut-off generation free from any GC activity
+    unsigned int max_generation = 1 + num_old_gens_to_collect;
 
     DEBUG_CHECK_NODE_COUNTS("before propagating");
 
-    propagateAges(num_old_gens_to_collect);
+    propagateAges(max_generation);
 
     DEBUG_CHECK_NODE_COUNTS("at start");
 
-    mark(num_old_gens_to_collect);
+    mark(max_generation);
 
     DEBUG_CHECK_NODE_COUNTS("after processing forwarded list");
 
-    sweep(num_old_gens_to_collect);
+    sweep(max_generation);
 
     DEBUG_CHECK_NODE_COUNTS("after releasing allocated nodes");
-}
-
-unsigned int GCManager::genRota(unsigned int num_old_gens_to_collect)
-{
-    static unsigned int s_collect_counts[s_num_old_generations] = { 0 };
-    static unsigned int s_level = 0;
-
-    auto reset_counters = [](unsigned int *counters) {
-        std::fill(counters, counters + s_num_old_generations, 0);
-        };
-
-        // Full reset request: collect everything and reset counters
-    if (num_old_gens_to_collect >= s_num_old_generations) {
-        reset_counters(s_collect_counts);
-        return s_level = num_old_gens_to_collect;
-    }
-
-    // Manual override: jump directly to requested level, adjust counters accordingly
-    if (s_level != num_old_gens_to_collect) {
-        s_level = num_old_gens_to_collect;
-
-        // Reset all lower-level counters when skipping ahead
-        for (unsigned int gen = 0; gen < s_level; ++gen)
-            s_collect_counts[gen] = 0;
-
-        // Increment the target level counter if within range
-        if (s_level < s_num_old_generations)
-            ++s_collect_counts[s_level];
-
-        return s_level;
-    }
-
-    // Normal escalation through all generations
-    for (unsigned int gen = 0; gen < s_num_old_generations; ++gen) {
-        ++s_collect_counts[gen];
-
-        // If we just escalated to a higher gen, reset the lower one
-        if (gen > 0 && s_collect_counts[gen] < s_collect_counts_max[gen])
-            s_collect_counts[gen - 1] = 0;
-
-        // Stop escalating once we're within the limit for this generation
-        if (s_collect_counts[gen] <= s_collect_counts_max[gen])
-            return s_level = gen;
-    }
-
-    // We've exceeded all thresholds → full collection
-    reset_counters(s_collect_counts);
-    return s_level = s_num_old_generations;
 }
 
 // former RunGenCollect()
@@ -1782,10 +1721,10 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
     BadObject::s_firstBadObject.clear();
 
     /* determine number of generations to collect */
-    if (force_full_collection) level = GCNode::numOldGenerations();
+    if (force_full_collection) level = s_num_old_generations;
 
 #ifdef PROTECTCHECK
-    level = GCNode::numOldGenerations();
+    level = s_num_old_generations;
 #endif
 
     level = genRota(level);
@@ -1797,7 +1736,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
         GCNode::gc(level);
         gens_collected = level;
 
-        if (level < GCNode::numOldGenerations()) {
+        if (level < s_num_old_generations) {
             if (VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
                 ++level;
                 if (VHEAP_FREE() < size_needed)
@@ -1811,7 +1750,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
 
     if (gens_collected > 0)
     {
-        if (gens_collected == GCNode::numOldGenerations()) {
+        if (gens_collected == s_num_old_generations) {
             /**** do some adjustment for intermediate collections? */
             AdjustHeapSize(size_needed);
         }
@@ -1819,7 +1758,7 @@ unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_co
     }
 
 #ifdef SORT_NODES
-    if (gens_collected == GCNode::numOldGenerations())
+    if (gens_collected == s_num_old_generations)
         SortNodes();
 #endif
 

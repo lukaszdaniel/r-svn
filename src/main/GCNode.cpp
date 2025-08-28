@@ -88,6 +88,17 @@ namespace CXXR
         }
     }
 
+    void GCNode::CountingMarker::operator()(const GCNode *node)
+    {
+        if (node->isMarked() || node->generation() > maxgen())
+        {
+            return;
+        }
+
+        Marker::operator()(node);
+        ++m_marks_applied;
+    }
+
     void GCNode::Marker::operator()(const GCNode *node)
     {
         if (node->isMarked())

@@ -398,24 +398,6 @@ namespace CXXR
          */
         static void gc(unsigned int num_old_gens_to_collect);
 
-        /** @brief Prevent old-to-new references.
-         *
-         * This is the first stage of garbage collection. It
-         * propagates the generation recursively
-         * through the node graph.
-         *
-         */
-        static void propagateAges(unsigned int max_generation);
-
-        /** @brief Carry out the mark phase of garbage collection.
-         */
-        static void mark(unsigned int max_generation);
-
-        /** @brief Carry out the sweep phase of garbage collection.
-         *
-         */
-        static void sweep(unsigned int num_old_gens_to_collect);
-
         /** @brief Number of GCNode objects in existence.
          *
          * @return the number of GCNode objects currently in
@@ -423,13 +405,19 @@ namespace CXXR
          */
         static size_t numNodes() { return s_num_nodes; }
 
-        // 2 old + 1 new
-        static constexpr unsigned int numGenerations() { return GCManager::numOldGenerations() + 1; }
-
-        /** sxpinfo allocates 2 bits for the old generation count, so only 0, 1, 2
-         * or 3 (max) is allowed
+        /** @brief Number of old generations used by garbage collector.
+         *
+         * @return The number of old generations into which GCNode objects
+         * are ranked by the garbage collector.
          */
         static constexpr unsigned int numOldGenerations() { return GCManager::numOldGenerations(); }
+
+        /** @brief Number of all generations.
+         *
+         * @return The number of all generations that includes
+         * old + newly created GCObjects (with generation 0)
+         */
+        static constexpr unsigned int numGenerations() { return GCManager::numOldGenerations() + 1; }
 
         unsigned int generation() const { return sxpinfo.m_gcgen; }
 
@@ -439,6 +427,7 @@ namespace CXXR
 
         const GCNode *prev() const { return m_prev; }
 
+    // private:
         /** @brief Visitor class used to impose a minimum generation number.
          *
          * This visitor class is used to ensure that a node and its
@@ -494,6 +483,27 @@ namespace CXXR
 
         private:
             unsigned int m_maxgen;
+        };
+
+        /** Marker that counts the number of nodes marked.
+         */
+        class CountingMarker: public Marker
+        {
+        public:
+            CountingMarker(unsigned int max_gen)
+                : Marker(max_gen), m_marks_applied(0)
+            {
+            }
+
+            unsigned int marksApplied() const
+            {
+                return m_marks_applied;
+            }
+
+            void operator()(const GCNode *node) override;
+
+        private:
+            unsigned int m_marks_applied;
         };
 
         /** Visitor class used to abort the program if old-to-new
@@ -575,6 +585,36 @@ namespace CXXR
          * second and subsequent calls do nothing.
          */
         static void initialize();
+
+        /** @brief Prevent old-to-new references.
+         *
+         * This is the first stage of garbage collection. It
+         * propagates the generation recursively
+         * through the node graph.
+         *
+         * If \a node points to a node of a younger generation than
+         * the node in question, then raise it to this node's generation, and
+         * propagate this change to the nodes to which \a node refers,
+         * and so on recursively.
+         *
+         * @param max_generation The cut-off generation number for which
+         *          age propagation will not occur.
+         */
+        static void propagateAges(unsigned int max_generation);
+
+        /** @brief Carry out the mark phase of garbage collection.
+         *
+         * @param max_generation The cut-off generation number for which
+         *          marking will not occur.
+         */
+        static void mark(unsigned int max_generation);
+
+        /** @brief Carry out the sweep phase of garbage collection.
+         *
+         * @param max_generation The cut-off generation number for which
+         *          sweep will not occur.
+         */
+        static void sweep(unsigned int max_generation);
 
         /** @brief Transfer a sublist so as to precede this node.
          *

@@ -32,8 +32,8 @@
 #ifndef GCMANAGER_HPP
 #define GCMANAGER_HPP
 
-#include <CXXR/RTypes.hpp>
 #include <iosfwd>
+#include <CXXR/RTypes.hpp>
 
 #define GC_TORTURE
 
@@ -113,11 +113,10 @@ namespace CXXR
 
         /** @brief Number of old generations used by garbage collector.
          *
-         * This will be at least 2, since one generation (Generation
-         * 0) is for newly created nodes still enjoying infant
-         * immunity.
+         * This will be at most 3, sxpinfo allocates 2 bits
+         * for the old generation count, so only 0, 1, 2 or 3 (max) is allowed.
          *
-         * @return The number of generations into which GCNode objects
+         * @return The number of old generations into which GCNode objects
          * are ranked by the garbage collector.
          */
         static constexpr unsigned int numOldGenerations() { return s_num_old_generations; }
@@ -175,6 +174,7 @@ namespace CXXR
 
     private:
         static constexpr unsigned int s_num_old_generations = 2;
+        static const unsigned int s_collect_counts_max[s_num_old_generations];
         static unsigned int s_gen_gc_counts[s_num_old_generations + 1];
         static bool s_gc_fail_on_error;
         static bool s_gc_is_running; // R_in_gc
