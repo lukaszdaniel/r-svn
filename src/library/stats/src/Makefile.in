@@ -26,7 +26,7 @@ SOURCES_CXX = init.cpp kmeans.cpp \
   mAR.cpp pacf.cpp starma.cpp port.cpp family.cpp sbart.cpp \
   approx.cpp loglin.cpp lowess.cpp massdist.cpp splines.cpp lm.cpp \
   complete_cases.cpp cov.cpp deriv.cpp fft.cpp fourier.cpp model.cpp optim.cpp optimize.cpp \
-  integrate.cpp random.cpp distn.cpp zeroin.cpp rcont.cpp influence.cpp
+  integrate.cpp random.cpp distn.cpp zeroin.cpp rcont.cpp influence.cpp permdist.cpp
 
 SOURCES_F = bsplvd.f bvalue.f bvalus.f loessf.f ppr.f qsbart.f \
   sgram.f sinerp.f sslvrg.f stxwx.f \
