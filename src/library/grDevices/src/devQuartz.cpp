@@ -966,7 +966,7 @@ static void QuartzInitMasks(QuartzDesc *xd)
 {
     int i;
     xd->numMasks = 20;
-    xd->masks = (QPathRef *) malloc(sizeof(QMaskRef) * xd->numMasks);
+    xd->masks = (QMaskRef *) malloc(sizeof(QMaskRef) * xd->numMasks);
     if (!xd->masks)
 	error("%s", _("allocation failure in QuartzInitMasks"));
     for (i = 0; i < xd->numMasks; i++) {
