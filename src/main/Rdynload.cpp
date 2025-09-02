@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997-2023 The R Core Team
+ *  Copyright (C) 1997-2025 The R Core Team
  *  Copyright (C) 1995-1996 Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -377,6 +377,8 @@ int R_registerRoutines(DllInfo *info, const R_CMethodDef * const croutines,
 	for(num = 0; croutines[num].name != NULL; num++) {;}
 	info->CSymbols = (Rf_DotCSymbol*)calloc((size_t) num,
 						sizeof(Rf_DotCSymbol));
+	if (!info->CSymbols)
+	    error("allocation failure in R_registerRoutines");
 	info->numCSymbols = num;
 	for (int i = 0; i < num; i++) {
 	    R_addCRoutine(info, croutines+i, info->CSymbols + i);
@@ -388,6 +390,10 @@ int R_registerRoutines(DllInfo *info, const R_CMethodDef * const croutines,
 	info->FortranSymbols =
 	    (Rf_DotFortranSymbol*)calloc((size_t) num,
 					 sizeof(Rf_DotFortranSymbol));
+	if (!info->FortranSymbols) {
+	    free(info->CSymbols);
+	    error("allocation failure in R_registerRoutines");
+	}
 	info->numFortranSymbols = num;
 	for (int i = 0; i < num; i++)
 	    R_addFortranRoutine(info, fortranRoutines+i,
@@ -398,6 +404,11 @@ int R_registerRoutines(DllInfo *info, const R_CMethodDef * const croutines,
 	for(num = 0; callRoutines[num].name != NULL; num++) {;}
 	info->CallSymbols =
 	    (Rf_DotCallSymbol*)calloc((size_t) num, sizeof(Rf_DotCallSymbol));
+	if (!info->CallSymbols) {
+	    free(info->CSymbols);
+	    free(info->FortranSymbols);
+	    error("allocation failure in R_registerRoutines");
+	}
 	info->numCallSymbols = num;
 	for (int i = 0; i < num; i++)
 	    R_addCallRoutine(info, callRoutines+i, info->CallSymbols + i);
@@ -408,6 +419,12 @@ int R_registerRoutines(DllInfo *info, const R_CMethodDef * const croutines,
 	info->ExternalSymbols =
 	    (Rf_DotExternalSymbol*)calloc((size_t) num,
 					  sizeof(Rf_DotExternalSymbol));
+	if (!info->ExternalSymbols) {
+	    free(info->CSymbols);
+	    free(info->FortranSymbols);
+	    free(info->CallSymbols);
+	    error("allocation failure in R_registerRoutines");
+	}
 	info->numExternalSymbols = num;
 
 	for (int i = 0; i < num; i++)

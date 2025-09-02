@@ -465,7 +465,13 @@ static void QuartzInitPatterns(QuartzDesc *xd)
     /* Gradients and tiling patterns are different types so need 
      * separate arrays */
     xd->gradients = (QGradientRef *) malloc(sizeof(QGradientRef) * xd->numPatterns);
+    if (!xd->gradients)
+	error("%s", _("allocation failure in QuartzInitPatterns"));
     xd->patterns = (QPatternRef *) malloc(sizeof(QPatternRef) * xd->numPatterns);
+    if (!xd->patterns) {
+	free(xd->gradients);
+	error("%s", _("allocation failure in QuartzInitPatterns"));
+    }
     for (i = 0; i < xd->numPatterns; i++) {
         xd->gradients[i] = NULL;
         xd->patterns[i] = NULL;
@@ -811,6 +817,8 @@ static void QuartzInitClipPaths(QuartzDesc *xd)
     /* Zero clip paths */
     xd->numClipPaths = maxClipPaths;
     xd->clipPaths = (QPathRef *) malloc(sizeof(QPathRef) * xd->numClipPaths);
+    if (!xd->clipPaths)
+	error("%s", _("allocation failure in QuartzInitClipPaths"));
     for (i = 0; i < xd->numClipPaths; i++) {
         xd->clipPaths[i] = NULL;
     }
@@ -958,7 +966,9 @@ static void QuartzInitMasks(QuartzDesc *xd)
 {
     int i;
     xd->numMasks = 20;
-    xd->masks = (QMaskRef *) malloc(sizeof(QMaskRef) * xd->numMasks);
+    xd->masks = (QPathRef *) malloc(sizeof(QMaskRef) * xd->numMasks);
+    if (!xd->masks)
+	error("%s", _("allocation failure in QuartzInitMasks"));
     for (i = 0; i < xd->numMasks; i++) {
         xd->masks[i] = NULL;
     }
@@ -1127,6 +1137,8 @@ static void QuartzInitGroups(QuartzDesc *xd)
     int i;
     xd->numGroups = maxGroups;
     xd->groups = (CGLayerRef *) malloc(sizeof(CGLayerRef) * xd->numGroups);
+    if (!xd->groups)
+	error("%s",_("allocation failure in QuartzInitGroups"));
     for (i = 0; i < xd->numGroups; i++) {
         xd->groups[i] = NULL;
     }
@@ -2062,7 +2074,9 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     if (!glyphs) error("%s", _("allocation failure in RQuartz_Text"));
     CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
     int      *advances = (int *) malloc(sizeof(int) * len);
+    if (!advances) error("%s", _("allocation failure in RQuartz_Text"));
     CGSize   *g_adv    = (CGSize *) malloc(sizeof(CGSize) * len);
+    if (!g_adv) error("%s", _("allocation failure in RQuartz_Text"));
 
     CGFontGetGlyphAdvances(font, glyphs, len, advances);
     for(int i =0 ; i < len; i++) {
