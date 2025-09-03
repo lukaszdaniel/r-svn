@@ -74,14 +74,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
         n <- as.double(length(x))
         if(is.null(exact))
             exact <- (n < 50)
-        ZERO <- any(x == mu)
-        ## Argh.  Having exact zeroes (after subtracting y if paired)
-        ## and subtracting mu) is a problem.  Wilcoxon suggested droping
-        ## them, Pratt suggested keeping them, see e.g.
-        ## <https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test#Zeros>.
-        ## Unclear how the conditional/permutation distribution works in
-        ## case of zeroes, so for not do not use an exact test then.
-        if(exact && !ZERO) {
+        if(exact) {
             METHOD <- sub("test", "exact test", METHOD, fixed = TRUE)
             STAT <- .wilcox_test_one_stat_exact(x, mu, n, digits.rank)
             PVAL <- .wilcox_test_one_pval_exact(STAT, n, alternative)
@@ -90,7 +83,7 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                                                     STAT$z,
                                                     alternative,
                                                     conf.level)
-        } else { ## not exact, maybe zeroes
+        } else { ## not exact
             if(correct >= 0)
                 METHOD <- paste(METHOD, "with continuity correction")
             STAT <- .wilcox_test_one_stat_asymp(x, mu, n, digits.rank)
@@ -103,11 +96,6 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
                                                     correct >= 0,
                                                     tol.root,
                                                     digits.rank)
-            if(exact && ZERO) {
-                warning("cannot compute exact p-value with zeroes")
-                if(conf.int)
-                    warning("cannot compute exact confidence interval with zeroes")
-            }
 	}
     }
     else {
@@ -174,20 +162,31 @@ function(x, y = NULL, alternative = c("two.sided", "less", "greater"),
     RVAL
 }
 
+## Having exact zeroes (after subtracting y if paired) and subtracting
+## mu) traditionally is a problem for the signed rank test.  Wilcoxon
+## suggested dropping them, Pratt suggested keeping them, see e.g.
+## <https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test#Zeros>.
+## Zeroes are not a problem for exact inference using the permutation
+## distribution.  With V(x) = sum(rank(abs(x))[x > 0]), this is the
+## empirical distribution of V over all 2^n possible sign flip vectors
+## s(x) = (\pm x_1, ..., \pm x_n).  Clearly, abs(s(x)) = abs(x), so with
+## r = rank(abs(x)), V(s(x)) = sum(r[s(x) > 0]).  Zeroes never
+## contribute to the sum, so we can reduce to doing the sign flips for
+## the non-zero elements, and dropping the ranks for the zero elements
+## (but not computing the ranks after dropping the zero elements).
+## For the internal dpq functions we thus use z = rank(abs(x))[x != 0]
+## in case of ties or zeroes.
+
 .wilcox_test_one_stat_exact <-
 function(x, mu, n = length(x), digits.rank)
 {
     x <- x - mu
-    ## Should not happen ...
-    ZERO <- any(x == 0)
-    if(ZERO) {
-        x <- x[x != 0]
-        n <- length(x)
-    }
+    i <- (x == 0)
     r <- rank(abs(if(is.finite(digits.rank)) signif(x, digits.rank) else x))
     TIES <- length(r) != length(unique(r))
+    ZERO <- any(i)
     STATISTIC <- c("V" = sum(r[x > 0]))
-    list(statistic = STATISTIC, z =  if(TIES) r else NULL)
+    list(statistic = STATISTIC, z =  if(TIES || ZERO) r[!i] else NULL)
 }
 
 .wilcox_test_one_stat_asymp <-
@@ -217,11 +216,14 @@ function(STAT, n, alternative)
     z <- STAT$z
     switch(alternative,
            "two.sided" = {
-               ## FIXME: Is the conditional distribution really
-               ## symmetric about its mean?
-               p <- if(q > (n * (n + 1) / 4))
+               ## The permutation distribution is symmetric about
+               ## sum(z)/2, which may be different from n(n+1)/4 in case
+               ## of zeroes.
+               m <- if(is.null(z)) n * (n + 1) / 4 else sum(z) / 2
+               p <- if(q > m)
                         .psignrank(q - 1/4, n, z, lower.tail = FALSE)
-                    else .psignrank(q, n, z)
+                    else
+                        .psignrank(q, n, z)
                min(2 * p, 1)
            },
            "greater" = .psignrank(q - 1/4, n, z, lower.tail = FALSE),
@@ -248,28 +250,24 @@ function(x, n, z, alternative, conf.level)
     CONF.INT <-
         switch(alternative,
                "two.sided" = {
-                   ## FIXME: Is the conditional distribution really
-                   ## symmetric about its mean?
                    qu <- .qsignrank(alpha / 2, n, z)
-                   ql <- n * (n + 1) / 2 - qu
+                   ql <- .qsignrank(1 - alpha / 2, n, z)
                    lci <- if(qu <= min(w)) max(diffs)
                           else min(diffs[w <= qu])
                    uci <- if(ql >= max(w)) min(diffs)
                           else max(diffs[w > ql])
                                c(uci, lci)
                    achieved.alpha <-
-                       2 * .psignrank(qu - 1/4, n, z)
+                       (.psignrank(qu - 1/4, n, z) +
+                        .psignrank(ql + 1/4, n, z, lower.tail = FALSE))
                    c(uci, lci)
                },
                "greater" = {
-                   ## FIXME: Is the conditional distribution really
-                   ## symmetric about its mean?
-                   qu <- .qsignrank(alpha, n, z)
-                   ql <- n * (n + 1) / 2 - qu
+                   ql <- .qsignrank(1 - alpha, n, z)
                    uci <- if(ql >= max(w)) min(diffs)
                           else max(diffs[w > ql])
                    achieved.alpha <-
-                       .psignrank(qu - 1/4, n, z)
+                       .psignrank(ql + 1/4, n, z, lower.tail = FALSE)
                    c(uci, +Inf)
                },
                "less" = {
@@ -285,10 +283,9 @@ function(x, n, z, alternative, conf.level)
         conf.level <- 1 - signif(achieved.alpha, 2)
     }
     attr(CONF.INT, "conf.level") <- conf.level
-    ## FIXME: This is the Hodges-Lehmann estimate and not what is
-    ## suggested in Bauer (1972) (as in \CRANpkg{coin}: is this really
-    ## what we want?
     ESTIMATE <- c("(pseudo)median" = median(diffs))
+    ## NOTE: This is the Hodges-Lehmann estimate and not what is
+    ## suggested in Bauer (1972) and used in \CRANpkg{coin}.
     list(conf.int = CONF.INT, estimate = ESTIMATE)
 }
 
@@ -456,11 +453,11 @@ function(x, n, alternative, conf.level, correct,
                    })
         attr(CONF.INT, "conf.level") <- conf.level
         correct <- FALSE # for W(): no continuity correction for estimate
-        ## FIXME: Perhaps instead simply give the Hodges-Lehmann
-        ## estimate?  In particular as we now use 'correct = FALSE'.
         ESTIMATE <- c("(pseudo)median" =
                           uniroot(W, lower = mumin, upper = mumax,
                                   tol = tol.root)$root)
+        ## NOTE: this is not the Hodges-Lehmann estimate, which would
+        ## need computing O(n^2) Walsh averages which may be a lot.
     } # regular (Wmumin, Wmumax)
     list(conf.int = CONF.INT, estimate = ESTIMATE)
 }
@@ -498,17 +495,17 @@ function(STAT, n.x, n.y, alternative)
     z <- STAT$z
     switch(alternative,
            "two.sided" = {
-               ## FIXME: Is the conditional distribution really
-               ## symmetric about its mean?
-               p <- if(q > (n.x * n.y / 2))
-                        .pwilcox(q - 1/4, n.x, n.y, z, lower.tail = FALSE)
-                    else
-                        .pwilcox(q, n.x, n.y, z)
-               min(2 * p, 1)
+               ## NOTE: the permutation distribution is not necessarily
+               ## symmetric about its mean.  We compute p-values as in
+               ## \CRANpkg{coin} as the twice the min of the lower and
+               ## upper tail probabilities, unlike binom.test() which
+               ## computes the probability of values with density not
+               ## exceeding that of the observed one.
+               min(2 * .pwilcox(q, n.x, n.y, z),
+                   2 * .pwilcox(q - 1/4, n.x, n.y, z, lower.tail = FALSE),
+                   1)
            },
-           "greater" = {
-               .pwilcox(q - 1/4, n.x, n.y, z, lower.tail = FALSE)
-           },
+           "greater" = .pwilcox(q - 1/4, n.x, n.y, z, lower.tail = FALSE),
            "less" = .pwilcox(q, n.x, n.y, z))
 }
 
@@ -530,35 +527,29 @@ function(x, y, n.x, n.y, z, alternative, conf.level)
     CONF.INT <-
         switch(alternative,
                "two.sided" = {
-                   ## FIXME: Is the conditional distribution really
-                   ## symmetric about its mean?
                    qu <- .qwilcox(alpha/2, n.x, n.y, z)
-                   ql <- n.x * n.y - qu
+                   ql <- .qwilcox(1 - alpha/2, n.x, n.y, z)                   
                    lci <- if(qu <= min(w)) max(diffs)
                           else min(diffs[w <= qu])
                    uci <- if(ql >= max(w)) min(diffs)
                           else max(diffs[w > ql])
                    achieved.alpha <-
-                       2 * .pwilcox(qu - 1/4, n.x, n.y, z)
+                       (.pwilcox(qu - 1/4, n.x, n.y, z) +
+                        .pwilcox(ql + 1/4, n.x, n.y, z, lower.tail = FALSE))
                    c(uci, lci)
                },
                "greater" = {
-                   ## FIXME: Is the conditional distribution really
-                   ## symmetric about its mean?
-                   qu <- .qwilcox(alpha, n.x, n.y, z)
-                   ql <- n.x * n.y - qu
+                   ql <- .qwilcox(1 - alpha, n.x, n.y, z)
                    uci <- if(ql >= max(w)) min(diffs)
                           else max(diffs[w > ql])
-                   if(qu == 0) qu <- 1
                    achieved.alpha <-
-                       .pwilcox(qu - 1/4, n.x, n.y, z)
+                       .pwilcox(ql + 1/4, n.x, n.y, z, lower.tail = FALSE)
                    c(uci, +Inf)
                },
                "less" = {
                    qu <- .qwilcox(alpha, n.x, n.y, z)
                    lci <- if(qu <= min(w)) max(diffs)
                           else min(diffs[w <= qu])
-                   if(qu == 0) qu <- 1
                    achieved.alpha <-
                        .pwilcox(qu - 1/4, n.x, n.y, z)
                    c(-Inf, lci)
@@ -568,10 +559,9 @@ function(x, y, n.x, n.y, z, alternative, conf.level)
         conf.level <- 1 - achieved.alpha
     }
     attr(CONF.INT, "conf.level") <- conf.level
-    ## FIXME: This is the Hodges-Lehmann estimate and not what is
-    ## suggested in Bauer (1972) (as in \CRANpkg{coin}: is this really
-    ## what we want?
     ESTIMATE <- c("difference in location" = median(diffs))
+    ## NOTE: This is the Hodges-Lehmann estimate and not what is
+    ## suggested in Bauer (1972) and used in \CRANpkg{coin}.
     list(conf.int = CONF.INT, estimate = ESTIMATE)
 }
 
@@ -693,11 +683,11 @@ function(x, y, n.x, n.y, alternative, conf.level, correct,
                })
     attr(CONF.INT, "conf.level") <- conf.level
     correct <- FALSE # for W(): no continuity correction for estimate
-    ## FIXME: Perhaps instead simply give the Hodges-Lehmann
-    ## estimate?  In particular as we now use 'correct = FALSE'.
     ESTIMATE <- c("difference in location" =
                       uniroot(W, lower=mumin, upper=mumax,
                               tol = tol.root)$root)
+    ## NOTE: this is not the Hodges-Lehmann estimate, which would
+    ## need computing m * n differences which may be a lot.
     list(conf.int = CONF.INT, estimate = ESTIMATE)
 }
 
@@ -755,7 +745,6 @@ function(x, m, n, z = NULL)
         return(dwilcox(x, m, n))
 
     stopifnot(length(z) == m + n)
-    ## FIXME: why floor() and not as.integer()?
     if(!all(2 * z == floor(2 * z)) || any(z < 1))
         stop("'z' is not a rank vector")
 
@@ -765,11 +754,9 @@ function(x, m, n, z = NULL)
         return(y)
 
     ## scores can be x.5: in that case need to multiply by f=2.
-    ## FIXME: why floor() and not as.integer()?    
-    f <- 2 - (max(z - floor(z)) == 0)
-    d <- .Call(C_cpermdist2,
-               ## FIXME: why not sort(as.integer(f * z)) ?
-               as.integer(sort(floor(f * z))),
+    f <- 2 - all(z == floor(z))
+    d <- .Call(C_dpermdist2,
+               sort(as.integer(f * z)),
                as.integer(m))
     w <- seq_along(d)
     x <- f * (x[i] + m * (m + 1) / 2)
@@ -791,14 +778,16 @@ function(q, m, n, z = NULL, lower.tail = TRUE)
         return(y)
 
     ## Support of U
-    s <- (0 : (2 * m * n)) / 2
-    ## FIXME: can we simplify to 0 : (m * n) if z is all integer?
+    s <- if(all(z == floor(z)))
+             seq.int(0, m * n)
+         else
+             seq.int(0, 2 * m * n) / 2
     ## Density
     d <- .dwilcox(s, m, n, z)
     y[i] <- vapply(q[i],
                    function(e) {
-                       ## FIXME: maybe use a smaller fuzz?
-                       sum(d[s < e + sqrt(.Machine$double.eps)])
+                       ## NOTE: C code in src/nmath uses a fuzz of 1e-7.
+                       sum(d[s < e + 1e-8])
                    },
                    0)
     if(lower.tail) y else 1 - y
@@ -816,9 +805,11 @@ function(p, m, n, z = NULL, lower.tail = TRUE)
     i <- !is.na(p) & !i
     if(!any(i))
         return(y)
-    
-    s <- (0 : (2 * m * n)) / 2
-    ## FIXME: can we simplify to 0 : (m * n) if z is all integer?
+
+    s <- if(all(z == floor(z)))
+             seq.int(0, m * n)
+         else
+             seq.int(0, 2 * m * n) / 2
     v <- .pwilcox(s, m, n, z)
     if(!lower.tail)
         p <- 1 - p
@@ -834,19 +825,15 @@ function(x, n, z = NULL)
     if(is.null(z))
         return(dsignrank(x, n))
 
-    stopifnot(length(z) == n)
-    ## FIXME: why floor() and not as.integer()?    
     if (!all(2 * z == floor(2 * z)) || any(z < 1)) 
         stop("'z' is not a rank vector")
     y <- rep.int(NA_real_, length(x))
     i <- which(!is.na(x))
     if (!any(i)) 
         return(y)
-    ## FIXME: why floor() and not as.integer()?
-    f <- 2 - (max(z - floor(z)) == 0)
-    d <- .Call(C_cpermdist1,
-               ## FIXME: why not sort(as.integer(f * z)) ?
-               as.integer(sort(floor(f * z))))
+    f <- 2 - all(z == floor(z))
+    d <- .Call(C_dpermdist1,
+               sort(as.integer(f * z)))
     w <- seq.int(0, length(d) - 1L)
     x <- f * x[i]
     w <- w[match(x, w)] + 1L
@@ -866,15 +853,16 @@ function(q, n, z = NULL, lower.tail = TRUE)
         return(y)
 
     ## Support of V
-    s <- seq.int(0, n * (n + 1)) / 2
-    ## FIXME: can we simplify to seq.int(0, n * (n + 1) / 2) is z is all
-    ## integer?
+    s <- if(all(z == floor(z)))
+             seq.int(0, n * (n + 1) / 2)
+         else
+             seq.int(0, n * (n + 1)) / 2
     ## Density
     d <- .dsignrank(s, n, z)
     y[i] <- vapply(q[i],
                    function(e) {
-                       ## FIXME: maybe use a smaller fuzz?
-                       sum(d[s < e + sqrt(.Machine$double.eps)])
+                       ## NOTE: C code in src/nmath uses a fuzz of 1e-7.
+                       sum(d[s < e + 1e-8])
                    },
                    0)
     if(lower.tail) y else 1 - y
@@ -886,15 +874,17 @@ function(p, n, z = NULL, lower.tail = TRUE)
     if(is.null(z))
         return(qsignrank(p, n, lower.tail = lower.tail))
 
+    y <- rep.int(NA_real_, length(p))
     if (any(i <- (p < 0) | (p > 1))) 
         y[i] <- NaN
     i <- !is.na(p) & !i
     if (!any(i)) 
         return(y)
 
-    s <- seq.int(0, n * (n + 1)) / 2
-    ## FIXME: can we simplify to seq.int(0, n * (n + 1) / 2) is z is all
-    ## integer?
+    s <- if(all(z == floor(z)))
+             seq.int(0, n * (n + 1) / 2)
+         else
+             seq.int(0, n * (n + 1)) / 2
     v <- .psignrank(s, n, z)
     if (!lower.tail) 
         p <- 1 - p
