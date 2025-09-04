@@ -99,6 +99,11 @@
 
       \item \code{barplot(.., orderH = *)} for stacked bar plots allows to
       sort the stacks each according to size.
+
+      \item \code{plot.default()} gets a new switch \code{lim2} to indicate
+      that the default \code{xlim} and \code{ylim} range computations only
+      use \emph{jointly} finite x- and y-values; indirectly suggested in
+      \PR{7986} by \I{Jincai Jiang}.
     }
   }
 
@@ -173,13 +178,6 @@
 
   \subsection{BUG FIXES}{
     \itemize{
-      \item \code{confint.default()} would fail on S4 model objects
-      because it used \code{stats} methods for \code{coef} and
-      \code{vcov} and their defaults did not know about S4. Now changed
-      to look for the the two functions in the calling frame. The
-      mechanism for \code{AIC.default} and \code{BIC.default} has been
-      changed to do likewise.
-      
       \item Profiling \code{"mle"} objects (\pkg{stats4} package) could fail
       because profile MLE used starting value from full MLE. Now starts from profile MLE
       from previous step.
