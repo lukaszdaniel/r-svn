@@ -11,9 +11,9 @@
 #define string strclass
 
 /* Include a few standard header files. */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 /*
  *  I/O functions.

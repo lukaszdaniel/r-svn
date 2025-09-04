@@ -44,7 +44,7 @@
 
 #include <shlobj.h>
 #include <shobjidl.h>
-#include <stdlib.h>
+#include <cstdlib>
 
 #define BUFSIZE (3*65536)
 static char strbuf[BUFSIZE];

@@ -31,7 +31,7 @@ extern unsigned int TopmostDialogs; /* from dialogs.c */
 WINGDIAPI BOOL WINAPI AlphaBlend(HDC,int,int,int,int,HDC,int,int,int,int,BLENDFUNCTION);
 #endif
 
-#include <wchar.h>
+#include <cwchar>
 #ifdef __GNUC__
 # define alloca(x) __builtin_alloca((x))
 #else

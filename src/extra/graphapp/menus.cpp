@@ -37,7 +37,7 @@
 
 #include "internal.h"
 /*#include "config.h" */
-#include <wchar.h>
+#include <cwchar>
 #define mbs_init(x) memset(&x,0,sizeof(x))
 #ifdef __cplusplus
 extern "C"
@@ -147,7 +147,7 @@ static void set_search_string(char *search, const char *name, int key)
 
     {
 	/* If there is an '&' in the string, use the next letter first */
-	char *p = strchr(name, '&');
+	const char *p = strchr(name, '&');
 	if (p && *(p+1)) search[dest++] = *(p+1);
     }
 

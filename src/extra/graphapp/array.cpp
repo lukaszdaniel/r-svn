@@ -26,7 +26,7 @@
    Copyright (C) 2025  The R Core Team
 */
 
-#include <stdlib.h>
+#include <cstdlib>
 #include "internal.h"
 
 #ifndef array

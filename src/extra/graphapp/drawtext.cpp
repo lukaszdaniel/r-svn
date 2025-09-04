@@ -31,7 +31,7 @@
 */
 
 #include "internal.h"
-#include <stdarg.h>
+#include <cstdarg>
 
 #define COMPRESS_WHITESPACE 0
 

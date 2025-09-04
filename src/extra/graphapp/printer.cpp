@@ -28,11 +28,10 @@
  *                          printers can be deleted by 'del(printer)'
  */
 
+#include <cstdlib>
 #include "win-nls.h"
 #include "internal.h"
 #include "rui.h"
-
-#include <stdlib.h>
 
 
 /*

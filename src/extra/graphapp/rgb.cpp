@@ -28,9 +28,8 @@
    This file is an add-on  to GraphApp, a cross-platform C graphics library.
  */
 
-
+#include <cstring>
 #include "ga.h"
-#include <string.h>
 
 #define RGBCOLORS 657
 

@@ -272,7 +272,7 @@ static void editorsaveas(editor c)
     wname = askfilesaveW(G_("Save script as"), "");
     if (wname) {
 	char *name = wchar_to_utf8(wname);
-	char *q = strchr(name, '.');
+	const char *q = strchr(name, '.');
 	if(!q) {
 	    char *tmp = (char *)malloc(strlen(name) + 2 + 1);
 	    if (tmp) {

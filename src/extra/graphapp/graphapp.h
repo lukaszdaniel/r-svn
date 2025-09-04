@@ -21,8 +21,8 @@
  *  Assume C declarations for C++
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 #include <R_ext/libextern.h>
 

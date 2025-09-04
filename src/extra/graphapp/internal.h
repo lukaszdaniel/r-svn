@@ -60,7 +60,7 @@ typedef objinfo *object;
 #ifndef __WINDOWS_H     /* prevent multiple includes */
 #include <windows.h>
 #endif
-#include <stdint.h> /* for intptr_t */
+#include <cstdint> /* for intptr_t */
 
 #ifndef __GA__VERSION__
 #define objptr object
@@ -74,11 +74,11 @@ PROTECTED void updatestatus(const char *text);
 PROTECTED font new_font_object(HFONT hf);
 UINT default_font_charset(void);
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-#include <math.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
+#include <cmath>
 
 
 #include <commdlg.h>
