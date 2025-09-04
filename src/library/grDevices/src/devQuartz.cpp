@@ -480,7 +480,7 @@ static void QuartzInitPatterns(QuartzDesc *xd)
 
 static int QuartzGrowPatterns(QuartzDesc *xd)
 {
-    int i, newMax = 2*xd->numPatterns;
+    int newMax = 2*xd->numPatterns;
     void *tmp;
     tmp = realloc(xd->gradients, sizeof(QGradientRef) * newMax);
     if (!tmp) { 
@@ -494,7 +494,7 @@ static int QuartzGrowPatterns(QuartzDesc *xd)
         return 0;
     }
     xd->patterns = (QPatternRef *) tmp;
-    for (i = xd->numPatterns; i < newMax; i++) {
+    for (int i = xd->numPatterns; i < newMax; i++) {
         xd->gradients[i] = NULL;
         xd->patterns[i] = NULL;
     }
@@ -542,7 +542,7 @@ static void QuartzDestroyPatterns(QuartzDesc *xd)
             free(xd->gradients[i]);
         }
     }    
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         if (xd->patterns[i] != NULL) {
             CGPatternRelease(xd->patterns[i]->pattern);
             free(xd->patterns[i]);
@@ -1813,12 +1813,12 @@ void RQuartz_Set(CGContextRef ctx,const pGEcontext gc,int flags) {
     }
     if(flags & RQUARTZ_LINE) {
         CGFloat dashlist[8];
-        int   i, ndash = 0;
+        int   ndash = 0;
         int   lty = gc->lty;
 	float lwd = (float)(gc->lwd * 0.75);
         CGContextSetLineWidth(ctx, lwd);
 
-        for(i = 0; i < 8 && lty; i++) {
+        for (int i = 0; i < 8 && lty; i++) {
             dashlist[ndash++] = (lwd >= 1 ? lwd : 1) * (lty & 15);
             lty >>= 4;
         }
@@ -2515,12 +2515,12 @@ static void QuartzPathPath(double *x, double *y,
                            int npoly, int* nper,
                            CGContextRef ctx)
 {
-    int i, j, index;
+    int index;
     index = 0;
-    for (i=0; i < npoly; i++) {
+    for (int i=0; i < npoly; i++) {
         CGContextMoveToPoint(ctx, x[index], y[index]);
         index++;
-        for(j=1; j < nper[i]; j++) {
+        for (int j=1; j < nper[i]; j++) {
             CGContextAddLineToPoint(ctx, x[index], y[index]);
             index++;
         }
@@ -3063,8 +3063,8 @@ const char *registeredAxisNames[5] = { "ital", "opsz", "slnt", "wdth", "wght" };
 const char *localAxisNames[5] = { "Italic", "Optical Size", "Slant", "Width", "Weight" };
 static int axisNameMatch(const char* axisName, CFStringRef axisDictName)
 {
-    int i, j, axisIndex = -1, axisDictIndex = -1;
-    for (i = 0; i < 5; i++) {
+    int axisIndex = -1, axisDictIndex = -1;
+    for (int i = 0; i < 5; i++) {
         if (!strcmp(axisName, registeredAxisNames[i])) 
             axisIndex = i;
     }
@@ -3078,7 +3078,7 @@ static int axisNameMatch(const char* axisName, CFStringRef axisDictName)
             kCFCompareEqualTo;
     } else {
         /* Registered axis */
-        for (j = 0; j < 5; j++) {
+        for (int j = 0; j < 5; j++) {
             CFStringRef localNameRef = 
                 CFStringCreateWithCString(NULL, localAxisNames[j], 
                                           kCFStringEncodingASCII);
@@ -3095,7 +3095,6 @@ static CTFontDescriptorRef applyFontVar(CTFontRef ctFont,
                                         SEXP font,
                                         int numVar) 
 {
-    int i, j;
     CTFontDescriptorRef curFontDescriptor, newFontDescriptor;
     curFontDescriptor = ctFontDescriptor;
     newFontDescriptor = ctFontDescriptor;
@@ -3103,13 +3102,13 @@ static CTFontDescriptorRef applyFontVar(CTFontRef ctFont,
     CFArrayRef ctFontVariationAxes = CTFontCopyVariationAxes(ctFont);
     if (ctFontVariationAxes) {
         CFIndex numAxes = CFArrayGetCount(ctFontVariationAxes);
-        for (i = 0; i < numVar; i++) {
+        for (int i = 0; i < numVar; i++) {
             /* Find the relevant variation axis identifier from 
                the dictionary */
             const char* axisName = R_GE_glyphFontVarAxis(font, i);
             CFNumberRef axisID;
             int found = 0;
-            for (j = 0; j < numAxes; j++) {
+            for (int j = 0; j < numAxes; j++) {
                 CFDictionaryRef axisDict = (CFDictionaryRef)
                     CFArrayGetValueAtIndex(ctFontVariationAxes, j);
                 CFStringRef axisDictName = (CFStringRef)
