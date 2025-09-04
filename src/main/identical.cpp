@@ -246,19 +246,19 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     case LGLSXP:
 	if (XLENGTH(x) != XLENGTH(y)) return FALSE;
 	/* Use memcmp (which is ISO C90) to speed up the comparison */
-	return (Rboolean) (memcmp((void *)LOGICAL(x), (void *)LOGICAL(y),
+	return (Rboolean) (memcmp((const void *)LOGICAL_RO(x), (const void *)LOGICAL_RO(y),
 		      xlength(x) * sizeof(Logical)) == 0);
     case INTSXP:
 	if (XLENGTH(x) != XLENGTH(y)) return FALSE;
 	/* Use memcmp (which is ISO C90) to speed up the comparison */
-	return (Rboolean) (memcmp((void *)INTEGER(x), (void *)INTEGER(y),
+	return (Rboolean) (memcmp((const void *)INTEGER_RO(x), (const void *)INTEGER_RO(y),
 		      xlength(x) * sizeof(int)) == 0);
     case REALSXP:
     {
 	R_xlen_t n = XLENGTH(x);
 	if(n != XLENGTH(y)) return FALSE;
 	else {
-	    double *xp = REAL(x), *yp = REAL(y);
+	    const double *xp = REAL_RO(x), *yp = REAL_RO(y);
 	    int ne_strict = NUM_EQ | (SINGLE_NA << 1);
 	    for(R_xlen_t i = 0; i < n; i++)
 		if(neWithNaN(xp[i], yp[i], (ne_strictness_type) ne_strict)) return FALSE;
@@ -270,7 +270,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 	R_xlen_t n = XLENGTH(x);
 	if(n != XLENGTH(y)) return FALSE;
 	else {
-	    Rcomplex *xp = COMPLEX(x), *yp = COMPLEX(y);
+	    const Rcomplex *xp = COMPLEX_RO(x), *yp = COMPLEX_RO(y);
 	    int ne_strict = NUM_EQ | (SINGLE_NA << 1);
 	    for(R_xlen_t i = 0; i < n; i++)
 		if(neWithNaN(xp[i].r, yp[i].r, (ne_strictness_type) ne_strict) ||
@@ -369,7 +369,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     case RAWSXP:
 	if (XLENGTH(x) != XLENGTH(y)) return FALSE;
 	/* Use memcmp (which is ISO C90) to speed up the comparison */
-	return (Rboolean) (memcmp((void *)RAW(x), (void *)RAW(y),
+	return (Rboolean) (memcmp((const void *)RAW_RO(x), (const void *)RAW_RO(y),
 		      XLENGTH(x) * sizeof(Rbyte)) == 0);
     case PROMSXP:
     {
