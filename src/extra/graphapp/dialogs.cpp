@@ -767,11 +767,29 @@ char *askcdstring(const char *question, const char *default_str)
 
     wquestion = mbstowcs_malloc(question);
     wdefault_str = mbstowcs_malloc(default_str);
-
+#ifdef __cplusplus
+    res = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_INPROC_SERVER,
+                     IID_IFileOpenDialog, (void **)&fileOpen);
+#else
     res = CoCreateInstance(&CLSID_FileOpenDialog, NULL, CLSCTX_INPROC_SERVER,
                      &IID_IFileOpenDialog, (void **)&fileOpen);
-
+#endif
     if (SUCCEEDED(res) && fileOpen && wquestion && wdefault_str) {
+#ifdef __cplusplus
+	ok = SUCCEEDED(fileOpen->GetOptions(&flags));
+	flags |= FOS_PICKFOLDERS | FOS_FILEMUSTEXIST |
+		 FOS_NOCHANGEDIR;
+	flags &= ~FOS_ALLOWMULTISELECT & ~FOS_OVERWRITEPROMPT &
+		 ~FOS_ALLNONSTORAGEITEMS;
+	ok = ok && SUCCEEDED(fileOpen->SetOptions(flags));
+	ok = ok && SUCCEEDED(fileOpen->SetTitle(wquestion));
+	ok = ok && SUCCEEDED(fileOpen->SetFileName(wdefault_str));
+
+	ok = ok && SUCCEEDED(fileOpen->Show(NULL));
+	ok = ok && SUCCEEDED(fileOpen->GetResult(&dirsi));
+	ok = ok && SUCCEEDED(dirsi->GetDisplayName(SIGDN_FILESYSPATH,
+	                                           &wdir));
+#else
 	ok = SUCCEEDED(fileOpen->lpVtbl->GetOptions(fileOpen, &flags));
 	flags |= FOS_PICKFOLDERS | FOS_FILEMUSTEXIST |
 		 FOS_NOCHANGEDIR;
@@ -787,6 +805,7 @@ char *askcdstring(const char *question, const char *default_str)
 	ok = ok && SUCCEEDED(dirsi->lpVtbl->GetDisplayName(dirsi,
 	                                                   SIGDN_FILESYSPATH,
 	                                                   &wdir));
+#endif
 	if (ok && dirsi) {
 	    nb = wcstombs(strbuf, wdir, BUFSIZE);
 	    if (nb == (size_t)-1 || nb >= BUFSIZE) {
@@ -797,10 +816,17 @@ char *askcdstring(const char *question, const char *default_str)
     }
     if (wdir)
 	CoTaskMemFree(wdir);
+#ifdef __cplusplus
+    if (dirsi)
+	dirsi->Release();
+    if (fileOpen)
+	fileOpen->Release();
+#else
     if (dirsi)
 	dirsi->lpVtbl->Release(dirsi);
     if (fileOpen)
 	fileOpen->lpVtbl->Release(fileOpen);
+#endif
     if (wquestion)
 	free(wquestion);
     if (wdefault_str)

@@ -69,7 +69,7 @@ static void key1(control c, int ch)
 }
 
 #ifdef __cplusplus
-extern "C"
+// extern "C"
 #endif
 rect getSysFontSize(void); /* in graphapp/fonts.c */
 RECT *RgetMDIsize(void); /* in rui.c */

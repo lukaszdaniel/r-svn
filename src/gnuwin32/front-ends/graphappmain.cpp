@@ -7,7 +7,7 @@
 */
 // FIXME headers
 #ifdef __cplusplus
-extern "C"
+// extern "C"
 #endif
 void GA_startgraphapp(HINSTANCE Instance, HINSTANCE PrevInstance, int CmdShow);
 

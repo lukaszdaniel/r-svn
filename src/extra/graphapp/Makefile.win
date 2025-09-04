@@ -7,8 +7,8 @@ CPPFLAGS = -I. -I../../gnuwin32 -I../../include
 DEFS = -DGA_DLL_BUILD -DENABLE_NLS=1
 CPPFLAGS += $(DEFS)
 
-SOURCES = $(wildcard *.c)
-OBJECTS = $(SOURCES:.c=.o)
+SOURCES = $(wildcard *.cpp)
+OBJECTS = $(SOURCES:.cpp=.o)
 
 DLL: libR.dll.a Rgraphapp.dll
 	@cp Rgraphapp.dll ../../../$(BINDIR)
@@ -45,7 +45,7 @@ distclean: clean
 
 # Dependencies
 dllversion.o: ../../include/Rversion.h
-DEPS = $(SOURCES:.c=.d)
+DEPS = $(SOURCES:.cpp=.d)
 
 makeMakedeps: $(DEPS)
 	@$(RM) Makedeps
