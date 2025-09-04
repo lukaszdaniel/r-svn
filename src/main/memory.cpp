@@ -2713,7 +2713,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     GCStackRoot<> ans, nms;
-    int tmp;
+    unsigned int tmp;
 
     ans = allocVector(INTSXP, 24);
     nms = allocVector(STRSXP, 24);

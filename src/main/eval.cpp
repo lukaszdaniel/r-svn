@@ -1382,7 +1382,7 @@ static R_exprhash_t hashexpr1(SEXP e, R_exprhash_t h)
 {
 #define SKIP_NONSCALAR 	if (len != 1) break /* non-scalars hashed by address */
     int len = length(e);
-    int type = TYPEOF(e);
+    SEXPTYPE type = TYPEOF(e);
     h = HASH(type, h);
     h = HASH(len, h);
 
@@ -1421,6 +1421,8 @@ static R_exprhash_t hashexpr1(SEXP e, R_exprhash_t h)
 	    h = R::hash((unsigned char *) CHAR(cval), LENGTH(cval), h);
 	}
 	return h;
+    default:
+	break;
     }
 
     return HASH(e, h);
@@ -5912,7 +5914,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 	    break; 							\
 	}								\
 	SEXP value = CAR(cell);						\
-	int type = TYPEOF(value);					\
+	SEXPTYPE type = TYPEOF(value);					\
 	/* extract value of forced promises */				\
 	if (type == PROMSXP) {						\
 	    if (PROMISE_IS_EVALUATED(value)) {				\
@@ -6885,7 +6887,7 @@ static R_INLINE void checkForMissings(SEXP args, SEXP call)
 
 typedef struct {
     R_xlen_t idx, len;
-    int type;
+    unsigned int type;
     /* Include the symbol in the loopinfo structure in case the
        binding cell is R_NilValue, e.g. for an active binding. Even if
        we eventually allow symbols to be garbage collected, the loop
@@ -7722,7 +7724,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
       {
 	Evaluator::enableResultPrinting(true);
 	SEXP value = GETCONST(constants, GETOP());
-	int type = TYPEOF(value);
+	SEXPTYPE type = TYPEOF(value);
 	switch(type) {
 	case REALSXP:
 	    if (IS_SIMPLE_SCALAR(value, REALSXP)) {
@@ -7741,6 +7743,8 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 		BCNPUSH_LOGICAL(LOGICAL0(value)[0]);
 		NEXT();
 	    }
+	    break;
+	default:
 	    break;
 	}
 	if (R_check_constants < 0)

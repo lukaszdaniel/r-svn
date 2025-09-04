@@ -1357,7 +1357,7 @@ static SEXP findrep(SEXP x, SEXP reps)
 static void WriteBCLang(SEXP s, HashTable *ref_table, SEXP reps,
 			R_outpstream_t stream)
 {
-    int type = TYPEOF(s);
+    SEXPTYPE type = TYPEOF(s);
     if (type == LANGSXP || type == LISTSXP) {
 	SEXP r = findrep(s, reps);
 	bool output = true;
@@ -1385,6 +1385,7 @@ static void WriteBCLang(SEXP s, HashTable *ref_table, SEXP reps,
 		switch(type) {
 		case LANGSXP: type = ATTRLANGSXP; break;
 		case LISTSXP: type = ATTRLISTSXP; break;
+		default: break;
 		}
 	    }
 	    OutInteger(stream, type);
@@ -1412,7 +1413,7 @@ static void WriteBC1(SEXP s, HashTable *ref_table, SEXP reps, R_outpstream_t str
     OutInteger(stream, n);
     for (i = 0; i < n; i++) {
 	SEXP c = VECTOR_ELT(consts, i);
-	int type = TYPEOF(c);
+	SEXPTYPE type = TYPEOF(c);
 	switch (type) {
 	case BCODESXP:
 	    OutInteger(stream, type);

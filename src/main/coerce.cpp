@@ -2048,7 +2048,7 @@ attribute_hidden SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 			    TYPEOF(CAR(args)) == NILSXP);/* pairlist() -> NULL */
 	break;
     case EXPRSXP:	/* is.expression */
-	LOGICAL0(ans)[0] = TYPEOF(CAR(args)) == EXPRSXP;
+	LOGICAL0(ans)[0] = (TYPEOF(CAR(args)) == EXPRSXP);
 	break;
     case RAWSXP:	/* is.raw */
 	LOGICAL0(ans)[0] = (TYPEOF(CAR(args)) == RAWSXP);
@@ -2123,7 +2123,7 @@ attribute_hidden SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
 
     case 300:		/* is.call */
-	LOGICAL0(ans)[0] = TYPEOF(CAR(args)) == LANGSXP;
+	LOGICAL0(ans)[0] = (TYPEOF(CAR(args)) == LANGSXP);
 	break;
     case 301:		/* is.language */
 	LOGICAL0(ans)[0] = (TYPEOF(CAR(args)) == SYMSXP ||

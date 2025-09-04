@@ -904,7 +904,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	d->isS4 = true;
 	/* const void *vmax = vmaxget(); */
 	SEXP class_ = getAttrib(s, R_ClassSymbol),
-	    cl_def = TYPEOF(class_) == STRSXP ? STRING_ELT(class_, 0) : R_NilValue;
+	    cl_def = (TYPEOF(class_) == STRSXP) ? STRING_ELT(class_, 0) : R_NilValue;
 	if(TYPEOF(cl_def) == CHARSXP) { // regular S4 objects
 	    print2buff("new(\"", d);
 	    print2buff(translateChar(cl_def), d);

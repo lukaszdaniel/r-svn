@@ -1770,8 +1770,8 @@ SEXP R_do_new_object(SEXP class_def)
     }
     e = R_do_slot(class_def, s_className);
     value = duplicate(R_do_slot(class_def, s_prototype));
-    bool xDataType = TYPEOF(value) == ENVSXP || TYPEOF(value) == SYMSXP ||
-	TYPEOF(value) == EXTPTRSXP;
+    bool xDataType = (TYPEOF(value) == ENVSXP || TYPEOF(value) == SYMSXP ||
+	TYPEOF(value) == EXTPTRSXP);
     if ((TYPEOF(value) == OBJSXP || getAttrib(e, R_PackageSymbol) != R_NilValue) &&
        !xDataType)
     {

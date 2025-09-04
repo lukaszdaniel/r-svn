@@ -460,7 +460,6 @@ static CGContextRef QuartzGetCurrentContext(QuartzDesc *xd)
 
 static void QuartzInitPatterns(QuartzDesc *xd)
 {
-    int i;
     xd->numPatterns = maxPatterns;
     /* Gradients and tiling patterns are different types so need 
      * separate arrays */
@@ -472,7 +471,7 @@ static void QuartzInitPatterns(QuartzDesc *xd)
 	free(xd->gradients);
 	error("%s", _("allocation failure in QuartzInitPatterns"));
     }
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         xd->gradients[i] = NULL;
         xd->patterns[i] = NULL;
     }
@@ -505,8 +504,7 @@ static int QuartzGrowPatterns(QuartzDesc *xd)
 
 static void QuartzCleanPatterns(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         if (xd->gradients[i] != NULL) {
             CGGradientRelease(xd->gradients[i]->gradient);
             free(xd->gradients[i]);
@@ -538,8 +536,7 @@ static void QuartzReleasePattern(int i, QuartzDesc *xd)
 
 static void QuartzDestroyPatterns(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         if (xd->gradients[i] != NULL) {
             CGGradientRelease(xd->gradients[i]->gradient);
             free(xd->gradients[i]);
@@ -557,8 +554,7 @@ static void QuartzDestroyPatterns(QuartzDesc *xd)
 
 static int QuartzNewPatternIndex(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numPatterns; i++) {
+    for (int i = 0; i < xd->numPatterns; i++) {
         if ((xd->gradients[i] == NULL) && (xd->patterns[i] == NULL)) {
             return i;
         } else {
@@ -632,7 +628,6 @@ static void QuartzSetPatternFill(CGContextRef ctx, SEXP pattern,
 
 static QGradientRef QuartzCreateGradient(SEXP gradient, int type, 
                                          QuartzDesc *xd) {
-    int i;
     unsigned int col;
     QGradientRef quartz_gradient = (QGradientRef) malloc(sizeof(QGradient));
     if (!quartz_gradient) error("%s", _("Failed to create gradient"));
@@ -653,7 +648,7 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
         if (!locations) error("%s", _("Failed to create gradient"));
         components = (CGFloat *) malloc(sizeof(CGFloat) * num_locations * 4);
         if (!components) error("%s", _("Failed to create gradient"));
-        for (i = 0; i < num_locations; i++) {
+        for (int i = 0; i < num_locations; i++) {
             locations[i] = R_GE_linearGradientStop(gradient, i);
             col = R_GE_linearGradientColour(gradient, i);
             components[i*4] = R_RED(col)/255.0;
@@ -686,7 +681,7 @@ static QGradientRef QuartzCreateGradient(SEXP gradient, int type,
         if (!locations) error("%s", _("Failed to create gradient"));
         components = (CGFloat *) malloc(sizeof(CGFloat) * num_locations * 4);
         if (!components) error("%s", _("Failed to create gradient"));
-        for (i = 0; i < num_locations; i++) {
+        for (int i = 0; i < num_locations; i++) {
             locations[i] = R_GE_radialGradientStop(gradient, i);
             col = R_GE_radialGradientColour(gradient, i);
             components[i*4] = R_RED(col)/255.0;
@@ -813,20 +808,19 @@ static QPatternRef QuartzCreatePattern(SEXP pattern, CGContextRef ctx,
 
 static void QuartzInitClipPaths(QuartzDesc *xd)
 {
-    int i;
     /* Zero clip paths */
     xd->numClipPaths = maxClipPaths;
     xd->clipPaths = (QPathRef *) malloc(sizeof(QPathRef) * xd->numClipPaths);
     if (!xd->clipPaths)
 	error("%s", _("allocation failure in QuartzInitClipPaths"));
-    for (i = 0; i < xd->numClipPaths; i++) {
+    for (int i = 0; i < xd->numClipPaths; i++) {
         xd->clipPaths[i] = NULL;
     }
 }
 
 static int QuartzGrowClipPaths(QuartzDesc *xd)
 {
-    int i, newMax = 2*xd->numClipPaths;
+    int newMax = 2*xd->numClipPaths;
     void *tmp;
     tmp = realloc(xd->clipPaths, sizeof(QPathRef) * newMax);
     if (!tmp) { 
@@ -834,7 +828,7 @@ static int QuartzGrowClipPaths(QuartzDesc *xd)
         return 0;
     }
     xd->clipPaths = (QPathRef *) tmp;
-    for (i = xd->numClipPaths; i < newMax; i++) {
+    for (int i = xd->numClipPaths; i < newMax; i++) {
         xd->clipPaths[i] = NULL;
     }
     xd->numClipPaths = newMax;
@@ -843,8 +837,7 @@ static int QuartzGrowClipPaths(QuartzDesc *xd)
 
 static void QuartzCleanClipPaths(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numClipPaths; i++) {
+    for (int i = 0; i < xd->numClipPaths; i++) {
         if (xd->clipPaths[i] != NULL) {
             CGPathRelease(xd->clipPaths[i]->path);
             free(xd->clipPaths[i]);
@@ -855,8 +848,7 @@ static void QuartzCleanClipPaths(QuartzDesc *xd)
 
 static void QuartzDestroyClipPaths(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numClipPaths; i++) {
+    for (int i = 0; i < xd->numClipPaths; i++) {
         if (xd->clipPaths[i] != NULL) {
             CGPathRelease(xd->clipPaths[i]->path);
             free(xd->clipPaths[i]);
@@ -868,8 +860,7 @@ static void QuartzDestroyClipPaths(QuartzDesc *xd)
 
 static int QuartzNewClipPathIndex(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numClipPaths; i++) {
+    for (int i = 0; i < xd->numClipPaths; i++) {
         if (xd->clipPaths[i] == NULL) {
             return i;
         } else {
@@ -964,12 +955,11 @@ static void QuartzReuseClipPath(QPathRef quartz_clipPath,
 
 static void QuartzInitMasks(QuartzDesc *xd)
 {
-    int i;
     xd->numMasks = 20;
     xd->masks = (QMaskRef *) malloc(sizeof(QMaskRef) * xd->numMasks);
     if (!xd->masks)
 	error("%s", _("allocation failure in QuartzInitMasks"));
-    for (i = 0; i < xd->numMasks; i++) {
+    for (int i = 0; i < xd->numMasks; i++) {
         xd->masks[i] = NULL;
     }
     xd->appendingMask = -1;
@@ -978,7 +968,7 @@ static void QuartzInitMasks(QuartzDesc *xd)
 
 static int QuartzGrowMasks(QuartzDesc *xd)
 {
-    int i, newMax = 2*xd->numMasks;
+    int newMax = 2*xd->numMasks;
     void *tmp;
     tmp = realloc(xd->masks, sizeof(QMaskRef) * newMax);
     if (!tmp) { 
@@ -986,7 +976,7 @@ static int QuartzGrowMasks(QuartzDesc *xd)
         return 0;
     }
     xd->masks = (QMaskRef *) tmp;
-    for (i = xd->numMasks; i < newMax; i++) {
+    for (int i = xd->numMasks; i < newMax; i++) {
         xd->masks[i] = NULL;
     }
     xd->numMasks = newMax;
@@ -995,8 +985,7 @@ static int QuartzGrowMasks(QuartzDesc *xd)
 
 static void QuartzCleanMasks(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numMasks; i++) {
+    for (int i = 0; i < xd->numMasks; i++) {
         if (xd->masks[i] != NULL) {
             CGContextRelease(xd->masks[i]->context);
             CGImageRelease(xd->masks[i]->mask);
@@ -1009,8 +998,7 @@ static void QuartzCleanMasks(QuartzDesc *xd)
 
 static void QuartzDestroyMasks(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numMasks; i++) {
+    for (int i = 0; i < xd->numMasks; i++) {
         if (xd->masks[i] != NULL) {
             CGContextRelease(xd->masks[i]->context);
             CGImageRelease(xd->masks[i]->mask);
@@ -1022,8 +1010,7 @@ static void QuartzDestroyMasks(QuartzDesc *xd)
 
 static int QuartzNewMaskIndex(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numMasks; i++) {
+    for (int i = 0; i < xd->numMasks; i++) {
         if (xd->masks[i] == NULL) {
             return i;
         } else {
@@ -1134,12 +1121,11 @@ static int QuartzCreateMask(SEXP mask,
 
 static void QuartzInitGroups(QuartzDesc *xd)
 {
-    int i;
     xd->numGroups = maxGroups;
     xd->groups = (CGLayerRef *) malloc(sizeof(CGLayerRef) * xd->numGroups);
     if (!xd->groups)
 	error("%s",_("allocation failure in QuartzInitGroups"));
-    for (i = 0; i < xd->numGroups; i++) {
+    for (int i = 0; i < xd->numGroups; i++) {
         xd->groups[i] = NULL;
     }
     xd->appendingGroup = -1;
@@ -1147,7 +1133,7 @@ static void QuartzInitGroups(QuartzDesc *xd)
 
 static int QuartzGrowGroups(QuartzDesc *xd)
 {
-    int i, newMax = 2*xd->numGroups;
+    int newMax = 2*xd->numGroups;
     void *tmp;
     tmp = realloc(xd->groups, sizeof(CGLayerRef) * newMax);
     if (!tmp) { 
@@ -1155,7 +1141,7 @@ static int QuartzGrowGroups(QuartzDesc *xd)
         return 0;
     }
     xd->groups = (CGLayerRef *) tmp;
-    for (i = xd->numGroups; i < newMax; i++) {
+    for (int i = xd->numGroups; i < newMax; i++) {
         xd->groups[i] = NULL;
     }
     xd->numGroups = newMax;
@@ -1164,8 +1150,7 @@ static int QuartzGrowGroups(QuartzDesc *xd)
 
 static void QuartzCleanGroups(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numGroups; i++) {
+    for (int i = 0; i < xd->numGroups; i++) {
         if (xd->groups[i] != NULL) {
             CGLayerRelease(xd->groups[i]);
             xd->groups[i] = NULL;
@@ -1185,8 +1170,7 @@ static void QuartzReleaseGroups(int i, QuartzDesc *xd)
 
 static void QuartzDestroyGroups(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numGroups; i++) {
+    for (int i = 0; i < xd->numGroups; i++) {
         if (xd->groups[i] != NULL) {
             CGLayerRelease(xd->groups[i]);
         }
@@ -1196,8 +1180,7 @@ static void QuartzDestroyGroups(QuartzDesc *xd)
 
 static int QuartzNewGroupIndex(QuartzDesc *xd)
 {
-    int i;
-    for (i = 0; i < xd->numGroups; i++) {
+    for (int i = 0; i < xd->numGroups; i++) {
         if (xd->groups[i] == NULL) {
             return i;
         } else {
@@ -2481,9 +2464,8 @@ static void RQuartz_Polyline(int n, double *x, double *y, CTXDESC)
 static void QuartzPolygonPath(int n, double *x, double *y,
                               CGContextRef ctx)
 {
-    int i;
     CGContextMoveToPoint(ctx, x[0], y[0]);
-    for(i = 1; i < n; i++)
+    for (int i = 1; i < n; i++)
 	CGContextAddLineToPoint(ctx, x[i], y[i]);
     CGContextClosePath(ctx);
 }
@@ -2655,12 +2637,11 @@ static void RQuartz_MetricInfo(int c, const pGEcontext gc,
         *width = 0.0;
         CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
         {
-	    int i;
             int    advances[8];
             CGRect bboxes[8];
             CGFontGetGlyphAdvances(font, glyphs, len, advances);
             CGFontGetGlyphBBoxes(font, glyphs, len, bboxes);
-            for(i = 0; i < len; i++)
+            for(int i = 0; i < len; i++)
                 *width += advances[i] * aScale;
             *ascent  = aScale * (bboxes[0].size.height + bboxes[0].origin.y);
             *descent = -aScale * bboxes[0].origin.y;
@@ -2769,8 +2750,7 @@ static void RQuartz_releaseClipPath(SEXP ref, pDevDesc dd) {
     if (isNull(ref)) {
         QuartzCleanClipPaths(xd);
     } else {
-        int i;
-        for (i = 0; i < LENGTH(ref); i++) {
+        for (int i = 0; i < LENGTH(ref); i++) {
             if (xd->clipPaths[i]) {
                 CGPathRelease(xd->clipPaths[i]->path);
                 free(xd->clipPaths[i]);
@@ -2820,8 +2800,7 @@ static void RQuartz_releaseMask(SEXP ref, pDevDesc dd)
     if (isNull(ref)) {
         QuartzCleanMasks(xd);
     } else {
-        int i;
-        for (i = 0; i < LENGTH(ref); i++) {
+        for (int i = 0; i < LENGTH(ref); i++) {
             if (xd->masks[i]) {
                 CGContextRelease(xd->masks[i]->context);
                 CGImageRelease(xd->masks[i]->mask);
@@ -3219,8 +3198,7 @@ void RQuartz_glyph(int n, int *glyphs, double *x, double *y,
                                 R_ALPHA(colour)/255.0 };
         CGColorRef fillColorRef = CGColorCreate(cs, fillColor);
         CGContextSetFillColorWithColor(ctx, fillColorRef);
-        int i;
-        for (i=0; i<n; i++) {
+        for (int i = 0; i < n; i++) {
             CGGlyph glyph = (CGGlyph) glyphs[i];
             CGPoint loc = CGPointMake(x[i], y[i]);
             CTFontDrawGlyphs(ctFont, &glyph, &loc, 1, ctx);

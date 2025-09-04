@@ -1975,7 +1975,7 @@ attribute_hidden SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "p");
     bool keepNA = !NaRm;
 
-    int type = TYPEOF(x);
+    SEXPTYPE type = TYPEOF(x);
     switch (type) {
     case LGLSXP:
     case INTSXP:
@@ -2059,6 +2059,8 @@ attribute_hidden SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 		COMPLEX(ans)[j] = csum;
 		continue; /* for(j ...) loop */
 	    }
+	    default:
+	        break; // -Wall
 	    } // switch()
 	    if (OP == 1) sum /= cnt; /* mean() -- gives NaN for cnt = 0 */
 	    REAL(ans)[j] = (double) sum;
@@ -2150,7 +2152,8 @@ attribute_hidden SEXP do_colsum(SEXP call, SEXP op, SEXP args, SEXP rho)
 			}
 		break;
 	    }
-
+	    default:
+	        break; // -Wall
 	    } // switch()
 	} // for(j ...)
 
