@@ -234,6 +234,12 @@ namespace CXXR
         static bool s_gc_inhibit_release;
 #endif
 
+        static void mem_err_heap();
+        static size_t R_GetMaxVSize(void);
+        static bool R_SetMaxVSize(size_t size);
+        static size_t R_GetMaxNSize(void);
+        static bool R_SetMaxNSize(size_t size);
+
         // Callback for CXXR::MemoryBank to cue a garbage collection:
         static size_t cue(size_t bytes_wanted);
 

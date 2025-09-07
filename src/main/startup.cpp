@@ -52,6 +52,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* These are used in ../gnuwin32/system.c, ../unix/sys-std.c */
 SA_TYPE SaveAction = SA_SAVEASK;
@@ -354,7 +355,7 @@ static void SetMaxSize(R_size_t vsize, R_size_t nsize)
 {
     char msg[1024];
 
-    if (!R_SetMaxVSize(vsize)) {
+    if (!GCManager::R_SetMaxVSize(vsize)) {
 	/* vsfac is still 1 */
 	snprintf(msg, 1024,
 		 _("WARNING: too small maximum for v(ector heap)size '%lu' ignored, \
@@ -363,7 +364,7 @@ static void SetMaxSize(R_size_t vsize, R_size_t nsize)
 	R_ShowMessage(msg);
     }
 
-    if (!R_SetMaxNSize(nsize)) {
+    if (!GCManager::R_SetMaxNSize(nsize)) {
 	snprintf(msg, 1024,
 		 _("WARNING: too small maximum for language heap (n)size '%lu' ignored, \
 		 the current usage '%lu' is already larger\n"),

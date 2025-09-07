@@ -1923,10 +1923,10 @@ SEXP R_getExpressionStackOverflowError(void);
 SEXP R_getNodeStackOverflowError(void);
 void R_InitConditions(void);
 
-R_size_t R_GetMaxVSize(void);
-bool R_SetMaxVSize(R_size_t);
-R_size_t R_GetMaxNSize(void);
-bool R_SetMaxNSize(R_size_t);
+// R_size_t R_GetMaxVSize(void);
+// bool R_SetMaxVSize(R_size_t);
+// R_size_t R_GetMaxNSize(void);
+// bool R_SetMaxNSize(R_size_t);
 R_size_t R_Decode2Long(char *p, int *ierr);
 void R_SetPPSize(R_size_t);
 void R_SetNconn(int);

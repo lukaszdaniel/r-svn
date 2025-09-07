@@ -139,6 +139,106 @@ namespace CXXR
             Rf_error("%s", msg);
     }
 
+    void GCManager::mem_err_heap()
+    {
+        if (R_MaxVSize == R_SIZE_T_MAX)
+            errorcall(R_NilValue, "%s", _("vector memory exhausted"));
+        else {
+            double l = R_GetMaxVSize() / Kilo;
+            const char *unit = "Kb";
+
+            if (l > Mega) {
+                l /= Mega;
+                unit = "Gb";
+            }
+            else if (l > Kilo) {
+                l /= Kilo;
+                unit = "Mb";
+            }
+            errorcall(R_NilValue,
+                _("vector memory limit of %0.1f %s reached, see mem.maxVSize()"),
+                l, unit);
+        }
+    }
+
+    size_t GCManager::R_GetMaxVSize(void)
+    {
+        if (R_MaxVSize == R_SIZE_T_MAX) return R_SIZE_T_MAX;
+        return R_MaxVSize * vsfac;
+    }
+
+    bool GCManager::R_SetMaxVSize(size_t size)
+    {
+        if (size == R_SIZE_T_MAX) {
+            R_MaxVSize = R_SIZE_T_MAX;
+            return true;
+        }
+        if (vsfac == 1) {
+            if (size >= R_VSize) {
+                R_MaxVSize = size;
+                return true;
+            }
+        }
+        else
+            if (size / vsfac >= R_VSize) {
+                R_MaxVSize = (size + 1) / vsfac;
+                return true;
+            }
+        return false;
+    }
+
+    size_t GCManager::R_GetMaxNSize(void)
+    {
+        return R_MaxNSize;
+    }
+
+    bool GCManager::R_SetMaxNSize(size_t size)
+    {
+        if (size >= R_NSize) {
+            R_MaxNSize = size;
+            return true;
+        }
+        return false;
+    }
+
+#define VHEAP_FREE() (R_VSize - MemoryBank::doublesAllocated())
+    size_t GCManager::cue(size_t bytes_wanted)
+    {
+        size_t n_doubles = bytes_wanted / sizeof(VECREC);
+        GCManager::gc(n_doubles, false); // gc() counts in doubles, not bytes
+        if (VHEAP_FREE() < n_doubles)
+            mem_err_heap();
+        return R_VSize * sizeof(VECREC);
+    }
+#undef VHEAP_FREE
+    void GCManager::enableGC(size_t initial_threshold, size_t initial_node_threshold)
+    {
+        // Safeguard against cases where R_VSize or R_NSize have already been set up.
+        if (R_VSize != R_VSIZE)
+        {
+            Rf_warning("R_VSize has been changed before GCManager::enableGC(). Ignoring init value.");
+            initial_threshold = R_VSize;
+        }
+        if (R_NSize != R_NSIZE)
+        {
+            Rf_warning("R_NSize has been changed before GCManager::enableGC(). Ignoring init value.");
+            initial_node_threshold = R_NSize;
+        }
+
+        vsfac = sizeof(VECREC);
+        R_VSize = (initial_threshold + 1) / vsfac;
+        orig_R_VSize = R_VSize;
+        if (R_MaxVSize < R_SIZE_T_MAX)
+            R_MaxVSize = (R_MaxVSize + 1) / vsfac;
+
+        R_NSize = initial_node_threshold;
+        orig_R_NSize = initial_node_threshold;
+
+        for (unsigned int i = 0; i <= s_num_old_generations; ++i)
+            s_gen_gc_counts[i] = 0;
+        MemoryBank::setGCCuer(cue, R_VSize * sizeof(VECREC));
+    }
+
     unsigned int GCManager::genRota(unsigned int num_old_gens_to_collect)
     {
         static unsigned int s_collect_counts[s_num_old_generations] = { 0 };

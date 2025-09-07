@@ -352,7 +352,7 @@ static void R_ReportAllocation(R_size_t);
 
 // static void R_gc_no_finalizers(R_size_t size_needed);
 static void R_gc_full(bool full = false);
-static void mem_err_heap();
+// static void mem_err_heap();
 
 #define NODE_IS_MARKED(s) (MARK(s)==1)
 #define MARK_NODE(s) (MARK(s)=1)
@@ -494,45 +494,6 @@ static void init_gc_grow_settings(void)
 // static R_size_t R_MaxNSize = R_SIZE_T_MAX;
 // static unsigned int vsfac = 1; /* current units for vsize: changes at initialization */
 
-attribute_hidden R_size_t R::R_GetMaxVSize(void)
-{
-    if (R_MaxVSize == R_SIZE_T_MAX) return R_SIZE_T_MAX;
-    return R_MaxVSize * vsfac;
-}
-
-attribute_hidden bool R::R_SetMaxVSize(R_size_t size)
-{
-    if (size == R_SIZE_T_MAX) {
-	R_MaxVSize = R_SIZE_T_MAX;
-	return true;
-    }
-    if (vsfac == 1) {
-	if (size >= R_VSize) {
-	    R_MaxVSize = size;
-	    return true;
-	}
-    } else 
-	if (size / vsfac >= R_VSize) {
-	    R_MaxVSize = (size + 1) / vsfac;
-	    return true;
-	}
-    return false;
-}
-
-attribute_hidden R_size_t R::R_GetMaxNSize(void)
-{
-    return R_MaxNSize;
-}
-
-attribute_hidden bool R::R_SetMaxNSize(R_size_t size)
-{
-    if (size >= R_NSize) {
-	R_MaxNSize = size;
-	return true;
-    }
-    return false;
-}
-
 attribute_hidden void R::R_SetPPSize(R_size_t size)
 {
     R_PPStackSize = size;
@@ -549,7 +510,7 @@ attribute_hidden SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    double newbytes = newval * Mega;
 	    if (newbytes >= (double) R_SIZE_T_MAX)
 		R_MaxVSize = R_SIZE_T_MAX;
-	    else if (!R_SetMaxVSize((R_size_t) newbytes))
+	    else if (!GCManager::R_SetMaxVSize((R_size_t) newbytes))
 		warning("%s", _("a limit lower than current usage, so ignored"));
 	}
     }
@@ -557,7 +518,7 @@ attribute_hidden SEXP do_maxVSize(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (R_MaxVSize == R_SIZE_T_MAX)
 	return ScalarReal(R_PosInf);
     else
-	return ScalarReal(R_GetMaxVSize() / Mega);
+	return ScalarReal(GCManager::R_GetMaxVSize() / Mega);
 }
 
 attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -570,7 +531,7 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else {
 	    if (newval >= (double) R_SIZE_T_MAX) 
 		R_MaxNSize = R_SIZE_T_MAX;
-	    else if (!R_SetMaxNSize((R_size_t) newval))
+	    else if (!GCManager::R_SetMaxNSize((R_size_t) newval))
 		warning("%s", _("a limit lower than current usage, so ignored"));
 	}
     }
@@ -578,7 +539,7 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (R_MaxNSize == R_SIZE_T_MAX)
 	return ScalarReal(R_PosInf);
     else
-	return ScalarReal(R_GetMaxNSize());
+	return ScalarReal(GCManager::R_GetMaxNSize());
 }
 
 
@@ -641,27 +602,6 @@ static R_size_t R_V_maxused=0;
 } while (0);
 
 /* Node Allocation. */
-
-NORET static void mem_err_heap()
-{
-    if (R_MaxVSize == R_SIZE_T_MAX)
-	errorcall(R_NilValue, "%s", _("vector memory exhausted"));
-    else {
-	double l = R_GetMaxVSize() / Kilo;
-	const char *unit = "Kb";
-
-	if (l > Mega) {
-	    l /= Mega;
-	    unit = "Gb";
-	} else if (l > Kilo) {
-	    l /= Kilo;
-	    unit = "Mb";
-	}
-	errorcall(R_NilValue,
-	          _("vector memory limit of %0.1f %s reached, see mem.maxVSize()"),
-	          l, unit);
-    }
-}
 
 /* Debugging Routines. */
 
@@ -1960,46 +1900,6 @@ static void gc_end_timing(void)
 
 /* InitMemory : Initialise the memory to be used in R. */
 /* This includes: stack space, node space and vector space */
-
-namespace CXXR
-{
-    size_t GCManager::cue(size_t bytes_wanted)
-    {
-        size_t n_doubles = bytes_wanted / sizeof(VECREC);
-        GCManager::gc(n_doubles, false); // gc() counts in doubles, not bytes
-        if (VHEAP_FREE() < n_doubles)
-            mem_err_heap();
-        return R_VSize * sizeof(VECREC);
-    }
-
-    void GCManager::enableGC(size_t initial_threshold, size_t initial_node_threshold)
-    {
-        // Safeguard against cases where R_VSize or R_NSize have already been set up.
-        if (R_VSize != R_VSIZE)
-        {
-            Rf_warning("R_VSize has been changed before GCManager::enableGC(). Ignoring init value.");
-            initial_threshold = R_VSize;
-        }
-        if (R_NSize != R_NSIZE)
-        {
-            Rf_warning("R_NSize has been changed before GCManager::enableGC(). Ignoring init value.");
-            initial_node_threshold = R_NSize;
-        }
-
-        vsfac = sizeof(VECREC);
-        R_VSize = (initial_threshold + 1) / vsfac;
-        orig_R_VSize = R_VSize;
-        if (R_MaxVSize < R_SIZE_T_MAX)
-            R_MaxVSize = (R_MaxVSize + 1) / vsfac;
-
-        R_NSize = initial_node_threshold;
-        orig_R_NSize = initial_node_threshold;
-
-        for (unsigned int i = 0; i <= s_num_old_generations; ++i)
-            s_gen_gc_counts[i] = 0;
-        MemoryBank::setGCCuer(cue, R_VSize * sizeof(VECREC));
-    }
-} // namespace CXXR
 
 attribute_hidden void R::InitMemory(void)
 {
