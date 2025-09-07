@@ -106,6 +106,25 @@ namespace CXXR
          */
         static void gc(R_size_t size_needed, bool force_full_collection = false);
 
+        /** @brief Enable mark-sweep garbage collection.
+         *
+         * No automatic mark-sweep garbage collection of GCNode
+         * objects will take place until this method has been called.
+         *
+         * @param initial_threshold  Initial value for the collection
+         *          threshold.  The threshold will never be made less
+         *          than this value during the run (or until the
+         *          threshold is changed by a subsequent call to
+         *          enableGC() ).
+         *
+         * @param initial_node_threshold  Initial node value for the collection
+         *          threshold.  The threshold will never be made less
+         *          than this value during the run (or until the
+         *          threshold is changed by a subsequent call to
+         *          enableGC() ).
+         */
+        static void enableGC(size_t initial_threshold, size_t initial_node_threshold);
+
         static bool gcIsRunning()
         {
             return s_gc_is_running;
@@ -149,6 +168,17 @@ namespace CXXR
          */
         static std::ostream *setReporting(std::ostream *os = nullptr);
 
+        /** @brief Current threshold level for mark-sweep garbage
+         * collection.
+         *
+         * @return The current threshold level.  When GCNode::operator
+         * new is on the point of requesting memory from MemoryBank,
+         * if it finds that the number of bytes already allocated via
+         * MemoryBank is at least as great as this threshold level, it
+         * may initiate a mark-sweep garbage collection.
+         */
+        static size_t memoryThreshold() { return s_threshold; }
+
         static bool gc_pending() { return s_gc_pending; }
 
         static bool gc_fail_on_error() { return s_gc_fail_on_error; }
@@ -172,10 +202,25 @@ namespace CXXR
         static int gc_force_wait();
         static int gc_force_gap();
 
-    private:
+    public: // private:
         static constexpr unsigned int s_num_old_generations = 2;
         static const unsigned int s_collect_counts_max[s_num_old_generations];
         static unsigned int s_gen_gc_counts[s_num_old_generations + 1];
+        static size_t s_threshold;
+        static size_t s_min_threshold;
+        static size_t s_max_threshold;
+        static size_t s_node_threshold;
+        static size_t s_min_node_threshold;
+        static size_t s_max_node_threshold;
+#define R_VSize CXXR::GCManager::s_threshold
+#define orig_R_VSize CXXR::GCManager::s_min_threshold
+#define R_MaxVSize CXXR::GCManager::s_max_threshold
+#define R_NSize CXXR::GCManager::s_node_threshold
+#define orig_R_NSize CXXR::GCManager::s_min_node_threshold
+#define R_MaxNSize CXXR::GCManager::s_max_node_threshold
+        /* current units for VSize: changes at initialization */
+        static unsigned int s_vsfac;
+#define vsfac CXXR::GCManager::s_vsfac
         static bool s_gc_fail_on_error;
         static bool s_gc_is_running; // R_in_gc
         static bool s_gc_pending;
@@ -188,6 +233,9 @@ namespace CXXR
         static int s_gc_force_gap;
         static bool s_gc_inhibit_release;
 #endif
+
+        // Callback for CXXR::MemoryBank to cue a garbage collection:
+        static size_t cue(size_t bytes_wanted);
 
         // Detailed control of the garbage collection, in particular
         // choosing how many generations to collect, is carried out

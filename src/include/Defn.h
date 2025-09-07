@@ -1187,8 +1187,8 @@ LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 // LibExtern char *R_Home;		    /* Root of the R tree */ // declared in Rinterface.h
 
 /* Memory Management */
-extern0 R_size_t R_NSize  INI_as(R_NSIZE);/* Size of cons cell heap */
-extern0 R_size_t R_VSize  INI_as(R_VSIZE);/* Size of the vector heap */
+// extern0 R_size_t R_NSize  INI_as(R_NSIZE);/* Size of cons cell heap */
+// extern0 R_size_t R_VSize  INI_as(R_VSIZE);/* Size of the vector heap */
 // extern0 bool	R_GCEnabled INI_as(1);
 // extern0 int	R_in_gc INI_as(0);
 // extern0 bool	R_BCIntActive INI_as(0); /* bcEval called more recently than eval */

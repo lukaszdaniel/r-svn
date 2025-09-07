@@ -30,10 +30,12 @@
  */
 
 #include <algorithm> // for std::fill
+#include <CXXR/MemoryBank.hpp>
 #include <CXXR/GCManager.hpp>
 #include <Rinterface.h> // for R_Suicide()
 #include <R_ext/Error.h> // for Rf_error
 #include <R_ext/Print.h> // for REprintf
+#include <Defn.h> // for R_VSIZE, R_NSIZE
 
 namespace CXXR
 {
@@ -62,6 +64,13 @@ namespace CXXR
     int GCManager::s_gc_force_gap = 0;
     bool GCManager::s_gc_inhibit_release = false;
 #endif
+    size_t GCManager::s_threshold = R_VSIZE;
+    size_t GCManager::s_min_threshold = 0;
+    size_t GCManager::s_max_threshold = R_SIZE_T_MAX;
+    size_t GCManager::s_node_threshold = R_NSIZE;
+    size_t GCManager::s_min_node_threshold = 0;
+    size_t GCManager::s_max_node_threshold = R_SIZE_T_MAX;
+    unsigned int GCManager::s_vsfac = 1;
     std::ostream *GCManager::s_os = nullptr;
 
     void (*GCManager::s_pre_gc)() = nullptr;

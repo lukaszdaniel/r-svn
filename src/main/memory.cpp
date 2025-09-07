@@ -490,9 +490,9 @@ static void init_gc_grow_settings(void)
    Access to these values is provided with reader and writer
    functions; the writer function insures that the maximal values are
    never set below the current ones. */
-static R_size_t R_MaxVSize = R_SIZE_T_MAX;
-static R_size_t R_MaxNSize = R_SIZE_T_MAX;
-static unsigned int vsfac = 1; /* current units for vsize: changes at initialization */
+// static R_size_t R_MaxVSize = R_SIZE_T_MAX;
+// static R_size_t R_MaxNSize = R_SIZE_T_MAX;
+// static unsigned int vsfac = 1; /* current units for vsize: changes at initialization */
 
 attribute_hidden R_size_t R::R_GetMaxVSize(void)
 {
@@ -585,8 +585,8 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Miscellaneous Globals. */
 
 // static SEXP R_VStack = NULL;		/* R_alloc stack pointer */
-static R_size_t orig_R_NSize;
-static R_size_t orig_R_VSize;
+// static R_size_t orig_R_NSize;
+// static R_size_t orig_R_VSize;
 
 static R_size_t R_N_maxused=0;
 static R_size_t R_V_maxused=0;
@@ -1886,7 +1886,7 @@ Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
     REAL(value)[0] = GCNode::numNodes();
     REAL(value)[1] = MemoryBank::doublesAllocated();
     REAL(value)[4] = R_NSize;
-    REAL(value)[5] = R_VSize;
+    REAL(value)[5] = GCManager::memoryThreshold(); // R_VSize
     /* next four are in 0.1Mb, rounded up */
     REAL(value)[2] = 0.1*ceil(10. * (GCNode::numNodes())/Mega * sizeof(RObject));
     REAL(value)[3] = 0.1*ceil(10. * (MemoryBank::doublesAllocated())/Mega * vsfac);
@@ -1963,13 +1963,41 @@ static void gc_end_timing(void)
 
 namespace CXXR
 {
-    size_t cue(size_t bytes_wanted)
+    size_t GCManager::cue(size_t bytes_wanted)
     {
         size_t n_doubles = bytes_wanted / sizeof(VECREC);
         GCManager::gc(n_doubles, false); // gc() counts in doubles, not bytes
         if (VHEAP_FREE() < n_doubles)
             mem_err_heap();
         return R_VSize * sizeof(VECREC);
+    }
+
+    void GCManager::enableGC(size_t initial_threshold, size_t initial_node_threshold)
+    {
+        // Safeguard against cases where R_VSize or R_NSize have already been set up.
+        if (R_VSize != R_VSIZE)
+        {
+            Rf_warning("R_VSize has been changed before GCManager::enableGC(). Ignoring init value.");
+            initial_threshold = R_VSize;
+        }
+        if (R_NSize != R_NSIZE)
+        {
+            Rf_warning("R_NSize has been changed before GCManager::enableGC(). Ignoring init value.");
+            initial_node_threshold = R_NSize;
+        }
+
+        vsfac = sizeof(VECREC);
+        R_VSize = (initial_threshold + 1) / vsfac;
+        orig_R_VSize = R_VSize;
+        if (R_MaxVSize < R_SIZE_T_MAX)
+            R_MaxVSize = (R_MaxVSize + 1) / vsfac;
+
+        R_NSize = initial_node_threshold;
+        orig_R_NSize = initial_node_threshold;
+
+        for (unsigned int i = 0; i <= s_num_old_generations; ++i)
+            s_gen_gc_counts[i] = 0;
+        MemoryBank::setGCCuer(cue, R_VSize * sizeof(VECREC));
     }
 } // namespace CXXR
 
@@ -1986,16 +2014,9 @@ attribute_hidden void R::InitMemory(void)
         GCManager::set_gc_fail_on_error(false);
 
     GCManager::setReporting(R_Verbose ? &std::cerr : nullptr);
+    GCManager::enableGC(R_VSIZE, R_NSIZE);
     CXXR::initializeMemorySubsystem();
     // ProtectStack::initialize(R_PPStackSize);
-
-    vsfac = sizeof(VECREC);
-    R_VSize = (R_VSize + 1)/vsfac;
-    if (R_MaxVSize < R_SIZE_T_MAX) R_MaxVSize = (R_MaxVSize + 1)/vsfac;
-
-    orig_R_NSize = R_NSize;
-    orig_R_VSize = R_VSize;
-    MemoryBank::setGCCuer(cue, R_VSize * sizeof(VECREC));
 
     /* R_NilValue */
     /* THIS MUST BE THE FIRST CONS CELL ALLOCATED */
