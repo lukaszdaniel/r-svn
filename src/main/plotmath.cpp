@@ -81,7 +81,7 @@ typedef struct {
     STYLE CurrentStyle;
 } mathContext;
 
-static GEUnit MetricUnit = GE_INCHES;
+constexpr GEUnit MetricUnit = GE_INCHES;
 
 /* Font Definitions */
 
@@ -102,7 +102,7 @@ typedef enum {
  *
  */
 
-static double ItalicFactor = 0.15;
+constexpr double ItalicFactor = 0.15;
 
 /* Drawing basics */
 
@@ -197,7 +197,7 @@ constexpr double RuleThickness(void)
 static double ThinSpace(pGEcontext gc, pGEDevDesc dd)
 {
     double height, depth, width;
-    static double OneSixth = 0.16666666666666666666;
+    constexpr double OneSixth = 0.16666666666666666666;
     GEMetricInfo('M', gc, &height, &depth, &width, dd);
     return fromDeviceHeight(OneSixth * width, MetricUnit, dd);
 }
@@ -205,7 +205,7 @@ static double ThinSpace(pGEcontext gc, pGEDevDesc dd)
 static double MediumSpace(pGEcontext gc, pGEDevDesc dd)
 {
     double height, depth, width;
-    static double TwoNinths = 0.22222222222222222222;
+    constexpr double TwoNinths = 0.22222222222222222222;
     GEMetricInfo('M', gc, &height, &depth, &width, dd);
     return fromDeviceHeight(TwoNinths * width, MetricUnit, dd);
 }
@@ -213,7 +213,7 @@ static double MediumSpace(pGEcontext gc, pGEDevDesc dd)
 static double ThickSpace(pGEcontext gc, pGEDevDesc dd)
 {
     double height, depth, width;
-    static double FiveEighteenths = 0.27777777777777777777;
+    constexpr double FiveEighteenths = 0.27777777777777777777;
     GEMetricInfo('M', gc, &height, &depth, &width, dd);
     return fromDeviceHeight(FiveEighteenths * width, MetricUnit, dd);
 }
@@ -221,7 +221,7 @@ static double ThickSpace(pGEcontext gc, pGEDevDesc dd)
 static double MuSpace(pGEcontext gc, pGEDevDesc dd)
 {
     double height, depth, width;
-    static double OneEighteenth = 0.05555555555555555555;
+    constexpr double OneEighteenth = 0.05555555555555555555;
     GEMetricInfo('M', gc, &height, &depth, &width, dd);
     return fromDeviceHeight(OneEighteenth * width, MetricUnit, dd);
 }
