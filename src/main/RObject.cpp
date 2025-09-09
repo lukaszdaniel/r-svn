@@ -82,6 +82,9 @@ namespace CXXR
 
     void RObject::setS4Object(bool on)
     {
+#ifndef S4_OBJECT_MASK
+#define S4_OBJECT_MASK ((unsigned short)(1<<4))
+#endif
         if (on)
         {
             sxpinfo.gp |= S4_OBJECT_MASK;
@@ -90,6 +93,7 @@ namespace CXXR
         {
             sxpinfo.gp &= ~S4_OBJECT_MASK;
         }
+#undef S4_OBJECT_MASK
     }
 
     bool RObject::hasAttributes() const

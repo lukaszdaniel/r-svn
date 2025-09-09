@@ -144,8 +144,11 @@ static R_INLINE SEXP BINDING_VALUE(SEXP b)
     if (IS_ACTIVE_BINDING(b)) return getActiveValue(CAR(b));
     else return CAR(b);
 }
-
+#ifdef TESTING_WRITE_BARRIER
+#define SYMBOL_BINDING_VALUE(s) ((IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s)))
+#else
 #define SYMBOL_BINDING_VALUE(s) ((IS_ACTIVE_BINDING(s) ? getActiveValue(SYMVALUE(s)) : SYMVALUE(s).get()))
+#endif
 #define SYMBOL_HAS_BINDING(s) (IS_ACTIVE_BINDING(s) || (SYMVALUE(s) != R_UnboundValue))
 
 #define SET_BINDING_VALUE(b,val) do { \

@@ -33,12 +33,9 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/BadObject.hpp>
 #include <Localization.h>
 #include <Defn.h> // for ForceNonInline
-
-#ifdef TESTING_WRITE_BARRIER
-# define PROTECTCHECK
-#endif
 
 using namespace R;
 
@@ -99,6 +96,7 @@ namespace CXXR
                 size = n_elem * sizeof(SEXP);
                 break;
             default:
+                BadObject::register_bad_object(s, __FILE__, __LINE__);
                 size = 0;
             }
             return size;

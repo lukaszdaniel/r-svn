@@ -80,6 +80,7 @@
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/BadObject.hpp>
 
 #include <R_ext/RS.h> /* for S4 allocation */
 #include <R_ext/Print.h>
@@ -148,10 +149,6 @@ using namespace CXXR;
 attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
 
 #ifdef TESTING_WRITE_BARRIER
-# define PROTECTCHECK
-#endif
-
-#ifdef TESTING_WRITE_BARRIER
 #define CR_ASSERT(x) (assert(((x) != R_NilValue) && ((x) != NULL)))
 #else
 #define CR_ASSERT(x)
@@ -206,96 +203,6 @@ static R_INLINE SEXP CHK(SEXP x)
 #define CHK(x) x
 #define VOID_CHK(x)
 #endif
-
-/* The following class is used to record the
-   address and type of the first bad type seen during a collection,
-   and for FREESXP nodes they record the old type as well. */
-class BadObject
-{
-public:
-    BadObject() : m_bad_sexp_type_seen(NILSXP),
-                  m_bad_sexp_type_sexp(nullptr),
-#ifdef PROTECTCHECK
-                  m_bad_sexp_type_old_type(NILSXP),
-#endif
-                  m_bad_sexp_type_line(0)
-    {
-    }
-
-    bool isEmpty() const { return m_bad_sexp_type_seen == NILSXP; }
-    void clear() { m_bad_sexp_type_seen = NILSXP; }
-
-    static void register_bad_object(const GCNode *s, int line);
-    void printSummary();
-
-    BadObject &operator=(const BadObject &other)
-    {
-    m_bad_sexp_type_seen = other.m_bad_sexp_type_seen;
-    m_bad_sexp_type_sexp = other.m_bad_sexp_type_sexp;
-#ifdef PROTECTCHECK
-    m_bad_sexp_type_old_type = other.m_bad_sexp_type_old_type;
-#endif
-    m_bad_sexp_type_line = other.m_bad_sexp_type_line;
-    return *this;
-    }
-
-    static BadObject s_firstBadObject;
-
-private:
-    SEXPTYPE m_bad_sexp_type_seen;
-    const GCNode *m_bad_sexp_type_sexp;
-#ifdef PROTECTCHECK
-    SEXPTYPE m_bad_sexp_type_old_type;
-#endif
-    unsigned int m_bad_sexp_type_line;
-};
-
-BadObject BadObject::s_firstBadObject;
-
-inline void BadObject::printSummary()
-{
-    if (m_bad_sexp_type_seen != NILSXP)
-    {
-    char msg[256];
-#ifdef PROTECTCHECK
-    if (m_bad_sexp_type_seen == FREESXP)
-        snprintf(msg, 256,
-                 "GC encountered a node (%p) with type FREESXP (was %s)"
-                 " at memory.c:%d",
-                 (void *)m_bad_sexp_type_sexp,
-                 sexptype2char(m_bad_sexp_type_old_type),
-                 m_bad_sexp_type_line);
-    else
-        snprintf(msg, 256,
-                 "GC encountered a node (%p) with an unknown SEXP type: %d"
-                 " at memory.c:%d",
-                 (void *)m_bad_sexp_type_sexp,
-                 m_bad_sexp_type_seen,
-                 m_bad_sexp_type_line);
-#else
-    snprintf(msg, 256,
-             "GC encountered a node (%p) with an unknown SEXP type: %d"
-             " at memory.c:%d",
-             (void *)m_bad_sexp_type_sexp,
-             m_bad_sexp_type_seen,
-             m_bad_sexp_type_line);
-    GCManager::gc_error(msg);
-#endif
-    }
-}
-
-inline void BadObject::register_bad_object(const GCNode *s, int line) 
-{
-    if (s_firstBadObject.isEmpty()) {
-	s_firstBadObject.m_bad_sexp_type_seen = TYPEOF(s);
-	s_firstBadObject.m_bad_sexp_type_sexp = s;
-	s_firstBadObject.m_bad_sexp_type_line = line;
-#ifdef PROTECTCHECK
-	if (TYPEOF(s) == FREESXP)
-	    s_firstBadObject.m_bad_sexp_type_old_type = OLDTYPE(s);
-#endif
-    }
-}
 
 /** @brief Translate SEXPTYPE enum to a character string
  * 
@@ -1103,6 +1010,11 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
+#ifdef PROTECTCHECK
+#define FREE_FORWARD_CASE case FREESXP: if (GCManager::gc_inhibit_release()) break;
+#else
+#define FREE_FORWARD_CASE
+#endif
 
 /* The Generational Collector. */
 namespace CXXR
@@ -1308,8 +1220,10 @@ namespace CXXR
                     (*v)(extptr_tag);
             }
             break;
+            FREE_FORWARD_CASE
             default:
-                Rf_error(_("unexpected type %d in %s"), this->sexptype(), __func__);
+                // Rf_error(_("unexpected type %d in %s"), this->sexptype(), __func__);
+                BadObject::register_bad_object(this, __FILE__, __LINE__);
             }
     }
 } // namespace CXXR
@@ -1416,8 +1330,10 @@ namespace
                 EXTPTR_PROT(node).detach();
                 EXTPTR_TAG(node).detach();
                 break;
+            FREE_FORWARD_CASE
             default:
-                Rf_error(_("unexpected type %d in %s"), TYPEOF(node), __func__);
+                // Rf_error(_("unexpected type %d in %s"), TYPEOF(node), __func__);
+                BadObject::register_bad_object(node, __FILE__, __LINE__);
             }
     }
 } // anonymous namespace
@@ -1590,7 +1506,7 @@ void GCNode::mark(unsigned int max_generation)
                     case VECSXP:
                         break;
                     default:
-                        BadObject::register_bad_object(s, __LINE__);
+                        BadObject::register_bad_object(s, __FILE__, __LINE__);
                     }
                 }
                 SETOLDTYPE(s, TYPEOF(s));

@@ -61,19 +61,6 @@
 #include <cstdlib>
 #include <cstring>
 
-/* To test the write barrier used by the generational collector,
-   define TESTING_WRITE_BARRIER.  This makes the internal structure of
-   SEXPRECs visible only inside of files that explicitly define
-   USE_RINTERNALS, and all uses of RObject fields that do not go
-   through the appropriate functions or macros will become compilation
-   errors.  Since this does impose a small but noticable performance
-   penalty, code that includes Defn.h (or code that explicitly defines
-   USE_RINTERNALS) can access a RObject's fields directly. */
-
-#ifndef TESTING_WRITE_BARRIER
-# define USE_RINTERNALS
-#endif
-
 #include <R_ext/Visibility.h>
 #include <R_ext/Complex.h>
 #include <R_ext/Print.h>
@@ -989,6 +976,12 @@ enum EvaluationStatus
     INTERRUPTED       /**< Evaluation of this Promise has been interrupted by a jump */
 };
 
+/* Vector Heap Structure */
+#if !(SIZEOF_DOUBLE == 8)
+# error SIZEOF_DOUBLE has to be equal to 8
+#endif
+#define VECREC double
+
 #ifdef USE_RINTERNALS
 /* There is much more in Rinternals.h, including function versions
  * of the Promise and Hashing groups.
@@ -1029,12 +1022,6 @@ enum EvaluationStatus
 #define SET_HASHASH(x,v) ((v) ? (((x)->sxpinfo.gp) |= HASHASH_MASK) : \
 			  (((x)->sxpinfo.gp) &= (~HASHASH_MASK)))
 #define SET_HASHVALUE(x,v) SET_TRUELENGTH(x, ((int) (v)))
-
-/* Vector Heap Structure */
-#if !(SIZEOF_DOUBLE == 8)
-# error SIZEOF_DOUBLE has to be equal to 8
-#endif
-#define VECREC double
 
 /* Vector Heap Macros */
 template <typename T>

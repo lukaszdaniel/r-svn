@@ -31,6 +31,7 @@
 #ifndef VECTORBASE_HPP
 #define VECTORBASE_HPP
 
+#include <CXXR/config.hpp>
 #include <CXXR/Complex.hpp>
 #include <CXXR/RObject.hpp>
 #include <R_ext/Rallocators.h>

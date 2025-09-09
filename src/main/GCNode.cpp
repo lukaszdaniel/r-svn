@@ -36,6 +36,9 @@
 #include <CXXR/ProtectStack.hpp>
 // #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
+#ifdef PROTECTCHECK
+#include <CXXR/BadObject.hpp>
+#endif
 
 namespace CXXR
 {
@@ -99,6 +102,17 @@ namespace CXXR
         ++m_marks_applied;
     }
 
+/* This macro should help localize where a FREESXP node is encountered
+   in the GC */
+#ifdef PROTECTCHECK
+#define CHECK_FOR_FREE_NODE(s) { \
+    if (s->sxpinfo.type == FREESXP && !GCManager::gc_inhibit_release()) \
+	BadObject::register_bad_object(s, __FILE__, __LINE__); \
+}
+#else
+#define CHECK_FOR_FREE_NODE(s)
+#endif
+
     void GCNode::Marker::operator()(const GCNode *node)
     {
         if (node->isMarked())
@@ -106,6 +120,7 @@ namespace CXXR
             return;
         }
 
+        CHECK_FOR_FREE_NODE(node);
         if (node->generation() < m_maxgen) // node is below the number of generations to be collected
         {
             node->sxpinfo.m_mark = true;
