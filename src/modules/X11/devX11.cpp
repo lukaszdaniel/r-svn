@@ -1327,7 +1327,7 @@ bool X11_Open(pDevDesc dd, pX11Desc xd, const char *dsp,
 	 int maxcube, int bgcolor, int canvascolor, int res,
 	 int xpos, int ypos)
 {
-    /* if we have to bail out with "error", then must free(dd) and free(xd) */
+    /* if we have to bail out with "error", then must GEfreeDD(dd) and free(xd) */
     /* That means the *caller*: the X11DeviceDriver code frees xd, for example */
 
     XEvent event;
@@ -1805,8 +1805,14 @@ static char* translateFontFamily(char* family, pX11Desc xd)
 
     graphicsNS = R_FindNamespace(ScalarString(mkChar("grDevices")));
     x11env = findVar(install(".X11env"), graphicsNS);
-    if (TYPEOF(x11env) == PROMSXP)
-	x11env = eval(x11env, graphicsNS);
+    if (TYPEOF(x11env) == PROMSXP) {
+        if (NoDevices()) {
+            x11env = eval(x11env, graphicsNS);
+        } else {
+            x11env = Rf_eval_with_gd(x11env, graphicsNS, 
+                                               GEcurrentDevice());
+        }
+    }
     fontdb = findVar(install(".X11.Fonts"), x11env);
     fontnames = getAttrib(fontdb, R_NamesSymbol);
     nfonts = LENGTH(fontdb);
@@ -3189,13 +3195,13 @@ static void Rf_addX11Device(const char *display, double width, double height, do
     R_CheckDeviceAvailable();
     BEGIN_SUSPEND_INTERRUPTS {
 	/* Allocate and initialize the device driver data */
-	if (!(dev = (pDevDesc) calloc(1, sizeof(DevDesc)))) return;
+	if (!(dev = GEcreateDD())) return;
 	if (!X11DeviceDriver(dev, display, width, height,
 			     ps, gamma, (X_COLORTYPE) colormodel, maxcubesize,
 			     bgcolor, canvascolor, sfonts, res,
 			     xpos, ypos, title, useCairo, antialias, family,
                              symbolfamily, usePUA)) {
-	    free(dev);
+	    GEfreeDD(dev);
 	    errorcall(call, _("unable to start device %s"), devname);
 	}
 	dd = GEcreateDevDesc(dev);

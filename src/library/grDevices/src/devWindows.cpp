@@ -374,7 +374,11 @@ static void init_PS_PDF(void)
     if(initS == R_UnboundValue)
 	error("%s", _("missing initPSandPDFfonts() in grDevices namespace: this should not happen"));
     PROTECT(call = lang1(initS));
-    eval(call, R_GlobalEnv);
+    if (NoDevices()) {
+        eval(call, R_GlobalEnv);
+    } else {
+        Rf_eval_with_gd(call, R_GlobalEnv, NULL);
+    }
     UNPROTECT(1);
 }
 
@@ -632,7 +636,12 @@ static char* translateFontFamily(const char* family) {
     windowsenv = findVar(install(".WindowsEnv"),
 					    graphicsNS);
     if(TYPEOF(windowsenv) == PROMSXP)
-	windowsenv = eval(windowsenv, graphicsNS);
+        if (NoDevices()) {
+            windowsenv = eval(windowsenv, graphicsNS);
+        } else {
+            windowsenv = Rf_eval_with_gd(windowsenv, graphicsNS,
+                                                   NULL);
+        }
     PROTECT(fontdb = findVar(install(".Windows.Fonts"), windowsenv));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);

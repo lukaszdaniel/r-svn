@@ -45,7 +45,6 @@ using namespace CXXR;
 attribute_hidden SEXP do_split(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     GCStackRoot<> counts, vec;
-    SEXP nmj;
 
     checkArity(op, args);
 

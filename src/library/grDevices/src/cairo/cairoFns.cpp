@@ -288,7 +288,7 @@ static cairo_pattern_t *CairoTilingPattern(SEXP pattern, pX11Desc xd)
     cairo_set_matrix(cc, &tm);
     /* Play the pattern function to build the pattern */
     R_fcall = PROTECT(lang1(R_GE_tilingPatternFunction(pattern)));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, GEcurrentDevice());
     UNPROTECT(1);
     /* Close group and return resulting pattern */
     cairo_tiling = cairo_pop_group(cc);
@@ -448,7 +448,7 @@ static cairo_path_t* CairoCreateClipPath(SEXP clipPath, int index, pX11Desc xd)
     cairo_new_path(cc);
     /* Play the clipPath function to build the clipping path */
     R_fcall = PROTECT(lang1(clipPath));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, GEcurrentDevice());
     UNPROTECT(1);
     /* Apply path fill rule */
     switch (R_GE_clipPathFillRule(clipPath)) {
@@ -621,7 +621,7 @@ static cairo_pattern_t *CairoCreateMask(SEXP mask, pX11Desc xd)
     cairo_set_operator(cc, CAIRO_OPERATOR_OVER);
     /* Play the mask function to build the mask */
     R_fcall = PROTECT(lang1(mask));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, GEcurrentDevice());
     UNPROTECT(1);
     /* Close group and return resulting mask */
     return cairo_pop_group(cc);
@@ -810,14 +810,14 @@ static cairo_pattern_t *CairoCreateGroup(SEXP src, int op, SEXP dst,
     if (dst != R_NilValue) {
         /* Play the destination function to draw the destination */
         R_fcall = PROTECT(lang1(dst));
-        eval(R_fcall, R_GlobalEnv);
+        Rf_eval_with_gd(R_fcall, R_GlobalEnv, GEcurrentDevice());
         UNPROTECT(1);
     }
     /* Set the group operator */
     cairo_set_operator(cc, CairoOperator(op));
     /* Play the source function to draw the source */
     R_fcall = PROTECT(lang1(src));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, GEcurrentDevice());
     UNPROTECT(1);
 
     /* Close group and return the resulting pattern */
@@ -2120,7 +2120,7 @@ static void CairoStrokePath(SEXP path,
     cairo_new_path(cc);
     /* Play the path function to build the path */
     R_fcall = PROTECT(lang1(path));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, GEcurrentDevice());
     UNPROTECT(1);
     /* Decrement the "appending" count */
     xd->appending--;
@@ -2159,7 +2159,7 @@ static void CairoFillPath(SEXP path,
     cairo_new_path(cc);
     /* Play the path function to build the path */
     R_fcall = PROTECT(lang1(path));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, GEcurrentDevice());
     UNPROTECT(1);
     /* Decrement the "appending" count */
     xd->appending--;
@@ -2200,7 +2200,7 @@ static void CairoFillStrokePath(SEXP path,
     cairo_new_path(cc);
     /* Play the path function to build the path */
     R_fcall = PROTECT(lang1(path));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, GEcurrentDevice());
     UNPROTECT(1);
     /* Decrement the "appending" count */
     xd->appending--;

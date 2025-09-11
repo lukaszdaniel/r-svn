@@ -31,6 +31,7 @@
 #include <config.h>
 #endif
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -3240,7 +3241,7 @@ attribute_hidden SEXP do_recordGraphics(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 #endif
     dd->recordGraphics = FALSE;
-    PROTECT(retval = eval(code, evalenv));
+    PROTECT(retval = Rf_eval_with_gd(code, evalenv, dd));
     /*
      * If there is an error or user-interrupt in the above
      * evaluation, dd->recordGraphics is set to TRUE
@@ -3952,3 +3953,37 @@ void GEGlyph(int n, int *glyphs, double *x, double *y,
                        colour, rot, dd->dev);
     }
 }
+
+SEXP Rf_eval_with_gd(SEXP e, SEXP rho, pGEDevDesc dd)
+{
+    if (!dd)
+        dd = GEcurrentDevice();
+    bool lock = dd->lock;
+
+    GCStackRoot<> result;
+    if (!lock)
+        dd->lock = TRUE;
+    try
+    {
+        result = eval(e, rho);
+    }
+    catch (...)
+    {
+        if (!lock)
+        {
+            if (GEdeviceNumber(dd))
+                dd->lock = FALSE;
+        }
+        throw;
+    }
+
+
+    if (!lock)
+    {
+        if (GEdeviceNumber(dd))
+            dd->lock = FALSE;
+    }
+
+    return result;
+}
+

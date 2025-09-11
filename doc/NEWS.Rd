@@ -16,6 +16,14 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
+      \item \code{AIC.default} and \code{BIC.default} now checks whether 
+      the \code{methods} namespace is loaded rather than \code{stats4}. It
+      still uses \code{stats4::logLik} and \code{stats4::nobs}, but packages
+      no longer need to load \code{stats4} explicitly.
+
+      \item \code{confint.default} now also works on S4 objects, as long as
+      suitable \code{coef()} and \code{vcov()} methods exist.
+
       \item \code{binomial(identity)} and \code{quasibinomial(identity)} now work
       without having to quote the argument.
 
@@ -141,7 +149,17 @@
 
   \subsection{C-LEVEL FACILITIES}{
     \itemize{
-      \item .
+      \item New functions \code{GEcreateDD()} and \code{GEfreeDD()}
+      for allocating (and initialising) \code{DevDesc} structures.
+      Can be used by external graphics devices.
+      Satisfies \PR{18292}.
+
+      \item New function \code{R_eval_with_gd()} designed to \dQuote{lock} a
+      graphics device during call to \code{eval()} within device drawing
+      routines.
+      External \emph{on-screen} graphics devices should consider using
+      this function to avoid crashes from the device being closed by the
+      user (e.g., a mouse click) during drawing.
     }
   }
 

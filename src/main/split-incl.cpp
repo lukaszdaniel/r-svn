@@ -60,7 +60,7 @@
 		UNIMPLEMENTED_TYPE("split", x);
 	    }
 	    if (have_names) {
-		nmj = getAttrib(VECTOR_ELT(vec, j - 1), R_NamesSymbol);
+		SEXP nmj = getAttrib(VECTOR_ELT(vec, j - 1), R_NamesSymbol);
 		SET_STRING_ELT(nmj, k, STRING_ELT(nm, i));
 	    }
 	    _L_INTEG_(counts)[j - 1] += 1;

@@ -888,7 +888,7 @@ static QPathRef QuartzCreateClipPath(SEXP clipPath, int index,
     CGContextBeginPath(ctx);
     /* Play the clipPath function to build the clipping path */
     R_fcall = PROTECT(lang1(clipPath));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, NULL);
     UNPROTECT(1);
     /* Save the clipping path (for reuse) */
     quartz_clipPath->path = CGContextCopyPath(ctx);
@@ -1066,7 +1066,7 @@ static int QuartzCreateMask(SEXP mask,
 
         /* Play the mask function to build the mask */
         R_fcall = PROTECT(lang1(mask));
-        eval(R_fcall, R_GlobalEnv);
+        Rf_eval_with_gd(R_fcall, R_GlobalEnv, NULL);
         UNPROTECT(1);
 
         /* When working with an alpha mask, convert into a grayscale bitmap */
@@ -1257,7 +1257,7 @@ static SEXP QuartzCreateGroup(SEXP src, int op, SEXP dst,
     if (dst != R_NilValue) {
         /* Play the destination function to draw the destination */
         R_fcall = PROTECT(lang1(dst));
-        eval(R_fcall, R_GlobalEnv);
+        Rf_eval_with_gd(R_fcall, R_GlobalEnv, NULL);
         UNPROTECT(1);
     }
     /* Set the group operator */
@@ -1270,7 +1270,7 @@ static SEXP QuartzCreateGroup(SEXP src, int op, SEXP dst,
         CGContextSetBlendMode(layerContext, QuartzOperator(op));
         /* Play the source function to draw the source */
         R_fcall = PROTECT(lang1(src));
-        eval(R_fcall, R_GlobalEnv);
+        Rf_eval_with_gd(R_fcall, R_GlobalEnv, NULL);
         UNPROTECT(1);
     }
     
@@ -1668,8 +1668,13 @@ const char *RQuartz_LookUpFontName(int fontface, const char *fontfamily)
     GCStackRoot<> env;
     PROTECT(ns = R_FindNamespace(ScalarString(mkChar("grDevices"))));
     env = findVar(install(".Quartzenv"), ns);
-    if(TYPEOF(env) == PROMSXP)
-        env = eval(env,ns);
+    if(TYPEOF(env) == PROMSXP) {
+        if (NoDevices()) {
+            env = eval(env, ns);
+        } else {
+            env = Rf_eval_with_gd(env, ns, NULL);
+        }
+    }
     PROTECT(db    = findVar(install(".Quartz.Fonts"), env));
     PROTECT(names = getAttrib(db, R_NamesSymbol));
     if (*fontfamily) {
@@ -2688,7 +2693,7 @@ static SEXP RQuartz_setPattern(SEXP pattern, pDevDesc dd) {
 
         /* Play the pattern function to draw the pattern on the pattern layer*/
         SEXP R_fcall = PROTECT(lang1(R_GE_tilingPatternFunction(pattern)));
-        eval(R_fcall, R_GlobalEnv);
+        Rf_eval_with_gd(R_fcall, R_GlobalEnv, desc2GEDesc(dd));
         UNPROTECT(1);
 
         xd->appendingPattern = savedPattern;
@@ -2859,7 +2864,7 @@ static void RQuartz_stroke(SEXP path, const pGEcontext gc, pDevDesc dd)
     CGContextBeginPath(ctx);
     /* Play the path function to build the path */
     R_fcall = PROTECT(lang1(path));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, desc2GEDesc(dd));
     UNPROTECT(1);
     /* Decrement the "appending" count */
     xd->appending--;
@@ -2895,7 +2900,7 @@ static void RQuartz_fill(SEXP path, int rule, const pGEcontext gc,
     CGContextBeginPath(ctx);
     /* Play the path function to build the path */
     R_fcall = PROTECT(lang1(path));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, desc2GEDesc(dd));
     UNPROTECT(1);
     /* Decrement the "appending" count */
     xd->appending--;
@@ -2921,7 +2926,7 @@ static void QuartzFillStrokePath(SEXP path, CGContextRef ctx, QuartzDesc *xd)
     CGContextBeginPath(ctx);
     /* Play the path function to build the path */
     R_fcall = PROTECT(lang1(path));
-    eval(R_fcall, R_GlobalEnv);
+    Rf_eval_with_gd(R_fcall, R_GlobalEnv, NULL);
     UNPROTECT(1);
     /* Decrement the "appending" count */
     xd->appending--;
@@ -3247,15 +3252,14 @@ QuartzDesc_t Quartz_C(QuartzParameters_t *par, quartz_create_fn_t q_create, int 
         R_CheckDeviceAvailable();
         {
 	    const char *devname = "quartz_off_screen";
-	    /* FIXME: check this allocation */
-            pDevDesc dev    = (pDevDesc) calloc(1, sizeof(DevDesc));
+            pDevDesc dev    = GEcreateDD();
 
             if (!dev) {
 		if (errorCode) errorCode[0] = -2;
 		return NULL;
 	    }
             if (!(qd = q_create(dev, &qfn, par))) {
-                free(dev);
+                GEfreeDD(dev);
 		if (errorCode) errorCode[0] = -3;
 		return NULL;
             }
@@ -3356,7 +3360,7 @@ SEXP Quartz(SEXP args)
     R_GE_checkVersionOrDie(R_GE_version);
     R_CheckDeviceAvailable();
     BEGIN_SUSPEND_INTERRUPTS {
-	pDevDesc dev = (pDevDesc) calloc(1, sizeof(DevDesc));
+	pDevDesc dev = GEcreateDD();
 
 	if (!dev)
 	    error("%s", _("unable to create device description"));
@@ -3407,7 +3411,7 @@ SEXP Quartz(SEXP args)
 	}
 
 	if (qd == NULL) {
-	    free(dev);
+	    GEfreeDD(dev);
 	    error("%s", _("unable to create quartz() device target, given type may not be supported"));
 	}
 	const char *devname = "quartz_off_screen";

@@ -33,7 +33,7 @@ SEXP resolveMask(SEXP mask, pGEDevDesc dd)
     GCStackRoot<> resolveFn, R_fcall;
     resolveFn = findFun(install("resolveMask"), R_gridEvalEnv);
     R_fcall = lang2(resolveFn, mask);
-    SEXP result = eval(R_fcall, R_gridEvalEnv);
+    SEXP result = Rf_eval_with_gd(R_fcall, R_gridEvalEnv, dd);
 
     return result;
 }

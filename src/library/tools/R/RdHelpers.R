@@ -196,7 +196,7 @@ function(x)
         footers[ind] <- paste("\\cr", footers[ind])
     rdfile <- processRdChunk_data_store()$Rdfile
     rdpath <- if(length(rdfile)) basename(rdfile) else ""
-    paste(sprintf("%s\\if{html}{\u2060\\out{<span id=\"reference+%s+%s\">}}%s\\if{html}{\\out{</span>}}%s",
+    paste(sprintf("%s\\if{html}{\\out{<span id=\"reference+%s+%s\"></span>}}%s%s",
                   headers,
                   rdpath,
                   string2id(.bibentry_get_key(y)),
@@ -279,11 +279,12 @@ function(x, textual = FALSE)
         if(any(ind <- nzchar(before)))
             before[ind] <- paste0(before[ind], " ")
         y <- paste0(before,
-                    sprintf("\\if{html}{\u2060\\out{<a href=\"#reference+%s+%s\"><span class=\"citation\">}}",
+                    ## Empty \cite{} here is a kludge to 'enterPara' in Rd2HTML.
+                    sprintf("\\if{html}{\\cite{}\\out{<a href=\"#reference+%s+%s\" class=\"citation\">}}",
                             rdpath,
                             string2id(keys)),
                     y,
-                    rep_len("\\if{html}{\\out{</span></a>}}", n),
+                    rep_len("\\if{html}{\\out{</a>}}", n),
                     collapse = "; ")
     } else {
         bibp <- c("", "", ";", "a", "",  ",")
@@ -300,11 +301,11 @@ function(x, textual = FALSE)
             after[ind] <- paste0(", ", after[ind])
         y <- paste0("(",
                     paste0(before,
-                           sprintf("\\if{html}{\\out{<a href=\"#reference+%s+%s\"><span class=\"citation\">}}",
+                           sprintf("\\if{html}{\\out{<a href=\"#reference+%s+%s\" class=\"citation\">}}",
                                    rdpath,
                                    string2id(keys)),
                            y,
-                           rep_len("\\if{html}{\\out{</span></a>}}", n),
+                           rep_len("\\if{html}{\\out{</a>}}", n),
                            after,
                            collapse = ";"),
                     ")")

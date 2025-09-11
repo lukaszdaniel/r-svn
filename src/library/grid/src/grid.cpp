@@ -414,7 +414,7 @@ SEXP L_setviewport(SEXP invp, SEXP hasParent)
      */
     PROTECT(fcall = lang2(install("pushedvp"),
 			  vp));
-    PROTECT(pushedvp = eval(fcall, R_gridEvalEnv)); 
+    PROTECT(pushedvp = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
     pushedvp = doSetViewport(pushedvp, !LOGICAL(hasParent)[0], true, dd);
     /* Set the value of the current viewport for the current device
      * Need to do this in here so that redrawing via R BASE display
@@ -506,7 +506,7 @@ static bool noChildren(SEXP children)
     SEXP result, fcall;
     PROTECT(fcall = lang2(install("no.children"),
 			  children));
-    PROTECT(result = eval(fcall, R_gridEvalEnv)); 
+    PROTECT(result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
     UNPROTECT(2);
     return asBool(result);
 }
@@ -516,7 +516,7 @@ static bool childExists(SEXP name, SEXP children)
     SEXP result, fcall;
     PROTECT(fcall = lang3(install("child.exists"),
 			  name, children));
-    PROTECT(result = eval(fcall, R_gridEvalEnv)); 
+    PROTECT(result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
     UNPROTECT(2);
     return asBool(result);
 }
@@ -526,7 +526,7 @@ static SEXP childList(SEXP children)
     SEXP result, fcall;
     PROTECT(fcall = lang2(install("child.list"),
 			  children));
-    PROTECT(result = eval(fcall, R_gridEvalEnv)); 
+    PROTECT(result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
     UNPROTECT(2);
     return result;    
 }
@@ -715,7 +715,7 @@ static bool pathMatch(SEXP path, SEXP pathsofar, SEXP strict)
     SEXP result, fcall;
     PROTECT(fcall = lang4(install("pathMatch"),
 			  path, pathsofar, strict));
-    PROTECT(result = eval(fcall, R_gridEvalEnv)); 
+    PROTECT(result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
     UNPROTECT(2);
     return asBool(result);
 }
@@ -728,7 +728,7 @@ static SEXP growPath(SEXP pathsofar, SEXP name)
     else {
 	PROTECT(fcall = lang3(install("growPath"),
 			      pathsofar, name));
-	PROTECT(result = eval(fcall, R_gridEvalEnv)); 
+        PROTECT(result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
 	UNPROTECT(2);
     }
     return result;    
@@ -944,7 +944,7 @@ SEXP L_unsetviewport(SEXP n)
 	SET_TAG(t, install("envir")); 
 	t = CDR(t);
 	SET_TAG(t, install("inherits")); 
-	eval(fcall, R_gridEvalEnv); 
+	Rf_eval_with_gd(fcall, R_gridEvalEnv, dd); 
 	UNPROTECT(2); /* false, fcall */
     }
     /* Get the current device size 
@@ -1986,7 +1986,7 @@ static void hullEdge(double *x, double *y, int n,
      */
     PROTECT(chullFn = findFun(install("chull"), R_gridEvalEnv));
     PROTECT(R_fcall = lang3(chullFn, xin, yin));
-    PROTECT(hull = eval(R_fcall, R_gridEvalEnv));
+    PROTECT(hull = Rf_eval_with_gd(R_fcall, R_gridEvalEnv, NULL));
     nh = LENGTH(hull);
     hx = (double *) R_alloc(nh, sizeof(double));
     hy = (double *) R_alloc(nh, sizeof(double));
