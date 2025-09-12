@@ -785,12 +785,12 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,   198,   198,   199,   200,   203,   204,   205,   206,   207,
-     208,   210,   211,   213,   214,   215,   216,   217,   219,   220,
-     221,   222,   223,   224,   226,   230,   234,   238,   238,   242,
-     244,   245,   247,   247,   251,   251,   255,   255
+       0,   199,   199,   200,   201,   204,   205,   206,   207,   208,
+     209,   211,   212,   214,   215,   216,   217,   218,   220,   221,
+     222,   223,   224,   225,   227,   231,   235,   239,   239,   243,
+     245,   246,   248,   248,   252,   252,   256,   256
 };
 #endif
 
@@ -2846,7 +2846,7 @@ static void yyerror(const char *s)
 	size_t nc = bp - stext;		    \
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
-      if (size_t(nstext) > SIZE_MAX / 2) error(_("Buffer size too large to double safely at line %d"), parseState.xxlineno); \
+        if (size_t(nstext) > SIZE_MAX / 2) error(_("Buffer size too large to double safely at line %d"), parseState.xxlineno); \
 	    nstext *= 2;		    \
 	    stext = (char *) malloc(nstext);	    \
 	    if(!stext) error(_("unable to allocate buffer for long string at line %d"), parseState.xxlineno);\
