@@ -1668,7 +1668,7 @@ const char *RQuartz_LookUpFontName(int fontface, const char *fontfamily)
     GCStackRoot<> env;
     PROTECT(ns = R_FindNamespace(ScalarString(mkChar("grDevices"))));
     env = findVar(install(".Quartzenv"), ns);
-    if(TYPEOF(env) == PROMSXP) {
+    if (TYPEOF(env) == PROMSXP) {
         if (NoDevices()) {
             env = eval(env, ns);
         } else {

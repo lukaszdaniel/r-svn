@@ -151,7 +151,7 @@ static void R_ReplFile(FILE *fp, SEXP rho)
 
 /* Read-Eval-Print loop with interactive input */
 static int prompt_type;
-static char BrowsePrompt[20];
+static char BrowsePrompt[32];
 
 static const char *R_PromptString(int type)
 {
@@ -162,7 +162,7 @@ static const char *R_PromptString(int type)
     else {
 	if (type == 1) {
 	    if (Browser::numberActive()) {
-		snprintf(BrowsePrompt, 20, "Browse[%zu]> ", Browser::numberActive());
+		snprintf(BrowsePrompt, sizeof(BrowsePrompt), "Browse[%zu]> ", Browser::numberActive());
 		return BrowsePrompt;
 	    }
 	    return CHAR(STRING_ELT(GetOption1(install("prompt")), 0));

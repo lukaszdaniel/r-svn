@@ -1669,7 +1669,7 @@ static SEXP getFontDB(const char *fontdbname) {
     PROTECT(graphicsNS = R_FindNamespace(ScalarString(mkChar("grDevices"))));
     PROTECT(PSenv = findVar(install(".PSenv"), graphicsNS));
     /* under lazy loading this will be a promise on first use */
-    if(TYPEOF(PSenv) == PROMSXP) {
+    if (TYPEOF(PSenv) == PROMSXP) {
 	PROTECT(PSenv);
         if (NoDevices()) {
             PSenv = eval(PSenv, graphicsNS);
@@ -2671,7 +2671,7 @@ static void PSFileHeader(FILE *fp,
 	PROTECT(graphicsNS);
 	prolog = findVar(install(".ps.prolog"), graphicsNS);
 	/* under lazy loading this will be a promise on first use */
-	if(TYPEOF(prolog) == PROMSXP) {
+	if (TYPEOF(prolog) == PROMSXP) {
 	    PROTECT(prolog);
             if (NoDevices()) {
                 prolog = eval(prolog, graphicsNS);
@@ -2693,7 +2693,7 @@ static void PSFileHeader(FILE *fp,
 	PROTECT(graphicsNS);
 	prolog = findVar(install(".ps.prolog.srgb"), graphicsNS);
 	/* under lazy loading this will be a promise on first use */
-	if(TYPEOF(prolog) == PROMSXP) {
+	if (TYPEOF(prolog) == PROMSXP) {
 	    PROTECT(prolog);
             if (NoDevices()) {
                 prolog = eval(prolog, graphicsNS);

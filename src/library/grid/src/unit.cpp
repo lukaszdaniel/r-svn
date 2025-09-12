@@ -1622,22 +1622,22 @@ SEXP validData(SEXP data, SEXP validUnits, int n) {
 					dataCopied = 1;
 				}
 				SEXP fcall = PROTECT(lang2(install("gPath"), singleData));
-                                if (NoDevices()) {
-                                    singleData = eval(fcall, R_gridEvalEnv);
-                                } else {
-                                    singleData = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL);
-                                }
+				if (NoDevices()) {
+					singleData = eval(fcall, R_gridEvalEnv);
+				} else {
+					singleData = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL);
+				}
 				SET_VECTOR_ELT(data, i % nData, singleData);
 				UNPROTECT(1);
 			}
 			if (Rf_inherits(singleData, "gPath")) {
 				SEXP fcall = PROTECT(lang2(install("depth"), singleData));
-                                SEXP depth;
-                                if (NoDevices()) {
-                                    depth = PROTECT(eval(fcall, R_gridEvalEnv));
-                                } else {
-                                    depth = PROTECT(Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL));
-                                }
+				SEXP depth;
+				 if (NoDevices()) {
+					depth = PROTECT(eval(fcall, R_gridEvalEnv));
+				} else {
+					depth = PROTECT(Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL));
+				}
 				int tooDeep = INTEGER(depth)[0] > 1;
 				UNPROTECT(2);
 				if (tooDeep) {

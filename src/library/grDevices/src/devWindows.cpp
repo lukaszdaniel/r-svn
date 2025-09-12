@@ -635,13 +635,14 @@ static char* translateFontFamily(const char* family) {
     PROTECT(graphicsNS = R_FindNamespace(ScalarString(mkChar("grDevices"))));
     windowsenv = findVar(install(".WindowsEnv"),
 					    graphicsNS);
-    if(TYPEOF(windowsenv) == PROMSXP)
+    if (TYPEOF(windowsenv) == PROMSXP) {
         if (NoDevices()) {
             windowsenv = eval(windowsenv, graphicsNS);
         } else {
             windowsenv = Rf_eval_with_gd(windowsenv, graphicsNS,
                                                    NULL);
         }
+    }
     PROTECT(fontdb = findVar(install(".Windows.Fonts"), windowsenv));
     PROTECT(fontnames = getAttrib(fontdb, R_NamesSymbol));
     nfonts = LENGTH(fontdb);
