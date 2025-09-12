@@ -102,6 +102,7 @@
 #include <memory>
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
+#include <algorithm> // for std::copy
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -5030,11 +5031,11 @@ static int NumericValue(int c)
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
 	    GCStackRoot<> st1;	            \
-        if (nstext > SIZE_MAX / 2) error(_("Buffer size too large to double safely")); \
+        if (size_t(nstext) > SIZE_MAX / 2) error("%s", _("Buffer size too large to double safely")); \
 	    nstext *= 2;                    \
 	    st1 = allocVector(RAWSXP, nstext); \
 	    stext = (char *)RAW(st1);       \
-	    if (old != stext) memmove(stext, old, nc);        \
+	    if (old != stext) std::copy(old, old + nc, stext);        \
 	    sti = st1;	   		    \
 	    bp = stext+nc; }		    \
 	*bp++ = ((char) c);		    \

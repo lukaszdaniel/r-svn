@@ -93,6 +93,7 @@
 #endif
 
 #include <cctype>
+#include <algorithm> // for std::copy
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -3960,11 +3961,11 @@ static void yyerror(const char *s)
 	size_t nc = bp - stext;		    \
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
-        if (nstext > SIZE_MAX / 2) error(_("Buffer size too large to double safely at line %d"), parseState.xxlineno); \
+        if (size_t(nstext) > SIZE_MAX / 2) error(_("Buffer size too large to double safely at line %d"), parseState.xxlineno); \
 	    nstext *= 2;		    \
 	    stext = (char*) malloc(nstext); \
 	    if(!stext) error(_("unable to allocate buffer for long string at line %d"), parseState.xxlineno);\
-	    if (old != stext) memmove(stext, old, nc);        \
+	    if (old != stext) std::copy(old, old + nc, stext);        \
 	    if(st1) free(st1);		    \
 	    st1 = stext;		    \
 	    bp = stext+nc; }		    \
