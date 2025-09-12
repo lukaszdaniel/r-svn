@@ -341,13 +341,13 @@ static void PrivateCopyDevice(pDevDesc dd, pDevDesc ndd, const char *name)
 static void SaveAsWin(pDevDesc dd, const char *display,
 		      bool restoreConsole)
 {
-    pDevDesc ndd = (pDevDesc) calloc(1, sizeof(DevDesc));
+    pDevDesc ndd = GEcreateDD();
     if (!ndd) {
 	R_ShowMessage(_("Not enough memory to copy graphics window"));
 	return;
     }
     if(!R_CheckDeviceAvailableBool()) {
-	free(ndd);
+	GEfreeDD(ndd);
 	R_ShowMessage(_("No device available to copy graphics window"));
 	return;
     }
@@ -386,7 +386,7 @@ static void init_PS_PDF(void)
 static void SaveAsPostscript(pDevDesc dd, const char *fn)
 {
     SEXP s;
-    pDevDesc ndd = (pDevDesc) calloc(1, sizeof(DevDesc));
+    pDevDesc ndd = GEcreateDD();
     pGEDevDesc gdd = desc2GEDesc(dd);
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     char family[256], encoding[256], paper[256], bg[256], fg[256];
@@ -397,7 +397,7 @@ static void SaveAsPostscript(pDevDesc dd, const char *fn)
 	return;
     }
     if(!R_CheckDeviceAvailableBool()) {
-	free(ndd);
+	GEfreeDD(ndd);
 	R_ShowMessage(_("No device available to copy graphics window"));
 	return;
     }
@@ -455,7 +455,7 @@ static void SaveAsPostscript(pDevDesc dd, const char *fn)
 static void SaveAsPDF(pDevDesc dd, const char *fn)
 {
     SEXP s;
-    pDevDesc ndd = (pDevDesc) calloc(1, sizeof(DevDesc));
+    pDevDesc ndd = GEcreateDD();
     pGEDevDesc gdd = desc2GEDesc(dd);
     gadesc *xd = (gadesc *) dd->deviceSpecific;
     char family[256], encoding[256], bg[256], fg[256];
@@ -470,7 +470,7 @@ static void SaveAsPDF(pDevDesc dd, const char *fn)
 	return;
     }
     if(!R_CheckDeviceAvailableBool()) {
-	free(ndd);
+	GEfreeDD(ndd);
 	R_ShowMessage(_("No device available to copy graphics window"));
 	return;
     }
@@ -3307,7 +3307,7 @@ bool GADeviceDriver(pDevDesc dd, const char *display, double width,
 			int quality, double xpinch, double ypinch)
 {
     /* if need to bail out with some sort of "error" then */
-    /* must free(dd) */
+    /* must GEfreeDD(dd) */
 
     int   ps; /* This really is in (big) points */
     gadesc *xd;
@@ -3318,9 +3318,6 @@ bool GADeviceDriver(pDevDesc dd, const char *display, double width,
 	warning("%s", _("allocation failed in GADeviceDriver"));
 	return FALSE;
     }
-
-    /* from here on, if need to bail out with "error", must also */
-    /* free(xd) */
 
     /* Allow user override of ppi */
     xd->xpinch = 0.0;
@@ -3816,13 +3813,13 @@ SEXP devga(SEXP args)
 	    if(p && !streqln(display, "win.metafile", 12)) *p = '\0';
 	}
 	/* Allocate and initialize the device driver data */
-	if (!(dev = (pDevDesc) calloc(1, sizeof(DevDesc)))) return 0;
+	if (!(dev = GEcreateDD())) return 0;
 	if (!GADeviceDriver(dev, display, width, height, ps,
 			    recording, resize, bg, canvas, gamma,
 			    xpos, ypos, buffered, psenv,
 			    restoreConsole, title, clickToConfirm,
 			    fillOddEven, family, quality, xpinch, ypinch)) {
-	    free(dev);
+	    GEfreeDD(dev);
 	    error(_("unable to start %s() device"), type);
 	}
 	gdd = GEcreateDevDesc(dev);
