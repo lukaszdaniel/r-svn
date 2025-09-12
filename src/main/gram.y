@@ -2721,10 +2721,11 @@ static int NumericValue(int c)
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
 	    GCStackRoot<> st1;	            \
+		if (nstext > SIZE_MAX / 2) error(_("Buffer size too large to double safely")); \
 	    nstext *= 2;                    \
 	    st1 = allocVector(RAWSXP, nstext); \
 	    stext = (char *)RAW(st1);       \
-	    memmove(stext, old, nc);        \
+	    if (old != stext) memmove(stext, old, nc);        \
 	    sti = st1;	   		    \
 	    bp = stext+nc; }		    \
 	*bp++ = ((char) c);		    \
