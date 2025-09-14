@@ -2246,6 +2246,35 @@ for(na in c(TRUE, FALSE))
 ## almost all differed in R <= 4.5.1
 
 
+## Ben Bolker + Kasper Kri...'s  PR#18946 -- lbeta(<complex>, *)
+(Lb <- list(
+    b1 = tryCid(  beta(1i, 1) )
+  , b2 = tryCid(  beta(1, 1i) )
+  , l1 = tryCid( lbeta(1i, 1) )
+  , l2 = tryCid( lbeta(1, 1i) )
+))
+stopifnot(vapply(Lb, inherits, what="error", NA))
+## l1 was not an error, but non-sense complex,  in R <= 4.5.1
+stopifnot(identical(log10(1i), log(1i, 10)), log2(c(1,2,4) + 0i) == 0:2)
+## (< 24h) lapsus "unimplemented complex fn."
+
+
+## jitter():  more "robust"
+ii5 <- rep(1000, 5)
+i12 <- rep(1:4, each=3)
+iI <- c(-Inf,  3,3,3)
+assertWarnV(iN <- sqrt(-1:1)) # NaNs produced
+set.seed(12)
+(j1 <- jitter(ii5, factor = -1/4)) # ok - no longer NaN
+(j2 <- jitter(i12, amount = -1/4)) #  (ditto)
+(jI <- jitter(iI))
+(jN <- jitter(iN))
+stopifnot(990 < j1, j1 < 1010, 0.9 < j2, j2 < 4.4,
+          jI[1] == -Inf, 2.9 < jI[-1], jI[-1] < 3.1,
+          is.na(jN[1]), -1/4 < jN[-1], jN[-1] < 1.1)
+## x in {Inf,NA,..} failed for 'd' computation;  negative amount / factor gave NaN
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

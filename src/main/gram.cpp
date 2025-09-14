@@ -5031,7 +5031,7 @@ static int NumericValue(int c)
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
 	    GCStackRoot<> st1;	            \
-		if (size_t(nstext) > SIZE_MAX / 2) error("%s", _("Buffer size too large to double safely")); \
+	    if (size_t(nstext) > SIZE_MAX / 2) error("%s", _("Buffer size too large to double safely")); \
 	    nstext *= 2;                    \
 	    st1 = allocVector(RAWSXP, nstext); \
 	    stext = (char *)RAW(st1);       \

@@ -1680,8 +1680,8 @@ attribute_hidden SEXP do_log1arg(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     SEXP sLog = install("log");
-    if(PRIMVAL(op) == 10) tmp = ScalarReal(10.0);
-    if(PRIMVAL(op) == 2)  tmp = ScalarReal(2.0);
+    if(PRIMVAL(op) == 10010) tmp = ScalarReal(10.0);
+    if(PRIMVAL(op) == 10002) tmp = ScalarReal(2.0);
 
     call2 = lang3(sLog, CAR(args), tmp);
     args2 = lang2(CAR(args), tmp);
