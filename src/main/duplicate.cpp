@@ -390,16 +390,16 @@ void Rf_copyVector(SEXP s, SEXP t)
 	xcopyStringWithRecycle(s, t, 0, ns, nt);
 	break;
     case LGLSXP:
-	xcopyWithRecycle(LOGICAL(s), LOGICAL(t), 0, ns, nt);
+	xcopyWithRecycle(LOGICAL(s), LOGICAL_RO(t), 0, ns, nt);
 	break;
     case INTSXP:
-	xcopyWithRecycle(INTEGER(s), INTEGER(t), 0, ns, nt);
+	xcopyWithRecycle(INTEGER(s), INTEGER_RO(t), 0, ns, nt);
 	break;
     case REALSXP:
-	xcopyWithRecycle(REAL(s), REAL(t), 0, ns, nt);
+	xcopyWithRecycle(REAL(s), REAL_RO(t), 0, ns, nt);
 	break;
     case CPLXSXP:
-	xcopyWithRecycle(COMPLEX(s), COMPLEX(t), 0, ns, nt);
+	xcopyWithRecycle(COMPLEX(s), COMPLEX_RO(t), 0, ns, nt);
 	break;
     case EXPRSXP:
 	xcopyVectorWithRecycle(s, t, 0, ns, nt);
@@ -408,7 +408,7 @@ void Rf_copyVector(SEXP s, SEXP t)
 	xcopyVectorWithRecycle(s, t, 0, ns, nt);
 	break;
     case RAWSXP:
-	xcopyWithRecycle(RAW(s), RAW(t), 0, ns, nt);
+	xcopyWithRecycle(RAW(s), RAW_RO(t), 0, ns, nt);
 	break;
     default:
 	UNIMPLEMENTED_TYPE("copyVector", s);

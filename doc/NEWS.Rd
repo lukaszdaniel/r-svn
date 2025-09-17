@@ -16,12 +16,12 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
-      \item \code{AIC.default} and \code{BIC.default} now checks whether
-      the \code{methods} namespace is loaded rather than \code{stats4}. It
-      still uses \code{stats4::logLik} and \code{stats4::nobs}, but packages
-      no longer need to load \code{stats4} explicitly.
+      \item The default \code{AIC} and \code{BIC} methods now check whether 
+      the \pkg{methods} namespace is loaded rather than \pkg{stats4}. They
+      still use \code{stats4::logLik} (and \code{stats4::nobs}), but packages
+      no longer need to load \pkg{stats4} explicitly.
 
-      \item \code{confint.default} now also works on S4 objects, as long as
+      \item \code{confint.default()} now also works on S4 objects, as long as
       suitable \code{coef()} and \code{vcov()} methods exist.
 
       \item \code{binomial(identity)} and \code{quasibinomial(identity)} now work
@@ -117,6 +117,19 @@
       \command{texi2any}-generated HTML versions of the \R manuals, was
       improved following joint efforts at the \sQuote{\I{R Dev Days}}
       of \I{useR! 2024} and \I{RSECon25}.
+
+      \item New system Rd macro \command{\\manual\{\var{name}\}\{\var{node}\}}
+      to refer to a specific section \emph{etc} (possibly empty, for
+      \samp{Top}) of one of the \R manuals (e.g., \samp{R-exts}).
+
+      \item \code{list.files()} now has optional argument \code{fixed}
+      to allow literal pattern matching.  Suggested and implemented
+      by \I{Duncan Murdoch} in \PR{18925}.
+
+      \item \code{substring(txt, i1, i2)}, \code{substr(..)} and their
+      replacement versions now accept \code{i2 = NULL} to mean \dQuote{to
+      the end_of_string}, thus fulfilling \I{Kevin Ushey} (and others')
+      suggestions in \PR{18851}.
     }
   }
 
@@ -295,6 +308,9 @@
       non-finite \code{x} or also negative \code{amount}, \code{factor}.
       \code{help(jitter)} is easier to read, fixing \PR{17279}, thanks to
       its contributors.
+
+      \item Plain-text help (\code{Rd2txt}) lacked markup for
+      \samp{\cite}d titles, which are now wrapped in single quotes.
     }
   }
 }

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2014	    The R Core Team.
+ *  Copyright (C) 1998--2025	    The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ Iterator macro to fill a matrix from a vector with re-use of vector
 void xcopyStringWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
 void xcopyVectorWithRecycle(SEXP dst, SEXP src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc);
 template <typename VALTYPE>
-HIDDEN void xcopyWithRecycle(VALTYPE * dst, VALTYPE * src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc)
+HIDDEN void xcopyWithRecycle(VALTYPE * dst, const VALTYPE * src, R_xlen_t dstart, R_xlen_t n, R_xlen_t nsrc)
 {
 
     if (nsrc >= n)

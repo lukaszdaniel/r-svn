@@ -1591,10 +1591,14 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool recursive = asBool2(CAR(args), call); args = CDR(args);
     bool igcase = asLogicalNoNA(CAR(args), "ignore.case"); args = CDR(args);
     bool idirs = asBool2(CAR(args), call); args = CDR(args);
-    bool nodots = asLogicalNoNA(CAR(args), "no..");
+//    if (idirs == NA_LOGICAL)
+//	error(_("invalid '%s' argument"), "include.dirs");
+    bool nodots = asLogicalNoNA(CAR(args), "no.."); args = CDR(args);
+    bool fixed = asLogicalNoNA(CAR(args), "fixed");
 
     int flags = REG_EXTENDED;
     if (igcase) flags |= REG_ICASE;
+    if (fixed)  flags |= REG_LITERAL;
     regex_t reg;
     if (pattern && tre_regcomp(&reg, translateChar(STRING_ELT(p, 0)), flags))
 	error("%s", _("invalid 'pattern' regular expression"));
