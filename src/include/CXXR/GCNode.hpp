@@ -36,6 +36,7 @@
 #include <memory>
 #include <bitset>
 #include <string>
+#include <forward_list>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/GCManager.hpp>
@@ -690,6 +691,7 @@ namespace CXXR
         static std::unique_ptr<CXXR::GCNode> s_OldToNew[1 + GCManager::numOldGenerations()];
 #endif
         static unsigned int s_gencount[1 + GCManager::numOldGenerations()];
+        static std::forward_list<const GCNode *> s_forwarded_nodes;
 
         /** @brief Next generation table.
         *
