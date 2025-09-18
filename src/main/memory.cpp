@@ -1362,14 +1362,21 @@ void GCNode::mark(unsigned int max_generation)
 {
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
-    for (unsigned int gen = 1; gen < max_generation; gen++) {
+    for (unsigned int gen = 0 /* 1 */; gen < max_generation; gen++) {
         const GCNode *s = NEXT_NODE(s_Old[gen]);
         while (s != s_Old[gen].get()) {
             const GCNode *next = NEXT_NODE(s);
+            if (gen < numGenerations() - 1)
+            {
+                // Advance generation:
+                --s_gencount[gen];
+                SET_NODE_GENERATION(s, gen + 1);
+                ++s_gencount[gen + 1];
+            }
             UNMARK_NODE(s);
             s = next;
         }
-        if (NEXT_NODE(s_Old[gen]) != s_Old[gen].get())
+        if ((gen > 0) && (NEXT_NODE(s_Old[gen]) != s_Old[gen].get()))
             BULK_MOVE(s_Old[gen].get(), s_New.get());
     }
 
@@ -1526,24 +1533,8 @@ void GCNode::sweep(unsigned int max_generation)
     while (s != s_New.get())
     {
         const GCNode *next = NEXT_NODE(s);
-        if (!s->isMarked())
-        {
-            CXXR_detach((SEXP)s);
-            delete s;
-        }
-        else
-        {
-            unsigned int gen = NODE_GENERATION(s);
-            if ((gen < max_generation) && (gen < numGenerations() - 1))
-            {
-                // Advance generation:
-                --s_gencount[gen];
-                ++gen;
-                SET_NODE_GENERATION(s, gen);
-                ++s_gencount[gen];
-            }
-            s_Old[gen]->splice(s);
-        }
+        CXXR_detach((SEXP)s);
+        delete s;
         s = next;
     }
 }

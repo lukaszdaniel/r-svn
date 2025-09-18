@@ -124,6 +124,7 @@ namespace CXXR
         if (node->generation() < m_maxgen) // node is below the number of generations to be collected
         {
             node->sxpinfo.m_mark = true;
+            s_Old[node->generation()]->splice(node);
             node->visitReferents(this);
         }
     }
