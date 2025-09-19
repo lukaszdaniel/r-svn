@@ -39,19 +39,6 @@
 
 namespace CXXR
 {
-    /* There are three levels of collections.  Level 0 collects only the
-       youngest generation, level 1 collects the two youngest generations,
-       and level 2 collects all generations.  Higher level collections
-       occur at least after specified numbers of lower level ones.  After
-       LEVEL_0_FREQ level zero collections a level 1 collection is done;
-       after every LEVEL_1_FREQ level 1 collections a level 2 collection
-       occurs.  Thus, roughly, every LEVEL_0_FREQ-th collection is a level
-       1 collection and every (LEVEL_0_FREQ * LEVEL_1_FREQ)-th collection
-       is a level 2 collection.  */
-    constexpr int LEVEL_0_FREQ = 20;
-    constexpr int LEVEL_1_FREQ = 5;
-
-    const unsigned int GCManager::s_collect_counts_max[s_num_old_generations] = { LEVEL_0_FREQ, LEVEL_1_FREQ };
     unsigned int GCManager::s_gen_gc_counts[s_num_old_generations + 1];
 
     unsigned int GCManager::s_inhibitor_count = 0;

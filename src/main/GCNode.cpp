@@ -50,7 +50,6 @@ namespace CXXR
 #endif
     unsigned int GCNode::s_gencount[1 + GCManager::numOldGenerations()];
     unsigned int GCNode::s_next_gen[1 + GCManager::numOldGenerations()];
-    std::forward_list<const GCNode *> GCNode::s_forwarded_nodes;
 
     HOT_FUNCTION void *GCNode::operator new(size_t bytes)
     {
@@ -122,9 +121,10 @@ namespace CXXR
         }
 
         CHECK_FOR_FREE_NODE(node);
-        if (node->generation() < m_maxgen) // node is below the number of generations to be collected
+        if (node->generation() < m_maxgen) // node generation falls into generations to be collected
         {
             node->sxpinfo.m_mark = true;
+            s_Old[node->generation()]->splice(node);
             node->visitReferents(this);
         }
     }

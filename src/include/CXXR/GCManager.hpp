@@ -204,7 +204,7 @@ namespace CXXR
 
     public: // private:
         static constexpr unsigned int s_num_old_generations = 2;
-        static const unsigned int s_collect_counts_max[s_num_old_generations];
+        static constexpr unsigned int s_collect_counts_max[s_num_old_generations] = { 20 /*LEVEL_0_FREQ*/, 5 /*LEVEL_1_FREQ*/ };
         static unsigned int s_gen_gc_counts[s_num_old_generations + 1];
         static size_t s_threshold;
         static size_t s_min_threshold;
@@ -255,18 +255,21 @@ namespace CXXR
          * generations, and Level 2 collects all generations.  This
          * function decides how many old generations to collect according
          * to a rota.  Most collections are Level 0.  However, after every
-         * collect_counts_max[0] Level 0 collections, a Level 1 collection
+         * s_collect_counts_max[0] Level 0 collections, a Level 1 collection
          * will be carried out; similarly after every
-         * collect_counts_max[1] Level 1 collections a Level 2 collection
-         * will be carried out.
+         * s_collect_counts_max[1] Level 1 collections a Level 2 collection
+         * will be carried out. Thus, roughly, every s_collect_counts_max[0]-th
+         * collection is a Level 1 collection and every
+         * (s_collect_counts_max[0] * s_collect_counts_max[1])-th collection 
+         * is a Level 2 collection.
          *
-         * @param minlevel (<= 2, not checked) This parameter places a
+         * @param num_old_gens_to_collect (<= 2, not checked) This parameter places a
          *          minimum on the number of old generations to be
-         *          collected.  If minlevel is higher than the number of
+         *          collected.  If num_old_gens_to_collect is higher than the number of
          *          generations that genRota would have chosen for itself,
          *          the position in the rota is advanced accordingly.
          */
-        static unsigned int genRota(unsigned int minlevel);
+        static unsigned int genRota(unsigned int num_old_gens_to_collect);
 
         static unsigned int s_inhibitor_count; // Number of GCInhibitor
                                                // objects in existence.

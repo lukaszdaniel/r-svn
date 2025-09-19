@@ -1016,156 +1016,7 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
 #define FREE_FORWARD_CASE
 #endif
 
-/* Processing Node Children */
-
-/* This macro calls dc__action__ for each child of __n__, passing
-   dc__extra__ as a second argument for each call. */
-/* When the CHARSXP hash chains are maintained through the ATTRIB
-   field it is important that we NOT trace those fields otherwise too
-   many CHARSXPs will be kept alive artificially. As a safety we don't
-   ignore all non-NULL ATTRIB values for CHARSXPs but only those that
-   are themselves CHARSXPs, which is what they will be if they are
-   part of a hash chain.  Theoretically, for CHARSXPs the ATTRIB field
-   should always be either R_NilValue or a CHARSXP. */
-#ifdef PROTECTCHECK
-# define HAS_GENUINE_ATTRIB(x) \
-    (TYPEOF(x) != FREESXP && ATTRIB(x) != R_NilValue && \
-     (TYPEOF(x) != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
-#else
-# define HAS_GENUINE_ATTRIB(x) \
-    (ATTRIB(x) != R_NilValue && \
-     (TYPEOF(x) != CHARSXP || TYPEOF(ATTRIB(x)) != CHARSXP))
-#endif
-
-#ifdef PROTECTCHECK
-#define FREE_FORWARD_CASE case FREESXP: if (GCManager::gc_inhibit_release()) break;
-#else
-#define FREE_FORWARD_CASE
-#endif
-/*** assume for now all ALTREP nodes are based on CONS nodes */
-#define DO_CHILDREN(__n__2,dc__action__,dc__extra__) do { \
-  SEXP __n__ = (SEXP) (__n__2); \
-  if (HAS_GENUINE_ATTRIB(__n__)) \
-    dc__action__(ATTRIB(__n__), dc__extra__); \
-  if (ALTREP(__n__)) {					\
-	  dc__action__(CLASS(__n__), dc__extra__);	\
-	  dc__action__(DATA1(__n__), dc__extra__);	\
-	  dc__action__(DATA2(__n__), dc__extra__);	\
-      }							\
-  else \
-  switch (TYPEOF(__n__)) { \
-  case NILSXP: \
-  case BUILTINSXP: \
-  case SPECIALSXP: \
-  case CHARSXP: \
-  case LGLSXP: \
-  case INTSXP: \
-  case REALSXP: \
-  case CPLXSXP: \
-  case RAWSXP: \
-    break; \
-  case OBJSXP: \
-    dc__action__(S4TAG(__n__), dc__extra__); \
-    break; \
-  case WEAKREFSXP: \
-    dc__action__(WEAKREF_KEY(__n__), dc__extra__); \
-    dc__action__(WEAKREF_VALUE(__n__), dc__extra__); \
-    dc__action__(WEAKREF_FINALIZER(__n__), dc__extra__); \
-    break; \
-  case STRSXP: \
-    { \
-      for (R_xlen_t i = 0; i < XLENGTH(__n__); i++) \
-	dc__action__(VECTOR_ELT_0(__n__, i), dc__extra__); \
-    } \
-    break; \
-  case EXPRSXP: \
-  case VECSXP: \
-    { \
-      for (R_xlen_t i = 0; i < XLENGTH(__n__); i++) \
-	dc__action__(VECTOR_ELT_0(__n__, i), dc__extra__); \
-    } \
-    break; \
-  case ENVSXP: \
-    dc__action__(FRAME(__n__), dc__extra__); \
-    dc__action__(ENCLOS(__n__), dc__extra__); \
-    dc__action__(HASHTAB(__n__), dc__extra__); \
-    break; \
-  case LISTSXP: \
-    dc__action__(TAG(__n__), dc__extra__); \
-    if (BOXED_BINDING_CELLS || BNDCELL_TAG(__n__) == NILSXP) \
-      dc__action__(CAR0(__n__), dc__extra__); \
-    dc__action__(CDR(__n__), dc__extra__); \
-    break; \
-  case LANGSXP: \
-  case DOTSXP: \
-    dc__action__(TAG(__n__), dc__extra__); \
-    dc__action__(CAR0(__n__), dc__extra__); \
-    dc__action__(CDR(__n__), dc__extra__); \
-    break; \
-  case PROMSXP: \
-    dc__action__(PRCODE(__n__), dc__extra__); \
-    if (BOXED_BINDING_CELLS || PROMISE_TAG(__n__) == NILSXP) \
-      dc__action__(PRVALUE0(__n__), dc__extra__); \
-    dc__action__(PRENV(__n__), dc__extra__); \
-    break; \
-  case CLOSXP: \
-    dc__action__(FORMALS(__n__), dc__extra__); \
-    dc__action__(BODY(__n__), dc__extra__); \
-    dc__action__(CLOENV(__n__), dc__extra__); \
-    break; \
-  case SYMSXP: \
-    dc__action__(PRINTNAME(__n__), dc__extra__); \
-    dc__action__(SYMVALUE(__n__), dc__extra__); \
-    dc__action__(INTERNAL(__n__), dc__extra__); \
-    break; \
-  case BCODESXP: \
-    dc__action__(CODE0(__n__), dc__extra__); \
-    dc__action__(CONSTS(__n__), dc__extra__); \
-    dc__action__(EXPR(__n__), dc__extra__); \
-    break; \
-  case EXTPTRSXP: \
-    dc__action__(EXTPTR_PROT(__n__), dc__extra__); \
-    dc__action__(EXTPTR_TAG(__n__), dc__extra__); \
-    break; \
-  FREE_FORWARD_CASE \
-  default: \
-    BadObject::register_bad_object(__n__, __FILE__, __LINE__);		\
-  } \
-} while(0)
-
-/* This macro should help localize where a FREESXP node is encountered
-   in the GC */
-#ifdef PROTECTCHECK
-#define CHECK_FOR_FREE_NODE(s) { \
-    const GCNode *cf__n__ = (s); \
-    if (TYPEOF(cf__n__) == FREESXP && !GCManager::gc_inhibit_release()) \
-	BadObject::register_bad_object(cf__n__, __FILE__, __LINE__); \
-}
-#else
-#define CHECK_FOR_FREE_NODE(s)
-#endif
-
-/* Forwarding Nodes.  These macros mark nodes or children of nodes and
-   place them on the forwarding list.  The forwarding list is assumed
-   to be in a local variable of the caller named
-   forwarded_nodes. */
-
-void MARK_THRU(const GCNode *s);
-
-#define FC_FORWARD_NODE(__n__,__dummy__) MARK_THRU(__n__)
-#define FORWARD_CHILDREN(__n__) \
-    DO_CHILDREN(__n__, FC_FORWARD_NODE, 0)
-
-void MARK_THRU(const GCNode *fn__n__) {
-    if (fn__n__ && !NODE_IS_MARKED(fn__n__)) {
-        CHECK_FOR_FREE_NODE(fn__n__);
-        MARK_NODE(fn__n__);
-        int __gen__ = NODE_GENERATION(fn__n__);
-        GCNode::s_Old[__gen__]->splice(fn__n__);
-        FORWARD_CHILDREN(fn__n__);
-    }
-}
-
+/* The Generational Collector. */
 namespace CXXR
 {
     void RObject::visitReferents(const_visitor *v) const
@@ -1505,6 +1356,8 @@ void GCNode::propagateAges(unsigned int max_generation)
 #endif
 }
 
+#define MARK_THRU(s) if (s != R_NilValue) marker(s);
+
 void GCNode::mark(unsigned int max_generation)
 {
     /* unmark all marked nodes in old generations to be collected and
@@ -1527,6 +1380,9 @@ void GCNode::mark(unsigned int max_generation)
             BULK_MOVE(s_Old[gen].get(), s_New.get());
     }
 
+    Marker marker(1 + max_generation); // some of the nodes have already aged (see above)
+    GCRootBase::visitRoots(&marker);
+    GCStackRootBase::visitRoots(&marker);
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
@@ -1534,7 +1390,7 @@ void GCNode::mark(unsigned int max_generation)
         for (const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
             s != s_OldToNew[gen].get();
             s = NEXT_NODE(s))
-            FORWARD_CHILDREN(s);
+            s->visitReferents(&marker);
 #endif
 
     /* forward all roots */
@@ -1577,18 +1433,6 @@ void GCNode::mark(unsigned int max_generation)
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
         MARK_THRU(R_PPStack[i]);
 
-    for (auto &node : *(GCStackRootBase::s_roots.get()))
-    {
-        if (node)
-            MARK_THRU(node);
-    }
-
-    for (GCRootBase *node = GCRootBase::s_list_head; node; node = node->m_next)
-    {
-        if (node->ptr())
-            MARK_THRU(node->ptr());
-    }
-
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
         if (sp->tag == RAWMEM_TAG)
             sp += sp->u.ival;
@@ -1628,22 +1472,8 @@ void GCNode::mark(unsigned int max_generation)
     }
 
     /* process CHARSXP cache */
-    std::vector<String::key> to_delete;
-    for (auto &[key, charsxp] : String::s_hash_table)
-    {
-        if (!NODE_IS_MARKED(charsxp))
-        {
-            to_delete.push_back(key);
-        }
-        else
-        {
-            MARK_THRU(charsxp);
-        }
-    }
-    for (auto &key : to_delete)
-    {
-        String::s_hash_table.erase(key);
-    }
+    String::visitTable();
+
 
 #ifdef PROTECTCHECK
     auto isVectorType = [](const GCNode *node) -> bool
