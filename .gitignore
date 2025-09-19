@@ -197,3 +197,4 @@ tests/PR17859.2_1.0.tar.gz
 tests/PR17859.3_1.0.tar.gz
 tests/S3export_1.0.tar.gz
 share/bibliographies/R.rds
+share/dictionaries/*.rds

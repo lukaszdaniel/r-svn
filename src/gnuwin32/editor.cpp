@@ -269,7 +269,7 @@ static void editorsaveas(editor c)
     wchar_t *wname;
 
     setuserfilterW(L"R files (*.R)\0*.R\0S files (*.q, *.ssc, *.S)\0*.q;*.ssc;*.S\0All files (*.*)\0*.*\0\0");
-    wname = askfilesaveW(G_("Save script as"), "");
+    wname = askfilesaveW(G_("Save script as"), p->file ? p->filename : "");
     if (wname) {
 	char *name = wchar_to_utf8(wname);
 	const char *q = strchr(name, '.');
