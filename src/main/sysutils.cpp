@@ -2088,12 +2088,12 @@ static const wchar_t *wfromASCII(const char *src, size_t len)
 }
 
 #ifdef Win32
-static const char TO_WCHAR[] = "UTF-16LE";
+static constexpr char TO_WCHAR[] = "UTF-16LE";
 #else
 # ifdef WORDS_BIGENDIAN
-static const char TO_WCHAR[] = "UCS-4BE";
+static constexpr char TO_WCHAR[] = "UCS-4BE";
 # else
-static const char TO_WCHAR[] = "UCS-4LE";
+static constexpr char TO_WCHAR[] = "UCS-4LE";
 # endif
 #endif
 
@@ -2437,9 +2437,9 @@ attribute_hidden void R::invalidate_cached_recodings(void)
 
 /* in C11 these could use char32_t */
 #ifdef WORDS_BIGENDIAN
-static const char UNICODE[] = "UCS-4BE";
+static constexpr char UNICODE[] = "UCS-4BE";
 #else
-static const char UNICODE[] = "UCS-4LE";
+static constexpr char UNICODE[] = "UCS-4LE";
 #endif
 
 /* used in gram.c and devX11.c */

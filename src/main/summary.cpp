@@ -34,6 +34,7 @@
 
 #include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -425,8 +426,11 @@ static bool cprod(SEXP sx, Complex *value, bool narm)
 attribute_hidden
 SEXP R::fixup_NaRm(SEXP args)
 {
+    GCStackRoot<> t;
+    GCStackRoot<> na_value;
+
     /* Need to make sure na.rm is last and exists */
-    SEXP na_value = ScalarLogical(FALSE);
+    na_value = ScalarLogical(FALSE);
     bool seen_NaRm = false;
     for(SEXP a = args, prev = R_NilValue; a != R_NilValue; a = CDR(a)) {
 	if(TAG(a) == R_NaRmSymbol) {
@@ -442,10 +446,7 @@ SEXP R::fixup_NaRm(SEXP args)
 	prev = a;
     }
 
-    PROTECT(na_value);
-    SEXP t = CONS(na_value, R_NilValue);
-    UNPROTECT(1);
-    PROTECT(t);
+    t = CONS(na_value, R_NilValue);
     SET_TAG(t, R_NaRmSymbol);
     if (args == R_NilValue)
 	args = t;
@@ -454,7 +455,6 @@ SEXP R::fixup_NaRm(SEXP args)
 	while (CDR(r) != R_NilValue) r = CDR(r);
 	SETCDR(r, t);
     }
-    UNPROTECT(1);
     return args;
 }
 
@@ -696,7 +696,7 @@ attribute_hidden SEXP do_summary(SEXP call, SEXP op, SEXP args, SEXP env)
     case 3:/* max */
 	DbgP2("do_summary: max(.. na.rm=%d) ", narm);
 	ans_type = INTSXP;
-	zcum.r = R_NegInf;;
+	zcum.r = R_NegInf;
 	icum = R_INT_MIN;
 	break;
 
@@ -1128,7 +1128,7 @@ attribute_hidden SEXP do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 
     i = (indx != -1);
-    bool large = (indx + 1) > INT_MAX;
+    bool large = ((indx + 1) > INT_MAX);
     PROTECT(ans = allocVector(large ? REALSXP : INTSXP, i ? 1 : 0));
     if (i) {
 	if(large)

@@ -2161,7 +2161,7 @@ static SEXP RestoreToEnv(SEXP ans, SEXP aenv)
 	PROTECT(ans);
 	PROTECT(names = getAttrib(ans, R_NamesSymbol)); /* PROTECT needed?? */
 	if (TYPEOF(names) != STRSXP || LENGTH(names) != LENGTH(ans))
-	    error("%s", _("not a valid named list"));
+	    error(_("'%s' is not a valid named list"), CHAR(PRINTNAME(TAG(ans))));
 	for (int i = 0; i < LENGTH(ans); i++) {
 	    SEXP sym = installTrChar(STRING_ELT(names, i));
 	    obj = VECTOR_ELT(ans, i);

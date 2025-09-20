@@ -102,25 +102,25 @@ attribute_hidden SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* maintain global trace & debug state */
 
-static bool tracing_state = TRUE, debugging_state = TRUE;
-#define GET_TRACE_STATE tracing_state
-#define GET_DEBUG_STATE debugging_state
-#define SET_TRACE_STATE(value) tracing_state = value
-#define SET_DEBUG_STATE(value) debugging_state = value
+static bool s_tracing_state = TRUE, s_debugging_state = TRUE;
+#define GET_TRACE_STATE s_tracing_state
+#define GET_DEBUG_STATE s_debugging_state
+#define SET_TRACE_STATE(value) s_tracing_state = value
+#define SET_DEBUG_STATE(value) s_debugging_state = value
 
 attribute_hidden SEXP do_traceOnOff(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP onOff = CAR(args);
-    bool trace = (PRIMVAL(op) == 0),
-	prev = trace ? GET_TRACE_STATE : GET_DEBUG_STATE;
+    bool trace = (PRIMVAL(op) == 0); // Otherwise it's debug.
+    bool prev = trace ? GET_TRACE_STATE : GET_DEBUG_STATE;
 
     if (length(onOff) > 0) {
 	bool _new = asLogical(onOff);
-	if (_new == TRUE || _new == FALSE)
+	if (_new == TRUE || _new == FALSE) {
 	    if(trace) SET_TRACE_STATE(_new);
 	    else      SET_DEBUG_STATE(_new);
-	else
+	} else
 	    error(_("'%s' argument must be TRUE or FALSE"),
 		  trace ? "tracingState" : "debuggingState");
     }

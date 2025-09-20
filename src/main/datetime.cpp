@@ -933,10 +933,10 @@ static void makelt(stm *tm, SEXP ans, R_xlen_t i, bool valid, double frac_secs)
     reset_tz(&tzsi);				\
     SEXP nm = getAttrib(x, R_NamesSymbol);				\
     if(nm != R_NilValue) setAttrib(VECTOR_ELT(ans, 5), R_NamesSymbol, nm); \
-    MAYBE_INIT_balanced							\
+    MAYBE_INIT_balanced					\
     setAttrib(ans, lt_balancedSymbol, _balanced_);
 
-#define END_MAKElt_no_reset					\
+#define END_MAKElt_no_reset				\
     setAttrib(ans, R_NamesSymbol, ansnames);		\
     SEXP klass = PROTECT(allocVector(STRSXP, 2));	\
     SET_STRING_ELT(klass, 0, mkChar("POSIXlt"));	\
@@ -945,7 +945,7 @@ static void makelt(stm *tm, SEXP ans, R_xlen_t i, bool valid, double frac_secs)
     if(isString(tzone)) setAttrib(ans, install("tzone"), tzone);	\
     SEXP nm = getAttrib(x, R_NamesSymbol);				\
     if(nm != R_NilValue) setAttrib(VECTOR_ELT(ans, 5), R_NamesSymbol, nm); \
-    MAYBE_INIT_balanced							\
+    MAYBE_INIT_balanced					\
     setAttrib(ans, lt_balancedSymbol, _balanced_);
 
 /*
@@ -962,7 +962,7 @@ static void makelt(stm *tm, SEXP ans, R_xlen_t i, bool valid, double frac_secs)
 */
 
 // used by valid_POSIX do_asPOSIXlt do_strptime do_D2POSIXlt do_balancePOSIXlt
-static const char ltnames[][11] =
+static constexpr char ltnames[][11] =
   // 0     1      2       3       4      5       6       7       8
 { "sec", "min", "hour", "mday", "mon", "year", "wday", "yday", "isdst",
   // 9       10
@@ -1046,7 +1046,7 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP x = PROTECT(coerceVector(CAR(args), REALSXP));
     SEXP stz = CADR(args);
-    if(!isString(stz) || LENGTH(stz) != 1)
+    if (!isString(stz) || LENGTH(stz) != 1)
 	error(_("invalid '%s' value"), "tz");
     const char *tz = CHAR(STRING_ELT(stz, 0));
     if(strlen(tz) == 0) {
@@ -1153,7 +1153,7 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
     valid_POSIXlt(x, 9);
 
     SEXP stz;
-    if(!isString((stz = CADR(args))) || LENGTH(stz) != 1)
+    if (!isString((stz = CADR(args))) || LENGTH(stz) != 1)
 	error(_("invalid '%s' value"), "tz");
     const char *tz = CHAR(STRING_ELT(stz, 0));
     if(strlen(tz) == 0) { // tz = ""
@@ -1658,7 +1658,7 @@ attribute_hidden SEXP do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString(stz) || LENGTH(stz) != 1)
 	error(_("invalid '%s' value"), "tz");
     const char *tz = CHAR(STRING_ELT(stz, 0));
-    if (!tz[0]) tz = "UTC";;
+    if (!tz[0]) tz = "UTC";
     R_xlen_t n = XLENGTH(x);
     SEXP ans = PROTECT(allocVector(VECSXP, 11));
     for(int i = 0; i < 9; i++)

@@ -834,9 +834,9 @@ static double PostScriptStringWidth(const unsigned char *str, int enc,
    FIXME: this assumes the mbcs is UTF-8.
 */
 # ifdef WORDS_BIGENDIAN
-static const char UCS2ENC[] = "UCS-2BE";
+static constexpr char UCS2ENC[] = "UCS-2BE";
 # else
-static const char UCS2ENC[] = "UCS-2LE";
+static constexpr char UCS2ENC[] = "UCS-2LE";
 # endif
 
 static void PostScriptMetricInfo(int c, double *ascent, double *descent, double *width,

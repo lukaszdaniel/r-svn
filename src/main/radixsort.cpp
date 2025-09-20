@@ -1829,7 +1829,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
             // continue; // BASELINE short circuit timing
             // point. Up to here is the cost of creating xsub.
             // [i|d|c]sorted(); very low cost, sequential
-//            tmp = (*f)(xsub, thisgrpn);
+            // tmp = (*f)(xsub, thisgrpn);
 	    switch(fgtype) {
 	    case 1:
 		tmp = isorted((int *)xsub, thisgrpn);
@@ -1867,7 +1867,7 @@ attribute_hidden SEXP do_radixsort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    newo[0] = -1;
 	    // may update osub directly, or if not will put the
 	    // result in global newo
-//	    (*g)(xsub, osub, thisgrpn);
+	    // (*g)(xsub, osub, thisgrpn);
 	    switch(fgtype) {
 	    case 1: isort((int *)xsub, osub, thisgrpn); break;
 	    case 2: dsort((double *)xsub, osub, thisgrpn); break;

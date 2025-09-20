@@ -659,22 +659,22 @@ void drawconsole(control c, rect r) /* r is unused here */
     int i, ll, wd, maxwd = 0;
 
     ll = min(NUMLINES, (xint) ROWS);
-    if(!BM) return;;     /* This is a workaround for PR#1711.
+    if (!BM) return;     /* This is a workaround for PR#1711.
 			    BM should never be null here */
     if (p->kind == PAGER)
 	gfillrect(BM, p->guiColors[pagerbg], getrect(BM));
     else
 	gfillrect(BM, p->guiColors[consolebg], getrect(BM));
-    if(!ll) return;;
+    if (!ll) return;;
     for (i = 0; i < ll; i++) {
 	wd = WRITELINE(NEWFV + i, i);
-	if(wd > maxwd) maxwd = wd;
+	if (wd > maxwd) maxwd = wd;
     }
     RSHOW(getrect(c));
     FV = NEWFV;
     p->needredraw = 0;
 /* always display scrollbar if FC > 0 */
-    if(maxwd < COLS - 1) maxwd = COLS - 1;
+    if (maxwd < COLS - 1) maxwd = COLS - 1;
     maxwd += FC;
     gchangescrollbar(c, HWINSB, FC, maxwd-FC, COLS,
 		     p->kind == CONSOLE || NUMLINES > (xint) ROWS);
@@ -2129,7 +2129,7 @@ void consoleresize(console c, rect r)
        R_ShowMessage(G_("Insufficient memory. Please close the console"));
        return ;
     }
-    if(!p->lbuf) return;;    /* don't implement resize if no content
+    if(!p->lbuf) return;    /* don't implement resize if no content
 				   yet in pager */
     if (CURROW >= 0) {
 	if (NUMLINES > (xint) ROWS) {

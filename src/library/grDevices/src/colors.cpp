@@ -1338,9 +1338,9 @@ static ColorDataBaseEntry ColorDataBase[] = {
 
 static unsigned int hexdigit(int digit)
 {
-    if('0' <= digit && digit <= '9') return digit - '0';
-    if('A' <= digit && digit <= 'F') return 10 + digit - 'A';
-    if('a' <= digit && digit <= 'f') return 10 + digit - 'a';
+    if ('0' <= digit && digit <= '9') return digit - '0';
+    if ('A' <= digit && digit <= 'F') return 10 + digit - 'A';
+    if ('a' <= digit && digit <= 'f') return 10 + digit - 'a';
     /*else */ error("%s", _("invalid hex digit in 'color' or 'lty'"));
     return digit; /* never occurs (-Wall) */
 }
@@ -1350,7 +1350,7 @@ static unsigned int hexdigit(int digit)
 static rcolor rgb2col(const char *rgb)
 {
     unsigned int r = 0, g = 0, b = 0, a = 0; /* -Wall */
-    if(rgb[0] != '#')
+    if (rgb[0] != '#')
 	error("%s", _("invalid RGB specification"));
     switch (strlen(rgb)) {
     case 9:
@@ -1385,7 +1385,6 @@ static rcolor rgb2col(const char *rgb)
 
 static rcolor name2col(const char *nm)
 {
-    int i;
     if(streql(nm, "NA") || streql(nm, "transparent"))
 	/*
 	 * Paul 01/07/04 (2004-07-01?)
@@ -1402,8 +1401,8 @@ static rcolor name2col(const char *nm)
 	 * not drawing.
 	 */
 	return R_TRANWHITE;
-    for(i = 0; ColorDataBase[i].name ; i++) {
-	if(StrMatch(ColorDataBase[i].name, nm))
+    for (int i = 0; ColorDataBase[i].name ; i++) {
+	if (StrMatch(ColorDataBase[i].name, nm))
 	    return ColorDataBase[i].code;
     }
     error(_("invalid color name '%s'"), nm);
@@ -1577,10 +1576,10 @@ static void savePalette_(bool save)
 }
 
 /* same as src/main/colors.c */
-typedef rcolor (*F1)(SEXP x, int i, rcolor bg);
-typedef const char * (*F2)(rcolor col);
-typedef rcolor (*F3)(const char *s);
-typedef void (*F4)(bool save);
+using F1 = rcolor (*)(SEXP x, int i, rcolor bg);
+using F2 = const char * (*)(rcolor col);
+using F3 = rcolor (*)(const char *s);
+using F4 = void (*)(bool save);
 
 void Rg_set_col_ptrs(F1 f1, F2 f2, F3 f3, F4 f4); // from main/colors.c
 

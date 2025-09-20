@@ -39,10 +39,10 @@
 #include <R_ext/GraphicsEngine.h>
 
 /* same as src/library/grDevices/src/colors.cpp */
-typedef rcolor (*F1)(SEXP x, int i, rcolor bg);
-typedef const char * (*F2)(rcolor col);
-typedef rcolor (*F3)(const char *s);
-typedef void (*F4)(bool save);
+using F1 = rcolor (*)(SEXP x, int i, rcolor bg);
+using F2 = const char * (*)(rcolor col);
+using F3 = rcolor (*)(const char *s);
+using F4 = void (*)(bool save);
 
 static F1 ptr_RGBpar3;
 static F2 ptr_col2name;

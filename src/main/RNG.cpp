@@ -44,7 +44,7 @@ using namespace R;
 
 static DL_FUNC User_unif_fun, User_unif_nseed,
 	User_unif_seedloc;
-typedef void (*UnifInitFun)(Int32);
+using UnifInitFun = void (*)(Int32);
 
 UnifInitFun User_unif_init = NULL; /* some picky compilers */
 
@@ -420,9 +420,9 @@ void GetRNGstate(void)
     SEXP seeds;
 
     seeds = GetSeedsFromVar();
-    if (seeds == R_UnboundValue)
+    if (seeds == R_UnboundValue) {
 	Randomize(RNG_kind);
-    else {
+    } else {
 	/* this might re-set the generator */
 	if(GetRNGkind(seeds)) return;
 	len_seed = RNG_Table[RNG_kind].n_seed;
