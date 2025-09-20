@@ -1606,7 +1606,7 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans;
     PROTECT_WITH_INDEX(ans = allocVector(STRSXP, countmax), &idx);
     int count = 0;
-    R_StringBuffer pb = {NULL, 0, 16};
+    R_StringBuffer pb = R_StringBuffer(16);
     /* set up a context which will free the string buffer if
        there is an error */
     try {
@@ -1674,7 +1674,7 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans;
     PROTECT_WITH_INDEX(ans = allocVector(STRSXP, countmax), &idx);
     int count = 0;
-    R_StringBuffer pb = {NULL, 0, 16};
+    R_StringBuffer pb = R_StringBuffer(16);
     /* set up a context which will free the string buffer if
        there is an error */
     try {

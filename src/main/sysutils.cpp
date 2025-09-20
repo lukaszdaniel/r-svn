@@ -227,8 +227,8 @@ FILE *R::RC_fopen(const SEXP fn, const char *mode, const bool expand)
 {
     CXXR::RAllocStack::Scope rscope;
     const char *filename = translateCharFP(fn), *res;
-    if(fn == NA_STRING || !filename) return NULL;
-    if(expand) res = R_ExpandFileName(filename);
+    if (fn == NA_STRING || !filename) return NULL;
+    if (expand) res = R_ExpandFileName(filename);
     else res = filename;
 
     return fopen(res, mode);
@@ -250,7 +250,7 @@ char *R_HomeDir(void)
 attribute_hidden SEXP do_interactive(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    return ScalarLogical( (R_Interactive) ? 1 : 0 );
+    return ScalarLogical(R_Interactive);
 }
 
 attribute_hidden SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -623,7 +623,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *sub; // null for no substitution.
     size_t inb, outb, res;
     size_t inp_unit_size = 0; /* uninitialized */
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     bool isRawlist = false;
 
     checkArity(op, args);
@@ -1843,7 +1843,7 @@ const char *Rf_translateChar(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     translateToNative(ans, &cbuff, t, 0);
     return copyAndFreeStringBuffer(&cbuff);
 }
@@ -1857,7 +1857,7 @@ const char *R::translateCharFP(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     translateToNative(ans, &cbuff, t, 1);
     return copyAndFreeStringBuffer(&cbuff);
 }
@@ -1872,7 +1872,7 @@ const char *R::translateCharFP2(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     if (translateToNative(ans, &cbuff, t, 2)) {
 	R_FreeStringBuffer(&cbuff);
 	return NULL;
@@ -1886,7 +1886,7 @@ SEXP Rf_installTrChar(SEXP x)
     nttype_t t = needsTranslation(x);
     if (t == NT_NONE) return installNoTrChar(x);
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     // For back-compatibility this allows installing
     // symbols with escapes, with a warning.
     translateToNative(CHAR(x), &cbuff, t, 2);
@@ -2019,7 +2019,7 @@ const char *Rf_translateCharUTF8(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     translateToUTF8(ans, &cbuff, t, 0);
     return copyAndFreeStringBuffer(&cbuff);
 }
@@ -2034,7 +2034,7 @@ const char *R::trCharUTF8(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     translateToUTF8(ans, &cbuff, t, 1);
     return copyAndFreeStringBuffer(&cbuff);
 }
@@ -2048,7 +2048,7 @@ const char *R::trCharUTF82(SEXP x)
     const char *ans = CHAR(x);
     if (t == NT_NONE) return ans;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     if (translateToUTF8(ans, &cbuff, t, 2)) {
 	R_FreeStringBuffer(&cbuff);
 	return NULL;
@@ -2211,7 +2211,7 @@ const wchar_t *R::wtransChar(SEXP x)
     if (t == NT_FROM_ASCII)
 	return wfromASCII(CHAR(x), LENGTH(x));
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     translateToWchar(CHAR(x), &cbuff, t, 0);
     return wcopyAndFreeStringBuffer(&cbuff);
 }
@@ -2225,7 +2225,7 @@ const wchar_t *R::wtransChar2(SEXP x)
     if (t == NT_FROM_ASCII)
 	return wfromASCII(CHAR(x), LENGTH(x));
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     if (translateToWchar(CHAR(x), &cbuff, t, 2)) {
 	R_FreeStringBuffer(&cbuff);
 	return NULL;
@@ -2365,7 +2365,7 @@ static int reEncode(const char *x, R_StringBuffer *cbuff,
    R_alloc stack */
 const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 {
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     if (reEncode(x, &cbuff, ce_in, ce_out, subst)) return x;
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
@@ -2381,7 +2381,7 @@ void R::reEnc2(const char *x, char *y, int ny,
 {
     int res;
 
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     if (reEncode(x, &cbuff, ce_in, ce_out, subst)) {
 	strncpy(y, x, ny);
 	y[ny - 1] = '\0';
@@ -2399,7 +2399,7 @@ void R::reEnc2(const char *x, char *y, int ny,
 attribute_hidden const char *R::reEnc3(const char *x,
                    const char *fromcode, const char *tocode, int subst)
 {
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
     if (reEncodeIconv(x, &cbuff, fromcode, tocode, subst)) return x;
     size_t res = strlen(cbuff.data) + 1;
     char *p = R_alloc(res, 1);
@@ -2963,7 +2963,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
     bool initialized = false;
     glob_t globbuf;
 #ifdef Win32
-    R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer cbuff = R_StringBuffer();
 #endif
 
     checkArity(op, args);

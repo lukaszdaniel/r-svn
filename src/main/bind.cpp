@@ -47,7 +47,7 @@
 #include <R_ext/Itermacros.h>
 
 #include "RBufferUtils.h"
-static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = R_StringBuffer();
 
 #include "duplicate.h"
 

@@ -53,7 +53,7 @@
 using namespace std;
 using namespace R;
 
-static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = R_StringBuffer();
 
 #ifndef HAVE_STPCPY
 static char *R_stpcpy(char *dest, const char *src)

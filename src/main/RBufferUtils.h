@@ -23,11 +23,22 @@
 /* used in bind.c character.c deparse.c, printutils.c, saveload.c
    scan.c seq.c sprintf.c sysutils.c */
 
-typedef struct {
- char *data;
- size_t bufsize;
- size_t defaultSize;
-} R_StringBuffer;
+struct R_StringBuffer {
+   char *data;
+   size_t bufsize;
+   size_t defaultSize;
+
+   R_StringBuffer(size_t init_size = MAXELTSIZE)
+      : data(nullptr), bufsize(0), defaultSize(init_size) {}
+
+   ~R_StringBuffer() {
+      if (data) {
+         free(data);
+         data = nullptr;
+      }
+      bufsize = 0;
+   }
+};
 
 #ifdef __cplusplus
 extern "C" {

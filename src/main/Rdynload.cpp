@@ -683,8 +683,8 @@ static void Rf_freeDllInfo(DllInfo *info)
 }
 
 
-typedef void (*DllInfoUnloadCall)(DllInfo *);
-typedef DllInfoUnloadCall DllInfoInitCall;
+using DllInfoUnloadCall = void (*)(DllInfo *);
+using DllInfoInitCall = DllInfoUnloadCall;
 
 static void R_callDLLUnload(DllInfo *dllInfo)
 {
@@ -704,20 +704,15 @@ static void freeRegisteredNativeSymbolCopy(SEXP);
 	/* Returns 1 if the DLL was found and removed from */
 	/* the list and returns 0 otherwise. */
 
-static int DeleteDLL(const char *path)
+static bool DeleteDLL(const char *path)
 {
     int loc;
 
     for (int i = 0; i < CountDLL; i++) {
 	if (streql(path, LoadedDLL[i]->path)) {
 	    loc = i;
-	    goto found;
-	}
-    }
-    return 0;
-found:
 #ifdef CACHE_DLL_SYM
-    if(R_osDynSymbol->deleteCachedSymbols)
+    if (R_osDynSymbol->deleteCachedSymbols)
 	R_osDynSymbol->deleteCachedSymbols(LoadedDLL[loc]);
 #endif
     R_reinit_altrep_classes(LoadedDLL[loc]);
@@ -746,14 +741,17 @@ found:
 
 
 
-    for(int i = loc + 1 ; i < CountDLL ; i++) {
+    for (int i = loc + 1; i < CountDLL; i++) {
 	LoadedDLL[i - 1] = LoadedDLL[i];
 	SET_VECTOR_ELT(DLLInfoEptrs, i - 1, VECTOR_ELT(DLLInfoEptrs, i));
     }
     CountDLL--;
     LoadedDLL[CountDLL] = NULL;
     SET_VECTOR_ELT(DLLInfoEptrs, CountDLL, R_NilValue);
-    return 1;
+    return true;
+	}
+    }
+    return false;
 }
 
 attribute_hidden
@@ -982,14 +980,14 @@ static int addDLL(char *dpath, const char *DLLname, HINSTANCE handle)
     SET_VECTOR_ELT(DLLInfoEptrs, CountDLL, R_NilValue);
     CountDLL++;
 
-    return(ans);
+    return ans;
 }
 
 static Rf_DotCSymbol *Rf_lookupRegisteredCSymbol(DllInfo *info, const char *name)
 {
     for (int i = 0; i < info->numCSymbols; i++) {
 	if (streql(name, info->CSymbols[i].name))
-	    return(&(info->CSymbols[i]));
+	    return (&(info->CSymbols[i]));
     }
     return NULL;
 }
@@ -998,7 +996,7 @@ static Rf_DotFortranSymbol *Rf_lookupRegisteredFortranSymbol(DllInfo *info, cons
 {
     for (int i = 0; i < info->numFortranSymbols; i++) {
 	if (streql(name, info->FortranSymbols[i].name))
-	    return(&(info->FortranSymbols[i]));
+	    return (&(info->FortranSymbols[i]));
     }
 
     return (Rf_DotFortranSymbol*) NULL;
@@ -1009,7 +1007,7 @@ static Rf_DotCallSymbol *Rf_lookupRegisteredCallSymbol(DllInfo *info, const char
 
     for (int i = 0; i < info->numCallSymbols; i++) {
 	if (streql(name, info->CallSymbols[i].name))
-	    return(&(info->CallSymbols[i]));
+	    return (&(info->CallSymbols[i]));
     }
     return (Rf_DotCallSymbol*) NULL;
 }
@@ -1018,7 +1016,7 @@ static Rf_DotExternalSymbol *Rf_lookupRegisteredExternalSymbol(DllInfo *info, co
 {
     for (int i = 0; i < info->numExternalSymbols; i++) {
 	if (streql(name, info->ExternalSymbols[i].name))
-	    return(&(info->ExternalSymbols[i]));
+	    return (&(info->ExternalSymbols[i]));
     }
     return (Rf_DotExternalSymbol*) NULL;
 }
@@ -1251,12 +1249,12 @@ attribute_hidden SEXP do_dynunload(SEXP call, SEXP op, SEXP args, SEXP env)
     return R_NilValue;
 }
 
-int R_moduleCdynload(const char *module, int local, int now)
+bool R_moduleCdynload(const char *module, int local, int now)
 {
     char dllpath[R_PATH_MAX], *p = getenv("R_HOME");
     DllInfo *res;
 
-    if(!p) return 0;
+    if(!p) return false;
 #ifdef R_ARCH
     snprintf(dllpath, R_PATH_MAX, "%s%smodules%s%s%s%s%s", p, FILESEP, FILESEP,
 	     R_ARCH, FILESEP, module, SHLIB_EXT);
@@ -1268,7 +1266,7 @@ int R_moduleCdynload(const char *module, int local, int now)
     if(!res)
 	warning(_("unable to load shared object '%s':\n  %s"),
 		dllpath, DLLerror);
-    return res != NULL ? 1 : 0;
+    return (res != NULL);
 }
 
 bool R::R_cairoCdynload(int local, int now)
@@ -1473,7 +1471,7 @@ attribute_hidden SEXP R_getDllTable(void)
 {
     SEXP ans, nm;
 
- again:
+    do {
     PROTECT(ans = allocVector(VECSXP, CountDLL));
     for(int i = 0; i < CountDLL; i++)
 	SET_VECTOR_ELT(ans, i, Rf_MakeDLLInfo(LoadedDLL[i]));
@@ -1486,8 +1484,7 @@ attribute_hidden SEXP R_getDllTable(void)
        CountDLL can be reduced during this loop.  A simple work-around
        is to just try again until CountDLL at the end is the same as
        it was at the beginning.  LT */
-    if (CountDLL != LENGTH(ans))
-	goto again;
+    } while (CountDLL != LENGTH(ans));
 
     PROTECT(ans);
     PROTECT(nm = allocVector(STRSXP, CountDLL));
@@ -1639,12 +1636,12 @@ attribute_hidden SEXP R_getRegisteredRoutines(SEXP dll)
     SEXP ans, snames;
     const char * const names[] = {".C", ".Call", ".Fortran", ".External"};
 
-    if(TYPEOF(dll) != EXTPTRSXP &&
+    if (TYPEOF(dll) != EXTPTRSXP &&
        R_ExternalPtrTag(dll) != install("DLLInfo"))
 	error("%s", _("R_getRegisteredRoutines() expects a DllInfo reference"));
 
     info = (DllInfo *) R_ExternalPtrAddr(dll);
-    if(!info) error("%s", _("NULL value passed for DllInfo"));
+    if (!info) error("%s", _("NULL value passed for DllInfo"));
 
 
     PROTECT(ans = allocVector(VECSXP, 4));
@@ -1655,7 +1652,7 @@ attribute_hidden SEXP R_getRegisteredRoutines(SEXP dll)
     SET_VECTOR_ELT(ans, 3, R_getRoutineSymbols(R_EXTERNAL_SYM, info));
 
     PROTECT(snames = allocVector(STRSXP, 4));
-    for(int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++)
 	SET_STRING_ELT(snames, i, mkChar(names[i]));
     setAttrib(ans, R_NamesSymbol, snames);
     UNPROTECT(2);

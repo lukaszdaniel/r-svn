@@ -262,7 +262,7 @@ static SEXP deparse1WithCutoff(SEXP call, bool abbrev, size_t cutoff,
 	localData.indent = 0;
 	localData.strvec = NULL;
 	localData.left = 0;
-	localData.buffer = { NULL, 0, BUFSIZE };
+	localData.buffer = R_StringBuffer();
 	localData.cutoff = DEFAULT_Cutoff;
 	localData.backtick = false;
 	localData.opts = 0;

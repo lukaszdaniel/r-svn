@@ -318,7 +318,7 @@ static double TeX(TEXPAR which, pGEcontext gc, pGEDevDesc dd)
     case xi13:	  /* big_op_spacing5 */
 	return 0.15 * XHeight(gc, dd);
     default:/* never happens (enum type) */
-	error("%s", _("invalid `which' in C function TeX")); return 0;/*-Wall*/
+	error("%s", _("invalid 'which' in C function TeX")); return 0;/*-Wall*/
     }
 }
 
@@ -887,7 +887,7 @@ static BBOX GlyphBBox(int chr, pGEcontext gc, pGEDevDesc dd)
     BBOX bbox;
     double height, depth, width;
     int chr1 = chr;
-    if(dd->dev->wantSymbolUTF8 && gc->fontface == 5)
+    if (dd->dev->wantSymbolUTF8 && gc->fontface == 5)
 	chr1 = -Rf_AdobeSymbol2ucs2(chr);
     GEMetricInfo(chr1, gc, &height, &depth, &width, dd);
     bboxHeight(bbox) = fromDeviceHeight(height, MetricUnit, dd);

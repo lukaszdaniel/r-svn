@@ -970,7 +970,7 @@ static int richeditfind(HWND hwnd, char *what, int matchcase,
     long start, end;
     CHARRANGE sel;
     WPARAM w = 0;
-    FINDTEXTEXW ft = { 0 };
+    FINDTEXTEXW ft = { {0, 0}, L"", {0, 0} };
     sendmessage (hwnd, EM_EXGETSEL, 0, &sel) ;
     start = sel.cpMin;
     end = sel.cpMax;

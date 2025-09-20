@@ -101,6 +101,9 @@ struct LocalData {
     bool embedWarn;
     bool skipNul;
     char convbuf[100];
+    LocalData() : NAstrings(nullptr), quiet(0), sepchar(0), decchar('.'), quoteset(nullptr), comchar(NO_COMCHAR), ttyflag(0), con(nullptr),
+		  wasopen(false), escapes(false), save(0), isLatin1(false), isUTF8(false), atStart(false), embedWarn(false), skipNul(false) {}
+    ~LocalData() {}
 };
 
 static SEXP insertString(char *str, LocalData *l)
@@ -484,14 +487,13 @@ static R_INLINE int isNAstring(const char *buf, int mode, LocalData *d)
     return 0;
 }
 
-NORET static R_INLINE void expected(const char *what, const char *got, LocalData *d)
+static R_INLINE void expected(LocalData *d)
 {
     int c;
     if (d->ttyflag) { /* This is safe in a MBCS */
 	while ((c = scanchar(false, d)) != R_EOF && c != '\n')
 	    ;
     }
-    error(_("scan() expected '%s', got '%s'"), what, got);
 }
 
 static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
@@ -506,7 +508,7 @@ static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
 	else {
 	    int tr = StringTrue(buffer), fa = StringFalse(buffer);
 	    if(tr || fa) LOGICAL(ans)[i] = tr;
-	    else expected("a logical", buffer, d);
+	    else { expected(d); error(_("scan() expected a logical, got '%s'"), buffer); };
 	}
 	break;
     case INTSXP:
@@ -515,7 +517,7 @@ static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
 	else {
 	    INTEGER(ans)[i] = Strtoi(buffer, 10);
 	    if (INTEGER(ans)[i] == NA_INTEGER)
-		expected("an integer", buffer, d);
+		{ expected(d); error(_("scan() expected an integer, got '%s'"), buffer); };
 	}
 	break;
     case REALSXP:
@@ -524,7 +526,7 @@ static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
 	else {
 	    REAL(ans)[i] = Strtod(buffer, &endp, false, d);
 	    if (!isBlankString(endp))
-		expected("a real", buffer, d);
+		{ expected(d); error(_("scan() expected a real, got '%s'"), buffer); }
 	}
 	break;
     case CPLXSXP:
@@ -533,7 +535,7 @@ static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
 	else {
 	    COMPLEX(ans)[i] = strtoc(buffer, &endp, false, d);
 	    if (!isBlankString(endp))
-		expected("a complex", buffer, d);
+		{ expected(d); error(_("scan() expected a complex, got '%s'"), buffer); }
 	}
 	break;
     case STRSXP:
@@ -548,7 +550,7 @@ static void extractItem(char *buffer, SEXP ans, R_xlen_t i, LocalData *d)
 	else {
 	    RAW(ans)[i] = strtoraw(buffer, &endp);
 	    if (!isBlankString(endp))
-		expected("a raw", buffer, d);
+		{ expected(d); error(_("scan() expected a raw, got '%s'"), buffer);  }
 	}
 	break;
     default:
@@ -563,7 +565,7 @@ static SEXP scanVector(SEXPTYPE type, R_xlen_t maxitems, R_xlen_t maxlines,
     int c, bch, ic;
     R_xlen_t i, blocksize, linesread, n, nprev;
     char *buffer;
-    R_StringBuffer strBuf = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer strBuf = R_StringBuffer();
 
     if (maxitems > 0) blocksize = maxitems;
     else blocksize = SCAN_BLOCKSIZE;
@@ -688,7 +690,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
     int c, bch, ic;
     R_xlen_t blksize, i, ii, j, n, nc, linesread, colsread;
     R_xlen_t badline;
-    R_StringBuffer buf = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer buf = R_StringBuffer();
 
     nc = xlength(what);
     if (!nc) {
@@ -811,7 +813,7 @@ static SEXP scanFrame(SEXP what, R_xlen_t maxitems, R_xlen_t maxlines,
 	n++;
     }
     if (!d->quiet)
-	REprintf("Read %lld record%s\n", (long long) n, (n == 1) ? "" : "s");
+	REprintf(n_("Read %lld record\n", "Read %lld records\n", (long long) n), (long long) n);
     if (d->ttyflag) ConsolePrompt[0] = '\0';
 
     for (i = 0; i < nc; i++) {
@@ -860,8 +862,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     int c, flush, fill, blskip, multiline;
     R_xlen_t nmax, nlines, nskip;
     const char *p, *encoding;
-    LocalData data = {NULL, false, 0, '.', NULL, NO_COMCHAR, 0, NULL, false,
-		      false, 0, false, false, false, false, false, {false}};
+    LocalData data = LocalData();
     data.NAstrings = R_NilValue;
 
     checkArity(op, args);

@@ -94,7 +94,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP format, _this, a[MAXNARGS], ans /* -Wall */ = R_NilValue;
     int ns, maxlen, lens[MAXNARGS], nthis, nstar, star_arg = 0, nunused;
     bool used[MAXNARGS];
-    static R_StringBuffer outbuff = {NULL, 0, MAXELTSIZE};
+    static R_StringBuffer outbuff = R_StringBuffer();
     bool has_star, use_UTF8;
 
 #define _my_sprintf(_X_)						\

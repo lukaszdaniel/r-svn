@@ -51,7 +51,7 @@
 using namespace R;
 using namespace CXXR;
 
-static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = R_StringBuffer();
 
 #define _S4_rep_keepClass
 /* ==>  rep(<S4>, .) keeps class e.g., for list-like */

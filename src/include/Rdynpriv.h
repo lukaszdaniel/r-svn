@@ -50,7 +50,7 @@ typedef void *HINSTANCE;
 #include <Defn.h>
 #include <R_ext/Rdynload.h>
 
-int R_moduleCdynload(const char *module, int local, int now);
+bool R_moduleCdynload(const char *module, int local, int now);
 
   /*
      A name-routine pair.

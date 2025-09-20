@@ -585,7 +585,7 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
        passed on by EncodeElement -- so no way could be end user be
        responsible for freeing it.  However, this is not thread-safe. */
 
-    static R_StringBuffer gBuffer = {NULL, 0, BUFSIZE};
+    static R_StringBuffer gBuffer = R_StringBuffer();
     R_StringBuffer *buffer = &gBuffer;
 
     if (s == NA_STRING) {

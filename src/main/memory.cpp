@@ -1436,7 +1436,7 @@ void GCNode::mark(unsigned int max_generation)
     for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
         if (sp->tag == RAWMEM_TAG)
             sp += sp->u.ival;
-        else if (sp->tag == 0 || IS_PARTIAL_SXP_TAG(sp->tag))
+        else if (sp->tag == NILSXP || IS_PARTIAL_SXP_TAG(sp->tag))
             MARK_THRU(sp->u.sxpval);
     }
 
@@ -1734,7 +1734,7 @@ Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
     REAL(value)[1] = MemoryBank::doublesAllocated();
     REAL(value)[4] = R_NSize;
     REAL(value)[5] = GCManager::memoryThreshold(); // R_VSize
-    /* next four are in 0.1Mb, rounded up */
+    /* next four are in 0.1MB, rounded up */
     REAL(value)[2] = 0.1*ceil(10. * (GCNode::numNodes())/Mega * sizeof(RObject));
     REAL(value)[3] = 0.1*ceil(10. * (MemoryBank::doublesAllocated())/Mega * vsfac);
     REAL(value)[6] = 0.1*ceil(10. * R_NSize/Mega * sizeof(RObject));
@@ -1743,7 +1743,7 @@ Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
 	0.1*ceil(10. * R_MaxNSize/Mega * sizeof(RObject)) : NA_REAL;
     REAL(value)[9] = (R_MaxVSize < R_SIZE_T_MAX) ?
 	0.1*ceil(10. * R_MaxVSize/Mega * vsfac) : NA_REAL;
-    if (reset_max){
+    if (reset_max) {
 	    R_N_maxused = GCNode::numNodes();
 	    R_V_maxused = MemoryBank::doublesAllocated();
     }
@@ -4178,16 +4178,16 @@ bool R::Seql(SEXP a, SEXP b)
       we have two strings in different encodings (which must be
       non-ASCII strings). Note that one of the strings could be marked
       as unknown. */
-    if (a == b) return 1;
+    if (a == b) return true;
     /* Leave this to compiler to optimize */
     if (IS_CACHED(a) && IS_CACHED(b) && ENC_KNOWN(a) == ENC_KNOWN(b))
-	return 0;
+	return false;
     else if (IS_BYTES(a) || IS_BYTES(b)) {
 	if (IS_BYTES(a) && IS_BYTES(b))
 	    /* only get here if at least one is not cached */
 	    return streql(CHAR(a), CHAR(b));
 	else
-	    return 0;
+	    return false;
     }
     else {
 	CXXR::RAllocStack::Scope rscope;

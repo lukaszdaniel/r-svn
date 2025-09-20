@@ -121,7 +121,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 
 using namespace R;
 
-static R_StringBuffer cbuff = {NULL, 0, MAXELTSIZE};
+static R_StringBuffer cbuff = R_StringBuffer();
 
 static int int_max = INT_MAX;
 

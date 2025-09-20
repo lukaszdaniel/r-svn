@@ -74,8 +74,7 @@ R_InternetRoutines *R_setInternetRoutines(R_InternetRoutines *routines)
 
 static void internet_Init(void)
 {
-    int res;
-    res = R_moduleCdynload("internet", 1, 1);
+    bool res = R_moduleCdynload("internet", 1, 1);
     s_initialized = -1;
     if (!res) return;
     if (!ptr->download)

@@ -141,7 +141,7 @@ typedef struct {
 #define SMBUF_SIZE 512
 #define SMBUF_SIZED_STRING "%511s"
 
-typedef struct {
+struct SaveLoadData {
 /* These variables are accessed in the
    InInteger, InComplex, InReal, InString
    methods for Ascii, Binary, XDR.
@@ -156,7 +156,16 @@ mean some of them wouldn't need the extra argument.
     char smbuf[SMBUF_SIZE];	/* Small buffer for temp use */
 				/* smbuf is only used by Ascii. */
     XDR xdrs;
-} SaveLoadData;
+
+    SaveLoadData(): buffer(), xdrs() {
+        std::memset(smbuf, 0, sizeof(smbuf));
+        // XDR is a C struct, zero-initialized above
+    }
+
+    ~SaveLoadData() {
+        // No explicit cleanup needed as buffer's destructor handles its own memory
+    }
+};
 
 /* ----- I / O -- F u n c t i o n -- P o i n t e r s ----- */
 
@@ -1932,7 +1941,7 @@ static int defaultSaveVersion(void)
 
 attribute_hidden void R::R_SaveToFileV(SEXP obj, FILE *fp, int ascii, int version)
 {
-    SaveLoadData data = {{NULL, 0, MAXELTSIZE}};
+    SaveLoadData data = SaveLoadData();
 
     if (version == 1) {
 	if (ascii) {
@@ -1978,7 +1987,7 @@ attribute_hidden SEXP R::R_LoadFromFile(FILE *fp, int startup)
 {
     struct R_inpstream_st in;
     int magic;
-    SaveLoadData data = {{NULL, 0, MAXELTSIZE}};
+    SaveLoadData data = SaveLoadData();
     SEXP r;
 
     magic = R_ReadMagic(fp);

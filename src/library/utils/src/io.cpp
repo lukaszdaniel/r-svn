@@ -1058,7 +1058,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     Rconnection con;
     const char *csep, *ceol, *cna, *sdec, *tmp = NULL /* -Wall */;
     SEXP *levels;
-    R_StringBuffer strBuf = {NULL, 0, MAXELTSIZE};
+    R_StringBuffer strBuf = R_StringBuffer();
     wt_info wi;
 
     args = CDR(args);
