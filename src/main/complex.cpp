@@ -510,11 +510,11 @@ static std::complex<double> R_casin(std::complex<double> z)
 {
 #ifndef HAVE_CASIN
     /* A&S 4.4.37 */
-    double alpha, t1, t2, x = std::real(z), y = std::imag(z), ri;
-    t1 = 0.5 * hypot(x + 1, y);
-    t2 = 0.5 * hypot(x - 1, y);
-    alpha = t1 + t2;
-    ri = log(alpha + sqrt(alpha*alpha - 1));
+    double x = std::real(z), y = std::imag(z),
+	t1 = 0.5 * hypot(x + 1, y),
+	t2 = 0.5 * hypot(x - 1, y),
+	alpha = t1 + t2,
+	ri = log(alpha + sqrt(alpha*alpha - 1));
     /* This comes from
        'z_asin() is continuous from below if x >= 1
 	and continuous from above if x <= -1.'
@@ -642,6 +642,13 @@ static std::complex<double> z_atanh(std::complex<double> z)
     return -I * z_atan(z * I);
 }
 
+#ifdef HAVE_CABS
+# define R_CABS(Z) cabs(Z)
+#else
+# define R_CABS(Z) hypot(creal(Z), cimag(Z))
+#endif
+
+
 static bool cmath1(std::complex<double> (*f)(std::complex<double>),
 		       const Rcomplex *x, Rcomplex *y, R_xlen_t n)
 {
@@ -749,20 +756,14 @@ static void z_atan2(Rcomplex *r, Rcomplex *csn, Rcomplex *ccs)
 typedef void (*cm2_fun)(Rcomplex *, Rcomplex *, Rcomplex *);
 attribute_hidden SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    R_xlen_t i, n, na, nb, ia, ib;
-    Rcomplex ai, bi, *y;
-    const Rcomplex *a, *b;
-    SEXP sa, sb, sy;
-    bool naflag = false;
     cm2_fun f;
-
     switch (PRIMVAL(op)) {
     case 0: /* atan2 */
 	f = z_atan2; break;
     case 10001: /* round */
 	f = z_rround; break;
     case 10002: /* passed from do_log1arg */
-    case 10010:
+    case 10010: /*   "     "    " */
     case 10003: /* passed from do_log */
 	f = z_logbase; break;
     case 10004: /* signif */
@@ -772,17 +773,22 @@ attribute_hidden SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
 	return R_NilValue;
     }
 
-    PROTECT(sa = coerceVector(CAR(args), CPLXSXP));
-    PROTECT(sb = coerceVector(CADR(args), CPLXSXP));
-    na = XLENGTH(sa); nb = XLENGTH(sb);
+    SEXP
+	sa = PROTECT(coerceVector(CAR(args), CPLXSXP)),
+	sb = PROTECT(coerceVector(CADR(args), CPLXSXP));
+    R_xlen_t na = XLENGTH(sa), nb = XLENGTH(sb), n;
     if ((na == 0) || (nb == 0)) {
 	UNPROTECT(2);
 	return allocVector(CPLXSXP, 0);
     }
     n = (na < nb) ? nb : na;
-    PROTECT(sy = allocVector(CPLXSXP, n));
-    a = COMPLEX_RO(sa); b = COMPLEX_RO(sb);
-    y = COMPLEX(sy);
+    SEXP sy = PROTECT(allocVector(CPLXSXP, n));
+    const Rcomplex
+	*a = COMPLEX_RO(sa),
+	*b = COMPLEX_RO(sb);
+    Rcomplex ai, bi, *y = COMPLEX(sy);
+    R_xlen_t i, ia, ib;
+    bool naflag = false;
     MOD_ITERATE2(n, na, nb, i, ia, ib, {
 	ai = a[ia]; bi = b[ib];
 	if(ISNA(ai.r) && ISNA(ai.i) &&
@@ -849,12 +855,8 @@ static void R_cpolyroot(double *opr, double *opi, int *degree,
 
 attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP z, zr, zi, r, rr, ri;
-    bool fail;
-    int degree, i, n;
-
     checkArity(op, args);
-    z = CAR(args);
+    SEXP z = CAR(args);
     switch(TYPEOF(z)) {
     case CPLXSXP:
 	PROTECT(z);
@@ -867,6 +869,8 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
     default:
 	UNIMPLEMENTED_TYPE("polyroot", z);
     }
+
+    int i, n;
 #ifdef LONG_VECTOR_SUPPORT
     R_xlen_t nn = XLENGTH(z);
     if (nn > R_SHORT_LEN_MAX) error("%s", _("long vectors are not supported"));
@@ -875,12 +879,14 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = LENGTH(z);
 #endif
     const Rcomplex *pz = COMPLEX_RO(z);
-    degree = 0;
+    int degree = 0; // := max{i; z[i] != 0}
     for(i = 0; i < n; i++) {
 	if(pz[i].r!= 0.0 || pz[i].i != 0.0) degree = i;
     }
     n = degree + 1; /* omit trailing zeroes */
+    SEXP r;
     if(degree >= 1) {
+	SEXP zr, zi, rr, ri;
 	PROTECT(rr = allocVector(REALSXP, n));
 	PROTECT(ri = allocVector(REALSXP, n));
 	PROTECT(zr = allocVector(REALSXP, n));
@@ -897,6 +903,7 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    p_zr[degree-i] = pz[i].r;
 	    p_zi[degree-i] = pz[i].i;
 	}
+	bool fail;
 	R_cpolyroot(p_zr, p_zi, &degree, p_rr, p_ri, &fail);
 	if(fail) error("%s", _("root finding code failed"));
 	UNPROTECT(2);
