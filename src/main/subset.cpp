@@ -969,8 +969,6 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	    RAISE_NAMED(ans, NAMED(ax)); /* PR#7924 */
 	}
     }
-    else {
-    }
     if (ATTRIB(ans) != R_NilValue) { /* remove probably erroneous attr's */
 	setAttrib(ans, R_TspSymbol, R_NilValue);
 #ifdef _S4_subsettable
@@ -1009,14 +1007,14 @@ attribute_hidden SEXP do_subset2(SEXP call, SEXP op, SEXP args, SEXP rho)
     return do_subset2_dflt(call, op, ans, rho);
 }
 
-attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args_, SEXP rho)
 {
+    GCStackRoot<> args(args_);
     SEXP ans, dims, dimnames, indx, subs, x;
     int ndims, nsubs;
     bool drop = 1;
     R_xlen_t offset = 0;
 
-    PROTECT(args);
     ExtractDropArg(args, &drop);
     /* Is partial matching ok?  When the exact arg is NA, a warning is
        issued if partial matching occurs.
@@ -1036,7 +1034,6 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* This code was intended for compatibility with S, */
     /* but in fact S does not do this.	Will anyone notice? */
     if (x == R_NilValue) {
-	UNPROTECT(1); /* args */
 	if(CAR(subs) == R_MissingArg)
 	    errorcallMissingSubs(x, call);
 	// else
@@ -1069,7 +1066,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    UNPROTECT(1); /* ans */
 	} else ENSURE_NAMEDMAX(ans);
 
-	UNPROTECT(2); /* args, x */
+	UNPROTECT(1); /* x */
 	if(ans == R_UnboundValue)
 	    return R_NilValue;
 	if (NAMED(ans))
@@ -1125,7 +1122,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 			       isExpression(x) ||
 			       isList(x) ||
 			       isLanguage(x))) {
-		UNPROTECT(2); /* args, x */
+		UNPROTECT(1); /* x */
 		return R_NilValue;
 	    }
 	    else errorcallOutOfBoundsSEXP(x, -1, thesub, call);
@@ -1204,7 +1201,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	UNPROTECT(1); /* ans */
     }
-    UNPROTECT(2); /* args, x */
+    UNPROTECT(1); /* x */
     return ans;
 }
 

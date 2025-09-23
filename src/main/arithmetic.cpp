@@ -1618,7 +1618,7 @@ static R_INLINE SEXP match_Math2_dflt_args(SEXP args, SEXP call)
 attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
 {
     SEXP res = R_NilValue, call2;
-    int is_signif = (PRIMVAL(op) == 10004);
+    bool is_signif = (PRIMVAL(op) == 10004);
     double dflt_digits = is_signif ? 6.0 : 0.;
 
     GCStackRoot<> args;

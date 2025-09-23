@@ -68,7 +68,8 @@ typedef enum {
     STYLE_D   = 8
 } STYLE;
 
-typedef struct {
+struct mathContext
+{
     unsigned int BoxColor;
     double BaseCex;
     double ReferenceX;
@@ -79,7 +80,18 @@ typedef struct {
     double CosAngle;
     double SinAngle;
     STYLE CurrentStyle;
-} mathContext;
+    mathContext()
+        : BoxColor(0), BaseCex(0), ReferenceX(0), ReferenceY(0), CurrentX(0), CurrentY(0), CurrentAngle(0), CosAngle(0), SinAngle(0), CurrentStyle(STYLE::STYLE_SS1){};
+    ~mathContext(){};
+    void PMoveAcross(double xamount) { CurrentX += xamount; }
+    void PMoveUp(double yamount) { CurrentY += yamount; }
+    void PMoveTo(double x, double y)
+    {
+        CurrentX = x;
+        CurrentY = y;
+    }
+    STYLE GetStyle() const { return CurrentStyle; }
+};
 
 constexpr GEUnit MetricUnit = GE_INCHES;
 
@@ -110,7 +122,7 @@ constexpr double ItalicFactor = 0.15;
 /* Convert CurrentX and CurrentY from */
 /* 0 angle to and CurrentAngle */
 
-static double ConvertedX(mathContext *mc, pGEDevDesc dd)
+static double ConvertedX(const mathContext *mc, pGEDevDesc dd)
 {
     double rotatedX = mc->ReferenceX +
 	(mc->CurrentX - mc->ReferenceX) * mc->CosAngle -
@@ -118,7 +130,7 @@ static double ConvertedX(mathContext *mc, pGEDevDesc dd)
     return toDeviceX(rotatedX, MetricUnit, dd);
 }
 
-static double ConvertedY(mathContext *mc, pGEDevDesc dd)
+static double ConvertedY(const mathContext *mc, pGEDevDesc dd)
 {
     double rotatedY = mc->ReferenceY +
 	(mc->CurrentY - mc->ReferenceY) * mc->CosAngle +
@@ -322,12 +334,12 @@ static double TeX(TEXPAR which, pGEcontext gc, pGEDevDesc dd)
     }
 }
 
-static STYLE GetStyle(mathContext *mc)
+static STYLE GetStyle(const mathContext *mc)
 {
     return mc->CurrentStyle;
 }
 
-static void SetStyle(STYLE newstyle, mathContext *mc, pGEcontext gc)
+static void SetStyle(const STYLE newstyle, mathContext *mc, pGEcontext gc)
 {
     switch (newstyle) {
     case STYLE_D:
@@ -350,7 +362,7 @@ static void SetStyle(STYLE newstyle, mathContext *mc, pGEcontext gc)
     mc->CurrentStyle = newstyle;
 }
 
-static void SetPrimeStyle(STYLE style, mathContext *mc, pGEcontext gc)
+static void SetPrimeStyle(const STYLE style, mathContext *mc, pGEcontext gc)
 {
     switch (style) {
     case STYLE_D:
@@ -372,7 +384,7 @@ static void SetPrimeStyle(STYLE style, mathContext *mc, pGEcontext gc)
     }
 }
 
-static void SetSupStyle(STYLE style, mathContext *mc, pGEcontext gc)
+static void SetSupStyle(const STYLE style, mathContext *mc, pGEcontext gc)
 {
     switch (style) {
     case STYLE_D:
@@ -394,7 +406,7 @@ static void SetSupStyle(STYLE style, mathContext *mc, pGEcontext gc)
     }
 }
 
-static void SetSubStyle(STYLE style, mathContext *mc, pGEcontext gc)
+static void SetSubStyle(const STYLE style, mathContext *mc, pGEcontext gc)
 {
     switch (style) {
     case STYLE_D:
@@ -412,7 +424,7 @@ static void SetSubStyle(STYLE style, mathContext *mc, pGEcontext gc)
     }
 }
 
-static void SetNumStyle(STYLE style, mathContext *mc, pGEcontext gc)
+static void SetNumStyle(const STYLE style, mathContext *mc, pGEcontext gc)
 {
     switch (style) {
     case STYLE_D:
@@ -426,7 +438,7 @@ static void SetNumStyle(STYLE style, mathContext *mc, pGEcontext gc)
     }
 }
 
-static void SetDenomStyle(STYLE style, mathContext *mc, pGEcontext gc)
+static void SetDenomStyle(const STYLE style, mathContext *mc, pGEcontext gc)
 {
     if (style > STYLE_T)
 	SetStyle(STYLE_T1, mc, gc);
@@ -452,13 +464,18 @@ static bool IsCompactStyle(const STYLE style)
 /* These including italic corrections and an */
 /* indication of whether the nucleus was simple. */
 
-typedef struct {
+struct BBOX
+{
     double height;
     double depth;
     double width;
     double italic;
     int simple;
-} BBOX;
+
+    BBOX() : height(0), depth(0), width(0), italic(0), simple(0){};
+    ~BBOX(){};
+    static BBOX NullBBox() { return BBOX(); };
+};
 
 
 #define bboxHeight(bbox) bbox.height
@@ -479,24 +496,10 @@ static BBOX MakeBBox(double height, double depth, double width)
     return bbox;
 }
 
-static BBOX NullBBox(void)
-{
-    BBOX bbox;
-    bboxHeight(bbox) = 0;
-    bboxDepth(bbox)  = 0;
-    bboxWidth(bbox)  = 0;
-    bboxItalic(bbox) = 0;
-    bboxSimple(bbox) = 0;
-    return bbox;
-}
-
 static BBOX ShiftBBox(BBOX bbox1, double shiftV)
 {
-    bboxHeight(bbox1) = bboxHeight(bbox1) + shiftV;
-    bboxDepth(bbox1)  = bboxDepth(bbox1) - shiftV;
-    bboxWidth(bbox1)  = bboxWidth(bbox1);
-    bboxItalic(bbox1) = bboxItalic(bbox1);
-    bboxSimple(bbox1) = bboxSimple(bbox1);
+    bboxHeight(bbox1) += shiftV;
+    bboxDepth(bbox1)  -= shiftV;
     return bbox1;
 }
 
@@ -871,7 +874,7 @@ static FontType GetFont(pGEcontext gc)
 
 static FontType SetFont(FontType font, pGEcontext gc)
 {
-    FontType prevfont = (FontType) gc->fontface;
+    FontType prevfont = (FontType) (gc->fontface);
     gc->fontface = font;
     return prevfont;
 }
@@ -965,7 +968,7 @@ static BBOX RenderSymbolStr(const char *str, int draw, mathContext *mc,
     char chr[7] = "";
     const char *s = str;
     BBOX glyphBBox;
-    BBOX resultBBox = NullBBox();
+    BBOX resultBBox;
     double lastItalicCorr = 0;
     FontType prevfont = GetFont(gc);
     FontType font = prevfont;
@@ -1082,8 +1085,8 @@ static BBOX RenderChar(int ascii, int draw, mathContext *mc,
 static BBOX RenderStr(const char *str, int draw, mathContext *mc,
 		      pGEcontext gc, pGEDevDesc dd)
 {
-    BBOX glyphBBox = NullBBox(); /* might be use do italic corr on str="" */
-    BBOX resultBBox = NullBBox();
+    BBOX glyphBBox; /* might be use do italic corr on str="" */
+    BBOX resultBBox;
     int nc = 0;
     cetype_t enc = (gc->fontface == 5) ? CE_SYMBOL : CE_NATIVE;
 
@@ -1226,7 +1229,7 @@ static BBOX RenderAtom(SEXP expr, int draw, mathContext *mc,
     else if (StringAtom(expr))
 	return RenderString(expr, draw, mc, gc, dd);
 
-    return NullBBox();		/* -Wall */
+    return BBOX::NullBBox();		/* -Wall */
 }
 
 
@@ -1267,7 +1270,7 @@ static BBOX RenderSpace(SEXP expr, int draw, mathContext *mc,
     else
 	error("%s", _("invalid mathematical annotation"));
 
-    return NullBBox();		/* -Wall */
+    return BBOX::NullBBox();		/* -Wall */
 }
 
 static constexpr SymTab BinTable[] = {
@@ -1371,7 +1374,7 @@ static BBOX RenderBin(SEXP expr, int draw, mathContext *mc,
     else
 	error("%s", _("invalid mathematical annotation"));
 
-    return NullBBox();		/* -Wall */
+    return BBOX::NullBBox();		/* -Wall */
 
 }
 
@@ -1644,11 +1647,11 @@ static BBOX RenderBar(SEXP expr, int draw, mathContext *mc,
     return EnlargeBBox(bbox, accentGap, 0, 0);
 }
 
-static constexpr struct {
+struct AccentTable_t {
     const char * const name;
     int code;
-}
-AccentTable[] = {
+};
+static constexpr AccentTable_t AccentTable[] = {
     { "hat",		 94 },
     { "ring",		176 },
     { "tilde",		126 },
@@ -1992,13 +1995,11 @@ static int GroupAtom(SEXP expr)
 static BBOX RenderGroup(SEXP expr, int draw, mathContext *mc,
 			pGEcontext gc, pGEDevDesc dd)
 {
-    double cexSaved = gc->cex;
-    BBOX bbox;
-    int code;
     if (length(expr) != 4)
 	errorcall(expr, "%s", _("invalid group specification"));
-    bbox = NullBBox();
-    code = DelimCode(expr, CADR(expr));
+    BBOX bbox;
+    int code = DelimCode(expr, CADR(expr));
+    double cexSaved = gc->cex;
     gc->cex = DelimSymbolMag * gc->cex;
     if (code != '.')
 	bbox = RenderSymbolChar(code, draw, mc, gc, dd);
@@ -2034,7 +2035,7 @@ static BBOX RenderDelim(int which, double dist, int draw, mathContext *mc,
     switch(which) {
     case '.':
 	SetFont(prev, gc);
-	return NullBBox();
+	return BBOX::NullBBox();
 	break;
     case '|':
 	top = 239; ext = 239; bot = 239; mid = 0;
@@ -2059,7 +2060,7 @@ static BBOX RenderDelim(int which, double dist, int draw, mathContext *mc,
 	break;
     default:
 	error("%s", _("group is incomplete"));
-	return NullBBox();/*never reached*/
+	return BBOX::NullBBox(); /*never reached*/
     }
     topBBox = GlyphBBox(top, gc, dd);
     extBBox = GlyphBBox(ext, gc, dd);
@@ -2127,14 +2128,14 @@ static BBOX RenderDelim(int which, double dist, int draw, mathContext *mc,
 static BBOX RenderBGroup(SEXP expr, int draw, mathContext *mc,
 			 pGEcontext gc, pGEDevDesc dd)
 {
+    if (length(expr) != 4)
+	errorcall(expr, "%s", _("invalid group specification"));
+
     double dist;
     BBOX bbox;
     double axisHeight = TeX(sigma22, gc, dd);
     double extra = 0.2 * xHeight(gc, dd);
     int delim1, delim2;
-    if (length(expr) != 4)
-	errorcall(expr, "%s", _("invalid group specification"));
-    bbox = NullBBox();
     delim1 = DelimCode(expr, CADR(expr));
     delim2 = DelimCode(expr, CADDDR(expr));
     bbox = RenderElement(CADDR(expr), 0, mc, gc, dd);
@@ -2326,7 +2327,7 @@ static BBOX RenderOpSymbol(SEXP op, int draw, mathContext *mc,
 static BBOX RenderOp(SEXP expr, int draw, mathContext *mc,
 		     pGEcontext gc, pGEDevDesc dd)
 {
-    BBOX lowerBBox = NullBBox() /* -Wall */, upperBBox = NullBBox(), bodyBBox;
+    BBOX lowerBBox, upperBBox, bodyBBox;
     double savedX = mc->CurrentX;
     double savedY = mc->CurrentY;
     int nexpr = length(expr);
@@ -2463,8 +2464,7 @@ static BBOX RenderRadical(SEXP expr, int draw, mathContext *mc,
 	}
 	orderBBox = EnlargeBBox(orderBBox, vshift, 0, hshift);
     }
-    else
-	orderBBox = NullBBox();
+
     if (draw) {
 	int savedlty = gc->lty;
 	double savedlwd = gc->lwd;
@@ -2660,7 +2660,7 @@ static BBOX RenderRel(SEXP expr, int draw, mathContext *mc,
     }
     else error("%s", _("invalid mathematical annotation"));
 
-    return NullBBox();		/* -Wall */
+    return BBOX::NullBBox();		/* -Wall */
 }
 
 
@@ -2852,7 +2852,7 @@ static int ConcatenateAtom(SEXP expr)
 static BBOX RenderConcatenate(SEXP expr, int draw, mathContext *mc,
 			      pGEcontext gc, pGEDevDesc dd)
 {
-    BBOX bbox = NullBBox();
+    BBOX bbox;
 
     expr = CDR(expr);
     int n = length(expr);
@@ -2875,7 +2875,7 @@ static BBOX RenderConcatenate(SEXP expr, int draw, mathContext *mc,
 static BBOX RenderCommaList(SEXP expr, int draw, mathContext *mc,
 			    pGEcontext gc, pGEDevDesc dd)
 {
-    BBOX bbox = NullBBox();
+    BBOX bbox;
     double small = 0.4 * ThinSpace(gc, dd);
     int n = length(expr);
     for (int i = 0; i < n; i++) {
