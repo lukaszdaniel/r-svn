@@ -88,7 +88,7 @@ static void unregisterOne(pGEDevDesc dd, int systemNumber) {
     if (dd->gesd[systemNumber] != NULL) {
         /* Defensive */
         if (dd->gesd[systemNumber]->callback != NULL) {
-            (dd->gesd[systemNumber]->callback)(GE_FinaliseState, dd, 
+            (dd->gesd[systemNumber]->callback)(GE_FinaliseState, dd,
                                                R_NilValue);
         }
 	free(dd->gesd[systemNumber]);
@@ -179,7 +179,7 @@ void GEregisterSystem(GEcallback cb, int *systemRegisterIndex) {
      * information in those devices
      * If a graphics system has been unregistered, there might
      * be "holes" in the list of graphics systems, so start
-     * from zero and look for the first NULL 
+     * from zero and look for the first NULL
      */
     *systemRegisterIndex = 0;
     while (registeredSystems[*systemRegisterIndex] != NULL) {
@@ -611,7 +611,7 @@ static void getClipRectToDevice(double *x1, double *y1, double *x2, double *y2,
 	*y2 = dd->dev->bottom;
 	*y1 = dd->dev->top;
     }
-    /* 
+    /*
      * Do NOT clip to the actual device edge (that produces artifacts).
      * Instead, clip to a much larger region.
      */
@@ -1093,7 +1093,7 @@ static bool mustClip(double xmin, double xmax, double ymin, double ymax,
             clip.ymin > ymin || clip.ymax < ymax);
 }
 
-/* 
+/*
  * Reorder the vertices of a polygon that is becoming a polyline
  * so that the first vertex is OUTSIDE the clipping area.
  * NOTE that x & y are length n+1, but x[0] == x[n]
@@ -1119,13 +1119,13 @@ static void reorderVertices(int n, double *x, double *y, pGEDevDesc dd)
                y[start] >= ymin && y[start] <= ymax) {
             start++;
         }
-        if (start == n) 
+        if (start == n)
             error("%s", _("Clipping polygon that does not need clipping"));
         for (i=0; i<n; i++) {
             x[i] = xtemp[start];
             y[i] = ytemp[start];
             start++;
-            if (start == n) 
+            if (start == n)
                 start = 0;
         }
         x[n] = xtemp[start];
@@ -1501,7 +1501,7 @@ void GEPath(double *x, double *y,
 	warning("%s", _("path rendering is not implemented for this device"));
 	return;
     }
-    /* FIXME: what about clipping? (if the device can't) 
+    /* FIXME: what about clipping? (if the device can't)
     */
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
 	error("%s", _("'lwd' must be non-negative and finite"));
@@ -1540,7 +1540,7 @@ void GERaster(unsigned int *raster, int w, int h,
 	return;
     }
 
-    /* FIXME: what about clipping? (if the device can't) 
+    /* FIXME: what about clipping? (if the device can't)
      * Maybe not too bad because it is just a matter of shaving off
      * some rows and columns from the image? (because R only does
      * rectangular clipping regions) */
@@ -1621,7 +1621,7 @@ static int clipTextCode(double x, double y, const char *str, cetype_t enc,
     return clipRectCode(toDeviceX(left, GE_INCHES, dd),
                         toDeviceY(bottom, GE_INCHES, dd),
                         toDeviceX(right, GE_INCHES, dd),
-                        toDeviceY(top, GE_INCHES, dd), 
+                        toDeviceY(top, GE_INCHES, dd),
                         toDevice, dd);
 }
 
@@ -2134,7 +2134,7 @@ void GESymbol(double x, double y, int pch, double size,
 	char str[16]; // probably 7 would do
 	if(gc->fontface == 5)
 	    error("%s", _("use of negative pch with symbol font is invalid"));
-	res = ucstoutf8(str, -pch); // throws error if unsuccessful 
+	res = ucstoutf8(str, -pch); // throws error if unsuccessful
 	str[res] = '\0';
 	GEText(x, y, str, CE_UTF8, NA_REAL, NA_REAL, 0., gc, dd);
     } else if(' ' <= pch && pch <= maxchar) {
@@ -2474,6 +2474,9 @@ void GEPretty(double *lo, double *up, int *ndiv)
 	if(               ns * unit < *lo - rounding_eps*unit) { ns++; mod++; }
 	if(nu > ns + 1 && nu * unit > *up + rounding_eps*unit) { nu--; mod++; }
 	if(mod) *ndiv = (int)(nu - ns);
+#ifdef DEBUG_axis
+	if(mod) REprintf(" GEPretty(): _mod_ify -> new (ns=%g, nu=%g, ndiv=%d)\n", ns, nu, *ndiv);
+#endif
     }
     *lo = ns * unit;
     *up = nu * unit;
@@ -2533,10 +2536,10 @@ void GEMetricInfo(int c, const pGEcontext gc,
            PAUL 2008-11-27
            The point of checking dd == last_dd is to check for
            a different TYPE of device (e.g., PDF vs. PNG).
-           Checking just the pGEDevDesc pointer is not a good enough 
+           Checking just the pGEDevDesc pointer is not a good enough
            test;  it is possible for that to be the same when one
-           device is closed and a new one is opened (I have seen 
-           it happen!). 
+           device is closed and a new one is opened (I have seen
+           it happen!).
            So, ALSO compare dd->dev->close function pointer
            which really should be different for different devices.
 	*/
@@ -2677,7 +2680,7 @@ double GEStrHeight(const char *str, cetype_t enc, const pGEcontext gc, pGEDevDes
 
  * Modelled on GEText handling of encodings
  */
-void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc, 
+void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
                  double *ascent, double *descent, double *width,
                  pGEDevDesc dd)
 {
@@ -2732,7 +2735,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
             *sb++ = *s++;
         }
         *sb = '\0';
-        /* Find the largest ascent for the first line */        
+        /* Find the largest ascent for the first line */
         if (noMetricInfo) {
             *ascent = GEStrHeight(sbuf, enc2, gc, dd);
         } else {
@@ -2765,14 +2768,14 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
                 }
             } else {
                 while (*s != '\0') {
-                    GEMetricInfo((unsigned char) *s++, gc, 
+                    GEMetricInfo((unsigned char) *s++, gc,
                                  &asc, &dsc, &wid, dd);
                     if (asc > *ascent)
                         *ascent = asc;
                 }
             }
         }
-        
+
 	/* Count the lines of text minus one */
 	n = 0;
 	for(s = str; *s ; s++)
@@ -2782,7 +2785,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
 
         /* Where is the start of the last line? */
         if (n > 0) {
-            while (*s != '\n') 
+            while (*s != '\n')
                 s--;
             s++;
         } else {
@@ -2827,7 +2830,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
                 }
             } else {
                 while (*s != '\0') {
-                    GEMetricInfo((unsigned char) *s++, gc, 
+                    GEMetricInfo((unsigned char) *s++, gc,
                                  &asc, &dsc, &wid, dd);
                     if (dsc > *descent)
                         *descent = dsc;
@@ -3119,14 +3122,14 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
      */
     SEXP snapshotEngineVersion;
     int engineVersion = R_GE_getVersion();
-    PROTECT(snapshotEngineVersion = getAttrib(snapshot, 
+    PROTECT(snapshotEngineVersion = getAttrib(snapshot,
                                               install("engineVersion")));
     if (isNull(snapshotEngineVersion)) {
         warning(_("snapshot recorded with different graphics engine version (pre 11 - this is version %d)"),
                 engineVersion);
     } else if (INTEGER(snapshotEngineVersion)[0] != engineVersion) {
         int snapshotVersion = INTEGER(snapshotEngineVersion)[0];
-        warning(_("snapshot recorded with different graphics engine version (%d - this is version %d)"), 
+        warning(_("snapshot recorded with different graphics engine version (%d - this is version %d)"),
                 snapshotVersion, engineVersion);
     }
     /* "clean" the device
@@ -3134,7 +3137,7 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
     GEcleanDevice(dd);
     /* Reset the snapshot state information in each registered
      * graphics system.
-     * This may try to restore state for a system that was NOT 
+     * This may try to restore state for a system that was NOT
      * registered when the snapshot was taken, but the systems
      * should protect themselves from that situation.
      */
@@ -3148,7 +3151,7 @@ void GEplaySnapshot(SEXP snapshot, pGEDevDesc dd)
 #ifdef R_GE_DEBUG
     if (getenv("R_GE_DEBUG_record")) {
         printf("GEplaySnapshot: record = TRUE\n");
-    } 
+    }
 #endif
     dd->recordGraphics = TRUE;
     /* Replay the display list
@@ -3452,14 +3455,14 @@ SEXP GE_LTYget(unsigned int lty)
 }
 
 /****************************************************************
- * 
+ *
  * Some functions for operations on raster images
  * (for those devices that cannot do these themselves)
  ****************************************************************
  */
 
 /* Some of this code is based on code from the leptonica library
- * hence the following notice 
+ * hence the following notice
  */
 
 /*====================================================================*
@@ -3477,8 +3480,8 @@ SEXP GE_LTYget(unsigned int lty)
 -  or altered from any source or modified source distribution.
 *====================================================================*/
 
-/* 
- * Scale a raster image to a desired size using 
+/*
+ * Scale a raster image to a desired size using
  * nearest-neighbour interpolation
 
  * draster must be pre-allocated.
@@ -3504,13 +3507,13 @@ void R_GE_rasterScale(unsigned int *sraster, int sw, int sh,
     }
 }
 
-/* 
- * Scale a raster image to a desired size using 
+/*
+ * Scale a raster image to a desired size using
  * bilinear interpolation
  * Code based on scaleColorLILow() from leptonica library
 
  *  Divide each destination pixel into 16 x 16 sub-pixels.
- *  Linear interpolation is equivalent to finding the 
+ *  Linear interpolation is equivalent to finding the
  *  fractional area (i.e., number of sub-pixels divided
  *  by 256) associated with each of the four nearest src pixels,
  *  and weighting each pixel value by this fractional area.
@@ -3620,7 +3623,7 @@ void R_GE_rasterRotatedSize(int w, int h, double angle,
     double try2 = diag*sin(angle - theta);
     *wnew = (int) (fmax2(fabs(trx1), fabs(trx2)) + 0.5);
     *hnew = (int) (fmax2(fabs(try1), fabs(try2)) + 0.5);
-    /* 
+    /*
      * Rotated image may be shorter or thinner than original
      */
     *wnew = imax2(w, *wnew);
@@ -3628,8 +3631,8 @@ void R_GE_rasterRotatedSize(int w, int h, double angle,
 }
 
 /*
- * Calculate offset for (left, bottom) or 
- * (left, top) of image 
+ * Calculate offset for (left, bottom) or
+ * (left, top) of image
  * to account for image rotation
  */
 void R_GE_rasterRotatedOffset(int w, int h, double angle,
@@ -3652,14 +3655,14 @@ void R_GE_rasterRotatedOffset(int w, int h, double angle,
     }
 }
 
-/* 
- * Copy a raster image into the middle of a larger 
+/*
+ * Copy a raster image into the middle of a larger
  * raster image (ready for rotation)
 
  * newRaster must be pre-allocated.
  */
-void R_GE_rasterResizeForRotation(unsigned int *sraster, 
-                                  int w, int h, 
+void R_GE_rasterResizeForRotation(unsigned int *sraster,
+                                  int w, int h,
                                   unsigned int *newRaster,
                                   int wnew, int hnew,
                                   const pGEcontext gc)
@@ -3683,16 +3686,16 @@ void R_GE_rasterResizeForRotation(unsigned int *sraster,
     }
 }
 
-/* 
- * Rotate a raster image 
+/*
+ * Rotate a raster image
  * Code based on rotateAMColorLow() from leptonica library
 
  * draster must be pre-allocated.
 
- * smoothAlpha allows alpha channel to vary smoothly based on 
- * interpolation.  If this is FALSE, then alpha values are 
+ * smoothAlpha allows alpha channel to vary smoothly based on
+ * interpolation.  If this is FALSE, then alpha values are
  * taken from MAX(alpha) of relevant pixels.  This means that
- * areas of full transparency remain fully transparent, 
+ * areas of full transparency remain fully transparent,
  * areas of opacity remain opaque, edges between anything less than opacity
  * and opacity are opaque, and edges between full transparency
  * and semitransparency become semitransparent.
@@ -3888,8 +3891,8 @@ int R_GE_glyphFontNumVar(SEXP glyphFont) {
     return LENGTH(VECTOR_ELT(glyphFont, glyph_font_var));
 }
 
-/* Existence of names(glyphFont$fontVar) and 
- * length(names) == length(glyphFont$fontVar) 
+/* Existence of names(glyphFont$fontVar) and
+ * length(names) == length(glyphFont$fontVar)
  * should be guaranteed by R code
  */
 const char* R_GE_glyphFontVarAxis(SEXP glyphFont, int index) {
