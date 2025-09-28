@@ -42,6 +42,7 @@
 #include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Rinternals.h>
+#include <Internal.h> // for R_getS4DataSlot
 
 using namespace CXXR;
 
@@ -116,6 +117,40 @@ namespace CXXR
     void Environment::nullEnvironmentError()
     {
         Rf_error("%s", _("use of NULL environment is defunct"));
+    }
+
+    namespace
+    {
+        Environment *as_environment_internal(RObject *arg, bool allow_null, bool allow_s4)
+        {
+            if (arg == R_NilValue)
+            {
+                if (allow_null)
+                    return R_NilValue;
+                else
+                    Environment::nullEnvironmentError();
+            }
+            else if (arg->sexptype() == ENVSXP)
+            {
+                return SEXP_downcast<Environment *>(arg);
+            }
+            else if (allow_s4 && IS_S4_OBJECT(arg) && arg->sexptype() == OBJSXP)
+            {
+                return SEXP_downcast<Environment *>(R_getS4DataSlot(arg, ENVSXP));
+            }
+
+            return R_NilValue;
+        }
+    } // anonumous namespace
+
+    Environment *simple_as_environment(RObject *arg, bool allow_null)
+    {
+        return as_environment_internal(arg, allow_null, /*allow_s4=*/true);
+    }
+
+    Environment *downcast_to_env(RObject *arg, bool allow_null)
+    {
+        return as_environment_internal(arg, allow_null, /*allow_s4=*/false);
     }
 
     namespace

@@ -87,7 +87,7 @@ R_xlen_t R::asVecSize(SEXP x)
 
 attribute_hidden SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP name = R_NilValue /* -Wall */, expr, eenv, aenv;
+    SEXP name = R_NilValue /* -Wall */, expr;
     checkArity(op, args);
 
     if (!isString(CAR(args)) || LENGTH(CAR(args)) == 0)
@@ -98,21 +98,13 @@ attribute_hidden SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
     expr = CAR(args);
 
     args = CDR(args);
-    eenv = CAR(args);
-    if (isNull(eenv)) {
-	error("%s", _("use of NULL environment is defunct"));
-	eenv = R_BaseEnv;
-    } else
-    if (!isEnvironment(eenv))
+    Environment *eenv = downcast_to_env(CAR(args));
+    if (!eenv)
 	error(_("invalid '%s' argument"), "eval.env");
 
     args = CDR(args);
-    aenv = CAR(args);
-    if (isNull(aenv)) {
-	error("%s", _("use of NULL environment is defunct"));
-	aenv = R_BaseEnv;
-    } else
-    if (!isEnvironment(aenv))
+    Environment *aenv = downcast_to_env(CAR(args));
+    if (!aenv)
 	error(_("invalid '%s' argument"), "assign.env");
 
     defineVar(name, mkPROMISE(expr, eenv), aenv);
@@ -307,7 +299,7 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (TYPEOF(s) == CLOSXP
 	&& (isEnvironment(env) ||
-	    isEnvironment(env = simple_as_environment(env, false)) ||
+	    isEnvironment(env = simple_as_environment(env)) ||
 	    isNull(env))) {
 	if (isNull(env))
 	    error("%s", _("use of NULL environment is defunct"));
@@ -321,7 +313,7 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_CLOENV(s, env);
     }
     else if (isNull(env) || isEnvironment(env) ||
-	isEnvironment(env = simple_as_environment(env)))
+	isEnvironment(env = simple_as_environment(env, true)))
     {
 	if(!isNull(env) && isPrimitive(s)) // temporary, to become error()
 	    warning("%s", _("setting environment(<primitive function>) is not possible and trying it is deprecated"));
@@ -340,19 +332,14 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
  */
 attribute_hidden SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP enclos;
     int hash, size = 0;
 
     checkArity(op, args);
 
     hash = asInteger(CAR(args));
     args = CDR(args);
-    enclos = CAR(args);
-    if (isNull(enclos))
-	error("%s", _("use of NULL environment is defunct"));
-
-    if( !isEnvironment(enclos) &&
-	!isEnvironment((enclos = simple_as_environment(enclos))))
+    Environment *enclos = simple_as_environment(CAR(args), true);
+    if (!enclos)
 	error(_("'%s' must be an environment"), "enclos");
 
     if( hash ) {
@@ -367,10 +354,8 @@ attribute_hidden SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP arg = CAR(args);
-
-    if( !isEnvironment(arg)  &&
-	!isEnvironment((arg = simple_as_environment(arg))))
+    Environment *arg = simple_as_environment(CAR(args), true);
+    if (!arg)
 	error(_("'%s' is not an environment"), "env");
     if( arg == R_EmptyEnv )
 	error("%s", _("the empty environment has no parent"));
@@ -394,30 +379,20 @@ static bool R_IsImportsEnv(SEXP env)
 
 attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP env, parent;
     checkArity(op, args);
 
-    env = CAR(args);
-    if (isNull(env)) {
-	error("%s", _("use of NULL environment is defunct"));
-	env = R_BaseEnv;
-    } else
-    if( !isEnvironment(env) &&
-	!isEnvironment((env = simple_as_environment(env))))
+    Environment *env = simple_as_environment(CAR(args), true);
+    if (!env)
 	error(_("'%s' is not an environment"), "env");
-    if( env == R_EmptyEnv )
+    if (env == R_EmptyEnv)
 	error("%s", _("can not set parent of the empty environment"));
     if (R_EnvironmentIsLocked(env) && R_IsNamespaceEnv(env))
 	error("%s", _("can not set the parent environment of a namespace"));
     if (R_EnvironmentIsLocked(env) && R_IsImportsEnv(env))
 	error("%s", _("can not set the parent environment of package imports"));
-    parent = CADR(args);
-    if (isNull(parent)) {
-	error("%s", _("use of NULL environment is defunct"));
-	parent = R_BaseEnv;
-    } else
-    if( !isEnvironment(parent) &&
-	!isEnvironment((parent = simple_as_environment(parent))))
+
+    Environment *parent = simple_as_environment(CADR(args), true);
+    if (!parent)
 	error(_("'%s' is not an environment"), "parent");
 
     SET_ENCLOS(env, parent);
@@ -431,7 +406,7 @@ attribute_hidden SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     PROTECT(ans);
-    env = simple_as_environment(env);
+    env = simple_as_environment(env, true);
     if (env != R_NilValue) {
 	if (env == R_GlobalEnv) ans = mkString("R_GlobalEnv");
 	else if (env == R_BaseEnv) ans = mkString("base");

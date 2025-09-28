@@ -1824,31 +1824,6 @@ void Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
     SET_SYMBOL_BINDING_VALUE(symbol, value);
 }
 
-/* get environment from a subclass if possible; else return NULL */
-
-namespace CXXR
-{
-    RObject *simple_as_environment(RObject *arg, bool allow_null)
-    {
-        if (arg == R_NilValue)
-        {
-            if (allow_null)
-                return R_NilValue;
-            else
-                Environment::nullEnvironmentError();
-        }
-        if (arg->sexptype() == ENVSXP)
-        {
-            return static_cast<Environment *>(arg);
-        }
-        if (IS_S4_OBJECT(arg) && (arg->sexptype() == OBJSXP))
-        {
-            return static_cast<Environment *>(R_getS4DataSlot(arg, ENVSXP));
-        }
-        return R_NilValue;
-    }
-} // namespace CXXR
-
 /*----------------------------------------------------------------------
 
   do_assign : .Internal(assign(x, value, envir, inherits))
@@ -1868,7 +1843,7 @@ attribute_hidden SEXP do_assign(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     PROTECT(val = CADR(args));
     aenv = CADDR(args);
-    aenv = simple_as_environment(aenv, false);
+    aenv = simple_as_environment(aenv);
     if (aenv == R_NilValue)
 	error(_("invalid '%s' argument"), "envir");
     if (asLogicalNoNA(CADDDR(args), "inherits"))
@@ -1974,7 +1949,7 @@ attribute_hidden SEXP do_remove(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("invalid first argument"));
     args = CDR(args);
 
-    SEXP envarg = simple_as_environment(CAR(args), false);
+    SEXP envarg = simple_as_environment(CAR(args));
     if (envarg == R_NilValue)
 	error(_("invalid '%s' argument"), "envir");
     args = CDR(args);
@@ -2086,7 +2061,7 @@ attribute_hidden SEXP do_get(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("use of NULL environment is defunct"));
 	genv = R_NilValue;  /* -Wall */
     }
-    else if (TYPEOF((genv = simple_as_environment(CADR(args)))) != ENVSXP) {
+    else if (TYPEOF((genv = simple_as_environment(CADR(args), true))) != ENVSXP) {
 	error(_("invalid '%s' argument"), "envir");
 	genv = R_NilValue;  /* -Wall */
     }
@@ -2890,7 +2865,7 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	k += BuiltinSize(all, 0);
     else if (isEnvironment(env) ||
-	isEnvironment(env = simple_as_environment(env))) {
+	isEnvironment(env = simple_as_environment(env, true))) {
 	if (HASHTAB(env) != R_NilValue)
 	    k += HashTableSize(HASHTAB(env), all);
 	else
@@ -3315,7 +3290,7 @@ void R_LockEnvironment(SEXP env, Rboolean bindings)
 
 Rboolean R_EnvironmentIsLocked(SEXP env)
 {
-    env = simple_as_environment(env, false);
+    env = simple_as_environment(env);
     if (env == R_NilValue)
 	error("%s", _("not an environment"));
     return (Rboolean) (FRAME_IS_LOCKED(env) != 0);
@@ -3340,7 +3315,7 @@ void R_LockBinding(SEXP sym, SEXP env)
 {
     if (TYPEOF(sym) != SYMSXP)
 	error("%s", _("not a symbol"));
-    env = simple_as_environment(env, false);
+    env = simple_as_environment(env);
     if (env == R_NilValue)
 	error("%s", _("not an environment"));
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -3359,7 +3334,7 @@ void R_unLockBinding(SEXP sym, SEXP env)
 {
     if (TYPEOF(sym) != SYMSXP)
 	error("%s", _("not a symbol"));
-    env = simple_as_environment(env, false);
+    env = simple_as_environment(env);
     if (env == R_NilValue)
 	error("%s", _("not an environment"));
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -3380,7 +3355,7 @@ void R_MakeActiveBinding(SEXP sym, SEXP fun, SEXP env)
 	error("%s", _("not a symbol"));
     if (!isFunction(fun))
 	error("%s", _("not a function"));
-    env = simple_as_environment(env, false);
+    env = simple_as_environment(env);
     if (env == R_NilValue)
 	error("%s", _("not an environment"));
     if (env == R_BaseEnv || env == R_BaseNamespace) {
@@ -3413,7 +3388,7 @@ Rboolean R_BindingIsLocked(SEXP sym, SEXP env)
 {
     if (TYPEOF(sym) != SYMSXP)
 	error("%s", _("not a symbol"));
-    env = simple_as_environment(env, false);
+    env = simple_as_environment(env);
     if (env == R_NilValue)
 	error("%s", _("not an environment"));
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -3432,7 +3407,7 @@ Rboolean R_BindingIsActive(SEXP sym, SEXP env)
 {
     if (TYPEOF(sym) != SYMSXP)
 	error("%s", _("not a symbol"));
-    env = simple_as_environment(env, false);
+    env = simple_as_environment(env);
     if (env == R_NilValue)
 	error("%s", _("not an environment"));
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -3472,7 +3447,7 @@ SEXP R_ActiveBindingFunction(SEXP sym, SEXP env)
 {
     if (TYPEOF(sym) != SYMSXP)
 	error("%s", _("not a symbol"));
-    env = simple_as_environment(env, false);
+    env = simple_as_environment(env);
     if (env == R_NilValue)
 	error("%s", _("not an environment"));
     if (env == R_BaseEnv || env == R_BaseNamespace) {
@@ -3924,10 +3899,10 @@ attribute_hidden SEXP do_importIntoEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
     expenv = CAR(args); args = CDR(args);
     expnames = CAR(args); args = CDR(args);
 
-    impenv = simple_as_environment(impenv, false);
+    impenv = simple_as_environment(impenv);
     if (impenv == R_NilValue)
 	error("%s", _("bad import environment argument"));
-    expenv = simple_as_environment(expenv, false);
+    expenv = simple_as_environment(expenv);
     if (expenv == R_NilValue)
 	error("%s", _("bad export environment argument"));
     if (TYPEOF(impnames) != STRSXP || TYPEOF(expnames) != STRSXP)

@@ -3929,7 +3929,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	   (and documented as such) */
 	encl = R_BaseEnv;
     } else if (!isEnvironment(encl) &&
-		!isEnvironment((encl = simple_as_environment(encl)))) {
+		!isEnvironment((encl = simple_as_environment(encl, true)))) {
 	error(_("invalid '%s' argument of type '%s'"),
 	      "enclos", R_typeToChar(encl));
     }

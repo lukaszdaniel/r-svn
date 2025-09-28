@@ -56,7 +56,7 @@ namespace CXXR
      * @note This class does not in itself enforce the requirement
      * that the enclosing relationship must be acyclic.
      */
-    class Environment : public RObject
+    class Environment: public RObject
     {
     public:
         static Environment *create(SEXP frame = R_NilValue, SEXP enclosing_env = R_NilValue, SEXP hashtab = R_NilValue);
@@ -165,7 +165,7 @@ namespace CXXR
         NORET static void nullEnvironmentError();
 
     private:
-        Environment(SEXP frame, SEXP enclosing_env, SEXP hashtab) : RObject(ENVSXP)
+        Environment(SEXP frame, SEXP enclosing_env, SEXP hashtab): RObject(ENVSXP)
         {
             u.envsxp.m_frame = frame;
             u.envsxp.m_enclos = enclosing_env;
@@ -187,7 +187,9 @@ namespace CXXR
 
     /** @brief Get environment from a subclass if possible; else return NULL.
      */
-    RObject *simple_as_environment(RObject *arg, bool allow_null = true);
+    Environment *simple_as_environment(RObject *arg, bool allow_null = false);
+
+    Environment *downcast_to_env(RObject *arg, bool allow_null = false);
 
     /** @brief (For debugging.)
      *
