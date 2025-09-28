@@ -16,7 +16,7 @@
 
   \subsection{NEW FEATURES}{
     \itemize{
-      \item The default \code{AIC} and \code{BIC} methods now check whether 
+      \item The default \code{AIC} and \code{BIC} methods now check whether
       the \pkg{methods} namespace is loaded rather than \pkg{stats4}. They
       still use \code{stats4::logLik} (and \code{stats4::nobs}), but packages
       no longer need to load \pkg{stats4} explicitly.
@@ -130,6 +130,11 @@
       replacement versions now accept \code{i2 = NULL} to mean \dQuote{to
       the end_of_string}, thus fulfilling \I{Kevin Ushey} (and others')
       suggestions in \PR{18851}.
+
+      \item The default method for \code{pretty()} gets a new switch \code{bounds} for
+      completeness, corresponding to \code{.pretty()}.  Also, it now
+      catches typos such as \code{eps.corrected = 2}, noted in \PR{18521}
+      by \I{Mikko Korpela}.
     }
   }
 
@@ -394,6 +399,9 @@
 
       \item The Cairo-based SVG device uses \code{pt} as the default
       document unit also with Cairo >= 1.17.8 (\PR{18912}).
+
+      \item \code{pretty(*, eps.correct = 2)} has been fixed, e.g., to
+      avoid over 1 mio length result for \code{pretty(c(0, 1e-322), eps.correct = 2)}.
     }
   }
 }
