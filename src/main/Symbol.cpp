@@ -79,6 +79,11 @@ namespace CXXR
         return R_UnboundValue;
     }
 
+    const char *Symbol::typeName() const
+    {
+        return staticTypeName();
+    }
+
     Symbol *Symbol::obtain(const std::string &name)
     {
         return Symbol::obtainCE(name, CE_NATIVE);

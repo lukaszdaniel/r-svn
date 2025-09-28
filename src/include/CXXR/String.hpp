@@ -170,11 +170,23 @@ namespace CXXR
          */
         static String *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "char";
+        }
+
         /** @brief Visit the String hash table.
          *
          * This function is used to visit the String hash table,
          */
         static void visitTable();
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
 
         /** @brief used in package utils and graphics
          */

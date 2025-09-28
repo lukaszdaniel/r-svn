@@ -37,6 +37,11 @@ namespace CXXR
     {
         const auto &lconsptr = Rf_lcons;
     } // namespace ForceNonInline
+
+    const char *Expression::typeName() const
+    {
+        return staticTypeName();
+    }
 } // namespace CXXR
 
 namespace R

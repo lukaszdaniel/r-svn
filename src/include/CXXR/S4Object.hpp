@@ -80,6 +80,15 @@ namespace CXXR
             u.s4ptr.m_tag.retarget(this, tg);
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "S4";
+        }
+
         /** @brief Is an RObject an S4Object?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -97,6 +106,9 @@ namespace CXXR
             SEXPTYPE st = obj->sexptype();
             return st == OBJSXP;
         }
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
 
     private:
         /** @brief Default constructor.

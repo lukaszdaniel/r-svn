@@ -75,6 +75,18 @@ namespace CXXR
             return st == DOTSXP;
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "...";
+        }
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
     private:
         // Declared private to ensure that DottedArgs objects are
         // allocated only using 'new':

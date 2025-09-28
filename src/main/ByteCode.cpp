@@ -55,6 +55,11 @@ namespace CXXR
         bcEval_loop(nullptr);
 #endif
     }
+
+    const char *ByteCode::typeName() const
+    {
+        return staticTypeName();
+    }
 } // namespace CXXR
 
 namespace R

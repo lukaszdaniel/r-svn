@@ -41,6 +41,7 @@
 
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/GCManager.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 
 namespace CXXR
 {
@@ -53,7 +54,7 @@ namespace CXXR
      * null.)  A PairList object is considered to 'own' its car, its
      * tag, and all its successors.
      */
-    class PairList : public ConsCell
+    class PairList: public ConsCell
     {
     public:
         /**
@@ -65,7 +66,7 @@ namespace CXXR
          *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        PairList(SEXP cr, SEXP tl, SEXP tg) : ConsCell(LISTSXP, cr, tl, tg)
+        PairList(SEXP cr, SEXP tl, SEXP tg): ConsCell(LISTSXP, cr, tl, tg)
         {
         }
 
@@ -136,6 +137,18 @@ namespace CXXR
         iterator end() { return iterator(); }
         const_iterator end() const { return const_iterator(); }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "pairlist";
+        }
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
     private:
         // Declared private to ensure that PairList objects are
         // allocated only using 'new':
@@ -150,9 +163,9 @@ namespace CXXR
     template <typename ValueType>
     inline void ConsCell::iterator_tmpl<ValueType>::advance()
     {
-        if (m_cc && (static_cast<RObject *>(m_cc->tail()) != R_NilValue))
+        if (m_cc && (SEXP_downcast<RObject *>(m_cc->tail()) != R_NilValue))
         {
-            m_cc = static_cast<ValueType *>(m_cc->tail());
+            m_cc = SEXP_downcast<ValueType *>(m_cc->tail());
         }
         else
         {
@@ -163,9 +176,9 @@ namespace CXXR
     template <typename ValueType>
     inline void ConsCell::const_iterator_tmpl<ValueType>::advance()
     {
-        if (m_cc && (static_cast<const RObject *>(m_cc->tail()) != R_NilValue))
+        if (m_cc && (SEXP_downcast<const RObject *>(m_cc->tail()) != R_NilValue))
         {
-            m_cc = static_cast<const ValueType *>(m_cc->tail());
+            m_cc = SEXP_downcast<const ValueType *>(m_cc->tail());
         }
         else
         {
@@ -181,7 +194,7 @@ namespace CXXR
     template <class T = PairList>
     T *CXXR_cons(RObject *car, RObject *cdr, RObject *tag = R_NilValue)
     {
-        return PairList::create<T>(car, static_cast<PairList *>(cdr), tag);
+        return PairList::create<T>(car, SEXP_downcast<PairList *>(cdr), tag);
     }
 } // namespace CXXR
 

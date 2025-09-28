@@ -51,6 +51,11 @@ namespace CXXR
         const auto &SET_PRVALUEptr = SET_PRVALUE;
     } // namespace ForceNonInline
 
+    const char *Promise::typeName() const
+    {
+        return staticTypeName();
+    }
+
     Promise *Promise::create(SEXP val, SEXP expr, SEXP env)
     {
         GCStackRoot<> valrt(val);

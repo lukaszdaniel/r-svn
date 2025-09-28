@@ -42,6 +42,11 @@ namespace CXXR
         const auto &R_ExternalPtrProtectedptr = R_ExternalPtrProtected;
         const auto &R_ClearExternalPtrptr = R_ClearExternalPtr;
     } // namespace ForceNonInline
+
+    const char *ExternalPointer::typeName() const
+    {
+        return ExternalPointer::staticTypeName();
+    }
 } // namespace CXXR
 
 namespace R

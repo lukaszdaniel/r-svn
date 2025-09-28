@@ -39,6 +39,7 @@
 #include <CXXR/Symbol.hpp>
 #include <CXXR/Closure.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -121,7 +122,7 @@ namespace
 
     bool isDDName(SEXP name)
     {
-        const String *m_name = static_cast<const String *>(name);
+        const String *m_name = SEXP_downcast<const String *>(name);
         bool m_dd_index = 0;
         // If this is a ..n symbol, extract the value of n.
         if (m_name && m_name->size() > 2)

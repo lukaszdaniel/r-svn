@@ -52,6 +52,11 @@ namespace CXXR
             ans = create(R_NilValue, ans);
         return ans;
     }
+
+    const char *PairList::typeName() const
+    {
+        return staticTypeName();
+    }
 } // namespace CXXR
 
 namespace R

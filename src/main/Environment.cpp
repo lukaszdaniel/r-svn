@@ -39,6 +39,7 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Rinternals.h>
 
@@ -91,20 +92,25 @@ namespace CXXR
 
     Environment *Environment::global()
     {
-        return static_cast<Environment *>(R_GlobalEnv);
+        return SEXP_downcast<Environment *>(R_GlobalEnv);
         // static GCRoot<Environment> global(createGlobalEnvironment());
         // return global;
     }
 
     Environment *Environment::baseNamespace()
     {
-        return static_cast<Environment *>(R_BaseNamespace);
+        return SEXP_downcast<Environment *>(R_BaseNamespace);
     }
 
     void Environment::initialize()
     {
         R_EmptyEnv = empty();
         R_BaseEnv = base();
+    }
+
+    const char *Environment::typeName() const
+    {
+        return staticTypeName();
     }
 
     void Environment::nullEnvironmentError()
@@ -164,7 +170,7 @@ namespace CXXR
             // print the symbol
             os << prefix << "├── ";
             {
-                const Symbol *tg = static_cast<const Symbol *>(binding->tag());
+                const Symbol *tg = SEXP_downcast<const Symbol *>(binding->tag());
                 if (show_refcnt)
                     os << "(" << tg->getRefCount() << ") ";
                 os << "symbol is '" << tg->name()->stdstring() << "'";
@@ -192,14 +198,14 @@ namespace CXXR
             // print the type of the tail node
             os << prefix << "└──";
             {
-                const PairList *tl = static_cast<const PairList *>(binding->tail());
+                const PairList *tl = SEXP_downcast<const PairList *>(binding->tail());
                 if (tl != R_NilValue)
                 {
                     os << "┐";
                     if (show_refcnt)
                         os << " (" << tl->getRefCount() << ")";
                     os << std::endl;
-                    printFrameBody(os, static_cast<const PairList *>(tl), prefix + "   ", show_refcnt);
+                    printFrameBody(os, SEXP_downcast<const PairList *>(tl), prefix + "   ", show_refcnt);
                 }
                 else
                 {
@@ -228,7 +234,7 @@ namespace CXXR
         os << "Frame detais:\n";
         if (show_refcnt)
             os << "(" << env->getRefCount() << ") ";
-        printFrameBody(os, static_cast<PairList *>(env->frame()), "", show_refcnt);
+        printFrameBody(os, SEXP_downcast<PairList *>(env->frame()), "", show_refcnt);
         os << "\n";
     }
 } // namespace CXXR

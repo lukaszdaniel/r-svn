@@ -32,6 +32,7 @@
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Error.h>
 #include <Localization.h>
 #include <Defn.h> // for ASSIGNMENT_PENDING, SET_ASSIGNMENT_PENDING
@@ -62,12 +63,12 @@ namespace CXXR
 
     const PairList *ConsCell::tail() const
     {
-        return static_cast<const PairList *>(u.listsxp.m_tail.get());
+        return SEXP_downcast<const PairList *>(u.listsxp.m_tail.get());
     }
 
     PairList *ConsCell::tail()
     {
-        return static_cast<PairList *>(u.listsxp.m_tail.get());
+        return SEXP_downcast<PairList *>(u.listsxp.m_tail.get());
     }
 
     bool ConsCell::assignmentPending() const
@@ -141,7 +142,7 @@ namespace CXXR
                     os << "tag is " << Rf_type2char(tg->sexptype());
                     if (Symbol::isA(tg))
                     {
-                        os << "; name is '" << static_cast<const Symbol *>(tg)->name()->stdstring() << "'";
+                        os << "; name is '" << SEXP_downcast<const Symbol *>(tg)->name()->stdstring() << "'";
                     }
                     else if (tg->sexptype() == INTSXP)
                     {
@@ -149,8 +150,8 @@ namespace CXXR
                     }
                     else if (ConsCell::isA(tg))
                     {
-                        os << " of length: " << ConsCell::listLength(static_cast<const ConsCell *>(tg)) << "\n";
-                        printCCBody(os, static_cast<const ConsCell *>(tg), prefix + "│   ", show_refcnt);
+                        os << " of length: " << ConsCell::listLength(SEXP_downcast<const ConsCell *>(tg)) << "\n";
+                        printCCBody(os, SEXP_downcast<const ConsCell *>(tg), prefix + "│   ", show_refcnt);
                     }
                 }
                 else
@@ -180,7 +181,7 @@ namespace CXXR
                         os << "car is " << Rf_type2char(cr->sexptype());
                         if (Symbol::isA(cr))
                         {
-                            os << "; name is '" << static_cast<const Symbol *>(cr)->name()->stdstring() << "'";
+                            os << "; name is '" << SEXP_downcast<const Symbol *>(cr)->name()->stdstring() << "'";
                         }
                         else if (cr->sexptype() == INTSXP)
                         {
@@ -188,8 +189,8 @@ namespace CXXR
                         }
                         else if (ConsCell::isA(cr))
                         {
-                            os << " of length: " << ConsCell::listLength(static_cast<const ConsCell *>(cr)) << "\n";
-                            printCCBody(os, static_cast<const ConsCell *>(cr), prefix + "│   ", show_refcnt);
+                            os << " of length: " << ConsCell::listLength(SEXP_downcast<const ConsCell *>(cr)) << "\n";
+                            printCCBody(os, SEXP_downcast<const ConsCell *>(cr), prefix + "│   ", show_refcnt);
                         }
                     }
                 }
@@ -214,7 +215,7 @@ namespace CXXR
                         if (tl->altrep())
                             os << " (altrep)";
                         os << std::endl;
-                        printCCBody(os, static_cast<const ConsCell *>(tl), prefix + "   ", show_refcnt);
+                        printCCBody(os, SEXP_downcast<const ConsCell *>(tl), prefix + "   ", show_refcnt);
                     }
                     else
                     {

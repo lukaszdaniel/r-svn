@@ -29,7 +29,7 @@ CXXR_HEADERS = Allocator.hpp BadObject.hpp Browser.hpp BuiltInFunction.hpp ByteC
 		ConsCell.hpp DotInternal.hpp DottedArgs.hpp Environment.hpp Evaluator.hpp Expression.hpp ExternalPointer.hpp FunctionBase.hpp \
 		GCEdge.hpp GCManager.hpp GCNode.hpp GCRoot.hpp GCStackRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp \
 		NodeStack.hpp PairList.hpp Promise.hpp ProtectStack.hpp RAllocStack.hpp RContext.hpp RObject.hpp \
-		RTypes.hpp S4Object.hpp SEXPTYPE.hpp StackChecker.hpp String.hpp Symbol.hpp VectorBase.hpp \
+		RTypes.hpp S4Object.hpp SEXP_downcast.hpp SEXPTYPE.hpp StackChecker.hpp String.hpp Symbol.hpp VectorBase.hpp \
 		WeakRef.hpp config.hpp strutil.hpp
 
 all: fixh config.h trioremap.h

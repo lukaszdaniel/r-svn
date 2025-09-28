@@ -22,24 +22,21 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/** @file DottedArgs.cpp
+/** @file SEXP_downcast.cpp
  *
- * @brief Class CXXR::DottedArgs.
+ * Error reporting for SEXP_downcast.
  */
 
-#include <CXXR/DottedArgs.hpp>
+#include <cstdlib>
+#include <CXXR/SEXP_downcast.hpp>
+#include <Localization.h>
+
+using namespace std;
 
 namespace CXXR
 {
-    const char *DottedArgs::typeName() const
+    void SEXP_downcast_error(const char *given, const char *wanted)
     {
-        return staticTypeName();
+        Rf_error(_("SEXP_downcast: '%s' supplied where '%s' expected."), given, wanted);
     }
 } // namespace CXXR
-
-namespace R
-{
-} // namespace R
-
-// ***** C interface *****
-

@@ -50,6 +50,10 @@ namespace CXXR
             SET_S4_OBJECT(this);
     }
 
+    const char *S4Object::typeName() const
+    {
+        return S4Object::staticTypeName();
+    }
 } // namespace CXXR
 
 namespace R

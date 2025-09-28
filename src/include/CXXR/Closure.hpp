@@ -124,6 +124,18 @@ namespace CXXR
             return st == CLOSXP;
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "closure";
+        }
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
         /** @brief Patrol entry and exit if debugging.
          *
          * DebugScope objects must be declared on the processor stack

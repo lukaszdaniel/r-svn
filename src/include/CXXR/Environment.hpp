@@ -146,6 +146,18 @@ namespace CXXR
             return u.envsxp.m_frame;
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "environment";
+        }
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
         /** @brief Not for general use.
          *
          * (Used by simple_as_environment to report use of NULL environment.)

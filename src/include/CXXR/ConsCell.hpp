@@ -63,7 +63,7 @@ namespace CXXR
      * however, it would have been difficult efficiently to implement
      * functions such as CAR(), which are ubiquitous in the CR code.
      */
-    class ConsCell : public RObject
+    class ConsCell: public RObject
     {
     public:
         /** @brief iterator for iterating over a ConsCell list.
@@ -83,7 +83,7 @@ namespace CXXR
              * @param cc Pointer, possibly null, to the ConsCell to be
              *           designated by the iterator.
              */
-            explicit iterator_tmpl(ValueType *cc = nullptr) : m_cc(cc) {}
+            explicit iterator_tmpl(ValueType *cc = nullptr): m_cc(cc) {}
 
             ValueType &operator*() const { return *m_cc; }
 
@@ -134,7 +134,7 @@ namespace CXXR
              * @param cc Pointer, possibly null, to the ConsCell to be
              *           designated by the const_iterator.
              */
-            explicit const_iterator_tmpl(const ValueType *cc = nullptr) : m_cc(cc)
+            explicit const_iterator_tmpl(const ValueType *cc = nullptr): m_cc(cc)
             {
             }
 
@@ -292,6 +292,15 @@ namespace CXXR
             sxpinfo.m_binding_tag = v;
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "(pairlist type)";
+        }
+
         /** @brief Get the 'tag' value.
          *
          * @return a pointer to the 'tag' of this ConsCell.
@@ -339,7 +348,7 @@ namespace CXXR
          *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        ConsCell(SEXPTYPE stype, SEXP cr, SEXP tl, SEXP tg) : RObject(stype)
+        ConsCell(SEXPTYPE stype, SEXP cr, SEXP tl, SEXP tg): RObject(stype)
         {
             u.listsxp.m_car.reset();
             u.listsxp.m_tail.reset();

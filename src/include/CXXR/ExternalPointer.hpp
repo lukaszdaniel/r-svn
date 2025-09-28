@@ -61,6 +61,15 @@ namespace CXXR
             return new ExternalPointer(ptr, prot, tag);
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "externalptr";
+        }
+
         /** @brief Is an RObject an ExternalPointer?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -163,6 +172,9 @@ namespace CXXR
         {
             return u.extptr.m_tag;
         }
+
+        // Virtual function of RObject:
+        const char *typeName() const override;
 
     private:
         /**

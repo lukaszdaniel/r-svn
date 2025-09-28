@@ -78,6 +78,11 @@ namespace CXXR
         u.closxp.m_body = body;
         u.closxp.m_env = env;
     }
+
+    const char *Closure::typeName() const
+    {
+        return staticTypeName();
+    }
 } // namespace CXXR
 
 namespace R

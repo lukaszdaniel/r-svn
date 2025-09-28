@@ -203,6 +203,15 @@ namespace CXXR
          */
         static Symbol *obtainS3Signature(const char *className, const char *methodName);
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "symbol";
+        }
+
         /** @brief Unbound value.
          *
          * This is used as the 'value' of a Symbol that has not been
@@ -215,6 +224,9 @@ namespace CXXR
         static SEXP unboundValue();
 
         static const std::vector<std::string> s_special_symbol_names;
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
 
     private:
         Symbol(SEXP name, SEXP val, SEXP internal) : RObject(SYMSXP)

@@ -132,6 +132,15 @@ namespace CXXR
             u.promsxp.m_expr.retarget(this, val);
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "promise";
+        }
+
         /** @brief Access the value of a Promise.
          *
          * @return pointer to the value of the Promise, or to
@@ -152,6 +161,9 @@ namespace CXXR
         {
             sxpinfo.m_binding_tag = NILSXP;
         }
+
+        // Virtual function of RObject:
+        const char *typeName() const override;
 
     private:
         Promise(SEXP val, SEXP expr, SEXP env) : RObject(PROMSXP)

@@ -79,6 +79,15 @@ namespace CXXR
             return u.bytecode.m_expression;
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "bytecode";
+        }
+
         // Normally this implements evaluate() by evaluating bcode in
         // the environment env.  However, if called with a null
         // pointer for bcode, it initialises the opcode despatch
@@ -128,6 +137,9 @@ namespace CXXR
         }
 
         static ptrdiff_t codeDistane(SEXP body, void *bcpc);
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
 
         static size_t nodeStackSize()
         {

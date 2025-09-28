@@ -139,6 +139,11 @@ namespace CXXR
         return !std::any_of(str.begin(), str.end(), [](char c)
             { return static_cast<unsigned char>(c) > 127; });
     }
+
+    const char *String::typeName() const
+    {
+        return String::staticTypeName();
+    }
 } // namespace CXXR
 
 namespace R

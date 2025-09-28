@@ -33,6 +33,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Localization.h>
 #include <Defn.h> // for S4_OBJECT_MASK
 
@@ -96,6 +97,11 @@ namespace CXXR
 #undef S4_OBJECT_MASK
     }
 
+    const char *RObject::typeName() const
+    {
+        return Rf_type2char(sexptype());
+    }
+
     bool RObject::hasAttributes() const
     {
         return attributes() != R_NilValue;
@@ -112,7 +118,7 @@ namespace CXXR
 
     RObject *RObject::getAttribute(const Symbol *name) const
     {
-        for (const PairList *node = static_cast<PairList *>(m_attrib.get()); node && node != R_NilValue; node = node->tail())
+        for (const PairList *node = SEXP_downcast<PairList *>(m_attrib.get()); node && node != R_NilValue; node = node->tail())
             if (node->tag() == name)
                 return node->car0();
         return R_NilValue;
@@ -149,7 +155,7 @@ namespace CXXR
         // Find attribute:
         /* this does no allocation */
         PairList *prev = nullptr;
-        PairList *node = static_cast<PairList *>(m_attrib.get());
+        PairList *node = SEXP_downcast<PairList *>(m_attrib.get());
         while (node && node != R_NilValue && node->tag() != name)
         {
             prev = node; // record last attribute, if any
@@ -204,7 +210,7 @@ namespace CXXR
         // generation than the newly assigned new_attributes
         m_attrib.retarget(this, new_attributes);
 
-        for (const PairList *node = static_cast<PairList *>(m_attrib.get()); node != R_NilValue; node = node->tail())
+        for (const PairList *node = SEXP_downcast<PairList *>(m_attrib.get()); node != R_NilValue; node = node->tail())
             if (node->tag() == R_ClassSymbol)
             {
                 sxpinfo.obj = (node->car0() != R_NilValue);
@@ -218,7 +224,7 @@ namespace CXXR
         // after SET_ATTRIB has been called.
         while (new_attributes && new_attributes != R_NilValue)
         {
-            const Symbol *name = static_cast<const Symbol *>(new_attributes->tag());
+            const Symbol *name = SEXP_downcast<const Symbol *>(new_attributes->tag());
             setAttribute(const_cast<Symbol *>(name), new_attributes->car0());
             new_attributes = new_attributes->tail();
         }

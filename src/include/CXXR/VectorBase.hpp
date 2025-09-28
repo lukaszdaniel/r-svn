@@ -117,6 +117,15 @@ namespace CXXR
             }
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "(vector type)";
+        }
+
         /** @brief Raise error on attempt to allocate overlarge vector.
          *
          * @param bytes Size of data block for which allocation failed.

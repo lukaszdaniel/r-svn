@@ -490,6 +490,13 @@ namespace CXXR
          */
         void setS4Object(bool on);
 
+        /** @brief Name within R of this type of object.
+         *
+         * @return the name by which this type of object is known
+         *         within R.
+         */
+        virtual const char *typeName() const;
+
         GCEdge<> m_attrib;
 
         union U
@@ -514,6 +521,15 @@ namespace CXXR
             }
             ~U() {}
         } u;
+
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "RObject";
+        }
 
     protected:
         /**

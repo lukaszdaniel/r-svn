@@ -105,6 +105,15 @@ namespace CXXR
             return st == WEAKREFSXP;
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "weakref";
+        }
+
     private:
         WeakRef(SEXP key, SEXP value, SEXP finalizer) : RObject(WEAKREFSXP)
         {

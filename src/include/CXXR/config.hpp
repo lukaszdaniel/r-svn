@@ -68,6 +68,11 @@
 #define ADJUST_ENVIR_REFCNTS
 #endif
 
+// Define CHECKED_SEXP_DOWNCAST to make SEXP_downcast() use
+// dynamic_cast<> instead of static_cast<>.  This adds a run-time
+// check that the cast is valid, at the cost of some performance.
+// #define CHECKED_SEXP_DOWNCAST
+
 /** To test the write barrier used by the generational collector,
  * define TESTING_WRITE_BARRIER.  This makes the internal structure of
  * SEXPRECs visible only inside of files that explicitly define

@@ -83,6 +83,18 @@ namespace CXXR
             return st == LANGSXP;
         }
 
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "language";
+        }
+
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
     private:
         // Declared private to ensure that Expression objects are
         // allocated only using 'new':

@@ -56,6 +56,7 @@
 #include <CXXR/Closure.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1080,7 +1081,7 @@ namespace
             R_MissingArgError(e, getLexicalCall(rho), "evalError");
         }
         else if (Promise::isA(tmp)) {
-            return static_cast<Promise *>(tmp)->force();
+            return SEXP_downcast<Promise *>(tmp)->force();
         }
         else ENSURE_NAMED(tmp); /* needed for .Last.value - LT */
 
@@ -1312,7 +1313,7 @@ SEXP Evaluator::evaluate(SEXP e, SEXP rho)
     break;
     case PROMSXP:
     {
-        tmp = static_cast<Promise *>(e)->force();
+        tmp = SEXP_downcast<Promise *>(e)->force();
     }
     break;
     case LANGSXP:
@@ -3208,7 +3209,7 @@ attribute_hidden SEXP do_function(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP rval, srcref;
 
     if (Promise::isA(op)) {
-	op = static_cast<Promise *>(op)->force();
+	op = SEXP_downcast<Promise *>(op)->force();
     }
     if (length(args) < 2) WrongArgCount("function");
     CheckFormals(CAR(args), "function");
@@ -5012,7 +5013,7 @@ static R_INLINE SEXP getPrimitive(SEXP symbol, SEXPTYPE type)
 {
     SEXP value = SYMVALUE(symbol);
     if (Promise::isA(value)) {
-	value = static_cast<Promise *>(value)->force();
+	value = SEXP_downcast<Promise *>(value)->force();
     }
     if (TYPEOF(value) != type) {
 	/* probably means a package redefined the base function so
@@ -5854,7 +5855,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 		if (miss)
 		    return R_MissingArg;
 	    }
-	    return static_cast<Promise *>(value)->force();
+	    return SEXP_downcast<Promise *>(value)->force();
 	}
     }
     else {
@@ -7171,7 +7172,7 @@ attribute_hidden SEXP R::R_getBCInterpreterExpression(void)
 {
     SEXP exp = R_findBCInterpreterExpression();
     if (Promise::isA(exp)) {
-	exp = static_cast<Promise *>(exp)->force();
+	exp = SEXP_downcast<Promise *>(exp)->force();
     }
 
     /* This tries to mimick the behavior of the AST interpreter to a
@@ -7827,7 +7828,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	SEXP symbol = GETCONST(constants, GETOP());
 	SEXP value = SYMVALUE(symbol);
 	if (Promise::isA(value)) {
-	    value = static_cast<Promise *>(value)->force();
+	    value = SEXP_downcast<Promise *>(value)->force();
 	}
 	if (RTRACE(value)) {
 	  Rprintf("trace: ");

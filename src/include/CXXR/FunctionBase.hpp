@@ -42,6 +42,15 @@ namespace CXXR
     class FunctionBase : public RObject
     {
     public:
+        /** @brief The name by which this type is known in R.
+         *
+         * @return The name by which this type is known in R.
+         */
+        static const char *staticTypeName()
+        {
+            return "(function type)";
+        }
+
         /** @brief Is an RObject a FunctionBase?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
