@@ -2105,177 +2105,65 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 #define intCHARSXP 73
 #endif
 
-namespace CXXR
-{
-    VectorBase::VectorBase(SEXPTYPE stype, size_type n_elem, R_allocator_t *allocator)
-        : RObject(stype)
-    {
-        R_size_t actual_size = 0; // in bytes
-        switch (stype)
-        {
-        case NILSXP:
-            break;
-        case RAWSXP:
-            actual_size = n_elem * sizeof(Rbyte);
-            break;
-        case CHARSXP:
-            actual_size = (n_elem + 1) * sizeof(char);
-            break;
-        case LGLSXP:
-            actual_size = n_elem * sizeof(Logical);
-            break;
-        case INTSXP:
-            actual_size = n_elem * sizeof(int);
-            break;
-        case REALSXP:
-            actual_size = n_elem * sizeof(double);
-            break;
-        case CPLXSXP:
-            actual_size = n_elem * sizeof(Complex);
-            break;
-        case STRSXP:
-        case EXPRSXP:
-        case VECSXP:
-            actual_size = n_elem * sizeof(SEXP);
-            break;
-        case LANGSXP:
-            break;
-        case LISTSXP:
-            break;
-        default:
-            break;
-        }
-
-        if (actual_size >= R_SIZE_T_MAX)
-        {
-            VectorBase::tooBig(actual_size);
-        }
-
-        SET_EXT_ALLOCATOR(this, (allocator != nullptr));
-        u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, allocator));
-        SET_STDVEC_LENGTH(this, n_elem);
-
-        /* The following prevents disaster in the case */
-        /* that an uninitialised string vector is marked */
-        /* Direct assignment is OK since the node was just allocated and */
-        /* so is at least as new as R_NilValue and R_BlankString */
-        if (stype == EXPRSXP || stype == VECSXP)
-        {
-            SEXP *data = STRING_PTR(this);
-            for (R_xlen_t i = 0; i < n_elem; i++)
-                data[i] = R_NilValue;
-        }
-        else if (stype == STRSXP)
-        {
-            SEXP *data = STRING_PTR(this);
-            for (R_xlen_t i = 0; i < n_elem; i++)
-                data[i] = R_BlankString;
-        }
-        else if (stype == CHARSXP)
-        {
-            CHAR_RW(this)[n_elem] = 0;
-        }
-        else
-        {
-            std::memset(u.vecsxp.m_data, 0, actual_size);
-        }
-    }
-
-    String::String(const std::string &name, cetype_t encoding, bool isAscii)
-        : VectorBase(CHARSXP, name.length(), nullptr)
-    {
-        int n_elem = name.length();
-        if (n_elem)
-            memcpy(u.vecsxp.m_data, name.c_str(), n_elem);
-        ((char *)u.vecsxp.m_data)[n_elem] = 0;
-
-        switch (encoding)
-        {
-        case CE_NATIVE:
-            break; /* don't set encoding */
-        case CE_UTF8:
-            SET_UTF8(this);
-            break;
-        case CE_LATIN1:
-            SET_LATIN1(this);
-            break;
-        case CE_BYTES:
-            SET_BYTES(this);
-            break;
-        default:
-            break;
-        }
-        if (isAscii)
-            SET_ASCII(this);
-        SET_CACHED(this); /* Mark it */
-    }
-} // namespace CXXR
-
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 {
-    SEXP s = nullptr;     /* For the generational collector it would be safer to
-		   work in terms of a VECSXP here, but that would
-		   require several casts below... */
-
     if (n_elem > R_XLEN_T_MAX)
-	error(_("cannot allocate vector of length %lld"), (long long)length);
-    else if (n_elem < 0 )
-	error("%s", _("negative length vectors are not allowed"));
+        error(_("cannot allocate vector of length %lld"), (long long)length);
+    else if (n_elem < 0)
+        error("%s", _("negative length vectors are not allowed"));
 
     /* number of vector cells to allocate */
     switch (type) {
     case NILSXP:
-	return R_NilValue;
+        return R_NilValue;
     case RAWSXP:
-	break;
+        break;
     case CHARSXP:
-	error("%s", _("use of allocVector(CHARSXP ...) is defunct\n"));
-	break;
+        error("%s", _("use of allocVector(CHARSXP ...) is defunct\n"));
+        break;
     case LGLSXP:
-	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Logical)))
-		error(_("cannot allocate vector of length %lld"),
-		      (long long)n_elem);
-	break;
+        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(Logical)))
+            error(_("cannot allocate vector of length %lld"),
+                (long long)n_elem);
+        break;
     case INTSXP:
-	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(int)))
-		error(_("cannot allocate vector of length %lld"),
-		      (long long)n_elem);
-	break;
+        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(int)))
+            error(_("cannot allocate vector of length %lld"),
+                (long long)n_elem);
+        break;
     case REALSXP:
-	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(double)))
-		error(_("cannot allocate vector of length %lld"),
-		      (long long)n_elem);
-	break;
+        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(double)))
+            error(_("cannot allocate vector of length %lld"),
+                (long long)n_elem);
+        break;
     case CPLXSXP:
-	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(Complex)))
-		error(_("cannot allocate vector of length %lld"),
-		      (long long)n_elem);
-	break;
+        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(Complex)))
+            error(_("cannot allocate vector of length %lld"),
+                (long long)n_elem);
+        break;
     case STRSXP:
     case EXPRSXP:
     case VECSXP:
-	    if (n_elem > (R_xlen_t) (R_SIZE_T_MAX / sizeof(SEXP)))
-		error(_("cannot allocate vector of length %lld"),
-		      (long long)n_elem);
-	break;
+        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(SEXP)))
+            error(_("cannot allocate vector of length %lld"),
+                (long long)n_elem);
+        break;
     case LANGSXP:
 #ifdef LONG_VECTOR_SUPPORT
-	if (n_elem > R_SHORT_LEN_MAX) error("%s", _("invalid length for pairlist"));
+        if (n_elem > R_SHORT_LEN_MAX) error("%s", _("invalid length for pairlist"));
 #endif
-	return allocLang((int) n_elem);
+        return Rf_allocLang((int)n_elem);
     case LISTSXP:
 #ifdef LONG_VECTOR_SUPPORT
-	if (n_elem > R_SHORT_LEN_MAX) error("%s", _("invalid length for pairlist"));
+        if (n_elem > R_SHORT_LEN_MAX) error("%s", _("invalid length for pairlist"));
 #endif
-	return allocList((int) n_elem);
+        return Rf_allocList((int)n_elem);
     default:
-	error(_("invalid type/length (%s/%lld) in vector allocation"),
-	      type2char(type), (long long)n_elem);
+        error(_("invalid type/length (%s/%lld) in vector allocation"),
+            type2char(type), (long long)n_elem);
     }
 
-    s = new VectorBase(type, n_elem, allocator);
-
-    return s;
+    return new VectorBase(type, n_elem, allocator);
 }
 
 String *CXXR::CXXR_allocCharsxp(const std::string &name, cetype_t encoding, bool isAscii)
@@ -2286,8 +2174,7 @@ String *CXXR::CXXR_allocCharsxp(const std::string &name, cetype_t encoding, bool
     else if (n_elem < 0)
         error("%s", _("negative length vectors are not allowed"));
 
-    // return Rf_allocVector(CHARSXP, name.length());
-    return new String(name, encoding, isAscii);
+    return String::create(name, encoding, isAscii);
 }
 
 /* For future hiding of allocVector(CHARSXP) */

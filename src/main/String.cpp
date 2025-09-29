@@ -122,6 +122,35 @@ namespace CXXR
         return new String(name, enc, is_ascii);
     }
 
+    String::String(const std::string &name, cetype_t encoding, bool isAscii)
+        : VectorBase(CHARSXP, name.length(), nullptr)
+    {
+        int n_elem = name.length();
+        if (n_elem)
+            memcpy(u.vecsxp.m_data, name.c_str(), n_elem);
+        ((char *)u.vecsxp.m_data)[n_elem] = 0;
+
+        switch (encoding)
+        {
+        case CE_NATIVE:
+            break; /* don't set encoding */
+        case CE_UTF8:
+            SET_UTF8(this);
+            break;
+        case CE_LATIN1:
+            SET_LATIN1(this);
+            break;
+        case CE_BYTES:
+            SET_BYTES(this);
+            break;
+        default:
+            break;
+        }
+        if (isAscii)
+            SET_ASCII(this);
+        SET_CACHED(this); /* Mark it */
+    }
+
     void String::visitTable()
     {
         for (auto it = String::s_hash_table.begin(); it != String::s_hash_table.end(); )
@@ -133,6 +162,23 @@ namespace CXXR
         }
     }
 
+    bool String::isASCII() const
+    {
+        return IS_ASCII(this);
+    }
+
+    cetype_t String::encoding() const
+    {
+        if (IS_BYTES(this))
+            return CE_BYTES;
+        if (IS_LATIN1(this))
+            return CE_LATIN1;
+        if (IS_UTF8(this))
+            return CE_UTF8;
+
+        Rf_error("String::encoding(): unknown encoding mask"); // for now
+        return CE_NATIVE;
+    }
 
     bool isASCII(const std::string &str)
     {

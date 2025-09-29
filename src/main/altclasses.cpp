@@ -33,6 +33,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/PairList.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Altrep.h>
@@ -1049,7 +1050,7 @@ static void mmap_finalize(SEXP eptr);
 static void register_mmap_eptr(SEXP eptr)
 {
     if (mmap_list == NULL) {
-	mmap_list = CONS(R_NilValue, R_NilValue);
+	mmap_list = PairList::create(R_NilValue, R_NilValue);
 	R_PreserveObject(mmap_list);
     }
 

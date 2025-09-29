@@ -55,7 +55,7 @@ namespace CXXR
      * this may be different from the number of Unicode characters
      * represented by the string.
      */
-    class String : public VectorBase
+    class String: public VectorBase
     {
     public:
         /** @brief Comparison object for CXXR::String.
@@ -91,6 +91,20 @@ namespace CXXR
             bool m_na_last;
         };
 
+        /** @brief Read-only character access.
+         *
+         * @param index Index of required character (counting from
+         *          zero).  No bounds checking is applied.
+         *
+         * @return the specified character.
+         *
+         * @note For CXXR internal use only.
+         */
+        const char operator[](size_type index) const
+        {
+            return (static_cast<const char *>(u.vecsxp.m_data))[index];
+        }
+
         /** @brief Access encapsulated C-style string.
          *
          * @return Pointer to the text of the string represented as a
@@ -110,6 +124,13 @@ namespace CXXR
          */
         static String *blank();
 
+        /** @brief Character encoding.
+         *
+         * @return the character encoding.  At present the only types
+         * of encoding are CE_NATIVE, CE_UTF8, CE_LATIN1 and CE_BYTES.
+         */
+        cetype_t encoding() const;
+
         /** @brief Extract encoding information from CR's \c gp bits
          * field.
          *
@@ -123,6 +144,36 @@ namespace CXXR
          *          least significant 16 bits).
          */
         static cetype_t GPBits2Encoding(unsigned int gpbits);
+
+        /** @brief Is this String pure ASCII?
+         *
+         * @return true iff the String contains only ASCII characters.
+         */
+        bool isASCII() const;
+
+        /** @brief Is this String encoded in UTF8?
+         *
+         * @return true iff the String is encoded in UTF8.
+         */
+        bool isUTF8() const { return encodingEquals(CE_UTF8); }
+
+        /** @brief Is this String encoded in LATIN1?
+         *
+         * @return true iff the String is encoded in LATIN1.
+         */
+        bool isLATIN1() const { return encodingEquals(CE_LATIN1); }
+
+        /** @brief Is this String encoded in BYTES?
+         *
+         * @return true iff the String is encoded in BYTES.
+         */
+        bool isBYTES() const { return encodingEquals(CE_BYTES); }
+
+        /** @brief Check if String is encoded in \a t?
+         *
+         * @return true iff the String is encoded in \a t.
+         */
+        bool encodingEquals(const cetype_t &t) const { return encoding() == t; }
 
         /** @brief Test if 'not available'.
          *
@@ -170,6 +221,28 @@ namespace CXXR
          */
         static String *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
 
+        /**
+         * @brief Create uncached String object.
+         *
+         * @param text The text of the required String. (Embedded null
+         *          characters are permissible.)
+         *
+         * @param encoding The encoding of the required String.
+         *          Only CE_NATIVE, CE_UTF8 or CE_LATIN1 are permitted
+         *          in this context (checked).  Note that if \a str
+         *          contains no non-ASCII characters, then the
+         *          encoding is set to CE_NATIVE regardless of the
+         *          value of the \a encoding parameter.
+         *
+         * @param isAscii Flag indicating whether \a text contains only
+         *         ASCII characters.
+         *
+         * @return Pointer to a String (preexisting or newly
+         * created) representing the specified text in the specified
+         * encoding.
+         */
+        static String *create(const std::string &text, cetype_t encoding, bool isAscii);
+
         /** @brief The name by which this type is known in R.
          *
          * @return The name by which this type is known in R.
@@ -193,7 +266,7 @@ namespace CXXR
         static bool s_known_to_be_latin1;
         static bool s_known_to_be_utf8;
 
-    // private:
+    private:
         // The first element of the key is the text, the second
         // element the encoding:
         using key = std::pair<std::string, cetype_t>;
@@ -216,13 +289,14 @@ namespace CXXR
         // to String objects.  Each String simply contains
         // a pointer locating its entry within the cache.
         using map = std::unordered_map<key, String *, Hasher, std::equal_to<key>,
-                                       CXXR::Allocator<std::pair<const key, String *>>>;
+            CXXR::Allocator<std::pair<const key, String *>>>;
 
         static map s_hash_table; // Global hash of CHARSXPs
 
         String(const std::string &text, cetype_t encoding, bool isAscii);
-        static String *create(const std::string &text, cetype_t encoding, bool isAscii);
 
+        // Not implemented yet.  Declared to prevent
+        // compiler-generated versions:
         String(const String &) = delete;
         String &operator=(const String &) = delete;
 
