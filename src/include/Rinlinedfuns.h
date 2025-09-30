@@ -329,6 +329,29 @@ INLINE_FUN R_xlen_t XTRUELENGTH(SEXP x)
     return (int *) STDVEC_DATAPTR(x);
 }
 
+/*HIDDEN (inlining)*/ INLINE_FUN int *INTEGER0(SEXP x) {
+    CHECK_STDVEC_INT(x);
+    return (int *) STDVEC_DATAPTR(x);
+}
+
+/*HIDDEN*/ INLINE_FUN double *REAL0(SEXP x) {
+    CHECK_STDVEC_REAL(x);
+    return (double *) STDVEC_DATAPTR(x);
+}
+
+/*HIDDEN*/ INLINE_FUN Rcomplex *COMPLEX0(SEXP x) {
+    CHECK_STDVEC_CPLX(x);
+    return (Rcomplex *) STDVEC_DATAPTR(x);
+}
+
+/*HIDDEN (inlining)*/ INLINE_FUN Rbyte *RAW0(SEXP x) {
+    CHECK_STDVEC_RAW(x);
+    return (Rbyte *) STDVEC_DATAPTR(x);
+}
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
 namespace R {
 /* This should not be Rboolean as could be NA_LOGICAL */
 HIDDEN INLINE_FUN int SCALAR_LVAL(SEXP x) {
@@ -341,14 +364,7 @@ HIDDEN INLINE_FUN void SET_SCALAR_LVAL(SEXP x, int v) {
     CHECK_SCALAR_LGL(x);
     LOGICAL(x)[0] = v;
 }
-} // namespace R
 
-/*HIDDEN (inlining)*/ INLINE_FUN int *INTEGER0(SEXP x) {
-    CHECK_STDVEC_INT(x);
-    return (int *) STDVEC_DATAPTR(x);
-}
-
-namespace R {
 HIDDEN INLINE_FUN int SCALAR_IVAL(SEXP x) {
     CHECK_SCALAR_INT(x);
     return INTEGER(x)[0];
@@ -358,14 +374,7 @@ HIDDEN INLINE_FUN int SCALAR_IVAL(SEXP x) {
     CHECK_SCALAR_INT(x);
     INTEGER(x)[0] = v;
 }
-} // namespace R
 
-/*HIDDEN*/ INLINE_FUN double *REAL0(SEXP x) {
-    CHECK_STDVEC_REAL(x);
-    return (double *) STDVEC_DATAPTR(x);
-}
-
-namespace R {
 HIDDEN INLINE_FUN double SCALAR_DVAL(SEXP x) {
     CHECK_SCALAR_REAL(x);
     return REAL(x)[0];
@@ -375,14 +384,7 @@ HIDDEN INLINE_FUN double SCALAR_DVAL(SEXP x) {
     CHECK_SCALAR_REAL(x);
     REAL(x)[0] = v;
 }
-} // namespace R
 
-/*HIDDEN*/ INLINE_FUN Rcomplex *COMPLEX0(SEXP x) {
-    CHECK_STDVEC_CPLX(x);
-    return (Rcomplex *) STDVEC_DATAPTR(x);
-}
-
-namespace R {
 HIDDEN INLINE_FUN Rcomplex SCALAR_CVAL(SEXP x) {
     CHECK_SCALAR_CPLX(x);
     return COMPLEX(x)[0];
@@ -392,14 +394,7 @@ HIDDEN INLINE_FUN Rcomplex SCALAR_CVAL(SEXP x) {
     CHECK_SCALAR_CPLX(x);
     COMPLEX(x)[0] = CXXR::Complex(v);
 }
-} // namespace R
 
-/*HIDDEN (inlining)*/ INLINE_FUN Rbyte *RAW0(SEXP x) {
-    CHECK_STDVEC_RAW(x);
-    return (Rbyte *) STDVEC_DATAPTR(x);
-}
-
-namespace R {
 HIDDEN INLINE_FUN Rbyte SCALAR_BVAL(SEXP x) {
     CHECK_SCALAR_RAW(x);
     return RAW(x)[0];
@@ -411,6 +406,9 @@ HIDDEN INLINE_FUN Rbyte SCALAR_BVAL(SEXP x) {
 }
 } // namespace R
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 INLINE_FUN SEXP ALTREP_CLASS(SEXP x) { return CLASS(x); }
 
 INLINE_FUN SEXP R_altrep_data1(SEXP x) { return DATA1(x); }
