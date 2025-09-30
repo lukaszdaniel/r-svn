@@ -2107,8 +2107,8 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 
 SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 {
-    if (n_elem > R_XLEN_T_MAX)
-        error(_("cannot allocate vector of length %lld"), (long long)length);
+    if (n_elem > R_XLEN_T_MAX) // n_elem > 2^52
+        error(_("cannot allocate vector of length %lld"), (long long)n_elem);
     else if (n_elem < 0)
         error("%s", _("negative length vectors are not allowed"));
 
@@ -2122,31 +2122,16 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
         error("%s", _("use of allocVector(CHARSXP ...) is defunct\n"));
         break;
     case LGLSXP:
-        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(Logical)))
-            error(_("cannot allocate vector of length %lld"),
-                (long long)n_elem);
         break;
     case INTSXP:
-        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(int)))
-            error(_("cannot allocate vector of length %lld"),
-                (long long)n_elem);
         break;
     case REALSXP:
-        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(double)))
-            error(_("cannot allocate vector of length %lld"),
-                (long long)n_elem);
         break;
     case CPLXSXP:
-        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(Complex)))
-            error(_("cannot allocate vector of length %lld"),
-                (long long)n_elem);
         break;
     case STRSXP:
     case EXPRSXP:
     case VECSXP:
-        if (n_elem > (R_xlen_t)(R_SIZE_T_MAX / sizeof(SEXP)))
-            error(_("cannot allocate vector of length %lld"),
-                (long long)n_elem);
         break;
     case LANGSXP:
 #ifdef LONG_VECTOR_SUPPORT

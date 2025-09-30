@@ -142,7 +142,3 @@ namespace R
 } // namespace R
 
 // ***** C interface *****
-
-extern "C"
-{
-}
