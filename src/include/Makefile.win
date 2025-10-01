@@ -30,7 +30,8 @@ CXXR_HEADERS = Allocator.hpp BadObject.hpp Browser.hpp BuiltInFunction.hpp ByteC
 		GCEdge.hpp GCManager.hpp GCNode.hpp GCRoot.hpp GCStackRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp \
 		NodeStack.hpp PairList.hpp Promise.hpp ProtectStack.hpp RAllocStack.hpp RContext.hpp RObject.hpp \
 		RTypes.hpp S4Object.hpp SEXP_downcast.hpp SEXPTYPE.hpp StackChecker.hpp String.hpp Symbol.hpp VectorBase.hpp \
-		WeakRef.hpp config.hpp strutil.hpp
+		WeakRef.hpp config.hpp strutil.hpp \
+		FixedVector.hpp ComplexVector.hpp IntVector.hpp LogicalVector.hpp RawVector.hpp RealVector.hpp
 
 all: fixh config.h trioremap.h
 	@echo 'installing C headers'

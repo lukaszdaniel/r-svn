@@ -573,7 +573,7 @@ INLINE_FUN R_xlen_t Rf_xlength(SEXP s)
 /* regular allocVector() as a special case of allocVector3() with no custom allocator */
 INLINE_FUN SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length)
 {
-    return allocVector3(type, length, NULL);
+    return Rf_allocVector3(type, length, NULL);
 }
 
 /* from list.c */

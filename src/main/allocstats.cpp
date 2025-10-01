@@ -21,8 +21,9 @@
  *  https://www.R-project.org/Licenses/
  */
 
-#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/MemoryBank.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 
 using namespace CXXR;
@@ -47,12 +48,12 @@ SEXP allocstats(void)
     std::copy(std::begin(alloc_counts), std::end(alloc_counts), std::begin(allocs));
     std::copy(std::begin(free_counts), std::end(free_counts), std::begin(frees));
 
-    GCStackRoot<> size_column;
-    size_column = Rf_allocVector(INTSXP, nbins);
-    GCStackRoot<> alloc_column;
-    alloc_column = Rf_allocVector(INTSXP, nbins);
-    GCStackRoot<> free_column;
-    free_column = Rf_allocVector(INTSXP, nbins);
+    GCStackRoot<IntVector> size_column;
+    size_column = IntVector::create(nbins);
+    GCStackRoot<IntVector> alloc_column;
+    alloc_column = IntVector::create(nbins);
+    GCStackRoot<IntVector> free_column;
+    free_column = IntVector::create(nbins);
     GCStackRoot<> ans;
     ans = Rf_allocVector(VECSXP, 3);
 

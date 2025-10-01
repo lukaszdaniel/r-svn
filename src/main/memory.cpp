@@ -80,6 +80,11 @@
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <CXXR/BadObject.hpp>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -2116,23 +2121,23 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     switch (type) {
     case NILSXP:
         return R_NilValue;
-    case RAWSXP:
-        break;
     case CHARSXP:
         error("%s", _("use of allocVector(CHARSXP ...) is defunct\n"));
         break;
+    case RAWSXP:
+        return RawVector::create(n_elem, allocator);
     case LGLSXP:
-        break;
+        return LogicalVector::create(n_elem, allocator);
     case INTSXP:
-        break;
+        return IntVector::create(n_elem, allocator);
     case REALSXP:
-        break;
+        return RealVector::create(n_elem, allocator);
     case CPLXSXP:
-        break;
+        return ComplexVector::create(n_elem, allocator);
     case STRSXP:
     case EXPRSXP:
     case VECSXP:
-        break;
+        return new VectorBase(type, n_elem, allocator);
     case LANGSXP:
 #ifdef LONG_VECTOR_SUPPORT
         if (n_elem > R_SHORT_LEN_MAX) error("%s", _("invalid length for pairlist"));
@@ -2148,7 +2153,7 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
             type2char(type), (long long)n_elem);
     }
 
-    return new VectorBase(type, n_elem, allocator);
+    return R_NilValue;
 }
 
 String *CXXR::CXXR_allocCharsxp(const std::string &name, cetype_t encoding, bool isAscii)
