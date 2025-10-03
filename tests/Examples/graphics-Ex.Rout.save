@@ -2114,11 +2114,11 @@ armed.forces
  $ y: num  -5.50e+02 -4.94e+02 9.24e-03 1.53e-02 2.71e-02 ...
 > plot(y ~ x) # (2 outliers, x < 0)
 > plot(y ~ x, log="x") # --> Warning:  2 x values <= 0 omitted from log..plot
-Warning in xy.coords(x, y, xlabel, ylabel, log) :
+Warning in 'xy.coords(x, y, xlabel, ylabel, log)':
   2 x values <= 0 omitted from logarithmic plot
 >                      # still same y-axis limits [~ -570, 0 ]
 > plot(y ~ x, log="x", lim2 = TRUE) # still Warning, but
-Warning in xy.coords(x, y, xlabel, ylabel, log) :
+Warning in 'xy.coords(x, y, xlabel, ylabel, log)':
   2 x values <= 0 omitted from logarithmic plot
 >                                         # nice - reasonable y-axis [0, 0.8]
 > 

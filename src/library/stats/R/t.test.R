@@ -175,9 +175,9 @@ function (formula, data, subset, na.action = na.pass, ...)
         y <- t.test(x = DATA[[1L]], y = DATA[[2L]], ...)
         if (length(y$estimate) == 2L) {
             names(y$estimate) <- paste("mean in group", levels(g))
-            names(y$null.value) <-
-                paste("difference in means between",
-                      paste("group", levels(g), collapse = " and "))
+            y$alt.name <-
+                gettextf("true difference in means between group %s and group %s is not equal to %s",
+                      levels(g)[1], levels(g)[2], y$null.value)
         }
     }
     else { # 1-sample and paired tests
