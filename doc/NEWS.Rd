@@ -135,6 +135,12 @@
       completeness, corresponding to \code{.pretty()}.  Also, it now
       catches typos such as \code{eps.corrected = 2}, noted in \PR{18521}
       by \I{Mikko Korpela}.
+
+      \item Plain-text help now renders Rd \verb{\describe} lists using
+      line breaks after item labels.  Set
+      \code{tools::Rd2txt_options(descStyle=NULL)} to get the old
+      behaviour with a simple space; a \code{"colon"} variant is also
+      available.
     }
   }
 
@@ -401,7 +407,7 @@
       document unit also with Cairo >= 1.17.8 (\PR{18912}).
 
       \item \code{pretty(*, eps.correct = 2)} has been fixed, e.g., to
-      avoid over 1 mio length result for \code{pretty(c(0, 1e-322), eps.correct = 2)}.
+      avoid over 1 million length result for \code{pretty(c(0, 1e-322), eps.correct = 2)}.
     }
   }
 }
