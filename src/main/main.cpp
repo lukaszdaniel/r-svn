@@ -42,6 +42,7 @@
 #include <clocale>
 
 #define __MAIN__
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -52,7 +53,7 @@
 #include <CXXR/Browser.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -1995,7 +1996,7 @@ static void releaseObjectFinalizer(void *data)
 attribute_hidden SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP name)
 {
     SEXP internalData;
-    SEXP index;
+    GCStackRoot<IntVector> index;
     R_ToplevelCallbackEl *el;
     const char *tmpName = NULL;
 
@@ -2008,7 +2009,7 @@ attribute_hidden SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP na
     if(length(name))
 	tmpName = CHAR(STRING_ELT(name, 0));
 
-    PROTECT(index = allocVector(INTSXP, 1));
+    index = IntVector::create(1);
     el = Rf_addTaskCallback(R_taskCallbackRoutine,  internalData,
 			    releaseObjectFinalizer, tmpName,
 			    INTEGER(index));
@@ -2021,7 +2022,6 @@ attribute_hidden SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP na
 	setAttrib(index, R_NamesSymbol, name);
     }
 
-    UNPROTECT(1);
     return index;
 }
 

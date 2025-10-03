@@ -33,12 +33,14 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
@@ -1172,7 +1174,7 @@ attribute_hidden SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
 	});
 
     len = j;
-    PROTECT(ans = allocVector(REALSXP, len));
+    PROTECT(ans = RealVector::create(len));
     // buf has doubles in it, memcopy if we found any indices.
     if(len) memcpy(REAL(ans), buf, sizeof(double) * len);
     } else
@@ -1193,7 +1195,7 @@ attribute_hidden SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     len = j;
     // buf has ints in it and we're returning ints, memcopy if we found any indices;
-    PROTECT(ans = allocVector(INTSXP, len));
+    PROTECT(ans = IntVector::create(len));
     if(len) memcpy(INTEGER(ans), buf, sizeof(int) * len);
     }
 

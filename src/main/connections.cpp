@@ -129,6 +129,7 @@
 #include <windows.h>
 #endif
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <CXXR/Logical.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -138,9 +139,10 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
-#include <Localization.h>
 #include <Internal.h>
 #include <Fileio.h>
 #include <Rconnections.h>
@@ -4734,7 +4736,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(size == NA_INTEGER) size = sizeof(Rcomplex);
 	if(size != sizeof(Rcomplex))
 	    error("%s", _("size changing is not supported for complex vectors"));
-	ans = allocVector(CPLXSXP, n);
+	ans = ComplexVector::create(n);
 	p = (void *) COMPLEX(ans);
 	if(isRaw) m = rawRead((char *) p, size, n, bytes, nbytes, &np);
 	else {
@@ -4814,7 +4816,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    default:
 		error(_("size %d is unknown on this machine"), size);
 	    }
-	    ans = allocVector(REALSXP, n);
+	    ans = RealVector::create(n);
 	    p = (void *) REAL(ans);
 	} else
 	    error(_("invalid '%s' argument"), "what");

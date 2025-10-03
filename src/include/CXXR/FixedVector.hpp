@@ -131,6 +131,8 @@ namespace CXXR
             : VectorBase(ST, sz, allocator)
         {
         }
+
+        FixedVector &operator=(const FixedVector &) = delete;
     };
 
     template <typename T, SEXPTYPE ST>

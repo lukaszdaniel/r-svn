@@ -32,13 +32,16 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/ComplexVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* Handle NaN and NA in input for a cumulative operation, preserving
    distinction between NA and NaN. */
@@ -225,7 +228,7 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
     if (isComplex(CAR(args))) {
 	t = CAR(args);
 	n = XLENGTH(t);
-	PROTECT(s = allocVector(CPLXSXP, n));
+	PROTECT(s = ComplexVector::create(n));
 	setAttrib(s, R_NamesSymbol, getAttrib(t, R_NamesSymbol));
 	UNPROTECT(1);
 	if(n == 0) return s;
@@ -250,7 +253,7 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
 	       PRIMVAL(op) != 2) {
 	PROTECT(t = coerceVector(CAR(args), INTSXP));
 	n = XLENGTH(t);
-	PROTECT(s = allocVector(INTSXP, n));
+	PROTECT(s = IntVector::create(n));
 	setAttrib(s, R_NamesSymbol, getAttrib(t, R_NamesSymbol));
 	if(n == 0) {
 	    UNPROTECT(2); /* t, s */

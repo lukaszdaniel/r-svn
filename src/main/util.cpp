@@ -38,13 +38,15 @@
 #include <cctype>		/* for isspace */
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <CXXR/RContext.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
@@ -2819,7 +2821,7 @@ attribute_hidden SEXP do_tabulate(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans;
 #ifdef LONG_VECTOR_SUPPORT
     if (n > INT_MAX) {
-	ans = allocVector(REALSXP, nb);
+	ans = RealVector::create(nb);
 	double *y = REAL(ans);
 	if (nb) memset(y, 0, nb * sizeof(double));
 	for(R_xlen_t i = 0 ; i < n ; i++)
@@ -2827,7 +2829,7 @@ attribute_hidden SEXP do_tabulate(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else
 #endif
     {
-	ans = allocVector(INTSXP, nb);
+	ans = IntVector::create(nb);
 	int *y = INTEGER(ans);
 	if (nb) memset(y, 0, nb * sizeof(int));
 	for(R_xlen_t i = 0 ; i < n ; i++)

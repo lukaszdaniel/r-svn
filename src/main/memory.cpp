@@ -1081,9 +1081,10 @@ namespace CXXR
             case STRSXP:
             {
                 const RObject *el = R_NilValue;
-                for (R_xlen_t i = 0; i < STDVEC_LENGTH(this); i++)
+                const VectorBase *vec = static_cast<const VectorBase *>(this);
+                for (R_xlen_t i = 0; i < vec->size(); i++)
                 {
-                    el = static_cast<const RObject **>(static_cast<const VectorBase *>(this)->u.vecsxp.m_data)[i];
+                    el = static_cast<const RObject **>(vec->u.vecsxp.m_data)[i];
                     if (el != R_NilValue)
                         (*v)(el);
                 }
@@ -1092,9 +1093,10 @@ namespace CXXR
             case EXPRSXP:
             {
                 const RObject *el = R_NilValue;
-                for (R_xlen_t i = 0; i < STDVEC_LENGTH(this); i++)
+                const VectorBase *vec = static_cast<const VectorBase *>(this);
+                for (R_xlen_t i = 0; i < vec->size(); i++)
                 {
-                    el = static_cast<const RObject **>(static_cast<const VectorBase *>(this)->u.vecsxp.m_data)[i];
+                    el = static_cast<const RObject **>(vec->u.vecsxp.m_data)[i];
                     if (el != R_NilValue)
                         (*v)(el);
                 }
@@ -1103,9 +1105,10 @@ namespace CXXR
             case VECSXP:
             {
                 const RObject *el = R_NilValue;
-                for (R_xlen_t i = 0; i < STDVEC_LENGTH(this); i++)
+                const VectorBase *vec = static_cast<const VectorBase *>(this);
+                for (R_xlen_t i = 0; i < vec->size(); i++)
                 {
-                    el = static_cast<const RObject **>(static_cast<const VectorBase *>(this)->u.vecsxp.m_data)[i];
+                    el = static_cast<const RObject **>(vec->u.vecsxp.m_data)[i];
                     if (el != R_NilValue)
                         (*v)(el);
                 }
@@ -1717,7 +1720,7 @@ attribute_hidden void R::get_current_mem(size_t *smallvsize,
 
 attribute_hidden SEXP do_gc(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    GCStackRoot<> value;
+    GCStackRoot<RealVector> value;
 
     checkArity(op, args);
     std::ostream *old_report_os = GCManager::setReporting(Rf_asLogical(CAR(args)) ? &std::cerr : nullptr);
@@ -1734,7 +1737,7 @@ Vcells    v[1] v[3]       v[5] v[7]       v[9]    v[11] v[13]
 
     GCManager::setReporting(old_report_os);
     /*- now return the [used , gc trigger size] for cells and heap */
-    value = allocVector(REALSXP, 14);
+    value = RealVector::create(14);
     REAL(value)[0] = GCNode::numNodes();
     REAL(value)[1] = MemoryBank::doublesAllocated();
     REAL(value)[4] = R_NSize;
@@ -1773,7 +1776,7 @@ attribute_hidden SEXP do_gctime(SEXP call, SEXP op, SEXP args, SEXP env)
 	check1arg(args, call, "on");
 	s_gctime_enabled = asRbool(CAR(args), call);
     }
-    SEXP ans = allocVector(REALSXP, 5);
+    RealVector *ans = RealVector::create(5);
     REAL(ans)[0] = gctimes[0];
     REAL(ans)[1] = gctimes[1];
     REAL(ans)[2] = gctimes[2];
@@ -2417,10 +2420,11 @@ void GCManager::gc(R_size_t size_needed, bool force_full_collection)
 attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    GCStackRoot<> ans, nms;
+    GCStackRoot<IntVector> ans;
+    GCStackRoot<> nms;
     unsigned int tmp;
 
-    ans = allocVector(INTSXP, 24);
+    ans = IntVector::create(24);
     nms = allocVector(STRSXP, 24);
     for (unsigned int i = 0; i < 24; i++) {
 	INTEGER(ans)[i] = 0;
@@ -2689,7 +2693,7 @@ SEXP R_NewPreciousMSet(int initialSize)
     GCStackRoot<> mset;
 
     /* npreserved is modified in place */
-    SEXP npreserved = allocVector(INTSXP, 1);
+    IntVector *npreserved = IntVector::create(1);
     SET_INTEGER_ELT(npreserved, 0, 0);
     mset = CONS(R_NilValue, npreserved);
     /* isize is not modified in place */

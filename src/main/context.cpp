@@ -115,6 +115,7 @@
 #endif
 
 #include <iostream>
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Browser.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -126,7 +127,7 @@
 #include <CXXR/CommandTerminated.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -738,7 +739,7 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     case 8: /* sys.parents */
 	nframe = framedepth(cptr);
-	rval = allocVector(INTSXP, nframe);
+	rval = IntVector::create(nframe);
 	for(i = 0; i < nframe; i++)
 	    INTEGER(rval)[i] = R_sysparent(nframe - i, cptr);
 	return rval;

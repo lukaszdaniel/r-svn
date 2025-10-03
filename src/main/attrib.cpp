@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
@@ -40,7 +41,7 @@
 #include <CXXR/Symbol.hpp>
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/PairList.hpp> // for CXXR_cons
-#include <Localization.h>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -487,7 +488,7 @@ SEXP R::tspgets(SEXP vec, SEXP val)
 	badtsp(1);
 
     PROTECT(vec);
-    val = allocVector(REALSXP, 3);
+    val = RealVector::create(3);
     PROTECT(val);
     REAL(val)[0] = start;
     REAL(val)[1] = end;

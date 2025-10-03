@@ -59,6 +59,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Localization.h>
 #include <Defn.h>		/*-> Arith.h -> math.h */
 #ifdef __OpenBSD__
@@ -503,7 +504,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #define FIXUP_NULL_AND_CHECK_TYPES(v) do { \
     switch (TYPEOF(v)) { \
-    case NILSXP: v = allocVector(INTSXP,0); break; \
+    case NILSXP: v = IntVector::create(0); break; \
     case CPLXSXP: case REALSXP: case INTSXP: case LGLSXP: break; \
     default: errorcall(call, "%s", _("non-numeric argument to binary operator")); \
     } \
@@ -682,7 +683,8 @@ attribute_hidden SEXP R_unary(SEXP call, SEXP op, SEXP s1)
 static SEXP logical_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
 {
     R_xlen_t n = XLENGTH(s1);
-    SEXP ans = PROTECT(allocVector(INTSXP, n));
+    GCStackRoot<IntVector> ans;
+    ans = IntVector::create(n);
     SEXP names = PROTECT(getAttrib(s1, R_NamesSymbol));
     SEXP dim = PROTECT(getAttrib(s1, R_DimSymbol));
     SEXP dimnames = PROTECT(getAttrib(s1, R_DimNamesSymbol));
@@ -708,7 +710,7 @@ static SEXP logical_unary(ARITHOP_TYPE code, SEXP s1, SEXP call)
     default:
 	errorcall(call, "%s", _("invalid unary operator"));
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -1299,7 +1301,7 @@ attribute_hidden SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
 	   factor was covered by Math.factor. */
 	R_xlen_t n = XLENGTH(x);
 	s = (NO_REFERENCES(x) && TYPEOF(x) == INTSXP) ?
-	    x : allocVector(INTSXP, n);
+	    x : IntVector::create(n);
 	PROTECT(s);
 	/* Note: relying on INTEGER(.) === LOGICAL(.) : */
 	int *pa = INTEGER(s);

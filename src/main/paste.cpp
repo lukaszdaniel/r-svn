@@ -40,10 +40,11 @@
 
 #include <string>
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -52,6 +53,7 @@
 
 using namespace std;
 using namespace R;
+using namespace CXXR;
 
 static R_StringBuffer cbuff = R_StringBuffer();
 
@@ -753,7 +755,7 @@ attribute_hidden SEXP do_formatinfo(SEXP call, SEXP op, SEXP args, SEXP env)
     default:
 	error("%s", _("atomic vector arguments only"));
     }
-    x = allocVector(INTSXP, no);
+    x = IntVector::create(no);
     INTEGER(x)[0] = w;
     if(no > 1) {
 	INTEGER(x)[1] = d;

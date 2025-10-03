@@ -37,6 +37,7 @@
 #endif
 
 #include <cassert>
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
@@ -45,7 +46,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for R_Calloc, R_Realloc and for S4 object bit */
@@ -1016,7 +1017,8 @@ attribute_hidden bool R::inherits2(SEXP x, const char *what) {
 static SEXP inherits3(SEXP x, SEXP what, SEXP which)
 {
     CXXR::RAllocStack::Scope rscope;
-    GCStackRoot<> klass, rval(R_NilValue) /* -Wall */;
+    GCStackRoot<> klass;
+    GCStackRoot<IntVector> rval(R_NilValue) /* -Wall */;
 
     if (IS_S4_OBJECT(x))
 	klass = R_data_class2(x); // -> := S4_extends( "class(x)" )
@@ -1032,7 +1034,7 @@ static SEXP inherits3(SEXP x, SEXP what, SEXP which)
     bool isvec = asRbool(which, R_NilValue);
 
     if (isvec)
-	rval = allocVector(INTSXP, nwhat);
+	rval = IntVector::create(nwhat);
 
     for (int j = 0; j < nwhat; j++) {
 	const char *ss = translateChar(STRING_ELT(what, j));

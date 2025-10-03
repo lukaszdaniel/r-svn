@@ -34,12 +34,13 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -534,15 +535,14 @@ static R_xlen_t getElementLength(SEXP x, R_xlen_t i, SEXP call, SEXP rho) {
 #ifdef LONG_VECTOR_SUPPORT
 static SEXP do_lengths_long(SEXP x, SEXP call, SEXP rho)
 {
-    SEXP ans;
-    R_xlen_t x_len, i;
-    double *ans_elt;
+    GCStackRoot<RealVector> ans;
 
-    x_len = dispatch_xlength(x, call, rho);
-    PROTECT(ans = allocVector(REALSXP, x_len));
-    for (i = 0, ans_elt = REAL(ans); i < x_len; i++, ans_elt++)
+    R_xlen_t x_len = dispatch_xlength(x, call, rho);
+    ans = RealVector::create(x_len);
+    double *ans_elt = REAL(ans);
+    for (R_xlen_t i = 0; i < x_len; i++, ans_elt++)
         *ans_elt = (double) getElementLength(x, i, call, rho);
-    UNPROTECT(1);
+
     return ans;
 }
 #endif
