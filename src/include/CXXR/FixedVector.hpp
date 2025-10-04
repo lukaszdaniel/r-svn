@@ -70,6 +70,18 @@ namespace CXXR
          */
         static FixedVector *create(size_type sz, R_allocator_t *allocator = nullptr);
 
+        /** @brief Create a vector containing a single value.
+         *
+         * @param value The value to store in the vector.
+         */
+        template <typename U>
+        static FixedVector *createScalar(const U &value)
+        {
+            FixedVector *result = create(1);
+            (*result)[0] = value;
+            return result;
+        }
+
         /** @brief Element access.
          *
          * @param index Index of required element (counting from

@@ -79,6 +79,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
@@ -116,6 +117,7 @@ typedef int socklen_t;
 #endif /* _WIN32 */
 
 using namespace R;
+using namespace CXXR;
 
 /* --- system-independent part --- */
 
@@ -489,7 +491,7 @@ static SEXP parse_request_body(httpd_conn_t *c) {
 	c->body[c->content_length] = 0; /* the body is guaranteed to have an extra byte for the termination */
 	return parse_query(c->body);
     } else { /* something else - pass it as a raw vector */
-	SEXP res = PROTECT(Rf_allocVector(RAWSXP, c->content_length));
+	SEXP res = PROTECT(RawVector::create(c->content_length));
 	if (c->content_length)
 	    memcpy(RAW(res), c->body, c->content_length);
 	if (c->content_type) { /* attach the content type so it can be interpreted */

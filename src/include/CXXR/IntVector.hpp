@@ -58,7 +58,7 @@ extern "C"
      *
      * @return Pointer to element 0 of \a x.
      */
-    int *INTEGER(SEXP x);
+    int *(INTEGER)(SEXP x);
 
     /**
      * @param x Pointer to an \c IntVector or a \c LogicalVector (i.e. an
@@ -67,7 +67,7 @@ extern "C"
      *          IntVector or a \c LogicalVector.
      * @return Pointer to constant element 0 of \a x.
      */
-    const int *INTEGER_RO(SEXP x);
+    const int *(INTEGER_RO)(SEXP x);
     int *INTEGER0(SEXP x);
 
     const int *INTEGER_OR_NULL(SEXP x);

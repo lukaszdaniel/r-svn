@@ -38,6 +38,7 @@
 #include <cmath>
 #include <cerrno>
 #include <array>
+#include <Localization.h>
 #include <Rdynpriv.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
@@ -56,8 +57,9 @@
 #include <CXXR/Closure.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/RawVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
-#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -777,7 +779,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 	   to strings; the actual strings are stored in the second len2 bytes. */
 	R_Srcfile_bufcount = numfiles;
 	size_t len1 = R_Srcfile_bufcount*sizeof(char *), len2 = bufsize;
-	R_PreserveObject( R_Srcfiles_buffer = Rf_allocVector(RAWSXP, len1 + len2) );
+	R_PreserveObject( R_Srcfiles_buffer = RawVector::create(len1 + len2) );
  //	memset(RAW(R_Srcfiles_buffer), 0, len1+len2);
 	R_Srcfiles = reinterpret_cast<char **>(RAW(R_Srcfiles_buffer));
 	R_Srcfiles[0] = reinterpret_cast<char *>(RAW(R_Srcfiles_buffer)) + len1;
@@ -8977,8 +8979,7 @@ attribute_hidden SEXP do_disassemble(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_bcversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
   checkArity(op, args);
-  SEXP ans = allocVector(INTSXP, 1);
-  INTEGER(ans)[0] = R_bcVersion;
+  IntVector *ans = IntVector::createScalar(R_bcVersion);
   return ans;
 }
 

@@ -39,17 +39,21 @@
 /*   if re-enabling, consider a power of two */
 /* #define NINTERRUPT 10000000 */
 
+#include <cfloat> /* for DBL_DIG */
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Parse.h>
-#include <Localization.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/
 #include <Internal.h>
-#include <cfloat> /* for DBL_DIG */
 #define R_MSG_list_vec	_("applies only to lists and vectors")
 #include <Rmath.h>
 #include <Print.h>
@@ -900,23 +904,19 @@ static SEXP coerceToPairList(SEXP v)
 	    LOGICAL0(CAR(ansp))[0] = LOGICAL_ELT(v, i);
 	    break;
 	case INTSXP:
-	    SETCAR(ansp, allocVector(INTSXP, 1));
-	    INTEGER0(CAR(ansp))[0] = INTEGER_ELT(v, i);
+	    SETCAR(ansp, IntVector::createScalar(INTEGER_ELT(v, i)));
 	    break;
 	case REALSXP:
-	    SETCAR(ansp, allocVector(REALSXP, 1));
-	    REAL0(CAR(ansp))[0] = REAL_ELT(v, i);
+	    SETCAR(ansp, RealVector::createScalar(REAL_ELT(v, i)));
 	    break;
 	case CPLXSXP:
-	    SETCAR(ansp, allocVector(CPLXSXP, 1));
-	    COMPLEX0(CAR(ansp))[0] = COMPLEX_ELT(v, i);
+	    SETCAR(ansp, ComplexVector::createScalar(CXXR_COMPLEX_ELT(v, i)));
 	    break;
 	case STRSXP:
 	    SETCAR(ansp, ScalarString(STRING_ELT(v, i)));
 	    break;
 	case RAWSXP:
-	    SETCAR(ansp, allocVector(RAWSXP, 1));
-	    RAW0(CAR(ansp))[0] = RAW_ELT(v, i);
+	    SETCAR(ansp, RawVector::createScalar(RAW_ELT(v, i)));
 	    break;
 	case VECSXP:
 	    SETCAR(ansp, VECTOR_ELT(v, i));

@@ -31,16 +31,17 @@
 #include <config.h>
 #endif
 
+#include <cfloat>  /* for DBL_MAX */
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
-#include <cfloat>  /* for DBL_MAX */
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Applic.h>	/* R_pretty() */
 #include <Rmath.h>
@@ -3069,35 +3070,32 @@ void GEcopyDisplayList(int fromDevice)
 
 SEXP GEcreateSnapshot(pGEDevDesc dd)
 {
-    SEXP snapshot, tmp;
-    SEXP state;
-    SEXP engineVersion;
+    GCStackRoot<> snapshot, tmp;
+    GCStackRoot<> state;
+    GCStackRoot<> engineVersion;
     /* Create a list with one spot for the display list
      * and one spot each for the registered graphics systems
      * to put their graphics state
      */
-    PROTECT(snapshot = allocVector(VECSXP, 1 + numGraphicsSystems));
+    snapshot = allocVector(VECSXP, 1 + numGraphicsSystems);
     /* The first element of the snapshot is the display list.
      */
     if(!isNull(dd->displayList)) {
-	PROTECT(tmp = duplicate(dd->displayList));
+	tmp = duplicate(dd->displayList);
 	SET_VECTOR_ELT(snapshot, 0, tmp);
-	UNPROTECT(1);
     }
     /* For each registered system, obtain state information,
      * and store that in the snapshot.
      */
     for (int i = 0; i < MAX_GRAPHICS_SYSTEMS; i++)
 	if (dd->gesd[i] != NULL) {
-	    PROTECT(state = (dd->gesd[i]->callback)(GE_SaveSnapshotState, dd,
-						    R_NilValue));
+	    state = (dd->gesd[i]->callback)(GE_SaveSnapshotState, dd,
+						    R_NilValue);
 	    SET_VECTOR_ELT(snapshot, i + 1, state);
-	    UNPROTECT(1);
 	}
-    PROTECT(engineVersion = allocVector(INTSXP, 1));
-    INTEGER(engineVersion)[0] = R_GE_getVersion();
+    engineVersion = IntVector::createScalar(R_GE_getVersion());
     setAttrib(snapshot, install("engineVersion"), engineVersion);
-    UNPROTECT(2);
+
     return snapshot;
 }
 

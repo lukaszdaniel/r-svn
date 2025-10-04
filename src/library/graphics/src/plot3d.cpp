@@ -22,19 +22,22 @@
 #include <config.h>
 #endif
 
+#include <cfloat>  /* for DBL_MAX */
+#include <R_ext/Boolean.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
-#include <cfloat>  /* for DBL_MAX */
 #include <Rmath.h>
 #include <Graphics.h>
 #include <Print.h>
-#include <R_ext/Boolean.h>
+
 
 #include "graphics.h"
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 static void TypeCheck(SEXP s, SEXPTYPE type)
 {
@@ -1563,8 +1566,7 @@ static SEXP contour(SEXP x, int nx, SEXP y, int ny, SEXP z,
 		    enc = getCharCE(STRING_ELT(labels, cnum % numl));
 		}
 		else {
-		    PROTECT(lab = allocVector(REALSXP, 1));
-		    REAL(lab)[0] = zc;
+		    PROTECT(lab = RealVector::createScalar(zc));
 		    lab = labelformat(lab);
 		    strncpy(&buffer[1], CHAR(STRING_ELT(lab, 0)),
 		            sizeof(buffer) - 2); /* ASCII */

@@ -39,6 +39,7 @@
 #include <cctype>		/* for isspace */
 #include <cstdarg>
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
@@ -51,7 +52,7 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/ExternalPointer.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Rmath.h>
 #include <Fileio.h>
@@ -1367,8 +1368,7 @@ static void WriteBCLang(SEXP s, HashTable *ref_table, SEXP reps,
 		/* this is the first reference, so update and register
 		   the counter */
 		int i = INTEGER(CAR(reps))[0]++;
-		SET_TAG(r, allocVector(INTSXP, 1));
-		INTEGER(TAG(r))[0] = i;
+		SET_TAG(r, IntVector::createScalar(i));
 		OutInteger(stream, BCREPDEF);
 		OutInteger(stream, i);
 	    }
@@ -1436,8 +1436,7 @@ static void WriteBC(SEXP s, HashTable *ref_table, R_outpstream_t stream)
     SEXP reps = ScanForCircles(s);
     PROTECT(reps = CONS(R_NilValue, reps));
     OutInteger(stream, length(reps));
-    SETCAR(reps, allocVector(INTSXP, 1));
-    INTEGER(CAR(reps))[0] = 0;
+    SETCAR(reps, IntVector::createScalar(0));
     WriteBC1(s, ref_table, reps, stream);
     UNPROTECT(1);
 }

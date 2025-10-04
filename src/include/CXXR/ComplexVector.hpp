@@ -39,6 +39,15 @@ namespace CXXR
     /** @brief Vector of complex numbers.
      */
     using ComplexVector = FixedVector<Complex, CPLXSXP>;
+
+    /**
+     * @param x Pointer to a CXXR::ComplexVector (i.e. an R complex vector).
+     *          An error is generated if \a x is not a non-null pointer to a
+     *          CXXR::ComplexVector.
+     *
+     * @return Pointer to element 0 of \a x.
+     */
+    Complex *(CXXR_COMPLEX)(SEXP x);
 } // namespace CXXR
 
 namespace R

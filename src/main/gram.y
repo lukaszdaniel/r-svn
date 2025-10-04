@@ -35,13 +35,16 @@
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
 #include <algorithm> // for std::copy
+#include <Localization.h>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
 #include <Parse.h>
@@ -2219,28 +2222,23 @@ static int KeywordLookup(const char *s)
 			PRESERVE_SV(yylval = mkFalse());
 			break;
 		    case 4:
-			PRESERVE_SV(yylval = allocVector(REALSXP, 1));
-			REAL(yylval)[0] = R_PosInf;
+			PRESERVE_SV(yylval = RealVector::createScalar(R_PosInf));
 			break;
 		    case 5:
-			PRESERVE_SV(yylval = allocVector(REALSXP, 1));
-			REAL(yylval)[0] = R_NaN;
+			PRESERVE_SV(yylval = RealVector::createScalar(R_NaN));
 			break;
 		    case 6:
-			PRESERVE_SV(yylval = allocVector(INTSXP, 1));
-			INTEGER(yylval)[0] = NA_INTEGER;
+			PRESERVE_SV(yylval = IntVector::createScalar(NA_INTEGER));
 			break;
 		    case 7:
-			PRESERVE_SV(yylval = allocVector(REALSXP, 1));
-			REAL(yylval)[0] = NA_REAL;
+			PRESERVE_SV(yylval = RealVector::createScalar(NA_REAL));
 			break;
 		    case 8:
 			PRESERVE_SV(yylval = allocVector(STRSXP, 1));
 			SET_STRING_ELT(yylval, 0, NA_STRING);
 			break;
 		    case 9:
-			PRESERVE_SV(yylval = allocVector(CPLXSXP, 1));
-			COMPLEX(yylval)[0].r = COMPLEX(yylval)[0].i = NA_REAL;
+			PRESERVE_SV(yylval = ComplexVector::createScalar(Complex(NA_REAL, NA_REAL)));
 			break;
 		    }
 		} else
@@ -2281,13 +2279,8 @@ static SEXP mkInt(const char *s)
 
 static SEXP mkComplex(const char *s)
 {
-    SEXP t = R_NilValue;
-    double f;
-    f = R_atof(s); /* FIXME: make certain the value is legitimate. */
-    t = allocVector(CPLXSXP, 1);
-    COMPLEX(t)[0].r = 0;
-    COMPLEX(t)[0].i = f;
-    return t;
+    double f = R_atof(s); /* FIXME: make certain the value is legitimate. */
+    return ComplexVector::createScalar(Complex(0, f));
 }
 
 static SEXP mkNA(void)

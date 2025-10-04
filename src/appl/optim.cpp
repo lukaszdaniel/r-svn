@@ -21,9 +21,10 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <R_ext/Random.h>	/* for the random number generation in samin() */
 #include <R_ext/Applic.h>
@@ -57,7 +58,7 @@ static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 
     if (!isNull(OS->R_gcall)) {
 	/* user defined generation of candidate point */
-	x = allocVector(REALSXP, n);
+	x = RealVector::create(n);
 	for (int i = 0; i < n; i++) {
 	    if (!R_FINITE(p[i]))
 		error("%s", _("non-finite value supplied by 'optim'"));

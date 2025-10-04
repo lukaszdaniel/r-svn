@@ -75,11 +75,12 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <cwchar>
 #include <cwctype>    /* for wctrans_t */
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h>  /* for R_Calloc/R_Free */
@@ -2905,9 +2906,8 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 static SEXP gregexpr_NAInputAns(void)
 {
     SEXP ans, matchlen;
-    PROTECT(ans = allocVector(INTSXP, 1));
-    PROTECT(matchlen = allocVector(INTSXP, 1));
-    INTEGER(ans)[0] = INTEGER(matchlen)[0] = R_NaInt;
+    PROTECT(ans = IntVector::createScalar(R_NaInt));
+    PROTECT(matchlen = IntVector::createScalar(R_NaInt));
     setAttrib(ans, install("match.length"), matchlen);
     UNPROTECT(2);
     return ans;
@@ -2916,9 +2916,8 @@ static SEXP gregexpr_NAInputAns(void)
 static SEXP gregexpr_BadStringAns(void)
 {
     SEXP ans, matchlen;
-    PROTECT(ans = allocVector(INTSXP, 1));
-    PROTECT(matchlen = allocVector(INTSXP, 1));
-    INTEGER(ans)[0] = INTEGER(matchlen)[0] = -1;
+    PROTECT(ans = IntVector::createScalar(-1));
+    PROTECT(matchlen = IntVector::createScalar(-1));
     setAttrib(ans, install("match.length"), matchlen);
     UNPROTECT(2);
     return ans;

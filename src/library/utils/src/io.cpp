@@ -40,6 +40,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
@@ -732,7 +733,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* CR avoided an allocation by reusing dup,
 	     * a LGLSXP of the right length.  CXXR doesn't!
 	     */
-	    rval = Rf_allocVector(INTSXP, LENGTH(dup));
+	    rval = IntVector::create(LENGTH(dup));
 
 	    /* put the levels in lexicographic order */
 

@@ -63,7 +63,7 @@ extern "C"
      *
      * @return Pointer to element 0 of \a x.
      */
-    Rbyte *RAW(SEXP x);
+    Rbyte *(RAW)(SEXP x);
 
     /**
      * @param x Pointer to a CXXR::RawVector (i.e. a RAWSXP).  An error is
@@ -72,7 +72,7 @@ extern "C"
      *
      * @return Pointer to constant element 0 of \a x.
      */
-    const Rbyte *RAW_RO(SEXP x);
+    const Rbyte *(RAW_RO)(SEXP x);
     Rbyte *RAW0(SEXP x);
 
     const Rbyte *RAW_OR_NULL(SEXP x);

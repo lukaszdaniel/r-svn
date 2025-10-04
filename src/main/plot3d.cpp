@@ -34,9 +34,10 @@
 
 #include <cfloat>  /* for DBL_MAX */
 #include <R_ext/Boolean.h>
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <Localization.h>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -50,6 +51,7 @@
 #include "contour-common.h"
 
 using namespace R;
+using namespace CXXR;
 
 #define CONTOUR_LIST_STEP 100
 #define CONTOUR_LIST_LEVEL 0
@@ -137,10 +139,9 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		 * "write" the contour locations into the list of contours
 		 */
 		ctr = PROTECT(allocVector(VECSXP, 3));
-		level = PROTECT(allocVector(REALSXP, 1));
+		level = PROTECT(RealVector::createScalar(zc));
 		xsxp = PROTECT(allocVector(REALSXP, ns + 1));
 		ysxp = PROTECT(allocVector(REALSXP, ns + 1));
-		REAL(level)[0] = zc;
 		SET_VECTOR_ELT(ctr, CONTOUR_LIST_LEVEL, level);
 		s = start;
 		REAL(xsxp)[0] = s->x0;
