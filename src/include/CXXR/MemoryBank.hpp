@@ -292,4 +292,4 @@ extern "C"
     SEXP allocstats(void);
 }
 
-#endif /* MEMORYBANK_HPP */
+#endif // MEMORYBANK_HPP

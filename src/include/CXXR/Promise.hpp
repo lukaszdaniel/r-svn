@@ -283,4 +283,4 @@ extern "C"
     void SET_PRCODE(SEXP x, SEXP v);
 } // extern "C"
 
-#endif /* PROMISE_HPP */
+#endif // PROMISE_HPP

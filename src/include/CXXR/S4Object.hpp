@@ -181,4 +181,4 @@ extern "C"
     SEXP Rf_allocS4Object();
 } // extern "C"
 
-#endif /* S4OBJECT_HPP */
+#endif // S4OBJECT_HPP

@@ -343,4 +343,4 @@ extern "C"
     void (SET_RSTEP)(SEXP x, int v);
 } // extern "C"
 
-#endif /* CLOSURE_HPP */
+#endif // CLOSURE_HPP

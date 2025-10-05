@@ -88,4 +88,4 @@ typedef int R_xlen_t;
 typedef size_t R_size_t;
 #define R_SIZE_T_MAX SIZE_MAX
 
-#endif /* RTYPES_HPP */
+#endif // RTYPES_HPP

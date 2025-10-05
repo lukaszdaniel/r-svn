@@ -114,4 +114,4 @@ extern "C"
     Rboolean Rf_isDottedArgs(SEXP s);
 }
 
-#endif /* DOTTEDARGS_HPP */
+#endif // DOTTEDARGS_HPP

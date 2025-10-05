@@ -286,4 +286,4 @@ extern "C"
     SEXP Rf_eval(SEXP e, SEXP rho);
 } // extern "C"
 
-#endif /* EVALUATOR_HPP */
+#endif // EVALUATOR_HPP

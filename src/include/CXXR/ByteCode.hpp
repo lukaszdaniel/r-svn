@@ -208,4 +208,4 @@ extern "C"
     SEXP R_BytecodeExpr(SEXP e);
 } // extern "C"
 
-#endif /* BYTECODE_HPP */
+#endif // BYTECODE_HPP

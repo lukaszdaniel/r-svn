@@ -888,4 +888,4 @@ extern "C"
     unsigned int R_status(void);
 } // extern "C"
 
-#endif /* ROBJECT_HPP */
+#endif // ROBJECT_HPP

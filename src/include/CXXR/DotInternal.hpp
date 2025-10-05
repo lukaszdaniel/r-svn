@@ -61,4 +61,4 @@ extern "C"
     SEXP (INTERNAL)(SEXP x);
 } // extern "C"
 
-#endif /* DOTINTERNAL_HPP */
+#endif // DOTINTERNAL_HPP

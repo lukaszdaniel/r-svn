@@ -153,4 +153,4 @@ extern "C"
     Rboolean Rf_isLanguage(SEXP s);
 } // extern "C"
 
-#endif /* EXPRESSION_HPP */
+#endif // EXPRESSION_HPP

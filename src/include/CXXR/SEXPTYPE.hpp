@@ -130,4 +130,4 @@ SEXPTYPE
 #define TYPE_BITS 8
 #define MAX_NUM_SEXPTYPE (1 << TYPE_BITS)
 
-#endif /* SEXPTYPE_HPP */
+#endif // SEXPTYPE_HPP

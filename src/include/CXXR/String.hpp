@@ -548,4 +548,4 @@ extern "C"
     SEXP Rf_installTrChar(SEXP x);
 } // extern "C"
 
-#endif /* CXXR_STRING_HPP */
+#endif // CXXR_STRING_HPP

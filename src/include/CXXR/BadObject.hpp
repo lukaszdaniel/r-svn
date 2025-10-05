@@ -83,4 +83,4 @@ namespace CXXR
         unsigned int m_bad_sexp_type_line;
     };
 }
-#endif /* BADOBJECT_HPP */
+#endif // BADOBJECT_HPP

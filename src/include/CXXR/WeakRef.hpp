@@ -163,4 +163,4 @@ extern "C"
     void R_RegisterCFinalizer(SEXP s, R_CFinalizer_t fun);
 }
 
-#endif /* WEAKREF_HPP */
+#endif // WEAKREF_HPP

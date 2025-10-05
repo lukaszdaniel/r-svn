@@ -320,4 +320,4 @@ namespace CXXR
     };
 } // namespace CXXR
 
-#endif /* CELLPOOL_HPP */
+#endif // CELLPOOL_HPP

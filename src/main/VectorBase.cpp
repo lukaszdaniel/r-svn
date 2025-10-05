@@ -157,7 +157,7 @@ namespace CXXR
         /* so is at least as new as R_NilValue and R_BlankString */
         if (stype == EXPRSXP || stype == VECSXP)
         {
-            SEXP *data = STRING_PTR(this);
+            SEXP *data = VECTOR_PTR(this);
             for (R_xlen_t i = 0; i < n_elem; i++)
                 data[i] = R_NilValue;
         }

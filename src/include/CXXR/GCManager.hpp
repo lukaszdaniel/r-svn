@@ -289,4 +289,4 @@ namespace CXXR
     };
 } // namespace CXXR
 
-#endif /* GCMANAGER_HPP */
+#endif // GCMANAGER_HPP

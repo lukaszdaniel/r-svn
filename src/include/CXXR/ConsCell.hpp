@@ -436,4 +436,4 @@ extern "C"
     SEXP Rf_nthcdr(SEXP s, int n);
 } // extern "C"
 
-#endif /* CONSCELL_HPP */
+#endif // CONSCELL_HPP

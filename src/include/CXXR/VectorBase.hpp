@@ -340,4 +340,4 @@ extern "C"
     int STRING_NO_NA(SEXP x);
 } // extern "C"
 
-#endif /* VECTORBASE_HPP */
+#endif // VECTORBASE_HPP

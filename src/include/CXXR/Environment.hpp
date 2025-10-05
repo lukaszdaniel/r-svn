@@ -381,4 +381,4 @@ extern "C"
     Rboolean R_HasFancyBindings(SEXP rho);
 } // extern "C"
 
-#endif /* ENVIRONMENT_HPP */
+#endif // ENVIRONMENT_HPP

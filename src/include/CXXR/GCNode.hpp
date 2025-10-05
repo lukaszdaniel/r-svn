@@ -737,4 +737,4 @@ extern "C"
     void (MARK_NOT_MUTABLE)(SEXP x);
 } // extern "C"
 
-#endif /* GCNODE_HPP */
+#endif // GCNODE_HPP

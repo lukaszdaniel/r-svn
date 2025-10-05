@@ -344,11 +344,6 @@ INLINE_FUN R_xlen_t XTRUELENGTH(SEXP x)
     return (Rcomplex *) STDVEC_DATAPTR(x);
 }
 
-/*HIDDEN*/ INLINE_FUN CXXR::Complex *CXXR_COMPLEX0(SEXP x) {
-    CHECK_STDVEC_CPLX(x);
-    return (CXXR::Complex *) STDVEC_DATAPTR(x);
-}
-
 /*HIDDEN (inlining)*/ INLINE_FUN Rbyte *RAW0(SEXP x) {
     CHECK_STDVEC_RAW(x);
     return (Rbyte *) STDVEC_DATAPTR(x);
@@ -411,6 +406,17 @@ HIDDEN INLINE_FUN Rbyte SCALAR_BVAL(SEXP x) {
 }
 } // namespace R
 
+/*HIDDEN*/ INLINE_FUN CXXR::Complex *CXXR_COMPLEX0(SEXP x) {
+    CHECK_STDVEC_CPLX(x);
+    return (CXXR::Complex *) STDVEC_DATAPTR(x);
+}
+
+INLINE_FUN CXXR::Complex CXXR_COMPLEX_ELT(SEXP x, R_xlen_t i)
+{
+    CHECK_VECTOR_CPLX_ELT(x, i);
+    return ALTREP(x) ? static_cast<CXXR::Complex>(R::ALTCOMPLEX_ELT(x, i)) : CXXR_COMPLEX0(x)[i];
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -464,12 +470,6 @@ INLINE_FUN Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i)
 {
     CHECK_VECTOR_CPLX_ELT(x, i);
     return ALTREP(x) ? R::ALTCOMPLEX_ELT(x, i) : COMPLEX0(x)[i];
-}
-
-INLINE_FUN CXXR::Complex CXXR_COMPLEX_ELT(SEXP x, R_xlen_t i)
-{
-    CHECK_VECTOR_CPLX_ELT(x, i);
-    return ALTREP(x) ? static_cast<CXXR::Complex>(R::ALTCOMPLEX_ELT(x, i)) : CXXR_COMPLEX0(x)[i];
 }
 
 INLINE_FUN void SET_COMPLEX_ELT(SEXP x, R_xlen_t i, Rcomplex v)

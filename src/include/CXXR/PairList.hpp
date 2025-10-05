@@ -485,4 +485,4 @@ extern "C"
     Rboolean Rf_isPairList(SEXP s);
 } // extern "C"
 
-#endif /* PAIRLIST_HPP */
+#endif // PAIRLIST_HPP

@@ -378,4 +378,4 @@ extern "C"
     SEXP Rf_installNoTrChar(SEXP charSXP);
 } // extern "C"
 
-#endif /* SYMBOL_HPP */
+#endif // SYMBOL_HPP
