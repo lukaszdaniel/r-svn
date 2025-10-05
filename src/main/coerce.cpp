@@ -80,7 +80,7 @@ using namespace CXXR;
    assignment functions when possible, since the write barrier (and
    possibly cache behavior on some architectures) makes assigning more
    costly than dereferencing. */
-#define SHALLOW_DUPLICATE_ATTRIB(to, from) do {\
+#define SHALLOW_DUPLICATE_ATTRIB2(to, from) do {\
   SEXP __from__ = (from); \
   if (ATTRIB(__from__) != R_NilValue) { \
     SEXP __to__ = (to); \
@@ -475,7 +475,7 @@ static SEXP coerceToLogical(SEXP v)
     PROTECT(ans = allocVector(LGLSXP, n = XLENGTH(v)));
     int *pa = LOGICAL(ans);
     ans->maybeTraceMemory(v);
-    SHALLOW_DUPLICATE_ATTRIB(ans, v);
+    SHALLOW_DUPLICATE_ATTRIB2(ans, v);
     switch (TYPEOF(v)) {
     case INTSXP:
 	for (i = 0; i < n; i++) {
@@ -523,7 +523,7 @@ static SEXP coerceToInteger(SEXP v)
     PROTECT(ans = allocVector(INTSXP, n = XLENGTH(v)));
     int *pa = INTEGER(ans);
     ans->maybeTraceMemory(v);
-    SHALLOW_DUPLICATE_ATTRIB(ans, v);
+    SHALLOW_DUPLICATE_ATTRIB2(ans, v);
     switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
@@ -571,7 +571,7 @@ static SEXP coerceToReal(SEXP v)
     PROTECT(ans = allocVector(REALSXP, n = XLENGTH(v)));
     double *pa = REAL(ans);
     ans->maybeTraceMemory(v);
-    SHALLOW_DUPLICATE_ATTRIB(ans, v);
+    SHALLOW_DUPLICATE_ATTRIB2(ans, v);
     switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
@@ -619,7 +619,7 @@ static SEXP coerceToComplex(SEXP v)
     PROTECT(ans = allocVector(CPLXSXP, n = XLENGTH(v)));
     Rcomplex *pa = COMPLEX(ans);
     ans->maybeTraceMemory(v);
-    SHALLOW_DUPLICATE_ATTRIB(ans, v);
+    SHALLOW_DUPLICATE_ATTRIB2(ans, v);
     switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
@@ -668,7 +668,7 @@ static SEXP coerceToRaw(SEXP v)
     PROTECT(ans = allocVector(RAWSXP, n = XLENGTH(v)));
     Rbyte *pa = RAW(ans);
     ans->maybeTraceMemory(v);
-    SHALLOW_DUPLICATE_ATTRIB(ans, v);
+    SHALLOW_DUPLICATE_ATTRIB2(ans, v);
     switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
@@ -741,7 +741,7 @@ static SEXP coerceToString(SEXP v)
 
     PROTECT(ans = allocVector(STRSXP, n = XLENGTH(v)));
     ans->maybeTraceMemory(v);
-    SHALLOW_DUPLICATE_ATTRIB(ans, v);
+    SHALLOW_DUPLICATE_ATTRIB2(ans, v);
     switch (TYPEOF(v)) {
     case LGLSXP:
 	for (i = 0; i < n; i++) {
@@ -1148,7 +1148,7 @@ SEXP Rf_coerceVector(SEXP v, SEXPTYPE type)
 	    /* attribute copying could be handled by a Coerce_Ex
 	       method as for Duplicate; for now, do it here */
 	    PROTECT(ans);
-	    SHALLOW_DUPLICATE_ATTRIB(ans, v);
+	    SHALLOW_DUPLICATE_ATTRIB2(ans, v);
 	    UNPROTECT(2); /* v, ans */
 	    return ans;
 	}
@@ -3103,7 +3103,7 @@ attribute_hidden SEXP do_storage_mode(SEXP call, SEXP op, SEXP args, SEXP env)
     if(isFactor(obj))
 	error("%s", _("invalid to change the storage mode of a factor"));
     SEXP ans = PROTECT(coerceVector(obj, type));
-    SHALLOW_DUPLICATE_ATTRIB(ans, obj); // keeping attributes plus OBJECT & S4 bits
+    SHALLOW_DUPLICATE_ATTRIB2(ans, obj); // keeping attributes plus OBJECT & S4 bits
     UNPROTECT(1);
     return ans;
 }

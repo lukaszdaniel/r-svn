@@ -140,8 +140,8 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		 */
 		ctr = PROTECT(allocVector(VECSXP, 3));
 		level = PROTECT(RealVector::createScalar(zc));
-		xsxp = PROTECT(allocVector(REALSXP, ns + 1));
-		ysxp = PROTECT(allocVector(REALSXP, ns + 1));
+		xsxp = PROTECT(RealVector::create(ns + 1));
+		ysxp = PROTECT(RealVector::create(ns + 1));
 		SET_VECTOR_ELT(ctr, CONTOUR_LIST_LEVEL, level);
 		s = start;
 		REAL(xsxp)[0] = s->x0;

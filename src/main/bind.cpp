@@ -80,7 +80,7 @@ static bool HasNames(SEXP x)
     }
     else if (isList(x)) {
 	while (!isNull(x)) {
-	    if (!isNull(TAG(x))) return 1;
+	    if (!isNull(TAG(x))) return true;
 	    x = CDR(x);
 	}
     }

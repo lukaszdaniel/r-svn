@@ -173,7 +173,7 @@ attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
 		return R_NilValue;
 	}
     }
-    RObject *att = vec->getAttribute(static_cast<Symbol *>(name));
+    RObject *att = vec->getAttribute(SEXP_downcast<Symbol *>(name));
     if (!att || att == R_NilValue) return R_NilValue;
 
 	    if (name == R_DimNamesSymbol && TYPEOF(att) == LISTSXP)
@@ -1596,14 +1596,14 @@ attribute_hidden SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP obj;
     checkArity(op, args);
 
-    if(PRIMVAL(op)) { /* @<- */
-	SEXP input, nlist, ans, value;
+    if (PRIMVAL(op)) { /* @<- */
+	SEXP input, ans, value;
 	PROTECT(input = allocVector(STRSXP, 1));
 
-	nlist = CADR(args);
+	SEXP nlist = CADR(args);
 	if (isSymbol(nlist))
 	    SET_STRING_ELT(input, 0, PRINTNAME(nlist));
-	else if(isString(nlist) ) {
+	else if (isString(nlist) ) {
 	    if (LENGTH(nlist) != 1)
 		error("%s", _("invalid slot name length"));
 	    SET_STRING_ELT(input, 0, STRING_ELT(nlist, 0));
@@ -1619,7 +1619,7 @@ attribute_hidden SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 	UNPROTECT(1); // 'input' is now protected
 
 	/* DispatchOrEval internal generic: @<- */
-	if(DispatchOrEval(call, op, "@<-", args, env, &ans, 0, 0))
+	if (DispatchOrEval(call, op, "@<-", args, env, &ans, 0, 0))
 	    return(ans);
 
 	PROTECT(value = CADDR(ans));

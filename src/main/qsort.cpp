@@ -67,8 +67,7 @@ attribute_hidden SEXP do_qsort(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool x_real= (TYPEOF(x) == REALSXP);
     bool x_int = (!x_real && (TYPEOF(x) == INTSXP || TYPEOF(x) == LGLSXP));
     PROTECT(sx = (x_real || x_int) ? duplicate(x) : coerceVector(x, REALSXP));
-    SET_ATTRIB(sx, R_NilValue);
-    SET_OBJECT(sx, 0);
+    sx->clearAttributes();
     bool indx_ret = asLogical(CADR(args));
     R_xlen_t n = XLENGTH(x);
 #ifdef LONG_VECTOR_SUPPORT

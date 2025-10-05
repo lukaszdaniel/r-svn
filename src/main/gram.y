@@ -43,6 +43,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <IOStuff.h>		/*-> Defn.h */
@@ -2285,24 +2286,18 @@ static SEXP mkComplex(const char *s)
 
 static SEXP mkNA(void)
 {
-    SEXP t = allocVector(LGLSXP, 1);
-    LOGICAL(t)[0] = NA_LOGICAL;
-    return t;
+    return LogicalVector::createScalar(Logical::NA());
 }
 
 attribute_hidden
 SEXP R::mkTrue(void)
 {
-    SEXP s = allocVector(LGLSXP, 1);
-    LOGICAL(s)[0] = 1;
-    return s;
+    return LogicalVector::createScalar(true);
 }
 
 SEXP R::mkFalse(void)
 {
-    SEXP s = allocVector(LGLSXP, 1);
-    LOGICAL(s)[0] = 0;
-    return s;
+    return LogicalVector::createScalar(false);
 }
 
 static void yyerror(const char *s)
@@ -2715,7 +2710,7 @@ static int NumericValue(int c)
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
 	    GCStackRoot<> st1;	            \
-		if (size_t(nstext) > SIZE_MAX / 2) error("%s", _("Buffer size too large to double safely")); \
+	    if (size_t(nstext) > SIZE_MAX / 2) error("%s", _("Buffer size too large to double safely")); \
 	    nstext *= 2;                    \
 	    st1 = allocVector(RAWSXP, nstext); \
 	    stext = (char *)RAW(st1);       \

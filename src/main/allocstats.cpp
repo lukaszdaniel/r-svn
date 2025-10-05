@@ -59,9 +59,9 @@ SEXP allocstats(void)
 
     for (int i = 0; i < nbins; ++i)
     {
-        SET_INTEGER_ELT(size_column, i, (i + 1) * 8);
-        SET_INTEGER_ELT(alloc_column, i, allocs[i]);
-        SET_INTEGER_ELT(free_column, i, frees[i]);
+        (*size_column)[i] = (i + 1) * 8;
+        (*alloc_column)[i] = allocs[i];
+        (*free_column)[i] = frees[i];
     }
     SET_VECTOR_ELT(ans, 0, size_column);
     SET_VECTOR_ELT(ans, 1, alloc_column);

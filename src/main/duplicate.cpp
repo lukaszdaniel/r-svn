@@ -84,7 +84,7 @@ using namespace CXXR;
 	 __n__ -= __this;  __to += __this; __from += __this; \
       } \
   } \
-  DUPLICATE_ATTRIB(to, from, deep);		 \
+  DUPLICATE_ATTRIB2(to, from, deep);		 \
   COPY_TRUELENGTH(to, from); \
   UNPROTECT(2); \
 } while (0)
@@ -95,7 +95,7 @@ using namespace CXXR;
   PROTECT(to = allocVector(TYPEOF(from), __n__)); \
   if (__n__ == 1) fun(to)[0] = fun_ro(from)[0]; \
   else if (__n__) memcpy(fun(to), fun_ro(from), __n__ * sizeof(type)); \
-  DUPLICATE_ATTRIB(to, from, deep); \
+  DUPLICATE_ATTRIB2(to, from, deep); \
   COPY_TRUELENGTH(to, from); \
   UNPROTECT(2); \
 } while (0)
@@ -105,7 +105,7 @@ using namespace CXXR;
    assignment functions (and duplicate in the case of ATTRIB) when the
    ATTRIB or TAG value to be stored is R_NilValue, the value the field
    will have been set to by the allocation function */
-#define DUPLICATE_ATTRIB(to, from, deep) do { \
+#define DUPLICATE_ATTRIB2(to, from, deep) do { \
   SEXP __a__ = ATTRIB(from); \
   if (__a__ != R_NilValue) { \
       SET_ATTRIB(to, duplicate1(__a__, deep)); \
@@ -130,7 +130,7 @@ using namespace CXXR;
    is not defined, because we still need to be able to
    optionally rename duplicate() as Rf_duplicate().
 */
-static SEXP duplicate1(SEXP, Rboolean deep);
+static SEXP duplicate1(SEXP, bool deep);
 
 #ifdef R_PROFILING
 static unsigned long s_duplicate_counter = (unsigned long)-1;
@@ -154,7 +154,9 @@ SEXP CXXR_duplicate(SEXP s)
 #ifdef R_PROFILING
     ++s_duplicate_counter;
 #endif
-    SEXP t = duplicate1(s, Rboolean(depth));
+    SEXP t = duplicate1(s, bool(depth));
+    if (t == R_NilValue)
+        return s;
     if (!(FunctionBase::isA(s) || Promise::isA(s) || Environment::isA(s)))
     {
         t->maybeTraceMemory(s);
@@ -208,9 +210,9 @@ SEXP Rf_lazy_duplicate(SEXP s) {
     return s;
 }
 
-static SEXP duplicate_child(SEXP s, Rboolean deep) {
+static SEXP duplicate_child(SEXP s, bool deep) {
     if (deep)
-	return duplicate1(s, TRUE);
+	return duplicate1(s, true);
     else
 	return lazy_duplicate(s);
 }
@@ -261,7 +263,7 @@ attribute_hidden bool R::R_cycle_detected(SEXP s, SEXP child) {
     return FALSE;
 }
 
-static R_INLINE SEXP duplicate_list(SEXP s, Rboolean deep)
+static R_INLINE SEXP duplicate_list(SEXP s, bool deep)
 {
     if (s == R_NilValue) return R_NilValue;
     SEXP sp, vp, val;
@@ -275,20 +277,20 @@ static R_INLINE SEXP duplicate_list(SEXP s, Rboolean deep)
     for (sp = s, vp = val; sp != R_NilValue; sp = CDR(sp), vp = CDR(vp)) {
 	SETCAR(vp, duplicate_child(CAR(sp), deep));
 	COPY_TAG(vp, sp);
-	DUPLICATE_ATTRIB(vp, sp, deep);
+	DUPLICATE_ATTRIB2(vp, sp, deep);
     }
     UNPROTECT(2);
     return val;
 }
 
-static SEXP duplicate1(SEXP s, Rboolean deep)
+static SEXP duplicate1(SEXP s, bool deep)
 {
     SEXP t;
     R_xlen_t i, n;
 
     if (ALTREP(s)) {
 	PROTECT(s); /* the methods should protect, but ... */
-	SEXP ans = ALTREP_DUPLICATE_EX(s, deep);
+	SEXP ans = ALTREP_DUPLICATE_EX(s, Rboolean(deep));
 	UNPROTECT(1);
 	if (ans != NULL)
 	    return ans;
@@ -310,7 +312,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	SET_FORMALS(t, FORMALS(s));
 	SET_BODY(t, BODY(s));
 	SET_CLOENV(t, CLOENV(s));
-	DUPLICATE_ATTRIB(t, s, deep);
+	DUPLICATE_ATTRIB2(t, s, deep);
 	if (NOJIT(s)) SET_NOJIT(t);
 	if (MAYBEJIT(s)) SET_MAYBEJIT(t);
 	UNPROTECT(2);
@@ -324,14 +326,14 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	PROTECT(s);
 	PROTECT(t = duplicate_list(s, deep));
 	SET_TYPEOF(t, LANGSXP);
-	DUPLICATE_ATTRIB(t, s, deep);
+	DUPLICATE_ATTRIB2(t, s, deep);
 	UNPROTECT(2);
 	break;
     case DOTSXP:
 	PROTECT(s);
 	PROTECT(t = duplicate_list(s, deep));
 	SET_TYPEOF(t, DOTSXP);
-	DUPLICATE_ATTRIB(t, s, deep);
+	DUPLICATE_ATTRIB2(t, s, deep);
 	UNPROTECT(2);
 	break;
     case CHARSXP:
@@ -344,7 +346,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
 	PROTECT(t = allocVector(TYPEOF(s), n));
 	for(i = 0 ; i < n ; i++)
 	    SET_VECTOR_ELT(t, i, duplicate_child(VECTOR_ELT(s, i), deep));
-	DUPLICATE_ATTRIB(t, s, deep);
+	DUPLICATE_ATTRIB2(t, s, deep);
 	COPY_TRUELENGTH(t, s);
 	UNPROTECT(2);
 	break;
@@ -365,7 +367,7 @@ static SEXP duplicate1(SEXP s, Rboolean deep)
     case OBJSXP:
 	PROTECT(s);
 	PROTECT(t = R_allocObject());
-	DUPLICATE_ATTRIB(t, s, deep);
+	DUPLICATE_ATTRIB2(t, s, deep);
 	UNPROTECT(2);
 	break;
     default:

@@ -44,6 +44,7 @@
 #include <R_ext/RS.h>  /* for R_Calloc/R_Free */
 #include <R_ext/Itermacros.h> /* for ITERATE_BY_REGION */
 
+// 'using namespace std' causes ambiguity of 'greater'
 using namespace R;
 using namespace CXXR;
 
@@ -1673,5 +1674,4 @@ attribute_hidden SEXP do_xtfrm(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans = applyClosure(call, fn, prargs, rho, R_NilValue, true);
 
     return ans;
-
 }

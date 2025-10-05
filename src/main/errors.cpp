@@ -936,11 +936,7 @@ void R::errorcall_cpy(SEXP call, const char *format, ...)
 attribute_hidden SEXP do_geterrmessage(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    GCStackRoot<> res;
-    res = allocVector(STRSXP, 1);
-    SET_STRING_ELT(res, 0, mkChar(errbuf));
-
-    return res;
+    return ScalarString(mkChar(errbuf));
 }
 
 void Rf_error(const char *format, ...)

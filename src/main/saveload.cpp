@@ -37,6 +37,7 @@
 #define NEED_CONNECTION_PSTREAMS
 #include <cerrno>
 #include <cctype>		/* for isspace */
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
@@ -45,7 +46,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/Environment.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -2216,10 +2217,8 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
     /* GRW 1/26/99 GRW : added environment parameter so that */
     /* the loaded objects can be placed where desired  */
 
-    aenv = CADR(args);
-    if (TYPEOF(aenv) == NILSXP)
-	error("%s", _("use of NULL environment is defunct"));
-    else if (TYPEOF(aenv) != ENVSXP)
+    aenv = downcast_to_env(CADR(args));
+    if (aenv == R_NilValue)
 	error(_("invalid '%s' argument"), "envir");
 
     /* Process the saved file to obtain a list of saved objects. */

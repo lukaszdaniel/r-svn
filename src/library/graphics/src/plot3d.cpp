@@ -32,7 +32,6 @@
 #include <Graphics.h>
 #include <Print.h>
 
-
 #include "graphics.h"
 #include "localization.h"
 

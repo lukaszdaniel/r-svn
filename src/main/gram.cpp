@@ -111,6 +111,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <IOStuff.h>		/*-> Defn.h */
@@ -1152,16 +1153,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   470,   470,   471,   472,   473,   474,   477,   478,   479,
-     482,   483,   486,   487,   488,   489,   490,   492,   493,   495,
-     496,   497,   498,   499,   501,   502,   503,   504,   505,   506,
-     507,   508,   509,   510,   511,   512,   513,   514,   515,   516,
-     517,   518,   519,   520,   521,   522,   523,   525,   526,   527,
-     528,   529,   530,   531,   532,   533,   534,   535,   536,   537,
-     538,   539,   540,   541,   542,   543,   544,   545,   546,   547,
-     551,   554,   557,   561,   562,   563,   564,   565,   566,   569,
-     570,   573,   574,   575,   576,   577,   578,   579,   580,   583,
-     584,   585,   586,   587,   591
+       0,   471,   471,   472,   473,   474,   475,   478,   479,   480,
+     483,   484,   487,   488,   489,   490,   491,   493,   494,   496,
+     497,   498,   499,   500,   502,   503,   504,   505,   506,   507,
+     508,   509,   510,   511,   512,   513,   514,   515,   516,   517,
+     518,   519,   520,   521,   522,   523,   524,   526,   527,   528,
+     529,   530,   531,   532,   533,   534,   535,   536,   537,   538,
+     539,   540,   541,   542,   543,   544,   545,   546,   547,   548,
+     552,   555,   558,   562,   563,   564,   565,   566,   567,   570,
+     571,   574,   575,   576,   577,   578,   579,   580,   581,   584,
+     585,   586,   587,   588,   592
 };
 #endif
 
@@ -4594,24 +4595,18 @@ static SEXP mkComplex(const char *s)
 
 static SEXP mkNA(void)
 {
-    SEXP t = allocVector(LGLSXP, 1);
-    LOGICAL(t)[0] = NA_LOGICAL;
-    return t;
+    return LogicalVector::createScalar(Logical::NA());
 }
 
 attribute_hidden
 SEXP R::mkTrue(void)
 {
-    SEXP s = allocVector(LGLSXP, 1);
-    LOGICAL(s)[0] = 1;
-    return s;
+    return LogicalVector::createScalar(true);
 }
 
 SEXP R::mkFalse(void)
 {
-    SEXP s = allocVector(LGLSXP, 1);
-    LOGICAL(s)[0] = 0;
-    return s;
+    return LogicalVector::createScalar(false);
 }
 
 static void yyerror(const char *s)
@@ -5024,7 +5019,7 @@ static int NumericValue(int c)
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
 	    GCStackRoot<> st1;	            \
-		if (size_t(nstext) > SIZE_MAX / 2) error("%s", _("Buffer size too large to double safely")); \
+	    if (size_t(nstext) > SIZE_MAX / 2) error("%s", _("Buffer size too large to double safely")); \
 	    nstext *= 2;                    \
 	    st1 = allocVector(RAWSXP, nstext); \
 	    stext = (char *)RAW(st1);       \
