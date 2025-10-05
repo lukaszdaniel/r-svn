@@ -185,7 +185,7 @@ static void *altvec_Dataptr_default(SEXP x, Rboolean writeable);
 static const void *altvec_Dataptr_or_null_default(SEXP x);
 static SEXP altvec_Extract_subset_default(SEXP x, SEXP indx, SEXP call);
 
-struct altvec_methods_t : public altrep_methods_t
+struct altvec_methods_t: public altrep_methods_t
 {
     altvec_methods_t();
     R_altvec_Dataptr_method_t Dataptr;
@@ -193,7 +193,7 @@ struct altvec_methods_t : public altrep_methods_t
     R_altvec_Extract_subset_method_t Extract_subset;
 };
 
-struct altinteger_methods_t : public altvec_methods_t
+struct altinteger_methods_t: public altvec_methods_t
 {
     altinteger_methods_t();
     R_altinteger_Elt_method_t Elt;
@@ -205,7 +205,7 @@ struct altinteger_methods_t : public altvec_methods_t
     R_altinteger_Max_method_t Max;
 };
 
-struct altreal_methods_t : public altvec_methods_t
+struct altreal_methods_t: public altvec_methods_t
 {
     altreal_methods_t();
     R_altreal_Elt_method_t Elt;
@@ -217,7 +217,7 @@ struct altreal_methods_t : public altvec_methods_t
     R_altreal_Max_method_t Max;
 };
 
-struct altlogical_methods_t : public altvec_methods_t
+struct altlogical_methods_t: public altvec_methods_t
 {
     altlogical_methods_t();
     R_altlogical_Elt_method_t Elt;
@@ -227,21 +227,21 @@ struct altlogical_methods_t : public altvec_methods_t
     R_altlogical_Sum_method_t Sum;
 };
 
-struct altraw_methods_t : public altvec_methods_t
+struct altraw_methods_t: public altvec_methods_t
 {
     altraw_methods_t();
     R_altraw_Elt_method_t Elt;
     R_altraw_Get_region_method_t Get_region;
 };
 
-struct altcomplex_methods_t : public altvec_methods_t
+struct altcomplex_methods_t: public altvec_methods_t
 {
     altcomplex_methods_t();
     R_altcomplex_Elt_method_t Elt;
     R_altcomplex_Get_region_method_t Get_region;
 };
 
-struct altstring_methods_t : public altvec_methods_t
+struct altstring_methods_t: public altvec_methods_t
 {
     altstring_methods_t();
     R_altstring_Elt_method_t Elt;
@@ -250,7 +250,7 @@ struct altstring_methods_t : public altvec_methods_t
     R_altstring_No_NA_method_t No_NA;
 };
 
-struct altlist_methods_t : public altvec_methods_t
+struct altlist_methods_t: public altvec_methods_t
 {
     altlist_methods_t();
     R_altstring_Elt_method_t Elt;

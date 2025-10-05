@@ -755,7 +755,7 @@ static SEXP S4_extends(SEXP klass, bool use_tab) {
 	    return val;
     }
     // else:  val <- .extendsForS3(klass) -- and cache it
-    PROTECT(e = allocVector(LANGSXP, 2));
+    PROTECT(e = Rf_allocLang(2));
     SETCAR(e, s_extendsForS3);
     val = CDR(e);
     SETCAR(val, klass);
@@ -1734,7 +1734,7 @@ static SEXP data_part(SEXP obj) {
     SEXP e, val;
     if(!s_getDataPart)
 	init_slot_handling();
-    PROTECT(e = allocVector(LANGSXP, 3));
+    PROTECT(e = Rf_allocLang(3));
     SETCAR(e, s_getDataPart);
     val = CDR(e);
     SETCAR(val, obj);
@@ -1749,7 +1749,7 @@ static SEXP set_data_part(SEXP obj,  SEXP rhs) {
     SEXP e, val;
     if(!s_setDataPart)
 	init_slot_handling();
-    PROTECT(e = allocVector(LANGSXP, 3));
+    PROTECT(e = Rf_allocLang(3));
     SETCAR(e, s_setDataPart);
     val = CDR(e);
     SETCAR(val, obj);

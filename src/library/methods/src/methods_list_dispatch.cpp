@@ -415,7 +415,7 @@ static SEXP R_S_MethodsListSelect(SEXP fname, SEXP ev, SEXP mlist, SEXP f_env)
 {
     SEXP e, val; int n;
     n = isNull(f_env) ? 4 : 5;
-    PROTECT(e = allocVector(LANGSXP, n));
+    PROTECT(e = Rf_allocLang(n));
     SETCAR(e, s_MethodsListSelect);
     val = CDR(e);
     SETCAR(val, fname);
@@ -836,7 +836,7 @@ static SEXP R_loadMethod(SEXP def, SEXP fname, SEXP ev)
             return def;
 	}
 	SEXP e, val;
-	PROTECT(e = allocVector(LANGSXP, 4));
+	PROTECT(e = Rf_allocLang(4));
 	SETCAR(e,
 	       lang3(R_tripleColon_name, R_methods_name, R_loadMethod_name));
 	val = CDR(e);
@@ -1002,7 +1002,7 @@ static SEXP do_inherited_table(SEXP class_objs, SEXP fdef, SEXP mtable, SEXP ev)
 	f = findFun(dotFind, R_MethodsNamespace);
 	R_PreserveObject(f);
     }
-    PROTECT(e = allocVector(LANGSXP, 4));
+    PROTECT(e = Rf_allocLang(4));
     SETCAR(e, f); ee = CDR(e);
     SETCAR(ee, class_objs); ee = CDR(ee);
     SETCAR(ee, fdef); ee = CDR(ee);
@@ -1020,7 +1020,7 @@ static SEXP dots_class(SEXP ev, void *cleandata)
 	dotFind = install(".dotsClass");
 	PROTECT(f = findFun(dotFind, R_MethodsNamespace));
 	R_dots = install("...");
-	call = allocVector(LANGSXP, 2);
+	call = Rf_allocLang(2);
 	R_PreserveObject(call);
 	SETCAR(call,f); ee = CDR(call);
 	SETCAR(ee, R_dots);
@@ -1037,7 +1037,7 @@ static SEXP do_mtable(SEXP fdef, SEXP ev)
 	f = findFun(dotFind, R_MethodsNamespace);
 	R_PreserveObject(f);
     }
-    PROTECT(e = allocVector(LANGSXP, 2));
+    PROTECT(e = Rf_allocLang(2));
     SETCAR(e, f); ee = CDR(e);
     SETCAR(ee, fdef);
     ee = eval(e, ev);

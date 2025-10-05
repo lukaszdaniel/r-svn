@@ -50,7 +50,7 @@ namespace CXXR
      * garbage-collected).  Subsequent evaluations of the Promise
      * object simply return the cached value.
      */
-    class Promise : public RObject
+    class Promise: public RObject
     {
     public:
         static Promise *create(SEXP val = R_NilValue, SEXP expr = R_NilValue, SEXP env = R_NilValue);
@@ -166,7 +166,7 @@ namespace CXXR
         const char *typeName() const override;
 
     private:
-        Promise(SEXP val, SEXP expr, SEXP env) : RObject(PROMSXP)
+        Promise(SEXP val, SEXP expr, SEXP env): RObject(PROMSXP)
         {
             u.promsxp.m_value = val;
             u.promsxp.m_expr = expr;

@@ -44,7 +44,7 @@ namespace CXXR
      * are interpreted by reference to the specified environment (and
      * its enclosing environments).
      */
-    class Closure : public FunctionBase
+    class Closure: public FunctionBase
     {
     public:
         static Closure *create(SEXP formal_args = R_NilValue, SEXP body = R_NilValue, SEXP env = Environment::global());
@@ -166,7 +166,7 @@ namespace CXXR
              * information it requires.
              */
             DebugScope(RObject *closure, RObject *call, RObject *rho, bool debug_on = false)
-            : m_closure(closure), m_call(call), m_env(rho), m_debug(debug_on)
+                : m_closure(closure), m_call(call), m_env(rho), m_debug(debug_on)
             {
                 if (m_debug)
                     startDebugging();

@@ -1951,7 +1951,7 @@ attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean 
 	defineVarInc(R_dataSym, VECTOR_ELT(f, 1), rho);
 
     /* create the call; these could be saved and re-used */
-    PROTECT(e = allocVector(LANGSXP, 5 + useData));
+    PROTECT(e = Rf_allocLang(5 + useData));
     SETCAR(e, R_cbSym); cur = CDR(e);
     SETCAR(cur, R_exprSym); cur = CDR(cur);
     SETCAR(cur, R_valueSym); cur = CDR(cur);

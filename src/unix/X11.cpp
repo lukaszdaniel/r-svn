@@ -21,10 +21,11 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/StringVector.hpp>
 #include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -121,9 +122,9 @@ attribute_hidden bool R_ReadClipboard(Rclpconn clpcon, const char *type)
 
 SEXP do_bmVersion(void)
 {
-    CXXR::GCStackRoot<> ans, nms;
-    ans = allocVector(STRSXP, 3);
-    nms = allocVector(STRSXP, 3);
+    CXXR::GCStackRoot<CXXR::StringVector> ans, nms;
+    ans = CXXR::StringVector::create(3);
+    nms = CXXR::StringVector::create(3);
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("libpng"));
     SET_STRING_ELT(nms, 1, mkChar("jpeg"));
@@ -170,9 +171,9 @@ attribute_hidden bool R_ReadClipboard(Rclpconn con, const char *type)
 
 SEXP do_bmVersion(void)
 {
-    CXXR::GCStackRoot<> ans, nms;
-    ans = allocVector(STRSXP, 3),
-    nms = allocVector(STRSXP, 3);
+    CXXR::GCStackRoot<CXXR::StringVector> ans, nms;
+    ans = CXXR::StringVector::create(3),
+    nms = CXXR::StringVector::create(3);
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("libpng"));
     SET_STRING_ELT(nms, 1, mkChar("jpeg"));

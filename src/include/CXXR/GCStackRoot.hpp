@@ -232,7 +232,7 @@ namespace CXXR
      * collection.)
      */
     template <class T = RObject>
-    class GCStackRoot : public GCStackRootBase
+    class GCStackRoot: public GCStackRootBase
     {
     public:
         /**
@@ -253,7 +253,7 @@ namespace CXXR
          * source.  (There is probably no reason to use this
          * constructor.)
          */
-        GCStackRoot(const GCStackRoot &source) : GCStackRootBase(source) {}
+        GCStackRoot(const GCStackRoot &source): GCStackRootBase(source) {}
 
         /**
          * This will cause this GCStackRoot to protect the same GCNode as

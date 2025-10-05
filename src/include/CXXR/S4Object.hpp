@@ -45,7 +45,7 @@ namespace CXXR
      * S4SXP.
      *
      */
-    class S4Object : public RObject
+    class S4Object: public RObject
     {
     public:
         static S4Object *create(bool is_s4_object = true)

@@ -257,7 +257,7 @@ namespace CXXR
      * that these consistency checks can be tailored according to the
      * derived class.
      */
-    class RObject : public GCNode
+    class RObject: public GCNode
     {
     public:
         enum class Duplication
@@ -424,8 +424,7 @@ namespace CXXR
          *
          * @param src2 Non-null pointer to an RObject.
          */
-        void maybeTraceMemory(const RObject *src1,
-                              const RObject *src2)
+        void maybeTraceMemory(const RObject *src1, const RObject *src2)
         {
 #ifdef R_MEMORY_PROFILING
             if (src1->memoryTraced() || src2->memoryTraced())
@@ -453,9 +452,7 @@ namespace CXXR
          *
          * @param src3 Non-null pointer to an RObject.
          */
-        void maybeTraceMemory(const RObject *src1,
-                              const RObject *src2,
-                              const RObject *src3)
+        void maybeTraceMemory(const RObject *src1, const RObject *src2, const RObject *src3)
         {
 #ifdef R_MEMORY_PROFILING
             if (src1->memoryTraced() || src2->memoryTraced() || src3->memoryTraced())
@@ -558,8 +555,7 @@ namespace CXXR
 #ifdef R_MEMORY_PROFILING
         // This function implements maybeTraceMemory() (qv.) when
         // memory profiling is enabled.
-        void traceMemory(const RObject *src1, const RObject *src2,
-                         const RObject *src3);
+        void traceMemory(const RObject *src1, const RObject *src2, const RObject *src3);
 #endif
     };
 

@@ -41,7 +41,7 @@ namespace CXXR
      * At present the class makes no attempt to enforce the
      * requirement that it should contain Promise objects.
      */
-    class DottedArgs : public ConsCell
+    class DottedArgs: public ConsCell
     {
     public:
         /**
@@ -53,7 +53,7 @@ namespace CXXR
          *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        DottedArgs(SEXP cr, SEXP tl, SEXP tg) : ConsCell(DOTSXP, cr, tl, tg)
+        DottedArgs(SEXP cr, SEXP tl, SEXP tg): ConsCell(DOTSXP, cr, tl, tg)
         {
         }
 

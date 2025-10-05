@@ -53,7 +53,7 @@ namespace CXXR
      * own classes from RObject rather than use this class, which is
      * provided primarily to support the established C interface.
      */
-    class ExternalPointer : public RObject
+    class ExternalPointer: public RObject
     {
     public:
         static ExternalPointer *create(void *ptr = nullptr, SEXP prot = R_NilValue, SEXP tag = R_NilValue)

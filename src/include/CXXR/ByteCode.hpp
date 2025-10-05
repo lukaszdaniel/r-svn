@@ -48,7 +48,7 @@ namespace CXXR
 
     /** @brief ByteCode interpreter.
      */
-    class ByteCode : public RObject
+    class ByteCode: public RObject
     {
     public:
         static ByteCode *create(SEXP code = R_NilValue, SEXP constants = R_NilValue)

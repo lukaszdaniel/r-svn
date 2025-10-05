@@ -93,7 +93,7 @@ extern "C"
      * at the mercy of callers.  It is deliberately not made visible
      * to C code.
      */
-    SEXP *STRING_PTR(SEXP x);
+    SEXP *(STRING_PTR)(SEXP x);
 
     /**
      * @param x Pointer to a CXXR::StringVector; an error is raised if \a x
@@ -106,7 +106,7 @@ extern "C"
      * at the mercy of callers.  It is deliberately not made visible
      * to C code.
      */
-    const SEXP *STRING_PTR_RO(SEXP x);
+    const SEXP *(STRING_PTR_RO)(SEXP x);
 
     /** @brief Obtaing index of a string vector
      *

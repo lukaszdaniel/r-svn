@@ -59,6 +59,8 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/RawVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -1555,7 +1557,7 @@ attribute_hidden void R::R_init_jit_enabled(void)
     R_WhileSymbol = install("while");
     R_RepeatSymbol = install("repeat");
 
-    R_PreserveObject(JIT_cache = allocVector(VECSXP, JIT_CACHE_SIZE));
+    R_PreserveObject(JIT_cache = ListVector::create(JIT_CACHE_SIZE));
 }
 
 static int JIT_score(SEXP e)
@@ -3185,7 +3187,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	/* allocating a vector result could be avoided by passing expr,
 	   env, and fun in some globals or on the byte code stack */
 	PROTECT(fun);
-	SEXP val = allocVector(VECSXP, 4);
+	SEXP val = ListVector::create(4);
 	UNPROTECT(1); /* fun */
 	SET_VECTOR_ELT(val, 0, R_exec_token);
 	SET_VECTOR_ELT(val, 1, expr);
@@ -4028,8 +4030,8 @@ attribute_hidden SEXP do_withVisible(SEXP call, SEXP op, SEXP args, SEXP rho)
     x = CAR(args);
     x = eval(x, rho);
     PROTECT(x);
-    PROTECT(ret = allocVector(VECSXP, 2));
-    PROTECT(nm = allocVector(STRSXP, 2));
+    PROTECT(ret = ListVector::create(2));
+    PROTECT(nm = StringVector::create(2));
     SET_STRING_ELT(nm, 0, mkChar("value"));
     SET_STRING_ELT(nm, 1, mkChar("visible"));
     SET_VECTOR_ELT(ret, 0, x);
@@ -4527,7 +4529,7 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
     SEXP s = args;
     const char *dispatchClassName = translateChar(STRING_ELT(lclass, lwhich));
 
-    SEXP t, m = PROTECT(allocVector(STRSXP,nargs));
+    SEXP t, m = PROTECT(StringVector::create(nargs));
     for (int i = 0 ; i < nargs ; i++) {
 	t = classForGroupDispatch(CAR(s));
 	if (isString(t) && (stringPositionTr(t, dispatchClassName) >= 0))
@@ -4637,7 +4639,7 @@ void R::R_initialize_bcode(void)
   ByteCode::initInterpreter();
 
   /* the first constants record always stays in place for protection */
-  R_ConstantsRegistry = allocVector(VECSXP, 2);
+  R_ConstantsRegistry = ListVector::create(2);
   R_PreserveObject(R_ConstantsRegistry);
   SET_VECTOR_ELT(R_ConstantsRegistry, 0, R_NilValue);
   SET_VECTOR_ELT(R_ConstantsRegistry, 1, R_NilValue);
@@ -4785,7 +4787,7 @@ static SEXP seq_int(int n1, int n2)
     return R_compact_intrange(n1, n2);
 #else
     int n = n1 <= n2 ? n2 - n1 + 1 : n1 - n2 + 1;
-    SEXP ans = allocVector(INTSXP, n);
+    SEXP ans = IntVector::create(n);
     int *data = INTEGER(ans);
     if (n1 <= n2)
 	for (int i = 0; i < n; i++)
@@ -4890,7 +4892,7 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
 
 #ifdef COMPACT_INTSEQ
 #define SETSTACK_INTSEQ(idx, rn1, rn2) do {	\
-	SEXP info = allocVector(INTSXP, 2);	\
+	SEXP info = IntVector::create(2);	\
 	INTEGER(info)[0] = (int) rn1;		\
 	INTEGER(info)[1] = (int) rn2;		\
 	R_BCNodeStackTop[idx] = R_bcstack_t(INTSEQSXP, info); \
@@ -6339,9 +6341,7 @@ static R_INLINE R_xlen_t bcStackIndex(R_bcstack_t *s)
 
 static R_INLINE SEXP mkVector1(SEXP s)
 {
-    SEXP t = allocVector(VECSXP, 1);
-    SET_VECTOR_ELT(t, 0, s);
-    return t;
+    return ListVector::createScalar(s);
 }
 
 #define DO_FAST_VECELT(sv, vec,  i, subset2) do {		\
@@ -7149,7 +7149,7 @@ static SEXP inflateAssignmentCall(SEXP expr) {
     SEXP nonAssignForm = Symbol::obtain(nonAssignName);
 
     int nargs = length(expr) - 2;
-    SEXP lhs = allocVector(LANGSXP, nargs + 1);
+    SEXP lhs = Rf_allocLang(nargs + 1);
     SETCAR(lhs, nonAssignForm);
 
     SEXP porig = CDR(expr);
@@ -7373,7 +7373,7 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
     }
 # else
     /* allocate binding cache and protect on stack */
-    vcache = allocVector(VECSXP, n);
+    vcache = ListVector::create(n);
     BCNPUSH(vcache);
 # endif
     }
@@ -7552,7 +7552,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	defineVar(symbol, R_NilValue, rho);
 	BCNPUSH(GET_BINDING_CELL(symbol, rho));
 
-	SEXP value = allocVector(RAWSXP, sizeof(R_loopinfo_t));
+	SEXP value = RawVector::create(sizeof(R_loopinfo_t));
 	R_loopinfo_t *loopinfo = (R_loopinfo_t *) RAW0(value);
 	loopinfo->idx = -1;
 #ifdef COMPACT_INTSEQ
@@ -8613,14 +8613,14 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
     int v = ipc[0];
     // Check version:
     if (v < R_bcMinVersion || v > R_bcVersion) {
-	code = allocVector(INTSXP, m * 2);
+	code = IntVector::create(m * 2);
 	pc = (BCODE *) DATAPTR(code);
 	pc[0].i = v;
 	pc[1].v = opinfo[BCMISMATCH_OP].addr;
 	return code;
     }
 
-	code = allocVector(INTSXP, m * n);
+	code = IntVector::create(m * n);
 	memset(INTEGER(code), 0, m * n * sizeof(int));
 	pc = (BCODE *) DATAPTR(code);
 
@@ -8668,7 +8668,7 @@ attribute_hidden SEXP R::R_bcDecode(SEXP code) {
     R_xlen_t n = LENGTH(code) / m;
     BCODE *pc = (BCODE *) DATAPTR(code);
 
-    SEXP bytes = allocVector(INTSXP, n);
+    SEXP bytes = IntVector::create(n);
     int *ipc = INTEGER(bytes);
 
     /* copy the version number */
@@ -8734,7 +8734,7 @@ attribute_hidden void R::R_registerBC(SEXP bcBytes, SEXP bcode)
 		ipc[i] == CALLSPECIAL_OP)
             loadableConsts++;
 
-    SEXP constsRecord = PROTECT(allocVector(VECSXP, loadableConsts * 2 + 3));
+    SEXP constsRecord = PROTECT(ListVector::create(loadableConsts * 2 + 3));
     int crIdx = 3;
     for (int i = 0; i < n; i += opinfo[ipc[i]].argc + 1)
         if (ipc[i] == LDCONST_OP || ipc[i] == PUSHCONSTARG_OP ||
@@ -8745,7 +8745,7 @@ attribute_hidden void R::R_registerBC(SEXP bcBytes, SEXP bcode)
         }
 #else
     /* add the whole constant pool */
-    SEXP constsRecord = PROTECT(allocVector(VECSXP, 2 + 3));
+    SEXP constsRecord = PROTECT(ListVector::create(2 + 3));
     SET_VECTOR_ELT(constsRecord, 3, consts);
     /* the consts reference is in the record twice to make the code simpler */
     SET_VECTOR_ELT(constsRecord, 4, duplicate(consts));
@@ -8948,10 +8948,10 @@ static SEXP disassemble(SEXP bc)
   SEXP expr = BCODE_EXPR(bc);
   int nc = LENGTH(consts);
 
-  ans = allocVector(VECSXP, expr != R_NilValue ? 4 : 3);
+  ans = ListVector::create(expr != R_NilValue ? 4 : 3);
   SET_VECTOR_ELT(ans, 0, install(".Code"));
   SET_VECTOR_ELT(ans, 1, R_bcDecode(code));
-  SET_VECTOR_ELT(ans, 2, allocVector(VECSXP, nc));
+  SET_VECTOR_ELT(ans, 2, ListVector::create(nc));
   if (expr != R_NilValue)
       SET_VECTOR_ELT(ans, 3, duplicate(expr));
 
@@ -9040,7 +9040,7 @@ attribute_hidden SEXP do_growconst(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("constant buffer must be a generic vector"));
 
     int n = LENGTH(constBuf);
-    SEXP ans = allocVector(VECSXP, 2 * n);
+    SEXP ans = ListVector::create(2 * n);
     for (int i = 0; i < n; i++)
 	SET_VECTOR_ELT(ans, i, VECTOR_ELT(constBuf, i));
 
@@ -9090,7 +9090,7 @@ attribute_hidden SEXP do_getconst(SEXP call, SEXP op, SEXP args, SEXP env)
     if (n < 0 || n > LENGTH(constBuf))
 	error("%s", _("bad constant count"));
 
-    ans = allocVector(VECSXP, n);
+    ans = ListVector::create(n);
     for (int i = 0; i < n; i++)
 	SET_VECTOR_ELT(ans, i, VECTOR_ELT(constBuf, i));
 
@@ -9102,7 +9102,7 @@ attribute_hidden
 SEXP do_bcprofcounts(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    SEXP val = allocVector(INTSXP, OPCOUNT);
+    SEXP val = IntVector::create(OPCOUNT);
     for (int i = 0; i < OPCOUNT; i++)
 	INTEGER(val)[i] = opcode_counts[i];
     return val;

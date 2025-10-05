@@ -79,7 +79,7 @@ namespace CXXR
      * inherit directly from GCNode, and for the key, value etc. to be
      * pointers to GCNode.
      */
-    class WeakRef : public RObject
+    class WeakRef: public RObject
     {
     public:
         static WeakRef *create(SEXP key = R_NilValue, SEXP value = R_NilValue, SEXP finalizer = R_NilValue)
@@ -115,7 +115,7 @@ namespace CXXR
         }
 
     private:
-        WeakRef(SEXP key, SEXP value, SEXP finalizer) : RObject(WEAKREFSXP)
+        WeakRef(SEXP key, SEXP value, SEXP finalizer): RObject(WEAKREFSXP)
         {
             u.weakrrefptr.m_key = key;
             u.weakrrefptr.m_value = value;

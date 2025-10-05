@@ -41,7 +41,7 @@ namespace CXXR
      *
      * These are the built-in R functions.
      */
-    using CCODE = RObject *(*)(RObject *, RObject *, RObject *, RObject *);
+    using CCODE = RObject * (*)(RObject *, RObject *, RObject *, RObject *);
 
     /** @brief Kind of function, used mainly in deparsing.
      */
@@ -111,7 +111,7 @@ namespace CXXR
      * before being passed on to the encapsulated C/C++ function (CR's
      * BUILTINSXP), or are passed on unevaluated (SPECIALSXP).
      */
-    class BuiltInFunction : public FunctionBase
+    class BuiltInFunction: public FunctionBase
     {
     public:
         static BuiltInFunction *create(bool is_special = false)
@@ -161,18 +161,18 @@ namespace CXXR
             const char *first_arg_name;
             enum DispatchType dispatch_type;
             FUNTAB(const char *name, CCODE cfun, int variant,
-                   int flags, int arity, PPinfo ppinfo,
-                   const char *first_arg_name = nullptr,
-                   enum DispatchType dispatch = DispatchType::NONE)
+                int flags, int arity, PPinfo ppinfo,
+                const char *first_arg_name = nullptr,
+                enum DispatchType dispatch = DispatchType::NONE)
                 : name(name), cfun(cfun), code(variant), eval(flags), arity(arity), gram(ppinfo),
-                  first_arg_name(first_arg_name), dispatch_type(dispatch) {}
+                first_arg_name(first_arg_name), dispatch_type(dispatch) {}
         };
 
         static std::vector<FUNTAB> s_R_FunTab;
 #define R_FunTab CXXR::BuiltInFunction::s_R_FunTab
 
     private:
-        BuiltInFunction(bool is_special) : FunctionBase(is_special ? SPECIALSXP : BUILTINSXP)
+        BuiltInFunction(bool is_special): FunctionBase(is_special ? SPECIALSXP : BUILTINSXP)
         {
             u.primsxp.m_offset = 0;
             u.primsxp.m_dummy1 = nullptr;

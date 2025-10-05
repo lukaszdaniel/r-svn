@@ -87,7 +87,7 @@ namespace CXXR
      * no need to use smart pointers such as GCStackRoot<Symbol> or
      * GCEdge<Symbol>: plain pointers will do fine.
      */
-    class Symbol : public RObject
+    class Symbol: public RObject
     {
     public:
         // The symbol table
@@ -95,7 +95,7 @@ namespace CXXR
         // to Symbol objects.  Each Symbol simply contains
         // a pointer locating its entry within the cache.
         using Table = std::unordered_map<std::string, Symbol *, std::hash<std::string>, std::equal_to<std::string>,
-                                       CXXR::Allocator<std::pair<const std::string, Symbol *>>>;
+            CXXR::Allocator<std::pair<const std::string, Symbol *>>>;
 
         static Table s_symbol_table;
 
@@ -229,7 +229,7 @@ namespace CXXR
         const char *typeName() const override;
 
     private:
-        Symbol(SEXP name, SEXP val, SEXP internal) : RObject(SYMSXP)
+        Symbol(SEXP name, SEXP val, SEXP internal): RObject(SYMSXP)
         {
             u.symsxp.m_pname = name;
             u.symsxp.m_value = val;

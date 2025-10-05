@@ -37,8 +37,12 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/StringVector.hpp>
 #include <R_ext/Visibility.h>
 #include <R_ext/RStartup.h> // for otype_t
+
+using namespace CXXR;
 
 #define too_small 1e-12
 #define hlzero 0
@@ -297,9 +301,9 @@ SEXP colorout_ListPatterns(void)
         */
         p = p->next;
     }
-
-    SEXP res = PROTECT(allocVector(STRSXP, n));
-    SEXP nms = PROTECT(allocVector(STRSXP, n));
+    GCStackRoot<StringVector> res, nms;
+    res = StringVector::create(n);
+    nms = StringVector::create(n);
 
     p = P;
     int i = 0;
@@ -310,7 +314,7 @@ SEXP colorout_ListPatterns(void)
         i++;
     }
     setAttrib(res, R_NamesSymbol, nms);
-    UNPROTECT(2);
+
     return res;
 }
 

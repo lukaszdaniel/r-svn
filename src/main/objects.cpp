@@ -1517,7 +1517,7 @@ static SEXP get_primitive_methods(SEXP op, SEXP rho)
 
     f = allocVector(STRSXP, 1);
     SET_STRING_ELT(f, 0, mkChar(PRIMNAME(op)));
-    e = allocVector(LANGSXP, 2);
+    e = Rf_allocLang(2);
     SETCAR(e, install("getGeneric"));
     val = CDR(e); SETCAR(val, f);
     val = eval(e, rho);
@@ -1692,7 +1692,7 @@ SEXP R_do_MAKE_CLASS(const char *what)
     if (!what)
 	error("%s", _("C level MAKE_CLASS macro called with NULL string pointer"));
     if (!s_getClass) s_getClass = install("getClass");
-    PROTECT(call = allocVector(LANGSXP, 2));
+    PROTECT(call = Rf_allocLang(2));
     SETCAR(call, s_getClass);
     SETCAR(CDR(call), mkString(what));
     e = eval(call, R_MethodsNamespace);

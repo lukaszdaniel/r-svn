@@ -39,7 +39,7 @@ namespace CXXR
 {
     /** @brief Base class for function types.
      */
-    class FunctionBase : public RObject
+    class FunctionBase: public RObject
     {
     public:
         /** @brief The name by which this type is known in R.
@@ -73,7 +73,7 @@ namespace CXXR
         /**
          * @param stype Required type of the FunctionBase.
          */
-        explicit FunctionBase(SEXPTYPE stype) : RObject(stype)
+        explicit FunctionBase(SEXPTYPE stype): RObject(stype)
         {
         }
 

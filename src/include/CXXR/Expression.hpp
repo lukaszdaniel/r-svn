@@ -49,7 +49,7 @@ namespace CXXR
      * useful for expressions that are only evaluated once, where the function
      * is known to be a primitive and for SET_TYPEOF.
      */
-    class Expression : public ConsCell
+    class Expression: public ConsCell
     {
     public:
         /**
@@ -61,7 +61,7 @@ namespace CXXR
          *
          * @param tg Pointer to the 'tag' of the element to be constructed.
          */
-        Expression(SEXP cr, SEXP tl, SEXP tg) : ConsCell(LANGSXP, cr, tl, tg)
+        Expression(SEXP cr, SEXP tl, SEXP tg): ConsCell(LANGSXP, cr, tl, tg)
         {
         }
 
