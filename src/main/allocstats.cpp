@@ -24,6 +24,7 @@
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Rinternals.h>
 
 using namespace CXXR;
@@ -54,8 +55,8 @@ SEXP allocstats(void)
     alloc_column = IntVector::create(nbins);
     GCStackRoot<IntVector> free_column;
     free_column = IntVector::create(nbins);
-    GCStackRoot<> ans;
-    ans = Rf_allocVector(VECSXP, 3);
+    GCStackRoot<ListVector> ans;
+    ans = ListVector::create(3);
 
     for (int i = 0; i < nbins; ++i)
     {

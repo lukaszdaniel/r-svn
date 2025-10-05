@@ -45,7 +45,11 @@
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <CXXR/ComplexVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <IOStuff.h>		/*-> Defn.h */
 #include <Fileio.h>
 #include <Parse.h>
@@ -789,9 +793,9 @@ static void initId(void){
 
 static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 {
-    GCStackRoot<> val;
+    GCStackRoot<IntVector> val;
 
-    val = allocVector(INTSXP, 8);
+    val = IntVector::create(8);
     INTEGER(val)[0] = lloc->first_line;
     INTEGER(val)[1] = lloc->first_byte;
     INTEGER(val)[2] = lloc->last_line;
@@ -1178,16 +1182,12 @@ static SEXP mkChar2(const char *name)
 
 static SEXP mkString2(const char *s, size_t len, bool escaped)
 {
-    GCStackRoot<> t;
     cetype_t enc = CE_NATIVE;
 
     if(known_to_be_latin1) enc = CE_LATIN1;
     else if(!escaped && known_to_be_utf8) enc = CE_UTF8;
 
-    t = allocVector(STRSXP, 1);
-    SET_STRING_ELT(t, 0, mkCharLenCE(s, (int) len, enc));
-
-    return t;
+    return StringVector::createScalar(String::obtain(std::string(s, len), enc));
 }
 
 static SEXP xxdefun(SEXP fname, SEXP formals, SEXP body, YYLTYPE *lloc)
@@ -1589,7 +1589,7 @@ static void UseSrcRefState(SrcRefState *state);
 attribute_hidden
 void R::InitParser(void)
 {
-    ParseState.sexps = allocVector(VECSXP, 7); /* initialized to R_NilValue */
+    ParseState.sexps = ListVector::create(7); /* initialized to R_NilValue */
     ParseState.data = R_NilValue;
     INIT_SVS();
     R_PreserveObject(ParseState.sexps); /* never released in an R session */
@@ -1610,7 +1610,7 @@ void R::R_InitSrcRefState()
 	    error("%s", _("allocation of source reference state failed"));
     	PutSrcRefState(prev);
 	ParseState.prevState = prev;
-	ParseState.sexps = allocVector(VECSXP, 7);
+	ParseState.sexps = ListVector::create(7);
 	ParseState.data = R_NilValue;
 	INIT_SVS();
 	R_PreserveObject(ParseState.sexps);
@@ -1855,7 +1855,7 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
     	if (ParseState.didAttach) {
    	    int buflen = R_IoBufferReadOffset(buffer);
    	    std::string buf; buf.resize(buflen);
-   	    GCStackRoot<> class_;
+   	    GCStackRoot<StringVector> class_;
    	    R_IoBufferReadReset(buffer);
    	    for (int i=0; i<buflen; i++)
    	    	buf[i] = (char) R_IoBufferGetc(buffer);
@@ -1864,7 +1864,7 @@ SEXP R::R_Parse1Buffer(IoBuffer *buffer, int gencode, ParseStatus *status)
 	    defineVar(s_filename, ScalarString(mkChar("")), PS_ORIGINAL);
 	    SEXP s_lines = install("lines");
 	    defineVar(s_lines, ScalarString(mkChar2(buf.c_str())), PS_ORIGINAL);
-    	    class_ = allocVector(STRSXP, 2);
+    	    class_ = StringVector::create(2);
             SET_STRING_ELT(class_, 0, mkChar("srcfilecopy"));
             SET_STRING_ELT(class_, 1, mkChar("srcfile"));
 	    setAttrib(PS_ORIGINAL, R_ClassSymbol, class_);
@@ -1932,7 +1932,7 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 finish:
 
     t = CDR(t);
-    rval = allocVector(EXPRSXP, length(t));
+    rval = ExpressionVector::create(length(t));
     for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t))
 	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
@@ -2086,7 +2086,7 @@ SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
 finish:
     R_IoBufferWriteReset(buffer);
     t = CDR(t);
-    rval = allocVector(EXPRSXP, length(t));
+    rval = ExpressionVector::create(length(t));
     for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t))
 	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
@@ -2235,8 +2235,7 @@ static int KeywordLookup(const char *s)
 			PRESERVE_SV(yylval = RealVector::createScalar(NA_REAL));
 			break;
 		    case 8:
-			PRESERVE_SV(yylval = allocVector(STRSXP, 1));
-			SET_STRING_ELT(yylval, 0, NA_STRING);
+			PRESERVE_SV(yylval = StringVector::createScalar(String::NA()));
 			break;
 		    case 9:
 			PRESERVE_SV(yylval = ComplexVector::createScalar(Complex(NA_REAL, NA_REAL)));
@@ -2709,10 +2708,10 @@ static int NumericValue(int c)
 	size_t nc = bp - stext;             \
 	if (nc >= nstext - 1) {             \
 	    char *old = stext;              \
-	    GCStackRoot<> st1;	            \
+	    GCStackRoot<RawVector> st1;	    \
 	    if (size_t(nstext) > SIZE_MAX / 2) error("%s", _("Buffer size too large to double safely")); \
 	    nstext *= 2;                    \
-	    st1 = allocVector(RAWSXP, nstext); \
+	    st1 = RawVector::create(nstext);\
 	    stext = (char *)RAW(st1);       \
 	    if (old != stext) std::copy(old, old + nc, stext);        \
 	    sti = st1;	   		    \
@@ -2805,11 +2804,8 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
 	memset(s, 0, ssize); /* safety */
     // This used to differentiate WC_NOT_UNICODE but not needed
     wcstoutf8(s, (const wchar_t *)wcs, ssize);
-    GCStackRoot<> t;
-    t = allocVector(STRSXP, 1);
-    SET_STRING_ELT(t, 0, mkCharCE(s, CE_UTF8));
 
-    return t;
+    return StringVector::createScalar(String::obtain(s, CE_UTF8));
 }
 /*
  * Skip at Least `min` Bytes in Complete Character Steps
@@ -3442,8 +3438,8 @@ static void setParseFilename(SEXP newname) {
 	defineVar(install("filename"), newname, PS_SRCFILE);
 	defineVar(install("original"), PS_ORIGINAL, PS_SRCFILE);
 
-	GCStackRoot<> class_;
-	class_ = allocVector(STRSXP, 2);
+	GCStackRoot<StringVector> class_;
+	class_ = StringVector::create(2);
 	SET_STRING_ELT(class_, 0, mkChar("srcfilealias"));
 	SET_STRING_ELT(class_, 1, mkChar("srcfile"));
 	setAttrib(PS_SRCFILE, R_ClassSymbol, class_);
@@ -4128,7 +4124,7 @@ static void modif_token( yyltype* loc, int tok ){
 /* this local version of lengthgets() always copies and doesn't fill with NA */
 static SEXP lengthgets2(SEXP x, int len) {
     GCStackRoot<> result;
-    result = allocVector( TYPEOF(x), len );
+    result = allocVector(TYPEOF(x), len);
 
     len = (len < length(x)) ? len : length(x);
     switch(TYPEOF(x)) {
@@ -4309,8 +4305,8 @@ static void finalizeData(void){
     }
 
     /* attach the token names as an attribute so we don't need to switch to a dataframe, and decide on terminals */
-    GCStackRoot<> tokens;
-    tokens = allocVector( STRSXP, nloc );
+    GCStackRoot<StringVector> tokens;
+    tokens = StringVector::create(nloc);
     for (int i=0; i<nloc; i++) {
         int token = _TOKEN(i);
         int xlat = YYTRANSLATE(token);
@@ -4331,10 +4327,10 @@ static void finalizeData(void){
 	newdata = lengthgets2(PS_DATA, nloc * DATA_ROWS);
 	newtext = lengthgets2(PS_TEXT, nloc);
     } else {
-	newdata = allocVector( INTSXP, 0);
-	newtext = allocVector( STRSXP, 0);
+	newdata = IntVector::create(0);
+	newtext = StringVector::create(0);
     }
-    dims = allocVector( INTSXP, 2 );
+    dims = IntVector::create(2);
     INTEGER(dims)[0] = DATA_ROWS ;
     INTEGER(dims)[1] = nloc ;
     setAttrib( newdata, install( "dim" ), dims ) ;
@@ -4359,8 +4355,8 @@ static void growData(void){
     int new_data_count;	
     if (PS_DATA == R_NilValue) {
         new_data_count = INIT_DATA_COUNT;
-	PS_SET_DATA(allocVector(INTSXP, 0));
-	PS_SET_TEXT(allocVector(STRSXP, 0));
+	PS_SET_DATA(IntVector::create(0));
+	PS_SET_TEXT(StringVector::create(0));
     } else
         new_data_count = 2*DATA_COUNT;
 
@@ -4376,7 +4372,7 @@ static void growID( int target ){
     int new_count;
     if (PS_IDS == R_NilValue) {
         new_count = INIT_DATA_COUNT/2 - 1;
-        PS_SET_IDS(allocVector(INTSXP, 0));
+        PS_SET_IDS(IntVector::create(0));
     } else
     	new_count = ID_COUNT;
 

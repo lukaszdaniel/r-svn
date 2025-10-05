@@ -128,6 +128,7 @@
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -937,7 +938,7 @@ typedef struct {
 
 SEXP R_MakeUnwindCont(void)
 {
-    return CONS(R_NilValue, allocVector(RAWSXP, sizeof(unwind_cont_t)));
+    return CONS(R_NilValue, RawVector::create(sizeof(unwind_cont_t)));
 }
 
 #define RAWDATA(x) ((void *) RAW0(x))

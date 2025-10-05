@@ -32,12 +32,13 @@
 #endif
 
 #include <cstring>
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
-#include <Localization.h>
 #include <R_ext/RStartup.h>
 
 using namespace R;
@@ -91,8 +92,8 @@ SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     /* need protection as mkChar allocates */
-    GCStackRoot<> vals;
-    vals = allocVector(STRSXP, NumCommandLineArgs);
+    GCStackRoot<StringVector> vals;
+    vals = StringVector::create(NumCommandLineArgs);
     for (int i = 0; i < NumCommandLineArgs; i++)
 	SET_STRING_ELT(vals, i, mkChar(CommandLineArgs[i]));
     return vals;

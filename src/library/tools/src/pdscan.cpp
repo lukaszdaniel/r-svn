@@ -19,9 +19,13 @@
 
 #include <cctype>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <R.h>
 #include "tools.h"
 #include "localization.h"
+
+using namespace CXXR;
 
 static SEXP package_dependencies_scan_one(SEXP this_) {
     SEXP y;
@@ -33,7 +37,7 @@ static SEXP package_dependencies_scan_one(SEXP this_) {
     cetype_t e;
 
     if(this_ == NA_STRING) {
-        return Rf_allocVector(STRSXP, 0);
+        return StringVector::create(0);
     }
 
     beg = R_Calloc(size, int);
@@ -90,7 +94,7 @@ static SEXP package_dependencies_scan_one(SEXP this_) {
 	    end[ne] = i - 1;
     }
 
-    PROTECT(y = Rf_allocVector(STRSXP, nb));
+    PROTECT(y = StringVector::create(nb));
     s = CHAR(this_);
     v = -1;
     for(i = 0; i < nb; i++) {
@@ -124,12 +128,12 @@ SEXP package_dependencies_scan(SEXP x) {
     nx = LENGTH(x);
 
     if(nx < 1)
-        return Rf_allocVector(STRSXP, 0);
+        return StringVector::create(0);
 
     if(nx == 1)
         return package_dependencies_scan_one(STRING_ELT(x, 0));
 
-    PROTECT(z = Rf_allocVector(VECSXP,nx));
+    PROTECT(z = ListVector::create(nx));
     ny = 0;
     for(i = 0; i < nx; i++) {
         this_ = package_dependencies_scan_one(STRING_ELT(x, i));
@@ -138,7 +142,7 @@ SEXP package_dependencies_scan(SEXP x) {
     }
     // Now unlist.
     k = 0;
-    PROTECT(y = Rf_allocVector(STRSXP,ny));
+    PROTECT(y = StringVector::create(ny));
     for(i = 0; i < nx; i++) {
         this_ = VECTOR_ELT(z, i);
         for(j = 0; j < LENGTH(this_); j++, k++)

@@ -30,14 +30,16 @@
 #include <config.h>
 #endif
 
-#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
+#include <CXXR/ProtectStack.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Rmath.h>
 #include <R_ext/GraphicsEngine.h>
 #include <R_ext/Print.h>
 
 using namespace R;
+using namespace CXXR;
 
 static const char *mouseHandlers[] =
 {"onMouseDown", "onMouseUp", "onMouseMove"};
@@ -236,7 +238,7 @@ void Rf_doMouseEvent(pDevDesc dd, R_MouseEvent event,
 	  + ((buttons & middleButton) != 0)
 	  + ((buttons & rightButton) != 0);
 
-	PROTECT(bvec = allocVector(INTSXP, len));
+	PROTECT(bvec = IntVector::create(len));
 	i = 0;
 	if (buttons & leftButton) INTEGER(bvec)[i++] = 0;
 	if (buttons & middleButton) INTEGER(bvec)[i++] = 1;

@@ -85,6 +85,9 @@
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/RawVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <CXXR/BadObject.hpp>
 
 #include <R_ext/RS.h> /* for S4 allocation */
@@ -2138,9 +2141,11 @@ SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
     case CPLXSXP:
         return ComplexVector::create(n_elem, allocator);
     case STRSXP:
+        return StringVector::create(n_elem, allocator);
     case EXPRSXP:
+        return ExpressionVector::create(n_elem, allocator);
     case VECSXP:
-        return new VectorBase(type, n_elem, allocator);
+        return ListVector::create(n_elem, allocator);
     case LANGSXP:
 #ifdef LONG_VECTOR_SUPPORT
         if (n_elem > R_SHORT_LEN_MAX) error("%s", _("invalid length for pairlist"));

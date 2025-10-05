@@ -36,6 +36,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -279,7 +280,7 @@ attribute_hidden SEXP do_cum(SEXP call, SEXP op, SEXP args, SEXP env)
     } else {
 	PROTECT(t = coerceVector(CAR(args), REALSXP));
 	n = XLENGTH(t);
-	PROTECT(s = allocVector(REALSXP, n));
+	PROTECT(s = RealVector::create(n));
 	setAttrib(s, R_NamesSymbol, getAttrib(t, R_NamesSymbol));
 	UNPROTECT(2);
 	if(n == 0) return s;
