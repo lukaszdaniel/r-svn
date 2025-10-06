@@ -33,16 +33,17 @@
 #include <config.h>
 #endif
 
-#include <Localization.h>
-
 #include <cfloat>
 #include <cstdio>
 #include <cstring>
 #include <ctime>
 #include <windows.h>
+#include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
@@ -65,6 +66,7 @@
 #include <Rversion.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* used in rui.c */
 void internal_shellexec(const char * file)
@@ -249,7 +251,7 @@ const char *formatError(DWORD res);
 // keep in step with src/library/utils/src/windows/util.c
 SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, ansnames;
+    GCStackRoot<StringVector> ans, ansnames;
     OSVERSIONINFOEX osvi;
     char ver[256], buf[1000];
     wchar_t name[MAX_COMPUTERNAME_LENGTH + 1];
@@ -259,7 +261,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     char *udomain;
 
     checkArity(op, args);
-    PROTECT(ans = allocVector(STRSXP, 9));
+    ans = StringVector::create(9);
     osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
     if(!GetVersionEx((OSVERSIONINFO *)&osvi))
 	error("%s", _("unsupported version of Windows"));
@@ -346,7 +348,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     SET_STRING_ELT(ans, 6, STRING_ELT(ans, 5));
     SET_STRING_ELT(ans, 7, STRING_ELT(ans, 5));
-    PROTECT(ansnames = allocVector(STRSXP, 9));
+    ansnames = StringVector::create(9);
     SET_STRING_ELT(ansnames, 0, mkChar("sysname"));
     SET_STRING_ELT(ansnames, 1, mkChar("release"));
     SET_STRING_ELT(ansnames, 2, mkChar("version"));
@@ -357,7 +359,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_STRING_ELT(ansnames, 7, mkChar("effective_user"));
     SET_STRING_ELT(ansnames, 8, mkChar("udomain"));
     setAttrib(ans, R_NamesSymbol, ansnames);
-    UNPROTECT(2);
+
     return ans;
 }
 
@@ -376,7 +378,8 @@ void Rsleep(double timeint)
 
 SEXP do_dllversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP path = R_NilValue, ans;
+    SEXP path = R_NilValue;
+	GCStackRoot<StringVector> ans;
     const wchar_t *dll;
     DWORD dwVerInfoSize;
     DWORD dwVerHnd;
@@ -387,7 +390,7 @@ SEXP do_dllversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("invalid '%s' argument"), "path");
     dll = filenameToWchar(STRING_ELT(path, 0), FALSE);
     dwVerInfoSize = GetFileVersionInfoSizeW(dll, &dwVerHnd);
-    PROTECT(ans = allocVector(STRSXP, 2));
+    ans = StringVector::create(2);
     SET_STRING_ELT(ans, 0, mkChar(""));
     SET_STRING_ELT(ans, 1, mkChar(""));
     if (dwVerInfoSize) {
@@ -418,7 +421,7 @@ SEXP do_dllversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 	} else ans = R_NilValue;
 	free(lpstrVffInfo);
     } else ans = R_NilValue;
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -752,10 +755,11 @@ static char *getLongPathName(const char *orig)
 
 SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, paths = CAR(args), el, slash;
+    SEXP paths = CAR(args), el, slash;
     int i, n = LENGTH(paths);
     int fslash = 0;
     CXXR::RAllocStack::Scope rscope;
+	GCStackRoot<StringVector> ans;
 
     checkArity(op, args);
     if (!isString(paths))
@@ -771,7 +775,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     
     int mustWork = asLogical(CADDR(args));
 
-    PROTECT(ans = allocVector(STRSXP, n));
+    ans = StringVector::create(n);
     for (i = 0; i < n; i++) {
     	SEXP result;
 	el = STRING_ELT(paths, i);
@@ -864,21 +868,21 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SET_STRING_ELT(ans, i, result);
     }
 
-    UNPROTECT(1);
     return ans;
 }
 
 /* utils::shortPathName */
 SEXP in_shortpath(SEXP paths)
 {
-    SEXP ans, el;
+    SEXP el;
     int i, n = LENGTH(paths);
     DWORD res;
     CXXR::RAllocStack::Scope rscope;
+	GCStackRoot<StringVector> ans;
 
     if(!isString(paths)) error(_("'%s' must be a character vector"), "path");
 
-    PROTECT(ans = allocVector(STRSXP, n));
+    ans = StringVector::create(n);
     for (i = 0; i < n; i++) {
 	el = STRING_ELT(paths, i);
 	if(getCharCE(el) == CE_UTF8) {
@@ -918,7 +922,6 @@ SEXP in_shortpath(SEXP paths)
 	R_fixbackslash(ffn);
 	SET_STRING_ELT(ans, i, mkChar(ffn));
     }
-    UNPROTECT(1);
 
     return ans;
 }
@@ -1123,7 +1126,7 @@ char *getDLLVersion(void)
 /* base::file.choose */
 attribute_hidden SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans;
+    GCStackRoot<StringVector> ans;
     wchar_t *fn;
 
     checkArity(op, args);
@@ -1131,9 +1134,9 @@ attribute_hidden SEXP do_filechoose(SEXP call, SEXP op, SEXP args, SEXP rho)
     fn = askfilenameW(G_("Select file"), "");
     if (!fn)
 	error("%s", _("file choice cancelled"));
-    PROTECT(ans = allocVector(STRSXP, 1));
+    ans = StringVector::create(1);
     SET_STRING_ELT(ans, 0, mkCharWUTF8(fn));
-    UNPROTECT(1);
+
     return ans;
 }
 

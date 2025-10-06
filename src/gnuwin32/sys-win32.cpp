@@ -29,11 +29,13 @@
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>
 #include <cctype> /* for isalpha */
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/Evaluator.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
@@ -365,19 +367,19 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	        translateChar(STRING_ELT(cmd, 0)), ll);
     }
     if (flag == 3) { /* intern = TRUE: convert pairlist to list */
-	GCStackRoot<> rval;
-	rval = allocVector(STRSXP, i);
+	GCStackRoot<StringVector> rval;
+	rval = StringVector::create(i);
 	for (j = (i - 1); j >= 0; j--) {
 	    SET_STRING_ELT(rval, j, CAR(tlist));
 	    tlist = CDR(tlist);
 	}
 	if (ll) {
 	    SEXP lsym = install("status");
-	    setAttrib(rval, lsym, ScalarInteger(ll));
+	    setAttrib(rval, lsym, IntVector::createScalar(ll));
 	}
 	return rval;
     } else {
-	SEXP rval = ScalarInteger(ll);
+	SEXP rval = IntVector::createScalar(ll);
 	Evaluator::enableResultPrinting(false);
 	return rval;
     }

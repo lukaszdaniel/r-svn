@@ -933,7 +933,7 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (!cacheOK) {
 	/* This _is_ the right way to do this: see §14.9 of
-	   http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html */
+	   https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html */
 	struct curl_slist *tmp =
 	    curl_slist_append(headers, "Pragma: no-cache");
 	if(!tmp)

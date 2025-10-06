@@ -40,12 +40,13 @@
 #include <cstring>
 #include <cstdlib>
 #include <cctype>
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -1131,17 +1132,14 @@ Rconnection newWpipe(const char *description, int ienc, const char *mode)
 
 SEXP do_syswhich(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP nm;
-    GCStackRoot<> ans;
-    int n;
-    CXXR::RAllocStack::Scope rscope;
-
     checkArity(op, args);
-    nm = CAR(args);
+    SEXP nm = CAR(args);
     if(!isString(nm))
 	error(_("'%s' is not a character vector"), "names");
-    n = LENGTH(nm);
-    ans = allocVector(STRSXP, n);
+    int n = LENGTH(nm);
+    CXXR::RAllocStack::Scope rscope;
+    GCStackRoot<StringVector> ans;
+    ans = StringVector::create(n);
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(nm, i) == NA_STRING) {
 	    SET_STRING_ELT(ans, i, NA_STRING);
