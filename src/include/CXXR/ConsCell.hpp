@@ -200,6 +200,32 @@ namespace CXXR
          */
         RObject *car() const;
 
+        /** @brief Convert a ConsCell to a (possibly) different
+         * ConsCell type.
+         *
+         * @tparam T A (non-abstract) class derived from ConsCell.
+         *
+         * @param cc Pointer to a ConsCell (possibly null).  The
+         *          effect of the method on \a cc is undefined;
+         *          consequently \a cc should not be used subsequently to
+         *          the method call.
+         *
+         * @return Pointer to the converted object, or a null pointer
+         * if \a cc is null.  If \a cc is already of the desired type,
+         * the method simply returns \a cc.
+         */
+        template <class T>
+        static T *convert(ConsCell *cc)
+        {
+            if (cc == R_NilValue)
+                return R_NilValue;
+            if (T *ccc = dynamic_cast<T *>(cc))
+                return ccc;
+            T *ans = new T(cc->car0(), cc->tail(), cc->tag());
+            DUPLICATE_ATTRIB(ans, cc); // ans->setAttributes(cc->attributes());
+            return ans;
+        }
+
         /** @brief Number of elements in list.
          *
          * @param start Pointer to a ConsCell, possibly null.
@@ -306,6 +332,15 @@ namespace CXXR
          * @return a pointer to the 'tag' of this ConsCell.
          */
         const RObject *tag() const
+        {
+            return u.listsxp.m_tag;
+        }
+
+        /** @brief Get the 'tag' value.
+         *
+         * @return a pointer to the 'tag' of this ConsCell.
+         */
+        RObject *tag()
         {
             return u.listsxp.m_tag;
         }

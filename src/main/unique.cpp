@@ -1838,15 +1838,20 @@ static SEXP StripUnmatched(SEXP s)
     }
 }
 
-static SEXP ExpandDots(SEXP s, int expdots)
+static SEXP ExpandDots(SEXP s_, int expdots)
 {
-    SEXP r;
+    // The call to ConsCell::convert below will allocate memory:
+    GCStackRoot<> s(s_);
     if (s == R_NilValue)
 	return s;
     if (TYPEOF(CAR(s)) == DOTSXP ) {
-	SET_TYPEOF(CAR(s), LISTSXP);	/* a safe mutation */
+        // Convert CAR(s) to a PairList:
+        {
+            GCStackRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(CAR(s)));
+            SETCAR(s, ConsCell::convert<PairList>(cc));
+        }
 	if (expdots) {
-	    r = CAR(s);
+	    SEXP r = CAR(s);
 	    while (CDR(r) != R_NilValue ) {
 		SET_ARGUSED(r, 1);
 		r = CDR(r);

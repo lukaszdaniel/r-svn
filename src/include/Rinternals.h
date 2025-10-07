@@ -436,6 +436,7 @@ R_xlen_t Rf_any_duplicated(SEXP x, Rboolean from_last); // unique.c
 R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last); // unique.c
 SEXP Rf_classgets(SEXP, SEXP);
 SEXP Rf_cons(SEXP, SEXP);
+SEXP Rf_lcons(SEXP car, SEXP cdr);
 void Rf_copyMatrix(SEXP, SEXP, Rboolean); // duplicate.c
 void Rf_copyListMatrix(SEXP, SEXP, Rboolean); // duplicate.c
 void Rf_copyMostAttrib(SEXP, SEXP);

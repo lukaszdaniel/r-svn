@@ -94,11 +94,14 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <Localization.h>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for test of S4 objects */
@@ -1730,9 +1733,10 @@ attribute_hidden SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     if (oldtype == LANGSXP) {
-	if(length(x)) {
-	    x = VectorToPairList(x);
-	    SET_TYPEOF(x, LANGSXP);
+	if (Rf_length(x)) {
+	    GCStackRoot<PairList> xlr(SEXP_downcast<PairList *>(VectorToPairList(x)));
+	    GCStackRoot<Expression> xr(ConsCell::convert<Expression>(xlr));
+	    x = xr;
 	} else
 	    error("%s", _("result is zero-length and so cannot be a language object"));
     }

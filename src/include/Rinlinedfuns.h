@@ -688,13 +688,6 @@ INLINE_FUN SEXP Rf_listAppend(SEXP s, SEXP t)
 
 /* Return a (language) dotted pair with the given car and cdr */
 
-INLINE_FUN SEXP Rf_lcons(SEXP car, SEXP cdr)
-{
-    SEXP e = CONS(car, cdr);
-    SET_TYPEOF(e, LANGSXP);
-    return e;
-}
-
 INLINE_FUN SEXP Rf_lang1(SEXP s)
 {
     return LCONS(s, R_NilValue);

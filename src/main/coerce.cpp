@@ -47,10 +47,15 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/RawVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Parse.h>
 #include <Defn.h> /*-- Maybe modularize into own Coerce.h ..*/
 #include <Internal.h>
@@ -1025,15 +1030,22 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 
     /* expression -> list, new in R 2.4.0 */
     if (type == VECSXP && TYPEOF(v) == EXPRSXP) {
-	/* This is sneaky but saves us rewriting a lot of the duplicate code */
-	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
-	SET_TYPEOF(rval, VECSXP);
+	GCStackRoot<ExpressionVector> vv(SEXP_downcast<ExpressionVector *>(v));
+	R_xlen_t sz = vv->size();
+	rval = ListVector::create(sz);
+	DUPLICATE_ATTRIB(rval, vv);
+	for (R_xlen_t i = 0; i < sz; i++)
+	    SET_VECTOR_ELT(rval, i, XVECTOR_ELT(vv, i));
 	return rval;
     }
 
     if (type == EXPRSXP && TYPEOF(v) == VECSXP) {
-	rval = MAYBE_REFERENCED(v) ? duplicate(v) : v;
-	SET_TYPEOF(rval, EXPRSXP);
+	GCStackRoot<ListVector> vv(SEXP_downcast<ListVector *>(v));
+	R_xlen_t sz = vv->size();
+	rval = ExpressionVector::create(sz);
+	DUPLICATE_ATTRIB(rval, vv);
+	for (R_xlen_t i = 0; i < sz; i++)
+	    SET_XVECTOR_ELT(rval, i, VECTOR_ELT(vv, i));
 	return rval;
     }
 
@@ -1708,7 +1720,8 @@ attribute_hidden SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if(n == 0)
 	    errorcall(call, "%s", _("invalid length 0 argument"));
 	SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
-	PROTECT(ap = ans = allocList(n));
+	GCStackRoot<PairList> tl(SEXP_downcast<PairList *>(PairList::makeList(n - 1)));
+	PROTECT(ap = ans = PairList::create<Expression>(R_NilValue, tl));
 	for (int i = 0; i < n; i++) {
 	    SETCAR(ap, VECTOR_ELT(args, i));
 	    if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
@@ -1719,8 +1732,12 @@ attribute_hidden SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	break;
     }
     case LISTSXP:
-	ans = duplicate(args);
-	break;
+    {
+        ConsCell *cc = SEXP_downcast<ConsCell *>(duplicate(args));
+        GCStackRoot<Expression> ansr(ConsCell::convert<Expression>(cc));
+        ans = ansr;
+        break;
+    }
     case STRSXP:
 	errorcall(call, "%s", _("as.call(<character>) not feasible; consider str2lang(<char.>)"));
 	break;
@@ -1728,7 +1745,6 @@ attribute_hidden SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, "%s", _("invalid argument list"));
 	ans = R_NilValue;
     }
-    SET_TYPEOF(ans, LANGSXP);
     SET_TAG(ans, R_NilValue);
     return ans;
 }

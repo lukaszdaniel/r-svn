@@ -2040,6 +2040,11 @@ SEXP Rf_cons(SEXP car, SEXP cdr)
     return PairList::create(CHK(car), CHK(cdr), R_NilValue);
 }
 
+SEXP Rf_lcons(SEXP car, SEXP cdr)
+{
+    return PairList::create<Expression>(CHK(car), CHK(cdr), R_NilValue);
+}
+
 attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
 {
     PairList *s = PairList::create(R_NilValue, R_NilValue, R_NilValue);

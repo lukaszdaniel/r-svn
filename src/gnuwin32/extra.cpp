@@ -379,7 +379,7 @@ void Rsleep(double timeint)
 SEXP do_dllversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP path = R_NilValue;
-	GCStackRoot<StringVector> ans;
+    GCStackRoot<StringVector> ans;
     const wchar_t *dll;
     DWORD dwVerInfoSize;
     DWORD dwVerHnd;
@@ -759,7 +759,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     int i, n = LENGTH(paths);
     int fslash = 0;
     CXXR::RAllocStack::Scope rscope;
-	GCStackRoot<StringVector> ans;
+    GCStackRoot<StringVector> ans;
 
     checkArity(op, args);
     if (!isString(paths))
@@ -878,7 +878,7 @@ SEXP in_shortpath(SEXP paths)
     int i, n = LENGTH(paths);
     DWORD res;
     CXXR::RAllocStack::Scope rscope;
-	GCStackRoot<StringVector> ans;
+    GCStackRoot<StringVector> ans;
 
     if(!isString(paths)) error(_("'%s' must be a character vector"), "path");
 

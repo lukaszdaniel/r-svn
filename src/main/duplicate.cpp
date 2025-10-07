@@ -33,11 +33,15 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
-#include <Localization.h>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/DottedArgs.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> /* S4 bit */
 
@@ -263,25 +267,28 @@ attribute_hidden bool R::R_cycle_detected(SEXP s, SEXP child) {
     return FALSE;
 }
 
-static R_INLINE SEXP duplicate_list(SEXP s, bool deep)
+namespace {
+template<typename T = PairList>
+SEXP duplicate_list(SEXP s_, bool deep)
 {
-    if (s == R_NilValue) return R_NilValue;
-    SEXP sp, vp, val;
-    PROTECT(s);
+    if (s_ == R_NilValue) return R_NilValue;
+    GCStackRoot<> val, s(s_);
+    SEXP sp, vp;
 
     val = R_NilValue;
-    for (sp = s; sp != R_NilValue; sp = CDR(sp))
-	val = CONS(R_NilValue, val);
+    for (sp = CDR(s); sp != R_NilValue; sp = CDR(sp))
+	val = PairList::create(R_NilValue, val);
 
-    PROTECT(val);
+    val = PairList::create<T>(R_NilValue, val);
     for (sp = s, vp = val; sp != R_NilValue; sp = CDR(sp), vp = CDR(vp)) {
 	SETCAR(vp, duplicate_child(CAR(sp), deep));
 	COPY_TAG(vp, sp);
 	DUPLICATE_ATTRIB2(vp, sp, deep);
     }
-    UNPROTECT(2);
+
     return val;
 }
+} // anonymous namespace
 
 static SEXP duplicate1(SEXP s, bool deep)
 {
@@ -324,15 +331,13 @@ static SEXP duplicate1(SEXP s, bool deep)
 	break;
     case LANGSXP:
 	PROTECT(s);
-	PROTECT(t = duplicate_list(s, deep));
-	SET_TYPEOF(t, LANGSXP);
+	PROTECT(t = duplicate_list<Expression>(s, deep));
 	DUPLICATE_ATTRIB2(t, s, deep);
 	UNPROTECT(2);
 	break;
     case DOTSXP:
 	PROTECT(s);
-	PROTECT(t = duplicate_list(s, deep));
-	SET_TYPEOF(t, DOTSXP);
+	PROTECT(t = duplicate_list<DottedArgs>(s, deep));
 	DUPLICATE_ATTRIB2(t, s, deep);
 	UNPROTECT(2);
 	break;

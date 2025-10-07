@@ -55,12 +55,14 @@
 # define __LIBM_PRIVATE
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
-#include <Localization.h>
+#include <CXXR/PairList.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>		/*-> Arith.h -> math.h */
 #ifdef __OpenBSD__
 # undef __LIBM_PRIVATE
@@ -1583,9 +1585,10 @@ static R_INLINE SEXP match_round_gen_args(SEXP args, SEXP call)
     SEXP rest = CADR(args);
     if (rest == R_MissingArg)
         rest = R_NilValue;
-    else if (TYPEOF(rest) == DOTSXP)
-        SET_TYPEOF(rest, LISTSXP);
-    else error("%s", _("matchArg returned something weird"));
+    else if (TYPEOF(rest) == DOTSXP) {
+        GCStackRoot<ConsCell> cc(SEXP_downcast<ConsCell *>(rest));
+        rest = ConsCell::convert<PairList>(cc);
+    } else error("%s", _("matchArg returned something weird"));
     SETCDR(args, rest);
     return args;
 }
