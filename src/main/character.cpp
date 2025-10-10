@@ -97,11 +97,11 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #include <array>
 #include <algorithm>
 #include <utility>
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h>  // for R_Calloc/R_Free
@@ -120,6 +120,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #include "RBufferUtils.h"
 
 using namespace R;
+using namespace CXXR;
 
 static R_StringBuffer cbuff = R_StringBuffer();
 
@@ -493,7 +494,7 @@ attribute_hidden SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 		   to be extracted from it */
 		substr(ss, slen, ienc, start, stop, i,
 		       IS_ASCII(el), &rfrom, &rlen, el == lastel);
-		SET_STRING_ELT(s, i, mkCharLenCE(rfrom, rlen, ienc));
+		SET_STRING_ELT(s, i, String::obtain(rfrom, rlen, ienc));
 	    }
 	    lastel = el;
 	}

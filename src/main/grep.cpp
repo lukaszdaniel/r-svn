@@ -186,7 +186,7 @@ static SEXP mkCharWLenASCII(const wchar_t *wc, int nc, bool maybe_ascii)
 	    }
 	    xi[i] = (char) u;
 	}
-	SEXP ans = mkCharLenCE(xi, nc, CE_UTF8);
+	String *ans = String::obtain(xi, nc, CE_UTF8);
 	R_Free(xi);
 	return ans;
     }
@@ -196,7 +196,7 @@ static SEXP mkCharWLenASCII(const wchar_t *wc, int nc, bool maybe_ascii)
     if (nb <= 8192) {
 	char xi[8192];
 	nb = wcstoutf8(xi, wc, nb);
-	return mkCharLenCE(xi, (int)(nb-1), CE_UTF8);
+	return String::obtain(xi, nb-1, CE_UTF8);
     }
 
     nb = wcstoutf8(NULL, wc, (size_t)INT_MAX+2);
@@ -204,7 +204,7 @@ static SEXP mkCharWLenASCII(const wchar_t *wc, int nc, bool maybe_ascii)
 	error("%s", _("R character strings are limited to 2^31-1 bytes"));
     char *xi = R_Calloc(nb, char);
     nb = wcstoutf8(xi, wc, nb);
-    SEXP ans = mkCharLenCE(xi, (int)(nb-1), CE_UTF8);
+    SEXP ans = String::obtain(xi, nb-1, CE_UTF8);
     R_Free(xi);
     return ans;
 }
@@ -233,7 +233,7 @@ static SEXP markBytesOld(SEXP x, bool useBytes, bool haveBytesInput)
 
 	return x;
     else
-	return mkCharLenCE(CHAR(x), LENGTH(x), CE_BYTES);
+	return String::obtain(CHAR(x), LENGTH(x), CE_BYTES);
 }
 
 static SEXP mkBytesNew(const char *name, bool haveBytesInput)

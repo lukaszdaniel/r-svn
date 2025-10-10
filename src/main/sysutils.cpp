@@ -39,10 +39,10 @@
 #endif
 
 #include <cerrno>
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Riconv.h>
@@ -70,6 +70,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 #ifdef HAVE_AQUA
 int (*ptr_CocoaSystem)(const char*);
@@ -936,7 +937,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		    /* FIXME: use "bytes" unless CE_NATIVE matches to? */
 		    SET_STRING_ELT(ans, i,
-				   mkCharLenCE(cbuff.data, (int) nout, ienc));
+				   String::obtain(cbuff.data, nout, ienc));
 		} else SET_STRING_ELT(ans, i, NA_STRING);
 	    }
 	}

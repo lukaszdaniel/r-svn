@@ -37,8 +37,6 @@
 #include <Localization.h>
 #include <Defn.h> // for ForceNonInline
 
-using namespace R;
-
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -194,7 +192,7 @@ namespace CXXR
             Rf_errorcall(R_NilValue,
                 _("cannot allocate vector of size %0.1f %s"),
                 bytes / Giga, "GB");
-        if (bytes > Mega)
+        else if (bytes > Mega)
             Rf_errorcall(R_NilValue,
                 _("cannot allocate vector of size %0.1f %s"),
                 bytes / Mega, "MB");

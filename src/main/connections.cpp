@@ -5241,14 +5241,14 @@ static SEXP rawFixedString(Rbyte *bytes, int len, int nbytes, int *np, int useBy
 	clen = iread - (*np);
 	*np = iread;
 	*p = '\0';
-	res = mkCharLenCE(buf, clen, CE_NATIVE);
+	res = String::obtain(buf, clen, CE_NATIVE);
     } else {
 	/* no terminator */
 	buf = (char*) R_chk_calloc(len + 1, 1);
 	if (len)
 	    memcpy(buf, bytes + (*np), len);
 	*np += len;
-	res = mkCharLenCE(buf, len, CE_NATIVE);
+	res = String::obtain(buf, len, CE_NATIVE);
 	R_Free(buf);
     }
     return res;

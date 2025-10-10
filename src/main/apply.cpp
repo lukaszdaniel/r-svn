@@ -31,12 +31,13 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/Expression.hpp>
 #include <Defn.h>
 #include <Internal.h>
 

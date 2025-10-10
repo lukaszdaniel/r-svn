@@ -28,6 +28,7 @@
  */
 
 #include <CXXR/Expression.hpp>
+#include <CXXR/PairList.hpp>
 
 namespace CXXR
 {
@@ -37,6 +38,18 @@ namespace CXXR
     {
         const auto &lconsptr = Rf_lcons;
     } // namespace ForceNonInline
+
+    Expression::Expression(RObject *function, std::initializer_list<RObject *> args)
+        : Expression(function, R_NilValue, R_NilValue)
+    {
+        ConsCell *current = this;
+        for (RObject *arg : args)
+        {
+            PairList *next = PairList::create(arg);
+            current->setTail(next);
+            current = next;
+        }
+    }
 
     const char *Expression::typeName() const
     {

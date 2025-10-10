@@ -97,6 +97,7 @@
 #include <algorithm> // for std::copy
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Parse.h>
 #include <R_ext/RS.h>           /* for R_chk_* allocation */
@@ -104,6 +105,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 /* bison creates a non-static symbol yylloc (and other) in both gramLatex.o
    and gramRd.o, so remap */
@@ -787,10 +789,10 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   199,   199,   200,   201,   204,   205,   206,   207,   208,
-     209,   211,   212,   214,   215,   216,   217,   218,   220,   221,
-     222,   223,   224,   225,   227,   231,   235,   239,   239,   243,
-     245,   246,   248,   248,   252,   252,   256,   256
+       0,   201,   201,   202,   203,   206,   207,   208,   209,   210,
+     211,   213,   214,   216,   217,   218,   219,   220,   222,   223,
+     224,   225,   226,   227,   229,   233,   237,   241,   241,   245,
+     247,   248,   250,   250,   254,   254,   258,   258
 };
 #endif
 
@@ -2567,13 +2569,7 @@ static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 
 static SEXP mkString2(const char *s, size_t len)
 {
-    SEXP t;
-    cetype_t enc = CE_UTF8;
-
-    PROTECT(t = allocVector(STRSXP, 1));
-    SET_STRING_ELT(t, 0, mkCharLenCE(s, (int) len, enc));
-    UNPROTECT(1); /* t */
-    return t;
+    return StringVector::createScalar(String::obtain(s, len, CE_UTF8));
 }
 
 

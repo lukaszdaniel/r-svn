@@ -116,7 +116,7 @@ namespace CXXR
         case CE_BYTES:
             break;
         default:
-            Rf_error(_("unknown encoding mask: %d"), enc);
+            Rf_error(_("unknown encoding: %d"), enc);
         }
 
         return new String(name, enc, is_ascii);

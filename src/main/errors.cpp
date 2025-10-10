@@ -34,6 +34,7 @@
 
 #include <cstdarg>
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -44,7 +45,10 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Environment.hpp>
-#include <Localization.h>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 /* -> Errormsg.h , R_ext/Error.h */
 #include <Internal.h>
@@ -1942,9 +1946,9 @@ static void signalInterrupt(void)
 
     SEXP h = GetOption1(install("interrupt"));
     if (h != R_NilValue) {
-	GCStackRoot<> call;
-	call = LCONS(h, R_NilValue);
-	evalKeepVis(call, R_GlobalEnv);
+	GCStackRoot<Expression> call;
+	call = PairList::create<Expression>(h, R_NilValue);
+	evalKeepVis(call, Environment::global());
     }
 }
 
@@ -1963,27 +1967,28 @@ static void checkRestartStacks(RCNTXT *cptr)
 static void addInternalRestart(RCNTXT *cptr, const char *cname)
 {
     checkRestartStacks(cptr);
-    GCStackRoot<> entry, name;
+    GCStackRoot<StringVector> name;
+    GCStackRoot<ListVector> entry;
 
-    name = mkString(cname);
-    entry = allocVector(VECSXP, 2);
+    name = StringVector::createScalar(String::obtain(cname));
+    entry = ListVector::create(2);
     SET_VECTOR_ELT(entry, 0, name);
     SET_VECTOR_ELT(entry, 1, R_MakeExternalPtr(cptr, R_NilValue, R_NilValue));
     setAttrib(entry, R_ClassSymbol, mkString("restart"));
-    R_RestartStack = CONS(entry, R_RestartStack);
+    R_RestartStack = PairList::create(entry, R_RestartStack);
 }
 
 attribute_hidden void R::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP rho, entry;
-    GCStackRoot<> klass;
+    GCStackRoot<String> klass;
     checkRestartStacks(cptr);
 
     /**** need more here to keep recursive errors in browser? */
     SEXP h = GetOption1(install("browser.error.handler"));
     if (!isFunction(h)) h = R_RestartToken;
     rho = cptr->cloenv;
-    klass = mkChar("error");
+    klass = String::obtain("error");
     entry = mkHandlerEntry(klass, rho, h, rho, R_NilValue, TRUE);
     R_HandlerStack = CONS(entry, R_HandlerStack);
 

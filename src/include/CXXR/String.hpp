@@ -220,6 +220,7 @@ namespace CXXR
          * encoding.
          */
         static String *obtain(const std::string &str, cetype_t encoding = CE_NATIVE);
+        static String *obtain(const char *name, size_t len, cetype_t encoding);
 
         /**
          * @brief Create uncached String object.

@@ -31,13 +31,15 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* charToRaw works at byte level, ignores encoding */
 attribute_hidden SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -83,7 +85,7 @@ attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 	nc = j + 1;
 	PROTECT(ans = allocVector(STRSXP, 1));
 	SET_STRING_ELT(ans, 0,
-		       mkCharLenCE((const char *)RAW(x), j+1, CE_NATIVE));
+		       String::obtain((const char *)RAW(x), j+1, CE_NATIVE));
     }
     UNPROTECT(1);
     return ans;
@@ -456,8 +458,7 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (used) memcpy(tmp + len, buf, used);
 	    len += used;
 	}
-	PROTECT(ans = allocVector(STRSXP, 1));
-	SET_STRING_ELT(ans, 0, mkCharLenCE(tmp, (int) len, CE_UTF8));
+	PROTECT(ans = StringVector::createScalar(String::obtain(tmp, len, CE_UTF8)));
 	if (len >= 10000) R_Free(tmp);
     }
     UNPROTECT(2);

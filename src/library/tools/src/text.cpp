@@ -43,6 +43,7 @@ LibExtern int R_MB_CUR_MAX;
 } // namespace R
 
 using namespace R;
+using namespace CXXR;
 
 /* .Call, so manages R_alloc stack */
 SEXP delim_match(SEXP x, SEXP delims)
@@ -301,9 +302,9 @@ SEXP splitString(SEXP string, SEXP delims)
 	    if(strchr(del, *p)) {
 		// put out current string (if any)
 		if(nthis)
-		    SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
+		    SET_STRING_ELT(out, used++, String::obtain(tmp, nthis, ienc));
 		// put out delimiter
-		SET_STRING_ELT(out, used++, mkCharLen(p, 1));
+		SET_STRING_ELT(out, used++, String::obtain(p, 1, CE_NATIVE));
 		// restart
 		this_ = tmp; nthis = 0;
 	    } else {
@@ -311,7 +312,7 @@ SEXP splitString(SEXP string, SEXP delims)
 		nthis++;
 	    }
 	}
-	if(nthis) SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
+	if(nthis) SET_STRING_ELT(out, used++, String::obtain(tmp, nthis, ienc));
 
 	ans = lengthgets(out, used);
     } else

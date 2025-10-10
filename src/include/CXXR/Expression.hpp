@@ -31,6 +31,7 @@
 #ifndef EXPRESSION_HPP
 #define EXPRESSION_HPP
 
+#include <initializer_list>
 #include <CXXR/ConsCell.hpp>
 
 namespace CXXR
@@ -64,6 +65,8 @@ namespace CXXR
         Expression(SEXP cr, SEXP tl, SEXP tg): ConsCell(LANGSXP, cr, tl, tg)
         {
         }
+
+        Expression(RObject *function, std::initializer_list<RObject *> unnamed_args);
 
         /** @brief Is an RObject an Expression?
          *

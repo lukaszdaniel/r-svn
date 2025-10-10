@@ -39,12 +39,6 @@
 
 namespace CXXR
 {
-/* The generational collector uses a reduced version of RObject as a
-   header in vector nodes.  The layout MUST be kept consistent with
-   the RObject definition. The standard RObject takes up the size of 7 doubles
-   and the reduced version takes 6 doubles on most 64-bit systems. On most
-   32-bit systems, RObject takes 8 doubles and the reduced version 7 doubles. */
-
     /** @brief Untemplated base class for R vectors.
      */
     class VectorBase: public RObject

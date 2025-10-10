@@ -31,9 +31,10 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
-#include <Localization.h>
+#include <CXXR/String.hpp>
 #include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -183,7 +184,7 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
 	error("%s", _("Error reading data in Rsockread"));
     GCStackRoot<> ans;
     ans = allocVector(STRSXP, 1);
-    SET_STRING_ELT(ans, 0, mkCharLen(buf, maxlen));
+    SET_STRING_ELT(ans, 0, String::obtain(buf, maxlen, CE_NATIVE));
 
     return ans;
 }
