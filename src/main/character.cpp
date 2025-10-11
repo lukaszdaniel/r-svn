@@ -494,7 +494,7 @@ attribute_hidden SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 		   to be extracted from it */
 		substr(ss, slen, ienc, start, stop, i,
 		       IS_ASCII(el), &rfrom, &rlen, el == lastel);
-		SET_STRING_ELT(s, i, String::obtain(rfrom, rlen, ienc));
+		SET_STRING_ELT(s, i, mkCharLenCE(rfrom, rlen, ienc));
 	    }
 	    lastel = el;
 	}

@@ -905,7 +905,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
             size_t ff = ll;
             /* find start of file part */
             while(ff && (pp[ff-1] != '\\' && pp[ff-1] != '/')) ff--;
-            SET_STRING_ELT(ans, i, String::obtain(pp+ff, ll-ff, CE_UTF8));
+            SET_STRING_ELT(ans, i, mkCharLenCE(pp+ff, ll-ff, CE_UTF8));
 	}
     }
     UNPROTECT(1);
@@ -937,7 +937,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    size_t ff = ll;
 	    /* find start of file part */
 	    while(ff && pp[ff-1] != fsp) ff--;
-	    SET_STRING_ELT(ans, i, String::obtain(pp+ff, ll-ff, CE_NATIVE));
+	    SET_STRING_ELT(ans, i, mkCharLenCE(pp+ff, (int)(ll-ff), CE_NATIVE));
 	}
     }
     UNPROTECT(1);
@@ -957,7 +957,7 @@ static SEXP root_dir_on_drive(char d)
     buf[0] = d;
     buf[1] = ':';
     buf[2] = '/';
-    return String::obtain(buf, 3, CE_UTF8);
+    return mkCharLenCE(buf, 3, CE_UTF8);
 }
 
 attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -989,7 +989,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    continue;
 		}
 		if (!ll) { /* only separators, not share */
-		    SET_STRING_ELT(ans, i, String::obtain("/", 1, CE_UTF8));
+		    SET_STRING_ELT(ans, i, mkCharLenCE("/", 1, CE_UTF8));
 		    continue;
 		}
 		/* remove file part */
@@ -1006,13 +1006,13 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    continue;
 		}
 		if (!ll) /* only single part, not share */
-		    SET_STRING_ELT(ans, i, String::obtain("/", 1, CE_UTF8));
+		    SET_STRING_ELT(ans, i, mkCharLenCE("/", 1, CE_UTF8));
 		else if (ll == 2 && buf[0] == '\\' && buf[1] == '\\'
 		                 && buf[2] == '/') {
 		    /* network share with extra slashes */
-		    SET_STRING_ELT(ans, i, String::obtain("/", 1, CE_UTF8));
+		    SET_STRING_ELT(ans, i, mkCharLenCE("/", 1, CE_UTF8));
 		} else
-		    SET_STRING_ELT(ans, i, String::obtain(buf, ll, CE_UTF8));
+		    SET_STRING_ELT(ans, i, mkCharLenCE(buf, ll, CE_UTF8));
 	    } else
 		/* empty pathname is invalid, but returned */
 		SET_STRING_ELT(ans, i, mkChar(""));
@@ -1046,7 +1046,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* remove trailing file separator(s) */
 		while(ll && pp[ll-1] == fsp) ll--;
 		if (!ll) { /* only separators */
-		    SET_STRING_ELT(ans, i, String::obtain(&fsp, 1, CE_NATIVE));
+		    SET_STRING_ELT(ans, i, mkCharLenCE(&fsp, 1, CE_NATIVE));
 		    continue;
 		}
 		/* remove file part */
@@ -1058,10 +1058,10 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* remove separator(s) after directory part */
 		while(ll && pp[ll-1] == fsp) ll--;
 		if (!ll) { /* only single part */
-		    SET_STRING_ELT(ans, i, String::obtain(&fsp, 1, CE_NATIVE));
+		    SET_STRING_ELT(ans, i, mkCharLenCE(&fsp, 1, CE_NATIVE));
 		    continue;
 		}
-		SET_STRING_ELT(ans, i, String::obtain(pp, (int)ll, CE_NATIVE));
+		SET_STRING_ELT(ans, i, mkCharLenCE(pp, (int)ll, CE_NATIVE));
 	    } else
 		/* empty pathname is invalid, but returned */
 		SET_STRING_ELT(ans, i, mkChar(""));
@@ -1333,7 +1333,7 @@ attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 	       (ienc == CE_UTF8   && IS_UTF8(tmp))   ||
 	       (ienc == CE_BYTES  && IS_BYTES(tmp))  ||
 	       (ienc == CE_NATIVE && IS_NATIVE(tmp))))
-	    SET_STRING_ELT(x, i, String::obtain(CHAR(tmp), LENGTH(tmp), ienc));
+	    SET_STRING_ELT(x, i, mkCharLenCE(CHAR(tmp), LENGTH(tmp), ienc));
     }
     UNPROTECT(1);
     return x;

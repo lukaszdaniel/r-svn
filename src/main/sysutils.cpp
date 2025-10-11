@@ -70,7 +70,6 @@
 #endif
 
 using namespace R;
-using namespace CXXR;
 
 #ifdef HAVE_AQUA
 int (*ptr_CocoaSystem)(const char*);
@@ -937,7 +936,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		    /* FIXME: use "bytes" unless CE_NATIVE matches to? */
 		    SET_STRING_ELT(ans, i,
-				   String::obtain(cbuff.data, nout, ienc));
+				   mkCharLenCE(cbuff.data, (int) nout, ienc));
 		} else SET_STRING_ELT(ans, i, NA_STRING);
 	    }
 	}

@@ -85,7 +85,7 @@ attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 	nc = j + 1;
 	PROTECT(ans = allocVector(STRSXP, 1));
 	SET_STRING_ELT(ans, 0,
-		       String::obtain((const char *)RAW(x), j+1, CE_NATIVE));
+		       mkCharLenCE((const char *)RAW(x), j+1, CE_NATIVE));
     }
     UNPROTECT(1);
     return ans;
@@ -458,7 +458,8 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (used) memcpy(tmp + len, buf, used);
 	    len += used;
 	}
-	PROTECT(ans = StringVector::createScalar(String::obtain(tmp, len, CE_UTF8)));
+	PROTECT(ans = allocVector(STRSXP, 1));
+	SET_STRING_ELT(ans, 0, mkCharLenCE(tmp, (int) len, CE_UTF8));
 	if (len >= 10000) R_Free(tmp);
     }
     UNPROTECT(2);

@@ -1967,10 +1967,10 @@ static void checkRestartStacks(RCNTXT *cptr)
 static void addInternalRestart(RCNTXT *cptr, const char *cname)
 {
     checkRestartStacks(cptr);
-    GCStackRoot<StringVector> name;
+    GCStackRoot<> name;
     GCStackRoot<ListVector> entry;
 
-    name = StringVector::createScalar(String::obtain(cname));
+    name = mkString(cname);
     entry = ListVector::create(2);
     SET_VECTOR_ELT(entry, 0, name);
     SET_VECTOR_ELT(entry, 1, R_MakeExternalPtr(cptr, R_NilValue, R_NilValue));
@@ -1981,14 +1981,14 @@ static void addInternalRestart(RCNTXT *cptr, const char *cname)
 attribute_hidden void R::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP rho, entry;
-    GCStackRoot<String> klass;
+    GCStackRoot<> klass;
     checkRestartStacks(cptr);
 
     /**** need more here to keep recursive errors in browser? */
     SEXP h = GetOption1(install("browser.error.handler"));
     if (!isFunction(h)) h = R_RestartToken;
     rho = cptr->cloenv;
-    klass = String::obtain("error");
+    klass = mkChar("error");
     entry = mkHandlerEntry(klass, rho, h, rho, R_NilValue, TRUE);
     R_HandlerStack = CONS(entry, R_HandlerStack);
 

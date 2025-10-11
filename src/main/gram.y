@@ -1177,7 +1177,7 @@ static SEXP mkChar2(const char *name)
     if(known_to_be_latin1) enc = CE_LATIN1;
     else if(known_to_be_utf8) enc = CE_UTF8;
 
-    return String::obtain(name, strlen(name), enc);
+    return mkCharLenCE(name, (int) strlen(name), enc);
 }
 
 static SEXP mkString2(const char *s, size_t len, bool escaped)
