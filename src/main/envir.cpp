@@ -3970,16 +3970,13 @@ attribute_hidden SEXP do_envprofile(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 SEXP Rf_mkCharCE(const char *name, cetype_t enc)
 {
-    size_t len =  strlen(name);
-    if (len > INT_MAX)
-	error("%s", _("R character strings are limited to 2^31-1 bytes"));
-    return Rf_mkCharLenCE(name, (int) len, enc);
+    return String::obtain(name, enc);
 }
 
 /* no longer used in R but documented in 2.7.x */
 SEXP Rf_mkCharLen(const char *name, int len)
 {
-    return Rf_mkCharLenCE(name, len, CE_NATIVE);
+    return String::obtain(name, len, CE_NATIVE); // 4
 }
 
 /** @brief Make a character (CHARSXP) variable.
@@ -3992,22 +3989,12 @@ SEXP Rf_mkCharLen(const char *name, int len)
  */
 SEXP Rf_mkChar(const char *name)
 {
-    size_t len =  strlen(name);
-    if (len > INT_MAX)
-	error("%s", _("R character strings are limited to 2^31-1 bytes"));
-    return Rf_mkCharLenCE(name, (int) len, CE_NATIVE);
+    return String::obtain(name);
 }
 
 attribute_hidden SEXP R::mkCharWUTF8(const wchar_t *wname)
 {
-    CXXR::RAllocStack::Scope rscope;
-    size_t nb = wcstoutf8(NULL, wname, (size_t)INT_MAX + 2);
-    if (nb-1 > INT_MAX) {
-	error("%s", _("R character strings are limited to 2^31-1 bytes"));
-    }
-    char *name = R_alloc(nb, 1);
-    nb = wcstoutf8(name, wname, nb);
-    return Rf_mkCharLenCE(name, (int)(nb-1), CE_UTF8);
+    return String::obtain(wname);
 }
 
 attribute_hidden void R::InitStringHash(void)
@@ -4159,6 +4146,27 @@ namespace
     }
 } // anonymous namespace
 
+String *String::obtain(const wchar_t *wname)
+{
+    CXXR::RAllocStack::Scope rscope;
+    size_t nb = wcstoutf8(NULL, wname, (size_t)INT_MAX + 2);
+    char *name = R_alloc(nb, 1);
+    nb = wcstoutf8(name, wname, nb);
+    return String::obtain(name, int(nb - 1), CE_UTF8);
+}
+
+String *String::obtain(const char *name, int len, cetype_t encoding)
+{
+    if (len > R_INT_MAX)
+        Rf_error("%s", _("R character strings are limited to 2^31-1 bytes"));
+
+    if (!name)
+        name = "";
+
+    std::string str(name, len);
+    return String::obtain(str, encoding);
+}
+
 String *String::obtain(const std::string &name, cetype_t enc)
 {
     // These encodings are acceptable for lookup.
@@ -4216,11 +4224,7 @@ String *String::obtain(const std::string &name, cetype_t enc)
 
 SEXP Rf_mkCharLenCE(const char *name, int len, cetype_t enc)
 {
-    if (!name)
-        name = "";
-
-    std::string str(name, len);
-    return String::obtain(str, enc);
+    return String::obtain(name, len, enc);
 }
 
 

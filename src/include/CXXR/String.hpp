@@ -205,6 +205,92 @@ namespace CXXR
          * Otherwise a pointer to the existing String will be
          * returned.
          *
+         * @param name The text of the required String. (Embedded null
+         *          characters are permissible.)
+         *
+         * @return Pointer to a String (preexisting or newly
+         * created) representing the specified text in the CE_NATIVE
+         * encoding (default).
+         */
+        static String *obtain(const char *name)
+        {
+            return String::obtain(name, int(strlen(name)), CE_NATIVE);
+        }
+
+        /** @brief Get a pointer to a String object.
+         *
+         * If no String with the specified text and encoding currently
+         * exists, one will be created, and a pointer to it returned.
+         * Otherwise a pointer to the existing String will be
+         * returned.
+         *
+         * @param wstr The text of the required String. (Embedded null
+         *          characters are permissible.)
+         *
+         * @return Pointer to a String (preexisting or newly
+         * created) representing the specified text in the CE_UTF8
+         * encoding (default).
+         */
+        static String *obtain(const wchar_t *wstr);
+
+        /** @brief Get a pointer to a String object.
+         *
+         * If no String with the specified text and encoding currently
+         * exists, one will be created, and a pointer to it returned.
+         * Otherwise a pointer to the existing String will be
+         * returned.
+         *
+         * @param name The text of the required String. (Embedded null
+         *          characters are permissible.)
+         *
+         * @param encoding The encoding of the required String.
+         *          Only CE_NATIVE, CE_UTF8 or CE_LATIN1 are permitted
+         *          in this context (checked).  Note that if \a str
+         *          contains no non-ASCII characters, then the
+         *          encoding is set to CE_NATIVE regardless of the
+         *          value of the \a encoding parameter.
+         *
+         * @return Pointer to a String (preexisting or newly
+         * created) representing the specified text in the specified
+         * encoding.
+         */
+        static String *obtain(const char *name, cetype_t encoding)
+        {
+            return String::obtain(name, int(strlen(name)), encoding);
+        }
+
+        /** @brief Get a pointer to a String object.
+         *
+         * If no String with the specified text and encoding currently
+         * exists, one will be created, and a pointer to it returned.
+         * Otherwise a pointer to the existing String will be
+         * returned.
+         *
+         * @param name The text of the required String. (Embedded null
+         *          characters are permissible.)
+         *
+         * @param len The length of \a name.
+         *
+         * @param encoding The encoding of the required String.
+         *          Only CE_NATIVE, CE_UTF8 or CE_LATIN1 are permitted
+         *          in this context (checked).  Note that if \a str
+         *          contains no non-ASCII characters, then the
+         *          encoding is set to CE_NATIVE regardless of the
+         *          value of the \a encoding parameter.
+         *
+         * @return Pointer to a String (preexisting or newly
+         * created) representing the specified text in the specified
+         * encoding.
+         */
+        static String *obtain(const char *name, int len, cetype_t encoding = CE_NATIVE);
+
+        /** @brief Get a pointer to a String object.
+         *
+         * If no String with the specified text and encoding currently
+         * exists, one will be created, and a pointer to it returned.
+         * Otherwise a pointer to the existing String will be
+         * returned.
+         *
          * @param str The text of the required String. (Embedded null
          *          characters are permissible.)
          *
