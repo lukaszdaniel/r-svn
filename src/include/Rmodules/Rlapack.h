@@ -22,12 +22,14 @@
 #ifndef R_LAPACK_MODULE_H
 #define R_LAPACK_MODULE_H
 
-#include <Rinternals.h>
-
-#ifdef __cplusplus
-extern "C" {
+#ifndef __cplusplus
+#error Rlapack.h can only be included in C++ files
 #endif
 
+#include <Rinternals.h>
+
+namespace R
+{
 typedef SEXP (*Rf_do_lapack)(SEXP, SEXP, SEXP, SEXP);
 
 typedef struct {
@@ -35,9 +37,6 @@ typedef struct {
 } R_LapackRoutines;
 
 R_LapackRoutines *R_setLapackRoutines(R_LapackRoutines *routines);
-
-#ifdef __cplusplus
-} //extern "C"
-#endif
+} // namespace R
 
 #endif /* R_LAPACK_MODULE_H */

@@ -61,7 +61,7 @@ attribute_hidden SEXP do_lapack(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 }
 
-R_LapackRoutines *R_setLapackRoutines(R_LapackRoutines *routines)
+R_LapackRoutines *R::R_setLapackRoutines(R_LapackRoutines *routines)
 {
     R_LapackRoutines *tmp;
     tmp = ptr;

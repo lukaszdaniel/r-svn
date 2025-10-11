@@ -302,9 +302,9 @@ SEXP splitString(SEXP string, SEXP delims)
 	    if(strchr(del, *p)) {
 		// put out current string (if any)
 		if(nthis)
-		    SET_STRING_ELT(out, used++, String::obtain(tmp, nthis, ienc));
+		    SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
 		// put out delimiter
-		SET_STRING_ELT(out, used++, String::obtain(p, 1, CE_NATIVE));
+		SET_STRING_ELT(out, used++, mkCharLen(p, 1));
 		// restart
 		this_ = tmp; nthis = 0;
 	    } else {
@@ -312,7 +312,7 @@ SEXP splitString(SEXP string, SEXP delims)
 		nthis++;
 	    }
 	}
-	if(nthis) SET_STRING_ELT(out, used++, String::obtain(tmp, nthis, ienc));
+	if(nthis) SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
 
 	ans = lengthgets(out, used);
     } else

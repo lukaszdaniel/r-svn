@@ -20,12 +20,14 @@
 #ifndef R_INTERNET_MODULE_H
 #define R_INTERNET_MODULE_H
 
+#ifndef __cplusplus
+#error Rinternet.h can only be included in C++ files
+#endif
 
 #include <Rinternals.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+namespace R
+{
 
 typedef SEXP (*R_DownloadRoutine)(SEXP args);
 typedef Rconnection (*R_NewUrlRoutine)(const char *description, const char * const mode,
@@ -74,9 +76,6 @@ typedef struct {
 } R_InternetRoutines;
 
 R_InternetRoutines *R_setInternetRoutines(R_InternetRoutines *routines);
-
-#ifdef __cplusplus
-} //extern "C"
-#endif
+} // namespace R
 
 #endif /* R_INTERNET_MODULE_H */

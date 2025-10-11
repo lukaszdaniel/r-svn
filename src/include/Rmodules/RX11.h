@@ -22,9 +22,15 @@
 #ifndef R_X11_MODULE_H
 #define R_X11_MODULE_H
 
+#ifndef __cplusplus
+#error RX11.h can only be included in C++ files
+#endif
+
 #include <Rinternals.h>
 #include <Rconnections.h>
 
+namespace R
+{
 typedef SEXP (*R_do_X11)(SEXP call, SEXP op, SEXP args, SEXP rho);
 typedef SEXP (*R_X11DataEntryRoutine)(SEXP call, SEXP op, SEXP args, SEXP rho);
 typedef SEXP (*R_X11DataViewer)(SEXP call, SEXP op, SEXP args, SEXP rho);
@@ -51,13 +57,8 @@ typedef struct {
     R_X11DataViewer dv;
 } R_deRoutines;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 R_X11Routines *R_setX11Routines(R_X11Routines *routines);
-R_deRoutines *R_setdeRoutines(R_deRoutines *routines);
-#ifdef __cplusplus
-} //extern "C"
-#endif
+// R_deRoutines *R_setdeRoutines(R_deRoutines *routines);
+} // namespace R
 
 #endif /* R_X11_MODULE_H */
