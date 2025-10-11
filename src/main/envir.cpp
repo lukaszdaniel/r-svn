@@ -3973,13 +3973,13 @@ SEXP Rf_mkCharCE(const char *name, cetype_t enc)
     size_t len =  strlen(name);
     if (len > INT_MAX)
 	error("%s", _("R character strings are limited to 2^31-1 bytes"));
-    return mkCharLenCE(name, (int) len, enc);
+    return Rf_mkCharLenCE(name, (int) len, enc);
 }
 
 /* no longer used in R but documented in 2.7.x */
 SEXP Rf_mkCharLen(const char *name, int len)
 {
-    return mkCharLenCE(name, len, CE_NATIVE);
+    return Rf_mkCharLenCE(name, len, CE_NATIVE);
 }
 
 /** @brief Make a character (CHARSXP) variable.
@@ -3995,7 +3995,7 @@ SEXP Rf_mkChar(const char *name)
     size_t len =  strlen(name);
     if (len > INT_MAX)
 	error("%s", _("R character strings are limited to 2^31-1 bytes"));
-    return mkCharLenCE(name, (int) len, CE_NATIVE);
+    return Rf_mkCharLenCE(name, (int) len, CE_NATIVE);
 }
 
 attribute_hidden SEXP R::mkCharWUTF8(const wchar_t *wname)
@@ -4007,7 +4007,7 @@ attribute_hidden SEXP R::mkCharWUTF8(const wchar_t *wname)
     }
     char *name = R_alloc(nb, 1);
     nb = wcstoutf8(name, wname, nb);
-    return mkCharLenCE(name, (int)(nb-1), CE_UTF8);
+    return Rf_mkCharLenCE(name, (int)(nb-1), CE_UTF8);
 }
 
 attribute_hidden void R::InitStringHash(void)

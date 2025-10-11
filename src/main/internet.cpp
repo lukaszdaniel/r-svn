@@ -186,7 +186,7 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
 	error("%s", _("Error reading data in Rsockread"));
     GCStackRoot<> ans;
     ans = allocVector(STRSXP, 1);
-    SET_STRING_ELT(ans, 0, mkCharLen(buf, maxlen));
+    SET_STRING_ELT(ans, 0, mkCharLenCE(buf, maxlen, CE_NATIVE));
 
     return ans;
 }

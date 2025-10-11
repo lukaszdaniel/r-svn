@@ -304,7 +304,7 @@ SEXP splitString(SEXP string, SEXP delims)
 		if(nthis)
 		    SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
 		// put out delimiter
-		SET_STRING_ELT(out, used++, mkCharLen(p, 1));
+		SET_STRING_ELT(out, used++, mkCharLenCE(p, 1, CE_NATIVE));
 		// restart
 		this_ = tmp; nthis = 0;
 	    } else {
