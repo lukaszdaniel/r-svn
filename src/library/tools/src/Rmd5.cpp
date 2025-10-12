@@ -24,6 +24,7 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include "localization.h"
@@ -38,7 +39,7 @@ using namespace CXXR;
 /* .Call so manages R_alloc stack */
 SEXP Rmd5(SEXP files)
 {
-    SEXP ans;
+    GCStackRoot<StringVector> ans;
     int nfiles = length(files), res;
 #ifdef _WIN32
     const wchar_t *wpath;
@@ -54,13 +55,13 @@ SEXP Rmd5(SEXP files)
 	/* there is really no failure possible, but just in case... */
 	if (!md5_buffer((const char *) RAW(files), XLENGTH(files), resblock))
 	    return StringVector::createScalar(String::NA());
-	for(int j = 0; j < 16; j++)
-	    snprintf (out+2*j, 33-2*j, "%02x", resblock[j]);
+	for (int j = 0; j < 16; j++)
+	    snprintf(out+2*j, 33-2*j, "%02x", resblock[j]);
 	return mkString(out);
     }
     /* otherwise list of files */
-    if(!isString(files)) error("%s", _("argument 'files' must be character"));
-    PROTECT(ans = allocVector(STRSXP, nfiles));
+    if (!isString(files)) error("%s", _("argument 'files' must be character"));
+    ans = StringVector::create(nfiles);
     for (int i = 0; i < nfiles; i++) {
 #ifdef _WIN32
 	wpath = filenameToWchar(STRING_ELT(files, i), FALSE);
@@ -69,7 +70,7 @@ SEXP Rmd5(SEXP files)
 	path = translateChar(STRING_ELT(files, i));
 	fp = fopen(path, "r");
 #endif
-	if(!fp) {
+	if (!fp) {
 	    SET_STRING_ELT(ans, i, NA_STRING);
 	} else {
 	    res = md5_stream(fp, &resblock);
@@ -82,12 +83,12 @@ SEXP Rmd5(SEXP files)
 		SET_STRING_ELT(ans, i, NA_STRING);
 	    } else {
 		for (int j = 0; j < 16; j++)
-		    snprintf (out+2*j, 33-2*j, "%02x", resblock[j]);
+		    snprintf(out+2*j, 33-2*j, "%02x", resblock[j]);
 		SET_STRING_ELT(ans, i, mkChar(out));
 	    }
 	    fclose(fp);
 	}
     }
-    UNPROTECT(1);
+
     return ans;
 }

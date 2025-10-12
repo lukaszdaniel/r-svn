@@ -522,6 +522,26 @@ namespace R
     const char *translateCharFP(SEXP);
     const char *translateCharFP2(SEXP);
     const char *trCharUTF8(SEXP);
+
+    /** @brief Converts a wide character string (UTF-16, UCS-2, or UCS-4) to a UTF-8 encoded string.
+     * 
+     * This function encodes the input wide character string `wc` into UTF-8 and writes it to the buffer `s`,
+     * which must be at least `n` bytes in size. If `s` is NULL or `n == 0`, the function does not write any data,
+     * but still returns the number of bytes that would have been written, including the null terminator.
+     * 
+     * Surrogate pairs in UTF-16 input are correctly combined into code points.
+     * If an unpaired surrogate is encountered, a warning is issued.
+     * The resulting UTF-8 string is always null-terminated, even if truncated due to insufficient buffer space.
+     * 
+     * @param s Pointer to the output buffer for UTF-8 string. Can be NULL to query required size.
+     *
+     * @param wc Input wide character string to be converted.
+     * 
+     * @param n Size (in bytes) of the output buffer `s`.
+     * 
+     * @return The total number of bytes (including the null terminator) that would be written to `s`.
+     */
+    size_t wcstoutf8(char *s, const wchar_t *wc, size_t n);
 } // namespace R
 
 extern "C"

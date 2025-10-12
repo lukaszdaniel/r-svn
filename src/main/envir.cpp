@@ -4002,167 +4002,148 @@ attribute_hidden void R::InitStringHash(void)
 {
 }
 
-static void reportInvalidString(SEXP cval, int actionWhenInvalid)
-{
-    int oldout = R_OutputCon;
-    int olderr = R_ErrorCon;
-    R_OutputCon = 2;
-    R_ErrorCon = 2;
-    REprintf(" ----------- FAILURE REPORT -------------- \n");
-    REprintf(" --- failure: %s ---\n", "invalid string was created");
-    REprintf(" --- srcref --- \n");
-    SrcrefPrompt("", R_getCurrentSrcref());
-    REprintf("\n");
-    REprintf(" --- call from context --- \n");
-    PrintValue(R_GlobalContext->call);
-    REprintf(" --- R stacktrace ---\n");
-    printwhere();
-    REprintf(" --- current native encoding: %s ---\n", R_nativeEncoding());
-    const char *enc = "native/unknown";
-    if (IS_LATIN1(cval))
- 	enc = "latin1";
-    else if (IS_UTF8(cval))
-	enc = "UTF-8";
-    else if (IS_BYTES(cval))
-	enc = "bytes";  // called in error
-    REprintf(" --- declared string encoding: %s ---\n", enc);
-    REprintf(" --- string (printed):\n");
-    PrintValue(cval);
-    REprintf(" --- string (bytes with ASCII chars):\n");
-    for (int i = 0; i < LENGTH(cval); i++) {
-	if (i > 0)
-	    REprintf(" ");
-	unsigned char b = (unsigned char) CHAR(cval)[i];
-	REprintf("%2x", b);
-	if (b > 0 && b <= 127) REprintf("(%c) ", b);
-    }
-    REprintf("\n");
-    REprintf(" --- function from context --- \n");
-    if (R_GlobalContext->callfun != NULL && Closure::isA(R_GlobalContext->callfun))
-	PrintValue(R_GlobalContext->callfun);
-    REprintf(" --- function search by body ---\n");
-    if (R_GlobalContext->callfun != NULL && Closure::isA(R_GlobalContext->callfun))
-	findFunctionForBody(R_ClosureExpr(R_GlobalContext->callfun));
-    REprintf(" ----------- END OF FAILURE REPORT -------------- \n");
-    R_OutputCon = oldout;
-    R_ErrorCon = olderr;
-
-    if (actionWhenInvalid == 3)
-    {
-	R_Suicide(_("invalid string was created"));
-    }
-    else if (actionWhenInvalid > 0) {
-	CXXR::RAllocStack::Scope rscope;
-	const char *native_str;
-	const char *from = "";
-	if (IS_UTF8(cval))
-	    from = "UTF-8";
-	else if (IS_LATIN1(cval))
-	    from = "CP1252";
-
-	native_str = reEnc3(CHAR(cval), from, "", 1);
-	if (actionWhenInvalid == 1)
-	    warning(_("invalid string %s"), native_str);
-	else if (actionWhenInvalid == 2)
-	    error(_("invalid string %s"), native_str);
-    }
-}
-
 namespace
 {
+    void reportInvalidString(SEXP cval, int actionWhenInvalid)
+    {
+        int oldout = R_OutputCon;
+        int olderr = R_ErrorCon;
+        R_OutputCon = 2;
+        R_ErrorCon = 2;
+        REprintf(" ----------- FAILURE REPORT -------------- \n");
+        REprintf(" --- failure: %s ---\n", "invalid string was created");
+        REprintf(" --- srcref --- \n");
+        SrcrefPrompt("", R_getCurrentSrcref());
+        REprintf("\n");
+        REprintf(" --- call from context --- \n");
+        PrintValue(R_GlobalContext->call);
+        REprintf(" --- R stacktrace ---\n");
+        printwhere();
+        REprintf(" --- current native encoding: %s ---\n", R_nativeEncoding());
+        const char *enc = "native/unknown";
+        if (IS_LATIN1(cval))
+            enc = "latin1";
+        else if (IS_UTF8(cval))
+            enc = "UTF-8";
+        else if (IS_BYTES(cval))
+            enc = "bytes";  // called in error
+        REprintf(" --- declared string encoding: %s ---\n", enc);
+        REprintf(" --- string (printed):\n");
+        PrintValue(cval);
+        REprintf(" --- string (bytes with ASCII chars):\n");
+        for (int i = 0; i < LENGTH(cval); i++) {
+            if (i > 0)
+                REprintf(" ");
+            unsigned char b = (unsigned char)CHAR(cval)[i];
+            REprintf("%2x", b);
+            if (b > 0 && b <= 127) REprintf("(%c) ", b);
+        }
+        REprintf("\n");
+        REprintf(" --- function from context --- \n");
+        if (R_GlobalContext->callfun != NULL && Closure::isA(R_GlobalContext->callfun))
+            PrintValue(R_GlobalContext->callfun);
+        REprintf(" --- function search by body ---\n");
+        if (R_GlobalContext->callfun != NULL && Closure::isA(R_GlobalContext->callfun))
+            findFunctionForBody(R_ClosureExpr(R_GlobalContext->callfun));
+        REprintf(" ----------- END OF FAILURE REPORT -------------- \n");
+        R_OutputCon = oldout;
+        R_ErrorCon = olderr;
+
+        if (actionWhenInvalid == 3)
+        {
+            R_Suicide(_("invalid string was created"));
+        }
+        else if (actionWhenInvalid > 0) {
+            CXXR::RAllocStack::Scope rscope;
+            const char *native_str;
+            const char *from = "";
+            if (IS_UTF8(cval))
+                from = "UTF-8";
+            else if (IS_LATIN1(cval))
+                from = "CP1252";
+
+            native_str = reEnc3(CHAR(cval), from, "", 1);
+            if (actionWhenInvalid == 1)
+                warning(_("invalid string %s"), native_str);
+            else if (actionWhenInvalid == 2)
+                error(_("invalid string %s"), native_str);
+        }
+    }
+
     void handleEmbeddedNull(const std::string &name, cetype_t enc, bool is_ascii)
     {
-	/* This is tricky: we want to make a reasonable job of
-	   representing this string, and EncodeString() is the most
-	   comprehensive */
-	SEXP c = CXXR_allocCharsxp(name, enc, is_ascii);
-	error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
+    /* This is tricky: we want to make a reasonable job of
+       representing this string, and EncodeString() is the most
+       comprehensive */
+        SEXP c = CXXR_allocCharsxp(name, enc, is_ascii);
+        error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
     void validateString(SEXP cval)
     {
-    static int checkValid = -1;
-    static int actionWhenInvalid = 0;
-	if (checkValid && !IS_ASCII(cval)) {
-	    if (checkValid == -1) {
-		checkValid = 0;
-		/* _R_CHECK_STRING_VALIDITY_ = XY (decimal)
+        static int checkValid = -1;
+        static int actionWhenInvalid = 0;
+        if (checkValid && !IS_ASCII(cval)) {
+            if (checkValid == -1) {
+                checkValid = 0;
+                /* _R_CHECK_STRING_VALIDITY_ = XY (decimal)
 
-		   Y = 0 ... no checks
-		   Y = 1 ... check marked strings
-		   Y = 2 ... check also native strings
+                   Y = 0 ... no checks
+                   Y = 1 ... check marked strings
+                   Y = 2 ... check also native strings
 
-		   X = 0 ... just print
-		   X = 1 ... print + issue a warning
-		   X = 2 ... print + throw R error
-		   X = 3 ... print + abort R
+                   X = 0 ... just print
+                   X = 1 ... print + issue a warning
+                   X = 2 ... print + throw R error
+                   X = 3 ... print + abort R
 
-		   This is experimental and will be likely changed or
-		   removed.
-		*/
-		const char *p = getenv("_R_CHECK_STRING_VALIDITY_");
-		if (p) {
-		    checkValid = atoi(p);
-		    actionWhenInvalid = checkValid / 10;
-		    checkValid -= actionWhenInvalid * 10;
+                   This is experimental and will be likely changed or
+                   removed.
+                */
+                const char *p = getenv("_R_CHECK_STRING_VALIDITY_");
+                if (p) {
+                    checkValid = atoi(p);
+                    actionWhenInvalid = checkValid / 10;
+                    checkValid -= actionWhenInvalid * 10;
 
-		    if (checkValid < 0 || checkValid > 2) {
-			checkValid = 0;
-			actionWhenInvalid = 0;
-		    }
-		    if (actionWhenInvalid < 0 || actionWhenInvalid > 3)
-			actionWhenInvalid = 0;
-		}
-	    }
-	    if (checkValid >= 1) {
-		/* check strings flagged UTF-8 and latin1 */
-		if (IS_UTF8(cval)) {
-		    if (!utf8Valid(CHAR(cval)))
-			reportInvalidString(cval, actionWhenInvalid);
-		    return;
-		} else if (IS_LATIN1(cval)) {
-		    CXXR::RAllocStack::Scope rscope;
-		    const wchar_t *dummy = wtransChar2(cval);
-		    if (!dummy)
-			reportInvalidString(cval, actionWhenInvalid);
-		    return;
-		}
-	    }
-	    if (checkValid >= 2 && !IS_BYTES(cval)) {
-		/* check strings flagged native/unknown */
-		if (known_to_be_utf8) {
-		    if (!utf8Valid(CHAR(cval)))
-			reportInvalidString(cval, actionWhenInvalid);
-		    return;
-		} else if (!mbcsValid(CHAR(cval))) {
-		    reportInvalidString(cval, actionWhenInvalid);
-		    return;
-		}
-	    }
-	}
+                    if (checkValid < 0 || checkValid > 2) {
+                        checkValid = 0;
+                        actionWhenInvalid = 0;
+                    }
+                    if (actionWhenInvalid < 0 || actionWhenInvalid > 3)
+                        actionWhenInvalid = 0;
+                }
+            }
+            if (checkValid >= 1) {
+            /* check strings flagged UTF-8 and latin1 */
+                if (IS_UTF8(cval)) {
+                    if (!utf8Valid(CHAR(cval)))
+                        reportInvalidString(cval, actionWhenInvalid);
+                    return;
+                }
+                else if (IS_LATIN1(cval)) {
+                    CXXR::RAllocStack::Scope rscope;
+                    const wchar_t *dummy = wtransChar2(cval);
+                    if (!dummy)
+                        reportInvalidString(cval, actionWhenInvalid);
+                    return;
+                }
+            }
+            if (checkValid >= 2 && !IS_BYTES(cval)) {
+            /* check strings flagged native/unknown */
+                if (known_to_be_utf8) {
+                    if (!utf8Valid(CHAR(cval)))
+                        reportInvalidString(cval, actionWhenInvalid);
+                    return;
+                }
+                else if (!mbcsValid(CHAR(cval))) {
+                    reportInvalidString(cval, actionWhenInvalid);
+                    return;
+                }
+            }
+        }
     }
 } // anonymous namespace
-
-String *String::obtain(const wchar_t *wname)
-{
-    CXXR::RAllocStack::Scope rscope;
-    size_t nb = wcstoutf8(NULL, wname, (size_t)INT_MAX + 2);
-    char *name = R_alloc(nb, 1);
-    nb = wcstoutf8(name, wname, nb);
-    return String::obtain(name, int(nb - 1), CE_UTF8);
-}
-
-String *String::obtain(const char *name, int len, cetype_t encoding)
-{
-    if (len > R_INT_MAX)
-        Rf_error("%s", _("R character strings are limited to 2^31-1 bytes"));
-
-    if (!name)
-        name = "";
-
-    std::string str(name, len);
-    return String::obtain(str, encoding);
-}
 
 String *String::obtain(const std::string &name, cetype_t enc)
 {

@@ -2569,13 +2569,7 @@ static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 
 static SEXP mkString2(const char *s, size_t len)
 {
-    SEXP t;
-    cetype_t enc = CE_UTF8;
-
-    PROTECT(t = allocVector(STRSXP, 1));
-    SET_STRING_ELT(t, 0, mkCharLenCE(s, (int) len, enc));
-    UNPROTECT(1); /* t */
-    return t;
+    return StringVector::createScalar(String::obtain(s, (int) len, CE_UTF8));
 }
 
 

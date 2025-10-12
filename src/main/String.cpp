@@ -31,6 +31,7 @@
 #include <cstring>
 #include <cassert>
 #include <Localization.h>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h> // for LATIN1_MASK, etc
@@ -189,6 +190,27 @@ namespace CXXR
     const char *String::typeName() const
     {
         return String::staticTypeName();
+    }
+
+    String *String::obtain(const wchar_t *wname)
+    {
+        CXXR::RAllocStack::Scope rscope;
+        size_t nb = R::wcstoutf8(NULL, wname, (size_t)INT_MAX + 2);
+        char *name = R_alloc(nb, 1);
+        nb = R::wcstoutf8(name, wname, nb);
+        return String::obtain(name, int(nb - 1), CE_UTF8);
+    }
+
+    String *String::obtain(const char *name, int len, cetype_t encoding)
+    {
+        if (len > R_INT_MAX)
+            Rf_error("%s", _("R character strings are limited to 2^31-1 bytes"));
+
+        if (!name)
+            name = "";
+
+        std::string str(name, len);
+        return String::obtain(str, encoding);
     }
 } // namespace CXXR
 

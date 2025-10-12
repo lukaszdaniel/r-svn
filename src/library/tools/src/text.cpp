@@ -274,14 +274,14 @@ SEXP doTabExpand(SEXP strings, SEXP starts)  /* does tab expansion for UTF-8 str
    DBCS encodings. */
 SEXP splitString(SEXP string, SEXP delims)
 {
-    if(!isString(string) || length(string) != 1)
+    if (!isString(string) || length(string) != 1)
 	error("%s", _("first arg must be a single character string"));
-    if(!isString(delims) || length(delims) != 1)
+    if (!isString(delims) || length(delims) != 1)
 	error("%s", _("first arg must be a single character string"));
 
-    if(STRING_ELT(string, 0) == NA_STRING)
+    if (STRING_ELT(string, 0) == NA_STRING)
 	return ScalarString(NA_STRING);
-    if(STRING_ELT(delims, 0) == NA_STRING)
+    if (STRING_ELT(delims, 0) == NA_STRING)
 	return ScalarString(NA_STRING);
 
     const char *in = CHAR(STRING_ELT(string, 0)),
@@ -299,12 +299,12 @@ SEXP splitString(SEXP string, SEXP delims)
 	char *this_ = tmp;
 	int nthis = 0;
 	for (const char *p = in; *p ; p++) {
-	    if(strchr(del, *p)) {
+	    if (strchr(del, *p)) {
 		// put out current string (if any)
 		if(nthis)
-		    SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
+		    SET_STRING_ELT(out, used++, String::obtain(tmp, nthis, ienc));
 		// put out delimiter
-		SET_STRING_ELT(out, used++, mkCharLenCE(p, 1, CE_NATIVE));
+		SET_STRING_ELT(out, used++, String::obtain(p, 1, CE_NATIVE));
 		// restart
 		this_ = tmp; nthis = 0;
 	    } else {
@@ -312,7 +312,7 @@ SEXP splitString(SEXP string, SEXP delims)
 		nthis++;
 	    }
 	}
-	if(nthis) SET_STRING_ELT(out, used++, mkCharLenCE(tmp, nthis, ienc));
+	if (nthis) SET_STRING_ELT(out, used++, String::obtain(tmp, nthis, ienc));
 
 	ans = lengthgets(out, used);
     } else
@@ -326,7 +326,7 @@ SEXP nonASCII(SEXP text)
     R_xlen_t len = XLENGTH(text);
     SEXP ans = allocVector(LGLSXP, len);
     int *lans = LOGICAL(ans);
-    if(TYPEOF(text) != STRSXP) error("%s", _("invalid input"));
+    if (TYPEOF(text) != STRSXP) error("%s", _("invalid input"));
     for (R_xlen_t i = 0; i < len; i++)
     {
 	SEXP this_ = STRING_ELT(text, i);
@@ -337,7 +337,7 @@ SEXP nonASCII(SEXP text)
 	bool notOK = 0;
 	const char *p = CHAR(this_);
 	while(*p++)
-	    if((unsigned int)*p > 127) {notOK = 1; break;}
+	    if ((unsigned int)*p > 127) {notOK = 1; break;}
 	lans[i] = notOK;
     }
     return ans;
