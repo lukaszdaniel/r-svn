@@ -97,6 +97,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
@@ -900,15 +901,15 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   234,   234,   235,   236,   239,   242,   245,   246,   248,
-     249,   250,   251,   252,   253,   254,   255,   256,   257,   258,
-     259,   260,   261,   263,   264,   266,   267,   268,   269,   270,
-     271,   272,   273,   274,   276,   277,   278,   279,   280,   281,
-     282,   283,   284,   285,   286,   287,   288,   289,   290,   291,
-     292,   294,   295,   296,   297,   299,   301,   303,   305,   307,
-     310,   313,   318,   320,   321,   330,   332,   334,   338,   339,
-     341,   343,   347,   348,   350,   353,   355,   357,   359,   361,
-     363,   365,   367,   369,   371,   372,   373,   374,   375,   377
+       0,   235,   235,   236,   237,   240,   243,   246,   247,   249,
+     250,   251,   252,   253,   254,   255,   256,   257,   258,   259,
+     260,   261,   262,   264,   265,   267,   268,   269,   270,   271,
+     272,   273,   274,   275,   277,   278,   279,   280,   281,   282,
+     283,   284,   285,   286,   287,   288,   289,   290,   291,   292,
+     293,   295,   296,   297,   298,   300,   302,   304,   306,   308,
+     311,   314,   319,   321,   322,   331,   333,   335,   339,   340,
+     342,   344,   348,   349,   351,   354,   356,   358,   360,   362,
+     364,   366,   368,   370,   372,   373,   374,   375,   376,   378
 };
 #endif
 
@@ -3501,13 +3502,9 @@ static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 
 static SEXP mkString2(const char *s, size_t len)
 {
-    SEXP t;
-    cetype_t enc = CE_UTF8;
-
-    PROTECT(t = allocVector(STRSXP, 1));
-    SET_STRING_ELT(t, 0, mkCharLenCE(s, (int) len, enc));
-    UNPROTECT(1); /* t */
-    return t;
+    GCStackRoot<String> name;
+    name = String::obtain(s, (int) len, CE_UTF8);
+    return StringVector::createScalar(name);
 }
 
 

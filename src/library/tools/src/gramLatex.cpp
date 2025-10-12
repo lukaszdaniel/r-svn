@@ -96,6 +96,7 @@
 #include <cctype>
 #include <algorithm> // for std::copy
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
@@ -789,10 +790,10 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   201,   201,   202,   203,   206,   207,   208,   209,   210,
-     211,   213,   214,   216,   217,   218,   219,   220,   222,   223,
-     224,   225,   226,   227,   229,   233,   237,   241,   241,   245,
-     247,   248,   250,   250,   254,   254,   258,   258
+       0,   202,   202,   203,   204,   207,   208,   209,   210,   211,
+     212,   214,   215,   217,   218,   219,   220,   221,   223,   224,
+     225,   226,   227,   228,   230,   234,   238,   242,   242,   246,
+     248,   249,   251,   251,   255,   255,   259,   259
 };
 #endif
 
@@ -2569,13 +2570,9 @@ static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 
 static SEXP mkString2(const char *s, size_t len)
 {
-    SEXP t;
-    cetype_t enc = CE_UTF8;
-
-    PROTECT(t = allocVector(STRSXP, 1));
-    SET_STRING_ELT(t, 0, mkCharLenCE(s, (int) len, enc));
-    UNPROTECT(1); /* t */
-    return t;
+    GCStackRoot<String> name;
+    name = String::obtain(s, (int) len, CE_UTF8);
+    return StringVector::createScalar(name);
 }
 
 

@@ -173,6 +173,8 @@ namespace CXXR
          *          encoding.  At present no check is made
          *          that the supplied string is a valid symbol name.
          *
+         * @param enc The encoding of \a name.
+         *
          * @return Pointer to a Symbol (preexisting or newly
          * created) with the required name.
          */

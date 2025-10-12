@@ -46,10 +46,10 @@
 
 // Garbage Collection
 #include <CXXR/GCManager.hpp>
-#include <CXXR/GCRoot.hpp>
-#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/NodeStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/BadObject.hpp>
 
 // CXXR extentions

@@ -176,9 +176,11 @@ namespace CXXR
             return CE_LATIN1;
         if (IS_UTF8(this))
             return CE_UTF8;
+        if (IS_NATIVE(this))
+            return CE_NATIVE;
 
         Rf_error("String::encoding(): unknown encoding mask"); // for now
-        return CE_NATIVE;
+        return CE_ANY;
     }
 
     bool isASCII(const std::string &str)

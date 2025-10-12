@@ -26,13 +26,15 @@
 #endif
 #include <vector>
 #include <R_ext/Minmax.h>
+#include <Localization.h>
 #ifdef Win32
 #include <CXXR/RContext.hpp>
 #endif
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
@@ -112,10 +114,11 @@ R_curl_multi_wait(CURLM *multi_handle,
 attribute_hidden SEXP in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP ans = PROTECT(allocVector(STRSXP, 1));
+    GCStackRoot<StringVector> ans;
+    ans = StringVector::create(1);
 #ifdef HAVE_LIBCURL
     curl_version_info_data *d = curl_version_info(CURLVERSION_NOW);
-    SET_STRING_ELT(ans, 0, mkChar(d->version));
+    SET_STRING_ELT(ans, 0, String::obtain(d->version));
     SEXP sSSLVersion = install("ssl_version");
     setAttrib(ans, sSSLVersion,
 	      mkString(d->ssl_version ? d->ssl_version : "none"));
@@ -125,15 +128,16 @@ attribute_hidden SEXP in_do_curlVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char * const *p;
     int n, i;
     for (p = d->protocols, n = 0; *p; p++, n++) ;
-    SEXP protocols = PROTECT(allocVector(STRSXP, n));
+    GCStackRoot<StringVector> protocols;
+    protocols = StringVector::create(n);
     for (p = d->protocols, i = 0; i < n; i++, p++)
-	SET_STRING_ELT(protocols, i, mkChar(*p));
+	SET_STRING_ELT(protocols, i, String::obtain(*p));
     setAttrib(ans, install("protocols"), protocols);
-    UNPROTECT(1);
+
 #else
-    SET_STRING_ELT(ans, 0, mkChar(""));
+    SET_STRING_ELT(ans, 0, String::obtain(""));
 #endif
-    UNPROTECT(1);
+
     return ans;
 }
 
