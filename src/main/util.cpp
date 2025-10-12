@@ -47,6 +47,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
@@ -905,7 +906,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
             size_t ff = ll;
             /* find start of file part */
             while(ff && (pp[ff-1] != '\\' && pp[ff-1] != '/')) ff--;
-            SET_STRING_ELT(ans, i, mkCharLenCE(pp+ff, ll-ff, CE_UTF8));
+            SET_STRING_ELT(ans, i, String::obtain(pp+ff, ll-ff, CE_UTF8));
 	}
     }
     UNPROTECT(1);
@@ -937,7 +938,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    size_t ff = ll;
 	    /* find start of file part */
 	    while(ff && pp[ff-1] != fsp) ff--;
-	    SET_STRING_ELT(ans, i, mkCharLenCE(pp+ff, (int)(ll-ff), CE_NATIVE));
+	    SET_STRING_ELT(ans, i, String::obtain(pp+ff, int(ll-ff), CE_NATIVE));
 	}
     }
     UNPROTECT(1);
@@ -957,7 +958,7 @@ static SEXP root_dir_on_drive(char d)
     buf[0] = d;
     buf[1] = ':';
     buf[2] = '/';
-    return mkCharLenCE(buf, 3, CE_UTF8);
+    return String::obtain(buf, 3, CE_UTF8);
 }
 
 attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -989,7 +990,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    continue;
 		}
 		if (!ll) { /* only separators, not share */
-		    SET_STRING_ELT(ans, i, mkCharLenCE("/", 1, CE_UTF8));
+		    SET_STRING_ELT(ans, i, String::obtain("/", 1, CE_UTF8));
 		    continue;
 		}
 		/* remove file part */
@@ -1006,13 +1007,13 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    continue;
 		}
 		if (!ll) /* only single part, not share */
-		    SET_STRING_ELT(ans, i, mkCharLenCE("/", 1, CE_UTF8));
+		    SET_STRING_ELT(ans, i, String::obtain("/", 1, CE_UTF8));
 		else if (ll == 2 && buf[0] == '\\' && buf[1] == '\\'
 		                 && buf[2] == '/') {
 		    /* network share with extra slashes */
-		    SET_STRING_ELT(ans, i, mkCharLenCE("/", 1, CE_UTF8));
+		    SET_STRING_ELT(ans, i, String::obtain("/", 1, CE_UTF8));
 		} else
-		    SET_STRING_ELT(ans, i, mkCharLenCE(buf, ll, CE_UTF8));
+		    SET_STRING_ELT(ans, i, String::obtain(buf, ll, CE_UTF8));
 	    } else
 		/* empty pathname is invalid, but returned */
 		SET_STRING_ELT(ans, i, mkChar(""));
@@ -1046,7 +1047,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* remove trailing file separator(s) */
 		while(ll && pp[ll-1] == fsp) ll--;
 		if (!ll) { /* only separators */
-		    SET_STRING_ELT(ans, i, mkCharLenCE(&fsp, 1, CE_NATIVE));
+		    SET_STRING_ELT(ans, i, String::obtain(&fsp, 1, CE_NATIVE));
 		    continue;
 		}
 		/* remove file part */
@@ -1058,10 +1059,10 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 		/* remove separator(s) after directory part */
 		while(ll && pp[ll-1] == fsp) ll--;
 		if (!ll) { /* only single part */
-		    SET_STRING_ELT(ans, i, mkCharLenCE(&fsp, 1, CE_NATIVE));
+		    SET_STRING_ELT(ans, i, String::obtain(&fsp, 1, CE_NATIVE));
 		    continue;
 		}
-		SET_STRING_ELT(ans, i, mkCharLenCE(pp, (int)ll, CE_NATIVE));
+		SET_STRING_ELT(ans, i, String::obtain(pp, (int)ll, CE_NATIVE));
 	    } else
 		/* empty pathname is invalid, but returned */
 		SET_STRING_ELT(ans, i, mkChar(""));
@@ -1280,62 +1281,57 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_encoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, x;
-    R_xlen_t i, n;
+    GCStackRoot<StringVector> ans;
     const char *tmp;
 
     checkArity(op, args);
-    x = CAR(args);
+    SEXP x = CAR(args);
     if (TYPEOF(x) != STRSXP)
 	error("%s", _("a character vector argument expected"));
-    n = XLENGTH(x);
-    PROTECT(ans = allocVector(STRSXP, n));
-    for (i = 0; i < n; i++) {
+    R_xlen_t n = XLENGTH(x);
+    ans = StringVector::create(n);
+    for (R_xlen_t i = 0; i < n; i++) {
 	if(IS_BYTES(STRING_ELT(x, i))) tmp = "bytes";
 	else if(IS_LATIN1(STRING_ELT(x, i))) tmp = "latin1";
 	else if(IS_UTF8(STRING_ELT(x, i))) tmp = "UTF-8";
 	else tmp = "unknown";
 	SET_STRING_ELT(ans, i, mkChar(tmp));
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
 attribute_hidden SEXP do_setencoding(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP x, enc, tmp;
-    int m;
-    R_xlen_t i, n;
-    const char *this_;
-
     checkArity(op, args);
+    GCStackRoot<> x;
     x = CAR(args);
     if (TYPEOF(x) != STRSXP)
 	error("%s", _("a character vector argument expected"));
-    enc = CADR(args);
+    SEXP enc = CADR(args);
     if (TYPEOF(enc) != STRSXP)
 	error("%s", _("a character vector 'value' expected"));
-    m = LENGTH(enc);
+    int m = LENGTH(enc);
     if (m == 0)
 	error("%s", _("'value' must be of positive length"));
     if (MAYBE_REFERENCED(x)) x = duplicate(x);
-    PROTECT(x);
-    n = XLENGTH(x);
-    for (i = 0; i < n; i++) {
+
+    R_xlen_t n = XLENGTH(x);
+    for (R_xlen_t i = 0; i < n; i++) {
 	cetype_t ienc = CE_NATIVE;
-	this_ = CHAR(STRING_ELT(enc, i % m)); /* ASCII */
+	const char *this_ = CHAR(STRING_ELT(enc, i % m)); /* ASCII */
 	if (streql(this_, "latin1")) ienc = CE_LATIN1;
 	else if (streql(this_, "UTF-8")) ienc = CE_UTF8;
 	else if (streql(this_, "bytes")) ienc = CE_BYTES;
-	tmp = STRING_ELT(x, i);
+	SEXP tmp = STRING_ELT(x, i);
 	if (tmp == NA_STRING) continue;
-	if (! ((ienc == CE_LATIN1 && IS_LATIN1(tmp)) ||
+	if (!((ienc == CE_LATIN1 && IS_LATIN1(tmp)) ||
 	       (ienc == CE_UTF8   && IS_UTF8(tmp))   ||
 	       (ienc == CE_BYTES  && IS_BYTES(tmp))  ||
 	       (ienc == CE_NATIVE && IS_NATIVE(tmp))))
-	    SET_STRING_ELT(x, i, mkCharLenCE(CHAR(tmp), LENGTH(tmp), ienc));
+	    SET_STRING_ELT(x, i, String::obtain(CHAR(tmp), LENGTH(tmp), ienc));
     }
-    UNPROTECT(1);
+
     return x;
 }
 
