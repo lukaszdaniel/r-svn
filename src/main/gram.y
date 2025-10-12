@@ -1187,7 +1187,9 @@ static SEXP mkString2(const char *s, size_t len, bool escaped)
     if(known_to_be_latin1) enc = CE_LATIN1;
     else if(!escaped && known_to_be_utf8) enc = CE_UTF8;
 
-    return StringVector::createScalar(String::obtain(s, (int) len, enc));
+    GCStackRoot<String> name;
+    name = String::obtain(s, (int) len, enc);
+    return StringVector::createScalar(name);
 }
 
 static SEXP xxdefun(SEXP fname, SEXP formals, SEXP body, YYLTYPE *lloc)
@@ -2811,7 +2813,9 @@ static SEXP mkStringUTF8(const ucs_t *wcs, int cnt)
     // This used to differentiate WC_NOT_UNICODE but not needed
     wcstoutf8(s, (const wchar_t *)wcs, ssize);
 
-    return StringVector::createScalar(String::obtain(s, CE_UTF8));
+    GCStackRoot<String> name;
+    name = String::obtain(s, CE_UTF8);
+    return StringVector::createScalar(name);
 }
 /*
  * Skip at Least `min` Bytes in Complete Character Steps

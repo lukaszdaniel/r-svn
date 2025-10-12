@@ -860,7 +860,7 @@ extern "C"
 
     R_xlen_t Rf_xlength(SEXP s);
 
-    Rboolean Rf_isFrame(SEXP s);
+    Rboolean Rf_isDataFrame(SEXP s);
 
     /** @brief Check to see if the arrays "x" and "y" have the identical extents
      */

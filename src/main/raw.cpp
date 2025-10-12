@@ -85,7 +85,9 @@ attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 	   Strip trailing nuls */
 	for (i = 0, j = -1; i < nc; i++) if (RAW(x)[i]) j = i;
 	nc = j + 1;
-	ans = StringVector::createScalar(String::obtain((const char *)RAW(x), j+1, CE_NATIVE));
+	GCStackRoot<String> name;
+	name = String::obtain((const char *)RAW(x), j+1, CE_NATIVE);
+	ans = StringVector::createScalar(name);
     }
 
     return ans;
@@ -384,12 +386,13 @@ static size_t inttomb(char *s, const int wc)
 
 attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, x;
-    size_t used, len;
+    GCStackRoot<StringVector> ans;
+    GCStackRoot<> x;
+    size_t used, len = 0;
     char buf[10], *tmp;
 
     checkArity(op, args);
-    PROTECT(x = coerceVector(CAR(args), INTSXP));
+    x = coerceVector(CAR(args), INTSXP);
     if (!isInteger(x))
 	error("%s", _("argument 'x' must be an integer vector"));
     bool multiple = asLogicalNoNA(CADR(args), "multiple");
@@ -397,9 +400,9 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
     if (multiple) {
 	if (s_pair)
 	    warning("%s", _("'allow_surrogate_pairs = TRUE' is incompatible with 'multiple = TRUE' and will be ignored"));
-	R_xlen_t i, nc = XLENGTH(x);
-	PROTECT(ans = allocVector(STRSXP, nc));
-	for (i = 0; i < nc; i++) {
+	R_xlen_t nc = XLENGTH(x);
+	ans = StringVector::create(nc);
+	for (R_xlen_t i = 0; i < nc; i++) {
 	    int this_ = INTEGER(x)[i];
 	    if (this_ == NA_INTEGER
 		|| (this_ >= 0xD800 && this_ <= 0xDFFF)
@@ -413,10 +416,10 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	/* do we want to copy e.g. names here? */
     } else {
-	int i, nc = LENGTH(x);
+	int nc = LENGTH(x);
 	bool haveNA = false;
 	/* Note that this gives zero length for input '0', so it is omitted */
-	for (i = 0, len = 0; i < nc; i++) {
+	for (int i = 0; i < nc; i++) {
 	    int this_ = INTEGER(x)[i];
 	    if (this_ == NA_INTEGER
 		|| (this_ >= 0xDC00 && this_ <= 0xDFFF)
@@ -435,10 +438,7 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 		len += inttomb(NULL, this_);
 	}
 	if (haveNA) {
-	    PROTECT(ans = allocVector(STRSXP, 1));
-	    SET_STRING_ELT(ans, 0, NA_STRING);
-	    UNPROTECT(2);
-	    return ans;
+	    return StringVector::createScalar(String::NA());
 	}
 	if (len >= 10000) {
 	    tmp = R_Calloc(len+1, char);
@@ -446,7 +446,8 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	    R_CheckStack2(len+1);
 	    tmp = (char*) alloca(len+1); tmp[len] = '\0';
 	}
-	for (i = 0, len = 0; i < nc; i++) {
+	len = 0;
+	for (int i = 0; i < nc; i++) {
 	    int this_ = INTEGER(x)[i];
 	    if (s_pair && (this_ >=  0xD800 && this_ <= 0xDBFF)) {
 		// all the validity checking has already been done.
@@ -458,9 +459,11 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (used) memcpy(tmp + len, buf, used);
 	    len += used;
 	}
-	PROTECT(ans = StringVector::createScalar(String::obtain(tmp, (int) len, CE_UTF8)));
+	GCStackRoot<String> name;
+	name = String::obtain(tmp, (int) len, CE_UTF8);
+	ans = StringVector::createScalar(name);
 	if (len >= 10000) R_Free(tmp);
     }
-    UNPROTECT(2);
+
     return ans;
 }

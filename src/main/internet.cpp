@@ -36,6 +36,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -185,7 +186,9 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
     if (maxlen < 0) // presumably -1, error from recv
 	error("%s", _("Error reading data in Rsockread"));
 
-    return StringVector::createScalar(String::obtain(buf, maxlen, CE_NATIVE));
+    GCStackRoot<String> name;
+    name = String::obtain(buf, maxlen, CE_NATIVE);
+    return StringVector::createScalar(name);
 }
 
 SEXP Rsockclose(SEXP ssock)
@@ -224,9 +227,12 @@ SEXP Rsocklisten(SEXP ssock)
 	(*s_ptr->socklisten)(&sock, abuf, &len);
     else
 	error("%s", _("socket routines cannot be loaded"));
-    GCStackRoot<> ans, host;
-    ans = ScalarInteger(sock); // The socket being listened on
-    host = StringVector::createScalar(String::obtain(buf));
+    GCStackRoot<IntVector> ans;
+    GCStackRoot<StringVector> host;
+    GCStackRoot<String> name;
+    ans = IntVector::createScalar(sock); // The socket being listened on
+    name = String::obtain(buf);
+    host = StringVector::createScalar(name);
     setAttrib(ans, install("host"), host);
 
     return ans;

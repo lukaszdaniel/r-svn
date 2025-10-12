@@ -100,7 +100,9 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 #include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -449,7 +451,8 @@ attribute_hidden SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(x))
 	error("%s", _("extracting substrings from a non-character object"));
     R_xlen_t len = XLENGTH(x);
-    SEXP s = PROTECT(allocVector(STRSXP, len));
+    GCStackRoot<StringVector> s;
+    s = StringVector::create(len);
 
     if (len > 0) {
 	SEXP sa = CADR(args), // start
@@ -484,7 +487,7 @@ attribute_hidden SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    int slen = LENGTH(el);
 	    if (start < 1) start = 1;
 	    if (start > stop) {
-		SET_STRING_ELT(s, i, R_BlankString);
+		SET_STRING_ELT(s, i, String::blank());
 	    } else {
 		const char *rfrom;
 		int rlen;
@@ -494,14 +497,14 @@ attribute_hidden SEXP do_substr(SEXP call, SEXP op, SEXP args, SEXP env)
 		   to be extracted from it */
 		substr(ss, slen, ienc, start, stop, i,
 		       IS_ASCII(el), &rfrom, &rlen, el == lastel);
-		SET_STRING_ELT(s, i, mkCharLenCE(rfrom, rlen, ienc));
+		SET_STRING_ELT(s, i, String::obtain(rfrom, rlen, ienc));
 	    }
 	    lastel = el;
 	}
     }
     SHALLOW_DUPLICATE_ATTRIB(s, x);
     /* This copied the class, if any */
-    UNPROTECT(1);
+
     return s;
 }
 

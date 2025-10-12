@@ -1981,14 +1981,14 @@ static void addInternalRestart(RCNTXT *cptr, const char *cname)
 attribute_hidden void R::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname)
 {
     SEXP rho, entry;
-    GCStackRoot<> klass;
+    GCStackRoot<String> klass;
     checkRestartStacks(cptr);
 
     /**** need more here to keep recursive errors in browser? */
     SEXP h = GetOption1(install("browser.error.handler"));
     if (!isFunction(h)) h = R_RestartToken;
     rho = cptr->cloenv;
-    klass = mkChar("error");
+    klass = String::obtain("error");
     entry = mkHandlerEntry(klass, rho, h, rho, R_NilValue, TRUE);
     R_HandlerStack = CONS(entry, R_HandlerStack);
 

@@ -1019,7 +1019,7 @@ Rboolean Rf_inherits(SEXP, const char *);
 Rboolean Rf_isArray(SEXP);
 Rboolean Rf_isDataFrame(SEXP);
 Rboolean Rf_isFactor(SEXP);
-Rboolean Rf_isFrame(SEXP);
+#define Rf_isFrame Rf_isDataFrame // keep available under old name for now
 Rboolean Rf_isFunction(SEXP);
 Rboolean Rf_isInteger(SEXP);
 Rboolean Rf_isLanguage(SEXP);
