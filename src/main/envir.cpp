@@ -103,6 +103,7 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -112,7 +113,7 @@
 #include <CXXR/Promise.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/Closure.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h> // for R_Suicide()
@@ -3976,7 +3977,7 @@ SEXP Rf_mkCharCE(const char *name, cetype_t enc)
 /* no longer used in R but documented in 2.7.x */
 SEXP Rf_mkCharLen(const char *name, int len)
 {
-    return String::obtain(name, len, CE_NATIVE); // 4
+    return String::obtain(name, len, CE_NATIVE);
 }
 
 /** @brief Make a character (CHARSXP) variable.
@@ -4016,8 +4017,7 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
     PrintValue(R_GlobalContext->call);
     REprintf(" --- R stacktrace ---\n");
     printwhere();
-    REprintf(" --- current native encoding: %s ---\n",
-             R_nativeEncoding());
+    REprintf(" --- current native encoding: %s ---\n", R_nativeEncoding());
     const char *enc = "native/unknown";
     if (IS_LATIN1(cval))
  	enc = "latin1";
@@ -4038,12 +4038,10 @@ static void reportInvalidString(SEXP cval, int actionWhenInvalid)
     }
     REprintf("\n");
     REprintf(" --- function from context --- \n");
-    if (R_GlobalContext->callfun != NULL &&
-	TYPEOF(R_GlobalContext->callfun) == CLOSXP)
+    if (R_GlobalContext->callfun != NULL && Closure::isA(R_GlobalContext->callfun))
 	PrintValue(R_GlobalContext->callfun);
     REprintf(" --- function search by body ---\n");
-    if (R_GlobalContext->callfun != NULL &&
-	TYPEOF(R_GlobalContext->callfun) == CLOSXP)
+    if (R_GlobalContext->callfun != NULL && Closure::isA(R_GlobalContext->callfun))
 	findFunctionForBody(R_ClosureExpr(R_GlobalContext->callfun));
     REprintf(" ----------- END OF FAILURE REPORT -------------- \n");
     R_OutputCon = oldout;
@@ -4078,8 +4076,7 @@ namespace
 	   representing this string, and EncodeString() is the most
 	   comprehensive */
 	SEXP c = CXXR_allocCharsxp(name, enc, is_ascii);
-	error(_("embedded nul in string: '%s'"),
-	      EncodeString(c, 0, 0, Rprt_adj_none));
+	error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
     void validateString(SEXP cval)

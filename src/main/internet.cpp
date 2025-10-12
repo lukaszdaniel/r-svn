@@ -184,11 +184,8 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
 	error("%s", _("socket routines cannot be loaded"));
     if (maxlen < 0) // presumably -1, error from recv
 	error("%s", _("Error reading data in Rsockread"));
-    GCStackRoot<> ans;
-    ans = allocVector(STRSXP, 1);
-    SET_STRING_ELT(ans, 0, mkCharLenCE(buf, maxlen, CE_NATIVE));
 
-    return ans;
+    return StringVector::createScalar(String::obtain(buf, maxlen, CE_NATIVE));
 }
 
 SEXP Rsockclose(SEXP ssock)
@@ -229,8 +226,7 @@ SEXP Rsocklisten(SEXP ssock)
 	error("%s", _("socket routines cannot be loaded"));
     GCStackRoot<> ans, host;
     ans = ScalarInteger(sock); // The socket being listened on
-    host = allocVector(STRSXP, 1);
-    SET_STRING_ELT(host, 0, mkChar(buf));
+    host = StringVector::createScalar(String::obtain(buf));
     setAttrib(ans, install("host"), host);
 
     return ans;

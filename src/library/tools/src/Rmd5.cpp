@@ -24,6 +24,7 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include "localization.h"
 
@@ -32,6 +33,7 @@
 #include "md5.h"
 
 using namespace R;
+using namespace CXXR;
 
 /* .Call so manages R_alloc stack */
 SEXP Rmd5(SEXP files)
@@ -51,7 +53,7 @@ SEXP Rmd5(SEXP files)
     if (TYPEOF(files) == RAWSXP) {
 	/* there is really no failure possible, but just in case... */
 	if (!md5_buffer((const char *) RAW(files), XLENGTH(files), resblock))
-	    return ScalarString(NA_STRING);
+	    return StringVector::createScalar(String::NA());
 	for(int j = 0; j < 16; j++)
 	    snprintf (out+2*j, 33-2*j, "%02x", resblock[j]);
 	return mkString(out);

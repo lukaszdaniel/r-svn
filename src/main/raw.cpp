@@ -32,6 +32,7 @@
 #endif
 
 #include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
@@ -61,7 +62,8 @@ attribute_hidden SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
 /* <UTF8>  rawToChar should work at byte level */
 attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, x = CAR(args);
+    GCStackRoot<> ans;
+    SEXP x = CAR(args);
 
     checkArity(op, args);
     if (!isRaw(x))
@@ -71,7 +73,7 @@ attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_xlen_t nc = XLENGTH(x);
 	char buf[2];
 	buf[1] = '\0';
-	PROTECT(ans = allocVector(STRSXP, nc));
+	ans = StringVector::create(nc);
 	for (R_xlen_t i = 0; i < nc; i++) {
 	    buf[0] = (char) RAW(x)[i];
 	    SET_STRING_ELT(ans, i, mkChar(buf));
@@ -83,11 +85,9 @@ attribute_hidden SEXP do_rawToChar(SEXP call, SEXP op, SEXP args, SEXP env)
 	   Strip trailing nuls */
 	for (i = 0, j = -1; i < nc; i++) if (RAW(x)[i]) j = i;
 	nc = j + 1;
-	PROTECT(ans = allocVector(STRSXP, 1));
-	SET_STRING_ELT(ans, 0,
-		       mkCharLenCE((const char *)RAW(x), j+1, CE_NATIVE));
+	ans = StringVector::createScalar(String::obtain((const char *)RAW(x), j+1, CE_NATIVE));
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -458,8 +458,7 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (used) memcpy(tmp + len, buf, used);
 	    len += used;
 	}
-	PROTECT(ans = allocVector(STRSXP, 1));
-	SET_STRING_ELT(ans, 0, mkCharLenCE(tmp, (int) len, CE_UTF8));
+	PROTECT(ans = StringVector::createScalar(String::obtain(tmp, (int) len, CE_UTF8)));
 	if (len >= 10000) R_Free(tmp);
     }
     UNPROTECT(2);
