@@ -63,6 +63,7 @@ namespace CXXR
 
     String::~String()
     {
+        // nothing to do here; removal from the hash table is done in visitTable()
     }
 
     const char *String::c_str() const
