@@ -54,6 +54,7 @@ namespace R
 {
     Rcomplex SCALAR_CVAL(SEXP x);
     void SET_SCALAR_CVAL(SEXP x, Rcomplex v);
+    Rcomplex *COMPLEX0(SEXP x);
 } // namespace R
 
 extern "C"
@@ -83,7 +84,6 @@ extern "C"
      * @return Pointer to constant element 0 of \a x.
      */
     const Rcomplex *COMPLEX_RO(SEXP x);
-    Rcomplex *COMPLEX0(SEXP x);
 
     const Rcomplex *COMPLEX_OR_NULL(SEXP x);
     Rcomplex COMPLEX_ELT(SEXP x, R_xlen_t i);

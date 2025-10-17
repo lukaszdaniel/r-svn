@@ -2274,7 +2274,7 @@ static SEXP xxenv(SEXP begin, SEXP body, SEXP end, YYLTYPE *lloc)
     Rprintf("xxenv(begin=%p, body=%p, end=%p)", begin, body, end);    
 #endif
     if (!streql(CHAR(STRING_ELT(begin, 0)),
-               CHAR(STRING_ELT(end, 0))) != 0) {
+               CHAR(STRING_ELT(end, 0)))) {
         char buffer[PARSE_ERROR_SIZE];
         snprintf(buffer, sizeof(buffer), "\\begin{%s} at %d:%d ended by \\end{%s}",
           CHAR(STRING_ELT(begin, 0)), lloc->first_line, lloc->first_column,

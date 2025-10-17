@@ -44,6 +44,7 @@ namespace R
 {
     double SCALAR_DVAL(SEXP x);
     void SET_SCALAR_DVAL(SEXP x, double v);
+    double *REAL0(SEXP x);
 } // namespace R
 
 extern "C"
@@ -73,7 +74,6 @@ extern "C"
      * @return Pointer to constant element 0 of \a x.
      */
     const double *REAL_RO(SEXP x);
-    double *REAL0(SEXP x);
     const double *REAL_OR_NULL(SEXP x);
     double REAL_ELT(SEXP x, R_xlen_t i);
     void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);

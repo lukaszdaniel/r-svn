@@ -107,9 +107,9 @@ static SEXP compact_intseq_Unserialize(SEXP class_, SEXP state)
     int inc = COMPACT_INTSEQ_SERIALIZED_STATE_INCR(state);
 
     if (inc == 1)
-	return new_compact_intseq(n, n1,  1);
+	return new_compact_intseq(n, n1, 1);
     else if (inc == -1)
-	return new_compact_intseq(n, n1,  -1);
+	return new_compact_intseq(n, n1, -1);
     else
 	error(_("compact sequences with increment %d not supported yet"), inc);
 }

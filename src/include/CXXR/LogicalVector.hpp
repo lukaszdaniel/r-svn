@@ -57,6 +57,7 @@ namespace R
 
     int SCALAR_LVAL(SEXP x);
     void SET_SCALAR_LVAL(SEXP x, int v);
+    int *LOGICAL0(SEXP x);
 } // namespace R
 
 extern "C"
@@ -88,7 +89,6 @@ extern "C"
      * @return Pointer to constant element 0 of \a x.
      */
     const int *LOGICAL_RO(SEXP x);
-    int *LOGICAL0(SEXP x);
 
     const int *LOGICAL_OR_NULL(SEXP x);
     void SET_LOGICAL_ELT(SEXP x, R_xlen_t i, int v);

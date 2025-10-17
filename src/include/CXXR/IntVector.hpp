@@ -44,6 +44,7 @@ namespace R
 {
     int SCALAR_IVAL(SEXP x);
     void SET_SCALAR_IVAL(SEXP x, int v);
+    int *INTEGER0(SEXP x);
 } // namespace R
 
 extern "C"
@@ -68,7 +69,6 @@ extern "C"
      * @return Pointer to constant element 0 of \a x.
      */
     const int *(INTEGER_RO)(SEXP x);
-    int *INTEGER0(SEXP x);
 
     const int *INTEGER_OR_NULL(SEXP x);
     int INTEGER_ELT(SEXP x, R_xlen_t i);

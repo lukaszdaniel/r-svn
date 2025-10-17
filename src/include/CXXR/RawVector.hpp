@@ -44,6 +44,7 @@ namespace R
 {
     Rbyte SCALAR_BVAL(SEXP x);
     void SET_SCALAR_BVAL(SEXP x, Rbyte v);
+    Rbyte *RAW0(SEXP x);
 } // namespace R
 
 extern "C"
@@ -73,7 +74,6 @@ extern "C"
      * @return Pointer to constant element 0 of \a x.
      */
     const Rbyte *(RAW_RO)(SEXP x);
-    Rbyte *RAW0(SEXP x);
 
     const Rbyte *RAW_OR_NULL(SEXP x);
     Rbyte RAW_ELT(SEXP x, R_xlen_t i);

@@ -2994,9 +2994,16 @@ The webpage @uref{https://en.cppreference.com/w/cpp/compiler_support.html}
 gives some information on which compiler versions are known to support
 recent C++ features.
 
-C++ standards have deprecated and later removed features.  Be aware that
-some current compilers still accept removed features in C++17 mode,
-such as @code{std::unary_function} (deprecated in C++11, removed in C++17).
+https://en.wikipedia.org/wiki/C%2B%2B17
+@c https://en.wikipedia.org/wiki/C%2B%2B20
+C++ standards have deprecated and later removed features (such as
+headers, types and functions).  Be aware that some current compilers
+still accept removed features in C++17 mode, such as
+@code{std::unary_function} (deprecated in C++11, removed in C++17) or
+removed in C++20 (such as @code{std::uncaught_exception}). And some
+compilers in use are far from current, notably those used for
+@acronym{CRAN} macOS builds.  The Wikipedia pages for the various
+standards list deprecated and removed (and undeprecated) features.
 
 For maximal portability a package should specify the standard it
 requires for code in its @file{src} directory by including something
@@ -3067,19 +3074,19 @@ that the script selects the correct C++ compiler and standard,
 @emph{via} something like
 
 @example
-CXX17=`"$@{R_HOME@}/bin/R" CMD config CXX17`
-if test -z "$CXX17"; then
-  AC_MSG_ERROR([No C++17 compiler is available])
+CXX20=`"$@{R_HOME@}/bin/R" CMD config CXX20`
+if test -z "$CXX20"; then
+  AC_MSG_ERROR([No C++20 compiler is available])
 fi
-CXX17STD=`"$@{R_HOME@}/bin/R" CMD config CXX17STD`
-CXX="$@{CXX17@} $@{CXX17STD@}"
-CXXFLAGS=`"$@{R_HOME@}/bin/R" CMD config CXX17FLAGS`
+CXX20STD=`"$@{R_HOME@}/bin/R" CMD config CXX20STD`
+CXX="$@{CXX20@} $@{CXX20STD@}"
+CXXFLAGS=`"$@{R_HOME@}/bin/R" CMD config CXX20FLAGS`
 ## for an configure.ac file
 AC_LANG(C++)
 @end example
 
 @noindent
-if C++17 was specified, but using
+if C++20 was specified, but using
 @example
 CXX=`"$@{R_HOME@}/bin/R" CMD config CXX`
 CXXFLAGS=`"$@{R_HOME@}/bin/R" CMD config CXXFLAGS`
@@ -3095,15 +3102,15 @@ down the macros to specify the appropriate compiler, e.g.@: in
 @example
 sublibs:
          @@(cd libs && $(MAKE) \
-            CXX="$(CXX17) $(CXX17STD)" CXXFLAGS="$(CXX17FLAGS) $(CXX17PICFLAGS)")
+            CXX="$(CXX20) $(CXX20STD)" CXXFLAGS="$(CXX20FLAGS) $(CXX20PICFLAGS)")
 @end example
 
 The discussion above is about the standard @R{} ways of compiling C++:
 it will not apply to packages using @file{src/Makefile} or building in a
 subdirectory that do not set the C++ standard.  Do not rely on the
 compilers' default C++ standard, which varies widely and gets changed
-frequently by vendors -- for example Apple clang up to at least 16
-defaults to C++98, @I{LLVM} clang 14--15 to C++14, @I{LLVM} clang 16--20
+frequently by vendors -- for example Apple clang up to at least 17
+defaults to C++98, @I{LLVM} clang 14--15 to C++14, @I{LLVM} clang 16--21
 and @command{g++} 11--15 to C++17.
 
 For a package with a @file{src/Makefile} (or a Windows analogue),
@@ -14070,8 +14077,9 @@ Setting the type to @code{LANGSXP} makes this a call which can be evaluated.
 Customarily, the evaluation environment is passed from the calling
 @R{} code (see @code{rho} above). In special cases it is possible that
 the C code may need to obtain the current evaluation environment
-which can be done via @code{R_GetCurrentEnv()} function.
-@findex R_GetCurrentEnv
+which can be done via @code{R_GetCurrentEnv()} function. This function
+is experimental and may be changed or removed in the future.
+@eapifun R_GetCurrentEnv
 
 
 @node Zero-finding
@@ -15299,6 +15307,8 @@ void * Memzero(@var{p}, @var{n})
 for the @code{nul} terminator.  @code{Memcpy} and @code{Memzero} take
 @code{n} items from array @code{p} and copy them to array @code{q} or
 zero them respectively.
+@eapifun R_chk_memcpy
+@eapifun R_chk_memset
 
 
 @node Error signaling
@@ -15366,6 +15376,9 @@ subroutine rwarn(@var{message})
 
 Messages of more than 255 characters are truncated, with a warning.
 
+The subroutine @code{xerbla} is also available for compatibility with
+BLAS and LAPACK, but is not intended for use in packages.
+@forfun xerbla
 
 @node Random numbers
 @section Random number generation
@@ -16548,6 +16561,11 @@ final value returned in @code{Fmin}.  Most of the other parameters can
 be found from the help page for @code{optim}: see the source code
 @file{src/appl/lbfgsb.c} for the values of @code{nbd}, which
 specifies which bounds are to be used.
+
+The function @code{optif9} is included in the experimental API for use
+by the @pkg{nlme} package. It is subject to change and not intended for
+use by other packages.
+@eapifun optif9
 
 
 @node Integration
