@@ -393,15 +393,6 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     }
 }
 
-namespace
-{
-    inline bool areEqual(const double &a, const double &b)
-    {
-        constexpr double epsilon = 1e-12;
-        if (a == b) return true;
-        return (std::abs(a - b) < epsilon);
-    }
-} // anonymous namespace
 /**
  * [N]ot [E]qual  (x, y)   <==>   x  "!="  y
  *  where the NA/NaN and "-0." / "+0." cases treatment depend on 'str'.
@@ -438,10 +429,10 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
 
     switch (str) {
     case single_NA__num_eq:
-	return !areEqual(x, y);
+	return (x != y);
     case bit_NA__num_eq:
 	if (!ISNAN(x) && !ISNAN(y))
-	    return !areEqual(x, y);
+	    return (x != y);
 	else /* bitwise check for NA/NaN's */
 	    return memcmp((const void *) &x,
 			  (const void *) &y, sizeof(double));
