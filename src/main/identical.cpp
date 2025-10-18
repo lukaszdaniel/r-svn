@@ -57,7 +57,6 @@ typedef enum {
 
 static bool neWithNaN(double x, double y, ne_strictness_type str);
 
-
 static R_INLINE bool asFlag(SEXP x, const char *name)
 {
     return asLogicalNoNA(x, name);
@@ -75,6 +74,65 @@ static R_INLINE bool asFlag(SEXP x, const char *name)
 
 namespace
 {
+    bool special_case_neWithNaN(double x, double y, ne_strictness_type str)
+    {
+        switch (str) {
+        case single_NA__num_eq:
+        case single_NA__num_bit:
+            if (R_IsNA(x))
+            {
+                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (!R_IsNA(y)) << "\n";
+                return (!R_IsNA(y));
+            }
+            if (R_IsNA(y))
+            {
+                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (!R_IsNA(x)) << "\n";
+                return (!R_IsNA(x));
+            }
+            if (ISNAN(x))
+            {
+                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (!ISNAN(y)) << "\n";
+                return (!ISNAN(y));
+            }
+
+        case bit_NA__num_eq:
+        case bit_NA__num_bit:
+            ; /* do nothing */
+        }
+
+        switch (str) {
+        case single_NA__num_eq:
+        {
+            std::cerr << __FILE__ << ":" << __LINE__ << " return " << (x != y) << "\n";
+            return (x != y);
+        }
+        case bit_NA__num_eq:
+            if (!ISNAN(x) && !ISNAN(y))
+            {
+                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (x != y) << "\n";
+                return (x != y);
+            }
+            else /* bitwise check for NA/NaN's */
+            {
+                bool res = memcmp((const void *)&x, (const void *)&y, sizeof(double));
+                std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
+                return res;
+            }
+        case bit_NA__num_bit:
+        case single_NA__num_bit:
+        {
+            bool res = memcmp((const void *)&x, (const void *)&y, sizeof(double));
+            std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
+            return res;
+        }
+        default: /* Wall */
+        {
+            std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
+            return false;
+        }
+        }
+    }
+
     Rboolean special_case_compute_identical(SEXP x, SEXP y, int flags)
     {
         std::cerr << __FILE__ << ":" << __LINE__ << " special_case_compute_identical called with flags = " << flags << "\n"; // here
@@ -264,7 +322,9 @@ namespace
                 const double *xp = REAL_RO(x), *yp = REAL_RO(y);
                 int ne_strict = NUM_EQ | (SINGLE_NA << 1);
                 for (R_xlen_t i = 0; i < n; i++)
-                    if (neWithNaN(xp[i], yp[i], (ne_strictness_type)ne_strict)) {
+                    if (special_case_neWithNaN(xp[i], yp[i], (ne_strictness_type)ne_strict)) {
+                        std::cerr << __FILE__ << ":" << __LINE__ << " compared values at index " << i << "with ne_strict = " << ne_strict << "\n";
+                        std::cerr << __FILE__ << ":" << __LINE__ << " compared " << xp[i] << " vs " << yp[i] << "\n";
                         std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
                         return FALSE;
                     }
@@ -283,8 +343,8 @@ namespace
                 const Rcomplex *xp = COMPLEX_RO(x), *yp = COMPLEX_RO(y);
                 int ne_strict = NUM_EQ | (SINGLE_NA << 1);
                 for (R_xlen_t i = 0; i < n; i++)
-                    if (neWithNaN(xp[i].r, yp[i].r, (ne_strictness_type)ne_strict) ||
-                        neWithNaN(xp[i].i, yp[i].i, (ne_strictness_type)ne_strict))
+                    if (special_case_neWithNaN(xp[i].r, yp[i].r, (ne_strictness_type)ne_strict) ||
+                        special_case_neWithNaN(xp[i].i, yp[i].i, (ne_strictness_type)ne_strict))
                     {
                         std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
                         return FALSE;
