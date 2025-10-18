@@ -32,6 +32,7 @@
 #endif
 
 #include <iostream>
+#include <iomanip>
 #include <CXXR/Logical.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -103,6 +104,12 @@ namespace
         switch (str) {
         case single_NA__num_eq:
         {
+            std::cerr << __FILE__ << ":" << __LINE__ << " x = " << std::setprecision(16) << x << "\n";
+            std::cerr << __FILE__ << ":" << __LINE__ << " y = " << std::setprecision(16) << y << "\n";
+            std::cerr << __FILE__ << ":" << __LINE__ << " (x != y)  = " << (x != y) << "\n";
+            std::cerr << __FILE__ << ":" << __LINE__ << " !(x == y) = " << !(x == y) << "\n";
+            std::cerr << __FILE__ << ":" << __LINE__ << " fabs(x - y) = " << std::setprecision(16) << std::fabs(x - y) << "\n";
+            if (y != 0.0) std::cerr << __FILE__ << ":" << __LINE__ << " (x/y) = " << std::setprecision(16) << (x / y) << "\n";
             std::cerr << __FILE__ << ":" << __LINE__ << " return " << (x != y) << "\n";
             return (x != y);
         }
@@ -323,7 +330,7 @@ namespace
                 int ne_strict = NUM_EQ | (SINGLE_NA << 1);
                 for (R_xlen_t i = 0; i < n; i++)
                     if (special_case_neWithNaN(xp[i], yp[i], (ne_strictness_type)ne_strict)) {
-                        std::cerr << __FILE__ << ":" << __LINE__ << " compared values at index " << i << "with ne_strict = " << ne_strict << "\n";
+                        std::cerr << __FILE__ << ":" << __LINE__ << " compared values at index " << i << " with ne_strict = " << ne_strict << "\n";
                         std::cerr << __FILE__ << ":" << __LINE__ << " compared " << xp[i] << " vs " << yp[i] << "\n";
                         std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
                         return FALSE;
