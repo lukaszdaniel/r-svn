@@ -395,7 +395,7 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
 
 namespace
 {
-    bool areEqual(double a, double b)
+    inline bool areEqual(const double &a, const double &b)
     {
         constexpr double epsilon = 1e-12;
         if (a == b) return true;
