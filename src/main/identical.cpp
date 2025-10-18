@@ -31,8 +31,6 @@
 #include <config.h>
 #endif
 
-#include <iostream>
-#include <iomanip>
 #include <CXXR/Logical.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -58,496 +56,13 @@ typedef enum {
 
 static bool neWithNaN(double x, double y, ne_strictness_type str);
 
+
 static R_INLINE bool asFlag(SEXP x, const char *name)
 {
     return asLogicalNoNA(x, name);
 }
 
 /* .Internal(identical(..)) */
-#define NUM_EQ		(!(flags & IDENT_NUM_AS_BITS))
-#define SINGLE_NA       (!(flags & IDENT_NA_AS_BITS))
-#define ATTR_AS_SET     (!(flags & IDENT_ATTR_BY_ORDER))
-#define IGNORE_BYTECODE (!(flags & IDENT_USE_BYTECODE))
-#define IGNORE_ENV      (!(flags & IDENT_USE_CLOENV))
-#define IGNORE_SRCREF   (!(flags & IDENT_USE_SRCREF))
-#define EXTPTR_AS_REF   (flags & IDENT_EXTPTR_AS_REF)
-
-
-namespace
-{
-    bool special_case_neWithNaN(double x, double y, ne_strictness_type str)
-    {
-        switch (str) {
-        case single_NA__num_eq:
-        case single_NA__num_bit:
-            if (R_IsNA(x))
-            {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (!R_IsNA(y)) << "\n";
-                return (!R_IsNA(y));
-            }
-            if (R_IsNA(y))
-            {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (!R_IsNA(x)) << "\n";
-                return (!R_IsNA(x));
-            }
-            if (ISNAN(x))
-            {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (!ISNAN(y)) << "\n";
-                return (!ISNAN(y));
-            }
-
-        case bit_NA__num_eq:
-        case bit_NA__num_bit:
-            ; /* do nothing */
-        }
-
-        switch (str) {
-        case single_NA__num_eq:
-        {
-            std::cerr << __FILE__ << ":" << __LINE__ << " x = " << std::setprecision(16) << x << "\n";
-            std::cerr << __FILE__ << ":" << __LINE__ << " y = " << std::setprecision(16) << y << "\n";
-            std::cerr << __FILE__ << ":" << __LINE__ << " (x != y)  = " << (x != y) << "\n";
-            std::cerr << __FILE__ << ":" << __LINE__ << " !(x == y) = " << !(x == y) << "\n";
-            std::cerr << __FILE__ << ":" << __LINE__ << " fabs(x - y) = " << std::setprecision(16) << std::fabs(x - y) << "\n";
-            if (y != 0.0) std::cerr << __FILE__ << ":" << __LINE__ << " (x/y) = " << std::setprecision(16) << (x / y) << "\n";
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << (x != y) << "\n";
-            return (x != y);
-        }
-        case bit_NA__num_eq:
-            if (!ISNAN(x) && !ISNAN(y))
-            {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (x != y) << "\n";
-                return (x != y);
-            }
-            else /* bitwise check for NA/NaN's */
-            {
-                bool res = memcmp((const void *)&x, (const void *)&y, sizeof(double));
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
-                return res;
-            }
-        case bit_NA__num_bit:
-        case single_NA__num_bit:
-        {
-            bool res = memcmp((const void *)&x, (const void *)&y, sizeof(double));
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
-            return res;
-        }
-        default: /* Wall */
-        {
-            std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-            return false;
-        }
-        }
-    }
-
-    Rboolean special_case_compute_identical(SEXP x, SEXP y, int flags)
-    {
-        std::cerr << __FILE__ << ":" << __LINE__ << " special_case_compute_identical called with flags = " << flags << "\n"; // here
-        std::cerr << XLENGTH(x) << " elements in x, " << XLENGTH(y) << " elements in y\n";
-
-        if (x == y) /* same pointer */
-        {
-            std::cerr << __FILE__ << ":" << __LINE__ << " return true\n";
-            return TRUE;
-        }
-        if (TYPEOF(x) != TYPEOF(y) ||
-            OBJECT(x) != OBJECT(y) ||
-            IS_S4_OBJECT(x) != IS_S4_OBJECT(y))
-        {
-            std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-            return FALSE;
-        }
-
-        /* Skip attribute checks for CHARSXP
-           -- such attributes are used for the cache.  */
-        if (TYPEOF(x) == CHARSXP) {
-        /* This matches NAs */
-            Rboolean res = (Rboolean)(Seql(x, y) == 1);
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
-            return res;
-        }
-        SEXP ax, ay;
-        if (IGNORE_SRCREF && TYPEOF(x) == CLOSXP) {
-        /* Remove "srcref" attribute - and below, treat body(x), body(y) */
-            SEXP x_ = PROTECT(duplicate(x)), y_ = PROTECT(duplicate(y));
-            setAttrib(x_, R_SrcrefSymbol, R_NilValue);
-            setAttrib(y_, R_SrcrefSymbol, R_NilValue);
-            ax = ATTRIB(x_); ay = ATTRIB(y_);
-            UNPROTECT(2);
-        }
-        else {
-            ax = ATTRIB(x); ay = ATTRIB(y);
-        }
-
-        if (ax != R_NilValue || ay != R_NilValue) {
-            if (ax == R_NilValue || ay == R_NilValue)
-            {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-        /* Attributes are tagged pairlists with unique non-empty non-NA tags.
-           This code still includes a check and if they are not pairlists,
-           they are not compared, with a warning (could be turned into an error
-           or removed). */
-            if (TYPEOF(ax) != LISTSXP || TYPEOF(ay) != LISTSXP) {
-                warning("%s", _("ignoring non-pairlist attributes"));
-            }
-            else if (!ATTR_AS_SET) {
-             /* ax, ay might be fresh allocations from duplicating into
-                x_, y_) above, so need to be protected from possible
-                allocations in getAttrib and recursive calls to
-                special_case_compute_identical in the loop. */
-                PROTECT(ax);
-                PROTECT(ay);
-                while (ax != R_NilValue) {
-                    if (ay == R_NilValue) {
-                        UNPROTECT(2); /* ax, ay */
-                        std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                        return FALSE;
-                    }
-                    /* Need to check for R_RowNamesSymbol and treat specially */
-                    if (TAG(ax) == R_RowNamesSymbol) {
-                        SEXP atrx = PROTECT(getAttrib(x, R_RowNamesSymbol));
-                        SEXP atry = PROTECT(getAttrib(y, R_RowNamesSymbol));
-                        if (!special_case_compute_identical(atrx, atry, flags)) {
-                            UNPROTECT(4); /* atrx, atry, ax, ay */
-                            std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                            return FALSE;
-                        }
-                        UNPROTECT(2); /* atrx, atry */
-                    }
-                    else if (!special_case_compute_identical(CAR(ax), CAR(ay), flags)) {
-                        UNPROTECT(2); /* ax, ay */
-                        std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                        return FALSE;
-                    }
-                    if (!special_case_compute_identical(PRINTNAME(TAG(ax)),
-                        PRINTNAME(TAG(ay)), flags)) {
-                        UNPROTECT(2); /* ax, ay */
-                        std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                        return FALSE;
-                    }
-                    ax = CDR(ax);
-                    ay = CDR(ay);
-                }
-                UNPROTECT(2); /* ax, ay */
-                if (ay != R_NilValue)
-                {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-            }
-            else /* ATTR_AS_SET */ {
-             /* This code is not very efficient, but then neither is using
-                pairlists for attributes.  If long attribute lists become more
-                common (and they are used for S4 slots) we should store them in
-                a hash table. */
-                SEXP elx, ely;
-                if (length(ax) != length(ay)) {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-                /* They are the same length and should have
-                   unique non-empty non-NA tags */
-                /* ax, ay might be fresh allocations from duplicating into
-                   x_, y_) above, so need to be protected from possible
-                   allocations in getAttrib and recursive calls to
-                   special_case_compute_identical in the loop. */
-                PROTECT(ax);
-                PROTECT(ay);
-                for (elx = ax; elx != R_NilValue; elx = CDR(elx)) {
-                    const char *tx = CHAR(PRINTNAME(TAG(elx)));
-                    for (ely = ay; ely != R_NilValue; ely = CDR(ely))
-                        if (streql(tx, CHAR(PRINTNAME(TAG(ely))))) {
-                        /* We need to treat row.names specially here */
-                            if (streql(tx, "row.names")) {
-                                SEXP
-                                    atrx = PROTECT(getAttrib(x, R_RowNamesSymbol)),
-                                    atry = PROTECT(getAttrib(y, R_RowNamesSymbol));
-                                if (!special_case_compute_identical(atrx, atry, flags)) {
-                                    UNPROTECT(4); /* atrx, atry, ax, ay */
-                                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                                    return FALSE;
-                                }
-                                else
-                                    UNPROTECT(2); /* atrx, atry */
-                            }
-                            else
-                                if (!special_case_compute_identical(CAR(elx), CAR(ely),
-                                    flags)) {
-                                    UNPROTECT(2); /* ax, ay */
-                                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                                    return FALSE;
-                                }
-                            break;
-                        }
-                    if (ely == R_NilValue) {
-                        UNPROTECT(2); /* ax, ay */
-                        std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                        return FALSE;
-                    }
-                }
-                UNPROTECT(2); /* ax, ay */
-            }
-        }
-
-        switch (TYPEOF(x)) {
-        case NILSXP:
-            return TRUE;
-        case LGLSXP:
-            if (XLENGTH(x) != XLENGTH(y)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            {
-            /* Use memcmp (which is ISO C90) to speed up the comparison */
-                Rboolean res = (Rboolean)(memcmp((const void *)LOGICAL_RO(x), (const void *)LOGICAL_RO(y),
-                    xlength(x) * sizeof(Logical)) == 0);
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
-                return res;
-            }
-        case INTSXP:
-            if (XLENGTH(x) != XLENGTH(y)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            {
-            /* Use memcmp (which is ISO C90) to speed up the comparison */
-                Rboolean res = (Rboolean)(memcmp((const void *)INTEGER_RO(x), (const void *)INTEGER_RO(y),
-                    xlength(x) * sizeof(int)) == 0);
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
-                return res;
-            }
-        case REALSXP:
-        {
-            R_xlen_t n = XLENGTH(x);
-            if (n != XLENGTH(y)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            else {
-                const double *xp = REAL_RO(x), *yp = REAL_RO(y);
-                int ne_strict = NUM_EQ | (SINGLE_NA << 1);
-                for (R_xlen_t i = 0; i < n; i++)
-                    if (special_case_neWithNaN(xp[i], yp[i], (ne_strictness_type)ne_strict)) {
-                        std::cerr << __FILE__ << ":" << __LINE__ << " compared values at index " << i << " with ne_strict = " << ne_strict << "\n";
-                        std::cerr << __FILE__ << ":" << __LINE__ << " compared " << xp[i] << " vs " << yp[i] << "\n";
-                        std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                        return FALSE;
-                    }
-            }
-            std::cerr << __FILE__ << ":" << __LINE__ << " return true\n"; // here
-            return TRUE;
-        }
-        case CPLXSXP:
-        {
-            R_xlen_t n = XLENGTH(x);
-            if (n != XLENGTH(y)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            else {
-                const Rcomplex *xp = COMPLEX_RO(x), *yp = COMPLEX_RO(y);
-                int ne_strict = NUM_EQ | (SINGLE_NA << 1);
-                for (R_xlen_t i = 0; i < n; i++)
-                    if (special_case_neWithNaN(xp[i].r, yp[i].r, (ne_strictness_type)ne_strict) ||
-                        special_case_neWithNaN(xp[i].i, yp[i].i, (ne_strictness_type)ne_strict))
-                    {
-                        std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                        return FALSE;
-                    }
-            }
-            std::cerr << __FILE__ << ":" << __LINE__ << " return true\n";
-            return TRUE;
-        }
-        case STRSXP:
-        {
-            R_xlen_t i, n = XLENGTH(x);
-            if (n != XLENGTH(y)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            for (i = 0; i < n; i++) {
-                /* This special-casing for NAs is not needed */
-                bool na1 = (STRING_ELT(x, i) == NA_STRING),
-                    na2 = (STRING_ELT(y, i) == NA_STRING);
-                if (na1 ^ na2) {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-                if (na1 && na2) continue;
-                if (!Seql(STRING_ELT(x, i), STRING_ELT(y, i))) {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-            }
-            std::cerr << __FILE__ << ":" << __LINE__ << " return true\n"; // here
-            return TRUE;
-        }
-        case CHARSXP: /* Probably unreachable, but better safe than sorry... */
-        {
-        /* This matches NAs */
-            Rboolean res = (Rboolean)(Seql(x, y) == 1);
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
-            return res;
-        }
-        case VECSXP:
-        {
-            R_xlen_t i, n = XLENGTH(x);
-            if (n != XLENGTH(y)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            for (i = 0; i < n; i++)
-                if (!special_case_compute_identical(VECTOR_ELT(x, i), VECTOR_ELT(y, i), flags))
-                {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-            std::cerr << __FILE__ << ":" << __LINE__ << " return true\n"; // here
-            return TRUE;
-        }
-        case EXPRSXP:
-        {
-            R_xlen_t i, n = XLENGTH(x);
-            if (n != XLENGTH(y)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            for (i = 0; i < n; i++)
-                if (!special_case_compute_identical(XVECTOR_ELT(x, i), XVECTOR_ELT(y, i), flags))
-                {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-            std::cerr << __FILE__ << ":" << __LINE__ << " return true\n";
-            return TRUE;
-        }
-        case LANGSXP:
-        case LISTSXP:
-        case DOTSXP:
-        {
-            while (x != R_NilValue) {
-                if (y == R_NilValue)
-                {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-                if (!special_case_compute_identical(CAR(x), CAR(y), flags))
-                {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-                if (!special_case_compute_identical(PRINTNAME(TAG(x)), PRINTNAME(TAG(y)), flags))
-                {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-                x = CDR(x);
-                y = CDR(y);
-            }
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << (y == R_NilValue) << "\n";
-            return (Rboolean)(y == R_NilValue);
-        }
-        case CLOSXP:
-        {
-            if (!special_case_compute_identical(FORMALS(x), FORMALS(y), flags)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            if (IGNORE_BYTECODE) {
-                if (IGNORE_SRCREF) {
-                    SEXP x_ = PROTECT(R_body_no_src(x)),
-                        y_ = PROTECT(R_body_no_src(y));
-                    bool id_body = special_case_compute_identical(x_, y_, flags);
-                    UNPROTECT(2);
-                    if (!id_body) {
-                        std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                        return FALSE;
-                    }
-                }
-                else if (!special_case_compute_identical(BODY_EXPR(x), BODY_EXPR(y), flags))
-                {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-            }
-            else { // !IGNORE_BYTECODE: use byte code for comparison of function bodies :
-                if (!special_case_compute_identical(BODY(x), BODY(y), flags)) {
-                    std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                    return FALSE;
-                }
-            }
-            // now, formals and body are equal, check the environment(.)s:
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << (IGNORE_ENV || CLOENV(x) == CLOENV(y)) << "\n";
-            return (Rboolean)(IGNORE_ENV || CLOENV(x) == CLOENV(y));
-        }
-        case SPECIALSXP:
-        case BUILTINSXP:
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << (PRIMOFFSET(x) == PRIMOFFSET(y)) << "\n";
-            return (Rboolean)(PRIMOFFSET(x) == PRIMOFFSET(y));
-        case ENVSXP:
-        case SYMSXP:
-        case WEAKREFSXP: /**** is this the best approach? */
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << (x == y) << "\n";
-            return (Rboolean)(x == y);
-        case BCODESXP:
-        {
-            Rboolean res = (Rboolean)(special_case_compute_identical(BCODE_CODE(x), BCODE_CODE(y), flags) &&
-                special_case_compute_identical(BCODE_EXPR(x), BCODE_EXPR(y), flags) &&
-                special_case_compute_identical(BCODE_CONSTS(x), BCODE_CONSTS(y), flags));
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
-            return res;
-        }
-        case EXTPTRSXP:
-            if (EXTPTR_AS_REF)
-            {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (x == y) << "\n";
-                return (Rboolean)(x == y);
-            }
-            else
-            {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << (EXTPTR_PTR(x) == EXTPTR_PTR(y)) << "\n";
-                return (Rboolean)(EXTPTR_PTR(x) == EXTPTR_PTR(y));
-            }
-        case RAWSXP:
-            if (XLENGTH(x) != XLENGTH(y)) {
-                std::cerr << __FILE__ << ":" << __LINE__ << " return false\n";
-                return FALSE;
-            }
-            {
-            /* Use memcmp (which is ISO C90) to speed up the comparison */
-                Rboolean res = (Rboolean)(memcmp((const void *)RAW_RO(x), (const void *)RAW_RO(y),
-                    XLENGTH(x) * sizeof(Rbyte)) == 0);
-                std::cerr << __FILE__ << ":" << __LINE__ << " return " << res << "\n";
-                return res;
-            }
-        case PROMSXP:
-        {
-        // args are evaluated -- but can be seen from DOTSXP dissection
-        /* test for equality of the substituted expression -- or should
-           we require both expression and environment to be identical? */
-            SEXP sy = PROTECT(substitute(PREXPR(y), PRENV(y)));
-            SEXP sx = PROTECT(substitute(PREXPR(x), PRENV(x)));
-            Rboolean ans = special_case_compute_identical(sx, sy, flags);
-            UNPROTECT(2); /* sx, sy */
-            std::cerr << __FILE__ << ":" << __LINE__ << " return " << ans << "\n";
-            return ans;
-        }
-        case OBJSXP:
-        /* attributes already tested, so all slots identical */
-            std::cerr << __FILE__ << ":" << __LINE__ << " return true\n";
-            return TRUE;
-        default:
-        /* these are all supposed to be types that represent constant
-           entities, so no further testing required ?? */
-            printf(_("Unknown type in identical(): %s (%x)\n"), R_typeToChar(x), TYPEOF(x));
-            std::cerr << __FILE__ << ":" << __LINE__ << " return true\n";
-            return TRUE;
-        }
-    }
-} // anonymous namespace
-
 attribute_hidden SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     int nargs = length(args);
@@ -593,21 +108,16 @@ attribute_hidden SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
     if (use_srcref) flags |= IDENT_USE_SRCREF;
     if (extptr_as_ref) flags |= IDENT_EXTPTR_AS_REF;
 
-    Rboolean res = FALSE;
-    bool special_case = ((TYPEOF(x) == VECSXP) &&
-        (XLENGTH(x) > 0) && (XLENGTH(y) > 0) &&
-        (TYPEOF(VECTOR_ELT(x, 0)) == REALSXP) &&
-        int(REAL_RO(VECTOR_ELT(x, 0))[0] * 100000) == 6771);
-    if (special_case) {
-        std::cerr << __FILE__ << ":" << __LINE__ << " Running special_case_compute_identical()\n";
-        res = special_case_compute_identical(x, y, flags);
-    }
-    else {
-        res = R_compute_identical(x, y, flags);
-    }
-    return ScalarLogical(res);
+    return ScalarLogical(R_compute_identical(x, y, flags));
 }
 
+#define NUM_EQ		(!(flags & IDENT_NUM_AS_BITS))
+#define SINGLE_NA       (!(flags & IDENT_NA_AS_BITS))
+#define ATTR_AS_SET     (!(flags & IDENT_ATTR_BY_ORDER))
+#define IGNORE_BYTECODE (!(flags & IDENT_USE_BYTECODE))
+#define IGNORE_ENV      (!(flags & IDENT_USE_CLOENV))
+#define IGNORE_SRCREF   (!(flags & IDENT_USE_SRCREF))
+#define EXTPTR_AS_REF   (flags & IDENT_EXTPTR_AS_REF)
 
 /* do the two objects compute as identical?
    Also used in unique.c, eval.c, relop.c, dotcode.c, and exported */
@@ -883,7 +393,15 @@ Rboolean R_compute_identical(SEXP x, SEXP y, int flags)
     }
 }
 
-
+namespace
+{
+    bool areEqual(double a, double b)
+    {
+        constexpr double epsilon = 1e-12;
+        if (a == b) return true;
+        return (std::abs(a - b) < epsilon);
+    }
+} // anonymous namespace
 /**
  * [N]ot [E]qual  (x, y)   <==>   x  "!="  y
  *  where the NA/NaN and "-0." / "+0." cases treatment depend on 'str'.
@@ -920,10 +438,10 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
 
     switch (str) {
     case single_NA__num_eq:
-	return (x != y);
+	return !areEqual(x, y);
     case bit_NA__num_eq:
 	if (!ISNAN(x) && !ISNAN(y))
-	    return (x != y);
+	    return !areEqual(x, y);
 	else /* bitwise check for NA/NaN's */
 	    return memcmp((const void *) &x,
 			  (const void *) &y, sizeof(double));
