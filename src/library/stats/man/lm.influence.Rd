@@ -126,6 +126,8 @@ strip(qrI)
 
 strip(lmI[c("hat", "sigma")])
 
+identical(strip(qrI), strip(lmI[c("hat", "sigma")]))
+
 stopifnot(identical(strip(qrI),
                     strip(lmI[c("hat", "sigma")])))
 
