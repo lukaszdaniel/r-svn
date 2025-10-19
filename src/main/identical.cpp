@@ -429,16 +429,16 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
 
     switch (str) {
     case single_NA__num_eq:
-	return (x != y);
+	    return ((std::signbit(x) != std::signbit(y)) || (std::abs(x - y) != 0.0)); // (x != y);
     case bit_NA__num_eq:
 	if (!ISNAN(x) && !ISNAN(y))
-	    return (x != y);
+	    return ((std::signbit(x) != std::signbit(y)) || (std::abs(x - y) != 0.0)); // (x != y);
 	else /* bitwise check for NA/NaN's */
 	    return memcmp((const void *) &x,
 			  (const void *) &y, sizeof(double));
     case bit_NA__num_bit:
     case single_NA__num_bit:
-	return memcmp((const void *) &x,
+	    return memcmp((const void *) &x,
 		      (const void *) &y, sizeof(double));
     default: /* Wall */
 	return false;
