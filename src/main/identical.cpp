@@ -427,12 +427,33 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
 	; /* do nothing */
     }
 
+    auto isEqual = [](double a, double b) -> bool {
+        // the simplest possible test
+        if (a == b) return true;
+        // if both are zero (of either sign), they are equal
+        if (std::abs(a) == 0.0 && std::abs(b) == 0.0) return true;
+
+        // if one is zero and the other is not, they are not equal
+        if (std::abs(a) == 0.0 || std::abs(b) == 0.0)
+        {
+            return false;
+        }
+
+        // at this point both are non-zero
+
+        // if they have different signs, they are not equal
+        if (std::signbit(a) != std::signbit(b)) return false;
+
+        // finally, compare their magnitudes
+        return (std::abs(a) == std::abs(b));
+        };
+
     switch (str) {
     case single_NA__num_eq:
-	    return ((std::signbit(x) != std::signbit(y)) || (std::abs(x - y) != 0.0)); // (x != y);
+	    return !isEqual(x, y);
     case bit_NA__num_eq:
 	if (!ISNAN(x) && !ISNAN(y))
-	    return ((std::signbit(x) != std::signbit(y)) || (std::abs(x - y) != 0.0)); // (x != y);
+	    return !isEqual(x, y);
 	else /* bitwise check for NA/NaN's */
 	    return memcmp((const void *) &x,
 			  (const void *) &y, sizeof(double));
