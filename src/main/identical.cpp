@@ -445,7 +445,7 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
         if (std::signbit(a) != std::signbit(b)) return false;
 
         // finally, compare their magnitudes using different ways
-        return ((std::abs(1.1 * a) == std::abs(1.1 * b)));
+        return ((std::abs(1.0 * a) == std::abs(1.0 * b)));
         };
 
     switch (str) {

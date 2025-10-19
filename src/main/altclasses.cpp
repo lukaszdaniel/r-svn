@@ -30,14 +30,17 @@
 #include <config.h>
 #endif
 
+#include <cfloat> /* for DBL_DIG */
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/PairList.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <R_ext/Altrep.h>
-#include <cfloat> /* for DBL_DIG */
 #include <Print.h> /* for R_print */
 #include <R_ext/Itermacros.h>
 
@@ -135,7 +138,7 @@ static SEXP compact_intseq_Coerce(SEXP x, int type)
 static SEXP compact_intseq_Duplicate(SEXP x, Rboolean deep)
 {
     R_xlen_t n = XLENGTH(x);
-    SEXP val = allocVector(INTSXP, n);
+    IntVector *val = IntVector::create(n);
     INTEGER_GET_REGION(x, 0, n, INTEGER0(val));
     return val;
 }
@@ -179,7 +182,7 @@ static void *compact_intseq_Dataptr(SEXP x, Rboolean writeable)
 	R_xlen_t n = COMPACT_INTSEQ_INFO_LENGTH(info);
 	int n1 = COMPACT_INTSEQ_INFO_FIRST(info);
 	int inc = COMPACT_INTSEQ_INFO_INCR(info);
-	SEXP val = allocVector(INTSXP, n);
+	IntVector *val = IntVector::create(n);
 	int *data = INTEGER(val);
 
 	if (inc == 1) {
@@ -336,7 +339,7 @@ static SEXP new_compact_intseq(R_xlen_t n, int n1, int inc)
 	error(_("compact sequences with increment %d not supported yet"), inc);
 
     /* info used REALSXP to allow for long vectors */
-    SEXP info = allocVector(REALSXP, 3);
+    RealVector *info = RealVector::create(3);
     REAL0(info)[0] = (double) n;
     REAL0(info)[1] = (double) n1;
     REAL0(info)[2] = (double) inc;
@@ -384,7 +387,7 @@ static SEXP compact_realseq_Unserialize(SEXP class_, SEXP state)
 static SEXP compact_realseq_Duplicate(SEXP x, Rboolean deep)
 {
     R_xlen_t n = XLENGTH(x);
-    SEXP val = allocVector(REALSXP, n);
+    RealVector *val = RealVector::create(n);
     REAL_GET_REGION(x, 0, n, REAL0(val));
     return val;
 }
@@ -419,7 +422,7 @@ static void *compact_realseq_Dataptr(SEXP x, Rboolean writeable)
 	double n1 = COMPACT_REALSEQ_INFO_FIRST(info);
 	double inc = COMPACT_REALSEQ_INFO_INCR(info);
 
-	SEXP val = allocVector(REALSXP, (R_xlen_t) n);
+	RealVector *val = RealVector::create((R_xlen_t) n);
 	double *data = REAL(val);
 
 	if (inc == 1) {
@@ -565,7 +568,7 @@ static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
     if (inc != 1 && inc != -1)
 	error(_("compact sequences with increment %f not supported yet"), inc);
 
-    SEXP info = allocVector(REALSXP, 3);
+    RealVector *info = RealVector::create(3);
     REAL(info)[0] = n;
     REAL(info)[1] = n1;
     REAL(info)[2] = inc;
@@ -697,7 +700,7 @@ static R_INLINE SEXP ExpandDeferredStringElt(SEXP x, R_xlen_t i)
     SEXP val = DEFERRED_STRING_EXPANDED(x);
     if (val == R_NilValue) {
 	R_xlen_t n = XLENGTH(x);
-	val = allocVector(STRSXP, n);
+	val = StringVector::create(n);
 	if (n)
 	    memset(STDVEC_DATAPTR(val), 0, n * sizeof(SEXP));
 	SET_DEFERRED_STRING_EXPANDED(x, val);
@@ -757,7 +760,7 @@ static R_INLINE void expand_deferred_string(SEXP x)
 	PROTECT(x);
 	R_xlen_t n = XLENGTH(x), i;
 	if (n == 0)
-	    SET_DEFERRED_STRING_EXPANDED(x, allocVector(STRSXP, 0));
+	    SET_DEFERRED_STRING_EXPANDED(x, StringVector::create(0));
 	else
 	    for (i = 0; i < n; i++)
 		ExpandDeferredStringElt(x, i);
@@ -938,7 +941,8 @@ attribute_hidden SEXP R::R_deferred_coerceToString(SEXP v, SEXP info)
 static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
 			    bool ptrOK, bool wrtOK, bool serOK)
 {
-    SEXP sizes = PROTECT(allocVector(REALSXP, 2));
+    GCStackRoot<RealVector> sizes;
+    sizes = RealVector::create(2);
     double *dsizes = REAL(sizes);
     dsizes[0] = size;
     switch(type) {
@@ -947,7 +951,8 @@ static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
     default: error(_("mmap for %s not supported yet"), type2char(type));
     }
 
-    SEXP info = PROTECT(allocVector(INTSXP, 4));
+    GCStackRoot<IntVector> info;
+    info = IntVector::create(4);
     INTEGER(info)[0] = type;
     INTEGER(info)[1] = ptrOK;
     INTEGER(info)[2] = wrtOK;
@@ -955,7 +960,6 @@ static SEXP make_mmap_state(SEXP file, size_t size, SEXPTYPE type,
 
     SEXP state = list3(file, sizes, info);
 
-    UNPROTECT(2);
     return state;
 }
 #endif
@@ -1997,7 +2001,7 @@ static SEXP wrap_meta(SEXP x, int srt, int no_na)
     if (no_na < 0 || no_na > 1)
 	error("%s", _("no_na must be 0 or +1"));
 
-    SEXP meta = allocVector(INTSXP, NMETA);
+    SEXP meta = IntVector::create(NMETA);
     INTEGER(meta)[0] = srt;
     INTEGER(meta)[1] = no_na;
 

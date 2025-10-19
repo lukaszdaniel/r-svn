@@ -30,13 +30,16 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Symbol.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RawVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <R_ext/Altrep.h>
 
@@ -94,7 +97,8 @@ static void RegisterClass(SEXP class_, SEXPTYPE type, const char *cname, const c
 
     Symbol *csym = Symbol::obtain(cname);
     Symbol *psym = Symbol::obtain(pname);
-    SEXP stype = PROTECT(ScalarInteger(type));
+    GCStackRoot<IntVector> stype;
+    stype = IntVector::createScalar(type);
     SEXP iptr = R_MakeExternalPtr(dll, R_NilValue, R_NilValue);
     SEXP entry = LookupClassEntry(csym, psym);
     if (entry == NULL) {
@@ -108,7 +112,7 @@ static void RegisterClass(SEXP class_, SEXPTYPE type, const char *cname, const c
 	SETCAR(CDR(CDR(CDR(entry))), iptr);
     }
     SET_ALTREP_CLASS_SERIALIZED_CLASS(class_, csym, psym, stype);
-    UNPROTECT(2); /* class_, stype */
+    UNPROTECT(1); /* class_ */
 }
 
 static SEXP LookupClass(SEXP csym, SEXP psym)
@@ -979,7 +983,7 @@ static altlist_methods_t altlist_default_methods;
     } while (FALSE)
 
 #define MAKE_CLASS(var, type) do {				\
-	var = allocVector(RAWSXP, sizeof(type##_methods_t));	\
+	var = RawVector::create(sizeof(type##_methods_t));	\
 	R_PreserveObject(var);					\
 	INIT_CLASS(var, type);					\
     } while (FALSE)
@@ -993,7 +997,7 @@ static R_INLINE R_altrep_class_t R_cast_altrep_class(SEXP x)
 
 static R_altrep_class_t make_altrep_class(SEXPTYPE type, const char *cname, const char *pname, DllInfo *dll)
 {
-    SEXP class_;
+    RawVector *class_;
     switch(type) {
     case INTSXP:  MAKE_CLASS(class_, altinteger); break;
     case REALSXP: MAKE_CLASS(class_, altreal);    break;
@@ -1130,7 +1134,7 @@ attribute_hidden SEXP do_altrep_class(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x = CAR(args);
     if (ALTREP(x)) {
 	SEXP info = ALTREP_SERIALIZED_CLASS(x);
-	SEXP val = allocVector(STRSXP, 2);
+	StringVector *val = StringVector::create(2);
 	SET_STRING_ELT(val, 0, PRINTNAME(ALTREP_SERIALIZED_CLASS_CLSSYM(info)));
 	SET_STRING_ELT(val, 1, PRINTNAME(ALTREP_SERIALIZED_CLASS_PKGSYM(info)));
 	return val;
