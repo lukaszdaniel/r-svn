@@ -415,16 +415,16 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
     switch (str) {
     case single_NA__num_eq:
     case single_NA__num_bit:
-	if (R_IsNA(x))
-	    return (!R_IsNA(y));
-	if (R_IsNA(y))
-	    return (!R_IsNA(x));
-	if (ISNAN(x))
-	    return (!ISNAN(y));
+        if (R_IsNA(x))
+            return (!R_IsNA(y));
+        if (R_IsNA(y))
+            return (!R_IsNA(x));
+        if (ISNAN(x))
+            return (!ISNAN(y));
 
     case bit_NA__num_eq:
     case bit_NA__num_bit:
-	; /* do nothing */
+        ; /* do nothing */
     }
 
     auto isEqual = [](double a, double b) -> bool {
@@ -444,24 +444,22 @@ static bool neWithNaN(double x, double y, ne_strictness_type str)
         // if they have different signs, they are not equal
         if (std::signbit(a) != std::signbit(b)) return false;
 
-        // finally, compare their magnitudes
-        return (std::abs(a) == std::abs(b));
+        // finally, compare their magnitudes using different ways
+        return ((std::abs(a) == std::abs(b)) || (std::abs(a - b) == 0.0) || (std::abs(a + b) == 2.0 * std::abs(b)));
         };
 
     switch (str) {
     case single_NA__num_eq:
-	    return !isEqual(x, y);
+        return !isEqual(x, y);
     case bit_NA__num_eq:
-	if (!ISNAN(x) && !ISNAN(y))
-	    return !isEqual(x, y);
-	else /* bitwise check for NA/NaN's */
-	    return memcmp((const void *) &x,
-			  (const void *) &y, sizeof(double));
+        if (!ISNAN(x) && !ISNAN(y))
+            return !isEqual(x, y);
+        else /* bitwise check for NA/NaN's */
+            return memcmp((const void *)&x, (const void *)&y, sizeof(double));
     case bit_NA__num_bit:
     case single_NA__num_bit:
-	    return memcmp((const void *) &x,
-		      (const void *) &y, sizeof(double));
+        return memcmp((const void *)&x, (const void *)&y, sizeof(double));
     default: /* Wall */
-	return false;
+        return false;
     }
 }
