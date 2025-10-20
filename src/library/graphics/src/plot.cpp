@@ -83,18 +83,18 @@ bool isNAcol(SEXP col, int index, int ncol)
 static SEXP getInlinePar(SEXP s, const char *name)
 {
     SEXP result = R_NilValue;
-    int found = 0;
+    bool found = false;
     if (isList(s) && !found) {
 	while (s != R_NilValue) {
 	    if (isList(CAR(s))) {
 		result = getInlinePar(CAR(s), name);
 		if (result)
-		    found = 1;
+		    found = true;
 	    } else
 		if (TAG(s) != R_NilValue)
 		    if (streql(CHAR(PRINTNAME(TAG(s))), name)) {
 			result = CAR(s);
-			found = 1;
+			found = true;
 		    }
 	    s = CDR(s);
 	}
@@ -159,18 +159,17 @@ SEXP Rf_FixupLty(SEXP lty, int dflt)
 
 SEXP Rf_FixupLwd(SEXP lwd, double dflt)
 {
-    int i, n;
     double w;
     RealVector *ans = NULL;
 
-    n = length(lwd);
+    int n = length(lwd);
     if (n == 0)
 	ans = RealVector::createScalar(dflt);
     else {
 	PROTECT(lwd = coerceVector(lwd, REALSXP));
 	n = length(lwd);
 	ans = RealVector::create(n);
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 	    w = REAL(lwd)[i];
 	    if (w < 0) w = NA_REAL;
 	    REAL(ans)[i] = w;
@@ -231,31 +230,30 @@ static SEXP FixupFont(SEXP font, int dflt)
 
 SEXP Rf_FixupCol(SEXP col, unsigned int dflt)
 {
-    int i, n;
-    SEXP ans;
+    GCStackRoot<IntVector> ans;
     unsigned int bg = dpptr(GEcurrentDevice())->bg; /* col = 0 */
 
-    n = length(col);
+    int n = length(col);
     if (n == 0) {
-	PROTECT(ans = IntVector::createScalar(dflt));
+	ans = IntVector::createScalar(dflt);
     } else {
-	ans = PROTECT(IntVector::create(n));
+	ans = IntVector::create(n);
 	if (isList(col))
-	    for (i = 0; i < n; i++) {
+	    for (int i = 0; i < n; i++) {
 		INTEGER(ans)[i] = RGBpar3(CAR(col), 0, bg);
 		col = CDR(col);
 	    }
 	else
-	    for (i = 0; i < n; i++)
+	    for (int i = 0; i < n; i++)
 		INTEGER(ans)[i] = RGBpar3(col, i, bg);
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
 static SEXP FixupCex(SEXP cex, double dflt)
 {
-    SEXP ans;
+    RealVector *ans;
     int i, n;
     n = length(cex);
     if (n == 0) {

@@ -28,11 +28,12 @@
 # include <config.h>
 #endif
 
-#include <CXXR/String.hpp>
+#include <cerrno>
+#include <clocale>
 #include <Localization.h>
+#include <CXXR/String.hpp>
 #include <Rembedded.h>
 #include <Defn.h>
-#include <clocale>
 
 /* necessary for some (older, i.e., ~ <= 1997) Linuxen, and apparently
    also some AIX systems.  NB, included unconditionally later on.
@@ -46,8 +47,6 @@
 #ifdef HAVE_UNISTD_H
 # include <unistd.h>
 #endif
-
-#include <cerrno>
 
 #include <Fileio.h>
 
@@ -153,7 +152,7 @@ extern void * __libc_stack_end;
 # endif
 #endif
 
-int R_running_as_main_program = 0;
+bool R_running_as_main_program = 0;
 
 /* In ../main/main.c, to avoid inlining */
 extern uintptr_t dummy_ii(void);
@@ -302,7 +301,7 @@ int Rf_initialize_R(int ac, char **av)
 	   suggest getrlimit is safe here. */
     }
 #else
-    if(R_running_as_main_program) {
+    if (R_running_as_main_program) {
 	/* This is not the main program, but unless embedded it is
 	   near the top, 5540 bytes away when checked. */
 	R_CStackStart = (uintptr_t) &i + (6000 * R_CStackDir);

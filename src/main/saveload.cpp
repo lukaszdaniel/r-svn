@@ -2490,10 +2490,8 @@ attribute_hidden SEXP do_loadFromConn2(SEXP call, SEXP op, SEXP args, SEXP env)
     if(con->text) error("%s", _("can only load() from a binary connection"));
 
     if (PRIMVAL(op) == 0) {
-	aenv = CADR(args);
-	if (TYPEOF(aenv) == NILSXP)
-	    error("%s", _("use of NULL environment is defunct"));
-	else if (TYPEOF(aenv) != ENVSXP)
+	aenv = downcast_to_env(CADR(args));
+	if (aenv == R_NilValue)
 	    error(_("invalid '%s' argument"), "envir");
     }
 

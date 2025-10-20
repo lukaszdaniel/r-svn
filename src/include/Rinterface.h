@@ -129,7 +129,7 @@ void R_setStartTime(void);
 void fpu_setup(Rboolean);
 
 /* in ../unix/system.c */
-extern int R_running_as_main_program;
+extern bool R_running_as_main_program;
 
 #ifdef CSTACK_DEFNS
 /* duplicating older Defn.h.

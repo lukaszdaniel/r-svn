@@ -28,11 +28,22 @@
  *
  */
 
+#include <exception>
+#include <execinfo.h>
 #include <Rembedded.h>
 #include <Rinterface.h>
 
+
+static void terminate_handler()
+{
+    void *buffer[128];
+    backtrace(buffer, 128);
+    backtrace_symbols_fd(buffer, 128, 2);
+}
+
 int main(int ac, char **av)
 {
+    std::set_terminate(terminate_handler);
     R_running_as_main_program = 1;
     Rf_initialize_R(ac, av);
     Rf_mainloop(); /* does not return */

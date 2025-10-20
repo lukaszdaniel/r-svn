@@ -46,6 +46,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Environment.hpp>
 #include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -255,20 +256,15 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
     GCStackRoot<> val, top(R_NilValue);	/* -Wall */
     static SEXP s_S3MethodsTable = NULL;
 
-    if (TYPEOF(callrho) != ENVSXP) {
-	if (TYPEOF(callrho) == NILSXP)
-	    error("%s", _("use of NULL environment is defunct"));
-	else
+    callrho = downcast_to_env(callrho);
+    if (callrho == R_NilValue)
 	    error("%s", _("bad generic call environment"));
-    }
+
+    defrho = downcast_to_env(defrho);
+    if (defrho == R_NilValue)
+	error(_("bad generic definition environment"));
     if (defrho == R_BaseEnv)
 	defrho = R_BaseNamespace;
-    else if (TYPEOF(defrho) != ENVSXP) {
-	if (TYPEOF(defrho) == NILSXP)
-	    error("%s", _("use of NULL environment is defunct"));
-	else
-	    error("%s", _("bad generic definition environment"));
-    }
 
     /* This evaluates promises */
     top = topenv(R_NilValue, callrho);
