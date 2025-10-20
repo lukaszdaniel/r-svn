@@ -41,7 +41,7 @@ struct R_StringBuffer {
 };
 
 #ifdef __cplusplus
-extern "C" {
+// extern "C" {
 #endif
 /* code in ./memory.c : */
 /* Note that R_StringBuffer *buf needs to be initialized before call */
@@ -49,7 +49,7 @@ void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf);
 void R_FreeStringBuffer(R_StringBuffer *buf);
 void R_FreeStringBufferL(R_StringBuffer *buf);
 #ifdef __cplusplus
-} // extern "C"
+// } // extern "C"
 #endif
 
 #endif

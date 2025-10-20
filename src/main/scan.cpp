@@ -56,7 +56,7 @@
 #include <Fileio.h>
 #include <Rconnections.h>
 #include <Print.h>
-
+#include "RBufferUtils.h"
 #include <rlocale.h> /* for btowc */
 
 #ifdef Win32
@@ -327,7 +327,6 @@ static int scanchar(bool inQuote, LocalData *d)
     return next;
 }
 
-#include "RBufferUtils.h"
 
 /*XX  Can we pass this routine an R_StringBuffer? appears so.
    But do we have to worry about continuation lines and whatever

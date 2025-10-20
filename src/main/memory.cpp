@@ -45,6 +45,11 @@
 #include <config.h>
 #endif
 
+#ifdef HAVE_STDALIGN_H
+# include <stdalign.h>
+#endif
+
+#include <cstdint>
 #include <memory>
 #include <forward_list>
 #include <iostream>
@@ -142,7 +147,7 @@
 #include <R_ext/Rallocators.h> /* for R_allocator_t structure */
 #include <Rmath.h> // R_pow_di
 #include <Print.h> // R_print
-
+#include "RBufferUtils.h"
 
 using namespace R;
 using namespace CXXR;
@@ -1901,12 +1906,6 @@ char *R_alloc(size_t num_elts, int elt_size)
 
 	return static_cast<char *>(RAllocStack::allocate(size));
 }
-
-#ifdef HAVE_STDALIGN_H
-# include <stdalign.h>
-#endif
-
-#include <cstdint>
 
 long double *R_allocLD(size_t num_elts)
 {
@@ -3954,9 +3953,9 @@ static void R_OutputStackTrace(FILE *file)
 
 static void R_ReportAllocation(R_size_t size)
 {
-	    fprintf(R_MemReportingOutfile, "%lu :", (unsigned long) size);
-	    R_OutputStackTrace(R_MemReportingOutfile);
-	    fprintf(R_MemReportingOutfile, "\n");
+    fprintf(R_MemReportingOutfile, "%lu :", (unsigned long) size);
+    R_OutputStackTrace(R_MemReportingOutfile);
+    fprintf(R_MemReportingOutfile, "\n");
 }
 
 static void R_EndMemReporting(void)
@@ -4007,8 +4006,6 @@ SEXP do_Rprofmem(SEXP args)
 #endif /* R_MEMORY_PROFILING */
 
 /* RBufferUtils, moved from deparse.c */
-
-#include "RBufferUtils.h"
 
 void *R_AllocStringBuffer(size_t blen, R_StringBuffer *buf)
 {

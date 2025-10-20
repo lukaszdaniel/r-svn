@@ -34,6 +34,7 @@
 
 #include <stack>
 #include <vector>
+#include <CXXR/config.hpp>
 #include <R_ext/Memory.h>
 
 namespace CXXR

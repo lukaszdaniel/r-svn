@@ -93,6 +93,9 @@
 # define PROTECTCHECK
 #endif
 
+
+// #define R_MEMORY_PROFILING
+
 #ifndef R_NilValue
 #define R_NilValue NULL
 #endif

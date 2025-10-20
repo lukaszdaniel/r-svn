@@ -31,11 +31,10 @@
 #ifndef GCNODE_HPP
 #define GCNODE_HPP
 
-#include <CXXR/config.hpp>
-
 #include <memory>
 #include <bitset>
 #include <string>
+#include <CXXR/config.hpp>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/GCManager.hpp>

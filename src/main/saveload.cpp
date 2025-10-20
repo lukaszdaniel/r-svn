@@ -53,6 +53,7 @@
 #include <Rmath.h>
 #include <Fileio.h>
 #include <R_ext/RS.h>
+#include "RBufferUtils.h"
 
 using namespace R;
 using namespace CXXR;
@@ -104,7 +105,6 @@ using namespace CXXR;
 /* Static Globals, DIE, DIE, DIE! */
 
 
-#include "RBufferUtils.h"
 
 /* These are used by OffsetToNode & DataLoad.
  OffsetToNode is called by DataLoad() and RestoreSEXP()

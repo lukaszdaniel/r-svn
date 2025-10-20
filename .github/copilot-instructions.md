@@ -37,6 +37,9 @@
   - Use `bin/rtags` for generating Emacs/Vi tags for C, R, and Rd files.
 
 ## Conventions & Patterns
+- Original r-svn project is referred to as 'CR', while the new, refactored version is called 'CXXR'.
+- CR's API remains wrapped in extern "C". Previously extern "C" functions and variables that are not part of CR's API were moved to "R" namespace.
+- New functions and variables should be placed in "CXXR" namespace.
 - **Scripts in `bin/`** use environment variables like `R_HOME`, `R_SHARE_DIR`, and `R_INCLUDE_DIR` for portability.
 - **Arguments to scripts** are often passed as `nextArg<value>` for later parsing in R code.
 - **Platform-specific logic** is handled in shell scripts and Makefiles (see `bin/R`, `Makefile`).

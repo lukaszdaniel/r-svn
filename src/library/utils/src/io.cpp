@@ -46,7 +46,7 @@
 #include <Rconnections.h>
 #include <Print.h>
 #include "localization.h"
-
+#include "RBufferUtils.h"
 #include <rlocale.h> /* for btowc */
 
 using namespace R;
@@ -297,9 +297,6 @@ static int scanchar(bool inQuote, LocalData *d)
     }
     return next;
 }
-
-
-#include "RBufferUtils.h"
 
 
 SEXP countfields(SEXP args)
