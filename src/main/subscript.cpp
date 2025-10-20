@@ -45,11 +45,12 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <R_ext/Itermacros.h>
 
@@ -69,22 +70,20 @@ NORET static void ECALL_OutOfBounds(SEXP x, int subscript,
 {
     if (call == R_NilValue)
 	call = R_CurrentExpression; /* default behaves like error() */
-    SEXP sindex = ScalarReal((double) index);
-    PROTECT(sindex);
-    SEXP cond = R_makeOutOfBoundsError(x, subscript, sindex, call, NULL);
-    PROTECT(cond);
+    GCStackRoot<RealVector> sindex;
+    sindex = RealVector::createScalar((double) index);
+    GCStackRoot<> cond;
+    cond = R_makeOutOfBoundsError(x, subscript, sindex, call, NULL);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(2); /* sindex, cond; not reached */
 }
 
 NORET static void ECALL_MissingSubs(SEXP call) // no x
 {
     if (call == R_NilValue)
 	call = R_CurrentExpression;
-    SEXP cond = R_makeMissingSubscriptError1(call);
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeMissingSubscriptError1(call);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 NORET static void ECALL_OutOfBoundsCHAR(SEXP x, int subscript,
@@ -94,10 +93,10 @@ NORET static void ECALL_OutOfBoundsCHAR(SEXP x, int subscript,
 	call = R_CurrentExpression; /* default behaves like error() */
     sindex = ScalarString(sindex);
     PROTECT(sindex);
-    SEXP cond = R_makeOutOfBoundsError(x, subscript, sindex, call, NULL);
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeOutOfBoundsError(x, subscript, sindex, call, NULL);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(2); /* sindex, cond; not reached */
+    UNPROTECT(1); /* sindex; not reached */
 }
 
 /* This allows for the unusual case where x is of length 2,

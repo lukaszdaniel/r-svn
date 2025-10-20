@@ -23,12 +23,16 @@
 # include <config.h>
 #endif
 
+#include <cfloat>  /* for DBL_MAX */
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>   // Rexp10 et al
-#include <cfloat>  /* for DBL_MAX */
 #include <Graphics.h>
 #include <Print.h>
 #include <Rmath.h>  // fmin2, fmax2, imax2
@@ -106,9 +110,9 @@ static SEXP FixupPch(SEXP pch, int dflt)
     SEXP ans = R_NilValue;/* -Wall*/
 
     n = length(pch);
-    if (n == 0) return ans = ScalarInteger(dflt);
+    if (n == 0) return ans = IntVector::createScalar(dflt);
 
-    PROTECT(ans = allocVector(INTSXP, n));
+    PROTECT(ans = IntVector::create(n));
     if (isList(pch)) {
 	for (i = 0; pch != R_NilValue;	pch = CDR(pch))
 	    INTEGER(ans)[i++] = asInteger(CAR(pch));
@@ -140,15 +144,14 @@ static SEXP FixupPch(SEXP pch, int dflt)
 
 SEXP Rf_FixupLty(SEXP lty, int dflt)
 {
-    int i, n;
-    SEXP ans;
-    n = length(lty);
+    IntVector *ans;
+    int n = length(lty);
     if (n == 0) {
-	ans = ScalarInteger(dflt);
+	ans = IntVector::createScalar(dflt);
     }
     else {
-	ans = allocVector(INTSXP, n);
-	for (i = 0; i < n; i++)
+	ans = IntVector::create(n);
+	for (int i = 0; i < n; i++)
 	    INTEGER(ans)[i] = GE_LTYpar(lty, i);
     }
     return ans;
@@ -158,15 +161,15 @@ SEXP Rf_FixupLwd(SEXP lwd, double dflt)
 {
     int i, n;
     double w;
-    SEXP ans = NULL;
+    RealVector *ans = NULL;
 
     n = length(lwd);
     if (n == 0)
-	ans = ScalarReal(dflt);
+	ans = RealVector::createScalar(dflt);
     else {
 	PROTECT(lwd = coerceVector(lwd, REALSXP));
 	n = length(lwd);
-	ans = allocVector(REALSXP, n);
+	ans = RealVector::create(n);
 	for (i = 0; i < n; i++) {
 	    w = REAL(lwd)[i];
 	    if (w < 0) w = NA_REAL;
@@ -180,14 +183,14 @@ SEXP Rf_FixupLwd(SEXP lwd, double dflt)
 
 static SEXP FixupFont(SEXP font, int dflt)
 {
-    int i, k, n;
-    SEXP ans = R_NilValue;/* -Wall*/
-    n = length(font);
+    int i, k;
+    IntVector *ans = R_NilValue;/* -Wall*/
+    int n = length(font);
     if (n == 0) {
-	ans = ScalarInteger(dflt);
+	ans = IntVector::createScalar(dflt);
     }
     else if (isLogical(font)) {
-	ans = allocVector(INTSXP, n);
+	ans = IntVector::create(n);
 	for (i = 0; i < n; i++) {
 	    k = LOGICAL(font)[i];
 #ifndef Win32
@@ -199,7 +202,7 @@ static SEXP FixupFont(SEXP font, int dflt)
 	}
     }
     else if (isInteger(font)) {
-	ans = allocVector(INTSXP, n);
+	ans = IntVector::create(n);
 	for (i = 0; i < n; i++) {
 	    k = INTEGER(font)[i];
 #ifndef Win32
@@ -211,7 +214,7 @@ static SEXP FixupFont(SEXP font, int dflt)
 	}
     }
     else if (isReal(font)) {
-	ans = allocVector(INTSXP, n);
+	ans = IntVector::create(n);
 	for (i = 0; i < n; i++) {
 	    k = (int) REAL(font)[i];
 #ifndef Win32
@@ -234,9 +237,9 @@ SEXP Rf_FixupCol(SEXP col, unsigned int dflt)
 
     n = length(col);
     if (n == 0) {
-	PROTECT(ans = ScalarInteger(dflt));
+	PROTECT(ans = IntVector::createScalar(dflt));
     } else {
-	ans = PROTECT(allocVector(INTSXP, n));
+	ans = PROTECT(IntVector::create(n));
 	if (isList(col))
 	    for (i = 0; i < n; i++) {
 		INTEGER(ans)[i] = RGBpar3(CAR(col), 0, bg);
@@ -256,7 +259,7 @@ static SEXP FixupCex(SEXP cex, double dflt)
     int i, n;
     n = length(cex);
     if (n == 0) {
-	ans = allocVector(REALSXP, 1);
+	ans = RealVector::createScalar(1);
 	if (R_FINITE(dflt) && dflt > 0)
 	    REAL(ans)[0] = dflt;
 	else
@@ -264,7 +267,7 @@ static SEXP FixupCex(SEXP cex, double dflt)
     }
     else {
 	double c;
-	ans = allocVector(REALSXP, n);
+	ans = RealVector::create(n);
 	if (isReal(cex))
 	    for (i = 0; i < n; i++) {
 		c = REAL(cex)[i];
@@ -324,7 +327,7 @@ SEXP Rf_FixupVFont(SEXP vfont) {
 	if (fontindex < minindex || fontindex > maxindex)
 	    error(_("invalid 'vfont' value [typeface = %d, fontindex = %d]"),
 		  typeface, fontindex);
-	ans = allocVector(INTSXP, 2);
+	ans = IntVector::create(2);
 	for (i = 0; i < 2; i++) INTEGER(ans)[i] = INTEGER(vf)[i];
 	UNPROTECT(1);
     }
@@ -654,7 +657,7 @@ SEXP Rf_labelformat(SEXP labels)
 			  (but really uses single precision..) */
     switch(TYPEOF(labels)) {
     case LGLSXP:
-	PROTECT(ans = allocVector(STRSXP, n));
+	PROTECT(ans = StringVector::create(n));
 	for (i = 0; i < n; i++) {
 	    strp = EncodeLogical(LOGICAL(labels)[i], 0);
 	    SET_STRING_ELT(ans, i, mkChar(strp));
@@ -662,7 +665,7 @@ SEXP Rf_labelformat(SEXP labels)
 	UNPROTECT(1);
 	break;
     case INTSXP:
-	PROTECT(ans = allocVector(STRSXP, n));
+	PROTECT(ans = StringVector::create(n));
 	for (i = 0; i < n; i++) {
 	    strp = EncodeInteger(INTEGER(labels)[i], 0);
 	    SET_STRING_ELT(ans, i, mkChar(strp));
@@ -671,7 +674,7 @@ SEXP Rf_labelformat(SEXP labels)
 	break;
     case REALSXP:
 	formatReal(REAL(labels), n, &w, &d, &e, 0);
-	PROTECT(ans = allocVector(STRSXP, n));
+	PROTECT(ans = StringVector::create(n));
 	for (i = 0; i < n; i++) {
 	    strp = EncodeReal0(REAL(labels)[i], 0, d, e, OutDec);
 	    SET_STRING_ELT(ans, i, mkChar(strp));
@@ -680,7 +683,7 @@ SEXP Rf_labelformat(SEXP labels)
 	break;
     case CPLXSXP:
 	formatComplex(COMPLEX(labels), n, &w, &d, &e, &wi, &di, &ei, 0);
-	PROTECT(ans = allocVector(STRSXP, n));
+	PROTECT(ans = StringVector::create(n));
 	for (i = 0; i < n; i++) {
 	    strp = EncodeComplex(COMPLEX(labels)[i], 0, d, e, 0, di, ei,
 				 OutDec);
@@ -689,7 +692,7 @@ SEXP Rf_labelformat(SEXP labels)
 	UNPROTECT(1);
 	break;
     case STRSXP:
-	PROTECT(ans = allocVector(STRSXP, n));
+	PROTECT(ans = StringVector::create(n));
 	for (i = 0; i < n; i++) {
 	    SET_STRING_ELT(ans, i, STRING_ELT(labels, i));
 	}
@@ -3082,9 +3085,9 @@ SEXP C_locator(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else
 	    error("%s", _("invalid plot type"));
 	type = CHAR(STRING_ELT(stype, 0))[0];
-	PROTECT(x = allocVector(REALSXP, n));
-	PROTECT(y = allocVector(REALSXP, n));
-	PROTECT(nobs=allocVector(INTSXP,1));
+	PROTECT(x = RealVector::create(n));
+	PROTECT(y = RealVector::create(n));
+	PROTECT(nobs=IntVector::createScalar(1));
 
 	GMode(2, dd);
 	for (i = 0; i < n; i++) {
@@ -3241,9 +3244,9 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 	 */
 	gpptr(dd)->cex = gpptr(dd)->cexbase;
 	offset = GConvertXUnits(asReal(Offset), CHARS, INCHES, dd);
-	PROTECT(ind = allocVector(LGLSXP, n));
-	PROTECT(pos = allocVector(INTSXP, n));
-        PROTECT(order = allocVector(INTSXP, n));
+	PROTECT(ind = LogicalVector::create(n));
+	PROTECT(pos = IntVector::create(n));
+        PROTECT(order = IntVector::create(n));
 	for (i = 0; i < n; i++) {
              LOGICAL(ind)[i] = 0;
              INTEGER(order)[i] = 0;
@@ -3396,7 +3399,7 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
     }                                                                   \
 									\
     n = LENGTH(str);							\
-    PROTECT(ans = allocVector(REALSXP, n));				\
+    PROTECT(ans = RealVector::create(n));				\
     cexsave = gpptr(dd)->cex;						\
     gpptr(dd)->cex = cex * gpptr(dd)->cexbase;				\
     for (i = 0; i < n; i++)						\
@@ -4073,15 +4076,15 @@ SEXP C_xspline(SEXP args)
 	SEXP nm, tmpx, tmpy;
 	double *xx, *yy, *x0, *y0;
 	PROTECT(ans = res);
-	PROTECT(nm = allocVector(STRSXP, 2));
+	PROTECT(nm = StringVector::create(2));
 	SET_STRING_ELT(nm, 0, mkChar("x"));
 	SET_STRING_ELT(nm, 1, mkChar("y"));
 	setAttrib(ans, R_NamesSymbol, nm);
 	nx = LENGTH(VECTOR_ELT(ans, 0));
 	x0 = REAL(VECTOR_ELT(ans, 0));
 	y0 = REAL(VECTOR_ELT(ans, 1));
-	PROTECT(tmpx = allocVector(REALSXP, nx));
-	PROTECT(tmpy = allocVector(REALSXP, nx));
+	PROTECT(tmpx = RealVector::create(nx));
+	PROTECT(tmpy = RealVector::create(nx));
 	xx = REAL(tmpx);
 	yy = REAL(tmpy);
 	for (int i = 0; i < nx; i++) {

@@ -28,6 +28,7 @@
 #include <config.h>
 #endif
 
+#include <cstdio>
 #include <memory>
 #include <R_ext/Minmax.h>
 #include <CXXR/RContext.hpp>
@@ -36,12 +37,12 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RObject.hpp> // for UserBreak
 #include <CXXR/String.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
 
 #include <Fileio.h>
-#include <cstdio>
 #include "opt.h"
 #include "graphapp/ga.h"
 #include "graphapp/stdimg.h"
@@ -2083,7 +2084,7 @@ static void GA_Resize(pDevDesc dd)
 	    xd->rescale_factor *= rf;
 	    {
 		SEXP scale;
-		PROTECT(scale = ScalarReal(rf));
+		PROTECT(scale = RealVector::createScalar(rf));
 		GEhandleEvent(GE_ScalePS, dd, scale);
 		UNPROTECT(1);
 	    }

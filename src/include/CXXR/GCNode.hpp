@@ -58,7 +58,7 @@ namespace CXXR
     struct sxpinfo_struct {
         sxpinfo_struct(SEXPTYPE stype = NILSXP): type(stype), scalar(false), obj(false),
             alt(false), gp(0), m_mark(false), debug(false),
-            trace(false), m_refcnt_enabled(true), m_rstep(false), m_gcgen(0),
+            m_memory_traced(false), m_refcnt_enabled(true), m_rstep(false), m_gcgen(0),
             m_ext_allocator(false), m_refcnt(0), m_binding_tag(NILSXP), extra(0)
         {
         }
@@ -72,7 +72,7 @@ namespace CXXR
             gp = 0;
             m_mark = false;
             debug = false;
-            trace = false;
+            m_memory_traced = false;
             m_refcnt_enabled = true;
             m_rstep = false;
             m_gcgen = 0;
@@ -89,7 +89,7 @@ namespace CXXR
         unsigned int gp : GP_BITS;
         unsigned int m_mark : 1;
         unsigned int debug : 1;
-        unsigned int trace : 1;  /* functions and memory tracing */
+        unsigned int m_memory_traced : 1;  /* functions and memory tracing */
         unsigned int m_refcnt_enabled : 1;  /* used on closures and when REFCNT is defined */
         unsigned int m_rstep : 1;
         unsigned int m_gcgen : 2;  /* old generation number */

@@ -27,6 +27,8 @@
 #include <windows.h>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include "graphapp/ga.h"
 #undef ERROR
@@ -40,6 +42,7 @@
 #undef TRUE
 
 using namespace R;
+using namespace CXXR;
 
 typedef struct {
     window wprog;
@@ -158,7 +161,7 @@ SEXP setWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
 		settext(pbar->lab, translateChar(clab));
 	}
     }
-    return ScalarReal(value);
+    return RealVector::createScalar(value);
 }
 
 SEXP winDialog(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -185,7 +188,7 @@ SEXP winDialog(SEXP call, SEXP op, SEXP args, SEXP env)
 	res = askyesnocancel(translateChar(STRING_ELT(message, 0)));
     } else
 	errorcall(call, "%s", _("unknown type"));
-    return ScalarInteger(res);
+    return IntVector::createScalar(res);
 }
 
 SEXP winDialogString(SEXP call, SEXP op, SEXP args, SEXP env)

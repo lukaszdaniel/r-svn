@@ -101,6 +101,8 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -1435,10 +1437,10 @@ static SEXP GetOneIndex(SEXP sub, int ind)
     if (length(sub) > 1) {
 	switch (TYPEOF(sub)) {
 	case INTSXP:
-	    sub = ScalarInteger(INTEGER_ELT(sub, ind));
+	    sub = IntVector::createScalar(INTEGER_ELT(sub, ind));
 	    break;
 	case REALSXP:
-	    sub = ScalarReal(REAL_ELT(sub, ind));
+	    sub = RealVector::createScalar(REAL_ELT(sub, ind));
 	    break;
 	case STRSXP:
 	    sub = ScalarString(STRING_ELT(sub, ind));

@@ -359,7 +359,7 @@ namespace CXXR
          */
         bool memoryTraced() const
         {
-            return sxpinfo.trace; // m_memory_traced;
+            return sxpinfo.m_memory_traced;
         }
 
         /** @brief Enable/disable tracing of copying etc.
@@ -378,7 +378,7 @@ namespace CXXR
          */
         void setMemoryTracing(bool on)
         {
-            sxpinfo.trace = on; // m_memory_traced
+            sxpinfo.m_memory_traced = on;
         }
 
         /** @brief Carry out memory tracing.

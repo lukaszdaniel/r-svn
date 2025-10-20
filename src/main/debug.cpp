@@ -148,7 +148,7 @@ attribute_hidden SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     check1arg(args, call, "x");
 
     object = CAR(args);
-    if (Rf_isFunction(object))
+    if (FunctionBase::isA(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
     if (object == R_NilValue)
@@ -161,7 +161,7 @@ attribute_hidden SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, "%s",
 		  _("'tracemem' is not useful for weak reference or external pointer objects"));
 
-    SET_RTRACE(object, 1);
+    object->setMemoryTracing(true);
     snprintf(buffer, 21, "<%p>", (void *) object);
     return mkString(buffer);
 }
@@ -174,11 +174,11 @@ attribute_hidden SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     check1arg(args, call, "x");
 
     object=CAR(args);
-    if (Rf_isFunction(object))
+    if (FunctionBase::isA(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
-    if (RTRACE(object))
-	SET_RTRACE(object, 0);
+    if (object && object->memoryTraced())
+	object->setMemoryTracing(false);
     return R_NilValue;
 }
 
@@ -281,7 +281,7 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isNull(previous) && (!isString(previous) || LENGTH(previous) != 1))
 	    errorcall(call, _("invalid '%s' argument"), "previous");
 
-    if (RTRACE(object)) {
+    if (object && object->memoryTraced()) {
 	snprintf(buffer, 21, "<%p>", (void *) object);
 	visible = TRUE;
 	ans = mkString(buffer);
@@ -291,7 +291,7 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 
     if (previous != R_NilValue){
-	SET_RTRACE(object, 1);
+	object->setMemoryTracing(true);
 	if (R_current_trace_state()) {
 	    /* FIXME: previous will have <0x....> whereas other values are
 	       without the < > */
