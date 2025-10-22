@@ -34,10 +34,12 @@
 #endif
 
 #include <cfloat> /* for DBL_MAX */
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h> /* => Utils.h with the protos from here; Rinternals.h */
 #include <Internal.h>
 #include <Rmath.h>
@@ -385,10 +387,12 @@ void R_csort(Rcomplex *x, int n)
 }
 
 /* used in platform.c */
-attribute_hidden void R::ssort(SEXP *x, int n)
+attribute_hidden void R::ssort(StringVector *sv_, int n)
 {
-    SEXP v;
-    sort_body(scmp,PROTECT,UNPROTECT(1))
+    GCStackRoot<StringVector> sv(sv_);
+    StringVector &x(*sv);
+    String *v;
+    sort_body(scmp,,)
 }
 
 void rsort_with_index(double *x, int *indx, int n)
@@ -655,9 +659,10 @@ static void R_csort2(Rcomplex *x, R_xlen_t n, bool decreasing)
 	}
 }
 
-static void ssort2(SEXP *x, R_xlen_t n, bool decreasing)
+static void ssort2(StringVector *sv, R_xlen_t n, bool decreasing)
 {
-    SEXP v;
+    StringVector &x(*sv);
+    String *v;
     R_xlen_t i, j, h, t;
 
     if (n < 2) error("%s", _("'n >= 2' is required"));
@@ -698,7 +703,10 @@ void R::sortVector(SEXP s, bool decreasing)
 	    R_csort2(COMPLEX(s), n, decreasing);
 	    break;
 	case STRSXP:
-	    ssort2(STRING_PTR(s), n, decreasing);
+	    {
+		StringVector *sv = SEXP_downcast<StringVector *>(s);
+		ssort2(sv, n, decreasing);
+	    }
 	    break;
 	default:
 	    UNIMPLEMENTED_TYPE("sortVector", s);
@@ -756,9 +764,10 @@ static void cPsort2(Rcomplex *x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 }
 
 
-static void sPsort2(SEXP *x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
+static void sPsort2(StringVector *sv, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 {
-    SEXP v, w;
+    StringVector &x(*sv);
+    String *v, *w;
 #define TYPE_CMP scmp
     psort_body
 #undef TYPE_CMP
@@ -799,7 +808,10 @@ static void Psort(SEXP x, R_xlen_t lo, R_xlen_t hi, R_xlen_t k)
 	cPsort2(COMPLEX(x), lo, hi, k);
 	break;
     case STRSXP:
-	sPsort2(STRING_PTR(x), lo, hi, k);
+	{
+	    StringVector *sv = SEXP_downcast<StringVector *>(x);
+	    sPsort2(sv, lo, hi, k);
+	}
 	break;
     default:
 	UNIMPLEMENTED_TYPE("Psort", x);
@@ -1210,7 +1222,7 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
     int *ix = NULL /* -Wall */;
     double *x = NULL /* -Wall */;
     Rcomplex *cx = NULL /* -Wall */;
-    SEXP *sx = NULL /* -Wall */;
+    StringVector *sv = NULL /* -Wall */;
 
     if (n < 2) return;
     switch (TYPEOF(key)) {
@@ -1224,7 +1236,7 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
 	x = REAL(key);
 	break;
     case STRSXP:
-	sx = STRING_PTR(key);
+	sv = SEXP_downcast<StringVector *>(key);
 	break;
     case CPLXSXP:
 	cx = COMPLEX(key);
@@ -1247,7 +1259,7 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(x[i]);
 	    break;
 	case STRSXP:
-	    for (i = 0; i < n; i++) isna[i] = (sx[i] == NA_STRING);
+	    for (i = 0; i < n; i++) isna[i] = ((*sv)[i] == NA_STRING);
 	    break;
 	case CPLXSXP:
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(cx[i].r) || ISNAN(cx[i].i);
@@ -1326,11 +1338,11 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
 	    break;
 	case STRSXP:
 	    if (decreasing)
-#define less(a, b) (c = Scollate(sx[a], sx[b]), c < 0 || (c == 0 && a > b))
+#define less(a, b) (c = Scollate((*sv)[a], (*sv)[b]), c < 0 || (c == 0 && a > b))
 		sort2_with_index
 #undef less
 	    else
-#define less(a, b) (c = Scollate(sx[a], sx[b]), c > 0 || (c == 0 && a > b))
+#define less(a, b) (c = Scollate((*sv)[a], (*sv)[b]), c > 0 || (c == 0 && a > b))
 		sort2_with_index
 #undef less
 	    break;
@@ -1354,7 +1366,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
     int *ix = NULL /* -Wall */;
     double *x = NULL /* -Wall */;
     Rcomplex *cx = NULL /* -Wall */;
-    SEXP *sx = NULL /* -Wall */;
+    StringVector *sv = NULL /* -Wall */;
     R_xlen_t itmp;
 
     if (n < 2) return;
@@ -1369,7 +1381,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 	x = REAL(key);
 	break;
     case STRSXP:
-	sx = STRING_PTR(key);
+	sv = SEXP_downcast<StringVector *>(key);
 	break;
     case CPLXSXP:
 	cx = COMPLEX(key);
@@ -1392,7 +1404,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(x[i]);
 	    break;
 	case STRSXP:
-	    for (i = 0; i < n; i++) isna[i] = (sx[i] == NA_STRING);
+	    for (i = 0; i < n; i++) isna[i] = ((*sv)[i] == NA_STRING);
 	    break;
 	case CPLXSXP:
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(cx[i].r) || ISNAN(cx[i].i);
@@ -1471,11 +1483,11 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 	    break;
 	case STRSXP:
 	    if (decreasing)
-#define less(a, b) (c=Scollate(sx[a], sx[b]), c < 0 || (c == 0 && a > b))
+#define less(a, b) (c=Scollate((*sv)[a], (*sv)[b]), c < 0 || (c == 0 && a > b))
 		sort2_with_index
 #undef less
 	    else
-#define less(a, b) (c=Scollate(sx[a], sx[b]), c > 0 || (c == 0 && a > b))
+#define less(a, b) (c=Scollate((*sv)[a], (*sv)[b]), c > 0 || (c == 0 && a > b))
 		sort2_with_index
 #undef less
 	    break;

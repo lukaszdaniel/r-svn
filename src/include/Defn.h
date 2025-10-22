@@ -1847,7 +1847,7 @@ bool R_missing(SEXP symbol, SEXP rho);
 const char *sexptype2char(SEXPTYPE type);
 void sortVector(SEXP, bool);
 void SrcrefPrompt(const char *, SEXP);
-void ssort(SEXP*,int);
+// void ssort(SEXP*,int);
 int StrToInternal(const char *);
 SEXP strmat2intmat(SEXP, SEXP, SEXP, SEXP);
 SEXP substituteList(SEXP, SEXP);

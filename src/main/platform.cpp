@@ -70,6 +70,7 @@ const char *formatError(DWORD res);  /* extra.c */
 #include <cstdlib>			/* for realpath */
 #include <ctime>			/* for ctime */
 #include <cerrno>
+#include <Localization.h>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
@@ -77,7 +78,8 @@ const char *formatError(DWORD res);  /* extra.c */
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RObject.hpp> // for GlobalParameter
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -1627,7 +1629,8 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
     search_cleanup(&pb);
     REPROTECT(ans = lengthgets(ans, count), idx);
     if (pattern) tre_regfree(&reg);
-    ssort(STRING_PTR(ans), count);
+    StringVector *sv = SEXP_downcast<StringVector *>(ans);
+    ssort(sv, count);
     UNPROTECT(1);
     return ans;
 }
@@ -1718,7 +1721,8 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     search_cleanup(&pb);
     REPROTECT(ans = lengthgets(ans, count), idx);
-    ssort(STRING_PTR(ans), count);
+    StringVector *sv = SEXP_downcast<StringVector *>(ans);
+    ssort(sv, count);
     UNPROTECT(1);
     return ans;
 }

@@ -295,7 +295,7 @@ attribute_hidden void R::onsigusr2(int dummy)
 
 static void setupwarnings(void)
 {
-    R_Warnings = allocVector(VECSXP, R_nwarnings);
+    R_Warnings = ListVector::create(R_nwarnings);
     setAttrib(R_Warnings, R_NamesSymbol, allocVector(STRSXP, R_nwarnings));
 }
 
@@ -2039,7 +2039,7 @@ attribute_hidden SEXP do_getRestart(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/**** need to pre-allocate */
 	GCStackRoot<> name, entry;
 	name = mkString("abort");
-	entry = allocVector(VECSXP, 2);
+	entry = ListVector::create(2);
 	SET_VECTOR_ELT(entry, 0, name);
 	SET_VECTOR_ELT(entry, 1, R_NilValue);
 	setAttrib(entry, R_ClassSymbol, mkString("restart"));

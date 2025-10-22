@@ -49,6 +49,7 @@ namespace CXXR
 
 namespace R
 {
+    void ssort(CXXR::StringVector *sv, int n);
 } // namespace R
 
 extern "C"

@@ -211,29 +211,27 @@ attribute_hidden SEXP R::ExtractSubset(SEXP x, SEXP indx, SEXP call)
 
 /* This is for all cases with a single index, including 1D arrays and
    matrix indexing of arrays */
-static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
+static SEXP VectorSubset(SEXP x, SEXP s_, SEXP call)
 {
     if (x == R_NilValue)
 	    return R_NilValue;
+    GCStackRoot<> s(s_);
+
     if (s == R_MissingArg) return duplicate(x);
 
     /* Check to see if we have special matrix subscripting. */
     /* If we do, make a real subscript vector and protect it. */
 
-    PROTECT(s);
     if (ATTRIB(s) != R_NilValue) { /* pretest to speed up simple case */
 	SEXP dim = getAttrib(x, R_DimSymbol);
 	if (isMatrix(s) && isArray(x) && ncols(s) == length(dim)) {
 	    if (isString(s)) {
-		SEXP dnames = PROTECT(GetArrayDimnames(x));
+		GCStackRoot<> dnames;
+		dnames = GetArrayDimnames(x);
  		s = strmat2intmat(s, dnames, call, x);
-		UNPROTECT(2); /* dnames, s */
-		PROTECT(s);
 	    }
 	    if (isInteger(s) || isReal(s)) {
 		s = mat2indsub(dim, s, call, x);
-		UNPROTECT(1);
-		PROTECT(s);
 	    }
 	}
     }
@@ -257,12 +255,13 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
     /* Convert to a vector of integer subscripts */
     /* in the range 1:length(x). */
     R_xlen_t stretch = 1;
-    SEXP indx = PROTECT(makeSubscript(x, s, &stretch, call));
+    GCStackRoot<> indx;
+    indx = makeSubscript(x, s, &stretch, call);
 
     /* Allocate the result. */
 
-
-    SEXP result = PROTECT(ExtractSubset(x, indx, call));
+    GCStackRoot<> result;
+    result = ExtractSubset(x, indx, call);
     if (mode == VECSXP || mode == EXPRSXP)
 	/* we do not duplicate the values when extracting the subset,
 	   so to be conservative mark the result as NAMED = NAMEDMAX */
@@ -270,7 +269,7 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 
     // Fix attributes:
     if (result != R_NilValue) {
-	SEXP attrib, nattrib;
+	GCStackRoot<>  attrib, nattrib;
 	if (
 	    ((attrib = getAttrib(x, R_NamesSymbol)) != R_NilValue) ||
 	    ( /* here we might have an array.  Use row names if 1D */
@@ -279,16 +278,13 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 		(attrib = GetRowNames(attrib)) != R_NilValue
 		)
 	    ) {
-	    PROTECT(attrib);
-	    PROTECT(nattrib = ExtractSubset(attrib, indx, call));
+	    nattrib = ExtractSubset(attrib, indx, call);
 	    setAttrib(result, R_NamesSymbol, nattrib);
-	    UNPROTECT(2); /* attrib, nattrib */
 	}
 	if ((attrib = getAttrib(x, R_SrcrefSymbol)) != R_NilValue &&
 	    TYPEOF(attrib) == VECSXP) {
-	    PROTECT(nattrib = ExtractSubset(attrib, indx, call));
+	    nattrib = ExtractSubset(attrib, indx, call);
 	    setAttrib(result, R_SrcrefSymbol, nattrib);
-	    UNPROTECT(1);
 	}
 	/* FIXME:  this is wrong, because the slots are gone, so result is an invalid object of the S4 class! JMC 3/3/09 */
 #ifdef _S4_subsettable
@@ -298,7 +294,6 @@ static SEXP VectorSubset(SEXP x, SEXP s, SEXP call)
 	}
 #endif
     }
-    UNPROTECT(3);
     return result;
 }
 
