@@ -1204,38 +1204,23 @@ static void SymbolShortcuts(void)
     R_dot_packageName = install(".packageName");
 }
 
-
-#define N_DDVAL_SYMBOLS 65
-
-static Symbol *DDVALSymbols[N_DDVAL_SYMBOLS];
-
-static Symbol *createDDVALSymbol(int n) {
-    char buf[15];
-    snprintf(buf, 15, "..%d", n);
-    return Symbol::obtain(buf);
-}
-
-static void initializeDDVALSymbols(void) {
-    for (int i = 0; i < N_DDVAL_SYMBOLS; i++) {
-	DDVALSymbols[i] = createDDVALSymbol(i);
+static void initializeDDVALSymbols(void)
+{
+    constexpr int N_DDVAL_SYMBOLS = 65;
+    for (int i = 0; i < N_DDVAL_SYMBOLS; i++)
+    {
+        Symbol::obtainDotDotSymbol(i);
     }
 }
 
-attribute_hidden SEXP R::installDDVAL(int n) {
-    if (n < N_DDVAL_SYMBOLS)
-	return DDVALSymbols[n];
-
-    return createDDVALSymbol(n);
-}
-
-
-static SEXP mkSymMarker(SEXP pname)
+attribute_hidden SEXP R::installDDVAL(int n)
 {
-    SEXP ans = Symbol::create(pname, R_NilValue, R_NilValue);
-    SET_SYMVALUE(ans, ans);
 
-    return ans;
+    return Symbol::obtainDotDotSymbol(n);
 }
+
+
+#define mkSymMarker(pname) Symbol::create(pname, R_NilValue, R_NilValue)
 
 /* initialize the symbol table */
 attribute_hidden void R::InitNames(void)

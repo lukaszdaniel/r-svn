@@ -35,6 +35,7 @@
 #endif
 
 #include <memory>
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -43,7 +44,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
-#include <Localization.h>
+#include <CXXR/Symbol.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Altrep.h>
@@ -1892,7 +1893,7 @@ static SEXP subDots(SEXP rho)
 	while (Promise::isA(t))
 	    t = PREXPR(t);
 	if( isSymbol(t) || isLanguage(t) )
-	    SETCAR(b, installDDVAL(i));
+	    SETCAR(b, Symbol::obtainDotDotSymbol(i));
 	else
 	    SETCAR(b, t);
     }
