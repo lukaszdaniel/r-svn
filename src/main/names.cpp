@@ -1220,7 +1220,13 @@ attribute_hidden SEXP R::installDDVAL(int n)
 }
 
 
-#define mkSymMarker(pname) Symbol::create(pname, R_NilValue, R_NilValue)
+static SEXP mkSymMarker(SEXP pname)
+{
+    SEXP ans = Symbol::create(pname, R_NilValue, R_NilValue);
+    SET_SYMVALUE(ans, ans);
+
+    return ans;
+}
 
 /* initialize the symbol table */
 attribute_hidden void R::InitNames(void)
