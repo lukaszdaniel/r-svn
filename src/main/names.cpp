@@ -35,6 +35,7 @@
 
 #include <vector>
 #include <string>
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
@@ -42,7 +43,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -1206,12 +1207,12 @@ static void SymbolShortcuts(void)
 
 #define N_DDVAL_SYMBOLS 65
 
-static SEXP DDVALSymbols[N_DDVAL_SYMBOLS];
+static Symbol *DDVALSymbols[N_DDVAL_SYMBOLS];
 
-static SEXP createDDVALSymbol(int n) {
+static Symbol *createDDVALSymbol(int n) {
     char buf[15];
     snprintf(buf, 15, "..%d", n);
-    return install(buf);
+    return Symbol::obtain(buf);
 }
 
 static void initializeDDVALSymbols(void) {
@@ -1230,12 +1231,9 @@ attribute_hidden SEXP R::installDDVAL(int n) {
 
 static SEXP mkSymMarker(SEXP pname)
 {
-    PROTECT(pname);
-    SEXP ans = allocSExp(SYMSXP);
+    SEXP ans = Symbol::create(pname, R_NilValue, R_NilValue);
     SET_SYMVALUE(ans, ans);
-    SET_ATTRIB(ans, R_NilValue);
-    SET_PRINTNAME(ans, pname);
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -1247,13 +1245,13 @@ attribute_hidden void R::InitNames(void)
 
     /* Create marker values */
     R_UnboundValue = mkSymMarker(R_NilValue);
-    R_MissingArg = mkSymMarker(mkChar(""));
-    R_InBCInterpreter = mkSymMarker(mkChar("<in-bc-interp>"));
-    R_RestartToken = mkSymMarker(mkChar(""));
-    R_CurrentExpression = mkSymMarker(mkChar("<current-expression>"));
+    R_MissingArg = mkSymMarker(String::obtain(""));
+    R_InBCInterpreter = mkSymMarker(String::obtain("<in-bc-interp>"));
+    R_RestartToken = mkSymMarker(String::obtain(""));
+    R_CurrentExpression = mkSymMarker(String::obtain("<current-expression>"));
 
     R_print.na_string = NA_STRING;
-    R_BlankScalarString = ScalarString(R_BlankString);
+    R_BlankScalarString = StringVector::createScalar(String::blank());
     MARK_NOT_MUTABLE(R_BlankScalarString);
 
     /* Set up a set of globals so that a symbol table search can be

@@ -73,12 +73,17 @@ const char *formatError(DWORD res);  /* extra.c */
 #include <Localization.h>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/RObject.hpp> // for GlobalParameter
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -116,10 +121,11 @@ static const char *const R_FileSep = FILESEP;
 
 static void Init_R_Platform(SEXP rho)
 {
-    SEXP value, names;
+    GCStackRoot<ListVector> value;
+    GCStackRoot<StringVector> names;
 
-    PROTECT(value = allocVector(VECSXP, 8));
-    PROTECT(names = allocVector(STRSXP, 8));
+    value = ListVector::create(8);
+    names = StringVector::create(8);
     SET_STRING_ELT(names, 0, mkChar("OS.type"));
     SET_STRING_ELT(names, 1, mkChar("file.sep"));
     SET_STRING_ELT(names, 2, mkChar("dynlib.ext"));
@@ -157,7 +163,6 @@ static void Init_R_Platform(SEXP rho)
 #endif
     setAttrib(value, R_NamesSymbol, names);
     defineVar(install(".Platform"), value, rho);
-    UNPROTECT(2);
 }
 
 void Init_R_Machine(SEXP rho); // from machine.c
@@ -449,7 +454,8 @@ static int R_AppendFile(SEXP file1, SEXP file2)
 
 attribute_hidden SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP f1, f2, ans;
+    GCStackRoot<LogicalVector> ans;
+    SEXP f1, f2;
     int n, n1, n2;
 
     checkArity(op, args);
@@ -463,9 +469,9 @@ attribute_hidden SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (n1 < 1)
 	error("%s", _("nothing to append to"));
     if (n2 < 1)
-	return allocVector(LGLSXP, 0);
+	return LogicalVector::create(0);
     n = (n1 > n2) ? n1 : n2;
-    PROTECT(ans = allocVector(LGLSXP, n));
+    ans = LogicalVector::create(n);
     for (int i = 0; i < n; i++) LOGICAL(ans)[i] = 0;  /* all FALSE */
     if (n1 == 1) { /* common case */
 	FILE *fp1, *fp2;
@@ -473,7 +479,7 @@ attribute_hidden SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
 	size_t nchar;
 	if (STRING_ELT(f1, 0) == NA_STRING ||
 	    !(fp1 = RC_fopen_notdir(STRING_ELT(f1, 0), "ab", TRUE)))
-	   goto done;
+	   return ans;
 	for (int i = 0; i < n; i++) {
 	    status = 0;
 	    if (STRING_ELT(f2, i) == NA_STRING ||
@@ -512,25 +518,22 @@ attribute_hidden SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    R_AppendFile(STRING_ELT(f1, i%n1), STRING_ELT(f2, i%n2));
 	}
     }
-done:
-    UNPROTECT(1);
+
     return ans;
 }
 
 attribute_hidden SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP fn, ans;
-    FILE *fp;
-    int i, n;
-
     checkArity(op, args);
-    fn = CAR(args);
+    GCStackRoot<LogicalVector> ans;
+    FILE *fp;
+    SEXP fn = CAR(args);
     if (!isString(fn))
 	error("%s", _("invalid filename argument"));
     bool show = asLogicalNAFalse(CADR(args));
-    n = LENGTH(fn);
-    PROTECT(ans = allocVector(LGLSXP, n));
-    for (i = 0; i < n; i++) {
+    int n = LENGTH(fn);
+    ans = LogicalVector::create(n);
+    for (int i = 0; i < n; i++) {
 	LOGICAL(ans)[i] = 0;
 	if (STRING_ELT(fn, i) == NA_STRING) continue;
 	if ((fp = RC_fopen(STRING_ELT(fn, i), "w", TRUE)) != NULL) {
@@ -542,21 +545,20 @@ attribute_hidden SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    translateChar(STRING_ELT(fn, i)), strerror(errno));
 	}
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
 attribute_hidden SEXP do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP f, ans;
-    int i, n;
     checkArity(op, args);
-    f = CAR(args);
+    GCStackRoot<LogicalVector> ans;
+    SEXP f = CAR(args);
     if (!isString(f))
 	error("%s", _("invalid first filename"));
-    n = LENGTH(f);
-    PROTECT(ans = allocVector(LGLSXP, n));
-    for (i = 0; i < n; i++) {
+    int n = LENGTH(f);
+    ans = LogicalVector::create(n);
+    for (int i = 0; i < n; i++) {
 	if (STRING_ELT(f, i) != NA_STRING) {
 	    LOGICAL(ans)[i] =
 #ifdef Win32
@@ -569,7 +571,7 @@ attribute_hidden SEXP do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
 			translateChar(STRING_ELT(f, i)), strerror(errno));
 	} else LOGICAL(ans)[i] = FALSE;
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -587,7 +589,7 @@ attribute_hidden SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP f1, f2;
     int n, n1, n2;
 #ifdef HAVE_SYMLINK
-    SEXP ans;
+    GCStackRoot<LogicalVector> ans;
 #endif
     checkArity(op, args);
     f1 = CAR(args);
@@ -600,11 +602,11 @@ attribute_hidden SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (n1 < 1)
 	error("%s", _("nothing to link"));
     if (n2 < 1)
-	return allocVector(LGLSXP, 0);
+	return LogicalVector::create(0);
     n = (n1 > n2) ? n1 : n2;
 
 #ifdef HAVE_SYMLINK
-    PROTECT(ans = allocVector(LGLSXP, n));
+    ans = LogicalVector::create(n);
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(f1, i%n1) == NA_STRING ||
 	    STRING_ELT(f2, i%n2) == NA_STRING)
@@ -650,11 +652,11 @@ attribute_hidden SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 	}
     }
-    UNPROTECT(1);
+
     return ans;
 #else
     warning("%s", _("symbolic links are not supported on this platform"));
-    return allocVector(LGLSXP, n);
+    return LogicalVector::create(n);
 #endif
 }
 
@@ -664,7 +666,7 @@ attribute_hidden SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP f1, f2;
     int n, n1, n2;
 #ifdef HAVE_LINK
-    SEXP ans;
+    GCStackRoot<LogicalVector> ans;
 #endif
     checkArity(op, args);
     f1 = CAR(args);
@@ -677,10 +679,10 @@ attribute_hidden SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (n1 < 1)
 	error("%s", _("nothing to link"));
     if (n2 < 1)
-	return allocVector(LGLSXP, 0);
+	return LogicalVector::create(0);
     n = (n1 > n2) ? n1 : n2;
 #ifdef HAVE_LINK
-    PROTECT(ans = allocVector(LGLSXP, n));
+    ans = LogicalVector::create(n);
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(f1, i%n1) == NA_STRING ||
 	    STRING_ELT(f2, i%n2) == NA_STRING)
@@ -722,11 +724,11 @@ attribute_hidden SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 	}
     }
-    UNPROTECT(1);
+
     return ans;
 #else
     warning("%s", _("(hard) links are not supported on this platform"));
-    return allocVector(LGLSXP, n);
+    return LogicalVector::create(n);
 #endif
 }
 
@@ -737,7 +739,8 @@ int Rwin_wrename(const wchar_t *from, const wchar_t *to);
 
 attribute_hidden SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP f1, f2, ans;
+    GCStackRoot<LogicalVector> ans;
+    SEXP f1, f2;
     int i, n1, n2;
     int res;
 #ifdef Win32
@@ -758,7 +761,7 @@ attribute_hidden SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
     n1 = LENGTH(f1); n2 = LENGTH(f2);
    if (n2 != n1)
        error(_("'%s' and '%s' are of different lengths"), "from", "to");
-    PROTECT(ans = allocVector(LGLSXP, n1));
+    ans = LogicalVector::create(n1);
     for (i = 0; i < n1; i++) {
 	if (STRING_ELT(f1, i) == NA_STRING ||
 	    STRING_ELT(f2, i) == NA_STRING) {
@@ -795,7 +798,7 @@ attribute_hidden SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	LOGICAL(ans)[i] = (res == 0);
 #endif
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -828,8 +831,11 @@ attribute_hidden SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP fn, ans, ansnames, fsize, mtime, ctime, atime, isdir,
-	mode, xxclass, uname = R_NilValue;
+    SEXP fn, fsize, mtime, ctime, atime, isdir,
+	mode, uname = R_NilValue;
+    GCStackRoot<> xxclass;
+    GCStackRoot<ListVector> ans;
+    GCStackRoot<StringVector> ansnames;
     CXXR::RAllocStack::Scope rscope;
 #ifdef UNIX_EXTRAS
     SEXP uid = R_NilValue, gid = R_NilValue,
@@ -861,37 +867,37 @@ attribute_hidden SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	ncols = 9;
 #endif
     }
-    PROTECT(ans = allocVector(VECSXP, ncols));
-    PROTECT(ansnames = allocVector(STRSXP, ncols));
-    fsize = SET_VECTOR_ELT(ans, 0, allocVector(REALSXP, n));
+    ans = ListVector::create(ncols);
+    ansnames = StringVector::create(ncols);
+    fsize = SET_VECTOR_ELT(ans, 0, RealVector::create(n));
     SET_STRING_ELT(ansnames, 0, mkChar("size"));
-    isdir = SET_VECTOR_ELT(ans, 1, allocVector(LGLSXP, n));
+    isdir = SET_VECTOR_ELT(ans, 1, LogicalVector::create(n));
     SET_STRING_ELT(ansnames, 1, mkChar("isdir"));
-    mode  = SET_VECTOR_ELT(ans, 2, allocVector(INTSXP, n));
+    mode  = SET_VECTOR_ELT(ans, 2, IntVector::create(n));
     SET_STRING_ELT(ansnames, 2, mkChar("mode"));
-    mtime = SET_VECTOR_ELT(ans, 3, allocVector(REALSXP, n));
+    mtime = SET_VECTOR_ELT(ans, 3, RealVector::create(n));
     SET_STRING_ELT(ansnames, 3, mkChar("mtime"));
-    ctime = SET_VECTOR_ELT(ans, 4, allocVector(REALSXP, n));
+    ctime = SET_VECTOR_ELT(ans, 4, RealVector::create(n));
     SET_STRING_ELT(ansnames, 4, mkChar("ctime"));
-    atime = SET_VECTOR_ELT(ans, 5, allocVector(REALSXP, n));
+    atime = SET_VECTOR_ELT(ans, 5, RealVector::create(n));
     SET_STRING_ELT(ansnames, 5, mkChar("atime"));
     if (extras) {
 #ifdef UNIX_EXTRAS
-	uid = SET_VECTOR_ELT(ans, 6, allocVector(INTSXP, n));
+	uid = SET_VECTOR_ELT(ans, 6, IntVector::create(n));
 	SET_STRING_ELT(ansnames, 6, mkChar("uid"));
-	gid = SET_VECTOR_ELT(ans, 7, allocVector(INTSXP, n));
+	gid = SET_VECTOR_ELT(ans, 7, IntVector::create(n));
 	SET_STRING_ELT(ansnames, 7, mkChar("gid"));
-	uname = SET_VECTOR_ELT(ans, 8, allocVector(STRSXP, n));
+	uname = SET_VECTOR_ELT(ans, 8, StringVector::create(n));
 	SET_STRING_ELT(ansnames, 8, mkChar("uname"));
-	grname = SET_VECTOR_ELT(ans, 9, allocVector(STRSXP, n));
+	grname = SET_VECTOR_ELT(ans, 9, StringVector::create(n));
 	SET_STRING_ELT(ansnames, 9, mkChar("grname"));
 #endif
 #ifdef Win32
-	exe = SET_VECTOR_ELT(ans, 6, allocVector(STRSXP, n));
+	exe = SET_VECTOR_ELT(ans, 6, StringVector::create(n));
 	SET_STRING_ELT(ansnames, 6, mkChar("exe"));
-	uname = SET_VECTOR_ELT(ans, 7, allocVector(STRSXP, n));
+	uname = SET_VECTOR_ELT(ans, 7, StringVector::create(n));
 	SET_STRING_ELT(ansnames, 7, mkChar("uname"));
-	udomain = SET_VECTOR_ELT(ans, 8, allocVector(STRSXP, n));
+	udomain = SET_VECTOR_ELT(ans, 8, StringVector::create(n));
 	SET_STRING_ELT(ansnames, 8, mkChar("udomain"));
 #endif
     }
@@ -1109,16 +1115,14 @@ attribute_hidden SEXP do_fileinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     setAttrib(ans, R_NamesSymbol, ansnames);
-    PROTECT(xxclass = mkString("octmode"));
+    xxclass = Rf_mkString("octmode");
     classgets(mode, xxclass);
-    UNPROTECT(3);
+
     return ans;
 }
 
 attribute_hidden SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP fn, ans;
-
 #ifdef Win32
     struct _stati64 sb;
 #else
@@ -1126,11 +1130,12 @@ attribute_hidden SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
     checkArity(op, args);
-    fn = CAR(args);
+    GCStackRoot<LogicalVector> ans;
+    SEXP fn = CAR(args);
     if (!isString(fn))
 	error("%s", _("invalid filename argument"));
     int n = LENGTH(fn);
-    PROTECT(ans = allocVector(LGLSXP, n));
+    ans = LogicalVector::create(n);
     for (int i = 0; i < n; i++) {
 #ifdef Win32
 	wchar_t *wfn = filenameToWchar(STRING_ELT(fn, i), TRUE);
@@ -1158,7 +1163,7 @@ attribute_hidden SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     }
     // copy names?
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -1606,7 +1611,7 @@ attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("invalid 'pattern' regular expression"));
     PROTECT_INDEX idx;
     SEXP ans;
-    PROTECT_WITH_INDEX(ans = allocVector(STRSXP, countmax), &idx);
+    PROTECT_WITH_INDEX(ans = StringVector::create(countmax), &idx);
     int count = 0;
     R_StringBuffer pb = R_StringBuffer(16);
     /* set up a context which will free the string buffer if
@@ -1675,7 +1680,7 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     PROTECT_INDEX idx;
     SEXP ans;
-    PROTECT_WITH_INDEX(ans = allocVector(STRSXP, countmax), &idx);
+    PROTECT_WITH_INDEX(ans = StringVector::create(countmax), &idx);
     int count = 0;
     R_StringBuffer pb = R_StringBuffer(16);
     /* set up a context which will free the string buffer if
@@ -1746,13 +1751,14 @@ static /*attribute_hidden*/ bool R_WFileExists(const wchar_t *path)
 
 attribute_hidden SEXP do_fileexists(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP file, ans;
+    SEXP file;
     int i, nfile, ic = 16;
     checkArity(op, args);
+    GCStackRoot<LogicalVector> ans;
     if (!isString(file = CAR(args)))
 	error(_("invalid '%s' argument"), "file");
     nfile = LENGTH(file);
-    ans = PROTECT(allocVector(LGLSXP, nfile));
+    ans = LogicalVector::create(nfile);
     for (i = 0; i < nfile; i++) {
 	if (!(--ic)) {
 	    R_CheckUserInterrupt();
@@ -1783,7 +1789,7 @@ attribute_hidden SEXP do_fileexists(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 	} else LOGICAL(ans)[i] = FALSE;
     }
-    UNPROTECT(1); /* ans */
+
     return ans;
 }
 
@@ -1816,11 +1822,11 @@ extern int winAccessW(const wchar_t *path, int mode);
 /* we require 'access' as from 2.12.0 */
 attribute_hidden SEXP do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP fn, ans;
     int i, n, mode, modemask;
 
     checkArity(op, args);
-    fn = CAR(args);
+    GCStackRoot<IntVector> ans;
+    SEXP fn = CAR(args);
     if (!isString(fn))
 	error(_("invalid '%s' argument"), "names");
     n = LENGTH(fn);
@@ -1830,7 +1836,7 @@ attribute_hidden SEXP do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (mode & 1) modemask |= X_OK;
     if (mode & 2) modemask |= W_OK;
     if (mode & 4) modemask |= R_OK;
-    PROTECT(ans = allocVector(INTSXP, n));
+    ans = IntVector::create(n);
     for (i = 0; i < n; i++)
 	if (STRING_ELT(fn, i) != NA_STRING) {
 #ifdef Win32
@@ -1841,7 +1847,7 @@ attribute_hidden SEXP do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    INTEGER(ans)[i] = p ? access(R_ExpandFileName(p), modemask): -1;
 #endif
 	} else INTEGER(ans)[i] = -1; /* treat NA as non-existent file */
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -2203,7 +2209,8 @@ attribute_hidden SEXP do_getlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* Locale specs are always ASCII */
 attribute_hidden SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP locale = CADR(args), ans;
+    SEXP locale = CADR(args);
+    GCStackRoot<StringVector> ans;
     int cat;
     const char *p;
     bool warned = FALSE;
@@ -2301,7 +2308,7 @@ attribute_hidden SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 	p = NULL; /* -Wall */
 	error(_("invalid '%s' argument"), "category");
     }
-    PROTECT(ans = allocVector(STRSXP, 1));
+    ans = StringVector::create(1);
     if (p) SET_STRING_ELT(ans, 0, mkChar(p));
     else  {
 	SET_STRING_ELT(ans, 0, mkChar(""));
@@ -2322,7 +2329,7 @@ attribute_hidden SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
 #endif
     invalidate_cached_recodings();
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -2330,14 +2337,14 @@ attribute_hidden SEXP do_setlocale(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_localeconv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, ansnames;
+    GCStackRoot<StringVector> ans, ansnames;
     struct lconv *lc = localeconv();
     int i = 0;
     char buff[20];
 
     checkArity(op, args);
-    PROTECT(ans = allocVector(STRSXP, 18));
-    PROTECT(ansnames = allocVector(STRSXP, 18));
+    ans = StringVector::create(18);
+    ansnames = StringVector::create(18);
     SET_STRING_ELT(ans, i, mkChar(lc->decimal_point));
     SET_STRING_ELT(ansnames, i++, mkChar("decimal_point"));
     SET_STRING_ELT(ans, i, mkChar(lc->thousands_sep));
@@ -2383,14 +2390,15 @@ attribute_hidden SEXP do_localeconv(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_STRING_ELT(ans, i, mkChar(buff));
     SET_STRING_ELT(ansnames, i++, mkChar("n_sign_posn"));
     setAttrib(ans, R_NamesSymbol, ansnames);
-    UNPROTECT(2);
+
     return ans;
 }
 
 /* .Internal function for path.expand */
 attribute_hidden SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP fn, ans;
+    SEXP fn;
+    GCStackRoot<StringVector> ans;
     int i, n;
 
     checkArity(op, args);
@@ -2398,7 +2406,7 @@ attribute_hidden SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isString(fn))
 	error(_("invalid '%s' argument"), "path");
     n = LENGTH(fn);
-    PROTECT(ans = allocVector(STRSXP, n));
+    ans = StringVector::create(n);
     for (i = 0; i < n; i++) {
 	SEXP tmp = STRING_ELT(fn, i);
 	if (tmp != NA_STRING) {
@@ -2423,7 +2431,7 @@ attribute_hidden SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	SET_STRING_ELT(ans, i, tmp);
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -2462,7 +2470,8 @@ attribute_hidden SEXP do_capabilitiesX11(SEXP call, SEXP op, SEXP args, SEXP rho
 
 attribute_hidden SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, ansnames;
+    GCStackRoot<LogicalVector> ans;
+    GCStackRoot<StringVector> ansnames;
     int i = 0;
 #ifdef Unix
 # ifdef HAVE_X11
@@ -2474,8 +2483,8 @@ attribute_hidden SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
 
-    PROTECT(ans      = allocVector(LGLSXP, 19));
-    PROTECT(ansnames = allocVector(STRSXP, 19));
+    ans      = LogicalVector::create(19);
+    ansnames = StringVector::create(19);
 
     SET_STRING_ELT(ansnames, i, mkChar("jpeg"));
 #ifdef HAVE_JPEG
@@ -2635,7 +2644,7 @@ attribute_hidden SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
     setAttrib(ans, R_NamesSymbol, ansnames);
-    UNPROTECT(2);
+
     return ans;
 }
 
@@ -2921,7 +2930,8 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP fn = CAR(args);
     int nfiles = length(fn);
-    SEXP ans = PROTECT(allocVector(LGLSXP, nfiles));
+    GCStackRoot<LogicalVector> ans;
+    ans = LogicalVector::create(nfiles);
     if (nfiles > 0) {
 	args = CDR(args);
 	if (!isString(fn))
@@ -2974,7 +2984,7 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    LOGICAL(ans)[i] = (nfail == 0);
 	}
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -3171,7 +3181,8 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     SEXP fn = CAR(args);
     int nfiles = length(fn);
-    SEXP ans = PROTECT(allocVector(LGLSXP, nfiles));
+    GCStackRoot<LogicalVector> ans;
+    ans = LogicalVector::create(nfiles);
     if (nfiles > 0) {
 	args = CDR(args);
 	if (!isString(fn))
@@ -3223,7 +3234,7 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    LOGICAL(ans)[i] = (nfail == 0);
 	}
     }
-    UNPROTECT(1);
+
     return ans;
 }
 #endif
@@ -3235,10 +3246,11 @@ attribute_hidden SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
     int len = 4;
 #endif
-    SEXP ans, names;
     checkArity(op, args);
-    PROTECT(ans = allocVector(VECSXP, len));
-    PROTECT(names = allocVector(STRSXP, len));
+    GCStackRoot<ListVector> ans;
+    GCStackRoot<StringVector> names;
+    ans = ListVector::create(len);
+    names = StringVector::create(len);
     SET_STRING_ELT(names, 0, mkChar("MBCS"));
     SET_STRING_ELT(names, 1, mkChar("UTF-8"));
     SET_STRING_ELT(names, 2, mkChar("Latin-1"));
@@ -3256,7 +3268,7 @@ attribute_hidden SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
     SET_VECTOR_ELT(ans, 4, ScalarInteger(systemCP));
 #endif
     setAttrib(ans, R_NamesSymbol, names);
-    UNPROTECT(2);
+
     return ans;
 }
 
@@ -3265,7 +3277,9 @@ attribute_hidden SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 #ifdef HAVE_CHMOD
-    SEXP paths, smode, ans;
+    GCStackRoot<LogicalVector> ans;
+    GCStackRoot<> smode;
+    SEXP paths;
     int i, m, n, *modes, res;
     mode_t um = 0;
 
@@ -3274,7 +3288,7 @@ attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(paths))
 	error(_("invalid '%s' argument"), "paths");
     n = LENGTH(paths);
-    PROTECT(smode = coerceVector(CADR(args), INTSXP));
+    smode = coerceVector(CADR(args), INTSXP);
     modes = INTEGER(smode);
     m = LENGTH(smode);
     if(!m && n) error(_("'%s' must be of length at least one"), "mode");
@@ -3282,7 +3296,7 @@ attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef HAVE_UMASK
     um = umask(0); umask(um);
 #endif
-    PROTECT(ans = allocVector(LGLSXP, n));
+    ans = LogicalVector::create(n);
     for (i = 0; i < n; i++) {
 	mode_t mode = (mode_t) modes[i % m];
 	if (mode == (mode_t) NA_INTEGER) mode = 0777;
@@ -3305,28 +3319,26 @@ attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else res = 1;
 	LOGICAL(ans)[i] = (res == 0);
     }
-    UNPROTECT(2);
+
     return ans;
 #else
-    SEXP paths, ans;
-    int i, n;
-
     checkArity(op, args);
-    paths = CAR(args);
+    GCStackRoot<LogicalVector> ans;
+    SEXP paths = CAR(args);
     if (!isString(paths))
 	error(_("invalid '%s' argument"), "paths");
-    n = LENGTH(paths);
+    int n = LENGTH(paths);
     warning("%s", _("insufficient OS support on this platform"));
-    PROTECT(ans = allocVector(LGLSXP, n));
-    for (i = 0; i < n; i++) LOGICAL(ans)[i] = 0;
-    UNPROTECT(1);
+    ans = LogicalVector::create(n);
+    for (int i = 0; i < n; i++) LOGICAL(ans)[i] = 0;
+
     return ans;
 #endif
 }
 
 attribute_hidden SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans;
+    GCStackRoot<IntVector> ans;
     int mode;
     mode_t res = 0;
     bool visible;
@@ -3346,9 +3358,9 @@ attribute_hidden SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
     warning("%s", _("insufficient OS support on this platform"));
     visible = FALSE;
 #endif
-    PROTECT(ans = ScalarInteger(res));
+    ans = IntVector::createScalar(res);
     setAttrib(ans, R_ClassSymbol, mkString("octmode"));
-    UNPROTECT(1);
+
     Evaluator::enableResultPrinting(visible);
     return ans;
 }
@@ -3360,7 +3372,8 @@ attribute_hidden SEXP do_readlink(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString(paths))
 	error(_("invalid '%s' argument"), "paths");
     int n = LENGTH(paths);
-    SEXP ans = PROTECT(allocVector(STRSXP, n));
+    GCStackRoot<StringVector> ans;
+    ans = StringVector::create(n);
 #ifdef HAVE_READLINK
     char buf[R_PATH_MAX+1];
     for (int i = 0; i < n; i++) {
@@ -3377,18 +3390,19 @@ attribute_hidden SEXP do_readlink(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else SET_STRING_ELT(ans, i,  NA_STRING);
     }
 #endif
-    UNPROTECT(1);
+
     return ans;
 }
 
 
 attribute_hidden SEXP do_Cstack_info(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, nms;
+    GCStackRoot<IntVector> ans;
+    GCStackRoot<StringVector> nms;
 
     checkArity(op, args);
-    PROTECT(ans = allocVector(INTSXP, 4));
-    PROTECT(nms = allocVector(STRSXP, 4));
+    ans = IntVector::create(4);
+    nms = StringVector::create(4);
     /* FIXME: could be out of range */
     INTEGER(ans)[0] = (R_CStackLimit == (uintptr_t) -1) ? NA_INTEGER : (int) R_CStackLimit;
     INTEGER(ans)[1] = (R_CStackLimit == (uintptr_t) -1) ? NA_INTEGER : (int)
@@ -3400,8 +3414,8 @@ attribute_hidden SEXP do_Cstack_info(SEXP call, SEXP op, SEXP args, SEXP rho)
     SET_STRING_ELT(nms, 2, mkChar("direction"));
     SET_STRING_ELT(nms, 3, mkChar("eval_depth"));
 
-    UNPROTECT(2);
     setAttrib(ans, R_NamesSymbol, nms);
+
     return ans;
 }
 
@@ -3443,17 +3457,19 @@ attribute_hidden SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
     double ftime;
     int res;
     R_xlen_t n, m;
-    SEXP paths, times, ans;
+    SEXP paths;
+    GCStackRoot<> times;
+    GCStackRoot<LogicalVector> ans;
 
     paths = CAR(args);
     if (!isString(paths))
 	error(_("invalid '%s' argument"), "path");
     n = XLENGTH(paths);
-    PROTECT(times = coerceVector(CADR(args), REALSXP));
+    times = coerceVector(CADR(args), REALSXP);
     m = XLENGTH(times);
     if (!m && n) error(_("'%s' must be of length at least one"), "time");
 
-    PROTECT(ans = allocVector(LGLSXP, n));
+    ans = LogicalVector::create(n);
     for (R_xlen_t i = 0; i < n; i++) {
 	CXXR::RAllocStack::Scope rscope; // throws away result of translateCharFP
 	fn = translateCharFP(STRING_ELT(paths, i));
@@ -3483,7 +3499,7 @@ attribute_hidden SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
 	LOGICAL(ans)[i] = (res == 0) ? FALSE : TRUE;
 	fn = NULL;
     }
-    UNPROTECT(2); /* times, ans */
+
     return ans;
 }
 
@@ -3619,8 +3635,10 @@ extern void *dlsym(void *handle, const char *symbol);
 attribute_hidden SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP ans = PROTECT(allocVector(STRSXP, nr_softVersion));
-    SEXP nms = PROTECT(allocVector(STRSXP, nr_softVersion));
+    GCStackRoot<StringVector> ans;
+    GCStackRoot<StringVector> nms;
+    ans = StringVector::create(nr_softVersion);
+    nms = StringVector::create(nr_softVersion);
     setAttrib(ans, R_NamesSymbol, nms);
     unsigned int i = 0;
     char p[256];
@@ -3846,15 +3864,16 @@ attribute_hidden SEXP do_eSoftVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
     SET_STRING_ELT(nms, i++, mkChar("BLAS"));
 
-    UNPROTECT(2);
     return ans;
 }
 
 attribute_hidden SEXP do_compilerVersion(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP ans = PROTECT(allocVector(STRSXP, 2));
-    SEXP nms = PROTECT(allocVector(STRSXP, 2));
+    GCStackRoot<StringVector> ans;
+    GCStackRoot<StringVector> nms;
+    ans = StringVector::create(2);
+    nms = StringVector::create(2);
     setAttrib(ans, R_NamesSymbol, nms);
     SET_STRING_ELT(nms, 0, mkChar("C"));
     SET_STRING_ELT(nms, 1, mkChar("Fortran"));
@@ -3868,7 +3887,7 @@ attribute_hidden SEXP do_compilerVersion(SEXP call, SEXP op, SEXP args, SEXP rho
 #else
     SET_STRING_ELT(ans, 1, mkChar(""));
 #endif
-    UNPROTECT(2);
+
     return ans;
 }
 

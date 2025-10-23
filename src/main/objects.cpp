@@ -262,14 +262,14 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 
     defrho = downcast_to_env(defrho);
     if (defrho == R_NilValue)
-	error(_("bad generic definition environment"));
+	error("%s", _("bad generic definition environment"));
     if (defrho == R_BaseEnv)
 	defrho = R_BaseNamespace;
 
     /* This evaluates promises */
     top = topenv(R_NilValue, callrho);
     val = findFunInEnvRange(method, callrho, top);
-    if(val != R_UnboundValue) {
+    if (val != R_UnboundValue) {
 	return val;
     }
 
@@ -288,7 +288,7 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 	UNPROTECT(1); /* table */
 	if (TYPEOF(val) == PROMSXP) 
 	    val = eval(val, rho);
-	if(val != R_UnboundValue) {
+	if (val != R_UnboundValue) {
 	    return val;
 	}
     } 
