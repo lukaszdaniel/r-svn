@@ -1222,7 +1222,7 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
     int *ix = NULL /* -Wall */;
     double *x = NULL /* -Wall */;
     Rcomplex *cx = NULL /* -Wall */;
-    StringVector *sv = NULL /* -Wall */;
+    SEXP *sx = NULL /* -Wall */;
 
     if (n < 2) return;
     switch (TYPEOF(key)) {
@@ -1236,7 +1236,7 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
 	x = REAL(key);
 	break;
     case STRSXP:
-	sv = SEXP_downcast<StringVector *>(key);
+	sx = STRING_PTR(key);
 	break;
     case CPLXSXP:
 	cx = COMPLEX(key);
@@ -1259,7 +1259,7 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(x[i]);
 	    break;
 	case STRSXP:
-	    for (i = 0; i < n; i++) isna[i] = ((*sv)[i] == NA_STRING);
+	    for (i = 0; i < n; i++) isna[i] = (sx[i] == NA_STRING);
 	    break;
 	case CPLXSXP:
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(cx[i].r) || ISNAN(cx[i].i);
@@ -1338,11 +1338,11 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
 	    break;
 	case STRSXP:
 	    if (decreasing)
-#define less(a, b) (c = Scollate((*sv)[a], (*sv)[b]), c < 0 || (c == 0 && a > b))
+#define less(a, b) (c = Scollate(sx[a], sx[b]), c < 0 || (c == 0 && a > b))
 		sort2_with_index
 #undef less
 	    else
-#define less(a, b) (c = Scollate((*sv)[a], (*sv)[b]), c > 0 || (c == 0 && a > b))
+#define less(a, b) (c = Scollate(sx[a], sx[b]), c > 0 || (c == 0 && a > b))
 		sort2_with_index
 #undef less
 	    break;
@@ -1366,7 +1366,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
     int *ix = NULL /* -Wall */;
     double *x = NULL /* -Wall */;
     Rcomplex *cx = NULL /* -Wall */;
-    StringVector *sv = NULL /* -Wall */;
+    SEXP *sx = NULL /* -Wall */;
     R_xlen_t itmp;
 
     if (n < 2) return;
@@ -1381,7 +1381,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 	x = REAL(key);
 	break;
     case STRSXP:
-	sv = SEXP_downcast<StringVector *>(key);
+	sx = STRING_PTR(key);
 	break;
     case CPLXSXP:
 	cx = COMPLEX(key);
@@ -1404,7 +1404,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(x[i]);
 	    break;
 	case STRSXP:
-	    for (i = 0; i < n; i++) isna[i] = ((*sv)[i] == NA_STRING);
+	    for (i = 0; i < n; i++) isna[i] = (sx[i] == NA_STRING);
 	    break;
 	case CPLXSXP:
 	    for (i = 0; i < n; i++) isna[i] = ISNAN(cx[i].r) || ISNAN(cx[i].i);
@@ -1483,11 +1483,11 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 	    break;
 	case STRSXP:
 	    if (decreasing)
-#define less(a, b) (c=Scollate((*sv)[a], (*sv)[b]), c < 0 || (c == 0 && a > b))
+#define less(a, b) (c=Scollate(sx[a], sx[b]), c < 0 || (c == 0 && a > b))
 		sort2_with_index
 #undef less
 	    else
-#define less(a, b) (c=Scollate((*sv)[a], (*sv)[b]), c > 0 || (c == 0 && a > b))
+#define less(a, b) (c=Scollate(sx[a], sx[b]), c > 0 || (c == 0 && a > b))
 		sort2_with_index
 #undef less
 	    break;
