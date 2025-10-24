@@ -146,7 +146,7 @@ namespace CXXR
          * @return Pointer to a Symbol (preexisting or newly
          * created) with the required name.
          */
-        static Symbol *obtain(/*const*/ RObject *name);
+        static Symbol *obtain(/*const*/ String *name);
 
         /** @brief Get a pointer to a regular Symbol object.
          *

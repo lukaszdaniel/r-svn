@@ -31,9 +31,9 @@
  */
 
 #include <cassert>
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Symbol.hpp>
-#include <Localization.h>
 #include <R_ext/Error.h>
 #include <Rinternals.h>
 

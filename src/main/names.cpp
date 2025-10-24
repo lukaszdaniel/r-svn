@@ -44,6 +44,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -1267,7 +1268,7 @@ attribute_hidden void R::InitNames(void)
 /*  If "name" is not found, it is installed in the symbol table.
     The symbol corresponding to the string "name" is returned. */
 
-Symbol *Symbol::obtain(/*const*/ RObject *charSXP)
+Symbol *Symbol::obtain(/*const*/ String *charSXP)
 {
     int len = LENGTH(charSXP);
     if (len == 0)
@@ -1325,7 +1326,7 @@ SEXP Rf_install(const char *name)
 attribute_hidden
 SEXP Rf_installNoTrChar(SEXP charSXP)
 {
-    return Symbol::obtain(charSXP);
+    return Symbol::obtain(SEXP_downcast<String *>(charSXP));
 }
 
 attribute_hidden

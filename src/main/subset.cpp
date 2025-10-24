@@ -953,7 +953,7 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args_, SEXP rho)
 
     if (type == LANGSXP) {
 	ax = ans;
-	ans = allocLang(LENGTH(ax));
+	ans = Rf_allocLang(LENGTH(ax));
 	if (LENGTH(ax) > 0) {
 	    int i = 0;
 	    for (SEXP px = ans; px != R_NilValue; px = CDR(px))

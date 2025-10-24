@@ -659,8 +659,7 @@ static void sigactionSegv(int signum, siginfo_t *ip, void *context)
 		 "exit R without saving workspace",
 		 "exit R saving workspace");
 	while(1) {
-	    if(R_ReadConsole("Selection: ", ConsoleBuf, CONSOLE_BUFFER_SIZE,
-			     0) > 0) {
+	    if(R_ReadConsole("Selection: ", ConsoleBuf, CONSOLE_BUFFER_SIZE, 0) > 0) {
 		if(ConsoleBuf[0] == '1') break;
 		if(ConsoleBuf[0] == '2') R_CleanUp(SA_DEFAULT, 0, 1);
 		if(ConsoleBuf[0] == '3') R_CleanUp(SA_NOSAVE, 70, 0);
