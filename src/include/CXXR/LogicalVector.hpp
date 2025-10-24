@@ -39,6 +39,12 @@ namespace CXXR
     /** @brief Vector of truth values.
      */
     using LogicalVector = FixedVector<Logical, LGLSXP>;
+
+    template <>
+    struct VectorTypeFor<Logical>
+    {
+        typedef LogicalVector type;
+    };
 } // namespace CXXR
 
 namespace R

@@ -147,6 +147,13 @@ namespace CXXR
         FixedVector &operator=(const FixedVector &) = delete;
     };
 
+    // VectorTypeFor<T>::type is the type of vector that can hold elements of
+    // type T.
+    template <class T>
+    struct VectorTypeFor
+    {
+    };
+
     template <typename T, SEXPTYPE ST>
     FixedVector<T, ST> *FixedVector<T, ST>::create(size_type sz, R_allocator_t *allocator)
     {

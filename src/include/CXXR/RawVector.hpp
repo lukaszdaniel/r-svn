@@ -31,6 +31,7 @@
 #ifndef RAWVECTOR_HPP
 #define RAWVECTOR_HPP
 
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/FixedVector.hpp>
 
 namespace CXXR
@@ -38,6 +39,39 @@ namespace CXXR
     /** @brief Vector of 'raw bytes'.
      */
     using RawVector = FixedVector<Rbyte, RAWSXP>;
+
+    template <>
+    struct VectorTypeFor<Rbyte>
+    {
+        typedef RawVector type;
+    };
+
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        struct MustConstruct<Rbyte>: public std::false_type
+        {
+        };
+
+        template <>
+        struct MustDestruct<Rbyte>: public std::false_type
+        {
+        };
+
+        template <>
+        inline const Rbyte &NAFunc<Rbyte>::operator()() const
+        {
+            static Rbyte s_na = 0;
+            return s_na;
+        }
+
+        template <>
+        inline bool IsNA<Rbyte>::operator()(const Rbyte &) const
+        {
+            return false;
+        }
+    } // namespace ElementTraits
 } // namespace CXXR
 
 namespace R

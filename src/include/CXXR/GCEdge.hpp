@@ -30,6 +30,7 @@
 #ifndef GCEDGE_HPP
 #define GCEDGE_HPP
 
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/GCNode.hpp>
 
 namespace CXXR
@@ -245,6 +246,56 @@ namespace CXXR
             static_assert(sizeof(T) >= 0, "T must be a complete type");
         }
     };
+
+    // Partial specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <class T>
+        struct MustConstruct<GCEdge<T>>: public std::true_type
+        {
+        };
+
+        template <class T>
+        struct MustDestruct<GCEdge<T>>: public std::true_type
+        {
+        };
+
+        template <typename T>
+        struct Duplicate<GCEdge<T>>
+        {
+            T *operator()(const GCEdge<T> &value, Duplication depth) const
+            {
+                return GCEdge<T>::cloneOrSelf(value, depth);
+            }
+        };
+
+        template <class T>
+        struct NAFunc<GCEdge<T>>
+        {
+            const GCEdge<T> &operator()() const
+            {
+                static GCEdge<T> s_na;
+                return s_na;
+            }
+        };
+
+        template <class T>
+        struct IsNA<GCEdge<T>>
+        {
+            bool operator()(const GCEdge<T> &t) const { return false; }
+        };
+
+        template <typename T>
+        struct IsGCEdge: public std::false_type
+        {
+        };
+
+        template <typename T>
+        struct IsGCEdge<GCEdge<T>>: public std::true_type
+        {
+        };
+
+    } // namespace ElementTraits
 } // namespace CXXR
 
 #endif // GCEDGE_HPP

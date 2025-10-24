@@ -31,13 +31,54 @@
 #ifndef REALVECTOR_HPP
 #define REALVECTOR_HPP
 
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/FixedVector.hpp>
+#include <R_ext/Arith.h> // for NA_REAL
 
 namespace CXXR
 {
     /** @brief Vector of real numbers.
      */
     using RealVector = FixedVector<double, REALSXP>;
+
+    template <>
+    struct VectorTypeFor<double>
+    {
+        typedef RealVector type;
+    };
+
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        struct MustConstruct<double>: public std::false_type
+        {
+        };
+
+        template <>
+        struct MustDestruct<double>: public std::false_type
+        {
+        };
+
+        template <>
+        inline const double &NAFunc<double>::operator()() const
+        {
+            static double s_na = NA_REAL;
+            return s_na;
+        }
+
+        template <>
+        inline bool IsNA<double>::operator()(const double &t) const
+        {
+            return R_IsNA(t);
+        }
+
+        template <>
+        inline bool IsNaOrNaN<double>::operator()(const double &t) const
+        {
+            return std::isnan(t);
+        }
+    } // namespace ElementTraits
 } // namespace CXXR
 
 namespace R

@@ -32,7 +32,9 @@
 #define CXXR_COMPLEX_HPP
 
 #include <complex>
+#include <CXXR/ElementTraits.hpp>
 #include <R_ext/Complex.h>
+#include <R_ext/Arith.h> // for NA_REAL
 
 namespace CXXR
 {
@@ -153,6 +155,39 @@ namespace CXXR
 
         friend std::ostream &operator<<(std::ostream &, const Complex &z);
     };
+
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        struct MustConstruct<Complex>: public std::false_type
+        {
+        };
+
+        template <>
+        struct MustDestruct<Complex>: public std::false_type
+        {
+        };
+
+        template <>
+        inline const Complex &NAFunc<Complex>::operator()() const
+        {
+            static Complex s_na(NA_REAL, NA_REAL);
+            return s_na;
+        }
+
+        template <>
+        inline bool IsNA<Complex>::operator()(const Complex &c) const
+        {
+            return isNA(c.r) || isNA(c.i);
+        }
+
+        template <>
+        inline bool IsNaOrNaN<Complex>::operator()(const Complex &c) const
+        {
+            return isNaOrNaN(c.r) || isNaOrNaN(c.i);
+        }
+    } // namespace ElementTraits
 } // namespace CXXR
 
 #endif // CXXR_COMPLEX_HPP

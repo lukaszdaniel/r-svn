@@ -31,13 +31,42 @@
 #ifndef INTVECTOR_HPP
 #define INTVECTOR_HPP
 
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/FixedVector.hpp>
+#include <R_ext/Arith.h> // for NA_INTEGER
 
 namespace CXXR
 {
     /** @brief Vector of integer values.
      */
     using IntVector = FixedVector<int, INTSXP>;
+
+    template <>
+    struct VectorTypeFor<int>
+    {
+        typedef IntVector type;
+    };
+
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        struct MustConstruct<int>: public std::false_type
+        {
+        };
+
+        template <>
+        struct MustDestruct<int>: public std::false_type
+        {
+        };
+
+        template <>
+        inline const int &NAFunc<int>::operator()() const
+        {
+            static int s_na = NA_INTEGER;
+            return s_na;
+        }
+    } // namespace ElementTraits
 } // namespace CXXR
 
 namespace R

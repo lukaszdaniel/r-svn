@@ -53,6 +53,7 @@
 #include <CXXR/BadObject.hpp>
 
 // CXXR extentions
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
 #include <CXXR/String.hpp>

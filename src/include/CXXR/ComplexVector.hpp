@@ -40,6 +40,12 @@ namespace CXXR
      */
     using ComplexVector = FixedVector<Complex, CPLXSXP>;
 
+    template <>
+    struct VectorTypeFor<Complex>
+    {
+        typedef ComplexVector type;
+    };
+
     /**
      * @param x Pointer to a CXXR::ComplexVector (i.e. an R complex vector).
      *          An error is generated if \a x is not a non-null pointer to a

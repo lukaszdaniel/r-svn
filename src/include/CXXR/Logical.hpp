@@ -29,6 +29,7 @@
 #define CXXR_LOGICAL_HPP
 
 #include <cassert>
+#include <CXXR/ElementTraits.hpp>
 #include <CXXR/RTypes.hpp>
 #include <R_ext/Boolean.h>
 #include <R_ext/Arith.h>
@@ -98,6 +99,33 @@ namespace CXXR
         /*implicit*/
         Logical(float prevent_implicit_int_to_Logical_conversions);
     };
+
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        struct MustConstruct<Logical>: public std::false_type
+        {
+        };
+
+        template <>
+        struct MustDestruct<Logical>: public std::false_type
+        {
+        };
+
+        template <>
+        inline bool IsNA<Logical>::operator()(const Logical &value) const
+        {
+            return value.isNA();
+        }
+
+        template <>
+        inline const Logical &NAFunc<Logical>::operator()() const
+        {
+            static Logical s_na = Logical::NA();
+            return s_na;
+        }
+    } // namespace ElementTraits
 
     // Inline definitions of operators.
     inline Logical Logical::operator!() const
