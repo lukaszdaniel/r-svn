@@ -32,30 +32,31 @@
 // updated to match colorout 1.3-3
 
 #include <R_ext/Minmax.h>
-#include <string>
 #include <array>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <string>
+#include <cctype>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/StringVector.hpp>
-#include <R_ext/Visibility.h>
+#include <R_ext/Visibility.h>  // for attribute_hidden
 #include <R_ext/RStartup.h> // for otype_t
 
 using namespace CXXR;
 
 #define too_small 1e-12
-#define hlzero 0
+#define highlight_zero 0
 
 #if CXXR_FALSE
 typedef struct pattern {
     char *ptrn;
     char *compiled;
-    int cpldsize;
-    int matchsize;
+    unsigned int cpldsize;
+    unsigned int matchsize;
     char *color;
-    int crsize;
-    struct pattern * next;
+    unsigned int crsize;
+    struct pattern *next;
 } pattern_t;
 
 pattern_t *P = NULL;
@@ -99,10 +100,10 @@ static bool isletter(const char b)
     return (b >= 'A' && b <= 'Z') || (b >= 'a' && b <= 'z');
 }
 
-static bool isword(const char * b, int i, int len)
+static bool isword(const char *b, unsigned int i, unsigned int len)
 {
-    int is_letter_preceeding = i > 0 ? isletter(b[i-1]) : 0;
-    int is_letter_following = isletter(b[i+len]);
+    bool is_letter_preceeding = (i > 0) ? isletter(b[i-1]) : false;
+    bool is_letter_following = isletter(b[i+len]);
     return !is_letter_preceeding && !is_letter_following;
 }
 
@@ -112,73 +113,66 @@ static bool isdelim(const char b)
     return (b >= 0 && b <= 47) || (b >= 58 && b <= 63) || (b >= 91 && b <= 94) || (b >= 123 && b <= 126);
 }
 
-static bool isnumber(const char * b, int i, int len)
+static bool isnumber(const char * b, unsigned int i, unsigned int len)
 {
     if(i > 0 && !isdelim(b[i-1]))
-        return 0;
+        return false;
 
     /* Look 8 bytes ahead */
-    int l = len;
+    unsigned int l = len;
     if(l > (i + 8))
         l = i + 8;
     i++;
     while(i < l){
         if (isdelim(b[i]))
-            return 1;
-        if(!(b[i] >= '0' && b[i] <= '9') && b[i] != '.' && b[i] != ',' &&
-                !(b[i] == 'e' && (i + 2) < len && (b[i+1] == '-' || b[i+1] == '+') && b[i+2] >= '0' && b[i+2] <= '9') &&
+            return true;
+        if(!std::isdigit(b[i]) && b[i] != '.' && b[i] != ',' &&
+                !(b[i] == 'e' && (i + 2) < len && (b[i+1] == '-' || b[i+1] == '+') && std::isdigit(b[i+2])) &&
                 !(b[i-1] == 'e' && (b[i] == '-' || b[i] == '+')))
-            return 0;
+            return false;
         i++;
     }
-    return 1;
+    return true;
 }
 
 
-static bool is_zero(const char * b, int i, int len)
+static bool is_zero(const char * b, unsigned int i, unsigned int len)
 {
-    char *charnum, *stopstring;
+    char *stopstring;
     double x;
-    int j;
-    j = i;
-    charnum = (char*)calloc(sizeof(char),len+1);
+    unsigned int j = i;
+    char *charnum = (char*)calloc(sizeof(char),len+1);
     while(i<len){
         charnum[i-j] = b[i];
         i++;
     }
     x = strtod(charnum, &stopstring);
     free(charnum);
-    if (x < too_small)
-        return 1;
-    else
-        return 0;
+    return (x < too_small);
 }
 
-static bool isindex(const char * b, int i, int len)
+static bool isindex(const char * b, unsigned int i, unsigned int len)
 {
     // Element of unnamed list
     if(i > 1 && b[i-2] == '[')
-        return 0;
+        return false;
 
     if(b[i] == ','){
         i++;
-        if(!((b[i] >= '0' && b[i] <= '9') || b[i] == ' '))
-            return 0;
+        if(!(std::isdigit(b[i]) || b[i] == ' '))
+            return false;
     }
-    while(i < len && ((b[i] >= '0' && b[i] <= '9') || b[i] == ' '))
+    while(i < len && (std::isdigit(b[i]) || b[i] == ' '))
         i++;
 
     // Vector or matrix index?
     // Also check that the previous index is a digit
-    if ((b[i] == ']' && b[i-1] >= '0' && b[i-1] <= '9') || (b[i] == ',' && b[i+1] == ']' && b[i-1] >= '0' && b[i-1] <= '9'))
-        return 1;
-    else
-        return 0;
+    return ((b[i] == ']' && std::isdigit(b[i-1])) || (b[i] == ',' && b[i+1] == ']' && std::isdigit(b[i-1])));
 }
 
 
 
-static bool isdate(const char * b, int i, int len)
+static bool isdate(const char * b, unsigned int i, unsigned int len)
 {
     if((len-i)>9){
         /* YYYYxMMxDD or YYYYxDDxMM */
@@ -215,7 +209,7 @@ static bool isdate(const char * b, int i, int len)
 }
 
 
-static bool istime(const char * b, int i, int len)
+static bool istime(const char * b, unsigned int i, unsigned int len)
 {
     if((len-i)>7){
         /* HH:MM:SS */
@@ -237,10 +231,10 @@ static bool istime(const char * b, int i, int len)
 }
 
 #if CXXR_FALSE
-static int ispattern(const char * b, int i, int len, const pattern_t *p)
+static unsigned int ispattern(const char * b, unsigned int i, unsigned int len, const pattern_t *p)
 {
-    int n = 0;
-    int j = i;
+    unsigned int n = 0;
+    unsigned int j = i;
     if((len-i) >= p->matchsize){
         while(n < p->cpldsize){
             if(p->compiled[n] == b[j]){
@@ -272,25 +266,25 @@ static int ispattern(const char * b, int i, int len, const pattern_t *p)
 
 void colorout_UnsetZero(void)
 {
-    hlzero = 0;
+    highlight_zero = 0;
 }
 
 void colorout_SetZero(double *zr)
 {
-    hlzero = 1;
+    highlight_zero = 1;
     too_small = *zr;
 }
 
 SEXP colorout_ListPatterns(void)
 {
-    int n = 0;
+    unsigned int n = 0;
     pattern_t *p = P;
 
     while(p){
         n++;
         /*
         printf("pattern = %s\nmatch size = %d\ncompiled = ", p->ptrn, p->matchsize);
-        for(int i = 0; i < strlen(p->compiled); i++)
+        for(unsigned int i = 0; i < strlen(p->compiled); i++)
             if(p->compiled[i] == '\x02')
                 printf("%s2\033[0m", crnumber);
             else if (p->compiled[i] == '\x03')
@@ -306,7 +300,7 @@ SEXP colorout_ListPatterns(void)
     nms = StringVector::create(n);
 
     p = P;
-    int i = 0;
+    unsigned int i = 0;
     while(p){
         SET_STRING_ELT(nms, i, mkChar(p->ptrn));
         SET_STRING_ELT(res, i, mkChar(p->color));
@@ -349,9 +343,9 @@ void colorout_AddPattern(char **pattern, char **color)
 
     // Compile the pattern for faster comparison
     p->compiled = (char*)calloc(1, strlen(*pattern)+1);
-    int i = 0;
-    int j = 0;
-    int l = strlen(p->ptrn);
+    unsigned int i = 0;
+    unsigned int j = 0;
+    unsigned int l = strlen(p->ptrn);
     p->matchsize = 0;
     while(i < l){
         if(i > 0 && p->ptrn[i] == '*' && p->ptrn[i-1] != '\\'){
@@ -395,7 +389,7 @@ void colorout_AddPattern(char **pattern, char **color)
     P = p;
 }
 
-static int max(const int a, const int b)
+static unsigned int max(const unsigned int a, const unsigned int b)
 {
     if(a > b)
         return a;
@@ -404,7 +398,7 @@ static int max(const int a, const int b)
 
 static void alloc_piece(void)
 {
-    int maxsize;
+    unsigned int maxsize;
 
     maxsize = max(logicalTsize, logicalFsize);
     maxsize = max(maxsize, constsize);
@@ -451,7 +445,7 @@ void colorout_SetColors(char **normal, char **number, char **negnum,
 
     if(*verbose){
         printf("%snormal\033[0m ", crnormal);
-        if(hlzero)
+        if(highlight_zero)
             printf("%sx[x<=-%g]\033[0m %sx[abs(x)<%g]\033[0m %sx[x>=%g]\033[0m ",
                     crnegnum, too_small, crzero, too_small, crnumber, too_small);
         else
@@ -463,7 +457,7 @@ void colorout_SetColors(char **normal, char **number, char **negnum,
 }
 #endif
 
-char *colorout_make_bigger(char *ptr, int *len)
+char *colorout_make_bigger(char *ptr, unsigned int *len)
 {
     char *nnbuf;
     *len = *len + 1024;
@@ -476,16 +470,20 @@ char *colorout_make_bigger(char *ptr, int *len)
 
 
 /* This function color prints the contents of 'buf', of length 'len' and type 'otype' */
-attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_t otype)
+attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len_, otype_t otype)
 {
+
+    if (!buf || len_ <= 0) return;
+
+    unsigned int len = len_;
+
     /* gnome-terminal extends the background color for the other line
      * if the "\033[0m" is after the newline*/
-    bool neednl = false;
+    bool neednl = (buf[len - 1] == '\n');
     char *bbuf = (char *)malloc((len + 1) * sizeof(char));
     strcpy(bbuf, buf);
-    if (buf[len - 1] == '\n')
+    if (neednl)
     {
-        neednl = true;
         bbuf[len - 1] = '\0';
         --len;
     }
@@ -496,7 +494,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
      * 2 = Warning
      * 3 = Error
      * */
-    if(otype){
+    if (otype){
         if (otype == 2 /* WARNING_ */)
         {
             fprintf(stderr, "%s%s\033[0m", crwarn, bbuf);
@@ -514,14 +512,14 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
         if(neednl)
             fprintf(stderr, "\n");
         fflush(stderr);
-        /* other type (i.e., non warning/error(s)). could be numbers, date, aso. */
+    /* other type (i.e., non warning/error(s)). could be numbers, date, aso. */
     } else {
-        int l = len + 1024;
+        unsigned int l = len + 1024;
         char *newbuf = (char *)calloc(sizeof(char), l);
         l -= 64;
         strcpy(newbuf, crnormal);
-        int i = 0;
-        int j = normalsize;
+        unsigned int i = 0;
+        unsigned int j = normalsize;
         /* for all i smaller than obj length */
 #if CXXR_FALSE
         bool haspttrn;
@@ -533,7 +531,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
             /* Custom patterns */
             haspttrn = 0;
             if(P){
-                int psz = 0;
+                unsigned int psz = 0;
                 pattern_t *p = P;
                 while(p){
                     psz = ispattern(bbuf, i, len, p);
@@ -541,7 +539,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                         haspttrn = 1;
                         strcat(newbuf, p->color);
                         j += p->crsize;
-                        for(int k = 0; k < psz; k++){
+                        for(unsigned int k = 0; k < psz; k++){
                             newbuf[j] = bbuf[i];
                             i++;
                             j++;
@@ -557,6 +555,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
             if(haspttrn)
                 continue;
 #endif
+                /* Strings */
             if(bbuf[i] == '"'){
                 strcat(newbuf, crstring);
                 j += stringsize;
@@ -574,7 +573,8 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                 }
                 strcat(newbuf, crnormal);
                 j += normalsize;
-            } else if(bbuf[i] == '[' && ((bbuf[i+1] >= '0' && bbuf[i+1] <= '9') || bbuf[i+1] == ',' || bbuf[i+1] == ' ') && isindex(bbuf, i+1, len)){
+                // Index like [1], [2, 3]
+            } else if(bbuf[i] == '[' && (std::isdigit(bbuf[i+1]) || bbuf[i+1] == ',' || bbuf[i+1] == ' ') && isindex(bbuf, i+1, len)){
                 strcat(newbuf, crindex);
                 j += indexsize;
                 newbuf[j] = bbuf[i];
@@ -619,7 +619,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                 strcat(newbuf, piece);
                 i += 2;
                 j += 2 + normalsize + constsize;
-                /* Inf */
+                /* Inf or -Inf */
             } else if(bbuf[i] == 'I' && bbuf[i+1] == 'n' && bbuf[i+2] == 'f'
                     && !isletter(bbuf[i+3])){
                 if(i > 0 && bbuf[i-1] == '-'){
@@ -640,15 +640,14 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                 i += 3;
                 j += 3 + normalsize + constsize;
                 /* hexadecimal number */
-            } else if(bbuf[i] == '0' && bbuf[i+1] == 'x' && ((bbuf[i+2] >= '0' && bbuf[i+2] <= '9') ||
-                        (bbuf[i+2] >= 'a' && bbuf[i+2] <= 'f'))){
+            } else if((i+2 < len) && bbuf[i] == '0' && bbuf[i+1] == 'x' && std::isxdigit(bbuf[i+2])){
                 strcat(newbuf, crnumber);
                 j += numbersize;
                 newbuf[j] = bbuf[i];
                 newbuf[j+1] = 'x';
                 i += 2;
                 j += 2;
-                while(i < len && ((bbuf[i] >= '0' && bbuf[i] <= '9') || (bbuf[i] >= 'a' && bbuf[i] <= 'f'))){
+                while(i < len && std::isxdigit(bbuf[i])){
                     if(j >= l)
                         newbuf = colorout_make_bigger(newbuf, &l);
                     newbuf[j] = bbuf[i];
@@ -661,14 +660,14 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
             } else if(isdate(bbuf, i, len)){
                 strcat(newbuf, crdate);
                 j += datesize;
-                for(int k = 0; k < 10; k++){
+                for(unsigned int k = 0; k < 10; k++){
                     newbuf[j] = bbuf[i];
                     i++;
                     j++;
                 }
                 /* if time is appended to the date */
                 if(bbuf[i] == ' ' && istime(bbuf, i+1, len)){
-                    for(int k = 0; k < 9; k++){
+                    for(unsigned int k = 0; k < 9; k++){
                         newbuf[j] = bbuf[i];
                         i++;
                         j++;
@@ -680,7 +679,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
             } else if(istime(bbuf, i, len)){
                 strcat(newbuf, crdate);
                 j += datesize;
-                for(int k = 0; k < 8; k++){
+                for(unsigned int k = 0; k < 8; k++){
                     newbuf[j] = bbuf[i];
                     i++;
                     j++;
@@ -688,21 +687,21 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                 strcat(newbuf, crnormal);
                 j += normalsize;
                 /* positive numbers */
-            } else if(bbuf[i] >= '0' && bbuf[i] <= '9' && isnumber(bbuf, i, len)){
-                if (hlzero && is_zero(bbuf, i, len)){
+            } else if(std::isdigit(bbuf[i]) && isnumber(bbuf, i, len)){
+                if (highlight_zero && is_zero(bbuf, i, len)){
                     strcat(newbuf, crzero);
                     j += zerosize;
                 }else{
                     strcat(newbuf, crnumber);
                     j += numbersize;
                 }
-                while(i < len && ((bbuf[i] >= '0' && bbuf[i] <= '9') || bbuf[i] == '.')){
+                while(i < len && (std::isdigit(bbuf[i]) || bbuf[i] == '.')){
                     if(j >= l)
                         newbuf = colorout_make_bigger(newbuf, &l);
                     newbuf[j] = bbuf[i];
                     i++;
                     j++;
-                    if(bbuf[i] == 'e' && (i + 2) < len && (bbuf[i+1] == '-' || bbuf[i+1] == '+') && (bbuf[i+2] >= '0' && bbuf[i+2] <= '9')){
+                    if(bbuf[i] == 'e' && (i + 2) < len && (bbuf[i+1] == '-' || bbuf[i+1] == '+') && std::isdigit(bbuf[i+2])){
                         newbuf[j] = bbuf[i];
                         i++;
                         j++;
@@ -714,8 +713,8 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                 strcat(newbuf, crnormal);
                 j += normalsize;
                 /* negative numbers */
-            } else if(bbuf[i] == '-' && (bbuf[i+1] >= '0' && bbuf[i+1] <= '9') && isnumber(bbuf, i+1, len)){
-                if (hlzero && is_zero(bbuf, i+1, len)){
+            } else if((i+1 < len) && bbuf[i] == '-' && std::isdigit(bbuf[i+1]) && isnumber(bbuf, i+1, len)){
+                if (highlight_zero && is_zero(bbuf, i+1, len)){
                     strcat(newbuf, crzero);
                     j += zerosize;
                 }else{
@@ -725,13 +724,13 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len, otype_
                 newbuf[j] = '-';
                 i++;
                 j++;
-                while(i < len && ((bbuf[i] >= '0' && bbuf[i] <= '9') || bbuf[i] == '.')){
+                while(i < len && (std::isdigit(bbuf[i]) || bbuf[i] == '.')){
                     if(j >= l)
                         newbuf = colorout_make_bigger(newbuf, &l);
                     newbuf[j] = bbuf[i];
                     i++;
                     j++;
-                    if(bbuf[i] == 'e' && (i + 2) < len && (bbuf[i+1] == '-' || bbuf[i+1] == '+') && (bbuf[i+2] >= '0' && bbuf[i+2] <= '9')){
+                    if(bbuf[i] == 'e' && (i + 2) < len && (bbuf[i+1] == '-' || bbuf[i+1] == '+') && std::isdigit(bbuf[i+2])){
                         newbuf[j] = bbuf[i];
                         i++;
                         j++;
