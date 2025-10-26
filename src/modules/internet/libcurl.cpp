@@ -35,6 +35,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Fileio.h>
@@ -448,12 +449,13 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     curl_easy_cleanup(hnd);
 
-    SEXP ans = PROTECT(allocVector(STRSXP, used));
+    GCStackRoot<StringVector> ans;
+    ans = StringVector::create(used);
     for (int i = 0; i < used; i++)
 	SET_STRING_ELT(ans, i, mkChar(headers[i]));
     SEXP sStatus = install("status");
-    setAttrib(ans, sStatus, ScalarInteger((int) http_code));
-    UNPROTECT(1);
+    setAttrib(ans, sStatus, IntVector::createScalar((int) http_code));
+
     return ans;
 #endif
 }
@@ -1112,15 +1114,14 @@ SEXP in_do_curlDownload(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     download_cleanup(&c);
 
-    SEXP ans = ScalarInteger(0);
+    GCStackRoot<IntVector> ans;
+    ans = IntVector::createScalar(0);
     if(nurls > 1) {
-	PROTECT(ans);
 	SEXP sretvals = install("retvals");
-	SEXP retval = allocVector(INTSXP, nurls);
+	IntVector *retval = IntVector::create(nurls);
 	setAttrib(ans, sretvals, retval);
 	for(int i = 0; i < nurls; i++)
-	    INTEGER(retval)[i] = errs[i] ? 1 : 0;
-	UNPROTECT(1); /* ans */
+	    (*retval)[i] = errs[i] ? 1 : 0;
     }
     return ans;
 #endif

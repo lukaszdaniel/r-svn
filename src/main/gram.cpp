@@ -4626,7 +4626,7 @@ static void yyerror(const char *s)
        the rest are to be copied literally.  The #if 0 block below allows xgettext
        to see these.
     */
-#define YYENGLISH 8
+#define YYENGLISH 10
 	"$undefined",	"input",
 	"END_OF_INPUT",	"end of input",
 	"ERROR",	"input",
@@ -4711,6 +4711,12 @@ static void yyerror(const char *s)
                                 break;
                 case 7:
                         snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s", _("unexpected end of line"));
+                                break;
+                case 8:
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected '%s' value"), "NULL");
+                                break;
+                case 9:
+                        snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected '%s' value"), "function");
                                 break;
                 default:
 		  if (streql(s + sizeof yyunexpected - 1, "PLACEHOLDER")) {
@@ -4931,7 +4937,7 @@ static int NumericValue(int c)
 		    YYTEXT_PUSH(c, yyp);
 		if (nd == 0) return ERROR;
 	    }
-// ?NumericComstants says exponent is optional (as does C99)
+// ?NumericConstants says exponent is optional (as does C99)
 //            if (seendot && !seenexp) return ERROR;
 	    if (c == 'L') /* for getParseData */
 	    {
@@ -5477,9 +5483,9 @@ static int StringValue(int c, bool forSymbol)
     	strcpy(yytext, currtext);
     else if (forSymbol || !use_wcs) {
         size_t total = strlen(stext);
-        snprintf(yytext, MAXELTSIZE, "[%u chars quoted with '%c']", (unsigned int)total, quote);
+        snprintf(yytext, MAXELTSIZE, n_("[%u char quoted with '%c']", "[%u chars quoted with '%c']", (unsigned int)total), (unsigned int)total, quote);
     } else 
-        snprintf(yytext, MAXELTSIZE, "[%d wide chars quoted with '%c']", wcnt, quote);
+        snprintf(yytext, MAXELTSIZE, n_("[%d wide char quoted with '%c']", "[%d wide chars quoted with '%c']", wcnt), wcnt, quote);
     if(forSymbol) {
 	PRESERVE_SV(yylval = install(stext));
 	return SYMBOL;

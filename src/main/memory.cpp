@@ -593,7 +593,7 @@ static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
 /* Heap Size Adjustment. */
 namespace
 {
-    R_size_t applyAggresiveGrow(R_size_t change)
+    R_size_t applyAggressiveGrow(R_size_t change)
     {
         static R_size_t last_in_use = 0;
         static unsigned int adjust_count = 1;
@@ -606,7 +606,7 @@ namespace
             R_size_t next_in_use = current_in_use + (current_in_use - last_in_use);
             last_in_use = current_in_use;
 
-            /* try to achieve and occupancy rate of R_NGrowFrac */
+            /* try to achieve an occupancy rate of R_NGrowFrac */
             R_size_t next_nsize = (R_size_t)(next_in_use / R_NGrowFrac);
             if (next_nsize > R_NSize + change)
                 change = next_nsize - R_NSize;
@@ -634,7 +634,7 @@ static void AdjustHeapSize(R_size_t size_needed)
         R_size_t change = (R_size_t)(R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize);
 
         /* for early adjustments grow more aggressively */
-        change = applyAggresiveGrow(change);
+        change = applyAggressiveGrow(change);
 
         if (R_MaxNSize >= R_NSize + change)
             R_NSize += change;
@@ -839,7 +839,7 @@ static bool isCFinalizer(SEXP fun)
 
 static SEXP MakeCFinalizer(R_CFinalizer_t cfun)
 {
-    SEXP s = allocVector(RAWSXP, sizeof(R_CFinalizer_t));
+    RawVector *s = RawVector::create(sizeof(R_CFinalizer_t));
     *((R_CFinalizer_t *) RAW(s)) = cfun;
     return s;
     /*return R_MakeExternalPtr((void *) cfun, R_NilValue, R_NilValue);*/
@@ -1874,8 +1874,7 @@ attribute_hidden void R::InitMemory(void)
     MARK_NOT_MUTABLE(R_TrueValue);
     R_FalseValue = mkFalse();
     MARK_NOT_MUTABLE(R_FalseValue);
-    R_LogicalNAValue = allocVector(LGLSXP, 1);
-    LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
+    R_LogicalNAValue = LogicalVector::createScalar(Logical::NA());
     MARK_NOT_MUTABLE(R_LogicalNAValue);
 }
 
@@ -2430,11 +2429,11 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     GCStackRoot<IntVector> ans;
-    GCStackRoot<> nms;
+    GCStackRoot<StringVector> nms;
     unsigned int tmp;
 
     ans = IntVector::create(24);
-    nms = allocVector(STRSXP, 24);
+    nms = StringVector::create(24);
     for (unsigned int i = 0; i < 24; i++) {
 	INTEGER(ans)[i] = 0;
 	SET_STRING_ELT(nms, i, type2str((SEXPTYPE) (i > LGLSXP? i+2 : i)));
@@ -2564,7 +2563,7 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
     size_t top = R_PPStackTop;
     int j = 0;
     if (i > top) i = top;
-    res = protect(allocVector(VECSXP, top - i));
+    res = Rf_protect(allocVector(VECSXP, top - i));
     while (i < top)
 	SET_VECTOR_ELT(res, j++, R_PPStack[--top]);
     ProtectStack::restoreSize(top); /* this includes the protect we used above */
@@ -2731,11 +2730,11 @@ static void checkMSet(SEXP mset)
 
 /* Add object to multi-set. The object will be protected as long as the
    multi-set is protected. */
-void R_PreserveInMSet(SEXP x, SEXP mset)
+void R_PreserveInMSet(SEXP x_, SEXP mset)
 {
-    if (x == R_NilValue || isSymbol(x))
+    if (x_ == R_NilValue || isSymbol(x_))
 	return; /* no need to preserve */
-    PROTECT(x);
+    GCStackRoot<> x(x_);
     checkMSet(mset);
     SEXP store = CAR(mset);
     int *n = INTEGER(CDR(mset));
@@ -2743,7 +2742,7 @@ void R_PreserveInMSet(SEXP x, SEXP mset)
 	R_xlen_t newsize = INTEGER_ELT(TAG(mset), 0);
 	if (newsize == 0)
 	    newsize = 4; /* default minimum size */
-	store = allocVector(VECSXP, newsize);
+	store = ListVector::create(newsize);
 	SETCAR(mset, store);
     }
     R_xlen_t size = XLENGTH(store);
@@ -2751,14 +2750,14 @@ void R_PreserveInMSet(SEXP x, SEXP mset)
 	R_xlen_t newsize = 2 * size;
 	if (newsize >= INT_MAX || newsize < size)
 	    error("%s", _("Multi-set overflow"));
-	SEXP newstore = PROTECT(allocVector(VECSXP, newsize));
+	GCStackRoot<ListVector> newstore;
+	newstore = ListVector::create(newsize);
 	for (R_xlen_t i = 0; i < size; i++)
 	    SET_VECTOR_ELT(newstore, i, VECTOR_ELT_0(store, i));
 	SETCAR(mset, newstore);
-	UNPROTECT(1); /* newstore */
 	store = newstore;
     }
-    UNPROTECT(1); /* x */
+
     SET_VECTOR_ELT(store, (*n)++, x);
 }
 

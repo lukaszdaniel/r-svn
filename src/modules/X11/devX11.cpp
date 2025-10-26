@@ -29,11 +29,12 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 
 /* rint is C99 */
@@ -2394,15 +2395,15 @@ static SEXP X11_Cap(pDevDesc dd)
     XImage *image = XGetImage(display, xd->window, 0, 0,
                               xd->windowWidth, xd->windowHeight, 
                               AllPlanes, ZPixmap);
-    CXXR::GCStackRoot<> raster(R_NilValue);
+    CXXR::GCStackRoot<CXXR::IntVector> raster(R_NilValue);
 
     if (image) {
-        CXXR::GCStackRoot<> dim;
+        CXXR::GCStackRoot<CXXR::IntVector> dim;
         int size = xd->windowWidth * xd->windowHeight;
         CXXR::RAllocStack::Scope rscope;
         unsigned int *rint;
 
-        raster = allocVector(INTSXP, size);
+        raster = CXXR::IntVector::create(size);
 
         /* Copy each byte of screen to an R matrix. 
          * The ARGB32 needs to be converted to an R ABGR32 */
@@ -2415,7 +2416,7 @@ static SEXP X11_Cap(pDevDesc dd)
                 rint[i*xd->windowWidth + j] = bitgp((void *) image, i, j);
             }
         }
-        dim = allocVector(INTSXP, 2);
+        dim = CXXR::IntVector::create(2);
         INTEGER(dim)[0] = xd->windowHeight;
         INTEGER(dim)[1] = xd->windowWidth;
         setAttrib(raster, R_DimSymbol, dim);
