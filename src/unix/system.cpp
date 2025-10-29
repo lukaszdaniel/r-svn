@@ -526,7 +526,7 @@ int Rf_initialize_R(int ac, char **av)
        and pretty-print warnings/errors (ESS = dumb terminal) */
     if (
 #ifdef HAVE_AQUA
-		useaqua || 
+	useaqua || 
 #endif
        (R_Interactive && getenv("TERM") && !streql(getenv("TERM"), "dumb"))) {
 	R_Outputfile = NULL;

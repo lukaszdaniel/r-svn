@@ -46,7 +46,12 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/Environment.hpp>
+#include <CXXR/PairList.hpp>
+#include <CXXR/Expression.hpp>
+#include <CXXR/Promise.hpp>
+#include <CXXR/ExternalPointer.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h>
@@ -556,7 +561,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
     case CLOSXP:
     case PROMSXP:
     case ENVSXP:
-	s = allocSExp(type);
+	s = Rf_allocSExp(type);
 	/* skip over CAR, CDR, and TAG */
 	/* CAR(s) = */ m->InInteger(fp, d);
 	/* CDR(s) = */ m->InInteger(fp, d);
@@ -564,7 +569,7 @@ static void RemakeNextSEXP(FILE *fp, NodeInfo *node, int version, InputRoutines 
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
-	s = allocSExp(type);
+	s = Rf_allocSExp(type);
 	/* skip over length and name fields */
 	/* length = */ m->InInteger(fp, d);
 	R_AllocStringBuffer(MAXELTSIZE - 1, &(d->buffer));
@@ -1298,7 +1303,7 @@ static SEXP NewReadItem(HashTable *sym_table, HashTable *env_table, FILE *fp,
 			 InputRoutines *m, SaveLoadData *d)
 {
     SEXPTYPE type;
-    SEXP s;
+    GCStackRoot<> s(R_NilValue);
     int pos, levs, objf;
 
     R_assert(TYPEOF(sym_table) == VECSXP && TYPEOF(env_table) == VECSXP);
@@ -1310,44 +1315,40 @@ static SEXP NewReadItem(HashTable *sym_table, HashTable *env_table, FILE *fp,
     switch (type) {
     case SYMSXP:
 	pos = m->InInteger(fp, d);
-	PROTECT(s = pos ? VECTOR_ELT(sym_table, pos - 1) : R_NilValue);
+	s = pos ? VECTOR_ELT(sym_table, pos - 1) : R_NilValue;
 	break;
     case ENVSXP:
 	pos = m->InInteger(fp, d);
-	PROTECT(s = pos ? VECTOR_ELT(env_table, pos - 1) : R_NilValue);
+	s = pos ? VECTOR_ELT(env_table, pos - 1) : R_NilValue;
 	break;
     case LISTSXP:
     case LANGSXP:
     case DOTSXP:
-	PROTECT(s = allocSExp(type));
+	s = Rf_allocSExp(type);
 	SET_TAG(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCAR(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SETCDR(s, NewReadItem(sym_table, env_table, fp, m, d));
-	/*UNPROTECT(1);*/
 	break;
     case CLOSXP:
-	PROTECT(s = allocSExp(type));
+	s = Closure::create();
 	SET_CLOENV(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_FORMALS(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_BODY(s, NewReadItem(sym_table, env_table, fp, m, d));
-	/*UNPROTECT(1);*/
 	break;
     case PROMSXP:
-	PROTECT(s = allocSExp(type));
+	s = Promise::create();
 	SET_PRENV(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_PRVALUE(s, NewReadItem(sym_table, env_table, fp, m, d));
 	SET_PRCODE(s, NewReadItem(sym_table, env_table, fp, m, d));
-	/*UNPROTECT(1);*/
 	break;
     case EXTPTRSXP:
-	PROTECT(s = allocSExp(type));
+	s = ExternalPointer::create();
 	R_SetExternalPtrAddr(s, NULL);
 	R_SetExternalPtrProtected(s, NewReadItem(sym_table, env_table, fp, m, d));
 	R_SetExternalPtrTag(s, NewReadItem(sym_table, env_table, fp, m, d));
-	/*UNPROTECT(1);*/
 	break;
     case WEAKREFSXP:
-	PROTECT(s = R_MakeWeakRef(R_NilValue, R_NilValue, R_NilValue, FALSE));
+	s = R_MakeWeakRef(R_NilValue, R_NilValue, R_NilValue, FALSE);
 	break;
     case SPECIALSXP:
     case BUILTINSXP:
@@ -1356,9 +1357,8 @@ static SEXP NewReadItem(HashTable *sym_table, HashTable *env_table, FILE *fp,
 	int index = StrToInternal(m->InString(fp, d));
 	if (index == NA_INTEGER) {
 	    warning(_("unrecognized internal function name \"%s\""), d->buffer.data);
-	    PROTECT(s = R_NilValue);
 	} else
-	    PROTECT(s = mkPRIMSXP(index, type == BUILTINSXP));
+	    s = mkPRIMSXP(index, type == BUILTINSXP);
     }
 	break;
     case CHARSXP:
@@ -1369,7 +1369,7 @@ static SEXP NewReadItem(HashTable *sym_table, HashTable *env_table, FILE *fp,
     case STRSXP:
     case VECSXP:
     case EXPRSXP:
-	PROTECT(s = NewReadVec(type, sym_table, env_table, fp, m, d));
+	s = NewReadVec(type, sym_table, env_table, fp, m, d);
 	break;
     case BCODESXP:
 	error("%s", _("cannot read byte code objects from version 1 workspaces"));
@@ -1379,7 +1379,7 @@ static SEXP NewReadItem(HashTable *sym_table, HashTable *env_table, FILE *fp,
     SETLEVELS(s, (unsigned short) levs);
     SET_OBJECT(s, objf);
     SET_ATTRIB(s, NewReadItem(sym_table, env_table, fp, m, d));
-    UNPROTECT(1); /* s */
+
     return s;
 }
 
@@ -1408,7 +1408,7 @@ static SEXP NewDataLoad(FILE *fp, InputRoutines *m, SaveLoadData *d)
     }
     /* Allocate the environments */
     for (int count = 0; count < env_count; ++count)
-	SET_VECTOR_ELT(env_table, count, allocSExp(ENVSXP));
+	SET_VECTOR_ELT(env_table, count, Environment::create());
 
     /* Now fill them in  */
     for (int count = 0; count < env_count; ++count) {
@@ -2044,7 +2044,7 @@ attribute_hidden SEXP do_loadfile(SEXP call, SEXP op, SEXP args, SEXP env)
 
     PROTECT(file = coerceVector(CAR(args), STRSXP));
 
-    if (! isValidStringF(file))
+    if (!isValidStringF(file))
 	error("%s", _("bad file name"));
 
     fp = RC_fopen(STRING_ELT(file, 0), "rb", TRUE);
@@ -2176,7 +2176,7 @@ static SEXP RestoreToEnv(SEXP ans, SEXP aenv)
 	return names;
     }
 
-    if (! isList(ans))
+    if (!isList(ans))
 	error("%s", _("loaded data is not in pair list form"));
 
     PROTECT(ans);
@@ -2251,7 +2251,7 @@ attribute_hidden void R_XDREncodeDouble(double d, void *buf)
     xdrmem_create(&xdrs, (char *) buf, R_XDR_DOUBLE_SIZE, XDR_ENCODE);
     bool success = xdr_double(&xdrs, &d);
     xdr_destroy(&xdrs);
-    if (! success)
+    if (!success)
 	error("%s", _("XDR write failed"));
 }
 
@@ -2263,7 +2263,7 @@ attribute_hidden double R_XDRDecodeDouble(void *buf)
     xdrmem_create(&xdrs, (char *) buf, R_XDR_DOUBLE_SIZE, XDR_DECODE);
     bool success = xdr_double(&xdrs, &d);
     xdr_destroy(&xdrs);
-    if (! success)
+    if (!success)
 	error("%s", _("XDR read failed"));
     return d;
 }
@@ -2276,7 +2276,7 @@ attribute_hidden void R_XDREncodeInteger(int i, void *buf)
     xdrmem_create(&xdrs, (char *) buf, R_XDR_INTEGER_SIZE, XDR_ENCODE);
     success = xdr_int(&xdrs, &i);
     xdr_destroy(&xdrs);
-    if (! success)
+    if (!success)
 	error("%s", _("XDR write failed"));
 }
 
@@ -2288,7 +2288,7 @@ attribute_hidden int R_XDRDecodeInteger(void *buf)
     xdrmem_create(&xdrs, (char *) buf, R_XDR_INTEGER_SIZE, XDR_DECODE);
     bool success = xdr_int(&xdrs, &i);
     xdr_destroy(&xdrs);
-    if (! success)
+    if (!success)
 	error("%s", _("XDR read failed"));
     return i;
 }
@@ -2322,7 +2322,7 @@ void R_RestoreGlobalEnvFromFile(const char *name, bool quiet)
 	FILE *fp = R_fopen(name, "rb"); /* binary file */
 	if(fp != NULL) {
 	    R_LoadSavedData(fp, R_GlobalEnv);
-	    if(! quiet)
+	    if (!quiet)
 		Rprintf("[Previously saved workspace restored]\n\n");
 	    fclose(fp);
 	}

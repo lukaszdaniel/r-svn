@@ -53,6 +53,8 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Rmath.h>
 #include <Fileio.h>
@@ -296,7 +298,7 @@ static void OutReal(R_outpstream_t stream, double d)
     char buf[128];
     switch (stream->type) {
     case R_pstream_ascii_format:
-	if (! R_FINITE(d)) {
+	if (!R_FINITE(d)) {
 	    if (ISNA(d))
 		Rsnprintf(buf, sizeof(buf), "NA\n");
 	    else if (ISNAN(d))
@@ -312,7 +314,7 @@ static void OutReal(R_outpstream_t stream, double d)
 	stream->OutBytes(stream, buf, (int)strlen(buf));
 	break;
     case R_pstream_asciihex_format:
-	if (! R_FINITE(d)) {
+	if (!R_FINITE(d)) {
 	    if (ISNA(d))
 		Rsnprintf(buf, sizeof(buf), "NA\n");
 	    else if (ISNAN(d))
@@ -415,7 +417,7 @@ static void InWord(R_inpstream_t stream, char * buf, int size)
 	if (c == EOF)
 	    error("%s", _("read error"));
     } while (isspace(c));
-    while (! isspace(c) && i < size) {
+    while (!isspace(c) && i < size) {
 	buf[i++] = (char) c;
 	c = stream->InChar(stream);
     }
@@ -1321,7 +1323,7 @@ static void ScanForCircles1(SEXP s, CircleHashTable *ct)
     switch (TYPEOF(s)) {
     case LANGSXP:
     case LISTSXP:
-	if (! AddCircleHash(s, ct)) {
+	if (!AddCircleHash(s, ct)) {
 	    ScanForCircles1(CAR(s), ct);
 	    ScanForCircles1(CDR(s), ct);
 	}
@@ -2247,17 +2249,15 @@ static SEXP ReadBCConsts(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 
 static SEXP ReadBC1(SEXP ref_table, SEXP reps, R_inpstream_t stream)
 {
-    GCStackRoot<ByteCode> s;
-    s = ByteCode::create();
+    GCStackRoot<IntVector> code;
     R_ReadItemDepth++;
-    SETCAR(s, ReadItem(ref_table, stream)); /* code */
+    code = SEXP_downcast<IntVector *>(ReadItem(ref_table, stream)); /* code */
     R_ReadItemDepth--;
-    SEXP bytes = PROTECT(CAR(s));
-    SETCAR(s, R_bcEncode(bytes));
-    SETCDR(s, ReadBCConsts(ref_table, reps, stream)); /* consts */
-    SET_TAG(s, R_NilValue); /* expr */
-    R_registerBC(bytes, s);
-    UNPROTECT(1);
+    code = SEXP_downcast<IntVector *>(R_bcEncode(code));
+    GCStackRoot<ListVector> constants;
+    constants = SEXP_downcast<ListVector *>(ReadBCConsts(ref_table, reps, stream));
+    ByteCode *s = ByteCode::create(code, constants);
+    R_registerBC(code, s);
     return s;
 }
 
@@ -2492,17 +2492,17 @@ void R_InitFileInPStream(R_inpstream_t stream, FILE *fp,
 
 static void CheckInConn(Rconnection con)
 {
-    if (! con->isopen)
+    if (!con->isopen)
 	error("%s", _("connection is not open"));
-    if (! con->canread || con->read == NULL)
+    if (!con->canread || con->read == NULL)
 	error("%s", _("cannot read from this connection"));
 }
 
 static void CheckOutConn(Rconnection con)
 {
-    if (! con->isopen)
+    if (!con->isopen)
 	error("%s", _("connection is not open"));
-    if (! con->canwrite || con->write == NULL)
+    if (!con->canwrite || con->write == NULL)
 	error("%s", _("cannot write to this connection"));
 }
 
@@ -2612,11 +2612,10 @@ void R_InitConnInPStream(R_inpstream_t stream,  Rconnection con,
 /* ought to quote the argument, but it should only be an ENVSXP or STRSXP */
 static SEXP CallHook(SEXP x, SEXP fun)
 {
-    SEXP val, call;
-    PROTECT(call = LCONS(fun, CONS(x, R_NilValue)));
-    val = eval(call, R_GlobalEnv);
-    UNPROTECT(1);
-    return val;
+    GCStackRoot<> call;
+    call = LCONS(fun, CONS(x, R_NilValue));
+
+    return Evaluator::evaluate(call, Environment::global());
 }
 
 /* Used from saveRDS().
@@ -3048,7 +3047,7 @@ static SEXP appendRawToFile(SEXP file, SEXP bytes)
     SEXP val;
     const char *cfile;
 
-    if (! IS_PROPER_STRING(file))
+    if (!IS_PROPER_STRING(file))
 	error("%s", _("not a proper file name"));
     CXXR::RAllocStack::Scope rscope;
     cfile = translateCharFP(STRING_ELT(file, 0));
@@ -3126,7 +3125,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
     SEXP val;
     const char *cfile;
 
-    if (! IS_PROPER_STRING(file))
+    if (!IS_PROPER_STRING(file))
 	error("%s", _("not a proper file name"));
     CXXR::RAllocStack::Scope rscope;
     cfile = translateCharFP(STRING_ELT(file, 0));

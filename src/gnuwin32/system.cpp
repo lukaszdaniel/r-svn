@@ -492,13 +492,22 @@ static void GuiWriteConsole(const char *buf,int len)
     else MessageBox(NULL, buf, "Console not found", MB_OK | MB_ICONEXCLAMATION);
 }
 
+static void GuiWriteConsoleEx(const char *buf,int len, otype_t otype)
+{
+    if (RConsole) consolewrites(RConsole, buf);
+    else MessageBox(NULL, buf, "Console not found", MB_OK | MB_ICONEXCLAMATION);
+}
+
 /* Rterm write */
 static void TermWriteConsole(const char *buf, int len)
 {
     printf("%s", buf);
 }
 
-
+static void TermWriteConsoleEx(const char *buf, int len, otype_t otype)
+{
+    printf("%s", buf);
+}
 
 
 
@@ -1177,6 +1186,7 @@ int cmdlineoptions(int ac, char **av)
 	R_Consolefile = stderr; /* used for errors */
 	R_Outputfile = stdout;  /* used for sink-able output */
 	Rp->WriteConsole = TermWriteConsole;
+	Rp->WriteConsoleEx = TermWriteConsoleEx;
 	Rp->ShowMessage = char_message;
 	Rp->YesNoCancel = char_YesNoCancel;
 	Rp->Busy = CharBusy;
@@ -1184,6 +1194,7 @@ int cmdlineoptions(int ac, char **av)
 	Rp->R_Interactive = TRUE;
 	Rp->ReadConsole = GuiReadConsole;
 	Rp->WriteConsole = GuiWriteConsole;
+	Rp->WriteConsoleEx = GuiWriteConsoleEx;
 	Rp->ShowMessage = askok;
 	Rp->YesNoCancel = askyesnocancel;
 	Rp->Busy = GuiBusy;
@@ -1191,6 +1202,7 @@ int cmdlineoptions(int ac, char **av)
 
     ptr_ShowMessage = Rp->ShowMessage; /* used here */
     ptr_WriteConsole = Rp->WriteConsole;
+    ptr_WriteConsoleEx = Rp->WriteConsoleEx;
     /* Rp->WriteConsole is guaranteed to be set above,
        so we know WriteConsoleEx is not used */
     ptr_ProcessEvents = Rp->CallBack;

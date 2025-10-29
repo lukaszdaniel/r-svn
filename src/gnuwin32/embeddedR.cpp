@@ -99,6 +99,7 @@ int Rf_initialize_R(int argc, char **argv)
     Rp->EmitEmbeddedUTF8 = FALSE;
     Rp->ReadConsole = myReadConsole;
     Rp->WriteConsole = myWriteConsole;
+    Rp->WriteConsoleEx = NULL;
     Rp->CallBack = myCallBack;
     Rp->ShowMessage = askok;
     Rp->YesNoCancel = askyesnocancel;

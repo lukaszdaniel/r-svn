@@ -44,10 +44,28 @@
 
 using namespace CXXR;
 
-#define too_small 1e-12
-#define highlight_zero false
-
 #if CXXR_FALSE
+#include <Rinterface.h>
+
+#define R_INTERFACE_PTRS 1
+
+static void (*save_ptr_R_WriteConsole)(const char *, int);
+static void (*save_ptr_R_WriteConsoleEx)(const char *, int, int);
+static void *save_R_Outputfile;
+static void *save_R_Consolefile;
+
+static char crnormal[64], crnumber[64], crnegnum[64], crdate[64], crstring[64],
+            crconst[64], crstderr[64], crwarn[64], crerror[64],
+            crlogicalF[64], crlogicalT[64], crinfinite[64], crindex[64], crzero[64];
+static int normalsize, numbersize, negnumsize, datesize, stringsize, constsize,
+           logicalTsize, logicalFsize, infinitesize, indexsize, zerosize;
+static int colors_initialized = 0;
+static int colorout_initialized = 0;
+static char *piece;
+
+static double too_small = 1e-12;
+static int highlight_zero = 0;
+
 typedef struct pattern {
     char *ptrn;
     char *compiled;
@@ -60,6 +78,9 @@ typedef struct pattern {
 
 pattern_t *P = NULL;
 #endif
+
+#define too_small 1e-12
+#define highlight_zero false
 
 #define crnormal   "\033[0;38;5;40m"
 #define crnumber   "\033[0;38;5;214m"
@@ -489,7 +510,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len_, otype
         while(i < len){
 #if CXXR_FALSE
             /* Custom patterns */
-            haspttrn = 0;
+            haspttrn = false;
             if(P){
                 unsigned int psz = 0;
                 pattern_t *p = P;

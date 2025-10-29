@@ -32,10 +32,12 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rversion.h>
@@ -64,17 +66,18 @@ Type 'q()' to quit R.\n\n"));
 
 attribute_hidden SEXP do_version(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    GCStackRoot<> value, names;
+    GCStackRoot<ListVector> value;
+    GCStackRoot<StringVector> names;
     char buf[128];
     int i = 0;
 
     checkArity(op, args);
 #ifndef Win32
-    value = allocVector(VECSXP,14);
-    names = allocVector(STRSXP,14);
+    value = ListVector::create(14);
+    names = StringVector::create(14);
 #else
-    value = allocVector(VECSXP,15);
-    names = allocVector(STRSXP,15);
+    value = ListVector::create(15);
+    names = StringVector::create(15);
 #endif
 
     SET_STRING_ELT(names, i, mkChar("platform"));

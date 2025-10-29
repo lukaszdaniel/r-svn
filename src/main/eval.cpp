@@ -8600,7 +8600,6 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 #ifdef THREADED_CODE
 attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
 {
-    SEXP code;
     BCODE *pc;
 
     R_xlen_t m = (sizeof(BCODE) + sizeof(int) - 1) / sizeof(int);
@@ -8613,14 +8612,14 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
     int v = ipc[0];
     // Check version:
     if (v < R_bcMinVersion || v > R_bcVersion) {
-	code = IntVector::create(m * 2);
+	IntVector *code = IntVector::create(m * 2);
 	pc = (BCODE *) DATAPTR(code);
 	pc[0].i = v;
 	pc[1].v = opinfo[BCMISMATCH_OP].addr;
 	return code;
     }
 
-	code = IntVector::create(m * n);
+	IntVector *code = IntVector::create(m * n);
 	memset(INTEGER(code), 0, m * n * sizeof(int));
 	pc = (BCODE *) DATAPTR(code);
 
@@ -8668,7 +8667,7 @@ attribute_hidden SEXP R::R_bcDecode(SEXP code) {
     R_xlen_t n = LENGTH(code) / m;
     BCODE *pc = (BCODE *) DATAPTR(code);
 
-    SEXP bytes = IntVector::create(n);
+    IntVector *bytes = IntVector::create(n);
     int *ipc = INTEGER(bytes);
 
     /* copy the version number */
@@ -8734,7 +8733,8 @@ attribute_hidden void R::R_registerBC(SEXP bcBytes, SEXP bcode)
 		ipc[i] == CALLSPECIAL_OP)
             loadableConsts++;
 
-    SEXP constsRecord = PROTECT(ListVector::create(loadableConsts * 2 + 3));
+    GCStackRoot<ListVector> constsRecord;
+    constsRecord = ListVector::create(loadableConsts * 2 + 3);
     int crIdx = 3;
     for (int i = 0; i < n; i += opinfo[ipc[i]].argc + 1)
         if (ipc[i] == LDCONST_OP || ipc[i] == PUSHCONSTARG_OP ||
@@ -8745,7 +8745,8 @@ attribute_hidden void R::R_registerBC(SEXP bcBytes, SEXP bcode)
         }
 #else
     /* add the whole constant pool */
-    SEXP constsRecord = PROTECT(ListVector::create(2 + 3));
+    GCStackRoot<ListVector> constsRecord;
+    constsRecord = ListVector::create(2 + 3);
     SET_VECTOR_ELT(constsRecord, 3, consts);
     /* the consts reference is in the record twice to make the code simpler */
     SET_VECTOR_ELT(constsRecord, 4, duplicate(consts));
@@ -8756,7 +8757,6 @@ attribute_hidden void R::R_registerBC(SEXP bcBytes, SEXP bcode)
     SET_VECTOR_ELT(constsRecord, 1, wref);
     SET_VECTOR_ELT(constsRecord, 2, consts);
     SET_VECTOR_ELT(R_ConstantsRegistry, 0, constsRecord);
-    UNPROTECT(1); /* constsRecord */
 }
 
 /* A potentially very verbose report for modified compiler constant. */
@@ -8854,17 +8854,17 @@ attribute_hidden bool R::R_checkConstants(bool abortOnError)
     if (R_check_constants <= 0 || R_ConstantsRegistry == NULL)
 	return true;
 
-    static bool checkingInProgress = false;
+    static bool s_checkingInProgress = false;
 
-    if (checkingInProgress)
+    if (s_checkingInProgress)
 	/* recursive invocation is possible because of allocation
            in R_compute_identical */
 	return true;
 
     bool constsOK = true;
-    /* set up context to recover checkingInProgress */
+    /* set up context to recover s_checkingInProgress */
     try {
-    checkingInProgress = true;
+    s_checkingInProgress = true;
     SEXP prev_crec = R_ConstantsRegistry;
     SEXP crec = VECTOR_ELT(prev_crec, 0);
     while(crec != R_NilValue) {
@@ -8880,10 +8880,10 @@ attribute_hidden bool R::R_checkConstants(bool abortOnError)
 	crec = VECTOR_ELT(crec, 0);
     }
     } catch (...) {
-        checkingInProgress = false;
+        s_checkingInProgress = false;
         throw;
 	}
-    checkingInProgress = false;
+    s_checkingInProgress = false;
     return constsOK;
 }
 
@@ -8941,7 +8941,7 @@ attribute_hidden SEXP do_is_builtin_internal(SEXP call, SEXP op, SEXP args, SEXP
 
 static SEXP disassemble(SEXP bc)
 {
-  GCStackRoot<> ans;
+  GCStackRoot<ListVector> ans;
   SEXP dconsts;
   SEXP code = BCODE_CODE(bc);
   SEXP consts = BCODE_CONSTS(bc);
@@ -9040,7 +9040,7 @@ attribute_hidden SEXP do_growconst(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("constant buffer must be a generic vector"));
 
     int n = LENGTH(constBuf);
-    SEXP ans = ListVector::create(2 * n);
+    ListVector *ans = ListVector::create(2 * n);
     for (int i = 0; i < n; i++)
 	SET_VECTOR_ELT(ans, i, VECTOR_ELT(constBuf, i));
 

@@ -287,19 +287,16 @@ static size_t enctowcs(wchar_t *wc, char *s, int n)
 
 static void xbufadds(xbuf p, const char *s, int user)
 {
-    int n = strlen(s) + 1; /* UCS-2 must be no more chars */
-    if (n < 1000) {
-	std::unique_ptr<wchar_t[]> buf = std::make_unique<wchar_t[]>(n);
-	wchar_t *tmp = buf.get();
-	enctowcs(tmp, (char *) s, n);
-	xbufaddxs(p, tmp, user);
-    } else {
-	/* very long line */
-	wchar_t *tmp = (wchar_t*) malloc(n * sizeof(wchar_t));
-	enctowcs(tmp, (char *) s, n);
-	xbufaddxs(p, tmp, user);
-	free(tmp);
-    }
+    int n = strlen(s) + 1; // UCS-2 must be no more chars
+
+    // Use a vector to manage memory automatically
+    std::vector<wchar_t> buf(n);
+
+    // Convert encoding into the buffer
+    enctowcs(buf.data(), (char*)s, n);
+
+    // Pass to the existing function
+    xbufaddxs(p, buf.data(), user);
 }
 
 static void xbuffixl(xbuf p)
