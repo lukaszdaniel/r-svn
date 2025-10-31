@@ -64,13 +64,14 @@ SEXP R_GAxisPars(SEXP usr, SEXP is_log, SEXP nintLog)
     // -> ../../../main/graphics.c
 
     const char *nms[] = {"axp", "n", ""};
-    GCStackRoot<> axp, ans;
+    GCStackRoot<> ans;
+    GCStackRoot<RealVector> axp;
     ans = mkNamed(VECSXP, nms);
     axp = RealVector::create(2);
     SET_VECTOR_ELT(ans, 0, axp);
     SET_VECTOR_ELT(ans, 1, ScalarInteger(n));
-    REAL(axp)[0] = min;
-    REAL(axp)[1] = max;
+    (*axp)[0] = min;
+    (*axp)[0] = max;
 
     return ans;
 }

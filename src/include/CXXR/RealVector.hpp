@@ -105,7 +105,7 @@ extern "C"
      *
      * @return Pointer to element 0 of \a x.
      */
-    double *REAL(SEXP x);
+    double *(REAL)(SEXP x);
 
     /**
      * @param x Pointer to an \c RealVector (i.e. an R numeric vector).
@@ -114,7 +114,7 @@ extern "C"
      *
      * @return Pointer to constant element 0 of \a x.
      */
-    const double *REAL_RO(SEXP x);
+    const double *(REAL_RO)(SEXP x);
     const double *REAL_OR_NULL(SEXP x);
     double REAL_ELT(SEXP x, R_xlen_t i);
     void SET_REAL_ELT(SEXP x, R_xlen_t i, double v);
