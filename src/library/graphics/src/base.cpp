@@ -26,7 +26,9 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Graphics.h>
 #include <GraphicsBase.h>
@@ -34,6 +36,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 static R_INLINE GPar* dpSavedptr(pGEDevDesc dd) {
     if (baseRegisterIndex == -1)
@@ -192,7 +195,7 @@ static SEXP baseCallback(GEevent task, pGEDevDesc dd, SEXP data)
 {
     GESystemDesc *sd;
     baseSystemState *bss, *bss2;
-    SEXP result = R_NilValue;
+    GCStackRoot<> result(R_NilValue);
 
     switch (task) {
     case GE_FinaliseState:
@@ -261,30 +264,29 @@ static SEXP baseCallback(GEevent task, pGEDevDesc dd, SEXP data)
     case GE_SaveSnapshotState:
         /* called from GEcreateSnapshot */
         { 
-            SEXP pkgName;
+            GCStackRoot<> pkgName;
             bss = (baseSystemState *) (dd->gesd[baseRegisterIndex]->systemSpecific);
             /* Changed from INTSXP in 2.7.0: but saved graphics lists
                are protected by an R version number */
-            PROTECT(result = allocVector(RAWSXP, sizeof(GPar)));
+            result = RawVector::create(sizeof(GPar));
             copyGPar(&(bss->dpSaved), (GPar*) RAW(result));
-            PROTECT(pkgName = mkString("graphics"));
+            pkgName = mkString("graphics");
             setAttrib(result, install("pkgName"), pkgName);
-            UNPROTECT(2);
         }
 	break;
     case GE_RestoreSnapshotState:
         /* called from GEplaySnapshot */
         {
             int nState = LENGTH(data) - 1;
-            SEXP graphicsState, snapshotEngineVersion;
-            PROTECT(graphicsState = R_NilValue);
+            GCStackRoot<> graphicsState, snapshotEngineVersion;
+            graphicsState = R_NilValue;
             /* Prior to engine version 11, "pkgName" was not stored.
              * (can tell because "engineVersion" was not stored either.)
              * Assume 'graphics' is first state in snapshot
              * (though this could be fatal).
              */
-            PROTECT(snapshotEngineVersion = 
-                    getAttrib(data, install("engineVersion")));
+            snapshotEngineVersion = 
+                    getAttrib(data, install("engineVersion"));
             if (isNull(snapshotEngineVersion)) {
                 graphicsState = VECTOR_ELT(data, 1);
             } else {
@@ -324,7 +326,6 @@ static SEXP baseCallback(GEevent task, pGEDevDesc dd, SEXP data)
                  */
                 bss->baseDevice = FALSE;
             }
-            UNPROTECT(2);
         }
 	break;
     case GE_CheckPlot:

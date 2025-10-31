@@ -28,6 +28,8 @@
 /* Formerly a version in src/appl/binning.c */
 #include <cstring> // for memset
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h> // for asLogicalNoNA()
 #include <Rinternals.h>
 #include <Rmath.h> /* for imin2 and imax2 */
@@ -39,6 +41,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 static void stem_print(int close, int dist, int ndigits)
 {
@@ -206,15 +209,18 @@ static void C_bincount(double *x, R_xlen_t n, double *breaks, R_xlen_t nb, int *
 }
 
 /* The R wrapper removed non-finite values */
-SEXP C_BinCount(SEXP x, SEXP breaks, SEXP right, SEXP lowest)
+SEXP C_BinCount(SEXP x_, SEXP breaks_, SEXP right, SEXP lowest)
 {
-    x = PROTECT(coerceVector(x, REALSXP));
-    breaks = PROTECT(coerceVector(breaks, REALSXP));
+    GCStackRoot<> x(x_);
+    GCStackRoot<> breaks(breaks_);
+    x = coerceVector(x_, REALSXP);
+    breaks = coerceVector(breaks_, REALSXP);
     R_xlen_t n = XLENGTH(x), nB = XLENGTH(breaks);
     bool sr = asLogicalNoNA(right, "right");
     bool sl = asLogicalNoNA(lowest, "include.lowest");
-    SEXP counts = PROTECT(allocVector(INTSXP, nB - 1));
+    GCStackRoot<> counts;
+    counts = IntVector::create(nB - 1);
     C_bincount(REAL(x), n, REAL(breaks), nB, INTEGER(counts), sr, sl);
-    UNPROTECT(3);
+
     return counts;
 }

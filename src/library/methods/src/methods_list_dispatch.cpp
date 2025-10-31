@@ -27,7 +27,9 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Defn.h>
 #include "localization.h"
 
@@ -36,6 +38,7 @@
 #include <Rinternals.h>
 
 using namespace R;
+using namespace CXXR;
 
 #define STRING_VALUE(x)		CHAR(asChar(x))
 
@@ -1049,7 +1052,8 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
 {
     static SEXP R_mtable = NULL, R_allmtable, R_sigargs, R_siglength, R_dots;
     int nprotect = 0;
-    SEXP mtable, classes, thisClass = R_NilValue /* -Wall */, sigargs,
+    GCStackRoot<> classes;
+    SEXP mtable, thisClass = R_NilValue /* -Wall */, sigargs,
 	siglength, f_env = R_NilValue, method, f, val = R_NilValue;
     char *buf, *bufptr;
     int nargs, i, lwidth = 0;
@@ -1089,7 +1093,7 @@ SEXP R_dispatchGeneric(SEXP fname, SEXP ev, SEXP fdef)
        mtable == R_UnboundValue)
 	error("%s", _("generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"));
     nargs = asInteger(siglength);
-    PROTECT(classes = allocVector(VECSXP, nargs)); nprotect++;
+    classes = ListVector::create(nargs);
     if (nargs > LENGTH(sigargs))
 	error("%s", _("'.SigArgs' is shorter than '.SigLength' says it should be"));
     for(i = 0; i < nargs; i++) {

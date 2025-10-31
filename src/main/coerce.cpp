@@ -666,11 +666,11 @@ static SEXP coerceToComplex(SEXP v)
 
 static SEXP coerceToRaw(SEXP v)
 {
-    SEXP ans;
+    GCStackRoot<RawVector> ans;
     int warn = 0, tmp;
-    R_xlen_t i, n;
+    R_xlen_t i, n = XLENGTH(v);
 
-    PROTECT(ans = allocVector(RAWSXP, n = XLENGTH(v)));
+    ans = RawVector::create(n);
     Rbyte *pa = RAW(ans);
     ans->maybeTraceMemory(v);
     SHALLOW_DUPLICATE_ATTRIB2(ans, v);
@@ -734,7 +734,7 @@ static SEXP coerceToRaw(SEXP v)
 	UNIMPLEMENTED_TYPE("coerceToRaw", v);
     }
     if (warn) CoercionWarning(warn);
-    UNPROTECT(1);
+
     return ans;
 }
 

@@ -616,7 +616,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 	pf_str(R_Srcfiles[i-1]);
 	pf_str("\n"); 
     }
-    
+
     if (strlen(buf)) {
 	pf_str(buf);
 	pf_str("\n");
@@ -1061,7 +1061,7 @@ namespace
 {
     SEXP ByteCode_evaluate(SEXP e, SEXP rho)
     {
-        return bcEval(e, rho, true);
+        return ByteCode::interpret(e, rho, true);
     }
 
     SEXP Symbol_evaluate(SEXP e, SEXP rho)
@@ -2861,8 +2861,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
     v = R_NilValue;
 
     {
-    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
-		 R_NilValue);
+    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
 
     for (R_xlen_t i = 0; i < n; i++) {
 
@@ -2965,8 +2964,7 @@ attribute_hidden SEXP do_while(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool bgn = BodyHasBraces(body);
 
     {
-    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
-		 R_NilValue);
+    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
 
     while (true)
     {
@@ -3021,8 +3019,7 @@ attribute_hidden SEXP do_repeat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SEXP body = CAR(args);
     {
-    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
-		 R_NilValue);
+    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
 
     while (true)
     {
@@ -6283,14 +6280,13 @@ static void bc_check_sigint(void)
 
 static void loopWithContext(SEXP code, SEXP rho)
 {
-    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue,
-		 R_NilValue);
+    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
 
     while (true)
     {
         try
         {
-            bcEval(code, rho, false);
+            ByteCode::interpret(code, rho, false);
             break;
         }
         catch (JMPException &e)
@@ -7450,7 +7446,7 @@ SEXP ByteCode::interpret(SEXP body, SEXP rho, bool useCache)
   struct bcEval_locals locals = bcode_setup_locals(body, rho, useCache);
   SEXP value = bcEval_loop(&locals);
   restore_bcEval_globals(&globals);
-  return value;  
+  return value;
 }
 
 SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)

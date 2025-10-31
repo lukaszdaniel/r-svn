@@ -24,10 +24,13 @@
 #include <config.h>
 #endif
 
+#include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 #include "localization.h"
 #include "grDevices.h"
+
+using namespace CXXR;
 
 SEXP defineGroup(SEXP args) 
 {
@@ -68,10 +71,8 @@ SEXP useGroup(SEXP args)
 SEXP devUp(SEXP args) {
     pDevDesc dd = GEcurrentDevice()->dev;
     double left, right, bottom, top;
-    SEXP ans;
 
     dd->size(&left, &right, &bottom, &top, dd);
-    ans = allocVector(LGLSXP, 1);
-    LOGICAL(ans)[0] = top > bottom;
+    LogicalVector *ans = LogicalVector::createScalar(top > bottom);
     return ans;
 }

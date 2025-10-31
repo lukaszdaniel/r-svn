@@ -15,9 +15,11 @@
 
 #include <R_ext/Boolean.h>	/* TRUE,... */
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 #include "localization.h"
 
+using namespace CXXR;
 
 static void split(int n, double *x,
 		  int m, int *in,
@@ -436,7 +438,7 @@ SEXP chull(SEXP x)
     int *ih = (int*)R_alloc(4*n, sizeof(int));
     x = PROTECT(coerceVector(x, REALSXP));
     in_chull(&n, REAL(x), &n, in, ih+n, ih+2*n, ih, &nh, ih+3*n);
-    SEXP ans = allocVector(INTSXP, nh);
+    IntVector *ans = IntVector::create(nh);
     int *ians = INTEGER(ans);
     for (int i = 0; i < nh; i++) ians[i] = ih[nh - 1 -i];
     UNPROTECT(1);

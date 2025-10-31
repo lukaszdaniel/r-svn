@@ -19,9 +19,13 @@
  */
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Rinternals.h>
 #include "localization.h"
 #include "statsErr.h"
+
+using namespace CXXR;
 
 #define R_MSG_type	_("invalid 'type' (%s) of argument")
 
@@ -30,7 +34,8 @@
 /* complete.cases(.) */
 SEXP compcases(SEXP args)
 {
-    SEXP s, t, u, rval;
+    GCStackRoot<LogicalVector> rval;
+    SEXP s, t, u;
     int i, len;
 
     args = CDR(args);
@@ -110,7 +115,7 @@ SEXP compcases(SEXP args)
 
     if (len < 0)
 	error("%s", _("no input has determined the number of cases"));
-    PROTECT(rval = allocVector(LGLSXP, len));
+    rval = LogicalVector::create(len);
     for (i = 0; i < len; i++) LOGICAL(rval)[i] = 1;
     /* FIXME : there is a lot of shared code here for vectors. */
     /* It should be abstracted out and optimized. */
@@ -145,7 +150,6 @@ SEXP compcases(SEXP args)
 			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    default:
-			UNPROTECT(1);
 			error(R_MSG_type, R_typeToChar(u));
 		    }
 		}
@@ -180,7 +184,6 @@ SEXP compcases(SEXP args)
 			    LOGICAL(rval)[i % len] = 0;
 			break;
 		    default:
-			UNPROTECT(1);
 			error(R_MSG_type, R_typeToChar(u));
 		    }
 		}
@@ -211,13 +214,11 @@ SEXP compcases(SEXP args)
 			LOGICAL(rval)[i % len] = 0;
 		    break;
 		default:
-		    UNPROTECT(1);
 		    error(R_MSG_type, R_typeToChar(u));
 		}
 	    }
 	}
     }
-    UNPROTECT(1);
     return rval;
 
  bad:

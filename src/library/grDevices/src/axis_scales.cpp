@@ -22,6 +22,8 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/RealVector.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/GraphicsEngine.h>
@@ -62,12 +64,13 @@ SEXP R_GAxisPars(SEXP usr, SEXP is_log, SEXP nintLog)
     // -> ../../../main/graphics.c
 
     const char *nms[] = {"axp", "n", ""};
-    SEXP axp, ans = PROTECT(mkNamed(VECSXP, nms));
-    SET_VECTOR_ELT(ans, 0, (axp = allocVector(REALSXP, 2)));// protected
+    GCStackRoot<> axp, ans;
+    ans = mkNamed(VECSXP, nms);
+    axp = RealVector::create(2);
+    SET_VECTOR_ELT(ans, 0, axp);
     SET_VECTOR_ELT(ans, 1, ScalarInteger(n));
     REAL(axp)[0] = min;
     REAL(axp)[1] = max;
 
-    UNPROTECT(1);
     return ans;
 }

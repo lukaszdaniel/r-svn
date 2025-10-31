@@ -26,8 +26,10 @@
 #include <config.h>
 #endif
 
-#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
+#include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Random.h>
@@ -41,6 +43,7 @@
 #include <R_ext/Rdynload.h>
 
 using namespace R;
+using namespace CXXR;
 
 static DL_FUNC User_unif_fun, User_unif_nseed,
 	User_unif_seedloc;
@@ -465,7 +468,7 @@ void PutRNGstate(void)
     }
     else {
 	/* need to allocate a fresh .Random.seed vector */
-	seeds = PROTECT(allocVector(INTSXP, len_seed + 1));
+	seeds = PROTECT(IntVector::create(len_seed + 1));
 	INTEGER(seeds)[0] = kinds;
 	copy_seeds_out(seeds, RNG_Table[RNG_kind].i_seed, len_seed);
 
@@ -549,14 +552,15 @@ static void Samp_kind(Sampletype kind)
 
 attribute_hidden SEXP do_RNGkind(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, rng, norm, sample;
+    GCStackRoot<IntVector> ans;
+    SEXP rng, norm, sample;
 
     checkArity(op,args);
     GetRNGstate(); /* might not be initialized */
-    PROTECT(ans = allocVector(INTSXP, 3));
-    INTEGER(ans)[0] = RNG_kind;
-    INTEGER(ans)[1] = N01_kind;
-    INTEGER(ans)[2] = Sample_kind;
+    ans = IntVector::create(3);
+    (*ans)[0] = RNG_kind;
+    (*ans)[1] = N01_kind;
+    (*ans)[2] = Sample_kind;
     rng = CAR(args);
     norm = CADR(args);
     sample = CADDR(args);
@@ -570,7 +574,7 @@ attribute_hidden SEXP do_RNGkind(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isNull(sample)) { /* set a new sample kind */
 	Samp_kind((Sampletype) asInteger(sample));
     }
-    UNPROTECT(1);
+
     return ans;
 }
 

@@ -37,6 +37,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Rdynpriv.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -174,8 +175,8 @@ SEXP Rsockread(SEXP ssock, SEXP smaxlen)
     int maxlen = asInteger(smaxlen);
     if (maxlen < 0) /* also catches NA_INTEGER */
 	error("%s", _("maxlen must be non-negative"));
-    GCStackRoot<> rbuf;
-    rbuf = allocVector(RAWSXP, maxlen + 1);
+    GCStackRoot<RawVector> rbuf;
+    rbuf = RawVector::create(maxlen + 1);
     char *buf = (char *) RAW(rbuf), *abuf[1];
     abuf[0] = buf;
     internet_Init();

@@ -22,6 +22,7 @@
 #endif
 
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/RawVector.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h> /* for checkArity, streql, streqln */
 #include <Internal.h>
@@ -35,6 +36,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 #ifdef Win32
 SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
@@ -308,7 +310,7 @@ SEXP shortpath(SEXP paths)
 SEXP octsize(SEXP size)
 {
     double s = asReal(size);
-    SEXP ans = allocVector(RAWSXP, 11);
+    RawVector *ans = RawVector::create(11);
     Rbyte *ra = RAW(ans);
     if (!R_FINITE(s) && s >= 0) error("%s", _("size must be finite and >= 0"));
     /* We have to be able to do this on a 32-bit system */

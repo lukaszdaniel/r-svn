@@ -33,14 +33,15 @@
 #endif
 
 #include <algorithm> // for find_if
+#include <Localization.h>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/Closure.hpp>
+#include <CXXR/ListVector.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/SEXP_downcast.hpp>
-#include <Localization.h>
 #include <Defn.h>
 
 using namespace R;
@@ -58,13 +59,13 @@ attribute_hidden SEXP R::mkPRIMSXP(unsigned int offset, bool evaluate)
 {
     SEXP result;
     SEXPTYPE type = evaluate ? BUILTINSXP : SPECIALSXP;
-    static SEXP PrimCache = NULL;
+    static ListVector *PrimCache = NULL;
 #define FunTabSize R_FunTab.size()
     
     if (PrimCache == NULL) {
 
 	/* allocate and protect the cache */
-	PrimCache = allocVector(VECSXP, FunTabSize);
+	PrimCache = ListVector::create(FunTabSize);
 	R_PreserveObject(PrimCache);
     }
 
