@@ -20,7 +20,7 @@ SOURCES_CXX = \
 	NodeStack.cpp PairList.cpp Promise.cpp ProtectStack.cpp RAllocStack.cpp RObject.cpp \
 	S4Object.cpp SEXP_downcast.cpp StackChecker.cpp String.cpp Symbol.cpp VectorBase.cpp WeakRef.cpp \
 	FixedVector.cpp ComplexVector.cpp IntVector.cpp LogicalVector.cpp RawVector.cpp RealVector.cpp \
-	ExpressionVector.cpp ListVector.cpp StringVector.cpp \
+	RAltRep.cpp ExpressionVector.cpp ListVector.cpp StringVector.cpp \
 	allocstats.cpp \
 	CommandLineArgs.cpp \
 	Rdynload.cpp Renviron.cpp RNG.cpp \

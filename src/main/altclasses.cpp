@@ -36,6 +36,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/RAltRep.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
@@ -280,17 +281,16 @@ static SEXP compact_intseq_Sum(SEXP x, Rboolean narm)
     if (COMPACT_SEQ_EXPANDED(x) != R_NilValue) 
 	return NULL;
 #endif
-    double tmp;
     SEXP info = COMPACT_SEQ_INFO(x);
     R_xlen_t size = COMPACT_INTSEQ_INFO_LENGTH(info);
     R_xlen_t n1 = COMPACT_INTSEQ_INFO_FIRST(info);
     int inc = COMPACT_INTSEQ_INFO_INCR(info);
-    tmp = (size / 2.0) * (n1 + n1 + inc * (size - 1));
+    double tmp = (size / 2.0) * (n1 + n1 + inc * (size - 1));
     if (tmp > INT_MAX || tmp < R_INT_MIN)
 	/**** check for overflow of exact integer range? */
-	return ScalarReal(tmp);
+	return RealVector::createScalar(tmp);
     else
-	return ScalarInteger((int) tmp);
+	return IntVector::createScalar(tmp);
 }
 
 
@@ -333,16 +333,16 @@ static void InitCompactIntegerClass(void)
 
 static SEXP new_compact_intseq(R_xlen_t n, int n1, int inc)
 {
-    if (n == 1) return ScalarInteger(n1);
+    if (n == 1) return IntVector::createScalar(n1);
 
     if (inc != 1 && inc != -1)
 	error(_("compact sequences with increment %d not supported yet"), inc);
 
     /* info used REALSXP to allow for long vectors */
     RealVector *info = RealVector::create(3);
-    REAL0(info)[0] = (double) n;
-    REAL0(info)[1] = (double) n1;
-    REAL0(info)[2] = (double) inc;
+    (*info)[0] = (double) n;
+    (*info)[1] = (double) n1;
+    (*info)[2] = (double) inc;
 
     SEXP ans = R_new_altrep(R_compact_intseq_class, info, R_NilValue);
 #ifndef COMPACT_INTSEQ_MUTABLE
@@ -520,7 +520,7 @@ static SEXP compact_realseq_Sum(SEXP x, Rboolean narm)
     double size = (double) COMPACT_REALSEQ_INFO_LENGTH(info);
     double n1 = COMPACT_REALSEQ_INFO_FIRST(info);
     double inc = COMPACT_REALSEQ_INFO_INCR(info);
-    return ScalarReal((size / 2.0) *(n1 + n1 + inc * (size - 1)));
+    return RealVector::createScalar((size / 2.0) *(n1 + n1 + inc * (size - 1)));
 }
 
 
@@ -563,15 +563,15 @@ static void InitCompactRealClass(void)
 
 static SEXP new_compact_realseq(R_xlen_t n, double n1, double inc)
 {
-    if (n == 1) return ScalarReal(n1);
+    if (n == 1) return RealVector::createScalar(n1);
 
     if (inc != 1 && inc != -1)
 	error(_("compact sequences with increment %f not supported yet"), inc);
 
     RealVector *info = RealVector::create(3);
-    REAL(info)[0] = n;
-    REAL(info)[1] = n1;
-    REAL(info)[2] = inc;
+    (*info)[0] = n;
+    (*info)[1] = n1;
+    (*info)[2] = inc;
 
     SEXP ans = R_new_altrep(R_compact_realseq_class, info, R_NilValue);
     MARK_NOT_MUTABLE(ans); /* force duplicate on modify */
@@ -890,7 +890,7 @@ attribute_hidden SEXP R::R_deferred_coerceToString(SEXP v, SEXP info)
 	PROTECT(v); /* may not be needed, but to be safe ... */
 	if (info == NULL) {
 	    PrintDefaults(); /* to set R_print from options */
-	    info = ScalarInteger(R_print.scipen);
+	    info = IntVector::createScalar(R_print.scipen);
 	    if (!streql(OutDec, ".")) {
 		/* non-default OutDec setting -- attach as an attribute */
 		PROTECT(info);

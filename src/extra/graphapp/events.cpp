@@ -916,7 +916,7 @@ void wndproc_unwind_clean(void *data, Rboolean jump)
         THROW(1);
 }
 
-LRESULT WINAPI wndproc_unwind (WNDPROC proc_real, HWND hwnd, UINT message,
+LRESULT WINAPI wndproc_unwind(WNDPROC proc_real, HWND hwnd, UINT message,
                                WPARAM wParam, LPARAM lParam)
 {
     wndproc_call w;
@@ -954,7 +954,7 @@ LRESULT WINAPI wndproc_unwind (WNDPROC proc_real, HWND hwnd, UINT message,
 /* end of R modification */
 
 LRESULT WINAPI
-app_win_proc_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+app_win_proc_real(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     long result;
     int pass = 0;
@@ -970,7 +970,7 @@ app_win_proc_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 /* R modification: propagation of R errors from window procedures. */
 
 LRESULT WINAPI
-app_win_proc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+app_win_proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     return wndproc_unwind(app_win_proc_real, hwnd, message, wParam, lParam);
 }
@@ -979,7 +979,7 @@ app_win_proc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 
 LRESULT WINAPI
-app_doc_proc_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+app_doc_proc_real(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     long result;
     int pass = 0;
@@ -1013,7 +1013,7 @@ app_doc_proc_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 /* R modification: propagation of R errors from window procedures. */
 
 LRESULT WINAPI
-app_doc_proc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+app_doc_proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     return wndproc_unwind(app_doc_proc_real, hwnd, message, wParam, lParam);
 }
@@ -1021,7 +1021,7 @@ app_doc_proc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 /* end of R modification */
 
 LRESULT WINAPI
-app_work_proc_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+app_work_proc_real(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     long result;
     int pass = 0;
@@ -1034,7 +1034,7 @@ app_work_proc_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 /* R modification: propagation of R errors from window procedures. */
 
 LRESULT WINAPI
-app_work_proc (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+app_work_proc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     return wndproc_unwind(app_work_proc_real, hwnd, message, wParam, lParam);
 }
@@ -1070,7 +1070,7 @@ static void send_char(object obj, int ch)
 }
 
 LRESULT WINAPI
-app_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+app_control_procedure_real(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     int prevent_activation = 0;
     int key;
@@ -1191,7 +1191,7 @@ app_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lPara
 /* R modification: propagation of R errors from window procedures. */
 
 LRESULT WINAPI
-app_control_procedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+app_control_procedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     return wndproc_unwind(app_control_procedure_real, hwnd, message, wParam, lParam);
 }
@@ -1199,7 +1199,7 @@ app_control_procedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 /* end of R modification */
 
 LRESULT WINAPI
-edit_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+edit_control_procedure_real(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     int key;
     object obj, next, prev;
@@ -1254,7 +1254,7 @@ edit_control_procedure_real (HWND hwnd, UINT message, WPARAM wParam, LPARAM lPar
 /* R modification: propagation of R errors from window procedures. */
 
 LRESULT WINAPI
-edit_control_procedure (HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+edit_control_procedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     return wndproc_unwind(edit_control_procedure_real, hwnd, message, wParam, lParam);
 }

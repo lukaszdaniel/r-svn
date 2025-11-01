@@ -30,7 +30,7 @@ CXXR_HEADERS = CXXR.hpp Allocator.hpp BadObject.hpp Browser.hpp BuiltInFunction.
 		GCEdge.hpp GCManager.hpp GCNode.hpp GCRoot.hpp GCStackRoot.hpp JMPException.hpp Logical.hpp MemoryBank.hpp \
 		NodeStack.hpp PairList.hpp Promise.hpp ProtectStack.hpp RAllocStack.hpp RContext.hpp RObject.hpp \
 		RTypes.hpp S4Object.hpp SEXP_downcast.hpp SEXPTYPE.hpp StackChecker.hpp String.hpp Symbol.hpp VectorBase.hpp \
-		WeakRef.hpp config.hpp strutil.hpp ElementTraits.hpp \
+		RAltRep.hpp WeakRef.hpp config.hpp strutil.hpp ElementTraits.hpp \
 		FixedVector.hpp ComplexVector.hpp IntVector.hpp LogicalVector.hpp RawVector.hpp RealVector.hpp \
 		ExpressionVector.hpp ListVector.hpp StringVector.hpp
 

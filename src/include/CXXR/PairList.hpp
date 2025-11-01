@@ -149,11 +149,12 @@ namespace CXXR
         // Virtual functions of RObject:
         const char *typeName() const override;
 
-    private:
+    protected:
         // Declared private to ensure that PairList objects are
         // allocated only using 'new':
         ~PairList() {}
 
+    private:
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
         PairList(const PairList &);
