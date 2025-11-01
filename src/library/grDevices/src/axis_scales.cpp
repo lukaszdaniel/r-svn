@@ -71,7 +71,7 @@ SEXP R_GAxisPars(SEXP usr, SEXP is_log, SEXP nintLog)
     SET_VECTOR_ELT(ans, 0, axp);
     SET_VECTOR_ELT(ans, 1, ScalarInteger(n));
     (*axp)[0] = min;
-    (*axp)[0] = max;
+    (*axp)[1] = max;
 
     return ans;
 }
