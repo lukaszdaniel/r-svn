@@ -1092,7 +1092,7 @@ namespace CXXR
                 const VectorBase *vec = static_cast<const VectorBase *>(this);
                 for (R_xlen_t i = 0; i < vec->size(); i++)
                 {
-                    el = static_cast<const RObject **>(vec->u.vecsxp.m_data)[i];
+                    el = static_cast<GCEdge<> *>(vec->u.vecsxp.m_data)[i];
                     if (el != R_NilValue)
                         (*v)(el);
                 }
@@ -1104,7 +1104,7 @@ namespace CXXR
                 const VectorBase *vec = static_cast<const VectorBase *>(this);
                 for (R_xlen_t i = 0; i < vec->size(); i++)
                 {
-                    el = static_cast<const RObject **>(vec->u.vecsxp.m_data)[i];
+                    el = static_cast<GCEdge<> *>(vec->u.vecsxp.m_data)[i];
                     if (el != R_NilValue)
                         (*v)(el);
                 }
@@ -1116,7 +1116,7 @@ namespace CXXR
                 const VectorBase *vec = static_cast<const VectorBase *>(this);
                 for (R_xlen_t i = 0; i < vec->size(); i++)
                 {
-                    el = static_cast<const RObject **>(vec->u.vecsxp.m_data)[i];
+                    el = static_cast<GCEdge<> *>(vec->u.vecsxp.m_data)[i];
                     if (el != R_NilValue)
                         (*v)(el);
                 }

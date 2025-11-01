@@ -1953,18 +1953,18 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
 
 static R_INLINE bool is_wrapper(SEXP x)
 {
-    if (ALTREP(x))
-	switch(TYPEOF(x)) {
-	case INTSXP: return R_altrep_inherits(x, wrap_integer_class);
-	case LGLSXP: return R_altrep_inherits(x, wrap_logical_class);
-	case REALSXP: return R_altrep_inherits(x, wrap_real_class);
-	case CPLXSXP: return R_altrep_inherits(x, wrap_complex_class);
-	case RAWSXP: return R_altrep_inherits(x, wrap_raw_class);
-	case STRSXP: return R_altrep_inherits(x, wrap_string_class);
-	case VECSXP: return R_altrep_inherits(x, wrap_list_class);
-	default: return FALSE;
-	}
-    else return FALSE;
+    if (!ALTREP(x)) return false;
+
+    switch (TYPEOF(x)) {
+    case INTSXP: return R_altrep_inherits(x, wrap_integer_class);
+    case LGLSXP: return R_altrep_inherits(x, wrap_logical_class);
+    case REALSXP: return R_altrep_inherits(x, wrap_real_class);
+    case CPLXSXP: return R_altrep_inherits(x, wrap_complex_class);
+    case RAWSXP: return R_altrep_inherits(x, wrap_raw_class);
+    case STRSXP: return R_altrep_inherits(x, wrap_string_class);
+    case VECSXP: return R_altrep_inherits(x, wrap_list_class);
+    default: return false;
+    }
 }
 
 static SEXP wrap_meta(SEXP x, int srt, int no_na)
@@ -2055,7 +2055,7 @@ attribute_hidden SEXP R::R_tryUnwrap(SEXP x)
 	       type to LISTSXP to limit errors in case the object is
 	       still live. */
 	    ALTREP_SET_TYPEOF(x, LISTSXP);
-	    SETALTREP(x, 0);
+	    // SETALTREP(x, 0);
 	    x->clearAttributes();
 	    SET_DATA1(x, R_NilValue);
 	    SET_DATA2(x, R_NilValue);

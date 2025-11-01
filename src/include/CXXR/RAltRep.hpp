@@ -39,7 +39,7 @@ namespace CXXR
 {
     /** @brief Singly linked list of pairs for Alternative Representation (ALTREP)
      */
-    class AltRep: public PairList
+    class AltRep: public RObject
     {
     public:
         /**
@@ -84,10 +84,12 @@ namespace CXXR
 
     private:
         explicit AltRep(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
-            : PairList(cr, tl, tg)
+            : RObject(LISTSXP)
         {
             sxpinfo.alt = true;
-            // setAltrep(true);
+            u.altrep.m_data1 = cr;
+            u.altrep.m_data2 = tl;
+            u.altrep.m_altclass = tg;
         }
 
         // Declared private to ensure that AltRep objects are
