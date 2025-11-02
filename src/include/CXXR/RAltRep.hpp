@@ -82,6 +82,11 @@ namespace CXXR
         // Virtual functions of RObject:
         const char *typeName() const override;
 
+    protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
     private:
         explicit AltRep(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
             : RObject(LISTSXP)

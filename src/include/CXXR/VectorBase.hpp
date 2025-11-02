@@ -121,6 +121,10 @@ namespace CXXR
         }
 
     protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
         // Declared protected to ensure that VectorBase objects are
         // allocated only using 'new':
         ~VectorBase();

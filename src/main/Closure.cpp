@@ -34,8 +34,7 @@
 #include <CXXR/Closure.hpp>
 #include <R_ext/Error.h>
 #include <Localization.h>
-
-using namespace CXXR;
+#include <Defn.h> // for FORMALS, BODY, CLOENV macros
 
 namespace CXXR
 {
@@ -82,6 +81,26 @@ namespace CXXR
     const char *Closure::typeName() const
     {
         return staticTypeName();
+    }
+
+    void Closure::detachReferents()
+    {
+        FunctionBase::detachReferents();
+    }
+
+    void Closure::visitReferents(const_visitor *v) const
+    {
+        FunctionBase::visitReferents(v);
+        const GCNode *formals = FORMALS(this);
+        const GCNode *body = BODY(this);
+        const GCNode *cloenv = CLOENV(this);
+
+        if (formals != R_NilValue)
+            (*v)(formals);
+        if (body != R_NilValue)
+            (*v)(body);
+        if (cloenv != R_NilValue)
+            (*v)(cloenv);
     }
 } // namespace CXXR
 

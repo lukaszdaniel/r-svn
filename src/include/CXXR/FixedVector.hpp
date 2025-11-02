@@ -121,6 +121,10 @@ namespace CXXR
         const char *typeName() const override;
 
     protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
         /**
          * Declared protected to ensure that FixedVector objects are
          * allocated only using 'new'.
@@ -145,6 +149,14 @@ namespace CXXR
         }
 
         FixedVector &operator=(const FixedVector &) = delete;
+
+        // Helper functions for detachReferents():
+        void detachElements(std::true_type);
+        void detachElements(std::false_type) {}
+
+        // Helper functions for visitReferents():
+        void visitElements(const_visitor *v, std::true_type) const;
+        void visitElements(const_visitor *v, std::false_type) const {}
     };
 
     // VectorTypeFor<T>::type is the type of vector that can hold elements of
@@ -168,6 +180,36 @@ namespace CXXR
     const char *FixedVector<T, ST>::typeName() const
     {
         return FixedVector<T, ST>::staticTypeName();
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::detachElements(std::true_type)
+    {
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::detachReferents()
+    {
+        detachElements(typename ElementTraits::IsGCEdge<T>());
+        VectorBase::detachReferents();
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::visitElements(const_visitor *v, std::true_type) const
+    {
+        for (R_xlen_t i = 0; i < this->size(); i++)
+        {
+            const RObject *el = static_cast<GCEdge<> *>(this->u.vecsxp.m_data)[i];
+            if (el != R_NilValue)
+                (*v)(el);
+        }
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::visitReferents(const_visitor *v) const
+    {
+        VectorBase::visitReferents(v);
+        visitElements(v, typename ElementTraits::IsGCEdge<T>());
     }
 } // namespace CXXR
 

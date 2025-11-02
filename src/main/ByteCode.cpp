@@ -29,6 +29,7 @@
 
 #include <stdexcept>
 #include <CXXR/ByteCode.hpp>
+#include <Defn.h> // for CODE0, CONSTS, EXPR macros
 
 namespace CXXR
 {
@@ -59,6 +60,26 @@ namespace CXXR
     const char *ByteCode::typeName() const
     {
         return staticTypeName();
+    }
+
+    void ByteCode::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void ByteCode::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *code0 = CODE0(this);
+        const GCNode *consts = CONSTS(this);
+        const GCNode *expr = EXPR(this);
+
+        if (code0 != R_NilValue)
+            (*v)(code0);
+        if (consts != R_NilValue)
+            (*v)(consts);
+        if (expr != R_NilValue)
+            (*v)(expr);
     }
 } // namespace CXXR
 

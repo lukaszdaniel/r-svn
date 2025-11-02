@@ -164,6 +164,11 @@ namespace CXXR
          */
         NORET static void nullEnvironmentError();
 
+    protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
     private:
         Environment(SEXP frame, SEXP enclosing_env, SEXP hashtab): RObject(ENVSXP)
         {

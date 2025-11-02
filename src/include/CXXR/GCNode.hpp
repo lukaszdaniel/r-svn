@@ -320,6 +320,27 @@ namespace CXXR
          */
         virtual void visitReferents(const_visitor *v) const {}
 
+        /** @brief Null out all references from this node to other nodes.
+         *
+         * The referents of this node are those objects (derived from
+         * GCNode) designated by a GCEdge within this object.  This
+         * function changes all GCEdges within this object to
+         * encapsulate a null pointer.  It is used during the sweep
+         * phase of a mark-sweep garbage collection to break up
+         * unreachable subgraphs, and in particular to remove
+         * reference loops from them.  After the application of this
+         * method, the GCNode should be regarded as a 'zombie', kept
+         * in existence only so other nodes can detach their
+         * references to it cleanly (using decRefCount()).
+         *
+         * @note If this method is reimplemented in a derived class,
+         * the reimplemented version must remember to invoke
+         * detachReferents() for the immediate base class of the
+         * derived class, to ensure that \e all referents of the
+         * object get detached.
+         */
+        virtual void detachReferents() {}
+
         /** @brief Allocate memory.
          *
          * Allocates memory for a new object of a class derived from

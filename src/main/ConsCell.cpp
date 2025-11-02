@@ -81,6 +81,28 @@ namespace CXXR
         SET_ASSIGNMENT_PENDING(this, on);
     }
 
+    void ConsCell::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void ConsCell::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *car = R_NilValue;
+        const GCNode *cdr = this->u.listsxp.m_tail;
+        const GCNode *tag = this->u.listsxp.m_tag;
+        if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
+            car = this->u.listsxp.m_car;
+
+        if (car != R_NilValue)
+            (*v)(car);
+        if (cdr != R_NilValue)
+            (*v)(cdr);
+        if (tag != R_NilValue)
+            (*v)(tag);
+    }
+
     namespace
     {
         void printAttributes(std::ostream &os, const ConsCell *node)

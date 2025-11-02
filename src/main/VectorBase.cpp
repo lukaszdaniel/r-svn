@@ -184,6 +184,16 @@ namespace CXXR
         }
     }
 
+    void VectorBase::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void VectorBase::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+    }
+
     // The error messages here match those used by CR (as of 3.0.2),
     // not including the malformed unit abbreviations.
     void VectorBase::tooBig(size_type bytes)

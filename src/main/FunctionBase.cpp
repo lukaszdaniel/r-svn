@@ -44,6 +44,16 @@ namespace CXXR
         const auto &SET_RDEBUGptr = SET_RDEBUG;
         const auto &SET_RTRACEptr = SET_RTRACE;
     } // namespace ForceNonInline
+
+    void FunctionBase::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void FunctionBase::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+    }
 } // namespace CXXR
 
 namespace R

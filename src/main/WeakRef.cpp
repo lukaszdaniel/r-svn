@@ -30,9 +30,29 @@
  */
 
 #include <CXXR/WeakRef.hpp>
+#include <Defn.h> // for WEAKREF_KEY, WEAKREF_VALUE, WEAKREF_FINALIZER macros
 
 namespace CXXR
 {
+    void WeakRef::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void WeakRef::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *weakref_key = WEAKREF_KEY(this);
+        const GCNode *weakref_value = WEAKREF_VALUE(this);
+        const GCNode *weakref_finalizer = WEAKREF_FINALIZER(this);
+
+        if (weakref_key != R_NilValue)
+            (*v)(weakref_key);
+        if (weakref_value != R_NilValue)
+            (*v)(weakref_value);
+        if (weakref_finalizer != R_NilValue)
+            (*v)(weakref_finalizer);
+    }
 } // namespace CXXR
 
 namespace R

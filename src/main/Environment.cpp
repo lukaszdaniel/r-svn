@@ -44,8 +44,6 @@
 #include <Rinternals.h>
 #include <Internal.h> // for R_getS4DataSlot
 
-using namespace CXXR;
-
 namespace R
 {
     SEXP R_NewHashedEnv(SEXP enclos, int size);
@@ -112,6 +110,26 @@ namespace CXXR
     const char *Environment::typeName() const
     {
         return staticTypeName();
+    }
+
+    void Environment::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void Environment::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *frame = this->u.envsxp.m_frame;
+        const GCNode *enclos = ENCLOS(this);
+        const GCNode *hashtab = this->u.envsxp.m_hashtab;
+
+        if (frame != R_NilValue)
+            (*v)(frame);
+        if (enclos != R_NilValue)
+            (*v)(enclos);
+        if (hashtab != R_NilValue)
+            (*v)(hashtab);
     }
 
     void Environment::nullEnvironmentError()

@@ -35,10 +35,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Symbol.hpp>
 #include <R_ext/Error.h>
-#include <Rinternals.h>
-
-using namespace R;
-using namespace CXXR;
+#include <Defn.h> // for SYMVALUE, INTERNAL macros
 
 namespace CXXR
 {
@@ -82,6 +79,26 @@ namespace CXXR
     const char *Symbol::typeName() const
     {
         return staticTypeName();
+    }
+
+    void Symbol::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void Symbol::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *printname0 = this->u.symsxp.m_pname;
+        const GCNode *symvalue = SYMVALUE(this);
+        const GCNode *internal = INTERNAL(this);
+
+        if (printname0 != R_NilValue)
+            (*v)(printname0);
+        if (symvalue != R_NilValue)
+            (*v)(symvalue);
+        if (internal != R_NilValue)
+            (*v)(internal);
     }
 
     Symbol *Symbol::obtain(const std::string &name)

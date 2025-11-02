@@ -536,6 +536,7 @@ namespace CXXR
 
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
 
         /** Destructor
          *

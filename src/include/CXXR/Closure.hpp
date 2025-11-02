@@ -188,6 +188,11 @@ namespace CXXR
             void endDebugging() const;
         };
 
+    protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
     private:
         /**
          * @param formal_args List of formal arguments.

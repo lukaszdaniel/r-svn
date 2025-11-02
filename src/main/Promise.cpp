@@ -35,8 +35,6 @@
 #include <CXXR/Symbol.hpp>
 #include <Defn.h> // for IMMEDIATE_PROMISE_VALUES
 
-using namespace CXXR;
-
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -95,6 +93,28 @@ namespace CXXR
 #endif
         return (u.promsxp.m_value != R_UnboundValue);
         // return u.promsxp.m_env == R_NilValue;
+    }
+
+    void Promise::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void Promise::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *prvalue = R_NilValue;
+        const GCNode *prcode = PRCODE(this);
+        const GCNode *prenv = PRENV(this);
+        if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
+            prvalue = PRVALUE0(this);
+
+        if (prvalue != R_NilValue)
+            (*v)(prvalue);
+        if (prcode != R_NilValue)
+            (*v)(prcode);
+        if (prenv != R_NilValue)
+            (*v)(prenv);
     }
 } // namespace CXXR
 

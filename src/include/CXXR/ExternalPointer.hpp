@@ -176,6 +176,11 @@ namespace CXXR
         // Virtual function of RObject:
         const char *typeName() const override;
 
+    protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
     private:
         /**
          * @param ptr The pointer that the ExternalPointer object is

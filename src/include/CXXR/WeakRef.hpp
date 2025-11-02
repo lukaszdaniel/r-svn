@@ -114,6 +114,11 @@ namespace CXXR
             return "weakref";
         }
 
+    protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
     private:
         WeakRef(SEXP key, SEXP value, SEXP finalizer): RObject(WEAKREFSXP)
         {

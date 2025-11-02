@@ -370,6 +370,10 @@ namespace CXXR
         void setAssignmentPending(bool on);
 
     protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
         /**
          * @param st The required ::SEXPTYPE of the ConsCell.  Must
          *           be one of LISTSXP, LANGSXP, DOTSXP or BCODESXP (not

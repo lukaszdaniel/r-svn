@@ -28,8 +28,7 @@
  */
 
 #include <CXXR/ExternalPointer.hpp>
-
-using namespace CXXR;
+#include <Defn.h> // for EXTPTR_PROT, EXTPTR_TAG macros
 
 namespace CXXR
 {
@@ -46,6 +45,23 @@ namespace CXXR
     const char *ExternalPointer::typeName() const
     {
         return ExternalPointer::staticTypeName();
+    }
+
+    void ExternalPointer::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void ExternalPointer::visitReferents(const_visitor * v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *extptr_prot = EXTPTR_PROT(this);
+        const GCNode *extptr_tag = EXTPTR_TAG(this);
+
+        if (extptr_prot != R_NilValue)
+            (*v)(extptr_prot);
+        if (extptr_tag != R_NilValue)
+            (*v)(extptr_tag);
     }
 } // namespace CXXR
 

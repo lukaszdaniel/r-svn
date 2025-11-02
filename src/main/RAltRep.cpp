@@ -31,7 +31,7 @@
 
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAltRep.hpp>
-
+#include <Defn.h> // for CLASS, DATA1, DATA2 macros
 
 namespace CXXR
 {
@@ -53,6 +53,26 @@ namespace CXXR
     const char *AltRep::typeName() const
     {
         return staticTypeName();
+    }
+
+    void AltRep::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void AltRep::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *altclass = CLASS(this);
+        const GCNode *altdata1 = DATA1(this);
+        const GCNode *altdata2 = DATA2(this);
+
+        if (altclass != R_NilValue)
+            (*v)(altclass);
+        if (altdata1 != R_NilValue)
+            (*v)(altdata1);
+        if (altdata2 != R_NilValue)
+            (*v)(altdata2);
     }
 } // namespace CXXR
 

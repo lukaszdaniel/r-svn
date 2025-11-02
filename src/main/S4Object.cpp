@@ -30,8 +30,6 @@
 #include <CXXR/S4Object.hpp>
 #include <Defn.h> // for SET_S4_OBJECT
 
-using namespace CXXR;
-
 namespace CXXR
 {
     // Force the creation of non-inline embodiments of functions callable
@@ -53,6 +51,20 @@ namespace CXXR
     const char *S4Object::typeName() const
     {
         return S4Object::staticTypeName();
+    }
+
+    void S4Object::detachReferents()
+    {
+        RObject::detachReferents();
+    }
+
+    void S4Object::visitReferents(const_visitor *v) const
+    {
+        RObject::visitReferents(v);
+        const GCNode *s4tag = S4TAG(this);
+
+        if (s4tag != R_NilValue)
+            (*v)(s4tag);
     }
 } // namespace CXXR
 

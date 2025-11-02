@@ -70,6 +70,10 @@ namespace CXXR
         }
 
     protected:
+        // Virtual functions of GCNode:
+        void visitReferents(const_visitor *v) const override;
+        void detachReferents() override;
+
         /**
          * @param stype Required type of the FunctionBase.
          */
