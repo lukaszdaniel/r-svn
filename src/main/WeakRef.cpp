@@ -36,6 +36,11 @@ namespace CXXR
 {
     void WeakRef::detachReferents()
     {
+        if (!this->refCountEnabled())
+            return;
+        WEAKREF_KEY(this).detach();
+        WEAKREF_VALUE(this).detach();
+        WEAKREF_FINALIZER(this).detach();
         RObject::detachReferents();
     }
 

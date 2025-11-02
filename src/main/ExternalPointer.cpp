@@ -49,10 +49,15 @@ namespace CXXR
 
     void ExternalPointer::detachReferents()
     {
+        if (!this->refCountEnabled())
+            return;
+        EXTPTR_PTR(this) = NULL;
+        EXTPTR_PROT(this).detach();
+        EXTPTR_TAG(this).detach();
         RObject::detachReferents();
     }
 
-    void ExternalPointer::visitReferents(const_visitor * v) const
+    void ExternalPointer::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
         const GCNode *extptr_prot = EXTPTR_PROT(this);

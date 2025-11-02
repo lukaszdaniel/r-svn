@@ -88,6 +88,13 @@ namespace CXXR
         void detachReferents() override;
 
     private:
+        /**
+         * @param cr Pointer to the 'car' of the element to be
+         *           constructed.
+         * @param tl Pointer to the 'tail' (LISP cdr) of the element
+         *           to be constructed.
+         * @param tg Pointer to the 'tag' of the element to be constructed.
+         */
         explicit AltRep(RObject *cr = nullptr, RObject *tl = nullptr, RObject *tg = nullptr)
             : RObject(LISTSXP)
         {

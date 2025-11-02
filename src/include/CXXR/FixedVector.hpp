@@ -185,6 +185,11 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::detachElements(std::true_type)
     {
+        for (R_xlen_t i = 0; i < this->size(); i++)
+        {
+            auto el = static_cast<GCEdge<> *>(this->u.vecsxp.m_data)[i];
+            el = R_NilValue;
+        }
     }
 
     template <typename T, SEXPTYPE ST>
@@ -199,7 +204,7 @@ namespace CXXR
     {
         for (R_xlen_t i = 0; i < this->size(); i++)
         {
-            const RObject *el = static_cast<GCEdge<> *>(this->u.vecsxp.m_data)[i];
+            auto el = static_cast<GCEdge<> *>(this->u.vecsxp.m_data)[i];
             if (el != R_NilValue)
                 (*v)(el);
         }
