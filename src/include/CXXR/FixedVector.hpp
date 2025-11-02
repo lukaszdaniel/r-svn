@@ -195,6 +195,8 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::detachReferents()
     {
+        if (!this->refCountEnabled())
+            return;
         detachElements(typename ElementTraits::IsGCEdge<T>());
         VectorBase::detachReferents();
     }
