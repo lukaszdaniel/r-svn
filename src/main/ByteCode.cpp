@@ -66,9 +66,9 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        CODE0(this).detach();
-        CONSTS(this).detach();
-        EXPR(this).detach();
+        // CODE0(this).detach();
+        // CONSTS(this).detach();
+        // EXPR(this).detach();
         RObject::detachReferents();
     }
 

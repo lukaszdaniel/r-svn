@@ -99,10 +99,10 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
-            PRVALUE0(this).detach();
-        PRCODE(this).detach();
-        PRENV(this).detach();
+        // if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
+        //     PRVALUE0(this).detach();
+        // PRCODE(this).detach();
+        // PRENV(this).detach();
         RObject::detachReferents();
     }
 

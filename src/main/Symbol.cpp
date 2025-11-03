@@ -85,9 +85,9 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        this->u.symsxp.m_pname.detach();
-        SYMVALUE(this).detach();
-        INTERNAL(this).detach();
+        // this->u.symsxp.m_pname.detach();
+        // SYMVALUE(this).detach();
+        // INTERNAL(this).detach();
         RObject::detachReferents();
     }
 

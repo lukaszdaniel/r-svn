@@ -57,7 +57,7 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        S4TAG(this).detach();
+        // S4TAG(this).detach();
         RObject::detachReferents();
     }
 

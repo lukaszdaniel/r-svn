@@ -51,9 +51,9 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        EXTPTR_PTR(this) = NULL;
-        EXTPTR_PROT(this).detach();
-        EXTPTR_TAG(this).detach();
+        // EXTPTR_PTR(this) = NULL;
+        // EXTPTR_PROT(this).detach();
+        // EXTPTR_TAG(this).detach();
         RObject::detachReferents();
     }
 

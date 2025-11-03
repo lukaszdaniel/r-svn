@@ -87,9 +87,9 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        FORMALS(this).detach();
-        BODY(this).detach();
-        CLOENV(this).detach();
+        // FORMALS(this).detach();
+        // BODY(this).detach();
+        // CLOENV(this).detach();
         FunctionBase::detachReferents();
     }
 

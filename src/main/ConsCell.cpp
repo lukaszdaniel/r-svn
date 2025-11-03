@@ -85,10 +85,10 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
-            this->u.listsxp.m_car.detach();
-        this->u.listsxp.m_tail.detach();
-        this->u.listsxp.m_tag.detach();
+        // if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
+        //     this->u.listsxp.m_car.detach();
+        // this->u.listsxp.m_tail.detach();
+        // this->u.listsxp.m_tag.detach();
         RObject::detachReferents();
     }
 
