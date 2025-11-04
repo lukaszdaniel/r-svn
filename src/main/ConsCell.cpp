@@ -83,8 +83,8 @@ namespace CXXR
 
     void ConsCell::detachReferents()
     {
-        if (!this->refCountEnabled())
-            return;
+        // if (!this->refCountEnabled())
+        //     return;
         // if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
         //     this->u.listsxp.m_car.detach();
         // this->u.listsxp.m_tail.detach();

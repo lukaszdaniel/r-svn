@@ -64,8 +64,8 @@ namespace CXXR
 
     void ByteCode::detachReferents()
     {
-        if (!this->refCountEnabled())
-            return;
+        // if (!this->refCountEnabled())
+        //     return;
         // CODE0(this).detach();
         // CONSTS(this).detach();
         // EXPR(this).detach();

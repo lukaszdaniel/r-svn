@@ -55,8 +55,8 @@ namespace CXXR
 
     void S4Object::detachReferents()
     {
-        if (!this->refCountEnabled())
-            return;
+        // if (!this->refCountEnabled())
+        //     return;
         // S4TAG(this).detach();
         RObject::detachReferents();
     }
