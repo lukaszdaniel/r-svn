@@ -1088,13 +1088,9 @@ namespace CXXR
         }
 #endif
         m_attrib.detach();
-        if (altrep())
+
+        if (!altrep())
         {
-            CLASS(this).detach();
-            DATA1(this).detach();
-            DATA2(this).detach();
-        }
-        else
             switch (sexptype())
             {
             case NILSXP:
@@ -1108,79 +1104,26 @@ namespace CXXR
             case RAWSXP:
                 break;
             case OBJSXP:
-                S4TAG(this).detach();
-                break;
             case WEAKREFSXP:
-                WEAKREF_KEY(this).detach();
-                WEAKREF_VALUE(this).detach();
-                WEAKREF_FINALIZER(this).detach();
-                break;
             case STRSXP:
-            {
-                for (R_xlen_t i = 0; i < XLENGTH(this); i++)
-                    SET_STRING_ELT(this, i, R_BlankString);
-            }
-            break;
             case EXPRSXP:
-            {
-                for (R_xlen_t i = 0; i < XLENGTH(this); i++)
-                    SET_XVECTOR_ELT(this, i, R_NilValue);
-            }
-            break;
             case VECSXP:
-            {
-                for (R_xlen_t i = 0; i < XLENGTH(this); i++)
-                    SET_VECTOR_ELT(this, i, R_NilValue);
-            }
-            break;
             case ENVSXP:
-                this->u.envsxp.m_frame.detach();
-                ENCLOS(this).detach();
-                this->u.envsxp.m_hashtab.detach();
-                break;
             case LISTSXP:
-                if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP)
-                    this->u.listsxp.m_car.detach();
-                this->u.listsxp.m_tail.detach();
-                this->u.listsxp.m_tag.detach();
-                break;
             case LANGSXP:
             case DOTSXP:
-                this->u.listsxp.m_car.detach();
-                this->u.listsxp.m_tail.detach();
-                this->u.listsxp.m_tag.detach();
-                break;
             case PROMSXP:
-                if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
-                    PRVALUE0(this).detach();
-                PRCODE(this).detach();
-                PRENV(this).detach();
-                break;
             case CLOSXP:
-                FORMALS(this).detach();
-                BODY(this).detach();
-                CLOENV(this).detach();
-                break;
             case SYMSXP:
-                this->u.symsxp.m_pname.detach();
-                SYMVALUE(this).detach();
-                INTERNAL(this).detach();
-                break;
             case BCODESXP:
-                CODE0(this).detach();
-                CONSTS(this).detach();
-                EXPR(this).detach();
-                break;
             case EXTPTRSXP:
-                EXTPTR_PTR(this) = NULL;
-                EXTPTR_PROT(this).detach();
-                EXTPTR_TAG(this).detach();
                 break;
             FREE_FORWARD_CASE
             default:
                 // Rf_error(_("unexpected type %d in %s"), sexptype(), __func__);
                 BadObject::register_bad_object(this, __FILE__, __LINE__);
             }
+        }
         GCNode::detachReferents();
     }
 } // namespace CXXR

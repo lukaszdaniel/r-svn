@@ -83,11 +83,11 @@ namespace CXXR
 
     void Symbol::detachReferents()
     {
-        // if (!this->refCountEnabled())
-        //     return;
-        // this->u.symsxp.m_pname.detach();
-        // SYMVALUE(this).detach();
-        // INTERNAL(this).detach();
+        if (!this->refCountEnabled())
+            return;
+        this->u.symsxp.m_pname.detach();
+        SYMVALUE(this).detach();
+        INTERNAL(this).detach();
         RObject::detachReferents();
     }
 

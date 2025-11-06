@@ -57,11 +57,11 @@ namespace CXXR
 
     void AltRep::detachReferents()
     {
-        // if (!this->refCountEnabled())
-        //     return;
-        // CLASS(this).detach();
-        // DATA1(this).detach();
-        // DATA2(this).detach();
+        if (!this->refCountEnabled())
+            return;
+        CLASS(this).detach();
+        DATA1(this).detach();
+        DATA2(this).detach();
         RObject::detachReferents();
     }
 

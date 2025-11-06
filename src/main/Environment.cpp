@@ -114,11 +114,11 @@ namespace CXXR
 
     void Environment::detachReferents()
     {
-        // if (!this->refCountEnabled())
-        //     return;
-        // this->u.envsxp.m_frame.detach();
-        // ENCLOS(this).detach();
-        // this->u.envsxp.m_hashtab.detach();
+        if (!this->refCountEnabled())
+            return;
+        this->u.envsxp.m_frame.detach();
+        ENCLOS(this).detach();
+        this->u.envsxp.m_hashtab.detach();
         RObject::detachReferents();
     }
 

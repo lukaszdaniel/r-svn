@@ -85,11 +85,11 @@ namespace CXXR
 
     void Closure::detachReferents()
     {
-        // if (!this->refCountEnabled())
-        //     return;
-        // FORMALS(this).detach();
-        // BODY(this).detach();
-        // CLOENV(this).detach();
+        if (!this->refCountEnabled())
+            return;
+        FORMALS(this).detach();
+        BODY(this).detach();
+        CLOENV(this).detach();
         FunctionBase::detachReferents();
     }
 

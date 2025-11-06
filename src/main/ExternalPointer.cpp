@@ -49,11 +49,11 @@ namespace CXXR
 
     void ExternalPointer::detachReferents()
     {
-        // if (!this->refCountEnabled())
-        //     return;
-        // EXTPTR_PTR(this) = NULL;
-        // EXTPTR_PROT(this).detach();
-        // EXTPTR_TAG(this).detach();
+        if (!this->refCountEnabled())
+            return;
+        EXTPTR_PTR(this) = NULL;
+        EXTPTR_PROT(this).detach();
+        EXTPTR_TAG(this).detach();
         RObject::detachReferents();
     }
 
