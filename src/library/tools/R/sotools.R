@@ -673,8 +673,7 @@ nonAPI <- c("chol_", "chol2inv_", "cg_", "ch_", "rg_",
 ## non-API, declared in Defn.h
             "Rf_setSVector",
 ## non-API, declared in Rinternals.h
-            ## not yet, in Rcpp headers "SET_TYPEOF",
-            ## not yet, used in an example in R-exts "SET_OBJECT",
+            "SET_OBJECT", ## no longer used in an example in R-exts 
             "SET_S4_OBJECT", "UNSET_S4_OBJECT",
             "R_curErrorBuf",
             "SETLENGTH", "SET_TRUELENGTH", "SETLEVELS",
@@ -716,6 +715,17 @@ nonAPI <- c("chol_", "chol2inv_", "cg_", "ch_", "rg_",
 ## "d1mach_" and "i1mach_" are API now in R-exts.
             "R_Pretty") ## hidden, so unlikely to be usable
 ##          "optif9")   ## used by pcaPP
+
+## These now generate warnings in check.R
+warnNonAPI <-
+    c("REAL0", "COMPLEX0", "ddfind", "DDVAL", "ENSURE_NAMEDMAX", "INTERNAL",
+      "PRSEEN", "SET_PRSEEN", "SYMVALUE", "R_nchar", "VECTOR_PTR", "R_tryWrap",
+      "Rf_NonNullStringMatch", "Rf_isValidString", "Rf_GetOption", "SET_FRAME",
+      "SET_HASHTAB", "SET_ENCLOS", "STDVEC_DATAPTR", "SET_S4_OBJECT",
+      "UNSET_S4_OBJECT", "SET_NAMED", "R_lsInternal", "Rf_lazy_duplicate",
+      "EXTPTR_PROT", "EXTPTR_PTR", "EXTPTR_TAG", "NAMED", "FRAME", "HASHTAB",
+      "IS_S4_OBJECT", "BODY", "FORMALS", "CLOENV", "ENCLOS", "Rf_isFrame",
+      "OBJECT", "SET_TYPEOF")
 
 ## grDevices uses R_Home R_InputHandlers R_TempDir R_Visible R_cairoCdynload R_fopen R_gzclose R_gzgets R_gzopen R_isForkedChild Rf_envlength Rf_strIsASCII Rf_utf8towcs Rg_set_col_ptrs Ri18n_wcwidth addInputHandler do_X11 do_contourLines do_getGraphicsEventEnv do_getSnapshot do_playSnapshot do_saveplot locale2charset mbcsToUcs2 ptr_R_ProcessEvents
 

@@ -3970,7 +3970,7 @@ add_dummies <- function(dir, Log)
             haveObjs <- any(grepl("^ *Object", out))
             pat <- paste("possibly from",
                          sQuote("(abort|assert|exit|_exit|_Exit|stop)"))
-            rempat <- "REAL0|COMPLEX0|ddfind|DDVAL|ENSURE_NAMEDMAX|INTERNAL|PRSEEN|SET_PRSEEN|SYMVALUE"
+            rempat <- paste(sprintf("\\b%s\\b", warnNonAPI), collapse = "|")            
             if(haveObjs && any(grepl(pat, out)) && pkgname %notin% "parallel")
                 ## need _exit in forked child
                 warningLog(Log)
@@ -3983,9 +3983,13 @@ add_dummies <- function(dir, Log)
                 if (any(grepl("calls", out))) {
                     ep <- Filter(function(x) any(grepl(x, out)),
                                  strsplit(rempat, "\\|")[[1]])
+                    ep <- gsub("\\\\b", "", ep)
                     epq <- paste(sQuote(ep), collapse = ", ")
                     out <- paste(c(out,
-                                   "These entry points may be removed soon:",
+                                   if(length(ep) > 1L)
+                                       "These entry points may be removed soon:"
+                                   else
+                                       "This entry point may be removed soon:",
                                    epq),
                                  collapse = "\n")
                 }
@@ -6180,7 +6184,7 @@ add_dummies <- function(dir, Log)
                         c(warn_re,
                           ": (warning|note): .*Using fallback compilation with Armadillo 14[.]6[.]3")
                 ## </FIXME>
-                
+
                 warn_re <- paste0("(", paste(warn_re, collapse = "|"), ")")
 
                 lines <- grep(warn_re, lines, value = TRUE, useBytes = TRUE)
