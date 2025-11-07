@@ -30,6 +30,8 @@
  * interface.
  */
 
+#define USE_RINTERNALS // always use macro versions
+
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Promise.hpp>
 #include <CXXR/Symbol.hpp>
@@ -100,9 +102,9 @@ namespace CXXR
         if (!this->refCountEnabled())
             return;
         if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
-            PRVALUE0(this).detach();
-        PRCODE(this).detach();
-        PRENV(this).detach();
+            u.promsxp.m_value.detach();
+        u.promsxp.m_expr.detach();
+        u.promsxp.m_env.detach();
         RObject::detachReferents();
     }
 
@@ -110,10 +112,10 @@ namespace CXXR
     {
         RObject::visitReferents(v);
         const GCNode *prvalue = R_NilValue;
-        const GCNode *prcode = PRCODE(this);
-        const GCNode *prenv = PRENV(this);
+        const GCNode *prcode = u.promsxp.m_expr;
+        const GCNode *prenv = u.promsxp.m_env;
         if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
-            prvalue = PRVALUE0(this);
+            prvalue = u.promsxp.m_value;
 
         if (prvalue != R_NilValue)
             (*v)(prvalue);

@@ -38,18 +38,18 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        WEAKREF_KEY(this).detach();
-        WEAKREF_VALUE(this).detach();
-        WEAKREF_FINALIZER(this).detach();
+        u.weakrrefptr.m_key.detach();
+        u.weakrrefptr.m_value.detach();
+        u.weakrrefptr.m_finalizer.detach();
         RObject::detachReferents();
     }
 
     void WeakRef::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *weakref_key = WEAKREF_KEY(this);
-        const GCNode *weakref_value = WEAKREF_VALUE(this);
-        const GCNode *weakref_finalizer = WEAKREF_FINALIZER(this);
+        const GCNode *weakref_key = u.weakrrefptr.m_key;
+        const GCNode *weakref_value = u.weakrrefptr.m_value;
+        const GCNode *weakref_finalizer = u.weakrrefptr.m_finalizer;
 
         if (weakref_key != R_NilValue)
             (*v)(weakref_key);

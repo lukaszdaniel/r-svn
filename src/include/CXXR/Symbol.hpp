@@ -135,6 +135,16 @@ namespace CXXR
          */
         const String *name() const;
 
+        RObject *value() const
+        {
+            return u.symsxp.m_value;
+        }
+
+        RObject *internal() const
+        {
+            return u.symsxp.m_internal;
+        }
+
         /** @brief Get a pointer to a regular Symbol object.
          *
          * If no Symbol with the specified name currently exists, one
@@ -252,6 +262,15 @@ namespace CXXR
         Symbol(const Symbol &);
         Symbol &operator=(const Symbol &);
     };
+
+    /** @brief Does Symbol's name start with '.'?
+     *
+     * @param symbol pointer to Symbol to be tested, or a null pointer
+     *          in which case the function returns false.
+     *
+     * @return true if the Symbol's name starts with '.'.
+     */
+    bool isDotSymbol(const Symbol *symbol);
 } // namespace CXXR
 
 namespace R

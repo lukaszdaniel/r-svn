@@ -35,7 +35,7 @@
 #include <CXXR/SEXP_downcast.hpp>
 #include <R_ext/Error.h>
 #include <Localization.h>
-#include <Defn.h> // for ASSIGNMENT_PENDING, SET_ASSIGNMENT_PENDING
+#include <Defn.h> // for ASSIGNMENT_PENDING, SET_ASSIGNMENT_PENDING, BOXED_BINDING_CELLS
 #include <Rinternals.h> // for ForceNonInline
 
 namespace CXXR
@@ -86,9 +86,9 @@ namespace CXXR
         if (!this->refCountEnabled())
             return;
         if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
-            this->u.listsxp.m_car.detach();
-        this->u.listsxp.m_tail.detach();
-        this->u.listsxp.m_tag.detach();
+            u.listsxp.m_car.detach();
+        u.listsxp.m_tail.detach();
+        u.listsxp.m_tag.detach();
         RObject::detachReferents();
     }
 
@@ -96,10 +96,10 @@ namespace CXXR
     {
         RObject::visitReferents(v);
         const GCNode *car = R_NilValue;
-        const GCNode *cdr = this->u.listsxp.m_tail;
-        const GCNode *tag = this->u.listsxp.m_tag;
+        const GCNode *cdr = u.listsxp.m_tail;
+        const GCNode *tag = u.listsxp.m_tag;
         if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
-            car = this->u.listsxp.m_car;
+            car = u.listsxp.m_car;
 
         if (car != R_NilValue)
             (*v)(car);

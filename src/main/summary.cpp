@@ -41,6 +41,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>

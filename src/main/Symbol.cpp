@@ -85,18 +85,18 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        this->u.symsxp.m_pname.detach();
-        SYMVALUE(this).detach();
-        INTERNAL(this).detach();
+        u.symsxp.m_pname.detach();
+        u.symsxp.m_value.detach();
+        u.symsxp.m_internal.detach();
         RObject::detachReferents();
     }
 
     void Symbol::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *printname0 = this->u.symsxp.m_pname;
-        const GCNode *symvalue = SYMVALUE(this);
-        const GCNode *internal = INTERNAL(this);
+        const GCNode *printname0 = u.symsxp.m_pname;
+        const GCNode *symvalue = u.symsxp.m_value;
+        const GCNode *internal = u.symsxp.m_internal;
 
         if (printname0 != R_NilValue)
             (*v)(printname0);
@@ -137,6 +137,11 @@ namespace CXXR
         const std::string ddval = ".." + std::to_string(n);
         GCStackRoot<String> name(String::obtain(ddval));
         return obtain(name);
+    }
+
+    bool isDotSymbol(const Symbol *symbol)
+    {
+        return symbol && symbol->name()->c_str()[0] == '.';
     }
 } // namespace CXXR
 

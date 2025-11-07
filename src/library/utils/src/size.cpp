@@ -26,6 +26,8 @@
 #endif
 
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/ByteCode.hpp>
+#include <CXXR/ExternalPointer.hpp>
 #include <Defn.h>
 
 using namespace R;

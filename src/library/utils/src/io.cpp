@@ -41,6 +41,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/ComplexVector.hpp>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>

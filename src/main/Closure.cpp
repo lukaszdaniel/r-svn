@@ -87,18 +87,18 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        FORMALS(this).detach();
-        BODY(this).detach();
-        CLOENV(this).detach();
+        u.closxp.m_formals.detach();
+        u.closxp.m_body.detach();
+        u.closxp.m_env.detach();
         FunctionBase::detachReferents();
     }
 
     void Closure::visitReferents(const_visitor *v) const
     {
         FunctionBase::visitReferents(v);
-        const GCNode *formals = FORMALS(this);
-        const GCNode *body = BODY(this);
-        const GCNode *cloenv = CLOENV(this);
+        const GCNode *formals = u.closxp.m_formals;
+        const GCNode *body = u.closxp.m_body;
+        const GCNode *cloenv = u.closxp.m_env;
 
         if (formals != R_NilValue)
             (*v)(formals);

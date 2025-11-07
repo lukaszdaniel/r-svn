@@ -52,6 +52,8 @@
 #include <CXXR/CommandTerminated.hpp>
 #include <CXXR/Browser.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/ConsCell.hpp>
+#include <CXXR/Symbol.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
 #include <Defn.h>

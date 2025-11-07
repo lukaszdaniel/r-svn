@@ -2731,9 +2731,9 @@ namespace
             return false;
 
         if (internal_only)
-            return (INTERNAL(sym) != R_NilValue);
+            return (sym->internal() != R_NilValue);
 
-        if ((all || CHAR(PRINTNAME(sym))[0] != '.') && SYMVALUE(sym) != R_UnboundValue)
+        if ((all || isDotSymbol(sym)) && (sym->value() != R_UnboundValue))
             return true;
         return false;
     }
@@ -2757,7 +2757,7 @@ static void BuiltinNames(bool all, bool internal_only, SEXP names, int *indx)
     {
         const Symbol *sym = it->second;
         if (BuiltinTest(sym, all, internal_only))
-		    SET_STRING_ELT(names, (*indx)++, PRINTNAME(sym));
+		    SET_STRING_ELT(names, (*indx)++, const_cast<String *>(sym->name()));
     }
 }
 
@@ -2768,7 +2768,7 @@ static void BuiltinValues(bool all, bool internal_only, SEXP values, int *indx)
     {
         const Symbol *sym = it->second;
         if (BuiltinTest(sym, all, internal_only)) {
-		    vl = SYMVALUE(sym);
+		    vl = sym->value();
 		    if (Promise::isA(vl)) {
 			vl = Evaluator::evaluate(vl, Environment::base());
 		    }

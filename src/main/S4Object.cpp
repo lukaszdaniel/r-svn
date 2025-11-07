@@ -57,14 +57,14 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        S4TAG(this).detach();
+        u.s4ptr.m_tag.detach();
         RObject::detachReferents();
     }
 
     void S4Object::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *s4tag = S4TAG(this);
+        const GCNode *s4tag = u.s4ptr.m_tag;
 
         if (s4tag != R_NilValue)
             (*v)(s4tag);

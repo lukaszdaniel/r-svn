@@ -27,6 +27,8 @@
  * Implementation of class String and related functions.
  */
 
+#define USE_RINTERNALS // always use macro versions
+
 #include <algorithm>
 #include <cstring>
 #include <cassert>

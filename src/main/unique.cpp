@@ -45,6 +45,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/ExternalPointer.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Altrep.h>

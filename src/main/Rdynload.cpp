@@ -90,6 +90,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <memory>
 #include <cstring>
 #include <cstdlib>
@@ -97,7 +98,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/ExternalPointer.hpp>
 #include <Rmath.h>
 #include <Rdynpriv.h>
 #include <Defn.h>
