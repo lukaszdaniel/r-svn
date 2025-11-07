@@ -2733,7 +2733,7 @@ namespace
         if (internal_only)
             return (sym->internal() != R_NilValue);
 
-        if ((all || isDotSymbol(sym)) && (sym->value() != R_UnboundValue))
+        if ((all || !isDotSymbol(sym)) && (sym->value() != R_UnboundValue))
             return true;
         return false;
     }

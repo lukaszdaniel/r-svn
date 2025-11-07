@@ -47,6 +47,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/ConsCell.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>

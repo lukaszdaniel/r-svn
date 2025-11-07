@@ -29,7 +29,7 @@
  * @brief Implementation of class VectorBase and related functions.
  */
 
- #define USE_RINTERNALS // always use macro versions
+#define USE_RINTERNALS // always use macro versions
 
 #include <CXXR/Logical.hpp>
 #include <CXXR/Complex.hpp>

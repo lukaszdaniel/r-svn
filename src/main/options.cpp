@@ -32,11 +32,12 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/ConsCell.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
