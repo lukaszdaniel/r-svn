@@ -1615,25 +1615,6 @@ attribute_hidden void R::InitMemory(void)
     CXXR::initializeMemorySubsystem();
     // ProtectStack::initialize(R_PPStackSize);
 
-    /* R_NilValue */
-    /* THIS MUST BE THE FIRST CONS CELL ALLOCATED */
-    /* OR ARMAGEDDON HAPPENS. */
-    /* Field assignments for R_NilValue must not go through write barrier
-       since the write barrier prevents assignments to R_NilValue's fields.
-       because of checks for nil */
-/*
-    R_NilValue = new RObject();
-    R_NilValue->u.listsxp.m_car = R_NilValue;
-    R_NilValue->u.listsxp.m_tail = R_NilValue;
-    R_NilValue->u.listsxp.m_tag = R_NilValue;
-    R_NilValue->m_attrib = R_NilValue;
-#ifdef SWITCH_TO_REFCNT
-    SET_REFCNT(R_NilValue, REFCNTMAX);
-#else
-    SET_NAMED(R_NilValue, NAMEDMAX);
-#endif
-*/
-
     ByteCode::initialize();
 
     s_R_weak_refs.clear();
@@ -3467,6 +3448,7 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
     return y;
 }
 
+/* ExternalPointer Accessors */
 SEXP (EXTPTR_PROT)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PROT(CHK(x)); }
 SEXP (EXTPTR_TAG)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_TAG(CHK(x)); }
 void *(EXTPTR_PTR)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PTR(CHK(x)); }

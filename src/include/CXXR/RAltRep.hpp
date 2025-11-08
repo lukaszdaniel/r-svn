@@ -117,7 +117,7 @@ namespace CXXR
 
 namespace R
 {
-    void SETALTREP(SEXP x, int v);
+    void (SETALTREP)(SEXP x, int v);
     SEXP ALTREP_DUPLICATE_EX(SEXP x, Rboolean deep);
     SEXP ALTREP_COERCE(SEXP x, int type);
     Rboolean ALTREP_INSPECT(SEXP, int, int, int, void (*)(SEXP, int, int, int));
@@ -165,8 +165,7 @@ namespace R
 
 extern "C"
 {
-    int ALTREP(SEXP x);
-    void SETALTREP(SEXP, int);
+    int (ALTREP)(SEXP x);
     SEXP R_tryWrap(SEXP x);
     SEXP ALTREP_CLASS(SEXP x);
     SEXP R_altrep_data1(SEXP x);

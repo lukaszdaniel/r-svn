@@ -340,10 +340,6 @@ namespace CXXR
          */
         bool hasAttributes() const;
 
-        /** @brief Special constructor for R_NilValue.
-         */
-        // RObject();
-
         /** @brief Is copying etc. of this object being traced?
          *
          * The property reported by this function is used by R

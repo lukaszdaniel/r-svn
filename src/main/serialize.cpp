@@ -55,7 +55,13 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/ExternalPointer.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <CXXR/ListVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Rmath.h>
@@ -1838,9 +1844,7 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
        pairlists in an iterative loop */
     
     SEXPTYPE type = DECODE_TYPE(flags);
-    SEXPTYPE prev_type = type;
-    SEXP sfirst = NULL, slast = NULL;
-    GCStackRoot<> s;
+    SEXP s, sfirst = NULL, slast = NULL;
 
     /* An assertion here guarantees that we go through the loop at
        least once. This make for cleaner exit code and avoids a
@@ -1854,15 +1858,15 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
 	int levs, objf, hasattr, hastag;
 	UnpackFlags(flags, &type, &levs, &objf, &hasattr, &hastag);
 
-	s = allocSExp(type);
+	PROTECT(s = allocSExp(type));
 	SETLEVELS(s, levs);
 	SET_OBJECT(s, objf);
 	R_ReadItemDepth++;
 	bool set_lastname = false;
 	SET_ATTRIB(s, hasattr ? ReadItem(ref_table, stream) : R_NilValue);
 	SEXP elem = hastag ? ReadItem(ref_table, stream) : R_NilValue;
-	if (type == PROMSXP) SET_PRENV(s, elem);
-	else if (type == CLOSXP) SET_CLOENV(s, elem);
+	if (TYPEOF(s) == PROMSXP) SET_PRENV(s, elem);
+	else if (TYPEOF(s) == CLOSXP) SET_CLOENV(s, elem);
 	else SET_TAG(s, elem);
 	if (hastag && R_ReadItemDepth == R_InitReadItemDepth + 1 &&
 	    isSymbol(elem)) {
@@ -1874,8 +1878,8 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
 	    PrintValue(elem);
 	}
 	SEXP item = ReadItem(ref_table, stream);
-	if (type == PROMSXP) SET_PRVALUE(s, item);
-	else if (type == CLOSXP) SET_FORMALS(s, item);
+	if (TYPEOF(s) == PROMSXP) SET_PRVALUE(s, item);
+	else if (TYPEOF(s) == CLOSXP) SET_FORMALS(s, item);
 	else SETCAR(s, item);
 	R_ReadItemDepth--;
 	R_CheckStack();
@@ -1885,9 +1889,10 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
 	}
 	else {
 	    /* Subsequent iterations: extend list */
-	    if (prev_type == PROMSXP) SET_PRCODE(slast, s);
-	    else if (prev_type == CLOSXP) SET_BODY(slast, s);
+	    if (TYPEOF(slast) == PROMSXP) SET_PRCODE(slast, s);
+	    else if (TYPEOF(slast) == CLOSXP) SET_BODY(slast, s);
 	    else SETCDR(slast, s);
+	    UNPROTECT(1); /* s, which is now protected as part of sfirst */
 	}
 	slast = s;
 
@@ -1900,17 +1905,16 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
 	if (set_lastname) strcpy(lastname, "<unknown>");
 
 	flags = InInteger(stream);
-	prev_type = type;
 	type = DECODE_TYPE(flags);
     }
 
     R_ReadItemDepth++;
-    s = ReadItem_Recursive(flags, ref_table, stream);
+    PROTECT(s = ReadItem_Recursive(flags, ref_table, stream));
     R_ReadItemDepth--;
-    if (prev_type == PROMSXP) SET_PRCODE(slast, s);
-    else if (prev_type == CLOSXP) SET_BODY(slast, s);
+    if (TYPEOF(slast) == PROMSXP) SET_PRCODE(slast, s);
+    else if (TYPEOF(slast) == CLOSXP) SET_BODY(slast, s);
     else SETCDR(slast, s);
-
+    UNPROTECT(2); /* s, sfirst */
     return sfirst;
 }
 
@@ -3368,7 +3372,7 @@ attribute_hidden SEXP do_serialize(SEXP call, SEXP op, SEXP args, SEXP env)
     ver = CAR(args); args = CDR(args);
     fun = CAR(args);
 
-    if(PRIMVAL(op) == 1)
+    if (PRIMVAL(op) == 1)
 	return R_serializeb(object, icon, type, ver, fun);
     else
 	return R_serialize(object, icon, type, ver, fun);

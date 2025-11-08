@@ -32,13 +32,14 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <R_ext/Minmax.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/Symbol.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>

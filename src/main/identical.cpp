@@ -31,11 +31,13 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/Logical.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/ByteCode.hpp>
+#include <CXXR/ExternalPointer.hpp>
 #include <Defn.h>
 
 using namespace R;

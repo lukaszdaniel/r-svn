@@ -40,11 +40,13 @@
 
 #include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/Symbol.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>
 
 using namespace R;
+using namespace CXXR;
 
 /* FIXME: envir.c keeps this private - it should probably go to Defn.h */
 #define FRAME_LOCK_MASK (1<<14)
