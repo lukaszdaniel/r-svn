@@ -28,6 +28,8 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/ListVector.hpp>
 #include <Defn.h>

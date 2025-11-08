@@ -101,6 +101,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/Promise.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>

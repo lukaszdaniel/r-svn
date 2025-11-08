@@ -28,6 +28,9 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/ExternalPointer.hpp>
+#include <CXXR/S4Object.hpp>
+#include <CXXR/WeakRef.hpp>
+#include <CXXR/Closure.hpp>
 #include <Defn.h>
 
 using namespace R;

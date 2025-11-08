@@ -41,6 +41,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Promise.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>

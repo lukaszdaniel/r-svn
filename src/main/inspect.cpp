@@ -41,6 +41,9 @@
 #include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/Environment.hpp>
+#include <CXXR/Closure.hpp>
+#include <CXXR/Promise.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Print.h>

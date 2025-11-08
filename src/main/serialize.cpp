@@ -49,6 +49,8 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/Closure.hpp>
+#include <CXXR/Promise.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>

@@ -56,8 +56,11 @@
 # define HIDDEN
 #endif /* ifdef COMPILING_R */
 
+#include <cassert>
 #include <cstring> /* for strlen, strcmp */
 #include <Localization.h>
+#include <CXXR/RAltRep.hpp>
+#include <CXXR/Symbol.hpp>
 
 #ifdef TRUE
 #undef TRUE
@@ -86,6 +89,9 @@ INLINE_FUN SEXP CAR(SEXP e)
 {
     if (BNDCELL_TAG(e))
 	error("%s", _("bad binding access"));
+#ifdef TESTING_WRITE_BARRIER
+    assert((TYPEOF(e) == LISTSXP) || (TYPEOF(e) == DOTSXP) || (TYPEOF(e) == LANGSXP) || (TYPEOF(e) == NILSXP));
+#endif
     return CAR0(e);
 }
 #else

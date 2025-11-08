@@ -32,6 +32,7 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
@@ -40,7 +41,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Environment.hpp>
-#include <Localization.h>
+#include <CXXR/Closure.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>

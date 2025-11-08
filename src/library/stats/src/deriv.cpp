@@ -28,11 +28,13 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/Closure.hpp>
 #include <Defn.h>  // for deparse1
 #include "localization.h"
 #include "statsErr.h"
 
 using namespace R;
+using namespace CXXR;
 
 static SEXP ParenSymbol;
 static SEXP PlusSymbol;

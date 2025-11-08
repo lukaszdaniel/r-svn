@@ -35,6 +35,8 @@
 #include <CXXR/Logical.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Closure.hpp>
+#include <CXXR/Promise.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/ExternalPointer.hpp>

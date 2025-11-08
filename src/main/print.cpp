@@ -71,12 +71,13 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/Closure.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>

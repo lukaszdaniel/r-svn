@@ -163,8 +163,28 @@ attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
 
 #ifdef TESTING_WRITE_BARRIER
 #define CR_ASSERT(x) (assert(((x) != R_NilValue) && ((x) != NULL)))
+#define CR_TYPE_ASSERT(x) (assert((x)))
+#define CR_CONSCELL_ASSERT(e) assert((TYPEOF(e) == LISTSXP) || (TYPEOF(e) == DOTSXP) || (TYPEOF(e) == LANGSXP) || (TYPEOF(e) == NILSXP))
+#define CR_CLOSURE_ASSERT(e) assert((TYPEOF(e) == CLOSXP) || (TYPEOF(e) == NILSXP))
+#define CR_SYMBOL_ASSERT(e) assert((TYPEOF(e) == SYMSXP) || (TYPEOF(e) == NILSXP))
+#define CR_ENVIRONMENT_ASSERT(e) assert((TYPEOF(e) == ENVSXP) || (TYPEOF(e) == NILSXP))
+#define CR_PROMISE_ASSERT(e) assert((TYPEOF(e) == PROMSXP) || (TYPEOF(e) == NILSXP))
+#define CR_WEAKREF_ASSERT(e) assert((TYPEOF(e) == WEAKREFSXP) || (TYPEOF(e) == NILSXP))
+#define CR_S4OBJECT_ASSERT(e) assert((TYPEOF(e) == OBJSXP) || (TYPEOF(e) == NILSXP))
+#define CR_ALTREP_ASSERT(e) assert(ALTREP(e) || (TYPEOF(e) == NILSXP))
+#define CR_BYTECODE_ASSERT(e) assert((TYPEOF(e) == BCODESXP) || (TYPEOF(e) == NILSXP))
 #else
 #define CR_ASSERT(x)
+#define CR_TYPE_ASSERT(x)
+#define CR_CONSCELL_ASSERT(e)
+#define CR_CLOSURE_ASSERT(e)
+#define CR_SYMBOL_ASSERT(e)
+#define CR_ENVIRONMENT_ASSERT(e)
+#define CR_PROMISE_ASSERT(e)
+#define CR_WEAKREF_ASSERT(e)
+#define CR_S4OBJECT_ASSERT(e)
+#define CR_ALTREP_ASSERT(e)
+#define CR_BYTECODE_ASSERT(e)
 #endif
 
 #ifdef PROTECTCHECK
@@ -3314,45 +3334,45 @@ attribute_hidden void R::R_try_clear_args_refcnt(SEXP args)
 }
 
 /* WeakRef Object Accessors */
-void R::SET_WEAKREF_KEY(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_KEY(x).retarget(x, v); }
-void R::SET_WEAKREF_VALUE(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_VALUE(x).retarget(x, v); }
-void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_FINALIZER(x).retarget(x, v); }
+void R::SET_WEAKREF_KEY(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_KEY(x).retarget(x, v); }
+void R::SET_WEAKREF_VALUE(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_VALUE(x).retarget(x, v); }
+void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_FINALIZER(x).retarget(x, v); }
 
 /* S4 Object Accessors */
-SEXP (S4TAG)(SEXP e) { CR_ASSERT(e); return CHK(S4TAG(CHKCONS(e))); }
-void SET_S4TAG(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); S4TAG(x).retarget(x, v); }
+SEXP (S4TAG)(SEXP e) { CR_ASSERT(e); CR_S4OBJECT_ASSERT(e); return CHK(S4TAG(CHKCONS(e))); }
+void SET_S4TAG(SEXP x, SEXP v) { CR_ASSERT(x); CR_S4OBJECT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); S4TAG(x).retarget(x, v); }
 
 /* AltRep Accessors */
-SEXP (DATA1)(SEXP e) { CR_ASSERT(e); return CHK(DATA1(CHKCONS(e))); }
-SEXP (DATA2)(SEXP e) { CR_ASSERT(e); return CHK(DATA2(CHKCONS(e))); }
-SEXP (CLASS)(SEXP e) { CR_ASSERT(e); return CHK(CLASS(CHKCONS(e))); }
-void (SET_DATA1)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); DATA1(x).retarget(x, v); }
-void (SET_DATA2)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); DATA2(x).retarget(x, v); }
-void (SET_CLASS)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CLASS(x).retarget(x, v); }
+SEXP (DATA1)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(DATA1(CHKCONS(e))); }
+SEXP (DATA2)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(DATA2(CHKCONS(e))); }
+SEXP (CLASS)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(CLASS(CHKCONS(e))); }
+void (SET_DATA1)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); DATA1(x).retarget(x, v); }
+void (SET_DATA2)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); DATA2(x).retarget(x, v); }
+void (SET_CLASS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CLASS(x).retarget(x, v); }
 
 /* ByteCode Accessors */
-SEXP (CODE0)(SEXP e) { CR_ASSERT(e); return CHK(CODE0(CHKCONS(e))); }
-SEXP (CONSTS)(SEXP e) { CR_ASSERT(e); return CHK(CONSTS(CHKCONS(e))); }
-SEXP (EXPR)(SEXP e) { CR_ASSERT(e); return CHK(EXPR(CHKCONS(e))); }
-void (SET_CODE)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CODE0(x).retarget(x, v); }
-void (SET_CONSTS)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CONSTS(x).retarget(x, v); }
-void (SET_EXPR)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); EXPR(x).retarget(x, v); }
+SEXP (CODE0)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(CODE0(CHKCONS(e))); }
+SEXP (CONSTS)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(CONSTS(CHKCONS(e))); }
+SEXP (EXPR)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(EXPR(CHKCONS(e))); }
+void (SET_CODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CODE0(x).retarget(x, v); }
+void (SET_CONSTS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CONSTS(x).retarget(x, v); }
+void (SET_EXPR)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); EXPR(x).retarget(x, v); }
 
 /* List Accessors */
-SEXP (TAG)(SEXP e) { return CHK(TAG(CHKCONS(e))); }
-attribute_hidden SEXP (R::CAR0)(SEXP e) { return CHK(CAR0(CHKCONS(e))); }
-SEXP (CDR)(SEXP e) { return CHK(CDR(CHKCONS(e))); }
-SEXP (CAAR)(SEXP e) { return CHK(CAAR(CHKCONS(e))); }
-SEXP (CDAR)(SEXP e) { return CHK(CDAR(CHKCONS(e))); }
-SEXP (CADR)(SEXP e) { return CHK(CADR(CHKCONS(e))); }
-SEXP (CDDR)(SEXP e) { return CHK(CDDR(CHKCONS(e))); }
-SEXP (CDDDR)(SEXP e) { return CHK(CDDDR(CHKCONS(e))); }
-SEXP (CD4R)(SEXP e) { return CHK(CD4R(CHKCONS(e))); }
-SEXP (CADDR)(SEXP e) { return CHK(CADDR(CHKCONS(e))); }
-SEXP (CADDDR)(SEXP e) { return CHK(CADDDR(CHKCONS(e))); }
-SEXP (CAD3R)(SEXP e) { return CHK(CADDDR(CHKCONS(e))); }
-SEXP (CAD4R)(SEXP e) { return CHK(CAD4R(CHKCONS(e))); }
-SEXP (CAD5R)(SEXP e) { return CHK(CAD5R(CHKCONS(e))); }
+SEXP (TAG)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(TAG(CHKCONS(e))); }
+attribute_hidden SEXP (R::CAR0)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CAR0(CHKCONS(e))); }
+SEXP (CDR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CDR(CHKCONS(e))); }
+SEXP (CAAR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CAAR(CHKCONS(e))); }
+SEXP (CDAR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CDAR(CHKCONS(e))); }
+SEXP (CADR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CADR(CHKCONS(e))); }
+SEXP (CDDR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CDDR(CHKCONS(e))); }
+SEXP (CDDDR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CDDDR(CHKCONS(e))); }
+SEXP (CD4R)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CD4R(CHKCONS(e))); }
+SEXP (CADDR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CADDR(CHKCONS(e))); }
+SEXP (CADDDR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CADDDR(CHKCONS(e))); }
+SEXP (CAD3R)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CADDDR(CHKCONS(e))); }
+SEXP (CAD4R)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CAD4R(CHKCONS(e))); }
+SEXP (CAD5R)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CAD5R(CHKCONS(e))); }
 attribute_hidden int (MISSING)(SEXP x) { CR_ASSERT(x); return MISSING(CHKCONS(x)); }
 
 void (SET_TAG)(SEXP x, SEXP v)
@@ -3360,6 +3380,7 @@ void (SET_TAG)(SEXP x, SEXP v)
     if (CHKCONS(x) == NULL || x == R_NilValue)
 	error("%s", _("bad value"));
 
+    CR_CONSCELL_ASSERT(x);
     CHECK_OLD_TO_NEW(x, v);
     x->u.listsxp.m_tag.retarget(x, v);
 }
@@ -3369,6 +3390,7 @@ SEXP (SETCAR)(SEXP x, SEXP y)
     if (CHKCONS(x) == NULL || x == R_NilValue)
 	error("%s", _("bad value"));
 
+    CR_CONSCELL_ASSERT(x);
     static_cast<PairList *>(x)->setCar(y);
     CHECK_OLD_TO_NEW(x, y);
 
@@ -3385,6 +3407,7 @@ SEXP (SETCDR)(SEXP x, SEXP y)
     if (REFCNT_ENABLED(x) && y && !REFCNT_ENABLED(y))
 	error("%s", _("inserting non-tracking CDR in tracking cell"));
 #endif
+    CR_CONSCELL_ASSERT(x);
     CHECK_OLD_TO_NEW(x, y);
     x->u.listsxp.m_tail.retarget(x, y);
     return y;
@@ -3395,6 +3418,7 @@ SEXP (SETCADR)(SEXP x, SEXP y)
     if (CHKCONS(x) == NULL || x == R_NilValue ||
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue)
 	error("%s", _("bad value"));
+    CR_CONSCELL_ASSERT(x);
     SEXP cell = CDR(x);
 
     static_cast<PairList *>(cell)->setCar(y);
@@ -3409,6 +3433,7 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
 	CHKCONS(CDR(x)) == NULL || CDR(x) == R_NilValue ||
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue)
 	error("%s", _("bad value"));
+    CR_CONSCELL_ASSERT(x);
     SEXP cell = CDDR(x);
 
     static_cast<PairList *>(cell)->setCar(y);
@@ -3424,6 +3449,7 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
 	CHKCONS(CDDR(x)) == NULL || CDDR(x) == R_NilValue ||
 	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue)
 	error("%s", _("bad value"));
+    CR_CONSCELL_ASSERT(x);
     SEXP cell = CDDDR(x);
 
     static_cast<PairList *>(cell)->setCar(y);
@@ -3440,6 +3466,7 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
 	CHKCONS(CDDDR(x)) == NULL || CDDDR(x) == R_NilValue ||
 	CHKCONS(CD4R(x)) == NULL || CD4R(x) == R_NilValue)
 	error("%s", _("bad value"));
+    CR_CONSCELL_ASSERT(x);
     SEXP cell = CD4R(x);
 
     static_cast<PairList *>(cell)->setCar(y);
@@ -3462,18 +3489,18 @@ void (R::SET_MISSING)(SEXP x, unsigned int v) { CR_ASSERT(x); SET_MISSING(CHKCON
     if (TYPEOF(x) != CLOSXP && TYPEOF(x) != LISTSXP) \
 	error(_("%s: argument of type %s is not a closure"), \
 	      __func__, sexptype2char(TYPEOF(x)))
-SEXP (FORMALS)(SEXP x) { CR_ASSERT(x); CHKCLOSXP(x); return CHK(FORMALS(CHK(x))); }
-SEXP (BODY)(SEXP x) { CR_ASSERT(x); CHKCLOSXP(x); return CHK(BODY(CHK(x))); }
-SEXP (CLOENV)(SEXP x) { CR_ASSERT(x); CHKCLOSXP(x); return CHK(CLOENV(CHK(x))); }
+SEXP (FORMALS)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(FORMALS(CHK(x))); }
+SEXP (BODY)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(BODY(CHK(x))); }
+SEXP (CLOENV)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(CLOENV(CHK(x))); }
 int (RDEBUG)(SEXP x) { CR_ASSERT(x); return RDEBUG(CHK(x)); }
 attribute_hidden int (RSTEP)(SEXP x) { CR_ASSERT(x); return RSTEP(CHK(x)); }
 SEXP R_ClosureFormals(SEXP x) { CR_ASSERT(x); return (FORMALS)(x); }
 SEXP R_ClosureBody(SEXP x) { CR_ASSERT(x); return (BODY)(x); }
 SEXP R_ClosureEnv(SEXP x) { CR_ASSERT(x); return (CLOENV)(x); }
 
-void (SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); FORMALS(x).retarget(x, v); }
-void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); BODY(x).retarget(x, v); }
-void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CLOENV(x).retarget(x, v); }
+void (SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); FORMALS(x).retarget(x, v); }
+void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); BODY(x).retarget(x, v); }
+void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CLOENV(x).retarget(x, v); }
 void (SET_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_RDEBUG(CHK(x), v); }
 attribute_hidden
 void (SET_RSTEP)(SEXP x, int v) { CR_ASSERT(x); SET_RSTEP(CHK(x), v); }
@@ -3494,18 +3521,19 @@ void (SET_PRIMOFFSET)(SEXP x, int v) { CR_ASSERT(x); SET_PRIMOFFSET(CHK(x), v); 
     if (x != R_NilValue && TYPEOF(x) != SYMSXP) \
 	error(_("%s: argument of type %s is not a symbol or NULL"), \
 	      __func__, sexptype2char(TYPEOF(x)))
-SEXP (PRINTNAME)(SEXP x) { CHKSYMSXP(x); return CHK(PRINTNAME(CHK(x))); }
-SEXP (SYMVALUE)(SEXP x) { CR_ASSERT(x); CHKSYMSXP(x); return CHK(SYMVALUE(CHK(x))); }
-SEXP (INTERNAL)(SEXP x) { CR_ASSERT(x); CHKSYMSXP(x); return CHK(INTERNAL(CHK(x))); }
+SEXP (PRINTNAME)(SEXP x) { CHKSYMSXP(x); CR_SYMBOL_ASSERT(x); return CHK(PRINTNAME(CHK(x))); }
+SEXP (SYMVALUE)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); return CHK(SYMVALUE(CHK(x))); }
+SEXP (INTERNAL)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); return CHK(INTERNAL(CHK(x))); }
 int (DDVAL)(SEXP x) { CR_ASSERT(x); CHKSYMSXP(x); return DDVAL(CHK(x)); }
 
 attribute_hidden
-void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.symsxp.m_pname.retarget(x, v); }
+void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.symsxp.m_pname.retarget(x, v); }
 
 attribute_hidden
 void (R::SET_SYMVALUE)(SEXP x, SEXP v)
 {
     CR_ASSERT(x);
+    CR_SYMBOL_ASSERT(x);
     if (SYMVALUE(x) == v)
 	return;
 
@@ -3517,6 +3545,7 @@ attribute_hidden
 void (R::SET_INTERNAL)(SEXP x, SEXP v) {
 
     CR_ASSERT(x);
+    CR_SYMBOL_ASSERT(x);
     CHECK_OLD_TO_NEW(x, v);
     INTERNAL(x).retarget(x, v);
 }
@@ -3528,18 +3557,19 @@ attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { CR_ASSERT(x); SET_DDVAL(CH
     if (x != R_NilValue && TYPEOF(x) != ENVSXP)				\
 	error(_("%s: argument of type %s is not an environment or NULL"), \
 	      __func__, sexptype2char(TYPEOF(x)))
-SEXP (FRAME)(SEXP x) { CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
-SEXP (ENCLOS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
-SEXP (HASHTAB)(SEXP x) { CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
+SEXP (FRAME)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
+SEXP (ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
+SEXP (HASHTAB)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
 int (ENVFLAGS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { CR_ASSERT(x); return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { CR_ASSERT(x); return ENV_RDEBUG(CHK(x)); }
 void (SET_ENV_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_ENV_RDEBUG(CHK(x), v); }
-void (SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.envsxp.m_frame.retarget(x, v); }
+void (SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.envsxp.m_frame.retarget(x, v); }
 
 void (SET_ENCLOS)(SEXP x, SEXP v)
 {
     CR_ASSERT(x);
+    CR_ENVIRONMENT_ASSERT(x);
     if (v == R_NilValue)
 	/* mainly to handle unserializing old files */
 	v = R_EmptyEnv;
@@ -3553,29 +3583,31 @@ void (SET_ENCLOS)(SEXP x, SEXP v)
     ENCLOS(x).retarget(x, v);
 }
 
-void (SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.envsxp.m_hashtab.retarget(x, v); }
+void (SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.envsxp.m_hashtab.retarget(x, v); }
 void (SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 
 /* Promise Accessors */
-SEXP (PRCODE)(SEXP x) { CR_ASSERT(x); return CHK(PRCODE(CHK(x))); }
-SEXP (PRENV)(SEXP x) { CR_ASSERT(x); return CHK(PRENV(CHK(x))); }
-SEXP (PRVALUE)(SEXP x) { CR_ASSERT(x); return CHK(static_cast<Promise *>(CHK(x))->value()); }
+SEXP (PRCODE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRCODE(CHK(x))); }
+SEXP (PRENV)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRENV(CHK(x))); }
+SEXP (PRVALUE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(static_cast<Promise *>(CHK(x))->value()); }
 int (PRSEEN)(SEXP x) { CR_ASSERT(x); return PRSEEN(CHK(x)); }
 attribute_hidden
 bool (R::PROMISE_IS_EVALUATED)(SEXP x)
 {
     CR_ASSERT(x);
+    CR_PROMISE_ASSERT(x); 
     x = CHK(x);
     return static_cast<Promise *>(x)->evaluated();
 }
 
-void (SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); PRENV(x).retarget(x, v); }
-void (SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CHECK_OLD_TO_NEW(x, v); PRCODE(x).retarget(x, v); }
+void (SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); PRENV(x).retarget(x, v); }
+void (SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); PRCODE(x).retarget(x, v); }
 void (R::SET_PRSEEN)(SEXP x, int v) { CR_ASSERT(x); SET_PRSEEN(CHK(x), v); }
 
 void (SET_PRVALUE)(SEXP x, SEXP v)
 {
     CR_ASSERT(x);
+    CR_PROMISE_ASSERT(x); 
     if (TYPEOF(x) != PROMSXP)
 	error(_("expecting a 'PROMSXP', not a '%s'"), R_typeToChar(x));
 
@@ -3587,6 +3619,7 @@ attribute_hidden
 void R::IF_PROMSXP_SET_PRVALUE(SEXP x, SEXP v)
 {
     CR_ASSERT(x);
+    CR_PROMISE_ASSERT(x); 
     /* promiseArgs produces a list containing promises or R_MissingArg.
        Using IF_PROMSXP_SET_PRVALUE avoids corrupting R_MissingArg. */
     if (TYPEOF(x) == PROMSXP)

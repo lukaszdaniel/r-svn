@@ -114,13 +114,14 @@
 #endif
 
 #include <cfloat> /* for DBL_DIG */
+#include <Localization.h>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>

@@ -42,6 +42,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
 #include <CXXR/DottedArgs.hpp>
+#include <CXXR/Closure.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> /* S4 bit */
 

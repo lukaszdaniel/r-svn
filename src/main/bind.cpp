@@ -40,6 +40,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/Promise.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
 #include <Internal.h>

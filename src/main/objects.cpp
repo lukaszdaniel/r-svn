@@ -44,6 +44,8 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Closure.hpp>
+#include <CXXR/Promise.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/Environment.hpp>

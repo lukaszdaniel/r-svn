@@ -126,6 +126,7 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/CommandTerminated.hpp>
 #include <CXXR/ByteCode.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RawVector.hpp>

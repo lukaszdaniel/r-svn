@@ -36,15 +36,16 @@
 #include <cctype> /* for tolower */
 #include <cstring>
 #include <cerrno>
+#include <Localization.h>
 #include <R_ext/Minmax.h>
 #include <Rdynpriv.h>
 #include <CXXR/Logical.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/Environment.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
 #include <Internal.h>
 #include <Defn.h>
 #include <Rmath.h>

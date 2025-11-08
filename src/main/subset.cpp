@@ -48,12 +48,13 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
-#include <Localization.h>
+#include <CXXR/Promise.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
