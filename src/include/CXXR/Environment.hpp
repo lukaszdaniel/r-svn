@@ -237,19 +237,19 @@ extern "C"
 {
     /** @brief An empty environment at the root of the environment tree
      */
-    extern SEXP R_EmptyEnv;
+    // extern SEXP R_EmptyEnv;
 
     /** @brief The base environment; formerly R_NilValue
      */
-    extern SEXP R_BaseEnv;
+    // extern SEXP R_BaseEnv;
 
     /** @brief The "global" environment
      */
-    extern SEXP R_GlobalEnv;
+    // extern SEXP R_GlobalEnv;
 
     /** @brief The (fake) namespace for base
      */
-    extern SEXP R_BaseNamespace;
+    // extern SEXP R_BaseNamespace;
 
     /** @brief Is this an environment?
      *

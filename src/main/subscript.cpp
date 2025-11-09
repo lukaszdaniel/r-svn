@@ -999,7 +999,7 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, SEXP names,
     x is the array to be subscripted.
 */
 
-attribute_hidden SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
+attribute_hidden SEXP R::int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call)
 {
     R_xlen_t stretch = 0;
     int ns = length(s);

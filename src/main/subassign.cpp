@@ -952,9 +952,6 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
     return x;
 }
 
-// in ./subscript.c :
-SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call);
-
 #define MATRIX_ASSIGN_LOOP(CODE) do {			\
 	R_xlen_t k = 0, NR = nr, ij;			\
 	if (anyIdxNA)					\

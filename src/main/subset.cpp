@@ -315,9 +315,6 @@ NORET static void errorcallOutOfBoundsSEXP(SEXP x, int subscript,
     R_signalErrorCondition(cond, call);
 }
 
-// in ./subscript.c :
-SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call);
-
 /* The MATRIX_SUBSET_LOOP macro allows the branches based on index
    type and vector type to happen outside the loop. Running through
    the indices in column-major order also improves cache locality. */

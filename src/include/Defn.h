@@ -1386,6 +1386,7 @@ SEXP allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SE
 SEXP R_allocObject(void);
 SEXP arraySubscript(int, SEXP, SEXP, SEXP (*)(SEXP,SEXP),
                        SEXP (*)(SEXP, int), SEXP);
+SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call);
 SEXP fixSubset3Args(SEXP, SEXP, SEXP, SEXP*);
 int countContexts(unsigned int, bool);
 SEXP CreateTag(SEXP);
