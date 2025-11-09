@@ -1114,7 +1114,7 @@ namespace
             SET_PRSEEN(e, UNDER_EVALUATION);
             try
             {
-                SEXP val = Evaluator::evaluate(PRCODE(e), PRENV(e));
+                SEXP val = Evaluator::evaluate((PRCODE)(e), (PRENV)(e));
                 SET_PRVALUE(e, val);
                 ENSURE_NAMEDMAX(val);
             }
@@ -1133,7 +1133,7 @@ namespace
             SET_PRSEEN(e, DEFAULT);
             SET_PRENV(e, R_NilValue);
         }
-        return PRVALUE(e);
+        return (PRVALUE)(e);
         /* This does _not_ change the value of NAMED on the value tmp,
            in contrast to the handling of promises bound to symbols in
            the SYMSXP case above.  The reason is that one (typically
@@ -1221,7 +1221,7 @@ namespace
         }
         else if (TYPEOF(op) == CLOSXP) {
             GCStackRoot<> pargs;
-            pargs = promiseArgs(CDR(e), rho);
+            pargs = promiseArgs((CDR)(e), rho);
             tmp = applyClosure(e, op, pargs, rho, R_NilValue, true);
         }
         else
@@ -1878,7 +1878,7 @@ attribute_hidden SEXP R::R_cmpfun1(SEXP fun)
     fcall = lang3(R_TripleColonSymbol, packsym, funsym);
     call = lang2(fcall, fun);
     val = eval(call, R_BaseEnv);
-    if (TYPEOF(BODY(val)) != BCODESXP)
+    if (TYPEOF((BODY)(val)) != BCODESXP)
 	/* Compilation may have failed because R allocator could not malloc
 	   memory to extend the R heap, so we run GC to release some pages.
 	   This problem has been observed while byte-compiling packages on
@@ -2477,12 +2477,12 @@ SEXP R_forceAndCall(SEXP expr, int n, SEXP rho)
     if (TYPEOF(fun) == SPECIALSXP) {
 	int flag = PRIMPRINT(fun);
 	Evaluator::enableResultPrinting(flag != 1);
-	tmp = PRIMFUN(fun) (e, fun, CDR(e), rho);
+	tmp = PRIMFUN(fun) (e, fun, (CDR)(e), rho);
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
     }
     else if (TYPEOF(fun) == BUILTINSXP) {
 	int flag = PRIMPRINT(fun);
-	tmp = evalList(CDR(e), rho, e, 0);
+	tmp = evalList((CDR)(e), rho, e, 0);
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	/* We used to insert a context only if profiling,
 	   but helps for tracebacks on .C etc. */
@@ -2500,7 +2500,7 @@ SEXP R_forceAndCall(SEXP expr, int n, SEXP rho)
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
     }
     else if (TYPEOF(fun) == CLOSXP) {
-	tmp = promiseArgs(CDR(e), rho);
+	tmp = promiseArgs((CDR)(e), rho);
 	int i = 0;
 	for (SEXP a = tmp; i < n && a != R_NilValue; a = CDR(a), i++) {
 	    SEXP p = CAR(a);
@@ -2527,7 +2527,7 @@ attribute_hidden SEXP do_forceAndCall(SEXP call, SEXP op, SEXP args, SEXP rho)
     e = CDDR(call);
 
     /* this would not be needed if CDDR(call) was a LANGSXP */
-    e = LCONS(CAR(e), CDR(e));
+    e = LCONS(CAR(e), (CDR)(e));
     SEXP val = R_forceAndCall(e, n, rho);
 
     return val;
@@ -2560,10 +2560,10 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 		  CHAR(PRINTNAME(symbol)));
 	bool missing = R_GetVarLocMISSING(loc);
 	val = R_GetVarLocValue(loc);
-	SET_FRAME(newrho, CONS(val, FRAME(newrho)));
-	SET_TAG(FRAME(newrho), symbol);
+	SET_FRAME(newrho, CONS(val, (FRAME)(newrho)));
+	SET_TAG((FRAME)(newrho), symbol);
 	if (missing) {
-	    SET_MISSING(FRAME(newrho), missing);
+	    SET_MISSING((FRAME)(newrho), missing);
 	    if (TYPEOF(val) == PROMSXP && PRENV(val) == rho) {
 		SEXP deflt;
 		SET_PRENV(val, newrho);
@@ -2583,7 +2583,7 @@ SEXP R::R_execMethod(SEXP op, SEXP rho)
 	/* re-promise to get reference counts for references from rho
 	   and newrho right. */
 	if (TYPEOF(val) == PROMSXP)
-	    SETCAR(FRAME(newrho), mkPROMISE(val, rho));
+	    SETCAR((FRAME)(newrho), mkPROMISE(val, rho));
 #endif
     }
 
@@ -2822,8 +2822,8 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
 
     checkArity(op, args);
     SEXP sym = CAR(args);
-    val = CADR(args);
-    SEXP body = CADDR(args);
+    val = (CADR)(args);
+    SEXP body = (CADDR)(args);
 
     if (!isSymbol(sym)) errorcall(call, "%s", _("non-symbol loop variable"));
 
@@ -2886,7 +2886,7 @@ attribute_hidden SEXP do_for(SEXP call, SEXP op, SEXP args_, SEXP rho_)
 	    /* make sure loop variable is not modified via other vars */
 	    ENSURE_NAMEDMAX(CAR(val));
 	    defineVar(sym, CAR(val), rho);
-	    val = CDR(val);
+	    val = (CDR)(val);
 	    break;
 
 	default:
@@ -3140,7 +3140,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	    expr = VECTOR_ELT(expr, 0);
 	if (TYPEOF(expr) != LANGSXP)
 	    error("%s", _("\"expr\" must be a call expression"));
-	env = CADR(args);
+	env = (CADR)(args);
 	if (env == R_MissingArg)
 	    env = rho;
     }
@@ -3148,7 +3148,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	/* could do argument matching here */
 	if (args == R_NilValue || CAR(args) == R_MissingArg)
 	    R_MissingArgError(install("FUN"), getLexicalCall(rho), "tailcallRecError");
-	expr = LCONS(CAR(args), CDR(args));
+	expr = LCONS(CAR(args), (CDR)(args));
 	env = rho;
     }
 
@@ -3264,9 +3264,9 @@ static SEXP evalseq(SEXP expr_, SEXP rho, int forcelocal,  R_varloc_t tmploc,
 	return CONS_NR(nval, expr);
     }
     else if (isLanguage(expr)) {
-	val = evalseq(CADR(expr), rho, forcelocal, tmploc, ploc);
+	val = evalseq((CADR)(expr), rho, forcelocal, tmploc, ploc);
 	R_SetVarLocValue(tmploc, CAR(val));
-	nexpr = LCONS(R_GetVarLocSymbol(tmploc), CDDR(expr));
+	nexpr = LCONS(R_GetVarLocSymbol(tmploc), (CDDR)(expr));
 	nexpr = LCONS(CAR(expr), nexpr);
 	nval = eval(nexpr, rho);
 	/* duplicate nval if it might be shared _or_ if the container,
@@ -3510,7 +3510,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
     try {
     /*  Do a partial evaluation down through the LHS. */
     R_varloc_t lhsloc;
-    lhs = evalseq(CADR(expr), rho,
+    lhs = evalseq((CADR)(expr), rho,
 		  PRIMVAL(op)==1 || PRIMVAL(op)==3, tmploc, &lhsloc);
     if (lhsloc.cell == NULL)
 	lhsloc.cell = R_NilValue;
@@ -3518,7 +3518,7 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     rhsprom = mkRHSPROMISE(CADR(args), rhs);
 
-    while (isLanguage(CADR(expr))) {
+    while (isLanguage((CADR)(expr))) {
 	if (TYPEOF(CAR(expr)) == SYMSXP)
 	    tmp = getAssignFcnSymbol(CAR(expr));
 	else {
@@ -3536,12 +3536,12 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 		error("%s", _("invalid function in complex assignment"));
 	}
 	SET_TEMPVARLOC_FROM_CAR(tmploc, lhs);
-	rhs = replaceCall(tmp, R_TmpvalSymbol, CDDR(expr), rhsprom);
+	rhs = replaceCall(tmp, R_TmpvalSymbol, (CDDR)(expr), rhsprom);
 	rhs = eval(rhs, rho);
 	SET_PRVALUE(rhsprom, rhs);
 	SET_PRCODE(rhsprom, rhs); /* not good but is what we have been doing */
-	lhs = CDR(lhs);
-	expr = CADR(expr);
+	lhs = (CDR)(lhs);
+	expr = (CADR)(expr);
     }
 
     if (TYPEOF(CAR(expr)) == SYMSXP)
@@ -3561,9 +3561,9 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error("%s", _("invalid function in complex assignment"));
     }
     SET_TEMPVARLOC_FROM_CAR(tmploc, lhs);
-    SEXP lhsSym = CDR(lhs);
+    SEXP lhsSym = (CDR)(lhs);
 
-    expr = replaceCall(afun, R_TmpvalSymbol, CDDR(expr), rhsprom);
+    expr = replaceCall(afun, R_TmpvalSymbol, (CDDR)(expr), rhsprom);
     GCStackRoot<> value;
     value = eval(expr, rho);
 
@@ -3647,7 +3647,7 @@ attribute_hidden SEXP do_set(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 
 #define COPY_TAG(to, from) do { \
-  SEXP __tag__ = TAG(from); \
+  SEXP __tag__ = (TAG)(from); \
   if (__tag__ != R_NilValue) SET_TAG(to, __tag__); \
 } while (0)
 
@@ -3690,7 +3690,7 @@ attribute_hidden SEXP R::evalList(SEXP el, SEXP rho, SEXP call, int n)
 			SETCDR(tail, ev);
 		    COPY_TAG(ev, h);
 		    tail = ev;
-		    h = CDR(h);
+		    h = (CDR)(h);
 		}
 	    }
 	    else if (h != R_MissingArg)
@@ -3773,7 +3773,7 @@ attribute_hidden SEXP R::evalListKeepMissing(SEXP el, SEXP rho)
 			SETCDR(tail, ev);
 		    COPY_TAG(ev, h);
 		    tail = ev;
-		    h = CDR(h);
+		    h = (CDR)(h);
 		}
 	    }
 	    else if (h != R_MissingArg)
@@ -3840,7 +3840,7 @@ attribute_hidden SEXP R::promiseArgs(SEXP el, SEXP rho)
 		      SETCDR(tail, CONS(mkPROMISE(CAR(h), rho), R_NilValue));
 		    tail = CDR(tail);
 		    COPY_TAG(tail, h);
-		    h = CDR(h);
+		    h = (CDR)(h);
 		}
 	    }
 	    else if (h != R_MissingArg)
@@ -3858,7 +3858,7 @@ attribute_hidden SEXP R::promiseArgs(SEXP el, SEXP rho)
 	}
 	el = CDR(el);
     }
-    ans = CDR(ans);
+    ans = (CDR)(ans);
     DECREMENT_REFCNT(ans);
     return ans;
 }
@@ -4227,7 +4227,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		    argValue = evalArgs(argValue, rho, dropmissing,
 						call, 0);
 		else {
-		    argValue = CONS_NR(x, evalArgs(CDR(argValue), rho,
+		    argValue = CONS_NR(x, evalArgs((CDR)(argValue), rho,
 							   dropmissing, call, 1));
 		    SET_TAG(argValue, CreateTag(TAG(args)));
 		}

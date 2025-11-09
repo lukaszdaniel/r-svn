@@ -380,7 +380,7 @@ static unsigned char DLLbuf[CONSOLE_BUFFER_SIZE+1], *DLLbufp;
 
 static void check_session_exit(void)
 {
-    if (! R_Interactive) {
+    if (!R_Interactive) {
 	/* This funtion will be called again after a LONGJMP if an
 	   error is signaled from one of the functions called. The
 	   'exiting' variable identifies this and results in
@@ -1429,31 +1429,31 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* argument matching */
     ap = list4(R_NilValue, R_NilValue, R_NilValue, R_NilValue);
     SET_TAG(ap,  install("text"));
-    SET_TAG(CDR(ap), install("condition"));
-    SET_TAG(CDDR(ap), install("expr"));
-    SET_TAG(CDDDR(ap), install("skipCalls"));
+    SET_TAG((CDR)(ap), install("condition"));
+    SET_TAG((CDDR)(ap), install("expr"));
+    SET_TAG((CDDDR)(ap), install("skipCalls"));
 #ifdef USE_BROWSER_HOOK
-    SETCDR(CDDDR(ap), CONS(R_NilValue, R_NilValue));
-    SET_TAG(CDR(CDDDR(ap)), install("ignoreHook"));
+    SETCDR((CDDDR)(ap), CONS(R_NilValue, R_NilValue));
+    SET_TAG(CDR((CDDDR)(ap)), install("ignoreHook"));
 #endif
     argList = matchArgs_RC(ap, args, call);
 
     /* substitute defaults */
     if(CAR(argList) == R_MissingArg)
 	SETCAR(argList, mkString(""));
-    if(CADR(argList) == R_MissingArg)
-	SETCAR(CDR(argList), R_NilValue);
-    if(CADDR(argList) == R_MissingArg)
-	SETCAR(CDDR(argList), ScalarLogical(1));
-    if(CADDDR(argList) == R_MissingArg)
-	SETCAR(CDDDR(argList), ScalarInteger(0));
+    if((CADR)(argList) == R_MissingArg)
+	SETCAR((CDR)(argList), R_NilValue);
+    if((CADDR)(argList) == R_MissingArg)
+	SETCAR((CDDR)(argList), ScalarLogical(1));
+    if((CADDDR)(argList) == R_MissingArg)
+	SETCAR((CDDDR)(argList), ScalarInteger(0));
 #ifdef USE_BROWSER_HOOK
-    if(CAR(CDR(CDDDR(argList))) == R_MissingArg)
-	SETCAR(CDR(CDDDR(argList)), ScalarLogical(FALSE));
+    if(CAR(CDR((CDDDR)(argList))) == R_MissingArg)
+	SETCAR(CDR((CDDDR)(argList)), ScalarLogical(FALSE));
 #endif
 
     /* return if 'expr' is not TRUE */
-    SEXP expr = CADDR(argList);
+    SEXP expr = (CADDR)(argList);
     if (!asLogical(expr)) {
 	return R_NilValue;
     }
@@ -1472,13 +1472,13 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
     /* trap non-interactive debugger invocation */
-    if(! R_Interactive) {
+    if (!R_Interactive) {
         char *p = getenv("_R_CHECK_BROWSER_NONINTERACTIVE_");
         if (p != NULL && StringTrue(p))
             error("%s", _("non-interactive browser() -- left over from debugging?"));
     }
 
-    Browser browser(CAR(argList) /*text*/, CADR(argList) /*condition*/);
+    Browser browser(CAR(argList) /*text*/, (CADR)(argList) /*condition*/);
 
     /* Save the evaluator state information */
     /* so that it can be restored on exit. */
@@ -1487,7 +1487,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     topExp = R_CurrentExpr;
 
     if (!ENV_RDEBUG(rho)) {
-	int skipCalls = asInteger(CADDDR(argList));
+	int skipCalls = asInteger((CADDDR)(argList));
 	RCNTXT *cptr = R_GlobalContext;
 #ifdef USE_BROWSER_HOOK
 	if (!ignoreHook)

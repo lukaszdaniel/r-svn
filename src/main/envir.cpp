@@ -1454,13 +1454,13 @@ attribute_hidden SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
     int n = length_DOTS(vl);
     bool named = false;
     for (int i = 0; i < n; i++) {
-	if (TAG(vl) != R_NilValue) {
+	if ((TAG)(vl) != R_NilValue) {
 	    if (!named) { named = true;
 		out = allocVector(STRSXP, n); // and is filled with "" already
 	    }
-	    SET_STRING_ELT(out, i, PRINTNAME(TAG(vl)));
+	    SET_STRING_ELT(out, i, PRINTNAME((TAG)(vl)));
 	}
-        vl = CDR(vl);
+        vl = (CDR)(vl);
     }
     if (!named) {
 	out = R_NilValue;

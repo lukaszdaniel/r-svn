@@ -173,6 +173,7 @@ attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
 #define CR_S4OBJECT_ASSERT(e) assert((TYPEOF(e) == OBJSXP) || (TYPEOF(e) == NILSXP))
 #define CR_ALTREP_ASSERT(e) assert(ALTREP(e) || (TYPEOF(e) == NILSXP))
 #define CR_BYTECODE_ASSERT(e) assert((TYPEOF(e) == BCODESXP) || (TYPEOF(e) == NILSXP))
+#define CR_BUILTIN_ASSERT(e) assert((TYPEOF(e) == SPECIALSXP) || (TYPEOF(e) == BUILTINSXP) || (TYPEOF(e) == NILSXP))
 #else
 #define CR_ASSERT(x)
 #define CR_TYPE_ASSERT(x)
@@ -185,6 +186,7 @@ attribute_hidden int R_gc_running(void) { return GCManager::gcIsRunning(); }
 #define CR_S4OBJECT_ASSERT(e)
 #define CR_ALTREP_ASSERT(e)
 #define CR_BYTECODE_ASSERT(e)
+#define CR_BUILTIN_ASSERT(e)
 #endif
 
 #ifdef PROTECTCHECK
@@ -3510,9 +3512,9 @@ namespace R
 {
 /* Primitive Accessors */
 /* not hidden since needed in some base packages */
-int (PRIMOFFSET)(SEXP x) { CR_ASSERT(x); return PRIMOFFSET(CHK(x)); }
+int (PRIMOFFSET)(SEXP x) { CR_ASSERT(x); CR_BUILTIN_ASSERT(x); return PRIMOFFSET(CHK(x)); }
 attribute_hidden
-void (SET_PRIMOFFSET)(SEXP x, int v) { CR_ASSERT(x); SET_PRIMOFFSET(CHK(x), v); }
+void (SET_PRIMOFFSET)(SEXP x, int v) { CR_ASSERT(x); CR_BUILTIN_ASSERT(x); SET_PRIMOFFSET(CHK(x), v); }
 } // namespace R
 
 /* Symbol Accessors */

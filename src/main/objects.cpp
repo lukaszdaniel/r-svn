@@ -50,6 +50,7 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h> /* for R_Calloc, R_Realloc and for S4 object bit */
@@ -298,7 +299,7 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
     if (top == R_GlobalEnv)
 	top = R_BaseEnv;
     else
-	top = ENCLOS(top);
+	top = (ENCLOS)(top);
     val = findFunWithBaseEnvAfterGlobalEnv(method, top);
 
     return val;
@@ -381,7 +382,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 	SEXP t;
 	int matched;
 
-	for (SEXP s = FRAME(cptr->cloenv); s != R_NilValue; s = CDR(s)) {
+	for (SEXP s = (FRAME)(cptr->cloenv); s != R_NilValue; s = CDR(s)) {
 	    matched = 0;
 	    for (t = formals; t != R_NilValue; t = CDR(t))
 		if (TAG(t) == TAG(s)) {
@@ -1517,14 +1518,14 @@ static SEXP get_primitive_methods(SEXP op, SEXP rho)
     GCStackRoot<> f, e;
     SEXP val;
 
-    f = allocVector(STRSXP, 1);
+    f = StringVector::create(1);
     SET_STRING_ELT(f, 0, mkChar(PRIMNAME(op)));
     e = Rf_allocLang(2);
     SETCAR(e, install("getGeneric"));
-    val = CDR(e); SETCAR(val, f);
+    val = (CDR)(e); SETCAR(val, f);
     val = eval(e, rho);
     /* a rough sanity check that this looks like a generic function */
-    if(TYPEOF(val) != CLOSXP || !IS_S4_OBJECT(val))
+    if (TYPEOF(val) != CLOSXP || !IS_S4_OBJECT(val))
 	error(_("object returned as generic function \"%s\" does not appear to be one"), PRIMNAME(op));
 
     return CLOENV(val);

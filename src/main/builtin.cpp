@@ -159,14 +159,14 @@ attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (CAR(argList) == R_MissingArg) code = R_NilValue;
     else code = CAR(argList);
 
-    if (CADR(argList) != R_MissingArg) {
+    if ((CADR)(argList) != R_MissingArg) {
 	GCStackRoot<> evl;
-	evl = eval(CADR(argList), rho);
+	evl = eval((CADR)(argList), rho);
 	addit = asLogicalNoNA(evl, "add");
     }
-    if (CADDR(argList) != R_MissingArg) {
+    if ((CADDR)(argList) != R_MissingArg) {
 	GCStackRoot<> evl;
-	evl = eval(CADDR(argList), rho);
+	evl = eval((CADDR)(argList), rho);
 	after = asLogicalNoNA(evl, "lifo");
     }
 
@@ -235,7 +235,7 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
 	s2 = R_findVarInFrame(env, install(nm));
 	if(s2 != R_UnboundValue) {
-	    s = mkCLOSXP(FORMALS(s2), R_NilValue, R_GlobalEnv);
+	    s = mkCLOSXP((FORMALS)(s2), R_NilValue, R_GlobalEnv);
 	    return s;
 	}
     }

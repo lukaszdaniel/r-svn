@@ -107,13 +107,13 @@ namespace CXXR
             return st == OBJSXP;
         }
 
+        // Virtual functions of RObject:
+        const char *typeName() const override;
+
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
         void detachReferents() override;
-
-        // Virtual functions of RObject:
-        const char *typeName() const override;
 
     private:
         /** @brief Default constructor.
