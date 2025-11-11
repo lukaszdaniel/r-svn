@@ -106,6 +106,9 @@ namespace CXXR
             return "(vector type)";
         }
 
+        virtual void *data() = 0;
+        virtual const void *data() const = 0;
+
     protected:
         /**
          * @param stype The required ::SEXPTYPE.

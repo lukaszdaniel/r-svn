@@ -323,7 +323,7 @@ namespace R {
 	SETSCALAR(__x__, (__v__ == 1));	\
     } while (0)
 
-#define STDVEC_DATAPTR(x) (((static_cast<CXXR::VectorBase *>(x))->u.vecsxp.m_data)) // data part
+#define STDVEC_DATAPTR(x) (static_cast<CXXR::VectorBase *>(x)->data()) // data part
 #undef CHAR
 #define CHAR(x)		((const char *) STDVEC_DATAPTR(x))
 #define LOGICAL(x)	((int *) DATAPTR(x))

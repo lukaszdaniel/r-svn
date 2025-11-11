@@ -52,57 +52,6 @@ namespace CXXR
         const auto &ALTREPptr = ALTREP;
     } // namespace ForceNonInline
 
-    namespace
-    {
-        inline R_size_t getVecSizeInBytes(VectorBase *s)
-        {
-#ifdef PROTECTCHECK
-            if (s->sexptype() == FREESXP)
-            {
-                s->sxpinfo.type = SEXPTYPE(s->sxpinfo.gp);
-            }
-#endif
-            if (IS_GROWABLE(s))
-            {
-                s->u.vecsxp.m_length = s->truelength();
-                s->sxpinfo.scalar = (s->u.vecsxp.m_length == 1);
-            }
-
-            R_size_t size = 0;
-            R_size_t n_elem = s->size();
-            switch (TYPEOF(s))
-            { /* get size in bytes */
-            case CHARSXP:
-                size = (n_elem + 1) * sizeof(char);
-                break;
-            case RAWSXP:
-                size = n_elem * sizeof(Rbyte);
-                break;
-            case LGLSXP:
-                size = n_elem * sizeof(Logical);
-                break;
-            case INTSXP:
-                size = n_elem * sizeof(int);
-                break;
-            case REALSXP:
-                size = n_elem * sizeof(double);
-                break;
-            case CPLXSXP:
-                size = n_elem * sizeof(Complex);
-                break;
-            case STRSXP:
-            case EXPRSXP:
-            case VECSXP:
-                size = n_elem * sizeof(SEXP);
-                break;
-            default:
-                BadObject::register_bad_object(s, __FILE__, __LINE__);
-                size = 0;
-            }
-            return size;
-        }
-    }
-
     VectorBase::VectorBase(SEXPTYPE stype, size_type n_elem, R_allocator_t *allocator)
         : RObject(stype)
     {

@@ -111,6 +111,17 @@ namespace CXXR
             return static_cast<const T *>(u.vecsxp.m_data)[index];
         }
 
+        // Virtual functions of VectorBase:
+        virtual void *data() override
+        {
+            return u.vecsxp.m_data;
+        }
+
+        virtual const void *data() const override
+        {
+            return u.vecsxp.m_data;
+        }
+
         /** @brief The name by which this type is known in R.
          *
          * @return The name by which this type is known in R.

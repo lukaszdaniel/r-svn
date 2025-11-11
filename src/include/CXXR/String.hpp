@@ -329,6 +329,17 @@ namespace CXXR
          */
         static String *create(const std::string &text, cetype_t encoding, bool isAscii);
 
+        // Virtual functions of VectorBase:
+        virtual void *data() override
+        {
+            return u.vecsxp.m_data;
+        }
+
+        virtual const void *data() const override
+        {
+            return u.vecsxp.m_data;
+        }
+
         /** @brief The name by which this type is known in R.
          *
          * @return The name by which this type is known in R.
