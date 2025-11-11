@@ -46,20 +46,6 @@ namespace CXXR
     public:
         using size_type = R_xlen_t;
 
-        /**
-         * @param stype The required ::SEXPTYPE.
-         *
-         * @param sz The required number of elements in the vector.
-         */
-        VectorBase(SEXPTYPE stype, size_type sz, R_allocator_t *allocator);
-
-        VectorBase(SEXPTYPE stype): RObject(stype)
-        {
-            u.vecsxp.m_length = 0;
-            u.vecsxp.m_truelength = 0;
-            u.vecsxp.m_data = nullptr;
-        }
-
         /** @brief Number of elements in the vector.
          *
          * @return The number of elements in the vector.
@@ -121,6 +107,13 @@ namespace CXXR
         }
 
     protected:
+        /**
+         * @param stype The required ::SEXPTYPE.
+         *
+         * @param sz The required number of elements in the vector.
+         */
+        VectorBase(SEXPTYPE stype, size_type sz, R_allocator_t *allocator);
+
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
         void detachReferents() override;

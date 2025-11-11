@@ -31,7 +31,12 @@
 #define FIXEDVECTOR_HPP
 
 #include <Localization.h>
+#include <CXXR/MemoryBank.hpp>
+#include <CXXR/Logical.hpp>
+#include <CXXR/Complex.hpp>
 #include <CXXR/VectorBase.hpp>
+#include <CXXR/String.hpp> // for String::blank()
+#include <CXXR/BadObject.hpp>
 
 namespace CXXR
 {
@@ -131,6 +136,54 @@ namespace CXXR
          */
         ~FixedVector()
         {
+            if (u.vecsxp.m_data)
+            {
+                const auto getVecSizeInBytes = [](VectorBase *s) -> R_size_t {
+#ifdef PROTECTCHECK
+                    if (s->sexptype() == FREESXP)
+                    {
+                        s->sxpinfo.type = SEXPTYPE(s->sxpinfo.gp);
+                    }
+#endif
+                    if (IS_GROWABLE(s))
+                    {
+                        s->u.vecsxp.m_length = s->truelength();
+                        s->sxpinfo.scalar = (s->u.vecsxp.m_length == 1);
+                    }
+
+                    R_size_t size = 0;
+                    R_size_t n_elem = s->size();
+                    switch (s->sexptype())
+                    { /* get size in bytes */
+                    case RAWSXP:
+                        size = n_elem * sizeof(Rbyte);
+                        break;
+                    case LGLSXP:
+                        size = n_elem * sizeof(Logical);
+                        break;
+                    case INTSXP:
+                        size = n_elem * sizeof(int);
+                        break;
+                    case REALSXP:
+                        size = n_elem * sizeof(double);
+                        break;
+                    case CPLXSXP:
+                        size = n_elem * sizeof(Complex);
+                        break;
+                    case STRSXP:
+                    case EXPRSXP:
+                    case VECSXP:
+                        size = n_elem * sizeof(SEXP);
+                        break;
+                    default:
+                        BadObject::register_bad_object(s, __FILE__, __LINE__);
+                        size = 0;
+                    }
+                    return size;
+                    };
+                R_size_t databytes = getVecSizeInBytes(this);
+                MemoryBank::deallocate(u.vecsxp.m_data, databytes, sxpinfo.m_ext_allocator);
+            }
         }
 
     private:
@@ -143,9 +196,60 @@ namespace CXXR
          *
          * @param allocator Custom allocator.
          */
-        FixedVector(size_type sz, R_allocator_t *allocator = nullptr)
-            : VectorBase(ST, sz, allocator)
+        FixedVector(size_type n_elem, R_allocator_t *allocator = nullptr)
+            : VectorBase(ST, n_elem, allocator)
         {
+            R_size_t actual_size = 0; // in bytes
+            switch (ST)
+            {
+            case RAWSXP:
+                actual_size = n_elem * sizeof(Rbyte);
+                break;
+            case LGLSXP:
+                actual_size = n_elem * sizeof(Logical);
+                break;
+            case INTSXP:
+                actual_size = n_elem * sizeof(int);
+                break;
+            case REALSXP:
+                actual_size = n_elem * sizeof(double);
+                break;
+            case CPLXSXP:
+                actual_size = n_elem * sizeof(Complex);
+                break;
+            case STRSXP:
+            case EXPRSXP:
+            case VECSXP:
+                actual_size = n_elem * sizeof(SEXP);
+                break;
+            default:
+                break;
+            }
+
+            u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, allocator));
+            u.vecsxp.m_length = n_elem;
+            sxpinfo.scalar = (n_elem == 1);
+
+            /* The following prevents disaster in the case */
+            /* that an uninitialised string vector is marked */
+            /* Direct assignment is OK since the node was just allocated and */
+            /* so is at least as new as R_NilValue and R_BlankString */
+            if (ST == EXPRSXP || ST == VECSXP)
+            {
+                SEXP *data = ((SEXP *)(u.vecsxp.m_data)); // VECTOR_PTR(this);
+                for (R_xlen_t i = 0; i < n_elem; i++)
+                    data[i] = R_NilValue;
+            }
+            else if (ST == STRSXP)
+            {
+                SEXP *data = ((SEXP *)(u.vecsxp.m_data)); // STRING_PTR(this);
+                for (R_xlen_t i = 0; i < n_elem; i++)
+                    data[i] = String::blank();
+            }
+            else
+            {
+                std::memset(u.vecsxp.m_data, 0, actual_size);
+            }
         }
 
         FixedVector &operator=(const FixedVector &) = delete;

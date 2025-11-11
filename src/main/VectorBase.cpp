@@ -109,8 +109,6 @@ namespace CXXR
         R_size_t actual_size = 0; // in bytes
         switch (stype)
         {
-        case NILSXP:
-            break;
         case RAWSXP:
             actual_size = n_elem * sizeof(Rbyte);
             break;
@@ -134,11 +132,8 @@ namespace CXXR
         case VECSXP:
             actual_size = n_elem * sizeof(SEXP);
             break;
-        case LANGSXP:
-            break;
-        case LISTSXP:
-            break;
         default:
+            error(_("unsupported type '%s'"), R::sexptype2char(stype));
             break;
         }
 
@@ -148,42 +143,10 @@ namespace CXXR
         }
 
         SET_EXT_ALLOCATOR(this, (allocator != nullptr));
-        u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, allocator));
-        SET_STDVEC_LENGTH(this, n_elem);
-
-        /* The following prevents disaster in the case */
-        /* that an uninitialised string vector is marked */
-        /* Direct assignment is OK since the node was just allocated and */
-        /* so is at least as new as R_NilValue and R_BlankString */
-        if (stype == EXPRSXP || stype == VECSXP)
-        {
-            SEXP *data = VECTOR_PTR(this);
-            for (R_xlen_t i = 0; i < n_elem; i++)
-                data[i] = R_NilValue;
-        }
-        else if (stype == STRSXP)
-        {
-            SEXP *data = STRING_PTR(this);
-            for (R_xlen_t i = 0; i < n_elem; i++)
-                data[i] = R_BlankString;
-        }
-        else if (stype == CHARSXP)
-        {
-            CHAR_RW(this)[n_elem] = 0;
-        }
-        else
-        {
-            std::memset(u.vecsxp.m_data, 0, actual_size);
-        }
     }
 
     VectorBase::~VectorBase()
     {
-        if (u.vecsxp.m_data)
-        {
-            R_size_t databytes = getVecSizeInBytes(this);
-            MemoryBank::deallocate(u.vecsxp.m_data, databytes, sxpinfo.m_ext_allocator);
-        }
     }
 
     void VectorBase::detachReferents()

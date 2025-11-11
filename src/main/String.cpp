@@ -65,7 +65,12 @@ namespace CXXR
 
     String::~String()
     {
-        // nothing to do here; removal from the hash table is done in visitTable()
+        // removal from the hash table is done in visitTable()
+        if (u.vecsxp.m_data)
+        {
+            R_size_t databytes = (size() + 1) * sizeof(char);
+            MemoryBank::deallocate(u.vecsxp.m_data, databytes, sxpinfo.m_ext_allocator);
+        }
     }
 
     const char *String::c_str() const
@@ -129,10 +134,16 @@ namespace CXXR
     String::String(const std::string &name, cetype_t encoding, bool isAscii)
         : VectorBase(CHARSXP, name.length(), nullptr)
     {
-        int n_elem = name.length();
+        size_t n_elem = name.length();
+        R_size_t actual_size = (n_elem + 1) * sizeof(char); // in bytes
+
+        u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, nullptr));
+
         if (n_elem)
             memcpy(u.vecsxp.m_data, name.c_str(), n_elem);
         ((char *)u.vecsxp.m_data)[n_elem] = 0;
+        u.vecsxp.m_length = n_elem;
+        sxpinfo.scalar = (n_elem == 1);
 
         switch (encoding)
         {
