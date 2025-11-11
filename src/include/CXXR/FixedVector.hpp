@@ -87,6 +87,36 @@ namespace CXXR
             return result;
         }
 
+        /** @brief Number of elements in the vector.
+         *
+         * @return The number of elements in the vector.
+         *
+         * @note AltRep uses its own version of size().
+         */
+        virtual size_type size() const override
+        {
+            return m_length;
+        }
+
+        virtual void setSize(size_type new_val) override
+        {
+            m_length = new_val;
+        }
+
+        /** @brief Number of occupied elements in the vector.
+         *
+         * @return The number of occupied elements in the vector.
+         */
+        virtual size_type truelength() const override
+        {
+            return m_truelength;
+        }
+
+        virtual void setTruelength(size_type new_val) override
+        {
+            m_truelength = new_val;
+        }
+
         /** @brief Element access.
          *
          * @param index Index of required element (counting from
@@ -96,7 +126,7 @@ namespace CXXR
          */
         T &operator[](size_type index)
         {
-            return static_cast<T *>(u.vecsxp.m_data)[index];
+            return static_cast<T *>(m_data)[index];
         }
 
         /** @brief Read-only element access.
@@ -108,18 +138,18 @@ namespace CXXR
          */
         const T &operator[](size_type index) const
         {
-            return static_cast<const T *>(u.vecsxp.m_data)[index];
+            return static_cast<const T *>(m_data)[index];
         }
 
         // Virtual functions of VectorBase:
         virtual void *data() override
         {
-            return u.vecsxp.m_data;
+            return m_data;
         }
 
         virtual const void *data() const override
         {
-            return u.vecsxp.m_data;
+            return m_data;
         }
 
         /** @brief The name by which this type is known in R.
@@ -147,9 +177,9 @@ namespace CXXR
          */
         ~FixedVector()
         {
-            if (u.vecsxp.m_data)
+            if (m_data)
             {
-                const auto getVecSizeInBytes = [](VectorBase *s) -> R_size_t {
+                const auto getVecSizeInBytes = [](FixedVector<T, ST> *s) -> R_size_t {
 #ifdef PROTECTCHECK
                     if (s->sexptype() == FREESXP)
                     {
@@ -158,8 +188,8 @@ namespace CXXR
 #endif
                     if (IS_GROWABLE(s))
                     {
-                        s->u.vecsxp.m_length = s->truelength();
-                        s->sxpinfo.scalar = (s->u.vecsxp.m_length == 1);
+                        s->m_length = s->truelength();
+                        s->sxpinfo.scalar = (s->m_length == 1);
                     }
 
                     R_size_t size = 0;
@@ -193,11 +223,15 @@ namespace CXXR
                     return size;
                     };
                 R_size_t databytes = getVecSizeInBytes(this);
-                MemoryBank::deallocate(u.vecsxp.m_data, databytes, sxpinfo.m_ext_allocator);
+                MemoryBank::deallocate(m_data, databytes, sxpinfo.m_ext_allocator);
             }
         }
 
     private:
+        void *m_data; // pointer to the vector's data block.
+        size_type m_length;
+        size_type m_truelength; // the number of non-null elements in the vector or hash value in case of char (aka String class)
+
         /** @brief Create a vector, leaving its contents
          *         uninitialized (for POD types) or default
          *         constructed.
@@ -237,8 +271,8 @@ namespace CXXR
                 break;
             }
 
-            u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, allocator));
-            u.vecsxp.m_length = n_elem;
+            m_data = (MemoryBank::allocate(actual_size, false, allocator));
+            m_length = n_elem;
             sxpinfo.scalar = (n_elem == 1);
 
             /* The following prevents disaster in the case */
@@ -247,19 +281,19 @@ namespace CXXR
             /* so is at least as new as R_NilValue and R_BlankString */
             if (ST == EXPRSXP || ST == VECSXP)
             {
-                SEXP *data = ((SEXP *)(u.vecsxp.m_data)); // VECTOR_PTR(this);
+                SEXP *data = ((SEXP *)(m_data)); // VECTOR_PTR(this);
                 for (R_xlen_t i = 0; i < n_elem; i++)
                     data[i] = R_NilValue;
             }
             else if (ST == STRSXP)
             {
-                SEXP *data = ((SEXP *)(u.vecsxp.m_data)); // STRING_PTR(this);
+                SEXP *data = ((SEXP *)(m_data)); // STRING_PTR(this);
                 for (R_xlen_t i = 0; i < n_elem; i++)
                     data[i] = String::blank();
             }
             else
             {
-                std::memset(u.vecsxp.m_data, 0, actual_size);
+                std::memset(m_data, 0, actual_size);
             }
         }
 
@@ -302,7 +336,7 @@ namespace CXXR
     {
         for (R_xlen_t i = 0; i < this->size(); i++)
         {
-            auto el = static_cast<GCEdge<> *>(this->u.vecsxp.m_data)[i];
+            auto el = static_cast<GCEdge<> *>(this->m_data)[i];
             el = R_NilValue;
         }
     }
@@ -321,7 +355,7 @@ namespace CXXR
     {
         for (R_xlen_t i = 0; i < this->size(); i++)
         {
-            const RObject *el = static_cast<GCEdge<> *>(this->u.vecsxp.m_data)[i];
+            const RObject *el = static_cast<GCEdge<> *>(this->m_data)[i];
             if (el != R_NilValue)
                 (*v)(el);
         }

@@ -52,19 +52,15 @@ namespace CXXR
          *
          * @note AltRep uses its own version of size().
          */
-        size_type size() const
-        {
-            return u.vecsxp.m_length;
-        }
+        virtual size_type size() const = 0;
+        virtual void setSize(size_type new_val) = 0;
 
         /** @brief Number of occupied elements in the vector.
          *
          * @return The number of occupied elements in the vector.
          */
-        size_type truelength() const
-        {
-            return u.vecsxp.m_truelength;
-        }
+        virtual size_type truelength() const = 0;
+        virtual void setTruelength(size_type new_val) = 0;
 
         /** @brief Is an RObject a Vector?
          *

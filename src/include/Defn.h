@@ -298,9 +298,9 @@ namespace R {
 #else
 # define IS_LONG_VEC(x) 0
 #endif
-#define STDVEC_LENGTH(x) ((static_cast<CXXR::VectorBase *>(x))->u.vecsxp.m_length)
-#define STDVEC_TRUELENGTH(x) ((static_cast<CXXR::VectorBase *>(x))->u.vecsxp.m_truelength)
-#define SET_STDVEC_TRUELENGTH(x, v) (STDVEC_TRUELENGTH(x)=(v))
+#define STDVEC_LENGTH(x) (static_cast<CXXR::VectorBase *>(x)->size())
+#define STDVEC_TRUELENGTH(x) (static_cast<CXXR::VectorBase *>(x)->truelength())
+#define SET_STDVEC_TRUELENGTH(x, v) (static_cast<CXXR::VectorBase *>(x)->setTruelength(v))
 #define SET_TRUELENGTH(x,v) do {				\
 	SEXP sl__x__ = (x);					\
 	R_xlen_t sl__v__ = (v);					\
@@ -319,7 +319,7 @@ namespace R {
 #define SET_STDVEC_LENGTH(x,v) do {		\
 	SEXP __x__ = (x);			\
 	R_xlen_t __v__ = (v);			\
-	STDVEC_LENGTH(__x__) = __v__;		\
+	static_cast<CXXR::VectorBase *>(__x__)->setSize(__v__); \
 	SETSCALAR(__x__, (__v__ == 1));	\
     } while (0)
 

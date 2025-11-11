@@ -91,6 +91,36 @@ namespace CXXR
             bool m_na_last;
         };
 
+        /** @brief Number of elements in the vector.
+         *
+         * @return The number of elements in the vector.
+         *
+         * @note AltRep uses its own version of size().
+         */
+        virtual size_type size() const override
+        {
+            return m_length;
+        }
+
+        virtual void setSize(size_type new_val) override
+        {
+            m_length = new_val;
+        }
+
+        /** @brief Number of occupied elements in the vector.
+         *
+         * @return The number of occupied elements in the vector.
+         */
+        virtual size_type truelength() const override
+        {
+            return m_truelength;
+        }
+
+        virtual void setTruelength(size_type new_val) override
+        {
+            m_truelength = new_val;
+        }
+
         /** @brief Read-only character access.
          *
          * @param index Index of required character (counting from
@@ -102,7 +132,7 @@ namespace CXXR
          */
         const char operator[](size_type index) const
         {
-            return (static_cast<const char *>(u.vecsxp.m_data))[index];
+            return (static_cast<const char *>(m_data))[index];
         }
 
         /** @brief Access encapsulated C-style string.
@@ -332,12 +362,12 @@ namespace CXXR
         // Virtual functions of VectorBase:
         virtual void *data() override
         {
-            return u.vecsxp.m_data;
+            return m_data;
         }
 
         virtual const void *data() const override
         {
-            return u.vecsxp.m_data;
+            return m_data;
         }
 
         /** @brief The name by which this type is known in R.
@@ -387,6 +417,10 @@ namespace CXXR
         // a pointer locating its entry within the cache.
         using map = std::unordered_map<key, String *, Hasher, std::equal_to<key>,
             CXXR::Allocator<std::pair<const key, String *>>>;
+
+        void *m_data;
+        size_type m_length;
+        size_type m_truelength; // the number of non-null elements in the vector or hash value in case of char (aka String class)
 
         static map s_hash_table; // Global hash of CHARSXPs
 

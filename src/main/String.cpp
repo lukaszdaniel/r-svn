@@ -66,22 +66,22 @@ namespace CXXR
     String::~String()
     {
         // removal from the hash table is done in visitTable()
-        if (u.vecsxp.m_data)
+        if (m_data)
         {
             R_size_t databytes = (size() + 1) * sizeof(char);
-            MemoryBank::deallocate(u.vecsxp.m_data, databytes, sxpinfo.m_ext_allocator);
+            MemoryBank::deallocate(m_data, databytes, sxpinfo.m_ext_allocator);
         }
     }
 
     const char *String::c_str() const
     {
-        return static_cast<const char *>(u.vecsxp.m_data);
+        return static_cast<const char *>(m_data);
     }
 
     std::string String::stdstring() const
     {
-        assert(u.vecsxp.m_data);
-        return std::string(static_cast<const char *>(u.vecsxp.m_data), size());
+        assert(m_data);
+        return std::string(static_cast<const char *>(m_data), size());
     }
 
     String *String::blank()
@@ -137,12 +137,12 @@ namespace CXXR
         size_t n_elem = name.length();
         R_size_t actual_size = (n_elem + 1) * sizeof(char); // in bytes
 
-        u.vecsxp.m_data = (MemoryBank::allocate(actual_size, false, nullptr));
+        m_data = (MemoryBank::allocate(actual_size, false, nullptr));
 
         if (n_elem)
-            memcpy(u.vecsxp.m_data, name.c_str(), n_elem);
-        ((char *)u.vecsxp.m_data)[n_elem] = 0;
-        u.vecsxp.m_length = n_elem;
+            memcpy(m_data, name.c_str(), n_elem);
+        ((char *)m_data)[n_elem] = 0;
+        m_length = n_elem;
         sxpinfo.scalar = (n_elem == 1);
 
         switch (encoding)

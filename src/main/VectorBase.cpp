@@ -113,17 +113,11 @@ namespace CXXR
     void VectorBase::tooBig(size_type bytes)
     {
         if (bytes > Giga)
-            Rf_errorcall(R_NilValue,
-                _("cannot allocate vector of size %0.1f %s"),
-                bytes / Giga, "GB");
+            Rf_errorcall(R_NilValue, _("cannot allocate vector of size %0.1f %s"), bytes / Giga, "GB");
         else if (bytes > Mega)
-            Rf_errorcall(R_NilValue,
-                _("cannot allocate vector of size %0.1f %s"),
-                bytes / Mega, "MB");
+            Rf_errorcall(R_NilValue, _("cannot allocate vector of size %0.1f %s"), bytes / Mega, "MB");
         else
-            Rf_errorcall(R_NilValue,
-                _("cannot allocate vector of size %0.f %s"),
-                bytes / Kilo, "KB");
+            Rf_errorcall(R_NilValue, _("cannot allocate vector of size %0.f %s"), bytes / Kilo, "KB");
     }
 } // namespace CXXR
 

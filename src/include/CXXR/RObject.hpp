@@ -71,13 +71,6 @@ namespace CXXR
     class PairList;
     class Symbol;
 
-    struct vecsxp_struct
-    {
-        R_xlen_t m_length;
-        R_xlen_t m_truelength; // the number of non-null elements in the vector or hash value in case of char (aka String class)
-        void *m_data;
-    };
-
     struct primsxp_struct
     {
         size_t m_offset;
@@ -505,7 +498,6 @@ namespace CXXR
             struct extptr_struct extptr;
             struct s4ptr_struct s4ptr;
             struct weakref_struct weakrrefptr;
-            struct vecsxp_struct vecsxp;
             U()
             {
                 // listsxp.m_car = nullptr;
