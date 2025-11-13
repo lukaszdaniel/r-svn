@@ -1222,7 +1222,7 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
     int *ix = NULL /* -Wall */;
     double *x = NULL /* -Wall */;
     Rcomplex *cx = NULL /* -Wall */;
-    SEXP *sx = NULL /* -Wall */;
+    const SEXP *sx = NULL /* -Wall */;
 
     if (n < 2) return;
     switch (TYPEOF(key)) {
@@ -1236,7 +1236,7 @@ attribute_hidden void R::orderVector1(int *indx, int n, SEXP key, bool nalast, b
 	x = REAL(key);
 	break;
     case STRSXP:
-	sx = STRING_PTR(key);
+	sx = STRING_PTR_RO(key);
 	break;
     case CPLXSXP:
 	cx = COMPLEX(key);
@@ -1366,7 +1366,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
     int *ix = NULL /* -Wall */;
     double *x = NULL /* -Wall */;
     Rcomplex *cx = NULL /* -Wall */;
-    SEXP *sx = NULL /* -Wall */;
+    const SEXP *sx = NULL /* -Wall */;
     R_xlen_t itmp;
 
     if (n < 2) return;
@@ -1381,7 +1381,7 @@ static void orderVector1l(R_xlen_t *indx, R_xlen_t n, SEXP key, bool nalast,
 	x = REAL(key);
 	break;
     case STRSXP:
-	sx = STRING_PTR(key);
+	sx = STRING_PTR_RO(key);
 	break;
     case CPLXSXP:
 	cx = COMPLEX(key);

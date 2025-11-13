@@ -5621,7 +5621,7 @@ static struct { void *addr; int argc; const char *instname; } opinfo[OPCOUNT];
 #define GETOP() (*pc++).i
 #define SKIP_OP() (pc++)
 
-#define BCCODE(e) (BCODE *) DATAPTR(BCODE_CODE(e))
+#define BCCODE(e) BCODE_PTR(BCODE_CODE(e))
 #else
 typedef int BCODE;
 
@@ -8609,7 +8609,7 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
     // Check version:
     if (v < R_bcMinVersion || v > R_bcVersion) {
 	IntVector *code = IntVector::create(m * 2);
-	pc = (BCODE *) DATAPTR(code);
+	pc = BCODE_PTR(code);
 	pc[0].i = v;
 	pc[1].v = opinfo[BCMISMATCH_OP].addr;
 	return code;
@@ -8617,7 +8617,7 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
 
 	IntVector *code = IntVector::create(m * n);
 	memset(INTEGER(code), 0, m * n * sizeof(int));
-	pc = (BCODE *) DATAPTR(code);
+	pc = BCODE_PTR(code);
 
 	// Insert the current version number:
 	pc[0].i = R_bcVersion;
@@ -8661,7 +8661,7 @@ attribute_hidden SEXP R::R_bcDecode(SEXP code) {
     int m = (sizeof(BCODE) + sizeof(int) - 1) / sizeof(int);
 
     R_xlen_t n = LENGTH(code) / m;
-    BCODE *pc = (BCODE *) DATAPTR(code);
+    BCODE *pc = BCODE_PTR(code);
 
     IntVector *bytes = IntVector::create(n);
     int *ipc = INTEGER(bytes);

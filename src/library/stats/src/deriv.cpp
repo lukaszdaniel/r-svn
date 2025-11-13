@@ -1058,7 +1058,7 @@ static SEXP Prune(SEXP lst)
 SEXP deriv(SEXP args)
 {
 /* deriv(expr, namevec, function.arg, tag, hessian) */
-    SEXP ans, ans2, expr, funarg, names, s;
+    SEXP ans, ans2, expr, funarg, names;
     int f_index, *d_index, *d2_index;
     int i, j, k, nexpr, nderiv=0;
     SEXP exprlist, stag;
@@ -1233,20 +1233,21 @@ SEXP deriv(SEXP args)
 
     if (TYPEOF(funarg) == CLOSXP)
     {
-	s = mkCLOSXP(FORMALS(funarg), exprlist, CLOENV(funarg));
-	funarg = s;
+	SEXP formals = R_ClosureFormals(funarg);
+	SEXP rho = R_ClosureEnv(funarg);
+	    funarg = R_mkClosure(formals, exprlist, rho);
     }
     else if (isString(funarg)) {
 	PROTECT(names = duplicate(funarg));
-	SEXP formals = PROTECT(allocList(length(names)));
-	ans = formals;
-	for (i = 0; i < length(names); i++) {
-	    SET_TAG(ans, installTrChar(STRING_ELT(names, i)));
-	    SETCAR(ans, R_MissingArg);
-	    ans = CDR(ans);
+	PROTECT(ans = allocList(length(names)));
+	SEXP a = ans;
+	for(i = 0; i < length(names); i++) {
+	    SET_TAG(a, installTrChar(STRING_ELT(names, i)));
+	    SETCAR(a, R_MissingArg);
+	    a = CDR(a);
 	}
-	PROTECT(funarg = mkCLOSXP(formals, exprlist, R_GlobalEnv));
-	UNPROTECT(3);
+	funarg = R_mkClosure(ans, exprlist, R_GlobalEnv);
+	UNPROTECT(2);
     }
     else {
 	funarg = allocVector(EXPRSXP, 1);

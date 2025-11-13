@@ -213,7 +213,14 @@
       \code{Rf_lazy_duplicate}, \code{EXTPTR_PROT}, \code{EXTPTR_PTR},
       \code{EXTPTR_TAG}, \code{NAMED}, \code{FRAME}, \code{HASHTAB},
       \code{IS_S4_OBJECT}, \code{BODY}, \code{FORMALS}, \code{CLOENV},
-      \code{ENCLOS}, \code{Rf_isFrame}, \code{OBJECT}, \code{SET_TYPEOF}.
+      \code{ENCLOS}, \code{Rf_isFrame}, \code{OBJECT},
+      \code{SET_TYPEOF}, \code{ENVFLAGS}, \code{SET_ENVFLAGS},
+      \code{SET_FORMALS}, \code{SET_BODY}, \code{SET_CLOENV},
+      \code{STRING_PTR}.
+
+      \item The deprecated macros \code{CHARACTER_DATA} and
+      \code{CHARACTER_POINTER} now return \code{const} pointers since using
+      writable pointers in packages is not safe.
     }
   }
 
@@ -359,6 +366,10 @@
       in the cases where the formula has more than one term with NAs such
       as \code{f(u, b=NA)} or \code{g(NA)}, finally fixing \PR{15275}
       thanks to \I{Mikael Jagan}'s patch.
+
+      \item The help page \code{example(matplot)} now correctly labels
+      Sepal vs Petal dimensions in its first iris data plot, thanks to
+      \I{Jeff Dick}'s post on R-devel.
     }
   }
 }
