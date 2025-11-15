@@ -132,7 +132,7 @@ namespace CXXR
          */
         const char operator[](size_type index) const
         {
-            return (static_cast<const char *>(m_data))[index];
+            return m_data[index];
         }
 
         /** @brief Access encapsulated C-style string.
@@ -418,7 +418,7 @@ namespace CXXR
         using map = std::unordered_map<key, String *, Hasher, std::equal_to<key>,
             CXXR::Allocator<std::pair<const key, String *>>>;
 
-        void *m_data;
+        char *m_data;
         size_type m_length;
         size_type m_truelength; // the number of non-null elements in the vector or hash value in case of char (aka String class)
 

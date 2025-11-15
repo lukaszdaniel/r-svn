@@ -30,6 +30,7 @@
 #ifndef FIXEDVECTOR_HPP
 #define FIXEDVECTOR_HPP
 
+#include <algorithm>
 #include <Localization.h>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/Logical.hpp>
@@ -236,7 +237,7 @@ namespace CXXR
          *         uninitialized (for POD types) or default
          *         constructed.
          *
-         * @param sz Number of elements required.  Zero is
+         * @param n_elem Number of elements required.  Zero is
          *          permissible.
          *
          * @param allocator Custom allocator.
@@ -273,6 +274,7 @@ namespace CXXR
 
             m_data = (MemoryBank::allocate(actual_size, false, allocator));
             m_length = n_elem;
+            m_truelength = 0;
             sxpinfo.scalar = (n_elem == 1);
 
             /* The following prevents disaster in the case */
@@ -334,9 +336,9 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::detachElements(std::true_type)
     {
-        for (R_xlen_t i = 0; i < this->size(); i++)
+        for (R_xlen_t i = 0; i < size(); i++)
         {
-            auto el = static_cast<GCEdge<> *>(this->m_data)[i];
+            auto el = static_cast<GCEdge<> *>(m_data)[i];
             el = R_NilValue;
         }
     }
@@ -344,7 +346,7 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::detachReferents()
     {
-        if (!this->refCountEnabled())
+        if (!refCountEnabled())
             return;
         detachElements(typename ElementTraits::IsGCEdge<T>());
         VectorBase::detachReferents();
@@ -353,9 +355,9 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::visitElements(const_visitor *v, std::true_type) const
     {
-        for (R_xlen_t i = 0; i < this->size(); i++)
+        for (R_xlen_t i = 0; i < size(); i++)
         {
-            const RObject *el = static_cast<GCEdge<> *>(this->m_data)[i];
+            const RObject *el = static_cast<GCEdge<> *>(m_data)[i];
             if (el != R_NilValue)
                 (*v)(el);
         }

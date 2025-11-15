@@ -723,7 +723,7 @@ attribute_hidden SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 		cetype_t venc = getCharCE(v_el);
 		if (venc != ienc && !IS_ASCII(v_el)) {
 		    ss = translateChar(el);
-		    slen = (int) strlen(ss);
+		    slen = strlen(ss);
 		    v_ss = translateChar(v_el);
 		    ienc2 = CE_NATIVE;
 		}
