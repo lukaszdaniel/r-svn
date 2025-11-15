@@ -456,6 +456,38 @@ namespace CXXR
     // Designed for use with std::accumulate():
     unsigned int stringWidthQuote(unsigned int minwidth, SEXP string);
 
+    // Template specializations of ElementTraits:
+    namespace ElementTraits
+    {
+        template <>
+        struct NAFunc<GCEdge<String>>
+        {
+            static GCEdge<String> makeNA();
+
+            inline const GCEdge<String> &operator()() const
+            {
+                static GCEdge<String> s_na = makeNA();
+                return s_na;
+            }
+        };
+
+        template <>
+        inline bool IsNA<GCEdge<String>>::operator()(const GCEdge<String> &t) const
+        {
+            typedef GCEdge<String> T;
+            return t == NA<T>();
+        }
+    } // namespace ElementTraits
+
+    // Make the default value for a String point to a blank string:
+    template <>
+    inline GCEdge<String>::GCEdge(String *val)
+    {
+        m_target = nullptr; // In case String::blank() causes GC.
+        m_target = String::blank();
+        GCNode::incRefCount(m_target);
+    }
+
     String *CXXR_allocCharsxp(const std::string &text, cetype_t encoding, bool isAscii);
 } // namespace CXXR
 

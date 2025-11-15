@@ -31,12 +31,11 @@
 
 #define USE_RINTERNALS // always use macro versions
 
+#include <Localization.h>
 #include <CXXR/Logical.hpp>
 #include <CXXR/Complex.hpp>
-#include <CXXR/MemoryBank.hpp>
 #include <CXXR/VectorBase.hpp>
 #include <CXXR/BadObject.hpp>
-#include <Localization.h>
 #include <Defn.h> // for ForceNonInline
 
 namespace CXXR

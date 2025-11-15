@@ -47,6 +47,16 @@ namespace CXXR
     {
         return "character";
     }
+
+    namespace ElementTraits
+    {
+        GCEdge<String> NAFunc<GCEdge<String>>::makeNA()
+        {
+            GCEdge<String> s_na;
+            s_na = String::NA();
+            return s_na;
+        }
+    } // namespace ElementTraits
 } // namespace CXXR
 
 namespace R
