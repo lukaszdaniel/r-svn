@@ -140,7 +140,7 @@ namespace CXXR
         size_type blocksize = (n_elem + 1) * sizeof(char); // in bytes
         // Check for integer overflow:
         if (size_type(blocksize / sizeof(char)) != n_elem + 1)
-            Rf_error(_("Request to create impossibly large vector."));
+            tooBig(blocksize);
 
         try
         {
