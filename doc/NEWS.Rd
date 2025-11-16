@@ -216,11 +216,15 @@
       \code{ENCLOS}, \code{Rf_isFrame}, \code{OBJECT},
       \code{SET_TYPEOF}, \code{ENVFLAGS}, \code{SET_ENVFLAGS},
       \code{SET_FORMALS}, \code{SET_BODY}, \code{SET_CLOENV},
-      \code{STRING_PTR}.
+      \code{STRING_PTR}, \code{DATAPTR}.
 
       \item The deprecated macros \code{CHARACTER_DATA} and
       \code{CHARACTER_POINTER} now return \code{const} pointers since using
       writable pointers in packages is not safe.
+
+      \item New function \code{DATAPTR_RW} for use in implementing
+      \code{ALTREP} \code{Dataptr} methods. This function should not be
+      used in any other contexts.
     }
   }
 
@@ -680,6 +684,14 @@
       \item New function \code{use()} to use packages in R scripts with
       full control over what gets added to the search path.  (Actually
       already available since \R 4.4.0.)
+
+      \item New connection type \code{zstdfile} for files compressed by
+      \command{zstd} if \R{} was built with such support.  \code{file()}
+      and \code{gafile()} can automagically read such files.
+
+      \item \code{memCompress()} and \code{memDecompress()} have optiosn
+      to use \command{zstd} compression if \R{} was built with support
+      for it.
 
       \item There is some support for \command{zstd} compression of
       tarballs in \code{tar()} and \code{untar()}.  (This depends on OS

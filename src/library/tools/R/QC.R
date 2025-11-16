@@ -7975,7 +7975,7 @@ function(dir, localOnly = FALSE, pkgSize = NA)
         z <- parse_URI_reference(v)
         if((endsWith(tolower(z$authority), "github.com") ||
             endsWith(tolower(z$authority), "gitlab.com")) &&
-           basename(z$path) != "issues") {
+           !grepl("/issues(/new)?/?$", z$path)) {
             w <- sprintf("%s/issues", sub("/$", "", v))
             out$bugreports <-
                 paste(c("The BugReports field in DESCRIPTION has",

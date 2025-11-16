@@ -62,6 +62,7 @@
 #include <R_ext/Minmax.h>
 #include <CXXR/Complex.hpp>
 #include <CXXR/Logical.hpp>
+#include <R_ext/Altrep.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/MemoryBank.hpp>
@@ -2990,6 +2991,9 @@ void *(STDVEC_DATAPTR)(SEXP x)
     CHKZLN(x, void);
     return STDVEC_DATAPTR(x);
 }
+
+/* nedded for implementing Dataptr ALTREP methods */
+void *DATAPTR_RW(SEXP x) { return DATAPTR(x); }
 
 int *(LOGICAL)(SEXP x) {
     CR_ASSERT(x);

@@ -27,6 +27,7 @@
 #define R_EXT_ALTREP_H_
 
 #include <R_ext/Complex.h>
+#include <R_ext/Rdynload.h> // for DllInfo
 
 #ifdef  __cplusplus
 extern "C" {
@@ -166,6 +167,10 @@ DECLARE_METHOD_SETTER(altstring, No_NA)
 
 DECLARE_METHOD_SETTER(altlist, Elt)
 DECLARE_METHOD_SETTER(altlist, Set_elt)
+
+/* DATAPTR_RW is declared here since it should only be used to
+   implement Dataptr methods. */
+void *DATAPTR_RW(SEXP);
 
 #ifdef  __cplusplus
 } //extern "C"
