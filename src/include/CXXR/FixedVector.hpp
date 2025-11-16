@@ -36,7 +36,6 @@
 #include <CXXR/Logical.hpp>
 #include <CXXR/Complex.hpp>
 #include <CXXR/VectorBase.hpp>
-#include <CXXR/String.hpp> // for String::blank()
 #include <CXXR/BadObject.hpp>
 
 namespace CXXR
@@ -127,7 +126,7 @@ namespace CXXR
          */
         T &operator[](size_type index)
         {
-            return static_cast<T *>(m_data)[index];
+            return m_data[index];
         }
 
         /** @brief Read-only element access.
@@ -139,8 +138,36 @@ namespace CXXR
          */
         const T &operator[](size_type index) const
         {
-            return static_cast<const T *>(m_data)[index];
+            return m_data[index];
         }
+
+        /** @brief Iterator designating first element.
+         *
+         * @return An iterator designating the first element of the
+         * vector.  Returns end() if the vector is empty.
+         */
+        iterator begin() { return m_data; }
+
+        /** @brief Const iterator designating first element.
+         *
+         * @return A const_iterator designating the first element of
+         * the vector.  Returns end() if the vector is empty.
+         */
+        const_iterator begin() const { return m_data; }
+
+        /** @brief One-past-the-end iterator.
+         *
+         * @return An iterator designating a position 'one past the
+         * end' of the vector.
+         */
+        iterator end() { return begin() + size(); }
+
+        /** @brief One-past-the-end const_iterator.
+         *
+         * @return A const_iterator designating a position 'one past
+         * the end' of the vector.
+         */
+        const_iterator end() const { return begin() + size(); }
 
         // Virtual functions of VectorBase:
         virtual void *data() override
@@ -178,58 +205,45 @@ namespace CXXR
          */
         ~FixedVector()
         {
-            if (m_data)
-            {
-                const auto getVecSizeInBytes = [](FixedVector<T, ST> *s) -> R_size_t {
 #ifdef PROTECTCHECK
-                    if (s->sexptype() == FREESXP)
-                    {
-                        s->sxpinfo.type = SEXPTYPE(s->sxpinfo.gp);
-                    }
+            if (sexptype() == FREESXP)
+            {
+                sxpinfo.type = SEXPTYPE(sxpinfo.gp);
+            }
 #endif
-                    if (IS_GROWABLE(s))
-                    {
-                        s->m_length = s->truelength();
-                        s->sxpinfo.scalar = (s->m_length == 1);
-                    }
+            switch (sexptype())
+            {
+            case RAWSXP:
+            case LGLSXP:
+            case INTSXP:
+            case REALSXP:
+            case CPLXSXP:
+                break;
+            case STRSXP:
+            case EXPRSXP:
+            case VECSXP:
+                break;
+            default:
+                BadObject::register_bad_object(this, __FILE__, __LINE__);
+            }
 
-                    R_size_t size = 0;
-                    R_size_t n_elem = s->size();
-                    switch (s->sexptype())
-                    { /* get size in bytes */
-                    case RAWSXP:
-                        size = n_elem * sizeof(Rbyte);
-                        break;
-                    case LGLSXP:
-                        size = n_elem * sizeof(Logical);
-                        break;
-                    case INTSXP:
-                        size = n_elem * sizeof(int);
-                        break;
-                    case REALSXP:
-                        size = n_elem * sizeof(double);
-                        break;
-                    case CPLXSXP:
-                        size = n_elem * sizeof(Complex);
-                        break;
-                    case STRSXP:
-                    case EXPRSXP:
-                    case VECSXP:
-                        size = n_elem * sizeof(SEXP);
-                        break;
-                    default:
-                        BadObject::register_bad_object(s, __FILE__, __LINE__);
-                        size = 0;
-                    }
-                    return size;
-                    };
-                R_size_t databytes = getVecSizeInBytes(this);
+            if (IS_GROWABLE(this))
+            {
+                m_length = m_truelength;
+                sxpinfo.scalar = (m_length == 1);
+            }
+
+            destructElementsIfNeeded();
+
+            R_size_t databytes = (size()) * sizeof(T);
+            if (databytes != 0)
+            {
                 MemoryBank::deallocate(m_data, databytes, sxpinfo.m_ext_allocator);
             }
         }
 
     private:
-        void *m_data; // pointer to the vector's data block.
+        T *m_data; // pointer to the vector's data block.
         size_type m_length;
         size_type m_truelength; // the number of non-null elements in the vector or hash value in case of char (aka String class)
 
@@ -243,63 +257,48 @@ namespace CXXR
          * @param allocator Custom allocator.
          */
         FixedVector(size_type n_elem, R_allocator_t *allocator = nullptr)
-            : VectorBase(ST, n_elem, allocator)
+            : VectorBase(ST)
         {
-            R_size_t actual_size = 0; // in bytes
-            switch (ST)
-            {
-            case RAWSXP:
-                actual_size = n_elem * sizeof(Rbyte);
-                break;
-            case LGLSXP:
-                actual_size = n_elem * sizeof(Logical);
-                break;
-            case INTSXP:
-                actual_size = n_elem * sizeof(int);
-                break;
-            case REALSXP:
-                actual_size = n_elem * sizeof(double);
-                break;
-            case CPLXSXP:
-                actual_size = n_elem * sizeof(Complex);
-                break;
-            case STRSXP:
-            case EXPRSXP:
-            case VECSXP:
-                actual_size = n_elem * sizeof(SEXP);
-                break;
-            default:
-                break;
-            }
-
-            m_data = (MemoryBank::allocate(actual_size, false, allocator));
+            m_data = allocate(n_elem, allocator);
             m_length = n_elem;
             m_truelength = 0;
             sxpinfo.scalar = (n_elem == 1);
-
-            /* The following prevents disaster in the case */
-            /* that an uninitialised string vector is marked */
-            /* Direct assignment is OK since the node was just allocated and */
-            /* so is at least as new as R_NilValue and R_BlankString */
-            if (ST == EXPRSXP || ST == VECSXP)
-            {
-                SEXP *data = ((SEXP *)(m_data)); // VECTOR_PTR(this);
-                for (R_xlen_t i = 0; i < n_elem; i++)
-                    data[i] = R_NilValue;
-            }
-            else if (ST == STRSXP)
-            {
-                SEXP *data = ((SEXP *)(m_data)); // STRING_PTR(this);
-                for (R_xlen_t i = 0; i < n_elem; i++)
-                    data[i] = String::blank();
-            }
-            else
-            {
-                std::memset(m_data, 0, actual_size);
-            }
+            sxpinfo.m_ext_allocator = (allocator != nullptr);
+            constructElementsIfNeeded();
         }
 
         FixedVector &operator=(const FixedVector &) = delete;
+
+        // If there is more than one element, this function is used to
+        // allocate the required memory block from CXXR::MemoryBank :
+        static T *allocate(size_type n_elem, R_allocator_t *allocator = nullptr);
+
+        static void constructElements(iterator from, iterator to);
+        static void constructElementsIfNeeded(iterator from, iterator to)
+        {
+            // This is essential for e.g. GCEdges, otherwise they
+            // may contain junk pointers.
+            if (ElementTraits::MustConstruct<T>::value) // compile-time constant
+                constructElements(from, to);
+        }
+
+        void constructElementsIfNeeded()
+        {
+            constructElementsIfNeeded(begin(), end());
+        }
+
+        void destructElementsIfNeeded(iterator from, iterator to)
+        {
+            if (ElementTraits::MustDestruct<T>::value) // compile-time constant
+                destructElements(from, to);
+        }
+
+        void destructElementsIfNeeded()
+        {
+            destructElementsIfNeeded(begin(), end());
+        }
+
+        void destructElements(iterator from, iterator to);
 
         // Helper functions for detachReferents():
         void detachElements(std::true_type);
@@ -316,6 +315,41 @@ namespace CXXR
     struct VectorTypeFor
     {
     };
+
+    template <typename T, SEXPTYPE ST>
+    T *FixedVector<T, ST>::allocate(size_type n_elem, R_allocator_t *allocator)
+    {
+        // We allocate enough space for n_elem + 1 elements so that the stack scanner
+        // recognizes end() as belonging to this object.
+        size_type blocksize = (n_elem + 1) * sizeof(T);
+        // Check for integer overflow:
+        if (size_type(blocksize / sizeof(T)) != n_elem + 1)
+            Rf_error(_("Request to create impossibly large vector."));
+
+        try
+        {
+            return static_cast<T *>(MemoryBank::allocate(blocksize, false, allocator));
+        }
+        catch (std::bad_alloc &e)
+        {
+            tooBig(blocksize);
+            return nullptr;
+        }
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::constructElements(iterator from, iterator to)
+    {
+        for (iterator p = from; p != to; ++p)
+            new (p) T;
+    }
+
+    template <typename T, SEXPTYPE ST>
+    void FixedVector<T, ST>::destructElements(iterator from, iterator to)
+    {
+        for (iterator p = from; p != to; ++p)
+            p->~T();
+    }
 
     template <typename T, SEXPTYPE ST>
     FixedVector<T, ST> *FixedVector<T, ST>::create(size_type sz, R_allocator_t *allocator)
@@ -336,11 +370,7 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::detachElements(std::true_type)
     {
-        for (R_xlen_t i = 0; i < size(); i++)
-        {
-            auto el = static_cast<GCEdge<> *>(m_data)[i];
-            el = R_NilValue;
-        }
+        std::fill(begin(), end(), nullptr);
     }
 
     template <typename T, SEXPTYPE ST>
@@ -355,12 +385,11 @@ namespace CXXR
     template <typename T, SEXPTYPE ST>
     void FixedVector<T, ST>::visitElements(const_visitor *v, std::true_type) const
     {
-        for (R_xlen_t i = 0; i < size(); i++)
-        {
-            const RObject *el = static_cast<GCEdge<> *>(m_data)[i];
-            if (el != R_NilValue)
-                (*v)(el);
-        }
+        std::for_each(begin(), end(), [=](GCNode *n)
+                      {
+                          if (n != R_NilValue)
+                              (*v)(n);
+                      });
     }
 
     template <typename T, SEXPTYPE ST>

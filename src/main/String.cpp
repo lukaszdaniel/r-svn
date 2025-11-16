@@ -132,16 +132,28 @@ namespace CXXR
     }
 
     String::String(const std::string &name, cetype_t encoding, bool isAscii)
-        : VectorBase(CHARSXP, name.length(), nullptr)
+        : VectorBase(CHARSXP)
     {
-        size_t n_elem = name.length();
-        R_size_t actual_size = (n_elem + 1) * sizeof(char); // in bytes
+        size_type n_elem = name.length();
+        // We allocate enough space for n_elem + 1 elements so that the '\0'
+        // can be added.
+        size_type blocksize = (n_elem + 1) * sizeof(char); // in bytes
+        // Check for integer overflow:
+        if (size_type(blocksize / sizeof(char)) != n_elem + 1)
+            Rf_error(_("Request to create impossibly large vector."));
 
-        m_data = (char *)(MemoryBank::allocate(actual_size, false));
+        try
+        {
+            m_data = static_cast<char *>(MemoryBank::allocate(blocksize, false));
+        }
+        catch (std::bad_alloc &e)
+        {
+            tooBig(blocksize);
+        }
 
         if (n_elem)
             memcpy(m_data, name.c_str(), n_elem);
-        m_data[n_elem] = 0;
+        m_data[n_elem] = '\0';
         m_length = n_elem;
         m_truelength = n_elem;
         sxpinfo.scalar = (n_elem == 1);

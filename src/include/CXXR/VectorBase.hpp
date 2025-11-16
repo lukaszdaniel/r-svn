@@ -62,6 +62,13 @@ namespace CXXR
         virtual size_type truelength() const = 0;
         virtual void setTruelength(size_type new_val) = 0;
 
+        /** @brief Pointer to the vector elements.
+         *
+         * @return Pointer to the vector elements.
+         */
+        virtual void *data() = 0;
+        virtual const void *data() const = 0;
+
         /** @brief Is an RObject a Vector?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -102,16 +109,13 @@ namespace CXXR
             return "(vector type)";
         }
 
-        virtual void *data() = 0;
-        virtual const void *data() const = 0;
-
     protected:
         /**
          * @param stype The required ::SEXPTYPE.
-         *
-         * @param sz The required number of elements in the vector.
          */
-        VectorBase(SEXPTYPE stype, size_type sz, R_allocator_t *allocator);
+        VectorBase(SEXPTYPE stype): RObject(stype)
+        {
+        }
 
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
@@ -119,7 +123,7 @@ namespace CXXR
 
         // Declared protected to ensure that VectorBase objects are
         // allocated only using 'new':
-        ~VectorBase();
+        ~VectorBase() {}
 
         /** @brief Raise error on attempt to allocate overlarge vector.
          *
@@ -239,7 +243,7 @@ extern "C"
      *
      * @param length The length of the vector to be created.
      *
-     * @param length Custom allocator to be used.
+     * @param allocator Custom allocator to be used.
      *
      * @return Pointer to the created vector.
      */

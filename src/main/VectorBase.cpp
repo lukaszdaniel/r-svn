@@ -29,8 +29,6 @@
  * @brief Implementation of class VectorBase and related functions.
  */
 
-#define USE_RINTERNALS // always use macro versions
-
 #include <Localization.h>
 #include <CXXR/Logical.hpp>
 #include <CXXR/Complex.hpp>
@@ -50,52 +48,6 @@ namespace CXXR
         const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
         const auto &ALTREPptr = ALTREP;
     } // namespace ForceNonInline
-
-    VectorBase::VectorBase(SEXPTYPE stype, size_type n_elem, R_allocator_t *allocator)
-        : RObject(stype)
-    {
-        R_size_t actual_size = 0; // in bytes
-        switch (stype)
-        {
-        case RAWSXP:
-            actual_size = n_elem * sizeof(Rbyte);
-            break;
-        case CHARSXP:
-            actual_size = (n_elem + 1) * sizeof(char);
-            break;
-        case LGLSXP:
-            actual_size = n_elem * sizeof(Logical);
-            break;
-        case INTSXP:
-            actual_size = n_elem * sizeof(int);
-            break;
-        case REALSXP:
-            actual_size = n_elem * sizeof(double);
-            break;
-        case CPLXSXP:
-            actual_size = n_elem * sizeof(Complex);
-            break;
-        case STRSXP:
-        case EXPRSXP:
-        case VECSXP:
-            actual_size = n_elem * sizeof(SEXP);
-            break;
-        default:
-            error(_("unsupported type '%s'"), R::sexptype2char(stype));
-            break;
-        }
-
-        if (actual_size >= R_SIZE_T_MAX)
-        {
-            VectorBase::tooBig(actual_size);
-        }
-
-        SET_EXT_ALLOCATOR(this, (allocator != nullptr));
-    }
-
-    VectorBase::~VectorBase()
-    {
-    }
 
     void VectorBase::detachReferents()
     {
