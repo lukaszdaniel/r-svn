@@ -261,7 +261,6 @@ static struct buffer *alloc_buffer(int size, struct buffer *parent) {
 
 /* convert doubly-linked buffers into one big raw vector */
 static SEXP collect_buffers(struct buffer *buf) {
-    char *dst;
     int len = 0;
     if (!buf) return RawVector::create(0);
     while (buf->prev) { /* count the total length and find the root */
@@ -269,7 +268,7 @@ static SEXP collect_buffers(struct buffer *buf) {
 	buf = buf->prev;
     }
     RawVector *res = RawVector::create(len + buf->length);
-    dst = (char*) RAW(res);
+    char *dst = (char*) RAW(res);
     while (buf) {
 	if (buf->length)
 	    memcpy(dst, buf->data, buf->length);
