@@ -21,6 +21,7 @@
 #include <cstring>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include "grid.h"
 #include "localization.h"
 
