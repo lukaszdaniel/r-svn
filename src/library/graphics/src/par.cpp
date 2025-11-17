@@ -45,6 +45,8 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <Graphics.h>		/* "GPar" structure + COMMENTS */
 
@@ -52,6 +54,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 typedef struct {
     const char *name;
@@ -688,12 +691,10 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	REAL(value)[0] = dpptr(dd)->adj;
     }
     else if (streql(what, "ann")) {
-	value = allocVector(LGLSXP, 1);
-	LOGICAL(value)[0] = (dpptr(dd)->ann != 0);
+	value = LogicalVector::createScalar((dpptr(dd)->ann != 0));
     }
     else if (streql(what, "ask")) {
-	value = allocVector(LGLSXP, 1);
-	LOGICAL(value)[0] = dd->ask;
+	value = LogicalVector::createScalar(dd->ask == TRUE);
     }
     else if (streql(what, "bg")) {
 	value = mkString(col2name(dpptr(dd)->bg));
@@ -894,8 +895,7 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	REAL(value)[0] = dpptr(dd)->mkh;
     }
     else if (streql(what, "new")) {
-	value = allocVector(LGLSXP, 1);
-	LOGICAL(value)[0] = dpptr(dd)->newplot;
+	value = LogicalVector::createScalar(dpptr(dd)->newplot);
     }
     else if (streql(what, "oma")) {
 	value = allocVector(REALSXP, 4);
@@ -922,8 +922,7 @@ static SEXP Query(const char *what, pGEDevDesc dd)
         /* This calculation mimics the decision-making in GNewPlot()
          * in graphics.c SO it MUST be kept in synch with the logic there
          */
-        value = allocVector(LGLSXP, 1);
-        LOGICAL(value)[0] = 0;
+        value = LogicalVector::createScalar(false);
         if (dpptr(dd)->newplot) {
             if (!dpptr(dd)->state)
                 LOGICAL(value)[0] = 1;
@@ -1024,11 +1023,10 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	value = mkString(buf);
     }
     else if (streql(what, "xlog")) {
-	value = allocVector(LGLSXP, 1);
-	LOGICAL(value)[0] = dpptr(dd)->xlog;
+	value = LogicalVector::createScalar(dpptr(dd)->xlog);
     }
     else if (streql(what, "xpd")) {
-	value = allocVector(LGLSXP, 1);
+	value = LogicalVector::create(1);
 	if (dpptr(dd)->xpd == 2)
 	    LOGICAL(value)[0] = NA_LOGICAL;
 	else
@@ -1057,8 +1055,7 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	REAL(value)[0] = dd->dev->yLineBias;
     }
     else if (streql(what, "ylog")) {
-	value = allocVector(LGLSXP, 1);
-	LOGICAL(value)[0] = dpptr(dd)->ylog;
+	value = LogicalVector::createScalar(dpptr(dd)->ylog);
     }
     else if (ParCode(what) == -2) {
 	warning(_("graphical parameter \"%s\" is obsolete"), what);

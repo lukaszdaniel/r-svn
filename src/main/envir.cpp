@@ -114,6 +114,7 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Closure.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h> // for R_Suicide()
@@ -2383,9 +2384,8 @@ attribute_hidden SEXP do_missing(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isSymbol(sym))
 	errorcall(call, "%s", _("invalid use of 'missing'"));
 
-    SEXP rval = PROTECT(allocVector(LGLSXP, 1));
-    LOGICAL(rval)[0] = R_missing(sym, rho);
-    UNPROTECT(1);
+    GCStackRoot<LogicalVector> rval;
+    rval = LogicalVector::createScalar(R_missing(sym, rho));
     return rval;
 }
 

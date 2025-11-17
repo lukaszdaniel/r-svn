@@ -331,8 +331,7 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
                      */
                     SEXP gsd, griddev;
                     gsd = (SEXP) curdd->gesd[gridRegisterIndex]->systemSpecific;
-                    PROTECT(griddev = allocVector(LGLSXP, 1));
-                    LOGICAL(griddev)[0] = TRUE;
+                    PROTECT(griddev = LogicalVector::createScalar(true));
                     SET_VECTOR_ELT(gsd, GSS_GRIDDEVICE, griddev);
                     UNPROTECT(1);
                     GEdirtyDevice(curdd);
@@ -345,8 +344,7 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
         }
 	break;
     case GE_CheckPlot:
-	PROTECT(valid = allocVector(LGLSXP, 1));
-	LOGICAL(valid)[0] = TRUE;
+	PROTECT(valid = LogicalVector::createScalar(true));
 	UNPROTECT(1);
 	result = valid;
         break;
@@ -425,8 +423,7 @@ SEXP gridCallback(GEevent task, pGEDevDesc dd, SEXP data) {
                     if (!LOGICAL(gridStateElement(dd, GSS_GRIDDEVICE))[0]) {
                         SEXP gsd, griddev;
                         gsd = (SEXP) dd->gesd[gridRegisterIndex]->systemSpecific;
-                        PROTECT(griddev = allocVector(LGLSXP, 1));
-                        LOGICAL(griddev)[0] = TRUE;
+                        PROTECT(griddev = LogicalVector::createScalar(true));
                         SET_VECTOR_ELT(gsd, GSS_GRIDDEVICE, griddev);
                         UNPROTECT(1);
                     }

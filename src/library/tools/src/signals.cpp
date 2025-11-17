@@ -27,8 +27,11 @@
 #include <windows.h>
 #endif
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include "tools.h"
 #include "localization.h"
+
+using namespace CXXR;
 
 SEXP ps_kill(SEXP spid, SEXP ssignal)
 {
@@ -36,7 +39,7 @@ SEXP ps_kill(SEXP spid, SEXP ssignal)
     int *pid, *res, signal = asInteger(ssignal);
     PROTECT(sspid = coerceVector(spid, INTSXP));
     unsigned int ns = LENGTH(sspid);
-    PROTECT(sres = allocVector(LGLSXP, ns));
+    PROTECT(sres = LogicalVector::create(ns));
     pid = INTEGER(sspid);
     res = INTEGER(sres);
 #if !defined(_WIN32) && !defined(HAVE_KILL)

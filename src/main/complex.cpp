@@ -69,20 +69,22 @@
 #undef HAVE_CPOW
 #endif
 
+#include <Localization.h>
+#include <R_ext/Itermacros.h>
+#include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/ComplexVector.hpp>
 #include <Defn.h>		/* -> ../include/R_ext/Complex.h */
 #include <Internal.h>
 #include <Rmath.h>
 
 #include <Rcomplex.h>		/* I, SET_C99_COMPLEX, toC99 */
 #include "arithmetic.h"		/* complex_*  */
-#include <R_ext/Itermacros.h>
-#include <CXXR/Complex.hpp>
 
 using namespace R;
+using namespace CXXR;
 
 /* interval at which to check interrupts, a guess */
 #define NINTERRUPT 10000000
@@ -218,7 +220,7 @@ attribute_hidden SEXP complex_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
      /* S4-compatibility change: if n1 or n2 is 0, result is of length 0 */
-    if (n1 == 0 || n2 == 0) return(allocVector(CPLXSXP, 0));
+    if (n1 == 0 || n2 == 0) return(ComplexVector::create(0));
 
     n = (n1 > n2) ? n1 : n2;
     ans = R_allocOrReuseVector(s1, s2, CPLXSXP, n);
@@ -342,7 +344,7 @@ attribute_hidden SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 	    break;
 	case 5:	/* Conj */
 	    {
-		y = NO_REFERENCES(x) ? x : allocVector(CPLXSXP, n);
+		y = NO_REFERENCES(x) ? x : ComplexVector::create(n);
 		Rcomplex *py = COMPLEX(y);
 		for(i = 0 ; i < n ; i++) {
 		    py[i].r = px[i].r;
@@ -674,7 +676,7 @@ attribute_hidden SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 
     PROTECT(x = CAR(args));
     n = XLENGTH(x);
-    PROTECT(y = allocVector(CPLXSXP, n));
+    PROTECT(y = ComplexVector::create(n));
 
     const Rcomplex *px = COMPLEX_RO(x);
     Rcomplex *py = COMPLEX(y);
@@ -779,10 +781,10 @@ attribute_hidden SEXP complex_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t na = XLENGTH(sa), nb = XLENGTH(sb), n;
     if ((na == 0) || (nb == 0)) {
 	UNPROTECT(2);
-	return allocVector(CPLXSXP, 0);
+	return ComplexVector::create(0);
     }
     n = (na < nb) ? nb : na;
-    SEXP sy = PROTECT(allocVector(CPLXSXP, n));
+    SEXP sy = PROTECT(ComplexVector::create(n));
     const Rcomplex
 	*a = COMPLEX_RO(sa),
 	*b = COMPLEX_RO(sb);
@@ -830,7 +832,7 @@ attribute_hidden SEXP do_complex(SEXP call, SEXP op, SEXP args, SEXP rho)
     na = (nr > na) ? nr : na;
     na = (ni > na) ? ni : na;
     /* }*/
-    ans = allocVector(CPLXSXP, na);
+    ans = ComplexVector::create(na);
     Rcomplex *pans = COMPLEX(ans);
     for(i=0 ; i<na ; i++) {
 	pans[i].r = 0;
@@ -907,8 +909,8 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 	R_cpolyroot(p_zr, p_zi, &degree, p_rr, p_ri, &fail);
 	if(fail) error("%s", _("root finding code failed"));
 	UNPROTECT(2);
-	r = allocVector(CPLXSXP, degree);
-	Rcomplex *pr = COMPLEX(r);
+	r = ComplexVector::create(degree);
+	Complex *pr = CXXR_COMPLEX(r);
 	for(i = 0 ; i < degree ; i++) {
 	    pr[i].r = p_rr[i];
 	    pr[i].i = p_ri[i];
@@ -917,7 +919,7 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     else {
 	UNPROTECT(1);
-	r = allocVector(CPLXSXP, 0);
+	r = ComplexVector::create(0);
     }
     return r;
 }

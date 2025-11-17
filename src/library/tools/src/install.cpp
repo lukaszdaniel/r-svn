@@ -43,11 +43,13 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
 #include "localization.h"
 #include "tools.h"
 
 using namespace R;
+using namespace CXXR;
 
 static const char  * const R_FileSep = FILESEP;
 
@@ -140,9 +142,9 @@ SEXP codeFilesAppend(SEXP f1, SEXP f2)
     if (!isString(f2))
 	error(_("invalid '%s' argument"), "file2");
     n2 = LENGTH(f2);
-    if (n2 < 1) return allocVector(LGLSXP, 0);
+    if (n2 < 1) return LogicalVector::create(0);
     n = (n1 > n2) ? n1 : n2; // will be n2.
-    SEXP ans = PROTECT(allocVector(LGLSXP, n));
+    SEXP ans = PROTECT(LogicalVector::create(n));
     for (int i = 0; i < n; i++) LOGICAL(ans)[i] = 0;  /* all FALSE */
     FILE *fp1, *fp2;
     char buf[APPENDBUFSIZE];

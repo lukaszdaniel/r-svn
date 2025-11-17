@@ -31,6 +31,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 
 #include "../localization.h"
@@ -262,7 +263,7 @@ SEXP readClipboard(SEXP sformat, SEXP sraw)
 	    if (raw) {
 		Rbyte *pans;
 		int size = GlobalSize(hglb);
-		ans = allocVector(RAWSXP, size); /* no R allocation below */
+		ans = RawVector::create(size); /* no R allocation below */
 		pans = RAW(ans);
 		for (int j = 0; j < size; j++) pans[j] = *pc++;
 	    } else if (format == CF_UNICODETEXT) {

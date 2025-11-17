@@ -41,6 +41,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <Defn.h>
 #include <Fileio.h>
@@ -624,7 +625,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (typeInfo.islogical) {
-	PROTECT(rval = allocVector(LGLSXP, len));
+	PROTECT(rval = LogicalVector::create(len));
 	for (i = 0; i < len; i++) {
 	    tmp = CHAR(STRING_ELT(cvec, i));
 	    if (STRING_ELT(cvec, i) == NA_STRING || strlen(tmp) == 0
@@ -684,7 +685,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (!done && typeInfo.iscomplex) {
-	PROTECT(rval = allocVector(CPLXSXP, len));
+	PROTECT(rval = ComplexVector::create(len));
 	for (i = 0; i < len; i++) {
 	    tmp = CHAR(STRING_ELT(cvec, i));
 	    if (STRING_ELT(cvec, i) == NA_STRING || strlen(tmp) == 0

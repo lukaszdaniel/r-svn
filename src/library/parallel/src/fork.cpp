@@ -33,6 +33,7 @@
 #include <cerrno>
 #include <cstring>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h> /* for R_isForkedChild */
 
 #include "parallel.h"
@@ -51,6 +52,7 @@
 #include <R_ext/eventloop.h> /* for R_SelectEx */
 
 using namespace R;
+using namespace CXXR;
 
 /* read()/write() on pipes may not support arbitrary lengths, so
    this is the largest chunk we'll ever send with one call between
@@ -991,7 +993,7 @@ static SEXP read_child_ci(child_info_t *ci)
 	terminate_and_detach_child_ci(ci);
 	return ScalarInteger(pid);
     } else {
-	SEXP rv = allocVector(RAWSXP, len);
+	RawVector *rv = RawVector::create(len);
 	unsigned char *rvb = RAW(rv);
 	R_xlen_t i = 0;
 	while (i < len) {

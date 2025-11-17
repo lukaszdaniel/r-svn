@@ -25,8 +25,12 @@
 #include <cstring>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include "grid.h"
 #include "localization.h"
+
+using namespace CXXR;
 
 /* NOTE:
  * The extensive use of L or L_ prefixes dates back to when this 
@@ -89,14 +93,13 @@ pGEDevDesc getDevice(void)
  */
 void dirtyGridDevice(pGEDevDesc dd) {
     if (!LOGICAL(gridStateElement(dd, GSS_GRIDDEVICE))[0]) {
-	SEXP gsd, griddev;
+	SEXP gsd;
+	GCStackRoot<LogicalVector> griddev;
 	/* Record the fact that this device has now received grid output
 	 */
 	gsd = (SEXP) dd->gesd[gridRegisterIndex]->systemSpecific;
-	PROTECT(griddev = allocVector(LGLSXP, 1));
-	LOGICAL(griddev)[0] = TRUE;
+	griddev = LogicalVector::createScalar(true);
 	SET_VECTOR_ELT(gsd, GSS_GRIDDEVICE, griddev);
-	UNPROTECT(1);
 	/*
 	 * Start the first page on the device
 	 * (But only if no other graphics system has not already done so)
@@ -933,8 +936,7 @@ SEXP L_unsetviewport(SEXP n)
     PROTECT(gvp); PROTECT(newvp);
     {
 	SEXP fcall, false0, t;
-	PROTECT(false0 = allocVector(LGLSXP, 1));
-	LOGICAL(false0)[0] = FALSE;
+	PROTECT(false0 = LogicalVector::createScalar(false));
 	PROTECT(fcall = lang4(install("remove"), 
 			      VECTOR_ELT(gvp, VP_NAME),
 			      VECTOR_ELT(newvp, PVP_CHILDREN),
@@ -3869,8 +3871,7 @@ SEXP L_text(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
 SEXP L_textBounds(SEXP label, SEXP x, SEXP y, 
 		  SEXP hjust, SEXP vjust, SEXP rot, SEXP theta)
 {
-    SEXP checkOverlap = allocVector(LGLSXP, 1);
-    LOGICAL(checkOverlap)[0] = FALSE;
+    SEXP checkOverlap = LogicalVector::createScalar(false);
     return gridText(label, x, y, hjust, vjust, rot, checkOverlap, 
 		    REAL(theta)[0], false);
 }

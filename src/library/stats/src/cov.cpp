@@ -29,6 +29,7 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Defn.h> // for LDOUBLE
 #include <Rmath.h>
 
@@ -37,6 +38,7 @@
 #include "statsErr.h"
 
 using namespace R;
+using namespace CXXR;
 
 static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP kendall, bool cor);
 
@@ -721,7 +723,7 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
     if (isNull(y)) {
 	if (everything) { /* NA's are propagated */
 	    PROTECT(xm = allocVector(REALSXP, ncx));
-	    PROTECT(ind = allocVector(LGLSXP, ncx));
+	    PROTECT(ind = LogicalVector::create(ncx));
 	    find_na_1(n, ncx, REAL(x), /* --> has_na[] = */ LOGICAL(ind));
 	    cov_na_1 (n, ncx, REAL(x), REAL(xm), LOGICAL(ind), REAL(ans), &sd_0, cor, kendall);
 
@@ -751,8 +753,8 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
 	    SEXP has_na_y;
 	    PROTECT(xm = allocVector(REALSXP, ncx));
 	    PROTECT(ym = allocVector(REALSXP, ncy));
-	    PROTECT(ind      = allocVector(LGLSXP, ncx));
-	    PROTECT(has_na_y = allocVector(LGLSXP, ncy));
+	    PROTECT(ind      = LogicalVector::create(ncx));
+	    PROTECT(has_na_y = LogicalVector::create(ncy));
 
 	    find_na_2(n, ncx, ncy, REAL(x), REAL(y), LOGICAL(ind), LOGICAL(has_na_y));
 	    cov_na_2 (n, ncx, ncy, REAL(x), REAL(y), REAL(xm), REAL(ym),

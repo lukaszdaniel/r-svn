@@ -32,11 +32,12 @@
 #include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/Logical.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Itermacros.h>
@@ -408,10 +409,10 @@ static SEXP binaryLogic2(int code, SEXP s1, SEXP s2)
     n2 = XLENGTH(s2);
     n = (n1 > n2) ? n1 : n2;
     if (n1 == 0 || n2 == 0) {
-	ans = allocVector(RAWSXP, 0);
+	ans = RawVector::create(0);
 	return ans;
     }
-    ans = allocVector(RAWSXP, n);
+    ans = RawVector::create(n);
 
     switch (code) {
     case 1:		/* & : AND */

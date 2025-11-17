@@ -36,9 +36,10 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -55,6 +56,7 @@
 #include <tre/tre.h>
 
 using namespace R;
+using namespace CXXR;
 
 static void amatch_regaparams(regaparams_t *params, int patlen,
 		  double *bounds, int *costs)
@@ -222,7 +224,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* Matching. */
     n = LENGTH(vec);
-    PROTECT(ind = allocVector(LGLSXP, n));
+    PROTECT(ind = LogicalVector::create(n));
     nmatches = 0;
     for (i = 0 ; i < n ; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();

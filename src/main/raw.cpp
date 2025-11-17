@@ -36,6 +36,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -54,7 +55,7 @@ attribute_hidden SEXP do_charToRaw(SEXP call, SEXP op, SEXP args, SEXP env)
     if (LENGTH(x) > 1)
 	warning("%s", _("argument should be a character vector of length 1\nall but the first element will be ignored"));
     nc = LENGTH(STRING_ELT(x, 0));
-    ans = allocVector(RAWSXP, nc);
+    ans = RawVector::create(nc);
     if (nc) memcpy(RAW(ans), CHAR(STRING_ELT(x, 0)), nc);
     return ans;
 }
@@ -126,7 +127,7 @@ attribute_hidden SEXP do_rawToBits(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (!isRaw(x))
 	error("%s", _("argument 'x' must be a raw vector"));
-    PROTECT(ans = allocVector(RAWSXP, 8*XLENGTH(x)));
+    PROTECT(ans = RawVector::create(8*XLENGTH(x)));
     for (i = 0; i < XLENGTH(x); i++) {
 	tmp = (unsigned int) RAW(x)[i];
 	for (int k = 0; k < 8; k++, tmp >>= 1)
@@ -142,7 +143,7 @@ attribute_hidden SEXP do_intToBits(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP x = PROTECT(coerceVector(CAR(args), INTSXP));
     if (!isInteger(x))
 	error("%s", _("argument 'x' must be an integer vector"));
-    SEXP ans = PROTECT(allocVector(RAWSXP, 32*XLENGTH(x)));
+    SEXP ans = PROTECT(RawVector::create(32*XLENGTH(x)));
     R_xlen_t j = 0;
     for (R_xlen_t i = 0; i < XLENGTH(x); i++) {
 	unsigned int tmp = (unsigned int) INTEGER(x)[i];
@@ -187,7 +188,7 @@ attribute_hidden SEXP do_numToBits(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
     SEXP x = PROTECT(coerceVector(CAR(args), REALSXP));
-    SEXP ans = PROTECT(allocVector(RAWSXP, 64*XLENGTH(x)));
+    SEXP ans = PROTECT(RawVector::create(64*XLENGTH(x)));
     R_xlen_t i, j = 0;
     double *x_ = REAL(x);
     for (i = 0; i < XLENGTH(x); i++) {

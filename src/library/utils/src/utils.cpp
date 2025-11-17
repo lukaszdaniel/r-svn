@@ -21,13 +21,18 @@
 # include <config.h>
 #endif
 
+#include <cwctype>
 #include <cstring>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <R.h>
 #include <Rinternals.h>
 
 #include "utils.h"
 #include "localization.h"
+#include "rlocale.h" // may remap iswctype, wctype
+#include <lzma.h>
 
 /* from src/main/eval.c */
 SEXP do_Rprof(SEXP args);
@@ -53,9 +58,6 @@ SEXP unzip(SEXP args)
     return Runzip(CDR(args));
 }
 
-#include <cwctype>
-#include "rlocale.h" // may remap iswctype, wctype
-
 namespace R {
 /* Declarations from Defn.h */
 bool IS_ASCII(SEXP x);
@@ -66,6 +68,7 @@ const wchar_t *wtransChar(SEXP x);
 } // namespace R
 
 using namespace R;
+using namespace CXXR;
 
 #if defined(USE_RI18N_FNS) || (defined(HAVE_ISWCTYPE) && defined(HAVE_WCTYPE))
 SEXP charClass(SEXP x, SEXP scl)
@@ -79,7 +82,7 @@ SEXP charClass(SEXP x, SEXP scl)
 	error(_("character class \"%s\" is invalid"), cl);
 
     R_xlen_t n;
-    SEXP ans;
+    GCStackRoot<LogicalVector> ans;
     if (isString(x)) {
 	if (XLENGTH(x) != 1)
 	    error("%s", _("argument 'x' must be a length-1 character vector"));
@@ -88,8 +91,7 @@ SEXP charClass(SEXP x, SEXP scl)
 	    error("%s", _("argument 'x' must be UTF-8 encoded (including ASCII)"));
 	const wchar_t *wx = wtransChar(sx);
 	n = wcslen(wx);
-	PROTECT(ans = allocVector(LGLSXP, n));
-	nProtect++;
+	ans = LogicalVector::create(n);
 	int *pans = LOGICAL(ans);
 	for (R_xlen_t i = 0; i < n; i++) {
 	    // casting in case wchar_t is signed short: avoid sign extension
@@ -101,8 +103,7 @@ SEXP charClass(SEXP x, SEXP scl)
 	nProtect++;
 	n = XLENGTH(x);
 	const int* px = INTEGER(x);
-	PROTECT(ans = allocVector(LGLSXP, n));
-	nProtect++;
+	ans = LogicalVector::create(n);
 	int *pans = LOGICAL(ans);
 	for (R_xlen_t i = 0; i < n; i++) {
 	    int this_ = px[i];
@@ -120,9 +121,6 @@ SEXP charClass(SEXP x, SEXP scl)
     return R_NilValue;
 }
 #endif
-
-
-#include <lzma.h>
 
 SEXP crc64(SEXP in)
 {

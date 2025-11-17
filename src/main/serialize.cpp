@@ -3158,7 +3158,7 @@ static SEXP readRawFromFile(SEXP file, SEXP key)
     offset = INTEGER(key)[0];
     len = INTEGER(key)[1];
 
-    val = allocVector(RAWSXP, len);
+    val = RawVector::create(len);
     /* Do we have this database cached? */
     for (i = 0; i < used; i++)
 	if(names[i] != NULL && streql(cfile, names[i])) {icache = i; break;}

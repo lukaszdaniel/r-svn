@@ -29,9 +29,11 @@
 #undef TRUE
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 
 using namespace R;
+using namespace CXXR;
 
 const static struct {
     const char * reg;
@@ -124,7 +126,7 @@ static SEXP readRegistryKey1(HKEY hkey, const wchar_t *name)
 	break;
     }
     case REG_BINARY:
-	ans = allocVector(RAWSXP, size);
+	ans = RawVector::create(size);
 	memcpy(RAW(ans), d, size);
 	break;
     case REG_MULTI_SZ:

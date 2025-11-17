@@ -29,6 +29,7 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
 
 #include "statsR.h"
@@ -403,7 +404,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     PROTECT(variable = allocVector(VECSXP, nVar));
     PROTECT(nlevs = allocVector(INTSXP, nVar));
-    PROTECT(ordered = allocVector(LGLSXP, nVar));
+    PROTECT(ordered = LogicalVector::create(nVar));
     PROTECT(columns = allocVector(INTSXP, nVar));
 
     for (i = 0; i < nVar; i++) {
@@ -474,7 +475,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     PROTECT(expr = allocLang(3));
     SETCAR(expr, install("contrasts"));
-    SETCADDR(expr, allocVector(LGLSXP, 1));
+    SETCADDR(expr, LogicalVector::create(1));
 
     /* FIXME: We need to allow a third argument to this function */
     /* which allows us to specify contrasts directly.  That argument */

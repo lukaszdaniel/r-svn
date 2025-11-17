@@ -33,6 +33,7 @@
 #include <cwchar>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Defn.h> // for asLogicalNoNA(), Rf_mbrtowc()
 #include <R.h>
 #include "tools.h"
@@ -324,7 +325,7 @@ SEXP splitString(SEXP string, SEXP delims)
 SEXP nonASCII(SEXP text)
 {
     R_xlen_t len = XLENGTH(text);
-    SEXP ans = allocVector(LGLSXP, len);
+    LogicalVector *ans = LogicalVector::create(len);
     int *lans = LOGICAL(ans);
     if (TYPEOF(text) != STRSXP) error("%s", _("invalid input"));
     for (R_xlen_t i = 0; i < len; i++)

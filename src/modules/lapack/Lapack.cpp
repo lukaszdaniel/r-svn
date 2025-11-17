@@ -28,10 +28,11 @@
 #include <climits> /* for PATH_MAX */
 #include <cstdlib> /* for realpath */
 #include <cstring> /* for strstr, strlen */
+#include <Localization.h>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
-#include <Localization.h>
+#include <CXXR/ComplexVector.hpp>
 #include <Defn.h>
 
 #ifdef HAVE_UNISTD_H
@@ -53,6 +54,7 @@ extern int dladdr(void *addr, Dl_info *info);
 #include "Lapack.h"
 
 using namespace R;
+using namespace CXXR;
 
 /* NB: the handling of dims is odd here.  Most are coerced to be
  * integers (which dimgets currently guarantees), but a couple were
@@ -323,10 +325,10 @@ static SEXP La_rg(SEXP x, SEXP only_values)
     setAttrib(ret, R_NamesSymbol, nm);
     SET_VECTOR_ELT(ret, 1, R_NilValue);
     if (complexValues) {
-	SEXP val = allocVector(CPLXSXP, n);
+	ComplexVector *val = ComplexVector::create(n);
 	for (i = 0; i < n; i++) {
-	    COMPLEX(val)[i].r = wR[i];
-	    COMPLEX(val)[i].i = wI[i];
+	    CXXR_COMPLEX(val)[i].r = wR[i];
+	    CXXR_COMPLEX(val)[i].i = wI[i];
 	}
 	SET_VECTOR_ELT(ret, 0, val);
 	if (vectors) SET_VECTOR_ELT(ret, 1, unscramble(wI, n, right));
@@ -696,7 +698,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
 	if(length(Bin) != n)
 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"),
 		  length(Bin), p, n, n);
-	PROTECT(B = allocVector(CPLXSXP, n));
+	PROTECT(B = ComplexVector::create(n));
 	if (!isNull(Adn)) setAttrib(B, R_NamesSymbol, VECTOR_ELT(Adn, 1));
     }
     Bin = PROTECT(coerceVector(Bin, CPLXSXP));
@@ -764,7 +766,7 @@ static SEXP La_qr_cmplx(SEXP Ain)
 
     SEXP jpvt = PROTECT(allocVector(INTSXP, n));
     for (i = 0; i < n; i++) INTEGER(jpvt)[i] = 0;
-    SEXP tau = PROTECT(allocVector(CPLXSXP, m < n ? m : n));
+    SEXP tau = PROTECT(ComplexVector::create(m < n ? m : n));
     lwork = -1;
     F77_CALL(zgeqp3)(&m, &n, COMPLEX(A), &m, INTEGER(jpvt), COMPLEX(tau),
 		     &tmp, &lwork, rwork, &info);
@@ -1036,7 +1038,7 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
 	PROTECT(val = allocMatrix(CPLXSXP, n, n));
 	right = COMPLEX(val);
     }
-    PROTECT(values = allocVector(CPLXSXP, n));
+    PROTECT(values = ComplexVector::create(n));
     rwork = (double *) R_alloc(2*(size_t)n, sizeof(double));
     /* ask for optimal size of work array */
     lwork = -1;

@@ -43,6 +43,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Riconv.h>
@@ -921,7 +922,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(toRaw) {
 		if((int) res != -1 && inb == 0) {
 		    size_t nout = cbuff.bufsize - 1 - outb;
-		    SEXP el = allocVector(RAWSXP, nout);
+		    RawVector *el = RawVector::create(nout);
 		    if (nout)
 			memcpy(RAW(el), cbuff.data, nout);
 		    SET_VECTOR_ELT(ans, i, el);

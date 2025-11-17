@@ -24,6 +24,7 @@
 #include <cstdlib>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> // for R_Calloc
 
@@ -32,6 +33,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 Tcl_Interp *RTcl_interp;
 
@@ -534,7 +536,7 @@ SEXP RTcl_ObjAsRawVector(SEXP args)
     if (!obj) error("%s", _("invalid tclObj -- perhaps saved from another session?"));
     ret = Tcl_GetByteArrayFromObj(obj, &nb);
     if (ret) {
-	ans = allocVector(RAWSXP, (R_xlen_t) nb);
+	ans = RawVector::create((R_xlen_t) nb);
 	for (j = 0 ; j < nb ; j++) RAW(ans)[j] = ret[j];
 	return ans;
     }
@@ -547,7 +549,7 @@ SEXP RTcl_ObjAsRawVector(SEXP args)
 
     PROTECT(ans = allocVector(VECSXP, (R_xlen_t) count));
     for (i = 0 ; i < count ; i++) {
-	el = allocVector(RAWSXP, (R_xlen_t) nb);
+	el = RawVector::create((R_xlen_t) nb);
 	SET_VECTOR_ELT(ans, i, el);
 	ret = Tcl_GetByteArrayFromObj(elem[i], &nb);
 	for (j = 0 ; j < nb ; j++) RAW(el)[j] = ret[j];
