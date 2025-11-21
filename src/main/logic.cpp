@@ -37,6 +37,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -341,6 +342,9 @@ attribute_hidden SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 	    else /* x1 == FALSE */
 		ans = x2;
 	}
+	break;
+    default:
+	Rf_error(_("internal error in do_logic2"));
     }
     return ScalarLogical(ans);
 }
@@ -522,7 +526,7 @@ attribute_hidden SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else has_na = 1;
     }
     UNPROTECT(2);
-    return has_na ? ScalarLogical(NA_LOGICAL) : ScalarLogical(int(val));
+    return LogicalVector::createScalar(has_na ? Logical::NA() : val);
 }
 #undef _OP_ALL
 #undef _OP_ANY

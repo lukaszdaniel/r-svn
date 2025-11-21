@@ -3915,7 +3915,7 @@ SEXP R_allocResizableVector(SEXPTYPE type, R_xlen_t len, R_xlen_t maxlen)
 	      sexptype2char(type));
     }
     if (len > maxlen)
-	error(_("len larger than maxlen"));
+	error("%s", _("len larger than maxlen"));
     SEXP val = allocVector(type, maxlen);
     SET_TRUELENGTH(val, maxlen);
     SET_GROWABLE_BIT(val);
@@ -3926,11 +3926,11 @@ SEXP R_allocResizableVector(SEXPTYPE type, R_xlen_t len, R_xlen_t maxlen)
 SEXP R_duplicateAsResizable(SEXP x)
 {
     if (ALTREP(x))
-	error(_("ALTREP objects cannot be made resizable"));
+	error("%s", _("ALTREP objects cannot be made resizable"));
     if (!isVector(x))
-	error(_("cannot make non-vector objects resizable"));
+	error("%s", _("cannot make non-vector objects resizable"));
     if (!GROWABLE_BIT_SET(x) && XTRUELENGTH(x) != 0)
-	error("XTRUELENGTH has been hijacked");
+	error("%s", _("XTRUELENGTH has been hijacked"));
     SEXP val = duplicate(x);
     SET_TRUELENGTH(x, XLENGTH(x));
     SET_GROWABLE_BIT(x);
@@ -3957,23 +3957,23 @@ static R_INLINE void clear_elements(SEXP x, R_xlen_t from, R_xlen_t to)
 void R_resizeVector(SEXP x, R_xlen_t newlen)
 {
     if (newlen < 0)
-	error(_("invalid negative 'newlen'"));
+	error("%s", _("invalid negative 'newlen'"));
     if (newlen != xlength(x)) {
 	if (!R_isResizable(x))
-	    error(_("not a resizable vector"));
+	    error("%s", _("not a resizable vector"));
 	if (newlen > XTRUELENGTH(x))
-	    error(_("'newlen' is too large"));
+	    error("%s", _("'newlen' is too large"));
 	if (MAYBE_SHARED(x))
-	    error(_("can't resize a vector that might be shared"));
+	    error("%s", _("can't resize a vector that might be shared"));
 	if (ATTRIB(x) != R_NilValue) {
 	    if (getAttrib(x, R_DimSymbol) != R_NilValue)
-		error(_("can't resize a vector with a 'dim' attribute"));
+		error("%s", _("can't resize a vector with a 'dim' attribute"));
 	    if (getAttrib(x, R_DimNamesSymbol) != R_NilValue)
-		error(_("can't resize a vector with a 'dimnames' attribute"));
+		error("%s", _("can't resize a vector with a 'dimnames' attribute"));
 	    SEXP names = getAttrib(x, R_NamesSymbol);
 	    if (names != R_NilValue) {
 		if (MAYBE_SHARED(names))
-		    error(_("can't resize 'names' that might be shared"));
+		    error("%s", _("can't resize 'names' that might be shared"));
 		R_resizeVector(names, newlen);
 	    }
 	}
