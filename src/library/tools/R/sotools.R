@@ -675,7 +675,6 @@ nonAPI <- c("chol_", "chol2inv_", "cg_", "ch_", "rg_",
 ## non-API, declared in Rinternals.h
             "SET_OBJECT", ## no longer used in an example in R-exts 
             "SET_S4_OBJECT", "UNSET_S4_OBJECT",
-            "R_curErrorBuf",
             "SETLENGTH", "SET_TRUELENGTH", "SETLEVELS",
             "SET_ENVFLAGS", "SET_FRAME", "SET_ENCLOS", "SET_HASHTAB",
             "SET_PRENV", "SET_PRVALUE", "SET_PRCODE", "STDVEC_DATAPTR",
@@ -726,7 +725,8 @@ warnNonAPI <-
       "EXTPTR_PROT", "EXTPTR_PTR", "EXTPTR_TAG", "NAMED", "FRAME", "HASHTAB",
       "IS_S4_OBJECT", "BODY", "FORMALS", "CLOENV", "ENCLOS", "Rf_isFrame",
       "OBJECT", "SET_TYPEOF", "ENVFLAGS", "SET_ENVFLAGS", "SET_FORMALS",
-      "SET_BODY", "SET_CLOENV", "STRING_PTR", "DATAPTR")
+      "SET_BODY", "SET_CLOENV", "STRING_PTR", "DATAPTR", "XTRUELENGTH",
+      "R_shallow_duplicate_attr", "R_duplicate_attr")
 
 ## grDevices uses R_Home R_InputHandlers R_TempDir R_Visible R_cairoCdynload R_fopen R_gzclose R_gzgets R_gzopen R_isForkedChild Rf_envlength Rf_strIsASCII Rf_utf8towcs Rg_set_col_ptrs Ri18n_wcwidth addInputHandler do_X11 do_contourLines do_getGraphicsEventEnv do_getSnapshot do_playSnapshot do_saveplot locale2charset mbcsToUcs2 ptr_R_ProcessEvents
 
