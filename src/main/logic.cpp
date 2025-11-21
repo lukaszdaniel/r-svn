@@ -344,7 +344,7 @@ attribute_hidden SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	break;
     default:
-	Rf_error(_("internal error in do_logic2"));
+	Rf_error("%s", _("internal error in do_logic2"));
     }
     return ScalarLogical(ans);
 }
@@ -470,8 +470,10 @@ static Logical checkValues(int op, int na_rm, SEXP x, R_xlen_t n)
 /* all, any */
 attribute_hidden SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, s, t, call2;
-    int narm, has_na = 0;
+    SEXP ans, s, t;
+    GCStackRoot<> call2;
+    bool has_na = false;
+    int narm;
     /* initialize for behavior on empty vector
        all(logical(0)) -> TRUE
        any(logical(0)) -> FALSE
@@ -479,14 +481,14 @@ attribute_hidden SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
     Logical val = (PRIMVAL(op) == _OP_ALL);
 
     PROTECT(args = fixup_NaRm(args));
-    PROTECT(call2 = shallow_duplicate(call));
+    call2 = shallow_duplicate(call);
     R_args_enable_refcnt(args);
     SETCDR(call2, args);
 
     {
         auto dgroup = DispatchGroup("Summary", call2, op, args, env);
         if (dgroup.first) {
-            UNPROTECT(2);
+            UNPROTECT(1);
             SETCDR(call2, R_NilValue); /* clear refcnt on args */
             R_try_clear_args_refcnt(args);
             return dgroup.second;
@@ -520,12 +522,12 @@ attribute_hidden SEXP do_logic3(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (!val.isNA()) {
 	    if ((PRIMVAL(op) == _OP_ANY && val.isTrue())
 		|| (PRIMVAL(op) == _OP_ALL && val.isFalse())) {
-		has_na = 0;
+		has_na = false;
 		break;
 	    }
-	} else has_na = 1;
+	} else has_na = true;
     }
-    UNPROTECT(2);
+    UNPROTECT(1);
     return LogicalVector::createScalar(has_na ? Logical::NA() : val);
 }
 #undef _OP_ALL

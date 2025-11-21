@@ -1176,7 +1176,7 @@ namespace
             int flag = PRIMPRINT(op);
             CXXR::RAllocStack::Scope rscope;
             Evaluator::enableResultPrinting(flag != 1);
-            tmp = PRIMFUN(op) (e, op, CDR(e), rho);
+            tmp = PRIMFUN(op) (e, op, (CDR)(e), rho);
 #ifdef CHECK_VISIBILITY
             if (flag < 2 && Evaluator::resultPrinted() == flag) {
                 const char *nm = PRIMNAME(op);

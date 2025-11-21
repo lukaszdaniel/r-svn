@@ -24,6 +24,7 @@
 #include <cstdlib>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/Closure.hpp>
 #include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> // for R_Calloc
