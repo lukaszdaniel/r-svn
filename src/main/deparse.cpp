@@ -594,7 +594,7 @@ static bool needsparens(PPinfo mainop, SEXP arg, unsigned int left,
     if (TYPEOF(arg) == LANGSXP) {
 	if (TYPEOF(CAR(arg)) == SYMSXP) {
 	    if (Rf_isPrimitive(SYMVALUE(CAR(arg)))) {
-		arginfo = PPINFO(SYMVALUE((CAR)(arg)));
+		arginfo = PPINFO((SYMVALUE)((CAR)(arg)));
 
 		/* Not all binary ops are binary! */
 		switch(arginfo.kind) {

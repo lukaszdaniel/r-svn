@@ -87,12 +87,11 @@ extern "C" {
 /* inline version of CAR to support immediate bindings */
 INLINE_FUN SEXP CAR(SEXP e)
 {
-    if (BNDCELL_TAG(e))
-	error("%s", _("bad binding access"));
+    if (e == R_NilValue) return R_NilValue;
 #ifdef TESTING_WRITE_BARRIER
-    assert((TYPEOF(e) == LISTSXP) || (TYPEOF(e) == DOTSXP) || (TYPEOF(e) == LANGSXP) || (TYPEOF(e) == NILSXP));
+    assert((TYPEOF(e) == LISTSXP) || (TYPEOF(e) == DOTSXP) || (TYPEOF(e) == LANGSXP));
 #endif
-    return CAR0(e);
+    return static_cast<CXXR::ConsCell *>(e)->car();
 }
 #else
 SEXP CAR(SEXP e);

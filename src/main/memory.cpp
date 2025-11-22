@@ -1826,8 +1826,8 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     PairList *s = PairList::create(R_NilValue, R_NilValue, R_NilValue);
 
     DISABLE_REFCNT(s);
-    s->u.listsxp.m_car.retarget(s, CHK(car));
-    s->u.listsxp.m_tail.retarget(s, CHK(cdr));
+    static_cast<ConsCell *>(s)->setCar(CHK(car));
+    static_cast<ConsCell *>(s)->setTail(CHK(cdr));
 
     return s;
 }
@@ -3215,19 +3215,19 @@ SEXPTYPE (R::BNDCELL_TAG)(SEXP cell) { return BNDCELL_TAG(cell); }
 attribute_hidden
 void (R::SET_BNDCELL_TAG)(SEXP cell, SEXPTYPE val) { CR_ASSERT(cell); SET_BNDCELL_TAG(cell, val); }
 attribute_hidden
-double (R::BNDCELL_DVAL)(SEXP cell) { CR_ASSERT(cell); return BNDCELL_DVAL(cell); }
+double (R::BNDCELL_DVAL)(SEXP cell) { CR_ASSERT(cell); CR_CONSCELL_ASSERT(cell); return BNDCELL_DVAL(cell); }
 attribute_hidden
-int (R::BNDCELL_IVAL)(SEXP cell) { CR_ASSERT(cell); return BNDCELL_IVAL(cell); }
+int (R::BNDCELL_IVAL)(SEXP cell) { CR_ASSERT(cell); CR_CONSCELL_ASSERT(cell); return BNDCELL_IVAL(cell); }
 attribute_hidden
-int (R::BNDCELL_LVAL)(SEXP cell) { CR_ASSERT(cell); return BNDCELL_LVAL(cell); }
+int (R::BNDCELL_LVAL)(SEXP cell) { CR_ASSERT(cell); CR_CONSCELL_ASSERT(cell); return BNDCELL_LVAL(cell); }
 attribute_hidden
-void (R::SET_BNDCELL_DVAL)(SEXP cell, double v) { CR_ASSERT(cell); SET_BNDCELL_DVAL(cell, v); }
+void (R::SET_BNDCELL_DVAL)(SEXP cell, double v) { CR_ASSERT(cell); CR_CONSCELL_ASSERT(cell); SET_BNDCELL_DVAL(cell, v); }
 attribute_hidden
-void (R::SET_BNDCELL_IVAL)(SEXP cell, int v) { CR_ASSERT(cell); SET_BNDCELL_IVAL(cell, v); }
+void (R::SET_BNDCELL_IVAL)(SEXP cell, int v) { CR_ASSERT(cell); CR_CONSCELL_ASSERT(cell); SET_BNDCELL_IVAL(cell, v); }
 attribute_hidden
-void (R::SET_BNDCELL_LVAL)(SEXP cell, int v) { CR_ASSERT(cell); SET_BNDCELL_LVAL(cell, v); }
+void (R::SET_BNDCELL_LVAL)(SEXP cell, int v) { CR_ASSERT(cell); CR_CONSCELL_ASSERT(cell); SET_BNDCELL_LVAL(cell, v); }
 attribute_hidden
-void (R::INIT_BNDCELL)(SEXP cell, SEXPTYPE type) { CR_ASSERT(cell); INIT_BNDCELL(cell, type); }
+void (R::INIT_BNDCELL)(SEXP cell, SEXPTYPE type) { CR_ASSERT(cell); CR_CONSCELL_ASSERT(cell); INIT_BNDCELL(cell, type); }
 attribute_hidden
 SEXPTYPE (R::PROMISE_TAG)(SEXP cell) { CR_ASSERT(cell); return PROMISE_TAG(cell); }
 attribute_hidden
@@ -3235,7 +3235,9 @@ void (R::SET_PROMISE_TAG)(SEXP cell, SEXPTYPE val) { CR_ASSERT(cell); SET_PROMIS
 
 #define CLEAR_BNDCELL_TAG(cell) do {		\
 	if (BNDCELL_TAG(cell)) {		\
-	    cell->u.listsxp.m_car = R_NilValue;	\
+	    CR_CONSCELL_ASSERT(cell);		\
+	    static_cast<ConsCell *>(cell)->clearCar();		\
+	    static_cast<ConsCell *>(cell)->setCar(R_NilValue);	\
 	    SET_BNDCELL_TAG(cell, NILSXP);	\
 	}					\
     } while (0)
@@ -3388,7 +3390,7 @@ void (SET_TAG)(SEXP x, SEXP v)
 
     CR_CONSCELL_ASSERT(x);
     CHECK_OLD_TO_NEW(x, v);
-    x->u.listsxp.m_tag.retarget(x, v);
+    static_cast<ConsCell *>(x)->setTag(v);
 }
 
 SEXP (SETCAR)(SEXP x, SEXP y)
@@ -3415,7 +3417,7 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 #endif
     CR_CONSCELL_ASSERT(x);
     CHECK_OLD_TO_NEW(x, y);
-    x->u.listsxp.m_tail.retarget(x, y);
+    static_cast<ConsCell *>(x)->setTail(y);
     return y;
 }
 

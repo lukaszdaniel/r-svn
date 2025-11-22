@@ -279,6 +279,11 @@ namespace CXXR
             u.listsxp.m_car.retarget(this, cr);
         }
 
+        void clearCar()
+        {
+            u.listsxp.m_car.reset();
+        }
+
         /** @brief Set the 'tag' value.
          *
          * @param tg Pointer to the new tag object (or a null
