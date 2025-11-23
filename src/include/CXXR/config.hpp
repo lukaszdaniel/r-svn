@@ -109,7 +109,11 @@
 // #define R_MEMORY_PROFILING
 
 #ifndef R_NilValue
+#ifdef __cplusplus
+#define R_NilValue nullptr
+#else
 #define R_NilValue NULL
+#endif
 #endif
 
 #endif // CXXR_CONFIG_HPP

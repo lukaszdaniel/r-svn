@@ -88,7 +88,4 @@ extern "C" {
     typedef Rboolean int;
 #endif /* R_INCLUDE_BOOLEAN_H = 0 */
 
-#define false_ 0
-#define true_ 1
-
 #endif /* R_EXT_BOOLEAN_H_ */

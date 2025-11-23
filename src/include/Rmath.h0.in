@@ -231,8 +231,6 @@ double  Rlog1p(double);
  #else
   # include <stdbool.h>
  #endif
-#define false_ 0
-#define true_ 1
 # endif
 #else
 # include <R_ext/Boolean.h>
