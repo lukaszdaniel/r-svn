@@ -41,13 +41,19 @@
 
 #include <CXXR/config.hpp>
 
-#if defined(COMPILING_IVORY) && defined(__cplusplus)
+/* ------------------------------------------------------------------
+   C++ code defines SEXP as a pointer to RObject class
+   ------------------------------------------------------------------ */
+#ifdef __cplusplus
 namespace CXXR
 {
     class RObject;
 }
 using SEXP = CXXR::RObject *;
 #else
+/* ------------------------------------------------------------------
+   C code defines SEXP as a pointer to opaque struct RObject
+   ------------------------------------------------------------------ */
 #define SEXPREC RObject
 typedef struct RObject *SEXP;
 #endif

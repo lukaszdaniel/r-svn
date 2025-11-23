@@ -68,9 +68,19 @@
 #define ADJUST_ENVIR_REFCNTS
 #endif
 
-// Define CHECKED_SEXP_DOWNCAST to make SEXP_downcast() use
-// dynamic_cast<> instead of static_cast<>.  This adds a run-time
-// check that the cast is valid, at the cost of some performance.
+/** Definition that allows C/C++ code to determine it is being compiled as
+ * part of CXXR or legacy CR code.
+ * 
+ * This differentiation is needed as CXXR and CR APIs do not fully overlap.
+ * For example, in CXXR R_NilValue is simply a null pointer while in CR
+ * R_NilValue is an RObject with non-null address.
+ */
+#define CXXR_PROJECT
+
+/** Define CHECKED_SEXP_DOWNCAST to make SEXP_downcast() use
+ * dynamic_cast<> instead of static_cast<>.  This adds a run-time
+ * check that the cast is valid, at the cost of some performance.
+ */
 // #define CHECKED_SEXP_DOWNCAST
 
 /** To test the write barrier used by the generational collector,
@@ -82,7 +92,6 @@
  * penalty, code that includes Defn.h (or code that explicitly defines
  * USE_RINTERNALS) can access a RObject's fields directly.
  */
-
 // #define TESTING_WRITE_BARRIER
 
 #ifndef TESTING_WRITE_BARRIER
@@ -93,7 +102,10 @@
 # define PROTECTCHECK
 #endif
 
-
+/** Define R_MEMORY_PROFILING to enable memory profiling support in R.
+ * This is primarily intended for use in conjunction with
+ * TESTING_WRITE_BARRIER to help track down memory management bugs.
+ */
 // #define R_MEMORY_PROFILING
 
 #ifndef R_NilValue
