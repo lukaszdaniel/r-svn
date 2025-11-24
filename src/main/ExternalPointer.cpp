@@ -27,6 +27,10 @@
  * @brief Class ExternalPointer and associated C interface.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/ExternalPointer.hpp>
 #include <Defn.h> // for EXTPTR_PROT, EXTPTR_TAG macros
 

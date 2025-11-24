@@ -29,6 +29,10 @@
  * Utility to record the address and type of the first bad type.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/BadObject.hpp>
 #include <CXXR/GCManager.hpp>
 #include <Defn.h> // for sexptype2char

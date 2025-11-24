@@ -27,6 +27,10 @@
  * @brief Class S4Object and associated C interface.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/S4Object.hpp>
 #include <Defn.h> // for SET_S4_OBJECT
 

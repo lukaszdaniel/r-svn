@@ -22,6 +22,10 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/StackChecker.hpp>
 #include <Defn.h>
 #include <Localization.h>

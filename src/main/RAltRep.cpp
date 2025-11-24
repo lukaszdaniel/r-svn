@@ -29,6 +29,10 @@
  * @brief Class CXXR::AltRep.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAltRep.hpp>
 #include <Defn.h> // for CLASS, DATA1, DATA2 macros

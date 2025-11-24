@@ -27,6 +27,10 @@
  * Implementation of class Evaluator.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/WeakRef.hpp> // for R_RunPendingFinalizers
 #include <R_ext/Utils.h> // for R_CheckUserInterrupt

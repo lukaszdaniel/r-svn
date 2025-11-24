@@ -29,6 +29,10 @@
  * Class WeakRef.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/WeakRef.hpp>
 #include <Defn.h> // for WEAKREF_KEY, WEAKREF_VALUE, WEAKREF_FINALIZER macros
 

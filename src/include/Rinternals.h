@@ -47,9 +47,7 @@
 
 /* both config.h and Rconfig.h set SIZEOF_SIZE_T, but Rconfig.h is
    skipped if config.h has already been included. */
-#ifndef R_CONFIG_H
-# include <Rconfig.h>
-#endif
+#include <Rconfig.h>
 
 #ifdef LONG_VECTOR_SUPPORT
 # define R_PRIdXLEN_T "td"

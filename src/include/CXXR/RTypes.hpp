@@ -61,14 +61,9 @@ typedef struct RObject *SEXP;
 #define CXXR_TRUE 1
 #define CXXR_FALSE 0
 
-#ifdef HAVE_CONFIG_H
-#include <config.h>
-#endif
 /* both config.h and Rconfig.h set SIZEOF_SIZE_T, but Rconfig.h is
    skipped if config.h has already been included. */
-// #ifndef R_CONFIG_H
-// #include <Rconfig.h>
-// #endif
+#include <Rconfig.h>
 
 typedef unsigned char Rbyte;
 

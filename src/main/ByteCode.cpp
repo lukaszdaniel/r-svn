@@ -27,6 +27,10 @@
  * @brief Class CXXR::ByteCode.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <stdexcept>
 #include <CXXR/ByteCode.hpp>
 #include <Defn.h> // for CODE0, CONSTS, EXPR macros

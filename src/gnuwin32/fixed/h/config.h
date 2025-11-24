@@ -2,7 +2,7 @@
 #define R_CONFIG_H
 
 /* on Mingw-w64 defines the MING64_ version */
-#include <_mingw.h>
+#include <mingw.h>
 
 /* Version of C Compiler */
 #define CC_VER "@CC_VER@"
