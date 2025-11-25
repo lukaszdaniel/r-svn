@@ -697,7 +697,7 @@ nonAPI <- c("chol_", "chol2inv_", "cg_", "ch_", "rg_",
             ## non-API entry points":
             "EXTPTR_PROT", "EXTPTR_TAG", "EXTPTR_PTR",
             "OBJECT", "IS_S4_OBJECT",
-            "Rf_GetOption", "R_lsInternal",
+            "R_lsInternal",
             "REAL0", "COMPLEX0",
             "STRING_PTR", "DATAPTR", "STDVEC_DATAPTR",
             "Rf_allocSExp",
@@ -707,6 +707,11 @@ nonAPI <- c("chol_", "chol2inv_", "cg_", "ch_", "rg_",
 ## experimental resizable vector entry points -- not yet in the API
             "R_isResizable", "R_maxLength", "R_resizeVector",
             "R_allocResizableVector", "R_duplicateAsResizable",
+## experimental hashtable support -- not yet in the API
+            "R_asHashtable", "R_HashtabSEXP", "R_isHashtable", "R_mkhashtab",
+            "R_gethash", "R_sethash", "R_remhash", "R_numhash", "R_typhash",
+            "R_maphash", "R_maphashC", "R_clrhash",
+
 ## in the experimental API header R_ext/Connections.h
 ##            "R_new_custom_connection", "R_ReadConnection",
 ##            "R_WriteConnection", "R_GetConnection",
@@ -722,7 +727,7 @@ nonAPI <- c("chol_", "chol2inv_", "cg_", "ch_", "rg_",
 warnNonAPI <-
     c("REAL0", "COMPLEX0", "ddfind", "DDVAL", "ENSURE_NAMEDMAX", "INTERNAL",
       "PRSEEN", "SET_PRSEEN", "SYMVALUE", "R_nchar", "VECTOR_PTR", "R_tryWrap",
-      "Rf_NonNullStringMatch", "Rf_isValidString", "Rf_GetOption", "SET_FRAME",
+      "Rf_NonNullStringMatch", "Rf_isValidString", "SET_FRAME",
       "SET_HASHTAB", "SET_ENCLOS", "STDVEC_DATAPTR", "SET_S4_OBJECT",
       "UNSET_S4_OBJECT", "SET_NAMED", "R_lsInternal", "Rf_lazy_duplicate",
       "EXTPTR_PROT", "EXTPTR_PTR", "EXTPTR_TAG", "NAMED", "FRAME", "HASHTAB",

@@ -134,7 +134,7 @@ namespace CXXR
         case SYMSXP:
         case BUILTINSXP:
         case SPECIALSXP:
-            error(_("cannot set attribute on a '%s'"), R_typeToChar(this));
+            error(_("cannot set attribute on a '%s'"), R::R_typeToChar(this));
         default:
             break;
         }

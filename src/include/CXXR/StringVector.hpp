@@ -56,6 +56,9 @@ namespace R
      * @return index of a given C string in (translated) R string vector
      */
     int Rf_stringPositionTr(SEXP string, const char *translatedElement);
+
+    /* non-empty ("") valid string :*/
+    Rboolean isValidStringF(SEXP x);
 } // namespace R
 
 extern "C"
@@ -117,8 +120,6 @@ extern "C"
 
     Rboolean Rf_isValidString(SEXP x);
 
-    /* non-empty ("") valid string :*/
-    Rboolean Rf_isValidStringF(SEXP x);
     SEXP Rf_ScalarString(SEXP x);
 } // extern "C"
 

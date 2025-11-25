@@ -113,10 +113,7 @@ namespace R
      *          required.
      */
     void (SET_RTRACE)(SEXP x, int v);
-} // namespace R
 
-extern "C"
-{
     /** @brief Query debugging status.
      *
      * @param x Pointer to a CXXR::FunctionBase object.
@@ -141,7 +138,10 @@ extern "C"
      * for environments.
      */
     void (SET_RDEBUG)(SEXP x, int v);
+} // namespace R
 
+extern "C"
+{
     /** @brief Is function BuiltIn or Special?
      *
      * @param s Pointer to a CXXR::RObject.

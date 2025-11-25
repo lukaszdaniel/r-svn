@@ -39,9 +39,9 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &RDEBUGptr = RDEBUG;
+        const auto &RDEBUGptr = R::RDEBUG;
         const auto &RTRACEptr = R::RTRACE;
-        const auto &SET_RDEBUGptr = SET_RDEBUG;
+        const auto &SET_RDEBUGptr = R::SET_RDEBUG;
         const auto &SET_RTRACEptr = R::SET_RTRACE;
     } // namespace ForceNonInline
 

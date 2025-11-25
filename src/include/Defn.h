@@ -309,7 +309,7 @@ namespace R {
     } while (0)
 
 #define IS_SCALAR(x, t) ((x) != R_NilValue && ((x)->sxpinfo.type == (t)) && (x)->sxpinfo.scalar)
-#define LENGTH(x) LENGTH_EX(x, __FILE__, __LINE__)
+#define LENGTH(x) R::LENGTH_EX(x, __FILE__, __LINE__)
 #define TRUELENGTH(x) XTRUELENGTH(x)
 
 /* defined as a macro since fastmatch packages tests for it */
@@ -558,6 +558,7 @@ void R_check_thread(const char *s);
 
 /* General Cons Cell Attributes */
 int  (MARK)(SEXP x);
+int  (REFCNT)(SEXP x);
 bool (REFCNT_ENABLED)(SEXP x);
 // void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
 // void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // declared in Rinternals.h
@@ -640,8 +641,10 @@ SEXP CONS_NR(SEXP a, SEXP b);
 int  (MISSING)(SEXP x);
 
 /* Closure Access Functions */
+int  (RDEBUG)(SEXP x);
 int  (RSTEP)(SEXP x);
 int  (RTRACE)(SEXP x);
+void (SET_RDEBUG)(SEXP x, int v);
 void (SET_RSTEP)(SEXP x, int v);
 void (SET_RTRACE)(SEXP x, int v);
 SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/utils.c
@@ -749,6 +752,12 @@ bool R_cycle_detected(SEXP s, SEXP child);
 
 void R_init_altrep(void);
 void R_reinit_altrep_classes(DllInfo *);
+
+SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t*);
+const char * R_typeToChar(SEXP);
+#ifdef USE_TYPE2CHAR_2
+const char * R_typeToChar2(SEXP, SEXPTYPE);
+#endif
 
 const char *translateCharFP(SEXP);
 const char *translateCharFP2(SEXP);
@@ -1430,6 +1439,7 @@ SEXP findFun3(SEXP, SEXP, SEXP);
 void findFunctionForBody(SEXP);
 int FixupDigits(SEXP, warn_type);
 int FixupWidth(SEXP, warn_type);
+void Rf_gsetVar(SEXP, SEXP, SEXP);
 SEXP installDDVAL(int i);
 SEXP installS3Signature(const char *, const char *);
 bool isFree(SEXP);
@@ -1446,6 +1456,16 @@ void R_registerBC(SEXP, SEXP);
 bool R_checkConstants(bool);
 bool R_BCVersionOK(SEXP);
 int R_NaN_is_R_NA(double);
+
+/* Replacements for popen and system */
+#ifdef HAVE_POPEN
+# ifdef __cplusplus
+std::FILE *R_popen(const char *, const char *);
+# else
+FILE *R_popen(const char *, const char *);
+# endif
+#endif
+int R_system(const char *);
 
 /* Environment and Binding Features */
 SEXP R_FindPackageEnv(SEXP info);
@@ -1775,6 +1795,7 @@ R_xlen_t dispatch_xlength(SEXP, SEXP, SEXP);
 R_len_t dispatch_length(SEXP, SEXP, SEXP);
 SEXP dispatch_subset2(SEXP, R_xlen_t, SEXP, SEXP);
 // SEXP Rf_duplicated(SEXP, Rboolean); // declared in Rinternals.h
+SEXP R_duplicate_attr(SEXP);
 // R_xlen_t Rf_any_duplicated(SEXP, Rboolean); // declared in Rinternals.h
 // R_xlen_t Rf_any_duplicated3(SEXP, SEXP, Rboolean); // declared in Rinternals.h
 SEXP evalList(SEXP, SEXP, SEXP, int);
@@ -1869,6 +1890,8 @@ SEXP R_data_class(SEXP , bool);
 SEXP R_data_class2(SEXP);
 char *R_LibraryFileName(const char *, char *, size_t);
 SEXP R_LoadFromFile(FILE*, int);
+int R_nchar(SEXP string, nchar_type type_,
+	    Rboolean allowNA, Rboolean keepNA, const char* msg_name);
 SEXP R_NewHashedEnv(SEXP, int);
 int R_Newhashpjw(const char *);
 FILE* R_OpenLibraryFile(const char *);
@@ -1883,6 +1906,7 @@ bool R_seemsOldStyleS4Object(SEXP object);
 int R_SetOptionWarn(int);
 int R_SetOptionWidth(int);
 SEXP R_SetOption(SEXP, SEXP);
+SEXP Rf_substitute(SEXP,SEXP);
 // NORET void R_Suicide(const char *); // defined in Rinterface.h
 SEXP R_flexiblas_info(void);
 void R_getProcTime(double *data);
@@ -1897,6 +1921,7 @@ SEXP strmat2intmat(SEXP, SEXP, SEXP, SEXP);
 SEXP substituteList(SEXP, SEXP);
 unsigned int TimeToSeed(void);
 SEXP tspgets(SEXP, SEXP);
+SEXP Rf_type2rstr(SEXPTYPE);
 SEXP type2symbol(SEXPTYPE);
 void unbindVar(SEXP, SEXP);
 #ifdef ALLOW_OLD_SAVE
@@ -2158,6 +2183,9 @@ Rbyte *RAW0(SEXP x);
 Rboolean Rf_conformable(SEXP, SEXP);
 Rboolean Rf_isUserBinop(SEXP);
 int Rf_stringPositionTr(SEXP, const char *);
+int LENGTH_EX(SEXP x, const char *file, int line);
+Rboolean isValidStringF(SEXP);
+//R_xlen_t XLENGTH_EX(SEXP x);
 } // namespace R
 #endif
 

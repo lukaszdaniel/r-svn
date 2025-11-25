@@ -327,7 +327,7 @@ SEXP Rf_type2str(SEXPTYPE t) /* returns a CHARSXP */
     return mkChar(buf);
 }
 
-SEXP Rf_type2rstr(SEXPTYPE t) /* returns a STRSXP */
+SEXP R::Rf_type2rstr(SEXPTYPE t) /* returns a STRSXP */
 {
     // if (t < MAX_NUM_SEXPTYPE) {
 	SEXP res = Type2Table[t].rstrName;
@@ -351,14 +351,14 @@ const char *Rf_type2char(SEXPTYPE t) /* returns a char* */
 }
 
 #ifdef USE_TYPE2CHAR_2
-const char *R_typeToChar2(SEXP x, SEXPTYPE t) {
+const char *R::R_typeToChar2(SEXP x, SEXPTYPE t) {
     return (t != OBJSXP)
 	? type2char(t)
 	: (IS_S4_OBJECT(x) ? "S4" : "object");
 }
 #endif
 
-const char *R_typeToChar(SEXP x) {
+const char *R::R_typeToChar(SEXP x) {
     // = type2char() but distinguishing {S4, object}
     if(TYPEOF(x) == OBJSXP)
 	return IS_S4_OBJECT(x) ? "S4" : "object";

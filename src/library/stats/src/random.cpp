@@ -30,6 +30,7 @@
 #include "stats.h" // for rcont2
 #include "localization.h"
 
+using namespace R;
 using namespace CXXR;
 
 /* interval at which to check interrupts */

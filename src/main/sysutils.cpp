@@ -306,7 +306,7 @@ attribute_hidden SEXP do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
     return (ans);
 }
 
-FILE *R_popen(const char *command, const char *type)
+FILE *R::R_popen(const char *command, const char *type)
 {
     FILE *fp;
 #ifdef OLD__APPLE__
@@ -328,7 +328,7 @@ FILE *R_popen(const char *command, const char *type)
 # include <sys/wait.h>
 #endif
 
-int R_system(const char *command)
+int R::R_system(const char *command)
 {
     int res;
 #ifdef __APPLE__

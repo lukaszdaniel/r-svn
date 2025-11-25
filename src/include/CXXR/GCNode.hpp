@@ -744,6 +744,7 @@ namespace R
      * is nullptr.
      */
     int (MARK)(SEXP x);
+    int (REFCNT)(SEXP x);
     bool (REFCNT_ENABLED)(SEXP x);
     void (DECREMENT_REFCNT)(SEXP x);
     void (INCREMENT_REFCNT)(SEXP x);
@@ -753,7 +754,6 @@ namespace R
 
 extern "C"
 {
-    int (REFCNT)(SEXP x);
     void (MARK_NOT_MUTABLE)(SEXP x);
 } // extern "C"
 

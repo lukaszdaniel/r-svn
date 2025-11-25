@@ -648,6 +648,8 @@ namespace R
     /** @brief Check to see if the arrays "x" and "y" have the identical extents
      */
     Rboolean Rf_conformable(SEXP x, SEXP y);
+
+    SEXP Rf_type2rstr(SEXPTYPE);
 } // namespace R
 
 extern "C"
@@ -673,7 +675,6 @@ extern "C"
      * @return The ::SEXPTYPE's name within R.
      */
     const char *Rf_type2char(SEXPTYPE st);
-    SEXP Rf_type2rstr(SEXPTYPE);
     SEXP Rf_type2str(SEXPTYPE);
     SEXP Rf_type2str_nowarn(SEXPTYPE);
     SEXPTYPE Rf_str2type(const char *const s);

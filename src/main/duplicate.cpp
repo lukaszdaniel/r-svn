@@ -584,4 +584,4 @@ static SEXP duplicate_attr(SEXP x, Rboolean deep)
 }
 
 SEXP R_shallow_duplicate_attr(SEXP x) { return duplicate_attr(x, FALSE); }
-SEXP R_duplicate_attr(SEXP x) { return duplicate_attr(x, TRUE); }
+SEXP R::R_duplicate_attr(SEXP x) { return duplicate_attr(x, TRUE); }

@@ -2782,7 +2782,7 @@ attribute_hidden SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
    Arguments to do_substitute should not be evaluated.
 */
 
-SEXP Rf_substitute(SEXP lang, SEXP rho)
+SEXP R::Rf_substitute(SEXP lang, SEXP rho)
 {
     SEXP t;
     switch (TYPEOF(lang)) {

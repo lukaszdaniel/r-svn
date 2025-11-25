@@ -141,6 +141,23 @@ namespace CXXR
 
 namespace R
 {
+    /** @brief Create a vector object.
+     *
+     *  Allocate a vector object.  This ensures only validity of
+     *  ::SEXPTYPE values representing lists (as the elements must be
+     *  initialized).  Initializing of other vector types is done in
+     *  do_makevector().
+     *
+     * @param stype The type of vector required.
+     *
+     * @param length The length of the vector to be created.
+     *
+     * @param allocator Custom allocator to be used.
+     *
+     * @return Pointer to the created vector.
+     */
+    SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
+
     /**
      * @param x Pointer to an CXXR::VectorBase.
      *
@@ -231,23 +248,6 @@ extern "C"
      * @return Pointer to the created vector.
      */
     SEXP Rf_allocVector(SEXPTYPE stype, R_xlen_t length);
-
-    /** @brief Create a vector object.
-     *
-     *  Allocate a vector object.  This ensures only validity of
-     *  ::SEXPTYPE values representing lists (as the elements must be
-     *  initialized).  Initializing of other vector types is done in
-     *  do_makevector().
-     *
-     * @param stype The type of vector required.
-     *
-     * @param length The length of the vector to be created.
-     *
-     * @param allocator Custom allocator to be used.
-     *
-     * @return Pointer to the created vector.
-     */
-    SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
 
     /** @brief Is an RObject a vector?
      *

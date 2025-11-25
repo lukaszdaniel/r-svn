@@ -1897,7 +1897,7 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 #define intCHARSXP 73
 #endif
 
-SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
+SEXP R::Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 {
     if (n_elem > R_XLEN_T_MAX) // n_elem > 2^52
         error(_("cannot allocate vector of length %lld"), (long long)n_elem);
@@ -2682,7 +2682,7 @@ SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
 int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
 attribute_hidden int (R::RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
 int (LEVELS)(SEXP x) { CR_ASSERT(x); return LEVELS(CHK(x)); }
-int (REFCNT)(SEXP x) { return REFCNT(CHK(x)); }
+int (R::REFCNT)(SEXP x) { return REFCNT(CHK(x)); }
 attribute_hidden bool (R::REFCNT_ENABLED)(SEXP x) { CR_ASSERT(x); return REFCNT_ENABLED(CHK(x)); }
 int (ALTREP)(SEXP x) { return ALTREP(CHK(x)); }
 void (MARK_NOT_MUTABLE)(SEXP x) { MARK_NOT_MUTABLE(CHK(x)); }
@@ -3501,7 +3501,7 @@ void (R::SET_MISSING)(SEXP x, unsigned int v) { CR_ASSERT(x); SET_MISSING(CHKCON
 SEXP (FORMALS)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(FORMALS(CHK(x))); }
 SEXP (BODY)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(BODY(CHK(x))); }
 SEXP (CLOENV)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(CLOENV(CHK(x))); }
-int (RDEBUG)(SEXP x) { CR_ASSERT(x); return RDEBUG(CHK(x)); }
+int (R::RDEBUG)(SEXP x) { CR_ASSERT(x); return RDEBUG(CHK(x)); }
 attribute_hidden int (R::RSTEP)(SEXP x) { CR_ASSERT(x); return RSTEP(CHK(x)); }
 SEXP R_ClosureFormals(SEXP x) { CR_ASSERT(x); return (FORMALS)(x); }
 SEXP R_ClosureBody(SEXP x) { CR_ASSERT(x); return (BODY)(x); }
@@ -3510,7 +3510,7 @@ SEXP R_ClosureEnv(SEXP x) { CR_ASSERT(x); return (CLOENV)(x); }
 void (SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); FORMALS(x).retarget(x, v); }
 void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); BODY(x).retarget(x, v); }
 void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CLOENV(x).retarget(x, v); }
-void (SET_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_RDEBUG(CHK(x), v); }
+void (R::SET_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_RDEBUG(CHK(x), v); }
 attribute_hidden
 void (R::SET_RSTEP)(SEXP x, int v) { CR_ASSERT(x); SET_RSTEP(CHK(x), v); }
 

@@ -18,13 +18,18 @@
  *  https://www.R-project.org/Licenses/
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif
+
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/LogicalVector.hpp>
-#include <Rinternals.h>
+#include <Defn.h>
 #include "localization.h"
 #include "statsErr.h"
 
+using namespace R;
 using namespace CXXR;
 
 #define R_MSG_type	_("invalid 'type' (%s) of argument")

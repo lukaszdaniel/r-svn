@@ -118,7 +118,7 @@ SEXP CAR(SEXP e);
     case WEAKREFSXP:
 	break;
     default:
-	error(_("cannot get data pointer of '%s' objects"), R_typeToChar(x));
+	error(_("cannot get data pointer of '%s' objects"), R::R_typeToChar(x));
     }
 }
 #else
@@ -219,7 +219,11 @@ INLINE_FUN R_xlen_t XTRUELENGTH(SEXP x)
 {
     return ALTREP(x) ? R::ALTREP_TRUELENGTH(x) : STDVEC_TRUELENGTH(x);
 }
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
+namespace R {
 /*HIDDEN*/ INLINE_FUN int LENGTH_EX(SEXP x, const char *file, int line)
 {
     if (x == R_NilValue) return 0;
@@ -230,7 +234,11 @@ INLINE_FUN R_xlen_t XTRUELENGTH(SEXP x)
 #endif
     return (int) len;
 }
+} // namespace R
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 #ifdef STRICT_TYPECHECK
 # define CHECK_STDVEC_LGL(x) do {				\
 	CHECK_VECTOR_LGL(x);					\
@@ -589,7 +597,7 @@ INLINE_FUN R_xlen_t Rf_xlength(SEXP s)
 /* regular allocVector() as a special case of allocVector3() with no custom allocator */
 INLINE_FUN SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length)
 {
-    return Rf_allocVector3(type, length, NULL);
+    return R::Rf_allocVector3(type, length, NULL);
 }
 
 /* from list.c */
@@ -757,12 +765,6 @@ INLINE_FUN Rboolean Rf_inherits(SEXP s, const char *name)
 INLINE_FUN Rboolean Rf_isValidString(SEXP x)
 {
     return (Rboolean) (TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP);
-}
-
-/* non-empty ("") valid string :*/
-INLINE_FUN Rboolean Rf_isValidStringF(SEXP x)
-{
-    return (Rboolean) (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
 }
 
 INLINE_FUN Rboolean Rf_isFunction(SEXP s)
@@ -1055,6 +1057,12 @@ INLINE_FUN SEXP Rf_mkString(const char *s)
 #endif
 
 namespace R {
+/* non-empty ("") valid string :*/
+INLINE_FUN Rboolean isValidStringF(SEXP x)
+{
+    return (Rboolean) (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
+}
+
 /* from util.c */
 
 /* Check to see if the arrays "x" and "y" have the identical extents */

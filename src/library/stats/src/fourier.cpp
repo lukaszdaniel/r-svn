@@ -23,6 +23,7 @@
 
 #include <cinttypes> // for PRIu64
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 
 #include "localization.h"
