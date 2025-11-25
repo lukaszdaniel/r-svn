@@ -40,9 +40,9 @@ namespace CXXR
     namespace ForceNonInline
     {
         const auto &RDEBUGptr = RDEBUG;
-        const auto &RTRACEptr = RTRACE;
+        const auto &RTRACEptr = R::RTRACE;
         const auto &SET_RDEBUGptr = SET_RDEBUG;
-        const auto &SET_RTRACEptr = SET_RTRACE;
+        const auto &SET_RTRACEptr = R::SET_RTRACE;
     } // namespace ForceNonInline
 
     void FunctionBase::detachReferents()

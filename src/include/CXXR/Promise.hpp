@@ -192,6 +192,15 @@ namespace R
     /**
      * @param x Pointer to a CXXR::Promise.
      *
+     * @return ?
+     *
+     * @deprecated Will need to be fixed.
+     */
+    int (PRSEEN)(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::Promise.
+     *
      * @deprecated Will need to be fixed.
      */
     void (SET_PRSEEN)(SEXP x, int v);
@@ -244,15 +253,6 @@ extern "C"
      *         R_UnboundValue if it has not yet been evaluated..
      */
     SEXP (PRVALUE)(SEXP x);
-
-    /**
-     * @param x Pointer to a CXXR::Promise.
-     *
-     * @return ?
-     *
-     * @deprecated Will need to be fixed.
-     */
-    int (PRSEEN)(SEXP x);
 
     /** @brief Set the environment of a CXXR::Promise.
      *

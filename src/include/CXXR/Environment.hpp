@@ -217,6 +217,16 @@ namespace R
      */
     void SET_SYMVALUE(SEXP x, SEXP v);
 
+    /** @brief Symbol's value in the base environment.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @return Pointer to a CXXR::RObject representing \a x's value.
+     *         Returns R_UnboundValue if no value is currently
+     *         associated with the Symbol.
+     */
+    SEXP (SYMVALUE)(SEXP x);
+
     void R_RestoreHashCount(SEXP rho);
 
     SEXP R_NewHashedEnv(SEXP enclos, int size);
@@ -231,6 +241,8 @@ namespace R
     void LOCK_FRAME(SEXP env);
     void UNLOCK_FRAME(SEXP env);
     bool FRAME_IS_LOCKED(SEXP env);
+    SEXP R_FindPackageEnv(SEXP info);
+    Rboolean R_HasFancyBindings(SEXP rho);
 } // namespace R
 
 extern "C"
@@ -258,16 +270,6 @@ extern "C"
      * @return TRUE iff the RObject pointed to by \a s is an environment.
      */
     Rboolean Rf_isEnvironment(SEXP s);
-
-    /** @brief Symbol's value in the base environment.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @return Pointer to a CXXR::RObject representing \a x's value.
-     *         Returns R_UnboundValue if no value is currently
-     *         associated with the Symbol.
-     */
-    SEXP (SYMVALUE)(SEXP x);
 
     /** @brief Access an environment's Frame, represented as a PairList.
      *
@@ -371,7 +373,6 @@ extern "C"
     SEXP R_NewEnv(SEXP enclos, int hash, int size);
     Rboolean R_IsPackageEnv(SEXP rho);
     SEXP R_PackageEnvName(SEXP rho);
-    SEXP R_FindPackageEnv(SEXP info);
     Rboolean R_IsNamespaceEnv(SEXP rho);
     SEXP R_NamespaceEnvSpec(SEXP rho);
     SEXP R_FindNamespace(SEXP info);
@@ -383,7 +384,6 @@ extern "C"
     Rboolean R_BindingIsLocked(SEXP sym, SEXP env);
     Rboolean R_BindingIsActive(SEXP sym, SEXP env);
     SEXP R_ActiveBindingFunction(SEXP sym, SEXP env);
-    Rboolean R_HasFancyBindings(SEXP rho);
 } // extern "C"
 
 #endif // ENVIRONMENT_HPP

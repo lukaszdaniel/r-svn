@@ -6596,7 +6596,7 @@ many code readers and supported by all C standards.  (Compilers may warn
 about an empty argument list in C23 mode.)
 
 @item
-@code{INIINITY} and @code{NAN} are available via
+@code{INFINITY} and @code{NAN} are available via
 header @file{float.h} and deprecated in @file{math.h}.
 
 @item
@@ -13322,7 +13322,7 @@ C99/C23/C++ type @code{bool}.
 @apifun Rf_asComplex
 @apifun Rf_asChar
 @apifun Rf_asRboolean
-@apifun Rf_asBbool
+@apifun Rf_asBool
 The function @code{Rf_asCharacterFactor} converts a factor to a character
 vector.
 @apifun Rf_asCharacterFactor
@@ -16482,7 +16482,6 @@ The C code underlying @code{optim} can be accessed directly.  The user
 needs to supply a function to compute the function to be minimized, of
 the type
 
-@apifun optimfn
 @example
 typedef double optimfn(int n, double *par, void *ex);
 @end example
@@ -16494,7 +16493,6 @@ routine, normally used to carry auxiliary information.
 
 Some of the methods also require a gradient function
 
-@apifun optimgr
 @example
 typedef void optimgr(int n, double *par, double *gr, void *ex);
 @end example
@@ -16577,7 +16575,6 @@ The C code underlying @code{integrate} can be accessed directly.  The
 user needs to supply a @emph{vectorizing} C function to compute the
 function to be integrated, of the type
 
-@apifun integr_fn
 @example
 typedef void integr_fn(double *x, int n, void *ex);
 @end example
@@ -16836,6 +16833,11 @@ Expand a path name @var{fn} by replacing a leading tilde by the user's
 home directory (if defined).  The precise meaning is platform-specific;
 it will usually be taken from the environment variable @env{HOME} if
 this is defined.
+@end deftypefun
+
+@eapifun acopy_string
+@deftypefun {const char *} acopy_string (const char *@var{in})
+Return a copy of a string using memory from @code{R_alloc}.
 @end deftypefun
 
 For historical reasons there are Fortran interfaces to functions

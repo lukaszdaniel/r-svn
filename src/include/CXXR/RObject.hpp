@@ -644,6 +644,10 @@ namespace R
      * @param src2 Non-null pointer to an RObject.
      */
     void maybeTraceMemory2(SEXP dest, SEXP src1, SEXP src2);
+
+    /** @brief Check to see if the arrays "x" and "y" have the identical extents
+     */
+    Rboolean Rf_conformable(SEXP x, SEXP y);
 } // namespace R
 
 extern "C"
@@ -850,10 +854,6 @@ extern "C"
     R_xlen_t Rf_xlength(SEXP s);
 
     Rboolean Rf_isDataFrame(SEXP s);
-
-    /** @brief Check to see if the arrays "x" and "y" have the identical extents
-     */
-    Rboolean Rf_conformable(SEXP x, SEXP y);
 
     /**
      * @note R's Rf_inherits() is based on inherits3() in ../main/objects.cpp

@@ -1324,7 +1324,7 @@ SEXP Rf_install(const char *name)
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
 attribute_hidden
-SEXP Rf_installNoTrChar(SEXP charSXP)
+SEXP R::installNoTrChar(SEXP charSXP)
 {
     return Symbol::obtain(SEXP_downcast<String *>(charSXP));
 }

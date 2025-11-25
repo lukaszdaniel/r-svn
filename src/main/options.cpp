@@ -187,7 +187,7 @@ attribute_hidden int R::FixupDigits(SEXP digits, warn_type warn)
     return d;
 }
 
-attribute_hidden int Rf_GetOptionDigits(void)
+attribute_hidden int R::GetOptionDigits(void)
 {
     return FixupDigits(GetOption1(install("digits")), iWARN);
 }

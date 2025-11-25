@@ -45,7 +45,7 @@ namespace CXXR
     {
         const auto &PRCODEptr = PRCODE;
         const auto &PRENVptr = PRENV;
-        const auto &PRSEENptr = PRSEEN;
+        const auto &PRSEENptr = R::PRSEEN;
         const auto &PRVALUEptr = PRVALUE;
         const auto &SETPRSEENptr = R::SET_PRSEEN;
         const auto &SET_PRVALUEptr = SET_PRVALUE;

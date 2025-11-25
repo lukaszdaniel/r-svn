@@ -623,7 +623,7 @@ attribute_hidden SEXP do_class(SEXP call, SEXP op, SEXP args, SEXP env)
     check1arg(args, call, "x");
     SEXP x = CAR(args), s3class;
     if (IS_S4_OBJECT(x)) {
-      if ((s3class = S3Class(x)) != R_NilValue) {
+      if ((s3class = Rf_S3Class(x)) != R_NilValue) {
 	return s3class;
       }
     } /* else */
@@ -1761,7 +1761,7 @@ static SEXP set_data_part(SEXP obj,  SEXP rhs) {
     return val;
 }
 
-attribute_hidden SEXP Rf_S3Class(SEXP obj)
+attribute_hidden SEXP R::Rf_S3Class(SEXP obj)
 {
     if(!s_dot_S3Class) init_slot_handling();
     return getAttrib(obj, s_dot_S3Class);
@@ -1942,7 +1942,7 @@ attribute_hidden SEXP R_getS4DataSlot(SEXP object, SEXPTYPE type)
     s_dotData = install(".Data");
   }
   if (TYPEOF(obj) != OBJSXP || type == OBJSXP) {
-    SEXP s3class = S3Class(obj);
+    SEXP s3class = Rf_S3Class(obj);
     if (s3class == R_NilValue && type == OBJSXP) {
       return R_NilValue;
     }

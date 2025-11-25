@@ -328,6 +328,31 @@ namespace R
     SEXP mkSYMSXP(SEXP name, SEXP value);
 
     bool (IS_SPECIAL_SYMBOL)(SEXP sym);
+
+    /** @brief Symbol's value in the base environment.
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @return Pointer to a CXXR::RObject representing \a x's value.
+     *         Returns R_UnboundValue if no value is currently
+     *         associated with the Symbol.
+     */
+    SEXP (SYMVALUE)(SEXP x);
+
+    /** @brief Does symbol relate to a <tt>...</tt> expression?
+     *
+     * @param x Pointer to a CXXR::Symbol (checked).
+     *
+     * @return \c TRUE iff this symbol denotes an element of a
+     *         <tt>...</tt> expression.
+     */
+    int (DDVAL)(SEXP x);
+
+    /* This function is equivalent to Rf_install(R_CHAR(charSXP)), but faster.
+   Like the equivalent code pattern, it discards the encoding information,
+   hence in almost all cases installTrChar should be used, instead. */
+    SEXP installNoTrChar(SEXP charSXP);
+    Rboolean Rf_isUserBinop(SEXP s);
 } // namespace R
 
 extern "C"
@@ -376,32 +401,6 @@ extern "C"
      * the required name.
      */
     SEXP Rf_install(const char *name);
-
-    /** @brief Symbol's value in the base environment.
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @return Pointer to a CXXR::RObject representing \a x's value.
-     *         Returns R_UnboundValue if no value is currently
-     *         associated with the Symbol.
-     */
-    SEXP (SYMVALUE)(SEXP x);
-
-    /** @brief Does symbol relate to a <tt>...</tt> expression?
-     *
-     * @param x Pointer to a CXXR::Symbol (checked).
-     *
-     * @return \c TRUE iff this symbol denotes an element of a
-     *         <tt>...</tt> expression.
-     */
-    int (DDVAL)(SEXP x);
-
-    Rboolean Rf_isUserBinop(SEXP s);
-
-    /* This function is equivalent to Rf_install(R_CHAR(charSXP)), but faster.
-   Like the equivalent code pattern, it discards the encoding information,
-   hence in almost all cases installTrChar should be used, instead. */
-    SEXP Rf_installNoTrChar(SEXP charSXP);
 } // extern "C"
 
 #endif // SYMBOL_HPP

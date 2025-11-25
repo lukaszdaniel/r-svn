@@ -316,7 +316,7 @@ static int match_to_obj(SEXP arg, SEXP obj) {
    which should be explicitly converted when an S3 method is applied
    to an object from an S4 subclass.
 */
-attribute_hidden int Rf_isBasicClass(const char *ss) {
+attribute_hidden int R::Rf_isBasicClass(const char *ss) {
     static SEXP s_S3table = NULL;
     if(!s_S3table) {
       s_S3table = R_findVarInFrame(R_MethodsNamespace,
@@ -1117,7 +1117,7 @@ attribute_hidden SEXP do_inherits(SEXP call, SEXP op, SEXP args, SEXP env)
  * @return index of match or -1 for no match
  */
 attribute_hidden
-int R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
+int R::R_check_class_and_super(SEXP x, const char **valid, SEXP rho)
 {
   if(isObject(x)) {
     int ans;
@@ -1705,7 +1705,7 @@ SEXP R_do_MAKE_CLASS(const char *what)
 
 // similar, but gives NULL instead of an error for a non-existing class
 // and 'what' is never checked
-attribute_hidden SEXP R_getClassDef_R(SEXP what)
+attribute_hidden SEXP R::R_getClassDef_R(SEXP what)
 {
     static SEXP s_getClassDef = NULL;
     if (!s_getClassDef) s_getClassDef = install("getClassDef");

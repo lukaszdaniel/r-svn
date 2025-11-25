@@ -43,11 +43,11 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &DDVALptr = DDVAL;
+        const auto &DDVALptr = R::DDVAL;
         const auto &installptr = Rf_install;
         const auto &isSymbolptr = Rf_isSymbol;
         const auto &PRINTNAMEptr = PRINTNAME;
-        const auto &SYMVALUEptr = SYMVALUE;
+        const auto &SYMVALUEptr = R::SYMVALUE;
         const auto &SET_PRINTNAMEptr = R::SET_PRINTNAME;
         const auto &SET_SYMVALUEptr = R::SET_SYMVALUE;
         const auto &SET_DDVALptr = R::SET_DDVAL;

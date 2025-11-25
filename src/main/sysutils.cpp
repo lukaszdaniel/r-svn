@@ -1886,7 +1886,7 @@ SEXP Rf_installTrChar(SEXP x)
 {
     CHECK_CHARSXP(x);
     nttype_t t = needsTranslation(x);
-    if (t == NT_NONE) return Rf_installNoTrChar(x);
+    if (t == NT_NONE) return R::installNoTrChar(x);
 
     R_StringBuffer cbuff = R_StringBuffer();
     // For back-compatibility this allows installing

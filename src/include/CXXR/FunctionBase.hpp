@@ -94,10 +94,6 @@ namespace CXXR
 
 namespace R
 {
-} // namespace R
-
-extern "C"
-{
     /** @brief Get function tracing status.
      *
      * @param x Pointer to a CXXR::FunctionBase (checked), or a null
@@ -117,7 +113,10 @@ extern "C"
      *          required.
      */
     void (SET_RTRACE)(SEXP x, int v);
+} // namespace R
 
+extern "C"
+{
     /** @brief Query debugging status.
      *
      * @param x Pointer to a CXXR::FunctionBase object.

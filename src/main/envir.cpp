@@ -3374,7 +3374,7 @@ Rboolean R_BindingIsActive(SEXP sym, SEXP env)
     }
 }
 
-attribute_hidden Rboolean R_HasFancyBindings(SEXP rho)
+attribute_hidden Rboolean R::R_HasFancyBindings(SEXP rho)
 {
     if (IS_HASHED(rho)) {
 	SEXP table = HASHTAB(rho);
@@ -3554,7 +3554,7 @@ SEXP R_PackageEnvName(SEXP rho)
 	return R_NilValue;
 }
 
-attribute_hidden SEXP R_FindPackageEnv(SEXP info)
+attribute_hidden SEXP R::R_FindPackageEnv(SEXP info)
 {
     SEXP expr, val;
     PROTECT(info);

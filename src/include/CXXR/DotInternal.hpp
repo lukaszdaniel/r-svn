@@ -45,10 +45,6 @@ namespace R
      * function is to be removed from the table.
      */
     void SET_INTERNAL(SEXP x, SEXP v);
-} // namespace R
-
-extern "C"
-{
 
     /** @brief Get function accessed via <tt>.Internal()</tt>.
      *
@@ -59,6 +55,10 @@ extern "C"
      * CXXR::BuiltInFunction, otherwise a null pointer.
      */
     SEXP (INTERNAL)(SEXP x);
+} // namespace R
+
+extern "C"
+{
 } // extern "C"
 
 #endif // DOTINTERNAL_HPP

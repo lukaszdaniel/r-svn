@@ -50,6 +50,12 @@ namespace CXXR
 namespace R
 {
     void ssort(CXXR::StringVector *sv, int n);
+
+    /** @brief Obtaing index of a string vector
+     *
+     * @return index of a given C string in (translated) R string vector
+     */
+    int Rf_stringPositionTr(SEXP string, const char *translatedElement);
 } // namespace R
 
 extern "C"
@@ -108,12 +114,6 @@ extern "C"
      * to C code.
      */
     const SEXP *(STRING_PTR_RO)(SEXP x);
-
-    /** @brief Obtaing index of a string vector
-     *
-     * @return index of a given C string in (translated) R string vector
-     */
-    int Rf_stringPositionTr(SEXP string, const char *translatedElement);
 
     Rboolean Rf_isValidString(SEXP x);
 

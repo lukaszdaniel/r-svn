@@ -619,6 +619,8 @@ namespace R
      * @return The total number of bytes (including the null terminator) that would be written to `s`.
      */
     size_t wcstoutf8(char *s, const wchar_t *wc, size_t n);
+
+    SEXP installNoTrChar(SEXP charSXP);
 } // namespace R
 
 extern "C"
@@ -727,7 +729,6 @@ extern "C"
     cetype_t Rf_getCharCE(SEXP x);
     const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst);
     SEXP Rf_installChar(SEXP x);
-    SEXP Rf_installNoTrChar(SEXP charSXP);
     SEXP Rf_installTrChar(SEXP x);
 } // extern "C"
 

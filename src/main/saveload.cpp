@@ -2244,7 +2244,7 @@ attribute_hidden SEXP do_load(SEXP call, SEXP op, SEXP args, SEXP env)
 #define R_XDR_INTEGER_SIZE 4
 */
 
-attribute_hidden void R_XDREncodeDouble(double d, void *buf)
+attribute_hidden void R::R_XDREncodeDouble(double d, void *buf)
 {
     XDR xdrs;
 
@@ -2255,7 +2255,7 @@ attribute_hidden void R_XDREncodeDouble(double d, void *buf)
 	error("%s", _("XDR write failed"));
 }
 
-attribute_hidden double R_XDRDecodeDouble(void *buf)
+attribute_hidden double R::R_XDRDecodeDouble(void *buf)
 {
     XDR xdrs;
     double d;
@@ -2268,7 +2268,7 @@ attribute_hidden double R_XDRDecodeDouble(void *buf)
     return d;
 }
 
-attribute_hidden void R_XDREncodeInteger(int i, void *buf)
+attribute_hidden void R::R_XDREncodeInteger(int i, void *buf)
 {
     XDR xdrs;
     int success;
@@ -2280,7 +2280,7 @@ attribute_hidden void R_XDREncodeInteger(int i, void *buf)
 	error("%s", _("XDR write failed"));
 }
 
-attribute_hidden int R_XDRDecodeInteger(void *buf)
+attribute_hidden int R::R_XDRDecodeInteger(void *buf)
 {
     XDR xdrs;
     int i;

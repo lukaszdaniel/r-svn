@@ -2680,7 +2680,7 @@ int (ANY_ATTRIB)(SEXP x) { CR_ASSERT(x); return ANY_ATTRIB(CHK(x)); }
 int (OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
 SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
 int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
-attribute_hidden int (RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
+attribute_hidden int (R::RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
 int (LEVELS)(SEXP x) { CR_ASSERT(x); return LEVELS(CHK(x)); }
 int (REFCNT)(SEXP x) { return REFCNT(CHK(x)); }
 attribute_hidden bool (R::REFCNT_ENABLED)(SEXP x) { CR_ASSERT(x); return REFCNT_ENABLED(CHK(x)); }
@@ -2695,7 +2695,7 @@ int (IS_SCALAR)(SEXP x, SEXPTYPE type)
     return TYPEOF(CHK(x)) == type && XLENGTH(x) == 1;
 }
 
-attribute_hidden int (MARK)(SEXP x) { CR_ASSERT(x); return MARK(CHK(x)); }
+attribute_hidden int (R::MARK)(SEXP x) { CR_ASSERT(x); return MARK(CHK(x)); }
 attribute_hidden
 void (R::DECREMENT_REFCNT)(SEXP x) { DECREMENT_REFCNT(CHK(x)); }
 attribute_hidden
@@ -2734,7 +2734,7 @@ void (SET_NAMED)(SEXP x, int v)
 #endif
 }
 attribute_hidden
-void (SET_RTRACE)(SEXP x, int v) { CR_ASSERT(x); SET_RTRACE(CHK(x), v); }
+void (R::SET_RTRACE)(SEXP x, int v) { CR_ASSERT(x); SET_RTRACE(CHK(x), v); }
 void (SETLEVELS)(SEXP x, int v) { CR_ASSERT(x); SETLEVELS(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), duplicate(CHK(ATTRIB(CHK(from)))));
@@ -2835,6 +2835,7 @@ attribute_hidden void (R::UNSET_MAYBEJIT)(SEXP x) { CR_ASSERT(x); UNSET_MAYBEJIT
 
 /* Growable vector support */
 int (IS_GROWABLE)(SEXP x) { CR_ASSERT(x); return IS_GROWABLE(CHK(x)); }
+int (R::GROWABLE_BIT_SET)(SEXP x) { return GROWABLE_BIT_SET(CHK(x)); }
 void (SET_GROWABLE_BIT)(SEXP x) { CR_ASSERT(x); SET_GROWABLE_BIT(CHK(x)); }
 
 namespace
@@ -3381,7 +3382,7 @@ SEXP (CADDDR)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CADDDR(CHKCONS(e))); }
 SEXP (CAD3R)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CADDDR(CHKCONS(e))); }
 SEXP (CAD4R)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CAD4R(CHKCONS(e))); }
 SEXP (CAD5R)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(CAD5R(CHKCONS(e))); }
-attribute_hidden int (MISSING)(SEXP x) { CR_ASSERT(x); return MISSING(CHKCONS(x)); }
+attribute_hidden int (R::MISSING)(SEXP x) { CR_ASSERT(x); return MISSING(CHKCONS(x)); }
 
 void (SET_TAG)(SEXP x, SEXP v)
 {
@@ -3501,7 +3502,7 @@ SEXP (FORMALS)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); retur
 SEXP (BODY)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(BODY(CHK(x))); }
 SEXP (CLOENV)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(CLOENV(CHK(x))); }
 int (RDEBUG)(SEXP x) { CR_ASSERT(x); return RDEBUG(CHK(x)); }
-attribute_hidden int (RSTEP)(SEXP x) { CR_ASSERT(x); return RSTEP(CHK(x)); }
+attribute_hidden int (R::RSTEP)(SEXP x) { CR_ASSERT(x); return RSTEP(CHK(x)); }
 SEXP R_ClosureFormals(SEXP x) { CR_ASSERT(x); return (FORMALS)(x); }
 SEXP R_ClosureBody(SEXP x) { CR_ASSERT(x); return (BODY)(x); }
 SEXP R_ClosureEnv(SEXP x) { CR_ASSERT(x); return (CLOENV)(x); }
@@ -3511,7 +3512,7 @@ void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_
 void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CLOENV(x).retarget(x, v); }
 void (SET_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_RDEBUG(CHK(x), v); }
 attribute_hidden
-void (SET_RSTEP)(SEXP x, int v) { CR_ASSERT(x); SET_RSTEP(CHK(x), v); }
+void (R::SET_RSTEP)(SEXP x, int v) { CR_ASSERT(x); SET_RSTEP(CHK(x), v); }
 
 /* These are only needed with the write barrier on */
 namespace R
@@ -3530,9 +3531,9 @@ void (SET_PRIMOFFSET)(SEXP x, int v) { CR_ASSERT(x); CR_BUILTIN_ASSERT(x); SET_P
 	error(_("%s: argument of type %s is not a symbol or NULL"), \
 	      __func__, sexptype2char(TYPEOF(x)))
 SEXP (PRINTNAME)(SEXP x) { CHKSYMSXP(x); CR_SYMBOL_ASSERT(x); return CHK(PRINTNAME(CHK(x))); }
-SEXP (SYMVALUE)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); return CHK(SYMVALUE(CHK(x))); }
-SEXP (INTERNAL)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); return CHK(INTERNAL(CHK(x))); }
-int (DDVAL)(SEXP x) { CR_ASSERT(x); CHKSYMSXP(x); return DDVAL(CHK(x)); }
+SEXP (R::SYMVALUE)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); return CHK(SYMVALUE(CHK(x))); }
+SEXP (R::INTERNAL)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); return CHK(INTERNAL(CHK(x))); }
+int (R::DDVAL)(SEXP x) { CR_ASSERT(x); CHKSYMSXP(x); return DDVAL(CHK(x)); }
 
 attribute_hidden
 void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.symsxp.m_pname.retarget(x, v); }
@@ -3598,7 +3599,7 @@ void (SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 SEXP (PRCODE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRCODE(CHK(x))); }
 SEXP (PRENV)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRENV(CHK(x))); }
 SEXP (PRVALUE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(static_cast<Promise *>(CHK(x))->value()); }
-int (PRSEEN)(SEXP x) { CR_ASSERT(x); return PRSEEN(CHK(x)); }
+int (R::PRSEEN)(SEXP x) { CR_ASSERT(x); return PRSEEN(CHK(x)); }
 attribute_hidden
 bool (R::PROMISE_IS_EVALUATED)(SEXP x)
 {
@@ -3900,7 +3901,7 @@ R_xlen_t R_maxLength(SEXP x)
     return GROWABLE_BIT_SET(x) ? XTRUELENGTH(x) : xlength(x);
 }
 
-SEXP R_allocResizableVector(SEXPTYPE type, R_xlen_t len, R_xlen_t maxlen)
+SEXP R_allocResizableVector(SEXPTYPE type, R_xlen_t maxlen)
 {
     switch (type) {
     case LGLSXP:
@@ -3916,12 +3917,9 @@ SEXP R_allocResizableVector(SEXPTYPE type, R_xlen_t len, R_xlen_t maxlen)
 	error(_("cannot make a resizable vector of type '%s'"),
 	      sexptype2char(type));
     }
-    if (len > maxlen)
-	error("%s", _("len larger than maxlen"));
     SEXP val = allocVector(type, maxlen);
     SET_TRUELENGTH(val, maxlen);
     SET_GROWABLE_BIT(val);
-    SETLENGTH(val, len);
     return val;
 }
 
@@ -3931,11 +3929,9 @@ SEXP R_duplicateAsResizable(SEXP x)
 	error("%s", _("ALTREP objects cannot be made resizable"));
     if (!isVector(x))
 	error("%s", _("cannot make non-vector objects resizable"));
-    if (!GROWABLE_BIT_SET(x) && XTRUELENGTH(x) != 0)
-	error("%s", _("XTRUELENGTH has been hijacked"));
     SEXP val = duplicate(x);
-    SET_TRUELENGTH(x, XLENGTH(x));
-    SET_GROWABLE_BIT(x);
+    SET_TRUELENGTH(val, XLENGTH(val));
+    SET_GROWABLE_BIT(val);
     return val;
 }
 
@@ -3965,19 +3961,14 @@ void R_resizeVector(SEXP x, R_xlen_t newlen)
 	    error("%s", _("not a resizable vector"));
 	if (newlen > XTRUELENGTH(x))
 	    error("%s", _("'newlen' is too large"));
-	if (MAYBE_SHARED(x))
-	    error("%s", _("can't resize a vector that might be shared"));
 	if (ATTRIB(x) != R_NilValue) {
+	    // clear length-dependent attributes
 	    if (getAttrib(x, R_DimSymbol) != R_NilValue)
-		error("%s", _("can't resize a vector with a 'dim' attribute"));
+		setAttrib(x, R_DimSymbol, R_NilValue);
 	    if (getAttrib(x, R_DimNamesSymbol) != R_NilValue)
-		error("%s", _("can't resize a vector with a 'dimnames' attribute"));
-	    SEXP names = getAttrib(x, R_NamesSymbol);
-	    if (names != R_NilValue) {
-		if (MAYBE_SHARED(names))
-		    error("%s", _("can't resize 'names' that might be shared"));
-		R_resizeVector(names, newlen);
-	    }
+		setAttrib(x, R_DimNamesSymbol, R_NilValue);
+	    if (getAttrib(x, R_NamesSymbol) != R_NilValue)
+		setAttrib(x, R_NamesSymbol, R_NilValue);
 	}
 	R_xlen_t len = XLENGTH(x);
 	if (newlen < len) // clear dropped elements to drop refcounts

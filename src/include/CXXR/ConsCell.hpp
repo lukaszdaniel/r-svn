@@ -424,6 +424,10 @@ namespace R
 {
     // Used in argument handling (within envir.cpp, eval.cpp and
     // match.cpp).  Note comments in the 'R Internals' document.
+    int (MISSING)(SEXP x);
+
+    // Used in argument handling (within envir.cpp, eval.cpp and
+    // match.cpp).  Note comments in the 'R Internals' document.
     void (SET_MISSING)(SEXP x, unsigned int v);
 
     SEXP CONS_NR(SEXP a, SEXP b);
@@ -436,10 +440,6 @@ namespace R
 
 extern "C"
 {
-    // Used in argument handling (within envir.cpp, eval.cpp and
-    // match.cpp).  Note comments in the 'R Internals' document.
-    int (MISSING)(SEXP x);
-
     /** @brief Get tag of CXXR::ConsCell.
      *
      * @param e Pointer to a CXXR::ConsCell (checked), or a null pointer.

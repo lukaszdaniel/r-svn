@@ -357,7 +357,6 @@ void SET_WEAKREF_FINALIZER(SEXP x, SEXP v);
 
 /* List Access Macros */
 /* These also work for ... objects */
-#define LISTVAL(x)	((x)->u.listsxp)
 #define TAG(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_tag)
 #define CAR0(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_car)
 #define CDR(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_tail)
@@ -558,6 +557,7 @@ void R_check_thread(const char *s);
 */
 
 /* General Cons Cell Attributes */
+int  (MARK)(SEXP x);
 bool (REFCNT_ENABLED)(SEXP x);
 // void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
 // void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // declared in Rinternals.h
@@ -575,6 +575,15 @@ void (ENABLE_REFCNT)(SEXP x);
 // void (SET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 // void (UNSET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 
+SEXP Rf_S3Class(SEXP);
+int Rf_isBasicClass(const char *);
+SEXP R_S4_extends(SEXP klass, SEXP useTable);
+SEXP R_getClassDef_R(SEXP what);
+Rboolean R_has_methods_attached(void);
+Rboolean R_isVirtualClass(SEXP class_def, SEXP env);
+Rboolean R_extends  (SEXP class1, SEXP class2, SEXP env);
+int R_check_class_and_super(SEXP x, const char **valid, SEXP rho);
+
 bool (ASSIGNMENT_PENDING)(SEXP x);
 void (SET_ASSIGNMENT_PENDING)(SEXP x, int v);
 bool (IS_ASSIGNMENT_CALL)(SEXP x);
@@ -589,6 +598,7 @@ void (UNSET_MAYBEJIT)(SEXP x);
 
 /* Growable vector support */
 // int (IS_GROWABLE)(SEXP x); // declared in Rinternals.h
+int (GROWABLE_BIT_SET)(SEXP x);
 // void (SET_GROWABLE_BIT)(SEXP x); // declared in Rinternals.h
 
 /* Vector Access Functions */
@@ -613,12 +623,33 @@ void SET_BNDCELL(SEXP cell, SEXP val);
 SEXPTYPE (PROMISE_TAG)(SEXP e);
 void (SET_PROMISE_TAG)(SEXP e, SEXPTYPE v);
 
+/* metadata access */
+//int INTEGER_IS_SORTED(SEXP x);
+//int INTEGER_NO_NA(SEXP x);
+//int REAL_IS_SORTED(SEXP x);
+//int REAL_NO_NA(SEXP x);
+//int LOGICAL_IS_SORTED(SEXP x);
+//int LOGICAL_NO_NA(SEXP x);
+//int STRING_IS_SORTED(SEXP x);
+//int STRING_NO_NA(SEXP x);
+
 /* List Access Functions */
 SEXP (CAR0)(SEXP e);
 void (SET_MISSING)(SEXP x, unsigned int v);
 SEXP CONS_NR(SEXP a, SEXP b);
+int  (MISSING)(SEXP x);
+
+/* Closure Access Functions */
+int  (RSTEP)(SEXP x);
+int  (RTRACE)(SEXP x);
+void (SET_RSTEP)(SEXP x, int v);
+void (SET_RTRACE)(SEXP x, int v);
+SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/utils.c
 
 /* Symbol Access Functions */
+SEXP (SYMVALUE)(SEXP x);
+SEXP (INTERNAL)(SEXP x);
+int  (DDVAL)(SEXP x);
 void (SET_DDVAL)(SEXP x, int v);
 void SET_PRINTNAME(SEXP x, SEXP v);
 void SET_SYMVALUE(SEXP x, SEXP v);
@@ -631,6 +662,7 @@ void SET_INTERNAL(SEXP x, SEXP v);
 // void SET_HASHTAB(SEXP x, SEXP v); // declared in Rinternals.h
 
 /* Promise Access Functions */
+int  (PRSEEN)(SEXP x);
 void (SET_PRSEEN)(SEXP x, int v);
 // void SET_PRENV(SEXP x, SEXP v); // declared in Rinternals.h
 // void SET_PRVALUE(SEXP x, SEXP v); // declared in Rinternals.h
@@ -1416,7 +1448,15 @@ bool R_BCVersionOK(SEXP);
 int R_NaN_is_R_NA(double);
 
 /* Environment and Binding Features */
-void R_RestoreHashCount(SEXP rho);
+SEXP R_FindPackageEnv(SEXP info);
+Rboolean R_HasFancyBindings(SEXP rho); // envir.c
+void R_RestoreHashCount(SEXP rho); // envir.c
+
+void R_XDREncodeDouble(double d, void *buf);
+double R_XDRDecodeDouble(void *buf);
+void R_XDREncodeInteger(int i, void *buf);
+int R_XDRDecodeInteger(void *buf);
+
 #if 0
 # define allocCharsxp		Rf_allocCharsxp
 # define asBool2	       	Rf_asBool2
@@ -1746,6 +1786,7 @@ void FrameClassFix(SEXP);
 // SEXP frameSubscript(int, SEXP, SEXP); // unused
 R_xlen_t get1index(SEXP, SEXP, R_xlen_t, int, int, SEXP);
 int GetOptionCutoff(void);
+int GetOptionDigits(void);
 SEXP getVar(SEXP, SEXP);
 SEXP getVarInFrame(SEXP, SEXP);
 bool Rf_GetOptionDeviceAsk(void);
@@ -1760,6 +1801,7 @@ bool R_current_trace_state(void);
 bool R_current_debug_state(void);
 bool R_has_methods(SEXP);
 void R_InitialData(void);
+SEXP installNoTrChar(SEXP);
 std::pair<bool, SEXP> R_possible_dispatch(SEXP, SEXP, SEXP, SEXP, bool);
 bool inherits2(SEXP, const char *);
 void InitGraphics(void);
@@ -2112,6 +2154,10 @@ int *INTEGER0(SEXP x);
 double *REAL0(SEXP x);
 Rcomplex *COMPLEX0(SEXP x);
 Rbyte *RAW0(SEXP x);
+
+Rboolean Rf_conformable(SEXP, SEXP);
+Rboolean Rf_isUserBinop(SEXP);
+int Rf_stringPositionTr(SEXP, const char *);
 } // namespace R
 #endif
 

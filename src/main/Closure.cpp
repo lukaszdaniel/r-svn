@@ -45,9 +45,9 @@ namespace CXXR
         const auto &BODYptr = BODY;
         const auto &CLOENVptr = CLOENV;
         const auto &FORMALSptr = FORMALS;
-        const auto &RSTEPptr = RSTEP;
+        const auto &RSTEPptr = R::RSTEP;
         const auto &SET_CLOENVptr = SET_CLOENV;
-        const auto &SET_RSTEPptr = SET_RSTEP;
+        const auto &SET_RSTEPptr = R::SET_RSTEP;
     } // namespace ForceNonInline
 
     Closure *Closure::create(SEXP formal_args, SEXP body, SEXP env)

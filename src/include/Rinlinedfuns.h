@@ -738,24 +738,6 @@ INLINE_FUN SEXP Rf_lang6(SEXP s, SEXP t, SEXP u, SEXP v, SEXP w, SEXP x)
     return s;
 }
 
-/* from util.c */
-
-/* Check to see if the arrays "x" and "y" have the identical extents */
-
-HIDDEN INLINE_FUN Rboolean Rf_conformable(SEXP x, SEXP y)
-{
-    int n;
-    PROTECT(x = getAttrib(x, R_DimSymbol));
-    y = getAttrib(y, R_DimSymbol);
-    UNPROTECT(1);
-    if ((n = length(x)) != length(y))
-	return FALSE;
-    for (int i = 0; i < n; i++)
-	if (INTEGER(x)[i] != INTEGER(y)[i])
-	    return FALSE;
-    return TRUE;
-}
-
 /* NOTE: R's inherits() is based on inherits3() in ../main/objects.c
  * Here, use char / CHAR() instead of the slower more general translateChar()
  */
@@ -781,16 +763,6 @@ INLINE_FUN Rboolean Rf_isValidString(SEXP x)
 INLINE_FUN Rboolean Rf_isValidStringF(SEXP x)
 {
     return (Rboolean) (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
-}
-
-HIDDEN INLINE_FUN Rboolean Rf_isUserBinop(SEXP s)
-{
-    if (TYPEOF(s) == SYMSXP) {
-	const char *str = CHAR(PRINTNAME(s));
-	if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str)-1] == '%')
-	    return TRUE;
-    }
-    return FALSE;
 }
 
 INLINE_FUN Rboolean Rf_isFunction(SEXP s)
@@ -1078,6 +1050,38 @@ INLINE_FUN SEXP Rf_mkString(const char *s)
     UNPROTECT(1);
     return t;
 }
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
+namespace R {
+/* from util.c */
+
+/* Check to see if the arrays "x" and "y" have the identical extents */
+
+HIDDEN INLINE_FUN Rboolean Rf_conformable(SEXP x, SEXP y)
+{
+    int n;
+    PROTECT(x = getAttrib(x, R_DimSymbol));
+    y = getAttrib(y, R_DimSymbol);
+    UNPROTECT(1);
+    if ((n = length(x)) != length(y))
+	return FALSE;
+    for (int i = 0; i < n; i++)
+	if (INTEGER(x)[i] != INTEGER(y)[i])
+	    return FALSE;
+    return TRUE;
+}
+
+HIDDEN INLINE_FUN Rboolean Rf_isUserBinop(SEXP s)
+{
+    if (TYPEOF(s) == SYMSXP) {
+	const char *str = CHAR(PRINTNAME(s));
+	if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str)-1] == '%')
+	    return TRUE;
+    }
+    return FALSE;
+}
 
 /* index of a given C string in (translated) R string vector  */
 HIDDEN INLINE_FUN int Rf_stringPositionTr(SEXP string, const char *translatedElement) {
@@ -1095,11 +1099,6 @@ HIDDEN INLINE_FUN int Rf_stringPositionTr(SEXP string, const char *translatedEle
     return -1; /* not found */
 }
 
-#ifdef __cplusplus
-} // extern "C"
-#endif
-
-namespace R {
 /* duplicate RHS value of complex assignment if necessary to prevent cycles */
 HIDDEN INLINE_FUN SEXP R_FixupRHS(SEXP x, SEXP y)
 {

@@ -243,6 +243,21 @@ namespace R
      */
     SEXP mkCLOSXP(SEXP formal_args, SEXP body, SEXP env);
 
+    /** @brief Get debugging state
+     *
+     * @param x Pointer to \c RObject.
+     *
+     * @return true iff \a x is in debugging state.  Returns false if \a x
+     * is nullptr.
+     */
+    int (RSTEP)(SEXP x);
+
+    /** @brief Set debugging state
+     *
+     * @param x Pointer to \c RObject.
+     */
+    void (SET_RSTEP)(SEXP x, int v);
+
     /** @brief Get the JIT state
      *
      * @param x Pointer to \c RObject.
@@ -331,21 +346,6 @@ extern "C"
      *          A null pointer is not permissible (not checked).
      */
     void SET_CLOENV(SEXP x, SEXP v);
-
-    /** @brief Get debugging state
-     *
-     * @param x Pointer to \c RObject.
-     *
-     * @return true iff \a x is in debugging state.  Returns false if \a x
-     * is nullptr.
-     */
-    int (RSTEP)(SEXP x);
-
-    /** @brief Set debugging state
-     *
-     * @param x Pointer to \c RObject.
-     */
-    void (SET_RSTEP)(SEXP x, int v);
 } // extern "C"
 
 #endif // CLOSURE_HPP
