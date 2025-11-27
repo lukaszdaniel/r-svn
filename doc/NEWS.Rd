@@ -175,7 +175,11 @@
 
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
-      \item .
+      \item Specifying C++11 or C++14 has long given a note: in 98\% of
+      CRAN packages the specification is unnecessary as the default
+      C++17 suffices.
+      The intention is that support for those standards will be withdrawn
+      before release.
     }
   }
 
@@ -376,6 +380,10 @@
       \item The help page \code{example(matplot)} now correctly labels
       Sepal vs Petal dimensions in its first iris data plot, thanks to
       \I{Jeff Dick}'s post on R-devel.
+
+      \item \code{all.equal(obj, simple, check.class=FALSE)} now is true, also
+      when \code{simple} is a bare atomic vector and \code{obj} has a simple
+      class, fixing the first part of \PR{18971} thanks to \I{Jan Gorecki}.
     }
   }
 }

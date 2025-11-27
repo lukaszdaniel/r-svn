@@ -186,6 +186,7 @@ static char* unescape_arg(char *p, char* avp) {
 #undef TRUE
 #undef FALSE
 
+#define MSGSIZE R_PATH_MAX + 128
 int Rf_initialize_R(int ac, char **av)
 {
     int i, ioff = 1, j;
@@ -193,7 +194,6 @@ int Rf_initialize_R(int ac, char **av)
 #ifdef HAVE_TCLTK
     bool useTk = FALSE;
 #endif
-    constexpr int MSGSIZE = R_PATH_MAX + 128;
     char *p, msg[MSGSIZE], cmdlines[10000], **avv;
     structRstart rstart;
     Rstart Rp = &rstart;
