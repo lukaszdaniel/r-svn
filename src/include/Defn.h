@@ -192,6 +192,15 @@ namespace R {
 # define MARK_NOT_MUTABLE(x) do { if ((x) != R_NilValue) { SET_NAMED(x, NAMEDMAX); } } while (0)
 #endif
 
+/* Macros for some common idioms. */
+#ifdef SWITCH_TO_REFCNT
+# define MAYBE_SHARED(x) (REFCNT(x) > 1)
+# define NO_REFERENCES(x) (REFCNT(x) == 0)
+#else
+# define MAYBE_SHARED(x) (NAMED(x) > 1)
+# define NO_REFERENCES(x) (NAMED(x) == 0)
+#endif
+
 /* To make complex assignments a bit safer, in particular with
    reference counting, a bit is set on the LHS binding cell or symbol
    at the beginning of the complex assignment process and unset at the
@@ -1571,6 +1580,7 @@ int R_XDRDecodeInteger(void *buf);
 # define Mbrtowc		Rf_mbrtowc
 # define mbtoucs		Rf_mbtoucs
 # define mbcsToUcs2		Rf_mbcsToUcs2
+# define mbcsValid		Rf_mbcsValid
 # define memtrace_report	Rf_memtrace_report
 # define mkCharWUTF8		Rf_mkCharWUTF8
 # define mkCLOSXP		Rf_mkCLOSXP
@@ -1626,8 +1636,10 @@ int R_XDRDecodeInteger(void *buf);
 # define usemethod		Rf_usemethod
 # define ucstomb		Rf_ucstomb
 # define ucstoutf8		Rf_ucstoutf8
+# define utf8clen		Rf_utf8clen
 # define utf8toucs		Rf_utf8toucs
 # define utf8towcs		Rf_utf8towcs
+# define utf8Valid		Rf_utf8Valid
 # define vectorIndex		Rf_vectorIndex
 # define warningcall		Rf_warningcall
 # define WarningMessage		Rf_WarningMessage

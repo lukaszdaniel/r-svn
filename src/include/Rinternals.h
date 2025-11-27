@@ -126,16 +126,6 @@ Rboolean (Rf_isObject)(SEXP s);
     } while (0)
 #endif
 
-/* Macros for some common idioms. */
-#ifdef USE_RINTERNALS
-# ifdef SWITCH_TO_REFCNT
-#  define MAYBE_SHARED(x) (REFCNT(x) > 1)
-#  define NO_REFERENCES(x) (REFCNT(x) == 0)
-# else
-#  define MAYBE_SHARED(x) (NAMED(x) > 1)
-#  define NO_REFERENCES(x) (NAMED(x) == 0)
-# endif
-#endif
 int (MAYBE_SHARED)(SEXP x);
 int (NO_REFERENCES)(SEXP x);
 
