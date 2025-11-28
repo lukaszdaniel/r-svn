@@ -27,6 +27,8 @@
 #ifndef SEXPTYPE_HPP
 #define SEXPTYPE_HPP
 
+#include <CXXR/config.hpp>
+
 /** @brief CR's object type identification.
  *
  * @enum SEXPTYPE This enumeration is used within CR to identify different types
@@ -40,7 +42,7 @@
  * This is done to support C++ packages that expect implicit int to
  * SEXPTYPE conversions.
  */
-#ifdef COMPILING_IVORY
+#ifdef CXXR_PROJECT
 #define enum_SEXPTYPE
 #endif
 #ifndef enum_SEXPTYPE

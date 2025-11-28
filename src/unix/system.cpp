@@ -158,7 +158,7 @@ bool R_running_as_main_program = 0;
 extern uintptr_t dummy_ii(void);
 
 /* Protection against embedded misuse, PR#15420 */
-static int num_initialized = 0;
+static bool s_initialized = false;
 
 static char* unescape_arg(char *p, char* avp) {
     /* Undo the escaping done in the front end */
@@ -189,6 +189,12 @@ static char* unescape_arg(char *p, char* avp) {
 #define MSGSIZE R_PATH_MAX + 128
 int Rf_initialize_R(int ac, char **av)
 {
+    if (s_initialized) {
+	fprintf(stderr, "%s", _("R is already initialized\n"));
+	std::exit(1);
+    }
+	s_initialized = true;
+
     int i, ioff = 1, j;
     bool useX11 = TRUE;
 #ifdef HAVE_TCLTK
@@ -198,12 +204,6 @@ int Rf_initialize_R(int ac, char **av)
     structRstart rstart;
     Rstart Rp = &rstart;
     bool force_interactive = FALSE;
-
-    if (num_initialized++) {
-	fprintf(stderr, "%s", _("R is already initialized\n"));
-	std::exit(1);
-    }
-
 
 #if defined(HAVE_SYS_RESOURCE_H) && defined(HAVE_GETRLIMIT)
 {
@@ -521,7 +521,7 @@ int Rf_initialize_R(int ac, char **av)
 #endif
 	R_Interactive = (R_Interactive && (force_interactive || R_isatty(0)));
 
-#if defined(HAVE_AQUA) || defined(COMPILING_IVORY)
+#if defined(HAVE_AQUA) || defined(CXXR_PROJECT)
     /* for Aqua and non-dumb terminal use callbacks instead of connections
        and pretty-print warnings/errors (ESS = dumb terminal) */
     if (
@@ -537,7 +537,7 @@ int Rf_initialize_R(int ac, char **av)
 #endif
 	R_Outputfile = stdout;
 	R_Consolefile = stderr;
-#if defined(HAVE_AQUA) || defined(COMPILING_IVORY)
+#if defined(HAVE_AQUA) || defined(CXXR_PROJECT)
     }
 #endif
 
