@@ -8,7 +8,6 @@
             "compilerPath": "/usr/bin/g++",
             "intelliSenseMode": "gcc-x64",
             "defines": [
-                "COMPILING_IVORY",
                 "HAVE_CONFIG_H",
                 "HAVE_DECL_SIZE_MAX=1",
                 "Unix",
