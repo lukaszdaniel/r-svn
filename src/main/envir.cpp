@@ -1771,7 +1771,7 @@ void Rf_setVar(SEXP symbol, SEXP value, SEXP rho)
  * 
  * Here we assign directly into the base environment.
  */
-void R::Rf_gsetVar(SEXP symbol, SEXP value, SEXP rho)
+void R::gsetVar(SEXP symbol, SEXP value, SEXP rho)
 {
     if (FRAME_IS_LOCKED(rho)) {
 	if (SYMVALUE(symbol) == R_UnboundValue)
@@ -3374,7 +3374,7 @@ Rboolean R_BindingIsActive(SEXP sym, SEXP env)
     }
 }
 
-attribute_hidden Rboolean R::R_HasFancyBindings(SEXP rho)
+attribute_hidden bool R::R_HasFancyBindings(SEXP rho)
 {
     if (IS_HASHED(rho)) {
 	SEXP table = HASHTAB(rho);

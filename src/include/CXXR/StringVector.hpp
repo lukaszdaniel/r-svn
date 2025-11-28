@@ -55,10 +55,10 @@ namespace R
      *
      * @return index of a given C string in (translated) R string vector
      */
-    int Rf_stringPositionTr(SEXP string, const char *translatedElement);
+    int stringPositionTr(SEXP string, const char *translatedElement);
 
     /* non-empty ("") valid string :*/
-    Rboolean isValidStringF(SEXP x);
+    bool isValidStringF(SEXP x);
 } // namespace R
 
 extern "C"

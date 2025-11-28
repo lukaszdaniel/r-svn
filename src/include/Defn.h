@@ -585,13 +585,13 @@ void (ENABLE_REFCNT)(SEXP x);
 // void (SET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 // void (UNSET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 
-SEXP Rf_S3Class(SEXP);
-int Rf_isBasicClass(const char *);
+SEXP S3Class(SEXP);
+bool isBasicClass(const char *);
 SEXP R_S4_extends(SEXP klass, SEXP useTable);
 SEXP R_getClassDef_R(SEXP what);
-Rboolean R_has_methods_attached(void);
-Rboolean R_isVirtualClass(SEXP class_def, SEXP env);
-Rboolean R_extends  (SEXP class1, SEXP class2, SEXP env);
+bool R_has_methods_attached(void);
+bool R_isVirtualClass(SEXP class_def, SEXP env);
+bool R_extends(SEXP class1, SEXP class2, SEXP env);
 int R_check_class_and_super(SEXP x, const char **valid, SEXP rho);
 
 bool (ASSIGNMENT_PENDING)(SEXP x);
@@ -762,7 +762,7 @@ bool R_cycle_detected(SEXP s, SEXP child);
 void R_init_altrep(void);
 void R_reinit_altrep_classes(DllInfo *);
 
-SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t*);
+SEXP allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t*);
 const char * R_typeToChar(SEXP);
 #ifdef USE_TYPE2CHAR_2
 const char * R_typeToChar2(SEXP, SEXPTYPE);
@@ -1448,7 +1448,7 @@ SEXP findFun3(SEXP, SEXP, SEXP);
 void findFunctionForBody(SEXP);
 int FixupDigits(SEXP, warn_type);
 int FixupWidth(SEXP, warn_type);
-void Rf_gsetVar(SEXP, SEXP, SEXP);
+void gsetVar(SEXP, SEXP, SEXP);
 SEXP installDDVAL(int i);
 SEXP installS3Signature(const char *, const char *);
 bool isFree(SEXP);
@@ -1478,7 +1478,7 @@ int R_system(const char *);
 
 /* Environment and Binding Features */
 SEXP R_FindPackageEnv(SEXP info);
-Rboolean R_HasFancyBindings(SEXP rho); // envir.c
+bool R_HasFancyBindings(SEXP rho); // envir.c
 void R_RestoreHashCount(SEXP rho); // envir.c
 
 void R_XDREncodeDouble(double d, void *buf);
@@ -2192,11 +2192,11 @@ double *REAL0(SEXP x);
 Rcomplex *COMPLEX0(SEXP x);
 Rbyte *RAW0(SEXP x);
 
-Rboolean Rf_conformable(SEXP, SEXP);
-Rboolean Rf_isUserBinop(SEXP);
-int Rf_stringPositionTr(SEXP, const char *);
+bool conformable(SEXP, SEXP);
+bool isUserBinop(SEXP);
+int stringPositionTr(SEXP, const char *);
 int LENGTH_EX(SEXP x, const char *file, int line);
-Rboolean isValidStringF(SEXP);
+bool isValidStringF(SEXP);
 //R_xlen_t XLENGTH_EX(SEXP x);
 } // namespace R
 #endif

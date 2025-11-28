@@ -156,7 +156,7 @@ namespace R
      *
      * @return Pointer to the created vector.
      */
-    SEXP Rf_allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
+    SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
 
     /**
      * @param x Pointer to an CXXR::VectorBase.

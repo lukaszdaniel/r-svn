@@ -1083,7 +1083,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	    print2buff("pairlist(", d);
 	d->inlist++;
 	for (t=s ; CDR(t) != R_NilValue ; t=CDR(t) ) {
-	    if( TAG(t) != R_NilValue ) {
+	    if (TAG(t) != R_NilValue) {
 		d->opts = SIMPLEDEPARSE; /* turn off quote()ing */
 		deparse2buff(TAG(t), d);
 		d->opts = d_opts_in;
@@ -1092,7 +1092,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	    deparse2buff(CAR(t), d);
 	    print2buff(", ", d);
 	}
-	if( TAG(t) != R_NilValue ) {
+	if (TAG(t) != R_NilValue) {
 	    d->opts = SIMPLEDEPARSE; /* turn off quote()ing */
 	    deparse2buff(TAG(t), d);
 	    d->opts = d_opts_in;
@@ -1128,7 +1128,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 	}
 
 	if (TYPEOF(op) == SYMSXP) {
-	    int userbinop = 0;
+	    bool userbinop = false;
 	    if (Rf_isPrimitive(SYMVALUE(op)) ||
 		(userbinop = isUserBinop(op))) {
 		PPinfo fop;
@@ -1338,7 +1338,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 			print2buff(")", d);
 		    print2buff(CHAR(PRINTNAME(op)), d); /* ASCII */
 		    /*temp fix to handle printing of x$a's */
-		    if( isString(CADR(s)) &&
+		    if (isString(CADR(s)) &&
 			isValidName(CHAR(STRING_ELT(CADR(s), 0))))
 			deparse2buff(STRING_ELT(CADR(s), 0), d);
 		    else {
@@ -1733,7 +1733,7 @@ static void vector2buff(SEXP vector, LocalParseData *d)
 	} else if((d->opts & KEEPNA) && TYPEOF(vector) == CPLXSXP) {
 	    Rcomplex *vec = COMPLEX(vector);
 	    for(i = 0; i < tlen; i++) {
-		if( !ISNA(vec[i].r) && !ISNA(vec[i].i) ) {
+		if (!ISNA(vec[i].r) && !ISNA(vec[i].i)) {
 		    allNA = false;
 		    break;
 		}
@@ -1916,7 +1916,7 @@ static void args2buff(SEXP arglist, int lineb, int formals, LocalParseData *d)
 	if (TAG(arglist) != R_NilValue) {
 	    SEXP s = TAG(arglist);
 
-	    if( s == R_DotsSymbol )
+	    if (s == R_DotsSymbol)
 		print2buff(CHAR(PRINTNAME(s)), d);
 	    else if(d->backtick)
 		print2buff(quotify(PRINTNAME(s), '`'), d);

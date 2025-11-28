@@ -597,7 +597,7 @@ INLINE_FUN R_xlen_t Rf_xlength(SEXP s)
 /* regular allocVector() as a special case of allocVector3() with no custom allocator */
 INLINE_FUN SEXP Rf_allocVector(SEXPTYPE type, R_xlen_t length)
 {
-    return R::Rf_allocVector3(type, length, NULL);
+    return R::allocVector3(type, length, NULL);
 }
 
 /* from list.c */
@@ -1058,41 +1058,41 @@ INLINE_FUN SEXP Rf_mkString(const char *s)
 
 namespace R {
 /* non-empty ("") valid string :*/
-INLINE_FUN Rboolean isValidStringF(SEXP x)
+INLINE_FUN bool isValidStringF(SEXP x)
 {
-    return (Rboolean) (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
+    return (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
 }
 
 /* from util.c */
 
 /* Check to see if the arrays "x" and "y" have the identical extents */
 
-HIDDEN INLINE_FUN Rboolean Rf_conformable(SEXP x, SEXP y)
+HIDDEN INLINE_FUN bool conformable(SEXP x, SEXP y)
 {
     int n;
     PROTECT(x = getAttrib(x, R_DimSymbol));
     y = getAttrib(y, R_DimSymbol);
     UNPROTECT(1);
     if ((n = length(x)) != length(y))
-	return FALSE;
+	return false;
     for (int i = 0; i < n; i++)
 	if (INTEGER(x)[i] != INTEGER(y)[i])
-	    return FALSE;
-    return TRUE;
+	    return false;
+    return true;
 }
 
-HIDDEN INLINE_FUN Rboolean Rf_isUserBinop(SEXP s)
+HIDDEN INLINE_FUN bool isUserBinop(SEXP s)
 {
     if (TYPEOF(s) == SYMSXP) {
 	const char *str = CHAR(PRINTNAME(s));
 	if (strlen(str) >= 2 && str[0] == '%' && str[strlen(str)-1] == '%')
-	    return TRUE;
+	    return true;
     }
-    return FALSE;
+    return false;
 }
 
 /* index of a given C string in (translated) R string vector  */
-HIDDEN INLINE_FUN int Rf_stringPositionTr(SEXP string, const char *translatedElement) {
+HIDDEN INLINE_FUN int stringPositionTr(SEXP string, const char *translatedElement) {
 
     int slen = LENGTH(string);
 

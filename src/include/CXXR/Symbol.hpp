@@ -352,7 +352,7 @@ namespace R
    Like the equivalent code pattern, it discards the encoding information,
    hence in almost all cases installTrChar should be used, instead. */
     SEXP installNoTrChar(SEXP charSXP);
-    Rboolean Rf_isUserBinop(SEXP s);
+    bool isUserBinop(SEXP s);
 } // namespace R
 
 extern "C"

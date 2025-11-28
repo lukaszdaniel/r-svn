@@ -4303,7 +4303,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 static R_INLINE void updateObjFromS4Slot(SEXP objSlot, const char *className) {
     SEXP obj = CAR(objSlot);
 
-    if (IS_S4_OBJECT(obj) && Rf_isBasicClass(className)) {
+    if (IS_S4_OBJECT(obj) && isBasicClass(className)) {
 	/* This and the similar test below implement the strategy
 	 for S3 methods selected for S4 objects.  See ?Methods */
 	if (NAMED(obj)) ENSURE_NAMEDMAX(obj);

@@ -574,7 +574,7 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	/* if one is a length-atleast-1-array and the
 	 * other  is a length-0 *non*array, then do not use array treatment */
 	if (xarray && yarray) {
-	    if (!Rf_conformable(x, y))
+	    if (!conformable(x, y))
 		errorcall(call, "%s", _("non-conformable arrays"));
 	    dims = getAttrib(x, R_DimSymbol);
 	}

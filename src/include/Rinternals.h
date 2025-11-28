@@ -794,7 +794,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define allocS4Object		Rf_allocS4Object
 #define allocSExp		Rf_allocSExp
 #define allocVector		Rf_allocVector
-#define allocVector3		Rf_allocVector3
+// #define allocVector3		Rf_allocVector3
 #define any_duplicated		Rf_any_duplicated
 #define any_duplicated3		Rf_any_duplicated3
 // #define applyClosure		Rf_applyClosure
@@ -814,7 +814,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define charIsLatin1		Rf_charIsLatin1
 #define classgets		Rf_classgets
 #define coerceVector		Rf_coerceVector
-#define conformable		Rf_conformable
+// #define conformable		Rf_conformable
 #define cons			Rf_cons
 // #define fixSubset3Args		Rf_fixSubset3Args
 #define copyListMatrix		Rf_copyListMatrix
@@ -850,7 +850,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 // #define GetOptionDigits		Rf_GetOptionDigits
 #define GetOptionWidth		Rf_GetOptionWidth
 #define GetRowNames		Rf_GetRowNames
-#define gsetVar			Rf_gsetVar
+// #define gsetVar			Rf_gsetVar
 #define inherits		Rf_inherits
 #define install			Rf_install
 #define installChar		Rf_installTrChar
@@ -890,7 +890,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 // #define isUnmodifiedSpecSym	Rf_isUnmodifiedSpecSym
 #define isUnordered		Rf_isUnordered
 #define isUnsorted		Rf_isUnsorted
-#define isUserBinop		Rf_isUserBinop
+// #define isUserBinop		Rf_isUserBinop
 #define isValidString		Rf_isValidString
 // #define isValidStringF		Rf_isValidStringF
 #define isVector		Rf_isVector
@@ -958,7 +958,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define shallow_duplicate	Rf_shallow_duplicate
 #define str2type		Rf_str2type
 // #define stringSuffix		Rf_stringSuffix
-#define stringPositionTr	Rf_stringPositionTr
+// #define stringPositionTr	Rf_stringPositionTr
 #define StringBlank		Rf_StringBlank
 #define substitute		Rf_substitute
 #define topenv		        Rf_topenv

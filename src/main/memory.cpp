@@ -1897,7 +1897,7 @@ attribute_hidden SEXP R::R_mkEVPROMISE_NR(SEXP expr, SEXP val)
 #define intCHARSXP 73
 #endif
 
-SEXP R::Rf_allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
+SEXP R::allocVector3(SEXPTYPE type, R_xlen_t n_elem, R_allocator_t *allocator)
 {
     if (n_elem > R_XLEN_T_MAX) // n_elem > 2^52
         error(_("cannot allocate vector of length %lld"), (long long)n_elem);

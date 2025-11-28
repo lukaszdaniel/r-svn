@@ -647,7 +647,7 @@ namespace R
 
     /** @brief Check to see if the arrays "x" and "y" have the identical extents
      */
-    Rboolean Rf_conformable(SEXP x, SEXP y);
+    bool conformable(SEXP x, SEXP y);
 
     SEXP Rf_type2rstr(SEXPTYPE);
 } // namespace R

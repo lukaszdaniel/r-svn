@@ -242,7 +242,7 @@ namespace R
     void UNLOCK_FRAME(SEXP env);
     bool FRAME_IS_LOCKED(SEXP env);
     SEXP R_FindPackageEnv(SEXP info);
-    Rboolean R_HasFancyBindings(SEXP rho);
+    bool R_HasFancyBindings(SEXP rho);
 } // namespace R
 
 extern "C"
