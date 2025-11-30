@@ -715,9 +715,9 @@ nonAPI <- c("chol_", "chol2inv_", "cg_", "ch_", "rg_",
             "Rf_isFrame",
             "BODY", "FORMALS", "CLOENV", "ENCLOS",
             "IS_ASCII", "IS_UTF8",
-## experimental resizable vector entry points -- not yet in the API
-            "R_isResizable", "R_maxLength", "R_resizeVector",
-            "R_allocResizableVector", "R_duplicateAsResizable",
+## experimental resizable vector entry points -- now in the experimental API
+            ## "R_isResizable", "R_maxLength", "R_resizeVector",
+            ## "R_allocResizableVector", "R_duplicateAsResizable",
 ## experimental hashtable support -- not yet in the API
             "R_asHashtable", "R_HashtabSEXP", "R_isHashtable", "R_mkhashtab",
             "R_gethash", "R_sethash", "R_remhash", "R_numhash", "R_typhash",
@@ -745,7 +745,8 @@ warnNonAPI <-
       "IS_S4_OBJECT", "BODY", "FORMALS", "CLOENV", "ENCLOS", "Rf_isFrame",
       "OBJECT", "SET_TYPEOF", "ENVFLAGS", "SET_ENVFLAGS", "SET_FORMALS",
       "SET_BODY", "SET_CLOENV", "STRING_PTR", "DATAPTR", "XTRUELENGTH",
-      "R_shallow_duplicate_attr", "R_duplicate_attr", "getConnection")
+      "R_shallow_duplicate_attr", "R_duplicate_attr", "getConnection",
+      "LEVELS", "SETLEVELS")
 
 ## grDevices uses R_Home R_InputHandlers R_TempDir R_Visible R_cairoCdynload R_fopen R_gzclose R_gzgets R_gzopen R_isForkedChild Rf_envlength Rf_strIsASCII Rf_utf8towcs Rg_set_col_ptrs Ri18n_wcwidth addInputHandler do_X11 do_contourLines do_getGraphicsEventEnv do_getSnapshot do_playSnapshot do_saveplot locale2charset mbcsToUcs2 ptr_R_ProcessEvents
 

@@ -181,6 +181,16 @@
       some compilers).
       The intention is that support for those standards will be withdrawn
       before release.
+
+      %% GCC 10 and Intel 2021.1 definitely support this: GCC 9 may
+      \item The default C++ standard will be changed to C++20
+      \sQuote{where available} (which it is on all known platforms from
+      2021): if not C++17 is used if available otherwise C++ is not
+      supported (as before).
+
+      Several CRAN packages already require C++20 and have hundreds of
+      others depending on them.  (Packages can request C++17 if
+      esssential.)
     }
   }
 
@@ -223,7 +233,7 @@
       \code{SET_FORMALS}, \code{SET_BODY}, \code{SET_CLOENV},
       \code{STRING_PTR}, \code{DATAPTR}, \code{XTRUELENGTH},
       \code{R_duplicate_attr}, \code{R_shallow_duplicate_attr},
-      \code{getConnection}.
+      \code{getConnection}, \code{LEVELS}, \code{SETLEVELS}.
 
       \item The deprecated macros \code{CHARACTER_DATA} and
       \code{CHARACTER_POINTER} now return \code{const} pointers since using
@@ -389,6 +399,18 @@
       \item \code{diff(m, lag, dif)} for matrix \code{m} now still returns
       matrices, also when \code{lag * dif > nrow(m)} (\PR{18972}, thanks to
       \I{Mikael Jagan}).
+
+      \item \code{str(x, give.attr=FALSE)} no longer shows attributes when
+      \code{x} is a zero length \code{"Date"} or \code{"POSIXt"} object.
+    }
+  }
+}
+
+\section{\Rlogo CHANGES IN R 4.5.2 patched}{
+
+  \subsection{BUG FIXES}{
+    \itemize{
+      \item .
     }
   }
 }
