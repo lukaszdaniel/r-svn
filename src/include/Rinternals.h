@@ -966,8 +966,8 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 // #define translateChar0		Rf_translateChar0
 #define translateCharUTF8      	Rf_translateCharUTF8
 #define type2char		Rf_type2char
-#define type2rstr		Rf_type2rstr
-#define type2str		Rf_type2str
+// #define type2rstr		Rf_type2rstr
+// #define type2str		Rf_type2str
 #define type2str_nowarn		Rf_type2str_nowarn
 #define unprotect(x)		Rf_unprotect(x)
 // #define unprotect_ptr		Rf_unprotect_ptr

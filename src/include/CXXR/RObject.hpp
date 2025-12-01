@@ -649,7 +649,8 @@ namespace R
      */
     bool conformable(SEXP x, SEXP y);
 
-    SEXP Rf_type2rstr(SEXPTYPE);
+    SEXP type2rstr(SEXPTYPE);
+    SEXP type2str(SEXPTYPE);
 } // namespace R
 
 extern "C"
@@ -675,7 +676,6 @@ extern "C"
      * @return The ::SEXPTYPE's name within R.
      */
     const char *Rf_type2char(SEXPTYPE st);
-    SEXP Rf_type2str(SEXPTYPE);
     SEXP Rf_type2str_nowarn(SEXPTYPE);
     SEXPTYPE Rf_str2type(const char *const s);
 

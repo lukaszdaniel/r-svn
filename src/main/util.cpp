@@ -315,7 +315,7 @@ SEXP Rf_type2str_nowarn(SEXPTYPE t) /* returns a CHARSXP */
     return R_NilValue;
 }
 
-SEXP Rf_type2str(SEXPTYPE t) /* returns a CHARSXP */
+SEXP R::type2str(SEXPTYPE t) /* returns a CHARSXP */
 {
     SEXP s = type2str_nowarn(t);
     if (s != R_NilValue) {
@@ -327,7 +327,7 @@ SEXP Rf_type2str(SEXPTYPE t) /* returns a CHARSXP */
     return mkChar(buf);
 }
 
-SEXP R::Rf_type2rstr(SEXPTYPE t) /* returns a STRSXP */
+SEXP R::type2rstr(SEXPTYPE t) /* returns a STRSXP */
 {
     // if (t < MAX_NUM_SEXPTYPE) {
 	SEXP res = Type2Table[t].rstrName;
