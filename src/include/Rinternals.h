@@ -422,6 +422,7 @@ SEXP Rf_allocSExp(SEXPTYPE);
 // SEXP Rf_allocVector3(SEXPTYPE, R_xlen_t, R_allocator_t *);
 R_xlen_t Rf_any_duplicated(SEXP x, Rboolean from_last); // unique.c
 R_xlen_t Rf_any_duplicated3(SEXP x, SEXP incomp, Rboolean from_last); // unique.c
+SEXP R_class(SEXP);
 SEXP Rf_classgets(SEXP, SEXP);
 SEXP Rf_cons(SEXP, SEXP);
 SEXP Rf_lcons(SEXP car, SEXP cdr);

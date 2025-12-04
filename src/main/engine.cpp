@@ -48,6 +48,9 @@
 
 # include <rlocale.h>
 
+/* Hershey functions */
+#include "g_extern.h"
+
 using namespace R;
 using namespace CXXR;
 

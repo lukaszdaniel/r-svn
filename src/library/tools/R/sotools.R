@@ -597,6 +597,7 @@ nonAPI <- c("chol_", "chol2inv_", "cg_", "ch_", "rg_",
             "Rconn_fgetc", "Rconn_printf", "Rdownload",
             "Rf_EncodeComplex", "Rf_EncodeElement",
             "Rf_EncodeEnvironment", "Rf_EncodeInteger",
+            "Rf_EncodeReal0",
             "Rf_EncodeLogical", "Rf_EncodeReal", "Rf_GPretty",
             "Rf_NewEnvironment", "Rf_PrintDefaults",
             "Rf_ReplIteration", "Rf_Seql", "Rf_addTaskCallback",
@@ -746,7 +747,7 @@ warnNonAPI <-
       "OBJECT", "SET_TYPEOF", "ENVFLAGS", "SET_ENVFLAGS", "SET_FORMALS",
       "SET_BODY", "SET_CLOENV", "STRING_PTR", "DATAPTR", "XTRUELENGTH",
       "R_shallow_duplicate_attr", "R_duplicate_attr", "getConnection",
-      "LEVELS", "SETLEVELS")
+      "LEVELS", "SETLEVELS", "R_data_class")
 
 ## grDevices uses R_Home R_InputHandlers R_TempDir R_Visible R_cairoCdynload R_fopen R_gzclose R_gzgets R_gzopen R_isForkedChild Rf_envlength Rf_strIsASCII Rf_utf8towcs Rg_set_col_ptrs Ri18n_wcwidth addInputHandler do_X11 do_contourLines do_getGraphicsEventEnv do_getSnapshot do_playSnapshot do_saveplot locale2charset mbcsToUcs2 ptr_R_ProcessEvents
 
