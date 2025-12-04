@@ -253,7 +253,7 @@ static struct {
 } completionrequest;
 
  /* Fill a text buffer with user typed console input. */
-int R::R_ReadConsole(const char *prompt, unsigned char *buf, int len,
+int R_ReadConsole(const char *prompt, unsigned char *buf, int len,
 	      int addtohistory)
 {
     R_ProcessEvents();

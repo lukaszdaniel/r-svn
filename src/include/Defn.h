@@ -1257,12 +1257,12 @@ extern0 int	R_WarnLength	INI_as(1000);	/* Error/warning max length */
 extern0 int	R_nwarnings	INI_as(50);
 
 /* C stack checking */
-extern uintptr_t R_CStackLimit	INI_as((uintptr_t)-1);	/* C stack limit */
+// extern uintptr_t R_CStackLimit	INI_as((uintptr_t)-1);	/* C stack limit */ // used by rJava package
 extern uintptr_t R_OldCStackLimit INI_as((uintptr_t)0); /* Old value while
 							   handling overflow */
-extern uintptr_t R_CStackStart	INI_as((uintptr_t)-1);	/* Initial stack address */
+// extern uintptr_t R_CStackStart	INI_as((uintptr_t)-1);	/* Initial stack address */ // used by rJava package
 /* Default here is for Windows: set from configure in src/unix/system.c */
-extern int	R_CStackDir	INI_as(1);	/* C stack direction */
+// extern int	R_CStackDir	INI_as(1);	/* C stack direction */ // used by rJava package
 
 /* File Input/Output */
 // LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/ // declared in Rinterface.h
@@ -1660,7 +1660,7 @@ int R_XDRDecodeInteger(void *buf);
 /* The maximum length of input line which will be asked for,
    in bytes, including the terminator */
 #define CONSOLE_BUFFER_SIZE 4096
-int	R_ReadConsole(const char *, unsigned char *, int, int);
+// int R_ReadConsole(const char *, unsigned char *, int, int); // used by rJava package
 void	R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, otype_t(0)) */
 void	R_WriteConsoleEx(const char *, int, otype_t);
 void	R_ResetConsole(void);
@@ -1780,7 +1780,7 @@ SEXP allocCharsxp(R_xlen_t);
 R_xlen_t asVecSize(SEXP x);
 R_xlen_t asXLength(SEXP x);
 void check1arg(SEXP, SEXP, const char *);
-void Rf_checkArityCall(SEXP, SEXP, SEXP);
+// void Rf_checkArityCall(SEXP, SEXP, SEXP); // used by rJava package
 void CheckFormals(SEXP, const char*);
 void R_check_locale(void);
 void check_stack_balance(SEXP op, size_t save);
@@ -2268,6 +2268,12 @@ LibExtern SEXP R_TrueValue INI_as(NULL);
 LibExtern SEXP R_FalseValue INI_as(NULL);
 LibExtern SEXP R_LogicalNAValue INI_as(NULL);
 
+// Variables not in R API but used by other R packages
+/* C stack checking */
+extern uintptr_t R_CStackLimit	INI_as((uintptr_t)-1);	/* C stack limit */ // used by rJava package
+extern uintptr_t R_CStackStart	INI_as((uintptr_t)-1);	/* Initial stack address */ // used by rJava package
+extern int	R_CStackDir	INI_as(1);	/* C stack direction */ // used by rJava package
+
 #ifdef __MAIN__
 # undef extern
 # undef extern0
@@ -2306,6 +2312,11 @@ void R_RestoreGlobalEnvFromFile(const char *, bool);
 void R_SaveGlobalEnv(void);
 void R_SaveGlobalEnvToFile(const char *);
 NORET void R_Suicide(const char *);
+
+// Functions not in R API but used by other R packages
+void Rf_checkArityCall(SEXP, SEXP, SEXP); // used by rJava package
+void run_Rmainloop(void); // used by rJava package
+int R_ReadConsole(const char *, unsigned char *, int, int); // used by rJava package
 #ifdef __cplusplus
 } // extern "C"
 #endif

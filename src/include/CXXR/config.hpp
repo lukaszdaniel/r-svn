@@ -95,7 +95,9 @@
 // #define TESTING_WRITE_BARRIER
 
 #ifndef TESTING_WRITE_BARRIER
+#ifndef USE_RINTERNALS
 # define USE_RINTERNALS
+#endif
 #endif
 
 #ifdef TESTING_WRITE_BARRIER

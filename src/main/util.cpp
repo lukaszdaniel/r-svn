@@ -515,7 +515,7 @@ attribute_hidden SEXP R::EnsureString(SEXP s)
 }
 
 // NB: have  checkArity(a,b) :=  Rf_checkArityCall(a,b,call)
-void R::Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
+void Rf_checkArityCall(SEXP op, SEXP args, SEXP call)
 {
     if (PRIMARITY(op) >= 0 && PRIMARITY(op) != length(args)) {
 	/* FIXME: ngettext reguires unsigned long, but %u would seem appropriate */
