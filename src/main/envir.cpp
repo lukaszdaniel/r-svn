@@ -118,7 +118,7 @@
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h> // for R_Suicide()
-#include <R_ext/Callbacks.h>
+#include <R_ext/ObjectTable.h>
 
 using namespace R;
 using namespace CXXR;

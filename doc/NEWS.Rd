@@ -141,6 +141,12 @@
       \code{tools::Rd2txt_options(descStyle=NULL)} to get the old
       behaviour with a simple space; a \code{"colon"} variant is also
       available.
+
+      \item \code{x \%notin\% table} newly in \pkg{base} is an idiom
+      for \code{!(x \%in\% table)} and provided almost entirely for
+      convenience and code readability, from an R-devel suggestion, after
+      many years of private definitions mostly hidden in packages,
+      including in \R's \pkg{tools} package.
     }
   }
 
@@ -249,7 +255,12 @@
 
       \item The non-API header files \file{R_ext/Callbacks.h} and
       \file{R_ext/PrtUtil.h} are no longer copied to the installed
-      includes directory.
+      includes directory. The \code{R_ObjectTable} type definitions
+      formally in \file{R_ext/Callbacks.h} are now available in the new
+      header file \file{R_ext/ObjectTable.h}.  This new header file
+      should be used in packages instead of \file{R_ext/Callbacks.h}. To
+      ease the transition a stub file \file{R_ext/Callbacks.h} has been
+      added that just includes \file{R_ext/ObjectTable.h}.	
     }
   }
 
@@ -406,7 +417,7 @@
 
       \item \code{diff(m, lag, dif)} for matrix \code{m} now still returns
       matrices, also when \code{lag * dif > nrow(m)} (\PR{18972}, thanks to
-      \I{Mikael Jagan}).
+      \I{Mikael Jagan} and \I{Suharto Anggono}).
       \code{diff(<ts-matrix>)} remains matrix, even when it has length zero.
 
       \item \code{str(x, give.attr=FALSE)} no longer shows attributes when

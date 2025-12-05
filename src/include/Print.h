@@ -28,7 +28,7 @@
 #endif
 
 #include <Defn.h>
-#include <R_ext/PrtUtil.h>
+#include <PrtUtil.h>
 #include <R_ext/Print.h>
 
 #if 0

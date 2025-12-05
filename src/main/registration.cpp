@@ -61,7 +61,7 @@
     a C++ compiler because the linkage changes as the declarations
     are (currently) within extern "C" blocks.
 */
-#include <R_ext/Callbacks.h>
+#include <Callbacks.h>
 #include <R_ext/Rdynload.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Linpack.h>

@@ -44,7 +44,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
 #include <Internal.h>
-#include <R_ext/PrtUtil.h> // for IndexWidth
+#include <PrtUtil.h> // for IndexWidth
 #include <R_ext/Itermacros.h>
 
 #include "RBufferUtils.h"
