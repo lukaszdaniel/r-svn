@@ -95,7 +95,7 @@ namespace CXXR
          */
         const RObject *protege() const
         {
-            return u.extptr.m_protege;
+            return m_protege;
         }
 
         /** @brief Get pointer to protege object.
@@ -105,7 +105,7 @@ namespace CXXR
          */
         RObject *protege()
         {
-            return u.extptr.m_protege;
+            return m_protege;
         }
 
         /** @brief Get the encapsulated pointer, qualified by const.
@@ -114,7 +114,7 @@ namespace CXXR
          */
         const void *ptr() const
         {
-            return u.extptr.m_ptr;
+            return m_ptr;
         }
 
         /** @brief Get the encapsulated pointer.
@@ -123,7 +123,7 @@ namespace CXXR
          */
         void *ptr()
         {
-            return u.extptr.m_ptr;
+            return m_ptr;
         }
 
         /** @brief Designate the protege object.
@@ -133,7 +133,7 @@ namespace CXXR
          */
         void setProtege(RObject *prot)
         {
-            u.extptr.m_protege.retarget(this, prot);
+            m_protege.retarget(this, prot);
         }
 
         /** @brief Set the value of the encapsulated pointer
@@ -142,7 +142,7 @@ namespace CXXR
          */
         void setPtr(void *ptr)
         {
-            u.extptr.m_ptr = ptr;
+            m_ptr = ptr;
         }
 
         /** @brief Set the 'tag' value.
@@ -152,7 +152,7 @@ namespace CXXR
          */
         void setTag(RObject *tag)
         {
-            u.extptr.m_tag.retarget(this, tag);
+            m_tag.retarget(this, tag);
         }
 
         /** @brief Get const pointer to tag object.
@@ -161,7 +161,7 @@ namespace CXXR
          */
         const RObject *tag() const
         {
-            return u.extptr.m_tag;
+            return m_tag;
         }
 
         /** @brief Get pointer to tag object.
@@ -170,11 +170,16 @@ namespace CXXR
          */
         RObject *tag()
         {
-            return u.extptr.m_tag;
+            return m_tag;
         }
 
         // Virtual function of RObject:
         const char *typeName() const override;
+
+    public:
+        void *m_ptr;
+        GCEdge<> m_tag;
+        GCEdge<> m_protege;
 
     protected:
         // Virtual functions of GCNode:
@@ -195,9 +200,9 @@ namespace CXXR
         explicit ExternalPointer(void *ptr, SEXP prot, SEXP tag)
             : RObject(EXTPTRSXP)
         {
-            u.extptr.m_ptr = ptr;
-            u.extptr.m_protege = prot;
-            u.extptr.m_tag = tag;
+            m_ptr = ptr;
+            m_protege = prot;
+            m_tag = tag;
         }
 
         // Declared private to ensure that ExternalPointer objects are

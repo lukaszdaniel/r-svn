@@ -120,20 +120,6 @@ namespace CXXR
         GCEdge<> m_expression;
     };
 
-    struct altrep_struct
-    {
-        GCEdge<> m_data1;
-        GCEdge<> m_data2;
-        GCEdge<> m_altclass;
-    };
-
-    struct extptr_struct
-    {
-        void *m_ptr;
-        GCEdge<> m_protege;
-        GCEdge<> m_tag;
-    };
-
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -480,8 +466,6 @@ namespace CXXR
             struct closxp_struct closxp;
             struct promsxp_struct promsxp;
             struct bytecode_struct bytecode;
-            struct altrep_struct altrep;
-            struct extptr_struct extptr;
             U()
             {
             }

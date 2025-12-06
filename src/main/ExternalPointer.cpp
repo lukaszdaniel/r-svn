@@ -55,17 +55,17 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        u.extptr.m_ptr = NULL;
-        u.extptr.m_protege.detach();
-        u.extptr.m_tag.detach();
+        m_ptr = NULL;
+        m_protege.detach();
+        m_tag.detach();
         RObject::detachReferents();
     }
 
     void ExternalPointer::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *extptr_prot = u.extptr.m_protege;
-        const GCNode *extptr_tag = u.extptr.m_tag;
+        const GCNode *extptr_prot = m_protege;
+        const GCNode *extptr_tag = m_tag;
 
         if (extptr_prot != R_NilValue)
             (*v)(extptr_prot);

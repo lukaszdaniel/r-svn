@@ -82,6 +82,11 @@ namespace CXXR
         // Virtual functions of RObject:
         const char *typeName() const override;
 
+    public:
+    GCEdge<> m_data1;
+    GCEdge<> m_data2;
+    GCEdge<> m_altclass;
+
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
@@ -99,9 +104,9 @@ namespace CXXR
             : RObject(LISTSXP)
         {
             sxpinfo.alt = true;
-            u.altrep.m_data1 = cr;
-            u.altrep.m_data2 = tl;
-            u.altrep.m_altclass = tg;
+            m_data1 = cr;
+            m_data2 = tl;
+            m_altclass = tg;
         }
 
         // Declared private to ensure that AltRep objects are

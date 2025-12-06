@@ -352,9 +352,9 @@ namespace R {
 #define VECTOR_PTR_RO(x)((const SEXP *) DATAPTR_RO(x))
 
 /* External Pointer Access Macros */
-#define EXTPTR_PROT(x)	((x)->u.extptr.m_protege)
-#define EXTPTR_TAG(x)	((x)->u.extptr.m_tag)
-#define EXTPTR_PTR(e)	((e)->u.extptr.m_ptr)
+#define EXTPTR_PROT(x)	(static_cast<CXXR::ExternalPointer *>(x)->m_protege)
+#define EXTPTR_TAG(x)	(static_cast<CXXR::ExternalPointer *>(x)->m_tag)
+#define EXTPTR_PTR(e)	(static_cast<CXXR::ExternalPointer *>(e)->m_ptr)
 
 /* Weak Reference Access Macros */
 #define WEAKREF_KEY(w) (static_cast<CXXR::WeakRef *>(w)->m_key)
@@ -452,9 +452,9 @@ union R_bndval_t {
 #define EXPR(x)	((x)->u.bytecode.m_expression)
 
 /* AltRep Access Macros */
-#define DATA1(x)	((x)->u.altrep.m_data1)
-#define DATA2(x)	((x)->u.altrep.m_data2)
-#define CLASS(x)	((x)->u.altrep.m_altclass)
+#define DATA1(x)	(static_cast<CXXR::AltRep *>(x)->m_data1)
+#define DATA2(x)	(static_cast<CXXR::AltRep *>(x)->m_data2)
+#define CLASS(x)	(static_cast<CXXR::AltRep *>(x)->m_altclass)
 
 /* Closure Access Macros */
 #define FORMALS(x)	((x)->u.closxp.m_formals)

@@ -63,18 +63,18 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        u.altrep.m_altclass.detach();
-        u.altrep.m_data1.detach();
-        u.altrep.m_data2.detach();
+        m_altclass.detach();
+        m_data1.detach();
+        m_data2.detach();
         RObject::detachReferents();
     }
 
     void AltRep::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *altclass = u.altrep.m_altclass;
-        const GCNode *altdata1 = u.altrep.m_data1;
-        const GCNode *altdata2 = u.altrep.m_data2;
+        const GCNode *altclass = m_altclass;
+        const GCNode *altdata1 = m_data1;
+        const GCNode *altdata2 = m_data2;
 
         if (altclass != R_NilValue)
             (*v)(altclass);
