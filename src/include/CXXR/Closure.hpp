@@ -55,7 +55,7 @@ namespace CXXR
          */
         RObject *formals() const
         {
-            return u.closxp.m_formals;
+            return m_formals;
         }
 
         /** @brief Access the body of the Closure.
@@ -64,7 +64,7 @@ namespace CXXR
          */
         const RObject *body() const
         {
-            return u.closxp.m_body;
+            return m_body;
         }
 
         /** @brief Access the environment of the Closure.
@@ -73,7 +73,7 @@ namespace CXXR
          */
         RObject *environment() const
         {
-            return u.closxp.m_env;
+            return m_env;
         }
 
         /** @brief Replace the environment of the closure.
@@ -84,7 +84,7 @@ namespace CXXR
          */
         void setEnvironment(RObject *new_env)
         {
-            u.closxp.m_env.retarget(this, new_env);
+            m_env.retarget(this, new_env);
         }
 
         /** @brief Replace the formals of the closure.
@@ -94,7 +94,7 @@ namespace CXXR
          */
         void setFormals(RObject *formals)
         {
-            u.closxp.m_formals.retarget(this, formals);
+            m_formals.retarget(this, formals);
         }
 
         /** @brief Replace the body of the closure.
@@ -103,7 +103,7 @@ namespace CXXR
          */
         void setBody(RObject *body)
         {
-            u.closxp.m_body.retarget(this, body);
+            m_body.retarget(this, body);
         }
 
         /** @brief Is an RObject a Closure?
@@ -187,6 +187,11 @@ namespace CXXR
             void startDebugging() const;
             void endDebugging() const;
         };
+
+    public:
+        GCEdge<> m_formals;
+        GCEdge<> m_body;
+        GCEdge<> m_env;
 
     protected:
         // Virtual functions of GCNode:

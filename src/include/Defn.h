@@ -457,9 +457,9 @@ union R_bndval_t {
 #define CLASS(x)	(static_cast<CXXR::AltRep *>(x)->m_altclass)
 
 /* Closure Access Macros */
-#define FORMALS(x)	((x)->u.closxp.m_formals)
-#define BODY(x)		((x)->u.closxp.m_body)
-#define CLOENV(x)	((x)->u.closxp.m_env)
+#define FORMALS(x)	(static_cast<CXXR::Closure *>(x)->m_formals)
+#define BODY(x)		(static_cast<CXXR::Closure *>(x)->m_body)
+#define CLOENV(x)	(static_cast<CXXR::Closure *>(x)->m_env)
 #define RDEBUG(x)	((x)->sxpinfo.debug)
 #define SET_RDEBUG(x,v)	(((x)->sxpinfo.debug)=(v))
 #define RSTEP(x)	((x)->sxpinfo.m_rstep)
@@ -1046,9 +1046,9 @@ enum EvaluationStatus
 #define PRIMINTERNAL(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].eval)%100)/10)
 
 /* Promise Access Macros */
-#define PRCODE(x)	((x)->u.promsxp.m_expr)
-#define PRENV(x)	((x)->u.promsxp.m_env)
-#define PRVALUE0(x) ((x)->u.promsxp.m_value)
+#define PRCODE(x)	(static_cast<CXXR::Promise *>(x)->m_expr)
+#define PRENV(x)	(static_cast<CXXR::Promise *>(x)->m_env)
+#define PRVALUE0(x) (static_cast<CXXR::Promise *>(x)->m_value)
 #define PRSEEN(x)	((x)->sxpinfo.gp)
 #define SET_PRSEEN(x,v)	(((x)->sxpinfo.gp)=(v))
 #ifdef IMMEDIATE_PROMISE_VALUES
