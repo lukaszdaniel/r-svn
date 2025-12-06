@@ -447,9 +447,9 @@ union R_bndval_t {
 #endif
 
 /* ByteCode Access Macros */
-#define CODE0(x)	((x)->u.bytecode.m_code)
-#define CONSTS(x)	((x)->u.bytecode.m_constants)
-#define EXPR(x)	((x)->u.bytecode.m_expression)
+#define CODE0(x)	(static_cast<CXXR::ByteCode *>(x)->m_code)
+#define CONSTS(x)	(static_cast<CXXR::ByteCode *>(x)->m_constants)
+#define EXPR(x)	(static_cast<CXXR::ByteCode *>(x)->m_expression)
 
 /* AltRep Access Macros */
 #define DATA1(x)	(static_cast<CXXR::AltRep *>(x)->m_data1)
@@ -1035,15 +1035,15 @@ enum EvaluationStatus
  */
 
 /* Primitive Access Macros */
-#define PRIMOFFSET(x)	((x)->u.primsxp.m_offset)
-#define SET_PRIMOFFSET(x,v)	(((x)->u.primsxp.m_offset)=(v))
-#define PRIMFUN(x)	(R_FunTab[(x)->u.primsxp.m_offset].cfun)
-#define PRIMNAME(x)	(R_FunTab[(x)->u.primsxp.m_offset].name)
-#define PRIMVAL(x)	(R_FunTab[(x)->u.primsxp.m_offset].code)
-#define PRIMARITY(x)	(R_FunTab[(x)->u.primsxp.m_offset].arity)
-#define PPINFO(x)	(R_FunTab[(x)->u.primsxp.m_offset].gram)
-#define PRIMPRINT(x)	(((R_FunTab[(x)->u.primsxp.m_offset].eval)/100)%10)
-#define PRIMINTERNAL(x)	(((R_FunTab[(x)->u.primsxp.m_offset].eval)%100)/10)
+#define PRIMOFFSET(x)	(static_cast<CXXR::BuiltInFunction *>(x)->m_offset)
+#define SET_PRIMOFFSET(x,v)	((static_cast<CXXR::BuiltInFunction *>(x)->m_offset)=(v))
+#define PRIMFUN(x)	(R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].cfun)
+#define PRIMNAME(x)	(R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].name)
+#define PRIMVAL(x)	(R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].code)
+#define PRIMARITY(x)	(R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].arity)
+#define PPINFO(x)	(R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].gram)
+#define PRIMPRINT(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].eval)/100)%10)
+#define PRIMINTERNAL(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].eval)%100)/10)
 
 /* Promise Access Macros */
 #define PRCODE(x)	((x)->u.promsxp.m_expr)

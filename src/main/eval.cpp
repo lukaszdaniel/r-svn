@@ -1173,10 +1173,10 @@ namespace
         }
         if (TYPEOF(op) == SPECIALSXP) {
             size_t save = R_PPStackTop;
-            int flag = PRIMPRINT(op);
+            int flag = PRIMPRINT(op.get());
             CXXR::RAllocStack::Scope rscope;
             Evaluator::enableResultPrinting(flag != 1);
-            tmp = PRIMFUN(op) (e, op, (CDR)(e), rho);
+            tmp = PRIMFUN(op.get()) (e, op, (CDR)(e), rho);
 #ifdef CHECK_VISIBILITY
             if (flag < 2 && Evaluator::resultPrinted() == flag) {
                 const char *nm = PRIMNAME(op);
@@ -1192,22 +1192,22 @@ namespace
         }
         else if (TYPEOF(op) == BUILTINSXP) {
             size_t save = R_PPStackTop;
-            int flag = PRIMPRINT(op);
+            int flag = PRIMPRINT(op.get());
             CXXR::RAllocStack::Scope rscope;
-            tmp = evalList(CDR(e), rho, e, 0);
+            tmp = evalList((CDR)(e), rho, e, 0);
             if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
             /* We used to insert a context only if profiling,
                but helps for tracebacks on .C etc. */
-            if (Evaluator::profiling() || (PPINFO(op).kind == PP_FOREIGN)) {
+            if (Evaluator::profiling() || (PPINFO(op.get()).kind == PP_FOREIGN)) {
                 SEXP oldref = R_Srcref;
                 RCNTXT cntxt(CTXT_BUILTIN, e, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
                 R_Srcref = NULL;
-                tmp = PRIMFUN(op) (e, op, tmp, rho);
+                tmp = PRIMFUN(op.get()) (e, op, tmp, rho);
                 R_Srcref = oldref;
                 endcontext(&cntxt);
             }
             else {
-                tmp = PRIMFUN(op) (e, op, tmp, rho);
+                tmp = PRIMFUN(op.get()) (e, op, tmp, rho);
             }
 #ifdef CHECK_VISIBILITY
             if (flag < 2 && Evaluator::resultPrinted() == flag) {
@@ -2475,27 +2475,27 @@ SEXP R_forceAndCall(SEXP expr, int n, SEXP rho)
 	fun = eval(CAR(e), rho);
 
     if (TYPEOF(fun) == SPECIALSXP) {
-	int flag = PRIMPRINT(fun);
+	int flag = PRIMPRINT(fun.get());
 	Evaluator::enableResultPrinting(flag != 1);
-	tmp = PRIMFUN(fun) (e, fun, (CDR)(e), rho);
+	tmp = PRIMFUN(fun.get()) (e, fun, (CDR)(e), rho);
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
     }
     else if (TYPEOF(fun) == BUILTINSXP) {
-	int flag = PRIMPRINT(fun);
+	int flag = PRIMPRINT(fun.get());
 	tmp = evalList((CDR)(e), rho, e, 0);
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
 	/* We used to insert a context only if profiling,
 	   but helps for tracebacks on .C etc. */
-	if (Evaluator::profiling() || (PPINFO(fun).kind == PP_FOREIGN)) {
+	if (Evaluator::profiling() || (PPINFO(fun.get()).kind == PP_FOREIGN)) {
 	    SEXP oldref = R_Srcref;
 	    RCNTXT cntxt(CTXT_BUILTIN, e,
 			 R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
 	    R_Srcref = NULL;
-	    tmp = PRIMFUN(fun) (e, fun, tmp, rho);
+	    tmp = PRIMFUN(fun.get()) (e, fun, tmp, rho);
 	    R_Srcref = oldref;
 	    endcontext(&cntxt);
 	} else {
-	    tmp = PRIMFUN(fun) (e, fun, tmp, rho);
+	    tmp = PRIMFUN(fun.get()) (e, fun, tmp, rho);
 	}
 	if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
     }

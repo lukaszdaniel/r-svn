@@ -171,12 +171,13 @@ namespace CXXR
         static std::vector<FUNTAB> s_R_FunTab;
 #define R_FunTab CXXR::BuiltInFunction::s_R_FunTab
 
+    public:
+        size_t m_offset;
+
     private:
         BuiltInFunction(bool is_special): FunctionBase(is_special ? SPECIALSXP : BUILTINSXP)
         {
-            u.primsxp.m_offset = 0;
-            u.primsxp.m_dummy1 = nullptr;
-            u.primsxp.m_dummy2 = nullptr;
+            m_offset = 0;
         }
 
         // Declared private to ensure that BuiltInFunction objects are

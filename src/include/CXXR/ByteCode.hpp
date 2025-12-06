@@ -62,21 +62,21 @@ namespace CXXR
          */
         RObject *code() const
         {
-            return u.bytecode.m_code;
+            return m_code;
         }
 
         /** @brief Not for general use.
          */
         RObject *constants() const
         {
-            return u.bytecode.m_constants;
+            return m_constants;
         }
 
         /** @brief Not for general use.
          */
         RObject *expression() const
         {
-            return u.bytecode.m_expression;
+            return m_expression;
         }
 
         /** @brief The name by which this type is known in R.
@@ -166,6 +166,11 @@ namespace CXXR
         void visitReferents(const_visitor *v) const override;
         void detachReferents() override;
 
+    public:
+        GCEdge<> m_code;
+        GCEdge<> m_constants;
+        GCEdge<> m_expression;
+
     private:
         static bool s_bytecode_disabled;
 
@@ -179,9 +184,9 @@ namespace CXXR
         explicit ByteCode(SEXP code, SEXP constants)
             : RObject(BCODESXP)
         {
-            u.bytecode.m_code = code;
-            u.bytecode.m_constants = constants;
-            u.bytecode.m_expression = R_NilValue;
+            m_code = code;
+            m_constants = constants;
+            m_expression = R_NilValue;
         }
 
         // Declared private to ensure that ByteCode objects are

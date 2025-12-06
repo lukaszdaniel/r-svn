@@ -70,18 +70,18 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        u.bytecode.m_code.detach();
-        u.bytecode.m_constants.detach();
-        u.bytecode.m_expression.detach();
+        m_code.detach();
+        m_constants.detach();
+        m_expression.detach();
         RObject::detachReferents();
     }
 
     void ByteCode::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *code0 = u.bytecode.m_code;
-        const GCNode *consts = u.bytecode.m_constants;
-        const GCNode *expr = u.bytecode.m_expression;
+        const GCNode *code0 = m_code;
+        const GCNode *consts = m_constants;
+        const GCNode *expr = m_expression;
 
         if (code0 != R_NilValue)
             (*v)(code0);

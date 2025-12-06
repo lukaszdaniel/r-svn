@@ -71,13 +71,6 @@ namespace CXXR
     class PairList;
     class Symbol;
 
-    struct primsxp_struct
-    {
-        size_t m_offset;
-        void *m_dummy1;
-        void *m_dummy2;
-    };
-
     struct symsxp_struct
     {
         GCEdge<> m_pname;
@@ -111,13 +104,6 @@ namespace CXXR
         GCEdge<> m_value;
         GCEdge<> m_expr;
         GCEdge<> m_env;
-    };
-
-    struct bytecode_struct
-    {
-        GCEdge<> m_code;
-        GCEdge<> m_constants;
-        GCEdge<> m_expression;
     };
 
     /** @brief Replacement for CR's SEXPREC.
@@ -459,13 +445,11 @@ namespace CXXR
 
         union U
         {
-            struct primsxp_struct primsxp;
             struct symsxp_struct symsxp;
             struct listsxp_struct listsxp;
             struct envsxp_struct envsxp;
             struct closxp_struct closxp;
             struct promsxp_struct promsxp;
-            struct bytecode_struct bytecode;
             U()
             {
             }
