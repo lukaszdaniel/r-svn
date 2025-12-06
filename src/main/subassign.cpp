@@ -1553,7 +1553,7 @@ static SEXP listRemove(SEXP x, SEXP s, int ind)
     if (val != R_NilValue) {
 	SET_ATTRIB(val, ATTRIB(x));
 	val->setS4Object(IS_S4_OBJECT(x));
-	SET_OBJECT(val, OBJECT(x));
+	// SET_OBJECT(val, OBJECT(x));
 	RAISE_NAMED(val, NAMED(x));
     }
     UNPROTECT(2);
@@ -2247,7 +2247,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 	    if (val == R_NilValue) {
 		SET_ATTRIB((CDR)(x), ATTRIB(x));
 		if (IS_S4_OBJECT(x)) { SET_S4_OBJECT((CDR)(x)); } else { UNSET_S4_OBJECT((CDR)(x)); }
-		SET_OBJECT((CDR)(x), OBJECT(x));
+		// SET_OBJECT((CDR)(x), OBJECT(x));
 		RAISE_NAMED(CDR(x), NAMED(x));
 		SETCAR(x, R_NilValue); // decrements REFCNT
 		x = (CDR)(x);

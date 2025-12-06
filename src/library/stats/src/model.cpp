@@ -944,7 +944,7 @@ SEXP updateform(SEXP old, SEXP new_)
     /* value, but it can't hurt. */
 
     SET_ATTRIB(_new, R_NilValue);
-    SET_OBJECT(_new, 0);
+    // SET_OBJECT(_new, 0);
     SEXP DotEnvSymbol = install(".Environment");
     setAttrib(_new, DotEnvSymbol, getAttrib(old, DotEnvSymbol));
 

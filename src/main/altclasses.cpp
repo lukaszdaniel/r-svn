@@ -1937,7 +1937,7 @@ static SEXP make_wrapper(SEXP x, SEXP meta)
     if (ATTRIB(x) != R_NilValue) {
 	/* could just move attributes if there are no references to x */
 	SET_ATTRIB(ans, shallow_duplicate(ATTRIB(x)));
-	SET_OBJECT(ans, OBJECT(x));
+	// SET_OBJECT(ans, OBJECT(x));
 	ans->setS4Object(IS_S4_OBJECT(x));
     }
 #endif
@@ -2048,7 +2048,7 @@ attribute_hidden SEXP R::R_tryUnwrap(SEXP x)
 	SEXP data = WRAPPER_WRAPPED(x);
 	if (data && !MAYBE_SHARED(data)) {
 	    SET_ATTRIB(data, ATTRIB(x));
-	    SET_OBJECT(data, OBJECT(x));
+	    // SET_OBJECT(data, OBJECT(x));
 	    data->setS4Object(IS_S4_OBJECT(x));
 
 	    /* Clear the fields to drop reference counts and set the

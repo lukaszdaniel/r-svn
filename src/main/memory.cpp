@@ -2723,7 +2723,9 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
 	      R_typeToChar(v));
 
     CHECK_OLD_TO_NEW(x, v);
-    x->m_attrib.retarget(x, v);
+    // x->m_attrib.retarget(x, v);
+    PairList *pl = SEXP_downcast<PairList *>(v);
+    x->setAttributes(pl);
 }
 void (SET_OBJECT)(SEXP x, int v) { CR_ASSERT(x); SET_OBJECT(CHK(x), v); }
 void (SET_NAMED)(SEXP x, int v)
@@ -2738,19 +2740,20 @@ void (R::SET_RTRACE)(SEXP x, int v) { CR_ASSERT(x); SET_RTRACE(CHK(x), v); }
 void (SETLEVELS)(SEXP x, int v) { CR_ASSERT(x); SETLEVELS(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), duplicate(CHK(ATTRIB(CHK(from)))));
-    SET_OBJECT(CHK(to), OBJECT(from));
+    // SET_OBJECT(CHK(to), OBJECT(from));
     to->setS4Object(IS_S4_OBJECT(from));
 }
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), shallow_duplicate(CHK(ATTRIB(CHK(from)))));
-    SET_OBJECT(CHK(to), OBJECT(from));
+    // SET_OBJECT(CHK(to), OBJECT(from));
     to->setS4Object(IS_S4_OBJECT(from));
 }
 void CLEAR_ATTRIB(SEXP x)
 {
     CR_ASSERT(x);
-    SET_ATTRIB(CHK(x), R_NilValue);
-    SET_OBJECT(x, 0);
+    CHK(x)->clearAttributes();
+    // SET_ATTRIB(CHK(x), R_NilValue);
+    // SET_OBJECT(x, 0);
     UNSET_S4_OBJECT(x);
 }
 

@@ -245,7 +245,7 @@ SEXP do_copyDFattr(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP in = CAR(args), out = CADR(args);
     SET_ATTRIB(out, shallow_duplicate(ATTRIB(in)));
     out->setS4Object(IS_S4_OBJECT(in));
-    SET_OBJECT(out, OBJECT(in));
+    // SET_OBJECT(out, OBJECT(in));
     return out;
 }
 
@@ -420,8 +420,8 @@ static SEXP removeAttrib(SEXP vec, SEXP name)
 	if (name == R_DimSymbol)
 	    SET_ATTRIB(vec, stripAttrib(R_DimNamesSymbol, ATTRIB(vec)));
 	SET_ATTRIB(vec, stripAttrib(name, ATTRIB(vec)));
-	if (name == R_ClassSymbol)
-	    SET_OBJECT(vec, 0);
+	// if (name == R_ClassSymbol)
+	    // SET_OBJECT(vec, 0);
     }
     return R_NilValue;
 }
@@ -541,7 +541,7 @@ SEXP Rf_classgets(SEXP vec, SEXP klass)
 	int ncl = length(klass);
 	if (ncl <= 0) {
 	    SET_ATTRIB(vec, stripAttrib(R_ClassSymbol, ATTRIB(vec)));
-	    SET_OBJECT(vec, 0);
+	    // SET_OBJECT(vec, 0);
 	    // problems when package building:  UNSET_S4_OBJECT(vec);
 	}
 	else {

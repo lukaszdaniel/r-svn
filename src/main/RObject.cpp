@@ -100,7 +100,7 @@ namespace CXXR
     {
         if (m_attrib != R_NilValue)
         {
-            SET_ATTRIB(this, R_NilValue);
+            m_attrib.retarget(this, R_NilValue);
             sxpinfo.obj = 0;
         }
     }
@@ -214,7 +214,7 @@ namespace CXXR
         while (new_attributes && new_attributes != R_NilValue)
         {
             const Symbol *name = SEXP_downcast<const Symbol *>(new_attributes->tag());
-            setAttribute(const_cast<Symbol *>(name), new_attributes->car0());
+            setAttribute(name, new_attributes->car0());
             new_attributes = new_attributes->tail();
         }
 #endif

@@ -701,7 +701,7 @@ static SEXP altrep_UnserializeEX_default(SEXP class_, SEXP state, SEXP attr,
     altrep_methods_t *m = (altrep_methods_t *) CLASS_METHODS_TABLE(class_);
     SEXP val = m->Unserialize(class_, state);
     SET_ATTRIB(val, attr);
-    SET_OBJECT(val, objf);
+    // SET_OBJECT(val, objf);
     SETLEVELS(val, levs);
     return val;
 }
@@ -732,7 +732,7 @@ static SEXP altrep_DuplicateEX_default(SEXP x, Rboolean deep)
 	SEXP attr = ATTRIB(x);
 	if (attr != R_NilValue) {
 	    SET_ATTRIB(ans, deep ? duplicate(attr) : shallow_duplicate(attr));
-	    SET_OBJECT(ans, OBJECT(x));
+	    // SET_OBJECT(ans, OBJECT(x));
 	    ans->setS4Object(IS_S4_OBJECT(x));
 	}
 	else if (ATTRIB(ans) != R_NilValue) {
