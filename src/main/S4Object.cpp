@@ -47,7 +47,7 @@ namespace CXXR
 
     S4Object::S4Object(bool is_s4_object) : RObject(OBJSXP)
     {
-        u.s4ptr.m_tag = R_NilValue;
+        m_tag = R_NilValue;
         if (is_s4_object)
             SET_S4_OBJECT(this);
     }
@@ -61,14 +61,14 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        u.s4ptr.m_tag.detach();
+        m_tag.detach();
         RObject::detachReferents();
     }
 
     void S4Object::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *s4tag = u.s4ptr.m_tag;
+        const GCNode *s4tag = m_tag;
 
         if (s4tag != R_NilValue)
             (*v)(s4tag);

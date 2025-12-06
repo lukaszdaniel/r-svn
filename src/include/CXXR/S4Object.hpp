@@ -59,7 +59,7 @@ namespace CXXR
          */
         const RObject *tag() const
         {
-            return u.s4ptr.m_tag;
+            return m_tag;
         }
 
         /**
@@ -67,7 +67,7 @@ namespace CXXR
          */
         RObject *tag()
         {
-            return u.s4ptr.m_tag;
+            return m_tag;
         }
 
         /** @brief Set the 'tag' value.
@@ -77,7 +77,7 @@ namespace CXXR
          */
         void setS4Tag(RObject *tg)
         {
-            u.s4ptr.m_tag.retarget(this, tg);
+            m_tag.retarget(this, tg);
         }
 
         /** @brief The name by which this type is known in R.
@@ -109,6 +109,9 @@ namespace CXXR
 
         // Virtual functions of RObject:
         const char *typeName() const override;
+
+    public:
+        GCEdge<> m_tag;
 
     protected:
         // Virtual functions of GCNode:

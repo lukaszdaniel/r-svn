@@ -134,13 +134,6 @@ namespace CXXR
         GCEdge<> m_tag;
     };
 
-    struct s4ptr_struct
-    {
-        void *m_car_dummy;
-        void *m_tail_dummy;
-        GCEdge<> m_tag;
-    };
-
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -489,7 +482,6 @@ namespace CXXR
             struct bytecode_struct bytecode;
             struct altrep_struct altrep;
             struct extptr_struct extptr;
-            struct s4ptr_struct s4ptr;
             U()
             {
             }

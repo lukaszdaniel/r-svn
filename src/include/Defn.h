@@ -281,7 +281,7 @@ namespace R {
 
 /* S4 object bit, set by R_do_new_object for all new() calls */
 #define S4_OBJECT_MASK ((unsigned short)(1<<4))
-#define S4TAG(e) ((e)->u.s4ptr.m_tag)
+#define S4TAG(e) (static_cast<CXXR::S4Object *>(e)->m_tag)
 #define IS_S4_OBJECT(x) CXXR_EXPAND2((x), 0, (x)->sxpinfo.gp & S4_OBJECT_MASK)
 #define SET_S4_OBJECT(x) (((x)->sxpinfo.gp) |= S4_OBJECT_MASK)
 #define UNSET_S4_OBJECT(x) (((x)->sxpinfo.gp) &= ~S4_OBJECT_MASK)
