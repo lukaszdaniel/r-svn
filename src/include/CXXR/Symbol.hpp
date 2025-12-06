@@ -137,12 +137,12 @@ namespace CXXR
 
         RObject *value() const
         {
-            return u.symsxp.m_value;
+            return m_value;
         }
 
         RObject *internal() const
         {
-            return u.symsxp.m_internal;
+            return m_internal;
         }
 
         /** @brief Get a pointer to a regular Symbol object.
@@ -240,6 +240,11 @@ namespace CXXR
         // Virtual functions of RObject:
         const char *typeName() const override;
 
+    public:
+        GCEdge<> m_pname;
+        GCEdge<> m_value;
+        GCEdge<> m_internal;
+
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
@@ -248,9 +253,9 @@ namespace CXXR
     private:
         Symbol(SEXP name, SEXP val, SEXP internal): RObject(SYMSXP)
         {
-            u.symsxp.m_pname = name;
-            u.symsxp.m_value = val;
-            u.symsxp.m_internal = internal;
+            m_pname = name;
+            m_value = val;
+            m_internal = internal;
         }
 
         // Declared private to ensure that Symbol objects are

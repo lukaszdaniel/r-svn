@@ -71,25 +71,11 @@ namespace CXXR
     class PairList;
     class Symbol;
 
-    struct symsxp_struct
-    {
-        GCEdge<> m_pname;
-        GCEdge<> m_value;
-        GCEdge<> m_internal;
-    };
-
     struct listsxp_struct
     {
         GCEdge<> m_car;
         GCEdge<> m_tail;
         GCEdge<> m_tag;
-    };
-
-    struct envsxp_struct
-    {
-        GCEdge<> m_frame;
-        GCEdge<> m_enclos;
-        GCEdge<> m_hashtab;
     };
 
     struct closxp_struct
@@ -445,9 +431,7 @@ namespace CXXR
 
         union U
         {
-            struct symsxp_struct symsxp;
             struct listsxp_struct listsxp;
-            struct envsxp_struct envsxp;
             struct closxp_struct closxp;
             struct promsxp_struct promsxp;
             U()

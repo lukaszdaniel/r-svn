@@ -68,7 +68,7 @@ namespace CXXR
 
     const String *Symbol::name() const
     {
-        return static_cast<const String *>(u.symsxp.m_pname.get());
+        return static_cast<const String *>(m_pname.get());
     }
 
     SEXP Symbol::unboundValue()
@@ -85,18 +85,18 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        u.symsxp.m_pname.detach();
-        u.symsxp.m_value.detach();
-        u.symsxp.m_internal.detach();
+        m_pname.detach();
+        m_value.detach();
+        m_internal.detach();
         RObject::detachReferents();
     }
 
     void Symbol::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *printname0 = u.symsxp.m_pname;
-        const GCNode *symvalue = u.symsxp.m_value;
-        const GCNode *internal = u.symsxp.m_internal;
+        const GCNode *printname0 = m_pname;
+        const GCNode *symvalue = m_value;
+        const GCNode *internal = m_internal;
 
         if (printname0 != R_NilValue)
             (*v)(printname0);

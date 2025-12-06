@@ -466,9 +466,9 @@ union R_bndval_t {
 #define SET_RSTEP(x,v)	(((x)->sxpinfo.m_rstep)=(v))
 
 /* Symbol Access Macros */
-#define PRINTNAME(x)	CXXR_EXPAND((x), (x)->u.symsxp.m_pname)
-#define SYMVALUE(x)	((x)->u.symsxp.m_value)
-#define INTERNAL(x)	((x)->u.symsxp.m_internal)
+#define PRINTNAME(x)	CXXR_EXPAND((x), static_cast<CXXR::Symbol *>(x)->m_pname)
+#define SYMVALUE(x)	(static_cast<CXXR::Symbol *>(x)->m_value)
+#define INTERNAL(x)	(static_cast<CXXR::Symbol *>(x)->m_internal)
 #define DDVAL_MASK	1
 #define DDVAL(x)	((x)->sxpinfo.gp & DDVAL_MASK) /* for ..1, ..2 etc */
 #define SET_DDVAL_BIT(x) (((x)->sxpinfo.gp) |= DDVAL_MASK)
@@ -476,9 +476,9 @@ union R_bndval_t {
 #define SET_DDVAL(x,v) if (v) { SET_DDVAL_BIT(x); } else { UNSET_DDVAL_BIT(x); } /* for ..1, ..2 etc */
 
 /* Environment Access Macros */
-#define FRAME(x)	CXXR_EXPAND((x), (x)->u.envsxp.m_frame)
-#define ENCLOS(x)	((x)->u.envsxp.m_enclos)
-#define HASHTAB(x)	CXXR_EXPAND((x), (x)->u.envsxp.m_hashtab)
+#define FRAME(x)	CXXR_EXPAND((x), static_cast<CXXR::Environment *>(x)->m_frame)
+#define ENCLOS(x)	(static_cast<CXXR::Environment *>(x)->m_enclos)
+#define HASHTAB(x)	CXXR_EXPAND((x), static_cast<CXXR::Environment *>(x)->m_hashtab)
 #define ENVFLAGS(x)	((x)->sxpinfo.gp)	/* for environments */
 #define SET_ENVFLAGS(x,v)	(((x)->sxpinfo.gp)=(v))
 #define ENV_RDEBUG(x)	((x)->sxpinfo.debug)

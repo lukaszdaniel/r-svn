@@ -116,18 +116,18 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        u.envsxp.m_frame.detach();
-        u.envsxp.m_enclos.detach();
-        u.envsxp.m_hashtab.detach();
+        m_frame.detach();
+        m_enclos.detach();
+        m_hashtab.detach();
         RObject::detachReferents();
     }
 
     void Environment::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *frame = u.envsxp.m_frame;
-        const GCNode *enclos = u.envsxp.m_enclos;
-        const GCNode *hashtab = u.envsxp.m_hashtab;
+        const GCNode *frame = m_frame;
+        const GCNode *enclos = m_enclos;
+        const GCNode *hashtab = m_hashtab;
 
         if (frame != R_NilValue)
             (*v)(frame);

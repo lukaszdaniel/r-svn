@@ -125,7 +125,7 @@ namespace CXXR
          */
         SEXP enclosingEnvironment() const
         {
-            return u.envsxp.m_enclos;
+            return m_enclos;
         }
 
         /** @brief Access the Environment's Frame.
@@ -134,7 +134,7 @@ namespace CXXR
          */
         SEXP frame()
         {
-            return u.envsxp.m_frame;
+            return m_frame;
         }
 
         /** @brief Access the Environment's Frame (const variant).
@@ -143,7 +143,7 @@ namespace CXXR
          */
         const SEXP frame() const
         {
-            return u.envsxp.m_frame;
+            return m_frame;
         }
 
         /** @brief The name by which this type is known in R.
@@ -164,6 +164,11 @@ namespace CXXR
          */
         NORET static void nullEnvironmentError();
 
+    public:
+        GCEdge<> m_frame;
+        GCEdge<> m_enclos;
+        GCEdge<> m_hashtab;
+
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
@@ -172,9 +177,9 @@ namespace CXXR
     private:
         Environment(SEXP frame, SEXP enclosing_env, SEXP hashtab): RObject(ENVSXP)
         {
-            u.envsxp.m_frame = frame;
-            u.envsxp.m_enclos = enclosing_env;
-            u.envsxp.m_hashtab = hashtab;
+            m_frame = frame;
+            m_enclos = enclosing_env;
+            m_hashtab = hashtab;
         }
 
         // Declared private to ensure that Environment objects are

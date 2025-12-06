@@ -3539,7 +3539,7 @@ SEXP (R::INTERNAL)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); re
 int (R::DDVAL)(SEXP x) { CR_ASSERT(x); CHKSYMSXP(x); return DDVAL(CHK(x)); }
 
 attribute_hidden
-void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.symsxp.m_pname.retarget(x, v); }
+void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Symbol *>(x)->m_pname.retarget(x, v); }
 
 attribute_hidden
 void (R::SET_SYMVALUE)(SEXP x, SEXP v)
@@ -3550,7 +3550,7 @@ void (R::SET_SYMVALUE)(SEXP x, SEXP v)
 	return;
 
     CHECK_OLD_TO_NEW(x, v);
-    (x)->u.symsxp.m_value.retarget2(x, v);
+    static_cast<CXXR::Symbol *>(x)->m_value.retarget2(x, v);
 }
 
 attribute_hidden
@@ -3576,7 +3576,7 @@ int (ENVFLAGS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { CR_ASSERT(x); return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { CR_ASSERT(x); return ENV_RDEBUG(CHK(x)); }
 void (SET_ENV_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_ENV_RDEBUG(CHK(x), v); }
-void (SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.envsxp.m_frame.retarget(x, v); }
+void (SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Environment *>(x)->m_frame.retarget(x, v); }
 
 void (SET_ENCLOS)(SEXP x, SEXP v)
 {
@@ -3595,7 +3595,7 @@ void (SET_ENCLOS)(SEXP x, SEXP v)
     ENCLOS(x).retarget(x, v);
 }
 
-void (SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); x->u.envsxp.m_hashtab.retarget(x, v); }
+void (SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Environment *>(x)->m_hashtab.retarget(x, v); }
 void (SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 
 /* Promise Accessors */
