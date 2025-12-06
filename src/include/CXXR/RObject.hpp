@@ -141,13 +141,6 @@ namespace CXXR
         GCEdge<> m_tag;
     };
 
-    struct weakref_struct
-    {
-        GCEdge<> m_key;
-        GCEdge<> m_value;
-        GCEdge<> m_finalizer;
-    };
-
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -497,12 +490,8 @@ namespace CXXR
             struct altrep_struct altrep;
             struct extptr_struct extptr;
             struct s4ptr_struct s4ptr;
-            struct weakref_struct weakrrefptr;
             U()
             {
-                // listsxp.m_car = nullptr;
-                // listsxp.m_tail = nullptr;
-                // listsxp.m_tag = nullptr;
             }
             ~U() {}
         } u;

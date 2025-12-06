@@ -357,9 +357,9 @@ namespace R {
 #define EXTPTR_PTR(e)	((e)->u.extptr.m_ptr)
 
 /* Weak Reference Access Macros */
-#define WEAKREF_KEY(w) ((w)->u.weakrrefptr.m_key)
-#define WEAKREF_VALUE(w) ((w)->u.weakrrefptr.m_value)
-#define WEAKREF_FINALIZER(w) ((w)->u.weakrrefptr.m_finalizer)
+#define WEAKREF_KEY(w) (static_cast<CXXR::WeakRef *>(w)->m_key)
+#define WEAKREF_VALUE(w) (static_cast<CXXR::WeakRef *>(w)->m_value)
+#define WEAKREF_FINALIZER(w) (static_cast<CXXR::WeakRef *>(w)->m_finalizer)
 void SET_WEAKREF_KEY(SEXP x, SEXP v);
 void SET_WEAKREF_VALUE(SEXP x, SEXP v);
 void SET_WEAKREF_FINALIZER(SEXP x, SEXP v);

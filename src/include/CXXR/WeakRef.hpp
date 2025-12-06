@@ -114,6 +114,11 @@ namespace CXXR
             return "weakref";
         }
 
+    public:
+        GCEdge<> m_key;
+        GCEdge<> m_value;
+        GCEdge<> m_finalizer;
+
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
@@ -122,9 +127,9 @@ namespace CXXR
     private:
         WeakRef(SEXP key, SEXP value, SEXP finalizer): RObject(WEAKREFSXP)
         {
-            u.weakrrefptr.m_key = key;
-            u.weakrrefptr.m_value = value;
-            u.weakrrefptr.m_finalizer = finalizer;
+            m_key = key;
+            m_value = value;
+            m_finalizer = finalizer;
         }
 
         // Declared private to ensure that WeakRef objects are
