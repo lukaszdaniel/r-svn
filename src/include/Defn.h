@@ -457,9 +457,9 @@ union R_bndval_t {
 #define CLASS(x)	(static_cast<CXXR::AltRep *>(x)->m_altclass)
 
 /* Closure Access Macros */
-#define FORMALS(x)	(static_cast<CXXR::Closure *>(x)->m_formals)
-#define BODY(x)		(static_cast<CXXR::Closure *>(x)->m_body)
-#define CLOENV(x)	(static_cast<CXXR::Closure *>(x)->m_env)
+#define FORMALS(x)	((x)->u.closxp.m_formals)
+#define BODY(x)		((x)->u.closxp.m_body)
+#define CLOENV(x)	((x)->u.closxp.m_env)
 #define RDEBUG(x)	((x)->sxpinfo.debug)
 #define SET_RDEBUG(x,v)	(((x)->sxpinfo.debug)=(v))
 #define RSTEP(x)	((x)->sxpinfo.m_rstep)

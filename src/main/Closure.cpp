@@ -73,9 +73,9 @@ namespace CXXR
 
     Closure::Closure(SEXP formal_args, SEXP body, SEXP env) : FunctionBase(CLOSXP)
     {
-        m_formals = formal_args;
-        m_body = body;
-        m_env = env;
+        u.closxp.m_formals = formal_args;
+        u.closxp.m_body = body;
+        u.closxp.m_env = env;
     }
 
     const char *Closure::typeName() const
@@ -87,18 +87,18 @@ namespace CXXR
     {
         if (!this->refCountEnabled())
             return;
-        m_formals.detach();
-        m_body.detach();
-        m_env.detach();
+        u.closxp.m_formals.detach();
+        u.closxp.m_body.detach();
+        u.closxp.m_env.detach();
         FunctionBase::detachReferents();
     }
 
     void Closure::visitReferents(const_visitor *v) const
     {
         FunctionBase::visitReferents(v);
-        const GCNode *formals = m_formals;
-        const GCNode *body = m_body;
-        const GCNode *cloenv = m_env;
+        const GCNode *formals = u.closxp.m_formals;
+        const GCNode *body = u.closxp.m_body;
+        const GCNode *cloenv = u.closxp.m_env;
 
         if (formals != R_NilValue)
             (*v)(formals);

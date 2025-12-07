@@ -78,6 +78,14 @@ namespace CXXR
         GCEdge<> m_tag;
     };
 
+
+    struct closxp_struct
+    {
+        GCEdge<> m_formals;
+        GCEdge<> m_body;
+        GCEdge<> m_env;
+    };
+
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -418,6 +426,7 @@ namespace CXXR
         union U
         {
             struct listsxp_struct listsxp;
+            struct closxp_struct closxp;
             U()
             {
             }

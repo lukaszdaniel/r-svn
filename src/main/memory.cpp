@@ -3510,9 +3510,9 @@ SEXP R_ClosureFormals(SEXP x) { CR_ASSERT(x); return (FORMALS)(x); }
 SEXP R_ClosureBody(SEXP x) { CR_ASSERT(x); return (BODY)(x); }
 SEXP R_ClosureEnv(SEXP x) { CR_ASSERT(x); return (CLOENV)(x); }
 
-void (SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->m_formals.retarget(x, v); }
-void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->m_body.retarget(x, v); }
-void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->m_env.retarget(x, v); }
+void (SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->u.closxp.m_formals.retarget(x, v); }
+void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->u.closxp.m_body.retarget(x, v); }
+void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->u.closxp.m_env.retarget(x, v); }
 void (R::SET_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_RDEBUG(CHK(x), v); }
 attribute_hidden
 void (R::SET_RSTEP)(SEXP x, int v) { CR_ASSERT(x); SET_RSTEP(CHK(x), v); }
