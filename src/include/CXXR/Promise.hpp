@@ -81,7 +81,7 @@ namespace CXXR
          */
         RObject *environment() const
         {
-            return m_env;
+            return u.promsxp.m_env;
         }
 
         /** @brief Force the Promise.
@@ -106,7 +106,7 @@ namespace CXXR
          */
         const RObject *valueGenerator() const
         {
-            return m_expr;
+            return u.promsxp.m_expr;
         }
 
         /** @brief Set value of the Promise.
@@ -124,12 +124,12 @@ namespace CXXR
 
         void setEnvironment(RObject *val)
         {
-            m_env.retarget(this, val);
+            u.promsxp.m_env.retarget(this, val);
         }
 
         void setValueGenerator(RObject *val)
         {
-            m_expr.retarget(this, val);
+            u.promsxp.m_expr.retarget(this, val);
         }
 
         /** @brief The name by which this type is known in R.
@@ -165,11 +165,6 @@ namespace CXXR
         // Virtual function of RObject:
         const char *typeName() const override;
 
-    public:
-        GCEdge<> m_value;
-        GCEdge<> m_expr;
-        GCEdge<> m_env;
-
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
@@ -178,9 +173,9 @@ namespace CXXR
     private:
         Promise(SEXP val, SEXP expr, SEXP env): RObject(PROMSXP)
         {
-            m_value = val;
-            m_expr = expr;
-            m_env = env;
+            u.promsxp.m_value = val;
+            u.promsxp.m_expr = expr;
+            u.promsxp.m_env = env;
         }
 
         // Declared private to ensure that Promise objects are

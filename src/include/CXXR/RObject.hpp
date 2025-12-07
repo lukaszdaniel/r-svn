@@ -78,11 +78,10 @@ namespace CXXR
         GCEdge<> m_tag;
     };
 
-
-    struct closxp_struct
+    struct promsxp_struct
     {
-        GCEdge<> m_formals;
-        GCEdge<> m_body;
+        GCEdge<> m_value;
+        GCEdge<> m_expr;
         GCEdge<> m_env;
     };
 
@@ -426,7 +425,7 @@ namespace CXXR
         union U
         {
             struct listsxp_struct listsxp;
-            struct closxp_struct closxp;
+            struct promsxp_struct promsxp;
             U()
             {
             }
