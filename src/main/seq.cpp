@@ -1213,8 +1213,8 @@ attribute_hidden SEXP do_sequence(SEXP call, SEXP op, SEXP args, SEXP rho)
 	static bool warn_1st = true;
 	if(warn_1st && maybe_warn) {
 	    char msg[99];
-	    snprintf(msg, 99, "length(nvec) %ld < %ld = max(length(from), length(by))",
-		     lengths_len, max_len);
+	    snprintf(msg, 99, "length(nvec) %lld < %lld = max(length(from), length(by))",
+		     (long long int)lengths_len, (long long int)max_len);
 	    warning(_("%s -- future R`s default 'recycle = TRUE' will recycle 'nvec'"), msg);
 	    warn_1st = false;
 	}
