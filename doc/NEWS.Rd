@@ -147,6 +147,11 @@
       convenience and code readability, from an R-devel suggestion, after
       many years of private definitions mostly hidden in packages,
       including in \R's \pkg{tools} package.
+
+      \item The default method of \code{sequence()} gets a new option
+      \code{recycle} to swap between current (not fully recycling) and
+      future behaviour where all three of \code{(nvec, from, by)} are
+      jointly recycled.
     }
   }
 
@@ -196,7 +201,7 @@
 
       Several CRAN packages already require C++20 and have hundreds of
       others depending on them.  (Packages can request C++17 if
-      esssential.)
+      essential.)
     }
   }
 
@@ -415,17 +420,25 @@
       Sepal vs Petal dimensions in its first iris data plot, thanks to
       \I{Jeff Dick}'s post on R-devel.
 
-      \item \code{all.equal(obj, simple, check.class=FALSE)} now is true, also
-      when \code{simple} is a bare atomic vector and \code{obj} has a simple
-      class, fixing the first part of \PR{18971} thanks to \I{Jan Gorecki}.
-
       \item \code{diff(m, lag, dif)} for matrix \code{m} now still returns
       matrices, also when \code{lag * dif > nrow(m)} (\PR{18972}, thanks to
       \I{Mikael Jagan} and \I{Suharto Anggono}).
       \code{diff(<ts-matrix>)} remains matrix, even when it has length zero.
 
-      \item \code{str(x, give.attr=FALSE)} no longer shows attributes when
-      \code{x} is a zero length \code{"Date"} or \code{"POSIXt"} object.
+      \item \code{model.frame(~1, list(), na.action=na.pass)} and similar
+      \dQuote{border-line} uses no longer produce invalid data frames,
+      fixing \PR{18977}, reported with patch by \I{Mikael Jagan}.
+
+      \item Values returned by active binding functions are now marked as
+      not mutable to prevent unintended mutation in complex assignment
+      operations.
+
+      \item The default method of \code{sequence()} now allows to
+      fully recycle all three of \code{(nvec, from, by)} as always
+      documented; with thanks to \I{Mikael Jagan}'s report and patch in
+      \PR{18304}.  Its behaviour remains back compatible for now, but can
+      be switched to future behaviour via enviroment variable
+      \env{R_sequence_recycle}, or explicit \code{recycle = TRUE}.
     }
   }
 }
@@ -434,7 +447,12 @@
 
   \subsection{BUG FIXES}{
     \itemize{
-      \item .
+      \item \code{all.equal(obj, simple, check.class=FALSE)} now is true, also
+      when \code{simple} is a bare atomic vector and \code{obj} has a simple
+      class, fixing the first part of \PR{18971} thanks to \I{Jan Gorecki}.
+
+      \item \code{str(x, give.attr=FALSE)} no longer shows attributes when
+      \code{x} is a zero length \code{"Date"} or \code{"POSIXt"} object.
     }
   }
 }

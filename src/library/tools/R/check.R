@@ -6085,7 +6085,7 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wdeprecated-non-prototype\\]",
                              ## gcc and clang reports on use of #warning
                              ## but not suppressing the warning itself.
-                             "\\[-Wcpp\\] ",
+                             "\\[-Wcpp\\]",
                              "\\[-W#warnings\\]",
                              "\\[-Wrange-loop-construct\\]",
                              "\\[-Warray-parameter=\\]",
@@ -6220,6 +6220,10 @@ add_dummies <- function(dir, Log)
 
                 ## Filter out BH header warnings
                 ex_re <- "BH/include/boost/.*\\[-Wdeprecated-literal-operator\\]"
+                lines <- filtergrep(ex_re, lines, useBytes = TRUE)
+
+                ## Filter out GCC >= 12 C++23 warnings on #warning (clang does not warn)
+                ex_re <- "warning:.*\\[-Wc\\+\\+23-extensions\\]"
                 lines <- filtergrep(ex_re, lines, useBytes = TRUE)
 
                 ## "gcc (even 9) seems not to know the size of pointers, so skip
