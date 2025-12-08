@@ -87,7 +87,7 @@ static char *ifile = NULL;
 
 UImode  CharacterMode = RGui; /* some compilers want initialized for export */
 bool EmitEmbeddedUTF8 = false;
-int ConsoleAcceptCmd;
+bool ConsoleAcceptCmd;
 bool set_workspace_name(const char *fn); /* ../main/startup.c */
 
 /* used to avoid some flashing during cleaning up */

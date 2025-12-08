@@ -6960,7 +6960,7 @@ static R_INLINE SEXP SymbolValue(SEXP sym)
    to .Internals of type BUILTIN. To handle profiling in a way that is
    consistent with this instruction needs to be able to distinguish a
    true BUILTIN from a .Internal. LT */
-#define IS_TRUE_BUILTIN(x) ((R_FunTab[PRIMOFFSET(x)].eval % 100 )/10 == 0)
+#define IS_TRUE_BUILTIN(x) ((R_FunTab[PRIMOFFSET(x)].m_eval % 100 )/10 == 0)
 
 /* rho only needed for _R_CHECK_LENGTH_1_CONDITION_=package:name */
 static R_INLINE bool GETSTACK_LOGICAL_NO_NA_PTR(R_bcstack_t *s, int callidx,

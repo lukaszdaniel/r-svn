@@ -155,7 +155,7 @@ namespace CXXR
             const char *name; /* print name */
             CCODE cfun;       /* c-code address */
             int code;         /* offset within c-code */
-            int eval;         /* evaluate args? */
+            int m_eval;       /* evaluate args? */
             int arity;        /* function arity */
             PPinfo gram;      /* pretty-print info */
             const char *first_arg_name;
@@ -164,7 +164,7 @@ namespace CXXR
                 int flags, int arity, PPinfo ppinfo,
                 const char *first_arg_name = nullptr,
                 enum DispatchType dispatch = DispatchType::NONE)
-                : name(name), cfun(cfun), code(variant), eval(flags), arity(arity), gram(ppinfo),
+                : name(name), cfun(cfun), code(variant), m_eval(flags), arity(arity), gram(ppinfo),
                 first_arg_name(first_arg_name), dispatch_type(dispatch) {}
         };
 

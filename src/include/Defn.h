@@ -1042,8 +1042,8 @@ enum EvaluationStatus
 #define PRIMVAL(x)	(R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].code)
 #define PRIMARITY(x)	(R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].arity)
 #define PPINFO(x)	(R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].gram)
-#define PRIMPRINT(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].eval)/100)%10)
-#define PRIMINTERNAL(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].eval)%100)/10)
+#define PRIMPRINT(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].m_eval)/100)%10)
+#define PRIMINTERNAL(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].m_eval)%100)/10)
 
 /* Promise Access Macros */
 #define PRCODE(x)	((x)->u.promsxp.m_expr)
@@ -1127,8 +1127,8 @@ void (SET_PRIMOFFSET)(SEXP x, int v);
 #define PRIMVAL(x)	(R_FunTab[PRIMOFFSET(x)].code)
 #define PRIMARITY(x)	(R_FunTab[PRIMOFFSET(x)].arity)
 #define PPINFO(x)	(R_FunTab[PRIMOFFSET(x)].gram)
-#define PRIMPRINT(x)	(((R_FunTab[PRIMOFFSET(x)].eval)/100)%10)
-#define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].eval)%100)/10)
+#define PRIMPRINT(x)	(((R_FunTab[PRIMOFFSET(x)].m_eval)/100)%10)
+#define PRIMINTERNAL(x) (((R_FunTab[PRIMOFFSET(x)].m_eval)%100)/10)
 
 
 bool (IS_ACTIVE_BINDING)(SEXP b);
@@ -2240,8 +2240,13 @@ LibExtern size_t	R_PPStackSize	INI_as(R_PPSSIZE); /* The stack size (elements) *
 // R_Interactive is accessed in parallel's fork.c and on Windows in util's stubs.c
 LibExtern bool R_Interactive INI_as(TRUE);	/* TRUE during interactive use*/ // declared in Rinterface.h
 extern bool  R_NoEcho	INI_as(FALSE);	/* do not echo R code */ // declared in Rinterface.h
-extern FILE*	R_Consolefile	INI_as(NULL);	/* Console output file */ // declared in Rinterface.h
-extern FILE*	R_Outputfile	INI_as(NULL);	/* Output file */ // declared in Rinterface.h
+#ifdef __cplusplus
+extern std::FILE *R_Consolefile	INI_as(NULL);	/* Console output file */ // declared in Rinterface.h
+extern std::FILE *R_Outputfile	INI_as(NULL);	/* Output file */ // declared in Rinterface.h
+#else
+extern FILE *R_Consolefile	INI_as(NULL);	/* Console output file */ // declared in Rinterface.h
+extern FILE *R_Outputfile	INI_as(NULL);	/* Output file */ // declared in Rinterface.h
+#endif
 LibExtern char *R_TempDir	INI_as(NULL);	/* Name of per-session dir */ // declared in Rembedded.h
 
 LibExtern bool mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */ // declared in GraphicsDevice.h

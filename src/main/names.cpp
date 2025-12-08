@@ -1076,10 +1076,10 @@ attribute_hidden SEXP R::R_Primitive(const char *primname)
     {
         if (streql(primname, el.name))
         { /* all names are ASCII */
-            if ((el.eval % 100) / 10)
+            if ((el.m_eval % 100) / 10)
                 return R_NilValue; /* it is a .Internal */
             else
-                return mkPRIMSXP(i, el.eval % 10);
+                return mkPRIMSXP(i, el.m_eval % 10);
         }
         ++i;
     }
@@ -1120,8 +1120,8 @@ static void installFunTab()
     {
         Symbol *sym = Symbol::obtain(el.name);
         /* mkPRIMSXP caches its results, thus prim does not need protection */
-        SEXP prim = mkPRIMSXP(i, el.eval % 10);
-        if ((el.eval % 100) / 10)
+        SEXP prim = mkPRIMSXP(i, el.m_eval % 10);
+        if ((el.m_eval % 100) / 10)
         {
             SET_INTERNAL(sym, prim);
         }
