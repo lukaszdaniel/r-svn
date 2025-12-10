@@ -3,7 +3,7 @@ include ../../gnuwin32/MkRules
 
 DEFS = -DWIN32 -DHAVE_CONFIG_H
 
-CPPFLAGS = -I. -I../../include $(DEFS)
+CPPFLAGS = -I. -I../../include -Wall -Werror $(DEFS)
 
 all: libxdr.a
 

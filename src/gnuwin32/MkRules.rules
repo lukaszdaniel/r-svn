@@ -130,7 +130,7 @@ endif
 ## -std=c99 would force __STRICT_ANSI__ disabling strdup etc, and also alloca
 C99FLAG=
 CXXFLAG=-std=c++17 -fpermissive
-WERROR_FLAGS = -Wall -Werror -Wno-error=sign-compare
+WERROR_FLAGS = -Wall -Werror
 
 BINDIR=bin$(R_ARCH)
 

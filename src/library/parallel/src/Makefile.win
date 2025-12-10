@@ -15,7 +15,7 @@ SOURCES_C =
 SOURCES_CXX = init.cpp rngstream.cpp ncpus.cpp
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) ../../../gnuwin32/dllversion.o
-WERROR_FLAGS = -Wall -Werror -Wno-error=sign-compare
+WERROR_FLAGS = -Wall -Werror
 SHLIB = $(pkg).dll
 RESFLAGS = -I $(R_HOME)/include
 

@@ -11,8 +11,9 @@ R_HOME = $(top_builddir)
 
 include $(top_builddir)/Makeconf
 
+WERROR_FLAGS = -Wall -Werror
 XDR_CPPFLAGS = -I$(srcdir)
-ALL_CPPFLAGS = $(XDR_CPPFLAGS) $(R_XTRA_CPPFLAGS) $(CPPFLAGS) $(DEFS)
+ALL_CPPFLAGS = $(XDR_CPPFLAGS) $(R_XTRA_CPPFLAGS) $(CPPFLAGS) $(WERROR_FLAGS) $(DEFS)
 
 SOURCES = xdr.c xdr_float.c xdr_mem.c xdr_stdio.c
 DEPENDS = $(SOURCES:.c=.d)

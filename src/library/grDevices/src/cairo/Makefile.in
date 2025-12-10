@@ -15,8 +15,9 @@ pkg = grDevices
 ## it uses the top-level Makeconf and not etc/Makeconf
 include $(top_builddir)/Makeconf
 
+WERROR_FLAGS = -Wall -Werror
 ## need to find bitmap.h
-ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(CPICFLAGS) @CAIRO_CPPFLAGS@ \
+ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(CPICFLAGS) $(WERROR_FLAGS) @CAIRO_CPPFLAGS@ \
   -I$(top_srcdir)/src/modules/X11 $(CPPFLAGS) $(DEFS)
 ALL_CFLAGS = $(ALL_CFLAGS_LO)
 

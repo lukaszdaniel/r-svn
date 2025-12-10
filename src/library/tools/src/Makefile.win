@@ -17,7 +17,7 @@ SOURCES_CXX = text.cpp init.cpp Rmd5.cpp md5.cpp signals.cpp install.cpp getfmts
 
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o) ../../../gnuwin32/dllversion.o
-WERROR_FLAGS = -Wall -Werror -Wno-error=sign-compare
+WERROR_FLAGS = -Wall -Werror
 SHLIB = $(pkg).dll
 RESFLAGS = -I $(R_HOME)/include
 

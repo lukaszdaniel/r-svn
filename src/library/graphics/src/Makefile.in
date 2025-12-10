@@ -18,7 +18,7 @@ SOURCES_CXX = init.cpp base.cpp graphics.cpp par.cpp plot.cpp plot3d.cpp stem.cp
 
 DEPENDS = $(SOURCES_C:.c=.d) $(SOURCES_CXX:.cpp=.d)
 OBJECTS = $(SOURCES_C:.c=.o) $(SOURCES_CXX:.cpp=.o)
-WERROR_FLAGS = -Wall -Werror -Wno-error=sign-compare
+WERROR_FLAGS = -Wall -Werror
 PKG_CFLAGS = $(C_VISIBILITY)
 
 SHLIB = $(pkg)@SHLIB_EXT@

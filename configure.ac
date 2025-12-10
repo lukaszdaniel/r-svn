@@ -228,7 +228,7 @@ AC_ARG_ENABLE([werror],
 	[AS_HELP_STRING([--enable-werror],
 		[compile src/main with -Wall -Werror @<:@no@:>@])],
 		[if test "${enable_werror}" = "yes";
-		     then WERROR_FLAGS="-Wall -Werror -Wno-error=sign-compare"; fi ], [])
+		     then WERROR_FLAGS="-Wall -Werror"; fi ], [])
 AC_SUBST(WERROR_FLAGS)
 
 ### ** Optional features.
