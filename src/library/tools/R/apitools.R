@@ -20,7 +20,8 @@
 ## Work out the function API from information in WRE
 ##
 
-## WRE data is now installed in system.file(package = "tools", "wre.txt")
+## WRE data is now installed in
+## system.file(package = "tools", "misc", "wre.txt")
 ## WRE(newpath) forces a new load with the new path.
 
 apidata <-
@@ -42,7 +43,8 @@ resetAPI <- function(newloc = "") {
 WRE <- function() {
     if (is.null(apidata$wrelines)) {
         if (is.null(apidata$wreloc)) {
-            apidata$wreloc <- system.file(package = "tools", "wre.txt")
+            apidata$wreloc <-
+                system.file(package = "tools", "misc", "wre.txt")
             if (apidata$wreloc == "")
                 apidata$wreloc <-
                     "https://svn.r-project.org/R/trunk/doc/manual/R-exts.texi"
@@ -62,7 +64,10 @@ getOneFunAPI <- function(apitype) {
     hdrs <- sub(hpat, "", grep(hpat, wrelines, value = TRUE))
     wAPI <- data.frame(name = funs, loc = rep("WRE", length(names)))
     getHdrAPI <- function(hdr) {
-        hfuns <- getFunsHdr(file.path(R.home("include"), hdr))
+        fpath <- file.path(R.home("include"), hdr)
+        if (! file.exists(fpath))
+            return(NULL) ## some headers may not exist on all platforms
+        hfuns <- getFunsHdr(fpath)
         data.frame(name = hfuns, loc = rep(hdr, length(hfuns)))
     }
     hAPI <- lapply(hdrs, getHdrAPI)
