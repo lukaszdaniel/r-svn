@@ -40,6 +40,7 @@ QuartzDesc_t QuartzCocoa_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPar
 #ifdef __OBJC__
 
 #import <Cocoa/Cocoa.h>
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
 typedef struct sQuartzCocoaDevice QuartzCocoaDevice;
 

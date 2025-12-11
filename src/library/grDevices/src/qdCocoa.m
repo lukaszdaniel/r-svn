@@ -262,8 +262,6 @@ static QuartzFunctions_t *qf;
 	return YES;
 }
 
-#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
-
 - (IBAction) saveDocumentAs: (id) sender
 {
 	NSSavePanel *sp = [NSSavePanel savePanel];
