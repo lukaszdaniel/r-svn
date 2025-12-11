@@ -2081,35 +2081,25 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     CGContextSetTextPosition(ctx, x - ax, y - ay);
     /*      Rprintf("%s,%.2f %.2f (%.2f,%.2f) (%d,%f)\n",text,hadj,width,ax,ay,CGFontGetUnitsPerEm(CGContextGetFont(ctx)),CGContextGetFontSize(ctx));       */
     // CGContextShowGlyphsWithAdvances(ctx,glyphs, g_adv, len); // deprecated in 10.9
-    // replacement for CGContextShowGlyphsWithAdvances
-    // Convert CGFontRef to CTFontRef
-    CTFontRef ctfont = CTFontCreateWithGraphicsFont(cgfont,
-                                                    gc->ps * gc->cex * xd->tscale,
-                                                    NULL, NULL);
+    // Convert glyph advances to absolute positions for CTFontDrawGlyphs
+    CGPoint *positions = (CGPoint *) malloc(sizeof(CGPoint) * len);
+    if (!positions) error("%s", _("allocation failure in RQuartz_Text"));
 
-    // Build CoreText run attributes (includes font)
-    const void *keys[] = { kCTFontAttributeName };
-    const void *vals[] = { ctfont };
+    double px = 0, py = 0;
+    for (int i = 0; i < len; i++) {
+        positions[i].x = px;
+        positions[i].y = py;
+        px += g_adv[i].width;
+        py += g_adv[i].height;
+    }
 
-    CFDictionaryRef attrs =
-        CFDictionaryCreate(kCFAllocatorDefault,
-                           keys, vals, 1,
-                           &kCFTypeDictionaryKeyCallBacks,
-                           &kCFTypeDictionaryValueCallBacks);
+    CTFontRef ctFont = CTFontCreateWithGraphicsFont(cgfont,
+                    gc->cex * gc->ps * xd->tscale, NULL, NULL);
 
-    // Create CTRun with your glyphs + advances
-    CTRunRef run = CTRunCreateWithGlyphs(attrs,
-                                         glyphs,
-                                         g_adv,
-                                         len);
+    CTFontDrawGlyphs(ctFont, glyphs, positions, len, ctx);
 
-    // Draw it
-    CTRunDraw(run, ctx, CFRangeMake(0, 0));
-
-    // Cleanup
-    CFRelease(run);
-    CFRelease(attrs);
-    CFRelease(ctfont);
+    CFRelease(ctFont);
+    free(positions);
 
     QuartzEnd(grouping, layer, ctx, savedCTX, xd);
 
