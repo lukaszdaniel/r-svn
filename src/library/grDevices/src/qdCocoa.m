@@ -82,7 +82,7 @@ static QuartzFunctions_t *qf;
     QuartzCocoaDevice *ci = (QuartzCocoaDevice*) info;
     QuartzCocoaView* view = nil;
     NSWindow* window = nil;
-    NSColor* canvasColor = nil;
+    // NSColor* canvasColor = nil;
 
     /* do everything in a try block -- this is not merely theoretical,
        for example NSWindow will throw an exception when the supplied
@@ -262,14 +262,29 @@ static QuartzFunctions_t *qf;
 	return YES;
 }
 
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
+
 - (IBAction) saveDocumentAs: (id) sender
 {
 	NSSavePanel *sp = [NSSavePanel savePanel];
-	[sp setRequiredFileType:@"pdf"];
-	[sp setTitle:@"Save Quartz To PDF File"];
-	int answer = [sp runModalForDirectory:nil file:@"Rplot.pdf"];
-	if(answer == NSModalResponseOK)
-		if (![self writeAsPDF:[sp filename]]) NSBeep();
+
+    // Replacement for setRequiredFileType:
+    sp.allowedContentTypes = @[ UTTypePDF ];
+
+    sp.title = @"Save Quartz To PDF File";
+
+    // Replacement for runModalForDirectory:file:
+    sp.directoryURL = nil; // same as old `nil` for directory
+    sp.nameFieldStringValue = @"Rplot.pdf";
+
+    if ([sp runModal] == NSModalResponseOK) {
+        // Replacement for filename:
+        NSString *path = sp.URL.path;
+
+        if (![self writeAsPDF:path]) {
+            NSBeep();
+        }
+    }
 }
 
 - (IBAction) saveDocument: (id) sender
@@ -418,7 +433,7 @@ static int has_sonoma_bug() {
 	if (has_sonoma_bug()) {
 	    static double _q = 0.0;
 	    CGContextSaveGState(ctx);
-	    CGRect cr = { 0.0, 0.0, 1.0, 1.0 };
+	    CGRect cr = { {0.0, 0.0}, {1.0, 1.0} };
 	    CGContextAddRect(ctx, cr);
 	    CGContextSetRGBFillColor(ctx, _q, 1.0, 1.0, 1.0);
 	    _q += 0.1; if (_q > 1.0) _q -= 1.0;
@@ -657,21 +672,11 @@ void QuartzCocoa_SetupEventLoop(int flags, unsigned long latency) {
         el_obj = [[ELThread alloc] init];
         [NSThread detachNewThreadSelector:@selector(eventsThread:) toTarget:el_obj withObject:nil];
     }
-    if (flags&QCF_SET_FRONT) {
-        void CPSEnableForegroundOperation(ProcessSerialNumber* psn);
-        ProcessSerialNumber myProc, frProc;
-        Boolean sameProc;
 
-        if (GetFrontProcess(&frProc) == noErr) {
-            if (GetCurrentProcess(&myProc) == noErr) {
-                if (SameProcess(&frProc, &myProc, &sameProc) == noErr && !sameProc) {
-                    CPSEnableForegroundOperation(&myProc);
-                }
-                SetFrontProcess(&myProc);
-            }
-        }
+    if (flags & QCF_SET_FRONT) {
+        // Modern foreground activation
+        [NSApp activateIgnoringOtherApps:YES];
     }
-
 }
 
 /* set Cocoa event loop latency in ms */
@@ -857,14 +862,29 @@ static void* QuartzCocoa_Cap(QuartzDesc_t dev, void *userInfo) {
 	// make sure the view is up-to-date (fix for PR#14260)
 	[ci->view display];
 
-        if (![ci->view canDraw])
-            warning("View not able to draw!?");
+        // Prepare bitmap rect
+        NSRect rect = NSMakeRect(0, 0, size.width, size.height);
 
-        [ci->view lockFocus];
+        // Allocate RGBA bitmap
         NSBitmapImageRep* rep = [[NSBitmapImageRep alloc] 
-                                    initWithFocusedViewRect:
-                                        NSMakeRect(0, 0, 
-                                                   size.width, size.height)];
+                initWithBitmapDataPlanes:NULL
+                              pixelsWide:size.width
+                              pixelsHigh:size.height
+                           bitsPerSample:8
+                         samplesPerPixel:4
+                                hasAlpha:YES
+                                isPlanar:NO
+                          colorSpaceName:NSCalibratedRGBColorSpace
+                             bytesPerRow:0
+                            bitsPerPixel:0];
+
+        if (!rep) {
+            warning("Unable to allocate bitmap representation");
+            return (void*) raster;
+        }
+
+        // Capture the view into the bitmap (modern macOS API)
+        [ci->view cacheDisplayInRect:rect toBitmapImageRep:rep];
 
 	int bpp = (int) [rep bitsPerPixel];
 	int spp = (int) [rep samplesPerPixel];
@@ -873,6 +893,7 @@ static void* QuartzCocoa_Cap(QuartzDesc_t dev, void *userInfo) {
 	/* we only support meshed (=interleaved) formats of 8 bits/component with 3 or 4 components. We should really check for RGB/RGBA as well.. */
 	if ([rep isPlanar] || [rep bitsPerSample] != 8 || (bf & NSBitmapFormatFloatingPointSamples) || (bpp != 24 && bpp != 32)) {
 	    warning("Unsupported image format");
+            [rep release];
 	    return (void*) raster;
 	}
 
@@ -904,8 +925,6 @@ static void* QuartzCocoa_Cap(QuartzDesc_t dev, void *userInfo) {
         setAttrib(raster, R_DimSymbol, dim);
 
         UNPROTECT(2);
-
-        [ci->view unlockFocus];
     }
 
     return (void *) raster;

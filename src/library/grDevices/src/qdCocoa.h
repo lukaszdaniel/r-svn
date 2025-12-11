@@ -43,7 +43,7 @@ QuartzDesc_t QuartzCocoa_DeviceCreate(void *dd, QuartzFunctions_t *fn, QuartzPar
 
 typedef struct sQuartzCocoaDevice QuartzCocoaDevice;
 
-@interface QuartzCocoaView : NSView
+@interface QuartzCocoaView : NSView <NSWindowDelegate>
 {
 	QuartzCocoaDevice *ci;
 }
