@@ -53,6 +53,48 @@ CGContextRef QuartzBitmap_GetCGContext(QuartzDesc_t dev, void *userInfo)
     return ((QuartzBitmapDevice*) userInfo)->bitmap;
 }
 
+static CFStringRef CFStringCreatePercentEncoded(CFAllocatorRef alloc, CFStringRef original)
+{
+    CFIndex length = CFStringGetLength(original);
+    CFIndex maxSize =
+        CFStringGetMaximumSizeForEncoding(length, kCFStringEncodingUTF8) + 1;
+
+    char *buf = (char *)malloc(maxSize);
+    if (!buf) return NULL;
+
+    if (!CFStringGetCString(original, buf, maxSize, kCFStringEncodingUTF8)) {
+        free(buf);
+        return NULL;
+    }
+
+    // Encode according to RFC 3986: unreserved chars stay unescaped
+    const char *src = buf;
+    std::string out;
+    out.reserve(strlen(buf) * 3);
+
+    auto isUnreserved = [](unsigned char c) {
+        return (isalnum(c) ||
+                c == '-' || c == '.' || c == '_' || c == '~');
+    };
+
+    while (*src) {
+        unsigned char c = (unsigned char)*src;
+        if (isUnreserved(c)) {
+            out.push_back(c);
+        } else {
+            char temp[4];
+            snprintf(temp, sizeof(temp), "%%%02X", c);
+            out.append(temp);
+        }
+        src++;
+    }
+
+    free(buf);
+
+    return CFStringCreateWithCString(alloc, out.c_str(), kCFStringEncodingUTF8);
+}
+
+
 void QuartzBitmap_Output(QuartzDesc_t dev, QuartzBitmapDevice *qbd)
 {
     if(qbd->path && qbd->uti) {
@@ -64,7 +106,10 @@ void QuartzBitmap_Output(QuartzDesc_t dev, QuartzBitmapDevice *qbd)
         CFStringRef pathString = CFStringCreateWithBytes(kCFAllocatorDefault, (UInt8*) buf, strlen(buf), kCFStringEncodingUTF8, FALSE);
         CFURLRef path;
         if(CFStringFind(pathString, CFSTR("://"), 0).location != kCFNotFound) {
-            CFStringRef pathEscaped = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, pathString, NULL, NULL, kCFStringEncodingUTF8);
+            // CFStringRef pathEscaped = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, pathString, NULL, NULL, kCFStringEncodingUTF8); 
+
+            // Custom percent encoder, no deprecated API
+            CFStringRef pathEscaped = CFStringCreatePercentEncoded(kCFAllocatorDefault, pathString);
             path = CFURLCreateWithString(kCFAllocatorDefault, pathEscaped, NULL);
             CFRelease(pathEscaped);
         } else {
@@ -102,7 +147,7 @@ void QuartzBitmap_Output(QuartzDesc_t dev, QuartzBitmapDevice *qbd)
         } else
             warning("%s", _("not a supported scheme, no image data written"));
         CFRelease(scheme);
-       	CFRelease(type);
+        CFRelease(type);
         CFRelease(path);
         CFRelease(image);
 #endif

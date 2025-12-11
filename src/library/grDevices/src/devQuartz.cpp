@@ -2036,7 +2036,7 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     CGLayerRef layer;
 
     /* Not able to add glyphs to the current path. */
-    if (xd->appending) 
+    if (xd->appending)
         return;
 
     bool grouping = QuartzBegin(&ctx, &layer, xd);
@@ -2047,11 +2047,11 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     SET(RQUARTZ_FILL | RQUARTZ_STROKE);
     RQuartz_SetFont(ctx, gc, xd);
     gc->fill = fill;
-    CGFontRef font = CGContextGetFont(ctx);
+    CGFontRef cgfont = CGContextGetFont(ctx);
     float aScale   = (float) ((gc->cex * gc->ps * xd->tscale) /
-			      CGFontGetUnitsPerEm(font));
+			      CGFontGetUnitsPerEm(cgfont));
     UniChar *buffer;
-    CGGlyph   *glyphs;
+    CGGlyph *glyphs;
 
     int Free = 0, len;
     float width = 0.0;
@@ -2060,14 +2060,14 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     len = (int) CFStringGetLength(str);
     glyphs = (CGGlyph *) malloc(sizeof(CGGlyph) * len);
     if (!glyphs) error("%s", _("allocation failure in RQuartz_Text"));
-    CGFontGetGlyphsForUnichars(font, buffer, glyphs, len);
-    int      *advances = (int *) malloc(sizeof(int) * len);
+    CGFontGetGlyphsForUnichars(cgfont, buffer, glyphs, len);
+    int *advances = (int *) malloc(sizeof(int) * len);
     if (!advances) error("%s", _("allocation failure in RQuartz_Text"));
-    CGSize   *g_adv    = (CGSize *) malloc(sizeof(CGSize) * len);
+    CGSize *g_adv = (CGSize *) malloc(sizeof(CGSize) * len);
     if (!g_adv) error("%s", _("allocation failure in RQuartz_Text"));
 
-    CGFontGetGlyphAdvances(font, glyphs, len, advances);
-    for(int i =0 ; i < len; i++) {
+    CGFontGetGlyphAdvances(cgfont, glyphs, len, advances);
+    for (int i = 0; i < len; i++) {
 	width += advances[i] * aScale;
 	g_adv[i] = CGSizeMake(aScale * advances[i] * cos(-DEG2RAD*rot), aScale*advances[i]*sin(-DEG2RAD * rot));
     }
@@ -2080,13 +2080,42 @@ static void RQuartz_Text(double x, double y, const char *text, double rot, doubl
     /*      double h  = CGFontGetXHeight(CGContextGetFont(ctx))*aScale; */
     CGContextSetTextPosition(ctx, x - ax, y - ay);
     /*      Rprintf("%s,%.2f %.2f (%.2f,%.2f) (%d,%f)\n",text,hadj,width,ax,ay,CGFontGetUnitsPerEm(CGContextGetFont(ctx)),CGContextGetFontSize(ctx));       */
-    CGContextShowGlyphsWithAdvances(ctx,glyphs, g_adv, len); // deprecated in 10.9
+    // CGContextShowGlyphsWithAdvances(ctx,glyphs, g_adv, len); // deprecated in 10.9
+    // replacement for CGContextShowGlyphsWithAdvances
+    // Convert CGFontRef to CTFontRef
+    CTFontRef ctfont = CTFontCreateWithGraphicsFont(cgfont,
+                                                    gc->ps * gc->cex * xd->tscale,
+                                                    NULL, NULL);
+
+    // Build CoreText run attributes (includes font)
+    const void *keys[] = { kCTFontAttributeName };
+    const void *vals[] = { ctfont };
+
+    CFDictionaryRef attrs =
+        CFDictionaryCreate(kCFAllocatorDefault,
+                           keys, vals, 1,
+                           &kCFTypeDictionaryKeyCallBacks,
+                           &kCFTypeDictionaryValueCallBacks);
+
+    // Create CTRun with your glyphs + advances
+    CTRunRef run = CTRunCreateWithGlyphs(attrs,
+                                         glyphs,
+                                         g_adv,
+                                         len);
+
+    // Draw it
+    CTRunDraw(run, ctx, CFRangeMake(0, 0));
+
+    // Cleanup
+    CFRelease(run);
+    CFRelease(attrs);
+    CFRelease(ctfont);
 
     QuartzEnd(grouping, layer, ctx, savedCTX, xd);
 
     free(glyphs);
     free(g_adv);
-    if(Free) free(buffer);
+    if (Free) free(buffer);
     CFRelease(str);
 }
 

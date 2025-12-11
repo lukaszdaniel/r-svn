@@ -90,8 +90,8 @@ static QuartzFunctions_t *qf;
     @try {
 	view = [[QuartzCocoaView alloc] initWithFrame: rect andInfo: info];
 	window = [[NSWindow alloc] initWithContentRect: rect
-					     styleMask: NSTitledWindowMask|NSClosableWindowMask|
-				   NSMiniaturizableWindowMask|NSResizableWindowMask//|NSTexturedBackgroundWindowMask
+					     styleMask: NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|
+				   NSWindowStyleMaskMiniaturizable|NSWindowStyleMaskResizable//|NSTexturedBackgroundWindowMask
 					       backing:NSBackingStoreBuffered defer:NO];
 	NSColor *canvasColor = [view canvasColor];
 	[window setBackgroundColor:canvasColor ? canvasColor : [NSColor colorWithCalibratedRed:1.0 green:1.0 blue:1.0 alpha:0.5]];
@@ -268,7 +268,7 @@ static QuartzFunctions_t *qf;
 	[sp setRequiredFileType:@"pdf"];
 	[sp setTitle:@"Save Quartz To PDF File"];
 	int answer = [sp runModalForDirectory:nil file:@"Rplot.pdf"];
-	if(answer == NSOKButton)
+	if(answer == NSModalResponseOK)
 		if (![self writeAsPDF:[sp filename]]) NSBeep();
 }
 
@@ -303,8 +303,8 @@ static QuartzFunctions_t *qf;
     qf->RestoreSnapshot(qd, ss);
     qf->Kill(qd);
     /* the result should be in the data by now */
-    [pb declareTypes: [NSArray arrayWithObjects: NSPDFPboardType, nil ] owner:nil];
-    [pb setData: (NSMutableData*) data forType:NSPDFPboardType];
+    [pb declareTypes: [NSArray arrayWithObjects: NSPasteboardTypePDF, nil ] owner:nil];
+    [pb setData: (NSMutableData*) data forType:NSPasteboardTypePDF];
     CFRelease(data);
 }
 
@@ -314,8 +314,8 @@ static QuartzFunctions_t *qf;
     NSPrintOperation *printOp;
 
     printInfo = [[NSPrintInfo alloc] initWithDictionary: [[NSPrintInfo sharedPrintInfo] dictionary]];
-    [printInfo setHorizontalPagination: NSFitPagination];
-    [printInfo setVerticalPagination: NSAutoPagination];
+    [printInfo setHorizontalPagination: NSPrintingPaginationModeFit];
+    [printInfo setVerticalPagination: NSPrintingPaginationModeAutomatic];
     [printInfo setVerticallyCentered:NO];
 
     ci->pdfMode = YES;
@@ -351,7 +351,7 @@ static int has_sonoma_bug() {
 - (void)drawRect:(NSRect)aRect
 {
     CGRect rect;
-    CGContextRef ctx = [[NSGraphicsContext currentContext] graphicsPort];
+    CGContextRef ctx = [[NSGraphicsContext currentContext] CGContext];
     /* we have to retain our copy, because we may need to create a layer
        based on the context in NewPage outside of drawRect: */
     if (ci->context != ctx) {
@@ -439,7 +439,7 @@ static int has_sonoma_bug() {
         ci->locator[0] = pt.x;
         ci->locator[1] = pt.y;
         /* Note: we still use menuForEvent:  because no other events than left click get here ..*/
-        if (mf&(NSControlKeyMask|NSRightMouseDownMask|NSOtherMouseDownMask))
+        if (mf&(NSEventModifierFlagControl|NSEventMaskRightMouseDown|NSEventMaskOtherMouseDown))
             ci->locator[0] = -1.0;
         ci->inLocator = NO;
     }
@@ -596,7 +596,7 @@ static void cocoa_process_events() {
        via R_ProcessEvents and the R code calls it too often */
     if (!R_isForkedChild && !el_inhibit && el_serial != el_pe_serial) {
         NSEvent *event;
-        while ((event = [NSApp nextEventMatchingMask:NSAnyEventMask
+        while ((event = [NSApp nextEventMatchingMask:NSEventMaskAny
                                           untilDate:nil
                                              inMode:NSDefaultRunLoopMode 
                                             dequeue:YES]))
@@ -781,7 +781,7 @@ static int QuartzCocoa_Locator(QuartzDesc_t dev, void* userInfo, double *x, doub
     [[ci->view window] invalidateCursorRectsForView: ci->view];
 
     while (ci->inLocator && !ci->closing) {
-        NSEvent *event = [NSApp nextEventMatchingMask:NSAnyEventMask
+        NSEvent *event = [NSApp nextEventMatchingMask:NSEventMaskAny
                                             untilDate:[NSDate dateWithTimeIntervalSinceNow:0.2]
                                                inMode:NSDefaultRunLoopMode 
                                               dequeue:YES];
@@ -871,7 +871,7 @@ static void* QuartzCocoa_Cap(QuartzDesc_t dev, void *userInfo) {
 	NSBitmapFormat bf = [rep bitmapFormat];
 	/* Rprintf("format: bpp=%d, bf=0x%x, bps=%d, spp=%d, planar=%s, colorspace=%s\n", bpp, (int) bf, [rep bitsPerSample], spp, [rep isPlanar] ? "YES" : "NO", [[rep colorSpaceName] UTF8String]); */
 	/* we only support meshed (=interleaved) formats of 8 bits/component with 3 or 4 components. We should really check for RGB/RGBA as well.. */
-	if ([rep isPlanar] || [rep bitsPerSample] != 8 || (bf & NSFloatingPointSamplesBitmapFormat) || (bpp != 24 && bpp != 32)) {
+	if ([rep isPlanar] || [rep bitsPerSample] != 8 || (bf & NSBitmapFormatFloatingPointSamples) || (bpp != 24 && bpp != 32)) {
 	    warning("Unsupported image format");
 	    return (void*) raster;
 	}
@@ -886,7 +886,7 @@ static void* QuartzCocoa_Cap(QuartzDesc_t dev, void *userInfo) {
         rint = (unsigned int *) INTEGER(raster);
 	stride = (bpp == 24) ? 3 : 4; /* convers bpp to stride in bytes */
 
-	if (bf & NSAlphaFirstBitmapFormat) /* ARGB */
+	if (bf & NSBitmapFormatAlphaFirst) /* ARGB */
 	    for (i = 0; i < pixels; i++, j += stride)
 		rint[i] = R_RGBA(screenData[j + 1], screenData[j + 2], screenData[j + 3], screenData[j]);
 	else if (spp == 4) /* RGBA */

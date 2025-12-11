@@ -2423,7 +2423,7 @@ static void applyFontVar(cairo_font_face_t *cairo_face,
                                    R_GE_glyphFontVarAxis(font, i),
                                    R_GE_glyphFontVarValue(font, i));
                 if (written < 0 || written > 1024 - offset) {
-                    warning(_("Font variations too long"));
+                    warning("%s", _("Font variations too long"));
                     i = numVar;
                 } else {
                     offset = offset + written - 1;
@@ -2446,7 +2446,7 @@ static void applyFontVar(cairo_font_face_t *cairo_face,
                                    format,
                                    R_GE_glyphFontVarFormatted(font, i));
                 if (written < 0 || written > 1024 - offset) {
-                    warning(_("Font variations too long"));
+                    warning("%s", _("Font variations too long"));
                     i = numVar;
                 } else {
                     offset = offset + written;
@@ -2466,7 +2466,7 @@ static void applyFontVar(cairo_font_face_t *cairo_face,
         } 
     }
     if (!success) {
-        warning(_("Failed to apply font variations"));
+        warning("%s", _("Failed to apply font variations"));
     }
 #else
     warning("%s", _("Variable fonts not supported (requires Cairo >= 1.16.0)"));
@@ -2505,7 +2505,7 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
                                         R_GE_glyphFontFile(font),
                                         FC_INDEX, FcTypeInteger, 
                                         R_GE_glyphFontIndex(font),
-                                        NULL);
+                                        (void*)0);
     cairo_face = cairo_ft_font_face_create_for_pattern(pattern);
     FcPatternDestroy(pattern);
 #endif
