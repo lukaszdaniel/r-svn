@@ -34,6 +34,8 @@
 # include <config.h>
 #endif
 
+#define USE_BASE_R_SUPPORT // for R_gc_running(), WrongArgCount()
+
 #include <string>
 #include <cmath>
 #include <cerrno>

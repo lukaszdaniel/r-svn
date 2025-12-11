@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2024-12-21 r87453) -- "Unsuffered Consequences"
-Copyright (C) 2024 The R Foundation for Statistical Computing
+R Under development (unstable) (2025-12-11 r89141) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -7000,10 +7000,10 @@ Asserted error: no method found for function 'show' and signature bar
 > ## corner cases for array
 > # allowed, gave non-array in 2.15.x
 > try(array(1, integer()))
-Error in 'array(1, integer())': 'dims' cannot be of length 0
+Error in array(1, integer()) : 'dim' cannot be of length 0
 > # if no dims, an error to supply dimnames
 > try(array(1, integer(), list(1, 2)))
-Error in 'array(1, integer(), list(1, 2))': 'dims' cannot be of length 0
+Error in array(1, integer(), list(1, 2)) : 'dim' cannot be of length 0
 > ##
 > 
 > 
@@ -7150,8 +7150,8 @@ g(y)(x)
 > str(d)
 'data.frame':	3 obs. of  3 variables:
  $ A      : int  1 2 3
- $ Bº  : Factor w/ 1 level "B": 1 1 1
- $ C«cd: num  4 4 4
+ $ Bï¿½  : Factor w/ 1 level "B": 1 1 1
+ $ Cï¿½cd: num  4 4 4
 > ## gave an error in R <= 3.0.0
 > 
 > 

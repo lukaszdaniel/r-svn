@@ -448,6 +448,13 @@
       \item Subassignment, \code{x[ind] <- val}, to 1-dimensional
       \code{array}s no longer \dQuote{drops} them to simple vectors when
       \code{ind} is a name, fixing \PR{18973}, reported by \I{Thomas Soeiro}.
+
+      \item The implicitGeneric definition for \code{toeplitz()} produced a
+      default method that failed when \code{toeplitz(x, r)} was called with
+      more than the first argument.  Simple fix from \I{Mikael Jagan}.
+
+      \item The error message for \code{array(dim = c())} now uses
+      \code{"'dim'"}, thanks to \I{Hugo Gruson}.
     }
   }
 }

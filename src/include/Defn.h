@@ -52,6 +52,9 @@
 #error Defn.h can only be included in C++ files
 #endif
 
+// enable some non-API declarations in R_ext includes
+#define USE_BASE_R_SUPPORT
+
 #include <CXXR/config.hpp>
 
 #include <vector>

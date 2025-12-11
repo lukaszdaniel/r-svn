@@ -28,6 +28,8 @@
  * Error and warning handling.
  */
 
+#define USE_BASE_R_SUPPORT // for WrongArgCount()
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif

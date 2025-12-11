@@ -32,6 +32,8 @@
 #include <config.h>
 #endif
 
+#define USE_BASE_R_SUPPORT // for R_pretty()
+
 #include <memory>
 #include <vector>
 #include <array>

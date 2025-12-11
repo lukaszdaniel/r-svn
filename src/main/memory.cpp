@@ -40,6 +40,7 @@
 
 #define USE_RINTERNALS
 #define COMPILING_MEMORY_C
+#define USE_BASE_R_SUPPORT // for R_gc_running()
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>

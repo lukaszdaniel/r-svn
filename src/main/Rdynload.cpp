@@ -90,6 +90,8 @@
 #include <config.h>
 #endif
 
+#define USE_BASE_R_SUPPORT
+
 #include <Localization.h>
 #include <memory>
 #include <cstring>
