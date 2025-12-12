@@ -104,7 +104,8 @@ typedef struct
 #ifdef Win32
     char *rhome;               /* R_HOME */
     char *home;                /* HOME  */
-
+#undef ReadConsole // wincon.h defines these macros
+#undef WriteConsole
     int (*ReadConsole) (const char *, unsigned char *, int, int);
     void (*WriteConsole) (const char *, int);
     void (*CallBack) (void);   /* ProcessEvents under Unix */
