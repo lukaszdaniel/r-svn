@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-10-22 r88964) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-12-11 r89149) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -95,28 +95,28 @@ $status
 [1] 0
 
 $stdout
- [1] ""                                                                                 
- [2] "R Under development (unstable) (2025-10-22 r88964) -- \"Unsuffered Consequences\""
- [3] "Copyright (C) 2025 The R Foundation for Statistical Computing"                    
- [4] "Platform: x86_64-pc-linux-gnu"                                                    
- [5] ""                                                                                 
- [6] "R is free software and comes with ABSOLUTELY NO WARRANTY."                        
- [7] "You are welcome to redistribute it under certain conditions."                     
- [8] "Type 'license()' or 'licence()' for distribution details."                        
- [9] ""                                                                                 
-[10] "R is a collaborative project with many contributors."                             
-[11] "Type 'contributors()' for more information and"                                   
-[12] "'citation()' on how to cite R or R packages in publications."                     
-[13] ""                                                                                 
-[14] "Type 'demo()' for some demos, 'help()' for on-line help, or"                      
-[15] "'help.start()' for an HTML browser interface to help."                            
-[16] "Type 'q()' to quit R."                                                            
-[17] ""                                                                                 
-[18] "> x <- readRDS(\"/tmp/RtmpjrnqE8/runri2309077fd2bc56\")"                          
-[19] "> options(repos = x$repos)"                                                       
-[20] "> y <- tryCatch(list(do.call(x$fun, x$args, quote = TRUE)), error = identity)"    
-[21] "> saveRDS(y, \"/tmp/RtmpjrnqE8/runro230907d287351\")"                             
-[22] "> "                                                                               
+ [1] ""                                                                               
+ [2] "R Under development (unstable) (2025-12-11 r89149) -- \"Unsuffered Consequences\""
+ [3] "Copyright (C) 2025 The R Foundation for Statistical Computing"                  
+ [4] "Platform: x86_64-pc-linux-gnu"                                                  
+ [5] ""                                                                               
+ [6] "R is free software and comes with ABSOLUTELY NO WARRANTY."                      
+ [7] "You are welcome to redistribute it under certain conditions."                   
+ [8] "Type 'license()' or 'licence()' for distribution details."                      
+ [9] ""                                                                               
+[10] "R is a collaborative project with many contributors."                           
+[11] "Type 'contributors()' for more information and"                                 
+[12] "'citation()' on how to cite R or R packages in publications."                   
+[13] ""                                                                               
+[14] "Type 'demo()' for some demos, 'help()' for on-line help, or"                    
+[15] "'help.start()' for an HTML browser interface to help."                          
+[16] "Type 'q()' to quit R."                                                          
+[17] ""                                                                               
+[18] "> x <- readRDS(\"/tmp/Rtmp8pRmBl/runri401951a8146e\")"                          
+[19] "> options(repos = x$repos)"                                                     
+[20] "> y <- tryCatch(list(do.call(x$fun, x$args, quote = TRUE)), error = identity)"  
+[21] "> saveRDS(y, \"/tmp/Rtmp8pRmBl/runro40194d632f1\")"                             
+[22] "> "                                                                             
 
 $stderr
 character(0)
@@ -279,7 +279,7 @@ Error in 'assertWarning(ff())':
 > bibstyle("unsorted", sortKeys = function(refs) seq_along(refs),
 +     fmtPrefix = function(paper) paste0("[", paper$.index, "]"),
 +        .init = TRUE)
-<environment: 0x55a759bc34c8>
+<environment: 0x57d6d9020360>
 > print(refs, .bibstyle = "unsorted")
 [1] R Core Team (2013). _R: A Language and Environment for Statistical
 Computing_. R Foundation for Statistical Computing, Vienna, Austria.
@@ -1034,7 +1034,7 @@ character(0)
 > ### ** Examples
 > 
 > as.vector(md5sum(dir(R.home(), pattern = "^COPY", full.names = TRUE)))
-[1] "eb723b61539feef013de476e68b5c50a"
+[1] "12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 > md5sum(bytes=raw())
 [1] "d41d8cd98f00b204e9800998ecf8427e"
 > md5sum(bytes=charToRaw("abc"))
@@ -1208,7 +1208,7 @@ function (x, ...)
 > ### ** Examples
 > 
 > as.vector(sha256sum(dir(R.home(), pattern = "^COPY", full.names = TRUE)))
-[1] "e6d6a009505e345fe949e1310334fcb0747f28dae2856759de102ab66b722cb4"
+[1] "b499eddebda05a8859e32b820a64577d91f1de2b52efa2a1575a2cb4000bc259"
 > sha256sum(bytes=raw())
 [1] "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 > sha256sum(bytes=charToRaw("abc"))
@@ -1453,11 +1453,11 @@ An illustration of lexical scoping.
 > ### ** Examples
 > ## IGNORE_RDIFF_BEGIN
 > R_user_dir("FOO", "cache")
-[1] "/home/hornik/.cache/R/FOO"
+[1] "/home/monia/.cache/R/FOO"
 > 
 > ## Create one, platform agnostically, must work if <normal> :
 > (Rdb <- R_user_dir("base"))
-[1] "/home/hornik/.local/share/R/base"
+[1] "/home/monia/.local/share/R/base"
 > if(newD <- !dir.exists(Rdb)) # should work user specifically:
 +     newD <- dir.create(Rdb, recursive=TRUE)
 > dir(Rdb) # typically empty
@@ -1591,34 +1591,44 @@ List of 5
 
 msgid        = too small
 command      = stop("too small")
+line         = 0
 
 msgid        = too small
 command      = stop("too small")
+line         = 0
 
 msgid        = sqrt(x) is
 command      = sqrt(as.complex(x))
+line         = , which may be too small
 
 msgid        = errorCondition(gettext("needs Deep Thought"), class = "myError")
 command      = stop(errorCondition(gettext("needs Deep Thought"), class = "myError"))
+line         = 0
 > xgettext(tmpPkg, asCall=FALSE)[[1]] # doesn't ; but then ' %.2f '
 
 msgid        = too small
 command      = stop("too small")
+line         = 0
 
 msgid        = too small
 command      = stop("too small")
+line         = 0
 
 msgid        = sqrt(x) is
 command      = warning("sqrt(x) is", sqrt(as.complex(x)), ", which may be too small")
+line         = 0
 
 msgid        = , which may be too small
 command      = warning("sqrt(x) is", sqrt(as.complex(x)), ", which may be too small")
+line         = 0
 
 msgid        = %.2f
 command      = gettextf("%.2f", x)
+line         = 0
 
 msgid        = needs Deep Thought
 command      = gettext("needs Deep Thought")
+line         = 0
 > 
 > unlink(tmpRDir, recursive=TRUE)
 > 
@@ -1629,7 +1639,7 @@ command      = gettext("needs Deep Thought")
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.338 0.018 0.748 0.284 0.109 
+Time elapsed:  0.385 0.008 0.766 0.293 0.076 
 > grDevices::dev.off()
 null device 
           1 

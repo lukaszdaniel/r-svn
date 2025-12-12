@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2024-03-14 r86129) -- "Unsuffered Consequences"
-Copyright (C) 2024 The R Foundation for Statistical Computing
+R Under development (unstable) (2025-12-12 r89159) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -166,11 +166,11 @@ List of 11
 [1] "2022-01-01 14:00:00 UTC"
 > strptime("2022-01-01 +1500", "%Y-%m-%d %z", tz = "UTC")
 Warning in 'strptime("2022-01-01 +1500", "%Y-%m-%d %z", tz = "UTC")':
-  values for %z outside +/-1400 are an error
+  values for %%z outside +/-1400 are an error
 [1] NA
 > strptime("2022-01-01 -1500", "%Y-%m-%d %z", tz = "UTC")
 Warning in 'strptime("2022-01-01 -1500", "%Y-%m-%d %z", tz = "UTC")':
-  values for %z outside +/-1400 are an error
+  values for %%z outside +/-1400 are an error
 [1] NA
 > 
 > 

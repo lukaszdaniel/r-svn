@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-12-07 r89119) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-12-11 r89149) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -434,14 +434,14 @@ NaN NaN NaN
 > stopifnot(is.na(A_b))
 > ## IGNORE_RDIFF_BEGIN
 > A_b
-        11       12
-a NaN+NaNi NaN+NaNi
-b NaN+NaNi NaN+NaNi
-c NaN+NaNi NaN+NaNi
+        11 12
+a NaN+NaNi NA
+b NaN+NaNi NA
+c NaN+NaNi NA
 > rbind(re = Re(A_b[,2]), im = Im(A_b[,2])) # often was "all NA", now typically "re=NA, im=NaN"
-     a   b   c
-re NaN NaN NaN
-im NaN NaN NaN
+    a  b  c
+re NA NA NA
+im NA NA NA
 > ## IGNORE_RDIFF_END
 > 
 > 
@@ -452,16 +452,16 @@ im NaN NaN NaN
 > chT <- withCallingHandlers(warning = function(w) ..W <<- conditionMessage(w),
 +                 chol(x, pivot = TRUE )) # dpstrf  - warning
 Warning message:
-In chol.default(x, pivot = TRUE) :
+In 'chol.default(x, pivot = TRUE)':
   the matrix is either rank-deficient or not positive definite
 > ## IGNORE_RDIFF_BEGIN
 > chT  # matrix typically == x + pivot and rank (checked below)
      [,1] [,2] [,3] [,4] [,5]
-[1,]   -1    0    0    0    0
-[2,]    0   -1    0    0    0
-[3,]    0    0   -1    0    0
-[4,]    0    0    0   -1    0
-[5,]    0    0    0    0   -1
+[1,]    0    0    0    0    0
+[2,]    0    0    0    0    0
+[3,]    0    0    0    0    0
+[4,]    0    0    0    0    0
+[5,]    0    0    0    0    0
 attr(,"pivot")
 [1] 1 2 3 4 5
 attr(,"rank")
