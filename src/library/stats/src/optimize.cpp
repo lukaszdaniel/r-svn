@@ -23,6 +23,8 @@
 #include <config.h>
 #endif
 
+#define USE_BASE_R_SUPPORT // for fdhess()
+
 #include <CXXR/ProtectStack.hpp>
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */

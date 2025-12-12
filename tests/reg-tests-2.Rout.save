@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2025-12-11 r89141) -- "Unsuffered Consequences"
+R Under development (unstable) (2025-12-11 r89149) -- "Unsuffered Consequences"
 Copyright (C) 2025 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -6393,7 +6393,7 @@ function(given = NULL) {
     if (is.null(given)) callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x63cc28088ec0>
+<bytecode: 0x55f1d4c89840>
 > print(foo, useSource = FALSE)
 function (given = NULL) 
 {
@@ -6404,7 +6404,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x63cc28088ec0>
+<bytecode: 0x55f1d4c89840>
 > attr(foo, "srcref") <- NULL
 > foo
 function (given = NULL) 
@@ -6416,7 +6416,7 @@ function (given = NULL)
         callObj$default <- TRUE
     callObj
 }
-<bytecode: 0x63cc28088ec0>
+<bytecode: 0x55f1d4c89840>
 > (f <- structure(function(){}, note = "just a note",
 +                 yada = function() "not the same"))
 function(){}
@@ -7000,10 +7000,10 @@ Asserted error: no method found for function 'show' and signature bar
 > ## corner cases for array
 > # allowed, gave non-array in 2.15.x
 > try(array(1, integer()))
-Error in array(1, integer()) : 'dim' cannot be of length 0
+Error in 'array(1, integer())': 'dim' cannot be of length 0
 > # if no dims, an error to supply dimnames
 > try(array(1, integer(), list(1, 2)))
-Error in array(1, integer(), list(1, 2)) : 'dim' cannot be of length 0
+Error in 'array(1, integer(), list(1, 2))': 'dim' cannot be of length 0
 > ##
 > 
 > 
@@ -7150,8 +7150,8 @@ g(y)(x)
 > str(d)
 'data.frame':	3 obs. of  3 variables:
  $ A      : int  1 2 3
- $ Bï¿½  : Factor w/ 1 level "B": 1 1 1
- $ Cï¿½cd: num  4 4 4
+ $ Bº  : Factor w/ 1 level "B": 1 1 1
+ $ C«cd: num  4 4 4
 > ## gave an error in R <= 3.0.0
 > 
 > 
@@ -8369,7 +8369,7 @@ Error in 'f()': argument is missing, with no default
 >     withAutoprint({ show.srcref() })
  language show.srcref()
  - attr(*, "srcref")= 'srcref' int [1:8] 1 21 1 33 21 33 3 3
-  ..- attr(*, "srcfile")=Classes 'srcfilealias', 'srcfile' <environment: 0x63cc27d2ecc0> 
+  ..- attr(*, "srcfile")=Classes 'srcfilealias', 'srcfile' <environment: 0x55f1d272dde0> 
 > ## no   attr(*, "src..")   in R <= 4.3.1
 > ##
 > withAutoprint({
@@ -8382,5 +8382,5 @@ Error in 'f()': argument is missing, with no default
 > 
 > # ----- Last line -------------
 > cat('Time elapsed: ', proc.time(),'\n')
-Time elapsed:  2.783 0.116 2.898 0 0.002 
+Time elapsed:  1.558 0.059 1.631 0.001 0.003 
 > 

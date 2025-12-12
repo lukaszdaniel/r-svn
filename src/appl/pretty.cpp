@@ -40,6 +40,8 @@
  * since this enables exact floating point division.
  */
 
+#define USE_BASE_R_SUPPORT // for R_pretty()
+
 #ifdef HAVE_CONFIG_H
 #include <config.h>
 #endif
