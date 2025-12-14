@@ -291,7 +291,7 @@ namespace CXXR
          */
         void setTag(RObject *tg)
         {
-            u.listsxp.m_tag.retarget(this, tg);
+            m_tag.retarget(this, tg);
         }
 
         /** @brief Set the 'tail' value.
@@ -338,7 +338,7 @@ namespace CXXR
          */
         const RObject *tag() const
         {
-            return u.listsxp.m_tag;
+            return m_tag;
         }
 
         /** @brief Get the 'tag' value.
@@ -347,7 +347,7 @@ namespace CXXR
          */
         RObject *tag()
         {
-            return u.listsxp.m_tag;
+            return m_tag;
         }
 
         /** @brief Get the 'tail' value.
@@ -374,6 +374,10 @@ namespace CXXR
          */
         void setAssignmentPending(bool on);
 
+    public:
+        GCEdge<> m_tail;
+        GCEdge<> m_tag;
+
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
@@ -395,11 +399,9 @@ namespace CXXR
         ConsCell(SEXPTYPE stype, SEXP cr, SEXP tl, SEXP tg): RObject(stype)
         {
             u.listsxp.m_car.reset();
-            u.listsxp.m_tail.reset();
-            u.listsxp.m_tag.reset();
             u.listsxp.m_car = cr;
-            u.listsxp.m_tail = tl;
-            u.listsxp.m_tag = tg;
+            m_tail = tl;
+            m_tag = tg;
         }
 
         // Declared protected to ensure that ConsCell objects are

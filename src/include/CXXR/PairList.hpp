@@ -189,7 +189,7 @@ namespace CXXR
 
     inline void ConsCell::setTail(RObject *tl)
     {
-        u.listsxp.m_tail.retarget(this, tl);
+        m_tail.retarget(this, tl);
     }
 
     template <class T = PairList>

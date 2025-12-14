@@ -369,9 +369,9 @@ void SET_WEAKREF_FINALIZER(SEXP x, SEXP v);
 
 /* List Access Macros */
 /* These also work for ... objects */
-#define TAG(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_tag)
+#define TAG(e)		CXXR_EXPAND((e), static_cast<CXXR::ConsCell *>(e)->m_tag)
 #define CAR0(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_car)
-#define CDR(e)		CXXR_EXPAND((e), (e)->u.listsxp.m_tail)
+#define CDR(e)		CXXR_EXPAND((e), static_cast<CXXR::ConsCell *>(e)->m_tail)
 #define CAAR(e)		CAR(CAR(e))
 #define CDAR(e)		CDR(CAR(e))
 #define CADR(e)		CAR(CDR(e))
@@ -1049,8 +1049,8 @@ enum EvaluationStatus
 #define PRIMINTERNAL(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].m_eval)%100)/10)
 
 /* Promise Access Macros */
-#define PRCODE(x)	((x)->u.promsxp.m_expr)
-#define PRENV(x)	((x)->u.promsxp.m_env)
+#define PRCODE(x)	(static_cast<CXXR::Promise *>(x)->m_expr)
+#define PRENV(x)	(static_cast<CXXR::Promise *>(x)->m_env)
 #define PRVALUE0(x) ((x)->u.promsxp.m_value)
 #define PRSEEN(x)	((x)->sxpinfo.gp)
 #define SET_PRSEEN(x,v)	(((x)->sxpinfo.gp)=(v))

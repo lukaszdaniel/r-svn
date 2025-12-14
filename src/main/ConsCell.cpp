@@ -63,12 +63,12 @@ namespace CXXR
 
     const PairList *ConsCell::tail() const
     {
-        return SEXP_downcast<const PairList *>(u.listsxp.m_tail.get());
+        return SEXP_downcast<const PairList *>(m_tail.get());
     }
 
     PairList *ConsCell::tail()
     {
-        return SEXP_downcast<PairList *>(u.listsxp.m_tail.get());
+        return SEXP_downcast<PairList *>(m_tail.get());
     }
 
     bool ConsCell::assignmentPending() const
@@ -87,8 +87,8 @@ namespace CXXR
             return;
         if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
             u.listsxp.m_car.detach();
-        u.listsxp.m_tail.detach();
-        u.listsxp.m_tag.detach();
+        m_tail.detach();
+        m_tag.detach();
         RObject::detachReferents();
     }
 
@@ -96,8 +96,8 @@ namespace CXXR
     {
         RObject::visitReferents(v);
         const GCNode *car = R_NilValue;
-        const GCNode *cdr = u.listsxp.m_tail;
-        const GCNode *tag = u.listsxp.m_tag;
+        const GCNode *cdr = m_tail;
+        const GCNode *tag = m_tag;
         if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
             car = u.listsxp.m_car;
 

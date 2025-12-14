@@ -74,15 +74,11 @@ namespace CXXR
     struct listsxp_struct
     {
         GCEdge<> m_car;
-        GCEdge<> m_tail;
-        GCEdge<> m_tag;
     };
 
     struct promsxp_struct
     {
         GCEdge<> m_value;
-        GCEdge<> m_expr;
-        GCEdge<> m_env;
     };
 
     /** @brief Replacement for CR's SEXPREC.
