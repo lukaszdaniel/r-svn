@@ -271,13 +271,13 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     argList =  matchArgs_NR(do_retracemem_formals, args, call);
     if (CAR(argList) == R_MissingArg) SETCAR(argList, R_NilValue);
-    if (CADR(argList) == R_MissingArg) SETCAR(CDR(argList), R_NilValue);
+    if (CADR(argList.get()) == R_MissingArg) SETCAR(CDR(argList.get()), R_NilValue);
 
     object = CAR(argList);
     if (Rf_isFunction(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
-    previous = CADR(argList);
+    previous = CADR(argList.get());
     if (!isNull(previous) && (!isString(previous) || LENGTH(previous) != 1))
 	    errorcall(call, _("invalid '%s' argument"), "previous");
 
