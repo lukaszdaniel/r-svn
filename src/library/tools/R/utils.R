@@ -617,19 +617,19 @@ function(year)
 ### ** .R_top_srcdir
 
 ## Find the root directory of the source tree used for building this
-## version of R (corresponding to Unix configure @top_srcdir@).
-## Seems this is not recorded anywhere, but we can find our way ...
+## version of R (corresponding to Unix configure @abs_top_srcdir@).
 
-.R_top_srcdir_from_Rd <-
-function() {
-    attr(readRDS(system.file("help", "paths.rds", package = "tools")),
-         "top")
-}
+.R_top_srcdir_file_path <-
+    system.file("misc", "top.txt", package = "tools")
 
-## Unfortunately,
-##   .R_top_srcdir <- .R_top_srcdir_from_Rd()
-## does not work because when tools is installed there are no Rd pages
-## yet ...
+.R_top_srcdir_default <-
+    if(nzchar(.R_top_srcdir_file_path)) {
+        readLines(.R_top_srcdir_file_path)
+    } else ""
+
+.R_top_srcdir <-
+function()
+    Sys.getenv("_R_TOP_SRCDIR_", .R_top_srcdir_default)
 
 ### ** config_val_to_logical
 
@@ -1501,7 +1501,7 @@ function()
 function(texi = NULL)
 {
     if(is.null(texi))
-        texi <- file.path(.R_top_srcdir_from_Rd(),
+        texi <- file.path(.R_top_srcdir(),
                           "doc", "manual", "R-exts.texi")
     lines <- readLines(texi)
     re <- "^@c DESCRIPTION field "

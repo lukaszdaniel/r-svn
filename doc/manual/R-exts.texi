@@ -4834,9 +4834,10 @@ specification is available at
 @uref{https://pubs.opengroup.org/onlinepubs/9699919799/utilities/make.html};
 anything not documented there should be regarded as an extension to be
 avoided.  Further advice can be found at
-@uref{https://www.gnu.org/software/autoconf/manual/autoconf.html#Portable-Make}.                                )
+@uref{https://www.gnu.org/software/autoconf/manual/autoconf.html#Portable-Make}.
+)
 Commonly misused GNU extensions are conditional inclusions (@code{ifeq}
-and the like), @code{$@{shell ...@}}, @code{$@{wildcard ...@}} and
+and the like), @code{export} directives, @code{$@{shell ...@}}, @code{$@{wildcard ...@}} and
 similar, and the use of @code{+=}@footnote{This was apparently
 introduced in @I{SunOS} 4, and is available elsewhere @emph{provided} it is
 surrounded by spaces.} and @code{:=}.  Also, the use of @code{$<} other
@@ -10099,7 +10100,7 @@ It can be helpful to install debug symbols (@command{INSTALL --dsym} for
 the package under test and particularly for reverse dependencies.
 @c https://stackoverflow.com/questions/64126942/malloc-nano-zone-abandoned-due-to-inability-to-preallocate-reserved-vm-space
 
-For more deatail on using sanitizers with macOS see
+For more detail on using sanitizers with macOS see
 @uref{https://www.stats.ox.ac.uk/pub/bdr/M1-SAN/README.txt}.
 
 @c 1-item menu: kept to avoid spurious warning from makeinfo 6.8/7.0
@@ -10309,7 +10310,7 @@ or using  @env{LD_LIBRARY_PATH}). @strong{N.B.}: The details, especially
 the paths used, have changed several times recently.
 
 Apple provides a version of the undefined behaviour sanitizer in recent
-versions of its C/C++ compiler.  For more deatail on using sanitizers
+versions of its C/C++ compiler.  For more detail on using sanitizers
 with macOS see
 @uref{https://www.stats.ox.ac.uk/pub/bdr/M1-SAN/README.txt}.
 
@@ -17441,8 +17442,6 @@ above (no longer maintained)
 @item @file{Rembedded.h} @tab for add-on front-ends
 @item @file{R_ext/Applic.h} @tab optimization, integration and some LAPACK ones)
 @item @file{R_ext/BLAS.h} @tab C definitions for BLAS routines
-@item @file{R_ext/Callbacks.h} @tab C (and R function) top-level task
-handlers
 @item @file{R_ext/GetX11Image.h} @tab X11Image interface used by package
 @pkg{trkplot}
 @item @file{R_ext/Lapack.h} @tab C definitions for some LAPACK routines
