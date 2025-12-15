@@ -777,8 +777,7 @@ static bool getccol(DEstruct DE)
     len = INTEGER(DE->lens)[wcol - 1];
     type = TYPEOF(tmp);
     if (len < wrow) {
-	for (newlen = max(len * 2, 10) ; newlen < wrow ; newlen *= 2)
-	    ;
+	for (newlen = max(len * 2, 10) ; newlen < wrow ; newlen *= 2) {}
 	tmp2 = ssNewVector(DE, type, newlen);
 	for (int i = 0; i < len; i++)
 	    if (type == REALSXP)
@@ -813,7 +812,7 @@ static SEXP processEscapes(SEXP x)
     replacement = mkString("\\1\\\\\"");
     SEXP s_gsub = install("gsub");
     expr = lang5(s_gsub, ScalarLogical(1), pattern, replacement, x);
-    SET_TAG( CDR(expr), install("perl") );
+    SET_TAG( CDR(expr.get()), install("perl") );
 
     newval = R_tryEval(expr, R_BaseEnv, NULL);
     if (!newval) {
@@ -827,7 +826,7 @@ static SEXP processEscapes(SEXP x)
     if (!newval) {
 	return R_NilValue;
     }
-    expr = R_ParseVector( newval, 1, &status, R_NilValue);
+    expr = R_ParseVector(newval, 1, &status, R_NilValue);
 
     /* We only handle the first entry. If this were available more generally,
        we'd probably want to loop over all of expr */
