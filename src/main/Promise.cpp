@@ -103,7 +103,7 @@ namespace CXXR
             return;
         if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
             u.promsxp.m_value.detach();
-        m_expr.detach();
+        u.promsxp.m_expr.detach();
         m_env.detach();
         RObject::detachReferents();
     }
@@ -112,7 +112,7 @@ namespace CXXR
     {
         RObject::visitReferents(v);
         const GCNode *prvalue = R_NilValue;
-        const GCNode *prcode = m_expr;
+        const GCNode *prcode = u.promsxp.m_expr;
         const GCNode *prenv = m_env;
         if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
             prvalue = u.promsxp.m_value;

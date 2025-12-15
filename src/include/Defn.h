@@ -1049,7 +1049,7 @@ enum EvaluationStatus
 #define PRIMINTERNAL(x)	(((R_FunTab[static_cast<CXXR::BuiltInFunction *>(x)->m_offset].m_eval)%100)/10)
 
 /* Promise Access Macros */
-#define PRCODE(x)	(static_cast<CXXR::Promise *>(x)->m_expr)
+#define PRCODE(x)	((x)->u.promsxp.m_expr)
 #define PRENV(x)	(static_cast<CXXR::Promise *>(x)->m_env)
 #define PRVALUE0(x) ((x)->u.promsxp.m_value)
 #define PRSEEN(x)	((x)->sxpinfo.gp)

@@ -106,7 +106,7 @@ namespace CXXR
          */
         const RObject *valueGenerator() const
         {
-            return m_expr;
+            return u.promsxp.m_expr;
         }
 
         /** @brief Set value of the Promise.
@@ -129,7 +129,7 @@ namespace CXXR
 
         void setValueGenerator(RObject *val)
         {
-            m_expr.retarget(this, val);
+            u.promsxp.m_expr.retarget(this, val);
         }
 
         /** @brief The name by which this type is known in R.
@@ -166,7 +166,7 @@ namespace CXXR
         const char *typeName() const override;
 
     public:
-        GCEdge<> m_expr;
+        // GCEdge<> m_expr;
         GCEdge<> m_env;
 
     protected:
@@ -178,7 +178,7 @@ namespace CXXR
         Promise(SEXP val, SEXP expr, SEXP env): RObject(PROMSXP)
         {
             u.promsxp.m_value = val;
-            m_expr = expr;
+            u.promsxp.m_expr = expr;
             m_env = env;
         }
 

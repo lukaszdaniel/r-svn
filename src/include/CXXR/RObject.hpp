@@ -79,6 +79,7 @@ namespace CXXR
     struct promsxp_struct
     {
         GCEdge<> m_value;
+        GCEdge<> m_expr;
     };
 
     /** @brief Replacement for CR's SEXPREC.

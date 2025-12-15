@@ -371,7 +371,7 @@ SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	rval = StringVector::create(i);
 	for (j = (i - 1); j >= 0; j--) {
 	    SET_STRING_ELT(rval, j, CAR(tlist));
-	    tlist = CDR(tlist);
+	    tlist = CDR(tlist.get());
 	}
 	if (ll) {
 	    SEXP lsym = install("status");
