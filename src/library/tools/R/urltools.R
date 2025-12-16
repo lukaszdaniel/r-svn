@@ -570,9 +570,6 @@ function(db, remote = TRUE, verbose = FALSE, parallel = FALSE, pool = NULL)
                 msg <- "OK"
             }
         }
-        ## A mis-configured site
-        if (s == "503" && any(grepl("www.sciencedirect.com", c(u, newLoc))))
-            s <- "405"
         c(s, msg, newLoc)
     }
 
@@ -739,13 +736,20 @@ function(db, remote = TRUE, verbose = FALSE, parallel = FALSE, pool = NULL)
         }
         results <- do.call(rbind, Map(.check_http, urlspos, headers))
         status <- as.numeric(results[, 1L])
-        ## 405 is HTTP not allowing HEAD requests
+        ## 405 is HTTP not allowing HEAD requests: we re-check with GET
+        ## when using curl ...
         ## maybe also skip 500, 503, 504 as likely to be temporary issues
-        ind <- is.na(match(status, c(200L, 405L, NA))) |
+        ind <- is.na(match(status,
+                           c(200L,
+                             if(!parallel) 405L,
+                             NA_integer_))) |
             nzchar(results[, 3L]) |
             nzchar(results[, 4L]) |
             nzchar(results[, 5L]) |
             nzchar(results[, 6L])
+        if(nzchar(pat <-
+                      Sys.getenv("_R_CHECK_URLS_HTTP_STATUS_IGNORE_REGEXP_")))
+            ind <- ind & !grepl(pat, status)
         if(any(ind)) {
             pos <- pos[ind]
             s <- as.character(status[ind])
@@ -758,27 +762,30 @@ function(db, remote = TRUE, verbose = FALSE, parallel = FALSE, pool = NULL)
                                  results[ind, 4L],
                                  results[ind, 5L],
                                  results[ind, 6L])
-                                 
-            ## omit some typically false positives
-            ## for efficiency reasons two separate false positives tables for 403 and 404:
-            false_pos_db_403 <- c(
-                "^https?://twitter.com/", 
-                "^https?://www.jstor.org/",
-                "^https?://.+\\.wiley.com/", 
-                "^https?://www.science.org/",
-                "^https?://www.researchgate.net/",
-                "^https?://www.tandfonline.com/",
-                "^https?://pubs.acs.org/",
-                "^https?://journals.aom.org/",
-                "^https?://journals.sagepub.com/",
-                "^https?://epubs.siam.org/",
-                "^https?://www.pnas.org/")
-            false_pos_db_404 <- c(                
-                "^https?://finance.yahoo.com/")
-            bad_https <- bad_https[!((grepl(paste(false_pos_db_403, collapse="|"), bad_https$URL) & 
-                                        bad_https$Status == "403") |
-                                     (grepl(paste(false_pos_db_404, collapse="|"), bad_https$URL) & 
-                                        bad_https$Status == "404")), , drop=FALSE]
+
+            ## As of 2025-12, this no longer seems necessary.
+            ## ## omit some typically false positives
+            ## ## for efficiency reasons two separate false positives
+            ## ## tables for 403 and 404:
+            ## false_pos_db_403 <- c(
+            ##     "^https?://twitter.com/", 
+            ##     "^https?://www.jstor.org/",
+            ##     "^https?://.+\\.wiley.com/", 
+            ##     "^https?://www.science.org/",
+            ##     "^https?://www.researchgate.net/",
+            ##     "^https?://www.tandfonline.com/",
+            ##     "^https?://pubs.acs.org/",
+            ##     "^https?://journals.aom.org/",
+            ##     "^https?://journals.sagepub.com/",
+            ##     "^https?://epubs.siam.org/",
+            ##     "^https?://www.pnas.org/")
+            ## false_pos_db_404 <- c(                
+            ##     "^https?://finance.yahoo.com/")
+            ## bad_https <- bad_https[!((grepl(paste(false_pos_db_403, collapse="|"), bad_https$URL) & 
+            ##                             bad_https$Status == "403") |
+            ##                          (grepl(paste(false_pos_db_404, collapse="|"), bad_https$URL) & 
+            ##                             bad_https$Status == "404")), , drop=FALSE]
+
             bad <- rbind(bad, bad_https)
         }
     }
@@ -841,6 +848,23 @@ function(x, ...)
                    lapply(x[-c(1L, 2L)], rep.int, n)))
     rownames(y) <- NULL
     y
+}
+
+.check_url_db_personal_access_tokens <-
+function()
+{
+    pats <- character()
+    file <- Sys.getenv("_R_CHECK_URLS_PAT_FILE_",
+                       file.path(normalizePath("~"), ".R", "pats.csv"))
+    if(file.exists(file)) {
+        elts <- utils::read.csv(file,
+                                colClasses = character(),
+                                comment.char = "")
+        pats <- `names<-`(elts[[2L]], elts[[1L]])
+    } else if(nzchar(s <- Sys.getenv("GITHUB_PAT", ""))) {
+        pats <- c(github = s)
+    }
+    pats
 }
 
 .fetch_headers_via_base <-
@@ -917,6 +941,8 @@ function(urls, nobody = FALSE, verbose = FALSE, pool = NULL,
     if(is.null(hdrs))
         hdrs <- .curl_handle_default_hdrs
 
+    pats <- .check_url_db_personal_access_tokens()
+
     bar <- .progress_bar(if (verbose) length(urls), msg = "fetching ")    
 
     out <- vector("list", length(urls))
@@ -929,8 +955,10 @@ function(urls, nobody = FALSE, verbose = FALSE, pool = NULL,
             curl::handle_setheaders(h, .list = hdrs)
         if((startsWith(u, "https://github.com/") ||
             (u == "https://github.com")) &&
-           nzchar(a <- Sys.getenv("GITHUB_PAT", ""))) {
-            curl::handle_setheaders(h, "Authorization" = paste("token", a))
+           nzchar(s <- pats["github"])) {
+            curl::handle_setheaders(h,
+                                    "Authorization" =
+                                        paste("token", s))
         }
         handle_result <- local({
             i <- i
