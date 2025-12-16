@@ -21,7 +21,6 @@ SOURCES_M = @BUILD_AQUA_TRUE@ qdCocoa.m
 
 DEPENDS = $(SOURCES_CXX:.cpp=.d) $(SOURCES_M:.m=.d)
 OBJECTS = $(SOURCES_CXX:.cpp=.o) $(SOURCES_M:.m=.o)
-WERROR_FLAGS = -Wall -Werror
 SHLIB = $(pkg)@SHLIB_EXT@
 
 # need Defn.h etc, and config.h
@@ -29,7 +28,7 @@ UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include -DHAVE_CONFIG_H
 else
-PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include $(WERROR_FLAGS) -DHAVE_CONFIG_H
+PKG_CPPFLAGS =-I../../../include -I$(top_srcdir)/src/include -DHAVE_CONFIG_H
 endif
 
 @BUILD_AQUA_TRUE@AQUA_LIBS = -framework AppKit
