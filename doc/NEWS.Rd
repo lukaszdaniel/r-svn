@@ -207,6 +207,10 @@
       Several CRAN packages already require C++20 and have hundreds of
       others depending on them.  (Packages can request C++17 if
       essential.)
+
+      \item A C++ standard specification (\code{CXX_STD =}) in
+      \file{src/Makevars*} is now checked more thoroughly.  Invalid
+      values are still ignored but now give a warning.
     }
   }
 
@@ -263,6 +267,8 @@
       \item New function \code{R_class()} as the \code{C} equivalent of
       \code{class()} in \R.
 
+      \item New function \code{Rf_isScalarString}.
+      
       \item The non-API header files \file{R_ext/Callbacks.h} and
       \file{R_ext/PrtUtil.h} are no longer copied to the installed
       includes directory. The \code{R_ObjectTable} type definitions
@@ -275,6 +281,13 @@
       should not be used. The stub \file{R_ext/Callbacks.h} also
       includes \file{R_ext/ObjectTable.h}. Packages including these headers
       will install successfully but with warnings for using these files.
+
+      \item New function \code{R_mapAttrib} for iterating over the
+      attributes of an object.
+
+      \item Packages using the non-API functions \code{ATTRIB} and
+      \code{SET_ATTRIB} will now receive check \samp{NOTE}s.
+      See \sQuote{Writing R Extensions} for alternatives to use.
     }
   }
 
@@ -461,6 +474,9 @@
 
       \item The error message for \code{array(dim = c())} now uses
       \code{"'dim'"}, thanks to \I{Hugo Gruson}.
+
+      \item Some legal but strange nested complex assignments are
+      handled a bit more robustly in interpreted code.
     }
   }
 }

@@ -3900,7 +3900,7 @@ NORET R_len_t R::R_BadLongVector(SEXP x, const char *file, int line)
    resizeble. */ 
 bool R_isResizable(SEXP x)
 {
-    return isVector(x) && ! ALTREP(x) && GROWABLE_BIT_SET(x) &&
+    return isVector(x) && !ALTREP(x) && GROWABLE_BIT_SET(x) &&
 	XTRUELENGTH(x) != 0 && XLENGTH(x) <= XTRUELENGTH(x);
 }
 

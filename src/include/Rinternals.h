@@ -886,6 +886,7 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define isReal			Rf_isReal
 #define isRaw			Rf_isRaw
 #define isS4			Rf_isS4
+#define isScalarString		Rf_isScalarString
 #define isString		Rf_isString
 #define isTs			Rf_isTs
 // #define isUnmodifiedSpecSym	Rf_isUnmodifiedSpecSym
@@ -1007,6 +1008,7 @@ Rboolean Rf_isNumber(SEXP);
 Rboolean Rf_isNumeric(SEXP);
 Rboolean Rf_isPairList(SEXP);
 Rboolean Rf_isPrimitive(SEXP);
+Rboolean Rf_isScalarString(SEXP);
 Rboolean Rf_isTs(SEXP);
 //Rboolean Rf_isUserBinop(SEXP);
 Rboolean Rf_isValidString(SEXP);
@@ -1130,7 +1132,7 @@ int R_remhash(R_hashtab_type h, SEXP key);
 int R_numhash(R_hashtab_type h);
 int R_typhash(R_hashtab_type h);
 SEXP R_maphash(R_hashtab_type h, SEXP FUN);
-void R_maphashC(R_hashtab_type h, void (*FUN)(SEXP, SEXP, void *), void *data);
+SEXP R_maphashC(R_hashtab_type h, SEXP (*FUN)(SEXP, SEXP, void *), void *data);
 void R_clrhash(R_hashtab_type h);
 
 /* Highly experimental resizable vector support */
@@ -1140,6 +1142,8 @@ void R_resizeVector(SEXP x, R_xlen_t newlen);
 SEXP R_allocResizableVector(SEXPTYPE type, R_xlen_t maxlen);
 SEXP R_duplicateAsResizable(SEXP x);
 
+/* Attribute iterator */
+SEXP R_mapAttrib(SEXP x, SEXP (*FUN)(SEXP, SEXP, void *), void *data);
 
 /* Rest of this file
    Stuff that is not API and probably should not be but is getting used.

@@ -762,6 +762,11 @@ INLINE_FUN Rboolean Rf_inherits(SEXP s, const char *name)
     return FALSE;
 }
 
+INLINE_FUN Rboolean Rf_isScalarString(SEXP x)
+{
+    return (Rboolean) (TYPEOF(x) == STRSXP && XLENGTH(x) == 1);
+}
+
 INLINE_FUN Rboolean Rf_isValidString(SEXP x)
 {
     return (Rboolean) (TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP);
