@@ -1991,23 +1991,21 @@ attribute_hidden SEXP R_getS4DataSlot(SEXP object, SEXPTYPE type)
 */
 SEXP R_mapAttrib(SEXP x, SEXP (*FUN)(SEXP, SEXP, void *), void *data)
 {
-    PROTECT_INDEX api;
-    SEXP a = ATTRIB(x);
+    GCStackRoot<> a, tag, attr;
+    a = ATTRIB(x);
     SEXP val = NULL;
 
     /* no need to PROTECT x as it is no longer needed from this point on */
-    PROTECT_WITH_INDEX(a, &api);
     while (a != R_NilValue) {
-	SEXP tag = PROTECT(TAG(a));
-	SEXP attr = PROTECT(CAR(a));
+	tag = TAG(a.get());
+	attr = CAR(a);
 	val = FUN(tag, attr, data);
-	UNPROTECT(2); /* tag, attr */
 	if (val != NULL)
 	    break;
 	/* defer computing CDR(a) until after calling FUN since FUN
 	   might change it by calling setAttrib */
-	REPROTECT(a = CDR(a), api);
+	a = CDR(a.get());
     }
-    UNPROTECT(1); /* a */
+
     return val;
 }
