@@ -795,7 +795,7 @@ static void process_request(httpd_conn_t *c)
 #endif
 
 /* Remove . and (most) .. from "p" following RFC 3986, 5.2.4.*/
-static char *remove_dot_segments(char *p) {
+static char *remove_dot_segments(const char *p) {
 
     char *inbuf = Rstrdup(p);
     char *in = inbuf;   /* first byte of input buffer */
