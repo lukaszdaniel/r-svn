@@ -1309,7 +1309,7 @@ void GCNode::mark(unsigned int max_generation)
                 if (isVectorType(s) && !ALTREP(s))
                 {
                     {
-                        VectorBase *vec = static_cast<VectorBase *>(const_cast<GCNode *>(s));
+                        VectorBase *vec = SEXP_downcast<VectorBase *>(const_cast<GCNode *>(s));
                         if (IS_GROWABLE(vec))
                             SET_STDVEC_LENGTH(vec, XTRUELENGTH(vec));
                     }
@@ -1827,8 +1827,8 @@ attribute_hidden SEXP R::CONS_NR(SEXP car, SEXP cdr)
     PairList *s = PairList::create(R_NilValue, R_NilValue, R_NilValue);
 
     DISABLE_REFCNT(s);
-    static_cast<ConsCell *>(s)->setCar(CHK(car));
-    static_cast<ConsCell *>(s)->setTail(CHK(cdr));
+    SEXP_downcast<ConsCell *>(s)->setCar(CHK(car));
+    SEXP_downcast<ConsCell *>(s)->setTail(CHK(cdr));
 
     return s;
 }
@@ -2632,7 +2632,7 @@ void R_SetExternalPtrTag(SEXP s, SEXP tag)
     CHKEXTPTRSXP(s);
 
     CHECK_OLD_TO_NEW(s, tag);
-    EXTPTR_TAG(s).retarget(s, tag);
+    SEXP_downcast<CXXR::ExternalPointer *>(s)->m_tag.retarget(s, tag);
 }
 
 void R_SetExternalPtrProtected(SEXP s, SEXP p)
@@ -2640,7 +2640,7 @@ void R_SetExternalPtrProtected(SEXP s, SEXP p)
     CHKEXTPTRSXP(s);
 
     CHECK_OLD_TO_NEW(s, p);
-    EXTPTR_PROT(s).retarget(s, p);
+    SEXP_downcast<CXXR::ExternalPointer *>(s)->m_protege.retarget(s, p);
 }
 
 /*
@@ -3250,8 +3250,8 @@ void (R::SET_PROMISE_TAG)(SEXP cell, SEXPTYPE val) { CR_ASSERT(cell); SET_PROMIS
 #define CLEAR_BNDCELL_TAG(cell) do {		\
 	if (BNDCELL_TAG(cell)) {		\
 	    CR_CONSCELL_ASSERT(cell);		\
-	    static_cast<ConsCell *>(cell)->clearCar();		\
-	    static_cast<ConsCell *>(cell)->setCar(R_NilValue);	\
+	    SEXP_downcast<ConsCell *>(cell)->clearCar();	\
+	    SEXP_downcast<ConsCell *>(cell)->setCar(R_NilValue);\
 	    SET_BNDCELL_TAG(cell, NILSXP);	\
 	}					\
     } while (0)
@@ -3356,29 +3356,29 @@ attribute_hidden void R::R_try_clear_args_refcnt(SEXP args)
 }
 
 /* WeakRef Object Accessors */
-void R::SET_WEAKREF_KEY(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_KEY(x).retarget(x, v); }
-void R::SET_WEAKREF_VALUE(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_VALUE(x).retarget(x, v); }
-void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); WEAKREF_FINALIZER(x).retarget(x, v); }
+void R::SET_WEAKREF_KEY(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_key.retarget(x, v); }
+void R::SET_WEAKREF_VALUE(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_value.retarget(x, v); }
+void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_finalizer.retarget(x, v); }
 
 /* S4 Object Accessors */
 SEXP (S4TAG)(SEXP e) { CR_ASSERT(e); CR_S4OBJECT_ASSERT(e); return CHK(S4TAG(CHKCONS(e))); }
-void SET_S4TAG(SEXP x, SEXP v) { CR_ASSERT(x); CR_S4OBJECT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); S4TAG(x).retarget(x, v); }
+void SET_S4TAG(SEXP x, SEXP v) { CR_ASSERT(x); CR_S4OBJECT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::S4Object *>(x)->m_tag.retarget(x, v); }
 
 /* AltRep Accessors */
 SEXP (DATA1)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(DATA1(CHKCONS(e))); }
 SEXP (DATA2)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(DATA2(CHKCONS(e))); }
 SEXP (CLASS)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(CLASS(CHKCONS(e))); }
-void (SET_DATA1)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); DATA1(x).retarget(x, v); }
-void (SET_DATA2)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); DATA2(x).retarget(x, v); }
-void (SET_CLASS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CLASS(x).retarget(x, v); }
+void (SET_DATA1)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_data1.retarget(x, v); }
+void (SET_DATA2)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_data2.retarget(x, v); }
+void (SET_CLASS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_altclass.retarget(x, v); }
 
 /* ByteCode Accessors */
 SEXP (CODE0)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(CODE0(CHKCONS(e))); }
 SEXP (CONSTS)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(CONSTS(CHKCONS(e))); }
 SEXP (EXPR)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(EXPR(CHKCONS(e))); }
-void (SET_CODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CODE0(x).retarget(x, v); }
-void (SET_CONSTS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); CONSTS(x).retarget(x, v); }
-void (SET_EXPR)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); EXPR(x).retarget(x, v); }
+void (SET_CODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_code.retarget(x, v); }
+void (SET_CONSTS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_constants.retarget(x, v); }
+void (SET_EXPR)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_expression.retarget(x, v); }
 
 /* List Accessors */
 SEXP (TAG)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(TAG(CHKCONS(e))); }
@@ -3404,7 +3404,7 @@ void (SET_TAG)(SEXP x, SEXP v)
 
     CR_CONSCELL_ASSERT(x);
     CHECK_OLD_TO_NEW(x, v);
-    static_cast<ConsCell *>(x)->setTag(v);
+    SEXP_downcast<ConsCell *>(x)->setTag(v);
 }
 
 SEXP (SETCAR)(SEXP x, SEXP y)
@@ -3413,7 +3413,7 @@ SEXP (SETCAR)(SEXP x, SEXP y)
 	error("%s", _("bad value"));
 
     CR_CONSCELL_ASSERT(x);
-    static_cast<PairList *>(x)->setCar(y);
+    SEXP_downcast<PairList *>(x)->setCar(y);
     CHECK_OLD_TO_NEW(x, y);
 
     return y;
@@ -3431,7 +3431,7 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 #endif
     CR_CONSCELL_ASSERT(x);
     CHECK_OLD_TO_NEW(x, y);
-    static_cast<ConsCell *>(x)->setTail(y);
+    SEXP_downcast<ConsCell *>(x)->setTail(y);
     return y;
 }
 
@@ -3443,7 +3443,7 @@ SEXP (SETCADR)(SEXP x, SEXP y)
     CR_CONSCELL_ASSERT(x);
     SEXP cell = CDR(x);
 
-    static_cast<PairList *>(cell)->setCar(y);
+    SEXP_downcast<PairList *>(cell)->setCar(y);
     CHECK_OLD_TO_NEW(cell, y);
 
     return y;
@@ -3458,7 +3458,7 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
     CR_CONSCELL_ASSERT(x);
     SEXP cell = CDDR(x);
 
-    static_cast<PairList *>(cell)->setCar(y);
+    SEXP_downcast<PairList *>(cell)->setCar(y);
     CHECK_OLD_TO_NEW(cell, y);
 
     return y;
@@ -3474,7 +3474,7 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
     CR_CONSCELL_ASSERT(x);
     SEXP cell = CDDDR(x);
 
-    static_cast<PairList *>(cell)->setCar(y);
+    SEXP_downcast<PairList *>(cell)->setCar(y);
     CHECK_OLD_TO_NEW(cell, y);
 
     return y;
@@ -3491,7 +3491,7 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
     CR_CONSCELL_ASSERT(x);
     SEXP cell = CD4R(x);
 
-    static_cast<PairList *>(cell)->setCar(y);
+    SEXP_downcast<PairList *>(cell)->setCar(y);
     CHECK_OLD_TO_NEW(cell, y);
 
     return y;
@@ -3520,9 +3520,9 @@ SEXP R_ClosureFormals(SEXP x) { CR_ASSERT(x); return (FORMALS)(x); }
 SEXP R_ClosureBody(SEXP x) { CR_ASSERT(x); return (BODY)(x); }
 SEXP R_ClosureEnv(SEXP x) { CR_ASSERT(x); return (CLOENV)(x); }
 
-void (SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->m_formals.retarget(x, v); }
-void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->m_body.retarget(x, v); }
-void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Closure *>(x)->m_env.retarget(x, v); }
+void (SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_formals.retarget(x, v); }
+void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_body.retarget(x, v); }
+void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_env.retarget(x, v); }
 void (R::SET_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_RDEBUG(CHK(x), v); }
 attribute_hidden
 void (R::SET_RSTEP)(SEXP x, int v) { CR_ASSERT(x); SET_RSTEP(CHK(x), v); }
@@ -3549,7 +3549,7 @@ SEXP (R::INTERNAL)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); re
 int (R::DDVAL)(SEXP x) { CR_ASSERT(x); CHKSYMSXP(x); return DDVAL(CHK(x)); }
 
 attribute_hidden
-void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Symbol *>(x)->m_pname.retarget(x, v); }
+void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Symbol *>(x)->m_pname.retarget(x, v); }
 
 attribute_hidden
 void (R::SET_SYMVALUE)(SEXP x, SEXP v)
@@ -3560,7 +3560,7 @@ void (R::SET_SYMVALUE)(SEXP x, SEXP v)
 	return;
 
     CHECK_OLD_TO_NEW(x, v);
-    static_cast<CXXR::Symbol *>(x)->m_value.retarget2(x, v);
+    SEXP_downcast<CXXR::Symbol *>(x)->m_value.retarget2(x, v);
 }
 
 attribute_hidden
@@ -3569,7 +3569,7 @@ void (R::SET_INTERNAL)(SEXP x, SEXP v) {
     CR_ASSERT(x);
     CR_SYMBOL_ASSERT(x);
     CHECK_OLD_TO_NEW(x, v);
-    INTERNAL(x).retarget(x, v);
+    SEXP_downcast<CXXR::Symbol *>(x)->m_internal.retarget(x, v);
 }
 attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { CR_ASSERT(x); SET_DDVAL(CHK(x), v); }
 
@@ -3586,7 +3586,7 @@ int (ENVFLAGS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { CR_ASSERT(x); return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { CR_ASSERT(x); return ENV_RDEBUG(CHK(x)); }
 void (SET_ENV_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_ENV_RDEBUG(CHK(x), v); }
-void (SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Environment *>(x)->m_frame.retarget(x, v); }
+void (SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_frame.retarget(x, v); }
 
 void (SET_ENCLOS)(SEXP x, SEXP v)
 {
@@ -3602,16 +3602,16 @@ void (SET_ENCLOS)(SEXP x, SEXP v)
 	    error("%s", _("cycles in parent chains are not allowed"));
 
     CHECK_OLD_TO_NEW(x, v);
-    ENCLOS(x).retarget(x, v);
+    SEXP_downcast<CXXR::Environment *>(x)->m_enclos.retarget(x, v);
 }
 
-void (SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); static_cast<CXXR::Environment *>(x)->m_hashtab.retarget(x, v); }
+void (SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_hashtab.retarget(x, v); }
 void (SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 
 /* Promise Accessors */
 SEXP (PRCODE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRCODE(CHK(x))); }
 SEXP (PRENV)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRENV(CHK(x))); }
-SEXP (PRVALUE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(static_cast<Promise *>(CHK(x))->value()); }
+SEXP (PRVALUE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(SEXP_downcast<Promise *>(CHK(x))->value()); }
 int (R::PRSEEN)(SEXP x) { CR_ASSERT(x); return PRSEEN(CHK(x)); }
 attribute_hidden
 bool (R::PROMISE_IS_EVALUATED)(SEXP x)
@@ -3619,11 +3619,11 @@ bool (R::PROMISE_IS_EVALUATED)(SEXP x)
     CR_ASSERT(x);
     CR_PROMISE_ASSERT(x); 
     x = CHK(x);
-    return static_cast<Promise *>(x)->evaluated();
+    return SEXP_downcast<Promise *>(x)->evaluated();
 }
 
-void (SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); PRENV(x).retarget(x, v); }
-void (SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); PRCODE(x).retarget(x, v); }
+void (SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Promise *>(x)->m_env.retarget(x, v); }
+void (SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<Promise *>(x)->u.promsxp.m_expr.retarget(x, v); }
 void (R::SET_PRSEEN)(SEXP x, int v) { CR_ASSERT(x); SET_PRSEEN(CHK(x), v); }
 
 void (SET_PRVALUE)(SEXP x, SEXP v)
@@ -3633,7 +3633,7 @@ void (SET_PRVALUE)(SEXP x, SEXP v)
     if (TYPEOF(x) != PROMSXP)
 	error(_("expecting a 'PROMSXP', not a '%s'"), R_typeToChar(x));
 
-    static_cast<Promise *>(x)->setValue(v);
+    SEXP_downcast<Promise *>(x)->setValue(v);
     CHECK_OLD_TO_NEW(x, v);
 }
 
