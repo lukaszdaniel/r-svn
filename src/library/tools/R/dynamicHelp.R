@@ -339,7 +339,10 @@ httpd <- function(path, query, ...)
             message(sprintf("HTTPD-ERROR %s %s", path, paste(msg, collapse = " ")), domain = NA)
         }
         list(payload =
-             paste(c(HTMLheader("httpd error"), msg, "\n</div></body></html>"), collapse = "\n"))
+                 structure(paste(c(HTMLheader("httpd error"), msg,
+                                   "\n</div></body></html>"),
+                                 collapse = "\n"),
+                           message = paste("httpd error", msg)))
     }
         
     cssRegexp <- "^/library/([^/]*)/html/R.css$"
@@ -396,6 +399,16 @@ httpd <- function(path, query, ...)
     sessionRegexp <- "^/session/"
     packageIndexRegexp <- "^/library/([^/]*)$"
     packageLicenseFileRegexp <- "^/library/([^/]*)/(LICEN[SC]E$)"
+
+    ## support pkgdown-style links like:
+    ## * pkg/reference/file.html -> pkg/html/file.html
+    ## * pkg/articles/file -> pkg/doc/file
+    referenceRegexp <- "^/library/+([^/]*)/reference/([^/]*)\\.html$"
+    articleRegexp <- "^/library/([^/]*)/articles/([^/]*)$"
+    if (grepl(referenceRegexp, path))
+        path <- gsub("/reference/", "/html/", path, fixed = TRUE)
+    else if (grepl(articleRegexp, path))
+        path <- gsub("/articles/", "/doc/", path, fixed = TRUE)
 
     file <- NULL
     if (grepl(topicRegexp, path)) {
