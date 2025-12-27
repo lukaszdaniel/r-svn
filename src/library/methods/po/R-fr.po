@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 11:12\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 15:40+0200\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1640,7 +1640,7 @@ msgstr "l'objet doit être une partie 'data' correcte pour la classe %s ; ce n'e
 msgid "object to use as a method signature for function %s does not look like a legitimate signature (a vector of single class names): there were %d class names, but %d elements in the signature object"
 msgstr "l'objet à utiliser comme signature de méthode pour la fonction %s ne semble pas être une signature correcte (un vecteur de noms de classes uniques) : il y a %d noms de classes, mais seulement %d éléments dans l'objet signature"
 
-#. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[[1L]])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
+#. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[1L])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
 #: R/trace.R:0
 msgid "objects found in multiple packages: using %s and ignoring %s"
 msgstr "objects trouvés dans plusieurs packages : utilisation de celui dans %s sans tenir compte de %s"

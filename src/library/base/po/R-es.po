@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 15:01+0200\n"
 "Last-Translator: \"Luis D. Verde Arregoitia\" <luisd@ciencias.unam.mx>\n"
 "Language-Team: none\n"
@@ -695,6 +695,11 @@ msgstr "'verbose' y 'quietly' son ambos verdaderos; se elige 'verbose'"
 #. R/source.R: warning("'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'")
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
+msgstr ""
+
+#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#: R/namespace.R:0
+msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
 msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
@@ -1596,6 +1601,12 @@ msgstr "dim(X) debe tener una longitud positiva"
 msgid "dim(x) must have a positive length"
 msgstr "dim(x) debe tener una longitud positiva"
 
+#. R/files.R: warning("directories are ignored")
+#: R/files.R:0
+#, fuzzy
+msgid "directories are ignored"
+msgstr "vectores largos no son soportados"
+
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
 msgid "directories are omitted unless 'recursive = TRUE'"
@@ -2143,6 +2154,14 @@ msgid ""
 "by .GlobalEnv when processing object %s"
 msgstr ""
 
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.source")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "partial")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.parse.data")
+#: R/namespace.R:0
+#, fuzzy
+msgid "namespace '%s' is already loaded so argument '%s' will be ignored."
+msgstr "el argumento '%s' será ignorado"
+
 #. R/namespace.R: stop("namespace is already attached")
 #: R/namespace.R:0
 msgid "namespace is already attached"
@@ -2676,12 +2695,6 @@ msgstr "objetivo es %s, actualmente es %s"
 msgid "the LINPACK argument has been defunct since R 3.1.0"
 msgstr "El argumento LINPACK ya no existe desde R 3.1.0"
 
-#. R/match.R: stop("there is more than one match in 'match.arg'")
-#: R/match.R:0
-#, fuzzy
-msgid "there is more than one match in 'match.arg'"
-msgstr "hay más de una coincidencia en 'match.arg'"
-
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
 #: R/library.R:0
@@ -3131,6 +3144,10 @@ msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "there is more than one match in 'match.arg'"
+#~ msgstr "hay más de una coincidencia en 'match.arg'"
 
 #~ msgid "invalid 'dims'"
 #~ msgstr "'dims' no válidas"

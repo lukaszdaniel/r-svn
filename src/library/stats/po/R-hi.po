@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Ayush Bipin Patel <ayush.ap58@gmail.com>\n"
 "Language-Team: none\n"
@@ -225,6 +225,11 @@ msgstr ""
 #. R/nlminb.R: gettextf("'control' component '%s' = %g, is out of range", names(port_cpos)[B],     v[iv1])
 #: R/nlminb.R:0
 msgid "'control' component '%s' = %g, is out of range"
+msgstr ""
+
+#. R/wilcox.test.R: stop("'correct' must be an integer between 0 and 3")
+#: R/wilcox.test.R:0
+msgid "'correct' must be an integer between 0 and 3"
 msgstr ""
 
 #. R/factanal.R: stop("'covmat' is not a valid covariance list")
@@ -1254,6 +1259,11 @@ msgstr ""
 msgid "'y', 'groups' and 'blocks' must have the same length"
 msgstr ""
 
+#. R/wilcox.test.R: stop("'z' is not a rank vector")
+#: R/wilcox.test.R:0
+msgid "'z' is not a rank vector"
+msgstr ""
+
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
 msgid "(unordered) factors are not allowed"
@@ -1482,6 +1492,11 @@ msgstr ""
 #. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 #: R/confint.R:0
 msgid "Reprofiling for %s  statistic. Waiting..."
+msgstr ""
+
+#. R/wilcox.test.R: warning("Requested conf.level not achievable")
+#: R/wilcox.test.R:0
+msgid "Requested conf.level not achievable"
 msgstr ""
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
@@ -1831,31 +1846,14 @@ msgstr ""
 msgid "cannot compute estimate, returning NA"
 msgstr ""
 
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with ties"
-msgstr ""
-
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with zeroes"
-msgstr ""
-
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
-#. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact confidence intervals with ties"
 msgstr ""
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact p-value with ties"
-msgstr ""
-
-#. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact p-value with zeroes"
 msgstr ""
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
@@ -3925,6 +3923,11 @@ msgstr ""
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 #: R/cor.test.R:0
 msgid "true correlation is not equal to %s"
+msgstr ""
+
+#. R/t.test.R: gettextf("true difference in means between group %s and group %s is not equal to %s",     levels(g)[1], levels(g)[2], y$null.value)
+#: R/t.test.R:0
+msgid "true difference in means between group %s and group %s is not equal to %s"
 msgstr ""
 
 #. R/t.test.R: gettextf("true difference in means is greater than %s", mu, domain = "R-stats")

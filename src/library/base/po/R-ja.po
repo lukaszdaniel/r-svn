@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 14:56+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -695,6 +695,11 @@ msgstr "'verbose' と 'quietly' の両方が真です。verbose とします.."
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose' が TRUE で 'echo' はそうではありません。'echo < - TRUE' とします"
+
+#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#: R/namespace.R:0
+msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
+msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
@@ -1606,6 +1611,12 @@ msgstr "dim(X) は正の長さでなければなりません"
 msgid "dim(x) must have a positive length"
 msgstr "dim(X) は正の長さを持たねばなりません"
 
+#. R/files.R: warning("directories are ignored")
+#: R/files.R:0
+#, fuzzy
+msgid "directories are ignored"
+msgstr "long vectorはサポートされていません"
+
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
 msgid "directories are omitted unless 'recursive = TRUE'"
@@ -2149,6 +2160,14 @@ msgid ""
 "by .GlobalEnv when processing object %s"
 msgstr "オブジェクト %2$s を処理する際、名前空間 %1$s は使用できないため .GlobalEnv によって置き換えられました"
 
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.source")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "partial")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.parse.data")
+#: R/namespace.R:0
+#, fuzzy
+msgid "namespace '%s' is already loaded so argument '%s' will be ignored."
+msgstr "名前空間 %s %s は既にロードされましたが、%s %s が要求されています"
+
 #. R/namespace.R: stop("namespace is already attached")
 #: R/namespace.R:0
 msgid "namespace is already attached"
@@ -2679,11 +2698,6 @@ msgstr "引数 target は %s、引数 current は %s です"
 msgid "the LINPACK argument has been defunct since R 3.1.0"
 msgstr ""
 
-#. R/match.R: stop("there is more than one match in 'match.arg'")
-#: R/match.R:0
-msgid "there is more than one match in 'match.arg'"
-msgstr "'match.arg' に複数のマッチがあります"
-
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
 #: R/library.R:0
@@ -3094,6 +3108,9 @@ msgstr[0] "%d 個の行名が %d 個の行に提供されました"
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "呼び出されたパッケージがありません"
+
+#~ msgid "there is more than one match in 'match.arg'"
+#~ msgstr "'match.arg' に複数のマッチがあります"
 
 #~ msgid "invalid 'dims'"
 #~ msgstr "無効な 'dims' です"

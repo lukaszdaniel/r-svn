@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-12-27 18:28+0100\n"
 "PO-Revision-Date: 2025-07-06 15:35+0200\n"
 "Last-Translator: Kwangchun Lee <kwangchun.lee.7@gmail.com>\n"
 "Language-Team: \n"
@@ -24,86 +24,86 @@ msgstr ""
 msgid "updateGContext must only be called after initGContext"
 msgstr "updateGContext는 initGContext 를 호출한 다음에만 호출해야 합니다"
 
-#: grid.cpp:202
+#: grid.cpp:205
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
 msgstr ""
 
-#: grid.cpp:244
+#: grid.cpp:247
 msgid "cannot clip to rotated viewport"
 msgstr "회전된 뷰포트에 고정 할 수 없습니다"
 
-#: grid.cpp:459
+#: grid.cpp:462
 msgid "Clipping paths within a (clipping) path are not honoured"
 msgstr ""
 
-#: grid.cpp:478
+#: grid.cpp:481
 msgid "Masks within a (clipping) path are not honoured"
 msgstr ""
 
-#: grid.cpp:702 grid.cpp:880
+#: grid.cpp:705 grid.cpp:883
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr ""
 
-#: grid.cpp:912 grid.cpp:917 grid.cpp:1038 grid.cpp:1043
+#: grid.cpp:915 grid.cpp:920 grid.cpp:1040 grid.cpp:1045
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr "최상단 뷰포트를 띄울 수 없습니다 ('grid'와 'graphics' 출력을 혼용하고 있나요?)"
 
-#: grid.cpp:1244
+#: grid.cpp:1246
 msgid "attempt to plot on null device"
 msgstr "null 장치위에 플랏을 시도합니다"
 
-#: grid.cpp:1714
+#: grid.cpp:1716
 msgid "there is no layout defined"
 msgstr "정의된 레이아웃이 없습니다"
 
-#: grid.cpp:1936
+#: grid.cpp:1938
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "다각형의 끝점을 찾을 수 없습니다 (혹시 너비 또는 높이가 0인가요?)"
 
-#: grid.cpp:1945
+#: grid.cpp:1947
 msgid "polygon edge not found"
 msgstr "다각형의 끝점을 찾을 수 없습니다"
 
-#: grid.cpp:2097
+#: grid.cpp:2099
 msgid "require at least two points to draw arrow"
 msgstr "화살표를 그리기 위해서는 최소한 두개의 점이 필요합니다"
 
-#: grid.cpp:2465
+#: grid.cpp:2467
 msgid "non-finite control point in Xspline"
 msgstr "Xspline에서 유한하지 않은 컨트롤 포인트입니다"
 
-#: grid.cpp:3431
+#: grid.cpp:3433
 msgid "non-finite x or y in graphics path"
 msgstr "그래픽 패스에 유한하지 않은 x 또는 y가 있습니다"
 
-#: grid.cpp:3480
+#: grid.cpp:3482
 msgid "Empty raster"
 msgstr "비어있는 래스터입니다"
 
-#: grid.cpp:4022
+#: grid.cpp:4023
 msgid "use of negative pch with symbol font is invalid"
 msgstr ""
 
-#: grid.cpp:4028 grid.cpp:4084
+#: grid.cpp:4029 grid.cpp:4085
 msgid "Coordinates for text pch not yet supported"
 msgstr ""
 
-#: grid.cpp:4089
+#: grid.cpp:4090
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr ""
 
-#: grid.cpp:4910
+#: grid.cpp:4911
 #, c-format
 msgid "unimplemented pch value '%d'"
 msgstr ""
 
-#: grid.cpp:5068
+#: grid.cpp:5069
 msgid "invalid plotting symbol"
 msgstr "유효하지 않은 플랏팅 기호입니다"
 
-#: grid.cpp:5186
+#: grid.cpp:5187
 msgid "unable to clip to rotated rectangle"
 msgstr "회전된 사각형을 고정할 수 없습니다"
 
@@ -119,7 +119,7 @@ msgstr "유효하지 않은 'layout.pos.col'입니다"
 msgid "singular transformation matrix"
 msgstr ""
 
-#: state.cpp:196
+#: state.cpp:197
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "'grid'상태를 저장할 수 없는데 혹시 너무 많은 장치가 열려있나요?"
 
@@ -164,27 +164,27 @@ msgstr ""
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr ""
 
-#: unit.cpp:1635
+#: unit.cpp:1644
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr ""
 
-#: unit.cpp:1640
+#: unit.cpp:1649
 msgid "non-NULL value supplied for plain unit"
 msgstr ""
 
-#: unit.cpp:1693 unit.cpp:1727 unit.cpp:1776
+#: unit.cpp:1702 unit.cpp:1736 unit.cpp:1785
 msgid "old version of unit class is no longer allowed"
 msgstr ""
 
-#: unit.cpp:1699
+#: unit.cpp:1708
 msgid "object is not coercible to a unit"
 msgstr ""
 
-#: unit.cpp:1725
+#: unit.cpp:1734
 msgid "object is not a unit"
 msgstr ""
 
-#: unit.cpp:1860
+#: unit.cpp:1869
 msgid "units can only be multiplied with numerics and integers"
 msgstr ""
 

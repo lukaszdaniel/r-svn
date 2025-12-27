@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-08-08 09:52\n"
-"PO-Revision-Date: 2025-07-12 12:59+0200\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
+"PO-Revision-Date: 2025-12-27 18:31+0100\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Bookmarks: -1,203,-1,-1,-1,-1,-1,-1,-1,-1\n"
@@ -145,6 +145,7 @@ msgstr "argument 'destfile' musi wektorem tekstowym o długości 1"
 msgid "'digits' and 'digits.d' are both specified and the latter is not used"
 msgstr "obydwa 'digits' oraz 'digits.d' są zdefiniowane i ostatni nie jest używany"
 
+#. R/packages.R: gettextf("'download.file()' error code '%d'", z)
 #. R/packages.R: gettextf("'download.file()' error code '%d'", m)
 #: R/packages.R:0
 msgid "'download.file()' error code '%d'"
@@ -473,9 +474,8 @@ msgstr "Upewnij się, że usuwasz z listy obiekt, który można ponownie wstawi�
 
 #. R/debugger.R: gettext("\nEnter a frame number, or 0 to exit")
 #: R/debugger.R:0
-#, fuzzy
 msgid "Enter a frame number, or 0 to exit"
-msgstr "Wpisz numer środowiska, lub 0 aby wyjść"
+msgstr "Wpisz numer ramki, lub 0 aby wyjść"
 
 #. R/debugger.R: gettext("\nEnter an environment number, or 0 to exit  ")
 #: R/debugger.R:0
@@ -987,9 +987,8 @@ msgstr "nie można edytować nazw wierszy o wartości NULL"
 
 #. R/windows/install.packages.R: gettextf("cannot extract package from %s", sQuote(pkg))
 #: R/windows/install.packages.R:0
-#, fuzzy
 msgid "cannot extract package from %s"
-msgstr "nie można wyodrębnić przez dowiązanie symboliczne"
+msgstr "nie można wyodrębnić pakietu z %s"
 
 #. R/tar.R: stop("cannot extract through symlink")
 #: R/tar.R:0
@@ -1326,8 +1325,7 @@ msgstr "instalacja pakietu %s miała niezerowy status wyjścia"
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
-#: R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0 R/tar.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 

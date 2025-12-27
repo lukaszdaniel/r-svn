@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-04-01 17:03+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -234,6 +234,12 @@ msgstr "аргумент 'control' должен быть именованным 
 #: R/nlminb.R:0
 msgid "'control' component '%s' = %g, is out of range"
 msgstr ""
+
+#. R/wilcox.test.R: stop("'correct' must be an integer between 0 and 3")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'correct' must be an integer between 0 and 3"
+msgstr "'conf.level' должен быть одним числом между 0 и 1"
 
 #. R/factanal.R: stop("'covmat' is not a valid covariance list")
 #. R/princomp.R: stop("'covmat' is not a valid covariance list")
@@ -1269,6 +1275,12 @@ msgstr "'y' должен быть длиннее чем 'x'"
 msgid "'y', 'groups' and 'blocks' must have the same length"
 msgstr "'y', 'groups' и 'blocks' должны иметь одну длину"
 
+#. R/wilcox.test.R: stop("'z' is not a rank vector")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'z' is not a rank vector"
+msgstr "'x' -- не вектор"
+
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
 msgid "(unordered) factors are not allowed"
@@ -1503,6 +1515,11 @@ msgstr "Подгонка модели для того чтобы сделать 
 #: R/confint.R:0
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
+
+#. R/wilcox.test.R: warning("Requested conf.level not achievable")
+#: R/wilcox.test.R:0
+msgid "Requested conf.level not achievable"
+msgstr "Заданный доверительный интервал не достигнут"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
@@ -1855,32 +1872,15 @@ msgstr "не могу подсчитать доверительное множе
 msgid "cannot compute estimate, returning NA"
 msgstr "не могу подсчитать оценку, возвращаю NA"
 
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with ties"
-msgstr "совпадающие значения: не могу высчитать точный доверительный интервал"
-
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with zeroes"
-msgstr "не могу высчитать точный доверительный интервал при наличии нулей"
-
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
-#. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact confidence intervals with ties"
 msgstr "не могу подсчитать точные доверительные интервалы при наличии повторяющихся наблюдений"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "не могу подсчитать точное p-значение при наличии повторяющихся наблюдений"
-
-#. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact p-value with zeroes"
-msgstr "не могу высчитать точное p-значение при наличии нулей"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0
@@ -3977,6 +3977,11 @@ msgstr "'r' < 1"
 msgid "true correlation is not equal to %s"
 msgstr ""
 
+#. R/t.test.R: gettextf("true difference in means between group %s and group %s is not equal to %s",     levels(g)[1], levels(g)[2], y$null.value)
+#: R/t.test.R:0
+msgid "true difference in means between group %s and group %s is not equal to %s"
+msgstr ""
+
 #. R/t.test.R: gettextf("true difference in means is greater than %s", mu, domain = "R-stats")
 #: R/t.test.R:0
 msgid "true difference in means is greater than %s"
@@ -4626,6 +4631,15 @@ msgstr[0] "использую %d/%d строку из комбинированн
 msgstr[1] "использую %d/%d строки из комбинированного выравнивания"
 msgstr[2] "использую %d/%d строк из комбинированного выравнивания"
 
+#~ msgid "cannot compute exact confidence interval with ties"
+#~ msgstr "совпадающие значения: не могу высчитать точный доверительный интервал"
+
+#~ msgid "cannot compute exact confidence interval with zeroes"
+#~ msgstr "не могу высчитать точный доверительный интервал при наличии нулей"
+
+#~ msgid "cannot compute exact p-value with zeroes"
+#~ msgstr "не могу высчитать точное p-значение при наличии нулей"
+
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "колонки 'контраст.obj' должны определять контраст (с нулевой суммой)"
 
@@ -4715,9 +4729,6 @@ msgstr[2] "использую %d/%d строк из комбинированно
 
 #~ msgid "invalid 'abbr.colnames'"
 #~ msgstr "неправильный 'abbr.colnames'"
-
-#~ msgid "Requested conf.level not achievable"
-#~ msgstr "Заданный доверительный интервал не достигнут"
 
 #~ msgid "medpolish() did not converge in %d iteration"
 #~ msgid_plural "medpolish() did not converge in %d iterations"

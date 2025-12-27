@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -226,6 +226,12 @@ msgstr "'control' argument must be a named list"
 #: R/nlminb.R:0
 msgid "'control' component '%s' = %g, is out of range"
 msgstr ""
+
+#. R/wilcox.test.R: stop("'correct' must be an integer between 0 and 3")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'correct' must be an integer between 0 and 3"
+msgstr "'or' must be a single number between 0 and Inf"
 
 #. R/factanal.R: stop("'covmat' is not a valid covariance list")
 #. R/princomp.R: stop("'covmat' is not a valid covariance list")
@@ -1261,6 +1267,12 @@ msgstr "'y' must be one longer than 'x'"
 msgid "'y', 'groups' and 'blocks' must have the same length"
 msgstr "'y', 'groups' and 'blocks' must have the same length"
 
+#. R/wilcox.test.R: stop("'z' is not a rank vector")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'z' is not a rank vector"
+msgstr "'x' is not a vector"
+
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
 msgid "(unordered) factors are not allowed"
@@ -1494,6 +1506,11 @@ msgstr "Refitting model to allow projection"
 #, fuzzy
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr "statistic. Waiting..."
+
+#. R/wilcox.test.R: warning("Requested conf.level not achievable")
+#: R/wilcox.test.R:0
+msgid "Requested conf.level not achievable"
+msgstr "Requested conf.level not achievable"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
@@ -1846,32 +1863,15 @@ msgstr "cannot compute confidence set, returning NA"
 msgid "cannot compute estimate, returning NA"
 msgstr "cannot compute estimate, returning NA"
 
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with ties"
-msgstr "cannot compute exact confidence interval with ties"
-
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with zeroes"
-msgstr "cannot compute exact confidence interval with zeroes"
-
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
-#. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact confidence intervals with ties"
 msgstr "cannot compute exact confidence intervals with ties"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "cannot compute exact p-value with ties"
-
-#. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact p-value with zeroes"
-msgstr "cannot compute exact p-value with zeroes"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0
@@ -3969,6 +3969,11 @@ msgstr "'r' is less than 1"
 msgid "true correlation is not equal to %s"
 msgstr ""
 
+#. R/t.test.R: gettextf("true difference in means between group %s and group %s is not equal to %s",     levels(g)[1], levels(g)[2], y$null.value)
+#: R/t.test.R:0
+msgid "true difference in means between group %s and group %s is not equal to %s"
+msgstr ""
+
 #. R/t.test.R: gettextf("true difference in means is greater than %s", mu, domain = "R-stats")
 #: R/t.test.R:0
 msgid "true difference in means is greater than %s"
@@ -4592,6 +4597,15 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "using the %d/%d row from a combined fit"
 msgstr[1] "using the %d/%d rows from a combined fit"
 
+#~ msgid "cannot compute exact confidence interval with ties"
+#~ msgstr "cannot compute exact confidence interval with ties"
+
+#~ msgid "cannot compute exact confidence interval with zeroes"
+#~ msgstr "cannot compute exact confidence interval with zeroes"
+
+#~ msgid "cannot compute exact p-value with zeroes"
+#~ msgstr "cannot compute exact p-value with zeroes"
+
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "columns of 'contrast.obj' must define a contrast(sum to zero)"
 
@@ -4690,9 +4704,6 @@ msgstr[1] "using the %d/%d rows from a combined fit"
 
 #~ msgid "invalid 'abbr.colnames'"
 #~ msgstr "invalid 'abbr.colnames'"
-
-#~ msgid "Requested conf.level not achievable"
-#~ msgstr "Requested conf.level not achievable"
 
 #~ msgid "medpolish() did not converge in %d iteration"
 #~ msgid_plural "medpolish() did not converge in %d iterations"

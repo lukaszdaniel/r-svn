@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,6 +239,13 @@ msgstr ""
 #. R/utils.R: warning("*not* using 'C' for LC_COLLATE locale")
 
 msgid "*not* using 'C' for LC_COLLATE locale"
+msgstr ""
+
+
+#: R/RdHelpers.R: 0
+#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
+
+msgid ","
 msgstr ""
 
 
@@ -925,6 +932,13 @@ msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
 msgstr ""
 
 
+#: R/license.R: 0
+#. R/license.R: stop("Input must be character")
+
+msgid "Input must be character"
+msgstr ""
+
+
 #: R/admin.R: 0
 #. R/admin.R: gettext("Invalid DESCRIPTION file")
 
@@ -965,6 +979,13 @@ msgstr ""
 #. R/QC.R: gettextf("Invalid package aliases in Rd file '%s':", nm)
 
 msgid "Invalid package aliases in Rd file '%s':"
+msgstr ""
+
+
+#: R/Rd2HTML.R: 0
+#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
+
+msgid "Invalid value of 'toc_entries'"
 msgstr ""
 
 
@@ -1478,7 +1499,6 @@ msgstr ""
 #: R/htmltools.R: 0
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
-#. R/htmltools.R: sprintf("Processing %s ...", u)
 
 msgid "Processing %s ..."
 msgstr ""
@@ -1818,6 +1838,13 @@ msgid "Undocumented data sets:"
 msgstr ""
 
 
+#: R/Rd2HTML.R: 0
+#. R/Rd2HTML.R: warning("Unexpected jump in section level")
+
+msgid "Unexpected jump in section level"
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 
@@ -2023,6 +2050,13 @@ msgstr ""
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
+msgstr ""
+
+
+#: R/RdHelpers.R: 0
+#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
+
+msgid "\\manual must refer to one of %s"
 msgstr ""
 
 
@@ -2293,16 +2327,23 @@ msgstr ""
 
 
 #: R/checktools.R: 0
-#. R/checktools.R: sprintf("downloading %s ... ", rfiles[i])
+#. R/checktools.R: gettextf("download of %d reverse dependencies failed:\n  %s",     n, paste(sQuote(fails), collapse = ", "))
 
-msgid "downloading %s ..."
+msgid "download of %d reverse dependencies failed:\n  %s"
 msgstr ""
 
 
 #: R/checktools.R: 0
-#. R/checktools.R: message("downloading reverse dependencies ...")
+#. R/checktools.R: gettextf("download of reverse dependency %s failed", sQuote(fails))
 
-msgid "downloading reverse dependencies ..."
+msgid "download of reverse dependency %s failed"
+msgstr ""
+
+
+#: R/checktools.R: 0
+#. R/checktools.R: gettextf("downloading reverse dependencies %s", paste(sQuote(rnames),     collapse = ", "))
+
+msgid "downloading reverse dependencies %s"
 msgstr ""
 
 
@@ -2726,8 +2767,7 @@ msgstr ""
 #. R/urltools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", i)
 #. R/urltools.R: sprintf("processing %s", u)
-#. R/utils.R: sprintf("processing %s", p)
-#. R/utils.R: sprintf("processing %s", basename(p))
+#. R/utils.R: sprintf("processing %s", trafo(e))
 #. R/utils.R: sprintf("processing %s", f)
 
 msgid "processing %s"
@@ -2809,6 +2849,13 @@ msgstr ""
 #. R/makeLazyLoad.R: stop("source must be an environment or a list")
 
 msgid "source must be an environment or a list"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: message("specified C++", use_cxxstd)
+
+msgid "specified C++"
 msgstr ""
 
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-08-08 09:52\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -152,6 +152,7 @@ msgstr "'destfile' doit être une chaîne de caractères de longueur 1"
 msgid "'digits' and 'digits.d' are both specified and the latter is not used"
 msgstr "'digits' et 'digits.d' sont tous deux spécifiés et le second est ignoré"
 
+#. R/packages.R: gettextf("'download.file()' error code '%d'", z)
 #. R/packages.R: gettextf("'download.file()' error code '%d'", m)
 #: R/packages.R:0
 msgid "'download.file()' error code '%d'"

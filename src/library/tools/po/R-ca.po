@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
 "PO-Revision-Date: 2025-07-06 16:07+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -200,6 +200,11 @@ msgstr "*** algú ha corromput el camp integrat al paquet «%s» ***"
 #, fuzzy
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr "*no* usant «C» per a la configuració regional de LCCOLLATE"
+
+#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
+#: R/RdHelpers.R:0
+msgid ","
+msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -787,6 +792,12 @@ msgstr "Pàgines d'ajuda:"
 msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
 msgstr "A «%s» les vinyetes «%s» i «%s» tenen el mateix nom de vinyeta"
 
+#. R/license.R: stop("Input must be character")
+#: R/license.R:0
+#, fuzzy
+msgid "Input must be character"
+msgstr "«text» ha de ser un vector de caràcters"
+
 #. R/admin.R: gettext("Invalid DESCRIPTION file")
 #: R/admin.R:0
 #, fuzzy
@@ -820,6 +831,12 @@ msgstr "Punters de fitxer de llicència no vàlids: %s"
 #, fuzzy
 msgid "Invalid package aliases in Rd file '%s':"
 msgstr "Àlies de paquets no vàlids al fitxer Rd «%s»:"
+
+#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
+#: R/Rd2HTML.R:0
+#, fuzzy
+msgid "Invalid value of 'toc_entries'"
+msgstr "valor no vàlid per a «%s»: %s"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -1257,7 +1274,6 @@ msgstr "Els paquets amb prioritats «base» o «recomanada» o «defunct-base» 
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
-#. R/htmltools.R: sprintf("Processing %s ...", u)
 #: R/CRANtools.R:0 R/htmltools.R:0
 msgid "Processing %s ..."
 msgstr "S'està processant %s ..."
@@ -1537,6 +1553,11 @@ msgstr "Objectes de codi no documentats:"
 msgid "Undocumented data sets:"
 msgstr "Conjunts de dades no documentats:"
 
+#. R/Rd2HTML.R: warning("Unexpected jump in section level")
+#: R/Rd2HTML.R:0
+msgid "Unexpected jump in section level"
+msgstr ""
+
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
 #, fuzzy
@@ -1706,6 +1727,11 @@ msgstr "[mode dryrun] S'ha completat el Dryrun."
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
+msgstr ""
+
+#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
+#: R/RdHelpers.R:0
+msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -1926,16 +1952,24 @@ msgstr "el directori «%s» no existeix"
 msgid "done"
 msgstr "fet"
 
-#. R/checktools.R: sprintf("downloading %s ... ", rfiles[i])
+#. R/checktools.R: gettextf("download of %d reverse dependencies failed:\n  %s",     n, paste(sQuote(fails), collapse = ", "))
 #: R/checktools.R:0
 #, fuzzy
-msgid "downloading %s ..."
-msgstr "s'està baixant %s ..."
+msgid ""
+"download of %d reverse dependencies failed:\n"
+"  %s"
+msgstr "s'estan baixant les dependències inverses..."
 
-#. R/checktools.R: message("downloading reverse dependencies ...")
+#. R/checktools.R: gettextf("download of reverse dependency %s failed", sQuote(fails))
 #: R/checktools.R:0
 #, fuzzy
-msgid "downloading reverse dependencies ..."
+msgid "download of reverse dependency %s failed"
+msgstr "s'estan baixant les dependències inverses..."
+
+#. R/checktools.R: gettextf("downloading reverse dependencies %s", paste(sQuote(rnames),     collapse = ", "))
+#: R/checktools.R:0
+#, fuzzy
+msgid "downloading reverse dependencies %s"
 msgstr "s'estan baixant les dependències inverses..."
 
 #. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
@@ -2291,8 +2325,7 @@ msgstr "La utilitat de pedaç és necessària per a l'ajustament en temps d'inst
 #. R/urltools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", i)
 #. R/urltools.R: sprintf("processing %s", u)
-#. R/utils.R: sprintf("processing %s", p)
-#. R/utils.R: sprintf("processing %s", basename(p))
+#. R/utils.R: sprintf("processing %s", trafo(e))
 #. R/utils.R: sprintf("processing %s", f)
 #: R/admin.R:0 R/doitools.R:0 R/urltools.R:0 R/utils.R:0
 #, fuzzy
@@ -2373,6 +2406,11 @@ msgstr "la llista d'origen ha de tenir noms per a tots els elements"
 #, fuzzy
 msgid "source must be an environment or a list"
 msgstr "l'origen ha de ser un entorn o una llista"
+
+#. R/install.R: message("specified C++", use_cxxstd)
+#: R/install.R:0
+msgid "specified C++"
+msgstr ""
 
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
@@ -2919,6 +2957,10 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "no s'ha pogut tornar a codificar la línia %s %s"
 msgstr[1] "no s'ha pogut tornar a codificar %s línies %s"
 
+#, fuzzy
+#~ msgid "downloading %s ..."
+#~ msgstr "s'està baixant %s ..."
+
 #~ msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
 #~ msgstr "Usa la llicència ACM: només és apropiat per al codi TOMS d'ACM anterior a 2013"
 
@@ -2940,9 +2982,6 @@ msgstr[1] "no s'ha pogut tornar a codificar %s línies %s"
 #, fuzzy
 #~ msgid "inst/doc"
 #~ msgstr "inst/doc"
-
-#~ msgid ","
-#~ msgstr ","
 
 #, fuzzy
 #~ msgid "ignored as vignettes have been rebuilt."

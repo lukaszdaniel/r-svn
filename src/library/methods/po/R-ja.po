@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 11:12\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 15:40+0200\n"
 "Last-Translator: Masafumi\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1642,7 +1642,7 @@ msgstr "オブジェクトは %s 型ではなく、クラス %s の有効なデ�
 msgid "object to use as a method signature for function %s does not look like a legitimate signature (a vector of single class names): there were %d class names, but %d elements in the signature object"
 msgstr "関数 %s に対するメソッドシグナチャとして使用しようとしているオブジェクトは正しいシグナチャ (単一のクラス名のリスト) のようには見えません: %d 個のクラス名がありましたが、シグナチャオブジェクトには %d 個の要素があります"
 
-#. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[[1L]])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
+#. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[1L])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
 #: R/trace.R:0
 msgid "objects found in multiple packages: using %s and ignoring %s"
 msgstr "オブジェクトは複数のパッケージで見つかりました。%s を使い %s を無視します"

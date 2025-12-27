@@ -1680,7 +1680,7 @@ static SEXP ConvertChar(void *obj, char *inp, size_t inplen, cetype_t enc)
 		} else
 		    return R_NilValue;
 	    }
-	    return mkCharLenCE(buf, (int)(buflen - bufleft), enc);
+	    return String::obtain(buf, (buflen - bufleft), enc);
 	} else {
 	    char *buf = CallocCharBuf(buflen);
 	    if (TryConvertString(obj, inp, inplen, buf, &bufleft) == -1) {
@@ -1691,7 +1691,7 @@ static SEXP ConvertChar(void *obj, char *inp, size_t inplen, cetype_t enc)
 		} else
 		    return R_NilValue;
 	    }
-	    SEXP ans = mkCharLenCE(buf, (int)(buflen - bufleft), enc);
+	    SEXP ans = String::obtain(buf, (buflen - bufleft), enc);
 	    R_Free(buf);
 	    return ans;
 	}
@@ -1732,19 +1732,19 @@ static SEXP ReadChar(R_inpstream_t stream, char *buf, int length, int levs)
     buf[length] = '\0';
     cetype_t enc = String::GPBits2Encoding(levs);
     if (enc == CE_UTF8)
-	return mkCharLenCE(buf, length, CE_UTF8);
+	return String::obtain(buf, length, CE_UTF8);
     if (enc == CE_LATIN1)
-	return mkCharLenCE(buf, length, CE_LATIN1);
+	return String::obtain(buf, length, CE_LATIN1);
     if (enc == CE_BYTES)
-	return mkCharLenCE(buf, length, CE_BYTES);
+	return String::obtain(buf, length, CE_BYTES);
     if (enc == CE_NATIVE)
-	return mkCharLenCE(buf, length, CE_NATIVE);
+	return String::obtain(buf, length, CE_NATIVE);
 
     /* native encoding, not ascii */
     if (!stream->native_encoding[0] || /* original native encoding unknown */
         (stream->nat2nat_obj == (void *)-1 && /* translation impossible or disabled */
          stream->nat2utf8_obj == (void *)-1))
-	return mkCharLenCE(buf, length, CE_NATIVE);
+	return String::obtain(buf, length, CE_NATIVE);
     /* try converting to native encoding */
     if (!stream->nat2nat_obj &&
         streql(stream->native_encoding, R_nativeEncoding())) {
@@ -1795,7 +1795,7 @@ static SEXP ReadChar(R_inpstream_t stream, char *buf, int length, int levs)
 	invalid_utf8_warning(buf, native_fromcode(stream));
     }
     /* no translation possible */
-    return mkCharLenCE(buf, length, CE_NATIVE);
+    return String::obtain(buf, length, CE_NATIVE);
 }
 
 static R_xlen_t ReadLENGTH(R_inpstream_t stream)

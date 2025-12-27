@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 14:48+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -691,6 +691,11 @@ msgstr "'verbose' 和 'quietly' 兩個值都是 TRUE；因此先詳細再…"
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose' 是 TRUE，但 'echo' 不是；… 強迫 'echo <- TRUE'"
+
+#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#: R/namespace.R:0
+msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
+msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
@@ -1600,6 +1605,12 @@ msgstr "dim(X) 的值必須是正數"
 msgid "dim(x) must have a positive length"
 msgstr "dim(X) 的值必須是正數"
 
+#. R/files.R: warning("directories are ignored")
+#: R/files.R:0
+#, fuzzy
+msgid "directories are ignored"
+msgstr "不支援長整數向量"
+
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
 msgid "directories are omitted unless 'recursive = TRUE'"
@@ -2142,6 +2153,14 @@ msgstr ""
 "當處理物件 %s 時，\n"
 "無法使用命名空間 %s 且被 .GlobalEnv 取代"
 
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.source")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "partial")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.parse.data")
+#: R/namespace.R:0
+#, fuzzy
+msgid "namespace '%s' is already loaded so argument '%s' will be ignored."
+msgstr "載入了命名空間 %1$s %2$s，但需要的是 %3$s %4$s"
+
 #. R/namespace.R: stop("namespace is already attached")
 #: R/namespace.R:0
 msgid "namespace is already attached"
@@ -2670,11 +2689,6 @@ msgstr "目標應該是 %s ，現在卻是 %s"
 msgid "the LINPACK argument has been defunct since R 3.1.0"
 msgstr ""
 
-#. R/match.R: stop("there is more than one match in 'match.arg'")
-#: R/match.R:0
-msgid "there is more than one match in 'match.arg'"
-msgstr "'match.arg' 裡有重複的匹配"
-
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
 #: R/library.R:0
@@ -3086,6 +3100,9 @@ msgstr[0] "%d 列名稱與 %d 列不符合"
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "不存在叫這個名稱的套件"
+
+#~ msgid "there is more than one match in 'match.arg'"
+#~ msgstr "'match.arg' 裡有重複的匹配"
 
 #~ msgid "invalid 'dims'"
 #~ msgstr "'dims' 無效"

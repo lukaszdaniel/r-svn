@@ -119,12 +119,12 @@ SEXP dpermdist2(SEXP x, SEXP m) {
     idx = sum_a * sum_bp1 + 1;
     for (int j = 0; j < sum_b; j++) {
         if (!R_FINITE(dH[idx + j]))
-            error("%s",_("overflow error; cannot compute exact distribution"));
+            error("%s",_("overflow error: cannot compute exact distribution"));
         dret[j] = dH[idx + j];
         msum += dret[j];
     }
     if (!R_FINITE(msum) || msum == 0.0)
-        error("%s",_("overflow error; cannot compute exact distribution"));
+        error("%s",_("overflow error: cannot compute exact distribution"));
     /* compute probabilities and return the density x to R
        Note: the support is min(score_b):sum(score_b) */
     for (int j = 0; j < sum_b; j++)

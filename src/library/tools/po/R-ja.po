@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
 "PO-Revision-Date: 2025-07-06 16:08+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -179,6 +179,11 @@ msgstr "*** 誰かがパッケージ '%s' 中の Built 欄を壊しました ***
 #: R/utils.R:0
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr ""
+
+#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
+#: R/RdHelpers.R:0
+msgid ","
+msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -725,6 +730,12 @@ msgstr "ヘルプページ:"
 msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
 msgstr "'%s' において、ビニエット '%s' と '%s' は同じビニエット名になっています"
 
+#. R/license.R: stop("Input must be character")
+#: R/license.R:0
+#, fuzzy
+msgid "Input must be character"
+msgstr "'text' は文字型ベクトルでなければなりません"
+
 #. R/admin.R: gettext("Invalid DESCRIPTION file")
 #: R/admin.R:0
 msgid "Invalid DESCRIPTION file"
@@ -757,6 +768,12 @@ msgstr "不正なライセンスファイルのポインタ: %s"
 #, fuzzy
 msgid "Invalid package aliases in Rd file '%s':"
 msgstr "変数 '%s' 中に non-portable フラグ:"
+
+#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
+#: R/Rd2HTML.R:0
+#, fuzzy
+msgid "Invalid value of 'toc_entries'"
+msgstr "'%s' に対する不正な値 : %s"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -1158,7 +1175,6 @@ msgstr "パッケージが必要とする優先順位 'base' 'recommended' 'defu
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
-#. R/htmltools.R: sprintf("Processing %s ...", u)
 #: R/CRANtools.R:0 R/htmltools.R:0
 #, fuzzy
 msgid "Processing %s ..."
@@ -1414,6 +1430,11 @@ msgstr "ドキュメント化されてないコードオブジェクト:"
 msgid "Undocumented data sets:"
 msgstr "ドキュメント化されてないデータセット:"
 
+#. R/Rd2HTML.R: warning("Unexpected jump in section level")
+#: R/Rd2HTML.R:0
+msgid "Unexpected jump in section level"
+msgstr ""
+
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
 msgid "Unexported object imported by a ':::' call: %s"
@@ -1561,6 +1582,11 @@ msgstr ""
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
+msgstr ""
+
+#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
+#: R/RdHelpers.R:0
+msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -1760,14 +1786,24 @@ msgstr "ディレクトリ '%s' が存在しません"
 msgid "done"
 msgstr "完了"
 
-#. R/checktools.R: sprintf("downloading %s ... ", rfiles[i])
+#. R/checktools.R: gettextf("download of %d reverse dependencies failed:\n  %s",     n, paste(sQuote(fails), collapse = ", "))
 #: R/checktools.R:0
-msgid "downloading %s ..."
-msgstr "%s をダウンロードしています..."
+#, fuzzy
+msgid ""
+"download of %d reverse dependencies failed:\n"
+"  %s"
+msgstr "逆向き依存するものをダウンロードしています..."
 
-#. R/checktools.R: message("downloading reverse dependencies ...")
+#. R/checktools.R: gettextf("download of reverse dependency %s failed", sQuote(fails))
 #: R/checktools.R:0
-msgid "downloading reverse dependencies ..."
+#, fuzzy
+msgid "download of reverse dependency %s failed"
+msgstr "逆向き依存するものをダウンロードしています..."
+
+#. R/checktools.R: gettextf("downloading reverse dependencies %s", paste(sQuote(rnames),     collapse = ", "))
+#: R/checktools.R:0
+#, fuzzy
+msgid "downloading reverse dependencies %s"
 msgstr "逆向き依存するものをダウンロードしています..."
 
 #. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
@@ -2078,8 +2114,7 @@ msgstr ""
 #. R/urltools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", i)
 #. R/urltools.R: sprintf("processing %s", u)
-#. R/utils.R: sprintf("processing %s", p)
-#. R/utils.R: sprintf("processing %s", basename(p))
+#. R/utils.R: sprintf("processing %s", trafo(e))
 #. R/utils.R: sprintf("processing %s", f)
 #: R/admin.R:0 R/doitools.R:0 R/urltools.R:0 R/utils.R:0
 msgid "processing %s"
@@ -2149,6 +2184,11 @@ msgstr "ソースリストには全ての要素の名前が含まれていなけ
 #: R/makeLazyLoad.R:0
 msgid "source must be an environment or a list"
 msgstr "ソースは環境またはリストでなければなりません"
+
+#. R/install.R: message("specified C++", use_cxxstd)
+#: R/install.R:0
+msgid "specified C++"
+msgstr ""
 
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
@@ -2597,14 +2637,14 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "%s (%s行) を再エンコード出来ません"
 
+#~ msgid "downloading %s ..."
+#~ msgstr "%s をダウンロードしています..."
+
 #~ msgid "..."
 #~ msgstr "..."
 
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Rd ファイルは空でない %s を持たなければなりません"
-
-#~ msgid ","
-#~ msgstr ","
 
 #~ msgid "="
 #~ msgstr "="

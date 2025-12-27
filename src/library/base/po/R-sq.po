@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 14:50+0200\n"
 "Last-Translator: Krye Kuzhinieri <sundley.12345@gmail.com>\n"
 "Language-Team: Albanian <https://translate.rx.studio/projects/r-project/base-r/sq/>\n"
@@ -672,6 +672,11 @@ msgstr ""
 #. R/source.R: warning("'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'")
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
+msgstr ""
+
+#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#: R/namespace.R:0
+msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
 msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
@@ -1547,6 +1552,11 @@ msgstr "Dimensionet e dim(x) duhet të kenë gjatësi pozitive"
 msgid "dim(x) must have a positive length"
 msgstr "dim(x) duhet të ketë gjatësi pozitive"
 
+#. R/files.R: warning("directories are ignored")
+#: R/files.R:0
+msgid "directories are ignored"
+msgstr ""
+
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
 msgid "directories are omitted unless 'recursive = TRUE'"
@@ -2082,6 +2092,13 @@ msgid ""
 "by .GlobalEnv when processing object %s"
 msgstr ""
 
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.source")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "partial")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.parse.data")
+#: R/namespace.R:0
+msgid "namespace '%s' is already loaded so argument '%s' will be ignored."
+msgstr ""
+
 #. R/namespace.R: stop("namespace is already attached")
 #: R/namespace.R:0
 msgid "namespace is already attached"
@@ -2593,11 +2610,6 @@ msgstr "Objektivi është %s, aktualja është %s"
 #. R/svd.R: stop("the LINPACK argument has been defunct since R 3.1.0")
 #: R/chol.R:0 R/solve.R:0 R/svd.R:0
 msgid "the LINPACK argument has been defunct since R 3.1.0"
-msgstr ""
-
-#. R/match.R: stop("there is more than one match in 'match.arg'")
-#: R/match.R:0
-msgid "there is more than one match in 'match.arg'"
 msgstr ""
 
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))

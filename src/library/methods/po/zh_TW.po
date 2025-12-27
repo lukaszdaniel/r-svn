@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-07 20:13+0200\n"
+"POT-Creation-Date: 2025-12-27 18:28+0100\n"
 "PO-Revision-Date: 2025-07-06 15:41+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -28,185 +28,185 @@ msgstr "呼叫 C 子程式給 'externalptr' 物件進行初始化"
 msgid "invalid list for substitution"
 msgstr "置換時用的串列發生錯誤"
 
-#: methods_list_dispatch.cpp:135
+#: methods_list_dispatch.cpp:140
 #, c-format
 msgid "unexpected type '%s' for condition message"
 msgstr ""
 
-#: methods_list_dispatch.cpp:138
+#: methods_list_dispatch.cpp:143
 msgid "condition message must be length 1"
 msgstr ""
 
-#: methods_list_dispatch.cpp:219
+#: methods_list_dispatch.cpp:224
 msgid "could not find the skeleton calls for 'methods' (package detached?): expect very bad things to happen"
 msgstr "沒有能夠為 'methods' 找到骨架呼叫(程式套件被拆離了？) ：接下去很可能會出大錯"
 
-#: methods_list_dispatch.cpp:280
+#: methods_list_dispatch.cpp:285
 #, c-format
 msgid "no \"allMethods\" slot found in object of class \"%s\" used as methods list for function '%s'"
 msgstr "當函式 '%2$s' 方法串列來用的，類別為 \"%1$s\" 的物件缺少 \"allMethods\" 這麼一個槽。"
 
-#: methods_list_dispatch.cpp:408
+#: methods_list_dispatch.cpp:413
 #, c-format
 msgid "S language method selection did not return normally when called from internal dispatch for function '%s'"
 msgstr ""
 
-#: methods_list_dispatch.cpp:410
+#: methods_list_dispatch.cpp:415
 msgid "Function name for method selection called internally"
 msgstr ""
 
-#: methods_list_dispatch.cpp:467 methods_list_dispatch.cpp:488
+#: methods_list_dispatch.cpp:472 methods_list_dispatch.cpp:493
 msgid "The \"package\" slot in generic function object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:500
+#: methods_list_dispatch.cpp:505
 msgid "The argument \"f\" to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:501
+#: methods_list_dispatch.cpp:506
 msgid "The argument \"package\" to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:506
+#: methods_list_dispatch.cpp:511
 #, c-format
 msgid "no generic function definition found for '%s'"
 msgstr "沒有為 '%s' 找到適用的泛型函式"
 
-#: methods_list_dispatch.cpp:507
+#: methods_list_dispatch.cpp:512
 #, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
 msgstr "在提供的環境裡 '%s' 沒有同屬函式定義"
 
-#: methods_list_dispatch.cpp:528
+#: methods_list_dispatch.cpp:533
 msgid "The function name in the call to standardGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:542
+#: methods_list_dispatch.cpp:547
 #, c-format
 msgid "invalid generic function object for method selection for function '%s': expected a function or a primitive, got an object of class \"%s\""
 msgstr "函式 '%s' 方法選擇時其同屬函式物件發生錯誤：需要的是函式或原始函式，得到的卻是類別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.cpp:557
+#: methods_list_dispatch.cpp:562
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr "呼叫時找不到用於 '%s' 函式的直接或繼承的方法"
 
-#: methods_list_dispatch.cpp:586 methods_list_dispatch.cpp:1160
+#: methods_list_dispatch.cpp:591 methods_list_dispatch.cpp:1166
 msgid "invalid object (non-function) used as method"
 msgstr "當方法用的物件(非函式)發生錯誤"
 
-#: methods_list_dispatch.cpp:602
+#: methods_list_dispatch.cpp:607
 msgid "'symbol' must be a SYMSXP"
 msgstr ""
 
-#: methods_list_dispatch.cpp:605
+#: methods_list_dispatch.cpp:610
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
 msgstr "呼叫框裡找不到 '%s' 這個符號"
 
-#: methods_list_dispatch.cpp:613
+#: methods_list_dispatch.cpp:618
 #, c-format
 msgid "invalid symbol in checking for missing argument in method dispatch: expected a name, got an object of class \"%s\""
 msgstr "方法調度在檢查短少引數時符號發生錯誤：需要的是個名稱，得到的卻是類別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.cpp:616
+#: methods_list_dispatch.cpp:621
 msgid "use of NULL environment is defunct"
 msgstr "NULL 環境不再有用"
 
-#: methods_list_dispatch.cpp:620
+#: methods_list_dispatch.cpp:625
 #, c-format
 msgid "invalid environment in checking for missing argument, '%s', in methods dispatch: got an object of class \"%s\""
 msgstr "方法調度在檢查短少引數 '%s' 時環境發生錯誤：不需要類別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.cpp:643
+#: methods_list_dispatch.cpp:648
 #, c-format
 msgid "error in evaluating the argument '%s' in selecting a method for function '%s': %s"
 msgstr "在為 '%2$s' 函式選擇方法時評估 '%1$s' 引數發生錯誤: %3$s"
 
-#: methods_list_dispatch.cpp:660
+#: methods_list_dispatch.cpp:665
 #, c-format
 msgid "object of class \"%s\" used as methods list for function '%s' ( no 'argument' slot)"
 msgstr "函式 '%s' 裡不能把類別為 \"%s\" 的物件當作方法串列來用(沒有 'argument' 這樣一個槽)"
 
-#: methods_list_dispatch.cpp:671
+#: methods_list_dispatch.cpp:676
 #, c-format
 msgid "(in selecting a method for function '%s') '...' and related variables cannot be used for methods dispatch"
 msgstr "(在為 '%s' 函式選擇方法時)'…' 和其他有關的變數不能在方法調度時使用"
 
-#: methods_list_dispatch.cpp:674
+#: methods_list_dispatch.cpp:679
 #, c-format
 msgid "(in selecting a method for function '%s') the 'environment' argument for dispatch must be an R environment; got an object of class \"%s\""
 msgstr "(在為 '%s' 函式選擇方法時) 調度時的 'environment' 引數必須是 R 環境；不需要類別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.cpp:705
+#: methods_list_dispatch.cpp:710
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr "找不到與 '%s' 函式符合的方法(引數是 '%s'，類別為 \"%s\")"
 
-#: methods_list_dispatch.cpp:712
+#: methods_list_dispatch.cpp:717
 #, c-format
 msgid "recursive use of function '%s' in method selection, with no default method"
 msgstr "在方法選擇時函式 '%s' 不能有無預設方法的遞迴使用"
 
-#: methods_list_dispatch.cpp:737
+#: methods_list_dispatch.cpp:742
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr "評估 'primitive' 其次方法時發生錯誤: %s"
 
-#: methods_list_dispatch.cpp:760
+#: methods_list_dispatch.cpp:765
 msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:767
+#: methods_list_dispatch.cpp:772
 msgid "internal error in 'callNextMethod': '.Generic' was not assigned in the frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:892
+#: methods_list_dispatch.cpp:897
 #, fuzzy, c-format
 msgid "%s must be a single string (got a character vector of length %d)"
 msgstr "'%s' 必須是單一字串(現在它是長度為 %d 的字元向量)"
 
-#: methods_list_dispatch.cpp:896
+#: methods_list_dispatch.cpp:901
 #, fuzzy, c-format
 msgid "%s must be a non-empty string; got an empty string"
 msgstr "'%s' 必須是非空字串；現在它是空的字串"
 
-#: methods_list_dispatch.cpp:900
+#: methods_list_dispatch.cpp:905
 #, fuzzy, c-format
 msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr "'%s' 必須是單一字串(現在它是類別為 \"%s\" 的物件)"
 
-#: methods_list_dispatch.cpp:934
+#: methods_list_dispatch.cpp:939
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:936
+#: methods_list_dispatch.cpp:941
 msgid "The name of the object (e.g,. a class or generic function) to find in the meta-data"
 msgstr ""
 
-#: methods_list_dispatch.cpp:938
+#: methods_list_dispatch.cpp:943
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:985
+#: methods_list_dispatch.cpp:990
 msgid "class should be either a character-string name or a class definition"
 msgstr "類別必須是字串名稱或類別定義"
 
-#: methods_list_dispatch.cpp:1071
+#: methods_list_dispatch.cpp:1077
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr "沒有能夠為原始 \"%s\" 找到同屬函式"
 
-#: methods_list_dispatch.cpp:1078
+#: methods_list_dispatch.cpp:1084
 #, c-format
 msgid "expected a generic function or a primitive for dispatch, got an object of class \"%s\""
 msgstr "需要的是同屬函式或原始函式，現在得到的卻是類別為 \"%s\" 的物件"
 
-#: methods_list_dispatch.cpp:1090
+#: methods_list_dispatch.cpp:1096
 msgid "generic seems not to have been initialized for table dispatch---need to have '.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.cpp:1094
+#: methods_list_dispatch.cpp:1100
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

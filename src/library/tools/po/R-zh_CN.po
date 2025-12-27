@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -190,6 +190,11 @@ msgstr "***程序包'%s'里的Built域坏了***"
 #: R/utils.R:0
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr ""
+
+#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
+#: R/RdHelpers.R:0
+msgid ","
+msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -740,6 +745,12 @@ msgstr "说明页面："
 msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
 msgstr "'%s'简介里'%s'和'%s'的名称是一样的"
 
+#. R/license.R: stop("Input must be character")
+#: R/license.R:0
+#, fuzzy
+msgid "Input must be character"
+msgstr "参数'x'必需是字符向量"
+
 #. R/admin.R: gettext("Invalid DESCRIPTION file")
 #: R/admin.R:0
 msgid "Invalid DESCRIPTION file"
@@ -773,6 +784,12 @@ msgstr "执照文件指示器无效：%s"
 #, fuzzy
 msgid "Invalid package aliases in Rd file '%s':"
 msgstr "变量'%s'里有不可便携的标志:"
+
+#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
+#: R/Rd2HTML.R:0
+#, fuzzy
+msgid "Invalid value of 'toc_entries'"
+msgstr "'%s'值无效：%s"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -1179,7 +1196,6 @@ msgstr "R必需知道带'base'，'recommended'或'defunct-base'优先权的程�
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
-#. R/htmltools.R: sprintf("Processing %s ...", u)
 #: R/CRANtools.R:0 R/htmltools.R:0
 msgid "Processing %s ..."
 msgstr "处理%s中 ..."
@@ -1436,6 +1452,11 @@ msgstr "未公开的编码对象:"
 msgid "Undocumented data sets:"
 msgstr "未公开的数据集:"
 
+#. R/Rd2HTML.R: warning("Unexpected jump in section level")
+#: R/Rd2HTML.R:0
+msgid "Unexpected jump in section level"
+msgstr ""
+
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
 msgid "Unexported object imported by a ':::' call: %s"
@@ -1587,6 +1608,11 @@ msgstr ""
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
+msgstr ""
+
+#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
+#: R/RdHelpers.R:0
+msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -1786,14 +1812,24 @@ msgstr "不存在'%s'这个文件目录"
 msgid "done"
 msgstr "好了"
 
-#. R/checktools.R: sprintf("downloading %s ... ", rfiles[i])
+#. R/checktools.R: gettextf("download of %d reverse dependencies failed:\n  %s",     n, paste(sQuote(fails), collapse = ", "))
 #: R/checktools.R:0
-msgid "downloading %s ..."
-msgstr "下载%s。。。"
+#, fuzzy
+msgid ""
+"download of %d reverse dependencies failed:\n"
+"  %s"
+msgstr "下载扭转了的依赖关系"
 
-#. R/checktools.R: message("downloading reverse dependencies ...")
+#. R/checktools.R: gettextf("download of reverse dependency %s failed", sQuote(fails))
 #: R/checktools.R:0
-msgid "downloading reverse dependencies ..."
+#, fuzzy
+msgid "download of reverse dependency %s failed"
+msgstr "下载扭转了的依赖关系"
+
+#. R/checktools.R: gettextf("downloading reverse dependencies %s", paste(sQuote(rnames),     collapse = ", "))
+#: R/checktools.R:0
+#, fuzzy
+msgid "downloading reverse dependencies %s"
 msgstr "下载扭转了的依赖关系"
 
 #. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
@@ -2106,8 +2142,7 @@ msgstr ""
 #. R/urltools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", i)
 #. R/urltools.R: sprintf("processing %s", u)
-#. R/utils.R: sprintf("processing %s", p)
-#. R/utils.R: sprintf("processing %s", basename(p))
+#. R/utils.R: sprintf("processing %s", trafo(e))
 #. R/utils.R: sprintf("processing %s", f)
 #: R/admin.R:0 R/doitools.R:0 R/urltools.R:0 R/utils.R:0
 msgid "processing %s"
@@ -2179,6 +2214,11 @@ msgstr "源列里所有单元都必需要带名称"
 #: R/makeLazyLoad.R:0
 msgid "source must be an environment or a list"
 msgstr "源码要么是环境要么是列"
+
+#. R/install.R: message("specified C++", use_cxxstd)
+#: R/install.R:0
+msgid "specified C++"
+msgstr ""
 
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
@@ -2634,14 +2674,14 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码%s行%s"
 
+#~ msgid "downloading %s ..."
+#~ msgstr "下载%s。。。"
+
 #~ msgid "..."
 #~ msgstr "…"
 
 #~ msgid "Rd files must have a non-empty %s."
 #~ msgstr "Rd文件里必需要有非空白的%s。"
-
-#~ msgid ","
-#~ msgstr ","
 
 #~ msgid "="
 #~ msgstr "="

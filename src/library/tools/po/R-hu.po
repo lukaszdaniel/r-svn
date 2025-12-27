@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
 "PO-Revision-Date: 2025-07-06 16:08+0200\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -176,6 +176,11 @@ msgstr ""
 #: R/utils.R:0
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr ""
+
+#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
+#: R/RdHelpers.R:0
+msgid ","
+msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -679,6 +684,11 @@ msgstr ""
 msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
 msgstr ""
 
+#. R/license.R: stop("Input must be character")
+#: R/license.R:0
+msgid "Input must be character"
+msgstr ""
+
 #. R/admin.R: gettext("Invalid DESCRIPTION file")
 #: R/admin.R:0
 msgid "Invalid DESCRIPTION file"
@@ -708,6 +718,11 @@ msgstr ""
 #. R/QC.R: gettextf("Invalid package aliases in Rd file '%s':", nm)
 #: R/QC.R:0
 msgid "Invalid package aliases in Rd file '%s':"
+msgstr ""
+
+#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
+#: R/Rd2HTML.R:0
+msgid "Invalid value of 'toc_entries'"
 msgstr ""
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
@@ -1087,7 +1102,6 @@ msgstr ""
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
-#. R/htmltools.R: sprintf("Processing %s ...", u)
 #: R/CRANtools.R:0 R/htmltools.R:0
 msgid "Processing %s ..."
 msgstr ""
@@ -1334,6 +1348,11 @@ msgstr ""
 msgid "Undocumented data sets:"
 msgstr ""
 
+#. R/Rd2HTML.R: warning("Unexpected jump in section level")
+#: R/Rd2HTML.R:0
+msgid "Unexpected jump in section level"
+msgstr ""
+
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
 msgid "Unexported object imported by a ':::' call: %s"
@@ -1480,6 +1499,11 @@ msgstr ""
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
+msgstr ""
+
+#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
+#: R/RdHelpers.R:0
+msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -1673,14 +1697,21 @@ msgstr ""
 msgid "done"
 msgstr ""
 
-#. R/checktools.R: sprintf("downloading %s ... ", rfiles[i])
+#. R/checktools.R: gettextf("download of %d reverse dependencies failed:\n  %s",     n, paste(sQuote(fails), collapse = ", "))
 #: R/checktools.R:0
-msgid "downloading %s ..."
+msgid ""
+"download of %d reverse dependencies failed:\n"
+"  %s"
 msgstr ""
 
-#. R/checktools.R: message("downloading reverse dependencies ...")
+#. R/checktools.R: gettextf("download of reverse dependency %s failed", sQuote(fails))
 #: R/checktools.R:0
-msgid "downloading reverse dependencies ..."
+msgid "download of reverse dependency %s failed"
+msgstr ""
+
+#. R/checktools.R: gettextf("downloading reverse dependencies %s", paste(sQuote(rnames),     collapse = ", "))
+#: R/checktools.R:0
+msgid "downloading reverse dependencies %s"
 msgstr ""
 
 #. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
@@ -1988,8 +2019,7 @@ msgstr ""
 #. R/urltools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", i)
 #. R/urltools.R: sprintf("processing %s", u)
-#. R/utils.R: sprintf("processing %s", p)
-#. R/utils.R: sprintf("processing %s", basename(p))
+#. R/utils.R: sprintf("processing %s", trafo(e))
 #. R/utils.R: sprintf("processing %s", f)
 #: R/admin.R:0 R/doitools.R:0 R/urltools.R:0 R/utils.R:0
 msgid "processing %s"
@@ -2053,6 +2083,11 @@ msgstr ""
 #. R/makeLazyLoad.R: stop("source must be an environment or a list")
 #: R/makeLazyLoad.R:0
 msgid "source must be an environment or a list"
+msgstr ""
+
+#. R/install.R: message("specified C++", use_cxxstd)
+#: R/install.R:0
+msgid "specified C++"
 msgstr ""
 
 #. R/install.R: message("staged installation is only possible with locking")
@@ -2533,6 +2568,3 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] ""
 msgstr[1] ""
-
-#~ msgid ","
-#~ msgstr ","

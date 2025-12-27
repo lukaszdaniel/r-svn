@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-08-08 09:52\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -152,6 +152,7 @@ msgstr "'destfile' dev'essere un vettore a caratteri di lunghezza 1"
 msgid "'digits' and 'digits.d' are both specified and the latter is not used"
 msgstr "'digits' e 'digits.d' sono entrambi specificati ma il secondo non è usato"
 
+#. R/packages.R: gettextf("'download.file()' error code '%d'", z)
 #. R/packages.R: gettextf("'download.file()' error code '%d'", m)
 #: R/packages.R:0
 msgid "'download.file()' error code '%d'"

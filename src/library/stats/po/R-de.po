@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -231,6 +231,12 @@ msgstr "'control' Argument muss eine benannte Liste sein"
 #: R/nlminb.R:0
 msgid "'control' component '%s' = %g, is out of range"
 msgstr ""
+
+#. R/wilcox.test.R: stop("'correct' must be an integer between 0 and 3")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'correct' must be an integer between 0 and 3"
+msgstr "'or' muss einzelne Zahl zwischen 0 und unendlich sein"
 
 #. R/factanal.R: stop("'covmat' is not a valid covariance list")
 #. R/princomp.R: stop("'covmat' is not a valid covariance list")
@@ -1266,6 +1272,12 @@ msgstr "'y' muss einen länger sein als 'x'"
 msgid "'y', 'groups' and 'blocks' must have the same length"
 msgstr "'y', 'groups' und 'blocks' müssen gleich lang sein"
 
+#. R/wilcox.test.R: stop("'z' is not a rank vector")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'z' is not a rank vector"
+msgstr "'x' ist kein Vektor"
+
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
 msgid "(unordered) factors are not allowed"
@@ -1499,6 +1511,11 @@ msgstr "Modellneuanpassung, um Projektion zu ermöglichen"
 #, fuzzy
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr "statistic. Waiting..."
+
+#. R/wilcox.test.R: warning("Requested conf.level not achievable")
+#: R/wilcox.test.R:0
+msgid "Requested conf.level not achievable"
+msgstr "gefordertes conf.level nicht erreichbar"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
@@ -1851,32 +1868,15 @@ msgstr "kann keinen Konfidenzbereich berechnen, gebe NA zurück"
 msgid "cannot compute estimate, returning NA"
 msgstr "kann keinen Schätzer berechnen, gebe NA zurück"
 
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with ties"
-msgstr "kann bei Bindungen das exakte Konfidenzintervall nicht berechnen"
-
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with zeroes"
-msgstr "kann das exakte Konfidenzintervall bei Nullen nicht berechnen"
-
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
-#. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact confidence intervals with ties"
 msgstr "Kann kein exaktes Konfidenzintervall bei Bindungen berechnen"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "kann bei Bindungen keinen exakten p-Wert Berechnen"
-
-#. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact p-value with zeroes"
-msgstr "kann den exakten p-Wert bei Nullen nicht berechnen"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0
@@ -3974,6 +3974,11 @@ msgstr "'r' ist kleiner als 1"
 msgid "true correlation is not equal to %s"
 msgstr ""
 
+#. R/t.test.R: gettextf("true difference in means between group %s and group %s is not equal to %s",     levels(g)[1], levels(g)[2], y$null.value)
+#: R/t.test.R:0
+msgid "true difference in means between group %s and group %s is not equal to %s"
+msgstr ""
+
 #. R/t.test.R: gettextf("true difference in means is greater than %s", mu, domain = "R-stats")
 #: R/t.test.R:0
 msgid "true difference in means is greater than %s"
@@ -4596,6 +4601,15 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "benutze %d/%d Zeile aus einem kombinierten Fit"
 msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
 
+#~ msgid "cannot compute exact confidence interval with ties"
+#~ msgstr "kann bei Bindungen das exakte Konfidenzintervall nicht berechnen"
+
+#~ msgid "cannot compute exact confidence interval with zeroes"
+#~ msgstr "kann das exakte Konfidenzintervall bei Nullen nicht berechnen"
+
+#~ msgid "cannot compute exact p-value with zeroes"
+#~ msgstr "kann den exakten p-Wert bei Nullen nicht berechnen"
+
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "Spalten von 'contrast.obj' müssen einen Kontrast definieren (Summe = 0)"
 
@@ -4694,9 +4708,6 @@ msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
 
 #~ msgid "invalid 'abbr.colnames'"
 #~ msgstr "unzulässige 'abbr.colnames'"
-
-#~ msgid "Requested conf.level not achievable"
-#~ msgstr "gefordertes conf.level nicht erreichbar"
 
 #~ msgid "medpolish() did not converge in %d iteration"
 #~ msgid_plural "medpolish() did not converge in %d iterations"

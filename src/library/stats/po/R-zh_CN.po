@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 16:02+0200\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -236,6 +236,12 @@ msgstr "'control'参数必需是列表"
 #: R/nlminb.R:0
 msgid "'control' component '%s' = %g, is out of range"
 msgstr ""
+
+#. R/wilcox.test.R: stop("'correct' must be an integer between 0 and 3")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'correct' must be an integer between 0 and 3"
+msgstr "'or'必需是在零和Inf之间的一个数值"
 
 #. R/factanal.R: stop("'covmat' is not a valid covariance list")
 #. R/princomp.R: stop("'covmat' is not a valid covariance list")
@@ -1278,6 +1284,12 @@ msgstr "'y'必需比'x'长"
 msgid "'y', 'groups' and 'blocks' must have the same length"
 msgstr "'y', 'groups'和'blocks'的长度必需相同"
 
+#. R/wilcox.test.R: stop("'z' is not a rank vector")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'z' is not a rank vector"
+msgstr "'x'不是向量"
+
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
 #, fuzzy
@@ -1514,6 +1526,11 @@ msgstr "重新拟合模型以提供投影"
 #: R/confint.R:0
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
+
+#. R/wilcox.test.R: warning("Requested conf.level not achievable")
+#: R/wilcox.test.R:0
+msgid "Requested conf.level not achievable"
+msgstr "无法达到所要求的conf.level"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
@@ -1871,32 +1888,15 @@ msgstr "无法计算置信集, 返回NA"
 msgid "cannot compute estimate, returning NA"
 msgstr "无法计算估计量, 返回NA"
 
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with ties"
-msgstr "有连结时无法计算精确的置信区间"
-
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with zeroes"
-msgstr "有零时无法计算精确的置信区间"
-
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
-#. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact confidence intervals with ties"
 msgstr "无法精确计算带连结的置信区间"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "无法精确计算带连结的p值"
-
-#. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact p-value with zeroes"
-msgstr "有0时无法计算精确的p值"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0
@@ -4024,6 +4024,11 @@ msgstr "'r'小于一"
 msgid "true correlation is not equal to %s"
 msgstr ""
 
+#. R/t.test.R: gettextf("true difference in means between group %s and group %s is not equal to %s",     levels(g)[1], levels(g)[2], y$null.value)
+#: R/t.test.R:0
+msgid "true difference in means between group %s and group %s is not equal to %s"
+msgstr ""
+
 #. R/t.test.R: gettextf("true difference in means is greater than %s", mu, domain = "R-stats")
 #: R/t.test.R:0
 msgid "true difference in means is greater than %s"
@@ -4626,6 +4631,15 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "从组合拟合中用%d/%d行"
 
+#~ msgid "cannot compute exact confidence interval with ties"
+#~ msgstr "有连结时无法计算精确的置信区间"
+
+#~ msgid "cannot compute exact confidence interval with zeroes"
+#~ msgstr "有零时无法计算精确的置信区间"
+
+#~ msgid "cannot compute exact p-value with zeroes"
+#~ msgstr "有0时无法计算精确的p值"
+
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "'contrast.obj'列必需设定对比(总和为零)"
 
@@ -4716,9 +4730,6 @@ msgstr[0] "从组合拟合中用%d/%d行"
 
 #~ msgid "invalid 'abbr.colnames'"
 #~ msgstr "'abbr.colnames'无效"
-
-#~ msgid "Requested conf.level not achievable"
-#~ msgstr "无法达到所要求的conf.level"
 
 #~ msgid "medpolish() did not converge in %d iteration"
 #~ msgid_plural "medpolish() did not converge in %d iterations"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-15 11:12\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 15:39+0200\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -1936,7 +1936,7 @@ msgstr "l'objecte ha de ser una part de dades vàlida per a la classe %s; no és
 msgid "object to use as a method signature for function %s does not look like a legitimate signature (a vector of single class names): there were %d class names, but %d elements in the signature object"
 msgstr "l'objecte a utilitzar com a signatura de mètode per a la funció %s no sembla una signatura legítima (un vector de noms de classe única): hi havia %d noms de classe, però %d elements a l'objecte de signatura"
 
-#. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[[1L]])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
+#. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[1L])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
 #: R/trace.R:0
 #, fuzzy
 msgid "objects found in multiple packages: using %s and ignoring %s"

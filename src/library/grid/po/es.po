@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-07-06 11:20+0200\n"
+"POT-Creation-Date: 2025-12-27 18:28+0100\n"
 "PO-Revision-Date: 2025-07-06 15:35+0200\n"
 "Last-Translator: Nichole Haines <NicholeHaines54@gmail.com>\n"
 "Language-Team: none\n"
@@ -23,86 +23,86 @@ msgstr ""
 msgid "updateGContext must only be called after initGContext"
 msgstr "updateGContext solo debe ser llamado después de initGContext"
 
-#: grid.cpp:202
+#: grid.cpp:205
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
 msgstr "Activar o desactivar el recorte dentro de una ruta (recortada) no está siendo respetado"
 
-#: grid.cpp:244
+#: grid.cpp:247
 msgid "cannot clip to rotated viewport"
 msgstr "no se puede recortar a la ventana gráfica rotada"
 
-#: grid.cpp:459
+#: grid.cpp:462
 msgid "Clipping paths within a (clipping) path are not honoured"
 msgstr "El recorte de las rutas dentro de una ruta (recortada) no está siendo respetado"
 
-#: grid.cpp:478
+#: grid.cpp:481
 msgid "Masks within a (clipping) path are not honoured"
 msgstr "Las máscaras dentro de una ruta (recortada) no están siendo respetadas"
 
-#: grid.cpp:702 grid.cpp:880
+#: grid.cpp:705 grid.cpp:883
 #, c-format
 msgid "Viewport '%s' was not found"
 msgstr "No se encontró la ventana gráfica '%s'"
 
-#: grid.cpp:912 grid.cpp:917 grid.cpp:1038 grid.cpp:1043
+#: grid.cpp:915 grid.cpp:920 grid.cpp:1040 grid.cpp:1045
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
 msgstr "no se puede abrir la ventana gráfica de nivel superior (¿se mezclan la salida de 'grid' y 'graphics'?)"
 
-#: grid.cpp:1244
+#: grid.cpp:1246
 msgid "attempt to plot on null device"
 msgstr "tentativa de graficar en un dispositivo nulo"
 
-#: grid.cpp:1714
+#: grid.cpp:1716
 msgid "there is no layout defined"
 msgstr "no hay ningún layout definido"
 
-#: grid.cpp:1936
+#: grid.cpp:1938
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr "no se encontró el borde del polígono (¿ancho cero o altura cero?)"
 
-#: grid.cpp:1945
+#: grid.cpp:1947
 msgid "polygon edge not found"
 msgstr "no se encontró el borde del polígono"
 
-#: grid.cpp:2097
+#: grid.cpp:2099
 msgid "require at least two points to draw arrow"
 msgstr "se requieren al menos dos puntos para dibujar la flecha"
 
-#: grid.cpp:2465
+#: grid.cpp:2467
 msgid "non-finite control point in Xspline"
 msgstr "punto de control no finito en Xspline"
 
-#: grid.cpp:3431
+#: grid.cpp:3433
 msgid "non-finite x or y in graphics path"
 msgstr "X o Y no finitos en trayecto"
 
-#: grid.cpp:3480
+#: grid.cpp:3482
 msgid "Empty raster"
 msgstr "ráster vacío"
 
-#: grid.cpp:4022
+#: grid.cpp:4023
 msgid "use of negative pch with symbol font is invalid"
 msgstr ""
 
-#: grid.cpp:4028 grid.cpp:4084
+#: grid.cpp:4029 grid.cpp:4085
 msgid "Coordinates for text pch not yet supported"
 msgstr "Coordenadas para 'pch' de texto no se soporta"
 
-#: grid.cpp:4089
+#: grid.cpp:4090
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr "valor pch '%d' no es válido para esta configuración local"
 
-#: grid.cpp:4910
+#: grid.cpp:4911
 #, c-format
 msgid "unimplemented pch value '%d'"
 msgstr "valor pch '%d' no implementado"
 
-#: grid.cpp:5068
+#: grid.cpp:5069
 msgid "invalid plotting symbol"
 msgstr "símbolo de gráfico no válido"
 
-#: grid.cpp:5186
+#: grid.cpp:5187
 msgid "unable to clip to rotated rectangle"
 msgstr "No se puede recortar a un rectángulo girado"
 
@@ -118,7 +118,7 @@ msgstr "'layout.pos.col' no válido"
 msgid "singular transformation matrix"
 msgstr "matriz de transformación es singular"
 
-#: state.cpp:196
+#: state.cpp:197
 msgid "unable to store 'grid' state.  Too many devices open?"
 msgstr "no se puede almacenar el estado de 'grid'. ¿Demasiados dispositivos abiertos?"
 
@@ -163,27 +163,27 @@ msgstr "n se suministra ninguna cadena para la unidad 'strwidth/height'"
 msgid "no 'grob' supplied for 'grobwidth/height' unit"
 msgstr "no se ha suministrado 'grob' para la unidad de 'grobwidth/height'"
 
-#: unit.cpp:1635
+#: unit.cpp:1644
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
 msgstr "'gPath' debe tener una profundidad de 1 en unidades 'grobwidth/height'"
 
-#: unit.cpp:1640
+#: unit.cpp:1649
 msgid "non-NULL value supplied for plain unit"
 msgstr "valor no NULL proporcionado para la unidad simple"
 
-#: unit.cpp:1693 unit.cpp:1727 unit.cpp:1776
+#: unit.cpp:1702 unit.cpp:1736 unit.cpp:1785
 msgid "old version of unit class is no longer allowed"
 msgstr "ya no se permite la versión anterior de la clase unit"
 
-#: unit.cpp:1699
+#: unit.cpp:1708
 msgid "object is not coercible to a unit"
 msgstr "no es posible forzar el objeto a una unidad"
 
-#: unit.cpp:1725
+#: unit.cpp:1734
 msgid "object is not a unit"
 msgstr "el objeto no es una unidad"
 
-#: unit.cpp:1860
+#: unit.cpp:1869
 msgid "units can only be multiplied with numerics and integers"
 msgstr "las unidades solo se pueden multiplicar por números y números enteros"
 

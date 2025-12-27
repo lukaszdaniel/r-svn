@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -235,6 +235,12 @@ msgstr "'control' 인자는 반드시 named list이어야 합니다"
 #: R/nlminb.R:0
 msgid "'control' component '%s' = %g, is out of range"
 msgstr ""
+
+#. R/wilcox.test.R: stop("'correct' must be an integer between 0 and 3")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'correct' must be an integer between 0 and 3"
+msgstr "'or'은 반드시 0과 Inf사이의 한개의 숫자이어야 합니다"
 
 #. R/factanal.R: stop("'covmat' is not a valid covariance list")
 #. R/princomp.R: stop("'covmat' is not a valid covariance list")
@@ -1272,6 +1278,12 @@ msgstr "'y'는 반드시 'x'보다 길어야 합니다."
 msgid "'y', 'groups' and 'blocks' must have the same length"
 msgstr "'y', 'groups' 그리고 'blocks'는 반드시 같은 길이를 가지고 있어야 합니다"
 
+#. R/wilcox.test.R: stop("'z' is not a rank vector")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'z' is not a rank vector"
+msgstr "'x'는 벡터가 아닙니다"
+
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
 #, fuzzy
@@ -1504,6 +1516,11 @@ msgstr "projection을 허용하도록 모델을 재적합합니다"
 #: R/confint.R:0
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
+
+#. R/wilcox.test.R: warning("Requested conf.level not achievable")
+#: R/wilcox.test.R:0
+msgid "Requested conf.level not achievable"
+msgstr "수행할 수 없는 conf.level의 값이 주어졌습니다."
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
@@ -1860,32 +1877,15 @@ msgstr "confidence set을 계산할 수 없어 NA를 돌려줍니다"
 msgid "cannot compute estimate, returning NA"
 msgstr "추정치를 계산할 수 없어 NA를 반환합니다"
 
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with ties"
-msgstr ""
-
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with zeroes"
-msgstr ""
-
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
-#. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact confidence intervals with ties"
 msgstr "tie가 있어 정확한 신뢰구간을 계산할 수 없습니다"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "tie가 있어 정확한 p값을 계산할 수 없습니다"
-
-#. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact p-value with zeroes"
-msgstr ""
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0
@@ -3996,6 +3996,11 @@ msgstr "'r'은 1보다 적습니다"
 msgid "true correlation is not equal to %s"
 msgstr ""
 
+#. R/t.test.R: gettextf("true difference in means between group %s and group %s is not equal to %s",     levels(g)[1], levels(g)[2], y$null.value)
+#: R/t.test.R:0
+msgid "true difference in means between group %s and group %s is not equal to %s"
+msgstr ""
+
 #. R/t.test.R: gettextf("true difference in means is greater than %s", mu, domain = "R-stats")
 #: R/t.test.R:0
 msgid "true difference in means is greater than %s"
@@ -4671,9 +4676,6 @@ msgstr[0] ""
 
 #~ msgid "invalid 'abbr.colnames'"
 #~ msgstr "유효하지 않은 'abbr.colnames'입니다"
-
-#~ msgid "Requested conf.level not achievable"
-#~ msgstr "수행할 수 없는 conf.level의 값이 주어졌습니다."
 
 #~ msgid "package 'MASS' must be installed"
 #~ msgstr "패키지 'MASS'가 반드시 설치되어야 합니다."

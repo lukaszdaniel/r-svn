@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-08 10:48+0200\n"
+"POT-Creation-Date: 2025-12-27 18:29+0100\n"
 "PO-Revision-Date: 2025-07-06 16:11+0200\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -38,13 +38,13 @@ msgstr ""
 
 #: io.cpp:325 io.cpp:329 io.cpp:338 io.cpp:570 io.cpp:771 io.cpp:826 io.cpp:839
 #: io.cpp:843 io.cpp:849 io.cpp:1088 io.cpp:1089 io.cpp:1091 io.cpp:1092
-#: io.cpp:1093 io.cpp:1094 io.cpp:1095 stubs.cpp:47 stubs.cpp:67
-#: windows/dialogs.cpp:84 windows/dialogs.cpp:88 windows/dialogs.cpp:92
-#: windows/dialogs.cpp:95 windows/dialogs.cpp:98 windows/dialogs.cpp:147
-#: windows/dialogs.cpp:155 windows/dialogs.cpp:175 windows/dialogs.cpp:200
-#: windows/dialogs.cpp:203 windows/dialogs.cpp:245 windows/dialogs.cpp:282
-#: windows/dialogs.cpp:293 windows/dialogs.cpp:317 windows/dialogs.cpp:325
-#: windows/util.cpp:139 windows/widgets.cpp:90 windows/widgets.cpp:93
+#: io.cpp:1093 io.cpp:1094 io.cpp:1095 stubs.cpp:49 stubs.cpp:69
+#: windows/dialogs.cpp:87 windows/dialogs.cpp:91 windows/dialogs.cpp:95
+#: windows/dialogs.cpp:98 windows/dialogs.cpp:101 windows/dialogs.cpp:150
+#: windows/dialogs.cpp:158 windows/dialogs.cpp:178 windows/dialogs.cpp:203
+#: windows/dialogs.cpp:206 windows/dialogs.cpp:248 windows/dialogs.cpp:285
+#: windows/dialogs.cpp:296 windows/dialogs.cpp:320 windows/dialogs.cpp:328
+#: windows/util.cpp:140 windows/widgets.cpp:90 windows/widgets.cpp:93
 #: windows/widgets.cpp:97
 #, c-format
 msgid "invalid '%s' argument"
@@ -137,80 +137,80 @@ msgstr ""
 msgid "corrupt matrix -- dims do not match length"
 msgstr ""
 
-#: stubs.cpp:56
+#: stubs.cpp:58
 msgid "'savehistory' can only be used in Rgui and Rterm"
 msgstr ""
 
-#: stubs.cpp:73
+#: stubs.cpp:75
 msgid "'loadhistory' can only be used in Rgui and Rterm"
 msgstr ""
 
-#: stubs.cpp:85
+#: stubs.cpp:87
 msgid "invalid timestamp"
 msgstr ""
 
-#: stubs.cpp:150 stubs.cpp:158
+#: stubs.cpp:152 stubs.cpp:160
 msgid "X11 dataentry cannot be loaded"
 msgstr ""
 
-#: stubs.cpp:154 stubs.cpp:183 stubs.cpp:189
+#: stubs.cpp:156 stubs.cpp:185 stubs.cpp:191
 msgid "X11 is not available"
 msgstr ""
 
-#: stubs.cpp:247 stubs.cpp:250
+#: stubs.cpp:249 stubs.cpp:252
 #, c-format
 msgid "invalid '%s' specification"
 msgstr ""
 
-#: stubs.cpp:253
+#: stubs.cpp:255
 #, c-format
 msgid "'%s' contains missing values"
 msgstr ""
 
-#: stubs.cpp:313
+#: stubs.cpp:315
 msgid "size must be finite and >= 0"
 msgstr ""
 
-#: utils.cpp:75
+#: utils.cpp:78
 msgid "argument 'class' must be a character string"
 msgstr ""
 
-#: utils.cpp:79
+#: utils.cpp:82
 #, c-format
 msgid "character class \"%s\" is invalid"
 msgstr ""
 
-#: utils.cpp:85
+#: utils.cpp:88
 msgid "argument 'x' must be a length-1 character vector"
 msgstr ""
 
-#: utils.cpp:88
+#: utils.cpp:91
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
 msgstr ""
 
-#: utils.cpp:119
+#: utils.cpp:120
 msgid "'charClass' is not available on this platform"
 msgstr ""
 
-#: utils.cpp:131
+#: utils.cpp:129
 msgid "input must be a character string"
 msgstr ""
 
-#: utils.cpp:154
+#: utils.cpp:152
 #, c-format
 msgid "'%s' must be a character vector of length 1"
 msgstr ""
 
-#: utils.cpp:160
+#: utils.cpp:158
 #, c-format
 msgid "nsl() was unable to resolve host '%s'"
 msgstr ""
 
-#: utils.cpp:167
+#: utils.cpp:165
 msgid "unknown format returned by 'gethostbyname'"
 msgstr ""
 
-#: utils.cpp:176
+#: utils.cpp:174
 msgid "nsl() is not supported on this platform"
 msgstr ""
 
@@ -218,113 +218,113 @@ msgstr ""
 msgid "unable to start data editor"
 msgstr ""
 
-#: windows/dialogs.cpp:133
+#: windows/dialogs.cpp:136
 msgid "invalid progressbar -- has it been closed?"
 msgstr ""
 
-#: windows/dialogs.cpp:187
+#: windows/dialogs.cpp:190
 msgid "unknown type"
 msgstr ""
 
-#: windows/dialogs.cpp:218 windows/dialogs.cpp:241 windows/dialogs.cpp:279
-#: windows/dialogs.cpp:314
+#: windows/dialogs.cpp:221 windows/dialogs.cpp:244 windows/dialogs.cpp:282
+#: windows/dialogs.cpp:317
 msgid "menu functions can only be used in the GUI"
 msgstr ""
 
-#: windows/dialogs.cpp:249
+#: windows/dialogs.cpp:252
 #, c-format
 msgid "unable to retrieve items for %s (%s)"
 msgstr ""
 
-#: windows/dialogs.cpp:287
+#: windows/dialogs.cpp:290
 #, c-format
 msgid "unable to add menu (%s)"
 msgstr ""
 
-#: windows/dialogs.cpp:299
+#: windows/dialogs.cpp:302
 #, c-format
 msgid "unable to add menu item (%s)"
 msgstr ""
 
-#: windows/dialogs.cpp:322
+#: windows/dialogs.cpp:325
 msgid "menu does not exist"
 msgstr "a menü nem létezik"
 
-#: windows/dialogs.cpp:329
+#: windows/dialogs.cpp:332
 #, c-format
 msgid "unable to delete menu item (%s)"
 msgstr ""
 
-#: windows/registry.cpp:71 windows/registry.cpp:247 windows/registry.cpp:250
-#: windows/registry.cpp:253
+#: windows/registry.cpp:73 windows/registry.cpp:249 windows/registry.cpp:252
+#: windows/registry.cpp:255
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: windows/registry.cpp:145 windows/registry.cpp:149
+#: windows/registry.cpp:147 windows/registry.cpp:151
 #, c-format
 msgid "unhandled key type %s\n"
 msgstr ""
 
-#: windows/registry.cpp:153
+#: windows/registry.cpp:155
 #, c-format
 msgid "unhandled key type %lu\n"
 msgstr ""
 
-#: windows/registry.cpp:176
+#: windows/registry.cpp:178
 #, c-format
 msgid "RegQueryInfoKey error code %d: '%s'"
 msgstr ""
 
-#: windows/registry.cpp:265
+#: windows/registry.cpp:267
 #, c-format
 msgid "Registry key '%ls' not found"
 msgstr ""
 
-#: windows/registry.cpp:267
+#: windows/registry.cpp:269
 #, c-format
 msgid "RegOpenKeyEx error code %d: '%s'"
 msgstr ""
 
-#: windows/util.cpp:57
+#: windows/util.cpp:58
 msgid "unsupported version of Windows"
 msgstr ""
 
-#: windows/util.cpp:283 windows/util.cpp:318
+#: windows/util.cpp:284 windows/util.cpp:319
 msgid "'raw = FALSE' and format is a not a known text format"
 msgstr ""
 
-#: windows/util.cpp:303
+#: windows/util.cpp:304
 msgid "argument must be a character vector or a raw vector"
 msgstr ""
 
-#: windows/util.cpp:344
+#: windows/util.cpp:345
 msgid "unable to open the clipboard"
 msgstr ""
 
-#: windows/util.cpp:349
+#: windows/util.cpp:350
 msgid "unable to write to the clipboard"
 msgstr ""
 
-#: windows/util.cpp:429
+#: windows/util.cpp:430
 msgid "'title' must be a character string"
 msgstr ""
 
-#: windows/util.cpp:438
+#: windows/util.cpp:439
 msgid "'text' must be a character string"
 msgstr ""
 
-#: windows/util.cpp:477
+#: windows/util.cpp:478
 #, c-format
 msgid "'%s' must be length 1"
 msgstr ""
 
-#: windows/util.cpp:587
+#: windows/util.cpp:588
 #, c-format
 msgid "'%s' must be a list"
 msgstr ""
 
-#: windows/util.cpp:591
+#: windows/util.cpp:592
 #, c-format
 msgid "'%s' element %d is not a window handle"
 msgstr ""

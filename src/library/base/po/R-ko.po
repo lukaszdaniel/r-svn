@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 15:03+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -691,6 +691,11 @@ msgstr "'verbose'와 'quitely' 모두 참으로 설정되어 있는데, verbose�
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose'는 TRUE인데 'echo'는 그렇지 않습니다; ... 'echo <- TRUE'로 강제변환합니다"
+
+#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#: R/namespace.R:0
+msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
+msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
@@ -1586,6 +1591,11 @@ msgstr "dim(X)는 반드시 양의 값을 가지는 길이를 가져야 합니�
 msgid "dim(x) must have a positive length"
 msgstr "dim(X)는 반드시 양의 값을 가지는 길이를 가져야 합니다"
 
+#. R/files.R: warning("directories are ignored")
+#: R/files.R:0
+msgid "directories are ignored"
+msgstr ""
+
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
 msgid "directories are omitted unless 'recursive = TRUE'"
@@ -2128,6 +2138,14 @@ msgstr ""
 "네임스페이스 %s를 사용할 수 없으며\n"
 "객체 %s를 프로세싱할 때 .GlobalEnv에 의하여 대체되었습니다."
 
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.source")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "partial")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.parse.data")
+#: R/namespace.R:0
+#, fuzzy
+msgid "namespace '%s' is already loaded so argument '%s' will be ignored."
+msgstr "네임스페이스 %s %s는 이미 로드되었으나 %s %s가 필요합니다"
+
 #. R/namespace.R: stop("namespace is already attached")
 #: R/namespace.R:0
 msgid "namespace is already attached"
@@ -2651,11 +2669,6 @@ msgstr "타겟은 %s이지만, 현재는 %s 입니다"
 msgid "the LINPACK argument has been defunct since R 3.1.0"
 msgstr ""
 
-#. R/match.R: stop("there is more than one match in 'match.arg'")
-#: R/match.R:0
-msgid "there is more than one match in 'match.arg'"
-msgstr "'match.arg'에 하나 이상의 매치가 있습니다"
-
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
 #: R/library.R:0
@@ -3064,6 +3077,9 @@ msgstr[0] ""
 msgid "there is no package called"
 msgid_plural "there are no packages called"
 msgstr[0] "호출된 패키지(들)가 없습니다."
+
+#~ msgid "there is more than one match in 'match.arg'"
+#~ msgstr "'match.arg'에 하나 이상의 매치가 있습니다"
 
 #~ msgid "invalid 'dims'"
 #~ msgstr "유효하지 않은 'dims'가 아닙니다"

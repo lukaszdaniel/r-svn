@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-16 18:36+0200\n"
+"POT-Creation-Date: 2025-12-27 18:36+0100\n"
 "PO-Revision-Date: 2025-07-06 16:02+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -84,102 +84,102 @@ msgstr "非有限值 x[%d] 出現於帶寬計算"
 msgid "data are constant in bandwidth calculation"
 msgstr "非有限值 x[%d] 出現於帶寬計算"
 
-#: complete_cases.cpp:26
+#: complete_cases.cpp:35
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type'(%s)引數無效"
 
-#: complete_cases.cpp:112
+#: complete_cases.cpp:122
 msgid "no input has determined the number of cases"
 msgstr "不可使用輸入來確定個案數目"
 
-#: complete_cases.cpp:224
+#: complete_cases.cpp:230
 msgid "not all arguments have the same length"
 msgstr "不是所有的引數都一樣長"
 
-#: cov.cpp:564
+#: cov.cpp:566
 msgid "missing observations in cov/cor"
 msgstr "cov/cor 中有缺值"
 
-#: cov.cpp:636
+#: cov.cpp:638
 msgid ""
 "Calling var(x) on a factor x is defunct.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:638
+#: cov.cpp:640
 msgid ""
 "Calling var(x) on a factor x is deprecated and will become an error.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:643
+#: cov.cpp:645
 msgid "'x' is NULL"
 msgstr "'x' 為 NULL"
 
-#: cov.cpp:675 cov.cpp:681
+#: cov.cpp:677 cov.cpp:683
 msgid "incompatible dimensions"
 msgstr "不相容的量度"
 
-#: cov.cpp:700 cov.cpp:741 cov.cpp:774
+#: cov.cpp:702 cov.cpp:743 cov.cpp:776
 msgid "no complete element pairs"
 msgstr "不存在完的一對"
 
-#: cov.cpp:713
+#: cov.cpp:715
 msgid "invalid 'use' (computational method)"
 msgstr "'use' 不對(計算方法)"
 
-#: cov.cpp:716
+#: cov.cpp:718
 msgid "'x' is empty"
 msgstr "'x' 是空的"
 
-#: cov.cpp:810
+#: cov.cpp:812
 msgid "the standard deviation is zero"
 msgstr "標準差為零"
 
-#: deriv.cpp:155
+#: deriv.cpp:157
 msgid "invalid form in unary minus check"
 msgstr "檢查一元減號時發現形式無效"
 
-#: deriv.cpp:439
+#: deriv.cpp:441
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:677
+#: deriv.cpp:679
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "微分表裡無此函式 '%s'"
 
-#: deriv.cpp:784
+#: deriv.cpp:786
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr "運算式必須為 '%s' 類型"
 
-#: deriv.cpp:787
+#: deriv.cpp:789
 msgid "variable must be a character string"
 msgstr "變數必須是字串"
 
-#: deriv.cpp:789
+#: deriv.cpp:791
 msgid "only the first element is used as variable name"
 msgstr "只用了第一個元素做為變數名稱"
 
-#: deriv.cpp:802
+#: deriv.cpp:804
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "'%s' 的運算式無效"
 
-#: deriv.cpp:864
+#: deriv.cpp:866
 #, fuzzy
 msgid "too many variables"
 msgstr "沒有因子"
 
-#: deriv.cpp:1077 model.cpp:105
+#: deriv.cpp:1079 model.cpp:106
 msgid "invalid variable names"
 msgstr "變數名稱無效"
 
-#: deriv.cpp:1085 deriv.cpp:1087
+#: deriv.cpp:1087 deriv.cpp:1089
 msgid "invalid tag"
 msgstr "標籤無效"
 
@@ -294,56 +294,56 @@ msgid ""
 "%s"
 msgstr ""
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:367
-#: model.cpp:375 optim.cpp:216
+#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:370
+#: model.cpp:378 optim.cpp:216
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 引數無效"
 
-#: fourier.cpp:56 fourier.cpp:151
+#: fourier.cpp:57 fourier.cpp:152
 msgid "non-numeric argument"
 msgstr "非數值引數"
 
-#: fourier.cpp:74 fourier.cpp:92 fourier.cpp:165
+#: fourier.cpp:75 fourier.cpp:93 fourier.cpp:166
 msgid "fft factorization error"
 msgstr "fft 因子分解錯誤"
 
-#: fourier.cpp:77 fourier.cpp:101 fourier.cpp:168
+#: fourier.cpp:78 fourier.cpp:102 fourier.cpp:169
 msgid "fft too large"
 msgstr ""
 
-#: fourier.cpp:137
+#: fourier.cpp:138
 msgid "vector-valued (multivariate) series required"
 msgstr "需要向量值系列(多變數)"
 
-#: fourier.cpp:207
+#: fourier.cpp:208
 #, c-format
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr ""
 
-#: fourier.cpp:218
+#: fourier.cpp:219
 #, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr ""
 
-#: fourier.cpp:234
+#: fourier.cpp:235
 msgid "no factors"
 msgstr "沒有因子"
 
-#: fourier.cpp:235
+#: fourier.cpp:236
 #, fuzzy
 msgid "too many factors"
 msgstr "沒有因子"
 
-#: fourier.cpp:238
+#: fourier.cpp:239
 msgid "invalid factors"
 msgstr "因子無效"
 
-#: fourier.cpp:242
+#: fourier.cpp:243
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr ""
 
-#: fourier.cpp:283
+#: fourier.cpp:284
 #, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr ""
@@ -470,145 +470,145 @@ msgstr "vmethod 無效"
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "Burg 的演算法沒有能夠找到偏相關數"
 
-#: model.cpp:103
+#: model.cpp:104
 msgid "invalid variables"
 msgstr "變數無效"
 
-#: model.cpp:107 model.cpp:112
+#: model.cpp:108 model.cpp:113
 msgid "number of variables != number of variable names"
 msgstr "變數數目不等於變數名稱數目"
 
-#: model.cpp:110
+#: model.cpp:111
 msgid "invalid extra variables"
 msgstr "額外變數無效"
 
-#: model.cpp:114
+#: model.cpp:115
 msgid "invalid extra variable names"
 msgstr "額外變數名稱無效"
 
-#: model.cpp:135
+#: model.cpp:136
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "'%s' 裡的名稱太長"
 
-#: model.cpp:160
+#: model.cpp:161
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "變數 '%2$s' 的種類(%1$s)無效"
 
-#: model.cpp:166
+#: model.cpp:167
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "變數的長度不一樣('%s')"
 
-#: model.cpp:214
+#: model.cpp:217
 msgid "invalid result from na.action"
 msgstr "na.action 的結果不正確"
 
-#: model.cpp:386
+#: model.cpp:389
 msgid "invalid model frame"
 msgstr "模型框無效"
 
-#: model.cpp:388
+#: model.cpp:391
 msgid "do not know how many cases"
 msgstr "案例數目不清"
 
-#: model.cpp:412
+#: model.cpp:415
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "變數的長度不一樣(變數 %d)"
 
-#: model.cpp:416 model.cpp:423
+#: model.cpp:419 model.cpp:426
 #, c-format
 msgid "variable %d has no levels"
 msgstr "變數 %d 沒有因子層"
 
-#: model.cpp:534
+#: model.cpp:537
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "在公式右手的反應忽略不用"
 
-#: model.cpp:554
+#: model.cpp:557
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "%d 項需要 %.0g 個列"
 
-#: model.cpp:558
+#: model.cpp:561
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "矩陣需要 %.0g 個列"
 
-#: model.cpp:569
+#: model.cpp:572
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "模型矩陣的 %d 項有問題: 沒有指定的列"
 
-#: model.cpp:618 model.cpp:623 model.cpp:629 model.cpp:640 model.cpp:646
-#: model.cpp:652
+#: model.cpp:621 model.cpp:626 model.cpp:632 model.cpp:643 model.cpp:649
+#: model.cpp:655
 msgid "term names will be truncated"
 msgstr "項名稱太長，被縮短了"
 
-#: model.cpp:632
+#: model.cpp:635
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "模型矩陣裡目前不能有複數"
 
-#: model.cpp:656
+#: model.cpp:659
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "模型矩陣裡不能有種類為 '%s' 的變數"
 
-#: model.cpp:871
+#: model.cpp:881
 msgid "invalid formula in 'update'"
 msgstr "'update' 裡的公式無效"
 
-#: model.cpp:905
+#: model.cpp:915
 msgid "formula expected"
 msgstr "需要公式"
 
-#: model.cpp:1069
+#: model.cpp:1081
 msgid "invalid term in model formula"
 msgstr "模型公式裡有錯誤的項"
 
-#: model.cpp:1160
+#: model.cpp:1172
 msgid "invalid model formula"
 msgstr "模型公式無效"
 
-#: model.cpp:1192 model.cpp:1499
+#: model.cpp:1204 model.cpp:1511
 msgid "invalid power in formula"
 msgstr "公式裡的冪無效"
 
-#: model.cpp:1241 model.cpp:1676
+#: model.cpp:1253 model.cpp:1688
 #, fuzzy, c-format
 msgid "invalid model formula in '%s'"
 msgstr "模型公式無效"
 
-#: model.cpp:1284
+#: model.cpp:1296
 #, c-format
 msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
 msgstr ""
 
-#: model.cpp:1610
+#: model.cpp:1622
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "在資料框裡用 '.' 時不能有重複的名稱 '%s'"
 
-#: model.cpp:1752
+#: model.cpp:1764
 msgid "argument is not a valid model"
 msgstr "引數不是正確的模型"
 
-#: model.cpp:1762
+#: model.cpp:1774
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' 的值要麼是 NULL 要麼是字元向量"
 
-#: model.cpp:1773
+#: model.cpp:1785
 msgid "'data' argument is of the wrong type"
 msgstr "'data' 引數種類不正確"
 
-#: model.cpp:1841
+#: model.cpp:1853
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr ""
 
-#: model.cpp:2123
+#: model.cpp:2135
 msgid "'.' in formula and no 'data' argument"
 msgstr "公式裡有 '.'，而沒有 'data' 此一引數"
 
@@ -733,153 +733,153 @@ msgstr "'ndeps' 長度無效"
 msgid "unknown 'method'"
 msgstr "不明的 'method'"
 
-#: optimize.cpp:215 optimize.cpp:305 optimize.cpp:527
+#: optimize.cpp:217 optimize.cpp:307 optimize.cpp:529
 msgid "NA replaced by maximum positive value"
 msgstr "NA 被換成最大的正值"
 
-#: optimize.cpp:224 optimize.cpp:314 optimize.cpp:536
+#: optimize.cpp:226 optimize.cpp:316 optimize.cpp:538
 msgid "-Inf replaced by maximally negative value"
 msgstr "-Inf 被換成最大的負值"
 
-#: optimize.cpp:227 optimize.cpp:317 optimize.cpp:539
+#: optimize.cpp:229 optimize.cpp:319 optimize.cpp:541
 #, fuzzy, c-format
 msgid "%s replaced by maximum positive value"
 msgstr "NA 被換成最大的正值"
 
-#: optimize.cpp:237
+#: optimize.cpp:239
 msgid "invalid function value in 'optimize'"
 msgstr "'optimize' 裡的函式值無效"
 
-#: optimize.cpp:253 optimize.cpp:346 optimize.cpp:732
+#: optimize.cpp:255 optimize.cpp:348 optimize.cpp:734
 msgid "attempt to minimize non-function"
 msgstr "不能將非函式最小化"
 
-#: optimize.cpp:260 optimize.cpp:267 optimize.cpp:276 optimize.cpp:351
-#: optimize.cpp:356 optimize.cpp:372 pacf.cpp:460
+#: optimize.cpp:262 optimize.cpp:269 optimize.cpp:278 optimize.cpp:353
+#: optimize.cpp:358 optimize.cpp:374 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 值無效"
 
-#: optimize.cpp:269 optimize.cpp:357
+#: optimize.cpp:271 optimize.cpp:359
 msgid "'xmin' not less than 'xmax'"
 msgstr "'xmin' 不能小於 xmax"
 
-#: optimize.cpp:327
+#: optimize.cpp:329
 msgid "invalid function value in 'zeroin'"
 msgstr "'zeroin' 函式值無效"
 
-#: optimize.cpp:362 optimize.cpp:367
+#: optimize.cpp:364 optimize.cpp:369
 #, c-format
 msgid "NA value for '%s' is not allowed"
 msgstr "'%s' 裡不可有 NA 值"
 
-#: optimize.cpp:377
+#: optimize.cpp:379
 msgid "'maxiter' must be positive"
 msgstr "'maxiter' 必須是正數"
 
-#: optimize.cpp:519
+#: optimize.cpp:521
 msgid "non-finite value supplied by 'nlm'"
 msgstr "'nlm' 回覆了無限值"
 
-#: optimize.cpp:559
+#: optimize.cpp:561
 msgid "invalid function value in 'nlm' optimizer"
 msgstr "'nlm' 最佳化器裡的函式值無效"
 
-#: optimize.cpp:571 optimize.cpp:586
+#: optimize.cpp:573 optimize.cpp:588
 msgid "function value caching for optimization is seriously confused"
 msgstr "最佳化時函式值暫存器出了問題"
 
-#: optimize.cpp:601
+#: optimize.cpp:603
 msgid "numeric parameter expected"
 msgstr "需要數值參數"
 
-#: optimize.cpp:605
+#: optimize.cpp:607
 msgid "conflicting parameter lengths"
 msgstr "參數的長度自相矛盾"
 
-#: optimize.cpp:609
+#: optimize.cpp:611
 msgid "invalid parameter length"
 msgstr "參數長度無效"
 
-#: optimize.cpp:618 optimize.cpp:625 optimize.cpp:632
+#: optimize.cpp:620 optimize.cpp:627 optimize.cpp:634
 msgid "missing value in parameter"
 msgstr "參數裡不能有缺值"
 
-#: optimize.cpp:637
+#: optimize.cpp:639
 msgid "invalid parameter type"
 msgstr "參數種類無效"
 
-#: optimize.cpp:648
+#: optimize.cpp:650
 msgid "non-positive number of parameters in nlm"
 msgstr "nlm 參數不能是負的"
 
-#: optimize.cpp:650
+#: optimize.cpp:652
 msgid "nlm is inefficient for 1-d problems"
 msgstr "用 nlm 來解決一維問題效率不高"
 
-#: optimize.cpp:652
+#: optimize.cpp:654
 msgid "invalid gradient tolerance in nlm"
 msgstr "nlm 裡的梯度容錯無效"
 
-#: optimize.cpp:654
+#: optimize.cpp:656
 msgid "invalid iteration limit in nlm"
 msgstr "nlm 裡的迭代極值無效"
 
-#: optimize.cpp:656
+#: optimize.cpp:658
 msgid "minimization function has no good digits in nlm"
 msgstr "nlm 最小化函式找不到可適用的數字"
 
-#: optimize.cpp:658
+#: optimize.cpp:660
 msgid "no analytic gradient to check in nlm!"
 msgstr "nlm 裡沒有可查的分析梯度！"
 
-#: optimize.cpp:660
+#: optimize.cpp:662
 msgid "no analytic Hessian to check in nlm!"
 msgstr "nlm 裡沒有可查的分析海森！"
 
-#: optimize.cpp:662
+#: optimize.cpp:664
 msgid "probable coding error in analytic gradient"
 msgstr "分析梯度的程式碼很有可能發生錯誤"
 
-#: optimize.cpp:664
+#: optimize.cpp:666
 msgid "probable coding error in analytic Hessian"
 msgstr "分析海森的程式碼很有可能發生錯誤"
 
-#: optimize.cpp:666
+#: optimize.cpp:668
 #, c-format
 msgid ""
 "*** unknown error message (msg = %d) in nlm()\n"
 "*** should not happen!"
 msgstr "*** nlm()產生了不明的錯誤資訊(msg = %d) 。這不應該發生！"
 
-#: optimize.cpp:677
+#: optimize.cpp:679
 msgid "Relative gradient close to zero.\n"
 msgstr "相對梯度離零太近.\n"
 
-#: optimize.cpp:678 optimize.cpp:682
+#: optimize.cpp:680 optimize.cpp:684
 msgid "Current iterate is probably solution.\n"
 msgstr "目前的重複值很可能就已經是答案了.\n"
 
-#: optimize.cpp:681
+#: optimize.cpp:683
 msgid "Successive iterates within tolerance.\n"
 msgstr "在容錯範圍內連續迭代.\n"
 
-#: optimize.cpp:685
+#: optimize.cpp:687
 msgid "Last global step failed to locate a point lower than x.\n"
 msgstr "最後一步的整體最佳化沒有能找到比 x 值要小的一個點.\n"
 
-#: optimize.cpp:686
+#: optimize.cpp:688
 msgid ""
 "Either x is an approximate local minimum of the function,\n"
 "the function is too non-linear for this algorithm,\n"
 "or steptol is too large.\n"
 msgstr "要麼 x 已經是函式的本地最小值，要麼這個函式非線性太強，要麼 steptol 設得太大。\n"
 
-#: optimize.cpp:691
+#: optimize.cpp:693
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
 msgstr "超過了迭代極值。演算法失敗.\n"
 
-#: optimize.cpp:694
+#: optimize.cpp:696
 msgid ""
 "Maximum step size exceeded 5 consecutive times.\n"
 "Either the function is unbounded below,\n"
@@ -892,16 +892,16 @@ msgstr ""
 "從上邊界達到了漸近有限值\n"
 "要麼是 stepmx 設得太小。\n"
 
-#: optimize.cpp:755 optimize.cpp:760 optimize.cpp:764 optimize.cpp:768
-#: optimize.cpp:772 optimize.cpp:776 optimize.cpp:781
+#: optimize.cpp:757 optimize.cpp:762 optimize.cpp:766 optimize.cpp:770
+#: optimize.cpp:774 optimize.cpp:778 optimize.cpp:783
 msgid "invalid NA value in parameter"
 msgstr "參數裡的 NA 值無效"
 
-#: optimize.cpp:810
+#: optimize.cpp:812
 msgid "hessian supplied is of the wrong length or mode, so ignored"
 msgstr "海森的長度不對或其狀態不對，因此忽略不用"
 
-#: optimize.cpp:814
+#: optimize.cpp:816
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "梯度的長度或其狀態不對，因此忽略不用"
 
@@ -918,6 +918,10 @@ msgstr "starma 發生錯誤編號 %d"
 #, c-format
 msgid "forkal error code %d"
 msgstr "forkal 發生錯誤編號 %d"
+
+#: permdist.cpp:122 permdist.cpp:127 permdist.cpp:198 permdist.cpp:202
+msgid "overflow error: cannot compute exact distribution"
+msgstr ""
 
 #: port.cpp:149
 #, c-format
@@ -1018,32 +1022,32 @@ msgstr "'scal' 必須是標準形的實數矩陣"
 msgid "'scal' matrix is not positive-definite"
 msgstr "'scal' 不是正定矩陣"
 
-#: random.cpp:54 random.cpp:138 random.cpp:218 random.cpp:308
+#: random.cpp:55 random.cpp:139 random.cpp:219 random.cpp:309
 msgid "NAs produced"
 msgstr "產生了 NA"
 
-#: random.cpp:61 random.cpp:67 random.cpp:73 random.cpp:88 random.cpp:168
-#: random.cpp:257 random.cpp:395
+#: random.cpp:62 random.cpp:68 random.cpp:74 random.cpp:89 random.cpp:169
+#: random.cpp:258 random.cpp:396
 msgid "invalid arguments"
 msgstr "引數無效"
 
-#: random.cpp:334
+#: random.cpp:335
 msgid "NA in probability vector"
 msgstr "NA 出現於機率向量"
 
-#: random.cpp:336
+#: random.cpp:337
 msgid "negative probability"
 msgstr "負值機率"
 
-#: random.cpp:342
+#: random.cpp:343
 msgid "no positive probabilities"
 msgstr "沒有正值機率"
 
-#: random.cpp:354
+#: random.cpp:355
 msgid "invalid first argument 'n'"
 msgstr "第一引數 'n' 無效"
 
-#: random.cpp:356
+#: random.cpp:357
 msgid "invalid second argument 'size'"
 msgstr "第二引數 'size' 無效"
 

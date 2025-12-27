@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
-"PO-Revision-Date: 2025-06-20 10:25+0200\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
+"PO-Revision-Date: 2025-12-27 18:41+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language: pl_PL\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #. R/New-Internal.R: stop("\"all\" and \"exact\" are mutually exclusive")
 #: R/New-Internal.R:0
@@ -229,8 +229,7 @@ msgstr "argumen '%s' musi być zmienną logiczną"
 #. R/unix/system.unix.R: gettextf("'%s' must be of length 1", "stderr")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stdout")
 #. R/windows/system.R: gettextf("'%s' must be of length 1", "stderr")
-#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0
-#: R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
+#: R/dates.R:0 R/datetime.R:0 R/files.R:0 R/library.R:0 R/match.R:0 R/seq.R:0 R/taskCallback.R:0 R/unix/system.unix.R:0 R/windows/system.R:0
 msgid "'%s' must be of length 1"
 msgstr "argument '%s' musi mieć długość 1"
 
@@ -673,6 +672,11 @@ msgstr "oba argumenty 'verbose' oraz 'quietly' są ustawione na tak; przyjmuję 
 #: R/source.R:0
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "argument 'verbose' jest TRUE, argument 'echo' nie; ... przekształcanie 'echo <- TRUE'"
+
+#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#: R/namespace.R:0
+msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
+msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
 #: R/taskCallback.R:0
@@ -1561,6 +1565,11 @@ msgstr "'dim(X)' musi mieć dodatnią długość"
 msgid "dim(x) must have a positive length"
 msgstr "'dim(x)' musi mieć dodatnią długość"
 
+#. R/files.R: warning("directories are ignored")
+#: R/files.R:0
+msgid "directories are ignored"
+msgstr "katalogi są pomijane"
+
 #. R/files.R: warning("directories are omitted unless 'recursive = TRUE'")
 #: R/files.R:0
 msgid "directories are omitted unless 'recursive = TRUE'"
@@ -1788,8 +1797,7 @@ msgstr "wejście zostało uszkodzone z LF zastąpionym przez CR"
 #. R/taskCallback.R: gettextf("invalid '%s' argument", "which")
 #. R/version.R: gettextf("invalid '%s' argument", "value")
 #. R/zapsmall.R: gettextf("invalid '%s' argument", "digits")
-#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0
-#: R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
+#: R/attach.R:0 R/colSums.R:0 R/connections.R:0 R/dataframe.R:0 R/files.R:0 R/load.R:0 R/locales.R:0 R/rowsum.R:0 R/serialize.R:0 R/taskCallback.R:0
 #: R/version.R:0 R/zapsmall.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
@@ -2097,6 +2105,14 @@ msgid ""
 msgstr ""
 "przestrzeń nazw %s nie jest dostępna, więc została zastąpiona\n"
 "przez '.GlobalEnv' podczas przetwarzania obiektu %s"
+
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.source")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "partial")
+#. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.parse.data")
+#: R/namespace.R:0
+#, fuzzy
+msgid "namespace '%s' is already loaded so argument '%s' will be ignored."
+msgstr "przestrzeń nazw %s %s jest już załadowana, ale %s %s jest wymagana"
 
 #. R/namespace.R: stop("namespace is already attached")
 #: R/namespace.R:0
@@ -2621,11 +2637,6 @@ msgstr "cel: %s, bieżące: %s"
 msgid "the LINPACK argument has been defunct since R 3.1.0"
 msgstr "argument LINPACK nie istnieje od wersji R 3.1.0"
 
-#. R/match.R: stop("there is more than one match in 'match.arg'")
-#: R/match.R:0
-msgid "there is more than one match in 'match.arg'"
-msgstr "jest więcej niż jedno dopasowanie w funkcji 'match.arg()'"
-
 #. R/library.R: gettextf("there is no package called %s", sQuote(package))
 #. R/library.R: gettextf("there is no package called %s", sQuote(pkg))
 #: R/library.R:0
@@ -3104,6 +3115,9 @@ msgid_plural "there are no packages called"
 msgstr[0] "nie ma pakietu o nazwie"
 msgstr[1] "nie ma pakietów o nazwach"
 msgstr[2] "nie ma pakietów o nazwach"
+
+#~ msgid "there is more than one match in 'match.arg'"
+#~ msgstr "jest więcej niż jedno dopasowanie w funkcji 'match.arg()'"
 
 #~ msgid "'INDEX' is of length zero"
 #~ msgstr "argument 'INDEX' ma zerową długość"

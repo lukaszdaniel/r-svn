@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -312,6 +312,13 @@ msgstr ""
 #. R/nlminb.R: gettextf("'control' component '%s' = %g, is out of range", names(port_cpos)[B],     v[iv1])
 
 msgid "'control' component '%s' = %g, is out of range"
+msgstr ""
+
+
+#: R/wilcox.test.R: 0
+#. R/wilcox.test.R: stop("'correct' must be an integer between 0 and 3")
+
+msgid "'correct' must be an integer between 0 and 3"
 msgstr ""
 
 
@@ -1777,6 +1784,13 @@ msgid "'y', 'groups' and 'blocks' must have the same length"
 msgstr ""
 
 
+#: R/wilcox.test.R: 0
+#. R/wilcox.test.R: stop("'z' is not a rank vector")
+
+msgid "'z' is not a rank vector"
+msgstr ""
+
+
 #: R/quantile.R: 0
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 
@@ -2098,6 +2112,13 @@ msgstr ""
 #. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 
 msgid "Reprofiling for %s  statistic. Waiting..."
+msgstr ""
+
+
+#: R/wilcox.test.R: 0
+#. R/wilcox.test.R: warning("Requested conf.level not achievable")
+
+msgid "Requested conf.level not achievable"
 msgstr ""
 
 
@@ -2586,42 +2607,17 @@ msgid "cannot compute estimate, returning NA"
 msgstr ""
 
 
-#: R/wilcox.test.R: 0
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
-
-msgid "cannot compute exact confidence interval with ties"
-msgstr ""
-
-
-#: R/wilcox.test.R: 0
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
-
-msgid "cannot compute exact confidence interval with zeroes"
-msgstr ""
-
-
 #: R/ansari.test.R: 0
-#: R/wilcox.test.R: 0
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
-#. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
 
 msgid "cannot compute exact confidence intervals with ties"
 msgstr ""
 
 
 #: R/ansari.test.R: 0
-#: R/wilcox.test.R: 0
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
 
 msgid "cannot compute exact p-value with ties"
-msgstr ""
-
-
-#: R/wilcox.test.R: 0
-#. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
-
-msgid "cannot compute exact p-value with zeroes"
 msgstr ""
 
 
@@ -5521,6 +5517,13 @@ msgstr ""
 #. R/cor.test.R: gettextf("true correlation is not equal to %s", NVAL, domain = "R-stats")
 
 msgid "true correlation is not equal to %s"
+msgstr ""
+
+
+#: R/t.test.R: 0
+#. R/t.test.R: gettextf("true difference in means between group %s and group %s is not equal to %s",     levels(g)[1], levels(g)[2], y$null.value)
+
+msgid "true difference in means between group %s and group %s is not equal to %s"
 msgstr ""
 
 

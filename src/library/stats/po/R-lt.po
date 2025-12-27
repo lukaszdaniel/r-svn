@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:44\n"
+"POT-Creation-Date: 2025-12-27 18:28\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -228,6 +228,12 @@ msgstr "'control' argumentas turi būti įvardytas sąrašas"
 #: R/nlminb.R:0
 msgid "'control' component '%s' = %g, is out of range"
 msgstr ""
+
+#. R/wilcox.test.R: stop("'correct' must be an integer between 0 and 3")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'correct' must be an integer between 0 and 3"
+msgstr "'or' turi būti vienas skaičius tarp 0 ir INF"
 
 #. R/factanal.R: stop("'covmat' is not a valid covariance list")
 #. R/princomp.R: stop("'covmat' is not a valid covariance list")
@@ -1264,6 +1270,12 @@ msgstr "'y' turi būti vienetu ilgesnis negu 'x'"
 msgid "'y', 'groups' and 'blocks' must have the same length"
 msgstr "'y', 'groups' ir 'blocks' turi būti tokio paties ilgio"
 
+#. R/wilcox.test.R: stop("'z' is not a rank vector")
+#: R/wilcox.test.R:0
+#, fuzzy
+msgid "'z' is not a rank vector"
+msgstr "'x' nėra vektorius"
+
 #. R/quantile.R: stop("(unordered) factors are not allowed")
 #: R/quantile.R:0
 #, fuzzy
@@ -1496,6 +1508,11 @@ msgstr "Atstatymo modelis, kad leisti projekciją"
 #: R/confint.R:0
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
+
+#. R/wilcox.test.R: warning("Requested conf.level not achievable")
+#: R/wilcox.test.R:0
+msgid "Requested conf.level not achievable"
+msgstr "Reikalaujamas conf.level nepasiekiamas"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
@@ -1852,32 +1869,15 @@ msgstr "negali apskaičiuoti pasikliautinosios aibės, grąžina NA"
 msgid "cannot compute estimate, returning NA"
 msgstr "negali apskaičiuoti įverčio, grąžina NA"
 
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with ties")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with ties"
-msgstr "negali tiksliai apskaičiuoti pasitikėjimo intervalo su ryšiais"
-
-#. R/wilcox.test.R: warning("cannot compute exact confidence interval with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact confidence interval with zeroes"
-msgstr "negali apskaičiuoti tikslaus patikimumo intervalo su nuliais"
-
 #. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
-#. R/wilcox.test.R: warning("cannot compute exact confidence intervals with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact confidence intervals with ties"
 msgstr "negali tiksliai apskaičiuoti pasitikėjimo intervalą su ryšiais"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#. R/wilcox.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0 R/wilcox.test.R:0
+#: R/ansari.test.R:0
 msgid "cannot compute exact p-value with ties"
 msgstr "nepavyko apskaičiuoti tikslios p-reikšmės su ryšiais"
-
-#. R/wilcox.test.R: warning("cannot compute exact p-value with zeroes")
-#: R/wilcox.test.R:0
-msgid "cannot compute exact p-value with zeroes"
-msgstr "nepavyko apskaičiuoti tikslios p-reikšmės su nuliais"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0
@@ -3983,6 +3983,11 @@ msgstr "'r' yra mažesnis negu 1"
 msgid "true correlation is not equal to %s"
 msgstr ""
 
+#. R/t.test.R: gettextf("true difference in means between group %s and group %s is not equal to %s",     levels(g)[1], levels(g)[2], y$null.value)
+#: R/t.test.R:0
+msgid "true difference in means between group %s and group %s is not equal to %s"
+msgstr ""
+
 #. R/t.test.R: gettextf("true difference in means is greater than %s", mu, domain = "R-stats")
 #: R/t.test.R:0
 msgid "true difference in means is greater than %s"
@@ -4633,6 +4638,15 @@ msgstr[0] "naudojant %d/%d eilutę iš kompleksinio parinkimo"
 msgstr[1] "naudojant %d/%d eilutes iš kompleksinio parinkimo"
 msgstr[2] "naudojant %d/%d eilučių iš kompleksinio parinkimo"
 
+#~ msgid "cannot compute exact confidence interval with ties"
+#~ msgstr "negali tiksliai apskaičiuoti pasitikėjimo intervalo su ryšiais"
+
+#~ msgid "cannot compute exact confidence interval with zeroes"
+#~ msgstr "negali apskaičiuoti tikslaus patikimumo intervalo su nuliais"
+
+#~ msgid "cannot compute exact p-value with zeroes"
+#~ msgstr "nepavyko apskaičiuoti tikslios p-reikšmės su nuliais"
+
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "'contrast.obj' stulpelis turi apibrėžti contrast(sum to zero)"
 
@@ -4716,9 +4730,6 @@ msgstr[2] "naudojant %d/%d eilučių iš kompleksinio parinkimo"
 
 #~ msgid "invalid 'abbr.colnames'"
 #~ msgstr "neteisingas 'abbr.colnames'"
-
-#~ msgid "Requested conf.level not achievable"
-#~ msgstr "Reikalaujamas conf.level nepasiekiamas"
 
 #~ msgid "medpolish() did not converge in %d iteration"
 #~ msgid_plural "medpolish() did not converge in %d iterations"

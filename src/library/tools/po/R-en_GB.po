@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-27 19:51\n"
+"POT-Creation-Date: 2025-12-27 18:29\n"
 "PO-Revision-Date: 2025-07-06 16:08+0200\n"
 "Last-Translator: Heather Turner <ht@heatherturner.net>\n"
 "Language-Team: none\n"
@@ -178,6 +178,11 @@ msgstr "*** someone has corrupted the Built field in package '%s' ***"
 #: R/utils.R:0
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr "*not* using 'C' for LC_COLLATE locale"
+
+#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
+#: R/RdHelpers.R:0
+msgid ","
+msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -701,6 +706,12 @@ msgstr "Help pages:"
 msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
 msgstr "In '%s' vignettes '%s' and '%s' have the same vignette name"
 
+#. R/license.R: stop("Input must be character")
+#: R/license.R:0
+#, fuzzy
+msgid "Input must be character"
+msgstr "'text' must be a character vector"
+
 #. R/admin.R: gettext("Invalid DESCRIPTION file")
 #: R/admin.R:0
 msgid "Invalid DESCRIPTION file"
@@ -731,6 +742,12 @@ msgstr "Invalid licence file pointers: %s"
 #: R/QC.R:0
 msgid "Invalid package aliases in Rd file '%s':"
 msgstr "Invalid package aliases in Rd file '%s':"
+
+#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
+#: R/Rd2HTML.R:0
+#, fuzzy
+msgid "Invalid value of 'toc_entries'"
+msgstr "invalid value for '%s' : %s"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -1127,7 +1144,6 @@ msgstr "Packages with priorities 'base' or 'recommended' or 'defunct-base' must 
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
-#. R/htmltools.R: sprintf("Processing %s ...", u)
 #: R/CRANtools.R:0 R/htmltools.R:0
 msgid "Processing %s ..."
 msgstr "Processing %s ..."
@@ -1380,6 +1396,11 @@ msgstr "Undocumented code objects:"
 msgid "Undocumented data sets:"
 msgstr "Undocumented data sets:"
 
+#. R/Rd2HTML.R: warning("Unexpected jump in section level")
+#: R/Rd2HTML.R:0
+msgid "Unexpected jump in section level"
+msgstr ""
+
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
 msgid "Unexported object imported by a ':::' call: %s"
@@ -1527,6 +1548,11 @@ msgstr "[dryrun mode] Dryrun complete."
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
+msgstr ""
+
+#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
+#: R/RdHelpers.R:0
+msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -1723,14 +1749,24 @@ msgstr "directory '%s' does not exist"
 msgid "done"
 msgstr "done"
 
-#. R/checktools.R: sprintf("downloading %s ... ", rfiles[i])
+#. R/checktools.R: gettextf("download of %d reverse dependencies failed:\n  %s",     n, paste(sQuote(fails), collapse = ", "))
 #: R/checktools.R:0
-msgid "downloading %s ..."
-msgstr "downloading %s ..."
+#, fuzzy
+msgid ""
+"download of %d reverse dependencies failed:\n"
+"  %s"
+msgstr "downloading reverse dependencies ..."
 
-#. R/checktools.R: message("downloading reverse dependencies ...")
+#. R/checktools.R: gettextf("download of reverse dependency %s failed", sQuote(fails))
 #: R/checktools.R:0
-msgid "downloading reverse dependencies ..."
+#, fuzzy
+msgid "download of reverse dependency %s failed"
+msgstr "downloading reverse dependencies ..."
+
+#. R/checktools.R: gettextf("downloading reverse dependencies %s", paste(sQuote(rnames),     collapse = ", "))
+#: R/checktools.R:0
+#, fuzzy
+msgid "downloading reverse dependencies %s"
 msgstr "downloading reverse dependencies ..."
 
 #. R/admin.R: gettextf("\nduplicated files in '%s' field:", collationField)
@@ -2043,8 +2079,7 @@ msgstr "patch utility is needed for installation-time patching"
 #. R/urltools.R: sprintf("processing %s", p)
 #. R/urltools.R: sprintf("processing %s", i)
 #. R/urltools.R: sprintf("processing %s", u)
-#. R/utils.R: sprintf("processing %s", p)
-#. R/utils.R: sprintf("processing %s", basename(p))
+#. R/utils.R: sprintf("processing %s", trafo(e))
 #. R/utils.R: sprintf("processing %s", f)
 #: R/admin.R:0 R/doitools.R:0 R/urltools.R:0 R/utils.R:0
 msgid "processing %s"
@@ -2113,6 +2148,11 @@ msgstr "source list must have names for all elements"
 #: R/makeLazyLoad.R:0
 msgid "source must be an environment or a list"
 msgstr "source must be an environment or a list"
+
+#. R/install.R: message("specified C++", use_cxxstd)
+#: R/install.R:0
+msgid "specified C++"
+msgstr ""
 
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
@@ -2606,6 +2646,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "unable to re-encode %s line %s"
 msgstr[1] "unable to re-encode %s lines %s"
 
+#~ msgid "downloading %s ..."
+#~ msgstr "downloading %s ..."
+
 #~ msgid "Uses ACM license: only appropriate for pre-2013 ACM TOMS code"
 #~ msgstr "Uses ACM licence: only appropriate for pre-2013 ACM TOMS code"
 
@@ -2623,9 +2666,6 @@ msgstr[1] "unable to re-encode %s lines %s"
 
 #~ msgid "inst/doc"
 #~ msgstr "inst/doc"
-
-#~ msgid ","
-#~ msgstr ","
 
 #~ msgid "ignored as vignettes have been rebuilt."
 #~ msgstr "ignored as vignettes have been rebuilt."
