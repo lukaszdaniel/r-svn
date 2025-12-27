@@ -416,7 +416,7 @@ if(FALSE) {
                 }
                 else if(found %in% c("11", "14")) {
                     msg <-
-                        sprintf("SystemRequirements specified C++%s: support will be removed soon", found)
+                        sprintf("SystemRequirements specified C++%s: support has been removed", found)
                     warning(msg, domain = NA, call. = FALSE)
                 }
 
@@ -2723,7 +2723,11 @@ if(FALSE) {
                 stop("C++98 standard requested but unsupported",
                      call. = FALSE, domain = NA)
             }
-            if (!checkCXX(use_cxxstd)) {
+            if (use_cxxstd %in% c("11", "14")) {
+                message("specified C++", use_cxxstd)
+                use_cxxstd <- NULL
+            }
+            else if (!checkCXX(use_cxxstd)) {
                 stop(paste0("C++", use_cxxstd, " standard requested but CXX",
                             use_cxxstd, " is not defined"),
                      call. = FALSE, domain = NA)
@@ -2853,7 +2857,7 @@ if(FALSE) {
                 if(!inherits(cxx_ver, "try-error")) {
                     message("using C++ compiler: ", sQuote(cxx_ver[1L]))
                     if(!is.null(use_cxxstd))
-                        message("using C++", use_cxxstd)
+                       message("using C++", use_cxxstd)
                 }
             }
         }

@@ -152,6 +152,16 @@
       \code{recycle} to swap between current (not fully recycling) and
       future behaviour where all three of \code{(nvec, from, by)} are
       jointly recycled.
+
+      \item \code{ftable()}s default method and the \code{as.table()}
+      method for \code{"ftable"}s get a \code{perm} argument with back
+      compatible default.  The \code{as.table()} method also gets a
+      \code{named.dim = FALSE} switch, no longer creating a named
+      \code{dim(<result>)} by default.
+
+      \item \code{approx(<x_with_ties>, <y_with_NA>, na.rm = FALSE)} now
+      should always call the \code{ties()} function, fixing \PR{17604}
+      reported by \I{Bill Dunlap}.
     }
   }
 
@@ -186,21 +196,23 @@
 
   \subsection{PACKAGE INSTALLATION}{
     \itemize{
-      \item Specifying C++11 or C++14 has long given a note: in 99\% of
-      CRAN packages the specification is unnecessary as the default
-      C++17 suffices (in a few cases with a deprecation warning from
-      some compilers).
+      \item Specifying C++11 or C++14 in \file{src/Makevars} has long
+      given a note: in 99\% of CRAN packages the specification was
+      unnecessary as the default C++17 suffices (in a few cases with a
+      deprecation warning from some compilers).
 
-      The intention is that support for those standards will be withdrawn
-      before release.
+      Supoport for these standards has been removed: the default C++
+      standard (currently C++17) will be used.
 
-      \command{R CMD config} will no longer support \code{CXX11},
-      \code{CXX14} nor their associated \code{FLAGS}, \code{STD} and
-      \code{LDFLAGS} values.
+      \command{R CMD config} variables \code{CXX11}, \code{CXX14} and
+      their associated \code{CXXxxFLAGS}, \code{CXXxxPICFLAGS}
+      \code{CXXxxSTD}, \code{SHLIBCXXxxLD} and \code{SHLIBCXXxxLDFLAGS}
+      variables are no longer supported and reported as
+      \sQuote{defunct}.
 
       %% GCC 10 and Intel 2021.1 definitely support this: GCC 9 may
       \item The default C++ standard will be changed to C++20
-      \sQuote{where available} (which it is on all known platforms from
+      \sQuote{where available} (which it is on all known platforms since
       2021): if not C++17 is used if available otherwise C++ is not
       supported (as before).
 
@@ -208,13 +220,10 @@
       others depending on them.  (Packages can request C++17 if
       essential.)
 
-      \item A C++ standard specification (\code{CXX_STD =}) in
-      \file{src/Makevars*} is now checked more thoroughly.  Invalid
-      values are still ignored but now give a warning.
-
-      C++ standard specifications in the \code{SystemRequirements} field
-      of the \file{DESCRIIPTON} file are checked more thoroughly.
-      Unknown values are still ignored but now give a warning.
+      \item C++ standard specifications (\code{CXX_STD =} in
+      \file{src/Makevars*} and in the \code{SystemRequirements} field of
+      the \file{DESCRIPTION} file) are now checked more thoroughly.
+      Invalid values are still ignored but now give a warning.
     }
   }
 
@@ -448,11 +457,6 @@
       Sepal vs Petal dimensions in its first iris data plot, thanks to
       \I{Jeff Dick}'s post on R-devel.
 
-      \item \code{diff(m, lag, dif)} for matrix \code{m} now still returns
-      matrices, also when \code{lag * dif > nrow(m)} (\PR{18972}, thanks to
-      \I{Mikael Jagan} and \I{Suharto Anggono}).
-      \code{diff(<ts-matrix>)} remains matrix, even when it has length zero.
-
       \item \code{model.frame(~1, list(), na.action=na.pass)} and similar
       \dQuote{border-line} uses no longer produce invalid data frames,
       fixing \PR{18977}, reported with patch by \I{Mikael Jagan}.
@@ -485,9 +489,13 @@
       \item \code{cacheMetaData()} does not to mangle primitive generics.
 
       \item The S4 method \code{norm(<ANY>, type = <missing>)} for the implicit
-	generic \code{norm()} now uses \code{type = "O"} as has been the
-	intention for more than ten years, fixing \PR{18979} thanks to
-	\I{Mikael Jagan}.
+      generic \code{norm()} now uses \code{type = "O"} as has been the
+      intention for more than ten years, fixing \PR{18979} thanks to
+      \I{Mikael Jagan}.
+
+      \item \code{length(<POSIXlt>) <- v} is more careful about balancing,
+      notably when \code{v} is not integer, thanks to \I{Suharto Anggono}'s
+      remarks on the mailing list R-devel.
     }
   }
 }
@@ -509,6 +517,11 @@
 
       \item Formatting book-type \code{bibentry} objects now converts
       \LaTeX accents also in the publisher and series fields.
+
+      \item \code{diff(m, lag, dif)} for matrix \code{m} now still returns
+      matrices, also when \code{lag * dif > nrow(m)} (\PR{18972}, thanks to
+      \I{Mikael Jagan} and \I{Suharto Anggono}).
+      \code{diff(<ts-matrix>)} remains matrix, even when it has length zero.
     }
   }
 }

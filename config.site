@@ -249,6 +249,30 @@
 ## addition unless SHLIB_CXXLD is given.
 ## SHLIB_CXXLDFLAGS=
 
+## It might be neccessry to use a different compiler (maybe somthing
+## like g++-15) for more recent C++ standards.  Default to the values
+## chosen for C++17.
+## CXX20=
+## CXX20STD=
+## CXX20FLAGS=
+## CXX20PICFLAGS=
+## SHLIB_CXX20LD=
+## SHLIB_CXX20LDFLAGS=
+## 
+## CXX23=
+## CXX23STD=
+## CXX23FLAGS=
+## CXX23PICFLAGS=
+## SHLIB_CXX23LD=
+## SHLIB_CXX23LDFLAGS=
+## 
+## CXX26=
+## CXX26STD=
+## CXX26FLAGS=
+## CXX26PICFLAGS=
+## SHLIB_CXX26LD=
+## SHLIB_CXX26LDFLAGS=
+
 ## Not used by R but configure can fail to find it, so set to
 ## "$CXX -E" if it does.
 ## CXXCPP=
@@ -410,7 +434,7 @@
 ## The configure code is conservative about enabling OpenMP 
 ## so use can be forced here (or non-use if set but empty).
 ## For packages (note that SHLIB_OPENMP_CXXFLAGS is for CXX, not
-## necessarily for CXX11/14/17/20/23/26).
+## necessarily for CXX17/20/23/26).
 ## SHLIB_OPENMP_CFLAGS=
 ## SHLIB_OPENMP_CXXFLAGS=
 ## SHLIB_OPENMP_FFLAGS=
