@@ -1632,7 +1632,7 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
     if (is_signif) {
         args = match_Math2_dflt_args(args, call);
 
-        if ((CADR)(args) == R_MissingArg)
+        if (CADR(args.get()) == R_MissingArg)
             SETCADR(args, ScalarReal(dflt_digits));
     }
     else
@@ -1653,14 +1653,14 @@ attribute_hidden SEXP do_Math2(SEXP call, SEXP op, SEXP args_, SEXP env)
         if (!is_signif) {
             args = match_Math2_dflt_args(args, call);
 
-            if ((CADR)(args) == R_MissingArg)
+            if (CADR(args.get()) == R_MissingArg)
                 SETCADR(args, ScalarReal(dflt_digits));
         }
 
         if (CAR(args) == R_MissingArg)
 	    R_MissingArgError_c("x", call, "MathMissingError");
 
-        if (xlength((CADR)(args)) == 0)
+        if (xlength(CADR(args.get())) == 0)
             errorcall(call, "%s", _("invalid second argument of length 0"));
 
         res = do_math2(call, op, args, env);
@@ -1724,7 +1724,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
     int n = length(args);
     SEXP res = R_NilValue;
 
-    if (n == 1 && (TAG)(args) == R_NilValue) {
+    if (n == 1 && TAG(args.get()) == R_NilValue) {
 	/* log(x) is handled here */
 	SEXP x = CAR(args);
 	if (x != R_MissingArg && !OBJECT(x)) {
@@ -1736,11 +1736,11 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
 	}
     }
     else if (n == 2 &&
-	     (TAG)(args) == R_NilValue &&
-	     (TAG((CDR)(args)) == R_NilValue || TAG((CDR)(args)) == R_BaseSymbol)) {
+	     TAG(args.get()) == R_NilValue &&
+	     (TAG(CDR(args.get())) == R_NilValue || TAG(CDR(args.get())) == R_BaseSymbol)) {
 	/* log(x, y) or log(x, base = y) are handled here */
 	SEXP x = CAR(args);
-	SEXP y = (CADR)(args);
+	SEXP y = CADR(args.get());
 	if (x != R_MissingArg && y != R_MissingArg &&
 	    !OBJECT(x) && !OBJECT(y)) {
 	    if (isComplex(x) || isComplex(y))
@@ -1760,7 +1760,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
 
     if (n == 1) {
 	if (CAR(args) == R_MissingArg ||
-	    ((TAG)(args) != R_NilValue && (TAG)(args) != R_x_Symbol))
+	    (TAG(args.get()) != R_NilValue && TAG(args.get()) != R_x_Symbol))
 	    R_MissingArgError_c("x", call, "log1Error");
 
 	auto dgroup = DispatchGroup("Math", call, op, args, env);
@@ -1781,18 +1781,18 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
 
 	if (CAR(args) == R_MissingArg)
 	    R_MissingArgError_c("x", call, "log2Error");
-	if ((CADR)(args) == R_MissingArg)
+	if (CADR(args.get()) == R_MissingArg)
 	    SETCADR(args, ScalarReal(DFLT_LOG_BASE));
 
 	auto dgroup = DispatchGroup("Math", call, op, args, env);
 	if (dgroup.first) res = dgroup.second;
 	if (!dgroup.first) {
-	    if (length((CADR)(args)) == 0)
+	    if (length(CADR(args.get())) == 0)
 		errorcall(call, "%s", _("invalid argument 'base' of length 0"));
-	    if (isComplex(CAR(args)) || isComplex((CADR)(args)))
+	    if (isComplex(CAR(args)) || isComplex(CADR(args.get())))
 		res = complex_math2(call, op, args, env);
 	    else
-		res = math2(CAR(args), (CADR)(args), logbase, call);
+		res = math2(CAR(args), CADR(args.get()), logbase, call);
 	}
 
 	return res;

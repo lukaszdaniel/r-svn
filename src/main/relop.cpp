@@ -284,7 +284,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     if ((iS = isSymbol(x)) || TYPEOF(x) == LANGSXP) {
 	GCStackRoot<> tmp;
 	tmp = allocVector(STRSXP, 1);
-	SET_STRING_ELT(tmp, 0, (iS) ? (PRINTNAME)(x) :
+	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x.get()) :
 		       STRING_ELT(deparse1line_ex(x, false,
 						DEFAULTDEPARSE | DIGITS17),
 				  0));
@@ -294,7 +294,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     if ((iS = isSymbol(y)) || TYPEOF(y) == LANGSXP) {
 	GCStackRoot<> tmp;
 	tmp = allocVector(STRSXP, 1);
-	SET_STRING_ELT(tmp, 0, (iS) ? (PRINTNAME)(y) :
+	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(y.get()) :
 		       STRING_ELT(deparse1line_ex(y, false,
 						DEFAULTDEPARSE | DIGITS17),
 				  0));

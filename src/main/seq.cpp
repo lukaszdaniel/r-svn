@@ -711,8 +711,8 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args_, SEXP rho)
 
     lx = xlength(x);
 
-    if (TYPEOF((CADDR)(args)) != INTSXP) {
-	double slen = asReal((CADDR)(args));
+    if (TYPEOF(CADDR(args.get())) != INTSXP) {
+	double slen = asReal(CADDR(args.get()));
 	if (R_FINITE(slen)) {
 	    if (slen <= -1 || slen >= (double) R_XLEN_T_MAX+1.0)
 		errorcall(call, _("invalid '%s' argument"), "length.out");
@@ -720,27 +720,27 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	} else
 	    len = NA_INTEGER;
     } else {
-	len = asInteger((CADDR)(args));
+	len = asInteger(CADDR(args.get()));
 	if(len != NA_INTEGER && len < 0)
 	    errorcall(call, _("invalid '%s' argument"), "length.out");
     }
-    if(length((CADDR)(args)) != 1)
+    if(length(CADDR(args.get())) != 1)
 	warningcall(call, _("first element used of '%s' argument"),
 		    "length.out");
 
-    if (TYPEOF((CADDDR)(args)) != INTSXP) {
-	double seach = asReal((CADDDR)(args));
+    if (TYPEOF(CADDDR(args.get())) != INTSXP) {
+	double seach = asReal(CADDDR(args.get()));
 	if (R_FINITE(seach)) {
 	    if (seach <= -1. || (lx > 0 && seach >= (double) R_XLEN_T_MAX + 1.))
 		errorcall(call, _("invalid '%s' argument"), "each");
 	    each = lx == 0 ? NA_INTEGER : (R_xlen_t) seach;
 	} else each = NA_INTEGER;
     } else {
-	each = asInteger((CADDDR)(args));
+	each = asInteger(CADDDR(args.get()));
 	if(each != NA_INTEGER && each < 0)
 	    errorcall(call, _("invalid '%s' argument"), "each");
     }
-    if(length((CADDDR)(args)) != 1)
+    if(length(CADDDR(args.get())) != 1)
 	warningcall(call, _("first element used of '%s' argument"), "each");
     if(each == NA_INTEGER) each = 1;
 
@@ -766,15 +766,15 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	nt = 1;
     } else {
 	double sum = 0;
-	if((CADR)(args) == R_MissingArg)
+	if(CADR(args.get()) == R_MissingArg)
 	    times = ScalarInteger(1);
 #ifdef LONG_VECTOR_SUPPORT
-	else if(TYPEOF((CADR)(args)) != INTSXP)
+	else if(TYPEOF(CADR(args.get())) != INTSXP)
 #else
-	else if(TYPEOF((CADR)(args)) == REALSXP)
+	else if(TYPEOF(CADR(args.get())) == REALSXP)
 #endif
-	    times = coerceVector((CADR)(args), REALSXP);
-	else times = coerceVector((CADR)(args), INTSXP);
+	    times = coerceVector(CADR(args.get()), REALSXP);
+	else times = coerceVector(CADR(args.get()), INTSXP);
 
 	nt = XLENGTH(times);
 	if(nt == 1) {

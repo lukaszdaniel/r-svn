@@ -2239,14 +2239,14 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
     }
 
     if ((isList(x) || isLanguage(x)) && !isNull(x)) {
-	if ((TAG)(x) == nlist) {
+	if (TAG(x.get()) == nlist) {
 	    if (val == R_NilValue) {
-		SET_ATTRIB((CDR)(x), ATTRIB(x));
-		if (IS_S4_OBJECT(x)) { SET_S4_OBJECT((CDR)(x)); } else { UNSET_S4_OBJECT((CDR)(x)); }
-		// SET_OBJECT((CDR)(x), OBJECT(x));
+		SET_ATTRIB(CDR(x.get()), ATTRIB(x));
+		if (IS_S4_OBJECT(x)) { SET_S4_OBJECT(CDR(x.get())); } else { UNSET_S4_OBJECT(CDR(x.get())); }
+		// SET_OBJECT(CDR(x.get()), OBJECT(x));
 		RAISE_NAMED(CDR(x), NAMED(x));
 		SETCAR(x, R_NilValue); // decrements REFCNT
-		x = (CDR)(x);
+		x = CDR(x.get());
 	    }
 	    else {
 		/* Here we need to check for cycles*/

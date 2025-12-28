@@ -1157,7 +1157,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args_, SEXP env)
     bool anyS4 = FALSE;
     char buf[512];
 
-    for (SEXP a = (CDR)(args); a != R_NilValue && method == R_NilValue; a = CDR(a)) {
+    for (SEXP a = CDR(args.get()); a != R_NilValue && method == R_NilValue; a = CDR(a)) {
 	GCStackRoot<> obj;
 	obj = eval(CAR(a), env);
 	if (tryS4 && !anyS4 && isS4(obj)) anyS4 = TRUE;
@@ -1186,13 +1186,13 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args_, SEXP env)
     }
     if (method != R_NilValue) { // found an S3 or S4 method
 	if (missingDL)
-	    args = (CDR)(args); /* discard 'deparse.level' */
+	    args = CDR(args.get()); /* discard 'deparse.level' */
 	else
 	    SET_TAG(args, install("deparse.level")); /* tag 'deparse.level' */
 	SEXP ans = applyClosure(call, method, args, env, R_NilValue, true);
 	return ans;
     } else
-	args = (CDR)(args); /* discard 'deparse.level' */
+	args = CDR(args.get()); /* discard 'deparse.level' */
 
     /* Dispatch based on class membership has failed. */
     /* The default code for rbind/cbind.default follows */

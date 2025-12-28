@@ -1429,31 +1429,31 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* argument matching */
     ap = list4(R_NilValue, R_NilValue, R_NilValue, R_NilValue);
     SET_TAG(ap,  install("text"));
-    SET_TAG((CDR)(ap), install("condition"));
-    SET_TAG((CDDR)(ap), install("expr"));
-    SET_TAG((CDDDR)(ap), install("skipCalls"));
+    SET_TAG(CDR(ap.get()), install("condition"));
+    SET_TAG(CDDR(ap.get()), install("expr"));
+    SET_TAG(CDDDR(ap.get()), install("skipCalls"));
 #ifdef USE_BROWSER_HOOK
-    SETCDR((CDDDR)(ap), CONS(R_NilValue, R_NilValue));
-    SET_TAG(CDR((CDDDR)(ap)), install("ignoreHook"));
+    SETCDR(CDDDR(ap.get()), CONS(R_NilValue, R_NilValue));
+    SET_TAG(CDR(CDDDR(ap.get())), install("ignoreHook"));
 #endif
     argList = matchArgs_RC(ap, args, call);
 
     /* substitute defaults */
     if(CAR(argList) == R_MissingArg)
 	SETCAR(argList, mkString(""));
-    if((CADR)(argList) == R_MissingArg)
-	SETCAR((CDR)(argList), R_NilValue);
-    if((CADDR)(argList) == R_MissingArg)
-	SETCAR((CDDR)(argList), ScalarLogical(1));
-    if((CADDDR)(argList) == R_MissingArg)
-	SETCAR((CDDDR)(argList), ScalarInteger(0));
+    if(CADR(argList.get()) == R_MissingArg)
+	SETCAR(CDR(argList.get()), R_NilValue);
+    if(CADDR(argList.get()) == R_MissingArg)
+	SETCAR(CDDR(argList.get()), ScalarLogical(1));
+    if(CADDDR(argList.get()) == R_MissingArg)
+	SETCAR(CDDDR(argList.get()), ScalarInteger(0));
 #ifdef USE_BROWSER_HOOK
-    if(CAR(CDR((CDDDR)(argList))) == R_MissingArg)
-	SETCAR(CDR((CDDDR)(argList)), ScalarLogical(FALSE));
+    if(CAR(CDR(CDDDR(argList.get()))) == R_MissingArg)
+	SETCAR(CDR(CDDDR(argList.get())), ScalarLogical(FALSE));
 #endif
 
     /* return if 'expr' is not TRUE */
-    SEXP expr = (CADDR)(argList);
+    SEXP expr = CADDR(argList.get());
     if (!asLogical(expr)) {
 	return R_NilValue;
     }
@@ -1478,7 +1478,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
             error("%s", _("non-interactive browser() -- left over from debugging?"));
     }
 
-    Browser browser(CAR(argList) /*text*/, (CADR)(argList) /*condition*/);
+    Browser browser(CAR(argList) /*text*/, CADR(argList.get()) /*condition*/);
 
     /* Save the evaluator state information */
     /* so that it can be restored on exit. */
@@ -1487,7 +1487,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     topExp = R_CurrentExpr;
 
     if (!ENV_RDEBUG(rho)) {
-	int skipCalls = asInteger((CADDDR)(argList));
+	int skipCalls = asInteger(CADDDR(argList.get()));
 	RCNTXT *cptr = R_GlobalContext;
 #ifdef USE_BROWSER_HOOK
 	if (!ignoreHook)

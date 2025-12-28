@@ -62,8 +62,8 @@ inline void SET_ALTREP_CLASS_SERIALIZED_CLASS(SEXP x, SEXP csym, SEXP psym, SEXP
     GCStackRoot<> pl;
     pl = Rf_list3(csym, psym, stype);
     SET_TAG(pl, Symbol::obtain("Altrep class"));
-    SET_TAG((CDR)(pl), Symbol::obtain("Package"));
-    SET_TAG(CDR((CDR)(pl)), Symbol::obtain("Underlying type"));
+    SET_TAG(CDR(pl.get()), Symbol::obtain("Package"));
+    SET_TAG(CDR(CDR(pl.get())), Symbol::obtain("Underlying type"));
     SET_ATTRIB(x, pl);
 }
 #define ALTREP_SERIALIZED_CLASS_CLSSYM(x) CAR(x)

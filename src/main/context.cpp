@@ -233,8 +233,8 @@ namespace CXXR
             StackChecker::extraDepth(true);
             R_CheckStack();
         }
-        for (; s != R_NilValue; s = (CDR)(s)) {
-            this->conexit = (CDR)(s);
+        for (; s != R_NilValue; s = CDR(s.get())) {
+            this->conexit = CDR(s.get());
             Evaluator::evaluate(CAR(s), cloenv);
         }
         if (cptr_retval) // why is this needed???
@@ -634,7 +634,7 @@ attribute_hidden SEXP do_sysbrowser(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error("%s", _("not that many functions on the call stack"));
 	if ( prevcptr && prevcptr->srcref == R_InBCInterpreter ) {
 	    if ( TYPEOF(cptr->callfun) == CLOSXP &&
-		    TYPEOF((BODY)(cptr->callfun)) == BCODESXP )
+		    TYPEOF(BODY(cptr->callfun.get())) == BCODESXP )
 		warning("%s", _("debug flag in compiled function has no effect"));
 	    else
 		warning("%s", _("debug will apply when function leaves compiled code"));

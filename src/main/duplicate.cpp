@@ -276,7 +276,7 @@ SEXP duplicate_list(SEXP s_, bool deep)
     SEXP sp, vp;
 
     val = R_NilValue;
-    for (sp = (CDR)(s); sp != R_NilValue; sp = CDR(sp))
+    for (sp = CDR(s.get()); sp != R_NilValue; sp = CDR(sp))
 	val = PairList::create(R_NilValue, val);
 
     val = PairList::create<T>(R_NilValue, val);

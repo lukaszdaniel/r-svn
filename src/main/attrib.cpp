@@ -1136,7 +1136,7 @@ SEXP Rf_dimnamesgets(SEXP vec_, SEXP val_)
 	newval = allocVector(VECSXP, k);
 	for (int i = 0; i < k; i++) {
 	    SET_VECTOR_ELT(newval, i, CAR(val));
-	    val = (CDR)(val);
+	    val = CDR(val.get());
 	}
 	val = newval;
     }
@@ -1167,7 +1167,7 @@ SEXP Rf_dimnamesgets(SEXP vec_, SEXP val_)
     if (isList(vec) && k == 1) {
 	SEXP top = VECTOR_ELT(val, 0);
 	int i = 0;
-	for (val = vec; !isNull(val); val = (CDR)(val))
+	for (val = vec; !isNull(val); val = CDR(val.get()))
 	    SET_TAG(val, installTrChar(STRING_ELT(top, i++)));
     }
 
@@ -1306,7 +1306,7 @@ attribute_hidden SEXP do_attributes(SEXP call, SEXP op, SEXP args, SEXP env)
 	nvalues++;
     }
     while (attrs != R_NilValue) {
-	SEXP tag = (TAG)(attrs);
+	SEXP tag = TAG(attrs.get());
 	if (TYPEOF(tag) == SYMSXP) {
 	    SET_VECTOR_ELT(value, nvalues, getAttrib(CAR(args), tag));
 	    SET_STRING_ELT(names, nvalues, PRINTNAME(tag));
@@ -1316,7 +1316,7 @@ attribute_hidden SEXP do_attributes(SEXP call, SEXP op, SEXP args, SEXP env)
 	    SET_VECTOR_ELT(value, nvalues, CAR(attrs));
 	    SET_STRING_ELT(names, nvalues, R_BlankString);
 	}
-	attrs = (CDR)(attrs);
+	attrs = CDR(attrs.get());
 	nvalues++;
     }
     setAttrib(value, R_NamesSymbol, names);

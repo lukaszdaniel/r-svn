@@ -1860,13 +1860,13 @@ static SEXP ExpandDots(SEXP s_, int expdots)
 		r = CDR(r);
 	    }
 	    SET_ARGUSED(r, 1);
-	    SETCDR(r, ExpandDots((CDR)(s), expdots));
+	    SETCDR(r, ExpandDots(CDR(s.get()), expdots));
 	    return CAR(s);
 	}
     }
     else
 	SET_ARGUSED(s, 0);
-    SETCDR(s, ExpandDots((CDR)(s), expdots));
+    SETCDR(s, ExpandDots(CDR(s.get()), expdots));
     return s;
 }
 

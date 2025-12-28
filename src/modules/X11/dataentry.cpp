@@ -1056,7 +1056,7 @@ static SEXP processEscapes(SEXP x)
     replacement = mkString("\\1\\\\\"");
     SEXP s_gsub = install("gsub");
     expr = lang5(s_gsub, ScalarLogical(1), pattern, replacement, x);
-    SET_TAG( (CDR)(expr), install("perl") );
+    SET_TAG( CDR(expr.get()), install("perl") );
 
     newval = eval(expr, R_BaseEnv);
     pattern = mkString("(^.*$)");

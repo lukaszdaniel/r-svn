@@ -1208,7 +1208,7 @@ SEXP Rf_coerceVector(SEXP v_, SEXPTYPE type)
 	if (TYPEOF(op) == SYMSXP) {
 	    SET_STRING_ELT(ans, i, PRINTNAME(op));
 	    i++;
-	    v = (CDR)(v);
+	    v = CDR(v.get());
 	}
 
 	/* The distinction between strings and other elements was

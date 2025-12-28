@@ -1389,9 +1389,9 @@ attribute_hidden SEXP do_internal(SEXP call, SEXP op, SEXP args, SEXP env)
     if (TYPEOF(INTERNAL(fun)) == BUILTINSXP)
 	args = evalList(args, env, call, 0);
     PROTECT(args);
-    flag = PRIMPRINT((INTERNAL)(fun));
+    flag = PRIMPRINT(INTERNAL(fun).get());
     Evaluator::enableResultPrinting(flag != 1);
-    ans = PRIMFUN((INTERNAL)(fun)) (s, INTERNAL(fun), args, env);
+    ans = PRIMFUN(INTERNAL(fun).get()) (s, INTERNAL(fun), args, env);
     /* This resetting of Evaluator::enableResultPrinting(false) was to fix PR#7397,
        now fixed in GEText */
     if (flag < 2) Evaluator::enableResultPrinting(flag != 1);

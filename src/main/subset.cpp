@@ -706,12 +706,12 @@ static R_INLINE std::pair<bool, RObject *> R_DispatchOrEvalSP(SEXP call, SEXP op
         x = eval(CAR(args), rho);
         INCREMENT_LINKS(x);
         if (!OBJECT(x)) {
-            ans = CONS_NR(x, evalListKeepMissing((CDR)(args), rho));
+            ans = CONS_NR(x, evalListKeepMissing(CDR(args.get()), rho));
             DECREMENT_LINKS(x);
             return std::pair<bool, RObject *>(false, ans);
         }
         prom = R_mkEVPROMISE_NR(CAR(args), x);
-        args = CONS(prom, (CDR)(args));
+        args = CONS(prom, CDR(args.get()));
     }
     auto dispatched = DispatchOrEval(call, op, generic, args, rho, false, false);
     if (prom) DECREMENT_LINKS(PRVALUE(prom));
@@ -783,7 +783,7 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args_, SEXP rho)
        or matrix directly to improve speed for these simple cases. */
     GCStackRoot<> args(args_);
     SEXP x = CAR(args);
-    SEXP cdrArgs = (CDR)(args);
+    SEXP cdrArgs = CDR(args.get());
     SEXP cddrArgs = CDR(cdrArgs);
     if (cdrArgs != R_NilValue && cddrArgs == R_NilValue &&
 	TAG(cdrArgs) == R_NilValue) {
@@ -874,7 +874,7 @@ attribute_hidden SEXP do_subset_dflt(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	return x;
     }
 
-    SEXP subs = (CDR)(args);
+    SEXP subs = CDR(args.get());
     int nsubs = length(subs); /* Will be short */
     SEXPTYPE type = TYPEOF(x);
 
@@ -1020,7 +1020,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args_, SEXP rho)
     /* Get the subscripting and dimensioning information */
     /* and check that any array subscripting is compatible. */
 
-    subs = (CDR)(args);
+    subs = CDR(args.get());
     if(0 == (nsubs = length(subs)))
 	errorcall(call, "%s", _("no index specified"));
 
@@ -1316,7 +1316,7 @@ attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args_, SEXP env)
 	return ans;
     }
     GCStackRoot<> ansrt(ans);
-    ansrt = R_subset3_dflt(CAR(ansrt), STRING_ELT((CADR)(args), 0), call);
+    ansrt = R_subset3_dflt(CAR(ansrt), STRING_ELT(CADR(args.get()), 0), call);
     return ansrt;
 }
 

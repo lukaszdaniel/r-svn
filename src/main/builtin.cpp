@@ -42,6 +42,9 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/Closure.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
@@ -61,23 +64,23 @@ R_xlen_t R::asVecSize(SEXP x)
 	case INTSXP:
 	{
 	    int res = INTEGER(x)[0];
-	    if(res == NA_INTEGER) error("%s", _("vector size cannot be NA"));
+	    if (res == NA_INTEGER) error("%s", _("vector size cannot be NA"));
 	    return (R_xlen_t) res;
 	}
 	case REALSXP:
 	{
 	    double d = REAL(x)[0];
-	    if(ISNAN(d)) error("%s", _("vector size cannot be NA/NaN"));
-	    if(!R_FINITE(d)) error("%s", _("vector size cannot be infinite"));
-	    if(d > R_XLEN_T_MAX) error("%s", _("vector size specified is too large"));
+	    if (ISNAN(d)) error("%s", _("vector size cannot be NA/NaN"));
+	    if (!R_FINITE(d)) error("%s", _("vector size cannot be infinite"));
+	    if (d > R_XLEN_T_MAX) error("%s", _("vector size specified is too large"));
 	    return (R_xlen_t) d;
 	}
 	case STRSXP:
 	{
 	    double d = asReal(x);
-	    if(ISNAN(d)) error("%s", _("vector size cannot be NA/NaN"));
-	    if(!R_FINITE(d)) error("%s", _("vector size cannot be infinite"));
-	    if(d > R_XLEN_T_MAX) error("%s", _("vector size specified is too large"));
+	    if (ISNAN(d)) error("%s", _("vector size cannot be NA/NaN"));
+	    if (!R_FINITE(d)) error("%s", _("vector size cannot be infinite"));
+	    if (d > R_XLEN_T_MAX) error("%s", _("vector size specified is too large"));
 	    return (R_xlen_t) d;
 	}
 	default:
@@ -101,12 +104,12 @@ attribute_hidden SEXP do_delayed(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     args = CDR(args);
     Environment *eenv = downcast_to_env(CAR(args));
-    if (!eenv)
+    if (eenv == R_NilValue)
 	error(_("invalid '%s' argument"), "eval.env");
 
     args = CDR(args);
     Environment *aenv = downcast_to_env(CAR(args));
-    if (!aenv)
+    if (aenv == R_NilValue)
 	error(_("invalid '%s' argument"), "assign.env");
 
     defineVar(name, mkPROMISE(expr, eenv), aenv);
@@ -159,14 +162,14 @@ attribute_hidden SEXP do_onexit(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (CAR(argList) == R_MissingArg) code = R_NilValue;
     else code = CAR(argList);
 
-    if ((CADR)(argList) != R_MissingArg) {
+    if (CADR(argList.get()) != R_MissingArg) {
 	GCStackRoot<> evl;
-	evl = eval((CADR)(argList), rho);
+	evl = eval(CADR(argList.get()), rho);
 	addit = asLogicalNoNA(evl, "add");
     }
-    if ((CADDR)(argList) != R_MissingArg) {
+    if (CADDR(argList.get()) != R_MissingArg) {
 	GCStackRoot<> evl;
-	evl = eval((CADDR)(argList), rho);
+	evl = eval(CADDR(argList.get()), rho);
 	after = asLogicalNoNA(evl, "lifo");
     }
 
@@ -225,7 +228,7 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
 	s2 = R_findVarInFrame(env, install(nm));
-	if(s2 != R_UnboundValue) {
+	if (s2 != R_UnboundValue) {
 	    s = duplicate(s2);
 	    SET_BODY(s, R_NilValue);
 	    SET_CLOENV(s, R_GlobalEnv);
@@ -234,8 +237,8 @@ attribute_hidden SEXP do_args(SEXP call, SEXP op, SEXP args, SEXP rho)
 	env = R_findVarInFrame(R_BaseEnv, install(".GenericArgsEnv"));
 	if (TYPEOF(env) == PROMSXP) env = eval(env, R_BaseEnv);
 	s2 = R_findVarInFrame(env, install(nm));
-	if(s2 != R_UnboundValue) {
-	    s = mkCLOSXP((FORMALS)(s2), R_NilValue, R_GlobalEnv);
+	if (s2 != R_UnboundValue) {
+	    s = mkCLOSXP(FORMALS(s2.get()), R_NilValue, R_GlobalEnv);
 	    return s;
 	}
     }
@@ -250,7 +253,7 @@ attribute_hidden SEXP do_formals(SEXP call, SEXP op, SEXP args, SEXP rho)
 	RAISE_NAMED(f, NAMED(CAR(args)));
 	return f;
     } else {
-	if(!Rf_isPrimitive(CAR(args)))
+	if (!Rf_isPrimitive(CAR(args)))
 	    warningcall(call, "%s", _("argument is not a function"));
 	return R_NilValue;
     }
@@ -264,7 +267,7 @@ attribute_hidden SEXP do_body(SEXP call, SEXP op, SEXP args, SEXP rho)
 	RAISE_NAMED(b, NAMED(CAR(args)));
 	return b;
     } else {
-	if(!Rf_isPrimitive(CAR(args)))
+	if (!Rf_isPrimitive(CAR(args)))
 	    warningcall(call, "%s", _("argument is not a function"));
 	return R_NilValue;
     }
@@ -305,7 +308,7 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    isNull(env))) {
 	if (isNull(env))
 	    error("%s", _("use of NULL environment is defunct"));
-	if(MAYBE_SHARED(s) ||
+	if (MAYBE_SHARED(s) ||
 	   ((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(s)))
 	    /* this copies but does not duplicate args or code */
 	    s = duplicate(s);
@@ -317,7 +320,7 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     else if (isNull(env) || isEnvironment(env) ||
 	isEnvironment(env = simple_as_environment(env, true)))
     {
-	if(!isNull(env) && isPrimitive(s)) // temporary, to become error()
+	if (!isNull(env) && isPrimitive(s)) // temporary, to become error()
 	    warning("%s", _("setting environment(<primitive function>) is not possible and trying it is deprecated"));
 	else
 	    setAttrib(s, R_DotEnvSymbol, env);
@@ -341,10 +344,10 @@ attribute_hidden SEXP do_newenv(SEXP call, SEXP op, SEXP args, SEXP rho)
     hash = asInteger(CAR(args));
     args = CDR(args);
     Environment *enclos = simple_as_environment(CAR(args), true);
-    if (!enclos)
+    if (enclos == R_NilValue)
 	error(_("'%s' must be an environment"), "enclos");
 
-    if( hash ) {
+    if (hash) {
 	size = asInteger(CADR(args));
 	if (size == NA_INTEGER)
 	    size = 0; /* so it will use the internal default */
@@ -357,9 +360,9 @@ attribute_hidden SEXP do_parentenv(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     Environment *arg = simple_as_environment(CAR(args), true);
-    if (!arg)
+    if (arg == R_NilValue)
 	error(_("'%s' is not an environment"), "env");
-    if( arg == R_EmptyEnv )
+    if (arg == R_EmptyEnv)
 	error("%s", _("the empty environment has no parent"));
     return ENCLOS(arg);
 }
@@ -384,7 +387,7 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
 
     Environment *env = simple_as_environment(CAR(args), true);
-    if (!env)
+    if (env == R_NilValue)
 	error(_("'%s' is not an environment"), "env");
     if (env == R_EmptyEnv)
 	error("%s", _("can not set parent of the empty environment"));
@@ -394,12 +397,12 @@ attribute_hidden SEXP do_parentenvgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error("%s", _("can not set the parent environment of package imports"));
 
     Environment *parent = simple_as_environment(CADR(args), true);
-    if (!parent)
+    if (parent == R_NilValue)
 	error(_("'%s' is not an environment"), "parent");
 
     SET_ENCLOS(env, parent);
 
-    return CAR(args);
+    return env;
 }
 
 attribute_hidden SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -509,9 +512,9 @@ static void cat_cleanup(void *data)
     int changedcon = pci->changedcon;
 
     if (con && con->fflush) con->fflush(con);
-    if(changedcon) switch_stdout(-1, 0);
+    if (changedcon) switch_stdout(-1, 0);
     /* previous line might have closed it */
-    if(!wasopen && con->isopen) con->close(con);
+    if (!wasopen && con->isopen) con->close(con);
 #ifdef Win32
     WinUTF8out = pci->saveWinUTF8out;
 #endif
@@ -539,7 +542,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     file = CAR(args);
     ifile = asInteger(file);
     con = getConnection(ifile);
-    if(!con->canwrite) /* if it is not open, we may not know yet */
+    if (!con->canwrite) /* if it is not open, we may not know yet */
 	error("%s", _("cannot write to this connection"));
     args = CDR(args);
 
@@ -561,7 +564,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    pwidth = SIZE_MAX;
     } else {
 	int ipwidth = asInteger(fill);
-        if(ipwidth <= 0) {
+        if (ipwidth <= 0) {
 	    warning("%s", _("non-positive 'fill' argument will be ignored"));
 	    pwidth = SIZE_MAX;
 	} else
@@ -679,10 +682,10 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int n, havenames;
+    int n = 0;
+    bool havenames = false;
     /* compute number of args and check for names */
-    SEXP next;
-    for (next = args, n = 0, havenames = FALSE;
+    for (SEXP next = args;
 	 next != R_NilValue;
 	 next = CDR(next)) {
 	if (TAG(next) != R_NilValue)
@@ -690,8 +693,8 @@ attribute_hidden SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
 	n++;
     }
 
-    GCStackRoot<> list(allocVector(VECSXP, n));
-    GCStackRoot<> names(havenames ? allocVector(STRSXP, n) : R_NilValue);
+    GCStackRoot<ListVector> list(ListVector::create(n));
+    GCStackRoot<StringVector> names(havenames ? StringVector::create(n) : R_NilValue);
     for (int i = 0; i < n; i++) {
 	if (havenames) {
 	    if (TAG(args) != R_NilValue)
@@ -714,24 +717,24 @@ attribute_hidden SEXP do_makelist(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* This is a primitive SPECIALSXP */
 attribute_hidden SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP a, ans, nms;
-    int i, n, named;
-    named = 0;
-    n = length(args);
-    PROTECT(ans = allocVector(EXPRSXP, n));
-    a = args;
-    for (i = 0; i < n; i++) {
-	if(MAYBE_REFERENCED(CAR(a)))
+    GCStackRoot<ExpressionVector> ans;
+    GCStackRoot<StringVector> nms;
+    bool named = false;
+    int n = length(args);
+    ans = ExpressionVector::create(n);
+    SEXP a = args;
+    for (int i = 0; i < n; i++) {
+	if (MAYBE_REFERENCED(CAR(a)))
 	    SET_XVECTOR_ELT(ans, i, duplicate(CAR(a)));
 	else
 	    SET_XVECTOR_ELT(ans, i, CAR(a));
-	if (TAG(a) != R_NilValue) named = 1;
+	if (TAG(a) != R_NilValue) named = true;
 	a = CDR(a);
     }
     if (named) {
-	PROTECT(nms = allocVector(STRSXP, n));
+	nms = StringVector::create(n);
 	a = args;
-	for (i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++) {
 	    if (TAG(a) != R_NilValue)
 		SET_STRING_ELT(nms, i, PRINTNAME(TAG(a)));
 	    else
@@ -739,9 +742,8 @@ attribute_hidden SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    a = CDR(a);
 	}
 	setAttrib(ans, R_NamesSymbol, nms);
-	UNPROTECT(1);
     }
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -928,7 +930,7 @@ attribute_hidden SEXP do_lengthgets(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans, x = CAR(args);
 
     /* DispatchOrEval internal generic: length<- */
-    if(isObject(x) && DispatchOrEval(call, op, "length<-", args,
+    if (isObject(x) && DispatchOrEval(call, op, "length<-", args,
 				     rho, &ans, 0, 1))
 	return ans;
     // more 'x' checks in xlengthgets()
@@ -959,7 +961,7 @@ static SEXP expandDots(SEXP el, SEXP rho)
 		while (h != R_NilValue) {
 		    SETCDR(tail, CONS(CAR(h), R_NilValue));
 		    tail = CDR(tail);
-		    if(TAG(h) != R_NilValue) SET_TAG(tail, TAG(h));
+		    if (TAG(h) != R_NilValue) SET_TAG(tail, TAG(h));
 		    h = CDR(h);
 		}
 	    } else if (h != R_MissingArg)
@@ -968,7 +970,7 @@ static SEXP expandDots(SEXP el, SEXP rho)
 	} else {
 	    SETCDR(tail, CONS(CAR(el), R_NilValue));
 	    tail = CDR(tail);
-	    if(TAG(el) != R_NilValue) SET_TAG(tail, TAG(el));
+	    if (TAG(el) != R_NilValue) SET_TAG(tail, TAG(el));
 	}
 	el = CDR(el);
     }

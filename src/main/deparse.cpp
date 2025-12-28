@@ -594,7 +594,7 @@ static bool needsparens(PPinfo mainop, SEXP arg, unsigned int left,
     if (TYPEOF(arg) == LANGSXP) {
 	if (TYPEOF(CAR(arg)) == SYMSXP) {
 	    if (Rf_isPrimitive(SYMVALUE(CAR(arg)))) {
-		arginfo = PPINFO((SYMVALUE)((CAR)(arg)));
+		arginfo = PPINFO(SYMVALUE(CAR(arg)).get());
 
 		/* Not all binary ops are binary! */
 		switch(arginfo.kind) {
@@ -1144,7 +1144,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 			// if args are named, deparse as function call (PR#15350):
 			fop.kind = PP_FUNCALL;
 		} else
-		    fop = PPINFO((SYMVALUE)(op));
+		    fop = PPINFO(SYMVALUE(op).get());
 
 		switch (fop.kind) {
 		case PP_BINARY:
@@ -1257,12 +1257,12 @@ static void deparse2buff(SEXP s, LocalParseData *d)
 		    deparse2buff(CAR(s), d);
 		    if (parens)
 			print2buff(")", d);
-		    if (PRIMVAL((SYMVALUE)(op)) == 1)
+		    if (PRIMVAL(SYMVALUE(op).get()) == 1)
 			print2buff("[", d);
 		    else
 			print2buff("[[", d);
 		    args2buff(CDR(s), 0, 0, d);
-		    if (PRIMVAL((SYMVALUE)(op)) == 1)
+		    if (PRIMVAL(SYMVALUE(op).get()) == 1)
 			print2buff("]", d);
 		    else
 			print2buff("]]", d);

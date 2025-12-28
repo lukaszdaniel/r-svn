@@ -1939,9 +1939,9 @@ static SEXP R_Parse(int n, ParseStatus *status, SEXP srcfile)
 
 finish:
 
-    t = (CDR)(t);
+    t = CDR(t.get());
     rval = ExpressionVector::create(length(t));
-    for (n = 0 ; n < LENGTH(rval) ; n++, t = (CDR)(t))
+    for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t.get()))
 	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
 	if (ParseState.keepParseData)
@@ -2093,9 +2093,9 @@ SEXP R::R_ParseBuffer(IoBuffer *buffer, int n, ParseStatus *status, SEXP prompt,
     }
 finish:
     R_IoBufferWriteReset(buffer);
-    t = (CDR)(t);
+    t = CDR(t.get());
     rval = ExpressionVector::create(length(t));
-    for (n = 0 ; n < LENGTH(rval) ; n++, t = (CDR)(t))
+    for (n = 0 ; n < LENGTH(rval) ; n++, t = CDR(t.get()))
 	SET_XVECTOR_ELT(rval, n, CAR(t));
     if (ParseState.keepSrcRefs) {
 	if (ParseState.keepParseData)
