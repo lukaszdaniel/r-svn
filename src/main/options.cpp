@@ -36,6 +36,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/FunctionBase.hpp>
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
@@ -737,7 +738,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 		SET_VECTOR_ELT(value, i, SetOption(tag, ScalarInteger(k)));
 	    }
 	    else if ( streql(CHAR(namei), "error") ) {
-		if(isFunction(argi))
+		if(FunctionBase::isA(argi))
 		  argi = makeErrorCall(argi);
 		else if( !isLanguage(argi) &&  !isExpression(argi) )
 		    error(_("invalid '%s' value"), CHAR(namei));

@@ -186,6 +186,8 @@ namespace CXXR
         // allocated only using 'new':
         ~Promise() {}
 
+        // Not (yet) implemented.  Declared to prevent
+        // compiler-generated versions:
         Promise(const Promise &) = delete;
         Promise &operator=(const Promise &) = delete;
     };
@@ -196,7 +198,7 @@ namespace R
     /**
      * @param x Pointer to a CXXR::Promise.
      *
-     * @return ?
+     * @return Evaluation status of the CXXR::Promise.
      *
      * @deprecated Will need to be fixed.
      */

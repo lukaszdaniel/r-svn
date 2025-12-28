@@ -2109,7 +2109,7 @@ static SEXP gfind(const char *name, SEXP env,
     rval = findVar1mode(t1, env, mode, wants_S4, inherits, TRUE);
 
     if (rval == R_UnboundValue) {
-	if (isFunction(ifnotfound)) {
+	if (FunctionBase::isA(ifnotfound)) {
 	    PROTECT(var = mkString(name));
 	    PROTECT(R_fcall = LCONS(ifnotfound, CONS(var, R_NilValue)));
 	    rval = eval(R_fcall, enclos);
@@ -3307,7 +3307,7 @@ void R_MakeActiveBinding(SEXP sym, SEXP fun, SEXP env)
 {
     if (TYPEOF(sym) != SYMSXP)
 	error("%s", _("not a symbol"));
-    if (!isFunction(fun))
+    if (!FunctionBase::isA(fun))
 	error("%s", _("not a function"));
     env = simple_as_environment(env);
     if (env == R_NilValue)

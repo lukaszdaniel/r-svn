@@ -61,6 +61,8 @@
 #include <Localization.h>
 #include <CXXR/RAltRep.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/FunctionBase.hpp>
+#include <CXXR/BuiltInFunction.hpp>
 
 #ifdef TRUE
 #undef TRUE
@@ -774,15 +776,12 @@ INLINE_FUN Rboolean Rf_isValidString(SEXP x)
 
 INLINE_FUN Rboolean Rf_isFunction(SEXP s)
 {
-    return (Rboolean) (TYPEOF(s) == CLOSXP ||
-	    TYPEOF(s) == BUILTINSXP ||
-	    TYPEOF(s) == SPECIALSXP);
+    return (Rboolean) CXXR::FunctionBase::isA(s);
 }
 
 INLINE_FUN Rboolean Rf_isPrimitive(SEXP s)
 {
-    return (Rboolean) (TYPEOF(s) == BUILTINSXP ||
-	    TYPEOF(s) == SPECIALSXP);
+    return (Rboolean) CXXR::BuiltInFunction::isA(s);
 }
 
 INLINE_FUN Rboolean Rf_isList(SEXP s)

@@ -516,7 +516,7 @@ std::pair<bool, RObject *> R::usemethod(const char *generic, SEXP obj, SEXP call
 	const char *ss = translateChar(STRING_ELT(klass, i));
 	method = installS3Signature(generic, ss);
 	sxp = R_LookupMethod(method, rho, callrho, defrho);
-	if (isFunction(sxp)) {
+	if (FunctionBase::isA(sxp)) {
 	    if(method == R_SortListSymbol && CLOENV(sxp) == R_BaseNamespace)
 		continue; /* kludge because sort.list is not a method */
 	    PROTECT(sxp);
@@ -536,7 +536,7 @@ std::pair<bool, RObject *> R::usemethod(const char *generic, SEXP obj, SEXP call
     }
     method = installS3Signature(generic, "default");
     PROTECT(sxp = R_LookupMethod(method, rho, callrho, defrho));
-    if (isFunction(sxp)) {
+    if (FunctionBase::isA(sxp)) {
 	ans = dispatchMethod(op, sxp, R_NilValue, cptr, method, generic,
 			      rho, callrho, defrho);
 	UNPROTECT(2); /* klass, sxp */
@@ -881,25 +881,25 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	sk = translateChar(STRING_ELT(klass, i));
 	nextfunSignature = installS3Signature(sg, sk);
 	nextfun = R_LookupMethod(nextfunSignature, env, callenv, defenv);
-	if (isFunction(nextfun)) break;
+	if (FunctionBase::isA(nextfun)) break;
 	if (group != R_UnboundValue) {
 	    /* if not Generic.foo, look for Group.foo */
 	    nextfunSignature = installS3Signature(sb, sk);
 	    nextfun = R_LookupMethod(nextfunSignature, env, callenv, defenv);
-	    if(isFunction(nextfun))
+	    if (FunctionBase::isA(nextfun))
 		break;
 	}
-	if (isFunction(nextfun))
+	if (FunctionBase::isA(nextfun))
 	    break;
     }
-    if (!isFunction(nextfun)) {
+    if (!FunctionBase::isA(nextfun)) {
 	nextfunSignature = installS3Signature(sg, "default");
 	nextfun = R_LookupMethod(nextfunSignature, env, callenv, defenv);
 	/* If there is no default method, try the generic itself,
 	   provided it is primitive or a wrapper for a .Internal
 	   function of the same name.
 	 */
-	if (!isFunction(nextfun)) {
+	if (!FunctionBase::isA(nextfun)) {
 	    t = install(sg);
 	    nextfun = R_findVar(t, env);
 	    if (TYPEOF(nextfun) == PROMSXP) {
@@ -907,7 +907,7 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 		nextfun = eval(nextfun, env);
 		UNPROTECT(1);
 	    }
-	    if (!isFunction(nextfun))
+	    if (!FunctionBase::isA(nextfun))
 		error("%s", _("no method to invoke"));
 	    if (TYPEOF(nextfun) == CLOSXP) {
 		if (INTERNAL(t) != R_NilValue)
@@ -1633,7 +1633,7 @@ std::pair<bool, SEXP> R::R_possible_dispatch(SEXP call, SEXP op, SEXP args, SEXP
 	value = (*quick_method_check_ptr)(args, mlist, op);
 	if (isPrimitive(value))
 	    return std::pair<bool, SEXP>(false, NULL);
-	if (isFunction(value)) {
+	if (FunctionBase::isA(value)) {
             if (inherits(value, "internalDispatchMethod")) {
                 return std::pair<bool, SEXP>(false, NULL);
             }

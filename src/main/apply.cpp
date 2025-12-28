@@ -36,6 +36,7 @@
 #include <CXXR/Logical.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/FunctionBase.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Expression.hpp>
 #include <Defn.h>
@@ -363,7 +364,7 @@ attribute_hidden SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(!isVectorList(X))
 	error(_("'%s' must be a list or expression"), "object");
     FUN = CAR(args); args = CDR(args);
-    if(!isFunction(FUN)) error(_("invalid '%s' argument"), "f");
+    if(!FunctionBase::isA(FUN)) error(_("invalid '%s' argument"), "f");
     classes = CAR(args); args = CDR(args);
     if(!isString(classes)) error(_("invalid '%s' argument"), "classes");
     deflt = CAR(args); args = CDR(args);

@@ -4348,14 +4348,14 @@ static void findmethod(SEXP Class, const char *group, const char *generic,
 	const char *ss = translateChar(STRING_ELT(Class, whichclass));
 	*meth = installS3Signature(generic, ss);
 	*sxp = R_LookupMethod(*meth, rho, rho, R_BaseEnv);
-	if (isFunction(*sxp)) {
+	if (FunctionBase::isA(*sxp)) {
 	    *gr = R_BlankScalarString;
 	    if (whichclass > 0) updateObjFromS4Slot(objSlot, ss);
 	    break;
 	}
 	*meth = installS3Signature(group, ss);
 	*sxp = R_LookupMethod(*meth, rho, rho, R_BaseEnv);
-	if (isFunction(*sxp)) {
+	if (FunctionBase::isA(*sxp)) {
 	    *gr = mkString(group);
 	    if (whichclass > 0) updateObjFromS4Slot(objSlot, ss);
 	    break;
@@ -4486,13 +4486,13 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
 	rwhich = 0;
     PROTECT(rgr);
 
-    if (!isFunction(lsxp) && !isFunction(rsxp)) {
+    if (!FunctionBase::isA(lsxp) && !FunctionBase::isA(rsxp)) {
 	UNPROTECT(4);
 	return std::pair<bool, RObject *>(false, nullptr); /* no generic or group method so use default */
     }
 
     if (lsxp != rsxp) {
-	if (isFunction(lsxp) && isFunction(rsxp)) {
+	if (FunctionBase::isA(lsxp) && FunctionBase::isA(rsxp)) {
 	    /* special-case some methods involving difftime */
 	    const char *lname = CHAR(PRINTNAME(lmeth)),
 		*rname = CHAR(PRINTNAME(rmeth));
@@ -4528,7 +4528,7 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
 	    }
 	}
 	/* if the right hand side is the one */
-	if (!isFunction(lsxp)) { /* copy over the righthand stuff */
+	if (!FunctionBase::isA(lsxp)) { /* copy over the righthand stuff */
 	    lsxp = rsxp;
 	    lmeth = rmeth;
 	    lgr = rgr;
@@ -5973,7 +5973,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
     SEXP symbol = GETCONST(constants, sidx);				\
     SEXP value = findVarEX(symbol, rho, dd, vcache, sidx);		\
     if (!keepmiss && TYPEOF(value) == PROMSXP &&			\
-	!PRSEEN(value) && !PROMISE_IS_EVALUATED(value) &&		\
+	(PRSEEN(value) == DEFAULT) && !PROMISE_IS_EVALUATED(value) &&	\
 	TYPEOF(PRCODE(value)) == BCODESXP) {				\
 	START_BCFRAME_PROM(value);					\
 	NEXT();								\
@@ -7885,7 +7885,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
       {
 	/* check then the value on the stack is a function */
 	SEXP value = GETSTACK(-1);
-	if (!Rf_isFunction(value))
+	if (!FunctionBase::isA(value))
 	  error("%s", _("attempt to apply non-function"));
 	INIT_CALL_FRAME_ARGS();
 	NEXT();

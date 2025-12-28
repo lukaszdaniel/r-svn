@@ -45,6 +45,7 @@
 #include <CXXR/JMPException.hpp>
 #include <CXXR/CommandTerminated.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/FunctionBase.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Environment.hpp>
 #include <CXXR/PairList.hpp>
@@ -1988,7 +1989,7 @@ attribute_hidden void R::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname
 
     /**** need more here to keep recursive errors in browser? */
     SEXP h = GetOption1(install("browser.error.handler"));
-    if (!isFunction(h)) h = R_RestartToken;
+    if (!FunctionBase::isA(h)) h = R_RestartToken;
     rho = cptr->cloenv;
     klass = String::obtain("error");
     entry = mkHandlerEntry(klass, rho, h, rho, R_NilValue, TRUE);

@@ -1299,7 +1299,7 @@ attribute_hidden SEXP R::CreateTag(SEXP x)
 static SEXP asFunction(SEXP x)
 {
     SEXP f;
-    if (isFunction(x)) return x;
+    if (FunctionBase::isA(x)) return x;
 
     if (MAYBE_REFERENCED(x)) PROTECT(x = duplicate(x));
     else PROTECT(x);
@@ -2132,7 +2132,7 @@ attribute_hidden SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 			    TYPEOF(CAR(args)) == EXPRSXP);
 	break;
     case 302:		/* is.function */
-	LOGICAL0(ans)[0] = isFunction(CAR(args));
+	LOGICAL0(ans)[0] = FunctionBase::isA(CAR(args));
 	break;
 
     case 999:		/* is.single */
@@ -2724,7 +2724,7 @@ attribute_hidden SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
        zero-length string check used to be here but install gives
        better error message.
      */
-    if(!(isFunction(fun) || (isString(fun) && length(fun) == 1)))
+    if(!(FunctionBase::isA(fun) || (isString(fun) && length(fun) == 1)))
 	error("%s", _("'what' must be a function or character string"));
 
 #ifdef __maybe_in_the_future__

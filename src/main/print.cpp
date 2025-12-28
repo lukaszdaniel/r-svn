@@ -1083,7 +1083,7 @@ attribute_hidden void R::PrintValueEnv(SEXP s, SEXP env)
 
     R_PrintData data;
     PrintInit(&data, env);
-    if (isFunction(s))
+    if (FunctionBase::isA(s))
 	/* printed via print() -> print.function() in order to allow user-defined
 	   print.function() methods to also work in auto-printing: */
         PrintObject(s, &data);

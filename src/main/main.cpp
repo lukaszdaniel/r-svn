@@ -1534,7 +1534,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef USE_BROWSER_HOOK
                 /* if a browser hook is provided, call it and use the result */
                 SEXP hook = ignoreHook ? R_NilValue : GetOption1(install("browser.hook"));
-                if (isFunction(hook))
+                if (FunctionBase::isA(hook))
                 {
                     struct callBrowserHookData bhdata = {
                         .hook = hook, .cond = CADR(argList), .rho = rho};
