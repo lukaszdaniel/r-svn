@@ -1413,7 +1413,7 @@ static int findcell(DEstruct DE)
 	wrow = (yw - DE->bwidth - DE->hht) / DE->box_h;
 	w = DE->bwidth + DE->boxw[0];
 	for (i = 1; i <= DE->nwide; i++)
-	    if((w += BOXW(i+DE->colmin-1)) > xw) {
+	    if ((w += BOXW(i+DE->colmin-1)) > xw) {
 		wcol = i;
 		break;
 	    }

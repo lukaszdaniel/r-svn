@@ -514,7 +514,7 @@ attribute_hidden SEXP do_arith(SEXP call, SEXP op, SEXP args, SEXP env)
 
 attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 {
-    ARITHOP_TYPE oper = (ARITHOP_TYPE) PRIMVAL(op);
+    ARITHOP_TYPE opcode = (ARITHOP_TYPE) PRIMVAL(op);
 
 
     GCStackRoot<> x(xarg);
@@ -627,23 +627,23 @@ attribute_hidden SEXP R_binary(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     if (TYPEOF(x) == CPLXSXP || TYPEOF(y) == CPLXSXP) {
 	COERCE_IF_NEEDED(x, CPLXSXP);
 	COERCE_IF_NEEDED(y, CPLXSXP);
-	val = complex_binary(oper, x, y);
+	val = complex_binary(opcode, x, y);
     }
     else if (TYPEOF(x) == REALSXP || TYPEOF(y) == REALSXP) {
 	/* real_binary can handle REALSXP or INTSXP operand, but not LGLSXP. */
 	/* Can get a LGLSXP. In base-Ex.R on 24 Oct '06, got 8 of these. */
 	if (TYPEOF(x) != INTSXP) COERCE_IF_NEEDED(x, REALSXP);
 	if (TYPEOF(y) != INTSXP) COERCE_IF_NEEDED(y, REALSXP);
-	val = real_binary(oper, x, y);
+	val = real_binary(opcode, x, y);
     }
-    else val = integer_binary(oper, x, y, call);
+    else val = integer_binary(opcode, x, y, call);
 
     if (dims != R_NilValue) {
-	    setAttrib(val, R_DimSymbol, dims);
-	    if (xnames != R_NilValue)
-		setAttrib(val, R_DimNamesSymbol, xnames);
-	    else if (ynames != R_NilValue)
-		setAttrib(val, R_DimNamesSymbol, ynames);
+	setAttrib(val, R_DimSymbol, dims);
+	if (xnames != R_NilValue)
+	    setAttrib(val, R_DimNamesSymbol, xnames);
+	else if (ynames != R_NilValue)
+	    setAttrib(val, R_DimNamesSymbol, ynames);
     }
     else {
 	if (xnames != R_NilValue && XLENGTH(val) == xlength(xnames))

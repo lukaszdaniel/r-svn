@@ -205,7 +205,7 @@ static SEXP findFunInEnvRange(SEXP symbol, SEXP rho, SEXP target)
 		vl = eval(vl, rho);
 		UNPROTECT(1);
 	    }
-	    if (Rf_isFunction(vl))
+	    if (FunctionBase::isA(vl))
 		return vl;
 	}
 	if (rho == target)
@@ -227,7 +227,7 @@ static SEXP findFunWithBaseEnvAfterGlobalEnv(SEXP symbol, SEXP rho)
 		vl = eval(vl, rho);
 		UNPROTECT(1);
 	    }
-	    if (Rf_isFunction(vl))
+	    if (FunctionBase::isA(vl))
 		return vl;
 	}
 	if (rho == R_GlobalEnv)

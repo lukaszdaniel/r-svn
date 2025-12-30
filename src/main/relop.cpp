@@ -40,6 +40,9 @@
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Symbol.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -57,8 +60,8 @@ static SEXP complex_relop(RELOP_TYPE code, SEXP s1, SEXP s2, SEXP call);
 static SEXP string_relop (RELOP_TYPE code, SEXP s1, SEXP s2);
 static SEXP raw_relop    (RELOP_TYPE code, SEXP s1, SEXP s2);
 
-#define DO_SCALAR_RELOP(oper, x, y) do {		\
-	switch (oper) {					\
+#define DO_SCALAR_RELOP(opcode, x, y) do {		\
+	switch (opcode) {				\
 	case EQOP: return ScalarLogical((x) == (y));	\
 	case NEOP: return ScalarLogical((x) != (y));	\
 	case LTOP: return ScalarLogical((x) < (y));	\
@@ -218,7 +221,7 @@ static SEXP compute_language_relop(SEXP call, SEXP op, SEXP x, SEXP y)
 // also called from cmp_relop() in eval.c :
 attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 {
-    RELOP_TYPE oper = (RELOP_TYPE) PRIMVAL(op);
+    RELOP_TYPE opcode = (RELOP_TYPE) PRIMVAL(op);
     GCStackRoot<> x(xarg), y(yarg);
 
     /* handle the REALSXP/INTSXP simple scalar case quickly */
@@ -228,13 +231,13 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	    int iy = SCALAR_IVAL(y);
 	    if (ix == NA_INTEGER || iy == NA_INTEGER)
 		return ScalarLogical(NA_LOGICAL);
-	    DO_SCALAR_RELOP(oper, ix, iy);
+	    DO_SCALAR_RELOP(opcode, ix, iy);
 	}
 	else if (IS_SIMPLE_SCALAR(y, REALSXP)) {
 	    double dy = SCALAR_DVAL(y);
 	    if (ix == NA_INTEGER || ISNAN(dy))
 		return ScalarLogical(NA_LOGICAL);
-	    DO_SCALAR_RELOP(oper, ix, dy);
+	    DO_SCALAR_RELOP(opcode, ix, dy);
 	}
     }
     else if (IS_SIMPLE_SCALAR(x, REALSXP)) {
@@ -243,13 +246,13 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	    int iy = SCALAR_IVAL(y);
 	    if (ISNAN(dx) || iy == NA_INTEGER)
 		return ScalarLogical(NA_LOGICAL);
-	    DO_SCALAR_RELOP(oper, dx, iy);
+	    DO_SCALAR_RELOP(opcode, dx, iy);
 	}
 	else if (IS_SIMPLE_SCALAR(y, REALSXP)) {
 	    double dy = SCALAR_DVAL(y);
 	    if (ISNAN(dx) || ISNAN(dy))
 		return ScalarLogical(NA_LOGICAL);
-	    DO_SCALAR_RELOP(oper, dx, dy);
+	    DO_SCALAR_RELOP(opcode, dx, dy);
 	}
     }
 
@@ -266,7 +269,7 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	(typey == REALSXP || typey == INTSXP) &&
 	nx > 0 && ny > 0 && (nx == 1 || ny == 1)) {
 
-	return numeric_relop(oper, x, y);
+	return numeric_relop(opcode, x, y);
     }
 
     /* handle the general case */
@@ -282,8 +285,8 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     /* That symbols and calls were allowed was undocumented prior to
        R 2.5.0.  We deparse them as deparse() would, minus attributes */
     if ((iS = isSymbol(x)) || TYPEOF(x) == LANGSXP) {
-	GCStackRoot<> tmp;
-	tmp = allocVector(STRSXP, 1);
+	GCStackRoot<StringVector> tmp;
+	tmp = StringVector::create(1);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(x.get()) :
 		       STRING_ELT(deparse1line_ex(x, false,
 						DEFAULTDEPARSE | DIGITS17),
@@ -292,8 +295,8 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	nx = xlength(x);
     }
     if ((iS = isSymbol(y)) || TYPEOF(y) == LANGSXP) {
-	GCStackRoot<> tmp;
-	tmp = allocVector(STRSXP, 1);
+	GCStackRoot<StringVector> tmp;
+	tmp = StringVector::create(1);
 	SET_STRING_ELT(tmp, 0, (iS) ? PRINTNAME(y.get()) :
 		       STRING_ELT(deparse1line_ex(y, false,
 						DEFAULTDEPARSE | DIGITS17),
@@ -302,8 +305,8 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	ny = xlength(y);
     }
 
-    if (isNull(x)) { x = allocVector(INTSXP,0); nx = xlength(x); }
-    if (isNull(y)) { y = allocVector(INTSXP,0); ny = xlength(y); }
+    if (isNull(x)) { x = IntVector::create(0); nx = xlength(x); }
+    if (isNull(y)) { y = IntVector::create(0); ny = xlength(y); }
     if (!isVector(x) || !isVector(y))
 	errorcall(call,
 		  _("comparison (%s) is possible only for atomic and list types"),
@@ -368,11 +371,11 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 	}
     }
 
-  if (nx > 0 && ny > 0) {
+    if (nx > 0 && ny > 0) {
 	if (((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
             warningcall(call, "%s",
 		_("longer object length is not a multiple of shorter object length"));
-  }
+    }
 
   GCStackRoot<> val;
   if (nx > 0 && ny > 0) {
@@ -380,38 +383,38 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
     if (isString(x) || isString(y)) {
 	x = coerceVector(x, STRSXP);
 	y = coerceVector(y, STRSXP);
-	val = string_relop(oper, x, y);
+	val = string_relop(opcode, x, y);
     }
     else if (isComplex(x) || isComplex(y)) {
 	x = coerceVector(x, CPLXSXP);
 	y = coerceVector(y, CPLXSXP);
-	val = complex_relop(oper, x, y, call);
+	val = complex_relop(opcode, x, y, call);
     }
     else if ((isNumeric(x) || isLogical(x)) && (isNumeric(y) || isLogical(y))) {
-        val = numeric_relop(oper, x, y);
+        val = numeric_relop(opcode, x, y);
     } // rest of cases only apply when 'x' or 'y' is raw
     else if (isReal(x) || isReal(y)) {
 	x = coerceVector(x, REALSXP);
 	y = coerceVector(y, REALSXP);
-	val = numeric_relop(oper, x, y);
+	val = numeric_relop(opcode, x, y);
     }
     else if (isInteger(x) || isInteger(y)) {
 	x = coerceVector(x, INTSXP);
 	y = coerceVector(y, INTSXP);
-	val = numeric_relop(oper, x, y);
+	val = numeric_relop(opcode, x, y);
     }
     else if (isLogical(x) || isLogical(y)) {
 	x = coerceVector(x, LGLSXP);
 	y = coerceVector(y, LGLSXP);
-	val = numeric_relop(oper, x, y);
+	val = numeric_relop(opcode, x, y);
     }
     else if (TYPEOF(x) == RAWSXP || TYPEOF(y) == RAWSXP) {
 	x = coerceVector(x, RAWSXP);
 	y = coerceVector(y, RAWSXP);
-	val = raw_relop(oper, x, y);
+	val = raw_relop(opcode, x, y);
     } else errorcall(call, "%s", _("comparison of these types is not implemented"));
   } else { // nx == 0 || ny == 0
-	val = allocVector(LGLSXP, 0);
+	val = LogicalVector::create(0);
   }
 
     if (dims != R_NilValue) {
@@ -478,14 +481,14 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
 static SEXP numeric_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 {
     R_xlen_t i, i1, i2, n, n1, n2;
-    SEXP ans;
+    LogicalVector *ans;
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
     n = (n1 > n2) ? n1 : n2;
     PROTECT(s1);
     PROTECT(s2);
-    ans = allocVector(LGLSXP, n);
+    ans = LogicalVector::create(n);
 
     if (isInteger(s1) || isLogical(s1)) {
         if (isInteger(s2) || isLogical(s2)) {
@@ -507,7 +510,7 @@ static SEXP complex_relop(RELOP_TYPE code, SEXP s1, SEXP s2, SEXP call)
 {
     R_xlen_t i, i1, i2, n, n1, n2;
     Rcomplex x1, x2;
-    SEXP ans;
+    LogicalVector *ans;
 
     if (code != EQOP && code != NEOP) {
 	errorcall(call, "%s", _("invalid comparison with complex values"));
@@ -518,7 +521,7 @@ static SEXP complex_relop(RELOP_TYPE code, SEXP s1, SEXP s2, SEXP call)
     n = (n1 > n2) ? n1 : n2;
     PROTECT(s1);
     PROTECT(s2);
-    ans = allocVector(LGLSXP, n);
+    ans = LogicalVector::create(n);
 
     const Rcomplex *px1 = COMPLEX_RO(s1);
     const Rcomplex *px2 = COMPLEX_RO(s2);
@@ -563,7 +566,8 @@ static SEXP complex_relop(RELOP_TYPE code, SEXP s1, SEXP s2, SEXP call)
 static SEXP string_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 {
     R_xlen_t i, n, n1, n2, res, i1, i2;
-    SEXP ans, c1, c2;
+    LogicalVector *ans;
+    SEXP c1, c2;
     CXXR::RAllocStack::Scope rscope; // for Scollate
 
     n1 = XLENGTH(s1);
@@ -571,7 +575,7 @@ static SEXP string_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
     n = (n1 > n2) ? n1 : n2;
     PROTECT(s1);
     PROTECT(s2);
-    PROTECT(ans = allocVector(LGLSXP, n));
+    PROTECT(ans = LogicalVector::create(n));
     int *pa = LOGICAL(ans);
 
     switch (code) {
@@ -682,14 +686,14 @@ static SEXP raw_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 {
     R_xlen_t i, i1, i2, n, n1, n2;
     Rbyte x1, x2;
-    SEXP ans;
+    LogicalVector *ans;
 
     n1 = XLENGTH(s1);
     n2 = XLENGTH(s2);
     n = (n1 > n2) ? n1 : n2;
     PROTECT(s1);
     PROTECT(s2);
-    ans = allocVector(LGLSXP, n);
+    ans = LogicalVector::create(n);
 
     const Rbyte *px1 = RAW_RO(s1);
     const Rbyte *px2 = RAW_RO(s2);
@@ -752,15 +756,15 @@ static SEXP raw_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 
 static SEXP bitwiseNot(SEXP a)
 {
-    SEXP ans;
-    int np = 0;
+    IntVector *ans;
+    unsigned int np = 0;
     if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
 
     switch(TYPEOF(a)) {
     case INTSXP:
 	{
 	    R_xlen_t m = XLENGTH(a);
-	    ans = allocVector(INTSXP, m);
+	    ans = IntVector::create(m);
 	    int *pans = INTEGER(ans);
 	    const int *pa = INTEGER_RO(a);
 	    for (R_xlen_t i = 0; i < m; i++) {
@@ -777,8 +781,8 @@ static SEXP bitwiseNot(SEXP a)
 }
 
 #define BIT(op, name)							\
-    SEXP ans;								\
-    int np = 0;								\
+    IntVector *ans;							\
+    unsigned int np = 0;						\
     if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}	\
     if (isReal(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}	\
     if (TYPEOF(a) != TYPEOF(b))						\
@@ -789,7 +793,7 @@ static SEXP bitwiseNot(SEXP a)
 	    R_xlen_t i, ia, ib;						\
 	    R_xlen_t m = XLENGTH(a), n = XLENGTH(b),			\
 		mn = (m && n) ? std::max(m, n) : 0;			\
-	    ans = allocVector(INTSXP, mn);				\
+	    ans = IntVector::create(mn);				\
 	    int *pans = INTEGER(ans);					\
 	    const int *pa = INTEGER_RO(a), *pb = INTEGER_RO(b);		\
 	    MOD_ITERATE2(mn, m, n, i, ia, ib, {				\
@@ -822,8 +826,8 @@ static SEXP bitwiseXor(SEXP a, SEXP b)
 
 static SEXP bitwiseShiftL(SEXP a, SEXP b)
 {
-    SEXP ans;
-    int np = 0;
+    IntVector *ans;
+    unsigned int np = 0;
     if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
     if (!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     if (TYPEOF(a) != TYPEOF(b))
@@ -835,7 +839,7 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
 	    R_xlen_t i, ia, ib;
 	    R_xlen_t m = XLENGTH(a), n = XLENGTH(b),
 		mn = (m && n) ? std::max(m, n) : 0;
-	    ans = allocVector(INTSXP, mn);
+	    ans = IntVector::create(mn);
 	    int *pans = INTEGER(ans);
 	    const int *pa = INTEGER_RO(a), *pb = INTEGER_RO(b);
 	    MOD_ITERATE2(mn, m, n, i, ia, ib, {
@@ -856,8 +860,8 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
 
 static SEXP bitwiseShiftR(SEXP a, SEXP b)
 {
-    SEXP ans;
-    int np = 0;
+    IntVector *ans;
+    unsigned int np = 0;
     if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
     if (!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
     if (TYPEOF(a) != TYPEOF(b))
@@ -869,7 +873,7 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
 	    R_xlen_t i, ia, ib;
 	    R_xlen_t m = XLENGTH(a), n = XLENGTH(b),
 		mn = (m && n) ? std::max(m, n) : 0;
-	    ans = allocVector(TYPEOF(a), mn);
+	    ans = IntVector::create(mn);
 	    int *pans = INTEGER(ans);
 	    const int *pa = INTEGER_RO(a), *pb = INTEGER_RO(b);
 	    MOD_ITERATE2(mn, m, n, i, ia, ib, {

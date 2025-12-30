@@ -165,6 +165,8 @@ namespace R
 
 extern "C"
 {
+    /* ***** C interface ***** */
+
     typedef unsigned int PROTECT_INDEX;
 
     /** @brief Push a node pointer onto the C pointer protection stack.

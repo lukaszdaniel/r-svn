@@ -127,14 +127,14 @@ namespace CXXR
         static void handleStackDepthExceeded() __attribute__((noreturn));
         static void handleStackSpaceExceeded(intptr_t usage) __attribute__((noreturn));
 
-        static unsigned int s_depth;		   // Current depth of expression evaluation
+        static unsigned int s_depth;           // Current depth of expression evaluation
         static unsigned int s_depth_threshold; // An error will be
                                                // reported if s_depth exceeds this
                                                // value.  s_depth_threshold is normally
                                                // equal to s_depth_limit, but may be
                                                // temporarily increased above s_depth_limit
                                                // to allow error reporting.
-        static unsigned int s_depth_limit;	   // The value (controlled
+        static unsigned int s_depth_limit;     // The value (controlled
                                                // by the 'expressions' R option) to
                                                // which s_depth_threshold is set except
                                                // during error reporting.

@@ -156,8 +156,8 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 
     if (nx > 0 && ny > 0) {
 	if (((nx > ny) ? nx % ny : ny % nx) != 0) // mismatch
-	    warningcall(call, "%s",
-			_("longer object length is not a multiple of shorter object length"));
+            warningcall(call, "%s",
+		_("longer object length is not a multiple of shorter object length"));
     }
 
     GCStackRoot<> val;
