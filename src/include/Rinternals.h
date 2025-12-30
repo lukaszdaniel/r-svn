@@ -1075,6 +1075,8 @@ SEXP R_altrep_data1(SEXP x);
 SEXP R_altrep_data2(SEXP x);
 void R_set_altrep_data1(SEXP x, SEXP v);
 void R_set_altrep_data2(SEXP x, SEXP v);
+SEXP R_altrep_class_name(SEXP x);     // CAR(ATTRIB(ALTREP_CLASS(x)))
+SEXP R_altrep_class_package(SEXP x);  // CADR(ATTRIB(ALTREP_CLASS(x)))
 #endif
 
 int (ALTREP)(SEXP x);
@@ -1142,8 +1144,14 @@ void R_resizeVector(SEXP x, R_xlen_t newlen);
 SEXP R_allocResizableVector(SEXPTYPE type, R_xlen_t maxlen);
 SEXP R_duplicateAsResizable(SEXP x);
 
-/* Attribute iterator */
+/* Attribute support */
 SEXP R_mapAttrib(SEXP x, SEXP (*FUN)(SEXP, SEXP, void *), void *data);
+SEXP R_getAttributes(SEXP x);
+R_xlen_t R_getAttribCount(SEXP x);
+SEXP R_getAttribNames(SEXP x);
+bool R_hasAttrib(SEXP x, SEXP name);
+int R_nrow(SEXP x); 
+int R_ncol(SEXP x);
 
 /* Rest of this file
    Stuff that is not API and probably should not be but is getting used.
