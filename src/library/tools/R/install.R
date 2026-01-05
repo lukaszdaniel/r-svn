@@ -1,7 +1,7 @@
 #  File src/library/tools/R/install.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 1995-2025 The R Core Team
+#  Copyright (C) 1995-2026 The R Core Team
 #
 # NB: also copyright dates in Usages.
 #
@@ -2658,7 +2658,7 @@ if(FALSE) {
                 val <- gsub("^CXX_STD *= *", "", ll)
                 val <- gsub("#.*$", "", val)
                 val <- gsub(" +$", "", val)
-                msg <- sprintf("src/%s: Unknown C++%s standard was ignored", fn, val)
+                msg <- sprintf("src/%s: Unknown C++ standard %s was ignored", fn,  sQuote(val))
                 warning(msg, domain = NA, call. = FALSE)
             }
         }
@@ -2696,12 +2696,15 @@ if(FALSE) {
             }
         }
     }
+    val <- Sys.getenv("R_PKG_CXX_STD")
     if (is.null(use_cxxstd)) {
         val <- Sys.getenv("R_PKG_CXX_STD")
         if (val %in% cxx_standards) {
             use_cxxstd <- val
             ## could warn here on C++98,11,14
         }
+    } else if (nzchar(val) && (val != use_cxxstd)) {
+        warning("SystemRequirements and Makevars* specified different C++ standards", domain = NA, call. = FALSE)
     }
 
     if (with_cxx) {
@@ -2731,7 +2734,8 @@ if(FALSE) {
                 stop(paste0("C++", use_cxxstd, " standard requested but CXX",
                             use_cxxstd, " is not defined"),
                      call. = FALSE, domain = NA)
-            }
+            } else
+                message("specified C++", use_cxxstd)
         }
     }
 

@@ -85,7 +85,7 @@ function(keys)
         y <- y[pos]
     }
     if(length(bad)) {
-        msg <- paste(c("Could not find bibentries for the following keys:\n%s", 
+        msg <- paste(c("Could not find bibentries for the following keys:\n", 
                        .strwrap22(sQuote(bad))),
                      collapse = "\n")
         warning(msg, call. = FALSE)
@@ -93,7 +93,7 @@ function(keys)
     y
 }
 
-.bibentries_from_bibtex_file <-
+.bibentries_from_bibtex <-
 function(file, text)
 {
     if(missing(file)) {
