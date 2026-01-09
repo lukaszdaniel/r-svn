@@ -2492,6 +2492,47 @@ stopifnot(endsWith(rd, "Ja\u00e9n."), grepl("Os Economistas", rd))
 order(NA_character_, 'c', method = 'radix', na.last = NA)
 
 
+## provideDimnames(use.names=) for names(dimnames(.))
+pDF <- provideDimnames
+formals(pDF)$base <- quote(list("uu" = "a", "vv" = "b"))
+pDT <- pDF
+formals(pDT)$use.names <- TRUE
+dn <- function(x, dn = dimnames(x))
+    if(!is.null(dn)) list(names(dn), `names<-`(dn, NULL))
+dnF <- function(...) dn(pDF(...))
+dnT <- function(...) dn(pDT(...))
+(N4 <- N4. <- array(0, rep(1L, 4L)))
+dimnames(N4.) <- `names<-`(vector("list", 4L), c("ww", "", "", ""))
+N4.
+L4 <- L4. <- list(NULL, list("a", "b", "a", "b"))
+L4.[[1L]] <- names(dimnames(N4.))
+stopifnot(identical(dnF(N4 ), L4 ),
+          identical(dnF(N4.), L4.),
+          identical(dnT(N4 , sep = "~"),
+                    `[[<-`(L4 , 1L, c("uu", "vv", "uu~1", "vv~1"))),
+          identical(dnT(N4., unique = FALSE),
+                    `[[<-`(L4., 1L, c("ww", "vv", "uu"  , "vv"  ))),
+          ## now composition ('T' always wins):
+          vapply(list(N4, N4.),
+                 function(.) identical(pDF(pDF(.)), pDF(.)) &&
+                             identical(pDF(pDT(.)), pDT(.)) &&
+                             identical(pDT(pDF(.)), pDT(.)) &&
+                             identical(pDT(pDT(.)), pDT(.)),	NA))
+
+
+## besselJ(pi/22, 1e-15) anomaly, R-help, 28 Dec 2025, Leo Mada
+x <- 0:41; bJ <- besselJ(0:41, 1e-15)
+bJ16xct <-
+    c(0, 0.76519769, 0.22389078, -0.26005195, -0.39714981, -0.17759677,
+      0.15064526, 0.30007927, 0.17165081, -0.090333611, -0.24593576,
+      -0.1711903, 0.047689311, 0.2069261, 0.17107348, -0.014224473)
+all.equal(bJ16xct, bJ[1:16], tolerance=0) # 8.3888e-9 [was +1e15 since r32446, 2005-01-03]
+stopifnot(all.equal(bJ16xct, bJ[1:16]),
+          max(abs(bJ[17:42])) < 0.175)
+## besselJ(x, nu)'s C code now works for very small nu
+
+
+
 ## keep at end
 rbind(last =  proc.time() - .pt,
       total = proc.time())

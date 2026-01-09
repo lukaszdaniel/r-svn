@@ -165,6 +165,9 @@
 
       \item \code{match.arg()} gets a new option \code{several.ok = "all"},
       fulfilling the wish of \I{Jim Hester} in \PR{16659}.
+
+      \item \code{provideDimnames()} gets new switch \code{use.names}, as
+      proposed including patch by \I{Mikael Jagan}, in \PR{18975}.
     }
   }
 
@@ -226,11 +229,6 @@
       For now this can be selected by configuring \R{} with
       \option{--with-CXX20}: it is planned that this will become the
       default before release.
-
-      \item C++ standard specifications (\code{CXX_STD =} in
-      \file{src/Makevars*} and in the \code{SystemRequirements} field of
-      the \file{DESCRIPTION} file) are now checked more thoroughly.
-      Invalid values are still ignored but now give a warning.
     }
   }
 
@@ -513,11 +511,33 @@
       \item \code{length(<POSIXlt>) <- v} is more careful about balancing,
       notably when \code{v} is not integer, thanks to \I{Suharto Anggono}'s
       remarks on the mailing list R-devel.
+
+      On Windows terminals \kbd{Ctrl-C} now breaks out of waiting for
+      keyboard input, fixing \PR{18982}.
     }
   }
 }
 
 \section{\Rlogo CHANGES IN R 4.5.2 patched}{
+
+  \subsection{UTILITIES}{
+    \itemize{
+      \item \command{tools/fetch-recommended} can be used instead of
+      \command{tools/rsync-recommended} to fetch recommended packages
+      into \R sources using \command{curl} on systems without
+      \command{rsync} or behind firewalls.
+    }
+  }
+
+  \subsection{PACKAGE INSTALLATION}{
+    \itemize{
+      \item C++ standard specifications (\code{CXX_STD =} in
+      \file{src/Makevars*} and in the \code{SystemRequirements} field of
+      the \file{DESCRIPTION} file) are now checked more thoroughly.
+      Invalid values are still ignored but now give a warning, as do
+      contradictory specifications.
+    }
+  }
 
   \subsection{BUG FIXES}{
     \itemize{
@@ -539,6 +559,9 @@
       matrices, also when \code{lag * dif > nrow(m)} (\PR{18972}, thanks to
       \I{Mikael Jagan} and \I{Suharto Anggono}).
       \code{diff(<ts-matrix>)} remains matrix, even when it has length zero.
+
+      \item \code{besselJ(1, 1e-15)} and similar now give correct results,
+      thanks to \I{Leo Mada} and other \dQuote{R-help}ers.
     }
   }
 }

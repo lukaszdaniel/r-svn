@@ -147,7 +147,13 @@ static void gl_char_init(void)			/* turn off input echo */
        Win32OutputStream = GetStdHandle(STD_OUTPUT_HANDLE);	
    }
    GetConsoleMode(Win32InputStream,&OldWin32Mode);
-   SetConsoleMode(Win32InputStream, ENABLE_PROCESSED_INPUT); /* So ^C works */
+
+   /* to capture ^C and set R_interrupts_pending */
+   DWORD mode;
+   GetConsoleMode(Win32InputStream, &mode);
+   mode &= ~ENABLE_PROCESSED_INPUT;
+   SetConsoleMode(Win32InputStream, mode);
+
    AltIsDown = 0;
 }
 
@@ -699,7 +705,7 @@ static int update_map(size_t change)
     return 0;
 }
 
-/* Returns 1 on EOF */
+/* Returns 1 on EOF, -1 on ^C */
 static int getline0(const char *prompt)
 {
     int c, loc;
@@ -745,9 +751,9 @@ static int getline0(const char *prompt)
 		break;
 	      case '\003':                                      /* ^C */
 		  gl_fixup(gl_prompt, -1, gl_cnt);
-		  gl_puts("^C\n");
-		  gl_kill(0);
-		  gl_fixup(gl_prompt, -2, BUF_SIZE);
+		  gl_puts("^C");
+		  gl_cleanup();
+		  return -1;
 		break;
 	      case '\004':					/* ^D */
 		if (gl_cnt == 0) {
@@ -883,7 +889,7 @@ static int getline0(const char *prompt)
     return 0;
 }
 
-/* returns 1 on eof */
+/* returns 1 on eof, -1 on ^C */
 /* The line is stored into buf of size buflen, attempts to enter a longer line
    are ignored with a beep signal. */
 int getline(const char *prompt, char *buf, int buflen)
@@ -895,7 +901,7 @@ int getline(const char *prompt, char *buf, int buflen)
     return getline0(prompt);
 }
 
-/* returns 1 on eof */
+/* returns 1 on eof, -1 on ^C */
 /* The line is stored into a dynamically allocated buffer. The buffer has to
    be freed by the caller using gl_free() when no longer needed. */
 int getline2(const char *prompt, char **buf)
