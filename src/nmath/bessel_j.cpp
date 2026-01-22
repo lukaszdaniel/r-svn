@@ -209,10 +209,10 @@ static void J_bessel(double *x, double *alpha, int *nb,
 /* ---------------------------------------------------------------------
    Mathematical constants */
 
-    constexpr double pi2 = .636619772367581343075535;           // pi2 = 2 / \pi
+    constexpr static double pi2 = .636619772367581343075535;           // pi2 = 2 / \pi
 
-    constexpr double twopi1 = 6.28125;			// twopi1 = first few significant digits of 2\pi
-    constexpr double twopi2 =  .001935307179586476925286767; /* twopi2 = (2*\pi - twopi1) to working precision, i.e.,
+    constexpr static double twopi1 = 6.28125;			// twopi1 = first few significant digits of 2\pi
+    const static double twopi2 =  .001935307179586476925286767; /* twopi2 = (2*\pi - twopi1) to working precision, i.e.,
 								 * twopi1 + twopi2 = 2 \pi to extra precision.
  --------------------------------------------------------------------- */
 #define very_small_nu  0x1p-800 // 2^-800 = 1.4996968....e-241
@@ -301,7 +301,7 @@ static void J_bessel(double *x, double *alpha, int *nb,
 	    /*---------------------------------------------------------------------
 	     *  Factorial(N)
 	     *--------------------------------------------------------------------- */
-	    constexpr double fact[25] =
+	    constexpr static double fact[25] =
 		{ 1.,1.,2.,6.,24.,120.,720.,5040.,40320.,
 		  362880.,3628800.,39916800.,479001600.,6227020800.,87178291200.,
 		  1.307674368e12,2.0922789888e13,3.55687428096e14,6.402373705728e15,

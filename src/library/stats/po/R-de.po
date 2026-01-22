@@ -1876,7 +1876,7 @@ msgstr "Kann kein exaktes Konfidenzintervall bei Bindungen berechnen"
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
 #: R/ansari.test.R:0
 msgid "cannot compute exact p-value with ties"
-msgstr "kann bei Bindungen keinen exakten p-Wert Berechnen"
+msgstr "kann bei Bindungen keinen exakten p-Wert berechnen"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
 #: R/chisq.test.R:0

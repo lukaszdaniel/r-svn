@@ -1748,7 +1748,7 @@ msgstr ""
 #. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
 msgid "package %s successfully unpacked and MD5 sums checked"
-msgstr "le package %s a été décompressé et les sommes MD5 ont été vérifiées avec succés"
+msgstr "le package %s a été décompressé et les sommes MD5 ont été vérifiées avec succès"
 
 #. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
 #: R/packages.R:0
