@@ -174,8 +174,26 @@
       via the new argument \code{character.method = "factor"}, e.g.,
       when summarizing a data frame (\PR{16750}).
 
+      It also provides more useful summaries for complex vectors, with
+      \code{polar} determining if polar or cartesian coordinates are more
+      relevant; mostly based on a proposal by \I{Mikael Jagan}.
+      Experimentally, and to be changed before release,
+      \code{summary(<raw>)} also provides quantitative information.
+
       \item Error messages from failed Rd \verb{\Sexpr} code now include
       the call from the original condition (if available).
+
+      \item When the environment variable \env{R_WARN_BOUNDS_OPT} is set to
+      \code{"yes"}, \code{options(warn = val)} will check if \code{val} is
+      inside \code{-1:2}; this may happen unconditionally in the future.
+
+      \item \code{weighted.residuals()} now returns weighted working
+      residuals for \code{"glm"} objects. It used to return deviance
+      residuals, but these do not give the one-step approximated
+      \code{dfbeta} values, as pointed out by \I{Ravi
+      Varadhan}. \code{influence.glm()} has been amended so that it now
+      returns an object with both a \code{"wt.res"} and a
+      \code{"dev.res"} element.
     }
   }
 
@@ -205,6 +223,12 @@
 
       \item Building the \R manuals now requires \I{Texinfo} 6.8 or later.
       % For the new Rman.css. Also features @example <lang> and @displaymath.
+
+      \item A new \env{LIBR_LDFLAGS} defaulting to \env{LDFLAGS} allows more
+      flexibility, e.g., for distributions such as Gentoo, Debian or
+      Ubuntu, fixing \PR{18992}; additionally a \code{make} failure to
+      create \file{libR.pc} should no longer be ignored, fixing \PR{18993};
+      both thanks to \I{Benjamin Drung}.
     }
   }
 
@@ -344,6 +368,9 @@
       \item \command{R CMD check} when passed a tarball looks at its contents
       and so no longer derives the package name from the tarball name
       (which can now be arbitrary).
+
+      \item Package \file{README.md} files are now installed and
+      featured in HTML help.
     }
   }
 
@@ -520,13 +547,17 @@
       \item On Windows terminals \kbd{Ctrl-C} now breaks out of waiting for
       keyboard input, fixing \PR{18982}.
 
-      \item \code{pretty(ch)} again correctly works with \code{ch} a
-      character vector of numbers.
-
       \item The default \code{summary()} and its factor method now
       label missing values \samp{NAs} rather than \samp{NA's},
       fixing a decades-old grammatical faux pas inherited from S
       (\PR{16348} and \PR{18948}).
+
+      \item Asymmetric toeplitz, \code{toeplitz(x, r)}, is type consistent
+      now, even when \code{r} of length 0 or 1 is not used directly.  Fixes
+      \PR{18996}, thanks to \I{Mikael Jagan}'s patch and test.
+
+      \item \code{format(r)} now keeps \code{names(r)} also for raw
+      objects \code{r}.
     }
   }
 }
@@ -575,6 +606,12 @@
 
       \item \code{besselJ(1, 1e-15)} and similar now give correct results,
       thanks to \I{Leo Mada} and other \I{\dQuote{R-help}ers}.
+
+      \item \code{vignette(\var{pkg}::\var{topic})} is now a documented
+      usage variant and confines vignette retrieval to the specified package.
+
+      \item \code{pretty(ch)} again correctly works with \code{ch} a
+      character vector of numbers.
     }
   }
 }

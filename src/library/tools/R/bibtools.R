@@ -150,19 +150,16 @@ function(bib)
 }
 
 .check_Rd_bibentries_cited_not_shown <-
-function(package, dir, lib.loc = NULL)
+function(dir)
 {
-    db <- if(!missing(package))
-              Rd_db(package, lib.loc)
-          else
-              Rd_db(dir = dir)
-    x <- Filter(length, lapply(db, .bibentries_cited_or_shown))
+    ## We really need build/partial.rdb for this, which we only have for
+    ## the package sources.
+    x <- Filter(length,
+                lapply(Rd_db(dir = dir), .bibentries_cited_or_shown))
     if(!length(x))
         return(NULL)
     u <- FALSE
     ## Check whether we got everything from the build stage expansions.
-    if(!missing(package))
-        dir <- system.file(package = package, lib.loc = lib.loc)
     f <- file.path(dir, "build", "partial.rdb")
     if(!file.exists(f)) {
         u <- TRUE
@@ -171,6 +168,7 @@ function(package, dir, lib.loc = NULL)
         ## Cannot simply use identical() as entries in the partial Rd db
         ## are subject to section re-ordering.
         g <- function(u, v) {
+            is.null(v) || # built with \bib stubs/unknowns in R < 4.6.0
             length(setdiff(split(u, row(u)), split(v, row(v))) > 0L)
         }
         if(any(unlist(Map(g, x, y), use.names = FALSE)))
@@ -186,7 +184,7 @@ function(package, dir, lib.loc = NULL)
             if(e[1L] != "\\bibshow") {
                 cited <- c(cited, .bibkeys_from_cite(e[2L]))
             } else {
-                given <- c(cited, .bibkeys_from_show(e[2L]))
+                given <- .bibkeys_from_show(e[2L])
                 if(!length(given)) {
                     delta <- c(delta, cited)
                     cited <- character()
