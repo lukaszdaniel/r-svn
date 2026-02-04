@@ -27,8 +27,12 @@ function(contriburl = contrib.url(repos, type), method,
 {
     if (!is.character(type))
         stop(gettextf("'%s' must be a character string", "type"), domain = NA)
+    ## We need Built if any of the URLs are binaries. At this point we don't enforce that url/type
+    ## match, partially because we don't actually use that information, but in case we are
+    ## on a system with binaries the default pkgType will contain "binary" or "both" so we take it
+    ## as a hint that one of them may be binary and thus we need "Built"
     requiredFields <-
-        c(tools:::.get_standard_repository_db_fields(), "File")
+        c(tools:::.get_standard_repository_db_fields(), "File", if(any(grepl("(binary|both)", type))) "Built")
     if (is.null(fields))
 	fields <- requiredFields
     else {
@@ -410,7 +414,7 @@ update.packages <- function(lib.loc = NULL, repos = getOption("repos"),
             cat(old[k, "Package"], ":\n",
                 "Version", old[k, "Installed"],
                 "installed in", old[k, "LibPath"],
-                if(checkBuilt) paste("built under R", old[k, "Built"]),
+                if(checkBuilt) paste("built under R", .builtRver(old[k, "Built"])),
                 "\n",
                 "Version", old[k, "ReposVer"], "available at",
                 simplifyRepos(old[k, "Repository"], type))
@@ -503,6 +507,23 @@ update.packages <- function(lib.loc = NULL, repos = getOption("repos"),
     }
 }
 
+## (see also indices.R but it strips the time, sadly)
+.builtDate <- function(built) { ## see also tools::.split_description, but return NA if something went wrong
+    ## also allow structure from package.rds (just in case)
+    bc <- if (is.list(built) && is.character(built$Date))
+              built$Date
+          else
+              strsplit(built, "; ", fixed=TRUE)[[1]]
+    ## Note that the timestamp should be always in UTC
+    if (length(bc) >= 3L)
+        as.POSIXct(bc[3], "UTC")
+    else
+        NA
+}
+
+.builtRver <- function(built) ## convert full "Built" string to just R version (unless it is already)
+    gsub("^R ([0-9.]+).*", "\\1", built)
+
 old.packages <- function(lib.loc = NULL, repos = getOption("repos"),
                          contriburl = contrib.url(repos, type),
                          instPkgs = installed.packages(lib.loc = lib.loc, ...),
@@ -526,6 +547,16 @@ old.packages <- function(lib.loc = NULL, repos = getOption("repos"),
 
     update <- NULL
 
+    needs.install <- function(repo, inst)
+        ## if the repo version is higher, then it's obvious
+        ((package_version(repo["Version"]) > package_version(inst["Version"])) ||
+         ## otherwise it depends - on equal versions we still need to install if published/built is higher
+         (package_version(repo["Version"]) == package_version(inst["Version"]) &&
+          isTRUE(.builtDate(repo["Built"]) > .builtDate(inst["Built"])) ## is FALSE if either is missing
+             ## FIXME: we want to also consider Published so we can override this by
+             ## repo metadata alone, but that's not recorded in the metadata yet
+         ))
+
     currentR <- minorR <- getRversion()
     minorR[[c(1L, 3L)]] <- 0L # set patchlevel to 0
     for(k in 1L:nrow(instPkgs)) {
@@ -534,9 +565,8 @@ old.packages <- function(lib.loc = NULL, repos = getOption("repos"),
         if(is.na(z)) next
         onRepos <- available[z, ]
         ## works OK if Built: is missing (which it should not be)
-	if((!checkBuilt || package_version(instPkgs[k, "Built"]) >= minorR) &&
-           package_version(onRepos["Version"]) <=
-           package_version(instPkgs[k, "Version"])) next
+	if((!checkBuilt || package_version(.builtRver(instPkgs[k, "Built"])) >= minorR) &&
+           !needs.install(onRepos, instPkgs[k,])) next
         deps <- onRepos["Depends"]
         if(!is.na(deps)) {
             Rdeps <- tools:::.split_dependencies(deps)[["R", exact=TRUE]]
@@ -647,15 +677,6 @@ new.packages <- function(lib.loc = NULL, repos = getOption("repos"),
                 warning(gettextf("metadata of %s is corrupt", sQuote(pkgpath)),
                         domain = NA)
                 next
-            }
-            if("Built" %in% fields) {
-                ## This should not be missing.
-                if(is.null(md$Built$R) || !("Built" %in% names(desc))) {
-                    warning(gettextf("metadata of %s is corrupt",
-                                     sQuote(pkgpath)), domain = NA)
-                    next
-                }
-                desc["Built"] <- as.character(md$Built$R)
             }
             ret[i, ] <- c(pkgs[i], lib, desc)
         }
@@ -819,15 +840,18 @@ download.packages <- function(pkgs, destdir, available = NULL,
                 keep[duplicated(keep)] <- FALSE
                 ok[ok][!keep] <- FALSE
             }
-            if (startsWith(type, "mac.binary")) type <- "mac.binary"
             ## in Oct 2009 we introduced file names in PACKAGES files
             File <- available[ok, "File"]
+            ## strip build name for ext detection
+            type <- gsub("^([[:lower:]]+[.]binary)[.].*", "\\1", type)
+            ## this is just a fall-back if there is no File: so hopefully
+            ## no longer used
             fn <- paste0(p, "_", available[ok, "Version"],
                          switch(type,
                                 "source" = ".tar.gz",
                                 "mac.binary" = ".tgz",
                                 "win.binary" = ".zip",
-                                stop(gettextf("invalid '%s' argument", "type"))))
+                                ".tar.xz")) ## for any other binaries, but they should use File:
             have_fn <- !is.na(File)
             fn[have_fn] <- File[have_fn]
             repos <- available[ok, "Repository"]
@@ -928,18 +952,28 @@ contrib.url <- function(repos, type = getOption("pkgType"))
 
     ver <- paste(R.version$major,
                  strsplit(R.version$minor, ".", fixed=TRUE)[[1L]][1L], sep = ".")
-    mac.path <- "macosx"
-    if (substr(type, 1L, 11L) == "mac.binary.") {
-        mac.path <- paste(mac.path, substring(type, 12L), sep = "/")
-        type <- "mac.binary"
+    .contrib.path <- function(type, ver) {
+        ## <os>.binary[.<build>]  where build has to match [[:alnum:]_-]+
+        m <- regexec("^([[:lower:]]+)[.]binary(|[.]([[:alnum:]_-]+))$", type)
+
+        if (length(m) && length(m[[1]]) == 4) {  ## binary spec?
+            m <- m[[1]]
+            l <- attr(m, "match.length")
+            os <- substr(type, m[2], m[2] + l[2] - 1L)
+            ## for historical reasons mac/win have different directory names
+            os <- switch(os, mac = "macosx", win = "windows", os)
+
+            if (l[3] > 0) ## have build name ?
+                paste("bin", os, substr(type, m[4], m[4] + l[4] - 1L), "contrib", ver, sep = "/")
+            else
+                paste("bin", os, "contrib", ver, sep = "/")
+        } else if (isTRUE(type == "source"))
+            "src/contrib"
+        else
+            stop("invalid 'type'")
     }
-    res <- switch(type,
-		"source" = paste(gsub("/$", "", repos), "src", "contrib", sep = "/"),
-                "mac.binary" = paste(gsub("/$", "", repos), "bin", mac.path, "contrib", ver, sep = "/"),
-                "win.binary" = paste(gsub("/$", "", repos), "bin", "windows", "contrib", ver, sep = "/"),
-                stop(gettextf("invalid '%s' argument", "type"))
-               )
-    res
+
+    paste(gsub("/$", "", repos), .contrib.path(type, ver), sep = "/")
 }
 
 .getMirrors <- function(url, local.file, all, local.only)
@@ -1040,7 +1074,8 @@ setRepositories <-
         stop("invalid options(\"pkgType\"); must be a character string")
     if (pkgType == "both") pkgType <- "source" #.Platform$pkgType
     if (pkgType == "binary") pkgType <- .Platform$pkgType
-    if(startsWith(pkgType, "mac.binary")) pkgType <- "mac.binary"
+    ## strip build names (until we need them and start recording them)
+    pkgType <- gsub("^([[:lower:]]+[.]binary)[.].*", "\\1", pkgType)
     thisType <- a[[pkgType]]
     a <- a[thisType, 1L:3L]
     repos <- getOption("repos")
