@@ -2301,9 +2301,9 @@ static void RQuartz_Raster(unsigned int *raster, int w, int h,
                         cs,  /* color space */
 			/* R uses AGBR which is so unusual (inverted RGBA) that it corresponds to endinness inverse(!) to the host with alpha last (=RGBA).  */
 #ifdef __BIG_ENDIAN__
-                        kCGImageAlphaLast | kCGBitmapByteOrder32Little,
+                        (CGBitmapInfo)kCGImageAlphaLast | kCGBitmapByteOrder32Little,
 #else
-                        kCGImageAlphaLast | kCGBitmapByteOrder32Big,
+                        (CGBitmapInfo)kCGImageAlphaLast | kCGBitmapByteOrder32Big,
 #endif
                         dp,  /* data provider */
                         NULL,/* decode array */
