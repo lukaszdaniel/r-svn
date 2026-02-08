@@ -203,7 +203,7 @@
       layout) with the above \code{type=} have the form
       \code{bin/<system>/<build>/contrib/<x.y>} where \code{<x.y>}
       is the \R version without patch level. This is a generalisation of
-      the binary types previously supported on macOS. In additon, binary
+      the binary types previously supported on macOS. In addition, binary
       packages can have the extensions \code{.tar.bz2}, \code{.tar.xz},
       \code{.tar.zst} and \code{.tar.zstd} with the corresponding
       compression support.
@@ -214,6 +214,15 @@
       this was only set by the macOS builds of \R). This should be
       typically only done by the author of a binary \R distribution to
       define the type of binaries supported by that build of \R.
+
+      \item Experimentally, several math library (\file{math.h}) functions,
+      such as \code{exp(.)}, \code{log1p()}, \code{sin()}, \code{atanh()},
+      when called from \R, are now ensured to give fully accurate results
+      in a small neighbourhood of special values, such as \code{exp(0) == 1},
+      \code{log1p(0) == 0}, etc.
+      This makes \R slightly less platform dependent for these functions,
+      notably on platforms with less accurate system math libraries, see also
+      \url{https://blog.r-project.org/2026/01/30/debugging-sensitivity-to-c-math-library-on-linux/}.
     }
   }
 
@@ -269,19 +278,14 @@
       \sQuote{defunct}.
 
       %% GCC 10 and Intel 2021.1 definitely support this: GCC 9 may
-      \item The default C++ standard will be changed to C++20
+      \item The default C++ standard has been changed to C++20
       \sQuote{where available} (which it is on all known platforms since
       2021): if not C++17 is used if available otherwise C++ is not
       supported (as before).
 
-      Several CRAN packages already require C++20 and have hundreds of
+      Several CRAN packages already required C++20 and have hundreds of
       others depending on them.  (Packages can request C++17 if
       essential.)
-
-      For now this default can be selected by configuring \R{} with
-      \option{--with-CXX20}: the changeover is scheduled for
-      2026-02-08.  For ways to test a package with C++20, see
-      \url{https://www.stats.ox.ac.uk/pub/bdr/C++20/README.txt}.
 
       \item When installing binary packages the time stamp in the
       \code{"Built"} field is considered even if the package version is
@@ -577,7 +581,7 @@
       fixing a decades-old grammatical faux pas inherited from S
       (\PR{16348} and \PR{18948}).
 
-      \item Asymmetric toeplitz, \code{toeplitz(x, r)}, is type consistent
+      \item Asymmetric \code{toeplitz(x, r)} is type consistent
       now, even when \code{r} of length 0 or 1 is not used directly.  Fixes
       \PR{18996}, thanks to \I{Mikael Jagan}'s patch and test.
 

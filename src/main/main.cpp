@@ -865,7 +865,7 @@ void setup_Rmainloop(void)
     volatile SEXP baseNSenv;
     SEXP cmd;
     char deferred_warnings[12][250];
-    volatile int ndeferred_warnings = 0;
+    unsigned int ndeferred_warnings = 0;
 
 #ifdef Win32
     {
@@ -1213,7 +1213,7 @@ void setup_Rmainloop(void)
     }
 
     {
-	for (int i = 0 ; i < ndeferred_warnings; i++)
+	for (unsigned int i = 0 ; i < ndeferred_warnings; i++)
 	    warning("%s", deferred_warnings[i]);
     }
     if (R_CollectWarnings) {

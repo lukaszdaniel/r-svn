@@ -122,7 +122,7 @@ static void qbeta_raw(double alpha, double p, double q,
 	warned = FALSE, add_N_step = TRUE;
     int i_pb, i_inn;
     double a, la, logbeta, g, h, pp, p_, qq, r, s, t, w, y = -1.;
-    volatile double u, xinbta;
+    double u, xinbta;
     bool
     bad_u = FALSE,
     bad_init = FALSE;
