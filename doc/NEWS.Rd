@@ -11,6 +11,14 @@
       \item The R citation now provides a \abbr{DOI}
       (\I{10.32614/R.manuals}): please update your
       bibliographies accordingly.
+
+      %% GCC 10 and Intel 2021.1 definitely support this: GCC 9 may
+      \item The default C++ standard has been changed to C++20 where
+      available (which it is on all known platforms from 2021 on): if
+      not C++17 is used if available otherwise C++ is not supported (as
+      before).
+
+      Packages can request C++17 if essential.
     }
   }
 
@@ -195,6 +203,12 @@
       returns an object with both a \code{"wt.res"} and a
       \code{"dev.res"} element.
 
+      \item Several influence measures for \code{"glm"} objects have
+      been updated to use Pearson residuals rather than deviance
+      residuals (the latter are not unbiased) and to not use
+      leave-one-out estimates of dispersion in models with fixed
+      dispersion.
+
       \item \R now supports custom binary types which are of the form
       \code{"<system>.binary.<build>"} where \code{<system>} is
       lower-case name (letters only) of the system and \code{<build>} is
@@ -276,16 +290,6 @@
       \code{CXXxxSTD}, \code{SHLIBCXXxxLD} and \code{SHLIBCXXxxLDFLAGS}
       variables are no longer supported and reported as
       \sQuote{defunct}.
-
-      %% GCC 10 and Intel 2021.1 definitely support this: GCC 9 may
-      \item The default C++ standard has been changed to C++20
-      \sQuote{where available} (which it is on all known platforms since
-      2021): if not C++17 is used if available otherwise C++ is not
-      supported (as before).
-
-      Several CRAN packages already required C++20 and have hundreds of
-      others depending on them.  (Packages can request C++17 if
-      essential.)
 
       \item When installing binary packages the time stamp in the
       \code{"Built"} field is considered even if the package version is
@@ -587,6 +591,10 @@
 
       \item \code{format(r)} now keeps \code{names(r)} also for raw
       objects \code{r}.
+
+      \item \code{rep.int()} and \code{rep_len()} again drop names also
+      for factors, fixing a regression in \R 4.0.0.  (Thanks to a report
+      by Rui Barradas and \PR{18999} by Suharto Anggono.)
     }
   }
 }

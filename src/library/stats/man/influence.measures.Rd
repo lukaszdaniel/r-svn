@@ -30,7 +30,10 @@
 \alias{dfbeta.lm}
 \alias{dfbetas}
 \alias{dfbetas.lm}
+\alias{dfbetas.glm}
 \alias{dffits}
+\alias{dffits.lm}
+\alias{dffits.glm}
 \alias{covratio}
 \alias{cooks.distance}
 \alias{cooks.distance.lm}
@@ -40,23 +43,28 @@ influence.measures(model, infl = influence(model))
 
 rstandard(model, \dots)
 \method{rstandard}{lm}(model, infl = lm.influence(model, do.coef = FALSE),
-          sd = sqrt(deviance(model)/df.residual(model)),
+          sd = sigma(model)/sqrt(df.residual(model)),
           type = c("sd.1", "predictive"), \dots)
 \method{rstandard}{glm}(model, infl = influence(model, do.coef = FALSE),
-          type = c("deviance", "pearson"), \dots)
+          type = c("pearson", "deviance"), \dots)
 
 rstudent(model, \dots)
 \method{rstudent}{lm}(model, infl = lm.influence(model, do.coef = FALSE),
          res = infl$wt.res, \dots)
 \method{rstudent}{glm}(model, infl = influence(model, do.coef = FALSE), \dots)
 
-dffits(model, infl = , res = )
+dffits(model, \dots)
+\method{dffits}{lm}(model, infl = lm.influence(model, do.coef = FALSE),
+		   res = weighted.residuals(model), \dots)
+\method{dffits}{glm}(model, infl = lm.influence(model, do.coef = FALSE),
+		   res = weighted.residuals(model), \dots)
 
 dfbeta(model, \dots)
 \method{dfbeta}{lm}(model, infl = lm.influence(model, do.coef = TRUE), \dots)
 
 dfbetas(model, \dots)
 \method{dfbetas}{lm}(model, infl = lm.influence(model, do.coef = TRUE), \dots)
+\method{dfbetas}{glm}(model, infl = lm.influence(model, do.coef = TRUE), \dots)
 
 covratio(model, infl = lm.influence(model, do.coef = FALSE),
          res = weighted.residuals(model))
