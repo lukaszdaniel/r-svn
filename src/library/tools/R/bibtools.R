@@ -1,7 +1,7 @@
 #  File src/library/tools/R/bibtools.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 2025 The R Core Team
+#  Copyright (C) 2025-2026 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -42,9 +42,23 @@ function(keys)
 {
     keys <- keys[nzchar(keys)]
     bad <- character()
-    if(!any(ind <- grepl("::", keys, fixed = TRUE))) {
+    ind <- grepl("::", keys, fixed = TRUE)
+    brp <- if(!all(ind)) {
+               ## Bibentries for base R and current package maybe.
+               rdfile <- processRdChunk_data_store()$Rdfile
+               dir <- dirname(normalizePath(rdfile, mustWork = FALSE))
+               if(basename(dir) %in% c("unix", "windows"))
+                   dir <- dirname(dir)
+               dir <- if(basename(dir) == "man") {
+                          dir <- dirname(dir)
+                          c(dir, file.path(dir, "inst"))
+                      } else character()
+               c(R_bibentries(),
+                 .bibentries_from_REFERENCES(dir))
+           } else NULL
+    if(!any(ind)) {
         ## Special-case for efficiency.
-        bib <- R_bibentries()
+        bib <- brp
         pos <- match(keys, .bibentry_get_key(bib),
                      nomatch = 0L)
         bad <- keys[pos == 0L]
@@ -58,19 +72,11 @@ function(keys)
         for(j in seq_along(i)) {
             pj <- names(i)[j]
             bib <- if(!nzchar(pj))
-                       R_bibentries()
-                   else if(nzchar(path <- system.file("REFERENCES.rds",
-                                                      package = pj)))
-                       readRDS(path)
-                   else if(nzchar(path <- system.file("REFERENCES.R",
-                                                      package = pj)))
-                       utils::readCitationFile(path,
-                                               list(Encoding = "UTF-8"))
-                   else if(nzchar(path <- system.file("REFERENCES.bib",
-                                                      package = pj)))
-                       `names<-`(bibtex::read.bib(path), NULL)
-                   else
-                       utils::bibentry()
+                       brp
+                   else {
+                       dir <- system.file(package = pj)
+                       .bibentries_from_REFERENCES(dir)
+                   }
             kj <- keys[i[[j]]]
             pos <- match(sub(".*::", "", kj),
                          .bibentry_get_key(bib),
@@ -91,6 +97,21 @@ function(keys)
         warning(msg, call. = FALSE)
     }
     y
+}
+
+.bibentries_from_REFERENCES <-
+function(dir)
+{
+    for(d in dir[nzchar(dir)]) {
+        if(file.exists(path <- file.path(d, "REFERENCES.rds")))
+            return(readRDS(path))
+        else if(file.exists(path <- file.path(d, "REFERENCES.R")))
+            return(utils::readCitationFile(path,
+                                           list(Encoding = "UTF-8")))
+        else if(file.exists(path <- file.path(d, "REFERENCES.bib")))
+            return(`names<-`(bibtex::read.bib(path), NULL))
+    }
+    utils::bibentry()        
 }
 
 .bibentries_from_bibtex <-
@@ -153,14 +174,16 @@ function(bib)
 function(dir)
 {
     dir <- file_path_as_absolute(dir)
-    
+
     ## Base packages are special as they have no partial Rd db, and
-    ## Rd_db() re-orders sections after processing Sexprs, so we need to 
+    ## Rd_db() re-orders sections after processing Sexprs, so we need to
     ## go via .build_Rd_db() which allows step control.
     ## For non-base packages, we really need build/partial.rdb (which we
     ## only have for the package sources) to check that all bibentry
     ## macros were properly expanded.
-    db <- .build_Rd_db(dir, step = 1L)
+    ## There is no need to process \Sexpr code here (and we are not
+    ## prepared to find the installed package/REFERENCES anyway).
+    db <- .build_Rd_db(dir, step = 1L, stages = NULL)
     if(length(db)) {
         first <- nchar(file.path(dir, "man")) + 2L
         names(db) <- substring(names(db), first)
@@ -169,25 +192,22 @@ function(dir)
     x <- Filter(length, lapply(db, .bibentries_cited_or_shown))
     if(!length(x))
         return(NULL)
-    
+
     u <- FALSE
-    
+
     if(basename(dir) %notin% .get_standard_package_names()$base) {
         ## Check whether we got everything from the build stage
-        ## expansions.
-        f <- file.path(dir, "build", "partial.rdb")
-        if(!file.exists(f)) {
+        ## expansions.  Catch if built with \bib* stubs/unknowns.
+        built_file <- file.path(dir, "build", "partial.rdb")
+        if(!file.exists(built_file)) {
             u <- TRUE
         } else {
-            y <- lapply(readRDS(f)[names(x)], .bibentries_cited_or_shown)
-            ## Cannot simply use identical() as entries in the partial
-            ## Rd db are subject to section re-ordering.
-            ## <FIXME>
-            ## Is this still true now that we go via .build_Rd_db()?
-            ## </FIXME>
+            y <- lapply(readRDS(built_file)[names(x)],
+                        .bibentries_cited_or_shown)
             g <- function(u, v) {
-                is.null(v) || # built with \bib stubs/unknowns in R < 4.6.0
-                    length(setdiff(split(u, row(u)), split(v, row(v))) > 0L)
+                is.null(v) || # page not in partial.rdb (no build-stage macros)
+                              # or built with undefined macros
+                    sum(startsWith(v[,3L], "\\Sexpr")) != nrow(u)
             }
             if(any(unlist(Map(g, x, y), use.names = FALSE)))
                 u <- TRUE
@@ -195,7 +215,7 @@ function(dir)
                 x <- y
         }
     }
-    
+
     f <- function(x) {
         if(!length(x))
             return(NULL)

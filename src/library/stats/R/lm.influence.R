@@ -176,7 +176,7 @@ hatvalues.lm <- function(model, infl = lm.influence(model, do.coef=FALSE), ...) 
 
 rstandard <- function(model, ...) UseMethod("rstandard")
 rstandard.lm <- function(model, infl = lm.influence(model, do.coef=FALSE),
-                         sd = sigma(model)/sqrt(df.residual(model)),
+                         sd = sigma(model),
                          type = c("sd.1", "predictive"), ...)
 {
     type <- match.arg(type)
@@ -198,7 +198,7 @@ rstandard.glm <-
 {
  type <- match.arg(type)
  res <- switch(type, pearson = infl$pear.res, infl$dev.res)
- res <- res/(sigma(model) * (1 - infl$hat))
+ res <- res/(sigma(model) * sqrt(1 - infl$hat))
  res[is.infinite(res)] <- NaN
  res
 }
