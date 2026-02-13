@@ -65,7 +65,7 @@ jobs:
       matrix:
         OS: [ 'macOS-15', 'macOS-15-intel' ]
     runs-on: ${{matrix.OS}}
-    timeout-minutes: 90
+    timeout-minutes: 120
     env:
       PKG_CONFIG_PATH: /opt/X11/lib/pkgconfig
       R_CRAN_WEB: "https://cran.rstudio.com"
