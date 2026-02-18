@@ -207,7 +207,8 @@
       been updated to use Pearson residuals rather than deviance
       residuals (the latter are not unbiased) and to not use
       leave-one-out estimates of dispersion in models with fixed
-      dispersion.
+      dispersion. Thanks to \I{Ravi Varadhan} for discussions and
+      testing of these updates.
 
       \item \R now supports custom binary types which are of the form
       \code{"<system>.binary.<build>"} where \code{<system>} is
@@ -272,6 +273,17 @@
       Ubuntu, fixing \PR{18992}; additionally a \code{make} failure to
       create \file{libR.pc} should no longer be ignored, fixing \PR{18993};
       both thanks to \I{Benjamin Drung}.
+    }
+  }
+
+  \subsection{CHECKING AN INSTALLATION}{
+    \itemize{
+      \item There is a new directory \file{tests/C++Standards} which
+      contains small packages which can be test-installed to check
+      support for various C++ standards.  This is principally for use on
+      Windows as on a Unix-alike this partially duplicates tests done by
+      \command{configure} --- although it can also be used to test the
+      behaviour of \command{R CMD INSTALL} on unsupported standards.
     }
   }
 
