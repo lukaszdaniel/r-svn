@@ -6115,9 +6115,18 @@ add_dummies <- function(dir, Log)
                              ": warning: .* \\[-Wdeprecated-enum-float-conversion\\]",
                              ## Deprecated in C++20, removed in C++23
                              ": warning: .* \\[-Wdeprecated-comma-subscript\\]",
+                             ## GCC version has 'deprecated' only in C++23.
+                             ": warning: .* \\[-Wcomma-subscript\\]",
                              ## C++20 deprecation seen in LLVM and Apple clang
                              ": warning: .* \\[-Wdeprecated-anon-enum-enum-conversion\\]",
-                            ": warning: .* \\[-Waligned-new",
+                             ## GCC >= 14 version
+                             ": warning: .* \\[-Wdeprecated-enum-enum-conversion\\]",
+                             ## C++20 deprecation -- GCC version
+                             ": warning: .* \\[-Wvolatile\\]",
+                             ## and clang version
+                             ": warning: .* \\[-Wdeprecated-volatile\\]",
+
+                             ": warning: .* \\[-Waligned-new",
                              ## new in gcc 8
                              ": warning: .* \\[-Wcatch-value=\\]",
                              ## removed 2020-05, nowadays clang only
@@ -6241,6 +6250,8 @@ add_dummies <- function(dir, Log)
                              "warning: .* \\[-Wc\\+\\+2b-extensions\\]",
                              ## in clang and in Wextra for recent gcc
                              "warning: .* \\[-Wenum-conversion\\]",
+                             ## Apple clang 21 version
+                             "warning: .* \\[-Wimplicit-enum-enum-cast\\]",
                              ## LLVM clang 15 versions
                              "warning: .* \\[-Wc\\+\\+14-attribute-extensions\\]",
                              "warning: .* \\[-Wc\\+\\+17-attribute-extensions\\]",
@@ -6279,6 +6290,12 @@ add_dummies <- function(dir, Log)
                              ": warning: .*(M_PI|INT_MIN|FCONE).* \\[-Wmacro-redefined\\]",
                              ## LLVM >= 18 clang++
                              ": warning: .* \\[-Wdeprecated-literal-operator\\]"
+                             )
+                ## macOS ld warnings
+                warn_re <- c(warn_re,
+                             "^ld: warning: search path .* not found",
+                             "^ld: warning: -single_module is obsolete",
+                             "^ld: warning: .*was built for newer"
                              )
 
                 ## <FIXME>
@@ -6325,6 +6342,10 @@ add_dummies <- function(dir, Log)
 
                 ## Filter out StanHeader warnings
                 ex_re <- "StanHeaders/.*\\[-Wunneeded-internal-declaration\\]"
+                lines <- filtergrep(ex_re, lines, useBytes = TRUE)
+
+                ## Filter out RcppParallel/tbb warnings from clang
+                ex_re <- "RcppParallel/include/tbb/.*\\[-Wdeprecated-volatile\\]"
                 lines <- filtergrep(ex_re, lines, useBytes = TRUE)
 
                 ## and GNU extensions in system headers
@@ -6556,6 +6577,17 @@ add_dummies <- function(dir, Log)
                     notes <- c(notes, sub("^Warning: ", "", lines[ll]))
                     lines <- lines[-ll]
                 }
+
+                if(config_val_to_logical(Sys.getenv("_R_CHECK_RCPP_NOT_NEEDED_", "FALSE"))) {
+                ## from Rcpp
+                    lines1 <- grep("LdFlags.* has not been needed since 2013",
+                                          lines0, value = TRUE, useBytes = TRUE)
+                    lines <- c(lines, unique(lines1))
+                }
+                ## Misuse of /usr/lib (32-bit on RH systems)
+                lines1 <- grep("/usr/bin/ld: skipping incompatible /usr/lib/",
+                               lines0, value = TRUE, useBytes = TRUE)
+                lines <- c(lines, unique(lines1))
 
                 if (length(lines)) {
                     warningLog(Log, "Found the following significant warnings:")
@@ -7579,6 +7611,7 @@ add_dummies <- function(dir, Log)
         Sys.setenv("_R_CHECK_S3_METHODS_SHOW_POSSIBLE_ISSUES_" = "TRUE")
         Sys.setenv("_R_CHECK_XREFS_NOTE_MISSING_PACKAGE_ANCHORS_" = "TRUE")
         Sys.setenv("_R_CHECK_PACKAGES_USED_IN_DEMO_" = "TRUE")
+        Sys.setenv("_R_CHECK_RCPP_NOT_NEEDED_" = "TRUE")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE
         R_check_doc_sizes2 <- TRUE

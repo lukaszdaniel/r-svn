@@ -18,6 +18,8 @@
       not C++17 is used if available otherwise C++ is not supported (as
       before).
 
+      (GCC 16 has also switched to C++20 as its default.)
+
       Packages can request C++17 if essential.
     }
   }
@@ -167,10 +169,6 @@
       \code{named.dim = FALSE} switch, no longer creating a named
       \code{dim(<result>)} by default.
 
-      \item \code{approx(<x_with_ties>, <y_with_NA>, na.rm = FALSE)} now
-      should always call the \code{ties()} function, fixing \PR{17604}
-      reported by \I{Bill Dunlap}.
-
       \item \code{match.arg()} gets a new option \code{several.ok = "all"},
       fulfilling the wish of \I{Jim Hester} in \PR{16659}.
 
@@ -238,6 +236,16 @@
       This makes \R slightly less platform dependent for these functions,
       notably on platforms with less accurate system math libraries, see also
       \url{https://blog.r-project.org/2026/01/30/debugging-sensitivity-to-c-math-library-on-linux/}.
+
+      \item Function \code{free1way()} implementing semiparametrically
+      efficient inference procedures (likelihood- and permutation-based)
+      in distribution-free stratified K-sample oneway layouts was added
+      to the \pkg{stats} package.  Approximate (via
+      \code{power.free1way.test()}) and simulation-based (utilising
+      \code{rfree1way()} for random number generation) power-assessment
+      and sample-size planning as well as model diagnostics (available
+      from a \code{plot} method and probability-probability plots in
+      \code{ppplot()}) complement the functionality.
     }
   }
 
@@ -549,9 +557,10 @@
       Sepal vs Petal dimensions in its first iris data plot, thanks to
       \I{Jeff Dick}'s post on R-devel.
 
-      \item \code{model.frame(~1, list(), na.action=na.pass)} and similar
-      \dQuote{border-line} uses no longer produce invalid data frames,
-      fixing \PR{18977}, reported with patch by \I{Mikael Jagan}.
+      \item \code{diff(m, lag, dif)} for matrix \code{m} now still returns
+      matrices, also when \code{lag * dif > nrow(m)} (\PR{18972}, thanks to
+      \I{Mikael Jagan} and \I{Suharto Anggono}).
+      \code{diff(<ts-matrix>)} remains matrix, even when it has length zero.
 
       \item Values returned by active binding functions are now marked as
       not mutable to prevent unintended mutation in complex assignment
@@ -585,10 +594,6 @@
       intention for more than ten years, fixing \PR{18979} thanks to
       \I{Mikael Jagan}.
 
-      \item \code{length(<POSIXlt>) <- v} is more careful about balancing,
-      notably when \code{v} is not integer, thanks to \I{Suharto Anggono}'s
-      remarks on the mailing list R-devel.
-
       \item On Windows terminals \kbd{Ctrl-C} now breaks out of waiting for
       keyboard input, fixing \PR{18982}.
 
@@ -607,6 +612,11 @@
       \item \code{rep.int()} and \code{rep_len()} again drop names also
       for factors, fixing a regression in \R 4.0.0.  (Thanks to a report
       by \I{Rui Barradas} and \PR{18999} by \I{Suharto Anggono}.)
+
+      \item \code{str(x)} with a \code{list}-like \code{x} of a class
+      having an \code{str()} S3 method using \code{NextMethod()}, now no
+      longer outputs \code{"List of <...>"} in the default method, thanks
+      to \I{Ian Farm}'s report and fix proposal in \PR{19001}.
     }
   }
 }
@@ -629,8 +639,12 @@
       the \file{DESCRIPTION} file) are now checked more thoroughly.
       Invalid values are still ignored but now give a warning, as do
       contradictory specifications.
-     
-      \item (Preliminary) support for C++26 has been extended to Windows. 
+
+      \item (Preliminary) support for C++26 has been extended to Windows.
+
+      \item A non-zero exit status from \file{cleanup}, \file{cleanup.win}
+      or \file{cleanup.ucrt}, if requested via options \option{--clean} or
+      \option{--preclean}, is now reported with a warning.
     }
   }
 
@@ -650,10 +664,17 @@
       \item Formatting book-type \code{bibentry} objects now converts
       \LaTeX accents also in the publisher and series fields.
 
-      \item \code{diff(m, lag, dif)} for matrix \code{m} now still returns
-      matrices, also when \code{lag * dif > nrow(m)} (\PR{18972}, thanks to
-      \I{Mikael Jagan} and \I{Suharto Anggono}).
-      \code{diff(<ts-matrix>)} remains matrix, even when it has length zero.
+      \item \code{model.frame(~1, list(), na.action=na.pass)} and similar
+      \dQuote{border-line} uses no longer produce invalid data frames,
+      fixing \PR{18977}, reported with patch by \I{Mikael Jagan}.
+
+      \item \code{length(<POSIXlt>) <- v} is more careful about balancing,
+      notably when \code{v} is not integer, thanks to \I{Suharto Anggono}'s
+      remarks on the mailing list R-devel.
+
+      \item \code{approx(<x_with_ties>, <y_with_NA>, na.rm = FALSE)} now
+      should always call the \code{ties()} function, fixing \PR{17604}
+      reported by \I{Bill Dunlap}.
 
       \item \code{besselJ(1, 1e-15)} and similar now give correct results,
       thanks to \I{Leo Mada} and other \I{\dQuote{R-help}ers}.
@@ -663,6 +684,9 @@
 
       \item \code{pretty(ch)} again correctly works with \code{ch} a
       character vector of numbers.
+
+      \item \code{persp()} labels the three axes correctly also when C level
+      \code{atan2pi()} is available, fixing \PR{19007} by \I{Klaus Schliep}.
     }
   }
 }
