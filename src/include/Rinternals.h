@@ -866,7 +866,6 @@ void R_orderVector1(int *indx, int n, SEXP x, Rboolean nalast, Rboolean decreasi
 #define isEnvironment		Rf_isEnvironment
 #define isExpression		Rf_isExpression
 #define isFactor		Rf_isFactor
-#define isFrame			Rf_isFrame
 // #define isFree			Rf_isFree
 #define isFunction		Rf_isFunction
 #define isInteger		Rf_isInteger
@@ -997,7 +996,6 @@ Rboolean Rf_inherits(SEXP, const char *);
 Rboolean Rf_isArray(SEXP);
 Rboolean Rf_isDataFrame(SEXP);
 Rboolean Rf_isFactor(SEXP);
-#define Rf_isFrame Rf_isDataFrame // keep available under old name for now
 Rboolean Rf_isFunction(SEXP);
 Rboolean Rf_isInteger(SEXP);
 Rboolean Rf_isLanguage(SEXP);

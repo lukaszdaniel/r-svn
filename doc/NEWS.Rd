@@ -118,6 +118,12 @@
       \item \code{barplot(.., orderH = *)} for stacked bar plots allows to
       sort the stacks each according to size.
 
+      \item New argument \code{panel.first} for \code{hist()}
+      (via \code{plot.histogram()}), \code{barplot()}, \code{bxp()},
+      and hence implicitly \code{boxplot()}.
+      All except the former also gain a new \code{panel.last}.
+      Suggested by Marieke Stolte and Julian Welz.
+
       \item \code{plot.default()} gets a new switch \code{lim2} to indicate
       that the default \code{xlim} and \code{ylim} range computations only
       use \emph{jointly} finite x- and y-values; indirectly suggested in
@@ -188,6 +194,7 @@
 
       \item Error messages from failed Rd \verb{\Sexpr} code now include
       the call from the original condition (if available).
+      Warning messages now include Rd source locations.
 
       \item When the environment variable \env{R_WARN_BOUNDS_OPT} is set to
       \code{"yes"}, \code{options(warn = val)} will check if \code{val} is
@@ -237,15 +244,18 @@
       notably on platforms with less accurate system math libraries, see also
       \url{https://blog.r-project.org/2026/01/30/debugging-sensitivity-to-c-math-library-on-linux/}.
 
-      \item Function \code{free1way()} implementing semiparametrically
+      \item Function \code{free1way()} implementing \I{semiparametrically}
       efficient inference procedures (likelihood- and permutation-based)
-      in distribution-free stratified K-sample oneway layouts was added
+      in distribution-free stratified K-sample one-way layouts was added
       to the \pkg{stats} package.  Approximate (via
       \code{power.free1way.test()}) and simulation-based (utilising
       \code{rfree1way()} for random number generation) power-assessment
       and sample-size planning as well as model diagnostics (available
       from a \code{plot} method and probability-probability plots in
       \code{ppplot()}) complement the functionality.
+      Provided by \I{Torsten Hothorn}.
+
+      \item \code{plot.data.frame()} now supports a \code{formula} argument.
     }
   }
 
@@ -352,7 +362,7 @@
       \code{Rf_lazy_duplicate}, \code{EXTPTR_PROT}, \code{EXTPTR_PTR},
       \code{EXTPTR_TAG}, \code{NAMED}, \code{FRAME}, \code{HASHTAB},
       \code{IS_S4_OBJECT}, \code{BODY}, \code{FORMALS}, \code{CLOENV},
-      \code{ENCLOS}, \code{Rf_isFrame}, \code{OBJECT},
+      \code{ENCLOS}, \code{OBJECT},
       \code{SET_TYPEOF}, \code{ENVFLAGS}, \code{SET_ENVFLAGS},
       \code{SET_FORMALS}, \code{SET_BODY}, \code{SET_CLOENV},
       \code{STRING_PTR}, \code{DATAPTR}, \code{XTRUELENGTH},
@@ -398,6 +408,9 @@
       as the \R function \code{attributes}. New functions
       \code{R_getAttribCount}, \code{R_getAttribNames},
       \code{R_hasAttrib}, \code{R_nrow}, and \code{R_ncol}.
+
+      The function \code{Rf_isFrame} has been removed; use
+      \code{Rf_isDataFrame} instead.
     }
   }
 
@@ -424,6 +437,9 @@
 
       \item Package \file{README.md} files are now installed and
       featured in HTML help.
+
+      \item \code{package.skeleton()} now invisibly returns the path of the
+      created directory, along the lines of \code{prompt()} \abbr{et al.}.
     }
   }
 
@@ -617,6 +633,17 @@
       having an \code{str()} S3 method using \code{NextMethod()}, now no
       longer outputs \code{"List of <...>"} in the default method, thanks
       to \I{Ian Farm}'s report and fix proposal in \PR{19001}.
+
+      \item Large (tall) subscripts in \I{plotmath} expressions are now
+      positioned correctly.  They were being positioned too high.
+
+      \item \code{as.POSIXlt(ch)}, \code{as.Date(ch)} etc now also work
+      correctly when \code{ch} contains \code{"Inf"}, via
+      \code{strptime(.)}, fixing \PR{19006}.
+
+      \item \code{c(<POSIXlt>, ..)} now fully preserves sub-second
+      accuracy, fulfilling a part of \I{Suharto Anggono}'s wishlist
+      \PR{18989}.
     }
   }
 }

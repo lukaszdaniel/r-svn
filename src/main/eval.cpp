@@ -6861,14 +6861,13 @@ static R_INLINE void SUBASSIGN_N_PTR(R_bcstack_t *sx, int rank,
 
 static void signalMissingArgError(SEXP args, SEXP call)
 {
-    SEXP a, c;
-    int k;
-    for (a = args; a != R_NilValue; a = CDR(a))
+    for (SEXP a = args; a != R_NilValue; a = CDR(a))
 	if (CAR(a) == R_MissingArg) {
 	    /* check for an empty argument in the call -- start from
 	       the beginning in case of ... arguments */
 	    if (call != R_NilValue) {
-		for (k = 1, c = CDR(call); c != R_NilValue; c = CDR(c), k++)
+		int k = 1;
+		for (SEXP c = CDR(call); c != R_NilValue; c = CDR(c), k++)
 		    if (CAR(c) == R_MissingArg)
 			errorcall(call, _("argument %d is empty"), k);
 	    }

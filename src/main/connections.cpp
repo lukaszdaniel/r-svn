@@ -395,7 +395,7 @@ static int buff_fgetc(Rconnection con)
 
 static double buff_seek(Rconnection con, double where, int origin, int rw)
 {
-    size_t unread_len = con->buff_stored_len - con->buff_pos;
+    double unread_len = (double)(con->buff_stored_len - con->buff_pos);
 
     if (rw == 2) /* write */
 	return con->seek(con, where, origin, rw);
@@ -3387,7 +3387,7 @@ static int raw_fgetc(Rconnection con)
 static double raw_seek(Rconnection con, double where, int origin, int rw)
 {
     Rrawconn this_ = (Rrawconn) con->connprivate;
-    double newpos;
+    double newpos; // maybe should be size_t
     size_t oldpos = this_->pos;
 
     if(ISNA(where)) return (double) oldpos;
@@ -3398,7 +3398,7 @@ static double raw_seek(Rconnection con, double where, int origin, int rw)
     case 3: newpos = (double) this_->nbytes + where; break;
     default: newpos = where;
     }
-    if(newpos < 0 || newpos > this_->nbytes)
+    if(newpos < 0 || newpos > (double)this_->nbytes)
 	error("%s", _("attempt to seek outside the range of the raw connection"));
     else this_->pos = (size_t) newpos;
 

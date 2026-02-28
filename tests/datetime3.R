@@ -824,6 +824,55 @@ stopifnot(all.equal(as.vector(diff(t4)), c(366, -366, 366), tolerance = 6e-6))
 ## diff(t4) was all NA in R <= 4.5.2
 
 
+## as.POSIXlt.character("Inf") should work   -- PR#19006
+(Ilt <- as.POSIXlt(II <- c(-Inf,Inf))) #  "-Inf" "Inf"
+ Ict <- as.POSIXct(II)
+cII <- as.character(II)
+stopifnot(exprs = {
+    identical(II, as.numeric(Ilt))
+    identical(II, as.numeric(Ict))
+    identical(Ilt, as.POSIXlt(Ict))
+    identical(cII, as.character(Ict))
+    identical(cII, as.character(Ilt))
+    ## the above worked "always", however these three
+    II == as.Date(cII) # calling its helper charToDate()
+    II == as.POSIXct(cII)
+    II == as.POSIXlt(cII)
+})
+## failed in R < 4.6.0 w/  Error in as.POSIXlt.character(x, tz, ...) :
+##	character string is not in a standard unambiguous format
+
+
+## c(<POSIXlt>, ..) preserving full accuracy of 'secs' -- PR#18989
+lt2 <- .POSIXlt(list(sec = c(-999, -9:9, 10000 + c(1:10,-Inf, NA)) + pi,
+                     min = 45L, hour = c(21L, 3L, NA, 4L), mday = 6L,
+                     mon  = 0:11, year = 125L, wday = 2L, yday = 340L, isdst = -1)
+              , tz = "UTC")
+lt2f <- balancePOSIXlt(lt2, fill.only = TRUE)
+lt2b <- balancePOSIXlt(lt2)
+ct2 <-  as.character(lt2, digits = 15)
+lt7 <- c(lt2, lt2f, lt2b, # c.POSIXlt
+         ct2, factor(ct2),
+         as.POSIXct(lt2), as.POSIXct(lt2b))
+n <- length(lt2)
+str(Lt7 <- split(lt7, rep(1:7, each=n)))
+## The fractional seconds: how close are they to pi-3 ~= 0.141592653589793
+delta <- sapply(Lt7, \(lt) lt$sec)[is.finite(lt2),] %% 1 - pi + 3
+apply(delta, 2L, \(.) range(abs(.)))
+stopifnot(exprs = {
+    identical(f2 <- format(lt2), print(format(lt2f)))
+    identical(f2,   format(lt2b))
+    identical(list(NULL, NA, TRUE),
+              lapply(list(lt2, lt2f, lt2b), attr, "balanced"))
+    length(lt7) == 7 * n
+    lengths(Lt7) == n
+    abs(delta[,1:3]) < 4e-13 # max are 3.304024e-13 [Lnx F42]
+    delta[,1:2] == delta[,3] # (first 3 were just "re-balanced")
+}) ##   delta  was   8.742e-8
+## in R <= 4.5.2 when c(<POSIXlt>) worked via POSIXct
+
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,
