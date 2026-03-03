@@ -45,7 +45,7 @@ namespace CXXR
         const auto &STDVEC_LENGTHptr = R::STDVEC_LENGTH;
         const auto &STDVEC_TRUELENGTHptr = R::STDVEC_TRUELENGTH;
         const auto &SETALTREPptr = R::SETALTREP;
-        const auto &SET_TRUELENGTHptr = SET_TRUELENGTH;
+        const auto &SET_TRUELENGTHptr = R::SET_TRUELENGTH;
         const auto &ALTREPptr = ALTREP;
     } // namespace ForceNonInline
 

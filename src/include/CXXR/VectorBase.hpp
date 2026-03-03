@@ -159,48 +159,6 @@ namespace R
     SEXP allocVector3(SEXPTYPE type, R_xlen_t length, R_allocator_t *allocator);
 
     /**
-     * @param x Pointer to an CXXR::VectorBase.
-     *
-     * @return The length of \a x, or 0 if \a x is a null pointer.  (In
-     *         the case of certain hash tables, this means the 'capacity'
-     *         of \a x , not all of which may be used.)
-     */
-    R_xlen_t (STDVEC_LENGTH)(SEXP x);
-
-    /**
-     * @param x Pointer to a CXXR::VectorBase.
-     *
-     * @return The 'true length' of \a x.  According to the R Internals
-     *         document for R 2.4.1, this is only used for certain hash
-     *         tables, and signifies the number of used slots in the
-     *         table.
-     *
-     * @deprecated May be withdrawn in the future.
-     */
-    R_xlen_t (STDVEC_TRUELENGTH)(SEXP x);
-
-#ifdef LONG_VECTOR_SUPPORT
-    NORET R_len_t R_BadLongVector(SEXP, const char *, int);
-#endif
-} // namespace R
-
-extern "C"
-{
-    /* Accessor functions */
-
-    /* Vector Access Functions */
-
-    /**
-     * @param x Pointer to a CXXR::RObject.
-     *
-     * @return The length of \a x, or 0 if \a x is a null pointer, or is
-     *         not a pointer to a vector object (VectorBase).  (In
-     *         the case of certain hash tables, this means the 'capacity'
-     *         of \a x , not all of which may be used.)
-     */
-    int (LENGTH)(SEXP x);
-
-    /**
      * @param x Pointer to a CXXR::VectorBase.
      *
      * @return The 'true length' of \a x.  According to the R Internals
@@ -231,6 +189,52 @@ extern "C"
      * @deprecated May be withdrawn in the future.
      */
     void (SET_TRUELENGTH)(SEXP x, R_xlen_t v);
+
+    /**
+     * @param x Pointer to an CXXR::VectorBase.
+     *
+     * @return The length of \a x, or 0 if \a x is a null pointer.  (In
+     *         the case of certain hash tables, this means the 'capacity'
+     *         of \a x , not all of which may be used.)
+     */
+    R_xlen_t (STDVEC_LENGTH)(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::VectorBase.
+     *
+     * @return The 'true length' of \a x.  According to the R Internals
+     *         document for R 2.4.1, this is only used for certain hash
+     *         tables, and signifies the number of used slots in the
+     *         table.
+     *
+     * @deprecated May be withdrawn in the future.
+     */
+    R_xlen_t (STDVEC_TRUELENGTH)(SEXP x);
+
+    /* Growable vector support */
+    bool (IS_GROWABLE)(SEXP x);
+    void (SET_GROWABLE_BIT)(SEXP x);
+
+#ifdef LONG_VECTOR_SUPPORT
+    NORET R_len_t R_BadLongVector(SEXP, const char *, int);
+#endif
+} // namespace R
+
+extern "C"
+{
+    /* Accessor functions */
+
+    /* Vector Access Functions */
+
+    /**
+     * @param x Pointer to a CXXR::RObject.
+     *
+     * @return The length of \a x, or 0 if \a x is a null pointer, or is
+     *         not a pointer to a vector object (VectorBase).  (In
+     *         the case of certain hash tables, this means the 'capacity'
+     *         of \a x , not all of which may be used.)
+     */
+    int (LENGTH)(SEXP x);
 
     /** @brief Create a vector object.
      *
@@ -300,9 +304,6 @@ extern "C"
      */
     const void *DATAPTR_RO(SEXP x);
 
-    /* Growable vector support */
-    int (IS_GROWABLE)(SEXP x);
-    void (SET_GROWABLE_BIT)(SEXP x);
     R_xlen_t (XLENGTH)(SEXP x);
     int (IS_LONG_VEC)(SEXP x);
 

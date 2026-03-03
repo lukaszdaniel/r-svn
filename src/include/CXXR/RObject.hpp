@@ -493,6 +493,15 @@ namespace CXXR
 
 namespace R
 {
+    /** @brief (For use only in serialization.)
+     */
+    int (LEVELS)(SEXP x);
+
+    /** @brief (For use only in deserialization.)
+     *
+     */
+    void (SETLEVELS)(SEXP x, int v);
+
     /** @brief Set object max copying status.
      *
      * @param x Pointer to CXXR::RObject.  The function does nothing
@@ -699,10 +708,6 @@ extern "C"
      */
     SEXP (ATTRIB)(SEXP x);
 
-    /** @brief (For use only in serialization.)
-     */
-    int (LEVELS)(SEXP x);
-
     /** @brief Get object copying status.
      *
      * @param x Pointer to CXXR::RObject.
@@ -711,11 +716,6 @@ extern "C"
      * null pointer.
      */
     int (NAMED)(SEXP x);
-
-    /** @brief (For use only in deserialization.)
-     *
-     */
-    void (SETLEVELS)(SEXP x, int v);
 
     /** @brief Replace an object's attributes.
      *

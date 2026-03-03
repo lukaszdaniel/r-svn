@@ -5517,7 +5517,11 @@ is the Rust compilation system (@command{cargo} and @command{rustc}).
 Usage of external commands should always be conditional on a test for
 presence (perhaps using @code{Sys.which}), as well as declared in the
 @samp{SystemRequirements} field.  A package should pass its checks
-without warnings nor errors without the external command being present.
+without warnings nor errors without the external command being
+present. N.B.: @file{/usr/sbin} is intended for administrator commands
+and may not be on the end-user path, and commands with simple English
+names (such as @command{go} and @command{ping}) should be checked (maybe
+@emph{via} @option{--version}) that they are the intended command.
 
 An external command can be a (possibly optional) requirement for an
 imported or suggested package but needed for examples, tests or
@@ -8574,8 +8578,8 @@ definition. However, unlike @LaTeX{}, the number of arguments is
 determined automatically from the highest placeholder number seen in
 the macro definition.  For example, a macro definition containing
 @code{#1} and @code{#3} (but no other placeholders) will define a
-three argument macro (whose second argument will be ignored). As in
-@LaTeX{}, at most 9 arguments may be defined. If the @code{#}
+three argument macro (whose second argument will be ignored).
+At most 4 arguments may be defined. If the @code{#}
 character is followed by a non-digit it will have no special
 significance.  All arguments to user-defined macros will be parsed as
 verbatim text, and simple text-substitution will be used to replace

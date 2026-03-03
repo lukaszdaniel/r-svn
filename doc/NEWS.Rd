@@ -354,23 +354,18 @@
       non-API entry points have been upgraded to \samp{WARNING}s in
       preparation for removing declarations and, where possible, hiding
       these entry points:
-      \code{R_nchar}, \code{VECTOR_PTR}, \code{R_tryWrap},
+      \code{R_nchar}, \code{R_tryWrap},
       \code{Rf_NonNullStringMatch}, \code{Rf_isValidString}
-      \code{Rf_GetOption}, \code{SET_FRAME}, \code{SET_HASHTAB},
-      \code{SET_ENCLOS}, \code{STDVEC_DATAPTR}, \code{SET_S4_OBJECT},
+      \code{Rf_GetOption},
+      \code{SET_S4_OBJECT},
       \code{UNSET_S4_OBJECT}, \code{SET_NAMED}, \code{R_lsInternal},
-      \code{Rf_lazy_duplicate}, \code{EXTPTR_PROT}, \code{EXTPTR_PTR},
-      \code{EXTPTR_TAG}, \code{NAMED}, \code{FRAME}, \code{HASHTAB},
+      \code{Rf_lazy_duplicate}, \code{NAMED},
       \code{IS_S4_OBJECT}, \code{BODY}, \code{FORMALS}, \code{CLOENV},
-      \code{ENCLOS}, \code{OBJECT},
+      \code{OBJECT},
       \code{SET_TYPEOF}, \code{ENVFLAGS}, \code{SET_ENVFLAGS},
-      \code{SET_FORMALS}, \code{SET_BODY}, \code{SET_CLOENV},
-      \code{STRING_PTR}, \code{DATAPTR}, \code{XTRUELENGTH},
+      \code{STRING_PTR}, \code{DATAPTR},
       \code{R_duplicate_attr}, \code{R_shallow_duplicate_attr},
-      \code{getConnection}, \code{LEVELS}, \code{SETLEVELS},
-      \code{R_data_class},
-      \code{SET_GROWABLE_BIT}, \code{TRUELENGTH}, \code{SET_TRUELENGTH},
-      \code{SETLENGTH}.
+      \code{getConnection}, \code{R_data_class}.
 
       \item The deprecated macros \code{CHARACTER_DATA} and
       \code{CHARACTER_POINTER} now return \code{const} pointers since using
@@ -409,8 +404,19 @@
       \code{R_getAttribCount}, \code{R_getAttribNames},
       \code{R_hasAttrib}, \code{R_nrow}, and \code{R_ncol}.
 
-      The function \code{Rf_isFrame} has been removed; use
+      \item The function \code{Rf_isFrame} has been removed; use
       \code{Rf_isDataFrame} instead.
+
+      \item The function \code{VECTOR_PTR} has been removed.
+
+      \item These entry points are now marked as hidden and no longer
+      have declarations in installed header files: \code{EXTPTR_PROT},
+      \code{FRAME}, \code{ENCLOS}, \code{EXTPTR_PTR}, \code{EXTPTR_TAG},
+      \code{HASHTAB}, \code{LEVELS}, \code{SETLENGTH}, \code{SETLEVELS},
+      \code{SET_BODY}, \code{SET_CLOENV}, \code{SET_ENCLOS},
+      \code{SET_FORMALS}, \code{SET_FRAME}, \code{SET_GROWABLE_BIT},
+      \code{SET_HASHTAB}, \code{SET_TRUELENGTH}, \code{STDVEC_DATAPTR},
+      \code{TRUELENGTH} \code{XTRUELENGTH}.
     }
   }
 
@@ -634,9 +640,6 @@
       longer outputs \code{"List of <...>"} in the default method, thanks
       to \I{Ian Farm}'s report and fix proposal in \PR{19001}.
 
-      \item Large (tall) subscripts in \I{plotmath} expressions are now
-      positioned correctly.  They were being positioned too high.
-
       \item \code{as.POSIXlt(ch)}, \code{as.Date(ch)} etc now also work
       correctly when \code{ch} contains \code{"Inf"}, via
       \code{strptime(.)}, fixing \PR{19006}.
@@ -648,7 +651,7 @@
   }
 }
 
-\section{\Rlogo CHANGES IN R 4.5.2 patched}{
+\section{\Rlogo CHANGES IN R 4.5.3}{
 
   \subsection{UTILITIES}{
     \itemize{
@@ -714,6 +717,9 @@
 
       \item \code{persp()} labels the three axes correctly also when C level
       \code{atan2pi()} is available, fixing \PR{19007} by \I{Klaus Schliep}.
+
+      \item Large (tall) subscripts in \I{plotmath} expressions are now
+      positioned correctly.  They were being positioned too high.
     }
   }
 }
@@ -1364,7 +1370,7 @@
       \code{RDEBUG}, \code{REAL0}, \code{Rf_findVarInFrame3},
       \code{SET_BODY}, \code{SET_CLOENV}, \code{SET_FORMALS},
       \code{SET_PRSEEN}, \code{SET_RDEBUG}, \code{STRING_PTR},
-      \code{SYMVALUE}, and \code{VECTOR_PTR}. Any declarations for these
+      and \code{SYMVALUE}. Any declarations for these
       in public header files will be removed in the near future, and
       they will be hidden where possible.
 

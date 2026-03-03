@@ -159,9 +159,7 @@ int (IS_S4_OBJECT)(SEXP x);
 /* Vector Access Functions */
 int  (LENGTH)(SEXP x);
 R_xlen_t (XLENGTH)(SEXP x);
-R_xlen_t  (TRUELENGTH)(SEXP x);
 int  (IS_LONG_VEC)(SEXP x);
-int  (LEVELS)(SEXP x);
 
 int  *(LOGICAL)(SEXP x);
 int  *(INTEGER)(SEXP x);
@@ -182,7 +180,6 @@ SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP *(STRING_PTR)(SEXP x);
 const SEXP *(STRING_PTR_RO)(SEXP x);
 const SEXP *(VECTOR_PTR_RO)(SEXP x);
-NORET SEXP *(VECTOR_PTR)(SEXP x);
 
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf);
 R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf);
@@ -257,9 +254,6 @@ SEXP (CLOENV)(SEXP x);
 //void (SET_RDEBUG)(SEXP x, int v);
 //void (SET_RSTEP)(SEXP x, int v);
 //void (SET_RTRACE)(SEXP x, int v);
-void SET_FORMALS(SEXP x, SEXP v);
-void SET_BODY(SEXP x, SEXP v);
-void SET_CLOENV(SEXP x, SEXP v);
 SEXP R_mkClosure(SEXP, SEXP, SEXP);
 SEXP R_ClosureFormals(SEXP);
 SEXP R_ClosureBody(SEXP);
@@ -272,9 +266,6 @@ SEXP (PRINTNAME)(SEXP x);
 //int  (DDVAL)(SEXP x);
 
 /* Environment Access Functions */
-SEXP (FRAME)(SEXP x);
-SEXP (ENCLOS)(SEXP x);
-SEXP (HASHTAB)(SEXP x);
 int  (ENVFLAGS)(SEXP x);
 int  (ENV_RDEBUG)(SEXP x);
 void (SET_ENV_RDEBUG)(SEXP x, int v);
@@ -285,11 +276,6 @@ SEXP (PRCODE)(SEXP x);
 SEXP (PRENV)(SEXP x);
 SEXP (PRVALUE)(SEXP x);
 //int  (PRSEEN)(SEXP x);
-
-/* External pointer access macros */
-SEXP (EXTPTR_PROT)(SEXP);
-SEXP (EXTPTR_TAG)(SEXP);
-void *(EXTPTR_PTR)(SEXP);
 
 /* Pointer Protection and Unprotection */
 #define PROTECT(s)	Rf_protect(s)
@@ -1043,7 +1029,6 @@ SEXP	 Rf_ScalarReal(double);
 SEXP	 Rf_ScalarString(SEXP);
 R_xlen_t  Rf_xlength(SEXP);
 R_xlen_t  (XLENGTH)(SEXP x);
-R_xlen_t  (XTRUELENGTH)(SEXP x);
 // int LENGTH_EX(SEXP x, const char *file, int line);
 // R_xlen_t XLENGTH_EX(SEXP x);
 SEXP (CAR)(SEXP e);
@@ -1172,10 +1157,6 @@ Rboolean Rf_psmatch(const char *, const char *, Rboolean); // match.c,  used by 
 #define error_return(msg)	{ Rf_error("%s", msg);	   return R_NilValue; }
 #define errorcall_return(cl,msg){ Rf_errorcall(cl, "%s", msg);   return R_NilValue; }
 
-void (SETLENGTH)(SEXP x, R_xlen_t v); // used by many packages
-void (SET_TRUELENGTH)(SEXP x, R_xlen_t v); // used by many packages
-void (SETLEVELS)(SEXP x, int v); // used by qs quotedargs
-
 // used by admisc arcpbf b64 box clarabel collapse declared drake fcl rlang this.path
 void (SET_ENVFLAGS)(SEXP x, int v);
 void SET_FRAME(SEXP x, SEXP v); // used by mmap qs
@@ -1186,11 +1167,6 @@ void SET_HASHTAB(SEXP x, SEXP v); // used mmap qs
 void SET_PRENV(SEXP x, SEXP v); 
 void SET_PRVALUE(SEXP x, SEXP v);
 void SET_PRCODE(SEXP x, SEXP v); 
-
-void *(STDVEC_DATAPTR)(SEXP x); // used by stringfish vctrs vroom
-
-/* Growable vector support */ // still used by a few packages
-void (SET_GROWABLE_BIT)(SEXP x);
 
 // no longer used
 #define BCODE_CONSTS(x) CONSTS(x) // re-enable in Defn.h after removing here

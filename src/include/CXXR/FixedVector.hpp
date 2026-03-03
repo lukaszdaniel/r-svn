@@ -227,7 +227,7 @@ namespace CXXR
                 BadObject::register_bad_object(this, __FILE__, __LINE__);
             }
 
-            if (IS_GROWABLE(this))
+            if ((R::IS_GROWABLE)(this))
             {
                 m_length = m_truelength;
                 sxpinfo.scalar = (m_length == 1);

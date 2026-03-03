@@ -345,7 +345,6 @@ namespace R {
 #define CXXR_COMPLEX(x)	((CXXR::Complex *) DATAPTR(x))
 #define REAL(x)		((double *) DATAPTR(x))
 #define STRING_PTR(x)	((SEXP *) DATAPTR(x))
-#define VECTOR_PTR(x)	((SEXP *) DATAPTR(x))
 #define LOGICAL_RO(x)	((const int *) DATAPTR_RO(x))
 #define INTEGER_RO(x)	((const int *) DATAPTR_RO(x))
 #define RAW_RO(x)	((const Rbyte *) DATAPTR_RO(x))
@@ -610,17 +609,19 @@ void (SET_MAYBEJIT)(SEXP x);
 void (UNSET_MAYBEJIT)(SEXP x);
 
 /* Growable vector support */
-// int (IS_GROWABLE)(SEXP x); // declared in Rinternals.h
-int (GROWABLE_BIT_SET)(SEXP x);
-// void (SET_GROWABLE_BIT)(SEXP x); // declared in Rinternals.h
+bool (IS_GROWABLE)(SEXP x);
+bool (GROWABLE_BIT_SET)(SEXP x);
+void (SET_GROWABLE_BIT)(SEXP x);
 
 /* Vector Access Functions */
-// void (SETLENGTH)(SEXP x, R_xlen_t v); // declared in Rinternals.h
-// void (SET_TRUELENGTH)(SEXP x, R_xlen_t v); // declared in Rinternals.h
-// int  (SETLEVELS)(SEXP x, int v); // declared in Rinternals.h
+void (SETLENGTH)(SEXP x, R_xlen_t v);
+void (SET_TRUELENGTH)(SEXP x, R_xlen_t v);
+int (LEVELS)(SEXP x);
+void (SETLEVELS)(SEXP x, int v);
 R_xlen_t (STDVEC_LENGTH)(SEXP);
 R_xlen_t (STDVEC_TRUELENGTH)(SEXP);
 void (SETALTREP)(SEXP, int);
+R_xlen_t (TRUELENGTH)(SEXP x);
 
 /* Binding Cell Access Functions */
 SEXPTYPE (BNDCELL_TAG)(SEXP e);
@@ -659,6 +660,9 @@ int  (RTRACE)(SEXP x);
 void (SET_RDEBUG)(SEXP x, int v);
 void (SET_RSTEP)(SEXP x, int v);
 void (SET_RTRACE)(SEXP x, int v);
+void SET_FORMALS(SEXP x, SEXP v);
+void SET_BODY(SEXP x, SEXP v);
+void SET_CLOENV(SEXP x, SEXP v);
 SEXP R_body_no_src(SEXP x); // body(x) without "srcref" etc, ../main/utils.c
 
 /* Symbol Access Functions */
@@ -671,6 +675,9 @@ void SET_SYMVALUE(SEXP x, SEXP v);
 void SET_INTERNAL(SEXP x, SEXP v);
 
 /* Environment Access Functions */
+SEXP (FRAME)(SEXP x);
+SEXP (ENCLOS)(SEXP x);
+SEXP (HASHTAB)(SEXP x);
 // void (SET_ENVFLAGS)(SEXP x, int v); // declared in Rinternals.h
 // void SET_FRAME(SEXP x, SEXP v); // declared in Rinternals.h
 // void SET_ENCLOS(SEXP x, SEXP v); // declared in Rinternals.h
@@ -684,6 +691,11 @@ void (SET_PRSEEN)(SEXP x, int v);
 // void SET_PRCODE(SEXP x, SEXP v); // declared in Rinternals.h
 void IF_PROMSXP_SET_PRVALUE(SEXP x, SEXP v);
 bool (PROMISE_IS_EVALUATED)(SEXP x);
+
+/* External pointer access macros */
+SEXP (EXTPTR_PROT)(SEXP);
+SEXP (EXTPTR_TAG)(SEXP);
+void *(EXTPTR_PTR)(SEXP);
 
 /* Hashing Functions */
 bool (HASHASH)(SEXP x);
@@ -714,6 +726,7 @@ const void *ALTVEC_DATAPTR_RO(SEXP x);
 const void *ALTVEC_DATAPTR_OR_NULL(SEXP x);
 SEXP ALTVEC_EXTRACT_SUBSET(SEXP x, SEXP indx, SEXP call);
 bool R_is_compact_intseq(SEXP x);
+void *(STDVEC_DATAPTR)(SEXP x);
 
 /* data access */
 int ALTINTEGER_ELT(SEXP x, R_xlen_t i);

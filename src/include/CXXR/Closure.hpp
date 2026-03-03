@@ -248,6 +248,32 @@ namespace R
      */
     SEXP mkCLOSXP(SEXP formal_args, SEXP body, SEXP env);
 
+    /** @brief Set the formal arguments of a CXXR::Closure.
+     *
+     * @param x Pointer to a CXXR::Closure object (checked).
+     *
+     * @param v Pointer to the formal argument list.
+     */
+    void SET_FORMALS(SEXP x, SEXP v);
+
+    /** @brief Set the body of a CXXR::Closure.
+     *
+     * @param x Pointer to a CXXR::Closure object (checked).
+     *
+     * @param v Pointer to the body of this CXXR::Closure.
+     */
+    void SET_BODY(SEXP x, SEXP v);
+
+    /** @brief Replace the environment of a CXXR::Closure.
+     *
+     * @param x Pointer to a CXXR::Closure object (checked).
+     *
+     * @param v Pointer to the environment now to be
+     *          considered as the environment of this CXXR::Closure.
+     *          A null pointer is not permissible (not checked).
+     */
+    void SET_CLOENV(SEXP x, SEXP v);
+
     /** @brief Get debugging state
      *
      * @param x Pointer to \c RObject.
@@ -325,32 +351,6 @@ extern "C"
      * @return Pointer to the formal argument list of \a x.
      */
     SEXP (FORMALS)(SEXP x);
-
-    /** @brief Set the formal arguments of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @param v Pointer to the formal argument list.
-     */
-    void SET_FORMALS(SEXP x, SEXP v);
-
-    /** @brief Set the body of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @param v Pointer to the body of this CXXR::Closure.
-     */
-    void SET_BODY(SEXP x, SEXP v);
-
-    /** @brief Replace the environment of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @param v Pointer to the environment now to be
-     *          considered as the environment of this CXXR::Closure.
-     *          A null pointer is not permissible (not checked).
-     */
-    void SET_CLOENV(SEXP x, SEXP v);
 } // extern "C"
 
 #endif // CLOSURE_HPP

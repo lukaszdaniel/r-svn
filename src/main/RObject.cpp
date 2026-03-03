@@ -55,8 +55,8 @@ namespace CXXR
         const auto &SETTER_CLEAR_NAMEDptr = R::SETTER_CLEAR_NAMED;
         const auto &RAISE_NAMEDptr = R::RAISE_NAMED;
         const auto &TYPEOFptr = TYPEOF;
-        const auto &LEVELSptr = LEVELS;
-        const auto &SETLEVELSptr = SETLEVELS;
+        const auto &LEVELSptr = R::LEVELS;
+        const auto &SETLEVELSptr = R::SETLEVELS;
     } // namespace ForceNonInline
 
     RStatus GlobalParameter::s_R_Is_Running = RStatus::NOT_STARTED;

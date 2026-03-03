@@ -2682,7 +2682,7 @@ int (OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
 SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
 int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
 attribute_hidden int (R::RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
-int (LEVELS)(SEXP x) { CR_ASSERT(x); return LEVELS(CHK(x)); }
+attribute_hidden int (R::LEVELS)(SEXP x) { CR_ASSERT(x); return LEVELS(CHK(x)); }
 int (R::REFCNT)(SEXP x) { return REFCNT(CHK(x)); }
 attribute_hidden bool (R::REFCNT_ENABLED)(SEXP x) { CR_ASSERT(x); return REFCNT_ENABLED(CHK(x)); }
 int (ALTREP)(SEXP x) { return ALTREP(CHK(x)); }
@@ -2738,7 +2738,8 @@ void (SET_NAMED)(SEXP x, int v)
 }
 attribute_hidden
 void (R::SET_RTRACE)(SEXP x, int v) { CR_ASSERT(x); SET_RTRACE(CHK(x), v); }
-void (SETLEVELS)(SEXP x, int v) { CR_ASSERT(x); SETLEVELS(CHK(x), v); }
+attribute_hidden
+void (R::SETLEVELS)(SEXP x, int v) { CR_ASSERT(x); SETLEVELS(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), duplicate(CHK(ATTRIB(CHK(from)))));
     // SET_OBJECT(CHK(to), OBJECT(from));
@@ -2838,9 +2839,12 @@ attribute_hidden void (R::SET_MAYBEJIT)(SEXP x) { CR_ASSERT(x); SET_MAYBEJIT(CHK
 attribute_hidden void (R::UNSET_MAYBEJIT)(SEXP x) { CR_ASSERT(x); UNSET_MAYBEJIT(CHK(x)); }
 
 /* Growable vector support */
-int (IS_GROWABLE)(SEXP x) { CR_ASSERT(x); return IS_GROWABLE(CHK(x)); }
-int (R::GROWABLE_BIT_SET)(SEXP x) { return GROWABLE_BIT_SET(CHK(x)); }
-void (SET_GROWABLE_BIT)(SEXP x) { CR_ASSERT(x); SET_GROWABLE_BIT(CHK(x)); }
+attribute_hidden
+bool (R::IS_GROWABLE)(SEXP x) { CR_ASSERT(x); return IS_GROWABLE(CHK(x)); }
+attribute_hidden
+bool (R::GROWABLE_BIT_SET)(SEXP x) { return GROWABLE_BIT_SET(CHK(x)); }
+attribute_hidden
+void (R::SET_GROWABLE_BIT)(SEXP x) { CR_ASSERT(x); SET_GROWABLE_BIT(CHK(x)); }
 
 namespace
 {
@@ -2886,9 +2890,11 @@ static R_INLINE SEXP CHK2(SEXP x)
 /* Vector Accessors */
 int (LENGTH)(SEXP x) { return x == R_NilValue ? 0 : LENGTH(CHK2(x)); }
 R_xlen_t (XLENGTH)(SEXP x) { return XLENGTH(CHK2(x)); }
-R_xlen_t (TRUELENGTH)(SEXP x) { CR_ASSERT(x); return TRUELENGTH(CHK2(x)); }
+attribute_hidden
+R_xlen_t (R::TRUELENGTH)(SEXP x) { CR_ASSERT(x); return TRUELENGTH(CHK2(x)); }
 
-void (SETLENGTH)(SEXP x, R_xlen_t v)
+attribute_hidden
+void (R::SETLENGTH)(SEXP x, R_xlen_t v)
 {
     CR_ASSERT(x);
     if (ALTREP(x))
@@ -2898,7 +2904,8 @@ void (SETLENGTH)(SEXP x, R_xlen_t v)
     SET_STDVEC_LENGTH(CHK2(x), v);
 }
 
-void (SET_TRUELENGTH)(SEXP x, R_xlen_t v) { CR_ASSERT(x); SET_TRUELENGTH(CHK2(x), v); }
+attribute_hidden
+void (R::SET_TRUELENGTH)(SEXP x, R_xlen_t v) { CR_ASSERT(x); SET_TRUELENGTH(CHK2(x), v); }
 int  (IS_LONG_VEC)(SEXP x) { CR_ASSERT(x); return IS_LONG_VEC(CHK2(x)); }
 attribute_hidden
 R_xlen_t (R::STDVEC_LENGTH)(SEXP x) { CR_ASSERT(x); return STDVEC_LENGTH(CHK2(x)); }
@@ -2994,7 +3001,8 @@ SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i) {
 # define CHKZLN(x, T) do { } while (0)
 #endif
 
-void *(STDVEC_DATAPTR)(SEXP x)
+attribute_hidden
+void *(R::STDVEC_DATAPTR)(SEXP x)
 {
     CR_ASSERT(x);
     if (ALTREP(x))
@@ -3120,11 +3128,6 @@ const SEXP *(STRING_PTR_RO)(SEXP x) {
 	      __func__, "character", R_typeToChar(x));
     CHKZLN(x, const SEXP);
     return STRING_PTR_RO(x);
-}
-
-NORET SEXP * (VECTOR_PTR)(SEXP x)
-{
-  error("%s", _("not safe to return vector pointer"));
 }
 
 const SEXP *(VECTOR_PTR_RO)(SEXP x) {
@@ -3498,9 +3501,12 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
 }
 
 /* ExternalPointer Accessors */
-SEXP (EXTPTR_PROT)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PROT(CHK(x)); }
-SEXP (EXTPTR_TAG)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_TAG(CHK(x)); }
-void *(EXTPTR_PTR)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PTR(CHK(x)); }
+attribute_hidden
+SEXP (R::EXTPTR_PROT)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PROT(CHK(x)); }
+attribute_hidden
+SEXP (R::EXTPTR_TAG)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_TAG(CHK(x)); }
+attribute_hidden
+void *(R::EXTPTR_PTR)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PTR(CHK(x)); }
 
 attribute_hidden
 void (R::SET_MISSING)(SEXP x, unsigned int v) { CR_ASSERT(x); SET_MISSING(CHKCONS(x), v); }
@@ -3520,9 +3526,12 @@ SEXP R_ClosureFormals(SEXP x) { CR_ASSERT(x); return (FORMALS)(x); }
 SEXP R_ClosureBody(SEXP x) { CR_ASSERT(x); return (BODY)(x); }
 SEXP R_ClosureEnv(SEXP x) { CR_ASSERT(x); return (CLOENV)(x); }
 
-void (SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_formals.retarget(x, v); }
-void (SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_body.retarget(x, v); }
-void (SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_env.retarget(x, v); }
+attribute_hidden
+void (R::SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_formals.retarget(x, v); }
+attribute_hidden
+void (R::SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_body.retarget(x, v); }
+attribute_hidden
+void (R::SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_env.retarget(x, v); }
 void (R::SET_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_RDEBUG(CHK(x), v); }
 attribute_hidden
 void (R::SET_RSTEP)(SEXP x, int v) { CR_ASSERT(x); SET_RSTEP(CHK(x), v); }
@@ -3579,9 +3588,12 @@ attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { CR_ASSERT(x); SET_DDVAL(CH
     if (x != R_NilValue && TYPEOF(x) != ENVSXP)				\
 	error(_("%s: argument of type %s is not an environment or NULL"), \
 	      __func__, sexptype2char(TYPEOF(x)))
-SEXP (FRAME)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
-SEXP (ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
-SEXP (HASHTAB)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
+attribute_hidden
+SEXP (R::FRAME)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
+attribute_hidden
+SEXP (R::ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
+attribute_hidden
+SEXP (R::HASHTAB)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
 int (ENVFLAGS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { CR_ASSERT(x); return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { CR_ASSERT(x); return ENV_RDEBUG(CHK(x)); }

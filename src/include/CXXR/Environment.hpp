@@ -210,6 +210,37 @@ namespace CXXR
 
 namespace R
 {
+    /** @brief Access an environment's Frame, represented as a PairList.
+     *
+     * @param x Pointer to a CXXR::Environment (checked).
+     *
+     * @return Pointer to a PairList representing the contents of the
+     * Frame of \a x (may be null).  This PairList is generated on the
+     * fly, so this is a relatively expensive operation.  Alterations
+     * to the returned PairList will not alter the Environment's Frame.
+     *
+     * @note Beware that since (unlike CR) this isn't a simple
+     * accessor function, its return value will need protection from
+     * garbage collection.
+     */
+    SEXP (FRAME)(SEXP x);
+
+    /** @brief Access enclosing environment.
+     *
+     * @param x Pointer to a CXXR::Environment (checked).
+     *
+     * @return Pointer to the enclosing environment of \a x.
+     */
+    SEXP (ENCLOS)(SEXP x);
+
+    /** @brief Access an environment's hash table.
+     *
+     * @param x Pointer to a CXXR::Environment (checked).
+     *
+     * @return Pointer to the hash table of \a x (may be null).
+     */
+    SEXP (HASHTAB)(SEXP x);
+
     /** @brief Set symbol's value in the base environment.
      *
      * @param x Pointer to a CXXR::Symbol (checked).
@@ -275,37 +306,6 @@ extern "C"
      * @return TRUE iff the RObject pointed to by \a s is an environment.
      */
     Rboolean Rf_isEnvironment(SEXP s);
-
-    /** @brief Access an environment's Frame, represented as a PairList.
-     *
-     * @param x Pointer to a CXXR::Environment (checked).
-     *
-     * @return Pointer to a PairList representing the contents of the
-     * Frame of \a x (may be null).  This PairList is generated on the
-     * fly, so this is a relatively expensive operation.  Alterations
-     * to the returned PairList will not alter the Environment's Frame.
-     *
-     * @note Beware that since (unlike CR) this isn't a simple
-     * accessor function, its return value will need protection from
-     * garbage collection.
-     */
-    SEXP (FRAME)(SEXP x);
-
-    /** @brief Access enclosing environment.
-     *
-     * @param x Pointer to a CXXR::Environment (checked).
-     *
-     * @return Pointer to the enclosing environment of \a x.
-     */
-    SEXP (ENCLOS)(SEXP x);
-
-    /** @brief Access an environment's hash table.
-     *
-     * @param x Pointer to a CXXR::Environment (checked).
-     *
-     * @return Pointer to the hash table of \a x (may be null).
-     */
-    SEXP (HASHTAB)(SEXP x);
 
     /** @brief Access an environment's flags.
      *
