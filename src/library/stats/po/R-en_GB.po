@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -19,6 +19,17 @@ msgstr ""
 msgid "%s applies only to two-way tables"
 msgstr "%s applies only to two-way tables"
 
+#. R/free1way.R: gettextf("%s currently only allows independent right-censoring",     "free1way")
+#: R/free1way.R:0
+msgid "%s currently only allows independent right-censoring"
+msgstr ""
+
+#. R/free1way.R: gettextf("%s is not defined for unordered responses", "free1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "%s is not defined for unordered responses"
+msgstr "'proj' is not implemented for multiple responses"
+
 #. R/family.R: gettextf("%s link not recognised", sQuote(link))
 #: R/family.R:0
 msgid "%s link not recognised"
@@ -30,10 +41,17 @@ msgid "%s must be 0 or 1"
 msgstr "%s must be 0 or 1"
 
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
+#. R/free1way.R: gettextf("%s needs package 'Matrix' correctly installed", ".NewtonRaphson")
+#. R/free1way.R: gettextf("%s needs package 'Matrix' correctly installed", ".free1wayML")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
-#: R/contrast.R:0 R/xtabs.R:0
+#: R/contrast.R:0 R/free1way.R:0 R/xtabs.R:0
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr "%s needs package 'Matrix' correctly installed"
+
+#. R/free1way.R: gettextf("%s only allows two-sided alternatives in the presence of more than two groups",     "power.free1way.test")
+#: R/free1way.R:0
+msgid "%s only allows two-sided alternatives in the presence of more than two groups"
+msgstr ""
 
 #. R/lm.R: gettextf("%s: NAs produced for non-estimable cases", msg1)
 #: R/lm.R:0
@@ -339,7 +357,9 @@ msgstr "'formula' has '.' in both left and right hand sides"
 
 #. R/ansari.test.R: stop("'formula' missing or incorrect")
 #. R/bartlett.test.R: stop("'formula' missing or incorrect")
+#. R/cor.test.R: stop("'formula' missing or incorrect")
 #. R/fligner.test.R: stop("'formula' missing or incorrect")
+#. R/free1way.R: stop("'formula' missing or incorrect")
 #. R/friedman.test.R: stop("'formula' missing or incorrect")
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
@@ -351,17 +371,12 @@ msgstr "'formula' has '.' in both left and right hand sides"
 #. R/var.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
-#: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/friedman.test.R:0
-#: R/ftable.R:0 R/kruskal.test.R:0 R/ks.test.R:0 R/mood.test.R:0
-#: R/oneway.test.R:0 R/quade.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0 R/xtabs.R:0
+#: R/ansari.test.R:0 R/bartlett.test.R:0 R/cor.test.R:0 R/fligner.test.R:0
+#: R/free1way.R:0 R/friedman.test.R:0 R/ftable.R:0 R/kruskal.test.R:0
+#: R/ks.test.R:0 R/mood.test.R:0 R/oneway.test.R:0 R/quade.test.R:0
+#: R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0 R/xtabs.R:0
 msgid "'formula' missing or incorrect"
 msgstr "'formula' missing or incorrect"
-
-#. R/cor.test.R: stop("'formula' missing or invalid")
-#: R/cor.test.R:0
-msgid "'formula' missing or invalid"
-msgstr "'formula' missing or invalid"
 
 #. R/ftable.R: stop("'formula' must have both left and right hand sides")
 #: R/ftable.R:0
@@ -1313,11 +1328,6 @@ msgstr "Assuming constant prediction variance even though model fit is weighted"
 msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr "Barrier algorithm ran out of iterations and did not converge"
 
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
-#: R/cor.test.R:0
-msgid "Cannot compute exact p-value with ties"
-msgstr "Cannot compute exact p-value with ties"
-
 #. R/chisq.test.R: warning("Chi-squared approximation may be incorrect")
 #. R/prop.test.R: warning("Chi-squared approximation may be incorrect")
 #: R/chisq.test.R:0 R/prop.test.R:0
@@ -1364,6 +1374,11 @@ msgstr "F test assumes quasi%s family"
 msgid "Initializing %s to '1.'."
 msgstr ""
 
+#. R/free1way.R: gettextf("Jeffreys penalisation was applied in %s because initial optimisation failed with:",     "free1way")
+#: R/free1way.R:0
+msgid "Jeffreys penalisation was applied in %s because initial optimisation failed with:"
+msgstr ""
+
 #. R/arima.R: warning("MA part of model is not invertible")
 #. R/arma0.R: warning("MA part of model is not invertible")
 #: R/arima.R:0 R/arma0.R:0
@@ -1385,18 +1400,14 @@ msgstr "NA lev[]; probably smoothing parameter 'spar' way too large!"
 msgid "NA values not allowed in 'd'"
 msgstr "NA values not allowed in 'd'"
 
-#. R/friedman.test.R: stop("NA's are not allowed in 'groups' or 'blocks'")
-#: R/friedman.test.R:0
-msgid "NA's are not allowed in 'groups' or 'blocks'"
-msgstr "NA's are not allowed in 'groups' or 'blocks'"
-
 #. R/mantelhaen.test.R: stop("NAs are not allowed")
 #: R/mantelhaen.test.R:0
 msgid "NAs are not allowed"
 msgstr "NAs are not allowed"
 
+#. R/friedman.test.R: stop("NAs are not allowed in 'groups' or 'blocks'")
 #. R/quade.test.R: stop("NAs are not allowed in 'groups' or 'blocks'")
-#: R/quade.test.R:0
+#: R/friedman.test.R:0 R/quade.test.R:0
 #, fuzzy
 msgid "NAs are not allowed in 'groups' or 'blocks'"
 msgstr "NA's are not allowed in 'groups' or 'blocks'"
@@ -1506,11 +1517,6 @@ msgstr "Refitting model to allow projection"
 #, fuzzy
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr "statistic. Waiting..."
-
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "Requested conf.level not achievable"
-msgstr "Requested conf.level not achievable"
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
@@ -1737,6 +1743,17 @@ msgstr "assuming prediction variance inversely proportional to weights used for 
 msgid "at least one entry of 'x' must be positive"
 msgstr "at least one entry of 'x' must be positive"
 
+#. R/free1way.R: stop("at least two groups required")
+#: R/free1way.R:0
+#, fuzzy
+msgid "at least two groups required"
+msgstr "a two-sided formula is required"
+
+#. R/free1way.R: stop("at least two response categories required")
+#: R/free1way.R:0
+msgid "at least two response categories required"
+msgstr ""
+
 #. R/smooth.R: stop("attempt to smooth NA values")
 #: R/smooth.R:0
 msgid "attempt to smooth NA values"
@@ -1863,14 +1880,27 @@ msgstr "cannot compute confidence set, returning NA"
 msgid "cannot compute estimate, returning NA"
 msgstr "cannot compute estimate, returning NA"
 
-#. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
+#. R/ansari.test.R: warning("cannot compute exact confidence interval with ties")
 #: R/ansari.test.R:0
-msgid "cannot compute exact confidence intervals with ties"
-msgstr "cannot compute exact confidence intervals with ties"
+msgid "cannot compute exact confidence interval with ties"
+msgstr "cannot compute exact confidence interval with ties"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0
+#. R/cor.test.R: warning("cannot compute exact p-value with ties")
+#: R/ansari.test.R:0 R/cor.test.R:0
 msgid "cannot compute exact p-value with ties"
+msgstr "cannot compute exact p-value with ties"
+
+#. R/free1way.R: gettextf("cannot compute exact permutation distribution in %s",     "free1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "cannot compute exact permutation distribution in %s"
+msgstr "cannot compute exact p-value with ties"
+
+#. R/free1way.R: gettextf("cannot compute one-sided p-values in %s", "free1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "cannot compute one-sided p-values in %s"
 msgstr "cannot compute exact p-value with ties"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
@@ -1903,6 +1933,11 @@ msgstr "cannot fit models without level ('alpha' must not be 0 or FALSE)"
 #: R/cor.R:0
 msgid "cannot handle 'pairwise.complete.obs'"
 msgstr "cannot handle 'pairwise.complete.obs'"
+
+#. R/free1way.R: gettextf("cannot have both a 'Surv()' response and an 'event' argument in %s",     "free1way")
+#: R/free1way.R:0
+msgid "cannot have both a 'Surv()' response and an 'event' argument in %s"
+msgstr ""
 
 #. R/ts.R: stop("cannot plot more than 10 series as \"multiple\"")
 #: R/ts.R:0
@@ -2100,6 +2135,11 @@ msgstr "each element of '%s' must be logical"
 msgid "eff.aovlist: non-orthogonal contrasts would give an incorrect answer"
 msgstr "eff.aovlist: non-orthogonal contrasts would give an incorrect answer"
 
+#. R/free1way.R: gettextf("effect size can only be computed for two-sample problems in %s",     "power.free1way.test")
+#: R/free1way.R:0
+msgid "effect size can only be computed for two-sample problems in %s"
+msgstr ""
+
 #. R/cmdscale.R: warning("eig=TRUE is disregarded when list.=FALSE")
 #: R/cmdscale.R:0
 msgid "eig=TRUE is disregarded when list.=FALSE"
@@ -2146,6 +2186,11 @@ msgstr "empty cluster: try a better set of initial centres"
 msgid "empty model supplied"
 msgstr "empty model supplied"
 
+#. R/free1way.R: gettextf("error computing the Hessian in %s", "free1way")
+#: R/free1way.R:0
+msgid "error computing the Hessian in %s"
+msgstr ""
+
 #. R/lm.R: warning("essentially perfect fit: summary may be unreliable")
 #: R/lm.R:0
 msgid "essentially perfect fit: summary may be unreliable"
@@ -2155,6 +2200,12 @@ msgstr "essentially perfect fit: summary may be unreliable"
 #: R/power.anova.test.R:0
 msgid "exactly one of 'groups', 'n', 'between.var', 'within.var', 'power', and 'sig.level' must be NULL"
 msgstr "exactly one of 'groups', 'n', 'between.var', 'within.var', 'power', and 'sig.level' must be NULL"
+
+#. R/free1way.R: stop("exactly one of 'n', 'delta', 'power', and 'sig.level' must be NULL")
+#: R/free1way.R:0
+#, fuzzy
+msgid "exactly one of 'n', 'delta', 'power', and 'sig.level' must be NULL"
+msgstr "exactly one of 'n', 'delta', 'sd', 'power', and 'sig.level' must be NULL"
 
 #. R/power.R: stop("exactly one of 'n', 'delta', 'sd', 'power', and 'sig.level' must be NULL")
 #: R/power.R:0
@@ -2200,6 +2251,12 @@ msgstr "factor analysis applies only to numerical variables"
 #: R/factanal.R:0
 msgid "factor analysis requires at least three variables"
 msgstr "factor analysis requires at least three variables"
+
+#. R/free1way.R: gettextf("failed to compute confidence interval in %s", "confint.free1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "failed to compute confidence interval in %s"
+msgstr "cannot compute exact confidence interval with ties"
 
 #. R/reshape.R: stop("failed to guess time-varying variables from their names")
 #: R/reshape.R:0
@@ -2318,6 +2375,11 @@ msgstr "ignoring prior weights"
 msgid "incompatible dimensions"
 msgstr "incompatible dimensions"
 
+#. R/free1way.R: gettextf("incompatible length of argument 'mu' in %s", "free1way")
+#: R/free1way.R:0
+msgid "incompatible length of argument 'mu' in %s"
+msgstr ""
+
 #. R/ts.R: stop("inconsistent specification of 'ar' order")
 #: R/ts.R:0
 msgid "inconsistent specification of 'ar' order"
@@ -2328,6 +2390,17 @@ msgstr "inconsistent specification of 'ar' order"
 msgid "inconsistent specification of 'ma' order"
 msgstr "inconsistent specification of 'ma' order"
 
+#. R/free1way.R: gettextf("incorrect argument 'groups' in %s: at least two groups needed",     "free1way")
+#: R/free1way.R:0
+msgid "incorrect argument 'groups' in %s: at least two groups needed"
+msgstr ""
+
+#. R/free1way.R: stop("incorrect dimensions")
+#: R/free1way.R:0
+#, fuzzy
+msgid "incorrect dimensions"
+msgstr "incorrect dimensions for 'xi'"
+
 #. R/diffinv.R: stop("incorrect dimensions for 'xi'")
 #: R/diffinv.R:0
 msgid "incorrect dimensions for 'xi'"
@@ -2337,6 +2410,18 @@ msgstr "incorrect dimensions for 'xi'"
 #: R/binom.test.R:0
 msgid "incorrect length of 'x'"
 msgstr "incorrect length of 'x'"
+
+#. R/free1way.R: gettextf("incorrect number of columns for 'prob' in %s", "rfree1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "incorrect number of columns for 'prob' in %s"
+msgstr "wrong number of columns in 'x'"
+
+#. R/free1way.R: gettextf("incorrect specification for '%s'", "formula")
+#: R/free1way.R:0
+#, fuzzy
+msgid "incorrect specification for '%s'"
+msgstr "incorrect specification for 'col.vars'"
 
 #. R/ftable.R: stop("incorrect specification for 'col.vars'")
 #: R/ftable.R:0
@@ -2456,6 +2541,18 @@ msgstr "invalid 'tree' ('merge' component)"
 #: R/dendrogram.R:0
 msgid "invalid (length 0) node in dendrogram"
 msgstr "invalid (length 0) node in dendrogram"
+
+#. R/free1way.R: gettextf("invalid argument '%s'", "x")
+#. R/free1way.R: gettextf("invalid argument '%s'", "fix")
+#. R/free1way.R: gettextf("invalid argument '%s'", "alloc_ratio")
+#. R/free1way.R: gettextf("invalid argument '%s'", "strata_ratio")
+#. R/free1way.R: gettextf("invalid argument '%s'", "n")
+#. R/free1way.R: gettextf("invalid argument '%s'", "c")
+#. R/free1way.R: gettextf("invalid argument '%s'", "r")
+#: R/free1way.R:0
+#, fuzzy
+msgid "invalid argument '%s'"
+msgstr "invalid argument 'n'"
 
 #. R/nls-profile.R: stop("invalid argument to 'getProfile'")
 #: R/nls-profile.R:0
@@ -3477,6 +3574,11 @@ msgstr "parameters without starting value in 'data': %s"
 msgid "penalty must be numeric and > 0"
 msgstr "'y' must be numeric"
 
+#. R/free1way.R: gettextf("permutation confidence intervals only available for 2-sample comparisons in %s",     "confint.free1way")
+#: R/free1way.R:0
+msgid "permutation confidence intervals only available for 2-sample comparisons in %s"
+msgstr ""
+
 #. R/pairwise.R: stop("pooling of SD is incompatible with paired tests")
 #: R/pairwise.R:0
 msgid "pooling of SD is incompatible with paired tests"
@@ -4247,6 +4349,11 @@ msgstr "unknown names in control:"
 msgid "unknown string value for s.window"
 msgstr "unknown string value for s.window"
 
+#. R/free1way.R: gettextf("unsuccessful optimisation in %s", "free1way")
+#: R/free1way.R:0
+msgid "unsuccessful optimisation in %s"
+msgstr ""
+
 #. R/nls.R: warning("upper and lower bounds ignored unless 'algorithm = \"port\"'")
 #: R/nls.R:0
 #, fuzzy
@@ -4597,8 +4704,20 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "using the %d/%d row from a combined fit"
 msgstr[1] "using the %d/%d rows from a combined fit"
 
-#~ msgid "cannot compute exact confidence interval with ties"
-#~ msgstr "cannot compute exact confidence interval with ties"
+#~ msgid "'formula' missing or invalid"
+#~ msgstr "'formula' missing or invalid"
+
+#~ msgid "Cannot compute exact p-value with ties"
+#~ msgstr "Cannot compute exact p-value with ties"
+
+#~ msgid "NA's are not allowed in 'groups' or 'blocks'"
+#~ msgstr "NA's are not allowed in 'groups' or 'blocks'"
+
+#~ msgid "Requested conf.level not achievable"
+#~ msgstr "Requested conf.level not achievable"
+
+#~ msgid "cannot compute exact confidence intervals with ties"
+#~ msgstr "cannot compute exact confidence intervals with ties"
 
 #~ msgid "cannot compute exact confidence interval with zeroes"
 #~ msgstr "cannot compute exact confidence interval with zeroes"
@@ -4683,9 +4802,6 @@ msgstr[1] "using the %d/%d rows from a combined fit"
 
 #~ msgid "'formula' missing"
 #~ msgstr "'formula' missing"
-
-#~ msgid "invalid argument 'n'"
-#~ msgstr "invalid argument 'n'"
 
 #~ msgid "invalid argument 'r'"
 #~ msgstr "invalid argument 'r'"

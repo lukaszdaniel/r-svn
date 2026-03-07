@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,20 @@ msgstr ""
 #. R/xtabs.R: gettextf("%s applies only to two-way tables", "xtabs(*, sparse=TRUE)")
 
 msgid "%s applies only to two-way tables"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("%s currently only allows independent right-censoring",     "free1way")
+
+msgid "%s currently only allows independent right-censoring"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("%s is not defined for unordered responses", "free1way")
+
+msgid "%s is not defined for unordered responses"
 msgstr ""
 
 
@@ -35,11 +49,21 @@ msgstr ""
 
 
 #: R/contrast.R: 0
+#: R/free1way.R: 0
 #: R/xtabs.R: 0
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
+#. R/free1way.R: gettextf("%s needs package 'Matrix' correctly installed", ".NewtonRaphson")
+#. R/free1way.R: gettextf("%s needs package 'Matrix' correctly installed", ".free1wayML")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
 
 msgid "%s needs package 'Matrix' correctly installed"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("%s only allows two-sided alternatives in the presence of more than two groups",     "power.free1way.test")
+
+msgid "%s only allows two-sided alternatives in the presence of more than two groups"
 msgstr ""
 
 
@@ -468,7 +492,9 @@ msgstr ""
 
 #: R/ansari.test.R: 0
 #: R/bartlett.test.R: 0
+#: R/cor.test.R: 0
 #: R/fligner.test.R: 0
+#: R/free1way.R: 0
 #: R/friedman.test.R: 0
 #: R/ftable.R: 0
 #: R/kruskal.test.R: 0
@@ -482,7 +508,9 @@ msgstr ""
 #: R/xtabs.R: 0
 #. R/ansari.test.R: stop("'formula' missing or incorrect")
 #. R/bartlett.test.R: stop("'formula' missing or incorrect")
+#. R/cor.test.R: stop("'formula' missing or incorrect")
 #. R/fligner.test.R: stop("'formula' missing or incorrect")
+#. R/free1way.R: stop("'formula' missing or incorrect")
 #. R/friedman.test.R: stop("'formula' missing or incorrect")
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
@@ -496,13 +524,6 @@ msgstr ""
 #. R/xtabs.R: stop("'formula' missing or incorrect")
 
 msgid "'formula' missing or incorrect"
-msgstr ""
-
-
-#: R/cor.test.R: 0
-#. R/cor.test.R: stop("'formula' missing or invalid")
-
-msgid "'formula' missing or invalid"
 msgstr ""
 
 
@@ -1847,13 +1868,6 @@ msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr ""
 
 
-#: R/cor.test.R: 0
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
-
-msgid "Cannot compute exact p-value with ties"
-msgstr ""
-
-
 #: R/chisq.test.R: 0
 #: R/prop.test.R: 0
 #. R/chisq.test.R: warning("Chi-squared approximation may be incorrect")
@@ -1919,6 +1933,13 @@ msgid "Initializing %s to '1.'."
 msgstr ""
 
 
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("Jeffreys penalisation was applied in %s because initial optimisation failed with:",     "free1way")
+
+msgid "Jeffreys penalisation was applied in %s because initial optimisation failed with:"
+msgstr ""
+
+
 #: R/arima.R: 0
 #: R/arma0.R: 0
 #. R/arima.R: warning("MA part of model is not invertible")
@@ -1949,13 +1970,6 @@ msgid "NA values not allowed in 'd'"
 msgstr ""
 
 
-#: R/friedman.test.R: 0
-#. R/friedman.test.R: stop("NA's are not allowed in 'groups' or 'blocks'")
-
-msgid "NA's are not allowed in 'groups' or 'blocks'"
-msgstr ""
-
-
 #: R/mantelhaen.test.R: 0
 #. R/mantelhaen.test.R: stop("NAs are not allowed")
 
@@ -1963,7 +1977,9 @@ msgid "NAs are not allowed"
 msgstr ""
 
 
+#: R/friedman.test.R: 0
 #: R/quade.test.R: 0
+#. R/friedman.test.R: stop("NAs are not allowed in 'groups' or 'blocks'")
 #. R/quade.test.R: stop("NAs are not allowed in 'groups' or 'blocks'")
 
 msgid "NAs are not allowed in 'groups' or 'blocks'"
@@ -2112,13 +2128,6 @@ msgstr ""
 #. R/confint.R: gettextf("Reprofiling for %s  statistic. Waiting...", test)
 
 msgid "Reprofiling for %s  statistic. Waiting..."
-msgstr ""
-
-
-#: R/wilcox.test.R: 0
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-
-msgid "Requested conf.level not achievable"
 msgstr ""
 
 
@@ -2430,6 +2439,20 @@ msgid "at least one entry of 'x' must be positive"
 msgstr ""
 
 
+#: R/free1way.R: 0
+#. R/free1way.R: stop("at least two groups required")
+
+msgid "at least two groups required"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: stop("at least two response categories required")
+
+msgid "at least two response categories required"
+msgstr ""
+
+
 #: R/smooth.R: 0
 #. R/smooth.R: stop("attempt to smooth NA values")
 
@@ -2608,16 +2631,32 @@ msgstr ""
 
 
 #: R/ansari.test.R: 0
-#. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
+#. R/ansari.test.R: warning("cannot compute exact confidence interval with ties")
 
-msgid "cannot compute exact confidence intervals with ties"
+msgid "cannot compute exact confidence interval with ties"
 msgstr ""
 
 
 #: R/ansari.test.R: 0
+#: R/cor.test.R: 0
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
+#. R/cor.test.R: warning("cannot compute exact p-value with ties")
 
 msgid "cannot compute exact p-value with ties"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("cannot compute exact permutation distribution in %s",     "free1way")
+
+msgid "cannot compute exact permutation distribution in %s"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("cannot compute one-sided p-values in %s", "free1way")
+
+msgid "cannot compute one-sided p-values in %s"
 msgstr ""
 
 
@@ -2662,6 +2701,13 @@ msgstr ""
 #. R/cor.R: stop("cannot handle 'pairwise.complete.obs'")
 
 msgid "cannot handle 'pairwise.complete.obs'"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("cannot have both a 'Surv()' response and an 'event' argument in %s",     "free1way")
+
+msgid "cannot have both a 'Surv()' response and an 'event' argument in %s"
 msgstr ""
 
 
@@ -2937,6 +2983,13 @@ msgid "eff.aovlist: non-orthogonal contrasts would give an incorrect answer"
 msgstr ""
 
 
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("effect size can only be computed for two-sample problems in %s",     "power.free1way.test")
+
+msgid "effect size can only be computed for two-sample problems in %s"
+msgstr ""
+
+
 #: R/cmdscale.R: 0
 #. R/cmdscale.R: warning("eig=TRUE is disregarded when list.=FALSE")
 
@@ -3001,6 +3054,13 @@ msgid "empty model supplied"
 msgstr ""
 
 
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("error computing the Hessian in %s", "free1way")
+
+msgid "error computing the Hessian in %s"
+msgstr ""
+
+
 #: R/lm.R: 0
 #. R/lm.R: warning("essentially perfect fit: summary may be unreliable")
 
@@ -3012,6 +3072,13 @@ msgstr ""
 #. R/power.anova.test.R: stop("exactly one of 'groups', 'n', 'between.var', 'within.var', 'power', and 'sig.level' must be NULL")
 
 msgid "exactly one of 'groups', 'n', 'between.var', 'within.var', 'power', and 'sig.level' must be NULL"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: stop("exactly one of 'n', 'delta', 'power', and 'sig.level' must be NULL")
+
+msgid "exactly one of 'n', 'delta', 'power', and 'sig.level' must be NULL"
 msgstr ""
 
 
@@ -3075,6 +3142,13 @@ msgstr ""
 #. R/factanal.R: stop("factor analysis requires at least three variables")
 
 msgid "factor analysis requires at least three variables"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("failed to compute confidence interval in %s", "confint.free1way")
+
+msgid "failed to compute confidence interval in %s"
 msgstr ""
 
 
@@ -3232,6 +3306,13 @@ msgid "incompatible dimensions"
 msgstr ""
 
 
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("incompatible length of argument 'mu' in %s", "free1way")
+
+msgid "incompatible length of argument 'mu' in %s"
+msgstr ""
+
+
 #: R/ts.R: 0
 #. R/ts.R: stop("inconsistent specification of 'ar' order")
 
@@ -3246,6 +3327,20 @@ msgid "inconsistent specification of 'ma' order"
 msgstr ""
 
 
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("incorrect argument 'groups' in %s: at least two groups needed",     "free1way")
+
+msgid "incorrect argument 'groups' in %s: at least two groups needed"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: stop("incorrect dimensions")
+
+msgid "incorrect dimensions"
+msgstr ""
+
+
 #: R/diffinv.R: 0
 #. R/diffinv.R: stop("incorrect dimensions for 'xi'")
 
@@ -3257,6 +3352,20 @@ msgstr ""
 #. R/binom.test.R: stop("incorrect length of 'x'")
 
 msgid "incorrect length of 'x'"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("incorrect number of columns for 'prob' in %s", "rfree1way")
+
+msgid "incorrect number of columns for 'prob' in %s"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("incorrect specification for '%s'", "formula")
+
+msgid "incorrect specification for '%s'"
 msgstr ""
 
 
@@ -3425,6 +3534,19 @@ msgstr ""
 #. R/dendrogram.R: stop("invalid (length 0) node in dendrogram")
 
 msgid "invalid (length 0) node in dendrogram"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("invalid argument '%s'", "x")
+#. R/free1way.R: gettextf("invalid argument '%s'", "fix")
+#. R/free1way.R: gettextf("invalid argument '%s'", "alloc_ratio")
+#. R/free1way.R: gettextf("invalid argument '%s'", "strata_ratio")
+#. R/free1way.R: gettextf("invalid argument '%s'", "n")
+#. R/free1way.R: gettextf("invalid argument '%s'", "c")
+#. R/free1way.R: gettextf("invalid argument '%s'", "r")
+
+msgid "invalid argument '%s'"
 msgstr ""
 
 
@@ -4833,6 +4955,13 @@ msgid "penalty must be numeric and > 0"
 msgstr ""
 
 
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("permutation confidence intervals only available for 2-sample comparisons in %s",     "confint.free1way")
+
+msgid "permutation confidence intervals only available for 2-sample comparisons in %s"
+msgstr ""
+
+
 #: R/pairwise.R: 0
 #. R/pairwise.R: stop("pooling of SD is incompatible with paired tests")
 
@@ -5895,6 +6024,13 @@ msgstr ""
 #. R/stl.R: stop("unknown string value for s.window")
 
 msgid "unknown string value for s.window"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("unsuccessful optimisation in %s", "free1way")
+
+msgid "unsuccessful optimisation in %s"
 msgstr ""
 
 

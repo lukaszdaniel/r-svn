@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28\n"
+"POT-Creation-Date: 2026-03-07 16:58\n"
 "PO-Revision-Date: 2025-04-01 16:46+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -618,6 +618,11 @@ msgstr "'row.names' должны определять одну из переме
 msgid "'scale' should be numeric or NULL"
 msgstr "'scale' должен быть числом или NULL"
 
+#. R/match.R: stop("'several.ok' must be logical or a string starting with \"all\"")
+#: R/match.R:0
+msgid "'several.ok' must be logical or a string starting with \"all\""
+msgstr ""
+
 #. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
 msgid "'subset' must be logical"
@@ -688,9 +693,9 @@ msgstr "'verbose' и 'quietly' -- оба true; значит, будем verbose.
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose' является TRUE, а 'echo' -- нет; ... преобразую 'echo <- TRUE'"
 
-#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#. R/namespace.R: stop("'versionCheck' must be NULL or a list with components 'op' and 'version'")
 #: R/namespace.R:0
-msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
+msgid "'versionCheck' must be NULL or a list with components 'op' and 'version'"
 msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
@@ -2540,6 +2545,11 @@ msgstr "возможно, неправильная кодировка в names(.
 #, fuzzy
 msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr "помещаю повторяющийся `%s` обработчик на вершину стека"
+
+#. R/summary.R: warning("quantile.type not in {1, 3} for <raw>")
+#: R/summary.R:0
+msgid "quantile.type not in {1, 3} for <raw>"
+msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0

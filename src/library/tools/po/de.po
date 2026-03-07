@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29+0100\n"
+"POT-Creation-Date: 2026-03-07 16:59+0100\n"
 "PO-Revision-Date: 2025-07-06 16:06+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -72,12 +72,12 @@ msgstr "nicht erkannte Formatspezifikation '%s'"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "höchstens ein Stern '*' in jeder Konversionsspezifikation unterstützt"
 
-#: gramLatex.cpp:2848 gramRd.cpp:3966
+#: gramLatex.cpp:2848 gramRd.cpp:3965
 #, c-format
 msgid "Buffer size too large to double safely at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2851 gramRd.cpp:3969
+#: gramLatex.cpp:2851 gramRd.cpp:3968
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "kann keinen Buffer für lange Zeichenkette in Zeile %d allokieren"
@@ -92,58 +92,58 @@ msgstr "kann keinen Buffer für lange Zeichenkette in Zeile %d allokieren"
 msgid "invalid '%s' value"
 msgstr "unzulässiger '%s' Wert"
 
-#: gramRd.cpp:2581 gramRd.cpp:2584
+#: gramRd.cpp:2579 gramRd.cpp:2582
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "schlechte Auszeichnung (Leerstelle zuviel?) bei %s:%d:%d"
 
-#: gramRd.cpp:3118
+#: gramRd.cpp:3116
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "Makro '%s' bereits definiert."
 
-#: gramRd.cpp:3128
+#: gramRd.cpp:3126
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "Höchstens 4 Argumente für benutzerdefinierte Makros erlaubt."
 
-#: gramRd.cpp:3170
+#: gramRd.cpp:3168
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "Keine Makrodefinition für '%s'."
 
-#: gramRd.cpp:3187 gramRd.cpp:3202
+#: gramRd.cpp:3185 gramRd.cpp:3200
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3231
+#: gramRd.cpp:3229
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Nicht genügend Argumente an benutzerdefiniertes Makro '%s' übergeben"
 
-#: gramRd.cpp:3290
+#: gramRd.cpp:3288
 msgid "internal error: inconsistent argument count"
 msgstr ""
 
-#: gramRd.cpp:3371 gramRd.cpp:3375
+#: gramRd.cpp:3369 gramRd.cpp:3373
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "Zeilenumbruch innerhalb einer Zeichenkette bei %s:%d"
 
-#: gramRd.cpp:3394
+#: gramRd.cpp:3392
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "kann keinen Buffer für langes Makro in Zeile %d allokieren"
 
-#: gramRd.cpp:3424
+#: gramRd.cpp:3422
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "Makros zu tief verschachtelt: unendliche Rekursion?"
 
-#: gramRd.cpp:3830
+#: gramRd.cpp:3829
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "Kann Makro %s nicht finden"
 
-#: gramRd.cpp:4030
+#: gramRd.cpp:4029
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "Unerwartetes Ende der Eingabe (in %c Zeichenkette bei %s:%d:%d)"

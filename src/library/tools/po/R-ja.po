@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:08+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -179,11 +179,6 @@ msgstr "*** 誰かがパッケージ '%s' 中の Built 欄を壊しました ***
 #: R/utils.R:0
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr ""
-
-#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
-#: R/RdHelpers.R:0
-msgid ","
-msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -429,11 +424,6 @@ msgstr "コード: %s"
 #, fuzzy
 msgid "Codoc mismatches from Rd file '%s':"
 msgstr "ドキュメントオブジェクト '%s' からの Codoc ミスマッチ:"
-
-#. R/testing.R: gettextf("  Comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
-#: R/testing.R:0
-msgid "Comparing %s to %s ..."
-msgstr "%s と %s を比較中 ..."
 
 #. R/Rd2pdf.R: message("Converting Rd files to LaTeX ...")
 #: R/Rd2pdf.R:0
@@ -768,12 +758,6 @@ msgstr "不正なライセンスファイルのポインタ: %s"
 #, fuzzy
 msgid "Invalid package aliases in Rd file '%s':"
 msgstr "変数 '%s' 中に non-portable フラグ:"
-
-#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
-#: R/Rd2HTML.R:0
-#, fuzzy
-msgid "Invalid value of 'toc_entries'"
-msgstr "'%s' に対する不正な値 : %s"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -1221,17 +1205,17 @@ msgstr "重複するエイリアス '%s' を持った Rd ファイル:"
 msgid "Rd files with duplicated name '%s':"
 msgstr "名前 '%s' が重複する Rd ファイル:"
 
+#. R/QC.R: gettextf("Rd files without %s:", paste0("\\", section))
+#: R/QC.R:0
+#, fuzzy
+msgid "Rd files without %s:"
+msgstr "'%s' を持たない Rd ファイル:"
+
 #. R/QC.R: gettext("Rd files without \\alias:")
 #: R/QC.R:0
 #, fuzzy
 msgid "Rd files without \\alias:"
 msgstr "'%s' を持たない Rd ファイル:"
-
-#. R/QC.R: gettext("Rd files without \\description:")
-#: R/QC.R:0
-#, fuzzy
-msgid "Rd files without \\description:"
-msgstr "空のセクションを含む Rd ファイル："
 
 #. R/Rd.R: gettextf("Rd macro package '%s' is not installed.", p)
 #: R/Rd.R:0
@@ -1369,6 +1353,11 @@ msgstr "既定の JSS スタイルは変更できないかもしれません"
 msgid "The package 'dir' argument must be of length 1"
 msgstr "引数 'package' は 長さ 1 でなければなりません"
 
+#. R/packages.R: stop("There is no binary type for this build of R.")
+#: R/packages.R:0
+msgid "There is no binary type for this build of R."
+msgstr ""
+
 #. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
 msgid "These fields must have ASCII values."
@@ -1429,11 +1418,6 @@ msgstr "ドキュメント化されてないコードオブジェクト:"
 #: R/QC.R:0
 msgid "Undocumented data sets:"
 msgstr "ドキュメント化されてないデータセット:"
-
-#. R/Rd2HTML.R: warning("Unexpected jump in section level")
-#: R/Rd2HTML.R:0
-msgid "Unexpected jump in section level"
-msgstr ""
 
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
@@ -1582,11 +1566,6 @@ msgstr ""
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
-msgstr ""
-
-#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
-#: R/RdHelpers.R:0
-msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -1903,6 +1882,12 @@ msgstr ""
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
 msgstr ""
 
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "不正なパッケージです"
+
 #. R/sha256.R: stop("invalid hex string")
 #: R/sha256.R:0
 msgid "invalid hex string"
@@ -1918,14 +1903,10 @@ msgstr "不正なパッケージです"
 msgid "invalid package layout"
 msgstr "不正なパッケージ構成です"
 
-#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-#: R/install.R:0
-msgid "invalid value %s for R_CROSS_BUILD"
-msgstr ""
-
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
+#. R/install.R: gettextf("invalid value for '%s' : %s", "R_CROSS_BUILD", sQuote(cross))
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
-#: R/RdConv2.R:0 R/makeLazyLoad.R:0
+#: R/RdConv2.R:0 R/install.R:0 R/makeLazyLoad.R:0
 msgid "invalid value for '%s' : %s"
 msgstr "'%s' に対する不正な値 : %s"
 
@@ -2636,6 +2617,20 @@ msgstr[0] "オブジェクト %s は 1 つ以上のデータ呼び出しによ�
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "%s (%s行) を再エンコード出来ません"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "Comparing %s to %s ..."
+#~ msgstr "%s と %s を比較中 ..."
+
+#, fuzzy
+#~ msgid "Invalid value of 'toc_entries'"
+#~ msgstr "'%s' に対する不正な値 : %s"
+
+#, fuzzy
+#~ msgid "Rd files without \\description:"
+#~ msgstr "空のセクションを含む Rd ファイル："
 
 #~ msgid "downloading %s ..."
 #~ msgstr "%s をダウンロードしています..."

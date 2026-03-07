@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-08-08 09:52\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 15:29+0200\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -98,7 +98,9 @@ msgstr "'figs' doit spécifier au moins un écran"
 
 #. R/barplot.R: stop("'formula' missing or incorrect")
 #. R/boxplot.R: stop("'formula' missing or incorrect")
-#: R/barplot.R:0 R/boxplot.R:0
+#. R/stripchart.R: stop("'formula' missing or incorrect")
+#. R/sunflowerplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0 R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "'formula' missing or incorrect"
 msgstr "'formula' manquante ou incorrecte"
 
@@ -397,12 +399,6 @@ msgstr "valeurs de catégories dupliquées - essayez autre chose pour 'formula' 
 msgid "exactly one symbol type must be specified"
 msgstr "exactement un type de symbole doit être donné"
 
-#. R/stripchart.R: stop("formula missing or incorrect")
-#. R/sunflowerplot.R: stop("formula missing or incorrect")
-#: R/stripchart.R:0 R/sunflowerplot.R:0
-msgid "formula missing or incorrect"
-msgstr "'formula' manquante ou incorrecte"
-
 #. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
 #: R/barplot.R:0
 msgid "formula must specify 1 or 2 categorical variables"
@@ -695,6 +691,17 @@ msgstr "seulement une colonne dans l'argument pour 'pairs'"
 msgid "only using the first two of %d regression coefficients"
 msgstr "utilisation des deux premiers des %d coefficients de régression"
 
+#. R/boxplot.R: warning("panel.first ignored, it is not a function")
+#: R/boxplot.R:0
+msgid "panel.first ignored, it is not a function"
+msgstr ""
+
+#. R/boxplot.R: warning("panel.last ignored, it is not a function")
+#: R/boxplot.R:0
+#, fuzzy
+msgid "panel.last ignored, it is not a function"
+msgstr "'include.lowest' ignoré car 'breaks' n'est pas un vecteur"
+
 #. R/plot.R: gettextf("plot type '%s' will be truncated to first character",     type)
 #: R/plot.R:0
 msgid "plot type '%s' will be truncated to first character"
@@ -816,6 +823,9 @@ msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] "l'argument %s n'est pas utilisé par"
 msgstr[1] "les arguments %s ne sont pas utilisés par"
+
+#~ msgid "formula missing or incorrect"
+#~ msgstr "'formula' manquante ou incorrecte"
 
 #~ msgid "invalid 'axp'"
 #~ msgstr "'axp' incorrect"

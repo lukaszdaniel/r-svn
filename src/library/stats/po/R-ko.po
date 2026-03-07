@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -25,6 +25,16 @@ msgstr ""
 msgid "%s applies only to two-way tables"
 msgstr "%s는 2차원 테이블에만 적용됩니다."
 
+#. R/free1way.R: gettextf("%s currently only allows independent right-censoring",     "free1way")
+#: R/free1way.R:0
+msgid "%s currently only allows independent right-censoring"
+msgstr ""
+
+#. R/free1way.R: gettextf("%s is not defined for unordered responses", "free1way")
+#: R/free1way.R:0
+msgid "%s is not defined for unordered responses"
+msgstr ""
+
 #. R/family.R: gettextf("%s link not recognised", sQuote(link))
 #: R/family.R:0
 msgid "%s link not recognised"
@@ -36,10 +46,17 @@ msgid "%s must be 0 or 1"
 msgstr "%s는 반드시 0 또는 1 이어야 합니다."
 
 #. R/contrast.R: gettextf("%s needs package 'Matrix' correctly installed", "contr*(.., sparse=TRUE)")
+#. R/free1way.R: gettextf("%s needs package 'Matrix' correctly installed", ".NewtonRaphson")
+#. R/free1way.R: gettextf("%s needs package 'Matrix' correctly installed", ".free1wayML")
 #. R/xtabs.R: gettextf("%s needs package 'Matrix' correctly installed", "xtabs(*, sparse=TRUE)")
-#: R/contrast.R:0 R/xtabs.R:0
+#: R/contrast.R:0 R/free1way.R:0 R/xtabs.R:0
 msgid "%s needs package 'Matrix' correctly installed"
 msgstr "%s는 정상적으로 설치되어 있는 패키지 'Matrix'를 필요로 합니다"
+
+#. R/free1way.R: gettextf("%s only allows two-sided alternatives in the presence of more than two groups",     "power.free1way.test")
+#: R/free1way.R:0
+msgid "%s only allows two-sided alternatives in the presence of more than two groups"
+msgstr ""
 
 #. R/lm.R: gettextf("%s: NAs produced for non-estimable cases", msg1)
 #: R/lm.R:0
@@ -350,7 +367,9 @@ msgstr "'formula'의 양변 모두 '.'를 가지고 있습니다"
 
 #. R/ansari.test.R: stop("'formula' missing or incorrect")
 #. R/bartlett.test.R: stop("'formula' missing or incorrect")
+#. R/cor.test.R: stop("'formula' missing or incorrect")
 #. R/fligner.test.R: stop("'formula' missing or incorrect")
+#. R/free1way.R: stop("'formula' missing or incorrect")
 #. R/friedman.test.R: stop("'formula' missing or incorrect")
 #. R/ftable.R: stop("'formula' missing or incorrect")
 #. R/kruskal.test.R: stop("'formula' missing or incorrect")
@@ -362,17 +381,12 @@ msgstr "'formula'의 양변 모두 '.'를 가지고 있습니다"
 #. R/var.test.R: stop("'formula' missing or incorrect")
 #. R/wilcox.test.R: stop("'formula' missing or incorrect")
 #. R/xtabs.R: stop("'formula' missing or incorrect")
-#: R/ansari.test.R:0 R/bartlett.test.R:0 R/fligner.test.R:0 R/friedman.test.R:0
-#: R/ftable.R:0 R/kruskal.test.R:0 R/ks.test.R:0 R/mood.test.R:0
-#: R/oneway.test.R:0 R/quade.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0 R/xtabs.R:0
+#: R/ansari.test.R:0 R/bartlett.test.R:0 R/cor.test.R:0 R/fligner.test.R:0
+#: R/free1way.R:0 R/friedman.test.R:0 R/ftable.R:0 R/kruskal.test.R:0
+#: R/ks.test.R:0 R/mood.test.R:0 R/oneway.test.R:0 R/quade.test.R:0
+#: R/t.test.R:0 R/var.test.R:0 R/wilcox.test.R:0 R/xtabs.R:0
 msgid "'formula' missing or incorrect"
 msgstr "'formula'가 누락되었거나 잘못되었습니다"
-
-#. R/cor.test.R: stop("'formula' missing or invalid")
-#: R/cor.test.R:0
-msgid "'formula' missing or invalid"
-msgstr "'formula'가 누락되었거나 유효하지 않습니다"
 
 #. R/ftable.R: stop("'formula' must have both left and right hand sides")
 #: R/ftable.R:0
@@ -1325,11 +1339,6 @@ msgstr ""
 msgid "Barrier algorithm ran out of iterations and did not converge"
 msgstr "Barrier 알고리즘이 주어진 최대반복수에 도달했으므로 수렴하지 않습니다"
 
-#. R/cor.test.R: warning("Cannot compute exact p-value with ties")
-#: R/cor.test.R:0
-msgid "Cannot compute exact p-value with ties"
-msgstr "tie때문에 정확한 p값을 계산할 수 없습니다"
-
 #. R/chisq.test.R: warning("Chi-squared approximation may be incorrect")
 #. R/prop.test.R: warning("Chi-squared approximation may be incorrect")
 #: R/chisq.test.R:0 R/prop.test.R:0
@@ -1376,6 +1385,11 @@ msgstr "F 테스트는 quasi%s 페밀리를 가정합니다"
 msgid "Initializing %s to '1.'."
 msgstr ""
 
+#. R/free1way.R: gettextf("Jeffreys penalisation was applied in %s because initial optimisation failed with:",     "free1way")
+#: R/free1way.R:0
+msgid "Jeffreys penalisation was applied in %s because initial optimisation failed with:"
+msgstr ""
+
 #. R/arima.R: warning("MA part of model is not invertible")
 #. R/arma0.R: warning("MA part of model is not invertible")
 #: R/arima.R:0 R/arma0.R:0
@@ -1397,18 +1411,14 @@ msgstr ""
 msgid "NA values not allowed in 'd'"
 msgstr "NA값들은 'd'에서 사용할 수 없습니다"
 
-#. R/friedman.test.R: stop("NA's are not allowed in 'groups' or 'blocks'")
-#: R/friedman.test.R:0
-msgid "NA's are not allowed in 'groups' or 'blocks'"
-msgstr "NA는 'groups' 또는 'blocks'내에서 허용되지 않습니다"
-
 #. R/mantelhaen.test.R: stop("NAs are not allowed")
 #: R/mantelhaen.test.R:0
 msgid "NAs are not allowed"
 msgstr "NA를 사용할 수 없습니다"
 
+#. R/friedman.test.R: stop("NAs are not allowed in 'groups' or 'blocks'")
 #. R/quade.test.R: stop("NAs are not allowed in 'groups' or 'blocks'")
-#: R/quade.test.R:0
+#: R/friedman.test.R:0 R/quade.test.R:0
 #, fuzzy
 msgid "NAs are not allowed in 'groups' or 'blocks'"
 msgstr "NA는 'groups' 또는 'blocks'내에서 허용되지 않습니다"
@@ -1516,11 +1526,6 @@ msgstr "projection을 허용하도록 모델을 재적합합니다"
 #: R/confint.R:0
 msgid "Reprofiling for %s  statistic. Waiting..."
 msgstr ""
-
-#. R/wilcox.test.R: warning("Requested conf.level not achievable")
-#: R/wilcox.test.R:0
-msgid "Requested conf.level not achievable"
-msgstr "수행할 수 없는 conf.level의 값이 주어졌습니다."
 
 #. R/model.tables.R: gettextf("SEs for type '%s' are not yet implemented", type)
 #: R/model.tables.R:0
@@ -1751,6 +1756,17 @@ msgstr "prediction variance는 모델적합시 사용된 가중치의 역수에 
 msgid "at least one entry of 'x' must be positive"
 msgstr "'x'의 항목들중 적어도 한개는 양수이어야 합니다"
 
+#. R/free1way.R: stop("at least two groups required")
+#: R/free1way.R:0
+#, fuzzy
+msgid "at least two groups required"
+msgstr "양변을 가진 formula가 필요합니다"
+
+#. R/free1way.R: stop("at least two response categories required")
+#: R/free1way.R:0
+msgid "at least two response categories required"
+msgstr ""
+
 #. R/smooth.R: stop("attempt to smooth NA values")
 #: R/smooth.R:0
 msgid "attempt to smooth NA values"
@@ -1877,14 +1893,28 @@ msgstr "confidence set을 계산할 수 없어 NA를 돌려줍니다"
 msgid "cannot compute estimate, returning NA"
 msgstr "추정치를 계산할 수 없어 NA를 반환합니다"
 
-#. R/ansari.test.R: warning("cannot compute exact confidence intervals with ties")
+#. R/ansari.test.R: warning("cannot compute exact confidence interval with ties")
 #: R/ansari.test.R:0
-msgid "cannot compute exact confidence intervals with ties"
+#, fuzzy
+msgid "cannot compute exact confidence interval with ties"
 msgstr "tie가 있어 정확한 신뢰구간을 계산할 수 없습니다"
 
 #. R/ansari.test.R: warning("cannot compute exact p-value with ties")
-#: R/ansari.test.R:0
+#. R/cor.test.R: warning("cannot compute exact p-value with ties")
+#: R/ansari.test.R:0 R/cor.test.R:0
 msgid "cannot compute exact p-value with ties"
+msgstr "tie가 있어 정확한 p값을 계산할 수 없습니다"
+
+#. R/free1way.R: gettextf("cannot compute exact permutation distribution in %s",     "free1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "cannot compute exact permutation distribution in %s"
+msgstr "tie가 있어 정확한 p값을 계산할 수 없습니다"
+
+#. R/free1way.R: gettextf("cannot compute one-sided p-values in %s", "free1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "cannot compute one-sided p-values in %s"
 msgstr "tie가 있어 정확한 p값을 계산할 수 없습니다"
 
 #. R/chisq.test.R: warning("cannot compute simulated p-value with zero marginals")
@@ -1917,6 +1947,11 @@ msgstr "level없이 모델들을 적합할 수 없습니다 ('alpha'는 반드�
 #: R/cor.R:0
 msgid "cannot handle 'pairwise.complete.obs'"
 msgstr "'pairwise.complete.obs'를 처리할 수 없습니다"
+
+#. R/free1way.R: gettextf("cannot have both a 'Surv()' response and an 'event' argument in %s",     "free1way")
+#: R/free1way.R:0
+msgid "cannot have both a 'Surv()' response and an 'event' argument in %s"
+msgstr ""
 
 #. R/ts.R: stop("cannot plot more than 10 series as \"multiple\"")
 #: R/ts.R:0
@@ -2117,6 +2152,11 @@ msgstr "'%s'의 각 구성요소는 논리값이어야 합니다"
 msgid "eff.aovlist: non-orthogonal contrasts would give an incorrect answer"
 msgstr ""
 
+#. R/free1way.R: gettextf("effect size can only be computed for two-sample problems in %s",     "power.free1way.test")
+#: R/free1way.R:0
+msgid "effect size can only be computed for two-sample problems in %s"
+msgstr ""
+
 #. R/cmdscale.R: warning("eig=TRUE is disregarded when list.=FALSE")
 #: R/cmdscale.R:0
 msgid "eig=TRUE is disregarded when list.=FALSE"
@@ -2163,6 +2203,11 @@ msgstr ""
 msgid "empty model supplied"
 msgstr "주어진 모델이 없습니다."
 
+#. R/free1way.R: gettextf("error computing the Hessian in %s", "free1way")
+#: R/free1way.R:0
+msgid "error computing the Hessian in %s"
+msgstr ""
+
 #. R/lm.R: warning("essentially perfect fit: summary may be unreliable")
 #: R/lm.R:0
 msgid "essentially perfect fit: summary may be unreliable"
@@ -2172,6 +2217,12 @@ msgstr ""
 #: R/power.anova.test.R:0
 msgid "exactly one of 'groups', 'n', 'between.var', 'within.var', 'power', and 'sig.level' must be NULL"
 msgstr "'groups', 'n', 'between.var', 'within.var', 'power', 그리고 'sig.level' 중 하나는 반드시 NULL이어야 합니다"
+
+#. R/free1way.R: stop("exactly one of 'n', 'delta', 'power', and 'sig.level' must be NULL")
+#: R/free1way.R:0
+#, fuzzy
+msgid "exactly one of 'n', 'delta', 'power', and 'sig.level' must be NULL"
+msgstr "'n', 'delta', 'sd', 'power', 그리고 'sig.level' 중의 하나는 반드시 NULL이어야 합니다"
 
 #. R/power.R: stop("exactly one of 'n', 'delta', 'sd', 'power', and 'sig.level' must be NULL")
 #: R/power.R:0
@@ -2217,6 +2268,12 @@ msgstr "factor analysis는 오로지 수치형 변수들에만 적용됩니다"
 #: R/factanal.R:0
 msgid "factor analysis requires at least three variables"
 msgstr "factor analysis는 최소 3개의 변수들을 필요로 합니다"
+
+#. R/free1way.R: gettextf("failed to compute confidence interval in %s", "confint.free1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "failed to compute confidence interval in %s"
+msgstr "tie가 있어 정확한 신뢰구간을 계산할 수 없습니다"
 
 #. R/reshape.R: stop("failed to guess time-varying variables from their names")
 #: R/reshape.R:0
@@ -2335,6 +2392,11 @@ msgstr "prior weights를 무시합니다"
 msgid "incompatible dimensions"
 msgstr ""
 
+#. R/free1way.R: gettextf("incompatible length of argument 'mu' in %s", "free1way")
+#: R/free1way.R:0
+msgid "incompatible length of argument 'mu' in %s"
+msgstr ""
+
 #. R/ts.R: stop("inconsistent specification of 'ar' order")
 #: R/ts.R:0
 msgid "inconsistent specification of 'ar' order"
@@ -2345,6 +2407,17 @@ msgstr "'ar'의 순서에 일치하지 않는 지정입니다."
 msgid "inconsistent specification of 'ma' order"
 msgstr "'ma'의 순서에 일치하지 않는 지정입니다."
 
+#. R/free1way.R: gettextf("incorrect argument 'groups' in %s: at least two groups needed",     "free1way")
+#: R/free1way.R:0
+msgid "incorrect argument 'groups' in %s: at least two groups needed"
+msgstr ""
+
+#. R/free1way.R: stop("incorrect dimensions")
+#: R/free1way.R:0
+#, fuzzy
+msgid "incorrect dimensions"
+msgstr "'xi'의 차원이 잘못되었습니다"
+
 #. R/diffinv.R: stop("incorrect dimensions for 'xi'")
 #: R/diffinv.R:0
 msgid "incorrect dimensions for 'xi'"
@@ -2354,6 +2427,18 @@ msgstr "'xi'의 차원이 잘못되었습니다"
 #: R/binom.test.R:0
 msgid "incorrect length of 'x'"
 msgstr "'x'의 길이가 올바르지 않습니다"
+
+#. R/free1way.R: gettextf("incorrect number of columns for 'prob' in %s", "rfree1way")
+#: R/free1way.R:0
+#, fuzzy
+msgid "incorrect number of columns for 'prob' in %s"
+msgstr "'x'에 있는 열의 개수가 잘못되었습니다"
+
+#. R/free1way.R: gettextf("incorrect specification for '%s'", "formula")
+#: R/free1way.R:0
+#, fuzzy
+msgid "incorrect specification for '%s'"
+msgstr "'col.vars' 지정이 잘못되었습니다"
 
 #. R/ftable.R: stop("incorrect specification for 'col.vars'")
 #: R/ftable.R:0
@@ -2473,6 +2558,18 @@ msgstr "유효하지 않은 'tree'입니다 ('merge'요소입니다)"
 #: R/dendrogram.R:0
 msgid "invalid (length 0) node in dendrogram"
 msgstr "덴드로그램내에 유효하지 않은 길이가 0인 노드가 있습니다"
+
+#. R/free1way.R: gettextf("invalid argument '%s'", "x")
+#. R/free1way.R: gettextf("invalid argument '%s'", "fix")
+#. R/free1way.R: gettextf("invalid argument '%s'", "alloc_ratio")
+#. R/free1way.R: gettextf("invalid argument '%s'", "strata_ratio")
+#. R/free1way.R: gettextf("invalid argument '%s'", "n")
+#. R/free1way.R: gettextf("invalid argument '%s'", "c")
+#. R/free1way.R: gettextf("invalid argument '%s'", "r")
+#: R/free1way.R:0
+#, fuzzy
+msgid "invalid argument '%s'"
+msgstr "유효하지 않은 인자 'n'입니다"
 
 #. R/nls-profile.R: stop("invalid argument to 'getProfile'")
 #: R/nls-profile.R:0
@@ -3503,6 +3600,11 @@ msgstr ""
 msgid "penalty must be numeric and > 0"
 msgstr "'y'는 반드시 수치형이어야 합니다"
 
+#. R/free1way.R: gettextf("permutation confidence intervals only available for 2-sample comparisons in %s",     "confint.free1way")
+#: R/free1way.R:0
+msgid "permutation confidence intervals only available for 2-sample comparisons in %s"
+msgstr ""
+
 #. R/pairwise.R: stop("pooling of SD is incompatible with paired tests")
 #: R/pairwise.R:0
 msgid "pooling of SD is incompatible with paired tests"
@@ -4274,6 +4376,11 @@ msgstr "control에 다음과 같은 알 수 없는 이름이 있습니다:"
 msgid "unknown string value for s.window"
 msgstr "s.window에 알수없는 문자열 값입니다"
 
+#. R/free1way.R: gettextf("unsuccessful optimisation in %s", "free1way")
+#: R/free1way.R:0
+msgid "unsuccessful optimisation in %s"
+msgstr ""
+
 #. R/nls.R: warning("upper and lower bounds ignored unless 'algorithm = \"port\"'")
 #: R/nls.R:0
 #, fuzzy
@@ -4596,6 +4703,18 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 
+#~ msgid "'formula' missing or invalid"
+#~ msgstr "'formula'가 누락되었거나 유효하지 않습니다"
+
+#~ msgid "Cannot compute exact p-value with ties"
+#~ msgstr "tie때문에 정확한 p값을 계산할 수 없습니다"
+
+#~ msgid "NA's are not allowed in 'groups' or 'blocks'"
+#~ msgstr "NA는 'groups' 또는 'blocks'내에서 허용되지 않습니다"
+
+#~ msgid "Requested conf.level not achievable"
+#~ msgstr "수행할 수 없는 conf.level의 값이 주어졌습니다."
+
 #~ msgid "columns of 'contrast.obj' must define a contrast(sum to zero)"
 #~ msgstr "'contrast.obj'의 열들은 반드시 합이 0이 되도록 constrast를 정의해야 합니다"
 
@@ -4655,9 +4774,6 @@ msgstr[0] ""
 
 #~ msgid "'formula' missing"
 #~ msgstr "'formula'가 없습니다"
-
-#~ msgid "invalid argument 'n'"
-#~ msgstr "유효하지 않은 인자 'n'입니다"
 
 #~ msgid "invalid argument 'r'"
 #~ msgstr "유효하지 않은 인자 'r'입니다"

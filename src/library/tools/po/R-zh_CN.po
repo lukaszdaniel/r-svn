@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -190,11 +190,6 @@ msgstr "***程序包'%s'里的Built域坏了***"
 #: R/utils.R:0
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr ""
-
-#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
-#: R/RdHelpers.R:0
-msgid ","
-msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -445,11 +440,6 @@ msgstr "编码: %s"
 #, fuzzy
 msgid "Codoc mismatches from Rd file '%s':"
 msgstr "使用文档对象'%s'里的Codoc配合错误:"
-
-#. R/testing.R: gettextf("  Comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
-#: R/testing.R:0
-msgid "Comparing %s to %s ..."
-msgstr "比较%s和%s"
 
 #. R/Rd2pdf.R: message("Converting Rd files to LaTeX ...")
 #: R/Rd2pdf.R:0
@@ -784,12 +774,6 @@ msgstr "执照文件指示器无效：%s"
 #, fuzzy
 msgid "Invalid package aliases in Rd file '%s':"
 msgstr "变量'%s'里有不可便携的标志:"
-
-#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
-#: R/Rd2HTML.R:0
-#, fuzzy
-msgid "Invalid value of 'toc_entries'"
-msgstr "'%s'值无效：%s"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -1241,17 +1225,17 @@ msgstr "Rd文件不能有重复的别名'%s':"
 msgid "Rd files with duplicated name '%s':"
 msgstr "有重复名称'%s'的Rd文件:"
 
+#. R/QC.R: gettextf("Rd files without %s:", paste0("\\", section))
+#: R/QC.R:0
+#, fuzzy
+msgid "Rd files without %s:"
+msgstr "Rd文件内没有'%s':"
+
 #. R/QC.R: gettext("Rd files without \\alias:")
 #: R/QC.R:0
 #, fuzzy
 msgid "Rd files without \\alias:"
 msgstr "Rd文件内没有'%s':"
-
-#. R/QC.R: gettext("Rd files without \\description:")
-#: R/QC.R:0
-#, fuzzy
-msgid "Rd files without \\description:"
-msgstr "Rd文件内有空的段:"
 
 #. R/Rd.R: gettextf("Rd macro package '%s' is not installed.", p)
 #: R/Rd.R:0
@@ -1391,6 +1375,11 @@ msgstr "不能对缺省JSS式样进行修改"
 msgid "The package 'dir' argument must be of length 1"
 msgstr "参数'package'的长度必需为一"
 
+#. R/packages.R: stop("There is no binary type for this build of R.")
+#: R/packages.R:0
+msgid "There is no binary type for this build of R."
+msgstr ""
+
 #. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
 msgid "These fields must have ASCII values."
@@ -1451,11 +1440,6 @@ msgstr "未公开的编码对象:"
 #: R/QC.R:0
 msgid "Undocumented data sets:"
 msgstr "未公开的数据集:"
-
-#. R/Rd2HTML.R: warning("Unexpected jump in section level")
-#: R/Rd2HTML.R:0
-msgid "Unexpected jump in section level"
-msgstr ""
 
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
@@ -1608,11 +1592,6 @@ msgstr ""
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
-msgstr ""
-
-#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
-#: R/RdHelpers.R:0
-msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -1929,6 +1908,12 @@ msgstr ""
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
 msgstr ""
 
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "程序包无效."
+
 #. R/sha256.R: stop("invalid hex string")
 #: R/sha256.R:0
 msgid "invalid hex string"
@@ -1944,14 +1929,10 @@ msgstr "程序包无效."
 msgid "invalid package layout"
 msgstr "程序包布局无效"
 
-#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-#: R/install.R:0
-msgid "invalid value %s for R_CROSS_BUILD"
-msgstr ""
-
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
+#. R/install.R: gettextf("invalid value for '%s' : %s", "R_CROSS_BUILD", sQuote(cross))
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
-#: R/RdConv2.R:0 R/makeLazyLoad.R:0
+#: R/RdConv2.R:0 R/install.R:0 R/makeLazyLoad.R:0
 msgid "invalid value for '%s' : %s"
 msgstr "'%s'值无效：%s"
 
@@ -2673,6 +2654,20 @@ msgstr[0] "不能用多个数据调用来产生对象%s"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码%s行%s"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "Comparing %s to %s ..."
+#~ msgstr "比较%s和%s"
+
+#, fuzzy
+#~ msgid "Invalid value of 'toc_entries'"
+#~ msgstr "'%s'值无效：%s"
+
+#, fuzzy
+#~ msgid "Rd files without \\description:"
+#~ msgstr "Rd文件内有空的段:"
 
 #~ msgid "downloading %s ..."
 #~ msgstr "下载%s。。。"

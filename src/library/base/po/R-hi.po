@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28\n"
+"POT-Creation-Date: 2026-03-07 16:58\n"
 "PO-Revision-Date: 2025-07-06 15:02+0200\n"
 "Last-Translator: Ayush Bipin Patel <ayush.ap58@gmail.com>\n"
 "Language-Team: none\n"
@@ -597,6 +597,11 @@ msgstr ""
 msgid "'scale' should be numeric or NULL"
 msgstr ""
 
+#. R/match.R: stop("'several.ok' must be logical or a string starting with \"all\"")
+#: R/match.R:0
+msgid "'several.ok' must be logical or a string starting with \"all\""
+msgstr ""
+
 #. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
 msgid "'subset' must be logical"
@@ -667,9 +672,9 @@ msgstr ""
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr ""
 
-#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#. R/namespace.R: stop("'versionCheck' must be NULL or a list with components 'op' and 'version'")
 #: R/namespace.R:0
-msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
+msgid "'versionCheck' must be NULL or a list with components 'op' and 'version'"
 msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
@@ -2476,6 +2481,11 @@ msgstr ""
 #. R/conditions.R: sprintf("pushing duplicate '%s' handler on top of the stack",     class)
 #: R/conditions.R:0
 msgid "pushing duplicate '%s' handler on top of the stack"
+msgstr ""
+
+#. R/summary.R: warning("quantile.type not in {1, 3} for <raw>")
+#: R/summary.R:0
+msgid "quantile.type not in {1, 3} for <raw>"
 msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -383,6 +383,11 @@ msgstr "利用可能な環境は以下の呼び出しを含んでいました:"
 #: R/debugger.R:0
 msgid "Browsing in the environment with call:"
 msgstr "以下の呼び出しに伴う環境でブラウジング:"
+
+#. R/unix/mac.install.R: stop("Built: value is not a string")
+#: R/unix/mac.install.R:0
+msgid "Built: value is not a string"
+msgstr ""
 
 #. R/askYesNo.R: c("Yes", "No", "Cancel")
 #: R/askYesNo.R:0
@@ -959,6 +964,11 @@ msgstr "少なくとも一つのベクトル要素が必要です"
 msgid "attempt to set '%s' ignored"
 msgstr "'%s' への変更の試みは無視されました"
 
+#. R/unix/mac.install.R: gettextf("binary package %s is not compatible with this build of R",     sQuote(pkg))
+#: R/unix/mac.install.R:0
+msgid "binary package %s is not compatible with this build of R"
+msgstr ""
+
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -1032,17 +1042,11 @@ msgstr "S4 メソッドはまだ扱うことができません"
 msgid "cannot install Windows binary packages on this platform"
 msgstr "Windows バイナリのパッケージをこのプラットフォームにインストールすることはできません"
 
-#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#. R/packages2.R: stop("cannot install binary packages from other operating systems on Windows")
 #: R/packages2.R:0
 #, fuzzy
-msgid "cannot install macOS binary packages on Windows"
+msgid "cannot install binary packages from other operating systems on Windows"
 msgstr "MacOS X バイナリのパッケージを Windows 上にインストールすることはできません"
-
-#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
-#: R/packages2.R:0
-#, fuzzy
-msgid "cannot install macOS binary packages on this platform"
-msgstr "MacOS X バイナリのパッケージをこのプラットフォームにインストールすることはできません"
 
 #. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
@@ -1213,10 +1217,10 @@ msgstr "ディレクトリ %s を作ることが出来ません"
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr ""
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
 #, fuzzy
-msgid "file %s is not a macOS binary package"
+msgid "file %s is not a binary package"
 msgstr "ファイル %s は OS X 用バイナリパッケージではありません"
 
 #. R/tar.R: gettextf("file '%s' did not have execute permissions: corrected",     f)
@@ -1351,7 +1355,6 @@ msgstr "パッケージ %s のインストールは、ゼロでない終了値�
 #. R/edit.R: gettextf("invalid '%s' argument", "x")
 #. R/help.R: gettextf("invalid '%s' argument", "file")
 #. R/packages.R: gettextf("invalid '%s' argument", "filters")
-#. R/packages.R: gettextf("invalid '%s' argument", "type")
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
@@ -1408,6 +1411,12 @@ msgstr "不正な長さの 'row.names'"
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 msgid "invalid 'row.names' specification"
 msgstr "不正な 'row.names' 指定"
+
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "不正な問い合わせ"
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -2302,6 +2311,10 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "パッケージ %s が利用できません (%s)"
 
+#, fuzzy
+#~ msgid "cannot install macOS binary packages on this platform"
+#~ msgstr "MacOS X バイナリのパッケージをこのプラットフォームにインストールすることはできません"
+
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "不正な 'filter' 引数"
 
@@ -2316,10 +2329,6 @@ msgstr[0] "パッケージ %s が利用できません (%s)"
 
 #~ msgid "invalid 'filters' argument."
 #~ msgstr "不正な 'filters' 引数"
-
-#, fuzzy
-#~ msgid "invalid 'type'"
-#~ msgstr "不正な問い合わせ"
 
 #, fuzzy
 #~ msgid "mirror non-interactively"

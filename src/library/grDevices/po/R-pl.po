@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:49\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
 #: R/pictex.R:0
@@ -195,9 +195,9 @@ msgstr ""
 "Dostępne urządzenia to:\n"
 "%s"
 
-#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+#. R/glyph.R: stop("Axis names must be 4 ASCII letters long")
 #: R/glyph.R:0
-msgid "Axis names must 4 ASCII letters long"
+msgid "Axis names must be 4 ASCII letters long"
 msgstr "Nazwy osi muszą mieć długość 4 liter ASCII"
 
 #. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")

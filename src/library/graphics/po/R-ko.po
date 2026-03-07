@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-08-08 09:52\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 15:29+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -99,7 +99,9 @@ msgstr "'figs'는 최소 1개의 스크린을 반드시 지정해야 합니다"
 
 #. R/barplot.R: stop("'formula' missing or incorrect")
 #. R/boxplot.R: stop("'formula' missing or incorrect")
-#: R/barplot.R:0 R/boxplot.R:0
+#. R/stripchart.R: stop("'formula' missing or incorrect")
+#. R/sunflowerplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0 R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "'formula' missing or incorrect"
 msgstr "'formula'가 없거나 잘못되었습니다"
 
@@ -398,12 +400,6 @@ msgstr ""
 msgid "exactly one symbol type must be specified"
 msgstr "반드시 하나의 심볼유형이 지정되어져야 합니다"
 
-#. R/stripchart.R: stop("formula missing or incorrect")
-#. R/sunflowerplot.R: stop("formula missing or incorrect")
-#: R/stripchart.R:0 R/sunflowerplot.R:0
-msgid "formula missing or incorrect"
-msgstr "formula가 누락되었거나 잘못되었습니다"
-
 #. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
 #: R/barplot.R:0
 #, fuzzy
@@ -698,6 +694,17 @@ msgstr ""
 msgid "only using the first two of %d regression coefficients"
 msgstr "%d개의 회귀계수들중에서 첫번째 두개만이 사용됩니다"
 
+#. R/boxplot.R: warning("panel.first ignored, it is not a function")
+#: R/boxplot.R:0
+msgid "panel.first ignored, it is not a function"
+msgstr ""
+
+#. R/boxplot.R: warning("panel.last ignored, it is not a function")
+#: R/boxplot.R:0
+#, fuzzy
+msgid "panel.last ignored, it is not a function"
+msgstr "'breaks'가 벡터가 아니므로 'include.lowest'는 무시됩니다"
+
 #. R/plot.R: gettextf("plot type '%s' will be truncated to first character",     type)
 #: R/plot.R:0
 msgid "plot type '%s' will be truncated to first character"
@@ -816,6 +823,9 @@ msgstr[0] "박스플랏 %2$d내에 이상값 (%1$s)가 그려지지 않았습니
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
 msgstr[0] ""
+
+#~ msgid "formula missing or incorrect"
+#~ msgstr "formula가 누락되었거나 잘못되었습니다"
 
 #~ msgid "invalid 'axp'"
 #~ msgstr "유효한 'axp'가 아닙니다"

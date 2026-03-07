@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Joan Maspons <joanmaspons@gmail.com>\n"
 "Language-Team: none\n"
@@ -436,6 +436,11 @@ msgstr "Els entorns disponibles tenien trucades:"
 #, fuzzy
 msgid "Browsing in the environment with call:"
 msgstr "Navegant en l'entorn amb trucada:"
+
+#. R/unix/mac.install.R: stop("Built: value is not a string")
+#: R/unix/mac.install.R:0
+msgid "Built: value is not a string"
+msgstr ""
 
 #. R/askYesNo.R: c("Yes", "No", "Cancel")
 #: R/askYesNo.R:0
@@ -1101,6 +1106,11 @@ msgstr "es requereix almenys un element vectorial"
 msgid "attempt to set '%s' ignored"
 msgstr "s'ha ignorat l'intent d'establir «%s»"
 
+#. R/unix/mac.install.R: gettextf("binary package %s is not compatible with this build of R",     sQuote(pkg))
+#: R/unix/mac.install.R:0
+msgid "binary package %s is not compatible with this build of R"
+msgstr ""
+
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 #, fuzzy
@@ -1183,17 +1193,11 @@ msgstr "encara no es poden gestionar els mètodes S4"
 msgid "cannot install Windows binary packages on this platform"
 msgstr "no s'han pogut instal·lar els paquets binaris del Windows en aquesta plataforma"
 
-#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#. R/packages2.R: stop("cannot install binary packages from other operating systems on Windows")
 #: R/packages2.R:0
 #, fuzzy
-msgid "cannot install macOS binary packages on Windows"
+msgid "cannot install binary packages from other operating systems on Windows"
 msgstr "no s'han pogut instal·lar els paquets binaris macOS al Windows"
-
-#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
-#: R/packages2.R:0
-#, fuzzy
-msgid "cannot install macOS binary packages on this platform"
-msgstr "no es poden instal·lar els paquets binaris macOS en aquesta plataforma"
 
 #. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
@@ -1392,10 +1396,10 @@ msgstr "no s'ha pogut crear el directori %s"
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr "no s'ha pogut baixar el fitxer de rèpliques (%s); s'usarà el fitxer local «%s»"
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
 #, fuzzy
-msgid "file %s is not a macOS binary package"
+msgid "file %s is not a binary package"
 msgstr "el fitxer %s no és un paquet binari macOS"
 
 #. R/tar.R: gettextf("file '%s' did not have execute permissions: corrected",     f)
@@ -1547,7 +1551,6 @@ msgstr "la instal·lació del paquet %s té un estat de sortida diferent de zero
 #. R/edit.R: gettextf("invalid '%s' argument", "x")
 #. R/help.R: gettextf("invalid '%s' argument", "file")
 #. R/packages.R: gettextf("invalid '%s' argument", "filters")
-#. R/packages.R: gettextf("invalid '%s' argument", "type")
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
@@ -1612,6 +1615,12 @@ msgstr "la longitud de «row.names» no és vàlida"
 #, fuzzy
 msgid "invalid 'row.names' specification"
 msgstr "especificació «row.names» no vàlida"
+
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "«type» no vàlid"
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -2690,6 +2699,10 @@ msgstr[0] "el paquet %s no està disponible %s"
 msgstr[1] "els paquets %s no estan disponibles %s"
 
 #, fuzzy
+#~ msgid "cannot install macOS binary packages on this platform"
+#~ msgstr "no es poden instal·lar els paquets binaris macOS en aquesta plataforma"
+
+#, fuzzy
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Argument «filter» no vàlid."
 
@@ -2728,10 +2741,6 @@ msgstr[1] "els paquets %s no estan disponibles %s"
 #, fuzzy
 #~ msgid "invalid 'filters' argument."
 #~ msgstr "argument «filters» no vàlid."
-
-#, fuzzy
-#~ msgid "invalid 'type'"
-#~ msgstr "«type» no vàlid"
 
 #, fuzzy
 #~ msgid "cannot choose a"

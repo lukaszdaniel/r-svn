@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29+0100\n"
+"POT-Creation-Date: 2026-03-07 16:59+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -68,12 +68,12 @@ msgstr "nierozpoznane określenie '%s' formatu"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "co najwyżej jedna gwiazdka '*' jest wspierana w każdym określeniu zamiany"
 
-#: gramLatex.cpp:2848 gramRd.cpp:3966
+#: gramLatex.cpp:2848 gramRd.cpp:3965
 #, c-format
 msgid "Buffer size too large to double safely at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2851 gramRd.cpp:3969
+#: gramLatex.cpp:2851 gramRd.cpp:3968
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "nie można przydzielić bufora dla długiego tekstu w linii %d"
@@ -87,58 +87,58 @@ msgstr "nie można przydzielić bloku pamięci w PushState"
 msgid "invalid '%s' value"
 msgstr "niepoprawna wartość '%s'"
 
-#: gramRd.cpp:2581 gramRd.cpp:2584
+#: gramRd.cpp:2579 gramRd.cpp:2582
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "błędne oznakowanie (dodatkowa spacja?) w %s:%d:%d"
 
-#: gramRd.cpp:3118
+#: gramRd.cpp:3116
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "Makro '%s' zostało już poprzednio zdefiniowane."
 
-#: gramRd.cpp:3128
+#: gramRd.cpp:3126
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "Co najwyżej 4 argumenty są dozwolone dla makr zdefiniowanych przez użytkownika."
 
-#: gramRd.cpp:3170
+#: gramRd.cpp:3168
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "Brak makra zdefiniowanego dla '%s'."
 
-#: gramRd.cpp:3187 gramRd.cpp:3202
+#: gramRd.cpp:3185 gramRd.cpp:3200
 msgid "internal error: invalid argument to xxusermacro"
 msgstr "błąd wewnętrzny: niepoprawny argument przekazany do xxusermacro"
 
-#: gramRd.cpp:3231
+#: gramRd.cpp:3229
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "Zbyt mało argumentów przekazanych do makra '%s' użytkownika"
 
-#: gramRd.cpp:3290
+#: gramRd.cpp:3288
 msgid "internal error: inconsistent argument count"
 msgstr "błąd wewnętrzny: niezgodna liczba argumentów"
 
-#: gramRd.cpp:3371 gramRd.cpp:3375
+#: gramRd.cpp:3369 gramRd.cpp:3373
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "nowa linia wewnątrz cytowanego ciągu znaków w %s:%d"
 
-#: gramRd.cpp:3394
+#: gramRd.cpp:3392
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "nie można przydzielić bufora dla długiego makra w linii %d"
 
-#: gramRd.cpp:3424
+#: gramRd.cpp:3422
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "makra są zagnieżdżone zbyt głęboko: nieskończona rekurencja?"
 
-#: gramRd.cpp:3830
+#: gramRd.cpp:3829
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "Nie można znaleźć makra %s"
 
-#: gramRd.cpp:4030
+#: gramRd.cpp:4029
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "Nieoczekiwane zakończenie wejścia (w %c cytowanym ciągu znaków otwartym w %s:%d:%d)"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -381,6 +381,11 @@ msgstr "Доступные окружения имеют вызовы:"
 #: R/debugger.R:0
 msgid "Browsing in the environment with call:"
 msgstr "Просмотр окружения с вызовом:"
+
+#. R/unix/mac.install.R: stop("Built: value is not a string")
+#: R/unix/mac.install.R:0
+msgid "Built: value is not a string"
+msgstr ""
 
 #. R/askYesNo.R: c("Yes", "No", "Cancel")
 #: R/askYesNo.R:0
@@ -951,6 +956,11 @@ msgstr "нужен по крайней мере один векторный эл
 msgid "attempt to set '%s' ignored"
 msgstr "попытка установить '%s' пропущена"
 
+#. R/unix/mac.install.R: gettextf("binary package %s is not compatible with this build of R",     sQuote(pkg))
+#: R/unix/mac.install.R:0
+msgid "binary package %s is not compatible with this build of R"
+msgstr ""
+
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -1023,15 +1033,11 @@ msgstr "пока не могу работать с методами S4"
 msgid "cannot install Windows binary packages on this platform"
 msgstr "не могу установить бинарные пакеты Windows на этой платформе"
 
-#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#. R/packages2.R: stop("cannot install binary packages from other operating systems on Windows")
 #: R/packages2.R:0
-msgid "cannot install macOS binary packages on Windows"
+#, fuzzy
+msgid "cannot install binary packages from other operating systems on Windows"
 msgstr "не могу установить бинарные пакеты macOS под Windows"
-
-#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
-#: R/packages2.R:0
-msgid "cannot install macOS binary packages on this platform"
-msgstr "не могу установить бинарные пакеты  macOS на этой платформе"
 
 #. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
@@ -1202,9 +1208,10 @@ msgstr "не могу создать каталог %s"
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr "не удалось скачать файл зеркал (%s); использую локальный файл '%s'"
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
-msgid "file %s is not a macOS binary package"
+#, fuzzy
+msgid "file %s is not a binary package"
 msgstr "файл %s -- не бинарный пакет macOS"
 
 #. R/tar.R: gettextf("file '%s' did not have execute permissions: corrected",     f)
@@ -1334,7 +1341,6 @@ msgstr "установка пакета %s имеет ненулевой ста�
 #. R/edit.R: gettextf("invalid '%s' argument", "x")
 #. R/help.R: gettextf("invalid '%s' argument", "file")
 #. R/packages.R: gettextf("invalid '%s' argument", "filters")
-#. R/packages.R: gettextf("invalid '%s' argument", "type")
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
@@ -1391,6 +1397,11 @@ msgstr "неправильная длина 'row.names'"
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 msgid "invalid 'row.names' specification"
 msgstr "неправильное указание 'row.names'"
+
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+msgid "invalid 'type'"
+msgstr "неправильный 'type'"
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -2358,6 +2369,9 @@ msgstr[0] "пакет '%s' недоступен (%s)"
 msgstr[1] "пакеты %s недоступны (%s)"
 msgstr[2] "пакеты %s недоступны (%s)"
 
+#~ msgid "cannot install macOS binary packages on this platform"
+#~ msgstr "не могу установить бинарные пакеты  macOS на этой платформе"
+
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "Неправильный аргумент 'filter'."
 
@@ -2388,9 +2402,6 @@ msgstr[2] "пакеты %s недоступны (%s)"
 
 #~ msgid "invalid 'filters' argument."
 #~ msgstr "неправильный аргумент 'filter'."
-
-#~ msgid "invalid 'type'"
-#~ msgstr "неправильный 'type'"
 
 #~ msgid "cannot choose a"
 #~ msgstr "не могу выбрать"

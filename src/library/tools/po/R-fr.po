@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:08+0200\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -183,11 +183,6 @@ msgstr "*** quelqu'un a corrompu le champ 'Built' dans le package '%s' ***"
 #: R/utils.R:0
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr ""
-
-#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
-#: R/RdHelpers.R:0
-msgid ","
-msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -427,11 +422,6 @@ msgstr "Code : %s"
 #, fuzzy
 msgid "Codoc mismatches from Rd file '%s':"
 msgstr "Erreurs 'codoc' pour la documentation de l'objet '%s' :"
-
-#. R/testing.R: gettextf("  Comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
-#: R/testing.R:0
-msgid "Comparing %s to %s ..."
-msgstr "Comparaison de %s à %s ..."
 
 #. R/Rd2pdf.R: message("Converting Rd files to LaTeX ...")
 #: R/Rd2pdf.R:0
@@ -757,12 +747,6 @@ msgstr "Pointeur de fichier licence incorrect : %s"
 #, fuzzy
 msgid "Invalid package aliases in Rd file '%s':"
 msgstr "Indicateur non portable dans le fichier '%s' :"
-
-#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
-#: R/Rd2HTML.R:0
-#, fuzzy
-msgid "Invalid value of 'toc_entries'"
-msgstr "valeur inexacte pour '%s' : %s"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -1208,16 +1192,16 @@ msgstr "Fichiers Rd avec alias '%s' dupliqué :"
 msgid "Rd files with duplicated name '%s':"
 msgstr "Fichiers Rd avec nom dupliqué '%s' :"
 
+#. R/QC.R: gettextf("Rd files without %s:", paste0("\\", section))
+#: R/QC.R:0
+#, fuzzy
+msgid "Rd files without %s:"
+msgstr "Fichiers Rd avec alias '%s' dupliqué :"
+
 #. R/QC.R: gettext("Rd files without \\alias:")
 #: R/QC.R:0
 #, fuzzy
 msgid "Rd files without \\alias:"
-msgstr "Fichiers Rd avec alias '%s' dupliqué :"
-
-#. R/QC.R: gettext("Rd files without \\description:")
-#: R/QC.R:0
-#, fuzzy
-msgid "Rd files without \\description:"
 msgstr "Fichiers Rd avec alias '%s' dupliqué :"
 
 #. R/Rd.R: gettextf("Rd macro package '%s' is not installed.", p)
@@ -1358,6 +1342,11 @@ msgstr "Le style par défaut JSS ne peut être modifié."
 msgid "The package 'dir' argument must be of length 1"
 msgstr "L’argument du package 'dir' doit être de longueur 1"
 
+#. R/packages.R: stop("There is no binary type for this build of R.")
+#: R/packages.R:0
+msgid "There is no binary type for this build of R."
+msgstr ""
+
 #. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
 msgid "These fields must have ASCII values."
@@ -1418,11 +1407,6 @@ msgstr "Objets code non documentés :"
 #: R/QC.R:0
 msgid "Undocumented data sets:"
 msgstr "Jeux de données non documentés :"
-
-#. R/Rd2HTML.R: warning("Unexpected jump in section level")
-#: R/Rd2HTML.R:0
-msgid "Unexpected jump in section level"
-msgstr ""
 
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
@@ -1571,11 +1555,6 @@ msgstr "[dryrun mode] Dryrun terminé."
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
-msgstr ""
-
-#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
-#: R/RdHelpers.R:0
-msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -1890,6 +1869,12 @@ msgstr ""
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
 msgstr "un 'OS.type' incorrect \"%s\" est trouvé. Cela ne devrait pas se produire"
 
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "package incorrect"
+
 #. R/sha256.R: stop("invalid hex string")
 #: R/sha256.R:0
 msgid "invalid hex string"
@@ -1905,15 +1890,10 @@ msgstr "package incorrect"
 msgid "invalid package layout"
 msgstr "structure de package incorrecte"
 
-#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-#: R/install.R:0
-#, fuzzy
-msgid "invalid value %s for R_CROSS_BUILD"
-msgstr "pour R_CROSS_BUILD"
-
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
+#. R/install.R: gettextf("invalid value for '%s' : %s", "R_CROSS_BUILD", sQuote(cross))
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
-#: R/RdConv2.R:0 R/makeLazyLoad.R:0
+#: R/RdConv2.R:0 R/install.R:0 R/makeLazyLoad.R:0
 msgid "invalid value for '%s' : %s"
 msgstr "valeur inexacte pour '%s' : %s"
 
@@ -2670,6 +2650,24 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossible de réencoder %s ligne %s"
 msgstr[1] "impossible de réencoder %s lignes %s"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "Comparing %s to %s ..."
+#~ msgstr "Comparaison de %s à %s ..."
+
+#, fuzzy
+#~ msgid "Invalid value of 'toc_entries'"
+#~ msgstr "valeur inexacte pour '%s' : %s"
+
+#, fuzzy
+#~ msgid "Rd files without \\description:"
+#~ msgstr "Fichiers Rd avec alias '%s' dupliqué :"
+
+#, fuzzy
+#~ msgid "invalid value %s for R_CROSS_BUILD"
+#~ msgstr "pour R_CROSS_BUILD"
 
 #~ msgid "downloading %s ..."
 #~ msgstr "téléchargement de %s ..."

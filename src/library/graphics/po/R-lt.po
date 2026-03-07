@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-08-08 09:52\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 15:29+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -93,7 +93,9 @@ msgstr "'figs' turi nurodyti bent vieną ekraną"
 
 #. R/barplot.R: stop("'formula' missing or incorrect")
 #. R/boxplot.R: stop("'formula' missing or incorrect")
-#: R/barplot.R:0 R/boxplot.R:0
+#. R/stripchart.R: stop("'formula' missing or incorrect")
+#. R/sunflowerplot.R: stop("'formula' missing or incorrect")
+#: R/barplot.R:0 R/boxplot.R:0 R/stripchart.R:0 R/sunflowerplot.R:0
 msgid "'formula' missing or incorrect"
 msgstr "trūkstama 'formula' arba neteisinga"
 
@@ -392,12 +394,6 @@ msgstr "dubliuotos kategorinės reikšmės - pabandykite kitą formulę ar poaib
 msgid "exactly one symbol type must be specified"
 msgstr "turi būti nurodytas būtent vienas simbolio tipas"
 
-#. R/stripchart.R: stop("formula missing or incorrect")
-#. R/sunflowerplot.R: stop("formula missing or incorrect")
-#: R/stripchart.R:0 R/sunflowerplot.R:0
-msgid "formula missing or incorrect"
-msgstr "trūkstama arba neteisinga formulė"
-
 #. R/barplot.R: stop("formula must specify 1 or 2 categorical variables")
 #: R/barplot.R:0
 msgid "formula must specify 1 or 2 categorical variables"
@@ -692,6 +688,17 @@ msgstr "tik vienas stulpelis argumente 'pairs'"
 msgid "only using the first two of %d regression coefficients"
 msgstr "naudojami tik pirmi du %d regresijos koeficientai"
 
+#. R/boxplot.R: warning("panel.first ignored, it is not a function")
+#: R/boxplot.R:0
+msgid "panel.first ignored, it is not a function"
+msgstr ""
+
+#. R/boxplot.R: warning("panel.last ignored, it is not a function")
+#: R/boxplot.R:0
+#, fuzzy
+msgid "panel.last ignored, it is not a function"
+msgstr "'include.lowest' ignoruojamas kaip 'breaks' ir nėra vektorius"
+
 #. R/plot.R: gettextf("plot type '%s' will be truncated to first character",     type)
 #: R/plot.R:0
 msgid "plot type '%s' will be truncated to first character"
@@ -816,6 +823,9 @@ msgid_plural "arguments %s are not made use of"
 msgstr[0] "argumentas %s nėra sukurtas naudoti"
 msgstr[1] "argumentai %s nėra sukurti naudoti"
 msgstr[2] "argumentų %s nėra sukurta naudoti"
+
+#~ msgid "formula missing or incorrect"
+#~ msgstr "trūkstama arba neteisinga formulė"
 
 #~ msgid "invalid 'axp'"
 #~ msgstr "neteisinga 'axp'"

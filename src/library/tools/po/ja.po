@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29+0100\n"
+"POT-Creation-Date: 2026-03-07 16:59+0100\n"
 "PO-Revision-Date: 2025-07-06 16:07+0200\n"
 "Last-Translator: Masafumi\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -72,12 +72,12 @@ msgstr "識別不能なフォーマット指定 '%s' です"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "各変換指定に許されるアステリスク '*' は多くても一つです"
 
-#: gramLatex.cpp:2848 gramRd.cpp:3966
+#: gramLatex.cpp:2848 gramRd.cpp:3965
 #, c-format
 msgid "Buffer size too large to double safely at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2851 gramRd.cpp:3969
+#: gramLatex.cpp:2851 gramRd.cpp:3968
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "%d 行にある長い文字列のためのバッファを確保できませんでした"
@@ -92,58 +92,58 @@ msgstr "%d 行にある長い文字列のためのバッファを確保できま
 msgid "invalid '%s' value"
 msgstr "不正な '%s' 値です"
 
-#: gramRd.cpp:2581 gramRd.cpp:2584
+#: gramRd.cpp:2579 gramRd.cpp:2582
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr "%s:%d:%d に誤ったマークアップがあります (スペースが余計?)"
 
-#: gramRd.cpp:3118
+#: gramRd.cpp:3116
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr "マクロ '%s' は既に定義されています。"
 
-#: gramRd.cpp:3128
+#: gramRd.cpp:3126
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr "ユーザー定義のマクロに許されている引数の数は最大 4 つです"
 
-#: gramRd.cpp:3170
+#: gramRd.cpp:3168
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr "'%s' に対するマクロが定義されていません。"
 
-#: gramRd.cpp:3187 gramRd.cpp:3202
+#: gramRd.cpp:3185 gramRd.cpp:3200
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3231
+#: gramRd.cpp:3229
 #, fuzzy, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr "ユーザー定義のマクロに許されている引数の数は最大 4 つです"
 
-#: gramRd.cpp:3290
+#: gramRd.cpp:3288
 msgid "internal error: inconsistent argument count"
 msgstr ""
 
-#: gramRd.cpp:3371 gramRd.cpp:3375
+#: gramRd.cpp:3369 gramRd.cpp:3373
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "引用文字列の %s に改行:%d"
 
-#: gramRd.cpp:3394
+#: gramRd.cpp:3392
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
 msgstr "行 %d にある長いマクロに対するバッファを確保できません"
 
-#: gramRd.cpp:3424
+#: gramRd.cpp:3422
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "マクロが過剰に入れ子になっています: 無限な再帰？"
 
-#: gramRd.cpp:3830
+#: gramRd.cpp:3829
 #, c-format
 msgid "Unable to find macro %s"
 msgstr "マクロ %s を見つけることができません"
 
-#: gramRd.cpp:4030
+#: gramRd.cpp:4029
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr "予想外の入力の停止 (%c 引用文字列中の %s:%d:%d で開かれた)"

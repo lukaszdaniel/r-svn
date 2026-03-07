@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:49\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 15:33+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -198,9 +198,9 @@ msgstr ""
 "利用可能なデバイスは以下の通りです:\n"
 "%s"
 
-#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+#. R/glyph.R: stop("Axis names must be 4 ASCII letters long")
 #: R/glyph.R:0
-msgid "Axis names must 4 ASCII letters long"
+msgid "Axis names must be 4 ASCII letters long"
 msgstr ""
 
 #. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-12-27 18:31+0100\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -372,6 +372,11 @@ msgstr "Dostępne środowiska miały wywołania:"
 #: R/debugger.R:0
 msgid "Browsing in the environment with call:"
 msgstr "Przeglądanie w środowisku z wywołaniem:"
+
+#. R/unix/mac.install.R: stop("Built: value is not a string")
+#: R/unix/mac.install.R:0
+msgid "Built: value is not a string"
+msgstr ""
 
 #. R/askYesNo.R: c("Yes", "No", "Cancel")
 #: R/askYesNo.R:0
@@ -940,6 +945,11 @@ msgstr "przynajmniej jeden element wektora jest wymagany"
 msgid "attempt to set '%s' ignored"
 msgstr "próba ustawienia '%s' została zignorowana"
 
+#. R/unix/mac.install.R: gettextf("binary package %s is not compatible with this build of R",     sQuote(pkg))
+#: R/unix/mac.install.R:0
+msgid "binary package %s is not compatible with this build of R"
+msgstr ""
+
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -1010,15 +1020,11 @@ msgstr "jeszcze nie można obsłużyć metod S4"
 msgid "cannot install Windows binary packages on this platform"
 msgstr "nie można zainstalować pakietów binarnych dla systemu Windows na tej platformie"
 
-#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#. R/packages2.R: stop("cannot install binary packages from other operating systems on Windows")
 #: R/packages2.R:0
-msgid "cannot install macOS binary packages on Windows"
+#, fuzzy
+msgid "cannot install binary packages from other operating systems on Windows"
 msgstr "nie można zainstalować pakietów binarnych dla macOS w systemie Windows"
-
-#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
-#: R/packages2.R:0
-msgid "cannot install macOS binary packages on this platform"
-msgstr "nie można zainstalować pakietów binarnych dla macOS na tej platformie"
 
 #. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
@@ -1189,9 +1195,10 @@ msgstr "nie udało się utworzyć katalogu %s"
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr "nie udało się pobrać pliku (%s) serwerów lustrzanych; używanie lokalnego pliku '%s'"
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
-msgid "file %s is not a macOS binary package"
+#, fuzzy
+msgid "file %s is not a binary package"
 msgstr "plik %s nie jest pakietem binarnym macOS"
 
 #. R/tar.R: gettextf("file '%s' did not have execute permissions: corrected",     f)
@@ -1321,11 +1328,11 @@ msgstr "instalacja pakietu %s miała niezerowy status wyjścia"
 #. R/edit.R: gettextf("invalid '%s' argument", "x")
 #. R/help.R: gettextf("invalid '%s' argument", "file")
 #. R/packages.R: gettextf("invalid '%s' argument", "filters")
-#. R/packages.R: gettextf("invalid '%s' argument", "type")
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
-#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0 R/tar.R:0
+#: R/aspell.R:0 R/edit.R:0 R/help.R:0 R/packages.R:0 R/packages2.R:0 R/sock.R:0
+#: R/tar.R:0
 msgid "invalid '%s' argument"
 msgstr "niepoprawny argument '%s'"
 
@@ -1376,6 +1383,11 @@ msgstr "niepoprawna długość 'row.names'"
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 msgid "invalid 'row.names' specification"
 msgstr "niepoprawne określenie 'row.names'"
+
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+msgid "invalid 'type'"
+msgstr "niepoprawny argument 'type'"
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")
 #: R/help.start.R:0
@@ -2338,14 +2350,14 @@ msgstr[0] "pakiet %s nie jest dostępny (%s)"
 msgstr[1] "pakiety %s nie są dostępne (%s)"
 msgstr[2] "pakiety %s nie są dostępne (%s)"
 
+#~ msgid "cannot install macOS binary packages on this platform"
+#~ msgstr "nie można zainstalować pakietów binarnych dla macOS na tej platformie"
+
 #~ msgid "path is empty"
 #~ msgstr "ścieżka jest pusta"
 
 #~ msgid "Invalid 'filter' argument."
 #~ msgstr "niepoprawny argument 'filter'."
-
-#~ msgid "invalid 'type'"
-#~ msgstr "niepoprawny argument 'type'"
 
 #~ msgid "invalid 'filters' argument."
 #~ msgstr "niepoprawny argument 'filters'."

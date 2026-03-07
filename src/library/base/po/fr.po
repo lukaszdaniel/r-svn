@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28+0100\n"
+"POT-Creation-Date: 2026-03-07 18:17+0100\n"
 "PO-Revision-Date: 2025-07-06 14:53+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -76,6 +76,10 @@ msgstr "Internal(pretty()) : intervalle trop petit.. corrigé"
 msgid "R_pretty(): very large range 'cell'=%.3g, decreased to %g"
 msgstr "Internal(pretty()) : intervalle trop grand.. corrigé"
 
+#: src/extra/graphapp/dialogs.cpp:876
+msgid "Password"
+msgstr ""
+
 #: src/gnuwin32/dynload.cpp:121
 #, c-format
 msgid "DLL attempted to change FPU control word from %x to %x"
@@ -133,14 +137,15 @@ msgstr "problème lors de l'affichage de '%ls'"
 #: src/gnuwin32/extra.cpp:133 src/gnuwin32/extra.cpp:173
 #: src/gnuwin32/extra.cpp:390 src/gnuwin32/extra.cpp:943
 #: src/gnuwin32/extra.cpp:968 src/gnuwin32/sys-win32.cpp:287
-#: src/gnuwin32/sys-win32.cpp:337 src/main/agrep.cpp:142 src/main/agrep.cpp:146
-#: src/main/agrep.cpp:775 src/main/agrep.cpp:780 src/main/altclasses.cpp:1393
-#: src/main/apply.cpp:366 src/main/apply.cpp:368 src/main/apply.cpp:371
-#: src/main/array.cpp:1829 src/main/array.cpp:1974 src/main/array.cpp:1976
-#: src/main/array.cpp:2444 src/main/attrib.cpp:237 src/main/builtin.cpp:105
-#: src/main/builtin.cpp:110 src/main/builtin.cpp:128 src/main/builtin.cpp:130
-#: src/main/builtin.cpp:556 src/main/builtin.cpp:574 src/main/builtin.cpp:755
-#: src/main/builtin.cpp:757 src/main/builtin.cpp:759 src/main/character.cpp:348
+#: src/gnuwin32/sys-win32.cpp:337 src/main/Rdynload.cpp:1446
+#: src/main/agrep.cpp:142 src/main/agrep.cpp:146 src/main/agrep.cpp:775
+#: src/main/agrep.cpp:780 src/main/altclasses.cpp:1393 src/main/apply.cpp:367
+#: src/main/apply.cpp:369 src/main/apply.cpp:372 src/main/array.cpp:1829
+#: src/main/array.cpp:1974 src/main/array.cpp:1976 src/main/array.cpp:2444
+#: src/main/attrib.cpp:237 src/main/builtin.cpp:108 src/main/builtin.cpp:113
+#: src/main/builtin.cpp:131 src/main/builtin.cpp:133 src/main/builtin.cpp:559
+#: src/main/builtin.cpp:577 src/main/builtin.cpp:757 src/main/builtin.cpp:759
+#: src/main/builtin.cpp:761 src/main/character.cpp:348
 #: src/main/character.cpp:351 src/main/character.cpp:356
 #: src/main/character.cpp:961 src/main/character.cpp:1466
 #: src/main/character.cpp:1470 src/main/character.cpp:1473
@@ -171,16 +176,16 @@ msgstr "problème lors de l'affichage de '%ls'"
 #: src/main/connections.cpp:5901 src/main/connections.cpp:5909
 #: src/main/connections.cpp:6813 src/main/connections.cpp:6840
 #: src/main/connections.cpp:6847 src/main/context.cpp:699
-#: src/main/context.cpp:708 src/main/context.cpp:712 src/main/datetime.cpp:1275
-#: src/main/datetime.cpp:1499 src/main/datetime.cpp:1501 src/main/debug.cpp:282
+#: src/main/context.cpp:708 src/main/context.cpp:712 src/main/datetime.cpp:1299
+#: src/main/datetime.cpp:1524 src/main/datetime.cpp:1526 src/main/debug.cpp:282
 #: src/main/deparse.cpp:464 src/main/dotcode.cpp:507 src/main/dotcode.cpp:511
 #: src/main/dotcode.cpp:516 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
 #: src/main/envir.cpp:1810 src/main/envir.cpp:1928 src/main/envir.cpp:2035
 #: src/main/envir.cpp:2050 src/main/envir.cpp:2166 src/main/envir.cpp:2174
 #: src/main/envir.cpp:2451 src/main/envir.cpp:2564 src/main/envir.cpp:2830
 #: src/main/envir.cpp:3088 src/main/envir.cpp:3102 src/main/envir.cpp:3109
-#: src/main/envir.cpp:3127 src/main/envir.cpp:3864 src/main/errors.cpp:1277
-#: src/main/errors.cpp:2770 src/main/eval.cpp:901 src/main/eval.cpp:911
+#: src/main/envir.cpp:3127 src/main/envir.cpp:3864 src/main/errors.cpp:1278
+#: src/main/errors.cpp:2771 src/main/eval.cpp:901 src/main/eval.cpp:911
 #: src/main/eval.cpp:914 src/main/eval.cpp:917 src/main/eval.cpp:925
 #: src/main/eval.cpp:932 src/main/grep.cpp:1293 src/main/grep.cpp:1298
 #: src/main/grep.cpp:1595 src/main/grep.cpp:1597 src/main/grep.cpp:1599
@@ -189,59 +194,58 @@ msgstr "problème lors de l'affichage de '%ls'"
 #: src/main/grep.cpp:2977 src/main/grep.cpp:3315 src/main/grep.cpp:3320
 #: src/main/internet.cpp:159 src/main/internet.cpp:173
 #: src/main/internet.cpp:197 src/main/internet.cpp:210
-#: src/main/internet.cpp:222 src/main/internet.cpp:244 src/main/memory.cpp:3799
+#: src/main/internet.cpp:222 src/main/internet.cpp:244 src/main/memory.cpp:3821
 #: src/main/objects.cpp:1804 src/main/objects.cpp:1806 src/main/paste.cpp:154
 #: src/main/paste.cpp:498 src/main/paste.cpp:503 src/main/paste.cpp:508
 #: src/main/paste.cpp:514 src/main/paste.cpp:523 src/main/paste.cpp:528
-#: src/main/paste.cpp:712 src/main/paste.cpp:717 src/main/platform.cpp:359
-#: src/main/platform.cpp:361 src/main/platform.cpp:363
-#: src/main/platform.cpp:375 src/main/platform.cpp:386
-#: src/main/platform.cpp:465 src/main/platform.cpp:467
-#: src/main/platform.cpp:758 src/main/platform.cpp:760
-#: src/main/platform.cpp:861 src/main/platform.cpp:1589
-#: src/main/platform.cpp:1595 src/main/platform.cpp:1677
-#: src/main/platform.cpp:1759 src/main/platform.cpp:1831
-#: src/main/platform.cpp:1834 src/main/platform.cpp:2089
-#: src/main/platform.cpp:2136 src/main/platform.cpp:2184
-#: src/main/platform.cpp:2221 src/main/platform.cpp:2223
-#: src/main/platform.cpp:2309 src/main/platform.cpp:2407
-#: src/main/platform.cpp:2675 src/main/platform.cpp:2733
-#: src/main/platform.cpp:2938 src/main/platform.cpp:2941
-#: src/main/platform.cpp:3189 src/main/platform.cpp:3192
-#: src/main/platform.cpp:3199 src/main/platform.cpp:3289
-#: src/main/platform.cpp:3329 src/main/platform.cpp:3373
-#: src/main/platform.cpp:3466 src/main/print.cpp:305 src/main/random.cpp:482
+#: src/main/paste.cpp:712 src/main/paste.cpp:717 src/main/platform.cpp:366
+#: src/main/platform.cpp:368 src/main/platform.cpp:370
+#: src/main/platform.cpp:382 src/main/platform.cpp:393
+#: src/main/platform.cpp:472 src/main/platform.cpp:474
+#: src/main/platform.cpp:765 src/main/platform.cpp:767
+#: src/main/platform.cpp:868 src/main/platform.cpp:1596
+#: src/main/platform.cpp:1602 src/main/platform.cpp:1684
+#: src/main/platform.cpp:1766 src/main/platform.cpp:1838
+#: src/main/platform.cpp:1841 src/main/platform.cpp:2096
+#: src/main/platform.cpp:2143 src/main/platform.cpp:2191
+#: src/main/platform.cpp:2228 src/main/platform.cpp:2230
+#: src/main/platform.cpp:2316 src/main/platform.cpp:2414
+#: src/main/platform.cpp:2682 src/main/platform.cpp:2740
+#: src/main/platform.cpp:2945 src/main/platform.cpp:2948
+#: src/main/platform.cpp:3196 src/main/platform.cpp:3199
+#: src/main/platform.cpp:3206 src/main/platform.cpp:3296
+#: src/main/platform.cpp:3336 src/main/platform.cpp:3380
+#: src/main/platform.cpp:3473 src/main/print.cpp:305 src/main/random.cpp:482
 #: src/main/random.cpp:485 src/main/random.cpp:494 src/main/random.cpp:522
-#: src/main/Rdynload.cpp:1446 src/main/saveload.cpp:2076
-#: src/main/saveload.cpp:2111 src/main/saveload.cpp:2114
-#: src/main/saveload.cpp:2222 src/main/saveload.cpp:2390
-#: src/main/saveload.cpp:2395 src/main/saveload.cpp:2495 src/main/scan.cpp:709
-#: src/main/scan.cpp:887 src/main/scan.cpp:900 src/main/scan.cpp:904
-#: src/main/scan.cpp:906 src/main/scan.cpp:917 src/main/scan.cpp:947
-#: src/main/scan.cpp:1007 src/main/seq.cpp:718 src/main/seq.cpp:725
-#: src/main/seq.cpp:735 src/main/seq.cpp:741 src/main/seq.cpp:785
-#: src/main/seq.cpp:790 src/main/seq.cpp:797 src/main/seq.cpp:804
-#: src/main/seq.cpp:811 src/main/seq.cpp:815 src/main/seq.cpp:821
-#: src/main/sysutils.cpp:648 src/main/sysutils.cpp:652
-#: src/main/sysutils.cpp:656 src/main/sysutils.cpp:2973
-#: src/main/unique.cpp:1920 src/main/unique.cpp:1924 src/main/unique.cpp:2317
-#: src/main/unique.cpp:2322 src/main/util.cpp:721 src/main/util.cpp:724
-#: src/main/util.cpp:1711 src/main/util.cpp:1725 src/main/util.cpp:2542
-#: src/main/util.cpp:2800 src/main/util.cpp:2817 src/main/util.cpp:2860
-#: src/main/util.cpp:2902 src/main/util.cpp:2904 src/main/util.cpp:2906
-#: src/main/util.cpp:2909 src/main/util.cpp:2912 src/main/util.cpp:2916
-#: src/main/util.cpp:2918 src/main/util.cpp:2920 src/main/util.cpp:3215
-#: src/main/util.cpp:3217 src/main/util.cpp:3257 src/main/util.cpp:3259
-#: src/modules/internet/internet.cpp:340 src/modules/internet/internet.cpp:346
-#: src/modules/internet/internet.cpp:354 src/modules/internet/internet.cpp:362
-#: src/modules/internet/libcurl.cpp:377 src/modules/internet/libcurl.cpp:384
-#: src/modules/internet/libcurl.cpp:389 src/modules/internet/libcurl.cpp:422
-#: src/modules/internet/libcurl.cpp:883 src/modules/internet/libcurl.cpp:898
-#: src/modules/internet/libcurl.cpp:904 src/modules/internet/libcurl.cpp:909
-#: src/modules/X11/devX11.cpp:3347 src/modules/X11/devX11.cpp:3350
-#: src/modules/X11/devX11.cpp:3353 src/modules/X11/devX11.cpp:3377
-#: src/unix/sys-std.cpp:1415 src/unix/sys-std.cpp:1438
-#: src/unix/sys-unix.cpp:914
+#: src/main/saveload.cpp:2076 src/main/saveload.cpp:2111
+#: src/main/saveload.cpp:2114 src/main/saveload.cpp:2222
+#: src/main/saveload.cpp:2390 src/main/saveload.cpp:2395
+#: src/main/saveload.cpp:2495 src/main/scan.cpp:709 src/main/scan.cpp:887
+#: src/main/scan.cpp:900 src/main/scan.cpp:904 src/main/scan.cpp:906
+#: src/main/scan.cpp:917 src/main/scan.cpp:947 src/main/scan.cpp:1007
+#: src/main/seq.cpp:719 src/main/seq.cpp:726 src/main/seq.cpp:736
+#: src/main/seq.cpp:742 src/main/seq.cpp:786 src/main/seq.cpp:791
+#: src/main/seq.cpp:798 src/main/seq.cpp:805 src/main/seq.cpp:812
+#: src/main/seq.cpp:816 src/main/seq.cpp:822 src/main/sysutils.cpp:648
+#: src/main/sysutils.cpp:652 src/main/sysutils.cpp:656
+#: src/main/sysutils.cpp:2973 src/main/unique.cpp:1920 src/main/unique.cpp:1924
+#: src/main/unique.cpp:2317 src/main/unique.cpp:2322 src/main/util.cpp:721
+#: src/main/util.cpp:724 src/main/util.cpp:1711 src/main/util.cpp:1725
+#: src/main/util.cpp:2542 src/main/util.cpp:2800 src/main/util.cpp:2817
+#: src/main/util.cpp:2860 src/main/util.cpp:2902 src/main/util.cpp:2904
+#: src/main/util.cpp:2906 src/main/util.cpp:2909 src/main/util.cpp:2912
+#: src/main/util.cpp:2916 src/main/util.cpp:2918 src/main/util.cpp:2920
+#: src/main/util.cpp:3215 src/main/util.cpp:3217 src/main/util.cpp:3257
+#: src/main/util.cpp:3259 src/modules/X11/devX11.cpp:3347
+#: src/modules/X11/devX11.cpp:3350 src/modules/X11/devX11.cpp:3353
+#: src/modules/X11/devX11.cpp:3377 src/modules/internet/internet.cpp:340
+#: src/modules/internet/internet.cpp:346 src/modules/internet/internet.cpp:354
+#: src/modules/internet/internet.cpp:362 src/modules/internet/libcurl.cpp:377
+#: src/modules/internet/libcurl.cpp:384 src/modules/internet/libcurl.cpp:389
+#: src/modules/internet/libcurl.cpp:422 src/modules/internet/libcurl.cpp:883
+#: src/modules/internet/libcurl.cpp:898 src/modules/internet/libcurl.cpp:904
+#: src/modules/internet/libcurl.cpp:909 src/unix/sys-std.cpp:1415
+#: src/unix/sys-std.cpp:1438 src/unix/sys-unix.cpp:914
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
@@ -261,8 +265,8 @@ msgstr "impossible d'effacer le fichier '%s', à cause de '%s'"
 msgid "'%s' must be a character vector"
 msgstr "'x' doit être un vecteur de caractères"
 
-#: src/gnuwin32/extra.cpp:770 src/main/errors.cpp:1279 src/main/errors.cpp:1281
-#: src/main/options.cpp:484 src/main/unique.cpp:2220
+#: src/gnuwin32/extra.cpp:770 src/main/errors.cpp:1280 src/main/errors.cpp:1282
+#: src/main/options.cpp:485 src/main/unique.cpp:2220
 #: src/modules/lapack/Lapack.cpp:120 src/modules/lapack/Lapack.cpp:357
 #: src/modules/lapack/Lapack.cpp:386 src/modules/lapack/Lapack.cpp:437
 #: src/modules/lapack/Lapack.cpp:438 src/modules/lapack/Lapack.cpp:474
@@ -296,7 +300,7 @@ msgstr "mauvais périphérique"
 msgid "Windows 2000 or later is required"
 msgstr ""
 
-#: src/gnuwin32/extra.cpp:1136 src/main/platform.cpp:1806
+#: src/gnuwin32/extra.cpp:1136 src/main/platform.cpp:1813
 msgid "file choice cancelled"
 msgstr "choix de fichier annulé"
 
@@ -359,6 +363,33 @@ msgstr "l'affectation de la conduite de connexion a échoué"
 msgid "'%s' is not a character vector"
 msgstr "'names' n'est pas un vecteur de caractères"
 
+#: src/gnuwin32/sys-win32.cpp:128 src/gnuwin32/sys-win32.cpp:146
+#: src/gnuwin32/sys-win32.cpp:157
+#, c-format
+msgid ""
+"expanded path length %llu would be too long for\n"
+"%s\n"
+msgstr ""
+
+#: src/gnuwin32/sys-win32.cpp:268
+msgid "character string expected as first argument"
+msgstr "chaîne de caractères attendue comme premier argument"
+
+#: src/gnuwin32/sys-win32.cpp:277
+msgid "character string expected as third argument"
+msgstr "chaîne de caractères attendue comme troisième argument"
+
+#: src/gnuwin32/sys-win32.cpp:363 src/unix/sys-unix.cpp:1037
+#: src/unix/sys-unix.cpp:1095
+#, c-format
+msgid "command '%s' timed out after %ds"
+msgstr "l'exécution de la commande '%s' renvoie un statut %d"
+
+#: src/gnuwin32/sys-win32.cpp:366 src/unix/sys-unix.cpp:875
+#, c-format
+msgid "running command '%s' had status %d"
+msgstr "l'exécution de la commande '%s' renvoie un statut %d"
+
 #: src/gnuwin32/system.cpp:111
 msgid "Thief about! Something other than package tcltk has set or is attempting to set R_Tcl_do"
 msgstr ""
@@ -388,18 +419,18 @@ msgstr "limite de temps processeur atteinte"
 msgid "Fatal error: %s\n"
 msgstr "Erreur fatale : %s\n"
 
-#: src/gnuwin32/system.cpp:453 src/unix/sys-std.cpp:1026
+#: src/gnuwin32/system.cpp:462 src/unix/sys-std.cpp:1026
 #, c-format
 msgid "encoding '%s' is not recognised"
 msgstr "l'encodage '%s' n'est pas reconnu"
 
-#: src/gnuwin32/system.cpp:466 src/unix/sys-std.cpp:1039
+#: src/gnuwin32/system.cpp:475 src/unix/sys-std.cpp:1039
 #, c-format
 msgid "<ERROR: re-encoding failure from encoding '%s'>\n"
 msgstr "<ERREUR : réencodage erroné pour l'encodage '%s'>\n"
 
-#: src/gnuwin32/system.cpp:712 src/gnuwin32/system.cpp:1267
-#: src/gnuwin32/system.cpp:1279 src/main/connections.cpp:917
+#: src/gnuwin32/system.cpp:721 src/gnuwin32/system.cpp:1276
+#: src/gnuwin32/system.cpp:1288 src/main/connections.cpp:917
 #: src/main/connections.cpp:922 src/main/dounzip.cpp:239
 #: src/main/saveload.cpp:2120 src/main/serialize.cpp:3082
 #: src/main/serialize.cpp:3087 src/main/serialize.cpp:3181
@@ -408,17 +439,17 @@ msgstr "<ERREUR : réencodage erroné pour l'encodage '%s'>\n"
 msgid "cannot open file '%s': %s"
 msgstr "impossible d'ouvrir le fichier '%s' : %s"
 
-#: src/gnuwin32/system.cpp:727
+#: src/gnuwin32/system.cpp:736
 #, c-format
 msgid "file.show(): file '%s' does not exist\n"
 msgstr "file.show() : fichier '%s' inexistant\n"
 
-#: src/gnuwin32/system.cpp:892 src/gnuwin32/system.cpp:1105
+#: src/gnuwin32/system.cpp:901 src/gnuwin32/system.cpp:1114
 #: src/gnuwin32/front-ends/rcmdfn.cpp:205
 msgid "Invalid R_HOME"
 msgstr ""
 
-#: src/gnuwin32/system.cpp:895 src/gnuwin32/system.cpp:911
+#: src/gnuwin32/system.cpp:904 src/gnuwin32/system.cpp:920
 #: src/gnuwin32/front-ends/rcmdfn.cpp:265
 #: src/gnuwin32/front-ends/rcmdfn.cpp:351
 #: src/gnuwin32/front-ends/rcmdfn.cpp:414
@@ -427,165 +458,138 @@ msgstr ""
 msgid "Allocation error"
 msgstr "erreur d'allocation pour bessel_i"
 
-#: src/gnuwin32/system.cpp:981
+#: src/gnuwin32/system.cpp:990
 #, fuzzy
 msgid "allocation failure in reading Renviron"
 msgstr "erreur d'affectation mémoire dans R_tmpnam2"
 
-#: src/gnuwin32/system.cpp:1055 src/unix/system.cpp:130
+#: src/gnuwin32/system.cpp:1064 src/unix/system.cpp:130
 #, fuzzy
 msgid "WARNING: invalid R_HISTSIZE ignored;"
 msgstr "AVIS : valeur '%s' incorrecte : ignorée"
 
-#: src/gnuwin32/system.cpp:1067
+#: src/gnuwin32/system.cpp:1076
 #, fuzzy
 msgid "Not enough memory"
 msgstr "manque de mémoire"
 
-#: src/gnuwin32/system.cpp:1083 src/unix/system.cpp:467
+#: src/gnuwin32/system.cpp:1092 src/unix/system.cpp:467
 #, c-format
 msgid "ARGUMENT '%s' __ignored__\n"
 msgstr "ARGUMENT '%s' __ignoré__\n"
 
-#: src/gnuwin32/system.cpp:1257
+#: src/gnuwin32/system.cpp:1266
 #, c-format
 msgid "option '%s' requires an argument"
 msgstr "l'option '%s' nécessite un argument"
 
-#: src/gnuwin32/system.cpp:1290
+#: src/gnuwin32/system.cpp:1299
 #, c-format
 msgid "option '%s' requires a non-empty argument"
 msgstr "l'option '%s' nécessite un argument non vide"
 
-#: src/gnuwin32/system.cpp:1298 src/unix/system.cpp:450
+#: src/gnuwin32/system.cpp:1307 src/unix/system.cpp:450
 #, c-format
 msgid "WARNING: '-e %s' omitted as input is too long\n"
 msgstr "AVIS : '-e %s' omis comme entrée trop longue\n"
 
-#: src/gnuwin32/system.cpp:1302 src/unix/system.cpp:463
+#: src/gnuwin32/system.cpp:1311 src/unix/system.cpp:463
 #, c-format
 msgid "WARNING: unknown option '%s'\n"
 msgstr "AVIS : option inconnue '%s'\n"
 
-#: src/gnuwin32/system.cpp:1315 src/unix/system.cpp:478
+#: src/gnuwin32/system.cpp:1324 src/unix/system.cpp:478
 msgid "cannot use -e with -f or --file"
 msgstr "utilisation de -e avec -f ou --file interdite"
 
-#: src/gnuwin32/system.cpp:1339
+#: src/gnuwin32/system.cpp:1348
 msgid "creation of tmpfile failed -- set TMPDIR suitably?"
 msgstr "la création de tmpfile a échoué -- redéfinir TMPDIR ?"
 
-#: src/gnuwin32/system.cpp:1343
+#: src/gnuwin32/system.cpp:1352
 #, fuzzy
 msgid "fwrite error in cmdlineoptions"
 msgstr "erreur d'écriture sur une connexion 'gzcon'"
 
-#: src/gnuwin32/system.cpp:1365 src/unix/system.cpp:551
+#: src/gnuwin32/system.cpp:1374 src/unix/system.cpp:551
 msgid "you must specify '--save', '--no-save' or '--vanilla'"
 msgstr "vous devez spécifier '--save', '--no-save' ou '--vanilla'"
 
-#: src/gnuwin32/system.cpp:1397
+#: src/gnuwin32/system.cpp:1406
 msgid "impossible to create 'reader thread'; you must free some system resources"
 msgstr "impossible de créer le 'reader thread' ; vous devez libérer des ressources système"
 
-#: src/gnuwin32/sys-win32.cpp:128 src/gnuwin32/sys-win32.cpp:146
-#: src/gnuwin32/sys-win32.cpp:157
-#, c-format
-msgid ""
-"expanded path length %llu would be too long for\n"
-"%s\n"
-msgstr ""
-
-#: src/gnuwin32/sys-win32.cpp:268
-msgid "character string expected as first argument"
-msgstr "chaîne de caractères attendue comme premier argument"
-
-#: src/gnuwin32/sys-win32.cpp:277
-msgid "character string expected as third argument"
-msgstr "chaîne de caractères attendue comme troisième argument"
-
-#: src/gnuwin32/sys-win32.cpp:363 src/unix/sys-unix.cpp:1037
-#: src/unix/sys-unix.cpp:1095
-#, c-format
-msgid "command '%s' timed out after %ds"
-msgstr "l'exécution de la commande '%s' renvoie un statut %d"
-
-#: src/gnuwin32/sys-win32.cpp:366 src/unix/sys-unix.cpp:875
-#, c-format
-msgid "running command '%s' had status %d"
-msgstr "l'exécution de la commande '%s' renvoie un statut %d"
-
-#: src/gnuwin32/getline/getline.cpp:429 src/gnuwin32/getline/getline.cpp:669
-#: src/gnuwin32/getline/getline.cpp:980 src/gnuwin32/getline/getline.cpp:1411
-#: src/gnuwin32/getline/getline.cpp:1435
+#: src/gnuwin32/getline/getline.cpp:435 src/gnuwin32/getline/getline.cpp:675
+#: src/gnuwin32/getline/getline.cpp:986 src/gnuwin32/getline/getline.cpp:1417
+#: src/gnuwin32/getline/getline.cpp:1441
 msgid ""
 "\n"
 "*** Error: getline(): invalid multi-byte character.\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:459 src/gnuwin32/getline/getline.cpp:906
+#: src/gnuwin32/getline/getline.cpp:465 src/gnuwin32/getline/getline.cpp:912
 msgid ""
 "\n"
 "*** Error: getline(): not enough memory.\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:476
+#: src/gnuwin32/getline/getline.cpp:482
 msgid ""
 "\n"
 "*** Error: getline(): not interactive, use stdio.\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:482 src/gnuwin32/getline/getline.cpp:488
+#: src/gnuwin32/getline/getline.cpp:488 src/gnuwin32/getline/getline.cpp:494
 msgid ""
 "\n"
 "*** Error: getline(): unable to convert to UCS-4.\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:485
+#: src/gnuwin32/getline/getline.cpp:491
 msgid ""
 "\n"
 "*** Error: getline(): unable to convert to UTF-16.\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:492
+#: src/gnuwin32/getline/getline.cpp:498
 msgid ""
 "\n"
 "*** Error: getline(): unable to convert from OEM CP.\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:552
+#: src/gnuwin32/getline/getline.cpp:558
 msgid ""
 "\n"
 "*** Error: minimum screen width is 21\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:943 src/gnuwin32/getline/getline.cpp:998
-#: src/gnuwin32/getline/getline.cpp:1076
+#: src/gnuwin32/getline/getline.cpp:949 src/gnuwin32/getline/getline.cpp:1004
+#: src/gnuwin32/getline/getline.cpp:1082
 #, fuzzy
 msgid ""
 "\n"
 "*** Error: getline(): input buffer overflow\n"
 msgstr "débordement vers le haut du tampon d’impression"
 
-#: src/gnuwin32/getline/getline.cpp:1459
+#: src/gnuwin32/getline/getline.cpp:1465
 msgid ""
 "\n"
 "*** Error: gl_hist_init() failed on malloc\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:1486
+#: src/gnuwin32/getline/getline.cpp:1492
 msgid ""
 "\n"
 "*** Error: gl_histadd() failed on realloc\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:1547
+#: src/gnuwin32/getline/getline.cpp:1553
 msgid ""
 "\n"
 "*** Error: hist_save() failed on malloc\n"
 msgstr ""
 
-#: src/gnuwin32/getline/getline.cpp:1560
+#: src/gnuwin32/getline/getline.cpp:1566
 #: src/gnuwin32/getline/wc_history.cpp:138
 #, fuzzy, c-format
 msgid "Unable to open %s"
@@ -614,7 +618,7 @@ msgstr "ouverture de fichier impossible"
 msgid "can't set ALTREP truelength"
 msgstr ""
 
-#: src/include/Errormsg.h:31 src/include/Rinlinedfuns.h:288
+#: src/include/Errormsg.h:31 src/include/Rinlinedfuns.h:289
 msgid "subscript out of bounds"
 msgstr "indice hors limites"
 
@@ -628,43 +632,551 @@ msgstr "objet de type '%s' non indiçable"
 msgid "missing subscript"
 msgstr "[[ ]] avec indice manquant"
 
-#: src/include/Rdefines.h:130
+#: src/include/Rdefines.h:124
 msgid "the 'value' of a list object is not defined"
 msgstr ""
 
-#: src/include/Rdefines.h:131
+#: src/include/Rdefines.h:125
 msgid "the 'value' of a raw object is not defined"
 msgstr ""
 
-#: src/include/Rinlinedfuns.h:122
+#: src/include/Rinlinedfuns.h:123
 #, fuzzy, c-format
 msgid "cannot get data pointer of '%s' objects"
 msgstr "impossible de sauvegarder les données -- impossible d'ouvrir %s : %s"
 
-#: src/include/Rinlinedfuns.h:165 src/include/Rinlinedfuns.h:169
-#: src/include/Rinlinedfuns.h:172 src/include/Rinlinedfuns.h:175
-#: src/include/Rinlinedfuns.h:178
+#: src/include/Rinlinedfuns.h:166 src/include/Rinlinedfuns.h:170
+#: src/include/Rinlinedfuns.h:173 src/include/Rinlinedfuns.h:176
+#: src/include/Rinlinedfuns.h:179
 #, fuzzy, c-format
 msgid "bad '%s' vector"
 msgstr "vecteur 'names' incorrect"
 
-#: src/include/Rinlinedfuns.h:246 src/include/Rinlinedfuns.h:250
-#: src/include/Rinlinedfuns.h:254 src/include/Rinlinedfuns.h:258
-#: src/include/Rinlinedfuns.h:262
+#: src/include/Rinlinedfuns.h:247 src/include/Rinlinedfuns.h:251
+#: src/include/Rinlinedfuns.h:255 src/include/Rinlinedfuns.h:259
+#: src/include/Rinlinedfuns.h:263
 #, fuzzy, c-format
 msgid "bad standard '%s' vector"
 msgstr "vecteur 'names' incorrect"
 
-#: src/include/Rinlinedfuns.h:267 src/include/Rinlinedfuns.h:271
-#: src/include/Rinlinedfuns.h:275 src/include/Rinlinedfuns.h:279
-#: src/include/Rinlinedfuns.h:283
+#: src/include/Rinlinedfuns.h:268 src/include/Rinlinedfuns.h:272
+#: src/include/Rinlinedfuns.h:276 src/include/Rinlinedfuns.h:280
+#: src/include/Rinlinedfuns.h:284
 #, fuzzy, c-format
 msgid "bad '%s' scalar"
 msgstr "valeur '%s' incorrecte"
 
-#: src/include/Rinlinedfuns.h:1122
+#: src/include/Rinlinedfuns.h:1121
 msgid "cycle detected"
 msgstr ""
+
+#: src/include/CXXR/FixedVector.hpp:358 src/main/memory.cpp:1904
+#: src/main/memory.cpp:1953
+#, fuzzy, c-format
+msgid "cannot allocate vector of length %lld"
+msgstr "impossible d'allouer un vecteur de longueur %lld"
+
+#: src/include/CXXR/FixedVector.hpp:360 src/main/memory.cpp:1906
+#: src/main/memory.cpp:1955
+msgid "negative length vectors are not allowed"
+msgstr "longueur de vecteurs négative non permise"
+
+#: src/main/Closure.cpp:62
+msgid "invalid body argument for 'function'"
+msgstr "argument formel invalide pour 'function'"
+
+#: src/main/CommandLineArgs.cpp:76 src/main/CommandLineArgs.cpp:81
+#, fuzzy
+msgid "allocation failure in R_set_command_line_arguments"
+msgstr "erreur d'affectation mémoire dans R_tmpnam2"
+
+#: src/main/CommandLineArgs.cpp:190
+msgid "WARNING: no value given for --encoding"
+msgstr "AVIS : aucune valeur donnée pour --encoding"
+
+#: src/main/CommandLineArgs.cpp:215
+#, c-format
+msgid "WARNING: option '%s' no longer supported"
+msgstr "AVIS : l'option '%s' n'est plus disponible"
+
+#: src/main/CommandLineArgs.cpp:226
+#, c-format
+msgid "WARNING: no value given for '%s'"
+msgstr "AVIS : aucune valeur donnée pour '%s'"
+
+#: src/main/CommandLineArgs.cpp:236
+#, c-format
+msgid "WARNING: '%s' value is invalid: ignored"
+msgstr "AVIS : valeur '%s' incorrecte : ignorée"
+
+#: src/main/CommandLineArgs.cpp:240
+#, c-format
+msgid "WARNING: %s: too large and ignored"
+msgstr "AVIS : %s : trop grand et ignoré"
+
+#: src/main/CommandLineArgs.cpp:254
+msgid "WARNING: no value given for '--max-ppsize'"
+msgstr "AVIS : aucune valeur donnée pour '--max-ppsize'"
+
+#: src/main/CommandLineArgs.cpp:259
+msgid "WARNING: '--max-ppsize' value is negative: ignored"
+msgstr "AVIS : valeur de '--max-ppsize' strictement négative : ignorée"
+
+#: src/main/CommandLineArgs.cpp:261
+msgid "WARNING: '--max-ppsize' value is too small: ignored"
+msgstr "AVIS : valeur de '--max-ppsize' trop petite : ignorée"
+
+#: src/main/CommandLineArgs.cpp:263
+msgid "WARNING: '--max-ppsize' value is too large: ignored"
+msgstr "AVIS : valeur de '--max-ppsize' trop grande : ignorée"
+
+#: src/main/CommandLineArgs.cpp:271
+#, fuzzy
+msgid "WARNING: no value given for '--max-connections'"
+msgstr "AVIS : aucune valeur donnée pour '--max-ppsize'"
+
+#: src/main/CommandLineArgs.cpp:276
+#, fuzzy
+msgid "WARNING: '--max-connections' value is negative: ignored"
+msgstr "AVIS : valeur de '--max-ppsize' strictement négative : ignorée"
+
+#: src/main/CommandLineArgs.cpp:278
+#, fuzzy
+msgid "WARNING: '--max-connections' value is too small: ignored"
+msgstr "AVIS : valeur de '--max-ppsize' trop petite : ignorée"
+
+#: src/main/CommandLineArgs.cpp:280
+#, fuzzy
+msgid "WARNING: '--max-connections' value is too large: ignored"
+msgstr "AVIS : valeur de '--max-ppsize' trop grande : ignorée"
+
+#: src/main/ConsCell.cpp:60
+#, c-format
+msgid "bad binding access: %d"
+msgstr ""
+
+#: src/main/Environment.cpp:142 src/main/builtin.cpp:310
+#: src/main/coerce.cpp:1578 src/main/connections.cpp:3895
+#: src/main/engine.cpp:3226 src/main/envir.cpp:996 src/main/envir.cpp:1046
+#: src/main/envir.cpp:1207 src/main/envir.cpp:1247 src/main/envir.cpp:1959
+#: src/main/envir.cpp:2031 src/main/envir.cpp:2159 src/main/envir.cpp:2869
+#: src/main/envir.cpp:2955 src/main/eval.cpp:8929 src/main/serialize.cpp:3256
+msgid "use of NULL environment is defunct"
+msgstr "l'utilisation de l'environnement NULL n'est plus autorisée"
+
+#: src/main/GCManager.cpp:132
+#, fuzzy
+msgid "vector memory exhausted"
+msgstr "vecteurs de mémoire épuisés (limite atteinte ?)"
+
+#: src/main/GCManager.cpp:146
+#, c-format
+msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
+msgstr ""
+
+#: src/main/RNG.cpp:190
+#, c-format
+msgid "unif_rand: unimplemented RNG kind %d"
+msgstr "unif_rand : type RNG (générateur de nombres pseudo-aléatoires) %d non implémenté"
+
+#: src/main/RNG.cpp:275
+#, c-format
+msgid "FixupSeeds: unimplemented RNG kind %d"
+msgstr "FixupSeeds : type RNG (générateur de nombres pseudo-aléatoires) %d non implémenté"
+
+#: src/main/RNG.cpp:315
+msgid "'user_unif_rand' not in load table"
+msgstr "'user_unif_rand' absent de la table de chargement"
+
+#: src/main/RNG.cpp:323
+msgid "cannot read seeds unless 'user_unif_nseed' is supplied"
+msgstr "impossible de lire les valeurs d'initialisation tant que 'user_unif_nseed' n'est pas fourni"
+
+#: src/main/RNG.cpp:328
+msgid "seed length must be in 0...625; ignored"
+msgstr "la longueur du vecteur de valeurs d'initialisation doit être comprise entre 0 et 625 : ignoré"
+
+#: src/main/RNG.cpp:336
+#, c-format
+msgid "RNG_Init: unimplemented RNG kind %d"
+msgstr "RNG_Init : type RNG (générateur de nombres pseudo-aléatoires) %d non implémenté"
+
+#: src/main/RNG.cpp:366
+#, c-format
+msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
+msgstr "'.Random.seed' n'est pas un vecteur d'entiers, mais est de type '%s', et sera donc ignoré"
+
+#: src/main/RNG.cpp:374
+msgid "'.Random.seed[1]' is not a valid integer, so ignored"
+msgstr "'.Random.seed[1]' n'est pas un entier correct, et sera donc ignoré"
+
+#: src/main/RNG.cpp:381
+msgid "'.Random.seed[1]' is not a valid Normal type, so ignored"
+msgstr "'.Random.seed[1]' n'est pas un type Normal correct, et sera donc ignoré"
+
+#: src/main/RNG.cpp:395
+msgid "'.Random.seed[1] = 5' but no user-supplied generator, so ignored"
+msgstr "'.Random.seed[1] = 5' mais aucun générateur de nombres fourni par l'utilisateur, il sera donc ignoré"
+
+#: src/main/RNG.cpp:400
+msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
+msgstr "'.Random.seed[1]' n'est pas un RNG (générateur de nombres pseudo-aléatoires) correct et sera donc ignoré"
+
+#: src/main/RNG.cpp:434
+msgid "'.Random.seed' has wrong length"
+msgstr "'.Random.seed' de taille incorrecte"
+
+#: src/main/RNG.cpp:454
+msgid "Internal .Random.seed is corrupt: not saving"
+msgstr ""
+
+#: src/main/RNG.cpp:490
+msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
+msgstr "RNGkind : Marsaglia-Multicarry a des mauvaises propriétés statistiques"
+
+#: src/main/RNG.cpp:500
+#, c-format
+msgid "RNGkind: unimplemented RNG kind %d"
+msgstr "RNGkind : type %d de RNG non implémenté"
+
+#: src/main/RNG.cpp:506
+msgid "someone corrupted the random-number generator: re-initializing"
+msgstr ""
+
+#: src/main/RNG.cpp:519
+msgid "RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry"
+msgstr "RNGkind : forts écarts à la normalité pour Kinderman-Ramage + Marsaglia-Multicarry"
+
+#: src/main/RNG.cpp:522
+msgid "RNGkind: deviations from normality for Ahrens-Dieter + Marsaglia-Multicarry"
+msgstr "RNGkind : écarts à la normalité pour Ahrens-Dieter + Marsaglia-Multicarry"
+
+#: src/main/RNG.cpp:526
+msgid "invalid Normal type in 'RNGkind'"
+msgstr "type Normal incorrect dans 'RNGkind'"
+
+#: src/main/RNG.cpp:529
+msgid "'user_norm_rand' not in load table"
+msgstr "'user_norm_rand' absent de la table de chargement"
+
+#: src/main/RNG.cpp:544
+msgid "invalid sample type in 'RNGkind'"
+msgstr "type ‘sample’ incorrect dans 'RNGkind'"
+
+#: src/main/RNG.cpp:591
+msgid "supplied seed is not a valid integer"
+msgstr "la valeur d'initialisation fournie n'est pas un entier correct"
+
+#: src/main/RNG.cpp:850
+msgid "function '.TAOCP1997init' is missing"
+msgstr ""
+
+#: src/main/RObject.cpp:129 src/main/attrib.cpp:66 src/main/attrib.cpp:286
+#: src/main/attrib.cpp:316 src/main/attrib.cpp:334 src/main/attrib.cpp:466
+#: src/main/attrib.cpp:513 src/main/attrib.cpp:567
+msgid "attempt to set an attribute on NULL"
+msgstr "tentative de changer un attribut en NULL"
+
+#: src/main/RObject.cpp:132
+#, fuzzy
+msgid "cannot set attribute on a 'CHARSXP'"
+msgstr "impossible de définir l’attribut sur un symbole"
+
+#: src/main/RObject.cpp:137
+#, fuzzy, c-format
+msgid "cannot set attribute on a '%s'"
+msgstr "impossible de définir l’attribut sur un symbole"
+
+#: src/main/Rdynload.cpp:180
+msgid "DLL table corruption detected"
+msgstr ""
+
+#: src/main/Rdynload.cpp:207
+#, c-format
+msgid "R_MAX_NUM_DLLS must be at least %d"
+msgstr "R_MAX_NUM_DLLS doit valoir au moins %d"
+
+#: src/main/Rdynload.cpp:213
+#, c-format
+msgid "R_MAX_NUM_DLLS cannot be bigger than %d"
+msgstr "R_MAX_NUM_DLLS ne peut être supérieur à %d"
+
+#: src/main/Rdynload.cpp:222
+#, c-format
+msgid "R_MAX_NUM_DLLS cannot be bigger than %d when fd limit is not known"
+msgstr "R_MAX_NUM_DLLS ne peut être supérieur à %d lorsque la limite fd est inconnue"
+
+#: src/main/Rdynload.cpp:228 src/main/Rdynload.cpp:247
+msgid "the limit on the number of open files is too low"
+msgstr "la limite pour le nombre de fichiers ouverts est trop basse"
+
+#: src/main/Rdynload.cpp:231
+#, c-format
+msgid "R_MAX_NUM_DLLS bigger than %d may exhaust open files limit"
+msgstr "R_MAX_NUM_DLLS plus large que %d peut épuiser le nombre de fichiers ouverts possibles"
+
+#: src/main/Rdynload.cpp:254
+msgid "could not allocate space for DLL table"
+msgstr "impossible d'allouer de l'espace pour la table DLL"
+
+#: src/main/Rdynload.cpp:369
+msgid "R_RegisterRoutines called with invalid DllInfo object."
+msgstr "R_RegisterRoutines appelé avec un objet DllInfo incorrect."
+
+#: src/main/Rdynload.cpp:446
+#, fuzzy
+msgid "Invalid object."
+msgstr "connexion incorrecte"
+
+#: src/main/Rdynload.cpp:452 src/main/Rdynload.cpp:455
+#, c-format
+msgid "Invalid entry '%s' in native symbol object."
+msgstr ""
+
+#: src/main/Rdynload.cpp:461
+#, c-format
+msgid "Component '%s' missing in symbol object."
+msgstr ""
+
+#: src/main/Rdynload.cpp:473
+#, fuzzy
+msgid "Invalid symbol list."
+msgstr "symbole non valide"
+
+#: src/main/Rdynload.cpp:487
+#, c-format
+msgid "Symbol at %d does not have registration information."
+msgstr ""
+
+#: src/main/Rdynload.cpp:523
+#, fuzzy
+msgid "Invalid symbol name."
+msgstr "symbole non valide"
+
+#: src/main/Rdynload.cpp:526
+#, fuzzy, c-format
+msgid "Cannot register already registered native symbol '%s'."
+msgstr "impossible d'allouer de la mémoire pour le symbole natif enregistré (%d byte)"
+
+#: src/main/Rdynload.cpp:528
+#, fuzzy, c-format
+msgid "Symbol '%s' does not have a valid native address."
+msgstr "le corps du fichier n'a pas une entête gzip correcte"
+
+#: src/main/Rdynload.cpp:530
+#, c-format
+msgid "Symbol '%s' does not have a valid DllInfo reference."
+msgstr ""
+
+#: src/main/Rdynload.cpp:535
+#, c-format
+msgid "Symbol '%s' comes from a different shared object."
+msgstr ""
+
+#: src/main/Rdynload.cpp:538
+#, c-format
+msgid "Symbol '%s' is missing parameter specification."
+msgstr ""
+
+#: src/main/Rdynload.cpp:594
+#, fuzzy
+msgid "allocation failure in R_setPrimitiveArgTypes"
+msgstr "erreur d'affectation mémoire dans R_tmpnam2"
+
+#: src/main/Rdynload.cpp:861
+#, fuzzy
+msgid "maximal number of DLLs reached..."
+msgstr "`nombre maximal de DLLs atteint..."
+
+#: src/main/Rdynload.cpp:912
+msgid "could not allocate space for 'path'"
+msgstr "impossible d'allouer de l'espace pour 'path'"
+
+#: src/main/Rdynload.cpp:924
+#, c-format
+msgid "DLLname '%s' is too long"
+msgstr "Le nom de DLL '%s' est trop long"
+
+#: src/main/Rdynload.cpp:952
+msgid "could not allocate space for 'name'"
+msgstr "impossible d'allouer de l'espace pour 'name'"
+
+#: src/main/Rdynload.cpp:962
+#, fuzzy
+msgid "could not allocate space for 'DllInfo'"
+msgstr "impossible d'allouer de l'espace pour 'name'"
+
+#: src/main/Rdynload.cpp:1202 src/main/platform.cpp:2022 src/main/util.cpp:937
+#: src/main/util.cpp:1047
+msgid "path too long"
+msgstr "chemin trop long"
+
+#: src/main/Rdynload.cpp:1230 src/main/Rdynload.cpp:1247 src/main/util.cpp:861
+msgid "character argument expected"
+msgstr "argument de type caractère attendu"
+
+#: src/main/Rdynload.cpp:1237 src/main/Rdynload.cpp:1270
+#: src/main/Rdynload.cpp:1291
+#, c-format
+msgid ""
+"unable to load shared object '%s':\n"
+"  %s"
+msgstr ""
+"impossible de charger l'objet partagé '%s' :\n"
+"  %s"
+
+#: src/main/Rdynload.cpp:1251
+#, c-format
+msgid "shared object '%s' was not loaded"
+msgstr "l'objet partagé '%s' n'a pas été chargé"
+
+#: src/main/Rdynload.cpp:1328
+#, c-format
+msgid "cannot allocate memory for registered native symbol (%d byte)"
+msgid_plural "cannot allocate memory for registered native symbol (%d bytes)"
+msgstr[0] "impossible d'allouer de la mémoire pour le symbole natif enregistré (%d byte)"
+msgstr[1] "impossible d'allouer de la mémoire pour les symboles natifs enregistrés (%d bytes)"
+
+#: src/main/Rdynload.cpp:1456 src/main/Rdynload.cpp:1647
+msgid "NULL value passed for DllInfo"
+msgstr "Valeur NULL passée pour DllInfo"
+
+#: src/main/Rdynload.cpp:1460
+msgid "must pass package name or DllInfo reference"
+msgstr "le nom du package ou la référence DllInfo doit être fourni"
+
+#: src/main/Rdynload.cpp:1565
+#, c-format
+msgid "unimplemented type %d in 'createRSymbolObject'"
+msgstr "type %d non implémenté dans 'createRSymbolObject'"
+
+#: src/main/Rdynload.cpp:1644
+msgid "R_getRegisteredRoutines() expects a DllInfo reference"
+msgstr "R_getRegisteredRoutines() attend une référence DllInfo"
+
+#: src/main/Rdynload.cpp:1730
+#, c-format
+msgid "function '%s' not provided by package '%s'"
+msgstr "la fonction '%s' n'existe pas dans le package '%s'"
+
+#: src/main/Rdynload.cpp:1732
+msgid "table entry must be an external pointer"
+msgstr "l'entrée de la table doit être un pointeur externe"
+
+#: src/main/Renviron.cpp:282
+#, c-format
+msgid "problem in setting variable '%s' in Renviron"
+msgstr "problème lors de l'affectation de la variable '%s' dans Renviron"
+
+#: src/main/Renviron.cpp:389
+msgid "path to system Renviron is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:407
+#, fuzzy
+msgid "cannot find system Renviron"
+msgstr "impossible de déclasser un environnement"
+
+#: src/main/Renviron.cpp:429
+msgid "path to arch-specific Renviron.site is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:448
+msgid "path to Renviron.site is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:465
+msgid "path to arch-specific user Renviron is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:499
+msgid "path to user Renviron is too long: skipping"
+msgstr ""
+
+#: src/main/Renviron.cpp:535 src/main/objects.cpp:1369 src/main/raw.cpp:219
+#, c-format
+msgid "argument '%s' must be a character string"
+msgstr "l'argument '%s' doit être une chaîne de caractères"
+
+#: src/main/Renviron.cpp:539
+#, c-format
+msgid "file '%s' cannot be opened for reading"
+msgstr "le fichier '%s' ne peut être ouvert en lecture"
+
+#: src/main/Rstrptime.h:523 src/main/Rstrptime.h:1011
+#, c-format
+msgid "values for %%z outside +/-1400 are an error"
+msgstr ""
+
+#: src/main/Rstrptime.h:532 src/main/Rstrptime.h:1020
+#, c-format
+msgid "use of %s for input is not supported"
+msgstr "l'utilisation de %s pour entrée n'est pas permise"
+
+#: src/main/Rstrptime.h:653 src/main/Rstrptime.h:1141
+#, c-format
+msgid "day-of-year %d in year %d is invalid\n"
+msgstr ""
+
+#: src/main/Rstrptime.h:699 src/main/Rstrptime.h:1183
+#, c-format
+msgid "(0-based) day-of-year %d in year %d is invalid\n"
+msgstr ""
+
+#: src/main/Rstrptime.h:1307
+msgid "input string is too long"
+msgstr "chaîne de caractères en entrée trop longue"
+
+#: src/main/Rstrptime.h:1309
+msgid "invalid multibyte input string"
+msgstr "chaîne de caractères multioctets incorrecte en entrée"
+
+#: src/main/Rstrptime.h:1312
+msgid "format string is too long"
+msgstr "chaîne de caractères de formattage trop longue"
+
+#: src/main/Rstrptime.h:1314
+msgid "invalid multibyte format string"
+msgstr "chaîne de caractères multioctets incorrecte"
+
+#: src/main/SEXP_downcast.cpp:40
+#, c-format
+msgid "SEXP_downcast: '%s' supplied where '%s' expected."
+msgstr ""
+
+#: src/main/StackChecker.cpp:74
+#, c-format
+msgid "'expressions' parameter invalid, allowed %d...%d"
+msgstr "paramètre 'expressions' incorrect, valeurs permises %d...%d"
+
+#: src/main/String.cpp:128 src/main/envir.cpp:4120
+#, c-format
+msgid "unknown encoding: %d"
+msgstr "encodage inconnu : %d"
+
+#: src/main/String.cpp:236 src/main/character.cpp:1856 src/main/grep.cpp:204
+#, fuzzy
+msgid "R character strings are limited to 2^31-1 bytes"
+msgstr "les noms de variables sont limités à %d octets"
+
+#: src/main/Symbol.cpp:129
+#, fuzzy, c-format
+msgid "signature is too long in '%s'"
+msgstr "nom de classe trop long dans '%s'"
+
+#: src/main/Symbol.cpp:136
+msgid "..n symbol name for a negative n is not permitted"
+msgstr ""
+
+#: src/main/VectorBase.cpp:67 src/main/VectorBase.cpp:69
+#, fuzzy, c-format
+msgid "cannot allocate vector of size %0.1f %s"
+msgstr "impossible d'allouer un vecteur de taille %0.1f Go"
+
+#: src/main/VectorBase.cpp:71
+#, fuzzy, c-format
+msgid "cannot allocate vector of size %0.f %s"
+msgstr "impossible d'allouer un vecteur de taille %0.f Ko"
 
 #: src/main/agrep.cpp:144 src/main/agrep.cpp:777 src/main/character.cpp:1468
 #: src/main/character.cpp:1472 src/main/grep.cpp:1295 src/main/grep.cpp:2134
@@ -713,8 +1225,8 @@ msgstr "la chaîne de caractères entrée x[%d] est incorrecte dans cet environn
 
 #: src/main/agrep.cpp:633 src/main/agrep.cpp:840 src/main/grep.cpp:483
 #: src/main/print.cpp:1197 src/main/util.cpp:3206
-#: src/modules/internet/Rhttpd.cpp:805 src/modules/internet/Rhttpd.cpp:1301
-#: src/modules/X11/dataentry.cpp:452
+#: src/modules/X11/dataentry.cpp:452 src/modules/internet/Rhttpd.cpp:805
+#: src/modules/internet/Rhttpd.cpp:1301
 #, fuzzy, c-format
 msgid "allocation error in '%s'"
 msgstr "erreur d'affectation mémoire dans 'realpr'"
@@ -742,8 +1254,8 @@ msgstr ""
 msgid "compact sequences with increment %f not supported yet"
 msgstr ""
 
-#: src/main/altclasses.cpp:597 src/main/seq.cpp:120 src/main/seq.cpp:911
-#: src/main/seq.cpp:1159
+#: src/main/altclasses.cpp:597 src/main/seq.cpp:120 src/main/seq.cpp:912
+#: src/main/seq.cpp:1160
 msgid "result would be too long a vector"
 msgstr "le résultat serait un vecteur trop long"
 
@@ -779,7 +1291,7 @@ msgstr "le menu n'existe pas"
 msgid "%s is not a regular file"
 msgstr "'raw = FALSE' mais '%s' n’est pas un fichier régulier"
 
-#: src/main/altclasses.cpp:1385 src/main/apply.cpp:149
+#: src/main/altclasses.cpp:1385 src/main/apply.cpp:150
 #, c-format
 msgid "type '%s' is not supported"
 msgstr "le type '%s' n'est pas supporté"
@@ -834,25 +1346,25 @@ msgstr ""
 msgid "unsupported ALTREP class"
 msgstr "schéma URL non supporté"
 
-#: src/main/apply.cpp:49
+#: src/main/apply.cpp:50
 #, fuzzy
 msgid "argument must be a symbol"
 msgstr "les arguments doivent être symboliques"
 
-#: src/main/apply.cpp:131
+#: src/main/apply.cpp:132
 msgid "'FUN.VALUE' must be a vector"
 msgstr "'FUN.VALUE' doit être un vecteur"
 
-#: src/main/apply.cpp:137 src/main/complex.cpp:826 src/main/serialize.cpp:2040
+#: src/main/apply.cpp:138 src/main/complex.cpp:826 src/main/serialize.cpp:2040
 #: src/main/serialize.cpp:2058
 msgid "invalid length"
 msgstr "taille incorrecte"
 
-#: src/main/apply.cpp:142
+#: src/main/apply.cpp:143
 msgid "long vectors are not supported for matrix/array results"
 msgstr "les longs vecteurs ne sont pas supportés pour des résultats matrix/array"
 
-#: src/main/apply.cpp:194
+#: src/main/apply.cpp:195
 #, fuzzy, c-format
 msgid ""
 "values must be length %d,\n"
@@ -861,11 +1373,11 @@ msgstr ""
 "les valeurs doivent être d'une longueur %d,\n"
 " mais FUN(X[[%lld]]) a une longueur %d"
 
-#: src/main/apply.cpp:205
+#: src/main/apply.cpp:206
 msgid "Internal error: unexpected SEXPTYPE"
 msgstr ""
 
-#: src/main/apply.cpp:208
+#: src/main/apply.cpp:209
 #, fuzzy, c-format
 msgid ""
 "values must be type '%s',\n"
@@ -874,47 +1386,47 @@ msgstr ""
 "les valeurs doivent être de type '%s',\n"
 " mais FUN(X[[%lld]]) est de type '%s'"
 
-#: src/main/apply.cpp:227 src/main/apply.cpp:255 src/main/sort.cpp:1290
+#: src/main/apply.cpp:228 src/main/apply.cpp:256 src/main/sort.cpp:1290
 #: src/main/sort.cpp:1435 src/main/unique.cpp:1491
 #, fuzzy
 msgid "invalid type"
 msgstr "type de ligne incorrect"
 
-#: src/main/apply.cpp:287
+#: src/main/apply.cpp:288
 #, c-format
 msgid "dimnames(<value>) is neither NULL nor list of length %d"
 msgstr "dimnames(<valeur>) n'est ni NULL ni une liste de longueur %d"
 
-#: src/main/apply.cpp:364 src/main/coerce.cpp:2732
+#: src/main/apply.cpp:365 src/main/coerce.cpp:2732
 #, c-format
 msgid "'%s' must be a list or expression"
 msgstr "'%s' doit être une liste ou une expression"
 
-#: src/main/arithmetic.cpp:73 src/main/eval.cpp:5138
+#: src/main/arithmetic.cpp:74 src/main/eval.cpp:5138
 msgid "NaNs produced"
 msgstr "Production de NaN"
 
-#: src/main/arithmetic.cpp:74
+#: src/main/arithmetic.cpp:75
 msgid "non-numeric argument to mathematical function"
 msgstr "argument non numérique pour une fonction mathématique"
 
-#: src/main/arithmetic.cpp:192
+#: src/main/arithmetic.cpp:193
 msgid "probable complete loss of accuracy in modulus"
 msgstr "perte totale de précision probable dans modulus"
 
-#: src/main/arithmetic.cpp:303
+#: src/main/arithmetic.cpp:310
 msgid "NAs produced by integer overflow"
 msgstr "NA produit par débordement d'entier par le haut"
 
-#: src/main/arithmetic.cpp:495
+#: src/main/arithmetic.cpp:502
 msgid "operator needs one or two arguments"
 msgstr "l'opérateur a besoin d'un ou de deux arguments"
 
-#: src/main/arithmetic.cpp:511
+#: src/main/arithmetic.cpp:518
 msgid "non-numeric argument to binary operator"
 msgstr "argument non numérique pour un opérateur binaire"
 
-#: src/main/arithmetic.cpp:556
+#: src/main/arithmetic.cpp:563
 msgid ""
 "Recycling array of length 1 in array-vector arithmetic is deprecated.\n"
 "  Use c() or as.vector() instead."
@@ -922,7 +1434,7 @@ msgstr ""
 "Le recyclage d’un tableau (array) de longueur 1 dans un calcul arithmétique tableau-vecteur est obsolète.\n"
 "  Utilisez c() ou as.vector() à la place."
 
-#: src/main/arithmetic.cpp:564
+#: src/main/arithmetic.cpp:571
 msgid ""
 "Recycling array of length 1 in vector-array arithmetic is deprecated.\n"
 "  Use c() or as.vector() instead."
@@ -930,51 +1442,51 @@ msgstr ""
 "Le recyclage d’un tableau (array) de longueur 1 dans un calcul arithmétique vecteur-tableau est obsolète.\n"
 "  Utilisez c() ou as.vector() à la place."
 
-#: src/main/arithmetic.cpp:578 src/main/logic.cpp:116 src/main/relop.cpp:330
+#: src/main/arithmetic.cpp:585 src/main/logic.cpp:116 src/main/relop.cpp:333
 msgid "non-conformable arrays"
 msgstr "tableaux de tailles inadéquates"
 
-#: src/main/arithmetic.cpp:622 src/main/logic.cpp:160 src/main/relop.cpp:374
+#: src/main/arithmetic.cpp:629 src/main/logic.cpp:160 src/main/relop.cpp:377
 msgid "longer object length is not a multiple of shorter object length"
 msgstr "la taille d'un objet plus long n'est pas multiple de la taille d'un objet plus court"
 
-#: src/main/arithmetic.cpp:680
+#: src/main/arithmetic.cpp:691
 msgid "invalid argument to unary operator"
 msgstr "argument incorrect pour un opérateur unitaire"
 
-#: src/main/arithmetic.cpp:713 src/main/arithmetic.cpp:741
-#: src/main/arithmetic.cpp:764
+#: src/main/arithmetic.cpp:724 src/main/arithmetic.cpp:752
+#: src/main/arithmetic.cpp:775
 msgid "invalid unary operator"
 msgstr "opérateur unitaire incorrect"
 
-#: src/main/arithmetic.cpp:1262
+#: src/main/arithmetic.cpp:1406
 msgid "unimplemented real function of 1 argument"
 msgstr "fonction réelle à un argument non implémentée"
 
-#: src/main/arithmetic.cpp:1278 src/main/complex.cpp:709
+#: src/main/arithmetic.cpp:1422 src/main/complex.cpp:709
 #: src/main/complex.cpp:774
 msgid "unimplemented complex function"
 msgstr "fonction complexe non implémentée"
 
-#: src/main/arithmetic.cpp:1554 src/main/arithmetic.cpp:2016
-#: src/main/arithmetic.cpp:2183 src/main/arithmetic.cpp:2288
+#: src/main/arithmetic.cpp:1681 src/main/arithmetic.cpp:2143
+#: src/main/arithmetic.cpp:2310 src/main/arithmetic.cpp:2415
 #, c-format
 msgid "unimplemented real function of %d numeric arguments"
 msgstr "fonction réelle de %d arguments numériques non implémentée"
 
-#: src/main/arithmetic.cpp:1591
+#: src/main/arithmetic.cpp:1718
 msgid "matchArg returned something weird"
 msgstr ""
 
-#: src/main/arithmetic.cpp:1664
+#: src/main/arithmetic.cpp:1791
 msgid "invalid second argument of length 0"
 msgstr "second argument de taille nulle incorrect"
 
-#: src/main/arithmetic.cpp:1791
+#: src/main/arithmetic.cpp:1918
 msgid "invalid argument 'base' of length 0"
 msgstr "argument 'base' de taille nulle incorrect"
 
-#: src/main/arithmetic.cpp:2306
+#: src/main/arithmetic.cpp:2433
 #, fuzzy
 msgid "bad arith function index"
 msgstr "mauvaise fonction"
@@ -1088,7 +1600,7 @@ msgstr "arguments inadéquats"
 msgid "'%s' argument is not a matrix"
 msgstr "l'argument n'est pas une matrice"
 
-#: src/main/array.cpp:1783 src/main/attrib.cpp:1242
+#: src/main/array.cpp:1783 src/main/attrib.cpp:1247
 #, c-format
 msgid "invalid first argument, must be %s"
 msgstr "premier argument incorrect, doit être %s"
@@ -1134,12 +1646,6 @@ msgstr "'x' doit avoir une longueur strictement positive"
 msgid "singular matrix in 'backsolve'. First zero in diagonal [%d]"
 msgstr "matrice singulière dans 'backsolve'. Premier zéro sur la diagonale [%d]"
 
-#: src/main/attrib.cpp:66 src/main/attrib.cpp:286 src/main/attrib.cpp:316
-#: src/main/attrib.cpp:334 src/main/attrib.cpp:466 src/main/attrib.cpp:513
-#: src/main/attrib.cpp:567 src/main/RObject.cpp:129
-msgid "attempt to set an attribute on NULL"
-msgstr "tentative de changer un attribut en NULL"
-
 #: src/main/attrib.cpp:108
 #, c-format
 msgid "row names must be 'character' or 'integer', not '%s'"
@@ -1159,7 +1665,7 @@ msgstr ""
 msgid "cannot have attributes on a CHARSXP"
 msgstr "impossible de définir l’attribut sur un symbole"
 
-#: src/main/attrib.cpp:206 src/main/attrib.cpp:282
+#: src/main/attrib.cpp:206 src/main/attrib.cpp:282 src/main/attrib.cpp:2080
 #, fuzzy
 msgid "'name' is not a symbol or a scalar string"
 msgstr "'names' doit être une chaîne de caractères"
@@ -1212,151 +1718,156 @@ msgstr "ajout d'une classe \"factor\" à un objet incorrect"
 msgid "attempt to set invalid 'class' attribute"
 msgstr "tentative de changer l'attribut 'class' à une valeur incorrecte"
 
-#: src/main/attrib.cpp:887
+#: src/main/attrib.cpp:892
 msgid "type must be LANGSXP at this point"
 msgstr ""
 
-#: src/main/attrib.cpp:918
+#: src/main/attrib.cpp:923
 #, fuzzy
 msgid "invalid class argument to internal .class_cache"
 msgstr "mauvais nombre d'arguments dans call_R"
 
-#: src/main/attrib.cpp:953
+#: src/main/attrib.cpp:958
 #, c-format
 msgid "invalid to use names()<- on an S4 object of class '%s'"
 msgstr "l’utilisation de names()<- sur un objet S4 de classe '%s' est interdite"
 
-#: src/main/attrib.cpp:994
+#: src/main/attrib.cpp:999
 msgid "incompatible 'names' argument"
 msgstr "argument 'names' incompatible"
 
-#: src/main/attrib.cpp:1045
+#: src/main/attrib.cpp:1050
 #, c-format
 msgid "invalid type (%s) to set 'names' attribute"
 msgstr "type incorrect (%s) pour l'attribut 'names'"
 
-#: src/main/attrib.cpp:1118
+#: src/main/attrib.cpp:1123
 msgid "'dimnames' applied to non-array"
 msgstr "'dimnames' appliqué à autre chose qu'un tableau"
 
-#: src/main/attrib.cpp:1123 src/main/coerce.cpp:2735 src/main/engine.cpp:3224
+#: src/main/attrib.cpp:1128 src/main/coerce.cpp:2735 src/main/engine.cpp:3224
 #, c-format
 msgid "'%s' must be a list"
 msgstr "'%s' doit être une liste"
 
-#: src/main/attrib.cpp:1127 src/main/attrib.cpp:1152
+#: src/main/attrib.cpp:1132 src/main/attrib.cpp:1157
 #, c-format
 msgid "length of 'dimnames' [%d] must match that of 'dims' [%d]"
 msgstr "la longueur de 'dimnames' [%d] doit correspondre à celle de 'dims' [%d]"
 
-#: src/main/attrib.cpp:1158
+#: src/main/attrib.cpp:1163
 #, c-format
 msgid "invalid type (%s) for 'dimnames' (must be a vector)"
 msgstr "type incorrect (%s) pour 'dimnames' (doit être un vecteur)"
 
-#: src/main/attrib.cpp:1161
+#: src/main/attrib.cpp:1166
 #, c-format
 msgid "length of 'dimnames' [%d] not equal to array extent"
 msgstr "la longueur de 'dimnames' [%d] n'est pas égale à l'étendue du tableau"
 
-#: src/main/attrib.cpp:1244
+#: src/main/attrib.cpp:1249
 #, c-format
 msgid "invalid second argument, must be %s"
 msgstr "second argument incorrect, doit être %s"
 
-#: src/main/attrib.cpp:1249
+#: src/main/attrib.cpp:1254
 msgid "length-0 dimension vector is invalid"
 msgstr "vecteur dimension de longueur nulle incorrect"
 
-#: src/main/attrib.cpp:1254
+#: src/main/attrib.cpp:1259
 msgid "the dims contain missing values"
 msgstr "les dimensions contiennent des valeurs manquantes"
 
-#: src/main/attrib.cpp:1256
+#: src/main/attrib.cpp:1261
 msgid "the dims contain negative values"
 msgstr "les dimensions contiennent des valeurs négatives"
 
-#: src/main/attrib.cpp:1260
+#: src/main/attrib.cpp:1265
 #, fuzzy, c-format
 msgid "dims [product %lld] do not match the length of object [%lld]"
 msgstr "dims [produit %lld] ne correspond pas à la longueur de l'objet [%lld]"
 
-#: src/main/attrib.cpp:1340
+#: src/main/attrib.cpp:1349
 #, fuzzy, c-format
 msgid "factor level [%lld] is duplicated"
 msgstr "le niveau [%lld] de la variable facteur est dupliqué"
 
-#: src/main/attrib.cpp:1368
+#: src/main/attrib.cpp:1377
 msgid "attributes must be a list or NULL"
 msgstr "les attributs doivent être dans une liste, ou alors la valeur 'NULL'"
 
-#: src/main/attrib.cpp:1373
+#: src/main/attrib.cpp:1382
 msgid "attributes must be named"
 msgstr "les attributs doivent être nommés"
 
-#: src/main/attrib.cpp:1377
+#: src/main/attrib.cpp:1386
 #, c-format
 msgid "all attributes must have names [%d does not]"
 msgstr "tous les attributs doivent être nommés [%d ne l'est pas]"
 
-#: src/main/attrib.cpp:1475 src/main/errors.cpp:1185
+#: src/main/attrib.cpp:1484 src/main/errors.cpp:1186
 #, fuzzy
 msgid "either 2 or 3 arguments are required"
 msgstr "argument chaîne de caractères requis"
 
-#: src/main/attrib.cpp:1482
+#: src/main/attrib.cpp:1491
 msgid "'which' must be of mode character"
 msgstr "'which' doit être en mode caractère"
 
-#: src/main/attrib.cpp:1484
+#: src/main/attrib.cpp:1493
 msgid "exactly one attribute 'which' must be given"
 msgstr "un et un seul attribut 'which' doit être fourni"
 
-#: src/main/attrib.cpp:1620
+#: src/main/attrib.cpp:1629
 #, fuzzy
 msgid "invalid slot name length"
 msgstr "taille incorrecte"
 
-#: src/main/attrib.cpp:1624
+#: src/main/attrib.cpp:1633
 #, c-format
 msgid "invalid type '%s' for slot name"
 msgstr "type incorrect '%s' pour le nom d'un slot"
 
-#: src/main/attrib.cpp:1668
+#: src/main/attrib.cpp:1677
 msgid "'name' must be non-null character string"
 msgstr "'name' doit être une chaîne de caractères non nulle"
 
-#: src/main/attrib.cpp:1670
+#: src/main/attrib.cpp:1679
 #, fuzzy
 msgid "'name' must be a scalar string"
 msgstr "'method' doit être une chaîne de caractères"
 
-#: src/main/attrib.cpp:1797 src/main/attrib.cpp:1868 src/main/attrib.cpp:1920
+#: src/main/attrib.cpp:1806 src/main/attrib.cpp:1877 src/main/attrib.cpp:1929
 msgid "invalid type or length for slot name"
 msgstr "type ou longueur incorrect pour le nom d'un slot"
 
-#: src/main/attrib.cpp:1831
+#: src/main/attrib.cpp:1840
 #, c-format
 msgid "cannot get a slot (\"%s\") from an object of type \"%s\""
 msgstr "impossible d'obtenir un slot (\"%s\") d'un objet de type \"%s\""
 
-#: src/main/attrib.cpp:1842
+#: src/main/attrib.cpp:1851
 #, c-format
 msgid "no slot of name \"%s\" for this object of class \"%s\""
 msgstr "aucun slot de nom \"%s\" pour cet objet de la classe \"%s\""
 
-#: src/main/attrib.cpp:1859
+#: src/main/attrib.cpp:1868
 msgid "attempt to set slot on NULL object"
 msgstr "tentative de changer le slot d'un objet en NULL"
 
-#: src/main/attrib.cpp:1915
+#: src/main/attrib.cpp:1924
 msgid "formal classes cannot be used without the 'methods' package"
 msgstr "les classes formelles ne peuvent être utilisées sans le package 'methods'"
 
-#: src/main/attrib.cpp:1925
+#: src/main/attrib.cpp:1934
 #, fuzzy, c-format
 msgid "no applicable method for `@` applied to an object of class \"%s\""
 msgstr "pas de méthode pour '%s' applicable pour un objet de classe \"%s\""
+
+#: src/main/attrib.cpp:2066
+#, fuzzy
+msgid "bad attribute tag"
+msgstr "attribut de nom erroné"
 
 #: src/main/bind.cpp:196
 #, c-format
@@ -1416,82 +1927,72 @@ msgstr "le nombre de colonnes des matrices doit correspondre (voir argument %d)"
 msgid "number of columns of result is not a multiple of vector length (arg %d)"
 msgstr "le nombre d'objets à remplacer n'est pas multiple de la taille du remplacement"
 
-#: src/main/builtin.cpp:64
+#: src/main/builtin.cpp:67
 msgid "vector size cannot be NA"
 msgstr "la taille de vecteur ne peut être NA"
 
-#: src/main/builtin.cpp:70 src/main/builtin.cpp:78 src/main/sort.cpp:1589
+#: src/main/builtin.cpp:73 src/main/builtin.cpp:81 src/main/sort.cpp:1589
 msgid "vector size cannot be NA/NaN"
 msgstr "la taille de vecteur ne peut être NA/NaN"
 
-#: src/main/builtin.cpp:71 src/main/builtin.cpp:79 src/main/sort.cpp:1590
+#: src/main/builtin.cpp:74 src/main/builtin.cpp:82 src/main/sort.cpp:1590
 msgid "vector size cannot be infinite"
 msgstr "la longueur d'un vecteur ne peut être infinie"
 
-#: src/main/builtin.cpp:72 src/main/builtin.cpp:80 src/main/builtin.cpp:940
+#: src/main/builtin.cpp:75 src/main/builtin.cpp:83 src/main/builtin.cpp:942
 #: src/main/sort.cpp:1591
 msgid "vector size specified is too large"
 msgstr "la longueur choisie pour le vecteur est trop grande"
 
-#: src/main/builtin.cpp:96 src/main/builtin.cpp:124 src/main/envir.cpp:1800
+#: src/main/builtin.cpp:99 src/main/builtin.cpp:127 src/main/envir.cpp:1800
 #: src/main/envir.cpp:1923 src/main/envir.cpp:2020 src/main/envir.cpp:2152
 #: src/main/paste.cpp:123 src/main/paste.cpp:365 src/main/random.cpp:492
 #: src/main/random.cpp:521 src/main/unique.cpp:2321
 msgid "invalid first argument"
 msgstr "premier argument incorrect"
 
-#: src/main/builtin.cpp:254 src/main/builtin.cpp:268
+#: src/main/builtin.cpp:257 src/main/builtin.cpp:271
 msgid "argument is not a function"
 msgstr "l'argument n’est pas une fonction"
 
-#: src/main/builtin.cpp:307 src/main/coerce.cpp:1578
-#: src/main/connections.cpp:3895 src/main/engine.cpp:3226
-#: src/main/envir.cpp:996 src/main/envir.cpp:1046 src/main/envir.cpp:1207
-#: src/main/envir.cpp:1247 src/main/envir.cpp:1959 src/main/envir.cpp:2031
-#: src/main/envir.cpp:2159 src/main/envir.cpp:2869 src/main/envir.cpp:2955
-#: src/main/Environment.cpp:142 src/main/eval.cpp:8930
-#: src/main/serialize.cpp:3256
-msgid "use of NULL environment is defunct"
-msgstr "l'utilisation de l'environnement NULL n'est plus autorisée"
-
-#: src/main/builtin.cpp:321
+#: src/main/builtin.cpp:324
 msgid "setting environment(<primitive function>) is not possible and trying it is deprecated"
 msgstr ""
 
-#: src/main/builtin.cpp:326
+#: src/main/builtin.cpp:329
 msgid "replacement object is not an environment"
 msgstr "l'objet de remplacement n'est pas un environnement"
 
-#: src/main/builtin.cpp:345 src/main/coerce.cpp:2739 src/main/engine.cpp:3230
+#: src/main/builtin.cpp:348 src/main/coerce.cpp:2739 src/main/engine.cpp:3230
 #: src/main/envir.cpp:1839 src/main/envir.cpp:2876 src/main/envir.cpp:2957
 #: src/main/unique.cpp:1928
 #, fuzzy, c-format
 msgid "'%s' must be an environment"
 msgstr "'enclos' doit être un environnement"
 
-#: src/main/builtin.cpp:361 src/main/builtin.cpp:388 src/main/builtin.cpp:398
-#: src/main/memory.cpp:3599
+#: src/main/builtin.cpp:364 src/main/builtin.cpp:391 src/main/builtin.cpp:401
+#: src/main/memory.cpp:3620
 #, fuzzy, c-format
 msgid "'%s' is not an environment"
 msgstr "'parent' n'est pas un environnement"
 
-#: src/main/builtin.cpp:363
+#: src/main/builtin.cpp:366
 msgid "the empty environment has no parent"
 msgstr "l'environnement vide n'a pas de parent"
 
-#: src/main/builtin.cpp:390
+#: src/main/builtin.cpp:393
 msgid "can not set parent of the empty environment"
 msgstr "impossible de fixer le parent de l'environnement vide"
 
-#: src/main/builtin.cpp:392
+#: src/main/builtin.cpp:395
 msgid "can not set the parent environment of a namespace"
 msgstr "impossible de définir l'environnement parent d’un espace de noms"
 
-#: src/main/builtin.cpp:394
+#: src/main/builtin.cpp:397
 msgid "can not set the parent environment of package imports"
 msgstr "impossible de définir l’environnement parent d’une importation de package"
 
-#: src/main/builtin.cpp:543 src/main/connections.cpp:4561
+#: src/main/builtin.cpp:546 src/main/connections.cpp:4561
 #: src/main/connections.cpp:4946 src/main/connections.cpp:4973
 #: src/main/connections.cpp:5354 src/main/connections.cpp:5417
 #: src/main/connections.cpp:5642 src/main/connections.cpp:5646
@@ -1500,70 +2001,70 @@ msgstr "impossible de définir l’environnement parent d’une importation de p
 msgid "cannot write to this connection"
 msgstr "impossible d'écrire vers cette connexion"
 
-#: src/main/builtin.cpp:548
+#: src/main/builtin.cpp:551
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "spécification de '%s' incorrecte"
 
-#: src/main/builtin.cpp:565
+#: src/main/builtin.cpp:568
 msgid "non-positive 'fill' argument will be ignored"
 msgstr "l'argument 'fill' négatif ou nul sera ignoré"
 
-#: src/main/builtin.cpp:636
+#: src/main/builtin.cpp:639
 #, c-format
 msgid "argument %d (type '%s') cannot be handled by 'cat'"
 msgstr "argument %d (type '%s') pas encore traité par 'cat'"
 
-#: src/main/builtin.cpp:775
+#: src/main/builtin.cpp:777
 #, fuzzy
 msgid "too long for a pairlist"
 msgstr "... n'est pas une pairlist"
 
-#: src/main/builtin.cpp:779
+#: src/main/builtin.cpp:781
 #, c-format
 msgid "vector: cannot make a vector of mode '%s'."
 msgstr "vector : impossible de créer un vecteur de mode ‘%s’."
 
-#: src/main/builtin.cpp:807
+#: src/main/builtin.cpp:809
 msgid "cannot set length of non-(vector or list)"
 msgstr "impossible de modifier la longueur d'un objet qui n'est pas un vecteur ou une liste"
 
-#: src/main/builtin.cpp:808 src/main/character.cpp:695 src/main/coerce.cpp:3101
+#: src/main/builtin.cpp:810 src/main/character.cpp:695 src/main/coerce.cpp:3101
 msgid "invalid value"
 msgstr "valeur incorrecte"
 
-#: src/main/builtin.cpp:810
+#: src/main/builtin.cpp:812
 msgid "length of NULL cannot be changed"
 msgstr "la longueur de NULL ne peut pas être modifiée"
 
-#: src/main/builtin.cpp:936 src/main/envir.cpp:2169 src/main/envir.cpp:2177
+#: src/main/builtin.cpp:938 src/main/envir.cpp:2169 src/main/envir.cpp:2177
 #, c-format
 msgid "wrong length for '%s' argument"
 msgstr "mauvaise longueur pour l'argument '%s'"
 
-#: src/main/builtin.cpp:966 src/main/coerce.cpp:2804 src/main/coerce.cpp:2847
+#: src/main/builtin.cpp:968 src/main/coerce.cpp:2804 src/main/coerce.cpp:2847
 #: src/main/eval.cpp:1074 src/main/eval.cpp:1237 src/main/eval.cpp:3714
 #: src/main/eval.cpp:3797 src/main/eval.cpp:3864 src/main/eval.cpp:4210
-#: src/main/eval.cpp:7951 src/main/eval.cpp:8094
+#: src/main/eval.cpp:7950 src/main/eval.cpp:8093
 msgid "'...' used in an incorrect context"
 msgstr "'...' utilisé dans un contexte incorrect"
 
-#: src/main/builtin.cpp:988
+#: src/main/builtin.cpp:990
 #, c-format
 msgid "duplicate 'switch' defaults: '%s' and '%s'"
 msgstr "multiples valeurs par défaut dans 'switch' : '%s' et ''%s'"
 
-#: src/main/builtin.cpp:1021 src/main/coerce.cpp:2689 src/main/dotcode.cpp:565
+#: src/main/builtin.cpp:1023 src/main/coerce.cpp:2689 src/main/dotcode.cpp:565
 #: src/main/dotcode.cpp:1427 src/main/dotcode.cpp:1679 src/main/eval.cpp:3732
 #, c-format
 msgid "'%s' is missing"
 msgstr "'%s' est manquant"
 
-#: src/main/builtin.cpp:1025 src/main/eval.cpp:8511
+#: src/main/builtin.cpp:1027 src/main/eval.cpp:8510
 msgid "EXPR must be a length 1 vector"
 msgstr "EXPR doit être un vecteur de longueur 1"
 
-#: src/main/builtin.cpp:1028 src/main/eval.cpp:8514
+#: src/main/builtin.cpp:1030 src/main/eval.cpp:8513
 #, c-format
 msgid ""
 "EXPR is a \"factor\", treated as integer.\n"
@@ -1572,11 +2073,11 @@ msgstr ""
 "EXPR est une variable \"factor\", elle sera traitée comme des entiers.\n"
 " Pensez à utiliser plutôt '%s'."
 
-#: src/main/builtin.cpp:1075
+#: src/main/builtin.cpp:1077
 msgid "empty alternative in numeric switch"
 msgstr ""
 
-#: src/main/builtin.cpp:1084 src/main/eval.cpp:8523 src/main/eval.cpp:8551
+#: src/main/builtin.cpp:1086 src/main/eval.cpp:8522 src/main/eval.cpp:8550
 msgid "'switch' with no alternatives"
 msgstr "'switch' sans alternatives"
 
@@ -1707,50 +2208,41 @@ msgid "strtrim() requires a character vector"
 msgstr "strtrim() exige un vecteur de caractères comme argument"
 
 #: src/main/character.cpp:1848 src/main/connections.cpp:4426
-#: src/main/context.cpp:750 src/main/context.cpp:764 src/main/datetime.cpp:1026
-#: src/main/datetime.cpp:1056 src/main/datetime.cpp:1163
-#: src/main/datetime.cpp:1281 src/main/datetime.cpp:1503
-#: src/main/datetime.cpp:1665 src/main/datetime.cpp:1984
-#: src/main/dotcode.cpp:236 src/main/errors.cpp:1171 src/main/errors.cpp:1193
-#: src/main/errors.cpp:1311 src/main/errors.cpp:1318 src/main/errors.cpp:1581
-#: src/main/errors.cpp:2253 src/main/options.cpp:493 src/main/options.cpp:648
-#: src/main/options.cpp:656 src/main/options.cpp:662 src/main/options.cpp:670
-#: src/main/options.cpp:677 src/main/options.cpp:682 src/main/options.cpp:689
-#: src/main/options.cpp:699 src/main/options.cpp:714 src/main/options.cpp:720
-#: src/main/options.cpp:725 src/main/options.cpp:734 src/main/options.cpp:743
-#: src/main/options.cpp:758 src/main/options.cpp:768 src/main/options.cpp:782
-#: src/main/options.cpp:788 src/main/options.cpp:822 src/main/options.cpp:842
-#: src/main/options.cpp:855 src/main/options.cpp:896 src/main/options.cpp:907
-#: src/main/options.cpp:918 src/main/platform.cpp:3903 src/main/seq.cpp:276
-#: src/main/seq.cpp:283 src/main/seq.cpp:287 src/main/seq.cpp:397
-#: src/main/seq.cpp:404 src/main/seq.cpp:407 src/main/seq.cpp:409
-#: src/main/seq.cpp:466 src/main/seq.cpp:470 src/main/seq.cpp:474
+#: src/main/context.cpp:750 src/main/context.cpp:764 src/main/datetime.cpp:1060
+#: src/main/datetime.cpp:1090 src/main/datetime.cpp:1192
+#: src/main/datetime.cpp:1305 src/main/datetime.cpp:1528
+#: src/main/datetime.cpp:1685 src/main/datetime.cpp:2004
+#: src/main/dotcode.cpp:236 src/main/errors.cpp:1172 src/main/errors.cpp:1194
+#: src/main/errors.cpp:1312 src/main/errors.cpp:1319 src/main/errors.cpp:1582
+#: src/main/errors.cpp:2254 src/main/options.cpp:494 src/main/options.cpp:649
+#: src/main/options.cpp:657 src/main/options.cpp:663 src/main/options.cpp:671
+#: src/main/options.cpp:678 src/main/options.cpp:683 src/main/options.cpp:690
+#: src/main/options.cpp:700 src/main/options.cpp:715 src/main/options.cpp:721
+#: src/main/options.cpp:726 src/main/options.cpp:735 src/main/options.cpp:744
+#: src/main/options.cpp:759 src/main/options.cpp:769 src/main/options.cpp:783
+#: src/main/options.cpp:789 src/main/options.cpp:823 src/main/options.cpp:843
+#: src/main/options.cpp:856 src/main/options.cpp:897 src/main/options.cpp:908
+#: src/main/options.cpp:919 src/main/platform.cpp:3910 src/main/seq.cpp:276
+#: src/main/seq.cpp:283 src/main/seq.cpp:287 src/main/seq.cpp:398
+#: src/main/seq.cpp:405 src/main/seq.cpp:408 src/main/seq.cpp:410
+#: src/main/seq.cpp:467 src/main/seq.cpp:471 src/main/seq.cpp:475
 #: src/main/sort.cpp:1593 src/main/sort.cpp:1597 src/main/sort.cpp:1604
 #: src/main/source.cpp:230 src/main/sysutils.cpp:284 src/main/util.cpp:1220
 #: src/main/util.cpp:1225 src/main/util.cpp:1232 src/main/util.cpp:2611
-#: src/modules/lapack/Lapack.cpp:1096 src/modules/X11/devX11.cpp:3240
-#: src/modules/X11/devX11.cpp:3267 src/modules/X11/devX11.cpp:3272
-#: src/modules/X11/devX11.cpp:3277 src/modules/X11/devX11.cpp:3287
-#: src/modules/X11/devX11.cpp:3292 src/modules/X11/devX11.cpp:3296
-#: src/modules/X11/devX11.cpp:3300 src/modules/X11/devX11.cpp:3305
+#: src/modules/X11/devX11.cpp:3240 src/modules/X11/devX11.cpp:3267
+#: src/modules/X11/devX11.cpp:3272 src/modules/X11/devX11.cpp:3277
+#: src/modules/X11/devX11.cpp:3287 src/modules/X11/devX11.cpp:3292
+#: src/modules/X11/devX11.cpp:3296 src/modules/X11/devX11.cpp:3300
+#: src/modules/X11/devX11.cpp:3305 src/modules/lapack/Lapack.cpp:1096
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valeur '%s' incorrecte"
-
-#: src/main/character.cpp:1856 src/main/grep.cpp:204 src/main/String.cpp:236
-#, fuzzy
-msgid "R character strings are limited to 2^31-1 bytes"
-msgstr "les noms de variables sont limités à %d octets"
-
-#: src/main/Closure.cpp:62
-msgid "invalid body argument for 'function'"
-msgstr "argument formel invalide pour 'function'"
 
 #: src/main/coerce.cpp:63
 msgid "applies only to lists and vectors"
 msgstr "ne s'applique qu'à des listes ou des vecteurs"
 
-#: src/main/coerce.cpp:113 src/main/errors.cpp:1432
+#: src/main/coerce.cpp:113 src/main/errors.cpp:1433
 msgid "NAs introduced by coercion"
 msgstr "NAs introduits lors de la conversion automatique"
 
@@ -1758,7 +2250,7 @@ msgstr "NAs introduits lors de la conversion automatique"
 msgid "NAs introduced by coercion to integer range"
 msgstr "NAs introduits lors de la conversion automatique en 'integer'"
 
-#: src/main/coerce.cpp:117 src/main/errors.cpp:1434
+#: src/main/coerce.cpp:117 src/main/errors.cpp:1435
 msgid "imaginary parts discarded in coercion"
 msgstr "les parties imaginaires sont perdues lors de la conversion automatique"
 
@@ -1801,7 +2293,7 @@ msgstr "variable facteur mal formée"
 msgid "list argument expected"
 msgstr "liste d'arguments attendue"
 
-#: src/main/coerce.cpp:1581 src/main/dstruct.cpp:106 src/main/eval.cpp:8934
+#: src/main/coerce.cpp:1581 src/main/dstruct.cpp:106 src/main/eval.cpp:8933
 msgid "invalid environment"
 msgstr "environnement incorrect"
 
@@ -1953,71 +2445,6 @@ msgstr "la modification du mode de stockage d'un objet 'factor' n'est pas autori
 msgid "package grDevices must be loaded"
 msgstr "les routines lapack ne peuvent être chargées"
 
-#: src/main/CommandLineArgs.cpp:76 src/main/CommandLineArgs.cpp:81
-#, fuzzy
-msgid "allocation failure in R_set_command_line_arguments"
-msgstr "erreur d'affectation mémoire dans R_tmpnam2"
-
-#: src/main/CommandLineArgs.cpp:190
-msgid "WARNING: no value given for --encoding"
-msgstr "AVIS : aucune valeur donnée pour --encoding"
-
-#: src/main/CommandLineArgs.cpp:215
-#, c-format
-msgid "WARNING: option '%s' no longer supported"
-msgstr "AVIS : l'option '%s' n'est plus disponible"
-
-#: src/main/CommandLineArgs.cpp:226
-#, c-format
-msgid "WARNING: no value given for '%s'"
-msgstr "AVIS : aucune valeur donnée pour '%s'"
-
-#: src/main/CommandLineArgs.cpp:236
-#, c-format
-msgid "WARNING: '%s' value is invalid: ignored"
-msgstr "AVIS : valeur '%s' incorrecte : ignorée"
-
-#: src/main/CommandLineArgs.cpp:240
-#, c-format
-msgid "WARNING: %s: too large and ignored"
-msgstr "AVIS : %s : trop grand et ignoré"
-
-#: src/main/CommandLineArgs.cpp:254
-msgid "WARNING: no value given for '--max-ppsize'"
-msgstr "AVIS : aucune valeur donnée pour '--max-ppsize'"
-
-#: src/main/CommandLineArgs.cpp:259
-msgid "WARNING: '--max-ppsize' value is negative: ignored"
-msgstr "AVIS : valeur de '--max-ppsize' strictement négative : ignorée"
-
-#: src/main/CommandLineArgs.cpp:261
-msgid "WARNING: '--max-ppsize' value is too small: ignored"
-msgstr "AVIS : valeur de '--max-ppsize' trop petite : ignorée"
-
-#: src/main/CommandLineArgs.cpp:263
-msgid "WARNING: '--max-ppsize' value is too large: ignored"
-msgstr "AVIS : valeur de '--max-ppsize' trop grande : ignorée"
-
-#: src/main/CommandLineArgs.cpp:271
-#, fuzzy
-msgid "WARNING: no value given for '--max-connections'"
-msgstr "AVIS : aucune valeur donnée pour '--max-ppsize'"
-
-#: src/main/CommandLineArgs.cpp:276
-#, fuzzy
-msgid "WARNING: '--max-connections' value is negative: ignored"
-msgstr "AVIS : valeur de '--max-ppsize' strictement négative : ignorée"
-
-#: src/main/CommandLineArgs.cpp:278
-#, fuzzy
-msgid "WARNING: '--max-connections' value is too small: ignored"
-msgstr "AVIS : valeur de '--max-ppsize' trop petite : ignorée"
-
-#: src/main/CommandLineArgs.cpp:280
-#, fuzzy
-msgid "WARNING: '--max-connections' value is too large: ignored"
-msgstr "AVIS : valeur de '--max-ppsize' trop grande : ignorée"
-
 #: src/main/complex.cpp:135
 msgid "invalid complex unary operator"
 msgstr "opérateur complexe unitaire incorrect"
@@ -2102,7 +2529,7 @@ msgstr "chaîne de caractères incorrecte dans la conversion de la sortie"
 msgid "invalid input found on input connection '%s'"
 msgstr "entrée incorrecte trouvée dans la connexion en entrée '%s'"
 
-#: src/main/connections.cpp:890 src/main/platform.cpp:970
+#: src/main/connections.cpp:890 src/main/platform.cpp:977
 #, c-format
 msgid "cannot open file '%ls': %s"
 msgstr "impossible d'ouvrir le fichier '%ls' : %s"
@@ -2954,11 +3381,6 @@ msgstr "erreur interne dans 'do_sys'"
 msgid "allocation of %s connection failed"
 msgstr "erreur d'allocation d'une connexion %s"
 
-#: src/main/ConsCell.cpp:60
-#, c-format
-msgid "bad binding access: %d"
-msgstr ""
-
 #: src/main/context.cpp:204
 #, fuzzy
 msgid "bad target context--should NEVER happen if R was called correctly"
@@ -3043,62 +3465,63 @@ msgstr "fonction cumxxx inconnue"
 msgid "datetimes before 1902 may not be accurate: warns once per session"
 msgstr ""
 
-#: src/main/datetime.cpp:794 src/main/datetime.cpp:810 src/main/util.cpp:1186
+#: src/main/datetime.cpp:794 src/main/datetime.cpp:844 src/main/util.cpp:1186
 #, fuzzy
 msgid "time zone specification is too long"
 msgstr "chaîne de caractères en entrée trop longue"
 
-#: src/main/datetime.cpp:800 src/main/datetime.cpp:812
-#: src/main/datetime.cpp:831 src/main/datetime.cpp:836
-msgid "problem with setting timezone"
-msgstr "problème lors de la détermination du fuseau horaire"
-
-#: src/main/datetime.cpp:816
-msgid "cannot set timezones on this system"
-msgstr "impossible de définir le fuseau horaire sur ce système"
-
-#: src/main/datetime.cpp:842 src/main/datetime.cpp:844
-#: src/main/datetime.cpp:846
+#: src/main/datetime.cpp:821 src/main/datetime.cpp:824
+#: src/main/datetime.cpp:827 src/main/datetime.cpp:876
+#: src/main/datetime.cpp:878 src/main/datetime.cpp:880
 msgid "problem with unsetting timezone"
 msgstr "problème lors de la désaffectation d'un fuseau horaire"
 
-#: src/main/datetime.cpp:985
+#: src/main/datetime.cpp:834 src/main/datetime.cpp:846
+#: src/main/datetime.cpp:865 src/main/datetime.cpp:870
+msgid "problem with setting timezone"
+msgstr "problème lors de la détermination du fuseau horaire"
+
+#: src/main/datetime.cpp:850
+msgid "cannot set timezones on this system"
+msgstr "impossible de définir le fuseau horaire sur ce système"
+
+#: src/main/datetime.cpp:1019
 msgid "a valid \"POSIXlt\" object is a list of at least 9 elements"
 msgstr ""
 
-#: src/main/datetime.cpp:989
+#: src/main/datetime.cpp:1023
 msgid "a valid \"POSIXlt\" object has names"
 msgstr ""
 
-#: src/main/datetime.cpp:995
+#: src/main/datetime.cpp:1029
 #, c-format
 msgid "a valid \"POSIXlt\" object has element %d with name '%s' which should be '%s'"
 msgstr ""
 
-#: src/main/datetime.cpp:1002 src/main/datetime.cpp:1018
+#: src/main/datetime.cpp:1036 src/main/datetime.cpp:1052
 #, c-format
 msgid "a valid \"POSIXlt\" object has a numeric element %s"
 msgstr ""
 
-#: src/main/datetime.cpp:1013
+#: src/main/datetime.cpp:1047
 #, c-format
 msgid "a valid \"POSIXlt\" object has a character element %s"
 msgstr ""
 
-#: src/main/datetime.cpp:1029
+#: src/main/datetime.cpp:1063
 msgid "attr(x, \"tzone\") should have length 1 or 3"
 msgstr ""
 
-#: src/main/datetime.cpp:1151
+#: src/main/datetime.cpp:1180
 #, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr "composante de longueur nulle [[%d]] dans une structure \"POSIXlt\" non vide"
 
-#: src/main/datetime.cpp:1443
+#: src/main/datetime.cpp:1468
 msgid "output string exceeded 2048 bytes"
 msgstr ""
 
-#: src/main/datetime.cpp:1818
+#: src/main/datetime.cpp:1838
 #, fuzzy, c-format
 msgid "'%s' is not a \"%s\""
 msgstr "le '%s' n'est pas un %s"
@@ -3319,7 +3742,7 @@ msgstr "'%s' est obsolète et sera désactivé"
 msgid "no arguments supplied"
 msgstr "aucun argument fourni"
 
-#: src/main/dotcode.cpp:504 src/main/seq.cpp:1101
+#: src/main/dotcode.cpp:504 src/main/seq.cpp:1102
 msgid "too many arguments"
 msgstr "trop d'arguments"
 
@@ -3553,7 +3976,7 @@ msgstr ""
 msgid "requested primitive type is not consistent with cached value"
 msgstr ""
 
-#: src/main/duplicate.cpp:402
+#: src/main/duplicate.cpp:403
 msgid "vector types do not match in copyVector"
 msgstr ""
 
@@ -4079,11 +4502,6 @@ msgstr "chaîne de charactères UTF-8 incorrecte"
 msgid "embedded nul in string: '%s'"
 msgstr "caractère nul au milieu de la chaîne : '%s'"
 
-#: src/main/envir.cpp:4120 src/main/String.cpp:128
-#, c-format
-msgid "unknown encoding: %d"
-msgstr "encodage inconnu : %d"
-
 #: src/main/envir.cpp:4262
 #, fuzzy
 msgid "argument 'nsenv' is not a namespace"
@@ -4099,233 +4517,233 @@ msgstr ""
 msgid "S4 Method %s defined in namespace %s with signature %s has this body.\n"
 msgstr ""
 
-#: src/main/errors.cpp:244 src/main/errors.cpp:281
+#: src/main/errors.cpp:245 src/main/errors.cpp:282
 msgid "interrupts suspended; signal ignored"
 msgstr "interruptions suspendues ; le signal est ignoré"
 
-#: src/main/errors.cpp:392
+#: src/main/errors.cpp:393
 msgid "[... truncated]"
 msgstr "[…tronqué]"
 
-#: src/main/errors.cpp:473
+#: src/main/errors.cpp:474
 msgid "invalid option \"warning.expression\""
 msgstr "option incorrecte \"warning.expression\""
 
-#: src/main/errors.cpp:500
+#: src/main/errors.cpp:501
 #, c-format
 msgid "(converted from warning) %s"
 msgstr "(converti depuis l'avis) %s"
 
-#: src/main/errors.cpp:511
+#: src/main/errors.cpp:512
 msgid "Warning:"
 msgstr "Avis :"
 
-#: src/main/errors.cpp:513
+#: src/main/errors.cpp:514
 #, fuzzy, c-format
 msgid "Warning in '%s':"
 msgstr "Avis dans %s :"
 
-#: src/main/errors.cpp:529 src/main/errors.cpp:544 src/main/errors.cpp:871
+#: src/main/errors.cpp:530 src/main/errors.cpp:545 src/main/errors.cpp:872
 msgid "Calls:"
 msgstr "Appels :"
 
-#: src/main/errors.cpp:601 src/main/errors.cpp:698 src/main/errors.cpp:775
+#: src/main/errors.cpp:602 src/main/errors.cpp:699 src/main/errors.cpp:776
 msgid "Lost warning messages\n"
 msgstr "Messages d'avis perdus\n"
 
-#: src/main/errors.cpp:607
+#: src/main/errors.cpp:608
 msgid "Warning message:"
 msgid_plural "Warning messages:"
 msgstr[0] "Message d'avis :"
 msgstr[1] "Messages d'avis :"
 
-#: src/main/errors.cpp:621 src/main/errors.cpp:650
+#: src/main/errors.cpp:622 src/main/errors.cpp:651
 #, fuzzy, c-format
 msgid "In '%s':"
 msgstr "valeur '%s' incorrecte"
 
-#: src/main/errors.cpp:675
+#: src/main/errors.cpp:676
 #, fuzzy, c-format
 msgid "There was %d warning (use 'warnings()' to see it)"
 msgid_plural "There were %d warnings (use 'warnings()' to see them)"
 msgstr[0] "Il y a eu %d avis (utilisez warnings() pour le visionner)"
 msgstr[1] "Il y a eu %d avis (utilisez warnings() pour les visionner)"
 
-#: src/main/errors.cpp:680
+#: src/main/errors.cpp:681
 #, fuzzy, c-format
 msgid "There were %d or more warnings (use 'warnings()' to see the first %d)"
 msgstr "Il y a eu %d avis ou plus (utilisez warnings() pour voir les %d premiers)"
 
-#: src/main/errors.cpp:766
+#: src/main/errors.cpp:767
 msgid "Error during wrapup: "
 msgstr "Erreur pendant l'emballage (wrapup) : "
 
-#: src/main/errors.cpp:777
+#: src/main/errors.cpp:778
 msgid "Error: no more error handlers available (recursive errors?); invoking 'abort' restart\n"
 msgstr "Erreur : plus de gestionnaire d’erreur disponible (erreurs récursives ?) ; appel d’un redémarrage de type 'abort'\n"
 
-#: src/main/errors.cpp:794
+#: src/main/errors.cpp:795
 msgid "Error in "
 msgstr "Erreur dans "
 
-#: src/main/errors.cpp:811 src/main/errors.cpp:818
+#: src/main/errors.cpp:812 src/main/errors.cpp:819
 #, fuzzy, c-format
 msgid "Error in '%s' (from %s): "
 msgstr "Erreur dans %s (depuis %s) : "
 
-#: src/main/errors.cpp:820
+#: src/main/errors.cpp:821
 #, fuzzy, c-format
 msgid "Error in '%s': "
 msgstr "Erreur dans %s : "
 
-#: src/main/errors.cpp:843 src/main/errors.cpp:848
+#: src/main/errors.cpp:844 src/main/errors.cpp:849
 msgid "Error: "
 msgstr "Erreur : "
 
-#: src/main/errors.cpp:884 src/main/errors.cpp:1492
+#: src/main/errors.cpp:885 src/main/errors.cpp:1493
 #, fuzzy
 msgid "Additional warning message:"
 msgid_plural "Additional warning messages:"
 msgstr[0] "Message d'avis :"
 msgstr[1] "Messages d'avis :"
 
-#: src/main/errors.cpp:1006
+#: src/main/errors.cpp:1007
 msgid "invalid option \"error\"\n"
 msgstr "option \"error\" incorrecte\n"
 
-#: src/main/errors.cpp:1354 src/main/errors.cpp:1386
+#: src/main/errors.cpp:1355 src/main/errors.cpp:1387
 #, fuzzy, c-format
 msgid " [invalid string in '%s']"
 msgstr " [chaîne incorrecte dans stop(.)]"
 
-#: src/main/errors.cpp:1402
+#: src/main/errors.cpp:1403
 #, c-format
 msgid "incorrect number of arguments to \"%s\""
 msgstr "nombre d'arguments incorrect pour \"%s\""
 
-#: src/main/errors.cpp:1408 src/main/errors.cpp:1423
+#: src/main/errors.cpp:1409 src/main/errors.cpp:1424
 #, c-format
 msgid "unimplemented feature in %s"
 msgstr "fonction non implémentée dans %s"
 
-#: src/main/errors.cpp:1417
+#: src/main/errors.cpp:1418
 msgid "invalid number of arguments"
 msgstr "nombre d'arguments incorrect"
 
-#: src/main/errors.cpp:1418 src/main/logic.cpp:215
+#: src/main/errors.cpp:1419 src/main/logic.cpp:215
 msgid "invalid argument type"
 msgstr "type de l'argument incorrect"
 
-#: src/main/errors.cpp:1420
+#: src/main/errors.cpp:1421
 msgid "time-series/vector length mismatch"
 msgstr "longueurs incompatibles des séries temporelles / vecteurs"
 
-#: src/main/errors.cpp:1421
+#: src/main/errors.cpp:1422
 msgid "incompatible arguments"
 msgstr "arguments incompatibles"
 
-#: src/main/errors.cpp:1424
+#: src/main/errors.cpp:1425
 msgid "unknown error (report this!)"
 msgstr "erreur inconnue (veuillez signaler ceci aux développeurs !)"
 
-#: src/main/errors.cpp:1433
+#: src/main/errors.cpp:1434
 msgid "inaccurate integer conversion in coercion"
 msgstr "conversion automatique d'entier approximative"
 
-#: src/main/errors.cpp:1436
+#: src/main/errors.cpp:1437
 msgid "unknown warning (report this!)"
 msgstr "avis inconnu (veuillez signaler ceci aux développeurs !)"
 
-#: src/main/errors.cpp:1741
+#: src/main/errors.cpp:1742
 msgid "bad handler data"
 msgstr "mauvais manipulateur de données"
 
-#: src/main/errors.cpp:1890
+#: src/main/errors.cpp:1891
 msgid "error message not a string"
 msgstr "le message d'erreur n'est pas une chaîne de caractères"
 
-#: src/main/errors.cpp:1965
+#: src/main/errors.cpp:1966
 msgid "handler or restart stack mismatch in old restart"
 msgstr "manipulateur de données ou pile de redémarrage incohérent dans l'ancien redémarrage"
 
-#: src/main/errors.cpp:2005 src/main/errors.cpp:2018
+#: src/main/errors.cpp:2006 src/main/errors.cpp:2019
 msgid "bad error message"
 msgstr "mauvais message d'erreur"
 
-#: src/main/errors.cpp:2058
+#: src/main/errors.cpp:2059
 msgid "bad restart"
 msgstr "mauvais redémarrage"
 
-#: src/main/errors.cpp:2090
+#: src/main/errors.cpp:2091
 msgid "restart not on stack"
 msgstr "le redémarrage n'est pas dans la pile"
 
-#: src/main/errors.cpp:2107
+#: src/main/errors.cpp:2108
 msgid "not in a try context"
 msgstr "vous n'êtes pas dans un contexte 'try'"
 
-#: src/main/errors.cpp:2118
+#: src/main/errors.cpp:2119
 msgid "error message must be a character string"
 msgstr "le message d'erreur doit être une chaîne de caractères"
 
-#: src/main/errors.cpp:2438 src/main/errors.cpp:2533
+#: src/main/errors.cpp:2439 src/main/errors.cpp:2534
 #, fuzzy
 msgid "body function is required"
 msgstr "aucune function à relancer"
 
-#: src/main/errors.cpp:2481
+#: src/main/errors.cpp:2482
 #, fuzzy
 msgid "not an external pointer"
 msgstr "impossible de déclasser un pointeur externe"
 
-#: src/main/errors.cpp:2586 src/main/errors.cpp:2601
+#: src/main/errors.cpp:2587 src/main/errors.cpp:2602
 #, fuzzy
 msgid "should not be called with handlers on the stack"
 msgstr "il n'y a pas autant de trames dans la pile"
 
-#: src/main/errors.cpp:2649
+#: src/main/errors.cpp:2650
 #, fuzzy
 msgid "condition object must be a VECSXP of length at least one"
 msgstr "'mode' doit être de longueur unitaire ou plus"
 
-#: src/main/errors.cpp:2652
+#: src/main/errors.cpp:2653
 #, fuzzy
 msgid "first element of condition object must be a scalar string"
 msgstr "objet de remplacement incorrect, doit être de classe chaîne de caractères"
 
-#: src/main/errors.cpp:2747
+#: src/main/errors.cpp:2748
 #, c-format
 msgid "argument \"%s\" is missing, with no default"
 msgstr "l'argument \"%s\" est manquant, avec aucune valeur par défaut"
 
-#: src/main/errors.cpp:2750
+#: src/main/errors.cpp:2751
 msgid "argument is missing, with no default"
 msgstr "argument manquant, sans valeur associée par défaut"
 
-#: src/main/errors.cpp:2772
+#: src/main/errors.cpp:2773
 #, fuzzy
 msgid "bad field index"
 msgstr "mauvais nom de fichier"
 
-#: src/main/errors.cpp:2775
+#: src/main/errors.cpp:2776
 #, fuzzy
 msgid "bad names attribute on condition object"
 msgstr "attribut de nom erroné"
 
-#: src/main/errors.cpp:2930
+#: src/main/errors.cpp:2931
 #, c-format
 msgid "partial argument match of '%s' to '%s'"
 msgstr "correspondance partielle d'argument de '%s' par rapport à '%s'"
 
-#: src/main/errors.cpp:2942
+#: src/main/errors.cpp:2943
 msgid "protect(): protection stack overflow"
 msgstr "protect() : débordement vers le haut de protection de pile"
 
-#: src/main/errors.cpp:2943
+#: src/main/errors.cpp:2944
 msgid "evaluation nested too deeply: infinite recursion / options(expressions=)?"
 msgstr "évaluations trop profondément imbriquées : récursion infinie / options(expressions=) ?"
 
-#: src/main/errors.cpp:2944
+#: src/main/errors.cpp:2945
 msgid "node stack overflow"
 msgstr "pile de noeuds débordée vers le haut"
 
@@ -4352,7 +4770,7 @@ msgstr "impossible de créer un pixmap"
 msgid "profiling requires 'pthread' support"
 msgstr ""
 
-#: src/main/eval.cpp:878 src/main/eval.cpp:9162
+#: src/main/eval.cpp:878 src/main/eval.cpp:9161
 msgid "setting profile timer failed"
 msgstr "le démarrage d'une temporisation de profilage a échoué"
 
@@ -4393,7 +4811,7 @@ msgstr "la promesse est déjà en cours d'évaluation : référence récursive d
 msgid "restarting interrupted promise evaluation"
 msgstr "redémarrage de l'évaluation d'une promesse interrompue"
 
-#: src/main/eval.cpp:1230 src/main/eval.cpp:2519 src/main/eval.cpp:7889
+#: src/main/eval.cpp:1230 src/main/eval.cpp:2519 src/main/eval.cpp:7888
 msgid "attempt to apply non-function"
 msgstr "tentative d'appliquer un objet qui n'est pas une fonction"
 
@@ -4411,7 +4829,7 @@ msgstr ""
 msgid "'rho' must be an environment not %s: detected in C-level applyClosure"
 msgstr ""
 
-#: src/main/eval.cpp:2512 src/main/eval.cpp:3718 src/main/eval.cpp:6873
+#: src/main/eval.cpp:2512 src/main/eval.cpp:3718 src/main/eval.cpp:6872
 #, c-format
 msgid "argument %d is empty"
 msgstr "l'argument %d est vide"
@@ -4451,7 +4869,7 @@ msgstr "l'argument est de longueur nulle"
 msgid "non-symbol loop variable"
 msgstr "variable de boucle non symbolique"
 
-#: src/main/eval.cpp:2922 src/main/eval.cpp:7584
+#: src/main/eval.cpp:2922 src/main/eval.cpp:7583
 msgid "invalid for() loop sequence"
 msgstr "séquence de boucle for() incorrecte"
 
@@ -4559,146 +4977,146 @@ msgstr "mauvais code d'opération (opcode)"
 msgid "invalid %s type in 'x %s y'"
 msgstr "type %s incorrect dans 'x %s y'"
 
-#: src/main/eval.cpp:6887
+#: src/main/eval.cpp:6886
 #, fuzzy, c-format
 msgid "argument %d is missing"
 msgstr "l'argument %d est vide"
 
-#: src/main/eval.cpp:7497
+#: src/main/eval.cpp:7496
 msgid "byte code version mismatch"
 msgstr "incohérence de versions du pseudo-code"
 
-#: src/main/eval.cpp:7720
+#: src/main/eval.cpp:7719
 msgid "invalid sequence argument in for loop"
 msgstr "séquence d'arguments incorrecte dans une boucle for"
 
-#: src/main/eval.cpp:7879 src/main/names.cpp:1356
+#: src/main/eval.cpp:7878 src/main/names.cpp:1356
 #, c-format
 msgid "there is no .Internal function '%s'"
 msgstr "pas de fonction .Internal '%s'"
 
-#: src/main/eval.cpp:7994 src/main/eval.cpp:8420 src/main/eval.cpp:8461
+#: src/main/eval.cpp:7993 src/main/eval.cpp:8419 src/main/eval.cpp:8460
 msgid "bad function"
 msgstr "mauvaise fonction"
 
-#: src/main/eval.cpp:8007
+#: src/main/eval.cpp:8006
 #, fuzzy, c-format
 msgid "'%s' is not a '%s' function"
 msgstr "\"%s\" n'est pas une fonction %s"
 
-#: src/main/eval.cpp:8520 src/main/eval.cpp:8545
+#: src/main/eval.cpp:8519 src/main/eval.cpp:8544
 msgid "bad numeric 'switch' offsets"
 msgstr "valeur de décalage numérique 'switch' erronée"
 
-#: src/main/eval.cpp:8526
+#: src/main/eval.cpp:8525
 msgid "numeric EXPR required for 'switch' without named alternatives"
 msgstr "une EXPR numérique est requise dans 'switch' sans alternatives nommées"
 
-#: src/main/eval.cpp:8529
+#: src/main/eval.cpp:8528
 msgid "bad character 'switch' offsets"
 msgstr "valeur de décalage caractère 'switch' erronée"
 
-#: src/main/eval.cpp:8531
+#: src/main/eval.cpp:8530
 #, fuzzy
 msgid "bad 'switch' names"
 msgstr "noms des options de branchage non appropriés"
 
-#: src/main/eval.cpp:8658
+#: src/main/eval.cpp:8657
 #, fuzzy
 msgid "unknown instruction code"
 msgstr "format d'entrée inconnu"
 
-#: src/main/eval.cpp:8672
+#: src/main/eval.cpp:8671
 msgid "cannot find index for threaded code address"
 msgstr "impossible de trouver l'indice pour l'adresse de code traitée"
 
-#: src/main/eval.cpp:8713
+#: src/main/eval.cpp:8712
 msgid "R_registerBC requires integer vector as bcBytes"
 msgstr ""
 
-#: src/main/eval.cpp:8715
+#: src/main/eval.cpp:8714
 msgid "R_registerBC requires BCODESXP object as bcode"
 msgstr ""
 
-#: src/main/eval.cpp:8795
+#: src/main/eval.cpp:8794
 msgid "ERROR: the modified value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8797
+#: src/main/eval.cpp:8796
 msgid "ERROR: the original value of the constant is:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8799
+#: src/main/eval.cpp:8798
 #, c-format
 msgid "ERROR: the modified constant is at index %d\n"
 msgstr ""
 
-#: src/main/eval.cpp:8800
+#: src/main/eval.cpp:8799
 msgid "ERROR: the modified constant is in this function body:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8803
+#: src/main/eval.cpp:8802
 msgid "ERROR: the modified constant is function body:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8805
+#: src/main/eval.cpp:8804
 msgid "ERROR: the body was originally:\n"
 msgstr ""
 
-#: src/main/eval.cpp:8834 src/main/eval.cpp:8843
+#: src/main/eval.cpp:8833 src/main/eval.cpp:8842
 #, c-format
 msgid "ERROR: modification of compiler constant of type %s, length %d\n"
 msgstr ""
 
-#: src/main/eval.cpp:8857
+#: src/main/eval.cpp:8856
 msgid "compiler constants were modified!\n"
 msgstr ""
 
-#: src/main/eval.cpp:8927
+#: src/main/eval.cpp:8926
 msgid "invalid body"
 msgstr "corps (body) non valide"
 
-#: src/main/eval.cpp:8947
+#: src/main/eval.cpp:8946
 msgid "invalid symbol"
 msgstr "symbole non valide"
 
-#: src/main/eval.cpp:8988
+#: src/main/eval.cpp:8987
 msgid "argument is not a byte code object"
 msgstr "l'argument n'est pas un objet pseudo-code"
 
-#: src/main/eval.cpp:9015 src/main/eval.cpp:9022
+#: src/main/eval.cpp:9014 src/main/eval.cpp:9021
 msgid "R_CompiledFileName: buffer too small"
 msgstr "R_CompiledFileName : tampon trop petit"
 
-#: src/main/eval.cpp:9053 src/main/eval.cpp:9069 src/main/eval.cpp:9102
+#: src/main/eval.cpp:9052 src/main/eval.cpp:9068 src/main/eval.cpp:9101
 msgid "constant buffer must be a generic vector"
 msgstr "le tampon des constantes doit être un vecteur générique"
 
-#: src/main/eval.cpp:9073
+#: src/main/eval.cpp:9072
 msgid "bad constCount value"
 msgstr "mauvaise valeur de constCount"
 
-#: src/main/eval.cpp:9104
+#: src/main/eval.cpp:9103
 msgid "bad constant count"
 msgstr "nombre de constantes erroné"
 
-#: src/main/eval.cpp:9140
+#: src/main/eval.cpp:9139
 msgid "profile timer in use"
 msgstr "temporisation de profilage en utilisation"
 
-#: src/main/eval.cpp:9142
+#: src/main/eval.cpp:9141
 msgid "already byte code profiling"
 msgstr "déjà en train de profiler du pseudo-code"
 
-#: src/main/eval.cpp:9181
+#: src/main/eval.cpp:9180
 msgid "not byte code profiling"
 msgstr "profilage d'autre chose que du pseudo-code"
 
-#: src/main/eval.cpp:9198 src/main/eval.cpp:9203 src/main/eval.cpp:9208
+#: src/main/eval.cpp:9197 src/main/eval.cpp:9202 src/main/eval.cpp:9207
 msgid "byte code profiling is not supported in this build"
 msgstr "le profilage de pseudo-code ne fonctionne pas dans cette compilation"
 
-#: src/main/eval.cpp:9257
+#: src/main/eval.cpp:9256
 #, fuzzy
 msgid "parse error"
 msgstr "erreur de lecture"
@@ -5510,15 +5928,6 @@ msgstr "impossible d'allouer un bloc de mémoire de taille %0.f Tb"
 msgid "cannot allocate memory block of size %0.1f %s"
 msgstr "impossible d'allouer un bloc de mémoire de taille %0.1f Go"
 
-#: src/main/memory.cpp:1904 src/main/memory.cpp:1953
-#, fuzzy, c-format
-msgid "cannot allocate vector of length %lld"
-msgstr "impossible d'allouer un vecteur de longueur %lld"
-
-#: src/main/memory.cpp:1906 src/main/memory.cpp:1955
-msgid "negative length vectors are not allowed"
-msgstr "longueur de vecteurs négative non permise"
-
 #: src/main/memory.cpp:1913
 msgid "use of allocVector(CHARSXP ...) is defunct\n"
 msgstr ""
@@ -5606,192 +6015,188 @@ msgstr "'default' est trop long"
 msgid "%s: argument of type %s is not an external pointer"
 msgstr "le premier argument doit être un environnement ou un pointeur externe"
 
-#: src/main/memory.cpp:2723
+#: src/main/memory.cpp:2725
 #, c-format
 msgid "value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:2763
+#: src/main/memory.cpp:2767
 #, c-format
 msgid "can't change type from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:2771
+#: src/main/memory.cpp:2775
 #, c-format
 msgid "can't change the type of an ALTREP object from %s to %s"
 msgstr ""
 
-#: src/main/memory.cpp:2778
+#: src/main/memory.cpp:2782
 #, fuzzy
 msgid "can't change the type of a binding cell"
 msgstr "impossible de changer un lien actif si le lien est verrouillé"
 
-#: src/main/memory.cpp:2882 src/main/memory.cpp:3219
+#: src/main/memory.cpp:2892 src/main/memory.cpp:3228
 #, c-format
 msgid "'%s' or similar applied to %s object"
 msgstr ""
 
-#: src/main/memory.cpp:2895
+#: src/main/memory.cpp:2907
 #, fuzzy
 msgid "SETLENGTH() cannot be applied to an ALTVEC object."
 msgstr "SETLENGTH() peut seulement être appliqué à un vecteur standard, pas à '%s'"
 
-#: src/main/memory.cpp:2897
+#: src/main/memory.cpp:2909
 #, c-format
 msgid "SETLENGTH() can only be applied to a standard vector, not a '%s'"
 msgstr "SETLENGTH() peut seulement être appliqué à un vecteur standard, pas à '%s'"
 
-#: src/main/memory.cpp:2915 src/main/memory.cpp:2923 src/main/memory.cpp:2943
-#: src/main/memory.cpp:2963 src/main/memory.cpp:3015 src/main/memory.cpp:3024
-#: src/main/memory.cpp:3034 src/main/memory.cpp:3043 src/main/memory.cpp:3052
-#: src/main/memory.cpp:3061 src/main/memory.cpp:3069 src/main/memory.cpp:3078
-#: src/main/memory.cpp:3087 src/main/memory.cpp:3095 src/main/memory.cpp:3103
-#: src/main/memory.cpp:3111 src/main/memory.cpp:3119 src/main/memory.cpp:3132
-#: src/main/memory.cpp:3141 src/main/memory.cpp:3166 src/main/memory.cpp:3185
+#: src/main/memory.cpp:2928 src/main/memory.cpp:2936 src/main/memory.cpp:2956
+#: src/main/memory.cpp:2976 src/main/memory.cpp:3029 src/main/memory.cpp:3038
+#: src/main/memory.cpp:3048 src/main/memory.cpp:3057 src/main/memory.cpp:3066
+#: src/main/memory.cpp:3075 src/main/memory.cpp:3083 src/main/memory.cpp:3092
+#: src/main/memory.cpp:3101 src/main/memory.cpp:3109 src/main/memory.cpp:3117
+#: src/main/memory.cpp:3125 src/main/memory.cpp:3133 src/main/memory.cpp:3141
+#: src/main/memory.cpp:3150 src/main/memory.cpp:3175 src/main/memory.cpp:3194
 #, fuzzy, c-format
 msgid "%s() can only be applied to a '%s', not a '%s'"
 msgstr "SETLENGTH() peut seulement être appliqué à un vecteur standard, pas à '%s'"
 
-#: src/main/memory.cpp:2926
+#: src/main/memory.cpp:2939
 #, fuzzy, c-format
 msgid "attempt access index %lld/%lld in STRING_ELT"
 msgstr "tentative de modification de l'index %lld/%lld dans SET_STRING_ELT"
 
-#: src/main/memory.cpp:2946
+#: src/main/memory.cpp:2959
 #, fuzzy, c-format
 msgid "attempt access index %lld/%lld in VECTOR_ELT"
 msgstr "tentative de modification de l'index %lld/%lld dans SET_VECTOR_ELT"
 
-#: src/main/memory.cpp:2966
+#: src/main/memory.cpp:2979
 #, fuzzy, c-format
 msgid "attempt access index %lld/%lld in XVECTOR_ELT"
 msgstr "tentative de modification de l'index %lld/%lld dans SET_VECTOR_ELT"
 
-#: src/main/memory.cpp:3001
+#: src/main/memory.cpp:3015
 msgid "cannot get STDVEC_DATAPTR from ALTREP object"
 msgstr ""
 
-#: src/main/memory.cpp:3003
+#: src/main/memory.cpp:3017
 #, fuzzy, c-format
 msgid "STDVEC_DATAPTR can only be applied to a vector, not a '%s'"
 msgstr "SETLENGTH() peut seulement être appliqué à un vecteur standard, pas à '%s'"
 
-#: src/main/memory.cpp:3127
-msgid "not safe to return vector pointer"
-msgstr "le renvoi d'un pointeur sur un vecteur n'est pas sûr"
-
-#: src/main/memory.cpp:3144
+#: src/main/memory.cpp:3153
 #, c-format
 msgid "Value of SET_STRING_ELT() must be a 'CHARSXP' not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3147
+#: src/main/memory.cpp:3156
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_STRING_ELT"
 msgstr "tentative de modification de l'index %lld/%lld dans SET_STRING_ELT"
 
-#: src/main/memory.cpp:3170
+#: src/main/memory.cpp:3179
 #, c-format
 msgid "attempt to set index %lld/%lld in SET_VECTOR_ELT"
 msgstr "tentative de modification de l'index %lld/%lld dans SET_VECTOR_ELT"
 
-#: src/main/memory.cpp:3189
+#: src/main/memory.cpp:3198
 #, fuzzy, c-format
 msgid "attempt to set index %lld/%lld in SET_XVECTOR_ELT"
 msgstr "tentative de modification de l'index %lld/%lld dans SET_VECTOR_ELT"
 
-#: src/main/memory.cpp:3335
+#: src/main/memory.cpp:3344
 #, fuzzy
 msgid "argument not tracking references"
 msgstr "l'argument n'est pas un environnment"
 
-#: src/main/memory.cpp:3403 src/main/memory.cpp:3413 src/main/memory.cpp:3425
-#: src/main/memory.cpp:3442 src/main/memory.cpp:3457 src/main/memory.cpp:3473
-#: src/main/memory.cpp:3490
+#: src/main/memory.cpp:3412 src/main/memory.cpp:3422 src/main/memory.cpp:3434
+#: src/main/memory.cpp:3451 src/main/memory.cpp:3466 src/main/memory.cpp:3482
+#: src/main/memory.cpp:3499
 msgid "bad value"
 msgstr "mauvaise valeur"
 
-#: src/main/memory.cpp:3430
+#: src/main/memory.cpp:3439
 msgid "inserting non-tracking CDR in tracking cell"
 msgstr ""
 
-#: src/main/memory.cpp:3512
+#: src/main/memory.cpp:3524
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not a closure"
 msgstr "l'argument %d n'est pas un vecteur"
 
-#: src/main/memory.cpp:3544
+#: src/main/memory.cpp:3559
 #, c-format
 msgid "%s: argument of type %s is not a symbol or NULL"
 msgstr ""
 
-#: src/main/memory.cpp:3580
+#: src/main/memory.cpp:3595
 #, fuzzy, c-format
 msgid "%s: argument of type %s is not an environment or NULL"
 msgstr "l'argument à '%s' n'est pas un environnment"
 
-#: src/main/memory.cpp:3602
+#: src/main/memory.cpp:3623
 #, fuzzy
 msgid "cycles in parent chains are not allowed"
 msgstr "longueur de vecteurs négative non permise"
 
-#: src/main/memory.cpp:3634
+#: src/main/memory.cpp:3656
 #, c-format
 msgid "expecting a 'PROMSXP', not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3667
+#: src/main/memory.cpp:3689
 #, c-format
 msgid "value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"
 msgstr ""
 
-#: src/main/memory.cpp:3745
+#: src/main/memory.cpp:3767
 msgid "memory profiling is not available on this system"
 msgstr "le profilage de la mémoire n'est pas disponible sur ce système"
 
-#: src/main/memory.cpp:3788
+#: src/main/memory.cpp:3810
 #, c-format
 msgid "Rprofmem: cannot open output file '%s'"
 msgstr "Rprofmem : impossible d'ouvrir le fichier '%s'"
 
-#: src/main/memory.cpp:3826
+#: src/main/memory.cpp:3848
 msgid "R_AllocStringBuffer( (size_t)-1 ) is no longer allowed"
 msgstr ""
 
-#: src/main/memory.cpp:3845
+#: src/main/memory.cpp:3867
 #, fuzzy, c-format
 msgid "could not allocate memory (%u %s) in C function 'R_AllocStringBuffer'"
 msgstr "impossible d'allouer de la mémoire pour 'read.dcf'"
 
-#: src/main/memory.cpp:3900
+#: src/main/memory.cpp:3922
 #, c-format
 msgid "long vectors not supported yet: %s:%d"
 msgstr "les vecteurs longs ne sont pas encore supportés : %s:%d"
 
-#: src/main/memory.cpp:3934
+#: src/main/memory.cpp:3956
 #, fuzzy, c-format
 msgid "cannot make a resizable vector of type '%s'"
 msgstr "impossible de créer une matrice à partir de du type '%s'"
 
-#: src/main/memory.cpp:3946
+#: src/main/memory.cpp:3968
 msgid "ALTREP objects cannot be made resizable"
 msgstr ""
 
-#: src/main/memory.cpp:3948
+#: src/main/memory.cpp:3970
 msgid "cannot make non-vector objects resizable"
 msgstr ""
 
-#: src/main/memory.cpp:3975
+#: src/main/memory.cpp:3997
 #, fuzzy
 msgid "invalid negative 'newlen'"
 msgstr "fin de ligne incorrecte"
 
-#: src/main/memory.cpp:3978
+#: src/main/memory.cpp:4000
 #, fuzzy
 msgid "not a resizable vector"
 msgstr "ce n'est pas un vecteur 'raw'"
 
-#: src/main/memory.cpp:3980
+#: src/main/memory.cpp:4002
 #, fuzzy
 msgid "'newlen' is too large"
 msgstr "vecteur trop long"
@@ -5961,11 +6366,6 @@ msgstr "l'argument à 'standardGeneric' doit être une chaîne de caractères no
 msgid "call to standardGeneric(\"%s\") apparently not from the body of that generic function"
 msgstr "l'appel à standardGeneric(\"%s\") n'est apparemment pas fait à partir du corps d'une fonction"
 
-#: src/main/objects.cpp:1369 src/main/raw.cpp:219 src/main/Renviron.cpp:535
-#, c-format
-msgid "argument '%s' must be a character string"
-msgstr "l'argument '%s' doit être une chaîne de caractères"
-
 #: src/main/objects.cpp:1389
 #, fuzzy, c-format
 msgid "'internal' slot does not name an internal function: %s"
@@ -6033,107 +6433,107 @@ msgstr "'R_get_primname' appelé sur une fonction qui n'est pas primitive"
 msgid "object of class \"%s\" does not correspond to a valid S3 object"
 msgstr "l'objet de classe \"%s\" ne correspond pas à un objet S3 correct"
 
-#: src/main/options.cpp:127
+#: src/main/options.cpp:128
 #, c-format
 msgid "option %s has NULL value"
 msgstr ""
 
-#: src/main/options.cpp:146 src/main/options.cpp:250
+#: src/main/options.cpp:147 src/main/options.cpp:251
 msgid "corrupted options list"
 msgstr "liste d'options corrompue"
 
-#: src/main/options.cpp:156
+#: src/main/options.cpp:157
 #, c-format
 msgid "invalid printing width %d, used 80"
 msgstr "largeur d'impression incorrecte %d, utilisation de 80"
 
-#: src/main/options.cpp:159
+#: src/main/options.cpp:160
 msgid "invalid printing width"
 msgstr "largeur d'impression incorrecte"
 
-#: src/main/options.cpp:175
+#: src/main/options.cpp:176
 #, c-format
 msgid "invalid printing digits %d, used 7"
 msgstr "nombre de chiffres à imprimer %d incorrect, utilisation de 7"
 
-#: src/main/options.cpp:178
+#: src/main/options.cpp:179
 #, c-format
 msgid "invalid printing digits %d"
 msgstr "nombre de chiffres à imprimer %d incorrect"
 
-#: src/main/options.cpp:193
+#: src/main/options.cpp:194
 #, fuzzy
 msgid "invalid 'scipen'"
 msgstr "valeur '%s' incorrecte"
 
-#: src/main/options.cpp:199
+#: src/main/options.cpp:200
 #, fuzzy, c-format
 msgid "setting scipen=%g is out of range"
 msgstr "indice de référence hors intervalle"
 
-#: src/main/options.cpp:207
+#: src/main/options.cpp:208
 #, fuzzy, c-format
 msgid "invalid 'scipen' %d, used %d"
 msgstr "largeur d'impression incorrecte %d, utilisation de 80"
 
-#: src/main/options.cpp:210
+#: src/main/options.cpp:211
 #, fuzzy, c-format
 msgid "invalid 'scipen' %d"
 msgstr "valeur '%s' incorrecte"
 
-#: src/main/options.cpp:223
+#: src/main/options.cpp:224
 msgid "invalid 'deparse.cutoff', used 60"
 msgstr "'deparse.cutoff' incorrect, utilisation de 60"
 
-#: src/main/options.cpp:234
+#: src/main/options.cpp:235
 msgid "invalid value for \"device.ask.default\", using FALSE"
 msgstr "valeur non autorisée pour \"device.ask.default\", utilisation de FALSE"
 
-#: src/main/options.cpp:568
+#: src/main/options.cpp:569
 msgid "list argument has no valid names"
 msgstr "l'argument liste n'a pas de noms valides"
 
-#: src/main/options.cpp:620
+#: src/main/options.cpp:621
 #, c-format
 msgid "option '%s' cannot be deleted"
 msgstr "l’option '%s' ne peut être effacée"
 
-#: src/main/options.cpp:626 src/main/options.cpp:637
+#: src/main/options.cpp:627 src/main/options.cpp:638
 #, c-format
 msgid "invalid '%s' parameter, allowed %d...%d"
 msgstr "paramètre '%s' incorrect, valeurs autorisées %d...%d"
 
-#: src/main/options.cpp:704
+#: src/main/options.cpp:705
 #, c-format
 msgid "value for '%s' outside of -1:2 is set to %d\n"
 msgstr "la valeur de '%s' est en dehors de -1:2 et est mis à %d\n"
 
-#: src/main/options.cpp:773
+#: src/main/options.cpp:774
 msgid "'OutDec' must be a string of one character"
 msgstr "'OutDec' doit être un seul caractère"
 
-#: src/main/options.cpp:827 src/main/options.cpp:937
+#: src/main/options.cpp:828 src/main/options.cpp:938
 msgid "\"par.ask.default\" has been replaced by \"device.ask.default\""
 msgstr "\"par.ask.default\" est remplacé par \"device.ask.default\""
 
-#: src/main/options.cpp:852
+#: src/main/options.cpp:853
 msgid "OpenMP SIMD is not supported in this build of R"
 msgstr "OpenMP SIMD ne fonctionne pas dans cette compilation"
 
-#: src/main/options.cpp:876
+#: src/main/options.cpp:877
 msgid "'PCRE_study' has no effect with PCRE2"
 msgstr "'PCRE_study' est sans effet avec PCRE2"
 
-#: src/main/options.cpp:899
+#: src/main/options.cpp:900
 #, c-format
 msgid "'%s' is deprecated and will be disabled"
 msgstr "'%s' est obsolète et sera désactivé"
 
-#: src/main/options.cpp:911 src/main/options.cpp:922
+#: src/main/options.cpp:912 src/main/options.cpp:923
 msgid "cannot set both options 'quiet' and 'verbose' to TRUE"
 msgstr ""
 
-#: src/main/options.cpp:934 src/modules/X11/dataentry.cpp:319
+#: src/main/options.cpp:935 src/modules/X11/dataentry.cpp:319
 #: src/modules/X11/dataentry.cpp:460 src/modules/X11/dataentry.cpp:463
 #: src/modules/X11/dataentry.cpp:492
 msgid "invalid argument"
@@ -6192,277 +6592,257 @@ msgstr "'parent' n'est pas un environnement"
 msgid "pattern is not a tiling pattern"
 msgstr "rgb n'est pas une matrice (en interne)"
 
-#: src/main/platform.cpp:357 src/main/platform.cpp:371
+#: src/main/platform.cpp:364 src/main/platform.cpp:378
 msgid "invalid filename specification"
 msgstr "choix de nom de fichier incorrect"
 
-#: src/main/platform.cpp:441 src/main/platform.cpp:491
-#: src/main/platform.cpp:2896 src/main/platform.cpp:3147
+#: src/main/platform.cpp:448 src/main/platform.cpp:498
+#: src/main/platform.cpp:2903 src/main/platform.cpp:3154
 #, fuzzy
 msgid "could not allocate copy buffer"
 msgstr "impossible d'affecter le tampon"
 
-#: src/main/platform.cpp:449 src/main/platform.cpp:506
+#: src/main/platform.cpp:456 src/main/platform.cpp:513
 msgid "write error during file append"
 msgstr "erreur en écriture lors de l'ajout a un fichier"
 
-#: src/main/platform.cpp:470
+#: src/main/platform.cpp:477
 msgid "nothing to append to"
 msgstr "rien à ajouter à"
 
-#: src/main/platform.cpp:532 src/main/platform.cpp:858
-#: src/main/platform.cpp:1136
+#: src/main/platform.cpp:539 src/main/platform.cpp:865
+#: src/main/platform.cpp:1143
 msgid "invalid filename argument"
 msgstr "argument 'filename' incorrect"
 
-#: src/main/platform.cpp:544
+#: src/main/platform.cpp:551
 #, c-format
 msgid "cannot create file '%s', reason '%s'"
 msgstr "impossible de créer le fichier '%s', à cause de '%s'"
 
-#: src/main/platform.cpp:558 src/main/platform.cpp:598
-#: src/main/platform.cpp:675
+#: src/main/platform.cpp:565 src/main/platform.cpp:605
+#: src/main/platform.cpp:682
 msgid "invalid first filename"
 msgstr "premier nom de fichier incorrect"
 
-#: src/main/platform.cpp:570
+#: src/main/platform.cpp:577
 #, c-format
 msgid "cannot remove file '%s', reason '%s'"
 msgstr "impossible d'effacer le fichier '%s', à cause de '%s'"
 
-#: src/main/platform.cpp:600 src/main/platform.cpp:677
+#: src/main/platform.cpp:607 src/main/platform.cpp:684
 msgid "invalid second filename"
 msgstr "second nom de fichier incorrect"
 
-#: src/main/platform.cpp:603 src/main/platform.cpp:680
+#: src/main/platform.cpp:610 src/main/platform.cpp:687
 msgid "nothing to link"
 msgstr "rien à lier"
 
-#: src/main/platform.cpp:628
+#: src/main/platform.cpp:635
 #, c-format
 msgid "cannot symlink '%ls' to '%ls', reason '%s'"
 msgstr "impossible de créer un lien symbolique de '%ls' vers '%ls', à cause de '%s'"
 
-#: src/main/platform.cpp:650
+#: src/main/platform.cpp:657
 #, c-format
 msgid "cannot symlink '%s' to '%s', reason '%s'"
 msgstr "impossible de créer un lien symbolique de '%s' vers '%s', à cause de '%s'"
 
-#: src/main/platform.cpp:658
+#: src/main/platform.cpp:665
 msgid "symbolic links are not supported on this platform"
 msgstr "les liens symboliques ne sont pas supportés sur cette plateforme"
 
-#: src/main/platform.cpp:699
+#: src/main/platform.cpp:706
 #, c-format
 msgid "cannot link '%ls' to '%ls', reason '%s'"
 msgstr "impossible de créer un lien symbolique de '%ls' vers '%ls', à cause de '%s'"
 
-#: src/main/platform.cpp:721
+#: src/main/platform.cpp:728
 #, c-format
 msgid "cannot link '%s' to '%s', reason '%s'"
 msgstr "impossible de créer un lien symbolique de '%s' vers '%s', à cause de '%s'"
 
-#: src/main/platform.cpp:730
+#: src/main/platform.cpp:737
 msgid "(hard) links are not supported on this platform"
 msgstr "les liens matériels ne sont pas supportés sur cette architecture"
 
-#: src/main/platform.cpp:763 src/main/sysutils.cpp:498
+#: src/main/platform.cpp:770 src/main/sysutils.cpp:498
 #, fuzzy, c-format
 msgid "'%s' and '%s' are of different lengths"
 msgstr "'from' et 'to' sont de longueurs différentes"
 
-#: src/main/platform.cpp:780
+#: src/main/platform.cpp:787
 #, c-format
 msgid "cannot rename file '%ls' to '%ls', reason '%s'"
 msgstr "impossible de renommer le fichier ‘%ls' en ‘%ls', à cause de '%s'"
 
-#: src/main/platform.cpp:787
+#: src/main/platform.cpp:794
 msgid "expanded 'from' name too long"
 msgstr "nom de 'from' expansé trop long"
 
-#: src/main/platform.cpp:791
+#: src/main/platform.cpp:798
 msgid "expanded 'to' name too long"
 msgstr "nom de 'to' expansé trop long"
 
-#: src/main/platform.cpp:795
+#: src/main/platform.cpp:802
 #, c-format
 msgid "cannot rename file '%s' to '%s', reason '%s'"
 msgstr "impossible de renommer le fichier '%s' en '%s', à cause de '%s'"
 
-#: src/main/platform.cpp:1089
+#: src/main/platform.cpp:1096
 #, fuzzy, c-format
 msgid "cannot resolve owner of file '%ls': %s"
 msgstr "impossible d'ouvrir le fichier '%ls' : %s"
 
-#: src/main/platform.cpp:1304
+#: src/main/platform.cpp:1311
 #, fuzzy, c-format
 msgid "error while listing a directory: '%s'"
 msgstr "problème lors de la création du répertoire %s : %s"
 
-#: src/main/platform.cpp:1457 src/main/platform.cpp:3062
-#: src/main/platform.cpp:3076 src/main/platform.cpp:3108
-#: src/main/platform.cpp:3129
+#: src/main/platform.cpp:1464 src/main/platform.cpp:3069
+#: src/main/platform.cpp:3083 src/main/platform.cpp:3115
+#: src/main/platform.cpp:3136
 msgid "over-long path"
 msgstr "chemin trop long"
 
-#: src/main/platform.cpp:1611
+#: src/main/platform.cpp:1618
 msgid "invalid 'pattern' regular expression"
 msgstr "expression régulière 'pattern' incorrecte"
 
-#: src/main/platform.cpp:1740
+#: src/main/platform.cpp:1747
 msgid "unable to determine R home location"
 msgstr "incapable de localiser R home"
 
-#: src/main/platform.cpp:1808
+#: src/main/platform.cpp:1815
 msgid "file name too long"
 msgstr "nom de fichier trop long"
 
-#: src/main/platform.cpp:1881 src/main/platform.cpp:3538
+#: src/main/platform.cpp:1888 src/main/platform.cpp:3545
 #, fuzzy, c-format
 msgid "cannot open reparse point '%ls', reason '%s'"
 msgstr "impossible d'ouvrir le fichier de destination '%s', à cause de '%s'"
 
-#: src/main/platform.cpp:1893
+#: src/main/platform.cpp:1900
 #, fuzzy, c-format
 msgid "cannot delete reparse point '%ls', reason '%s'"
 msgstr "impossible de créer le répertoire '%ls', à cause de '%s'"
 
-#: src/main/platform.cpp:2015 src/main/Rdynload.cpp:1202 src/main/util.cpp:937
-#: src/main/util.cpp:1047
-msgid "path too long"
-msgstr "chemin trop long"
-
-#: src/main/platform.cpp:2103 src/main/platform.cpp:2160
+#: src/main/platform.cpp:2110 src/main/platform.cpp:2167
 #: src/main/sysutils.cpp:2990 src/main/sysutils.cpp:3004
 msgid "internal out-of-memory condition"
 msgstr "condition interne, plus de mémoire disponible"
 
-#: src/main/platform.cpp:2156 src/main/sysutils.cpp:3000
+#: src/main/platform.cpp:2163 src/main/sysutils.cpp:3000
 #, c-format
 msgid "read error on '%s'"
 msgstr "erreur de lecture sur '%s'"
 
-#: src/main/platform.cpp:2267
+#: src/main/platform.cpp:2274
 msgid "setting 'LC_NUMERIC' may cause R to function strangely"
 msgstr "changer 'LC_NUMERIC' peut résulter en un fonctionnement étrange de R"
 
-#: src/main/platform.cpp:2280
+#: src/main/platform.cpp:2287
 #, fuzzy, c-format
 msgid "%s does not exist on Windows"
 msgstr "le menu n'existe pas"
 
-#: src/main/platform.cpp:2316
+#: src/main/platform.cpp:2323
 #, c-format
 msgid "OS reports request to set locale to \"%s\" cannot be honored"
 msgstr "La requête OS pour spécifier la localisation à \"%s\" n'a pas pu être honorée"
 
-#: src/main/platform.cpp:2327
+#: src/main/platform.cpp:2334
 #, c-format
 msgid "using locale code page other than %d%s may cause problems"
 msgstr ""
 
-#: src/main/platform.cpp:2682 src/main/platform.cpp:2738
+#: src/main/platform.cpp:2689 src/main/platform.cpp:2745
 #, fuzzy
 msgid "zero-length 'path' argument"
 msgstr "argument de longueur nulle"
 
-#: src/main/platform.cpp:2716
+#: src/main/platform.cpp:2723
 #, c-format
 msgid "'%s' already exists"
 msgstr "'%s' existe déjà"
 
-#: src/main/platform.cpp:2719
+#: src/main/platform.cpp:2726
 #, c-format
 msgid "cannot create dir '%s', reason '%s'"
 msgstr "impossible de créer le répertoire '%s', à cause de '%s'"
 
-#: src/main/platform.cpp:2770
+#: src/main/platform.cpp:2777
 #, c-format
 msgid "'%ls' already exists"
 msgstr "'%ls' existe déjà"
 
-#: src/main/platform.cpp:2772 src/main/platform.cpp:2778
+#: src/main/platform.cpp:2779 src/main/platform.cpp:2785
 #, c-format
 msgid "cannot create dir '%ls', reason '%s'"
 msgstr "impossible de créer le répertoire '%ls', à cause de '%s'"
 
-#: src/main/platform.cpp:2812 src/main/platform.cpp:3042
+#: src/main/platform.cpp:2819 src/main/platform.cpp:3049
 msgid "too deep nesting"
 msgstr "imbrication trop profonde"
 
-#: src/main/platform.cpp:2844
+#: src/main/platform.cpp:2851
 #, c-format
 msgid "cannot overwrite non-directory %ls with directory %ls"
 msgstr "impossible de remplacer le fichier %ls qui n’est pas un dossier par le dossier %ls"
 
-#: src/main/platform.cpp:2849
+#: src/main/platform.cpp:2856
 #, c-format
 msgid "problem creating directory %ls: %s"
 msgstr "problème lors de la création du répertoire %ls : %s"
 
-#: src/main/platform.cpp:2870
+#: src/main/platform.cpp:2877
 #, c-format
 msgid "problem reading directory %ls: %s"
 msgstr "problème lors de la lecture du répertoire %ls : %s"
 
-#: src/main/platform.cpp:2887
+#: src/main/platform.cpp:2894
 #, c-format
 msgid "problem copying %ls to %ls: %s"
 msgstr "problème lors de la copie de %ls vers %ls : %s"
 
-#: src/main/platform.cpp:3090
+#: src/main/platform.cpp:3097
 #, c-format
 msgid "cannot overwrite non-directory %s with directory %s"
 msgstr "impossible de remplacer le fichier %s qui n’est pas un dossier par le dossier %s"
 
-#: src/main/platform.cpp:3095
+#: src/main/platform.cpp:3102
 #, c-format
 msgid "problem creating directory %s: %s"
 msgstr "problème lors de la création du répertoire %s : %s"
 
-#: src/main/platform.cpp:3118
+#: src/main/platform.cpp:3125
 #, c-format
 msgid "problem reading directory %s: %s"
 msgstr "problème lors de la lecture du répertoire %s : %s"
 
-#: src/main/platform.cpp:3138
+#: src/main/platform.cpp:3145
 #, c-format
 msgid "problem copying %s to %s: %s"
 msgstr "problème lors de la copie de %s vers %s : %s"
 
-#: src/main/platform.cpp:3294 src/main/platform.cpp:3470
+#: src/main/platform.cpp:3301 src/main/platform.cpp:3477
 #, c-format
 msgid "'%s' must be of length at least one"
 msgstr "'%s' doit être au moins de longueur unitaire"
 
-#: src/main/platform.cpp:3331 src/main/platform.cpp:3358
+#: src/main/platform.cpp:3338 src/main/platform.cpp:3365
 msgid "insufficient OS support on this platform"
 msgstr "support de l'OS insuffisant sur cette plateforme"
 
-#: src/main/platform.cpp:3386
+#: src/main/platform.cpp:3393
 #, fuzzy, c-format
 msgid "possible truncation of value for element %d"
 msgstr "la troncature du fichier a échoué"
 
-#: src/main/platform.cpp:3559
+#: src/main/platform.cpp:3566
 #, fuzzy, c-format
 msgid "cannot set reparse point '%ls', reason '%s'"
 msgstr "impossible de créer le répertoire '%ls', à cause de '%s'"
-
-#: src/main/plot3d.cpp:136
-#, fuzzy, c-format
-msgid "contour(): circular/long segment list -- set '%s' > %d?"
-msgstr "contour() : seglist longue / circulaire -- est-ce que %s > %d ?"
-
-#: src/main/plot3d.cpp:212
-#, fuzzy
-msgid "all 'z' values are equal"
-msgstr "toutes les valeurs en z sont égales"
-
-#: src/main/plot3d.cpp:214
-#, fuzzy
-msgid "all 'z' values are NA"
-msgstr "toutes les valeurs z sont NA"
 
 #: src/main/plot.cpp:123
 #, c-format
@@ -6504,6 +6884,21 @@ msgstr ""
 #, c-format
 msgid "log - axis(), 'at' creation: INVALID {xy}axp[3] = %g"
 msgstr ""
+
+#: src/main/plot3d.cpp:136
+#, fuzzy, c-format
+msgid "contour(): circular/long segment list -- set '%s' > %d?"
+msgstr "contour() : seglist longue / circulaire -- est-ce que %s > %d ?"
+
+#: src/main/plot3d.cpp:212
+#, fuzzy
+msgid "all 'z' values are equal"
+msgstr "toutes les valeurs en z sont égales"
+
+#: src/main/plot3d.cpp:214
+#, fuzzy
+msgid "all 'z' values are NA"
+msgstr "toutes les valeurs z sont NA"
 
 #: src/main/plotmath.cpp:333
 #, fuzzy
@@ -6554,6 +6949,79 @@ msgstr "groupe incomplet"
 msgid "Metric information not available for this family/device"
 msgstr "Information de métrique indisponible pour cette famille / périphérique"
 
+#: src/main/print.cpp:173 src/main/print.cpp:277
+msgid "invalid 'na.print' specification"
+msgstr "choix de 'na.print' incorrect"
+
+#: src/main/print.cpp:182
+msgid "invalid row labels"
+msgstr "étiquettes de lignes incorrectes"
+
+#: src/main/print.cpp:184
+msgid "invalid column labels"
+msgstr "étiquettes de colonne incorrectes"
+
+#: src/main/print.cpp:289
+msgid "'gap' must be non-negative integer"
+msgstr "'gap' doit être un entier positif ou nul"
+
+#: src/main/print.cpp:292
+#, c-format
+msgid "'print.gap' must be less than %d"
+msgstr "'print.gap' doit valoir moins que %d"
+
+#: src/main/print.cpp:358
+msgid "missing methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:367
+msgid "missing show() in methods namespace: this should not happen"
+msgstr ""
+
+#: src/main/print.cpp:404
+#, fuzzy
+msgid "tagbuf overflow"
+msgstr "débordement vers le haut du tampon d’impression"
+
+#: src/main/print.cpp:629 src/main/printvector.cpp:363
+#: src/main/printvector.cpp:518
+#, fuzzy, c-format
+msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %lld entry ]\n"
+msgid_plural " [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n"
+msgstr[0] " [ getOption(\"max.print\") est atteint -- ligne %d omise ]\n"
+msgstr[1] " [ getOption(\"max.print\") est atteint -- %d lignes omises ]\n"
+
+#: src/main/print.cpp:854
+#, c-format
+msgid "<S4 object of class \"%s\">\n"
+msgstr ""
+
+#: src/main/print.cpp:857
+#, c-format
+msgid "<S4 object of class \"%s\" from package '%s'>\n"
+msgstr ""
+
+#: src/main/print.cpp:1014
+msgid "print buffer overflow"
+msgstr "débordement vers le haut du tampon d’impression"
+
+#: src/main/print.cpp:1145
+msgid "invalid character length in 'dblepr'"
+msgstr "taille de caractère incorrecte dans 'dblepr'"
+
+#: src/main/print.cpp:1166
+msgid "invalid character length in 'intpr'"
+msgstr "taille de caractère incorrecte dans 'intpr'"
+
+#: src/main/print.cpp:1187
+msgid "invalid character length in 'realpr'"
+msgstr "taille de caractère incorrecte dans 'realpr'"
+
+#: src/main/print.cpp:1230
+#, c-format
+msgid "BLAS/LAPACK routine '%6s' gave error code %d"
+msgstr "La procédure BLAS/LAPACK '%6s' a produit le code d'erreur %d"
+
 #: src/main/printarray.cpp:353
 msgid "too few row labels"
 msgstr "trop peu d'étiquettes de lignes"
@@ -6591,78 +7059,6 @@ msgid " %d slice"
 msgid_plural " %d slices"
 msgstr[0] ""
 msgstr[1] ""
-
-#: src/main/print.cpp:173 src/main/print.cpp:277
-msgid "invalid 'na.print' specification"
-msgstr "choix de 'na.print' incorrect"
-
-#: src/main/print.cpp:182
-msgid "invalid row labels"
-msgstr "étiquettes de lignes incorrectes"
-
-#: src/main/print.cpp:184
-msgid "invalid column labels"
-msgstr "étiquettes de colonne incorrectes"
-
-#: src/main/print.cpp:289
-msgid "'gap' must be non-negative integer"
-msgstr "'gap' doit être un entier positif ou nul"
-
-#: src/main/print.cpp:292
-#, c-format
-msgid "'print.gap' must be less than %d"
-msgstr "'print.gap' doit valoir moins que %d"
-
-#: src/main/print.cpp:358
-msgid "missing methods namespace: this should not happen"
-msgstr ""
-
-#: src/main/print.cpp:367
-msgid "missing show() in methods namespace: this should not happen"
-msgstr ""
-
-#: src/main/print.cpp:404
-#, fuzzy
-msgid "tagbuf overflow"
-msgstr "débordement vers le haut du tampon d’impression"
-
-#: src/main/print.cpp:629
-#, fuzzy, c-format
-msgid " [ reached 'max' / getOption(\"max.print\") -- omitted %lld entry ]\n"
-msgid_plural " [ reached 'max' / getOption(\"max.print\") -- omitted %lld entries ]\n"
-msgstr[0] " [ getOption(\"max.print\") est atteint -- ligne %d omise ]\n"
-msgstr[1] " [ getOption(\"max.print\") est atteint -- %d lignes omises ]\n"
-
-#: src/main/print.cpp:854
-#, c-format
-msgid "<S4 object of class \"%s\">\n"
-msgstr ""
-
-#: src/main/print.cpp:857
-#, c-format
-msgid "<S4 object of class \"%s\" from package '%s'>\n"
-msgstr ""
-
-#: src/main/print.cpp:1014
-msgid "print buffer overflow"
-msgstr "débordement vers le haut du tampon d’impression"
-
-#: src/main/print.cpp:1145
-msgid "invalid character length in 'dblepr'"
-msgstr "taille de caractère incorrecte dans 'dblepr'"
-
-#: src/main/print.cpp:1166
-msgid "invalid character length in 'intpr'"
-msgstr "taille de caractère incorrecte dans 'intpr'"
-
-#: src/main/print.cpp:1187
-msgid "invalid character length in 'realpr'"
-msgstr "taille de caractère incorrecte dans 'realpr'"
-
-#: src/main/print.cpp:1230
-#, c-format
-msgid "BLAS/LAPACK routine '%6s' gave error code %d"
-msgstr "La procédure BLAS/LAPACK '%6s' a produit le code d'erreur %d"
 
 #: src/main/printutils.cpp:245 src/main/printutils.cpp:306
 msgid "the decimal mark is more than one character wide; this will become an error"
@@ -6827,401 +7223,52 @@ msgstr "chaîne de charactères UTF-8 incorrecte"
 msgid "'allow_surrogate_pairs = TRUE' is incompatible with 'multiple = TRUE' and will be ignored"
 msgstr ""
 
-#: src/main/Rdynload.cpp:180
-msgid "DLL table corruption detected"
-msgstr ""
-
-#: src/main/Rdynload.cpp:207
-#, c-format
-msgid "R_MAX_NUM_DLLS must be at least %d"
-msgstr "R_MAX_NUM_DLLS doit valoir au moins %d"
-
-#: src/main/Rdynload.cpp:213
-#, c-format
-msgid "R_MAX_NUM_DLLS cannot be bigger than %d"
-msgstr "R_MAX_NUM_DLLS ne peut être supérieur à %d"
-
-#: src/main/Rdynload.cpp:222
-#, c-format
-msgid "R_MAX_NUM_DLLS cannot be bigger than %d when fd limit is not known"
-msgstr "R_MAX_NUM_DLLS ne peut être supérieur à %d lorsque la limite fd est inconnue"
-
-#: src/main/Rdynload.cpp:228 src/main/Rdynload.cpp:247
-msgid "the limit on the number of open files is too low"
-msgstr "la limite pour le nombre de fichiers ouverts est trop basse"
-
-#: src/main/Rdynload.cpp:231
-#, c-format
-msgid "R_MAX_NUM_DLLS bigger than %d may exhaust open files limit"
-msgstr "R_MAX_NUM_DLLS plus large que %d peut épuiser le nombre de fichiers ouverts possibles"
-
-#: src/main/Rdynload.cpp:254
-msgid "could not allocate space for DLL table"
-msgstr "impossible d'allouer de l'espace pour la table DLL"
-
-#: src/main/Rdynload.cpp:369
-msgid "R_RegisterRoutines called with invalid DllInfo object."
-msgstr "R_RegisterRoutines appelé avec un objet DllInfo incorrect."
-
-#: src/main/Rdynload.cpp:446
-#, fuzzy
-msgid "Invalid object."
-msgstr "connexion incorrecte"
-
-#: src/main/Rdynload.cpp:452 src/main/Rdynload.cpp:455
-#, c-format
-msgid "Invalid entry '%s' in native symbol object."
-msgstr ""
-
-#: src/main/Rdynload.cpp:461
-#, c-format
-msgid "Component '%s' missing in symbol object."
-msgstr ""
-
-#: src/main/Rdynload.cpp:473
-#, fuzzy
-msgid "Invalid symbol list."
-msgstr "symbole non valide"
-
-#: src/main/Rdynload.cpp:487
-#, c-format
-msgid "Symbol at %d does not have registration information."
-msgstr ""
-
-#: src/main/Rdynload.cpp:523
-#, fuzzy
-msgid "Invalid symbol name."
-msgstr "symbole non valide"
-
-#: src/main/Rdynload.cpp:526
-#, fuzzy, c-format
-msgid "Cannot register already registered native symbol '%s'."
-msgstr "impossible d'allouer de la mémoire pour le symbole natif enregistré (%d byte)"
-
-#: src/main/Rdynload.cpp:528
-#, fuzzy, c-format
-msgid "Symbol '%s' does not have a valid native address."
-msgstr "le corps du fichier n'a pas une entête gzip correcte"
-
-#: src/main/Rdynload.cpp:530
-#, c-format
-msgid "Symbol '%s' does not have a valid DllInfo reference."
-msgstr ""
-
-#: src/main/Rdynload.cpp:535
-#, c-format
-msgid "Symbol '%s' comes from a different shared object."
-msgstr ""
-
-#: src/main/Rdynload.cpp:538
-#, c-format
-msgid "Symbol '%s' is missing parameter specification."
-msgstr ""
-
-#: src/main/Rdynload.cpp:594
-#, fuzzy
-msgid "allocation failure in R_setPrimitiveArgTypes"
-msgstr "erreur d'affectation mémoire dans R_tmpnam2"
-
-#: src/main/Rdynload.cpp:861
-#, fuzzy
-msgid "maximal number of DLLs reached..."
-msgstr "`nombre maximal de DLLs atteint..."
-
-#: src/main/Rdynload.cpp:912
-msgid "could not allocate space for 'path'"
-msgstr "impossible d'allouer de l'espace pour 'path'"
-
-#: src/main/Rdynload.cpp:924
-#, c-format
-msgid "DLLname '%s' is too long"
-msgstr "Le nom de DLL '%s' est trop long"
-
-#: src/main/Rdynload.cpp:952
-msgid "could not allocate space for 'name'"
-msgstr "impossible d'allouer de l'espace pour 'name'"
-
-#: src/main/Rdynload.cpp:962
-#, fuzzy
-msgid "could not allocate space for 'DllInfo'"
-msgstr "impossible d'allouer de l'espace pour 'name'"
-
-#: src/main/Rdynload.cpp:1230 src/main/Rdynload.cpp:1247 src/main/util.cpp:861
-msgid "character argument expected"
-msgstr "argument de type caractère attendu"
-
-#: src/main/Rdynload.cpp:1237 src/main/Rdynload.cpp:1270
-#: src/main/Rdynload.cpp:1291
-#, c-format
-msgid ""
-"unable to load shared object '%s':\n"
-"  %s"
-msgstr ""
-"impossible de charger l'objet partagé '%s' :\n"
-"  %s"
-
-#: src/main/Rdynload.cpp:1251
-#, c-format
-msgid "shared object '%s' was not loaded"
-msgstr "l'objet partagé '%s' n'a pas été chargé"
-
-#: src/main/Rdynload.cpp:1328
-#, c-format
-msgid "cannot allocate memory for registered native symbol (%d byte)"
-msgid_plural "cannot allocate memory for registered native symbol (%d bytes)"
-msgstr[0] "impossible d'allouer de la mémoire pour le symbole natif enregistré (%d byte)"
-msgstr[1] "impossible d'allouer de la mémoire pour les symboles natifs enregistrés (%d bytes)"
-
-#: src/main/Rdynload.cpp:1456 src/main/Rdynload.cpp:1647
-msgid "NULL value passed for DllInfo"
-msgstr "Valeur NULL passée pour DllInfo"
-
-#: src/main/Rdynload.cpp:1460
-msgid "must pass package name or DllInfo reference"
-msgstr "le nom du package ou la référence DllInfo doit être fourni"
-
-#: src/main/Rdynload.cpp:1565
-#, c-format
-msgid "unimplemented type %d in 'createRSymbolObject'"
-msgstr "type %d non implémenté dans 'createRSymbolObject'"
-
-#: src/main/Rdynload.cpp:1644
-msgid "R_getRegisteredRoutines() expects a DllInfo reference"
-msgstr "R_getRegisteredRoutines() attend une référence DllInfo"
-
-#: src/main/Rdynload.cpp:1730
-#, c-format
-msgid "function '%s' not provided by package '%s'"
-msgstr "la fonction '%s' n'existe pas dans le package '%s'"
-
-#: src/main/Rdynload.cpp:1732
-msgid "table entry must be an external pointer"
-msgstr "l'entrée de la table doit être un pointeur externe"
-
-#: src/main/relop.cpp:92
+#: src/main/relop.cpp:95
 #, fuzzy
 msgid "operator needs two arguments"
 msgstr "l'opérateur a besoin d'un ou de deux arguments"
 
-#: src/main/relop.cpp:161 src/main/relop.cpp:175 src/main/relop.cpp:190
-#: src/main/relop.cpp:205
+#: src/main/relop.cpp:164 src/main/relop.cpp:178 src/main/relop.cpp:193
+#: src/main/relop.cpp:208
 #, fuzzy, c-format
 msgid "comparison (%s) is not possible for language types"
 msgstr "comparaison (%d) possible seulement pour les types liste et atomique"
 
-#: src/main/relop.cpp:198
+#: src/main/relop.cpp:201
 #, fuzzy
 msgid "comparing this symbol and string pair is not supported"
 msgstr "les noms dans les chaînes de caractères ne sont pas encore supportées"
 
-#: src/main/relop.cpp:210
+#: src/main/relop.cpp:213
 #, fuzzy
 msgid "comparison of call objects is not supported"
 msgstr "comparaison de ces types non implémentée"
 
-#: src/main/relop.cpp:213
+#: src/main/relop.cpp:216
 #, fuzzy
 msgid "comparison of language objects is not supported"
 msgstr "comparaison de ces types non implémentée"
 
-#: src/main/relop.cpp:309
+#: src/main/relop.cpp:312
 #, fuzzy, c-format
 msgid "comparison (%s) is possible only for atomic and list types"
 msgstr "comparaison (%d) possible seulement pour les types liste et atomique"
 
-#: src/main/relop.cpp:314
+#: src/main/relop.cpp:317
 msgid "comparison is not allowed for expressions"
 msgstr "comparaison interdite pour les expressions"
 
-#: src/main/relop.cpp:412
+#: src/main/relop.cpp:415
 msgid "comparison of these types is not implemented"
 msgstr "comparaison de ces types non implémentée"
 
-#: src/main/relop.cpp:513
+#: src/main/relop.cpp:516
 msgid "invalid comparison with complex values"
 msgstr "comparaison incorrecte pour des valeurs complexes"
 
-#: src/main/relop.cpp:785 src/main/relop.cpp:830 src/main/relop.cpp:864
+#: src/main/relop.cpp:789 src/main/relop.cpp:834 src/main/relop.cpp:868
 msgid "'a' and 'b' must have the same type"
 msgstr "'a' et 'b' doivent être de même type"
-
-#: src/main/Renviron.cpp:282
-#, c-format
-msgid "problem in setting variable '%s' in Renviron"
-msgstr "problème lors de l'affectation de la variable '%s' dans Renviron"
-
-#: src/main/Renviron.cpp:389
-msgid "path to system Renviron is too long: skipping"
-msgstr ""
-
-#: src/main/Renviron.cpp:407
-#, fuzzy
-msgid "cannot find system Renviron"
-msgstr "impossible de déclasser un environnement"
-
-#: src/main/Renviron.cpp:429
-msgid "path to arch-specific Renviron.site is too long: skipping"
-msgstr ""
-
-#: src/main/Renviron.cpp:448
-msgid "path to Renviron.site is too long: skipping"
-msgstr ""
-
-#: src/main/Renviron.cpp:465
-msgid "path to arch-specific user Renviron is too long: skipping"
-msgstr ""
-
-#: src/main/Renviron.cpp:499
-msgid "path to user Renviron is too long: skipping"
-msgstr ""
-
-#: src/main/Renviron.cpp:539
-#, c-format
-msgid "file '%s' cannot be opened for reading"
-msgstr "le fichier '%s' ne peut être ouvert en lecture"
-
-#: src/main/RNG.cpp:190
-#, c-format
-msgid "unif_rand: unimplemented RNG kind %d"
-msgstr "unif_rand : type RNG (générateur de nombres pseudo-aléatoires) %d non implémenté"
-
-#: src/main/RNG.cpp:275
-#, c-format
-msgid "FixupSeeds: unimplemented RNG kind %d"
-msgstr "FixupSeeds : type RNG (générateur de nombres pseudo-aléatoires) %d non implémenté"
-
-#: src/main/RNG.cpp:315
-msgid "'user_unif_rand' not in load table"
-msgstr "'user_unif_rand' absent de la table de chargement"
-
-#: src/main/RNG.cpp:323
-msgid "cannot read seeds unless 'user_unif_nseed' is supplied"
-msgstr "impossible de lire les valeurs d'initialisation tant que 'user_unif_nseed' n'est pas fourni"
-
-#: src/main/RNG.cpp:328
-msgid "seed length must be in 0...625; ignored"
-msgstr "la longueur du vecteur de valeurs d'initialisation doit être comprise entre 0 et 625 : ignoré"
-
-#: src/main/RNG.cpp:336
-#, c-format
-msgid "RNG_Init: unimplemented RNG kind %d"
-msgstr "RNG_Init : type RNG (générateur de nombres pseudo-aléatoires) %d non implémenté"
-
-#: src/main/RNG.cpp:366
-#, c-format
-msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
-msgstr "'.Random.seed' n'est pas un vecteur d'entiers, mais est de type '%s', et sera donc ignoré"
-
-#: src/main/RNG.cpp:374
-msgid "'.Random.seed[1]' is not a valid integer, so ignored"
-msgstr "'.Random.seed[1]' n'est pas un entier correct, et sera donc ignoré"
-
-#: src/main/RNG.cpp:381
-msgid "'.Random.seed[1]' is not a valid Normal type, so ignored"
-msgstr "'.Random.seed[1]' n'est pas un type Normal correct, et sera donc ignoré"
-
-#: src/main/RNG.cpp:395
-msgid "'.Random.seed[1] = 5' but no user-supplied generator, so ignored"
-msgstr "'.Random.seed[1] = 5' mais aucun générateur de nombres fourni par l'utilisateur, il sera donc ignoré"
-
-#: src/main/RNG.cpp:400
-msgid "'.Random.seed[1]' is not a valid RNG kind so ignored"
-msgstr "'.Random.seed[1]' n'est pas un RNG (générateur de nombres pseudo-aléatoires) correct et sera donc ignoré"
-
-#: src/main/RNG.cpp:434
-msgid "'.Random.seed' has wrong length"
-msgstr "'.Random.seed' de taille incorrecte"
-
-#: src/main/RNG.cpp:454
-msgid "Internal .Random.seed is corrupt: not saving"
-msgstr ""
-
-#: src/main/RNG.cpp:490
-msgid "RNGkind: Marsaglia-Multicarry has poor statistical properties"
-msgstr "RNGkind : Marsaglia-Multicarry a des mauvaises propriétés statistiques"
-
-#: src/main/RNG.cpp:500
-#, c-format
-msgid "RNGkind: unimplemented RNG kind %d"
-msgstr "RNGkind : type %d de RNG non implémenté"
-
-#: src/main/RNG.cpp:506
-msgid "someone corrupted the random-number generator: re-initializing"
-msgstr ""
-
-#: src/main/RNG.cpp:519
-msgid "RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry"
-msgstr "RNGkind : forts écarts à la normalité pour Kinderman-Ramage + Marsaglia-Multicarry"
-
-#: src/main/RNG.cpp:522
-msgid "RNGkind: deviations from normality for Ahrens-Dieter + Marsaglia-Multicarry"
-msgstr "RNGkind : écarts à la normalité pour Ahrens-Dieter + Marsaglia-Multicarry"
-
-#: src/main/RNG.cpp:526
-msgid "invalid Normal type in 'RNGkind'"
-msgstr "type Normal incorrect dans 'RNGkind'"
-
-#: src/main/RNG.cpp:529
-msgid "'user_norm_rand' not in load table"
-msgstr "'user_norm_rand' absent de la table de chargement"
-
-#: src/main/RNG.cpp:544
-msgid "invalid sample type in 'RNGkind'"
-msgstr "type ‘sample’ incorrect dans 'RNGkind'"
-
-#: src/main/RNG.cpp:591
-msgid "supplied seed is not a valid integer"
-msgstr "la valeur d'initialisation fournie n'est pas un entier correct"
-
-#: src/main/RNG.cpp:850
-msgid "function '.TAOCP1997init' is missing"
-msgstr ""
-
-#: src/main/RObject.cpp:132
-#, fuzzy
-msgid "cannot set attribute on a 'CHARSXP'"
-msgstr "impossible de définir l’attribut sur un symbole"
-
-#: src/main/RObject.cpp:137
-#, fuzzy, c-format
-msgid "cannot set attribute on a '%s'"
-msgstr "impossible de définir l’attribut sur un symbole"
-
-#: src/main/Rstrptime.h:523 src/main/Rstrptime.h:1011
-#, c-format
-msgid "values for %%z outside +/-1400 are an error"
-msgstr ""
-
-#: src/main/Rstrptime.h:532 src/main/Rstrptime.h:1020
-#, c-format
-msgid "use of %s for input is not supported"
-msgstr "l'utilisation de %s pour entrée n'est pas permise"
-
-#: src/main/Rstrptime.h:653 src/main/Rstrptime.h:1141
-#, c-format
-msgid "day-of-year %d in year %d is invalid\n"
-msgstr ""
-
-#: src/main/Rstrptime.h:699 src/main/Rstrptime.h:1183
-#, c-format
-msgid "(0-based) day-of-year %d in year %d is invalid\n"
-msgstr ""
-
-#: src/main/Rstrptime.h:1307
-msgid "input string is too long"
-msgstr "chaîne de caractères en entrée trop longue"
-
-#: src/main/Rstrptime.h:1309
-msgid "invalid multibyte input string"
-msgstr "chaîne de caractères multioctets incorrecte en entrée"
-
-#: src/main/Rstrptime.h:1312
-msgid "format string is too long"
-msgstr "chaîne de caractères de formattage trop longue"
-
-#: src/main/Rstrptime.h:1314
-msgid "invalid multibyte format string"
-msgstr "chaîne de caractères multioctets incorrecte"
 
 #: src/main/saveload.cpp:243 src/main/saveload.cpp:248
 #: src/main/saveload.cpp:257 src/main/saveload.cpp:266
@@ -7586,118 +7633,118 @@ msgstr[1] "l'expression numérique a %d élément : seul le premier est utilisé
 msgid "NA/NaN argument"
 msgstr "Argument NA / NaN"
 
-#: src/main/seq.cpp:386
+#: src/main/seq.cpp:387
 #, c-format
 msgid "invalid type (%s) for '%s' (must be a vector)"
 msgstr "type incorrect (%s) pour '%s' (doit être un vecteur)"
 
-#: src/main/seq.cpp:390 src/main/seq.cpp:758
+#: src/main/seq.cpp:391 src/main/seq.cpp:759
 #, c-format
 msgid "attempt to replicate an object of type '%s'"
 msgstr "tentative de dupliquer un objet de type '%s'"
 
-#: src/main/seq.cpp:462
+#: src/main/seq.cpp:463
 msgid "attempt to replicate non-vector"
 msgstr "tentative de dupliquer autre chose qu'un vecteur"
 
-#: src/main/seq.cpp:477
+#: src/main/seq.cpp:478
 msgid "cannot replicate NULL to a non-zero length"
 msgstr "impossible de répliquer NULL vers une longueur non nulle"
 
-#: src/main/seq.cpp:710
+#: src/main/seq.cpp:711
 msgid "replication of pairlists is defunct"
 msgstr ""
 
-#: src/main/seq.cpp:728 src/main/seq.cpp:744 src/main/seq.cpp:907
-#: src/main/seq.cpp:1151
+#: src/main/seq.cpp:729 src/main/seq.cpp:745 src/main/seq.cpp:908
+#: src/main/seq.cpp:1152
 #, c-format
 msgid "first element used of '%s' argument"
 msgstr "seul le premier élément de l'argument '%s' est utilisé"
 
-#: src/main/seq.cpp:749
+#: src/main/seq.cpp:750
 msgid "'x' is NULL so the result will be NULL"
 msgstr ""
 
-#: src/main/seq.cpp:793
+#: src/main/seq.cpp:794
 #, fuzzy, c-format
 msgid "length(x) * '%s' * '%s' is too large"
 msgstr "la longueur %d est trop grande pour le hachage"
 
-#: src/main/seq.cpp:798
+#: src/main/seq.cpp:799
 #, fuzzy, c-format
 msgid "invalid '%s' argument, given the value of '%s'"
 msgstr "argument '%s' incorrect de type '%s'"
 
-#: src/main/seq.cpp:885 src/main/seq.cpp:903 src/main/seq.cpp:922
-#: src/main/seq.cpp:929 src/main/seq.cpp:1015 src/main/seq.cpp:1016
-#: src/main/seq.cpp:1061 src/main/seq.cpp:1062 src/main/seq.cpp:1083
-#: src/main/seq.cpp:1084
+#: src/main/seq.cpp:886 src/main/seq.cpp:904 src/main/seq.cpp:923
+#: src/main/seq.cpp:930 src/main/seq.cpp:1016 src/main/seq.cpp:1017
+#: src/main/seq.cpp:1062 src/main/seq.cpp:1063 src/main/seq.cpp:1084
+#: src/main/seq.cpp:1085
 #, c-format
 msgid "'%s' must be a finite number"
 msgstr "'%s' doit être un entier fini"
 
-#: src/main/seq.cpp:905
+#: src/main/seq.cpp:906
 msgid "'length.out' must be a non-negative number"
 msgstr "'length.out' doit être un entier positif ou nul"
 
-#: src/main/seq.cpp:919 src/main/seq.cpp:926 src/main/seq.cpp:934
+#: src/main/seq.cpp:920 src/main/seq.cpp:927 src/main/seq.cpp:935
 #, c-format
 msgid "'%s' must be of length 1"
 msgstr "'%s' doit être de taille 1"
 
-#: src/main/seq.cpp:955
+#: src/main/seq.cpp:956
 msgid "invalid '(to - from)/by'"
 msgstr "'(to - from)/by' incorrect"
 
-#: src/main/seq.cpp:967
+#: src/main/seq.cpp:968
 msgid "'by' argument is much too small"
 msgstr "argument 'by' bien trop petit"
 
-#: src/main/seq.cpp:969
+#: src/main/seq.cpp:970
 msgid "wrong sign in 'by' argument"
 msgstr "signe incorrect pour l'argument 'by'"
 
-#: src/main/seq.cpp:1120
+#: src/main/seq.cpp:1121
 msgid "'length' is not a BUILTIN"
 msgstr ""
 
-#: src/main/seq.cpp:1157 src/main/seq.cpp:1164
+#: src/main/seq.cpp:1158 src/main/seq.cpp:1165
 msgid "argument must be coercible to non-negative integer"
 msgstr "l'argument doit être convertible automatiquement en un entier non négatif"
 
-#: src/main/seq.cpp:1179
+#: src/main/seq.cpp:1180
 #, fuzzy
 msgid "'nvec' is not of mode integer"
 msgstr "'by' n'est pas de mode integer"
 
-#: src/main/seq.cpp:1182
+#: src/main/seq.cpp:1183
 msgid "'from' is not of mode integer"
 msgstr "'from' n'est pas de mode integer"
 
-#: src/main/seq.cpp:1185
+#: src/main/seq.cpp:1186
 msgid "'by' is not of mode integer"
 msgstr "'by' n'est pas de mode integer"
 
-#: src/main/seq.cpp:1199 src/main/seq.cpp:1201
+#: src/main/seq.cpp:1200 src/main/seq.cpp:1202
 #, c-format
 msgid "'%s' has length 0, but not 'nvec'; 'recycle = TRUE' returns empty here"
 msgstr ""
 
-#: src/main/seq.cpp:1218
+#: src/main/seq.cpp:1219
 #, c-format
 msgid "%s -- future R`s default 'recycle = TRUE' will recycle 'nvec'"
 msgstr ""
 
-#: src/main/seq.cpp:1229
+#: src/main/seq.cpp:1230
 #, fuzzy
 msgid "'nvec' must be a vector of non-negative integers"
 msgstr "'lengths' doit être un vecteur d’entiers non négatifs"
 
-#: src/main/seq.cpp:1246
+#: src/main/seq.cpp:1247
 msgid "'from' contains NAs"
 msgstr "'from' contient des NAs"
 
-#: src/main/seq.cpp:1249
+#: src/main/seq.cpp:1250
 msgid "'by' contains NAs"
 msgstr "'by' contient des NAs"
 
@@ -7992,6 +8039,10 @@ msgstr "l’argument encoding=\"UTF-8\" est ignoré dans des localisations MBCS"
 msgid "argument '%s = \"%s\"' will be ignored"
 msgstr "l'argument '%s = \"%s\"' sera ignoré"
 
+#: src/main/split-incl.cpp:15
+msgid "factor has bad level"
+msgstr "la variable 'factor' a des niveaux erronés"
+
 #: src/main/split.cpp:54
 msgid "first argument must be a vector"
 msgstr "le premier argument doit être un vecteur"
@@ -8007,10 +8058,6 @@ msgstr "la taille du groupe est 0 mais la taille des données est > 0"
 #: src/main/split.cpp:63
 msgid "data length is not a multiple of split variable"
 msgstr "la taille de données n'est pas un multiple de la variable découpée"
-
-#: src/main/split-incl.cpp:15
-msgid "factor has bad level"
-msgstr "la variable 'factor' a des niveaux erronés"
 
 #: src/main/sprintf.cpp:112
 #, c-format
@@ -8112,11 +8159,6 @@ msgstr "un argument est inutilisé par le format"
 #, c-format
 msgid "%d arguments not used by format"
 msgstr "%d arguments sont inutilisés par le format"
-
-#: src/main/StackChecker.cpp:74
-#, c-format
-msgid "'expressions' parameter invalid, allowed %d...%d"
-msgstr "paramètre 'expressions' incorrect, valeurs permises %d...%d"
 
 #: src/main/startup.cpp:93
 msgid "R_LibraryFileName: buffer too small"
@@ -8513,15 +8555,6 @@ msgstr "type d'entrée incorrect"
 #: src/main/summary.cpp:1284
 msgid "an argument will be fractionally recycled"
 msgstr "un argument sera recyclé partiellement"
-
-#: src/main/Symbol.cpp:129
-#, fuzzy, c-format
-msgid "signature is too long in '%s'"
-msgstr "nom de classe trop long dans '%s'"
-
-#: src/main/Symbol.cpp:136
-msgid "..n symbol name for a negative n is not permitted"
-msgstr ""
 
 #: src/main/sysutils.cpp:91 src/main/sysutils.cpp:106
 #, c-format
@@ -9010,16 +9043,6 @@ msgstr ".C(..) : 'type' doit être \"integer\" pour le format \"d\""
 msgid "'type' must be \"real\" for this format"
 msgstr ".C(..) : 'type' doit être \"real\" pour ce format"
 
-#: src/main/VectorBase.cpp:67 src/main/VectorBase.cpp:69
-#, fuzzy, c-format
-msgid "cannot allocate vector of size %0.1f %s"
-msgstr "impossible d'allouer un vecteur de taille %0.1f Go"
-
-#: src/main/VectorBase.cpp:71
-#, fuzzy, c-format
-msgid "cannot allocate vector of size %0.f %s"
-msgstr "impossible d'allouer un vecteur de taille %0.f Ko"
-
 #: src/main/version.cpp:56
 msgid ""
 "R is free software and comes with ABSOLUTELY NO WARRANTY.\n"
@@ -9076,523 +9099,6 @@ msgstr "il doit y avoir au moins quatre points de contrôle"
 #: src/main/xspline.cpp:526
 msgid "There must be at least three control points"
 msgstr "Il doit y avoir au moins trois points de contrôle"
-
-#: src/modules/internet/internet.cpp:100 src/modules/internet/libcurl.cpp:1282
-#, fuzzy
-msgid "can only open URLs for reading"
-msgstr "connexion non ouverte en lecture"
-
-#: src/modules/internet/internet.cpp:108
-msgid "the 'wininet' method of url() is deprecated for http:// and https:// URLs"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:130
-msgid "the 'wininet' method of url() is deprecated for ftp:// URLs"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:141 src/modules/internet/internet.cpp:534
-#, c-format
-msgid "scheme not supported in URL '%s'"
-msgstr "schéma non supporté dans '%s'"
-
-#: src/modules/internet/internet.cpp:215 src/modules/internet/internet.cpp:219
-#: src/modules/internet/internet.cpp:225 src/modules/internet/internet.cpp:246
-#: src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1360
-#: src/modules/internet/libcurl.cpp:1364 src/modules/internet/libcurl.cpp:1371
-#: src/modules/internet/libcurl.cpp:1385 src/modules/internet/libcurl.cpp:1394
-#: src/modules/internet/libcurl.cpp:1406
-msgid "allocation of url connection failed"
-msgstr "erreur d'allocation d'une connexion URL"
-
-#: src/modules/internet/internet.cpp:342
-msgid "only first element of 'url' argument used"
-msgstr "seul le premier élément de l'argument 'url' est utilisé"
-
-#: src/modules/internet/internet.cpp:348
-msgid "only first element of 'destfile' argument used"
-msgstr "seul le premier élément de l'argument 'destfile' est utilisé"
-
-#: src/modules/internet/internet.cpp:366 src/modules/internet/internet.cpp:465
-#: src/modules/internet/libcurl.cpp:729 src/modules/internet/libcurl.cpp:742
-msgid "Download progress"
-msgstr "Progression du téléchargement"
-
-#: src/modules/internet/internet.cpp:391
-#, c-format
-msgid "cannot open URL '%s', reason '%s'"
-msgstr "impossible d'ouvrir l'URL '%s', à cause de '%s'"
-
-#: src/modules/internet/internet.cpp:398 src/modules/internet/internet.cpp:428
-#, c-format
-msgid "cannot open destfile '%s', reason '%s'"
-msgstr "impossible d'ouvrir le fichier de destination '%s', à cause de '%s'"
-
-#: src/modules/internet/internet.cpp:409
-msgid "the 'internal' method for http:// URLs is defunct"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:417
-msgid "the 'wininet' method is deprecated for http:// and https:// URLs"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:433 src/modules/internet/libcurl.cpp:801
-#, c-format
-msgid "trying URL '%s'\n"
-msgstr "essai de l'URL '%s'\n"
-
-#: src/modules/internet/internet.cpp:486 src/modules/internet/libcurl.cpp:538
-#, c-format
-msgid "%d%% downloaded"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:501 src/modules/internet/libcurl.cpp:1072
-#, c-format
-msgid ""
-"downloaded %0.1f MB\n"
-"\n"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:504 src/modules/internet/libcurl.cpp:1074
-#, c-format
-msgid ""
-"downloaded %d KB\n"
-"\n"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:506 src/modules/internet/libcurl.cpp:1076
-#, c-format
-msgid ""
-"downloaded %d byte\n"
-"\n"
-msgid_plural ""
-"downloaded %d bytes\n"
-"\n"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/modules/internet/internet.cpp:519 src/modules/internet/libcurl.cpp:1084
-#, c-format
-msgid "downloaded length %0.f != reported length %0.f"
-msgstr "taille téléchargée %0.f != taille déclarée %0.f"
-
-#: src/modules/internet/internet.cpp:525 src/modules/internet/libcurl.cpp:1104
-#, c-format
-msgid "cannot open URL '%s'"
-msgstr "impossible d'ouvrir l'URL '%s'"
-
-#: src/modules/internet/internet.cpp:530
-msgid "the 'wininet' method for ftp:// URLs is defunct"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:532
-msgid "the 'internal' method for ftp:// URLs is defunct"
-msgstr ""
-
-#: src/modules/internet/internet.cpp:584 src/modules/internet/internet.cpp:598
-#: src/modules/internet/internet.cpp:691 src/modules/internet/internet.cpp:700
-#, c-format
-msgid "InternetOpenUrl failed: '%s'"
-msgstr "Échec de InternetOpenUrl : '%s'"
-
-#: src/modules/internet/internet.cpp:613
-#, fuzzy, c-format
-msgid "cannot open URL '%s': %s status was '%lu %s'"
-msgstr "ouverture de l’URL '%s' impossible : le statut %s était '%lu %s'"
-
-#: src/modules/internet/internet.cpp:629 src/modules/internet/libcurl.cpp:517
-#, c-format
-msgid "Content type '%s' length %0.0f byte (%0.1f MB)\n"
-msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)\n"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/modules/internet/internet.cpp:632 src/modules/internet/libcurl.cpp:520
-#, c-format
-msgid "Content type '%s' length %d byte (%d KB)\n"
-msgid_plural "Content type '%s' length %d bytes (%d KB)\n"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/modules/internet/internet.cpp:635 src/modules/internet/libcurl.cpp:523
-#, c-format
-msgid "Content type '%s' length %d byte\n"
-msgid_plural "Content type '%s' length %d bytes\n"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/modules/internet/internet.cpp:636
-#, c-format
-msgid "Content type '%s' length unknown\n"
-msgstr ""
-
-#: src/modules/internet/libcurl.cpp:234
-#, fuzzy, c-format
-msgid "cannot open URL '%s': %s status was '%ld %s'"
-msgstr "ouverture de l’URL '%s' impossible : le statut %s était '%ld %s'"
-
-#: src/modules/internet/libcurl.cpp:243
-#, c-format
-msgid "URL '%s': Timeout of %d seconds was reached"
-msgstr "URL ‘%s’: délais maximal de %d secondes atteint"
-
-#: src/modules/internet/libcurl.cpp:246
-#, c-format
-msgid "URL '%s': status was '%s'"
-msgstr "URL '%s': statut '%s'"
-
-#: src/modules/internet/libcurl.cpp:373
-msgid "curlGetHeaders is not supported on this platform"
-msgstr "curlGetHeaders ne fonctionne pas sur cette architecture"
-
-#: src/modules/internet/libcurl.cpp:393 src/modules/internet/libcurl.cpp:670
-#: src/modules/internet/libcurl.cpp:952 src/modules/internet/libcurl.cpp:1288
-#: src/modules/internet/libcurl.cpp:1307
-#, fuzzy
-msgid "could not create curl handle"
-msgstr "impossible d'allouer de l'espace pour la table DLL"
-
-#: src/modules/internet/libcurl.cpp:425
-#, fuzzy, c-format
-msgid "TLS argument is unsupported in this libcurl version %d.%d"
-msgstr "format TIFF indisponible dans cette version de R"
-
-#: src/modules/internet/libcurl.cpp:437
-#, c-format
-msgid ""
-"libcurl error code %d:\n"
-"\t%s\n"
-msgstr ""
-"code d’erreur libcurl %d:\n"
-"\t%s\n"
-
-#: src/modules/internet/libcurl.cpp:439
-#, c-format
-msgid ""
-"libcurl error code %d:\n"
-"\tunable to access SSL/TLS CA certificates\n"
-msgstr ""
-
-#: src/modules/internet/libcurl.cpp:441
-#, fuzzy, c-format
-msgid "libcurl error code %d\n"
-msgstr ""
-"code d’erreur libcurl %d:\n"
-"\t%s\n"
-
-#: src/modules/internet/libcurl.cpp:696
-#, c-format
-msgid "URL %s: cannot open destfile '%s', reason '%s'"
-msgstr "URL %s : impossible d'ouvrir le fichier de destination '%s', à cause de '%s'"
-
-#: src/modules/internet/libcurl.cpp:872
-msgid "download.file(method = \"libcurl\") is not supported on this platform"
-msgstr "download.file(method = \"libcurl\") ne fonctionne pas sur cette architecture"
-
-#: src/modules/internet/libcurl.cpp:900
-msgid "lengths of 'url' and 'destfile' must match"
-msgstr "les longueurs de 'url' and 'destfile' doivent correspondre"
-
-#: src/modules/internet/libcurl.cpp:930 src/modules/internet/libcurl.cpp:946
-msgid "out of memory"
-msgstr "manque de mémoire"
-
-#: src/modules/internet/libcurl.cpp:1014 src/modules/internet/libcurl.cpp:1213
-#, c-format
-msgid "curl_multi_wait() failed, code %d"
-msgstr ""
-
-#: src/modules/internet/libcurl.cpp:1100
-msgid "cannot download any files"
-msgstr "impossible de télécharger des fichiers"
-
-#: src/modules/internet/libcurl.cpp:1101
-msgid "some files were not downloaded"
-msgstr "certains fichiers n’ont pas été téléchargés"
-
-#: src/modules/internet/libcurl.cpp:1107
-#, c-format
-msgid "download from '%s' failed"
-msgstr "le téléchargement de '%s' a échoué"
-
-#: src/modules/internet/libcurl.cpp:1181
-msgid "Failure in re-allocation in rcvData"
-msgstr ""
-
-#: src/modules/internet/libcurl.cpp:1270
-msgid "cannot read from connection"
-msgstr "impossible de lire depuis la connexion"
-
-#: src/modules/internet/libcurl.cpp:1332
-#, c-format
-msgid "cannot open the connection to '%s'"
-msgstr "impossible d'ouvrir la connexion vers '%s'"
-
-#: src/modules/internet/Rhttpd.cpp:1362
-#, fuzzy
-msgid "unable to create socket"
-msgstr "impossible de créer un pixmap"
-
-#: src/modules/internet/Rhttpd.cpp:1384
-#, fuzzy, c-format
-msgid "unable to bind socket to TCP port %d"
-msgstr "connexion à '%s' impossible sur le port %d."
-
-#: src/modules/internet/Rhttpd.cpp:1392
-#, fuzzy, c-format
-msgid "cannot listen to TCP port %d"
-msgstr "écoute impossible sur le port %d"
-
-#: src/modules/internet/Rhttpd.cpp:1406
-msgid "cannot create synchronization event"
-msgstr ""
-
-#: src/modules/internet/Rhttpd.cpp:1415
-#, fuzzy
-msgid "cannot create server thread"
-msgstr "impossible de diminuer la limite de mémoire allouée : ignorée"
-
-#: src/modules/internet/Rhttpd.cpp:1455
-msgid "invalid bind address specification"
-msgstr "spécification d'adresse de lien invalide"
-
-#: src/modules/internet/Rsock.cpp:71 src/modules/internet/Rsock.cpp:96
-#: src/modules/internet/Rsock.cpp:106 src/modules/internet/Rsock.cpp:120
-#: src/modules/internet/Rsock.cpp:138 src/modules/internet/Rsock.cpp:161
-#, fuzzy, c-format
-msgid "socket error: %s\n"
-msgstr "Erreur fatale : %s\n"
-
-#: src/modules/internet/sockconn.cpp:52
-#, fuzzy, c-format
-msgid "port %d cannot be opened"
-msgstr "le fichier zip '%s' ne peut être ouvert"
-
-#: src/modules/internet/sockconn.cpp:74
-#, fuzzy
-msgid "problem in listening on this socket"
-msgstr "problème lors de la troncature du fichier d'historique des commandes"
-
-#: src/modules/internet/sockconn.cpp:82
-#, fuzzy
-msgid "problem in accepting connections on this socket"
-msgstr "Problème lors de la fermeture de la connexion : %s"
-
-#: src/modules/internet/sockconn.cpp:98 src/modules/internet/sockconn.cpp:215
-#: src/modules/internet/sockconn.cpp:219 src/modules/internet/sockconn.cpp:226
-#: src/modules/internet/sockconn.cpp:240
-msgid "allocation of socket connection failed"
-msgstr "échec d'allocation d'un connecteur logiciel (socket)"
-
-#: src/modules/internet/sockconn.cpp:103
-#, fuzzy, c-format
-msgid "%s:%d cannot be opened"
-msgstr "le fichier zip '%s' ne peut être ouvert"
-
-#: src/modules/internet/sockconn.cpp:256 src/modules/internet/sockconn.cpp:260
-#: src/modules/internet/sockconn.cpp:267 src/modules/internet/sockconn.cpp:275
-msgid "allocation of server socket connection failed"
-msgstr "échec d'allocation d'un connecteur logiciel (socket)"
-
-#: src/modules/internet/sockconn.cpp:284
-#, c-format
-msgid "creation of server socket failed: port %d cannot be opened"
-msgstr "échec de création d’un connecteur logiciel (socket) : le port %d ne peut être ouvert"
-
-#: src/modules/lapack/Lapack.cpp:74 src/modules/lapack/Lapack.cpp:93
-#: src/modules/lapack/Lapack.cpp:108
-#, c-format
-msgid "argument type[1]='%s' must be a character string of string length 1"
-msgstr "l'argument type[1]='%s' doit être un vecteur de caractères de longueur 1"
-
-#: src/modules/lapack/Lapack.cpp:82
-#, c-format
-msgid "argument type[1]='%s' must be one of 'M','1','O','I','F' or 'E'"
-msgstr "l'argument type[1]='%s' doit être une des options 'M', '1', 'O', 'I', 'F' ou 'E'"
-
-#: src/modules/lapack/Lapack.cpp:99
-#, c-format
-msgid "argument type[1]='%s' must be one of '1','O', or 'I'"
-msgstr "l'argument type[1]='%s' doit être une des options '1', 'O' ou 'I'"
-
-#: src/modules/lapack/Lapack.cpp:112
-#, fuzzy, c-format
-msgid "argument type[1]='%s' must be 'U' or 'L'"
-msgstr "l'argument type[1]='%s' doit être une des options '1', 'O' ou 'I'"
-
-#: src/modules/lapack/Lapack.cpp:135
-msgid "non-integer dim(u)"
-msgstr ""
-
-#: src/modules/lapack/Lapack.cpp:138
-msgid "non-integer dim(vt)"
-msgstr ""
-
-#: src/modules/lapack/Lapack.cpp:151 src/modules/lapack/Lapack.cpp:158
-#: src/modules/lapack/Lapack.cpp:217 src/modules/lapack/Lapack.cpp:228
-#: src/modules/lapack/Lapack.cpp:306 src/modules/lapack/Lapack.cpp:312
-#: src/modules/lapack/Lapack.cpp:406 src/modules/lapack/Lapack.cpp:423
-#: src/modules/lapack/Lapack.cpp:497 src/modules/lapack/Lapack.cpp:567
-#: src/modules/lapack/Lapack.cpp:580 src/modules/lapack/Lapack.cpp:616
-#: src/modules/lapack/Lapack.cpp:774 src/modules/lapack/Lapack.cpp:780
-#: src/modules/lapack/Lapack.cpp:834 src/modules/lapack/Lapack.cpp:841
-#: src/modules/lapack/Lapack.cpp:846 src/modules/lapack/Lapack.cpp:880
-#: src/modules/lapack/Lapack.cpp:887 src/modules/lapack/Lapack.cpp:935
-#: src/modules/lapack/Lapack.cpp:942 src/modules/lapack/Lapack.cpp:989
-#: src/modules/lapack/Lapack.cpp:995 src/modules/lapack/Lapack.cpp:1049
-#: src/modules/lapack/Lapack.cpp:1056 src/modules/lapack/Lapack.cpp:1304
-#: src/modules/lapack/Lapack.cpp:1310 src/modules/lapack/Lapack.cpp:1356
-#: src/modules/lapack/Lapack.cpp:1363 src/modules/lapack/Lapack.cpp:1368
-#: src/modules/lapack/Lapack.cpp:1395 src/modules/lapack/Lapack.cpp:1402
-#: src/modules/lapack/Lapack.cpp:1422
-#, c-format
-msgid "error code %d from Lapack routine '%s'"
-msgstr "code d'erreur %d dans le sous-programme Lapack '%s'"
-
-#: src/modules/lapack/Lapack.cpp:189 src/modules/lapack/Lapack.cpp:281
-#: src/modules/lapack/Lapack.cpp:1029
-msgid "'x' must be a square numeric matrix"
-msgstr "'x' doit être une matrice carrée numérique"
-
-#: src/modules/lapack/Lapack.cpp:356 src/modules/lapack/Lapack.cpp:385
-#: src/modules/lapack/Lapack.cpp:436 src/modules/lapack/Lapack.cpp:473
-#: src/modules/lapack/Lapack.cpp:1082 src/modules/lapack/Lapack.cpp:1162
-#: src/modules/lapack/Lapack.cpp:1201 src/modules/lapack/Lapack.cpp:1284
-#: src/modules/lapack/Lapack.cpp:1339 src/modules/lapack/Lapack.cpp:1381
-#: src/modules/lapack/Lapack.cpp:1414
-#, fuzzy, c-format
-msgid "'%s' must be a numeric matrix"
-msgstr "'A' doit être une matrice numérique"
-
-#: src/modules/lapack/Lapack.cpp:411
-#, c-format
-msgid "exact singularity: U[%d,%d] = 0 in LU-decomposition {Lapack 'dgetrf()'}"
-msgstr "singularité: U[%d,%d] = 0 dans une décomposition LU {Lapack 'dgetrf()'}"
-
-#: src/modules/lapack/Lapack.cpp:447 src/modules/lapack/Lapack.cpp:483
-#: src/modules/lapack/Lapack.cpp:548 src/modules/lapack/Lapack.cpp:604
-#: src/modules/lapack/Lapack.cpp:640
-msgid "'A' must be a *square* matrix"
-msgstr "'A' doit être une matrice *carrée*"
-
-#: src/modules/lapack/Lapack.cpp:462
-#, c-format
-msgid "error [%d] from Lapack 'dtrcon()'"
-msgstr "code d'erreur [%d] dans le sous-programme Lapack 'dtrcon()'"
-
-#: src/modules/lapack/Lapack.cpp:511 src/modules/lapack/Lapack.cpp:545
-#: src/modules/lapack/Lapack.cpp:600 src/modules/lapack/Lapack.cpp:634
-#: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:759
-#: src/modules/lapack/Lapack.cpp:819 src/modules/lapack/Lapack.cpp:865
-#, fuzzy, c-format
-msgid "'%s' must be a complex matrix"
-msgstr "'A' doit être une matrice complexe"
-
-#: src/modules/lapack/Lapack.cpp:528 src/modules/lapack/Lapack.cpp:584
-#: src/modules/lapack/Lapack.cpp:619 src/modules/lapack/Lapack.cpp:656
-#: src/modules/lapack/Lapack.cpp:745 src/modules/lapack/Lapack.cpp:805
-#: src/modules/lapack/Lapack.cpp:850 src/modules/lapack/Lapack.cpp:891
-#: src/modules/lapack/Lapack.cpp:956 src/modules/lapack/Lapack.cpp:1012
-#: src/modules/lapack/Lapack.cpp:1073
-msgid "Fortran complex functions are not available on this platform"
-msgstr "Les fonctions Fortran complexes ne sont pas disponibles sur cette architecture"
-
-#: src/modules/lapack/Lapack.cpp:653
-#, c-format
-msgid "error [%d] from Lapack 'ztrcon()'"
-msgstr "code d'erreur [%d] dans le sous-programme Lapack 'ztrcon()'"
-
-#: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1204
-#, fuzzy
-msgid "'a' is 0-dimensional"
-msgstr "'a' est de dimension nulle"
-
-#: src/modules/lapack/Lapack.cpp:676 src/modules/lapack/Lapack.cpp:1207
-#, c-format
-msgid "'a' (%d x %d) must be square"
-msgstr "'a' (%d x %d) doit être carrée"
-
-#: src/modules/lapack/Lapack.cpp:682 src/modules/lapack/Lapack.cpp:1213
-msgid "no right-hand side in 'b'"
-msgstr "aucun membre de droite dans 'b'"
-
-#: src/modules/lapack/Lapack.cpp:685 src/modules/lapack/Lapack.cpp:699
-#: src/modules/lapack/Lapack.cpp:1216 src/modules/lapack/Lapack.cpp:1232
-#, c-format
-msgid "'b' (%d x %d) must be compatible with 'a' (%d x %d)"
-msgstr "'b' (%d x %d) doit être compatible avec 'a' (%d x %d)"
-
-#: src/modules/lapack/Lapack.cpp:720 src/modules/lapack/Lapack.cpp:1104
-#: src/modules/lapack/Lapack.cpp:1119 src/modules/lapack/Lapack.cpp:1179
-#: src/modules/lapack/Lapack.cpp:1254
-#, c-format
-msgid "argument %d of Lapack routine %s had invalid value"
-msgstr "valeur incorrecte pour l'argument %d du sous-programme Lapack %s"
-
-#: src/modules/lapack/Lapack.cpp:723 src/modules/lapack/Lapack.cpp:1257
-#, c-format
-msgid "Lapack routine %s: system is exactly singular: U[%d,%d] = 0"
-msgstr "Routine Lapack %s : le système est exactement singulier : U[%d,%d] = 0"
-
-#: src/modules/lapack/Lapack.cpp:739 src/modules/lapack/Lapack.cpp:1272
-#, c-format
-msgid "system is computationally singular: reciprocal condition number = %g"
-msgstr "le système est numériquement singulier : conditionnement de la réciproque = %g"
-
-#: src/modules/lapack/Lapack.cpp:827 src/modules/lapack/Lapack.cpp:873
-#: src/modules/lapack/Lapack.cpp:1348 src/modules/lapack/Lapack.cpp:1388
-#, c-format
-msgid "right-hand side should have %d not %d rows"
-msgstr "le membre de droite devrait avoir %d lignes et non %d"
-
-#: src/modules/lapack/Lapack.cpp:907
-msgid "matrices of 2^31 or more elements are not supported"
-msgstr "les matrices de 2^31 ou plus d'éléments ne sont pas supportées"
-
-#: src/modules/lapack/Lapack.cpp:926 src/modules/lapack/Lapack.cpp:929
-#: src/modules/lapack/Lapack.cpp:1086 src/modules/lapack/Lapack.cpp:1159
-msgid "non-integer dims"
-msgstr ""
-
-#: src/modules/lapack/Lapack.cpp:972
-msgid "'x' must be a square complex matrix"
-msgstr "'x' doit être une matrice carrée numérique complexe"
-
-#: src/modules/lapack/Lapack.cpp:1089 src/modules/lapack/Lapack.cpp:1418
-msgid "'a' must be a square matrix"
-msgstr "'a' doit être une matrice carrée"
-
-#: src/modules/lapack/Lapack.cpp:1090
-msgid "'a' must have dims > 0"
-msgstr "'a' doit avoir des dimensions > 0"
-
-#: src/modules/lapack/Lapack.cpp:1102
-#, fuzzy, c-format
-msgid "the leading minor of order %d is not positive"
-msgstr "le mineur dominant d'ordre %d n'est pas défini positif"
-
-#: src/modules/lapack/Lapack.cpp:1117
-#, fuzzy
-msgid "the matrix is either rank-deficient or not positive definite"
-msgstr "la matrice n'est ni déficiente de rang ou indéfinie"
-
-#: src/modules/lapack/Lapack.cpp:1149
-msgid "'size' argument must be a positive integer"
-msgstr "l'argument 'size' doit être un entier strictement positif"
-
-#: src/modules/lapack/Lapack.cpp:1164
-#, c-format
-msgid "'size' cannot exceed ncol(x) = %d"
-msgstr "l'argument 'size' ne doit pas dépasser ncol(x) = %d"
-
-#: src/modules/lapack/Lapack.cpp:1165
-#, c-format
-msgid "'size' cannot exceed nrow(x) = %d"
-msgstr "l'argument 'size' ne doit pas dépasser nrow(x) = %d"
-
-#: src/modules/lapack/Lapack.cpp:1177
-#, c-format
-msgid "element (%d, %d) is zero, so the inverse cannot be computed"
-msgstr "l'élément (%d, %d) est nul, donc l'inverse ne peut être calculé"
 
 #: src/modules/X11/dataentry.cpp:364
 #, fuzzy
@@ -9951,6 +9457,523 @@ msgstr "format PNG indisponible dans cette version de R"
 msgid "Problems writing to 'bmp' file"
 msgstr "problème lors de l'écriture vers la connexion"
 
+#: src/modules/internet/Rhttpd.cpp:1362
+#, fuzzy
+msgid "unable to create socket"
+msgstr "impossible de créer un pixmap"
+
+#: src/modules/internet/Rhttpd.cpp:1384
+#, fuzzy, c-format
+msgid "unable to bind socket to TCP port %d"
+msgstr "connexion à '%s' impossible sur le port %d."
+
+#: src/modules/internet/Rhttpd.cpp:1392
+#, fuzzy, c-format
+msgid "cannot listen to TCP port %d"
+msgstr "écoute impossible sur le port %d"
+
+#: src/modules/internet/Rhttpd.cpp:1406
+msgid "cannot create synchronization event"
+msgstr ""
+
+#: src/modules/internet/Rhttpd.cpp:1415
+#, fuzzy
+msgid "cannot create server thread"
+msgstr "impossible de diminuer la limite de mémoire allouée : ignorée"
+
+#: src/modules/internet/Rhttpd.cpp:1455
+msgid "invalid bind address specification"
+msgstr "spécification d'adresse de lien invalide"
+
+#: src/modules/internet/Rsock.cpp:71 src/modules/internet/Rsock.cpp:96
+#: src/modules/internet/Rsock.cpp:106 src/modules/internet/Rsock.cpp:120
+#: src/modules/internet/Rsock.cpp:138 src/modules/internet/Rsock.cpp:161
+#, fuzzy, c-format
+msgid "socket error: %s\n"
+msgstr "Erreur fatale : %s\n"
+
+#: src/modules/internet/internet.cpp:100 src/modules/internet/libcurl.cpp:1282
+#, fuzzy
+msgid "can only open URLs for reading"
+msgstr "connexion non ouverte en lecture"
+
+#: src/modules/internet/internet.cpp:108
+msgid "the 'wininet' method of url() is deprecated for http:// and https:// URLs"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:130
+msgid "the 'wininet' method of url() is deprecated for ftp:// URLs"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:141 src/modules/internet/internet.cpp:534
+#, c-format
+msgid "scheme not supported in URL '%s'"
+msgstr "schéma non supporté dans '%s'"
+
+#: src/modules/internet/internet.cpp:215 src/modules/internet/internet.cpp:219
+#: src/modules/internet/internet.cpp:225 src/modules/internet/internet.cpp:246
+#: src/modules/internet/internet.cpp:254 src/modules/internet/libcurl.cpp:1360
+#: src/modules/internet/libcurl.cpp:1364 src/modules/internet/libcurl.cpp:1371
+#: src/modules/internet/libcurl.cpp:1385 src/modules/internet/libcurl.cpp:1394
+#: src/modules/internet/libcurl.cpp:1406
+msgid "allocation of url connection failed"
+msgstr "erreur d'allocation d'une connexion URL"
+
+#: src/modules/internet/internet.cpp:342
+msgid "only first element of 'url' argument used"
+msgstr "seul le premier élément de l'argument 'url' est utilisé"
+
+#: src/modules/internet/internet.cpp:348
+msgid "only first element of 'destfile' argument used"
+msgstr "seul le premier élément de l'argument 'destfile' est utilisé"
+
+#: src/modules/internet/internet.cpp:366 src/modules/internet/internet.cpp:465
+#: src/modules/internet/libcurl.cpp:729 src/modules/internet/libcurl.cpp:742
+msgid "Download progress"
+msgstr "Progression du téléchargement"
+
+#: src/modules/internet/internet.cpp:391
+#, c-format
+msgid "cannot open URL '%s', reason '%s'"
+msgstr "impossible d'ouvrir l'URL '%s', à cause de '%s'"
+
+#: src/modules/internet/internet.cpp:398 src/modules/internet/internet.cpp:428
+#, c-format
+msgid "cannot open destfile '%s', reason '%s'"
+msgstr "impossible d'ouvrir le fichier de destination '%s', à cause de '%s'"
+
+#: src/modules/internet/internet.cpp:409
+msgid "the 'internal' method for http:// URLs is defunct"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:417
+msgid "the 'wininet' method is deprecated for http:// and https:// URLs"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:433 src/modules/internet/libcurl.cpp:801
+#, c-format
+msgid "trying URL '%s'\n"
+msgstr "essai de l'URL '%s'\n"
+
+#: src/modules/internet/internet.cpp:486 src/modules/internet/libcurl.cpp:538
+#, c-format
+msgid "%d%% downloaded"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:501 src/modules/internet/libcurl.cpp:1072
+#, c-format
+msgid ""
+"downloaded %0.1f MB\n"
+"\n"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:504 src/modules/internet/libcurl.cpp:1074
+#, c-format
+msgid ""
+"downloaded %d KB\n"
+"\n"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:506 src/modules/internet/libcurl.cpp:1076
+#, c-format
+msgid ""
+"downloaded %d byte\n"
+"\n"
+msgid_plural ""
+"downloaded %d bytes\n"
+"\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/modules/internet/internet.cpp:519 src/modules/internet/libcurl.cpp:1084
+#, c-format
+msgid "downloaded length %0.f != reported length %0.f"
+msgstr "taille téléchargée %0.f != taille déclarée %0.f"
+
+#: src/modules/internet/internet.cpp:525 src/modules/internet/libcurl.cpp:1104
+#, c-format
+msgid "cannot open URL '%s'"
+msgstr "impossible d'ouvrir l'URL '%s'"
+
+#: src/modules/internet/internet.cpp:530
+msgid "the 'wininet' method for ftp:// URLs is defunct"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:532
+msgid "the 'internal' method for ftp:// URLs is defunct"
+msgstr ""
+
+#: src/modules/internet/internet.cpp:584 src/modules/internet/internet.cpp:598
+#: src/modules/internet/internet.cpp:691 src/modules/internet/internet.cpp:700
+#, c-format
+msgid "InternetOpenUrl failed: '%s'"
+msgstr "Échec de InternetOpenUrl : '%s'"
+
+#: src/modules/internet/internet.cpp:613
+#, fuzzy, c-format
+msgid "cannot open URL '%s': %s status was '%lu %s'"
+msgstr "ouverture de l’URL '%s' impossible : le statut %s était '%lu %s'"
+
+#: src/modules/internet/internet.cpp:629 src/modules/internet/libcurl.cpp:517
+#, c-format
+msgid "Content type '%s' length %0.0f byte (%0.1f MB)\n"
+msgid_plural "Content type '%s' length %0.0f bytes (%0.1f MB)\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/modules/internet/internet.cpp:632 src/modules/internet/libcurl.cpp:520
+#, c-format
+msgid "Content type '%s' length %d byte (%d KB)\n"
+msgid_plural "Content type '%s' length %d bytes (%d KB)\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/modules/internet/internet.cpp:635 src/modules/internet/libcurl.cpp:523
+#, c-format
+msgid "Content type '%s' length %d byte\n"
+msgid_plural "Content type '%s' length %d bytes\n"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/modules/internet/internet.cpp:636
+#, c-format
+msgid "Content type '%s' length unknown\n"
+msgstr ""
+
+#: src/modules/internet/libcurl.cpp:234
+#, fuzzy, c-format
+msgid "cannot open URL '%s': %s status was '%ld %s'"
+msgstr "ouverture de l’URL '%s' impossible : le statut %s était '%ld %s'"
+
+#: src/modules/internet/libcurl.cpp:243
+#, c-format
+msgid "URL '%s': Timeout of %d seconds was reached"
+msgstr "URL ‘%s’: délais maximal de %d secondes atteint"
+
+#: src/modules/internet/libcurl.cpp:246
+#, c-format
+msgid "URL '%s': status was '%s'"
+msgstr "URL '%s': statut '%s'"
+
+#: src/modules/internet/libcurl.cpp:373
+msgid "curlGetHeaders is not supported on this platform"
+msgstr "curlGetHeaders ne fonctionne pas sur cette architecture"
+
+#: src/modules/internet/libcurl.cpp:393 src/modules/internet/libcurl.cpp:670
+#: src/modules/internet/libcurl.cpp:952 src/modules/internet/libcurl.cpp:1288
+#: src/modules/internet/libcurl.cpp:1307
+#, fuzzy
+msgid "could not create curl handle"
+msgstr "impossible d'allouer de l'espace pour la table DLL"
+
+#: src/modules/internet/libcurl.cpp:425
+#, fuzzy, c-format
+msgid "TLS argument is unsupported in this libcurl version %d.%d"
+msgstr "format TIFF indisponible dans cette version de R"
+
+#: src/modules/internet/libcurl.cpp:437
+#, c-format
+msgid ""
+"libcurl error code %d:\n"
+"\t%s\n"
+msgstr ""
+"code d’erreur libcurl %d:\n"
+"\t%s\n"
+
+#: src/modules/internet/libcurl.cpp:439
+#, c-format
+msgid ""
+"libcurl error code %d:\n"
+"\tunable to access SSL/TLS CA certificates\n"
+msgstr ""
+
+#: src/modules/internet/libcurl.cpp:441
+#, fuzzy, c-format
+msgid "libcurl error code %d\n"
+msgstr ""
+"code d’erreur libcurl %d:\n"
+"\t%s\n"
+
+#: src/modules/internet/libcurl.cpp:696
+#, c-format
+msgid "URL %s: cannot open destfile '%s', reason '%s'"
+msgstr "URL %s : impossible d'ouvrir le fichier de destination '%s', à cause de '%s'"
+
+#: src/modules/internet/libcurl.cpp:872
+msgid "download.file(method = \"libcurl\") is not supported on this platform"
+msgstr "download.file(method = \"libcurl\") ne fonctionne pas sur cette architecture"
+
+#: src/modules/internet/libcurl.cpp:900
+msgid "lengths of 'url' and 'destfile' must match"
+msgstr "les longueurs de 'url' and 'destfile' doivent correspondre"
+
+#: src/modules/internet/libcurl.cpp:930 src/modules/internet/libcurl.cpp:946
+msgid "out of memory"
+msgstr "manque de mémoire"
+
+#: src/modules/internet/libcurl.cpp:1014 src/modules/internet/libcurl.cpp:1213
+#, c-format
+msgid "curl_multi_wait() failed, code %d"
+msgstr ""
+
+#: src/modules/internet/libcurl.cpp:1100
+msgid "cannot download any files"
+msgstr "impossible de télécharger des fichiers"
+
+#: src/modules/internet/libcurl.cpp:1101
+msgid "some files were not downloaded"
+msgstr "certains fichiers n’ont pas été téléchargés"
+
+#: src/modules/internet/libcurl.cpp:1107
+#, c-format
+msgid "download from '%s' failed"
+msgstr "le téléchargement de '%s' a échoué"
+
+#: src/modules/internet/libcurl.cpp:1181
+msgid "Failure in re-allocation in rcvData"
+msgstr ""
+
+#: src/modules/internet/libcurl.cpp:1270
+msgid "cannot read from connection"
+msgstr "impossible de lire depuis la connexion"
+
+#: src/modules/internet/libcurl.cpp:1332
+#, c-format
+msgid "cannot open the connection to '%s'"
+msgstr "impossible d'ouvrir la connexion vers '%s'"
+
+#: src/modules/internet/sockconn.cpp:52
+#, fuzzy, c-format
+msgid "port %d cannot be opened"
+msgstr "le fichier zip '%s' ne peut être ouvert"
+
+#: src/modules/internet/sockconn.cpp:74
+#, fuzzy
+msgid "problem in listening on this socket"
+msgstr "problème lors de la troncature du fichier d'historique des commandes"
+
+#: src/modules/internet/sockconn.cpp:82
+#, fuzzy
+msgid "problem in accepting connections on this socket"
+msgstr "Problème lors de la fermeture de la connexion : %s"
+
+#: src/modules/internet/sockconn.cpp:98 src/modules/internet/sockconn.cpp:215
+#: src/modules/internet/sockconn.cpp:219 src/modules/internet/sockconn.cpp:226
+#: src/modules/internet/sockconn.cpp:240
+msgid "allocation of socket connection failed"
+msgstr "échec d'allocation d'un connecteur logiciel (socket)"
+
+#: src/modules/internet/sockconn.cpp:103
+#, fuzzy, c-format
+msgid "%s:%d cannot be opened"
+msgstr "le fichier zip '%s' ne peut être ouvert"
+
+#: src/modules/internet/sockconn.cpp:256 src/modules/internet/sockconn.cpp:260
+#: src/modules/internet/sockconn.cpp:267 src/modules/internet/sockconn.cpp:275
+msgid "allocation of server socket connection failed"
+msgstr "échec d'allocation d'un connecteur logiciel (socket)"
+
+#: src/modules/internet/sockconn.cpp:284
+#, c-format
+msgid "creation of server socket failed: port %d cannot be opened"
+msgstr "échec de création d’un connecteur logiciel (socket) : le port %d ne peut être ouvert"
+
+#: src/modules/lapack/Lapack.cpp:74 src/modules/lapack/Lapack.cpp:93
+#: src/modules/lapack/Lapack.cpp:108
+#, c-format
+msgid "argument type[1]='%s' must be a character string of string length 1"
+msgstr "l'argument type[1]='%s' doit être un vecteur de caractères de longueur 1"
+
+#: src/modules/lapack/Lapack.cpp:82
+#, c-format
+msgid "argument type[1]='%s' must be one of 'M','1','O','I','F' or 'E'"
+msgstr "l'argument type[1]='%s' doit être une des options 'M', '1', 'O', 'I', 'F' ou 'E'"
+
+#: src/modules/lapack/Lapack.cpp:99
+#, c-format
+msgid "argument type[1]='%s' must be one of '1','O', or 'I'"
+msgstr "l'argument type[1]='%s' doit être une des options '1', 'O' ou 'I'"
+
+#: src/modules/lapack/Lapack.cpp:112
+#, fuzzy, c-format
+msgid "argument type[1]='%s' must be 'U' or 'L'"
+msgstr "l'argument type[1]='%s' doit être une des options '1', 'O' ou 'I'"
+
+#: src/modules/lapack/Lapack.cpp:135
+msgid "non-integer dim(u)"
+msgstr ""
+
+#: src/modules/lapack/Lapack.cpp:138
+msgid "non-integer dim(vt)"
+msgstr ""
+
+#: src/modules/lapack/Lapack.cpp:151 src/modules/lapack/Lapack.cpp:158
+#: src/modules/lapack/Lapack.cpp:217 src/modules/lapack/Lapack.cpp:228
+#: src/modules/lapack/Lapack.cpp:306 src/modules/lapack/Lapack.cpp:312
+#: src/modules/lapack/Lapack.cpp:406 src/modules/lapack/Lapack.cpp:423
+#: src/modules/lapack/Lapack.cpp:497 src/modules/lapack/Lapack.cpp:567
+#: src/modules/lapack/Lapack.cpp:580 src/modules/lapack/Lapack.cpp:616
+#: src/modules/lapack/Lapack.cpp:774 src/modules/lapack/Lapack.cpp:780
+#: src/modules/lapack/Lapack.cpp:834 src/modules/lapack/Lapack.cpp:841
+#: src/modules/lapack/Lapack.cpp:846 src/modules/lapack/Lapack.cpp:880
+#: src/modules/lapack/Lapack.cpp:887 src/modules/lapack/Lapack.cpp:935
+#: src/modules/lapack/Lapack.cpp:942 src/modules/lapack/Lapack.cpp:989
+#: src/modules/lapack/Lapack.cpp:995 src/modules/lapack/Lapack.cpp:1049
+#: src/modules/lapack/Lapack.cpp:1056 src/modules/lapack/Lapack.cpp:1304
+#: src/modules/lapack/Lapack.cpp:1310 src/modules/lapack/Lapack.cpp:1356
+#: src/modules/lapack/Lapack.cpp:1363 src/modules/lapack/Lapack.cpp:1368
+#: src/modules/lapack/Lapack.cpp:1395 src/modules/lapack/Lapack.cpp:1402
+#: src/modules/lapack/Lapack.cpp:1422
+#, c-format
+msgid "error code %d from Lapack routine '%s'"
+msgstr "code d'erreur %d dans le sous-programme Lapack '%s'"
+
+#: src/modules/lapack/Lapack.cpp:189 src/modules/lapack/Lapack.cpp:281
+#: src/modules/lapack/Lapack.cpp:1029
+msgid "'x' must be a square numeric matrix"
+msgstr "'x' doit être une matrice carrée numérique"
+
+#: src/modules/lapack/Lapack.cpp:356 src/modules/lapack/Lapack.cpp:385
+#: src/modules/lapack/Lapack.cpp:436 src/modules/lapack/Lapack.cpp:473
+#: src/modules/lapack/Lapack.cpp:1082 src/modules/lapack/Lapack.cpp:1162
+#: src/modules/lapack/Lapack.cpp:1201 src/modules/lapack/Lapack.cpp:1284
+#: src/modules/lapack/Lapack.cpp:1339 src/modules/lapack/Lapack.cpp:1381
+#: src/modules/lapack/Lapack.cpp:1414
+#, fuzzy, c-format
+msgid "'%s' must be a numeric matrix"
+msgstr "'A' doit être une matrice numérique"
+
+#: src/modules/lapack/Lapack.cpp:411
+#, c-format
+msgid "exact singularity: U[%d,%d] = 0 in LU-decomposition {Lapack 'dgetrf()'}"
+msgstr "singularité: U[%d,%d] = 0 dans une décomposition LU {Lapack 'dgetrf()'}"
+
+#: src/modules/lapack/Lapack.cpp:447 src/modules/lapack/Lapack.cpp:483
+#: src/modules/lapack/Lapack.cpp:548 src/modules/lapack/Lapack.cpp:604
+#: src/modules/lapack/Lapack.cpp:640
+msgid "'A' must be a *square* matrix"
+msgstr "'A' doit être une matrice *carrée*"
+
+#: src/modules/lapack/Lapack.cpp:462
+#, c-format
+msgid "error [%d] from Lapack 'dtrcon()'"
+msgstr "code d'erreur [%d] dans le sous-programme Lapack 'dtrcon()'"
+
+#: src/modules/lapack/Lapack.cpp:511 src/modules/lapack/Lapack.cpp:545
+#: src/modules/lapack/Lapack.cpp:600 src/modules/lapack/Lapack.cpp:634
+#: src/modules/lapack/Lapack.cpp:670 src/modules/lapack/Lapack.cpp:759
+#: src/modules/lapack/Lapack.cpp:819 src/modules/lapack/Lapack.cpp:865
+#, fuzzy, c-format
+msgid "'%s' must be a complex matrix"
+msgstr "'A' doit être une matrice complexe"
+
+#: src/modules/lapack/Lapack.cpp:528 src/modules/lapack/Lapack.cpp:584
+#: src/modules/lapack/Lapack.cpp:619 src/modules/lapack/Lapack.cpp:656
+#: src/modules/lapack/Lapack.cpp:745 src/modules/lapack/Lapack.cpp:805
+#: src/modules/lapack/Lapack.cpp:850 src/modules/lapack/Lapack.cpp:891
+#: src/modules/lapack/Lapack.cpp:956 src/modules/lapack/Lapack.cpp:1012
+#: src/modules/lapack/Lapack.cpp:1073
+msgid "Fortran complex functions are not available on this platform"
+msgstr "Les fonctions Fortran complexes ne sont pas disponibles sur cette architecture"
+
+#: src/modules/lapack/Lapack.cpp:653
+#, c-format
+msgid "error [%d] from Lapack 'ztrcon()'"
+msgstr "code d'erreur [%d] dans le sous-programme Lapack 'ztrcon()'"
+
+#: src/modules/lapack/Lapack.cpp:673 src/modules/lapack/Lapack.cpp:1204
+#, fuzzy
+msgid "'a' is 0-dimensional"
+msgstr "'a' est de dimension nulle"
+
+#: src/modules/lapack/Lapack.cpp:676 src/modules/lapack/Lapack.cpp:1207
+#, c-format
+msgid "'a' (%d x %d) must be square"
+msgstr "'a' (%d x %d) doit être carrée"
+
+#: src/modules/lapack/Lapack.cpp:682 src/modules/lapack/Lapack.cpp:1213
+msgid "no right-hand side in 'b'"
+msgstr "aucun membre de droite dans 'b'"
+
+#: src/modules/lapack/Lapack.cpp:685 src/modules/lapack/Lapack.cpp:699
+#: src/modules/lapack/Lapack.cpp:1216 src/modules/lapack/Lapack.cpp:1232
+#, c-format
+msgid "'b' (%d x %d) must be compatible with 'a' (%d x %d)"
+msgstr "'b' (%d x %d) doit être compatible avec 'a' (%d x %d)"
+
+#: src/modules/lapack/Lapack.cpp:720 src/modules/lapack/Lapack.cpp:1104
+#: src/modules/lapack/Lapack.cpp:1119 src/modules/lapack/Lapack.cpp:1179
+#: src/modules/lapack/Lapack.cpp:1254
+#, c-format
+msgid "argument %d of Lapack routine %s had invalid value"
+msgstr "valeur incorrecte pour l'argument %d du sous-programme Lapack %s"
+
+#: src/modules/lapack/Lapack.cpp:723 src/modules/lapack/Lapack.cpp:1257
+#, c-format
+msgid "Lapack routine %s: system is exactly singular: U[%d,%d] = 0"
+msgstr "Routine Lapack %s : le système est exactement singulier : U[%d,%d] = 0"
+
+#: src/modules/lapack/Lapack.cpp:739 src/modules/lapack/Lapack.cpp:1272
+#, c-format
+msgid "system is computationally singular: reciprocal condition number = %g"
+msgstr "le système est numériquement singulier : conditionnement de la réciproque = %g"
+
+#: src/modules/lapack/Lapack.cpp:827 src/modules/lapack/Lapack.cpp:873
+#: src/modules/lapack/Lapack.cpp:1348 src/modules/lapack/Lapack.cpp:1388
+#, c-format
+msgid "right-hand side should have %d not %d rows"
+msgstr "le membre de droite devrait avoir %d lignes et non %d"
+
+#: src/modules/lapack/Lapack.cpp:907
+msgid "matrices of 2^31 or more elements are not supported"
+msgstr "les matrices de 2^31 ou plus d'éléments ne sont pas supportées"
+
+#: src/modules/lapack/Lapack.cpp:926 src/modules/lapack/Lapack.cpp:929
+#: src/modules/lapack/Lapack.cpp:1086 src/modules/lapack/Lapack.cpp:1159
+msgid "non-integer dims"
+msgstr ""
+
+#: src/modules/lapack/Lapack.cpp:972
+msgid "'x' must be a square complex matrix"
+msgstr "'x' doit être une matrice carrée numérique complexe"
+
+#: src/modules/lapack/Lapack.cpp:1089 src/modules/lapack/Lapack.cpp:1418
+msgid "'a' must be a square matrix"
+msgstr "'a' doit être une matrice carrée"
+
+#: src/modules/lapack/Lapack.cpp:1090
+msgid "'a' must have dims > 0"
+msgstr "'a' doit avoir des dimensions > 0"
+
+#: src/modules/lapack/Lapack.cpp:1102
+#, fuzzy, c-format
+msgid "the leading minor of order %d is not positive"
+msgstr "le mineur dominant d'ordre %d n'est pas défini positif"
+
+#: src/modules/lapack/Lapack.cpp:1117
+#, fuzzy
+msgid "the matrix is either rank-deficient or not positive definite"
+msgstr "la matrice n'est ni déficiente de rang ou indéfinie"
+
+#: src/modules/lapack/Lapack.cpp:1149
+msgid "'size' argument must be a positive integer"
+msgstr "l'argument 'size' doit être un entier strictement positif"
+
+#: src/modules/lapack/Lapack.cpp:1164
+#, c-format
+msgid "'size' cannot exceed ncol(x) = %d"
+msgstr "l'argument 'size' ne doit pas dépasser ncol(x) = %d"
+
+#: src/modules/lapack/Lapack.cpp:1165
+#, c-format
+msgid "'size' cannot exceed nrow(x) = %d"
+msgstr "l'argument 'size' ne doit pas dépasser nrow(x) = %d"
+
+#: src/modules/lapack/Lapack.cpp:1177
+#, c-format
+msgid "element (%d, %d) is zero, so the inverse cannot be computed"
+msgstr "l'élément (%d, %d) est nul, donc l'inverse ne peut être calculé"
+
 #: src/nmath/bessel_i.cpp:67
 msgid "bessel_i allocation error"
 msgstr "erreur d'allocation pour bessel_i"
@@ -9965,24 +9988,29 @@ msgstr "bessel_i(%g): ncalc (=%d) != nb (=%d); alpha=%g. Argument hors limites ?
 msgid "bessel_i(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_i(%g,nu=%g) : perte de précision dans le résultat\n"
 
-#: src/nmath/bessel_j.cpp:62 src/nmath/bessel_j.cpp:114
+#: src/nmath/bessel_j.cpp:64
 #, c-format
 msgid "besselJ(x, nu): nu=%g too large for bessel_j() algorithm"
 msgstr "besselJ(x, nu): nu=%g est trop large pour l’algorithme bessel_j()"
 
-#: src/nmath/bessel_j.cpp:70
+#: src/nmath/bessel_j.cpp:73
 msgid "bessel_j allocation error"
 msgstr "erreur d'allocation pour bessel_j"
 
-#: src/nmath/bessel_j.cpp:78 src/nmath/bessel_j.cpp:123
+#: src/nmath/bessel_j.cpp:81 src/nmath/bessel_j.cpp:125
 #, c-format
 msgid "bessel_j(%g): ncalc (=%d) != nb (=%d); alpha=%g. Arg. out of range?\n"
 msgstr "bessel_j(%g) : ncalc (=%d) != nb (=%d) ; alpha=%g. Argument hors limites ?\n"
 
-#: src/nmath/bessel_j.cpp:81 src/nmath/bessel_j.cpp:126
+#: src/nmath/bessel_j.cpp:84 src/nmath/bessel_j.cpp:128
 #, c-format
 msgid "bessel_j(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_j(%g,nu=%g) : perte de précision dans le résultat\n"
+
+#: src/nmath/bessel_j.cpp:116
+#, fuzzy, c-format
+msgid "besselJ(x, nu): nu=%g > 1e7; too large for bessel_j() algorithm"
+msgstr "besselJ(x, nu): nu=%g est trop large pour l’algorithme bessel_j()"
 
 #: src/nmath/bessel_k.cpp:61
 msgid "bessel_k allocation error"
@@ -10108,6 +10136,24 @@ msgstr "norm_rand() : N01_kind incorrect : %d\n"
 msgid "wilcox allocation error %d"
 msgstr "erreur d'allocation %d pour wilcox"
 
+#: src/unix/X11.cpp:58
+msgid "X11 module is not available under this GUI"
+msgstr "Module X11 inaccessible par cette interface graphique"
+
+#: src/unix/X11.cpp:64
+msgid "X11 routines cannot be accessed in module"
+msgstr "Impossible d'accéder aux sous-programmes X11 dans le module"
+
+#: src/unix/X11.cpp:82 src/unix/X11.cpp:94 src/unix/X11.cpp:106
+#: src/unix/X11.cpp:117
+msgid "X11 module cannot be loaded"
+msgstr "Impossible de charger le module X11"
+
+#: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161
+#: src/unix/X11.cpp:167
+msgid "X11 is not available"
+msgstr "X11 indisponible"
+
 #: src/unix/dynload.cpp:110
 msgid "Explicit local dynamic loading not supported on this platform. Using default."
 msgstr "Chargement dynamique local explicite indisponible sur cette architecture. Utilisation de la valeur par défaut."
@@ -10153,8 +10199,8 @@ msgstr ""
 "Impossible d'ouvrir le fichier '%s' : %s\n"
 "\n"
 
-#: src/unix/sys-std.cpp:1361 src/unix/system.cpp:593 src/unix/sys-unix.cpp:1032
-#: src/unix/sys-unix.cpp:1092
+#: src/unix/sys-std.cpp:1361 src/unix/sys-unix.cpp:1032
+#: src/unix/sys-unix.cpp:1092 src/unix/system.cpp:593
 msgid "error in running command"
 msgstr "erreur lors de l'exécution d'une commande"
 
@@ -10177,6 +10223,45 @@ msgstr "aucun historique des commandes disponible pour la sauvegarde"
 #: src/unix/sys-std.cpp:1469
 msgid "invalid timestamp"
 msgstr "marque (timestamp) incorrecte"
+
+#: src/unix/sys-unix.cpp:587 src/unix/sys-unix.cpp:668
+#: src/unix/sys-unix.cpp:785
+#, fuzzy
+msgid "Cannot open /dev/null for reading:"
+msgstr "connexion non ouverte en lecture"
+
+#: src/unix/sys-unix.cpp:618
+#, fuzzy
+msgid "Invalid file pointer in pclose"
+msgstr "motif de nom de fichier incorrect"
+
+#: src/unix/sys-unix.cpp:872
+#, c-format
+msgid "running command '%s' had status %d and error message '%s'"
+msgstr "l'exécution de la commande '%s' renvoie un statut %d et le message d'erreur '%s'"
+
+#: src/unix/sys-unix.cpp:910
+msgid "non-empty character argument expected"
+msgstr "argument de taille non nulle et de type caractère attendu"
+
+#: src/unix/sys-unix.cpp:963
+#, c-format
+msgid "cannot popen '%s', probable reason '%s'"
+msgstr "popen impossible pour '%s', cause probable : '%s'"
+
+#: src/unix/sys-unix.cpp:977
+#, c-format
+msgid "line %d may be truncated in call to system(, intern = TRUE)"
+msgstr "la ligne %d est probablement tronquée lors de l'appel à system(, intern = TRUE)"
+
+#: src/unix/sys-unix.cpp:1029
+#, c-format
+msgid "error in running command: '%s'"
+msgstr "erreur lors de l'exécution de la commande : '%s'"
+
+#: src/unix/sys-unix.cpp:1171
+msgid "Sys.info() is not implemented on this system"
+msgstr "Sys.info() n'est pas implémenté sur ce système"
 
 #: src/unix/system.cpp:193
 #, fuzzy
@@ -10226,69 +10311,11 @@ msgstr "erreur d'écriture lors de l'extraction d'un fichier zip"
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "AVIS : édition uniquement du premier fichier de la liste"
 
-#: src/unix/sys-unix.cpp:587 src/unix/sys-unix.cpp:668
-#: src/unix/sys-unix.cpp:785
-#, fuzzy
-msgid "Cannot open /dev/null for reading:"
-msgstr "connexion non ouverte en lecture"
-
-#: src/unix/sys-unix.cpp:618
-#, fuzzy
-msgid "Invalid file pointer in pclose"
-msgstr "motif de nom de fichier incorrect"
-
-#: src/unix/sys-unix.cpp:872
-#, c-format
-msgid "running command '%s' had status %d and error message '%s'"
-msgstr "l'exécution de la commande '%s' renvoie un statut %d et le message d'erreur '%s'"
-
-#: src/unix/sys-unix.cpp:910
-msgid "non-empty character argument expected"
-msgstr "argument de taille non nulle et de type caractère attendu"
-
-#: src/unix/sys-unix.cpp:963
-#, c-format
-msgid "cannot popen '%s', probable reason '%s'"
-msgstr "popen impossible pour '%s', cause probable : '%s'"
-
-#: src/unix/sys-unix.cpp:977
-#, c-format
-msgid "line %d may be truncated in call to system(, intern = TRUE)"
-msgstr "la ligne %d est probablement tronquée lors de l'appel à system(, intern = TRUE)"
-
-#: src/unix/sys-unix.cpp:1029
-#, c-format
-msgid "error in running command: '%s'"
-msgstr "erreur lors de l'exécution de la commande : '%s'"
-
-#: src/unix/sys-unix.cpp:1171
-msgid "Sys.info() is not implemented on this system"
-msgstr "Sys.info() n'est pas implémenté sur ce système"
-
-#: src/unix/X11.cpp:58
-msgid "X11 module is not available under this GUI"
-msgstr "Module X11 inaccessible par cette interface graphique"
-
-#: src/unix/X11.cpp:64
-msgid "X11 routines cannot be accessed in module"
-msgstr "Impossible d'accéder aux sous-programmes X11 dans le module"
-
-#: src/unix/X11.cpp:82 src/unix/X11.cpp:94 src/unix/X11.cpp:106
-#: src/unix/X11.cpp:117
-msgid "X11 module cannot be loaded"
-msgstr "Impossible de charger le module X11"
-
-#: src/unix/X11.cpp:149 src/unix/X11.cpp:155 src/unix/X11.cpp:161
-#: src/unix/X11.cpp:167
-msgid "X11 is not available"
-msgstr "X11 indisponible"
+#~ msgid "not safe to return vector pointer"
+#~ msgstr "le renvoi d'un pointeur sur un vecteur n'est pas sûr"
 
 #~ msgid "the base graphics system is not registered"
 #~ msgstr "le système graphique de base n'est pas enregistré"
-
-#, fuzzy
-#~ msgid "vector memory exhausted"
-#~ msgstr "vecteurs de mémoire épuisés (limite atteinte ?)"
 
 #, fuzzy
 #~ msgid "untraced old-to-new reference\n"

@@ -818,13 +818,13 @@ static bool set_tz(const char *tz, tzset_info *si)
 	    tz = si->oldtz;
 	} else {
 #ifdef HAVE_UNSETENV
-	    if(unsetenv("TZ")) warning(_("problem with unsetting timezone"));
+	    if(unsetenv("TZ")) warning("%s", _("problem with unsetting timezone"));
 #elif defined(HAVE_PUTENV_UNSET)
 	    static char e[] = "TZ";
-	    if(putenv(e)) warning(_("problem with unsetting timezone"));
+	    if(putenv(e)) warning("%s", _("problem with unsetting timezone"));
 #elif defined(HAVE_PUTENV_UNSET2)
 	    static char e[] = "TZ=";
-	    if(putenv(e)) warning(_("problem with unsetting timezone"));
+	    if(putenv(e)) warning("%s", _("problem with unsetting timezone"));
 #endif
 	    tzset();
 	    return si->settz;

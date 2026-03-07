@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:07+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -200,11 +200,6 @@ msgstr "*** algú ha corromput el camp integrat al paquet «%s» ***"
 #, fuzzy
 msgid "*not* using 'C' for LC_COLLATE locale"
 msgstr "*no* usant «C» per a la configuració regional de LCCOLLATE"
-
-#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
-#: R/RdHelpers.R:0
-msgid ","
-msgstr ","
 
 #. R/Vignettes.R: gettextf("--- failed re-building %s\n", sQuote(file))
 #: R/Vignettes.R:0
@@ -464,12 +459,6 @@ msgstr "Codi: %s"
 #, fuzzy
 msgid "Codoc mismatches from Rd file '%s':"
 msgstr "No coincideix el Codoc amb l'objecte de documentació «%s»:"
-
-#. R/testing.R: gettextf("  Comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
-#: R/testing.R:0
-#, fuzzy
-msgid "Comparing %s to %s ..."
-msgstr "S'està comparant %s a %s..."
 
 #. R/Rd2pdf.R: message("Converting Rd files to LaTeX ...")
 #: R/Rd2pdf.R:0
@@ -831,12 +820,6 @@ msgstr "Punters de fitxer de llicència no vàlids: %s"
 #, fuzzy
 msgid "Invalid package aliases in Rd file '%s':"
 msgstr "Àlies de paquets no vàlids al fitxer Rd «%s»:"
-
-#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
-#: R/Rd2HTML.R:0
-#, fuzzy
-msgid "Invalid value of 'toc_entries'"
-msgstr "valor no vàlid per a «%s»: %s"
 
 #. R/QC.R: gettext("License components which are templates and need '+ file LICENSE':")
 #: R/QC.R:0
@@ -1325,17 +1308,17 @@ msgstr "Fitxers Rd amb l'àlies duplicat «%s»:"
 msgid "Rd files with duplicated name '%s':"
 msgstr "Fitxers Rd amb el nom duplicat «%s»:"
 
+#. R/QC.R: gettextf("Rd files without %s:", paste0("\\", section))
+#: R/QC.R:0
+#, fuzzy
+msgid "Rd files without %s:"
+msgstr "Fitxers Rd sense \\alias:"
+
 #. R/QC.R: gettext("Rd files without \\alias:")
 #: R/QC.R:0
 #, fuzzy
 msgid "Rd files without \\alias:"
 msgstr "Fitxers Rd sense \\alias:"
-
-#. R/QC.R: gettext("Rd files without \\description:")
-#: R/QC.R:0
-#, fuzzy
-msgid "Rd files without \\description:"
-msgstr "Objectes Rd sense \\description:"
 
 #. R/Rd.R: gettextf("Rd macro package '%s' is not installed.", p)
 #: R/Rd.R:0
@@ -1488,6 +1471,11 @@ msgstr "L'estil JSS per defecte no es pot modificar."
 msgid "The package 'dir' argument must be of length 1"
 msgstr "L'argument «dir» del paquet ha de ser de longitud 1"
 
+#. R/packages.R: stop("There is no binary type for this build of R.")
+#: R/packages.R:0
+msgid "There is no binary type for this build of R."
+msgstr ""
+
 #. R/QC.R: gettext("These fields must have ASCII values.")
 #: R/QC.R:0
 msgid "These fields must have ASCII values."
@@ -1552,11 +1540,6 @@ msgstr "Objectes de codi no documentats:"
 #: R/QC.R:0
 msgid "Undocumented data sets:"
 msgstr "Conjunts de dades no documentats:"
-
-#. R/Rd2HTML.R: warning("Unexpected jump in section level")
-#: R/Rd2HTML.R:0
-msgid "Unexpected jump in section level"
-msgstr ""
 
 #. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
 #: R/QC.R:0
@@ -1727,11 +1710,6 @@ msgstr "[mode dryrun] S'ha completat el Dryrun."
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 #: R/update_packages.R:0
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
-msgstr ""
-
-#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
-#: R/RdHelpers.R:0
-msgid "\\manual must refer to one of %s"
 msgstr ""
 
 #. R/Rd2latex.R: gettext("\\tabular format must be simple text")
@@ -2081,6 +2059,12 @@ msgstr "Ha fallat la crida inferior"
 msgid "invalid 'OS.type' \"%s\".  Should not happen"
 msgstr "'OS.type' no vàlid \"%s\". No hauria de succeir"
 
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+#, fuzzy
+msgid "invalid 'type'"
+msgstr "paquet no vàlid"
+
 #. R/sha256.R: stop("invalid hex string")
 #: R/sha256.R:0
 msgid "invalid hex string"
@@ -2098,15 +2082,10 @@ msgstr "paquet no vàlid"
 msgid "invalid package layout"
 msgstr "la disposició del paquet no és vàlida"
 
-#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-#: R/install.R:0
-#, fuzzy
-msgid "invalid value %s for R_CROSS_BUILD"
-msgstr "per a RCROSSBUILD"
-
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
+#. R/install.R: gettextf("invalid value for '%s' : %s", "R_CROSS_BUILD", sQuote(cross))
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
-#: R/RdConv2.R:0 R/makeLazyLoad.R:0
+#: R/RdConv2.R:0 R/install.R:0 R/makeLazyLoad.R:0
 #, fuzzy
 msgid "invalid value for '%s' : %s"
 msgstr "valor no vàlid per a «%s»: %s"
@@ -2956,6 +2935,25 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "no s'ha pogut tornar a codificar la línia %s %s"
 msgstr[1] "no s'ha pogut tornar a codificar %s línies %s"
+
+#~ msgid ","
+#~ msgstr ","
+
+#, fuzzy
+#~ msgid "Comparing %s to %s ..."
+#~ msgstr "S'està comparant %s a %s..."
+
+#, fuzzy
+#~ msgid "Invalid value of 'toc_entries'"
+#~ msgstr "valor no vàlid per a «%s»: %s"
+
+#, fuzzy
+#~ msgid "Rd files without \\description:"
+#~ msgstr "Objectes Rd sense \\description:"
+
+#, fuzzy
+#~ msgid "invalid value %s for R_CROSS_BUILD"
+#~ msgstr "per a RCROSSBUILD"
 
 #, fuzzy
 #~ msgid "downloading %s ..."

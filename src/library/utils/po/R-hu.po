@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Norbert Solymosi <solymosi.norbert@gmail.com>\n"
 "Language-Team: none\n"
@@ -369,6 +369,11 @@ msgstr ""
 #. R/debugger.R: gettext("Browsing in the environment with call:\n   ")
 #: R/debugger.R:0
 msgid "Browsing in the environment with call:"
+msgstr ""
+
+#. R/unix/mac.install.R: stop("Built: value is not a string")
+#: R/unix/mac.install.R:0
+msgid "Built: value is not a string"
 msgstr ""
 
 #. R/askYesNo.R: c("Yes", "No", "Cancel")
@@ -911,6 +916,11 @@ msgstr ""
 msgid "attempt to set '%s' ignored"
 msgstr ""
 
+#. R/unix/mac.install.R: gettextf("binary package %s is not compatible with this build of R",     sQuote(pkg))
+#: R/unix/mac.install.R:0
+msgid "binary package %s is not compatible with this build of R"
+msgstr ""
+
 #. R/edit.R: stop("can only handle vector and factor elements")
 #: R/edit.R:0
 msgid "can only handle vector and factor elements"
@@ -981,14 +991,9 @@ msgstr ""
 msgid "cannot install Windows binary packages on this platform"
 msgstr ""
 
-#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#. R/packages2.R: stop("cannot install binary packages from other operating systems on Windows")
 #: R/packages2.R:0
-msgid "cannot install macOS binary packages on Windows"
-msgstr ""
-
-#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
-#: R/packages2.R:0
-msgid "cannot install macOS binary packages on this platform"
+msgid "cannot install binary packages from other operating systems on Windows"
 msgstr ""
 
 #. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
@@ -1160,9 +1165,9 @@ msgstr ""
 msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr ""
 
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a binary package", sQuote(pkg))
 #: R/unix/mac.install.R:0
-msgid "file %s is not a macOS binary package"
+msgid "file %s is not a binary package"
 msgstr ""
 
 #. R/tar.R: gettextf("file '%s' did not have execute permissions: corrected",     f)
@@ -1290,7 +1295,6 @@ msgstr ""
 #. R/edit.R: gettextf("invalid '%s' argument", "x")
 #. R/help.R: gettextf("invalid '%s' argument", "file")
 #. R/packages.R: gettextf("invalid '%s' argument", "filters")
-#. R/packages.R: gettextf("invalid '%s' argument", "type")
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
@@ -1346,6 +1350,11 @@ msgstr "érvénytelen 'row.names' hossz"
 #. R/write.table.R: stop("invalid 'row.names' specification")
 #: R/read.DIF.R:0 R/readtable.R:0 R/write.table.R:0
 msgid "invalid 'row.names' specification"
+msgstr ""
+
+#. R/packages.R: stop("invalid 'type'")
+#: R/packages.R:0
+msgid "invalid 'type'"
 msgstr ""
 
 #. R/help.start.R: stop("invalid browser name, check options(\"browser\").")

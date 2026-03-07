@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28\n"
+"POT-Creation-Date: 2026-03-07 16:58\n"
 "PO-Revision-Date: 2025-07-06 14:50+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -617,6 +617,11 @@ msgstr "'row.names' deve especificar uma das variáveis"
 msgid "'scale' should be numeric or NULL"
 msgstr "'scale' deve ser numérico ou NULL"
 
+#. R/match.R: stop("'several.ok' must be logical or a string starting with \"all\"")
+#: R/match.R:0
+msgid "'several.ok' must be logical or a string starting with \"all\""
+msgstr ""
+
 #. R/frametools.R: stop("'subset' must be logical")
 #: R/frametools.R:0
 msgid "'subset' must be logical"
@@ -688,9 +693,9 @@ msgstr "'verbose' e 'quietly' são ambos verdadeiros; mantendo verbose então ..
 msgid "'verbose' is TRUE, 'echo' not; ... coercing 'echo <- TRUE'"
 msgstr "'verbose' é TRUE, 'echo' não; ... fazendo 'echo <- TRUE'"
 
-#. R/namespace.R: stop("'versionCheck' must be NULL or list with components 'op' and 'version'")
+#. R/namespace.R: stop("'versionCheck' must be NULL or a list with components 'op' and 'version'")
 #: R/namespace.R:0
-msgid "'versionCheck' must be NULL or list with components 'op' and 'version'"
+msgid "'versionCheck' must be NULL or a list with components 'op' and 'version'"
 msgstr ""
 
 #. R/taskCallback.R: stop("'which' must be character or numeric")
@@ -2554,6 +2559,11 @@ msgstr "provavelmente codificação errada no names(.) da coluna"
 #, fuzzy
 msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr "levando gerenciador de `%s` duplicado ao topo da pilha"
+
+#. R/summary.R: warning("quantile.type not in {1, 3} for <raw>")
+#: R/summary.R:0
+msgid "quantile.type not in {1, 3} for <raw>"
+msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0

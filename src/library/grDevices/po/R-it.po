@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-06-20 10:49\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: 2025-07-06 15:33+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -202,9 +202,9 @@ msgstr ""
 "Dispositivi disponibili:\n"
 "%s"
 
-#. R/glyph.R: stop("Axis names must 4 ASCII letters long")
+#. R/glyph.R: stop("Axis names must be 4 ASCII letters long")
 #: R/glyph.R:0
-msgid "Axis names must 4 ASCII letters long"
+msgid "Axis names must be 4 ASCII letters long"
 msgstr ""
 
 #. R/glyph.R: gettext("Axis value(s) out of range: ", domain = "R-grDevices")

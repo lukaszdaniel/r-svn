@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,13 +239,6 @@ msgstr ""
 #. R/utils.R: warning("*not* using 'C' for LC_COLLATE locale")
 
 msgid "*not* using 'C' for LC_COLLATE locale"
-msgstr ""
-
-
-#: R/RdHelpers.R: 0
-#. R/RdHelpers.R: paste(sQuote(rownames(utils:::R_manuals)), collapse = ", ")
-
-msgid ","
 msgstr ""
 
 
@@ -555,13 +548,6 @@ msgstr ""
 #. R/QC.R: gettextf("Codoc mismatches from Rd file '%s':", fname)
 
 msgid "Codoc mismatches from Rd file '%s':"
-msgstr ""
-
-
-#: R/testing.R: 0
-#. R/testing.R: gettextf("  Comparing %s to %s ...", sQuote(outfile), sQuote(savefile))
-
-msgid "Comparing %s to %s ..."
 msgstr ""
 
 
@@ -979,13 +965,6 @@ msgstr ""
 #. R/QC.R: gettextf("Invalid package aliases in Rd file '%s':", nm)
 
 msgid "Invalid package aliases in Rd file '%s':"
-msgstr ""
-
-
-#: R/Rd2HTML.R: 0
-#. R/Rd2HTML.R: stop("Invalid value of 'toc_entries'")
-
-msgid "Invalid value of 'toc_entries'"
 msgstr ""
 
 
@@ -1561,16 +1540,16 @@ msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettext("Rd files without \\alias:")
+#. R/QC.R: gettextf("Rd files without %s:", paste0("\\", section))
 
-msgid "Rd files without \\alias:"
+msgid "Rd files without %s:"
 msgstr ""
 
 
 #: R/QC.R: 0
-#. R/QC.R: gettext("Rd files without \\description:")
+#. R/QC.R: gettext("Rd files without \\alias:")
 
-msgid "Rd files without \\description:"
+msgid "Rd files without \\alias:"
 msgstr ""
 
 
@@ -1754,6 +1733,13 @@ msgid "The package 'dir' argument must be of length 1"
 msgstr ""
 
 
+#: R/packages.R: 0
+#. R/packages.R: stop("There is no binary type for this build of R.")
+
+msgid "There is no binary type for this build of R."
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettext("These fields must have ASCII values.")
 
@@ -1835,13 +1821,6 @@ msgstr ""
 #. R/QC.R: gettext("Undocumented data sets:")
 
 msgid "Undocumented data sets:"
-msgstr ""
-
-
-#: R/Rd2HTML.R: 0
-#. R/Rd2HTML.R: warning("Unexpected jump in section level")
-
-msgid "Unexpected jump in section level"
 msgstr ""
 
 
@@ -2050,13 +2029,6 @@ msgstr ""
 #. R/update_packages.R: message("[strict mode] Checking if MD5sums match for existing tarballs")
 
 msgid "[strict mode] Checking if MD5sums match for existing tarballs"
-msgstr ""
-
-
-#: R/RdHelpers.R: 0
-#. R/RdHelpers.R: sprintf("\\manual must refer to one of %s", paste(sQuote(rownames(utils:::R_manuals)),     collapse = ", "))
-
-msgid "\\manual must refer to one of %s"
 msgstr ""
 
 
@@ -2480,6 +2452,13 @@ msgid "invalid 'OS.type' \"%s\".  Should not happen"
 msgstr ""
 
 
+#: R/packages.R: 0
+#. R/packages.R: stop("invalid 'type'")
+
+msgid "invalid 'type'"
+msgstr ""
+
+
 #: R/sha256.R: 0
 #. R/sha256.R: stop("invalid hex string")
 
@@ -2501,16 +2480,11 @@ msgid "invalid package layout"
 msgstr ""
 
 
-#: R/install.R: 0
-#. R/install.R: gettextf("invalid value %s for R_CROSS_BUILD", sQuote(cross))
-
-msgid "invalid value %s for R_CROSS_BUILD"
-msgstr ""
-
-
 #: R/RdConv2.R: 0
+#: R/install.R: 0
 #: R/makeLazyLoad.R: 0
 #. R/RdConv2.R: gettextf("invalid value for '%s' : %s", opt, oldval)
+#. R/install.R: gettextf("invalid value for '%s' : %s", "R_CROSS_BUILD", sQuote(cross))
 #. R/makeLazyLoad.R: gettextf("invalid value for '%s' : %s", "compress", "should be FALSE, TRUE, 2 or 3")
 
 msgid "invalid value for '%s' : %s"

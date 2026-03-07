@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:29\n"
+"POT-Creation-Date: 2026-03-07 16:59\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -517,6 +517,13 @@ msgstr ""
 #. R/debugger.R: gettext("Browsing in the environment with call:\n   ")
 
 msgid "Browsing in the environment with call:"
+msgstr ""
+
+
+#: R/unix/mac.install.R: 0
+#. R/unix/mac.install.R: stop("Built: value is not a string")
+
+msgid "Built: value is not a string"
 msgstr ""
 
 
@@ -1239,6 +1246,13 @@ msgid "attempt to set '%s' ignored"
 msgstr ""
 
 
+#: R/unix/mac.install.R: 0
+#. R/unix/mac.install.R: gettextf("binary package %s is not compatible with this build of R",     sQuote(pkg))
+
+msgid "binary package %s is not compatible with this build of R"
+msgstr ""
+
+
 #: R/edit.R: 0
 #. R/edit.R: stop("can only handle vector and factor elements")
 
@@ -1338,16 +1352,9 @@ msgstr ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: stop("cannot install macOS binary packages on Windows")
+#. R/packages2.R: stop("cannot install binary packages from other operating systems on Windows")
 
-msgid "cannot install macOS binary packages on Windows"
-msgstr ""
-
-
-#: R/packages2.R: 0
-#. R/packages2.R: stop("cannot install macOS binary packages on this platform")
-
-msgid "cannot install macOS binary packages on this platform"
+msgid "cannot install binary packages from other operating systems on Windows"
 msgstr ""
 
 
@@ -1588,9 +1595,9 @@ msgstr ""
 
 
 #: R/unix/mac.install.R: 0
-#. R/unix/mac.install.R: gettextf("file %s is not a macOS binary package", sQuote(pkg))
+#. R/unix/mac.install.R: gettextf("file %s is not a binary package", sQuote(pkg))
 
-msgid "file %s is not a macOS binary package"
+msgid "file %s is not a binary package"
 msgstr ""
 
 
@@ -1771,7 +1778,6 @@ msgstr ""
 #. R/edit.R: gettextf("invalid '%s' argument", "x")
 #. R/help.R: gettextf("invalid '%s' argument", "file")
 #. R/packages.R: gettextf("invalid '%s' argument", "filters")
-#. R/packages.R: gettextf("invalid '%s' argument", "type")
 #. R/packages2.R: gettextf("invalid '%s' argument", "keep_outputs")
 #. R/sock.R: gettextf("invalid '%s' argument", "socket")
 #. R/tar.R: gettextf("invalid '%s' argument", "tarfile")
@@ -1846,6 +1852,13 @@ msgstr ""
 #. R/write.table.R: stop("invalid 'row.names' specification")
 
 msgid "invalid 'row.names' specification"
+msgstr ""
+
+
+#: R/packages.R: 0
+#. R/packages.R: stop("invalid 'type'")
+
+msgid "invalid 'type'"
 msgstr ""
 
 
