@@ -2839,7 +2839,7 @@ attribute_hidden void (R::SET_MAYBEJIT)(SEXP x) { CR_ASSERT(x); SET_MAYBEJIT(CHK
 attribute_hidden void (R::UNSET_MAYBEJIT)(SEXP x) { CR_ASSERT(x); UNSET_MAYBEJIT(CHK(x)); }
 
 /* Growable vector support */
-attribute_hidden
+// attribute_hidden
 bool (R::IS_GROWABLE)(SEXP x) { CR_ASSERT(x); return IS_GROWABLE(CHK(x)); }
 attribute_hidden
 bool (R::GROWABLE_BIT_SET)(SEXP x) { return GROWABLE_BIT_SET(CHK(x)); }
