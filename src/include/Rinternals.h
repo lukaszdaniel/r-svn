@@ -140,11 +140,7 @@ int (NO_REFERENCES)(SEXP x);
 
 /* General Cons Cell Attributes */
 SEXP (ATTRIB)(SEXP x);
-int  (OBJECT)(SEXP x);
-// int  (MARK)(SEXP x);
 SEXPTYPE (TYPEOF)(SEXP x);
-int  (NAMED)(SEXP x);
-//int  (REFCNT)(SEXP x);
 void SET_ATTRIB(SEXP x, SEXP v);
 void DUPLICATE_ATTRIB(SEXP to, SEXP from);
 void SHALLOW_DUPLICATE_ATTRIB(SEXP to, SEXP from);
@@ -152,9 +148,6 @@ void (MARK_NOT_MUTABLE)(SEXP x);
 void CLEAR_ATTRIB(SEXP x);
 int  (ANY_ATTRIB)(SEXP x);
 #define NO_ATTRIB(x) (! ANY_ATTRIB(x))
-
-/* S4 object testing */
-int (IS_S4_OBJECT)(SEXP x);
 
 /* Vector Access Functions */
 int  (LENGTH)(SEXP x);
@@ -192,7 +185,7 @@ int INTEGER_IS_SORTED(SEXP x);
 int INTEGER_NO_NA(SEXP x);
 int REAL_IS_SORTED(SEXP x);
 int REAL_NO_NA(SEXP x);
-int LOGICAL_IS_SORTED(SEXP x);
+//int LOGICAL_IS_SORTED(SEXP x);
 int LOGICAL_NO_NA(SEXP x);
 int STRING_IS_SORTED(SEXP x);
 int STRING_NO_NA(SEXP x);
@@ -266,9 +259,6 @@ SEXP (PRINTNAME)(SEXP x);
 //int  (DDVAL)(SEXP x);
 
 /* Environment Access Functions */
-int  (ENVFLAGS)(SEXP x);
-int  (ENV_RDEBUG)(SEXP x);
-void (SET_ENV_RDEBUG)(SEXP x, int v);
 SEXP R_ParentEnv(SEXP);
 
 /* Promise Access Functions */
@@ -421,9 +411,6 @@ SEXP Rf_dimgets(SEXP, SEXP);
 SEXP Rf_dimnamesgets(SEXP, SEXP);
 SEXP Rf_duplicate(SEXP);
 SEXP Rf_shallow_duplicate(SEXP);
-//SEXP R_duplicate_attr(SEXP);
-SEXP R_shallow_duplicate_attr(SEXP);
-SEXP Rf_lazy_duplicate(SEXP);
 /* the next really should not be here and is also in Defn.h */
 SEXP Rf_duplicated(SEXP, Rboolean); // duplicate.c
 SEXP Rf_eval(SEXP, SEXP);
@@ -460,15 +447,9 @@ SEXP Rf_match(SEXP, SEXP, int);
 SEXP Rf_namesgets(SEXP, SEXP);
 SEXP Rf_mkChar(const char *);
 SEXP Rf_mkCharLen(const char *, int);
-Rboolean Rf_NonNullStringMatch(SEXP, SEXP); // match.c
 int Rf_ncols(SEXP);
 int Rf_nrows(SEXP);
 SEXP Rf_nthcdr(SEXP, int);
-
-// ../main/character.c :
-typedef enum {Bytes, Chars, Width} nchar_type;
-//int R_nchar(SEXP string, nchar_type type_,
-//	    Rboolean allowNA, Rboolean keepNA, const char* msg_name);
 
 SEXP R_ParseEvalString(const char *, SEXP);
 SEXP R_ParseString(const char *);
@@ -994,9 +975,6 @@ Rboolean Rf_isPairList(SEXP);
 Rboolean Rf_isPrimitive(SEXP);
 Rboolean Rf_isScalarString(SEXP);
 Rboolean Rf_isTs(SEXP);
-//Rboolean Rf_isUserBinop(SEXP);
-Rboolean Rf_isValidString(SEXP);
-//Rboolean Rf_isValidStringF(SEXP);
 Rboolean Rf_isVector(SEXP);
 Rboolean Rf_isVectorAtomic(SEXP);
 Rboolean Rf_isVectorList(SEXP);
@@ -1032,7 +1010,6 @@ R_xlen_t  (XLENGTH)(SEXP x);
 // int LENGTH_EX(SEXP x, const char *file, int line);
 // R_xlen_t XLENGTH_EX(SEXP x);
 SEXP (CAR)(SEXP e);
-void *(DATAPTR)(SEXP x);
 const void *(DATAPTR_RO)(SEXP x);
 const void *(DATAPTR_OR_NULL)(SEXP x);
 const int *(LOGICAL_OR_NULL)(SEXP x);
@@ -1140,11 +1117,7 @@ R_xlen_t R_ncol(SEXP x);
    Stuff that is not API and probably should not be but is getting used.
  */
 
-void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // used by Rcpp and much more
-// used by Rcpp (not?), Matrix and more and in an example in R-exts.
 void (SET_OBJECT)(SEXP x, int v); // used by Rcpp (not?), Matrix and more
-void (SET_S4_OBJECT)(SEXP x); // used by essentials qs redland tibble vectrs
-void (UNSET_S4_OBJECT)(SEXP x); // used by essentials vectrs
 const char *R_curErrorBuf(void); // used by Rserve
 int (IS_SCALAR)(SEXP x, SEXPTYPE type);
 Rboolean Rf_psmatch(const char *, const char *, Rboolean); // match.c,  used by rgl and in WRE
@@ -1157,20 +1130,10 @@ Rboolean Rf_psmatch(const char *, const char *, Rboolean); // match.c,  used by 
 #define error_return(msg)	{ Rf_error("%s", msg);	   return R_NilValue; }
 #define errorcall_return(cl,msg){ Rf_errorcall(cl, "%s", msg);   return R_NilValue; }
 
-// used by admisc arcpbf b64 box clarabel collapse declared drake fcl rlang this.path
-void (SET_ENVFLAGS)(SEXP x, int v);
-void SET_FRAME(SEXP x, SEXP v); // used by mmap qs
-void SET_ENCLOS(SEXP x, SEXP v); // used by magrittr mmap qs rlang vecrs
-void SET_HASHTAB(SEXP x, SEXP v); // used mmap qs
-
 // used by dplyr magrittr quotedargs
 void SET_PRENV(SEXP x, SEXP v); 
 void SET_PRVALUE(SEXP x, SEXP v);
 void SET_PRCODE(SEXP x, SEXP v); 
-
-// no longer used
-#define BCODE_CONSTS(x) CONSTS(x) // re-enable in Defn.h after removing here
-void (SET_NAMED)(SEXP x, int v); // used by fastmatch quotedargs
 
 // R_PromiseExp used in lazyeval precondition rlang tibblify vctrs
 #define PREXPR(e) R_PromiseExpr(e)
@@ -1178,7 +1141,7 @@ void (SET_NAMED)(SEXP x, int v); // used by fastmatch quotedargs
 // formerly used in rlang
 #define BODY_EXPR(e) R_ClosureExpr(e)
 
-// used by BioC::matter; might be reasonable to include in API
+// used by BioC::matter; marked as @eapifun for now
 SEXP R_tryWrap(SEXP);
 
 #ifdef __cplusplus
@@ -1189,6 +1152,25 @@ inline R_len_t length(SEXP s)
 {
     return Rf_length(s);
 }
+#endif
+
+// temporatily add these declarations and unhide until BioC catches up
+int  (NAMED)(SEXP x);
+void (SET_NAMED)(SEXP x, int v);
+int (IS_S4_OBJECT)(SEXP x);
+void (SET_S4_OBJECT)(SEXP x);
+void (UNSET_S4_OBJECT)(SEXP x);
+SEXP R_data_class(SEXP , Rboolean);
+int  (OBJECT)(SEXP x);  // used in dang via tidyCpp
+void (SET_TYPEOF)(SEXP x, SEXPTYPE v);
+int  (ENVFLAGS)(SEXP x);
+void (SET_ENVFLAGS)(SEXP x, int v);
+int  (LEVELS)(SEXP x);  // used in dang via tidyCpp
+int  (SETLEVELS)(SEXP x, int v);  // used in dang via tidyCpp
+void *(EXTPTR_PTR)(SEXP);  // used in rJava in a separate .so file
+SEXP (ENCLOS)(SEXP x);  // used in rJava in a separate .so file
+#if ! (defined(CALLED_FROM_DEFN_H) && !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS)))
+void *(DATAPTR)(SEXP x);
 #endif
 
 #ifdef __cplusplus

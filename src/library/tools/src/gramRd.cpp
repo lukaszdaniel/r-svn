@@ -3306,7 +3306,7 @@ static SEXP xxmarkup3(SEXP header, SEXP body1, SEXP body2, SEXP body3, int flag,
 {
     SEXP ans;
 #if DEBUGVALS
-    Rprintf("xxmarkup2(header=%p, body1=%p, body2=%p, body3=%p)", header, body1, body2, body3);        
+    Rprintf("xxmarkup3(header=%p, body1=%p, body2=%p, body3=%p)", header, body1, body2, body3);        
 #endif
 
     PRESERVE_SV(ans = allocVector(VECSXP, 3));
@@ -3745,7 +3745,8 @@ static keywords[] = {
 
     { "\\link",    OPTMACRO },
     { "\\linkS4class", OPTMACRO },
-
+    { "\\linkS4methods", OPTMACRO },
+       
     /* These markup macros require an R-like text argument */
 
     { "\\code",    RCODEMACRO },
@@ -4406,6 +4407,7 @@ static int yylex(void)
     int tok = token();
 
     if (parseState.xxDebugTokens) {
+        /* FIXME: Print "+" if/per macrolevel instead of (nonexistent) source location. */
         Rprintf("%d:%d: %s", yylloc.first_line, yylloc.first_column, yytname[YYTRANSLATE(tok)]);
     	if (parseState.xxinRString) Rprintf("(in %c%c)", parseState.xxinRString, parseState.xxinRString);
     	if (tok > 255 && tok != END_OF_INPUT) 

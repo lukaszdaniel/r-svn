@@ -215,6 +215,8 @@ namespace R
     bool (IS_GROWABLE)(SEXP x);
     void (SET_GROWABLE_BIT)(SEXP x);
 
+    int LOGICAL_IS_SORTED(SEXP x);
+
 #ifdef LONG_VECTOR_SUPPORT
     NORET R_len_t R_BadLongVector(SEXP, const char *, int);
 #endif
@@ -329,7 +331,6 @@ extern "C"
     int INTEGER_NO_NA(SEXP x);
     int REAL_IS_SORTED(SEXP x);
     int REAL_NO_NA(SEXP x);
-    int LOGICAL_IS_SORTED(SEXP x);
     int LOGICAL_NO_NA(SEXP x);
     int STRING_IS_SORTED(SEXP x);
     int STRING_NO_NA(SEXP x);

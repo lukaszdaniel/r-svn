@@ -2680,9 +2680,11 @@ SEXP (ATTRIB)(SEXP x) { return CHK(ATTRIB(CHK(x))); }
 int (ANY_ATTRIB)(SEXP x) { CR_ASSERT(x); return ANY_ATTRIB(CHK(x)); }
 int (OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
 SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
+//attribute_hidden
 int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
 attribute_hidden int (R::RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
-attribute_hidden int (R::LEVELS)(SEXP x) { CR_ASSERT(x); return LEVELS(CHK(x)); }
+//attribute_hidden
+int (R::LEVELS)(SEXP x) { CR_ASSERT(x); return LEVELS(CHK(x)); }
 int (R::REFCNT)(SEXP x) { return REFCNT(CHK(x)); }
 attribute_hidden bool (R::REFCNT_ENABLED)(SEXP x) { CR_ASSERT(x); return REFCNT_ENABLED(CHK(x)); }
 int (ALTREP)(SEXP x) { return ALTREP(CHK(x)); }
@@ -2729,6 +2731,7 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
     x->setAttributes(pl);
 }
 void (SET_OBJECT)(SEXP x, int v) { CR_ASSERT(x); SET_OBJECT(CHK(x), v); }
+//attribute_hidden
 void (SET_NAMED)(SEXP x, int v)
 {
     CR_ASSERT(x);
@@ -2738,7 +2741,7 @@ void (SET_NAMED)(SEXP x, int v)
 }
 attribute_hidden
 void (R::SET_RTRACE)(SEXP x, int v) { CR_ASSERT(x); SET_RTRACE(CHK(x), v); }
-attribute_hidden
+//attribute_hidden
 void (R::SETLEVELS)(SEXP x, int v) { CR_ASSERT(x); SETLEVELS(CHK(x), v); }
 void DUPLICATE_ATTRIB(SEXP to, SEXP from) {
     SET_ATTRIB(CHK(to), duplicate(CHK(ATTRIB(CHK(from)))));
@@ -2827,8 +2830,11 @@ attribute_hidden
 void (R::RAISE_NAMED)(SEXP x, int n) { RAISE_NAMED(CHK(x), n); }
 
 /* S4 object testing */
+//attribute_hidden
 int (IS_S4_OBJECT)(SEXP x){ return IS_S4_OBJECT(CHK(x)); }
+//attribute_hidden
 void (SET_S4_OBJECT)(SEXP x){ CR_ASSERT(x); SET_S4_OBJECT(CHK(x)); }
+//attribute_hidden
 void (UNSET_S4_OBJECT)(SEXP x){ CR_ASSERT(x); UNSET_S4_OBJECT(CHK(x)); }
 
 /* JIT optimization support */
@@ -3505,7 +3511,7 @@ attribute_hidden
 SEXP (R::EXTPTR_PROT)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PROT(CHK(x)); }
 attribute_hidden
 SEXP (R::EXTPTR_TAG)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_TAG(CHK(x)); }
-attribute_hidden
+//attribute_hidden
 void *(R::EXTPTR_PTR)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PTR(CHK(x)); }
 
 attribute_hidden
@@ -3590,17 +3596,20 @@ attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { CR_ASSERT(x); SET_DDVAL(CH
 	      __func__, sexptype2char(TYPEOF(x)))
 attribute_hidden
 SEXP (R::FRAME)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
-attribute_hidden
-SEXP (R::ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
+//attribute_hidden
+SEXP (ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
 attribute_hidden
 SEXP (R::HASHTAB)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
+//attribute_hidden
 int (ENVFLAGS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { CR_ASSERT(x); return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { CR_ASSERT(x); return ENV_RDEBUG(CHK(x)); }
 void (SET_ENV_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_ENV_RDEBUG(CHK(x), v); }
-void (SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_frame.retarget(x, v); }
+//attribute_hidden
+void (R::SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_frame.retarget(x, v); }
 
-void (SET_ENCLOS)(SEXP x, SEXP v)
+//attribute_hidden
+void (R::SET_ENCLOS)(SEXP x, SEXP v)
 {
     CR_ASSERT(x);
     CR_ENVIRONMENT_ASSERT(x);
@@ -3617,7 +3626,8 @@ void (SET_ENCLOS)(SEXP x, SEXP v)
     SEXP_downcast<CXXR::Environment *>(x)->m_enclos.retarget(x, v);
 }
 
-void (SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_hashtab.retarget(x, v); }
+void (R::SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_hashtab.retarget(x, v); }
+//attribute_hidden
 void (SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 
 /* Promise Accessors */

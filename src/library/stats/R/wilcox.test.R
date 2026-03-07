@@ -240,48 +240,120 @@ function(x, n, z, alternative, conf.level)
     diffs <- outer(x, x, `+`)
     diffs <- sort(diffs[!lower.tri(diffs)]) / 2
     ## Of course the 'diffs' are really the Walsh averages.
-    w <- if(is.null(z))
-             (n * (n + 1) / 2) : 1L
-         else {
-             vapply(diffs,
-                    \(d) { xx <- x - d; sum(rank(abs(xx))[xx > 0]) },
-                    0)
-         }
-    CONF.INT <-
+    toler <- 10 * .Machine$double.eps
+    CONF.INT <- if(is.null(z)) {
         switch(alternative,
                "two.sided" = {
-                   qu <- .qsignrank(alpha / 2, n, z)
-                   ql <- .qsignrank(1 - alpha / 2, n, z)
-                   lci <- if(qu <= min(w)) max(diffs)
-                          else min(diffs[w <= qu])
-                   uci <- if(ql >= max(w)) min(diffs)
-                          else max(diffs[w > ql])
-                               c(uci, lci)
-                   achieved.alpha <-
-                       (.psignrank(qu - 1/4, n, z) +
-                        .psignrank(ql + 1/4, n, z, lower.tail = FALSE))
-                   c(uci, lci)
+                   qu <- qsignrank(alpha / 2, n)
+                   if(psignrank(qu, n) <= alpha / 2 + toler)
+                       qu <- qu + 1
+                   if(qu == 0) {
+                       achieved.alpha <- 0
+                       c(-Inf, Inf)
+                   } else {
+                       ql <- n*(n+1) / 2 - qu
+                       achieved.alpha <-
+                           2 * psignrank(trunc(qu) - 1, n)
+                       c(diffs[qu], diffs[ql+1])
+                   }
                },
                "greater" = {
-                   ql <- .qsignrank(1 - alpha, n, z)
-                   uci <- if(ql >= max(w)) min(diffs)
-                          else max(diffs[w > ql])
-                   achieved.alpha <-
-                       .psignrank(ql + 1/4, n, z, lower.tail = FALSE)
-                   c(uci, +Inf)
+                   qu <- qsignrank(alpha, n)
+                   if(psignrank(qu, n) <= alpha + toler)
+                       qu <- qu + 1
+                   if(qu == 0) {
+                       achieved.alpha <- 0
+                       c(-Inf, Inf)
+                   } else {
+                       achieved.alpha <-
+                           psignrank(trunc(qu) - 1, n)
+                       c(diffs[qu], +Inf)
+                   }
                },
                "less" = {
-                   qu <- .qsignrank(alpha, n, z)
-                   lci <- if(qu <= min(w)) max(diffs)
-                          else min(diffs[w <= qu])
-                   achieved.alpha <-
-                       .psignrank(qu - 1/4, n, z)
-                   c(-Inf, lci)
+                   qu <- qsignrank(alpha, n)
+                   if(psignrank(qu, n) <= alpha + toler)
+                       qu <- qu + 1
+                   if(qu == 0) {
+                       achieved.alpha <- 0
+                       c(-Inf, Inf)
+                   } else {
+                       ql <- n*(n+1)/2 - qu
+                       achieved.alpha <-
+                           psignrank(trunc(qu) - 1, n)
+                       c(-Inf, diffs[ql+1])
+                   }
                })
-    if(achieved.alpha - alpha > alpha/2){
-        warning("requested conf.level not achievable")
-        conf.level <- 1 - signif(achieved.alpha, 2)
+    } else {
+        n.d <- length(diffs)
+        ptail <- function(mu, lower = TRUE) {
+            x <- x - mu
+            z <- rank(abs(x))
+            v <- sum(z[x > 0])
+            if(lower)
+                .psignrank(v, n, z)
+            else
+                .psignrank(v, n, z, lower.tail = FALSE)
+        }
+        ## Identical to what we use for .wilcox_test_two_cint_exact():
+        ## could put into general purpose functions which compute the
+        ## appropriate generalized inverses of functions which are
+        ## piecewise constant and monotone.
+        lower <- function(alpha) {
+            alpha <- alpha + toler
+            pi <- 0
+            mu <- -Inf
+            if(ptail(diffs[1L] - 1, FALSE) > alpha)
+                return(c(mu, pi))
+            for(k in seq_len(n.d - 1L)) {
+                p <- ptail((diffs[k] + diffs[k + 1L]) / 2, FALSE)
+                if(p > alpha) {
+                    mu <- diffs[k]
+                    break
+                }
+                pi <- p
+            }
+            if(!is.finite(mu))
+                mu <- diffs[n.d]
+            c(mu, pi)
+        }
+        upper <- function(alpha) {
+            alpha <- alpha + toler            
+            pi <- 0
+            mu <- Inf
+            if(ptail(diffs[n.d] + 1) > alpha)
+                return(c(mu, pi))
+            for(k in seq(n.d - 1L, 1L)) {
+                p <- ptail((diffs[k] + diffs[k + 1L]) / 2)
+                if(p > alpha) {
+                    mu <- diffs[k + 1L]
+                    break
+                }
+                pi <- p
+            }
+            if(!is.finite(mu))
+                mu <- diffs[1L]
+            c(mu, pi)
+        }            
+        switch(alternative,
+               "two.sided" = {
+                   l <- lower(alpha / 2)
+                   u <- upper(alpha / 2)
+                   achieved.alpha <- l[2L] + u[2L]
+                   c(l[1L], u[1L])
+               },
+               "greater" = {
+                   l <- lower(alpha)
+                   achieved.alpha <- l[2L]
+                   c(l[1L], Inf)
+               },
+               "less" = {
+                   u <- upper(alpha)
+                   achieved.alpha <- u[2L]
+                   c(-Inf, u[1L])
+               })
     }
+    conf.level <- 1 - achieved.alpha    
     attr(CONF.INT, "conf.level") <- conf.level
     ESTIMATE <- c("(pseudo)median" = median(diffs))
     ## NOTE: This is the Hodges-Lehmann estimate and not what is
@@ -497,10 +569,11 @@ function(STAT, n.x, n.y, alternative)
            "two.sided" = {
                ## NOTE: the permutation distribution is not necessarily
                ## symmetric about its mean.  We compute p-values as in
-               ## \CRANpkg{coin} as the twice the min of the lower and
-               ## upper tail probabilities, unlike binom.test() which
-               ## computes the probability of values with density not
-               ## exceeding that of the observed one.
+               ## as the twice the min of the lower and upper tail
+               ## probabilities, unlike \CRANpkg{coin} which uses
+               ## Prob(|T - E(T)| > |t - E(T)|), and unlike binom.test()
+               ## which computes the probability of values with density
+               ## not exceeding that of the observed one. 
                min(2 * .pwilcox(q, n.x, n.y, z),
                    2 * .pwilcox(q - 1/4, n.x, n.y, z, lower.tail = FALSE),
                    1)
@@ -517,47 +590,115 @@ function(x, y, n.x, n.y, z, alternative, conf.level)
     ## one-sample case).
     alpha <- 1 - conf.level
     diffs <- sort(outer(x, y, `-`))
-    w <- if(is.null(z))
-             (n.x * n.y) : 1L
-         else {
-             i <- seq_along(x)
-             m <- n.x * (n.x + 1) / 2
-             vapply(diffs, \(d) sum(rank(c(x - d, y))[i]) - m, 0)
-         }
-    CONF.INT <-
+    toler <- 10 * .Machine$double.eps
+    CONF.INT <- if(is.null(z)) {
         switch(alternative,
                "two.sided" = {
-                   qu <- .qwilcox(alpha/2, n.x, n.y, z)
-                   ql <- .qwilcox(1 - alpha/2, n.x, n.y, z)                   
-                   lci <- if(qu <= min(w)) max(diffs)
-                          else min(diffs[w <= qu])
-                   uci <- if(ql >= max(w)) min(diffs)
-                          else max(diffs[w > ql])
-                   achieved.alpha <-
-                       (.pwilcox(qu - 1/4, n.x, n.y, z) +
-                        .pwilcox(ql + 1/4, n.x, n.y, z, lower.tail = FALSE))
-                   c(uci, lci)
+                   qu <- qwilcox(alpha / 2, n.x, n.y)
+                   if(pwilcox(qu, n.x, n.y) <= alpha / 2 + toler)
+                       qu <- qu + 1
+                   if(qu == 0) {
+                       achieved.alpha <- 0
+                       c(-Inf, Inf)
+                   } else {
+                       ql <- n.x * n.y - qu
+                       achieved.alpha <-
+                           2 * pwilcox(trunc(qu) - 1, n.x, n.y)
+                       c(diffs[qu], diffs[ql + 1])
+                   }
                },
                "greater" = {
-                   ql <- .qwilcox(1 - alpha, n.x, n.y, z)
-                   uci <- if(ql >= max(w)) min(diffs)
-                          else max(diffs[w > ql])
-                   achieved.alpha <-
-                       .pwilcox(ql + 1/4, n.x, n.y, z, lower.tail = FALSE)
-                   c(uci, +Inf)
+                   qu <- qwilcox(alpha, n.x, n.y)
+                   if(pwilcox(qu, n.x, n.y) <= alpha + toler)
+                       qu <- qu + 1
+                   if(qu == 0) {
+                       achieved.alpha <- 0
+                       c(-Inf, Inf)
+                   } else {
+                       achieved.alpha <-
+                           pwilcox(trunc(qu) - 1, n.x, n.y)
+                       c(diffs[qu], +Inf)
+                   }
                },
                "less" = {
-                   qu <- .qwilcox(alpha, n.x, n.y, z)
-                   lci <- if(qu <= min(w)) max(diffs)
-                          else min(diffs[w <= qu])
-                   achieved.alpha <-
-                       .pwilcox(qu - 1/4, n.x, n.y, z)
-                   c(-Inf, lci)
+                   qu <- qwilcox(alpha, n.x, n.y)
+                   if(pwilcox(qu, n.x, n.y) <= alpha + toler)
+                       qu <- qu + 1
+                   if(qu == 0) {
+                       achieved.alpha <- 0
+                       c(-Inf, Inf)
+                   } else {
+                       ql <- n.x * n.y - qu
+                       achieved.alpha <-
+                           pwilcox(trunc(qu) - 1, n.x, n.y)
+                       c(-Inf, diffs[ql + 1])
+                   }
                })
-    if(achieved.alpha - alpha > alpha / 2) {
-        warning("Requested conf.level not achievable")
-        conf.level <- 1 - achieved.alpha
+    } else {
+        n.d <- length(diffs)
+        ptail <- function(mu, lower = TRUE) {
+            z <- rank(c(x - mu, y))
+            w <- sum(z[seq_len(n.x)]) - n.x * (n.x + 1) / 2
+            if(lower)
+                .pwilcox(w, n.x, n.y, z)
+            else
+                .pwilcox(w - 1 / 4, n.x, n.y, z, lower.tail = FALSE)
+        }
+        lower <- function(alpha) {
+            alpha <- alpha + toler
+            pi <- 0
+            mu <- -Inf
+            if(ptail(diffs[1L] - 1, FALSE) > alpha)
+                return(c(mu, pi))
+            for(k in seq_len(n.d - 1L)) {
+                p <- ptail((diffs[k] + diffs[k + 1L]) / 2, FALSE)
+                if(p > alpha) {
+                    mu <- diffs[k]
+                    break
+                }
+                pi <- p
+            }
+            if(!is.finite(mu))
+                mu <- diffs[n.d]
+            c(mu, pi)
+        }
+        upper <- function(alpha) {
+            alpha <- alpha + toler            
+            pi <- 0
+            mu <- Inf
+            if(ptail(diffs[n.d] + 1) > alpha)
+                return(c(mu, pi))
+            for(k in seq(n.d - 1L, 1L)) {
+                p <- ptail((diffs[k] + diffs[k + 1L]) / 2)
+                if(p > alpha) {
+                    mu <- diffs[k + 1L]
+                    break
+                }
+                pi <- p
+            }
+            if(!is.finite(mu))
+                mu <- diffs[1L]
+            c(mu, pi)
+        }            
+        switch(alternative,
+               "two.sided" = {
+                   l <- lower(alpha / 2)
+                   u <- upper(alpha / 2)
+                   achieved.alpha <- l[2L] + u[2L]
+                   c(l[1L], u[1L])
+               },
+               "greater" = {
+                   l <- lower(alpha)
+                   achieved.alpha <- l[2L]
+                   c(l[1L], Inf)
+               },
+               "less" = {
+                   u <- upper(alpha)
+                   achieved.alpha <- u[2L]
+                   c(-Inf, u[1L])
+               })
     }
+    conf.level <- 1 - achieved.alpha
     attr(CONF.INT, "conf.level") <- conf.level
     ESTIMATE <- c("difference in location" = median(diffs))
     ## NOTE: This is the Hodges-Lehmann estimate and not what is

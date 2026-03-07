@@ -569,6 +569,8 @@ void R_check_thread(const char *s);
 
 /* General Cons Cell Attributes */
 int  (MARK)(SEXP x);
+// int  (OBJECT)(SEXP x); // declared in Rinternals.h
+// int  (NAMED)(SEXP x); // declared in Rinternals.h
 int  (REFCNT)(SEXP x);
 bool (REFCNT_ENABLED)(SEXP x);
 // void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
@@ -582,6 +584,9 @@ void (DECREMENT_REFCNT)(SEXP x);
 void (INCREMENT_REFCNT)(SEXP x);
 void (DISABLE_REFCNT)(SEXP x);
 void (ENABLE_REFCNT)(SEXP x);
+
+/* S4 object testing */
+// int (IS_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 
 /* S4 object setting */
 // void (SET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
@@ -642,7 +647,7 @@ void (SET_PROMISE_TAG)(SEXP e, SEXPTYPE v);
 //int INTEGER_NO_NA(SEXP x);
 //int REAL_IS_SORTED(SEXP x);
 //int REAL_NO_NA(SEXP x);
-//int LOGICAL_IS_SORTED(SEXP x);
+int LOGICAL_IS_SORTED(SEXP x);
 //int LOGICAL_NO_NA(SEXP x);
 //int STRING_IS_SORTED(SEXP x);
 //int STRING_NO_NA(SEXP x);
@@ -676,12 +681,13 @@ void SET_INTERNAL(SEXP x, SEXP v);
 
 /* Environment Access Functions */
 SEXP (FRAME)(SEXP x);
-SEXP (ENCLOS)(SEXP x);
+// SEXP (ENCLOS)(SEXP x); // declared in Rinternals.h
 SEXP (HASHTAB)(SEXP x);
+// int  (ENVFLAGS)(SEXP x); // declared in Rinternals.h
 // void (SET_ENVFLAGS)(SEXP x, int v); // declared in Rinternals.h
-// void SET_FRAME(SEXP x, SEXP v); // declared in Rinternals.h
-// void SET_ENCLOS(SEXP x, SEXP v); // declared in Rinternals.h
-// void SET_HASHTAB(SEXP x, SEXP v); // declared in Rinternals.h
+void SET_FRAME(SEXP x, SEXP v);
+void SET_ENCLOS(SEXP x, SEXP v);
+void SET_HASHTAB(SEXP x, SEXP v);
 
 /* Promise Access Functions */
 int  (PRSEEN)(SEXP x);
@@ -706,7 +712,7 @@ void (SET_HASHVALUE)(SEXP x, int v);
 /* Bytecode access macros */
 #define BCODE_CODE(x)	CODE0(x)
 #define BCODE_PTR(x) ((BCODE *) DATAPTR(x))
-//#define BCODE_CONSTS(x) CONSTS(x)
+#define BCODE_CONSTS(x) CONSTS(x)
 #define BCODE_EXPR(x)	EXPR(x)
 #define isByteCode(x)	(TYPEOF(x)==BCODESXP)
 
@@ -760,8 +766,8 @@ SEXP ALTLOGICAL_SUM(SEXP x, Rboolean narm);
 /* constructors for internal ALTREP classes */
 SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
 SEXP R_deferred_coerceToString(SEXP v, SEXP info);
-// SEXP R_virtrep_vec(SEXP, SEXP);
-// SEXP R_tryWrap(SEXP); // declared in Rinternals.h
+SEXP R_virtrep_vec(SEXP, SEXP);
+//SEXP R_tryWrap(SEXP); // now marked as @eapifun // declared in Rinternals.h
 SEXP R_tryUnwrap(SEXP);
 
 bool Rf_pmatch(SEXP, SEXP, bool);
@@ -1825,6 +1831,8 @@ R_len_t dispatch_length(SEXP, SEXP, SEXP);
 SEXP dispatch_subset2(SEXP, R_xlen_t, SEXP, SEXP);
 // SEXP Rf_duplicated(SEXP, Rboolean); // declared in Rinternals.h
 SEXP R_duplicate_attr(SEXP);
+SEXP R_shallow_duplicate_attr(SEXP);
+SEXP Rf_lazy_duplicate(SEXP);
 // R_xlen_t Rf_any_duplicated(SEXP, Rboolean); // declared in Rinternals.h
 // R_xlen_t Rf_any_duplicated3(SEXP, SEXP, Rboolean); // declared in Rinternals.h
 SEXP evalList(SEXP, SEXP, SEXP, int);
@@ -1893,6 +1901,7 @@ SEXP mkSYMSXP(SEXP, SEXP);
 SEXP mkTrue(void);
 const char *R_nativeEncoding(void);
 SEXP NewEnvironment(SEXP, SEXP, SEXP);
+Rboolean Rf_NonNullStringMatch(SEXP, SEXP); // match.c
 // void Rf_onintr(void); // declared in Rinterface.h
 // void Rf_onintrNoResume(void); // declared in Rinterface.h
 void onsigusr1(int);
@@ -1919,6 +1928,8 @@ SEXP R_data_class(SEXP , bool);
 SEXP R_data_class2(SEXP);
 char *R_LibraryFileName(const char *, char *, size_t);
 SEXP R_LoadFromFile(FILE*, int);
+// ../main/character.c :
+typedef enum {Bytes, Chars, Width} nchar_type;
 int R_nchar(SEXP string, nchar_type type_,
 	    Rboolean allowNA, Rboolean keepNA, const char* msg_name);
 SEXP R_NewHashedEnv(SEXP, int);

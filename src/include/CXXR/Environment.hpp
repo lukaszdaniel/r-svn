@@ -225,13 +225,27 @@ namespace R
      */
     SEXP (FRAME)(SEXP x);
 
-    /** @brief Access enclosing environment.
+    /** @brief Set environment's frame.
      *
      * @param x Pointer to a CXXR::Environment (checked).
      *
-     * @return Pointer to the enclosing environment of \a x.
+     * @param v Pointer to the new frame.  This must be a CXXR::PairList
+     *          (checked), and every element of this list must have a tag
+     *          (not checked), and these tags must be distinct (not
+     *          checked).
+     *
+     * @todo Probably should be private.
      */
-    SEXP (ENCLOS)(SEXP x);
+    void SET_FRAME(SEXP x, SEXP v);
+
+    /** @brief Set an environment's enclosing environment.
+     *
+     * @param x Pointer to a CXXR::Environment (checked).
+     *
+     * @param v Pointer to a CXXR::Environment (checked) intended to be
+     *          the new enclosing environment of \a x.
+     */
+    void SET_ENCLOS(SEXP x, SEXP v);
 
     /** @brief Access an environment's hash table.
      *
@@ -240,6 +254,17 @@ namespace R
      * @return Pointer to the hash table of \a x (may be null).
      */
     SEXP (HASHTAB)(SEXP x);
+
+    /** @brief Set environment's hash table.
+     *
+     * @param x Pointer to a CXXR::Environment (checked).
+     *
+     * @param v Pointer to the new hash table, which must be a
+     * CXXR::ListVector (checked), and satisfy other conditions.
+     *
+     * @todo Probably should be private.
+     */
+    void SET_HASHTAB(SEXP x, SEXP v);
 
     /** @brief Set symbol's value in the base environment.
      *
@@ -307,6 +332,14 @@ extern "C"
      */
     Rboolean Rf_isEnvironment(SEXP s);
 
+    /** @brief Access enclosing environment.
+     *
+     * @param x Pointer to a CXXR::Environment (checked).
+     *
+     * @return Pointer to the enclosing environment of \a x.
+     */
+    SEXP (ENCLOS)(SEXP x);
+
     /** @brief Access an environment's flags.
      *
      * @param x Pointer to a CXXR::Environment (not currently checked).
@@ -341,39 +374,6 @@ extern "C"
      * @deprecated
      */
     void (SET_ENVFLAGS)(SEXP x, int v);
-
-    /** @brief Set environment's frame.
-     *
-     * @param x Pointer to a CXXR::Environment (checked).
-     *
-     * @param v Pointer to the new frame.  This must be a CXXR::PairList
-     *          (checked), and every element of this list must have a tag
-     *          (not checked), and these tags must be distinct (not
-     *          checked).
-     *
-     * @todo Probably should be private.
-     */
-    void SET_FRAME(SEXP x, SEXP v);
-
-    /** @brief Set an environment's enclosing environment.
-     *
-     * @param x Pointer to a CXXR::Environment (checked).
-     *
-     * @param v Pointer to a CXXR::Environment (checked) intended to be
-     *          the new enclosing environment of \a x.
-     */
-    void SET_ENCLOS(SEXP x, SEXP v);
-
-    /** @brief Set environment's hash table.
-     *
-     * @param x Pointer to a CXXR::Environment (checked).
-     *
-     * @param v Pointer to the new hash table, which must be a
-     * CXXR::ListVector (checked), and satisfy other conditions.
-     *
-     * @todo Probably should be private.
-     */
-    void SET_HASHTAB(SEXP x, SEXP v);
 
     SEXP R_NewEnv(SEXP enclos, int hash, int size);
     Rboolean R_IsPackageEnv(SEXP rho);

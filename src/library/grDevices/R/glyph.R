@@ -145,7 +145,7 @@ fontVariation <- function(axis, value) {
     }
     if (!is.character(axis) || any(is.na(axis)) || any(nchar(axis) != 4)||
         any(grepl("[^a-zA-Z]", axis))) {
-        stop("Axis names must 4 ASCII letters long")
+        stop("Axis names must be 4 ASCII letters long")
     }
     if (!is.numeric(value) || any(is.na(value))) {
         stop("Axis values must be numeric")

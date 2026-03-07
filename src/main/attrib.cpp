@@ -670,6 +670,11 @@ static SEXP lang2str(SEXP obj)
    if(!singleString) , keeps S3-style multiple classes.
    Called from the methods package, so exposed.
  */
+SEXP R_data_class(SEXP obj, Rboolean singleString) 
+{
+	return R::R_data_class(obj, bool(singleString));
+}
+
 SEXP R::R_data_class(SEXP obj, bool singleString)
 {
     SEXP value, klass = getAttrib(obj, R_ClassSymbol);

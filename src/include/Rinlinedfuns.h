@@ -769,6 +769,7 @@ INLINE_FUN Rboolean Rf_isScalarString(SEXP x)
     return (Rboolean) (TYPEOF(x) == STRSXP && XLENGTH(x) == 1);
 }
 
+//HIDDEN
 INLINE_FUN Rboolean Rf_isValidString(SEXP x)
 {
     return (Rboolean) (TYPEOF(x) == STRSXP && LENGTH(x) > 0 && TYPEOF(STRING_ELT(x, 0)) != NILSXP);
@@ -1062,7 +1063,7 @@ INLINE_FUN SEXP Rf_mkString(const char *s)
 
 namespace R {
 /* non-empty ("") valid string :*/
-INLINE_FUN bool isValidStringF(SEXP x)
+HIDDEN INLINE_FUN bool isValidStringF(SEXP x)
 {
     return (isValidString(x) && CHAR(STRING_ELT(x, 0))[0]);
 }

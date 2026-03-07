@@ -83,12 +83,10 @@
  ENSURE_NAMED
  EXTPTR_PROT
  EXTPTR_TAG
- EXTPTR_PTR
  EhiWakeUp
  EncodeEnvironment
  EncodeExtptr
  EncodeReal2
- ENCLOS
  FRAME
  GROWABLE_BIT_SET
  HASHASH
@@ -107,7 +105,6 @@
  InitParser
  Init_R_Machine
  Init_R_Variables
- LEVELS
  LOCK_BINDING
  LOGICAL_IS_SORTED
  LoadInitFile
@@ -373,6 +370,7 @@
  R_run_onexits
  R_seemsOldStyleS4Object
  R_setConditionField
+ R_shallow_duplicate_attr
  R_signalErrorCondition
  R_signalErrorConditionEx
  R_strftime
@@ -449,6 +447,7 @@
  Rf_LogicalFromInteger
  Rf_LogicalFromReal
  Rf_LogicalFromString
+ Rf_NonNullStringMatch
  Rf_OneIndex
  Rf_PrintGreeting
  Rf_PrintValueEnv
@@ -510,6 +509,7 @@
  Rf_installS3Signature
  Rf_isUnmodifiedSpecSym
  Rf_isValidName
+ Rf_lazy_duplicate
  Rf_lfastchoose
  Rf_lgammacor
  Rf_lookupCachedSymbol
@@ -586,7 +586,6 @@
  Rwin_rename
  Rwin_wrename
  SETLENGTH
- SETLEVELS
  SETTER_CLEAR_NAMED
  SET_ACTIVE_BINDING_BIT
  SET_ASCII

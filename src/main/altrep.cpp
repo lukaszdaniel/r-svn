@@ -510,7 +510,7 @@ R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 	return ALTLOGICAL_DISPATCH(Get_region, sx, i, n, buf);
 }
 
-attribute_hidden int LOGICAL_IS_SORTED(SEXP x)
+attribute_hidden int R::LOGICAL_IS_SORTED(SEXP x)
 {
     return ALTREP(x) ? ALTLOGICAL_DISPATCH(Is_sorted, x) : UNKNOWN_SORTEDNESS;
 }

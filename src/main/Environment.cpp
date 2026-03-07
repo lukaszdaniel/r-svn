@@ -55,17 +55,17 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &ENCLOSptr = R::ENCLOS;
+        const auto &ENCLOSptr = ENCLOS;
         const auto &ENVFLAGSptr = ENVFLAGS;
         const auto &HASHTABptr = R::HASHTAB;
         const auto &isEnvironmentptr = Rf_isEnvironment;
         const auto &FRAMEptr = R::FRAME;
         // const auto &ENV_RDEBUGptr = ENV_RDEBUG;
-        const auto &SET_ENCLOSptr = SET_ENCLOS;
+        const auto &SET_ENCLOSptr = R::SET_ENCLOS;
         const auto &SET_ENVFLAGSptr = SET_ENVFLAGS;
-        const auto &SET_FRAMEptr = SET_FRAME;
+        const auto &SET_FRAMEptr = R::SET_FRAME;
         // const auto &SET_ENV_RDEBUGptr = SET_ENV_RDEBUG;
-        const auto &SET_HASHTABptr = SET_HASHTAB;
+        const auto &SET_HASHTABptr = R::SET_HASHTAB;
     } // namespace ForceNonInline
 
     Environment *Environment::create(SEXP frame, SEXP enclosing_env, SEXP hashtab)

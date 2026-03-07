@@ -159,6 +159,8 @@ namespace R
     SEXP REAL_MATCH(SEXP, SEXP, int, SEXP, SEXP, Rboolean);
     SEXP REAL_IS_NA(SEXP x);
     SEXP ALTLOGICAL_SUM(SEXP x, Rboolean narm);
+    int LOGICAL_IS_SORTED(SEXP x);
+
     /* constructors for internal ALTREP classes */
     SEXP R_compact_intrange(R_xlen_t n1, R_xlen_t n2);
     SEXP R_deferred_coerceToString(SEXP v, SEXP info);
@@ -189,7 +191,6 @@ extern "C"
     int INTEGER_NO_NA(SEXP x);
     int REAL_IS_SORTED(SEXP x);
     int REAL_NO_NA(SEXP x);
-    int LOGICAL_IS_SORTED(SEXP x);
     int LOGICAL_NO_NA(SEXP x);
     int STRING_IS_SORTED(SEXP x);
     int STRING_NO_NA(SEXP x);

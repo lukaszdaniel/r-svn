@@ -122,7 +122,7 @@
       (via \code{plot.histogram()}), \code{barplot()}, \code{bxp()},
       and hence implicitly \code{boxplot()}.
       All except the former also gain a new \code{panel.last}.
-      Suggested by Marieke Stolte and Julian Welz.
+      Suggested by \I{Marieke Stolte} and \I{Julian Welz}.
 
       \item \code{plot.default()} gets a new switch \code{lim2} to indicate
       that the default \code{xlim} and \code{ylim} range computations only
@@ -256,6 +256,10 @@
       Provided by \I{Torsten Hothorn}.
 
       \item \code{plot.data.frame()} now supports a \code{formula} argument.
+
+      \item New Rd macro \verb{\linkS4methods{}}, e.g., for easier linking to
+      method docs in other packages, proposed and coded by \I{Mikael Jagan}
+      in \PR{18998}.
     }
   }
 
@@ -355,17 +359,15 @@
       preparation for removing declarations and, where possible, hiding
       these entry points:
       \code{R_nchar}, \code{R_tryWrap},
-      \code{Rf_NonNullStringMatch}, \code{Rf_isValidString}
       \code{Rf_GetOption},
-      \code{SET_S4_OBJECT},
-      \code{UNSET_S4_OBJECT}, \code{SET_NAMED}, \code{R_lsInternal},
-      \code{Rf_lazy_duplicate}, \code{NAMED},
-      \code{IS_S4_OBJECT}, \code{BODY}, \code{FORMALS}, \code{CLOENV},
-      \code{OBJECT},
-      \code{SET_TYPEOF}, \code{ENVFLAGS}, \code{SET_ENVFLAGS},
-      \code{STRING_PTR}, \code{DATAPTR},
-      \code{R_duplicate_attr}, \code{R_shallow_duplicate_attr},
-      \code{getConnection}, \code{R_data_class}.
+      \code{R_lsInternal},
+      \code{BODY}, \code{FORMALS}, \code{CLOENV},
+      \code{SET_TYPEOF},
+      \code{STRING_PTR},
+      \code{R_duplicate_attr},
+      \code{getConnection}, \code{R_data_class},
+      \code{STRING_PTR}, \code{SET_OBJECT},
+      \code{ATTRIB}, \code{SET_ATTRIB}.
 
       \item The deprecated macros \code{CHARACTER_DATA} and
       \code{CHARACTER_POINTER} now return \code{const} pointers since using
@@ -409,14 +411,22 @@
 
       \item The function \code{VECTOR_PTR} has been removed.
 
+      The non-API function \code{DATAPTR} is no longer declared in an
+      installed header file.
+
       \item These entry points are now marked as hidden and no longer
-      have declarations in installed header files: \code{EXTPTR_PROT},
-      \code{FRAME}, \code{ENCLOS}, \code{EXTPTR_PTR}, \code{EXTPTR_TAG},
-      \code{HASHTAB}, \code{LEVELS}, \code{SETLENGTH}, \code{SETLEVELS},
-      \code{SET_BODY}, \code{SET_CLOENV}, \code{SET_ENCLOS},
-      \code{SET_FORMALS}, \code{SET_FRAME}, \code{SET_GROWABLE_BIT},
-      \code{SET_HASHTAB}, \code{SET_TRUELENGTH}, \code{STDVEC_DATAPTR},
-      \code{TRUELENGTH} \code{XTRUELENGTH}.
+      have declarations in installed header files: \code{ENVFLAGS},
+      \code{EXTPTR_PROT}, \code{FRAME}, \code{ENCLOS},
+      \code{EXTPTR_PTR}, \code{EXTPTR_TAG}, \code{HASHTAB},
+      \code{IS_S4_OBJECT}, \code{LEVELS}, \code{NAMED}, \code{OBJECT},
+      \code{R_shallow_duplicate_attr}, \code{Rf_isValidString},
+      \code{Rf_lazy_duplicate}, \code{Rf_NonNullStringMatch},
+      \code{SETLENGTH}, \code{SETLEVELS}, \code{SET_BODY},
+      \code{SET_CLOENV}, \code{SET_ENCLOS}, \code{SET_FORMALS},
+      \code{SET_ENVFLAGS}, \code{SET_FRAME}, \code{SET_GROWABLE_BIT},
+      \code{SET_HASHTAB}, \code{SET_NAMED}, \code{SET_S4_OBJECT},
+      \code{SET_TRUELENGTH}, \code{STDVEC_DATAPTR}, \code{TRUELENGTH},
+      \code{UNSET_S4_OBJECT}, \code{XTRUELENGTH}.
     }
   }
 
@@ -647,6 +657,12 @@
       \item \code{c(<POSIXlt>, ..)} now fully preserves sub-second
       accuracy, fulfilling a part of \I{Suharto Anggono}'s wishlist
       \PR{18989}.
+
+      \item The \code{"tzcode"} attribute of \code{"POSIXlt"} objects
+      should no longer depend on earlier calls, fixing \PR{19005} thanks to
+      \I{Ivan Krylov}, a patch by \I{Suharto Anggono} and reports of
+      \dQuote{\I{Non-deterministic POSIXlt tzone in Europe/London ..}} on
+      R-devel.
     }
   }
 }

@@ -1,6 +1,6 @@
 #  File src/library/tools/R/Rd2HTML.R
 #
-#  Copyright (C) 1995-2025 The R Core Team
+#  Copyright (C) 1995-2026 The R Core Team
 #  Part of the R package, https://www.R-project.org
 #
 #  This program is free software; you can redistribute it and/or modify
@@ -36,6 +36,7 @@ get_link <- function(arg, tag, Rdfile) {
 
     topic <- dest <- paste(unlist(arg), collapse = "")
     if (tag == "\\linkS4class") dest <- paste0(dest, "-class")
+    else if (tag == "\\linkS4methods") dest <- paste0(dest, "-methods")
 
     targetfile <- NULL
     pkg <- NULL
@@ -460,7 +461,7 @@ Rd2HTML <-
              concordance = FALSE,
              standalone = TRUE,
              hooks = list(),
-             toc = isTRUE(getOption("help.htmltoc")),
+             toc = FALSE, # needs special R-nav.css
              Rhtml = FALSE, # TODO: guess from 'out' if non-missing
              ...)
 {
@@ -857,6 +858,7 @@ Rd2HTML <-
                "\\var" = writeWrapped(tag, block, doParas),
                "\\special" = writeContent(block, tag), ## FIXME, verbatim?
                "\\linkS4class" =,
+               "\\linkS4methods" =,
                "\\link" = writeLink(tag, block, doParas),
                ## cwhmisc has an empty \\email
                "\\email" = if (length(block)) {
@@ -1299,10 +1301,10 @@ Rd2HTML <-
             else if (!is.null(last_section_level)) { # argitem
                 current_level <- last_section_level + 1
             }
-            else stop("Invalid value of 'toc_entries'")
+            else stop("invalid value of 'toc_entries'", domain = NA)
             jump_level <- current_level - previous_level
             ## Positive jump values should be exactly 1
-            if (jump_level > 1) warning("Unexpected jump in section level")
+            if (jump_level > 1) warning("unexpected jump in section level", domain = NA)
             if (jump_level > 0) replicate(jump_level, of1("<li><ul>\n")) # see NOTE below
             else if (jump_level < 0) replicate(-jump_level, of1("</ul></li>\n"))
             of0(sprintf("<li><a href='#%s'>%s</a></li>\n", e$id, e$value))

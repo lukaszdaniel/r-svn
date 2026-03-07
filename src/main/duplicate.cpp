@@ -180,7 +180,8 @@ SEXP Rf_shallow_duplicate(SEXP s)
     return CXXR_duplicate<CXXR::RObject::Duplication::SHALLOW>(s);
 }
 
-SEXP Rf_lazy_duplicate(SEXP s) {
+attribute_hidden
+SEXP R::Rf_lazy_duplicate(SEXP s) {
     switch (TYPEOF(s)) {
     case NILSXP:
     case SYMSXP:
@@ -582,5 +583,6 @@ static SEXP duplicate_attr(SEXP x, Rboolean deep)
     return deep ? duplicate(x) : shallow_duplicate(x);
 }
 
-SEXP R_shallow_duplicate_attr(SEXP x) { return duplicate_attr(x, FALSE); }
+attribute_hidden
+SEXP R::R_shallow_duplicate_attr(SEXP x) { return duplicate_attr(x, FALSE); }
 SEXP R::R_duplicate_attr(SEXP x) { return duplicate_attr(x, TRUE); }
