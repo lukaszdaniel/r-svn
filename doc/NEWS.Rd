@@ -260,6 +260,8 @@
       \item New Rd macro \verb{\linkS4methods{}}, e.g., for easier linking to
       method docs in other packages, proposed and coded by \I{Mikael Jagan}
       in \PR{18998}.
+
+      \item Class \code{"difftime"} is now also among the S4 \code{"OldClasses"}.
     }
   }
 
@@ -455,7 +457,8 @@
       featured in HTML help.
 
       \item \code{package.skeleton()} now invisibly returns the path of the
-      created directory, along the lines of \code{prompt()} \abbr{et al.}.
+      created directory, similar to \code{prompt()} \abbr{et al.}, and
+      allows creating blank skeletons without any R objects.
     }
   }
 
@@ -663,6 +666,11 @@
       \I{Ivan Krylov}, a patch by \I{Suharto Anggono} and reports of
       \dQuote{\I{Non-deterministic POSIXlt tzone in Europe/London ..}} on
       R-devel.
+
+      \item In intervals with very low density \code{cdplot()} was
+      unreliable, returning probabilities that are greater than one or
+      \code{NaN} (\PR{19011}).
+      Fix from \I{Christoph Dalitz} and \I{Achim Zeileis}.
     }
   }
 }

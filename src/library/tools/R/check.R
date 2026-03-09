@@ -5625,7 +5625,7 @@ add_dummies <- function(dir, Log)
         eq <- .Rd_get_equations_from_Rd_db(db)
 
         i1 <- (length(db) && isTRUE(R_check_Rd_validate_Rd2HTML))
-        i2 <- (length(eq) && isTRUE(R_check_Rd_math_rendering))
+        i2 <- (length(eq) && !isFALSE(R_check_Rd_math_rendering))
         if(!i1 && !i2)
             return()
 
@@ -5745,7 +5745,7 @@ add_dummies <- function(dir, Log)
         }
 
         if(i2) { ## report on math rendering
-            if(!OK2) {
+            if(!OK2 && isTRUE(R_check_Rd_math_rendering)) {
                 if(!any) noteLog(Log)
                 any <- TRUE
                 printLog0(Log,
@@ -7617,6 +7617,7 @@ add_dummies <- function(dir, Log)
         Sys.setenv("_R_CHECK_XREFS_NOTE_MISSING_PACKAGE_ANCHORS_" = "TRUE")
         Sys.setenv("_R_CHECK_PACKAGES_USED_IN_DEMO_" = "TRUE")
         Sys.setenv("_R_CHECK_RCPP_NOT_NEEDED_" = "TRUE")
+        Sys.setenv("_R_CHECK_URLS_SHOW_301_STATUS_" = "TRUE")
         R_check_vc_dirs <- TRUE
         R_check_executables_exclusions <- FALSE
         R_check_doc_sizes2 <- TRUE

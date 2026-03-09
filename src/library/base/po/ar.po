@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 18:17+0100\n"
+"POT-Creation-Date: 2026-03-09 18:24+0100\n"
 "PO-Revision-Date: 2025-07-06 14:43+0200\n"
 "Last-Translator: Abdulrahman Alswaji <alswajiab@gmail.com>\n"
 "Language-Team: none\n"
@@ -170,8 +170,8 @@ msgstr ""
 #: src/main/connections.cpp:5901 src/main/connections.cpp:5909
 #: src/main/connections.cpp:6813 src/main/connections.cpp:6840
 #: src/main/connections.cpp:6847 src/main/context.cpp:699
-#: src/main/context.cpp:708 src/main/context.cpp:712 src/main/datetime.cpp:1299
-#: src/main/datetime.cpp:1524 src/main/datetime.cpp:1526 src/main/debug.cpp:282
+#: src/main/context.cpp:708 src/main/context.cpp:712 src/main/datetime.cpp:1295
+#: src/main/datetime.cpp:1520 src/main/datetime.cpp:1522 src/main/debug.cpp:282
 #: src/main/deparse.cpp:464 src/main/dotcode.cpp:507 src/main/dotcode.cpp:511
 #: src/main/dotcode.cpp:516 src/main/dounzip.cpp:393 src/main/dounzip.cpp:400
 #: src/main/envir.cpp:1810 src/main/envir.cpp:1928 src/main/envir.cpp:2035
@@ -2177,10 +2177,9 @@ msgid "strtrim() requires a character vector"
 msgstr ""
 
 #: src/main/character.cpp:1848 src/main/connections.cpp:4426
-#: src/main/context.cpp:750 src/main/context.cpp:764 src/main/datetime.cpp:1060
-#: src/main/datetime.cpp:1090 src/main/datetime.cpp:1192
-#: src/main/datetime.cpp:1305 src/main/datetime.cpp:1528
-#: src/main/datetime.cpp:1685 src/main/datetime.cpp:2004
+#: src/main/context.cpp:750 src/main/context.cpp:764 src/main/datetime.cpp:968
+#: src/main/datetime.cpp:1104 src/main/datetime.cpp:1301
+#: src/main/datetime.cpp:1660 src/main/datetime.cpp:1979
 #: src/main/dotcode.cpp:236 src/main/errors.cpp:1172 src/main/errors.cpp:1194
 #: src/main/errors.cpp:1312 src/main/errors.cpp:1319 src/main/errors.cpp:1582
 #: src/main/errors.cpp:2254 src/main/options.cpp:494 src/main/options.cpp:649
@@ -3433,43 +3432,43 @@ msgstr ""
 msgid "cannot set timezones on this system"
 msgstr "\"iconvlist\" غير متوفر على هذا النظام"
 
-#: src/main/datetime.cpp:1019
+#: src/main/datetime.cpp:1063
 msgid "a valid \"POSIXlt\" object is a list of at least 9 elements"
 msgstr ""
 
-#: src/main/datetime.cpp:1023
+#: src/main/datetime.cpp:1067
 msgid "a valid \"POSIXlt\" object has names"
 msgstr ""
 
-#: src/main/datetime.cpp:1029
+#: src/main/datetime.cpp:1073
 #, c-format
 msgid "a valid \"POSIXlt\" object has element %d with name '%s' which should be '%s'"
 msgstr ""
 
-#: src/main/datetime.cpp:1036 src/main/datetime.cpp:1052
+#: src/main/datetime.cpp:1080 src/main/datetime.cpp:1096
 #, c-format
 msgid "a valid \"POSIXlt\" object has a numeric element %s"
 msgstr ""
 
-#: src/main/datetime.cpp:1047
+#: src/main/datetime.cpp:1091
 #, c-format
 msgid "a valid \"POSIXlt\" object has a character element %s"
 msgstr ""
 
-#: src/main/datetime.cpp:1063
+#: src/main/datetime.cpp:1107
 msgid "attr(x, \"tzone\") should have length 1 or 3"
 msgstr ""
 
-#: src/main/datetime.cpp:1180
+#: src/main/datetime.cpp:1197
 #, c-format
 msgid "zero-length component [[%d]] in non-empty \"POSIXlt\" structure"
 msgstr ""
 
-#: src/main/datetime.cpp:1468
+#: src/main/datetime.cpp:1464
 msgid "output string exceeded 2048 bytes"
 msgstr ""
 
-#: src/main/datetime.cpp:1838
+#: src/main/datetime.cpp:1813
 #, c-format
 msgid "'%s' is not a \"%s\""
 msgstr ""

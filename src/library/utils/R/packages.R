@@ -870,8 +870,10 @@ download.packages <- function(pkgs, destdir, available = NULL,
                 } else {
                     fn <- paste(substring(repos, 6L), fn, sep = "/")
                 }
-                if(file.exists(fn))
+                if(file.exists(fn)) {
+                    ## file.copy(fn, destdir)
                     retval <- rbind(retval, c(p, fn))
+                }
                 else
                     warning(gettextf("package %s does not exist on the local repository", sQuote(p)),
                             domain = NA, immediate. = TRUE)
@@ -1345,7 +1347,7 @@ function(repos, file = stdout(), ...)
 }
 
 ## default is included in setRepositories.Rd (via \Sexpr)
-.BioC_version_associated_with_R_version_default <- "3.22"
+.BioC_version_associated_with_R_version_default <- "3.23"
 .BioC_version_associated_with_R_version <- function ()
     numeric_version(Sys.getenv("R_BIOC_VERSION",
                                .BioC_version_associated_with_R_version_default))

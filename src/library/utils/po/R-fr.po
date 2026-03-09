@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-03-09 18:26\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -1581,11 +1581,6 @@ msgstr "il faut fournir 'address'"
 msgid "must supply 'generic.function' or 'class'"
 msgstr "il faut fournir 'generic.function' ou 'class'"
 
-#. R/package.skeleton.R: stop("no R objects specified or available")
-#: R/package.skeleton.R:0
-msgid "no R objects specified or available"
-msgstr "aucun objet R spécifié ou disponible"
-
 #. R/Sweave.R: gettextf("no Sweave file with name %s found", sQuote(file[1L]))
 #: R/Sweave.R:0
 msgid "no Sweave file with name %s found"
@@ -2343,6 +2338,9 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] "le package %s n'est pas disponible %s"
 msgstr[1] "les packages %s ne sont pas disponibles %s"
+
+#~ msgid "no R objects specified or available"
+#~ msgstr "aucun objet R spécifié ou disponible"
 
 #~ msgid "cannot install macOS binary packages on this platform"
 #~ msgstr "impossible d'installer les packages MacOS binaires sur cette plateforme"
