@@ -5155,7 +5155,7 @@ help with installing all the needed components.  (At the time of writing
 @code{install.libs("r-base-dev")} installed neither @code{readline5} nor
 those needed to support @I{Pango}.)
 
-Apple Silicon users of Sonoma (14) or later want the @code{darwin23}
+Apple Silicon users of @I{Sonoma} (14) or later want the @code{darwin23}
 components.  Intel users want the @code{darwin20} components: the
 @code{darwin17} ones are for macOS 10.13--10.15.
 
@@ -5965,12 +5965,10 @@ Use of ICU for collation and the @command{configure} option
 @section @I{OpenBSD}
 @cindex @I{OpenBSD}
 
-@I{Ingo Feinerer} installed @R{} version 3.2.2 on OpenBSD 5.8 arch
+@I{Ingo Feinerer} provides builds for OpenBSD arch
 @cputype{amd64} (their name for @cputype{x86_64}).  Details of the build
 (and patches applied) are at
-@uref{https://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/math/R/},
-currently updated for @R{} 4.2.3.
-
+@uref{https://cvsweb.openbsd.org/ports/math/R/}.
 
 @node Cygwin
 @section @I{Cygwin}
