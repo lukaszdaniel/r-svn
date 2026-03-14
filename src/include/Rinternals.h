@@ -564,6 +564,17 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
                      void *cleandata, SEXP cont); // context.c
 
 /* Environment and Binding Features */
+typedef enum {
+    R_BindingTypeUnbound = 0,  // Unbound in this environment
+    R_BindingTypeValue = 1,    // Direct value binding
+    R_BindingTypeMissing = 2,  // Missing argument
+    R_BindingTypeDelayed = 3,  // Delayed (promise)
+    R_BindingTypeForced = 4,   // Forced (promise)
+    R_BindingTypeActive = 5,   // Active binding
+} R_BindingType_t;
+
+R_BindingType_t R_GetBindingType(SEXP sym, SEXP env);
+
 SEXP R_NewEnv(SEXP, int, int);
 Rboolean R_IsPackageEnv(SEXP rho); // envir.c
 SEXP R_PackageEnvName(SEXP rho);
@@ -575,10 +586,16 @@ void R_LockEnvironment(SEXP env, Rboolean bindings);
 Rboolean R_EnvironmentIsLocked(SEXP env); // envir.c
 void R_LockBinding(SEXP sym, SEXP env);
 void R_unLockBinding(SEXP sym, SEXP env);
+void R_MakeDelayedBinding(SEXP sym, SEXP expr, SEXP evalEnv, SEXP env);
+void R_MakeForcedBinding(SEXP sym, SEXP expr, SEXP value, SEXP env);
+void R_MakeMissingBinding(SEXP sym, SEXP env);
 void R_MakeActiveBinding(SEXP sym, SEXP fun, SEXP env);
 Rboolean R_BindingIsLocked(SEXP sym, SEXP env); // envir.c
 Rboolean R_BindingIsActive(SEXP sym, SEXP env); // envir.c
 SEXP R_ActiveBindingFunction(SEXP sym, SEXP env);
+SEXP R_ForcedBindingExpression(SEXP sym, SEXP env);
+SEXP R_DelayedBindingExpression(SEXP sym, SEXP env);
+SEXP R_DelayedBindingEnvironment(SEXP sym, SEXP env);
 //Rboolean R_HasFancyBindings(SEXP rho); // envir.c
 
 
@@ -1155,22 +1172,22 @@ inline R_len_t length(SEXP s)
 #endif
 
 // temporatily add these declarations and unhide until BioC catches up
-int  (NAMED)(SEXP x);
-void (SET_NAMED)(SEXP x, int v);
+int  (NAMED)(SEXP x);      // used in Biostrings
+void (SET_NAMED)(SEXP x, int v);      // used in Biostrings
 int (IS_S4_OBJECT)(SEXP x);
 void (SET_S4_OBJECT)(SEXP x);
 void (UNSET_S4_OBJECT)(SEXP x);
 SEXP R_data_class(SEXP , Rboolean);
-int  (OBJECT)(SEXP x);  // used in dang via tidyCpp
-void (SET_TYPEOF)(SEXP x, SEXPTYPE v);
-int  (ENVFLAGS)(SEXP x);
-void (SET_ENVFLAGS)(SEXP x, int v);
+int  (OBJECT)(SEXP x);  // used in dang via tidyCpp, used in SharedObject
+void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // used in HilbertVisGUI
+int  (ENVFLAGS)(SEXP x);  // used in GOfuncR
+void (SET_ENVFLAGS)(SEXP x, int v);  // used in GOfuncR
 int  (LEVELS)(SEXP x);  // used in dang via tidyCpp
 int  (SETLEVELS)(SEXP x, int v);  // used in dang via tidyCpp
-void *(EXTPTR_PTR)(SEXP);  // used in rJava in a separate .so file
-SEXP (ENCLOS)(SEXP x);  // used in rJava in a separate .so file
+//void *(EXTPTR_PTR)(SEXP);  // used in rJava in a separate .so file
+//SEXP (ENCLOS)(SEXP x);  // used in rJava in a separate .so file
 #if ! (defined(CALLED_FROM_DEFN_H) && !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS)))
-void *(DATAPTR)(SEXP x);
+void *(DATAPTR)(SEXP x); // used in COMPASS matter SharedObject
 #endif
 
 #ifdef __cplusplus

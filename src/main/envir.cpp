@@ -787,6 +787,135 @@ static SEXP R_GetGlobalCacheLoc(SEXP symbol)
 }
 #endif /* USE_GLOBAL_CACHE */
 
+
+/*----------------------------------------------------------------------
+  R_GetBindingType
+*/
+
+/* Unwrap nested promises to the innermost one.
+   Sets `*forced` to TRUE if the innermost promise has been evaluated.
+   Uses Floyd's cycle detection to guard against promise loops. */
+static SEXP promiseUnwrap(SEXP x, bool *forced)
+{
+    SEXP slow = x;
+    bool advance_slow = FALSE;
+    while (TRUE) {
+	SEXP code = PRCODE(x);
+	if (TYPEOF(code) != PROMSXP) {
+	    *forced = PROMISE_IS_EVALUATED(x);
+	    return x;
+	}
+
+	x = code;
+	if (x == slow)
+	    error("%s", _("cycle detected in promise chain"));
+
+	if (advance_slow)
+	    slow = PRCODE(slow);
+	advance_slow = !advance_slow;
+    }
+}
+
+static R_BindingType_t BINDING_TYPE(SEXP cell)
+{
+    if (BNDCELL_TAG(cell))
+	// avoid expanding immediate values
+        return R_BindingTypeValue;
+    else if (IS_ACTIVE_BINDING(cell))
+        return R_BindingTypeActive;
+    else {
+	SEXP value = CAR(cell);
+	if (value == R_MissingArg)
+	    return R_BindingTypeMissing;
+	else if (TYPEOF(value) == PROMSXP) {
+	    bool forced;
+	    promiseUnwrap(value, &forced);
+	    if (forced)
+		return R_BindingTypeForced;
+	    else
+		return R_BindingTypeDelayed;
+	}
+	else
+	    return R_BindingTypeValue;
+    }
+}
+
+static R_BindingType_t SYMBOL_BINDING_TYPE(SEXP cell)
+{
+    // probably no need to support symbol bindings
+    error("%s", _("symbol bindings not supported yet"));
+}
+
+attribute_hidden
+R_BindingType_t R_GetVarLocType(R_varloc_t vl)
+{
+    SEXP cell = vl.cell;
+    if (cell == NULL || cell == R_UnboundValue)
+        return R_BindingTypeUnbound;
+    else if (TYPEOF(cell) == SYMSXP)
+	return SYMBOL_BINDING_TYPE(cell);
+    else
+	return BINDING_TYPE(cell);
+}
+
+static R_varloc_t R_findVarLocInFrameCheck(SEXP env, SEXP sym)
+{
+    if (TYPEOF(sym) != SYMSXP)
+	error("%s", _("not a symbol"));
+    if (TYPEOF(env) != ENVSXP)
+	error("%s", _("not an environment"));
+    return R_findVarLocInFrame(env, sym);
+}
+
+R_BindingType_t R_GetBindingType(SEXP sym, SEXP env) {
+    R_varloc_t loc = R_findVarLocInFrameCheck(env, sym);
+    return R_GetVarLocType(loc);
+}
+
+attribute_hidden SEXP do_bindingType(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    SEXP sym = CAR(args);
+    SEXP env = CADR(args);
+    switch(R_GetBindingType(sym, env)) {
+    case R_BindingTypeUnbound: return mkString("unbound");
+    case R_BindingTypeValue: return mkString("value");
+    case R_BindingTypeMissing: return mkString("missing");
+    case R_BindingTypeDelayed: return mkString("delayed");
+    case R_BindingTypeForced: return mkString("forced");
+    case R_BindingTypeActive: return mkString("active");
+    default: error("%s", _("unknown binding type; should not happen"));
+    }
+}
+
+attribute_hidden
+SEXP do_delayedBindingExpr(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    SEXP sym = CAR(args);
+    SEXP env = CADR(args);
+    return R_DelayedBindingExpression(sym, env);
+}
+
+attribute_hidden
+SEXP do_delayedBindingEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    SEXP sym = CAR(args);
+    SEXP env = CADR(args);
+    return R_DelayedBindingEnvironment(sym, env);
+}
+
+attribute_hidden
+SEXP do_forcedBindingExpr(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    SEXP sym = CAR(args);
+    SEXP env = CADR(args);
+    return R_ForcedBindingExpression(sym, env);
+}
+
+
 /*----------------------------------------------------------------------
 
   unbindVar
@@ -1380,13 +1509,15 @@ static int ddVal(SEXP symbol)
 
 #define length_DOTS(_v_) (TYPEOF(_v_) == DOTSXP ? length(_v_) : 0)
 
-SEXP ddfind(int i, SEXP rho)
+static SEXP ddfind(int i, SEXP rho)
 {
     if (i <= 0)
 	error(_("indexing '...' with non-positive index %d"), i);
     /* first look for ... symbol  */
     SEXP vl = R_findVar(R_DotsSymbol, rho);
     if (vl != R_UnboundValue) {
+	if (TYPEOF(vl) != DOTSXP && vl != R_MissingArg)
+	    error("%s", _("bad ... value"));
 	if (length_DOTS(vl) >= i) {
 	    vl = nthcdr(vl, i - 1);
 	    return(CAR(vl));
@@ -3303,6 +3434,32 @@ void R_unLockBinding(SEXP sym, SEXP env)
     }
 }
 
+void R_MakeDelayedBinding(SEXP sym, SEXP expr, SEXP evalEnv, SEXP env) {
+    if (TYPEOF(sym) != SYMSXP)
+	error("%s", _("not a symbol"));
+    if (TYPEOF(env) != ENVSXP)
+	error("%s", _("not an environment"));
+    if (TYPEOF(evalEnv) != ENVSXP)
+	error("%s", _("not an environment"));
+    defineVar(sym, mkPROMISE(expr, evalEnv), env);
+}
+
+void R_MakeForcedBinding(SEXP sym, SEXP expr, SEXP value, SEXP env) {
+    if (TYPEOF(sym) != SYMSXP)
+	error("%s", _("not a symbol"));
+    if (TYPEOF(env) != ENVSXP)
+	error("%s", _("not an environment"));
+    defineVar(sym, R_mkEVPROMISE(expr, value), env);
+}
+
+void R_MakeMissingBinding(SEXP sym, SEXP env) {
+    if (TYPEOF(sym) != SYMSXP)
+	error("%s", _("not a symbol"));
+    if (TYPEOF(env) != ENVSXP)
+	error("%s", _("not an environment"));
+    defineVar(sym, R_MissingArg, env);
+}
+
 void R_MakeActiveBinding(SEXP sym, SEXP fun, SEXP env)
 {
     if (TYPEOF(sym) != SYMSXP)
@@ -3395,6 +3552,60 @@ attribute_hidden bool R::R_HasFancyBindings(SEXP rho)
 		return TRUE;
 	return FALSE;
     }
+}
+
+// get the expression for a delayed or forced binding
+static SEXP R_GetVarLocExpression(R_varloc_t loc)
+{
+    SEXP cell = loc.cell;
+    if (cell == NULL || cell == R_UnboundValue)
+	error("%s", _("unbound variable"));
+
+    SEXP value = BINDING_VALUE(cell);
+    if (TYPEOF(value) != PROMSXP)
+	error("%s", _("not a delayed or forced binding"));
+
+    bool forced;
+    SEXP inner = promiseUnwrap(value, &forced);
+
+    /* This has special handling for bytecode, unlike `PREXPR()` */
+    return R_PromiseExpr(inner);
+
+}
+
+SEXP R_DelayedBindingExpression(SEXP sym, SEXP env)
+{
+    R_varloc_t loc = R_findVarLocInFrameCheck(env, sym);
+    if (R_GetVarLocType(loc) != R_BindingTypeDelayed)
+	error("%s", _("not a delayed binding"));	
+    return R_GetVarLocExpression(loc);
+}
+
+SEXP R_ForcedBindingExpression(SEXP sym, SEXP env)
+{
+    R_varloc_t loc = R_findVarLocInFrameCheck(env, sym);
+    if (R_GetVarLocType(loc) != R_BindingTypeForced)
+	error("%s", _("not a forced binding"));	
+    return R_GetVarLocExpression(loc);
+}
+
+// get the environment for a delayed binding
+SEXP R_DelayedBindingEnvironment(SEXP sym, SEXP env) {
+    R_varloc_t loc = R_findVarLocInFrame(env, sym);
+    SEXP cell = loc.cell;
+    if (cell == NULL || cell == R_UnboundValue)
+	error("%s", _("unbound variable"));
+
+    SEXP value = BINDING_VALUE(cell);
+    if (TYPEOF(value) != PROMSXP)
+	error("%s", _("not a delayed binding"));
+
+    bool forced;
+    SEXP inner = promiseUnwrap(value, &forced);
+    if (forced)
+	error("%s", _("not a delayed binding"));
+
+    return PRENV(inner);
 }
 
 SEXP R_ActiveBindingFunction(SEXP sym, SEXP env)
@@ -4319,4 +4530,3 @@ attribute_hidden void R::findFunctionForBody(SEXP body) {
 	}
     }
 }
-

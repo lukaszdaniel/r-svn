@@ -429,6 +429,15 @@
       \code{SET_HASHTAB}, \code{SET_NAMED}, \code{SET_S4_OBJECT},
       \code{SET_TRUELENGTH}, \code{STDVEC_DATAPTR}, \code{TRUELENGTH},
       \code{UNSET_S4_OBJECT}, \code{XTRUELENGTH}.
+
+      \item New experimental function \code{R_GetBindingType} to support
+      inspecting environment bindings without forcing delayed or active
+      bindings.  New functions \code{R_MakeDelayedBinding},
+      \code{R_MakeForcedBinding} and \code{R_MakeMissingBinding} for
+      creating bindings. For examining features of bindings:
+      \code{R_ForcedBindingExpression},
+      \code{R_DelayedBindingExpression}, and
+      \code{R_DelayedBindingEnvironment} (\PR{18928}).
     }
   }
 
@@ -671,6 +680,10 @@
       unreliable, returning probabilities that are greater than one or
       \code{NaN} (\PR{19011}).
       Fix from \I{Christoph Dalitz} and \I{Achim Zeileis}.
+
+      \item \command{R CMD build} now installs packages providing their
+      own vignette engine (\PR{18191}).
+      Patch by \I{Paul Smith}.
     }
   }
 }
@@ -744,6 +757,11 @@
 
       \item Large (tall) subscripts in \I{plotmath} expressions are now
       positioned correctly.  They were being positioned too high.
+
+      \item \code{Ops} group (\code{Arith}, \code{Compare}, \dots) methods for
+      matrix-\code{"ts"} now do return (zero length) matrices even when the
+      two series do not overlap; a very partial fix of \PR{18972}, which is to
+      be fully addressed later.
     }
   }
 }
@@ -1394,7 +1412,7 @@
       \code{RDEBUG}, \code{REAL0}, \code{Rf_findVarInFrame3},
       \code{SET_BODY}, \code{SET_CLOENV}, \code{SET_FORMALS},
       \code{SET_PRSEEN}, \code{SET_RDEBUG}, \code{STRING_PTR},
-      and \code{SYMVALUE}. Any declarations for these
+      \code{SYMVALUE}, and \code{VECTOR_PTR}. Any declarations for these
       in public header files will be removed in the near future, and
       they will be hidden where possible.
 
