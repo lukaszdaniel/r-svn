@@ -2664,6 +2664,48 @@ local({
     stopifnot(f(x) == "forced")
 })
 
+## R_GetBindingType with symbol bindings (base namespace)
+local({
+    getBindingType <- function(sym, env) {
+        if (is.character(sym))
+            sym <- as.name(sym)
+        .Internal(getBindingType(sym, env))
+    }
+    stopifnot(getBindingType("T", baseenv()) == "value")
+    stopifnot(getBindingType("c", baseenv()) == "value")
+    stopifnot(getBindingType(".TAOCP1997init", baseenv()) == "delayed")
+    stopifnot(getBindingType(".Library.site", baseenv()) == "active")
+    stopifnot(getBindingType("..nonexistent..", baseenv()) == "unbound")
+})
+
+## Binding accessors with symbol bindings (base namespace)
+local({
+    delayedExpr <- function(sym, env) {
+        if (is.character(sym)) sym <- as.name(sym)
+        .Internal(delayedBindingExpression(sym, env))
+    }
+    delayedEnv <- function(sym, env) {
+        if (is.character(sym)) sym <- as.name(sym)
+        .Internal(delayedBindingEnvironment(sym, env))
+    }
+    forcedExpr <- function(sym, env) {
+        if (is.character(sym)) sym <- as.name(sym)
+        .Internal(forcedBindingExpression(sym, env))
+    }
+    # `.TAOCP1997init` is lazily loaded in base. We're checking this one
+    # because it's unlikely to have been forced by another test.
+    expr <- delayedExpr(".TAOCP1997init", baseenv())
+    stopifnot(is.language(expr))
+    env <- delayedEnv(".TAOCP1997init", baseenv())
+    stopifnot(is.environment(env))
+    force(.TAOCP1997init)
+    expr <- forcedExpr(".TAOCP1997init", baseenv())
+    stopifnot(is.language(expr))
+    # `.Library.site` is an active binding in base
+    fn <- activeBindingFunction(as.name(".Library.site"), baseenv())
+    stopifnot(is.function(fn))
+})
+
 ## R_DelayedBindingExpression and R_DelayedBindingEnvironment
 local({
     delayedExpr <- function(sym, env = parent.frame()) {
@@ -2716,6 +2758,95 @@ local({
     # Deeper chain
     mid <- function(...) inner(...)
     f <- function(...) { force(..1); mid(...) }
+    stopifnot(identical(f(x), quote(x)))
+})
+
+## R_DotsElt errors on missing dot argument
+local({
+    f <- function(...) ...elt(1)
+    x <- 1
+    stopifnot(identical(f(x), 1))
+    stopifnot(inherits(tryCatch(f(, 1), error = identity), "missingArgError"))
+    # This is another error path
+    stopifnot(grepl("the ... list contains fewer than",
+                    tryCatch(f(), error = conditionMessage)))
+})
+
+## simple test for R_GetDotType
+local({
+    getDotType <- function(i, env = parent.frame())
+        .Internal(getDotType(i, env))
+    g <- function(...) getDotType(1L, environment())
+    x <- 1
+    stopifnot(g(x) == "delayed")
+    stopifnot(g(, 1) == "missing")
+    h <- function(...) { force(..1); getDotType(1L, environment()) }
+    stopifnot(h(x) == "forced")
+})
+
+## R_GetDotType with promise chains from `...` expansion
+local({
+    getDotType <- function(i, env = parent.frame())
+        .Internal(getDotType(i, env))
+    inner <- function(...) getDotType(1L)
+    x <- 1
+    f <- function(...) inner(...)
+    stopifnot(f(x) == "delayed")
+    # Forced inner, then forwarded
+    f <- function(...) { force(..1); inner(...) }
+    stopifnot(f(x) == "forced")
+    # Deeper chain
+    mid <- function(...) inner(...)
+    f <- function(...) mid(...)
+    stopifnot(f(x) == "delayed")
+    f <- function(...) { force(..1); mid(...) }
+    stopifnot(f(x) == "forced")
+})
+
+## R_DotDelayedExpression and R_DotDelayedEnvironment
+local({
+    dotDelayedExpr <- function(i, env = parent.frame())
+        .Internal(dotDelayedExpression(i, env))
+    dotDelayedEnv <- function(i, env = parent.frame())
+        .Internal(dotDelayedEnvironment(i, env))
+    get_expr <- function(...) dotDelayedExpr(1L)
+    get_env <- function(...) dotDelayedEnv(1L)
+    e <- environment()
+    x <- 1
+    stopifnot(identical(get_expr(x), quote(x)))
+    stopifnot(identical(get_env(x), e))
+    # Through forwarded ...
+    outer_expr <- function(...) get_expr(...)
+    outer_env <- function(...) get_env(...)
+    stopifnot(identical(outer_expr(x), quote(x)))
+    stopifnot(identical(outer_env(x), e))
+    # Deeper chain
+    mid_expr <- function(...) get_expr(...)
+    deep_expr <- function(...) mid_expr(...)
+    mid_env <- function(...) get_env(...)
+    deep_env <- function(...) mid_env(...)
+    stopifnot(identical(deep_expr(x), quote(x)))
+    stopifnot(identical(deep_env(x), e))
+})
+
+## R_DotForcedExpression
+local({
+    dotForcedExpr <- function(i, env = parent.frame())
+        .Internal(dotForcedExpression(i, env))
+    get_expr <- function(...) dotForcedExpr(1L)
+    x <- 1
+    g <- function(...) { force(..1); dotForcedExpr(1L) }
+    stopifnot(identical(g(x), quote(x)))
+    # Forced inner, then forwarded
+    h <- function(...) { force(..1); get_expr(...) }
+    stopifnot(identical(h(x), quote(x)))
+    # Deeper chain
+    mid <- function(...) get_expr(...)
+    h <- function(...) { force(..1); mid(...) }
+    stopifnot(identical(h(x), quote(x)))
+    # Forwarded dot forced in place (outermost wrapper is directly forced)
+    inner_forced <- function(...) { force(..1); dotForcedExpr(1L) }
+    f <- function(...) inner_forced(...)
     stopifnot(identical(f(x), quote(x)))
 })
 

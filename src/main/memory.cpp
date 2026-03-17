@@ -3511,7 +3511,7 @@ attribute_hidden
 SEXP (R::EXTPTR_PROT)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PROT(CHK(x)); }
 attribute_hidden
 SEXP (R::EXTPTR_TAG)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_TAG(CHK(x)); }
-//attribute_hidden
+attribute_hidden
 void *(R::EXTPTR_PTR)(SEXP x) { CR_ASSERT(x); CHKEXTPTRSXP(x); return EXTPTR_PTR(CHK(x)); }
 
 attribute_hidden
@@ -3596,7 +3596,7 @@ attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { CR_ASSERT(x); SET_DDVAL(CH
 	      __func__, sexptype2char(TYPEOF(x)))
 attribute_hidden
 SEXP (R::FRAME)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
-//attribute_hidden
+attribute_hidden
 SEXP (ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
 attribute_hidden
 SEXP (R::HASHTAB)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
@@ -3634,7 +3634,7 @@ void (SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 SEXP (PRCODE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRCODE(CHK(x))); }
 SEXP (PRENV)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRENV(CHK(x))); }
 SEXP (PRVALUE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(SEXP_downcast<Promise *>(CHK(x))->value()); }
-int (R::PRSEEN)(SEXP x) { CR_ASSERT(x); return PRSEEN(CHK(x)); }
+attribute_hidden int (R::PRSEEN)(SEXP x) { CR_ASSERT(x); return PRSEEN(CHK(x)); }
 attribute_hidden
 bool (R::PROMISE_IS_EVALUATED)(SEXP x)
 {
@@ -3646,7 +3646,7 @@ bool (R::PROMISE_IS_EVALUATED)(SEXP x)
 
 void (SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Promise *>(x)->m_env.retarget(x, v); }
 void (SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<Promise *>(x)->u.promsxp.m_expr.retarget(x, v); }
-void (R::SET_PRSEEN)(SEXP x, int v) { CR_ASSERT(x); SET_PRSEEN(CHK(x), v); }
+attribute_hidden void (R::SET_PRSEEN)(SEXP x, int v) { CR_ASSERT(x); SET_PRSEEN(CHK(x), v); }
 
 void (SET_PRVALUE)(SEXP x, SEXP v)
 {

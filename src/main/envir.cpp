@@ -842,8 +842,29 @@ static R_BindingType_t BINDING_TYPE(SEXP cell)
 
 static R_BindingType_t SYMBOL_BINDING_TYPE(SEXP cell)
 {
-    // probably no need to support symbol bindings
-    error("%s", _("symbol bindings not supported yet"));
+    if (IS_ACTIVE_BINDING(cell))
+        return R_BindingTypeActive;
+
+    SEXP value = SYMVALUE(cell);
+    if (value == R_UnboundValue)
+	return R_BindingTypeUnbound;
+
+    /* Shouldn't happen but for completeness */
+    if (value == R_MissingArg)
+	return R_BindingTypeMissing;
+
+    /* There really shouldn't be any promise chains here but we unwrap
+       for consistency with BINDING_TYPE */
+    if (TYPEOF(value) == PROMSXP) {
+	bool forced;
+	promiseUnwrap(value, &forced);
+	if (forced)
+	    return R_BindingTypeForced;
+	else
+	    return R_BindingTypeDelayed;
+    }
+
+    return R_BindingTypeValue;
 }
 
 attribute_hidden
@@ -1509,6 +1530,11 @@ static int ddVal(SEXP symbol)
 
 #define length_DOTS(_v_) (TYPEOF(_v_) == DOTSXP ? length(_v_) : 0)
 
+Rboolean R_DotsExist(SEXP env)
+{
+    return Rboolean(R_findVar(R_DotsSymbol, env) != R_UnboundValue);
+}
+
 static SEXP ddfind(int i, SEXP rho)
 {
     if (i <= 0)
@@ -1553,6 +1579,15 @@ SEXP R::ddfindVar(SEXP symbol, SEXP rho)
     return ddfind(i, rho);
 }
 
+SEXP R_DotsElt(int i, SEXP env)
+{
+    SEXP val = ddfind(i, env);
+    if (TYPEOF(val) == PROMSXP || val == R_MissingArg)
+	return eval(val, env);
+    else
+	return val;
+}
+
 attribute_hidden SEXP do_dotsElt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
@@ -1562,45 +1597,150 @@ attribute_hidden SEXP do_dotsElt(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isNumeric(si) || XLENGTH(si) != 1)
 	errorcall(call, "%s", _("indexing '...' with an invalid index"));
     int i = asInteger(si);
-    return eval(ddfind(i, env), env);
+    return R_DotsElt(i, env);
+}
+
+int R_DotsLength(SEXP env)
+{
+    SEXP vl = R_findVar(R_DotsSymbol, env);
+    if (vl == R_UnboundValue)
+	error("%s", _("incorrect context: the current call has no '...' to look in"));
+    return length_DOTS(vl);
 }
 
 attribute_hidden SEXP do_dotsLength(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
-    SEXP vl = R_findVar(R_DotsSymbol, env);
-    if (vl == R_UnboundValue)
-	error("%s", _("incorrect context: the current call has no '...' to look in"));
-    // else
-    return ScalarInteger(length_DOTS(vl));
+    return ScalarInteger(R_DotsLength(env));
 }
 
-attribute_hidden SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
+SEXP R_DotsNames(SEXP env)
 {
-    checkArity(op, args);
     GCStackRoot<> vl;
     vl = R_findVar(R_DotsSymbol, env);
 
     if (vl == R_UnboundValue)
 	error("%s", _("incorrect context: the current call has no '...' to look in"));
-    // else
+
     GCStackRoot<> out(R_NilValue);
     int n = length_DOTS(vl);
-    bool named = false;
     for (int i = 0; i < n; i++) {
 	if (TAG(vl.get()) != R_NilValue) {
-	    if (!named) { named = true;
-		out = allocVector(STRSXP, n); // and is filled with "" already
+	    if (out == R_NilValue) {
+		// this fills 'out' with ""
+		out = allocVector(STRSXP, n);
 	    }
 	    SET_STRING_ELT(out, i, PRINTNAME(TAG(vl.get())));
 	}
         vl = CDR(vl.get());
     }
-    if (!named) {
-	out = R_NilValue;
-    }
 
     return out;
+}
+
+attribute_hidden SEXP do_dotsNames(SEXP call, SEXP op, SEXP args, SEXP env)
+{
+    checkArity(op, args);
+    return R_DotsNames(env);
+}
+
+R_DotType_t R_GetDotType(int i, SEXP env)
+{
+    SEXP value = ddfind(i, env);
+
+    if (value == R_MissingArg)
+	return R_DotTypeMissing;
+
+    if (TYPEOF(value) == PROMSXP) {
+	bool forced;
+	promiseUnwrap(value, &forced);
+	if (forced)
+	    return R_DotTypeForced;
+	else
+	    return R_DotTypeDelayed;
+    }
+
+    return R_DotTypeValue;
+}
+
+SEXP R_DotDelayedExpression(int i, SEXP env)
+{
+    SEXP value = ddfind(i, env);
+    if (TYPEOF(value) != PROMSXP)
+	error("%s", _("not a delayed ... element"));
+
+    bool forced;
+    SEXP inner = promiseUnwrap(value, &forced);
+    if (forced)
+	error("%s", _("not a delayed ... element"));
+
+    return R_PromiseExpr(inner);
+}
+
+SEXP R_DotDelayedEnvironment(int i, SEXP env)
+{
+    SEXP value = ddfind(i, env);
+    if (TYPEOF(value) != PROMSXP)
+	error("%s", _("not a delayed ... element"));
+
+    bool forced;
+    SEXP inner = promiseUnwrap(value, &forced);
+    if (forced)
+	error("%s", _("not a delayed ... element"));
+
+    return PRENV(inner);
+}
+
+SEXP R_DotForcedExpression(int i, SEXP env)
+{
+    SEXP value = ddfind(i, env);
+    if (TYPEOF(value) != PROMSXP)
+	error("%s", _("not a forced ... element"));
+
+    bool forced;
+    SEXP inner = promiseUnwrap(value, &forced);
+    if (!forced)
+	error("%s", _("not a forced ... element"));
+
+    return R_PromiseExpr(inner);
+}
+
+attribute_hidden SEXP do_dotType(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    int i = asInteger(CAR(args));
+    SEXP env = CADR(args);
+    switch(R_GetDotType(i, env)) {
+    case R_DotTypeValue: return mkString("value");
+    case R_DotTypeMissing: return mkString("missing");
+    case R_DotTypeDelayed: return mkString("delayed");
+    case R_DotTypeForced: return mkString("forced");
+    default: error("%s", _("unknown dot type; should not happen"));
+    }
+}
+
+attribute_hidden SEXP do_dotDelayedExpr(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    int i = asInteger(CAR(args));
+    SEXP env = CADR(args);
+    return R_DotDelayedExpression(i, env);
+}
+
+attribute_hidden SEXP do_dotDelayedEnv(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    int i = asInteger(CAR(args));
+    SEXP env = CADR(args);
+    return R_DotDelayedEnvironment(i, env);
+}
+
+attribute_hidden SEXP do_dotForcedExpr(SEXP call, SEXP op, SEXP args, SEXP rho)
+{
+    checkArity(op, args);
+    int i = asInteger(CAR(args));
+    SEXP env = CADR(args);
+    return R_DotForcedExpression(i, env);
 }
 
 #undef length_DOTS
@@ -2979,9 +3119,22 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
 
 /* non-API version used in several packages */
 // in Rinternals.h
-SEXP R_lsInternal(SEXP env, Rboolean all)
+SEXP R::R_lsInternal(SEXP env, Rboolean all)
 {
     return R_lsInternal3(env, all, TRUE);
+}
+
+SEXP R_envSymbols(SEXP env)
+{
+    // this could be rewritten to avoid allocating the intermediate STRSXP
+    // this would be mor efficient for non-USER-DATABASE environments
+    SEXP names = PROTECT(R_lsInternal3(env, TRUE, FALSE));
+    R_xlen_t n = XLENGTH(names);
+    SEXP val = PROTECT(allocVector(VECSXP, n));
+    for (R_xlen_t i = 0; i < n; i++)
+	SET_VECTOR_ELT(val, i, installChar(STRING_ELT(names, i)));
+    UNPROTECT(2); // names, val
+    return val;			 
 }
 
 /** @brief transform an environment into a named list
@@ -3554,6 +3707,24 @@ attribute_hidden bool R::R_HasFancyBindings(SEXP rho)
     }
 }
 
+/* Like BINDING_VALUE but handles symbol cells (base namespace) via
+   SYMVALUE instead of CAR. Also signals an error for active bindings. */
+static R_INLINE SEXP BINDING_OR_SYMBOL_VALUE(SEXP cell)
+{
+    if (IS_ACTIVE_BINDING(cell))
+	error("BINDING_OR_SYMBOL_VALUE called on active binding");
+
+    if (TYPEOF(cell) == SYMSXP)
+	return SYMVALUE(cell);
+
+    if (BNDCELL_TAG(cell)) {
+	R_expand_binding_value(cell);
+	return CAR0(cell);
+    }
+
+    return CAR(cell);
+}
+
 // get the expression for a delayed or forced binding
 static SEXP R_GetVarLocExpression(R_varloc_t loc)
 {
@@ -3561,7 +3732,7 @@ static SEXP R_GetVarLocExpression(R_varloc_t loc)
     if (cell == NULL || cell == R_UnboundValue)
 	error("%s", _("unbound variable"));
 
-    SEXP value = BINDING_VALUE(cell);
+    SEXP value = BINDING_OR_SYMBOL_VALUE(cell);
     if (TYPEOF(value) != PROMSXP)
 	error("%s", _("not a delayed or forced binding"));
 
@@ -3591,12 +3762,12 @@ SEXP R_ForcedBindingExpression(SEXP sym, SEXP env)
 
 // get the environment for a delayed binding
 SEXP R_DelayedBindingEnvironment(SEXP sym, SEXP env) {
-    R_varloc_t loc = R_findVarLocInFrame(env, sym);
+    R_varloc_t loc = R_findVarLocInFrameCheck(env, sym);
     SEXP cell = loc.cell;
     if (cell == NULL || cell == R_UnboundValue)
 	error("%s", _("unbound variable"));
 
-    SEXP value = BINDING_VALUE(cell);
+    SEXP value = BINDING_OR_SYMBOL_VALUE(cell);
     if (TYPEOF(value) != PROMSXP)
 	error("%s", _("not a delayed binding"));
 

@@ -623,6 +623,7 @@ void (SETLENGTH)(SEXP x, R_xlen_t v);
 void (SET_TRUELENGTH)(SEXP x, R_xlen_t v);
 int (LEVELS)(SEXP x);
 void (SETLEVELS)(SEXP x, int v);
+// SEXP *(STRING_PTR)(SEXP x); //declared in Rinternals.h
 R_xlen_t (STDVEC_LENGTH)(SEXP);
 R_xlen_t (STDVEC_TRUELENGTH)(SEXP);
 void (SETALTREP)(SEXP, int);
@@ -1503,6 +1504,7 @@ int R_system(const char *);
 SEXP R_FindPackageEnv(SEXP info);
 bool R_HasFancyBindings(SEXP rho); // envir.c
 void R_RestoreHashCount(SEXP rho); // envir.c
+SEXP R_lsInternal(SEXP, Rboolean); // envir.c
 
 void R_XDREncodeDouble(double d, void *buf);
 double R_XDRDecodeDouble(void *buf);

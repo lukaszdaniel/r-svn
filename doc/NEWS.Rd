@@ -261,7 +261,11 @@
       method docs in other packages, proposed and coded by \I{Mikael Jagan}
       in \PR{18998}.
 
-      \item Class \code{"difftime"} is now also among the S4 \code{"OldClasses"}.
+      \item Class \code{"difftime"} is now also among the S4
+      \code{"OldClasses"}.
+
+      \item New function \code{bitstring()} as a user-friendly wrapper
+      around \code{intToBits()}, etc.
     }
   }
 
@@ -356,6 +360,10 @@
       \code{Rf_lazy_duplicate} have been added to those reported
       by \command{R CMD check}.
 
+      \item Packages using the non-API functions \code{ATTRIB} and
+      \code{SET_ATTRIB} will now receive check \samp{NOTE}s.
+      See \sQuote{Writing R Extensions} for alternatives to use.
+
       \item \command{R CMD check} \samp{NOTE}s on the use of these
       non-API entry points have been upgraded to \samp{WARNING}s in
       preparation for removing declarations and, where possible, hiding
@@ -369,7 +377,7 @@
       \code{R_duplicate_attr},
       \code{getConnection}, \code{R_data_class},
       \code{STRING_PTR}, \code{SET_OBJECT},
-      \code{ATTRIB}, \code{SET_ATTRIB}.
+      \code{ATTRIB}, \code{SET_ATTRIB}, \code{Rf_findVarInFrame3}.
 
       \item The deprecated macros \code{CHARACTER_DATA} and
       \code{CHARACTER_POINTER} now return \code{const} pointers since using
@@ -393,10 +401,6 @@
 
       \item New function \code{R_mapAttrib} for iterating over the
       attributes of an object.
-
-      \item Packages using the non-API functions \code{ATTRIB} and
-      \code{SET_ATTRIB} will now receive check \samp{NOTE}s.
-      See \sQuote{Writing R Extensions} for alternatives to use.
 
       \item New functions \code{R_altrep_class_name} and
       \code{R_altrep_class_package} for retrieving the class name symbol
@@ -437,7 +441,27 @@
       creating bindings. For examining features of bindings:
       \code{R_ForcedBindingExpression},
       \code{R_DelayedBindingExpression}, and
-      \code{R_DelayedBindingEnvironment} (\PR{18928}).
+      \code{R_DelayedBindingEnvironment} (\PR{18928}).  New functions
+      for examining \code{...} bindings in environments:
+      \code{R_DotsExist}, \code{R_DotsLength}, \code{R_DotsNames},
+      \code{R_DotsElt}, \code{R_GetDotType},
+      \code{R_DotDelayedExpression}, \code{R_DotDelayedEnvironment}, and
+      \code{R_DotForcedExpression} (\PR{18928}).
+
+      \item New function \code{R_envSymbols} returns a vector of the
+      symbols for which an environment contains bindings (\PR{18928}).
+
+      \item The functions \code{Rf_findVar} and \code{findVarInFrame}
+      are now marked as non-API, and uses in packages will now receive
+      check \samp{NOTE}s.  See \sQuote{Writing R Extensions} for
+      alternatives to use.
+
+      \item \command{R CMD check} \samp{NOTE}s on the use of the non-API
+      entry points \code{PRCODE}, \code{SET_PRCODE}, \code{PRENV},
+      \code{SET_PRENV}, \code{PRVALUE}, \code{SET_PRVALUE},
+      \code{R_PromiseExpr}, and \code{Rf_allocSExp} have been upgraded
+      to \samp{WARNING}s in preparation for removing declarations and,
+      where possible, hiding these entry points.
     }
   }
 

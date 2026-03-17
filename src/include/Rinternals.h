@@ -170,7 +170,6 @@ SEXP (XVECTOR_ELT)(SEXP x, R_xlen_t i);
 void SET_STRING_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP SET_VECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
 SEXP SET_XVECTOR_ELT(SEXP x, R_xlen_t i, SEXP v);
-SEXP *(STRING_PTR)(SEXP x);
 const SEXP *(STRING_PTR_RO)(SEXP x);
 const SEXP *(VECTOR_PTR_RO)(SEXP x);
 
@@ -441,8 +440,8 @@ Rboolean Rf_isUnsorted(SEXP, Rboolean); // sort.c
 Rboolean R_isTRUE(SEXP); // util.c
 SEXP Rf_lengthgets(SEXP, R_len_t);
 SEXP Rf_xlengthgets(SEXP, R_xlen_t);
-SEXP R_lsInternal(SEXP, Rboolean); // envir.c
 SEXP R_lsInternal3(SEXP, Rboolean, Rboolean); // envir.c
+SEXP R_envSymbols(SEXP); // envir.c
 SEXP Rf_match(SEXP, SEXP, int);
 SEXP Rf_namesgets(SEXP, SEXP);
 SEXP Rf_mkChar(const char *);
@@ -598,6 +597,23 @@ SEXP R_DelayedBindingExpression(SEXP sym, SEXP env);
 SEXP R_DelayedBindingEnvironment(SEXP sym, SEXP env);
 //Rboolean R_HasFancyBindings(SEXP rho); // envir.c
 
+/* Dots interface */
+typedef enum {
+    R_DotTypeValue = 0,
+    R_DotTypeMissing = 1,
+    R_DotTypeDelayed = 2,
+    R_DotTypeForced = 3
+} R_DotType_t;
+
+Rboolean R_DotsExist(SEXP env);
+int R_DotsLength(SEXP env);
+SEXP R_DotsNames(SEXP env);
+SEXP R_DotsElt(int i, SEXP env);
+
+R_DotType_t R_GetDotType(int i, SEXP env);
+SEXP R_DotDelayedExpression(int i, SEXP env);
+SEXP R_DotDelayedEnvironment(int i, SEXP env);
+SEXP R_DotForcedExpression(int i, SEXP env);
 
 /* ../main/errors.c : */
 /* needed for R_load/savehistory handling in front ends */
@@ -1171,19 +1187,21 @@ inline R_len_t length(SEXP s)
 }
 #endif
 
-// temporatily add these declarations and unhide until BioC catches up
-int  (NAMED)(SEXP x);      // used in Biostrings
-void (SET_NAMED)(SEXP x, int v);      // used in Biostrings
-int (IS_S4_OBJECT)(SEXP x);
-void (SET_S4_OBJECT)(SEXP x);
-void (UNSET_S4_OBJECT)(SEXP x);
-SEXP R_data_class(SEXP , Rboolean);
+// temporatily add these declarations and unhide until until BioC catches up
+//int  (NAMED)(SEXP x);      // used in Biostrings
+//void (SET_NAMED)(SEXP x, int v);      // used in Biostrings
+int (IS_S4_OBJECT)(SEXP x); // used in chopsticks, SharedObject
+void (SET_S4_OBJECT)(SEXP x); //used in chopsticks, SharedObject
+void (UNSET_S4_OBJECT)(SEXP x); // used in SharedObject
+SEXP R_data_class(SEXP , Rboolean); // used in chopsticks
 int  (OBJECT)(SEXP x);  // used in dang via tidyCpp, used in SharedObject
 void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // used in HilbertVisGUI
 int  (ENVFLAGS)(SEXP x);  // used in GOfuncR
 void (SET_ENVFLAGS)(SEXP x, int v);  // used in GOfuncR
-int  (LEVELS)(SEXP x);  // used in dang via tidyCpp
-int  (SETLEVELS)(SEXP x, int v);  // used in dang via tidyCpp
+//int  (LEVELS)(SEXP x);  // used in dang via tidyCpp
+//int  (SETLEVELS)(SEXP x, int v);  // used in dang via tidyCpp
+//SEXP R_lsInternal(SEXP, Rboolean); // used in rJava in a separate .so file
+SEXP *(STRING_PTR)(SEXP x); // used in matter
 //void *(EXTPTR_PTR)(SEXP);  // used in rJava in a separate .so file
 //SEXP (ENCLOS)(SEXP x);  // used in rJava in a separate .so file
 #if ! (defined(CALLED_FROM_DEFN_H) && !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS)))
