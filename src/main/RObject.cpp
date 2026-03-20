@@ -47,9 +47,9 @@ namespace CXXR
         const auto &SHALLOW_DUPLICATE_ATTRIBptr = SHALLOW_DUPLICATE_ATTRIB;
         const auto &isNullptr = Rf_isNull;
         const auto &isObjectptr = Rf_isObject;
-        const auto &NAMEDptr = NAMED;
+        const auto &NAMEDptr = R::NAMED;
         const auto &OBJECTptr = OBJECT;
-        const auto &SET_NAMEDptr = SET_NAMED;
+        const auto &SET_NAMEDptr = R::SET_NAMED;
         const auto &ENSURE_NAMEDMAXptr = R::ENSURE_NAMEDMAX;
         const auto &ENSURE_NAMEDptr = R::ENSURE_NAMED;
         const auto &SETTER_CLEAR_NAMEDptr = R::SETTER_CLEAR_NAMED;

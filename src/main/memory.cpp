@@ -2681,7 +2681,7 @@ int (ANY_ATTRIB)(SEXP x) { CR_ASSERT(x); return ANY_ATTRIB(CHK(x)); }
 int (OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
 SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
 //attribute_hidden
-int (NAMED)(SEXP x) { return NAMED(CHK(x)); }
+int (R::NAMED)(SEXP x) { return NAMED(CHK(x)); }
 attribute_hidden int (R::RTRACE)(SEXP x) { return RTRACE(CHK(x)); }
 //attribute_hidden
 int (R::LEVELS)(SEXP x) { CR_ASSERT(x); return LEVELS(CHK(x)); }
@@ -2732,7 +2732,7 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
 }
 void (SET_OBJECT)(SEXP x, int v) { CR_ASSERT(x); SET_OBJECT(CHK(x), v); }
 //attribute_hidden
-void (SET_NAMED)(SEXP x, int v)
+void (R::SET_NAMED)(SEXP x, int v)
 {
     CR_ASSERT(x);
 #ifndef SWITCH_TO_REFCNT
@@ -3597,7 +3597,7 @@ attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { CR_ASSERT(x); SET_DDVAL(CH
 attribute_hidden
 SEXP (R::FRAME)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
 attribute_hidden
-SEXP (ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
+SEXP (R::ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
 attribute_hidden
 SEXP (R::HASHTAB)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
 //attribute_hidden

@@ -570,12 +570,12 @@ void R_check_thread(const char *s);
 /* General Cons Cell Attributes */
 int  (MARK)(SEXP x);
 // int  (OBJECT)(SEXP x); // declared in Rinternals.h
-// int  (NAMED)(SEXP x); // declared in Rinternals.h
+int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
 bool (REFCNT_ENABLED)(SEXP x);
 // void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
 // void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // declared in Rinternals.h
-// void (SET_NAMED)(SEXP x, int v); // declared in Rinternals.h
+void (SET_NAMED)(SEXP x, int v);
 void (ENSURE_NAMEDMAX)(SEXP x);
 void (ENSURE_NAMED)(SEXP x);
 void (SETTER_CLEAR_NAMED)(SEXP x);
@@ -682,7 +682,7 @@ void SET_INTERNAL(SEXP x, SEXP v);
 
 /* Environment Access Functions */
 SEXP (FRAME)(SEXP x);
-// SEXP (ENCLOS)(SEXP x); // declared in Rinternals.h
+SEXP (ENCLOS)(SEXP x);
 SEXP (HASHTAB)(SEXP x);
 // int  (ENVFLAGS)(SEXP x); // declared in Rinternals.h
 // void (SET_ENVFLAGS)(SEXP x, int v); // declared in Rinternals.h
@@ -1966,9 +1966,6 @@ SEXP tspgets(SEXP, SEXP);
 SEXP type2rstr(SEXPTYPE);
 SEXP type2symbol(SEXPTYPE);
 void unbindVar(SEXP, SEXP);
-#ifdef ALLOW_OLD_SAVE
-// void unmarkPhase(void); // unused
-#endif
 SEXP R_LookupMethod(SEXP, SEXP, SEXP, SEXP);
 std::pair<bool, SEXP> usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 int usemethod(const char *, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP*);

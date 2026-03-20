@@ -238,6 +238,14 @@ namespace R
      */
     void SET_FRAME(SEXP x, SEXP v);
 
+    /** @brief Access enclosing environment.
+     *
+     * @param x Pointer to a CXXR::Environment (checked).
+     *
+     * @return Pointer to the enclosing environment of \a x.
+     */
+    SEXP (ENCLOS)(SEXP x);
+
     /** @brief Set an environment's enclosing environment.
      *
      * @param x Pointer to a CXXR::Environment (checked).
@@ -331,14 +339,6 @@ extern "C"
      * @return TRUE iff the RObject pointed to by \a s is an environment.
      */
     Rboolean Rf_isEnvironment(SEXP s);
-
-    /** @brief Access enclosing environment.
-     *
-     * @param x Pointer to a CXXR::Environment (checked).
-     *
-     * @return Pointer to the enclosing environment of \a x.
-     */
-    SEXP (ENCLOS)(SEXP x);
 
     /** @brief Access an environment's flags.
      *

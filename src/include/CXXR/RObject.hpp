@@ -502,6 +502,26 @@ namespace R
      */
     void (SETLEVELS)(SEXP x, int v);
 
+    /** @brief Get object copying status.
+     *
+     * @param x Pointer to CXXR::RObject.
+     *
+     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
+     * null pointer.
+     */
+    int (NAMED)(SEXP x);
+
+    /** @brief Set object copying status.
+     *
+     * @param x Pointer to CXXR::RObject.  The function does nothing
+     *          if \a x is a null pointer.
+     *
+     * @param v Refer to 'R Internals' document.
+     *
+     * @deprecated Ought to be private.
+     */
+    void (SET_NAMED)(SEXP x, int v);
+
     /** @brief Set object max copying status.
      *
      * @param x Pointer to CXXR::RObject.  The function does nothing
@@ -708,15 +728,6 @@ extern "C"
      */
     SEXP (ATTRIB)(SEXP x);
 
-    /** @brief Get object copying status.
-     *
-     * @param x Pointer to CXXR::RObject.
-     *
-     * @return Refer to 'R Internals' document.  Returns 0 if \a x is a
-     * null pointer.
-     */
-    int (NAMED)(SEXP x);
-
     /** @brief Replace an object's attributes.
      *
      * @param x Pointer to a CXXR::RObject.
@@ -736,17 +747,6 @@ extern "C"
      * inhibited within this function.
      */
     void (SET_ATTRIB)(SEXP x, SEXP v);
-
-    /** @brief Set object copying status.
-     *
-     * @param x Pointer to CXXR::RObject.  The function does nothing
-     *          if \a x is a null pointer.
-     *
-     * @param v Refer to 'R Internals' document.
-     *
-     * @deprecated Ought to be private.
-     */
-    void (SET_NAMED)(SEXP x, int v);
 
     /**
      * @deprecated This has no effect in CXXR.

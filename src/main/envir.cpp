@@ -115,6 +115,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Closure.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rinterface.h> // for R_Suicide()
@@ -1437,15 +1438,13 @@ R_varloc_t R::R_findVarLoc(SEXP symbol, SEXP rho)
  */
 attribute_hidden SEXP R::findVar1(SEXP symbol, SEXP rho, SEXPTYPE mode, bool inherits)
 {
-    SEXP vl;
+    GCStackRoot<> vl;
     while (rho != R_EmptyEnv) {
 	vl = R_findVarInFrame(rho, symbol);
 	if (vl != R_UnboundValue) {
 	    if (mode == ANYSXP) return vl;
 	    if (TYPEOF(vl) == PROMSXP) {
-		PROTECT(vl);
 		vl = eval(vl, rho);
-		UNPROTECT(1);
 	    }
 	    if (TYPEOF(vl) == mode) return vl;
 	    if (mode == FUNSXP && Rf_isFunction(vl))
@@ -1591,7 +1590,7 @@ SEXP R_DotsElt(int i, SEXP env)
 {
     SEXP val = ddfind(i, env);
     if (TYPEOF(val) == PROMSXP || val == R_MissingArg)
-	return eval(val, env);
+	return Evaluator::evaluate(val, env);
     else
 	return val;
 }
@@ -1636,7 +1635,7 @@ SEXP R_DotsNames(SEXP env)
 	if (TAG(vl.get()) != R_NilValue) {
 	    if (out == R_NilValue) {
 		// this fills 'out' with ""
-		out = allocVector(STRSXP, n);
+		out = StringVector::create(n);
 	    }
 	    SET_STRING_ELT(out, i, PRINTNAME(TAG(vl.get())));
 	}
@@ -2874,27 +2873,26 @@ attribute_hidden SEXP do_detach(SEXP call, SEXP op, SEXP args, SEXP env)
  */
 attribute_hidden SEXP do_search(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, name;
-    int i, n;
+    GCStackRoot<> ans;
 
     checkArity(op, args);
-    n = 2;
+    int n = 2;
     for (SEXP t = ENCLOS(R_GlobalEnv); t != R_BaseEnv ; t = ENCLOS(t))
 	n++;
-    PROTECT(ans = allocVector(STRSXP, n));
+    ans = StringVector::create(n);
     /* TODO - what should the name of this be? */
     SET_STRING_ELT(ans, 0, mkChar(".GlobalEnv"));
     SET_STRING_ELT(ans, n-1, mkChar("package:base"));
-    i = 1;
+    int i = 1;
     for (SEXP t = ENCLOS(R_GlobalEnv); t != R_BaseEnv ; t = ENCLOS(t)) {
-	name = getAttrib(t, R_NameSymbol);
+	SEXP name = getAttrib(t, R_NameSymbol);
 	if (!isString(name) || length(name) < 1)
 	    SET_STRING_ELT(ans, i, mkChar("(unknown)"));
 	else
 	    SET_STRING_ELT(ans, i, STRING_ELT(name, 0));
 	i++;
     }
-    UNPROTECT(1);
+
     return ans;
 }
 

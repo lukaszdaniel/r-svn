@@ -55,7 +55,7 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &ENCLOSptr = ENCLOS;
+        const auto &ENCLOSptr = R::ENCLOS;
         const auto &ENVFLAGSptr = ENVFLAGS;
         const auto &HASHTABptr = R::HASHTAB;
         const auto &isEnvironmentptr = Rf_isEnvironment;
