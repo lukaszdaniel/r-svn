@@ -43,7 +43,9 @@
         if (length(grep("-darwin[0-9][0-9.]*$", c(b.platform, platform))) == 2L &&
             ## if everything else matches (mainly arch)
             gsub("-darwin[0-9][0-9.]*$", "", b.platform) == gsub("-darwin[0-9][0-9.]*$", "", platform)) {
-            vers <- as.integer(gsub(".*-darwin(([0-9]+)|([0-9]+)[.][0-9.]*)$", "\\1", c(b.platform, platform)))
+            vers <- as.integer(gsub("[.].*","",gsub(".*-darwin(([0-9]+)|([0-9]+)[.][0-9.]*)$", "\\1", c(b.platform, platform))))
+            ## if we cannot recognize versions (shouldn't happen), we have to give up and hope for the best
+            if (any(is.na(vers))) return(TRUE)
             ## NOTE: in principle a newer binary can actually work if we are running a
             ## build that targets older system, but is ran on a macOS that is at least as new,
             ## but we should not see that unless the binary is from a newer build which
@@ -125,11 +127,18 @@
         if (!.is.built.compatible(desc$Built))
             stop(gettextf("binary package %s is not compatible with this build of R", sQuote(pkg)))
 
-        res <- tools::checkMD5sums(pkgname, file.path(tmpDir, pkgname))
+        res <- tools::checkSHA256sums(pkgname, file.path(tmpDir, pkgname))
         if(!quiet && !is.na(res) && res) {
-            cat(gettextf("package %s successfully unpacked and MD5 sums checked\n",
-                         sQuote(pkgname)))
+            cat(gettextf("package %s successfully unpacked and %s sums checked",
+                         sQuote(pkgname), "SHA256"), "\n", sep="")
             flush.console()
+        } else {
+            res <- tools::checkMD5sums(pkgname, file.path(tmpDir, pkgname))
+            if(!quiet && !is.na(res) && res) {
+                cat(gettextf("package %s successfully unpacked and %s sums checked",
+                             sQuote(pkgname), "MD5"), "\n", sep="")
+                flush.console()
+            }
         }
 
         instPath <- file.path(lib, pkgname)

@@ -1532,7 +1532,15 @@ static int ddVal(SEXP symbol)
 
 Rboolean R_DotsExist(SEXP env)
 {
-    return Rboolean(R_findVar(R_DotsSymbol, env) != R_UnboundValue);
+    SEXP vl = R_findVar(R_DotsSymbol, env);
+    return Rboolean(vl != R_UnboundValue &&
+	(vl == R_MissingArg || TYPEOF(vl) == DOTSXP));
+}
+
+attribute_hidden SEXP do_dotsExist(SEXP call, SEXP op, SEXP args, SEXP env)
+{
+    checkArity(op, args);
+    return ScalarLogical(R_DotsExist(CAR(args)));
 }
 
 static SEXP ddfind(int i, SEXP rho)
