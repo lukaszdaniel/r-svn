@@ -109,7 +109,12 @@ static R_INLINE SEXP charFromSexp(SEXP s)
     }
 }
 
-bool R::Rf_pmatch(SEXP formal, SEXP tag, bool exact)
+Rboolean Rf_pmatch(SEXP formal, SEXP tag, Rboolean exact)
+{
+    return Rboolean(R_pmatch(formal, tag, bool(exact)));
+}
+
+bool R::R_pmatch(SEXP formal, SEXP tag, bool exact)
 {
     SEXP f = charFromSexp(formal);
     SEXP t = charFromSexp(tag);
@@ -279,7 +284,7 @@ attribute_hidden SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 	    } else {
 		for (b = supplied, i = 1; b != R_NilValue; b = CDR(b), i++) {
 		    if (ARGUSED(b) != 2 && TAG(b) != R_NilValue &&
-			pmatch(TAG(f), TAG(b), seendots)) {
+			R_pmatch(TAG(f), TAG(b), seendots)) {
 			if (ARGUSED(b))
 			    errorcall(call,
 				_("argument %d matches multiple formal arguments"), i);
@@ -474,7 +479,7 @@ attribute_hidden SEXP R::patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cl
     while (f != R_NilValue) {
 	if (TAG(f) != R_DotsSymbol) {
 	    for (b = prsupplied; b != R_NilValue; b = CDR(b)) {
-		if (TAG(b) != R_NilValue && pmatch(TAG(f), TAG(b), TRUE)) {
+		if (TAG(b) != R_NilValue && R_pmatch(TAG(f), TAG(b), TRUE)) {
 		    patchArgument(b, TAG(f), &farg[farg_i], cloenv);
 		    SET_ARGUSED(b, 2);
 		    break; /* Previous invocation of matchArgs_NR */
@@ -500,7 +505,7 @@ attribute_hidden SEXP R::patchArgsByActuals(SEXP formals, SEXP supplied, SEXP cl
 	    } else {
 		for (b = prsupplied; b != R_NilValue; b = CDR(b)) {
 		    if (!ARGUSED(b) && TAG(b) != R_NilValue &&
-			pmatch(TAG(f), TAG(b), seendots)) {
+			R_pmatch(TAG(f), TAG(b), seendots)) {
 
 			patchArgument(b, TAG(f), &farg[farg_i], cloenv);
 			SET_ARGUSED(b, 1);

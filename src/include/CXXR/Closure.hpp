@@ -256,6 +256,22 @@ namespace R
      */
     void SET_FORMALS(SEXP x, SEXP v);
 
+    /** @brief Access the body of a CXXR::Closure.
+     *
+     * @param x Pointer to a CXXR::Closure object (checked).
+     *
+     * @return Pointer to the body of \a x.
+     */
+    SEXP (BODY)(SEXP x);
+
+    /** @brief Access the environment of a CXXR::Closure.
+     *
+     * @param x Pointer to a CXXR::Closure object (checked).
+     *
+     * @return Pointer to the environment of x.
+     */
+    SEXP (CLOENV)(SEXP x);
+
     /** @brief Set the body of a CXXR::Closure.
      *
      * @param x Pointer to a CXXR::Closure object (checked).
@@ -328,22 +344,6 @@ namespace R
 
 extern "C"
 {
-    /** @brief Access the body of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @return Pointer to the body of \a x.
-     */
-    SEXP (BODY)(SEXP x);
-
-    /** @brief Access the environment of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @return Pointer to the environment of x.
-     */
-    SEXP (CLOENV)(SEXP x);
-
     /** @brief Access formal arguments of a CXXR::Closure.
      *
      * @param x Pointer to a CXXR::Closure object (checked).

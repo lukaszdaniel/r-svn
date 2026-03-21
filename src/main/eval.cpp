@@ -8531,7 +8531,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	       int n = LENGTH(names);
 	       int which = n - 1;
 	       for (int i = 0; i < n - 1; i++)
-		   if (pmatch(STRING_ELT(value, 0),
+		   if (R_pmatch(STRING_ELT(value, 0),
 			      STRING_ELT(names, i), TRUE /* exact */)) {
 		       which = i;
 		       break;

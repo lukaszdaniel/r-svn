@@ -660,6 +660,8 @@ SEXP CONS_NR(SEXP a, SEXP b);
 int  (MISSING)(SEXP x);
 
 /* Closure Access Functions */
+SEXP (BODY)(SEXP x);
+SEXP (CLOENV)(SEXP x);
 int  (RDEBUG)(SEXP x);
 int  (RSTEP)(SEXP x);
 int  (RTRACE)(SEXP x);
@@ -771,7 +773,7 @@ SEXP R_virtrep_vec(SEXP, SEXP);
 //SEXP R_tryWrap(SEXP); // now marked as @eapifun // declared in Rinternals.h
 SEXP R_tryUnwrap(SEXP);
 
-bool Rf_pmatch(SEXP, SEXP, bool);
+bool R_pmatch(SEXP, SEXP, bool);
 // Rboolean Rf_psmatch(const char *, const char *, Rboolean); // declared in Rinternals.h
 void printwhere(void);
 void readS3VarsFromFrame(SEXP, SEXP*, SEXP*, SEXP*, SEXP*, SEXP*, SEXP*);

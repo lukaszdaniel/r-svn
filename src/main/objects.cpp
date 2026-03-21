@@ -71,7 +71,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	s = NULL;
 	/** exact matches **/
 	for (b = cptr->promargs ; b != R_NilValue ; b = CDR(b))
-	    if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), TRUE)) {
+	    if (TAG(b) != R_NilValue && R_pmatch(tag, TAG(b), TRUE)) {
 		if (s != NULL)
 		    error(_("formal argument \"%s\" matched by multiple actual arguments"),
 		          CHAR(PRINTNAME(tag)));
@@ -82,7 +82,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	if (s == NULL)
 	    /** partial matches **/
 	    for (b = cptr->promargs ; b != R_NilValue ; b = CDR(b))
-		if (TAG(b) != R_NilValue && pmatch(tag, TAG(b), FALSE)) {
+		if (TAG(b) != R_NilValue && R_pmatch(tag, TAG(b), FALSE)) {
 		    if ( s != NULL)
 			error(_("formal argument \"%s\" matched by multiple actual arguments"),
 			      CHAR(PRINTNAME(tag)));

@@ -800,7 +800,7 @@ NORET static void verrorcall_dflt(SEXP call, const char *format, va_list ap)
 	if (length(opt) == 1 &&
 	    (asLogical(opt) == 1 ||
 	     (TYPEOF(opt) == STRSXP &&
-	      pmatch(ScalarString(mkChar("top")), opt, 0))))
+	      R_pmatch(ScalarString(mkChar("top")), opt, 0))))
 	    	show = true;
 
 	const char *dcall = CHAR(STRING_ELT(deparse1s(call), 0));

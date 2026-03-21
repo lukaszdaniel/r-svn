@@ -42,8 +42,8 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &BODYptr = BODY;
-        const auto &CLOENVptr = CLOENV;
+        const auto &BODYptr = R::BODY;
+        const auto &CLOENVptr = R::CLOENV;
         const auto &FORMALSptr = FORMALS;
         const auto &RSTEPptr = R::RSTEP;
         const auto &SET_CLOENVptr = R::SET_CLOENV;

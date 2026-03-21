@@ -3524,8 +3524,8 @@ void (R::SET_MISSING)(SEXP x, unsigned int v) { CR_ASSERT(x); SET_MISSING(CHKCON
 	error(_("%s: argument of type %s is not a closure"), \
 	      __func__, sexptype2char(TYPEOF(x)))
 SEXP (FORMALS)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(FORMALS(CHK(x))); }
-SEXP (BODY)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(BODY(CHK(x))); }
-SEXP (CLOENV)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(CLOENV(CHK(x))); }
+SEXP (R::BODY)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(BODY(CHK(x))); }
+SEXP (R::CLOENV)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(CLOENV(CHK(x))); }
 int (R::RDEBUG)(SEXP x) { CR_ASSERT(x); return RDEBUG(CHK(x)); }
 attribute_hidden int (R::RSTEP)(SEXP x) { CR_ASSERT(x); return RSTEP(CHK(x)); }
 SEXP R_ClosureFormals(SEXP x) { CR_ASSERT(x); return (FORMALS)(x); }
