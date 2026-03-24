@@ -217,7 +217,7 @@
       \code{"<system>.binary.<build>"} where \code{<system>} is
       lower-case name (letters only) of the system and \code{<build>} is
       the name of the build (alphanumeric and dashes). The corresponding
-      paths returned by \code{contrib.url} (which govern repository
+      paths returned by \code{contrib.url} (which govern the repository
       layout) with the above \code{type=} have the form
       \code{bin/<system>/<build>/contrib/<x.y>} where \code{<x.y>}
       is the \R version without patch level. This is a generalisation of
@@ -232,6 +232,33 @@
       this was only set by the macOS builds of \R). This should be
       typically only done by the author of a binary \R distribution to
       define the type of binaries supported by that build of \R.
+
+      \item If \R uses custom binary type in its
+      \code{.Platform$pkgType} then \code{R CMD INSTALL --build} will
+      produce \code{<package>_<ver>_R_<system>-<build>.tar.zstd} binary
+      files if \R has \command{zstd} support, \code{.tar.xz} otherwise.
+
+      \item New facilities have been introduced for package integrity
+      verification and package signing. The optional file \file{SHA256}
+      in a package contains \abbr{SHA}-256 hashes, lengths and paths
+      of files provided in the package allowing for more reliable integrity
+      verification (relative to \file{MD5}). This file is now generated
+      by default in \code{R CMD INSTALL --build} and optionally via
+      \code{R CMD build --sha256}. A package can be signed by creating a
+      detached GnuPG signature file \file{SHA256.sig} signing the
+      entirety of the \file{SHA256} file. Upon installation, the
+      signature is verified using GnuPG, thus ensuring the integrity of
+      the \file{SHA256} file and by induction all files in the package.
+      Both source and binary packages can be signed. Currently, this only
+      applies to tar-based packages, and the command-line GnuPG
+      \command{gpg} tool (or equivalent tool named in the \code{GPG}
+      environment variable) has to be available for signing and
+      verification to work. \code{R CMD INSTALL --sign} can be used to
+      sign binary packages, including its use with \code{--build}.
+      System-wide GnuPG keyrings for the \R installation
+      can be placed in \code{\var{R_HOME}/etc/keyrings} as files with
+      \file{.gpg} extensions and will be checked first before consulting
+      user's GnuPG keyring (if present).
 
       \item Experimentally, several math library (\file{math.h}) functions,
       such as \code{exp(.)}, \code{log1p()}, \code{sin()}, \code{atanh()},
@@ -264,6 +291,10 @@
 
       \item New function \code{bitstring()} as a user-friendly wrapper
       around \code{intToBits()}, etc.
+
+      \item \code{plot.lm()} now omits the smoother in the residuals vs 
+      leverage plot. This never made much sense, but if you really want it,
+      you can force the old behaviour by setting \code{panel.raw=panel.smooth}.
     }
   }
 
@@ -442,11 +473,11 @@
       \code{R_DelayedBindingExpression}, and
       \code{R_DelayedBindingEnvironment}.  Bindings for \code{...} in
       function call environments can be examined with
-      \code{R_DotsExist}, \code{R_DotsLength}, \code{R_DotsNames},
-      \code{R_DotsElt}, \code{R_GetDotType},
+      \code{R_findDotsEnv}, \code{R_DotsExist}, \code{R_DotsLength},
+      \code{R_DotsNames}, \code{R_DotsElt}, \code{R_GetDotType},
       \code{R_DotDelayedExpression}, \code{R_DotDelayedEnvironment}, and
-      \code{R_DotForcedExpression}. Contributed by Lionel Henry and
-      Davis Vaughan in \PR{18928}.
+      \code{R_DotForcedExpression}. Contributed by Lionel Henry, Davis
+      Vaughan, and Charlie Gao in \PR{18928}.
 
       \item New function \code{R_envSymbols} returns a vector of the
       symbols for which an environment contains bindings (\PR{18928}).

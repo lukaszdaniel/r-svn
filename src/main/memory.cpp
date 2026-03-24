@@ -3594,11 +3594,11 @@ attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { CR_ASSERT(x); SET_DDVAL(CH
     if (x != R_NilValue && TYPEOF(x) != ENVSXP)				\
 	error(_("%s: argument of type %s is not an environment or NULL"), \
 	      __func__, sexptype2char(TYPEOF(x)))
-attribute_hidden
+// attribute_hidden
 SEXP (R::FRAME)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(FRAME(CHK(x))); }
-attribute_hidden
+// attribute_hidden
 SEXP (R::ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(ENCLOS(CHK(x))); }
-attribute_hidden
+// attribute_hidden
 SEXP (R::HASHTAB)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
 //attribute_hidden
 int (ENVFLAGS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return ENVFLAGS(CHK(x)); }

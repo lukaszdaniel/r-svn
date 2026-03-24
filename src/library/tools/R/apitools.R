@@ -214,8 +214,9 @@ readFileSyms <- function(fpath) {
     else as.data.frame(v)[c("name", "type")]
 }
 
+
 ## crude approach based on string matching
-## **** this is to crude -- needs to allow more
+## **** this is too crude -- needs to allow more
 inRfunsCrude <- function(syms) {
     syms <- union(syms[syms == toupper(syms)],
                   grep("^_?Rf?_", syms, value = TRUE))
@@ -240,7 +241,7 @@ inRfuns <- function(syms) {
     if (length(rfuns) == 0)
         inRfunsCrude(syms)
     else
-        syms[unmap(syms) %in% unmap(rfuns)]
+        intersect(syms, rfuns)
 }
 
 cleanRfuns <- function(val) {
@@ -331,7 +332,7 @@ ofile_syms <- function(fname, keep = c("F", "V", "U")) {
         match_type <-function(type)
             ifelse(type == "T", "F", ifelse(type == "U", "U", "V"))
         val <- as.data.frame(v)[c("name", "type")]
-        val <- val[val$type %in% c("U", "B", "D", "T"), ]
+        val <- val[val$type %in% c("U", "B", "D", "T", "S"), ]
         val$type <- match_type(val$type)
         val <- val[val$type %in% keep, ]
         val
@@ -364,6 +365,26 @@ Rsyms <- function(keep = c("F", "V")) {
     rsyms
 }
 
+## only allows for variables specified in WRE for now
+varAPI <- function() {
+    varpat <- "^@(eapi|api|emb)var +.*"
+    vlines <- trimws(grepv(varpat, WRE()))
+    vars <- sub("^.* +", "", vlines)
+    atypes <- sub(varpat, "\\1", vlines)
+    data.frame(name = vars, loc = rep("WRE", length(vars)), apitype = atypes)
+}
+
+## similar to checkLibAPI but also picke up variables
+checkObjAPI <- function(exe) {
+    name <- NULL ## keep codetools happy
+    ofile_syms(exe, keep = "U") |>
+        clear_rownames() |>
+        transform(type = NULL) |>
+        merge(Rsyms()) |>
+        transform(name = sub("^_", "", name)) |>
+        merge(rbind(funAPI(), varAPI()), all.x = TRUE) |>
+        sort_by(~ apitype)
+}
 
 pkgRepo <- function(pkg, lib.loc = NULL) {
     pd <- utils::packageDescription(pkg, lib.loc = lib.loc)
