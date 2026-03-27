@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998-2025   The R Core Team
+ *  Copyright (C) 1998-2026   The R Core Team
  *  Copyright (C) 2002-2005  The R Foundation
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -1643,7 +1643,7 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-#include <Callbacks.h>
+#include <R_ext/Callbacks.h>
 
 static R_ToplevelCallbackEl *Rf_ToplevelTaskHandlers = NULL;
 

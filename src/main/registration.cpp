@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2002-2024	The R Core Team.
+ *  Copyright (C) 2002-2026	The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -61,7 +61,7 @@
     a C++ compiler because the linkage changes as the declarations
     are (currently) within extern "C" blocks.
 */
-#include <Callbacks.h>
+#include <R_ext/Callbacks.h>
 #include <R_ext/Rdynload.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Linpack.h>

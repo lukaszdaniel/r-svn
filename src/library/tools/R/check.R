@@ -318,6 +318,10 @@ add_dummies <- function(dir, Log)
     WINDOWS <- .Platform$OS.type == "windows"
     ## this requires on Windows: file.exe (optional)
 
+    Sys.setenv("_R_BIBTOOLS_CACHE_BIBENTRIES_" =
+                   Sys.getenv("_R_BIBTOOLS_CACHE_BIBENTRIES_",
+                              "TRUE"))
+
     wrapLog <- function(...) {
         text <- paste(..., collapse = " ")
         ## strwrap expects paras separated by blank lines.
@@ -2509,9 +2513,6 @@ add_dummies <- function(dir, Log)
         if (dir.exists("man") && !extra_arch) {
             checkingLog(Log, "Rd files")
             t1 <- proc.time()
-            Sys.setenv("_R_BIBTOOLS_CACHE_BIBENTRIES_" =
-                           Sys.getenv("_R_BIBTOOLS_CACHE_BIBENTRIES_",
-                                      "TRUE"))
             minlevel <- if (is_base_pkg) -Inf else
                 as.numeric(Sys.getenv("_R_CHECK_RD_CHECKRD_MINLEVEL_", "-1"))
             Rcmd <- paste(opWarn_string, "\n",
@@ -4024,6 +4025,9 @@ add_dummies <- function(dir, Log)
             haveObjs <- any(grepl("^ *Object", out))
             pat <- paste("possibly from",
                          sQuote("(abort|assert|exit|_exit|_Exit|stop)"))
+            if (pkgname %in% "S7")
+                ## allow Rf_findVarInFrame for now
+                warnNonAPI <- setdiff(warnNonAPI, "Rf_findVarInFrame")
             rempat <- paste(sprintf("\\b%s\\b", warnNonAPI), collapse = "|")
             if(haveObjs && any(grepl(pat, out)) && pkgname %notin% "parallel")
                 ## need _exit in forked child

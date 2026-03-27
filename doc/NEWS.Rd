@@ -8,6 +8,37 @@
 \section{\Rlogo Changes in R-devel}{
   \subsection{Significant User-Visible Changes}{
     \itemize{
+      \item .
+    }
+  }
+
+  \subsection{New Features}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{Installation}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{Package Installation}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{C-LEVEL FACILITIES}{
+    \itemize{
+      \item .
+    }
+  }
+}
+\section{\Rlogo Changes in R 4.6.0}{
+  \subsection{Significant User-Visible Changes}{
+    \itemize{
       \item The R citation now provides a \abbr{DOI}
       (\I{10.32614/R.manuals}): please update your
       bibliographies accordingly.
@@ -421,12 +452,16 @@
 
       \item New function \code{Rf_isScalarString}.
 
-      \item The non-API header files \file{R_ext/Callbacks.h} and
-      \file{R_ext/PrtUtil.h} are no longer copied to the installed
-      includes directory. The \code{R_ObjectTable} type definitions
-      formally in \file{R_ext/Callbacks.h} are now available in the new
-      header file \file{R_ext/ObjectTable.h}.  This new header file
-      should be used in packages instead of \file{R_ext/Callbacks.h}.
+      \item The \code{R_ObjectTable} type definitions formerly in
+      \file{R_ext/Callbacks.h} are now available in the new header file
+      \file{R_ext/ObjectTable.h}. This new header file should be used in
+      packages instead of \file{R_ext/Callbacks.h}.
+
+      \item Task callback support declared in \file{R_ext/Callbacks.h}
+      has been enabled again. It was disabled for \R 4.5.0.
+
+      \item The non-API header file \file{R_ext/PrtUtil.h} is no longer
+      copied to the installed \file{include} directory.
 
       \item New function \code{R_mapAttrib} for iterating over the
       attributes of an object.
@@ -476,16 +511,11 @@
       \code{R_findDotsEnv}, \code{R_DotsExist}, \code{R_DotsLength},
       \code{R_DotsNames}, \code{R_DotsElt}, \code{R_GetDotType},
       \code{R_DotDelayedExpression}, \code{R_DotDelayedEnvironment}, and
-      \code{R_DotForcedExpression}. Contributed by Lionel Henry, Davis
-      Vaughan, and Charlie Gao in \PR{18928}.
+      \code{R_DotForcedExpression}. Contributed by \I{Lionel Henry},
+      \I{Davis Vaughan}, and \I{Charlie Gao} in \PR{18928}.
 
       \item New function \code{R_envSymbols} returns a vector of the
       symbols for which an environment contains bindings (\PR{18928}).
-
-      \item The functions \code{Rf_findVar} and \code{findVarInFrame}
-      are now marked as non-API, and uses in packages will now receive
-      check \samp{WARNING}s.  See \sQuote{Writing R Extensions} for
-      alternatives to use.
 
       \item \command{R CMD check} \samp{NOTE}s on the use of the non-API
       entry points \code{PRCODE}, \code{SET_PRCODE}, \code{PRENV},
@@ -493,6 +523,14 @@
       \code{R_PromiseExpr}, and \code{Rf_allocSExp} have been upgraded
       to \samp{WARNING}s in preparation for removing declarations and,
       where possible, hiding these entry points.
+
+      \item New functions \code{R_getVar} and \code{R_getVarEx}. In most
+      cases these can be used instead of the non-API functions
+      \code{Rf_findVar} and \code{Rf_findVarInFrame}.  Other cases can
+      be handled by the new API for working with variable bindings.
+
+      \item Packages using any non-API variables will now receive check
+      \samp{NOTE}s.      
     }
   }
 
@@ -743,6 +781,10 @@
       \item \code{ar.burg()}, \code{ar.yw()} and \code{ar.ols()} deal
       better with non finite AIC values thanks to \I{Simone Giannerini}'s
       remarks on R-devel.
+
+      \item Parsing deeply nested expressions no longer should segfault in 
+      certain circumstances, fixing five different checks on context stack
+      size thanks to \I{Michael Chirico}'s report and patch in \PR{18994}.
     }
   }
 }

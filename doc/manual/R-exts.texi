@@ -8708,9 +8708,9 @@ UTF-8 in @LaTeX{} is quite low.
 @node Bibliographic citations and references
 @section Bibliographic citations and references
 
-For R at least 4.6.0 one can auto-generate bibliographic citations and
+For @R{} at least 4.6.0 one can auto-generate bibliographic citations and
 references from bibentries in bibliographic databases in R or Bib@TeX{}
-formats.  This is implemented via build stage @code{\Sexpr} macros
+formats.  This is implemented via build-stage @code{\Sexpr} macros
 (@pxref{Dynamic pages}) in the file @file{share/Rd/macros/system.Rd} of
 the @R{} source or home directory.  For @HTML{} output, the citations
 are conveniently hyperlinked to the corresponding references.
@@ -8719,24 +8719,25 @@ Textual and parenthetical citations are obtained via, respectively,
 @code{\bibcitet} and @code{\bibcitep} (the naming follows that of
 @code{\citet} and @code{\citep} in the @LaTeX{} @code{natbib} package
 (@uref{https://mirrors.ctan.org/macros/latex/contrib/natbib, Daly
-2010}).  These macros both take a comma separated @var{citespec} list as
-argument, where a @var{citespec} can be a @var{keyspec} or of the form
+2010}).  These single-argument macros both take either a comma-separated
+list of one or more @var{keyspec}s or a single @var{citespec} of the form
 @code{@var{before}|@var{keyspec}|@var{after}} with both @samp{|}
 mandatory and @var{before} and @var{after} possibly empty text to be
-inserted before and after the citation if not empty.  If these texts
-contain commas, these can be backslash-escaped: see the examples below.
+inserted before and after the citation if not empty.
 
 A @var{keyspec} is either a simple @var{key} or of the form
-@code{@var{pkg}::@var{key}}.  In the former case, @var{key} is taken as
-the key of a bibentry in R's system bibentry data base (available via
-the currently unexported @code{tools:::R_bibentries()} with sources in
-the @file{.R} files in the @file{share/bibentries} directory of the R
-sources).  In the latter case, @var{key} is looked up in the bibentry
+@code{@var{pkg}::@var{key}}.
+In the latter case, @var{key} is looked up in the bibentry
 data base of package @var{pkg}, made available in the packages sources
 either as @file{inst/REFERENCES.R} in R format (an R code file encoded
 in UTF-8 with calls to @code{bibentry()}, as for the
 @file{inst/CITATION} file) or as @file{inst/REFERENCES.bib} in Bib@TeX{}
 format (this needs @CRANpkg{bibtex} to be installed).
+A simple @var{key} without a @var{pkg} prefix is taken as the key of a
+``local'' bibentry (from the package containing the Rd file) or of R's
+system bibentry data base (available via the currently unexported
+@code{tools:::R_bibentries()}, with sources in R's
+@file{share/bibliographies} directory).
 
 References (usually in the @code{\references} section) are obtained via
 @code{\bibshow}, which takes a comma-separated @var{keyspec} list as
@@ -8761,11 +8762,11 @@ For example,
 gives a textual citation of the ``@emph{Blue Book}''
 (`@I{Becker, Chambers, and Wilks (1988)}' when first encountered),
 @example
-\bibcitep@{e.g.\,|R:Chambers+Hastie:1992|page 123@}
+\bibcitep@{|R:Chambers+Hastie:1992|page 123@}
 @end example
 @noindent
 gives a parenthetical citation of a page in the ``@emph{White Book}''
-(`@I{(e.g., Chambers and Hastie 1992, page 123)}' when first encountered).
+(`@I{(Chambers and Hastie 1992, page 123)}' when first encountered).
 An Rd file having cited the above two and also wanting to include the
 ``@emph{Green Book}'' in its references could use
 @example
@@ -8802,7 +8803,7 @@ disambiguate by manually adding the suffixes to the year fields, e.g.
 
 As these macros are evaluated at build stage, packages using these and
 built with R >= 4.6.0 can be used without problems for R < 4.6.0.
-(However, checking such packages with R < 4.6.0 will warn that these
+(However, checking such packages with R < 4.5.3 will warn that these
 macros are unknown.)
 
 @node Processing documentation files
@@ -12982,6 +12983,44 @@ functions get and set individual attributes.  Their second argument is a
 @code{SEXP} defining the name in the symbol table of the attribute we
 want; these and many such symbols are defined in the header file
 @file{Rinternals.h}.
+@comment FIXME once all of Rinternals.h is in the API we can drop these:
+@apivar R_AsCharacterSymbol
+@apivar R_BaseSymbol
+@apivar R_BraceSymbol
+@apivar R_Bracket2Symbol
+@apivar R_BracketSymbol
+@apivar R_ClassSymbol
+@apivar R_DeviceSymbol
+@apivar R_DimSymbol
+@apivar R_DollarSymbol
+@apivar R_DotsSymbol
+@apivar R_DoubleColonSymbol
+@apivar R_DropSymbol
+@apivar R_EvalSymbol
+@apivar R_FunctionSymbol
+@apivar R_LastvalueSymbol
+@apivar R_LevelsSymbol
+@apivar R_ModeSymbol
+@apivar R_NaRmSymbol
+@apivar R_NameSymbol
+@apivar R_NamespaceEnvSymbol
+@apivar R_PackageSymbol
+@apivar R_PreviousSymbol
+@apivar R_QuoteSymbol
+@apivar R_RowNamesSymbol
+@apivar R_SeedsSymbol
+@apivar R_SortListSymbol
+@apivar R_SourceSymbol
+@apivar R_SpecSymbol
+@apivar R_TripleColonSymbol
+@apivar R_TspSymbol
+@apivar R_dot_Generic
+@apivar R_dot_Method
+@apivar R_dot_defined
+@apivar R_dot_packageName
+@apivar R_dot_target
+@apivar R_AtsignSymbol
+@apivar R_baseSymbol
 
 There are shortcuts here too: the functions @code{Rf_namesgets},
 @code{Rf_dimgets} and @code{Rf_dimnamesgets} are the internal versions of the
@@ -13405,6 +13444,13 @@ SEXP Rf_ScalarString(SEXP);
 SEXP Rf_mkString(const char *);
 @end group
 @end example
+
+Some useful pre-allocated values are available as
+@code{R_BlankScalarString}, @code{R_BlankString}, and @code{R_NaString}
+@eapivar R_BlankScalarString
+@eapivar R_BlankString
+@eapivar R_NaString
+
 
 Some of the @code{Rf_is@var{XXXX}} functions differ from their apparent
 @R{}-level counterparts: for example @code{Rf_isVector} is true for any
@@ -14566,7 +14612,14 @@ SEXP menu_ttest3()
 @end example
 @noindent
 Note that a single line of text may give rise to more than one @R{}
-expression.
+expression. @code{R_GlobalEnv} provides access from C to the @R{}-level
+@code{.GlobalEnv}. The base environment, base namespace, and empty
+environment can be accessed as @code{R_BaseEnv}, @code{R_BaseNamespace},
+and @code{R_EmptyEnv}.
+@apivar R_GlobalEnv
+@apivar R_BaseEnv
+@apivar R_BaseNamespace
+@apivar R_EmptyEnv
 
 @apifun R_ParseVector
 @code{R_ParseVector} is essentially the code used to implement
@@ -17529,6 +17582,8 @@ above (no longer maintained)
 @item @file{Rembedded.h} @tab for add-on front-ends
 @item @file{R_ext/Applic.h} @tab optimization, integration and some LAPACK ones)
 @item @file{R_ext/BLAS.h} @tab C definitions for BLAS routines
+@item @file{R_ext/Callbacks.h} @tab C (and R function) top-level task
+handlers
 @item @file{R_ext/GetX11Image.h} @tab X11Image interface used by package
 @pkg{trkplot}
 @item @file{R_ext/Lapack.h} @tab C definitions for some LAPACK routines
@@ -17597,6 +17652,25 @@ be used in system headers, or (preferably and the default since @R{}
 @c INSTALL} to compile C++ code defining @code{R_NO_REMAP}.
 @c @env{_R_CXX_USE_NO_REMAP_} is set by @command{R CMD check --as-cran} and
 @c is planned to become the default in future.
+
+
+@node Hash tables
+@section Hash tables
+An implementation of hash tables is available that is accessible from
+the @R{} and C level. The C interface is experimental and may change.
+It is currently declared in @file{Rinternals.h}.
+@eapifun R_asHashtable
+@eapifun R_HashtabSEXP
+@eapifun R_isHashtable
+@eapifun R_mkhashtab
+@eapifun R_gethash
+@eapifun R_sethash
+@eapifun R_remhash
+@eapifun R_numhash
+@eapifun R_typhash
+@eapifun R_maphash
+@eapifun R_maphashC
+@eapifun R_clrhash
 
 
 @node Moving into C API compliance
@@ -18438,7 +18512,7 @@ contain an existing writable directory, and it is not
 cleaned up when @R{} is shut down.
 @embvar R_TempDir
 
-@embfun R_Interactive
+@embvar R_Interactive
 @embhdr Rinterface.h
 @code{Rf_initEmbeddedR} sets @R{} to be in interactive mode: you can set
 @code{R_Interactive} (defined in @file{Rinterface.h}) subsequently to
@@ -18846,8 +18920,8 @@ used by the @pkg{tcltk} package. Input handlers are managed with
 @code{addInputHandler},@code{getInputHandler}, and
 @code{removeInputHandler}. The handlers are held in a linked list
 @code{R_InputHandlers}.
-@embfun R_PolledEvents
-@embfun R_wait_usec
+@embvar R_PolledEvents
+@embvar R_wait_usec
 @embfun addInputHandler
 @embfun getInputHandler
 @embfun removeInputHandler
@@ -19246,6 +19320,17 @@ using backslashes).  If it does not, look for version-specific keys like
 algorithm as @code{2.11.0 patched > 2.11.0 > 2.11.0 alpha > 2.8.1}) and
 use its value for @code{InstallPath}.
 @end itemize
+
+@node Task callbacks
+@section Task callbacks
+The file @file{R_ext/Callbacks.h} defines an API for working with task
+callbacks from the C level.  This corresponds to the @R{} level
+interface provided by @code{addTaskCallback()} and
+@code{removeTaskCallback()}.  The C interface is likely to be most
+useful in embedded contexts.
+@c could mark as @embhdr but might be useful elsewhere
+@eapihdr R_ext/Callbacks.h
+
 
 
 @node Function and variable index

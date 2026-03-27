@@ -568,6 +568,8 @@ void R_check_thread(const char *s);
 */
 
 /* General Cons Cell Attributes */
+// SEXP (ATTRIB)(SEXP x); // declared in Rinternals.h
+// void SET_ATTRIB(SEXP x, SEXP v); // declared in Rinternals.h
 int  (MARK)(SEXP x);
 // int  (OBJECT)(SEXP x); // declared in Rinternals.h
 int  (NAMED)(SEXP x);
@@ -700,6 +702,10 @@ void (SET_PRSEEN)(SEXP x, int v);
 // void SET_PRCODE(SEXP x, SEXP v); // declared in Rinternals.h
 void IF_PROMSXP_SET_PRVALUE(SEXP x, SEXP v);
 bool (PROMISE_IS_EVALUATED)(SEXP x);
+// SEXP R_PromiseExpr(SEXP); // declared in Rinternals.h
+#ifndef PREXPR
+// #define PREXPR(e) R_PromiseExpr(e) // declared in Rinternals.h
+#endif
 
 /* External pointer access macros */
 SEXP (EXTPTR_PROT)(SEXP);
@@ -1461,6 +1467,7 @@ SEXP allocFormalsList4(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4);
 SEXP allocFormalsList5(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5);
 SEXP allocFormalsList6(SEXP sym1, SEXP sym2, SEXP sym3, SEXP sym4, SEXP sym5, SEXP sym6);
 SEXP R_allocObject(void);
+// SEXP Rf_allocSExp(SEXPTYPE); // declared in Rinternals.h
 SEXP arraySubscript(int, SEXP, SEXP, SEXP (*)(SEXP,SEXP),
                        SEXP (*)(SEXP, int), SEXP);
 SEXP int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, SEXP call);
@@ -1717,6 +1724,9 @@ bool R_GetVarLocMISSING(R_varloc_t);
 void R_SetVarLocValue(R_varloc_t, SEXP);
 SEXP R_findVar(SEXP, SEXP);
 SEXP R_findVarInFrame(SEXP, SEXP);
+// SEXP Rf_findVar(SEXP, SEXP); // declared in Rinternals.h
+// SEXP Rf_findVarInFrame(SEXP, SEXP); // declared in Rinternals.h
+// SEXP Rf_findVarInFrame3(SEXP, SEXP, Rboolean); // envir.c // declared in Rinternals.h
 
 /* deparse option bits: change do_dump if more are added */
 enum DeparseOptionBits
