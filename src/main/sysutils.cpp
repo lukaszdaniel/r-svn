@@ -73,6 +73,13 @@
 using namespace R;
 using namespace CXXR;
 
+#ifdef HAVE_AQUA
+extern "C"
+{
+int (*ptr_CocoaSystem)(const char*);
+}
+#endif
+
 #ifdef Win32
 bool R::R_FileExists(const char *path)
 {
