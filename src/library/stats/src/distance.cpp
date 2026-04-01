@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998-2017  The R Core Team
+ *  Copyright (C) 1998-2026  The R Core Team
  *  Copyright (C) 2002-2017  The R Foundation
  *  Copyright (C) 1995, 1996 Robert Gentleman and Ross Ihaka
  *
@@ -30,6 +30,7 @@
 #include "stats.h"
 #include "localization.h"
 #ifdef _OPENMP
+# define USE_MATH_THREADS
 # include <R_ext/MathThreads.h>
 #endif
 

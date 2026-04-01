@@ -30,13 +30,15 @@
     }
   }
 
-  \subsection{C-LEVEL FACILITIES}{
+  \subsection{C-Level Facilities}{
     \itemize{
       \item .
     }
   }
 }
+
 \section{\Rlogo Changes in R 4.6.0}{
+
   \subsection{Significant User-Visible Changes}{
     \itemize{
       \item The R citation now provides a \abbr{DOI}
@@ -137,6 +139,10 @@
 
       \item \code{chkDots()}' optional argument \code{allowed} has been
       implemented thanks to \I{Trevor Davis}' proposal in \PR{18936}.
+
+      \item New function \code{messageCondition()} to create structured
+      \code{"message"} objects analogous to \code{warningCondition()}
+      and \code{errorCondition()} (\PR{18940}, by \I{Trevor Davis}).
 
       \item \code{wilcox.test()} can now perform exact (conditional)
       inference in case of ties.  Based on contributions by
@@ -323,9 +329,13 @@
       \item New function \code{bitstring()} as a user-friendly wrapper
       around \code{intToBits()}, etc.
 
-      \item \code{plot.lm()} now omits the smoother in the residuals vs 
+      \item \code{plot.lm()} now omits the smoother in the residuals vs
       leverage plot. This never made much sense, but if you really want it,
       you can force the old behaviour by setting \code{panel.raw=panel.smooth}.
+
+      \item \code{hatvalues()} now has a method for \code{nls} (nonlinear
+      model) results, prompted by the proposal of \I{Patrice Kiener} and
+      \I{Heather Turner} in \PR{18897}.
     }
   }
 
@@ -530,7 +540,11 @@
       be handled by the new API for working with variable bindings.
 
       \item Packages using any non-API variables will now receive check
-      \samp{NOTE}s.      
+      \samp{NOTE}s.
+
+      \item New function \code{R_getRegisteredNamespace} finds and
+      returns the namespace environment registered for a name, or
+      \code{R_NilValue} if none is found.
     }
   }
 
@@ -782,9 +796,16 @@
       better with non finite AIC values thanks to \I{Simone Giannerini}'s
       remarks on R-devel.
 
-      \item Parsing deeply nested expressions no longer should segfault in 
+      \item Parsing deeply nested expressions no longer should segfault in
       certain circumstances, fixing five different checks on context stack
-      size thanks to \I{Michael Chirico}'s report and patch in \PR{18994}.
+      size, thanks to \I{Kevin Ushey}'s report and \I{Michael Chirico}'s
+      patch in \PR{18994}.
+
+      \item The internal \code{cwilcox} function used in computations
+      for the Wilcoxon distribution is now based on an implementation of
+      a formula by \I{Andreas Löffler} provided by \I{Andreas Löffler},
+      \I{Aidan Lakshman}, and \I{Ivan Krylov}, substantially reducing
+      the memory complexity of the original implementation (\PR{18655}).
     }
   }
 }
