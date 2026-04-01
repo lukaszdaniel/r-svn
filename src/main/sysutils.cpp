@@ -76,7 +76,7 @@ using namespace CXXR;
 #ifdef HAVE_AQUA
 extern "C"
 {
-int (*ptr_CocoaSystem)(const char*);
+extern int (*ptr_CocoaSystem)(const char*);
 }
 #endif
 
