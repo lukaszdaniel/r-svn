@@ -99,6 +99,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Parse.h>
@@ -901,15 +902,15 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   235,   235,   236,   237,   240,   243,   246,   247,   249,
-     250,   251,   252,   253,   254,   255,   256,   257,   258,   259,
-     260,   261,   262,   264,   265,   267,   268,   269,   270,   271,
-     272,   273,   274,   275,   277,   278,   279,   280,   281,   282,
-     283,   284,   285,   286,   287,   288,   289,   290,   291,   292,
-     293,   295,   296,   297,   298,   300,   302,   305,   307,   309,
-     312,   315,   320,   322,   323,   332,   334,   336,   340,   341,
-     343,   345,   349,   350,   352,   355,   357,   359,   361,   363,
-     365,   367,   369,   371,   373,   374,   375,   376,   377,   379
+       0,   236,   236,   237,   238,   241,   244,   247,   248,   250,
+     251,   252,   253,   254,   255,   256,   257,   258,   259,   260,
+     261,   262,   263,   265,   266,   268,   269,   270,   271,   272,
+     273,   274,   275,   276,   278,   279,   280,   281,   282,   283,
+     284,   285,   286,   287,   288,   289,   290,   291,   292,   293,
+     294,   296,   297,   298,   299,   301,   303,   306,   308,   310,
+     313,   316,   321,   323,   324,   333,   335,   337,   341,   342,
+     344,   346,   350,   351,   353,   356,   358,   360,   362,   364,
+     366,   368,   370,   372,   374,   375,   376,   377,   378,   380
 };
 #endif
 
@@ -3483,9 +3484,9 @@ static int xxungetc(int c)
 
 static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 {
-    SEXP val;
+    GCStackRoot<IntVector> val;
 
-    PROTECT(val = allocVector(INTSXP, 6));
+    val = IntVector::create(6);
     INTEGER(val)[0] = lloc->first_line;
     INTEGER(val)[1] = lloc->first_byte;
     INTEGER(val)[2] = lloc->last_line;
@@ -3494,19 +3495,15 @@ static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
     INTEGER(val)[5] = lloc->last_column;
     setAttrib(val, R_SrcfileSymbol, srcfile);
     setAttrib(val, R_ClassSymbol, mkString("srcref"));
-    UNPROTECT(1); /* val */
+
     return val;
 }
 
 static SEXP mkString2(const char *s, size_t len)
 {
-    SEXP t;
-    cetype_t enc = CE_UTF8;
-
-    PROTECT(t = allocVector(STRSXP, 1));
-    SET_STRING_ELT(t, 0, mkCharLenCE(s, (int) len, enc));
-    UNPROTECT(1); /* t */
-    return t;
+    GCStackRoot<String> name;
+    name = String::obtain(s, (int) len, CE_UTF8);
+    return StringVector::createScalar(name);
 }
 
 

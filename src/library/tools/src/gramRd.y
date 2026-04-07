@@ -31,6 +31,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Parse.h>
@@ -948,9 +949,9 @@ static int xxungetc(int c)
 
 static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
 {
-    SEXP val;
+    GCStackRoot<IntVector> val;
 
-    PROTECT(val = allocVector(INTSXP, 6));
+    val = IntVector::create(6);
     INTEGER(val)[0] = lloc->first_line;
     INTEGER(val)[1] = lloc->first_byte;
     INTEGER(val)[2] = lloc->last_line;
@@ -959,19 +960,15 @@ static SEXP makeSrcref(YYLTYPE *lloc, SEXP srcfile)
     INTEGER(val)[5] = lloc->last_column;
     setAttrib(val, R_SrcfileSymbol, srcfile);
     setAttrib(val, R_ClassSymbol, mkString("srcref"));
-    UNPROTECT(1); /* val */
+
     return val;
 }
 
 static SEXP mkString2(const char *s, size_t len)
 {
-    SEXP t;
-    cetype_t enc = CE_UTF8;
-
-    PROTECT(t = allocVector(STRSXP, 1));
-    SET_STRING_ELT(t, 0, mkCharLenCE(s, (int) len, enc));
-    UNPROTECT(1); /* t */
-    return t;
+    GCStackRoot<String> name;
+    name = String::obtain(s, (int) len, CE_UTF8);
+    return StringVector::createScalar(name);
 }
 
 
