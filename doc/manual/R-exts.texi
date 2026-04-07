@@ -14676,7 +14676,6 @@ call = R_ParseString("base::nameOfClass(X)");
 The source references added by the parser are recorded by @R{}'s evaluator
 as it evaluates code. Two functions
 make these available to debuggers running C code:
-@findex R_Srcref
 @apifun R_GetCurrentSrcref
 @apifun R_GetSrcFilename
 
@@ -18835,6 +18834,7 @@ void R_CleanUp (SA_TYPE saveact, int status, int RunLast)
 @embfun fpu_setup
 @comment FIXME need to mention R_RunPendingFinalizers in text
 @embfun R_RunPendingFinalizers
+@embvar SaveAction
 
 These callbacks should never be changed in a running @R{} session (and
 hence cannot be called from an extension package).

@@ -1249,6 +1249,12 @@ LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 // LibExtern bool R_interrupts_suspended INI_as(FALSE); // declared in GraphicsDevice.h
 // LibExtern bool R_interrupts_pending INI_as(FALSE); // declared in GraphicsDevice.h
 
+/* Special Values for Internal Use */
+LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
+LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state
+				       (marker) */
+LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
+
 /* R Home Directory */
 // LibExtern char *R_Home;		    /* Root of the R tree */ // declared in Rinterface.h
 
@@ -1694,16 +1700,16 @@ int R_XDRDecodeInteger(void *buf);
 /* The maximum length of input line which will be asked for,
    in bytes, including the terminator */
 #define CONSOLE_BUFFER_SIZE 4096
-// int R_ReadConsole(const char *, unsigned char *, int, int); // used by rJava package
-void	R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, otype_t(0)) */
-void	R_WriteConsoleEx(const char *, int, otype_t);
-void	R_ResetConsole(void);
+// int R_ReadConsole(const char *, unsigned char *, int, int); // declared in Rinterface.h
+// void R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, otype_t(0)) */ // declared in Rinterface.h
+// void R_WriteConsoleEx(const char *, int, otype_t); // declared in Rinterface.h
+// void R_ResetConsole(void); // declared in Rinterface.h
 // void R_FlushConsole(void); // declared in R.h and Rinterface.h
 // void R_ClearerrConsole(void); // declared in Rinterface.h
-void	R_Busy(int);
+// void R_Busy(int); // declared in Rinterface.h
 int	R_ShowFiles(int, const char **, const char **, const char *,
 		    Rboolean, const char *);
-int     R_EditFiles(int, const char **, const char **, const char *);
+// int R_EditFiles(int, const char **, const char **, const char *); // declared in Rinterface.h
 int	R_ChooseFile(int, char *, int);
 // char	*R_HomeDir(void); // declared in Rinterface.h
 bool R_FileExists(const char *);
@@ -2356,11 +2362,16 @@ void R_RestoreGlobalEnvFromFile(const char *, bool);
 void R_SaveGlobalEnv(void);
 void R_SaveGlobalEnvToFile(const char *);
 NORET void R_Suicide(const char *);
+void R_Busy(int); // declared in Rinterface.h
+int R_ReadConsole(const char *, unsigned char *, int, int); // declared in Rinterface.h
+void R_WriteConsole(const char *, int); /* equivalent to R_WriteConsoleEx(a, b, otype_t(0)) */ // declared in Rinterface.h
+void R_WriteConsoleEx(const char *, int, otype_t); // declared in Rinterface.h
+void R_ResetConsole(void); // declared in Rinterface.h
+int R_EditFiles(int, const char **, const char **, const char *); // declared in Rinterface.h
+void run_Rmainloop(void); // // declared in RStartup.h
 
 // Functions not in R API but used by other R packages
 void Rf_checkArityCall(SEXP, SEXP, SEXP); // used by rJava package
-void run_Rmainloop(void); // used by rJava package
-int R_ReadConsole(const char *, unsigned char *, int, int); // used by rJava package
 #ifdef __cplusplus
 } // extern "C"
 #endif

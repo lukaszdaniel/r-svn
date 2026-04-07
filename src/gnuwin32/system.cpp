@@ -266,7 +266,7 @@ int R_ReadConsole(const char *prompt, unsigned char *buf, int len,
 	/* Write a text buffer to the console. */
 	/* All system output is filtered through this routine. */
 
-void R::R_WriteConsole(const char *buf, int len)
+void R_WriteConsole(const char *buf, int len)
 {
     R_ProcessEvents();
     if (ptr_WriteConsole) ptr_WriteConsole(buf, len);
@@ -274,7 +274,7 @@ void R::R_WriteConsole(const char *buf, int len)
 }
 
 
-void R::R_WriteConsoleEx(const char *buf, int len, otype_t otype)
+void R_WriteConsoleEx(const char *buf, int len, otype_t otype)
 {
     R_ProcessEvents();
     if (ptr_WriteConsole) ptr_WriteConsole(buf, len);
@@ -522,7 +522,7 @@ static void TermWriteConsoleEx(const char *buf, int len, otype_t otype)
 
 	/* Indicate that input is coming from the console */
 
-void R::R_ResetConsole(void)
+void R_ResetConsole(void)
 {
     ptr_ResetConsole();
 }
@@ -571,7 +571,7 @@ static void CharBusy(int which)
 {
 }
 
-void R::R_Busy(int which)
+void R_Busy(int which)
 {
     ptr_Busy(which);
 }
@@ -757,7 +757,7 @@ int R::R_ShowFiles(int nfile, const char **file, const char **headers,
      */
 
 /* As from R 2.7.0 we assume file, editor are in UTF-8 */
-int R::R_EditFiles(int nfile, const char **file, const char **title,
+int R_EditFiles(int nfile, const char **file, const char **title,
 		const char *editor)
 {
     int   ll;

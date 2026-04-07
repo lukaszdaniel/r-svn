@@ -287,11 +287,11 @@ LibExtern SEXP	R_Srcref;           /* Current srcref, for debuggers */
 #ifndef R_NilValue
 #define R_NilValue NULL
 #endif
-LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
+// LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
 LibExtern SEXP	R_MissingArg;	    /* Missing argument marker */
-LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state
-				       (marker) */
-LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
+// LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state
+// 				       (marker) */
+// LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
 #ifdef __MAIN__
 attribute_hidden
 #else

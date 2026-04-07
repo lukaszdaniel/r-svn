@@ -38,7 +38,9 @@ extern bool EmitEmbeddedUTF8; // was Rboolean, but bool in structRstart
 
 #include <R_ext/Error.h>  // includes NORET macro
 
+extern "C" {
 NORET void R_CleanUp(SA_TYPE, int, int);
+} // extern "C"
 void R_StartUp(void);
 
 FILE *R_OpenInitFile(void);

@@ -1,7 +1,7 @@
 #  File src/library/tools/R/apitools.R
 #  Part of the R package, https://www.R-project.org
 #
-#  Copyright (C) 2024 The R Core Team
+#  Copyright (C) 2024-2026 The R Core Team
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -118,7 +118,13 @@ getFunsHdr <- function(fpath, lines) {
 
     lines <- lines[! grepl("^#\\s*error", lines)] ## for GraphicsDevice.h
 
-    lines <- ccE(lines)
+    if (! missing(fpath) && name == "Utils.h")
+        lines <- c("#include <R_ext/RS.h>", lines)
+    if (! missing(fpath) && name == "Rinterface.h")
+        flags <- "-DHAVE_AQUA -DR_INTERFACE_PTRS"
+    else
+        flags <- "-DR_INTERFACE_PTRS"
+    lines <- ccE(lines, flags = flags)
     lines <- dropBraces(lines)
 
     ## these could be incorporated into the regex
@@ -147,13 +153,15 @@ getFunsHdr <- function(fpath, lines) {
     val
 }
 
-ccE <- function(lines, include = R.home("include"), clean = TRUE) {
+ccE <- function(lines, include = R.home("include"), flags, clean = TRUE) {
     if (Sys.which("cc") == "")
         stop("'cc' is not on the path")
     tfile <- tempfile(fileext = ".h")
     on.exit(unlink(tfile))
     writeLines(lines, tfile)
     cmd <- sprintf("cc -E -I%s %s", include, tfile)
+    if (! missing(flags))
+        cmd <- paste(cmd, flags)
     val <- system(cmd, intern=TRUE)
     if (clean)
         ccEclean(val, tfile)
@@ -335,6 +343,7 @@ ofile_syms <- function(fname, keep = c("F", "V", "U")) {
         val <- val[val$type %in% c("U", "B", "D", "T", "S"), ]
         val$type <- match_type(val$type)
         val <- val[val$type %in% keep, ]
+        val$name <- sub("^_", "", val$name)
         val
     }    
 }
@@ -372,14 +381,24 @@ getVarsHdr <- function(fpath, lines) {
         if (! file.exists(fpath))
             return(NULL) ## some headers may not exist on all platforms
         lines <- readLines(fpath)
+        name <- basename(fpath)
     }
+    else name <- NULL
+
+    lines <- lines[! grepl("^#\\s*error", lines)] ## for GraphicsDevice.h
+
+    if (! missing(fpath) && name == "Rinterface.h")
+        flags <- "-DHAVE_AQUA -DR_INTERFACE_PTRS"
+    else
+        flags <- "-DR_INTERFACE_PTRS"
+    lines <- ccE(lines, flags = flags)
     fppat <- r"(^\s*(extern|LibExtern)\s+\w+\s+\(\s*\*\s*(\w+)\).*)"
     vpat <- r"(^\s*(extern|LibExtern)\s+\w+(\s+|\s*\*\s*)(\w+)\s*;.*)"
     c(sub(vpat, "\\3", grepv(vpat, lines)),
       sub(fppat, "\\2", grepv(fppat, lines)))
 }
 
-varAPI <- function () 
+getVarAPI <- function () 
 {
     varpat <- "^@(eapi|api|emb)var +.*"
     vlines <- trimws(grepv(varpat, WRE()))
@@ -401,7 +420,13 @@ varAPI <- function ()
     clear_rownames(val)
 }
 
-## similar to checkLibAPI but also picke up variables
+varAPI <- function() {
+    if (is.null(apidata$vapi))
+        apidata$vapi <- getVarAPI()
+    apidata$vapi
+}
+
+## similar to checkLibAPI but also picks up variables
 checkObjAPI <- function(exe) {
     name <- NULL ## keep codetools happy
     ofile_syms(exe, keep = "U") |>
