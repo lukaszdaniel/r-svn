@@ -91,9 +91,9 @@ namespace CXXR
     bool Promise::evaluated() const
     {
 #ifdef IMMEDIATE_PROMISE_VALUES
-        return (hasUnexpandedValue() || m_value != R::R_UnboundValue);
+        return (hasUnexpandedValue() || m_value != R_UnboundValue);
 #endif
-        return (u.promsxp.m_value != R::R_UnboundValue);
+        return (u.promsxp.m_value != R_UnboundValue);
         // return m_env == R_NilValue;
     }
 

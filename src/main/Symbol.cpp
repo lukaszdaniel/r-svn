@@ -73,7 +73,7 @@ namespace CXXR
 
     SEXP Symbol::unboundValue()
     {
-        return R::R_UnboundValue;
+        return R_UnboundValue;
     }
 
     const char *Symbol::typeName() const

@@ -1250,7 +1250,7 @@ LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 // LibExtern bool R_interrupts_pending INI_as(FALSE); // declared in GraphicsDevice.h
 
 /* Special Values for Internal Use */
-LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
+// LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
 LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state
 				       (marker) */
 LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
