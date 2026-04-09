@@ -273,8 +273,10 @@
 
       \item If \R uses custom binary type in its
       \code{.Platform$pkgType} then \code{R CMD INSTALL --build} will
-      produce \code{<package>_<ver>_R_<system>-<build>.tar.zstd} binary
-      files if \R has \command{zstd} support, \code{.tar.xz} otherwise.
+      produce \code{<package>_<ver>_R_<system>-<build>.tar.xz} binary
+      files. Please note that future versions may use \code{.zstd}
+      compression by default so package tooling should support any of
+      the above mentioned extensions.
 
       \item New facilities have been introduced for package integrity
       verification and package signing. The optional file \file{SHA256}
@@ -406,6 +408,18 @@
       \code{"Built"} field is considered even if the package version is
       identical to allow binary package repositories to update binaries
       without the need to increase the package version.
+
+      \item The \code{"Built"} column returned by
+      \code{available.packages()} and \code{old.packages()} now contains
+      the full value of the \code{"Built"} entry (if present) in the
+      \file{DESCRIPTION} file. Previously, only the \R version from the
+      \code{"Built"} entry was returned.
+
+      \item If the timestamp passed as {--built-timestamp} to
+      \code{R CMD INSTALL} is in RFC-822 form (with time-zone offset)
+      it will be converted to ISO UTC form to conform to the format
+      used by \R for purposes described above. (\PR{19037}, thanks to
+      \I{Dirk Eddelbuettel})
     }
   }
 

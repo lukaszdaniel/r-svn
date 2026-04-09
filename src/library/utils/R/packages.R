@@ -32,7 +32,8 @@ function(contriburl = contrib.url(repos, type), method,
     ## on a system with binaries the default pkgType will contain "binary" or "both" so we take it
     ## as a hint that one of them may be binary and thus we need "Built"
     requiredFields <-
-        c(tools:::.get_standard_repository_db_fields(), "File", if(any(grepl("(binary|both)", type))) "Built")
+        c(tools:::.get_standard_repository_db_fields(), "File", "Published",
+          if(any(grepl("(binary|both)", type))) "Built")
     if (is.null(fields))
 	fields <- requiredFields
     else {
@@ -438,8 +439,10 @@ update.packages <- function(lib.loc = NULL, repos = getOption("repos"),
         stop("specifying 'contriburl' or 'available' requires a single type, not type = \"both\"")
     }
     if(is.null(available)) {
-        available <- available.packages(contriburl = contriburl,
-                                        method = method, ...)
+        available <- if (type == "both" && .Platform$pkgType != "source")
+                         .available.both(repos, method, ...)
+                     else
+                         available.packages(contriburl = contriburl, method = method, ...)
         if (missing(repos)) repos <- getOption("repos") # May have changed
     }
     if(!is.matrix(oldPkgs) && is.character(oldPkgs)) {
@@ -525,6 +528,29 @@ update.packages <- function(lib.loc = NULL, repos = getOption("repos"),
 .builtRver <- function(built) ## convert full "Built" string to just R version (unless it is already)
     gsub("^R ([0-9.]+).*", "\\1", built)
 
+## this is a wrapper of available.packages that handles the special case of type="both"
+## by calling available.packages twice: once with "source" and once with "binary",
+## combing the result. Given that the combination step is subject to specific choices,
+## the logic in this wrapper is tailored for internal use in update.packages and old.packages.
+.available.both <- function(repos, method, ...) {
+    ## "both" gets complicated as we have to use available.packages twice
+    fields <- c(tools:::.get_standard_repository_db_fields(), "File", "Built")
+    av.src <- available.packages(contriburl = contrib.url(repos, "source"), method = method, fields = fields, ...)
+    av.bin <- available.packages(contriburl = contrib.url(repos, "binary"), method = method, fields = fields, ...)
+    ## we keep things simple in that we use source unless there is the same binary version
+    ## so that we can get at the Built field. This is more simple than in install.packages
+    ## since we only care about determining whether a package is new, but not which type is
+    ## preferred - install.packages will sort that out.
+    pkg.src <- row.names(av.src)
+    pkg.bin <- row.names(av.bin)
+    bin.ver <- av.bin[pkg.bin, "Version"]
+    src.ver <- av.src[pkg.bin, "Version"]
+    use.bin <- pkg.bin[as.numeric_version(bin.ver) >= as.numeric_version(src.ver)]
+    use.bin <- use.bin[!is.na(use.bin)]
+    use.src <- pkg.src[pkg.src %notin% use.bin]
+    rbind(av.src[use.src,], av.bin[use.bin, ])
+}
+
 old.packages <- function(lib.loc = NULL, repos = getOption("repos"),
                          contriburl = contrib.url(repos, type),
                          instPkgs = installed.packages(lib.loc = lib.loc, ...),
@@ -542,20 +568,29 @@ old.packages <- function(lib.loc = NULL, repos = getOption("repos"),
     }
     if(NROW(instPkgs) == 0L) return(NULL)
 
-    available <- if(is.null(available))
-        available.packages(contriburl = contriburl, method = method, ...)
-    else tools:::.remove_stale_dups(available)
+    ## NB: type is ignored if either available or contriburl is specified.
+    ## update.packages() raises an error in that case, but we can't really do that,
+    ## becuase we get called with available internally
+    available <- if(is.null(available)) {
+                     if (type == "both" && .Platform$pkgType != "source")
+                         .available.both(repos, method, ...)
+                     else
+                         available.packages(contriburl = contriburl, method = method, ...)
+                 } else tools:::.remove_stale_dups(available)
 
     update <- NULL
+
+    ## safely attempt to parse a (possibly incomplete) timestamp in UTC
+    .ts <- function(x) if (isTRUE(!is.na(x))) as.POSIXlt(x, optional=TRUE, tz="UTC") else NA
 
     needs.install <- function(repo, inst)
         ## if the repo version is higher, then it's obvious
         ((package_version(repo["Version"]) > package_version(inst["Version"])) ||
          ## otherwise it depends - on equal versions we still need to install if published/built is higher
          (package_version(repo["Version"]) == package_version(inst["Version"]) &&
-          isTRUE(.builtDate(repo["Built"]) > .builtDate(inst["Built"])) ## is FALSE if either is missing
-             ## FIXME: we want to also consider Published so we can override this by
-             ## repo metadata alone, but that's not recorded in the metadata yet
+          (isTRUE(.builtDate(repo["Built"]) > .builtDate(inst["Built"])) || ## new re-built binary
+           isTRUE(.ts(repo["Published"]) > .ts(inst["Published"]))          ## new "invalidated" due to dependency
+          )
          ))
 
     currentR <- minorR <- getRversion()
@@ -602,6 +637,8 @@ new.packages <- function(lib.loc = NULL, repos = getOption("repos"),
     if(!is.matrix(instPkgs))
         stop(gettextf("no installed packages for (invalid?) 'lib.loc=%s'",
                       lib.loc), domain = NA)
+    ## NB: this implicitly uses type="source" even if type="both" - c.f. contrib.url()
+    ##     but that's ok here as there should not be binary packages without sources
     if(is.null(available))
         available <- available.packages(contriburl = contriburl,
                                         method = method, ...)
@@ -646,7 +683,7 @@ new.packages <- function(lib.loc = NULL, repos = getOption("repos"),
 .instPkgFields <- function(fields) {
     ## to be used in installed.packages() and similar
     requiredFields <-
-        c(tools:::.get_standard_repository_db_fields(), "Built")
+        c(tools:::.get_standard_repository_db_fields(), "Built", "Published")
     if (is.null(fields))
 	fields <- requiredFields
     else {
@@ -807,11 +844,12 @@ remove.packages <- function(pkgs, lib)
 download.packages <- function(pkgs, destdir, available = NULL,
                               repos = getOption("repos"),
                               contriburl = contrib.url(repos, type),
-                              method, type = getOption("pkgType"), ...)
+                              method, type = getOption("pkgType"),
+                              local = FALSE, ...)
 {
     if (!is.character(type))
         stop(gettextf("'%s' must be a character string", "type"), domain = NA)
-    nonlocalcran <- !all(startsWith(contriburl, "file:"))
+    nonlocalcran <- !all(startsWith(contriburl, "file:")) || local
     if(nonlocalcran && !dir.exists(destdir))
         stop("'destdir' is not a directory")
 
@@ -872,7 +910,7 @@ download.packages <- function(pkgs, destdir, available = NULL,
                     fn <- paste(substring(repos, 6L), fn, sep = "/")
                 }
                 if(file.exists(fn)) {
-                    ## file.copy(fn, destdir)
+                    if(local) file.copy(fn, destdir)
                     retval <- rbind(retval, c(p, fn))
                 }
                 else
@@ -927,6 +965,9 @@ download.packages <- function(pkgs, destdir, available = NULL,
 
 resolvePkgType <- function(type) {
     ## Not entirely clear this is optimal
+    ## This was built on the assumption that binaries are always a subset, so
+    ## using sources covers everything necssary. Not only is that not guaranteed,
+    ## but binaries now may have additional information such as build timestamps.
     if(type == "both") type <- "source"
     else if(type == "binary") type <- .Platform$pkgType
     type

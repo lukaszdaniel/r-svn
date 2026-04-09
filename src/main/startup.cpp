@@ -1,7 +1,7 @@
 /*
   R : A Computer Language for Statistical Data Analysis
   Copyright (C) 1995-1996   Robert Gentleman and Ross Ihaka
-  Copyright (C) 1997-2025   The R Core Team
+  Copyright (C) 1997-2026   The R Core Team
   Copyright (C) 2008-2014  Andrew R. Runnalls.
   Copyright (C) 2014 and onwards the Rho Project Authors.
 
@@ -55,9 +55,18 @@ using namespace R;
 using namespace CXXR;
 
 /* These are used in ../gnuwin32/system.c, ../unix/sys-std.c */
-SA_TYPE SaveAction = SA_SAVEASK;
+SA_TYPE SaveAction = SA_SAVEASK;    // eventually make this static
 SA_TYPE RestoreAction = SA_RESTORE;
 attribute_hidden bool R::LoadInitFile = true;  /* Used in R_OpenInitFile */
+
+/* API for reading and changing SaveAction */
+SA_TYPE R_GetSaveAction(void) { return SaveAction; }
+SA_TYPE R_SetSaveAction(SA_TYPE newval)
+{
+    SA_TYPE oldval = SaveAction;
+    SaveAction = newval;
+    return oldval;
+}
 
 static bool LoadSiteFile = true;
 // static bool DebugInitFile = false; // unused
