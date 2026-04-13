@@ -24,7 +24,7 @@
  *  https://www.R-project.org/Licenses/
  */
 
-/* Internal header, not installed, used in some standard packages */
+/* Internal header, not installed, used in some base packages */
 
 /** @file Defn.h
  *
@@ -576,7 +576,7 @@ int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
 bool (REFCNT_ENABLED)(SEXP x);
 // void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
-// void (SET_TYPEOF)(SEXP x, SEXPTYPE v); // declared in Rinternals.h
+void (SET_TYPEOF)(SEXP x, SEXPTYPE v);
 void (SET_NAMED)(SEXP x, int v);
 void (ENSURE_NAMEDMAX)(SEXP x);
 void (ENSURE_NAMED)(SEXP x);
@@ -670,6 +670,7 @@ int  (RTRACE)(SEXP x);
 void (SET_RDEBUG)(SEXP x, int v);
 void (SET_RSTEP)(SEXP x, int v);
 void (SET_RTRACE)(SEXP x, int v);
+SEXP (FORMALS)(SEXP x);
 void SET_FORMALS(SEXP x, SEXP v);
 void SET_BODY(SEXP x, SEXP v);
 void SET_CLOENV(SEXP x, SEXP v);
@@ -696,10 +697,13 @@ void SET_HASHTAB(SEXP x, SEXP v);
 
 /* Promise Access Functions */
 int  (PRSEEN)(SEXP x);
+SEXP (PRCODE)(SEXP x);
+// SEXP (PRENV)(SEXP x); // declared in Rinternals.h
+SEXP (PRVALUE)(SEXP x);
 void (SET_PRSEEN)(SEXP x, int v);
-// void SET_PRENV(SEXP x, SEXP v); // declared in Rinternals.h
-// void SET_PRVALUE(SEXP x, SEXP v); // declared in Rinternals.h
-// void SET_PRCODE(SEXP x, SEXP v); // declared in Rinternals.h
+void SET_PRENV(SEXP x, SEXP v);
+void SET_PRVALUE(SEXP x, SEXP v);
+void SET_PRCODE(SEXP x, SEXP v);
 void IF_PROMSXP_SET_PRVALUE(SEXP x, SEXP v);
 bool (PROMISE_IS_EVALUATED)(SEXP x);
 // SEXP R_PromiseExpr(SEXP); // declared in Rinternals.h
@@ -1251,9 +1255,9 @@ LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 
 /* Special Values for Internal Use */
 // LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
-LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state
-				       (marker) */
-LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
+// LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state (marker) */
+// LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
+// LibExtern SEXP	R_NamespaceRegistry; /* Registry for registered namespaces */
 
 /* R Home Directory */
 // LibExtern char *R_Home;		    /* Root of the R tree */ // declared in Rinterface.h
@@ -1732,7 +1736,7 @@ SEXP R_findVar(SEXP, SEXP);
 SEXP R_findVarInFrame(SEXP, SEXP);
 // SEXP Rf_findVar(SEXP, SEXP); // declared in Rinternals.h
 // SEXP Rf_findVarInFrame(SEXP, SEXP); // declared in Rinternals.h
-// SEXP Rf_findVarInFrame3(SEXP, SEXP, Rboolean); // envir.c // declared in Rinternals.h
+SEXP Rf_findVarInFrame3(SEXP, SEXP, Rboolean); // envir.c
 
 /* deparse option bits: change do_dump if more are added */
 enum DeparseOptionBits
@@ -2317,6 +2321,10 @@ LibExtern unsigned int localeCP  INI_as(1252); /* the locale's codepage */ // de
 LibExtern SEXP R_TrueValue INI_as(NULL);
 LibExtern SEXP R_FalseValue INI_as(NULL);
 LibExtern SEXP R_LogicalNAValue INI_as(NULL);
+
+LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state (marker) */
+LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
+LibExtern SEXP	R_NamespaceRegistry; /* Registry for registered namespaces */
 
 // Variables not in R API but used by other R packages
 /* C stack checking */

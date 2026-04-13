@@ -43,12 +43,12 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &PRCODEptr = PRCODE;
+        const auto &PRCODEptr = R::PRCODE;
         const auto &PRENVptr = PRENV;
         const auto &PRSEENptr = R::PRSEEN;
-        const auto &PRVALUEptr = PRVALUE;
+        const auto &PRVALUEptr = R::PRVALUE;
         const auto &SETPRSEENptr = R::SET_PRSEEN;
-        const auto &SET_PRVALUEptr = SET_PRVALUE;
+        const auto &SET_PRVALUEptr = R::SET_PRVALUE;
     } // namespace ForceNonInline
 
     const char *Promise::typeName() const

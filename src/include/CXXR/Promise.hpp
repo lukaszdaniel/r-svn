@@ -195,43 +195,6 @@ namespace CXXR
 
 namespace R
 {
-    /**
-     * @param x Pointer to a CXXR::Promise.
-     *
-     * @return Evaluation status of the CXXR::Promise.
-     *
-     * @deprecated Will need to be fixed.
-     */
-    int (PRSEEN)(SEXP x);
-
-    /**
-     * @param x Pointer to a CXXR::Promise.
-     *
-     * @deprecated Will need to be fixed.
-     */
-    void (SET_PRSEEN)(SEXP x, int v);
-
-    /** @brief Create a CXXR::Promise object.
-     *
-     * @param expr Expression to be evaluated to provide the value
-     *          of the CXXR::Promise.
-     *
-     * @param env CXXR::Environment in which \a expr is to be evaluated.
-     */
-    SEXP mkPROMISE(SEXP expr, SEXP env);
-
-    /** @brief Create a CXXR::Promise object which has already been evaluated.
-     *
-     * @param expr Expression to be evaluated to provide the value
-     *          of the CXXR::Promise.
-     *
-     * @param value CXXR::RObject which is the value of the promise.
-     */
-    SEXP R_mkEVPROMISE(SEXP expr, SEXP value);
-} // namespace R
-
-extern "C"
-{
     /** @brief Access the expression of a CXXR::Promise.
      *
      * @param x Pointer to a CXXR::Promise (checked).
@@ -240,16 +203,6 @@ extern "C"
      *         CXXR::Promise.
      */
     SEXP (PRCODE)(SEXP x);
-
-    /** @brief Access the environment of a CXXR::Promise.
-     *
-     * @param x Pointer to a CXXR::Promise (checked).
-     *
-     * @return Pointer to the environment in which the CXXR::Promise
-     *         is to be  evaluated.  Set to a null pointer when the
-     *         CXXR::Promise has been evaluated.
-     */
-    SEXP (PRENV)(SEXP x);
 
     /** @brief Access the value of a CXXR::Promise.
      *
@@ -292,6 +245,53 @@ extern "C"
      *         CXXR::Promise.
      */
     void SET_PRCODE(SEXP x, SEXP v);
+
+    /**
+     * @param x Pointer to a CXXR::Promise.
+     *
+     * @return Evaluation status of the CXXR::Promise.
+     *
+     * @deprecated Will need to be fixed.
+     */
+    int (PRSEEN)(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::Promise.
+     *
+     * @deprecated Will need to be fixed.
+     */
+    void (SET_PRSEEN)(SEXP x, int v);
+
+    /** @brief Create a CXXR::Promise object.
+     *
+     * @param expr Expression to be evaluated to provide the value
+     *          of the CXXR::Promise.
+     *
+     * @param env CXXR::Environment in which \a expr is to be evaluated.
+     */
+    SEXP mkPROMISE(SEXP expr, SEXP env);
+
+    /** @brief Create a CXXR::Promise object which has already been evaluated.
+     *
+     * @param expr Expression to be evaluated to provide the value
+     *          of the CXXR::Promise.
+     *
+     * @param value CXXR::RObject which is the value of the promise.
+     */
+    SEXP R_mkEVPROMISE(SEXP expr, SEXP value);
+} // namespace R
+
+extern "C"
+{
+    /** @brief Access the environment of a CXXR::Promise.
+     *
+     * @param x Pointer to a CXXR::Promise (checked).
+     *
+     * @return Pointer to the environment in which the CXXR::Promise
+     *         is to be  evaluated.  Set to a null pointer when the
+     *         CXXR::Promise has been evaluated.
+     */
+    SEXP (PRENV)(SEXP x);
 } // extern "C"
 
 #endif // PROMISE_HPP

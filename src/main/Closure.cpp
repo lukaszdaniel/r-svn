@@ -44,7 +44,7 @@ namespace CXXR
     {
         const auto &BODYptr = R::BODY;
         const auto &CLOENVptr = R::CLOENV;
-        const auto &FORMALSptr = FORMALS;
+        const auto &FORMALSptr = R::FORMALS;
         const auto &RSTEPptr = R::RSTEP;
         const auto &SET_CLOENVptr = R::SET_CLOENV;
         const auto &SET_RSTEPptr = R::SET_RSTEP;

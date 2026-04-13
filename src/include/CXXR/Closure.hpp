@@ -272,6 +272,14 @@ namespace R
      */
     SEXP (CLOENV)(SEXP x);
 
+    /** @brief Access formal arguments of a CXXR::Closure.
+     *
+     * @param x Pointer to a CXXR::Closure object (checked).
+     *
+     * @return Pointer to the formal argument list of \a x.
+     */
+    SEXP (FORMALS)(SEXP x);
+
     /** @brief Set the body of a CXXR::Closure.
      *
      * @param x Pointer to a CXXR::Closure object (checked).
@@ -344,13 +352,6 @@ namespace R
 
 extern "C"
 {
-    /** @brief Access formal arguments of a CXXR::Closure.
-     *
-     * @param x Pointer to a CXXR::Closure object (checked).
-     *
-     * @return Pointer to the formal argument list of \a x.
-     */
-    SEXP (FORMALS)(SEXP x);
 } // extern "C"
 
 #endif // CLOSURE_HPP

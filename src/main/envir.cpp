@@ -1140,8 +1140,8 @@ void R::R_SetVarLocValue(R_varloc_t vl, SEXP value)
   symbol in this frame (FALSE).  This is used for get() and exists().
 */
 
-// In Rinternals.h
-SEXP Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
+// In Defn.h
+SEXP R::Rf_findVarInFrame3(SEXP rho, SEXP symbol, Rboolean doGet)
 {
     if (TYPEOF(rho) == NILSXP)
 	error("%s", _("use of NULL environment is defunct"));

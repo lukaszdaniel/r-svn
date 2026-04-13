@@ -566,6 +566,11 @@ namespace R
      */
     void (RAISE_NAMED)(SEXP x, int n);
 
+    /**
+     * @deprecated Ought to be private.
+     */
+    void (SET_TYPEOF)(SEXP x, SEXPTYPE dest_type);
+
     SEXP R_FixupRHS(SEXP x, SEXP y);
 
     const char *typeName(SEXP v);
@@ -753,11 +758,6 @@ extern "C"
      * Object status is determined in setAttributes().
      */
     void (SET_OBJECT)(SEXP x, int v);
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void (SET_TYPEOF)(SEXP x, SEXPTYPE dest_type);
 
     /** @brief Replace the attributes of \a to by those of \a from.
      *

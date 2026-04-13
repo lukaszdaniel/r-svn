@@ -2805,7 +2805,7 @@ static void check_SET_TYPEOF(SEXP x, SEXPTYPE v)
     }
 }
 
-void (SET_TYPEOF)(SEXP x, SEXPTYPE v)
+void (R::SET_TYPEOF)(SEXP x, SEXPTYPE v)
 {
     /* Ideally this should not exist as a function outsie of base, but
        it was shown in WRE and is used in a good number of packages.
@@ -3523,7 +3523,7 @@ void (R::SET_MISSING)(SEXP x, unsigned int v) { CR_ASSERT(x); SET_MISSING(CHKCON
     if (TYPEOF(x) != CLOSXP && TYPEOF(x) != LISTSXP) \
 	error(_("%s: argument of type %s is not a closure"), \
 	      __func__, sexptype2char(TYPEOF(x)))
-SEXP (FORMALS)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(FORMALS(CHK(x))); }
+SEXP (R::FORMALS)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(FORMALS(CHK(x))); }
 SEXP (R::BODY)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(BODY(CHK(x))); }
 SEXP (R::CLOENV)(SEXP x) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHKCLOSXP(x); return CHK(CLOENV(CHK(x))); }
 int (R::RDEBUG)(SEXP x) { CR_ASSERT(x); return RDEBUG(CHK(x)); }
@@ -3631,9 +3631,9 @@ void (R::SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); 
 void (SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 
 /* Promise Accessors */
-SEXP (PRCODE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRCODE(CHK(x))); }
+SEXP (R::PRCODE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRCODE(CHK(x))); }
 SEXP (PRENV)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRENV(CHK(x))); }
-SEXP (PRVALUE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(SEXP_downcast<Promise *>(CHK(x))->value()); }
+SEXP (R::PRVALUE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(SEXP_downcast<Promise *>(CHK(x))->value()); }
 attribute_hidden int (R::PRSEEN)(SEXP x) { CR_ASSERT(x); return PRSEEN(CHK(x)); }
 attribute_hidden
 bool (R::PROMISE_IS_EVALUATED)(SEXP x)
@@ -3644,11 +3644,11 @@ bool (R::PROMISE_IS_EVALUATED)(SEXP x)
     return SEXP_downcast<Promise *>(x)->evaluated();
 }
 
-void (SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Promise *>(x)->m_env.retarget(x, v); }
-void (SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<Promise *>(x)->u.promsxp.m_expr.retarget(x, v); }
+void (R::SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Promise *>(x)->m_env.retarget(x, v); }
+void (R::SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<Promise *>(x)->u.promsxp.m_expr.retarget(x, v); }
 attribute_hidden void (R::SET_PRSEEN)(SEXP x, int v) { CR_ASSERT(x); SET_PRSEEN(CHK(x), v); }
 
-void (SET_PRVALUE)(SEXP x, SEXP v)
+void (R::SET_PRVALUE)(SEXP x, SEXP v)
 {
     CR_ASSERT(x);
     CR_PROMISE_ASSERT(x); 
