@@ -2676,9 +2676,9 @@ DL_FUNC R_ExternalPtrAddrFn(SEXP s)
    implement the write barrier. */
 
 /* General Cons Cell Attributes */
-SEXP (ATTRIB)(SEXP x) { return CHK(ATTRIB(CHK(x))); }
+SEXP (R::ATTRIB)(SEXP x) { return CHK(ATTRIB(CHK(x))); }
 int (ANY_ATTRIB)(SEXP x) { CR_ASSERT(x); return ANY_ATTRIB(CHK(x)); }
-int (OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
+int (R::OBJECT)(SEXP x) { return OBJECT(CHK(x)); }
 SEXPTYPE (TYPEOF)(SEXP x) { return TYPEOF(CHK(x)); }
 //attribute_hidden
 int (R::NAMED)(SEXP x) { return NAMED(CHK(x)); }
@@ -2719,7 +2719,7 @@ bool (R::IS_ASSIGNMENT_CALL)(SEXP x) { CR_ASSERT(x); return IS_ASSIGNMENT_CALL(C
 attribute_hidden
 void (R::MARK_ASSIGNMENT_CALL)(SEXP x) { CR_ASSERT(x); MARK_ASSIGNMENT_CALL(CHK(x)); }
 
-void (SET_ATTRIB)(SEXP x, SEXP v) {
+void (R::SET_ATTRIB)(SEXP x, SEXP v) {
     CR_ASSERT(x);
     if (TYPEOF(v) != LISTSXP && TYPEOF(v) != NILSXP)
 	error(_("value of 'SET_ATTRIB' must be a pairlist or NULL, not a '%s'"),
@@ -2730,7 +2730,7 @@ void (SET_ATTRIB)(SEXP x, SEXP v) {
     PairList *pl = SEXP_downcast<PairList *>(v);
     x->setAttributes(pl);
 }
-void (SET_OBJECT)(SEXP x, int v) { CR_ASSERT(x); SET_OBJECT(CHK(x), v); }
+void (R::SET_OBJECT)(SEXP x, int v) { CR_ASSERT(x); SET_OBJECT(CHK(x), v); }
 //attribute_hidden
 void (R::SET_NAMED)(SEXP x, int v)
 {
@@ -2831,11 +2831,11 @@ void (R::RAISE_NAMED)(SEXP x, int n) { RAISE_NAMED(CHK(x), n); }
 
 /* S4 object testing */
 //attribute_hidden
-int (IS_S4_OBJECT)(SEXP x){ return IS_S4_OBJECT(CHK(x)); }
+int (R::IS_S4_OBJECT)(SEXP x){ return IS_S4_OBJECT(CHK(x)); }
 //attribute_hidden
-void (SET_S4_OBJECT)(SEXP x){ CR_ASSERT(x); SET_S4_OBJECT(CHK(x)); }
+void (R::SET_S4_OBJECT)(SEXP x){ CR_ASSERT(x); SET_S4_OBJECT(CHK(x)); }
 //attribute_hidden
-void (UNSET_S4_OBJECT)(SEXP x){ CR_ASSERT(x); UNSET_S4_OBJECT(CHK(x)); }
+void (R::UNSET_S4_OBJECT)(SEXP x){ CR_ASSERT(x); UNSET_S4_OBJECT(CHK(x)); }
 
 /* JIT optimization support */
 attribute_hidden bool (R::NOJIT)(SEXP x) { CR_ASSERT(x); return NOJIT(CHK(x)); }
@@ -3120,7 +3120,7 @@ const Rcomplex *(COMPLEX_RO)(SEXP x) {
     return COMPLEX_RO(x);
 }
 
-SEXP *(STRING_PTR)(SEXP x) {
+SEXP *(R::STRING_PTR)(SEXP x) {
     if (TYPEOF(x) != STRSXP)
 	error(_("%s() can only be applied to a '%s', not a '%s'"),
 	      "STRING_PTR", "character", R_typeToChar(x));
@@ -3601,7 +3601,7 @@ SEXP (R::ENCLOS)(SEXP x) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x);
 // attribute_hidden
 SEXP (R::HASHTAB)(SEXP x) { CR_ENVIRONMENT_ASSERT(x); CHKENVSXP(x); return CHK(HASHTAB(CHK(x))); }
 //attribute_hidden
-int (ENVFLAGS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
+int (R::ENVFLAGS)(SEXP x) { CR_ASSERT(x); CHKENVSXP(x); return ENVFLAGS(CHK(x)); }
 SEXP R_ParentEnv(SEXP x) { CR_ASSERT(x); return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { CR_ASSERT(x); return ENV_RDEBUG(CHK(x)); }
 void (SET_ENV_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_ENV_RDEBUG(CHK(x), v); }
@@ -3628,11 +3628,11 @@ void (R::SET_ENCLOS)(SEXP x, SEXP v)
 
 void (R::SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_hashtab.retarget(x, v); }
 //attribute_hidden
-void (SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
+void (R::SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 
 /* Promise Accessors */
 SEXP (R::PRCODE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRCODE(CHK(x))); }
-SEXP (PRENV)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRENV(CHK(x))); }
+SEXP (R::PRENV)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(PRENV(CHK(x))); }
 SEXP (R::PRVALUE)(SEXP x) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); return CHK(SEXP_downcast<Promise *>(CHK(x))->value()); }
 attribute_hidden int (R::PRSEEN)(SEXP x) { CR_ASSERT(x); return PRSEEN(CHK(x)); }
 attribute_hidden

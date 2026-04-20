@@ -59,6 +59,19 @@ namespace R
 
     /* non-empty ("") valid string :*/
     bool isValidStringF(SEXP x);
+
+    /**
+     * @param x Pointer to a CXXR::StringVector; an error is raised if \a x
+     *          is not a pointer to a CXXR::StringVector.
+     *
+     * @return Pointer to the start of \a x 's data, interpreted (riskily)
+     *         as an array of CXXR::String*.
+     *
+     * @deprecated This function puts the integrity of the write barrier
+     * at the mercy of callers.  It is deliberately not made visible
+     * to C code.
+     */
+    SEXP *(STRING_PTR)(SEXP x);
 } // namespace R
 
 extern "C"
@@ -91,19 +104,6 @@ extern "C"
      * @return Pointer to extracted \a i 'th element.
      */
     SEXP STRING_ELT(SEXP x, R_xlen_t i);
-
-    /**
-     * @param x Pointer to a CXXR::StringVector; an error is raised if \a x
-     *          is not a pointer to a CXXR::StringVector.
-     *
-     * @return Pointer to the start of \a x 's data, interpreted (riskily)
-     *         as an array of CXXR::String*.
-     *
-     * @deprecated This function puts the integrity of the write barrier
-     * at the mercy of callers.  It is deliberately not made visible
-     * to C code.
-     */
-    SEXP *(STRING_PTR)(SEXP x);
 
     /**
      * @param x Pointer to a CXXR::StringVector; an error is raised if \a x

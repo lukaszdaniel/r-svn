@@ -568,14 +568,14 @@ void R_check_thread(const char *s);
 */
 
 /* General Cons Cell Attributes */
-// SEXP (ATTRIB)(SEXP x); // declared in Rinternals.h
-// void SET_ATTRIB(SEXP x, SEXP v); // declared in Rinternals.h
+SEXP (ATTRIB)(SEXP x); // declared in Rinternals.h
+void SET_ATTRIB(SEXP x, SEXP v); // declared in Rinternals.h
 int  (MARK)(SEXP x);
-// int  (OBJECT)(SEXP x); // declared in Rinternals.h
+int  (OBJECT)(SEXP x); // declared in Rinternals.h
 int  (NAMED)(SEXP x);
 int  (REFCNT)(SEXP x);
 bool (REFCNT_ENABLED)(SEXP x);
-// void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
+void (SET_OBJECT)(SEXP x, int v); // declared in Rinternals.h
 void (SET_TYPEOF)(SEXP x, SEXPTYPE v);
 void (SET_NAMED)(SEXP x, int v);
 void (ENSURE_NAMEDMAX)(SEXP x);
@@ -588,11 +588,11 @@ void (DISABLE_REFCNT)(SEXP x);
 void (ENABLE_REFCNT)(SEXP x);
 
 /* S4 object testing */
-// int (IS_S4_OBJECT)(SEXP x); // declared in Rinternals.h
+int (IS_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 
 /* S4 object setting */
-// void (SET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
-// void (UNSET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
+void (SET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
+void (UNSET_S4_OBJECT)(SEXP x); // declared in Rinternals.h
 
 SEXP S3Class(SEXP);
 bool isBasicClass(const char *);
@@ -625,7 +625,7 @@ void (SETLENGTH)(SEXP x, R_xlen_t v);
 void (SET_TRUELENGTH)(SEXP x, R_xlen_t v);
 int (LEVELS)(SEXP x);
 void (SETLEVELS)(SEXP x, int v);
-// SEXP *(STRING_PTR)(SEXP x); //declared in Rinternals.h
+SEXP *(STRING_PTR)(SEXP x); //declared in Rinternals.h
 R_xlen_t (STDVEC_LENGTH)(SEXP);
 R_xlen_t (STDVEC_TRUELENGTH)(SEXP);
 void (SETALTREP)(SEXP, int);
@@ -689,8 +689,8 @@ void SET_INTERNAL(SEXP x, SEXP v);
 SEXP (FRAME)(SEXP x);
 SEXP (ENCLOS)(SEXP x);
 SEXP (HASHTAB)(SEXP x);
-// int  (ENVFLAGS)(SEXP x); // declared in Rinternals.h
-// void (SET_ENVFLAGS)(SEXP x, int v); // declared in Rinternals.h
+int  (ENVFLAGS)(SEXP x); // declared in Rinternals.h
+void (SET_ENVFLAGS)(SEXP x, int v); // declared in Rinternals.h
 void SET_FRAME(SEXP x, SEXP v);
 void SET_ENCLOS(SEXP x, SEXP v);
 void SET_HASHTAB(SEXP x, SEXP v);
@@ -698,7 +698,7 @@ void SET_HASHTAB(SEXP x, SEXP v);
 /* Promise Access Functions */
 int  (PRSEEN)(SEXP x);
 SEXP (PRCODE)(SEXP x);
-// SEXP (PRENV)(SEXP x); // declared in Rinternals.h
+SEXP (PRENV)(SEXP x); // declared in Rinternals.h
 SEXP (PRVALUE)(SEXP x);
 void (SET_PRSEEN)(SEXP x, int v);
 void SET_PRENV(SEXP x, SEXP v);
@@ -706,9 +706,9 @@ void SET_PRVALUE(SEXP x, SEXP v);
 void SET_PRCODE(SEXP x, SEXP v);
 void IF_PROMSXP_SET_PRVALUE(SEXP x, SEXP v);
 bool (PROMISE_IS_EVALUATED)(SEXP x);
-// SEXP R_PromiseExpr(SEXP); // declared in Rinternals.h
+SEXP R_PromiseExpr(SEXP); // declared in Rinternals.h
 #ifndef PREXPR
-// #define PREXPR(e) R_PromiseExpr(e) // declared in Rinternals.h
+#define PREXPR(e) R_PromiseExpr(e) // declared in Rinternals.h
 #endif
 
 /* External pointer access macros */
@@ -1255,9 +1255,9 @@ LibExtern SEXP  R_SrcrefSymbol;     /* "srcref" */
 
 /* Special Values for Internal Use */
 // LibExtern SEXP	R_UnboundValue;	    /* Unbound marker */
-// LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state (marker) */
-// LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
-// LibExtern SEXP	R_NamespaceRegistry; /* Registry for registered namespaces */
+LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state (marker) */
+LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
+LibExtern SEXP	R_NamespaceRegistry; /* Registry for registered namespaces */
 
 /* R Home Directory */
 // LibExtern char *R_Home;		    /* Root of the R tree */ // declared in Rinterface.h
@@ -1734,8 +1734,8 @@ bool R_GetVarLocMISSING(R_varloc_t);
 void R_SetVarLocValue(R_varloc_t, SEXP);
 SEXP R_findVar(SEXP, SEXP);
 SEXP R_findVarInFrame(SEXP, SEXP);
-// SEXP Rf_findVar(SEXP, SEXP); // declared in Rinternals.h
-// SEXP Rf_findVarInFrame(SEXP, SEXP); // declared in Rinternals.h
+SEXP Rf_findVar(SEXP, SEXP); // declared in Rinternals.h
+SEXP Rf_findVarInFrame(SEXP, SEXP); // declared in Rinternals.h
 SEXP Rf_findVarInFrame3(SEXP, SEXP, Rboolean); // envir.c
 
 /* deparse option bits: change do_dump if more are added */
@@ -2322,10 +2322,6 @@ LibExtern SEXP R_TrueValue INI_as(NULL);
 LibExtern SEXP R_FalseValue INI_as(NULL);
 LibExtern SEXP R_LogicalNAValue INI_as(NULL);
 
-LibExtern SEXP	R_InBCInterpreter;  /* To be found in BC interp. state (marker) */
-LibExtern SEXP	R_CurrentExpression; /* Use current expression (marker) */
-LibExtern SEXP	R_NamespaceRegistry; /* Registry for registered namespaces */
-
 // Variables not in R API but used by other R packages
 /* C stack checking */
 extern uintptr_t R_CStackLimit	INI_as((uintptr_t)-1);	/* C stack limit */ // used by rJava package
@@ -2380,6 +2376,7 @@ void run_Rmainloop(void); // // declared in RStartup.h
 
 // Functions not in R API but used by other R packages
 void Rf_checkArityCall(SEXP, SEXP, SEXP); // used by rJava package
+void *(DATAPTR)(SEXP x); // used in COMPASS matter SharedObject
 #ifdef __cplusplus
 } // extern "C"
 #endif

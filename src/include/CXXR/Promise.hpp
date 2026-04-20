@@ -213,6 +213,16 @@ namespace R
      */
     SEXP (PRVALUE)(SEXP x);
 
+    /** @brief Access the environment of a CXXR::Promise.
+     *
+     * @param x Pointer to a CXXR::Promise (checked).
+     *
+     * @return Pointer to the environment in which the CXXR::Promise
+     *         is to be  evaluated.  Set to a null pointer when the
+     *         CXXR::Promise has been evaluated.
+     */
+    SEXP (PRENV)(SEXP x);
+
     /** @brief Set the environment of a CXXR::Promise.
      *
      * @param x Pointer to a CXXR::Promise (checked).
@@ -283,15 +293,6 @@ namespace R
 
 extern "C"
 {
-    /** @brief Access the environment of a CXXR::Promise.
-     *
-     * @param x Pointer to a CXXR::Promise (checked).
-     *
-     * @return Pointer to the environment in which the CXXR::Promise
-     *         is to be  evaluated.  Set to a null pointer when the
-     *         CXXR::Promise has been evaluated.
-     */
-    SEXP (PRENV)(SEXP x);
 } // extern "C"
 
 #endif // PROMISE_HPP

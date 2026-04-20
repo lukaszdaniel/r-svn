@@ -16,6 +16,15 @@
     \itemize{
       \item \code{boxplot()}: when \code{notch=TRUE}, new option \code{warnN=FALSE}
       suppresses warnings about \dQuote{notches outside hinges}.
+
+      \item New function \code{cumvar()} to calculate cumulative variances.
+
+      \item The \code{print()} method for \code{rle()} now passes \code{...}
+      to \code{str()}.
+
+      \item \code{rmultinom()} now uses \I{Kahan}'s arithmetic instead of
+      \code{LDOUBLE} to avoid platform dependency, thanks to \I{Mauricio Vargas}'
+      proposal in \PR{18693}.
     }
   }
 
@@ -32,6 +41,12 @@
   }
 
   \subsection{C-Level Facilities}{
+    \itemize{
+      \item .
+    }
+  }
+
+  \subsection{Bug Fixes}{
     \itemize{
       \item .
     }
@@ -350,7 +365,7 @@
       weaving purposes, the \code{Rtangle} driver rather uses their
       default values, with a warning.
       By \I{Vincent Goulet}.
-      
+
       \item The Sweave driver \code{RweaveLatex} gains an option to
       include unparsable R code or arbitrary text in code chunks. Chunks
       marked as \code{ignore.on.weave = TRUE} are completely ignored on
@@ -369,7 +384,7 @@
       available for both drivers, sets \code{ignore.on.weave} and
       \code{ignore.on.tangle} at once.
 
-      By \I{Vincent Goulet}.      
+      By \I{Vincent Goulet}.
 
       \item The Sweave driver \code{Rtangle} now provides an option
       \code{chunk.sep} to control the separator between code chunks in
@@ -844,6 +859,10 @@
       accuracy, fulfilling a part of \I{Suharto Anggono}'s wishlist
       \PR{18989}.
 
+      \item When \I{subassigning} \code{"POSIXlt"}, e.g., \code{<dat>[i] <- v},
+      \code{v} is now converted to the time zone of \code{dat}, before
+      being assigned.
+
       \item The \code{"tzcode"} attribute of \code{"POSIXlt"} objects
       should no longer depend on earlier calls, fixing \PR{19005} thanks to
       \I{Ivan Krylov}, a patch by \I{Suharto Anggono} and reports of
@@ -877,6 +896,14 @@
       \item When \code{Ops} group methods for matrix-\code{"ts"} return a
       zero-extent matrix, its type is correct now.  E.g., \code{<int> + <dbl>}
       now returns type \code{"double"}, see also \PR{18972}.
+
+      \item \code{intToUtf8(<negative>)} now returns \code{NA} and no
+      longer accesses invalid memory, thanks to \I{Kevin Ushey}'s report
+      with patch in \PR{19052}.
+
+      \item When \code{file.choose()} is terminated with an \command{EOF},
+      it now signals an error rather than returning garbage, thanks to
+      \I{Kevin Ushey}'s report and patch in \PR{19053},
     }
   }
 }
@@ -999,8 +1026,8 @@
       to \I{Martin Smith}'s \PR{18921}.
 
       \item \I{Subassigning} \code{"POSIXlt"}, i.e., \code{<tdat>[i] <- val}
-      and \code{<tdat>[[i]] <- val} now rebalance as they should,
-      thanks to \I{Mikael Jagan}'s \PR{18919}.
+      and \code{<tdat>[[i]] <- val} now rebalance as they should;
+      thanks mostly to \I{Mikael Jagan}'s \PR{18919}.
 
       \item \code{<POSIXlt>[*]} (re-)setting \code{"balanced"}, fixing
       \PR{18681} comment #7, thanks to \I{Mikael Jagan}.

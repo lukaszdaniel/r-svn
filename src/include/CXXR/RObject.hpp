@@ -493,6 +493,35 @@ namespace CXXR
 
 namespace R
 {
+    /** @brief Get the attributes of a CXXR::RObject.
+     *
+     * @param x Pointer to the CXXR::RObject whose attributes are required.
+     *
+     * @return Pointer to the attributes object of \a x , or 0 if \a x is
+     * a null pointer.
+     */
+    SEXP (ATTRIB)(SEXP x);
+
+    /** @brief Replace an object's attributes.
+     *
+     * @param x Pointer to a CXXR::RObject.
+     *
+     * @param v Pointer to a PairList giving the new attributes of \a
+     *          x.  \a x should be considered to assume ownership of
+     *          the 'car' values in \a v ; they should therefore not
+     *          be subsequently altered externally.
+     *
+     * @note Unlike CR, \a v isn't simply plugged into the attributes
+     * field of \a x : refer to the documentation for \c
+     * RObject::setAttributes() .  In particular, do not attempt to
+     * modify the attributes by changing \a v \e after SET_ATTRIB
+     * has been called.
+     *
+     * @note For compatibility with CR, garbage collection is
+     * inhibited within this function.
+     */
+    void (SET_ATTRIB)(SEXP x, SEXP v);
+
     /** @brief (For use only in serialization.)
      */
     int (LEVELS)(SEXP x);
@@ -521,6 +550,21 @@ namespace R
      * @deprecated Ought to be private.
      */
     void (SET_NAMED)(SEXP x, int v);
+
+    /** @brief Does an object have a class attribute?
+     *
+     * @param x Pointer to a CXXR::RObject.
+     *
+     * @return true iff \a x has a class attribute.  Returns false if \a x
+     * is 0.
+     */
+    int (OBJECT)(SEXP x);
+
+    /**
+     * @deprecated This has no effect in CXXR.
+     * Object status is determined in setAttributes().
+     */
+    void (SET_OBJECT)(SEXP x, int v);
 
     /** @brief Set object max copying status.
      *
@@ -696,15 +740,6 @@ extern "C"
      */
     SEXP Rf_setAttrib(SEXP vec, SEXP name, SEXP val);
 
-    /** @brief Does an object have a class attribute?
-     *
-     * @param x Pointer to a CXXR::RObject.
-     *
-     * @return true iff \a x has a class attribute.  Returns false if \a x
-     * is 0.
-     */
-    int (OBJECT)(SEXP x);
-
     /** @brief Is this the null object pointer?
      *
      * @param s Pointer to a CXXR::RObject.
@@ -723,41 +758,6 @@ extern "C"
      * class attribute.
      */
     Rboolean Rf_isObject(SEXP s);
-
-    /** @brief Get the attributes of a CXXR::RObject.
-     *
-     * @param x Pointer to the CXXR::RObject whose attributes are required.
-     *
-     * @return Pointer to the attributes object of \a x , or 0 if \a x is
-     * a null pointer.
-     */
-    SEXP (ATTRIB)(SEXP x);
-
-    /** @brief Replace an object's attributes.
-     *
-     * @param x Pointer to a CXXR::RObject.
-     *
-     * @param v Pointer to a PairList giving the new attributes of \a
-     *          x.  \a x should be considered to assume ownership of
-     *          the 'car' values in \a v ; they should therefore not
-     *          be subsequently altered externally.
-     *
-     * @note Unlike CR, \a v isn't simply plugged into the attributes
-     * field of \a x : refer to the documentation for \c
-     * RObject::setAttributes() .  In particular, do not attempt to
-     * modify the attributes by changing \a v \e after SET_ATTRIB
-     * has been called.
-     *
-     * @note For compatibility with CR, garbage collection is
-     * inhibited within this function.
-     */
-    void (SET_ATTRIB)(SEXP x, SEXP v);
-
-    /**
-     * @deprecated This has no effect in CXXR.
-     * Object status is determined in setAttributes().
-     */
-    void (SET_OBJECT)(SEXP x, int v);
 
     /** @brief Replace the attributes of \a to by those of \a from.
      *

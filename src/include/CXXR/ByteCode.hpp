@@ -202,6 +202,7 @@ namespace CXXR
 
 namespace R
 {
+    SEXP R_PromiseExpr(SEXP);
     bool (isByteCode)(SEXP x);
     void R_initialize_bcode(void);
     SEXP R_bcEncode(SEXP);
@@ -213,7 +214,6 @@ namespace R
 
 extern "C"
 {
-    SEXP R_PromiseExpr(SEXP);
     SEXP R_ClosureExpr(SEXP);
     SEXP R_BytecodeExpr(SEXP e);
 } // extern "C"

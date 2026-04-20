@@ -5592,7 +5592,7 @@ SEXP R_BytecodeExpr(SEXP e)
     return bytecodeExpr(e);
 }
 
-SEXP R_PromiseExpr(SEXP p)
+SEXP R::R_PromiseExpr(SEXP p)
 {
     return bytecodeExpr(PRCODE(p));
 }

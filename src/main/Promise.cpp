@@ -44,7 +44,7 @@ namespace CXXR
     namespace ForceNonInline
     {
         const auto &PRCODEptr = R::PRCODE;
-        const auto &PRENVptr = PRENV;
+        const auto &PRENVptr = R::PRENV;
         const auto &PRSEENptr = R::PRSEEN;
         const auto &PRVALUEptr = R::PRVALUE;
         const auto &SETPRSEENptr = R::SET_PRSEEN;

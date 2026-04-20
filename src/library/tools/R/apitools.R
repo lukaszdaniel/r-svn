@@ -100,11 +100,42 @@ funAPI <- function() {
     apidata$fapi
 }
 
+getVarAPI <- function () {
+    varpat <- "^@(eapi|api|emb)var +.*"
+    vlines <- trimws(grepv(varpat, WRE()))
+    vars <- sub("^.* +", "", vlines)
+    atypes <- sub(varpat, "\\1", vlines)
+    val <- data.frame(name = vars,
+                      loc = rep("WRE", length(vars)),
+                      apitype = atypes)
+    hdrpat <- "^@(eapi|api|emb)hdr +.*"
+    vlines <- trimws(grepv(hdrpat, WRE()))
+    vfiles <- sub("^.* +", "", vlines)
+    atypes <- sub(hdrpat, "\\1", vlines)
+    getOneHdr <- function(x, a) {
+        val <- getVarsHdr(file.path(R.home("include"), x))
+        if (length(val) > 0)
+            data.frame(name = val, loc = x, apitype = a)
+    }
+    val <- rbind(unique(val), rbind_list(mapply(getOneHdr, vfiles, atypes)))
+    clear_rownames(val)
+}
+
+varAPI <- function() {
+    if (is.null(apidata$vapi))
+        apidata$vapi <- getVarAPI()
+    apidata$vapi
+}
+
+##
+## Get declarations from header files
+##
+
 ## getFunsHdr tries to get the functions declared in a header file
 ## without additional tools beyond cc -E. Using a proper
 ## header-parsing tool would be more accurate, but this seems adequate
 ## for now.
-getFunsHdr <- function(fpath, lines) {
+getFunsHdr <- function(fpath, lines, include = R.home("include"), flags = "") {
     if (missing(lines)) {
         lines <- readLines(fpath)
         name <- basename(fpath)
@@ -121,10 +152,11 @@ getFunsHdr <- function(fpath, lines) {
     if (! missing(fpath) && name == "Utils.h")
         lines <- c("#include <R_ext/RS.h>", lines)
     if (! missing(fpath) && name == "Rinterface.h")
-        flags <- "-DHAVE_AQUA -DR_INTERFACE_PTRS"
+        new_flags <- paste(flags, "-DHAVE_AQUA -DR_INTERFACE_PTRS")
     else
-        flags <- "-DR_INTERFACE_PTRS"
-    lines <- ccE(lines, flags = flags)
+        new_flags <- paste(flags, "-DR_INTERFACE_PTRS")
+    
+    lines <- ccE(lines, flags = new_flags, include = include)
     lines <- dropBraces(lines)
 
     ## these could be incorporated into the regex
@@ -153,13 +185,38 @@ getFunsHdr <- function(fpath, lines) {
     val
 }
 
+## variables declared in installed headers:
+## probaly not quite right but maybe good enough?
+getVarsHdr <- function(fpath, lines, include = R.home("include"), flags = "") {
+    if (missing(lines)) {
+        if (! file.exists(fpath))
+            return(NULL) ## some headers may not exist on all platforms
+        lines <- readLines(fpath)
+        name <- basename(fpath)
+    }
+    else name <- NULL
+
+    lines <- lines[! grepl("^#\\s*error", lines)] ## for GraphicsDevice.h
+
+    if (! missing(fpath) && name == "Rinterface.h")
+        flags <- paste(flags, "-DHAVE_AQUA -DR_INTERFACE_PTRS")
+    else
+        flags <- paste(flags, "-DR_INTERFACE_PTRS")
+    lines <- ccE(lines, flags = flags, include = include)
+    fppat <- r"(^\s*(extern|LibExtern)\s+\w+\s+\(\s*\*\s*(\w+)\).*)"
+    vpat <- r"(^\s*(extern|LibExtern)\s+\w+(\s+|\s*\*\s*)(\w+)\s*;.*)"
+    c(sub(vpat, "\\3", grepv(vpat, lines)),
+      sub(fppat, "\\2", grepv(fppat, lines)))
+}
+
 ccE <- function(lines, include = R.home("include"), flags, clean = TRUE) {
     if (Sys.which("cc") == "")
         stop("'cc' is not on the path")
     tfile <- tempfile(fileext = ".h")
     on.exit(unlink(tfile))
     writeLines(lines, tfile)
-    cmd <- sprintf("cc -E -I%s %s", include, tfile)
+    include <- paste(sprintf("-I%s", include), collapse = " ")
+    cmd <- sprintf("cc -E %s %s", include, tfile)
     if (! missing(flags))
         cmd <- paste(cmd, flags)
     val <- system(cmd, intern=TRUE)
@@ -190,6 +247,46 @@ dropBraces <- function(lines) {
     lines <- lines[! grepl(".*[}]", lines)] ## don't keep stuff after }
 
     lines
+}
+
+## function and variable declarations in installed headers
+getHdrDecls <- function(fpath, include = R.home("include"), flags = "") {
+    funs <- getFunsHdr(fpath, include = include, flags = flags);
+    if (basename(fpath) == "Rmath.h")
+        funs <- c(funs, "R_isnancpp")
+    if (length(funs) > 0)
+        funs <- data.frame(name = funs, type = "F")
+    else
+        funs <- NULL
+    vars <- getVarsHdr(fpath, include = include, flags = flags);
+    if (length(vars) > 0)
+        vars <- data.frame(name = vars, type = "V")
+    else
+        vars <- NULL
+    rbind(funs, vars)
+}
+
+getDirDecls <- function(incdir = R.home("include"),
+                        include = incdir, flags = "") {
+    hfiles <- dir(incdir, recursive = TRUE, pattern = "\\.h$")
+    ## drop the R_ext/stats_* ones
+    hfiles <- grepv("stats_", hfiles, invert = TRUE)
+    getDecls <- function(fname) {
+        val <- getHdrDecls(file.path(incdir, fname), include, flags)
+        if (! is.null(val))
+            val$file <- fname
+        val
+    }
+    do.call(rbind, lapply(hfiles, getDecls))
+}
+
+Rdecls <- function(incdir = R.home("include"), include = incdir) {
+    decls <- apidata$decls
+    if (is.null(decls)) {
+        decls <- getDirDecls(incdir, include)
+        assign("decls", decls, apidata)
+    }
+    decls
 }
 
 
@@ -331,7 +428,8 @@ rbind_list <- function(args)
 ofile_syms <- function(fname, keep = c("F", "V", "U")) {
     ## this uses nm on Linux/macOS; probably doesn't work on Windows, so bail
     stopifnot(isFALSE(.Platform$OS.type == "windows"))
-    v <- read_symbols_from_object_file(fname)
+    v <- suppressWarnings(read_symbols_from_object_file(fname,
+                                                        ignore.stderr = TRUE))
     if (is.character(v) && nrow(v) == 0) 
         ofile_syms_od(fname, keep)
     else if (is.null(v))
@@ -351,7 +449,8 @@ ofile_syms <- function(fname, keep = c("F", "V", "U")) {
 ofile_syms_od <- function(fpath, keep = c("F", "V", "U")) {
     if (Sys.which("objdump") == "")
         stop("'objdump' is not on the path")
-    v <- system(sprintf("objdump -T %s", fpath), intern = TRUE)
+    v <- suppressWarnings(system(sprintf("objdump -T %s", fpath),
+                                 intern = TRUE, ignore.stderr = TRUE))
     v <- grep("\t", v, value = TRUE)      ## data lines contain a \t
     name <- sub(".*\t.* (.*$)", "\\1", v) ## the name is at the end after the \t
     type <- sub(".* (.*)\t.*", "\\1", v)  ## the type is right before the \t
@@ -374,57 +473,6 @@ Rsyms <- function(keep = c("F", "V")) {
     rsyms
 }
 
-## variables declared in installed headers:
-## probaly not quite right but maybe good enough?
-getVarsHdr <- function(fpath, lines) {
-    if (missing(lines)) {
-        if (! file.exists(fpath))
-            return(NULL) ## some headers may not exist on all platforms
-        lines <- readLines(fpath)
-        name <- basename(fpath)
-    }
-    else name <- NULL
-
-    lines <- lines[! grepl("^#\\s*error", lines)] ## for GraphicsDevice.h
-
-    if (! missing(fpath) && name == "Rinterface.h")
-        flags <- "-DHAVE_AQUA -DR_INTERFACE_PTRS"
-    else
-        flags <- "-DR_INTERFACE_PTRS"
-    lines <- ccE(lines, flags = flags)
-    fppat <- r"(^\s*(extern|LibExtern)\s+\w+\s+\(\s*\*\s*(\w+)\).*)"
-    vpat <- r"(^\s*(extern|LibExtern)\s+\w+(\s+|\s*\*\s*)(\w+)\s*;.*)"
-    c(sub(vpat, "\\3", grepv(vpat, lines)),
-      sub(fppat, "\\2", grepv(fppat, lines)))
-}
-
-getVarAPI <- function () 
-{
-    varpat <- "^@(eapi|api|emb)var +.*"
-    vlines <- trimws(grepv(varpat, WRE()))
-    vars <- sub("^.* +", "", vlines)
-    atypes <- sub(varpat, "\\1", vlines)
-    val <- data.frame(name = vars,
-                      loc = rep("WRE", length(vars)),
-                      apitype = atypes)
-    hdrpat <- "^@(eapi|api|emb)hdr +.*"
-    vlines <- trimws(grepv(hdrpat, WRE()))
-    vfiles <- sub("^.* +", "", vlines)
-    atypes <- sub(hdrpat, "\\1", vlines)
-    getOneHdr <- function(x, a) {
-        val <- getVarsHdr(file.path(R.home("include"), x))
-        if (length(val) > 0)
-            data.frame(name = val, loc = x, apitype = a)
-    }
-    val <- rbind(unique(val), rbind_list(mapply(getOneHdr, vfiles, atypes)))
-    clear_rownames(val)
-}
-
-varAPI <- function() {
-    if (is.null(apidata$vapi))
-        apidata$vapi <- getVarAPI()
-    apidata$vapi
-}
 
 ## similar to checkLibAPI but also picks up variables
 checkObjAPI <- function(exe) {

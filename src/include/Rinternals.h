@@ -1154,32 +1154,47 @@ int (IS_SCALAR)(SEXP x, SEXPTYPE type);
 #define error_return(msg)	{ Rf_error("%s", msg);	   return R_NilValue; }
 #define errorcall_return(cl,msg){ Rf_errorcall(cl, "%s", msg);   return R_NilValue; }
 
-#ifndef NO_LEGACY_NONAPI
-# define ENABLE_LEGACY_NONAPI
-#endif
 #ifdef ENABLE_LEGACY_NONAPI
+# define ENABLE_LEGACY_NONAPI_FUNS
+# define ENABLE_LEGACY_NONAPI_VARS
+#endif
 
+#ifdef ENABLE_LEGACY_NONAPI_VARS
 # ifndef __MAIN__
-extern SEXP R_NamespaceRegistry; /* Registry for registered namespaces */
-extern SEXP R_InBCInterpreter;   /* To be found in BC interp. state
-				    (marker) */
-extern SEXP R_CurrentExpression; /* Use current expression (marker) */
+// extern SEXP R_NamespaceRegistry; /* Registry for registered namespaces */
 # endif
+#endif
 
-SEXP (ATTRIB)(SEXP x);
-void SET_ATTRIB(SEXP x, SEXP v);
-SEXP Rf_findVar(SEXP, SEXP);
-SEXP Rf_findVarInFrame(SEXP, SEXP);
+#ifdef ENABLE_LEGACY_NONAPI_FUNS
+// SEXP (ATTRIB)(SEXP x);
+// void SET_ATTRIB(SEXP x, SEXP v);
+// SEXP Rf_findVar(SEXP, SEXP);
+// SEXP Rf_findVarInFrame(SEXP, SEXP);
 
-SEXP (PRENV)(SEXP x);
+// SEXP (PRENV)(SEXP x);
 
 SEXP Rf_allocSExp(SEXPTYPE);
-SEXP R_PromiseExpr(SEXP);
+// SEXP R_PromiseExpr(SEXP);
 #ifndef PREXPR
-#define PREXPR(e) R_PromiseExpr(e)
+// #define PREXPR(e) R_PromiseExpr(e)
 #endif
 
-void (SET_OBJECT)(SEXP x, int v); // used by Rcpp (not?), Matrix and more
+// void (SET_OBJECT)(SEXP x, int v); // used by Rcpp (not?), Matrix and more
+
+// temporatily add these declarations and unhide until until BioC catches up
+// int (IS_S4_OBJECT)(SEXP x); // used in chopsticks, SharedObject
+// void (SET_S4_OBJECT)(SEXP x); //used in chopsticks, SharedObject
+// void (UNSET_S4_OBJECT)(SEXP x); // used in SharedObject
+SEXP R_data_class(SEXP , Rboolean); // used in chopsticks
+// int  (OBJECT)(SEXP x);  // used in dang via tidyCpp, used in SharedObject
+// int  (ENVFLAGS)(SEXP x);  // used in GOfuncR
+// void (SET_ENVFLAGS)(SEXP x, int v);  // used in GOfuncR
+// SEXP *(STRING_PTR)(SEXP x); // used in matter
+
+#if ! (defined(CALLED_FROM_DEFN_H) && !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS)))
+// void *(DATAPTR)(SEXP x); // used in COMPASS matter SharedObject
+#endif
+#endif
 
 #ifdef __cplusplus
 R_len_t Rf_length(SEXP);
@@ -1189,21 +1204,6 @@ inline R_len_t length(SEXP s)
 {
     return Rf_length(s);
 }
-#endif
-
-// temporatily add these declarations and unhide until until BioC catches up
-int (IS_S4_OBJECT)(SEXP x); // used in chopsticks, SharedObject
-void (SET_S4_OBJECT)(SEXP x); //used in chopsticks, SharedObject
-void (UNSET_S4_OBJECT)(SEXP x); // used in SharedObject
-SEXP R_data_class(SEXP , Rboolean); // used in chopsticks
-int  (OBJECT)(SEXP x);  // used in dang via tidyCpp, used in SharedObject
-int  (ENVFLAGS)(SEXP x);  // used in GOfuncR
-void (SET_ENVFLAGS)(SEXP x, int v);  // used in GOfuncR
-SEXP *(STRING_PTR)(SEXP x); // used in matter
-
-#if ! (defined(CALLED_FROM_DEFN_H) && !defined(__MAIN__) && (defined(COMPILING_R) || ( __GNUC__ && !defined(__INTEL_COMPILER) )) && (defined(COMPILING_R) || !defined(NO_RINLINEDFUNS)))
-void *(DATAPTR)(SEXP x); // used in COMPASS matter SharedObject
-#endif
 #endif
 
 #ifdef __cplusplus

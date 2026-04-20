@@ -40,9 +40,9 @@ namespace CXXR
     // from C:
     namespace ForceNonInline
     {
-        const auto &IS_S4_OBJECTptr = IS_S4_OBJECT;
-        const auto &SET_S4_OBJECTptr = SET_S4_OBJECT;
-        const auto &UNSET_S4_OBJECTptr = UNSET_S4_OBJECT;
+        const auto &IS_S4_OBJECTptr = R::IS_S4_OBJECT;
+        const auto &SET_S4_OBJECTptr = R::SET_S4_OBJECT;
+        const auto &UNSET_S4_OBJECTptr = R::UNSET_S4_OBJECT;
     } // namespace ForceNonInline
 
     S4Object::S4Object(bool is_s4_object) : RObject(OBJSXP)

@@ -1385,7 +1385,7 @@ attribute_hidden SEXP R::R_findVar(SEXP symbol, SEXP rho)
 
 /** @brief Look up a symbol in an environment.
  */
-SEXP Rf_findVar(SEXP symbol, SEXP rho)
+SEXP R::Rf_findVar(SEXP symbol, SEXP rho)
 {
     return R_findVar(symbol, rho);
 }

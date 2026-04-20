@@ -141,6 +141,25 @@ namespace R
      * @return Pointer to the created object.
      */
     SEXP R_allocObject(void);
+
+    /** @brief Is this an S4 object?
+     *
+     * @param x Pointer to \c RObject.
+     *
+     * @return true iff \a x is an S4 object.  Returns false if \a x
+     * is 0.
+     */
+    int IS_S4_OBJECT(SEXP x);
+
+    /**
+     * @deprecated Ought to be private.
+     */
+    void SET_S4_OBJECT(SEXP x);
+
+    /**
+     * @deprecated Ought to be private.
+     */
+    void UNSET_S4_OBJECT(SEXP x);
 } // namespace R
 
 extern "C"
@@ -162,25 +181,6 @@ extern "C"
      *          the CXXR::S4Object.
      */
     void SET_S4TAG(SEXP x, SEXP y);
-
-    /** @brief Is this an S4 object?
-     *
-     * @param x Pointer to \c RObject.
-     *
-     * @return true iff \a x is an S4 object.  Returns false if \a x
-     * is 0.
-     */
-    int IS_S4_OBJECT(SEXP x);
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void SET_S4_OBJECT(SEXP x);
-
-    /**
-     * @deprecated Ought to be private.
-     */
-    void UNSET_S4_OBJECT(SEXP x);
 
     /** @brief Create an S4 object.
      *

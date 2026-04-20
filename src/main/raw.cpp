@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001--2025 The R Core Team
+ *  Copyright (C) 2001--2026 The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -406,7 +406,8 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (R_xlen_t i = 0; i < nc; i++) {
 	    int this_ = INTEGER(x)[i];
 	    if (this_ == NA_INTEGER
-		|| (this_ >= 0xD800 && this_ <= 0xDFFF)
+		|| this_ < 0
+		|| (0xD800 <= this_ && this_ <= 0xDFFF)
 		|| this_ > 0x10FFFF)
 		SET_STRING_ELT(ans, i, NA_STRING);
 	    else {
@@ -423,15 +424,16 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (int i = 0; i < nc; i++) {
 	    int this_ = INTEGER(x)[i];
 	    if (this_ == NA_INTEGER
-		|| (this_ >= 0xDC00 && this_ <= 0xDFFF)
+		|| this_ < 0
+		|| (0xDC00 <= this_ && this_ <= 0xDFFF)
 		|| this_ > 0x10FFFF) {
 		haveNA = true;
 		break;
 	    }
-	    else if (this_ >=  0xD800 && this_ <= 0xDBFF) {
+	    else if (this_ >= 0xD800 && this_ <= 0xDBFF) {
 		if (!s_pair || i >= nc-1) {haveNA = true; break;}
 		int next = INTEGER(x)[i+1];
-		if (next >= 0xDC00 && next <= 0xDFFF) i++;
+		if (0xDC00 <= next && next <= 0xDFFF) i++;
 		else {haveNA = true; break;}
 		len += 4; // all points not in the basic plane have length 4
 	    }
@@ -450,7 +452,7 @@ attribute_hidden SEXP do_intToUtf8(SEXP call, SEXP op, SEXP args, SEXP env)
 	len = 0;
 	for (int i = 0; i < nc; i++) {
 	    int this_ = INTEGER(x)[i];
-	    if (s_pair && (this_ >=  0xD800 && this_ <= 0xDBFF)) {
+	    if (s_pair && (this_ >= 0xD800 && this_ <= 0xDBFF)) {
 		// all the validity checking has already been done.
 		int next = INTEGER(x)[++i];
 		unsigned int hi = this_ - 0xD800, lo = next - 0xDC00;

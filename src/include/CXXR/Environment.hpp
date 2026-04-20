@@ -303,6 +303,24 @@ namespace R
     int Rf_envlength(SEXP rho);
     R_xlen_t Rf_envxlength(SEXP rho);
 
+    /** @brief Access an environment's flags.
+     *
+     * @param x Pointer to a CXXR::Environment (not currently checked).
+     *
+     * @return the environment flags of \a x .
+     */
+    int (ENVFLAGS)(SEXP x);
+
+    /** @brief Set environment flags.
+     *
+     * @param x Pointer to a CXXR::Environment (not currently checked).
+     *
+     * @param v The new flags.
+     *
+     * @deprecated
+     */
+    void (SET_ENVFLAGS)(SEXP x, int v);
+
     bool (NO_SPECIAL_SYMBOLS)(SEXP env);
     void (SET_NO_SPECIAL_SYMBOLS)(SEXP env);
     void (UNSET_NO_SPECIAL_SYMBOLS)(SEXP env);
@@ -340,14 +358,6 @@ extern "C"
      */
     Rboolean Rf_isEnvironment(SEXP s);
 
-    /** @brief Access an environment's flags.
-     *
-     * @param x Pointer to a CXXR::Environment (not currently checked).
-     *
-     * @return the environment flags of \a x .
-     */
-    int (ENVFLAGS)(SEXP x);
-
     /** @brief Should the debugger single-step?
      *
      * @param x Pointer to a CXXR::Environment object (checked).
@@ -364,16 +374,6 @@ extern "C"
      * @param v The new single-stepping state (true = enabled).
      */
     void (SET_ENV_RDEBUG)(SEXP x, int v);
-
-    /** @brief Set environment flags.
-     *
-     * @param x Pointer to a CXXR::Environment (not currently checked).
-     *
-     * @param v The new flags.
-     *
-     * @deprecated
-     */
-    void (SET_ENVFLAGS)(SEXP x, int v);
 
     SEXP R_NewEnv(SEXP enclos, int hash, int size);
     Rboolean R_IsPackageEnv(SEXP rho);
