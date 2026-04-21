@@ -1235,7 +1235,7 @@ attribute_hidden SEXP R::R_findVarInFrame(SEXP rho, SEXP symbol)
     return findVarInFrame3(rho, symbol, TRUE);
 }
 
-SEXP Rf_findVarInFrame(SEXP rho, SEXP symbol)
+SEXP R::Rf_findVarInFrame(SEXP rho, SEXP symbol)
 {
     return R_findVarInFrame(rho, symbol);
 }
