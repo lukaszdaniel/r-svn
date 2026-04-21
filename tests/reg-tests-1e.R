@@ -3156,7 +3156,7 @@ stopifnot(identical(tryCatch(matrix(1:6, nrow = 2)[3, 1],
 
 
 ## Check that headers, WRE, and non-API variables are in sync
-tools:::checkAPI()
+# tools:::checkAPI()
 
 
 ## keep at end

@@ -51,6 +51,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/DottedArgs.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/ByteCode.hpp>
 #include <CXXR/Environment.hpp>
@@ -9282,13 +9283,7 @@ attribute_hidden SEXP do_declare(SEXP call, SEXP op, SEXP args, SEXP rho)
     if ((var) != R_NilValue) CHECK_TYPE(var, type)
 
 // this probably should go in envir.c
-static SEXP DCONS(SEXP x, SEXP y, SEXP sym)
-{
-    SEXP val = CONS(x, y);
-    SET_TYPEOF(val, DOTSXP);
-    SET_TAG(val, sym);
-    return val;
-}
+#define DCONS(x, y, sym) PairList::create<DottedArgs>(x, y, sym)
 
 static SEXP lastDot(SEXP dots)
 {
@@ -9331,7 +9326,7 @@ void R_UnmatchArgs(SEXP forms, SEXP env)
 	SEXP val = findVarInFrame(env, sym);
 	if (sym == R_DotsSymbol) {
 	    if (val == R_UnboundValue)
-		error(_("'...' used in an incorrect context"));
+		error("%s", _("'...' used in an incorrect context"));
 	    else if (TYPEOF(val) == DOTSXP) {
 		if (last == R_NilValue)
 		    dots = PROTECT(val);
