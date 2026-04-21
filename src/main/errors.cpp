@@ -2758,7 +2758,7 @@ NORET void R::R_MissingArgError(SEXP symbol, SEXP call, const char* subclass)
     R_MissingArgError_c(CHAR(PRINTNAME(symbol)), call, subclass);
 }
 
-NORET attribute_hidden void R_ObjectNotFoundError(SEXP sym, SEXP call,
+NORET attribute_hidden void R::R_ObjectNotFoundError(SEXP sym, SEXP call,
 						  const char *mode)
 {
     if (TYPEOF(sym) != SYMSXP)
@@ -2788,7 +2788,7 @@ NORET attribute_hidden void R_ObjectNotFoundError(SEXP sym, SEXP call,
     UNPROTECT(2); // not reached
 }
 
-NORET attribute_hidden void R_FunctionNotFoundError(SEXP sym, SEXP call)
+NORET attribute_hidden void R::R_FunctionNotFoundError(SEXP sym, SEXP call)
 {
     if (TYPEOF(sym) != SYMSXP)
 	error(_("not a symbol"));
