@@ -2762,7 +2762,7 @@ NORET attribute_hidden void R::R_ObjectNotFoundError(SEXP sym, SEXP call,
 						  const char *mode)
 {
     if (TYPEOF(sym) != SYMSXP)
-	error(_("not a symbol"));
+	error("%s", _("not a symbol"));
     if (call == R_CurrentExpression)
 	call = getCurrentCall();
     PROTECT(call);
@@ -2791,7 +2791,7 @@ NORET attribute_hidden void R::R_ObjectNotFoundError(SEXP sym, SEXP call,
 NORET attribute_hidden void R::R_FunctionNotFoundError(SEXP sym, SEXP call)
 {
     if (TYPEOF(sym) != SYMSXP)
-	error(_("not a symbol"));
+	error("%s", _("not a symbol"));
     if (call == R_CurrentExpression)
 	call = getCurrentCall();
     PROTECT(call);
