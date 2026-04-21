@@ -761,7 +761,7 @@ static SEXP positiveSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx)
 }
 
 static SEXP integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
-		 SEXP call, SEXP x)
+		 SEXP call, SEXP x, int dim)
 {
     bool isna = false, neg = false,
 	canstretch = (*stretch > 0);
@@ -782,7 +782,7 @@ static SEXP integerSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
     if (max > nx) {
 	if(canstretch) *stretch = max;
 	else {
-	    ECALL_OutOfBounds(x, -1, max, call);
+	    ECALL_OutOfBounds(x, dim, max, call);
 	}
     }
     if (neg) {
@@ -1011,13 +1011,13 @@ attribute_hidden SEXP R::int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, 
     case LGLSXP:
 	return logicalSubscript(s, ns, nd, &stretch, call);
     case INTSXP:
-	return integerSubscript(s, ns, nd, &stretch, call, x);
+	return integerSubscript(s, ns, nd, &stretch, call, x, dim);
     case REALSXP:
 	{
 	/* We don't yet allow subscripts > R_SHORT_LEN_MAX */
 	GCStackRoot<> tmp;
 	tmp = coerceVector(s, INTSXP);
-	tmp = integerSubscript(tmp, ns, nd, &stretch, call, x);
+	tmp = integerSubscript(tmp, ns, nd, &stretch, call, x, dim);
 	return tmp;
 	}
     case STRSXP:
@@ -1095,7 +1095,7 @@ attribute_hidden SEXP R::makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP c
 	ans = logicalSubscript(s, ns, nx, stretch, call);
 	break;
     case INTSXP:
-	ans = integerSubscript(s, ns, nx, stretch, call, x);
+	ans = integerSubscript(s, ns, nx, stretch, call, x, -1);
 	break;
     case REALSXP:
 	ans = realSubscript(s, ns, nx, stretch, call, x);

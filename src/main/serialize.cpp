@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1995--2025  The R Core Team
+ *  Copyright (C) 1995--2026  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -3271,7 +3271,7 @@ static SEXP R_getVarsFromFrame(SEXP vars, SEXP env, SEXP forcesxp)
 	if (tmp == R_UnboundValue) {
 /*		PrintValue(env);
 		PrintValue(R_GetTraceback(0)); */  /* DJM debugging */
-	    error(_("object '%s' not found"), EncodeChar(STRING_ELT(vars, i)));
+	    R_ObjectNotFoundError(sym, R_CurrentExpression, NULL);
 	    }
 	if (force && TYPEOF(tmp) == PROMSXP) {
 	    tmp = eval(tmp, R_GlobalEnv);
