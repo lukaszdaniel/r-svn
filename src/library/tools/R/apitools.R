@@ -564,11 +564,16 @@ checkAPI <- function() {
     if(.Platform$OS.type == "windows")
         return(invisible(NULL))
 
+    ## make codetools happy
+    name <- NULL
+    type <- NULL
+    apitype <- NULL
+
     ## Check all functions declared in installed headers are in the API.
     v <- subset(Rdecls(),
                 type == "F" & unmap(name) %notin% unmap(funAPI()$name))
     if (nrow(v) != 0)
-        stop(sprintf("non-API functions declared in installeed headers: %s",
+        stop(sprintf("non-API functions declared in installed headers: %s",
                      paste(v$name, collapse = " ")))
 
     ## Check all variables declared in installed headers are in the API

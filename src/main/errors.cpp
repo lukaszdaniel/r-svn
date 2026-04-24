@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1995--2025  The R Core Team.
+ *  Copyright (C) 1995--2026  The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -2737,19 +2737,24 @@ SEXP R::R_makeErrorCondition(SEXP call,
     return cond;
 }
 
-NORET void R::R_MissingArgError_c(const char* arg, SEXP call, const char* subclass)
+NORET void R::R_MissingArgError_c(const char* arg, SEXP call_, const char* subclass)
 {
-    if (call == R_CurrentExpression) /* as error() */
-	call = getCurrentCall();
-    PROTECT(call);
+    if (call_ == R_CurrentExpression) /* as error() */
+	call_ = getCurrentCall();
+    GCStackRoot<> call(call_);
     GCStackRoot<> cond;
-    if (*arg)
-	cond = R_makeErrorCondition(call, "missingArgError", subclass, 0,
+    bool non_empty_arg = (arg[0] != 0);
+    if (non_empty_arg)
+	cond = R_makeErrorCondition(call, "missingArgError", subclass, 1,
 				    _("argument \"%s\" is missing, with no default"), arg);
     else
-	cond = R_makeErrorCondition(call, "missingArgError", subclass, 0,
+	cond = R_makeErrorCondition(call, "missingArgError", subclass, 1,
 				    _("argument is missing, with no default"));
 
+    if (non_empty_arg)
+	R_setConditionField(cond, 2, "name", install(arg));
+    else
+	R_setConditionField(cond, 2, "name", R_NilValue);
     R_signalErrorCondition(cond, call);
 }
 

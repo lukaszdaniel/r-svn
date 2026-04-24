@@ -93,7 +93,7 @@ const char *R_ExpandFileNameUTF8(const char *);
 void	Rf_setIVector(int*, int, int);
 void	Rf_setRVector(double*, int, double);
 */
-/* Not API */
+/* Experimental API */
 Rboolean Rf_StringFalse(const char *); // used by iotools
 Rboolean Rf_StringTrue(const char *); // used by iotools
 Rboolean Rf_isBlankString(const char *); // used by iotools and openxlsx2
