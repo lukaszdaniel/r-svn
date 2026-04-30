@@ -38,7 +38,9 @@
 
   \subsection{Installation}{
     \itemize{
-      \item .
+      \item Building R, e.g., on Ubuntu 26.04, using \command{--package-metadata}
+        needs to use a different \command{sed} separator than \code{:},
+	fixing \PR{19060}, thanks to \I{Jeroen Ooms} and \I{Dirk Eddelbuettel}.
     }
   }
 
@@ -57,11 +59,40 @@
   \subsection{Bug Fixes}{
     \itemize{
       \item For \code{x <-  <large-POSIXlt>}, \code{c(x)}, subsetting
-    (\code{[}, \code{[[}) and \I{subassignment} such as \code{x[i] <- val} now
-    work again mostly, thanks to suggestions by \I{Suharto Anggono} in
-    \PR{18989}.
+      (\code{[}, \code{[[}) and \I{subassignment} such as \code{x[i] <- val} now
+      work again mostly, thanks to suggestions by \I{Suharto Anggono} in
+      \PR{18989}.
+
+      \item \code{cut(1:11, {})} now signals an error for the invalid
+      \code{breaks}, fixing \PR{19057}, thanks to \I{Kevin Ushey}.
+
+      \item \code{abbreviate(<non-ASCII>)} now works better, using
+      \code{iswlower()} and \code{*upper()} to treat \dQuote{wide}
+      characters, thanks to \I{Kevin}'s \PR{19058}.
+
+      \item In an \R installation without \acronym{NLS}, e.g., from
+      \command{--disable-nls} configuration, the C \code{ngettext()}
+      replacement now also keeps plural for \dQuote{0 things}, thanks to
+      \I{Michael Chirico}'s \PR{19065}.
+
+      \item \code{as.data.frame.vector(<row.names_w/_NA>)} now signals
+      the same error as \code{data.frame()}, fixing \I{Hervé Pagès}'
+      \PR{19059}.
     }
   }
+}
+
+
+\section{\Rlogo Changes in R 4.6.0 patched}{
+
+  \subsection{New Features}{
+    \itemize{
+      \item The \LaTeX class \samp{jss} bundled in
+      \file{share/texmf/tex/latex/jss.cls} has been updated
+      to work with \samp{hyperref} version 7.01q (2026/04/24).
+    }
+  }
+
 }
 
 \section{\Rlogo Changes in R 4.6.0}{
@@ -874,7 +905,7 @@
       \code{v} is now converted to the time zone of \code{dat}, before
       being assigned, see \PR{18919}.
 
-      \item The \code{"tzcode"} attribute of \code{"POSIXlt"} objects
+      \item The \code{"tzone"} attribute of \code{"POSIXlt"} objects
       should no longer depend on earlier calls, fixing \PR{19005} thanks to
       \I{Ivan Krylov}, a patch by \I{Suharto Anggono} and reports of
       \dQuote{\I{Non-deterministic POSIXlt tzone in Europe/London ..}} on

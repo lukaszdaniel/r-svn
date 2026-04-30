@@ -1238,7 +1238,8 @@ for(nr in 0:2) {
 gp  <- getVaW(pbinom(1234560:1234570, 9876543.2, 1/8))
 (gdp <- getVaW(dpois(9876543 + (2:8)/10, 1e7)))
 stopifnot(exprs = {
-    identical(gd, structure(rep(NaN, 11), warning = "NaNs produced"))
+    !englishMsgs ||
+        identical(gd, structure(rep(NaN, 11), warning = "NaNs produced"))
     identical(gd, gp)
     identical(gdp, structure(rep(0,7), # only *last* warning:
                              warning = "non-integer x = 9876543.800000"))
@@ -1252,7 +1253,9 @@ t0 <- getVaW(terms(y ~ a+b, abb = 1))
 t1 <- getVaW(terms(y ~ a+b, neg.out = 0))
 t2 <- getVaW(terms(y ~ a+b, abb=NA, neg.out=NA))
 stopifnot(exprs = {
+    !englishMsgs ||
     identical(t0, structure(tt, warning = "setting 'abb' in terms.formula() is deprecated"))
+    !englishMsgs ||
     identical(t1, structure(tt, warning = "setting 'neg.out' in terms.formula() is deprecated"))
     identical(t2, t1)
 })
@@ -3157,6 +3160,79 @@ stopifnot(identical(tryCatch(matrix(1:6, nrow = 2)[3, 1],
 
 ## Check that headers, WRE, and non-API variables are in sync
 # tools:::checkAPI()
+## New functionality, takes a few secs
+
+
+## cut(*, <empty breaks>) -- PR#19057
+assertErrV( cut(1:3, {}) )
+## gave an <NA> vector w/ bizarre levels in R <= 4.6.0
+
+
+## Tailcall in non-tail position: jump, like return()
+stopifnot((function() 1 + Tailcall(log, 1))() == 0)
+
+## Tailcall stops at context in .Internal(eval()) for now, like return()
+local({
+    f <- function(x) {
+        e <- environment()
+        g <- function(x) evalq(Tailcall(identity, x), e)
+        g(x)
+        "B"
+    }
+    stopifnot(identical(f("A"), "B"))
+})
+
+## Tailcall handles substitute() missing args in caller like S3 dispatch
+local({
+    f <- function(x) Tailcall(function(y) substitute(y), x)
+    stopifnot(identical(f(1 + 2), quote(1 + 2)))
+    g <- function(x) Tailcall(function(y = 1) y, x)
+    stopifnot(g() == 1)
+})
+
+## Tailcall handles parent.frame() like caller
+f <- function() Tailcall(function() parent.frame())
+e <- f()
+stopifnot(identical(e, .GlobalEnv))
+
+
+## In a  --disable-nls configuration, "0 things" should remain plural; PR#19065
+mE <- tryCid( sin() )
+stopifnot(inherits(mE, "error"))
+if(englishMsgs)
+    stopifnot(grepl("0 arguments passed to 'sin'", conditionMessage(mE)))
+## gave "0 argument passed .." in R <= 4.6.0 (--disable-nls)
+
+
+## as.data.frame.vector() with NA rownames -- PR#19059
+assertErrV( as.data.frame(setNames(11:12, c("a", NA))) )
+## gave a data frame with `NA` in row names, in R <= 4.6.0
+
+
+## abbreviate(<non-ASCII>) -- PR#19058
+ch1 <- intToUtf8(c(112L, 345L, 237L, 115:116, 345L, 101L, 353L, 101L, 107L))
+lcct <- Sys.getlocale("LC_CTYPE") # saved
+Sys.getlocale() # just for info ..
+for(loc in c("C", if(onWindows) c("", "English_US.utf8") else "C.UTF-8")) {
+                      ## Windows: "" means 'the implementation-defined native environment'
+    locW <- getVaW(lc <- Sys.setlocale("LC_CTYPE", loc))# warning on Windows & some server Linux, incl docker/podman.
+    cat("Warning?", attr(locW, "warning") %||% "No; all fine", "\n")
+    if(!is.null(lc) && nzchar(lc)) { # when Sys.setlocale() worked supposedly
+        cat("\n", lc, ": ", sep="")
+        suppressWarnings(a1 <- abbreviate(ch1)) # FIXME - should it warn even when "correct"?
+        ## In abbreviate("přístřešek") : abbreviate used with non-ASCII chars
+        print(a1) # correctly "přst" *in* case
+        print(hasUTF8 <- grepl("utf-?8$", print(Sys.getlocale("LC_CTYPE")), ignore.case=TRUE))
+        stopifnot(identical(ch1, names(a1)),
+                  identical(c(112L, 345L, if(hasUTF8 || grepl("macOS", osVersion))
+                                               c(115L, if(onWindows) 345L else 116L)
+                                          else c(345L, 353L)),
+                            print(utf8ToInt(a1))))
+    }
+}
+if(!is.null(lc <- lcct) && nzchar(lc)) Sys.setlocale("LC_CTYPE", lc) # revert
+## <chars>(a1)[3:4] were different in R <= 4.6.0
+
 
 
 ## keep at end

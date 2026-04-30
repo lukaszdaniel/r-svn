@@ -44,7 +44,7 @@
 #define GN_(String) gettext_noop(String)
 #else /* not NLS */
 #define _(String) (String)
-#define n_(String, StringP, N) (N > 1 ? StringP : String)
+#define n_(String, StringP, N) (N != 1 ? StringP : String)
 #define N_(String) String
 #define G_(String) (String)
 #define GN_(String) String

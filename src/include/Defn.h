@@ -486,7 +486,7 @@ union R_bndval_t {
 #define ENV_RDEBUG(x)	((x)->sxpinfo.debug)
 #define SET_ENV_RDEBUG(x,v)	(((x)->sxpinfo.debug)=(v))
 
-/* Test macros with function versions above */
+/* Test macros with function versions in Rinternals.h , included above */
 #undef isNull
 #define isNull(s)	(TYPEOF(s) == NILSXP)
 #undef isSymbol
@@ -890,7 +890,7 @@ SEXP (SET_CXTAIL)(SEXP x, SEXP y);
 # define FILESEP     "/"
 #endif /* Win32 */
 
-/* F77_SYMBOL was a minimal version of F77_SUB from RS.h, 
+/* F77_SYMBOL was a minimal version of F77_SUB from RS.h,
    used in main/util.c and main/registration.c
    F77_QSYMBOL is unused
 #ifdef HAVE_F77_UNDERSCORE
@@ -1844,6 +1844,7 @@ SEXP deparse1w(SEXP,bool,int);
 SEXP deparse1line(SEXP, bool);
 SEXP deparse1line_ex(SEXP, bool, int);
 SEXP deparse1s(SEXP call);
+SEXP R_DispatchClosure(SEXP generic, SEXP mname, SEXP method, SEXP rho, SEXP callrho);
 std::pair<bool, SEXP> DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, bool, bool);
 bool DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, bool, bool);
 std::pair<bool, SEXP> DispatchOrEval(SEXP, SEXP, const char *, SEXP, SEXP, bool, bool);
