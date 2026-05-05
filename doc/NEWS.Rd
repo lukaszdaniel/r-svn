@@ -33,6 +33,12 @@
 
       \item Condition classes used internally for signaling some errors
       are now documented in \code{?conditions}.
+
+      \item The \code{as.data.frame()} methods for atomic \code{vector}
+      classes get an optional switch \code{validRN}, with default true to
+      fix \PR{19059} and false for some back compatibility, still
+      allowing data frames in construction to contain \code{NA}s in row
+      names.
     }
   }
 
@@ -58,13 +64,11 @@
 
   \subsection{Bug Fixes}{
     \itemize{
-      \item For \code{x <-  <large-POSIXlt>}, \code{c(x)}, subsetting
-      (\code{[}, \code{[[}) and \I{subassignment} such as \code{x[i] <- val} now
-      work again mostly, thanks to suggestions by \I{Suharto Anggono} in
-      \PR{18989}.
-
-      \item \code{cut(1:11, {})} now signals an error for the invalid
-      \code{breaks}, fixing \PR{19057}, thanks to \I{Kevin Ushey}.
+      \item For \code{x <-  <large-POSIXlt>}, for some boundary cases
+      with \code{x$sec - floor(x$sec)} close to 1, \code{c(x)} could
+      become one second ahead of \code{x} in \R 4.6.0;  \I{subassignments}
+      such as \code{x[i] <- val} have improved, thanks to suggestions by
+      \I{Suharto Anggono} in \PR{18989}.
 
       \item \code{abbreviate(<non-ASCII>)} now works better, using
       \code{iswlower()} and \code{*upper()} to treat \dQuote{wide}
@@ -77,7 +81,14 @@
 
       \item \code{as.data.frame.vector(<row.names_w/_NA>)} now signals
       the same error as \code{data.frame()}, fixing \I{Hervé Pagès}'
-      \PR{19059}.
+      \PR{19059}.  From \I{Suharto Anggono}'s comment #c4, it gives the same
+      error also when \code{row.names = RN} explicitly, where \code{RN} has
+      \code{NA}s.
+
+      \item \code{all(<symbol>)} signals an error now, as some similar
+      coercions; previously, the coercion of the symbol resulted
+      in \code{NULL} internally, raised a warning, and could access illegal
+      memory; thanks to \I{Kevin Ushey}'s \PR{19054}.
     }
   }
 }
@@ -92,7 +103,18 @@
       to work with \samp{hyperref} version 7.01q (2026/04/24).
     }
   }
+  \subsection{Bug Fixes}{
+    \itemize{
+      \item \code{cut(1:11, {})} now signals an error for the invalid
+      \code{breaks}, fixing \PR{19057}, thanks to \I{Kevin Ushey}.
 
+      \item \code{stl()} now checks its 3 x 3 tuning parameters on the R level;
+      \code{stl(*, s.window = 0)} now \dQuote{works} instead dumping core,
+      \code{stl(*, s.window = 1)} \dQuote{works} correctly, too.  Also, the
+      \code{summary()} method mentions the robustness \code{weights} only
+      if any robustness iterations happened.
+    }
+  }
 }
 
 \section{\Rlogo Changes in R 4.6.0}{
@@ -1597,7 +1619,7 @@
       %% There are claims that the Green Hills compiler can.
       %% In C++ rhis was confirmed as undefined behaviour in
       %% https://cplusplus.github.io/CWG/issues/1766.html
-      %% Some versiins of UBSAN caan check it with -fsanitize=enum
+      %% Some versions of UBSAN can check it with -fsanitize=enum
 
       If there were a platform which used an underlying type of a
       different size this would be an \abbr{ABI}-breaking change (but we are
@@ -4966,7 +4988,7 @@
 
       \item Improved determination of the correct translation domain in
       non-base packages, addressing the combination of \PR{18092} and
-      \PR{17998} (\code{#c6}) with reports and \emph{augmented} patch
+      \PR{17998} (\samp{#c6}) with reports and \emph{augmented} patch
       #2904 by \I{Suharto Anggono}.
 
       Note that \code{"R-base"} is no longer the default domain e.g.,

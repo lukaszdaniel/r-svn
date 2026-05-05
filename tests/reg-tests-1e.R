@@ -3171,7 +3171,7 @@ assertErrV( cut(1:3, {}) )
 ## Tailcall in non-tail position: jump, like return()
 stopifnot((function() 1 + Tailcall(log, 1))() == 0)
 
-## Tailcall stops at context in .Internal(eval()) for now, like return()
+## Tailcall does not stop at context in .Internal(eval()), unlike return()
 local({
     f <- function(x) {
         e <- environment()
@@ -3179,7 +3179,7 @@ local({
         g(x)
         "B"
     }
-    stopifnot(identical(f("A"), "B"))
+    stopifnot(identical(f("A"), "A"))
 })
 
 ## Tailcall handles substitute() missing args in caller like S3 dispatch
@@ -3205,8 +3205,16 @@ if(englishMsgs)
 
 
 ## as.data.frame.vector() with NA rownames -- PR#19059
-assertErrV( as.data.frame(setNames(11:12, c("a", NA))) )
+e1 <- tryCid( as.data.frame(setNames(11:12, c("a", NA))) ) ## and the same, explicitly:
+e2 <- tryCid( as.data.frame(         11:12, c("a", NA))  )
+writeLines(as.character(e1))
+stopifnot(identical(e1$message, e2$message), identical(class(e1), class(e2)))
 ## gave a data frame with `NA` in row names, in R <= 4.6.0
+dftN <- as.data.frame(tab <- table(ff <- penguins$sex, useNA = "ifany"))
+stopifnot(identical(3:2, dim(dftN)),
+          identical(structure(c(1:2, NA), levels = levels(ff), class = "factor"),
+                    dftN[,"Var1"]))
+## as.DF(<tab_w_NA>) failed after first fix ..
 
 
 ## abbreviate(<non-ASCII>) -- PR#19058
@@ -3224,14 +3232,20 @@ for(loc in c("C", if(onWindows) c("", "English_US.utf8") else "C.UTF-8")) {
         print(a1) # correctly "přst" *in* case
         print(hasUTF8 <- grepl("utf-?8$", print(Sys.getlocale("LC_CTYPE")), ignore.case=TRUE))
         stopifnot(identical(ch1, names(a1)),
-                  identical(c(112L, 345L, if(hasUTF8 || grepl("macOS", osVersion))
-                                               c(115L, if(onWindows) 345L else 116L)
+                  identical(c(112L, 345L, if(hasUTF8 || onWindows || grepl("macOS", osVersion))
+                                               c(115L, 116L) # also: if(onWindows) 345L else 116L
                                           else c(345L, 353L)),
                             print(utf8ToInt(a1))))
     }
 }
 if(!is.null(lc <- lcct) && nzchar(lc)) Sys.setlocale("LC_CTYPE", lc) # revert
 ## <chars>(a1)[3:4] were different in R <= 4.6.0
+
+
+## <symbol> -> <logical> etc via C level coerceSymbol() -- PR#19054
+assertErrV( all(quote(symbool)) )
+assertErrV( any(quote(symbool)) )
+## gave warnings but then TRUE or FALSE in R <= 4.6.0
 
 
 
