@@ -89,6 +89,14 @@
       coercions; previously, the coercion of the symbol resulted
       in \code{NULL} internally, raised a warning, and could access illegal
       memory; thanks to \I{Kevin Ushey}'s \PR{19054}.
+
+      \item \code{.leap.seconds} again has no \code{"tzone"} attribute, as
+      in earlier \R versions, fixing \PR{19072} thanks to \I{Suharto Anggono}.
+
+      \item \code{as.POSIXct(x)} for \code{POSIXlt} object \code{x} with
+      \code{.Machine$integer.max - x$year < 1900} no longer suffers from C
+      level integer overflow, thanks to \I{Suharto Anggono}'s patch for
+      \PR{19038}.
     }
   }
 }
@@ -101,8 +109,13 @@
       \item The \LaTeX class \samp{jss} bundled in
       \file{share/texmf/tex/latex/jss.cls} has been updated
       to work with \samp{hyperref} version 7.01q (2026/04/24).
+
+      \item Plain-text (and legacy HTML) conversion for a simple Rd
+      \verb{\eqn{}} now handles \verb{\geq} and \verb{\leq} in addition
+      to \verb{\ge} and \verb{\le} (\PR{19070}).
     }
   }
+
   \subsection{Bug Fixes}{
     \itemize{
       \item \code{cut(1:11, {})} now signals an error for the invalid
@@ -113,6 +126,10 @@
       \code{stl(*, s.window = 1)} \dQuote{works} correctly, too.  Also, the
       \code{summary()} method mentions the robustness \code{weights} only
       if any robustness iterations happened.
+
+      Further, \code{stl()} is now based on C code, translated from previous
+      Fortran, triggered by a \I{flang 22} compiler optimization bug
+      (\command{-O2}).
     }
   }
 }
