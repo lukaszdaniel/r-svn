@@ -211,20 +211,22 @@ SEXP C_filledcontour(SEXP args)
     /* Check of grid coordinates */
     /* We want them to all be finite */
     /* and in strictly ascending order */
+    auto badxy = [] { error("%s", _("invalid x / y values or limits")); };
+    auto badlev = [] { error("%s", _("invalid contour levels: must be strictly increasing")); };
 
-    if (nx < 1 || ny < 1) goto badxy;
-    if (!R_FINITE(x[0])) goto badxy;
-    if (!R_FINITE(y[0])) goto badxy;
+    if (nx < 1 || ny < 1) badxy();
+    if (!R_FINITE(x[0])) badxy();
+    if (!R_FINITE(y[0])) badxy();
     for (int i = 1; i < nx; i++)
-	if (!R_FINITE(x[i]) || x[i] <= x[i - 1]) goto badxy;
+	if (!R_FINITE(x[i]) || x[i] <= x[i - 1]) badxy();
     for (int j = 1; j < ny; j++)
-	if (!R_FINITE(y[j]) || y[j] <= y[j - 1]) goto badxy;
+	if (!R_FINITE(y[j]) || y[j] <= y[j - 1]) badxy();
 
     /* Check of the contour levels */
 
-    if (!R_FINITE(c[0])) goto badlev;
+    if (!R_FINITE(c[0])) badlev();
     for (int k = 1; k < nc; k++)
-	if (!R_FINITE(c[k]) || c[k] <= c[k - 1]) goto badlev;
+	if (!R_FINITE(c[k]) || c[k] <= c[k - 1]) badlev();
 
     colsave = gpptr(dd)->col;
     xpdsave = gpptr(dd)->xpd;
@@ -255,12 +257,6 @@ SEXP C_filledcontour(SEXP args)
     gpptr(dd)->xpd = xpdsave;
     UNPROTECT(5);
     return R_NilValue;
-
- badxy:
-    error("%s", _("invalid x / y values or limits"));
- badlev:
-    error("%s", _("invalid contour levels: must be strictly increasing"));
-    return R_NilValue;  /* never used; to keep -Wall happy */
 }
 
 

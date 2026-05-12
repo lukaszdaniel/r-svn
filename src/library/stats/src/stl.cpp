@@ -434,139 +434,118 @@ void stlss(const double y[], int n, int np, int ns, int isdeg, int nsjump,
 
 
 /* Partial Sorting ; used for Median (MAD) computation only */
-static
-void psort(double *a, int n, int *ind, int ni)
+static void psort(double *a, int n, int *ind, int ni)
 {
-    if (n < 0 || ni < 0) {
-	return;
-    }
-    if (n < 2 || ni == 0) {
-	return;
-    }
-	int p1 = 0;
-	double t = 0.0;
-	int k = 0;
-	int l = 0;
-	int ij = 0;
-    int il[16], iu[16];
-    int indl[16], indu[16];
+    if (n < 2 || ni <= 0)
+        return;
 
-    /* Parameter adjustments */
     --a;
     --ind;
 
-    int jl = 1,
-	ju = ni,
-	i = 1,
-	j = n,
-	m = 0;
-    indl[0] = 1;
-    indu[0] = ni;
+    struct StackItem
+    {
+        int i, j;
+        int jl, ju;
+    };
 
-LoopOuter: // L 161
-    if (i < j) {
-	goto L10;
-    }
-/*  _Loop_ */
-Loop: // L 166
-    --m;
-    if (m < 0) {
-	return;
-    }
-    i = il[m];
-    j = iu[m];
-    jl = indl[m];
-    ju = indu[m];
-    if (! (jl <= ju)) {
-	goto Loop;
-    }
-/*     while (j - i > 10) */
-L173:
-    if (! (j - i > 10)) {
-	goto L174;
-    }
-L10:
-    k = i, l = j,
-	ij = (i + j) / 2;
-    t = a[ij];
-    if (a[i] > t) { // swap a[i] <--> a[ij]
-	a[ij] = a[i]; a[i] = t; t = a[ij];
-    }
-    if (a[j] < t) { // swap a[j] ..
-	a[ij] = a[j]; a[j] = t; t = a[ij];
-	if (a[i] > t) { // swap
-	    a[ij] = a[i]; a[i] = t; t = a[ij];
-	}
-    }
-    do { // L181:
-	--l;
-	if (a[l] <= t) {
-	    double tt = a[l];
-	    do
-		++k;
-	    while (a[k] < t);
-	    if (k > l)
-		break;
-	    a[l] = a[k];
-	    a[k] = tt;
-	}
-    } while(1);
+    StackItem stack[16];
+    int top = 0;
 
-    indl[m] = jl;
-    indu[m] = ju;
-    p1 = m;
-    ++m;
-    if (l - i <= j - k) {
-	il[p1] = k;
-	iu[p1] = j;
-	j = l;
-    L_1:
-	if (jl > ju) {
-	    goto Loop;
-	}
-	if (ind[ju] > j) {
-	    --ju;
-	    goto L_1;
-	}
-	indl[p1] = ju + 1;
-    } else {
-	il[p1] = i;
-	iu[p1] = l;
-	i = k;
-    L_2:
-	if (jl > ju) {
-	    goto Loop;
-	}
-	if (ind[jl] < i) {
-	    ++jl;
-	    goto L_2;
-	}
-	indu[p1] = jl - 1;
-    }
-    goto L173;
-/*     end while */
-L174:
+    stack[top++] = { 1, n, 1, ni };
 
-    if (i != 1) {
-	--i;
-	do { // L209:
-	    ++i;
-	    if (i == j) {
-		goto Loop;
-	    }
-	    t = a[i + 1];
-	    if (a[i] > t) {
-		k = i;
-		do {
-		    a[k + 1] = a[k];
-		    --k;
-		} while (!(t >= a[k]));
-		/* now  t >= a(k) */
-		a[k + 1] = t;
-	    }
-	} while(1);
-    }
-    goto LoopOuter;
+    while (top > 0)
+    {
+        auto [i0, j0, jl0, ju0] = stack[--top];
 
+        int i = i0;
+        int j = j0;
+        int jl = jl0;
+        int ju = ju0;
+
+        if (jl > ju)
+            continue;
+
+        // quicksort for bigger ranges
+        while (j - i > 10)
+        {
+            int k = i;
+            int l = j;
+            int ij = (i + j) / 2;
+
+            double t = a[ij];
+
+            // median-of-three
+            if (a[i] > t)
+            {
+                std::swap(a[i], a[ij]);
+                t = a[ij];
+            }
+
+            if (a[j] < t)
+            {
+                std::swap(a[j], a[ij]);
+                t = a[ij];
+
+                if (a[i] > t)
+                {
+                    std::swap(a[i], a[ij]);
+                    t = a[ij];
+                }
+            }
+
+            // partition
+            while (true)
+            {
+                do {
+                    --l;
+                } while (a[l] > t);
+
+                do {
+                    ++k;
+                } while (a[k] < t);
+
+                if (k > l)
+                    break;
+
+                std::swap(a[k], a[l]);
+            }
+
+            // remember bigger fragment on stack,
+            // smaller one process immediately
+            if (l - i <= j - k)
+            {
+                stack[top++] = { k, j, ju + 1, ju };
+
+                j = l;
+
+                while (jl <= ju && ind[ju] > j)
+                    --ju;
+            }
+            else
+            {
+                stack[top++] = { i, l, jl, jl - 1 };
+
+                i = k;
+
+                while (jl <= ju && ind[jl] < i)
+                    ++jl;
+            }
+        }
+
+        // insertion sort for smaller fragments
+        for (int p = i + 1; p <= j; ++p)
+        {
+            double t = a[p];
+            int k = p - 1;
+
+            while (k >= i && a[k] > t)
+            {
+                a[k + 1] = a[k];
+                --k;
+            }
+
+            a[k + 1] = t;
+        }
+    }
 } /* psort_ */
 

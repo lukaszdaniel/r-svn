@@ -4496,10 +4496,18 @@ static void mbcsToSbcs(const char *in, char *out, const char *encoding,
     o_buf = (char *) out;
     /* libiconv in macOS 14 can expand 1 UTF-8 char to at least 4 (o/oo) */
     o_len = 2*i_len;
-next_char:
+
+    bool conversion_done = false;
+
+    while (!conversion_done) {
     status = Riconv(cd, &i_buf, &i_len, &o_buf, &o_len);
     /* GNU libiconv 1.13 gave EINVAL on \xe0 in UTF-8 (as used in fBasics) */
-    if(status == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
+    if (status == (size_t) -1 && (errno == EILSEQ || errno == EINVAL)) {
+        conversion_done = false;
+    } else {
+        conversion_done = true;
+    }
+
 	Riconv(cd, NULL, NULL, &o_buf, &o_len);
 	const char *m = getenv("_R_CHECK_MBCS_CONVERSION_FAILURE_");
 	int fail = (m != NULL);
@@ -4624,7 +4632,8 @@ next_char:
 		warning(_("conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"), in, (unsigned char) *i_buf);
 	    *o_buf++ = '.'; o_len--; i_buf++; i_len--;
 	}
-	if(i_len > 0) goto next_char;
+            if (i_len == 0)
+                conversion_done = true;
     }
 
     Riconv_close(cd);

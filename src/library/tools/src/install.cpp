@@ -42,6 +42,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <Defn.h>
@@ -136,25 +137,26 @@ SEXP dirchmod(SEXP dr, SEXP gwsxp)
 
 SEXP codeFilesAppend(SEXP f1, SEXP f2)
 {
-    int n, n1, n2;
+    int n1 = 0;
     if (!isString(f1) || (n1 = LENGTH(f1)) != 1)
 	error(_("invalid '%s' argument"), "file1");
     if (!isString(f2))
 	error(_("invalid '%s' argument"), "file2");
-    n2 = LENGTH(f2);
+    int n2 = LENGTH(f2);
     if (n2 < 1) return LogicalVector::create(0);
-    n = (n1 > n2) ? n1 : n2; // will be n2.
-    SEXP ans = PROTECT(LogicalVector::create(n));
+    int n = (n1 > n2) ? n1 : n2; // will be n2.
+    GCStackRoot<LogicalVector> ans;
+    ans = LogicalVector::create(n);
     for (int i = 0; i < n; i++) LOGICAL(ans)[i] = 0;  /* all FALSE */
     FILE *fp1, *fp2;
     char buf[APPENDBUFSIZE];
-    int status = 0;
+    bool status = false;
     size_t nchar;
     if (STRING_ELT(f1, 0) == NA_STRING ||
 	!(fp1 = RC_fopen(STRING_ELT(f1, 0), "ab", TRUE)))
-	goto done;
+	return ans;
     for (int i = 0; i < n; i++) {
-	status = 0;
+	status = false;
 	if (STRING_ELT(f2, i) == NA_STRING ||
 	    !(fp2 = RC_fopen(STRING_ELT(f2, i), "rb", TRUE))) continue;
 	snprintf(buf, APPENDBUFSIZE, "#line 1 \"%s\"\n",
@@ -167,14 +169,13 @@ SEXP codeFilesAppend(SEXP f1, SEXP f2)
 	if (!nchar || buf[nchar - 1] != '\n')
 	    if (fwrite("\n", 1, 1, fp1) != 1) goto append_error;
 
-	status = 1;
+	status = true;
     append_error:
-	if (status == 0) warning("%s", _("write error during file append"));
+	if (status == false) warning("%s", _("write error during file append"));
 	LOGICAL(ans)[i] = status;
 	fclose(fp2);
     }
     fclose(fp1);
-done:
-    UNPROTECT(1);
+
     return ans;
 }

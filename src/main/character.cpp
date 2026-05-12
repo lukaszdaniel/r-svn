@@ -879,6 +879,7 @@ static void mywcscpy(wchar_t *dest, const wchar_t *src)
 
 static SEXP wstripchars(const wchar_t * const inchar, size_t minlen, bool usecl)
 {
+    if (inchar == nullptr) return R_NilValue;
     int i, j;
     size_t nspace = 0;
     wchar_t *wc = (wchar_t *)cbuff.data;

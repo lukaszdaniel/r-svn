@@ -46,6 +46,7 @@ SEXP compcases(SEXP args)
     args = CDR(args);
 
     len = -1;
+	auto bad = [] { error("%s", _("not all arguments have the same length")); };
 
     for (s = args; s != R_NilValue; s = CDR(s)) {
 	if (isList(CAR(s))) {
@@ -55,13 +56,13 @@ SEXP compcases(SEXP args)
 		    if (len < 0)
 			len = INTEGER(u)[0];
 		    else if (len != INTEGER(u)[0])
-			goto bad;
+			bad();
 		}
 		else if (isVector(CAR(t))) {
 		    if (len < 0)
 			len = LENGTH(CAR(t));
 		    else if (len != LENGTH(CAR(t)))
-			goto bad;
+			bad();
 		}
 		else
 		    error(R_MSG_type, R_typeToChar(CAR(t)));
@@ -80,13 +81,13 @@ SEXP compcases(SEXP args)
 			if (len < 0)
 			    len = INTEGER(u)[0];
 			else if (len != INTEGER(u)[0])
-			    goto bad;
+			    bad();
 		    }
 		    else if (isVector(VECTOR_ELT(t, it))) {
 			if (len < 0)
 			    len = LENGTH(VECTOR_ELT(t, it));
 			else if (len != LENGTH(VECTOR_ELT(t, it)))
-			    goto bad;
+			    bad();
 		    }
 		    else
 			error(R_MSG_type, "unknown");
@@ -97,7 +98,7 @@ SEXP compcases(SEXP args)
 		    if (len < 0)
 			len = LENGTH(u);
 		    else if (len != INTEGER(u)[0])
-			goto bad;
+			bad();
 		}
 	    }
 	}
@@ -106,13 +107,13 @@ SEXP compcases(SEXP args)
 	    if (len < 0)
 		len = INTEGER(u)[0];
 	    else if (len != INTEGER(u)[0])
-		goto bad;
+		bad();
 	}
 	else if (isVector(CAR(s))) {
 	    if (len < 0)
 		len = LENGTH(CAR(s));
 	    else if (len != LENGTH(CAR(s)))
-		goto bad;
+		bad();
 	}
 	else
 	    error(R_MSG_type, R_typeToChar(CAR(s)));
@@ -225,8 +226,4 @@ SEXP compcases(SEXP args)
 	}
     }
     return rval;
-
- bad:
-    error("%s", _("not all arguments have the same length"));
-    return R_NilValue; /* -Wall */
 }
