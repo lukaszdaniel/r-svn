@@ -39,6 +39,9 @@
       fix \PR{19059} and false for some back compatibility, still
       allowing data frames in construction to contain \code{NA}s in row
       names.
+
+      \item \code{tools::Rd2txt()} now replaces \samp{---} and \samp{--}
+      by Unicode dashes when the output encoding is UTF-8.
     }
   }
 
@@ -111,8 +114,8 @@
       to work with \samp{hyperref} version 7.01q (2026/04/24).
 
       \item Plain-text (and legacy HTML) conversion for a simple Rd
-      \verb{\eqn{}} now handles \verb{\geq} and \verb{\leq} in addition
-      to \verb{\ge} and \verb{\le} (\PR{19070}).
+      \verb{\eqn{}} now handles \verb{\geq}, \verb{\leq}, \verb{\neq}
+      and \verb{\ne} in addition to \verb{\ge} and \verb{\le} (\PR{19070}).
     }
   }
 

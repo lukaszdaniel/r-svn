@@ -48,6 +48,7 @@ Rd2txt_options <- local({
         else {
             if (is.list(args[[1L]])) args <- args[[1L]]
             result <- opts[names(args)]
+            names(result) <- names(args)
             opts[names(args)] <<- args
             invisible(result)
         }
@@ -342,10 +343,9 @@ Rd2txt <-
     }
 
     ## for efficiency
-    li <- l10n_info()
-    WriteLines <-
-        if(outputEncoding == "UTF-8" ||
-           (outputEncoding == "" && li[["UTF-8"]])) {
+    asUTF8 <- outputEncoding == "UTF-8" ||
+        (outputEncoding == "" && l10n_info()[["UTF-8"]])
+    WriteLines <- if(asUTF8) {
         function(x, con, outputEncoding, ...)
             writeLines(x, con, useBytes = TRUE, ...)
     } else {
@@ -460,15 +460,11 @@ Rd2txt <-
     	linestart <<- TRUE
     }
 
-    ## See the comment in ?Rd2txt as to why we do not attempt fancy quotes
-    ## in Windows CJK locales -- and in any case they would need more work
-    ## This covers the common single-byte locales and Thai (874)
-    use_fancy_quotes <-
-        (.Platform$OS.type == "windows" &&
-         ((li$codepage >= 1250 && li$codepage <= 1258) || li$codepage == 874)) ||
-        li[["UTF-8"]]
+    unicode_symbols <- asUTF8 &&
+        ## disable in title (see .Rd_get_text) to match existing *-Ex.Rout.save
+        !isFALSE(Rd2txt_options()$unicode_symbols)
 
-    if(!isFALSE(getOption("useFancyQuotes")) && use_fancy_quotes) {
+    if(unicode_symbols && !isFALSE(getOption("useFancyQuotes"))) {
     	LSQM <- "\u2018"                # Left single quote
     	RSQM <- "\u2019"                # Right single quote
     	LDQM <- "\u201c"                # Left double quote
@@ -495,9 +491,13 @@ Rd2txt <-
         } else header
     }
 
-    ## FIXME: replace by Unicode symbols ("\u2014", "\u2013") when possible
     unescape <- function(x) {
-        x <- psub("(---|--)", "-", x)
+        if (unicode_symbols) {
+            x <- fsub("---", "\u2014", x)
+            x <- fsub("--",  "\u2013", x)
+        } else {
+            x <- psub("(---|--)", "-", x)
+        }
         x
     }
 
@@ -531,8 +531,10 @@ Rd2txt <-
     txt_eqn <- function(x) {
         x <- psub("\\\\(Alpha|Beta|Gamma|Delta|Epsilon|Zeta|Eta|Theta|Iota|Kappa|Lambda|Mu|Nu|Xi|Omicron|Pi|Rho|Sigma|Tau|Upsilon|Phi|Chi|Psi|Omega|alpha|beta|gamma|delta|epsilon|zeta|eta|theta|iota|kappa|lambda|mu|nu|xi|omicron|pi|rho|sigma|tau|upsilon|phi|chi|psi|omega|sum|prod|sqrt)", "\\1", x)
         x <- psub("\\\\(dots|ldots)", "...", x)
+        x <- psub("\\\\(left|right)", "", x)
         x <- psub("\\\\leq?", "<=", x)
         x <- psub("\\\\geq?", ">=", x)
+        x <- psub("\\\\neq?", "!=", x)
         x <- fsub("\\infty", "Inf", x)
         ## FIXME: are these needed?
         x <- psub("\\\\(bold|strong|emph|var)\\{([^}]*)\\}", "\\2", x)

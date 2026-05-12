@@ -5522,13 +5522,12 @@ presence (perhaps using @code{Sys.which}), as well as declared in the
 @samp{SystemRequirements} field.  A package should pass its checks
 without warnings nor errors without the external command being
 present. @strong{N.B.}: @file{/usr/sbin} and @file{/sbin}@footnote{where
-different, which it is on macOS.} are intended for administrator commands
-and may not be on the end-user path: examples of commands which packages
-have (wrongly) assumed to be available are @command{sysctl} and
-@command{ping}.
-Commands with simple English names (such as @command{go} and
-@command{ping}) should be checked (maybe @emph{via} @option{--version})
-that they are the intended command.
+different, which it is on macOS.} are intended for administrator
+commands and may not be on the end-user path: examples of commands which
+packages have (wrongly) assumed to be available are @command{sysctl},
+@command{sha1sum} and @command{ping}.  Commands with simple English
+names (such as @command{go} and @command{ping}) should be checked (maybe
+@emph{via} @option{--version}) that they are the intended command.
 
 An external command can be a (possibly optional) requirement for an
 imported or suggested package but needed for examples, tests or
@@ -5772,8 +5771,8 @@ See @uref{https://ghostscript.readthedocs.io/en/latest/VectorDevices.html} for
 more such and consider all the options for image downsampling).  There
 have been examples in @acronym{CRAN} packages for which current versions
 of Ghostscript produced much bigger reductions than earlier ones (e.g.@:
-at the upgrades from @code{9.50} to @code{9.52}, from @code{9.55} to
-@code{9.56} and then to @code{10.00.0}).
+at the upgrades from @code{9.56} to @code{10.00.0} and from
+@code{10.06.0} to @code{10.07.0}).
 
 We come across occasionally large PDF files containing excessively
 complicated figures using PDF vector graphics: such figures are often
@@ -8253,13 +8252,13 @@ for x = 0, 1, 2, ... .
 
 This substituted @code{\ldots}, as it would @code{\dots}.
 Text conversion also handles the basic relational symbols
-@code{\ge} and @code{\le} (or @code{\geq} and @code{\leq}),
+@code{\ge}, @code{\le}, @code{\ne} (or @code{\geq}, @code{\leq}, @code{\neq}),
 so the 1-argument form suffices for, e.g., @code{\eqn@{0 < p \le 1@}}.
 
 In legacy @HTML{} help, Greek letters (both cases) will be rendered if preceded by a
 backslash, @code{\dots} and @code{\ldots} will be rendered as ellipses,
-and @code{\sqrt}, @code{\ge} and @code{\le} (or @code{\geq} and @code{\leq})
-as mathematical symbols.
+and @code{\sqrt}, @code{\ge} (or @code{\geq}), @code{\le} (or @code{\leq}),
+@code{\ne} (or @code{\neq}) as mathematical symbols.
 
 Note that only basic @LaTeX{} can be used, there being no provision to
 specify @LaTeX{} style files, but @abbr{AMS} extensions are supported
