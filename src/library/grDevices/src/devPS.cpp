@@ -4508,6 +4508,7 @@ static void mbcsToSbcs(const char *in, char *out, const char *encoding,
         conversion_done = true;
     }
 
+    if (!conversion_done) {
 	Riconv(cd, NULL, NULL, &o_buf, &o_len);
 	const char *m = getenv("_R_CHECK_MBCS_CONVERSION_FAILURE_");
 	int fail = (m != NULL);
@@ -4634,6 +4635,7 @@ static void mbcsToSbcs(const char *in, char *out, const char *encoding,
 	}
             if (i_len == 0)
                 conversion_done = true;
+    }
     }
 
     Riconv_close(cd);
