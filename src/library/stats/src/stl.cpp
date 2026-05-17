@@ -477,18 +477,24 @@ static void psort(double *a, int n, int *ind, int ni)
             // median-of-three
             if (a[i] > t)
             {
-                std::swap(a[i], a[ij]);
+                auto tmp = a[i];
+				a[i] = a[ij];
+				a[ij] = tmp;
                 t = a[ij];
             }
 
             if (a[j] < t)
             {
-                std::swap(a[j], a[ij]);
+                auto tmp = a[j];
+				a[j] = a[ij];
+				a[ij] = tmp;
                 t = a[ij];
 
                 if (a[i] > t)
                 {
-                    std::swap(a[i], a[ij]);
+                    auto tmp = a[i];
+					a[i] = a[ij];
+					a[ij] = tmp;
                     t = a[ij];
                 }
             }
@@ -507,7 +513,9 @@ static void psort(double *a, int n, int *ind, int ni)
                 if (k > l)
                     break;
 
-                std::swap(a[k], a[l]);
+                auto tmp = a[k];
+				a[k] = a[l];
+				a[l] = tmp;
             }
 
             // remember bigger fragment on stack,
