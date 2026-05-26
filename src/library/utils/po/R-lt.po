@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-09 18:26\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -829,6 +829,12 @@ msgstr "Neatpažinta speciali duomenų reikšmė"
 msgid "Unrecognized value indicator"
 msgstr "Neatpažintas reikšmės indikatorius"
 
+#. R/bitstring.R: stop("Unsupported object")
+#: R/bitstring.R:0
+#, fuzzy
+msgid "Unsupported object"
+msgstr "nepalaikomas įrašo tipas"
+
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
 #. R/packages2.R: message("Updating HTML index of packages in '.Library'")
 #: R/packages.R:0 R/packages2.R:0
@@ -863,6 +869,11 @@ msgstr "Naršyklės naudojimas norint atidaryti mailto: URI"
 #: R/help.R:0
 msgid "Using the first match ..."
 msgstr "Naudojant pirmąjį sutapimą ..."
+
+#. R/unix/mac.install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkgname))
+#: R/unix/mac.install.R:0
+msgid "Valid signature is required, but package %s could not be successfully verified."
+msgstr ""
 
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
 #: R/Sweave.R:0
@@ -930,9 +941,9 @@ msgstr "stulpelių pavadinimų pridėjimas prie failo"
 msgid "argument 'compressed' is ignored for the internal method"
 msgstr "vidinio metodo argumentas 'compressed' yra ignoruojamas"
 
-#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
+#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no effect on search results")
 #: R/RSiteSearch.R:0
-msgid "argument 'format' is deprecated and has no affect on search results"
+msgid "argument 'format' is deprecated and has no effect on search results"
 msgstr ""
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
@@ -1747,10 +1758,18 @@ msgstr "paketas %s turi tuščius hsearch duomenis"
 msgid "package %s has no %s file: only auto-generation is possible"
 msgstr ""
 
-#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
-#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#. R/unix/mac.install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkgname),     info$fingerprint, info$userid)
+#: R/unix/mac.install.R:0
+#, fuzzy
+msgid "package %s signature verified (%s %s)"
+msgstr "paketas %s negalimas (%s)"
+
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "SHA256")
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "MD5")
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and %s sums checked\n",     sQuote(pkgname), "MD5")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-msgid "package %s successfully unpacked and MD5 sums checked"
+#, fuzzy
+msgid "package %s successfully unpacked and %s sums checked"
 msgstr "paketas %s sėkmingai išpakuotas ir MD5 sumos patikrintos"
 
 #. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
@@ -1941,6 +1960,12 @@ msgstr "išvesties failas '%s' dingo"
 msgid "there is no 'libs' directory in package %s"
 msgstr "pakete %s nėra katalogo 'libs'"
 
+#. R/SweaveGetSourceName.R: stop("this function cannot be used from an interactive session")
+#: R/SweaveGetSourceName.R:0
+#, fuzzy
+msgid "this function cannot be used from an interactive session"
+msgstr "winDialog() negali būti naudojamas ne interaktyviai"
+
 #. R/SweaveDrivers.R: gettext("this may cause problems when running LaTeX")
 #: R/SweaveDrivers.R:0
 msgid "this may cause problems when running LaTeX"
@@ -1972,10 +1997,10 @@ msgstr "bandymas naudoti CRAN be dublikato nustatymo"
 msgid "type 'binary' is not supported on this platform"
 msgstr "tipas 'binary' nepalaikomas šioje platformoje"
 
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for macOS")
+#. R/packages2.R: stop("type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)")
 #: R/packages2.R:0
-msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
-msgstr "type == \"both\" gali būti naudojami tik Windows arba CRAN komponavimo versijos macOS"
+msgid "type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)"
+msgstr ""
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
 #: R/packages2.R:0
@@ -2025,6 +2050,12 @@ msgstr "neįmanoma perkelti laikino diegimo %s į %s"
 msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr "neįmanoma perkelti laikino diegimo %s į %s, vietoj to kopijuojant"
 
+#. R/SweaveGetSourceName.R: stop("unrecognized Sweave call")
+#: R/SweaveGetSourceName.R:0
+#, fuzzy
+msgid "unrecognized Sweave call"
+msgstr "Neatpažintas reikšmės indikatorius"
+
 #. R/tar.R: stop("unsupported entry type ", sQuote(ctype))
 #: R/tar.R:0
 msgid "unsupported entry type"
@@ -2033,6 +2064,11 @@ msgstr "nepalaikomas įrašo tipas"
 #. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
 #: R/tar.R:0
 msgid "untar: using cmd = %s"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("using default value %s", defval)
+#: R/SweaveDrivers.R:0
+msgid "using default value %s"
 msgstr ""
 
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
@@ -2366,6 +2402,9 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "paketas %s negalimas (%s)"
 msgstr[1] "paketai %s negalimi (%s)"
 msgstr[2] "%s paketų yra negalimi (%s)"
+
+#~ msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+#~ msgstr "type == \"both\" gali būti naudojami tik Windows arba CRAN komponavimo versijos macOS"
 
 #~ msgid "no R objects specified or available"
 #~ msgstr "nenurodyti arba nepasiekiami R objektai"

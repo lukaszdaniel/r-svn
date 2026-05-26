@@ -60,12 +60,16 @@ msgstr "'ord' doit être un entier positif, au nombre de noeuds au mieux"
 #: R/splines.R:0
 msgid "all interior knots match left boundary knot"
 msgstr ""
+"tous les noeuds internes correspondent au noeud de la limite "
+"gauche"
 
 #. R/splines.R: warning("all interior knots match right boundary knot")
 #. R/splines.R: stop("all interior knots match right boundary knot")
 #: R/splines.R:0
 msgid "all interior knots match right boundary knot"
 msgstr ""
+"tous les noeuds internes correspondent au noeud de la limite "
+"droite"
 
 #. R/splineClasses.R: stop("currently implemented only for cubic splines")
 #: R/splineClasses.R:0

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:58\n"
+"POT-Creation-Date: 2026-05-26 16:55\n"
 "PO-Revision-Date: 2025-07-06 14:52+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -1631,7 +1631,7 @@ msgstr "negalimas 'row.names' pasikartojimas"
 msgid "duplicate import names %s"
 msgstr "pasikartojantys importo vardai %s"
 
-#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(rownms[duplicated(rownms)]),     collapse = ", "))
 #: R/dataframe.R:0
 msgid "duplicate row.names: %s"
 msgstr "pasikartojančios row.names: %s"
@@ -2557,11 +2557,6 @@ msgstr "tikriausiai neteisinga koduotė stulpelio names(.)"
 #, fuzzy
 msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr "stumiama dubliuota '%s' manipuliavimo programa dėklo viršuje"
-
-#. R/summary.R: warning("quantile.type not in {1, 3} for <raw>")
-#: R/summary.R:0
-msgid "quantile.type not in {1, 3} for <raw>"
-msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0

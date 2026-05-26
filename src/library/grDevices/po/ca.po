@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28+0100\n"
+"POT-Creation-Date: 2026-05-26 17:26+0200\n"
 "PO-Revision-Date: 2025-07-06 15:31+0200\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -187,7 +187,7 @@ msgstr "no s'ha pogut obrir el fitxer afm «%s»"
 msgid "unknown AFM entity encountered"
 msgstr "s'ha trobat una entitat AFM desconeguda"
 
-#: devPS.cpp:769 devPS.cpp:772 devPS.cpp:4739 devPS.cpp:9318 devPicTeX.cpp:482
+#: devPS.cpp:769 devPS.cpp:772 devPS.cpp:4750 devPS.cpp:9329 devPicTeX.cpp:482
 #: devPicTeX.cpp:484
 #, fuzzy, c-format
 msgid "invalid string in '%s'"
@@ -313,12 +313,12 @@ msgstr "no s'ha pogut enregistrar la codificació del dispositiu"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "l'objecte «.ps.prolog» no és un vector de caràcters"
 
-#: devPS.cpp:2765 devPS.cpp:7441 devWindows.cpp:802
+#: devPS.cpp:2765 devPS.cpp:7452 devWindows.cpp:802
 #, fuzzy
 msgid "invalid line end"
 msgstr "final de línia no vàlid"
 
-#: devPS.cpp:2784 devPS.cpp:7461 devWindows.cpp:815
+#: devPS.cpp:2784 devPS.cpp:7472 devWindows.cpp:815
 #, fuzzy
 msgid "invalid line join"
 msgstr "la unió de línia no és vàlida"
@@ -328,24 +328,24 @@ msgstr "la unió de línia no és vàlida"
 msgid "invalid line mitre"
 msgstr "el mitre de línia no és vàlid"
 
-#: devPS.cpp:2994 devPS.cpp:3932 devPS.cpp:4376 devPS.cpp:4403 devPS.cpp:9121
-#: devPS.cpp:9192
+#: devPS.cpp:2994 devPS.cpp:3932 devPS.cpp:4376 devPS.cpp:4403 devPS.cpp:9132
+#: devPS.cpp:9203
 #, fuzzy, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "s'ha intentat utilitzar un tipus de lletra no vàlid %d substituït pel tipus de lletra 1"
 
-#: devPS.cpp:3231 devPS.cpp:6844 devWindows.cpp:1809 devWindows.cpp:1846
+#: devPS.cpp:3231 devPS.cpp:6855 devWindows.cpp:1809 devWindows.cpp:1846
 #: devWindows.cpp:1876 devWindows.cpp:1908
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "el nom del fitxer és massa llarg a la crida %s()"
 
-#: devPS.cpp:3237 devPS.cpp:6850
+#: devPS.cpp:3237 devPS.cpp:6861
 #, fuzzy, c-format
 msgid "memory allocation problem in %s()"
 msgstr "problema d'assignació de memòria a %s()"
 
-#: devPS.cpp:3255 devPS.cpp:6917
+#: devPS.cpp:3255 devPS.cpp:6928
 #, fuzzy, c-format
 msgid "encoding path is too long in %s()"
 msgstr "el camí de codificació és massa llarg a %s()"
@@ -355,7 +355,7 @@ msgstr "el camí de codificació és massa llarg a %s()"
 msgid "failed to load encoding file in %s()"
 msgstr "no s'ha pogut carregar el fitxer de codificació a %s()"
 
-#: devPS.cpp:3314 devPS.cpp:3377 devPS.cpp:6976 devPS.cpp:7032 devPS.cpp:8920
+#: devPS.cpp:3314 devPS.cpp:3377 devPS.cpp:6987 devPS.cpp:7043 devPS.cpp:8931
 #, fuzzy
 msgid "invalid font type"
 msgstr "tipus de lletra no vàlid"
@@ -400,10 +400,10 @@ msgstr "la semitransparència no està suportada en aquest dispositiu: només s'
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "no es pot obrir la canonada «postscript» a «%s»"
 
-#: devPS.cpp:3746 devPS.cpp:8182 qdPDF.cpp:101
+#: devPS.cpp:3746 devPS.cpp:8193 qdPDF.cpp:101
 #, fuzzy, c-format
 msgid "cannot open file '%s'"
-msgstr "no s'ha pogut obrir el fitxer «%s»"
+msgstr "no es pot obrir el fitxer «%s»"
 
 #: devPS.cpp:3874 devPS.cpp:3889
 #, fuzzy, c-format
@@ -419,7 +419,7 @@ msgstr ""
 msgid "CID family '%s' not included in postscript() device"
 msgstr "La família CID «%s» no està inclosa en el dispositiu postscript()"
 
-#: devPS.cpp:3938 devPS.cpp:3949 devPS.cpp:4383 devPS.cpp:4413 devPS.cpp:4678
+#: devPS.cpp:3938 devPS.cpp:3949 devPS.cpp:4383 devPS.cpp:4413 devPS.cpp:4689
 #, fuzzy, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr "la família «%s» no està inclosa en el dispositiu postscript()"
@@ -429,248 +429,248 @@ msgstr "la família «%s» no està inclosa en el dispositiu postscript()"
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "codificació «%s» desconeguda a «mbcsToSbcs»"
 
-#: devPS.cpp:4604 devPS.cpp:4606
+#: devPS.cpp:4613 devPS.cpp:4615
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
 msgstr "ha fallat la conversió a «%s» a «mbcsToSbcs»: el punt ha estat substituït per <%02x>"
 
-#: devPS.cpp:4609
+#: devPS.cpp:4618
 #, fuzzy, c-format
 msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
 msgstr "ha fallat la conversió a «%s» a «mbcsToSbcs»: el punt ha estat substituït per <%02x>"
 
-#: devPS.cpp:4615 devPS.cpp:4622
+#: devPS.cpp:4624 devPS.cpp:4631
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
 msgstr "ha fallat la conversió a «%s» a «mbcsToSbcs»: el punt ha estat substituït per <%02x>"
 
-#: devPS.cpp:4617 devPS.cpp:4624
+#: devPS.cpp:4626 devPS.cpp:4633
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr "ha fallat la conversió a «%s» a «mbcsToSbcs»: el punt ha estat substituït per <%02x>"
 
-#: devPS.cpp:4634
+#: devPS.cpp:4645
 #, fuzzy, c-format
 msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
 msgstr "ha fallat la conversió a «%s» a «mbcsToSbcs»: el punt ha estat substituït per <%02x>"
 
-#: devPS.cpp:4706
+#: devPS.cpp:4717
 #, fuzzy, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "no s'ha pogut obrir el convertidor a la codificació «%s»"
 
-#: devPS.cpp:4725 devPS.cpp:9293
+#: devPS.cpp:4736 devPS.cpp:9304
 #, fuzzy, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "ha fallat la conversió de text a la codificació «%s»"
 
-#: devPS.cpp:5111
+#: devPS.cpp:5122
 #, fuzzy
 msgid "Failed to allocate PDF definition string"
 msgstr "No s'ha pogut assignar la cadena de definició del PDF"
 
-#: devPS.cpp:5133
+#: devPS.cpp:5144
 #, fuzzy
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr "no s'ha pogut augmentar la cadena de definició (desactiva el dispositiu PDF)"
 
-#: devPS.cpp:5182
+#: devPS.cpp:5193
 #, fuzzy
 msgid "failed to increase 'maxDefns'"
 msgstr "no s'ha pogut augmentar «maxDefns»"
 
-#: devPS.cpp:5400 devPS.cpp:5453
+#: devPS.cpp:5411 devPS.cpp:5464
 #, fuzzy
 msgid "Repeat or reflect pattern not supported on PDF device"
 msgstr "Màscara alfa ignorada (no admesa en aquest dispositiu)"
 
-#: devPS.cpp:5509 devPS.cpp:5597
+#: devPS.cpp:5520 devPS.cpp:5608
 msgid "Shading type not yet supported"
 msgstr ""
 
-#: devPS.cpp:5812
+#: devPS.cpp:5823
 #, fuzzy
 msgid "Drawing not appended to path (contains text)"
 msgstr "Dibuix no afegit al camí (conté text)"
 
-#: devPS.cpp:6040
+#: devPS.cpp:6051
 #, fuzzy
 msgid "Compositing operator has no corresponding blend mode; defaulting to Normal"
 msgstr "L'operador de composició no té el mode de barreja corresponent; el predeterminat és Normal"
 
-#: devPS.cpp:6309
+#: devPS.cpp:6320
 #, fuzzy
 msgid "Failed to write PDF clipping path"
 msgstr "No s'ha pogut escriure el camí de retallat del PDF"
 
-#: devPS.cpp:6334
+#: devPS.cpp:6345
 #, fuzzy
 msgid "Failed to write PDF stroke"
 msgstr "No s'ha pogut escriure el traç PDF"
 
-#: devPS.cpp:6355
+#: devPS.cpp:6366
 #, fuzzy
 msgid "Failed to write PDF fill"
 msgstr "No s'ha pogut escriure el PDF fill"
 
-#: devPS.cpp:6376
+#: devPS.cpp:6387
 #, fuzzy
 msgid "Failed to write PDF fillStroke"
 msgstr "No s'ha pogut escriure el PDF fillStroke"
 
-#: devPS.cpp:6421
+#: devPS.cpp:6432
 #, fuzzy
 msgid "Glyph ID larger than 0xFFFF; output will be incorrect"
 msgstr "L'ID del glif més gran que 0xFFFF; la sortida serà incorrecta"
 
-#: devPS.cpp:6445
+#: devPS.cpp:6456
 #, fuzzy
 msgid "invalid 'alpha' value in PDF"
 msgstr "valor «alpha» no vàlid en PDF"
 
-#: devPS.cpp:6558 devPS.cpp:6561
+#: devPS.cpp:6569 devPS.cpp:6572
 #, fuzzy
 msgid "failed to increase 'maxRaster'"
 msgstr "no s'ha pogut augmentar «maxRaster»"
 
-#: devPS.cpp:6573
+#: devPS.cpp:6584
 #, fuzzy
 msgid "unable to allocate raster image"
 msgstr "no s'ha pogut assignar la imatge ràster"
 
-#: devPS.cpp:6639 devPS.cpp:6689
+#: devPS.cpp:6650 devPS.cpp:6700
 #, c-format
 msgid "internal error %d in '%s'"
 msgstr ""
 
-#: devPS.cpp:6668 devPS.cpp:6712 devPS.cpp:8243
+#: devPS.cpp:6679 devPS.cpp:6723 devPS.cpp:8254
 #, fuzzy
 msgid "write failed"
 msgstr "ha fallat l'escriptura"
 
-#: devPS.cpp:6772
+#: devPS.cpp:6783
 #, fuzzy
 msgid "corrupt loaded encodings;  font not added"
 msgstr "codificacions carregades corruptes; no s'ha afegit el tipus de lletra"
 
-#: devPS.cpp:6782
+#: devPS.cpp:6793
 #, fuzzy
 msgid "failed to record device encoding; font not added"
 msgstr "no s'ha pogut enregistrar la codificació del dispositiu; no s'ha afegit el tipus de lletra"
 
-#: devPS.cpp:6870
+#: devPS.cpp:6881
 msgid "cannot allocate pd->pos"
 msgstr ""
 
-#: devPS.cpp:6878
+#: devPS.cpp:6889
 msgid "cannot allocate pd->pageobj"
 msgstr ""
 
-#: devPS.cpp:6903
+#: devPS.cpp:6914
 #, fuzzy
 msgid "increasing the PDF version to 1.2"
 msgstr "augment de la versió PDF a 1.2"
 
-#: devPS.cpp:6933
+#: devPS.cpp:6944
 #, fuzzy
 msgid "failed to load default encoding"
 msgstr "no s'ha pogut carregar la codificació predeterminada"
 
-#: devPS.cpp:7000
+#: devPS.cpp:7011
 #, fuzzy
 msgid "failed to initialise default PDF font"
 msgstr "no s'ha pogut inicialitzar el tipus de lletra PDF predeterminat"
 
-#: devPS.cpp:7055
+#: devPS.cpp:7066
 #, fuzzy
 msgid "failed to initialise additional PDF fonts"
 msgstr "no s'han pogut inicialitzar els tipus de lletra PDF addicionals"
 
-#: devPS.cpp:7068
+#: devPS.cpp:7079
 #, fuzzy
 msgid "failed to allocate rasters"
 msgstr "no s'han pogut assignar les trames"
 
-#: devPS.cpp:7075
+#: devPS.cpp:7086
 #, fuzzy
 msgid "failed to allocate masks"
 msgstr "no s'han pogut assignar les màscares"
 
-#: devPS.cpp:7085
+#: devPS.cpp:7096
 #, fuzzy
 msgid "failed to allocate definitions"
 msgstr "no s'han pogut assignar les definicions"
 
-#: devPS.cpp:7159
+#: devPS.cpp:7170
 #, fuzzy, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "tipus de paper no vàlid «%s» (pdf)"
 
-#: devPS.cpp:7183
+#: devPS.cpp:7194
 #, fuzzy
 msgid "invalid foreground/background color (pdf)"
 msgstr "color de primer pla/fons no vàlid (pdf)"
 
-#: devPS.cpp:7290
+#: devPS.cpp:7301
 #, fuzzy
 msgid "increasing the PDF version to 1.4"
 msgstr "augment de la versió PDF a 1.4"
 
-#: devPS.cpp:7334 devPS.cpp:7382
+#: devPS.cpp:7345 devPS.cpp:7393
 #, fuzzy
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "«colormodel» desconegut, s'usarà «srgb»"
 
-#: devPS.cpp:7605
+#: devPS.cpp:7616
 #, fuzzy
 msgid "failed to load sRGB colorspace file"
 msgstr "no s'ha pogut carregar el fitxer d'espai de color sRGB"
 
-#: devPS.cpp:7881 devPS.cpp:7906 devPS.cpp:8259 devPS.cpp:8302
+#: devPS.cpp:7892 devPS.cpp:7917 devPS.cpp:8270 devPS.cpp:8313
 #, fuzzy
 msgid "unable to increase object limit: please shutdown the pdf device"
 msgstr "no s'ha pogut augmentar la cadena de definició (desactiva el dispositiu PDF)"
 
-#: devPS.cpp:7942
+#: devPS.cpp:7953
 #, fuzzy
 msgid "corrupt encodings in PDF device"
 msgstr "codificacions corruptes al dispositiu PDF"
 
-#: devPS.cpp:8023
+#: devPS.cpp:8034
 #, fuzzy
 msgid "increasing the PDF version to 1.3"
 msgstr "augment de la versió PDF a 1.3"
 
-#: devPS.cpp:8135
+#: devPS.cpp:8146
 #, fuzzy
 msgid "write error"
 msgstr "ha fallat l'escriptura"
 
-#: devPS.cpp:8166
+#: devPS.cpp:8177
 #, fuzzy, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "no es pot obrir la canonada «pdf» a «%s»"
 
-#: devPS.cpp:8172
+#: devPS.cpp:8183
 #, fuzzy
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" implica 'onefile = TRUE'"
 
-#: devPS.cpp:8233
+#: devPS.cpp:8244
 msgid "internal read error in PDF_endpage"
 msgstr ""
 
-#: devPS.cpp:8239
+#: devPS.cpp:8250
 #, c-format
 msgid "internal compression error %d in PDF_endpage"
 msgstr ""
 
-#: devPS.cpp:8294
+#: devPS.cpp:8305
 #, fuzzy
 msgid "unable to increase page limit: please shutdown the pdf device"
 msgstr "no s'ha pogut augmentar la cadena de definició (desactiva el dispositiu PDF)"
 
-#: devPS.cpp:8316
+#: devPS.cpp:8327
 #, fuzzy, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -679,42 +679,42 @@ msgstr ""
 "no es pot obrir l'argument «%s» del fitxer «pdf»\n"
 "  apagueu el dispositiu PDF"
 
-#: devPS.cpp:8337
+#: devPS.cpp:8348
 #, fuzzy, c-format
 msgid "Cannot open temporary file '%s' for compression (reason: %s); compression has been turned off for this device"
 msgstr "No es pot obrir el fitxer temporal «%s» per a la compressió (motiu: %s); la compressió s'ha desactivat per a aquest dispositiu"
 
-#: devPS.cpp:8945 devPS.cpp:9450 devPS.cpp:9496
+#: devPS.cpp:8956 devPS.cpp:9461 devPS.cpp:9507
 #, fuzzy
 msgid "failed to find or load PDF font"
 msgstr "no s'ha pogut trobar o carregar el tipus de lletra PDF"
 
-#: devPS.cpp:9128 devPS.cpp:9187
+#: devPS.cpp:9139 devPS.cpp:9198
 #, fuzzy
 msgid "Text not added to path containing other drawing"
 msgstr "Text no afegit al camí que conté un altre dibuix"
 
-#: devPS.cpp:9237 devPS.cpp:9405
+#: devPS.cpp:9248 devPS.cpp:9416
 #, fuzzy
 msgid "failed to find or load PDF CID font"
 msgstr "no s'ha pogut trobar o carregar el tipus de lletra CID del PDF"
 
-#: devPS.cpp:9899 devPicTeX.cpp:767
+#: devPS.cpp:9910 devPicTeX.cpp:767
 #, fuzzy, c-format
 msgid "invalid 'file' parameter in %s"
 msgstr "argument 'family' no vàlid a %s"
 
-#: devPS.cpp:9908 devPS.cpp:9912 devPS.cpp:10002 devPS.cpp:10006
+#: devPS.cpp:9919 devPS.cpp:9923 devPS.cpp:10013 devPS.cpp:10017
 #, fuzzy, c-format
 msgid "invalid 'family' parameter in %s"
 msgstr "argument 'family' no vàlid a %s"
 
-#: devPS.cpp:9928 devPS.cpp:10018
+#: devPS.cpp:9939 devPS.cpp:10029
 #, fuzzy, c-format
 msgid "invalid 'fonts' parameter in %s"
 msgstr "argument 'fonts' no vàlid a %s"
 
-#: devPS.cpp:9944 devPS.cpp:10042 devPicTeX.cpp:779 devPicTeX.cpp:784
+#: devPS.cpp:9955 devPS.cpp:10053 devPicTeX.cpp:779 devPicTeX.cpp:784
 #: devWindows.cpp:3824
 #, fuzzy, c-format
 msgid "unable to start %s() device"
@@ -1289,9 +1289,8 @@ msgid "Variable fonts not supported (requires Cairo >= 1.16.0)"
 msgstr ""
 
 #: cairo/cairoFns.cpp:2516
-#, fuzzy
 msgid "Font file not found; matching font family and face"
-msgstr "No s'ha trobat el fitxer de tipus de lletra; s'aparellen la família i la cara del tipus de lletra"
+msgstr ""
 
 #, fuzzy
 #~ msgid "invalid value of 'maxColorValue'"

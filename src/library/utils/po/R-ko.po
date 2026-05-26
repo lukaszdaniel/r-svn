@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-09 18:26\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -833,6 +833,12 @@ msgstr "인식할 수 없는 특수한 데이터 값입니다"
 msgid "Unrecognized value indicator"
 msgstr ""
 
+#. R/bitstring.R: stop("Unsupported object")
+#: R/bitstring.R:0
+#, fuzzy
+msgid "Unsupported object"
+msgstr "지원되지 않는 엔트리 타입입니다"
+
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
 #. R/packages2.R: message("Updating HTML index of packages in '.Library'")
 #: R/packages.R:0 R/packages2.R:0
@@ -867,6 +873,11 @@ msgstr "브라우저를 이용하여 mailto: URI를 엽니다"
 #: R/help.R:0
 msgid "Using the first match ..."
 msgstr "첫번째로 일치하는 것을 사용합니다 ..."
+
+#. R/unix/mac.install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkgname))
+#: R/unix/mac.install.R:0
+msgid "Valid signature is required, but package %s could not be successfully verified."
+msgstr ""
 
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
 #: R/Sweave.R:0
@@ -931,9 +942,9 @@ msgstr "열의 이름들을 파일에 추가합니다"
 msgid "argument 'compressed' is ignored for the internal method"
 msgstr ""
 
-#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
+#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no effect on search results")
 #: R/RSiteSearch.R:0
-msgid "argument 'format' is deprecated and has no affect on search results"
+msgid "argument 'format' is deprecated and has no effect on search results"
 msgstr ""
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
@@ -1749,10 +1760,18 @@ msgstr "패키지 %s는 비어있는 hsearch data를 가집니다 - 이상합니
 msgid "package %s has no %s file: only auto-generation is possible"
 msgstr ""
 
-#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
-#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#. R/unix/mac.install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkgname),     info$fingerprint, info$userid)
+#: R/unix/mac.install.R:0
+#, fuzzy
+msgid "package %s signature verified (%s %s)"
+msgstr "패키지 %s(들)이 사용가능하지 않습니다 (그 이유는 %s 입니다)"
+
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "SHA256")
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "MD5")
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and %s sums checked\n",     sQuote(pkgname), "MD5")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-msgid "package %s successfully unpacked and MD5 sums checked"
+#, fuzzy
+msgid "package %s successfully unpacked and %s sums checked"
 msgstr "패키지 %s를 성공적으로 압축해제하였고 MD5 sums 이 확인되었습니다"
 
 #. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
@@ -1937,6 +1956,12 @@ msgstr "출력결과를 포함한 파일 '%s'가 사라졌습니다."
 msgid "there is no 'libs' directory in package %s"
 msgstr "패키지 %s내에 'libs'이라는 디렉토리가 없습니다"
 
+#. R/SweaveGetSourceName.R: stop("this function cannot be used from an interactive session")
+#: R/SweaveGetSourceName.R:0
+#, fuzzy
+msgid "this function cannot be used from an interactive session"
+msgstr "winDialog()는 인터랙티브하게 사용되어져야 합니다"
+
 #. R/SweaveDrivers.R: gettext("this may cause problems when running LaTeX")
 #: R/SweaveDrivers.R:0
 msgid "this may cause problems when running LaTeX"
@@ -1968,9 +1993,9 @@ msgstr "미러 설정을 하지 않고서는 CRAN을 사용할 수 없습니다"
 msgid "type 'binary' is not supported on this platform"
 msgstr "이 플랫폼에서는 유형(type) 'binary'은 지원되지 않습니다."
 
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for macOS")
+#. R/packages2.R: stop("type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)")
 #: R/packages2.R:0
-msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+msgid "type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)"
 msgstr ""
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
@@ -2023,6 +2048,12 @@ msgstr "임시 설치 %s를 %s로 이동할 수 없습니다"
 msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr "임시 설치 %s를 %s로 이동할 수 없습니다"
 
+#. R/SweaveGetSourceName.R: stop("unrecognized Sweave call")
+#: R/SweaveGetSourceName.R:0
+#, fuzzy
+msgid "unrecognized Sweave call"
+msgstr "인식할 수 없는 특수한 데이터 값입니다"
+
 #. R/tar.R: stop("unsupported entry type ", sQuote(ctype))
 #: R/tar.R:0
 msgid "unsupported entry type"
@@ -2031,6 +2062,11 @@ msgstr "지원되지 않는 엔트리 타입입니다"
 #. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
 #: R/tar.R:0
 msgid "untar: using cmd = %s"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("using default value %s", defval)
+#: R/SweaveDrivers.R:0
+msgid "using default value %s"
 msgstr ""
 
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)

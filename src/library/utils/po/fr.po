@@ -57,11 +57,11 @@ msgstr "set de symboles pour mettre du texte entre guillemets incorrect"
 
 #: io.cpp:359 io.cpp:858 io.cpp:1076
 msgid "cannot open the connection"
-msgstr "impossible d’ouvrir la connection"
+msgstr "impossible d'ouvrir la connexion"
 
 #: io.cpp:362 io.cpp:366
 msgid "cannot read from this connection"
-msgstr "impossible de lire depuis la connection"
+msgstr "impossible de lire depuis cette connexion"
 
 #: io.cpp:413 io.cpp:431
 #, c-format
@@ -175,7 +175,8 @@ msgstr ""
 #: utils.cpp:78
 #, fuzzy
 msgid "argument 'class' must be a character string"
-msgstr "'text' doit être une chaîne de caractères"
+msgstr ""
+"l'argument 'class' doit être une chaîne de caractères"
 
 #: utils.cpp:82
 #, c-format
@@ -185,7 +186,9 @@ msgstr ""
 #: utils.cpp:88
 #, fuzzy
 msgid "argument 'x' must be a length-1 character vector"
-msgstr "l’argument doit être une chaîne de caractères ou un vecteur raw"
+msgstr ""
+"l’argument 'x' doit être un vecteur de caractères de "
+"longueur 1"
 
 #: utils.cpp:91
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"

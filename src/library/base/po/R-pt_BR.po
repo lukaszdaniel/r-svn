@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:58\n"
+"POT-Creation-Date: 2026-05-26 16:55\n"
 "PO-Revision-Date: 2025-07-06 14:50+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -192,7 +192,7 @@ msgstr "'wait' deve ser TRUE ou FALSE"
 #: R/datetime.R:0
 #, fuzzy
 msgid "'%s' must be a \"%s\" object"
-msgstr "'to' deve ser um objeto \"Date\""
+msgstr "'%s' deve ser um objeto \"%s\""
 
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
@@ -1633,7 +1633,7 @@ msgstr "'row.names' duplicados não são permitidos"
 msgid "duplicate import names %s"
 msgstr "nomes de importação %s duplicados"
 
-#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(rownms[duplicated(rownms)]),     collapse = ", "))
 #: R/dataframe.R:0
 msgid "duplicate row.names: %s"
 msgstr "row.names duplicados: %s"
@@ -2559,11 +2559,6 @@ msgstr "provavelmente codificação errada no names(.) da coluna"
 #, fuzzy
 msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr "levando gerenciador de `%s` duplicado ao topo da pilha"
-
-#. R/summary.R: warning("quantile.type not in {1, 3} for <raw>")
-#: R/summary.R:0
-msgid "quantile.type not in {1, 3} for <raw>"
-msgstr ""
 
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0

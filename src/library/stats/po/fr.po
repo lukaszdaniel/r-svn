@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 15:59+0200\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -26,11 +26,11 @@ msgstr "largeur de fenêtre de médiane mobile supérieure à n"
 #: Srunmed.cpp:265
 #, fuzzy, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
-msgstr "runmed(x, .., na.action=\"na.fail\"): des valeurs manquantes se trouvent à x[%lld]"
+msgstr "runmed(x, .., na.action=\"na.fail\") : des valeurs manquantes se trouvent à x[%lld]"
 
 #: Srunmed.cpp:268
 msgid "runmed(): invalid 'na.action'"
-msgstr "runmed(): 'na.action' incorrecte"
+msgstr "runmed() : 'na.action' incorrecte"
 
 #: Srunmed.cpp:279
 msgid "long vectors are not supported for algorithm = \"Turlach\""
@@ -39,7 +39,7 @@ msgstr ""
 #: Srunmed.cpp:318
 #, c-format
 msgid "na_action logic error (%d), please report!"
-msgstr "na_action erreur logique (%d), veuillez reporter l’erreur, s’il-vous-plait !"
+msgstr "na_action erreur logique (%d), veuillez rapporter l’erreur, s’il-vous-plait !"
 
 #: ansari.cpp:120
 msgid "probabilities outside [0,1] in qansari()"
@@ -81,20 +81,20 @@ msgstr "valeurs infinies x[%d] dans le calcul de largeur de bande"
 #: bandwidths.cpp:128
 #, fuzzy
 msgid "data are constant in bandwidth calculation"
-msgstr "valeurs infinies x[%d] dans le calcul de largeur de bande"
+msgstr "données constantes dans le calcul de la largeur de bande"
 
 #: complete_cases.cpp:35
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type' (%s) de l'argument incorrect"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "aucune entrée n'a déterminé le nombre de cas"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "les arguments n'ont pas tous la même taille"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "aucune entrée n'a déterminé le nombre de cas"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -172,7 +172,7 @@ msgstr "expression incorrecte dans '%s'"
 #: deriv.cpp:866
 #, fuzzy
 msgid "too many variables"
-msgstr "trop de facteurs"
+msgstr "trop de variables"
 
 #: deriv.cpp:1079 model.cpp:106
 msgid "invalid variable names"
@@ -182,15 +182,15 @@ msgstr "noms des variables incorrects"
 msgid "invalid tag"
 msgstr "marque (tag) incorrecte"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "valeurs infinies traitées comme NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance() : p incorrect"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance() : distance incorrecte"
 
@@ -743,7 +743,7 @@ msgstr "-Inf remplacé par la valeur négative la plus large possible"
 #: optimize.cpp:229 optimize.cpp:319 optimize.cpp:541
 #, fuzzy, c-format
 msgid "%s replaced by maximum positive value"
-msgstr "NA remplacé par la valeur maximale positive"
+msgstr "%s remplacé par la valeur maximale positive"
 
 #: optimize.cpp:239
 msgid "invalid function value in 'optimize'"
@@ -963,7 +963,7 @@ msgstr "'rho' doit être un environnement"
 #: port.cpp:407 port.cpp:575
 #, fuzzy
 msgid "'d' must be a nonempty numeric (double) vector"
-msgstr "'d' doit être un vecteur numérique non vide"
+msgstr "'d' doit être un vecteur numérique de doubles non vide"
 
 #: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
@@ -972,12 +972,12 @@ msgstr "Quand Hessian est défini, un gradient doit l'être aussi"
 #: port.cpp:412
 #, fuzzy, c-format
 msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
-msgstr "l'environnement 'rho' doit contenir un vecteur numérique '.par' de longueur %d"
+msgstr "l'environnement 'rho' doit contenir un vecteur numérique (double) '.par' de longueur %d"
 
 #: port.cpp:426
 #, fuzzy
 msgid "'lower' and 'upper' must be numeric (double) vectors"
-msgstr "'lower' et 'upper' doivent tous deux être des vecteurs numériques"
+msgstr "'lower' et 'upper' doivent tous deux être des vecteurs numériques (doubles)"
 
 #: port.cpp:441
 #, fuzzy
@@ -1013,7 +1013,7 @@ msgstr "'lowerb' et 'upperb' doivent tous deux être des vecteurs numériques"
 
 #: prho.cpp:158
 msgid "invalid sample size 'n' in C routine prho(n,s,*)"
-msgstr ""
+msgstr "taille 'n' non autorisée pour l'échantillon dans la fonction C prho(n,s,*)"
 
 #: rWishart.cpp:53
 msgid "inconsistent degrees of freedom and dimension"
@@ -1059,7 +1059,7 @@ msgstr "second argument 'size' incorrect"
 #: rcont.cpp:80
 #, c-format
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
-msgstr "rcont2 [%d,%d]: exp provoque un dépassement mémoire vers le bas à 0; l'algorithme a échoué"
+msgstr "rcont2 [%d,%d] : exp provoque un dépassement mémoire vers le bas à 0 ; l'algorithme a échoué"
 
 #: smooth.cpp:102
 #, c-format

@@ -73,7 +73,7 @@ msgstr "não é possível compilar promessas literais em código"
 #: R/cmp.R:0
 #, fuzzy
 msgid "cannot compile this expression"
-msgstr "não é possível compilar promessas literais em código"
+msgstr "não é possível compilar esta expressão"
 
 #. R/cmp.R: gettext("cannot constant fold literal bytecode objects")
 #: R/cmp.R:0

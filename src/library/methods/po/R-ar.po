@@ -1980,6 +1980,10 @@ msgid "Choosing method %s from %d ambiguous possibility"
 msgid_plural "Choosing method %s from %d ambiguous possibilities"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/MethodsListClass.R: ngettext(nreport, "Reported %d ambiguous selection out of %d for function %s\n",     "Reported %d ambiguous selections out of %d for function %s\n")
 #: R/MethodsListClass.R:0
@@ -1987,6 +1991,10 @@ msgid "Reported %d ambiguous selection out of %d for function %s\n"
 msgid_plural "Reported %d ambiguous selections out of %d for function %s\n"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/methodsTable.R: ngettext(which2, "Selecting %d method of minimum distance", "Selecting %d methods of minimum distance")
 #: R/methodsTable.R:0
@@ -1994,6 +2002,10 @@ msgid "Selecting %d method of minimum distance"
 msgid_plural "Selecting %d methods of minimum distance"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/methodsTable.R: ngettext(length(which), "Selecting %d non-group method", "Selecting %d non-group methods")
 #: R/methodsTable.R:0
@@ -2001,6 +2013,10 @@ msgid "Selecting %d non-group method"
 msgid_plural "Selecting %d non-group methods"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/methodsTable.R: ngettext(length(which), "Selecting %d partially exact-matching method",     "Selecting %d partially exact-matching methods")
 #: R/methodsTable.R:0
@@ -2022,6 +2038,10 @@ msgid "duplicated slot name: %s"
 msgid_plural "duplicated slot names: %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/methodsTable.R: ngettext(length(methods), "found %d equally good next method",     "found %d equally good next methods")
 #: R/methodsTable.R:0
@@ -2043,6 +2063,10 @@ msgid "invalid name for slot of class %s: %s"
 msgid_plural "invalid names for slots of class %s: %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/SClasses.R: ngettext(length(pkgs), "multiple definition of class %s visible (%s); using the definition\n   in package %s for %s",     "multiple definitions of class %s visible (%s); using the definition\n   in package %s for %s")
 #: R/SClasses.R:0
@@ -2061,6 +2085,10 @@ msgid "named elements of prototype do not correspond to slot name: %s"
 msgid_plural "named elements of prototype do not correspond to slot names: %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/MethodsList.R: ngettext(length(unknown), "no definition for class %s", "no definition for classes %s")
 #: R/MethodsList.R:0
@@ -2089,6 +2117,10 @@ msgid "slot in class %s must extend corresponding slot in class %s: fails for %s
 msgid_plural "slots in class %s must extend corresponding slots in class %s: fails for %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/RMethodUtils.R: ngettext(length(fdef), "the formal argument of the generic function for %s (%s) differs from that of the non-generic to be used as the default (%s)",     "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)")
 #: R/RMethodUtils.R:0
@@ -2096,3 +2128,7 @@ msgid "the formal argument of the generic function for %s (%s) differs from that
 msgid_plural "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""

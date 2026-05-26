@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-09 18:26\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:11+0200\n"
 "Last-Translator: Abdulrahman Alswaji <alswajiab@gmail.com>\n"
 "Language-Team: none\n"
@@ -795,6 +795,11 @@ msgstr ""
 msgid "Unrecognized value indicator"
 msgstr ""
 
+#. R/bitstring.R: stop("Unsupported object")
+#: R/bitstring.R:0
+msgid "Unsupported object"
+msgstr ""
+
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
 #. R/packages2.R: message("Updating HTML index of packages in '.Library'")
 #: R/packages.R:0 R/packages2.R:0
@@ -826,6 +831,11 @@ msgstr ""
 #. R/help.R: gettext("\nUsing the first match ...")
 #: R/help.R:0
 msgid "Using the first match ..."
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkgname))
+#: R/unix/mac.install.R:0
+msgid "Valid signature is required, but package %s could not be successfully verified."
 msgstr ""
 
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
@@ -891,9 +901,9 @@ msgstr ""
 msgid "argument 'compressed' is ignored for the internal method"
 msgstr ""
 
-#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
+#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no effect on search results")
 #: R/RSiteSearch.R:0
-msgid "argument 'format' is deprecated and has no affect on search results"
+msgid "argument 'format' is deprecated and has no effect on search results"
 msgstr ""
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
@@ -1692,10 +1702,16 @@ msgstr ""
 msgid "package %s has no %s file: only auto-generation is possible"
 msgstr ""
 
-#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
-#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#. R/unix/mac.install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkgname),     info$fingerprint, info$userid)
+#: R/unix/mac.install.R:0
+msgid "package %s signature verified (%s %s)"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "SHA256")
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "MD5")
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and %s sums checked\n",     sQuote(pkgname), "MD5")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-msgid "package %s successfully unpacked and MD5 sums checked"
+msgid "package %s successfully unpacked and %s sums checked"
 msgstr ""
 
 #. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
@@ -1877,6 +1893,11 @@ msgstr ""
 msgid "there is no 'libs' directory in package %s"
 msgstr ""
 
+#. R/SweaveGetSourceName.R: stop("this function cannot be used from an interactive session")
+#: R/SweaveGetSourceName.R:0
+msgid "this function cannot be used from an interactive session"
+msgstr ""
+
 #. R/SweaveDrivers.R: gettext("this may cause problems when running LaTeX")
 #: R/SweaveDrivers.R:0
 msgid "this may cause problems when running LaTeX"
@@ -1908,9 +1929,9 @@ msgstr ""
 msgid "type 'binary' is not supported on this platform"
 msgstr ""
 
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for macOS")
+#. R/packages2.R: stop("type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)")
 #: R/packages2.R:0
-msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+msgid "type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)"
 msgstr ""
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
@@ -1961,6 +1982,11 @@ msgstr ""
 msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr ""
 
+#. R/SweaveGetSourceName.R: stop("unrecognized Sweave call")
+#: R/SweaveGetSourceName.R:0
+msgid "unrecognized Sweave call"
+msgstr ""
+
 #. R/tar.R: stop("unsupported entry type ", sQuote(ctype))
 #: R/tar.R:0
 msgid "unsupported entry type"
@@ -1969,6 +1995,11 @@ msgstr ""
 #. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
 #: R/tar.R:0
 msgid "untar: using cmd = %s"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("using default value %s", defval)
+#: R/SweaveDrivers.R:0
+msgid "using default value %s"
 msgstr ""
 
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
@@ -2046,6 +2077,10 @@ msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s")
 #: R/apropos.R:0
@@ -2053,6 +2088,10 @@ msgid "%d occurrence in %s"
 msgid_plural "%d occurrences in %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(!ok), "'lib' element %s is not a writable directory",     "'lib' elements %s are not writable directories")
 #: R/packages2.R:0
@@ -2067,6 +2106,10 @@ msgid "A bibentry of bibtype %s has to specify the field: %s"
 msgid_plural "A bibentry of bibtype %s has to specify the fields: %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(m0), "A version of this package for your version of R might be available elsewhere,\nsee the ideas at\n",     "Versions of these packages for your version of R might be available elsewhere,\nsee the ideas at\n")
 #: R/packages2.R:0
@@ -2085,6 +2128,10 @@ msgid "Do you want to install from sources the package which needs compilation?"
 msgid_plural "Do you want to install from sources the packages which need compilation?"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/packages2.R: ngettext(length(pkgs), "Installing package into %s\n(as %s is unspecified)",     "Installing packages into %s\n(as %s is unspecified)")
 #: R/packages2.R:0
@@ -2126,6 +2173,10 @@ msgid "Invalid role specification: %s."
 msgid_plural "Invalid role specifications: %s."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/Sweave.R: ngettext(length(output), "Output file:  ", "Output files:  ")
 #: R/Sweave.R:0
@@ -2155,6 +2206,10 @@ msgid "Package which is only available in source form, and may need compilation 
 msgid_plural "Packages which are only available in source form, and may need compilation of C/C++/Fortran"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/packages.R: ngettext(length(pkgs), "Removing package from %s\n(as %s is unspecified)",     "Removing packages from %s\n(as %s is unspecified)")
 #: R/packages.R:0
@@ -2166,6 +2221,10 @@ msgid_plural ""
 "(as %s is unspecified)"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(later), "There is a binary version available (and will be installed) but the source version is later",     "There are binary versions available (and will be installed) but the source versions are later")
 #: R/packages2.R:0
@@ -2173,6 +2232,10 @@ msgid "There is a binary version available (and will be installed) but the sourc
 msgid_plural "There are binary versions available (and will be installed) but the source versions are later"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/packages2.R: ngettext(sum(later), "There is a binary version available but the source version is later",     "There are binary versions available but the source versions are later")
 #: R/packages2.R:0
@@ -2222,6 +2285,10 @@ msgid "last record incomplete, %d line discarded"
 msgid_plural "last record incomplete, %d lines discarded"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/help.search.R: ngettext(n_of_objects_matched, "matched %d object.", "matched %d objects.")
 #: R/help.search.R:0
@@ -2275,3 +2342,7 @@ msgid "package %s is not available %s"
 msgid_plural "packages %s are not available %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""

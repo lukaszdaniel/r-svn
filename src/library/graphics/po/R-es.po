@@ -18,6 +18,7 @@ msgstr ""
 #: R/image.R:0
 msgid "%s can only be used with a regular grid"
 msgstr ""
+"%s solo se puede usar con una cuadrícula normal"
 
 #. R/legend.R: gettextf("'%s' is of length 0", "legend")
 #: R/legend.R:0
@@ -568,11 +569,16 @@ msgid ""
 "layout matrix must contain at least one reference\n"
 "to each of the values {1 ... %d}"
 msgstr ""
+"La matriz de diseño debe contener al menos una "
+"referencia\n"
+"a cada uno de los valores {1 ... %d}"
 
 #. R/stars.R: stop("length of 'angles' must equal 'ncol(x)'")
 #: R/stars.R:0
 msgid "length of 'angles' must equal 'ncol(x)'"
 msgstr ""
+"La longitud de los 'ángulos' debe ser igual a "
+"'ncol(x)'"
 
 #. R/mosaicplot.R: stop("length of 'sort' does not conform to 'dim(x)'")
 #: R/mosaicplot.R:0
@@ -598,11 +604,13 @@ msgstr ""
 #: R/barplot.R:0
 msgid "log scale error: at least one 'height + offset' value <= 0"
 msgstr ""
+"escala logarítmica \"y\":  yinch() no tiene sentido"
 
 #. R/units.R: warning("log scale:  xyinch() is nonsense")
 #: R/units.R:0
 msgid "log scale:  xyinch() is nonsense"
 msgstr ""
+"escala logarítmica \"x\":  xinch() no tiene sentido"
 
 #. R/mosaicplot.R: stop("missing values in contingency table")
 #: R/mosaicplot.R:0
@@ -810,5 +818,6 @@ msgstr[1] ""
 #: R/hist.R:0
 msgid "argument %s is not made use of"
 msgid_plural "arguments %s are not made use of"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "el argumento %s no se utiliza"
+msgstr[1] "los argumentos %s no se utilizan"
+

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-04-01 17:02+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -91,13 +91,13 @@ msgstr "не конечное x[%d] при вычислении диапазон
 msgid "invalid 'type' (%s) of argument"
 msgstr "неправильный 'type' (%s) аргумента"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "ввод не определил количество классов"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "не все аргументы имеют одинаковую длину"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "ввод не определил количество классов"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -184,15 +184,15 @@ msgstr "неправильные имена переменных"
 msgid "invalid tag"
 msgstr "неправильный тег"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "обрабатываю не-конечные значения как NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): неправильный p"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance(): неправильное расстояние"
 
@@ -1017,7 +1017,7 @@ msgstr "'lowerb' и 'upperb' должны быть числовыми векто
 
 #: prho.cpp:158
 msgid "invalid sample size 'n' in C routine prho(n,s,*)"
-msgstr ""
+msgstr "������������ ������ ������� 'n' � C-������� prho(n,s,*)"
 
 #: rWishart.cpp:53
 msgid "inconsistent degrees of freedom and dimension"

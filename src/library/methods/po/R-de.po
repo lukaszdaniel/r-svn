@@ -161,7 +161,7 @@ msgstr "'%s' ist keine bekannte generische Funktion {und 'package' nicht angegeb
 #. R/RClassUtils.R: stop("'Class' must be a valid class definition or class")
 #: R/RClassUtils.R:0
 msgid "'Class' must be a valid class definition or class"
-msgstr "'Class' muss  eine gültige Klassendefinition oder eine Klasse sein"
+msgstr "'Class' muss eine gültige Klassendefinition oder eine Klasse sein"
 
 #. R/oldClass.R: gettextf("'S3Class' can only assign to S4 objects that extend \"oldClass\"; not true of class %s",     dQuote(class(object)))
 #: R/oldClass.R:0

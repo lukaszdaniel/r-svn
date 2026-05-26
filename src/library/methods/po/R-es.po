@@ -17,7 +17,7 @@ msgstr ""
 #. R/RMethodUtils.R: warning("\"MethodsList\" is defunct; allMethods now are empty")
 #: R/RMethodUtils.R:0
 msgid "\"MethodsList\" is defunct; allMethods now are empty"
-msgstr ""
+msgstr "\"MethodsList\" está obsoleto; allMethods ahora está vacío"
 
 #. R/RClassUtils.R: stop("\"class\" is a reserved slot name and cannot be redefined")
 #: R/RClassUtils.R:0
@@ -42,7 +42,7 @@ msgstr ""
 #. R/SClasses.R: gettextf("%s has a sealed class definition and cannot be redefined",     dQuote(Class))
 #: R/SClasses.R:0
 msgid "%s has a sealed class definition and cannot be redefined"
-msgstr ""
+msgstr "%s tiene una definición de clase sellada y no puede redefinirse"
 
 #. R/Methods.R: gettextf("%s has no methods defined", sQuote(f))
 #: R/Methods.R:0
@@ -57,7 +57,7 @@ msgstr ""
 #. R/SClasses.R: gettextf("%s is not a defined class", dQuote(Class))
 #: R/SClasses.R:0
 msgid "%s is not a defined class"
-msgstr ""
+msgstr "%s no es una clase definida"
 
 #. R/refClass.R: gettextf("%s is not a defined class in this environment", dQuote(Class))
 #: R/refClass.R:0
@@ -95,7 +95,7 @@ msgstr ""
 #. R/SClasses.R: gettextf("%s is not a slot in class %s", sQuote(name), dQuote(cl))
 #: R/SClasses.R:0
 msgid "%s is not a slot in class %s"
-msgstr ""
+msgstr "%s no es un slot en la clase %s"
 
 #. R/refClass.R: gettextf("%s is not a valid field or method name for reference class %s",     sQuote(field), dQuote(thisClass@className))
 #: R/refClass.R:0
@@ -196,6 +196,8 @@ msgstr ""
 #: R/MethodsListClass.R:0
 msgid "'initialize' method returned an object of class %s instead of the required class %s"
 msgstr ""
+"Todos los nombres de '“%s”' deben ser no vacíos en:\n"
+"(%s)"
 
 #. R/RClassUtils.R: gettextf("(class %s)", .dQ(unlist(properties, recursive = FALSE)[undefClasses]))
 #: R/RClassUtils.R:0
@@ -228,6 +230,8 @@ msgid ""
 "All %s names must be distinct in:\n"
 "(%s)"
 msgstr ""
+"Todos los nombres de %s deben ser distintos en: \n"
+"(%s)"
 
 #. R/SClasses.R: gettextf("All %s names must be nonempty in:\n(%s)", what, paste(sQuote(propNames),     collapse = ", "))
 #: R/SClasses.R:0
@@ -389,6 +393,8 @@ msgstr ""
 #: R/methodsTable.R:0
 msgid "No simply inherited methods found for function %s; using non-simple method"
 msgstr ""
+"No se encontraron métodos simplemente heredados para la función %s, se usa un método no "
+"simple"
 
 #. R/trace.R: gettextf("Non-function objects are not currently inserted (not traceable): %s",     paste(notTraceable, collapse = ", "))
 #: R/trace.R:0
@@ -402,6 +408,9 @@ msgid ""
 " target signature %s.\n"
 " %s would also be valid"
 msgstr ""
+"Nota: se eligió el método con firma %s para la función %s,\n"
+" firma de método objetivo: %s\n"
+" %s también debería ser válida"
 
 #. R/RClassUtils.R: gettextf("Note: some superclasses of class %s in package %s have duplicate definitions.  This definition is not being treated as equivalent to that from package %s",     dQuote(def@className), sQuote(def@package), sQuote(prev@package))
 #: R/RClassUtils.R:0
@@ -487,6 +496,8 @@ msgstr ""
 #: R/refClass.R:0
 msgid "a single class name is needed for field %s, got a character vector of length %d"
 msgstr ""
+"se requiere un único nombre de clase para el campo %s, se obtuvo un vector de "
+"caracteres de longitud %d"
 
 #. R/RClassUtils.R: gettextf("a validity method must be a function of one argument, got an object of class %s",     dQuote(class(validity)))
 #: R/RClassUtils.R:0
@@ -756,7 +767,7 @@ msgstr ""
 #. R/refClass.R: gettextf("class %s for field %s is not defined", dQuote(thisField),     sQuote(thisName))
 #: R/refClass.R:0
 msgid "class %s for field %s is not defined"
-msgstr ""
+msgstr "la clase %s para el campo %s no está definida"
 
 #. R/RClassUtils.R: gettextf("class %s has a locked definition in package %s", dQuote(Class),     sQuote(getPackageName(where)))
 #: R/RClassUtils.R:0
@@ -791,7 +802,7 @@ msgstr ""
 #. R/refClass.R: gettextf("class %s is defined but is not a reference class",     dQuote(Class))
 #: R/refClass.R:0
 msgid "class %s is defined but is not a reference class"
-msgstr ""
+msgstr "la clase %s está definida, pero no es una clase de referencia"
 
 #. R/SClasses.R: gettextf("class %s is defined, with package %s, but no corresponding metadata object was found (not exported?)",     dQuote(Class), sQuote(classDef@package))
 #: R/SClasses.R:0
@@ -1226,6 +1237,9 @@ msgid ""
 "    %s\n"
 " Did you mean to use \"<<-\"? ( in method %s for class %s)"
 msgstr ""
+"asignación local a nombre de campo no cambiará el campo:\n"
+"    %s\n"
+" ¿quizá su intención era usar \"<<-\"? ( en el método %s para la clase %s )"
 
 #. R/RMethodUtils.R: gettextf("making a generic for special function %s", sQuote(f))
 #: R/RMethodUtils.R:0
@@ -1548,6 +1562,9 @@ msgid ""
 "    %s\n"
 "( in method %s for class %s)"
 msgstr ""
+"no se permite asignación no local (<<-) para nombres de método\n"
+"    %s\n"
+"( en el método %s para la clase %s )"
 
 #. R/refClass.R: gettextf("non-local assignment to non-field names (possibly misspelled?)\n    %s\n( in method %s for class %s)",     paste(unlist(assigned$globals)[globalsNotFields], collapse = "; "),     methodName, className)
 #: R/refClass.R:0
@@ -1605,7 +1622,7 @@ msgstr ""
 #. R/trace.R: gettextf("objects found in multiple packages: using %s and ignoring %s",     sQuote(names(possible[1L])), paste(sQuote(names(possible[-1L])),         collapse = ", "))
 #: R/trace.R:0
 msgid "objects found in multiple packages: using %s and ignoring %s"
-msgstr ""
+msgstr "se encontraron los objetos en múltiples paquetes: se usa(n) %s y se ignora(n) %s"
 
 #. R/Methods.R: gettextf("only FALSE is meaningful for 'inherited', when 'where' is supplied (got %s)",     inherited)
 #: R/Methods.R:0
@@ -1631,6 +1648,7 @@ msgstr ""
 #: R/trace.R:0
 msgid "package %s is not attached and no namespace found for it"
 msgstr ""
+"el paquete %s no está adjunto y no se encontró un espacio de nombres para el mismo"
 
 #. R/Methods.R: gettextf("package slots  differ: %s, %s", .dQ(gpString(f1@package)),     .dQ(gpString(f2@package)))
 #: R/Methods.R:0
@@ -1700,7 +1718,7 @@ msgstr ""
 #. R/trace.R: gettextf("supplied package, %s, differs from package inferred from source, %s",     sQuote(package), sQuote(envPackage))
 #: R/trace.R:0
 msgid "supplied package, %s, differs from package inferred from source, %s"
-msgstr ""
+msgstr "el paquete proporcionado, %s, difiere del paquete inferido del código fuente, %s"
 
 #. R/methodsTable.R: gettextf("the \"ambiguousMethodSelection\" option should be a function to be called as the condition action; got an object of class %s",     dQuote(class(condAction)))
 #: R/methodsTable.R:0
@@ -1942,7 +1960,7 @@ msgstr ""
 #. R/zzz.R: message("unloading 'methods' package ...")
 #: R/zzz.R:0
 msgid "unloading 'methods' package ..."
-msgstr ""
+msgstr "desvinculando el paquete 'methods' ..."
 
 #. R/BasicClasses.R: gettextf("unnamed argument must extend either the S3 class or the class of the data part; not true of class %s",     dQuote(Classi))
 #: R/BasicClasses.R:0
@@ -1985,8 +2003,8 @@ msgstr[1] ""
 #: R/MethodsListClass.R:0
 msgid "Reported %d ambiguous selection out of %d for function %s\n"
 msgid_plural "Reported %d ambiguous selections out of %d for function %s\n"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se reportó %d selección ambigua de un total de %d para la función %s\n"
+msgstr[1] "Se reportaron %d selecciones ambiguas de un total de %d para la función %s\n"
 
 #. R/methodsTable.R: ngettext(which2, "Selecting %d method of minimum distance", "Selecting %d methods of minimum distance")
 #: R/methodsTable.R:0
@@ -2020,8 +2038,8 @@ msgstr[1] ""
 #: R/SClasses.R:0
 msgid "duplicated slot name: %s"
 msgid_plural "duplicated slot names: %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "nombre de slot duplicado: %s"
+msgstr[1] "nombres de slot duplicados :%s"
 
 #. R/methodsTable.R: ngettext(length(methods), "found %d equally good next method",     "found %d equally good next methods")
 #: R/methodsTable.R:0
@@ -2041,8 +2059,8 @@ msgstr[1] ""
 #: R/SClasses.R:0
 msgid "invalid name for slot of class %s: %s"
 msgid_plural "invalid names for slots of class %s: %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "nombre de slot de clase %s no válido: %s"
+msgstr[1] "nombre de los slots de clase %s no válidos: %s"
 
 #. R/SClasses.R: ngettext(length(pkgs), "multiple definition of class %s visible (%s); using the definition\n   in package %s for %s",     "multiple definitions of class %s visible (%s); using the definition\n   in package %s for %s")
 #: R/SClasses.R:0
@@ -2088,7 +2106,11 @@ msgstr[1] ""
 msgid "slot in class %s must extend corresponding slot in class %s: fails for %s"
 msgid_plural "slots in class %s must extend corresponding slots in class %s: fails for %s"
 msgstr[0] ""
+"el slot en la clase %s debe extender al slot correspondiente en la clase %s: no se "
+"cumple para %s"
 msgstr[1] ""
+"los slots en la clase %s deben extender a los slots correspondientes en la clase %s: no "
+"se cumple para %s"
 
 #. R/RMethodUtils.R: ngettext(length(fdef), "the formal argument of the generic function for %s (%s) differs from that of the non-generic to be used as the default (%s)",     "the formal arguments of the generic function for %s (%s) differ from those of the non-generic to be used as the default (%s)")
 #: R/RMethodUtils.R:0

@@ -119,7 +119,7 @@ msgstr "'length' deve ser um objeto unitário"
 #: R/highlevel.R:0
 #, fuzzy
 msgid "'ncol' must be >= 1"
-msgstr "'l' deve ser um layout"
+msgstr "'ncol' deve ser >= 1"
 
 #. R/highlevel.R: stop("'nrow' must be >= 1")
 #: R/highlevel.R:0
@@ -406,12 +406,12 @@ msgstr "Objeto unitário inválido"
 #. R/mask.R: stop("Only a grob can be converted to a mask")
 #: R/mask.R:0
 msgid "Only a grob can be converted to a mask"
-msgstr ""
+msgstr "Apenas um grob pode ser convertido em uma máscara"
 
 #. R/path.R: stop("Only a grob can be converted to a path")
 #: R/path.R:0
 msgid "Only a grob can be converted to a path"
-msgstr ""
+msgstr "Apenas um grob pode ser convertido em um caminho"
 
 #. R/patterns.R: warning("Pattern fill applied to object with no inside")
 #: R/patterns.R:0
@@ -500,7 +500,7 @@ msgstr "Não pode ser especificado mais de um 'side=[\"left\", \"right\"]', 'col
 #: R/patterns.R:0
 #, fuzzy
 msgid "colours and stops must be at least length 1"
-msgstr "'x' e 'y' devem ter o mesmo comprimento"
+msgstr "'colours' e os 'stops' devem ter comprimento igual ou maior que 1"
 
 #. R/primitives.R: stop("corrupt 'arrows' object")
 #: R/primitives.R:0
@@ -512,7 +512,7 @@ msgstr "Objeto 'arrows' corrupto"
 #: R/patterns.R:0
 #, fuzzy
 msgid "cx1, cy1, cx2, cy2, r1, and r2 must all be length 1"
-msgstr "'x1', 'y1' ,'x2', e 'y2' devem ser unidade"
+msgstr "cx1, cy1, cx2, cy2, r1, e r2 devem ter comprimento 1"
 
 #. R/curve.R: stop("end points must not be identical")
 #: R/curve.R:0
@@ -538,6 +538,8 @@ msgid ""
 "grob drawing produces more shapes than grob coords\n"
 "(recycling coords)"
 msgstr ""
+"O desenho do Grob produz mais formas do que as coordenadas do Grob\n"
+"(coordenadas foram reutilizadas)"
 
 #. R/grab.R: warning("grob pushed viewports and did not pop/up them (grab MAY not be faithful)")
 #: R/grab.R:0
@@ -676,7 +678,7 @@ msgstr "'layout' inválido em vista"
 #: R/viewport.R:0
 #, fuzzy
 msgid "invalid 'layout.pos.col' in viewport"
-msgstr "'layout.pos.col' inválido em vista"
+msgstr "'layout.pos.col' inválido para viewport"
 
 #. R/viewport.R: stop("invalid 'layout.pos.row' in viewport")
 #: R/viewport.R:0
@@ -883,13 +885,13 @@ msgstr "Deve restaurar ao menos uma vista"
 #: R/viewport.R:0
 #, fuzzy
 msgid "must specify at least one of 'xData' or 'xscale'"
-msgstr "Deve especificar pelo menos um de 'x' ou 'xscale'"
+msgstr "Deve especificar pelo menos um entre 'xData' ou 'xscale'"
 
 #. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
 #, fuzzy
 msgid "must specify at least one of 'yData' or 'yscale'"
-msgstr "Deve especificar pelo menos um de 'y' ou 'yscale'"
+msgstr "Deve especificar pelo menos um entre 'yData' ou 'yscale'"
 
 #. R/grid.R: stop("must specify at least one viewport")
 #: R/grid.R:0
@@ -984,7 +986,8 @@ msgstr "elemento gpar '%s' não deve ser de comprimento 0"
 #: R/zzz.R:0
 #, fuzzy
 msgid "shutting down all devices when unloading 'grid' namespace"
-msgstr "desligando todos os dispositivos quando descarregando name space 'grid'"
+msgstr ""
+"Desligando todos os dispositivos enquanto descarrega o namespace do 'grid'"
 
 #. R/grob.R: gettextf("slot '%s' not found", i)
 #: R/grob.R:0

@@ -50,7 +50,7 @@ msgstr "l'argument no és del tipus correcte"
 
 #: tcltk.cpp:731
 msgid "no DISPLAY variable so Tk is not available"
-msgstr "no hi ha cap variable DISPLAY de manera que Tk no està disponible"
+msgstr "no hi ha cap variable DISPLAY de manera que Tk no està "
 
 #: tcltk_unix.cpp:109
 msgid "Tcl is not loaded"

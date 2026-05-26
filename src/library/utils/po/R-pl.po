@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-09 18:26\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-12-27 18:31+0100\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -819,6 +819,12 @@ msgstr "Nierozpoznana specjalna wartość danej"
 msgid "Unrecognized value indicator"
 msgstr "Nierozpoznany wskaźnik wartości"
 
+#. R/bitstring.R: stop("Unsupported object")
+#: R/bitstring.R:0
+#, fuzzy
+msgid "Unsupported object"
+msgstr "niewspierany typ wpisu"
+
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
 #. R/packages2.R: message("Updating HTML index of packages in '.Library'")
 #: R/packages.R:0 R/packages2.R:0
@@ -853,6 +859,11 @@ msgstr "Używanie przeglądarki do otwarcia 'mailto': URI"
 #: R/help.R:0
 msgid "Using the first match ..."
 msgstr "Używanie pierwszego dopasowania ..."
+
+#. R/unix/mac.install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkgname))
+#: R/unix/mac.install.R:0
+msgid "Valid signature is required, but package %s could not be successfully verified."
+msgstr ""
 
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
 #: R/Sweave.R:0
@@ -920,9 +931,10 @@ msgstr "dołączanie nazw kolumn do pliku"
 msgid "argument 'compressed' is ignored for the internal method"
 msgstr "argument 'compressed' jest ignorowany w przypadku metody wewnętrznej"
 
-#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
+#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no effect on search results")
 #: R/RSiteSearch.R:0
-msgid "argument 'format' is deprecated and has no affect on search results"
+#, fuzzy
+msgid "argument 'format' is deprecated and has no effect on search results"
 msgstr "argument 'format' jest przestarzały i nie ma wpływu na wyniki wyszukiwania"
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
@@ -1725,10 +1737,18 @@ msgstr "pakiet %s ma puste dane 'hsearch' - dziwne"
 msgid "package %s has no %s file: only auto-generation is possible"
 msgstr "pakiet %s nie zawiera pliku %s: możliwe jest tylko automatyczne generowanie"
 
-#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
-#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#. R/unix/mac.install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkgname),     info$fingerprint, info$userid)
+#: R/unix/mac.install.R:0
+#, fuzzy
+msgid "package %s signature verified (%s %s)"
+msgstr "pakiet %s nie jest dostępny (%s)"
+
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "SHA256")
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "MD5")
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and %s sums checked\n",     sQuote(pkgname), "MD5")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-msgid "package %s successfully unpacked and MD5 sums checked"
+#, fuzzy
+msgid "package %s successfully unpacked and %s sums checked"
 msgstr "pakiet %s został pomyślnie rozpakowany oraz sumy MD5 zostały sprawdzone"
 
 #. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
@@ -1916,6 +1936,12 @@ msgstr "plik wyjściowy '%s' zniknął"
 msgid "there is no 'libs' directory in package %s"
 msgstr "nie ma katalogu 'libs' w pakiecie %s"
 
+#. R/SweaveGetSourceName.R: stop("this function cannot be used from an interactive session")
+#: R/SweaveGetSourceName.R:0
+#, fuzzy
+msgid "this function cannot be used from an interactive session"
+msgstr "'winDialog()' nie może być użyty nieinteraktywnie"
+
 #. R/SweaveDrivers.R: gettext("this may cause problems when running LaTeX")
 #: R/SweaveDrivers.R:0
 msgid "this may cause problems when running LaTeX"
@@ -1947,10 +1973,10 @@ msgstr "próba użycia CRAN bez ustawienia serwera lustrzanego"
 msgid "type 'binary' is not supported on this platform"
 msgstr "typ 'binary' nie jest wspierany na tej platformie"
 
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for macOS")
+#. R/packages2.R: stop("type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)")
 #: R/packages2.R:0
-msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
-msgstr "'type == \"both\"' może być użyte jedynie w systemie Windows lub kompilacji CRAN dla systemów macOS"
+msgid "type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)"
+msgstr ""
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
 #: R/packages2.R:0
@@ -2000,6 +2026,12 @@ msgstr "nie można usunąć tymczasowej instalacji %s w %s"
 msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr "nie można przenieść tymczasowej instalacji %s do %s, zamiast tego kopiowanie"
 
+#. R/SweaveGetSourceName.R: stop("unrecognized Sweave call")
+#: R/SweaveGetSourceName.R:0
+#, fuzzy
+msgid "unrecognized Sweave call"
+msgstr "Nierozpoznany wskaźnik wartości"
+
 #. R/tar.R: stop("unsupported entry type ", sQuote(ctype))
 #: R/tar.R:0
 msgid "unsupported entry type"
@@ -2009,6 +2041,11 @@ msgstr "niewspierany typ wpisu"
 #: R/tar.R:0
 msgid "untar: using cmd = %s"
 msgstr "untar: używanie polecenia = %s"
+
+#. R/SweaveDrivers.R: gettextf("using default value %s", defval)
+#: R/SweaveDrivers.R:0
+msgid "using default value %s"
+msgstr ""
 
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
 #: R/SweaveDrivers.R:0
@@ -2344,6 +2381,9 @@ msgid_plural "packages %s are not available %s"
 msgstr[0] "pakiet %s nie jest dostępny (%s)"
 msgstr[1] "pakiety %s nie są dostępne (%s)"
 msgstr[2] "pakiety %s nie są dostępne (%s)"
+
+#~ msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+#~ msgstr "'type == \"both\"' może być użyte jedynie w systemie Windows lub kompilacji CRAN dla systemów macOS"
 
 #~ msgid "no R objects specified or available"
 #~ msgstr "nie określono obiektów R lub są one niedostępne"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -73,6 +73,12 @@ msgstr ""
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "'%s' はモード '%s' にはなれません"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+#, fuzzy
+msgid "'%s' is not implemented yet"
+msgstr "型 '%s' はまだ実装されていません"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -223,13 +229,14 @@ msgstr ""
 #. R/cor.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/fisher.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/mantelhaen.test.R: stop("'conf.level' must be a single number between 0 and 1")
+#. R/poisson.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/prop.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/t.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/var.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/wilcox.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/ansari.test.R:0 R/binom.test.R:0 R/cor.test.R:0 R/fisher.test.R:0
-#: R/mantelhaen.test.R:0 R/prop.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0
+#: R/mantelhaen.test.R:0 R/poisson.test.R:0 R/prop.test.R:0 R/t.test.R:0
+#: R/var.test.R:0 R/wilcox.test.R:0
 msgid "'conf.level' must be a single number between 0 and 1"
 msgstr "'conf.level' は 0 と 1 の間の単一の数値でなければなりません"
 
@@ -1581,6 +1588,11 @@ msgstr ""
 msgid "X does not define a subspace of M"
 msgstr "X は M の部分空間を定めません"
 
+#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
+#: R/fisher.test.R:0
+msgid "`pval.only` and `conf.int` may not both be true"
+msgstr ""
+
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2363,6 +2375,11 @@ msgid ""
 msgstr ""
 "ハット行列の対角要素 (テコ比) が全て %s で\n"
 " かつ factor 型の予測子もありません: 5 番目の図は作成されません"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "hatvalues() for nls(*, algorithm='plinear')"
+msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")

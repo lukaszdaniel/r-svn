@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -74,6 +74,12 @@ msgstr "%s; rozważ predict(., rankdeficient=\"NA\")"
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "argument '%s' nie może być trybu '%s'"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+#, fuzzy
+msgid "'%s' is not implemented yet"
+msgstr "typ '%s' nie jest jeszcze zaimplementowany"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -221,13 +227,14 @@ msgstr "argument 'conf.level' nie jest prawdopodobieństwem"
 #. R/cor.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/fisher.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/mantelhaen.test.R: stop("'conf.level' must be a single number between 0 and 1")
+#. R/poisson.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/prop.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/t.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/var.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/wilcox.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/ansari.test.R:0 R/binom.test.R:0 R/cor.test.R:0 R/fisher.test.R:0
-#: R/mantelhaen.test.R:0 R/prop.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0
+#: R/mantelhaen.test.R:0 R/poisson.test.R:0 R/prop.test.R:0 R/t.test.R:0
+#: R/var.test.R:0 R/wilcox.test.R:0
 msgid "'conf.level' must be a single number between 0 and 1"
 msgstr "'conf.level' musi być pojedynczą liczbą pomiędzy 0 a 1"
 
@@ -1560,6 +1567,11 @@ msgstr "Oczekiwanie aż profilowanie się zakończy..."
 msgid "X does not define a subspace of M"
 msgstr "X nie definiuje podprzestrzeni M"
 
+#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
+#: R/fisher.test.R:0
+msgid "`pval.only` and `conf.int` may not both be true"
+msgstr ""
+
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2328,6 +2340,11 @@ msgid ""
 msgstr ""
 "wszystkie dopasowane wartości (zależne) są = %s\n"
 "oraz nie ma czynnikowych predyktorów; brak wykresu nr. 5"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "hatvalues() for nls(*, algorithm='plinear')"
+msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")

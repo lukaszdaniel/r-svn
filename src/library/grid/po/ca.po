@@ -216,7 +216,7 @@ msgstr "l'objecte no és una unitat"
 #: unit.cpp:1869
 #, fuzzy
 msgid "units can only be multiplied with numerics and integers"
-msgstr "les unitats només es poden multiplicar amb nombres i enters"
+msgstr ""
 
 #: util.cpp:220
 #, fuzzy

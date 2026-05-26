@@ -17,12 +17,12 @@ msgstr ""
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
 #: R/pictex.R:0
 msgid "'%s' is deprecated."
-msgstr ""
+msgstr "'%s' está obsoleto."
 
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
 msgid "'%s' must be a non-empty character string"
-msgstr ""
+msgstr "'%s' debe ser una cadena de caracteres no vacía"
 
 #. R/grDevices-defunct.R: gettextf("'%s' was removed in R 4.5.0.\n", "xfig")
 #: R/grDevices-defunct.R:0
@@ -37,12 +37,12 @@ msgstr ""
 #. R/smooth2d.R: stop("'bandwidth' must be numeric")
 #: R/smooth2d.R:0
 msgid "'bandwidth' must be numeric"
-msgstr ""
+msgstr "'bandwidth' debe ser numérico"
 
 #. R/smooth2d.R: stop("'bandwidth' must be positive")
 #: R/smooth2d.R:0
 msgid "'bandwidth' must be positive"
-msgstr ""
+msgstr "'bandwidth' debe ser positivo"
 
 #. R/colorRamp.R: stop("'bias' must be positive")
 #: R/colorRamp.R:0
@@ -68,13 +68,13 @@ msgstr ""
 #. R/windows/dev2bitmap.R: stop("'file' is missing with no default")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' is missing with no default"
-msgstr ""
+msgstr "'file' está ausente, sin valor por omisión"
 
 #. R/unix/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #. R/windows/dev2bitmap.R: stop("'file' must be a non-empty character string")
 #: R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
 msgid "'file' must be a non-empty character string"
-msgstr ""
+msgstr "'file' debe ser una cadena de caracteres no vacía"
 
 #. R/unix/png.R: stop("'filename' must be a non-empty character string")
 #: R/unix/png.R:0
@@ -191,6 +191,8 @@ msgid ""
 "Available devices are:\n"
 "%s"
 msgstr ""
+"Los dispositivos disponibles son:\n"
+"%s"
 
 #. R/glyph.R: stop("Axis names must be 4 ASCII letters long")
 #: R/glyph.R:0
@@ -210,7 +212,7 @@ msgstr ""
 #. R/windows/windows.R: gettextf("Calls like '%s' are unsafe and should be replaced by '%s'",     "x11(w, h)", "x11(width=w, height=h)")
 #: R/windows/windows.R:0
 msgid "Calls like '%s' are unsafe and should be replaced by '%s'"
-msgstr ""
+msgstr "Las llamadas como '%s' no son seguras y deben reemplazarse por '%s'"
 
 #. R/convertColor.R: gettextf("Color space converter: %s", x$name)
 #: R/convertColor.R:0
@@ -457,7 +459,7 @@ msgstr ""
 #. R/windows/windows.R: stop("can only bring windows devices to the front")
 #: R/windows/windows.R:0
 msgid "can only bring windows devices to the front"
-msgstr ""
+msgstr "solo pueden traer al frente los dispositivos de tipo ventana"
 
 #. R/unix/x11.R: stop("can only copy from 'X11(type=\"*cairo\")' devices")
 #: R/unix/x11.R:0
@@ -467,7 +469,7 @@ msgstr ""
 #. R/windows/windows.R: stop("can only copy from 'windows' devices")
 #: R/windows/windows.R:0
 msgid "can only copy from 'windows' devices"
-msgstr ""
+msgstr "solo se puede copiar desde dispositivos tipo ventana"
 
 #. R/windows/windows.R: stop("can only manipulate windows devices")
 #: R/windows/windows.R:0
@@ -639,6 +641,7 @@ msgstr ""
 #: R/windows/windows.R:0
 msgid "invalid Windows font:  must be a single font family name"
 msgstr ""
+"fuente de Windows no válida:  debe ser un solo nombre de familia de fuentes"
 
 #. R/unix/x11.R: stop("invalid X11 font specification: ", errDesc)
 #: R/unix/x11.R:0
@@ -681,12 +684,13 @@ msgstr ""
 #. R/windows/windows.R: stop("invalid arguments in 'windowsFonts' (must be font names)")
 #: R/windows/windows.R:0
 msgid "invalid arguments in 'windowsFonts' (must be font names)"
-msgstr ""
+msgstr "argumentos no válidos en 'windowsFonts' (deben ser nombres de fuente)"
 
 #. R/windows/windows.R: stop("invalid arguments in 'windowsFonts' (need named args)")
 #: R/windows/windows.R:0
 msgid "invalid arguments in 'windowsFonts' (need named args)"
 msgstr ""
+"argumentos no válidos en 'windowsFonts' (se requieren argumentos con nombre)"
 
 #. R/postscript.R: stop("invalid encoding in font specification")
 #: R/postscript.R:0
@@ -922,8 +926,8 @@ msgstr[1] ""
 #: R/postscript.R:0
 msgid "differs between new and previous"
 msgid_plural "differ between new and previous"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "difiere entre el nuevo y el anterior"
+msgstr[1] "difieren entre el/los nuevo/s y anterior/es"
 
 #. R/postscript.R: ngettext(as.integer(sum(is.na(matches))), "invalid argument name %s in '%s'",     "invalid argument names %s in '%s'", domain = "R-grDevices")
 #: R/postscript.R:0

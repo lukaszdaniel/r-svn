@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-09 18:26\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:12+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -677,8 +677,8 @@ msgid ""
 "RShowDoc() should be used with a character string argument specifying\n"
 "   a documentation file"
 msgstr ""
-"RShowDoc() debería ser usado con un argumento de tipo cadena de caracteres (string) especificando \n"
-"…un archivo de documentación"
+"RShowDoc() debería ser usado con un argumento de cadena de caracteres (string) especificando\n"
+"un archivo de documentación"
 
 #. R/aspell.R: gettextf("Running aspell failed with diagnostics:\n%s", paste(out$stderr,     collapse = "\n"))
 #: R/aspell.R:0
@@ -797,6 +797,12 @@ msgstr ""
 msgid "Unrecognized value indicator"
 msgstr ""
 
+#. R/bitstring.R: stop("Unsupported object")
+#: R/bitstring.R:0
+#, fuzzy
+msgid "Unsupported object"
+msgstr "tipo de entrada no admitido"
+
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
 #. R/packages2.R: message("Updating HTML index of packages in '.Library'")
 #: R/packages.R:0 R/packages2.R:0
@@ -828,6 +834,11 @@ msgstr ""
 #. R/help.R: gettext("\nUsing the first match ...")
 #: R/help.R:0
 msgid "Using the first match ..."
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkgname))
+#: R/unix/mac.install.R:0
+msgid "Valid signature is required, but package %s could not be successfully verified."
 msgstr ""
 
 #. R/Sweave.R: gettextf("Warning: unknown option %s", sQuote(a))
@@ -893,9 +904,9 @@ msgstr ""
 msgid "argument 'compressed' is ignored for the internal method"
 msgstr ""
 
-#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
+#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no effect on search results")
 #: R/RSiteSearch.R:0
-msgid "argument 'format' is deprecated and has no affect on search results"
+msgid "argument 'format' is deprecated and has no effect on search results"
 msgstr ""
 
 #. R/help.search.R: warning("argument 'help.db' is deprecated")
@@ -1695,10 +1706,16 @@ msgstr ""
 msgid "package %s has no %s file: only auto-generation is possible"
 msgstr ""
 
-#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
-#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#. R/unix/mac.install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkgname),     info$fingerprint, info$userid)
+#: R/unix/mac.install.R:0
+msgid "package %s signature verified (%s %s)"
+msgstr ""
+
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "SHA256")
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "MD5")
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and %s sums checked\n",     sQuote(pkgname), "MD5")
 #: R/unix/mac.install.R:0 R/windows/install.packages.R:0
-msgid "package %s successfully unpacked and MD5 sums checked"
+msgid "package %s successfully unpacked and %s sums checked"
 msgstr ""
 
 #. R/packages.R: sprintf("package '%s' in library '%s' will not be updated", oldPkgs[pkg],     oldPkgs[pkg, 2])
@@ -1723,7 +1740,7 @@ msgstr ""
 #. R/tar.R: stop("path contains '..'")
 #: R/tar.R:0
 msgid "path contains '..'"
-msgstr ""
+msgstr "la ruta contiene '..'"
 
 #. R/tar.R: stop("path starts with '~'")
 #: R/tar.R:0
@@ -1882,6 +1899,12 @@ msgstr ""
 msgid "there is no 'libs' directory in package %s"
 msgstr ""
 
+#. R/SweaveGetSourceName.R: stop("this function cannot be used from an interactive session")
+#: R/SweaveGetSourceName.R:0
+#, fuzzy
+msgid "this function cannot be used from an interactive session"
+msgstr "winDialog() no se puede utilizar de forma no interactiva"
+
 #. R/SweaveDrivers.R: gettext("this may cause problems when running LaTeX")
 #: R/SweaveDrivers.R:0
 msgid "this may cause problems when running LaTeX"
@@ -1913,9 +1936,9 @@ msgstr ""
 msgid "type 'binary' is not supported on this platform"
 msgstr ""
 
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for macOS")
+#. R/packages2.R: stop("type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)")
 #: R/packages2.R:0
-msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+msgid "type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)"
 msgstr ""
 
 #. R/packages2.R: stop("type == \"both\" cannot be used with 'repos = NULL'")
@@ -1966,14 +1989,25 @@ msgstr ""
 msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr ""
 
+#. R/SweaveGetSourceName.R: stop("unrecognized Sweave call")
+#: R/SweaveGetSourceName.R:0
+#, fuzzy
+msgid "unrecognized Sweave call"
+msgstr "Respuesta desconocida"
+
 #. R/tar.R: stop("unsupported entry type ", sQuote(ctype))
 #: R/tar.R:0
 msgid "unsupported entry type"
-msgstr ""
+msgstr "tipo de entrada no admitido"
 
 #. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
 #: R/tar.R:0
 msgid "untar: using cmd = %s"
+msgstr ""
+
+#. R/SweaveDrivers.R: gettextf("using default value %s", defval)
+#: R/SweaveDrivers.R:0
+msgid "using default value %s"
 msgstr ""
 
 #. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
@@ -1992,16 +2026,18 @@ msgid ""
 "vignette %s found more than once,\n"
 "using the one found in %s"
 msgstr ""
+"viñeta %s encontrada más de una vez,\n"
+"usando la que se encuentra en %s"
 
 #. R/vignette.R: gettextf("vignette %s has no PDF/HTML", sQuote(x$Topic))
 #: R/vignette.R:0
 msgid "vignette %s has no PDF/HTML"
-msgstr ""
+msgstr "viñeta %s no tiene PDF/HTML"
 
 #. R/vignette.R: gettextf("vignette %s has no R code", sQuote(x$Topic))
 #: R/vignette.R:0
 msgid "vignette %s has no R code"
-msgstr ""
+msgstr "viñeta %s no tiene código R"
 
 #. R/vignette.R: gettextf("vignette %s not found", sQuote(topic))
 #: R/vignette.R:0
@@ -2011,12 +2047,12 @@ msgstr ""
 #. R/windows/winDialog.R: stop("winDialog() cannot be used non-interactively")
 #: R/windows/winDialog.R:0
 msgid "winDialog() cannot be used non-interactively"
-msgstr ""
+msgstr "winDialog() no se puede utilizar de forma no interactiva"
 
 #. R/windows/winDialog.R: stop("winDialogString() cannot be used non-interactively")
 #: R/windows/winDialog.R:0
 msgid "winDialogString() cannot be used non-interactively"
-msgstr ""
+msgstr "winDialogString() no se puede utilizar de forma no interactiva"
 
 #. R/de.R: stop("wrong argument to 'dataentry'")
 #: R/de.R:0
@@ -2042,15 +2078,15 @@ msgstr ""
 #: R/Sweave.R:0
 msgid "%d Sweave file for basename %s found"
 msgid_plural "%d Sweave files for basename %s found"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d archivo Sweave para (basename) %s encontrado"
+msgstr[1] "%d archivos Sweave para (basename) %s encontrados"
 
 #. R/modifyList.R: ngettext(tt[[1L]], "%d error caught in %s: %s", "%d times caught the same error in %s: %s")
 #: R/modifyList.R:0
 msgid "%d error caught in %s: %s"
 msgid_plural "%d times caught the same error in %s: %s"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d error detectado en %s: %s"
+msgstr[1] "%d veces detectó el mismo error en %s: %s"
 
 #. R/apropos.R: ngettext(ll, "%d occurrence in %s", "%d occurrences in %s")
 #: R/apropos.R:0
@@ -2210,8 +2246,8 @@ msgstr[1] ""
 #: R/read.fwf.R:0
 msgid "last record incomplete, %d line discarded"
 msgid_plural "last record incomplete, %d lines discarded"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "último registro incompleto, %d línea descartada"
+msgstr[1] "último registro incompleto, %d líneas descartadas"
 
 #. R/help.search.R: ngettext(n_of_objects_matched, "matched %d object.", "matched %d objects.")
 #: R/help.search.R:0

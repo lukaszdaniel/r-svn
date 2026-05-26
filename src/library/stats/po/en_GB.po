@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 15:59+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -88,13 +88,13 @@ msgstr "non-finite x[%d] in bandwidth calculation"
 msgid "invalid 'type' (%s) of argument"
 msgstr "invalid 'type' (%s) of argument"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "no input has determined the number of cases"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "not all arguments have the same length"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "no input has determined the number of cases"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -181,15 +181,15 @@ msgstr "invalid variable names"
 msgid "invalid tag"
 msgstr "invalid tag"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "treating non-finite values as NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): invalid p"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance(): invalid distance"
 
@@ -744,7 +744,7 @@ msgstr "-Inf replaced by maximally negative value"
 #: optimize.cpp:229 optimize.cpp:319 optimize.cpp:541
 #, fuzzy, c-format
 msgid "%s replaced by maximum positive value"
-msgstr "NA replaced by maximum positive value"
+msgstr "%s replaced by maximum positive value"
 
 #: optimize.cpp:239
 msgid "invalid function value in 'optimize'"

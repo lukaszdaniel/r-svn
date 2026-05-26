@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 15:55+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -97,15 +97,15 @@ msgstr "x[%d] no definit en el càlcul de l'amplada de banda"
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type' (%s) de l'argument no és vàlid"
 
-#: complete_cases.cpp:122
-#, fuzzy
-msgid "no input has determined the number of cases"
-msgstr "cap entrada ha determinat el nombre de casos"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 #, fuzzy
 msgid "not all arguments have the same length"
 msgstr "no tots els arguments tenen la mateixa longitud"
+
+#: complete_cases.cpp:123
+#, fuzzy
+msgid "no input has determined the number of cases"
+msgstr "cap entrada ha determinat el nombre de casos"
 
 #: cov.cpp:566
 #, fuzzy
@@ -205,17 +205,17 @@ msgstr "noms de variables no vàlids"
 msgid "invalid tag"
 msgstr "etiqueta no vàlida"
 
-#: distance.cpp:153
+#: distance.cpp:154
 #, fuzzy
 msgid "treating non-finite values as NA"
 msgstr "tractant els valors no-finits com a NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 #, fuzzy
 msgid "distance(): invalid p"
 msgstr "distance(): p no vàlida"
 
-#: distance.cpp:230
+#: distance.cpp:231
 #, fuzzy
 msgid "distance(): invalid distance"
 msgstr "distance(): la distància no és vàlida"
@@ -223,7 +223,7 @@ msgstr "distance(): la distància no és vàlida"
 #: distn.cpp:40
 #, fuzzy
 msgid "NaNs produced"
-msgstr "NaN produït"
+msgstr "s'han produït NaNs"
 
 #: distn.cpp:41
 #, fuzzy

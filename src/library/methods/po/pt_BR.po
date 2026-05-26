@@ -29,11 +29,11 @@ msgstr "lista para substituição inválida"
 #: methods_list_dispatch.cpp:140
 #, c-format
 msgid "unexpected type '%s' for condition message"
-msgstr ""
+msgstr "tipo inesperado '%s' para mensagem de condição"
 
 #: methods_list_dispatch.cpp:143
 msgid "condition message must be length 1"
-msgstr ""
+msgstr "mensagem de condição deve ser de comprimento 1"
 
 #: methods_list_dispatch.cpp:224
 msgid "could not find the skeleton calls for 'methods' (package detached?): expect very bad things to happen"
@@ -51,7 +51,7 @@ msgstr "Seleção de método na linguagem S retornou um erro quando chamada a pa
 
 #: methods_list_dispatch.cpp:415
 msgid "Function name for method selection called internally"
-msgstr ""
+msgstr "Nome da função para seleção de método chamada internamente"
 
 #: methods_list_dispatch.cpp:472 methods_list_dispatch.cpp:493
 msgid "The \"package\" slot in generic function object"
@@ -190,12 +190,12 @@ msgstr ""
 #: methods_list_dispatch.cpp:990
 #, fuzzy
 msgid "class should be either a character-string name or a class definition"
-msgstr "Class deve ser ou um nome cadeia de caracteres ou uma definição de classe"
+msgstr "class deve ser uma string de caracteres ou definição de classe"
 
 #: methods_list_dispatch.cpp:1077
 #, fuzzy, c-format
 msgid "failed to get the generic for the primitive \"%s\""
-msgstr "Falha ao obter a genérica primitiva '%s"
+msgstr "falha em obter o genérico para o primitivo \"%s\""
 
 #: methods_list_dispatch.cpp:1084
 #, fuzzy, c-format

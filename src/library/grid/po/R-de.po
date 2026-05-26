@@ -282,7 +282,7 @@ msgstr "Kann keinen Einheitsvektor mit Länge 0 erzeugen (\"unit\" Teilmengenbil
 #: R/coords.R:0
 #, fuzzy
 msgid "Closed must be length 1 and must not be a missing value"
-msgstr "Closed darf kein fehlender Wert sein"
+msgstr "Geschlossen darf kein fehlender Wert sein"
 
 #. R/grid.R: stop("Down viewport failed to record on display list")
 #: R/grid.R:0

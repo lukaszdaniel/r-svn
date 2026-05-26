@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -79,6 +79,12 @@ msgstr "%s; considereu predict(., rankdeficient=\"NA\")"
 #, fuzzy
 msgid "'%s' cannot be of mode '%s'"
 msgstr "«%s» no pot ser del mode «%s»"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+#, fuzzy
+msgid "'%s' is not implemented yet"
+msgstr "el tipus «%s» encara no està implementat"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -245,13 +251,14 @@ msgstr "«conf.level» no és una probabilitat"
 #. R/cor.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/fisher.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/mantelhaen.test.R: stop("'conf.level' must be a single number between 0 and 1")
+#. R/poisson.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/prop.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/t.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/var.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/wilcox.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/ansari.test.R:0 R/binom.test.R:0 R/cor.test.R:0 R/fisher.test.R:0
-#: R/mantelhaen.test.R:0 R/prop.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0
+#: R/mantelhaen.test.R:0 R/poisson.test.R:0 R/prop.test.R:0 R/t.test.R:0
+#: R/var.test.R:0 R/wilcox.test.R:0
 msgid "'conf.level' must be a single number between 0 and 1"
 msgstr "«conf.level» ha de ser un únic nombre entre 0 i 1"
 
@@ -1765,6 +1772,11 @@ msgstr "S'està esperant que es faci l'anàlisi de rendiment..."
 msgid "X does not define a subspace of M"
 msgstr "X no defineix un subespai de M"
 
+#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
+#: R/fisher.test.R:0
+msgid "`pval.only` and `conf.int` may not both be true"
+msgstr ""
+
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 #, fuzzy
@@ -2638,6 +2650,11 @@ msgid ""
 msgstr ""
 "els valors del barret (les palanques) són tots = %s\n"
 " i no hi ha cap factor predictor; no hi ha cap diagrama núm. 5"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "hatvalues() for nls(*, algorithm='plinear')"
+msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")

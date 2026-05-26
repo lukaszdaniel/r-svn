@@ -796,13 +796,13 @@ msgstr "must pop at least one viewport"
 #: R/viewport.R:0
 #, fuzzy
 msgid "must specify at least one of 'xData' or 'xscale'"
-msgstr "must specify at least one of 'x' or 'xscale'"
+msgstr "must specify at least one of 'xData' or 'xscale'"
 
 #. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
 #, fuzzy
 msgid "must specify at least one of 'yData' or 'yscale'"
-msgstr "must specify at least one of 'y' or 'yscale'"
+msgstr "must specify at least one of 'yData' or 'yscale'"
 
 #. R/grid.R: stop("must specify at least one viewport")
 #: R/grid.R:0

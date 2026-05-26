@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Renata Hirota <re.hirota@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -26,11 +26,11 @@ msgstr "largura de banda/vão das medianas móveis é maior que n"
 #: Srunmed.cpp:265
 #, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
-msgstr ""
+msgstr "runmed(x, .., na.action=\"na.fail\"): tem NAs começando em x[%lld]"
 
 #: Srunmed.cpp:268
 msgid "runmed(): invalid 'na.action'"
-msgstr ""
+msgstr "runmed(): 'na.action' inválido"
 
 #: Srunmed.cpp:279
 msgid "long vectors are not supported for algorithm = \"Turlach\""
@@ -39,7 +39,7 @@ msgstr ""
 #: Srunmed.cpp:318
 #, c-format
 msgid "na_action logic error (%d), please report!"
-msgstr ""
+msgstr "na_action erro de lógica (%d), favor reportar!"
 
 #: ansari.cpp:120
 msgid "probabilities outside [0,1] in qansari()"
@@ -59,7 +59,7 @@ msgstr "approx(): tentativa de interpolar valores NA"
 
 #: approx.cpp:125
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
-msgstr ""
+msgstr "approx(x,y, .., na.rm=FALSE): valores NA em x não são permitidos"
 
 #: arima.cpp:77 arima.cpp:187 arima.cpp:371 arima.cpp:602 optim.cpp:40
 msgid "invalid argument type"
@@ -76,24 +76,24 @@ msgstr "intervalo máximo suportado é 350"
 #: bandwidths.cpp:122
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
-msgstr ""
+msgstr "x[%d] não finito no cálculo da largura de banda"
 
 #: bandwidths.cpp:128
 msgid "data are constant in bandwidth calculation"
-msgstr ""
+msgstr "dados  são constantes no cálculo da largura de banda"
 
 #: complete_cases.cpp:35
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type' inválido (%s) do argumento"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "nenhuma entrada pôde determinar o número de casos"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "nem todos os argumentos tem o mesmo comprimento"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "nenhuma entrada pôde determinar o número de casos"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -153,7 +153,7 @@ msgstr "Função '%s' não está na tabela de derivadas"
 #: deriv.cpp:786
 #, c-format
 msgid "expression must not be type '%s'"
-msgstr ""
+msgstr "a expressão não deve ser do tipo '%s'"
 
 #: deriv.cpp:789
 msgid "variable must be a character string"
@@ -171,7 +171,7 @@ msgstr "expressão inválida em '%s'"
 #: deriv.cpp:866
 #, fuzzy
 msgid "too many variables"
-msgstr "não há fatores"
+msgstr "variáveis em excesso"
 
 #: deriv.cpp:1079 model.cpp:106
 msgid "invalid variable names"
@@ -181,15 +181,15 @@ msgstr "nomes inválidos de variável"
 msgid "invalid tag"
 msgstr "etiqueta inválida"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "considerando valores não-finitos como NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): p inválido"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance(): distância inválida"
 

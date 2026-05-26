@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28+0100\n"
+"POT-Creation-Date: 2026-05-26 17:27+0200\n"
 "PO-Revision-Date: 2025-07-06 15:16+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <R-core@r-project.org>\n"
@@ -215,8 +215,8 @@ msgid "invalid font specification"
 msgstr "ungültige Zeichensatzspezifikation"
 
 #: plot.cpp:285 plot.cpp:299 plot.cpp:479 plot.cpp:484 plot.cpp:2194
-#: plot.cpp:2201 plot.cpp:3224 plot.cpp:3383 plot3d.cpp:1165 plot3d.cpp:1169
-#: plot3d.cpp:1171 plot3d.cpp:1899
+#: plot.cpp:2201 plot.cpp:3224 plot.cpp:3383 plot3d.cpp:1161 plot3d.cpp:1165
+#: plot3d.cpp:1167 plot3d.cpp:1895
 #, c-format
 msgid "invalid '%s' value"
 msgstr "ungültiger '%s' Wert"
@@ -275,7 +275,7 @@ msgstr "ungültiger Typ für die Achsen-Label"
 #: plot.cpp:788 plot.cpp:1395 plot.cpp:1707 plot.cpp:1772 plot.cpp:1846
 #: plot.cpp:1910 plot.cpp:1983 plot.cpp:2078 plot.cpp:2154 plot.cpp:2432
 #: plot.cpp:2606 plot.cpp:2821 plot.cpp:3365 plot.cpp:3508 plot.cpp:3579
-#: plot.cpp:3741 plot.cpp:4021 plot3d.cpp:1868
+#: plot.cpp:3741 plot.cpp:4021 plot3d.cpp:1864
 msgid "too few arguments"
 msgstr "zu wenig Argumente"
 
@@ -386,8 +386,8 @@ msgstr "'a' und 'b' müssen endlich sein"
 
 #: plot.cpp:3007 plot.cpp:4112 plot.cpp:4115 plot.cpp:4118 plot.cpp:4121
 #: plot.cpp:4141 plot.cpp:4145 plot.cpp:4148 plot.cpp:4168 plot.cpp:4172
-#: plot.cpp:4175 plot3d.cpp:1087 plot3d.cpp:1091 plot3d.cpp:1096
-#: plot3d.cpp:1100 plot3d.cpp:1104 plot3d.cpp:1108 stem.cpp:171 stem.cpp:172
+#: plot.cpp:4175 plot3d.cpp:1083 plot3d.cpp:1087 plot3d.cpp:1092
+#: plot3d.cpp:1096 plot3d.cpp:1100 plot3d.cpp:1104 stem.cpp:171 stem.cpp:172
 #: stem.cpp:174 stem.cpp:175
 #, c-format
 msgid "invalid '%s' argument"
@@ -507,11 +507,11 @@ msgstr "falsche Länge für das '%s' Argument"
 msgid "unable to allocate memory (in xspline)"
 msgstr "kann keinen Speicher zuteilen (in xspline)"
 
-#: plot3d.cpp:186 plot3d.cpp:1925
+#: plot3d.cpp:186 plot3d.cpp:1921
 msgid "insufficient 'x' or 'y' values"
 msgstr "zu wenig 'x' oder 'y' Werte"
 
-#: plot3d.cpp:190 plot3d.cpp:1928
+#: plot3d.cpp:190 plot3d.cpp:1924
 msgid "dimension mismatch"
 msgstr "Dimensionen passen nicht"
 
@@ -519,83 +519,83 @@ msgstr "Dimensionen passen nicht"
 msgid "no contour values"
 msgstr "keine Konturwerte"
 
-#: plot3d.cpp:260
+#: plot3d.cpp:214
 msgid "invalid x / y values or limits"
 msgstr "ungültige x / y Werte oder Grenzen"
 
-#: plot3d.cpp:262
+#: plot3d.cpp:215
 msgid "invalid contour levels: must be strictly increasing"
 msgstr "ungültige Konturwerte: müssen streng monoton ansteigen"
 
-#: plot3d.cpp:1051 plot3d.cpp:1064
+#: plot3d.cpp:1047 plot3d.cpp:1060
 msgid "Axis orientation not calculated"
 msgstr "Achsenorientierung nicht berechnet"
 
-#: plot3d.cpp:1084
+#: plot3d.cpp:1080
 msgid "too few parameters"
 msgstr "zu wenig Parameter"
 
-#: plot3d.cpp:1114
+#: plot3d.cpp:1110
 msgid "invalid 'x' limits"
 msgstr "ungültige Grenzen für 'x'"
 
-#: plot3d.cpp:1116
+#: plot3d.cpp:1112
 msgid "invalid 'y' limits"
 msgstr "ungültige Grenzen für 'y'"
 
-#: plot3d.cpp:1118
+#: plot3d.cpp:1114
 msgid "invalid 'z' limits"
 msgstr "ungültige Grenzen für 'z'"
 
-#: plot3d.cpp:1139 plot3d.cpp:1141 plot3d.cpp:1143
+#: plot3d.cpp:1135 plot3d.cpp:1137 plot3d.cpp:1139
 #, fuzzy, c-format
 msgid "'%s' must be a character vector of length 1"
 msgstr "'xlab' muss ein Zeichenkettenvektor der Länge 1 sein"
 
-#: plot3d.cpp:1163
+#: plot3d.cpp:1159
 msgid "invalid viewing parameters"
 msgstr "ungültige Parameter für Ansicht"
 
-#: plot3d.cpp:1181 plot3d.cpp:1185
+#: plot3d.cpp:1177 plot3d.cpp:1181
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "ungültige '%s' Spezifikation"
 
-#: plot3d.cpp:1522
+#: plot3d.cpp:1518
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour(): zirkuläre/lange Segmentliste -- festgelegtes %s > %d?"
 
-#: plot3d.cpp:1931
+#: plot3d.cpp:1927
 msgid "no 'levels'"
 msgstr "keine 'levels'"
 
-#: plot3d.cpp:1935
+#: plot3d.cpp:1931
 msgid "missing 'x' values"
 msgstr "fehlende 'x' Werte"
 
-#: plot3d.cpp:1937
+#: plot3d.cpp:1933
 msgid "increasing 'x' values expected"
 msgstr "'x' Werte aufsteigend erwartet"
 
-#: plot3d.cpp:1942
+#: plot3d.cpp:1938
 msgid "missing 'y' values"
 msgstr "fehlende 'y' Werte"
 
-#: plot3d.cpp:1944
+#: plot3d.cpp:1940
 msgid "increasing 'y' values expected"
 msgstr "'y' Werte aufsteigend erwartet"
 
-#: plot3d.cpp:1949
+#: plot3d.cpp:1945
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr "nicht-endliche Stufenwerte: levels[%d] = %g"
 
-#: plot3d.cpp:1962
+#: plot3d.cpp:1958
 msgid "all z values are equal"
 msgstr "alle z Werte sind gleich"
 
-#: plot3d.cpp:1964
+#: plot3d.cpp:1960
 msgid "all z values are NA"
 msgstr "alle z Werte sind NA"
 

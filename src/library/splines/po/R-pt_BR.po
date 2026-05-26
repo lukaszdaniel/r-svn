@@ -38,7 +38,7 @@ msgstr "'deriv' deve estar entre 0 e %d"
 #: R/splines.R:0
 #, fuzzy
 msgid "'df' was too small; have used %d"
-msgstr "'df' muito pequeno; foi usado"
+msgstr "'df' muito pequeno; foi usado %d"
 
 #. R/splineClasses.R: stop("'formula' must be of the form \"y ~ x\"")
 #: R/splineClasses.R:0
@@ -59,13 +59,13 @@ msgstr "'ord' deve ser um inteiro positivo, sendo no máximo igual ao número de
 #. R/splines.R: stop("all interior knots match left boundary knot")
 #: R/splines.R:0
 msgid "all interior knots match left boundary knot"
-msgstr ""
+msgstr "todos os nós internos correspondem ao nó de limite esquerdo"
 
 #. R/splines.R: warning("all interior knots match right boundary knot")
 #. R/splines.R: stop("all interior knots match right boundary knot")
 #: R/splines.R:0
 msgid "all interior knots match right boundary knot"
-msgstr ""
+msgstr "todos os nós internos correspondem ao nó de limite direito"
 
 #. R/splineClasses.R: stop("currently implemented only for cubic splines")
 #: R/splineClasses.R:0
@@ -128,7 +128,7 @@ msgstr ""
 #. R/splines.R: warning("shoving 'interior' knots matching boundary knots to inside")
 #: R/splines.R:0
 msgid "shoving 'interior' knots matching boundary knots to inside"
-msgstr ""
+msgstr "empurrando nós 'interiores' combinando nós de limite para dentro"
 
 #. R/splines.R: warning("some 'x' values beyond boundary knots may cause ill-conditioned bases")
 #: R/splines.R:0

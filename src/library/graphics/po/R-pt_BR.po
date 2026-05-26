@@ -49,13 +49,13 @@ msgstr "'at' deve ter comprimento igual ao número de %d de grupos"
 #: R/boxplot.R:0
 #, fuzzy
 msgid "'at' must have same length as 'z$n', i.e. %d"
-msgstr "'at' deve ter o mesmo comprimento que 'z$n', isto é"
+msgstr "'at' deve ter o mesmo comprimento que 'z$n', isto é %d"
 
 #. R/hist.R: gettextf("'breaks = %g' is too large and set to 1e6", breaks)
 #. R/spineplot.R: gettextf("'breaks = %g' is too large and set to 1e6", breaks)
 #: R/hist.R:0 R/spineplot.R:0
 msgid "'breaks = %g' is too large and set to 1e6"
-msgstr ""
+msgstr "'breaks = %g' é muito grande e foi determinado como 1e6"
 
 #. R/hist.R: stop("'breaks' are not strictly increasing")
 #: R/hist.R:0
@@ -66,7 +66,7 @@ msgstr "'breaks' não é estritamente crescente"
 #: R/image.R:0
 #, fuzzy
 msgid "'breaks' must all be finite"
-msgstr "breaks devem ser todos finitos"
+msgstr "'breaks' devem ser todos finitos"
 
 #. R/fourfoldplot.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/fourfoldplot.R:0
@@ -589,7 +589,7 @@ msgid ""
 "to each of the values {1 ... %d}"
 msgstr ""
 "matriz de layout deve conter pelo menos uma referência\n"
-"para cada um dos valores {1..n}; aqui  n ="
+"para cada um dos valores {1 ... %d}"
 
 #. R/stars.R: stop("length of 'angles' must equal 'ncol(x)'")
 #: R/stars.R:0

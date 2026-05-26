@@ -21,7 +21,7 @@ msgstr ""
 
 #: class_support.cpp:30
 msgid "calling the C routine used as an initializer for 'externalptr' objects"
-msgstr ""
+msgstr "استدعاء روتين C المستخدم كمهيئ لكائنات \"externalptr\""
 
 #: do_substitute_direct.cpp:44
 msgid "invalid list for substitution"
@@ -30,7 +30,7 @@ msgstr "القائمة غير صالحة للاستبدال"
 #: methods_list_dispatch.cpp:140
 #, c-format
 msgid "unexpected type '%s' for condition message"
-msgstr ""
+msgstr "اكتب غير متوقع '%s' لرسالة الشرط"
 
 #: methods_list_dispatch.cpp:143
 msgid "condition message must be length 1"
@@ -38,21 +38,21 @@ msgstr "يجب أن تكون رسالة الشرط بطول 1"
 
 #: methods_list_dispatch.cpp:224
 msgid "could not find the skeleton calls for 'methods' (package detached?): expect very bad things to happen"
-msgstr ""
+msgstr "تعذر العثور على الهيكل العظمي يدعو إلى \"طرق\" (حزمة منفصلة؟): توقع حدوث أشياء سيئة للغاية"
 
 #: methods_list_dispatch.cpp:285
 #, c-format
 msgid "no \"allMethods\" slot found in object of class \"%s\" used as methods list for function '%s'"
-msgstr ""
+msgstr "لا توجد فتحة \"allMethods\" في كائن الفئة \"%s\" المستخدمة كقائمة طرق للوظيفة \"%s\""
 
 #: methods_list_dispatch.cpp:413
 #, c-format
 msgid "S language method selection did not return normally when called from internal dispatch for function '%s'"
-msgstr ""
+msgstr "لم يعد تحديد طريقة لغة S بشكل طبيعي عند استدعاؤه من الإرسال الداخلي للوظيفة \"%s\""
 
 #: methods_list_dispatch.cpp:415
 msgid "Function name for method selection called internally"
-msgstr ""
+msgstr "اسم الوظيفة لاختيار الطريقة يسمى داخليا"
 
 #: methods_list_dispatch.cpp:472 methods_list_dispatch.cpp:493
 msgid "The \"package\" slot in generic function object"
@@ -69,12 +69,12 @@ msgstr ""
 #: methods_list_dispatch.cpp:511
 #, c-format
 msgid "no generic function definition found for '%s'"
-msgstr ""
+msgstr "لم يتم العثور على تعريف دالة عامة ل \"%s\""
 
 #: methods_list_dispatch.cpp:512
 #, c-format
 msgid "no generic function definition found for '%s' in the supplied environment"
-msgstr ""
+msgstr "لم يتم العثور على تعريف دالة عامة ل \"%s\" في البيئة المتوفرة"
 
 #: methods_list_dispatch.cpp:533
 msgid "The function name in the call to standardGeneric"
@@ -88,11 +88,11 @@ msgstr ""
 #: methods_list_dispatch.cpp:562
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
-msgstr ""
+msgstr "لا توجد طريقة مباشرة أو موروثة للدالة \"%s\" لهذه المكالمة"
 
 #: methods_list_dispatch.cpp:591 methods_list_dispatch.cpp:1166
 msgid "invalid object (non-function) used as method"
-msgstr ""
+msgstr "كائن غير صالح (غير دالة) يستخدم كأسلوب"
 
 #: methods_list_dispatch.cpp:607
 msgid "'symbol' must be a SYMSXP"
@@ -101,7 +101,7 @@ msgstr ""
 #: methods_list_dispatch.cpp:610
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
-msgstr ""
+msgstr "تعذر العثور على الرمز \"%s\" في إطار المكالمة"
 
 #: methods_list_dispatch.cpp:618
 #, c-format
@@ -110,7 +110,7 @@ msgstr ""
 
 #: methods_list_dispatch.cpp:621
 msgid "use of NULL environment is defunct"
-msgstr ""
+msgstr "استخدام بيئة NULL غير موجودة"
 
 #: methods_list_dispatch.cpp:625
 #, c-format
@@ -120,17 +120,17 @@ msgstr ""
 #: methods_list_dispatch.cpp:648
 #, c-format
 msgid "error in evaluating the argument '%s' in selecting a method for function '%s': %s"
-msgstr ""
+msgstr "خطأ في تقييم الوسيطة \"%s\" في تحديد طريقة للدالة \"%s\": %s"
 
 #: methods_list_dispatch.cpp:665
 #, c-format
 msgid "object of class \"%s\" used as methods list for function '%s' ( no 'argument' slot)"
-msgstr ""
+msgstr "كائن من الفئة \"%s\" يستخدم كقائمة طرق للوظيفة \"%s\" (لا توجد فتحة \"وسيطة\")"
 
 #: methods_list_dispatch.cpp:676
 #, c-format
 msgid "(in selecting a method for function '%s') '...' and related variables cannot be used for methods dispatch"
-msgstr ""
+msgstr "(عند تحديد طريقة للوظيفة \"%s\") '...' ولا يمكن استخدام المتغيرات ذات الصلة لإرسال الطرق"
 
 #: methods_list_dispatch.cpp:679
 #, c-format
@@ -140,17 +140,17 @@ msgstr ""
 #: methods_list_dispatch.cpp:710
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
-msgstr ""
+msgstr "لا توجد طريقة مطابقة للدالة '%s' (الوسيطة '%s'، مع الفئة \"%s\")"
 
 #: methods_list_dispatch.cpp:717
 #, c-format
 msgid "recursive use of function '%s' in method selection, with no default method"
-msgstr ""
+msgstr "الاستخدام المتكرر للدالة \"%s\" في اختيار الأسلوب ، بدون طريقة افتراضية"
 
 #: methods_list_dispatch.cpp:742
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
-msgstr ""
+msgstr "خطأ في تقييم الطريقة التالية \"البدائية\": %s"
 
 #: methods_list_dispatch.cpp:765
 msgid "internal error in 'callNextMethod': '.nextMethod' was not assigned in the frame of the method call"
@@ -189,12 +189,12 @@ msgstr ""
 
 #: methods_list_dispatch.cpp:990
 msgid "class should be either a character-string name or a class definition"
-msgstr ""
+msgstr "يجب أن تكون الفئة إما اسم سلسلة حرف أو تعريف فئة"
 
 #: methods_list_dispatch.cpp:1077
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
-msgstr ""
+msgstr "فشل في الحصول على الاسم العام للبدائية \"%s\""
 
 #: methods_list_dispatch.cpp:1084
 #, c-format

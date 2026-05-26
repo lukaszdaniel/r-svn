@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 12:43\n"
+"POT-Creation-Date: 2026-05-26 16:55\n"
 "PO-Revision-Date: 2026-05-01 14:17+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -1633,7 +1633,7 @@ msgstr "doppelte 'row.names' nicht zulässig"
 msgid "duplicate import names %s"
 msgstr "doppelte Importnamen %s"
 
-#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(rownms[duplicated(rownms)]),     collapse = ", "))
 #: R/dataframe.R:0
 msgid "duplicate row.names: %s"
 msgstr "doppelte row.names: %s"
@@ -2557,11 +2557,6 @@ msgstr "wahrscheinlich die falsche Kodierung in den names(.) der Spalte"
 msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr "schiebe doppelten `%s` Handler oben auf den Stack"
 
-#. R/summary.R: warning("quantile.type not in {1, 3} for <raw>")
-#: R/summary.R:0
-msgid "quantile.type not in {1, 3} for <raw>"
-msgstr ""
-
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0
 msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
@@ -2617,7 +2612,7 @@ msgstr "Zeilennamen wurden in einer short Variablen gefunden und wurden verworfe
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
-msgstr "Auführung von Kommando '%s' hatte Status %d"
+msgstr "Ausführung von Kommando '%s' ergab Status %d"
 
 #. R/New-Internal.R: stop("second argument must be a list")
 #: R/New-Internal.R:0

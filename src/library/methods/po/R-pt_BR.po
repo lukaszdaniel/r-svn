@@ -513,7 +513,7 @@ msgstr ""
 #: R/Methods.R:0
 #, fuzzy
 msgid "a function for argument 'f' must be a generic function"
-msgstr "função para o argumento 'f' deve ser uma função genérica"
+msgstr "a função para o argumento 'f' deve ser uma função genérica"
 
 #. R/RClassUtils.R: gettextf("a prototype object was supplied with object slot of class %s, but the class definition requires an object that is class %s",     dQuote(class(prototype@object)), dQuote(dataPartClass))
 #: R/RClassUtils.R:0
@@ -633,8 +633,8 @@ msgid ""
 "argument 'signature' is not meaningful with the current implementation and is ignored \n"
 "(extract a subset of the methods list instead)"
 msgstr ""
-"\"Assinatura\" do argumento não faz sentido quando a implementação atual é ignorada \n"
-"(tente extrair um subconjunto da lista de métodos)"
+"argumento 'signature' não faz sentido com a implementação atual e é ignorado \n"
+"(extraia um subconjunto da lista de métodos)"
 
 #. R/methodsTable.R: stop("argument 'signatures' must be a character matrix whose rows are method signatures")
 #: R/methodsTable.R:0

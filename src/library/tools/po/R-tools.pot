@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 4.6.0\n"
+"Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,9 @@ msgid "%s has wrong argument list %s"
 msgstr ""
 
 
+#: R/sign.R: 0
 #: R/utils.R: 0
+#. R/sign.R: gettextf("'%s' must be a character string", "uid")
 #. R/utils.R: gettextf("'%s' must be a character string", "x")
 
 msgid "'%s' must be a character string"
@@ -126,6 +128,20 @@ msgstr ""
 #. R/sha256.R: stop("'files' and 'bytes' are mutually exclusive")
 
 msgid "'files' and 'bytes' are mutually exclusive"
+msgstr ""
+
+
+#: R/sign.R: 0
+#. R/sign.R: stop("'gpg' is not available for signing")
+
+msgid "'gpg' is not available for signing"
+msgstr ""
+
+
+#: R/sign.R: 0
+#. R/sign.R: stop("'keyring' must be specified if 'use.default.keyring=FALSE'")
+
+msgid "'keyring' must be specified if 'use.default.keyring=FALSE'"
 msgstr ""
 
 
@@ -318,6 +334,34 @@ msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org
 msgstr ""
 
 
+#: R/apitools.R: 0
+#. R/apitools.R: sprintf("API funcitons not declared in installed headers: %s",     paste(v$name, collapse = " "))
+
+msgid "API funcitons not declared in installed headers: %s"
+msgstr ""
+
+
+#: R/apitools.R: 0
+#. R/apitools.R: stop("API functions listed in nonAPI: %s", paste(v$name, collapse = " "))
+
+msgid "API functions listed in nonAPI: %s"
+msgstr ""
+
+
+#: R/apitools.R: 0
+#. R/apitools.R: stop("API variables listed in nonAPI: %s", paste(v$name, collapse = " "))
+
+msgid "API variables listed in nonAPI: %s"
+msgstr ""
+
+
+#: R/apitools.R: 0
+#. R/apitools.R: sprintf("API variables not in declared in installed headers: %s",     paste(v$name, collapse = " "))
+
+msgid "API variables not in declared in installed headers: %s"
+msgstr ""
+
+
 #: R/update_packages.R: 0
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
 
@@ -505,6 +549,13 @@ msgstr ""
 #. R/news.R: gettextf("Cannot process chunk/lines:\n%s", .collapse(paste0("  ",     x)))
 
 msgid "Cannot process chunk/lines:\n%s"
+msgstr ""
+
+
+#: R/sign.R: 0
+#. R/sign.R: gettextf("Cannot sign due to failed pin entry for key %s", sfp %||%     "??")
+
+msgid "Cannot sign due to failed pin entry for key %s"
 msgstr ""
 
 
@@ -808,6 +859,13 @@ msgstr ""
 #. R/assertCondition.R: gettextf("Failed to get error in evaluating %s", d.expr)
 
 msgid "Failed to get error in evaluating %s"
+msgstr ""
+
+
+#: R/sign.R: 0
+#. R/sign.R: stop("Failed to invoke 'gpg' for signing")
+
+msgid "Failed to invoke 'gpg' for signing"
 msgstr ""
 
 
@@ -1677,6 +1735,13 @@ msgid "See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
 msgstr ""
 
 
+#: R/sign.R: 0
+#. R/sign.R: stop("Signing failed: ", sfe)
+
+msgid "Signing failed:"
+msgstr ""
+
+
 #: R/QC.R: 0
 #. R/QC.R: gettextf("Slots for class '%s'", docObj[["name"]])
 
@@ -1709,6 +1774,13 @@ msgstr ""
 #. R/QC.R: gettext("Standardized license specification:")
 
 msgid "Standardized license specification:"
+msgstr ""
+
+
+#: R/sign.R: 0
+#. R/sign.R: stop("Target file for the signature already exists")
+
+msgid "Target file for the signature already exists"
 msgstr ""
 
 
@@ -1863,6 +1935,13 @@ msgstr ""
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
 
 msgid "Unsupported engine name"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkg))
+
+msgid "Valid signature is required, but package %s could not be successfully verified."
 msgstr ""
 
 
@@ -2438,6 +2517,13 @@ msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr ""
 
 
+#: R/apitools.R: 0
+#. R/apitools.R: sprintf("in API but marked for warnings: %s", paste(v$name, collapse = " "))
+
+msgid "in API but marked for warnings: %s"
+msgstr ""
+
+
 #: R/utils.R: 0
 #. R/utils.R: gettext("inferior call failed")
 
@@ -2617,6 +2703,20 @@ msgid "no source files found"
 msgstr ""
 
 
+#: R/apitools.R: 0
+#. R/apitools.R: sprintf("non-API functions declared in installed headers: %s",     paste(v$name, collapse = " "))
+
+msgid "non-API functions declared in installed headers: %s"
+msgstr ""
+
+
+#: R/apitools.R: 0
+#. R/apitools.R: sprintf("non-API variables declared in installed headers: %s",     paste(v$name, collapse = " "))
+
+msgid "non-API variables declared in installed headers: %s"
+msgstr ""
+
+
 #: R/citation.R: 0
 #. R/citation.R: stop("non-ASCII input in a CITATION file without a declared encoding")
 
@@ -2653,9 +2753,20 @@ msgstr ""
 
 
 #: R/install.R: 0
-#. R/install.R: gettextf("package %s successfully unpacked and MD5 sums checked",     sQuote(pkg_name))
+#. R/install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkg),     info$fingerprint, info$userid)
+#. R/install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkg_name),     info$fingerprint, info$userid)
 
-msgid "package %s successfully unpacked and MD5 sums checked"
+msgid "package %s signature verified (%s %s)"
+msgstr ""
+
+
+#: R/install.R: 0
+#. R/install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkg), "SHA256")
+#. R/install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkg), "MD5")
+#. R/install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkg_name), "SHA256")
+#. R/install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkg_name), "MD5")
+
+msgid "package %s successfully unpacked and %s sums checked"
 msgstr ""
 
 

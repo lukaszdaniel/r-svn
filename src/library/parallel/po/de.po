@@ -39,7 +39,7 @@ msgstr "Speicherallozierungsfehler"
 #: fork.cpp:390
 #, c-format
 msgid "invalid '%s' argument"
-msgstr "unzulässiges '%s' Argument"
+msgstr "ungültiges '%s' Argument"
 
 #: fork.cpp:451
 msgid "Error while shutting down parallel: unable to terminate some child processes\n"

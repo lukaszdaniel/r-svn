@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -73,6 +73,12 @@ msgstr "%s; considerar predict(., rankdeficient=\"NA\")"
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "'%s' não pode ser do modo '%s'"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+#, fuzzy
+msgid "'%s' is not implemented yet"
+msgstr "tipo '%s' ainda não é implementado"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -220,13 +226,14 @@ msgstr "'conf.level' não é uma probabilidade"
 #. R/cor.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/fisher.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/mantelhaen.test.R: stop("'conf.level' must be a single number between 0 and 1")
+#. R/poisson.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/prop.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/t.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/var.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/wilcox.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/ansari.test.R:0 R/binom.test.R:0 R/cor.test.R:0 R/fisher.test.R:0
-#: R/mantelhaen.test.R:0 R/prop.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0
+#: R/mantelhaen.test.R:0 R/poisson.test.R:0 R/prop.test.R:0 R/t.test.R:0
+#: R/var.test.R:0 R/wilcox.test.R:0
 msgid "'conf.level' must be a single number between 0 and 1"
 msgstr "'conf.level' deve ser um único número entre 0 e 1"
 
@@ -1506,7 +1513,7 @@ msgstr "Parâmetro:"
 #. R/kmeans.R: gettextf("Quick-TRANSfer stage steps exceeded maximum (= %d)",     isteps.Qtran)
 #: R/kmeans.R:0
 msgid "Quick-TRANSfer stage steps exceeded maximum (= %d)"
-msgstr ""
+msgstr "As etapas do estágio Quick-TRANSfer excederam o máximo (= %d)"
 
 #. R/aov.R: message("Refitting model to allow projection")
 #: R/aov.R:0
@@ -1568,6 +1575,11 @@ msgstr ""
 #: R/mlm.R:0
 msgid "X does not define a subspace of M"
 msgstr "X não define um subespaço de M"
+
+#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
+#: R/fisher.test.R:0
+msgid "`pval.only` and `conf.int` may not both be true"
+msgstr ""
 
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
@@ -2344,6 +2356,11 @@ msgid ""
 msgstr ""
 "Os valores chapéu (alavancagens) são todos = %s\n"
 " e não há fatores preditores; sem gráfico nº 5"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "hatvalues() for nls(*, algorithm='plinear')"
+msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")
@@ -4662,8 +4679,8 @@ msgstr[1] "apenas %d casos"
 #: R/selfStart.R:0
 msgid "parameter %s does not occur in the model formula"
 msgid_plural "parameters %s do not occur in the model formula"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "O parâmetro %s não ocorre na fórmula do modelo"
+msgstr[1] "Os parâmetros %s não ocorrem na fórmula do modelo"
 
 #. R/aov.R: ngettext(length(indError), "there is %d Error term: only 1 is allowed",     "there are %d Error terms: only 1 is allowed", domain = "R-stats")
 #: R/aov.R:0

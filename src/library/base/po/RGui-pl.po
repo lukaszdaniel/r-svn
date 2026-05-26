@@ -89,7 +89,7 @@ msgstr "     Home lub Ctrl+A: idź do początku linii;\n"
 
 #: src/gnuwin32/console.cpp:2458
 msgid "     End or Ctrl+E: go to end of line;\n"
-msgstr "     End lub Ctrl+E: idź do końca linii;\n"
+msgstr "     End lub Ctrl+E: przejdź do końca linii;\n"
 
 #: src/gnuwin32/console.cpp:2459
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
@@ -208,7 +208,7 @@ msgstr "Nie można odczytać z pliku '%s'"
 #: src/gnuwin32/editor.cpp:222
 #, c-format
 msgid "Could not save file '%s'"
-msgstr "Nie można było zapisać pliku '%s'"
+msgstr "Nie można zapisać pliku '%s'"
 
 #: src/gnuwin32/editor.cpp:242
 msgid "Save script as"
@@ -935,7 +935,7 @@ msgstr "Edytor zmiennych"
 
 #: src/library/utils/src/windows/dataentry.cpp:1551
 msgid "variable name"
-msgstr "Nazwa zmiennej"
+msgstr "nazwa zmiennej"
 
 #: src/library/utils/src/windows/dataentry.cpp:1553
 msgid "type"
@@ -1045,7 +1045,7 @@ msgstr "Plik TIFF"
 
 #: src/library/grDevices/src/devWindows.cpp:947
 msgid "Jpeg file"
-msgstr "Plik jpeg"
+msgstr "Plik Jpeg"
 
 #: src/library/grDevices/src/devWindows.cpp:968
 msgid "Postscript file"

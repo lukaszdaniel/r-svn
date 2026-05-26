@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 16:02+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -89,13 +89,13 @@ msgstr "非有限值 x[%d] 出現於帶寬計算"
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type'(%s)引數無效"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "不可使用輸入來確定個案數目"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "不是所有的引數都一樣長"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "不可使用輸入來確定個案數目"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -183,15 +183,15 @@ msgstr "變數名稱無效"
 msgid "invalid tag"
 msgstr "標籤無效"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "所有無限值都做為 NA 來處理"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): p 值無效"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance()：距離值無效"
 

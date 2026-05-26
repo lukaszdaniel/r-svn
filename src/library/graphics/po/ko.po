@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28+0100\n"
+"POT-Creation-Date: 2026-05-26 17:27+0200\n"
 "PO-Revision-Date: 2025-07-06 15:17+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -215,8 +215,8 @@ msgid "invalid font specification"
 msgstr "유효한 폰트 지정이 아닙니다"
 
 #: plot.cpp:285 plot.cpp:299 plot.cpp:479 plot.cpp:484 plot.cpp:2194
-#: plot.cpp:2201 plot.cpp:3224 plot.cpp:3383 plot3d.cpp:1165 plot3d.cpp:1169
-#: plot3d.cpp:1171 plot3d.cpp:1899
+#: plot.cpp:2201 plot.cpp:3224 plot.cpp:3383 plot3d.cpp:1161 plot3d.cpp:1165
+#: plot3d.cpp:1167 plot3d.cpp:1895
 #, c-format
 msgid "invalid '%s' value"
 msgstr "유효한 '%s'의 값이 아닙니다"
@@ -275,7 +275,7 @@ msgstr "축 레이블에 유효한 타입이 아닙니다"
 #: plot.cpp:788 plot.cpp:1395 plot.cpp:1707 plot.cpp:1772 plot.cpp:1846
 #: plot.cpp:1910 plot.cpp:1983 plot.cpp:2078 plot.cpp:2154 plot.cpp:2432
 #: plot.cpp:2606 plot.cpp:2821 plot.cpp:3365 plot.cpp:3508 plot.cpp:3579
-#: plot.cpp:3741 plot.cpp:4021 plot3d.cpp:1868
+#: plot.cpp:3741 plot.cpp:4021 plot3d.cpp:1864
 msgid "too few arguments"
 msgstr "인자의 수가 너무 적습니다"
 
@@ -385,8 +385,8 @@ msgstr "'a'와 'b'는 반드시 유한해야 합니다"
 
 #: plot.cpp:3007 plot.cpp:4112 plot.cpp:4115 plot.cpp:4118 plot.cpp:4121
 #: plot.cpp:4141 plot.cpp:4145 plot.cpp:4148 plot.cpp:4168 plot.cpp:4172
-#: plot.cpp:4175 plot3d.cpp:1087 plot3d.cpp:1091 plot3d.cpp:1096
-#: plot3d.cpp:1100 plot3d.cpp:1104 plot3d.cpp:1108 stem.cpp:171 stem.cpp:172
+#: plot.cpp:4175 plot3d.cpp:1083 plot3d.cpp:1087 plot3d.cpp:1092
+#: plot3d.cpp:1096 plot3d.cpp:1100 plot3d.cpp:1104 stem.cpp:171 stem.cpp:172
 #: stem.cpp:174 stem.cpp:175
 #, c-format
 msgid "invalid '%s' argument"
@@ -506,11 +506,11 @@ msgstr "'%s' 인자의 길이가 잘못되었습니다"
 msgid "unable to allocate memory (in xspline)"
 msgstr ""
 
-#: plot3d.cpp:186 plot3d.cpp:1925
+#: plot3d.cpp:186 plot3d.cpp:1921
 msgid "insufficient 'x' or 'y' values"
 msgstr "충분하지 않은 'x' 또는 'y'의 값입니다"
 
-#: plot3d.cpp:190 plot3d.cpp:1928
+#: plot3d.cpp:190 plot3d.cpp:1924
 msgid "dimension mismatch"
 msgstr "차원이 일치하지 않습니다"
 
@@ -518,83 +518,83 @@ msgstr "차원이 일치하지 않습니다"
 msgid "no contour values"
 msgstr "contour 값들이 없습니다"
 
-#: plot3d.cpp:260
+#: plot3d.cpp:214
 msgid "invalid x / y values or limits"
 msgstr "x / y 값들 또는 극한값들이 올바르지 않습니다"
 
-#: plot3d.cpp:262
+#: plot3d.cpp:215
 msgid "invalid contour levels: must be strictly increasing"
 msgstr "유효하지 않은 contour 레벨입니다. 이 값은 반드시 증가해야만 합니다"
 
-#: plot3d.cpp:1051 plot3d.cpp:1064
+#: plot3d.cpp:1047 plot3d.cpp:1060
 msgid "Axis orientation not calculated"
 msgstr ""
 
-#: plot3d.cpp:1084
+#: plot3d.cpp:1080
 msgid "too few parameters"
 msgstr "파라미터들이 너무 적습니다"
 
-#: plot3d.cpp:1114
+#: plot3d.cpp:1110
 msgid "invalid 'x' limits"
 msgstr "유효하지 않은 'x' limits입니다"
 
-#: plot3d.cpp:1116
+#: plot3d.cpp:1112
 msgid "invalid 'y' limits"
 msgstr "유효하지 않은 'y' limits입니다"
 
-#: plot3d.cpp:1118
+#: plot3d.cpp:1114
 msgid "invalid 'z' limits"
 msgstr "유효하지 않은 'z' limits입니다"
 
-#: plot3d.cpp:1139 plot3d.cpp:1141 plot3d.cpp:1143
+#: plot3d.cpp:1135 plot3d.cpp:1137 plot3d.cpp:1139
 #, fuzzy, c-format
 msgid "'%s' must be a character vector of length 1"
 msgstr "'xlab'은 반드시 길이가 1인 문자형 벡터이어야 합니다"
 
-#: plot3d.cpp:1163
+#: plot3d.cpp:1159
 msgid "invalid viewing parameters"
 msgstr "유효하지 않은 viewing 파라미터입니다"
 
-#: plot3d.cpp:1181 plot3d.cpp:1185
+#: plot3d.cpp:1177 plot3d.cpp:1181
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "유효한 '%s' 지정이 아닙니다"
 
-#: plot3d.cpp:1522
+#: plot3d.cpp:1518
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr ""
 
-#: plot3d.cpp:1931
+#: plot3d.cpp:1927
 msgid "no 'levels'"
 msgstr ""
 
-#: plot3d.cpp:1935
+#: plot3d.cpp:1931
 msgid "missing 'x' values"
 msgstr "'x' 값들이 없습니다"
 
-#: plot3d.cpp:1937
+#: plot3d.cpp:1933
 msgid "increasing 'x' values expected"
 msgstr "'x'의 값들은 증가해야만 합니다"
 
-#: plot3d.cpp:1942
+#: plot3d.cpp:1938
 msgid "missing 'y' values"
 msgstr "'y' 값들이 없습니다"
 
-#: plot3d.cpp:1944
+#: plot3d.cpp:1940
 msgid "increasing 'y' values expected"
 msgstr "'y'의 값들은 증가해야만 합니다"
 
-#: plot3d.cpp:1949
+#: plot3d.cpp:1945
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr ""
 
-#: plot3d.cpp:1962
+#: plot3d.cpp:1958
 msgid "all z values are equal"
 msgstr "모든 z 값들이 동일합니다"
 
-#: plot3d.cpp:1964
+#: plot3d.cpp:1960
 msgid "all z values are NA"
 msgstr "모든 z 값들이 NA입니다"
 

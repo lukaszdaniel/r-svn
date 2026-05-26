@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 15:59+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -30,7 +30,7 @@ msgstr "runmed(x, .., na.action=\"na.fail\"): tiene NAs comienzando en x[%lld]"
 
 #: Srunmed.cpp:268
 msgid "runmed(): invalid 'na.action'"
-msgstr "runmed(): 'na.action' inválida"
+msgstr "runmed(): 'na.action' no válida"
 
 #: Srunmed.cpp:279
 msgid "long vectors are not supported for algorithm = \"Turlach\""
@@ -47,11 +47,11 @@ msgstr "probabilidades fuera de [0,1] en qansari()"
 
 #: approx.cpp:111
 msgid "approx(): invalid f value"
-msgstr "approx(): valor f inválido"
+msgstr "approx(): valor f no válido"
 
 #: approx.cpp:114
 msgid "approx(): invalid interpolation method"
-msgstr "approx(): método de interpolación inválido"
+msgstr "approx(): método de interpolación no válido"
 
 #: approx.cpp:121
 msgid "approx(): attempted to interpolate NA values"
@@ -63,7 +63,7 @@ msgstr "approx(x,y, .., na.rm=FALSE): valores NA en x no están permitidos"
 
 #: arima.cpp:77 arima.cpp:187 arima.cpp:371 arima.cpp:602 optim.cpp:40
 msgid "invalid argument type"
-msgstr "tipo de argumento inválido"
+msgstr "tipo de argumento no válido"
 
 #: arima.cpp:438 arima.cpp:525 pacf.cpp:319 pacf.cpp:358
 msgid "can only transform 100 pars in arima0"
@@ -81,20 +81,20 @@ msgstr "x no finito[%d] en el cálculo del ancho de banda"
 #: bandwidths.cpp:128
 #, fuzzy
 msgid "data are constant in bandwidth calculation"
-msgstr "x no finito[%d] en el cálculo del ancho de banda"
+msgstr "data es constante en el cálculo del ancho de banda"
 
 #: complete_cases.cpp:35
 #, c-format
 msgid "invalid 'type' (%s) of argument"
-msgstr "'tipo' (%s) de argumento inválido"
+msgstr "'tipo' (%s) de argumento no válido"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "Ninguna entrada ha determinado el número de casos"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "No todos los argumentos tienen la misma longitud"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "Ninguna entrada ha determinado el número de casos"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -118,7 +118,7 @@ msgstr "'x' es NULL"
 
 #: cov.cpp:677 cov.cpp:683
 msgid "incompatible dimensions"
-msgstr "Dimensiones incompatibles"
+msgstr "dimensiones incompatibles"
 
 #: cov.cpp:702 cov.cpp:743 cov.cpp:776
 msgid "no complete element pairs"
@@ -126,7 +126,7 @@ msgstr "no hay pares de elementos completos"
 
 #: cov.cpp:715
 msgid "invalid 'use' (computational method)"
-msgstr "'Uso' inválido (método computacional)"
+msgstr "'use' no es válido (método computacional)"
 
 #: cov.cpp:718
 msgid "'x' is empty"
@@ -167,32 +167,32 @@ msgstr "solo el primer elemento es usado como nombre de variable"
 #: deriv.cpp:804
 #, c-format
 msgid "invalid expression in '%s'"
-msgstr "expresión inválida en '%s'"
+msgstr "expresión no válida en '%s'"
 
 #: deriv.cpp:866
 #, fuzzy
 msgid "too many variables"
-msgstr "demasiados factores"
+msgstr "demasiadas variables"
 
 #: deriv.cpp:1079 model.cpp:106
 msgid "invalid variable names"
-msgstr "Nombres de variables inválidos"
+msgstr "nombres de variables no válidos"
 
 #: deriv.cpp:1087 deriv.cpp:1089
 msgid "invalid tag"
-msgstr "etiqueta inválida"
+msgstr "etiqueta no válida"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
-msgstr "se tratan valores no finitos como NA"
+msgstr "tratando valores no finitos como NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
-msgstr "distance(): p inválido"
+msgstr "distance(): p no válido"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
-msgstr "distance(): distancia inválida"
+msgstr "distance(): distancia no válida"
 
 #: distn.cpp:40
 msgid "NaNs produced"
@@ -506,7 +506,7 @@ msgstr "Resultado no válido en na.action"
 
 #: model.cpp:389
 msgid "invalid model frame"
-msgstr "fórmula de modelo inválida"
+msgstr "fórmula de modelo no válida"
 
 #: model.cpp:391
 msgid "do not know how many cases"
@@ -557,7 +557,7 @@ msgstr "las variables del tipo %s no están permitidas en las matrices del model
 
 #: model.cpp:881
 msgid "invalid formula in 'update'"
-msgstr "fórmula inválida en 'update'"
+msgstr "fórmula no válida en 'update'"
 
 #: model.cpp:915
 msgid "formula expected"
@@ -565,15 +565,15 @@ msgstr "fórmula esperada"
 
 #: model.cpp:1081
 msgid "invalid term in model formula"
-msgstr "término inválido en fórmula del modelo"
+msgstr "término no válido en fórmula del modelo"
 
 #: model.cpp:1172
 msgid "invalid model formula"
-msgstr "fórmula de modelo inválida"
+msgstr "fórmula de modelo no válida"
 
 #: model.cpp:1204 model.cpp:1511
 msgid "invalid power in formula"
-msgstr "poder inválido en la fórmula"
+msgstr "poder no válido en la fórmula"
 
 #: model.cpp:1253 model.cpp:1688
 #, fuzzy, c-format
@@ -661,7 +661,7 @@ msgstr "'theta' debe ser del tipo caracter"
 
 #: nls.cpp:291 port.cpp:402
 msgid "use of NULL environment is defunct"
-msgstr "no es posible usar un ambiente NULL"
+msgstr "el uso de entorno NULL es obsoleto"
 
 #: nls.cpp:295
 msgid "'rho' should be an environment"
@@ -743,11 +743,11 @@ msgstr "-Inf reemplazado por valor negativo máximo"
 #: optimize.cpp:229 optimize.cpp:319 optimize.cpp:541
 #, fuzzy, c-format
 msgid "%s replaced by maximum positive value"
-msgstr "NA reemplazados por el máximo valor positivo"
+msgstr "%s reemplazado por el máximo valor positivo"
 
 #: optimize.cpp:239
 msgid "invalid function value in 'optimize'"
-msgstr "valor de función en 'optimize' inválida"
+msgstr "valor de función en 'optimize' no válida"
 
 #: optimize.cpp:255 optimize.cpp:348 optimize.cpp:734
 msgid "attempt to minimize non-function"
@@ -757,7 +757,7 @@ msgstr "tentativa de minimizar una no-función"
 #: optimize.cpp:358 optimize.cpp:374 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
-msgstr "valor '%s' inválido"
+msgstr "valor '%s' no válido"
 
 #: optimize.cpp:271 optimize.cpp:359
 msgid "'xmin' not less than 'xmax'"
@@ -765,7 +765,7 @@ msgstr "'xmin' no menor a 'xmax'"
 
 #: optimize.cpp:329
 msgid "invalid function value in 'zeroin'"
-msgstr "valor de función in 'zeroin' inválido"
+msgstr "valor de función in 'zeroin' no válido"
 
 #: optimize.cpp:364 optimize.cpp:369
 #, c-format
@@ -782,67 +782,67 @@ msgstr "valor no finito provisto por 'nlm'"
 
 #: optimize.cpp:561
 msgid "invalid function value in 'nlm' optimizer"
-msgstr "valor de función en optimizador 'nlm' inválido"
+msgstr "valor de función no válido en optimizador 'nlm'"
 
 #: optimize.cpp:573 optimize.cpp:588
 msgid "function value caching for optimization is seriously confused"
-msgstr ""
+msgstr "caché de valores de función para optimización está seriamente confundido"
 
 #: optimize.cpp:603
 msgid "numeric parameter expected"
-msgstr ""
+msgstr "se esperaba parámetro numérico"
 
 #: optimize.cpp:607
 msgid "conflicting parameter lengths"
-msgstr ""
+msgstr "longitudes de parámetros están en conflicto"
 
 #: optimize.cpp:611
 msgid "invalid parameter length"
-msgstr ""
+msgstr "longitud del parámetro no válido"
 
 #: optimize.cpp:620 optimize.cpp:627 optimize.cpp:634
 msgid "missing value in parameter"
-msgstr ""
+msgstr "valor faltante en el parámetro"
 
 #: optimize.cpp:639
 msgid "invalid parameter type"
-msgstr ""
+msgstr "tipo de parámetro no válido"
 
 #: optimize.cpp:650
 msgid "non-positive number of parameters in nlm"
-msgstr ""
+msgstr "número no positivo de parámetros en nlm"
 
 #: optimize.cpp:652
 msgid "nlm is inefficient for 1-d problems"
-msgstr ""
+msgstr "nlm es ineficiente para problemas 1-d"
 
 #: optimize.cpp:654
 msgid "invalid gradient tolerance in nlm"
-msgstr ""
+msgstr "tolerancia de gradiente no válida en nlm"
 
 #: optimize.cpp:656
 msgid "invalid iteration limit in nlm"
-msgstr ""
+msgstr "límite de iteración no válido en nlm"
 
 #: optimize.cpp:658
 msgid "minimization function has no good digits in nlm"
-msgstr ""
+msgstr "la función de minimización no tiene dígitos aceptables en nlm"
 
 #: optimize.cpp:660
 msgid "no analytic gradient to check in nlm!"
-msgstr ""
+msgstr "¡falta gradiente analítico para verificar en nlm!"
 
 #: optimize.cpp:662
 msgid "no analytic Hessian to check in nlm!"
-msgstr ""
+msgstr "¡falta hessiano analítico para verificar en nlm!"
 
 #: optimize.cpp:664
 msgid "probable coding error in analytic gradient"
-msgstr ""
+msgstr "probable error de codificación en el gradiente analítico"
 
 #: optimize.cpp:666
 msgid "probable coding error in analytic Hessian"
-msgstr ""
+msgstr "probable error de codificación en el hessiano analítica"
 
 #: optimize.cpp:668
 #, c-format
@@ -853,19 +853,19 @@ msgstr ""
 
 #: optimize.cpp:679
 msgid "Relative gradient close to zero.\n"
-msgstr ""
+msgstr "Gradiente relativo cercano a cero.\n"
 
 #: optimize.cpp:680 optimize.cpp:684
 msgid "Current iterate is probably solution.\n"
-msgstr ""
+msgstr "La iteración actual es probablemente la solución.\n"
 
 #: optimize.cpp:683
 msgid "Successive iterates within tolerance.\n"
-msgstr ""
+msgstr "Iteraciones sucesivas dentro de la tolerancia.\n"
 
 #: optimize.cpp:687
 msgid "Last global step failed to locate a point lower than x.\n"
-msgstr ""
+msgstr "El último paso global no pudo encontrar un punto más bajo que x.\n"
 
 #: optimize.cpp:688
 msgid ""
@@ -876,7 +876,7 @@ msgstr ""
 
 #: optimize.cpp:693
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
-msgstr ""
+msgstr "Se ha superado el límite de iteración.  El algoritmo falló.\n"
 
 #: optimize.cpp:696
 msgid ""
@@ -890,29 +890,29 @@ msgstr ""
 #: optimize.cpp:757 optimize.cpp:762 optimize.cpp:766 optimize.cpp:770
 #: optimize.cpp:774 optimize.cpp:778 optimize.cpp:783
 msgid "invalid NA value in parameter"
-msgstr ""
+msgstr "valor NA no válido en el parámetro"
 
 #: optimize.cpp:812
 msgid "hessian supplied is of the wrong length or mode, so ignored"
-msgstr ""
+msgstr "el hessiano suministrado es de longitud o modo incorrecto, por lo que se ignora"
 
 #: optimize.cpp:816
 msgid "gradient supplied is of the wrong length or mode, so ignored"
-msgstr ""
+msgstr "gradiente suministrado es de longitud o modo incorrecto, por lo que se ignora"
 
 #: pacf.cpp:82
 msgid "bad Starma struct"
-msgstr ""
+msgstr "estructura Starma incorrecta"
 
 #: pacf.cpp:228
 #, c-format
 msgid "starma error code %d"
-msgstr ""
+msgstr "código de error starma: %d"
 
 #: pacf.cpp:288
 #, c-format
 msgid "forkal error code %d"
-msgstr ""
+msgstr "código de error forkal: %d"
 
 #: permdist.cpp:122 permdist.cpp:127 permdist.cpp:198 permdist.cpp:202
 msgid "overflow error: cannot compute exact distribution"
@@ -921,16 +921,16 @@ msgstr ""
 #: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
-msgstr ""
+msgstr "Rf_divset: alg = %d debe ser 1, 2, 3 o 4"
 
 #: port.cpp:165
 msgid "port algorithms 3 or higher are not supported"
-msgstr ""
+msgstr "algoritmos de PORT 3 o superior no son compatibles"
 
 #: port.cpp:339
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
-msgstr ""
+msgstr "función gradiente debe devolver un vector numérico de longitud %d"
 
 #: port.cpp:342
 msgid "NA/NaN gradient evaluation"
@@ -939,7 +939,7 @@ msgstr ""
 #: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
-msgstr ""
+msgstr "función hessiana debe devolver una matriz numérica cuadrada de orden %d"
 
 #: port.cpp:355
 msgid "NA/NaN Hessian evaluation"
@@ -953,20 +953,20 @@ msgstr "'rho' debe ser un entorno"
 #: port.cpp:407 port.cpp:575
 #, fuzzy
 msgid "'d' must be a nonempty numeric (double) vector"
-msgstr "El argumento %s debe ser un vector numérico no vacío"
+msgstr "'d' debe ser un vector numérico (double) no vacío"
 
 #: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
-msgstr ""
+msgstr "Cuando se define la matriz hessiana, también debe estar definido el gradiente"
 
 #: port.cpp:412
 #, fuzzy, c-format
 msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
-msgstr "argumento %s debe ser un vector numérico de longitud 1 o longitud %d"
+msgstr "entorno 'rho' debe contener un vector numérico (double) '.par' de longitud %d"
 
 #: port.cpp:426
 msgid "'lower' and 'upper' must be numeric (double) vectors"
-msgstr ""
+msgstr "'lower' y 'upper' deben ser vectores numéricos (double)"
 
 #: port.cpp:441
 #, fuzzy
@@ -975,7 +975,7 @@ msgstr "valor de función in 'zeroin' inválido"
 
 #: port.cpp:484
 msgid "'getElement' applies only to named lists"
-msgstr ""
+msgstr "'getElement' solo se aplica a las listas con nombre"
 
 #: port.cpp:507
 #, c-format
@@ -985,75 +985,75 @@ msgstr ""
 #: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
-msgstr ""
+msgstr "'gradient' debe ser una matriz numérica de dimensión (%d,%d)"
 
 #: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
-msgstr ""
+msgstr "fcn produjo resultado modo %d, longitud %d - se esperaba modo %d, longitud %d"
 
 #: port.cpp:555
 msgid "invalid type for eval_check_store"
-msgstr ""
+msgstr "tipo no válido para eval_check_store"
 
 #: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
-msgstr ""
+msgstr "'lowerb' y 'upperb' deben ser vectores numéricos"
 
 #: prho.cpp:158
 msgid "invalid sample size 'n' in C routine prho(n,s,*)"
-msgstr ""
+msgstr "Tamaño de muestra 'n' no válido en la rutina C prho(n,s*,)"
 
 #: rWishart.cpp:53
 msgid "inconsistent degrees of freedom and dimension"
-msgstr ""
+msgstr "grados de libertad y dimensión son inconsistentes"
 
 #: rWishart.cpp:86
 msgid "'scal' must be a square, real matrix"
-msgstr ""
+msgstr "'scal' debe ser una matriz cuadrada y real"
 
 #: rWishart.cpp:99
 msgid "'scal' matrix is not positive-definite"
-msgstr ""
+msgstr "la matriz 'scal' no es definida positiva"
 
 #: random.cpp:55 random.cpp:139 random.cpp:219 random.cpp:309
 msgid "NAs produced"
-msgstr ""
+msgstr "se produjeron NA's"
 
 #: random.cpp:62 random.cpp:68 random.cpp:74 random.cpp:89 random.cpp:169
 #: random.cpp:258 random.cpp:396
 msgid "invalid arguments"
-msgstr ""
+msgstr "argumentos no válidos"
 
 #: random.cpp:335
 msgid "NA in probability vector"
-msgstr ""
+msgstr "NA en el vector de probabilidades"
 
 #: random.cpp:337
 msgid "negative probability"
-msgstr ""
+msgstr "probabilidad negativa"
 
 #: random.cpp:343
 msgid "no positive probabilities"
-msgstr ""
+msgstr "ninguna probabilidad positiva"
 
 #: random.cpp:355
 msgid "invalid first argument 'n'"
-msgstr ""
+msgstr "primer argumento 'n' no válido"
 
 #: random.cpp:357
 msgid "invalid second argument 'size'"
-msgstr ""
+msgstr "segundo argumento no válido 'size'"
 
 #: rcont.cpp:80
 #, c-format
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
-msgstr ""
+msgstr "rcont2 [%d,%d]: exponencial subdesbordó a 0; error en el algoritmo"
 
 #: smooth.cpp:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
-msgstr ""
+msgstr "regla final no válida para mediana móvil de 3: %d"
 
 #: splines.cpp:368
 msgid "inputs of different lengths"
@@ -1062,7 +1062,7 @@ msgstr ""
 #: starma.cpp:357
 #, c-format
 msgid "missing value in last %d observations"
-msgstr ""
+msgstr "valor faltante en las últimas %d observaciones"
 
 #: swilk.cpp:209
 #, fuzzy, c-format

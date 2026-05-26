@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -82,13 +82,13 @@ msgstr "nebaigtinis x[%d] pralaidumo skaičiavime"
 msgid "invalid 'type' (%s) of argument"
 msgstr "neleistinas 'type' (%s) argumento"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "jokia įvestis nenustatė atvejų skaičiaus"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "ne visi argumentai turi tą patį ilgį"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "jokia įvestis nenustatė atvejų skaičiaus"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -176,15 +176,15 @@ msgstr "neleistini kintamųjų pavadinimai"
 msgid "invalid tag"
 msgstr "netinkama žymė"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "neribines reikšmes traktuoti kaip NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): neleistinas p"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance(): netinkamas atstumas"
 

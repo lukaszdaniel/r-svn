@@ -17,12 +17,12 @@ msgstr ""
 #. R/clusterApply.R: stop("'X' must have named dimnames")
 #: R/clusterApply.R:0
 msgid "'X' must have named dimnames"
-msgstr ""
+msgstr "'X' debe tener 'dimnames' con nombre"
 
 #. R/unix/mcfork.R: stop("'child' must be a valid child process")
 #: R/unix/mcfork.R:0
 msgid "'child' must be a valid child process"
-msgstr ""
+msgstr "'child' debe ser un proceso secundario válido"
 
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 #: R/unix/mcfork.R:0
@@ -32,7 +32,7 @@ msgstr ""
 #. R/windows/mcdummies.R: stop("'mc.cores' > 1 is not supported on Windows")
 #: R/windows/mcdummies.R:0
 msgid "'mc.cores' > 1 is not supported on Windows"
-msgstr ""
+msgstr "'mc.cores' > 1 no es soportado en Windows"
 
 #. R/unix/mclapply.R: stop("'mc.cores' must be >= 1")
 #. R/unix/pvec.R: stop("'mc.cores' must be >= 1")
@@ -179,8 +179,9 @@ msgstr[1] ""
 #: R/unix/mclapply.R:0
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"
-msgstr[0] ""
+msgstr[0] "La llamada en paralelo a la función %d no entregó un resultado"
 msgstr[1] ""
+"La llamada en paralelo a la/s función/es %d no entregaron resultados"
 
 #. R/unix/mcparallel.R: ngettext(nores, "%d parallel job did not deliver a result", "%d parallel jobs did not deliver results")
 #: R/unix/mcparallel.R:0

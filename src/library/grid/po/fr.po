@@ -21,7 +21,9 @@ msgstr ""
 
 #: gpar.cpp:634
 msgid "updateGContext must only be called after initGContext"
-msgstr "updateGContext doit être appelé après initGContext"
+msgstr ""
+"updateGContext doit être appelé uniquement après "
+"initGContext"
 
 #: grid.cpp:205
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
@@ -42,7 +44,7 @@ msgstr "Les masques dans un chemin (de détourage) ne sont pas respectés"
 #: grid.cpp:705 grid.cpp:883
 #, c-format
 msgid "Viewport '%s' was not found"
-msgstr ""
+msgstr "La fenêtre '%s' n'est pas trouvée"
 
 #: grid.cpp:915 grid.cpp:920 grid.cpp:1040 grid.cpp:1045
 msgid "cannot pop the top-level viewport ('grid' and 'graphics' output mixed?)"
@@ -87,16 +89,20 @@ msgstr ""
 #: grid.cpp:4029 grid.cpp:4085
 msgid "Coordinates for text pch not yet supported"
 msgstr ""
+"Les coordonnées du pch de texte ne sont pas encore prises "
+"en charge"
 
 #: grid.cpp:4090
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr ""
+"la valeur de pch '%d' est incorrecte dans cet "
+"environnement linguistique"
 
 #: grid.cpp:4911
 #, c-format
 msgid "unimplemented pch value '%d'"
-msgstr ""
+msgstr "valeur '%d' non implémentée pour 'pch'"
 
 #: grid.cpp:5069
 msgid "invalid plotting symbol"
@@ -190,6 +196,8 @@ msgstr "les unités ne peuvent être multipliées que par des nombres décimaux 
 #: util.cpp:220
 msgid "Unable to calculate text width/height (using zero)"
 msgstr ""
+"impossible de calculer la largeur ou la hauteur du texte "
+"(zéro est utilisé)"
 
 #: util.cpp:308 util.cpp:320
 msgid "grid grob object is empty"

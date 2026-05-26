@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -71,6 +71,11 @@ msgstr ""
 #. R/nlsFunc.R: gettextf("'%s' cannot be of mode '%s'", deparse1(substitute(object)),     mode(object))
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
+msgstr ""
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "'%s' is not implemented yet"
 msgstr ""
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
@@ -222,13 +227,14 @@ msgstr ""
 #. R/cor.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/fisher.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/mantelhaen.test.R: stop("'conf.level' must be a single number between 0 and 1")
+#. R/poisson.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/prop.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/t.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/var.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/wilcox.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/ansari.test.R:0 R/binom.test.R:0 R/cor.test.R:0 R/fisher.test.R:0
-#: R/mantelhaen.test.R:0 R/prop.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0
+#: R/mantelhaen.test.R:0 R/poisson.test.R:0 R/prop.test.R:0 R/t.test.R:0
+#: R/var.test.R:0 R/wilcox.test.R:0
 msgid "'conf.level' must be a single number between 0 and 1"
 msgstr "»conf.level« skal være et enkelt tal mellem 0 og 1"
 
@@ -1565,6 +1571,11 @@ msgstr ""
 msgid "X does not define a subspace of M"
 msgstr ""
 
+#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
+#: R/fisher.test.R:0
+msgid "`pval.only` and `conf.int` may not both be true"
+msgstr ""
+
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2336,6 +2347,11 @@ msgstr "grupperingsfaktor skal have præcis 2 niveauer"
 msgid ""
 "hat values (leverages) are all = %s\n"
 " and there are no factor predictors; no plot no. 5"
+msgstr ""
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "hatvalues() for nls(*, algorithm='plinear')"
 msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")

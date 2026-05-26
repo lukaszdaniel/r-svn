@@ -147,7 +147,7 @@ msgstr "a 'MARGIN' nem minden eleme dimenziónév"
 #. R/snowSOCK.R: stop("numeric 'names' must be >= 1")
 #: R/snowSOCK.R:0
 msgid "numeric 'names' must be >= 1"
-msgstr ""
+msgstr "A numerikus \"neveknek\" >= 1-nek kell lenniük"
 
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
@@ -158,6 +158,8 @@ msgstr ""
 #: R/unix/pvec.R:0
 msgid "some results may be missing, folded or caused an error"
 msgstr ""
+"Előfordulhat, hogy egyes eredmények hiányoznak, összecsukódnak "
+"vagy hibát okoznak"
 
 #. R/snow.R: sprintf("unknown cluster type: '%s'", type)
 #: R/snow.R:0
@@ -181,7 +183,7 @@ msgstr[1] ""
 msgid "%d parallel function call did not deliver a result"
 msgid_plural "%d parallel function calls did not deliver results"
 msgstr[0] ""
-msgstr[1] ""
+msgstr[1] "%d A párhuzamos függvényhívások nem hoztak eredményt"
 
 #. R/unix/mcparallel.R: ngettext(nores, "%d parallel job did not deliver a result", "%d parallel jobs did not deliver results")
 #: R/unix/mcparallel.R:0

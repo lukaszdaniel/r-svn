@@ -42,7 +42,7 @@ msgstr "水平被縮短成正值"
 #. R/mle.R: stop("named list expected")
 #: R/mle.R:0
 msgid "named list expected"
-msgstr ""
+msgstr "预期是命名列表"
 
 #. R/mle.R: stop("profiling has found a better solution, so original fit had not converged")
 #: R/mle.R:0

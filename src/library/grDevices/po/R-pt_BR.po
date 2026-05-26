@@ -32,7 +32,7 @@ msgstr ""
 #. R/colorRamp.R: stop("'alpha' must be false if 'space' is specified")
 #: R/colorRamp.R:0
 msgid "'alpha' must be false if 'space' is specified"
-msgstr ""
+msgstr "'alpha' deve ser falso se 'space' for especificado"
 
 #. R/smooth2d.R: stop("'bandwidth' must be numeric")
 #: R/smooth2d.R:0
@@ -86,13 +86,14 @@ msgstr "'file' deve ser uma cadeia de caracteres não-vazia"
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'from' must be a \"colorConverter\" object or a string"
-msgstr "'from' deve ser colorConverter ou cadeia de caracter"
+msgstr ""
+"'from' deve ser um objeto \"colorConverter\" ou um string de caracteres"
 
 #. R/convertColor.R: gettextf("'from.ref.white' disagrees with definition of %s",     from$name)
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'from.ref.white' disagrees with definition of %s"
-msgstr "'from.ref.white' discorda com a definição de"
+msgstr "'from.ref.white' não está de acordo com a definição de %s"
 
 #. R/convertColor.R: stop("'gamma' must be a scalar or 'sRGB'")
 #: R/convertColor.R:0
@@ -162,7 +163,7 @@ msgstr "'to' deve ser um colorConverter ou uma cadeia de caracter"
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'to.ref.white' disagrees with definition of %s"
-msgstr "'to.ref.white' discorda com a definição de"
+msgstr "'from.ref.white' não está de acordo com a definição de %s"
 
 #. R/windows/windows.R: stop("'type' not applicable to the R console")
 #: R/windows/windows.R:0
@@ -473,6 +474,8 @@ msgstr "pelo menos 3 colunas necessárias"
 #: R/unix/x11.R:0
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
 msgstr ""
+"Os tipos baseados no Cairo não são suportados nesta compilação - usando "
+"\"Xlib\""
 
 #. R/cairo.R: stop("cairo_pdf: Cairo-based devices are not available for this platform")
 #: R/cairo.R:0
@@ -695,13 +698,13 @@ msgstr "argumentos inválidos em '%s' (precisa-se de argumentos nomeados)"
 #: R/unix/x11.R:0
 #, fuzzy
 msgid "invalid arguments in 'X11Fonts' (must be font names)"
-msgstr "argumentos inválidos em '%s' (devem ser nomes de fontes)"
+msgstr "argumentos inválidos em 'X11Fonts' (devem ser nomes de fontes)"
 
 #. R/unix/x11.R: stop("invalid arguments in 'X11Fonts' (need named args)")
 #: R/unix/x11.R:0
 #, fuzzy
 msgid "invalid arguments in 'X11Fonts' (need named args)"
-msgstr "argumentos inválidos em '%s' (precisa-se de argumentos nomeados)"
+msgstr "argumentos inválidos em 'X11Fonts' (precisa de argumentos nomeados)"
 
 #. R/unix/quartz.R: stop("invalid arguments in 'quartzFonts' (must be font names)")
 #: R/unix/quartz.R:0

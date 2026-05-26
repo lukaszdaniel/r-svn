@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 16:02+0200\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -87,13 +87,13 @@ msgstr ""
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type'(%s)参数无效"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "无法用输入来确定个案数目"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "不是所有的参数都一样长"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "无法用输入来确定个案数目"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -181,15 +181,15 @@ msgstr "变量名称无效"
 msgid "invalid tag"
 msgstr "标签无效"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "所有无限值都作为NA来处理"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): p值无效"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance()：距离值无效"
 

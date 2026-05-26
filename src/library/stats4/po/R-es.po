@@ -32,7 +32,7 @@ msgstr "Los valores fijados no cumplen con las restricciones"
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
-msgstr "Niveles limitados únicamente a valores positivos"
+msgstr "niveles truncados solo a valores positivos"
 
 #. R/mle.R: stop("named list expected")
 #: R/mle.R:0

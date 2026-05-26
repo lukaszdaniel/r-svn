@@ -52,41 +52,41 @@ msgstr "الوسيطة '%s' غير صالحة"
 
 #: io.cpp:347 io.cpp:836
 msgid "invalid quote symbol set"
-msgstr ""
+msgstr "مجموعة رموز اقتباس غير صالحة"
 
 #: io.cpp:359 io.cpp:858 io.cpp:1076
 msgid "cannot open the connection"
-msgstr ""
+msgstr "لا يمكن فتح الاتصال"
 
 #: io.cpp:362 io.cpp:366
 msgid "cannot read from this connection"
-msgstr ""
+msgstr "لا يمكن القراءة من هذا الاتصال"
 
 #: io.cpp:413 io.cpp:431
 #, c-format
 msgid "quoted string on line %d terminated by EOF"
-msgstr ""
+msgstr "سلسلة مقتبسة على السطر %d تم إنهاؤها بواسطة EOF"
 
 #: io.cpp:566
 msgid "the first argument must be of mode character"
-msgstr ""
+msgstr "يجب أن تكون الوسيطة الأولى ذات طابع الوضع"
 
 #: io.cpp:595
 #, c-format
 msgid "invalid 'numerals' string: \"%s\""
-msgstr ""
+msgstr "سلسلة \"أرقام\" غير صالحة: \"%s\""
 
 #: io.cpp:773
 msgid "Selection: "
-msgstr ""
+msgstr "إنتخاب: "
 
 #: io.cpp:868 io.cpp:883
 msgid "cannot allocate buffer in 'readTableHead'"
-msgstr ""
+msgstr "لا يمكن تخصيص المخزن المؤقت في \"readTableHead\""
 
 #: io.cpp:896
 msgid "\\ followed by EOF"
-msgstr ""
+msgstr "\\ يليه EOF"
 
 #: io.cpp:935
 #, c-format
@@ -96,76 +96,76 @@ msgstr ""
 #: io.cpp:948 io.cpp:952
 #, c-format
 msgid "incomplete final line found by readTableHeader on '%s'"
-msgstr ""
+msgstr "تم العثور على السطر النهائي غير المكتمل بواسطة readTableHeader على \"%s\""
 
 #: io.cpp:1009
 msgid "index out of range"
-msgstr ""
+msgstr "مؤشر خارج النطاق"
 
 #: io.cpp:1045
 #, c-format
 msgid "Problem closing connection:  %s"
-msgstr ""
+msgstr "مشكلة إغلاق الاتصال:%s"
 
 #: io.cpp:1047
 msgid "Problem closing connection"
-msgstr ""
+msgstr "مشكلة إغلاق الاتصال"
 
 #: io.cpp:1069
 msgid "'file' is not a connection"
-msgstr ""
+msgstr "\"الملف\" ليس اتصالا"
 
 #: io.cpp:1072
 msgid "cannot write to this connection"
-msgstr ""
+msgstr "لا يمكن الكتابة إلى هذا الاتصال"
 
 #: io.cpp:1101
 msgid "'dec' must be a single character"
-msgstr ""
+msgstr "يجب أن يكون \"dec\" حرفا واحدا"
 
 #: io.cpp:1125
 #, c-format
 msgid "corrupt data frame -- length of column %d does not match nrows"
-msgstr ""
+msgstr "إطار البيانات التالف - طول العمود %d لا يتطابق مع الصفوف"
 
 #: io.cpp:1159
 #, c-format
 msgid "column %d claims to be a factor but does not have numeric codes"
-msgstr ""
+msgstr "يدعي العمود %d أنه عامل ولكن لا يحتوي على رموز رقمية"
 
 #: io.cpp:1177
 msgid "corrupt matrix -- dims do not match length"
-msgstr ""
+msgstr "مصفوفة تالفة - لا تتطابق الطول مع DIMS"
 
 #: stubs.cpp:58
 msgid "'savehistory' can only be used in Rgui and Rterm"
-msgstr ""
+msgstr "لا يمكن استخدام \"حفظ التاريخ\" إلا في Rgui و Rterm"
 
 #: stubs.cpp:75
 msgid "'loadhistory' can only be used in Rgui and Rterm"
-msgstr ""
+msgstr "لا يمكن استخدام \"حفظ التاريخ\" إلا في Rgui و Rterm"
 
 #: stubs.cpp:87
 msgid "invalid timestamp"
-msgstr ""
+msgstr "طابع زمني غير صالح"
 
 #: stubs.cpp:152 stubs.cpp:160
 msgid "X11 dataentry cannot be loaded"
-msgstr ""
+msgstr "لا يمكن تحميل إدخال بيانات X11"
 
 #: stubs.cpp:156 stubs.cpp:185 stubs.cpp:191
 msgid "X11 is not available"
-msgstr ""
+msgstr "X11 غير متوفر"
 
 #: stubs.cpp:249 stubs.cpp:252
 #, c-format
 msgid "invalid '%s' specification"
-msgstr ""
+msgstr "مواصفات \"%s\" غير صالحة"
 
 #: stubs.cpp:255
 #, c-format
 msgid "'%s' contains missing values"
-msgstr ""
+msgstr "يحتوي \"%s\" على قيم مفقودة"
 
 #: stubs.cpp:315
 msgid "size must be finite and >= 0"
@@ -173,7 +173,7 @@ msgstr ""
 
 #: utils.cpp:78
 msgid "argument 'class' must be a character string"
-msgstr ""
+msgstr "يجب أن تكون الوسيطة \"class\" سلسلة أحرف"
 
 #: utils.cpp:82
 #, c-format
@@ -182,11 +182,11 @@ msgstr ""
 
 #: utils.cpp:88
 msgid "argument 'x' must be a length-1 character vector"
-msgstr ""
+msgstr "يجب أن تكون الوسيطة \"X\" متجه بطول 1 حرف"
 
 #: utils.cpp:91
 msgid "argument 'x' must be UTF-8 encoded (including ASCII)"
-msgstr ""
+msgstr "يجب أن تكون الوسيطة \"x\" مشفرة ب UTF-8 (بما في ذلك ASCII)"
 
 #: utils.cpp:120
 msgid "'charClass' is not available on this platform"
@@ -204,15 +204,15 @@ msgstr ""
 #: utils.cpp:158
 #, c-format
 msgid "nsl() was unable to resolve host '%s'"
-msgstr ""
+msgstr "تعذر على nsl() حل المضيف \"%s\""
 
 #: utils.cpp:165
 msgid "unknown format returned by 'gethostbyname'"
-msgstr ""
+msgstr "تنسيق غير معروف تم إرجاعه بواسطة \"gethostbyname\""
 
 #: utils.cpp:174
 msgid "nsl() is not supported on this platform"
-msgstr ""
+msgstr "NSL() غير مدعوم على هذه المنصة"
 
 #: windows/dataentry.cpp:301
 msgid "unable to start data editor"
@@ -224,42 +224,42 @@ msgstr ""
 
 #: windows/dialogs.cpp:190
 msgid "unknown type"
-msgstr ""
+msgstr "نوع غير معروف"
 
 #: windows/dialogs.cpp:221 windows/dialogs.cpp:244 windows/dialogs.cpp:282
 #: windows/dialogs.cpp:317
 msgid "menu functions can only be used in the GUI"
-msgstr ""
+msgstr "لا يمكن استخدام وظائف القائمة إلا في واجهة المستخدم الرسومية (GUI)"
 
 #: windows/dialogs.cpp:252
 #, c-format
 msgid "unable to retrieve items for %s (%s)"
-msgstr ""
+msgstr "يتعذر استرداد العناصر ل %s (%s)"
 
 #: windows/dialogs.cpp:290
 #, c-format
 msgid "unable to add menu (%s)"
-msgstr ""
+msgstr "تعذر إضافة القائمة (%s)"
 
 #: windows/dialogs.cpp:302
 #, c-format
 msgid "unable to add menu item (%s)"
-msgstr ""
+msgstr "تعذر إضافة القائمة (%s)"
 
 #: windows/dialogs.cpp:325
 msgid "menu does not exist"
-msgstr ""
+msgstr "القائمة غير موجودة"
 
 #: windows/dialogs.cpp:332
 #, c-format
 msgid "unable to delete menu item (%s)"
-msgstr ""
+msgstr "تعذر إضافة القائمة (%s)"
 
 #: windows/registry.cpp:73 windows/registry.cpp:249 windows/registry.cpp:252
 #: windows/registry.cpp:255
 #, c-format
 msgid "invalid '%s' value"
-msgstr ""
+msgstr "قيمة \"%s\" غير صالحة"
 
 #: windows/registry.cpp:147 windows/registry.cpp:151
 #, c-format
@@ -279,7 +279,7 @@ msgstr ""
 #: windows/registry.cpp:267
 #, c-format
 msgid "Registry key '%ls' not found"
-msgstr ""
+msgstr "لم يتم العثور على مفتاح التسجيل \"%ls\""
 
 #: windows/registry.cpp:269
 #, c-format
@@ -288,7 +288,7 @@ msgstr ""
 
 #: windows/util.cpp:58
 msgid "unsupported version of Windows"
-msgstr ""
+msgstr "إصدار غير مدعوم من Windows"
 
 #: windows/util.cpp:284 windows/util.cpp:319
 msgid "'raw = FALSE' and format is a not a known text format"
@@ -296,59 +296,59 @@ msgstr ""
 
 #: windows/util.cpp:304
 msgid "argument must be a character vector or a raw vector"
-msgstr ""
+msgstr "يجب أن تكون الوسيطة متجه حرف أو متجه أولي"
 
 #: windows/util.cpp:345
 msgid "unable to open the clipboard"
-msgstr ""
+msgstr "تعذر فتح الحافظة"
 
 #: windows/util.cpp:350
 msgid "unable to write to the clipboard"
-msgstr ""
+msgstr "تعذر فتح الحافظة"
 
 #: windows/util.cpp:430
 msgid "'title' must be a character string"
-msgstr ""
+msgstr "يجب أن يكون \"العنوان\" سلسلة أحرف"
 
 #: windows/util.cpp:439
 msgid "'text' must be a character string"
-msgstr ""
+msgstr "يجب أن يكون \"النص\" عبارة عن سلسلة أحرف"
 
 #: windows/util.cpp:478
 #, c-format
 msgid "'%s' must be length 1"
-msgstr ""
+msgstr "يجب أن يكون طول \"%s\" 1"
 
 #: windows/util.cpp:588
 #, c-format
 msgid "'%s' must be a list"
-msgstr ""
+msgstr "يجب أن تكون \"%s\" قائمة"
 
 #: windows/util.cpp:592
 #, c-format
 msgid "'%s' element %d is not a window handle"
-msgstr ""
+msgstr "عنصر \"%s\" %d ليس مقبض نافذة"
 
 #: windows/widgets.cpp:119
 msgid "Select one or more"
-msgstr ""
+msgstr "حدد واحدا أو أكثر"
 
 #: windows/widgets.cpp:119
 msgid "Select one"
-msgstr ""
+msgstr "حدد واحدا"
 
 #: windows/widgets.cpp:203 windows/widgets.cpp:270
 msgid "'default' must be a character string"
-msgstr ""
+msgstr "يجب أن تكون كلمة \"default\" عبارة عن سلسلة أحرف"
 
 #: windows/widgets.cpp:205
 msgid "'default' is overlong"
-msgstr ""
+msgstr "\"الافتراضي\" طويل الأمد"
 
 #: windows/widgets.cpp:209 windows/widgets.cpp:276
 msgid "'caption' must be a character string"
-msgstr ""
+msgstr "يجب أن يكون \"النص\" عبارة عن سلسلة أحرف"
 
 #: windows/widgets.cpp:211
 msgid "'filterindex' must be an integer value"
-msgstr ""
+msgstr "يجب أن يكون \"filterindex\" قيمة صحيحة"

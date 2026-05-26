@@ -58,6 +58,8 @@ msgstr "'exp' doit retourner un objet 'grob' ou 'gList'"
 #: R/gpar.R:0
 msgid "'fill' gpar list components must all be patterns"
 msgstr ""
+"les composants 'fill'de la liste gpar doivent tous être "
+"des modèles"
 
 #. R/edit.R: stop("'gEditList' can only contain 'gEdit' objects")
 #: R/edit.R:0
@@ -307,7 +309,7 @@ msgstr "la définition du groupe a échoué"
 #: R/grid.R:0
 #, fuzzy
 msgid "Invalid 'clearGroups' argument"
-msgstr "argument 'arrow' incorrect"
+msgstr "argument 'clearGroups' incorrect"
 
 #. R/grob.R: stop("Invalid 'order'")
 #: R/grob.R:0
@@ -393,7 +395,7 @@ msgstr "Ce n’est pas un objet 'unit'"
 #: R/mask.R:0
 #, fuzzy
 msgid "Only a grob can be converted to a mask"
-msgstr "Seul un grob peut être converti en chemin"
+msgstr "Seul un grob peut être converti en masque"
 
 #. R/path.R: stop("Only a grob can be converted to a path")
 #: R/path.R:0
@@ -481,7 +483,8 @@ msgstr "il n'est pas possible de spécifier plus d'un 'side=[\"left\", \"right\"
 #: R/patterns.R:0
 #, fuzzy
 msgid "colours and stops must be at least length 1"
-msgstr "'x' et 'y' doivent être de même longueur"
+msgstr ""
+"'colours' et 'stops' doivent être au moins de longueur 1"
 
 #. R/primitives.R: stop("corrupt 'arrows' object")
 #: R/primitives.R:0
@@ -492,7 +495,9 @@ msgstr "objet 'arrows' corrompu"
 #: R/patterns.R:0
 #, fuzzy
 msgid "cx1, cy1, cx2, cy2, r1, and r2 must all be length 1"
-msgstr "'x1', 'y1', 'x2' et 'y2' doivent être des unités ('units')"
+msgstr ""
+"'cx1', 'cy1', 'cx2', 'cy2', 'r1' et 'r2' doivent tous être "
+"de longueur 1"
 
 #. R/curve.R: stop("end points must not be identical")
 #: R/curve.R:0
@@ -812,13 +817,13 @@ msgstr "il faut restaurer au moins une vue"
 #: R/viewport.R:0
 #, fuzzy
 msgid "must specify at least one of 'xData' or 'xscale'"
-msgstr "il faut spécifier au moins 'x' ou 'xscale'"
+msgstr "il faut spécifier au moins 'xData' ou 'xscale'"
 
 #. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
 #, fuzzy
 msgid "must specify at least one of 'yData' or 'yscale'"
-msgstr "il faut spécifier au moins 'y' ou 'yscale'"
+msgstr "il faut spécifier au moins 'yData' ou 'yscale'"
 
 #. R/grid.R: stop("must specify at least one viewport")
 #: R/grid.R:0

@@ -165,7 +165,7 @@ msgstr "no se ha suministrado 'grob' para la unidad de 'grobwidth/height'"
 
 #: unit.cpp:1644
 msgid "'gPath' must have depth 1 in 'grobwidth/height' units"
-msgstr "'gPath' debe tener una profundidad de 1 en unidades 'grobwidth/height'"
+msgstr "'gPath' debe tener una profundidad de 1 en unidades "
 
 #: unit.cpp:1649
 msgid "non-NULL value supplied for plain unit"

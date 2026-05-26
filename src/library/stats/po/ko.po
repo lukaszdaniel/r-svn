@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 15:59+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -88,13 +88,13 @@ msgstr ""
 msgid "invalid 'type' (%s) of argument"
 msgstr "유효하지 않은 인자의 'type' (%s)입니다"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "경우의 수를 결정할 수 있는 입력이 없습니다"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "모든 인자들이 같은 길이를 가지고 있지 않습니다"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "경우의 수를 결정할 수 있는 입력이 없습니다"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -182,15 +182,15 @@ msgstr "유효하지 않은 변수명입니다"
 msgid "invalid tag"
 msgstr "유효하지 않은 태그입니다"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "유한하지 않은 값들을 NA로 처리합니다"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): 유효하지 않은 p입니다"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance(): 유효하지 않은 거리입니다"
 
@@ -595,7 +595,7 @@ msgstr ""
 
 #: model.cpp:2135
 msgid "'.' in formula and no 'data' argument"
-msgstr "formula 안에  '.'가 사용되었는데 'data' 인자가 없습니다"
+msgstr "formula 안에 '.'가 사용되었는데 'data' 인자가 없습니다"
 
 #: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format

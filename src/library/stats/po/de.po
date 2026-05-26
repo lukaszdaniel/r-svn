@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 15:59+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-core <r-core@r-project.org>\n"
@@ -25,7 +25,7 @@ msgstr "Bandbreite/Spannweite der gleitenden Mediane größer als n"
 #: Srunmed.cpp:265
 #, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
-msgstr "runmed(x, .., na.action=\"na.fail\"): es gibt NAs beginnend bei x[%lld]"
+msgstr "runmed(x, .., na.action=\"na.fail\"): haben NAs, die bei x[%lld beginnen]"
 
 #: Srunmed.cpp:268
 msgid "runmed(): invalid 'na.action'"
@@ -87,13 +87,13 @@ msgstr "nicht-endliches x[%d] in der Bandbreitenberechnung"
 msgid "invalid 'type' (%s) of argument"
 msgstr "ungültiger 'type' (%s) des Argumentes"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "Anzahl der Fälle durch keine Eingabe festgelegt"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "nicht alle Argumente haben gleiche Länge"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "Anzahl der Fälle durch keine Eingabe festgelegt"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -180,15 +180,15 @@ msgstr "ungültige Variablennamen"
 msgid "invalid tag"
 msgstr "ungültiger tag"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "behandle nicht-endliche Werte als NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): unzulässiges p"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance(): unzulässige distance"
 

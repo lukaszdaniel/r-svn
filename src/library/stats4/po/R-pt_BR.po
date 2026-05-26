@@ -21,7 +21,7 @@ msgstr ""
 #. R/mle.R: stop("Mismatch in length of start values")
 #: R/mle.R:0
 msgid "Mismatch in length of start values"
-msgstr ""
+msgstr "Incompatibilidade no comprimento dos valores iniciais"
 
 #. R/mle.R: warning("extra arguments discarded")
 #: R/mle.R:0
@@ -37,7 +37,7 @@ msgstr "valores fixos violam restrições"
 #. R/mle.R: warning("levels truncated to positive values only")
 #: R/mle.R:0
 msgid "levels truncated to positive values only"
-msgstr "níveis truncados para valores positivos"
+msgstr "níveis truncados somente para valores positivos"
 
 #. R/mle.R: stop("named list expected")
 #: R/mle.R:0

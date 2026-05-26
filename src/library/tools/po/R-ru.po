@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-04-01 17:06+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -31,8 +31,9 @@ msgstr "%s вызывает:"
 msgid "%s has wrong argument list %s"
 msgstr "у %s неправильный список аргументов %s"
 
+#. R/sign.R: gettextf("'%s' must be a character string", "uid")
 #. R/utils.R: gettextf("'%s' must be a character string", "x")
-#: R/utils.R:0
+#: R/sign.R:0 R/utils.R:0
 #, fuzzy
 msgid "'%s' must be a character string"
 msgstr "аргумент 'x' должен быть текстовой строкой"
@@ -103,6 +104,17 @@ msgstr "не могу запустить 'diff', так что использу�
 #. R/sha256.R: stop("'files' and 'bytes' are mutually exclusive")
 #: R/md5.R:0 R/sha256.R:0
 msgid "'files' and 'bytes' are mutually exclusive"
+msgstr ""
+
+#. R/sign.R: stop("'gpg' is not available for signing")
+#: R/sign.R:0
+#, fuzzy
+msgid "'gpg' is not available for signing"
+msgstr "тест '%s' недоступен"
+
+#. R/sign.R: stop("'keyring' must be specified if 'use.default.keyring=FALSE'")
+#: R/sign.R:0
+msgid "'keyring' must be specified if 'use.default.keyring=FALSE'"
 msgstr ""
 
 #. R/QC.R: gettextf("'library' or 'require' call not declared from: %s",     sQuote(xx))
@@ -238,6 +250,26 @@ msgstr "<p>Чтобы увидеть результат в браузере, у�
 #: R/code2html.R:0
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
 msgstr "<p>Чтобы увидеть результат в браузере, установите пакет <a href='https://CRAN.R-project.org/package=knitr'>knitr</a>.</p>"
+
+#. R/apitools.R: sprintf("API funcitons not declared in installed headers: %s",     paste(v$name, collapse = " "))
+#: R/apitools.R:0
+msgid "API funcitons not declared in installed headers: %s"
+msgstr ""
+
+#. R/apitools.R: stop("API functions listed in nonAPI: %s", paste(v$name, collapse = " "))
+#: R/apitools.R:0
+msgid "API functions listed in nonAPI: %s"
+msgstr ""
+
+#. R/apitools.R: stop("API variables listed in nonAPI: %s", paste(v$name, collapse = " "))
+#: R/apitools.R:0
+msgid "API variables listed in nonAPI: %s"
+msgstr ""
+
+#. R/apitools.R: sprintf("API variables not in declared in installed headers: %s",     paste(v$name, collapse = " "))
+#: R/apitools.R:0
+msgid "API variables not in declared in installed headers: %s"
+msgstr ""
 
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
 #: R/update_packages.R:0
@@ -385,6 +417,11 @@ msgid ""
 msgstr ""
 "Не могу обработать группу/строки:\n"
 "%s"
+
+#. R/sign.R: gettextf("Cannot sign due to failed pin entry for key %s", sfp %||%     "??")
+#: R/sign.R:0
+msgid "Cannot sign due to failed pin entry for key %s"
+msgstr ""
 
 #. R/bibstyle.R: stop("Changes require specified 'style'")
 #: R/bibstyle.R:0
@@ -616,6 +653,11 @@ msgstr "Не удалось получить %s проверяя %s"
 #: R/assertCondition.R:0
 msgid "Failed to get error in evaluating %s"
 msgstr "Не удалось получить ошибку, проверяя %s"
+
+#. R/sign.R: stop("Failed to invoke 'gpg' for signing")
+#: R/sign.R:0
+msgid "Failed to invoke 'gpg' for signing"
+msgstr ""
 
 #. R/Vignettes.R: gettextf("Failed to locate %s output file %s for vignette with name %s and engine %s. The following files exist in working directory %s: %s",     sQuote(by), sQuote(paste0(name, ".pdf")), sQuote(name), sQuote(sprintf("%s::%s",         engine$package, engine$name)), sQuote(normalizePath(dir)),     fmt_file_sizes(output0))
 #: R/Vignettes.R:0
@@ -1285,6 +1327,12 @@ msgstr "См. раздел 'Cross-references' руководства 'Writing R 
 msgid "See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
 msgstr "См. раздел 'The DESCRIPTION file' руководства 'Writing R Extensions'."
 
+#. R/sign.R: stop("Signing failed: ", sfe)
+#: R/sign.R:0
+#, fuzzy
+msgid "Signing failed:"
+msgstr "загрузка не удалась"
+
 #. R/QC.R: gettextf("Slots for class '%s'", docObj[["name"]])
 #: R/QC.R:0
 msgid "Slots for class '%s'"
@@ -1310,6 +1358,11 @@ msgstr "Стандартизируемо: %s"
 #: R/QC.R:0
 msgid "Standardized license specification:"
 msgstr "Стандартизованная спецификация лицензии:"
+
+#. R/sign.R: stop("Target file for the signature already exists")
+#: R/sign.R:0
+msgid "Target file for the signature already exists"
+msgstr ""
 
 #. R/testing.R: gettextf("Testing examples for package %s", sQuote(pkg))
 #: R/testing.R:0
@@ -1420,6 +1473,11 @@ msgstr "Неизвестная кодировка с не-ASCII данными: 
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
 msgstr "Неподдерживаемое имя устройства"
+
+#. R/install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkg))
+#: R/install.R:0
+msgid "Valid signature is required, but package %s could not be successfully verified."
+msgstr ""
 
 #. R/QC.R: gettextf("Variables in data frame '%s'", docObj[["name"]])
 #: R/QC.R:0
@@ -1841,6 +1899,11 @@ msgstr "создаю символы отладки (%s)"
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "сервер httpd отключен через R_DISABLE_HTTPD"
 
+#. R/apitools.R: sprintf("in API but marked for warnings: %s", paste(v$name, collapse = " "))
+#: R/apitools.R:0
+msgid "in API but marked for warnings: %s"
+msgstr ""
+
 #. R/utils.R: gettext("inferior call failed")
 #: R/utils.R:0
 msgid "inferior call failed"
@@ -1969,6 +2032,16 @@ msgstr "нет запущенного сервера -- нельзя его ос
 msgid "no source files found"
 msgstr "не найдено файлов исходников"
 
+#. R/apitools.R: sprintf("non-API functions declared in installed headers: %s",     paste(v$name, collapse = " "))
+#: R/apitools.R:0
+msgid "non-API functions declared in installed headers: %s"
+msgstr ""
+
+#. R/apitools.R: sprintf("non-API variables declared in installed headers: %s",     paste(v$name, collapse = " "))
+#: R/apitools.R:0
+msgid "non-API variables declared in installed headers: %s"
+msgstr ""
+
 #. R/citation.R: stop("non-ASCII input in a CITATION file without a declared encoding")
 #: R/citation.R:0
 msgid "non-ASCII input in a CITATION file without a declared encoding"
@@ -1994,9 +2067,19 @@ msgstr "сейчас поддерживается только Rd-синтакс
 msgid "package %s %s was found, but %s %s is required by %s"
 msgstr "пакет %s %s не найден но %s %s нужен для %s"
 
-#. R/install.R: gettextf("package %s successfully unpacked and MD5 sums checked",     sQuote(pkg_name))
+#. R/install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkg),     info$fingerprint, info$userid)
+#. R/install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkg_name),     info$fingerprint, info$userid)
 #: R/install.R:0
-msgid "package %s successfully unpacked and MD5 sums checked"
+msgid "package %s signature verified (%s %s)"
+msgstr ""
+
+#. R/install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkg), "SHA256")
+#. R/install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkg), "MD5")
+#. R/install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkg_name), "SHA256")
+#. R/install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkg_name), "MD5")
+#: R/install.R:0
+#, fuzzy
+msgid "package %s successfully unpacked and %s sums checked"
 msgstr "пакет %s удачно распакован, MD5 sums проверены"
 
 #. R/QC.R: gettext("package 'methods' is used but not declared")

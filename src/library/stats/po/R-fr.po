@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Hugo Gruson <hugo.gruson@normalesup.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -77,6 +77,12 @@ msgstr ""
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "'%s' ne peut être de mode '%s'"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+#, fuzzy
+msgid "'%s' is not implemented yet"
+msgstr "le type '%s' n'est pas encore implémenté"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -226,13 +232,14 @@ msgstr ""
 #. R/cor.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/fisher.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/mantelhaen.test.R: stop("'conf.level' must be a single number between 0 and 1")
+#. R/poisson.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/prop.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/t.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/var.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/wilcox.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/ansari.test.R:0 R/binom.test.R:0 R/cor.test.R:0 R/fisher.test.R:0
-#: R/mantelhaen.test.R:0 R/prop.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0
+#: R/mantelhaen.test.R:0 R/poisson.test.R:0 R/prop.test.R:0 R/t.test.R:0
+#: R/var.test.R:0 R/wilcox.test.R:0
 msgid "'conf.level' must be a single number between 0 and 1"
 msgstr "'conf.level' doit être un nombre compris entre 0 et 1"
 
@@ -1575,6 +1582,11 @@ msgstr ""
 msgid "X does not define a subspace of M"
 msgstr "X ne défini pas un sous-espace de M"
 
+#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
+#: R/fisher.test.R:0
+msgid "`pval.only` and `conf.int` may not both be true"
+msgstr ""
+
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2030,13 +2042,13 @@ msgstr "les contrastes ne peuvent être appliqués qu'aux facteurs ayant au moin
 #: R/models.R:0
 #, fuzzy
 msgid "contrasts dropped from factor %s"
-msgstr "les contrastes s'appliquent uniquement aux facteurs"
+msgstr "contrastes ignorés du facteur %s"
 
 #. R/models.R: gettextf("contrasts dropped from factor %s due to missing levels",     nm)
 #: R/models.R:0
 #, fuzzy
 msgid "contrasts dropped from factor %s due to missing levels"
-msgstr "les contrastes ne peuvent être appliqués qu'aux facteurs ayant au moins deux niveaux"
+msgstr "contrastes ignorés du facteur %s dûs aux niveaux absents"
 
 #. R/contr.poly.R: gettextf("contrasts not defined for %d degrees of freedom", n -     1)
 #. R/contrast.R: gettextf("contrasts not defined for %d degrees of freedom", n -     1L)
@@ -2355,6 +2367,11 @@ msgid ""
 msgstr ""
 "les valeurs estimées (\"leverages\") sont tous = %s\n"
 " et il n'y a aucune variable dépendante facteur ; aucun graphe no. 5"
+
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "hatvalues() for nls(*, algorithm='plinear')"
+msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")
@@ -2832,7 +2849,7 @@ msgstr "le minimum se trouve à une des extrémités de l'intervalle"
 #: R/ppr.R:0
 #, fuzzy
 msgid "mismatched 'x' and 'weights'"
-msgstr "'x' et 'y' ne correspondent pas"
+msgstr "'x' et 'weights' ne correspondent pas"
 
 #. R/ppr.R: stop("mismatched 'x' and 'y'")
 #: R/ppr.R:0
@@ -4640,8 +4657,8 @@ msgstr[1] "mais les variables trouvées ont %d lignes"
 #, fuzzy
 msgid "extra argument %s is not of class \"%s\""
 msgid_plural "extra arguments %s are not of class \"%s\""
-msgstr[0] "l'argument supplémentaire %s n'est pas un \"%s\""
-msgstr[1] "les arguments supplémentaires %s ne sont pas des \"%s\""
+msgstr[0] "l'argument supplémentaire %s n'est pas de classe \"%s\""
+msgstr[1] "les arguments supplémentaires %s ne sont pas de classe \"%s\""
 
 #. R/models.R: ngettext(length(m), "factor %s has new level %s", "factor %s has new levels %s",     domain = "R-stats")
 #: R/models.R:0

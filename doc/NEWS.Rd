@@ -42,6 +42,10 @@
 
       \item \code{tools::Rd2txt()} now replaces \samp{---} and \samp{--}
       by Unicode dashes when the output encoding is UTF-8.
+
+      \item \code{fisher.test()} gains a new option \code{pval.only = TRUE}
+      for the 2x2 exact case, with substantial speed gains in the case of large
+      counts.
     }
   }
 
@@ -73,10 +77,6 @@
       such as \code{x[i] <- val} have improved, thanks to suggestions by
       \I{Suharto Anggono} in \PR{18989}.
 
-      \item \code{abbreviate(<non-ASCII>)} now works better, using
-      \code{iswlower()} and \code{*upper()} to treat \dQuote{wide}
-      characters, thanks to \I{Kevin}'s \PR{19058}.
-
       \item In an \R installation without \acronym{NLS}, e.g., from
       \command{--disable-nls} configuration, the C \code{ngettext()}
       replacement now also keeps plural for \dQuote{0 things}, thanks to
@@ -88,11 +88,6 @@
       error also when \code{row.names = RN} explicitly, where \code{RN} has
       \code{NA}s.
 
-      \item \code{all(<symbol>)} signals an error now, as some similar
-      coercions; previously, the coercion of the symbol resulted
-      in \code{NULL} internally, raised a warning, and could access illegal
-      memory; thanks to \I{Kevin Ushey}'s \PR{19054}.
-
       \item \code{.leap.seconds} again has no \code{"tzone"} attribute, as
       in earlier \R versions, fixing \PR{19072} thanks to \I{Suharto Anggono}.
 
@@ -102,6 +97,12 @@
       \PR{19038}.  Currently, this does not apply when the
       \code{"internal"} code for date-time conversion and printing is in
       use, as e.g., on Windows and macOS.
+
+      \item \code{wilcox.test()} gains new optional argument
+      \code{digits.zap}, \emph{and} the default for argument
+      \code{digits.rank} is changed from \code{Inf} to \code{7},
+      addressing bugs \PR{18035} and \PR{19071}, in order to deal with
+      both ties of almost equal numbers and almost zeros of differences.
     }
   }
 }
@@ -123,8 +124,17 @@
 
   \subsection{Bug Fixes}{
     \itemize{
+      \item \code{abbreviate(<non-ASCII>)} now works better, using
+      \code{iswlower()} and \code{*upper()} to treat \dQuote{wide}
+      characters, thanks to \I{Kevin}'s \PR{19058}.
+
       \item \code{cut(1:11, {})} now signals an error for the invalid
       \code{breaks}, fixing \PR{19057}, thanks to \I{Kevin Ushey}.
+
+      \item \code{all(<symbol>)} signals an error now, as some similar
+      coercions; previously, the coercion of the symbol resulted
+      in \code{NULL} internally, raised a warning, and could access illegal
+      memory; thanks to \I{Kevin Ushey}'s \PR{19054}.
 
       \item \code{stl()} now checks its 3 x 3 tuning parameters on the R level;
       \code{stl(*, s.window = 0)} now \dQuote{works} instead dumping core,
@@ -139,6 +149,9 @@
       \item Border case \code{zapsmall(x, digits=Inf)} where \code{x} has an
       \code{Inf} entry, no longer returns all \code{NaN} but rather \code{x}.
       Help page improved, also with more non-default examples.
+
+      \item \code{wilcox.test(x, exact=FALSE, correct = k)}'s p-value
+      computation got a missing \code{dnorm(z)} factor.
     }
   }
 }

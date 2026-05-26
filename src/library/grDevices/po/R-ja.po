@@ -24,7 +24,7 @@ msgstr "'%s' は廃止予定です"
 #: R/postscript.R:0
 #, fuzzy
 msgid "'%s' must be a non-empty character string"
-msgstr "'file' は空でない文字列でなければなりません"
+msgstr "'%s' は空でない文字列でなければなりません"
 
 #. R/grDevices-defunct.R: gettextf("'%s' was removed in R 4.5.0.\n", "xfig")
 #: R/grDevices-defunct.R:0

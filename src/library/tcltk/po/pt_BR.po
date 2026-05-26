@@ -33,7 +33,7 @@ msgstr "argumento inválido"
 
 #: tcltk.cpp:291
 msgid "no such variable"
-msgstr ""
+msgstr "variável não existente"
 
 #: tcltk.cpp:322 tcltk.cpp:342 tcltk.cpp:416 tcltk.cpp:482 tcltk.cpp:537
 msgid "invalid tclObj -- perhaps saved from another session?"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 16:07+0200\n"
 "Last-Translator: Renata Hirota <re.hirota@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -25,7 +25,7 @@ msgstr "argumento 'files' deve ser do tipo caractere"
 #: Rmd5.cpp:79
 #, fuzzy, c-format
 msgid "md5 failed on file '%ls'"
-msgstr "md5 falhou no arquivo '%s'"
+msgstr "md5 falhou no arquivo '%ls'"
 
 #: Rmd5.cpp:81
 #, c-format
@@ -35,17 +35,17 @@ msgstr "md5 falhou no arquivo '%s'"
 #: Rsha256.cpp:88
 #, fuzzy, c-format
 msgid "sha256 failed on file '%ls'"
-msgstr "md5 falhou no arquivo '%s'"
+msgstr "sha256 falhou no arquivo '%ls'"
 
 #: Rsha256.cpp:90
 #, fuzzy, c-format
 msgid "sha256 failed on file '%s'"
-msgstr "md5 falhou no arquivo '%s'"
+msgstr "sha256 falhou no arquivo '%s'"
 
 #: getfmts.cpp:56
 #, c-format
 msgid "only %d arguments are allowed"
-msgstr ""
+msgstr "apenas %d argumentos são permitidos"
 
 #: getfmts.cpp:61
 #, c-format
@@ -60,125 +60,125 @@ msgstr ""
 #: getfmts.cpp:70
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
-msgstr ""
+msgstr "o comprimento de 'fmt' excede o comprimento máximo %d"
 
 #: getfmts.cpp:91
 #, c-format
 msgid "unrecognised format specification '%s'"
-msgstr ""
+msgstr "especificação de formato não reconhecida '%s'"
 
 #: getfmts.cpp:131
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2848 gramRd.cpp:3965
+#: gramLatex.cpp:2848 gramRd.cpp:3966
 #, c-format
 msgid "Buffer size too large to double safely at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2851 gramRd.cpp:3968
+#: gramLatex.cpp:2851 gramRd.cpp:3969
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
-msgstr ""
+msgstr "não é possível alocar buffer para cadeia de caracteres longa na linha %d"
 
-#: gramLatex.cpp:3120 gramRd.cpp:4464
+#: gramLatex.cpp:3120 gramRd.cpp:4465
 msgid "unable to allocate in PushState"
 msgstr ""
 
-#: gramLatex.cpp:3162 gramRd.cpp:4515
+#: gramLatex.cpp:3162 gramRd.cpp:4516
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valor '%s' inválido"
 
-#: gramRd.cpp:2579 gramRd.cpp:2582
+#: gramRd.cpp:2580 gramRd.cpp:2583
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
-msgstr ""
+msgstr "marcação ruim (espaço extra?) em %s:%d:%d"
 
-#: gramRd.cpp:3116
+#: gramRd.cpp:3117
 #, c-format
 msgid "Macro '%s' previously defined."
-msgstr ""
+msgstr "Macro '%s' definida previamente."
 
-#: gramRd.cpp:3126
+#: gramRd.cpp:3127
 msgid "At most 4 arguments are allowed for user defined macros."
-msgstr ""
+msgstr "Máximo de 4 argumentos permitidos para macros definidas por usuário."
 
-#: gramRd.cpp:3168
+#: gramRd.cpp:3169
 #, c-format
 msgid "No macro definition for '%s'."
-msgstr ""
+msgstr "Não existe macro definida para '%s'."
 
-#: gramRd.cpp:3185 gramRd.cpp:3200
+#: gramRd.cpp:3186 gramRd.cpp:3201
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3229
+#: gramRd.cpp:3230
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
-msgstr ""
+msgstr "Não for passados argumentos suficientes para a macro de usuário '%s'"
 
-#: gramRd.cpp:3288
+#: gramRd.cpp:3289
 msgid "internal error: inconsistent argument count"
 msgstr ""
 
-#: gramRd.cpp:3369 gramRd.cpp:3373
+#: gramRd.cpp:3370 gramRd.cpp:3374
 #, c-format
 msgid "newline within quoted string at %s:%d"
-msgstr ""
+msgstr "nova linha dentro da string entre aspas em %s:%d"
 
-#: gramRd.cpp:3392
+#: gramRd.cpp:3393
 #, c-format
 msgid "unable to allocate buffer for long macro at line %d"
-msgstr ""
+msgstr "não foi possível alocar buffer para macro longa na linha %d"
 
-#: gramRd.cpp:3422
+#: gramRd.cpp:3423
 msgid "macros nested too deeply: infinite recursion?"
-msgstr ""
+msgstr "macros aninhadas muito profundamente: recursão infinita?"
 
-#: gramRd.cpp:3829
+#: gramRd.cpp:3830
 #, c-format
 msgid "Unable to find macro %s"
-msgstr ""
+msgstr "Não é possível encontrar a macro %s"
 
-#: gramRd.cpp:4029
+#: gramRd.cpp:4030
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
-msgstr ""
+msgstr "Fim inesperado de input (em %c string entre aspas aberta em %s:%d:%d)"
 
-#: gramRd.cpp:4525
+#: gramRd.cpp:4526
 msgid "cannot open the connection"
 msgstr "não é possível abrir a conexão"
 
-#: gramRd.cpp:4527
+#: gramRd.cpp:4528
 msgid "cannot read from this connection"
 msgstr "não é possível ler a partir desta conexão"
 
-#: gramRd.cpp:4541
+#: gramRd.cpp:4542
 msgid "invalid Rd file"
-msgstr ""
+msgstr "arquivo Rd inválido"
 
-#: gramRd.cpp:4561
+#: gramRd.cpp:4562
 msgid "'deparseRd' only supports deparsing character elements"
-msgstr ""
+msgstr "'deparseRd' suporta apenas a análise sintática de elementos de caracteres"
 
-#: gramRd.cpp:4564
+#: gramRd.cpp:4565
 msgid "bad state"
-msgstr ""
+msgstr "mau estado"
 
-#: gramRd.cpp:4577
+#: gramRd.cpp:4578
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
-msgstr ""
+msgstr "modo de texto incorreto %d em 'deparseRd'"
 
 #: http.cpp:32
 msgid "invalid bind address specification"
-msgstr ""
+msgstr "especificação de endereço de vínculo inválida"
 
 #: http.cpp:37
 #, c-format
 msgid "Invalid port number %d: should be in 0:65535, typically above 1024"
-msgstr ""
+msgstr "o número da porta %d é inválido: deve estar em 0:65535, normalmente acima de 1024"
 
 #: http.cpp:61
 msgid "allocation error in remove_dot_segments"
@@ -188,26 +188,26 @@ msgstr ""
 msgid "non-character argument"
 msgstr ""
 
-#: install.cpp:98
+#: install.cpp:99
 msgid "path too long"
-msgstr ""
+msgstr "caminho muito longo"
 
-#: install.cpp:122 install.cpp:141 install.cpp:143
+#: install.cpp:123 install.cpp:142 install.cpp:144
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argumento '%s' inválido"
 
-#: install.cpp:172
+#: install.cpp:174
 msgid "write error during file append"
 msgstr ""
 
 #: pdscan.cpp:79
 msgid "too many items"
-msgstr ""
+msgstr "itens em excesso"
 
 #: signals.cpp:46
 msgid "pskill() is not supported on this platform"
-msgstr ""
+msgstr "pskill() não é suportado nesta plataforam"
 
 #: signals.cpp:144
 msgid "psnice() is not supported on this platform"

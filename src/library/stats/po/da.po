@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.0.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-07-06 15:56+0200\n"
 "Last-Translator: Joe <joedalton2@yahoo.dk>\n"
 "Language-Team: \n"
@@ -86,12 +86,12 @@ msgstr ""
 msgid "invalid 'type' (%s) of argument"
 msgstr "ugyldig argumenttype"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
+#: complete_cases.cpp:49
+msgid "not all arguments have the same length"
 msgstr ""
 
-#: complete_cases.cpp:230
-msgid "not all arguments have the same length"
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
 msgstr ""
 
 #: cov.cpp:566
@@ -181,15 +181,15 @@ msgstr "ugyldig værdi for lag.max"
 msgid "invalid tag"
 msgstr "ugyldig argumenttype"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "behandler ikkebegrænsende værdier som NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): ugyldig p"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance(): ugyldig afstand"
 

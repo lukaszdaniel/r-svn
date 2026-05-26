@@ -103,7 +103,7 @@ msgstr "'l' debe ser un layout"
 #. R/components.R: stop("'labels' and 'at' locations must have same length")
 #: R/components.R:0
 msgid "'labels' and 'at' locations must have same length"
-msgstr ""
+msgstr "posiciones 'labels' y 'at'deberían tener la misma longitud"
 
 #. R/primitives.R: stop("'length' must be a 'unit' object")
 #: R/primitives.R:0
@@ -278,12 +278,13 @@ msgstr ""
 #: R/coords.R:0
 #, fuzzy
 msgid "Closed must be length 1 and must not be a missing value"
-msgstr "Closed no debería tener un valor no informado"
+msgstr "Closed debe tener un largo de 1 y no debe ser un valor perdido"
 
 #. R/grid.R: stop("Down viewport failed to record on display list")
 #: R/grid.R:0
 msgid "Down viewport failed to record on display list"
 msgstr ""
+"downViewport() falló al registrar viewport en la lista de visualización"
 
 #. R/grid.R: warning("Down viewport incorrectly recorded on display list")
 #: R/grid.R:0
@@ -364,7 +365,7 @@ msgstr "Transformación no válida (no se dibuja nada)"
 #. R/patterns.R: warning("Missing pattern fill has been set to transparent")
 #: R/patterns.R:0
 msgid "Missing pattern fill has been set to transparent"
-msgstr ""
+msgstr "patrón de relleno faltante, se establece como transparente"
 
 #. R/grob.R: gettextf("New 'grob' name (%s) does not match 'gPath' (%s)",     newGrob$name, gPath)
 #: R/grob.R:0
@@ -498,6 +499,8 @@ msgid ""
 "grob drawing produces more shapes than grob coords\n"
 "(recycling coords)"
 msgstr ""
+"al graficar grob se producen más formas que coordenadas en grob\n"
+"(reciclando coordenadas...)"
 
 #. R/grab.R: warning("grob pushed viewports and did not pop/up them (grab MAY not be faithful)")
 #: R/grab.R:0
@@ -512,7 +515,7 @@ msgstr "¿Cómo llegamos aquí?"
 #. R/unit.R: stop("index must be of length 1", call. = FALSE)
 #: R/unit.R:0
 msgid "index must be of length 1"
-msgstr ""
+msgstr "el índice debe tener una longitud de 1"
 
 #. R/unit.R: stop("index out of bounds (\"unit\" subsetting)", call. = FALSE)
 #: R/unit.R:0
@@ -558,7 +561,7 @@ msgstr "valor de 'alpha' no válido"
 #. R/viewport.R: stop("invalid 'angle' in viewport")
 #: R/viewport.R:0
 msgid "invalid 'angle' in viewport"
-msgstr ""
+msgstr "valor de 'angle' no válido en esta ventana gráfica"
 
 #. R/components.R: stop("invalid 'at' location in 'axis'")
 #: R/components.R:0
@@ -613,12 +616,12 @@ msgstr "clase 'grob' no válida"
 #. R/viewport.R: stop("invalid 'layout' in viewport")
 #: R/viewport.R:0
 msgid "invalid 'layout' in viewport"
-msgstr ""
+msgstr "'layout' no válido en esta ventana gráfica"
 
 #. R/viewport.R: stop("invalid 'layout.pos.col' in viewport")
 #: R/viewport.R:0
 msgid "invalid 'layout.pos.col' in viewport"
-msgstr ""
+msgstr "'layout.pos.col' no válido en esta ventana gráfica"
 
 #. R/viewport.R: stop("invalid 'layout.pos.row' in viewport")
 #: R/viewport.R:0
@@ -719,6 +722,8 @@ msgstr "no es válido editar directamente la ranura 'children' or 'childrenOrder
 #: R/primitives.R:0
 msgid "it is invalid to specify both 'id' and 'id.lengths'"
 msgstr ""
+"una ruta de ventana gráfica debe contener al menos un nombre de ventana "
+"gráfica"
 
 #. R/grob.R: stop("it is only valid to add a 'grob' to a \"gTree\"")
 #: R/grob.R:0
@@ -794,13 +799,13 @@ msgstr "se debe abrir al menos una ventana"
 #: R/viewport.R:0
 #, fuzzy
 msgid "must specify at least one of 'xData' or 'xscale'"
-msgstr "se debe especificar al menos una ventana"
+msgstr "se debe especificar al menos 'xData' o 'xscale'"
 
 #. R/viewport.R: stop("must specify at least one of 'yData' or 'yscale'")
 #: R/viewport.R:0
 #, fuzzy
 msgid "must specify at least one of 'yData' or 'yscale'"
-msgstr "se debe especificar al menos una ventana"
+msgstr "se debe especificar al menos 'yData' o 'yscale'"
 
 #. R/grid.R: stop("must specify at least one viewport")
 #: R/grid.R:0
@@ -882,6 +887,8 @@ msgstr ""
 #: R/zzz.R:0
 msgid "shutting down all devices when unloading 'grid' namespace"
 msgstr ""
+"cerrando todos los dispositivos gráficos al descargar el espacio de nombres "
+"'grid'"
 
 #. R/grob.R: gettextf("slot '%s' not found", i)
 #: R/grob.R:0
@@ -927,8 +934,8 @@ msgstr ""
 #: R/grob.R:0
 msgid "invalid grob name"
 msgid_plural "invalid grob names"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "nombre de grob no válido"
+msgstr[1] "nombres de grob no válidos"
 
 #. R/viewport.R: ngettext(sum(bad), "invalid viewport name", "invalid viewport names")
 #: R/viewport.R:0

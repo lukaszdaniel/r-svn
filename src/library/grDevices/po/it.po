@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28+0100\n"
+"POT-Creation-Date: 2026-05-26 17:26+0200\n"
 "PO-Revision-Date: 2025-07-06 15:32+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -174,7 +174,7 @@ msgstr "il file afm '%s' non può essere aperto"
 msgid "unknown AFM entity encountered"
 msgstr "entità AFM sconosciuta"
 
-#: devPS.cpp:769 devPS.cpp:772 devPS.cpp:4739 devPS.cpp:9318 devPicTeX.cpp:482
+#: devPS.cpp:769 devPS.cpp:772 devPS.cpp:4750 devPS.cpp:9329 devPicTeX.cpp:482
 #: devPicTeX.cpp:484
 #, c-format
 msgid "invalid string in '%s'"
@@ -287,11 +287,11 @@ msgstr "registrazione codifica del dispositivo fallita"
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "l'oggetto '.ps.prolog' non è un vettore di caratteri"
 
-#: devPS.cpp:2765 devPS.cpp:7441 devWindows.cpp:802
+#: devPS.cpp:2765 devPS.cpp:7452 devWindows.cpp:802
 msgid "invalid line end"
 msgstr "fine linea non valido"
 
-#: devPS.cpp:2784 devPS.cpp:7461 devWindows.cpp:815
+#: devPS.cpp:2784 devPS.cpp:7472 devWindows.cpp:815
 msgid "invalid line join"
 msgstr "linea unione non valida"
 
@@ -299,24 +299,24 @@ msgstr "linea unione non valida"
 msgid "invalid line mitre"
 msgstr "linea mitra non valida"
 
-#: devPS.cpp:2994 devPS.cpp:3932 devPS.cpp:4376 devPS.cpp:4403 devPS.cpp:9121
-#: devPS.cpp:9192
+#: devPS.cpp:2994 devPS.cpp:3932 devPS.cpp:4376 devPS.cpp:4403 devPS.cpp:9132
+#: devPS.cpp:9203
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "utilizzo del carattere %d non valido sostituito con il carattere 1"
 
-#: devPS.cpp:3231 devPS.cpp:6844 devWindows.cpp:1809 devWindows.cpp:1846
+#: devPS.cpp:3231 devPS.cpp:6855 devWindows.cpp:1809 devWindows.cpp:1846
 #: devWindows.cpp:1876 devWindows.cpp:1908
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "nome file troppo lungo in %s()"
 
-#: devPS.cpp:3237 devPS.cpp:6850
+#: devPS.cpp:3237 devPS.cpp:6861
 #, c-format
 msgid "memory allocation problem in %s()"
 msgstr "problema di allocazione memoria in %s()"
 
-#: devPS.cpp:3255 devPS.cpp:6917
+#: devPS.cpp:3255 devPS.cpp:6928
 #, c-format
 msgid "encoding path is too long in %s()"
 msgstr "percorso di codifica troppo lungo in %s()"
@@ -326,7 +326,7 @@ msgstr "percorso di codifica troppo lungo in %s()"
 msgid "failed to load encoding file in %s()"
 msgstr "caricamento fallito del file codifica in %s()"
 
-#: devPS.cpp:3314 devPS.cpp:3377 devPS.cpp:6976 devPS.cpp:7032 devPS.cpp:8920
+#: devPS.cpp:3314 devPS.cpp:3377 devPS.cpp:6987 devPS.cpp:7043 devPS.cpp:8931
 msgid "invalid font type"
 msgstr "tipo carattere non valido"
 
@@ -364,7 +364,7 @@ msgstr "la semi-trasparenza non è supportata su questo dispositivo: segnalato u
 msgid "cannot open 'postscript' pipe to '%s'"
 msgstr "non posso aprire pipe 'postscript' su '%s'"
 
-#: devPS.cpp:3746 devPS.cpp:8182 qdPDF.cpp:101
+#: devPS.cpp:3746 devPS.cpp:8193 qdPDF.cpp:101
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "non è possibile aprire il file '%s'"
@@ -383,7 +383,7 @@ msgstr ""
 msgid "CID family '%s' not included in postscript() device"
 msgstr "CID famiglia '%s' non inclusa nel dispositivo postscript()"
 
-#: devPS.cpp:3938 devPS.cpp:3949 devPS.cpp:4383 devPS.cpp:4413 devPS.cpp:4678
+#: devPS.cpp:3938 devPS.cpp:3949 devPS.cpp:4383 devPS.cpp:4413 devPS.cpp:4689
 #, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr "famiglia '%s' non inclusa nel dispositivo postscript()"
@@ -393,218 +393,218 @@ msgstr "famiglia '%s' non inclusa nel dispositivo postscript()"
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "codifica sconosciuta '%s' in 'mbcsToSbcs'"
 
-#: devPS.cpp:4604 devPS.cpp:4606
+#: devPS.cpp:4613 devPS.cpp:4615
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4609
+#: devPS.cpp:4618
 #, fuzzy, c-format
 msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4615 devPS.cpp:4622
+#: devPS.cpp:4624 devPS.cpp:4631
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4617 devPS.cpp:4624
+#: devPS.cpp:4626 devPS.cpp:4633
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4634
+#: devPS.cpp:4645
 #, fuzzy, c-format
 msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4706
+#: devPS.cpp:4717
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "apertura della conversione fallita verso la codifica '%s'"
 
-#: devPS.cpp:4725 devPS.cpp:9293
+#: devPS.cpp:4736 devPS.cpp:9304
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "conversione testo fallita alla codifica '%s'"
 
-#: devPS.cpp:5111
+#: devPS.cpp:5122
 msgid "Failed to allocate PDF definition string"
 msgstr "Allocazione fallita per la stringa con le definizioni PDF"
 
-#: devPS.cpp:5133
+#: devPS.cpp:5144
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr "incremento fallito per la stringa di definizione (chiusura dispositivo PDF)"
 
-#: devPS.cpp:5182
+#: devPS.cpp:5193
 msgid "failed to increase 'maxDefns'"
 msgstr "incremento fallito per 'maxDefns'"
 
-#: devPS.cpp:5400 devPS.cpp:5453
+#: devPS.cpp:5411 devPS.cpp:5464
 #, fuzzy
 msgid "Repeat or reflect pattern not supported on PDF device"
 msgstr "Maschera di luminanza ignorata (non supportata su questo dispositivo)"
 
-#: devPS.cpp:5509 devPS.cpp:5597
+#: devPS.cpp:5520 devPS.cpp:5608
 msgid "Shading type not yet supported"
 msgstr ""
 
-#: devPS.cpp:5812
+#: devPS.cpp:5823
 msgid "Drawing not appended to path (contains text)"
 msgstr "Disegno non aggiunto al percorso (contiene testo)"
 
-#: devPS.cpp:6040
+#: devPS.cpp:6051
 msgid "Compositing operator has no corresponding blend mode; defaulting to Normal"
 msgstr "L'operatore di composizione non ha una modalità di fusione corrispondente; predefinito su Normal"
 
-#: devPS.cpp:6309
+#: devPS.cpp:6320
 msgid "Failed to write PDF clipping path"
 msgstr "Scrittura del tracciato di ritaglio PDF fallita"
 
-#: devPS.cpp:6334
+#: devPS.cpp:6345
 msgid "Failed to write PDF stroke"
 msgstr "Scrittura del trattino PDF fallita"
 
-#: devPS.cpp:6355
+#: devPS.cpp:6366
 msgid "Failed to write PDF fill"
 msgstr "Scrittura del fill PDF fallita"
 
-#: devPS.cpp:6376
+#: devPS.cpp:6387
 msgid "Failed to write PDF fillStroke"
 msgstr "Scrittura del fillStroke PDF fallita"
 
-#: devPS.cpp:6421
+#: devPS.cpp:6432
 msgid "Glyph ID larger than 0xFFFF; output will be incorrect"
 msgstr ""
 
-#: devPS.cpp:6445
+#: devPS.cpp:6456
 msgid "invalid 'alpha' value in PDF"
 msgstr "valore 'alpha' non valido in PDF"
 
-#: devPS.cpp:6558 devPS.cpp:6561
+#: devPS.cpp:6569 devPS.cpp:6572
 msgid "failed to increase 'maxRaster'"
 msgstr "incremento di 'maxRaster' fallito"
 
-#: devPS.cpp:6573
+#: devPS.cpp:6584
 msgid "unable to allocate raster image"
 msgstr "non è possibile allocare l'immagine raster"
 
-#: devPS.cpp:6639 devPS.cpp:6689
+#: devPS.cpp:6650 devPS.cpp:6700
 #, c-format
 msgid "internal error %d in '%s'"
 msgstr ""
 
-#: devPS.cpp:6668 devPS.cpp:6712 devPS.cpp:8243
+#: devPS.cpp:6679 devPS.cpp:6723 devPS.cpp:8254
 msgid "write failed"
 msgstr "scrittura non riuscita"
 
-#: devPS.cpp:6772
+#: devPS.cpp:6783
 msgid "corrupt loaded encodings;  font not added"
 msgstr "codifiche caricate corrotte;  carattere non aggiunto"
 
-#: devPS.cpp:6782
+#: devPS.cpp:6793
 msgid "failed to record device encoding; font not added"
 msgstr "fallita registrazione della codifica per il dispositivo; carattere non aggiunto"
 
-#: devPS.cpp:6870
+#: devPS.cpp:6881
 msgid "cannot allocate pd->pos"
 msgstr ""
 
-#: devPS.cpp:6878
+#: devPS.cpp:6889
 msgid "cannot allocate pd->pageobj"
 msgstr ""
 
-#: devPS.cpp:6903
+#: devPS.cpp:6914
 msgid "increasing the PDF version to 1.2"
 msgstr "incremento della versione PDF a 1.2"
 
-#: devPS.cpp:6933
+#: devPS.cpp:6944
 msgid "failed to load default encoding"
 msgstr "caricamento file encoding fallito"
 
-#: devPS.cpp:7000
+#: devPS.cpp:7011
 msgid "failed to initialise default PDF font"
 msgstr "inizializzazione fallita per il carattere predefinito PDF"
 
-#: devPS.cpp:7055
+#: devPS.cpp:7066
 msgid "failed to initialise additional PDF fonts"
 msgstr "inizializzazione fallita per i caratteri aggiuntivi PDF"
 
-#: devPS.cpp:7068
+#: devPS.cpp:7079
 msgid "failed to allocate rasters"
 msgstr "allocazione dei raster fallita"
 
-#: devPS.cpp:7075
+#: devPS.cpp:7086
 msgid "failed to allocate masks"
 msgstr "allocazione delle maschere fallita"
 
-#: devPS.cpp:7085
+#: devPS.cpp:7096
 msgid "failed to allocate definitions"
 msgstr "allocazione fallita per le definizioni"
 
-#: devPS.cpp:7159
+#: devPS.cpp:7170
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "tipo foglio '%s' non valido (pdf)"
 
-#: devPS.cpp:7183
+#: devPS.cpp:7194
 msgid "invalid foreground/background color (pdf)"
 msgstr "colore primo piano/sfondo non valido (pdf)"
 
-#: devPS.cpp:7290
+#: devPS.cpp:7301
 msgid "increasing the PDF version to 1.4"
 msgstr "incremento della versione PDF a 1.4"
 
-#: devPS.cpp:7334 devPS.cpp:7382
+#: devPS.cpp:7345 devPS.cpp:7393
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "'colormodel' sconosciuto, si utilizza 'srgb'"
 
-#: devPS.cpp:7605
+#: devPS.cpp:7616
 msgid "failed to load sRGB colorspace file"
 msgstr "caricamento fallito per il file con lo spazio colore sRGB"
 
-#: devPS.cpp:7881 devPS.cpp:7906 devPS.cpp:8259 devPS.cpp:8302
+#: devPS.cpp:7892 devPS.cpp:7917 devPS.cpp:8270 devPS.cpp:8313
 #, fuzzy
 msgid "unable to increase object limit: please shutdown the pdf device"
 msgstr "incremento fallito per la stringa di definizione (chiusura dispositivo PDF)"
 
-#: devPS.cpp:7942
+#: devPS.cpp:7953
 msgid "corrupt encodings in PDF device"
 msgstr "codifiche corrotte nel dispositivo PDF"
 
-#: devPS.cpp:8023
+#: devPS.cpp:8034
 msgid "increasing the PDF version to 1.3"
 msgstr "incremento della versione PDF a 1.3"
 
-#: devPS.cpp:8135
+#: devPS.cpp:8146
 #, fuzzy
 msgid "write error"
 msgstr "scrittura non riuscita"
 
-#: devPS.cpp:8166
+#: devPS.cpp:8177
 #, c-format
 msgid "cannot open 'pdf' pipe to '%s'"
 msgstr "non è possibile aprire un pipe 'pdf' a '%s'"
 
-#: devPS.cpp:8172
+#: devPS.cpp:8183
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" implica 'onefile = TRUE'"
 
-#: devPS.cpp:8233
+#: devPS.cpp:8244
 msgid "internal read error in PDF_endpage"
 msgstr ""
 
-#: devPS.cpp:8239
+#: devPS.cpp:8250
 #, c-format
 msgid "internal compression error %d in PDF_endpage"
 msgstr ""
 
-#: devPS.cpp:8294
+#: devPS.cpp:8305
 #, fuzzy
 msgid "unable to increase page limit: please shutdown the pdf device"
 msgstr "incremento fallito per la stringa di definizione (chiusura dispositivo PDF)"
 
-#: devPS.cpp:8316
+#: devPS.cpp:8327
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -613,39 +613,39 @@ msgstr ""
 "non è possibile aprire il file 'pdf' con argomento '%s'\n"
 "  per piacere, chiudere il dispositivo PDF"
 
-#: devPS.cpp:8337
+#: devPS.cpp:8348
 #, c-format
 msgid "Cannot open temporary file '%s' for compression (reason: %s); compression has been turned off for this device"
 msgstr "Non è possibile aprire il file temporaneo '%s' per la compressione (motivo: %s); la compressione è stata disabilitata per questo dispositivo"
 
-#: devPS.cpp:8945 devPS.cpp:9450 devPS.cpp:9496
+#: devPS.cpp:8956 devPS.cpp:9461 devPS.cpp:9507
 msgid "failed to find or load PDF font"
 msgstr "fallita ricerca, o caricamento, del carattere PDF"
 
-#: devPS.cpp:9128 devPS.cpp:9187
+#: devPS.cpp:9139 devPS.cpp:9198
 msgid "Text not added to path containing other drawing"
 msgstr "Testo non aggiunto al percorso contenente altri disegni"
 
-#: devPS.cpp:9237 devPS.cpp:9405
+#: devPS.cpp:9248 devPS.cpp:9416
 msgid "failed to find or load PDF CID font"
 msgstr "fallita ricerca, o caricamento, del carattere PDF CID"
 
-#: devPS.cpp:9899 devPicTeX.cpp:767
+#: devPS.cpp:9910 devPicTeX.cpp:767
 #, fuzzy, c-format
 msgid "invalid 'file' parameter in %s"
 msgstr "parametro 'family' non valido in %s"
 
-#: devPS.cpp:9908 devPS.cpp:9912 devPS.cpp:10002 devPS.cpp:10006
+#: devPS.cpp:9919 devPS.cpp:9923 devPS.cpp:10013 devPS.cpp:10017
 #, c-format
 msgid "invalid 'family' parameter in %s"
 msgstr "parametro 'family' non valido in %s"
 
-#: devPS.cpp:9928 devPS.cpp:10018
+#: devPS.cpp:9939 devPS.cpp:10029
 #, c-format
 msgid "invalid 'fonts' parameter in %s"
 msgstr "parametro 'fonts' non valido in %s"
 
-#: devPS.cpp:9944 devPS.cpp:10042 devPicTeX.cpp:779 devPicTeX.cpp:784
+#: devPS.cpp:9955 devPS.cpp:10053 devPicTeX.cpp:779 devPicTeX.cpp:784
 #: devWindows.cpp:3824
 #, c-format
 msgid "unable to start %s() device"

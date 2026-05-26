@@ -100,7 +100,7 @@ msgstr "niepoprawny symbol wykresu"
 
 #: grid.cpp:5187
 msgid "unable to clip to rotated rectangle"
-msgstr "nie można przypiąć do obróconego prostokąta"
+msgstr "nie można przyciąć do obróconego prostokąta"
 
 #: layout.cpp:602
 msgid "invalid 'layout.pos.row'"
@@ -140,7 +140,7 @@ msgstr "Niepoprawna jednostka"
 
 #: unit.cpp:1587
 msgid "'units' must be character"
-msgstr "'units' muszą być tekstem"
+msgstr "argument 'units' musi być tekstem"
 
 #: unit.cpp:1590
 #, c-format

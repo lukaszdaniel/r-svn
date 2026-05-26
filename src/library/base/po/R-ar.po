@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:58\n"
+"POT-Creation-Date: 2026-05-26 16:55\n"
 "PO-Revision-Date: 2025-07-06 14:58+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -1584,7 +1584,7 @@ msgstr ""
 msgid "duplicate import names %s"
 msgstr ""
 
-#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(row.names[duplicated(row.names)]),     collapse = ", "))
+#. R/dataframe.R: gettextf("duplicate row.names: %s", paste(unique(rownms[duplicated(rownms)]),     collapse = ", "))
 #: R/dataframe.R:0
 msgid "duplicate row.names: %s"
 msgstr ""
@@ -2490,11 +2490,6 @@ msgstr ""
 msgid "pushing duplicate '%s' handler on top of the stack"
 msgstr ""
 
-#. R/summary.R: warning("quantile.type not in {1, 3} for <raw>")
-#: R/summary.R:0
-msgid "quantile.type not in {1, 3} for <raw>"
-msgstr ""
-
 #. R/attach.R: warning("replaced '[<-' by '\\\\[<-' in regular expression pattern")
 #: R/attach.R:0
 msgid "replaced '[<-' by '\\\\[<-' in regular expression pattern"
@@ -2549,7 +2544,7 @@ msgstr ""
 #. R/windows/system.R: gettextf("running command '%s' had status %d", command, rval)
 #: R/windows/system.R:0
 msgid "running command '%s' had status %d"
-msgstr ""
+msgstr "كان الأمر قيد التشغيل '%s' بالحالة %d"
 
 #. R/New-Internal.R: stop("second argument must be a list")
 #: R/New-Internal.R:0
@@ -2840,6 +2835,10 @@ msgid "%d row in value to replace %d rows"
 msgid_plural "%d rows in value to replace %d rows"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/mapply.R: ngettext(length(collisions), "%s function may not have argument named %s",     "%s function may not have arguments named %s", domain = "R-base")
 #: R/mapply.R:0
@@ -2858,6 +2857,10 @@ msgid "%s is not TRUE"
 msgid_plural "%s are not all TRUE"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/match.R: ngettext(length(chs <- unique(choices[nzchar(choices)])), "'arg' should be %s",     "'arg' should be one of %s")
 #: R/match.R:0
@@ -2883,6 +2886,10 @@ msgid "Function found when exporting methods from the namespace %s which is not 
 msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/warnings.R: ngettext(nx, "In '%s':\n extra argument %s will be disregarded",     "In '%s':\n extra arguments %s will be disregarded", domain = "R-base")
 #: R/warnings.R:0
@@ -2905,6 +2912,10 @@ msgid "No methods found in package %s for request: %s when loading %s"
 msgid_plural "No methods found in package %s for requests: %s when loading %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/namespace.R: ngettext(sum(notex), "S3 method %s was declared in NAMESPACE but not found",     "S3 methods %s were declared in NAMESPACE but not found")
 #: R/namespace.R:0
@@ -2912,6 +2923,10 @@ msgid "S3 method %s was declared in NAMESPACE but not found"
 msgid_plural "S3 methods %s were declared in NAMESPACE but not found"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/attach.R: ngettext(length(same), "The following object is masked _by_ %s:",     "The following objects are masked _by_ %s:")
 #: R/attach.R:0
@@ -2919,6 +2934,10 @@ msgid "The following object is masked _by_ %s:"
 msgid_plural "The following objects are masked _by_ %s:"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/attach.R: ngettext(length(same), "The following object is masked from %s:",     "The following objects are masked from %s:")
 #: R/attach.R:0
@@ -2933,6 +2952,10 @@ msgid "Warning message:\n"
 msgid_plural "Warning messages:\n"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
 
 #. R/namespace.R: ngettext(length(miss), "class %s is not exported by 'namespace:%s'",     "classes %s are not exported by 'namespace:%s'")
 #: R/namespace.R:0

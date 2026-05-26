@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Natalia Labadie <nlabadie.fbioyf@gmail.com>\n"
 "Language-Team: none\n"
@@ -72,6 +72,11 @@ msgstr ""
 msgid "'%s' cannot be of mode '%s'"
 msgstr ""
 
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "'%s' is not implemented yet"
+msgstr ""
+
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
 #: R/models.R:0 R/reshape.R:0
@@ -87,7 +92,7 @@ msgstr ""
 #: R/addmargins.R:0
 #, fuzzy
 msgid "'A' must be an array or table"
-msgstr "'A' debe ser una matriz o tabla"
+msgstr "'A' debe ser un array o tabla"
 
 #. R/dendrogram.R: stop("'ColSideColors' must be a character vector of length ncol(x)")
 #: R/dendrogram.R:0
@@ -220,13 +225,14 @@ msgstr ""
 #. R/cor.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/fisher.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/mantelhaen.test.R: stop("'conf.level' must be a single number between 0 and 1")
+#. R/poisson.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/prop.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/t.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/var.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #. R/wilcox.test.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/ansari.test.R:0 R/binom.test.R:0 R/cor.test.R:0 R/fisher.test.R:0
-#: R/mantelhaen.test.R:0 R/prop.test.R:0 R/t.test.R:0 R/var.test.R:0
-#: R/wilcox.test.R:0
+#: R/mantelhaen.test.R:0 R/poisson.test.R:0 R/prop.test.R:0 R/t.test.R:0
+#: R/var.test.R:0 R/wilcox.test.R:0
 msgid "'conf.level' must be a single number between 0 and 1"
 msgstr ""
 
@@ -1559,6 +1565,11 @@ msgstr ""
 msgid "X does not define a subspace of M"
 msgstr ""
 
+#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
+#: R/fisher.test.R:0
+msgid "`pval.only` and `conf.int` may not both be true"
+msgstr ""
+
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2320,6 +2331,11 @@ msgid ""
 " and there are no factor predictors; no plot no. 5"
 msgstr ""
 
+#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
+#: R/nls.R:0
+msgid "hatvalues() for nls(*, algorithm='plinear')"
+msgstr ""
+
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #: R/fisher.test.R:0 R/mcnemar.test.R:0
@@ -2708,7 +2724,7 @@ msgstr ""
 #. R/biplot.R: stop("length of choices must be 2")
 #: R/biplot.R:0
 msgid "length of choices must be 2"
-msgstr ""
+msgstr "la longitud de las opciones debe ser 2"
 
 #. R/smspline.R: stop("lengths of 'x' and 'w' must match")
 #: R/smspline.R:0
@@ -2729,7 +2745,7 @@ msgstr ""
 #. R/family.R: gettextf("link \"%s\" not available for %s family; available links are %s",     linktemp, family, paste(sQuote(okLinks), collapse = ", "))
 #: R/family.R:0
 msgid "link \"%s\" not available for %s family; available links are %s"
-msgstr ""
+msgstr "enlace \"%s\" no disponible para la familia %s; los enlaces disponibles son %s"
 
 #. R/lm.R: stop("lm object does not have a proper 'qr' component.\n Rank zero or should not have used lm(.., qr=FALSE).")
 #: R/lm.R:0
@@ -2737,11 +2753,13 @@ msgid ""
 "lm object does not have a proper 'qr' component.\n"
 " Rank zero or should not have used lm(.., qr=FALSE)."
 msgstr ""
+"el objeto lm no tiene un componente 'qr' adecuado.\n"
+" Rango cero o no debería haber usado lm(.., qr=FALSE)."
 
 #. R/nlminb.R: stop("logical 'hessian' argument not allowed.  See documentation.")
 #: R/nlminb.R:0
 msgid "logical 'hessian' argument not allowed.  See documentation."
-msgstr ""
+msgstr "argumento 'hessian' lógico no está permitido. Ver documentación."
 
 #. R/nlm.R: stop("lower < upper is not fulfilled")
 #: R/nlm.R:0
@@ -2757,11 +2775,13 @@ msgstr ""
 #: R/glm.R:0
 msgid "maximum number of iterations must be > 0"
 msgstr ""
+"la optimización unidimensional de Nelder-Mead no es confiable:\n"
+"use \"Brent\" u optimice() directamente"
 
 #. R/optim.R: stop("method = \"Brent\" is only available for one-dimensional optimization")
 #: R/optim.R:0
 msgid "method = \"Brent\" is only available for one-dimensional optimization"
-msgstr ""
+msgstr "el método = \"Brent\" solo está disponible para optimización unidimensional"
 
 #. R/lm.R: gettextf("method = '%s' is not supported. Using 'qr'", method)
 #: R/lm.R:0
@@ -3331,6 +3351,8 @@ msgid ""
 "not plotting observations with leverage one:\n"
 "  %s"
 msgstr ""
+"no se grafican observaciones con apalancamiento uno:\n"
+" %s"
 
 #. R/smspline.R: warning("not using invalid df; must have 1 < df <= n := #{unique x} = ",     nx)
 #: R/smspline.R:0
@@ -3365,7 +3387,7 @@ msgstr ""
 #. R/power.anova.test.R: stop("number of groups must be at least 2")
 #: R/power.anova.test.R:0
 msgid "number of groups must be at least 2"
-msgstr ""
+msgstr "el número de grupos debe ser al menos 2"
 
 #. R/smspline.R: stop("number of observations in 'x' and 'y' must match.")
 #: R/smspline.R:0
@@ -3375,7 +3397,7 @@ msgstr ""
 #. R/power.anova.test.R: stop("number of observations in each group must be at least 2")
 #: R/power.anova.test.R:0
 msgid "number of observations in each group must be at least 2"
-msgstr ""
+msgstr "el número de observaciones en cada grupo debe ser al menos 2"
 
 #. R/glm.R: gettextf("number of offsets is %d should equal %d (number of observations)",     length(offset), NROW(Y))
 #: R/glm.R:0
@@ -3415,7 +3437,7 @@ msgstr ""
 #. R/smspline.R: stop("numeric 'all.knots' must cover [0,1] (= the transformed data-range)")
 #: R/smspline.R:0
 msgid "numeric 'all.knots' must cover [0,1] (= the transformed data-range)"
-msgstr ""
+msgstr "el numérico 'all.knots' debe cubrir [0,1] (= el rango de datos transformado)"
 
 #. R/contrast.R: stop("numeric contrasts or contrast name expected")
 #: R/contrast.R:0
@@ -3533,7 +3555,7 @@ msgstr ""
 #: R/smspline.R:0
 #, fuzzy
 msgid "penalty must be numeric and > 0"
-msgstr "'x' debe ser numérico"
+msgstr "penalty debe ser numérico y > 0"
 
 #. R/free1way.R: gettextf("permutation confidence intervals only available for 2-sample comparisons in %s",     "confint.free1way")
 #: R/free1way.R:0
@@ -3609,7 +3631,7 @@ msgstr ""
 #. R/wilcox.test.R: warning("requested conf.level not achievable")
 #: R/wilcox.test.R:0
 msgid "requested conf.level not achievable"
-msgstr ""
+msgstr "nivel de confianza conf.level solicitado no alcanzable"
 
 #. R/factanal.R: stop("requested scores without an 'x' matrix")
 #: R/factanal.R:0
@@ -3932,7 +3954,7 @@ msgstr ""
 #. R/zzModels.R: stop("too few distinct input values to fit a Michaelis-Menten model")
 #: R/zzModels.R:0
 msgid "too few distinct input values to fit a Michaelis-Menten model"
-msgstr ""
+msgstr "muy pocos valores de entrada distintos para ajustar un modelo de Michaelis-Menten"
 
 #. R/zzModels.R: stop("too few distinct input values to fit a biexponential")
 #: R/zzModels.R:0
@@ -3967,12 +3989,12 @@ msgstr ""
 #. R/zzModels.R: stop("too few distinct input values to fit the Gompertz model")
 #: R/zzModels.R:0
 msgid "too few distinct input values to fit the Gompertz model"
-msgstr ""
+msgstr "muy pocos valores de entrada distintos para ajustar un modelo de Gompertz"
 
 #. R/zzModels.R: stop("too few distinct input values to fit the Weibull growth model")
 #: R/zzModels.R:0
 msgid "too few distinct input values to fit the Weibull growth model"
-msgstr ""
+msgstr "muy pocos valores de entrada distintos para ajustar un modelo de crecimiento de Weibull"
 
 #. R/pairwise.R: stop("too few groups")
 #: R/pairwise.R:0
@@ -4464,29 +4486,29 @@ msgstr ""
 #: R/factanal.R:0
 msgid "%d factor is too many for %d variables"
 msgid_plural "%d factors are too many for %d variables"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d factor es demasiado para %d variables"
+msgstr[1] "%d factores son demasiados para %d variables"
 
 #. R/lsfit.R: ngettext(sum(!good), "%d missing value deleted", "%d missing values deleted",     domain = "R-stats")
 #: R/lsfit.R:0
 msgid "%d missing value deleted"
 msgid_plural "%d missing values deleted"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d valor faltante eliminado"
+msgstr[1] "%d valores faltantes eliminados"
 
 #. R/nafns.R: ngettext(n <- length(x), "%d observation deleted due to missingness",     "%d observations deleted due to missingness")
 #: R/nafns.R:0
 msgid "%d observation deleted due to missingness"
 msgid_plural "%d observations deleted due to missingness"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d observación eliminada debido a que era faltante"
+msgstr[1] "%d observaciones eliminadas debido a que eran faltantes"
 
 #. R/smspline.R: ngettext(diff, "%d observation with NA, NaN or Inf deleted",     "%d observations with NAs, NaNs and/or Infs deleted", domain = "R-stats")
 #: R/smspline.R:0
 msgid "%d observation with NA, NaN or Inf deleted"
 msgid_plural "%d observations with NAs, NaNs and/or Infs deleted"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d observación con NA, NaN y/o Inf eliminada"
+msgstr[1] "%d observaciones con NA, NaN y/o Inf eliminadas"
 
 #. R/kmeans.R: ngettext(iter.max, "'%s' did not converge in %d iteration", "'%s' did not converge in %d iterations",     domain = "R-stats")
 #. R/medpolish.R: ngettext(maxiter, "'%s' did not converge in %d iteration", "'%s' did not converge in %d iterations",     domain = "R-stats")

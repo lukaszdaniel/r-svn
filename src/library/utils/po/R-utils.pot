@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: R 4.6.0\n"
+"Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-09 18:26\n"
+"POT-Creation-Date: 2026-05-26 16:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1083,6 +1083,13 @@ msgid "Unrecognized value indicator"
 msgstr ""
 
 
+#: R/bitstring.R: 0
+#. R/bitstring.R: stop("Unsupported object")
+
+msgid "Unsupported object"
+msgstr ""
+
+
 #: R/packages.R: 0
 #: R/packages2.R: 0
 #. R/packages.R: message("Updating HTML index of packages in '.Library'")
@@ -1124,6 +1131,13 @@ msgstr ""
 #. R/help.R: gettext("\nUsing the first match ...")
 
 msgid "Using the first match ..."
+msgstr ""
+
+
+#: R/unix/mac.install.R: 0
+#. R/unix/mac.install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkgname))
+
+msgid "Valid signature is required, but package %s could not be successfully verified."
 msgstr ""
 
 
@@ -1212,9 +1226,9 @@ msgstr ""
 
 
 #: R/RSiteSearch.R: 0
-#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no affect on search results")
+#. R/RSiteSearch.R: warning("argument 'format' is deprecated and has no effect on search results")
 
-msgid "argument 'format' is deprecated and has no affect on search results"
+msgid "argument 'format' is deprecated and has no effect on search results"
 msgstr ""
 
 
@@ -2338,11 +2352,19 @@ msgstr ""
 
 
 #: R/unix/mac.install.R: 0
-#: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
-#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and MD5 sums checked\n",     sQuote(pkgname))
+#. R/unix/mac.install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkgname),     info$fingerprint, info$userid)
 
-msgid "package %s successfully unpacked and MD5 sums checked"
+msgid "package %s signature verified (%s %s)"
+msgstr ""
+
+
+#: R/unix/mac.install.R: 0
+#: R/windows/install.packages.R: 0
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "SHA256")
+#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "MD5")
+#. R/windows/install.packages.R: gettextf("package %s successfully unpacked and %s sums checked\n",     sQuote(pkgname), "MD5")
+
+msgid "package %s successfully unpacked and %s sums checked"
 msgstr ""
 
 
@@ -2589,6 +2611,13 @@ msgid "there is no 'libs' directory in package %s"
 msgstr ""
 
 
+#: R/SweaveGetSourceName.R: 0
+#. R/SweaveGetSourceName.R: stop("this function cannot be used from an interactive session")
+
+msgid "this function cannot be used from an interactive session"
+msgstr ""
+
+
 #: R/SweaveDrivers.R: 0
 #. R/SweaveDrivers.R: gettext("this may cause problems when running LaTeX")
 
@@ -2633,9 +2662,9 @@ msgstr ""
 
 
 #: R/packages2.R: 0
-#. R/packages2.R: stop("type == \"both\" can only be used on Windows or a CRAN build for macOS")
+#. R/packages2.R: stop("type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)")
 
-msgid "type == \"both\" can only be used on Windows or a CRAN build for macOS"
+msgid "type == \"both\" can only be used in R builds that have well-defined binary type (e.g., CRAN binary releases)"
 msgstr ""
 
 
@@ -2706,6 +2735,13 @@ msgid "unable to move temporary installation %s to %s, copying instead"
 msgstr ""
 
 
+#: R/SweaveGetSourceName.R: 0
+#. R/SweaveGetSourceName.R: stop("unrecognized Sweave call")
+
+msgid "unrecognized Sweave call"
+msgstr ""
+
+
 #: R/tar.R: 0
 #. R/tar.R: stop("unsupported entry type ", sQuote(ctype))
 
@@ -2717,6 +2753,13 @@ msgstr ""
 #. R/tar.R: gettextf("untar: using cmd = %s", sQuote(cmd))
 
 msgid "untar: using cmd = %s"
+msgstr ""
+
+
+#: R/SweaveDrivers.R: 0
+#. R/SweaveDrivers.R: gettextf("using default value %s", defval)
+
+msgid "using default value %s"
 msgstr ""
 
 

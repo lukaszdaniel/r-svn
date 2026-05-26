@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: 2025-12-27 18:34+0100\n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -83,13 +83,13 @@ msgstr "dane są stałe w obliczeniach przepustowości"
 msgid "invalid 'type' (%s) of argument"
 msgstr "niepoprawny 'type' (%s) argumentu"
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
-msgstr "żadne wejście nie określiło liczby przypadków"
-
-#: complete_cases.cpp:230
+#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "nie wszystkie argumenty mają tę samą długość"
+
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
+msgstr "żadne wejście nie określiło liczby przypadków"
 
 #: cov.cpp:566
 msgid "missing observations in cov/cor"
@@ -137,7 +137,7 @@ msgstr "odchylenie standardowe wynosi zero"
 
 #: deriv.cpp:157
 msgid "invalid form in unary minus check"
-msgstr "niepoprawna forma sprawdzania jednoargumentowej operacji minus"
+msgstr "niepoprawna forma podczas sprawdzania jednoargumentowej operacji minus"
 
 #: deriv.cpp:441
 msgid ""
@@ -182,15 +182,15 @@ msgstr "niepoprawne nazwy zmiennych"
 msgid "invalid tag"
 msgstr "niepoprawny znacznik"
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "traktowanie nieskończonych wartości jako NA"
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance(): niepoprawne 'p'"
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance(): niepoprawna odległość"
 
@@ -785,7 +785,7 @@ msgstr "niepoprawna wartość funkcji w optymalizatorze 'nlm'"
 
 #: optimize.cpp:573 optimize.cpp:588
 msgid "function value caching for optimization is seriously confused"
-msgstr "buforowanie wartości funkcji na potrzeby optymalizacji poważnie pomylone"
+msgstr "buforowanie wartości funkcji w celu optymalizacji jest poważnie mylące"
 
 #: optimize.cpp:603
 msgid "numeric parameter expected"
@@ -825,7 +825,7 @@ msgstr "niepoprawna granica iteracji w 'nlm'"
 
 #: optimize.cpp:658
 msgid "minimization function has no good digits in nlm"
-msgstr "funkcja minimalizacyjna nie ma dobrych cyfr w 'nlm'"
+msgstr "funkcja minimalizacji nie ma dobrych cyfr w 'nlm'"
 
 #: optimize.cpp:660
 msgid "no analytic gradient to check in nlm!"
@@ -862,7 +862,7 @@ msgstr "Bieżąca iteracja prawdopodobnie jest rozwiązaniem.\n"
 
 #: optimize.cpp:683
 msgid "Successive iterates within tolerance.\n"
-msgstr "Kolejna iteracja w granicach tolerancji.\n"
+msgstr "Kolejne iteracje są w granicach tolerancji.\n"
 
 #: optimize.cpp:687
 msgid "Last global step failed to locate a point lower than x.\n"
@@ -948,7 +948,7 @@ msgstr "wartość NA/NaN przy ewaluacji gradientu"
 #: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
-msgstr "Funkcja hesjana musi zwrócić kwadratową macierz liczbową rzędu %d"
+msgstr "Funkcja hesjanu musi zwrócić kwadratową macierz liczbową rzędu %d"
 
 #: port.cpp:355
 msgid "NA/NaN Hessian evaluation"
@@ -965,7 +965,7 @@ msgstr "'d' musi być niepustym wektorem liczbowym (podwójnym)"
 
 #: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
-msgstr "Kiedy jest zdefiniowany Hesjan musi być również zdefiniowany gradient"
+msgstr "Kiedy Hesjan jest zdefiniowany gradient musi również być zdefiniowany"
 
 #: port.cpp:412
 #, c-format

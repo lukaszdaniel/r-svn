@@ -30,7 +30,7 @@ msgstr "error tcl.\n"
 #: tcltk.cpp:212 tcltk.cpp:284 tcltk.cpp:300 tcltk.cpp:320 tcltk.cpp:340
 #: tcltk.cpp:414 tcltk.cpp:480 tcltk.cpp:535 tcltk.cpp:773
 msgid "invalid argument"
-msgstr "argumento inválido"
+msgstr "argumento no válido"
 
 #: tcltk.cpp:291
 msgid "no such variable"

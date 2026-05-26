@@ -158,6 +158,8 @@ msgstr "'names' numérique doit être >= 1"
 #: R/snow.R:0
 msgid "replacing registration for cluster type '%s'"
 msgstr ""
+"remplacement de l'enregistrement pour le type de cluster "
+"'%s'"
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0
@@ -168,7 +170,7 @@ msgstr "quelques résultats peuvent être manquants, repliés ou ont produit une
 #: R/snow.R:0
 #, fuzzy
 msgid "unknown cluster type: '%s'"
-msgstr "groupe de processus de type inconnu"
+msgstr "type de cluster inconnu : '%s'"
 
 #. R/clusterApply.R: stop("zero-length inputs cannot be mixed with those of non-zero length")
 #: R/clusterApply.R:0

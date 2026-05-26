@@ -22,7 +22,7 @@ msgstr "'X' deve ter dimnames nomeados"
 #. R/unix/mcfork.R: stop("'child' must be a valid child process")
 #: R/unix/mcfork.R:0
 msgid "'child' must be a valid child process"
-msgstr ""
+msgstr "'filho' deve ser um processo filho válido"
 
 #. R/unix/mcfork.R: stop("'children' must be a list of processes or a single process")
 #: R/unix/mcfork.R:0

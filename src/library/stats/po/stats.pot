@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: R 4.6.0\n"
+"Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:36+0100\n"
+"POT-Creation-Date: 2026-05-26 17:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,12 +85,12 @@ msgstr ""
 msgid "invalid 'type' (%s) of argument"
 msgstr ""
 
-#: complete_cases.cpp:122
-msgid "no input has determined the number of cases"
+#: complete_cases.cpp:49
+msgid "not all arguments have the same length"
 msgstr ""
 
-#: complete_cases.cpp:230
-msgid "not all arguments have the same length"
+#: complete_cases.cpp:123
+msgid "no input has determined the number of cases"
 msgstr ""
 
 #: cov.cpp:566
@@ -178,15 +178,15 @@ msgstr ""
 msgid "invalid tag"
 msgstr ""
 
-#: distance.cpp:153
+#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr ""
 
-#: distance.cpp:226
+#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr ""
 
-#: distance.cpp:230
+#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr ""
 

@@ -158,7 +158,7 @@ msgstr "числовые 'names' должны быть >= 1"
 #. R/snow.R: sprintf("replacing registration for cluster type '%s'", type)
 #: R/snow.R:0
 msgid "replacing registration for cluster type '%s'"
-msgstr ""
+msgstr "������� ��� ������������������ ��� �������� '%s'"
 
 #. R/unix/pvec.R: warning("some results may be missing, folded or caused an error")
 #: R/unix/pvec.R:0

@@ -17,7 +17,7 @@ msgstr ""
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
 #: R/pictex.R:0
 msgid "'%s' is deprecated."
-msgstr ""
+msgstr "'%s ' अब अमान्य है।"
 
 #. R/postscript.R: gettextf("'%s' must be a non-empty character string", "file")
 #: R/postscript.R:0
