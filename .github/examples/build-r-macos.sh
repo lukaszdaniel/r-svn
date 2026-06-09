@@ -13,9 +13,9 @@ export R_TEXI2DVICMD="emulation"
 # Clone and prep source code
 git clone --depth 1 https://github.com/r-devel/r-svn
 cd r-svn
-sed -i.bak 's|$(GIT) svn info|./.github/scripts/svn-info.sh|' Makefile.in
+sed -i.bak 's|$(GIT) svn info|./.github/scripts/git-svn-info.sh|' Makefile.in
 ./.github/scripts/wget-recommended.sh
-./.github/scripts/svn-info.sh
+./.github/scripts/git-svn-info.sh
 
 # Configure and build
 export PDFLATEX="${PWD}/.github/scripts/dummy"

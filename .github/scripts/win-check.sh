@@ -24,12 +24,12 @@ perl --version
 
 # Extra steps to prepare SVN build (rather than official tarball)
 cd "$(cygpath ${GITHUB_WORKSPACE})"
-sed -i.bak 's|$(GIT) svn info|./.github/scripts/svn-info.sh|' src/include/Makefile.win
+sed -i.bak 's|$(GIT) svn info|./.github/scripts/git-svn-info.sh|' src/include/Makefile.win
 curl -sSL https://curl.se/ca/cacert.pem > etc/curl-ca-bundle.crt
 #./tools/rsync-recommended
 ./.github/scripts/wget-recommended.sh
 ./.github/scripts/update-recommended.sh
-./.github/scripts/svn-info.sh
+./.github/scripts/git-svn-info.sh
 
 # Download the TCL bundle required by tcltk package
 curl -o tcltk.zip -L $tcltk
