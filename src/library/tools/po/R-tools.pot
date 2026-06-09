@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -331,34 +331,6 @@ msgstr ""
 #. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>")
 
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
-msgstr ""
-
-
-#: R/apitools.R: 0
-#. R/apitools.R: sprintf("API funcitons not declared in installed headers: %s",     paste(v$name, collapse = " "))
-
-msgid "API funcitons not declared in installed headers: %s"
-msgstr ""
-
-
-#: R/apitools.R: 0
-#. R/apitools.R: stop("API functions listed in nonAPI: %s", paste(v$name, collapse = " "))
-
-msgid "API functions listed in nonAPI: %s"
-msgstr ""
-
-
-#: R/apitools.R: 0
-#. R/apitools.R: stop("API variables listed in nonAPI: %s", paste(v$name, collapse = " "))
-
-msgid "API variables listed in nonAPI: %s"
-msgstr ""
-
-
-#: R/apitools.R: 0
-#. R/apitools.R: sprintf("API variables not in declared in installed headers: %s",     paste(v$name, collapse = " "))
-
-msgid "API variables not in declared in installed headers: %s"
 msgstr ""
 
 
@@ -789,13 +761,6 @@ msgstr ""
 #. R/Vignettes.R: gettextf("Error: Vignette '%s' is non-ASCII but has no declared encoding",     file)
 
 msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
-msgstr ""
-
-
-#: R/build.R: 0
-#. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
-
-msgid "Error: cannot rename directory to %s"
 msgstr ""
 
 
@@ -1233,35 +1198,6 @@ msgstr ""
 #. R/install.R: gettextf("NOTE: Skipping installation-time patch %s which seems to be already applied.\n",     purl)
 
 msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("NOTE: fixed library identification name ", sQuote(oldid))
-
-msgid "NOTE: fixed library identification name"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
-
-msgid "NOTE: fixed library path"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("NOTE: fixed path ", sQuote(old_paths[i]))
-
-msgid "NOTE: fixed path"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
-
-msgid "NOTE: fixed rpath"
 msgstr ""
 
 
@@ -2037,20 +1973,6 @@ msgid "WARNING: failed to apply patch %s"
 msgstr ""
 
 
-#: R/install.R: 0
-#. R/install.R: message("WARNING: failed to revert patch ", p, "\n")
-
-msgid "WARNING: failed to revert patch"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("WARNING: installation-time patches will not be applied, could not get the patches index")
-
-msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
-msgstr ""
-
-
 #: R/admin.R: 0
 #. R/admin.R: message("WARNING: malformed 'Depends' field in 'DESCRIPTION'")
 
@@ -2367,10 +2289,8 @@ msgstr ""
 
 
 #: R/dynamicHelp.R: 0
-#: R/install.R: 0
 #: R/packages.R: 0
 #. R/dynamicHelp.R: message(" done")
-#. R/install.R: message(" done")
 #. R/packages.R: message("done")
 
 msgid "done"
@@ -2514,13 +2434,6 @@ msgstr ""
 #. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
 
 msgid "httpd server disabled by R_DISABLE_HTTPD"
-msgstr ""
-
-
-#: R/apitools.R: 0
-#. R/apitools.R: sprintf("in API but marked for warnings: %s", paste(v$name, collapse = " "))
-
-msgid "in API but marked for warnings: %s"
 msgstr ""
 
 
@@ -2703,20 +2616,6 @@ msgid "no source files found"
 msgstr ""
 
 
-#: R/apitools.R: 0
-#. R/apitools.R: sprintf("non-API functions declared in installed headers: %s",     paste(v$name, collapse = " "))
-
-msgid "non-API functions declared in installed headers: %s"
-msgstr ""
-
-
-#: R/apitools.R: 0
-#. R/apitools.R: sprintf("non-API variables declared in installed headers: %s",     paste(v$name, collapse = " "))
-
-msgid "non-API variables declared in installed headers: %s"
-msgstr ""
-
-
 #: R/citation.R: 0
 #. R/citation.R: stop("non-ASCII input in a CITATION file without a declared encoding")
 
@@ -2867,13 +2766,6 @@ msgid "reading DESCRIPTION for package %s failed with message:\n  %s"
 msgstr ""
 
 
-#: R/install.R: 0
-#. R/install.R: message("  restoration failed\n")
-
-msgid "restoration failed"
-msgstr ""
-
-
 #: R/testing.R: 0
 #. R/testing.R: stop("  ", "results differ from reference results")
 
@@ -2934,13 +2826,6 @@ msgstr ""
 #. R/makeLazyLoad.R: stop("source must be an environment or a list")
 
 msgid "source must be an environment or a list"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("specified C++", use_cxxstd)
-
-msgid "specified C++"
 msgstr ""
 
 
@@ -3105,41 +2990,6 @@ msgstr ""
 #. R/update_packages.R: message("update_PACKAGES complete.")
 
 msgid "update_PACKAGES complete."
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("using C compiler: ", sQuote(cc_ver[1L]))
-
-msgid "using C compiler:"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("using C++", use_cxxstd)
-
-msgid "using C++"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("using C++ compiler: ", sQuote(cxx_ver[1L]))
-
-msgid "using C++ compiler:"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("using Fortran compiler: ", sQuote(fc_ver[1L]))
-
-msgid "using Fortran compiler:"
-msgstr ""
-
-
-#: R/install.R: 0
-#. R/install.R: message("using SDK: ", sQuote(sdk))
-
-msgid "using SDK:"
 msgstr ""
 
 

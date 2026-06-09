@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -242,26 +242,6 @@ msgstr ""
 #. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>")
 #: R/code2html.R:0
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
-msgstr ""
-
-#. R/apitools.R: sprintf("API funcitons not declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API funcitons not declared in installed headers: %s"
-msgstr ""
-
-#. R/apitools.R: stop("API functions listed in nonAPI: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API functions listed in nonAPI: %s"
-msgstr ""
-
-#. R/apitools.R: stop("API variables listed in nonAPI: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API variables listed in nonAPI: %s"
-msgstr ""
-
-#. R/apitools.R: sprintf("API variables not in declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API variables not in declared in installed headers: %s"
 msgstr ""
 
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
@@ -594,11 +574,6 @@ msgstr "Klaida vykdant tools::texi2pdf()"
 #: R/Vignettes.R:0
 msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
 msgstr "Klaida: Vinjetė '%s' yra ne ASCII, bet nėra paskelbta kodavimo"
-
-#. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
-#: R/build.R:0
-msgid "Error: cannot rename directory to %s"
-msgstr "Klaida: negalima pervardyti katalogo į %s"
 
 #. R/check.R: message("Error: no packages were specified")
 #: R/check.R:0
@@ -963,27 +938,6 @@ msgstr "PASTABA"
 #, fuzzy
 msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
 msgstr "tai atrodo kaip paketas -- ir yra nepilnas"
-
-#. R/install.R: message("NOTE: fixed library identification name ", sQuote(oldid))
-#: R/install.R:0
-msgid "NOTE: fixed library identification name"
-msgstr "PASTABA: fiksuotos bibliotekos identifikavimo pavadinimas"
-
-#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
-#: R/install.R:0
-msgid "NOTE: fixed library path"
-msgstr "PASTABA: fiksuotas bibliotekos kelias"
-
-#. R/install.R: message("NOTE: fixed path ", sQuote(old_paths[i]))
-#: R/install.R:0
-msgid "NOTE: fixed path"
-msgstr "PASTABA: fiksuotas kelias"
-
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
-#: R/install.R:0
-msgid "NOTE: fixed rpath"
-msgstr "PASTABA: fiksuotas rpath"
 
 #. R/QC.R: gettextf("Namespace in Imports field not imported from: %s",     sQuote(xx))
 #: R/QC.R:0
@@ -1558,16 +1512,6 @@ msgstr "Vinjetės:"
 msgid "WARNING: failed to apply patch %s"
 msgstr ""
 
-#. R/install.R: message("WARNING: failed to revert patch ", p, "\n")
-#: R/install.R:0
-msgid "WARNING: failed to revert patch"
-msgstr ""
-
-#. R/install.R: message("WARNING: installation-time patches will not be applied, could not get the patches index")
-#: R/install.R:0
-msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
-msgstr ""
-
 #. R/admin.R: message("WARNING: malformed 'Depends' field in 'DESCRIPTION'")
 #: R/admin.R:0
 msgid "WARNING: malformed 'Depends' field in 'DESCRIPTION'"
@@ -1798,9 +1742,8 @@ msgid "directory '%s' does not exist"
 msgstr "katalogas '%s' neegzistuoja"
 
 #. R/dynamicHelp.R: message(" done")
-#. R/install.R: message(" done")
 #. R/packages.R: message("done")
-#: R/dynamicHelp.R:0 R/install.R:0 R/packages.R:0
+#: R/dynamicHelp.R:0 R/packages.R:0
 msgid "done"
 msgstr "atlikta"
 
@@ -1910,11 +1853,6 @@ msgstr "generuojami derinimo simboliai (%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "httpd serverį išjungė R_DISABLE_HTTPD"
-
-#. R/apitools.R: sprintf("in API but marked for warnings: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "in API but marked for warnings: %s"
-msgstr ""
 
 #. R/utils.R: gettext("inferior call failed")
 #: R/utils.R:0
@@ -2044,16 +1982,6 @@ msgstr "nėra veikiančio serverio, kurį reikia sustabdyti"
 msgid "no source files found"
 msgstr "nerasta šaltinio failų"
 
-#. R/apitools.R: sprintf("non-API functions declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "non-API functions declared in installed headers: %s"
-msgstr ""
-
-#. R/apitools.R: sprintf("non-API variables declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "non-API variables declared in installed headers: %s"
-msgstr ""
-
 #. R/citation.R: stop("non-ASCII input in a CITATION file without a declared encoding")
 #: R/citation.R:0
 msgid "non-ASCII input in a CITATION file without a declared encoding"
@@ -2175,11 +2103,6 @@ msgstr ""
 "skaitymas DESCRIPTION paketui %s nepavyko su pranešimu:\n"
 "  %s"
 
-#. R/install.R: message("  restoration failed\n")
-#: R/install.R:0
-msgid "restoration failed"
-msgstr "įkėlimas nepavyko"
-
 #. R/testing.R: stop("  ", "results differ from reference results")
 #: R/testing.R:0
 msgid "results differ from reference results"
@@ -2229,11 +2152,6 @@ msgstr "šaltinių sąrašas turi turėti visų elementų pavadinimus"
 #: R/makeLazyLoad.R:0
 msgid "source must be an environment or a list"
 msgstr "šaltinis turi būti aplinka arba sąrašas"
-
-#. R/install.R: message("specified C++", use_cxxstd)
-#: R/install.R:0
-msgid "specified C++"
-msgstr ""
 
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
@@ -2352,31 +2270,6 @@ msgstr "nepalaikomas URL %s"
 #: R/update_packages.R:0
 msgid "update_PACKAGES complete."
 msgstr "update_PACKAGES baigtas."
-
-#. R/install.R: message("using C compiler: ", sQuote(cc_ver[1L]))
-#: R/install.R:0
-msgid "using C compiler:"
-msgstr ""
-
-#. R/install.R: message("using C++", use_cxxstd)
-#: R/install.R:0
-msgid "using C++"
-msgstr ""
-
-#. R/install.R: message("using C++ compiler: ", sQuote(cxx_ver[1L]))
-#: R/install.R:0
-msgid "using C++ compiler:"
-msgstr ""
-
-#. R/install.R: message("using Fortran compiler: ", sQuote(fc_ver[1L]))
-#: R/install.R:0
-msgid "using Fortran compiler:"
-msgstr ""
-
-#. R/install.R: message("using SDK: ", sQuote(sdk))
-#: R/install.R:0
-msgid "using SDK:"
-msgstr ""
 
 #. R/Vignettes.R: gettextf("vignette builder '%s' not found", pkg)
 #: R/Vignettes.R:0
@@ -2770,6 +2663,24 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nepavyko perkoduoti %s eilutės %s"
 msgstr[1] "nepavyko perkoduoti %s eilučių %s"
 msgstr[2] "nepavyko perkoduoti %s eilučių %s"
+
+#~ msgid "Error: cannot rename directory to %s"
+#~ msgstr "Klaida: negalima pervardyti katalogo į %s"
+
+#~ msgid "NOTE: fixed library identification name"
+#~ msgstr "PASTABA: fiksuotos bibliotekos identifikavimo pavadinimas"
+
+#~ msgid "NOTE: fixed library path"
+#~ msgstr "PASTABA: fiksuotas bibliotekos kelias"
+
+#~ msgid "NOTE: fixed path"
+#~ msgstr "PASTABA: fiksuotas kelias"
+
+#~ msgid "NOTE: fixed rpath"
+#~ msgstr "PASTABA: fiksuotas rpath"
+
+#~ msgid "restoration failed"
+#~ msgstr "įkėlimas nepavyko"
 
 #~ msgid ","
 #~ msgstr ","

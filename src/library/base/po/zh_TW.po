@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:55+0200\n"
+"POT-Creation-Date: 2026-06-09 17:54+0200\n"
 "PO-Revision-Date: 2025-07-06 14:46+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "DLL attempted to change FPU control word from %x to %x"
 msgstr "DLL 試圖把 FPU 控制詞從 %x 改成 %x"
 
-#: src/gnuwin32/dynload.cpp:168
+#: src/gnuwin32/dynload.cpp:170
 msgid "cannot get working directory"
 msgstr "找不到工作目錄"
 
@@ -185,7 +185,7 @@ msgstr "顯示 '%ls' 時發生問題"
 #: src/main/envir.cpp:2374 src/main/envir.cpp:2489 src/main/envir.cpp:2497
 #: src/main/envir.cpp:2774 src/main/envir.cpp:2887 src/main/envir.cpp:3152
 #: src/main/envir.cpp:3423 src/main/envir.cpp:3437 src/main/envir.cpp:3444
-#: src/main/envir.cpp:3462 src/main/envir.cpp:4307 src/main/errors.cpp:1278
+#: src/main/envir.cpp:3462 src/main/envir.cpp:4306 src/main/errors.cpp:1278
 #: src/main/errors.cpp:2825 src/main/eval.cpp:902 src/main/eval.cpp:912
 #: src/main/eval.cpp:915 src/main/eval.cpp:918 src/main/eval.cpp:926
 #: src/main/eval.cpp:933 src/main/grep.cpp:1293 src/main/grep.cpp:1298
@@ -1149,7 +1149,7 @@ msgstr ""
 msgid "'expressions' parameter invalid, allowed %d...%d"
 msgstr "'expressions' 參數無效，允許 %d...%d"
 
-#: src/main/String.cpp:128 src/main/envir.cpp:4563
+#: src/main/String.cpp:128 src/main/envir.cpp:4562
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "不明編碼：%d"
@@ -4467,7 +4467,7 @@ msgstr "無法切斷已經鎖定的繫結"
 msgid "no active binding for \"%s\""
 msgstr "沒有 \"%s\" 繫結"
 
-#: src/main/envir.cpp:3875 src/main/envir.cpp:4130
+#: src/main/envir.cpp:3875 src/main/envir.cpp:4129
 msgid "unknown op"
 msgstr "沒有這種運算子"
 
@@ -4491,73 +4491,73 @@ msgstr "命名空間已註冊"
 msgid "namespace not registered"
 msgstr "命名空間尚未註冊"
 
-#: src/main/envir.cpp:4176
+#: src/main/envir.cpp:4175
 #, fuzzy
 msgid "bad variable name"
 msgstr "不當的變數名稱"
 
-#: src/main/envir.cpp:4218
+#: src/main/envir.cpp:4217
 #, fuzzy
 msgid "bad namespace"
 msgstr "不當的命名空間名稱"
 
-#: src/main/envir.cpp:4252
+#: src/main/envir.cpp:4251
 msgid "bad value returned by 'getNamespaceName'"
 msgstr ""
 
-#: src/main/envir.cpp:4254
+#: src/main/envir.cpp:4253
 #, c-format
 msgid "'%s' is not an exported object from 'namespace:%s'"
 msgstr ""
 
-#: src/main/envir.cpp:4302
+#: src/main/envir.cpp:4301
 msgid "bad import environment argument"
 msgstr "不當導入環境引數"
 
-#: src/main/envir.cpp:4305
+#: src/main/envir.cpp:4304
 msgid "bad export environment argument"
 msgstr "不當導出環境引數"
 
-#: src/main/envir.cpp:4309
+#: src/main/envir.cpp:4308
 msgid "length of import and export names must match"
 msgstr "導入和導出名稱的長度必須相等"
 
-#: src/main/envir.cpp:4332
+#: src/main/envir.cpp:4331
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "導出的符號 '%s' 沒有值"
 
-#: src/main/envir.cpp:4365
+#: src/main/envir.cpp:4364
 #, fuzzy
 msgid "argument must be a hashed environment"
 msgstr "引數必須是環境物件"
 
-#: src/main/envir.cpp:4451
+#: src/main/envir.cpp:4450
 #, fuzzy
 msgid "invalid string was created"
 msgstr "無效的子字串引數"
 
-#: src/main/envir.cpp:4464 src/main/envir.cpp:4466
+#: src/main/envir.cpp:4463 src/main/envir.cpp:4465
 #, fuzzy, c-format
 msgid "invalid string %s"
 msgstr "無效的 UTF-8 字串"
 
-#: src/main/envir.cpp:4476
+#: src/main/envir.cpp:4475
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr "空值嵌入於字串中：'%s'"
 
-#: src/main/envir.cpp:4705
+#: src/main/envir.cpp:4704
 #, fuzzy
 msgid "argument 'nsenv' is not a namespace"
 msgstr "引數 'editor' 還沒有被設定"
 
-#: src/main/envir.cpp:4720
+#: src/main/envir.cpp:4719
 #, c-format
 msgid "Function %s in namespace %s has this body.\n"
 msgstr ""
 
-#: src/main/envir.cpp:4737
+#: src/main/envir.cpp:4736
 #, c-format
 msgid "S4 Method %s defined in namespace %s with signature %s has this body.\n"
 msgstr ""
@@ -10191,23 +10191,23 @@ msgstr "無法載入 X11 模組"
 msgid "X11 is not available"
 msgstr "無法使用 X11"
 
-#: src/unix/dynload.cpp:110
+#: src/unix/dynload.cpp:111
 msgid "Explicit local dynamic loading not supported on this platform. Using default."
 msgstr "本系統不支援明確的本地動態載入。使用預設值。"
 
-#: src/unix/dynload.cpp:111
+#: src/unix/dynload.cpp:112
 msgid "Explicit global dynamic loading not supported on this platform. Using default."
 msgstr "本系統不支援明確的全局動態載入。使用預設值。"
 
-#: src/unix/dynload.cpp:112
+#: src/unix/dynload.cpp:113
 msgid "Explicit non-lazy dynamic loading not supported on this platform. Using default."
 msgstr "本系統不支援明確的非緩慢動態載入。使用預設值。"
 
-#: src/unix/dynload.cpp:113
+#: src/unix/dynload.cpp:114
 msgid "Explicit lazy dynamic loading not supported on this platform. Using default."
 msgstr "本系統不支援明確的緩慢動態載入。使用預設值。"
 
-#: src/unix/dynload.cpp:212
+#: src/unix/dynload.cpp:213
 msgid "cannot get working directory!"
 msgstr "找不到工作目錄"
 

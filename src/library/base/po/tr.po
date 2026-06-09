@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:55+0200\n"
+"POT-Creation-Date: 2026-06-09 17:54+0200\n"
 "PO-Revision-Date: 2025-07-06 14:47+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -89,7 +89,7 @@ msgstr ""
 msgid "DLL attempted to change FPU control word from %x to %x"
 msgstr "DLL FPU kontrol kelimesi %x'i %x ile değiştirmek istedi"
 
-#: src/gnuwin32/dynload.cpp:168
+#: src/gnuwin32/dynload.cpp:170
 msgid "cannot get working directory"
 msgstr "çalışma dizini alınamadı"
 
@@ -188,7 +188,7 @@ msgstr "'%ls' gösterilirken hata"
 #: src/main/envir.cpp:2374 src/main/envir.cpp:2489 src/main/envir.cpp:2497
 #: src/main/envir.cpp:2774 src/main/envir.cpp:2887 src/main/envir.cpp:3152
 #: src/main/envir.cpp:3423 src/main/envir.cpp:3437 src/main/envir.cpp:3444
-#: src/main/envir.cpp:3462 src/main/envir.cpp:4307 src/main/errors.cpp:1278
+#: src/main/envir.cpp:3462 src/main/envir.cpp:4306 src/main/errors.cpp:1278
 #: src/main/errors.cpp:2825 src/main/eval.cpp:902 src/main/eval.cpp:912
 #: src/main/eval.cpp:915 src/main/eval.cpp:918 src/main/eval.cpp:926
 #: src/main/eval.cpp:933 src/main/grep.cpp:1293 src/main/grep.cpp:1298
@@ -1156,7 +1156,7 @@ msgstr ""
 msgid "'expressions' parameter invalid, allowed %d...%d"
 msgstr "'expressions' parametresi geçersiz, izin verilen %d...%d"
 
-#: src/main/String.cpp:128 src/main/envir.cpp:4563
+#: src/main/String.cpp:128 src/main/envir.cpp:4562
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "bilinmeyen kodlama: %d"
@@ -4526,7 +4526,7 @@ msgstr "kilitlenmiş bağlayıcı ayrılamaz"
 msgid "no active binding for \"%s\""
 msgstr "\"%s\" için bağlayıcı yok"
 
-#: src/main/envir.cpp:3875 src/main/envir.cpp:4130
+#: src/main/envir.cpp:3875 src/main/envir.cpp:4129
 msgid "unknown op"
 msgstr "bilinmeyen op"
 
@@ -4553,73 +4553,73 @@ msgstr "isim alanı halihazırda kayıtlı"
 msgid "namespace not registered"
 msgstr "isim alanı kayıtlı değil"
 
-#: src/main/envir.cpp:4176
+#: src/main/envir.cpp:4175
 #, fuzzy
 msgid "bad variable name"
 msgstr "hatalı değişken isimleri"
 
-#: src/main/envir.cpp:4218
+#: src/main/envir.cpp:4217
 #, fuzzy
 msgid "bad namespace"
 msgstr "hatalı"
 
-#: src/main/envir.cpp:4252
+#: src/main/envir.cpp:4251
 msgid "bad value returned by 'getNamespaceName'"
 msgstr ""
 
-#: src/main/envir.cpp:4254
+#: src/main/envir.cpp:4253
 #, c-format
 msgid "'%s' is not an exported object from 'namespace:%s'"
 msgstr ""
 
-#: src/main/envir.cpp:4302
+#: src/main/envir.cpp:4301
 msgid "bad import environment argument"
 msgstr "hatalı içe aktarma ortam argümanı"
 
-#: src/main/envir.cpp:4305
+#: src/main/envir.cpp:4304
 msgid "bad export environment argument"
 msgstr "hatalı dışa aktarma argümanı"
 
-#: src/main/envir.cpp:4309
+#: src/main/envir.cpp:4308
 msgid "length of import and export names must match"
 msgstr "içe ve dışa aktarma isimleri uzunlukları eşit olmalıdır"
 
-#: src/main/envir.cpp:4332
+#: src/main/envir.cpp:4331
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "'%s' dışa aktarılmış sembolünün değeri yok"
 
-#: src/main/envir.cpp:4365
+#: src/main/envir.cpp:4364
 #, fuzzy
 msgid "argument must be a hashed environment"
 msgstr "argüman bir ortam olmalıdır"
 
-#: src/main/envir.cpp:4451
+#: src/main/envir.cpp:4450
 #, fuzzy
 msgid "invalid string was created"
 msgstr "geçersiz altmetin argümanı/argümanları"
 
-#: src/main/envir.cpp:4464 src/main/envir.cpp:4466
+#: src/main/envir.cpp:4463 src/main/envir.cpp:4465
 #, fuzzy, c-format
 msgid "invalid string %s"
 msgstr "geçersiz UTF-8 dizesi 'old'"
 
-#: src/main/envir.cpp:4476
+#: src/main/envir.cpp:4475
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr "'%s' dizesi gömülü nul"
 
-#: src/main/envir.cpp:4705
+#: src/main/envir.cpp:4704
 #, fuzzy
 msgid "argument 'nsenv' is not a namespace"
 msgstr "'editor' argümanı belirlenmemiş"
 
-#: src/main/envir.cpp:4720
+#: src/main/envir.cpp:4719
 #, c-format
 msgid "Function %s in namespace %s has this body.\n"
 msgstr ""
 
-#: src/main/envir.cpp:4737
+#: src/main/envir.cpp:4736
 #, c-format
 msgid "S4 Method %s defined in namespace %s with signature %s has this body.\n"
 msgstr ""
@@ -10329,23 +10329,23 @@ msgstr "X11 modülü yüklenemiyor"
 msgid "X11 is not available"
 msgstr "X11 mevcut değil"
 
-#: src/unix/dynload.cpp:110
+#: src/unix/dynload.cpp:111
 msgid "Explicit local dynamic loading not supported on this platform. Using default."
 msgstr "Açık yerel dinamik yükleme bu platformda desteklenmiyor. Varsayılan kullanılacak"
 
-#: src/unix/dynload.cpp:111
+#: src/unix/dynload.cpp:112
 msgid "Explicit global dynamic loading not supported on this platform. Using default."
 msgstr "Açık global dinamik yükleme bu platformda desteklenmiyor. Varsayılan kullanılacak"
 
-#: src/unix/dynload.cpp:112
+#: src/unix/dynload.cpp:113
 msgid "Explicit non-lazy dynamic loading not supported on this platform. Using default."
 msgstr "Açık ağır olmayan dinamik yükleme bu platformda desteklenmiyor. Varsayılan kullanılacak"
 
-#: src/unix/dynload.cpp:113
+#: src/unix/dynload.cpp:114
 msgid "Explicit lazy dynamic loading not supported on this platform. Using default."
 msgstr "Açık ağır dinamik yükleme bu platformda desteklenmiyor. Varsayılan kullanılacak"
 
-#: src/unix/dynload.cpp:212
+#: src/unix/dynload.cpp:213
 msgid "cannot get working directory!"
 msgstr "çalışma dizini alınamıyor!"
 

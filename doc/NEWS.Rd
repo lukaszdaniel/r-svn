@@ -49,11 +49,12 @@
     }
   }
 
-  \subsection{Installation}{
+  \subsection{Installation on a Unix-Alike}{
     \itemize{
-      \item Building R, e.g., on Ubuntu 26.04, using \command{--package-metadata}
-        needs to use a different \command{sed} separator than \code{:},
-	fixing \PR{19060}, thanks to \I{Jeroen Ooms} and \I{Dirk Eddelbuettel}.
+      \item Installing \R (creating \file{libR.pc}) no longer fails with a
+      \command{sed} error when the new \option{--package-metadata} linker flag
+      is involved; an \samp{s}-command delimiter other than \samp{:} was needed
+      (\PR{19060}, thanks to \I{Jeroen Ooms} and \I{Dirk Eddelbuettel}).
     }
   }
 
@@ -78,7 +79,7 @@
       \I{Suharto Anggono} in \PR{18989}.
 
       \item In an \R installation without \acronym{NLS}, e.g., from
-      \command{--disable-nls} configuration, the C \code{ngettext()}
+      \option{--disable-nls} configuration, the C \code{ngettext()}
       replacement now also keeps plural for \dQuote{0 things}, thanks to
       \I{Michael Chirico}'s \PR{19065}.
 
@@ -104,14 +105,27 @@
       addressing bugs \PR{18035} and \PR{19071}, in order to deal with
       both ties of almost equal numbers and almost zeros of differences.
 
-      \item When a source package \file{foo/} folder contains broken
-      symlinks, \command{R CMD build foo} now succeeds, omitting these,
-      thus fixing \PR{18186}, thanks to \I{Ivan Krylov} and others, notably
-      \I{Jenny Brian} and \I{R Dev Day @ useR! 2025} contributors.
+      \item Exclude patterns from \file{.Rbuildignore} are now processed
+      \emph{before} preparing the package directory for the tarball,
+      avoiding redundant file copies from the source directory (\PR{17549}).
+      In particular, when a source package \file{foo/} folder contains broken
+      symlinks matching an exclude pattern, \command{R CMD build foo}
+      now succeeds, omitting these, thus fixing \PR{18186}.  (Thanks to
+      \I{Ivan Krylov} and others, notably \I{Jenny Brian} and \I{R Dev
+      Day @ useR! 2025} contributors.)
 
       \item Overly long \code{dyn.load()} error messages (C level
       \code{dlerror()}), should no longer corrupt its state, thanks to
       \I{Ivan Krylov}'s \PR{19029} report and patch.
+
+      \item Data part of \code{getGenerics()} listed package names for
+      generic functions defined in more than one package.  Now it
+      lists generic function names, as intended.  Thanks to \I{Michael
+      Chirico} for report and patch proposal (\PR{19080}).
+
+      \item In \pkg{methods}, \code{as()} now correctly coerces S4
+      objects to S4 superclasses extending old-style classes, instead
+      of returning only the S3 part.
     }
   }
 }
@@ -162,6 +176,9 @@
       \item \code{wilcox.test(x, exact=FALSE, correct = k)}'s p-value
       computation got a missing \code{dnorm(z)} factor, and so did the
       2-sample case, in addition to more fixes.
+
+      \item \code{as.matrix(<POSIXlt>)} again produces a \emph{numeric}
+      matrix, thanks to \I{Suharto Anggono}'s \PR{19084}.
     }
   }
 }
@@ -425,7 +442,7 @@
       \command{gpg} tool (or equivalent tool named in the \code{GPG}
       environment variable) has to be available for signing and
       verification to work. \command{R CMD INSTALL --sign} can be used to
-      sign binary packages, including its use with \code{--build}.
+      sign binary packages, including its use with \option{--build}.
       System-wide GnuPG keyrings for the \R installation
       can be placed in \code{\var{R_HOME}/etc/keyrings} as files with
       \file{.gpg} extensions and will be checked first before consulting
@@ -811,7 +828,7 @@
       consistently, fixing \PR{18845}.
 
       \item When \code{browser()} is active or when otherwise debugging, \R code
-      such as \code{if(TRUE)} now longer triggers a new browser level, fixing
+      such as \code{if(TRUE)} no longer triggers a new browser level, fixing
       \PR{18885} (differently than the fix for \PR{15770}), with thanks to
       \I{Ivan Krylov}.
 

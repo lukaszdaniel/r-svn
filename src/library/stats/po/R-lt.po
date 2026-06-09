@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -72,12 +72,6 @@ msgstr ""
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "'%s' negali būti '%s' tipo"
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-#, fuzzy
-msgid "'%s' is not implemented yet"
-msgstr "'%s' tipas neįdiegtas"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -731,6 +725,11 @@ msgstr "'probs' už [0,1]"
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
 msgstr "'proj' netaikoma keliems atsakymams"
+
+#. R/fisher.test.R: stop("'pval.only' and 'conf.int' may not both be true")
+#: R/fisher.test.R:0
+msgid "'pval.only' and 'conf.int' may not both be true"
+msgstr ""
 
 #. R/kernel.R: stop("'r' is less than 0")
 #: R/kernel.R:0
@@ -1578,11 +1577,6 @@ msgstr ""
 msgid "X does not define a subspace of M"
 msgstr "X neapibrėžia M poerdvio"
 
-#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
-#: R/fisher.test.R:0
-msgid "`pval.only` and `conf.int` may not both be true"
-msgstr ""
-
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2363,11 +2357,6 @@ msgid ""
 msgstr ""
 "reikšmės (svertai) yra visi = %s\n"
 "ir nėra faktoriaus prediktoriaus; jokio brėžinio Nr. 5"
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-msgid "hatvalues() for nls(*, algorithm='plinear')"
-msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")
@@ -4761,6 +4750,10 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "naudojant %d/%d eilutę iš kompleksinio parinkimo"
 msgstr[1] "naudojant %d/%d eilutes iš kompleksinio parinkimo"
 msgstr[2] "naudojant %d/%d eilučių iš kompleksinio parinkimo"
+
+#, fuzzy
+#~ msgid "'%s' is not implemented yet"
+#~ msgstr "'%s' tipas neįdiegtas"
 
 #~ msgid "'formula' missing or invalid"
 #~ msgstr "trūksta 'formula' arba ji neteisinga"

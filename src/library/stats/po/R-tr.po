@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Murat Alkan <muratalk@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -83,12 +83,6 @@ msgstr ""
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "'%s' '%s'in bir modu olamaz"
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-#, fuzzy
-msgid "'%s' is not implemented yet"
-msgstr "tip '%s' henüz tanımlanmadı"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -758,6 +752,11 @@ msgstr "'probs' [0,1] dışında"
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
+msgstr ""
+
+#. R/fisher.test.R: stop("'pval.only' and 'conf.int' may not both be true")
+#: R/fisher.test.R:0
+msgid "'pval.only' and 'conf.int' may not both be true"
 msgstr ""
 
 #. R/kernel.R: stop("'r' is less than 0")
@@ -1619,11 +1618,6 @@ msgstr ""
 msgid "X does not define a subspace of M"
 msgstr ""
 
-#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
-#: R/fisher.test.R:0
-msgid "`pval.only` and `conf.int` may not both be true"
-msgstr ""
-
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2404,11 +2398,6 @@ msgstr ""
 msgid ""
 "hat values (leverages) are all = %s\n"
 " and there are no factor predictors; no plot no. 5"
-msgstr ""
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-msgid "hatvalues() for nls(*, algorithm='plinear')"
 msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
@@ -4817,6 +4806,10 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
 msgstr[1] ""
+
+#, fuzzy
+#~ msgid "'%s' is not implemented yet"
+#~ msgstr "tip '%s' henüz tanımlanmadı"
 
 #~ msgid "'formula' missing or invalid"
 #~ msgstr "'formula' eksik veya geçersiz"

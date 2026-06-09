@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -77,12 +77,6 @@ msgstr "%s; überlege predict(., rankdeficient=\\\"NA\\\")"
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "'%s' kann nicht von Modus '%s' sein"
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-#, fuzzy
-msgid "'%s' is not implemented yet"
-msgstr "Typ '%s' noch nicht implementiert"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -733,6 +727,11 @@ msgstr "'probs' nicht in [0, 1]"
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
 msgstr "'proj' ist für multiple Zielgrößen nicht implementiert"
+
+#. R/fisher.test.R: stop("'pval.only' and 'conf.int' may not both be true")
+#: R/fisher.test.R:0
+msgid "'pval.only' and 'conf.int' may not both be true"
+msgstr ""
 
 #. R/kernel.R: stop("'r' is less than 0")
 #: R/kernel.R:0
@@ -1581,11 +1580,6 @@ msgstr "Warte auf das Profiling ..."
 msgid "X does not define a subspace of M"
 msgstr "x definiert keinen Unterraum von M"
 
-#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
-#: R/fisher.test.R:0
-msgid "`pval.only` and `conf.int` may not both be true"
-msgstr ""
-
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2357,11 +2351,6 @@ msgid ""
 msgstr ""
 "Schätzwerte sind alle = %s\n"
 "und es gibt keine faktoriellen Prädiktoren; keinen Plot Nr. 5"
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-msgid "hatvalues() for nls(*, algorithm='plinear')"
-msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")
@@ -4724,6 +4713,10 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "benutze %d/%d Zeile aus einem kombinierten Fit"
 msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
+
+#, fuzzy
+#~ msgid "'%s' is not implemented yet"
+#~ msgstr "Typ '%s' noch nicht implementiert"
 
 #~ msgid "'formula' missing or invalid"
 #~ msgstr "'formula' fehlt oder unzulässig"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: 2025-07-06 16:07+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -274,26 +274,6 @@ msgstr "<p>Per veure la sortida al navegador, cal instal·lar el paquet <a href=
 #, fuzzy
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
 msgstr "<p>Per veure la sortida al navegador, cal instal·lar el paquet <a href='https://CRAN.R-project.org/package=knitr'>knitr</a>.</p>"
-
-#. R/apitools.R: sprintf("API funcitons not declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API funcitons not declared in installed headers: %s"
-msgstr ""
-
-#. R/apitools.R: stop("API functions listed in nonAPI: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API functions listed in nonAPI: %s"
-msgstr ""
-
-#. R/apitools.R: stop("API variables listed in nonAPI: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API variables listed in nonAPI: %s"
-msgstr ""
-
-#. R/apitools.R: sprintf("API variables not in declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API variables not in declared in installed headers: %s"
-msgstr ""
 
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
 #: R/update_packages.R:0
@@ -652,12 +632,6 @@ msgstr "Error en executar tools::texi2pdf()"
 #, fuzzy
 msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
 msgstr "Error: la vinyeta «%s» no és ASCII però no té codificació declarada"
-
-#. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
-#: R/build.R:0
-#, fuzzy
-msgid "Error: cannot rename directory to %s"
-msgstr "Error: no es pot canviar el nom del directori a %s"
 
 #. R/check.R: message("Error: no packages were specified")
 #: R/check.R:0
@@ -1054,31 +1028,6 @@ msgstr "NOTA"
 #, fuzzy
 msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
 msgstr "NOTA: s'omet el pedaç de temps d'instal·lació"
-
-#. R/install.R: message("NOTE: fixed library identification name ", sQuote(oldid))
-#: R/install.R:0
-#, fuzzy
-msgid "NOTE: fixed library identification name"
-msgstr "NOTA: nom d'identificació fix de la biblioteca"
-
-#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
-#: R/install.R:0
-#, fuzzy
-msgid "NOTE: fixed library path"
-msgstr "NOTA: s'ha esmenat el camí de la biblioteca"
-
-#. R/install.R: message("NOTE: fixed path ", sQuote(old_paths[i]))
-#: R/install.R:0
-#, fuzzy
-msgid "NOTE: fixed path"
-msgstr "NOTA: camí fix"
-
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
-#: R/install.R:0
-#, fuzzy
-msgid "NOTE: fixed rpath"
-msgstr "NOTA: rpath fix"
 
 #. R/QC.R: gettextf("Namespace in Imports field not imported from: %s",     sQuote(xx))
 #: R/QC.R:0
@@ -1709,18 +1658,6 @@ msgstr "Vinyetes:"
 msgid "WARNING: failed to apply patch %s"
 msgstr "AVÍS: no s'ha pogut aplicar el pedaç"
 
-#. R/install.R: message("WARNING: failed to revert patch ", p, "\n")
-#: R/install.R:0
-#, fuzzy
-msgid "WARNING: failed to revert patch"
-msgstr "AVÍS: no s'ha pogut revertir el pedaç"
-
-#. R/install.R: message("WARNING: installation-time patches will not be applied, could not get the patches index")
-#: R/install.R:0
-#, fuzzy
-msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
-msgstr "AVÍS: els pedaços en temps d'instal·lació no s'aplicaran, no s'ha pogut obtenir l'índex de pedaços"
-
 #. R/admin.R: message("WARNING: malformed 'Depends' field in 'DESCRIPTION'")
 #: R/admin.R:0
 #, fuzzy
@@ -1982,9 +1919,8 @@ msgid "directory '%s' does not exist"
 msgstr "el directori «%s» no existeix"
 
 #. R/dynamicHelp.R: message(" done")
-#. R/install.R: message(" done")
 #. R/packages.R: message("done")
-#: R/dynamicHelp.R:0 R/install.R:0 R/packages.R:0
+#: R/dynamicHelp.R:0 R/packages.R:0
 msgid "done"
 msgstr "fet"
 
@@ -2105,11 +2041,6 @@ msgstr "s'estan generant els símbols de depuració (%s)"
 #, fuzzy
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "El servidor httpd està desactivat per RDISABLEHTTPD"
-
-#. R/apitools.R: sprintf("in API but marked for warnings: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "in API but marked for warnings: %s"
-msgstr ""
 
 #. R/utils.R: gettext("inferior call failed")
 #: R/utils.R:0
@@ -2260,16 +2191,6 @@ msgstr "no hi ha cap servidor en execució per aturar"
 msgid "no source files found"
 msgstr "no s'ha trobat cap fitxer font"
 
-#. R/apitools.R: sprintf("non-API functions declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "non-API functions declared in installed headers: %s"
-msgstr ""
-
-#. R/apitools.R: sprintf("non-API variables declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "non-API variables declared in installed headers: %s"
-msgstr ""
-
 #. R/citation.R: stop("non-ASCII input in a CITATION file without a declared encoding")
 #: R/citation.R:0
 #, fuzzy
@@ -2404,12 +2325,6 @@ msgstr ""
 "la lectura de la descripció del paquet %s ha fallat amb el missatge:\n"
 "  %s"
 
-#. R/install.R: message("  restoration failed\n")
-#: R/install.R:0
-#, fuzzy
-msgid "restoration failed"
-msgstr "ha fallat la restauració"
-
 #. R/testing.R: stop("  ", "results differ from reference results")
 #: R/testing.R:0
 #, fuzzy
@@ -2467,11 +2382,6 @@ msgstr "la llista d'origen ha de tenir noms per a tots els elements"
 #, fuzzy
 msgid "source must be an environment or a list"
 msgstr "l'origen ha de ser un entorn o una llista"
-
-#. R/install.R: message("specified C++", use_cxxstd)
-#: R/install.R:0
-msgid "specified C++"
-msgstr ""
 
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
@@ -2608,36 +2518,6 @@ msgstr "URL no compatible %s"
 #, fuzzy
 msgid "update_PACKAGES complete."
 msgstr "s'han completat els paquets d'actualització."
-
-#. R/install.R: message("using C compiler: ", sQuote(cc_ver[1L]))
-#: R/install.R:0
-#, fuzzy
-msgid "using C compiler:"
-msgstr "utilitzant el compilador de C:"
-
-#. R/install.R: message("using C++", use_cxxstd)
-#: R/install.R:0
-#, fuzzy
-msgid "using C++"
-msgstr "utilitzant C++"
-
-#. R/install.R: message("using C++ compiler: ", sQuote(cxx_ver[1L]))
-#: R/install.R:0
-#, fuzzy
-msgid "using C++ compiler:"
-msgstr "utilitzant el compilador C++:"
-
-#. R/install.R: message("using Fortran compiler: ", sQuote(fc_ver[1L]))
-#: R/install.R:0
-#, fuzzy
-msgid "using Fortran compiler:"
-msgstr "utilitzant el compilador Fortran:"
-
-#. R/install.R: message("using SDK: ", sQuote(sdk))
-#: R/install.R:0
-#, fuzzy
-msgid "using SDK:"
-msgstr "s'està utilitzant SDK:"
 
 #. R/Vignettes.R: gettextf("vignette builder '%s' not found", pkg)
 #: R/Vignettes.R:0
@@ -3017,6 +2897,58 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "no s'ha pogut tornar a codificar la línia %s %s"
 msgstr[1] "no s'ha pogut tornar a codificar %s línies %s"
+
+#, fuzzy
+#~ msgid "Error: cannot rename directory to %s"
+#~ msgstr "Error: no es pot canviar el nom del directori a %s"
+
+#, fuzzy
+#~ msgid "NOTE: fixed library identification name"
+#~ msgstr "NOTA: nom d'identificació fix de la biblioteca"
+
+#, fuzzy
+#~ msgid "NOTE: fixed library path"
+#~ msgstr "NOTA: s'ha esmenat el camí de la biblioteca"
+
+#, fuzzy
+#~ msgid "NOTE: fixed path"
+#~ msgstr "NOTA: camí fix"
+
+#, fuzzy
+#~ msgid "NOTE: fixed rpath"
+#~ msgstr "NOTA: rpath fix"
+
+#, fuzzy
+#~ msgid "WARNING: failed to revert patch"
+#~ msgstr "AVÍS: no s'ha pogut revertir el pedaç"
+
+#, fuzzy
+#~ msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
+#~ msgstr "AVÍS: els pedaços en temps d'instal·lació no s'aplicaran, no s'ha pogut obtenir l'índex de pedaços"
+
+#, fuzzy
+#~ msgid "restoration failed"
+#~ msgstr "ha fallat la restauració"
+
+#, fuzzy
+#~ msgid "using C compiler:"
+#~ msgstr "utilitzant el compilador de C:"
+
+#, fuzzy
+#~ msgid "using C++"
+#~ msgstr "utilitzant C++"
+
+#, fuzzy
+#~ msgid "using C++ compiler:"
+#~ msgstr "utilitzant el compilador C++:"
+
+#, fuzzy
+#~ msgid "using Fortran compiler:"
+#~ msgstr "utilitzant el compilador Fortran:"
+
+#, fuzzy
+#~ msgid "using SDK:"
+#~ msgstr "s'està utilitzant SDK:"
 
 #~ msgid ","
 #~ msgstr ","

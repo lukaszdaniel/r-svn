@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:55+0200\n"
+"POT-Creation-Date: 2026-06-09 17:54+0200\n"
 "PO-Revision-Date: 2025-07-06 14:56+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -86,7 +86,7 @@ msgstr ""
 msgid "DLL attempted to change FPU control word from %x to %x"
 msgstr "DLL이 FPU 컨트롤 단어를 %x 에서 %x로 변경을 시도했습니다"
 
-#: src/gnuwin32/dynload.cpp:168
+#: src/gnuwin32/dynload.cpp:170
 msgid "cannot get working directory"
 msgstr "작업디렉토리를 가져올 수 없습니다"
 
@@ -185,7 +185,7 @@ msgstr "'%ls'를 표시하는데 문제가 발생했습니다"
 #: src/main/envir.cpp:2374 src/main/envir.cpp:2489 src/main/envir.cpp:2497
 #: src/main/envir.cpp:2774 src/main/envir.cpp:2887 src/main/envir.cpp:3152
 #: src/main/envir.cpp:3423 src/main/envir.cpp:3437 src/main/envir.cpp:3444
-#: src/main/envir.cpp:3462 src/main/envir.cpp:4307 src/main/errors.cpp:1278
+#: src/main/envir.cpp:3462 src/main/envir.cpp:4306 src/main/errors.cpp:1278
 #: src/main/errors.cpp:2825 src/main/eval.cpp:902 src/main/eval.cpp:912
 #: src/main/eval.cpp:915 src/main/eval.cpp:918 src/main/eval.cpp:926
 #: src/main/eval.cpp:933 src/main/grep.cpp:1293 src/main/grep.cpp:1298
@@ -1145,7 +1145,7 @@ msgstr ""
 msgid "'expressions' parameter invalid, allowed %d...%d"
 msgstr "유효하지 않은 'expression' 파라미터입니다.  %d...%d만을 허용합니다"
 
-#: src/main/String.cpp:128 src/main/envir.cpp:4563
+#: src/main/String.cpp:128 src/main/envir.cpp:4562
 #, c-format
 msgid "unknown encoding: %d"
 msgstr "알수없는 인코딩입니다: %d"
@@ -4455,7 +4455,7 @@ msgstr "잠겨있는 바인딩을 떼어낼 수 없습니다"
 msgid "no active binding for \"%s\""
 msgstr "\"%s\"에 대한 바인딩이 아님"
 
-#: src/main/envir.cpp:3875 src/main/envir.cpp:4130
+#: src/main/envir.cpp:3875 src/main/envir.cpp:4129
 msgid "unknown op"
 msgstr "알 수 없는 op입니다"
 
@@ -4479,73 +4479,73 @@ msgstr "이미 등록되어 있는 네임스페이스입니다"
 msgid "namespace not registered"
 msgstr "등록되어 있지 않은 네임스페이스입니다1"
 
-#: src/main/envir.cpp:4176
+#: src/main/envir.cpp:4175
 #, fuzzy
 msgid "bad variable name"
 msgstr "변수명들이 잘못되었습니다"
 
-#: src/main/envir.cpp:4218
+#: src/main/envir.cpp:4217
 #, fuzzy
 msgid "bad namespace"
 msgstr "잘못된 네임스페이스명입니다"
 
-#: src/main/envir.cpp:4252
+#: src/main/envir.cpp:4251
 msgid "bad value returned by 'getNamespaceName'"
 msgstr ""
 
-#: src/main/envir.cpp:4254
+#: src/main/envir.cpp:4253
 #, c-format
 msgid "'%s' is not an exported object from 'namespace:%s'"
 msgstr ""
 
-#: src/main/envir.cpp:4302
+#: src/main/envir.cpp:4301
 msgid "bad import environment argument"
 msgstr "불러오기 인바이런먼트 인자가 잘못되었습니다"
 
-#: src/main/envir.cpp:4305
+#: src/main/envir.cpp:4304
 msgid "bad export environment argument"
 msgstr "내보내기 인바이런먼트 인자가 잘못되었습니다"
 
-#: src/main/envir.cpp:4309
+#: src/main/envir.cpp:4308
 msgid "length of import and export names must match"
 msgstr "불러오기와 내보내기의 이름들의 길이는 반드시 일치해야 합니다"
 
-#: src/main/envir.cpp:4332
+#: src/main/envir.cpp:4331
 #, c-format
 msgid "exported symbol '%s' has no value"
 msgstr "내보내어진 심볼 '%s'이 값을 가지고 있지 않습니다"
 
-#: src/main/envir.cpp:4365
+#: src/main/envir.cpp:4364
 #, fuzzy
 msgid "argument must be a hashed environment"
 msgstr "인자는 반드시 인바이런먼트이어야 합니다"
 
-#: src/main/envir.cpp:4451
+#: src/main/envir.cpp:4450
 #, fuzzy
 msgid "invalid string was created"
 msgstr "유효하지 않은 부분문자열 인자들입니다"
 
-#: src/main/envir.cpp:4464 src/main/envir.cpp:4466
+#: src/main/envir.cpp:4463 src/main/envir.cpp:4465
 #, fuzzy, c-format
 msgid "invalid string %s"
 msgstr "잘못된 UTF-8 문자열입니다"
 
-#: src/main/envir.cpp:4476
+#: src/main/envir.cpp:4475
 #, c-format
 msgid "embedded nul in string: '%s'"
 msgstr "문자열에 nul이 포함되어 있습니다: '%s'"
 
-#: src/main/envir.cpp:4705
+#: src/main/envir.cpp:4704
 #, fuzzy
 msgid "argument 'nsenv' is not a namespace"
 msgstr "인자 'editor'가 설정되어 있지 않습니다"
 
-#: src/main/envir.cpp:4720
+#: src/main/envir.cpp:4719
 #, c-format
 msgid "Function %s in namespace %s has this body.\n"
 msgstr ""
 
-#: src/main/envir.cpp:4737
+#: src/main/envir.cpp:4736
 #, c-format
 msgid "S4 Method %s defined in namespace %s with signature %s has this body.\n"
 msgstr ""
@@ -10158,23 +10158,23 @@ msgstr "X11 모듈이 로드되어질 수 없습니다"
 msgid "X11 is not available"
 msgstr "X11을 사용할 수 없습니다"
 
-#: src/unix/dynload.cpp:110
+#: src/unix/dynload.cpp:111
 msgid "Explicit local dynamic loading not supported on this platform. Using default."
 msgstr ""
 
-#: src/unix/dynload.cpp:111
+#: src/unix/dynload.cpp:112
 msgid "Explicit global dynamic loading not supported on this platform. Using default."
 msgstr ""
 
-#: src/unix/dynload.cpp:112
+#: src/unix/dynload.cpp:113
 msgid "Explicit non-lazy dynamic loading not supported on this platform. Using default."
 msgstr ""
 
-#: src/unix/dynload.cpp:113
+#: src/unix/dynload.cpp:114
 msgid "Explicit lazy dynamic loading not supported on this platform. Using default."
 msgstr ""
 
-#: src/unix/dynload.cpp:212
+#: src/unix/dynload.cpp:213
 msgid "cannot get working directory!"
 msgstr "작업 디렉토리를 얻을 수 없습니다!"
 

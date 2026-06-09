@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: 2025-04-01 17:03+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -80,12 +80,6 @@ msgstr "%s; попробуйте predict(., rankdeficient=\"NA\")"
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "'%s' не может быть моды '%s'"
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-#, fuzzy
-msgid "'%s' is not implemented yet"
-msgstr "тип '%s' еще не разработан"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -736,6 +730,11 @@ msgstr "'probs' вне [0,1]"
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
 msgstr "'proj' для множественных откликов не реализован"
+
+#. R/fisher.test.R: stop("'pval.only' and 'conf.int' may not both be true")
+#: R/fisher.test.R:0
+msgid "'pval.only' and 'conf.int' may not both be true"
+msgstr ""
 
 #. R/kernel.R: stop("'r' is less than 0")
 #: R/kernel.R:0
@@ -1585,11 +1584,6 @@ msgstr "Выполняю профилирование..."
 msgid "X does not define a subspace of M"
 msgstr "X не определяет подпространство M"
 
-#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
-#: R/fisher.test.R:0
-msgid "`pval.only` and `conf.int` may not both be true"
-msgstr ""
-
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2361,11 +2355,6 @@ msgid ""
 msgstr ""
 "все hat-значения (leverages) = %s\n"
 " и здесь нет факторов-предикторов; нет графика N 5"
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-msgid "hatvalues() for nls(*, algorithm='plinear')"
-msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
 #. R/mcnemar.test.R: stop("if 'x' is not a matrix, 'y' must be given")
@@ -4754,6 +4743,10 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "использую %d/%d строку из комбинированного выравнивания"
 msgstr[1] "использую %d/%d строки из комбинированного выравнивания"
 msgstr[2] "использую %d/%d строк из комбинированного выравнивания"
+
+#, fuzzy
+#~ msgid "'%s' is not implemented yet"
+#~ msgstr "тип '%s' еще не разработан"
 
 #~ msgid "'formula' missing or invalid"
 #~ msgstr "'formula' пропущена либо неправильная"

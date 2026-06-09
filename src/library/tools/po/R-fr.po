@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: 2025-07-06 16:08+0200\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -247,26 +247,6 @@ msgstr ""
 #. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>")
 #: R/code2html.R:0
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
-msgstr ""
-
-#. R/apitools.R: sprintf("API funcitons not declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API funcitons not declared in installed headers: %s"
-msgstr ""
-
-#. R/apitools.R: stop("API functions listed in nonAPI: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API functions listed in nonAPI: %s"
-msgstr ""
-
-#. R/apitools.R: stop("API variables listed in nonAPI: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API variables listed in nonAPI: %s"
-msgstr ""
-
-#. R/apitools.R: sprintf("API variables not in declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "API variables not in declared in installed headers: %s"
 msgstr ""
 
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
@@ -599,11 +579,6 @@ msgstr "Erreur lors de l'exécution de tools::texi2pdf()"
 #: R/Vignettes.R:0
 msgid "Error: Vignette '%s' is non-ASCII but has no declared encoding"
 msgstr "Erreur : la vignette '%s' n’est pas ASCII mais n’a pas d’encodage déclaré"
-
-#. R/build.R: gettextf("Error: cannot rename directory to %s", sQuote(intname))
-#: R/build.R:0
-msgid "Error: cannot rename directory to %s"
-msgstr "Erreur : impossible de renommer le répertoire vers %s"
 
 #. R/check.R: message("Error: no packages were specified")
 #: R/check.R:0
@@ -968,27 +943,6 @@ msgstr "NOTE"
 #, fuzzy
 msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
 msgstr "ceci semble être un bundle -- ils ne sont plus supportés"
-
-#. R/install.R: message("NOTE: fixed library identification name ", sQuote(oldid))
-#: R/install.R:0
-msgid "NOTE: fixed library identification name"
-msgstr "NOTE : nom d’identification de bibliothèque fixé"
-
-#. R/install.R: message("NOTE: fixed library path ", sQuote(old_paths[i]))
-#: R/install.R:0
-msgid "NOTE: fixed library path"
-msgstr "NOTE : chemin de bibliothèques fixé"
-
-#. R/install.R: message("NOTE: fixed path ", sQuote(old_paths[i]))
-#: R/install.R:0
-msgid "NOTE: fixed path"
-msgstr "NOTE : chemin fixé"
-
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_paths[i]))
-#. R/install.R: message("NOTE: fixed rpath ", sQuote(old_rpath))
-#: R/install.R:0
-msgid "NOTE: fixed rpath"
-msgstr "NOTE : chemin rpath fixé"
 
 #. R/QC.R: gettextf("Namespace in Imports field not imported from: %s",     sQuote(xx))
 #: R/QC.R:0
@@ -1563,16 +1517,6 @@ msgstr "Vignettes :"
 msgid "WARNING: failed to apply patch %s"
 msgstr ""
 
-#. R/install.R: message("WARNING: failed to revert patch ", p, "\n")
-#: R/install.R:0
-msgid "WARNING: failed to revert patch"
-msgstr ""
-
-#. R/install.R: message("WARNING: installation-time patches will not be applied, could not get the patches index")
-#: R/install.R:0
-msgid "WARNING: installation-time patches will not be applied, could not get the patches index"
-msgstr ""
-
 #. R/admin.R: message("WARNING: malformed 'Depends' field in 'DESCRIPTION'")
 #: R/admin.R:0
 msgid "WARNING: malformed 'Depends' field in 'DESCRIPTION'"
@@ -1804,9 +1748,8 @@ msgid "directory '%s' does not exist"
 msgstr "le répertoire '%s' n'existe pas"
 
 #. R/dynamicHelp.R: message(" done")
-#. R/install.R: message(" done")
 #. R/packages.R: message("done")
-#: R/dynamicHelp.R:0 R/install.R:0 R/packages.R:0
+#: R/dynamicHelp.R:0 R/packages.R:0
 msgid "done"
 msgstr "fini"
 
@@ -1916,11 +1859,6 @@ msgstr "génération des symboles de débogage (%s)"
 #: R/dynamicHelp.R:0
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "serveur http arrêté par R_DISABLE_HTTPD"
-
-#. R/apitools.R: sprintf("in API but marked for warnings: %s", paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "in API but marked for warnings: %s"
-msgstr ""
 
 #. R/utils.R: gettext("inferior call failed")
 #: R/utils.R:0
@@ -2050,16 +1988,6 @@ msgstr "aucun serveur en cours d'exécution à arrêter"
 msgid "no source files found"
 msgstr "aucun fichier source n'est trouvé"
 
-#. R/apitools.R: sprintf("non-API functions declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "non-API functions declared in installed headers: %s"
-msgstr ""
-
-#. R/apitools.R: sprintf("non-API variables declared in installed headers: %s",     paste(v$name, collapse = " "))
-#: R/apitools.R:0
-msgid "non-API variables declared in installed headers: %s"
-msgstr ""
-
 #. R/citation.R: stop("non-ASCII input in a CITATION file without a declared encoding")
 #: R/citation.R:0
 msgid "non-ASCII input in a CITATION file without a declared encoding"
@@ -2181,11 +2109,6 @@ msgstr ""
 "la lecture de DESCRIPTION pour le package %s a échoué avec le message :\n"
 "  %s"
 
-#. R/install.R: message("  restoration failed\n")
-#: R/install.R:0
-msgid "restoration failed"
-msgstr "la restauration a échoué"
-
 #. R/testing.R: stop("  ", "results differ from reference results")
 #: R/testing.R:0
 msgid "results differ from reference results"
@@ -2235,11 +2158,6 @@ msgstr "la liste de source doit avoir des noms pour tous ses éléments"
 #: R/makeLazyLoad.R:0
 msgid "source must be an environment or a list"
 msgstr "source doit être un environnement ou une liste"
-
-#. R/install.R: message("specified C++", use_cxxstd)
-#: R/install.R:0
-msgid "specified C++"
-msgstr ""
 
 #. R/install.R: message("staged installation is only possible with locking")
 #: R/install.R:0
@@ -2358,31 +2276,6 @@ msgstr "l’URL %s n’est pas supportée"
 #: R/update_packages.R:0
 msgid "update_PACKAGES complete."
 msgstr "update_PACKAGES terminé."
-
-#. R/install.R: message("using C compiler: ", sQuote(cc_ver[1L]))
-#: R/install.R:0
-msgid "using C compiler:"
-msgstr ""
-
-#. R/install.R: message("using C++", use_cxxstd)
-#: R/install.R:0
-msgid "using C++"
-msgstr ""
-
-#. R/install.R: message("using C++ compiler: ", sQuote(cxx_ver[1L]))
-#: R/install.R:0
-msgid "using C++ compiler:"
-msgstr ""
-
-#. R/install.R: message("using Fortran compiler: ", sQuote(fc_ver[1L]))
-#: R/install.R:0
-msgid "using Fortran compiler:"
-msgstr ""
-
-#. R/install.R: message("using SDK: ", sQuote(sdk))
-#: R/install.R:0
-msgid "using SDK:"
-msgstr ""
 
 #. R/Vignettes.R: gettextf("vignette builder '%s' not found", pkg)
 #: R/Vignettes.R:0
@@ -2734,6 +2627,24 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "impossible de réencoder %s ligne %s"
 msgstr[1] "impossible de réencoder %s lignes %s"
 
+#~ msgid "Error: cannot rename directory to %s"
+#~ msgstr "Erreur : impossible de renommer le répertoire vers %s"
+
+#~ msgid "NOTE: fixed library identification name"
+#~ msgstr "NOTE : nom d’identification de bibliothèque fixé"
+
+#~ msgid "NOTE: fixed library path"
+#~ msgstr "NOTE : chemin de bibliothèques fixé"
+
+#~ msgid "NOTE: fixed path"
+#~ msgstr "NOTE : chemin fixé"
+
+#~ msgid "NOTE: fixed rpath"
+#~ msgstr "NOTE : chemin rpath fixé"
+
+#~ msgid "restoration failed"
+#~ msgstr "la restauration a échoué"
+
 #~ msgid ","
 #~ msgstr ","
 
@@ -2969,96 +2880,12 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 #~ msgid "installing dependencies %s"
 #~ msgstr "installation des dépendances %s"
 
-#~ msgid "%s"
-#~ msgstr "%s"
-
-#~ msgid ":"
-#~ msgstr " :"
-
 #, fuzzy
 #~ msgid "Inconsistent encoding specifications: %s with %%\\SweaveUTF8"
 #~ msgstr "Spécifications d'encodage incohérentes :"
 
 #~ msgid "argument 'file' must be a character string or connection"
 #~ msgstr "l'argument 'file' doit être une chaîne de caractères ou une connexion"
-
-#~ msgid "with %\\SweaveUTF8"
-#~ msgstr "avec %\\SweaveUTF8"
-
-#~ msgid "to logical"
-#~ msgstr "en valeur logique"
-
-#~ msgid "Vignette product"
-#~ msgstr "Vignette produit"
-
-#~ msgid ")"
-#~ msgstr ")"
-
-#~ msgid "Failed to locate the"
-#~ msgstr "impossible de créer"
-
-#~ msgid "output file (by engine"
-#~ msgstr "fichier en sortie (par engin"
-
-#~ msgid "%s::%s"
-#~ msgstr "%s::%s"
-
-#~ msgid ") for vignette with name"
-#~ msgstr ") pour la vignette avec le nom"
-
-#~ msgid ". The following files exists in directory"
-#~ msgstr ". Les fichiers sont dans ce répertoire"
-
-#~ msgid "Located more than one"
-#~ msgstr "Localisation plus d'une fois"
-
-#~ msgid "Vignette"
-#~ msgstr "Vignette"
-
-#~ msgid "overwrites the following"
-#~ msgstr "remplace le suivant"
-
-#~ msgid "output by vignette"
-#~ msgstr "sortie par vignette"
-
-#~ msgid "Detected vignette source files ("
-#~ msgstr "Fichiers source de vignettes détectés ("
-
-#~ msgid ") with shared names ("
-#~ msgstr ") avec les mêmes noms ("
-
-#~ msgid "None of packages"
-#~ msgstr "Aucun des packages"
-
-#~ msgid "Vignette engine"
-#~ msgstr "Module de traitement de vignette"
-
-#~ msgid "Engine name"
-#~ msgstr "Nom du module de traitement"
-
-#~ msgid "and package"
-#~ msgstr "et le package"
-
-#~ msgid "do not match"
-#~ msgstr "ne correspond pas"
-
-#~ msgid "Argument"
-#~ msgstr "Argument"
-
-#~ msgid "weave"
-#~ msgstr "weave"
-
-#~ msgid "tangle"
-#~ msgstr "tangle"
-
-#~ msgid "pattern"
-#~ msgstr "motif"
-
-#~ msgid "Cannot change the"
-#~ msgstr "impossible de changer le"
-
-#~ msgid "Sweave"
-#~ msgstr "Sweave"
 
 #~ msgid "'file' must be a character string or connection"
 #~ msgstr "'file' doit être une chaîne de caractères ou une connexion"
@@ -3097,19 +2924,6 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 #~ msgstr[0] "Avis : option inconnue"
 #~ msgstr[1] "Avis : option inconnue"
 
-#~ msgid "name"
-#~ msgstr "nom"
-
-#~ msgid "code"
-#~ msgstr "code"
-
-#~ msgid "docs"
-#~ msgstr "docs"
-
-#, fuzzy
-#~ msgid "\\VignetteDepends{}"
-#~ msgstr "Vignettes :"
-
 #~ msgid "Invalid package name."
 #~ msgstr "Nom de package incorrect."
 
@@ -3122,45 +2936,8 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 #~ msgid "package must be loaded"
 #~ msgstr "le package doit être chargé"
 
-#~ msgid "lib"
-#~ msgstr "lib"
-
-#~ msgid "pkg"
-#~ msgstr "pkg"
-
-#~ msgid "packageStartupMessage"
-#~ msgstr "packageStartupMessage"
-
 #~ msgid "Good practice"
 #~ msgstr "Bonne pratique"
-
-#, fuzzy
-#~ msgid "\\name"
-#~ msgstr "nom"
-
-#~ msgid "NEWS"
-#~ msgstr "NEWS"
-
-#~ msgid "DESCRIPTION"
-#~ msgstr "DESCRIPTION"
-
-#~ msgid "doc/"
-#~ msgstr "doc/"
-
-#~ msgid "demo/"
-#~ msgstr "demo/"
-
-#~ msgid "%s (%s)"
-#~ msgstr "%s (%s)"
-
-#~ msgid "ssname"
-#~ msgstr "ssname"
-
-#~ msgid "language"
-#~ msgstr "langage"
-
-#~ msgid "processing"
-#~ msgstr "analyse de "
 
 #, fuzzy
 #~ msgid "package directory"
@@ -3171,9 +2948,6 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 
 #~ msgid "running 'zip' failed"
 #~ msgstr "l'exécution de 'zip' a échoué"
-
-#~ msgid "as"
-#~ msgstr "comme"
 
 #~ msgid "installing via 'install.libs.R' to"
 #~ msgstr "Installation via 'install.libs.R' vers"
@@ -3191,63 +2965,8 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 #~ msgid "ERROR: failed to lock directory"
 #~ msgstr "ERREUR : impossible de verrouiller le répertoire"
 
-#~ msgid ""
-#~ "for modifying\n"
-#~ "Try removing"
-#~ msgstr ""
-#~ "pour modification\n"
-#~ "Essayez d'éliminer"
-
 #~ msgid "ERROR: failed to create lock directory"
 #~ msgstr "ERREUR : impossible de créer le répertoire verrouillé"
-
-#~ msgid "finding HTML links ..."
-#~ msgstr "recherche des liens HTML ..."
-
-#~ msgid "finding level-2 HTML links ..."
-#~ msgstr "recherche des liens HTML de niveau 2 ..."
-
-#~ msgid "Internal error, no tag"
-#~ msgstr "Erreur interne, pas d'étiquette"
-
-#~ msgid "Internal error:  NULL tag"
-#~ msgstr "Erreur interne : étiquette NULL"
-
-#~ msgid "Inconsistent arg count for"
-#~ msgstr "Nombre d'arguments incohérent pour"
-
-#~ msgid "Entry for"
-#~ msgstr "Entrée pour"
-
-#~ msgid "already defined to be"
-#~ msgstr "déjà définie pour être"
-
-#~ msgid "found encoding"
-#~ msgstr "encodage trouvé"
-
-#~ msgid "cannot be opened"
-#~ msgstr "ne peut être ouvert"
-
-#~ msgid "comparing"
-#~ msgstr "comparaison"
-
-#~ msgid "to"
-#~ msgstr "à"
-
-#~ msgid "Comparing"
-#~ msgstr "Comparaison"
-
-#~ msgid "creation of"
-#~ msgstr "la création de"
-
-#~ msgid "failed"
-#~ msgstr "a échoué"
-
-#~ msgid "creating"
-#~ msgstr "création"
-
-#~ msgid "running code in"
-#~ msgstr "exécution du code dans"
 
 #~ msgid "running strict specific tests"
 #~ msgstr "exécution stricte des tests spécifiques"
@@ -3281,47 +3000,6 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 
 #~ msgid "running tests to possibly trigger segfaults"
 #~ msgstr "exécution de tests pour générer éventuellement des 'segfaults'"
-
-#, fuzzy
-#~ msgid "not installing"
-#~ msgstr "installation dans"
-
-#~ msgid "Generics g in env ="
-#~ msgstr "Les génériques g dans env ="
-
-#~ msgid "where hasMethods(g, env) errors:"
-#~ msgstr "où les erreurs hasMethods(g, env) :"
-
-#~ msgid "May need something like"
-#~ msgstr "Il faut quelque chose du genre"
-
-#~ msgid "importFrom("
-#~ msgstr "importFrom("
-
-#~ msgid "in NAMESPACE."
-#~ msgstr "dans NAMESPACE."
-
-#, fuzzy
-#~ msgid "not insttalling"
-#~ msgstr "installation dans"
-
-#, fuzzy
-#~ msgid "running msgmerge failed"
-#~ msgstr "l'exécution de 'make' a échoué"
-
-#, fuzzy
-#~ msgid "running msginit failed"
-#~ msgstr "l'exécution de 'zip' a échoué"
-
-#, fuzzy
-#~ msgid "running msgconv failed"
-#~ msgstr "l'exécution de 'make' a échoué"
-
-#~ msgid "ERROR: --merge-multiarch can only be used on i386/x64 installations"
-#~ msgstr "ERREUR : --merge-multiarch valide seulement sur les systèmes i386/x64"
-
-#~ msgid "--merge-multiarch is Windows-only"
-#~ msgstr "'--merge-multiarch est pour Windows seulement"
 
 #~ msgid ""
 #~ "running Stangle on vignette '%s' failed with message:\n"
@@ -3386,12 +3064,6 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 #~ msgid "WARNING: 'Depends' entry has multiple dependencies on R:"
 #~ msgstr "AVIS : l'entrée 'Depends' a des dépendances multiples sur R :"
 
-#~ msgid "only the first will be used in R < 2.7.0"
-#~ msgstr "seule la première sera utilisée dans R < 2.7.0"
-
-#~ msgid "'"
-#~ msgstr "'"
-
 #~ msgid "--binary is deprecated"
 #~ msgstr "--binary est obsolète "
 
@@ -3404,20 +3076,8 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 #~ msgid "use of '--no-docs' is deprecated: use '--install-args' instead"
 #~ msgstr "l'utilisation de '--no-docs' n'est plus disponible : utilisez '--install-args' à la place"
 
-#~ msgid "** Options"
-#~ msgstr "** Les options"
-
-#~ msgid "are only for '--binary'  and will be ignored"
-#~ msgstr "sont valides avec --binary seulement et seront ignorées"
-
 #~ msgid "--pkglock applies only to a single package"
 #~ msgstr "--pkglock est valide pour un seul package"
-
-#~ msgid "--no-help overrides"
-#~ msgstr "--no-help a priorité sur"
-
-#~ msgid "--"
-#~ msgstr "--"
 
 #~ msgid "'--auto-zip' is for Windows only"
 #~ msgstr "'--auto-zip'  est pour Windows seulement"
@@ -3430,6 +3090,3 @@ msgstr[1] "impossible de réencoder %s lignes %s"
 
 #~ msgid "cannot create HTML package index"
 #~ msgstr "impossible de créer l'index HTML du package"
-
-#~ msgid "... done"
-#~ msgstr "... fini"

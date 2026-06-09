@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-06-09 17:54\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -77,12 +77,6 @@ msgstr ""
 #: R/nlsFunc.R:0
 msgid "'%s' cannot be of mode '%s'"
 msgstr "'%1$s'는 모드 '%2$s'가 될 수 없습니다"
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-#, fuzzy
-msgid "'%s' is not implemented yet"
-msgstr "타입 '%s'는 아직 구현되지 않았습니다"
 
 #. R/models.R: gettextf("'%s' must be a character string", "response")
 #. R/reshape.R: gettextf("'%s' must be a character string", "sep")
@@ -737,6 +731,11 @@ msgstr "'probs'는 [0,1] 범위외입니다"
 #. R/proj.R: stop("'proj' is not implemented for multiple responses")
 #: R/proj.R:0
 msgid "'proj' is not implemented for multiple responses"
+msgstr ""
+
+#. R/fisher.test.R: stop("'pval.only' and 'conf.int' may not both be true")
+#: R/fisher.test.R:0
+msgid "'pval.only' and 'conf.int' may not both be true"
 msgstr ""
 
 #. R/kernel.R: stop("'r' is less than 0")
@@ -1585,11 +1584,6 @@ msgstr ""
 msgid "X does not define a subspace of M"
 msgstr ""
 
-#. R/fisher.test.R: stop("`pval.only` and `conf.int` may not both be true")
-#: R/fisher.test.R:0
-msgid "`pval.only` and `conf.int` may not both be true"
-msgstr ""
-
 #. R/integrate.R: stop("a limit is NA or NaN")
 #: R/integrate.R:0
 msgid "a limit is NA or NaN"
@@ -2369,11 +2363,6 @@ msgstr "grouping factor는 반드시 2개의 수준을 가지고 있어야만 �
 msgid ""
 "hat values (leverages) are all = %s\n"
 " and there are no factor predictors; no plot no. 5"
-msgstr ""
-
-#. R/nls.R: stop("'%s' is not implemented yet", "hatvalues() for nls(*, algorithm='plinear')")
-#: R/nls.R:0
-msgid "hatvalues() for nls(*, algorithm='plinear')"
 msgstr ""
 
 #. R/fisher.test.R: stop("if 'x' is not a matrix, 'y' must be given")
@@ -4719,6 +4708,10 @@ msgstr[0] "upper scope는 모델에는 포함되어 있지 않은 항 %s를 가�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
+
+#, fuzzy
+#~ msgid "'%s' is not implemented yet"
+#~ msgstr "타입 '%s'는 아직 구현되지 않았습니다"
 
 #~ msgid "'formula' missing or invalid"
 #~ msgstr "'formula'가 누락되었거나 유효하지 않습니다"
