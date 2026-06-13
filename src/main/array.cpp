@@ -1820,6 +1820,16 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
 
+    /* handle the resize */
+    bool resize = asLogicalNoNA(CADDR(args), "resize");
+
+    /* short-circuit identity permutation (PR#19069) */
+    if (resize) {
+	bool skip = true;
+        for (i = 0; i < n; i++) if (pp[i] != i) {skip = false; break;}
+        if (skip) {UNPROTECT(1); return(a);}
+    }
+
     R_xlen_t *iip = (R_xlen_t *) R_alloc((size_t) n, sizeof(R_xlen_t));
     Memzero(iip, n);
     for (i = 0; i < n; i++)
@@ -1915,10 +1925,7 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	UNIMPLEMENTED_TYPE("aperm", a);
     }
 
-    /* handle the resize */
-    bool resize = asLogicalNoNA(CADDR(args), "resize");
-
-    /* and handle names(dim(.)) and the dimnames if any */
+    /* handle names(dim(.)) and the dimnames if any */
     if (resize) {
 	SEXP nmdm = getAttrib(dimsa, R_NamesSymbol);
 	if(nmdm != R_NilValue) { // dimsr needs correctly permuted names()
@@ -1957,6 +1964,8 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     else // !resize
 	setAttrib(r, R_DimSymbol, dimsa);
+
+    copyMostAttrib(a, r);
 
     UNPROTECT(3); /* dimsa, r, dimsr */
     return r;

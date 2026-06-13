@@ -111,21 +111,22 @@
       In particular, when a source package \file{foo/} folder contains broken
       symlinks matching an exclude pattern, \command{R CMD build foo}
       now succeeds, omitting these, thus fixing \PR{18186}.  (Thanks to
-      \I{Ivan Krylov} and others, notably \I{Jenny Brian} and \I{R Dev
+      \I{Ivan Krylov} and others, notably \I{Jenny Bryan} and \I{R Dev
       Day @ useR! 2025} contributors.)
 
       \item Overly long \code{dyn.load()} error messages (C level
       \code{dlerror()}), should no longer corrupt its state, thanks to
       \I{Ivan Krylov}'s \PR{19029} report and patch.
 
-      \item Data part of \code{getGenerics()} listed package names for
-      generic functions defined in more than one package.  Now it
-      lists generic function names, as intended.  Thanks to \I{Michael
-      Chirico} for report and patch proposal (\PR{19080}).
-
       \item In \pkg{methods}, \code{as()} now correctly coerces S4
       objects to S4 superclasses extending old-style classes, instead
       of returning only the S3 part.
+
+      \item \code{strat_ratio != 1} in \code{rfree1way} did not work as
+      advertised.
+      
+      \item Zeros in \code{prob} argument to \code{power.free1way.test}
+      triggered an error and are now handled correctly.
     }
   }
 }
@@ -176,6 +177,11 @@
       \item \code{wilcox.test(x, exact=FALSE, correct = k)}'s p-value
       computation got a missing \code{dnorm(z)} factor, and so did the
       2-sample case, in addition to more fixes.
+
+      \item Data part of \code{getGenerics()} listed package names for
+      generic functions defined in more than one package.  Now it
+      lists generic function names, as intended.  Thanks to \I{Michael
+      Chirico} for report and patch proposal (\PR{19080}).
 
       \item \code{as.matrix(<POSIXlt>)} again produces a \emph{numeric}
       matrix, thanks to \I{Suharto Anggono}'s \PR{19084}.
@@ -822,7 +828,7 @@
 
       \item The \code{Pair(x,y)} construction in the formula interface to
       paired tests did not work with the \code{subset} argument, due to the
-      absence of a \code{[.Pair} method, which has now been added.
+      absence of a \code{[.Pair} method, which has now been added (\PR{18898}).
 
       \item Subsetting \code{"table"} objects keeps S3 classes more
       consistently, fixing \PR{18845}.
