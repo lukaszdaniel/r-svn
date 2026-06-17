@@ -32,7 +32,7 @@ runs:
       run: brew unlink $(brew list --formula) || true
 
     - name: Install CRAN fortran build
-      if: inputs.fortran
+      if: ${{ inputs.fortran == 'true' }}
       shell: bash
       run: |
         curl --retry 3 --fail-with-body -sSLO https://github.com/R-macos/gcc-14-branch/releases/download/gcc-14.2-darwin-r2.1/gfortran-14.2-universal.pkg
@@ -47,7 +47,7 @@ runs:
         sudo mkdir -p /opt
         sudo chown $USER /opt
         curl --retry 3 --fail-with-body -sSL https://github.com/r-universe-org/macos-libs/releases/download/2025-12-13/cranlibs-everything.tar.xz -o libs.tar.xz
-        sudo tar -xf libs.tar.xz -C / opt
+        sudo tar -xf libs.tar.xz -C /opt
         rm -f libs.tar.xz
         echo "/opt/R/$(uname -m)/bin" >> $GITHUB_PATH
         echo "PKG_CONFIG_PATH=/opt/R/$(uname -m)/lib/pkgconfig:/opt/R/$(uname -m)/share/pkgconfig" >> $GITHUB_ENV
@@ -68,7 +68,7 @@ runs:
       shell: bash
 
     - shell: bash
-      if: inputs.xquartz
+      if: ${{ inputs.xquartz == 'true' }}
       run: |
         if [ -d "/opt/X11/lib" ]; then
           echo "/opt/X11/lib exists. Skipping xQuartz installation"
