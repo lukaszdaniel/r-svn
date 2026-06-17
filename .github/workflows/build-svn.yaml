@@ -21,13 +21,13 @@ jobs:
         arch: [ 'x86_64', 'aarch64']
     steps:
     - name: Checkout
-      uses: actions/checkout@main
+      uses: ../checkout
 
     - name: Setup Build Tooling
-      uses: actions/setup-windows-tools@main
+      uses: ../setup-windows-tools
 
     - name: Build R-base
-      uses: actions/build-r-windows@main
+      uses: ../build-r-windows
 
     - name: Test Installer
       run: |
@@ -36,7 +36,7 @@ jobs:
       shell: powershell
 
     - name: Save installer
-      uses: actions/upload-artifact@v7
+      uses: ../upload-artifact@v7
       with:
         name: Win-installer-${{matrix.arch}}
         path: src/gnuwin32/installer/R-*.exe
@@ -78,7 +78,7 @@ jobs:
         echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
 
     - name: Checkout
-      uses: actions/checkout@main
+      uses: ../checkout
 
     - name: Configure
       run: CC=${{matrix.CC}} ./configure --enable-R-shlib --with-blas --with-lapack --enable-werror --disable-java
@@ -105,10 +105,10 @@ jobs:
       R_TEXI2DVICMD: emulation
     steps:
     - name: Checkout
-      uses: actions/checkout@main
+      uses: ../checkout
 
     - name: Setup Build Tooling
-      uses: actions/setup-macos-tools@main
+      uses: ../setup-macos-tools
 
     - name: Configure
       run: |
