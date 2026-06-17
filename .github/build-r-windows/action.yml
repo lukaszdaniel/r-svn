@@ -1,0 +1,11 @@
+runs:
+  using: "composite"
+  steps:
+    - name: Apply ARM64 patch
+      if: runner.arch == 'ARM64'
+      run: git apply -v "$GITHUB_ACTION_PATH/winarm64.patch"
+      shell: bash
+
+    - name: Build
+      run: $GITHUB_ACTION_PATH/build-windows.sh
+      shell: msys2 {0}

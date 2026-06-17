@@ -1,0 +1,48 @@
+name: 'Windows Tools'
+description: 'Install Windows Build Tooling'
+inputs:
+  tinytex:
+    description: 'Install TinyTex'
+    default: true
+  msys2:
+    description: 'Install MSYS2'
+    default: true
+  rtools:
+    description: 'Install Rtools'
+    default: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Set a timezone
+      shell: powershell
+      run: tzutil /s "GMT Standard Time"
+
+    - name: Install InnoSetup
+      shell: powershell
+      run: choco install -y --no-progress innosetup
+
+    - name: Install TinyTex
+      if: ${{ inputs.tinytex }}
+      uses: r-lib/actions/setup-tinytex@v2
+      env:
+        TINYTEX_INSTALLER: TinyTeX
+
+    - name: Install additional LaTeX packages
+      if: ${{ inputs.tinytex }}
+      run: |
+        tlmgr update --self
+        tlmgr install texinfo
+        tlmgr list --only-installed
+      shell: powershell
+
+    - uses: msys2/setup-msys2@v2
+      if: ${{ inputs.msys2 }}
+      with:
+        msystem: MSYS
+        install: git make perl curl texinfo texinfo-tex rsync zip unzip diffutils
+
+    - name: Download Rtools toolchain
+      if: ${{ inputs.rtools }}
+      run: $GITHUB_ACTION_PATH/rtools.sh
+      shell: msys2 {0}

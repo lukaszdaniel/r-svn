@@ -6,84 +6,53 @@ concurrency:
   group: ${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: true
 
+env:
+  R_CRAN_WEB: "https://cran.rstudio.com"
+  CRAN_MIRROR: "cran.rstudio.com"
+
 jobs:
   windows:
     name: Windows
     runs-on: ${{matrix.arch == 'aarch64' && 'windows-11-arm' || 'windows-latest'}}
     timeout-minutes: 120
-    env:
-      R_CRAN_WEB: "https://cran.rstudio.com"
-      CRAN_RSYNC: 'mirrors.nic.cz::CRAN'
-    defaults:
-      run:
-        shell: msys2 {0}
     strategy:
       fail-fast: false
       matrix:
-        script: [ 'check', 'installer' ]
         arch: [ 'x86_64', 'aarch64']
     steps:
-    - name: Prepare git
-      run: |
-        git config --global core.autocrlf false
-        echo "archfix=${{ matrix.OS == 'windows-11-arm' && '-aarch64' || '' }}" >> $GITHUB_ENV
-      shell: bash
-
-    - name: Install InnoSetup
-      if: matrix.script == 'installer'
-      run: choco install -y --no-progress innosetup
-      shell: cmd
-
     - name: Checkout
-      uses: actions/checkout@v6
-      with:
-        fetch-depth: 100
+      uses: actions/checkout@main
 
-    - uses: msys2/setup-msys2@v2
-      with:
-        msystem: MSYS
-        install: git make perl curl wget texinfo texinfo-tex rsync zip unzip diffutils
+    - name: Setup Build Tooling
+      uses: actions/setup-windows-tools@main
 
-    - name: "Download rtools45 toolchain"
+    - name: Build R-base
+      uses: actions/build-r-windows@main
+
+    - name: Test Installer
       run: |
-        archfix=${{ matrix.arch == 'arm' && '-aarch64' || '' }}
-        url="https://github.com/r-windows/rtools-chocolatey/releases/download/6536/rtools45-toolchain-libs-base${archfix}-6536.tar.zst"
-        curl --retry 3 -sSL $url | tar x --zstd -C /c/
-
-    - name: Set timezone
-      shell: powershell
-      run: tzutil /s "GMT Standard Time"
-
-    - uses: r-lib/actions/setup-tinytex@v2
-      env:
-        TINYTEX_INSTALLER: TinyTeX
-
-    - name: Install additional LaTeX packages
-      run: |
-        tlmgr update --self
-        tlmgr install texinfo
-        tlmgr list --only-installed
+        Get-Item "src/gnuwin32/installer/R-*-win.exe" | Rename-Item -NewName { $_.Name -replace 'win\.exe$', '${{matrix.arch }}.exe' }
+        .\src\gnuwin32\installer\R-*.exe /SILENT
       shell: powershell
 
-    - name: Build and Check
+    - name: Save installer
+      uses: actions/upload-artifact@v7
+      with:
+        name: Win-installer-${{matrix.arch}}
+        path: src/gnuwin32/installer/R-*.exe
+
+    - name: Run checks
       run: |
-        sed -i.bak 's/rsync -rc/rsync -r/' tools/rsync-recommended
-        ./.github/scripts/win-${{matrix.script}}.sh
+        cd src/gnuwin32
+        export TAR="/usr/bin/tar"
+        export TAR_OPTIONS="--force-local"
+        export PATH="/c/rtools-base-toolchain/bin:/c/Users/$USER/AppData/Roaming/TinyTeX/bin/windows:$PATH"
+        make check-all
+      shell: msys2 {0}
 
     - name: Print failed tests
       if: failure()
       run: tail -n100 tests/*.fail tests/Examples/*.fail 
-
-    - name: Run Installer
-      run: .\src\gnuwin32\installer\R-devel-win.exe /SILENT
-      if: matrix.script == 'installer'
-      shell: powershell
-
-    - uses: actions/upload-artifact@v7
-      with:
-        name: Windows-R-devel-${{matrix.arch}}
-        path: src/gnuwin32/installer/R-devel-win.exe
-      if: matrix.script == 'installer'
 
   linux:
     name: Linux
@@ -92,8 +61,6 @@ jobs:
       image: ${{matrix.OS}}
     env:
       DEBIAN_FRONTEND: noninteractive
-      R_CRAN_WEB: "https://cran.rstudio.com"
-      CRAN_RSYNC: 'mirrors.nic.cz::CRAN'
     strategy:
       fail-fast: false
       matrix:
@@ -111,17 +78,7 @@ jobs:
         echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
 
     - name: Checkout
-      uses: actions/checkout@v6
-      with:
-        fetch-depth: 100
-
-    - name: Prepare
-      run: |
-        git config --global --add safe.directory $PWD || true
-        sed -i.bak 's|$(GIT) svn info|./.github/scripts/git-svn-info.sh|' Makefile.in
-        ./.github/scripts/wget-recommended.sh
-        ./.github/scripts/update-recommended.sh
-        ./.github/scripts/git-svn-info.sh
+      uses: actions/checkout@main
 
     - name: Configure
       run: CC=${{matrix.CC}} ./configure --enable-R-shlib --with-blas --with-lapack --enable-werror --disable-java
@@ -145,75 +102,30 @@ jobs:
     runs-on: ${{matrix.OS}}
     timeout-minutes: 120
     env:
-      PKG_CONFIG_PATH: /opt/X11/lib/pkgconfig
-      R_CRAN_WEB: "https://cran.rstudio.com"
-      CRAN_RSYNC: 'mirrors.nic.cz::CRAN'
       R_TEXI2DVICMD: emulation
     steps:
-    - name: Download CRAN system libraries
-      run: |
-        echo "ARCH=$(uname -m)" >> $GITHUB_ENV
-        curl --retry 3 --fail-with-body -sSL https://github.com/r-universe-org/macos-libs/releases/download/2025-12-13/cranlibs-everything.tar.xz -o libs.tar.xz
-        sudo tar -xf libs.tar.xz -C / opt
-        rm -f libs.tar.xz
-
-    - name: Remove homebrew
-      run: |
-        echo "/opt/R/${ARCH}/bin" >> $GITHUB_PATH
-        echo "LDFLAGS=-L/opt/R/${ARCH}/lib" >> $GITHUB_ENV
-        echo "CPPFLAGS=-I/opt/R/${ARCH}/include" >> $GITHUB_ENV
-        echo "PKG_CONFIG_PATH=/opt/R/${ARCH}/lib/pkgconfig:/opt/R/${ARCH}/share/pkgconfig" >> $GITHUB_ENV
-        echo "/Library/TeX/texbin" >> $GITHUB_PATH
-        echo "/usr/local/opt/texinfo/bin" >> $GITHUB_PATH
-        cp -fv $(which wget) "/opt/R/${ARCH}/bin"
-        brew unlink $(brew list --formula) || true
-
-    - name: Install CRAN fortran build
-      run: |
-        curl --retry 3 --fail-with-body -sSLO https://github.com/R-macos/gcc-14-branch/releases/download/gcc-14.2-darwin-r2.1/gfortran-14.2-universal.pkg
-        sudo installer -pkg "gfortran-14.2-universal.pkg" -target /
-        rm -f gfortran-14.2-universal.pkg
-        echo "/opt/gfortran/bin" >> $GITHUB_PATH
-        echo "FC=/opt/gfortran/bin/gfortran" >> $GITHUB_ENV
-
     - name: Checkout
-      uses: actions/checkout@v6
-      with:
-        fetch-depth: 100
+      uses: actions/checkout@main
 
-    - name: Prepare
-      run: |
-        sed -i.bak 's|$(GIT) svn info|./.github/scripts/git-svn-info.sh|' Makefile.in
-        ./.github/scripts/wget-recommended.sh
-        ./.github/scripts/update-recommended.sh
-        ./.github/scripts/git-svn-info.sh
+    - name: Setup Build Tooling
+      uses: actions/setup-macos-tools@main
 
     - name: Configure
-      run: CC=clang ./configure --prefix=/opt/R/${ARCH}/r-devel --enable-werror --disable-java --with-cairo --without-tcltk --without-x --with-aqua $ACCELERATE --enable-R-shlib SED=/usr/bin/sed
-      env:
-        PDFLATEX: ${{github.workspace}}/.github/scripts/dummy
-        ACCELERATE: ${{ matrix.OS != 'macOS-15-intel' && '--with-lapack --with-blas' || '' }}
+      run: |
+        export CC=clang
+        export CPPFLAGS="-I/opt/R/$(uname -m)/include"
+        export LDFLAGS="-L/opt/R/$(uname -m)/lib"
+        export PKG_CONFIG_PATH="/opt/R/$(uname -m)/lib/pkgconfig:/opt/R/$(uname -m)/share/pkgconfig"
+        if [ "$(uname -m)" = "arm64" ]; then
+          ACCELERATE="--with-lapack --with-blas"
+        fi
+        ./configure --prefix=/opt/R/$(uname -m)/r-devel --disable-java --with-cairo --without-tcltk --without-x --with-aqua $ACCELERATE --enable-R-shlib SED=/usr/bin/sed
 
     - name: Build R
       run: make
-      env:
-        PDFLATEX: ${{github.workspace}}/.github/scripts/dummy
-
-    - name: Install
-      run: |
-        mkdir -p /opt/R/${ARCH}/r-devel
-        make install DESTDIR="/opt/R/${ARCH}/r-devel"
-        (cd /opt/R/${ARCH}/r-devel; tar cfJ "/opt/R/r-devel-${ARCH}.tar.xz" .)
-
-    - uses: actions/upload-artifact@v7
-      with:
-        name: MacOS-R-devel-${{ matrix.OS == 'macOS-15-intel' && 'x86_64' || 'arm64' }}
-        path: /opt/R/r-devel-${{ matrix.OS == 'macOS-15-intel' && 'x86_64' || 'arm64' }}.tar.xz
 
     - name: Run checks
       run: make check-all
-      env:
-        PDFLATEX: ${{github.workspace}}/.github/scripts/dummy
 
     - name: Print failed tests
       if: failure()

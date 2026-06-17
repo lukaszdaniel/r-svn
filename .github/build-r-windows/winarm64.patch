@@ -1,0 +1,63 @@
+From a6547c8b4ea51b5ce57dc7e457635e17375d1b21 Mon Sep 17 00:00:00 2001
+From: Jeroen Ooms <jeroenooms@gmail.com>
+Date: Sun, 3 May 2026 14:19:55 +0200
+Subject: [PATCH] Use winarm64 binaries
+
+---
+ src/gnuwin32/fixed/etc/Renviron.site         | 1 +
+ src/gnuwin32/installer/Makefile              | 2 +-
+ src/library/utils/R/{unix => }/mac.install.R | 0
+ src/library/utils/R/packages2.R              | 7 +------
+ 4 files changed, 3 insertions(+), 7 deletions(-)
+ create mode 100644 src/gnuwin32/fixed/etc/Renviron.site
+ rename src/library/utils/R/{unix => }/mac.install.R (100%)
+
+diff --git a/src/gnuwin32/fixed/etc/Renviron.site b/src/gnuwin32/fixed/etc/Renviron.site
+new file mode 100644
+index 00000000000..a6d95a7827f
+--- /dev/null
++++ b/src/gnuwin32/fixed/etc/Renviron.site
+@@ -0,0 +1 @@
++R_PLATFORM_PKGTYPE="windows.binary.clang-aarch64"
+diff --git a/src/gnuwin32/installer/Makefile b/src/gnuwin32/installer/Makefile
+index e7c7dd1c496..d0d886300ef 100644
+--- a/src/gnuwin32/installer/Makefile
++++ b/src/gnuwin32/installer/Makefile
+@@ -31,7 +31,7 @@ DOC_INFO_FILES = AUTHORS COPYING FAQ RESOURCES THANKS CHANGES \
+   NEWS NEWS.0 NEWS.1 NEWS.2 
+ GW_INFO_FILES = COPYRIGHTS README.Rterm ../../doc/manual/rw-FAQ
+ 
+-ETC_FILES = Rprofile.site Rconsole Rdevga rgb.txt repositories Rcmd_environ
++ETC_FILES = Renviron.site Rprofile.site Rconsole Rdevga rgb.txt repositories Rcmd_environ
+ 
+ 
+ # we don't want share/{Makefile.in,java,sh} installed
+diff --git a/src/library/utils/R/unix/mac.install.R b/src/library/utils/R/mac.install.R
+similarity index 100%
+rename from src/library/utils/R/unix/mac.install.R
+rename to src/library/utils/R/mac.install.R
+diff --git a/src/library/utils/R/packages2.R b/src/library/utils/R/packages2.R
+index 3b8c442e765..76615ea64b1 100644
+--- a/src/library/utils/R/packages2.R
++++ b/src/library/utils/R/packages2.R
+@@ -16,10 +16,6 @@
+ #  A copy of the GNU General Public License is available at
+ #  https://www.R-project.org/Licenses/
+ 
+-## FIXME: at some point we may want to allow custom binary installs on Windows as well
+-if (.Platform$OS.type == "windows")
+-    .install.macbinary <- function(...) NULL	# globalVariables isn't available, so use this to suppress the warning
+-
+ isBasePkg <- function(pkg) {
+   priority <- tryCatch(packageDescription(pkg, fields = "Priority", encoding = NA),
+                        error = function(e) e, warning = function(e) e)
+@@ -633,8 +629,7 @@ install.packages <-
+         }
+     }
+ 
+-    if(.Platform$OS.type == "windows") {
+-        ## FIXME: we may want allow custom binaries on Windows as well...
++    if(.Platform$OS.type == "windows" && tools:::.pkg.type(type) != "other.binary") {
+         if(!startsWith(type, "win.binary") && type != "source")
+             stop("cannot install binary packages from other operating systems on Windows")
+ 
