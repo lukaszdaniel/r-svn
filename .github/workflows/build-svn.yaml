@@ -21,7 +21,7 @@ jobs:
         arch: [ 'x86_64', 'aarch64']
     steps:
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 100
 
@@ -41,7 +41,7 @@ jobs:
       shell: powershell
 
     - name: Save installer
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: Win-installer-${{matrix.arch}}
         path: src/gnuwin32/installer/R-*.exe
@@ -82,7 +82,7 @@ jobs:
         localedef -i en_US -f UTF-8 en_US.UTF-8
         echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 100
 
@@ -113,7 +113,7 @@ jobs:
     env:
       R_TEXI2DVICMD: emulation
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 100
 
