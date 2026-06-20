@@ -54,14 +54,15 @@ runs:
     - name: Install Homebrew dependencies
       shell: bash
       run: |
-        brew install xz pkg-config
+        brew install xz pkg-config pcre2
 
         XZ_PREFIX=$(brew --prefix xz)
+        PCRE2_PREFIX=$(brew --prefix pcre2)
 
-        echo "CPPFLAGS=-I$XZ_PREFIX/include" >> $GITHUB_ENV
-        echo "LDFLAGS=-L$XZ_PREFIX/lib" >> $GITHUB_ENV
+        echo "CPPFLAGS=-I$XZ_PREFIX/include -I$PCRE2_PREFIX/include $CPPFLAGS" >> $GITHUB_ENV
+        echo "LDFLAGS=-L$XZ_PREFIX/lib -L$PCRE2_PREFIX/lib $LDFLAGS" >> $GITHUB_ENV
 
-        echo "PKG_CONFIG_PATH=$XZ_PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
+        echo "PKG_CONFIG_PATH=$XZ_PREFIX/lib/pkgconfig:$PCRE2_PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
 
     - name: Install TinyTex
       if: ${{ inputs.tinytex }}
