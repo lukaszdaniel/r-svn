@@ -1,5 +1,6 @@
 name: 'Prepare MacOS system'
 description: 'Prepare system for building R'
+
 inputs:
   fortran:
     description: 'Install Fortran compiler'
@@ -14,6 +15,7 @@ inputs:
 runs:
   using: "composite"
   steps:
+
     - name: Set SDK to match CRAN
       shell: bash
       run: |
@@ -24,12 +26,9 @@ runs:
           sudo xcode-select -s /Applications/Xcode_26.0.app || true
           echo "MACOSX_DEPLOYMENT_TARGET=14.0" >> $GITHUB_ENV
         fi
-        echo "xcode is set: $(xcode-select --print-path)"
-        echo "using SDK: $(xcrun --show-sdk-version)" || true
 
-    - name: Remove homebrew packages
-      shell: bash
-      run: brew unlink $(brew list --formula) || true
+        echo "xcode path: $(xcode-select --print-path)"
+        echo "sdk version: $(xcrun --show-sdk-version)" || true
 
     - name: Install CRAN fortran build
       if: inputs.fortran
@@ -52,6 +51,18 @@ runs:
         echo "/opt/R/$(uname -m)/bin" >> $GITHUB_PATH
         echo "PKG_CONFIG_PATH=/opt/R/$(uname -m)/lib/pkgconfig:/opt/R/$(uname -m)/share/pkgconfig" >> $GITHUB_ENV
 
+    - name: Install Homebrew dependencies
+      shell: bash
+      run: |
+        brew install xz pkg-config
+
+        XZ_PREFIX=$(brew --prefix xz)
+
+        echo "CPPFLAGS=-I$XZ_PREFIX/include" >> $GITHUB_ENV
+        echo "LDFLAGS=-L$XZ_PREFIX/lib" >> $GITHUB_ENV
+
+        echo "PKG_CONFIG_PATH=$XZ_PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
+
     - name: Install TinyTex
       if: ${{ inputs.tinytex }}
       uses: r-lib/actions/setup-tinytex@v2
@@ -60,15 +71,16 @@ runs:
 
     - name: Install additional LaTeX packages
       if: ${{ inputs.tinytex }}
+      shell: bash
       run: |
         tlmgr update --self
         tlmgr install texinfo
         tlmgr list --only-installed
         echo "$HOME/Library/TinyTeX/bin/universal-darwin" >> $GITHUB_PATH
-      shell: bash
 
-    - shell: bash
+    - name: Install XQuartz
       if: inputs.xquartz
+      shell: bash
       run: |
         if [ -d "/opt/X11/lib" ]; then
           echo "/opt/X11/lib exists. Skipping xQuartz installation"
@@ -81,3 +93,4 @@ runs:
           echo "Done installing XQuartz!"
           echo "::endgroup::"
         fi
+
