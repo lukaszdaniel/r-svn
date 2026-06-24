@@ -46,6 +46,10 @@
       \item \code{fisher.test()} gains a new option \code{pval.only = TRUE}
       for the 2x2 exact case, with substantial speed gains in the case of large
       counts.
+
+      \item \code{binom.test()} and \code{poisson.test()} can now at
+      least optionally compute central two-sided p-values which match
+      the confidence intervals.
     }
   }
 
@@ -142,6 +146,10 @@
 
       \item \code{as(object, to) <- value} no longer treats \code{to} 
       as a class union when it was registered via \code{setOldClass()}.
+
+      \item In \pkg{methods}, \code{setOldClass(..., S4Class = )}
+      no longer warns about undefined subclasses when the supplied S4
+      class inherits from a class union.
     }
   }
 }
