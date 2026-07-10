@@ -62,7 +62,7 @@
       least optionally compute central two-sided p-values which match
       the confidence intervals.  Same for \code{fisher.test()} in the
       \eqn{2 \times 2}{2 by 2} case and \code{mantelhaen.test()} in
-      the \eqn{2 \times 2 \times K}{2 by 2 by K} case if an exact 
+      the \eqn{2 \times 2 \times K}{2 by 2 by K} case if an exact
       conditional test is performed.
     }
   }
@@ -85,6 +85,23 @@
   \subsection{C-Level Facilities}{
     \itemize{
       \item .
+    }
+  }
+
+  \subsection{Utilities}{
+    \itemize{
+      \item \code{tools::texi2pdf()} now reports BibTeX warnings;
+      in particular, missing references are now noted by
+      \command{R CMD check} when re-building PDF vignettes.
+    }
+  }
+
+  \subsection{Deprecated and Defunct}{
+    \itemize{
+      \item \code{structure()} now deprecates the old \dQuote{special}
+      substitute \code{attributes}' names \code{".Dim", ".Dimnames", ".Names", ".Tsp", ".Label"}
+      in favour of the respective \code{"dim", "dimnames", "names", "tsp", "levels"}
+      names.
     }
   }
 
@@ -158,7 +175,7 @@
       attribute has more than one string, e.g., \CRANpkg{S7} generics
       and methods. Thanks to \I{Hadley Wickham} for the patch.
 
-      \item \code{as(object, to) <- value} no longer treats \code{to} 
+      \item \code{as(object, to) <- value} no longer treats \code{to}
       as a class union when it was registered via \code{setOldClass()}.
 
       \item In \pkg{methods}, \code{setOldClass(..., S4Class = )}
@@ -171,18 +188,36 @@
       \item Fix for \PR{18842};  better documentation and warnings
       when specify inappropriate \code{col} to \code{filled.contour()}.
       Thanks to \I{Darakhshan Nehal}.
+
+      \item \code{cor(*, method="kendall")} and \code{cov()} now use the fast
+      N*log(N) algorithm suggested in \PR{18934} and offered by \I{David Simcha}
+      on R-devel in 2010.  With thanks to the \I{R Dev Day @ Nantes 2026}
+      contributors, notably \I{Charles Bordet} and \I{Alexis Derumigny}.
+      
+      \item In \code{nls}, follow suggestion by \I{Ben Bolker} to reorder
+      named vectors for \code{lower} and \code{upper} arguments to match
+      names of coefficients (\PR{18415}). 
+
+      \item Fix for \PR{19100}: \code{seq.int} was not handling
+      non-vector \code{along.width} arguments properly. Thanks to
+      \I{Mitchell O'Hara-Wild}.
     }
   }
 }
 
 
 \section{\Rlogo Changes in R 4.6.1 patched}{
-  
+
   \subsection{Bug Fixes}{
     \itemize{
       \item In plain-text help (\code{Rd2txt}), paragraphs are again
       recognized even when started with a non-indented Rd comment,
       fixing a regression in \R 4.4.0.
+
+      \item \code{rhyper(N, m, n, k)} now switches to the \dQuote{large}
+      scenario when \code{m + n} is larger than
+      \code{.Machine$integer.max}, preventing integer overflow, thanks to
+      \I{Jonathan Blood}'s report on R-devel.
     }
   }
 }

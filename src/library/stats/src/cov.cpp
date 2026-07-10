@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1995-2025	The R Core Team
+ *  Copyright (C) 1995-2026	The R Core Team
  *  Copyright (C) 2003		The R Foundation
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -32,6 +32,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <Defn.h> // for LDOUBLE
 #include <Rmath.h>
+#include <R_ext/Utils.h>
 
 #include "statsR.h"
 #include "localization.h"
@@ -41,6 +42,7 @@ using namespace R;
 using namespace CXXR;
 
 static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP kendall, bool cor);
+double kendall_wrapper(double* arr1, double* arr2, size_t len);
 
 
 SEXP cor(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
@@ -52,8 +54,6 @@ SEXP cov(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
 {
     return corcov(x, y, na_method, kendall, false);
 }
-
-
 
 #define COV_SUM_UPDATE				\
 		    sum += xm * ym;		\
@@ -73,7 +73,7 @@ SEXP cov(SEXP x, SEXP y, SEXP na_method, SEXP kendall)
 /** Compute   Cov(xx[], yy[])  or  Cor(.,.)  with n = length(xx)
  */
 #define COV_PAIRWISE_BODY						\
-	LDOUBLE sum, xmean = 0., ymean = 0., xsd, ysd, xm, ym;	\
+	LDOUBLE sum, xmean = 0., ymean = 0., xsd, ysd, xm, ym; 		\
         int k, nobs, n1 = -1;	/* -Wall initializing */		\
 									\
 	    nobs = 0;							\
@@ -149,9 +149,11 @@ static void cov_pairwise1(int n, int ncx, double *x,
 	double *xx = &x[i * n];
 	for (int j = 0 ; j <= i ; j++) {
 	    double *yy = &x[j * n];
-
-	    COV_PAIRWISE_BODY;
-
+	    if (kendall) {
+		ANS(i,j) = (double) kendall_wrapper(xx, yy, n);
+	    } else {
+		COV_PAIRWISE_BODY;
+	    }
 	    ANS(j,i) = ANS(i,j);
 	}
     }
@@ -165,8 +167,11 @@ static void cov_pairwise2(int n, int ncx, int ncy, double *x, double *y,
 	double *xx = &x[i * n];
 	for (int j = 0 ; j < ncy ; j++) {
 	    double *yy = &y[j * n];
-
-	    COV_PAIRWISE_BODY;
+	    if (kendall) {
+		ANS(i,j) = (double) kendall_wrapper(xx, yy, n);
+	    } else {
+		COV_PAIRWISE_BODY;
+	    }
 	}
     }
 }
@@ -275,14 +280,7 @@ static void cov_complete1(int n, int ncx, double *x, double *xm,
 	else { /* Kendall's tau */
 	    for (j = 0 ; j <= i ; j++) {
 		yy = &x[j * n];
-		sum = 0.;
-		for (k = 0 ; k < n ; k++)
-		    if (ind[k] != 0)
-			for (n1 = 0 ; n1 < n ; n1++)
-			    if (ind[n1] != 0)
-				sum += sign(xx[k] - xx[n1])
-				     * sign(yy[k] - yy[n1]);
-		ANS(j,i) = ANS(i,j) = (double)sum;
+		ANS(j,i) = ANS(i,j) = kendall_wrapper(xx, yy, (size_t) n);
 	    }
 	}
     }
@@ -345,11 +343,7 @@ static void cov_na_1(int n, int ncx, double *x, double *xm,
 			ANS(j,i) = ANS(i,j) = NA_REAL;
 		    } else {
 			yy = &x[j * n];
-			sum = 0.;
-			for (k = 0 ; k < n ; k++)
-			    for (n1 = 0 ; n1 < n ; n1++)
-				sum += sign(xx[k] - xx[n1]) * sign(yy[k] - yy[n1]);
-			ANS(j,i) = ANS(i,j) = (double)sum;
+			ANS(i,j) = ANS(j,i) = kendall_wrapper(xx, yy, (size_t) n);
 		    }
 	    }
 	}
@@ -402,14 +396,7 @@ static void cov_complete2(int n, int ncx, int ncy, double *x, double *y,
 	else { /* Kendall's tau */
 	    for (j = 0 ; j < ncy ; j++) {
 		yy = &y[j * n];
-		sum = 0.;
-		for (k = 0 ; k < n ; k++)
-		    if (ind[k] != 0)
-			for (n1 = 0 ; n1 < n ; n1++)
-			    if (ind[n1] != 0)
-				sum += sign(xx[k] - xx[n1])
- 				    * sign(yy[k] - yy[n1]);
-		ANS(i,j) = (double)sum;
+		ANS(i,j) = kendall_wrapper(xx, yy, (size_t) n);
 	    }
 	}
     }
@@ -493,11 +480,7 @@ static void cov_na_2(int n, int ncx, int ncy, double *x, double *y,
 			ANS(i,j) = NA_REAL;
 		    } else {
 			yy = &y[j * n];
-			sum = 0.;
-			for (k = 0 ; k < n ; k++)
-			    for (n1 = 0 ; n1 < n ; n1++)
-				sum += sign(xx[k] - xx[n1]) * sign(yy[k] - yy[n1]);
-			ANS(i,j) = (double)sum;
+			ANS(i,j) = kendall_wrapper(xx, yy, (size_t) n);
 		    }
 	    }
 	}
@@ -691,7 +674,7 @@ static SEXP corcov(SEXP x, SEXP y, SEXP na_method, SEXP skendall, bool cor)
     bool kendall = asBool(skendall);
 
     /* "default: complete" (easier for -Wall) */
-    na_fail = false; everything = FALSE; empty_err = true;
+    na_fail = false; everything = false; empty_err = true;
     pair = false;
     switch(method) {
     case 1:		/* use all :  no NAs */

@@ -1226,6 +1226,7 @@ void setup_Rmainloop(void)
 		 R_Interactive);
 
     /* trying to do this earlier seems to run into bootstrapping issues. */
+#ifndef RMIN_ONLY
     try
     {
         Evaluator evalr;
@@ -1237,6 +1238,7 @@ void setup_Rmainloop(void)
         check_session_exit();
         R_Suicide(_("unable to initialize the JIT\n"));
     }
+#endif
 
     R_Is_Running = RStatus::STARTED;
 }

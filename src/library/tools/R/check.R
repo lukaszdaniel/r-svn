@@ -5468,8 +5468,16 @@ add_dummies <- function(dir, Log)
                 if(R_check_suppress_RandR_message)
                     out <- filtergrep('^Xlib: *extension "RANDR" missing on display',
                                       out, useBytes = TRUE)
-                warns <- grep("^Warning: file .* is not portable",
-                              out, value = TRUE, useBytes = TRUE)
+                bibwarnings <-
+                    unique(grepv("I didn't find a database entry for",
+                                 out, useBytes = TRUE))
+                warns <- c(
+                    grepv("^Warning: file .* is not portable",
+                          out, useBytes = TRUE),
+                    if (length(bibwarnings))
+                        paste(c("From the bibliography engine:", # BibTeX or biber
+                                bibwarnings), collapse = "\n  ")
+                )
                 ltx_err <- any(grepl("LaTeX error", out, ignore.case = TRUE,
                                      useBytes = TRUE))
                 iskip <- grep("^Note: skipping .* dependencies:", out,
@@ -5493,7 +5501,8 @@ add_dummies <- function(dir, Log)
                                           out, "", ""), collapse = "\n"))
                 } else if(nw <- length(warns)) {
                     any <- TRUE
-                    if(skip_run_maybe || !ran) warningLog(Log) else noteLog(Log)
+                    if(length(bibwarnings) && nw == 1L) noteLog(Log)
+                    else if(skip_run_maybe || !ran) warningLog(Log) else noteLog(Log)
                     msg <- ngettext(nw,
                                     "Warning in re-building vignettes:\n",
                                     "Warnings in re-building vignettes:\n",
