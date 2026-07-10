@@ -15,7 +15,7 @@ for pkg in ${REC_PKGS}; do
     existing_version=$(ls ${pkg}_*.tar.gz | sed -E 's/.*_([0-9.-]+)\.tar\.gz/\1/')
 
     # Download the latest package from GitHub
-    wget -nv -O "${pkg}.zip" "http://github.com/lukaszdaniel/${pkg}/archive/master.zip"
+    curl -s -L -o "${pkg}.zip" "http://github.com/lukaszdaniel/${pkg}/archive/master.zip"
 
     # Unzip the downloaded file
     echo "Unpacking ${pkg} zip file"
