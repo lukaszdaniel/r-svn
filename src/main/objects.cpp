@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999-2025  The R Core Team.
+ *  Copyright (C) 1999-2026  The R Core Team.
  *  Copyright (C) 2002-2023  The R Foundation
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -51,9 +51,10 @@
 #include <CXXR/Environment.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/S4Object.hpp>
 #include <Defn.h>
 #include <Internal.h>
-#include <R_ext/RS.h> /* for R_Calloc, R_Realloc and for S4 object bit */
+#include <R_ext/RS.h> /* for R_Calloc, R_Realloc and for S4 object bit, R_allocObject() */
 
 using namespace R;
 using namespace CXXR;
@@ -289,12 +290,12 @@ SEXP R::R_LookupMethod(SEXP method, SEXP rho, SEXP callrho, SEXP defrho)
 	PROTECT(table);
 	val = R_findVarInFrame(table, method);
 	UNPROTECT(1); /* table */
-	if (TYPEOF(val) == PROMSXP) 
+	if (TYPEOF(val) == PROMSXP)
 	    val = eval(val, rho);
 	if (val != R_UnboundValue) {
 	    return val;
 	}
-    } 
+    }
 
     if (top == R_GlobalEnv)
 	top = R_BaseEnv;
@@ -435,7 +436,7 @@ static SEXP dispatchMethod(SEXP op, SEXP sxp, SEXP dotClass, RCNTXT *cptr, SEXP 
 		case 2: // don't forward any variables
 		    break;
 		case 3: // forward all, with an error when used
-#ifdef WARN_ON_FORWARDING		    
+#ifdef WARN_ON_FORWARDING
 		    if (TAG(s) != R_dot_defined &&
 			TAG(s) != R_dot_Method &&
 			TAG(s) != R_dot_target &&
@@ -553,7 +554,7 @@ std::pair<bool, RObject *> R::usemethod(const char *generic, SEXP obj, SEXP call
 */
 
 /* This is a primitive SPECIALSXP */
-NORET attribute_hidden 
+NORET attribute_hidden
 SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     static SEXP do_usemethod_formals = NULL;
@@ -1792,6 +1793,13 @@ attribute_hidden bool R::R_seemsOldStyleS4Object(SEXP object)
     SEXP klass = getAttrib(object, R_ClassSymbol);
     return (klass != R_NilValue && LENGTH(klass) == 1 &&
 	    getAttrib(klass, R_PackageSymbol) != R_NilValue);
+}
+
+// a bare object of type "object" (OBJSXP without the S4 bit), as used e.g. by S7
+attribute_hidden SEXP do_objsxp(SEXP call, SEXP op, SEXP args, SEXP env)
+{
+    checkArity(op, args);
+    return S4Object::create(false);
 }
 
 attribute_hidden SEXP do_setS4Object(SEXP call, SEXP op, SEXP args, SEXP env)

@@ -93,6 +93,9 @@
       \item \code{tools::texi2pdf()} now reports BibTeX warnings;
       in particular, missing references are now noted by
       \command{R CMD check} when re-building PDF vignettes.
+
+      \item \command{R CMD build} now excludes an obsolete
+      \file{data/datalist} file when the package uses \samp{LazyData}.
     }
   }
 
@@ -6970,6 +6973,9 @@
       \item New argument \code{symbolfamily} in \I{cairo}-based graphics
       devices and new function \code{cairoSymbolFont()} that can be used
       to provide the value for that argument.
+
+      \item New low-level function \code{.OBJSXP()} enables deparsing of
+      non-S4 \code{"object"} type objects.
     }
   }% end{ New Features }
 
