@@ -115,6 +115,8 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/Closure.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -378,7 +380,7 @@ static SEXP R_NewHashTable(int size)
     if (size <= 0) size = HASHMINSIZE;
 
     /* Allocate hash table in the form of a vector */
-    PROTECT(table = allocVector(VECSXP, size));
+    PROTECT(table = ListVector::create(size));
     SET_HASHPRI(table, 0);
     UNPROTECT(1);
     return(table);
@@ -574,8 +576,8 @@ static SEXP R_HashProfile(SEXP table)
     SEXP chain, ans, chain_counts, nms;
     int count;
 
-    PROTECT(ans = allocVector(VECSXP, 3));
-    PROTECT(nms = allocVector(STRSXP, 3));
+    PROTECT(ans = ListVector::create(3));
+    PROTECT(nms = StringVector::create(3));
     SET_STRING_ELT(nms, 0, mkChar("size"));    /* size of hashtable */
     SET_STRING_ELT(nms, 1, mkChar("nchains")); /* number of non-null chains */
     SET_STRING_ELT(nms, 2, mkChar("counts"));  /* length of each chain */
@@ -585,7 +587,7 @@ static SEXP R_HashProfile(SEXP table)
     SET_VECTOR_ELT(ans, 0, ScalarInteger(length(table)));
     SET_VECTOR_ELT(ans, 1, ScalarInteger(HASHPRI(table)));
 
-    PROTECT(chain_counts = allocVector(INTSXP, length(table)));
+    PROTECT(chain_counts = IntVector::create(length(table)));
     for (int i = 0; i < length(table); i++) {
 	chain = VECTOR_ELT(table, i);
 	count = 0;
@@ -2501,7 +2503,7 @@ attribute_hidden SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     bool ginherits = asLogicalNoNA(CAD4R(args), "inherits");
 
-    PROTECT(ans = allocVector(VECSXP, nvals));
+    PROTECT(ans = ListVector::create(nvals));
 
     for (int i = 0; i < nvals; i++) {
 	bool wants_S4 = FALSE;
@@ -3152,7 +3154,7 @@ SEXP R_lsInternal3(SEXP env, Rboolean all, Rboolean sorted)
 	error(_("invalid '%s' argument"), "envir");
 
     /* Step 2 : Allocate and Fill the Result */
-    SEXP ans = PROTECT(allocVector(STRSXP, k));
+    SEXP ans = PROTECT(StringVector::create(k));
     k = 0;
     if (env == R_BaseEnv || env == R_BaseNamespace)
 	BuiltinNames(all, 0, ans, &k);
@@ -3181,7 +3183,7 @@ SEXP R_envSymbols(SEXP env)
     // this would be mor efficient for non-USER-DATABASE environments
     SEXP names = PROTECT(R_lsInternal3(env, TRUE, FALSE));
     R_xlen_t n = XLENGTH(names);
-    SEXP val = PROTECT(allocVector(VECSXP, n));
+    SEXP val = PROTECT(ListVector::create(n));
     for (R_xlen_t i = 0; i < n; i++)
 	SET_VECTOR_ELT(val, i, installChar(STRING_ELT(names, i)));
     UNPROTECT(2); // names, val
@@ -3223,8 +3225,8 @@ attribute_hidden SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
     else
 	k = FrameSize(FRAME(env), all);
 
-    PROTECT(names = allocVector(STRSXP, k));
-    PROTECT(ans = allocVector(VECSXP, k));
+    PROTECT(names = StringVector::create(k));
+    PROTECT(ans = ListVector::create(k));
 
     k = 0;
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -3248,13 +3250,13 @@ attribute_hidden SEXP do_env2list(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     if (sort_nms) {
 	// return list with *sorted* names
-	SEXP sind = PROTECT(allocVector(INTSXP, k));
+	SEXP sind = PROTECT(IntVector::create(k));
 	int *indx = INTEGER(sind);
 	for (int i = 0; i < k; i++) indx[i] = i;
 	orderVector1(indx, k, names, /* nalast */ true, /* decreasing */ false,
 		     R_NilValue);
-	SEXP ans2   = PROTECT(allocVector(VECSXP, k));
-	SEXP names2 = PROTECT(allocVector(STRSXP, k));
+	SEXP ans2   = PROTECT(ListVector::create(k));
+	SEXP names2 = PROTECT(StringVector::create(k));
 	for (int i = 0; i < k; i++) {
 	    SET_STRING_ELT(names2, i, STRING_ELT(names, indx[i]));
 	    SET_VECTOR_ELT(ans2,   i, VECTOR_ELT(ans,   indx[i]));
@@ -3310,8 +3312,8 @@ attribute_hidden SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     else
 	k = FrameSize(FRAME(env), all);
 
-    PROTECT(ans  = allocVector(VECSXP, k));
-    PROTECT(tmp2 = allocVector(VECSXP, k));
+    PROTECT(ans  = ListVector::create(k));
+    PROTECT(tmp2 = ListVector::create(k));
 
     k2 = 0;
     if (env == R_BaseEnv || env == R_BaseNamespace)
@@ -3323,7 +3325,7 @@ attribute_hidden SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SEXP Xsym = install("X");
     SEXP isym = install("i");
-    PROTECT(ind = allocVector(INTSXP, 1));
+    PROTECT(ind = IntVector::create(1));
     /* tmp :=  `[`(<elist>, i) */
     PROTECT(tmp = LCONS(R_Bracket2Symbol,
 			CONS(Xsym, CONS(isym, R_NilValue))));
@@ -3345,7 +3347,7 @@ attribute_hidden SEXP do_eapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (useNms) {
 	SEXP names;
-	PROTECT(names = allocVector(STRSXP, k));
+	PROTECT(names = StringVector::create(k));
 	k = 0;
 	if (env == R_BaseEnv || env == R_BaseNamespace)
 	    BuiltinNames(all, 0, names, &k);
@@ -3398,7 +3400,7 @@ attribute_hidden SEXP do_builtins(SEXP call, SEXP op, SEXP args, SEXP rho)
     checkArity(op, args);
     bool intern = asLogicalNAFalse(CAR(args));
     int nelts = BuiltinSize(true, intern);
-    ans = allocVector(STRSXP, nelts);
+    ans = StringVector::create(nelts);
     nelts = 0;
     BuiltinNames(1, intern, ans, &nelts);
     sortVector(ans, true);
@@ -3463,7 +3465,7 @@ attribute_hidden SEXP do_pos2env(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (npos == 1)
 	env = pos2env(INTEGER(pos)[0], call);
     else {
-	PROTECT(env = allocVector(VECSXP, npos));
+	PROTECT(env = ListVector::create(npos));
 	for (int i = 0; i < npos; i++) {
 	    SET_VECTOR_ELT(env, i, pos2env(INTEGER(pos)[i], call));
 	}

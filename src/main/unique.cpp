@@ -47,6 +47,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/ExternalPointer.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Altrep.h>
@@ -1354,7 +1355,7 @@ static SEXP asUTF8(SEXP x)
 	SEXP xi = STRING_ELT(x, i);
 	if ((xi != NA_STRING) && !IS_ASCII(xi) && !IS_UTF8(xi)) {
 	    if (!ux) {
-		ux = PROTECT(allocVector(STRSXP, nx));
+		ux = PROTECT(StringVector::create(nx));
 		for(R_xlen_t j = 0; j < i; j++)
 		    SET_STRING_ELT(ux, j, STRING_ELT(x, j));
 	    }
@@ -2219,7 +2220,7 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!isString(sep) || LENGTH(sep) != 1)
 	error(_("'%s' must be a character string"), "sep");
     csep = translateChar(STRING_ELT(sep, 0));
-    PROTECT(ans = allocVector(STRSXP, n));
+    PROTECT(ans = StringVector::create(n));
     for(i = 0; i < n; i++) {
 	CXXR::RAllocStack::Scope rscope;
 	SET_STRING_ELT(ans, i, STRING_ELT(names, i));
@@ -2242,7 +2243,7 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	for(i = 0; i < n; i++) cnts[i] = 1;
 	data.nomatch = 0;
-	PROTECT(newx = allocVector(STRSXP, 1));
+	PROTECT(newx = StringVector::create(1));
 	PROTECT(dup = duplicated2(names, &data));
 	PROTECT(data.HashTable);
 	for(i = 1; i < n; i++) { /* first cannot be a duplicate */

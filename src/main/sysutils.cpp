@@ -44,6 +44,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/RawVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/Riconv.h>
@@ -295,7 +296,7 @@ attribute_hidden SEXP do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("no 'fileext'"));
     slen = (n1 > n2) ? n1 : n2;
     slen = (n3 > slen) ? n3 : slen;
-    PROTECT(ans = allocVector(STRSXP, slen));
+    PROTECT(ans = StringVector::create(slen));
     for(i = 0; i < slen; i++) {
 	tn = translateCharFP( STRING_ELT( pattern , i%n1 ) );
 	td = translateCharFP( STRING_ELT( tempdir , i%n2 ) );
@@ -411,7 +412,7 @@ attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 	N = 4*n+1;
 	std::unique_ptr<char[]> tmp = std::make_unique<char[]>(N);
 	char *buf = tmp.get();
-	PROTECT(ans = allocVector(STRSXP, i));
+	PROTECT(ans = StringVector::create(i));
 	for (i = 0, w = _wenviron; *w != NULL; i++, w++) {
 	    wcstoutf8(buf, *w, N * sizeof(char));
 	    SET_STRING_ELT(ans, i, mkCharCE(buf, CE_UTF8));
@@ -419,12 +420,12 @@ attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
 	char **e;
 	for (i = 0, e = environ; *e != NULL; i++, e++);
-	PROTECT(ans = allocVector(STRSXP, i));
+	PROTECT(ans = StringVector::create(i));
 	for (i = 0, e = environ; *e != NULL; i++, e++)
 	    SET_STRING_ELT(ans, i, mkChar(*e));
 #endif
     } else {
-	PROTECT(ans = allocVector(STRSXP, i));
+	PROTECT(ans = StringVector::create(i));
 	for (j = 0; j < i; j++) {
 #ifdef Win32
 	    const wchar_t *wnm = wtransChar(STRING_ELT(CAR(args), j));
@@ -636,7 +637,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 #ifdef HAVE_ICONVLIST
 	cnt = 0;
 	iconvlist(count_one, NULL);
-	PROTECT(ans = allocVector(STRSXP, cnt));
+	PROTECT(ans = StringVector::create(cnt));
 	cnt = 0;
 	iconvlist(write_one, (void *)ans);
 #else
@@ -687,7 +688,7 @@ attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(toRaw)
 		PROTECT(ans = duplicate(x));
 	    else {
-		PROTECT(ans = allocVector(STRSXP, LENGTH(x)));
+		PROTECT(ans = StringVector::create(LENGTH(x)));
 		SHALLOW_DUPLICATE_ATTRIB(ans, x);
 	    }
 	} else {
@@ -2814,7 +2815,7 @@ attribute_hidden SEXP do_proctime(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     PROTECT(ans = allocVector(REALSXP, 5));
-    PROTECT(nm = allocVector(STRSXP, 5));
+    PROTECT(nm = StringVector::create(5));
     R_getProcTime(REAL(ans));
     SET_STRING_ELT(nm, 0, mkChar("user.self"));
     SET_STRING_ELT(nm, 1, mkChar("sys.self"));
@@ -2974,7 +2975,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     if (!isString(x = CAR(args)))
 	error(_("invalid '%s' argument"), "paths");
-    if (!XLENGTH(x)) return allocVector(STRSXP, 0);
+    if (!XLENGTH(x)) return StringVector::create(0);
     bool dirmark = asLogicalNoNA(CADR(args), "dirmark");
 #ifndef GLOB_MARK
     if (dirmark)
@@ -3010,7 +3011,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 	initialized = true;
     }
     n = initialized ? globbuf.gl_pathc : 0;
-    PROTECT(ans = allocVector(STRSXP, n));
+    PROTECT(ans = StringVector::create(n));
     for (i = 0; i < n; i++)
 #ifdef Win32
     {

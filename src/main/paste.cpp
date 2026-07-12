@@ -45,6 +45,7 @@
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -154,7 +155,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("invalid '%s' argument"), "collapse");
 
 #define zero_return  \
-    return (do_collapse ? mkString("") : allocVector(STRSXP, 0))
+    return (do_collapse ? mkString("") : StringVector::create(0))
 
     if(nx == 0)
 	zero_return;
@@ -191,7 +192,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
     if(maxlen == 0) // all of the arguments where (equivalent to)  character(0)
 	zero_return;
 
-    SEXP ans = PROTECT( allocVector(STRSXP, maxlen));
+    SEXP ans = PROTECT( StringVector::create(maxlen));
 
     bool allKnown, anyKnown, use_UTF8, use_Bytes;
 
@@ -339,7 +340,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if(known_to_be_latin1) ienc = CE_LATIN1;
 	    if(known_to_be_utf8)   ienc = CE_UTF8;
 	}
-	PROTECT(ans = allocVector(STRSXP, 1));
+	PROTECT(ans = StringVector::create(1));
 	SET_STRING_ELT(ans, 0, mkCharCE(cbuf, ienc));
     }
     R_FreeStringBufferL(&cbuff);
@@ -364,7 +365,7 @@ attribute_hidden SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isVectorList(x))
 	error("%s", _("invalid first argument"));
     int nx = length(x);
-    if (nx == 0) return allocVector(STRSXP, 0);
+    if (nx == 0) return StringVector::create(0);
 
     SEXP sep = CADR(args);
     if (!isString(sep) || LENGTH(sep) <= 0 || STRING_ELT(sep, 0) == NA_STRING)
@@ -394,7 +395,7 @@ attribute_hidden SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (ln == 0) {nzero++; break;}
 	if (ln > maxlen) maxlen = ln;
     }
-    if (nzero || maxlen == 0) return allocVector(STRSXP, 0);
+    if (nzero || maxlen == 0) return StringVector::create(0);
 
     for (int j = 0; j < nx; j++) {
 	int k = LENGTH(VECTOR_ELT(x, j));
@@ -404,7 +405,7 @@ attribute_hidden SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 		error("%s", _("strings with \"bytes\" encoding are not allowed"));
 	}
     }
-    SEXP ans = PROTECT(allocVector(STRSXP, maxlen));
+    SEXP ans = PROTECT(StringVector::create(maxlen));
 
     for (int i = 0; i < maxlen; i++) {
 	bool use_UTF8;
@@ -545,14 +546,14 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_xlen_t i, n = XLENGTH(x);
     if (n <= 0) {
-	PROTECT(y = allocVector(STRSXP, 0));
+	PROTECT(y = StringVector::create(0));
     } else {
 	int w, d, e;
 	const char *strp;
 	switch (TYPEOF(x)) {
 
 	case LGLSXP:
-	    PROTECT(y = allocVector(STRSXP, n));
+	    PROTECT(y = StringVector::create(n));
 	    if (trim) w = 0; else formatLogical(LOGICAL(x), n, &w);
 	    w = max(w, wd);
 	    for (i = 0; i < n; i++) {
@@ -562,7 +563,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	    break;
 
 	case INTSXP:
-	    PROTECT(y = allocVector(STRSXP, n));
+	    PROTECT(y = StringVector::create(n));
 	    if (trim) w = 0;
 	    else formatInteger(INTEGER(x), n, &w);
 	    w = max(w, wd);
@@ -576,7 +577,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	    formatReal(REAL(x), n, &w, &d, &e, nsmall);
 	    if (trim) w = 0;
 	    w = max(w, wd);
-	    PROTECT(y = allocVector(STRSXP, n));
+	    PROTECT(y = StringVector::create(n));
 	    for (i = 0; i < n; i++) {
 		strp = EncodeReal0(REAL(x)[i], w, d, e, my_OutDec);
 		SET_STRING_ELT(y, i, mkChar(strp));
@@ -589,7 +590,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	    formatComplex(COMPLEX(x), n, &w, &d, &e, &wi, &di, &ei, nsmall);
 	    if (trim) wi = w = 0;
 	    w = max(w, wd); wi = max(wi, wd);
-	    PROTECT(y = allocVector(STRSXP, n));
+	    PROTECT(y = StringVector::create(n));
 	    for (i = 0; i < n; i++) {
 		strp = EncodeComplex(COMPLEX(x)[i], w, d, e, wi, di, ei, my_OutDec);
 		SET_STRING_ELT(y, i, mkChar(strp));
@@ -642,7 +643,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 		    cnt = max(cnt, R_print.na_width + max(0, w-R_print.na_width));
 	    R_CheckStack2(cnt+1);
 	    std::string buff; buff.resize(cnt+1);
-	    PROTECT(y = allocVector(STRSXP, n));
+	    PROTECT(y = StringVector::create(n));
 	    for (i = 0; i < n; i++) {
 		if(!na && STRING_ELT(xx, i) == NA_STRING) {
 		    SET_STRING_ELT(y, i, NA_STRING);

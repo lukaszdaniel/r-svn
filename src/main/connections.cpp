@@ -141,6 +141,7 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Internal.h>
@@ -1643,7 +1644,7 @@ attribute_hidden SEXP do_fifo(SEXP call, SEXP op, SEXP args, SEXP env)
 	checked_open(ncon);
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar("fifo"));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -1820,7 +1821,7 @@ attribute_hidden SEXP do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
 	checked_open(ncon);
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar("pipe"));
 #ifdef Win32
     if (CharacterMode != RTerm)
@@ -2831,7 +2832,7 @@ attribute_hidden SEXP do_gzfile(SEXP call, SEXP op, SEXP args, SEXP env)
 	checked_open(ncon);
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     switch(type) {
     case 0:
 	SET_STRING_ELT(class_, 0, mkChar("gzfile"));
@@ -3234,7 +3235,7 @@ attribute_hidden SEXP do_stdin(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     PROTECT(ans = ScalarInteger(0));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar(con->connclass));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -3249,7 +3250,7 @@ attribute_hidden SEXP do_stdout(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     PROTECT(ans = ScalarInteger(R_OutputCon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar(con->connclass));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -3265,7 +3266,7 @@ attribute_hidden SEXP do_stderr(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     PROTECT(ans = ScalarInteger(2));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar(con->connclass));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -3485,7 +3486,7 @@ attribute_hidden SEXP do_rawconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     /* already opened */
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar("rawConnection"));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -3790,13 +3791,13 @@ static void outtext_init(Rconnection con, SEXP stext, const char *mode, int idx)
     if(stext == R_NilValue) {
 	this_->namesymbol = NULL;
 	    /* create variable pointed to by con->description */
-	val = allocVector(STRSXP, 0);
+	val = StringVector::create(0);
 	R_PreserveObject(val);
     } else {
 	this_->namesymbol = install(con->description);
 	if(streql(mode, "w")) {
 	    /* create variable pointed to by con->description */
-	    PROTECT(val = allocVector(STRSXP, 0));
+	    PROTECT(val = StringVector::create(0));
 	    defineVar(this_->namesymbol, val, VECTOR_ELT(OutTextData, idx));
 	    /* Not clear if this is needed, but be conservative */
 	    ENSURE_NAMEDMAX(val);
@@ -3807,7 +3808,7 @@ static void outtext_init(Rconnection con, SEXP stext, const char *mode, int idx)
 			   STRSXP, FALSE);
 	    if(val == R_UnboundValue) {
 		warning("%s", _("text connection: appending to a non-existent char vector"));
-		PROTECT(val = allocVector(STRSXP, 0));
+		PROTECT(val = StringVector::create(0));
 		defineVar(this_->namesymbol, val, VECTOR_ELT(OutTextData, idx));
 		ENSURE_NAMEDMAX(val);
 		UNPROTECT(1);
@@ -3923,7 +3924,7 @@ attribute_hidden SEXP do_textconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     /* already opened */
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar("textConnection"));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -4024,7 +4025,7 @@ attribute_hidden SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
 	checked_open(ncon);
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar("sockconn"));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -4073,7 +4074,7 @@ attribute_hidden SEXP do_unz(SEXP call, SEXP op, SEXP args, SEXP env)
 	checked_open(ncon);
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar("unz"));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -4454,12 +4455,12 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("cannot allocate buffer in readLines"));
     nn = (n < 0) ? 1000 : n; /* initially allocate space for 1000 lines */
     nnn = (n < 0) ? R_XLEN_T_MAX : n;
-    ans = allocVector(STRSXP, nn);
+    ans = StringVector::create(nn);
     for(nread = 0; nread < nnn; nread++) {
 	if(nread >= nn) {
 	    double dnn = 2. * (double) nn;
 	    if (dnn > (double) R_XLEN_T_MAX) error("%s", _("too many items"));
-	    ans2 = allocVector(STRSXP, 2*nn);
+	    ans2 = StringVector::create(2*nn);
 	    for(i = 0; i < nn; i++)
 		SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
 	    nn *= 2;
@@ -4522,7 +4523,7 @@ no_more_lines:
     free(buf);
     if(nread < nnn && !ok)
 	error("%s", _("too few lines read in readLines"));
-    ans2 = allocVector(STRSXP, nread);
+    ans2 = StringVector::create(nread);
     for(i = 0; i < nread; i++)
 	SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
 
@@ -4723,7 +4724,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
     try {
     if(streql(what, "character")) {
 	SEXP onechar;
-	ans = allocVector(STRSXP, n);
+	ans = StringVector::create(n);
 	for(i = 0, m = 0; i < n; i++) {
 	    onechar = isRaw ? rawOneString(bytes, nbytes, &np)
 		: readOneString(con);
@@ -5278,7 +5279,7 @@ attribute_hidden SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
     /* We did as.integer in the wrapper */
     nchars = CADR(args);
     n = XLENGTH(nchars);
-    if(n == 0) return allocVector(STRSXP, 0);
+    if(n == 0) return StringVector::create(0);
     bool useBytes = asLogicalNoNA(CADDR(args), "useBytes");
 
     if (!isRaw) {
@@ -5296,7 +5297,7 @@ attribute_hidden SEXP do_readchar(SEXP call, SEXP op, SEXP args, SEXP env)
     try {
     if (mbcslocale && !utf8locale && !useBytes)
 	warning("%s", _("can only read in bytes in a non-UTF-8 MBCS locale" ));
-    ans = allocVector(STRSXP, n);
+    ans = StringVector::create(n);
     if(!isRaw && con->text &&
        (con->buff || con->nPushBack >= 0 || con->inconv))
 
@@ -5779,7 +5780,7 @@ attribute_hidden SEXP do_getconnection(SEXP call, SEXP op, SEXP args, SEXP env)
 
     con = Connections[what];
     PROTECT(ans = ScalarInteger(what));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar(con->connclass));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -5797,9 +5798,9 @@ attribute_hidden SEXP do_sumconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     Rcon = getConnection(asInteger(CAR(args)));
     PROTECT(ans = allocVector(VECSXP, 7));
-    PROTECT(names = allocVector(STRSXP, 7));
+    PROTECT(names = StringVector::create(7));
     SET_STRING_ELT(names, 0, mkChar("description"));
-    PROTECT(tmp = allocVector(STRSXP, 1));
+    PROTECT(tmp = StringVector::create(1));
     if(Rcon->enc == CE_UTF8)
 	SET_STRING_ELT(tmp, 0, mkCharCE(Rcon->description, CE_UTF8));
     else
@@ -6082,7 +6083,7 @@ attribute_hidden SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 	checked_open(ncon);
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar(class2));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -6510,7 +6511,7 @@ attribute_hidden SEXP do_gzcon(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(incon->isopen) new_->open(new_);
 
     PROTECT(ans = ScalarInteger(icon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar("gzcon"));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -6818,7 +6819,7 @@ attribute_hidden SEXP do_serversocket(SEXP call, SEXP op, SEXP args, SEXP rho)
     con->ex_ptr = PROTECT(R_MakeExternalPtr(con->id, install("connection"), R_NilValue));
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar("servsockconn"));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);
@@ -7398,7 +7399,7 @@ SEXP R_new_custom_connection(const char *description, const char *mode, const ch
     new_->ex_ptr = PROTECT(R_MakeExternalPtr(new_->id, install("connection"), R_NilValue));
 
     PROTECT(ans = ScalarInteger(ncon));
-    PROTECT(class_ = allocVector(STRSXP, 2));
+    PROTECT(class_ = StringVector::create(2));
     SET_STRING_ELT(class_, 0, mkChar(class_name));
     SET_STRING_ELT(class_, 1, mkChar("connection"));
     classgets(ans, class_);

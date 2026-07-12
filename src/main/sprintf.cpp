@@ -33,8 +33,9 @@
 #include <config.h>
 #endif
 
-#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
+#include <CXXR/ProtectStack.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include "RBufferUtils.h"
@@ -44,6 +45,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 #define MAXLINE MAXELTSIZE
 #define MAXNARGS 100
@@ -119,7 +121,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(format))
 	error(_("'%s' is not a character vector"), "fmt");
     nfmt = length(format);
-    if (nfmt == 0) return allocVector(STRSXP, 0);
+    if (nfmt == 0) return StringVector::create(0);
     args = CDR(args); nargs--;
     if(nargs >= MAXNARGS)
 	error(_("only %d arguments are allowed"), MAXNARGS);
@@ -133,7 +135,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("invalid type of argument[%d]: '%s'"),
 		  i+1, CHAR(type2str(t_ai)));
 	lens[i] = length(a[i]);
-	if(lens[i] == 0) return allocVector(STRSXP, 0);
+	if(lens[i] == 0) return StringVector::create(0);
     }
 
 #define CHECK_maxlen							\
@@ -481,7 +483,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 	}  /* end for ( each chunk ) */
 
 	if(ns == 0) { /* may have adjusted maxlen now ... */
-	    PROTECT(ans = allocVector(STRSXP, maxlen));
+	    PROTECT(ans = StringVector::create(maxlen));
 	    nprotect++;
 	}
 	SET_STRING_ELT(ans, ns, mkCharCE(outputString,

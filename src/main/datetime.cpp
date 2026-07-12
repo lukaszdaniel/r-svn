@@ -115,6 +115,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 // #include <Rmath.h> // for imin2() -> on windows due to cmath header: error: 'std::Rf_beta' has not been declared
 
@@ -957,7 +958,7 @@ static void makelt(stm *tm, SEXP ans, R_xlen_t i, bool valid, double frac_secs)
     if (isUTC) {					\
 	tzone = PROTECT(mkString(tz));			\
     } else {						\
-	tzone = PROTECT(allocVector(STRSXP, 3));	\
+	tzone = PROTECT(StringVector::create(3));	\
 	SET_STRING_ELT(tzone, 0, mkChar(tz));		\
 	SET_STRING_ELT(tzone, 1, mkChar(R_tzname[0]));	\
 	SET_STRING_ELT(tzone, 2, mkChar(R_tzname[1]));	\
@@ -1010,7 +1011,7 @@ static void makelt(stm *tm, SEXP ans, R_xlen_t i, bool valid, double frac_secs)
 // Uses ans ansnames tzone tzsi from enclosing function
 #define END_MAKElt					\
     setAttrib(ans, R_NamesSymbol, ansnames);		\
-    SEXP klass = PROTECT(allocVector(STRSXP, 2));	\
+    SEXP klass = PROTECT(StringVector::create(2));	\
     SET_STRING_ELT(klass, 0, mkChar("POSIXlt"));	\
     SET_STRING_ELT(klass, 1, mkChar("POSIXt"));		\
     classgets(ans, klass);				\
@@ -1023,7 +1024,7 @@ static void makelt(stm *tm, SEXP ans, R_xlen_t i, bool valid, double frac_secs)
 
 #define END_MAKElt_no_reset				\
     setAttrib(ans, R_NamesSymbol, ansnames);		\
-    SEXP klass = PROTECT(allocVector(STRSXP, 2));	\
+    SEXP klass = PROTECT(StringVector::create(2));	\
     SET_STRING_ELT(klass, 0, mkChar("POSIXlt"));	\
     SET_STRING_ELT(klass, 1, mkChar("POSIXt"));		\
     classgets(ans, klass);				\
@@ -1142,10 +1143,10 @@ attribute_hidden SEXP do_asPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = PROTECT(allocVector(VECSXP, nans));
     for(int i = 0; i < 9; i++)
 	SET_VECTOR_ELT(ans, i, allocVector(i > 0 ? INTSXP : REALSXP, n));
-    SET_VECTOR_ELT(ans,  9, allocVector(STRSXP, n)); // zone
+    SET_VECTOR_ELT(ans,  9, StringVector::create(n)); // zone
     SET_VECTOR_ELT(ans, 10, allocVector(INTSXP, n)); // gmtoff
 
-    SEXP ansnames = PROTECT(allocVector(STRSXP, nans));
+    SEXP ansnames = PROTECT(StringVector::create(nans));
     for(int i = 0; i < nans; i++)
 	SET_STRING_ELT(ansnames, i, mkChar(ltnames[i]));
 
@@ -1268,7 +1269,7 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
     // set names() and class() :
     SEXP nm = getAttrib(VECTOR_ELT(x, 5), R_NamesSymbol);
     if (nm != R_NilValue) setAttrib(ans, R_NamesSymbol, nm);
-    SEXP klass = PROTECT(allocVector(STRSXP, 2));
+    SEXP klass = PROTECT(StringVector::create(2));
     SET_STRING_ELT(klass, 0, mkChar("POSIXct"));
     SET_STRING_ELT(klass, 1, mkChar("POSIXt"));
     classgets(ans, klass);
@@ -1339,7 +1340,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 	  check_nlen(i);
     }
     R_xlen_t N = (n > 0) ? ((m > n) ? m : n) : 0;
-    ans = allocVector(STRSXP, N);
+    ans = StringVector::create(N);
     char tm_zone[20];
     bool have_zone =
 #ifdef HAVE_TM_GMTOFF
@@ -1495,7 +1496,7 @@ attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     if (nm != R_NilValue) {
 	GCStackRoot<> nm2;
 	nm2 = xlengthgets(nm, n);
-	SEXP nm3 = allocVector(STRSXP, N);
+	SEXP nm3 = StringVector::create(N);
 	for (R_xlen_t j = 0; j < N; j++)
 	    SET_STRING_ELT(nm3, j, STRING_ELT(nm2, j % n));
 	setAttrib(ans, R_NamesSymbol, nm3);
@@ -1537,10 +1538,10 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     ans = PROTECT(allocVector(VECSXP, nans));
     for(int i = 0; i < 9; i++)
 	SET_VECTOR_ELT(ans, i, allocVector(i > 0 ? INTSXP : REALSXP, N));
-    SET_VECTOR_ELT(ans,  9, allocVector(STRSXP, N));
+    SET_VECTOR_ELT(ans,  9, StringVector::create(N));
     SET_VECTOR_ELT(ans, 10, allocVector(INTSXP, N));
 
-    SEXP ansnames = PROTECT(allocVector(STRSXP, nans));
+    SEXP ansnames = PROTECT(StringVector::create(nans));
     for(int i = 0; i < nans; i++)
 	SET_STRING_ELT(ansnames, i, mkChar(ltnames[i]));
 
@@ -1635,7 +1636,7 @@ attribute_hidden SEXP do_strptime(SEXP call, SEXP op, SEXP args, SEXP env)
     END_MAKElt;
     if(nm != R_NilValue) {
 	if (N > n) {// we need to recycle names
-	    SEXP nm3 = allocVector(STRSXP, N);
+	    SEXP nm3 = StringVector::create(N);
 	    for (R_xlen_t j = 0; j < N; j++)
 		SET_STRING_ELT(nm3, j, STRING_ELT(nm, j % n));
 	    setAttrib(VECTOR_ELT(ans, 5), R_NamesSymbol, nm3);
@@ -1665,10 +1666,10 @@ attribute_hidden SEXP do_D2POSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans = PROTECT(allocVector(VECSXP, 11));
     for(int i = 0; i < 9; i++)
 	SET_VECTOR_ELT(ans, i, allocVector(i > 0 ? INTSXP : REALSXP, n));
-    SET_VECTOR_ELT(ans, 9, allocVector(STRSXP, n));
+    SET_VECTOR_ELT(ans, 9, StringVector::create(n));
     SET_VECTOR_ELT(ans, 10, allocVector(INTSXP, n));
 
-    SEXP ansnames = PROTECT(allocVector(STRSXP, 11));
+    SEXP ansnames = PROTECT(StringVector::create(11));
     for(int i = 0; i < 11; i++)
 	SET_STRING_ELT(ansnames, i, mkChar(ltnames[i]));
 
@@ -1880,10 +1881,10 @@ static SEXP balancePOSIXlt(SEXP x, bool fill_only, bool do_class)
     SEXP ans = PROTECT(allocVector(VECSXP, n_comp));
     for(int i = 0; i < 9; i++)
 	SET_VECTOR_ELT(ans, i, allocVector(i > 0 ? INTSXP : REALSXP, n));
-    if(have_10) SET_VECTOR_ELT(ans, 9, allocVector(STRSXP, n));
+    if(have_10) SET_VECTOR_ELT(ans, 9, StringVector::create(n));
     if(have_11) SET_VECTOR_ELT(ans, 10, allocVector(INTSXP, n));
 
-    SEXP ansnames = PROTECT(allocVector(STRSXP, n_comp));
+    SEXP ansnames = PROTECT(StringVector::create(n_comp));
     for(int i = 0; i < n_comp; i++)
 	SET_STRING_ELT(ansnames, i, mkChar(ltnames[i]));
 
@@ -1968,7 +1969,7 @@ static SEXP balancePOSIXlt(SEXP x, bool fill_only, bool do_class)
 
     setAttrib(ans, R_NamesSymbol, ansnames); // sec, min, ...
     if(do_class) {
-	SEXP klass = PROTECT(allocVector(STRSXP, 2));
+	SEXP klass = PROTECT(StringVector::create(2));
 	SET_STRING_ELT(klass, 0, mkChar("POSIXlt"));
 	SET_STRING_ELT(klass, 1, mkChar("POSIXt"));
 	classgets(ans, klass);
@@ -1981,7 +1982,7 @@ static SEXP balancePOSIXlt(SEXP x, bool fill_only, bool do_class)
 	setAttrib(ans, install("tzone"), tz);
     }
     if(set_nm) { // names(.), attached to x[[5]] = x$year:
-	SEXP nmN = PROTECT(allocVector(STRSXP, n));
+	SEXP nmN = PROTECT(StringVector::create(n));
 	R_xlen_t ni = XLENGTH(nm); // typically = nlen[5]
 	// names(.) will have to become length n;  $year is already
 	// fill names, recycling:

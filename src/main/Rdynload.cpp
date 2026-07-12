@@ -101,6 +101,8 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/ExternalPointer.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Rmath.h>
 #include <Rdynpriv.h>
 #include <Defn.h>
@@ -252,7 +254,7 @@ static void initLoadedDLL(void)
     LoadedDLL = (DllInfo **) calloc(MaxNumDLLs, sizeof(DllInfo*));
     if (LoadedDLL == NULL)
 	R_Suicide(_("could not allocate space for DLL table"));
-    DLLInfoEptrs = allocVector(VECSXP, MaxNumDLLs);
+    DLLInfoEptrs = ListVector::create(MaxNumDLLs);
     R_PreserveObject(DLLInfoEptrs);
     SymbolEptrs = CONS(R_NilValue, R_NilValue);
     R_PreserveObject(SymbolEptrs);
@@ -1390,11 +1392,11 @@ static SEXP Rf_MakeDLLInfo(DllInfo *info)
 
     int n = sizeof(names)/sizeof(names[0]);
 
-    PROTECT(ref = allocVector(VECSXP, n));
-    SET_VECTOR_ELT(ref, 0, tmp = allocVector(STRSXP, 1));
+    PROTECT(ref = ListVector::create(n));
+    SET_VECTOR_ELT(ref, 0, tmp = StringVector::create(1));
     if(info->name)
 	SET_STRING_ELT(tmp, 0, mkChar(info->name));
-    SET_VECTOR_ELT(ref, 1, tmp = allocVector(STRSXP, 1));
+    SET_VECTOR_ELT(ref, 1, tmp = StringVector::create(1));
     if(info->path)
 	SET_STRING_ELT(tmp, 0, mkChar(info->path));
     SET_VECTOR_ELT(ref, 2, ScalarLogical(info->useDynamicLookup));
@@ -1406,7 +1408,7 @@ static SEXP Rf_MakeDLLInfo(DllInfo *info)
     R_registerSymbolEptr(ehandle, einfo);
     SET_VECTOR_ELT(ref, 5, ScalarLogical(info->forceSymbols));
 
-    PROTECT(elNames = allocVector(STRSXP, n));
+    PROTECT(elNames = StringVector::create(n));
     for(int i = 0; i < n; i++)
 	SET_STRING_ELT(elNames, i, mkChar(names[i]));
     setAttrib(ref, R_NamesSymbol, elNames);
@@ -1475,7 +1477,7 @@ attribute_hidden SEXP R_getDllTable(void)
     SEXP ans, nm;
 
     do {
-    PROTECT(ans = allocVector(VECSXP, CountDLL));
+    PROTECT(ans = ListVector::create(CountDLL));
     for(int i = 0; i < CountDLL; i++)
 	SET_VECTOR_ELT(ans, i, Rf_MakeDLLInfo(LoadedDLL[i]));
     
@@ -1490,7 +1492,7 @@ attribute_hidden SEXP R_getDllTable(void)
     } while (CountDLL != LENGTH(ans));
 
     PROTECT(ans);
-    PROTECT(nm = allocVector(STRSXP, CountDLL));
+    PROTECT(nm = StringVector::create(CountDLL));
     setAttrib(ans, R_NamesSymbol, nm);
     for(int i = 0; i < CountDLL; i++)
 	SET_STRING_ELT(nm, i,
@@ -1507,8 +1509,8 @@ static SEXP createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol 
     int n = (symbol->type != R_ANY_SYM) ? 4 : 3;
     int numProtects = 0;
 
-    PROTECT(sym = allocVector(VECSXP, n));    numProtects++;
-    PROTECT(names = allocVector(STRSXP, n));    numProtects++;
+    PROTECT(sym = ListVector::create(n));    numProtects++;
+    PROTECT(names = StringVector::create(n));    numProtects++;
 
     if(!sname || sname == R_NilValue) {
 	PROTECT(sname = mkString(symbol->symbol.call->name));
@@ -1533,7 +1535,7 @@ static SEXP createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol 
     SET_STRING_ELT(names, 2, mkChar("dll"));
 
 
-    PROTECT(klass = allocVector(STRSXP, (symbol->type != R_ANY_SYM ? 2 : 1)));
+    PROTECT(klass = StringVector::create((symbol->type != R_ANY_SYM ? 2 : 1)));
     numProtects++;
     SET_STRING_ELT(klass, LENGTH(klass) - 1, mkChar("NativeSymbolInfo"));
 
@@ -1601,7 +1603,7 @@ static SEXP R_getRoutineSymbols(NativeSymbolType type, DllInfo *info)
 	num = 0;
     }
 
-    PROTECT(ans = allocVector(VECSXP, num));
+    PROTECT(ans = ListVector::create(num));
 
     for(int i = 0; i < num ; i++) {
 	switch(type) {
@@ -1647,14 +1649,14 @@ attribute_hidden SEXP R_getRegisteredRoutines(SEXP dll)
     if (!info) error("%s", _("NULL value passed for DllInfo"));
 
 
-    PROTECT(ans = allocVector(VECSXP, 4));
+    PROTECT(ans = ListVector::create(4));
 
     SET_VECTOR_ELT(ans, 0, R_getRoutineSymbols(R_C_SYM, info));
     SET_VECTOR_ELT(ans, 1, R_getRoutineSymbols(R_CALL_SYM, info));
     SET_VECTOR_ELT(ans, 2, R_getRoutineSymbols(R_FORTRAN_SYM, info));
     SET_VECTOR_ELT(ans, 3, R_getRoutineSymbols(R_EXTERNAL_SYM, info));
 
-    PROTECT(snames = allocVector(STRSXP, 4));
+    PROTECT(snames = StringVector::create(4));
     for (int i = 0; i < 4; i++)
 	SET_STRING_ELT(snames, i, mkChar(names[i]));
     setAttrib(ans, R_NamesSymbol, snames);

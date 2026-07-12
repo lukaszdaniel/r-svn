@@ -43,6 +43,8 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Rembedded.h>
 #include <Defn.h>
 #include <Internal.h>
@@ -1038,7 +1040,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 	} else
 	    warn_status(cmd, res);
 
-	rval = PROTECT(allocVector(STRSXP, i));
+	rval = PROTECT(StringVector::create(i));
 	for (j = (i - 1); j >= 0; j--) {
 	    SET_STRING_ELT(rval, j, CAR(tlist));
 	    tlist = CDR(tlist);
@@ -1058,7 +1060,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef HAVE_AQUA
 	R_Busy(1);
 #endif
-	tlist = PROTECT(allocVector(INTSXP, 1));
+	tlist = PROTECT(IntVector::create(1));
 	fflush(stdout);
 	int res;
 	/* When running background processes (last_is_amp) in interactive mode,
@@ -1122,7 +1124,7 @@ attribute_hidden SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     char *login;
 
     checkArity(op, args);
-    PROTECT(ans = allocVector(STRSXP, 8));
+    PROTECT(ans = StringVector::create(8));
     if(uname(&name) == -1) {
 	UNPROTECT(1);
 	return R_NilValue;
@@ -1152,7 +1154,7 @@ attribute_hidden SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
 #else
     SET_STRING_ELT(ans, 7, mkChar("unknown"));
 #endif
-    PROTECT(ansnames = allocVector(STRSXP, 8));
+    PROTECT(ansnames = StringVector::create(8));
     SET_STRING_ELT(ansnames, 0, mkChar("sysname"));
     SET_STRING_ELT(ansnames, 1, mkChar("release"));
     SET_STRING_ELT(ansnames, 2, mkChar("version"));

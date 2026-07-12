@@ -76,10 +76,12 @@
 #include <cstdio>
 #include <cstring>
 #include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/RawVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Fileio.h>
 #include <Rconnections.h>
@@ -428,15 +430,15 @@ static void uri_decode(char *s)
 static SEXP parse_query(char *query)
 {
     int parts = 0;
-    SEXP res, names;
+    GCStackRoot<> res, names;
     char *s = query, *key = 0, *value = query, *t = query;
     while (*s) {
 	if (*s == '&') parts++;
 	s++;
     }
     parts++;
-    res = PROTECT(allocVector(STRSXP, parts));
-    names = PROTECT(allocVector(STRSXP, parts));
+    res = StringVector::create(parts);
+    names = StringVector::create(parts);
     s = query;
     parts = 0;
     while (1) {
@@ -473,7 +475,7 @@ static SEXP parse_query(char *query)
 	} else *(t++) = *(s++);
     }
     setAttrib(res, R_NamesSymbol, names);
-    UNPROTECT(2);
+
     return res;
 }
 

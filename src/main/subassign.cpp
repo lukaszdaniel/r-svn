@@ -104,6 +104,7 @@
 #include <CXXR/Promise.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -611,7 +612,7 @@ static SEXP DeleteListElements(SEXP x, SEXP which)
     }
     PROTECT(xnames = getAttrib(x, R_NamesSymbol));
     if (xnames != R_NilValue) {
-	PROTECT(xnewnames = allocVector(STRSXP, ii));
+	PROTECT(xnewnames = StringVector::create(ii));
 	ii = 0;
 	for (i = 0; i < len; i++) {
 	    if (pinclude[i] == 1) {
@@ -936,7 +937,7 @@ static SEXP VectorAssign(SEXP call, SEXP rho, SEXP x, SEXP s, SEXP y)
 	    }
 	}
 	else {
-	    PROTECT(oldnames = allocVector(STRSXP, nx));
+	    PROTECT(oldnames = StringVector::create(nx));
 	    for (i = 0; i < nx; i++)
 		SET_STRING_ELT(oldnames, i, R_BlankString);
 	    for (i = 0; i < n; i++) {
@@ -1782,7 +1783,7 @@ static SEXP DeleteOneVectorListItem(SEXP x, R_xlen_t which)
 	}
 	PROTECT(xnames = getAttrib(x, R_NamesSymbol));
 	if (xnames != R_NilValue) {
-	    PROTECT(ynames = allocVector(STRSXP, n - 1));
+	    PROTECT(ynames = StringVector::create(n - 1));
 	    k = 0;
 	    for (i = 0 ; i < n; i++)
 		if(i != which)
@@ -2114,7 +2115,7 @@ attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho
 	if (stretch && newname != R_NilValue) {
 	    names = getAttrib(x, R_NamesSymbol);
 	    if (names == R_NilValue) {
-		PROTECT(names = allocVector(STRSXP, length(x)));
+		PROTECT(names = StringVector::create(length(x)));
 		SET_STRING_ELT(names, offset, newname);
 		setAttrib(x, R_NamesSymbol, names);
 		UNPROTECT(1); /* names */
@@ -2324,7 +2325,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 		    SEXP ans, ansnames;
 		    int ii;
 		    PROTECT(ans = allocVector(type, nx - 1));
-		    PROTECT(ansnames = allocVector(STRSXP, nx - 1));
+		    PROTECT(ansnames = StringVector::create(nx - 1));
 		    for (i = 0, ii = 0; i < nx; i++) {
 			if (i != imatch) {
 			    if (type == VECSXP)
@@ -2368,7 +2369,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 		/* and finally, adjust the attributes. */
 		SEXP ans, ansnames;
 		PROTECT(ans = allocVector(VECSXP, nx + 1));
-		PROTECT(ansnames = allocVector(STRSXP, nx + 1));
+		PROTECT(ansnames = StringVector::create(nx + 1));
 		for (i = 0; i < nx; i++)
 		    SET_VECTOR_ELT(ans, i, VECTOR_ELT(x, i));
 		if (isNull(names)) {

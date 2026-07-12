@@ -819,7 +819,7 @@ static SEXP intern_getwd(void)
 	    char *buf = R_alloc(needed + 1, 1);
 	    wcstoutf8(buf, wbuf, needed + 1);
 	    R_UTF8fixslash(buf);
-	    PROTECT(rval = allocVector(STRSXP, 1));
+	    PROTECT(rval = StringVector::create(1));
 	    SET_STRING_ELT(rval, 0, mkCharCE(buf, CE_UTF8));
 	    UNPROTECT(1);
 	}
@@ -894,7 +894,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
     s = CAR(args);
     if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
-    PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
+    PROTECT(ans = StringVector::create(n = LENGTH(s)));
     for(i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
@@ -924,7 +924,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
     s = CAR(args);
     if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
-    PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
+    PROTECT(ans = StringVector::create(n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
@@ -972,7 +972,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     s = CAR(args);
     if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
-    PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
+    PROTECT(ans = StringVector::create(n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
@@ -1034,7 +1034,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     s = CAR(args);
     if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
-    PROTECT(ans = allocVector(STRSXP, n = LENGTH(s)));
+    PROTECT(ans = StringVector::create(n = LENGTH(s)));
     for (int i = 0; i < n; i++) {
 	if (STRING_ELT(s, i) == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
@@ -1094,7 +1094,7 @@ attribute_hidden SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* Does any platform not have this? */
 #ifdef HAVE_REALPATH
-    PROTECT(ans = allocVector(STRSXP, n));
+    PROTECT(ans = StringVector::create(n));
     for (i = 0; i < n; i++) {
 	elp = STRING_ELT(paths, i);
 	if (elp == NA_STRING) {
@@ -1125,7 +1125,7 @@ attribute_hidden SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 #else
     bool OK;
     warning("%s", _("this platform does not have realpath so the results may not be canonical"));
-    PROTECT(ans = allocVector(STRSXP, n));
+    PROTECT(ans = StringVector::create(n));
     for (i = 0; i < n; i++) {
 	elp = STRING_ELT(paths, i);
 	if (elp == NA_STRING) {
@@ -2927,7 +2927,7 @@ attribute_hidden SEXP do_pretty(SEXP call, SEXP op, SEXP args, SEXP rho)
 	unit = R_pretty(&l, &u, &n, min_n, shrink, REAL(hi), eps, 0);
     int l_ans = return_bounds ? 3 : 4;
     SEXP ans = PROTECT(allocVector(VECSXP, l_ans)),
-	nm = allocVector(STRSXP, l_ans);
+	nm = StringVector::create(l_ans);
     setAttrib(ans, R_NamesSymbol, nm);
     SET_VECTOR_ELT(ans, 0, ScalarReal(l));
     SET_VECTOR_ELT(ans, 1, ScalarReal(u));
@@ -2974,7 +2974,7 @@ attribute_hidden SEXP do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
 	cptr[i][ix] = 0;
     }
     str_signif_sexp(x, type, width, digits, fmt, flag, cptr);
-    SEXP ans = PROTECT(allocVector(STRSXP, n));
+    SEXP ans = PROTECT(StringVector::create(n));
     for (R_xlen_t i = 0; i < n; i++) SET_STRING_ELT(ans, i, mkChar(cptr[i]));
     UNPROTECT(2);
     return ans;

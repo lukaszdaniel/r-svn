@@ -669,7 +669,7 @@ attribute_hidden SEXP do_substrgets(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(x))
 	error("%s", _("replacing substrings in a non-character object"));
     R_xlen_t len = XLENGTH(x);
-    SEXP s = PROTECT(allocVector(STRSXP, len));
+    SEXP s = PROTECT(StringVector::create(len));
 
     if (len > 0) {
 	SEXP sa = CADR(args), // start
@@ -963,7 +963,7 @@ attribute_hidden SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
     bool usecl = asLogicalNoNA(CADDR(args), "use.classes");
 
     R_xlen_t len = XLENGTH(x);
-    SEXP ans = PROTECT(allocVector(STRSXP, len));
+    SEXP ans = PROTECT(StringVector::create(len));
     bool warn = FALSE;
     for (R_xlen_t i = 0 ; i < len ; i++) {
 	CXXR::RAllocStack::Scope rscope;
@@ -1013,7 +1013,7 @@ attribute_hidden SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("non-character names"));
     n = XLENGTH(arg);
     bool allow_ = asLogicalNoNA(CADR(args), "allow_");
-    PROTECT(ans = allocVector(STRSXP, n));
+    PROTECT(ans = StringVector::create(n));
     for (i = 0 ; i < n ; i++) {
 	CXXR::RAllocStack::Scope rscope;
 	This = translateChar(STRING_ELT(arg, i));
@@ -1103,7 +1103,7 @@ attribute_hidden SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
     /* coercion is done in wrapper */
     if (!isString(x)) error("%s", _("non-character argument"));
     n = XLENGTH(x);
-    PROTECT(y = allocVector(STRSXP, n));
+    PROTECT(y = StringVector::create(n));
     for (i = 0; i < n; i++) {
 	SEXP xi = STRING_ELT(x, i);
 	if (IS_UTF8(xi) ||
@@ -1588,7 +1588,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	ISORT(xtable, xtable_cnt, xtable_t , xtable_comp);
 	COMPRESS(xtable, &xtable_cnt, xtable_t, xtable_comp);
 
-	PROTECT(y = allocVector(STRSXP, n));
+	PROTECT(y = StringVector::create(n));
 	for (i = 0; i < n; i++) {
 	    CXXR::RAllocStack::Scope rscope;
 	    el = STRING_ELT(x,i);
@@ -1671,7 +1671,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_Free(trs_old_ptr); R_Free(trs_new_ptr);
 
 	n = LENGTH(x);
-	PROTECT(y = allocVector(STRSXP, n));
+	PROTECT(y = StringVector::create(n));
 	CXXR::RAllocStack::Scope rscope;
 	for (i = 0; i < n; i++) {
 	    if (STRING_ELT(x,i) == NA_STRING)
@@ -1710,7 +1710,7 @@ attribute_hidden SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(x = CAR(args)))
 	error("%s", _("strtrim() requires a character vector"));
     len = XLENGTH(x);
-    PROTECT(s = allocVector(STRSXP, len));
+    PROTECT(s = StringVector::create(len));
     if(len > 0) {
 	PROTECT(width = coerceVector(CADR(args), INTSXP));
 	nw = LENGTH(width);
@@ -1806,7 +1806,7 @@ attribute_hidden SEXP R::stringSuffix(SEXP string, int fromIndex) {
     int origLen = LENGTH(string);
     int newLen = origLen - fromIndex;
 
-    SEXP res = PROTECT(allocVector(STRSXP, newLen));
+    SEXP res = PROTECT(StringVector::create(newLen));
     for (int i = 0; i < newLen; i++) {
 	SET_STRING_ELT(res, i, STRING_ELT(string, fromIndex++));
     }
@@ -1832,11 +1832,11 @@ attribute_hidden SEXP do_strrep(SEXP call, SEXP op, SEXP args, SEXP env)
     nx = XLENGTH(x);
     nn = XLENGTH(n);
     if((nx == 0) || (nn == 0))
-	return allocVector(STRSXP, 0);
+	return StringVector::create(0);
 
     ns = (nx > nn) ? nx : nn;
 
-    PROTECT(s = allocVector(STRSXP, ns));
+    PROTECT(s = StringVector::create(ns));
     is = ix = in = 0;
     for(; is < ns; is++) {
 	el = STRING_ELT(x, ix);

@@ -168,11 +168,11 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 	}
 	else {
 	    if(isNull(x))
-		val = SETCAR(args, allocVector(LGLSXP, 0));
+		val = SETCAR(args, LogicalVector::create(0));
 	    else // isNumeric(x)
 		val = SETCAR(args, coerceVector(x, LGLSXP));
 	    if(isNull(y))
-		y = SETCAR(args, allocVector(LGLSXP, 0));
+		y = SETCAR(args, LogicalVector::create(0));
 	    else // isNumeric(y)
 		y = SETCADR(args, coerceVector(y, LGLSXP));
 	    val = binaryLogic(PRIMVAL(op), val, y);
@@ -205,27 +205,26 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 
 static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 {
-    SEXP x, dim, dimnames, names;
+    GCStackRoot<> x, dim, dimnames, names;
     R_xlen_t i, len;
 
     len = XLENGTH(arg);
     if (!isLogical(arg) && !isNumber(arg) && !isRaw(arg)) {
 	/* For back-compatibility */
-	if (!len) return allocVector(LGLSXP, 0);
+	if (!len) return LogicalVector::create(0);
 	errorcall(call, "%s", _("invalid argument type"));
     }
     if (isLogical(arg) || isRaw(arg))
 	// copy all attributes in this case
-	x = PROTECT(shallow_duplicate(arg));
+	x = shallow_duplicate(arg);
     else {
-	x = PROTECT(allocVector(isRaw(arg) ? RAWSXP : LGLSXP, len));
-	PROTECT(names = getAttrib(arg, R_NamesSymbol));
-	PROTECT(dim = getAttrib(arg, R_DimSymbol));
-	PROTECT(dimnames = getAttrib(arg, R_DimNamesSymbol));
+	x = allocVector(isRaw(arg) ? RAWSXP : LGLSXP, len);
+	names = getAttrib(arg, R_NamesSymbol);
+	dim = getAttrib(arg, R_DimSymbol);
+	dimnames = getAttrib(arg, R_DimNamesSymbol);
 	if(names != R_NilValue) setAttrib(x, R_NamesSymbol, names);
 	if(dim != R_NilValue) setAttrib(x, R_DimSymbol, dim);
 	if(dimnames != R_NilValue) setAttrib(x, R_DimNamesSymbol, dimnames);
-	UNPROTECT(3);
     }
     switch(TYPEOF(arg)) {
     case LGLSXP:
@@ -286,7 +285,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
     default:
 	UNIMPLEMENTED_TYPE("lunary", arg);
     }
-    UNPROTECT(1);
+
     return x;
 }
 
@@ -359,10 +358,10 @@ static SEXP binaryLogic(int code, SEXP s1, SEXP s2)
     n2 = XLENGTH(s2);
     n = (n1 > n2) ? n1 : n2;
     if (n1 == 0 || n2 == 0) {
-	ans = allocVector(LGLSXP, 0);
+	ans = LogicalVector::create(0);
 	return ans;
     }
-    ans = allocVector(LGLSXP, n);
+    ans = LogicalVector::create(n);
 
     int *px1 = LOGICAL(s1);
     int *px2 = LOGICAL(s2);

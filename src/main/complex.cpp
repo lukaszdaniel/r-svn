@@ -71,10 +71,12 @@
 
 #include <Localization.h>
 #include <R_ext/Itermacros.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Complex.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <Defn.h>		/* -> ../include/R_ext/Complex.h */
 #include <Internal.h>
@@ -303,7 +305,7 @@ attribute_hidden SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 	switch(PRIMVAL(op)) {
 	case 1:	/* Re */
 	    {
-		y = allocVector(REALSXP, n);
+		y = RealVector::create(n);
 		double *py = REAL(y);
 		for(i = 0 ; i < n ; i++)
 		    py[i] = px[i].r;
@@ -311,7 +313,7 @@ attribute_hidden SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 	    break;
 	case 2:	/* Im */
 	    {
-		y = allocVector(REALSXP, n);
+		y = RealVector::create(n);
 		double *py = REAL(y);
 		for(i = 0 ; i < n ; i++)
 		    py[i] = px[i].i;
@@ -320,7 +322,7 @@ attribute_hidden SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 	case 3:	/* Mod */
 	case 6:	/* abs */
 	    {
-		y = allocVector(REALSXP, n);
+		y = RealVector::create(n);
 		double *py = REAL(y);
 		for(i = 0 ; i < n ; i++)
 #if HAVE_CABS
@@ -332,7 +334,7 @@ attribute_hidden SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 	    break;
 	case 4:	/* Arg */
 	    {
-		y = allocVector(REALSXP, n);
+		y = RealVector::create(n);
 		double *py = REAL(y);
 		for(i = 0 ; i < n ; i++)
 #if HAVE_CARG
@@ -358,7 +360,7 @@ attribute_hidden SEXP do_cmathfuns(SEXP call, SEXP op, SEXP args, SEXP env)
 	n = XLENGTH(x);
 	if(isReal(x)) PROTECT(x);
 	else PROTECT(x = coerceVector(x, REALSXP));
-	y = NO_REFERENCES(x) ? x : allocVector(REALSXP, n);
+	y = NO_REFERENCES(x) ? x : RealVector::create(n);
 	double *py = REAL(y);
 	const double *px = REAL_RO(x);
 
@@ -654,9 +656,8 @@ static std::complex<double> z_atanh(std::complex<double> z)
 static bool cmath1(std::complex<double> (*f)(std::complex<double>),
 		       const Rcomplex *x, Rcomplex *y, R_xlen_t n)
 {
-    R_xlen_t i;
     bool naflag = false;
-    for (i = 0 ; i < n ; i++) {
+    for (R_xlen_t i = 0 ; i < n ; i++) {
 	if (ISNA(x[i].r) || ISNA(x[i].i)) {
 	    y[i].r = NA_REAL; y[i].i = NA_REAL;
 	} else {
@@ -670,13 +671,13 @@ static bool cmath1(std::complex<double> (*f)(std::complex<double>),
 
 attribute_hidden SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP x, y;
+    GCStackRoot<> x, y;
     R_xlen_t n;
     bool naflag = false;
 
-    PROTECT(x = CAR(args));
+    x = CAR(args);
     n = XLENGTH(x);
-    PROTECT(y = ComplexVector::create(n));
+    y = ComplexVector::create(n);
 
     const Rcomplex *px = COMPLEX_RO(x);
     Rcomplex *py = COMPLEX(y);
@@ -711,7 +712,7 @@ attribute_hidden SEXP complex_math1(SEXP call, SEXP op, SEXP args, SEXP env)
     if (naflag)
 	warningcall(call, _("NaNs produced in function \"%s\""), PRIMNAME(op));
     SHALLOW_DUPLICATE_ATTRIB(y, x);
-    UNPROTECT(2);
+
     return y;
 }
 
@@ -858,15 +859,15 @@ static void R_cpolyroot(double *opr, double *opi, int *degree,
 attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
-    SEXP z = CAR(args);
+    GCStackRoot<> z;
+    z = CAR(args);
     switch(TYPEOF(z)) {
     case CPLXSXP:
-	PROTECT(z);
 	break;
     case REALSXP:
     case INTSXP:
     case LGLSXP:
-	PROTECT(z = coerceVector(z, CPLXSXP));
+	z = coerceVector(z, CPLXSXP);
 	break;
     default:
 	UNIMPLEMENTED_TYPE("polyroot", z);
@@ -888,11 +889,11 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
     n = degree + 1; /* omit trailing zeroes */
     SEXP r;
     if(degree >= 1) {
-	SEXP zr, zi, rr, ri;
-	PROTECT(rr = allocVector(REALSXP, n));
-	PROTECT(ri = allocVector(REALSXP, n));
-	PROTECT(zr = allocVector(REALSXP, n));
-	PROTECT(zi = allocVector(REALSXP, n));
+	GCStackRoot<RealVector> zr, zi, rr, ri;
+	rr = RealVector::create(n);
+	ri = RealVector::create(n);
+	zr = RealVector::create(n);
+	zi = RealVector::create(n);
 
 	double *p_rr = REAL(rr);
 	double *p_ri = REAL(ri);
@@ -908,17 +909,15 @@ attribute_hidden SEXP do_polyroot(SEXP call, SEXP op, SEXP args, SEXP rho)
 	bool fail;
 	R_cpolyroot(p_zr, p_zi, &degree, p_rr, p_ri, &fail);
 	if(fail) error("%s", _("root finding code failed"));
-	UNPROTECT(2);
+
 	r = ComplexVector::create(degree);
 	Complex *pr = CXXR_COMPLEX(r);
 	for(i = 0 ; i < degree ; i++) {
 	    pr[i].r = p_rr[i];
 	    pr[i].i = p_ri[i];
 	}
-	UNPROTECT(3);
     }
     else {
-	UNPROTECT(1);
 	r = ComplexVector::create(0);
     }
     return r;

@@ -42,6 +42,8 @@
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -401,7 +403,7 @@ attribute_hidden SEXP R::DropDims(SEXP x)
 		INTEGER(newdims)[n++] = dim[i];
 	if(!isNull(getAttrib(dims, R_NamesSymbol))) {
 	    GCStackRoot<> new_nms;
-	    new_nms = allocVector(STRSXP, n);
+	    new_nms = StringVector::create(n);
 	    SEXP nms_d = getAttrib(dims, R_NamesSymbol);
 	    for (i = 0, n = 0; i < ndims; i++)
 		if (dim[i] != 1)
@@ -415,8 +417,8 @@ attribute_hidden SEXP R::DropDims(SEXP x)
 		    VECTOR_ELT(dimnames, i) != R_NilValue)
 		    havenames = true;
 	    if (havenames) {
-		PROTECT(newnames = allocVector(VECSXP, n));
-		PROTECT(newnamesnames = allocVector(STRSXP, n));
+		PROTECT(newnames = ListVector::create(n));
+		PROTECT(newnamesnames = StringVector::create(n));
 		for (i = 0, n = 0; i < ndims; i++) {
 		    if (dim[i] != 1) {
 			if(!isNull(dnn))
@@ -1496,8 +1498,8 @@ attribute_hidden SEXP do_matprod(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    SEXP dimnames, dimnamesnames, dnx=R_NilValue, dny=R_NilValue; \
 									\
 	    /* allocate dimnames and dimnamesnames */			\
-	    PROTECT(dimnames = allocVector(VECSXP, 2));			\
-	    PROTECT(dimnamesnames = allocVector(STRSXP, 2))
+	    PROTECT(dimnames = ListVector::create(2));			\
+	    PROTECT(dimnamesnames = StringVector::create(2))
 
 	    ALLOC_DIMNAMES_NAMES;
 	    if (xdims != R_NilValue) {
@@ -1744,11 +1746,11 @@ attribute_hidden SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* R <= 2.2.0: dropped list(NULL,NULL) dimnames :
      * if(rnames != R_NilValue || cnames != R_NilValue) */
     if(!isNull(dimnames)) {
-	PROTECT(dimnames = allocVector(VECSXP, 2));
+	PROTECT(dimnames = ListVector::create(2));
 	SET_VECTOR_ELT(dimnames, 0, cnames);
 	SET_VECTOR_ELT(dimnames, 1, rnames);
 	if(!isNull(dimnamesnames)) {
-	    PROTECT(ndimnamesnames = allocVector(VECSXP, 2));
+	    PROTECT(ndimnamesnames = ListVector::create(2));
 	    SET_VECTOR_ELT(ndimnamesnames, 1, STRING_ELT(dimnamesnames, 0));
 	    SET_VECTOR_ELT(ndimnamesnames, 0,
 			   (ldim == 2) ? STRING_ELT(dimnamesnames, 1):
@@ -1930,7 +1932,7 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP nmdm = getAttrib(dimsa, R_NamesSymbol);
 	if(nmdm != R_NilValue) { // dimsr needs correctly permuted names()
 	    PROTECT(nmdm);
-	    SEXP nm_dr = PROTECT(allocVector(STRSXP, n));
+	    SEXP nm_dr = PROTECT(StringVector::create(n));
 	    for (i = 0; i < n; i++) {
 		SET_STRING_ELT(nm_dr, i, STRING_ELT(nmdm, pp[i]));
 	    }
@@ -1943,10 +1945,10 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (dna != R_NilValue) {
 	    SEXP dnna, dnr, dnnr;
 
-	    PROTECT(dnr  = allocVector(VECSXP, n));
+	    PROTECT(dnr  = ListVector::create(n));
 	    PROTECT(dnna = getAttrib(dna, R_NamesSymbol));
 	    if (dnna != R_NilValue) {
-		PROTECT(dnnr = allocVector(STRSXP, n));
+		PROTECT(dnnr = StringVector::create(n));
 		for (i = 0; i < n; i++) {
 		    SET_VECTOR_ELT(dnr, i, VECTOR_ELT(dna, pp[i]));
 		    SET_STRING_ELT(dnnr, i, STRING_ELT(dnna, pp[i]));
@@ -2529,7 +2531,7 @@ attribute_hidden SEXP do_asplit(SEXP call, SEXP op, SEXP args, SEXP rho)
     n2 = asInteger(d2);
     havednc = (!isNull(dnc) && length(dnc) > 0);
     keepdim = (!asLogical(drop));
-    PROTECT(y = allocVector(VECSXP, n2));
+    PROTECT(y = ListVector::create(n2));
     y = dimgets(y, da);
     if(!isNull(dna) && (length(dna) > 0)) {
 	y = dimnamesgets(y, dna);

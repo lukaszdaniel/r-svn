@@ -48,6 +48,9 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Rinternals.h>
@@ -338,10 +341,10 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* setup work, names, lens  */
     DE->xmaxused = length(DE->work); DE->ymaxused = 0;
-    DE->lens = allocVector(INTSXP, DE->xmaxused);
+    DE->lens = CXXR::IntVector::create(DE->xmaxused);
 
     if (isNull(tnames)) {
-	DE->names = allocVector(STRSXP, DE->xmaxused);
+	DE->names = CXXR::StringVector::create(DE->xmaxused);
 	for (int i = 0; i < DE->xmaxused; i++) {
 	    char clab[25];
 	    snprintf(clab, 25, "var%d", i);
@@ -406,7 +409,7 @@ SEXP in_RX11_dataentry(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (int i = 0; i < DE->xmaxused; i++)
 	if (!isNull(VECTOR_ELT(DE->work, i))) cnt++;
     if (cnt < DE->xmaxused) {
-	work2 = allocVector(VECSXP, cnt);
+	work2 = CXXR::ListVector::create(cnt);
 	for (int i = 0, j = 0; i < DE->xmaxused; i++) {
 	    if(!isNull(VECTOR_ELT(DE->work, i))) {
 		SET_VECTOR_ELT(work2, j, VECTOR_ELT(DE->work, i));
@@ -481,7 +484,7 @@ SEXP in_R_X11_dataviewer(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* setup work, names, lens  */
     DE->xmaxused = length(DE->work); DE->ymaxused = 0;
-    DE->lens = allocVector(INTSXP, DE->xmaxused);
+    DE->lens = CXXR::IntVector::create(DE->xmaxused);
 
     for (int i = 0; i < DE->xmaxused; i++) {
 	int len = LENGTH(VECTOR_ELT(DE->work, i));

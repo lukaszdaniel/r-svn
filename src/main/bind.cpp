@@ -41,6 +41,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/Promise.hpp>
+#include <CXXR/StringVector.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -942,7 +943,7 @@ attribute_hidden SEXP do_c_dflt(SEXP call, SEXP op, SEXP args, SEXP env)
     /* Build and attach the names attribute for the returned object. */
 
     if (data.ans_nnames && data.ans_length > 0) {
-	PROTECT(data.ans_names = allocVector(STRSXP, data.ans_length));
+	PROTECT(data.ans_names = StringVector::create(data.ans_length));
 	data.ans_nnames = 0;
 	while (args != R_NilValue) {
 	    struct NameData nameData;
@@ -1069,7 +1070,7 @@ attribute_hidden SEXP do_unlist(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (data.ans_nnames && data.ans_length > 0) {
 	struct NameData nameData;
-	PROTECT(data.ans_names = allocVector(STRSXP, data.ans_length));
+	PROTECT(data.ans_names = StringVector::create(data.ans_length));
 	if (!recurse) {
 	    if (TYPEOF(args) == VECSXP) {
 		SEXP names = getAttrib(args, R_NamesSymbol);
@@ -1499,7 +1500,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	SEXP nam, tnam,v;
 	PROTECT(dn = allocVector(VECSXP, 2));
 	if (have_cnames)
-	    nam = SET_VECTOR_ELT(dn, 1, allocVector(STRSXP, cols));
+	    nam = SET_VECTOR_ELT(dn, 1, StringVector::create(cols));
 	else
 	    nam = R_NilValue;	/* -Wall */
 	int j = 0;
@@ -1744,7 +1745,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	SEXP nam, tnam,v;
 	PROTECT(dn = allocVector(VECSXP, 2));
 	if (have_rnames)
-	    nam = SET_VECTOR_ELT(dn, 0, allocVector(STRSXP, rows));
+	    nam = SET_VECTOR_ELT(dn, 0, StringVector::create(rows));
 	else
 	    nam = R_NilValue;	/* -Wall */
 	int j = 0;

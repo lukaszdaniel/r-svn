@@ -42,6 +42,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ConsCell.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -84,7 +85,7 @@ static SEXP cross_colon(SEXP call, SEXP s, SEXP t)
     }
     UNPROTECT(2);
     if (!isNull(ls) && !isNull(lt)) {
-	PROTECT(la = allocVector(STRSXP, nls * nlt));
+	PROTECT(la = StringVector::create(nls * nlt));
 	k = 0;
 	/* FIXME: possibly UTF-8 version */
 	for (int i = 0; i < nls; i++) {
@@ -421,7 +422,7 @@ attribute_hidden SEXP do_rep_int(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (inherits(s, "factor")) {
 	SEXP tmp;
 	if(inherits(s, "ordered")) {
-	    PROTECT(tmp = allocVector(STRSXP, 2));
+	    PROTECT(tmp = StringVector::create(2));
 	    SET_STRING_ELT(tmp, 0, mkChar("ordered"));
 	    SET_STRING_ELT(tmp, 1, mkChar("factor"));
 	} else PROTECT(tmp = mkString("factor"));
@@ -496,7 +497,7 @@ attribute_hidden SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (inherits(s, "factor")) {
 	SEXP tmp;
 	if(inherits(s, "ordered")) {
-	    PROTECT(tmp = allocVector(STRSXP, 2));
+	    PROTECT(tmp = StringVector::create(2));
 	    SET_STRING_ELT(tmp, 0, mkChar("ordered"));
 	    SET_STRING_ELT(tmp, 1, mkChar("factor"));
 	} else PROTECT(tmp = mkString("factor"));

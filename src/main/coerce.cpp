@@ -319,7 +319,7 @@ attribute_hidden SEXP R::StringFromLogical(int x)
     static SEXP lglcache = NULL;
     if (x == NA_LOGICAL) return NA_STRING;
     if (lglcache == NULL) {
-	lglcache = allocVector(STRSXP, 2);
+	lglcache = StringVector::create(2);
 	R_PreserveObject(lglcache);
 	SET_STRING_ELT(lglcache, 0, mkChar("FALSE"));
 	SET_STRING_ELT(lglcache, 1, mkChar("TRUE"));
@@ -336,7 +336,7 @@ attribute_hidden SEXP R::StringFromInteger(int x, int *warn)
     if (x == NA_INTEGER) return NA_STRING;
     else if (x >= 0 && x < SFI_CACHE_SIZE) {
 	if (sficache == NULL) {
-	    sficache = allocVector(STRSXP, SFI_CACHE_SIZE);
+	    sficache = StringVector::create(SFI_CACHE_SIZE);
 	    R_PreserveObject(sficache);
 	}
 	SEXP cval = STRING_ELT(sficache, x);
@@ -391,7 +391,7 @@ SEXP Rf_PairToVectorList(SEXP x)
 	SET_VECTOR_ELT(xnew, i, CAR(xptr));
     }
     if (named) {
-	PROTECT(xnames = allocVector(STRSXP, len));
+	PROTECT(xnames = StringVector::create(len));
 	xptr = x;
 	for (i = 0, xptr = x; i < len; i++, xptr = CDR(xptr)) {
 	    if(TAG(xptr) == R_NilValue)
@@ -1391,7 +1391,7 @@ SEXP Rf_asCharacterFactor(SEXP x)
     if (TYPEOF(labels) != STRSXP)
 	error("%s", _("malformed factor"));
     int nl = LENGTH(labels);
-    PROTECT(ans = allocVector(STRSXP, n));
+    PROTECT(ans = StringVector::create(n));
     for(R_xlen_t i = 0; i < n; i++) {
       int ii = INTEGER_ELT(x, i);
       if (ii == NA_INTEGER)

@@ -40,6 +40,8 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -173,7 +175,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if(STRING_ELT(pat, 0) == NA_STRING) {
 	if(opt_value) {
-	    PROTECT(ans = allocVector(STRSXP, n));
+	    PROTECT(ans = StringVector::create(n));
 	    for(i = 0; i < n; i++)
 		SET_STRING_ELT(ans, i, NA_STRING);
 	    SEXP nms = getAttrib(vec, R_NamesSymbol);
@@ -265,7 +267,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if(opt_value) {
-	PROTECT(ans = allocVector(STRSXP, nmatches));
+	PROTECT(ans = StringVector::create(nmatches));
 	SEXP nmold = getAttrib(vec, R_NamesSymbol), nm;
 	for (j = i = 0 ; i < n ; i++) {
 	    if(LOGICAL(ind)[i])
@@ -273,7 +275,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	/* copy across names and subset */
 	if(!isNull(nmold)) {
-	    nm = allocVector(STRSXP, nmatches);
+	    nm = StringVector::create(nmatches);
 	    for (i = 0, j = 0; i < n ; i++)
 		if(LOGICAL(ind)[i])
 		    SET_STRING_ELT(nm, j++, STRING_ELT(nmold, i));
@@ -457,7 +459,7 @@ static SEXP adist_full(SEXP x, SEXP y, double *costs, bool opt_counts)
     PROTECT(x = getAttrib(x, R_NamesSymbol));
     PROTECT(y = getAttrib(y, R_NamesSymbol));
     if(!isNull(x) || !isNull(y)) {
-	PROTECT(dimnames = allocVector(VECSXP, 2));
+	PROTECT(dimnames = ListVector::create(2));
 	SET_VECTOR_ELT(dimnames, 0, x);
 	SET_VECTOR_ELT(dimnames, 1, y);
 	setAttrib(ans, R_DimNamesSymbol, dimnames);
@@ -466,8 +468,8 @@ static SEXP adist_full(SEXP x, SEXP y, double *costs, bool opt_counts)
 
     if(opt_counts) {
 	R_Free(buf);
-	PROTECT(dimnames = allocVector(VECSXP, 3));
-	PROTECT(names = allocVector(STRSXP, 3));
+	PROTECT(dimnames = ListVector::create(3));
+	PROTECT(names = StringVector::create(3));
 	SET_STRING_ELT(names, 0, mkChar("ins"));
 	SET_STRING_ELT(names, 1, mkChar("del"));
 	SET_STRING_ELT(names, 2, mkChar("sub"));
@@ -478,7 +480,7 @@ static SEXP adist_full(SEXP x, SEXP y, double *costs, bool opt_counts)
 	setAttrib(ans, install("counts"), counts);
 	UNPROTECT(2); /* names, dimnames */
 	if(!isNull(x) || !isNull(y)) {
-	    PROTECT(dimnames = allocVector(VECSXP, 2));
+	    PROTECT(dimnames = ListVector::create(2));
 	    SET_VECTOR_ELT(dimnames, 0, x);
 	    SET_VECTOR_ELT(dimnames, 1, y);
 	    setAttrib(trafos, R_DimNamesSymbol, dimnames);
@@ -701,15 +703,15 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     PROTECT(x = getAttrib(x, R_NamesSymbol));
     PROTECT(y = getAttrib(y, R_NamesSymbol));
     if(!isNull(x) || !isNull(y)) {
-	PROTECT(dimnames = allocVector(VECSXP, 2));
+	PROTECT(dimnames = ListVector::create(2));
 	SET_VECTOR_ELT(dimnames, 0, x);
 	SET_VECTOR_ELT(dimnames, 1, y);
 	setAttrib(ans, R_DimNamesSymbol, dimnames);
 	UNPROTECT(1); /* dimnames */
     }
     if(opt_counts) {
-	PROTECT(dimnames = allocVector(VECSXP, 3));
-	PROTECT(names = allocVector(STRSXP, 3));
+	PROTECT(dimnames = ListVector::create(3));
+	PROTECT(names = StringVector::create(3));
 	SET_STRING_ELT(names, 0, mkChar("ins"));
 	SET_STRING_ELT(names, 1, mkChar("del"));
 	SET_STRING_ELT(names, 2, mkChar("sub"));
@@ -719,8 +721,8 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
 	setAttrib(counts, R_DimNamesSymbol, dimnames);
 	setAttrib(ans, install("counts"), counts);
 	UNPROTECT(2); /* names, dimnames */
-	PROTECT(dimnames = allocVector(VECSXP, 3));
-	PROTECT(names = allocVector(STRSXP, 2));
+	PROTECT(dimnames = ListVector::create(3));
+	PROTECT(names = StringVector::create(2));
 	SET_STRING_ELT(names, 0, mkChar("first"));
 	SET_STRING_ELT(names, 1, mkChar("last"));
 	SET_VECTOR_ELT(dimnames, 0, x);
@@ -843,7 +845,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     amatch_regaparams(&params, patlen,
 		      REAL(opt_bounds), INTEGER(opt_costs));
 
-    PROTECT(ans = allocVector(VECSXP, n));
+    PROTECT(ans = ListVector::create(n));
 
     for(R_xlen_t i = 0; i < n; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();

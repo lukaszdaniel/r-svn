@@ -299,7 +299,7 @@ attribute_hidden void R::onsigusr2(int dummy)
 static void setupwarnings(void)
 {
     R_Warnings = ListVector::create(R_nwarnings);
-    setAttrib(R_Warnings, R_NamesSymbol, allocVector(STRSXP, R_nwarnings));
+    setAttrib(R_Warnings, R_NamesSymbol, StringVector::create(R_nwarnings));
 }
 
 /* Rvsnprintf_mbcs: like vsnprintf, but guaranteed to null-terminate and not to
@@ -683,8 +683,8 @@ void R::PrintWarnings(const char *hdr)
 	RWprintf("\n");
     }
     /* now truncate and install last.warning */
-    s = allocVector(VECSXP, R_CollectWarnings);
-    t = allocVector(STRSXP, R_CollectWarnings);
+    s = ListVector::create(R_CollectWarnings);
+    t = StringVector::create(R_CollectWarnings);
     names = CAR(ATTRIB(R_Warnings));
     for (int i = 0; i < R_CollectWarnings; i++) {
 	SET_VECTOR_ELT(s, i, VECTOR_ELT(R_Warnings, i));
@@ -1196,7 +1196,7 @@ attribute_hidden SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char * domain = determine_domain_gettext(CAR(args), /*up*/TRUE);
 
     if(domain && strlen(domain)) {
-	SEXP ans = PROTECT(allocVector(STRSXP, n));
+	SEXP ans = PROTECT(StringVector::create(n));
 	bool trim;
 #ifdef _gettext_3_args_only_
 #else
@@ -1649,7 +1649,7 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
 static SEXP mkHandlerEntry(SEXP klass, SEXP parentenv, SEXP handler, SEXP rho,
 			   SEXP result, bool calling)
 {
-    SEXP entry = allocVector(VECSXP, 5);
+    SEXP entry = ListVector::create(5);
     SET_VECTOR_ELT(entry, 0, klass);
     SET_VECTOR_ELT(entry, 1, parentenv);
     SET_VECTOR_ELT(entry, 2, handler);
@@ -1722,7 +1722,7 @@ attribute_hidden SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
     GCStackRoot<> newstack, result;
 
     if (R_HandlerResultToken == NULL) {
-	R_HandlerResultToken = allocVector(VECSXP, 1);
+	R_HandlerResultToken = ListVector::create(1);
 	R_PreserveObject(R_HandlerResultToken);
     }
 
@@ -1744,7 +1744,7 @@ attribute_hidden SEXP do_addCondHands(SEXP call, SEXP op, SEXP args, SEXP rho)
     int n = LENGTH(handlers);
     SEXP oldstack = R_HandlerStack;
 
-    result = allocVector(VECSXP, RESULT_SIZE);
+    result = ListVector::create(RESULT_SIZE);
     SET_VECTOR_ELT(result, RESULT_SIZE - 1, R_HandlerResultToken);
     newstack = oldstack;
 
@@ -1918,8 +1918,8 @@ static SEXP getInterruptCondition(void)
 {
     /**** FIXME: should probably pre-allocate this */
     GCStackRoot<> cond, klass;
-    cond = allocVector(VECSXP, 0);
-    klass = allocVector(STRSXP, 2);
+    cond = ListVector::create(0);
+    klass = StringVector::create(2);
     SET_STRING_ELT(klass, 0, mkChar("interrupt"));
     SET_STRING_ELT(klass, 1, mkChar("condition"));
     classgets(cond, klass);
@@ -2459,7 +2459,7 @@ SEXP R_tryCatch(SEXP (*body)(void *), void *bdata,
 
     Evaluator::setInterruptsSuspended(TRUE);
 
-    if (conds == NULL) conds = allocVector(STRSXP, 0);
+    if (conds == NULL) conds = StringVector::create(0);
     PROTECT(conds);
     SEXP fin = finally != NULL ? R_TrueValue : R_FalseValue;
     SEXP tcdptr = R_MakeExternalPtr(&tcd, R_NilValue, R_NilValue);
@@ -2694,18 +2694,18 @@ SEXP R::R_vmakeErrorCondition(SEXP call,
 	call = getCurrentCall();
     PROTECT(call);
     int nelem = nextra + 2;
-    SEXP cond = PROTECT(allocVector(VECSXP, nelem));
+    SEXP cond = PROTECT(ListVector::create(nelem));
 
     Rvsnprintf_mbcs(emsg_buf, BUFSIZE, format, ap);
     SET_VECTOR_ELT(cond, 0, mkString(emsg_buf));
     SET_VECTOR_ELT(cond, 1, call);
 
-    SEXP names = allocVector(STRSXP, nelem);
+    SEXP names = StringVector::create(nelem);
     setAttrib(cond, R_NamesSymbol, names);
     SET_STRING_ELT(names, 0, mkChar("message"));
     SET_STRING_ELT(names, 1, mkChar("call"));
 
-    SEXP klass = allocVector(STRSXP, subclassname == NULL ? 3 : 4);
+    SEXP klass = StringVector::create(subclassname == NULL ? 3 : 4);
     setAttrib(cond, R_ClassSymbol, klass);
     if (subclassname == NULL) {
 	SET_STRING_ELT(klass, 0, mkChar(classname));
@@ -2935,18 +2935,18 @@ SEXP R_vmakeWarningCondition(SEXP call,
 	call = getCurrentCall();
     PROTECT(call);
     int nelem = nextra + 2;
-    SEXP cond = PROTECT(allocVector(VECSXP, nelem));
+    SEXP cond = PROTECT(ListVector::create(nelem));
 
     Rvsnprintf_mbcs(emsg_buf, BUFSIZE, format, ap);
     SET_VECTOR_ELT(cond, 0, mkString(emsg_buf));
     SET_VECTOR_ELT(cond, 1, call);
 
-    SEXP names = allocVector(STRSXP, nelem);
+    SEXP names = StringVector::create(nelem);
     setAttrib(cond, R_NamesSymbol, names);
     SET_STRING_ELT(names, 0, mkChar("message"));
     SET_STRING_ELT(names, 1, mkChar("call"));
 
-    SEXP klass = allocVector(STRSXP, subclassname == NULL ? 3 : 4);
+    SEXP klass = StringVector::create(subclassname == NULL ? 3 : 4);
     setAttrib(cond, R_ClassSymbol, klass);
     if (subclassname == NULL) {
 	SET_STRING_ELT(klass, 0, mkChar(classname));

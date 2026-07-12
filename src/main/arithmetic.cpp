@@ -790,7 +790,7 @@ static SEXP integer_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2, SEXP lcall)
     if (n1 == 0 || n2 == 0) n = 0; else n = (n1 > n2) ? n1 : n2;
 
     if (code == DIVOP || code == POWOP)
-	ans = allocVector(REALSXP, n);
+	ans = RealVector::create(n);
     else
 	ans = R_allocOrReuseVector(s1, s2, INTSXP, n);
     if (n == 0) return ans;
@@ -930,7 +930,7 @@ static SEXP real_binary(ARITHOP_TYPE code, SEXP s1, SEXP s2)
     n2 = XLENGTH(s2);
 
     /* S4-compatibility change: if n1 or n2 is 0, result is of length 0 */
-    if (n1 == 0 || n2 == 0) return (allocVector(REALSXP, 0));
+    if (n1 == 0 || n2 == 0) return (RealVector::create(0));
 
     n = (n1 > n2) ? n1 : n2;
     PROTECT(ans = R_allocOrReuseVector(s1, s2, REALSXP, n));
@@ -1458,7 +1458,7 @@ attribute_hidden SEXP do_abs(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     } else if (TYPEOF(x) == REALSXP) {
 	R_xlen_t n = XLENGTH(x);
-	PROTECT(s = NO_REFERENCES(x) ? x : allocVector(REALSXP, n));
+	PROTECT(s = NO_REFERENCES(x) ? x : RealVector::create(n));
 	double *pa = REAL(s);
 	const double *px = REAL_RO(x);
 	for (R_xlen_t i = 0 ; i < n ; i++)
@@ -1502,7 +1502,7 @@ static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
     na = XLENGTH(sa);					\
     nb = XLENGTH(sb);					\
     if ((na == 0) || (nb == 0))	{			\
-	PROTECT(sy = allocVector(REALSXP, 0));		\
+	PROTECT(sy = RealVector::create(0));		\
 	if (na == 0) SHALLOW_DUPLICATE_ATTRIB(sy, sa);	\
 	UNPROTECT(1);					\
 	return(sy);					\
@@ -1510,7 +1510,7 @@ static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
     n = (na < nb) ? nb : na;				\
     PROTECT(sa = coerceVector(sa, REALSXP));		\
     PROTECT(sb = coerceVector(sb, REALSXP));		\
-    PROTECT(sy = allocVector(REALSXP, n));		\
+    PROTECT(sy = RealVector::create(n));		\
     a = REAL_RO(sa);					\
     b = REAL_RO(sb);					\
     y = REAL(sy);					\
@@ -1946,7 +1946,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
     nc = XLENGTH(sc);						\
     if ((na == 0) || (nb == 0) || (nc == 0)) {			\
 	/* for 0-length a we want the attributes of a: */	\
-	PROTECT(sy = allocVector(REALSXP, 0));			\
+	PROTECT(sy = RealVector::create(0));			\
 	if (na == 0) SHALLOW_DUPLICATE_ATTRIB(sy, sa);		\
 	UNPROTECT(1);						\
 	return(sy);						\
@@ -1957,7 +1957,7 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
     PROTECT(sa = coerceVector(sa, REALSXP));			\
     PROTECT(sb = coerceVector(sb, REALSXP));			\
     PROTECT(sc = coerceVector(sc, REALSXP));			\
-    PROTECT(sy = allocVector(REALSXP, n));			\
+    PROTECT(sy = RealVector::create(n));			\
     const double *a = REAL_RO(sa),				\
 	*b = REAL_RO(sb),					\
 	*c = REAL_RO(sc);					\
@@ -2171,7 +2171,7 @@ static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
     nd = XLENGTH(sd);							\
     if ((na == 0) || (nb == 0) || (nc == 0) || (nd == 0)) {		\
 	/* for 0-length a we want the attributes of a: */		\
-	PROTECT(sy = allocVector(REALSXP, 0));				\
+	PROTECT(sy = RealVector::create(0));				\
 	if (na == 0) SHALLOW_DUPLICATE_ATTRIB(sy, sa);			\
 	UNPROTECT(1);							\
 	return(sy);							\
@@ -2184,7 +2184,7 @@ static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
     PROTECT(sb = coerceVector(sb, REALSXP));				\
     PROTECT(sc = coerceVector(sc, REALSXP));				\
     PROTECT(sd = coerceVector(sd, REALSXP));				\
-    PROTECT(sy = allocVector(REALSXP, n));				\
+    PROTECT(sy = RealVector::create(n));				\
     const double *a = REAL_RO(sa),					\
 	*b = REAL_RO(sb),						\
 	*c = REAL_RO(sc),						\
@@ -2341,7 +2341,7 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
     ne = XLENGTH(se);							\
     if ((na == 0) || (nb == 0) || (nc == 0) || (nd == 0) || (ne == 0)) { \
 	/* ... TODO if(na == 0) do keep attributes of 'a' */		\
-	return(allocVector(REALSXP, 0));				\
+	return(RealVector::create(0));				\
     }									\
     n = na;								\
     if (n < nb) n = nb;							\
@@ -2353,7 +2353,7 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
     PROTECT(sc = coerceVector(sc, REALSXP));				\
     PROTECT(sd = coerceVector(sd, REALSXP));				\
     PROTECT(se = coerceVector(se, REALSXP));				\
-    PROTECT(sy = allocVector(REALSXP, n));				\
+    PROTECT(sy = RealVector::create(n));				\
     const double							\
 	*a = REAL_RO(sa),						\
 	*b = REAL_RO(sb),						\

@@ -81,6 +81,8 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h>  /* for R_Calloc/R_Free */
@@ -596,7 +598,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     /* group by token for efficiency with PCRE/TRE versions */
-    PROTECT(ans = allocVector(VECSXP, len));
+    PROTECT(ans = ListVector::create(len));
     vmax = vmaxget();
     for (itok = 0; itok < tlen; itok++) {
 	SEXP this_ = STRING_ELT(tok, itok);
@@ -651,7 +653,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 			for (ntok = 0; *p; p += used, ntok++)
 			    used = utf8clen(*p);
 			p = buf;
-			PROTECT(t = allocVector(STRSXP, ntok));
+			PROTECT(t = StringVector::create(ntok));
 			for (j = 0; j < ntok; j++, p += used) {
 			    used = utf8clen(*p);
 			    memcpy(bf, p, used); bf[used] = '\0';
@@ -662,7 +664,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    } else {
 			ntok = nt;
 			mbs_init(&mb_st);
-			PROTECT(t = allocVector(STRSXP, ntok));
+			PROTECT(t = StringVector::create(ntok));
 			for (j = 0; j < ntok; j++, p += used) {
 			    /* This is valid as we have already checked */
 			    used = mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st);
@@ -675,7 +677,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		       single-byte locale and not marked as UTF-8 */
 		    char bf[2];
 		    ntok = strlen(buf);
-		    PROTECT(t = allocVector(STRSXP, ntok));
+		    PROTECT(t = StringVector::create(ntok));
 		    bf[1] = '\0';
 		    if(useBytes) {
 			for (j = 0; j < ntok; j++) {
@@ -753,7 +755,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		bufp = laststart;
 		SET_VECTOR_ELT(ans, i,
-			       t = allocVector(STRSXP, ntok + (*bufp ? 1 : 0)));
+			       t = StringVector::create(ntok + (*bufp ? 1 : 0)));
 		/* and fill with the splits */
 		laststart = bufp = buf;
 		pt = R_Realloc(pt, strlen(buf)+1, char);
@@ -882,7 +884,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    R_pcre_exec_error(rc, i);
 		}
 		SET_VECTOR_ELT(ans, i,
-			       t = allocVector(STRSXP, ntok + (*bufp ? 1 : 0)));
+			       t = StringVector::create(ntok + (*bufp ? 1 : 0)));
 		/* and fill with the splits */
 		bufp = buf;
 		pt = R_Realloc(pt, strlen(buf)+1, char);
@@ -985,7 +987,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		}
 		SET_VECTOR_ELT(ans, i,
-			       t = allocVector(STRSXP, ntok + (*wbufp ? 1 : 0)));
+			       t = StringVector::create(ntok + (*wbufp ? 1 : 0)));
 		/* and fill with the splits */
 		wbufp = wbuf;
 		wpt = R_Realloc(wpt, wcslen(wbuf)+1, wchar_t);
@@ -1091,7 +1093,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 				(int) i + 1);
 		}
 		SET_VECTOR_ELT(ans, i,
-			       t = allocVector(STRSXP, ntok + (*bufp ? 1 : 0)));
+			       t = StringVector::create(ntok + (*bufp ? 1 : 0)));
 		/* and fill with the splits */
 		bufp = buf;
 		pt = R_Realloc(pt, strlen(buf)+1, char);
@@ -1301,7 +1303,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     if (STRING_ELT(pat, 0) == NA_STRING) {
 	if (value_opt) {
 	    SEXP nmold = PROTECT(getAttrib(text, R_NamesSymbol));
-	    PROTECT(ans = allocVector(STRSXP, n));
+	    PROTECT(ans = StringVector::create(n));
 	    for (i = 0; i < n; i++)  SET_STRING_ELT(ans, i, NA_STRING);
 	    if (!isNull(nmold))
 		setAttrib(ans, R_NamesSymbol, duplicate(nmold));
@@ -1461,13 +1463,13 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (value_opt) {
 	SEXP nmold = PROTECT(getAttrib(text, R_NamesSymbol)), nm;
-	PROTECT(ans = allocVector(STRSXP, nmatches));
+	PROTECT(ans = StringVector::create(nmatches));
 	for (i = 0, j = 0; i < n ; i++)
 	    if (invert ^ LOGICAL(ind)[i])
 		SET_STRING_ELT(ans, j++, STRING_ELT(text, i));
 	/* copy across names and subset */
 	if (!isNull(nmold)) {
-	    nm = allocVector(STRSXP, nmatches);
+	    nm = StringVector::create(nmatches);
 	    for (i = 0, j = 0; i < n ; i++)
 		if (invert ^ LOGICAL(ind)[i])
 		    SET_STRING_ELT(nm, j++, STRING_ELT(nmold, i));
@@ -1679,7 +1681,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 
 		    /* there are always nmatches + 1 pieces (unlike strsplit) */
-		    ans = PROTECT(allocVector(VECSXP, nmatches + 1));
+		    ans = PROTECT(ListVector::create(nmatches + 1));
 		    nprotect++;
 		    /* add all pieces before matches */
 		    for (int i = 0; i < nmatches; i++) {
@@ -1701,7 +1703,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 
 		/* value=TRUE is pathetic for fixed=TRUE without
 		   invert as it is just rep(pat, nmatches) */
-		ans = PROTECT(allocVector(VECSXP, nmatches));
+		ans = PROTECT(ListVector::create(nmatches));
 		for (int i = 0; i < nmatches; i++)
 		    SET_VECTOR_ELT(ans, i, pat);
 		UNPROTECT(1);
@@ -1808,7 +1810,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_size_t entry = 0, cptr = 0, clen = (CDR(res_head) == R_NilValue) ? res_ptr : LENGTH(vec);
 	R_size_t inv_start = 0; /* 0-based start position of the pieces for invert */
 	res_val = INTEGER(vec);
-	ans = PROTECT(allocVector(VECSXP, invert ? (nmatches + 1) : nmatches));
+	ans = PROTECT(ListVector::create(invert ? (nmatches + 1) : nmatches));
 	while (entry < (R_size_t) nmatches) {
 	    if (invert) { /* for invert=TRUE store the current piece up to the match */
 		SEXP rvec = allocVector(RAWSXP, res_val[cptr] - 1 - inv_start);
@@ -2143,7 +2145,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     n = XLENGTH(text);
     /* This contradicts the code below that has NA matching NA */
     if (STRING_ELT(pat, 0) == NA_STRING) {
-	PROTECT(ans = allocVector(STRSXP, n));
+	PROTECT(ans = StringVector::create(n));
 	for (i = 0; i < n; i++)  SET_STRING_ELT(ans, i, NA_STRING);
 
 	goto exit_gsub;
@@ -2223,7 +2225,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
-    PROTECT(ans = allocVector(STRSXP, n));
+    PROTECT(ans = StringVector::create(n));
     vmax = vmaxget();
     for (i = 0 ; i < n ; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -2878,7 +2880,7 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	GCStackRoot<> capture, capturelen, dmn;
 	capture = allocMatrix(INTSXP, matchIndex+1, capture_count);
 	capturelen = allocMatrix(INTSXP, matchIndex+1, capture_count);
-	dmn = allocVector(VECSXP, 2);
+	dmn = ListVector::create(2);
 	SET_VECTOR_ELT(dmn, 1, capture_names);
 	setAttrib(capture, R_DimNamesSymbol, dmn);
 	setAttrib(capturelen, R_DimNamesSymbol, dmn);
@@ -3048,7 +3050,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	ovector = (int *) malloc(ovector_size*sizeof(int));
 #endif
 	SEXP thisname;
-	PROTECT(capture_names = allocVector(STRSXP, (int) capture_count));
+	PROTECT(capture_names = StringVector::create((int) capture_count));
 	for(i = 0; i < name_count; i++) {
 	    char *entry = name_table + name_entry_size * i;
 	    PROTECT(thisname = mkChar(entry + 2));
@@ -3083,7 +3085,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (n > INT_MAX) error("%s", _("too long a vector"));
 	    int nn = (int) n;
 	    SEXP dmn;
-	    PROTECT(dmn = allocVector(VECSXP, 2));
+	    PROTECT(dmn = ListVector::create(2));
 	    SET_VECTOR_ELT(dmn, 1, capture_names);
 	    PROTECT(capture_start = allocMatrix(INTSXP, nn, (int) capture_count));
 	    setAttrib(capture_start, R_DimNamesSymbol, dmn);
@@ -3196,7 +3198,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     } else {
 	SEXP elt;
-	PROTECT(ans = allocVector(VECSXP, n));
+	PROTECT(ans = ListVector::create(n));
 	vmax = vmaxget();
 	for (i = 0 ; i < n ; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -3359,7 +3361,7 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 
     pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
 
-    PROTECT(ans = allocVector(VECSXP, n));
+    PROTECT(ans = ListVector::create(n));
 
     for(i = 0; i < n; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -3448,7 +3450,7 @@ attribute_hidden SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP ans = PROTECT(allocVector(LGLSXP, 4));
     int *lans = LOGICAL(ans);
-    SEXP nm = allocVector(STRSXP, 4);
+    SEXP nm = StringVector::create(4);
     setAttrib(ans, R_NamesSymbol, nm);
     SET_STRING_ELT(nm, 0, mkChar("UTF-8"));
     pcre2_config(PCRE2_CONFIG_UNICODE, &res);
@@ -3472,7 +3474,7 @@ attribute_hidden SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     SEXP ans = PROTECT(allocVector(LGLSXP, 4));
     int *lans = LOGICAL(ans);
-    SEXP nm = allocVector(STRSXP, 4);
+    SEXP nm = StringVector::create(4);
     setAttrib(ans, R_NamesSymbol, nm);
     SET_STRING_ELT(nm, 0, mkChar("UTF-8"));
     pcre_config(PCRE_CONFIG_UTF8, &res); lans[0] = res;

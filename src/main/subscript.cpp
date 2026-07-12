@@ -50,6 +50,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <Defn.h>
 #include <R_ext/Itermacros.h>
@@ -448,7 +449,7 @@ attribute_hidden SEXP R::mat2indsub(SEXP dims, SEXP s, SEXP call, SEXP x)
     for (int j = 0; j < ndim; j++)  len *= pdims[j];
 
     if(len > R_SHORT_LEN_MAX) {
-	PROTECT(rvec = allocVector(REALSXP, nrs));
+	PROTECT(rvec = RealVector::create(nrs));
 	double *rv = REAL(rvec);
 	for (int i = 0; i < nrs; i++) rv[i] = 1.; // 1-based.
 	if (TYPEOF(s) == REALSXP) {
@@ -493,7 +494,7 @@ attribute_hidden SEXP R::mat2indsub(SEXP dims, SEXP s, SEXP call, SEXP x)
     } else
 #endif
     {
-	PROTECT(rvec = allocVector(INTSXP, nrs));
+	PROTECT(rvec = IntVector::create(nrs));
 	int *iv = INTEGER(rvec);
 	for (int i = 0; i < nrs; i++) iv[i] = 1; // 1-based.
 	s = coerceVector(s, INTSXP);
@@ -557,7 +558,7 @@ attribute_hidden SEXP R::strmat2intmat(SEXP s, SEXP dnamelist, SEXP call, SEXP x
 #endif
     SEXP snames = PROTECT(allocVector(STRSXP, nr));
     // result si := an integer matrix of same dimension as 's'
-    SEXP si = PROTECT(allocVector(INTSXP, xlength(s)));
+    SEXP si = PROTECT(IntVector::create(xlength(s)));
     dimgets(si, dim);
     int *psi = INTEGER(si);
     if (XLENGTH(si))
@@ -588,14 +589,14 @@ static SEXP nullSubscript(R_xlen_t n)
     SEXP indx;
 #ifdef LONG_VECTOR_SUPPORT
     if (n > R_SHORT_LEN_MAX) {
-	indx = allocVector(REALSXP, n);
+	indx = RealVector::create(n);
 	double *pindx = REAL(indx);
 	for (R_xlen_t i = 0; i < n; i++)
 	    pindx[i] = (double)(i + 1);
     } else
 #endif
     {
-	indx = allocVector(INTSXP, n);
+	indx = IntVector::create(n);
 	int *pindx = INTEGER(indx);
 	for (int i = 0; i < n; i++)
 	    pindx[i] = i + 1;
@@ -611,7 +612,7 @@ static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
 	ECALL(call, _("(subscript) logical subscript too long"));
     }
     *stretch = (ns > nx) ? ns : 0;
-    if (ns == 0) return allocVector(INTSXP, 0);
+    if (ns == 0) return IntVector::create(0);
     R_xlen_t count, i, i1, i2,
 	nmax = (ns > nx) ? ns : nx;
     SEXP indx; // result
@@ -634,7 +635,7 @@ static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
 		    else
 			buf[count++] = (double)(i + 1);
 		});
-	    PROTECT(indx = allocVector(REALSXP, count));
+	    PROTECT(indx = RealVector::create(count));
 	    if (count)
 		memcpy(REAL(indx), buf, sizeof(double) * count);
 	    UNPROTECT(1);
@@ -658,7 +659,7 @@ static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
 		if (ps[i]) count++;
 	    count *= nmax / ns;
 	}
-	PROTECT(indx = allocVector(REALSXP, count));
+	PROTECT(indx = RealVector::create(count));
 	double *pindx = REAL(indx);
 	count = 0;
 	MOD_ITERATE_CHECK(NINTERRUPT, nmax, ns, nmax, i, i1, i2,
@@ -685,7 +686,7 @@ static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
 		else
 		    buf[count++] = (int)(i + 1);
 	    });
-	PROTECT(indx = allocVector(INTSXP, count));
+	PROTECT(indx = IntVector::create(count));
 	if (count)
 	    memcpy(INTEGER(indx), buf, sizeof(int) * count);
 	UNPROTECT(1);
@@ -710,7 +711,7 @@ static SEXP logicalSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch
 	    if (ps[i]) count++;
 	count *= nmax / ns;
     }
-    PROTECT(indx = allocVector(INTSXP, count));
+    PROTECT(indx = IntVector::create(count));
     int *pindx = INTEGER(indx);
     count = 0;
     MOD_ITERATE_CHECK(NINTERRUPT, nmax, ns, nmax, i, i1, i2,
@@ -750,7 +751,7 @@ static SEXP positiveSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx)
     const int *ps = INTEGER_RO(s);
     for (i = 0; i < ns; i++) if (ps[i] == 0) zct++;
     if (zct) {
-	SEXP indx = allocVector(INTSXP, (ns - zct));
+	SEXP indx = IntVector::create((ns - zct));
 	int *pindx = INTEGER(indx);
 	for (i = 0, zct = 0; i < ns; i++)
 	    if (ps[i] != 0)
@@ -860,7 +861,7 @@ static SEXP realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
 #endif
 	}
 	if (int_ok) {
-	    indx = allocVector(INTSXP, cnt);
+	    indx = IntVector::create(cnt);
 	    int *pindx = INTEGER(indx);
 	    for (i = 0, cnt = 0; i < ns; i++) {
 		double ds = ps[i];
@@ -870,7 +871,7 @@ static SEXP realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
 		if (ia != 0) pindx[cnt++] = ia;
 	    }
 	} else {
-	    indx = allocVector(REALSXP, cnt);
+	    indx = RealVector::create(cnt);
 	    double *pindx = REAL(indx);
 	    for (i = 0, cnt = 0; i < ns; i++) {
 		double ds = ps[i];
@@ -934,7 +935,7 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns /* = xlength(s) */, R_xlen_t nx 
 	    if(STRING_ELT(s, i) == NA_STRING || !CHAR(STRING_ELT(s, i))[0])
 		pindx[i] = 0;
     } else {
-	PROTECT(indx = allocVector(INTSXP, ns));
+	PROTECT(indx = IntVector::create(ns));
 	nprotect++;
 	int *pindx = INTEGER(indx);
 	for (i = 0; i < ns; i++) {
@@ -1007,7 +1008,7 @@ attribute_hidden SEXP R::int_arraySubscript(int dim, SEXP s, SEXP dims, SEXP x, 
 
     switch (TYPEOF(s)) {
     case NILSXP:
-	return allocVector(INTSXP, 0);
+	return IntVector::create(0);
     case LGLSXP:
 	return logicalSubscript(s, ns, nd, &stretch, call);
     case INTSXP:
@@ -1089,7 +1090,7 @@ attribute_hidden SEXP R::makeSubscript(SEXP x, SEXP s, R_xlen_t *stretch, SEXP c
     switch (TYPEOF(s)) {
     case NILSXP:
 	*stretch = 0;
-	ans = allocVector(INTSXP, 0);
+	ans = IntVector::create(0);
 	break;
     case LGLSXP:
 	ans = logicalSubscript(s, ns, nx, stretch, call);

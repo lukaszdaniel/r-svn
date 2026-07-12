@@ -36,6 +36,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h
 #include <Internal.h>
@@ -65,13 +66,13 @@ attribute_hidden SEXP getParseContext(void)
     }
 
     nn = 16; /* initially allocate space for 16 lines */
-    PROTECT(ans = allocVector(STRSXP, nn));
+    PROTECT(ans = StringVector::create(nn));
     c = context[last];
     nread = 0;
     while(c) {
 	nread++;
 	if(nread >= nn) {
-	    ans2 = allocVector(STRSXP, 2*nn);
+	    ans2 = StringVector::create(2*nn);
 	    for (i = 0; i < nn; i++)
 		SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
 	    nn *= 2;
@@ -91,7 +92,7 @@ attribute_hidden SEXP getParseContext(void)
 	nread--;
 	R_ParseContextLine--;
     }
-    PROTECT(ans2 = allocVector(STRSXP, nread));
+    PROTECT(ans2 = StringVector::create(nread));
     for (i = 0; i < nread; i++)
 	SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
     UNPROTECT(2);
@@ -124,7 +125,7 @@ static SEXP tabExpand(SEXP strings)
     const char *input;
     SEXP result;
     PROTECT(strings);
-    PROTECT(result = allocVector(STRSXP, length(strings)));
+    PROTECT(result = StringVector::create(length(strings)));
     for (int i = 0; i < length(strings); i++) {
 	input = CHAR(STRING_ELT(strings, i));
 	for (b = buffer; *input && (b-buffer < 192); input++) {

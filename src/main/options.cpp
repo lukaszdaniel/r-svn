@@ -39,6 +39,7 @@
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Print.h>
@@ -520,7 +521,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	*/
 	int n = length(options);
 	PROTECT(value = allocVector(VECSXP, n));
-	PROTECT(names = allocVector(STRSXP, n));
+	PROTECT(names = StringVector::create(n));
 	for (int i = 0; i < n; i++) {
 	    SET_STRING_ELT(names, i, PRINTNAME(TAG(options)));
 	    SET_VECTOR_ELT(value, i, duplicate(CAR(options)));
@@ -531,7 +532,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (int i = 0; i < n; i++) indx[i] = i;
 	orderVector1(indx, n, names, true, false, R_NilValue);
 	SEXP value2 = PROTECT(allocVector(VECSXP, n));
-	SEXP names2 = PROTECT(allocVector(STRSXP, n));
+	SEXP names2 = PROTECT(StringVector::create(n));
 	for (int i = 0; i < n; i++) {
 	    SET_STRING_ELT(names2, i, STRING_ELT(names, indx[i]));
 	    SET_VECTOR_ELT(value2, i, VECTOR_ELT(value, indx[i]));
@@ -555,7 +556,7 @@ attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 	n = length(args);
     }
     PROTECT(value = allocVector(VECSXP, n));
-    PROTECT(names = allocVector(STRSXP, n));
+    PROTECT(names = StringVector::create(n));
 
     SEXP argnames = R_NilValue;
     switch (TYPEOF(args)) {

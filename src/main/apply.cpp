@@ -39,6 +39,7 @@
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/Expression.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 
@@ -71,7 +72,7 @@ attribute_hidden SEXP do_lapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     FUN = checkArgIsSymbol(CADR(args));
     bool realIndx = (n > INT_MAX);
 
-    SEXP ans = PROTECT(allocVector(VECSXP, n));
+    SEXP ans = PROTECT(ListVector::create(n));
     SEXP names = getAttrib(XX, R_NamesSymbol);
     if(!isNull(names)) setAttrib(ans, R_NamesSymbol, names);
 
@@ -281,7 +282,7 @@ attribute_hidden SEXP do_vapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	} else {
 	    if (!isNull(names) || !isNull(rowNames)) {
 		SEXP dimnames;
-		PROTECT(dimnames = allocVector(VECSXP, rnk_v+1));
+		PROTECT(dimnames = ListVector::create(rnk_v+1));
 		if(array_value && !isNull(rowNames)) {
 		    if(TYPEOF(rowNames) != VECSXP || LENGTH(rowNames) != rnk_v)
 			// should never happen ..
@@ -316,7 +317,7 @@ static SEXP do_one(SEXP X, SEXP FUN, SEXP classes, SEXP deflt,
 	if (replace) {
 	    PROTECT(ans = shallow_duplicate(X));
 	} else {
-	    PROTECT(ans = allocVector(VECSXP, n));
+	    PROTECT(ans = ListVector::create(n));
 	    names = getAttrib(X, R_NamesSymbol);
 	    if(!isNull(names)) setAttrib(ans, R_NamesSymbol, names);
 	}
@@ -375,7 +376,7 @@ attribute_hidden SEXP do_rapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (replace) {
       PROTECT(ans = shallow_duplicate(X));
     } else {
-      PROTECT(ans = allocVector(VECSXP, n));
+      PROTECT(ans = ListVector::create(n));
       SEXP names = getAttrib(X, R_NamesSymbol);
       if(!isNull(names)) setAttrib(ans, R_NamesSymbol, names);
     }

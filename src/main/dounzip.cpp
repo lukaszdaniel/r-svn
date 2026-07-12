@@ -43,6 +43,7 @@
 #include <cstring>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <Fileio.h> /* for R_fopen */
@@ -57,6 +58,7 @@
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /* cf do_dircreate in platform.c */
 static int R_mkdir(char *path)
@@ -271,12 +273,12 @@ static int zipunzip(const char *zipname, const char *dest, int nfiles, const cha
     if (nfiles == 0) { /* all files */
 	unz_global_info64 gi;
 	unzGetGlobalInfo64(uf, &gi);
-	PROTECT(names = allocVector(STRSXP, 5000));
+	PROTECT(names = StringVector::create(5000));
 	for (ZPOS64_T i = 0; i < gi.number_entry; i++) {
 	    if (i > 0) if ((err = unzGoToNextFile(uf)) != UNZ_OK) break;
 	    if (*nnames+1 >= LENGTH(names)) {
 		SEXP onames = names;
-		names = allocVector(STRSXP, 2*LENGTH(names));
+		names = StringVector::create(2*LENGTH(names));
 		UNPROTECT(1);
 		PROTECT(names);
 		copyVector(names, onames);
@@ -290,7 +292,7 @@ static int zipunzip(const char *zipname, const char *dest, int nfiles, const cha
 #endif
 	}
     } else {
-	PROTECT(names = allocVector(STRSXP, nfiles));
+	PROTECT(names = StringVector::create(nfiles));
 	for (i = 0; i < nfiles; i++) {
 	    if ((err = unzLocateFile(uf, files[i], 1)) != UNZ_OK) break;
 	    if ((err = extract_one(uf, dest, files[i], names, nnames,
@@ -327,9 +329,9 @@ static SEXP ziplist(const char *zipname)
     nfiles = (int) gi.number_entry;
     /* name, length, datetime */
     PROTECT(ans = allocVector(VECSXP, 3));
-    SET_VECTOR_ELT(ans, 0, names = allocVector(STRSXP, nfiles));
+    SET_VECTOR_ELT(ans, 0, names = StringVector::create(nfiles));
     SET_VECTOR_ELT(ans, 1, lengths = allocVector(REALSXP, nfiles));
-    SET_VECTOR_ELT(ans, 2, dates = allocVector(STRSXP, nfiles));
+    SET_VECTOR_ELT(ans, 2, dates = StringVector::create(nfiles));
 
     for (int i = 0; i < nfiles; i++) {
 	char filename_inzip[R_PATH_MAX], date[50];

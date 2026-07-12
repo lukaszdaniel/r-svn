@@ -38,6 +38,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -62,7 +63,7 @@ static SEXP growList(SEXP oldlist) {
     int i, len;
     SEXP templist;
     len = LENGTH(oldlist);
-    templist = PROTECT(allocVector(VECSXP, len + CONTOUR_LIST_STEP));
+    templist = PROTECT(ListVector::create(len + CONTOUR_LIST_STEP));
     for (i=0; i<len; i++)
 	SET_VECTOR_ELT(templist, i, VECTOR_ELT(oldlist, i));
     UNPROTECT(1);
@@ -138,7 +139,7 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		/*
 		 * "write" the contour locations into the list of contours
 		 */
-		ctr = PROTECT(allocVector(VECSXP, 3));
+		ctr = PROTECT(ListVector::create(3));
 		level = PROTECT(RealVector::createScalar(zc));
 		xsxp = PROTECT(RealVector::create(ns + 1));
 		ysxp = PROTECT(RealVector::create(ns + 1));
@@ -232,11 +233,11 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
      * grow and it's awkward to get the PROTECTs/UNPROTECTs right
      * when you're in a loop and growing a list.
      */
-    container = PROTECT(allocVector(VECSXP, 1));
+    container = PROTECT(ListVector::create(1));
     /*
      * Create "large" list (will trim excess at the end if necessary)
      */
-    SET_VECTOR_ELT(container, 0, allocVector(VECSXP, CONTOUR_LIST_STEP));
+    SET_VECTOR_ELT(container, 0, ListVector::create(CONTOUR_LIST_STEP));
     nlines = 0;
     /*
      * Add lines for each contour level
@@ -264,7 +265,7 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
     len = LENGTH(VECTOR_ELT(container, 0));
     if (nlines < len) {
 	mainlist = VECTOR_ELT(container, 0);
-	templist = PROTECT(allocVector(VECSXP, nlines));
+	templist = PROTECT(ListVector::create(nlines));
 	for (i=0; i<nlines; i++)
 	    SET_VECTOR_ELT(templist, i, VECTOR_ELT(mainlist, i));
 	mainlist = templist;

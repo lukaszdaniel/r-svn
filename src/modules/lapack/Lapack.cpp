@@ -33,6 +33,8 @@
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/ComplexVector.hpp>
+#include <CXXR/StringVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Defn.h>
 
 #ifdef HAVE_UNISTD_H
@@ -157,8 +159,8 @@ static SEXP La_svd(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP vt)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dgesdd");
 
-    SEXP val = PROTECT(allocVector(VECSXP, 3));
-    SEXP nm = PROTECT(allocVector(STRSXP, 3));
+    SEXP val = PROTECT(ListVector::create(3));
+    SEXP nm = PROTECT(StringVector::create(3));
     SET_STRING_ELT(nm, 0, mkChar("d"));
     SET_STRING_ELT(nm, 1, mkChar("u"));
     SET_STRING_ELT(nm, 2, mkChar("vt"));
@@ -229,13 +231,13 @@ static SEXP La_rs(SEXP x, SEXP only_values)
 
     SEXP ret, nm;
     if (!ov) {
-	ret = PROTECT(allocVector(VECSXP, 2));
-	nm = PROTECT(allocVector(STRSXP, 2));
+	ret = PROTECT(ListVector::create(2));
+	nm = PROTECT(StringVector::create(2));
 	SET_STRING_ELT(nm, 1, mkChar("vectors"));
 	SET_VECTOR_ELT(ret, 1, z);
     } else {
-	ret = PROTECT(allocVector(VECSXP, 1));
-	nm = PROTECT(allocVector(STRSXP, 1));
+	ret = PROTECT(ListVector::create(1));
+	nm = PROTECT(StringVector::create(1));
     }
     SET_STRING_ELT(nm, 0, mkChar("values"));
     setAttrib(ret, R_NamesSymbol, nm);
@@ -318,8 +320,8 @@ static SEXP La_rg(SEXP x, SEXP only_values)
 	    complexValues = true;
 	    break;
 	}
-    SEXP ret = PROTECT(allocVector(VECSXP, 2));
-    SEXP nm = PROTECT(allocVector(STRSXP, 2));
+    SEXP ret = PROTECT(ListVector::create(2));
+    SEXP nm = PROTECT(StringVector::create(2));
     SET_STRING_ELT(nm, 0, mkChar("values"));
     SET_STRING_ELT(nm, 1, mkChar("vectors"));
     setAttrib(ret, R_NamesSymbol, nm);
@@ -687,7 +689,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
 	PROTECT(B = allocMatrix(CPLXSXP, n, p));
 	SEXP Bindn =  getAttrib(Bin, R_DimNamesSymbol);
 	if (!isNull(Adn) || !isNull(Bindn)) {
-	    Bdn = allocVector(VECSXP, 2);
+	    Bdn = ListVector::create(2);
 	    if (!isNull(Adn)) SET_VECTOR_ELT(Bdn, 0, VECTOR_ELT(Adn, 1));
 	    if (!isNull(Bindn)) SET_VECTOR_ELT(Bdn, 1, VECTOR_ELT(Bindn, 1));
 	    if (!isNull(VECTOR_ELT(Bdn, 0)) && !isNull(VECTOR_ELT(Bdn, 1)))
@@ -778,8 +780,8 @@ static SEXP La_qr_cmplx(SEXP Ain)
 		     work, &lwork, rwork, &info);
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "zgeqp3");
-    SEXP val = PROTECT(allocVector(VECSXP, 4));
-    SEXP nm = PROTECT(allocVector(STRSXP, 4));
+    SEXP val = PROTECT(ListVector::create(4));
+    SEXP nm = PROTECT(StringVector::create(4));
     SET_STRING_ELT(nm, 0, mkChar("qr"));
     SET_STRING_ELT(nm, 1, mkChar("rank"));
     SET_STRING_ELT(nm, 2, mkChar("qraux"));
@@ -941,8 +943,8 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "zgesdd");
 
-    SEXP val = PROTECT(allocVector(VECSXP, 3));
-    SEXP nm = PROTECT(allocVector(STRSXP, 3));
+    SEXP val = PROTECT(ListVector::create(3));
+    SEXP nm = PROTECT(StringVector::create(3));
     SET_STRING_ELT(nm, 0, mkChar("d"));
     SET_STRING_ELT(nm, 1, mkChar("u"));
     SET_STRING_ELT(nm, 2, mkChar("vt"));
@@ -995,13 +997,13 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
 	error(_("error code %d from Lapack routine '%s'"), info, "zheev");
     SEXP ret, nm;
     if (!ov) {
-	ret = PROTECT(allocVector(VECSXP, 2));
-	nm = PROTECT(allocVector(STRSXP, 2));
+	ret = PROTECT(ListVector::create(2));
+	nm = PROTECT(StringVector::create(2));
 	SET_STRING_ELT(nm, 1, mkChar("vectors"));
 	SET_VECTOR_ELT(ret, 1, x);
     } else {
-	ret = PROTECT(allocVector(VECSXP, 1));
-	nm = PROTECT(allocVector(STRSXP, 1));
+	ret = PROTECT(ListVector::create(1));
+	nm = PROTECT(StringVector::create(1));
     }
     SET_STRING_ELT(nm, 0, mkChar("values"));
     setAttrib(ret, R_NamesSymbol, nm);
@@ -1056,13 +1058,13 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
 	error(_("error code %d from Lapack routine '%s'"), info, "zgeev");
 
     if(!ov){
-	ret = PROTECT(allocVector(VECSXP, 2));
-	nm = PROTECT(allocVector(STRSXP, 2));
+	ret = PROTECT(ListVector::create(2));
+	nm = PROTECT(StringVector::create(2));
 	SET_STRING_ELT(nm, 1, mkChar("vectors"));
 	SET_VECTOR_ELT(ret, 1, val);
     } else {
-	ret = PROTECT(allocVector(VECSXP, 1));
-	nm = PROTECT(allocVector(STRSXP, 1));
+	ret = PROTECT(ListVector::create(1));
+	nm = PROTECT(StringVector::create(1));
     }
     SET_STRING_ELT(nm, 0, mkChar("values"));
     SET_VECTOR_ELT(ret, 0, values);
@@ -1220,7 +1222,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
 	// This is somewhat odd, but Matrix relies on dropping NULL dimnames
 	if (!isNull(Adn) || !isNull(Bindn)) {
 	    // rownames(ans) = colnames(A), colnames(ans) = colnames(Bin)
-	    Bdn = allocVector(VECSXP, 2);
+	    Bdn = ListVector::create(2);
 	    if (!isNull(Adn)) SET_VECTOR_ELT(Bdn, 0, VECTOR_ELT(Adn, 1));
 	    if (!isNull(Bindn)) SET_VECTOR_ELT(Bdn, 1, VECTOR_ELT(Bindn, 1));
 	    if (!isNull(VECTOR_ELT(Bdn, 0)) || !isNull(VECTOR_ELT(Bdn, 1)))
@@ -1308,8 +1310,8 @@ static SEXP La_qr(SEXP Ain)
 		     work, &lwork, &info);
     if (info < 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dgeqp3");
-    SEXP val = PROTECT(allocVector(VECSXP, 4));
-    SEXP nm = PROTECT(allocVector(STRSXP, 4));
+    SEXP val = PROTECT(ListVector::create(4));
+    SEXP nm = PROTECT(StringVector::create(4));
     SET_STRING_ELT(nm, 0, mkChar("qr"));
     SET_STRING_ELT(nm, 1, mkChar("rank"));
     SET_STRING_ELT(nm, 2, mkChar("qraux"));
@@ -1449,8 +1451,8 @@ static SEXP det_ge_real(SEXP Ain, SEXP logarithm)
 	    }
 	}
     }
-    SEXP val = PROTECT(allocVector(VECSXP, 2));
-    SEXP nm = PROTECT(allocVector(STRSXP, 2));
+    SEXP val = PROTECT(ListVector::create(2));
+    SEXP nm = PROTECT(StringVector::create(2));
     SET_STRING_ELT(nm, 0, mkChar("modulus"));
     SET_STRING_ELT(nm, 1, mkChar("sign"));
     setAttrib(val, R_NamesSymbol, nm);

@@ -42,6 +42,7 @@
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/PairList.hpp> // for CXXR_cons
 #include <CXXR/RealVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -163,7 +164,7 @@ attribute_hidden SEXP getAttrib0(SEXP vec, SEXP name)
 	}
 	if (isList(vec) || isLanguage(vec) || TYPEOF(vec) == DOTSXP) {
 	    int len = length(vec);
-	    PROTECT(s = allocVector(STRSXP, len));
+	    PROTECT(s = StringVector::create(len));
 	    int i = 0;
 	    bool any = false;
 	    for ( ; vec != R_NilValue; vec = CDR(vec), i++) {
@@ -373,7 +374,7 @@ void R::copyMostAttribNoTs(SEXP inp_, SEXP ans_)
 	    } else {
 		GCStackRoot<> new_cl;
 		int l = LENGTH(cl);
-		new_cl = allocVector(STRSXP, l - 1);
+		new_cl = StringVector::create(l - 1);
 		for (int i = 0, j = 0; i < l; i++)
 		    if (!streql(CHAR(STRING_ELT(cl, i)), "ts")) /* ASCII */
 			SET_STRING_ELT(new_cl, j++, STRING_ELT(cl, i));
@@ -701,7 +702,7 @@ SEXP R::R_data_class(SEXP obj, bool singleString)
 		if(singleString)
 		    klass = mkChar("matrix");
 		else { // R >= 4.0.0 :  class(<matrix>) |->  c("matrix", "array")
-		    PROTECT(klass = allocVector(STRSXP, 2));
+		    PROTECT(klass = StringVector::create(2));
 		    SET_STRING_ELT(klass, 0, mkChar("matrix"));
 		    SET_STRING_ELT(klass, 1, mkChar("array"));
 		    UNPROTECT(1);
@@ -816,7 +817,7 @@ static SEXP createDefaultClass(SEXP part1, SEXP part2, SEXP part3, SEXP part4)
     if (size == 0 || part3 == R_NilValue) // .. ?
 	return R_NilValue;
 
-    SEXP res = allocVector(STRSXP, size);
+    SEXP res = StringVector::create(size);
     R_PreserveObject(res);
 
     int i = 0;
@@ -911,7 +912,7 @@ attribute_hidden SEXP R::R_data_class2(SEXP obj)
 	 */
 	int I_mat = (n == 2) ? 1 : 0,
 	    nprot = 2;  /* part1, defaultClass */
-	defaultClass = PROTECT(allocVector(STRSXP, 2 + I_mat));
+	defaultClass = PROTECT(StringVector::create(2 + I_mat));
 	SEXP part1 = PROTECT(mkChar("array")), part2;
 	SET_STRING_ELT(defaultClass, 0, part1);
 	if (n == 2) {
@@ -1010,7 +1011,7 @@ SEXP Rf_namesgets(SEXP vec, SEXP val)
 	if (!isVectorizable(val))
 	    error("%s", _("incompatible 'names' argument"));
 	else {
-	    rval = allocVector(STRSXP, length(vec));
+	    rval = StringVector::create(length(vec));
 	    PROTECT(rval);
 	    /* See PR#10807 */
 	    tval = val;
@@ -1312,7 +1313,7 @@ SEXP R_getAttributes(SEXP x)
     /* FIXME */
     GCStackRoot<> value, names;
     value = allocVector(VECSXP, nvalues);
-    names = allocVector(STRSXP, nvalues);
+    names = StringVector::create(nvalues);
     nvalues = 0;
     if (namesattr != R_NilValue) {
 	SET_VECTOR_ELT(value, nvalues, namesattr);
@@ -1631,7 +1632,7 @@ attribute_hidden SEXP do_attrgets(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (PRIMVAL(op)) { /* @<- */
 	SEXP input, ans, value;
-	PROTECT(input = allocVector(STRSXP, 1));
+	PROTECT(input = StringVector::create(1));
 
 	SEXP nlist = CADR(args);
 	if (isSymbol(nlist))
@@ -2071,7 +2072,7 @@ SEXP R_getAttribNames(SEXP x)
     R_xlen_t n = xlength(attr);
     bool list_with_names = isListWithNames(x);
     R_xlen_t nval = list_with_names ? n + 1 : n;
-    SEXP val = PROTECT(allocVector(STRSXP, nval)); // may not need PROTECT
+    SEXP val = PROTECT(StringVector::create(nval)); // may not need PROTECT
     for (R_xlen_t i = 0; i < n; i++) {
 	SEXP tag = TAG(attr);
 	if (TYPEOF(tag) != SYMSXP)
