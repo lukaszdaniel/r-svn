@@ -2329,7 +2329,8 @@ add_dummies <- function(dir, Log)
         out1 <- if (length(out1) && length(out1a)) c(out1, "", out1a)
                 else c(out1, out1a)
 
-        out2 <- out3 <- out4 <- out5 <- out6 <- out7 <- out8 <- out9 <- out10 <- NULL
+        out2 <- out3 <- out4 <- out5 <- out6 <- out7 <- out8 <- out9 <-
+            out10 <- out11 <- NULL
 
         if (!is_base_pkg && R_check_unsafe_calls) {
             Rcmd <- paste(opWarn_string, "\n",
@@ -2428,13 +2429,18 @@ add_dummies <- function(dir, Log)
             out10 <- R_runR0(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
         }
 
+        Rcmd <- paste(opWarn_string, "\n",
+                      sprintf("tools:::.check_package_code_structure_specials(dir = \"%s\")\n",
+                              pkgdir))
+        out11 <- R_runR0(Rcmd, R_opts2, "R_DEFAULT_PACKAGES=NULL")
+
         t2 <- proc.time()
         print_time(t1, t2, Log)
 
         if (length(out1) || length(out2) || length(out3) ||
             length(out4) || length(out5) || length(out6) ||
             length(out7) || length(out8) || length(out9) ||
-            length(out10)) {
+            length(out10) || length(out11)) {
             ini <- character()
             if(length(out4) ||
                (length(out8) &&
@@ -2500,6 +2506,10 @@ add_dummies <- function(dir, Log)
             }
             if(length(out10)) {
                 printLog0(Log, paste(c(ini, out10, ""), collapse = "\n"))
+                ini <- ""
+            }
+            if(length(out11)) {
+                printLog0(Log, paste(c(ini, out11, ""), collapse = "\n"))
                 ini <- ""
             }
         } else resultLog(Log, "OK")
@@ -3108,7 +3118,7 @@ add_dummies <- function(dir, Log)
                 printLog0(Log, .format_lines_with_indent(out), "\n")
             } else resultLog(Log, "OK")
         }
-        
+
         if(!is_base_pkg &&
            (dir.exists("data") || file.exists("R/sysdata.rda")) &&
            length(bad <- .check_package_data_namespace_loads("."))) {
@@ -6342,7 +6352,9 @@ add_dummies <- function(dir, Log)
                              ## selected re-defining of macros": clang
                              ": warning: .*(M_PI|INT_MIN|FCONE).* \\[-Wmacro-redefined\\]",
                              ## LLVM >= 18 clang++
-                             ": warning: .* \\[-Wdeprecated-literal-operator\\]"
+                             ": warning: .* \\[-Wdeprecated-literal-operator\\]",
+                             ## C23 warnings on some setups of GCC and clang
+                               "\\[-Wdiscarded-qualifiers\\]"
                              )
                 ## macOS ld warnings
                 warn_re <- c(warn_re,

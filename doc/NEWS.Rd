@@ -64,6 +64,9 @@
       \eqn{2 \times 2}{2 by 2} case and \code{mantelhaen.test()} in
       the \eqn{2 \times 2 \times K}{2 by 2 by K} case if an exact
       conditional test is performed.
+
+      \item New low-level function \code{.OBJSXP()} enables deparsing of
+      non-S4 \code{"object"} type objects.
     }
   }
 
@@ -152,10 +155,6 @@
       \I{Ivan Krylov} and others, notably \I{Jenny Bryan} and \I{R Dev
       Day @ useR! 2025} contributors.)
 
-      \item In \pkg{methods}, \code{as()} now correctly coerces S4
-      objects to S4 superclasses extending old-style classes, instead
-      of returning only the S3 part.
-
       \item \code{strat_ratio != 1} in \code{rfree1way} did not work as
       advertised.
 
@@ -196,14 +195,15 @@
       N*log(N) algorithm suggested in \PR{18934} and offered by \I{David Simcha}
       on R-devel in 2010.  With thanks to the \I{R Dev Day @ Nantes 2026}
       contributors, notably \I{Charles Bordet} and \I{Alexis Derumigny}.
-      
+
       \item In \code{nls}, follow suggestion by \I{Ben Bolker} to reorder
       named vectors for \code{lower} and \code{upper} arguments to match
-      names of coefficients (\PR{18415}). 
+      names of coefficients (\PR{18415}).
 
-      \item Fix for \PR{19100}: \code{seq.int} was not handling
-      non-vector \code{along.width} arguments properly. Thanks to
-      \I{Mitchell O'Hara-Wild}.
+      \item \code{summary(<aov>)} for an almost perfect fit now warns
+      analogously to \code{summary(<lm>)}, using the same check.  Fixes
+      fixes \PR{18341} thanks to R Dev Day members \I{Deepansh Khurana},
+      \I{Stefan Linner} and \I{Oscar de Leon}.
     }
   }
 }
@@ -221,6 +221,14 @@
       scenario when \code{m + n} is larger than
       \code{.Machine$integer.max}, preventing integer overflow, thanks to
       \I{Jonathan Blood}'s report on R-devel.
+
+      \item Fix for \PR{19100}: \code{seq.int} was not handling
+      non-vector \code{along.width} arguments properly. Thanks to
+      \I{Mitchell O'Hara-Wild}.
+
+      \item Wrappers now duplicate even a wrapped object that might be
+      shared before returning a read-only pointer. This prevents cached
+      read-only pointers from becoming invalid. Reported by \I{Ivan Krylov}.
     }
   }
 }
@@ -286,6 +294,10 @@
       \code{POSIXlt} objects work correctly more often, e.g., without a
       \code{"tzone"} attribute, back porting a few of the \PR{18989} fixes
       from R-devel, both thanks to \I{Suharto Anggono}.
+
+      \item In \pkg{methods}, \code{as()} now correctly coerces S4
+      objects to S4 superclasses extending old-style classes, instead
+      of returning only the S3 part.
 
       \item Fix long standing (Fortran compiler optimization related) bug
       in \code{nlminb} with constraints, thanks to \I{Kasper Kristensen}'s
@@ -6973,9 +6985,6 @@
       \item New argument \code{symbolfamily} in \I{cairo}-based graphics
       devices and new function \code{cairoSymbolFont()} that can be used
       to provide the value for that argument.
-
-      \item New low-level function \code{.OBJSXP()} enables deparsing of
-      non-S4 \code{"object"} type objects.
     }
   }% end{ New Features }
 
