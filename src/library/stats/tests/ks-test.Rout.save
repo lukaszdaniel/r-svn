@@ -113,8 +113,8 @@ Warning message:
 In 'ks.test.default(round(ds2, 1), "pnorm", exact = TRUE)':
   ties should not be present for the one-sample Kolmogorov-Smirnov test
 > summary(w1 <- warnings())
-1 identical warnings:
-In ks.test.default(round(ds2, 1), "pnorm", exact = TRUE) :
+1 identical warning:
+In 'ks.test.default(round(ds2, 1), "pnorm", exact = TRUE)':
   ties should not be present for the one-sample Kolmogorov-Smirnov test
 > 
 >
@@ -182,34 +182,36 @@ List of 6
   ..$ s.:List of 3
 > str(RL[["d.rank=7"]]$s.$two.sided, max.level = 1) # 5 x {list of 9, class "htest"}
 List of 5
- $ n_1:List of 9
+ $ n_1:List of 10
   ..- attr(*, "class")= chr "htest"
- $ n_2:List of 9
+ $ n_2:List of 10
   ..- attr(*, "class")= chr "htest"
- $ n_3:List of 9
+ $ n_3:List of 10
   ..- attr(*, "class")= chr "htest"
- $ n_4:List of 9
+ $ n_4:List of 10
   ..- attr(*, "class")= chr "htest"
- $ n_5:List of 9
+ $ n_5:List of 10
   ..- attr(*, "class")= chr "htest"
 > str(RL[["d.rank=7"]]$s.$two.sided [1:2], give.attr = FALSE)
 List of 2
- $ n_1:List of 9
+ $ n_1:List of 10
   ..$ statistic  : Named num 1
   ..$ parameter  : NULL
   ..$ p.value    : num 1
   ..$ null.value : Named num 0
   ..$ alternative: chr "two.sided"
+  ..$ alt.name   : chr "true location is not equal to 0"
   ..$ method     : chr "Wilcoxon signed rank exact test"
   ..$ data.name  : chr "x"
   ..$ conf.int   : num [1:2] -Inf Inf
   ..$ estimate   : Named num 1e-09
- $ n_2:List of 9
+ $ n_2:List of 10
   ..$ statistic  : Named num 2
   ..$ parameter  : NULL
   ..$ p.value    : num 1
   ..$ null.value : Named num 0
   ..$ alternative: chr "two.sided"
+  ..$ alt.name   : chr "true location is not equal to 0"
   ..$ method     : chr "Wilcoxon signed rank exact test"
   ..$ data.name  : chr "x"
   ..$ conf.int   : num [1:2] 1e-09 Inf
@@ -262,9 +264,9 @@ List of 2
 > ##  ..$ : chr [1:2] "s0" "s."
 > ##  ..$ : chr [1:6] "d.rank=Inf" "d.rank=20" "d.rank=15" "d.rank=10" ...
 > object.size(apv) 				# 3144 bytes
-3144 bytes
+3328 bytes
 > object.size(dpv <- as.data.frame.table(apv))	# 8176 bytes
-8176 bytes
+8520 bytes
 > str(dpv)
 'data.frame':	180 obs. of  5 variables:
  $ Var1: Factor w/ 5 levels "n_1","n_2","n_3",..: 1 2 3 4 5 1 2 3 4 5 ...

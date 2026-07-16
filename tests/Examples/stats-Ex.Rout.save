@@ -1,5 +1,5 @@
 
-R Under development (unstable) (2026-07-08 r90212) -- "Unsuffered Consequences"
+R Under development (unstable) (2026-07-13 r90246) -- "Unsuffered Consequences"
 Copyright (C) 2026 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu
 
@@ -1276,7 +1276,7 @@ Residual standard error: 0.04103 on 7 degrees of freedom
 1.224242e-29 (9.63e+00): par = (0.5793887 -1.787785 2.029277 0.1915475)
 1.224242e-29 (9.63e+00): par = (0.5793887 -1.787785 2.029277 0.1915475)
 1.224242e-29 (9.63e+00): par = (0.5793887 -1.787785 2.029277 0.1915475)
-Error in 'nls(y ~ cbind(exp(-exp(lrc1) * x), exp(-exp(lrc2) * x)), data = xy,  ': 
+Error in 'nls(y ~ cbind(exp(-exp(lrc1) * x), exp(-exp(lrc2) * x)), data = xy, ': 
   number of iterations exceeded maximum of 10
 > ## End(Don't show)
 > fmX1 <- nls(conc ~ SSbiexp(time, A1, lrc1, A2, lrc2), data = datN,
@@ -5177,7 +5177,7 @@ function (V)
         r[seq.int(from = 1L, by = p + 1L, length.out = p)] <- 1
     r
 }
-<bytecode: 0x5651c796f7b0>
+<bytecode: 0x5677810ac6c0>
 <environment: namespace:stats>
 > stopifnot(all.equal(Cl, cov2cor(cov(longley))),
 +           all.equal(cor(longley, method = "kendall"),
@@ -7680,7 +7680,7 @@ attr(,"conf.level")
 [1] 0.99
 > ## if you only need the p-value, `pval.only = TRUE` is much faster for large 2x2 counts
 > fisher.test(Convictions, pval.only = TRUE) -> fastft
-> stopifnot(length(fastft) == 5, length(ft) == 7,
+> stopifnot(length(fastft) == 5, length(ft) == 8,
 +           ## fastft has neither estimate nor conf.int, is otherwise the same
 +           all.equal(unclass(fastft), ft[names(fastft)], tolerance = 1e-15))
 > 
@@ -7831,7 +7831,7 @@ attr(,".Environment")
 > environment(as.formula("y ~ x"))
 <environment: R_GlobalEnv>
 > environment(as.formula("y ~ x", env = new.env()))
-<environment: 0x5651c7933aa0>
+<environment: 0x567780fec420>
 > 
 > 
 > ## Create a formula for a model with a large number of variables:
@@ -11496,6 +11496,23 @@ Nonlinear regression model
 + musc.2 <- nls(Length ~ a[Strip] + b[Strip]*exp(-Conc/th), MASS::muscle,
 +               start = list(a = rep(b[2], 21), b = rep(b[3], 21), th = b[1]))
 + summary(musc.2)
++ 
++ ## Example with constraint, using "port" algorithm. Also showing possibility
++ ## for reordering if using named vector for lower=
++ dd <- structure(list(time = c(1L, 2L, 3L, 6L, 12L, 24L, 48L), y = c(1.95, 
++ 6.43, 10.39, 27.01, 113.72, 251.14, 314.22)), row.names = c(NA, 
++ -7L), class = "data.frame")
++ 
++ st0 <- list(Max = 200, k = 0.1, Lag = 0.5)
++ lwr <- c(k = 0.1, Max =-Inf, Lag = -Inf)
++ form <- y ~ (time > Lag) * Max * (1-exp(-k * (time - Lag)))
++ m1 <- nls(form,
++     data = dd,
++     algorithm="port",
++     lower = lwr,
++     start = st0)
++ stopifnot(coef(m1)[["k"]] >= lwr[["k"]])
++ 
 + })
 > with(MASS::muscle, table(Strip))
 Strip
@@ -11576,6 +11593,13 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 
 Residual standard error: 1.11 on 17 degrees of freedom
 
+> dd <- structure(list(time = c(1L, 2L, 3L, 6L, 12L, 24L, 48L), y = c(1.95, 
++     6.43, 10.39, 27.01, 113.72, 251.14, 314.22)), row.names = c(NA, -7L), class = "data.frame")
+> st0 <- list(Max = 200, k = 0.1, Lag = 0.5)
+> lwr <- c(k = 0.1, Max = -Inf, Lag = -Inf)
+> form <- y ~ (time > Lag) * Max * (1 - exp(-k * (time - Lag)))
+> m1 <- nls(form, data = dd, algorithm = "port", lower = lwr, start = st0)
+> stopifnot(coef(m1)[["k"]] >= lwr[["k"]])
 > ## IGNORE_RDIFF_END
 > ## Don't show: 
 > options(od)
@@ -12035,7 +12059,7 @@ $objective
 > matplot(p, p.adj, ylab="p.adjust(p, meth)", type = "l", asp = 1, lty = 1:6, col = 1:7,
 +         main = "P-value adjustments [log-log]", log = "xy", xlim=lim, ylim=lim, las=1)
 > legR()
-Warning in rug(p) : some values will be clipped
+Warning in 'rug(p)': some values will be clipped
 > 
 > ## Can work with NAs:
 > pN <- p; iN <- c(46, 47); pN[iN] <- NA
@@ -12776,14 +12800,14 @@ attr(,"class")
 $linkfun
 function (mu) 
 mu^lambda
-<bytecode: 0x5651c88b56e0>
-<environment: 0x5651c8871bd8>
+<bytecode: 0x567782c9dea0>
+<environment: 0x567782c7dc00>
 
 $linkinv
 function (eta) 
 pmax(eta^(1/lambda), .Machine$double.eps)
-<bytecode: 0x5651c88b5590>
-<environment: 0x5651c8871bd8>
+<bytecode: 0x567782c9cf00>
+<environment: 0x567782c7dc00>
 
 > 
 > 
@@ -17171,8 +17195,8 @@ Step function with continuity 'f'= 0.2 ,  3 knots at
 > unclass(sfun0)
 function (v) 
 .approxfun(x, y, v, method, yleft, yright, f, na.rm)
-<bytecode: 0x5651c7aec8d8>
-<environment: 0x5651c3164e58>
+<bytecode: 0x56778201c2a0>
+<environment: 0x5677825300c0>
 attr(,"call")
 stepfun(1:3, y0, f = 0)
 > ls(envir = environment(sfun0))
@@ -17245,21 +17269,21 @@ f.f1c  1.0 1.00    1 2.00  2.0 2.00    2 4.00  4.0  4.00     4  3.00   3.0
  stl(x = mdeaths, s.window = "per", robust = TRUE)
 
  Time.series components:
-    seasonal           trend        remainder       
- Min.   :-446.83   Min.   :1319   Min.   :-314.584  
- 1st Qu.:-301.57   1st Qu.:1432   1st Qu.: -32.539  
- Median : -79.06   Median :1449   Median :   5.794  
- Mean   :   0.00   Mean   :1473   Mean   :  23.065  
- 3rd Qu.: 304.57   3rd Qu.:1549   3rd Qu.:  47.513  
- Max.   : 544.79   Max.   :1616   Max.   : 872.199  
+    seasonal              trend        remainder        
+ Min.   :-448.30607   Min.   :1279   Min.   :-279.8449  
+ 1st Qu.:-303.84099   1st Qu.:1408   1st Qu.: -41.1280  
+ Median :-120.79144   Median :1463   Median :  -0.5066  
+ Mean   :  -0.00001   Mean   :1474   Mean   :  21.8264  
+ 3rd Qu.: 350.32753   3rd Qu.:1558   3rd Qu.:  68.8693  
+ Max.   : 630.06335   Max.   :1626   Max.   : 870.7541  
  IQR:
-     STL.seasonal STL.trend STL.remainder data  
-     606.14       116.77     80.05        707.75
-   %  85.6         16.5      11.3         100.0 
+     STL.seasonal STL.trend STL.remainder data 
+     654.2        149.4     110.0         707.8
+   %  92.4         21.1      15.5         100.0
 
  Weights from 15 robustness iterations:
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
- 0.0000  0.5594  0.9452  0.7312  0.9853  1.0000 
+ 0.0000  0.9144  0.9791  0.9145  0.9974  1.0000 
 
  Other components: List of 5
  $ win  : Named int [1:3] 721 19 13
@@ -17273,7 +17297,7 @@ f.f1c  1.0 1.00    1 2.00  2.0 2.00    2 4.00  4.0  4.00     4  3.00   3.0
 > plot(stmR, set.pars = NULL)
 > # mark the 'outliers' :
 > (iO <- which(stmR $ weights  < 1e-8)) # 10 were considered outliers
- [1] 24 26 27 28 36 37 50 52 59 61
+[1] 26
 > sts <- stmR$time.series
 > points(time(sts)[iO], 0.8* sts[,"remainder"][iO], pch = 4, col = "red")
 > par(op)   # reset
@@ -19802,7 +19826,7 @@ Number of Fisher Scoring iterations: 6
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  5.14 0.184 5.327 0 0 
+Time elapsed:  6.706 0.174 6.881 0 0 
 > grDevices::dev.off()
 null device 
           1 

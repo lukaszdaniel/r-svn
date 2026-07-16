@@ -275,7 +275,7 @@ function(x, y = NULL, workspace = 200000, hybrid = FALSE,
                            less = gettextf("true odds ratio is less than %s", NVAL, domain = "R-stats"),
                            greater = gettextf("true odds ratio is greater than %s", NVAL, domain = "R-stats"))
         RVAL <- c(RVAL,
-                  list(conf.int = if(conf.int) CINT,
+                  list(conf.int = if(conf.int) CINT, alt.name = alt.name,
                        estimate = ESTIMATE))
       } # more than just pvalue
     } ## end (2 x 2)

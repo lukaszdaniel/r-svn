@@ -191,7 +191,7 @@ fisher.test(Convictions, conf.int = FALSE)
  fisher.test(Convictions, conf.level = 0.99)$conf.int
 ## if you only need the p-value, `pval.only = TRUE` is much faster for large 2x2 counts
 fisher.test(Convictions, pval.only = TRUE) -> fastft
-stopifnot(length(fastft) == 5, length(ft) == 7,
+stopifnot(length(fastft) == 5, length(ft) == 8,
           ## fastft has neither estimate nor conf.int, is otherwise the same
           all.equal(unclass(fastft), ft[names(fastft)], tolerance = 1e-15))
 

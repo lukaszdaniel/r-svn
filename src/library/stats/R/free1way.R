@@ -1340,8 +1340,32 @@ model.matrix.free1way <- function (object, ...)
         
     }
 
+    if(names(x$mu) == "log-odds ratio") {
+        alt.name <- switch(alternative,
+                       two.sided = gettextf("true log-odds ratio is not equal to %s", x$mu, domain = "R-stats"),
+                       less = gettextf("true log-odds ratio is less than %s", x$data.name, domain = "R-stats"),
+                       greater = gettextf("true log-odds ratio is greater than %s", x$mu, domain = "R-stats"))
+    } else if(names(x$mu) == "generalised Cohen's d") {
+        alt.name <- switch(alternative,
+                       two.sided = gettextf("true generalised Cohen's d is not equal to %s", x$mu, domain = "R-stats"),
+                       less = gettextf("true generalised Cohen's d is less than %s", x$data.name, domain = "R-stats"),
+                       greater = gettextf("true generalised Cohen's d is greater than %s", x$mu, domain = "R-stats"))
+    } else if(names(x$mu) == "log-hazard ratio") {
+        alt.name <- switch(alternative,
+                       two.sided = gettextf("true log-hazard ratio is not equal to %s", x$mu, domain = "R-stats"),
+                       less = gettextf("true log-hazard ratio is less than %s", x$data.name, domain = "R-stats"),
+                       greater = gettextf("true log-hazard ratio is greater than %s", x$mu, domain = "R-stats"))
+    } else if(names(x$mu) == "log-reverse time hazard ratio") {
+        alt.name <- switch(alternative,
+                       two.sided = gettextf("true log-reverse time hazard ratio is not equal to %s", x$mu, domain = "R-stats"),
+                       less = gettextf("true log-reverse time hazard ratio is less than %s", x$data.name, domain = "R-stats"),
+                       greater = gettextf("true log-reverse time hazard ratio is greater than %s", x$mu, domain = "R-stats"))
+    } else {
+        stop("Unknown parameter name for alternative hypothesis description.")
+    }
+
     RVAL <- list(statistic = STATISTIC, parameter = DF, p.value = PVAL, 
-        null.value = x$mu, alternative = alternative, method = x$method, 
+        null.value = x$mu, alternative = alternative, alt.name = alt.name, method = x$method, 
         data.name = x$data.name)
     class(RVAL) <- "htest"
     return(RVAL)

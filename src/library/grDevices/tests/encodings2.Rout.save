@@ -4513,29 +4513,6 @@ Warning in 'plot.xy(xy.coords(x, y), type = type, ...)':
 testing postscript in CP1257
 > 
 > if(!capabilities("cairo")) q("no")
-> ## Now test cairo_pdf(): do not expect any messages
-> cairo_pdf("cairo_pdf-encodings.pdf", width = 9, height = 9, onefile = TRUE)
-> for (e in enc) {
-+     message("testing ", e, " with cairo_pdf")
-+     do_one(e, e)
-+ }
-testing latin1 with cairo_pdf
-testing latin2 with cairo_pdf
-testing iso-8859-13 with cairo_pdf
-testing latin-9 with cairo_pdf
-testing iso-8859-7 with cairo_pdf
-testing iso-8859-5 with cairo_pdf
-testing KOI8-R with cairo_pdf
-testing KOI8-U with cairo_pdf
-testing CP1252 with cairo_pdf
-testing CP1250 with cairo_pdf
-testing CP1251 with cairo_pdf
-testing CP1253 with cairo_pdf
-testing CP1257 with cairo_pdf
-> dev.off()
-null device 
-          1 
-> 
 > proc.time()
    user  system elapsed 
   0.848   0.011   0.848 
