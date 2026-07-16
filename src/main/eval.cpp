@@ -37,6 +37,7 @@
 #define USE_BASE_R_SUPPORT // for R_gc_running(), WrongArgCount()
 
 #include <string>
+#include <vector>
 #include <cmath>
 #include <cerrno>
 #include <array>
@@ -163,12 +164,17 @@ static int R_ProfileOutfile = -1;
 #endif
 
 static bool R_Mem_Profiling = false;
-static bool R_GC_Profiling = false;                     /* indicates GC profiling */
-static int R_Line_Profiling = 0;                   /* indicates line profiling, and also counts the filenames seen (+1) */
-static char **R_Srcfiles;			   /* an array of pointers into the filename buffer */
-static size_t R_Srcfile_bufcount;                  /* how big is the array above? */
-static SEXP R_Srcfiles_buffer = NULL;              /* a big RAWSXP to use as a buffer for filenames and pointers to them */
-static int R_Profiling_Error;		           /* record errors here */
+static bool R_GC_Profiling = false;           /* indicates GC profiling */
+static bool R_Line_Profiling = false; /* indicates line profiling */
+static std::vector<std::string> R_Srcfiles;   /* source files seen during profiling */
+static size_t R_Srcfile_max;                  /* maximum number of source files to record */
+typedef enum {
+    RPE_NO_ERROR = 0,
+    RPE_TOO_MANY_FILES = 1,
+    RPE_BUFFER_TOO_SMALL = 2,
+    RPE_SAMPLES_TOO_LARGE = 3
+} rpe_error_t; /* record errors here */
+static rpe_error_t R_Profiling_Error;                /* record errors here */
 static bool R_Filter_Callframes = false;	      	   /* whether to record only the trailing branch of call trees */
 
 typedef enum { RPE_CPU, RPE_ELAPSED } rpe_type;    /* profiling event, CPU time or elapsed time */
@@ -205,32 +211,20 @@ static R_profile_thread_info_t R_Profile_Thread_Info;
    this one is new, we try to add it.  FIXME:  if there are eventually
    too many files for an efficient linear search, do hashing. */
 
-static int getFilenum(const char* filename) {
-    int fnum;
+static int getFilenum(const char *filename) {
+    auto it = std::find(R_Srcfiles.begin(), R_Srcfiles.end(), filename);
 
-    for (fnum = 0; fnum < R_Line_Profiling-1
-		   && !streql(filename, R_Srcfiles[fnum]); fnum++);
-
-    if (fnum == R_Line_Profiling-1) {
-	size_t len = strlen(filename);
-	if ((size_t) fnum >= R_Srcfile_bufcount) { /* too many files */
-	    R_Profiling_Error = 1;
-	    return 0;
-	}
-	if (R_Srcfiles[fnum] - (char*)RAW(R_Srcfiles_buffer) + len + 1 >
-	    (size_t) length(R_Srcfiles_buffer)) {
-
-	    /* out of space in the buffer */
-	    R_Profiling_Error = 2;
-	    return 0;
-	}
-	strcpy(R_Srcfiles[fnum], filename);
-	R_Srcfiles[fnum+1] = R_Srcfiles[fnum] + len + 1;
-	*(R_Srcfiles[fnum+1]) = '\0';
-	R_Line_Profiling++;
+    if (it == R_Srcfiles.end()) {
+        auto sz = R_Srcfiles.size();
+        if (sz >= R_Srcfile_max) { /* too many files */
+            R_Profiling_Error = RPE_TOO_MANY_FILES;
+            return 0;
+        }
+        R_Srcfiles.emplace_back(filename);
+        return sz;
     }
 
-    return fnum + 1;
+    return std::distance(R_Srcfiles.begin(), it);
 }
 
 #define PROFBUFSIZ 10500
@@ -478,7 +472,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 {
     char buf[PROFBUFSIZ];
     size_t bigv, smallv, nodes;
-    int prevnum = R_Line_Profiling;
+    size_t prevnum = R_Srcfiles.size();
     int old_errno = errno;
 
     profbuf pb;
@@ -604,7 +598,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
     else {
 	/* overflow */
 	buf[0] = '\0';
-	R_Profiling_Error = 3;
+	R_Profiling_Error = RPE_SAMPLES_TOO_LARGE;
     }
 
 #ifdef Win32
@@ -612,11 +606,11 @@ static void doprof(int sig)  /* sig is ignored in Windows */
     ResumeThread(MainThread);
 #endif
 
-    for (int i = prevnum; i < R_Line_Profiling; i++) {
+    for (size_t i = prevnum; i < R_Srcfiles.size(); i++) {
 	pf_str("#File ");
 	pf_int(i); /* %d */
 	pf_str(": ");
-	pf_str(R_Srcfiles[i-1]);
+	pf_str(R_Srcfiles[i-1].c_str());
 	pf_str("\n"); 
     }
 
@@ -711,25 +705,24 @@ static void R_EndProfiling(void)
     R_ProfileOutfile = -1;
 #endif /* not Win32 */
     Evaluator::enableProfiling(false);
-    if (R_Srcfiles_buffer) {
-	R_ReleaseObject(R_Srcfiles_buffer);
-	R_Srcfiles_buffer = NULL;
-    }
+    R_Srcfiles.clear();
+    R_Line_Profiling = false;
+    R_Mem_Profiling = false;
     if (R_Profiling_Error) {
-	if (R_Profiling_Error == 3)
+	if (R_Profiling_Error == RPE_SAMPLES_TOO_LARGE)
 	    /* It is hard to imagine this could happen in practice, but
 	       if needed, it could be configurable like numfiles/bufsize. */
 	    warning("%s", _("samples too large for I/O buffer skipped by Rprof"));
 	else
 	    warning(_("source files skipped by Rprof; please increase '%s'"),
-		      R_Profiling_Error == 1 ? "numfiles" : "bufsize");
+		      R_Profiling_Error == RPE_TOO_MANY_FILES ? "numfiles" : "bufsize");
     }
 }
 
 static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 			    bool mem_profiling, bool gc_profiling,
 			    bool line_profiling, bool filter_callframes,
-			    int numfiles, int bufsize, rpe_type event)
+			    size_t numfiles, int bufsize, rpe_type event)
 {
 #ifndef Win32
     CXXR::RAllocStack::Scope rscope;
@@ -774,21 +767,15 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
     if (mem_profiling)
 	reset_duplicate_counter();
 
-    R_Profiling_Error = 0;
+    R_Profiling_Error = RPE_NO_ERROR;
     R_Line_Profiling = line_profiling;
     R_GC_Profiling = gc_profiling;
     R_Filter_Callframes = filter_callframes;
 
     if (line_profiling) {
-	/* Allocate a big RAW vector to use as a buffer.  The first len1 bytes are an array of pointers
-	   to strings; the actual strings are stored in the second len2 bytes. */
-	R_Srcfile_bufcount = numfiles;
-	size_t len1 = R_Srcfile_bufcount*sizeof(char *), len2 = bufsize;
-	R_PreserveObject( R_Srcfiles_buffer = RawVector::create(len1 + len2) );
- //	memset(RAW(R_Srcfiles_buffer), 0, len1+len2);
-	R_Srcfiles = reinterpret_cast<char **>(RAW(R_Srcfiles_buffer));
-	R_Srcfiles[0] = reinterpret_cast<char *>(RAW(R_Srcfiles_buffer)) + len1;
-	*(R_Srcfiles[0]) = '\0';
+	R_Srcfile_max = numfiles;
+	R_Srcfiles.clear();
+	R_Srcfiles.reserve(R_Srcfile_max);
     }
 
     R_Profiling_Event = event;
