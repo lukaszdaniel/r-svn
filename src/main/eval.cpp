@@ -41,8 +41,10 @@
 #include <cmath>
 #include <cerrno>
 #include <array>
+#include <unordered_map>
 #include <Localization.h>
 #include <Rdynpriv.h>
+#include <CXXR/Allocator.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -1479,9 +1481,14 @@ static SEXP R_ForSymbol = NULL;
 static SEXP R_WhileSymbol = NULL;
 static SEXP R_RepeatSymbol = NULL;
 
-#define JIT_CACHE_SIZE 1024
-static SEXP JIT_cache = NULL;
-static R_exprhash_t JIT_cache_hashes[JIT_CACHE_SIZE];
+using JITCacheMap = std::unordered_map<
+    R_exprhash_t,
+    GCRoot<>,
+    std::hash<R_exprhash_t>,
+    std::equal_to<R_exprhash_t>,
+    CXXR::Allocator<std::pair<const R_exprhash_t, GCRoot<>>>>;
+
+static JITCacheMap JIT_cache;
 
 /**** allow MIN_JIT_SCORE, or both, to be changed by environment variables? */
 static int MIN_JIT_SCORE = 50;
@@ -1544,8 +1551,6 @@ attribute_hidden void R::R_init_jit_enabled(void)
     R_ForSymbol = install("for");
     R_WhileSymbol = install("while");
     R_RepeatSymbol = install("repeat");
-
-    R_PreserveObject(JIT_cache = ListVector::create(JIT_CACHE_SIZE));
 }
 
 static int JIT_score(SEXP e)
@@ -1743,14 +1748,10 @@ static R_INLINE SEXP make_cached_cmpenv(SEXP fun)
    in CDR, and the Srcref in the TAG. */
 static R_INLINE void set_jit_cache_entry(R_exprhash_t hash, SEXP val)
 {
-    int hashidx = hash % JIT_CACHE_SIZE;
-
     PROTECT(val);
     SEXP entry = CXXR_cons(BODY(val), make_cached_cmpenv(val), getAttrib(val, R_SrcrefSymbol));
-    SET_VECTOR_ELT(JIT_cache, hashidx, entry);
+    JIT_cache[hash] = entry;
     UNPROTECT(1); /* val */
-
-    JIT_cache_hashes[hashidx] = hash;
 }
 
 static R_INLINE SEXP jit_cache_code(SEXP entry)
@@ -1778,15 +1779,16 @@ static R_INLINE SEXP jit_cache_expr(SEXP entry)
 
 static R_INLINE SEXP get_jit_cache_entry(R_exprhash_t hash)
 {
-    int hashidx = hash % JIT_CACHE_SIZE;
-    if (JIT_cache_hashes[hashidx] == hash) {
-	SEXP entry = VECTOR_ELT(JIT_cache, hashidx);
-	if (TYPEOF(jit_cache_code(entry)) == BCODESXP)
-	    return entry;
-	else
-	    /* function has been de-compiled; clear the cache entry */
-	    SET_VECTOR_ELT(JIT_cache, hashidx, R_NilValue);
-    }
+    auto it = JIT_cache.find(hash);
+    if (it == JIT_cache.end())
+	return R_NilValue;
+
+    SEXP entry = it->second;
+    if (TYPEOF(jit_cache_code(entry)) == BCODESXP)
+	return entry;
+
+    /* function has been de-compiled; clear the cache entry */
+    JIT_cache.erase(it);
     return R_NilValue;
 }
 
@@ -1803,12 +1805,15 @@ static R_INLINE SEXP cmpenv_topenv(SEXP cmpenv)
 
 static R_INLINE bool cmpenv_exists_local(SEXP sym, SEXP cmpenv, SEXP top)
 {
-    if (cmpenv != top)
-	for (SEXP frame = FRAME(cmpenv);
-	     frame != R_NilValue;
-	     frame = CDR(frame))
-	    if (TAG(frame) == sym)
-		return true;
+    if (cmpenv == top) return false;
+
+    for (SEXP frame = FRAME(cmpenv);
+        frame != R_NilValue;
+        frame = CDR(frame))
+    {
+        if (TAG(frame) == sym)
+            return true;
+    }
     return false;
 }
 

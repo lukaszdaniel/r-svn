@@ -214,7 +214,12 @@ using namespace CXXR;
 /*
  * Forward Declarations
  */
-using HashTable = std::unordered_map<GCRoot<RObject>, int>;
+using HashTable = std::unordered_map<
+    GCRoot<RObject>,
+    int,
+    std::hash<GCRoot<RObject>>,
+    std::equal_to<GCRoot<RObject>>,
+    CXXR::Allocator<std::pair<const GCRoot<RObject>, int>>>;
 
 static void OutStringVec(R_outpstream_t stream, SEXP s, HashTable *ref_table);
 static void WriteItem(SEXP s, HashTable *ref_table, R_outpstream_t stream);

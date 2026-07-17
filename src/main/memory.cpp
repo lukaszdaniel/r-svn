@@ -66,6 +66,7 @@
 #include <R_ext/Altrep.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
+#include <CXXR/Allocator.hpp>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -2419,10 +2420,14 @@ void *R_chk_memset(void *s, int c, size_t n)
  * In CXXR it is supported by keeping track of duplicate Preserves.
  */
 
-static std::unordered_map<const RObject *, std::pair<GCRoot<>, unsigned int /* keeps track of duplicate Preserves*/>,
+using PreciousMap = std::unordered_map<
+    const RObject *,
+    std::pair<GCRoot<>, unsigned int /* keeps track of duplicate Preserves*/>,
     std::hash<const RObject *>,
-    std::equal_to<const RObject *>>
-    precious;
+    std::equal_to<const RObject *>,
+    CXXR::Allocator<std::pair<const RObject * const, std::pair<GCRoot<>, unsigned int>>>>;
+
+static PreciousMap precious;
 
 void R_PreserveObject(SEXP object)
 {
