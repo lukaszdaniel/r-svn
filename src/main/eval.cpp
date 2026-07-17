@@ -4051,20 +4051,20 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* This is a special .Internal */
 attribute_hidden SEXP do_withVisible(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP x, nm, ret;
+    GCStackRoot<> x, nm, ret;
 
     checkArity(op, args);
     x = CAR(args);
     x = eval(x, rho);
-    PROTECT(x);
-    PROTECT(ret = ListVector::create(2));
-    PROTECT(nm = StringVector::create(2));
+
+    ret = ListVector::create(2);
+    nm = StringVector::create(2);
     SET_STRING_ELT(nm, 0, mkChar("value"));
     SET_STRING_ELT(nm, 1, mkChar("visible"));
     SET_VECTOR_ELT(ret, 0, x);
     SET_VECTOR_ELT(ret, 1, ScalarLogical(Evaluator::resultPrinted()));
     setAttrib(ret, R_NamesSymbol, nm);
-    UNPROTECT(3);
+
     return ret;
 }
 

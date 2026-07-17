@@ -28,7 +28,7 @@ void menueditoropen(control m);
 #endif
 int editorchecksave(editor c);
 void editorsetfont(font f);
-int Rgui_Edit(const char *filename, int enc, const char *title, int modal);
+void Rgui_Edit(const char *filename, int enc, const char *title, bool modal);
 
 #define EDITORMAXTITLE 128
 #define MAXNEDITORS 50

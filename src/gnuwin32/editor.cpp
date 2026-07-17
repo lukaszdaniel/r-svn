@@ -464,7 +464,7 @@ void editorcleanall(void)
 
 static void editornew(void)
 {
-    Rgui_Edit("", CE_NATIVE, "", 0);
+    Rgui_Edit("", CE_NATIVE, "", false);
 }
 
 void menueditornew(control m)
@@ -491,7 +491,7 @@ static void editoropen(const char *default_name)
 	    }
 	}
 	char *sname = utf8_to_native(name);
-	Rgui_Edit(name, CE_UTF8, sname, 0);
+	Rgui_Edit(name, CE_UTF8, sname, false);
 	free(name);
 	free(sname);
     } else show(RConsole);
@@ -926,11 +926,9 @@ static editor neweditor(void)
 
 void editorsetfont(font f)
 {
-    int i, ismod;
-    textbox t;
-    for (i = 0; i < neditors; i++) {
-	t = (textbox) getdata(REditors[i]);
-	ismod = ggetmodified(t);
+    for (int i = 0; i < neditors; i++) {
+	textbox t = (textbox) getdata(REditors[i]);
+	int ismod = ggetmodified(t);
 	/* Don't change the modification flag when changing font  */
 	settextfont(t, f);
 	gsetmodified(t, ismod);
@@ -953,20 +951,17 @@ static void eventloop(editor c)
 
 #include <unistd.h>
 
-int Rgui_Edit(const char *filename, int enc, const char *title,
-	      int modal)
+void Rgui_Edit(const char *filename, int enc, const char *title,
+	      bool modal)
 {
-    editor c;
-    EditorData p;
-
     if (neditors == MAXNEDITORS) {
 	R_ShowMessage(G_("Maximum number of editors reached"));
-	return 1;
+	return;
     }
-    c = neweditor();
+    editor c = neweditor();
     if (!c) {
 	R_ShowMessage(G_("Unable to create editor window"));
-	return 1;
+	return;
     }
     if (strlen(filename) > 0) {
 	editor_load_file(c, filename, enc);
@@ -977,11 +972,10 @@ int Rgui_Edit(const char *filename, int enc, const char *title,
     }
     show(c);
 
-    p = (EditorData) getdata((control) getdata(c));
+    EditorData p = (EditorData) getdata((control) getdata(c));
     p->stealconsole = modal;
     if (modal) {
 	fix_editor_up = TRUE;
 	eventloop(c);
     }
-    return 0;
 }

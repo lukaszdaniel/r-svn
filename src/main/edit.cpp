@@ -37,6 +37,7 @@
 
 #include <cstdio>
 #include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -50,7 +51,7 @@
 
 #ifdef Win32
 # include "run.h"
-int Rgui_Edit(const char *filename, int enc, const char *title, int modal);
+void Rgui_Edit(const char *filename, int enc, const char *title, bool modal);
 #endif
 
 #ifdef Unix
@@ -64,6 +65,7 @@ int Rgui_Edit(const char *filename, int enc, const char *title, int modal);
 #endif
 
 using namespace R;
+using namespace CXXR;
 
 /*
  * ed, vi etc have 3 parameters. the data, a file and an editor
@@ -83,7 +85,7 @@ using namespace R;
  */
 
 static char *DefaultFileName;
-static int  EdFileUsed = 0;
+static bool  EdFileUsed = false;
 
 attribute_hidden void R::InitEd(void)
 {
@@ -96,32 +98,26 @@ attribute_hidden void R::InitEd(void)
 
 void CleanEd(void)
 {
-    if(EdFileUsed) unlink(DefaultFileName);
+    if (EdFileUsed) unlink(DefaultFileName);
 }
 
 SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    int   i, rc;
-    ParseStatus status;
-    SEXP  x, fn, envir, ed, src, srcfile, Rfn;
+    int   rc = 0;
     char *filename, *editcmd;
     const char *cmd;
     FILE *fp;
-#ifdef Win32
-    SEXP ti;
-    char *title;
-#endif
 
     checkArity(op, args);
 
     CXXR::RAllocStack::Scope rscope;
 
+    GCStackRoot<> x(R_NilValue);
     x = CAR(args); args = CDR(args);
-    if (TYPEOF(x) == CLOSXP) envir = CLOENV(x);
-    else envir = R_NilValue;
-    PROTECT(envir);
+    GCStackRoot<> envir(R_NilValue);
+    if (TYPEOF(x) == CLOSXP) envir = CLOENV(x.get());
 
-    fn = CAR(args); args = CDR(args);
+    SEXP fn = CAR(args); args = CDR(args);
     if (!isString(fn))
 	error(_("invalid argument to '%s'"), "edit()");
 
@@ -133,20 +129,20 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     else filename = DefaultFileName;
 
     if (x != R_NilValue) {
-	if((fp=R_fopen(R_ExpandFileName(filename), "w")) == NULL)
+	if ((fp=R_fopen(R_ExpandFileName(filename), "w")) == NULL)
 	    errorcall(call, "%s", _("unable to open file"));
-	if (LENGTH(STRING_ELT(fn, 0)) == 0) EdFileUsed++;
-	PROTECT(src = deparse1(x, FALSE, FORSOURCING)); /* deparse for sourcing, not for display */
-	for (i = 0; i < LENGTH(src); i++)
+	if (LENGTH(STRING_ELT(fn, 0)) == 0) EdFileUsed = true;
+	GCStackRoot<> src(R_NilValue);
+	src = deparse1(x, FALSE, FORSOURCING); /* deparse for sourcing, not for display */
+	for (int i = 0; i < LENGTH(src); i++)
 	    fprintf(fp, "%s\n", translateChar(STRING_ELT(src, i)));
-	UNPROTECT(1); /* src */
 	fclose(fp);
     }
 #ifdef Win32
-    ti = CAR(args);
+    SEXP ti = CAR(args);
 #endif
     args = CDR(args);
-    ed = CAR(args);
+    SEXP ed = CAR(args);
     if (!isString(ed)) errorcall(call, "%s", _("argument 'editor' type not valid"));
     cmd = translateCharFP(STRING_ELT(ed, 0));
     if (strlen(cmd) == 0) errorcall(call, "%s", _("argument 'editor' is not set"));
@@ -154,6 +150,7 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
     editcmd = R_alloc(sz, sizeof(char));
 #ifdef Win32
     if (streql(cmd,"internal")) {
+	char *title;
 	if (!isString(ti))
 	    error("%s", _("'title' must be a string"));
 	if (LENGTH(STRING_ELT(ti, 0)) > 0) {
@@ -163,11 +160,11 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    title = R_alloc(strlen(filename)+1, sizeof(char));
 	    strcpy(title, filename);
 	}
-	Rgui_Edit(filename, CE_NATIVE, title, 1);
+	Rgui_Edit(filename, CE_NATIVE, title, true);
     }
     else {
 	/* Quote path if not quoted */
-	if(cmd[0] != '"')
+	if (cmd[0] != '"')
 	    snprintf(editcmd, sz, "\"%s\" \"%s\"", cmd, filename);
 	else
 	    snprintf(editcmd, sz, "%s \"%s\"", cmd, filename);
@@ -188,24 +185,24 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 	errorcall(call, _("problem with running editor %s"), cmd);
 #endif
 
+    GCStackRoot<> srcfile(R_NilValue);
     if (asLogical(GetOption1(install("keep.source")))) {
-	PROTECT(Rfn = findFun(install("readLines"), R_BaseEnv));
-	PROTECT(src = lang2(Rfn, ScalarString(mkChar(R_ExpandFileName(filename)))));
-	PROTECT(src = eval(src, R_BaseEnv));
-	PROTECT(Rfn = findFun(install("srcfilecopy"), R_BaseEnv));
-	PROTECT(srcfile = lang3(Rfn, ScalarString(mkChar("<tmp>")), src));
+	GCStackRoot<> Rfn, src;
+	Rfn = findFun(install("readLines"), R_BaseEnv);
+	src = lang2(Rfn, ScalarString(mkChar(R_ExpandFileName(filename))));
+	src = eval(src, R_BaseEnv);
+	Rfn = findFun(install("srcfilecopy"), R_BaseEnv);
+	srcfile = lang3(Rfn, ScalarString(mkChar("<tmp>")), src);
 	srcfile = eval(srcfile, R_BaseEnv);
-	UNPROTECT(5);
-    } else
-	srcfile = R_NilValue;
-    PROTECT(srcfile);
+    }
 
     /* <FIXME> setup a context to close the file, and parse and eval
        line by line */
-    if((fp = R_fopen(R_ExpandFileName(filename), "r")) == NULL)
+    if ((fp = R_fopen(R_ExpandFileName(filename), "r")) == NULL)
 	errorcall(call, "%s", _("unable to open file to read"));
 
-    x = PROTECT(R_ParseFile(fp, -1, &status, srcfile));
+    ParseStatus status;
+    x = R_ParseFile(fp, -1, &status, srcfile);
     fclose(fp);
 
     if (status != PARSE_OK)
@@ -213,17 +210,15 @@ SEXP do_edit(SEXP call, SEXP op, SEXP args, SEXP rho)
 		  _("%s occurred on line %d\n use a command like\n x <- edit()\n to recover"), R_ParseErrorMsg, R_ParseError);
     R_ResetConsole();
     {   /* can't just eval(x) here */
-	int j, n;
 	SEXP tmp = R_NilValue;
 
-	n = LENGTH(x);
-	for (j = 0 ; j < n ; j++)
+	int n = LENGTH(x);
+	for (int j = 0 ; j < n ; j++)
 	    tmp = eval(XVECTOR_ELT(x, j), R_GlobalEnv);
 	x = tmp;
     }
     if (TYPEOF(x) == CLOSXP && envir != R_NilValue)
 	SET_CLOENV(x, envir);
-    UNPROTECT(3);
 
     return x;
 }

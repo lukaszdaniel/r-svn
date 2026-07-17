@@ -768,7 +768,7 @@ int R_EditFiles(int nfile, const char **file, const char **title,
 	    editor = "internal";
 	for (int i = 0; i < nfile; i++) {
 	    if (streql(editor, "internal")) {
-		Rgui_Edit(file[i], CE_UTF8, title[i], 0);
+		Rgui_Edit(file[i], CE_UTF8, title[i], false);
 	    } else {
 		/* Quote path if not quoted */
 		if (editor[0] != '"')
