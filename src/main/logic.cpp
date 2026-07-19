@@ -206,9 +206,8 @@ static SEXP lbinary(SEXP call, SEXP op, SEXP args)
 static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 {
     GCStackRoot<> x, dim, dimnames, names;
-    R_xlen_t i, len;
 
-    len = XLENGTH(arg);
+    R_xlen_t len = XLENGTH(arg);
     if (!isLogical(arg) && !isNumber(arg) && !isRaw(arg)) {
 	/* For back-compatibility */
 	if (!len) return LogicalVector::create(0);
@@ -231,7 +230,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 	{
 	    int *px = LOGICAL(x);
 	    const int *parg = LOGICAL_RO(arg);
-	    for (i = 0; i < len; i++) {
+	    for (R_xlen_t i = 0; i < len; i++) {
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		int v = parg[i];
 		px[i] = (v == NA_LOGICAL) ? NA_LOGICAL : v == 0;
@@ -242,7 +241,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 	{
 	    int *px = LOGICAL(x);
 	    const int *parg = INTEGER_RO(arg);
-	    for (i = 0; i < len; i++) {
+	    for (R_xlen_t i = 0; i < len; i++) {
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		int v = parg[i];
 		px[i] = (v == NA_INTEGER) ? NA_LOGICAL : v == 0;
@@ -253,7 +252,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 	{
 	    int *px = LOGICAL(x);
 	    const double *parg = REAL_RO(arg);
-	    for (i = 0; i < len; i++){
+	    for (R_xlen_t i = 0; i < len; i++){
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		double v = parg[i];
 		px[i] = ISNAN(v) ? NA_LOGICAL : v == 0;
@@ -264,7 +263,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 	{
 	    int *px = LOGICAL(x);
 	    const Rcomplex *parg = COMPLEX_RO(arg);
-	    for (i = 0; i < len; i++) {
+	    for (R_xlen_t i = 0; i < len; i++) {
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		Rcomplex v = parg[i];
 		px[i] = (ISNAN(v.r) || ISNAN(v.i))
@@ -276,7 +275,7 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 	{
 	    Rbyte *px = RAW(x);
 	    const Rbyte *parg = RAW_RO(arg);
-	    for (i = 0; i < len; i++) {
+	    for (R_xlen_t i = 0; i < len; i++) {
 //	        if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 		px[i] = 0xFF ^ parg[i];
 	    }
@@ -293,22 +292,20 @@ static SEXP lunary(SEXP call, SEXP op, SEXP arg)
 attribute_hidden SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 /*  &&	and  ||	 */
-    SEXP s1, s2;
-    int x1, x2;
     int ans = FALSE;
 
     if (length(args) != 2)
 	error(_("'%s' operator requires 2 arguments"),
 	      PRIMVAL(op) == 1 ? "&&" : "||");
 
-    s1 = CAR(args);
-    s2 = CADR(args);
+    SEXP s1 = CAR(args);
+    SEXP s2 = CADR(args);
     PROTECT(s1 = eval(s1, env));
     if (!isNumber(s1))
 	errorcall(call, _("invalid %s type in 'x %s y'"),
 		  "x", PRIMVAL(op) == 1 ? "&&" : "||");
 
-    x1 = asLogical2(s1, /*checking*/ 1, call);
+    int x1 = asLogical2(s1, /*checking*/ 1, call);
     UNPROTECT(1); /* s1 */
 
 #define get_2nd							\
@@ -316,7 +313,7 @@ attribute_hidden SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (!isNumber(s2))					\
 	    errorcall(call, _("invalid %s type in 'x %s y'"),	\
 		      "y", PRIMVAL(op) == 1 ? "&&" : "||");	\
-	x2 = asLogical2(s2, 1, call);			\
+	int x2 = asLogical2(s2, 1, call);			\
 	UNPROTECT(1); /* s2 */
 
     switch (PRIMVAL(op)) {
@@ -350,18 +347,16 @@ attribute_hidden SEXP do_logic2(SEXP call, SEXP op, SEXP args, SEXP env)
 
 static SEXP binaryLogic(int code, SEXP s1, SEXP s2)
 {
-    R_xlen_t i, n, n1, n2, i1, i2;
+    R_xlen_t i, i1, i2;
     int x1, x2;
-    SEXP ans;
 
-    n1 = XLENGTH(s1);
-    n2 = XLENGTH(s2);
-    n = (n1 > n2) ? n1 : n2;
+    R_xlen_t n1 = XLENGTH(s1);
+    R_xlen_t n2 = XLENGTH(s2);
+    R_xlen_t n = (n1 > n2) ? n1 : n2;
     if (n1 == 0 || n2 == 0) {
-	ans = LogicalVector::create(0);
-	return ans;
+	return LogicalVector::create(0);
     }
-    ans = LogicalVector::create(n);
+    SEXP ans = LogicalVector::create(n);
 
     int *px1 = LOGICAL(s1);
     int *px2 = LOGICAL(s2);
@@ -404,18 +399,16 @@ static SEXP binaryLogic(int code, SEXP s1, SEXP s2)
 // called only when both  s1 and s2 are  RAWSXP
 static SEXP binaryLogic2(int code, SEXP s1, SEXP s2)
 {
-    R_xlen_t i, n, n1, n2, i1, i2;
+    R_xlen_t i, i1, i2;
     Rbyte x1, x2;
-    SEXP ans;
 
-    n1 = XLENGTH(s1);
-    n2 = XLENGTH(s2);
-    n = (n1 > n2) ? n1 : n2;
+    R_xlen_t n1 = XLENGTH(s1);
+    R_xlen_t n2 = XLENGTH(s2);
+    R_xlen_t n = (n1 > n2) ? n1 : n2;
     if (n1 == 0 || n2 == 0) {
-	ans = RawVector::create(0);
-	return ans;
+	return RawVector::create(0);
     }
-    ans = RawVector::create(n);
+    SEXP ans = RawVector::create(n);
 
     switch (code) {
     case 1:		/* & : AND */

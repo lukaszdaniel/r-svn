@@ -683,7 +683,7 @@ attribute_hidden SEXP R::getLexicalCall(SEXP rho)
 attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int i, n  = -1, nframe;
-    SEXP rval;
+    GCStackRoot<> rval;
 
     checkArity(op, args);
 
@@ -715,19 +715,17 @@ attribute_hidden SEXP do_sys(SEXP call, SEXP op, SEXP args, SEXP rho)
 	return ScalarInteger(framedepth(cptr));
     case 5: /* sys.calls */
 	nframe = framedepth(cptr);
-	PROTECT(rval = allocList(nframe));
+	rval = allocList(nframe);
 	t=rval;
 	for(i = 1; i <= nframe; i++, t = CDR(t))
 	    SETCAR(t, R_syscall(i, cptr));
-	UNPROTECT(1);
 	return rval;
     case 6: /* sys.frames */
 	nframe = framedepth(cptr);
-	PROTECT(rval = allocList(nframe));
+	rval = allocList(nframe);
 	t = rval;
 	for(i = 1; i <= nframe; i++, t = CDR(t))
 	    SETCAR(t, R_sysframe(i, cptr));
-	UNPROTECT(1);
 	return rval;
     case 7: /* sys.on.exit */
 	{
@@ -808,14 +806,14 @@ RCNTXT *R::R_findParentContext(RCNTXT *cptr, int n)
 
 Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
 {
-    SEXP topExp, oldHStack, oldRStack;
+    GCStackRoot<> topExp, oldHStack, oldRStack;
     bool oldvis;
     Rboolean result;
 
 
-    PROTECT(topExp = R_CurrentExpr);
-    PROTECT(oldHStack = R_HandlerStack);
-    PROTECT(oldRStack = R_RestartStack);
+    topExp = R_CurrentExpr;
+    oldHStack = R_HandlerStack;
+    oldRStack = R_RestartStack;
     oldvis = Evaluator::resultPrinted();
     R_HandlerStack = R_NilValue;
     R_RestartStack = R_NilValue;
@@ -835,7 +833,6 @@ Rboolean R_ToplevelExec(void (*fun)(void *), void *data)
     R_HandlerStack = oldHStack;
     R_RestartStack = oldRStack;
     Evaluator::enableResultPrinting(oldvis);
-    UNPROTECT(3);
 
     return result;
 }
@@ -975,10 +972,9 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
        stack limit before calling fun(), so fun() and cleanfun should
        be written accordingly. */
     if (cont == NULL) {
-	PROTECT(cont = R_MakeUnwindCont());
-	result = R_UnwindProtect(fun, data, cleanfun, cleandata, cont);
-	UNPROTECT(1);
-	return result;
+	GCStackRoot<> new_cont;
+	new_cont = R_MakeUnwindCont();
+	return R_UnwindProtect(fun, data, cleanfun, cleandata, new_cont);
     }
 
     {

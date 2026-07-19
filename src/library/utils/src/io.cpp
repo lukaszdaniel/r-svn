@@ -303,7 +303,7 @@ static int scanchar(bool inQuote, LocalData *d)
 
 SEXP countfields(SEXP args)
 {
-    SEXP ans, file, sep,  bns, quotes, comstr;
+    SEXP file, sep,  bns, quotes, comstr;
     int nfields, nskip, i, c, inquote, quote = 0;
     int blocksize, nlines;
     const char *p;
@@ -370,7 +370,8 @@ SEXP countfields(SEXP args)
     }
 
     blocksize = SCAN_BLOCKSIZE;
-    PROTECT(ans = allocVector(INTSXP, blocksize));
+    GCStackRoot<> ans;
+    ans = allocVector(INTSXP, blocksize);
     nlines = 0;
     nfields = 0;
     inquote = 0;
@@ -399,8 +400,6 @@ SEXP countfields(SEXP args)
 		bns = ans;
 		blocksize = 2 * blocksize;
 		ans = allocVector(INTSXP, blocksize);
-		UNPROTECT(1);
-		PROTECT(ans);
 		copyVector(ans, bns);
 	    }
 	    continue;
@@ -436,8 +435,6 @@ SEXP countfields(SEXP args)
 			    bns = ans;
 			    blocksize = 2 * blocksize;
 			    ans = allocVector(INTSXP, blocksize);
-			    UNPROTECT(1);
-			    PROTECT(ans);
 			    copyVector(ans, bns);
 	    		}
 		    }
@@ -466,18 +463,16 @@ SEXP countfields(SEXP args)
     if(!data.wasopen) data.con->close(data.con);
 
     if (nlines < 0) {
-	UNPROTECT(1);
 	return R_NilValue;
     }
     if (nlines == blocksize) {
-	UNPROTECT(1);
 	return ans;
     }
 
     bns = allocVector(INTSXP, nlines+1);
     for (i = 0; i <= nlines; i++)
 	INTEGER(bns)[i] = INTEGER(ans)[i];
-    UNPROTECT(1);
+
     return bns;
 }
 

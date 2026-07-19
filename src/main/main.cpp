@@ -290,9 +290,10 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *s
 	Evaluator::enableResultPrinting(false);
 	StackChecker::setDepth(0);
 	resetTimeLimits();
-	SEXP thisExpr = PROTECT(R_CurrentExpr);
+	SEXP thisExpr = R_CurrentExpr;
 	R_Busy(1);
-	SEXP value = PROTECT(eval(thisExpr, rho));
+	GCStackRoot<> value;
+	value = eval(thisExpr, rho);
 	SET_SYMVALUE(R_LastvalueSymbol, value);
 	if (NO_REFERENCES(value))
 	    INCREMENT_REFCNT(value);
@@ -303,7 +304,6 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *s
 	    PrintWarnings();
 	Rf_callToplevelHandlers(thisExpr, value, TRUE, (Rboolean) wasDisplayed);
 	R_CurrentExpr = value; /* Necessary? Doubt it. */
-	UNPROTECT(2); /* thisExpr, value */
 	if (Browser::numberActive() && browsevalue < 0)
 	    /* Done evaluating REPL expression, continue stepping. */
 	    SET_RDEBUG(rho, 1);
@@ -862,8 +862,7 @@ static void invalid_parameter_handler_watson(
 
 void setup_Rmainloop(void)
 {
-    volatile SEXP baseNSenv;
-    SEXP cmd;
+    SEXP baseNSenv;
     char deferred_warnings[12][250];
     unsigned int ndeferred_warnings = 0;
 
@@ -1109,7 +1108,8 @@ void setup_Rmainloop(void)
     {
         Evaluator evalr;
         RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-        PROTECT(cmd = install(".OptRequireMethods"));
+        GCStackRoot<> cmd;
+        cmd = install(".OptRequireMethods");
         R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
         if (R_CurrentExpr != R_UnboundValue &&
             TYPEOF(R_CurrentExpr) == CLOSXP)
@@ -1117,7 +1117,6 @@ void setup_Rmainloop(void)
             R_CurrentExpr = lang1(cmd);
             R_CurrentExpr = eval(R_CurrentExpr, R_BaseEnv);
         }
-        UNPROTECT(1);
     }
     catch (CommandTerminated)
     {
@@ -1175,7 +1174,8 @@ void setup_Rmainloop(void)
     {
         Evaluator evalr;
         RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-        PROTECT(cmd = install(".First"));
+        GCStackRoot<> cmd;
+        cmd = install(".First");
         R_CurrentExpr = R_findVar(cmd, R_GlobalEnv);
         if (R_CurrentExpr != R_UnboundValue &&
             TYPEOF(R_CurrentExpr) == CLOSXP)
@@ -1183,7 +1183,6 @@ void setup_Rmainloop(void)
             R_CurrentExpr = lang1(cmd);
             R_CurrentExpr = eval(R_CurrentExpr, R_GlobalEnv);
         }
-        UNPROTECT(1);
     }
     catch (CommandTerminated)
     {
@@ -1197,7 +1196,8 @@ void setup_Rmainloop(void)
     {
         Evaluator evalr;
         RCNTXT toplevel(CTXT_TOPLEVEL, R_NilValue, R_GlobalEnv, R_BaseEnv, R_NilValue, R_NilValue);
-        PROTECT(cmd = install(".First.sys"));
+        GCStackRoot<> cmd;
+        cmd = install(".First.sys");
         R_CurrentExpr = R_findVar(cmd, baseNSenv);
         if (R_CurrentExpr != R_UnboundValue &&
             TYPEOF(R_CurrentExpr) == CLOSXP)
@@ -1205,7 +1205,6 @@ void setup_Rmainloop(void)
             R_CurrentExpr = lang1(cmd);
             R_CurrentExpr = eval(R_CurrentExpr, R_BaseEnv);
         }
-        UNPROTECT(1);
     }
     catch (CommandTerminated)
     {
@@ -1387,11 +1386,11 @@ static SEXP callBrowserHook(void *data)
     SEXP cond = bhdata->cond;
     SEXP rho = bhdata->rho;
     SEXP args = CONS(hook, CONS(cond, CONS(rho, R_NilValue)));
-    SEXP hcall = LCONS(hook, args);
-    PROTECT(hcall);
+    GCStackRoot<> hcall;
+    hcall = LCONS(hook, args);
     R_SetOption(install("browser.hook"), R_NilValue);
     SEXP val = eval(hcall, R_GlobalEnv);
-    UNPROTECT(1); /* hcall */
+
     return val;
 }
 
@@ -1468,7 +1467,6 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool ignoreHook = asBool2(CAR(CDR(CDDDR(argList))), call);
     if (ignoreHook) {
         R_browserRepl(rho);
-        UNPROTECT(1); /* argList */
         return R_NilValue;
     }
 #endif
@@ -1942,12 +1940,13 @@ attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean 
     }
 
     SEXP f = (SEXP) userData;
-    SEXP e, val, cur, rho;
+    SEXP cur;
     int errorOccurred;
     bool again, useData = LOGICAL(VECTOR_ELT(f, 2))[0];
 
     /* create an environment with bindings for the function and arguments */
-    PROTECT(rho = NewEnvironment(R_NilValue, R_NilValue, R_GlobalEnv));
+    GCStackRoot<> rho;
+    rho = NewEnvironment(R_NilValue, R_NilValue, R_GlobalEnv);
     defineVarInc(R_cbSym, VECTOR_ELT(f, 0), rho);
     defineVarInc(R_exprSym, expr, rho);
     defineVarInc(R_valueSym, value, rho);
@@ -1957,17 +1956,17 @@ attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean 
 	defineVarInc(R_dataSym, VECTOR_ELT(f, 1), rho);
 
     /* create the call; these could be saved and re-used */
-    PROTECT(e = Rf_allocLang(5 + useData));
-    SETCAR(e, R_cbSym); cur = CDR(e);
+    GCStackRoot<> e;
+    e = Rf_allocLang(5 + useData);
+    SETCAR(e, R_cbSym); cur = CDR(e.get());
     SETCAR(cur, R_exprSym); cur = CDR(cur);
     SETCAR(cur, R_valueSym); cur = CDR(cur);
     SETCAR(cur, R_succeededSym); cur = CDR(cur);
     SETCAR(cur, R_visibleSym); cur = CDR(cur);
     if (useData)
 	SETCAR(cur, R_dataSym);
-
+    GCStackRoot<> val;
     val = R_tryEval(e, rho, &errorOccurred);
-    PROTECT(val);
 
     /* clear the environment to reduce reference counts */
     defineVar(R_cbSym, R_NilValue, rho);
@@ -1988,8 +1987,6 @@ attribute_hidden Rboolean R_taskCallbackRoutine(SEXP expr, SEXP value, Rboolean 
 	/* warning("%s", _("error occurred in top-level task callback\n")); */
 	again = false;
     }
-
-    UNPROTECT(3); /* rho, e, val */
 
     return (Rboolean) again;
 }
@@ -2021,9 +2018,9 @@ attribute_hidden SEXP R_addTaskCallback(SEXP f, SEXP data, SEXP useData, SEXP na
 			    INTEGER(index));
 
     if(length(name) == 0) {
-	PROTECT(name = mkString(el->name));
-	setAttrib(index, R_NamesSymbol, name);
-	UNPROTECT(1);
+	GCStackRoot<> new_name;
+	new_name = mkString(el->name);
+	setAttrib(index, R_NamesSymbol, new_name);
     } else {
 	setAttrib(index, R_NamesSymbol, name);
     }

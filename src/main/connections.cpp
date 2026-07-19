@@ -142,6 +142,7 @@
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Rinterface.h>
 #include <Internal.h>
@@ -3331,7 +3332,7 @@ static void raw_resize(Rrawconn this_, size_t needed)
 
     if (needed > 8192) nalloc = (size_t)(1.2*(double)needed); /* 20% over-allocation */
     else while(nalloc < needed) nalloc *= 2;  /* use powers of 2 if small */
-    PROTECT(tmp = allocVector(RAWSXP, nalloc));
+    PROTECT(tmp = RawVector::create(nalloc));
     if (this_->nbytes)
 	memcpy(RAW(tmp), RAW(this_->data), this_->nbytes);
     R_ReleaseObject(this_->data);
@@ -3520,7 +3521,7 @@ attribute_hidden SEXP do_rawconvalue(SEXP call, SEXP op, SEXP args, SEXP env)
     if(!con->canwrite)
 	error("%s", _("'con' is not an output rawConnection"));
     this_ = (Rrawconn) con->connprivate;
-    ans = allocVector(RAWSXP, this_->nbytes); /* later, use TRUELENGTH? */
+    ans = RawVector::create(this_->nbytes); /* later, use TRUELENGTH? */
     if (this_->nbytes)
 	memcpy(RAW(ans), RAW(this_->data), this_->nbytes);
     return ans;
@@ -4802,7 +4803,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    default:
 		error("%s", _("raw is always of size 1"));
 	    }
-	    ans = allocVector(RAWSXP, n);
+	    ans = RawVector::create(n);
 	    p = (void *) RAW(ans);
 	} else if (streql(what, "numeric") || streql(what, "double")) {
 	    sizedef = sizeof(double); mode = 2;
@@ -4952,7 +4953,7 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
     bool useBytes = asLogicalNoNA(CAD4R(args), "useBytes");
     R_xlen_t i, len = XLENGTH(object);
     if(len == 0)
-	return (isRaw) ? allocVector(RAWSXP, 0) : R_NilValue;
+	return (isRaw) ? RawVector::create(0) : R_NilValue;
 
 #ifndef LONG_VECTOR_SUPPORT
     /* without long vectors RAW vectors are limited to 2^31 - 1 bytes */
@@ -4987,7 +4988,7 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 	    else
 		for(i = 0; i < len; i++)
 		    outlen += strlen(translateChar0(STRING_ELT(object, i))) + 1;
-	    ans = allocVector(RAWSXP, outlen);
+	    ans = RawVector::create(outlen);
 	    bytes = RAW(ans);
 	    /* translateChar0() is the same as CHAR for IS_BYTES strings */
 	    for(i = 0, np = 0; i < len; i++) {
@@ -5145,7 +5146,7 @@ attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	/* write it now */
 	if(isRaw) { /* for non-long vectors, we checked size*len < 2^31-1 above */
-	    ans = allocVector(RAWSXP, size*len);
+	    ans = RawVector::create(size*len);
 	    memcpy(RAW(ans), buf, size*len);
 	} else {
 	    size_t nwrite = con->write(buf, size, len, con);
@@ -5378,7 +5379,7 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
     if(XLENGTH(object) < n)
 	error("%s", _("'object' is too short"));
     if(n == 0) {
-	if(isRaw) return allocVector(RAWSXP, 0); else return R_NilValue;
+	if(isRaw) return RawVector::create(0); else return R_NilValue;
     }
 
     len = 0;
@@ -5404,7 +5405,7 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (dlen > R_XLEN_T_MAX)
 	    error("%s", _("too much data for a raw vector on this platform"));
 	len = (R_xlen_t) dlen;
-	ans = allocVector(RAWSXP, len);
+	ans = RawVector::create(len);
 	buf = (char*) RAW(ans);
     }
 
@@ -6566,7 +6567,7 @@ SEXP R::R_compress1(SEXP in)
 	libdeflate_zlib_compress(c, RAW(in), inlen, buf + 4, outlen);
     if(res == 0)
 	error("%s", _("internal libdeflate error in R_compress1 with libdeflate"));
-    SEXP ans = allocVector(RAWSXP, res + 4);
+    SEXP ans = RawVector::create(res + 4);
     memcpy(RAW(ans), buf, res + 4);
     return ans;
 }
@@ -6600,7 +6601,7 @@ SEXP R::R_decompress1(SEXP in, bool *err)
 	*err = TRUE;
 	return R_NilValue;
     }
-    SEXP ans = allocVector(RAWSXP, actual_out);
+    SEXP ans = RawVector::create(actual_out);
     if (actual_out)
 	memcpy(RAW(ans), buf, actual_out);
     return ans;
@@ -6623,7 +6624,7 @@ SEXP R::R_compress1(SEXP in)
     *((unsigned int *)buf) = (unsigned int) uiSwap(inlen);
     int res = compress(buf + 4, &outlen, (Bytef *)RAW(in), inlen);
     if(res != Z_OK) error(_("internal error %d in '%s'"), res, "R_compress1");
-    SEXP ans = allocVector(RAWSXP, outlen + 4);
+    SEXP ans = RawVector::create(outlen + 4);
     memcpy(RAW(ans), buf, outlen + 4);
 
     return ans;
@@ -6647,7 +6648,7 @@ SEXP R::R_decompress1(SEXP in, bool *err)
 	*err = TRUE;
 	return R_NilValue;
     }
-    SEXP ans = allocVector(RAWSXP, outlen);
+    SEXP ans = RawVector::create(outlen);
     if (outlen)
 	memcpy(RAW(ans), buf, outlen);
 
@@ -6683,7 +6684,7 @@ SEXP R::R_compress2(SEXP in)
 	if (inlen)
 	    memcpy(buf+5, (char *)RAW(in), inlen);
     }
-    ans = allocVector(RAWSXP, outlen + 5);
+    ans = RawVector::create(outlen + 5);
     memcpy(RAW(ans), buf, outlen + 5);
 
     return ans;
@@ -6727,7 +6728,7 @@ SEXP R::R_decompress2(SEXP in, bool *err)
 	*err = TRUE;
 	return R_NilValue;
     }
-    ans = allocVector(RAWSXP, outlen);
+    ans = RawVector::create(outlen);
     if (outlen)
 	memcpy(RAW(ans), buf, outlen);
 
@@ -6909,7 +6910,7 @@ SEXP R::R_compress3(SEXP in)
     lzma_end(&strm);
 
     /* printf("compressed %d to %d\n", inlen, outlen); */
-    ans = allocVector(RAWSXP, outlen + 5);
+    ans = RawVector::create(outlen + 5);
     memcpy(RAW(ans), buf, outlen + 5);
 
     return ans;
@@ -6991,7 +6992,7 @@ SEXP R::R_decompress3(SEXP in, bool *err)
 	*err = TRUE;
 	return R_NilValue;
     }
-    ans = allocVector(RAWSXP, outlen);
+    ans = RawVector::create(outlen);
     if (outlen)
 	memcpy(RAW(ans), buf, outlen);
 
@@ -7028,7 +7029,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	    libdeflate_zlib_compress(c, RAW(from), inlen, buf, outlen);
 	if(res == 0)
 	    error("%s", _("internal libdeflate error in memCompress"));
-	ans = allocVector(RAWSXP, res);
+	ans = RawVector::create(res);
 	memcpy(RAW(ans), buf, res);
 	break;
     }
@@ -7041,7 +7042,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	buf = (Bytef *) R_alloc(outlen, sizeof(Bytef));
 	res = compress(buf, &outlen, (Bytef *)RAW(from), inlen);
 	if(res != Z_OK) error(_("internal error %d in '%s'"), res, "memCompress");
-	ans = allocVector(RAWSXP, outlen);
+	ans = RawVector::create(outlen);
 	if (outlen)
 	    memcpy(RAW(ans), buf, outlen);
 	break;
@@ -7057,7 +7058,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	res = BZ2_bzBuffToBuffCompress(buf, &outlen, (char *)RAW(from),
 				       inlen, 9, 0, 0);
 	if(res != BZ_OK) error(_("internal error %d in '%s'"), res, "memCompress");
-	ans = allocVector(RAWSXP, outlen);
+	ans = RawVector::create(outlen);
 	if (outlen)
 	    memcpy(RAW(ans), buf, outlen);
 	break;
@@ -7093,7 +7094,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* If LZMZ_BUF_ERROR, could realloc and continue */
 	outlen = (unsigned int)strm.total_out;
 	lzma_end(&strm);
-	ans = allocVector(RAWSXP, outlen);
+	ans = RawVector::create(outlen);
 	if (outlen)
 	    memcpy(RAW(ans), buf, outlen);
 	break;
@@ -7108,7 +7109,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	    ZSTD_compress(buf, outlen, RAW(from), inlen, 3);
 	if (ZSTD_isError(res))
 	    error(_("internal libzstd error (%s) in memCompress"), ZSTD_getErrorName(res));
-	ans = allocVector(RAWSXP, res);
+	ans = RawVector::create(res);
 	memcpy(RAW(ans), buf, res);
 	break;
     }
@@ -7208,7 +7209,7 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 		      "memDecompress(type = \"libdeflate\")");
 	    }
 	}
-	ans = allocVector(RAWSXP, actual_out);
+	ans = RawVector::create(actual_out);
 	if (actual_out)
 	    memcpy(RAW(ans), buf, actual_out);
 	break;
@@ -7237,7 +7238,7 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 		  "memDecompress(type = \"gzip\")");
 	}
 
-	ans = allocVector(RAWSXP, outlen);
+	ans = RawVector::create(outlen);
 	if (outlen)
 	    memcpy(RAW(ans), buf, outlen);
 	break;
@@ -7263,7 +7264,7 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	    error(_("internal error %d in '%s'"), res,
 		  "memDecompress(type = \"bzip2\")");
 	}
-	ans = allocVector(RAWSXP, outlen);
+	ans = RawVector::create(outlen);
 	if (outlen)
 	    memcpy(RAW(ans), buf, outlen);
 	break;
@@ -7318,7 +7319,7 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	outlen = strm.total_out;
 	lzma_end(&strm);
-	ans = allocVector(RAWSXP, outlen);
+	ans = RawVector::create(outlen);
 	if (outlen)
 	    memcpy(RAW(ans), buf, outlen);
 	break;
@@ -7339,7 +7340,7 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 	res = ZSTD_decompress(buf, outlen, p, inlen);
 	if (ZSTD_isError(res))
 	    error(_("internal error in memDecompress(%s)"), ZSTD_getErrorName(res));
-	ans = allocVector(RAWSXP, res);
+	ans = RawVector::create(res);
 	if (res)
 	    memcpy(RAW(ans), buf, res);
 	break;

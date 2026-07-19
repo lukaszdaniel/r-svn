@@ -83,6 +83,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/ListVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h>  /* for R_Calloc/R_Free */
@@ -134,7 +135,7 @@ static int jit_stack_size(void)
 	double xdouble = R_strtod(p, &endp);
 	if (xdouble >= 0 && xdouble <= 1000)
 	    stmax = (int)(xdouble*1024*1024);
-	else warning ("R_PCRE_JIT_STACK_MAXSIZE invalid and ignored");
+	else warning(_("R_PCRE_JIT_STACK_MAXSIZE invalid and ignored"));
     }
     return stmax;
 }
@@ -1617,7 +1618,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		Rbyte *ansp;
 		if (res == (R_size_t) -1) return value ? text : ScalarInteger(1);
 		if (!value) return ScalarInteger(((res == 0) ? LENGTH(pat) : 0) + 1);
-		ans = allocVector(RAWSXP, LENGTH(text) - LENGTH(pat));
+		ans = RawVector::create(LENGTH(text) - LENGTH(pat));
 		ansp = RAW(ans);
 		if (res) {
 		    memcpy(ansp, RAW(text), res);
@@ -1686,14 +1687,14 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		    /* add all pieces before matches */
 		    for (int i = 0; i < nmatches; i++) {
 			R_size_t elt_size = fmatches[i] - 1 - pos;
-			elt = allocVector(RAWSXP, elt_size);
+			elt = RawVector::create(elt_size);
 			SET_VECTOR_ELT(ans, i, elt);
 			if (elt_size)
 			    memcpy(RAW(elt), RAW(text) + pos, elt_size);
 			pos = fmatches[i] - 1 + LENGTH(pat);
 		    }
 		    /* add the rest after last match */
-		    elt = allocVector(RAWSXP, LENGTH(text) - (fmatches[nmatches - 1] - 1 + LENGTH(pat)));
+		    elt = RawVector::create(LENGTH(text) - (fmatches[nmatches - 1] - 1 + LENGTH(pat)));
 		    SET_VECTOR_ELT(ans, nmatches, elt);
 		    if (LENGTH(elt))
 			memcpy(RAW(elt), RAW(text) + LENGTH(text) - LENGTH(elt), LENGTH(elt));
@@ -1743,11 +1744,11 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	tre_regfree(&reg);
 	if (value) {
 	    if (rc != REG_OK || ptag.rm_eo == ptag.rm_so) /* TODO: is this good enough? it is the same as matching an empty string ... */
-		return invert ? text : allocVector(RAWSXP, 0);
+		return invert ? text : RawVector::create(0);
 	    if (invert) {
 		Rbyte *ansp;
 		R_size_t len;
-		ans = allocVector(RAWSXP, LENGTH(text) - (ptag.rm_eo - ptag.rm_so));
+		ans = RawVector::create(LENGTH(text) - (ptag.rm_eo - ptag.rm_so));
 		ansp = RAW(ans);
 		if (ptag.rm_so) {
 		    memcpy(ansp, RAW(text), ptag.rm_so);
@@ -1757,7 +1758,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (len)
 		    memcpy(ansp, RAW(text) + ptag.rm_eo, len);
 	    } else {
-		ans = allocVector(RAWSXP, ptag.rm_eo - ptag.rm_so);
+		ans = RawVector::create(ptag.rm_eo - ptag.rm_so);
 		memcpy(RAW(ans), RAW(text) + offset + ptag.rm_so, ptag.rm_eo - ptag.rm_so);
 	    }
 	    return ans;
@@ -1813,14 +1814,14 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	ans = PROTECT(ListVector::create(invert ? (nmatches + 1) : nmatches));
 	while (entry < (R_size_t) nmatches) {
 	    if (invert) { /* for invert=TRUE store the current piece up to the match */
-		SEXP rvec = allocVector(RAWSXP, res_val[cptr] - 1 - inv_start);
+		SEXP rvec = RawVector::create(res_val[cptr] - 1 - inv_start);
 		SET_VECTOR_ELT(ans, entry, rvec);
 		entry++;
 		if (LENGTH(rvec))
 		    memcpy(RAW(rvec), RAW(text) + inv_start, LENGTH(rvec));
 		inv_start = res_val[cptr] - 1 + res_val[cptr + 1];
 	    } else { /* for invert=FALSE store the matched piece */
-		SEXP rvec = allocVector(RAWSXP, res_val[cptr + 1]);
+		SEXP rvec = RawVector::create(res_val[cptr + 1]);
 		SET_VECTOR_ELT(ans, entry, rvec);
 		entry++;
 		if (LENGTH(rvec))
@@ -1838,7 +1839,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
 	if (invert) { /* add the last piece after the last match */
-	    SEXP lvec = allocVector(RAWSXP, LENGTH(text) - inv_start);
+	    SEXP lvec = RawVector::create(LENGTH(text) - inv_start);
 	    SET_VECTOR_ELT(ans, nmatches, lvec);
 	    if (LENGTH(lvec))
 		memcpy(RAW(lvec), RAW(text) + inv_start, LENGTH(lvec));
