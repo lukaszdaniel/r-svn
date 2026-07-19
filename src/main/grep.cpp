@@ -135,7 +135,7 @@ static int jit_stack_size(void)
 	double xdouble = R_strtod(p, &endp);
 	if (xdouble >= 0 && xdouble <= 1000)
 	    stmax = (int)(xdouble*1024*1024);
-	else warning(_("R_PCRE_JIT_STACK_MAXSIZE invalid and ignored"));
+	else warning("%s", _("R_PCRE_JIT_STACK_MAXSIZE invalid and ignored"));
     }
     return stmax;
 }
