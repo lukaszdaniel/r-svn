@@ -2573,12 +2573,14 @@ static void InBytesConn(R_inpstream_t stream, void *buf, int length)
 		if (ncread != 2)
 		    error("%s", _("error reading from ascii connection"));
 		if (!sscanf(linebuf, "%02x", &res))
-		    error("%s", _("unexpected format in ascii connection"));
+		    error(_("unexpected format in ascii connection '%s'"),
+			con->description);
 		*p++ = (unsigned char)res;
 	    }
 	} else {
 	    if ((size_t) length != con->read(buf, 1, length, con))
-		error("%s", _("error reading from connection"));
+		error(_("error reading from connection '%s'"),
+		      con->description);
 	}
     }
 }
@@ -2592,7 +2594,8 @@ static int InCharConn(R_inpstream_t stream)
 	return Rconn_fgetc(con);
     else {
 	if (1 != con->read(buf, 1, 1, con))
-	    error("%s", _("error reading from connection"));
+	    error(_("error reading from connection '%s'"),
+		    con->description);
 	return buf[0];
     }
 }

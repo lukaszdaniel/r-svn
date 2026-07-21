@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2005-2021 The R Core Team
+ *  Copyright (C) 2005-2026 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -614,13 +614,13 @@ const char *locale2charset(const char *locale)
      */
     memset(la_loc, 0, sizeof(la_loc));
     memset(enc, 0, sizeof(enc));
-    char *p = (char *) strrchr(locale, '.');
+    const char *p = strrchr(locale, '.');
     if (p) {
 	strncpy(enc, p+1, sizeof(enc)-1);
         enc[sizeof(enc) - 1] = '\0';
 	strncpy(la_loc, locale, sizeof(la_loc)-1);
         la_loc[sizeof(la_loc) - 1] = '\0';
-	p = strrchr(la_loc, '.');
+	char *p = (char *) strrchr(la_loc, '.');
 	if (p) *p = '\0';
     }
 
@@ -663,7 +663,7 @@ const char *locale2charset(const char *locale)
      * Assume locales are like en_US[.utf8[@euro]]
      */
     /* cut encoding @hoge  no use.
-       for (i=0;enc[i] && enc[i]!='@' && i<sizeof(enc)-1;i++);
+       for (int i = 0;enc[i] && enc[i]!='@' && i<sizeof(enc)-1;i++);
        enc[i]='\0';
     */
 
@@ -760,7 +760,7 @@ main()
     SPRINT(locale2charset("en_IN"));
     SPRINT(locale2charset("C"));
     SPRINT(locale2charset("fran""\xe7""ais"));
-    for (int i=0;i<guess_count;i++){
+    for (int i= 0; i<guess_count; i++){
 	locale2charset(guess[i].name);
     }
 #else

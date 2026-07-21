@@ -53,6 +53,7 @@
 #endif
 
 #include <vector>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -293,13 +294,11 @@ attribute_hidden SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 				_("formal argument \"%s\" matched by multiple actual arguments"),
 				CHAR(PRINTNAME(TAG(f))));
 			if (R_warn_partial_match_args) {
-			    SEXP cond =
-				R_makePartialMatchWarningCondition(call,
-								   TAG(b),
-								   TAG(f));
-			    PROTECT(cond);
+			    GCStackRoot<> cond;
+			    cond = R_makePartialArgumentMatchWarningCondition(call,
+									   TAG(b),
+									   TAG(f));
 			    R_signalWarningCondition(cond);
-			    UNPROTECT(1);
 			}
 			SETCAR(a, CAR(b));
 			if (CAR(b) != R_MissingArg) SET_MISSING(a, 0);

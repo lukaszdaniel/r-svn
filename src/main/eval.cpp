@@ -4231,7 +4231,6 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
     }
 	/* try to dispatch on the object */
     if (isObject(x)) {
-	char *pt;
 	/* Try for formal method. */
 	if (IS_S4_OBJECT(x) && R_has_methods(op)) {
 	    GCStackRoot<> argValue;
@@ -4265,6 +4264,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 		argsevald = 1;
 	    }
 	}
+	const char *pt;
 	if (TYPEOF(CAR(call)) == SYMSXP)
 	    pt = Rf_strrchr(CHAR(PRINTNAME(CAR(call))), '.');
 	else

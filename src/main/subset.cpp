@@ -1373,8 +1373,11 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x_, SEXP input_, SEXP call)
 		default:
 		    break;
 		}
-		warningcall(call, _("partial match of '%s' to '%s'"),
-			    translateChar(input), st);
+		GCStackRoot<> cond;
+		cond = R_makePartialMatchWarningCondition(call,
+						       install(translateChar(input)), 
+						       install(st));
+		R_signalWarningCondition(cond);
 	    }
 	    y = CAR(xmatch);
 	    RAISE_NAMED(y, NAMED(x));
@@ -1429,8 +1432,11 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x_, SEXP input_, SEXP call)
 		default:
 		    break;
 		}
-		warningcall(call, _("partial match of '%s' to '%s'"),
-			    translateChar(input), st);
+		GCStackRoot<> cond;
+		cond = R_makePartialMatchWarningCondition(call,
+						       install(translateChar(input)), 
+						       install(st));
+		R_signalWarningCondition(cond);
 	    }
 	    y = VECTOR_ELT(x, imatch);
 	    RAISE_NAMED(y, NAMED(x));

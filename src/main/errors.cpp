@@ -617,26 +617,30 @@ void R::PrintWarnings(const char *hdr)
 	if (VECTOR_ELT(R_Warnings, 0) == R_NilValue)
 	    RWprintf("%s \n", CHAR(STRING_ELT(names, 0)));
 	else {
-	    const char *dcall, *msg = CHAR(STRING_ELT(names, 0));
-	    dcall = CHAR(STRING_ELT(deparse1s(VECTOR_ELT(R_Warnings, 0)), 0));
+	    const char *msg = CHAR(STRING_ELT(names, 0));
+	    const char *dcall = CHAR(STRING_ELT(deparse1s(VECTOR_ELT(R_Warnings, 0)), 0));
 	    RWprintf(_("In '%s':"), dcall);
 	    if (mbcslocale) {
 		int msgline1;
-		const char *p = strchr(msg, '\n');
-		if (p) {
-		    char *q = (char*) (p);
-		    *q = '\0';
-		    msgline1 = wd(msg);
-		    *q = '\n';
+		if (strchr(msg, '\n')) {
+		    // this branch alters msg temporarily
+		    std::string msg1(msg);
+		    size_t pos = msg1.find('\n');
+		    if (pos != std::string::npos)
+		    {
+		       msg1.erase(pos);
+		    }
+		    msgline1 = wd(msg1.c_str());
 		} else msgline1 = wd(msg);
 		if (6 + wd(dcall) + msgline1 > LONGWARN) RWprintf("\n ");
+		RWprintf(" %s\n", msg);
 	    } else {
 		size_t msgline1 = strlen(msg);
 		const char *p = strchr(msg, '\n');
 		if (p) msgline1 = (int)(p - msg);
 		if (6 + strlen(dcall) + msgline1 > LONGWARN) RWprintf("\n ");
+		RWprintf(" %s\n", msg);
 	    }
-	    RWprintf(" %s\n", msg);
 	}
     } else if (R_CollectWarnings <= 10) {
 	RWprintf("%s\n", header);
@@ -2982,17 +2986,31 @@ SEXP R::R_makePartialMatchWarningCondition(SEXP call, SEXP argument, SEXP formal
 {
     GCStackRoot<> cond;
     cond = R_makeWarningCondition(call, "partialMatchWarning", NULL, 2,
+			       _("partial match of '%s' to '%s'"),
+			       CHAR(PRINTNAME(argument)),//EncodeChar??
+			       CHAR(PRINTNAME(formal)));//EncodeChar??
+
+    R_setConditionField(cond, 2, "argument", argument);
+    R_setConditionField(cond, 3, "formal", formal);
+    // ideally we would want the function/object in a field also
+
+    return cond;
+}
+
+SEXP R::R_makePartialArgumentMatchWarningCondition(SEXP call, SEXP argument, SEXP formal)
+{
+    GCStackRoot<> cond;
+    cond = R_makeWarningCondition(call, "partialMatchWarning", NULL, 2,
 			       _("partial argument match of '%s' to '%s'"),
 			       CHAR(PRINTNAME(argument)),//EncodeChar??
 			       CHAR(PRINTNAME(formal)));//EncodeChar??
 
     R_setConditionField(cond, 2, "argument", argument);
     R_setConditionField(cond, 3, "formal", formal);
-    // idealy we would want the function/object in a field also
+    // ideally we would want the function/object in a field also
 
     return cond;
 }
-
 
 #define PROT_SO_MSG _("protect(): protection stack overflow")
 #define EXPR_SO_MSG _("evaluation nested too deeply: infinite recursion / options(expressions=)?")
