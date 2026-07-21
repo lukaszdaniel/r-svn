@@ -1606,7 +1606,7 @@ attribute_hidden SEXP do_quit(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     /* if there are any browser contexts active don't quit */
-    if(Browser::numberActive()) {
+    if (Browser::numberActive()) {
 	warning("%s", _("cannot quit from browser"));
 	return R_NilValue;
     }

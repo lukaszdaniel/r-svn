@@ -44,6 +44,55 @@
 #ifndef CXXR_CONFIG_HPP
 #define CXXR_CONFIG_HPP
 
+
+/** @def AGGRESSIVE_GC
+ *
+ * By default, GCNode::operator new initiates a reference-count-based
+ * garbage collection (GCNode::gclite()) only when the number of bytes
+ * allocated has risen by a certain margin from the number allocated
+ * after the last such collection.  However, if CXXR is compiled with
+ * the preprocessor variable AGGRESSIVE_GC define, every call to
+ * GCNode::operator new will initiate a reference-count-based garbage
+ * collection.  When used in conjunction with NO_CELLPOOLS and address
+ * sanitizer (or valgrind), this can help to detect and diagnose gaps in
+ * the protection of nodes against garbage collection.
+ */
+// #define AGGRESSIVE_GC
+
+/** @def NDEBUG
+ *
+ * @brief Suppress some runtime checks.
+ *
+ * By default, CXXR includes code to check that CXXR::GCStackRoot
+ * objects are destroyed in the reverse order of creation, and that a
+ * node is <code>UNPROTECT</code>ed in the same RCNTXT as it was
+ * <code>PROTECT</code>ed. If NDEBUG is defined, these checks are
+ * omitted. Not recommended during development.
+ */
+// #define NDEBUG
+
+
+/* PROVENANCE_TRACKING is *not yet* controlled by the
+ * --enable-provenance-tracking option to configure, and will be
+ * defined (or not) in config.h .
+ */
+// #define PROVENANCE_TRACKING
+
+/** @def RARE_GC
+ *
+ * @brief Suppress reference-counting garbage collection.
+ *
+ * By default, CXXR will delete any CXXR::GCNode whose reference count
+ * has fallen to zero as a preliminary to allocating memory for a new
+ * CXXR::GCNode.
+ * Defining RARE_GC suppresses the default behaviour, and results in
+ * CXXR::GCNode objects being deleted only as part of the mark-sweep
+ * garbage collection process, initiated when a memory utilisation
+ * threshold is exceeded.
+ */
+// #define RARE_GC
+
+
 #ifdef __GNUC__
 #  ifdef __i386__
 #    define HOT_FUNCTION __attribute__((hot, fastcall))
@@ -77,9 +126,16 @@
  */
 #define CXXR_PROJECT
 
-/** Define CHECKED_SEXP_DOWNCAST to make SEXP_downcast() use
- * dynamic_cast<> instead of static_cast<>.  This adds a run-time
- * check that the cast is valid, at the cost of some performance.
+/** @def CHECKED_SEXP_DOWNCAST
+ *
+ * @brief Check downcasts within the CXXR::RObject class hierarchy.
+ *
+ * If enabled, CXXR implements the templated function
+ * CXXR::SEXP_downcast<PtrOut, PtrIn>() using
+ * <code>dynamic_cast</code>, to verify that the argument object is of
+ * an appropriate type for the requested cast.
+ * This adds a run-time check that the cast is valid,
+ * at the cost of some performance.
  */
 // #define CHECKED_SEXP_DOWNCAST
 
