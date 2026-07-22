@@ -99,6 +99,7 @@ using namespace R;
 using namespace CXXR;
 
 # define Renviron_strchr Rf_strchr
+# define Renviron_strchr_const Rf_strchr_const
 # define Renviron_snprintf Rsnprintf_mbcs
 
 static void Renviron_warning(const char *msg)
@@ -177,8 +178,8 @@ static const char *findRbrace(const char *s)
     int nl = 0, nr = 0;
 
     while(nr <= nl) {
-	pl = Renviron_strchr(p, '{');
-	pr = Renviron_strchr(p, '}');
+	pl = Renviron_strchr_const(p, '{');
+	pr = Renviron_strchr_const(p, '}');
 	if(!pr) return NULL;
 	if(!pl || pr < pl) {
 	    p = pr+1; nr++;
@@ -201,7 +202,7 @@ static const char *findterm(const char *s)
     ans[0] = '\0';
     while (1) {
 	/* Look for ${...}, taking care to look for inner matches */
-	p = Renviron_strchr(s, '$');
+	p = Renviron_strchr_const(s, '$');
 	if (!p || p[1] != '{') break;
 	q = findRbrace(p+2);
 	if (!q) break;

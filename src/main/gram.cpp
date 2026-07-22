@@ -4681,11 +4681,13 @@ static void yyerror(const char *s)
     R_ParseErrorFile = PS_SRCFILE;
 
     if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
-	/* Edit the error message */
-	expecting = (char *) strstr(s + sizeof yyunexpected -1, yyexpecting);
+	/* Edit the error message: needs a copy */
+	std::string s1 = std::string(s).substr(0, PARSE_ERROR_SIZE);
+	expecting = (char *) strstr(s1.c_str() + sizeof yyunexpected -1, yyexpecting);
 	if (expecting) *expecting = '\0';
+	
 	for (int i = 0; yytname_translations[i]; i += 2) {
-	    if (streql(s + sizeof yyunexpected - 1, yytname_translations[i])) {
+	    if (streql(s1.c_str() + sizeof yyunexpected - 1, yytname_translations[i])) {
                 switch(i/2)
                 {
                 case 0:
@@ -4719,7 +4721,7 @@ static void yyerror(const char *s)
                         snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, _("unexpected '%s' value"), "function");
                                 break;
                 default:
-		  if (streql(s + sizeof yyunexpected - 1, "PLACEHOLDER")) {
+		  if (streql(s1.c_str() + sizeof yyunexpected - 1, "PLACEHOLDER")) {
 		      /* cheat to avoid changing the parse error
 			 message for mis-use of _ */
 		      snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE, "%s",
@@ -4735,7 +4737,7 @@ static void yyerror(const char *s)
 	    }
 	}
 	snprintf(R_ParseErrorMsg, PARSE_ERROR_SIZE - 1, _("unexpected %s"),
-                 s + sizeof yyunexpected - 1);
+                 s1.c_str() + sizeof yyunexpected - 1);
     } else {
 	strncpy(R_ParseErrorMsg, s, PARSE_ERROR_SIZE - 1);
         R_ParseErrorMsg[PARSE_ERROR_SIZE - 1] = '\0';

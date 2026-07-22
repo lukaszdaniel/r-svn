@@ -30,6 +30,7 @@
 
 #include "localization.h"
 
+using namespace R;
 
 #define MAXLINE MAXELTSIZE
 #define MAXNARGS 100
@@ -144,7 +145,7 @@ SEXP getfmts(SEXP format)
 	    }
 	}
 	else { /* not '%' : handle string part */
-	    char *ch = Rf_strchr(curFormat, '%'); /* MBCS-aware version used */
+	    const char *ch = Rf_strchr_const(curFormat, '%'); /* MBCS-aware version used */
 	    chunk = (ch) ? (size_t) (ch - curFormat) : strlen(curFormat);
 	    strncpy(bit, curFormat, chunk);
 	    bit[chunk] = '\0';

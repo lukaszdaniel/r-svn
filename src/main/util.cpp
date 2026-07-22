@@ -1458,7 +1458,7 @@ size_t R::utf8toucs(wchar_t *wc, const char *s)
 
 /* despite its name this translates to UTF-16 if there are (invalid)
  * UTF-8 codings for surrogates in the input */
-size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
+size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1607,7 +1607,7 @@ size_t Rf_wcs4toutf8(char *s, const R_wchar_t *wc, size_t n)
 /* A version that reports failure as an error
  * Exported as Rf_mbrtowc
  */
-size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
+size_t R::Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 {
     size_t used;
 
@@ -1734,33 +1734,66 @@ attribute_hidden SEXP do_validEnc(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 
-/* MBCS-aware versions of common comparisons.  Only used for ASCII c */
-char *Rf_strchr(const char *s, int c)
+/* MBCS-aware versions of common comparisons.  Only used for ASCII c,
+   so not needed in UTF-8 locales, but likely in DBCS locales and for
+   7-bit encodings such as ISO-2022-JP.
+ */
+char *R::Rf_strchr(char *s, int c)
 {
-    char *p = (char *)s;
     mbstate_t mb_st;
     size_t used;
 
     if (!mbcslocale || utf8locale) return (char *) strchr(s, c);
     mbs_init(&mb_st);
-    while( (used = Mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st)) ) {
-	if(*p == c) return p;
-	p += used;
+    while( (used = Mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st)) ) {
+	if(*s == c) return s;
+	s += used;
     }
     return (char *)NULL;
 }
 
-attribute_hidden char *R::Rf_strrchr(const char *s, int c)
+// not hidden on Windows
+attribute_hidden char *R::Rf_strrchr(char *s, int c)
 {
-    char *p = (char *)s, *plast = NULL;
+    char *plast = NULL;
     mbstate_t mb_st;
     size_t used;
 
     if (!mbcslocale || utf8locale) return (char *) strrchr(s, c);
     mbs_init(&mb_st);
-    while( (used = Mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st)) ) {
-	if(*p == c) plast = p;
-	p += used;
+    while( (used = Mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st)) ) {
+	if(*s == c) plast = s;
+	s += used;
+    }
+    return plast;
+}
+
+const char *R::Rf_strchr_const(const char *s, int c)
+{
+    mbstate_t mb_st;
+    size_t used;
+
+    if (!mbcslocale || utf8locale) return strchr(s, c);
+    mbs_init(&mb_st);
+    while( (used = Mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st)) ) {
+	if(*s == c) return s;
+	s += used;
+    }
+    return (const char *)NULL;
+}
+
+// not hidden on Windows
+attribute_hidden const char *R::Rf_strrchr_const(const char *s, int c)
+{
+    const char *plast = NULL;
+    mbstate_t mb_st;
+    size_t used;
+
+    if(!mbcslocale || utf8locale) return strrchr(s, c);
+    mbs_init(&mb_st);
+    while( (used = Mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st)) ) {
+	if(*s == c) plast = s;
+	s += used;
     }
     return plast;
 }

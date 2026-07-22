@@ -4266,7 +4266,7 @@ R::DispatchOrEval(SEXP call, SEXP op, const char *generic, SEXP args,
 	}
 	const char *pt;
 	if (TYPEOF(CAR(call)) == SYMSXP)
-	    pt = Rf_strrchr(CHAR(PRINTNAME(CAR(call))), '.');
+	    pt = Rf_strrchr_const(CHAR(PRINTNAME(CAR(call))), '.');
 	else
 	    pt = NULL;
 
@@ -9014,9 +9014,9 @@ attribute_hidden SEXP do_bcversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 const char *R_CompiledFileName(char *fname, char *buf, size_t bsize)
 {
     /* find the base name and the extension */
-    const char *basename = Rf_strrchr(fname, FILESEP[0]);
+    const char *basename = Rf_strrchr_const(fname, FILESEP[0]);
     if (basename == NULL) basename = fname;
-    const char *ext = Rf_strrchr(basename, '.');
+    const char *ext = Rf_strrchr_const(basename, '.');
 
     if (ext != NULL && streql(ext, R_COMPILED_EXTENSION)) {
 	/* the supplied file name has the compiled file extension, so
