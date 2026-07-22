@@ -44,6 +44,8 @@ size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
 const char *Rf_strchr_const(const char *s, int c); /* from util.c, MBCS-aware */
 } // namespace R
 
+namespace R;
+
 /*
  *  Menu variables.
  */

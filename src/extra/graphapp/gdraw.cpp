@@ -43,6 +43,7 @@ namespace R {
 size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
 } // namespace R
 
+namespace R;
 
 static HDC GETHDC(drawing d)
 {
