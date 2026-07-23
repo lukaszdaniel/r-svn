@@ -1361,22 +1361,11 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x_, SEXP input_, SEXP call)
 	}
 	if (havematch == 1) { /* unique partial match */
 	    if (R_warn_partial_match_dollar) {
-		const char *st = "";
 		SEXP target = TAG(xmatch);
-		switch (TYPEOF(target)) {
-		case SYMSXP:
-		    st = CHAR(PRINTNAME(target));
-		    break;
-		case CHARSXP:
-		    st = translateChar(target);
-		    break;
-		default:
-		    break;
-		}
 		GCStackRoot<> cond;
 		cond = R_makePartialMatchWarningCondition(call,
-						       install(translateChar(input)), 
-						       install(st));
+						       input,
+						       target);
 		R_signalWarningCondition(cond);
 	    }
 	    y = CAR(xmatch);
@@ -1420,22 +1409,11 @@ attribute_hidden SEXP R::R_subset3_dflt(SEXP x_, SEXP input_, SEXP call)
 	}
 	if (havematch == 1) { /* unique partial match */
 	    if (R_warn_partial_match_dollar) {
-		const char *st = "";
 		SEXP target = STRING_ELT(nlist, imatch);
-		switch (TYPEOF(target)) {
-		case SYMSXP:
-		    st = CHAR(PRINTNAME(target));
-		    break;
-		case CHARSXP:
-		    st = translateChar(target);
-		    break;
-		default:
-		    break;
-		}
 		GCStackRoot<> cond;
 		cond = R_makePartialMatchWarningCondition(call,
-						       install(translateChar(input)), 
-						       install(st));
+						       input,
+						       target);
 		R_signalWarningCondition(cond);
 	    }
 	    y = VECTOR_ELT(x, imatch);

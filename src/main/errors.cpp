@@ -2982,16 +2982,24 @@ SEXP R::R_makeWarningCondition(SEXP call,
     return cond;
 }
 
-SEXP R::R_makePartialMatchWarningCondition(SEXP call, SEXP argument, SEXP formal)
+SEXP R::R_makePartialMatchWarningCondition(SEXP call, SEXP input, SEXP target)
 {
     GCStackRoot<> cond;
     cond = R_makeWarningCondition(call, "partialMatchWarning", NULL, 2,
 			       _("partial match of '%s' to '%s'"),
-			       CHAR(PRINTNAME(argument)),//EncodeChar??
-			       CHAR(PRINTNAME(formal)));//EncodeChar??
+ 			       TYPEOF(input) == SYMSXP ? 
+			       CHAR(PRINTNAME(input))  //EncodeChar??
+			       : translateChar(input),
+			       TYPEOF(target) == SYMSXP ?
+			       CHAR(PRINTNAME(target)) //EncodeChar??
+			       : translateChar(target));
 
-    R_setConditionField(cond, 2, "argument", argument);
-    R_setConditionField(cond, 3, "formal", formal);
+    R_setConditionField(cond, 2, "input", 
+			TYPEOF(input) == SYMSXP ? input :
+			ScalarString(input));
+    R_setConditionField(cond, 3, "target",
+			TYPEOF(target) == SYMSXP ? target :
+			ScalarString(target));
     // ideally we would want the function/object in a field also
 
     return cond;
@@ -3000,7 +3008,8 @@ SEXP R::R_makePartialMatchWarningCondition(SEXP call, SEXP argument, SEXP formal
 SEXP R::R_makePartialArgumentMatchWarningCondition(SEXP call, SEXP argument, SEXP formal)
 {
     GCStackRoot<> cond;
-    cond = R_makeWarningCondition(call, "partialMatchWarning", NULL, 2,
+    cond = R_makeWarningCondition(call, "partialMatchWarning",
+			       "partialArgumentMatchWarning", 2,
 			       _("partial argument match of '%s' to '%s'"),
 			       CHAR(PRINTNAME(argument)),//EncodeChar??
 			       CHAR(PRINTNAME(formal)));//EncodeChar??
