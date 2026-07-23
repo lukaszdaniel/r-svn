@@ -52,7 +52,7 @@ void init_objects(void)
     if (base_object)
 	return;
 
-    base_object = create(objinfo);
+    base_object = ga_create(objinfo);
 
     if (!base_object)
 	apperror("Out of memory (init_objects)!");
@@ -172,7 +172,7 @@ void decrease_refcount(object obj)
 	return;	/* don't delete this object */
 
     /* the refcount must now be zero, so add to list */
-    new_node = create(delnode);
+    new_node = ga_create(delnode);
     new_node->obj = obj;
     if (del_base) {
 	/* add to end of circular list */
@@ -396,14 +396,14 @@ object new_object(int kind, HANDLE handle, object parent)
     object obj;
 
     /* create the object */
-    obj = create(objinfo);
+    obj = ga_create(objinfo);
     if (!obj)
 	return NULL;
     obj->menubar = obj->popup = obj->toolbar = NULL;
     obj->status[0] = '\0';
     if (kind & ControlObject)
     {
-	obj->call = create(callinfo);
+	obj->call = ga_create(callinfo);
 	if (!obj->call) {
 	    discard(obj);
 	    return NULL;

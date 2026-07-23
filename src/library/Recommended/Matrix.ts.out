@@ -1,0 +1,29 @@
+* installing *source* package ‘Matrix’ ...
+** this is package ‘Matrix’ version ‘1.7-5’
+files ‘.Rinstignore’, ‘.gitignore’ are missing
+** using non-staged installation
+** libs
+using C compiler: ‘gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0’
+make[3]: Wejście do katalogu '/tmp/Rtmp3wRqRf/R.INSTALLe323216039c3/Matrix/src'
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c Csparse.c -o Csparse.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c attrib.c -o attrib.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c bind.c -o bind.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cholmod-common.c -o cholmod-common.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cholmod-etc.c -o cholmod-etc.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c coerce.c -o coerce.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c cs-etc.c -o cs-etc.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c dense.c -o dense.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c determinant.c -o determinant.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c expm.c -o expm.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c factor.c -o factor.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c idz.c -o idz.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c init.c -o init.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c kappa.c -o kappa.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c matmult.c -o matmult.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c objects.c -o objects.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c perm.c -o perm.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c solve.c -o solve.o
+gcc -I"/home/monia/dev/r-svn/include" -DNDEBUG -I"SuiteSparse/SuiteSparse_config"  -Wall -Werror -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2  -c sparse.c -o sparse.o
+make[3]: *** [/home/monia/dev/r-svn/etc/Makeconf:192: sparse.o] Przerwanie
+ERROR: compilation failed for package ‘Matrix’
+* removing ‘/home/monia/dev/r-svn/library/Matrix’

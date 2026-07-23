@@ -94,7 +94,7 @@ static size_t double_backslashes(const char *s, char *out, size_t bufsize)
     if (mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
-	while((used = Mbrtowc(NULL, p, MB_CUR_MAX, &mb_st))) {
+	while((used = Rf_mbrtowc(NULL, p, MB_CUR_MAX, &mb_st))) {
 	    if (*p == '\\') {
 		needed ++;
 		if (needed < bufsize) *out++ = '\\';
@@ -1397,7 +1397,6 @@ static menu getMenu(const char * name)
 int winaddmenu(const char *name, char *errmsg)
 {
     const char *submenu = name;
-    char *p, start[501];
     menu parent;
 
     if (getMenu(name))
@@ -1419,9 +1418,10 @@ int winaddmenu(const char *name, char *errmsg)
 	strcpy(errmsg, G_("'menu' is limited to 500 bytes"));
 	return 5;
     }
-    p = Rf_strrchr(name, '/');
+    const char *p = Rf_strrchr_const(name, '/');
     if (p) {
 	submenu = p + 1;
+    char start[501];
 	strcpy(start, name);
 	*Rf_strrchr(start, '/') = '\0';
 	parent = getMenu(start);

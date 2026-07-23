@@ -56,7 +56,7 @@ image newimage(int width, int height, int depth)
     if ((depth != 8) && (depth != 32))
 	return NULL;
 
-    img = create(struct imagedata);
+    img = ga_create(struct imagedata);
 
     if (! img)
 	return img;
@@ -667,7 +667,7 @@ static image load_header_image_file(FILE *file)
 	    return NULL;
 	}
 	for (i=0; i<cmapsize; i++) {
-	    append(cmap, read_hex_long(file));
+	    ga_append(cmap, read_hex_long(file));
 	}
 	if (fgets(line, sizeof(line)-2, file) == NULL)
 	    return NULL;
@@ -793,7 +793,7 @@ static char * base_file_name(const char *filename)
 	}
     }
     for (i=start; i < end; i++)
-	append(name, tolower(filename[i]));
+	ga_append(name, tolower(filename[i]));
     return name;
 }
 

@@ -419,7 +419,7 @@ size_t R::mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc)
     char *o_buf;
     size_t  i_len, o_len, status, wc_len;
     /* out length */
-    wc_len = (enc == CE_UTF8)? utf8towcs(NULL, in, 0) : mbstowcs(NULL, in, 0);
+    wc_len = (enc == CE_UTF8)? Rf_utf8towcs(NULL, in, 0) : mbstowcs(NULL, in, 0);
     if (out == NULL || (int)wc_len < 0) return wc_len;
 
     if ((void*)-1 == (cd = Riconv_open(UCS2ENC, (enc == CE_UTF8) ? "UTF-8": "")))
@@ -458,7 +458,7 @@ Rboolean Rf_isBlankString(const char *s)
 	wchar_t wc; size_t used; mbstate_t mb_st;
 	mbs_init(&mb_st);
 	// This does not allow for surrogate pairs, but all blanks are in BMP
-	while( (used = Mbrtowc(&wc, s, R_MB_CUR_MAX, &mb_st)) ) {
+	while( (used = Rf_mbrtowc(&wc, s, R_MB_CUR_MAX, &mb_st)) ) {
 	    if(!iswspace((wint_t) wc)) return FALSE;
 	    s += used;
 	}
@@ -1458,7 +1458,7 @@ size_t R::utf8toucs(wchar_t *wc, const char *s)
 
 /* despite its name this translates to UTF-16 if there are (invalid)
  * UTF-8 codings for surrogates in the input */
-size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
+size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
 {
     ssize_t m, res = 0;
     const char *t;
@@ -1468,7 +1468,7 @@ size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
     if(wc)
 	for(p = wc, t = s; ; p++, t += m) {
 	    m  = (ssize_t) utf8toucs(p, t);
-	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs'"), s);
+	    if (m < 0) error(_("invalid input '%s' in 'Rf_utf8towcs'"), s);
 	    if (m == 0) break;
 	    res ++;
 	    if (res >= (ssize_t) n) break;
@@ -1481,7 +1481,7 @@ size_t R::Rf_utf8towcs(wchar_t *wc, const char *s, size_t n)
     else
 	for(t = s; ; t += m) {
 	    m  = (ssize_t) utf8toucs(&local, t);
-	    if (m < 0) error(_("invalid input '%s' in 'utf8towcs'"), s);
+	    if (m < 0) error(_("invalid input '%s' in 'Rf_utf8towcs'"), s);
 	    if (m == 0) break;
 	    res ++;
 	    if (IS_HIGH_SURROGATE(local))
@@ -1607,7 +1607,7 @@ size_t Rf_wcs4toutf8(char *s, const R_wchar_t *wc, size_t n)
 /* A version that reports failure as an error
  * Exported as Rf_mbrtowc
  */
-size_t R::Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
+size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps)
 {
     size_t used;
 
@@ -1738,64 +1738,60 @@ attribute_hidden SEXP do_validEnc(SEXP call, SEXP op, SEXP args, SEXP rho)
    so not needed in UTF-8 locales, but likely in DBCS locales and for
    7-bit encodings such as ISO-2022-JP.
  */
-char *R::Rf_strchr(char *s, int c)
+namespace
 {
-    mbstate_t mb_st;
-    size_t used;
+    template <typename T>
+    T *R_strchr(T *s, int c)
+    {
+        mbstate_t mb_st;
+        size_t used;
 
-    if (!mbcslocale || utf8locale) return (char *) strchr(s, c);
-    mbs_init(&mb_st);
-    while( (used = Mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st)) ) {
-	if(*s == c) return s;
-	s += used;
+        if (!mbcslocale || utf8locale) return (T *)strchr(s, c);
+        mbs_init(&mb_st);
+        while ((used = Rf_mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st))) {
+            if (*s == c) return s;
+            s += used;
+        }
+        return (T *)NULL;
     }
-    return (char *)NULL;
+
+    template <typename T>
+    T *R_strrchr(T *s, int c)
+    {
+        T *plast = NULL;
+        mbstate_t mb_st;
+        size_t used;
+
+        if (!mbcslocale || utf8locale) return (T *)strrchr(s, c);
+        mbs_init(&mb_st);
+        while ((used = Rf_mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st))) {
+            if (*s == c) plast = s;
+            s += used;
+        }
+        return plast;
+    }
+} // anonymous namespace
+
+char *Rf_strchr(char *s, int c)
+{
+    return R_strchr(s, c);
 }
 
 // not hidden on Windows
 attribute_hidden char *R::Rf_strrchr(char *s, int c)
 {
-    char *plast = NULL;
-    mbstate_t mb_st;
-    size_t used;
-
-    if (!mbcslocale || utf8locale) return (char *) strrchr(s, c);
-    mbs_init(&mb_st);
-    while( (used = Mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st)) ) {
-	if(*s == c) plast = s;
-	s += used;
-    }
-    return plast;
+    return R_strrchr(s, c);
 }
 
 const char *R::Rf_strchr_const(const char *s, int c)
 {
-    mbstate_t mb_st;
-    size_t used;
-
-    if (!mbcslocale || utf8locale) return strchr(s, c);
-    mbs_init(&mb_st);
-    while( (used = Mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st)) ) {
-	if(*s == c) return s;
-	s += used;
-    }
-    return (const char *)NULL;
+    return R_strchr(s, c);
 }
 
 // not hidden on Windows
 attribute_hidden const char *R::Rf_strrchr_const(const char *s, int c)
 {
-    const char *plast = NULL;
-    mbstate_t mb_st;
-    size_t used;
-
-    if(!mbcslocale || utf8locale) return strrchr(s, c);
-    mbs_init(&mb_st);
-    while( (used = Mbrtowc(NULL, s, R_MB_CUR_MAX, &mb_st)) ) {
-	if(*s == c) plast = s;
-	s += used;
-    }
-    return plast;
+    return R_strrchr(s, c);
 }
 
 #ifdef Win32
@@ -1806,7 +1802,7 @@ void R::R_fixslash(char *s)
     if(mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
-	while((used = Mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st))) {
+	while((used = Rf_mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st))) {
 	    if(*p == '\\') *p = '/';
 	    p += used;
 	}
@@ -1841,7 +1837,7 @@ void R::R_fixbackslash(char *s)
     if(mbcslocale) {
 	mbstate_t mb_st; int used;
 	mbs_init(&mb_st);
-	while((used = Mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st))) {
+	while((used = Rf_mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st))) {
 	    if(*p == '/') *p = '\\';
 	    p += used;
 	}
@@ -2738,8 +2734,8 @@ static int Rstrcoll(const char *s1, const char *s2)
 {
     R_CheckStack2(sizeof(wchar_t) * (2 + strlen(s1) + strlen(s2)));
     wchar_t w1[strlen(s1)+1], w2[strlen(s2)+1];
-    utf8towcs(w1, s1, strlen(s1));
-    utf8towcs(w2, s2, strlen(s2));
+    Rf_utf8towcs(w1, s1, strlen(s1));
+    Rf_utf8towcs(w2, s2, strlen(s2));
     return wcscoll(w1, w2);
 }
 

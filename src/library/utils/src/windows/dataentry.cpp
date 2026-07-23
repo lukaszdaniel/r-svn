@@ -148,7 +148,7 @@ int mb_char_len(const char *buf, int clength)
     mbstate_t mb_st;
     mbs_init(&mb_st);
     for (int i = 0; i <= clength; i += mb_len)
-	mb_len = Mbrtowc(NULL, buf+i, R_MB_CUR_MAX, &mb_st);
+	mb_len = Rf_mbrtowc(NULL, buf+i, R_MB_CUR_MAX, &mb_st);
     return mb_len;
 }
 

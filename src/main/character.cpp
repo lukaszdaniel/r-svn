@@ -89,7 +89,7 @@ abbreviate chartr make.names strtrim tolower toupper give error.
 # define TO_WCS_OK 1
 #else
 /*
-  Maybe warn if utf8towcs is used, but no known platforms.
+  Maybe warn if Rf_utf8towcs is used, but no known platforms.
  */
 #endif
 
@@ -425,11 +425,11 @@ static void substr(const char *str, int len, int ienc, int sa, int so,
 	mbs_init(&mb_st);
 	for (i = 0; i < sa - 1 && str < end; i++)
 	    /* throws error on invalid multi-byte string */
-	    str += Mbrtowc(NULL, str, R_MB_CUR_MAX, &mb_st);
+	    str += Rf_mbrtowc(NULL, str, R_MB_CUR_MAX, &mb_st);
 	*rfrom = str;
 	for (; i < so && str < end; i++)
 	    /* throws error on invalid multi-byte string */
-	    str += (int) Mbrtowc(NULL, str, R_MB_CUR_MAX, &mb_st);
+	    str += (int) Rf_mbrtowc(NULL, str, R_MB_CUR_MAX, &mb_st);
 	*rlen = (int) (str - *rfrom);
     } else {
 	if (so - 1 < len) {
@@ -644,13 +644,13 @@ static void substrset(char *buf, const char *const str, cetype_t ienc, int sa, i
 	    mbstate_t mb_st_in;
 	    mbs_init(&mb_st_in);
 	    for (i = 1; i < sa; i++)
-		buf += Mbrtowc(NULL, buf, R_MB_CUR_MAX, &mb_st_in);
+		buf += Rf_mbrtowc(NULL, buf, R_MB_CUR_MAX, &mb_st_in);
 	    /* now work out how many bytes to replace by how many */
 	    mbstate_t mb_st_out;
 	    mbs_init(&mb_st_out);
 	    for (i = sa; i <= so && buf[out] && str[in]; i++) {
-		in  += (int) Mbrtowc(NULL, str+in,  R_MB_CUR_MAX, &mb_st_in);
-		out += (int) Mbrtowc(NULL, buf+out, R_MB_CUR_MAX, &mb_st_out);
+		in  += (int) Rf_mbrtowc(NULL, str+in,  R_MB_CUR_MAX, &mb_st_in);
+		out += (int) Rf_mbrtowc(NULL, buf+out, R_MB_CUR_MAX, &mb_st_out);
 	    }
 	    if (in != out) memmove(buf+in, buf+out, strlen(buf+out)+1);
 	    memcpy(buf, str, in);
@@ -979,7 +979,7 @@ attribute_hidden SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
 		} else SET_STRING_ELT(ans, i, el);
 	    } else {
 		s = translateCharUTF8(el);
-		int nc = (int) utf8towcs(NULL, s, 0);
+		int nc = (int) Rf_utf8towcs(NULL, s, 0);
 		if (nc > minlen) {
 		    warn = TRUE;
 		    const wchar_t *wc = wtransChar(el); // to WCS-2 on Windows
@@ -1027,11 +1027,11 @@ attribute_hidden SEXP do_makenames(SEXP call, SEXP op, SEXP args, SEXP env)
 	    mbstate_t mb_st;
 	    const char *pp = This;
 	    mbs_init(&mb_st);
-	    used = (int) Mbrtowc(&wc, pp, R_MB_CUR_MAX, &mb_st);
+	    used = (int) Rf_mbrtowc(&wc, pp, R_MB_CUR_MAX, &mb_st);
 	    pp += used; nc -= used;
 	    if (wc == L'.') {
 		if (nc > 0) {
-		    Mbrtowc(&wc, pp, R_MB_CUR_MAX, &mb_st);
+		    Rf_mbrtowc(&wc, pp, R_MB_CUR_MAX, &mb_st);
 		    if (iswdigit(wc))  need_prefix = TRUE;
 		}
 	    } else if (!iswalpha(wc)) need_prefix = TRUE;
@@ -1129,10 +1129,10 @@ attribute_hidden SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (use_UTF8 && ienc == CE_UTF8) {
 		    xi = CHAR(el);
 		    // could overcount if there are conjugate pairs
-		    nc = (int) utf8towcs(NULL, xi, 0);
+		    nc = (int) Rf_utf8towcs(NULL, xi, 0);
 		} else if (use_UTF8 && ienc == CE_LATIN1) {
 		    xi = translateCharUTF8(el); // in case it is really in CP1252
-		    nc = (int) utf8towcs(NULL, xi, 0);
+		    nc = (int) Rf_utf8towcs(NULL, xi, 0);
 		    ienc = CE_UTF8;
 		} else {
 		    xi = translateChar(el);
@@ -1158,7 +1158,7 @@ attribute_hidden SEXP do_tolower(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
 			wc = (wchar_t *)
 			    R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
-			utf8towcs(wc, xi, nc + 1);
+			Rf_utf8towcs(wc, xi, nc + 1);
 			for (j = 0; j < nc; j++) wc[j] = towctrans(wc[j], tr);
 			nb = (int) wcstoutf8(NULL, wc, INT_MAX);
 			cbuf = CallocCharBuf(nb);
@@ -1475,7 +1475,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* If we have marked strings we want to do this in Unicode as some
      * of them might be mis-represented by translateChar.  But
-     * utf8towcs may not be reliable unless TO_WCS_OK is defined.
+     * Rf_utf8towcs may not be reliable unless TO_WCS_OK is defined.
      */
     for (i = 0; i < n; i++) {
 	SEXP xi = STRING_ELT(x, i);
@@ -1507,16 +1507,16 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	/* Build the old and new wtr_spec lists. */
 	if (use_WC && IS_UTF8(STRING_ELT(old, 0))) {
 	    s = CHAR(STRING_ELT(old, 0));
-	    nc = (int) utf8towcs(NULL, s, 0);
+	    nc = (int) Rf_utf8towcs(NULL, s, 0);
 	    if (nc < 0) error("%s", _("invalid UTF-8 string 'old'"));
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
-	    utf8towcs(wc, s, nc + 1);
+	    Rf_utf8towcs(wc, s, nc + 1);
 	} else if (use_WC && IS_LATIN1(STRING_ELT(old, 0))) {
 	    s = translateCharUTF8(STRING_ELT(old, 0));
-	    nc = (int) utf8towcs(NULL, s, 0);
+	    nc = (int) Rf_utf8towcs(NULL, s, 0);
 	    if (nc < 0) error("%s", _("invalid UTF-8 string 'old'")); // but must be valid
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
-	    utf8towcs(wc, s, nc + 1);
+	    Rf_utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(old, 0));
 	    nc = (int) mbstowcs(NULL, s, 0);
@@ -1532,16 +1532,16 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	if (use_WC && IS_UTF8(STRING_ELT(_new, 0))) {
 	    s = CHAR(STRING_ELT(_new, 0));
-	    nc = (int) utf8towcs(NULL, s, 0);
+	    nc = (int) Rf_utf8towcs(NULL, s, 0);
 	    if (nc < 0) error("%s", _("invalid UTF-8 string 'new'"));
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
-	    utf8towcs(wc, s, nc + 1);
+	    Rf_utf8towcs(wc, s, nc + 1);
 	} else if (use_WC && IS_LATIN1(STRING_ELT(_new, 0))) {
 	    s = translateCharUTF8(STRING_ELT(_new, 0));
-	    nc = (int) utf8towcs(NULL, s, 0);
+	    nc = (int) Rf_utf8towcs(NULL, s, 0);
 	    if (nc < 0) error("%s", _("invalid UTF-8 string 'new'"));
 	    wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t), &cbuff);
-	    utf8towcs(wc, s, nc + 1);
+	    Rf_utf8towcs(wc, s, nc + 1);
 	} else {
 	    s = translateChar(STRING_ELT(_new, 0));
 	    nc = (int) mbstowcs(NULL, s, 0);
@@ -1598,7 +1598,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		ienc = getCharCE(el);
 		if (use_WC && ienc == CE_UTF8) {
 		    xi = CHAR(el);
-		    nc = (int) utf8towcs(NULL, xi, 0);
+		    nc = (int) Rf_utf8towcs(NULL, xi, 0);
 		} else {
 		    xi = translateChar(el);
 		    nc = (int) mbstowcs(NULL, xi, 0);
@@ -1609,7 +1609,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		          (long long)i+1);
 		wc = (wchar_t *) R_AllocStringBuffer((nc+1)*sizeof(wchar_t),
 						     &cbuff);
-		if (ienc == CE_UTF8) utf8towcs(wc, xi, nc + 1);
+		if (ienc == CE_UTF8) Rf_utf8towcs(wc, xi, nc + 1);
 		else mbstowcs(wc, xi, nc + 1);
 		for (j = 0; j < nc; j++){
 		    BSEARCH(tbl,&wc[j], xtable, xtable_cnt, xtable_key_comp);
@@ -1735,7 +1735,7 @@ attribute_hidden SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
 	    mbs_init(&mb_st);
 	    for (p = This, w0 = 0, q = buf; *p ;) {
 		wchar_t wc;
-		nb =  (int) Mbrtowc(&wc, p, R_MB_CUR_MAX, &mb_st);
+		nb =  (int) Rf_mbrtowc(&wc, p, R_MB_CUR_MAX, &mb_st);
 #ifdef USE_RI18N_WIDTH
 		w0 = Ri18n_wcwidth((R_wchar_t) wc);
 #else

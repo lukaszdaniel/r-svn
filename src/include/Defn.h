@@ -2098,10 +2098,8 @@ size_t mbcsToUcs2(const char *in, R_ucs2_t *out, int nout, int enc);
 /* size_t mbcsMblen(char *in);
 size_t ucs2ToMbcs(R_ucs2_t *in, char *out);
 size_t ucs2Mblen(R_ucs2_t *in); */
-#define utf8towcs Rf_utf8towcs
-#define Mbrtowc Rf_mbrtowc
 size_t utf8toucs(wchar_t *wc, const char *s);
-size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
+// size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n); // used in graphapp
 size_t ucstomb(char *s, const unsigned int wc);
 // size_t Rf_ucstoutf8(char *s, const unsigned int wc); // declared in GraphicsDevice.h
 size_t mbtoucs(unsigned int *wc, const char *s, size_t n);
@@ -2113,11 +2111,11 @@ const wchar_t *wtransChar(SEXP x); /* from sysutils.c */
 const char *reEnc3(const char *x, const char *fromcode, const char *tocode, int subst);
 
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
-size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
+// size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps); // used in graphapp
 bool mbcsValid(const char *str);
 char *mbcsTruncateToValid(char *s);
 bool utf8Valid(const char *str);
-char *Rf_strchr(char *s, int c);
+// char *Rf_strchr(char *s, int c); // used in graphapp
 char *Rf_strrchr(char *s, int c);
 const char *Rf_strchr_const(const char *s, int c);
 const char *Rf_strrchr_const(const char *s, int c);
@@ -2350,6 +2348,11 @@ void R_ProcessEvents(void); // declared in R.h
 void R_WaitEvent(void); // declared in R.h
 #endif
 void R_setupHistory(void); // declared in Rinterface.h
+#define utf8towcs Rf_utf8towcs
+size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n); // used in graphapp/gdraw.c
+#define Mbrtowc Rf_mbrtowc
+size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps); // used in graphapp/menus.c
+char *Rf_strchr(char *s, int c); // used in graphapp/menus.c
 const char *locale2charset(const char *); // used in extra/intl/localecharset.c
 size_t Rf_ucstoutf8(char *s, const unsigned int wc); // declared in GraphicsDevice.h
 // below are declared in Rinterface.h and/or R.h/Rembedded.h

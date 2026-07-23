@@ -1099,7 +1099,7 @@ static BBOX RenderStr(const char *str, int draw, mathContext *mc,
 	    mbstate_t mb_st;
 	    mbs_init(&mb_st);
 	    // FIXME this does not allow for surrogate pairs
-	    while ((used = Mbrtowc(&wc, p, n, &mb_st)) > 0) {
+	    while ((used = Rf_mbrtowc(&wc, p, n, &mb_st)) > 0) {
 		/* On Windows could have sign extension here */
 		glyphBBox = GlyphBBox((unsigned int) wc, gc, dd);
 		resultBBox = CombineBBoxes(resultBBox, glyphBBox);

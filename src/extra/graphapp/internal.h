@@ -82,6 +82,7 @@ UINT default_font_charset(void);
 
 
 #include <commdlg.h>
+#include <R_ext/Minmax.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -276,11 +277,6 @@ struct callinfo
 
 /*  Useful definitions.  */
 
-#undef min
-#undef max
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-
 #define MinMenuID  0x0100
 #define MinChildID 0x6000
 #define MinDocID   0xE000
@@ -296,11 +292,11 @@ sendmessage_unwind(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 
 /* Array memory management. */
 
-  #define create(type)  ( (type*) memalloc(sizeof(type)) )
+  #define ga_create(type)  ( (type*) memalloc(sizeof(type)) )
   #define array(n,type) ( (type*) memalloc(n*sizeof(type)) )
   #define len(a)        ( memlength((char*)(a))/sizeof((a)[0]) )
   #define element(a,i)  ( (((i)<len(a)) && ((i)>=0)) ? (a)[i] : 0 )
-  #define append(a,e)   ( *(char**)&(a)=memexpand((char*)(a),sizeof((a)[0])),\
+  #define ga_append(a,e)   ( *(char**)&(a)=memexpand((char*)(a),sizeof((a)[0])),\
 				(a)[len(a)-1]=(e) )
   #define join(a,b)     ( *(char**)&(a)=memjoin((char*)(a),(char*)(b)) )
   #define discard(a)    ( memfree((char*)(a)), (a)=0 )

@@ -580,7 +580,7 @@ static void add_data(window w)
 {
     dialog_data *d;
 
-    d = create (dialog_data);
+    d = ga_create(dialog_data);
     if (!d)
 	return;
     d->hit = NOT_CHOSEN_YET;

@@ -5469,7 +5469,7 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
 		    mbs_init(&mb_st);
 		    lenb = 0;
 		    for(R_xlen_t i = 0; i < len; i++) {
-			used = Mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st);
+			used = Rf_mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st);
 			p += used;
 			lenb += used;
 		    }

@@ -38,13 +38,15 @@
 #include "internal.h"
 /*#include "config.h" */
 #include <cwchar>
-#define mbs_init(x) memset(&x,0,sizeof(x))
-namespace R {
+#define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
+#ifdef __cplusplus
+extern "C" {
+#endif
 size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps);
-const char *Rf_strchr_const(const char *s, int c); /* from util.c, MBCS-aware */
-} // namespace R
-
-using namespace R;
+char *Rf_strchr(const char *s, int c); /* from util.c, MBCS-aware */
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 /*
  *  Menu variables.
@@ -118,8 +120,8 @@ static void private_delmenu(menu m)
  */
 static int find_char(int ch, const char *str)
 {
-    const char *p = Rf_strchr_const(str, ch);
-    if (!p) return -1; else return p - str;
+    char *p = Rf_strchr(str, ch);
+    if(!p) return -1; else return p - str;
 }
 
 /*
@@ -160,7 +162,7 @@ static void set_search_string(char *search, const char *name, int key)
     }
     /* add the uppercase letters */
     for (source=0; name[source]; source++) {
-	mbs_init(mb_st);
+	mbs_init(&mb_st);
 	mb_len = Rf_mbrtowc(NULL, name + source, MB_CUR_MAX,&mb_st);
 	if (mb_len > 1) source += mb_len-1;
 	else
@@ -168,7 +170,7 @@ static void set_search_string(char *search, const char *name, int key)
     }
     /* add the digits */
     for (source=0; name[source]; source++) {
-	mbs_init(mb_st);
+	mbs_init(&mb_st);
 	mb_len = Rf_mbrtowc(NULL, name + source, MB_CUR_MAX,&mb_st);
 	if (mb_len > 1) source += mb_len-1;
 	else
@@ -176,7 +178,7 @@ static void set_search_string(char *search, const char *name, int key)
     }
     /* add the lowercase letters */
     for (source=0; name[source]; source++) {
-	mbs_init(mb_st);
+	mbs_init(&mb_st);
 	mb_len = Rf_mbrtowc(NULL, name + source, MB_CUR_MAX,&mb_st);
 	if (mb_len > 1) source += mb_len-1;
 	else
@@ -203,7 +205,7 @@ static int find_shortcut(object me, char *search)
     {
 	int mb_len;
 	mbstate_t mb_st;
-	mbs_init(mb_st);
+	mbs_init(&mb_st);
 	mb_len = Rf_mbrtowc(NULL, search + source, MB_CUR_MAX, &mb_st);
 	if ( mb_len > 1 ) {
 	    source += mb_len - 1;
@@ -250,7 +252,7 @@ static void setmenustring(object obj, char *buf, const char *name, int key)
 	    int mb_len;
 	    int i;
 	    mbstate_t mb_st;
-	    mbs_init(mb_st);
+	    mbs_init(&mb_st);
 	    mb_len = Rf_mbrtowc(NULL, name + source, MB_CUR_MAX, &mb_st);
 	    if ( mb_len > 1 ) {
 		for (i = 0 ; i < mb_len ; i++)

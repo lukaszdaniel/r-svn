@@ -3368,15 +3368,15 @@ bool R::isValidName(const char *name)
 	/* This is not necessarily correct for stateful MBCS */
 	mbstate_t mb_st;
 	mbs_init(&mb_st);
-	used = Mbrtowc(&wc, p, n, &mb_st); p += used; n -= used;
+	used = Rf_mbrtowc(&wc, p, n, &mb_st); p += used; n -= used;
 	if(used == 0) return false;
 	if (wc != L'.' && !iswalpha(wc) ) return false;
 	if (wc == L'.') {
 	    /* We don't care about other than ASCII digits */
 	    if(isdigit(0xff & (int)*p)) return false;
-	    /* Mbrtowc(&wc, p, n, NULL); if(iswdigit(wc)) return 0; */
+	    /* Rf_mbrtowc(&wc, p, n, NULL); if(iswdigit(wc)) return 0; */
 	}
-	while((used = Mbrtowc(&wc, p, n, &mb_st))) {
+	while((used = Rf_mbrtowc(&wc, p, n, &mb_st))) {
 	    if (!(iswalnum(wc) || wc == L'.' || wc == L'_')) break;
 	    p += used; n -= used;
 	}

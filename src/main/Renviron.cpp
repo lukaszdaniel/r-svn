@@ -66,6 +66,7 @@
 # define HAVE_PUTENV 1
 
 # define Renviron_strchr strchr
+# define Renviron_strchr_const strchr
 # define Renviron_snprintf snprintf
 
 static void Renviron_warning(const char *msg)

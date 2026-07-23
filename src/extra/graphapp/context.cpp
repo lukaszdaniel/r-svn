@@ -518,7 +518,7 @@ drawstate copydrawstate(void)
     drawstate s = NULL;
 
     if (current) {
-	s = create(drawstruct);
+	s = ga_create(drawstruct);
 	if (s)
 	    *s = *current;
     }

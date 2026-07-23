@@ -39,11 +39,10 @@ WINGDIAPI BOOL WINAPI AlphaBlend(HDC,int,int,int,int,HDC,int,int,int,int,BLENDFU
 #endif
 
 /* from extra.c */
-namespace R {
+#ifdef __cplusplus
+extern "C"
+#endif
 size_t Rf_utf8towcs(wchar_t *wc, const char *s, size_t n);
-} // namespace R
-
-using namespace R;
 
 static HDC GETHDC(drawing d)
 {

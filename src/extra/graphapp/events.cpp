@@ -42,6 +42,8 @@
 
 #include "internal.h"
 
+using namespace std;
+
 /*
  *  Library variables.
  */

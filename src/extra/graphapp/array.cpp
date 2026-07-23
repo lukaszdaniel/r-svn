@@ -31,11 +31,11 @@
 
 #ifndef array
 
-#define create(type)  ( (type*) memalloc(sizeof(type)) )
+#define ga_create(type)  ( (type*) memalloc(sizeof(type)) )
 #define array(n,type) ( (type*) memalloc(n*sizeof(type)) )
 #define len(a)        ( memlength((char*)(a))/sizeof((a)[0]) )
 #define element(a,i)  ( (((i)<len(a)) && ((i)>=0)) ? (a)[i] : 0 )
-#define append(a,e)   ( *(char**)&(a)=memexpand((char*)(a),sizeof((a)[0])), \
+#define ga_append(a,e)   ( *(char**)&(a)=memexpand((char*)(a),sizeof((a)[0])), \
 				(a)[len(a)-1]=(e) )
 #define shrink(a,ns)  ( *(char**)&(a)=memrealloc((char*)(a),(ns)) )
 #define join(a,b)     ( *(char**)&(a)=memjoin((char*)(a),(char*)(b)) )

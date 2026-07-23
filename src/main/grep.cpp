@@ -1199,7 +1199,7 @@ static int fgrep_one(const char *pat, const char *target,
 		if (next != NULL) *next = ib + plen;
 		return i;
 	    }
-	    used = (int) Mbrtowc(NULL,  target+ib, R_MB_CUR_MAX, &mb_st);
+	    used = (int) Rf_mbrtowc(NULL,  target+ib, R_MB_CUR_MAX, &mb_st);
 	    if (used <= 0) break;
 	    ib += used;
 	}
@@ -1243,7 +1243,7 @@ static int fgrep_one_bytes(const char *pat, size_t patlen, const char *target,
 	mbs_init(&mb_st);
 	for (ib = 0, i = 0; (size_t) ib <= len-patlen; i++) {
 	    if (streqln(pat, target+ib, patlen)) return ib;
-	    used = (int) Mbrtowc(NULL, target+ib, R_MB_CUR_MAX, &mb_st);
+	    used = (int) Rf_mbrtowc(NULL, target+ib, R_MB_CUR_MAX, &mb_st);
 	    if (used <= 0) break;
 	    ib += used;
 	}
@@ -1951,11 +1951,11 @@ static char *R_pcre_string_adj(char *target, const char *orig, const char *repl,
 		    p = xi = (char *) alloca((nb+1)*sizeof(char));
 		    for (j = 0; j < nb; j++) *p++ = orig[ovec[2*k]+j];
 		    *p = '\0';
-		    nc = (int) utf8towcs(NULL, xi, 0);
+		    nc = (int) Rf_utf8towcs(NULL, xi, 0);
 		    if (nc >= 0) {
 			R_CheckStack2((nc+1)*sizeof(wchar_t));
 			wc = (wchar_t *) alloca((nc+1)*sizeof(wchar_t));
-			utf8towcs(wc, xi, nc + 1);
+			Rf_utf8towcs(wc, xi, nc + 1);
 			for (int j = 0; j < nc; j++) wc[j] = towctrans(wc[j], tr);
 			nb = (int) wcstoutf8(NULL, wc, INT_MAX);
 			wcstoutf8(xi, wc, nb);
@@ -2633,7 +2633,7 @@ static SEXP gregexpr_fixed(const char *pattern, const char *string,
     PROTECT(matchbuf = allocVector(INTSXP, bufsize));
     PROTECT(matchlenbuf = allocVector(INTSXP, bufsize));
     if (!useBytes && use_UTF8)
-	patlen = (int) utf8towcs(NULL, pattern, 0);
+	patlen = (int) Rf_utf8towcs(NULL, pattern, 0);
     else if (!useBytes && mbcslocale)
 	patlen = (int) mbstowcs(NULL, pattern, 0);
     else
@@ -3146,7 +3146,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 		    INTEGER(ans)[i] = (st > -1)?(st+1):-1;
 		    if (!useBytes && use_UTF8) {
 			INTEGER(matchlen)[i] = INTEGER(ans)[i] >= 0 ?
-			    (int) utf8towcs(NULL, spat, 0):-1;
+			    (int) Rf_utf8towcs(NULL, spat, 0):-1;
 		    } else if (!useBytes && mbcslocale) {
 			INTEGER(matchlen)[i] = INTEGER(ans)[i] >= 0 ?
 			    (int) mbstowcs(NULL, spat, 0):-1;

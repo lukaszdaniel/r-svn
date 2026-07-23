@@ -39,6 +39,8 @@
 
 #include "internal.h"
 
+using namespace std;
+
 #if (WINVER < 0x030a)
 
 #define MoveToEx move_to_ex
