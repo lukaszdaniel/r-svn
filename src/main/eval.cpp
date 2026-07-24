@@ -5658,14 +5658,14 @@ typedef int BCODE;
 #define OP(name,argc) case name##_OP
 
 #ifdef BC_PROFILING
-#define BEGIN_MACHINE  loop: R_BCpc = currentpc = pc; s_current_opcode = *pc; switch(*pc++)
+#define BEGIN_MACHINE  for (;;) { R_BCpc = currentpc = pc; s_current_opcode = *pc; switch(*pc++)
 #else
-#define BEGIN_MACHINE  loop: R_BCpc = currentpc = pc; switch(*pc++)
+#define BEGIN_MACHINE  for (;;) { R_BCpc = currentpc = pc; switch(*pc++)
 #endif
-#define LASTOP  default: error("%s", _("bad opcode"))
+#define LASTOP  default: error("%s", _("bad opcode")); break; }
 #define INITIALIZE_MACHINE()
 
-#define NEXT() goto loop
+#define NEXT() continue
 #define GETOP() *pc++
 #define SKIP_OP() (pc++)
 

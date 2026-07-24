@@ -100,16 +100,19 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 	if(PRIMARITY(op) == nargs + 1) {
 	    recycle_0 = false;
 #if 0
-	    REprintf("%d arguments passed to .Internal(%s) which requires %d;\n an S4 method"
+	    std::string primname = ".Internal(" + std::string(PRIMNAME(op)) + ")";
+	    REprintf("%d arguments passed to '%s' which requires %d;\n an S4 method"
 		     " may need to be redefined, typically by re-installing a package\n",
-		     nargs, PRIMNAME(op), PRIMARITY(op));
+		     nargs, primname.c_str(), PRIMARITY(op));
 #endif
 	}
-	else // not even "ok":
-	    error(n_("%d argument passed to .Internal(%s) which requires %d",
-			   "%d arguments passed to .Internal(%s) which requires %d",
+	else { // not even "ok":
+	    std::string primname = ".Internal(" + std::string(PRIMNAME(op)) + ")";
+	    error(n_("%d argument passed to '%s' which requires %d",
+			   "%d arguments passed to '%s' which requires %d",
 			   (unsigned long) nargs),
-		  nargs, PRIMNAME(op), PRIMARITY(op));
+		  nargs, primname.c_str(), PRIMARITY(op));
+	}
     }
 #endif
 

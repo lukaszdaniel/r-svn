@@ -75,11 +75,12 @@ attribute_hidden SEXP do_identical(SEXP call, SEXP op, SEXP args, SEXP env)
        'methods'!
 
        checkArity(op, args); */
-    if (nargs < 5)
-	error(n_("%d argument passed to .Internal(%s) which requires %d",
-	      "%d arguments passed to .Internal(%s) which requires %d", length(args)),
-	      length(args), PRIMNAME(op), PRIMARITY(op));
-
+    if (nargs < 5) {
+	std::string primname = ".Internal(" + std::string(PRIMNAME(op)) + ")";
+	error(n_("%d argument passed to '%s' which requires %d",
+	      "%d arguments passed to '%s' which requires %d", length(args)),
+	      length(args), primname.c_str(), PRIMARITY(op));
+    }
     SEXP x = CAR(args); args = CDR(args);
     SEXP y = CAR(args); args = CDR(args);
 
