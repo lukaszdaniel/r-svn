@@ -7336,13 +7336,13 @@ struct CXXR::bcEval_locals {
 struct CXXR::R_bcFrame {
     struct bcEval_globals globals;
     struct bcEval_locals locals;
-    struct { SEXP promise; } promvars;
+    GCRoot<> promise;
 };
 
 #define BCFRAME_LOCALS() (&(R_BCFrame->locals))
 #define BCFRAME_GLOBALS() (&(R_BCFrame->globals))
-#define BCFRAME_PROMISE() (R_BCFrame->promvars.promise)
-#define SET_BCFRAME_PROMISE(val) (R_BCFrame->promvars.promise = (val))
+#define BCFRAME_PROMISE() (R_BCFrame->promise)
+#define SET_BCFRAME_PROMISE(val) (R_BCFrame->promise = (val))
 
 /* Allocate activation frame for inline calls on the node stack */
 static R_INLINE R_bcFrame_type *PUSH_BCFRAME()
@@ -7423,7 +7423,6 @@ static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho, boo
 
 static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom, bool useCache)
 {
-    PROTECT(prom);
     SET_PRSEEN(prom, UNDER_EVALUATION);
     R_BCFrame = PUSH_BCFRAME();
     INCREMENT_EVAL_DEPTH();
@@ -7447,7 +7446,6 @@ static R_INLINE void finish_force_promise(void)
     SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval);
     SET_PRSEEN(prom, DEFAULT);
     SET_PRENV(prom, R_NilValue);
-    UNPROTECT(1); /* prom */
 }
 
 #define DO_GETVAR_FORCE_PROMISE_RETURN() do {			\
