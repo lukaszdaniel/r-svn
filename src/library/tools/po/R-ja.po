@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 16:08+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -1446,11 +1446,6 @@ msgstr "未知のエンコードです"
 msgid "Unknown encoding with non-ASCII data"
 msgstr "非 ASCII データをもつ未知のエンコーディングです"
 
-#. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
-#: R/utils.R:0
-msgid "Unknown encoding with non-ASCII data: converting to ASCII"
-msgstr "非 ASCII データをもつ未知のエンコーディングです: ASCII に変換します"
-
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
@@ -2594,6 +2589,9 @@ msgstr[0] "オブジェクト %s は 1 つ以上のデータ呼び出しによ�
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "%s (%s行) を再エンコード出来ません"
+
+#~ msgid "Unknown encoding with non-ASCII data: converting to ASCII"
+#~ msgstr "非 ASCII データをもつ未知のエンコーディングです: ASCII に変換します"
 
 #~ msgid "Error: cannot rename directory to %s"
 #~ msgstr "エラー: ディレクトリの名前を %s に変更できません"

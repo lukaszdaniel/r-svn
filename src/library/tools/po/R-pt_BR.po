@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: Caio Lente <lente@ime.usp.br>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -1432,11 +1432,6 @@ msgstr "Codificação desconhecida"
 msgid "Unknown encoding with non-ASCII data"
 msgstr "Codificação com dados não ASCII desconhecida"
 
-#. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
-#: R/utils.R:0
-msgid "Unknown encoding with non-ASCII data: converting to ASCII"
-msgstr "Codificação desconhecida com dados não ASCII: convertendo para ASCII"
-
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
@@ -2623,6 +2618,9 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "não é possível recodificar %s linha %s"
 msgstr[1] "não é possível recodificar %s linhas %s"
+
+#~ msgid "Unknown encoding with non-ASCII data: converting to ASCII"
+#~ msgstr "Codificação desconhecida com dados não ASCII: convertendo para ASCII"
 
 #~ msgid "Error: cannot rename directory to %s"
 #~ msgstr "Erro: não é possível renomear diretório para %s"

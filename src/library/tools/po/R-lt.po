@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -1430,11 +1430,6 @@ msgstr "Nežinomas kodavimas"
 msgid "Unknown encoding with non-ASCII data"
 msgstr "Nežinomas kodavimas su ne ASCII duomenimis"
 
-#. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
-#: R/utils.R:0
-msgid "Unknown encoding with non-ASCII data: converting to ASCII"
-msgstr "Nežinomas kodavimas su ne ASCII duomenimis: konvertavimas į ASCII"
-
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
@@ -2663,6 +2658,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nepavyko perkoduoti %s eilutės %s"
 msgstr[1] "nepavyko perkoduoti %s eilučių %s"
 msgstr[2] "nepavyko perkoduoti %s eilučių %s"
+
+#~ msgid "Unknown encoding with non-ASCII data: converting to ASCII"
+#~ msgstr "Nežinomas kodavimas su ne ASCII duomenimis: konvertavimas į ASCII"
 
 #~ msgid "Error: cannot rename directory to %s"
 #~ msgstr "Klaida: negalima pervardyti katalogo į %s"

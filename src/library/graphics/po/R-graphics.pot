@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,6 +82,13 @@ msgstr ""
 #. R/image.R: stop("'breaks' must all be finite")
 
 msgid "'breaks' must all be finite"
+msgstr ""
+
+
+#: R/filled.contour.R: 0
+#. R/filled.contour.R: gettextf("'col' has length %d but should have length %d (= length(levels) - 1, with length(levels) = %d); colors will be recycled or ignored",     length(col), length(levels) - 1L, length(levels))
+
+msgid "'col' has length %d but should have length %d (= length(levels) - 1, with length(levels) = %d); colors will be recycled or ignored"
 msgstr ""
 
 

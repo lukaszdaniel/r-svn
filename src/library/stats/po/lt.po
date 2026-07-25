@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 17:35+0200\n"
+"POT-Creation-Date: 2026-07-25 10:38+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -90,43 +90,43 @@ msgstr "ne visi argumentai turi tą patį ilgį"
 msgid "no input has determined the number of cases"
 msgstr "jokia įvestis nenustatė atvejų skaičiaus"
 
-#: cov.cpp:566
+#: cov.cpp:549
 msgid "missing observations in cov/cor"
 msgstr "trūkstami stebėjimai, esantys cov/cor"
 
-#: cov.cpp:638
+#: cov.cpp:621
 msgid ""
 "Calling var(x) on a factor x is defunct.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:640
+#: cov.cpp:623
 msgid ""
 "Calling var(x) on a factor x is deprecated and will become an error.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:645
+#: cov.cpp:628
 msgid "'x' is NULL"
 msgstr "'x' yra NULL"
 
-#: cov.cpp:677 cov.cpp:683
+#: cov.cpp:660 cov.cpp:666
 msgid "incompatible dimensions"
 msgstr "nesuderintos dimensijos"
 
-#: cov.cpp:702 cov.cpp:743 cov.cpp:776
+#: cov.cpp:685 cov.cpp:726 cov.cpp:759
 msgid "no complete element pairs"
 msgstr "nėra jokių išsamių elementų porų"
 
-#: cov.cpp:715
+#: cov.cpp:698
 msgid "invalid 'use' (computational method)"
 msgstr "netinkamas 'use' (skaičiavimo metodas)"
 
-#: cov.cpp:718
+#: cov.cpp:701
 msgid "'x' is empty"
 msgstr "'x' tuščias"
 
-#: cov.cpp:812
+#: cov.cpp:795
 msgid "the standard deviation is zero"
 msgstr "standartinis nuokrypis lygus nuliui"
 

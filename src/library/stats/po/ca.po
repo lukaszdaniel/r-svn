@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 17:35+0200\n"
+"POT-Creation-Date: 2026-07-25 10:38+0200\n"
 "PO-Revision-Date: 2025-07-06 15:55+0200\n"
 "Last-Translator: Lluís <lluis.revilla+weblate@gmail.com>\n"
 "Language-Team: none\n"
@@ -107,49 +107,49 @@ msgstr "no tots els arguments tenen la mateixa longitud"
 msgid "no input has determined the number of cases"
 msgstr "cap entrada ha determinat el nombre de casos"
 
-#: cov.cpp:566
+#: cov.cpp:549
 #, fuzzy
 msgid "missing observations in cov/cor"
 msgstr "manca observacions a la cov/cor"
 
-#: cov.cpp:638
+#: cov.cpp:621
 msgid ""
 "Calling var(x) on a factor x is defunct.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:640
+#: cov.cpp:623
 msgid ""
 "Calling var(x) on a factor x is deprecated and will become an error.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:645
+#: cov.cpp:628
 #, fuzzy
 msgid "'x' is NULL"
 msgstr "«x» és NULL"
 
-#: cov.cpp:677 cov.cpp:683
+#: cov.cpp:660 cov.cpp:666
 #, fuzzy
 msgid "incompatible dimensions"
 msgstr "dimensions incompatibles"
 
-#: cov.cpp:702 cov.cpp:743 cov.cpp:776
+#: cov.cpp:685 cov.cpp:726 cov.cpp:759
 #, fuzzy
 msgid "no complete element pairs"
 msgstr "no hi ha cap parell d'elements complets"
 
-#: cov.cpp:715
+#: cov.cpp:698
 #, fuzzy
 msgid "invalid 'use' (computational method)"
 msgstr "«use» no vàlid (mètode computacional)"
 
-#: cov.cpp:718
+#: cov.cpp:701
 #, fuzzy
 msgid "'x' is empty"
 msgstr "«x» és buit"
 
-#: cov.cpp:812
+#: cov.cpp:795
 #, fuzzy
 msgid "the standard deviation is zero"
 msgstr "la desviació estàndard és zero"

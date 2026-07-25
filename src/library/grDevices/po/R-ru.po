@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-04-01 16:58+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -249,11 +249,12 @@ msgstr "Путь к файлу шрифта длиннее 500 байт буде
 msgid "Font information is inconsistent"
 msgstr "Неконсистентная информация о шрифте"
 
-#. R/postscript.R: stop("GhostScript was not found")
-#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#. R/postscript.R: stop("Ghostscript was not found")
+#. R/unix/dev2bitmap.R: stop("Ghostscript was not found")
+#. R/windows/dev2bitmap.R: stop("Ghostscript was not found")
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
-msgid "GhostScript was not found"
+#, fuzzy
+msgid "Ghostscript was not found"
 msgstr "GhostScript не найден"
 
 #. R/patterns.R: stop("Invalid 'extend' value")

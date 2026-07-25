@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.6.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2026-04-14 15:46+0000\n"
 "Last-Translator: Erika Siregar <erika.mukhlisina@gmail.com>\n"
 "Language-Team: none\n"
@@ -1360,11 +1360,6 @@ msgstr ""
 #. R/QC.R: gettext("Unknown encoding with non-ASCII data")
 #: R/QC.R:0
 msgid "Unknown encoding with non-ASCII data"
-msgstr ""
-
-#. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
-#: R/utils.R:0
-msgid "Unknown encoding with non-ASCII data: converting to ASCII"
 msgstr ""
 
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Ayush Bipin Patel <ayush.ap58@gmail.com>\n"
 "Language-Team: none\n"
@@ -1299,6 +1299,11 @@ msgstr ""
 msgid "0s in V(mu)"
 msgstr ""
 
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid ": not reordering to match"
+msgstr ""
+
 #. R/add.R: stop("AIC is -infinity for this model, so 'step' cannot proceed")
 #: R/add.R:0
 msgid "AIC is -infinity for this model, so 'step' cannot proceed"
@@ -1532,6 +1537,11 @@ msgstr ""
 msgid "The \"ward\" method has been renamed to \"ward.D\"; note new \"ward.D2\""
 msgstr ""
 
+#. R/free1way.R: stop("Unknown parameter name for alternative hypothesis description.")
+#: R/free1way.R:0
+msgid "Unknown parameter name for alternative hypothesis description."
+msgstr ""
+
 #. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
 #: R/models.R:0
 msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
@@ -1634,6 +1644,11 @@ msgstr ""
 #. R/dist.R: stop("ambiguous distance method")
 #: R/dist.R:0
 msgid "ambiguous distance method"
+msgstr ""
+
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid "and"
 msgstr ""
 
 #. R/nls.R: stop("anova is only defined for sequences of \"nls\" objects")
@@ -2084,6 +2099,11 @@ msgstr ""
 #. R/nlm.R: if (doX) "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0" else "f() values at end points not of opposite sign"
 #: R/nlm.R:0
 msgid "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0"
+msgstr ""
+
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid "different names for"
 msgstr ""
 
 #. R/cancor.R: stop("dimension 0 in 'x' or 'y'")
@@ -3814,6 +3834,11 @@ msgstr ""
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr ""
 
+#. R/nls.R: sQuote("start")
+#: R/nls.R:0
+msgid "start"
+msgstr ""
+
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0
 msgid "step size truncated due to divergence"
@@ -4059,6 +4084,21 @@ msgstr ""
 msgid "true event rate is not equal to %s"
 msgstr ""
 
+#. R/free1way.R: gettextf("true generalised Cohen's d is greater than %s", x$mu,     domain = "R-stats")
+#: R/free1way.R:0
+msgid "true generalised Cohen's d is greater than %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true generalised Cohen's d is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+msgid "true generalised Cohen's d is less than %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true generalised Cohen's d is not equal to %s", x$mu,     domain = "R-stats")
+#: R/free1way.R:0
+msgid "true generalised Cohen's d is not equal to %s"
+msgstr ""
+
 #. R/wilcox.test.R: gettextf("true location is greater than %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "true location is greater than %s"
@@ -4087,6 +4127,51 @@ msgstr ""
 #. R/wilcox.test.R: gettextf("true location shift is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "true location shift is not equal to %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-hazard ratio is greater than %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-hazard ratio is greater than %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-hazard ratio is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-hazard ratio is less than %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-hazard ratio is not equal to %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-hazard ratio is not equal to %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-odds ratio is greater than %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-odds ratio is greater than %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-odds ratio is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-odds ratio is less than %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-odds ratio is not equal to %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-odds ratio is not equal to %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is greater than %s",     x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-reverse time hazard ratio is greater than %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is less than %s",     x$data.name, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-reverse time hazard ratio is less than %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is not equal to %s",     x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-reverse time hazard ratio is not equal to %s"
 msgstr ""
 
 #. R/t.test.R: gettextf("true mean difference is greater than %s", mu, domain = "R-stats")
@@ -4557,6 +4642,13 @@ msgstr[1] ""
 #: R/models.R:0
 msgid "but variable found had %d row"
 msgid_plural "but variables found have %d rows"
+msgstr[0] ""
+msgstr[1] ""
+
+#. R/aov.R: ngettext(nresp, "essentially perfect fit for %s: summary may be unreliable",     "essentially perfect fit for response(s) %s: summary may be unreliable")
+#: R/aov.R:0
+msgid "essentially perfect fit for %s: summary may be unreliable"
+msgid_plural "essentially perfect fit for response(s) %s: summary may be unreliable"
 msgstr[0] ""
 msgstr[1] ""
 

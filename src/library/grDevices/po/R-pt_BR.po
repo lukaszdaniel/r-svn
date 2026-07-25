@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 15:33+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -86,8 +86,7 @@ msgstr "'file' deve ser uma cadeia de caracteres não-vazia"
 #: R/convertColor.R:0
 #, fuzzy
 msgid "'from' must be a \"colorConverter\" object or a string"
-msgstr ""
-"'from' deve ser um objeto \"colorConverter\" ou um string de caracteres"
+msgstr "'from' deve ser um objeto \"colorConverter\" ou um string de caracteres"
 
 #. R/convertColor.R: gettextf("'from.ref.white' disagrees with definition of %s",     from$name)
 #: R/convertColor.R:0
@@ -248,11 +247,11 @@ msgstr ""
 msgid "Font information is inconsistent"
 msgstr ""
 
-#. R/postscript.R: stop("GhostScript was not found")
-#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#. R/postscript.R: stop("Ghostscript was not found")
+#. R/unix/dev2bitmap.R: stop("Ghostscript was not found")
+#. R/windows/dev2bitmap.R: stop("Ghostscript was not found")
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
-msgid "GhostScript was not found"
+msgid "Ghostscript was not found"
 msgstr ""
 
 #. R/patterns.R: stop("Invalid 'extend' value")
@@ -473,9 +472,7 @@ msgstr "pelo menos 3 colunas necessárias"
 #. R/unix/x11.R: warning("cairo-based types are not supported on this build - using \"Xlib\"")
 #: R/unix/x11.R:0
 msgid "cairo-based types are not supported on this build - using \"Xlib\""
-msgstr ""
-"Os tipos baseados no Cairo não são suportados nesta compilação - usando "
-"\"Xlib\""
+msgstr "Os tipos baseados no Cairo não são suportados nesta compilação - usando \"Xlib\""
 
 #. R/cairo.R: stop("cairo_pdf: Cairo-based devices are not available for this platform")
 #: R/cairo.R:0

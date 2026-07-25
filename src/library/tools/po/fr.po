@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 17:35+0200\n"
+"POT-Creation-Date: 2026-07-25 10:38+0200\n"
 "PO-Revision-Date: 2025-07-06 16:06+0200\n"
 "Last-Translator: Marcel Ramos <marcel.ramos@sph.cuny.edu>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -43,51 +43,51 @@ msgstr "erreur de sha256 sur le fichier ‘%ls'"
 msgid "sha256 failed on file '%s'"
 msgstr "erreur de sha256 sur le fichier '%s'"
 
-#: getfmts.cpp:56
+#: getfmts.cpp:57
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr "seuls %d arguments sont autorisés"
 
-#: getfmts.cpp:61
+#: getfmts.cpp:62
 #, fuzzy, c-format
 msgid "'%s' is not a character vector"
 msgstr "'fmt' n'est pas un vecteur de chaînes de caractères"
 
-#: getfmts.cpp:64
+#: getfmts.cpp:65
 #, fuzzy, c-format
 msgid "'%s' must be length 1"
 msgstr "'fmt' doit avoir une longueur 1"
 
-#: getfmts.cpp:70
+#: getfmts.cpp:71
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr "la longueur de 'fmt' dépasse la longueur du format maximal %d"
 
-#: getfmts.cpp:91
+#: getfmts.cpp:92
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr "spécification de format inconnu '%s'"
 
-#: getfmts.cpp:131
+#: getfmts.cpp:132
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "une seule astérisque '*' est supportée au maximum dans chaque spécification de conversion"
 
-#: gramLatex.cpp:2848 gramRd.cpp:3966
+#: gramLatex.cpp:2858 gramRd.cpp:3966
 #, c-format
 msgid "Buffer size too large to double safely at line %d"
 msgstr ""
 
-#: gramLatex.cpp:2851 gramRd.cpp:3969
+#: gramLatex.cpp:2861 gramRd.cpp:3969
 #, c-format
 msgid "unable to allocate buffer for long string at line %d"
 msgstr "impossibilité d'allouer une zone tampon pour une chaîne longue à la ligne %d"
 
-#: gramLatex.cpp:3120 gramRd.cpp:4465
+#: gramLatex.cpp:3138 gramRd.cpp:4465
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "impossibilité d'allouer une zone tampon pour une chaîne longue à la ligne %d"
 
-#: gramLatex.cpp:3162 gramRd.cpp:4516
+#: gramLatex.cpp:3180 gramRd.cpp:4516
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valeur '%s' incorrecte"
@@ -194,12 +194,12 @@ msgstr "argument qui n’est pas une chaîne de caractères"
 msgid "path too long"
 msgstr "chemin trop long"
 
-#: install.cpp:123 install.cpp:142 install.cpp:144
+#: install.cpp:123 install.cpp:141 install.cpp:143 install.cpp:145
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
 
-#: install.cpp:174
+#: install.cpp:180
 msgid "write error during file append"
 msgstr "erreur en écriture lors du rajout dans un fichier"
 

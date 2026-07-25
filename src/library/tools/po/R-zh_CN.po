@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -1468,11 +1468,6 @@ msgstr "没有这种编码"
 msgid "Unknown encoding with non-ASCII data"
 msgstr "没有这样的编码，带非ASCII数据:"
 
-#. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
-#: R/utils.R:0
-msgid "Unknown encoding with non-ASCII data: converting to ASCII"
-msgstr "没有这样带非ASCII数据的编码: 转换为ASCII"
-
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
@@ -2629,6 +2624,9 @@ msgstr[0] "不能用多个数据调用来产生对象%s"
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "无法重新编码%s行%s"
+
+#~ msgid "Unknown encoding with non-ASCII data: converting to ASCII"
+#~ msgstr "没有这样带非ASCII数据的编码: 转换为ASCII"
 
 #~ msgid "Error: cannot rename directory to %s"
 #~ msgstr "错误：无法改变目录名称到时%s"

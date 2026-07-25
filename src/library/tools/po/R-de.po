@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-10 15:25+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1415,11 +1415,6 @@ msgstr "Unbekannte Kodierung"
 msgid "Unknown encoding with non-ASCII data"
 msgstr "Unbekannte Kodierung mit nicht-ASCII Daten"
 
-#. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
-#: R/utils.R:0
-msgid "Unknown encoding with non-ASCII data: converting to ASCII"
-msgstr "Unbekannte Kodierung mit nicht-ASCII Daten: konvertiere nach ASCII"
-
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
@@ -2602,6 +2597,9 @@ msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "kann %s Zeile %s nicht rekodieren"
 msgstr[1] "kann '%s' Zeilen %s nicht rekodieren"
+
+#~ msgid "Unknown encoding with non-ASCII data: converting to ASCII"
+#~ msgstr "Unbekannte Kodierung mit nicht-ASCII Daten: konvertiere nach ASCII"
 
 #~ msgid "Error: cannot rename directory to %s"
 #~ msgstr "Fehler: kann Verzeichnis nicht in %s umbenennen"

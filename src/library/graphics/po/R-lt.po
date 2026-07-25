@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: graphics 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 15:29+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -65,6 +65,11 @@ msgstr "'breaks' nėra griežtai didėjantis"
 #: R/image.R:0
 msgid "'breaks' must all be finite"
 msgstr "'breaks' turi būti baigtinis"
+
+#. R/filled.contour.R: gettextf("'col' has length %d but should have length %d (= length(levels) - 1, with length(levels) = %d); colors will be recycled or ignored",     length(col), length(levels) - 1L, length(levels))
+#: R/filled.contour.R:0
+msgid "'col' has length %d but should have length %d (= length(levels) - 1, with length(levels) = %d); colors will be recycled or ignored"
+msgstr ""
 
 #. R/fourfoldplot.R: stop("'conf.level' must be a single number between 0 and 1")
 #: R/fourfoldplot.R:0

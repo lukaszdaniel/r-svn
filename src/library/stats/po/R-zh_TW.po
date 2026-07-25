@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 16:02+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -1322,6 +1322,11 @@ msgstr "沒有(非 NA)案例可用"
 msgid "0s in V(mu)"
 msgstr "V(mu) 裡有零"
 
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid ": not reordering to match"
+msgstr ""
+
 #. R/add.R: stop("AIC is -infinity for this model, so 'step' cannot proceed")
 #: R/add.R:0
 msgid "AIC is -infinity for this model, so 'step' cannot proceed"
@@ -1561,6 +1566,11 @@ msgstr ""
 msgid "The \"ward\" method has been renamed to \"ward.D\"; note new \"ward.D2\""
 msgstr "\"ward\" 方法已被更名為 \"ward.D\"；注意新版為 \"ward.D2\""
 
+#. R/free1way.R: stop("Unknown parameter name for alternative hypothesis description.")
+#: R/free1way.R:0
+msgid "Unknown parameter name for alternative hypothesis description."
+msgstr ""
+
 #. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
 #: R/models.R:0
 msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
@@ -1665,6 +1675,11 @@ msgstr "叢集方法不明確"
 #: R/dist.R:0
 msgid "ambiguous distance method"
 msgstr "距離方法不明確"
+
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid "and"
+msgstr ""
 
 #. R/nls.R: stop("anova is only defined for sequences of \"nls\" objects")
 #: R/nls.R:0
@@ -2128,6 +2143,11 @@ msgstr "diag(.)內有 0 或 NA 值；無限值的可靠性不高"
 #: R/nlm.R:0
 msgid "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0"
 msgstr "未能成功地擴展區間的 f(lower) * f(upper) <= 0 極點"
+
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid "different names for"
+msgstr ""
 
 #. R/cancor.R: stop("dimension 0 in 'x' or 'y'")
 #: R/cancor.R:0
@@ -3902,6 +3922,11 @@ msgstr "spline: 第一個和最後一個 y 的值不相等 - 因此都用 y[1L] 
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: 第一個和最後一個 y 的值不相等 - 兩個用 y[1]"
 
+#. R/nls.R: sQuote("start")
+#: R/nls.R:0
+msgid "start"
+msgstr ""
+
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0
 msgid "step size truncated due to divergence"
@@ -4151,6 +4176,23 @@ msgstr "'r' 小於一"
 msgid "true event rate is not equal to %s"
 msgstr ""
 
+#. R/free1way.R: gettextf("true generalised Cohen's d is greater than %s", x$mu,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true generalised Cohen's d is greater than %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true generalised Cohen's d is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true generalised Cohen's d is less than %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true generalised Cohen's d is not equal to %s", x$mu,     domain = "R-stats")
+#: R/free1way.R:0
+msgid "true generalised Cohen's d is not equal to %s"
+msgstr ""
+
 #. R/wilcox.test.R: gettextf("true location is greater than %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "true location is greater than %s"
@@ -4180,6 +4222,59 @@ msgstr ""
 #. R/wilcox.test.R: gettextf("true location shift is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "true location shift is not equal to %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-hazard ratio is greater than %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is greater than %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true log-hazard ratio is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is less than %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true log-hazard ratio is not equal to %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is not equal to %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true log-odds ratio is greater than %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is greater than %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true log-odds ratio is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is less than %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true log-odds ratio is not equal to %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is not equal to %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is greater than %s",     x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-reverse time hazard ratio is greater than %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is less than %s",     x$data.name, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-reverse time hazard ratio is less than %s"
+msgstr "'r' 小於一"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is not equal to %s",     x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-reverse time hazard ratio is not equal to %s"
 msgstr ""
 
 #. R/t.test.R: gettextf("true mean difference is greater than %s", mu, domain = "R-stats")
@@ -4645,6 +4740,13 @@ msgstr[0] "但有 %d 個變數"
 msgid "but variable found had %d row"
 msgid_plural "but variables found have %d rows"
 msgstr[0] "但變數裡有 %d 列"
+
+#. R/aov.R: ngettext(nresp, "essentially perfect fit for %s: summary may be unreliable",     "essentially perfect fit for response(s) %s: summary may be unreliable")
+#: R/aov.R:0
+#, fuzzy
+msgid "essentially perfect fit for %s: summary may be unreliable"
+msgid_plural "essentially perfect fit for response(s) %s: summary may be unreliable"
+msgstr[0] "完全擬合進行：summary 可能不會可靠"
 
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"%s\"",     "extra arguments %s are not of class \"%s\"")
 #: R/dendrogram.R:0

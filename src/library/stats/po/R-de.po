@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -1314,6 +1314,11 @@ msgstr "alle Fälle NA"
 msgid "0s in V(mu)"
 msgstr "0s in V(mu)"
 
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid ": not reordering to match"
+msgstr ""
+
 #. R/add.R: stop("AIC is -infinity for this model, so 'step' cannot proceed")
 #: R/add.R:0
 msgid "AIC is -infinity for this model, so 'step' cannot proceed"
@@ -1553,6 +1558,11 @@ msgstr ""
 msgid "The \"ward\" method has been renamed to \"ward.D\"; note new \"ward.D2\""
 msgstr "Die \"ward\" Methode wurde in \"ward.D\" umbenannt; beachte das neue \"ward.D2\""
 
+#. R/free1way.R: stop("Unknown parameter name for alternative hypothesis description.")
+#: R/free1way.R:0
+msgid "Unknown parameter name for alternative hypothesis description."
+msgstr ""
+
 #. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
 #: R/models.R:0
 msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
@@ -1657,6 +1667,11 @@ msgstr "zweideutige Clustering-Methode"
 #: R/dist.R:0
 msgid "ambiguous distance method"
 msgstr "zweideutige Distanzmethode"
+
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid "and"
+msgstr ""
 
 #. R/nls.R: stop("anova is only defined for sequences of \"nls\" objects")
 #: R/nls.R:0
@@ -2112,6 +2127,11 @@ msgstr "diag(V) hat nicht-positive oder NA Einträge; das nicht-endliche Ergebni
 #: R/nlm.R:0
 msgid "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0"
 msgstr "kein Erfolg beim Erweitern der Intervallendpunkte für f(lower) * f(upper) <= 0"
+
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid "different names for"
+msgstr ""
 
 #. R/cancor.R: stop("dimension 0 in 'x' or 'y'")
 #: R/cancor.R:0
@@ -3870,6 +3890,11 @@ msgstr "spline: erster und letzter y Wert unterscheiden sich - benutze y[1L] fü
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline: erster und letzter y Wert unterscheiden sich - benutze y[1] für beide"
 
+#. R/nls.R: sQuote("start")
+#: R/nls.R:0
+msgid "start"
+msgstr ""
+
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0
 msgid "step size truncated due to divergence"
@@ -4118,6 +4143,23 @@ msgstr "'r' ist kleiner als 1"
 msgid "true event rate is not equal to %s"
 msgstr ""
 
+#. R/free1way.R: gettextf("true generalised Cohen's d is greater than %s", x$mu,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true generalised Cohen's d is greater than %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true generalised Cohen's d is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true generalised Cohen's d is less than %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true generalised Cohen's d is not equal to %s", x$mu,     domain = "R-stats")
+#: R/free1way.R:0
+msgid "true generalised Cohen's d is not equal to %s"
+msgstr ""
+
 #. R/wilcox.test.R: gettextf("true location is greater than %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "true location is greater than %s"
@@ -4147,6 +4189,59 @@ msgstr ""
 #. R/wilcox.test.R: gettextf("true location shift is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "true location shift is not equal to %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-hazard ratio is greater than %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is greater than %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true log-hazard ratio is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is less than %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true log-hazard ratio is not equal to %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is not equal to %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true log-odds ratio is greater than %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is greater than %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true log-odds ratio is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is less than %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true log-odds ratio is not equal to %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is not equal to %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is greater than %s",     x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-reverse time hazard ratio is greater than %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is less than %s",     x$data.name, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-reverse time hazard ratio is less than %s"
+msgstr "'r' ist kleiner als 1"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is not equal to %s",     x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-reverse time hazard ratio is not equal to %s"
 msgstr ""
 
 #. R/t.test.R: gettextf("true mean difference is greater than %s", mu, domain = "R-stats")
@@ -4627,6 +4722,14 @@ msgid "but variable found had %d row"
 msgid_plural "but variables found have %d rows"
 msgstr[0] ", aber die gefundenen Variable hat %d Zeile"
 msgstr[1] ", aber die gefundenen Variablen haben %d Zeilen"
+
+#. R/aov.R: ngettext(nresp, "essentially perfect fit for %s: summary may be unreliable",     "essentially perfect fit for response(s) %s: summary may be unreliable")
+#: R/aov.R:0
+#, fuzzy
+msgid "essentially perfect fit for %s: summary may be unreliable"
+msgid_plural "essentially perfect fit for response(s) %s: summary may be unreliable"
+msgstr[0] "im Wesentlichen ein perfekter Fit: summary kann unzuverlässig sein"
+msgstr[1] "im Wesentlichen ein perfekter Fit: summary kann unzuverlässig sein"
 
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"%s\"",     "extra arguments %s are not of class \"%s\"")
 #: R/dendrogram.R:0

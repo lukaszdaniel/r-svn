@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: grDevices 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 15:33+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -244,11 +244,12 @@ msgstr ""
 msgid "Font information is inconsistent"
 msgstr ""
 
-#. R/postscript.R: stop("GhostScript was not found")
-#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#. R/postscript.R: stop("Ghostscript was not found")
+#. R/unix/dev2bitmap.R: stop("Ghostscript was not found")
+#. R/windows/dev2bitmap.R: stop("Ghostscript was not found")
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
-msgid "GhostScript was not found"
+#, fuzzy
+msgid "Ghostscript was not found"
 msgstr "GhostScript nerastas"
 
 #. R/patterns.R: stop("Invalid 'extend' value")

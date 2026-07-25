@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 15:32+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R-Core <R-core@r-project.org>\n"
@@ -246,11 +246,12 @@ msgstr "Zeichensatz Datei länger als 500 wird abgeschnitten"
 msgid "Font information is inconsistent"
 msgstr "Zeichensatzinformation ist inkonsistent"
 
-#. R/postscript.R: stop("GhostScript was not found")
-#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#. R/postscript.R: stop("Ghostscript was not found")
+#. R/unix/dev2bitmap.R: stop("Ghostscript was not found")
+#. R/windows/dev2bitmap.R: stop("Ghostscript was not found")
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
-msgid "GhostScript was not found"
+#, fuzzy
+msgid "Ghostscript was not found"
 msgstr "GhostScript nicht gefunden"
 
 #. R/patterns.R: stop("Invalid 'extend' value")

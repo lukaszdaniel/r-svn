@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 17:35+0200\n"
+"POT-Creation-Date: 2026-07-25 10:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,43 +93,43 @@ msgstr ""
 msgid "no input has determined the number of cases"
 msgstr ""
 
-#: cov.cpp:566
+#: cov.cpp:549
 msgid "missing observations in cov/cor"
 msgstr ""
 
-#: cov.cpp:638
+#: cov.cpp:621
 msgid ""
 "Calling var(x) on a factor x is defunct.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:640
+#: cov.cpp:623
 msgid ""
 "Calling var(x) on a factor x is deprecated and will become an error.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:645
+#: cov.cpp:628
 msgid "'x' is NULL"
 msgstr ""
 
-#: cov.cpp:677 cov.cpp:683
+#: cov.cpp:660 cov.cpp:666
 msgid "incompatible dimensions"
 msgstr ""
 
-#: cov.cpp:702 cov.cpp:743 cov.cpp:776
+#: cov.cpp:685 cov.cpp:726 cov.cpp:759
 msgid "no complete element pairs"
 msgstr ""
 
-#: cov.cpp:715
+#: cov.cpp:698
 msgid "invalid 'use' (computational method)"
 msgstr ""
 
-#: cov.cpp:718
+#: cov.cpp:701
 msgid "'x' is empty"
 msgstr ""
 
-#: cov.cpp:812
+#: cov.cpp:795
 msgid "the standard deviation is zero"
 msgstr ""
 

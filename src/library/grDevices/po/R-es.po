@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-03-07 16:59\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 15:33+0200\n"
 "Last-Translator: Geraldine Gomez Millan <geralidine.gomez@javeriana.edu.co>\n"
 "Language-Team: none\n"
@@ -239,11 +239,11 @@ msgstr ""
 msgid "Font information is inconsistent"
 msgstr ""
 
-#. R/postscript.R: stop("GhostScript was not found")
-#. R/unix/dev2bitmap.R: stop("GhostScript was not found")
-#. R/windows/dev2bitmap.R: stop("GhostScript was not found")
+#. R/postscript.R: stop("Ghostscript was not found")
+#. R/unix/dev2bitmap.R: stop("Ghostscript was not found")
+#. R/windows/dev2bitmap.R: stop("Ghostscript was not found")
 #: R/postscript.R:0 R/unix/dev2bitmap.R:0 R/windows/dev2bitmap.R:0
-msgid "GhostScript was not found"
+msgid "Ghostscript was not found"
 msgstr ""
 
 #. R/patterns.R: stop("Invalid 'extend' value")
@@ -640,8 +640,7 @@ msgstr ""
 #. R/windows/windows.R: stop("invalid Windows font:  must be a single font family name")
 #: R/windows/windows.R:0
 msgid "invalid Windows font:  must be a single font family name"
-msgstr ""
-"fuente de Windows no válida:  debe ser un solo nombre de familia de fuentes"
+msgstr "fuente de Windows no válida:  debe ser un solo nombre de familia de fuentes"
 
 #. R/unix/x11.R: stop("invalid X11 font specification: ", errDesc)
 #: R/unix/x11.R:0
@@ -689,8 +688,7 @@ msgstr "argumentos no válidos en 'windowsFonts' (deben ser nombres de fuente)"
 #. R/windows/windows.R: stop("invalid arguments in 'windowsFonts' (need named args)")
 #: R/windows/windows.R:0
 msgid "invalid arguments in 'windowsFonts' (need named args)"
-msgstr ""
-"argumentos no válidos en 'windowsFonts' (se requieren argumentos con nombre)"
+msgstr "argumentos no válidos en 'windowsFonts' (se requieren argumentos con nombre)"
 
 #. R/postscript.R: stop("invalid encoding in font specification")
 #: R/postscript.R:0

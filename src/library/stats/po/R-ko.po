@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -1320,6 +1320,11 @@ msgstr ""
 msgid "0s in V(mu)"
 msgstr "V(mu)내에 0이 있습니다"
 
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid ": not reordering to match"
+msgstr ""
+
 #. R/add.R: stop("AIC is -infinity for this model, so 'step' cannot proceed")
 #: R/add.R:0
 msgid "AIC is -infinity for this model, so 'step' cannot proceed"
@@ -1557,6 +1562,11 @@ msgstr ""
 msgid "The \"ward\" method has been renamed to \"ward.D\"; note new \"ward.D2\""
 msgstr ""
 
+#. R/free1way.R: stop("Unknown parameter name for alternative hypothesis description.")
+#: R/free1way.R:0
+msgid "Unknown parameter name for alternative hypothesis description."
+msgstr ""
+
 #. R/models.R: sprintf("Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!",     response)
 #: R/models.R:0
 msgid "Unparseable 'response' \"%s\"; use is deprecated.  Use as.name(.) or `..`!"
@@ -1661,6 +1671,11 @@ msgstr "분명하지 않은 클러스터링 메소드입니다"
 #: R/dist.R:0
 msgid "ambiguous distance method"
 msgstr "불분명한 distance method입니다"
+
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid "and"
+msgstr ""
 
 #. R/nls.R: stop("anova is only defined for sequences of \"nls\" objects")
 #: R/nls.R:0
@@ -2124,6 +2139,11 @@ msgstr "diag(.)는 0 또는 NA 항목을 가지고 있으므로 유한하지 않
 #. R/nlm.R: if (doX) "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0" else "f() values at end points not of opposite sign"
 #: R/nlm.R:0
 msgid "did not succeed extending the interval endpoints for f(lower) * f(upper) <= 0"
+msgstr ""
+
+#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#: R/nls.R:0
+msgid "different names for"
 msgstr ""
 
 #. R/cancor.R: stop("dimension 0 in 'x' or 'y'")
@@ -3891,6 +3911,11 @@ msgstr "spline: 처음과 마지막 y 값들이 다릅니다 - 양쪽 모두 y[1
 msgid "spline: first and last y values differ - using y[1] for both"
 msgstr "spline:  처음과 마지막 y 값들이 다릅니다 - 양쪽에 모두 y[1]을 사용합니다"
 
+#. R/nls.R: sQuote("start")
+#: R/nls.R:0
+msgid "start"
+msgstr ""
+
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 #: R/glm.R:0
 msgid "step size truncated due to divergence"
@@ -4140,6 +4165,23 @@ msgstr "'r'은 1보다 적습니다"
 msgid "true event rate is not equal to %s"
 msgstr ""
 
+#. R/free1way.R: gettextf("true generalised Cohen's d is greater than %s", x$mu,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true generalised Cohen's d is greater than %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true generalised Cohen's d is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true generalised Cohen's d is less than %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true generalised Cohen's d is not equal to %s", x$mu,     domain = "R-stats")
+#: R/free1way.R:0
+msgid "true generalised Cohen's d is not equal to %s"
+msgstr ""
+
 #. R/wilcox.test.R: gettextf("true location is greater than %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "true location is greater than %s"
@@ -4169,6 +4211,59 @@ msgstr ""
 #. R/wilcox.test.R: gettextf("true location shift is not equal to %s", mu, domain = "R-stats")
 #: R/wilcox.test.R:0
 msgid "true location shift is not equal to %s"
+msgstr ""
+
+#. R/free1way.R: gettextf("true log-hazard ratio is greater than %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is greater than %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true log-hazard ratio is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is less than %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true log-hazard ratio is not equal to %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-hazard ratio is not equal to %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true log-odds ratio is greater than %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is greater than %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true log-odds ratio is less than %s", x$data.name,     domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is less than %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true log-odds ratio is not equal to %s", x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-odds ratio is not equal to %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is greater than %s",     x$mu, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-reverse time hazard ratio is greater than %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is less than %s",     x$data.name, domain = "R-stats")
+#: R/free1way.R:0
+#, fuzzy
+msgid "true log-reverse time hazard ratio is less than %s"
+msgstr "'r'은 1보다 적습니다"
+
+#. R/free1way.R: gettextf("true log-reverse time hazard ratio is not equal to %s",     x$mu, domain = "R-stats")
+#: R/free1way.R:0
+msgid "true log-reverse time hazard ratio is not equal to %s"
 msgstr ""
 
 #. R/t.test.R: gettextf("true mean difference is greater than %s", mu, domain = "R-stats")
@@ -4634,6 +4729,12 @@ msgstr[0] ""
 msgid "but variable found had %d row"
 msgid_plural "but variables found have %d rows"
 msgstr[0] "그러나 찾아진 변수는 %d개의 행을 가지고 있었습니다."
+
+#. R/aov.R: ngettext(nresp, "essentially perfect fit for %s: summary may be unreliable",     "essentially perfect fit for response(s) %s: summary may be unreliable")
+#: R/aov.R:0
+msgid "essentially perfect fit for %s: summary may be unreliable"
+msgid_plural "essentially perfect fit for response(s) %s: summary may be unreliable"
+msgstr[0] ""
 
 #. R/dendrogram.R: ngettext(length(nms), "extra argument %s is not of class \"%s\"",     "extra arguments %s are not of class \"%s\"")
 #: R/dendrogram.R:0

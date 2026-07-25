@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-06-09 17:54\n"
+"POT-Creation-Date: 2026-07-25 10:38\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -1400,11 +1400,6 @@ msgstr "Nieznane kodowanie"
 msgid "Unknown encoding with non-ASCII data"
 msgstr "Nieznane kodowanie z danymi nie-ASCII"
 
-#. R/utils.R: warning("Unknown encoding with non-ASCII data: converting to ASCII")
-#: R/utils.R:0
-msgid "Unknown encoding with non-ASCII data: converting to ASCII"
-msgstr "Nieznane kodowanie z danymi nie-ASCII: konwertowanie do ASCII"
-
 #. R/Vignettes.R: stop("Unsupported engine name ", sQuote(name))
 #: R/Vignettes.R:0
 msgid "Unsupported engine name"
@@ -2649,6 +2644,9 @@ msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "nie można przekodować %s linia %s"
 msgstr[1] "nie można przekodować %s linie %s"
 msgstr[2] "nie można przekodować %s linie %s"
+
+#~ msgid "Unknown encoding with non-ASCII data: converting to ASCII"
+#~ msgstr "Nieznane kodowanie z danymi nie-ASCII: konwertowanie do ASCII"
 
 #~ msgid "Error: cannot rename directory to %s"
 #~ msgstr "Błąd: nie można zmienić katalogu na %s"
