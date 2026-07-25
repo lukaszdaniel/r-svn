@@ -4348,10 +4348,10 @@ static void findmethod(SEXP Class, const char *group, const char *generic,
 		       SEXP *sxp,  SEXP *gr, SEXP *meth, int *which,
 		       SEXP objSlot, SEXP rho)
 {
-    int len, whichclass;
+    int whichclass;
     CXXR::RAllocStack::Scope rscope;
 
-    len = length(Class);
+    int len = length(Class);
 
     /* Need to interleave looking for group and generic methods
        e.g. if class(x) is c("foo", "bar)" then x > 3 should invoke
@@ -4478,29 +4478,28 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
 	return std::pair<bool, RObject *>(false, nullptr);
 
     const char *generic = PRIMNAME(op);
-    SEXP lclass = PROTECT(classForGroupDispatch(CAR(args))), rclass;
+    GCStackRoot<> lclass, rclass;
+    lclass = classForGroupDispatch(CAR(args));
     if (nargs == 2)
 	rclass = classForGroupDispatch(CADR(args));
     else
 	rclass = R_NilValue;
-    PROTECT(rclass);
 
     SEXP lmeth = R_NilValue, lsxp = R_NilValue, lgr = R_NilValue,
 	 rmeth = R_NilValue, rsxp = R_NilValue, rgr = R_NilValue;
     int lwhich, rwhich;
     findmethod(lclass, group, generic,
 	       &lsxp, &lgr, &lmeth, &lwhich, args, rho);
-    PROTECT(lgr);
+    GCStackRoot<> lgr_root(lgr);
 
     if (nargs == 2)
 	findmethod(rclass, group, generic, &rsxp, &rgr, &rmeth,
 		   &rwhich, CDR(args), rho);
     else
 	rwhich = 0;
-    PROTECT(rgr);
+    GCStackRoot<> rgr_root(rgr);
 
     if (!FunctionBase::isA(lsxp) && !FunctionBase::isA(rsxp)) {
-	UNPROTECT(4);
 	return std::pair<bool, RObject *>(false, nullptr); /* no generic or group method so use default */
     }
 
@@ -4535,7 +4534,6 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
 		else {
 		    warning(_("Incompatible methods (\"%s\", \"%s\") for \"%s\""),
 			    lname, rname, generic);
-		    UNPROTECT(4);
 		    return std::pair<bool, RObject *>(false, nullptr);
 		}
 	    }
@@ -4553,51 +4551,57 @@ std::pair<bool, RObject *> R::DispatchGroup(const char *group, SEXP call, SEXP o
     /* we either have a group method or a class method */
 
     CXXR::RAllocStack::Scope rscope;
-    SEXP s = args;
+    SEXP ss = args;
     const char *dispatchClassName = translateChar(STRING_ELT(lclass, lwhich));
 
-    SEXP t, m = PROTECT(StringVector::create(nargs));
+    GCStackRoot<> mm;
+    mm = StringVector::create(nargs);
     for (int i = 0 ; i < nargs ; i++) {
-	t = classForGroupDispatch(CAR(s));
+	SEXP t = classForGroupDispatch(CAR(ss));
 	if (isString(t) && (stringPositionTr(t, dispatchClassName) >= 0))
-	    SET_STRING_ELT(m, i, PRINTNAME(lmeth));
+	    SET_STRING_ELT(mm, i, PRINTNAME(lmeth));
 	else
-	    SET_STRING_ELT(m, i, R_BlankString);
-	s = CDR(s);
+	    SET_STRING_ELT(mm, i, R_BlankString);
+	ss = CDR(ss);
     }
 
-    SEXP newvars = PROTECT(createS3Vars(
-	PROTECT(mkString(generic)),
+    GCStackRoot<> newvars, generic_str, lclass_suff;
+    generic_str = mkString(generic);
+    lclass_suff = stringSuffix(lclass, lwhich);
+    newvars = createS3Vars(
+	generic_str,
 	lgr,
-	PROTECT(stringSuffix(lclass, lwhich)),
-	m,
+	lclass_suff,
+	mm,
 	rho,
 	R_BaseEnv
-    ));
+    );
 
-    PROTECT(t = LCONS(lmeth, CDR(call)));
+    GCStackRoot<> t;
+    t = LCONS(lmeth, CDR(call));
 
     /* the arguments have been evaluated; since we are passing them */
     /* out to a closure we need to wrap them in promises so that */
     /* they get duplicated and things like missing/substitute work. */
 
-    PROTECT(s = promiseArgs(CDR(call), rho));
+    GCStackRoot<> s;
+    s = promiseArgs(CDR(call), rho);
     if (length(s) != length(args))
 	error("%s", _("dispatch error in group dispatch"));
-    for (m = s ; m != R_NilValue ; m = CDR(m), args = CDR(args) ) {
+    for (SEXP m = s ; m != R_NilValue ; m = CDR(m), args = CDR(args) ) {
 	IF_PROMSXP_SET_PRVALUE(CAR(m), CAR(args));
 	/* ensure positional matching for operators */
 	if (isOps) SET_TAG(m, R_NilValue);
     }
 
     SEXP ans = applyClosure(t, lsxp, s, rho, newvars, true);
-    UNPROTECT(10);
+
     return std::make_pair(true, ans);
 }
 
 /* start of bytecode section */
-static int R_bcVersion = 12;
-static int R_bcMinVersion = 9;
+static constexpr int R_bcVersion = 12;
+static constexpr int R_bcMinVersion = 9;
 
 static SEXP R_AddSym = NULL;
 static SEXP R_SubSym = NULL;
@@ -8191,12 +8195,11 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	SEXP x = GETSTACK(-1);
 	SEXP value = NULL;
 	if (isObject(x)) {
-	    SEXP ncall;
-	    PROTECT(ncall = duplicate(call));
+	    GCStackRoot<> ncall;
+	    ncall = duplicate(call);
 	    /**** hack to avoid evaluating the symbol */
-	    SETCAR(CDDR(ncall), ScalarString(PRINTNAME(symbol)));
+	    SETCAR(CDDR(ncall.get()), ScalarString(PRINTNAME(symbol)));
 	    dispatched = tryDispatch("$", ncall, x, rho, &value);
-	    UNPROTECT(1);
 	}
 	if (dispatched)
 	    SETSTACK(-1, value);
@@ -8220,14 +8223,13 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	}
 	SEXP value = NULL;
 	if (isObject(x)) {
-	    SEXP ncall, prom;
-	    PROTECT(ncall = duplicate(call));
+	    GCStackRoot<> ncall;
+	    ncall = duplicate(call);
 	    /**** hack to avoid evaluating the symbol */
-	    SETCAR(CDDR(ncall), ScalarString(PRINTNAME(symbol)));
-	    prom = mkRHSPROMISE(CADDDR(ncall), rhs);
-	    SETCAR(CDDDR(ncall), prom);
+	    SETCAR(CDDR(ncall.get()), ScalarString(PRINTNAME(symbol)));
+	    SEXP prom = mkRHSPROMISE(CADDDR(ncall.get()), rhs);
+	    SETCAR(CDDDR(ncall.get()), prom);
 	    dispatched = tryDispatch("$<-", ncall, x, rho, &value);
-	    UNPROTECT(1);
 	}
 	if (!dispatched)
 	  value = R_subassign3_dflt(call, x, symbol, rhs);
@@ -9255,10 +9257,12 @@ attribute_hidden SEXP do_returnValue(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 SEXP R_ParseEvalString(const char *str, SEXP env)
 {
-    SEXP s = PROTECT(mkString(str));
+    GCStackRoot<> s;
+    s = mkString(str);
 
     ParseStatus status;
-    SEXP ps = PROTECT(R_ParseVector(s, -1, &status, R_NilValue));
+    GCStackRoot<> ps;
+    ps = R_ParseVector(s, -1, &status, R_NilValue);
     if (status != PARSE_OK ||
 	TYPEOF(ps) != EXPRSXP ||
 	LENGTH(ps) != 1)
@@ -9268,7 +9272,6 @@ SEXP R_ParseEvalString(const char *str, SEXP env)
     if (env != NULL)
 	val = eval(val, env);
 
-    UNPROTECT(2); /* s, ps */
     return val;
 }
 
