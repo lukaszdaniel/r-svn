@@ -1867,7 +1867,8 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
        pairlists in an iterative loop */
     
     SEXPTYPE type = DECODE_TYPE(flags);
-    SEXP s, sfirst = NULL, slast = NULL;
+    SEXP slast = NULL;
+    GCStackRoot<> s, sfirst(NULL);
 
     /* An assertion here guarantees that we go through the loop at
        least once. This make for cleaner exit code and avoids a
@@ -1881,7 +1882,7 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
 	int levs, objf, hasattr, hastag;
 	UnpackFlags(flags, &type, &levs, &objf, &hasattr, &hastag);
 
-	PROTECT(s = allocSExp(type));
+	s = allocSExp(type);
 	SETLEVELS(s, levs);
 	SET_OBJECT(s, objf);
 	R_ReadItemDepth++;
@@ -1915,15 +1916,14 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
 	    if (TYPEOF(slast) == PROMSXP) SET_PRCODE(slast, s);
 	    else if (TYPEOF(slast) == CLOSXP) SET_BODY(slast, s);
 	    else SETCDR(slast, s);
-	    UNPROTECT(1); /* s, which is now protected as part of sfirst */
 	}
 	slast = s;
 
 	/* For reading closures and promises stored in earlier
 	   versions, convert NULL env to baseenv() */
-	if (type == CLOSXP && CLOENV(s) == R_NilValue)
+	if (type == CLOSXP && CLOENV(s.get()) == R_NilValue)
 	    SET_CLOENV(s, R_BaseEnv);
-	else if (type == PROMSXP && PRENV(s) == R_NilValue)
+	else if (type == PROMSXP && PRENV(s.get()) == R_NilValue)
 	    SET_PRENV(s, R_BaseEnv);
 	if (set_lastname) strcpy(lastname, "<unknown>");
 
@@ -1932,12 +1932,12 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
     }
 
     R_ReadItemDepth++;
-    PROTECT(s = ReadItem_Recursive(flags, ref_table, stream));
+    s = ReadItem_Recursive(flags, ref_table, stream);
     R_ReadItemDepth--;
     if (TYPEOF(slast) == PROMSXP) SET_PRCODE(slast, s);
     else if (TYPEOF(slast) == CLOSXP) SET_BODY(slast, s);
     else SETCDR(slast, s);
-    UNPROTECT(2); /* s, sfirst */
+
     return sfirst;
 }
 
@@ -1945,7 +1945,7 @@ static SEXP ReadItem_Iterative(int flags, SEXP ref_table, R_inpstream_t stream)
 static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 {
     SEXPTYPE type;
-    SEXP s;
+    GCStackRoot<> s;
     R_xlen_t len, count;
     int levs, objf, hasattr, hastag, length;
 
@@ -1965,47 +1965,44 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
     case REFSXP:
 	return GetReadRef(ref_table, InRefIndex(stream, flags));
     case PERSISTSXP:
-	PROTECT(s = InStringVec(stream, ref_table));
+	s = InStringVec(stream, ref_table);
 	s = PersistentRestore(stream, s);
-	UNPROTECT(1);
+
 	AddReadRef(ref_table, s);
 	return s;
     case ALTREP_SXP:
 	{
 	    R_ReadItemDepth++;
-	    SEXP info = PROTECT(ReadItem(ref_table, stream));
-	    SEXP state = PROTECT(ReadItem(ref_table, stream));
-	    SEXP attr = PROTECT(ReadItem(ref_table, stream));
+	    GCStackRoot<> info, state, attr;
+	    info = ReadItem(ref_table, stream);
+	    state = ReadItem(ref_table, stream);
+	    attr = ReadItem(ref_table, stream);
 	    s = ALTREP_UNSERIALIZE_EX(info, state, attr, objf, levs);
-	    UNPROTECT(3); /* info, state, attr */
 	    R_ReadItemDepth--;
 	    return s;
 	}
     case SYMSXP:
 	R_ReadItemDepth++;
-	PROTECT(s = ReadItem(ref_table, stream)); /* print name */
+	s = ReadItem(ref_table, stream); /* print name */
 	R_ReadItemDepth--;
 	s = installTrChar(s);
 	AddReadRef(ref_table, s);
-	UNPROTECT(1);
 	return s;
     case PACKAGESXP:
-	PROTECT(s = InStringVec(stream, ref_table));
+	s = InStringVec(stream, ref_table);
 	s = R_FindPackageEnv(s);
-	UNPROTECT(1);
 	AddReadRef(ref_table, s);
 	return s;
     case NAMESPACESXP:
-	PROTECT(s = InStringVec(stream, ref_table));
+	s = InStringVec(stream, ref_table);
 	s = R_FindNamespace1(s);
 	AddReadRef(ref_table, s);
-	UNPROTECT(1);
 	return s;
     case ENVSXP:
 	{
 	    int locked = InInteger(stream);
 
-	    PROTECT(s = Environment::create());
+	    s = Environment::create();
 
 	    /* MUST register before filling in */
 	    AddReadRef(ref_table, s);
@@ -2025,8 +2022,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    R_RestoreHashCount(s);
 	    if (locked) R_LockEnvironment(s, FALSE);
 	    /* Convert a NULL enclosure to baseenv() */
-	    if (ENCLOS(s) == R_NilValue) SET_ENCLOS(s, R_BaseEnv);
-	    UNPROTECT(1);
+	    if (ENCLOS(s.get()) == R_NilValue) SET_ENCLOS(s, R_BaseEnv);
 	    return s;
 	}
     case CLOSXP:
@@ -2041,7 +2037,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	   newly allocated value PROTECTed */
 	switch (type) {
 	case EXTPTRSXP:
-	    PROTECT(s = ExternalPointer::create());
+	    s = ExternalPointer::create();
 	    AddReadRef(ref_table, s);
 	    R_SetExternalPtrAddr(s, NULL);
 	    R_ReadItemDepth++;
@@ -2050,8 +2046,8 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    R_ReadItemDepth--;
 	    break;
 	case WEAKREFSXP:
-	    PROTECT(s = R_MakeWeakRef(R_NilValue, R_NilValue, R_NilValue,
-				      FALSE));
+	    s = R_MakeWeakRef(R_NilValue, R_NilValue, R_NilValue,
+				      FALSE);
 	    AddReadRef(ref_table, s);
 	    break;
 	case SPECIALSXP:
@@ -2069,9 +2065,9 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 		int index = StrToInternal(cbuf);
 		if (index == NA_INTEGER) {
 		    warning(_("unrecognized internal function name \"%s\""), cbuf);
-		    PROTECT(s = R_NilValue);
+		    s = R_NilValue;
 		} else
-		    PROTECT(s = mkPRIMSXP(index, type == BUILTINSXP));
+		    s = mkPRIMSXP(index, type == BUILTINSXP);
 	    }
 	    break;
 	case CHARSXP:
@@ -2080,40 +2076,40 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    if (length < -1)
 		error("%s", _("invalid length"));
 	    else if (length == -1)
-		PROTECT(s = NA_STRING);
+		s = NA_STRING;
 	    else if (length < 1000) {
 		std::unique_ptr<char[]> tmp = std::make_unique<char[]>(length + 1);
 		char *cbuf = tmp.get();
-		PROTECT(s = ReadChar(stream, cbuf, length, levs));
+		s = ReadChar(stream, cbuf, length, levs);
 	    } else {
 		char *cbuf = CallocCharBuf(length);
-		PROTECT(s = ReadChar(stream, cbuf, length, levs));
+		s = ReadChar(stream, cbuf, length, levs);
 		R_Free(cbuf);
 	    }
 	    break;
 	case LGLSXP:
 	    len = ReadLENGTH(stream);
-	    PROTECT(s = LogicalVector::create(len));
+	    s = LogicalVector::create(len);
 	    InIntegerVec(stream, s, len);
 	    break;
 	case INTSXP:
 	    len = ReadLENGTH(stream);
-	    PROTECT(s = IntVector::create(len));
+	    s = IntVector::create(len);
 	    InIntegerVec(stream, s, len);
 	    break;
 	case REALSXP:
 	    len = ReadLENGTH(stream);
-	    PROTECT(s = RealVector::create(len));
+	    s = RealVector::create(len);
 	    InRealVec(stream, s, len);
 	    break;
 	case CPLXSXP:
 	    len = ReadLENGTH(stream);
-	    PROTECT(s = ComplexVector::create(len));
+	    s = ComplexVector::create(len);
 	    InComplexVec(stream, s, len);
 	    break;
 	case STRSXP:
 	    len = ReadLENGTH(stream);
-	    PROTECT(s = StringVector::create(len));
+	    s = StringVector::create(len);
 	    R_ReadItemDepth++;
 	    for (count = 0; count < len; ++count)
 		SET_STRING_ELT(s, count, ReadItem(ref_table, stream));
@@ -2121,7 +2117,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    break;
 	case VECSXP:
 	    len = ReadLENGTH(stream);
-	    PROTECT(s = ListVector::create(len));
+	    s = ListVector::create(len);
 	    R_ReadItemDepth++;
 	    for (count = 0; count < len; ++count) {
 		if (R_ReadItemDepth <= 0)
@@ -2133,7 +2129,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    break;
 	case EXPRSXP:
 	    len = ReadLENGTH(stream);
-	    PROTECT(s = ExpressionVector::create(len));
+	    s = ExpressionVector::create(len);
 	    R_ReadItemDepth++;
 	    for (count = 0; count < len; ++count) {
 		if (R_ReadItemDepth <= 0)
@@ -2144,7 +2140,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    R_ReadItemDepth--;
 	    break;
 	case BCODESXP:
-	    PROTECT(s = ReadBC(ref_table, stream));
+	    s = ReadBC(ref_table, stream);
 	    break;
 	case CLASSREFSXP:
 	    error("%s", _("this version of R cannot read class references"));
@@ -2152,7 +2148,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    error("%s", _("this version of R cannot read generic function references"));
 	case RAWSXP:
 	    len = ReadLENGTH(stream);
-	    PROTECT(s = RawVector::create(len));
+	    s = RawVector::create(len);
 	    switch (stream->type) {
 	    case R_pstream_ascii_format:
 		for (R_xlen_t ix = 0; ix < len; ix++) {
@@ -2174,7 +2170,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    }
 	    break;
 	case OBJSXP:
-	    PROTECT(s = R_allocObject());
+	    s = R_allocObject();
 	    break;
 	default:
 	    s = R_NilValue; /* keep compiler happy */
@@ -2198,7 +2194,7 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    SET_ATTRIB(s, hasattr ? ReadItem(ref_table, stream) : R_NilValue);
 	    R_ReadItemDepth--;
 	}
-	UNPROTECT(1); /* s */
+
 	if (TYPEOF(s) == BCODESXP && !R_BCVersionOK(s))
 	    return R_BytecodeExpr(s);
 	return s;

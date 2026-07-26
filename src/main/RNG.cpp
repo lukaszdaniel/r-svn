@@ -561,7 +561,7 @@ static void Bin_kind(Binomtype kind)
        mapped to an unsigned integer type. */
     if (kind == (Binomtype)-1) kind = Binom_DEFAULT;
     if (kind > BTPE)
-        error(_("invalid binom type in 'RNGkind'"));
+        error("%s", _("invalid binom type in 'RNGkind'"));
     GetRNGstate(); /* might not be initialized */
     Binom_kind = kind;
     PutRNGstate();
