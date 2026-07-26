@@ -37,9 +37,10 @@
 # include <config.h>
 #endif
 
+#include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RAllocStack.hpp>
-#include <Localization.h>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -884,11 +885,11 @@ NORET static void cmdError(const char *cmd, const char *format, ...)
 
     va_list ap;
     va_start(ap, format);
-    SEXP cond = R_vmakeErrorCondition(call, "cmdError", NULL,
+    GCStackRoot<> cond;
+    cond = R_vmakeErrorCondition(call, "cmdError", NULL,
 				      nextra, format, ap);
     va_end(ap);
 
-    PROTECT(cond);
     R_setConditionField(cond, 2, "cmd", mkString(cmd));
     if (errno) {
 	R_setConditionField(cond, 3, "errno", ScalarInteger(errno));
@@ -896,7 +897,6 @@ NORET static void cmdError(const char *cmd, const char *format, ...)
     }
 
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 #ifndef HAVE_GETLINE

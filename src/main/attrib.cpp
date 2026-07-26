@@ -1563,11 +1563,9 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    tag = R_NamesSymbol;
 	    PROTECT(t = getAttrib(s, tag));
 	    if(t != R_NilValue && R_warn_partial_match_attr) {
-		SEXP cond =
-		    R_makePartialMatchWarningCondition(call, install(str), tag);
-		PROTECT(cond);
+		GCStackRoot<> cond;
+		cond = R_makePartialMatchWarningCondition(call, install(str), tag);
 		R_signalWarningCondition(cond);
-		UNPROTECT(1);
 	    }
 	    UNPROTECT(2);
 	    return t;
@@ -1590,11 +1588,9 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
 	return R_NilValue;
     }
     if (match == PARTIAL && R_warn_partial_match_attr) {
-	SEXP cond =
-	    R_makePartialMatchWarningCondition(call, install(str), tag);
-	PROTECT(cond);
+	GCStackRoot<> cond;
+	cond = R_makePartialMatchWarningCondition(call, install(str), tag);
 	R_signalWarningCondition(cond);
-	UNPROTECT(1);
     }
 
     ans =  getAttrib(s, tag);
@@ -1610,9 +1606,9 @@ static void check_slot_assign(SEXP obj, SEXP input, SEXP value, SEXP env)
     static SEXP checkAt = NULL;
     // 'methods' may *not* be in search() ==> do as if calling  methods::checkAtAssignment(..)
     if (!isMethodsDispatchOn()) { // needed?
-	SEXP e = PROTECT(lang1(install("initMethodDispatch")));
+	GCStackRoot<> e;
+	e = lang1(install("initMethodDispatch"));
 	eval(e, R_MethodsNamespace); // only works with methods loaded
-	UNPROTECT(1);
     }
     if (checkAt == NULL)
 	checkAt = findFun(install("checkAtAssignment"), R_MethodsNamespace);

@@ -1642,19 +1642,17 @@ attribute_hidden SEXP do_subassign(SEXP call, SEXP op, SEXP args, SEXP rho)
 NORET static void errorNotSubsettable(SEXP x)
 {
     SEXP call = R_CurrentExpression; /* behave like error() */
-    SEXP cond = R_makeNotSubsettableError(x, call);
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeNotSubsettableError(x, call);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 NORET static void errorMissingSubscript(SEXP x)
 {
     SEXP call = R_CurrentExpression; /* behave like error() */
-    SEXP cond = R_makeMissingSubscriptError(x, call);
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeMissingSubscriptError(x, call);
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 attribute_hidden SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -1759,40 +1757,39 @@ attribute_hidden SEXP do_subassign_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static SEXP DeleteOneVectorListItem(SEXP x, R_xlen_t which)
 {
-    SEXP y, xnames, ynames;
-    R_xlen_t i, k, n;
-    n = xlength(x);
+    GCStackRoot<> y, xnames, ynames;
+    R_xlen_t n = xlength(x);
+
     if (0 <= which && which < n) {
-	PROTECT(y = allocVector(TYPEOF(x), n - 1));
-	k = 0;
+	y = allocVector(TYPEOF(x), n - 1);
+	R_xlen_t k = 0;
 	switch (TYPEOF(x)) {
 	case VECSXP:
-	for (i = 0 ; i < n; i++) {
-	    if(i != which)
+	for (R_xlen_t i = 0 ; i < n; i++) {
+	    if (i != which)
 		SET_VECTOR_ELT(y, k++, VECTOR_ELT(x, i));
 	}
 	break;
 	case EXPRSXP:
-	for (i = 0 ; i < n; i++) {
-	    if(i != which)
+	for (R_xlen_t i = 0 ; i < n; i++) {
+	    if (i != which)
 		SET_XVECTOR_ELT(y, k++, XVECTOR_ELT(x, i));
 	}
 	break;
 	default:
 	    error("%s", _("Internal error: unexpected type in DeleteOneVectorListItem"));
 	}
-	PROTECT(xnames = getAttrib(x, R_NamesSymbol));
+	xnames = getAttrib(x, R_NamesSymbol);
 	if (xnames != R_NilValue) {
-	    PROTECT(ynames = StringVector::create(n - 1));
+	    ynames = StringVector::create(n - 1);
 	    k = 0;
-	    for (i = 0 ; i < n; i++)
-		if(i != which)
+	    for (R_xlen_t i = 0 ; i < n; i++)
+		if (i != which)
 		    SET_STRING_ELT(ynames, k++, STRING_ELT(xnames, i));
 	    setAttrib(y, R_NamesSymbol, ynames);
-	    UNPROTECT(1);
 	}
 	copyMostAttrib(x, y);
-	UNPROTECT(2);
+
 	return y;
     }
     return x;
@@ -1818,10 +1815,9 @@ attribute_hidden SEXP do_subassign2(SEXP call, SEXP op, SEXP args, SEXP rho)
 NORET static void errorOutOfBoundsSEXP(SEXP x, int subscript, SEXP sindex)
 {
     SEXP call = R_CurrentExpression; /* default behaves like error() */
-    SEXP cond = R_makeOutOfBoundsError(x, subscript, sindex, call, "[[ ]]");
-    PROTECT(cond);
+    GCStackRoot<> cond;
+    cond = R_makeOutOfBoundsError(x, subscript, sindex, call, "[[ ]]");
     R_signalErrorCondition(cond, call);
-    UNPROTECT(1); /* cond; not reached */
 }
 
 attribute_hidden SEXP do_subassign2_dflt(SEXP call, SEXP op, SEXP args, SEXP rho)

@@ -2698,7 +2698,8 @@ SEXP R::R_vmakeErrorCondition(SEXP call,
 	call = getCurrentCall();
     PROTECT(call);
     int nelem = nextra + 2;
-    SEXP cond = PROTECT(ListVector::create(nelem));
+    GCStackRoot<> cond;
+    cond = ListVector::create(nelem);
 
     Rvsnprintf_mbcs(emsg_buf, BUFSIZE, format, ap);
     SET_VECTOR_ELT(cond, 0, mkString(emsg_buf));
@@ -2723,7 +2724,7 @@ SEXP R::R_vmakeErrorCondition(SEXP call,
 	SET_STRING_ELT(klass, 3, mkChar("condition"));
     }
 
-    UNPROTECT(2); /* cond, call */
+    UNPROTECT(1); /* call */
 
     return cond;
 }
@@ -2804,17 +2805,17 @@ NORET attribute_hidden void R::R_FunctionNotFoundError(SEXP sym, SEXP call)
     if (call == R_CurrentExpression)
 	call = getCurrentCall();
     PROTECT(call);
-    SEXP cond = R_makeErrorCondition(call,
+    GCStackRoot<> cond;
+    cond = R_makeErrorCondition(call,
 				     "objectNotFoundError",
 				     "functionNotFoundError",
 				     2,
 				     _("could not find function \"%s\""),
 				     EncodeChar(PRINTNAME(sym)));
-    PROTECT(cond);
     R_setConditionField(cond, 2, "name", sym);
     R_setConditionField(cond, 3, "mode", mkString("function"));
     R_signalErrorCondition(cond, call);
-    UNPROTECT(2); // not reached
+    UNPROTECT(1); // not reached
 }
 
 attribute_hidden /* for now */
@@ -2939,7 +2940,8 @@ SEXP R_vmakeWarningCondition(SEXP call,
 	call = getCurrentCall();
     PROTECT(call);
     int nelem = nextra + 2;
-    SEXP cond = PROTECT(ListVector::create(nelem));
+    GCStackRoot<> cond;
+    cond = ListVector::create(nelem);
 
     Rvsnprintf_mbcs(emsg_buf, BUFSIZE, format, ap);
     SET_VECTOR_ELT(cond, 0, mkString(emsg_buf));
@@ -2964,7 +2966,7 @@ SEXP R_vmakeWarningCondition(SEXP call,
 	SET_STRING_ELT(klass, 3, mkChar("condition"));
     }
 
-    UNPROTECT(2); /* cond, call */
+    UNPROTECT(1); /* call */
 
     return cond;
 }
