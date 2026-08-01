@@ -71,7 +71,7 @@ namespace CXXR
         if (hasUnexpandedValue())
             return R::R_expand_promise_value(this);
 #endif
-        return u.promsxp.m_value;
+        return m_value;
     }
 
     void Promise::setValue(RObject *val)
@@ -83,7 +83,7 @@ namespace CXXR
             markExpanded();
         }
 #endif
-        u.promsxp.m_value.retarget(this, val);
+        m_value.retarget(this, val);
         // if (val != Symbol::unboundValue())
         //     m_env = nullptr;
     }
@@ -93,7 +93,7 @@ namespace CXXR
 #ifdef IMMEDIATE_PROMISE_VALUES
         return (hasUnexpandedValue() || m_value != R_UnboundValue);
 #endif
-        return (u.promsxp.m_value != R_UnboundValue);
+        return (m_value != R_UnboundValue);
         // return m_env == R_NilValue;
     }
 
@@ -102,8 +102,8 @@ namespace CXXR
         if (!this->refCountEnabled())
             return;
         if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
-            u.promsxp.m_value.detach();
-        u.promsxp.m_expr.detach();
+            m_value.detach();
+        m_expr.detach();
         m_env.detach();
         RObject::detachReferents();
     }
@@ -112,10 +112,10 @@ namespace CXXR
     {
         RObject::visitReferents(v);
         const GCNode *prvalue = R_NilValue;
-        const GCNode *prcode = u.promsxp.m_expr;
+        const GCNode *prcode = m_expr;
         const GCNode *prenv = m_env;
         if (BOXED_BINDING_CELLS || PROMISE_TAG(this) == NILSXP)
-            prvalue = u.promsxp.m_value;
+            prvalue = m_value;
 
         if (prvalue != R_NilValue)
             (*v)(prvalue);

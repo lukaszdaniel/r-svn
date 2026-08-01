@@ -76,12 +76,6 @@ namespace CXXR
         GCEdge<> m_car;
     };
 
-    struct promsxp_struct
-    {
-        GCEdge<> m_value;
-        GCEdge<> m_expr;
-    };
-
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -422,7 +416,6 @@ namespace CXXR
         union U
         {
             struct listsxp_struct listsxp;
-            struct promsxp_struct promsxp;
             U()
             {
             }
