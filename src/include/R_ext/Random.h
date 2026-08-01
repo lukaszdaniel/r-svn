@@ -68,7 +68,6 @@ typedef enum {
 } Binomtype;
 Binomtype R_binom_kind(void);
 
-
 void GetRNGstate(void);
 void PutRNGstate(void);
 

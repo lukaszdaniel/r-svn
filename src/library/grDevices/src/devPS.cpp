@@ -3437,9 +3437,10 @@ bool PSDeviceDriver(pDevDesc dd, const char *file, const char *paper,
     pd->paperspecial = FALSE;
     if (streql(pd->papername, "Default") ||
        streql(pd->papername, "default")) {
-	SEXP s = STRING_ELT(GetOption1(install("papersize")), 0);
-	if(s != NA_STRING && strlen(CHAR(s)) > 0)
-	    strcpy(pd->papername, CHAR(s));
+	SEXP p = GetOption1(install("papersize"));
+        SEXP s = (isString(p) && LENGTH(p) > 0) ? STRING_ELT(p, 0) : NA_STRING;
+	if (s != NA_STRING && strlen(CHAR(s)) > 0)
+            safestrcpy(pd->papername, CHAR(s), sizeof(pd->papername));
 	else strcpy(pd->papername, "a4");
     }
     if (streql(pd->papername, "A4") ||
@@ -7120,9 +7121,10 @@ bool PDFDeviceDriver(pDevDesc dd, const char *file, const char *paper,
 
     if (streql(pd->papername, "Default") ||
        streql(pd->papername, "default")) {
-	SEXP s = STRING_ELT(GetOption1(install("papersize")), 0);
-	if(s != NA_STRING && strlen(CHAR(s)) > 0)
-	    strcpy(pd->papername, CHAR(s));
+        SEXP p = GetOption1(install("papersize"));
+        SEXP s = (isString(p) && LENGTH(p) > 0) ? STRING_ELT(p, 0) : NA_STRING;
+	if (s != NA_STRING && strlen(CHAR(s)) > 0)
+            safestrcpy(pd->papername, CHAR(s), sizeof(pd->papername));
 	else strcpy(pd->papername, "a4");
     }
     if (streql(pd->papername, "A4") ||

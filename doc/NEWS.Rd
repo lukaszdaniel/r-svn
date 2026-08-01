@@ -71,6 +71,18 @@
 
       \item New low-level function \code{.OBJSXP()} enables deparsing of
       non-S4 \code{"object"} type objects.
+
+      \item \code{use()} gets an argument \code{pos} with a help example
+      showing how to attach a \dQuote{chain} of packages to
+      \code{search()}.
+
+      \item New higher-order functions \code{Compose()}, \code{Funcall()}
+      and \code{Partial()}.
+
+      \item New functions \code{find_calls()},
+      \code{find_calls_in_package_code()},
+      \code{gsub_with_transformed_matches()} and
+      \code{system_with_capture()} in package \pkg{tools}.
     }
   }
 
@@ -219,10 +231,18 @@
       \code{c(x="ANY", norm="missing")} so that \code{rcond(x)}
       does not break after \code{setGeneric("rcond")}.
 
-      \item \code{rbinom()}'s BTPE algorithm is fixed thanks to \I{Kate
-	Hudson}'s findings and report in \PR{19049}.  To ensure
+      \item \code{rbinom()}'s \abbr{BTPE} algorithm is fixed thanks to
+      \I{Kate Hudson}'s findings and report in \PR{19049}.  To ensure
       reproducibility, \code{RNGkind()} gets new argument
       \code{binom.kind}.
+
+      \item Fix segfault in \code{postscript()} and \code{pdf()} if set
+      \code{papersize} option to very long string (\PR{19108}).  Thanks
+      to \I{Kevin Ushey}.
+
+      \item Fix segfault in \code{grid::gpar()} if set \code{fontfamily}
+      longer than 200 characters (\PR{19107}).  Thanks
+      to \I{Kevin Ushey}.
     }
   }
 }
@@ -249,9 +269,16 @@
       non-vector \code{along.width} arguments properly. Thanks to
       \I{Mitchell O'Hara-Wild}.
 
-      \item Wrappers now duplicate even a wrapped object that might be
-      shared before returning a read-only pointer. This prevents cached
-      read-only pointers from becoming invalid. Reported by \I{Ivan Krylov}.
+      \item Wrapper objects make sure data pointers remain once obtained
+      remain valid as long as a wrapper object is reachable. Reported by
+      \I{Ivan Krylov}.
+
+      \item Now \code{PROTECT()} in \code{SubassignTypeFix}, fixing
+      \PR{19110} thanks to \I{Kevin Ushey}.
+
+      \item \code{writeChar()} in a multibyte locale counts characters and
+      bytes consistently and no longer overflows, thanks to \I{Kevin
+	Ushey}'s report and patch in \PR{19112}.
     }
   }
 }

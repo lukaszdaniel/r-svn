@@ -43,6 +43,14 @@
 #include <cstdlib>
 #include <climits>
 
+#ifdef MATHLIB_STANDALONE
+ Binomtype ML_Binom_kind = BTPE; // possibly reset where rbinom() will be used
+# define Binom_kind ML_Binom_kind
+#else
+ Binomtype Binom_kind = BTPE;   // set and used in ../main/RNG.c  */
+#endif
+Binomtype R_binom_kind(void) { return Binom_kind; }
+
 
 #define repeat for(;;)
 

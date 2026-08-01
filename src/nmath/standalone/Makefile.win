@@ -37,10 +37,10 @@ endif
 
 
 ## see R-admin for alternatives
-test.exe: test.cpp
+test.exe: test.cpp shared
 	$(CXX) -I../../include -DRMATH_DLL -o $@ $< -L. Rmath.dll
 	./$@
-test-static.exe: test.cpp
+test-static.exe: test.cpp static
 	$(CXX) -I../../include -o $@ $< -L. libRmath.a
 	./$@
 
