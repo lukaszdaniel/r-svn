@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998-2025   The R Core Team
+ *  Copyright (C) 1998-2026   The R Core Team
  *  Copyright (C) 2002-2025   The R Foundation
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -296,27 +296,38 @@ SEXP Rf_alloc3DArray(SEXPTYPE mode, int nrow, int ncol, int nface)
     return s;
 }
 
+// dim(.) --> prod(dim(.)) { = length(.)} with all checks --- also called from attrib.c
+attribute_hidden 
+R_xlen_t R::dim2total(SEXP dim, int ndim, const char *ErrMsg)
+{
+    if (ndim == 0)
+	error("%s", _("'dim' cannot be of length 0"));
+    double dn = 1.;
+    for (int i = 0; i < ndim; i++) {
+	/* need this test first as NA_INTEGER is < 0 */
+	if (INTEGER(dim)[i] == NA_INTEGER)
+	    error("%s", _("the dims contain missing values"));
+	if (INTEGER(dim)[i] < 0)
+	    error("%s", _("the dims contain negative values"));
+	if (INTEGER(dim)[i])
+	    dn *= INTEGER(dim)[i];
+	else dn = 0.; // but continue checking ..
+    }
+#ifdef LONG_VECTOR_SUPPORT
+    if (dn > R_XLEN_T_MAX)
+#else
+    if (dn > INT_MAX)
+#endif
+	error("%s", ErrMsg);
+    return (R_xlen_t) dn;
+}
 
 SEXP Rf_allocArray(SEXPTYPE mode, SEXP dims)
 {
-    SEXP array;
-    R_xlen_t n = 1;
-    double dn = 1;
-
-    for (int i = 0; i < LENGTH(dims); i++) {
-	dn *= INTEGER(dims)[i];
-#ifdef LONG_VECTOR_SUPPORT
-	if(dn > R_XLEN_T_MAX)
-	    error("%s", _("'allocArray': too many elements specified by 'dims'"));
-#else
-	if(dn > INT_MAX)
-	    error("%s", _("'allocArray': too many elements specified by 'dims'"));
-#endif
-	n *= INTEGER(dims)[i];
-    }
-
+    R_xlen_t n = dim2total(dims, LENGTH(dims),
+			   _("'allocArray': too many elements specified by 'dims'"));
     PROTECT(dims = duplicate(dims));
-    PROTECT(array = allocVector(mode, n));
+    SEXP array = PROTECT(allocVector(mode, n));
     setAttrib(array, R_DimSymbol, dims);
     UNPROTECT(2);
     return array;
@@ -2244,23 +2255,14 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    break;
 	default:
 	    error(_("'data' must be of a vector type, was '%s'"),
-		R_typeToChar(vals));
+		  R_typeToChar(vals));
     }
     SEXP ans,
 	dims     = CADR(args),
 	dimnames = CADDR(args);
     PROTECT(dims = coerceVector(dims, INTSXP));
-    int nd = LENGTH(dims);
-    if (nd == 0) error("%s", _("'dim' cannot be of length 0"));
-    double d = 1.0;
-    for (int j = 0; j < nd; j++) d *= INTEGER(dims)[j];
-#ifdef LONG_VECTOR_SUPPORT
-    if (d > R_XLEN_T_MAX) error("%s", _("too many elements specified"));
-#else
-    if (d > INT_MAX) error("%s", _("too many elements specified"));
-#endif
-    R_xlen_t lendat = XLENGTH(vals),
-	i, nans = (R_xlen_t) d;
+    R_xlen_t nans = dim2total(dims, LENGTH(dims), _("too many elements specified")),
+	lendat = XLENGTH(vals), i;
 
     PROTECT(ans = allocVector(TYPEOF(vals), nans));
     switch(TYPEOF(vals)) {

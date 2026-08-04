@@ -216,8 +216,12 @@ nonMath:	Item				{ $$ = xxnewlist($1); }
 	|	nonMath Item			{ $$ = xxlist($1, $2); }
 	
 Item:		TEXT				{ xxArg($1); $$ = xxtag($1, TEXT, &@$); }
-	|	'['				{ $$ = xxtag(mkString("["), TEXT, &@$); }
-	|	']'				{ $$ = xxtag(mkString("]"), TEXT, &@$); }
+	|	'['				{ $$ = xxtag(PROTECT(mkString("[")), TEXT, &@$);
+	  UNPROTECT(1);
+	}
+	|	']'				{ $$ = xxtag(PROTECT(mkString("]")), TEXT, &@$);
+	  UNPROTECT(1);
+	}
 	|	COMMENT				{ $$ = xxtag($1, COMMENT, &@$); }
 	|	MACRO				{ xxArg(NULL);
 						  $$ = xxtag($1, MACRO, &@$); }
@@ -251,17 +255,20 @@ block:		'{' Items  '}'			{ $$ = xxblock($2, &@$); }
 
 newdefine:	NEWCMD  			{ $$ = xxpushMode(2, 1, 0, 0); }
 	        Items END_OF_ARGS		{ xxpopMode($2);
-						  $$ = xxnewdef(xxtag($1, MACRO, &@1),
-								$3, &@$); }
+						  $$ = xxnewdef(PROTECT(xxtag($1, MACRO, &@1)),
+								$3, &@$);
+						  UNPROTECT(1); }
 	|	NEWENV  			{ $$ = xxpushMode(3, 1, 0, 0); }
                 Items END_OF_ARGS		{ xxpopMode($2);
-						  $$ = xxnewdef(xxtag($1, MACRO, &@1),
-								$3, &@$); }
+						  $$ = xxnewdef(PROTECT(xxtag($1, MACRO, &@1)),
+								$3, &@$);
+						  UNPROTECT(1); }
 		LET_OR_DEF			{  $$ = xxenterDefMode(2, 1); }
 		Items END_OF_ARGS
 						{  xxpopMode($2);
-						  $$ = xxnewdef(xxtag($1, MACRO, &@1),
-							$3, &@$); }
+						  $$ = xxnewdef(PROTECT(xxtag($1, MACRO, &@1)),
+							$3, &@$);
+						  UNPROTECT(1); }
 %%
 
 static SEXP xxnewlist(SEXP item)
@@ -491,7 +498,7 @@ static void xxSetInVerbEnv(SEXP envname)
     char buffer[256];
     if (VerbatimLookup(CHAR(STRING_ELT(envname, 0)))) {
     	snprintf(buffer, sizeof(buffer), "\\end{%s}", CHAR(STRING_ELT(envname, 0)));
-	PRESERVE_SV(parseState.xxInVerbEnv = ScalarString(mkChar(buffer)));
+	PRESERVE_SV(parseState.xxInVerbEnv = mkString(buffer));
     } else parseState.xxInVerbEnv = NULL;
 }
 
@@ -506,8 +513,9 @@ static void xxsavevalue(SEXP items, YYLTYPE *lloc)
 	setAttrib(VECTOR_ELT(parseState.Value, 0), LatexTagSymbol, mkString("TEXT"));
     }	
     if (!isNull(parseState.Value)) {
-    	setAttrib(parseState.Value, R_ClassSymbol, mkString("LaTeX"));
-    	setAttrib(parseState.Value, R_SrcrefSymbol, makeSrcref(lloc, parseState.SrcFile));
+    	setAttrib(parseState.Value, R_ClassSymbol, PROTECT(mkString("LaTeX")));
+    	setAttrib(parseState.Value, R_SrcrefSymbol, PROTECT(makeSrcref(lloc, parseState.SrcFile)));
+    	UNPROTECT(2);
     }
 }
 
@@ -810,11 +818,16 @@ static void yyerror(const char *s)
     char ErrorTranslation[PARSE_ERROR_SIZE];
     if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	int i, translated = FALSE;
+	/* Make local copy so we can modify it */
+	char s1[PARSE_ERROR_SIZE + 1];
+	strncpy(s1, s, PARSE_ERROR_SIZE);
+	s1[PARSE_ERROR_SIZE] = 0;
+
     	/* Edit the error message */    
-    	expecting = (char *) strstr(s + sizeof yyunexpected -1, yyexpecting);
+	expecting = (char *) strstr(s1 + sizeof yyunexpected -1, yyexpecting);
     	if (expecting) *expecting = '\0';
     	for (i = 0; yytname_translations[i]; i += 2) {
-    	    if (streql(s + sizeof yyunexpected - 1, yytname_translations[i])) {
+	    if (streql(s1 + sizeof yyunexpected - 1, yytname_translations[i])) {
     	    	if (yychar < 256 || yychar == END_OF_INPUT)
     	    	    snprintf(ErrorTranslation, sizeof(ErrorTranslation),
 			     _(yyshortunexpected), 
@@ -834,11 +847,11 @@ static void yyerror(const char *s)
     	    if (yychar < 256 || yychar == END_OF_INPUT) 
     		snprintf(ErrorTranslation, sizeof(ErrorTranslation), 
 			 _(yyshortunexpected),
-			 s + sizeof yyunexpected - 1);
+			 s1 + sizeof yyunexpected - 1);
     	    else
     	    	snprintf(ErrorTranslation, sizeof(ErrorTranslation),
 			 _(yylongunexpected),
-			 s + sizeof yyunexpected - 1, CHAR(STRING_ELT(yylval, 0)));
+			 s1 + sizeof yyunexpected - 1, CHAR(STRING_ELT(yylval, 0)));
     	}
     	if (expecting) {
  	    translated = FALSE;

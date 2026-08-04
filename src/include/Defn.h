@@ -1844,6 +1844,7 @@ SEXP deparse1w(SEXP,bool,int);
 SEXP deparse1line(SEXP, bool);
 SEXP deparse1line_ex(SEXP, bool, int);
 SEXP deparse1s(SEXP call);
+R_xlen_t dim2total(SEXP, int, const char *);
 SEXP R_DispatchClosure(SEXP generic, SEXP mname, SEXP method, SEXP rho, SEXP callrho);
 std::pair<bool, SEXP> DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, bool, bool);
 bool DispatchAnyOrEval(SEXP, SEXP, const char *, SEXP, SEXP, SEXP*, bool, bool);

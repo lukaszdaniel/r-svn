@@ -3653,6 +3653,33 @@ stopifnot(identical(f(FALSE), 100),
           identical(f(TRUE),  100)) # was '1' (silently)
 
 
+## PR#19109 -- `dim<-` dimension vector product can overflow
+x <- integer()
+er <- tryCid(dim(x) <- rep(2^16, 4))
+stopifnot(inherits(er, "error"))
+if(englishMsgs)
+    stopifnot(grepl("too many", conditionMessage(er)))
+## gave no error but an x of length zero; x[] <- .. would seg.fault
+t30 <- 2^30
+for(nd in c(2:4, 33:37)) { # 
+    d. <- c(rep(t30, nd), 0)
+    x <- integer();   dim(x) <- d.
+    y <- array(integer(), dim = d.)
+    stopifnot(identical(x, y), is.integer(d <- dim(x)), all.equal(d., d))
+}
+## above creation of x & y failed for a couple of hours in R-devel
+
+
+## PR#19116 -- <matrix>[[i, j]]: stochastic error with negative i
+m <- matrix(1:4, 2); mm <- m; mm[[-1, 1]] <- 99L; mm[, 1] # 1 99
+RR <- replicate(1000, {
+    invisible(lapply(1:200, function(i) c(2L, 2L)))   # churn the heap
+    as.character(m[[-1L, 1L]])
+})
+stopifnot(RR == "2", length(RR) == 1000L)
+## RR was '2' "randomly" in R <= 4.6.1
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

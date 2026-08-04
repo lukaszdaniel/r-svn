@@ -221,11 +221,6 @@
       fixes \PR{18341} thanks to \sQuote{\I{R Dev Day @ useR! 2026}}
       participants \I{Deepansh Khurana}, \I{Stefan Linner} and \I{Oscar de Leon}.
 
-      \item \code{dummy.coef()} becomes more robust to non-syntactic
-      variable names, fixing \PR{18468}.  Thanks to \I{Bill Dunlap} and
-      \sQuote{\I{R Dev Day}} participants \I{Vincent Arel-Bundock},
-      \I{Cynthia Huang}, \I{Tina Rozsos} and \I{Marina Marinelli}.
-
       \item Package \pkg{methods} provides a method for implicit generic
       function \code{rcond} with signature
       \code{c(x="ANY", norm="missing")} so that \code{rcond(x)}
@@ -273,12 +268,31 @@
       remain valid as long as a wrapper object is reachable. Reported by
       \I{Ivan Krylov}.
 
+      \item \code{dummy.coef()} becomes more robust to non-syntactic
+      variable names, fixing \PR{18468}.  Thanks to \I{Bill Dunlap} and
+      \sQuote{\I{R Dev Day}} participants \I{Vincent Arel-Bundock},
+      \I{Cynthia Huang}, \I{Tina Rozsos} and \I{Marina Marinelli}.
+
       \item Now \code{PROTECT()} in \code{SubassignTypeFix}, fixing
       \PR{19110} thanks to \I{Kevin Ushey}.
 
       \item \code{writeChar()} in a multibyte locale counts characters and
       bytes consistently and no longer overflows, thanks to \I{Kevin
 	Ushey}'s report and patch in \PR{19112}.
+
+      \item \code{dim(a) <- vec} now checks for too large \code{prod(vec)},
+      thanks to \I{Kevin Ushey}'s report and patch in \PR{19109}.
+      
+      \item Tweaks (including to the parsers) for the C23 behaviour
+      (preserving \code{const}) of \code{strchr}, \code{strrchr} and
+      \code{strstr}.  (By Brian Ripley and Duncan Murdoch.)
+
+      \item \command{make check-devel} now works without recommended
+      packages.
+
+      \item \code{<matrix>[[i, j]]} with negative \code{i} occasionally
+      gives no error but accesses \code{previous content}; thanks to
+      \I{Kevin Ushey}'s report and very simple fix in \PR{19116}.
     }
   }
 }
@@ -1755,8 +1769,7 @@
       the \code{"MethodsList"} class for S4 method handling were removed
       from package \pkg{methods}.
       Deprecated functions \code{balanceMethodsList}, \code{emptyMethodsList},
-      \code{inheritedSubMethodLists}, \code{insertMethod},
-      \code{insertMethodInEmptyList}, \code{makeMethodsList},
+      \code{insertMethod}, \code{makeMethodsList},
       \code{mergeMethods}, \code{MethodsList}, \code{MethodsListSelect}, and
       \code{SignatureMethod} were made defunct, as were the
       \code{"MethodsList"} branches of functions \code{assignMethodsMetaData},

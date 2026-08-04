@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2023  The R Core Team
+ *  Copyright (C) 1997--2026  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -1138,7 +1138,7 @@ attribute_hidden SEXP do_subset2_dflt(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	    pindx[i] = (int)
 		get1index(thesub,
 			  (i < ndn) ? VECTOR_ELT(dimnames, i) : R_NilValue,
-			  pindx[i], pok, -1, call);
+			  pdims[i], pok, -1, call);
 	    subs = CDR(subs);
 	    if (pindx[i] < 0 || pindx[i] >= pdims[i])
 		errorcallOutOfBoundsSEXP(x, i, thesub, call);
