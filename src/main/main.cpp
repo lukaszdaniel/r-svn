@@ -55,6 +55,7 @@
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/Environment.hpp>
 #include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Internal.h>

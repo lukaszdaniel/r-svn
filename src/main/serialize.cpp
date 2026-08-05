@@ -775,7 +775,9 @@ static int PackFlags(int type, int levs, int isobj, int hasattr, int hastag)
        which is still serialized here as this is preexisting and has
        not caused problems in practice.
     */
-
+#ifndef GROWABLE_MASK
+#define GROWABLE_MASK ((unsigned short)(1<<5))
+#endif
     /* Also make sure the HASHASH bit of CHARSXP is not written out. */
     if (type == CHARSXP)
 	levs &= (~(CACHED_MASK | HASHASH_MASK));
