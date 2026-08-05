@@ -3650,7 +3650,7 @@ bool (R::PROMISE_IS_EVALUATED)(SEXP x)
 }
 
 void (R::SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Promise *>(x)->m_env.retarget(x, v); }
-void (R::SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<Promise *>(x)->m_expr.retarget(x, v); }
+void (R::SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<Promise *>(x)->u.promsxp.m_expr.retarget(x, v); }
 attribute_hidden void (R::SET_PRSEEN)(SEXP x, int v) { CR_ASSERT(x); SET_PRSEEN(CHK(x), v); }
 
 void (R::SET_PRVALUE)(SEXP x, SEXP v)
