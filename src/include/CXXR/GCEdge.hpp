@@ -84,10 +84,10 @@ namespace CXXR
          * crash.  This bug would remain latent until a garbage
          * collection happened at precisely this point.
          */
-        GCEdge(T *val = nullptr) : m_target(val)
+        GCEdge() : m_target(nullptr)
         {
             check_complete_type();
-            GCNode::incRefCount(m_target);
+            // GCNode::incRefCount(m_target);
         }
 
         // explicit GCEdge(T* target) is intentionally not defined here.
@@ -105,7 +105,7 @@ namespace CXXR
         ~GCEdge()
         {
             check_complete_type();
-            GCNode::decRefCount(m_target);
+            // GCNode::decRefCount(m_target);
         }
 
         GCEdge<T> &operator=(const GCEdge<T> &source)

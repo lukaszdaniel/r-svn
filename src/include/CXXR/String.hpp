@@ -481,11 +481,11 @@ namespace CXXR
 
     // Make the default value for a String point to a blank string:
     template <>
-    inline GCEdge<String>::GCEdge(String *val)
+    inline GCEdge<String>::GCEdge()
     {
         m_target = nullptr; // In case String::blank() causes GC.
         m_target = String::blank();
-        GCNode::incRefCount(m_target);
+        // GCNode::incRefCount(m_target);
     }
 
     String *CXXR_allocCharsxp(const std::string &text, cetype_t encoding, bool isAscii);
