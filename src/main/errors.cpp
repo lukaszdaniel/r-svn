@@ -657,11 +657,11 @@ void R::PrintWarnings(const char *hdr)
 		    int msgline1;
 		    if (strchr(msg, '\n')) {
 			// this branch alters msg temporarily
-			char msg1[strlen(msg) + 1];
-			strcpy(msg1, msg);
-			char *p = strchr(msg1, '\n');
-			*p = '\0';
-			msgline1 = wd(msg1);
+			std::string msg1(msg);
+			size_t pos = msg1.find('\n');
+			if (pos != std::string::npos)
+			    msg1.erase(pos);
+			msgline1 = wd(msg1.c_str());
 		    } else msgline1 = wd(msg);
 		    if (10 + wd(dcall) + msgline1 > LONGWARN) {
 			RWprintf("\n ");
