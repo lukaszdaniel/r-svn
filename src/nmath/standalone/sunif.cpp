@@ -30,6 +30,9 @@ void set_seed(unsigned int i1, unsigned int i2)
     I1 = i1; I2 = i2;
 }
 
+#ifdef __cplusplus
+extern "C"
+#endif
 void get_seed(unsigned int *i1, unsigned int *i2)
 {
     *i1 = I1; *i2 = I2;
