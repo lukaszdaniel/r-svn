@@ -318,7 +318,7 @@ R_xlen_t R::dim2total(SEXP dim, int ndim, const char *ErrMsg)
 #else
     if (dn > INT_MAX)
 #endif
-	error("%s", ErrMsg);
+	error("%s", ErrMsg); // avoid -Wformat-security warning
     return (R_xlen_t) dn;
 }
 

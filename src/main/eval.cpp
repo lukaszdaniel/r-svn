@@ -8516,7 +8516,10 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
        SEXP names = GETCONST(constants, GETOP());
        SEXP coffsets = GETCONST(constants, GETOP());
        SEXP ioffsets = GETCONST(constants, GETOP());
-       SEXP value = BCNPOP();
+       /* Leave the value on the node stack for the whole instruction: the
+	  node stack below R_BCNodeStackTop is the only thing rooting it, and
+	  warningcall() below allocates and can run R-level handlers. */
+       SEXP value = GETSTACK(-1);
        if (!isVector(value) || length(value) != 1)
 	   errorcall(call, "%s", _("EXPR must be a length 1 vector"));
        if (isFactor(value))
@@ -8561,6 +8564,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	       warningcall(call, "%s", _("'switch' with no alternatives"));
 	   pc = codebase + INTEGER(ioffsets)[which];
        }
+       BCNPOP_IGNORE_VALUE();
        NEXT();
     }
     OP(RETURNJMP, 0):
