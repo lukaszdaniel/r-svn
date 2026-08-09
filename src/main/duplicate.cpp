@@ -346,6 +346,15 @@ static SEXP duplicate1(SEXP s, bool deep)
 	return s;
 	break;
     case EXPRSXP:
+	n = XLENGTH(s);
+	PROTECT(s);
+	PROTECT(t = allocVector(TYPEOF(s), n));
+	for(i = 0 ; i < n ; i++)
+	    SET_XVECTOR_ELT(t, i, duplicate_child(XVECTOR_ELT(s, i), deep));
+	DUPLICATE_ATTRIB2(t, s, deep);
+	COPY_TRUELENGTH(t, s);
+	UNPROTECT(2);
+	break;
     case VECSXP:
 	n = XLENGTH(s);
 	PROTECT(s);

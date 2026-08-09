@@ -3987,6 +3987,9 @@ static R_INLINE void clear_elements(SEXP x, R_xlen_t from, R_xlen_t to)
 	    SET_STRING_ELT(x, i, R_BlankString);
 	break;
     case EXPRSXP:
+	for (R_xlen_t i = from; i < to; i++)
+	    SET_XVECTOR_ELT(x, i, R_NilValue);
+	break;
     case VECSXP:
 	for (R_xlen_t i = from; i < to; i++)
 	    SET_VECTOR_ELT(x, i, R_NilValue);
