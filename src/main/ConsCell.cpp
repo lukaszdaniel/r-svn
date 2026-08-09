@@ -58,7 +58,7 @@ namespace CXXR
     {
         if (hasUnexpandedValue())
             Rf_error(_("bad binding access: %d"), underlyingType());
-        return u.listsxp.m_car;
+        return m_car;
     }
 
     const PairList *ConsCell::tail() const
@@ -86,7 +86,7 @@ namespace CXXR
         if (!this->refCountEnabled())
             return;
         if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
-            u.listsxp.m_car.detach();
+            m_car.detach();
         m_tail.detach();
         m_tag.detach();
         RObject::detachReferents();
@@ -99,7 +99,7 @@ namespace CXXR
         const GCNode *cdr = m_tail;
         const GCNode *tag = m_tag;
         if (BOXED_BINDING_CELLS || BNDCELL_TAG(this) == NILSXP) // condition for LISTSXP objects
-            car = u.listsxp.m_car;
+            car = m_car;
 
         if (car != R_NilValue)
             (*v)(car);

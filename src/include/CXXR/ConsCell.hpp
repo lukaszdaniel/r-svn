@@ -190,7 +190,7 @@ namespace CXXR
          */
         RObject *car0() const
         {
-            return u.listsxp.m_car;
+            return m_car;
         }
 
         /** @brief Get the 'car' value.
@@ -266,22 +266,22 @@ namespace CXXR
         {
             if (hasUnexpandedValue())
             {
-                u.listsxp.m_car.reset();
+                m_car.reset();
                 markExpanded();
             }
-            if (u.listsxp.m_car == cr)
+            if (m_car == cr)
                 return;
-            if (refCountEnabled() && u.listsxp.m_car && assignmentPending())
+            if (refCountEnabled() && m_car && assignmentPending())
             {
                 setAssignmentPending(false);
-                GCNode::incRefCount(u.listsxp.m_car);
+                GCNode::incRefCount(m_car);
             }
-            u.listsxp.m_car.retarget(this, cr);
+            m_car.retarget(this, cr);
         }
 
         void clearCar()
         {
-            u.listsxp.m_car.reset();
+            m_car.reset();
         }
 
         /** @brief Set the 'tag' value.
@@ -375,6 +375,7 @@ namespace CXXR
         void setAssignmentPending(bool on);
 
     public:
+        GCEdge<> m_car;
         GCEdge<> m_tail;
         GCEdge<> m_tag;
 
@@ -398,10 +399,7 @@ namespace CXXR
          */
         ConsCell(SEXPTYPE stype, SEXP cr, SEXP tl, SEXP tg): RObject(stype)
         {
-            u.listsxp.m_car.reset();
-            m_tail.reset();
-            m_tag.reset();
-            u.listsxp.m_car = cr;
+            m_car = cr;
             m_tail = tl;
             m_tag = tg;
         }

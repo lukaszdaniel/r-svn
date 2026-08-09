@@ -71,17 +71,6 @@ namespace CXXR
     class PairList;
     class Symbol;
 
-    struct listsxp_struct
-    {
-        GCEdge<> m_car;
-    };
-
-    struct promsxp_struct
-    {
-        GCEdge<> m_value;
-        GCEdge<> m_expr;
-    };
-
     /** @brief Replacement for CR's SEXPREC.
      *
      * This class is the rough equivalent within CXXR of the SEXPREC
@@ -418,16 +407,6 @@ namespace CXXR
         virtual const char *typeName() const;
 
         GCEdge<> m_attrib;
-
-        union U
-        {
-            struct listsxp_struct listsxp;
-            struct promsxp_struct promsxp;
-            U()
-            {
-            }
-            ~U() {}
-        } u;
 
         /** @brief The name by which this type is known in R.
          *
