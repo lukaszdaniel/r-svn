@@ -260,24 +260,27 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 #ifdef R_MEMORY_PROFILING
     SEXP object, previous, ans;
-    GCStackRoot<> argList;
     char buffer[21];
-    static SEXP do_retracemem_formals = NULL;
     bool visible; 
 
+    static SEXP do_retracemem_formals = NULL;
     if (do_retracemem_formals == NULL)
 	do_retracemem_formals = allocFormalsList2(install("x"),
 						  R_PreviousSymbol);
 
+    GCStackRoot<> argList;
     argList =  matchArgs_NR(do_retracemem_formals, args, call);
-    if (CAR(argList) == R_MissingArg) SETCAR(argList, R_NilValue);
-    if (CADR(argList.get()) == R_MissingArg) SETCAR(CDR(argList.get()), R_NilValue);
-
     object = CAR(argList);
+    previous = CADR(argList.get());
+
+    if (object == R_MissingArg)
+        object = R_NilValue;
+    if (previous == R_MissingArg)
+        previous = R_NilValue;
+
     if (Rf_isFunction(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
-    previous = CADR(argList.get());
     if (!isNull(previous) && (!isString(previous) || LENGTH(previous) != 1))
 	    errorcall(call, _("invalid '%s' argument"), "previous");
 

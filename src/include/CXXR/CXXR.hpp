@@ -104,6 +104,9 @@
 #include <CXXR/PairList.hpp>
 #include <CXXR/Expression.hpp>
 
+// AltRep
+#include <CXXR/RAltRep.hpp>
+
 // Other Derived classes
 #include <CXXR/Environment.hpp>
 #include <CXXR/Promise.hpp>
