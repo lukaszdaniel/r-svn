@@ -834,11 +834,12 @@ function(package, dir, lib.loc = NULL,
                 NULL
         }
     objects_missing_from_usages <-
-        if(!has_namespace) character() else {
+        if(!has_namespace) character()
+        else {
             c(functions_missing_from_usages$name,
               setdiff(objects_in_code_not_in_usages,
                       c(functions_in_code, data_sets_in_code)))
-                                       }
+        }
 
     attr(bad_doc_objects, "objects_in_code_not_in_usages") <-
         objects_in_code_not_in_usages
@@ -859,6 +860,9 @@ function(package, dir, lib.loc = NULL,
         objects_missing_from_usages
     attr(bad_doc_objects, "functions_missing_from_usages") <-
         functions_missing_from_usages
+    attr(bad_doc_objects, "functions_in_usages") <- functions_in_usages
+    attr(bad_doc_objects, "variables_in_usages") <- variables_in_usages
+    attr(bad_doc_objects, "data_sets_in_usages") <- data_sets_in_usages
     attr(bad_doc_objects, "has_namespace") <- has_namespace
     attr(bad_doc_objects, "bad_lines") <- bad_lines
     class(bad_doc_objects) <- "codoc"
@@ -926,11 +930,13 @@ function(x, ...)
     functions_missing_from_usages <-
         attr(x, "functions_missing_from_usages")
     if(NROW(functions_missing_from_usages) &&
-       config_val_to_logical(Sys.getenv("_R_CHECK_CODOC_FUNCTIONS_MISSING_FROM_USAGES_",
-                                        "FALSE"))) {
-        self <- functions_missing_from_usages$self
+       (!isFALSE(val <- config_val_to_logical(Sys.getenv("_R_CHECK_CODOC_FUNCTIONS_MISSING_FROM_USAGES_",
+                                                          "FALSE"))))) {
+        ind <- functions_missing_from_usages$self
+        if(is.na(val))
+            ind <- ind & functions_missing_from_usages$ext
         functions_missing_from_usages <-
-            functions_missing_from_usages$name[self]
+            functions_missing_from_usages$name[ind]
         if(length(functions_missing_from_usages))
             y <- c(y,
                    pcn(c("Exported functions without usage information:",
