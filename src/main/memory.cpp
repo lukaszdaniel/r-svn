@@ -1248,12 +1248,8 @@ void GCNode::mark(unsigned int max_generation)
     for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
         MARK_THRU(R_PPStack[i]);
 
-    for (R_bcstack_t *sp = R_BCNodeStackBase; sp < R_BCNodeStackTop; sp++) {
-        if (sp->tag == RAWMEM_TAG)
-            sp += sp->u.ival;
-        else if (sp->tag == NILSXP || IS_PARTIAL_SXP_TAG(sp->tag))
-            MARK_THRU(sp->u.sxpval);
-    }
+    ByteCode::visitRoots(&marker);
+
 
     /* identify weakly reachable nodes */
     {

@@ -33,6 +33,7 @@
 #include <memory>
 #include <iterator> // for std::distance
 #include <CXXR/RTypes.hpp>
+#include <CXXR/RObject.hpp>
 
 namespace CXXR
 {
@@ -114,6 +115,15 @@ namespace CXXR
         {
             return std::distance(m_R_BCNodeStackBase.get(), m_R_BCNodeStackTop);
         }
+
+        /** @brief Conduct a const visitor via the NodeStack.
+         *
+         * Conduct a GCNode::const_visitor object to each node_t
+         * pointed to by the NodeStack.
+         *
+         * @param v Pointer to the const_visitor object.
+         */
+        void visitRoots(GCNode::const_visitor *v);
 
         std::unique_ptr<node_t[]> m_R_BCNodeStackBase;
         node_t *m_R_BCProtTop;

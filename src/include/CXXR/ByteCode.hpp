@@ -138,6 +138,15 @@ namespace CXXR
 
         static ptrdiff_t codeDistane(SEXP body, void *bcpc);
 
+        /** @brief Conduct a const visitor via the NodeStack.
+         *
+         * Conduct a GCNode::const_visitor object to each R_bcstack_t
+         * pointed to by the NodeStack.
+         *
+         * @param v Pointer to the const_visitor object.
+         */
+        static void visitRoots(GCNode::const_visitor *v);
+
         // Virtual functions of RObject:
         const char *typeName() const override;
 

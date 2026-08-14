@@ -38,4 +38,14 @@ namespace CXXR
         m_R_BCNodeStackEnd = m_R_BCNodeStackBase.get() + initial_capacity;
         m_R_BCProtTop = m_R_BCNodeStackTop;
     }
+
+    void NodeStack::visitRoots(GCNode::const_visitor *v)
+    {
+        for (R_bcstack_t *sp = m_R_BCNodeStackBase.get(); sp < m_R_BCNodeStackTop; sp++) {
+            if (sp->tag == RAWMEM_TAG)
+                sp += sp->u.ival;
+            else if ((sp->tag == NILSXP || IS_PARTIAL_SXP_TAG(sp->tag)) && sp->u.sxpval != R_NilValue)
+                (*v)(sp->u.sxpval);
+        }
+    }
 } // namespace CXXR

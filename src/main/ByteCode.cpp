@@ -79,16 +79,22 @@ namespace CXXR
     void ByteCode::visitReferents(const_visitor *v) const
     {
         RObject::visitReferents(v);
-        const GCNode *code0 = m_code;
-        const GCNode *consts = m_constants;
-        const GCNode *expr = m_expression;
+        const GCNode *code = m_code;
+        const GCNode *constants = m_constants;
+        const GCNode *expression = m_expression;
 
-        if (code0 != R_NilValue)
-            (*v)(code0);
-        if (consts != R_NilValue)
-            (*v)(consts);
-        if (expr != R_NilValue)
-            (*v)(expr);
+        if (code != R_NilValue)
+            (*v)(code);
+        if (constants != R_NilValue)
+            (*v)(constants);
+        if (expression != R_NilValue)
+            (*v)(expression);
+    }
+
+    void ByteCode::visitRoots(GCNode::const_visitor *v)
+    {
+        if (s_nodestack)
+            s_nodestack->visitRoots(v);
     }
 } // namespace CXXR
 
