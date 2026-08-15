@@ -7406,7 +7406,8 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
     }
     else smallcache = false;
 #endif
-    R_BCProtTop = R_BCNodeStackTop;
+    // R_BCProtTop = R_BCNodeStackTop;
+    ByteCode::protectAll();
 
     return vcache_info(vcache, smallcache);
 }

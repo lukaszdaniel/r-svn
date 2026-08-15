@@ -39,6 +39,12 @@ namespace CXXR
         m_R_BCProtTop = m_R_BCNodeStackTop;
     }
 
+    void NodeStack::protectAll()
+    {
+        // R_BCProtTop = R_BCNodeStackTop;
+        m_R_BCProtTop = m_R_BCNodeStackTop;
+    }
+
     void NodeStack::visitRoots(GCNode::const_visitor *v)
     {
         for (R_bcstack_t *sp = m_R_BCNodeStackBase.get(); sp < m_R_BCNodeStackTop; sp++) {

@@ -170,6 +170,11 @@ namespace CXXR
         static bool s_BCIntActive; /* bcEval called more recently than eval */
 #define R_BCIntActive CXXR::ByteCode::s_BCIntActive
 
+        static void protectAll()
+        {
+            s_nodestack->protectAll();
+        }
+
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;

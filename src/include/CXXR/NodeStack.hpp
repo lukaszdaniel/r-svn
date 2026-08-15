@@ -107,6 +107,13 @@ namespace CXXR
         {
         }
 
+        /** @brief Ensure GC protection of all nodes.
+         *
+         * This function ensures that all RObjects pointed to from the
+         * NodeStack are protected from garbage collection.
+         */
+        void protectAll();
+
         /** @brief Current size of NodeStack.
          *
          * @return the number of pointers currently on the NodeStack.
