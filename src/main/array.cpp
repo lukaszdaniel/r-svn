@@ -1837,11 +1837,9 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     bool resize = asLogicalNoNA(CADDR(args), "resize");
 
     /* short-circuit identity permutation (PR#19069) */
-    if (resize) {
-	bool skip = true;
-        for (i = 0; i < n; i++) if (pp[i] != i) {skip = false; break;}
-        if (skip) {UNPROTECT(1); return(a);}
-    }
+    bool skip = true;
+    for (i = 0; i < n; i++) if (pp[i] != i) {skip = false; break;}
+    if (resize && skip) {UNPROTECT(1); return(a);}
 
     R_xlen_t *iip = (R_xlen_t *) R_alloc((size_t) n, sizeof(R_xlen_t));
     Memzero(iip, n);
@@ -1850,6 +1848,20 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	else error("%s", _("value out of range in 'perm'"));
     for (i = 0; i < n; i++)
 	if (iip[i] == 0) error(_("invalid '%s' argument"), "perm");
+
+    if (n == 2 && !skip) {
+	/* special case for 2D arrays (PR#19133) */
+	SEXP r = do_transpose(call, op, args, rho);
+	if (resize) {
+	    UNPROTECT(1);
+	    return r;
+	}
+	PROTECT(r);
+	setAttrib(r, R_DimSymbol, dimsa);
+	copyMostAttrib(a, r);
+	UNPROTECT(2);
+        return r;
+    }
 
     /* create the stride object and permute */
 

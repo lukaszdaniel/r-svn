@@ -4459,6 +4459,7 @@ static void PutState(ParseState *state) {
     state->Value = parseState.Value;
     state->xxinitvalue = parseState.xxinitvalue;
     state->xxMacroList = parseState.xxMacroList;
+    state->mset = parseState.mset;
     state->prevState = parseState.prevState;
 }
 
@@ -4479,6 +4480,7 @@ static void UseState(ParseState *state) {
     parseState.Value = state->Value;
     parseState.xxinitvalue = state->xxinitvalue;
     parseState.xxMacroList = state->xxMacroList;
+    parseState.mset = state->mset;
     parseState.prevState = state->prevState;
 }
 
@@ -4501,6 +4503,12 @@ static void PopState(void) {
     } else
     	busy = false;
 }
+
+/* Run PopState() when a parse is abandoned by a long jump.  Several error()
+   calls inside the parser (e.g. the unterminated-string error in mkCode, and
+   any warning promoted by options(warn=2)) unwind past the PopState() in
+   parseRd(), which would otherwise leave 'busy' set for the rest of the
+   session.  Compare FinalizeSrcRefStateOnError() in src/main/gram.y. */
 
 /* "do_parseRd" 
 
@@ -4525,9 +4533,23 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
 
     R_ParseError = 0;
     R_ParseErrorMsg[0] = '\0';
+    
+    /* Reject re-entrancy rather than corrupting the outer parse.  PushState()
+       saves only the ParseState fields listed in PutState(); the multi-set
+       (parseState.mset) and the lexer statics (con_parse, ptr_getc, pushbase,
+       npush, pushsize, macrolevel, SrcFile, wCalls, warnDups) are not saved,
+       so a nested parse leaves the outer one reading a dead connection and
+       preserving into a released multi-set.  This is reachable from a *calling*
+       handler -- withCallingHandlers() or globalCallingHandlers() -- since the
+       parser signals warnings mid-parse.  tryCatch() unwinds first and so is
+       unaffected. */
+    if (busy)
+	error(_("'parse_Rd' is not re-entrant"));
 
     PushState();
-
+    /* PopState() below is skipped when the parse is abandoned by a long jump,
+       so arrange for it to run on that path too. */
+    try {
     ifile = asInteger(CAR(args));                       args = CDR(args);
 
     con = getConnection(ifile);
@@ -4564,6 +4586,10 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
       PopState();
       error("%s", _("invalid Rd file"));
     }
+	} catch (...) {
+        PopState();
+        throw;
+	}
     return s;
 }
 
