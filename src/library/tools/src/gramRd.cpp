@@ -4544,7 +4544,7 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
        parser signals warnings mid-parse.  tryCatch() unwinds first and so is
        unaffected. */
     if (busy)
-	error(_("'parse_Rd' is not re-entrant"));
+	error("%s", _("'parse_Rd' is not re-entrant"));
 
     PushState();
     /* PopState() below is skipped when the parse is abandoned by a long jump,
