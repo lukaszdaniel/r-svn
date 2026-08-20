@@ -30,7 +30,7 @@
 #ifndef NODESTACK_HPP
 #define NODESTACK_HPP
 
-#include <memory>
+#include <vector>
 #include <iterator> // for std::distance
 #include <CXXR/RTypes.hpp>
 #include <CXXR/RObject.hpp>
@@ -120,7 +120,8 @@ namespace CXXR
          */
         size_t size() const
         {
-            return std::distance(m_R_BCNodeStackBase.get(), m_R_BCNodeStackTop);
+            return m_R_BCNodeStackBase.size();
+            // return std::distance(m_R_BCNodeStackBase, m_R_BCNodeStackTop);
         }
 
         /** @brief Conduct a const visitor via the NodeStack.
@@ -132,14 +133,15 @@ namespace CXXR
          */
         void visitRoots(GCNode::const_visitor *v);
 
-        std::unique_ptr<node_t[]> m_R_BCNodeStackBase;
+        std::vector<node_t> m_R_BCNodeStackBase;
         node_t *m_R_BCProtTop;
         node_t *m_R_BCNodeStackTop;
         node_t *m_R_BCNodeStackEnd;
         node_t *m_R_BCProtCommitted;
-#define R_BCNodeStackBase ByteCode::s_nodestack->m_R_BCNodeStackBase.get()
+#define R_BCNodeStackBase ByteCode::s_nodestack->m_R_BCNodeStackBase.data()
 #define R_BCProtTop ByteCode::s_nodestack->m_R_BCProtTop
 #define R_BCNodeStackTop ByteCode::s_nodestack->m_R_BCNodeStackTop
+#define R_BCNodeStackTopSize ByteCode::s_nodestack->m_R_BCNodeStackBase.size()
 #define R_BCNodeStackEnd ByteCode::s_nodestack->m_R_BCNodeStackEnd
 #define R_BCProtCommitted ByteCode::s_nodestack->m_R_BCProtCommitted
     };

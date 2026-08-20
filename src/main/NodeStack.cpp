@@ -33,9 +33,9 @@ namespace CXXR
 {
     NodeStack::NodeStack(size_t initial_capacity)
     {
-        CXXR::NodeStack::m_R_BCNodeStackBase = std::make_unique<R_bcstack_t[]>(initial_capacity);
-        m_R_BCNodeStackTop = m_R_BCNodeStackBase.get();
-        m_R_BCNodeStackEnd = m_R_BCNodeStackBase.get() + initial_capacity;
+        CXXR::NodeStack::m_R_BCNodeStackBase.reserve(initial_capacity);
+        m_R_BCNodeStackTop = m_R_BCNodeStackBase.data();
+        m_R_BCNodeStackEnd = m_R_BCNodeStackBase.data() + initial_capacity;
         m_R_BCProtTop = m_R_BCNodeStackTop;
     }
 
@@ -47,7 +47,7 @@ namespace CXXR
 
     void NodeStack::visitRoots(GCNode::const_visitor *v)
     {
-        for (R_bcstack_t *sp = m_R_BCNodeStackBase.get(); sp < m_R_BCNodeStackTop; sp++) {
+        for (R_bcstack_t *sp = m_R_BCNodeStackBase.data(); sp < m_R_BCNodeStackTop; sp++) {
             if (sp->tag == RAWMEM_TAG)
                 sp += sp->u.ival;
             else if ((sp->tag == NILSXP || IS_PARTIAL_SXP_TAG(sp->tag)) && sp->u.sxpval != R_NilValue)
