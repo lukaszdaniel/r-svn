@@ -91,6 +91,14 @@
       \item \command{data()} will accept text files with further
       extension \file{.zst} or \file{.zstd}, and read them on builds
       with \command{zstd} support.
+
+      \code{free1way(, MPL_Jeffreys = TRUE)} implements maximum
+      penalised likelihood estimation with Jeffreys prior for all model
+      parameters simultaneously, along with Wald-type inference.
+
+      \item \code{rfree1way} also accepts \code{offset} terms equal to
+      the number of simulated observations, allowing to sample from more
+      complex models.
     }
   }
 
@@ -266,8 +274,19 @@
 	Chirico}; additionally, some overflow to \code{Inf} times no longer
       result in \code{NA}.
 
-      \item \code{drop1.glm()} misbehaved for models fitted with 
+      \item \code{drop1.glm()} misbehaved for models fitted with
       \code{y = FALSE} (\PR{19128}, \I{Amal Tawfik}).
+
+      \item \code{confint(<free1way>, parm)} returned confidence intervals for
+      all parameters when \code{parm} requested a subset.
+
+      \item \code{summary(<free1way>)} renames p-values to \code{Pr(..)} and
+      thus \code{printCoefmat} recognises them.
+
+      \item \code{strptime(ch, "...\%OS<n>...")} now disregards contiguous
+      digits in "<n>", for symmetry with \code{strftime()}, fulfilling
+      \I{Frederick Eaton}'s wish in \PR{17209}, thanks to a patch by
+      \I{Suharto Anggono}.
     }
   }
 }
