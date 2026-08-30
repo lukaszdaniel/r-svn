@@ -108,6 +108,20 @@ namespace CXXR
         {
         }
 
+        /** @brief Pointer to 'one beyond the end' of the NodeStack.
+         *
+         * @return A pointer to the node_t one beyond the end of
+         * the node stack.  This performs a function similar to
+         * R_BCNodeStackTop in CR.
+         *
+         * @note Used in ByteCode stack.
+         */
+        node_t *end()
+        {
+            // return &(*(m_vector.begin() + m_vector.size()));
+            return m_R_BCNodeStackTop;
+        }
+
         /** @brief Pop pointers from the NodeStack.
          *
          * If this function is executed within a NodeStack::Scope
@@ -137,7 +151,7 @@ namespace CXXR
         void push_node(node_t node)
         {
             node_t *__ntop__ = m_R_BCNodeStackTop + 1;
-            if (__ntop__ > m_R_BCNodeStackEnd) nodeStackOverflow();
+            if (size() + 1 > m_reserved_capacity) nodeStackOverflow();
             __ntop__[-1] = node;
             m_R_BCNodeStackTop = __ntop__;
         }
@@ -154,7 +168,7 @@ namespace CXXR
         {
             // CHECK_SET_BELOW_PROT(m_R_BCNodeStackTop);
             push_node(node_t(NILSXP, node));
-            return std::distance(m_R_BCNodeStackBase.data(), m_R_BCNodeStackTop);
+            return std::distance(m_vector.data(), m_R_BCNodeStackTop);
         }
 
         /** @brief Duplicate first value on the stack.
@@ -190,8 +204,8 @@ namespace CXXR
          */
         size_t size()
         {
-            // return m_R_BCNodeStackBase.size();
-            return std::distance(m_R_BCNodeStackBase.data(), m_R_BCNodeStackTop);
+            // return m_vector.size();
+            return std::distance(m_vector.data(), m_R_BCNodeStackTop);
         }
 
         /** @brief pop and return the top element of the stack.
@@ -228,7 +242,7 @@ namespace CXXR
 
         size_t protectedCount() const
         {
-            return m_R_BCProtCommitted;
+            return m_protected_count;
         }
 
         /** @brief Conduct a const visitor via the NodeStack.
@@ -240,16 +254,24 @@ namespace CXXR
          */
         void visitRoots(GCNode::const_visitor *v);
 
-        std::vector<node_t> m_R_BCNodeStackBase;
-        size_t m_R_BCProtTop;
+        std::vector<node_t> m_vector;
+        size_t m_deferred_protected_count;
         node_t *m_R_BCNodeStackTop;
-        node_t *m_R_BCNodeStackEnd;
-        size_t m_R_BCProtCommitted;
-#define R_BCNodeStackBase ByteCode::s_nodestack->m_R_BCNodeStackBase.data()
-#define R_BCProtTop ByteCode::s_nodestack->m_R_BCProtTop
+        size_t m_reserved_capacity;
+        size_t m_protected_count; // The nodes (if any) pointed to
+                                  // (*m_vector)[0] through (*m_vector)[m_protected_count - 1]
+                                  // will have had their reference counts increased by this
+                                  // class.  Stack entries beyond this (if any) will not yet
+                                  // have had this protection applied.
+#define R_BCNodeStackBase ByteCode::s_nodestack->m_vector.data()
+#define R_BCProtTop ByteCode::s_nodestack->m_deferred_protected_count
+// Note that this macro name uses 'Top' in the sense of the C++ standard
+// library end(), i.e. one past the current top element of the stack,
+// not in the way that CR uses R_BCNodeStackEnd, which relates to the
+// end of allocated storage.
 #define R_BCNodeStackTop ByteCode::s_nodestack->m_R_BCNodeStackTop
-#define R_BCNodeStackEnd ByteCode::s_nodestack->m_R_BCNodeStackEnd
-#define R_BCProtCommitted ByteCode::s_nodestack->m_R_BCProtCommitted
+#define R_BCNodeStackEnd ByteCode::s_nodestack->m_reserved_capacity
+#define R_BCProtCommitted ByteCode::s_nodestack->m_protected_count
 
         NORET static void nodeStackOverflow(void);
     };

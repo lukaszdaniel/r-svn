@@ -33,10 +33,10 @@ namespace CXXR
 {
     NodeStack::NodeStack(size_t initial_capacity)
     {
-        CXXR::NodeStack::m_R_BCNodeStackBase.reserve(initial_capacity);
-        m_R_BCNodeStackTop = m_R_BCNodeStackBase.data();
-        m_R_BCNodeStackEnd = m_R_BCNodeStackBase.data() + initial_capacity;
-        m_R_BCProtTop = 0;
+        CXXR::NodeStack::m_vector.reserve(initial_capacity);
+        m_R_BCNodeStackTop = m_vector.data();
+        m_reserved_capacity = initial_capacity;
+        m_deferred_protected_count = 0;
     }
 
     void NodeStack::pop(unsigned int count)
@@ -46,47 +46,47 @@ namespace CXXR
 
     void NodeStack::protectAll()
     {
-        m_R_BCProtTop = std::distance(m_R_BCNodeStackBase.data(), m_R_BCNodeStackTop);
+        m_deferred_protected_count = std::distance(m_vector.data(), m_R_BCNodeStackTop);
     }
 
     void NodeStack::inclnk_stack(size_t top)
     {
-        m_R_BCProtTop = top;
+        m_deferred_protected_count = top;
     }
 
     void NodeStack::inclnk_stack_commit(void)
     {
-        if (m_R_BCProtCommitted < m_R_BCProtTop) {
-            R_bcstack_t *base = m_R_BCNodeStackBase.data()+m_R_BCProtCommitted;
-            R_bcstack_t *top = m_R_BCNodeStackBase.data()+m_R_BCProtTop;
-            for (R_bcstack_t *p = base; p < top; p++) {
+        if (m_protected_count < m_deferred_protected_count) {
+            node_t *base = m_vector.data() + m_protected_count;
+            node_t *top = m_vector.data() + m_deferred_protected_count;
+            for (node_t *p = base; p < top; p++) {
                 if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
                     p += p->u.ival;
                 else if (p->tag == 0)
                     GCNode::incRefCount(p->u.sxpval);
             }
-            m_R_BCProtCommitted = m_R_BCProtTop;
+            m_protected_count = m_deferred_protected_count;
         }
     }
 
     void NodeStack::declnk_stack(size_t base)
     {
-        if (base < m_R_BCProtCommitted) {
-            R_bcstack_t *top = m_R_BCNodeStackBase.data()+m_R_BCProtCommitted;
-            for (R_bcstack_t *p = m_R_BCNodeStackBase.data()+base; p < top; p++) {
+        if (base < m_protected_count) {
+            node_t *top = m_vector.data() + m_protected_count;
+            for (node_t *p = m_vector.data() + base; p < top; p++) {
                 if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
                     p += p->u.ival;
                 else if (p->tag == 0)
                     GCNode::decRefCount(p->u.sxpval);
             }
-            m_R_BCProtCommitted = base;
+            m_protected_count = base;
         }
-        m_R_BCProtTop = base;
+        m_deferred_protected_count = base;
     }
 
     void NodeStack::visitRoots(GCNode::const_visitor *v)
     {
-        for (R_bcstack_t *sp = m_R_BCNodeStackBase.data(); sp < m_R_BCNodeStackTop; sp++) {
+        for (node_t *sp = m_vector.data(); sp < m_R_BCNodeStackTop; sp++) {
             if (sp->tag == RAWMEM_TAG)
                 sp += sp->u.ival;
             else if ((sp->tag == NILSXP || IS_PARTIAL_SXP_TAG(sp->tag)) && sp->u.sxpval != R_NilValue)

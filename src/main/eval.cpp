@@ -5473,6 +5473,7 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
 #define BCNPUSH_LOGICAL(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(LGLSXP, v)))
 
 #define BCNPUSH_CACHE(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(CACHESZ_TAG, v)))
+#define BCNPUSH_RAWMEM(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(RAWMEM_TAG, v)))
 
 #define BCNDUP() (ByteCode::s_nodestack->push_dup())
 
@@ -5484,7 +5485,7 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
 #define BCNPOP_IGNORE_VALUE() CXXR_POP(1)
 
 #define BCNSTACKCHECK(n)  do {						\
-	if (R_BCNodeStackTop + (n) > R_BCNodeStackEnd) NodeStack::nodeStackOverflow(); \
+	if (R_BCNodeStackTopSize + (n) > R_BCNodeStackEnd) NodeStack::nodeStackOverflow(); \
     } while (0)
 
 /* use a struct to force use of correct accessors */
@@ -5517,9 +5518,7 @@ static R_INLINE void* BCNALLOC(size_t size)
 {
     int nelems = NELEMS_FOR_SIZE(size);
     BCNSTACKCHECK(nelems + 1);
-    R_BCNodeStackTop->tag = RAWMEM_TAG;
-    R_BCNodeStackTop->u.ival = nelems;
-    R_BCNodeStackTop++;
+	BCNPUSH_RAWMEM(nelems);
     void *ans = R_BCNodeStackTop;
     R_BCNodeStackTop += nelems;
     return ans;

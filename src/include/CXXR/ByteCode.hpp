@@ -159,6 +159,11 @@ namespace CXXR
             return s_nodestack->size();
         }
 
+        static R_bcstack_t *nodeStackTop()
+        {
+            return s_nodestack->end();
+        }
+
         static size_t protectedCount()
         {
             return s_nodestack->protectedCount();
