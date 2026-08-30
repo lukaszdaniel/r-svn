@@ -36,13 +36,52 @@ namespace CXXR
         CXXR::NodeStack::m_R_BCNodeStackBase.reserve(initial_capacity);
         m_R_BCNodeStackTop = m_R_BCNodeStackBase.data();
         m_R_BCNodeStackEnd = m_R_BCNodeStackBase.data() + initial_capacity;
-        m_R_BCProtTop = m_R_BCNodeStackTop;
+        m_R_BCProtTop = 0;
+    }
+
+    void NodeStack::pop(unsigned int count)
+    {
+        m_R_BCNodeStackTop -= count;
     }
 
     void NodeStack::protectAll()
     {
-        // R_BCProtTop = R_BCNodeStackTop;
-        m_R_BCProtTop = m_R_BCNodeStackTop;
+        m_R_BCProtTop = std::distance(m_R_BCNodeStackBase.data(), m_R_BCNodeStackTop);
+    }
+
+    void NodeStack::inclnk_stack(size_t top)
+    {
+        m_R_BCProtTop = top;
+    }
+
+    void NodeStack::inclnk_stack_commit(void)
+    {
+        if (m_R_BCProtCommitted < m_R_BCProtTop) {
+            R_bcstack_t *base = m_R_BCNodeStackBase.data()+m_R_BCProtCommitted;
+            R_bcstack_t *top = m_R_BCNodeStackBase.data()+m_R_BCProtTop;
+            for (R_bcstack_t *p = base; p < top; p++) {
+                if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
+                    p += p->u.ival;
+                else if (p->tag == 0)
+                    GCNode::incRefCount(p->u.sxpval);
+            }
+            m_R_BCProtCommitted = m_R_BCProtTop;
+        }
+    }
+
+    void NodeStack::declnk_stack(size_t base)
+    {
+        if (base < m_R_BCProtCommitted) {
+            R_bcstack_t *top = m_R_BCNodeStackBase.data()+m_R_BCProtCommitted;
+            for (R_bcstack_t *p = m_R_BCNodeStackBase.data()+base; p < top; p++) {
+                if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
+                    p += p->u.ival;
+                else if (p->tag == 0)
+                    GCNode::decRefCount(p->u.sxpval);
+            }
+            m_R_BCProtCommitted = base;
+        }
+        m_R_BCProtTop = base;
     }
 
     void NodeStack::visitRoots(GCNode::const_visitor *v)

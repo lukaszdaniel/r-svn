@@ -961,8 +961,8 @@ attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
 	     PRIMNAME(op), save, R_PPStackTop);
 }
 
-
-#define CXXR_POP(n) R_BCNodeStackTop -= (n)
+#define R_BCNodeStackTopSize (ByteCode::nodeStackSize())
+#define CXXR_POP(n) ByteCode::s_nodestack->pop(n)
 
 /*
  * Protecting the Stack During Possibly Mutating Operations
@@ -977,54 +977,34 @@ attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
  * functional style.
  */
 
-static R_INLINE void INCLNK_stack(R_bcstack_t *top)
+void ByteCode::INCLNK_stack(size_t top)
 {
-    R_BCProtTop = top;
+    s_nodestack->inclnk_stack(top);
 }
 
-static R_INLINE void INCLNK_stack_commit(void)
+void ByteCode::INCLNK_stack_commit(void)
 {
-    if (R_BCProtCommitted < R_BCProtTop) {
-	R_bcstack_t *base = R_BCProtCommitted;
-	R_bcstack_t *top = R_BCProtTop;
-	for (R_bcstack_t *p = base; p < top; p++) {
-	    if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
-		p += p->u.ival;
-	    else if (p->tag == 0)
-		INCREMENT_LINKS(p->u.sxpval);
-	}
-	R_BCProtCommitted = R_BCProtTop;
-    }
+	s_nodestack->inclnk_stack_commit();
 }
 
-static R_INLINE void DECLNK_stack(R_bcstack_t *base)
+void ByteCode::DECLNK_stack(size_t base)
 {
-    if (base < R_BCProtCommitted) {
-	R_bcstack_t *top = R_BCProtCommitted;
-	for (R_bcstack_t *p = base; p < top; p++) {
-	    if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
-		p += p->u.ival;
-	    else if (p->tag == 0)
-		DECREMENT_LINKS(p->u.sxpval);
-	}
-	R_BCProtCommitted = base;
-    }
-    R_BCProtTop = base;
+    s_nodestack->declnk_stack(base);
 }
 
-attribute_hidden void R::R_BCProtReset(R_bcstack_t *ptop)
+attribute_hidden void R::R_BCProtReset(size_t ptop)
 {
-    DECLNK_stack(ptop);
+    ByteCode::DECLNK_stack(ptop);
 }
 
 #define INCREMENT_BCSTACK_LINKS() do {			\
-	if (R_BCNodeStackTop > R_BCProtTop)		\
-	    INCLNK_stack(R_BCNodeStackTop);		\
+	if (R_BCNodeStackTopSize > R_BCProtTop)		\
+	    ByteCode::INCLNK_stack(R_BCNodeStackTopSize);	\
     } while (0)
 
 #define DECREMENT_BCSTACK_LINKS(oldptop) do {		\
 	if (R_BCProtTop > (oldptop))			\
-	    DECLNK_stack(oldptop);			\
+	    ByteCode::DECLNK_stack(oldptop);		\
     } while (0)
 
 #define INCREMENT_EVAL_DEPTH() do {		\
@@ -3438,9 +3418,9 @@ static SEXP applydefine(SEXP call, SEXP op, SEXP args, SEXP rho)
 	assignment is right associative i.e.  a <- b <- c is parsed as
 	a <- (b <- c).  */
 
-    R_bcstack_t *old_bcprot_top = R_BCProtTop;
+    size_t old_bcprot_top = R_BCProtTop;
     INCREMENT_BCSTACK_LINKS();
-    INCLNK_stack_commit();
+    ByteCode::INCLNK_stack_commit();
 
     saverhs = rhs = eval(CADR(args), rho);
 #ifdef SWITCH_TO_REFCNT
@@ -4675,7 +4655,7 @@ void R::R_initialize_bcode(void)
   SET_VECTOR_ELT(R_ConstantsRegistry, 0, R_NilValue);
   SET_VECTOR_ELT(R_ConstantsRegistry, 1, R_NilValue);
 
-  R_BCProtCommitted = R_BCNodeStackBase;
+  R_BCProtCommitted = 0;
 }
 
 enum {
@@ -4869,6 +4849,16 @@ static R_INLINE SEXP GETSTACK_PTR_TAG(R_bcstack_t *s)
     s->u.sxpval = value;
     return value;
 }
+
+namespace CXXR
+{
+    RObject *NodeStack::topnpop()
+    {
+        pop();
+
+        return m_R_BCNodeStackTop->tag ? GETSTACK_PTR_TAG(m_R_BCNodeStackTop) : m_R_BCNodeStackTop->u.sxpval;
+    }
+} // namespace CXXR
 
 #define GETSTACK_PTR(s) ((s)->tag ? GETSTACK_PTR_TAG(s) : (s)->u.sxpval)
 
@@ -5470,90 +5460,31 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
     return GETSTACK(offset);
 }
 
-#define BCNPUSH(v) do { \
-  SEXP __value__ = (v); \
-  R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
-  if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
-  SETSTACK(0, __value__); \
-  R_BCNodeStackTop = __ntop__; \
-} while (0)
+#define BCNPUSH_NODE(v) (ByteCode::s_nodestack->push_node(v))
 
-#define BCNPUSH_NODE(v) do { \
-	R_BCNodeStackTop[0] = R_BCNodeStackTop[-1];	\
-	R_BCNodeStackTop++;				\
-} while (0)
+#define BCNPUSH(v) (ByteCode::s_nodestack->push(v))
 
-#define BCNPUSH_NLNK(v) do {			\
-	BCNPUSH(R_NilValue);			\
-	SETSTACK_NLNK(-1, v);			\
-    } while (0)
+#define BCNPUSH_NLNK(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(NLNKSXP, v)))
 
-#define BCNPUSH_REAL(v) do { \
-  double __value__ = (v); \
-  R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
-  if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
-  __ntop__[-1] = R_bcstack_t(REALSXP, __value__); \
-  R_BCNodeStackTop = __ntop__; \
-} while (0)
+#define BCNPUSH_REAL(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(REALSXP, v)))
 
-#define BCNPUSH_INTEGER(v) do { \
-  int __value__ = (v); \
-  R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
-  if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
-  __ntop__[-1] = R_bcstack_t(INTSXP, __value__); \
-  R_BCNodeStackTop = __ntop__; \
-} while (0)
+#define BCNPUSH_INTEGER(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(INTSXP, v)))
 
-#define BCNPUSH_LOGICAL(v) do { \
-  int __value__ = (v); \
-  R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
-  if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
-  __ntop__[-1] = R_bcstack_t(LGLSXP, __value__); \
-  R_BCNodeStackTop = __ntop__; \
-} while (0)
+#define BCNPUSH_LOGICAL(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(LGLSXP, v)))
 
-#define BCNPUSH_CACHE(v) do { \
-  int __value__ = (v); \
-  R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1; \
-  if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow(); \
-  __ntop__[-1] = R_bcstack_t(CACHESZ_TAG, __value__); \
-  R_BCNodeStackTop = __ntop__; \
-} while (0)
+#define BCNPUSH_CACHE(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(CACHESZ_TAG, v)))
 
-#define BCNPUSH_STACKVAL(v) do {				\
-	R_bcstack_t __value__ = (v);				\
-	R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1;		\
-	if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow();	\
-	__ntop__[-1] = __value__;				\
-	R_BCNodeStackTop = __ntop__;				\
-    } while (0)
+#define BCNDUP() (ByteCode::s_nodestack->push_dup())
 
-#define BCNDUP() do {						\
-	R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1;		\
-	if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow();	\
-	__ntop__[-1] = __ntop__[-2];				\
-	R_BCNodeStackTop = __ntop__;				\
-    } while(0)
+#define BCNDUP2ND() (ByteCode::s_nodestack->push_dup2nd())
 
-#define BCNDUP2ND() do {					\
-	R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1;		\
-	if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow();	\
-	__ntop__[-1] = __ntop__[-3];				\
-	R_BCNodeStackTop = __ntop__;				\
-    } while(0)
+#define BCNDUP3RD() (ByteCode::s_nodestack->push_dup3rd())
 
-#define BCNDUP3RD() do {					\
-	R_bcstack_t *__ntop__ = R_BCNodeStackTop + 1;		\
-	if (__ntop__ > R_BCNodeStackEnd) nodeStackOverflow();	\
-	__ntop__[-1] = __ntop__[-4];				\
-	R_BCNodeStackTop = __ntop__;				\
-    } while(0)
-
-#define BCNPOP() (CXXR_POP(1), GETSTACK(0))
+#define BCNPOP() (ByteCode::s_nodestack->topnpop())
 #define BCNPOP_IGNORE_VALUE() CXXR_POP(1)
 
 #define BCNSTACKCHECK(n)  do {						\
-	if (R_BCNodeStackTop + (n) > R_BCNodeStackEnd) nodeStackOverflow(); \
+	if (R_BCNodeStackTop + (n) > R_BCNodeStackEnd) NodeStack::nodeStackOverflow(); \
     } while (0)
 
 /* use a struct to force use of correct accessors */
@@ -5570,7 +5501,7 @@ struct R_bcconsts_t
 #define BCCONSTS_LEN(e) XLENGTH(BCODE_CONSTS(e))
 #define GETCONST(x, i) ((x).p)[i]
 
-NORET static void nodeStackOverflow(void)
+NORET void NodeStack::nodeStackOverflow(void)
 {
     /* condition is pre-allocated and protected with R_PreserveObject */
     GCStackRoot<> cond;
@@ -6936,7 +6867,7 @@ typedef struct {
 #define INSERT_FOR_LOOP_BCPROT_OFFSET() do {				\
 	/* insert space for the BCProt offset below the sequence */	\
 	BCNSTACKCHECK(1);						\
-	BCNPUSH_NODE(R_BCNodeStackTop[-1]);				\
+	BCNDUP();							\
 	SETSTACK_INTEGER(-2, 0);					\
     } while (0)
 
@@ -7258,7 +7189,7 @@ attribute_hidden bool R::R_BCVersionOK(SEXP s)
 }
 
 struct bcEval_globals {
-    R_bcstack_t *oldntop;
+    size_t oldntop;
     bool oldbcintactive;
     SEXP oldbcbody;
     void *oldbcpc;
@@ -7267,14 +7198,14 @@ struct bcEval_globals {
 #ifdef BC_PROFILING
     int old_current_opcode;
 #endif
-    R_bcstack_t *old_bcprot_top;
-    R_bcstack_t *old_bcprot_committed; // **** not sure this is really needed
+    size_t old_bcprot_top;
+    size_t old_bcprot_committed; // **** not sure this is really needed
     int oldevdepth;
 };
 
 static R_INLINE void save_bcEval_globals(struct bcEval_globals *g)
 {
-    g->oldntop = R_BCNodeStackTop;
+    g->oldntop = R_BCNodeStackTopSize;
     g->oldbcintactive = Evaluator::bcActive();
     g->oldbcbody = R_BCbody;
     g->oldbcpc = R_BCpc;
@@ -7291,11 +7222,11 @@ static R_INLINE void save_bcEval_globals(struct bcEval_globals *g)
 
 static R_INLINE void restore_bcEval_globals(struct bcEval_globals *g)
 {
-    R_BCNodeStackTop = R_BCProtTop;
+    R_BCNodeStackTop = R_BCNodeStackBase + R_BCProtTop;
     DECREMENT_BCSTACK_LINKS(g->old_bcprot_top);
     StackChecker::setDepth(g->oldevdepth);
     R_BCProtCommitted = g->old_bcprot_committed;
-    R_BCNodeStackTop = g->oldntop;
+    R_BCNodeStackTop = R_BCNodeStackBase + g->oldntop;
     Evaluator::enableBCActive(g->oldbcintactive);
     R_BCbody = g->oldbcbody;
     R_BCpc = g->oldbcpc;
@@ -7351,7 +7282,7 @@ struct CXXR::R_bcFrame {
 /* Allocate activation frame for inline calls on the node stack */
 static R_INLINE R_bcFrame_type *PUSH_BCFRAME()
 {
-    R_bcstack_t *oldtop = R_BCNodeStackTop;
+    size_t oldtop = R_BCNodeStackTopSize;
     R_bcFrame_type *rec = (R_bcFrame_type *) BCNALLOC(sizeof(R_bcFrame_type));
     save_bcEval_globals(&(rec->globals));
     /* modify saved stack top to the value before pushing the frame */
@@ -7392,7 +7323,7 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
 # ifdef CACHE_ON_STACK
     /* initialize binding cache on the stack */
     BCNSTACKCHECK(n + 1);
-    BCNPUSH_CACHE(n);
+    BCNPUSH_CACHE(int(n));
     vcache = R_BCNodeStackTop;
     while (n > 0) {
 	BCNPUSH_NLNK(R_NilValue);
@@ -7406,7 +7337,6 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
     }
     else smallcache = false;
 #endif
-    // R_BCProtTop = R_BCNodeStackTop;
     ByteCode::protectAll();
 
     return vcache_info(vcache, smallcache);
@@ -7447,7 +7377,7 @@ static R_INLINE void finish_force_promise(void)
 {
     SEXP prom = BCFRAME_PROMISE();
     R_bcstack_t ubval = POP_BCFRAME();
-    BCNPUSH_STACKVAL(ubval); /* push early to protect */
+    BCNPUSH_NODE(ubval); /* push early to protect */
     SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval);
     SET_PRSEEN(prom, DEFAULT);
     SET_PRENV(prom, R_NilValue);
@@ -7622,8 +7552,8 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	}
 	/* the seq, binding cell, and value on the stack are now boxed */
 
-	SET_FOR_LOOP_BCPROT_OFFSET(R_BCProtTop - R_BCNodeStackBase);
-	INCLNK_stack(R_BCNodeStackTop);
+	SET_FOR_LOOP_BCPROT_OFFSET(R_BCProtTop);
+	INCLNK_stack(R_BCNodeStackTopSize);
 
 	BC_CHECK_SIGINT();
 	pc = codebase + label;
@@ -7739,7 +7669,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
     OP(ENDFOR, 0):
       {
 	size_t offset = GET_FOR_LOOP_BCPROT_OFFSET();
-	DECLNK_stack(R_BCNodeStackBase + offset);
+	DECLNK_stack(offset);
 	SEXP seq = GET_FOR_LOOP_SEQ();
 	DECREMENT_LINKS(seq);
 	CXXR_POP(FOR_LOOP_STATE_SIZE - 1);
@@ -8606,16 +8536,15 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
       NEXT();
     OP(INCLNKSTK, 0):
       {
-	  int offset = (int)(R_BCProtTop - R_BCNodeStackBase);
-	  INCLNK_stack(R_BCNodeStackTop);
+	  int offset = int(R_BCProtTop);
+	  INCLNK_stack(R_BCNodeStackTopSize);
 	  BCNPUSH_INTEGER(offset);
 	  NEXT();
       }
     OP(DECLNKSTK, 0):
       {
-	  int offset = GETSTACK_IVAL_PTR(R_BCNodeStackTop - 2);
-	  R_bcstack_t *ptop = R_BCNodeStackBase + offset;
-	  DECLNK_stack(ptop);
+	  size_t offset = GETSTACK_IVAL_PTR(R_BCNodeStackTop - 2);
+	  DECLNK_stack(offset);
 	  R_BCNodeStackTop[-2] = R_BCNodeStackTop[-1];
 	  CXXR_POP(1);
 	  NEXT();

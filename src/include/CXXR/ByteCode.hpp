@@ -150,9 +150,18 @@ namespace CXXR
         // Virtual functions of RObject:
         const char *typeName() const override;
 
+        static void INCLNK_stack_commit();
+        static void DECLNK_stack(size_t base);
+        static void INCLNK_stack(size_t top);
+
         static size_t nodeStackSize()
         {
             return s_nodestack->size();
+        }
+
+        static size_t protectedCount()
+        {
+            return s_nodestack->protectedCount();
         }
 
         // Initialize static data (called by InitMemory()):

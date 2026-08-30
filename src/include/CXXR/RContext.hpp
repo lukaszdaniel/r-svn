@@ -170,7 +170,7 @@ namespace CXXR
         GCRoot<> handlerstack; /* condition handler stack */
         GCRoot<> restartstack; /* stack of available restarts */
         R_bcstack_t *nodestack;
-        R_bcstack_t *bcprottop;
+        size_t bcprottop;
         R_bcFrame_type *bcframe;
         GCRoot<> srcref;         /* The source line in effect */
         bool browserfinish;       /* should browser finish this context without

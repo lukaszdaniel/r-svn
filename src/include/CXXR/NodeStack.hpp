@@ -34,6 +34,7 @@
 #include <iterator> // for std::distance
 #include <CXXR/RTypes.hpp>
 #include <CXXR/RObject.hpp>
+#include <R_ext/Error.h> // for NORET
 
 namespace CXXR
 {
@@ -107,6 +108,21 @@ namespace CXXR
         {
         }
 
+        /** @brief Pop pointers from the NodeStack.
+         *
+         * If this function is executed within a NodeStack::Scope
+         * pertaining to this NodeStack, the number of elements popped
+         * must balance a corresponding number of push() operations
+         * previously executed within the innermost such scope.  This
+         * is checked unless the class is compiled with NDEBUG.
+         *
+         * @param count Number of cells to be popped.  Must not be
+         *          larger than the current size of the C pointer
+         *          protection stack (checked unless compiled with
+         *          NDEBUG).
+         */
+        void pop(unsigned int count = 1);
+
         /** @brief Ensure GC protection of all nodes.
          *
          * This function ensures that all RObjects pointed to from the
@@ -114,14 +130,105 @@ namespace CXXR
          */
         void protectAll();
 
+        /** @brief Push a node_t object onto the stack.
+         *
+         * @param node node_t object.
+         */
+        void push_node(node_t node)
+        {
+            node_t *__ntop__ = m_R_BCNodeStackTop + 1;
+            if (__ntop__ > m_R_BCNodeStackEnd) nodeStackOverflow();
+            __ntop__[-1] = node;
+            m_R_BCNodeStackTop = __ntop__;
+        }
+
+        /** @brief Push a node pointer onto the NodeStack.
+         *
+         * @param node Pointer, possibly null, to the node to be
+         *          pushed onto the NodeStack.
+         *
+         * @return Index of the stack cell thus created, counting from
+         *         zero.
+         */
+        size_t push(RObject *node)
+        {
+            // CHECK_SET_BELOW_PROT(m_R_BCNodeStackTop);
+            push_node(node_t(NILSXP, node));
+            return std::distance(m_R_BCNodeStackBase.data(), m_R_BCNodeStackTop);
+        }
+
+        /** @brief Duplicate first value on the stack.
+         *
+         * @note Used in ByteCode stack.
+         */
+        void push_dup()
+        {
+            push_node(m_R_BCNodeStackTop[-1]);
+        }
+
+        /** @brief Duplicate second value on the stack.
+         *
+         * @note Used in ByteCode stack.
+         */
+        void push_dup2nd()
+        {
+            push_node(m_R_BCNodeStackTop[-2]);
+        }
+
+        /** @brief Duplicate third value on the stack.
+         *
+         * @note Used in ByteCode stack.
+         */
+        void push_dup3rd()
+        {
+            push_node(m_R_BCNodeStackTop[-3]);
+        }
+
         /** @brief Current size of NodeStack.
          *
          * @return the number of pointers currently on the NodeStack.
          */
-        size_t size() const
+        size_t size()
         {
-            return m_R_BCNodeStackBase.size();
-            // return std::distance(m_R_BCNodeStackBase, m_R_BCNodeStackTop);
+            // return m_R_BCNodeStackBase.size();
+            return std::distance(m_R_BCNodeStackBase.data(), m_R_BCNodeStackTop);
+        }
+
+        /** @brief pop and return the top element of the stack.
+         *
+         * The stack must not be empty; this is checked unless the
+         * class is compiled with NDEBUG.
+         *
+         * @return the pointer previously at the top of the stack.
+         */
+        RObject *topnpop();
+
+        /** @brief Set the new value for protection top.
+         *
+         * @param top New value for protection top.
+         *
+         * @note This function increases ref count up to protection top.
+         *
+         * @note Used in ByteCode stack.
+         */
+        void inclnk_stack(size_t top);
+        void inclnk_stack_commit(void);
+
+        /** @brief Decrease ref count for pending objects.
+         *
+         * @param base Value from which decrease of ref count
+         * should start.
+         *
+         * @note This function decreases ref count from base up to
+         * committed protection.
+         *
+         * @note Used in ByteCode stack.
+         */
+        void declnk_stack(size_t base);
+
+        size_t protectedCount() const
+        {
+            return m_R_BCProtCommitted;
         }
 
         /** @brief Conduct a const visitor via the NodeStack.
@@ -134,16 +241,17 @@ namespace CXXR
         void visitRoots(GCNode::const_visitor *v);
 
         std::vector<node_t> m_R_BCNodeStackBase;
-        node_t *m_R_BCProtTop;
+        size_t m_R_BCProtTop;
         node_t *m_R_BCNodeStackTop;
         node_t *m_R_BCNodeStackEnd;
-        node_t *m_R_BCProtCommitted;
+        size_t m_R_BCProtCommitted;
 #define R_BCNodeStackBase ByteCode::s_nodestack->m_R_BCNodeStackBase.data()
 #define R_BCProtTop ByteCode::s_nodestack->m_R_BCProtTop
 #define R_BCNodeStackTop ByteCode::s_nodestack->m_R_BCNodeStackTop
-#define R_BCNodeStackTopSize ByteCode::s_nodestack->m_R_BCNodeStackBase.size()
 #define R_BCNodeStackEnd ByteCode::s_nodestack->m_R_BCNodeStackEnd
 #define R_BCProtCommitted ByteCode::s_nodestack->m_R_BCProtCommitted
+
+        NORET static void nodeStackOverflow(void);
     };
 
     using R_bcstack_t = NodeStack::node_t;
@@ -169,7 +277,7 @@ inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
 
 namespace R
 {
-    void R_BCProtReset(CXXR::R_bcstack_t *);
+    void R_BCProtReset(size_t ptop);
 }
 
 #endif // NODESTACK_HPP
