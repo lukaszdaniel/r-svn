@@ -36,6 +36,7 @@ namespace CXXR
         CXXR::NodeStack::m_vector.reserve(initial_capacity);
         m_R_BCNodeStackTop = m_vector.data();
         m_reserved_capacity = initial_capacity;
+        m_protected_count = 0;
         m_deferred_protected_count = 0;
     }
 
@@ -47,6 +48,28 @@ namespace CXXR
     void NodeStack::protectAll()
     {
         m_deferred_protected_count = std::distance(m_vector.data(), m_R_BCNodeStackTop);
+    }
+
+    void NodeStack::retarget(RObject *node, size_t index)
+    {
+        retarget(node_t(0, node), index);
+    }
+
+    void NodeStack::retarget(node_t node, size_t index)
+    {
+#ifndef NDEBUG
+        if (index >= m_vector.size())
+            throw std::out_of_range("NodeStack::retarget(): index out of range.");
+#endif
+        if (index < m_protected_count)
+        {
+#ifdef TESTING_WRITE_BARRIER
+            Rf_warning("changing stack value below current protected count");
+#endif
+            retarget_aux(m_vector[index], node);
+        }
+
+        m_vector[index] = node;
     }
 
     void NodeStack::inclnk_stack(size_t top)
@@ -71,9 +94,12 @@ namespace CXXR
 
     void NodeStack::declnk_stack(size_t base)
     {
-        if (base < m_protected_count) {
-            node_t *top = m_vector.data() + m_protected_count;
-            for (node_t *p = m_vector.data() + base; p < top; p++) {
+        if (base < m_protected_count)
+        {
+            std::vector<node_t>::iterator start = m_vector.begin() + std::ptrdiff_t(base);
+            std::vector<node_t>::iterator end = m_vector.begin() + std::ptrdiff_t(m_protected_count);
+            for (std::vector<node_t>::iterator p = start; p != end; ++p)
+            {
                 if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
                     p += p->u.ival;
                 else if (p->tag == 0)
@@ -82,6 +108,28 @@ namespace CXXR
             m_protected_count = base;
         }
         m_deferred_protected_count = base;
+    }
+
+    void NodeStack::retarget_aux(node_t oldnode, node_t newnode)
+    {
+        if (newnode.tag == 0)
+            GCNode::incRefCount(newnode.u.sxpval);
+        if (oldnode.tag == 0)
+            GCNode::decRefCount(oldnode.u.sxpval);
+    }
+
+    void NodeStack::resize_aux(size_t new_size)
+    {
+        m_vector.resize(m_protected_count);
+        while (m_vector.size() > new_size)
+        {
+            node_t node = m_vector.back();
+            if (node.tag == 0)
+                GCNode::decRefCount(node.u.sxpval);
+            m_vector.pop_back();
+        }
+        m_protected_count = new_size;
+        m_deferred_protected_count = new_size;
     }
 
     void NodeStack::visitRoots(GCNode::const_visitor *v)

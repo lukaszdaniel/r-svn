@@ -984,7 +984,7 @@ void ByteCode::INCLNK_stack(size_t top)
 
 void ByteCode::INCLNK_stack_commit(void)
 {
-	s_nodestack->inclnk_stack_commit();
+    s_nodestack->inclnk_stack_commit();
 }
 
 void ByteCode::DECLNK_stack(size_t base)
@@ -4655,7 +4655,7 @@ void R::R_initialize_bcode(void)
   SET_VECTOR_ELT(R_ConstantsRegistry, 0, R_NilValue);
   SET_VECTOR_ELT(R_ConstantsRegistry, 1, R_NilValue);
 
-  R_BCProtCommitted = 0;
+  // R_BCProtCommitted = 0;
 }
 
 enum {
@@ -4876,7 +4876,7 @@ namespace CXXR
 
 #ifdef TESTING_WRITE_BARRIER
 # define CHECK_SET_BELOW_PROT(s)					\
-    if ((s) < R_BCProtTop) error("%s", _("changing stack value below R_BCProt pointer"))
+    if ((s) < R_BCProtTop) error("%s", _("changing stack value below current protected count"))
 #else
 # define CHECK_SET_BELOW_PROT(s) do { } while (0)
 #endif
@@ -5518,7 +5518,7 @@ static R_INLINE void* BCNALLOC(size_t size)
 {
     int nelems = NELEMS_FOR_SIZE(size);
     BCNSTACKCHECK(nelems + 1);
-	BCNPUSH_RAWMEM(nelems);
+    BCNPUSH_RAWMEM(nelems);
     void *ans = R_BCNodeStackTop;
     R_BCNodeStackTop += nelems;
     return ans;

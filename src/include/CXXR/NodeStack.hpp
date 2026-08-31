@@ -106,6 +106,7 @@ namespace CXXR
 
         ~NodeStack()
         {
+            resize(0);
         }
 
         /** @brief Pointer to 'one beyond the end' of the NodeStack.
@@ -198,6 +199,46 @@ namespace CXXR
             push_node(m_R_BCNodeStackTop[-3]);
         }
 
+        /** @brief Change the target of a pointer on the PPS.
+         *
+         * Change the node that a particular cell in the C pointer
+         * protection stack protects.  As a consistency check, it is
+         * required that the retarget takes place within the same
+         * NodeStack::Scope as the corresponding protect.
+         *
+         * @param node Pointer to the node now to be protected from
+         *          the garbage collector by the designated stack
+         *          cell.  (Not necessarily a different node from the
+         *          one currently protected.)
+         *
+         * @param index Index (as returned by protect() ) of the stack
+         *          cell to be retargeted to node.  Must be less than
+         *          the current size of the C pointer protection
+         *          stack (checked).
+         */
+        void retarget(node_t node, size_t index);
+        void retarget(RObject *node, size_t index);
+
+        /** @brief Modify size of NodeStack.
+         *
+         * @param new_size The required size.  If larger than the
+         *          current size, the added cells will contain null
+         *          pointers.  If smaller than the current size, then
+         *          pointers are popped off the NodeStack to bring its
+         *          size down to \a new_size.
+         */
+        void resize(size_t new_size)
+        {
+            if (new_size >= m_protected_count)
+            {
+                m_vector.resize(new_size, node_t());
+                if (new_size < m_deferred_protected_count)
+                    m_deferred_protected_count = new_size;
+            }
+            else
+                resize_aux(new_size);
+        }
+
         /** @brief Current size of NodeStack.
          *
          * @return the number of pointers currently on the NodeStack.
@@ -245,6 +286,11 @@ namespace CXXR
             return m_protected_count;
         }
 
+        size_t deferredprotectedCount() const
+        {
+            return m_deferred_protected_count;
+        }
+
         /** @brief Conduct a const visitor via the NodeStack.
          *
          * Conduct a GCNode::const_visitor object to each node_t
@@ -263,8 +309,18 @@ namespace CXXR
                                   // will have had their reference counts increased by this
                                   // class.  Stack entries beyond this (if any) will not yet
                                   // have had this protection applied.
+
+        // Helper function for retarget(), handling the case where
+        // 'index' is within the protected range:
+        static void retarget_aux(node_t oldnode, node_t newnode)
+            HOT_FUNCTION;
+
+        // Helper function for trim(), handling the case where the trim
+        // cuts down into protected nodes:
+        void resize_aux(size_t new_size) HOT_FUNCTION;
+
 #define R_BCNodeStackBase ByteCode::s_nodestack->m_vector.data()
-#define R_BCProtTop ByteCode::s_nodestack->m_deferred_protected_count
+#define R_BCProtTop ByteCode::deferredprotectedCount()
 // Note that this macro name uses 'Top' in the sense of the C++ standard
 // library end(), i.e. one past the current top element of the stack,
 // not in the way that CR uses R_BCNodeStackEnd, which relates to the

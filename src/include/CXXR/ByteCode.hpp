@@ -169,6 +169,11 @@ namespace CXXR
             return s_nodestack->protectedCount();
         }
 
+        static size_t deferredprotectedCount()
+        {
+            return s_nodestack->deferredprotectedCount();
+        }
+
         // Initialize static data (called by InitMemory()):
         static void initialize();
 
