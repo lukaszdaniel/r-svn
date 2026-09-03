@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:56\n"
+"POT-Creation-Date: 2026-09-03 17:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -418,13 +418,6 @@ msgid "'subject' is missing"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
-#. R/unix/mac.install.R: gettextf("'tar' returned non-zero exit code %d", xcode)
-
-msgid "'tar' returned non-zero exit code %d"
-msgstr ""
-
-
 #: R/tar.R: 0
 #. R/tar.R: stop("'tarfile' must be a character string or a connection")
 
@@ -520,8 +513,8 @@ msgid "Browsing in the environment with call:"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
-#. R/unix/mac.install.R: stop("Built: value is not a string")
+#: R/install.bin.R: 0
+#. R/install.bin.R: stop("Built: value is not a string")
 
 msgid "Built: value is not a string"
 msgstr ""
@@ -613,18 +606,18 @@ msgid "Dropping invalid entry %d:\n%s"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
+#: R/install.bin.R: 0
 #: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
+#. R/install.bin.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
 #. R/windows/install.packages.R: gettextf("ERROR: failed to create lock directory %s", sQuote(lockdir))
 
 msgid "ERROR: failed to create lock directory %s"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
+#: R/install.bin.R: 0
 #: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
+#. R/install.bin.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
 #. R/windows/install.packages.R: gettextf("ERROR: failed to lock directory %s for modifying\nTry removing %s",     sQuote(lib), sQuote(lockdir))
 
 msgid "ERROR: failed to lock directory %s for modifying\nTry removing %s"
@@ -968,9 +961,9 @@ msgid "The 'flesh' argument does not contain a skeleton attribute."
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
+#: R/install.bin.R: 0
 #: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("The downloaded binary packages are in\n\t%s", tmpd)
+#. R/install.bin.R: gettextf("The downloaded binary packages are in\n\t%s", tmpd)
 #. R/windows/install.packages.R: gettextf("The downloaded binary packages are in\n\t%s", normalizePath(tmpd,     mustWork = FALSE))
 
 msgid "The downloaded binary packages are in\n\t%s"
@@ -1134,8 +1127,8 @@ msgid "Using the first match ..."
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
-#. R/unix/mac.install.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkgname))
+#: R/install.bin.R: 0
+#. R/install.bin.R: gettextf("Valid signature is required, but package %s could not be successfully verified.",     sQuote(pkgname))
 
 msgid "Valid signature is required, but package %s could not be successfully verified."
 msgstr ""
@@ -1260,8 +1253,8 @@ msgid "attempt to set '%s' ignored"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
-#. R/unix/mac.install.R: gettextf("binary package %s is not compatible with this build of R",     sQuote(pkg))
+#: R/install.bin.R: 0
+#. R/install.bin.R: gettextf("binary package %s is not compatible with this build of R",     sQuote(pkg))
 
 msgid "binary package %s is not compatible with this build of R"
 msgstr ""
@@ -1372,9 +1365,9 @@ msgid "cannot install binary packages from other operating systems on Windows"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
+#: R/install.bin.R: 0
 #: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
+#. R/install.bin.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("cannot remove prior installation of package %s", sQuote(pkgname))
 
 msgid "cannot remove prior installation of package %s"
@@ -1608,8 +1601,8 @@ msgid "failed to download mirrors file (%s); using local file '%s'"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
-#. R/unix/mac.install.R: gettextf("file %s is not a binary package", sQuote(pkg))
+#: R/install.bin.R: 0
+#. R/install.bin.R: gettextf("file %s is not a binary package", sQuote(pkg))
 
 msgid "file %s is not a binary package"
 msgstr ""
@@ -2351,17 +2344,17 @@ msgid "package %s has no %s file: only auto-generation is possible"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
-#. R/unix/mac.install.R: gettextf("package %s signature verified (%s %s)", sQuote(pkgname),     info$fingerprint, info$userid)
+#: R/install.bin.R: 0
+#. R/install.bin.R: gettextf("package %s signature verified (%s %s)", sQuote(pkgname),     info$fingerprint, info$userid)
 
 msgid "package %s signature verified (%s %s)"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
+#: R/install.bin.R: 0
 #: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "SHA256")
-#. R/unix/mac.install.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "MD5")
+#. R/install.bin.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "SHA256")
+#. R/install.bin.R: gettextf("package %s successfully unpacked and %s sums checked",     sQuote(pkgname), "MD5")
 #. R/windows/install.packages.R: gettextf("package %s successfully unpacked and %s sums checked\n",     sQuote(pkgname), "MD5")
 
 msgid "package %s successfully unpacked and %s sums checked"
@@ -2473,9 +2466,9 @@ msgid "removing leading '/' from '%s'"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
+#: R/install.bin.R: 0
 #: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("restored %s", sQuote(pkgname))
+#. R/install.bin.R: gettextf("restored %s", sQuote(pkgname))
 #. R/windows/install.packages.R: gettextf("restored %s", sQuote(pkgname))
 
 msgid "restored %s"
@@ -2697,13 +2690,13 @@ msgid "unable to create %s"
 msgstr ""
 
 
+#: R/install.bin.R: 0
 #: R/packages2.R: 0
-#: R/unix/mac.install.R: 0
 #: R/windows/install.packages.R: 0
+#. R/install.bin.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
+#. R/install.bin.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
 #. R/packages2.R: gettextf("unable to create temporary directory %s", sQuote(tmpd2))
-#. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpDir))
-#. R/unix/mac.install.R: gettextf("unable to create temporary directory %s", sQuote(tmpd))
 #. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpDir,     mustWork = FALSE)))
 #. R/windows/install.packages.R: gettextf("unable to create temporary directory %s", sQuote(normalizePath(tmpd,     mustWork = FALSE)))
 
@@ -2718,9 +2711,9 @@ msgid "unable to install packages"
 msgstr ""
 
 
-#: R/unix/mac.install.R: 0
+#: R/install.bin.R: 0
 #: R/windows/install.packages.R: 0
-#. R/unix/mac.install.R: gettextf("unable to move temporary installation %s to %s", sQuote(file.path(tmpDir,     pkgname)), sQuote(instPath))
+#. R/install.bin.R: gettextf("unable to move temporary installation %s to %s", sQuote(file.path(tmpDir,     pkgname)), sQuote(instPath))
 #. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(file.path(tmpDir,     pkgname, "libs", sub), mustWork = FALSE)), sQuote(normalizePath(file.path(instPath,     "libs"), mustWork = FALSE)))
 #. R/windows/install.packages.R: gettextf("unable to move temporary installation %s to %s", sQuote(normalizePath(tmpInstPath,     mustWork = FALSE)), sQuote(normalizePath(instPath, mustWork = FALSE)))
 
@@ -2764,16 +2757,16 @@ msgstr ""
 
 
 #: R/SweaveDrivers.R: 0
-#. R/SweaveDrivers.R: warning("value of 'results' option should be lowercase", call. = FALSE)
+#. R/SweaveDrivers.R: warning("value of option 'results' should be lowercase", call. = FALSE)
 
-msgid "value of 'results' option should be lowercase"
+msgid "value of option 'results' should be lowercase"
 msgstr ""
 
 
 #: R/SweaveDrivers.R: 0
-#. R/SweaveDrivers.R: warning("value of 'strip.white' option should be lowercase",     call. = FALSE)
+#. R/SweaveDrivers.R: warning("value of option 'strip.white' should be lowercase",     call. = FALSE)
 
-msgid "value of 'strip.white' option should be lowercase"
+msgid "value of option 'strip.white' should be lowercase"
 msgstr ""
 
 

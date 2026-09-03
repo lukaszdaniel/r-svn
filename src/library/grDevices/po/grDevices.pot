@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 17:26+0200\n"
+"POT-Creation-Date: 2026-09-03 17:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -169,7 +169,7 @@ msgstr ""
 msgid "unknown AFM entity encountered"
 msgstr ""
 
-#: devPS.cpp:769 devPS.cpp:772 devPS.cpp:4750 devPS.cpp:9329 devPicTeX.cpp:482
+#: devPS.cpp:769 devPS.cpp:772 devPS.cpp:4750 devPS.cpp:9330 devPicTeX.cpp:482
 #: devPicTeX.cpp:484
 #, c-format
 msgid "invalid string in '%s'"
@@ -285,11 +285,11 @@ msgstr ""
 msgid "object '.ps.prolog' is not a character vector"
 msgstr ""
 
-#: devPS.cpp:2765 devPS.cpp:7452 devWindows.cpp:802
+#: devPS.cpp:2765 devPS.cpp:7453 devWindows.cpp:802
 msgid "invalid line end"
 msgstr ""
 
-#: devPS.cpp:2784 devPS.cpp:7472 devWindows.cpp:815
+#: devPS.cpp:2784 devPS.cpp:7473 devWindows.cpp:815
 msgid "invalid line join"
 msgstr ""
 
@@ -297,8 +297,8 @@ msgstr ""
 msgid "invalid line mitre"
 msgstr ""
 
-#: devPS.cpp:2994 devPS.cpp:3932 devPS.cpp:4376 devPS.cpp:4403 devPS.cpp:9132
-#: devPS.cpp:9203
+#: devPS.cpp:2994 devPS.cpp:3932 devPS.cpp:4376 devPS.cpp:4403 devPS.cpp:9133
+#: devPS.cpp:9204
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr ""
@@ -324,7 +324,7 @@ msgstr ""
 msgid "failed to load encoding file in %s()"
 msgstr ""
 
-#: devPS.cpp:3314 devPS.cpp:3377 devPS.cpp:6987 devPS.cpp:7043 devPS.cpp:8931
+#: devPS.cpp:3314 devPS.cpp:3377 devPS.cpp:6987 devPS.cpp:7043 devPS.cpp:8932
 msgid "invalid font type"
 msgstr ""
 
@@ -348,12 +348,12 @@ msgstr ""
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr ""
 
-#: devPS.cpp:3482
+#: devPS.cpp:3483
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr ""
 
-#: devPS.cpp:3611 devWindows.cpp:2341
+#: devPS.cpp:3612 devWindows.cpp:2341
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -361,10 +361,10 @@ msgstr ""
 
 #: devPS.cpp:3723 devPS.cpp:3735
 #, c-format
-msgid "cannot open 'postscript' pipe to '%s'"
+msgid "cannot open 'postscript' pipe to '%s' (reason: %s)"
 msgstr ""
 
-#: devPS.cpp:3746 devPS.cpp:8193 qdPDF.cpp:101
+#: devPS.cpp:3746 devPS.cpp:8194 qdPDF.cpp:101
 #, c-format
 msgid "cannot open file '%s'"
 msgstr ""
@@ -421,7 +421,7 @@ msgstr ""
 msgid "failed open converter to encoding '%s'"
 msgstr ""
 
-#: devPS.cpp:4736 devPS.cpp:9304
+#: devPS.cpp:4736 devPS.cpp:9305
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr ""
@@ -492,7 +492,7 @@ msgstr ""
 msgid "internal error %d in '%s'"
 msgstr ""
 
-#: devPS.cpp:6679 devPS.cpp:6723 devPS.cpp:8254
+#: devPS.cpp:6679 devPS.cpp:6723 devPS.cpp:8255
 msgid "write failed"
 msgstr ""
 
@@ -540,107 +540,107 @@ msgstr ""
 msgid "failed to allocate definitions"
 msgstr ""
 
-#: devPS.cpp:7170
+#: devPS.cpp:7171
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr ""
 
-#: devPS.cpp:7194
+#: devPS.cpp:7195
 msgid "invalid foreground/background color (pdf)"
 msgstr ""
 
-#: devPS.cpp:7301
+#: devPS.cpp:7302
 msgid "increasing the PDF version to 1.4"
 msgstr ""
 
-#: devPS.cpp:7345 devPS.cpp:7393
+#: devPS.cpp:7346 devPS.cpp:7394
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr ""
 
-#: devPS.cpp:7616
+#: devPS.cpp:7617
 msgid "failed to load sRGB colorspace file"
 msgstr ""
 
-#: devPS.cpp:7892 devPS.cpp:7917 devPS.cpp:8270 devPS.cpp:8313
+#: devPS.cpp:7893 devPS.cpp:7918 devPS.cpp:8271 devPS.cpp:8314
 msgid "unable to increase object limit: please shutdown the pdf device"
 msgstr ""
 
-#: devPS.cpp:7953
+#: devPS.cpp:7954
 msgid "corrupt encodings in PDF device"
 msgstr ""
 
-#: devPS.cpp:8034
+#: devPS.cpp:8035
 msgid "increasing the PDF version to 1.3"
 msgstr ""
 
-#: devPS.cpp:8146
+#: devPS.cpp:8147
 msgid "write error"
 msgstr ""
 
 #: devPS.cpp:8177
 #, c-format
-msgid "cannot open 'pdf' pipe to '%s'"
+msgid "cannot open 'pdf' pipe to '%s' (reason: %s)"
 msgstr ""
 
-#: devPS.cpp:8183
+#: devPS.cpp:8184
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr ""
 
-#: devPS.cpp:8244
+#: devPS.cpp:8245
 msgid "internal read error in PDF_endpage"
 msgstr ""
 
-#: devPS.cpp:8250
+#: devPS.cpp:8251
 #, c-format
 msgid "internal compression error %d in PDF_endpage"
 msgstr ""
 
-#: devPS.cpp:8305
+#: devPS.cpp:8306
 msgid "unable to increase page limit: please shutdown the pdf device"
 msgstr ""
 
-#: devPS.cpp:8327
+#: devPS.cpp:8328
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
 "  please shut down the PDF device"
 msgstr ""
 
-#: devPS.cpp:8348
+#: devPS.cpp:8349
 #, c-format
 msgid ""
 "Cannot open temporary file '%s' for compression (reason: %s); compression "
 "has been turned off for this device"
 msgstr ""
 
-#: devPS.cpp:8956 devPS.cpp:9461 devPS.cpp:9507
+#: devPS.cpp:8957 devPS.cpp:9462 devPS.cpp:9508
 msgid "failed to find or load PDF font"
 msgstr ""
 
-#: devPS.cpp:9139 devPS.cpp:9198
+#: devPS.cpp:9140 devPS.cpp:9199
 msgid "Text not added to path containing other drawing"
 msgstr ""
 
-#: devPS.cpp:9248 devPS.cpp:9416
+#: devPS.cpp:9249 devPS.cpp:9417
 msgid "failed to find or load PDF CID font"
 msgstr ""
 
-#: devPS.cpp:9910 devPicTeX.cpp:767
+#: devPS.cpp:9911 devPicTeX.cpp:767
 #, c-format
 msgid "invalid 'file' parameter in %s"
 msgstr ""
 
-#: devPS.cpp:9919 devPS.cpp:9923 devPS.cpp:10013 devPS.cpp:10017
+#: devPS.cpp:9920 devPS.cpp:9924 devPS.cpp:10014 devPS.cpp:10018
 #, c-format
 msgid "invalid 'family' parameter in %s"
 msgstr ""
 
-#: devPS.cpp:9939 devPS.cpp:10029
+#: devPS.cpp:9940 devPS.cpp:10030
 #, c-format
 msgid "invalid 'fonts' parameter in %s"
 msgstr ""
 
-#: devPS.cpp:9955 devPS.cpp:10053 devPicTeX.cpp:779 devPicTeX.cpp:784
+#: devPS.cpp:9956 devPS.cpp:10054 devPicTeX.cpp:779 devPicTeX.cpp:784
 #: devWindows.cpp:3824
 #, c-format
 msgid "unable to start %s() device"
@@ -765,40 +765,40 @@ msgstr ""
 msgid "no font could be found for family \"%s\""
 msgstr ""
 
-#: devQuartz.cpp:1987
+#: devQuartz.cpp:2006
 msgid "allocation failure in text2unichar"
 msgstr ""
 
-#: devQuartz.cpp:2017 devQuartz.cpp:2019
+#: devQuartz.cpp:2036 devQuartz.cpp:2038
 msgid "allocation failure in RQuartz_StrWidth"
 msgstr ""
 
-#: devQuartz.cpp:2062 devQuartz.cpp:2065 devQuartz.cpp:2067 devQuartz.cpp:2086
+#: devQuartz.cpp:2081 devQuartz.cpp:2084 devQuartz.cpp:2086 devQuartz.cpp:2105
 msgid "allocation failure in RQuartz_Text"
 msgstr ""
 
-#: devQuartz.cpp:2764 cairo/cairoFns.cpp:523
+#: devQuartz.cpp:2831 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2784 cairo/cairoFns.cpp:536
+#: devQuartz.cpp:2851 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr ""
 
-#: devQuartz.cpp:2834 cairo/cairoFns.cpp:679
+#: devQuartz.cpp:2901 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr ""
 
-#: devQuartz.cpp:3191
+#: devQuartz.cpp:3258
 #, c-format
 msgid "Invalid font path: \"%s\""
 msgstr ""
 
-#: devQuartz.cpp:3234
+#: devQuartz.cpp:3301
 msgid "failed to load font"
 msgstr ""
 
-#: devQuartz.cpp:3326 devQuartz.cpp:3331 cairo/cairoBM.cpp:605
+#: devQuartz.cpp:3393 devQuartz.cpp:3398 cairo/cairoBM.cpp:605
 #: cairo/cairoBM.cpp:608 cairo/cairoBM.cpp:612 cairo/cairoBM.cpp:616
 #: cairo/cairoBM.cpp:620 cairo/cairoBM.cpp:624 cairo/cairoBM.cpp:635
 #: cairo/cairoBM.cpp:640 cairo/cairoBM.cpp:643 cairo/cairoBM.cpp:647
@@ -807,20 +807,20 @@ msgstr ""
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: devQuartz.cpp:3358
+#: devQuartz.cpp:3425
 msgid "invalid quartz() device size"
 msgstr ""
 
-#: devQuartz.cpp:3386
+#: devQuartz.cpp:3453
 msgid "unable to create device description"
 msgstr ""
 
-#: devQuartz.cpp:3435
+#: devQuartz.cpp:3502
 msgid ""
 "unable to create quartz() device target, given type may not be supported"
 msgstr ""
 
-#: devQuartz.cpp:3568
+#: devQuartz.cpp:3635
 msgid "Quartz device is not available on this platform"
 msgstr ""
 

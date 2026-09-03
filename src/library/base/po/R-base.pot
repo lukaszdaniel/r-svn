@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 16:55\n"
+"POT-Creation-Date: 2026-09-03 17:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,7 +167,6 @@ msgstr ""
 
 #: R/RNG.R: 0
 #. R/RNG.R: gettextf("'%s' is not a valid choice", normal.kind)
-#. R/RNG.R: gettextf("'%s' is not a valid choice", sample.kind)
 
 msgid "'%s' is not a valid choice"
 msgstr ""
@@ -191,6 +190,15 @@ msgstr ""
 #. R/factor.R: sprintf("'%s' is not meaningful for ordered factors", .Generic)
 
 msgid "'%s' is not meaningful for ordered factors"
+msgstr ""
+
+
+#: R/RNG.R: 0
+#. R/RNG.R: gettextf("'%s' is not valid for '%s'", normal.kind, "normal.kind")
+#. R/RNG.R: gettextf("'%s' is not valid for '%s'", sample.kind, "sample.kind")
+#. R/RNG.R: gettextf("'%s' is not valid for '%s'", binom.kind, "binom.kind")
+
+msgid "'%s' is not valid for '%s'"
 msgstr ""
 
 
@@ -241,6 +249,7 @@ msgstr ""
 #: R/format.R: 0
 #. R/RNG.R: gettextf("'%s' must be a character string", "normal.kind")
 #. R/RNG.R: gettextf("'%s' must be a character string", "sample.kind")
+#. R/RNG.R: gettextf("'%s' must be a character string", "binom.kind")
 #. R/connections.R: gettextf("'%s' must be a character string", "name")
 #. R/format.R: gettextf("'%s' must be a character string", "flag")
 
@@ -1475,6 +1484,13 @@ msgstr ""
 #. R/interaction.R: stop("No factors specified")
 
 msgid "No factors specified"
+msgstr ""
+
+
+#: R/funprog.R: 0
+#. R/funprog.R: stop("No functions specified")
+
+msgid "No functions specified"
 msgstr ""
 
 
@@ -3627,6 +3643,13 @@ msgid "this is the \"qr\" method for the generic function solve()"
 msgstr ""
 
 
+#: R/datetime.R: 0
+#. R/datetime.R: sQuote("timedatectl")
+
+msgid "timedatectl"
+msgstr ""
+
+
 #: R/qr.R: 0
 #. R/qr.R: stop("too large a matrix for LINPACK")
 
@@ -3670,6 +3693,7 @@ msgstr ""
 
 
 #: R/datetime.R: 0
+#. R/datetime.R: message("unable to deduce timezone name from ", sQuote("timedatectl"))
 #. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
 
 msgid "unable to deduce timezone name from"

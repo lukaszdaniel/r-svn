@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-07-25 10:38\n"
+"POT-Creation-Date: 2026-09-03 17:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1842,13 +1842,6 @@ msgid "0s in V(mu)"
 msgstr ""
 
 
-#: R/nls.R: 0
-#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
-
-msgid ": not reordering to match"
-msgstr ""
-
-
 #: R/add.R: 0
 #. R/add.R: stop("AIC is -infinity for this model, so 'step' cannot proceed")
 
@@ -1946,13 +1939,6 @@ msgstr ""
 #. R/nls.R: gettextf("Initializing %s to '1.'.", paste(sQuote(nnn), collapse = ", "))
 
 msgid "Initializing %s to '1.'."
-msgstr ""
-
-
-#: R/free1way.R: 0
-#. R/free1way.R: gettextf("Jeffreys penalisation was applied in %s because initial optimisation failed with:",     "free1way")
-
-msgid "Jeffreys penalisation was applied in %s because initial optimisation failed with:"
 msgstr ""
 
 
@@ -2326,13 +2312,6 @@ msgstr ""
 #. R/dist.R: stop("ambiguous distance method")
 
 msgid "ambiguous distance method"
-msgstr ""
-
-
-#: R/nls.R: 0
-#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
-
-msgid "and"
 msgstr ""
 
 
@@ -2834,6 +2813,13 @@ msgid "computation of exact probability failed, returning Monte Carlo approximat
 msgstr ""
 
 
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("computing Newton updated failed in %s", ".NewtonRaphson")
+
+msgid "computing Newton updated failed in %s"
+msgstr ""
+
+
 #: R/contrast.R: 0
 #. R/contrast.R: stop("contrasts apply only to factors")
 
@@ -2970,9 +2956,9 @@ msgstr ""
 
 
 #: R/nls.R: 0
-#. R/nls.R: warning("different names for ", sQuote("start"), " and ", sQuote(w),     ": not reordering to match")
+#. R/nls.R: gettextf("different names for %s and %s: names ignored", sQuote("start"),     sQuote(w))
 
-msgid "different names for"
+msgid "different names for %s and %s: names ignored"
 msgstr ""
 
 
@@ -2995,6 +2981,13 @@ msgstr ""
 #. R/cmdscale.R: stop("distances must be result of 'dist' or a square matrix")
 
 msgid "distances must be result of 'dist' or a square matrix"
+msgstr ""
+
+
+#: R/nls.R: 0
+#. R/nls.R: gettextf("duplicated names in %s", sQuote(w))
+
+msgid "duplicated names in %s"
 msgstr ""
 
 
@@ -3088,6 +3081,13 @@ msgstr ""
 #. R/ARMAtheory.R: stop("empty model supplied")
 
 msgid "empty model supplied"
+msgstr ""
+
+
+#: R/free1way.R: 0
+#. R/free1way.R: gettextf("error computing the Hessian determinant in %s", "free1way")
+
+msgid "error computing the Hessian determinant in %s"
 msgstr ""
 
 
@@ -3576,9 +3576,11 @@ msgstr ""
 
 #: R/free1way.R: 0
 #. R/free1way.R: gettextf("invalid argument '%s'", "x")
+#. R/free1way.R: gettextf("invalid argument '%s'", "MPL_Jeffreys")
 #. R/free1way.R: gettextf("invalid argument '%s'", "fix")
 #. R/free1way.R: gettextf("invalid argument '%s'", "alloc_ratio")
 #. R/free1way.R: gettextf("invalid argument '%s'", "strata_ratio")
+#. R/free1way.R: gettextf("invalid argument '%s'", "offset")
 #. R/free1way.R: gettextf("invalid argument '%s'", "n")
 #. R/free1way.R: gettextf("invalid argument '%s'", "c")
 #. R/free1way.R: gettextf("invalid argument '%s'", "r")
@@ -3949,6 +3951,13 @@ msgstr ""
 #. R/ppr.R: stop("mismatched 'x' and 'y'")
 
 msgid "mismatched 'x' and 'y'"
+msgstr ""
+
+
+#: R/nls.R: 0
+#. R/nls.R: gettextf("mismatched names for %s and %s", sQuote("start"), sQuote(w))
+
+msgid "mismatched names for %s and %s"
 msgstr ""
 
 
@@ -5392,13 +5401,6 @@ msgid "spline: first and last y values differ - using y[1] for both"
 msgstr ""
 
 
-#: R/nls.R: 0
-#. R/nls.R: sQuote("start")
-
-msgid "start"
-msgstr ""
-
-
 #: R/glm.R: 0
 #. R/glm.R: warning("step size truncated due to divergence", call. = FALSE)
 
@@ -6258,6 +6260,13 @@ msgstr ""
 #. R/cov.wt.R: stop("weights must be non-negative and not all zero")
 
 msgid "weights must be non-negative and not all zero"
+msgstr ""
+
+
+#: R/lm.R: 0
+#. R/lm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
+
+msgid "weights smaller than tolerance wtol*sum(w) = %g treated as zero"
 msgstr ""
 
 

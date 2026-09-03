@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-07-25 10:38\n"
+"POT-Creation-Date: 2026-09-03 17:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,13 +84,6 @@ msgstr ""
 #. R/sha256.R: stop("'bytes' must be a raw vector")
 
 msgid "'bytes' must be a raw vector"
-msgstr ""
-
-
-#: R/apitools.R: 0
-#. R/apitools.R: stop("'cc' is not on the path")
-
-msgid "'cc' is not on the path"
 msgstr ""
 
 
@@ -219,6 +212,13 @@ msgstr ""
 #. R/checktools.R: stop("'reverse$repos' should be a subset of getOption(\"repos\")")
 
 msgid "'reverse$repos' should be a subset of getOption(\"repos\")"
+msgstr ""
+
+
+#: R/mailtools.R: 0
+#. R/mailtools.R: stop("'subject' is missing")
+
+msgid "'subject' is missing"
 msgstr ""
 
 
@@ -1671,6 +1671,20 @@ msgid "See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
 msgstr ""
 
 
+#: R/mailtools.R: 0
+#. R/mailtools.R: sprintf("Sending email failed!\nThe unsent msg can be found in file %s.",     sQuote(filename))
+
+msgid "Sending email failed!\nThe unsent msg can be found in file %s."
+msgstr ""
+
+
+#: R/mailtools.R: 0
+#. R/mailtools.R: sprintf("Sending email to %s", address)
+
+msgid "Sending email to %s"
+msgstr ""
+
+
 #: R/sign.R: 0
 #. R/sign.R: stop("Signing failed: ", sfe)
 
@@ -2522,6 +2536,13 @@ msgstr ""
 #. R/Rd2ex.R: warning("more than one \\examples section, using the first")
 
 msgid "more than one \\examples section, using the first"
+msgstr ""
+
+
+#: R/mailtools.R: 0
+#. R/mailtools.R: stop("must specify 'address'")
+
+msgid "must specify 'address'"
 msgstr ""
 
 

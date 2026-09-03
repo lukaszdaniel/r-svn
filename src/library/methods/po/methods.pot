@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28+0100\n"
+"POT-Creation-Date: 2026-09-03 17:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,217 +25,217 @@ msgstr ""
 msgid "invalid list for substitution"
 msgstr ""
 
-#: methods_list_dispatch.cpp:140
+#: methods_list_dispatch.cpp:137
 #, c-format
 msgid "unexpected type '%s' for condition message"
 msgstr ""
 
-#: methods_list_dispatch.cpp:143
+#: methods_list_dispatch.cpp:140
 msgid "condition message must be length 1"
 msgstr ""
 
-#: methods_list_dispatch.cpp:224
+#: methods_list_dispatch.cpp:221
 msgid ""
 "could not find the skeleton calls for 'methods' (package detached?): expect "
 "very bad things to happen"
 msgstr ""
 
-#: methods_list_dispatch.cpp:285
+#: methods_list_dispatch.cpp:284
 #, c-format
 msgid ""
 "no \"allMethods\" slot found in object of class \"%s\" used as methods list "
 "for function '%s'"
 msgstr ""
 
-#: methods_list_dispatch.cpp:413
+#: methods_list_dispatch.cpp:412
 #, c-format
 msgid ""
 "S language method selection did not return normally when called from "
 "internal dispatch for function '%s'"
 msgstr ""
 
-#: methods_list_dispatch.cpp:415
+#: methods_list_dispatch.cpp:414
 msgid "Function name for method selection called internally"
 msgstr ""
 
-#: methods_list_dispatch.cpp:472 methods_list_dispatch.cpp:493
+#: methods_list_dispatch.cpp:471 methods_list_dispatch.cpp:492
 msgid "The \"package\" slot in generic function object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:505
+#: methods_list_dispatch.cpp:504
 msgid "The argument \"f\" to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:506
+#: methods_list_dispatch.cpp:505
 msgid "The argument \"package\" to getGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:511
+#: methods_list_dispatch.cpp:510
 #, c-format
 msgid "no generic function definition found for '%s'"
 msgstr ""
 
-#: methods_list_dispatch.cpp:512
+#: methods_list_dispatch.cpp:511
 #, c-format
 msgid ""
 "no generic function definition found for '%s' in the supplied environment"
 msgstr ""
 
-#: methods_list_dispatch.cpp:533
+#: methods_list_dispatch.cpp:532
 msgid "The function name in the call to standardGeneric"
 msgstr ""
 
-#: methods_list_dispatch.cpp:547
+#: methods_list_dispatch.cpp:546
 #, c-format
 msgid ""
 "invalid generic function object for method selection for function '%s': "
 "expected a function or a primitive, got an object of class \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:562
+#: methods_list_dispatch.cpp:561
 #, c-format
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:591 methods_list_dispatch.cpp:1166
+#: methods_list_dispatch.cpp:590 methods_list_dispatch.cpp:1165
 msgid "invalid object (non-function) used as method"
 msgstr ""
 
-#: methods_list_dispatch.cpp:607
+#: methods_list_dispatch.cpp:606
 msgid "'symbol' must be a SYMSXP"
 msgstr ""
 
-#: methods_list_dispatch.cpp:610
+#: methods_list_dispatch.cpp:609
 #, c-format
 msgid "could not find symbol '%s' in frame of call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:618
+#: methods_list_dispatch.cpp:617
 #, c-format
 msgid ""
 "invalid symbol in checking for missing argument in method dispatch: expected "
 "a name, got an object of class \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:621
+#: methods_list_dispatch.cpp:620
 msgid "use of NULL environment is defunct"
 msgstr ""
 
-#: methods_list_dispatch.cpp:625
+#: methods_list_dispatch.cpp:624
 #, c-format
 msgid ""
 "invalid environment in checking for missing argument, '%s', in methods "
 "dispatch: got an object of class \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:648
+#: methods_list_dispatch.cpp:647
 #, c-format
 msgid ""
 "error in evaluating the argument '%s' in selecting a method for function "
 "'%s': %s"
 msgstr ""
 
-#: methods_list_dispatch.cpp:665
+#: methods_list_dispatch.cpp:664
 #, c-format
 msgid ""
 "object of class \"%s\" used as methods list for function '%s' ( no "
 "'argument' slot)"
 msgstr ""
 
-#: methods_list_dispatch.cpp:676
+#: methods_list_dispatch.cpp:675
 #, c-format
 msgid ""
 "(in selecting a method for function '%s') '...' and related variables cannot "
 "be used for methods dispatch"
 msgstr ""
 
-#: methods_list_dispatch.cpp:679
+#: methods_list_dispatch.cpp:678
 #, c-format
 msgid ""
 "(in selecting a method for function '%s') the 'environment' argument for "
 "dispatch must be an R environment; got an object of class \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:710
+#: methods_list_dispatch.cpp:709
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr ""
 
-#: methods_list_dispatch.cpp:717
+#: methods_list_dispatch.cpp:716
 #, c-format
 msgid ""
 "recursive use of function '%s' in method selection, with no default method"
 msgstr ""
 
-#: methods_list_dispatch.cpp:742
+#: methods_list_dispatch.cpp:741
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr ""
 
-#: methods_list_dispatch.cpp:765
+#: methods_list_dispatch.cpp:764
 msgid ""
 "internal error in 'callNextMethod': '.nextMethod' was not assigned in the "
 "frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:772
+#: methods_list_dispatch.cpp:771
 msgid ""
 "internal error in 'callNextMethod': '.Generic' was not assigned in the frame "
 "of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:897
+#: methods_list_dispatch.cpp:896
 #, c-format
 msgid "%s must be a single string (got a character vector of length %d)"
 msgstr ""
 
-#: methods_list_dispatch.cpp:901
+#: methods_list_dispatch.cpp:900
 #, c-format
 msgid "%s must be a non-empty string; got an empty string"
 msgstr ""
 
-#: methods_list_dispatch.cpp:905
+#: methods_list_dispatch.cpp:904
 #, c-format
 msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr ""
 
-#: methods_list_dispatch.cpp:939
+#: methods_list_dispatch.cpp:938
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:941
+#: methods_list_dispatch.cpp:940
 msgid ""
 "The name of the object (e.g,. a class or generic function) to find in the "
 "meta-data"
 msgstr ""
 
-#: methods_list_dispatch.cpp:943
+#: methods_list_dispatch.cpp:942
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:990
+#: methods_list_dispatch.cpp:989
 msgid "class should be either a character-string name or a class definition"
 msgstr ""
 
-#: methods_list_dispatch.cpp:1077
+#: methods_list_dispatch.cpp:1076
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:1084
+#: methods_list_dispatch.cpp:1083
 #, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
 "class \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:1096
+#: methods_list_dispatch.cpp:1095
 msgid ""
 "generic seems not to have been initialized for table dispatch---need to have "
 "'.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.cpp:1100
+#: methods_list_dispatch.cpp:1099
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

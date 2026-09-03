@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4-3-BRANCH\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 17:26+0200\n"
+"POT-Creation-Date: 2026-09-03 17:38+0200\n"
 "PO-Revision-Date: 2025-07-06 15:32+0200\n"
 "Last-Translator: Daniele Medri <dmedri@gmail.com>\n"
 "Language-Team: Italian https://github.com/dmedri/R-italian-lang\n"
@@ -19,357 +19,275 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: axis_scales.cpp:43 axis_scales.cpp:44 axis_scales.cpp:56
 #, c-format
 msgid "'%s' must be numeric of length %d"
 msgstr "'%s' dev'essere un numerico di lunghezza %d"
 
-#: clippath.cpp:37
 msgid "Clipping path ignored (device is appending path)"
 msgstr "Tracciato di ritaglio ignorato (il dispositivo sta aggiungendo il percorso)"
 
-#: colors.cpp:74
 #, c-format
 msgid "color intensity %s, not in [0,1]"
 msgstr "intensità colore %s, non in [0,1]"
 
-#: colors.cpp:76
 #, c-format
 msgid "color intensity %g, not in [0,1]"
 msgstr "intensità colore %g, non in [0,1]"
 
-#: colors.cpp:83
 #, c-format
 msgid "color intensity %s, not in 0:255"
 msgstr "intensità colore %s, non in 0:255"
 
-#: colors.cpp:85
 #, c-format
 msgid "color intensity %d, not in 0:255"
 msgstr "intensità colore %d, non in 0:255"
 
-#: colors.cpp:92
 #, c-format
 msgid "alpha level %s, not in [0,1]"
 msgstr "livello alpha %s, non in [0,1]"
 
-#: colors.cpp:94
 #, c-format
 msgid "alpha level %g, not in [0,1]"
 msgstr "livello alpha %g, non in [0,1]"
 
-#: colors.cpp:101
 #, c-format
 msgid "alpha level %s, not in 0:255"
 msgstr "livello alpha %s, non in 0:255"
 
-#: colors.cpp:103
 #, c-format
 msgid "alpha level %d, not in 0:255"
 msgstr "livello alpha %d, non in 0:255"
 
-#: colors.cpp:118
 msgid "inputs must be finite"
 msgstr "i valori di input devono essere finiti"
 
-#: colors.cpp:133
 msgid "bad hsv to rgb color conversion"
 msgstr "conversione colore da hsv a rgb errata"
 
-#: colors.cpp:225 colors.cpp:239
 msgid "invalid hsv color"
 msgstr "colore hsv non valido"
 
-#: colors.cpp:349 colors.cpp:369
 msgid "invalid hcl color"
 msgstr "colore hcl non valido"
 
-#: colors.cpp:401 devWindows.cpp:3744 devWindows.cpp:3752 devWindows.cpp:3767
-#: devWindows.cpp:3774 devWindows.cpp:3783 cairo/cairoBM.cpp:628
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valore '%s' non valido"
 
-#: colors.cpp:429
 msgid "invalid 'names' vector"
 msgstr "vettore 'names' non valido"
 
-#: colors.cpp:494 colors.cpp:503
 msgid "invalid gray level, must be in [0,1]."
 msgstr "livello di grigio non valido, dev'essere in [0,1]."
 
-#: colors.cpp:525
 msgid "rgb is not a matrix (internally)"
 msgstr ""
 
-#: colors.cpp:527
 msgid "rgb must have 3 rows (internally)"
 msgstr ""
 
-#: colors.cpp:1344
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr "cifre esadecimali non valide in 'color' o 'lty'"
 
-#: colors.cpp:1354 colors.cpp:1372
 msgid "invalid RGB specification"
 msgstr "specificazione RGB non valida"
 
-#: colors.cpp:1408
 #, c-format
 msgid "invalid color name '%s'"
 msgstr "nome colore '%s' non valido"
 
-#: colors.cpp:1458 colors.cpp:1467
 #, c-format
 msgid "invalid color specification \"%s\""
 msgstr "specificazione colore \"%s\" non valida"
 
-#: colors.cpp:1495
 msgid "supplied color is neither numeric nor character"
 msgstr "il colore passato non è ne di tipo numeric ne character"
 
-#: colors.cpp:1499
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr "i valori numerici del colore devono essere >= 0, trovato %d"
 
-#: colors.cpp:1510
 msgid "invalid argument type"
 msgstr "tipo argomento non valido"
 
-#: colors.cpp:1521
 msgid "unknown palette (need >= 2 colors)"
 msgstr "palette sconosciuta (richiede >= 2 colori)"
 
-#: colors.cpp:1525 colors.cpp:1547
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr "numero massimo di colori è %d"
 
-#: colors.cpp:1545
 msgid "requires INTSXP argument"
 msgstr ""
 
-#: devCairo.cpp:50 devCairo.cpp:61
 #, fuzzy
 msgid "failed to load cairo DLL"
 msgstr "allocazione lista font fallita"
 
-#: devPS.cpp:587
 #, c-format
 msgid "afm file '%s' could not be opened"
 msgstr "il file afm '%s' non può essere aperto"
 
-#: devPS.cpp:617
 #, fuzzy
 msgid "'FontBBox' could not be parsed"
 msgstr "il file afm '%s' non può essere aperto"
 
-#: devPS.cpp:625
 #, fuzzy
 msgid "'CharInfo' could not be parsed"
 msgstr "il file afm '%s' non può essere aperto"
 
-#: devPS.cpp:655
 msgid "unknown AFM entity encountered"
 msgstr "entità AFM sconosciuta"
 
-#: devPS.cpp:769 devPS.cpp:772 devPS.cpp:4750 devPS.cpp:9329 devPicTeX.cpp:482
-#: devPicTeX.cpp:484
 #, c-format
 msgid "invalid string in '%s'"
 msgstr "stringa in '%s' non valida"
 
-#: devPS.cpp:806
 #, fuzzy, c-format
 msgid "font width unknown for character 0x%02x in encoding %s"
 msgstr "larghezza sconosciuta per il carattere 0x%x"
 
-#: devPS.cpp:865
 #, fuzzy, c-format
 msgid "font metrics unknown for Unicode character U+%04X"
 msgstr "metrica font sconosciuta per carattere Unicode U+%04x"
 
-#: devPS.cpp:876
 #, c-format
 msgid "unknown encoding '%s' in 'PostScriptMetricInfo'"
 msgstr "codifica sconosciuta '%s' in 'PostScriptMetricInfo'"
 
-#: devPS.cpp:893
 #, c-format
 msgid "Unicode character %lc (U+%04X) cannot be converted"
 msgstr ""
 
-#: devPS.cpp:912 devPS.cpp:966
 #, fuzzy, c-format
 msgid "font metrics unknown for character 0x%02x in encoding %s"
 msgstr "metrica carattere sconosciuta per carattere 0x%x"
 
-#: devPS.cpp:980
 #, fuzzy, c-format
 msgid "invalid character (%04X) sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
 msgstr "carattere non valido (%04x) inviato a 'PostScriptCIDMetricInfo' in una localizzazione single-byte"
 
-#: devPS.cpp:988
 msgid "invalid character sent to 'PostScriptCIDMetricInfo' in a single-byte locale"
 msgstr "carattere non valido inviato a 'PostScriptCIDMetricInfo' in una localizzazione single-byte"
 
-#: devPS.cpp:1100
 msgid "failed to allocate CID font info"
 msgstr "allocazione font CID fallita"
 
-#: devPS.cpp:1116
 msgid "failed to allocate Type 1 font info"
 msgstr "allocazione font Type 1 fallita"
 
-#: devPS.cpp:1136
 msgid "failed to allocate encoding info"
 msgstr "allocazione informazioni encoding fallita"
 
-#: devPS.cpp:1153
 msgid "failed to allocate CID font family"
 msgstr "allocazione famiglia font CID fallita"
 
-#: devPS.cpp:1165
 msgid "failed to allocate Type 1 font family"
 msgstr "allocazione famiglia font Type 1 fallita"
 
-#: devPS.cpp:1202 devPS.cpp:1213
 msgid "failed to allocate font list"
 msgstr "allocazione lista font fallita"
 
-#: devPS.cpp:1264
 msgid "failed to allocated encoding list"
 msgstr "allocazione lista encodings fallita"
 
-#: devPS.cpp:1411
 msgid "truncated string which was too long for copy"
 msgstr "stringa troncata perché troppo lunga da copiare"
 
-#: devPS.cpp:1451
 #, c-format
 msgid "failed to load encoding file '%s'"
 msgstr "caricamento fallito del file codifica '%s'"
 
-#: devPS.cpp:1549 devPS.cpp:1583
 msgid "invalid font name or more than one font name"
 msgstr "nome carattere non valido o più nomi caratteri"
 
-#: devPS.cpp:1706 devPS.cpp:1740
 #, c-format
 msgid "font family '%s' not found in PostScript font database"
 msgstr "famiglia di caratteri '%s' non trovata nel database dei caratteri Postscript"
 
-#: devPS.cpp:1824 devPS.cpp:1905 devPS.cpp:1932
 #, c-format
 msgid "font encoding for family '%s' not found in font database"
 msgstr "codifica caratteri per la famiglia '%s' non trovata nel database dei caratteri"
 
-#: devPS.cpp:1851 devPS.cpp:1878
 #, c-format
 msgid "font CMap for family '%s' not found in font database"
 msgstr "carattere CMap per la famiglia '%s' non trovato nel database dei caratteri"
 
-#: devPS.cpp:2070 devPS.cpp:2149 devPS.cpp:2215
 #, c-format
 msgid "cannot load afm file '%s'"
 msgstr "non posso leggere file afm '%s'"
 
-#: devPS.cpp:2503
 msgid "corrupt loaded encodings;  encoding not recorded"
 msgstr "caricate codifiche corrotte;  codifica non registrata"
 
-#: devPS.cpp:2514
 msgid "failed to record device encoding"
 msgstr "registrazione codifica del dispositivo fallita"
 
-#: devPS.cpp:2686
 msgid "object '.ps.prolog' is not a character vector"
 msgstr "l'oggetto '.ps.prolog' non è un vettore di caratteri"
 
-#: devPS.cpp:2765 devPS.cpp:7452 devWindows.cpp:802
 msgid "invalid line end"
 msgstr "fine linea non valido"
 
-#: devPS.cpp:2784 devPS.cpp:7472 devWindows.cpp:815
 msgid "invalid line join"
 msgstr "linea unione non valida"
 
-#: devPS.cpp:2792
 msgid "invalid line mitre"
 msgstr "linea mitra non valida"
 
-#: devPS.cpp:2994 devPS.cpp:3932 devPS.cpp:4376 devPS.cpp:4403 devPS.cpp:9132
-#: devPS.cpp:9203
 #, c-format
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr "utilizzo del carattere %d non valido sostituito con il carattere 1"
 
-#: devPS.cpp:3231 devPS.cpp:6855 devWindows.cpp:1809 devWindows.cpp:1846
-#: devWindows.cpp:1876 devWindows.cpp:1908
 #, fuzzy, c-format
 msgid "filename too long in '%s' call"
 msgstr "nome file troppo lungo in %s()"
 
-#: devPS.cpp:3237 devPS.cpp:6861
 #, c-format
 msgid "memory allocation problem in %s()"
 msgstr "problema di allocazione memoria in %s()"
 
-#: devPS.cpp:3255 devPS.cpp:6928
 #, c-format
 msgid "encoding path is too long in %s()"
 msgstr "percorso di codifica troppo lungo in %s()"
 
-#: devPS.cpp:3269
 #, c-format
 msgid "failed to load encoding file in %s()"
 msgstr "caricamento fallito del file codifica in %s()"
 
-#: devPS.cpp:3314 devPS.cpp:3377 devPS.cpp:6987 devPS.cpp:7043 devPS.cpp:8931
 msgid "invalid font type"
 msgstr "tipo carattere non valido"
 
-#: devPS.cpp:3338
 msgid "failed to initialise default PostScript font"
 msgstr "inizializzazione fallita per il carattere predefinito PostScript"
 
-#: devPS.cpp:3404
 msgid "failed to initialise additional PostScript fonts"
 msgstr "inizializzazione fallita per caratteri aggiuntivi PostScript"
 
-#: devPS.cpp:3420
 msgid "invalid foreground/background color (postscript)"
 msgstr "colore primo piano/sfondo non valido (postscript)"
 
-#: devPS.cpp:3425
 msgid "'command' is too long"
 msgstr "'command' è troppo lungo"
 
-#: devPS.cpp:3430
 msgid "'postscript(print.it=TRUE)' used with an empty 'print' command"
 msgstr "'postscript(print.it=TRUE)' utilizzato con un comando vuoto 'print'"
 
-#: devPS.cpp:3482
 #, c-format
 msgid "invalid page type '%s' (postscript)"
 msgstr "tipo pagina '%s' non valido (postscript)"
 
-#: devPS.cpp:3611 devWindows.cpp:2341
 msgid "semi-transparency is not supported on this device: reported only once per page"
 msgstr "la semi-trasparenza non è supportata su questo dispositivo: segnalato una volta sola per pagina"
 
-#: devPS.cpp:3723 devPS.cpp:3735
-#, c-format
-msgid "cannot open 'postscript' pipe to '%s'"
+#, fuzzy, c-format
+msgid "cannot open 'postscript' pipe to '%s' (reason: %s)"
 msgstr "non posso aprire pipe 'postscript' su '%s'"
 
-#: devPS.cpp:3746 devPS.cpp:8193 qdPDF.cpp:101
 #, c-format
 msgid "cannot open file '%s'"
 msgstr "non è possibile aprire il file '%s'"
 
-#: devPS.cpp:3874 devPS.cpp:3889
 #, c-format
 msgid ""
 "error from postscript() in running:\n"
@@ -378,233 +296,180 @@ msgstr ""
 "errore esecuzione postscript() in:\n"
 "    %s"
 
-#: devPS.cpp:3920
 #, c-format
 msgid "CID family '%s' not included in postscript() device"
 msgstr "CID famiglia '%s' non inclusa nel dispositivo postscript()"
 
-#: devPS.cpp:3938 devPS.cpp:3949 devPS.cpp:4383 devPS.cpp:4413 devPS.cpp:4689
 #, c-format
 msgid "family '%s' not included in postscript() device"
 msgstr "famiglia '%s' non inclusa nel dispositivo postscript()"
 
-#: devPS.cpp:4488
 #, c-format
 msgid "unknown encoding '%s' in 'mbcsToSbcs'"
 msgstr "codifica sconosciuta '%s' in 'mbcsToSbcs'"
 
-#: devPS.cpp:4613 devPS.cpp:4615
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for %s (U+%04X)"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4618
 #, fuzzy, c-format
 msgid "for '%s' in 'mbcsToSbcs': %s substituted for %s (U+%04X)"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4624 devPS.cpp:4631
 #, fuzzy, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': for <%02x>"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4626 devPS.cpp:4633
 #, c-format
 msgid "conversion failure on '%s' in 'mbcsToSbcs': dot substituted for <%02x>"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4645
 #, fuzzy, c-format
 msgid "conversion failure from %s to %s on '%s' in 'mbcsToSbcs'"
 msgstr "conversione fallita da '%s' in 'mbcsToSbcs': punto sostituito per <%02x>"
 
-#: devPS.cpp:4717
 #, c-format
 msgid "failed open converter to encoding '%s'"
 msgstr "apertura della conversione fallita verso la codifica '%s'"
 
-#: devPS.cpp:4736 devPS.cpp:9304
 #, c-format
 msgid "failed in text conversion to encoding '%s'"
 msgstr "conversione testo fallita alla codifica '%s'"
 
-#: devPS.cpp:5122
 msgid "Failed to allocate PDF definition string"
 msgstr "Allocazione fallita per la stringa con le definizioni PDF"
 
-#: devPS.cpp:5144
 msgid "failed to increase definition string (shut down PDF device)"
 msgstr "incremento fallito per la stringa di definizione (chiusura dispositivo PDF)"
 
-#: devPS.cpp:5193
 msgid "failed to increase 'maxDefns'"
 msgstr "incremento fallito per 'maxDefns'"
 
-#: devPS.cpp:5411 devPS.cpp:5464
 #, fuzzy
 msgid "Repeat or reflect pattern not supported on PDF device"
 msgstr "Maschera di luminanza ignorata (non supportata su questo dispositivo)"
 
-#: devPS.cpp:5520 devPS.cpp:5608
 msgid "Shading type not yet supported"
 msgstr ""
 
-#: devPS.cpp:5823
 msgid "Drawing not appended to path (contains text)"
 msgstr "Disegno non aggiunto al percorso (contiene testo)"
 
-#: devPS.cpp:6051
 msgid "Compositing operator has no corresponding blend mode; defaulting to Normal"
 msgstr "L'operatore di composizione non ha una modalità di fusione corrispondente; predefinito su Normal"
 
-#: devPS.cpp:6320
 msgid "Failed to write PDF clipping path"
 msgstr "Scrittura del tracciato di ritaglio PDF fallita"
 
-#: devPS.cpp:6345
 msgid "Failed to write PDF stroke"
 msgstr "Scrittura del trattino PDF fallita"
 
-#: devPS.cpp:6366
 msgid "Failed to write PDF fill"
 msgstr "Scrittura del fill PDF fallita"
 
-#: devPS.cpp:6387
 msgid "Failed to write PDF fillStroke"
 msgstr "Scrittura del fillStroke PDF fallita"
 
-#: devPS.cpp:6432
 msgid "Glyph ID larger than 0xFFFF; output will be incorrect"
 msgstr ""
 
-#: devPS.cpp:6456
 msgid "invalid 'alpha' value in PDF"
 msgstr "valore 'alpha' non valido in PDF"
 
-#: devPS.cpp:6569 devPS.cpp:6572
 msgid "failed to increase 'maxRaster'"
 msgstr "incremento di 'maxRaster' fallito"
 
-#: devPS.cpp:6584
 msgid "unable to allocate raster image"
 msgstr "non è possibile allocare l'immagine raster"
 
-#: devPS.cpp:6650 devPS.cpp:6700
 #, c-format
 msgid "internal error %d in '%s'"
 msgstr ""
 
-#: devPS.cpp:6679 devPS.cpp:6723 devPS.cpp:8254
 msgid "write failed"
 msgstr "scrittura non riuscita"
 
-#: devPS.cpp:6783
 msgid "corrupt loaded encodings;  font not added"
 msgstr "codifiche caricate corrotte;  carattere non aggiunto"
 
-#: devPS.cpp:6793
 msgid "failed to record device encoding; font not added"
 msgstr "fallita registrazione della codifica per il dispositivo; carattere non aggiunto"
 
-#: devPS.cpp:6881
 msgid "cannot allocate pd->pos"
 msgstr ""
 
-#: devPS.cpp:6889
 msgid "cannot allocate pd->pageobj"
 msgstr ""
 
-#: devPS.cpp:6914
 msgid "increasing the PDF version to 1.2"
 msgstr "incremento della versione PDF a 1.2"
 
-#: devPS.cpp:6944
 msgid "failed to load default encoding"
 msgstr "caricamento file encoding fallito"
 
-#: devPS.cpp:7011
 msgid "failed to initialise default PDF font"
 msgstr "inizializzazione fallita per il carattere predefinito PDF"
 
-#: devPS.cpp:7066
 msgid "failed to initialise additional PDF fonts"
 msgstr "inizializzazione fallita per i caratteri aggiuntivi PDF"
 
-#: devPS.cpp:7079
 msgid "failed to allocate rasters"
 msgstr "allocazione dei raster fallita"
 
-#: devPS.cpp:7086
 msgid "failed to allocate masks"
 msgstr "allocazione delle maschere fallita"
 
-#: devPS.cpp:7096
 msgid "failed to allocate definitions"
 msgstr "allocazione fallita per le definizioni"
 
-#: devPS.cpp:7170
 #, c-format
 msgid "invalid paper type '%s' (pdf)"
 msgstr "tipo foglio '%s' non valido (pdf)"
 
-#: devPS.cpp:7194
 msgid "invalid foreground/background color (pdf)"
 msgstr "colore primo piano/sfondo non valido (pdf)"
 
-#: devPS.cpp:7301
 msgid "increasing the PDF version to 1.4"
 msgstr "incremento della versione PDF a 1.4"
 
-#: devPS.cpp:7345 devPS.cpp:7393
 msgid "unknown 'colormodel', using 'srgb'"
 msgstr "'colormodel' sconosciuto, si utilizza 'srgb'"
 
-#: devPS.cpp:7616
 msgid "failed to load sRGB colorspace file"
 msgstr "caricamento fallito per il file con lo spazio colore sRGB"
 
-#: devPS.cpp:7892 devPS.cpp:7917 devPS.cpp:8270 devPS.cpp:8313
 #, fuzzy
 msgid "unable to increase object limit: please shutdown the pdf device"
 msgstr "incremento fallito per la stringa di definizione (chiusura dispositivo PDF)"
 
-#: devPS.cpp:7953
 msgid "corrupt encodings in PDF device"
 msgstr "codifiche corrotte nel dispositivo PDF"
 
-#: devPS.cpp:8034
 msgid "increasing the PDF version to 1.3"
 msgstr "incremento della versione PDF a 1.3"
 
-#: devPS.cpp:8146
 #, fuzzy
 msgid "write error"
 msgstr "scrittura non riuscita"
 
-#: devPS.cpp:8177
-#, c-format
-msgid "cannot open 'pdf' pipe to '%s'"
+#, fuzzy, c-format
+msgid "cannot open 'pdf' pipe to '%s' (reason: %s)"
 msgstr "non è possibile aprire un pipe 'pdf' a '%s'"
 
-#: devPS.cpp:8183
 msgid "file = \"|cmd\" implies 'onefile = TRUE'"
 msgstr "file = \"|cmd\" implica 'onefile = TRUE'"
 
-#: devPS.cpp:8244
 msgid "internal read error in PDF_endpage"
 msgstr ""
 
-#: devPS.cpp:8250
 #, c-format
 msgid "internal compression error %d in PDF_endpage"
 msgstr ""
 
-#: devPS.cpp:8305
 #, fuzzy
 msgid "unable to increase page limit: please shutdown the pdf device"
 msgstr "incremento fallito per la stringa di definizione (chiusura dispositivo PDF)"
 
-#: devPS.cpp:8327
 #, c-format
 msgid ""
 "cannot open 'pdf' file argument '%s'\n"
@@ -613,563 +478,426 @@ msgstr ""
 "non è possibile aprire il file 'pdf' con argomento '%s'\n"
 "  per piacere, chiudere il dispositivo PDF"
 
-#: devPS.cpp:8348
 #, c-format
 msgid "Cannot open temporary file '%s' for compression (reason: %s); compression has been turned off for this device"
 msgstr "Non è possibile aprire il file temporaneo '%s' per la compressione (motivo: %s); la compressione è stata disabilitata per questo dispositivo"
 
-#: devPS.cpp:8956 devPS.cpp:9461 devPS.cpp:9507
 msgid "failed to find or load PDF font"
 msgstr "fallita ricerca, o caricamento, del carattere PDF"
 
-#: devPS.cpp:9139 devPS.cpp:9198
 msgid "Text not added to path containing other drawing"
 msgstr "Testo non aggiunto al percorso contenente altri disegni"
 
-#: devPS.cpp:9248 devPS.cpp:9416
 msgid "failed to find or load PDF CID font"
 msgstr "fallita ricerca, o caricamento, del carattere PDF CID"
 
-#: devPS.cpp:9910 devPicTeX.cpp:767
 #, fuzzy, c-format
 msgid "invalid 'file' parameter in %s"
 msgstr "parametro 'family' non valido in %s"
 
-#: devPS.cpp:9919 devPS.cpp:9923 devPS.cpp:10013 devPS.cpp:10017
 #, c-format
 msgid "invalid 'family' parameter in %s"
 msgstr "parametro 'family' non valido in %s"
 
-#: devPS.cpp:9939 devPS.cpp:10029
 #, c-format
 msgid "invalid 'fonts' parameter in %s"
 msgstr "parametro 'fonts' non valido in %s"
 
-#: devPS.cpp:9955 devPS.cpp:10053 devPicTeX.cpp:779 devPicTeX.cpp:784
-#: devWindows.cpp:3824
 #, c-format
 msgid "unable to start %s() device"
 msgstr "non è possibile aprire il dispositivo %s()"
 
-#: devQuartz.cpp:384
 msgid "Tried to restore an empty snapshot?"
 msgstr ""
 
-#: devQuartz.cpp:468 devQuartz.cpp:472
 msgid "allocation failure in QuartzInitPatterns"
 msgstr ""
 
-#: devQuartz.cpp:487
 #, fuzzy
 msgid "Quartz gradients exhausted (failed to increase maxPatterns)"
 msgstr "Motivi Cairo esauriti (fallito l'incremento di maxPatterns)"
 
-#: devQuartz.cpp:493
 #, fuzzy
 msgid "Quartz patterns exhausted (failed to increase maxPatterns)"
 msgstr "Motivi Cairo esauriti (fallito l'incremento di maxPatterns)"
 
-#: devQuartz.cpp:533 cairo/cairoFns.cpp:348
 msgid "Attempt to release non-existent pattern"
 msgstr "Tentato rilascio di un motivo inesistente"
 
-#: devQuartz.cpp:568
 #, fuzzy
 msgid "Quartz patterns exhausted"
 msgstr "Motivi Cairo esauriti"
 
-#: devQuartz.cpp:633 devQuartz.cpp:648 devQuartz.cpp:650 devQuartz.cpp:681
-#: devQuartz.cpp:683
 #, fuzzy
 msgid "Failed to create gradient"
 msgstr "incremento fallito per 'maxDefns'"
 
-#: devQuartz.cpp:665 devQuartz.cpp:698
 msgid "Unsupported gradient fill extend type; using 'pad'"
 msgstr ""
 
-#: devQuartz.cpp:741 devQuartz.cpp:774
 #, fuzzy
 msgid "Failed to create pattern"
 msgstr "allocazione dei raster fallita"
 
-#: devQuartz.cpp:764
 msgid "Unsupported pattern extend mode;  using \"repeat\""
 msgstr ""
 
-#: devQuartz.cpp:815
 msgid "allocation failure in QuartzInitClipPaths"
 msgstr ""
 
-#: devQuartz.cpp:827
 #, fuzzy
 msgid "Quartz clipping paths exhausted (failed to increase maxClipPaths)"
 msgstr "Tracciati di ritaglio Cairo esauriti (fallito l'incremento di maxClipPaths)"
 
-#: devQuartz.cpp:873
 #, fuzzy
 msgid "Quartz clipping paths exhausted"
 msgstr "Tracciati di ritaglio Cairo esauriti"
 
-#: devQuartz.cpp:881
 #, fuzzy
 msgid "Failed to create clipping path"
 msgstr "Scrittura del tracciato di ritaglio PDF fallita"
 
-#: devQuartz.cpp:961
 msgid "allocation failure in QuartzInitMasks"
 msgstr ""
 
-#: devQuartz.cpp:975
 #, fuzzy
 msgid "Quartz masks exhausted (failed to increase maxMasks)"
 msgstr "Maschere Cairo esaurite (fallito incremento di maxMasks)"
 
-#: devQuartz.cpp:1023
 #, fuzzy
 msgid "Quartz masks exhausted"
 msgstr "Maschere Cairo esaurite"
 
-#: devQuartz.cpp:1039
 #, fuzzy
 msgid "Failed to create Quartz mask"
 msgstr "allocazione delle maschere fallita"
 
-#: devQuartz.cpp:1127
 msgid "allocation failure in QuartzInitGroups"
 msgstr ""
 
-#: devQuartz.cpp:1140
 #, fuzzy
 msgid "Quartz groups exhausted (failed to increase maxGroups)"
 msgstr "Gruppi Cairo esauriti (fallito l'incremento di maxGroups)"
 
-#: devQuartz.cpp:1167 cairo/cairoFns.cpp:907
 msgid "Attempt to release non-existent group"
 msgstr "Tentato rilascio di un gruppo inesistente"
 
-#: devQuartz.cpp:1194
 #, fuzzy
 msgid "Quartz groups exhausted"
 msgstr "Gruppi Cairo esauriti"
 
-#: devQuartz.cpp:1214
 #, fuzzy
 msgid "Add compositing operator not supported; falling back to over"
 msgstr "L'operatore di composizione non ha una modalità di fusione corrispondente; predefinito su Normal"
 
-#: devQuartz.cpp:1302 cairo/cairoFns.cpp:864
 msgid "Groups exhausted"
 msgstr "Gruppi esauriti"
 
-#: devQuartz.cpp:1307 cairo/cairoFns.cpp:869
 msgid "Unknown group"
 msgstr ""
 
-#: devQuartz.cpp:1567
 msgid "Cannot load CoreGraphics"
 msgstr ""
 
-#: devQuartz.cpp:1709
 #, c-format
 msgid "font \"%s\" could not be found for family \"%s\""
 msgstr "il carattere \"%s\" non è stato trovato per la famiglia \"%s\""
 
-#: devQuartz.cpp:1727
 msgid "font family name is too long"
 msgstr "il nome della famiglia del carattere è troppo lungo"
 
-#: devQuartz.cpp:1766
 #, c-format
 msgid "no font could be found for family \"%s\""
 msgstr "nessuno carattere è stato trovato per la famiglia \"%s\""
 
-#: devQuartz.cpp:1987
 msgid "allocation failure in text2unichar"
 msgstr ""
 
-#: devQuartz.cpp:2017 devQuartz.cpp:2019
 msgid "allocation failure in RQuartz_StrWidth"
 msgstr ""
 
-#: devQuartz.cpp:2062 devQuartz.cpp:2065 devQuartz.cpp:2067 devQuartz.cpp:2086
 msgid "allocation failure in RQuartz_Text"
 msgstr ""
 
-#: devQuartz.cpp:2764 cairo/cairoFns.cpp:523
 msgid "Attempt to reuse non-existent clipping path"
 msgstr "Tentato riutilizzo di un tracciato di ritaglio inesistente"
 
-#: devQuartz.cpp:2784 cairo/cairoFns.cpp:536
 msgid "Attempt to release non-existent clipping path"
 msgstr "Tentato rilascio di un tracciato di ritaglio inesistente"
 
-#: devQuartz.cpp:2834 cairo/cairoFns.cpp:679
 msgid "Attempt to release non-existent mask"
 msgstr "Tentato rilascio di una maschera inesistente"
 
-#: devQuartz.cpp:3191
 #, fuzzy, c-format
 msgid "Invalid font path: \"%s\""
 msgstr "parametro 'fonts' non valido in %s"
 
-#: devQuartz.cpp:3234
 #, fuzzy
 msgid "failed to load font"
 msgstr "allocazione lista font fallita"
 
-#: devQuartz.cpp:3326 devQuartz.cpp:3331 cairo/cairoBM.cpp:605
-#: cairo/cairoBM.cpp:608 cairo/cairoBM.cpp:612 cairo/cairoBM.cpp:616
-#: cairo/cairoBM.cpp:620 cairo/cairoBM.cpp:624 cairo/cairoBM.cpp:635
-#: cairo/cairoBM.cpp:640 cairo/cairoBM.cpp:643 cairo/cairoBM.cpp:647
-#: cairo/cairoBM.cpp:652 cairo/cairoBM.cpp:655
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argomento '%s' non valido"
 
-#: devQuartz.cpp:3358
 msgid "invalid quartz() device size"
 msgstr "dimensione dispositivo quartz() non valida"
 
-#: devQuartz.cpp:3386
 msgid "unable to create device description"
 msgstr "non è possibile creare una descrizione per il dispositivo"
 
-#: devQuartz.cpp:3435
 msgid "unable to create quartz() device target, given type may not be supported"
 msgstr "non è possibile creare il dispositivo quartz(), quest'ultimo potrebber non essere supportato"
 
-#: devQuartz.cpp:3568
 msgid "Quartz device is not available on this platform"
 msgstr "Il dispositivo Quartz non è disponibile su questa piattaforma"
 
-#: devWindows.cpp:347 devWindows.cpp:397 devWindows.cpp:470
 msgid "Not enough memory to copy graphics window"
 msgstr "Non c'è abbastanza memoria per copiare la finestra grafica"
 
-#: devWindows.cpp:352 devWindows.cpp:402 devWindows.cpp:475
 msgid "No device available to copy graphics window"
 msgstr "Nessun dispositivo disponibile per copiarci la finestra grafica"
 
-#: devWindows.cpp:376
 msgid "missing initPSandPDFfonts() in grDevices namespace: this should not happen"
 msgstr ""
 
-#: devWindows.cpp:406 devWindows.cpp:479
 #, c-format
 msgid "'%%' is not allowed in file name"
 msgstr "'%%' non è ammesso nel nome file"
 
-#: devWindows.cpp:615
 msgid "invalid font specification"
 msgstr "specificazione del carattere non valida"
 
-#: devWindows.cpp:660
 msgid "font family not found in Windows font database"
 msgstr "famiglia di caratteri non trovata nel database dei caratteri di Windows"
 
-#: devWindows.cpp:725
 msgid "unable to set or substitute a suitable font"
 msgstr ""
 
-#: devWindows.cpp:730
 #, fuzzy
 msgid "unable to set font: using Arial"
 msgstr "non è possibile utilizzare la codifica '%s'"
 
-#: devWindows.cpp:1090
 msgid "plot history seems corrupted"
 msgstr "plot history sembra essere danneggiato"
 
-#: devWindows.cpp:1097
 msgid "no plot history!"
 msgstr "nessuna plot history!"
 
-#: devWindows.cpp:1575
 #, fuzzy
 msgid "unable to open window"
 msgstr "non è possibile aprire il file '%s' in scrittura"
 
-#: devWindows.cpp:1802
 #, fuzzy
 msgid "unable to open printer"
 msgstr "non è possibile allocare l'immagine raster"
 
-#: devWindows.cpp:1814 devWindows.cpp:1849 devWindows.cpp:1879
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr "'width=%d, height=%d' non sembrano valori in pixel"
 
-#: devWindows.cpp:1822 devWindows.cpp:1827 devWindows.cpp:1852
-#: devWindows.cpp:1857 devWindows.cpp:1882 devWindows.cpp:1887
 msgid "unable to allocate bitmap"
 msgstr "non è possibile allocare bitmap"
 
-#: devWindows.cpp:1833 devWindows.cpp:1863 devWindows.cpp:2184
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr "non è possibile aprire il file '%s' in scrittura"
 
-#: devWindows.cpp:1904
 #, fuzzy
 msgid "invalid specification for file name in win.metafile()"
 msgstr "nome file troppo lungo in win.metafile()"
 
-#: devWindows.cpp:1919
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr "non è possibile aprire il metafile '%s' in scrittura"
 
-#: devWindows.cpp:1921
 msgid "unable to open clipboard to write metafile"
 msgstr "non è possibile aprire gli appunti per scrivere il metafile"
 
-#: devWindows.cpp:2132
 msgid "Insufficient memory for resize. Killing device"
 msgstr "Memoria insufficiente per resize. Chiudo il dispositivo"
 
-#: devWindows.cpp:2140
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr "Memoria insufficiente per il ridimensionamento. Disabilitazione del alpha blending"
 
-#: devWindows.cpp:2169
 msgid "a clipboard metafile can store only one figure."
 msgstr "un metafile degli appunti può contenere solo una figura."
 
-#: devWindows.cpp:2175
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr "il metafile '%s' non può essere creato"
 
-#: devWindows.cpp:3180 devWindows.cpp:3847
 msgid "R Graphics"
 msgstr "R Graphics"
 
-#: devWindows.cpp:3193
 msgid "attempt to use the locator after dev.hold()"
 msgstr "si tenta l'utilizzo del locator dopo dev.hold()"
 
-#: devWindows.cpp:3219
 msgid "graphics device closed during call to locator or identify"
 msgstr "dispositivo grafico chiuso durante la chiamata a locator o identify"
 
-#: devWindows.cpp:3319
 msgid "allocation failed in GADeviceDriver"
 msgstr ""
 
-#: devWindows.cpp:3361
 msgid "opening device failed"
 msgstr ""
 
-#: devWindows.cpp:3492
 msgid "option 'windowsTimeouts' should be integer"
 msgstr "l'opzione 'windowsTimeouts' dovrebbe essere un intero"
 
-#: devWindows.cpp:3513
 msgid "invalid device number in 'savePlot'"
 msgstr "numero di dispositivo in 'savePlot' non valido"
 
-#: devWindows.cpp:3515
 msgid "invalid device in 'savePlot'"
 msgstr "numero di dispositivo in 'savePlot' non valido"
 
-#: devWindows.cpp:3518
 msgid "invalid filename argument in 'savePlot'"
 msgstr "argomento filename non valido in 'savePlot'"
 
-#: devWindows.cpp:3523
 msgid "invalid type argument in 'savePlot'"
 msgstr "tipo argomento non valido in 'savePlot'"
 
-#: devWindows.cpp:3550
 msgid "unknown type in savePlot"
 msgstr "type sconosciuto in savePlot"
 
-#: devWindows.cpp:3595 devWindows.cpp:3637 devWindows.cpp:3662
-#: devWindows.cpp:3689 devWindows.cpp:3710
 msgid "processing of the plot ran out of memory"
 msgstr "mancanza di memoria nel processare il grafico"
 
-#: devWindows.cpp:3606
 #, fuzzy
 msgid "Not enough memory to create error message."
 msgstr "Non c'è abbastanza memoria per copiare la finestra grafica"
 
-#: devWindows.cpp:3608
 msgid "Impossible to open "
 msgstr "Impossibile aprire "
 
-#: devWindows.cpp:3737
 msgid "invalid 'width' or 'height'"
 msgstr "'width' o 'height' non validi"
 
-#: devWindows.cpp:3933
 #, fuzzy
 msgid "Not enough memory to create buffer for path."
 msgstr "Non c'è abbastanza memoria per copiare la finestra grafica"
 
-#: devWindows.cpp:3974
 msgid "unable to load winCairo.dll: was it built?"
 msgstr ""
 
-#: devices.cpp:47
 msgid "argument must have positive length"
 msgstr "l'argomento deve avere una lunghezza positiva"
 
-#: devices.cpp:83 devices.cpp:91 devices.cpp:99
 msgid "NA argument is invalid"
 msgstr "Argomento NA non valido"
 
-#: devices.cpp:113
 msgid "Killing locked device"
 msgstr ""
 
-#: group.cpp:41
 msgid "Group definition ignored (device is appending path)"
 msgstr "Definizione del gruppo ignorata (il dispositivo sta aggiungendo il percorso)"
 
-#: group.cpp:60
 msgid "Group use ignored (device is appending path)"
 msgstr "Utilizzo del gruppo ignorato (il dispositivo sta aggiungendo il percorso)"
 
-#: mask.cpp:37
 msgid "Mask ignored (device is appending path)"
 msgstr "Maschera ignorata (il dispositivo sta aggiungendo il percorso)"
 
-#: qdBitmap.cpp:120
 #, fuzzy
 msgid "QuartzBitmap_Output - filename is empty!"
 msgstr "QuartzBitmap_Output - non è possibile aprire il file '%s'"
 
-#: qdBitmap.cpp:133
 #, c-format
 msgid "QuartzBitmap_Output - unable to open file '%s'"
 msgstr "QuartzBitmap_Output - non è possibile aprire il file '%s'"
 
-#: qdBitmap.cpp:148
 msgid "not a supported scheme, no image data written"
 msgstr "non è uno schema supportato, nessun dato immagine scritto"
 
-#: qdBitmap.cpp:204 qdBitmap.cpp:211 qdBitmap.cpp:220
 msgid "allocation failure in QuartzBitmap_DeviceCreate"
 msgstr ""
 
-#: qdPDF.cpp:91
 #, fuzzy
 msgid "not enough memory in QuartzPDF_DeviceCreate"
 msgstr "Non c'è abbastanza memoria per copiare la finestra grafica"
 
-#: winbitmap.cpp:458
 #, fuzzy, c-format
 msgid "unable to open TIFF file '%s'"
 msgstr "non è possibile aprire il file '%s' in scrittura"
 
-#: winbitmap.cpp:497 winbitmap.cpp:524
 msgid "allocation failure in R_SaveAsTIF"
 msgstr ""
 
-#: winbitmap.cpp:554
 msgid "Problems writing to 'bmp' file"
 msgstr ""
 
-#: cairo/cairoBM.cpp:109 cairo/cairoBM.cpp:115 cairo/cairoBM.cpp:131
-#: cairo/cairoBM.cpp:142 cairo/cairoBM.cpp:156 cairo/cairoBM.cpp:164
-#: cairo/cairoBM.cpp:178 cairo/cairoBM.cpp:191 cairo/cairoBM.cpp:293
-#: cairo/cairoBM.cpp:303 cairo/cairoBM.cpp:323 cairo/cairoBM.cpp:330
-#: cairo/cairoBM.cpp:350 cairo/cairoBM.cpp:362
 #, c-format
 msgid "cairo error '%s'"
 msgstr ""
 
-#: cairo/cairoBM.cpp:198 cairo/cairoBM.cpp:370
 msgid "unimplemented cairo-based device"
 msgstr "dispositivo basato su Carico non implementato"
 
-#: cairo/cairoBM.cpp:229
 #, c-format
 msgid "'%s' called on non-surface"
 msgstr ""
 
-#: cairo/cairoBM.cpp:270
 #, c-format
 msgid "could not open file '%s'"
 msgstr "non è possibile aprire il file '%s'"
 
-#: cairo/cairoBM.cpp:671
 #, c-format
 msgid "unable to start device '%s'"
 msgstr "non è possibile aprire il dispositivo '%s'"
 
-#: cairo/cairoFns.cpp:149
 msgid "Cairo patterns exhausted (failed to increase maxPatterns)"
 msgstr "Motivi Cairo esauriti (fallito l'incremento di maxPatterns)"
 
-#: cairo/cairoFns.cpp:193
 msgid "Cairo patterns exhausted"
 msgstr "Motivi Cairo esauriti"
 
-#: cairo/cairoFns.cpp:390
 msgid "Cairo clipping paths exhausted (failed to increase maxClipPaths)"
 msgstr "Tracciati di ritaglio Cairo esauriti (fallito l'incremento di maxClipPaths)"
 
-#: cairo/cairoFns.cpp:434
 msgid "Cairo clipping paths exhausted"
 msgstr "Tracciati di ritaglio Cairo esauriti"
 
-#: cairo/cairoFns.cpp:565
 msgid "Cairo masks exhausted (failed to increase maxMasks)"
 msgstr "Maschere Cairo esaurite (fallito incremento di maxMasks)"
 
-#: cairo/cairoFns.cpp:610
 msgid "Cairo masks exhausted"
 msgstr "Maschere Cairo esaurite"
 
-#: cairo/cairoFns.cpp:640
 msgid "Ignored luminance mask (not supported on this device)"
 msgstr "Maschera di luminanza ignorata (non supportata su questo dispositivo)"
 
-#: cairo/cairoFns.cpp:709
 msgid "Cairo groups exhausted (failed to increase maxGroups)"
 msgstr "Gruppi Cairo esauriti (fallito l'incremento di maxGroups)"
 
-#: cairo/cairoFns.cpp:760
 msgid "Cairo groups exhausted"
 msgstr "Gruppi Cairo esauriti"
 
-#: cairo/cairoFns.cpp:1624 cairo/cairoFns.cpp:1647
 #, fuzzy
 msgid "invalid string in PangoCairo_Text"
 msgstr "stringa in '%s' non valida"
 
-#: cairo/cairoFns.cpp:1788
 msgid "unable to initialize FontConfig in cairo-ft font selection"
 msgstr ""
 
-#: cairo/cairoFns.cpp:1997
 #, fuzzy
 msgid "invalid string in Cairo_StrWidth"
 msgstr "stringa in '%s' non valida"
 
-#: cairo/cairoFns.cpp:2019
 #, fuzzy
 msgid "invalid string in Cairo_Text"
 msgstr "stringa in '%s' non valida"
 
-#: cairo/cairoFns.cpp:2426 cairo/cairoFns.cpp:2449
 #, fuzzy
 msgid "Font variations too long"
 msgstr "il nome della famiglia del carattere è troppo lungo"
 
-#: cairo/cairoFns.cpp:2469
 #, fuzzy
 msgid "Failed to apply font variations"
 msgstr "allocazione fallita per le definizioni"
 
-#: cairo/cairoFns.cpp:2472
 msgid "Variable fonts not supported (requires Cairo >= 1.16.0)"
 msgstr ""
 
-#: cairo/cairoFns.cpp:2516
 #, fuzzy
 msgid "Font file not found; matching font family and face"
 msgstr "famiglia di caratteri non trovata nel database dei caratteri di Windows"
