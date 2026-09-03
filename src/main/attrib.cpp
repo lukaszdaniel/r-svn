@@ -1262,8 +1262,10 @@ SEXP Rf_dimgets(SEXP vec_, SEXP val_)
 	error(_("invalid second argument, must be %s"), "vector or NULL");
     val = coerceVector(val, INTSXP);
 
-    R_xlen_t total = dim2total(val, _("too many elements specified")),
-	len = xlength(vec);
+    bool err;
+    R_xlen_t total = dim2total(val, &err);
+    if(err) error("%s", _("too many elements specified"));
+    R_xlen_t len = xlength(vec);
     if (total != len) {
 	error(_("dims [product %lld] do not match the length of object [%lld]"),
 	      (long long)total, (long long)len);

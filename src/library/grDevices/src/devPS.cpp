@@ -3712,20 +3712,19 @@ static void PS_Open(pDevDesc dd, PostScriptDesc *pd)
 	if(strlen(pd->command) == 0)
 	    pd->psfp = NULL;
 	else {
-	    errno = 0;
 	    pd->psfp = R_popen(pd->command, "w");
 	    pd->open_type = 1;
 	}
-	if (!pd->psfp || errno != 0) {
+	if (!pd->psfp) {
 	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(strlen(pd->command) + 1);
 	    char *errbuf = tmp.get();
 	    strcpy(errbuf, pd->command);
 	    PS_cleanup(4, dd, pd);
-	    error(_("cannot open 'postscript' pipe to '%s'"), errbuf);
+	    error(_("cannot open 'postscript' pipe to '%s' (reason: %s)"), 
+                  errbuf, strerror(errno));
 	    return;
 	}
     } else if (pd->filename[0] == '|') {
-	errno = 0;
 	pd->psfp = R_popen(pd->filename + 1, "w");
 	pd->open_type = 1;
 	if (!pd->psfp || errno != 0) {
@@ -3733,8 +3732,8 @@ static void PS_Open(pDevDesc dd, PostScriptDesc *pd)
 	    char *errbuf = tmp.get();
 	    strcpy(errbuf, pd->filename + 1);
 	    PS_cleanup(4, dd, pd);
-	    error(_("cannot open 'postscript' pipe to '%s'"),
-		     errbuf);
+	    error(_("cannot open 'postscript' pipe to '%s' (reason: %s)"), 
+                  errbuf, strerror(errno));
 	    return;
 	}
     } else {
@@ -8169,14 +8168,14 @@ static void PDF_Open(pDevDesc dd, PDFDesc *pd)
 	strncpy(pd->filename, tmp, R_PATH_MAX - 1);
 	pd->filename[R_PATH_MAX - 1] = '\0';
 	free(tmp);
-	errno = 0;
 	pd->pipefp = R_popen(pd->cmd, "w");
-	if (!pd->pipefp || errno != 0) {
+	if (!pd->pipefp) {
 	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(strlen(pd->cmd) + 1);
 	    char *errbuf = tmp.get();
 	    strcpy(errbuf, pd->cmd);
 	    PDFcleanup(7, pd);
-	    error(_("cannot open 'pdf' pipe to '%s'"), errbuf);
+	    error(_("cannot open 'pdf' pipe to '%s' (reason: %s)"), 
+                  errbuf, strerror(errno));
 	    return;
 	}
 	pd->open_type = 1;
