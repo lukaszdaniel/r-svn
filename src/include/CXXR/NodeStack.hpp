@@ -291,6 +291,11 @@ namespace CXXR
             return m_deferred_protected_count;
         }
 
+        size_t reservedCapacity() const
+        {
+            return m_reserved_capacity;
+        }
+
         /** @brief Conduct a const visitor via the NodeStack.
          *
          * Conduct a GCNode::const_visitor object to each node_t
@@ -320,14 +325,12 @@ namespace CXXR
         void resize_aux(size_t new_size) HOT_FUNCTION;
 
 #define R_BCNodeStackBase ByteCode::s_nodestack->m_vector.data()
-#define R_BCProtTop ByteCode::deferredprotectedCount()
 // Note that this macro name uses 'Top' in the sense of the C++ standard
 // library end(), i.e. one past the current top element of the stack,
 // not in the way that CR uses R_BCNodeStackEnd, which relates to the
 // end of allocated storage.
 #define R_BCNodeStackTop ByteCode::s_nodestack->m_R_BCNodeStackTop
-#define R_BCNodeStackEnd ByteCode::s_nodestack->m_reserved_capacity
-#define R_BCProtCommitted ByteCode::s_nodestack->m_protected_count
+#define R_BCNodeStackEnd ByteCode::s_nodestack->reservedCapacity()
 
         NORET static void nodeStackOverflow(void);
     };

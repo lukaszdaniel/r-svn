@@ -169,7 +169,7 @@ namespace CXXR
         ptrdiff_t relpc;       /* pc offset when begincontext is called */
         GCRoot<> handlerstack; /* condition handler stack */
         GCRoot<> restartstack; /* stack of available restarts */
-        R_bcstack_t *nodestack;
+        size_t nodestack_size;
         size_t bcprottop;
         R_bcFrame_type *bcframe;
         GCRoot<> srcref;         /* The source line in effect */

@@ -961,6 +961,8 @@ attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
 	     PRIMNAME(op), save, R_PPStackTop);
 }
 
+#define R_BCProtTop ByteCode::deferredprotectedCount()
+#define R_BCProtCommitted ByteCode::s_nodestack->m_protected_count
 #define R_BCNodeStackTopSize (ByteCode::nodeStackSize())
 #define CXXR_POP(n) ByteCode::s_nodestack->pop(n)
 
@@ -5520,7 +5522,10 @@ static R_INLINE void* BCNALLOC(size_t size)
     BCNSTACKCHECK(nelems + 1);
     BCNPUSH_RAWMEM(nelems);
     void *ans = R_BCNodeStackTop;
-    R_BCNodeStackTop += nelems;
+    while (nelems-- > 0) {
+        BCNPUSH(R_NilValue);
+    }
+
     return ans;
 }
 

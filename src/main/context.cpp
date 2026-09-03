@@ -285,8 +285,8 @@ RCNTXT::RContext()
     relpc = 0;
     handlerstack = R_HandlerStack;
     restartstack = R_RestartStack;
-    nodestack = R_BCNodeStackTop;
-    bcprottop = R_BCProtTop;
+    nodestack_size = ByteCode::nodeStackSize();
+    bcprottop = ByteCode::deferredprotectedCount();
     bcframe = nullptr;
     srcref = R_Srcref;
     browserfinish = 0;
@@ -326,8 +326,8 @@ void R::begincontext(RCNTXT *cptr, RCNTXT::Type flags,
     cptr->m_intsusp = Evaluator::interruptsSuspended();
     cptr->handlerstack = R_HandlerStack;
     cptr->restartstack = R_RestartStack;
-    cptr->nodestack = R_BCNodeStackTop;
-    cptr->bcprottop = R_BCProtTop;
+    cptr->nodestack_size = ByteCode::nodeStackSize();
+    cptr->bcprottop = ByteCode::deferredprotectedCount();
     cptr->srcref = R_Srcref;
     cptr->browserfinish = R_GlobalContext ? R_GlobalContext->browserfinish : 0;
     cptr->returnValue = SEXP_TO_STACKVAL(NULL);
@@ -366,7 +366,7 @@ RCNTXT::~RContext()
     Evaluator::setInterruptsSuspended(this->m_intsusp);
     R_HandlerStack = this->handlerstack;
     R_RestartStack = this->restartstack;
-    R_BCNodeStackTop = this->nodestack;
+    R_BCNodeStackTop = R_BCNodeStackBase + this->nodestack_size;
     R_BCProtReset(this->bcprottop);
     R_Srcref = this->srcref;
 
