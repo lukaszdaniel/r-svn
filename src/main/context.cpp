@@ -217,7 +217,7 @@ namespace CXXR
         this->conexit = R_NilValue; /* prevent recursion */
         if (intermediate_jump) {
         /* we are in intermediate jump, so returnValue is undefined */
-            this->returnValue = SEXP_TO_STACKVAL(NULL);
+            this->returnValue = SEXP_TO_STACKVAL(nullptr);
         }
         SEXP cptr_retval =
             this->returnValue.tag == 0 ? this->returnValue.u.sxpval : NULL;
@@ -330,7 +330,7 @@ void R::begincontext(RCNTXT *cptr, RCNTXT::Type flags,
     cptr->bcprottop = ByteCode::deferredprotectedCount();
     cptr->srcref = R_Srcref;
     cptr->browserfinish = R_GlobalContext ? R_GlobalContext->browserfinish : 0;
-    cptr->returnValue = SEXP_TO_STACKVAL(NULL);
+    cptr->returnValue = SEXP_TO_STACKVAL(nullptr);
     cptr->jumpmask = 0;
     cptr->m_restart = false;
 

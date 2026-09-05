@@ -179,8 +179,7 @@ namespace CXXR
          */
         node_t *end()
         {
-            // return &(*(m_vector.begin() + m_vector.size()));
-            return m_R_BCNodeStackTop;
+            return m_vector.data() + size();
         }
 
         /** @brief Pop pointers from the NodeStack.
@@ -211,10 +210,9 @@ namespace CXXR
          */
         void push_node(node_t node)
         {
-            node_t *__ntop__ = m_R_BCNodeStackTop + 1;
             if (size() + 1 > m_reserved_capacity) nodeStackOverflow();
-            __ntop__[-1] = node;
-            m_R_BCNodeStackTop = __ntop__;
+            m_vector[size()] = node;
+            ++m_node_count;
         }
 
         /** @brief Push a node pointer onto the NodeStack.
@@ -227,9 +225,10 @@ namespace CXXR
          */
         size_t push(RObject *node)
         {
-            // CHECK_SET_BELOW_PROT(m_R_BCNodeStackTop);
+            // CHECK_SET_BELOW_PROT(size());
+            size_t index = size();
             push_node(node_t(NILSXP, node));
-            return std::distance(m_vector.data(), m_R_BCNodeStackTop);
+            return index;
         }
 
         /** @brief Duplicate first value on the stack.
@@ -238,7 +237,7 @@ namespace CXXR
          */
         void push_dup()
         {
-            push_node(m_R_BCNodeStackTop[-1]);
+            push_node(m_vector[size() - 1]);
         }
 
         /** @brief Duplicate second value on the stack.
@@ -247,7 +246,7 @@ namespace CXXR
          */
         void push_dup2nd()
         {
-            push_node(m_R_BCNodeStackTop[-2]);
+            push_node(m_vector[size() - 2]);
         }
 
         /** @brief Duplicate third value on the stack.
@@ -256,7 +255,7 @@ namespace CXXR
          */
         void push_dup3rd()
         {
-            push_node(m_R_BCNodeStackTop[-3]);
+            push_node(m_vector[size() - 3]);
         }
 
         /** @brief Change the target of a pointer on the PPS.
@@ -300,17 +299,16 @@ namespace CXXR
         }
         void resize_cr(size_t new_size)
         {
-            m_R_BCNodeStackTop = m_vector.data() + new_size;
+            m_node_count = new_size;
         }
 
         /** @brief Current size of NodeStack.
          *
          * @return the number of pointers currently on the NodeStack.
          */
-        size_t size()
+        size_t size() const
         {
-            // return m_vector.size();
-            return std::distance(m_vector.data(), m_R_BCNodeStackTop);
+            return m_node_count;
         }
 
         /** @brief pop and return the top element of the stack.
@@ -371,7 +369,7 @@ namespace CXXR
 
         std::vector<node_t> m_vector;
         size_t m_deferred_protected_count;
-        node_t *m_R_BCNodeStackTop;
+        size_t m_node_count;
         size_t m_reserved_capacity;
         size_t m_protected_count; // The nodes (if any) pointed to
                                   // (*m_vector)[0] through (*m_vector)[m_protected_count - 1]
@@ -395,7 +393,7 @@ namespace CXXR
 // library end(), i.e. one past the current top element of the stack,
 // not in the way that CR uses R_BCNodeStackEnd, which relates to the
 // end of allocated storage.
-#define R_BCNodeStackTop ByteCode::s_nodestack->m_R_BCNodeStackTop
+#define R_BCNodeStackTop (ByteCode::s_nodestack->m_vector.data() + ByteCode::s_nodestack->size())
 #define R_BCNodeStackEnd ByteCode::s_nodestack->reservedCapacity()
 
         NORET static void nodeStackOverflow(void);
@@ -409,17 +407,7 @@ namespace CXXR
 #define CACHESZ_TAG 253
 
 // this produces an initialized structure as a _compound literal_
-#ifdef __cplusplus
-inline R_bcstack_t SEXP_TO_STACKVAL(SEXP x)
-{
-    R_bcstack_t node;
-    node.tag = 0;
-    node.u.sxpval = x;
-    return node;
-}
-#else
-#define SEXP_TO_STACKVAL(x) ((R_bcstack_t) { .tag = 0, .u.sxpval = (x) })
-#endif
+#define SEXP_TO_STACKVAL(x) CXXR::NodeStack::node_t(NILSXP, x)
 } // namespace CXXR
 
 namespace R

@@ -42,10 +42,9 @@ namespace CXXR
     }
 
     NodeStack::NodeStack(size_t initial_capacity)
-        : m_deferred_protected_count(0), m_reserved_capacity(initial_capacity), m_protected_count(0), m_innermost_scope(nullptr)
+        : m_deferred_protected_count(0), m_node_count(0), m_reserved_capacity(initial_capacity), m_protected_count(0), m_innermost_scope(nullptr)
     {
         m_vector.reserve(initial_capacity);
-        m_R_BCNodeStackTop = m_vector.data();
     }
 
     void NodeStack::pop(unsigned int count)
@@ -57,12 +56,12 @@ namespace CXXR
         if (m_innermost_scope && sz - count < m_innermost_scope->startSize())
             throw std::logic_error("NodeStack::unprotect: too many unprotects in this scope.");
 #endif
-        m_R_BCNodeStackTop -= count;
+        m_node_count -= count;
     }
 
     void NodeStack::protectAll()
     {
-        m_deferred_protected_count = std::distance(m_vector.data(), m_R_BCNodeStackTop);
+        m_deferred_protected_count = size();
     }
 
     void NodeStack::retarget(RObject *node, size_t index)
@@ -149,7 +148,10 @@ namespace CXXR
 
     void NodeStack::visitRoots(GCNode::const_visitor *v)
     {
-        for (node_t *sp = m_vector.data(); sp < m_R_BCNodeStackTop; sp++) {
+        std::vector<node_t>::iterator start = m_vector.begin();
+        std::vector<node_t>::iterator end = m_vector.begin() + size();
+        for (std::vector<node_t>::iterator sp = start; sp != end; ++sp)
+        {
             if (sp->tag == RAWMEM_TAG)
                 sp += sp->u.ival;
             else if ((sp->tag == NILSXP || IS_PARTIAL_SXP_TAG(sp->tag)) && sp->u.sxpval != R_NilValue)

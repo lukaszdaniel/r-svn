@@ -4858,7 +4858,8 @@ namespace CXXR
     {
         pop();
 
-        return m_R_BCNodeStackTop->tag ? GETSTACK_PTR_TAG(m_R_BCNodeStackTop) : m_R_BCNodeStackTop->u.sxpval;
+        node_t *top = end();
+        return top->tag ? GETSTACK_PTR_TAG(top) : top->u.sxpval;
     }
 } // namespace CXXR
 
