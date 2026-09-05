@@ -323,7 +323,7 @@ attribute_hidden int Rf_ReplIteration(SEXP rho, size_t savestack, R_ReplState *s
 	/* the parser thinks it is EOF but it may not have seen all of the
 	   input, so postpone the decision to exit until there is really
 	   no more input (the parser may be seeing a sequence of spaces)
-	   PR#15941 */ 
+	   PR#15941 */
     case PARSE_INCOMPLETE:
 	R_IoBufferReadReset(&R_ConsoleIob);
 	state->prompt_type = 2;
@@ -343,8 +343,10 @@ static void R_ReplConsole(SEXP rho, size_t savestack)
     state.buf[CONSOLE_BUFFER_SIZE] = '\0';
     /* stopgap measure if line > CONSOLE_BUFFER_SIZE chars */
     state.bufp = state.buf;
-    if(R_Verbose)
+#ifdef XTR_VERBOSE
+    if(R_Verbose) // if(R_Verbose >= 2)  if ever the 'verbose' option  would be  positive integer
 	REprintf(" >R_ReplConsole(): before \"for(;;)\" {main.c}\n");
+#endif
     for(;;) {
 	status = Rf_ReplIteration(rho, savestack, &state);
 	if(status < 0) {
@@ -877,7 +879,7 @@ void setup_Rmainloop(void)
     }
 #endif
 
-#ifdef DEBUG_STACK_DETECTION 
+#ifdef DEBUG_STACK_DETECTION
     /* testing stack base and size detection */
     printf("stack limit %lu, start %lu dir %d \n",
 	(unsigned long) R_CStackLimit,
@@ -924,9 +926,9 @@ void setup_Rmainloop(void)
 #ifdef HAVE_LOCALE_H
 #ifdef Win32
     {
-	char allbuf[1000]; /* Windows' locales can be very long */ 
-	char *p, *lcall; 
-    
+	char allbuf[1000]; /* Windows' locales can be very long */
+	char *p, *lcall;
+
 	p = getenv("LC_ALL");
 	if(p) {
 	    strncpy(allbuf, p, sizeof(allbuf));
@@ -934,7 +936,7 @@ void setup_Rmainloop(void)
 	    lcall = allbuf;
 	} else
 	    lcall = NULL;
-	
+
 	/* We'd like to use warning, but need to defer.
 	   Also cannot translate. */
 
@@ -947,7 +949,7 @@ void setup_Rmainloop(void)
 	if(!setlocale(LC_CTYPE, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
 		     _("Setting LC_CTYPE=%.200s failed\n"), p);
-	
+
 	p = lcall ? lcall : getenv("LC_MONETARY");
 	if(!setlocale(LC_MONETARY, p ? p : ""))
 	    snprintf(deferred_warnings[ndeferred_warnings++], 250,
@@ -1907,6 +1909,7 @@ void Rf_callToplevelHandlers(SEXP expr, SEXP value, Rboolean succeeded,
 		Rf_ToplevelTaskHandlers = h;
 	    if (tmp->finalizer)
 		tmp->finalizer(tmp->data);
+	    free(tmp->name);
 	    free(tmp);
 	}
     }
