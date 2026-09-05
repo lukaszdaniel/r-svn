@@ -95,6 +95,69 @@ namespace CXXR
             }
         };
 
+        /** @brief Proxy object for an element of a NodeStack.
+         *
+         * Objects of this class are used to allow the elements of an
+         * NodeStack to be examined and modified using the same syntax
+         * as would be used for accessing an array of
+         * <tt>node_t</tt>, whilst nevertheless enforcing the logic
+         * for protection against garbage collection.  See Item 30 of
+         * Scott Meyers's 'More Effective C++' for a general
+         * discussion of proxy objects, but see the <a
+         * href="https://www.aristeia.com/BookErrata/mec++-errata.html">errata</a>.
+         * (It may look complicated, but an optimising compiler should
+         * be able to distil an invocation of NodeStack::operator[]
+         * into very few instructions.)
+         */
+        class ElementProxy
+        {
+        public:
+            /** Copy the value of the proxied element from another
+             *  proxied element.
+             *
+             * @param rhs Proxied element whose value is to be copied.
+             *
+             * @return Reference to this ElementProxy.
+             */
+            ElementProxy &operator=(const ElementProxy &rhs)
+            {
+                m_stack->retarget((*rhs.m_stack)[rhs.m_index], m_index);
+                return *this;
+            }
+
+            /** @brief Redirect encapsulated pointer.
+             *
+             * @param node New pointer value.
+             *
+             * @return Reference to this ElementProxy.
+             */
+            ElementProxy &operator=(node_t node)
+            {
+                m_stack->retarget(node, m_index);
+                return *this;
+            }
+
+            /**
+             * @return The pointer encapsulated by the proxied
+             *         element.
+             */
+            operator node_t const() const
+            {
+                return m_stack->m_vector[m_index];
+            }
+
+        private:
+            friend class NodeStack;
+
+            NodeStack *m_stack;
+            size_t m_index;
+
+            ElementProxy(NodeStack *stack, size_t index)
+                : m_stack(stack), m_index(index)
+            {
+            }
+        };
+
         /** @brief Object constraining lifetime of NodeStack entries.
          *
          * Scope objects must be declared on the processor stack
@@ -182,6 +245,92 @@ namespace CXXR
             return m_vector.data() + size();
         }
 
+        /** @brief Element access.
+         *
+         * @param index Index of required element (counting from
+         *          zero).  Bounds checking is applied unless the
+         *          class is compiled with NDEBUG.
+         *
+         * @return Proxy for the specified element, via which the
+         *         element can be examined or modified.
+         */
+        ElementProxy operator[](size_t index)
+        {
+            return ElementProxy(this, index);
+        }
+
+        /** @brief Read-only element access.
+         *
+         * @param index Index of required element (counting from
+         *          zero).  Bounds checking is applied unless the
+         *          class is compiled with NDEBUG.
+         *
+         * @return the specified element.
+         */
+        const node_t operator[](size_t index) const
+        {
+            return m_vector[index];
+        }
+
+        /** @brief Remove topmost cell with given contents.
+         *
+         * Removes from the C pointer protection stack the uppermost
+         * stack cell containing a specified node address, and
+         * drops all the stack cells above it by one place.
+         *
+         * If this function is executed within a NodeStack::Scope
+         * pertaining to this NodeStack, its execution counts as a
+         * 'pop', and must balance a push() previously executed within
+         * the innermost such scope.  This is checked unless the class is
+         * compiled with NDEBUG.
+         *
+         * @param node ByteCode node which must be
+         *          contained in at least one cell within the
+         *          NodeStack.  This cell will be removed from the
+         *          stack, and any cells above it dropped by one
+         *          place.
+         */
+        void eraseTopmost(node_t node);
+
+        /** @brief Remove topmost cell with given contents.
+         *
+         * Removes from the C pointer protection stack the uppermost
+         * stack cell containing a specified node address, and
+         * drops all the stack cells above it by one place.
+         *
+         * If this function is executed within a NodeStack::Scope
+         * pertaining to this NodeStack, its execution counts as a
+         * 'pop', and must balance a push() previously executed within
+         * the innermost such scope.  This is checked unless the class is
+         * compiled with NDEBUG.
+         *
+         * @param node Pointer value (possibly null) which must be
+         *          contained in at least one cell within the
+         *          NodeStack.  This cell will be removed from the
+         *          stack, and any cells above it dropped by one
+         *          place.
+         *
+         * @deprecated Used to implement the CR function
+         * UNPROTECT_PTR() (itself ghastly).  Its use for any other
+         * purpose is strongly deprecated.
+         */
+        void eraseTopmost(RObject *node);
+
+        /** @brief Element access with respect to stack top.
+         *
+         * @param count A value of 1 signifies the top value of the
+         *          stack, 2 the element immediately below that, and
+         *          so on.  Must be strictly positive and smaller than
+         *          the size of the stack (checked unless the class is
+         *          compiled with NDEBUG).
+         *
+         * @return the specified element.
+         */
+        ElementProxy fromEnd(size_t count)
+        {
+            return operator[](size() - count);
+        }
+
         /** @brief Pop pointers from the NodeStack.
          *
          * If this function is executed within a NodeStack::Scope
@@ -210,9 +359,7 @@ namespace CXXR
          */
         void push_node(node_t node)
         {
-            if (size() + 1 > m_reserved_capacity) nodeStackOverflow();
-            m_vector[size()] = node;
-            ++m_node_count;
+            m_vector.push_back(node);
         }
 
         /** @brief Push a node pointer onto the NodeStack.
@@ -226,7 +373,7 @@ namespace CXXR
         size_t push(RObject *node)
         {
             // CHECK_SET_BELOW_PROT(size());
-            size_t index = size();
+            size_t index = m_vector.size();
             push_node(node_t(NILSXP, node));
             return index;
         }
@@ -237,7 +384,7 @@ namespace CXXR
          */
         void push_dup()
         {
-            push_node(m_vector[size() - 1]);
+            push_node(m_vector[m_vector.size() - 1]);
         }
 
         /** @brief Duplicate second value on the stack.
@@ -246,7 +393,7 @@ namespace CXXR
          */
         void push_dup2nd()
         {
-            push_node(m_vector[size() - 2]);
+            push_node(m_vector[m_vector.size() - 2]);
         }
 
         /** @brief Duplicate third value on the stack.
@@ -255,7 +402,7 @@ namespace CXXR
          */
         void push_dup3rd()
         {
-            push_node(m_vector[size() - 3]);
+            push_node(m_vector[m_vector.size() - 3]);
         }
 
         /** @brief Change the target of a pointer on the PPS.
@@ -297,10 +444,6 @@ namespace CXXR
             else
                 resize_aux(new_size);
         }
-        void resize_cr(size_t new_size)
-        {
-            m_node_count = new_size;
-        }
 
         /** @brief Current size of NodeStack.
          *
@@ -308,7 +451,7 @@ namespace CXXR
          */
         size_t size() const
         {
-            return m_node_count;
+            return m_vector.size();
         }
 
         /** @brief pop and return the top element of the stack.
@@ -369,7 +512,6 @@ namespace CXXR
 
         std::vector<node_t> m_vector;
         size_t m_deferred_protected_count;
-        size_t m_node_count;
         size_t m_reserved_capacity;
         size_t m_protected_count; // The nodes (if any) pointed to
                                   // (*m_vector)[0] through (*m_vector)[m_protected_count - 1]
@@ -393,7 +535,7 @@ namespace CXXR
 // library end(), i.e. one past the current top element of the stack,
 // not in the way that CR uses R_BCNodeStackEnd, which relates to the
 // end of allocated storage.
-#define R_BCNodeStackTop (ByteCode::s_nodestack->m_vector.data() + ByteCode::s_nodestack->size())
+#define R_BCNodeStackTop (ByteCode::nodeStackTop())
 #define R_BCNodeStackEnd ByteCode::s_nodestack->reservedCapacity()
 
         NORET static void nodeStackOverflow(void);

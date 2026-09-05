@@ -42,9 +42,35 @@ namespace CXXR
     }
 
     NodeStack::NodeStack(size_t initial_capacity)
-        : m_deferred_protected_count(0), m_node_count(0), m_reserved_capacity(initial_capacity), m_protected_count(0), m_innermost_scope(nullptr)
+        : m_deferred_protected_count(0), m_reserved_capacity(initial_capacity), m_protected_count(0), m_innermost_scope(nullptr)
     {
         m_vector.reserve(initial_capacity);
+    }
+
+    void NodeStack::eraseTopmost(RObject *node)
+    {
+        eraseTopmost(node_t(0, node));
+    }
+
+    void NodeStack::eraseTopmost(node_t node)
+    {
+#ifndef NDEBUG
+        if (m_innermost_scope && m_vector.size() == m_innermost_scope->startSize())
+            throw std::logic_error("NodeStack::eraseTopmost(): too many pops in this scope.");
+#endif
+        std::vector<node_t>::reverse_iterator rit = find_if(m_vector.rbegin(), m_vector.rend(), [&](const node_t &qnode)
+                                                            { return node.tag == qnode.tag && node.u.ival == qnode.u.ival; });
+        if (rit == m_vector.rend())
+            throw std::invalid_argument("NodeStack::unprotectPtr: pointer not found.");
+        // See Josuttis p.267 for the need for -1 :
+        std::vector<node_t>::iterator it = rit.base() - 1;
+        if (std::distance(m_vector.begin(), it) < int(m_protected_count))
+        {
+            if (node.tag == 0)
+                GCNode::decRefCount(node.u.sxpval);
+            --m_protected_count;
+        }
+        m_vector.erase(it);
     }
 
     void NodeStack::pop(unsigned int count)
@@ -56,7 +82,7 @@ namespace CXXR
         if (m_innermost_scope && sz - count < m_innermost_scope->startSize())
             throw std::logic_error("NodeStack::unprotect: too many unprotects in this scope.");
 #endif
-        m_node_count -= count;
+        resize(size() - count);
     }
 
     void NodeStack::protectAll()
@@ -149,7 +175,7 @@ namespace CXXR
     void NodeStack::visitRoots(GCNode::const_visitor *v)
     {
         std::vector<node_t>::iterator start = m_vector.begin();
-        std::vector<node_t>::iterator end = m_vector.begin() + size();
+        std::vector<node_t>::iterator end = m_vector.end();
         for (std::vector<node_t>::iterator sp = start; sp != end; ++sp)
         {
             if (sp->tag == RAWMEM_TAG)

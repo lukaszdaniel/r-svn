@@ -4856,10 +4856,10 @@ namespace CXXR
 {
     RObject *NodeStack::topnpop()
     {
+        R_bcstack_t ans = operator[](size() - 1);
         pop();
 
-        node_t *top = end();
-        return top->tag ? GETSTACK_PTR_TAG(top) : top->u.sxpval;
+        return ans.tag ? GETSTACK_PTR_TAG(&ans) : ans.u.sxpval;
     }
 } // namespace CXXR
 
@@ -7227,11 +7227,11 @@ static R_INLINE void save_bcEval_globals(struct bcEval_globals *g)
 
 static R_INLINE void restore_bcEval_globals(struct bcEval_globals *g)
 {
-    ByteCode::s_nodestack->resize_cr(R_BCProtTop);
-    DECREMENT_BCSTACK_LINKS(g->old_bcprot_top);
+    ByteCode::s_nodestack->resize(R_BCProtTop);
+    // DECREMENT_BCSTACK_LINKS(g->old_bcprot_top);
     StackChecker::setDepth(g->oldevdepth);
     R_BCProtCommitted = g->old_bcprot_committed;
-    ByteCode::s_nodestack->resize_cr(g->oldntop);
+    ByteCode::s_nodestack->resize(g->oldntop);
     Evaluator::enableBCActive(g->oldbcintactive);
     R_BCbody = g->oldbcbody;
     R_BCpc = g->oldbcpc;
