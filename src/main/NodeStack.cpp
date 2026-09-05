@@ -42,12 +42,10 @@ namespace CXXR
     }
 
     NodeStack::NodeStack(size_t initial_capacity)
+        : m_deferred_protected_count(0), m_reserved_capacity(initial_capacity), m_protected_count(0), m_innermost_scope(nullptr)
     {
-        CXXR::NodeStack::m_vector.reserve(initial_capacity);
+        m_vector.reserve(initial_capacity);
         m_R_BCNodeStackTop = m_vector.data();
-        m_reserved_capacity = initial_capacity;
-        m_protected_count = 0;
-        m_deferred_protected_count = 0;
     }
 
     void NodeStack::pop(unsigned int count)
