@@ -74,7 +74,7 @@ update-pkg-pot:
 update-recpkg-po:
 	@fail=; for pkg in $(REC_PKGS_PO); do \
 	  $(ECHO); $(ECHO) "updating translations for '$${pkg}'"; \
-	  $(ECHO) "options(warn=2); tools::update_pkg_po(\"../../Recommended/$${pkg}\", mergeOpts=\"--no-wrap\")" | \
+	  $(ECHO) "options(warn=2); tools::update_pkg_po(\"../../Recommended/$${pkg}\", mergeOpts=\"--no-wrap --no-location\")" | \
 	    R_DEFAULT_PACKAGES=NULL LC_COLLATE=C $(R_EXE) || fail="$${fail} $${pkg}"; \
 	done; if test -n "$${fail}"; then $(ECHO) "FAILED:$${fail}"; exit 1; fi
 
