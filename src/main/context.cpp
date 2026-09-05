@@ -366,7 +366,7 @@ RCNTXT::~RContext()
     Evaluator::setInterruptsSuspended(this->m_intsusp);
     R_HandlerStack = this->handlerstack;
     R_RestartStack = this->restartstack;
-    R_BCNodeStackTop = R_BCNodeStackBase + this->nodestack_size;
+    ByteCode::s_nodestack->resize_cr(this->nodestack_size);
     R_BCProtReset(this->bcprottop);
     R_Srcref = this->srcref;
 

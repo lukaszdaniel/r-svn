@@ -95,6 +95,66 @@ namespace CXXR
             }
         };
 
+        /** @brief Object constraining lifetime of NodeStack entries.
+         *
+         * Scope objects must be declared on the processor stack
+         * (i.e. as C++ automatic variables).  Each Scope is
+         * associated with a particular NodeStack object.  Any entry
+         * pushed onto that NodeStack object during the lifetime of
+         * the Scope object will be automatically popped off when that
+         * lifetime comes to an end, i.e. when the Scope object itself
+         * goes out of scope.
+         */
+        class Scope
+        {
+        public:
+            /** @brief Constructor
+             *
+             * @param stack Non-null pointer to the NodeStack object
+             *    with which this Scope is to be associated.
+             */
+            Scope(NodeStack *stack)
+                : m_nodestack(stack),
+                  m_next_scope(stack->m_innermost_scope),
+                  m_saved_size(m_nodestack->size())
+            {
+                m_saved_protected_count = stack->m_protected_count;
+                stack->m_innermost_scope = this;
+            }
+
+            ~Scope()
+            {
+#ifndef NDEBUG
+                if (this != m_nodestack->m_innermost_scope)
+                    nestingError();
+#endif
+                m_nodestack->resize(m_saved_size);
+                m_nodestack->declnk_stack(m_saved_protected_count);
+                m_nodestack->m_innermost_scope = m_next_scope;
+            }
+
+        private:
+            friend class NodeStack;
+
+            NodeStack *m_nodestack;
+            Scope *m_next_scope;
+            size_t m_saved_size;
+            size_t m_saved_protected_count;
+
+            /** @brief NodeStack size at construction.
+             *
+             * @return The size of the NodeStack at the time this
+             * Scope object was constructed.  The NodeStack will be
+             * restored to this size by the Scope destructor.
+             */
+            size_t startSize() const
+            {
+                return m_saved_size;
+            }
+
+            static void nestingError();
+        };
+
         /** @brief Constructor.
          *
          * @param initial_capacity The initial capacity of the
@@ -238,6 +298,10 @@ namespace CXXR
             else
                 resize_aux(new_size);
         }
+        void resize_cr(size_t new_size)
+        {
+            m_R_BCNodeStackTop = m_vector.data() + new_size;
+        }
 
         /** @brief Current size of NodeStack.
          *
@@ -314,6 +378,8 @@ namespace CXXR
                                   // will have had their reference counts increased by this
                                   // class.  Stack entries beyond this (if any) will not yet
                                   // have had this protection applied.
+
+        Scope *m_innermost_scope;
 
         // Helper function for retarget(), handling the case where
         // 'index' is within the protected range:

@@ -27,10 +27,20 @@
  * Implementation of class NodeStack.
  */
 
+#include <iostream>
+#include <algorithm>
 #include <CXXR/NodeStack.hpp>
 
 namespace CXXR
 {
+    // ***** NodeStack *****
+
+    void NodeStack::Scope::nestingError()
+    {
+        std::cerr << "Fatal error: NodeStack::Scope objects must be destroyed in reverse order of creation\n";
+        abort();
+    }
+
     NodeStack::NodeStack(size_t initial_capacity)
     {
         CXXR::NodeStack::m_vector.reserve(initial_capacity);
@@ -42,6 +52,13 @@ namespace CXXR
 
     void NodeStack::pop(unsigned int count)
     {
+#ifndef NDEBUG
+        size_t sz = size();
+        if (count > sz)
+            throw std::out_of_range("NodeStack::pop(): count greater than current stack size.");
+        if (m_innermost_scope && sz - count < m_innermost_scope->startSize())
+            throw std::logic_error("NodeStack::unprotect: too many unprotects in this scope.");
+#endif
         m_R_BCNodeStackTop -= count;
     }
 
