@@ -2408,7 +2408,7 @@ static R_INLINE SEXP R_execClosure(SEXP call, SEXP newrho, SEXP sysparent,
             }
             R_Srcref = cntxt.srcref;
             retValue = STACKVAL_TO_SEXP(cntxt.returnValue);
-            RCNTXT::maybeRunOnExit(&cntxt); // so that endcontext doesn't run it
+            RCNTXT::maybeRunOnExit(&cntxt); // so that RCNTXT destructor doesn't run it
             endcontext(&cntxt);
         }
         catch (JMPException &e)
@@ -6271,8 +6271,6 @@ static void loopWithContext(SEXP code, SEXP rho)
                 break;
         }
     }
-
-    endcontext(&cntxt);
 }
 
 static R_INLINE R_xlen_t bcStackIndex(R_bcstack_t *s)

@@ -378,7 +378,6 @@ namespace CXXR
          */
         size_t push(RObject *node)
         {
-            // CHECK_SET_BELOW_PROT(size());
             size_t index = m_vector.size();
             emplace_node(NILSXP, node);
             return index;

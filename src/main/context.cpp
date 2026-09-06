@@ -338,13 +338,6 @@ void R::begincontext(RCNTXT *cptr, RCNTXT::Type flags,
     Evaluator::current()->m_innermost_context = cptr;
 }
 
-
-/* endcontext - end an execution context */
-
-void R::endcontext(RCNTXT *cptr)
-{
-}
-
 RCNTXT::~RContext()
 {
     try

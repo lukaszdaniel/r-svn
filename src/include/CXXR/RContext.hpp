@@ -276,7 +276,7 @@ namespace R
     SEXP R_findBCInterpreterSrcref(RCNTXT *);
     void begincontext(RCNTXT *, RCNTXT::Type, SEXP, SEXP, SEXP, SEXP, SEXP);
     SEXP dynamicfindVar(SEXP, RCNTXT *);
-    void endcontext(RCNTXT *);
+#define endcontext(cptr)
     int framedepth(RCNTXT *);
     void R_InsertRestartHandlers(RCNTXT *, const char *);
     NORET void R_JumpToContext(RCNTXT *, int, SEXP);
