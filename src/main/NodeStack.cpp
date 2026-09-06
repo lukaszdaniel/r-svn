@@ -42,14 +42,14 @@ namespace CXXR
     }
 
     NodeStack::NodeStack(size_t initial_capacity)
-        : m_deferred_protected_count(0), m_reserved_capacity(initial_capacity), m_protected_count(0), m_innermost_scope(nullptr)
+        : m_reserved_capacity(initial_capacity), m_deferred_protected_count(0), m_protected_count(0), m_innermost_scope(nullptr)
     {
         m_vector.reserve(initial_capacity);
     }
 
     void NodeStack::eraseTopmost(RObject *node)
     {
-        eraseTopmost(node_t(0, node));
+        eraseTopmost(node_t(NILSXP, node));
     }
 
     void NodeStack::eraseTopmost(node_t node)
@@ -66,7 +66,7 @@ namespace CXXR
         std::vector<node_t>::iterator it = rit.base() - 1;
         if (std::distance(m_vector.begin(), it) < int(m_protected_count))
         {
-            if (node.tag == 0)
+            if (node.tag == NILSXP)
                 GCNode::decRefCount(node.u.sxpval);
             --m_protected_count;
         }
@@ -92,7 +92,7 @@ namespace CXXR
 
     void NodeStack::retarget(RObject *node, size_t index)
     {
-        retarget(node_t(0, node), index);
+        retarget(node_t(NILSXP, node), index);
     }
 
     void NodeStack::retarget(node_t node, size_t index)
@@ -120,12 +120,12 @@ namespace CXXR
     void NodeStack::inclnk_stack_commit(void)
     {
         if (m_protected_count < m_deferred_protected_count) {
-            node_t *base = m_vector.data() + m_protected_count;
-            node_t *top = m_vector.data() + m_deferred_protected_count;
-            for (node_t *p = base; p < top; p++) {
+            std::vector<node_t>::iterator base = m_vector.begin() + std::ptrdiff_t(m_protected_count);
+            std::vector<node_t>::iterator top = m_vector.begin() + std::ptrdiff_t(m_deferred_protected_count);
+            for (std::vector<node_t>::iterator p = base; p != top; p++) {
                 if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
                     p += p->u.ival;
-                else if (p->tag == 0)
+                else if (p->tag == NILSXP)
                     GCNode::incRefCount(p->u.sxpval);
             }
             m_protected_count = m_deferred_protected_count;
@@ -142,7 +142,7 @@ namespace CXXR
             {
                 if (p->tag == RAWMEM_TAG || p->tag == CACHESZ_TAG)
                     p += p->u.ival;
-                else if (p->tag == 0)
+                else if (p->tag == NILSXP)
                     GCNode::decRefCount(p->u.sxpval);
             }
             m_protected_count = base;
@@ -152,9 +152,9 @@ namespace CXXR
 
     void NodeStack::retarget_aux(node_t oldnode, node_t newnode)
     {
-        if (newnode.tag == 0)
+        if (newnode.tag == NILSXP)
             GCNode::incRefCount(newnode.u.sxpval);
-        if (oldnode.tag == 0)
+        if (oldnode.tag == NILSXP)
             GCNode::decRefCount(oldnode.u.sxpval);
     }
 
@@ -164,12 +164,28 @@ namespace CXXR
         while (m_vector.size() > new_size)
         {
             node_t node = m_vector.back();
-            if (node.tag == 0)
+            if (node.tag == NILSXP)
                 GCNode::decRefCount(node.u.sxpval);
             m_vector.pop_back();
         }
         m_protected_count = new_size;
         m_deferred_protected_count = new_size;
+    }
+
+    int NodeStack::nodeIndex(RObject *node)
+    {
+        return nodeIndex(node_t(NILSXP, node));
+    }
+
+    int NodeStack::nodeIndex(const node_t &node)
+    {
+        auto it = find_if(m_vector.begin(), m_vector.end(), [&](const node_t &qnode)
+                          { return node.tag == qnode.tag && node.u.ival == qnode.u.ival; });
+        if (it != m_vector.end())
+        {
+            return std::distance(m_vector.begin(), it);
+        }
+        return -1;
     }
 
     void NodeStack::visitRoots(GCNode::const_visitor *v)

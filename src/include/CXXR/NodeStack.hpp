@@ -31,7 +31,7 @@
 #define NODESTACK_HPP
 
 #include <vector>
-#include <iterator> // for std::distance
+#include <utility> // for std::forward
 #include <CXXR/RTypes.hpp>
 #include <CXXR/RObject.hpp>
 #include <R_ext/Error.h> // for NORET
@@ -242,7 +242,7 @@ namespace CXXR
          */
         node_t *end()
         {
-            return m_vector.data() + size();
+            return m_vector.data() + m_vector.size();
         }
 
         /** @brief Element access.
@@ -362,6 +362,12 @@ namespace CXXR
             m_vector.push_back(node);
         }
 
+        template<typename... Args>
+        void emplace_node(Args&&... args)
+        {
+            m_vector.emplace_back(std::forward<Args>(args)...);
+        }
+
         /** @brief Push a node pointer onto the NodeStack.
          *
          * @param node Pointer, possibly null, to the node to be
@@ -374,7 +380,7 @@ namespace CXXR
         {
             // CHECK_SET_BELOW_PROT(size());
             size_t index = m_vector.size();
-            push_node(node_t(NILSXP, node));
+            emplace_node(NILSXP, node);
             return index;
         }
 
@@ -404,6 +410,16 @@ namespace CXXR
         {
             push_node(m_vector[m_vector.size() - 3]);
         }
+
+        /** @brief Index of a node in NodeStack.
+         *
+         * @param node Pointer, possibly null, to the node to be
+         *          searched for in the NodeStack.
+         *
+         * @return Index of the stack cell tor -1 if not found.
+         */
+        int nodeIndex(const node_t &node);
+        int nodeIndex(RObject *node);
 
         /** @brief Change the target of a pointer on the PPS.
          *
@@ -511,8 +527,8 @@ namespace CXXR
         void visitRoots(GCNode::const_visitor *v);
 
         std::vector<node_t> m_vector;
-        size_t m_deferred_protected_count;
         size_t m_reserved_capacity;
+        size_t m_deferred_protected_count;
         size_t m_protected_count; // The nodes (if any) pointed to
                                   // (*m_vector)[0] through (*m_vector)[m_protected_count - 1]
                                   // will have had their reference counts increased by this
@@ -529,14 +545,6 @@ namespace CXXR
         // Helper function for trim(), handling the case where the trim
         // cuts down into protected nodes:
         void resize_aux(size_t new_size) HOT_FUNCTION;
-
-#define R_BCNodeStackBase ByteCode::s_nodestack->m_vector.data()
-// Note that this macro name uses 'Top' in the sense of the C++ standard
-// library end(), i.e. one past the current top element of the stack,
-// not in the way that CR uses R_BCNodeStackEnd, which relates to the
-// end of allocated storage.
-#define R_BCNodeStackTop (ByteCode::nodeStackTop())
-#define R_BCNodeStackEnd ByteCode::s_nodestack->reservedCapacity()
 
         NORET static void nodeStackOverflow(void);
     };

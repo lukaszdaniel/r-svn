@@ -961,6 +961,12 @@ attribute_hidden void R::check_stack_balance(SEXP op, size_t save)
 	     PRIMNAME(op), save, R_PPStackTop);
 }
 
+// Note that this macro name uses 'Top' in the sense of the C++ standard
+// library end(), i.e. one past the current top element of the stack,
+// not in the way that CR uses R_BCNodeStackEnd, which relates to the
+// end of allocated storage.
+#define R_BCNodeStackTop (ByteCode::nodeStackTop())
+#define R_BCNodeStackEnd ByteCode::s_nodestack->reservedCapacity()
 #define R_BCProtTop ByteCode::deferredprotectedCount()
 #define R_BCProtCommitted ByteCode::s_nodestack->m_protected_count
 #define R_BCNodeStackTopSize (ByteCode::nodeStackSize())
@@ -5467,16 +5473,16 @@ static R_INLINE SEXP getForLoopSeq(int offset, bool *iscompact)
 
 #define BCNPUSH(v) (ByteCode::s_nodestack->push(v))
 
-#define BCNPUSH_NLNK(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(NLNKSXP, v)))
+#define BCNPUSH_NLNK(v) (ByteCode::s_nodestack->emplace_node(NLNKSXP, v))
 
-#define BCNPUSH_REAL(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(REALSXP, v)))
+#define BCNPUSH_REAL(v) (ByteCode::s_nodestack->emplace_node(REALSXP, v))
 
-#define BCNPUSH_INTEGER(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(INTSXP, v)))
+#define BCNPUSH_INTEGER(v) (ByteCode::s_nodestack->emplace_node(INTSXP, v))
 
-#define BCNPUSH_LOGICAL(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(LGLSXP, v)))
+#define BCNPUSH_LOGICAL(v) (ByteCode::s_nodestack->emplace_node(LGLSXP, v))
 
-#define BCNPUSH_CACHE(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(CACHESZ_TAG, v)))
-#define BCNPUSH_RAWMEM(v) (ByteCode::s_nodestack->push_node(R_bcstack_t(RAWMEM_TAG, v)))
+#define BCNPUSH_CACHE(v) (ByteCode::s_nodestack->emplace_node(CACHESZ_TAG, v))
+#define BCNPUSH_RAWMEM(v) (ByteCode::s_nodestack->emplace_node(RAWMEM_TAG, v))
 
 #define BCNDUP() (ByteCode::s_nodestack->push_dup())
 
@@ -5712,7 +5718,7 @@ static R_INLINE SEXP BINDING_VALUE(SEXP loc)
 
 # define CACHE_ON_STACK
 # ifdef CACHE_ON_STACK
-typedef R_bcstack_t * R_binding_cache_t;
+using R_binding_cache_t = CXXR::NodeStack::node_t *;
 #  define VCACHE(i) GETSTACK_SXPVAL_PTR(vcache + (i))
 #  define GET_CACHED_BINDING_CELL(vcache, sidx) \
     (vcache ? VCACHE(CACHEIDX(sidx)) : R_NilValue)
@@ -5721,7 +5727,7 @@ typedef R_bcstack_t * R_binding_cache_t;
 #  define SET_CACHED_BINDING(vcache, sidx, cell) \
     do { if (vcache) VCACHE(CACHEIDX(sidx)) = (cell); } while (0)
 # else
-typedef SEXP R_binding_cache_t;
+using R_binding_cache_t = SEXP;
 #  define GET_CACHED_BINDING_CELL(vcache, sidx) \
     (vcache ? VECTOR_ELT(vcache, CACHEIDX(sidx)) : R_NilValue)
 #  define GET_SMALLCACHE_BINDING_CELL(vcache, sidx) \
@@ -5731,7 +5737,7 @@ typedef SEXP R_binding_cache_t;
     do { if (vcache) SET_VECTOR_ELT(vcache, CACHEIDX(sidx), cell); } while (0)
 # endif
 #else
-typedef void *R_binding_cache_t;
+using R_binding_cache_t = void *;
 # define GET_CACHED_BINDING_CELL(vcache, sidx) R_NilValue
 # define GET_SMALLCACHE_BINDING_CELL(vcache, sidx) R_NilValue
 
@@ -7228,7 +7234,7 @@ static R_INLINE void save_bcEval_globals(struct bcEval_globals *g)
 static R_INLINE void restore_bcEval_globals(struct bcEval_globals *g)
 {
     ByteCode::s_nodestack->resize(R_BCProtTop);
-    // DECREMENT_BCSTACK_LINKS(g->old_bcprot_top);
+    // DECREMENT_BCSTACK_LINKS(g->old_bcprot_top); // already handled in resize()
     StackChecker::setDepth(g->oldevdepth);
     R_BCProtCommitted = g->old_bcprot_committed;
     ByteCode::s_nodestack->resize(g->oldntop);
