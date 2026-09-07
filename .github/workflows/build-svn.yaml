@@ -1,10 +1,10 @@
-on:
-  workflow_call:
+on: [push, pull_request]
 
 name: Build from SVN
 
-permissions:
-  contents: write
+concurrency:
+  group: ${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
 
 env:
   R_CRAN_WEB: "https://cran.rstudio.com"
