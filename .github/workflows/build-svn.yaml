@@ -25,13 +25,13 @@ jobs:
         fetch-depth: 100
 
     - name: Checkout
-      uses: ./.github/checkout@main
+      uses: ./.github/checkout
 
     - name: Setup Build Tooling
-      uses: ./.github/setup-windows-tools@main
+      uses: ./.github/setup-windows-tools
 
     - name: Build R-base
-      uses: ./.github/build-r-windows@main
+      uses: ./.github/build-r-windows
 
     - name: Test Installer
       run: |
@@ -86,7 +86,7 @@ jobs:
         fetch-depth: 100
 
     - name: Checkout
-      uses: ./.github/checkout@main
+      uses: ./.github/checkout
 
     - name: Configure
       run: CC=${{matrix.CC}} ./configure --enable-R-shlib --with-blas --with-lapack --enable-werror --disable-java
@@ -117,10 +117,10 @@ jobs:
         fetch-depth: 100
 
     - name: Checkout
-      uses: ./.github/checkout@main
+      uses: ./.github/checkout
 
     - name: Setup Build Tooling
-      uses: ./.github/setup-macos-tools@main
+      uses: ./.github/setup-macos-tools
 
     - name: Configure
       run: |
