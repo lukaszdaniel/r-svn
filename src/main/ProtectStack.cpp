@@ -28,6 +28,7 @@
  * interface.
  */
 
+#include <stdexcept>
 #include <CXXR/ProtectStack.hpp>
 
 namespace CXXR
