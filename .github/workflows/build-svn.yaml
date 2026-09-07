@@ -20,6 +20,10 @@ jobs:
       matrix:
         arch: [ 'x86_64', 'aarch64']
     steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 100
+
     - name: Checkout
       uses: ./.github/checkout@main
 
@@ -77,6 +81,10 @@ jobs:
         localedef -i en_US -f UTF-8 en_US.UTF-8
         echo "LANG=en_US.UTF-8" >> $GITHUB_ENV
 
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 100
+
     - name: Checkout
       uses: ./.github/checkout@main
 
@@ -104,6 +112,10 @@ jobs:
     env:
       R_TEXI2DVICMD: emulation
     steps:
+    - uses: actions/checkout@v6
+      with:
+        fetch-depth: 100
+
     - name: Checkout
       uses: ./.github/checkout@main
 
