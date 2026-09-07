@@ -1,0 +1,41 @@
+Subject: [PATCH] Invoke the real flang driver instead of the rtools wrapper
+
+On Windows ARM64, 'flang.exe' in rtools is a wrapper (flang-target-wrapper
+from llvm-mingw, see WindowsBuilds/winutf8/ucrt3/toolchain_libs/mxe/plugins/
+llvm-mingw in R-dev-web) that injects link-only flags (-lc++ -pthread
+-rtlib=compiler-rt) into every invocation. Because flang cannot suppress
+unused-argument warnings (unlike clang), every compile emits
+-Wunused-command-line-argument warnings, which R CMD check reports as
+significant. R never links with $(FC) on Windows: packages are linked via
+SHLIB_LD=$(CC) with FLIBS, so these flags are not needed. Call the real
+driver (renamed to aarch64-w64-mingw32-flang by the rtools build) directly.
+Its compiled-in default triple is aarch64-w64-mingw32, so no --target flag
+is needed.
+---
+diff --git a/src/gnuwin32/MkRules.rules b/src/gnuwin32/MkRules.rules
+index 1111111111..2222222222 100644
+--- a/src/gnuwin32/MkRules.rules
++++ b/src/gnuwin32/MkRules.rules
+@@ -157,9 +157,9 @@
+ ifndef USE_LLVM
+   FC=$(BINPREF)gfortran $(M_ARCH)
+   FLIBS=-lgfortran -lquadmath
+ else
+-  FC=$(BINPREF)flang $(M_ARCH)
++  FC=$(BINPREF)aarch64-w64-mingw32-flang $(M_ARCH)
+   ## Fortran_main is needed/available only in some builds of llvm/flang-new
+   LIBFM = $(or $(and $(wildcard $(EXT_LIBS)/lib/libFortran_main.a),-lFortran_main),)
+   FLIBS=-lFortranRuntime -lFortranDecimal $(LIBFM) -lc++ -lm
+ endif
+diff --git a/src/gnuwin32/fixed/etc/Makeconf b/src/gnuwin32/fixed/etc/Makeconf
+index 3333333333..4444444444 100644
+--- a/src/gnuwin32/fixed/etc/Makeconf
++++ b/src/gnuwin32/fixed/etc/Makeconf
+@@ -159,6 +159,6 @@
+ ## FC is the compiler used for all Fortran as from R 3.6.0
+ ifdef USE_LLVM
+-  FC = $(BINPREF)flang $(M_ARCH)
++  FC = $(BINPREF)aarch64-w64-mingw32-flang $(M_ARCH)
+ else
+   FC = $(BINPREF)gfortran $(M_ARCH)
+ endif

@@ -1,0 +1,14 @@
+diff --git a/etc/repositories b/etc/repositories
+index 6a1e642fff..6559ecb628 100644
+--- a/etc/repositories
++++ b/etc/repositories
+@@ -10,7 +10,8 @@
+ ## Also, %bm is substituted from the setting of getOption("BioC_mirror")
+ ##
+ menu_name	URL	default	source	win.binary	mac.binary
+-CRAN	CRAN	@CRAN@	TRUE	TRUE	TRUE	TRUE
++CRAN	CRAN	https://cran.r-universe.dev	TRUE	TRUE	TRUE	FALSE
++BIOC	BIOC	https://bioc-release.r-universe.dev	TRUE	TRUE	TRUE	FALSE
+ BioCsoft	"BioC software"	%bm/packages/%v/bioc	FALSE	TRUE	TRUE	TRUE
+ BioCann	"BioC annotation"	%bm/packages/%v/data/annotation	FALSE	TRUE	TRUE	TRUE
+ BioCexp	"BioC experiment"	%bm/packages/%v/data/experiment	FALSE	TRUE	TRUE	TRUE

@@ -1,0 +1,18 @@
+diff --git a/src/main/Makefile.win b/src/main/Makefile.win
+index 2a59ab2ff3..7472380f5f 100644
+--- a/src/main/Makefile.win
++++ b/src/main/Makefile.win
+@@ -49,9 +49,10 @@ endif
+ 
+ platform-CPPFLAGS = -I../gnuwin32 -I../extra
+ 
+-ifneq "$(R_ARCH)" ""
+-  platform-CPPFLAGS += -DPLATFORM_PKGTYPE='"win.binary"'
+-endif
++## Use custom binary package type windows.binary.<compiler>-<arch>,
++## e.g. windows.binary.gcc-x86_64 or windows.binary.clang-aarch64
++PKGTYPE_ARCH := $(firstword $(subst -, ,$(shell $(CC) -dumpmachine)))
++platform-CPPFLAGS += -DPLATFORM_PKGTYPE='"windows.binary.$(CCBASE)-$(PKGTYPE_ARCH)"'
+ 
+ RNG-CPPFLAGS = -I../nmath
+ agrep-CPPFLAGS = -I../extra

@@ -1,6 +1,5 @@
 name: 'Prepare MacOS system'
 description: 'Prepare system for building R'
-
 inputs:
   fortran:
     description: 'Install Fortran compiler'
@@ -15,7 +14,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-
     - name: Set SDK to match CRAN
       shell: bash
       run: |
@@ -26,9 +24,12 @@ runs:
           sudo xcode-select -s /Applications/Xcode_26.0.app || true
           echo "MACOSX_DEPLOYMENT_TARGET=14.0" >> $GITHUB_ENV
         fi
+        echo "xcode is set: $(xcode-select --print-path)"
+        echo "using SDK: $(xcrun --show-sdk-version)" || true
 
-        echo "xcode path: $(xcode-select --print-path)"
-        echo "sdk version: $(xcrun --show-sdk-version)" || true
+    - name: Remove homebrew packages
+      shell: bash
+      run: brew unlink $(brew list --formula) || true
 
     - name: Install CRAN fortran build
       if: inputs.fortran
@@ -46,23 +47,10 @@ runs:
         sudo mkdir -p /opt
         sudo chown $USER /opt
         curl --retry 3 --fail-with-body -sSL https://github.com/r-universe-org/macos-libs/releases/download/2025-12-13/cranlibs-everything.tar.xz -o libs.tar.xz
-        sudo tar -xf libs.tar.xz -C /opt
+        sudo tar -xf libs.tar.xz -C / opt
         rm -f libs.tar.xz
         echo "/opt/R/$(uname -m)/bin" >> $GITHUB_PATH
         echo "PKG_CONFIG_PATH=/opt/R/$(uname -m)/lib/pkgconfig:/opt/R/$(uname -m)/share/pkgconfig" >> $GITHUB_ENV
-
-    - name: Install Homebrew dependencies
-      shell: bash
-      run: |
-        brew install xz pkg-config pcre2
-
-        XZ_PREFIX=$(brew --prefix xz)
-        PCRE2_PREFIX=$(brew --prefix pcre2)
-
-        echo "CPPFLAGS=-I$XZ_PREFIX/include -I$PCRE2_PREFIX/include $CPPFLAGS" >> $GITHUB_ENV
-        echo "LDFLAGS=-L$XZ_PREFIX/lib -L$PCRE2_PREFIX/lib $LDFLAGS" >> $GITHUB_ENV
-
-        echo "PKG_CONFIG_PATH=$XZ_PREFIX/lib/pkgconfig:$PCRE2_PREFIX/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
 
     - name: Install TinyTex
       if: ${{ inputs.tinytex }}
@@ -72,16 +60,15 @@ runs:
 
     - name: Install additional LaTeX packages
       if: ${{ inputs.tinytex }}
-      shell: bash
       run: |
         tlmgr update --self
         tlmgr install texinfo
         tlmgr list --only-installed
         echo "$HOME/Library/TinyTeX/bin/universal-darwin" >> $GITHUB_PATH
-
-    - name: Install XQuartz
-      if: inputs.xquartz
       shell: bash
+
+    - shell: bash
+      if: inputs.xquartz
       run: |
         if [ -d "/opt/X11/lib" ]; then
           echo "/opt/X11/lib exists. Skipping xQuartz installation"
@@ -94,4 +81,3 @@ runs:
           echo "Done installing XQuartz!"
           echo "::endgroup::"
         fi
-
