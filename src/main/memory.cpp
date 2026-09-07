@@ -1241,13 +1241,11 @@ void GCNode::mark(unsigned int max_generation)
     }
 
     for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL; ctxt = ctxt->nextcontext) {
-        if (ctxt->returnValue.tag == 0)    /* For on.exit calls */
+        if (ctxt->returnValue.tag == NILSXP)    /* For on.exit calls */
             MARK_THRU(ctxt->returnValue.u.sxpval);
     }
 
-    for (size_t i = 0; i < R_PPStackTop; i++)	   /* Protected pointers */
-        MARK_THRU(R_PPStack[i]);
-
+    ProtectStack::visitRoots(&marker);	   /* Protected pointers */
     ByteCode::visitRoots(&marker);
 
 

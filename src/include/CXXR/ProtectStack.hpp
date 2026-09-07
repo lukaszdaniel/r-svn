@@ -134,9 +134,24 @@ namespace CXXR
          */
         static void unprotectPtr(SEXP node);
 
+        /** @brief Conduct a const visitor to protected objects.
+         *
+         * Conduct a GCNode::const_visitor object to each node on the
+         * pointer protection stack.
+         *
+         * @param v Pointer to the const_visitor object.
+         */
+        static void visitRoots(GCNode::const_visitor *v)
+        {
+            for (auto &el : s_stack)
+            {
+                if (el != R_NilValue) (*v)(el);
+            }
+        }
+
         static void initialize(size_t initial_capacity = 50000);
 
-        static std::vector<SEXP> s_stack;
+        static std::vector<RObject *> s_stack;
 #define R_PPStack CXXR::ProtectStack::s_stack
 
         // Initialize the static data members:
