@@ -118,6 +118,8 @@ namespace CXXR
          */
         static void visitRoots(GCNode::const_visitor *v);
 
+        static void initialize();
+
     protected:
         /** @brief Primary constructor.
          *
@@ -164,8 +166,6 @@ namespace CXXR
         }
 
     private:
-        friend class GCNode;
-
         // Note that we deliberately do not use CXXR::Allocator in
         // declaring the following vectors: we really don't want a
         // garbage collection happening just as we're trying to
@@ -185,11 +185,6 @@ namespace CXXR
         {
             // delete s_roots;
         }
-
-        // Initialize the static data members:
-        friend void initializeMemorySubsystem();
-        // Initialize static data (called by GCStackRootBase::SchwarzCtr constructor):
-        static void initialize();
 
         // Report out-of-sequence destructor call and abort program.
         // (We can't use an exception here because it's called from a
@@ -245,7 +240,10 @@ namespace CXXR
          *          node and its descendants to the garbage collector.
          */
         explicit GCStackRoot(T *node = nullptr, bool expose = false)
-            : GCStackRootBase(node, expose) { check_complete_type(); }
+            : GCStackRootBase(node, expose)
+        {
+            check_complete_type();
+        }
 
         /** @brief Copy constructor.
          *

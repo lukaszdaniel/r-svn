@@ -587,14 +587,6 @@ namespace CXXR
             link(s, this);
         }
 
-        /** @brief Initialize the entire memory subsystem.
-         *
-         * This method must be called before any GCNodes are created.
-         * If called more than once in a single program run, the
-         * second and subsequent calls do nothing.
-         */
-        friend void initializeMemorySubsystem();
-
         // Clean up static data at end of run:
         static void cleanup();
 
@@ -718,14 +710,6 @@ namespace CXXR
         */
         static unsigned int s_next_gen[1 + GCManager::numOldGenerations()];
     };
-
-    /** @brief Initialize the entire memory subsystem.
-     *
-     * This method must be called before any GCNodes are created.
-     * If called more than once in a single program run, the
-     * second and subsequent calls do nothing.
-     */
-    void initializeMemorySubsystem();
 } // namespace CXXR
 
 namespace

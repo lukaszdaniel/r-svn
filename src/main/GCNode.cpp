@@ -138,20 +138,6 @@ namespace CXXR
         }
     }
 
-    void initializeMemorySubsystem()
-    {
-        static bool initialized = false;
-        if (!initialized)
-        {
-            GCNode::initialize();
-            GCStackRootBase::initialize();
-            ProtectStack::initialize();
-            // RAllocStack::initialize();
-
-            initialized = true;
-        }
-    }
-
     void GCNode::cleanup()
     {
     }

@@ -1617,6 +1617,8 @@ static void gc_end_timing(void)
 /* InitMemory : Initialise the memory to be used in R. */
 /* This includes: stack space, node space and vector space */
 
+#define PP_REDZONE_SIZE 1000L
+
 attribute_hidden void R::InitMemory(void)
 {
     GCManager::setMonitors(gc_start_timing, gc_end_timing);
@@ -1631,8 +1633,10 @@ attribute_hidden void R::InitMemory(void)
 
     GCManager::setReporting(R_Verbose ? &std::cerr : nullptr);
     GCManager::enableGC(R_VSIZE, R_NSIZE);
-    CXXR::initializeMemorySubsystem();
-    // ProtectStack::initialize(R_PPStackSize);
+    GCNode::initialize();
+    GCStackRootBase::initialize();
+    ProtectStack::initialize(R_PPStackSize + PP_REDZONE_SIZE); // ProtectStack plus a red zone to avoid stack overflow
+    // RAllocStack::initialize();
 
     ByteCode::initialize();
 
@@ -2246,7 +2250,32 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
 NORET void ProtectStack::R_signal_protect_error(void)
 {
-    error("%s", _("R_signal_protect_error() is no-op in CXXR"));
+    RCNTXT cntxt;
+    size_t oldpps = size();
+    const size_t R_RealPPStackSize = reservedCapacity();
+
+    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+        R_NilValue, R_NilValue);
+
+    try {
+    /* condition is pre-allocated and protected with R_PreserveObject */
+        SEXP cond = R_getProtectStackOverflowError();
+
+        if (size() < R_RealPPStackSize) {
+            s_stack.resize(R_RealPPStackSize);
+            /* allow calling handlers */
+            R_signalErrorCondition(cond, R_NilValue);
+        }
+
+        /* calling handlers at this point might produce a C stack
+           overflow/SEGFAULT so treat them as failed and skip them */
+        R_signalErrorConditionEx(cond, R_NilValue, TRUE);
+    }
+    catch (...) {
+        s_stack.resize(oldpps);
+        throw;
+    }
+    endcontext(&cntxt); /* not reached */
 }
 
 NORET void ProtectStack::R_signal_unprotect_error(void)
@@ -2259,6 +2288,9 @@ NORET void ProtectStack::R_signal_unprotect_error(void)
 unsigned int ProtectStack::protect_(SEXP s)
 {
     R_CHECK_THREAD;
+    if (size() + PP_REDZONE_SIZE >= reservedCapacity())
+        R_signal_protect_error();
+
     s_stack.push_back(CHK(s));
     return R_PPStackTop - 1;
 }

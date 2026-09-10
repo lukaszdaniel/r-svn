@@ -181,7 +181,6 @@ namespace CXXR
         }
 
     private:
-        friend class GCNode;
         using Pair = std::pair<size_t, void *>;
         using Stack = std::stack<Pair, std::vector<Pair>>;
         static Stack *s_stack;
@@ -194,8 +193,6 @@ namespace CXXR
             // delete s_stack;
         }
 
-        // Initialize the static data members:
-        friend void initializeMemorySubsystem();
         // Initialize static data (called by RAllocStack::SchwarzCtr constructor):
         static void initialize();
 

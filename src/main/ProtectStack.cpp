@@ -56,6 +56,13 @@ namespace CXXR
 
     void ProtectStack::initialize(size_t initial_capacity)
     {
+        static bool s_initialized = false;
+        if (s_initialized)
+        {
+            throw std::runtime_error("ProtectStack is already initialized.");
+        }
+        s_initialized = true;
+
         s_stack.reserve(initial_capacity);
         s_reserved_capacity = initial_capacity;
     }

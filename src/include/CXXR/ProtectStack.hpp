@@ -204,16 +204,13 @@ namespace CXXR
             }
         }
 
+        static void initialize(size_t initial_capacity = 50000);
+
     private:
         static std::vector<RObject *> s_stack;
         static size_t s_reserved_capacity;
 
 #define R_PPStack CXXR::ProtectStack::s_stack
-
-        // Initialize the static data members:
-        friend void initializeMemorySubsystem();
-        // Initialize static data (called by GCNode::SchwarzCtr constructor):
-        static void initialize(size_t initial_capacity = 50000);
 
         static Scope *s_innermost_scope;
 
