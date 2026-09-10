@@ -63,7 +63,7 @@ namespace CXXR
             /** @brief Constructor. */
             Scope()
                 : m_next_scope(s_innermost_scope),
-                  m_saved_size(ProtectStack::size())
+                m_saved_size(ProtectStack::size())
             {
                 s_innermost_scope = this;
             }
@@ -163,6 +163,15 @@ namespace CXXR
          */
         static void unprotect_(unsigned int count = 1);
 
+        /** @brief Is node protected?
+         *
+         * @param node Pointer to the node to be checked.
+         *
+         * @return index in ProtectStack. If node is not found result
+         *          is (false, 0).
+         */
+        static std::pair<bool, unsigned int> isProtected(RObject *node);
+
         /**
          * Removes from the C pointer protection stack the uppermost
          * stack cell containing a pointer to a specified node, and
@@ -174,6 +183,11 @@ namespace CXXR
          * @deprecated Utterly.
          */
         static void unprotectPtr(SEXP node);
+
+        static size_t reservedCapacity()
+        {
+            return s_reserved_capacity;
+        }
 
         /** @brief Conduct a const visitor to protected objects.
          *
@@ -190,7 +204,10 @@ namespace CXXR
             }
         }
 
+    private:
         static std::vector<RObject *> s_stack;
+        static size_t s_reserved_capacity;
+
 #define R_PPStack CXXR::ProtectStack::s_stack
 
         // Initialize the static data members:
@@ -198,7 +215,6 @@ namespace CXXR
         // Initialize static data (called by GCNode::SchwarzCtr constructor):
         static void initialize(size_t initial_capacity = 50000);
 
-    private:
         static Scope *s_innermost_scope;
 
         ProtectStack() = delete;

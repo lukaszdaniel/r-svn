@@ -30,8 +30,8 @@
 #ifndef NODESTACK_HPP
 #define NODESTACK_HPP
 
-#include <vector>
 #include <utility> // for std::forward
+#include <vector>
 #include <CXXR/RTypes.hpp>
 #include <CXXR/RObject.hpp>
 #include <R_ext/Error.h> // for NORET
@@ -178,8 +178,8 @@ namespace CXXR
              */
             Scope(NodeStack *stack)
                 : m_nodestack(stack),
-                  m_next_scope(stack->m_innermost_scope),
-                  m_saved_size(m_nodestack->size())
+                m_next_scope(stack->m_innermost_scope),
+                m_saved_size(m_nodestack->size())
             {
                 m_saved_protected_count = stack->m_protected_count;
                 stack->m_innermost_scope = this;
@@ -516,6 +516,8 @@ namespace CXXR
             return m_reserved_capacity;
         }
 
+        NORET static void nodeStackOverflow(void);
+
         /** @brief Conduct a const visitor via the NodeStack.
          *
          * Conduct a GCNode::const_visitor object to each node_t
@@ -525,6 +527,7 @@ namespace CXXR
          */
         void visitRoots(GCNode::const_visitor *v);
 
+    // private:
         std::vector<node_t> m_vector;
         size_t m_reserved_capacity;
         size_t m_deferred_protected_count;
@@ -544,8 +547,6 @@ namespace CXXR
         // Helper function for trim(), handling the case where the trim
         // cuts down into protected nodes:
         void resize_aux(size_t new_size) HOT_FUNCTION;
-
-        NORET static void nodeStackOverflow(void);
     };
 
     using R_bcstack_t = NodeStack::node_t;

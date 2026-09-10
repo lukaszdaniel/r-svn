@@ -2306,14 +2306,7 @@ void ProtectStack::unprotectPtr(SEXP s)
 attribute_hidden std::pair<bool, unsigned int> R::Rf_isProtected(SEXP s)
 {
     R_CHECK_THREAD;
-    auto it = std::find_if(ProtectStack::s_stack.rbegin(),
-        ProtectStack::s_stack.rend(),
-        [&](SEXP q) { return q == s; });
-    if (it == ProtectStack::s_stack.rend())
-        return std::pair(false, 0);
-
-    unsigned int index = R_PPStackTop - 1 - (it - ProtectStack::s_stack.rbegin());
-    return std::pair(true, index);
+    return ProtectStack::isProtected(s);
 }
 
 

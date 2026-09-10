@@ -28,6 +28,7 @@
  */
 
 #include <algorithm>
+#include <stdexcept>
 #include <CXXR/NodeStack.hpp>
 
 namespace CXXR

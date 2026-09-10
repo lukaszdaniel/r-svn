@@ -28,6 +28,7 @@
  * interface.
  */
 
+#include <algorithm>
 #include <stdexcept>
 #include <CXXR/ProtectStack.hpp>
 
@@ -45,6 +46,7 @@ namespace CXXR
     } // namespace ForceNonInline
 
     std::vector<SEXP> ProtectStack::s_stack;
+    size_t ProtectStack::s_reserved_capacity = 0;
     ProtectStack::Scope *ProtectStack::s_innermost_scope = nullptr;
 
     void ProtectStack::Scope::nestingError()
@@ -55,6 +57,7 @@ namespace CXXR
     void ProtectStack::initialize(size_t initial_capacity)
     {
         s_stack.reserve(initial_capacity);
+        s_reserved_capacity = initial_capacity;
     }
 
     void ProtectStack::restoreSize(size_t new_size)
@@ -62,6 +65,18 @@ namespace CXXR
         if (new_size > s_stack.size())
             throw std::out_of_range("ProtectStack::restoreSize: requested size greater than current size.");
         s_stack.resize(new_size);
+    }
+
+    std::pair<bool, unsigned int> ProtectStack::isProtected(RObject *node)
+    {
+        auto it = std::find_if(ProtectStack::s_stack.rbegin(),
+            ProtectStack::s_stack.rend(),
+            [&](SEXP q) { return q == node; });
+        if (it == ProtectStack::s_stack.rend())
+            return std::pair(false, 0);
+
+        unsigned int index = R_PPStackTop - 1 - (it - ProtectStack::s_stack.rbegin());
+        return std::pair(true, index);
     }
 } // namespace CXXR
 
