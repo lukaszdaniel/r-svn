@@ -788,9 +788,9 @@ bool R_pmatch(SEXP, SEXP, bool);
 void printwhere(void);
 void readS3VarsFromFrame(SEXP, SEXP*, SEXP*, SEXP*, SEXP*, SEXP*, SEXP*);
 
-NORET void R_signal_protect_error(void);
-NORET void R_signal_unprotect_error(void);
-NORET void R_signal_reprotect_error(PROTECT_INDEX i);
+// NORET void R_signal_protect_error(void);
+// NORET void R_signal_unprotect_error(void);
+// NORET void R_signal_reprotect_error(PROTECT_INDEX i);
 
 // const char *R_curErrorBuf(void); // declared in Rinternals.h
 bool R_cycle_detected(SEXP s, SEXP child);

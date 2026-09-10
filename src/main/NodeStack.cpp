@@ -27,7 +27,6 @@
  * Implementation of class NodeStack.
  */
 
-#include <iostream>
 #include <algorithm>
 #include <CXXR/NodeStack.hpp>
 
@@ -37,8 +36,7 @@ namespace CXXR
 
     void NodeStack::Scope::nestingError()
     {
-        std::cerr << "Fatal error: NodeStack::Scope objects must be destroyed in reverse order of creation\n";
-        abort();
+        throw std::runtime_error("Fatal error: NodeStack::Scope objects must be destroyed in reverse order of creation");
     }
 
     NodeStack::NodeStack(size_t initial_capacity)
@@ -58,12 +56,12 @@ namespace CXXR
         if (m_innermost_scope && m_vector.size() == m_innermost_scope->startSize())
             throw std::logic_error("NodeStack::eraseTopmost(): too many pops in this scope.");
 #endif
-        std::vector<node_t>::reverse_iterator rit = find_if(m_vector.rbegin(), m_vector.rend(), [&](const node_t &qnode)
-                                                            { return node.tag == qnode.tag && node.u.ival == qnode.u.ival; });
+        auto rit = find_if(m_vector.rbegin(), m_vector.rend(), [&](const node_t &qnode)
+            { return node.tag == qnode.tag && node.u.ival == qnode.u.ival; });
         if (rit == m_vector.rend())
             throw std::invalid_argument("NodeStack::unprotectPtr: pointer not found.");
-        // See Josuttis p.267 for the need for -1 :
-        std::vector<node_t>::iterator it = rit.base() - 1;
+        // See Josuttis p.267 for the need for -1:
+        auto it = rit.base() - 1;
         if (std::distance(m_vector.begin(), it) < int(m_protected_count))
         {
             if (node.tag == NILSXP)

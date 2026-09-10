@@ -50,6 +50,47 @@ namespace CXXR
     class ProtectStack
     {
     public:
+        /** @brief Object constraining lifetime of ProtectStack entries.
+         *
+         * Scope objects must be declared on the processor stack. Any
+         * entry pushed onto the protection stack during the lifetime of
+         * a Scope object is automatically removed when the Scope is
+         * destroyed.
+         */
+        class Scope
+        {
+        public:
+            /** @brief Constructor. */
+            Scope()
+                : m_next_scope(s_innermost_scope),
+                  m_saved_size(ProtectStack::size())
+            {
+                s_innermost_scope = this;
+            }
+
+            ~Scope()
+            {
+#ifndef NDEBUG
+                if (this != s_innermost_scope)
+                    nestingError();
+#endif
+                ProtectStack::restoreSize(m_saved_size);
+                s_innermost_scope = m_next_scope;
+            }
+
+            /** @brief ProtectStack size at construction. */
+            size_t startSize() const
+            {
+                return m_saved_size;
+            }
+
+        private:
+            Scope *m_next_scope;
+            size_t m_saved_size;
+
+            static void nestingError();
+        };
+
         /** @brief Restore PPS to a previous size.
          *
          * Restore the C pointer protection stack to a previous size by
@@ -149,15 +190,22 @@ namespace CXXR
             }
         }
 
-        static void initialize(size_t initial_capacity = 50000);
-
         static std::vector<RObject *> s_stack;
 #define R_PPStack CXXR::ProtectStack::s_stack
 
         // Initialize the static data members:
         friend void initializeMemorySubsystem();
+        // Initialize static data (called by GCNode::SchwarzCtr constructor):
+        static void initialize(size_t initial_capacity = 50000);
+
+    private:
+        static Scope *s_innermost_scope;
 
         ProtectStack() = delete;
+
+        NORET static void R_signal_protect_error(void);
+        NORET static void R_signal_unprotect_error(void);
+        NORET static void R_signal_reprotect_error(unsigned int i);
     };
 } // namespace CXXR
 
@@ -222,6 +270,32 @@ extern "C"
     {
         CXXR::ProtectStack::reprotect(node, index);
     }
+
+    /** @brief Restore C pointer protection stack to a previous size.
+     *
+     * Restore the C pointer protection stack to a previous size by
+     * popping elements off the top.
+     *
+     * @param new_size The size to which the stack is to be
+     *          restored.  Must not be greater than the current
+     *          size.
+     *
+     * @deprecated This is an interface for C code to call
+     * CXXR::ProtectStack::restoreSize(), which may cease to be available
+     * in future.  In C++, use of the ProtectStack::Scope class is
+     * preferable.
+     */
+    void Rf_ppsRestoreSize(size_t new_size);
+
+    /** @brief Current size of C pointer protection stack.
+     *
+     * @return the current size of the C pointer protection stack.
+     *
+     * @deprecated This is an interface for C code to call
+     * CXXR::ProtectStack::size(), which may cease to be public in
+     * future.
+     */
+    size_t Rf_ppsSize();
 
     /** @brief Push a node pointer onto the C pointer protection stack.
      *

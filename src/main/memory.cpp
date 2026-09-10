@@ -2244,12 +2244,12 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
    we'll allocate a slightly larger PP stack and only enable the added
    red zone during handling of a stack overflow error.  LT */
 
-NORET void R::R_signal_protect_error(void)
+NORET void ProtectStack::R_signal_protect_error(void)
 {
     error("%s", _("R_signal_protect_error() is no-op in CXXR"));
 }
 
-NORET void R::R_signal_unprotect_error(void)
+NORET void ProtectStack::R_signal_unprotect_error(void)
 {
     error(n_("unprotect(): only %td protected item",
 		   "unprotect(): only %td protected items", R_PPStackTop),
@@ -2259,7 +2259,7 @@ NORET void R::R_signal_unprotect_error(void)
 unsigned int ProtectStack::protect_(SEXP s)
 {
     R_CHECK_THREAD;
-    ProtectStack::s_stack.push_back(CHK(s));
+    s_stack.push_back(CHK(s));
     return R_PPStackTop - 1;
 }
 
@@ -2271,10 +2271,15 @@ void ProtectStack::unprotect_(unsigned int l)
     R_CHECK_THREAD;
     if (R_PPStackTop < l)
         R_signal_unprotect_error();
+#ifndef NDEBUG
+    size_t sz = s_stack.size();
+    if (s_innermost_scope && sz - l < s_innermost_scope->startSize())
+        throw std::logic_error("ProtectStack::unprotect: too many unprotects in this scope.");
+#endif
 
     while (l--)
     {
-        ProtectStack::s_stack.pop_back();
+        s_stack.pop_back();
     }
 }
 
@@ -2283,14 +2288,17 @@ void ProtectStack::unprotect_(unsigned int l)
 void ProtectStack::unprotectPtr(SEXP s)
 {
     R_CHECK_THREAD;
-    for (auto it = ProtectStack::s_stack.end(); it != ProtectStack::s_stack.begin();) {
-        --it; // Move the iterator backwards
-        if (*it == s) {
-            ProtectStack::s_stack.erase(it);
-            return;
-        }
-    }
-    error("%s", _("unprotect_ptr: pointer not found"));
+#ifndef NDEBUG
+    if (s_innermost_scope && s_stack.size() == s_innermost_scope->startSize())
+        throw std::logic_error("ProtectStack::unprotectPtr: too many pops in this scope.");
+#endif
+    auto rit = std::find_if(s_stack.rbegin(), s_stack.rend(),
+        [&](SEXP q) { return s == q; });
+    if (rit == s_stack.rend())
+        throw std::invalid_argument("ProtectStack::unprotectPtr: pointer not found.");
+
+    // See Josuttis p.267 for the need for -1.
+    s_stack.erase(rit.base() - 1);
 }
 
 /* Debugging function:  is s protected? */
@@ -2298,19 +2306,18 @@ void ProtectStack::unprotectPtr(SEXP s)
 attribute_hidden std::pair<bool, unsigned int> R::Rf_isProtected(SEXP s)
 {
     R_CHECK_THREAD;
-    size_t i = R_PPStackTop;
-    for (auto it = ProtectStack::s_stack.end(); it != ProtectStack::s_stack.begin();) {
-        --it; // Move the iterator backwards
-        --i;
-        if (*it == s) {
-            return std::pair(true, i);
-        }
-    }
-    return std::pair(false, 0);
+    auto it = std::find_if(ProtectStack::s_stack.rbegin(),
+        ProtectStack::s_stack.rend(),
+        [&](SEXP q) { return q == s; });
+    if (it == ProtectStack::s_stack.rend())
+        return std::pair(false, 0);
+
+    unsigned int index = R_PPStackTop - 1 - (it - ProtectStack::s_stack.rbegin());
+    return std::pair(true, index);
 }
 
 
-NORET void R::R_signal_reprotect_error(PROTECT_INDEX i)
+NORET void ProtectStack::R_signal_reprotect_error(PROTECT_INDEX i)
 {
     error(n_("R_Reprotect: only %td protected item, can't reprotect index %d",
 		   "R_Reprotect: only %td protected items, can't reprotect index %d",
@@ -2322,7 +2329,7 @@ void ProtectStack::reprotect(SEXP s, PROTECT_INDEX i)
 {
     R_CHECK_THREAD;
     if (i >= R_PPStackTop || i < 0)
-	R_signal_reprotect_error(i);
+        R_signal_reprotect_error(i);
     R_PPStack[i] = s;
 }
 
@@ -2333,13 +2340,15 @@ void ProtectStack::reprotect(SEXP s, PROTECT_INDEX i)
 SEXP R_CollectFromIndex(PROTECT_INDEX i)
 {
     R_CHECK_THREAD;
-    SEXP res;
+    GCStackRoot<ListVector> res;
     size_t top = R_PPStackTop;
     int j = 0;
     if (i > top) i = top;
-    res = Rf_protect(allocVector(VECSXP, top - i));
+    res = ListVector::create(top - i);
     while (i < top)
+    {
 	SET_VECTOR_ELT(res, j++, R_PPStack[--top]);
+    }
     ProtectStack::restoreSize(top); /* this includes the protect we used above */
     return res;
 }
