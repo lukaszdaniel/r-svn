@@ -3,6 +3,9 @@
 options(warn = 2, width = 101) # all warnings must be asserted below
 all.equal.0 <- function(x,y, ...) all.equal(x,y, tolerance = 0, ...)
 all.equal15 <- function(x,y, ...) all.equal(x,y, tolerance = 1e-15, ...)
+assertWarnV <- function(...) tools::assertWarning(..., verbose=TRUE)
+## for comparisons, may drop call:
+noC  <- function(L) L[-match("call", names(L))]
 
 data(mtcars)
 mtcar2 <- within(mtcars, {
@@ -102,10 +105,10 @@ stopifnot(all.equal(cf8.9, coef(fm8.9), tolerance = 7e-9))
 ## predict :
 nd <- d8[,-1] + rep(outer(c(-2:2),10^(1:3)), 3) # 5 * 9 = 45 = 15 * 3 (nrow * ncol)
 row.names(nd) <- LETTERS[1:nrow(nd)]
-tools::assertWarning(verbose=TRUE, # "... rank-deficient .. consider predict(., rankdeficient="NA")
- ps <- predict(fm8. , newdata=nd, rankdeficient = "simple") )
-tools::assertWarning(verbose=TRUE, # "... rank-deficient ..  attr(*, "non-estim") has doubtful cases
- ps.<- predict(fm8. , newdata=nd) ) # default
+assertWarnV(# "... rank-deficient .. consider predict(., rankdeficient="NA")
+    ps <- predict(fm8. , newdata=nd, rankdeficient = "simple") )
+assertWarnV(# "... rank-deficient ..  attr(*, "non-estim") has doubtful cases
+    ps.<- predict(fm8. , newdata=nd) ) # default
 pN  <- predict(fm8. , newdata=nd, rankdeficient = "NA")
 pne <- predict(fm8. , newdata=nd, rankdeficient = "non-estim")
 p.9 <- predict(fm8.9, newdata=nd)
@@ -321,10 +324,10 @@ fit15  <- lm(y~x, weights = wts,     data = df, wtol = 0, tol = 1e-15)
 ## [1] "Component “qr”: Component “tol”: Mean relative difference: 1"
 ## [2] "Component “call”: target, current do not match when deparsed"
 ## ------------- but everything else is numerically identical -----------
-tools::assertWarning(verbose=TRUE, { # setting very small weights to zero ..
+assertWarnV({ # setting very small weights to zero ..
     fitw30    <- lm(y~x, weights = wts,     data = df, wtol = 1e-30)
     fiF100w30 <- lm(y~x, weights = wts*100, data = df, wtol = 1e-30)
-    })
+})
 (aew30 <- all.equal.0(fitw30, fiF100w30)) # 8 components differ . . . "okay"
 stopifnot(exprs = {
     length(ae15) == 2
@@ -387,16 +390,27 @@ stopifnot(exprs = { # the fitted models now have identical 'call':
     ##
     all.equal.0( wls2(rock.mod1), wls2(rock.mod2) -> wu2) # Error in eval(..) : object 'res2' not found
     all.equal.0( wls2(rock.modf) -> wuf, wu2)
-    all.equal.0( wuf, wls2(rock.modf2))
-    all.equal.0( wuf, wls2(rock.modf0))
-    ## but wls2(umod0) or  wls2(umod*)  all fail
+    all.equal.0(    wuf,      wls2(rock.modf2))
+    all.equal.0(noC(wuf), noC(wls2(rock.modf0)))
+    ## but wls2(umod0) or  wls2(umod*)  all fail [[TODO ?]]
 })
+## A version without data i.e. global variables!
+counts <- c(18,17,15,20,10,20,25,13,12)
+treatment <- gl(3,3)
+form <- counts ~ treatment # formula as object
+flm <- lm(form)
+(u1 <- update(flm)) # calling update.default(flm) -- failed in R-devel 90471
+rm(form)
+(u2 <- update(flm))
+stopifnot(all.equal.0(u1, flm),
+          identical(u1, u2))
+
 
 ##----- the same with glm(): ----------
-
 rock.glm0 <- glm(area ~ . , data = rock)
 rock.glm1 <- glm(area ~ peri + shape + perm, data = rock)
 rock.glm2 <- glm(rock)
+form <- formula(rock.mod1)
 rock.glmf <- glm(form, data = rock)
 rock.glmf0<- glm(form0,data = rock)
 rock.glmf2<- glm(formula(rock.glm1), data = rock)
@@ -422,11 +436,21 @@ stopifnot(exprs = { # the fitted models now have identical 'call':
     all.equal.0( uglmf, uglmf2)
     all.equal.0(uglm1$call, uglm2$call) # non identical environment(.$formula)
     ##
-    all.equal.0( wls2(rock.glm1), wls2(rock.glm2) -> wu2)
-    all.equal.0( wls2(rock.glmf) -> wuf, wu2)
-    all.equal.0( wuf, wls2(rock.glmf0))
-    all.equal.0( wuf, wls2(rock.glmf2))
+    all.equal.0( wls2(rock.glm1 ), wu2 <- wls2(rock.glm2))
+    all.equal.0( wls2(rock.glmf ), wu2)
+    all.equal.0( wls2(rock.glmf2), wu2)
+    is.call({ wu0 <- wu2; wu0$formula <- form0 })
+    all.equal.0(noC(wu0), noC(wls2(rock.glmf0)))
 })
+form <- counts ~ treatment
+fglm <- glm(form, family = poisson())
+(u1 <- update(fglm))
+rm(form)
+(u2 <- update(fglm))
+stopifnot(all.equal.0(u1, fglm),
+          all.equal.0(u1, u2))
+
+
 ## AIC & logLik() --- PR#16008
 dropN <- function(llik) `attr<-`(llik, "nall", NULL)
 x <- 1:10; d10 <- data.frame(x=x, y = sin(x/3), weights = as.numeric(x > 1.5))
@@ -440,6 +464,24 @@ stopifnot({
                 structure(-0.471028026733263, nobs = 9L, df = 3, class = "logLik"))
 })
 
+
+## lm() and glm() with only __data__ (i.e., no formula) args:
+list(lm =  lm(rock),  lm.d =  lm(data=rock),
+    glm = glm(rock), glm.d = glm(data=rock)) -> mods
+(cfm <- t(vapply(mods, coef, numeric(4))))
+all.equal(cfm["lm",], cfm["glm.d",], tolerance = 0) # see TRUE on Lnx x86_64
+resmat <- sapply(mods, resid)
+resm2 <- t(unique(t(resmat))) # same models [lm() / glm()] should be "unique"
+summary(resRelD <- 1 - resm2[,1]/resm2[,2]) # relative difference
+stopifnot(exprs = {
+    cfm[c(1,3),] == cfm[c(2,4),] ##
+    all.equal15(cfm["lm",], cfm["glm.d",])
+    identical(colnames(resm2), c("lm", "glm"))
+    abs(resRelD) < 1e-12 # Lnx x86_c64 {default qr() tol} has max(.) = 7.26e-14
+})
+
+"NB:  Also consider demos(\"glm.vr\") ---->  ../demo/glm.vr.R
+"
 
 ### Local variables:
 ### mode: R
