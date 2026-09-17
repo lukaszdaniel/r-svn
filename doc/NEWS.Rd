@@ -107,6 +107,9 @@
       \item \code{tools::add_datalist()} now returns a logical
       (invisibly, instead of \code{NULL}), indicating if it did add
       a \file{data/datalist} file (addressing parts of \PR{18015}).
+
+      \item \code{gzcon} \code{rawConnection}s now can flush and are
+      writable thanks to \I{Ivan Krylov}'s analysis and patch in \PR{19172}.
     }
   }
 
@@ -286,27 +289,23 @@
       \item \code{summary(<free1way>)} renames p-values to \code{Pr(..)}
       and thus \code{printCoefmat} recognises them.
 
-      \item \code{strptime(ch, "...\%OS<n>...")} now disregards contiguous
-      digits in "<n>", for symmetry with \code{strftime()}, fulfilling
-      \I{Frederick Eaton}'s wish in \PR{17209}, thanks to a patch by
-      \I{Suharto Anggono}.
-
-      \item \code{strptime("0", "\%w")} in a \code{"C"} locale now
-      works in valid cases, fixing \PR{19124} thanks to \I{Michael
-        Chirico}.
-
       \item Fix for \PR{19035} (piping \code{postscript()} output)
       thanks to \I{Jeroen Ooms} and \I{Ivan Krylov}.
 
       \item \code{lm(.., weights = *)} gets a new optional argument
       \code{wtol}, defaulting to 0 currently for back compatibility.
       Setting \code{wtol = 1e-30} fixes \PR{17475} thanks to the
-      \sQuote{\I{R Dev Day}} 2025 participants \I{Kelly Bodwin} et al.
+      \sQuote{\I{R Dev Day}} 2025 participants \I{Kelly Bodwin} \abbr{et al.}
+
+      \item \code{glm(*, wtol = <positive>)} treats very small weights as
+      zeros via \code{glm.fit()} and \code{glm.control()}, also with new
+      optional \code{tol} argument, more similar to \code{lm()}, but not
+      equivalently, e.g., for computing \code{AIC()}.
 
       \item Atypical \code{lm()} calls now work better, e.g.,
       \code{fm <- lm(rock); update(fm, . ~ . - perm)} and similar cases,
       fixing \PR{17463} and \PR{17476} and part of \PR{1861}, thanks to
-      \I{Ben Tyner}, \I{Elin Waring}, \I{Kevin Tappe} and other bugzilla
+      \I{Ben Tyner}, \I{Elin Waring}, \I{Kevin Tappe} and other Bugzilla
       contributors.
 
       \item \code{pkg2HTML(dir="pkg")} and other \pkg{tools}
@@ -331,6 +330,16 @@
       \code{length(x)} is not a multiple of \code{length(logi)}, fixing
       \PR{19155} thanks to several participants in two \I{R Dev Day}s and
       the \I{R Sprint} in 2026.
+
+      \item The \code{as.list()} method for class \code{"function"} now
+      checks its argument and behaves better for a fake "function", fixing
+      \PR{19173} thanks to \I{Mark Padgham}'s report and patch proposal.
+
+      \item \code{path.expand("~")} and similar now should work correctly
+      on Windows when the user name is not in ASCII and neither
+      \env{\%HOME\%} nor \env{\%USER\%} environment variables are set,
+      fixing \PR{18949} thanks to the report and patch from \I{Ivan Krylov}
+      and \I{Mauricio Vargas}'s \I{R Dev Day} work.
     }
   }
 }
@@ -392,11 +401,20 @@
       \I{R Dev Day @ useR! 2026} contributors, notably
       \I{Tomek Gieorgijewski}, report in \PR{18680}.
 
+      \item \code{strptime(ch, "...\%OS<n>...")} now disregards contiguous
+      digits in "<n>", for symmetry with \code{strftime()}, fulfilling
+      \I{Frederick Eaton}'s wish in \PR{17209}, thanks to a patch by
+      \I{Suharto Anggono}.
+
       \item \code{strptime()} now also returns \code{NA} for out of range
       \code{"\%OS"} and a correct error message in some wrong multibyte
       cases, fixing \PR{19117} comment #1 and \PR{19122} by \I{Michael
 	Chirico}; additionally, some overflow to \code{Inf} times no longer
       result in \code{NA}.
+
+      \item \code{strptime("0", "\%w")} in a \code{"C"} locale now
+      works in valid cases, fixing \PR{19124} thanks to \I{Michael
+        Chirico}.
 
       \item \code{ksmooth(x,y, x.points=NULL)} now returns an empty (x,y)
       pair instead of crashing \R, fixing \PR{19153}.

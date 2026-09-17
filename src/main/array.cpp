@@ -1870,6 +1870,23 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* special case for 2D arrays (PR#19133) */
 	SEXP r = do_transpose(call, op, args, rho);
 	if (resize) {
+	    /* <FIXME>
+	       Since c69642, "aperm() now preserves names(dim(.))"
+	       so need to ensure this here too.
+	       Ideally do_transpose() would do that?
+	    */
+	    SEXP dimsr = getAttrib(r, R_DimSymbol);
+	    GCStackRoot<> nmdm;
+	    nmdm = getAttrib(dimsa, R_NamesSymbol);
+	    if(nmdm != R_NilValue) { // dimsr needs correctly permuted names()
+		GCStackRoot<> nm_dr;
+		nm_dr = StringVector::create(n);
+		for (int i = 0; i < n; i++) {
+		    SET_STRING_ELT(nm_dr, i, STRING_ELT(nmdm, pp[i]));
+		}
+		setAttrib(dimsr, R_NamesSymbol, nm_dr);
+		setAttrib(r, R_DimSymbol, dimsr);
+	    }
 	    UNPROTECT(1);
 	    return r;
 	}

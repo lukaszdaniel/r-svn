@@ -1,5 +1,5 @@
 # Translation of src/library/tools/po/R-tools.pot to German.
-# Copyright (C) 2008-2025 The R Foundation
+# Copyright (C) 2008-2026 The R Foundation
 # This file is distributed under the same license as the R package.
 # Detlef Steuer <steuer@hsu-hh.de>, 2008-2025.
 msgid ""
@@ -264,7 +264,7 @@ msgstr "Das Authors@R Feld enthält Personen mit doppelten ORCID IDs:"
 #. R/QC.R: gettext("Authors@R field gives persons with duplicated ROR identifiers:")
 #, fuzzy
 msgid "Authors@R field gives persons with duplicated ROR identifiers:"
-msgstr "Das Authors@R Feld enthält Personen mit doppelten ORCID IDs:"
+msgstr "Das Authors@R Feld enthält Personen mit doppelten ROR IDs:"
 
 #. R/QC.R: gettext("Authors@R field gives persons with invalid ORCID identifiers:")
 msgid "Authors@R field gives persons with invalid ORCID identifiers:"
