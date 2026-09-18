@@ -1812,7 +1812,8 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isArray(a))
 	error(_("invalid first argument, must be %s"), "an array");
 
-    SEXP dimsa = PROTECT(getAttrib(a, R_DimSymbol));
+    GCStackRoot<> dimsa;
+    dimsa = getAttrib(a, R_DimSymbol);
     int n = LENGTH(dimsa),
 	*isa = INTEGER(dimsa);
 
@@ -1820,7 +1821,8 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     int i;
     int *pp = (int *) R_alloc((size_t) n, sizeof(int));
-    SEXP perm = CADR(args);
+    GCStackRoot<> perm;
+    perm = CADR(args);
     if (length(perm) == 0) {
 	for (i = 0; i < n; i++) pp[i] = n-1-i;
     } else {
@@ -1844,9 +1846,8 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    error(_("'perm[%d]' does not match a dimension name"), i+1);
 	    }
 	} else {
-	    PROTECT(perm = coerceVector(perm, INTSXP));
+	    perm = coerceVector(perm, INTSXP);
 	    for (i = 0; i < n; i++) pp[i] = INTEGER(perm)[i] - 1;
-	    UNPROTECT(1);
 	}
     }
 
@@ -1856,7 +1857,7 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* short-circuit identity permutation (PR#19069) */
     bool skip = true;
     for (i = 0; i < n; i++) if (pp[i] != i) {skip = false; break;}
-    if (resize && skip) {UNPROTECT(1); return(a);}
+    if (resize && skip) { return(a); }
 
     R_xlen_t *iip = (R_xlen_t *) R_alloc((size_t) n, sizeof(R_xlen_t));
     Memzero(iip, n);
@@ -1868,7 +1869,8 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (n == 2 && !skip) {
 	/* special case for 2D arrays (PR#19133) */
-	SEXP r = do_transpose(call, op, args, rho);
+	GCStackRoot<> r;
+	r = do_transpose(call, op, args, rho);
 	if (resize) {
 	    /* <FIXME>
 	       Since c69642, "aperm() now preserves names(dim(.))"
@@ -1880,19 +1882,17 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    nmdm = getAttrib(dimsa, R_NamesSymbol);
 	    if(nmdm != R_NilValue) { // dimsr needs correctly permuted names()
 		GCStackRoot<> nm_dr;
-		nm_dr = StringVector::create(n);
-		for (int i = 0; i < n; i++) {
-		    SET_STRING_ELT(nm_dr, i, STRING_ELT(nmdm, pp[i]));
-		}
+		nm_dr = StringVector::create(2);
+		SET_STRING_ELT(nm_dr, 0, STRING_ELT(nmdm, 1));
+                SET_STRING_ELT(nm_dr, 1, STRING_ELT(nmdm, 0));
 		setAttrib(dimsr, R_NamesSymbol, nm_dr);
-		setAttrib(r, R_DimSymbol, dimsr);
 	    }
-	    UNPROTECT(1);
+
 	    return r;
 	}
-	PROTECT(r);
+
 	setAttrib(r, R_DimSymbol, dimsa);
-	UNPROTECT(2);
+
         return r;
     }
 
@@ -1903,8 +1903,8 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (i = 0; i < n; i++) stride[i] = iip[pp[i]];
 
     /* also need to have the dimensions of r */
-
-    SEXP dimsr = PROTECT(allocVector(INTSXP, n));
+    GCStackRoot<> dimsr;
+    dimsr = allocVector(INTSXP, n);
     int *isr = INTEGER(dimsr);
     for (i = 0; i < n; i++) isr[i] = isa[pp[i]];
 
@@ -1912,7 +1912,8 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     Memzero(iip, n);
 
     R_xlen_t len = XLENGTH(a);
-    SEXP r = PROTECT(allocVector(TYPEOF(a), len));
+    GCStackRoot<> r;
+    r = allocVector(TYPEOF(a), len);
 
     R_xlen_t li, lj;
 
@@ -1985,47 +1986,44 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* handle names(dim(.)) and the dimnames if any */
     if (resize) {
-	SEXP nmdm = getAttrib(dimsa, R_NamesSymbol);
+	GCStackRoot<> nmdm;
+	nmdm = getAttrib(dimsa, R_NamesSymbol);
 	if(nmdm != R_NilValue) { // dimsr needs correctly permuted names()
-	    PROTECT(nmdm);
-	    SEXP nm_dr = PROTECT(StringVector::create(n));
+	    GCStackRoot<> nm_dr;
+	    nm_dr = StringVector::create(n);
 	    for (i = 0; i < n; i++) {
 		SET_STRING_ELT(nm_dr, i, STRING_ELT(nmdm, pp[i]));
 	    }
 	    setAttrib(dimsr, R_NamesSymbol, nm_dr);
-	    UNPROTECT(2);
 	}
 	setAttrib(r, R_DimSymbol, dimsr);
 
-	SEXP dna = PROTECT(getAttrib(a, R_DimNamesSymbol));
+	GCStackRoot<> dna;
+	dna = getAttrib(a, R_DimNamesSymbol);
 	if (dna != R_NilValue) {
-	    SEXP dnna, dnr, dnnr;
+	    GCStackRoot<> dnna, dnr, dnnr;
 
-	    PROTECT(dnr  = ListVector::create(n));
-	    PROTECT(dnna = getAttrib(dna, R_NamesSymbol));
+	    dnr  = ListVector::create(n);
+	    dnna = getAttrib(dna, R_NamesSymbol);
 	    if (dnna != R_NilValue) {
-		PROTECT(dnnr = StringVector::create(n));
+		dnnr = StringVector::create(n);
 		for (i = 0; i < n; i++) {
 		    SET_VECTOR_ELT(dnr, i, VECTOR_ELT(dna, pp[i]));
 		    SET_STRING_ELT(dnnr, i, STRING_ELT(dnna, pp[i]));
 		}
 		setAttrib(dnr, R_NamesSymbol, dnnr);
-		UNPROTECT(1);
 	    } else {
 		for (i = 0; i < n; i++)
 		    SET_VECTOR_ELT(dnr, i, VECTOR_ELT(dna, pp[i]));
 	    }
 	    setAttrib(r, R_DimNamesSymbol, dnr);
-	    UNPROTECT(2);
 	}
-	UNPROTECT(1);
     }
     else // !resize
 	setAttrib(r, R_DimSymbol, dimsa);
 
     copyMostAttrib(a, r);
 
-    UNPROTECT(3); /* dimsa, r, dimsr */
     return r;
 }
 
