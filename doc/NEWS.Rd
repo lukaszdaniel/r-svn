@@ -110,6 +110,10 @@
 
       \item \code{gzcon} \code{rawConnection}s now can flush and are
       writable thanks to \I{Ivan Krylov}'s analysis and patch in \PR{19172}.
+
+      \item \code{chol2inv()} gains optional switch \code{diag.only} for
+      shortcutting \code{diag(chol2inv(.))}, wished for with a patch and
+      reproducible analysis in \PR{19177} by \I{Adam Marstrand}.
     }
   }
 
@@ -420,6 +424,14 @@
 
       \item \code{ksmooth(x,y, x.points=NULL)} now returns an empty (x,y)
       pair instead of crashing \R, fixing \PR{19153}.
+
+      Additionally, also by \I{Adam Berkeš}, \code{x <- rep(999,0);
+	ksmooth(x, x, x.points = 1)} no longer writes out of bounds, fixing
+      \PR{19171}.
+
+      \item \code{besselI(1, 1e11)} and \code{besselK(..)} now signal a
+      warning and return \code{NaN} instead of typically segfaulting,
+      fixing \PR{19175} thanks to \I{Ben Bolker}.
     }
   }
 }

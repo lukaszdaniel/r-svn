@@ -348,7 +348,7 @@ static void format_via_sprintf(double r, int d, int *kpower, int *nsig)
 
 
 #if defined(HAVE_LONG_DOUBLE) && (SIZEOF_LONG_DOUBLE > SIZEOF_DOUBLE)
-static const long double tbl[] =
+static constexpr long double tbl[] =
 {
     /* Powers exactly representable with 64 bit mantissa */
     1e00, 1e01, 1e02, 1e03, 1e04, 1e05, 1e06, 1e07, 1e08, 1e09,
@@ -357,7 +357,7 @@ static const long double tbl[] =
 };
 #define KP_MAX 27
 #else
-static const double tbl[] =
+static constexpr double tbl[] =
 {
     1e00, 1e01, 1e02, 1e03, 1e04, 1e05, 1e06, 1e07, 1e08, 1e09,
     1e10, 1e11, 1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19,

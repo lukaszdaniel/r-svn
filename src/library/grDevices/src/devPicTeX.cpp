@@ -66,7 +66,7 @@ typedef struct {
 
 	/* Global device information */
 
-static const double charwidth[4][128] = {
+static constexpr double charwidth[4][128] = {
 {
   0.5416690, 0.8333360, 0.7777810, 0.6111145, 0.6666690, 0.7083380, 0.7222240,
   0.7777810, 0.7222240, 0.7777810, 0.7222240, 0.5833360, 0.5361130, 0.5361130,

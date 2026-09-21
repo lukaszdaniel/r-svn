@@ -30,9 +30,9 @@
 #include "statsR.h"
 #include "localization.h"
 
-static const double THRESH = 30.;
-static const double MTHRESH = -30.;
-static const double INVEPS = 1/DBL_EPSILON;
+static constexpr double THRESH = 30.;
+static constexpr double MTHRESH = -30.;
+static constexpr double INVEPS = 1/DBL_EPSILON;
 
 /**
  * Evaluate x/(1 - x). An inline function is used so that x is
