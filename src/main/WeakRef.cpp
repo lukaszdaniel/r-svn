@@ -38,6 +38,9 @@
 
 namespace CXXR
 {
+    std::list<SEXP> WeakRef::s_R_weak_refs;
+    bool WeakRef::s_R_finalizers_pending = false;
+
     void WeakRef::detachReferents()
     {
         if (!this->refCountEnabled())

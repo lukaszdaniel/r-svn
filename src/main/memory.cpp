@@ -769,8 +769,6 @@ static void SortNodes(void)
    Haskell" by Peyton Jones, Marlow, and Elliott (at
    https://www.microsoft.com/en-us/research/wp-content/uploads/1999/09/stretching.pdf). --LT */
 
-static std::list<SEXP> s_R_weak_refs;
-
 #define READY_TO_FINALIZE_MASK 1
 
 #define SET_READY_TO_FINALIZE(s) ((s)->sxpinfo.gp |= READY_TO_FINALIZE_MASK)
@@ -811,7 +809,7 @@ static SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, bool onexit)
 	    SET_FINALIZE_ON_EXIT(w);
 	else
 	    CLEAR_FINALIZE_ON_EXIT(w);
-	s_R_weak_refs.push_back(w);
+	WeakRef::s_R_weak_refs.push_back(w);
     }
     UNPROTECT(3);
     return w;
@@ -839,15 +837,14 @@ SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
     return w;
 }
 
-static bool s_R_finalizers_pending = false;
 static void CheckFinalizers(void)
 {
-    s_R_finalizers_pending = false;
-    for (auto &s : s_R_weak_refs) {
+    WeakRef::s_R_finalizers_pending = false;
+    for (auto &s : WeakRef::s_R_weak_refs) {
 	if (s && WEAKREF_KEY(s) && !NODE_IS_MARKED(WEAKREF_KEY(s)) && !IS_READY_TO_FINALIZE(s))
 	    SET_READY_TO_FINALIZE(s);
 	if (IS_READY_TO_FINALIZE(s))
-	    s_R_finalizers_pending = true;
+	    WeakRef::s_R_finalizers_pending = true;
     }
 }
 
@@ -925,7 +922,7 @@ bool R::RunFinalizers(void)
 {
     R_CHECK_THREAD;
 
-    if (s_R_weak_refs.empty())
+    if (WeakRef::s_R_weak_refs.empty())
         return false;
 
     /* Prevent this function from running again when already in
@@ -939,9 +936,9 @@ bool R::RunFinalizers(void)
     bool finalizer_run = false;
     std::list<SEXP> pending_refs;
 
-    while (!s_R_weak_refs.empty()) {
-        SEXP s = s_R_weak_refs.back();
-        s_R_weak_refs.pop_back();
+    while (!WeakRef::s_R_weak_refs.empty()) {
+        SEXP s = WeakRef::s_R_weak_refs.back();
+        WeakRef::s_R_weak_refs.pop_back();
         if (!IS_READY_TO_FINALIZE(s)) {
             pending_refs.push_front(s);
         }
@@ -989,9 +986,9 @@ bool R::RunFinalizers(void)
         }
     }
     if (!pending_refs.empty())
-        s_R_weak_refs = std::move(pending_refs);
+        WeakRef::s_R_weak_refs = std::move(pending_refs);
     s_running = false;
-    s_R_finalizers_pending = false;
+    WeakRef::s_R_finalizers_pending = false;
     return finalizer_run;
 }
 
@@ -999,7 +996,7 @@ void R_RunExitFinalizers(void)
 {
     R_checkConstants(true);
 
-    for (auto &s : s_R_weak_refs)
+    for (auto &s : WeakRef::s_R_weak_refs)
 	if (s && FINALIZE_ON_EXIT(s))
 	    SET_READY_TO_FINALIZE(s);
     RunFinalizers();
@@ -1007,7 +1004,7 @@ void R_RunExitFinalizers(void)
 
 void R_RunPendingFinalizers(void)
 {
-    if (s_R_finalizers_pending)
+    if (WeakRef::s_R_finalizers_pending)
         RunFinalizers();
 }
 
@@ -1254,7 +1251,7 @@ void GCNode::mark(unsigned int max_generation)
         bool recheck_weak_refs;
         do {
             recheck_weak_refs = false;
-            for (auto &s : s_R_weak_refs) {
+            for (auto &s : WeakRef::s_R_weak_refs) {
                 if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
                     if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) < max_generation) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
                         recheck_weak_refs = true;
@@ -1273,7 +1270,7 @@ void GCNode::mark(unsigned int max_generation)
     CheckFinalizers();
 
     /* process the weak reference chain */
-    for (auto &s : s_R_weak_refs) {
+    for (auto &s : WeakRef::s_R_weak_refs) {
         MARK_THRU(s);
         MARK_THRU(WEAKREF_KEY(s));
         MARK_THRU(WEAKREF_VALUE(s));
@@ -1640,7 +1637,7 @@ attribute_hidden void R::InitMemory(void)
 
     ByteCode::initialize();
 
-    s_R_weak_refs.clear();
+    WeakRef::s_R_weak_refs.clear();
 
     R_HandlerStack = R_RestartStack = R_NilValue;
 

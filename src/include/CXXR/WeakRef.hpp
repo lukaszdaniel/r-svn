@@ -31,6 +31,7 @@
 #ifndef WEAKREF_HPP
 #define WEAKREF_HPP
 
+#include <list>
 #include <R_ext/Boolean.h>
 #include <CXXR/RObject.hpp>
 
@@ -118,6 +119,9 @@ namespace CXXR
         GCEdge<> m_key;
         GCEdge<> m_value;
         GCEdge<> m_finalizer;
+
+        static std::list<SEXP> s_R_weak_refs;
+        static bool s_R_finalizers_pending;
 
     protected:
         // Virtual functions of GCNode:
