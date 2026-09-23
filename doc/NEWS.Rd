@@ -92,7 +92,7 @@
       \code{gsub_with_transformed_matches()} and
       \code{system_with_capture()} in package \pkg{tools}.
 
-      \item \command{data()} will accept text files with further
+      \item \code{data()} will accept text files with further
       extension \file{.zst} or \file{.zstd}, and read them on builds
       with \command{zstd} support.
 
@@ -344,6 +344,11 @@
       \env{\%HOME\%} nor \env{\%USER\%} environment variables are set,
       fixing \PR{18949} thanks to the report and patch from \I{Ivan Krylov}
       and \I{Mauricio Vargas}'s \I{R Dev Day} work.
+
+      \item The \code{anova(.., test = tt)} methods for \code{"glm"} and
+      \code{"glmlist"} now do partially match a string \code{tt}, as
+      documented, thanks to \I{Amal Tawfik}'s report and patch in
+      \PR{19179}.
     }
   }
 }
@@ -432,6 +437,10 @@
       \item \code{besselI(1, 1e11)} and \code{besselK(..)} now signal a
       warning and return \code{NaN} instead of typically segfaulting,
       fixing \PR{19175} thanks to \I{Ben Bolker}.
+
+      \item \code{text.default(.., col = numeric(0))} and similar no longer
+      segfault in "instrumented" versions of R, fixing \PR{19178} thanks to
+      \I{Jiang Yuancheng}'s \command{fusion-fuzz} and \I{Ivan Krylov}.
     }
   }
 }

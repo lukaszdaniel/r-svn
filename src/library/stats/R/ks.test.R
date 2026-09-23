@@ -34,9 +34,7 @@ ks.test.default <-
     if (is.ordered(y)) y <- unclass(y)
 
     if(is.numeric(y)) { ## two-sample case
-        args <- list(...)
-        if (length(args) > 0L)
-            warning(gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", ")))
+        chkDots(...)
         DNAME <- paste(DNAME, "and", deparse1(substitute(y)))
         y <- y[!is.na(y)]
         n.x <- as.double(n)             # to avoid integer overflow
