@@ -2534,7 +2534,7 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
     }
 
     for (int i=0; i<n; i++) {
-        
+
         if (rot != 0.0) {
             cairo_save(xd->cc);
             cairo_translate(xd->cc, x[i], y[i]);
@@ -2553,14 +2553,14 @@ static void Cairo_Glyph(int n, int *glyphs, double *x, double *y,
             cairo_glyph_path(xd->cc, &cairoGlyph, 1);
         }
 
-        if (!xd->appending) {
-            cairoEnd(grouping, xd);
-        }
-
         if (rot != 0.0) {
             cairo_restore(xd->cc);
         }
     }
-    
+
+    if (!xd->appending) {
+        cairoEnd(grouping, xd);
+    }
+
 }
 

@@ -32,6 +32,7 @@
 #endif
 
 #include <cfloat>  /* for DBL_MAX */
+#include <climits> /* for INT_MAX */
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -478,7 +479,7 @@ R_GE_lineend GE_LENDpar(SEXP value, int ind)
     }
     else if(isReal(value)) {
 	rcode = REAL(value)[ind];
-	if(!R_FINITE(rcode) || rcode < 0)
+	if(!R_FINITE(rcode) || rcode < 0 || rcode >= INT_MAX + 1.)
 	    error("%s", _("invalid line end"));
 	code = (int) rcode;
 	if (code > 0)
@@ -542,7 +543,7 @@ R_GE_linejoin GE_LJOINpar(SEXP value, int ind)
     }
     else if(isReal(value)) {
 	rcode = REAL(value)[ind];
-	if(!R_FINITE(rcode) || rcode < 0)
+	if(!R_FINITE(rcode) || rcode < 0 || rcode >= INT_MAX + 1.)
 	    error("%s", _("invalid line join"));
 	code = (int) rcode;
 	if (code > 0)
@@ -3424,7 +3425,7 @@ unsigned int GE_LTYpar(SEXP value, int ind)
     }
     else if(isReal(value)) {
 	rcode = REAL(value)[ind];
-	if(!R_FINITE(rcode) || rcode < 0)
+	if(!R_FINITE(rcode) || rcode < 0 || rcode >= INT_MAX + 1.)
 	    error("%s", _("invalid line type"));
 	code = (int) rcode;
 	if (code > 0)

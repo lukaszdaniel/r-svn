@@ -349,6 +349,16 @@
       \code{"glmlist"} now do partially match a string \code{tt}, as
       documented, thanks to \I{Amal Tawfik}'s report and patch in
       \PR{19179}.
+
+      \item Added protection against out-of-range values for graphical
+      parameters \code{lty}, \code{lend}, and \code{ljoin} in
+      \pkg{graphics} function calls (\PR{19170}). Thanks to \I{Adam
+        Berkeš}.
+
+      \item \code{cairo_pdf()} no longer silently ignores \code{grid.newpage()}
+      calls after drawing a \code{glyphGrob} containing two or more glyphs
+      inside a masked \code{viewport}. Thanks to \I{Trevor Davis}' patch
+      proposal in \PR{19075}.
     }
   }
 }
@@ -441,6 +451,9 @@
       \item \code{text.default(.., col = numeric(0))} and similar no longer
       segfault in "instrumented" versions of R, fixing \PR{19178} thanks to
       \I{Jiang Yuancheng}'s \command{fusion-fuzz} and \I{Ivan Krylov}.
+
+      \item \command{R CMD rtags} (on Unix-alikes) no longer fails from
+      a bad escape if \command{sh} is \command{bash} or \command{busybox}.
     }
   }
 }
