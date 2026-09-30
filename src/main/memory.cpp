@@ -837,17 +837,6 @@ SEXP R_MakeWeakRefC(SEXP key, SEXP val, R_CFinalizer_t fin, Rboolean onexit)
     return w;
 }
 
-static void CheckFinalizers(void)
-{
-    WeakRef::s_R_finalizers_pending = false;
-    for (auto &s : WeakRef::s_R_weak_refs) {
-	if (s && WEAKREF_KEY(s) && !NODE_IS_MARKED(WEAKREF_KEY(s)) && !IS_READY_TO_FINALIZE(s))
-	    SET_READY_TO_FINALIZE(s);
-	if (IS_READY_TO_FINALIZE(s))
-	    WeakRef::s_R_finalizers_pending = true;
-    }
-}
-
 /* C finalizers are stored in a RAWSXP.  It would be nice if we could
    use EXTPTRSXP's but these only hold a void *, and function pointers
    are not guaranteed to be compatible with a void *.  There should be
@@ -1242,35 +1231,7 @@ void GCNode::mark(unsigned int max_generation)
 
 
     /* identify weakly reachable nodes */
-    {
-        bool recheck_weak_refs;
-        do {
-            recheck_weak_refs = false;
-            for (auto &s : WeakRef::s_R_weak_refs) {
-                if (s && WEAKREF_KEY(s) && NODE_IS_MARKED(WEAKREF_KEY(s))) {
-                    if (WEAKREF_VALUE(s) && (NODE_GENERATION(WEAKREF_VALUE(s)) < max_generation) && !NODE_IS_MARKED(WEAKREF_VALUE(s))) {
-                        recheck_weak_refs = true;
-                        MARK_THRU(WEAKREF_VALUE(s));
-                    }
-                    if (WEAKREF_FINALIZER(s) && (NODE_GENERATION(WEAKREF_FINALIZER(s)) < max_generation) && !NODE_IS_MARKED(WEAKREF_FINALIZER(s))) {
-                        recheck_weak_refs = true;
-                        MARK_THRU(WEAKREF_FINALIZER(s));
-                    }
-                }
-            }
-        } while (recheck_weak_refs);
-    }
-
-    /* mark nodes ready for finalizing */
-    CheckFinalizers();
-
-    /* process the weak reference chain */
-    for (auto &s : WeakRef::s_R_weak_refs) {
-        MARK_THRU(s);
-        MARK_THRU(WEAKREF_KEY(s));
-        MARK_THRU(WEAKREF_VALUE(s));
-        MARK_THRU(WEAKREF_FINALIZER(s));
-    }
+    WeakRef::markThru(&marker);
 
     /* process CHARSXP cache */
     String::visitTable();

@@ -123,6 +123,18 @@ namespace CXXR
         static std::list<SEXP> s_R_weak_refs;
         static bool s_R_finalizers_pending;
 
+        /** @brief Mark nodes reachable via weak references.
+         *
+         * This function implements the algorithm in Sec. 6.2 of the
+         * Peyton-Jones et al. paper.  If a WeakRef has a marked key,
+         * its value and R finalizer and their descendants are marked.
+         * If the key is not marked, and there is a finalizer, then
+         * the WeakRef is placed on a finalization pending list.  If
+         * the key is not marked and there is no finalizer, the
+         * WeakRef is tombstoned.
+         */
+        static void markThru(GCNode::Marker *v);
+
     protected:
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;
