@@ -181,13 +181,10 @@ namespace CXXR
 
     void String::visitTable()
     {
-        for (auto it = String::s_hash_table.begin(); it != String::s_hash_table.end(); )
+        std::erase_if(s_hash_table, [](const auto &entry)
         {
-            if (!it->second->isMarked())
-                it = String::s_hash_table.erase(it);  // erase returns the next iterator
-            else
-                ++it;
-        }
+            return !entry.second->isMarked();
+        });
     }
 
     bool String::isASCII() const
@@ -232,11 +229,16 @@ namespace CXXR
 
     String *String::obtain(const char *name, int len, cetype_t encoding)
     {
+        if (len < 0)
+            Rf_error("%s", _("invalid string length"));
         if (len > R_INT_MAX)
             Rf_error("%s", _("R character strings are limited to 2^31-1 bytes"));
 
         if (!name)
+        {
             name = "";
+            len = 0;
+        }
 
         std::string str(name, len);
         return String::obtain(str, encoding);

@@ -240,6 +240,12 @@ namespace CXXR
         // Virtual functions of RObject:
         const char *typeName() const override;
 
+        /** @brief Visit the Symbol hash table.
+         *
+         * This function is used to visit the Symbol hash table,
+         */
+        static void visitTable(GCNode::const_visitor *v);
+
     public:
         GCEdge<> m_pname;
         GCEdge<> m_value;

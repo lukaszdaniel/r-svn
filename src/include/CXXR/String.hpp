@@ -244,7 +244,7 @@ namespace CXXR
          */
         static String *obtain(const char *name)
         {
-            return String::obtain(name, int(strlen(name)), CE_NATIVE);
+            return String::obtain(name, CE_NATIVE);
         }
 
         /** @brief Get a pointer to a String object.
@@ -275,7 +275,7 @@ namespace CXXR
          *
          * @param encoding The encoding of the required String.
          *          Only CE_NATIVE, CE_UTF8 or CE_LATIN1 are permitted
-         *          in this context (checked).  Note that if \a str
+         *          in this context (checked).  Note that if \a name
          *          contains no non-ASCII characters, then the
          *          encoding is set to CE_NATIVE regardless of the
          *          value of the \a encoding parameter.
@@ -286,7 +286,7 @@ namespace CXXR
          */
         static String *obtain(const char *name, cetype_t encoding)
         {
-            return String::obtain(name, int(strlen(name)), encoding);
+            return String::obtain(std::string(name), encoding);
         }
 
         /** @brief Get a pointer to a String object.
@@ -303,7 +303,7 @@ namespace CXXR
          *
          * @param encoding The encoding of the required String.
          *          Only CE_NATIVE, CE_UTF8 or CE_LATIN1 are permitted
-         *          in this context (checked).  Note that if \a str
+         *          in this context (checked).  Note that if \a name
          *          contains no non-ASCII characters, then the
          *          encoding is set to CE_NATIVE regardless of the
          *          value of the \a encoding parameter.

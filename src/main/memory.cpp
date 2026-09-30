@@ -1230,12 +1230,7 @@ void GCNode::mark(unsigned int max_generation)
     MARK_THRU(R_print.na_string);
     MARK_THRU(R_print.na_string_noquote);
 
-    for (auto &[key, symbol] : Symbol::s_symbol_table)
-    {
-        if (ATTRIB(symbol) != R_NilValue)
-            GCManager::gc_error("****found a symbol with attributes\n");
-        MARK_THRU(symbol);
-    }
+    Symbol::visitTable(&marker);
 
     for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL; ctxt = ctxt->nextcontext) {
         if (ctxt->returnValue.tag == NILSXP)    /* For on.exit calls */

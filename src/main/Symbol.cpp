@@ -117,8 +117,7 @@ namespace CXXR
         return Symbol::obtain(str);
     }
 
-    Symbol *Symbol::obtainS3Signature(const char *className,
-                                      const char *methodName)
+    Symbol *Symbol::obtainS3Signature(const char *className, const char *methodName)
     {
         assert(className != nullptr);
         assert(methodName != nullptr);
@@ -142,6 +141,17 @@ namespace CXXR
     bool isDotSymbol(const Symbol *symbol)
     {
         return symbol && symbol->name()->c_str()[0] == '.';
+    }
+
+    void Symbol::visitTable(GCNode::const_visitor *v)
+    {
+        for (auto &[key, symbol] : s_symbol_table)
+        {
+            if (ATTRIB(symbol) != R_NilValue)
+                GCManager::gc_error("****found a symbol with attributes\n");
+            if (symbol != R_NilValue)
+                (*v)(symbol);
+        }
     }
 } // namespace CXXR
 

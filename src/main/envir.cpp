@@ -4545,6 +4545,9 @@ namespace
 
 String *String::obtain(const std::string &name, cetype_t enc)
 {
+    if (name.size() > R_INT_MAX)
+        Rf_error("%s", _("R character strings are limited to 2^31-1 bytes"));
+
     // These encodings are acceptable for lookup.
     // For insertion only the first 4 are considered valid (checked again later):
     cetype_t lookable_enc;
