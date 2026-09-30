@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1998--2026  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1998--2024  The R Core Team
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -1950,10 +1950,10 @@ static bool initwin(DEstruct DE, const char *title) /* TRUE = Error */
     DE->box_w = twidth + 4;
     if(mbcslocale) {
 	XFontSetExtents *extent = XExtentsOfFontSet(font_set);
-//      char **ml;
+	char **ml;
 	DE->box_h = (extent->max_logical_extent.height)
 	    + (extent->max_logical_extent.height / 5) + 4;
-//	font_set_cnt = XFontsOfFontSet(font_set, &fs_list, &ml);
+	XFontsOfFontSet(font_set, &fs_list, &ml);
 	DE->text_offset = 2 + fs_list[0]->max_bounds.descent;
     } else {
 	DE->box_h = DE->font_info->max_bounds.ascent

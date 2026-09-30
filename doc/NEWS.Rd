@@ -454,6 +454,19 @@
 
       \item \command{R CMD rtags} (on Unix-alikes) no longer fails from
       a bad escape if \command{sh} is \command{bash} or \command{busybox}.
+
+      \item \code{capabilities("X11")} no longer incorrectly returns
+      \code{TRUE} on a Unix-alike where X11 is not actually available when
+      built by a C compiler without C23 \code{enum} base types, thanks to
+      \I{Trevor Davis}' report and patch in \PR{19180}.
+    }
+  }
+  \subsection{Bug Fixes (Windows)}{
+    \itemize{
+      \item \code{file.copy(*, date=TRUE)} no longer opens files for
+      exclusive access when copying the file time.  Consequently, the time
+      \emph{is} copied now and concurrent attempts to open the source file should
+      work reliably, thanks to \I{Kevin Ushey}'s report and patch in \PR{19187}.
     }
   }
 }

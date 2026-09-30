@@ -4119,6 +4119,9 @@ attribute_hidden SEXP do_open(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("invalid '%s' argument"), "open");
     bool block = asRbool(CADDR(args), call);
     open = CHAR(STRING_ELT(sopen, 0)); /* ASCII */
+    /* con->mode is char[5]; reject anything that would overflow it */
+    if(strlen(open) >= sizeof(con->mode))
+	error(_("invalid '%s' argument"), "open");
     if(strlen(open) > 0) strcpy(con->mode, open);
     con->blocking = block;
     success = con->open(con);

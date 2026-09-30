@@ -3740,8 +3740,10 @@ stopifnot(exprs = {
 
 
 ## besselI()/besselK() with too large order -- now NaN with warning
-assertWarnV(bI <- besselI(1, 1e10))     # Warning ... too large for bessel_[ik]() algorithm
-assertWarnV(bK <- besselK(1, c(2^(60:70), Inf)))
+if(.Machine$sizeof.pointer >= 8) { # 32-bit cannot allocate 7.5 Gb (PR#19175#c3)
+    assertWarnV(bI <- besselI(1, 1e10))     # Warning ... too large for bessel_[ik]() algorithm
+    assertWarnV(bK <- besselK(1, c(2^(60:70), Inf)))
+}
 ## segfaulted for order >= 2^31 in R <= 4.6.1
 
 
@@ -3784,6 +3786,21 @@ local({
     assertErrV(lines(0:1, 0:1, ljoin = max.int + 1))
 })
 ## produced undefined behvaior
+
+
+## parsing '<lhs> |> <var> => <expr>' left the reduced call unprotected on the
+## parser stack, so a GC before the enclosing reduction could free it
+## (found by fuzzing; '=>' is still opt-in, and stays enabled once seen)
+Sys.setenv("_R_USE_PIPEBIND_" = "true")
+gctorture(TRUE)
+e <- parse(text = "x |> b => f(b) + { y <- 1; y <- 1; y <- 1; y <- 1; y <- 1 }",
+           keep.source = FALSE)
+gctorture(FALSE)
+Sys.unsetenv("_R_USE_PIPEBIND_")
+ex <- quote((function(b) f(b))(x)); ex[[1]] <- ex[[1]][[2]] # no `(` call
+stopifnot(identical(e[[1]][[2]], ex))
+## gave garbage (or a crash) for the LHS of '+' in R <= 4.6.x
+
 
 
 ## keep at end

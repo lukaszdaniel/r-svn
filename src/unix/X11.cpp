@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1999-2012 The R Core Team
+ *  Copyright (C) 1999-2026 The R Core Team
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -65,11 +65,11 @@ static void R_X11_Init(void)
     s_initialized = 1;
 }
 
-/* used in src/main/platform.c */
+/* used in ../main/platform.c */
 attribute_hidden bool R::R_access_X11(void)
 {
     R_X11_Init();
-    return (s_initialized > 0) ? ((*s_ptr->access)() > 0) : FALSE;
+    return (s_initialized > 0) ? ((*s_ptr->access)() > 0) : false;
 }
 
 // called from src/library/grDevices/src/stubs.c
@@ -141,7 +141,7 @@ SEXP do_bmVersion(void)
 
 attribute_hidden bool R::R_access_X11(void)
 {
-    return FALSE;
+    return false;
 }
 
 SEXP do_X11(SEXP call, SEXP op, SEXP args, SEXP rho)
