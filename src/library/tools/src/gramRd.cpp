@@ -93,9 +93,10 @@
 #endif
 
 #include <cctype>
-#include <algorithm> // for std::copy
+#include <new>
+#include <string>
+#include <vector>
 #include <CXXR/RContext.hpp>
-#include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
@@ -135,7 +136,7 @@ static int yyparse(void);
 
 #define yyconst const
 
-typedef struct yyltype
+struct yyltype
 {
   int first_line;
   int first_column;
@@ -144,7 +145,7 @@ typedef struct yyltype
   int last_line;
   int last_column;
   int last_byte;
-} yyltype;
+};
 
 # define YYLTYPE yyltype
 # define YYLLOC_DEFAULT(Current, Rhs, N)				\
@@ -196,7 +197,7 @@ static int	xxungetc(int);
 static char const yyunknown[] = "unknown macro"; /* our message, not bison's */
 
 
-typedef struct ParseState ParseState;
+struct ParseState;
 struct ParseState {
     int xxinRString, xxQuoteLine, xxQuoteCol;
     int	xxinEqn;
@@ -351,52 +352,6 @@ extern int yydebug;
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Token kinds.  */
-#define YYEMPTY -2
-#define YYEOF 0
-#define YYerror 256
-#define YYUNDEF 257
-#define END_OF_INPUT 258
-#define ERROR 259
-#define SECTIONHEADER 260
-#define RSECTIONHEADER 261
-#define VSECTIONHEADER 262
-#define SECTIONHEADER2 263
-#define RCODEMACRO 264
-#define SEXPR 265
-#define RDOPTS 266
-#define LATEXMACRO 267
-#define VERBMACRO 268
-#define OPTMACRO 269
-#define ESCAPE 270
-#define LISTSECTION 271
-#define ITEMIZE 272
-#define DESCRIPTION 273
-#define NOITEM 274
-#define LATEXMACRO2 275
-#define VERBMACRO2 276
-#define VERBLATEX 277
-#define LATEXMACRO3 278
-#define NEWCOMMAND 279
-#define USERMACRO 280
-#define USERMACRO1 281
-#define USERMACRO2 282
-#define USERMACRO3 283
-#define USERMACRO4 284
-#define USERMACRO5 285
-#define USERMACRO6 286
-#define USERMACRO7 287
-#define USERMACRO8 288
-#define USERMACRO9 289
-#define IFDEF 290
-#define ENDIF 291
-#define TEXT 292
-#define RCODE 293
-#define VERB 294
-#define COMMENT 295
-#define UNKNOWN 296
-#define STARTFILE 297
-#define STARTFRAGMENT 298
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -902,15 +857,15 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   236,   236,   237,   238,   241,   244,   247,   248,   250,
-     251,   252,   253,   254,   255,   256,   257,   258,   259,   260,
-     261,   262,   263,   265,   266,   268,   269,   270,   271,   272,
-     273,   274,   275,   276,   278,   279,   280,   281,   282,   283,
-     284,   285,   286,   287,   288,   289,   290,   291,   292,   293,
-     294,   296,   297,   299,   301,   304,   307,   311,   314,   317,
-     321,   325,   331,   333,   334,   343,   345,   347,   351,   352,
-     354,   356,   360,   361,   363,   367,   369,   371,   373,   375,
-     377,   379,   381,   383,   385,   386,   387,   388,   389,   391
+       0,   237,   237,   238,   239,   242,   245,   248,   249,   251,
+     252,   253,   254,   255,   256,   257,   258,   259,   260,   261,
+     262,   263,   264,   266,   267,   269,   270,   271,   272,   273,
+     274,   275,   276,   277,   279,   280,   281,   282,   283,   284,
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295,   297,   298,   300,   302,   305,   308,   312,   315,   318,
+     322,   326,   332,   334,   335,   344,   346,   348,   352,   353,
+     355,   357,   361,   362,   364,   368,   370,   372,   374,   376,
+     378,   380,   382,   384,   386,   387,   388,   389,   390,   392
 };
 #endif
 
@@ -3093,9 +3048,10 @@ static SEXP xxmarkup(SEXP header, SEXP body, int flag, YYLTYPE *lloc)
 static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
 {
     SEXP ans, prev, defnvals, val, thename, thedefn;
-    char buffer[128], *defnBuffer = NULL;
+    char buffer[128];
+    std::string defnBuffer;
     const char *c;
-    int maxarg = 0, vlen, len = 0;
+    int maxarg = 0, vlen;
 #if DEBUGVALS
     Rprintf("xxnewcommand(cmd=%p, name=%p, defn=%p)", cmd, name, defn);
 #endif
@@ -3111,15 +3067,12 @@ static SEXP xxnewcommand(SEXP cmd, SEXP name, SEXP defn, YYLTYPE *lloc)
         val = CAR(defnvals);
         if (TYPEOF(val) == STRSXP) {
             vlen = (int)strlen(CHAR(STRING_ELT(val, 0)));
-            defnBuffer = R_Realloc(defnBuffer, len + vlen + 1, char);
-            strncpy(defnBuffer + len, CHAR(STRING_ELT(val, 0)), vlen + 1);
-            len += vlen;
+            defnBuffer.append(CHAR(STRING_ELT(val, 0)), vlen);
         }
         defnvals = CDR(defnvals);
     }
-    if (len != 0) {
-        PROTECT(thedefn = mkString(defnBuffer)); 
-        R_Free(defnBuffer);
+    if (!defnBuffer.empty()) {
+        PROTECT(thedefn = mkString(defnBuffer.c_str()));
     } else
     	PROTECT(thedefn = mkString(""));
 
@@ -3167,7 +3120,7 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 {
     SEXP ans, value, nextarg;
     int len;
-    const char *c, *start ;
+    const char *c, *start;
 
 #if DEBUGVALS
     Rprintf("xxusermacro(macro=%p, args=%p)", macro, args);
@@ -3202,7 +3155,6 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 	/* An argument with a newline or comment or both. Exclude comments and
 	   concatenate VERBs from different lines (newline characters are
 	   in the VERBs already). */
-	CXXR::RAllocStack::Scope rscope;
 	size_t ilen = 0;
 	for (SEXP si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
 	    SEXP stri = CAR(si);
@@ -3213,19 +3165,17 @@ static SEXP xxusermacro(SEXP macro, SEXP args, YYLTYPE *lloc)
 		error("%s", _("internal error: invalid argument to xxusermacro"));
 	}
 
-	char *str = (char *)R_alloc(ilen + 1, sizeof(char));
-	size_t offset = 0;
+    std::string str;
+    str.reserve(ilen);
 	for (SEXP si = CDR(CADR(nextarg)); si != R_NilValue; si = CDR(si)) {
 	    SEXP stri = CAR(si);
 	    if (!isComment(stri)) {
 		int nc = LENGTH(STRING_ELT(stri, 0));
 		if (nc)
-		    memcpy(str + offset, CHAR(STRING_ELT(stri, 0)), nc);
-		offset += nc;
+            str.append(CHAR(STRING_ELT(stri, 0)), nc);
 	    }
 	}
-	str[offset] = '\0';
-	SET_STRING_ELT(ans, i+1, mkCharCE(str, CE_UTF8));
+    SET_STRING_ELT(ans, i+1, mkCharCE(str.c_str(), CE_UTF8));
     }
     RELEASE_SV(args);
 
@@ -3403,24 +3353,17 @@ static int (*ptr_getc)(void);
 /* Private pushback, since file ungetc only guarantees one byte.
    We need arbitrarily large size, since this is how macros are expanded. */
 
-#define PUSH_BACK(c) do {                  \
-	if (npush >= pushsize - 1) {             \
-	    int *old = pushbase;              \
-            pushsize *= 2;                    \
-	    pushbase = (int*) malloc(pushsize*sizeof(int));         \
-	    if(!pushbase) error(_("unable to allocate buffer for long macro at line %d"), parseState.xxlineno);\
-	    memmove(pushbase, old, npush*sizeof(int));        \
-	    if(old != pushback) free(old); }	    \
-	pushbase[npush++] = (c);                        \
-} while(0)
+#define PUSH_BACK(c) do { \
+    if (npush == pushback.size()) pushback.resize(pushback.size() * 2); \
+    pushback[npush++] = (c); \
+} while (0)
 
 
 
 #define PUSHBACK_BUFSIZE 32
 
-static int pushback[PUSHBACK_BUFSIZE];
-static int *pushbase;
-static unsigned int npush, pushsize;
+static std::vector<int> pushback(PUSHBACK_BUFSIZE);
+static size_t npush;
 static int macrolevel;
 static int prevpos = 0;
 static int prevlines[PUSHBACK_BUFSIZE];
@@ -3433,8 +3376,8 @@ static int xxgetc(void)
     int c, oldpos;
 
     do {
-    	if(npush) {    	
-    	    c = pushbase[--npush]; 
+        if (npush) {
+            c = pushback[--npush];
     	    if (c == START_MACRO) {
     	    	macrolevel++;
     	    	if (macrolevel > 1000) 
@@ -3585,8 +3528,7 @@ static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macro
     SrcFile = srcfile;
 
     npush = 0;
-    pushbase = pushback;
-    pushsize = PUSHBACK_BUFSIZE;
+    pushback.resize(PUSHBACK_BUFSIZE);
     macrolevel = 0;
 
     parseState.xxmode = LATEXLIKE; 
@@ -3618,8 +3560,6 @@ static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macro
 #endif    
     RELEASE_SV(parseState.Value);
     UNPROTECT(3); /* macros, parseState.xxMacroList, parseState.mset */
-
-    if (pushbase != pushback) free(pushbase);
 
     return parseState.Value;
 }
@@ -3890,7 +3830,7 @@ static void yyerror(const char *s)
     static char const yyexpecting[] = ", expecting ";
     static char const yyshortunexpected[] = "unexpected %s";
     static char const yylongunexpected[] = "unexpected %s '%s'";
-    char *expecting;
+    char *expecting = nullptr;
     char ParseErrorMsg[PARSE_ERROR_SIZE];
     SEXP filename;
     char ParseErrorFilename[PARSE_ERROR_SIZE];
@@ -3911,7 +3851,7 @@ static void yyerror(const char *s)
 	s1[PARSE_ERROR_SIZE] = 0;
 
     	/* Edit the error message */    
-	expecting = (char *) strstr(s1 + sizeof yyunexpected -1, yyexpecting);
+	expecting = strstr(s1 + sizeof yyunexpected -1, yyexpecting);
     	if (expecting) *expecting = '\0';
     	for (int i = 0; yytname_translations[i]; i += 2) {
 	    if (streql(s1 + sizeof yyunexpected - 1, yytname_translations[i])) {
@@ -3982,20 +3922,7 @@ static void yyerror(const char *s)
     }
 }
 
-#define TEXT_PUSH(c) do {		    \
-	size_t nc = bp - stext;		    \
-	if (nc >= nstext - 1) {             \
-	    char *old = stext;              \
-        if (size_t(nstext) > SIZE_MAX / 2) error(_("Buffer size too large to double safely at line %d"), parseState.xxlineno); \
-	    nstext *= 2;		    \
-	    stext = (char*) malloc(nstext); \
-	    if(!stext) error(_("unable to allocate buffer for long string at line %d"), parseState.xxlineno);\
-	    if (old != stext) std::copy(old, old + nc, stext);        \
-	    if(st1) free(st1);		    \
-	    st1 = stext;		    \
-	    bp = stext+nc; }		    \
-	*bp++ = ((char) c);		    \
-} while(0)
+#define TEXT_PUSH(c) text.push_back(static_cast<char>(c))
 
 static void setfirstloc(void)
 {
@@ -4085,14 +4012,10 @@ static int token(void)
     return ERROR; /* We shouldn't get here. */
 }
 
-#define INITBUFSIZE 128
-
 static int mkText(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0, lookahead;
+    std::string text;
+    char lookahead;
 
     while(1) {
     	switch (c) {
@@ -4120,25 +4043,20 @@ static int mkText(int c)
     };
 stop:
     if (c != '\n') xxungetc(c); /* newline causes a break, but we keep it */
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext));
-    if(st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return TEXT;
 }
 
 static int mkComment(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
 
     do TEXT_PUSH(c);
     while ((c = xxgetc()) != '\n' && c != R_EOF);
 
     xxungetc(c);
 
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext));
-    if(st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return COMMENT;
 }
 
@@ -4169,10 +4087,7 @@ static int closingRawStringDelim(int c)
 
 static int mkCode(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
 
     /* Avoid double counting initial braces */
     if (c == LBRACE && !parseState.xxinRString) parseState.xxbraceDepth--;
@@ -4296,17 +4211,13 @@ static int mkCode(int c)
     	c = xxgetc();
     }
     if (c != '\n') xxungetc(c);
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext));
-    if(st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return RCODE; 
 }
 
 static int mkMarkup(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
     int retval = 0, attempt = 0;
 
     TEXT_PUSH(c);
@@ -4314,7 +4225,7 @@ static int mkMarkup(int c)
 
     while (attempt++ < 2) {
     	/* character escapes are processed as text, not markup */
-    	if (bp == stext+1) {
+        if (text.size() == 1) {
     	    TEXT_PUSH(c);
     	    TEXT_PUSH('\0');
     	    retval = TEXT;
@@ -4322,12 +4233,13 @@ static int mkMarkup(int c)
     	    break;
     	} else {
     	    TEXT_PUSH('\0');
-    	    retval = KeywordLookup(stext);
+            retval = KeywordLookup(text.c_str());
     	    if (retval == UNKNOWN && attempt == 1) { /* try again, non-digits only */
-    	    	bp--; 				     /* pop the \0 */
-    	        while (isdigit(*(bp-1))) {
+                text.pop_back();
+                while (!text.empty() && isdigit(static_cast<unsigned char>(text.back()))) {
             	    xxungetc(c);
-    	            c = *(--bp);                     /* pop the last letter into c */
+                    c = text.back();
+                    text.pop_back();
             	}
             } else {
             	if (retval == NOITEM) 
@@ -4336,27 +4248,23 @@ static int mkMarkup(int c)
     	    }
         }
     }
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext - 1));
-    if(st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size() - 1));
     xxungetc(c);
     return retval;
 }
 
 static int mkIfdef(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
     int retval;
 
     TEXT_PUSH(c);
-    while (isalpha((c = xxgetc())) && bp - stext <= DIRECTIVE_LEN) TEXT_PUSH(c);
+    while (isalpha((c = xxgetc())) && text.size() <= DIRECTIVE_LEN) TEXT_PUSH(c);
     TEXT_PUSH('\0');
     xxungetc(c);
 
-    retval = KeywordLookup(stext);
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext - 1));
+    retval = KeywordLookup(text.c_str());
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size() - 1));
 
     switch (retval) {
     case ENDIF:  /* eat chars to the end of the line */
@@ -4365,33 +4273,28 @@ static int mkIfdef(int c)
     	break;
     case UNKNOWN:
 	RELEASE_SV(yylval);
-    	bp--; bp--;
-    	for (; bp > stext; bp--) 
-    	    xxungetc(*bp);
+            for (size_t i = text.size() - 2; i > 0; i--)
+                xxungetc(text[i]);
     	switch (parseState.xxmode) {
     	case RLIKE:     
-    	    retval = mkCode(*bp);
+            retval = mkCode(text[0]);
     	    break;
     	case INOPTION:
     	case LATEXLIKE:
-    	    retval = mkText(*bp);
+            retval = mkText(text[0]);
     	    break;
     	case VERBATIM:
-    	    retval = mkVerb(*bp);
+            retval = mkVerb(text[0]);
     	    break;
 	}
 	break;
     }
-    if(st1) free(st1);
     return retval;
 }
 
 static int mkVerb(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
 
     /* Avoid double counting initial braces */
     if (c == LBRACE) parseState.xxbraceDepth--;
@@ -4421,8 +4324,7 @@ static int mkVerb(int c)
     	c = xxgetc();
     };
     if (c != '\n') xxungetc(c);
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext));
-    if(st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return VERB;  
 }
 
@@ -4486,12 +4388,12 @@ static void UseState(ParseState *state) {
 
 static void PushState(void) {
     if (busy) {
-    	ParseState *prev = (ParseState*) malloc(sizeof(ParseState));
+        ParseState *prev = new (std::nothrow) ParseState;
 	if (prev == NULL) error("%s", _("unable to allocate in PushState"));
     	PutState(prev);
     	parseState.prevState = prev;
     } else 
-        parseState.prevState = NULL;  
+        parseState.prevState = NULL;
     busy = true;
 }
 
@@ -4499,7 +4401,7 @@ static void PopState(void) {
     if (parseState.prevState) {
     	ParseState *prev = parseState.prevState;
     	UseState(prev);
-    	free(prev);
+        delete prev;
     } else
     	busy = false;
 }
@@ -4536,8 +4438,8 @@ SEXP parseRd(SEXP call, SEXP op, SEXP args, SEXP env)
     
     /* Reject re-entrancy rather than corrupting the outer parse.  PushState()
        saves only the ParseState fields listed in PutState(); the multi-set
-       (parseState.mset) and the lexer statics (con_parse, ptr_getc, pushbase,
-       npush, pushsize, macrolevel, SrcFile, wCalls, warnDups) are not saved,
+       (parseState.mset) and the lexer statics (con_parse, ptr_getc, pushback,
+       npush, macrolevel, SrcFile, wCalls, warnDups) are not saved,
        so a nested parse leaves the outer one reading a dead connection and
        preserving into a released multi-set.  This is reachable from a *calling*
        handler -- withCallingHandlers() or globalCallingHandlers() -- since the

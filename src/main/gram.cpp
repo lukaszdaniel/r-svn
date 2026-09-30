@@ -99,7 +99,9 @@
 #include <config.h>
 #endif
 
+#include <array>
 #include <memory>
+#include <new>
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
 #include <algorithm> // for std::copy
@@ -161,7 +163,7 @@ static SEXP	SavedLval;
 
 #define yyconst const
 
-typedef struct yyltype
+struct yyltype
 {
   int first_line;
   int first_column;
@@ -175,7 +177,7 @@ typedef struct yyltype
   int last_parsed;
 
   int id;
-} yyltype;
+};
 
 
 #define INIT_DATA_COUNT 16384    	/* init parser data to this size */
@@ -184,9 +186,9 @@ typedef struct yyltype
 #define DATA_COUNT  (length( PS_DATA ) / DATA_ROWS)
 #define ID_COUNT    ((length( PS_IDS ) / 2) - 1)
 
-static void finalizeData(void) ;
-static void growData(void) ;
-static void growID( int ) ;
+static void finalizeData(void);
+static void growData(void);
+static void growID( int );
 
 #define DATA_ROWS 8
 
@@ -202,10 +204,10 @@ static void growID( int ) ;
 #define ID_ID( i )      INTEGER(PS_IDS)[ 2*(i) ]
 #define ID_PARENT( i )  INTEGER(PS_IDS)[ 2*(i) + 1 ]
 
-static void modif_token( yyltype*, int ) ;
-static void recordParents( int, yyltype*, int) ;
+static void modif_token( yyltype*, int );
+static void recordParents( int, yyltype*, int);
 
-static int _current_token ;
+static int _current_token;
 
 /**
  * Records the current non-terminal token expression and gives it an id
@@ -586,62 +588,6 @@ extern int yydebug;
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Token kinds.  */
-#define YYEMPTY -2
-#define YYEOF 0
-#define YYerror 256
-#define YYUNDEF 257
-#define END_OF_INPUT 258
-#define ERROR 259
-#define STR_CONST 260
-#define NUM_CONST 261
-#define NULL_CONST 262
-#define SYMBOL 263
-#define FUNCTION 264
-#define INCOMPLETE_STRING 265
-#define LEFT_ASSIGN 266
-#define EQ_ASSIGN 267
-#define RIGHT_ASSIGN 268
-#define LBB 269
-#define FOR 270
-#define IN 271
-#define IF 272
-#define ELSE 273
-#define WHILE 274
-#define NEXT 275
-#define BREAK 276
-#define REPEAT 277
-#define GT 278
-#define GE 279
-#define LT 280
-#define LE 281
-#define EQ 282
-#define NE 283
-#define AND 284
-#define OR 285
-#define AND2 286
-#define OR2 287
-#define NS_GET 288
-#define NS_GET_INT 289
-#define COMMENT 290
-#define LINE_DIRECTIVE 291
-#define SYMBOL_FORMALS 292
-#define EQ_FORMALS 293
-#define EQ_SUB 294
-#define SYMBOL_SUB 295
-#define SYMBOL_FUNCTION_CALL 296
-#define SYMBOL_PACKAGE 297
-#define SLOT 298
-#define PIPE 299
-#define PLACEHOLDER 300
-#define PIPEBIND 301
-#define LOW 302
-#define TILDE 303
-#define UNOT 304
-#define NOT 305
-#define SPECIAL 306
-#define UMINUS 307
-#define UPLUS 308
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -1157,16 +1103,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   475,   475,   476,   477,   478,   479,   482,   483,   484,
-     487,   488,   491,   492,   493,   494,   495,   497,   498,   500,
-     501,   502,   503,   504,   506,   507,   508,   509,   510,   511,
-     512,   513,   514,   515,   516,   517,   518,   519,   520,   521,
-     522,   523,   524,   525,   526,   527,   528,   530,   531,   532,
-     533,   534,   535,   536,   537,   538,   539,   540,   541,   542,
-     543,   544,   545,   546,   547,   548,   549,   550,   551,   552,
-     556,   559,   562,   566,   567,   568,   569,   570,   571,   574,
-     575,   578,   579,   580,   581,   582,   583,   584,   585,   588,
-     589,   590,   591,   592,   596
+       0,   477,   477,   478,   479,   480,   481,   484,   485,   486,
+     489,   490,   493,   494,   495,   496,   497,   499,   500,   502,
+     503,   504,   505,   506,   508,   509,   510,   511,   512,   513,
+     514,   515,   516,   517,   518,   519,   520,   521,   522,   523,
+     524,   525,   526,   527,   528,   529,   530,   532,   533,   534,
+     535,   536,   537,   538,   539,   540,   541,   542,   543,   544,
+     545,   546,   547,   548,   549,   550,   551,   552,   553,   554,
+     558,   561,   564,   568,   569,   570,   571,   572,   573,   576,
+     577,   580,   581,   582,   583,   584,   585,   586,   587,   590,
+     591,   592,   593,   594,   598
 };
 #endif
 
@@ -2923,14 +2869,14 @@ yyreturnlab:
 } while(0) ;
 
 #define PUSHBACK_BUFSIZE 16
-static int pushback[PUSHBACK_BUFSIZE];
+static std::array<int, PUSHBACK_BUFSIZE> pushback{};
 static unsigned int npush = 0;
 
 static int prevpos = 0;
-static int prevlines[PUSHBACK_BUFSIZE];
-static int prevcols[PUSHBACK_BUFSIZE];
-static int prevbytes[PUSHBACK_BUFSIZE];
-static int prevparse[PUSHBACK_BUFSIZE];
+static std::array<int, PUSHBACK_BUFSIZE> prevlines{};
+static std::array<int, PUSHBACK_BUFSIZE> prevcols{};
+static std::array<int, PUSHBACK_BUFSIZE> prevbytes{};
+static std::array<int, PUSHBACK_BUFSIZE> prevparse{};
 
 static int xxgetc(void)
 {
@@ -2987,7 +2933,7 @@ static int xxungetc(int c)
     R_ParseContext[R_ParseContextLast] = '\0';
     /* precaution as to how % is implemented for < 0 numbers */
     R_ParseContextLast = (R_ParseContextLast + PARSE_CONTEXT_SIZE -1) % PARSE_CONTEXT_SIZE;
-    if(npush >= PUSHBACK_BUFSIZE) return EOF;
+    if (npush >= pushback.size()) return EOF;
     pushback[npush++] = c;
     return c;
 }
@@ -3929,7 +3875,7 @@ attribute_hidden
 void R::R_InitSrcRefState()
 {
     if (busy) {
-    	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
+        SrcRefState *prev = new (std::nothrow) SrcRefState;
 	if (prev == NULL)
 	    error("%s", _("allocation of source reference state failed"));
     	PutSrcRefState(prev);
@@ -3988,10 +3934,10 @@ void R::R_FinalizeSrcRefState(void)
     }
     ParseState.data_count = NA_INTEGER;
     if (ParseState.prevState) {
-	R_ReleaseObject(ParseState.sexps);
+        R_ReleaseObject(ParseState.sexps);
         SrcRefState *prev = ParseState.prevState;
-    	UseSrcRefState(prev);
-    	free(prev);
+        UseSrcRefState(prev);
+        delete prev;
     } else
         busy = false;
 }
@@ -4695,7 +4641,7 @@ static void yyerror(const char *s)
     if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	/* Edit the error message: needs a copy */
 	std::string s1 = std::string(s).substr(0, PARSE_ERROR_SIZE);
-	expecting = (char *) strstr(s1.c_str() + sizeof yyunexpected -1, yyexpecting);
+	expecting = strstr(s1.data() + sizeof yyunexpected -1, yyexpecting);
 	if (expecting) *expecting = '\0';
 	
 	for (int i = 0; yytname_translations[i]; i += 2) {

@@ -31,7 +31,9 @@
 #include <config.h>
 #endif
 
+#include <array>
 #include <memory>
+#include <new>
 #include <string>
 #include <cstdint>// for uint32_t, uint64_t
 #include <algorithm> // for std::copy
@@ -93,7 +95,7 @@ static SEXP	SavedLval;
 
 #define yyconst const
 
-typedef struct yyltype
+struct yyltype
 {
   int first_line;
   int first_column;
@@ -107,7 +109,7 @@ typedef struct yyltype
   int last_parsed;
 
   int id;
-} yyltype;
+};
 
 
 #define INIT_DATA_COUNT 16384    	/* init parser data to this size */
@@ -116,9 +118,9 @@ typedef struct yyltype
 #define DATA_COUNT  (length( PS_DATA ) / DATA_ROWS)
 #define ID_COUNT    ((length( PS_IDS ) / 2) - 1)
 
-static void finalizeData(void) ;
-static void growData(void) ;
-static void growID( int ) ;
+static void finalizeData(void);
+static void growData(void);
+static void growID( int );
 
 #define DATA_ROWS 8
 
@@ -134,10 +136,10 @@ static void growID( int ) ;
 #define ID_ID( i )      INTEGER(PS_IDS)[ 2*(i) ]
 #define ID_PARENT( i )  INTEGER(PS_IDS)[ 2*(i) + 1 ]
 
-static void modif_token( yyltype*, int ) ;
-static void recordParents( int, yyltype*, int) ;
+static void modif_token( yyltype*, int );
+static void recordParents( int, yyltype*, int);
 
-static int _current_token ;
+static int _current_token;
 
 /**
  * Records the current non-terminal token expression and gives it an id
@@ -614,14 +616,14 @@ cr	:					{ EatLines = 1; }
 } while(0) ;
 
 #define PUSHBACK_BUFSIZE 16
-static int pushback[PUSHBACK_BUFSIZE];
+static std::array<int, PUSHBACK_BUFSIZE> pushback{};
 static unsigned int npush = 0;
 
 static int prevpos = 0;
-static int prevlines[PUSHBACK_BUFSIZE];
-static int prevcols[PUSHBACK_BUFSIZE];
-static int prevbytes[PUSHBACK_BUFSIZE];
-static int prevparse[PUSHBACK_BUFSIZE];
+static std::array<int, PUSHBACK_BUFSIZE> prevlines{};
+static std::array<int, PUSHBACK_BUFSIZE> prevcols{};
+static std::array<int, PUSHBACK_BUFSIZE> prevbytes{};
+static std::array<int, PUSHBACK_BUFSIZE> prevparse{};
 
 static int xxgetc(void)
 {
@@ -678,7 +680,7 @@ static int xxungetc(int c)
     R_ParseContext[R_ParseContextLast] = '\0';
     /* precaution as to how % is implemented for < 0 numbers */
     R_ParseContextLast = (R_ParseContextLast + PARSE_CONTEXT_SIZE -1) % PARSE_CONTEXT_SIZE;
-    if(npush >= PUSHBACK_BUFSIZE) return EOF;
+    if (npush >= pushback.size()) return EOF;
     pushback[npush++] = c;
     return c;
 }
@@ -1620,7 +1622,7 @@ attribute_hidden
 void R::R_InitSrcRefState()
 {
     if (busy) {
-    	SrcRefState *prev = (SrcRefState *) malloc(sizeof(SrcRefState));
+        SrcRefState *prev = new (std::nothrow) SrcRefState;
 	if (prev == NULL)
 	    error("%s", _("allocation of source reference state failed"));
     	PutSrcRefState(prev);
@@ -1679,10 +1681,10 @@ void R::R_FinalizeSrcRefState(void)
     }
     ParseState.data_count = NA_INTEGER;
     if (ParseState.prevState) {
-	R_ReleaseObject(ParseState.sexps);
+        R_ReleaseObject(ParseState.sexps);
         SrcRefState *prev = ParseState.prevState;
-    	UseSrcRefState(prev);
-    	free(prev);
+        UseSrcRefState(prev);
+        delete prev;
     } else
         busy = false;
 }
@@ -2386,7 +2388,7 @@ static void yyerror(const char *s)
     if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	/* Edit the error message: needs a copy */
 	std::string s1 = std::string(s).substr(0, PARSE_ERROR_SIZE);
-	expecting = (char *) strstr(s1.c_str() + sizeof yyunexpected -1, yyexpecting);
+	expecting = strstr(s1.data() + sizeof yyunexpected -1, yyexpecting);
 	if (expecting) *expecting = '\0';
 	
 	for (int i = 0; yytname_translations[i]; i += 2) {

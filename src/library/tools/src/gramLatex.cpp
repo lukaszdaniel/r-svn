@@ -94,7 +94,8 @@
 #endif
 
 #include <cctype>
-#include <algorithm> // for std::copy
+#include <new>
+#include <string>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
@@ -130,7 +131,7 @@ static int yyparse(void);
 
 #define yyconst const
 
-typedef struct yyltype
+struct yyltype
 {
   int first_line;
   int first_column;
@@ -139,7 +140,7 @@ typedef struct yyltype
   int last_line;
   int last_column;
   int last_byte;
-} yyltype;
+};
 
 # define YYLTYPE yyltype
 # define YYLLOC_DEFAULT(Current, Rhs, N)				\
@@ -183,7 +184,7 @@ static int	xxungetc(int);
 
 static char const yyunknown[] = "unknown macro"; /* our message, not bison's */
 
-typedef struct ParseState ParseState;
+struct ParseState;
 struct ParseState {
     int	xxlineno, xxbyteno, xxcolno;
     int	xxDebugTokens;  /* non-zero causes debug output to R console */
@@ -307,27 +308,6 @@ extern int yydebug;
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Token kinds.  */
-#define YYEMPTY -2
-#define YYEOF 0
-#define YYerror 256
-#define YYUNDEF 257
-#define END_OF_INPUT 258
-#define ERROR 259
-#define MACRO 260
-#define TEXT 261
-#define COMMENT 262
-#define BEGIN 263
-#define END 264
-#define VERB 265
-#define VERB2 266
-#define NEWENV 267
-#define NEWCMD 268
-#define END_OF_ARGS 269
-#define TWO_DOLLARS 270
-#define LBRACKET 271
-#define RBRACKET 272
-#define LET_OR_DEF 273
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -791,10 +771,10 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   203,   203,   204,   205,   208,   209,   210,   211,   212,
-     213,   215,   216,   218,   219,   222,   225,   226,   228,   229,
-     230,   231,   232,   233,   235,   239,   243,   247,   247,   251,
-     253,   254,   256,   256,   261,   261,   266,   266
+       0,   204,   204,   205,   206,   209,   210,   211,   212,   213,
+     214,   216,   217,   219,   220,   223,   226,   227,   229,   230,
+     231,   232,   233,   234,   236,   240,   244,   248,   248,   252,
+     254,   255,   257,   257,   262,   262,   267,   267
 };
 #endif
 
@@ -2727,11 +2707,12 @@ static int char_getc(void)
 /* Special Symbols */
 /* Section and R code headers */
 
-struct {
+struct Keyword {
     const char *name;
     int token;
-}
-static keywords[] = {
+};
+
+static const Keyword keywords[] = {
     /* These sections contain Latex-like text */
 
     { "\\begin",  BEGIN },
@@ -2739,7 +2720,7 @@ static keywords[] = {
     { "\\verb",   VERB },
     { "\\let",    LET_OR_DEF },
     { "\\def",    LET_OR_DEF },
-    { 0,     0        }
+    { nullptr, 0 }
     /* All other markup macros are rejected. */
 };
 
@@ -2788,7 +2769,7 @@ static void yyerror(const char *s)
     static char const yyexpecting[] = ", expecting ";
     static char const yyshortunexpected[] = "unexpected %s";
     static char const yylongunexpected[] = "unexpected %s '%s'";
-    char *expecting;
+    char *expecting = nullptr;
     char ErrorTranslation[PARSE_ERROR_SIZE];
     if (streqln(s, yyunexpected, sizeof yyunexpected -1)) {
 	int i, translated = FALSE;
@@ -2798,7 +2779,7 @@ static void yyerror(const char *s)
 	s1[PARSE_ERROR_SIZE] = 0;
 
     	/* Edit the error message */    
-	expecting = (char *) strstr(s1 + sizeof yyunexpected -1, yyexpecting);
+        expecting = strstr(s1 + sizeof yyunexpected -1, yyexpecting);
     	if (expecting) *expecting = '\0';
     	for (i = 0; yytname_translations[i]; i += 2) {
 	    if (streql(s1 + sizeof yyunexpected - 1, yytname_translations[i])) {
@@ -2859,20 +2840,7 @@ static void yyerror(const char *s)
              ErrorTranslation);
 }
 
-#define TEXT_PUSH(c) do {		    \
-	size_t nc = bp - stext;		    \
-	if (nc >= nstext - 1) {             \
-	    char *old = stext;              \
-        if (size_t(nstext) > SIZE_MAX / 2) error(_("Buffer size too large to double safely at line %d"), parseState.xxlineno); \
-	    nstext *= 2;		    \
-	    stext = (char *) malloc(nstext);	    \
-	    if(!stext) error(_("unable to allocate buffer for long string at line %d"), parseState.xxlineno);\
-	    if (old != stext) std::copy(old, old + nc, stext);        \
-	    if(st1) free(st1);		    \
-	    st1 = stext;		    \
-	    bp = stext+nc; }		    \
-	*bp++ = ((char)c);		    \
-} while(0)
+#define TEXT_PUSH(c) text.push_back(static_cast<char>(c))
 
 static void setfirstloc(void)
 {
@@ -2935,14 +2903,9 @@ static int token(void)
     return mkText(c);
 }
 
-#define INITBUFSIZE 128
-
 static int mkText(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
 
     while(1) {
     	switch (c) {
@@ -2961,17 +2924,13 @@ static int mkText(int c)
     };
 stop:
     xxungetc(c);
-    PRESERVE_SV(yylval = mkString2(stext,  bp - stext));
-    if(st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return TEXT;
 }
 
 static int mkComment(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
 
     do TEXT_PUSH(c);
     while ((c = xxgetc()) != '\n' && c != R_EOF);
@@ -2979,8 +2938,7 @@ static int mkComment(int c)
     if (c == R_EOF) xxungetc(c);
     else TEXT_PUSH(c);
 
-    PRESERVE_SV(yylval = mkString2(stext,  bp - stext));
-    if(st1) free(st1);    
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return COMMENT;
 }
 
@@ -3005,42 +2963,35 @@ static int mkDollar(int c)
 
 static int mkMarkup(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
     int retval = 0;
 
     TEXT_PUSH(c);
     while (isalpha((c = xxgetc()))) TEXT_PUSH(c);
 
     /* One non-alpha allowed */
-    if (bp - stext == 1) {
+    if (text.size() == 1) {
     	TEXT_PUSH(c);
     	TEXT_PUSH('\0');
     	retval = MACRO;
     } else {
 	TEXT_PUSH('\0');       
-        retval = KeywordLookup(stext);
+        retval = KeywordLookup(text.c_str());
         if (retval == VERB)
             retval = mkVerb(c); /* This makes the yylval */
         else if (retval == VERB2)
-            retval = mkVerb2(stext, c); /* ditto */
+            retval = mkVerb2(text.c_str(), c); /* ditto */
         else if (c != ' ') /* Eat a space, but keep other terminators */
     	    xxungetc(c);
     }
     if (retval != VERB)
-	PRESERVE_SV(yylval = mkString(stext));
-    if(st1) free(st1);
+        PRESERVE_SV(yylval = mkString(text.c_str()));
     return retval;
 }
 
 static int mkVerb(int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
     int delim = c;   
 
     TEXT_PUSH('\\'); TEXT_PUSH('v'); TEXT_PUSH('e'); TEXT_PUSH('r'); TEXT_PUSH('b');
@@ -3048,17 +2999,13 @@ static int mkVerb(int c)
     while (((c = xxgetc()) != delim) && c != R_EOF) TEXT_PUSH(c);
     if (c != R_EOF) TEXT_PUSH(c);
 
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext));
-    if(st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return VERB;  
 }
 
 static int mkVerb2(const char *s, int c)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
     const char *macro = s;
 
     while (*s) TEXT_PUSH(*s++);
@@ -3092,37 +3039,34 @@ static int mkVerb2(const char *s, int c)
     } else
 	TEXT_PUSH(c);
     
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext));
-    if(st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return VERB;  
 }
 
 static int mkVerbEnv(void)
 {
-    char st0[INITBUFSIZE];
-    char *st1 = NULL;
-    unsigned int nstext = INITBUFSIZE;
-    char *stext = st0, *bp = st0;
+    std::string text;
     int matched = 0;
     int c;
+    const char *end = CHAR(STRING_ELT(parseState.xxInVerbEnv, 0));
 
-    while ((c = xxgetc()) != R_EOF && CHAR(STRING_ELT(parseState.xxInVerbEnv, 0))[matched]) {
+    while ((c = xxgetc()) != R_EOF && end[matched]) {
     	TEXT_PUSH(c);
-    	if (c == CHAR(STRING_ELT(parseState.xxInVerbEnv, 0))[matched])
+        if (c == end[matched])
     	    matched++;
     	else
     	    matched = 0;
     }
-    if ( !CHAR(STRING_ELT(parseState.xxInVerbEnv, 0))[matched] ) {
+    if (!end[matched]) {
         xxungetc(c);
-    	for (int i = matched-1; i >= 0; i--) 
-    	    xxungetc(*(--bp));    	    
+        for (int i = matched - 1; i >= 0; i--)
+            xxungetc(text[text.size() - 1 - (matched - 1 - i)]);
+        text.resize(text.size() - matched);
 	RELEASE_SV(parseState.xxInVerbEnv);
     	parseState.xxInVerbEnv = NULL;
     }
 
-    PRESERVE_SV(yylval = mkString2(stext, bp - stext));
-    if (st1) free(st1);
+    PRESERVE_SV(yylval = mkString2(text.data(), text.size()));
     return VERB;
 }
 
@@ -3142,12 +3086,12 @@ static int yylex(void)
 
 static void PushState(void) {
     if (busy) {
-    	ParseState *prev = (ParseState *) malloc(sizeof(ParseState));
+    	ParseState *prev = new (std::nothrow) ParseState;
 	if (prev == NULL) error("%s", _("unable to allocate in PushState"));
     	PutState(prev);
     	parseState.prevState = prev;
     } else 
-        parseState.prevState = NULL;  
+        parseState.prevState = NULL;
     busy = true;
 }
 
@@ -3155,7 +3099,7 @@ static void PopState(void) {
     if (parseState.prevState) {
     	ParseState *prev = parseState.prevState;
     	UseState(prev);
-    	free(prev);
+        delete prev;
     } else
     	busy = false;
 }
