@@ -1189,7 +1189,7 @@ attribute_hidden SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
     int *buf = (int *) R_alloc(len, sizeof(int));
     /* use iteration macros to be ALTREP safe and pull ptr retrieval out of tight loop */
     ITERATE_BY_REGION(v, ptr, idx, nb, int, LOGICAL, {
-	    for(int i = 0; i < nb; i++) {
+	    for(R_xlen_t i = 0; i < nb; i++) {
 		if(ptr[i] == TRUE) {
 		    buf[j] = ioffset + i; // offset has +1 built in
 		    j++;
