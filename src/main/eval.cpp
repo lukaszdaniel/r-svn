@@ -3112,7 +3112,7 @@ static RCNTXT *getTailcallTarget(SEXP rho, int mask)
 attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 {
 #ifdef SUPPORT_TAILCALL
-    SEXP expr, env;
+    GCStackRoot<> expr, env;
     GCStackRoot<> args(args_);
 
     if (PRIMVAL(op) == 0) { // exec
@@ -3143,9 +3143,6 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	env = rho;
     }
 
-    PROTECT(expr);
-    PROTECT(env);
-
     int mask = CTXT_BROWSER | CTXT_FUNCTION;
     RCNTXT *target = getTailcallTarget(rho, mask);
 
@@ -3158,7 +3155,8 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
     if (target != NULL) {
 	/* computing the function before the jump allows the idiom
 	   Tailcall(sys.function(), ...) to be used */
-	SEXP fun = CAR(expr);
+	GCStackRoot<> fun;
+	fun = CAR(expr);
 	if (TYPEOF(fun) == STRSXP && XLENGTH(fun) == 1)
 	    fun = installTrChar(STRING_ELT(fun, 0));
 	if (TYPEOF(fun) == SYMSXP)
@@ -3169,9 +3167,8 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 
 	/* allocating a vector result could be avoided by passing expr,
 	   env, and fun in some globals or on the byte code stack */
-	PROTECT(fun);
 	SEXP val = ListVector::create(4);
-	UNPROTECT(1); /* fun */
+
 	SET_VECTOR_ELT(val, 0, R_exec_token);
 	SET_VECTOR_ELT(val, 1, expr);
 	SET_VECTOR_ELT(val, 2, env);
@@ -3183,7 +3180,7 @@ attribute_hidden SEXP do_tailcall(SEXP call, SEXP op, SEXP args_, SEXP rho)
 	/**** maybe have an optional diagnostic about why no tail call? */
 	/**** or even signal an error as return() does? */
 	SEXP val = eval(expr, rho);
-	UNPROTECT(2); /* expr, rho */
+
 	return val;
     }
 #else
@@ -9358,7 +9355,7 @@ SEXP R_TailCall(SEXP call, SEXP fun, SEXP rho, SEXP callrho)
     RCNTXT *target = getTailcallTarget(callrho, mask);
     if (target != NULL) {
         PROTECT(fun);
-        SEXP val = allocVector(VECSXP, 4);
+        SEXP val = ListVector::create(4);
         UNPROTECT(1); /* fun */
         SET_VECTOR_ELT(val, 0, R_exec_token);
         SET_VECTOR_ELT(val, 1, call);
@@ -9369,8 +9366,9 @@ SEXP R_TailCall(SEXP call, SEXP fun, SEXP rho, SEXP callrho)
 #endif
 
     // still here, so no target found; just use eval()
-    SEXP newcall = PROTECT(LCONS(fun, CDR(call)));
+    GCStackRoot<> newcall;
+    newcall = LCONS(fun, CDR(call));
     SEXP val = eval(newcall, rho);
-    UNPROTECT(1); // newcall
+
     return val;
 }

@@ -1139,24 +1139,6 @@ namespace CXXR
     }
 } // namespace CXXR
 
-void GCNode::propagateAges(unsigned int max_generation)
-{
-#ifndef EXPEL_OLD_TO_NEW
-    /* eliminate old-to-new references in generations to collect by
-       transferring referenced nodes to referring generation */
-    for (unsigned int gen = 1; gen < max_generation; gen++) {
-        Ager ager(gen);
-        const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
-        while (s != s_OldToNew[gen].get()) {
-            const GCNode *next = NEXT_NODE(s);
-            s->visitReferents(&ager);
-            s_Old[gen]->splice(s);
-            s = next;
-        }
-    }
-#endif
-}
-
 #define MARK_THRU(s) if (s != R_NilValue) marker(s);
 
 void GCNode::mark(unsigned int max_generation)
@@ -1287,18 +1269,6 @@ void GCNode::mark(unsigned int max_generation)
         s = next;
     }
 #endif
-}
-
-void GCNode::sweep(unsigned int max_generation)
-{
-    const GCNode *s = NEXT_NODE(s_New);
-    while (s != s_New.get())
-    {
-        const GCNode *next = NEXT_NODE(s);
-        const_cast<GCNode *>(s)->detachReferents();
-        delete s;
-        s = next;
-    }
 }
 
 void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)

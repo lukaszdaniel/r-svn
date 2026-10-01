@@ -138,6 +138,36 @@ namespace CXXR
         }
     }
 
+    void GCNode::propagateAges(unsigned int max_generation)
+    {
+#ifndef EXPEL_OLD_TO_NEW
+    /* eliminate old-to-new references in generations to collect by
+       transferring referenced nodes to referring generation */
+        for (unsigned int gen = 1; gen < max_generation; gen++) {
+            Ager ager(gen);
+            const GCNode *s = (s_OldToNew[gen])->m_next;
+            while (s != s_OldToNew[gen].get()) {
+                const GCNode *next = s->m_next;
+                s->visitReferents(&ager);
+                s_Old[gen]->splice(s);
+                s = next;
+            }
+        }
+#endif
+    }
+
+    void GCNode::sweep(unsigned int max_generation)
+    {
+        const GCNode *s = s_New->m_next;
+        while (s != s_New.get())
+        {
+            const GCNode *next = s->m_next;
+            const_cast<GCNode *>(s)->detachReferents();
+            delete s;
+            s = next;
+        }
+    }
+
     void GCNode::cleanup()
     {
     }
