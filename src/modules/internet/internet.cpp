@@ -501,7 +501,7 @@ static SEXP in_do_download(SEXP args)
 		    REprintf(_("downloaded %0.1f MB\n\n"),
 			     (double)nbytes/Mega);
 		else if(nbytes > Kilo)
-		    REprintf(_("downloaded %d KB\n\n"), (int) nbytes/Kilo);
+		    REprintf(_("downloaded %d KB\n\n"), int(nbytes/Kilo));
 		else
 		    REprintf(n_("downloaded %d byte\n\n", "downloaded %d bytes\n\n", (int)nbytes), (int) nbytes);
 	    }

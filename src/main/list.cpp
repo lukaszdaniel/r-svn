@@ -55,7 +55,7 @@ typedef struct {
  SEXP	ans;
  bool	UniqueNames;
  bool	IncludeFunctions;
- int	StoreValues;
+ bool	StoreValues;
  int	ItemCounts;
  int	MaxCount;
 } NameWalkData;

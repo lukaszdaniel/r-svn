@@ -151,7 +151,7 @@
 # CSTD = -std=gnu2x
 
 # C++ standard to use by default (override the compiler default)
-# CXXSTD = -std=c++17
+# CXXSTD = -std=gnu++20
 
 # additional optimization flags (e.g. -mtune=native for a private build)
 #
