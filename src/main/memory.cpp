@@ -506,46 +506,6 @@ static R_size_t R_V_maxused=0;
 
 #define VHEAP_FREE() (R_VSize - MemoryBank::doublesAllocated())
 
-#define NEXT_NODE(s) (s)->m_next
-#define PREV_NODE(s) (s)->m_prev
-#define SET_NEXT_NODE(s,t) (NEXT_NODE(s) = (t))
-#define SET_PREV_NODE(s,t) (PREV_NODE(s) = (t))
-
-
-/* Node List Manipulation */
-
-/* link node s to t */
-#define LINK_NODE(s,t) do { \
-  SET_NEXT_NODE(s, t); \
-  SET_PREV_NODE(t, s); \
-} while (0)
-
-/* unsnap node s from its list */
-#define UNSNAP_NODE(s) do { \
-  const GCNode *un__n__ = (s); \
-  LINK_NODE(PREV_NODE(un__n__), NEXT_NODE(un__n__)); \
-} while(0)
-
-/* snap in node s before node t */
-#define SNAP_NODE(s,t) do { \
-  const GCNode *sn__n__ = (s); \
-  const GCNode *tn__n__ = (t); \
-  LINK_NODE(PREV_NODE(tn__n__), sn__n__); \
-  LINK_NODE(sn__n__, tn__n__); \
-} while (0)
-
-/* move all nodes on from_peg to to_peg */
-#define BULK_MOVE(from_peg,to_peg) do { \
-  const GCNode *__from__ = (from_peg); \
-  const GCNode *__to__ = (to_peg); \
-  const GCNode *first_old = NEXT_NODE(__from__); \
-  const GCNode *last_old = PREV_NODE(__from__); \
-  const GCNode *first_new = NEXT_NODE(__to__); \
-  LINK_NODE(__to__, first_old); \
-  LINK_NODE(last_old, first_new); \
-  LINK_NODE(__from__, __from__); \
-} while (0);
-
 /* Node Allocation. */
 
 /* Debugging Routines. */
@@ -557,24 +517,18 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
     unsigned int NewCount = 0;
     unsigned int OldCount = 0;
     unsigned int OldToNewCount = 0;
-    for (const GCNode *s = NEXT_NODE(GCNode::s_New);
-        s != GCNode::s_New.get();
-        s = NEXT_NODE(s)) {
+    for (const GCNode *s : GCNode::s_New) {
         NewCount++;
     }
     for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
-        for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
-            s != GCNode::s_Old[gen].get();
-            s = NEXT_NODE(s)) {
+        for (const GCNode *s : GCNode::s_Old[gen]) {
             OldCount++;
             if (gen != NODE_GENERATION(s))
                 GCManager::gc_error(_("Inconsistent node generation in s_Old\n"));
             GCNode::OldToNewChecker o2n(gen);
             s->visitReferents(&o2n);
         }
-        for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[gen]);
-            s != GCNode::s_OldToNew[gen].get();
-            s = NEXT_NODE(s)) {
+        for (const GCNode *s : GCNode::s_OldToNew[gen]) {
             OldToNewCount++;
             if (gen != NODE_GENERATION(s))
                 GCManager::gc_error(_("Inconsistent node generation in s_OldToNew\n"));
@@ -705,7 +659,7 @@ static void old_to_new(SEXP x, SEXP y)
     GCNode::Ager age(NODE_GENERATION(x));
     age(y);
 #else
-    GCNode::s_OldToNew[NODE_GENERATION(x)]->splice(x);
+    GCNode::moveToOldToNew(x);
 #endif
 }
 
@@ -1146,21 +1100,27 @@ void GCNode::mark(unsigned int max_generation)
     /* unmark all marked nodes in old generations to be collected and
        move to New space */
     for (unsigned int gen = 0 /* 1 */; gen < max_generation; gen++) {
-        const GCNode *s = NEXT_NODE(s_Old[gen]);
-        while (s != s_Old[gen].get()) {
-            const GCNode *next = NEXT_NODE(s);
-            if (gen < numGenerations() - 1)
-            {
-                // Advance generation:
-                --s_gencount[gen];
-                SET_NODE_GENERATION(s, gen + 1);
-                ++s_gencount[gen + 1];
+        if (gen == 0) {
+            for (GCNode *node : s_Old[gen]) {
+                if (gen < numGenerations() - 1) {
+                    --s_gencount[gen];
+                    SET_NODE_GENERATION(node, gen + 1);
+                    ++s_gencount[gen + 1];
+                }
+                UNMARK_NODE(node);
             }
-            UNMARK_NODE(s);
-            s = next;
+        } else {
+            while (!s_Old[gen].empty()) {
+                GCNode *node = s_Old[gen].getDataAt(s_Old[gen].size() - 1);
+                if (gen < numGenerations() - 1) {
+                    --s_gencount[gen];
+                    SET_NODE_GENERATION(node, gen + 1);
+                    ++s_gencount[gen + 1];
+                }
+                UNMARK_NODE(node);
+                node->moveToGeneration(0);
+            }
         }
-        if ((gen > 0) && (NEXT_NODE(s_Old[gen]) != s_Old[gen].get()))
-            BULK_MOVE(s_Old[gen].get(), s_New.get());
     }
 
     Marker marker(1 + max_generation); // some of the nodes have already aged (see above)
@@ -1169,11 +1129,16 @@ void GCNode::mark(unsigned int max_generation)
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
-    for (unsigned int gen = max_generation; gen < numGenerations(); gen++)
-        for (const GCNode *s = NEXT_NODE(s_OldToNew[gen]);
-            s != s_OldToNew[gen].get();
-            s = NEXT_NODE(s))
-            s->visitReferents(&marker);
+    for (unsigned int gen = max_generation; gen < numGenerations(); gen++) {
+        siv::Vector<GCNode *> &nodes = s_OldToNew[gen];
+        std::size_t index = 0;
+        while (index < nodes.size()) {
+            GCNode *node = nodes.getDataAt(index);
+            node->visitReferents(&marker);
+            if (index < nodes.size() && nodes.getDataAt(index) == node)
+                ++index;
+        }
+    }
 #endif
 
     /* forward all roots */
@@ -1228,10 +1193,10 @@ void GCNode::mark(unsigned int max_generation)
             };
             return std::find(types.begin(), types.end(), TYPEOF(node)) != types.end();
         };
-    const GCNode *s = NEXT_NODE(s_New);
-    while (s != s_New.get())
+    std::size_t index = 0;
+    while (index < s_New.size())
     {
-        const GCNode *next = NEXT_NODE(s);
+        GCNode *s = s_New.getDataAt(index);
         if (TYPEOF(s) != NEWSXP)
         {
             if (TYPEOF(s) != FREESXP)
@@ -1266,7 +1231,8 @@ void GCNode::mark(unsigned int max_generation)
             if (GCManager::gc_inhibit_release())
                 MARK_THRU(s);
         }
-        s = next;
+        if (index < s_New.size() && s_New.getDataAt(index) == s)
+            ++index;
     }
 #endif
 }
@@ -2146,9 +2112,7 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
       for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
-	  for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
-	       s != GCNode::s_Old[gen].get();
-	       s = NEXT_NODE(s)) {
+          for (const GCNode *s : GCNode::s_Old[gen]) {
 	      tmp = TYPEOF(s);
 	      if (tmp > LGLSXP) tmp -= 2;
 	      INTEGER(ans)[tmp]++;
