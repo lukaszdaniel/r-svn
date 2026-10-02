@@ -1002,7 +1002,7 @@ namespace CXXR
         mutable struct sxpinfo_struct sxpinfo;
 #define ID_NOT_SET std::numeric_limits<siv::ID>::max()
         mutable siv::ID m_ID{ID_NOT_SET};
-        mutable unsigned int m_current_gen_list{};
+        mutable bool m_in_new_space{};
         mutable bool m_in_old_to_new_list{};
 
         void moveToGeneration(unsigned int generation) const;
@@ -1039,11 +1039,7 @@ namespace CXXR
          * both counts.
          */
 // #define EXPEL_OLD_TO_NEW
-#define s_New s_Old[0]
-        static siv::Vector<CXXR::GCNode *> s_Old[1 + GCManager::numOldGenerations()];
-#ifndef EXPEL_OLD_TO_NEW
-        static siv::Vector<CXXR::GCNode *> s_OldToNew[1 + GCManager::numOldGenerations()];
-#endif
+        static siv::Vector<CXXR::GCNode *> s_Old;
         static unsigned int s_gencount[1 + GCManager::numOldGenerations()];
 
         /** @brief Next generation table.

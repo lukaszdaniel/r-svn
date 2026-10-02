@@ -517,22 +517,21 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
     unsigned int NewCount = 0;
     unsigned int OldCount = 0;
     unsigned int OldToNewCount = 0;
-    for (const GCNode *s : GCNode::s_New) {
-        NewCount++;
-    }
-    for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
-        for (const GCNode *s : GCNode::s_Old[gen]) {
-            OldCount++;
-            if (gen != NODE_GENERATION(s))
-                GCManager::gc_error(_("Inconsistent node generation in s_Old\n"));
-            GCNode::OldToNewChecker o2n(gen);
-            s->visitReferents(&o2n);
+    for (const GCNode *s : GCNode::s_Old) {
+        if (s->m_in_new_space) {
+            NewCount++;
+            continue;
         }
-        for (const GCNode *s : GCNode::s_OldToNew[gen]) {
-            OldToNewCount++;
-            if (gen != NODE_GENERATION(s))
-                GCManager::gc_error(_("Inconsistent node generation in s_OldToNew\n"));
+        if (s->m_in_old_to_new_list) {
+            if (NODE_GENERATION(s) > 0)
+                OldToNewCount++;
+            continue;
         }
+        OldCount++;
+        if (NODE_GENERATION(s) == 0)
+            GCManager::gc_error(_("Inconsistent node generation in s_Old\n"));
+        GCNode::OldToNewChecker o2n(NODE_GENERATION(s));
+        s->visitReferents(&o2n);
     }
     REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
         NewCount, OldCount, OldToNewCount,
@@ -1097,11 +1096,12 @@ namespace CXXR
 
 void GCNode::mark(unsigned int max_generation)
 {
-    /* unmark all marked nodes in old generations to be collected and
-       move to New space */
+    /* Unmark nodes in generations to be collected and move them to New space. */
     for (unsigned int gen = 0 /* 1 */; gen < max_generation; gen++) {
         if (gen == 0) {
-            for (GCNode *node : s_Old[gen]) {
+            for (GCNode *node : s_Old) {
+                if (!node->m_in_new_space)
+                    continue;
                 if (gen < numGenerations() - 1) {
                     --s_gencount[gen];
                     SET_NODE_GENERATION(node, gen + 1);
@@ -1110,8 +1110,13 @@ void GCNode::mark(unsigned int max_generation)
                 UNMARK_NODE(node);
             }
         } else {
-            while (!s_Old[gen].empty()) {
-                GCNode *node = s_Old[gen].getDataAt(s_Old[gen].size() - 1);
+            std::size_t index = 0;
+            while (index < s_Old.size()) {
+                GCNode *node = s_Old.getDataAt(index);
+                if (node->m_in_new_space || node->generation() != gen) {
+                    ++index;
+                    continue;
+                }
                 if (gen < numGenerations() - 1) {
                     --s_gencount[gen];
                     SET_NODE_GENERATION(node, gen + 1);
@@ -1129,15 +1134,16 @@ void GCNode::mark(unsigned int max_generation)
 
 #ifndef EXPEL_OLD_TO_NEW
     /* scan nodes in uncollected old generations with old-to-new pointers */
-    for (unsigned int gen = max_generation; gen < numGenerations(); gen++) {
-        siv::Vector<GCNode *> &nodes = s_OldToNew[gen];
-        std::size_t index = 0;
-        while (index < nodes.size()) {
-            GCNode *node = nodes.getDataAt(index);
-            node->visitReferents(&marker);
-            if (index < nodes.size() && nodes.getDataAt(index) == node)
-                ++index;
+    std::size_t old_to_new_index = 0;
+    while (old_to_new_index < s_Old.size()) {
+        GCNode *node = s_Old.getDataAt(old_to_new_index);
+        if (!node->m_in_old_to_new_list || node->generation() < max_generation) {
+            ++old_to_new_index;
+            continue;
         }
+        node->visitReferents(&marker);
+        if (old_to_new_index < s_Old.size() && s_Old.getDataAt(old_to_new_index) == node)
+            ++old_to_new_index;
     }
 #endif
 
@@ -1194,9 +1200,14 @@ void GCNode::mark(unsigned int max_generation)
             return std::find(types.begin(), types.end(), TYPEOF(node)) != types.end();
         };
     std::size_t index = 0;
-    while (index < s_New.size())
+        while (index < s_Old.size())
     {
-        GCNode *s = s_New.getDataAt(index);
+            GCNode *s = s_Old.getDataAt(index);
+            if (!s->m_in_new_space)
+            {
+                ++index;
+                continue;
+            }
         if (TYPEOF(s) != NEWSXP)
         {
             if (TYPEOF(s) != FREESXP)
@@ -1231,7 +1242,7 @@ void GCNode::mark(unsigned int max_generation)
             if (GCManager::gc_inhibit_release())
                 MARK_THRU(s);
         }
-        if (index < s_New.size() && s_New.getDataAt(index) == s)
+        if (index < s_Old.size() && s_Old.getDataAt(index) == s)
             ++index;
     }
 #endif
@@ -2111,8 +2122,8 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
       /* run a full GC to make sure that all stuff in use is in Old space */
       R_gc();
-      for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
-          for (const GCNode *s : GCNode::s_Old[gen]) {
+      for (const GCNode *s : GCNode::s_Old) {
+          if (!s->m_in_new_space && !s->m_in_old_to_new_list && s->generation() > 0) {
 	      tmp = TYPEOF(s);
 	      if (tmp > LGLSXP) tmp -= 2;
 	      INTEGER(ans)[tmp]++;
