@@ -31,14 +31,6 @@
 #ifndef GCNODE_HPP
 #define GCNODE_HPP
 
-#include <cstddef>
-#include <cstdint>
-#include <functional>
-#include <utility>
-#include <limits>
-#include <vector>
-#include <cassert>
-
 #include <memory>
 #include <bitset>
 #include <string>
@@ -46,403 +38,6 @@
 #include <CXXR/RTypes.hpp>
 #include <CXXR/SEXPTYPE.hpp>
 #include <CXXR/GCManager.hpp>
-
-
-
-
-
-namespace siv
-{
-    /// Alias to differentiate between stable IDs and internal ids.
-    /// A stable ID allows to access the data through the index vector and is associated with the same object until its erased.
-    /// An internal id is simply the current position of the object in the data vector and may change with deletions.
-    using ID = uint64_t;
-
-    /// Forward declaration
-    template <typename T>
-    class Vector;
-
-    /// @brief A standalone struct allowing to access an object without the need to have a reference to the containing Vector.
-    /// @tparam T The type of the object
-    template <typename T>
-    class Ref
-    {
-    public:
-        using element_type = T;
-
-        /// @brief Constructs an invalid reference.
-        constexpr Ref() noexcept = default;
-
-        /// @brief Constructs a reference bound to a specific vector and generation token.
-        /// @param id Stable ID of the object.
-        /// @param generation_id Generation token used to detect stale references.
-        /// @param vector Pointer to the owning vector.
-        constexpr Ref(ID id,
-                      uint32_t generation,
-                      Vector<T> *owner) noexcept
-            : m_id(id), m_generation(generation), m_owner(owner)
-        {
-        }
-
-        /// @brief Pointer-like access to the underlying object
-        [[nodiscard]] T *operator->() const noexcept
-        {
-            return &(*m_owner)[m_id];
-        }
-
-        /// @brief Dereference operator
-        [[nodiscard]] T &operator*() const noexcept
-        {
-            return (*m_owner)[m_id];
-        }
-
-        constexpr void reset() noexcept
-        {
-            m_owner = nullptr;
-            m_id = invalid_id;
-            m_generation = 0;
-        }
-
-        /// @brief Returns the stable ID of the associated object.
-        [[nodiscard]] constexpr ID getID() const noexcept
-        {
-            return m_id;
-        }
-
-        /// @brief Checks whether the reference is still valid.
-        /// @return false if uninitialized or if the object has been erased from the vector, true otherwise
-        [[nodiscard]] constexpr explicit operator bool() const noexcept
-        {
-            return isValid();
-        }
-
-        [[nodiscard]] constexpr bool isValid() const noexcept
-        {
-            return m_owner && m_owner->isValid(m_id, m_generation);
-        }
-
-        friend constexpr bool operator==(const Ref &, const Ref &) noexcept = default;
-
-    private:
-        static constexpr ID invalid_id = std::numeric_limits<ID>::max();
-
-        /// The stable ID of the object.
-        ID m_id{invalid_id};
-        /// The generation ID of the object at the time of creation. Used to check the generation of the handle.
-        uint32_t m_generation{};
-        /// A raw pointer to the vector containing the object associated with this handle
-        Vector<T> *m_owner{};
-    };
-
-    /// @brief A vector that provides stable IDs when adding objects.
-    /// These stable IDs will still allow to access their associated objects even after inserting of removing other objects.
-    /// This comes at the cost of a small overhead because of an additional indirection.
-    ///
-    /// @tparam T The type of the objects to be stored in the vector. It has to be movable.
-    ///
-    template <typename T>
-    class Vector
-    {
-    public:
-        using value_type = T;
-        using size_type = std::size_t;
-        using iterator = typename std::vector<T>::iterator;
-        using const_iterator = typename std::vector<T>::const_iterator;
-
-        /// @brief Constructs an empty vector container.
-        Vector() = default;
-
-        /// @brief Constructs an empty vector container with reserved capacity.
-        explicit Vector(size_type reserve_size)
-        {
-            reserve(reserve_size);
-        }
-
-        /// @brief Constructs a new object in-place and returns its stable ID.
-        /// @tparam Args Constructor arguments types
-        /// @param args Constructor arguments
-        /// @return The ID to retrieve the object
-        template <typename... Args>
-        [[nodiscard]] ID emplace_back(Args &&...args)
-        {
-            const ID id = getFreeSlot();
-            m_data.emplace_back(std::forward<Args>(args)...);
-            return id;
-        }
-
-        /// @brief Copies an object into the container and returns its stable ID.
-        /// @param object The object to copy
-        /// @return The ID to retrieve the object
-        [[nodiscard]] ID push_back(const T &object)
-        {
-            const ID id = getFreeSlot();
-            m_data.push_back(object);
-            return id;
-        }
-
-        /// @brief Moves an object into the container and returns its stable ID.
-        /// @param obj The object to move
-        /// @return The ID to retrieve the object
-        [[nodiscard]] ID push_back(T &&obj)
-        {
-            const ID id = getFreeSlot();
-            m_data.push_back(std::move(obj));
-            // m_internal_to_ID.push_back(Metadata{id, 0});
-            // m_ID_to_internal[id] = m_data.size() - 1u;
-            return id;
-        }
-
-        /// @brief Removes the object associated with the provided stable ID.
-        /// @param id The ID of the object to remove
-        void erase(ID id)
-        {
-            // Fetch relevant info
-            const size_type internal_id = m_ID_to_internal[id];
-            const size_type last_internal_id = m_data.size() - 1;
-            const ID last_ID = m_internal_to_ID[last_internal_id].m_stable_id;
-            // Update validity ID
-            ++(m_internal_to_ID[internal_id].m_generation);
-
-            if (internal_id != last_internal_id)
-            {
-                // Swap the object to delete with the object at the end
-                std::swap(m_data[internal_id], m_data[last_internal_id]);
-                std::swap(m_internal_to_ID[internal_id], m_internal_to_ID[last_internal_id]);
-                std::swap(m_ID_to_internal[id], m_ID_to_internal[last_ID]);
-            }
-
-            // Destroy the object
-            m_data.pop_back();
-        }
-
-        /// @brief Removes all objects matching the given predicate.
-        /// @param predicate The predicate used to check an object has to be removed
-        template <typename Pred>
-        void remove_if(Pred &&predicate)
-        {
-            for (size_type internal_id = 0; internal_id < m_data.size();)
-            {
-                if (predicate(m_data[internal_id]))
-                {
-                    eraseViaInternalID(internal_id);
-                }
-                else
-                {
-                    ++internal_id;
-                }
-            }
-        }
-
-        /// @brief Removes the object referenced by the handle from the vector
-        /// @param handle The handle referencing the object to remove
-        void erase(const Ref<T> &handle)
-        {
-            // Ensure the handle is from this vector
-            assert(handle.m_owner == this);
-            // Ensure the object hasn't already been erased
-            assert(handle.isValid());
-            erase(handle.getID());
-        }
-
-        /// @brief Access the object reference by its stable ID.
-        /// @param id The object's stable ID
-        /// @return A reference to the object
-        T &operator[](ID id)
-        {
-            return m_data[getInternalID(id)];
-        }
-
-        /// @brief Access the object reference by its stable ID in const mode.
-        /// @param id The object's stable ID
-        /// @return A constant reference to the object
-        const T &operator[](ID id) const
-        {
-            return m_data[getInternalID(id)];
-        }
-
-        /// @brief Creates a handle that can safely access the object.
-        /// @param id The ID of the object
-        /// @return A handle to the object
-        [[nodiscard]] Ref<T> getRef(ID id)
-        {
-            /* Ensure the object is valid. If the internal id is greater than the current size
-             * it means that it has been swapped and removed. */
-            assert(m_ID_to_internal[id] < m_data.size());
-            return {id, getGenerationID(id), this};
-        }
-
-        /// @brief Returns the object stored at a specific internal id.
-        /// @param i The internal id of the object
-        /// @return A reference to the object
-        T &getDataAt(size_type i)
-        {
-            return m_data[i];
-        }
-
-        /// @brief Checks if the provided object is still valid considering its last known generation ID
-        /// @param id The ID of the object
-        /// @param generation_id The last known generation ID
-        /// @return True if the last known generation ID is equal to the current one
-        [[nodiscard]] bool isValid(ID id, uint32_t generation_id) const
-        {
-            return generation_id == m_internal_to_ID[getInternalID(id)].m_generation;
-        }
-
-        /// @brief Returns an iterator to the first active object.
-        iterator begin() noexcept
-        {
-            return m_data.begin();
-        }
-
-        /// @brief Returns an iterator to the last active object.
-        iterator end() noexcept
-        {
-            return m_data.end();
-        }
-
-        /// @brief Returns a const iterator to the first active object.
-        const_iterator begin() const noexcept
-        {
-            return m_data.begin();
-        }
-
-        /// @brief Returns a const iterator to the last active object.
-        const_iterator end() const noexcept
-        {
-            return m_data.end();
-        }
-
-        /// @brief Returns the number of active objects in the container.
-        [[nodiscard]] size_type size() const noexcept
-        {
-            return m_data.size();
-        }
-
-        /// @brief Tells if the vector is currently full
-        [[nodiscard]] bool isFull() const noexcept
-        {
-            return m_internal_to_ID.size() <= m_data.size();
-        }
-
-        /// @brief Tells if the vector is currently empty
-        [[nodiscard]] bool empty() const noexcept
-        {
-            return m_data.empty();
-        }
-
-        /// @brief Returns the vector's capacity (i.e. the number of allocated slots in the vector)
-        [[nodiscard]] size_type capacity() const noexcept
-        {
-            return m_data.capacity();
-        }
-
-        /// @brief Returns the stable ID of the object stored at a given internal index.
-        [[nodiscard]] ID getID(size_type internal_id) const noexcept
-        {
-            return m_internal_to_ID[internal_id].m_stable_id;
-        }
-
-        /// @brief Returns the internal id associated with a stable ID.
-        [[nodiscard]] size_type getInternalID(ID id) const noexcept
-        {
-            return m_ID_to_internal[id];
-        }
-
-        const T &getAt(uint64_t id) const
-        {
-            return m_data[getInternalID(id)];
-        }
-
-        /// @brief Pre allocates @p size slots in the vector
-        /// @param size The number of slots to allocate in the vector
-        void reserve(size_type size)
-        {
-            m_data.reserve(size);
-            m_internal_to_ID.reserve(size);
-            m_ID_to_internal.reserve(size);
-        }
-
-        /// @brief Reduces storage capacities to fit the current vector sizes.
-        void shrink_to_fit()
-        {
-            m_data.shrink_to_fit();
-            m_internal_to_ID.shrink_to_fit();
-            m_ID_to_internal.shrink_to_fit();
-        }
-
-    private:
-        /// @brief Creates a fresh stable ID for a new object.
-        ID getFreeSlot()
-        {
-            const ID id = getFreeID();
-            m_ID_to_internal[id] = m_data.size();
-            return id;
-        }
-
-        ID getFreeID()
-        {
-            // This means that we have available slots
-            if (m_internal_to_ID.size() > m_data.size())
-            {
-                // Update the validity ID
-                ++(m_internal_to_ID[m_data.size()].m_generation);
-                return m_internal_to_ID[m_data.size()].m_stable_id;
-            }
-            // A new slot has to be created
-            const ID new_id = m_data.size();
-            m_internal_to_ID.push_back({new_id, 0});
-            m_ID_to_internal.push_back(new_id);
-            return new_id;
-        }
-
-        /// @brief Stores metadata used to track object lifetime and generation across reuses.
-        struct Metadata
-        {
-            /// Stable ID, allowing to retrieve the ID of the object from the data vector.
-            ID m_stable_id = 0;
-            /// An identifier that is changed when the object is erased, used to ensure a handle is still valid.
-            uint32_t m_generation = 0;
-        };
-
-        /// The vector holding the actual objects.
-        std::vector<T> m_data;
-        /// The vector holding the associated metadata. It is accessed using the same index as for the data vector.
-        std::vector<Metadata> m_internal_to_ID;
-        /// The vector that stores the internal data index for each ID.
-        std::vector<size_type> m_ID_to_internal;
-
-        /// @brief Removes the object from the vector
-        /// @param internal_id The internal id in the data vector of the object to remove
-        void eraseViaInternalID(size_type internal_id)
-        {
-            erase(m_internal_to_ID[internal_id].m_stable_id);
-        }
-
-        /// @brief Return the generation ID associated with the provided ID
-        /// @param id The stable ID of the object for which to retrieve the generation ID.
-        /// @return The generation ID associated with the provided ID.
-        [[nodiscard]] uint32_t getGenerationID(ID id) const
-        {
-            return m_internal_to_ID[getInternalID(id)].m_generation;
-        }
-
-        /// @brief Returns metadata for the object associated with a stable ID.
-        /// @param id The stable ID of the object for which to retrieve metadata.
-        /// @return A reference to the metadata for the specified object.
-        Metadata &getMetadataAt(ID id)
-        {
-            return m_internal_to_ID[getInternalID(id)];
-        }
-    };
-}
-
-
-
-
-
-
-
-
 
 #define NAMED_BITS 16
 #define GP_BITS 16
@@ -667,6 +262,13 @@ namespace CXXR
             static unsigned int s_count;
         };
 
+        /** @brief Constructor used for creating pegs.
+         *
+         * Special constructor for pegs (i.e. dummy nodes used to
+         * simplify list management).
+         */
+        GCNode();
+
         /** @brief Main GCNode Constructor.
          *
          */
@@ -841,9 +443,9 @@ namespace CXXR
 
         bool isMarked() const { return sxpinfo.m_mark; }
 
-#ifndef EXPEL_OLD_TO_NEW
-        static void moveToOldToNew(const GCNode *node);
-#endif
+        const GCNode *next() const { return m_next; }
+
+        const GCNode *prev() const { return m_prev; }
 
     // private:
         /** @brief Visitor class used to impose a minimum generation number.
@@ -949,6 +551,42 @@ namespace CXXR
         // GCNode(const GCNode &) = delete;
         GCNode &operator=(const GCNode &) = delete;
 
+        /** @brief Unsnap this node from its list
+         *
+         */
+        void unsnap()
+        {
+            link(prev(), next());
+            link(this, this);
+        }
+
+        // Make t the successor of s:
+        static void link(const GCNode *s, const GCNode *t)
+        {
+            s->m_next = t;
+            t->m_prev = s;
+        }
+
+        /** @brief Transfer a node so as to precede this node.
+         *
+         * @param s Pointer to node to be moved, which may be in the
+         * same (circularly linked) list as '*this', or in a different
+         * list.  It is permissible for \e s to point to what is already
+         * the predecessor of '*this', in which case the function
+         * amounts to a no-op.  It is also permissible for \e s to point
+         * to '*this' itself; beware however that in that case the
+         * function will detach '*this' from its current list, and turn
+         * it into a singleton list.
+         */
+        void splice(const GCNode *s)
+        {
+            // Doing things in this order is innocuous if s is already
+            // this node's predecessor:
+            link(s->prev(), s->next());
+            link(prev(), s);
+            link(s, this);
+        }
+
         // Clean up static data at end of run:
         static void cleanup();
 
@@ -990,6 +628,29 @@ namespace CXXR
          */
         static void sweep(unsigned int max_generation);
 
+        /** @brief Transfer a sublist so as to precede this node.
+         *
+         * @param beg Pointer to the first node in the sublist to be
+         * moved.  The sublist may be a sublist of the same (circularly
+         * linked) list of which '*this' forms a part, or of another
+         * list.  Note however that in the former case, the sublist to
+         * be moved must not contain '*this'.
+         *
+         * @param end Pointer to the successor of the last node of the
+         * sublist to be moved.  It is permissible for it be identical
+         * to beg, or to point to '*this': in either case the function
+         * amounts to a no-op.
+         */
+        void splice(const GCNode *beg, const GCNode *end)
+        {
+            if (beg != end && end != this) {
+                const GCNode *last = end->prev();
+                link(beg->prev(), end);
+                link(prev(), beg);
+                link(last, this);
+            }
+        }
+
         std::string gpbits() const
         {
             return std::bitset<GP_BITS>(sxpinfo.gp).to_string();
@@ -1000,12 +661,8 @@ namespace CXXR
         static void *operator new[](size_t);
 
         mutable struct sxpinfo_struct sxpinfo;
-#define ID_NOT_SET std::numeric_limits<siv::ID>::max()
-        mutable siv::ID m_ID{ID_NOT_SET};
-        mutable bool m_in_new_space{};
-        mutable bool m_in_old_to_new_list{};
-
-        void moveToGeneration(unsigned int generation) const;
+        mutable const GCNode *m_next;
+        mutable const GCNode *m_prev;
 
         static size_t s_num_nodes; // Number of nodes in existence
 
@@ -1039,7 +696,11 @@ namespace CXXR
          * both counts.
          */
 // #define EXPEL_OLD_TO_NEW
-        static siv::Vector<CXXR::GCNode *> s_Old;
+#define s_New s_Old[0]
+        static std::unique_ptr<CXXR::GCNode> s_Old[1 + GCManager::numOldGenerations()];
+#ifndef EXPEL_OLD_TO_NEW
+        static std::unique_ptr<CXXR::GCNode> s_OldToNew[1 + GCManager::numOldGenerations()];
+#endif
         static unsigned int s_gencount[1 + GCManager::numOldGenerations()];
 
         /** @brief Next generation table.

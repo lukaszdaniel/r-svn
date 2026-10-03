@@ -44,7 +44,10 @@ namespace CXXR
 {
     unsigned int GCNode::SchwarzCounter::s_count = 0;
     size_t GCNode::s_num_nodes = 0;
-    siv::Vector<CXXR::GCNode *> GCNode::s_Old;
+    std::unique_ptr<CXXR::GCNode> GCNode::s_Old[1 + GCManager::numOldGenerations()];
+#ifndef EXPEL_OLD_TO_NEW
+    std::unique_ptr<CXXR::GCNode> GCNode::s_OldToNew[1 + GCManager::numOldGenerations()];
+#endif
     unsigned int GCNode::s_gencount[1 + GCManager::numOldGenerations()];
     unsigned int GCNode::s_next_gen[1 + GCManager::numOldGenerations()];
 
@@ -58,41 +61,23 @@ namespace CXXR
         MemoryBank::deallocate(pointer, bytes);
     }
 
-    GCNode::GCNode(SEXPTYPE stype): sxpinfo(stype)
+    GCNode::GCNode(): sxpinfo(NILSXP), m_next(this), m_prev(this)
     {
-        moveToGeneration(0);
+    }
+
+    GCNode::GCNode(SEXPTYPE stype): sxpinfo(stype), m_next(this), m_prev(this)
+    {
         ++s_num_nodes;
         ++s_gencount[0];
+        s_New->splice(this);
     }
 
     GCNode::~GCNode()
     {
-        s_Old.erase(m_ID);
+        unsnap();
         --s_gencount[generation()];
         --s_num_nodes;
     }
-
-    void GCNode::moveToGeneration(unsigned int generation) const
-    {
-        const siv::ID new_id = s_Old.emplace_back(const_cast<GCNode *>(this));
-        if (m_ID != ID_NOT_SET)
-            s_Old.erase(m_ID);
-        m_ID = new_id;
-        m_in_new_space = generation == 0;
-        m_in_old_to_new_list = false;
-    }
-
-#ifndef EXPEL_OLD_TO_NEW
-    void GCNode::moveToOldToNew(const GCNode *node)
-    {
-        const siv::ID new_id = s_Old.emplace_back(const_cast<GCNode *>(node));
-        if (node->m_ID != ID_NOT_SET)
-            s_Old.erase(node->m_ID);
-        node->m_ID = new_id;
-        node->m_in_new_space = false;
-        node->m_in_old_to_new_list = true;
-    }
-#endif
 
     void GCNode::Ager::operator()(const GCNode *node)
     {
@@ -100,7 +85,7 @@ namespace CXXR
         {
             --s_gencount[node->generation()];
             node->sxpinfo.m_gcgen = m_mingen;
-            node->moveToGeneration(m_mingen);
+            s_Old[m_mingen]->splice(node);
             ++s_gencount[m_mingen];
             node->visitReferents(this);
         }
@@ -139,7 +124,7 @@ namespace CXXR
         if (node->generation() < m_maxgen) // node generation falls into generations to be collected
         {
             node->sxpinfo.m_mark = true;
-            node->moveToGeneration(node->generation());
+            s_Old[node->generation()]->splice(node);
             node->visitReferents(this);
         }
     }
@@ -158,46 +143,28 @@ namespace CXXR
 #ifndef EXPEL_OLD_TO_NEW
     /* eliminate old-to-new references in generations to collect by
        transferring referenced nodes to referring generation */
-        std::size_t index = 0;
-        while (index < s_Old.size()) {
-            GCNode *s = s_Old.getDataAt(index);
-            if (!s->m_in_old_to_new_list) {
-                ++index;
-                continue;
-            }
-            const unsigned int gen = s->generation();
-            if (gen == 0 || gen >= max_generation) {
-                ++index;
-                continue;
-            }
+        for (unsigned int gen = 1; gen < max_generation; gen++) {
             Ager ager(gen);
-            s->visitReferents(&ager);
-            s->moveToGeneration(gen);
+            const GCNode *s = (s_OldToNew[gen])->m_next;
+            while (s != s_OldToNew[gen].get()) {
+                const GCNode *next = s->m_next;
+                s->visitReferents(&ager);
+                s_Old[gen]->splice(s);
+                s = next;
+            }
         }
 #endif
     }
 
     void GCNode::sweep(unsigned int max_generation)
     {
-#if CXXR_FALSE
-        static unsigned int s_sweeps_since_shrink = 0;
-        if (++s_sweeps_since_shrink == 64)
+        const GCNode *s = s_New->m_next;
+        while (s != s_New.get())
         {
-            s_sweeps_since_shrink = 0;
-            s_Old.shrink_to_fit();
-        }
-#endif
-        std::size_t index = 0;
-        while (index < s_Old.size())
-        {
-            GCNode *s = s_Old.getDataAt(index);
-            if (!s->m_in_new_space)
-            {
-                ++index;
-                continue;
-            }
-            s->detachReferents();
+            const GCNode *next = s->m_next;
+            const_cast<GCNode *>(s)->detachReferents();
             delete s;
+            s = next;
         }
     }
 
@@ -214,9 +181,12 @@ namespace CXXR
         }
         s_initialized = true;
 
-        s_Old.reserve(1'000'000);
         for (unsigned int gen = 0; gen < GCNode::numGenerations(); ++gen)
         {
+            s_Old[gen] = std::make_unique<GCNode>(/* Peg constructor */);
+#ifndef EXPEL_OLD_TO_NEW
+            s_OldToNew[gen] = std::make_unique<GCNode>(/* OldToNew peg constructor */);
+#endif
             s_gencount[gen] = 0;
             s_next_gen[gen] = gen + 1;
         }
