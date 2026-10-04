@@ -1008,7 +1008,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     } catch (...) {
         if (data.con && !data.ttyflag && !data.wasopen) {
-            data.con->close(data.con);
+            if (data.con->isopen) data.con->close(data.con);
             data.con = NULL;
         }
         if (data.quoteset && data.quoteset[0]) {

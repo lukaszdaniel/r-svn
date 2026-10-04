@@ -3743,8 +3743,12 @@ stopifnot(exprs = {
 if(.Machine$sizeof.pointer >= 8) { # 32-bit cannot allocate 7.5 Gb (PR#19175#c3)
     assertWarnV(bI <- besselI(1, 1e10))     # Warning ... too large for bessel_[ik]() algorithm
     assertWarnV(bK <- besselK(1, c(2^(60:70), Inf)))
+    for(sc in c(FALSE, TRUE)) {
+        assertWarnV(bK <- besselK(0, c(-Inf, -1e11), expon.scaled = sc))
+        stopifnot(is.nan(bK))
+    }
 }
-## segfaulted for order >= 2^31 in R <= 4.6.1
+## segfaulted for |order| >= 2^31 in R <= 4.6.1
 
 
 ## New  chol2inv(.., diag.only = TRUE) -- wish of PR#19177
@@ -3808,6 +3812,52 @@ for(obj in list(ss, ss$fit))
     for(d in list(NULL, -99L))
         assertErrV(predict(obj, x = 1, deriv = d))
 ## These could cause a segfault in R <= 4.6.1
+
+
+## format(<utf8>, width = large) -- PR#19188
+assertWarnV(# j=0 --> warning: NAs introduced by coercion to integer range
+  lapply(0:3, \(j)
+	 tryCid(format("\u00e9", width = 2^31 - j))) -> errs)
+stopifnot(unlist(lapply(errs, inherits, "error")))
+vapply(errs, `[[`, "..", "message")
+## j=1,2 would segfault in R <= 4.6.1
+
+
+## sprintf() with a width or precision near INT_MAX, PR#19192
+imax <- .Machine$integer.max
+assertErrV(sprintf("%2147483647s", "a"))
+assertErrV(sprintf("%*s", imax, "a"))
+assertErrV(sprintf("%-2147483647d", 1L))
+assertErrV(sprintf("%99999999999s", "a"))
+assertErrV(sprintf("%.2147483647f", 1))
+stopifnot(exprs = {
+    identical(sprintf("%.2147483647s", "a"), "a")
+    identical(sprintf("%.*s", imax, "a"), "a")
+    identical(sprintf("%.99999999999s", "a"), "a")
+    identical(sprintf("%.2147483647g", 0.1), sprintf("%.9000g", 0.1))
+})
+if(englishMsgs)
+    stopifnot(grepl("length 2147483647 is greater than maximal",
+                    tryCmsg(sprintf("%2147483647s", "a"))))
+## overflowed the C stack (glibc 2.31 with printf hooks registered, as
+## libquadmath does) or silently gave "" in R <= 4.6.x
+
+
+## the "embedded nul in string" error built its message from an unprotected
+## CHARSXP, and translating that CHARSXP to the native encoding could trigger
+## a GC that freed it first (found by fuzzing)
+s <- strrep(iconv("\u00e9", "UTF-8", "latin1"), 30000) # latin1, large vector
+r <- serialize(s, NULL)
+idx <- which(r == as.raw(0xe9))
+for (frac in c(1/2, 1/4)) { # nul position where the translation is as long
+    rr <- r                 # as the CHARSXP, in a UTF-8 resp. C locale
+    rr[idx[length(idx) * frac]] <- as.raw(0)
+    gctorture(TRUE)
+    res <- tryCatch(unserialize(rr), error = conditionMessage)
+    gctorture(FALSE)
+    stopifnot(startsWith(res, "embedded nul in string: '"))
+}
+## gave "'Rf_getCharCE' must be called on a CHARSXP" (or a crash) in R <= 4.6.x
 
 
 

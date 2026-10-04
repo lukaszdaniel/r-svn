@@ -1045,6 +1045,7 @@ function(q, m, n, z = NULL, lower.tail = TRUE)
                        sum(d[s < e + 1e-8])
                    },
                    0)
+    y[i] <- pmin(y[i], 1) # PR#19144
     if(lower.tail) y else 1 - y
 }
 
@@ -1120,6 +1121,7 @@ function(q, n, z = NULL, lower.tail = TRUE)
                        sum(d[s < e + 1e-8])
                    },
                    0)
+    y[i] <- pmin(y[i], 1) # PR#19144
     if(lower.tail) y else 1 - y
 }
 
