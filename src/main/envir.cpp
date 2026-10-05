@@ -4473,7 +4473,8 @@ namespace
     /* This is tricky: we want to make a reasonable job of
        representing this string, and EncodeString() is the most
        comprehensive */
-        SEXP c = CXXR_allocCharsxp(name, enc, is_ascii);
+        GCStackRoot<> c;
+        c = CXXR_allocCharsxp(name, enc, is_ascii);
         error(_("embedded nul in string: '%s'"), EncodeString(c, 0, 0, Rprt_adj_none));
     }
 
