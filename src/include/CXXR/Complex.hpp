@@ -71,58 +71,56 @@ namespace CXXR
         explicit Complex(const std::complex<double> &z): Complex(z.real(), z.imag()) {}
         explicit Complex(const Rcomplex &z): Complex(z.r, z.i) {}
 
-        /** @brief Assignment from T.
+        /** @brief Assignment from a real scalar.
          *
-         * @param rhs Value to be assigned.
+         * @param rhs Value to become the real part.
          *
          * @return Reference to this object.
-         *
-         * @note std::complex has its own specialization.
          */
-        template <typename T>
-        Complex &operator=(const T &rhs)
+        Complex &operator=(double rhs) noexcept
         {
             r = rhs;
             i = 0;
             return *this;
         }
 
-        Complex operator+(const Complex &obj)
+        Complex &operator=(const std::complex<double> &rhs) noexcept
         {
-            Complex res;
-            res.r = r + obj.r;
-            res.i = i + obj.i;
-            return res;
+            r = rhs.real();
+            i = rhs.imag();
+            return *this;
         }
 
-        Complex operator-(const Complex &obj)
+        Complex operator+(const Complex &obj) const
         {
-            Complex res;
-            res.r = r - obj.r;
-            res.i = i - obj.i;
-            return res;
+            return Complex(r + obj.r, i + obj.i);
         }
 
-        Complex operator*(const Complex &obj)
+        Complex operator-(const Complex &obj) const
+        {
+            return Complex(r - obj.r, i - obj.i);
+        }
+
+        Complex operator*(const Complex &obj) const
         {
             std::complex<double> lhs(r, i);
             std::complex<double> rhs(obj.r, obj.i);
             return Complex(lhs * rhs);
         }
 
-        Complex operator/(const Complex &obj)
+        Complex operator/(const Complex &obj) const
         {
             std::complex<double> lhs(r, i);
             std::complex<double> rhs(obj.r, obj.i);
             return Complex(lhs / rhs);
         }
 
-        bool operator==(const Complex &rhs)
+        bool operator==(const Complex &rhs) const noexcept
         {
             return (r == rhs.r) && (i == rhs.i);
         }
 
-        bool operator!=(const Complex &rhs)
+        bool operator!=(const Complex &rhs) const noexcept
         {
             return !(*this == rhs);
         }
@@ -155,6 +153,9 @@ namespace CXXR
 
         friend std::ostream &operator<<(std::ostream &, const Complex &z);
     };
+
+    static_assert(sizeof(Complex) == sizeof(Rcomplex),
+                  "Complex must preserve the Rcomplex ABI");
 
     // Template specializations of ElementTraits:
     namespace ElementTraits

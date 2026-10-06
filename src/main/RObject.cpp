@@ -33,6 +33,7 @@
 #include <CXXR/RObject.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/PairList.hpp>
+#include <CXXR/BadObject.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Localization.h>
 #include <Defn.h> // for S4_OBJECT_MASK
@@ -68,6 +69,107 @@ namespace CXXR
     RObject::RObject(SEXPTYPE stype): GCNode(stype)
     {
         m_attrib = R_NilValue;
+    }
+
+#ifdef PROTECTCHECK
+#define FREE_FORWARD_CASE case FREESXP: if (GCManager::gc_inhibit_release()) break;
+#else
+#define FREE_FORWARD_CASE
+#endif
+
+    void RObject::visitReferents(const_visitor *v) const
+    {
+        GCNode::visitReferents(v);
+        const GCNode *attrib = m_attrib;
+        if (attrib != R_NilValue)
+            (*v)(attrib);
+
+        if (!altrep())
+        {
+            switch (sexptype())
+            {
+            case NILSXP:
+            case BUILTINSXP:
+            case SPECIALSXP:
+            case CHARSXP:
+            case LGLSXP:
+            case INTSXP:
+            case REALSXP:
+            case CPLXSXP:
+            case RAWSXP:
+                break;
+            case OBJSXP:
+            case WEAKREFSXP:
+            case STRSXP:
+            case EXPRSXP:
+            case VECSXP:
+            case ENVSXP:
+            case LISTSXP:
+            case LANGSXP:
+            case DOTSXP:
+            case PROMSXP:
+            case CLOSXP:
+            case SYMSXP:
+            case BCODESXP:
+            case EXTPTRSXP:
+                break;
+                FREE_FORWARD_CASE
+            default:
+                // Rf_error(_("unexpected type %d in %s"), sexptype(), __func__);
+                BadObject::register_bad_object(this, __FILE__, __LINE__);
+            }
+        }
+    }
+
+    void RObject::detachReferents()
+    {
+        if (!refCountEnabled())
+            return;
+
+#ifdef PROTECTCHECK
+        if (sexptype() == FREESXP)
+        {
+            sxpinfo.type = SEXPTYPE(sxpinfo.gp);
+        }
+#endif
+        m_attrib.detach();
+
+        if (!altrep())
+        {
+            switch (sexptype())
+            {
+            case NILSXP:
+            case BUILTINSXP:
+            case SPECIALSXP:
+            case CHARSXP:
+            case LGLSXP:
+            case INTSXP:
+            case REALSXP:
+            case CPLXSXP:
+            case RAWSXP:
+                break;
+            case OBJSXP:
+            case WEAKREFSXP:
+            case STRSXP:
+            case EXPRSXP:
+            case VECSXP:
+            case ENVSXP:
+            case LISTSXP:
+            case LANGSXP:
+            case DOTSXP:
+            case PROMSXP:
+            case CLOSXP:
+            case SYMSXP:
+            case BCODESXP:
+            case EXTPTRSXP:
+                break;
+                FREE_FORWARD_CASE
+            default:
+                // Rf_error(_("unexpected type %d in %s"), sexptype(), __func__);
+                BadObject::register_bad_object(this, __FILE__, __LINE__);
+            }
+        }
+        GCNode::detachReferents();
     }
 
     void RObject::setS4Object(bool on)

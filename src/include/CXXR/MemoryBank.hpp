@@ -97,11 +97,16 @@ namespace CXXR
                     MemoryBank::initialize();
             }
 
-            ~SchwarzCounter()
+            ~SchwarzCounter() noexcept
             {
                 if (!--s_count)
                     MemoryBank::cleanup();
             }
+
+            SchwarzCounter(const SchwarzCounter &) = delete;
+            SchwarzCounter(SchwarzCounter &&) = delete;
+            SchwarzCounter &operator=(const SchwarzCounter &) = delete;
+            SchwarzCounter &operator=(SchwarzCounter &&) = delete;
 
         private:
             static unsigned int s_count;
@@ -267,7 +272,7 @@ namespace CXXR
 
         // Clean up static data at end of run (called by
         // MemoryBank::SchwarzCtr destructor):
-        static void cleanup();
+        static void cleanup() noexcept;
 
         // Initialize static data (called by MemoryBank::SchwarzCtr constructor):
         static void initialize();

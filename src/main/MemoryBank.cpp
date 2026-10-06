@@ -30,6 +30,7 @@
 #include <iostream>
 #include <limits>
 #include <iterator>
+#include <new>
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/GCManager.hpp>
 
@@ -118,7 +119,9 @@ namespace CXXR
         }
         else if (bytes >= s_new_threshold)
         {
-            if (s_cue_gc && allow_gc && (GCManager::FORCE_GC() || (s_bytes_allocated + bytes > s_gc_threshold)))
+            if (s_cue_gc && allow_gc &&
+                (GCManager::FORCE_GC() || s_bytes_allocated >= s_gc_threshold ||
+                 bytes > s_gc_threshold - s_bytes_allocated))
             {
                 s_gc_threshold = s_cue_gc(bytes);
             }
@@ -177,9 +180,11 @@ namespace CXXR
 
     // Deleting heap objects on program exit is not strictly necessary,
     // but doing so makes bugs more conspicuous when using valgrind.
-    void MemoryBank::cleanup()
+    void MemoryBank::cleanup() noexcept
     {
-        delete[] s_pools;
+        Pool *pools = s_pools;
+        s_pools = nullptr;
+        delete[] pools;
     }
 
     void MemoryBank::defragment()
@@ -200,17 +205,18 @@ namespace CXXR
         // The following leave some space at the end of each 4096-byte
         // page, in case posix_memalign needs to put some housekeeping
         // information for the next page there.
-        s_pools = new Pool[s_num_pools];
-        s_pools[0].initialize(1, 511);
-        s_pools[1].initialize(2, 255);
-        s_pools[2].initialize(3, 170);
-        s_pools[3].initialize(4, 127);
-        s_pools[4].initialize(5, 102);
-        s_pools[5].initialize(6, 85);
-        s_pools[6].initialize(8, 63);
-        s_pools[7].initialize(12, 42);
-        s_pools[8].initialize(16, 31);
-        s_pools[9].initialize(24, 21);
+        auto pools = std::make_unique<Pool[]>(s_num_pools);
+        pools[0].initialize(1, 511);
+        pools[1].initialize(2, 255);
+        pools[2].initialize(3, 170);
+        pools[3].initialize(4, 127);
+        pools[4].initialize(5, 102);
+        pools[5].initialize(6, 85);
+        pools[6].initialize(8, 63);
+        pools[7].initialize(12, 42);
+        pools[8].initialize(16, 31);
+        pools[9].initialize(24, 21);
+        s_pools = pools.release();
     }
 
     void MemoryBank::setGCCuer(size_t (*cue_gc)(size_t), size_t initial_threshold)
@@ -251,16 +257,18 @@ namespace CXXR
 
     void *MemoryBank::custom_node_alloc(R_allocator_t *allocator, size_t bytes)
     {
-        if (!allocator || !allocator->mem_alloc)
-            return nullptr;
-        void *ptr = allocator->mem_alloc(allocator, bytes + sizeof(R_allocator_t));
-        if (ptr)
+        if (!allocator || !allocator->mem_alloc || !allocator->mem_free ||
+            bytes > std::numeric_limits<size_t>::max() - sizeof(R_allocator_t))
         {
-            R_allocator_t *ca = (R_allocator_t *)ptr;
-            *ca = *allocator;
-            return (void *)(ca + 1);
+            throw std::bad_alloc();
         }
-        return nullptr;
+        void *ptr = allocator->mem_alloc(allocator, bytes + sizeof(R_allocator_t));
+        if (!ptr)
+            throw std::bad_alloc();
+
+        R_allocator_t *ca = static_cast<R_allocator_t *>(ptr);
+        *ca = *allocator;
+        return static_cast<void *>(ca + 1);
     }
 
     void MemoryBank::custom_node_free(void *ptr, size_t bytes)

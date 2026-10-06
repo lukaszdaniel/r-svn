@@ -1034,110 +1034,7 @@ attribute_hidden SEXP do_regFinaliz(SEXP call, SEXP op, SEXP args, SEXP rho)
     return R_NilValue;
 }
 
-#ifdef PROTECTCHECK
-#define FREE_FORWARD_CASE case FREESXP: if (GCManager::gc_inhibit_release()) break;
-#else
-#define FREE_FORWARD_CASE
-#endif
-
 /* The Generational Collector. */
-namespace CXXR
-{
-    void RObject::visitReferents(const_visitor *v) const
-    {
-        GCNode::visitReferents(v);
-        const GCNode *attrib = m_attrib;
-        if (attrib != R_NilValue)
-            (*v)(attrib);
-
-        if (!altrep())
-        {
-            switch (sexptype())
-            {
-            case NILSXP:
-            case BUILTINSXP:
-            case SPECIALSXP:
-            case CHARSXP:
-            case LGLSXP:
-            case INTSXP:
-            case REALSXP:
-            case CPLXSXP:
-            case RAWSXP:
-                break;
-            case OBJSXP:
-            case WEAKREFSXP:
-            case STRSXP:
-            case EXPRSXP:
-            case VECSXP:
-            case ENVSXP:
-            case LISTSXP:
-            case LANGSXP:
-            case DOTSXP:
-            case PROMSXP:
-            case CLOSXP:
-            case SYMSXP:
-            case BCODESXP:
-            case EXTPTRSXP:
-                break;
-            FREE_FORWARD_CASE
-            default:
-                // Rf_error(_("unexpected type %d in %s"), sexptype(), __func__);
-                BadObject::register_bad_object(this, __FILE__, __LINE__);
-            }
-        }
-    }
-
-    void RObject::detachReferents()
-    {
-        if (!refCountEnabled())
-            return;
-
-#ifdef PROTECTCHECK
-        if (sexptype() == FREESXP)
-        {
-            sxpinfo.type = SEXPTYPE(sxpinfo.gp);
-        }
-#endif
-        m_attrib.detach();
-
-        if (!altrep())
-        {
-            switch (sexptype())
-            {
-            case NILSXP:
-            case BUILTINSXP:
-            case SPECIALSXP:
-            case CHARSXP:
-            case LGLSXP:
-            case INTSXP:
-            case REALSXP:
-            case CPLXSXP:
-            case RAWSXP:
-                break;
-            case OBJSXP:
-            case WEAKREFSXP:
-            case STRSXP:
-            case EXPRSXP:
-            case VECSXP:
-            case ENVSXP:
-            case LISTSXP:
-            case LANGSXP:
-            case DOTSXP:
-            case PROMSXP:
-            case CLOSXP:
-            case SYMSXP:
-            case BCODESXP:
-            case EXTPTRSXP:
-                break;
-            FREE_FORWARD_CASE
-            default:
-                // Rf_error(_("unexpected type %d in %s"), sexptype(), __func__);
-                BadObject::register_bad_object(this, __FILE__, __LINE__);
-            }
-        }
-        GCNode::detachReferents();
-    }
-} // namespace CXXR
 
 #define MARK_THRU(s) if (s != R_NilValue) marker(s);
 
@@ -2240,17 +2137,19 @@ void ProtectStack::unprotect_(unsigned int l)
 void ProtectStack::unprotectPtr(SEXP s)
 {
     R_CHECK_THREAD;
-#ifndef NDEBUG
-    if (s_innermost_scope && s_stack.size() == s_innermost_scope->startSize())
-        throw std::logic_error("ProtectStack::unprotectPtr: too many pops in this scope.");
-#endif
     auto rit = std::find_if(s_stack.rbegin(), s_stack.rend(),
         [&](SEXP q) { return s == q; });
     if (rit == s_stack.rend())
         throw std::invalid_argument("ProtectStack::unprotectPtr: pointer not found.");
 
     // See Josuttis p.267 for the need for -1.
-    s_stack.erase(rit.base() - 1);
+    auto it = rit.base() - 1;
+#ifndef NDEBUG
+    if (s_innermost_scope &&
+        static_cast<std::size_t>(it - s_stack.begin()) < s_innermost_scope->startSize())
+        throw std::logic_error("ProtectStack::unprotectPtr: pointer protected outside this scope.");
+#endif
+    s_stack.erase(it);
 }
 
 /* Debugging function:  is s protected? */
@@ -2273,8 +2172,12 @@ NORET void ProtectStack::R_signal_reprotect_error(PROTECT_INDEX i)
 void ProtectStack::reprotect(SEXP s, PROTECT_INDEX i)
 {
     R_CHECK_THREAD;
-    if (i >= R_PPStackTop || i < 0)
+    if (i >= R_PPStackTop)
         R_signal_reprotect_error(i);
+#ifndef NDEBUG
+    if (s_innermost_scope && i < s_innermost_scope->startSize())
+        throw std::logic_error("ProtectStack::reprotect: pointer protected outside this scope.");
+#endif
     R_PPStack[i] = s;
 }
 

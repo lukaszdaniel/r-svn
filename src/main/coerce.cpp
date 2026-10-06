@@ -241,7 +241,7 @@ attribute_hidden Rcomplex R::ComplexFromLogical(int x, int *warn)
     Complex z;
     if (x == NA_LOGICAL) {
 #ifdef NA_TO_COMPLEX_NA
-	z = {NA_REAL, NA_REAL};
+	z = Complex(NA_REAL, NA_REAL);
 #else
 	z.r = NA_REAL;
 #endif
@@ -259,7 +259,7 @@ attribute_hidden Rcomplex R::ComplexFromInteger(int x, int *warn)
     Complex z;
     if (x == NA_INTEGER) {
 #ifdef NA_TO_COMPLEX_NA
-	z = {NA_REAL, NA_REAL};
+	z = Complex(NA_REAL, NA_REAL);
 #else
 	z.r = NA_REAL;
 #endif
@@ -277,13 +277,13 @@ attribute_hidden Rcomplex R::ComplexFromReal(double x, int *warn)
     Complex z;
 #ifdef NA_TO_COMPLEX_NA
     if (ISNA(x)) { // NA, but not NaN; was ISNAN(x) in R < 3.3.0
-	z = {NA_REAL, NA_REAL};
+	z = Complex(NA_REAL, NA_REAL);
     }
     else { // also for non-NA NaN's
 #else
     {
 #endif
-	z = {x, 0};
+	z = Complex(x, 0);
     }
     return z;
 }
@@ -305,7 +305,7 @@ attribute_hidden Rcomplex R::ComplexFromString(SEXP x, int *warn)
 	else if (*--endp == '+' || *endp == '-') {
 	    double xi = R_strtod(endp, &endp);
 	    if (*endp++ == 'i' && isBlankString(endp)) {
-		z = {xr, xi};
+		z = Complex(xr, xi);
 	    }
 	    else *warn |= WARN_NA;
 	}

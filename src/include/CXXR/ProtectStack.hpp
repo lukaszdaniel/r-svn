@@ -36,9 +36,9 @@
 #ifndef PROTECTSTACK_HPP
 #define PROTECTSTACK_HPP
 
+#include <cstddef>
 #include <utility>
 #include <vector>
-#include <cstddef>
 #include <CXXR/NodeStack.hpp>
 
 namespace CXXR
@@ -61,32 +61,37 @@ namespace CXXR
         {
         public:
             /** @brief Constructor. */
-            Scope()
-                : m_next_scope(s_innermost_scope),
+            Scope() noexcept
+                : m_next_scope(ProtectStack::s_innermost_scope),
                 m_saved_size(ProtectStack::size())
             {
-                s_innermost_scope = this;
+                ProtectStack::s_innermost_scope = this;
             }
 
-            ~Scope()
+            Scope(const Scope &) = delete;
+            Scope &operator=(const Scope &) = delete;
+            Scope(Scope &&) = delete;
+            Scope &operator=(Scope &&) = delete;
+
+            ~Scope() noexcept
             {
 #ifndef NDEBUG
-                if (this != s_innermost_scope)
+                if (this != ProtectStack::s_innermost_scope)
                     nestingError();
 #endif
                 ProtectStack::restoreSize(m_saved_size);
-                s_innermost_scope = m_next_scope;
+                ProtectStack::s_innermost_scope = m_next_scope;
             }
 
             /** @brief ProtectStack size at construction. */
-            size_t startSize() const
+            std::size_t startSize() const noexcept
             {
                 return m_saved_size;
             }
 
         private:
             Scope *m_next_scope;
-            size_t m_saved_size;
+            std::size_t m_saved_size;
 
             static void nestingError();
         };
@@ -104,7 +109,7 @@ namespace CXXR
          * available, since the use of the ProtectStack::Scope class
          * is preferable.
          */
-        static void restoreSize(size_t new_size);
+        static void restoreSize(std::size_t new_size);
 
         /** @brief Current size of PPS.
          *
@@ -113,7 +118,7 @@ namespace CXXR
          * @note This method is intended for use in conjunction with
          * restoreSize(), and may cease to be public in future.
          */
-        static size_t size()
+        static std::size_t size() noexcept
         {
             return s_stack.size();
         }
@@ -184,7 +189,7 @@ namespace CXXR
          */
         static void unprotectPtr(SEXP node);
 
-        static size_t reservedCapacity()
+        static std::size_t reservedCapacity() noexcept
         {
             return s_reserved_capacity;
         }
@@ -204,11 +209,11 @@ namespace CXXR
             }
         }
 
-        static void initialize(size_t initial_capacity = 50000);
+        static void initialize(std::size_t initial_capacity = 50000);
 
     private:
         static std::vector<RObject *> s_stack;
-        static size_t s_reserved_capacity;
+        static std::size_t s_reserved_capacity;
 
 #define R_PPStack CXXR::ProtectStack::s_stack
 

@@ -28,7 +28,12 @@
 #endif
 
 #include <algorithm>
+#include <cstdint>
+#include <functional>
 #include <iostream>
+#include <limits>
+#include <new>
+#include <stdexcept>
 #include <CXXR/CellPool.hpp>
 
 #ifdef HAVE_FEATURES_H
@@ -42,7 +47,7 @@
 
 namespace CXXR
 {
-    CellPool::~CellPool()
+    CellPool::~CellPool() noexcept
     {
 #if VALGRIND_LEVEL >= 2
         VALGRIND_DESTROY_MEMPOOL(this);
@@ -84,13 +89,15 @@ namespace CXXR
         const char *pc = static_cast<const char *>(p);
         bool is_valid = false;
 
-        auto superblock_size = static_cast<long>(m_admin->m_cell_size * m_admin->m_cells_per_superblock);
+        const std::size_t superblock_size =
+            m_admin->m_cell_size * m_admin->m_cells_per_superblock;
+        const auto address = reinterpret_cast<std::uintptr_t>(pc);
         for (const auto &cell : m_admin->m_superblocks)
         {
-            ptrdiff_t offset = pc - static_cast<const char *>(cell.get());
-            if (offset >= 0 && offset < superblock_size)
+            const auto base = reinterpret_cast<std::uintptr_t>(cell.get());
+            if (address >= base && address - base < superblock_size)
             {
-                if (std::size_t(offset) % m_admin->m_cell_size != 0)
+                if ((address - base) % m_admin->m_cell_size != 0)
                 {
                     throw std::runtime_error("CellPool::checkCell : designated block is misaligned");
                 }
@@ -107,7 +114,7 @@ namespace CXXR
         Cell *prev = nullptr;
         for (Cell *cell = m_free_cells; cell; cell = cell->m_next)
         {
-            if (prev && prev > cell)
+            if (prev && std::less<Cell *>{}(cell, prev))
             {
                 throw std::runtime_error("CellPool::checkCell : child with lower address than parent.");
             }
@@ -130,7 +137,7 @@ namespace CXXR
             }
         }
         // Sort by increasing address:
-        std::sort(free_cell_list.begin(), free_cell_list.end());
+        std::sort(free_cell_list.begin(), free_cell_list.end(), std::less<Cell *>{});
         // Restring the pearls:
         {
             Cell *next = nullptr;
@@ -145,18 +152,28 @@ namespace CXXR
 #endif
     }
 
-    void CellPool::initialize(uint16_t dbls_per_cell, uint16_t cells_per_superblock)
+    void CellPool::initialize(std::uint16_t dbls_per_cell, std::uint16_t cells_per_superblock)
     {
         if (m_admin)
         {
             throw std::runtime_error("CellPool is already initialized.");
         }
+        if (dbls_per_cell == 0 || cells_per_superblock == 0)
+        {
+            throw std::invalid_argument("CellPool dimensions must be non-zero.");
+        }
+
+        const std::size_t cell_size = std::size_t(dbls_per_cell) * sizeof(double);
+        if (cells_per_superblock > std::numeric_limits<std::size_t>::max() / cell_size)
+        {
+            throw std::length_error("CellPool superblock size overflows size_t.");
+        }
         m_admin = std::make_unique<Admin>(dbls_per_cell, cells_per_superblock);
     }
 
-    size_t CellPool::cellsFree() const
+    std::size_t CellPool::cellsFree() const
     {
-        size_t ans = 0;
+        std::size_t ans = 0;
         for (const Cell *cell = m_free_cells; cell; cell = cell->m_next)
         {
             ++ans;
@@ -180,15 +197,21 @@ namespace CXXR
         if (m_admin->m_cell_index == m_admin->m_cells_per_superblock)
         {
 #ifdef HAVE_POSIX_MEMALIGN
-            void *memblock;
-            if (posix_memalign(&memblock, 4096, m_admin->m_cell_size * m_admin->m_cells_per_superblock) != 0)
+            void *memblock = nullptr;
+            const std::size_t bytes = m_admin->m_cell_size * m_admin->m_cells_per_superblock;
+            if (posix_memalign(&memblock, 4096, bytes) != 0)
             {
                 throw std::bad_alloc();
             }
-            char *superblock = static_cast<char *>(memblock);
-            m_admin->m_superblocks.push_back(std::unique_ptr<char[]>(superblock));
+            Admin::Superblock superblock(
+                static_cast<char *>(memblock), Admin::SuperblockDeleter{ true });
+            m_admin->m_superblocks.push_back(std::move(superblock));
 #else
-            m_admin->m_superblocks.emplace_back(std::make_unique<char[]>(m_admin->m_cell_size * m_admin->m_cells_per_superblock));
+            auto allocation = std::make_unique<char[]>(
+                m_admin->m_cell_size * m_admin->m_cells_per_superblock);
+            Admin::Superblock superblock(
+                allocation.release(), Admin::SuperblockDeleter{ false });
+            m_admin->m_superblocks.push_back(std::move(superblock));
 #endif
             m_admin->m_pool = m_admin->m_superblocks.back().get();
             m_admin->m_cell_index = 0;

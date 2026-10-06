@@ -25,6 +25,7 @@
 #define CXXR_USE_SKEW_HEAP
 
 #include <stdexcept>
+#include <functional>
 #include <iostream>
 #include <CXXR/CellPool.hpp>
 
@@ -37,7 +38,7 @@ namespace
 
     void seq_check(double *block)
     {
-        if (prev_ && prev_ > block)
+        if (prev_ && std::less<double *>{}(block, prev_))
         {
             throw std::runtime_error("Address sequence error.");
         }

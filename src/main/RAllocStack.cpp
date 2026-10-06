@@ -45,11 +45,24 @@ namespace CXXR
     RAllocStack::Stack *RAllocStack::s_stack = nullptr; // usually up to 5 elements
     RAllocStack::Scope *RAllocStack::s_innermost_scope = nullptr;
 
-    void *RAllocStack::allocate(size_t sz)
+    void RAllocStack::Scope::nestingError()
     {
-        Pair pr(sz, MemoryBank::allocate(sz));
-        s_stack->push(pr);
-        return s_stack->top().second;
+        throw std::runtime_error("Fatal error: RAllocStack::Scope objects must be destroyed in reverse order of creation");
+    }
+
+    void *RAllocStack::allocate(std::size_t sz)
+    {
+        void *block = MemoryBank::allocate(sz);
+        try
+        {
+            s_stack->emplace(sz, block);
+        }
+        catch (...)
+        {
+            MemoryBank::deallocate(block, sz);
+            throw;
+        }
+        return block;
     }
 
     void RAllocStack::initialize()
@@ -62,7 +75,7 @@ namespace CXXR
         s_stack = new Stack();
     }
 
-    void RAllocStack::restoreSize(size_t new_size)
+    void RAllocStack::restoreSize(std::size_t new_size)
     {
         if (new_size > s_stack->size())
             throw std::out_of_range("RAllocStack::restoreSize: requested size greater than current size.");
@@ -74,7 +87,7 @@ namespace CXXR
         trim(new_size);
     }
 
-    void RAllocStack::trim(size_t new_size)
+    void RAllocStack::trim(std::size_t new_size)
     {
         while (s_stack->size() > new_size)
         {

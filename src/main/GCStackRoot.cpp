@@ -42,7 +42,7 @@ namespace CXXR
     unsigned int GCStackRootBase::SchwarzCounter::s_count = 0;
     std::unique_ptr<std::vector<const GCNode *>> GCStackRootBase::s_roots;
 
-    GCStackRootBase::GCStackRootBase(const GCNode *node, bool expose)
+    GCStackRootBase::GCStackRootBase(const GCNode *node)
         : m_index(s_roots->size())
     {
         s_roots->push_back(node);

@@ -30,6 +30,7 @@
 #ifndef BROWSER_HPP
 #define BROWSER_HPP
 
+#include <cstddef>
 #include <vector>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
@@ -63,7 +64,12 @@ namespace CXXR
             s_browsers.push_back(this);
         }
 
-        ~Browser()
+        Browser(const Browser &) = delete;
+        Browser &operator=(const Browser &) = delete;
+        Browser(Browser &&) = delete;
+        Browser &operator=(Browser &&) = delete;
+
+        ~Browser() noexcept
         {
             s_browsers.pop_back();
         }
@@ -72,7 +78,7 @@ namespace CXXR
          *
          * @return the number of browser levels currently active.
          */
-        static size_t numberActive()
+        static std::size_t numberActive()
         {
             return s_browsers.size();
         }
@@ -107,7 +113,7 @@ namespace CXXR
          *
          * @return Pointer to the Browser at level \a i.
          */
-        static Browser *fromOutermost(size_t i)
+        static Browser *fromOutermost(std::size_t i)
         {
             return s_browsers.at(i);
         }

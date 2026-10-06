@@ -54,22 +54,26 @@ namespace CXXR
          * @param the_value Pointer, possibly null, to the RObject to
          *          be conveyed back to the target Context.
          */
-        JMPException(RCNTXT *the_context = nullptr, int the_mask = 0, RObject *the_value = nullptr)
+        JMPException(RCNTXT *the_context = nullptr, int the_mask = 0,
+                     RObject *the_value = nullptr) noexcept
             : m_context(the_context), m_mask(the_mask), m_value(the_value)
         {
         }
+
+        JMPException(const JMPException &) noexcept = default;
+        JMPException &operator=(const JMPException &) noexcept = default;
 
         /** @brief Target Context of this JMPException.
          *
          * @return pointer to the Context within which this
          * JMPException should be caught.
          */
-        RCNTXT *context() const
+        RCNTXT *context() const noexcept
         {
             return m_context;
         }
 
-        int mask() const
+        int mask() const noexcept
         {
             return m_mask;
         }
@@ -79,9 +83,9 @@ namespace CXXR
          * @return Pointer, possibly null, to the RObject conveyed to
          * the target Context by this JMPException.
          */
-        RObject *value() const
+        RObject *value() const noexcept
         {
-            return m_value;
+            return m_value.get();
         }
 
     private:

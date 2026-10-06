@@ -70,12 +70,17 @@ namespace CXXR
          */
         struct GCInhibitor
         {
-            GCInhibitor()
+            GCInhibitor() noexcept
             {
                 ++s_inhibitor_count;
             }
 
-            ~GCInhibitor()
+            GCInhibitor(const GCInhibitor &) = delete;
+            GCInhibitor &operator=(const GCInhibitor &) = delete;
+            GCInhibitor(GCInhibitor &&) = delete;
+            GCInhibitor &operator=(GCInhibitor &&) = delete;
+
+            ~GCInhibitor() noexcept
             {
                 --s_inhibitor_count;
             }
@@ -84,7 +89,7 @@ namespace CXXR
              *
              * @return true iff garbage collection is currently inhibited.
              */
-            static bool active()
+            static bool active() noexcept
             {
                 return s_inhibitor_count != 0;
             }

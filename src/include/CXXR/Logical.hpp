@@ -29,6 +29,7 @@
 #define CXXR_LOGICAL_HPP
 
 #include <cassert>
+#include <type_traits>
 #include <CXXR/ElementTraits.hpp>
 #include <CXXR/RTypes.hpp>
 #include <R_ext/Boolean.h>
@@ -49,29 +50,29 @@ namespace CXXR
     class Logical
     {
     public:
-        Logical() {}
-        explicit Logical(int i) : m_value(i)
+        Logical() noexcept {}
+        explicit Logical(int i) noexcept : m_value(i)
         {
             assert(i == 0 || i == 1 || i == NA_LOGICAL);
         }
 
-        /*implicit*/ Logical(bool b) : m_value(b) {}
+        /*implicit*/ Logical(bool b) noexcept : m_value(b) {}
 
-        explicit operator int() const { return m_value; }
-        explicit operator double() const { return isNA() ? NA_REAL : m_value; }
+        explicit operator int() const noexcept { return m_value; }
+        explicit operator double() const noexcept { return isNA() ? NA_REAL : m_value; }
 
-        bool isTrue() const { return m_value == int(TRUE); }
-        bool isFalse() const { return m_value == int(FALSE); }
-        bool isNA() const { return m_value == NA_LOGICAL; }
+        bool isTrue() const noexcept { return m_value == int(TRUE); }
+        bool isFalse() const noexcept { return m_value == int(FALSE); }
+        bool isNA() const noexcept { return m_value == NA_LOGICAL; }
 
-        static Logical NA() { return Logical(NA_LOGICAL); }
+        static Logical NA() noexcept { return Logical(NA_LOGICAL); }
 
         /** @brief NA aware equality operator.
          *
          *  Returns NA if either or both operands are NA.  Otherwise returns
          *  whether or not the two values are equal.
          */
-        Logical equals(Logical other) const
+        Logical equals(Logical other) const noexcept
         {
             return (isNA() || other.isNA()) ? NA() : identical(other);
         }
@@ -80,7 +81,7 @@ namespace CXXR
          *
          *  Returns True iff the values are equal, or if they are both NA.
          */
-        bool identical(Logical other) const
+        bool identical(Logical other) const noexcept
         {
             return m_value == other.m_value;
         }
@@ -88,9 +89,9 @@ namespace CXXR
         // NB: operator==() is intentionally not defined.
         // Use either 'equals' or 'identical' instead.
 
-        Logical operator!() const;
-        Logical operator||(Logical other) const;
-        Logical operator&&(Logical other) const;
+        Logical operator!() const noexcept;
+        Logical operator||(Logical other) const noexcept;
+        Logical operator&&(Logical other) const noexcept;
 
     private:
         // The value.  Allowed values are TRUE, FALSE and NA_LOGICAL.
@@ -99,6 +100,11 @@ namespace CXXR
         /*implicit*/
         Logical(float prevent_implicit_int_to_Logical_conversions);
     };
+
+    static_assert(sizeof(Logical) == sizeof(int));
+    static_assert(alignof(Logical) == alignof(int));
+    static_assert(std::is_standard_layout_v<Logical>);
+    static_assert(std::is_trivially_copyable_v<Logical>);
 
     // Template specializations of ElementTraits:
     namespace ElementTraits
@@ -128,7 +134,7 @@ namespace CXXR
     } // namespace ElementTraits
 
     // Inline definitions of operators.
-    inline Logical Logical::operator!() const
+    inline Logical Logical::operator!() const noexcept
     {
         if (isNA())
         {
@@ -137,7 +143,7 @@ namespace CXXR
         return Logical(1 - m_value);
     }
 
-    inline Logical Logical::operator||(Logical other) const
+    inline Logical Logical::operator||(Logical other) const noexcept
     {
         if (isTrue() || other.isTrue())
         {
@@ -150,7 +156,7 @@ namespace CXXR
         return false;
     }
 
-    inline Logical Logical::operator&&(Logical other) const
+    inline Logical Logical::operator&&(Logical other) const noexcept
     {
         if (isFalse() || other.isFalse())
         {

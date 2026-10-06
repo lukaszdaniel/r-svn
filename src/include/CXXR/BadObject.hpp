@@ -59,17 +59,7 @@ namespace CXXR
         static void register_bad_object(const GCNode *s, const char *file, int line);
         void printSummary();
 
-        BadObject &operator=(const BadObject &other)
-        {
-            m_bad_sexp_type_seen = other.m_bad_sexp_type_seen;
-            m_bad_sexp_type_sexp = other.m_bad_sexp_type_sexp;
-#ifdef PROTECTCHECK
-            m_bad_sexp_type_old_type = other.m_bad_sexp_type_old_type;
-#endif
-            m_bad_sexp_type_file = other.m_bad_sexp_type_file;
-            m_bad_sexp_type_line = other.m_bad_sexp_type_line;
-            return *this;
-        }
+        BadObject &operator=(const BadObject &) = default;
 
         static BadObject s_firstBadObject;
 
@@ -80,7 +70,7 @@ namespace CXXR
         SEXPTYPE m_bad_sexp_type_old_type;
 #endif
         const char *m_bad_sexp_type_file;
-        unsigned int m_bad_sexp_type_line;
+        int m_bad_sexp_type_line;
     };
 }
 #endif // BADOBJECT_HPP

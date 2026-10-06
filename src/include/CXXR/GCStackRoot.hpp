@@ -31,6 +31,7 @@
 #ifndef GCSTACKROOT_HPP
 #define GCSTACKROOT_HPP
 
+#include <cstddef>
 #include <memory>
 #include <vector>
 #include <CXXR/GCNode.hpp>
@@ -105,6 +106,11 @@ namespace CXXR
                 //     GCStackRootBase::cleanup();
             }
 
+            SchwarzCounter(const SchwarzCounter &) = delete;
+            SchwarzCounter &operator=(const SchwarzCounter &) = delete;
+            SchwarzCounter(SchwarzCounter &&) = delete;
+            SchwarzCounter &operator=(SchwarzCounter &&) = delete;
+
         private:
             static unsigned int s_count;
         };
@@ -125,7 +131,7 @@ namespace CXXR
          *
          * @param node Pointer, possibly null, to the node to be protected.
          */
-        GCStackRootBase(const GCNode *node, bool expose);
+        GCStackRootBase(const GCNode *node);
 
         /** @brief Copy constructor.
          *
@@ -133,11 +139,14 @@ namespace CXXR
          */
         GCStackRootBase(const GCStackRootBase &source);
 
-        ~GCStackRootBase()
+        GCStackRootBase(GCStackRootBase &&) = delete;
+        GCStackRootBase &operator=(GCStackRootBase &&) = delete;
+
+        ~GCStackRootBase() noexcept
         {
-            s_roots->pop_back();
-            if (m_index != s_roots->size())
+            if (s_roots->empty() || m_index != s_roots->size() - 1)
                 seq_error();
+            s_roots->pop_back();
         }
 
         GCStackRootBase &operator=(const GCStackRootBase &source)
@@ -151,7 +160,7 @@ namespace CXXR
          * @param node Pointer to the node now to be protected, or a
          * null pointer.
          */
-        void retarget(const GCNode *node)
+        void retarget(const GCNode *node) noexcept
         {
             (*s_roots)[m_index] = node;
         }
@@ -160,7 +169,7 @@ namespace CXXR
          *
          * @return the GCNode pointer encapsulated by this object.
          */
-        const GCNode *ptr() const
+        const GCNode *ptr() const noexcept
         {
             return (*s_roots)[m_index];
         }
@@ -177,7 +186,7 @@ namespace CXXR
         // shrinks.
         static std::unique_ptr<std::vector<const GCNode *>> s_roots;
 
-        unsigned int m_index;
+        std::vector<const GCNode *>::size_type m_index;
 
         // Clean up static data at end of run (called by
         // GCStackRootBase::SchwarzCtr destructor):
@@ -234,13 +243,9 @@ namespace CXXR
          * @param node Pointer the node to be pointed to, and
          *          protected from the garbage collector, or a null
          *          pointer.
-         *
-         * @param expose If true, and \a node is not a null pointer, a
-         *          side effect of the constructor is to expose \a
-         *          node and its descendants to the garbage collector.
          */
-        explicit GCStackRoot(T *node = nullptr, bool expose = false)
-            : GCStackRootBase(node, expose)
+        explicit GCStackRoot(T *node = nullptr)
+            : GCStackRootBase(node)
         {
             check_complete_type();
         }
@@ -251,17 +256,15 @@ namespace CXXR
          * source.  (There is probably no reason to use this
          * constructor.)
          */
-        GCStackRoot(const GCStackRoot &source): GCStackRootBase(source) {}
+        GCStackRoot(const GCStackRoot &source) = default;
+        GCStackRoot(GCStackRoot &&) = delete;
+        GCStackRoot &operator=(GCStackRoot &&) = delete;
 
         /**
          * This will cause this GCStackRoot to protect the same GCNode as
          * is protected by source.
          */
-        GCStackRoot &operator=(const GCStackRoot &source)
-        {
-            GCStackRootBase::operator=(source);
-            return *this;
-        }
+        GCStackRoot &operator=(const GCStackRoot &source) = default;
 
         /**
          * This will cause this GCStackRoot to point to and protect node,
@@ -271,7 +274,7 @@ namespace CXXR
          * @param node Pointer to the GCNode that is now to be pointed
          *          to and protected from the garbage collector.
          */
-        GCStackRoot &operator=(T *node)
+        GCStackRoot &operator=(T *node) noexcept
         {
             check_complete_type();
             GCStackRootBase::retarget(node);
@@ -282,7 +285,7 @@ namespace CXXR
          *
          * @return the pointer currently encapsulated by the node.
          */
-        T *operator->() const
+        T *operator->() const noexcept
         {
             return get();
         }
@@ -293,7 +296,7 @@ namespace CXXR
          * encapsulated pointer.  The effect is undefined if this
          * object encapsulates a null pointer.
          */
-        T &operator*() const
+        T &operator*() const noexcept
         {
             return *get();
         }
@@ -305,7 +308,7 @@ namespace CXXR
          * an lvalue, the effect of which would probably not be what
          * the programmer wanted.
          */
-        operator T *() const
+        operator T *() const noexcept
         {
             return get();
         }
@@ -314,7 +317,7 @@ namespace CXXR
          *
          * @return the pointer currently encapsulated by the node.
          */
-        T *get() const
+        T *get() const noexcept
         {
             check_complete_type();
             return static_cast<T *>(const_cast<GCNode *>(ptr()));
@@ -322,7 +325,7 @@ namespace CXXR
 
     private:
         // A stack root is a pointer, not an array.
-        T &operator[](size_t) const = delete;
+        T &operator[](std::size_t) const = delete;
 
         static void check_complete_type()
         {

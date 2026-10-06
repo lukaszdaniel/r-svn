@@ -37,6 +37,8 @@
 #include <memory>
 #include <vector>
 #include <cstdint>
+#include <cstddef>
+#include <cstdlib>
 
 // #define CXXR_USE_SKEW_HEAP
 
@@ -83,7 +85,7 @@ namespace CXXR
          * Note that CellPool objects must be initialized by calling
          * initialize() before being used.
          */
-        CellPool() : m_admin(nullptr), m_free_cells(nullptr)
+        CellPool() noexcept : m_admin(nullptr), m_free_cells(nullptr)
         {
 #if VALGRIND_LEVEL >= 2
             VALGRIND_CREATE_MEMPOOL(this, 0, 0);
@@ -98,7 +100,7 @@ namespace CXXR
          * itself and issue an error message, this message would
          * probably be a nuisance if it occurred during program shutdown.)
          */
-        ~CellPool();
+        ~CellPool() noexcept;
 
         /** @brief Allocate a cell from the pool.
          *
@@ -165,8 +167,7 @@ namespace CXXR
             VALGRIND_MAKE_MEM_UNDEFINED(ptr, sizeof(Cell));
 #endif
             // check();
-            Cell *cell = static_cast<Cell *>(ptr);
-            cell->m_next = m_free_cells;
+            Cell *cell = std::construct_at(static_cast<Cell *>(ptr), Cell{m_free_cells});
             m_free_cells = cell;
 #ifdef CXXR_USE_SKEW_HEAP
             defragment();
@@ -191,21 +192,21 @@ namespace CXXR
          *         obtained from the main heap in 'superblocks'
          *         sufficient to contain this many cells.
          */
-        void initialize(uint16_t dbls_per_cell, uint16_t cells_per_superblock);
+        void initialize(std::uint16_t dbls_per_cell, std::uint16_t cells_per_superblock);
 
         /** @brief Size of cells.
          *
          * @return the size of each cell in bytes (well, strictly as a
          * multiple of sizeof(char)).
          */
-        size_t cellSize() const { return m_admin->m_cell_size; }
+        std::size_t cellSize() const noexcept { return m_admin->m_cell_size; }
 
         /** @brief Number of cells allocated from this CellPool.
          *
          * @return the number of cells currently allocated from this
          * pool.
          */
-        size_t cellsAllocated() const
+        std::size_t cellsAllocated() const
         {
             return m_admin->cellsAvailable() - cellsFree() - cellsPendingAllocation();
         }
@@ -214,7 +215,7 @@ namespace CXXR
          * @return The size in bytes of the superblocks from which
          *         cells are allocated.
          */
-        size_t superblockSize() const { return m_admin->m_cell_size * m_admin->m_cells_per_superblock; }
+        std::size_t superblockSize() const noexcept { return m_admin->m_cell_size * m_admin->m_cells_per_superblock; }
 
         /** @brief Integrity check.
          *
@@ -238,8 +239,6 @@ namespace CXXR
         struct Cell
         {
             Cell *m_next;
-
-            explicit Cell(Cell *next = nullptr) : m_next(next) {}
         };
 
         void *pop()
@@ -261,10 +260,25 @@ namespace CXXR
         // compact as possible.
         struct Admin
         {
-            const size_t m_cell_size;
-            const uint16_t m_cells_per_superblock;
-            std::vector<std::unique_ptr<char[]>> m_superblocks;
-            size_t m_cell_index;
+            struct SuperblockDeleter
+            {
+                bool m_use_free;
+
+                void operator()(char *ptr) const noexcept
+                {
+                    if (m_use_free)
+                        std::free(ptr);
+                    else
+                        delete[] ptr;
+                }
+            };
+
+            using Superblock = std::unique_ptr<char[], SuperblockDeleter>;
+
+            const std::size_t m_cell_size;
+            const std::uint16_t m_cells_per_superblock;
+            std::vector<Superblock> m_superblocks;
+            std::size_t m_cell_index;
             char *m_pool;
 
             /**
@@ -280,12 +294,12 @@ namespace CXXR
              *         obtained from the main heap in 'superblocks'
              *         sufficient to contain this many cells.
              */
-            Admin(uint16_t dbls_per_cell, uint16_t cells_per_superblock)
+            Admin(std::uint16_t dbls_per_cell, std::uint16_t cells_per_superblock)
                 : m_cell_size(dbls_per_cell * sizeof(double)),
                   m_cells_per_superblock(cells_per_superblock),
                   m_cell_index(cells_per_superblock), m_pool(nullptr) {}
 
-            size_t cellsAvailable() const
+            std::size_t cellsAvailable() const noexcept
             {
                 return m_cells_per_superblock * m_superblocks.size();
             }
@@ -302,10 +316,10 @@ namespace CXXR
         void checkAllocatedCell(const void *p) const;
 
         /** @brief Counts the number of free cells in the pool. */
-        size_t cellsFree() const;
+        std::size_t cellsFree() const;
 
         /** @brief Counts the number pending cells in the current pool. */
-        uint16_t cellsPendingAllocation() const { return (m_admin->m_cells_per_superblock - m_admin->m_cell_index); }
+        std::uint16_t cellsPendingAllocation() const { return (m_admin->m_cells_per_superblock - m_admin->m_cell_index); }
 
         // Helper method to check if a given block is on the m_free_cells
         bool isOnFreeCellList(const void *c) const;

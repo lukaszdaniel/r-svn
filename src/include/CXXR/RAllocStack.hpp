@@ -32,7 +32,10 @@
 #ifndef RALLOCSTACK_HPP
 #define RALLOCSTACK_HPP
 
+#include <cstddef>
+#include <exception>
 #include <stack>
+#include <utility>
 #include <vector>
 #include <CXXR/config.hpp>
 #include <R_ext/Memory.h>
@@ -98,6 +101,11 @@ namespace CXXR
                     RAllocStack::cleanup();
             }
 
+            SchwarzCounter(const SchwarzCounter &) = delete;
+            SchwarzCounter &operator=(const SchwarzCounter &) = delete;
+            SchwarzCounter(SchwarzCounter &&) = delete;
+            SchwarzCounter &operator=(SchwarzCounter &&) = delete;
+
         private:
             static unsigned int s_count;
         };
@@ -113,15 +121,24 @@ namespace CXXR
         class Scope
         {
         public:
-            Scope()
+            Scope() noexcept
                 : m_next_scope(RAllocStack::s_innermost_scope),
                   m_saved_size(RAllocStack::size())
             {
                 RAllocStack::s_innermost_scope = this;
             }
 
-            ~Scope()
+            Scope(const Scope &) = delete;
+            Scope &operator=(const Scope &) = delete;
+            Scope(Scope &&) = delete;
+            Scope &operator=(Scope &&) = delete;
+
+            ~Scope() noexcept
             {
+#ifndef NDEBUG
+                if (this != RAllocStack::s_innermost_scope)
+                    nestingError();
+#endif
                 if (RAllocStack::size() != m_saved_size)
                     RAllocStack::trim(m_saved_size);
                 RAllocStack::s_innermost_scope = m_next_scope;
@@ -133,14 +150,16 @@ namespace CXXR
              * Scope object was constructed.  The RAllocStack will be
              * restored to this size by the Scope destructor.
              */
-            size_t startSize() const
+            std::size_t startSize() const noexcept
             {
                 return m_saved_size;
             }
 
         private:
             Scope *m_next_scope;
-            size_t m_saved_size;
+            std::size_t m_saved_size;
+
+            static void nestingError();
         };
 
         /** @brief Allocate a new block of memory.
@@ -151,7 +170,7 @@ namespace CXXR
          *           multiple of <tt>sizeof(char)</tt>), of the memory block.
          * @return Pointer to the start of the memory block.
          */
-        static void *allocate(size_t sz);
+        static void *allocate(std::size_t sz);
 
         /** @brief Restore stack to a previous size.
          *
@@ -166,7 +185,7 @@ namespace CXXR
          * since the use of the RAllocStack::Scope class is
          * preferable.
          */
-        static void restoreSize(size_t new_size);
+        static void restoreSize(std::size_t new_size);
 
         /** @brief Current size of stack.
          *
@@ -175,13 +194,13 @@ namespace CXXR
          * @note This method is intended for use in conjunction with
          * restoreSize(), and may cease to be public in future.
          */
-        static size_t size()
+        static std::size_t size() noexcept
         {
             return s_stack->size();
         }
 
     private:
-        using Pair = std::pair<size_t, void *>;
+        using Pair = std::pair<std::size_t, void *>;
         using Stack = std::stack<Pair, std::vector<Pair>>;
         static Stack *s_stack;
         static Scope *s_innermost_scope;

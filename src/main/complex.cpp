@@ -93,14 +93,6 @@ using namespace CXXR;
 
 namespace CXXR
 {
-    template <>
-    Complex &Complex::operator=(const std::complex<double> &rhs)
-    {
-        r = rhs.real();
-        i = rhs.imag();
-        return *this;
-    }
-
     std::ostream &operator<<(std::ostream &os, const Complex &z)
     {
         if (z.i < 0)

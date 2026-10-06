@@ -258,6 +258,11 @@ namespace CXXR
                 //     GCNode::cleanup();
             }
 
+            SchwarzCounter(const SchwarzCounter &) = delete;
+            SchwarzCounter &operator=(const SchwarzCounter &) = delete;
+            SchwarzCounter(SchwarzCounter &&) = delete;
+            SchwarzCounter &operator=(SchwarzCounter &&) = delete;
+
         private:
             static unsigned int s_count;
         };

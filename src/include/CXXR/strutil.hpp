@@ -28,46 +28,19 @@
 #ifndef CXXR_STRUTIL_HPP
 #define CXXR_STRUTIL_HPP
 
-#include <memory>
-#include <stdexcept>
-#include <sstream>
 #include <ostream>
+#include <sstream>
+#include <string>
+#include <utility>
 
 namespace CXXR
 {
-    namespace internal
-    {
-        inline void strcat_helper(std::ostringstream &stream) {}
-
-        template <typename Arg, typename... Args>
-        inline void strcat_helper(std::ostringstream &stream,
-                                  Arg arg, Args... args)
-        {
-            stream << arg;
-            strcat_helper(stream, args...);
-        }
-    }
-
     template <typename... Args>
-    std::string StrCat(Args... args)
+    std::string StrCat(Args &&...args)
     {
         std::ostringstream stream;
-        internal::strcat_helper(stream, args...);
-        return stream.str();
-    }
-
-    // std::cout << string_format("%d, %s", 202412, "text") << std::endl;
-    template <typename... Args>
-    std::string string_format(const std::string &format, Args... args)
-    {
-        size_t size = snprintf(nullptr, 0, format.c_str(), args...) + 1; // Extra space for '\0'
-        if (size <= 0)
-        {
-            throw std::runtime_error("Error during formatting.");
-        }
-        std::unique_ptr<char[]> buf = std ::make_unique<char[]>(size);
-        snprintf(buf.get(), size, format.c_str(), args...);
-        return std::string(buf.get(), buf.get() + size - 1); // We don't want the '\0' inside
+        (static_cast<void>(stream << std::forward<Args>(args)), ...);
+        return std::move(stream).str();
     }
 
     namespace Color
@@ -100,7 +73,7 @@ namespace CXXR
                 BG_DEFAULT = 49
             };
 
-            Code code() const
+            Code code() const noexcept
             {
                 return m_code;
             }
@@ -109,7 +82,7 @@ namespace CXXR
             Code m_code;
 
         public:
-            explicit Modifier(Code pCode) : m_code(pCode) {}
+            explicit Modifier(Code pCode) noexcept : m_code(pCode) {}
             friend std::ostream &operator<<(std::ostream &os, const Modifier &mod)
             {
                 return os << "\033[" << mod.m_code << "m";

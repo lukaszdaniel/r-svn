@@ -31,6 +31,8 @@
 #ifndef GCROOT_HPP
 #define GCROOT_HPP
 
+#include <cstddef>
+#include <functional>
 #include <CXXR/GCNode.hpp>
 
 namespace CXXR
@@ -59,20 +61,20 @@ namespace CXXR
          *
          * @param node Pointer, possibly null, to the node to be protected.
          */
-        GCRootBase(const GCNode *node);
+        GCRootBase(const GCNode *node) noexcept;
 
         /** @brief Copy constructor.
          *
          * @param source Pattern for the copy.
          */
-        GCRootBase(const GCRootBase &source): GCRootBase(source.ptr()) {}
+        GCRootBase(const GCRootBase &source) noexcept: GCRootBase(source.ptr()) {}
 
-        ~GCRootBase()
+        ~GCRootBase() noexcept
         {
             unlink();
         }
 
-        GCRootBase &operator=(const GCRootBase &source)
+        GCRootBase &operator=(const GCRootBase &source) noexcept
         {
             const GCNode *newnode = source.ptr();
             m_pointer = newnode;
@@ -84,7 +86,7 @@ namespace CXXR
          * @param node Pointer to the node now to be protected, or a
          * null pointer.
          */
-        void retarget(const GCNode *node)
+        void retarget(const GCNode *node) noexcept
         {
             m_pointer = node;
         }
@@ -93,7 +95,7 @@ namespace CXXR
          *
          * @return the GCNode pointer encapsulated by this object.
          */
-        const GCNode *ptr() const
+        const GCNode *ptr() const noexcept
         {
             return m_pointer;
         }
@@ -109,7 +111,7 @@ namespace CXXR
 
         static GCRootBase *s_list_head;
 
-        void unlink()
+        void unlink() noexcept
         {
             if (m_next)
             {
@@ -156,7 +158,7 @@ namespace CXXR
          *          protected from the garbage collector, or a null
          *          pointer.
          */
-        GCRoot(T *node = nullptr): GCRootBase(node) { check_complete_type(); }
+        GCRoot(T *node = nullptr) noexcept: GCRootBase(node) { check_complete_type(); }
 
         /** @brief Copy constructor.
          *
@@ -164,18 +166,14 @@ namespace CXXR
          * source.  (There is probably no reason to use this
          * constructor.)
          */
-        GCRoot(const GCRoot &source): GCRootBase(source) {}
+        GCRoot(const GCRoot &source) noexcept = default;
 
         /**
          * This will cause this GCRoot to protect the same GCNode as
          * is protected by source.  (There is probably no reason to
          * use this method.)
          */
-        GCRoot &operator=(const GCRoot &source)
-        {
-            GCRootBase::operator=(source);
-            return *this;
-        }
+        GCRoot &operator=(const GCRoot &source) noexcept = default;
 
         /**
          * This will cause this GCRoot to point to and protect node,
@@ -185,7 +183,7 @@ namespace CXXR
          * @param node Pointer to the GCNode that is now to be pointed
          *          to and protected from the garbage collector.
          */
-        GCRoot &operator=(T *node)
+        GCRoot &operator=(T *node) noexcept
         {
             check_complete_type();
             GCRootBase::retarget(node);
@@ -196,7 +194,7 @@ namespace CXXR
          *
          * @return the pointer currently encapsulated by the node.
          */
-        T *operator->() const
+        T *operator->() const noexcept
         {
             return get();
         }
@@ -207,7 +205,7 @@ namespace CXXR
          * encapsulated pointer.  The effect is undefined if this
          * object encapsulates a null pointer.
          */
-        T &operator*() const
+        T &operator*() const noexcept
         {
             return *get();
         }
@@ -219,7 +217,7 @@ namespace CXXR
          * an lvalue, the effect of which would probably not be what
          * the programmer wanted.
          */
-        operator T *() const
+        operator T *() const noexcept
         {
             return get();
         }
@@ -228,7 +226,7 @@ namespace CXXR
          *
          * @return the pointer currently encapsulated by the node.
          */
-        T *get() const
+        T *get() const noexcept
         {
             check_complete_type();
             return static_cast<T *>(const_cast<GCNode *>(ptr()));
@@ -236,7 +234,7 @@ namespace CXXR
 
     private:
         // A GC root is a pointer, not an array.
-        T &operator[](size_t) const = delete;
+        T &operator[](std::size_t) const = delete;
 
         static void check_complete_type()
         {
@@ -251,10 +249,9 @@ namespace std
     template <class T>
     struct hash<CXXR::GCRoot<T>>
     {
-        std::size_t operator()(const CXXR::GCRoot<T> &gcrt) const
+        std::size_t operator()(const CXXR::GCRoot<T> &gcrt) const noexcept
         {
-            std::hash<T *> make_hash;
-            return make_hash(gcrt);
+            return std::hash<T *>{}(gcrt.get());
         }
     };
 } // namespace std
