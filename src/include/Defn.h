@@ -1335,7 +1335,7 @@ LibExtern int	R_ParseContextLast INI_as(0); /* last character in context buffer 
 LibExtern int	R_ParseContextLine; /* Line in file of the above */
 
 /* Image Dump/Restore */
-// extern int	R_DirtyImage	INI_as(0);	/* Current image dirty */ // declared in Rembedded.h
+// extern bool	R_DirtyImage	INI_as(false);	/* Current image dirty */ // declared in Rembedded.h
 
 /* History */
 // LibExtern char *R_HistoryFile;	/* Name of the history file */ // declared in Rinterface.h
@@ -2308,7 +2308,7 @@ LibExtern char *R_TempDir	INI_as(NULL);	/* Name of per-session dir */ // declare
 LibExtern bool mbcslocale  INI_as(FALSE);  /* is this a MBCS locale? */ // declared in GraphicsDevice.h
 
 /* Image Dump/Restore */
-extern int	R_DirtyImage	INI_as(0);	/* Current image dirty */ // declared in Rembedded.h
+extern bool	R_DirtyImage	INI_as(false);	/* Current image dirty */ // declared in Rembedded.h
 
 /* History */
 LibExtern char *R_HistoryFile;	/* Name of the history file */ // declared in Rinterface.h

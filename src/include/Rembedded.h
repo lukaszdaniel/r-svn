@@ -50,7 +50,7 @@ extern void R_RunExitFinalizers(void);
 extern void CleanEd(void);
 #define KillAllDevices Rf_KillAllDevices
 extern void Rf_KillAllDevices(void);
-LibExtern int R_DirtyImage;
+LibExtern bool R_DirtyImage;
 extern void R_CleanTempDir(void);
 LibExtern char *R_TempDir;    
 extern void R_SaveGlobalEnv(void);

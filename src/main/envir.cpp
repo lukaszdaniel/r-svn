@@ -375,14 +375,14 @@ static SEXP R_HashGetLoc(int hashcode, SEXP symbol, SEXP table)
 
 static SEXP R_NewHashTable(int size)
 {
-    SEXP table;
+    GCStackRoot<> table;
 
     if (size <= 0) size = HASHMINSIZE;
 
     /* Allocate hash table in the form of a vector */
-    PROTECT(table = ListVector::create(size));
+    table = ListVector::create(size);
     SET_HASHPRI(table, 0);
-    UNPROTECT(1);
+
     return(table);
 }
 
@@ -394,14 +394,13 @@ static SEXP R_NewHashTable(int size)
   size.  The only non-static hash table function.
 */
 
-SEXP R::R_NewHashedEnv(SEXP enclos, int size)
+SEXP R::R_NewHashedEnv(SEXP enclos_, int size)
 {
-    SEXP s;
+    GCStackRoot<> s, enclos(enclos_);
 
-    PROTECT(enclos);
-    PROTECT(s = NewEnvironment(R_NilValue, R_NilValue, enclos));
+    s = NewEnvironment(R_NilValue, R_NilValue, enclos);
     SET_HASHTAB(s, R_NewHashTable(size));
-    UNPROTECT(2);
+
     return s;
 }
 
@@ -424,7 +423,7 @@ static bool R_HashDelete(int hashcode, SEXP symbol, SEXP env)
     auto list = RemoveFromList(symbol, VECTOR_ELT(hashtab, idx));
     if (list.second) {
 	if (env == R_GlobalEnv)
-	    R_DirtyImage = 1;
+	    R_DirtyImage = true;
 	if (list.first == R_NilValue)
 	    SET_HASHPRI(hashtab, HASHPRI(hashtab) - 1);
 	SET_VECTOR_ELT(hashtab, idx, list.first);
@@ -573,21 +572,21 @@ static SEXP R_HashFrame(SEXP rho)
 
 static SEXP R_HashProfile(SEXP table)
 {
-    SEXP chain, ans, chain_counts, nms;
+    GCStackRoot<> ans, chain_counts, nms;
+    SEXP chain;
     int count;
 
-    PROTECT(ans = ListVector::create(3));
-    PROTECT(nms = StringVector::create(3));
+    ans = ListVector::create(3);
+    nms = StringVector::create(3);
     SET_STRING_ELT(nms, 0, mkChar("size"));    /* size of hashtable */
     SET_STRING_ELT(nms, 1, mkChar("nchains")); /* number of non-null chains */
     SET_STRING_ELT(nms, 2, mkChar("counts"));  /* length of each chain */
     setAttrib(ans, R_NamesSymbol, nms);
-    UNPROTECT(1);
 
     SET_VECTOR_ELT(ans, 0, ScalarInteger(length(table)));
     SET_VECTOR_ELT(ans, 1, ScalarInteger(HASHPRI(table)));
 
-    PROTECT(chain_counts = IntVector::create(length(table)));
+    chain_counts = IntVector::create(length(table));
     for (int i = 0; i < length(table); i++) {
 	chain = VECTOR_ELT(table, i);
 	count = 0;
@@ -599,7 +598,6 @@ static SEXP R_HashProfile(SEXP table)
 
     SET_VECTOR_ELT(ans, 2, chain_counts);
 
-    UNPROTECT(2);
     return ans;
 }
 
@@ -996,7 +994,7 @@ attribute_hidden void R::unbindVar(SEXP symbol, SEXP rho)
     if (HASHTAB(rho) == R_NilValue) {
 	auto list = RemoveFromList(symbol, FRAME(rho));
 	if (list.second) {
-	    if (rho == R_GlobalEnv) R_DirtyImage = 1;
+	    if (rho == R_GlobalEnv) R_DirtyImage = true;
 	    SET_FRAME(rho, list.first);
 #ifdef USE_GLOBAL_CACHE
 	    if (IS_GLOBAL_FRAME(rho))
@@ -1255,47 +1253,52 @@ void R::readS3VarsFromFrame(SEXP rho,
 
     SEXP frame = FRAME(rho);
 
-    if (TYPEOF(rho) == NILSXP ||
-	rho == R_BaseNamespace || rho == R_BaseEnv || rho == R_EmptyEnv ||
-	IS_USER_DATABASE(rho) || HASHTAB(rho) != R_NilValue) goto slowpath;
-
+    bool fast_path = TYPEOF(rho) != NILSXP &&
+        rho != R_BaseNamespace && rho != R_BaseEnv && rho != R_EmptyEnv &&
+        !IS_USER_DATABASE(rho) && HASHTAB(rho) == R_NilValue;
 
     /*
     This code speculates there is a specific order of S3 meta-variables.  It
     holds in most (perhaps all non-fabricated) cases.  If at any time this
-    ceased to hold, this code will fall back to the slowpath, which may be
-    slow but still correct.
+    ceased to hold, this code will fall back to the slow but general
+    implementation below.
     */
+    if (fast_path) {
+        while (TAG(frame) != R_dot_Generic)
+            frame = CDR(frame);
+        fast_path = frame != R_NilValue;
+    }
+    if (fast_path) {
+        *dotGeneric = BINDING_VALUE(frame);
+        frame = CDR(frame);
+        fast_path = TAG(frame) == R_dot_Class;
+    }
+    if (fast_path) {
+        *dotClass = BINDING_VALUE(frame);
+        frame = CDR(frame);
+        fast_path = TAG(frame) == R_dot_Method;
+    }
+    if (fast_path) {
+        *dotMethod = BINDING_VALUE(frame);
+        frame = CDR(frame);
+        fast_path = TAG(frame) == R_dot_Group;
+    }
+    if (fast_path) {
+        *dotGroup = BINDING_VALUE(frame);
+        frame = CDR(frame);
+        fast_path = TAG(frame) == R_dot_GenericCallEnv;
+    }
+    if (fast_path) {
+        *dotGenericCallEnv = BINDING_VALUE(frame);
+        frame = CDR(frame);
+        fast_path = TAG(frame) == R_dot_GenericDefEnv;
+    }
+    if (fast_path) {
+        *dotGenericDefEnv = BINDING_VALUE(frame);
+        return;
+    }
 
-    for (;TAG(frame) != R_dot_Generic; frame = CDR(frame))
-	if (frame == R_NilValue) goto slowpath;
-    *dotGeneric = BINDING_VALUE(frame);
-    frame = CDR(frame);
-
-    if (TAG(frame) != R_dot_Class) goto slowpath;
-    *dotClass = BINDING_VALUE(frame);
-    frame = CDR(frame);
-
-    if (TAG(frame) != R_dot_Method) goto slowpath;
-    *dotMethod = BINDING_VALUE(frame);
-    frame = CDR(frame);
-
-    if (TAG(frame) != R_dot_Group) goto slowpath;
-    *dotGroup = BINDING_VALUE(frame);
-    frame = CDR(frame);
-
-    if (TAG(frame) != R_dot_GenericCallEnv) goto slowpath;
-    *dotGenericCallEnv = BINDING_VALUE(frame);
-    frame = CDR(frame);
-
-    if (TAG(frame) != R_dot_GenericDefEnv) goto slowpath;
-    *dotGenericDefEnv = BINDING_VALUE(frame);
-
-    return;
-
-slowpath:
-    /* fall back to the slow but general implementation */
-
+    /* Fall back to the slow but general implementation. */
     *dotGeneric = R_findVarInFrame(rho, R_dot_Generic);
     *dotClass = R_findVarInFrame(rho, R_dot_Class);
     *dotMethod = R_findVarInFrame(rho, R_dot_Method);
@@ -1903,7 +1906,7 @@ void Rf_defineVar(SEXP symbol, SEXP value, SEXP rho)
     if (value == R_UnboundValue)
 	error("%s", _("attempt to bind a variable to R_UnboundValue"));
     /* R_DirtyImage should only be set if assigning to R_GlobalEnv. */
-    if (rho == R_GlobalEnv) R_DirtyImage = 1;
+    if (rho == R_GlobalEnv) R_DirtyImage = true;
 
     if (rho == R_EmptyEnv)
 	error("%s", _("cannot assign values in the empty environment"));
@@ -2023,7 +2026,7 @@ void R::addMissingVarsToNewEnv(SEXP env, SEXP addVars)
 static SEXP setVarInFrame(SEXP rho, SEXP symbol, SEXP value)
 {
     /* R_DirtyImage should only be set if assigning to R_GlobalEnv. */
-    if (rho == R_GlobalEnv) R_DirtyImage = 1;
+    if (rho == R_GlobalEnv) R_DirtyImage = true;
     if (rho == R_EmptyEnv) return R_NilValue;
 
     if (IS_USER_DATABASE(rho)) {
@@ -2216,7 +2219,7 @@ static bool RemoveVariable(SEXP name, int hashcode, SEXP env)
     } else {
 	auto list = RemoveFromList(name, FRAME(env));
 	if (list.second) {
-	    if (env == R_GlobalEnv) R_DirtyImage = 1;
+	    if (env == R_GlobalEnv) R_DirtyImage = true;
 	    SET_FRAME(env, list.first);
 #ifdef USE_GLOBAL_CACHE
 	    if (IS_GLOBAL_FRAME(env))
@@ -2568,10 +2571,10 @@ SEXP R_getVar(SEXP sym, SEXP rho, Rboolean inherits)
 */
 
 static SEXP findRootPromise(SEXP p) {
-    if (TYPEOF(p) == PROMSXP) {
-	while(TYPEOF(PREXPR(p)) == PROMSXP) {
-	    p = PREXPR(p);
-	}
+    if (Promise::isA(p)) {
+        while (Promise::isA(PREXPR(p))) {
+            p = PREXPR(p);
+        }
     }
     return p;
 }

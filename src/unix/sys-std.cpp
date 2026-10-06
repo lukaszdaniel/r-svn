@@ -1238,37 +1238,44 @@ void Rstd_CleanUp(SA_TYPE saveact, int status, int runLast)
     if(saveact == SA_SAVEASK) {
 	if(R_Interactive) {
 	    unsigned char buf[1024];
-	qask:
-
-	    R_ClearerrConsole();
-	    R_FlushConsole();
-	    int res = R_ReadConsole("Save workspace image? [y/n/c]: ",
-				    buf, 128, 0);
-	    if(res) {
-		switch (buf[0]) {
-		case 'y':
-		case 'Y':
-		    saveact = SA_SAVE;
-		    break;
-		case 'n':
-		case 'N':
-		    saveact = SA_NOSAVE;
-		    break;
-		case 'c':
-		case 'C':
-		    jump_to_toplevel();
-		    break;
-		default:
-		    goto qask;
+	    bool response_valid = false;
+	    while (!response_valid) {
+		R_ClearerrConsole();
+		R_FlushConsole();
+		int res = R_ReadConsole("Save workspace image? [y/n/c]: ",
+					buf, 128, 0);
+		if(res) {
+		    switch (buf[0]) {
+		    case 'y':
+		    case 'Y':
+			saveact = SA_SAVE;
+			response_valid = true;
+			break;
+		    case 'n':
+		    case 'N':
+			saveact = SA_NOSAVE;
+			response_valid = true;
+			break;
+		    case 'c':
+		    case 'C':
+			jump_to_toplevel();
+			response_valid = true;
+			break;
+		    default:
+			break;
+		    }
+		} else {
+		    saveact = SA_NOSAVE; /* probably EOF */
+		    response_valid = true;
 		}
-	    } else saveact = SA_NOSAVE; /* probably EOF */
+	    }
 	} else
 	    saveact = SaveAction;
     }
     switch (saveact) {
     case SA_SAVE:
-	if(runLast) R_dot_Last();
-	if(R_DirtyImage) R_SaveGlobalEnv();
+	if (runLast) R_dot_Last();
+	if (R_DirtyImage) R_SaveGlobalEnv();
 #if defined(HAVE_LIBREADLINE) && defined(HAVE_READLINE_HISTORY_H)
 	if(R_Interactive && UsingReadline) {
 	    int err;

@@ -99,7 +99,7 @@ extern void R_WriteConsole(const char *, int);
 extern void R_WriteConsoleEx(const char *, int, otype_t);
 extern void R_ResetConsole(void);
 extern int R_EditFiles(int, const char **, const char **, const char *);
-extern int R_DirtyImage;	/* Current image dirty */
+extern bool R_DirtyImage;	/* Current image dirty */
 extern const char *R_GUIType;
 extern void R_setupHistory(void);
 extern char *R_HistoryFile;	/* Name of the history file */
