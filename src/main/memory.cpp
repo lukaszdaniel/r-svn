@@ -1203,10 +1203,7 @@ void GCNode::mark(unsigned int max_generation)
 
     Symbol::visitTable(&marker);
 
-    for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL; ctxt = ctxt->nextcontext) {
-        if (ctxt->returnValue.tag == NILSXP)    /* For on.exit calls */
-            MARK_THRU(ctxt->returnValue.u.sxpval);
-    }
+    Evaluator::RContext::visitValues(&marker);
 
     ProtectStack::visitRoots(&marker);	   /* Protected pointers */
     ByteCode::visitRoots(&marker);

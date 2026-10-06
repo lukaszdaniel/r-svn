@@ -140,6 +140,17 @@ namespace CXXR
 {
     RCNTXT *RCNTXT::s_exit_context = nullptr;
 
+    void RCNTXT::visitValues(GCNode::const_visitor *v)
+    {
+        for (RCNTXT *ctxt = R_GlobalContext; ctxt != NULL; ctxt = ctxt->nextcontext) {
+            if (ctxt->returnValue.tag == NILSXP)    /* For on.exit calls */
+            {
+                if (ctxt->returnValue.u.sxpval != R_NilValue)
+                    (*v)(ctxt->returnValue.u.sxpval);
+            }
+        }
+    }
+
     bool isTopLevelContext(RCNTXT *cptr)
     {
         return (!cptr || (cptr->nextcontext == nullptr));

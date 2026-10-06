@@ -182,6 +182,8 @@ namespace CXXR
         static void maybeRunOnExit(RContext *cptr, bool intermediate_jump = false);
         void runOnExit(bool intermediate_jump = false);
 
+        static void visitValues(GCNode::const_visitor *v);
+
         constexpr std::string_view namedType() const
         {
             switch (callflag)
