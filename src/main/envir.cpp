@@ -375,14 +375,14 @@ static SEXP R_HashGetLoc(int hashcode, SEXP symbol, SEXP table)
 
 static SEXP R_NewHashTable(int size)
 {
-    GCStackRoot<> table;
+    SEXP table;
 
     if (size <= 0) size = HASHMINSIZE;
 
     /* Allocate hash table in the form of a vector */
-    table = ListVector::create(size);
+    PROTECT(table = ListVector::create(size));
     SET_HASHPRI(table, 0);
-
+    UNPROTECT(1);
     return(table);
 }
 
@@ -394,13 +394,14 @@ static SEXP R_NewHashTable(int size)
   size.  The only non-static hash table function.
 */
 
-SEXP R::R_NewHashedEnv(SEXP enclos_, int size)
+SEXP R::R_NewHashedEnv(SEXP enclos, int size)
 {
-    GCStackRoot<> s, enclos(enclos_);
+    SEXP s;
 
-    s = NewEnvironment(R_NilValue, R_NilValue, enclos);
+    PROTECT(enclos);
+    PROTECT(s = NewEnvironment(R_NilValue, R_NilValue, enclos));
     SET_HASHTAB(s, R_NewHashTable(size));
-
+    UNPROTECT(2);
     return s;
 }
 
@@ -572,21 +573,21 @@ static SEXP R_HashFrame(SEXP rho)
 
 static SEXP R_HashProfile(SEXP table)
 {
-    GCStackRoot<> ans, chain_counts, nms;
-    SEXP chain;
+    SEXP chain, ans, chain_counts, nms;
     int count;
 
-    ans = ListVector::create(3);
-    nms = StringVector::create(3);
+    PROTECT(ans = ListVector::create(3));
+    PROTECT(nms = StringVector::create(3));
     SET_STRING_ELT(nms, 0, mkChar("size"));    /* size of hashtable */
     SET_STRING_ELT(nms, 1, mkChar("nchains")); /* number of non-null chains */
     SET_STRING_ELT(nms, 2, mkChar("counts"));  /* length of each chain */
     setAttrib(ans, R_NamesSymbol, nms);
+    UNPROTECT(1);
 
     SET_VECTOR_ELT(ans, 0, ScalarInteger(length(table)));
     SET_VECTOR_ELT(ans, 1, ScalarInteger(HASHPRI(table)));
 
-    chain_counts = IntVector::create(length(table));
+    PROTECT(chain_counts = IntVector::create(length(table)));
     for (int i = 0; i < length(table); i++) {
 	chain = VECTOR_ELT(table, i);
 	count = 0;
@@ -598,6 +599,7 @@ static SEXP R_HashProfile(SEXP table)
 
     SET_VECTOR_ELT(ans, 2, chain_counts);
 
+    UNPROTECT(2);
     return ans;
 }
 
@@ -1253,52 +1255,47 @@ void R::readS3VarsFromFrame(SEXP rho,
 
     SEXP frame = FRAME(rho);
 
-    bool fast_path = TYPEOF(rho) != NILSXP &&
-        rho != R_BaseNamespace && rho != R_BaseEnv && rho != R_EmptyEnv &&
-        !IS_USER_DATABASE(rho) && HASHTAB(rho) == R_NilValue;
+    if (TYPEOF(rho) == NILSXP ||
+	rho == R_BaseNamespace || rho == R_BaseEnv || rho == R_EmptyEnv ||
+	IS_USER_DATABASE(rho) || HASHTAB(rho) != R_NilValue) goto slowpath;
+
 
     /*
     This code speculates there is a specific order of S3 meta-variables.  It
     holds in most (perhaps all non-fabricated) cases.  If at any time this
-    ceased to hold, this code will fall back to the slow but general
-    implementation below.
+    ceased to hold, this code will fall back to the slowpath, which may be
+    slow but still correct.
     */
-    if (fast_path) {
-        while (TAG(frame) != R_dot_Generic)
-            frame = CDR(frame);
-        fast_path = frame != R_NilValue;
-    }
-    if (fast_path) {
-        *dotGeneric = BINDING_VALUE(frame);
-        frame = CDR(frame);
-        fast_path = TAG(frame) == R_dot_Class;
-    }
-    if (fast_path) {
-        *dotClass = BINDING_VALUE(frame);
-        frame = CDR(frame);
-        fast_path = TAG(frame) == R_dot_Method;
-    }
-    if (fast_path) {
-        *dotMethod = BINDING_VALUE(frame);
-        frame = CDR(frame);
-        fast_path = TAG(frame) == R_dot_Group;
-    }
-    if (fast_path) {
-        *dotGroup = BINDING_VALUE(frame);
-        frame = CDR(frame);
-        fast_path = TAG(frame) == R_dot_GenericCallEnv;
-    }
-    if (fast_path) {
-        *dotGenericCallEnv = BINDING_VALUE(frame);
-        frame = CDR(frame);
-        fast_path = TAG(frame) == R_dot_GenericDefEnv;
-    }
-    if (fast_path) {
-        *dotGenericDefEnv = BINDING_VALUE(frame);
-        return;
-    }
 
-    /* Fall back to the slow but general implementation. */
+    for (;TAG(frame) != R_dot_Generic; frame = CDR(frame))
+	if (frame == R_NilValue) goto slowpath;
+    *dotGeneric = BINDING_VALUE(frame);
+    frame = CDR(frame);
+
+    if (TAG(frame) != R_dot_Class) goto slowpath;
+    *dotClass = BINDING_VALUE(frame);
+    frame = CDR(frame);
+
+    if (TAG(frame) != R_dot_Method) goto slowpath;
+    *dotMethod = BINDING_VALUE(frame);
+    frame = CDR(frame);
+
+    if (TAG(frame) != R_dot_Group) goto slowpath;
+    *dotGroup = BINDING_VALUE(frame);
+    frame = CDR(frame);
+
+    if (TAG(frame) != R_dot_GenericCallEnv) goto slowpath;
+    *dotGenericCallEnv = BINDING_VALUE(frame);
+    frame = CDR(frame);
+
+    if (TAG(frame) != R_dot_GenericDefEnv) goto slowpath;
+    *dotGenericDefEnv = BINDING_VALUE(frame);
+
+    return;
+
+slowpath:
+    /* fall back to the slow but general implementation */
+
     *dotGeneric = R_findVarInFrame(rho, R_dot_Generic);
     *dotClass = R_findVarInFrame(rho, R_dot_Class);
     *dotMethod = R_findVarInFrame(rho, R_dot_Method);
@@ -2571,10 +2568,10 @@ SEXP R_getVar(SEXP sym, SEXP rho, Rboolean inherits)
 */
 
 static SEXP findRootPromise(SEXP p) {
-    if (Promise::isA(p)) {
-        while (Promise::isA(PREXPR(p))) {
-            p = PREXPR(p);
-        }
+    if (TYPEOF(p) == PROMSXP) {
+	while (TYPEOF(PREXPR(p)) == PROMSXP) {
+	    p = PREXPR(p);
+	}
     }
     return p;
 }
