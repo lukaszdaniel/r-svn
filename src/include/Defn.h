@@ -2116,6 +2116,7 @@ const char *reEnc3(const char *x, const char *fromcode, const char *tocode, int 
 bool mbcsValid(const char *str);
 char *mbcsTruncateToValid(char *s);
 bool utf8Valid(const char *str);
+int utf8ValidClen(const char *);
 // char *Rf_strchr(char *s, int c); // used in graphapp
 char *Rf_strrchr(char *s, int c);
 const char *Rf_strchr_const(const char *s, int c);

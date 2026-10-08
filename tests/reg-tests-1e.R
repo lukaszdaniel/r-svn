@@ -3569,6 +3569,33 @@ local({
 ## write.dcf() relied on the Encoding field (in R <= 4.6.0)
 
 
+## read.dcf() matches a repeated field name containing an invalid byte
+local({
+    tf <- tempfile()
+    rec <- c(charToRaw("Package: p\nX"), as.raw(0xff), charToRaw("Y: v\n\n"))
+    con <- file(tf, "wb")
+    writeBin(rep(rec, 3), con)
+    close(con)
+    dC <- read.dcf(tf)
+    dR <- read.dcf(tf, all = TRUE)
+    stopifnot(identical(dim(dC), c(3L, 2L)),
+              identical(colnames(dC), c("Package", "X<ff>Y")),
+              identical(colnames(dC), names(dR)),
+              identical(unname(dC[, "X<ff>Y"]), dR[["X<ff>Y"]]))
+    ## Malformed lines with invalid bytes: the repaired line is shorter
+    ## than the 20 bytes the error message keeps.
+    for (b in list(as.raw(0xff), c(charToRaw("  "), as.raw(0xff)))) {
+        con <- file(tf, "wb")
+        writeBin(b, con)
+        close(con)
+        msg <- tryCatch(read.dcf(tf), error = conditionMessage)
+        stopifnot(grepl("<ff>", msg, fixed = TRUE))
+    }
+    unlink(tf)
+})
+## previously a duplicate "X<ff>Y" column per record (in R-devel since r90200)
+
+
 ## seq.int(along.with = *) for non-vector objects (PR#19100)
 stopifnot(identical(seq.int(along.with = NULL), integer(0)),
           identical(seq.int(along.with = mean), 1L))
@@ -3859,6 +3886,45 @@ for (frac in c(1/2, 1/4)) { # nul position where the translation is as long
 }
 ## gave "'Rf_getCharCE' must be called on a CHARSXP" (or a crash) in R <= 4.6.x
 
+
+## influence.measures() must agree with the direct access functions for a
+## glm with fixed dispersion (binomial, poisson)
+counts <- c(18,17,15,20,10,20,25,13,12); outcome <- gl(3,1,9); treatment <- gl(3,3)
+fitP <- glm(counts ~ outcome + treatment, family = poisson())
+imP <- influence.measures(fitP)$infmat
+stopifnot(all.equal(imP[, "dffit"], dffits(fitP)),
+          all.equal(imP[, "cov.r"], covratio(fitP)),
+          all.equal(unname(imP[, 1:5]), unname(dfbetas(fitP))))
+## dffit, cov.r and dfb.* used the leave-one-out sigma in R 4.6.0 and 4.6.1
+
+
+## wilcox.test(*, exact=TRUE)  when p ~= 1 -- PR#19144
+x <- c(-71, -54, -41, -33, -30:-29, -27, -1:0, 2:26, 28, 31:32, 34:40, 42:53, 55:70, 72:99)
+(pvW <- vapply(c("two.sided", "greater", "less"),
+               function(alt) wilcox.test(x, exact = TRUE, alternative = alt)$p.value, .1))
+pvX <- c( # exact values:
+    two.sided = 409667043355 / 2^97
+  , greater   = 409667043355 / 2^98
+  , less  = 1 - 194595959493 / 2^97)
+all.equal(pvX, pvW, tolerance = 0) # 3.87e-15
+stopifnot(print(abs(pvW/pvX - 1)) <= c(2e-14, 2e-14, 1e-15),
+          all.equal(2, pvW[["two.sided"]]/pvW[["greater"]]))
+## not ok in  R <= 4.6.1
+
+
+
+## read.dcf() escapes 4-byte sequences above U+10FFFF, which iconv()
+## passes through but validUTF8() rejects, like other invalid bytes
+local({
+    bad <- as.raw(c(0xf6, 0xb6, 0xb6, 0xb6))
+    x <- rawToChar(c(charToRaw("A: v\n "), bad, charToRaw("\n lue\n")))
+    con <- textConnection(x)
+    d <- read.dcf(con)
+    close(con)
+    stopifnot(identical(d[[1L, "A"]], "v\n<f6><b6><b6><b6>\nlue"), validUTF8(d))
+})
+## gave "????" in R-devel since r90200, and re-encoded the whole field
+## value for each further continuation line
 
 
 ## keep at end

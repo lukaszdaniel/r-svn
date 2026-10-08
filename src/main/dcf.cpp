@@ -51,22 +51,54 @@ static void transferVector(SEXP s, SEXP t);
 /* Build a CHARSXP marked as UTF-8 from the NUL-terminated string 's'.
    DCF files are required to be UTF-8, so 's' is interpreted as UTF-8
    regardless of its actual encoding; any invalid byte sequences are
-   repaired by escaping them as "<xx>", exactly as
+   repaired by escaping them as "<xx>", as
    iconv(from = "UTF-8", to = "UTF-8", sub = "byte") does (which the R
    code paths in read.dcf()/write.dcf() also use).  The common case of
-   already-valid input is handled without conversion. */
+   already-valid input is handled without conversion.
+
+   The escaping is done with utf8Valid()'s rules rather than by iconv():
+   glibc and libiconv pass 4-byte sequences above U+10FFFF through,
+   which utf8Valid() rejects, so an iconv() round trip could leave the
+   result invalid and do_readDCF() would then re-encode the whole field
+   value for every further continuation line. */
 static SEXP mkCharUTF8sub(const char *s)
 {
     if (utf8Valid(s))
-	return mkCharCE(s, CE_UTF8);
+	return String::obtain(s, CE_UTF8);
 
-    /* reEnc3() performs the iconv() repair via Riconv(); subst = 1 selects
-       the "<xx>" hexadecimal substitution for invalid bytes.  It returns a
-       string allocated with R_alloc() (and freed at the vmaxset() in
-       do_readDCF()), or 's' itself if iconv is unavailable.  Either way
-       mkCharCE() copies the bytes into the CHARSXP below. */
-    const char *repaired = reEnc3(s, "UTF-8", "UTF-8", 1);
-    return mkCharCE(repaired, CE_UTF8);
+    CXXR::RAllocStack::Scope rscope;
+    char *out = R_alloc(4 * strlen(s) + 1, sizeof(char)); /* all escaped */
+    static constexpr char hex[] = "0123456789abcdef";
+    char *q = out;
+    const char *p = s;
+    while (*p) {
+	const char *run = p;
+	while (*p) {
+	    if ((unsigned char) *p < 0x80) {
+		p++;
+		continue;
+	    }
+	    int len = utf8ValidClen(p);
+	    if (len == 0)
+		break;
+	    p += len;
+	}
+	size_t len = p - run;
+	if (len != 0) {
+	    memcpy(q, run, len);
+	    q += len;
+	}
+	if (*p) {
+	    unsigned char byte = (unsigned char) *p++;
+	    *q++ = '<';
+	    *q++ = hex[byte >> 4];
+	    *q++ = hex[byte & 0x0f];
+	    *q++ = '>';
+	}
+    }
+    *q = '\0';
+
+    return String::obtain(out, CE_UTF8);
 }
 
 static bool field_is_foldable_p(const char *, SEXP);
@@ -158,6 +190,13 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     CXXR::RAllocStack::Scope rscope;
     char buf0[MAXELTSIZE];
     while((line = Rconn_getline2(con, buf0, MAXELTSIZE))) {
+	/* Repair invalid UTF-8 in the whole line before matching, as the
+	   all = TRUE R code does: a new field name is recorded repaired, so
+	   matching its later occurrences against the raw bytes would fail
+	   and add a duplicate column for each.  The repaired copy comes from
+	   R_alloc() and may be shorter than 21 bytes. */
+	if (!utf8Valid(line))
+	    line = (char *) reEnc3(line, "UTF-8", "UTF-8", 1);
 	if (strlen(line) == 0 ||
 	   tre_regexecb(&blankline, line, 0, NULL, 0) == 0) {
 	    /* A blank line.  The first one after a record ends a new
@@ -186,7 +225,8 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 		/* A continuation line: wrong if at the beginning of a
 		   record. */
 		if ((lastm == -1) && !field_skip) {
-		    line[20] = '\0';
+		    if (strlen(line) > 20)
+			line[20] = '\0';
 		    error(_("Found continuation line starting '%s ...' at begin of record."),
 			  line);
 		}
@@ -325,7 +365,8 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		} else {
 		    /* Must be a regular line with no tag ... */
-		    line[20] = '\0';
+		    if(strlen(line) > 20)
+			line[20] = '\0';
 		    error(_("Line starting '%s ...' is malformed!"), line);
 		}
 	    }
