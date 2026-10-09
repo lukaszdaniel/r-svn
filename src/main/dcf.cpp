@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001-2025   The R Core Team.
+ *  Copyright (C) 2001-2026   The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -31,6 +31,7 @@
 # include <config.h>
 #endif
 
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -101,6 +102,30 @@ static SEXP mkCharUTF8sub(const char *s)
     return String::obtain(out, CE_UTF8);
 }
 
+/* What do_readDCF() has to release however it exits: the error() calls
+   in its read loop would otherwise leak the line buffer and the compiled
+   regexps, and leave open a connection it opened itself. */
+typedef struct dcf_info {
+    Rconnection con;
+    bool wasopen;
+    char **buf;			/* the line buffer, which realloc() may move */
+    regex_t *regex[5];
+    int nregex;			/* how many of regex[] have been compiled */
+} dcf_info;
+
+static void dcf_cleanup(void *data)
+{
+    dcf_info *pdi = (dcf_info *) data;
+
+    for(int i = 0; i < pdi->nregex; i++)
+	tre_regfree(pdi->regex[i]);
+    pdi->nregex = 0;
+    free(*pdi->buf);
+    *pdi->buf = NULL;
+    if(!pdi->wasopen && pdi->con->isopen)
+	pdi->con->close(pdi->con);
+}
+
 static bool field_is_foldable_p(const char *, SEXP);
 
 /* Use R_alloc as this might get interrupted */
@@ -136,15 +161,22 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     bool blank_skip, field_skip = false;
     int dynwhat, buflen = 8096; // was 100, but that re-alloced often
     size_t whatlen;
-    char *line, *buf;
+    char *line, *buf = NULL;
     regex_t blankline, contline, trailblank, regline, eblankline;
     regmatch_t regmatch[1];
-    SEXP file, what, what2, retval, retval2, dims, dimnames;
+    SEXP file;
+    GCStackRoot<> dims, dimnames;
+    GCStackRoot<> what, retval;
+    GCStackRoot<> what2, retval2;
     Rconnection con = NULL;
     bool is_eblankline;
-    int nprot = 0;
+    dcf_info di = {
+	.buf = &buf,
+	.regex = { &blankline, &trailblank, &contline, &regline, &eblankline },
+	.nregex = 0
+    };
 
-    SEXP fold_excludes;
+    GCStackRoot<> fold_excludes;
     bool field_fold = true, has_fold_excludes;
     const char *field_name;
     int offset = 0; /* -Wall */
@@ -154,26 +186,32 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     file = CAR(args);
     con = getConnection(asInteger(file));
     bool wasopen = con->isopen;
-    if(!wasopen) {
-	if(!con->open(con)) error("%s", _("cannot open the connection"));
-    }
+    if(!wasopen && !con->open(con))
+	error("%s", _("cannot open the connection"));
     if(!con->canread) error("%s", _("cannot read from this connection"));
-    /* Set up a context which will close the connection on error */
+    /* Set up a context which will close the connection if we opened it,
+       and free the line buffer and regexps, on error */
+    di.con = con;
+    di.wasopen = wasopen;
+    {
+    RCNTXT cntxt;
+    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
     try {
     args = CDR(args);
-    PROTECT(what = coerceVector(CAR(args), STRSXP)); nprot++; /* argument fields */
+    what = coerceVector(CAR(args), STRSXP); /* argument fields */
     nwhat = LENGTH(what);
     dynwhat = (nwhat == 0);
 
     args = CDR(args);
-    PROTECT(fold_excludes = coerceVector(CAR(args), STRSXP)); nprot++;
+    fold_excludes = coerceVector(CAR(args), STRSXP);
     has_fold_excludes = (LENGTH(fold_excludes) > 0);
 
     buf = (char *) malloc(buflen);
     if (!buf) error("%s", _("could not allocate memory for 'read.dcf'"));
     nret = 20;
     /* it is easier if we first have a record per column */
-    PROTECT(retval = allocMatrixNA(STRSXP, LENGTH(what), nret)); nprot++;
+    retval = allocMatrixNA(STRSXP, LENGTH(what), nret);
 
     /* These used to use [:blank:] and [:space:] but those are locale-dependent
        and :blank: can match \xa0 as part of a UTF-8 character
@@ -183,6 +221,7 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
     tre_regcompb(&contline, "^[ \t]+", REG_EXTENDED);
     tre_regcompb(&regline, "^[^:]+:[ \t]*", REG_EXTENDED);
     tre_regcompb(&eblankline, "^[ \f\n\r\t\v]+\\.[ \f\n\r\t\v]*$", REG_EXTENDED);
+    di.nregex = 5;
 
     k = 0;
     lastm = -1; /* index of the field currently being recorded */
@@ -253,11 +292,11 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			need += (int) strlen(line + offset) + n_eblanklines;
 		    }
 		    if (buflen < need) {
+			/* on failure, dcf_cleanup() frees the old buffer */
 			char *tmp = (char *) realloc(buf, need);
-			if (!tmp) {
-			    free(buf);
+			if (!tmp)
 			    error("%s", _("could not allocate memory for 'read.dcf'"));
-			} else buf = tmp;
+			buf = tmp;
 			buflen = need;
 		    }
 		    strcpy(buf, CHAR(STRING_ELT(retval, lastm + nwhat * k)));
@@ -311,10 +350,10 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			/* A previously unseen field and we are
 			 * recording all fields */
 			field_skip = false;
-			PROTECT(what2 = allocVector(STRSXP, nwhat+1)); nprot++;
-			PROTECT(retval2 = allocMatrixNA(STRSXP,
+			what2 = allocVector(STRSXP, nwhat+1);
+			retval2 = allocMatrixNA(STRSXP,
 							nrows(retval)+1,
-							ncols(retval))); nprot++;
+							ncols(retval));
 			if (nwhat > 0) {
 			    copyVector(what2, what);
 			    for (nr = 0; nr < nrows(retval); nr++){
@@ -327,18 +366,13 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 			}
 			retval = retval2;
 			what = what2;
-			UNPROTECT(nprot); nprot = 0; /* what, fold_excludes, retval, what2, retval2 */
-			PROTECT(what); nprot++;
-			PROTECT(fold_excludes); nprot++;
-			PROTECT(retval); nprot++;
 			/* Make sure enough space was used */
 			need = (int) (Rf_strchr(line, ':') - line + 1);
 			if (buflen < need){
 			    char *tmp = (char *) realloc(buf, need);
-			    if (!tmp) {
-				free(buf);
+			    if (!tmp)
 				error("%s", _("could not allocate memory for 'read.dcf'"));
-			    } else buf = tmp;
+			    buf = tmp;
 			    buflen = need;
 			}
 			strncpy(buf, line, Rf_strchr(line, ':') - line);
@@ -373,33 +407,27 @@ attribute_hidden SEXP do_readDCF(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
     } catch (...) {
-        if (!wasopen && con->isopen) {
-            con->close(con);
-        }
+        dcf_cleanup(&di);
         throw;
     }
-    if (!wasopen) { con->close(con); }
-    free(buf);
-    tre_regfree(&blankline);
-    tre_regfree(&contline);
-    tre_regfree(&trailblank);
-    tre_regfree(&regline);
-    tre_regfree(&eblankline);
+    endcontext(&cntxt);
+    }
+    dcf_cleanup(&di);
 
     if (!blank_skip) k++;
 
     /* and now transpose the whole matrix */
-    PROTECT(retval2 = allocMatrixNA(STRSXP, k, LENGTH(what))); nprot++;
+    retval2 = allocMatrixNA(STRSXP, k, LENGTH(what));
     copyMatrix(retval2, retval, TRUE);
 
-    PROTECT(dimnames = allocVector(VECSXP, 2)); nprot++;
-    PROTECT(dims = allocVector(INTSXP, 2)); nprot++;
+    dimnames = allocVector(VECSXP, 2);
+    dims = allocVector(INTSXP, 2);
     INTEGER(dims)[0] = k;
     INTEGER(dims)[1] = LENGTH(what);
     SET_VECTOR_ELT(dimnames, 1, what);
     setAttrib(retval2, R_DimSymbol, dims);
     setAttrib(retval2, R_DimNamesSymbol, dimnames);
-    UNPROTECT(nprot); /* what, fold_excludes, retval, retval2, dimnames, dims */
+
     return retval2;
 }
 

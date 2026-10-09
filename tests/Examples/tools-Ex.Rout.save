@@ -140,6 +140,20 @@ Warning in 'stop(do.call(errorCondition, c(list(message = msg, class = "inferior
 > 
 > 
 > cleanEx()
+> nameEx("Rcmd")
+> ### * Rcmd
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Rcmd
+> ### Title: 'R CMD' Interface
+> ### Aliases: Rcmd
+> ### Keywords: utilities
+> 
+> ### ** Examples
+> 
+> 
+> cleanEx()
 > nameEx("Rd2HTML")
 > ### * Rd2HTML
 > 

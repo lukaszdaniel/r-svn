@@ -3730,6 +3730,25 @@ stopifnot(identical(L00, ksmooth(x,y, x.points=NULL)),
 ## did seg.fault, trying to access x.points[1] from C
 
 
+## malformed ALTREP serialized class metadata
+altrep <- rawToChar(serialize(1:3, NULL, ascii = TRUE))
+marker <- "\n2\n13\n1\n13\n254\n"
+pos <- gregexpr(marker, altrep, fixed = TRUE)[[1L]]
+stopifnot(length(pos) == 1L, pos > 0L)
+replacements <- c("\n2\n13\n1\n8357\n254\n",
+                  "\n2\n14\n1\n13\n254\n",
+                  "\n2\n13\n0\n254\n")
+errs <- lapply(replacements, function(replacement) {
+    serialized <- charToRaw(sub(marker, replacement, altrep, fixed = TRUE))
+    tryCid(unserialize(serialized))
+})
+stopifnot(vapply(errs, inherits, NA, what = "error"),
+          vapply(errs, function(e)
+              grepl("invalid ALTREP serialized class", conditionMessage(e), fixed = TRUE),
+              NA))
+## an invalid type value indexed beyond Type2Table and seg.faulted
+
+
 ## lm(data = .)
 (lmd <- lm(data = swiss))
 stopifnot(all.equal(coef(lmd), tolerance = 1e-4,
@@ -3868,6 +3887,20 @@ if(englishMsgs)
                     tryCmsg(sprintf("%2147483647s", "a"))))
 ## overflowed the C stack (glibc 2.31 with printf hooks registered, as
 ## libquadmath does) or silently gave "" in R <= 4.6.x
+
+
+## memDecompress(type = "gzip") on a truncated gzip or zlib stream looped
+## forever, allocating a fresh output buffer on every pass, when R was built
+## without libdeflate (found by fuzzing)
+x <- as.raw(rep(0L, 1000))
+z <- memCompress(x, "gzip")                     # a zlib stream
+assertErrV(memDecompress(z[-length(z)], "gzip"))
+tf <- tempfile(fileext = ".gz")
+con <- gzfile(tf, "wb"); writeBin(x, con); close(con)
+g <- readBin(tf, "raw", file.size(tf)); unlink(tf) # a gzip member
+assertErrV(memDecompress(g[seq_len(length(g) - 8L)], "gzip")) # no trailer
+assertErrV(memDecompress(as.raw(c(0x78, 0x9c, 0x0a, 0x20)), "gzip"))
+## hung or exhausted memory in R <= 4.6.x
 
 
 ## the "embedded nul in string" error built its message from an unprotected
