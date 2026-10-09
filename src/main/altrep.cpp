@@ -31,6 +31,7 @@
 #endif
 
 #include <Localization.h>
+#include <cstring>
 #include <CXXR/Complex.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
@@ -478,15 +479,21 @@ attribute_hidden int R::ALTINTEGER_ELT(SEXP x, R_xlen_t i)
     return ALTINTEGER_DISPATCH(Elt, x, i);
 }
 
+static R_xlen_t get_region_length(R_xlen_t size, R_xlen_t i, R_xlen_t n)
+{
+    if (i < 0 || n <= 0 || i >= size)
+        return 0;
+    const R_xlen_t available = size - i;
+    return n < available ? n : available;
+}
+
 R_xlen_t INTEGER_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
     const int *x = INTEGER_OR_NULL(sx);
     if (x != NULL) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(int));
+	R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
+	if (ncopy > 0)
+	    std::memcpy(buf, x + i, static_cast<size_t>(ncopy) * sizeof(*buf));
 	return ncopy;
     }
     else
@@ -512,11 +519,9 @@ R_xlen_t REAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 {
     const double *x = REAL_OR_NULL(sx);
     if (x != NULL) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(double));
+	R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
+	if (ncopy > 0)
+	    std::memcpy(buf, x + i, static_cast<size_t>(ncopy) * sizeof(*buf));
 	return ncopy;
     }
     else
@@ -537,11 +542,9 @@ R_xlen_t LOGICAL_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
     const int *x = (const int *) DATAPTR_OR_NULL(sx);
     if (x != NULL) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(int));
+	R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
+	if (ncopy > 0)
+	    std::memcpy(buf, x + i, static_cast<size_t>(ncopy) * sizeof(*buf));
 	return ncopy;
     }
     else
@@ -564,11 +567,9 @@ R_xlen_t RAW_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf)
 {
     const Rbyte *x = (const Rbyte *) DATAPTR_OR_NULL(sx);
     if (x != NULL) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(int));
+	R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
+	if (ncopy > 0)
+	    std::memcpy(buf, x + i, static_cast<size_t>(ncopy) * sizeof(*buf));
 	return ncopy;
     }
     else
@@ -580,11 +581,9 @@ R_xlen_t COMPLEX_GET_REGION(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 {
     const Rcomplex *x = (const Rcomplex *) DATAPTR_OR_NULL(sx);
     if (x != NULL) {
-	R_xlen_t size = XLENGTH(sx);
-	R_xlen_t ncopy = size - i > n ? n : size - i;
-	for (R_xlen_t k = 0; k < ncopy; k++)
-	    buf[k] = x[k + i];
-	//memcpy(buf, x + i, ncopy * sizeof(int));
+	R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
+	if (ncopy > 0)
+	    std::memcpy(buf, x + i, static_cast<size_t>(ncopy) * sizeof(*buf));
 	return ncopy;
     }
     else
@@ -813,8 +812,7 @@ static int altinteger_Elt_default(SEXP x, R_xlen_t i) { return INTEGER(x)[i]; }
 
 static R_xlen_t altinteger_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
-    R_xlen_t size = XLENGTH(sx);
-    R_xlen_t ncopy = size - i > n ? n : size - i;
+    R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
     for (R_xlen_t k = 0; k < ncopy; k++)
 	buf[k] = INTEGER_ELT(sx, k + i);
     return ncopy;
@@ -831,8 +829,7 @@ static double altreal_Elt_default(SEXP x, R_xlen_t i) { return REAL(x)[i]; }
 
 static R_xlen_t altreal_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, double *buf)
 {
-    R_xlen_t size = XLENGTH(sx);
-    R_xlen_t ncopy = size - i > n ? n : size - i;
+    R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
     for (R_xlen_t k = 0; k < ncopy; k++)
 	buf[k] = REAL_ELT(sx, k + i);
     return ncopy;
@@ -849,8 +846,7 @@ static int altlogical_Elt_default(SEXP x, R_xlen_t i) { return LOGICAL(x)[i]; }
 
 static R_xlen_t altlogical_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, int *buf)
 {
-    R_xlen_t size = XLENGTH(sx);
-    R_xlen_t ncopy = size - i > n ? n : size - i;
+    R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
     for (R_xlen_t k = 0; k < ncopy; k++)
 	buf[k] = LOGICAL_ELT(sx, k + i);
     return ncopy;
@@ -866,8 +862,7 @@ static Rbyte altraw_Elt_default(SEXP x, R_xlen_t i) { return RAW(x)[i]; }
 
 static R_xlen_t altraw_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, Rbyte *buf)
 {
-    R_xlen_t size = XLENGTH(sx);
-    R_xlen_t ncopy = size - i > n ? n : size - i;
+    R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
     for (R_xlen_t k = 0; k < ncopy; k++)
 	buf[k] = RAW_ELT(sx, k + i);
     return ncopy;
@@ -881,8 +876,7 @@ static Rcomplex altcomplex_Elt_default(SEXP x, R_xlen_t i)
 
 static R_xlen_t altcomplex_Get_region_default(SEXP sx, R_xlen_t i, R_xlen_t n, Rcomplex *buf)
 {
-    R_xlen_t size = XLENGTH(sx);
-    R_xlen_t ncopy = size - i > n ? n : size - i;
+    R_xlen_t ncopy = get_region_length(XLENGTH(sx), i, n);
     for (R_xlen_t k = 0; k < ncopy; k++)
 	buf[k] = COMPLEX_ELT(sx, k + i);
     return ncopy;

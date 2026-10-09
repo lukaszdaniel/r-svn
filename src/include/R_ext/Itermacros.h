@@ -30,14 +30,16 @@
 #define R_EXT_ITERMACROS_H_
 
 #define LOOP_WITH_INTERRUPT_CHECK(LOOP, ncheck, n, ...) do {		\
-	for (R_xlen_t __intr_threshold__ = ncheck;			\
-	     TRUE;							\
-	     __intr_threshold__ += ncheck) {				\
-	    R_xlen_t __intr_end__ = n < __intr_threshold__ ?		\
-		n : __intr_threshold__;					\
+	R_xlen_t __intr_n__ = (n);					\
+	R_xlen_t __intr_step__ = (ncheck);				\
+	for (R_xlen_t __intr_threshold__ = __intr_step__;		\
+	     TRUE;) {							\
+	    R_xlen_t __intr_end__ = __intr_n__ < __intr_threshold__ ?	\
+		__intr_n__ : __intr_threshold__;			\
 	    LOOP(__intr_end__, __VA_ARGS__);				\
-	    if (__intr_end__ == n) break;				\
-	    else R_CheckUserInterrupt();				\
+	    if (__intr_end__ == __intr_n__) break;			\
+	    R_CheckUserInterrupt();					\
+	    __intr_threshold__ += __intr_step__;			\
 	}								\
     } while (0)
 
@@ -47,7 +49,7 @@
 
 #define R_ITERATE(n, i, loop_body) do {		\
 	i = 0;					\
-	R_ITERATE_CORE(n, i, loop_body);		\
+	R_ITERATE_CORE(n, i, loop_body);	\
     } while (0)
 
 #define R_ITERATE_CHECK(ncheck, n, i, loop_body) do {			\
@@ -78,11 +80,11 @@
 										  ++i)
 
 #define MOD_ITERATE1_CORE(n, n1, i, i1, loop_body) do {	\
-	for (; i < n;							\
-	     i1 = (++i1 == n1) ? 0 : i1,				\
-		 ++i) {							\
-	    loop_body							\
-		}							\
+	for (; i < n;					\
+	     i1 = (++i1 == n1) ? 0 : i1,		\
+		 ++i) {					\
+	    loop_body					\
+		}					\
     } while (0)
 
 #define MOD_ITERATE1(n, n1, i, i1, loop_body) do {	\
@@ -163,7 +165,7 @@
 			   loop_body)					\
     do {								\
 	i = i1 = i2 = i3 = i4 = 0;					\
-	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE4_CORE, ncheck, n,	\
+	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE4_CORE, ncheck, n,		\
 				  n1, n2, n3, n4,			\
 				  i, i1, i2, i3, i4, loop_body);	\
     } while (0)
@@ -189,12 +191,12 @@
 			  loop_body);					\
     } while (0)
 
-#define MOD_ITERATE5_CHECK(ncheck, n, n1, n2, n3, n4, n5, \
+#define MOD_ITERATE5_CHECK(ncheck, n, n1, n2, n3, n4, n5,		\
 			   i, i1, i2, i3, i4, i5,			\
 			   loop_body)					\
     do {								\
 	i = i1 = i2 = i3 = i4 = i5 = 0;					\
-	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE5_CORE, ncheck, n,	\
+	LOOP_WITH_INTERRUPT_CHECK(MOD_ITERATE5_CORE, ncheck, n,		\
 				  n1, n2, n3, n4, n5,			\
 				  i, i1, i2, i3, i4, i5, loop_body);	\
     } while (0)

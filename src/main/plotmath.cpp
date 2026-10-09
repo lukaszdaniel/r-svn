@@ -610,7 +610,7 @@ static bool StringMatch(SEXP expr, const char *aString)
 
 /* The Full Adobe Symbol Font */
 
-static SymTab
+static constexpr SymTab
 SymbolTable[] = {
     { "space",		 32 },
     { "exclam",		 33 },
@@ -2596,8 +2596,7 @@ static BBOX RenderCurly(SEXP expr, int draw, mathContext *mc,
  */
 
 				/* Binary Relationships */
-static
-SymTab RelTable[] = {
+static constexpr SymTab RelTable[] = {
     { "<",		 60 },	/* less */
     { "==",		 61 },	/* equal */
     { ">",		 62 },	/* greater */

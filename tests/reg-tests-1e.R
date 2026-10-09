@@ -3732,12 +3732,12 @@ stopifnot(identical(L00, ksmooth(x,y, x.points=NULL)),
 
 ## malformed ALTREP serialized class metadata
 altrep <- rawToChar(serialize(1:3, NULL, ascii = TRUE))
-marker <- "\n2\n13\n1\n13\n254\n"
+marker <- "type\n13\n1\n13\n254\n"
 pos <- gregexpr(marker, altrep, fixed = TRUE)[[1L]]
 stopifnot(length(pos) == 1L, pos > 0L)
-replacements <- c("\n2\n13\n1\n8357\n254\n",
-                  "\n2\n14\n1\n13\n254\n",
-                  "\n2\n13\n0\n254\n")
+replacements <- c("type\n13\n1\n8357\n254\n",
+                  "type\n14\n1\n13\n254\n",
+                  "type\n13\n0\n254\n")
 errs <- lapply(replacements, function(replacement) {
     serialized <- charToRaw(sub(marker, replacement, altrep, fixed = TRUE))
     tryCid(unserialize(serialized))

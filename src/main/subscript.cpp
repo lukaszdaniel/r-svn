@@ -167,22 +167,23 @@ attribute_hidden R_xlen_t R::OneIndex(SEXP x, SEXP s, R_xlen_t nx, int partial, 
 	names = getAttrib(x, R_NamesSymbol);
 	if (names != R_NilValue) {
 	    PROTECT(names);
+	    const char *sub_name = translateChar(STRING_ELT(s, pos));
 	    /* Try for exact match */
 	    for (i = 0; i < nx; i++) {
 		const char *tmp = translateChar(STRING_ELT(names, i));
 		if (!tmp[0]) continue;
-		if (streql(tmp, translateChar(STRING_ELT(s, pos)))) {
+		if (streql(tmp, sub_name)) {
 		    indx = i;
 		    break;
 		}
 	    }
 	    // Try for partial match -- not ever used in current R (partial is 0)
 	    if (partial && indx < 0) {
-		size_t l = strlen(translateChar(STRING_ELT(s, pos)));
+		size_t l = strlen(sub_name);
 		for (i = 0; i < nx; i++) {
 		    const char *tmp = translateChar(STRING_ELT(names, i));
 		    if (!tmp[0]) continue;
-		    if (streqln(tmp, translateChar(STRING_ELT(s, pos)), l)) {
+		    if (streqln(tmp, sub_name, l)) {
 			if (indx == -1 )
 			    indx = i;
 			else
@@ -242,13 +243,14 @@ attribute_hidden R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok
     if (warn_pok)
 	pok = 1;
 
-    if (pos < 0 && length(s) != 1) {
-	if (length(s) > 1) {
+    int sub_len = length(s);
+    if (pos < 0 && sub_len != 1) {
+	if (sub_len > 1) {
 	    ECALL3(call, _("attempt to select more than one element in %s"), "get1index");
 	} else {
 	    ECALL3(call, _("attempt to select less than one element in %s"), "get1index");
 	}
-    } else if(pos >= length(s)) {
+    } else if(pos >= sub_len) {
 	ECALL(call, _("internal error in use of recursive indexing"));
     }
     if(pos < 0) pos = 0;
@@ -301,7 +303,8 @@ attribute_hidden R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok
 	/* Try for exact match */
 	CXXR::RAllocStack::Scope rscope;
 	const char *ss = translateChar(STRING_ELT(s, pos));
-	for (R_xlen_t i = 0; i < xlength(names); i++)
+	R_xlen_t names_len = xlength(names);
+	for (R_xlen_t i = 0; i < names_len; i++)
 	    if (STRING_ELT(names, i) != NA_STRING) {
 		if (streql(translateChar(STRING_ELT(names, i)), ss)) {
 		    indx = i;
@@ -311,7 +314,7 @@ attribute_hidden R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok
 	/* Try for partial match */
 	if (pok && indx < 0) {
 	    size_t len = strlen(ss);
-	    for (R_xlen_t i = 0; i < xlength(names); i++) {
+	    for (R_xlen_t i = 0; i < names_len; i++) {
 		if (STRING_ELT(names, i) != NA_STRING) {
 		    cur_name = translateChar(STRING_ELT(names, i));
 		    if (streqln(cur_name, ss, len)) {
@@ -345,14 +348,18 @@ attribute_hidden R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok
 	if (s == R_MissingArg) {
 	    ECALL_MissingSubs(call);
 	}
-	for (R_xlen_t i = 0; i < xlength(names); i++)
-	    if (STRING_ELT(names, i) != NA_STRING &&
-		streql(translateChar(STRING_ELT(names, i)),
-		       CHAR(PRINTNAME(s)))) {
-		CXXR::RAllocStack::Scope rscope;
-		indx = i;
-		break;
-	    }
+	{
+	    const char *symbol_name = CHAR(PRINTNAME(s));
+	    R_xlen_t names_len = xlength(names);
+	    for (R_xlen_t i = 0; i < names_len; i++)
+		if (STRING_ELT(names, i) != NA_STRING &&
+		    streql(translateChar(STRING_ELT(names, i)),
+			   symbol_name)) {
+		    CXXR::RAllocStack::Scope rscope;
+		    indx = i;
+		    break;
+		}
+	}
 	break;
     default:
 	ECALL3(call, _("invalid subscript type '%s'"), R_typeToChar(s));
@@ -561,8 +568,6 @@ attribute_hidden SEXP R::strmat2intmat(SEXP s, SEXP dnamelist, SEXP call, SEXP x
     SEXP si = PROTECT(IntVector::create(xlength(s)));
     dimgets(si, dim);
     int *psi = INTEGER(si);
-    if (XLENGTH(si))
-	memset(psi, 0, XLENGTH(si) * sizeof(int));
     for (int i = 0; i < nc; i++) {
 	R_xlen_t iNR = i * (R_xlen_t) nr;
 	for (int j = 0; j < nr; j++)

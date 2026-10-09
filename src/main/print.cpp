@@ -72,6 +72,7 @@
 #endif
 
 #include <Localization.h>
+#include <charconv>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
@@ -427,6 +428,16 @@ static void PrintDispatch(SEXP s, R_PrintData *data) {
 	PrintValueRec(s, data);
 }
 
+static void PrintTypeLength(char *buffer, size_t buffer_size,
+			    const char *type, int length)
+{
+    size_t type_len = strlen(type);
+    memcpy(buffer, type, type_len);
+    buffer[type_len++] = ',';
+    auto result = std::to_chars(buffer + type_len, buffer + buffer_size, length);
+    *result.ptr = '\0';
+}
+
 static void PrintGenericVector(SEXP s, R_PrintData *data)
 {
     R_xlen_t ns = XLENGTH(s), i;
@@ -439,20 +450,23 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 	for (i = 0; i < ns; i++) {
 	    SEXP s_i = PROTECT(VECTOR_ELT(s, i));
 	    char pbuf[115];
+	    const char *pstr = NULL;
 	    if(isObject(s_i)) {
 		const char *str;
 		bool use_fmt = false;
+		size_t str_len = 0;
 		SEXP fun = PROTECT(findFun(install("format"),
 					   R_BaseNamespace));
 		SEXP call = PROTECT(lang2(fun, s_i));
 		SEXP ans = PROTECT(eval(call, data->env));
 		if(TYPEOF(ans) == STRSXP && LENGTH(ans) == 1) {
 		    str = translateChar(STRING_ELT(ans, 0));
-		    if(strlen(str) < 100)
+		    str_len = strlen(str);
+		    if(str_len < 100)
 			use_fmt = true;
 		}
 		if(use_fmt)
-		    snprintf(pbuf, 115, "%s", str);
+		    memcpy(pbuf, str, str_len + 1);
 		else {
 		    SEXP cls = PROTECT(R_data_class2(s_i));
 		    Rsnprintf_mbcs(pbuf, 115, "%s,%d",
@@ -463,29 +477,27 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 		UNPROTECT(3);
 	    } else switch(TYPEOF(s_i)) {
 	    case NILSXP:
-		snprintf(pbuf, 115, "NULL");
+		pstr = "NULL";
 		break;
 	    case LGLSXP:
 		if (LENGTH(s_i) == 1) {
 		    const int *x = LOGICAL_RO(s_i); int w;
 		    formatLogical(x, 1, &w);
-		    snprintf(pbuf, 115, "%s",
-			     EncodeLogical(x[0], w));
+		    pstr = EncodeLogical(x[0], w);
 		} else
-		    snprintf(pbuf, 115, "logical,%d", LENGTH(s_i));
+		    PrintTypeLength(pbuf, sizeof pbuf, "logical", LENGTH(s_i));
 		break;
 	    case INTSXP:
 		/* factors are stored as integers */
 		if (inherits(s_i, "factor")) {
-		    snprintf(pbuf, 115, "factor,%d", LENGTH(s_i));
+		    PrintTypeLength(pbuf, sizeof pbuf, "factor", LENGTH(s_i));
 		} else {
 		    if (LENGTH(s_i) == 1) {
 			const int *x = INTEGER_RO(s_i); int w;
 			formatInteger(x, 1, &w);
-			snprintf(pbuf, 115, "%s",
-				 EncodeInteger(x[0], w));
+			pstr = EncodeInteger(x[0], w);
 		    } else
-			snprintf(pbuf, 115, "integer,%d", LENGTH(s_i));
+			PrintTypeLength(pbuf, sizeof pbuf, "integer", LENGTH(s_i));
 		}
 		break;
 	    case REALSXP:
@@ -493,35 +505,35 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 		    const double *x = REAL_RO(s_i);
 		    int w, d, e;
 		    formatReal(x, 1, &w, &d, &e, 0);
-		    snprintf(pbuf, 115, "%s",
-			     EncodeReal0(x[0], w, d, e, OutDec));
+		    pstr = EncodeReal0(x[0], w, d, e, OutDec);
 		} else
-		    snprintf(pbuf, 115, "numeric,%d", LENGTH(s_i));
+		    PrintTypeLength(pbuf, sizeof pbuf, "numeric", LENGTH(s_i));
 		break;
 	    case CPLXSXP: 
 		if (LENGTH(s_i) == 1) {
 		    const Rcomplex *x = COMPLEX_RO(s_i);
 		    if (ISNA(x[0].r) || ISNA(x[0].i))
 			/* formatReal(NA) --> w=data->na_width, d=0, e=0 */
-			snprintf(pbuf, 115, "%s",
-				 EncodeReal0(NA_REAL, data->na_width, 0, 0, OutDec));
+			pstr = EncodeReal0(NA_REAL, data->na_width, 0, 0, OutDec);
 		    else {
 			int wr, dr, er, wi, di, ei;
 			formatComplex(x, 1, &wr, &dr, &er, &wi, &di, &ei, 0);
-			snprintf(pbuf, 115, "%s",
-				 EncodeComplex(x[0],
-					       wr, dr, er, wi, di, ei, OutDec));
+			pstr = EncodeComplex(x[0], wr, dr, er, wi, di, ei, OutDec);
 		    }
 		} else
-		snprintf(pbuf, 115, "complex,%d", LENGTH(s_i));
+		    PrintTypeLength(pbuf, sizeof pbuf, "complex", LENGTH(s_i));
 		break;
 	    case STRSXP:
 		if (LENGTH(s_i) == 1) {
 		    CXXR::RAllocStack::Scope rscope;
 		    const char *ctmp = translateChar(STRING_ELT(s_i, 0));
 		    int len = (int) strlen(ctmp);
-		    if(len < 100)
-			snprintf(pbuf, 115, "\"%s\"", ctmp);
+		    if(len < 100) {
+			pbuf[0] = '"';
+			memcpy(pbuf + 1, ctmp, len);
+			pbuf[len + 1] = '"';
+			pbuf[len + 2] = '\0';
+		    }
 		    else {
 			Rsnprintf_mbcs(pbuf, 101, "\"%s\"", ctmp);
 			size_t pbuflen = strlen(pbuf);
@@ -529,25 +541,35 @@ static void PrintGenericVector(SEXP s, R_PrintData *data)
 			strcat(pbuf, " [truncated]");
 		    }
 		} else
-		snprintf(pbuf, 115, "character,%d", LENGTH(s_i));
+		    PrintTypeLength(pbuf, sizeof pbuf, "character", LENGTH(s_i));
 		break;
 	    case RAWSXP:
-		snprintf(pbuf, 115, "raw,%d", LENGTH(s_i));
+		PrintTypeLength(pbuf, sizeof pbuf, "raw", LENGTH(s_i));
 		break;
 	    case LISTSXP:
 	    case VECSXP:
-		snprintf(pbuf, 115, "list,%d", length(s_i));
+		PrintTypeLength(pbuf, sizeof pbuf, "list", length(s_i));
 		break;
 	    case LANGSXP:
-		snprintf(pbuf, 115, "expression");
+		pstr = "expression";
 		break;
 	    default:
-		snprintf(pbuf, 115, "?");
+		pstr = "?";
 		break;
 	    }
 	    UNPROTECT(1); /* s_i */
 	    pbuf[114] = '\0';
-	    SET_STRING_ELT(t, i, mkChar(pbuf));
+	    if (pstr) {
+		size_t len = strlen(pstr);
+		if (len < sizeof pbuf)
+		    SET_STRING_ELT(t, i, mkChar(pstr));
+		else {
+		    memcpy(pbuf, pstr, sizeof pbuf - 1);
+		    pbuf[sizeof pbuf - 1] = '\0';
+		    SET_STRING_ELT(t, i, mkChar(pbuf));
+		}
+	    } else
+		SET_STRING_ELT(t, i, mkChar(pbuf));
 	}
 	if (LENGTH(dims) == 2) {
 	    SEXP rl, cl;
@@ -679,47 +701,48 @@ static void printList(SEXP s, R_PrintData *data)
 	PROTECT(t = allocArray(STRSXP, dims));
 	i = 0;
 	while(s != R_NilValue) {
+	    const char *pstr = NULL;
 	    switch(TYPEOF(CAR(s))) {
 
 	    case NILSXP:
-		snprintf(pbuf, 100, "NULL");
+		pstr = "NULL";
 		break;
 
 	    case LGLSXP:
-		snprintf(pbuf, 100, "logical,%d", LENGTH(CAR(s)));
+		PrintTypeLength(pbuf, sizeof pbuf, "logical", LENGTH(CAR(s)));
 		break;
 
 	    case INTSXP:
 	    case REALSXP:
-		snprintf(pbuf, 100, "numeric,%d", LENGTH(CAR(s)));
+		PrintTypeLength(pbuf, sizeof pbuf, "numeric", LENGTH(CAR(s)));
 		break;
 
 	    case CPLXSXP:
-		snprintf(pbuf, 100, "complex,%d", LENGTH(CAR(s)));
+		PrintTypeLength(pbuf, sizeof pbuf, "complex", LENGTH(CAR(s)));
 		break;
 
 	    case STRSXP:
-		snprintf(pbuf, 100, "character,%d", LENGTH(CAR(s)));
+		PrintTypeLength(pbuf, sizeof pbuf, "character", LENGTH(CAR(s)));
 		break;
 
 	    case RAWSXP:
-		snprintf(pbuf, 100, "raw,%d", LENGTH(CAR(s)));
+		PrintTypeLength(pbuf, sizeof pbuf, "raw", LENGTH(CAR(s)));
 		break;
 
 	    case LISTSXP:
-		snprintf(pbuf, 100, "list,%d", length(CAR(s)));
+		PrintTypeLength(pbuf, sizeof pbuf, "list", length(CAR(s)));
 		break;
 
 	    case LANGSXP:
-		snprintf(pbuf, 100, "expression");
+		pstr = "expression";
 		break;
 
 	    default:
-		snprintf(pbuf, 100, "?");
+		pstr = "?";
 		break;
 	    }
 	    pbuf[100] ='\0';
-	    SET_STRING_ELT(t, i++, mkChar(pbuf));
+	    SET_STRING_ELT(t, i++, mkChar(pstr ? pstr : pbuf));
 	    s = CDR(s);
 	}
 	if (LENGTH(dims) == 2) {
@@ -1010,14 +1033,17 @@ static void printAttributes(SEXP s, R_PrintData *data, bool useSlots)
     a = ATTRIB(s);
     if (a != R_NilValue) {
 	/* guard against cycles through attributes on environments */
-	if (strlen(tagbuf) > TAGBUFLEN0)
+	size_t taglen = strlen(tagbuf);
+	if (taglen > TAGBUFLEN0)
 	    error("%s", _("print buffer overflow"));
 	save_tagbuf(save, sizeof save);
 	/* remove the tag if it looks like a list not an attribute */
-	if (strlen(tagbuf) > 0 &&
-	    *(tagbuf + strlen(tagbuf) - 1) != ')')
+	if (taglen > 0 && tagbuf[taglen - 1] != ')') {
 	    tagbuf[0] = '\0';
-	ptag = tagbuf + strlen(tagbuf);
+	    taglen = 0;
+	}
+	ptag = tagbuf + taglen;
+	size_t space = TAGBUFLEN0 - taglen;
 	while (a != R_NilValue) {
 	    if(useSlots && TAG(a) == R_ClassSymbol)
 		    goto nextattr;
@@ -1044,12 +1070,10 @@ static void printAttributes(SEXP s, R_PrintData *data, bool useSlots)
 	       || TAG(a) == R_WholeSrcrefSymbol || TAG(a) == R_SrcfileSymbol)
 		goto nextattr;
 	    if(useSlots) {
-		size_t space = TAGBUFLEN0 - strlen(tagbuf);
 		Rsnprintf_mbcs(ptag, space,
 			       "Slot \"%s\":", EncodeChar(PRINTNAME(TAG(a))));
 	    }
 	    else {
-		size_t space = TAGBUFLEN0 - strlen(tagbuf);
 		Rsnprintf_mbcs(ptag, space,
 			       "attr(,\"%s\")", EncodeChar(PRINTNAME(TAG(a))));
 	    }

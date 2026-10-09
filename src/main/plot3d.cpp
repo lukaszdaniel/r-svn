@@ -35,10 +35,12 @@
 #include <cfloat>  /* for DBL_MAX */
 #include <R_ext/Boolean.h>
 #include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ListVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -60,13 +62,13 @@ using namespace CXXR;
 #define CONTOUR_LIST_Y 2
 
 static SEXP growList(SEXP oldlist) {
-    int i, len;
-    SEXP templist;
-    len = LENGTH(oldlist);
-    templist = PROTECT(ListVector::create(len + CONTOUR_LIST_STEP));
-    for (i=0; i<len; i++)
+
+    GCStackRoot<> templist;
+    int len = LENGTH(oldlist);
+    templist = ListVector::create(len + CONTOUR_LIST_STEP);
+    for (int i = 0; i<len; i++)
 	SET_VECTOR_ELT(templist, i, VECTOR_ELT(oldlist, i));
-    UNPROTECT(1);
+
     return templist;
 }
 
@@ -80,9 +82,9 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		     SEGP* segmentDB, int nlines, SEXP container)
 {
     double xend, yend;
-    int i, ii, j, jj, ns, dir, nc;
+    int ii, jj, ns, dir, nc;
     SEGP seglist, seg, s, start, end;
-    SEXP ctr, level, xsxp, ysxp, names;
+    GCStackRoot<> ctr, level, xsxp, ysxp, names;
 /// NB: The following is very much the same as in contour() in ../library/graphics/src/plot3d.c
 
     /* Begin following contours. */
@@ -90,8 +92,8 @@ int addContourLines(double *x, int nx, double *y, int ny,
     /* 2. Follow its tail */
     /* 3. Follow its head */
     /* 4. Save the contour */
-    for (i = 0; i < nx - 1; i++)
-	for (j = 0; j < ny - 1; j++) {
+    for (int i = 0; i < nx - 1; i++)
+	for (int j = 0; j < ny - 1; j++) {
 	    while ((seglist = segmentDB[i + j * nx])) {
 		ii = i; jj = j;
 		start = end = seglist;
@@ -139,10 +141,10 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		/*
 		 * "write" the contour locations into the list of contours
 		 */
-		ctr = PROTECT(ListVector::create(3));
-		level = PROTECT(RealVector::createScalar(zc));
-		xsxp = PROTECT(RealVector::create(ns + 1));
-		ysxp = PROTECT(RealVector::create(ns + 1));
+		ctr = ListVector::create(3);
+		level = RealVector::createScalar(zc);
+		xsxp = RealVector::create(ns + 1);
+		ysxp = RealVector::create(ns + 1);
 		SET_VECTOR_ELT(ctr, CONTOUR_LIST_LEVEL, level);
 		s = start;
 		REAL(xsxp)[0] = s->x0;
@@ -162,7 +164,7 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		 * So that users can extract components using
 		 * meaningful names
 		 */
-		PROTECT(names = allocVector(STRSXP, 3));
+		names = StringVector::create(3);
 		SET_STRING_ELT(names, 0, mkChar("level"));
 		SET_STRING_ELT(names, 1, mkChar("x"));
 		SET_STRING_ELT(names, 2, mkChar("y"));
@@ -177,7 +179,6 @@ int addContourLines(double *x, int nx, double *y, int ny,
 		    SET_VECTOR_ELT(container, 0,
 				   growList(VECTOR_ELT(container, 0)));
 		SET_VECTOR_ELT(VECTOR_ELT(container, 0), nlines - 1, ctr);
-		UNPROTECT(5);
 	    }
 	}
     return nlines;
@@ -193,16 +194,17 @@ int addContourLines(double *x, int nx, double *y, int ny,
 SEXP GEcontourLines(double *x, int nx, double *y, int ny,
 		    double *z, double *levels, int nl)
 {
-    int i, nlines, len;
+    int nlines, len;
     double atom, zmin, zmax;
     SEGP* segmentDB;
-    SEXP container, mainlist, templist;
+    SEXP mainlist;
+    GCStackRoot<> container, templist;
     /*
      * "tie-breaker" values
      */
     zmin = DBL_MAX;
     zmax = DBL_MIN;
-    for (i = 0; i < nx * ny; i++)
+    for (int i = 0; i < nx * ny; i++)
 	if (R_FINITE(z[i])) {
 	    if (zmax < z[i]) zmax =  z[i];
 	    if (zmin > z[i]) zmin =  z[i];
@@ -233,7 +235,7 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
      * grow and it's awkward to get the PROTECTs/UNPROTECTs right
      * when you're in a loop and growing a list.
      */
-    container = PROTECT(ListVector::create(1));
+    container = ListVector::create(1);
     /*
      * Create "large" list (will trim excess at the end if necessary)
      */
@@ -242,7 +244,7 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
     /*
      * Add lines for each contour level
      */
-    for (i = 0; i < nl; i++) {
+    for (int i = 0; i < nl; i++) {
 	/*
 	 * The vmaxget/set is to manage the memory that gets
 	 * R_alloc'ed in the creation of the segmentDB structure
@@ -265,40 +267,37 @@ SEXP GEcontourLines(double *x, int nx, double *y, int ny,
     len = LENGTH(VECTOR_ELT(container, 0));
     if (nlines < len) {
 	mainlist = VECTOR_ELT(container, 0);
-	templist = PROTECT(ListVector::create(nlines));
-	for (i=0; i<nlines; i++)
+	templist = ListVector::create(nlines);
+	for (int i=0; i<nlines; i++)
 	    SET_VECTOR_ELT(templist, i, VECTOR_ELT(mainlist, i));
 	mainlist = templist;
-	UNPROTECT(1);  /* UNPROTECT templist */
     } else
 	mainlist = VECTOR_ELT(container, 0);
-    UNPROTECT(1);  /* UNPROTECT container */
+
     return mainlist;
 }
 
 /* This is for contourLines() in package grDevices */
 SEXP do_contourLines(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP c, x, y, z;
+    GCStackRoot<> c, x, y, z;
     int nx, ny, nc;
 
-    x = PROTECT(coerceVector(CAR(args), REALSXP));
+    x = coerceVector(CAR(args), REALSXP);
     nx = LENGTH(x);
     args = CDR(args);
 
-    y = PROTECT(coerceVector(CAR(args), REALSXP));
+    y = coerceVector(CAR(args), REALSXP);
     ny = LENGTH(y);
     args = CDR(args);
 
-    z = PROTECT(coerceVector(CAR(args), REALSXP));
+    z = coerceVector(CAR(args), REALSXP);
     args = CDR(args);
 
     /* levels */
-    c = PROTECT(coerceVector(CAR(args), REALSXP));
+    c = coerceVector(CAR(args), REALSXP);
     nc = LENGTH(c);
     args = CDR(args);
 
-    SEXP res = GEcontourLines(REAL(x), nx, REAL(y), ny, REAL(z), REAL(c), nc);
-    UNPROTECT(4);
-    return res;
+    return GEcontourLines(REAL(x), nx, REAL(y), ny, REAL(z), REAL(c), nc);
 }
