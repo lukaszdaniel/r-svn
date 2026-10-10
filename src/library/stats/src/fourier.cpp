@@ -22,6 +22,7 @@
    fft_factor() & fft_work() in fft.c. */
 
 #include <cinttypes> // for PRIu64
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
@@ -224,18 +225,20 @@ static uint64_t nextn0_64(uint64_t n, const int f[], int nf)
 }
 
 
-SEXP nextn(SEXP n, SEXP f)
+SEXP nextn(SEXP n_, SEXP f_)
 {
-    if(TYPEOF(n) == NILSXP) // NULL <==> integer(0) :
+    if(TYPEOF(n_) == NILSXP) // NULL <==> integer(0) :
 	return allocVector(INTSXP, 0);
-    int nprot = 0;
-    if(TYPEOF(f) != INTSXP) { PROTECT(f = coerceVector(f, INTSXP)); nprot++; }
-    int nf = LENGTH(f), *f_ = INTEGER(f);
+    CXXR::GCStackRoot<> n(n_), f(f_), ans;
+    if(TYPEOF(f) != INTSXP)
+	f = coerceVector(f, INTSXP);
+    int nf = LENGTH(f);
+    int *factors = INTEGER(f);
     /* check the factors */
     if (nf == 0) error("%s", _("no factors"));
     if (nf <  0) error("%s", _("too many factors")); // < 0 : from integer overflow
     for (int i = 0; i < nf; i++)
-	if (f_[i] == NA_INTEGER || f_[i] <= 1)
+	if (factors[i] == NA_INTEGER || factors[i] <= 1)
 	    error("%s", _("invalid factors"));
 
     bool use_int = (TYPEOF(n) == INTSXP);
@@ -247,16 +250,14 @@ SEXP nextn(SEXP n, SEXP f)
 	for (R_xlen_t i = 0; i < nn; i++) {
 	    if (!ISNAN(d_n[i]) && d_n[i] > n_max) n_max = d_n[i];
 	}
-	if(n_max <= INT_MAX / f_[0]) { // maximal n[] should not be too large to find "next n"
+	if(n_max <= INT_MAX / factors[0]) { // maximal n[] should not be too large to find "next n"
 	    use_int = true;
-	    n = PROTECT(n = coerceVector(n, INTSXP)); nprot++;
+	    n = coerceVector(n, INTSXP);
 	}
     }
-    SEXP ans = PROTECT(allocVector(use_int ? INTSXP : REALSXP, nn)); nprot++;
-    if(nn == 0) {
-	UNPROTECT(nprot);
+    ans = allocVector(use_int ? INTSXP : REALSXP, nn);
+    if(nn == 0)
 	return(ans);
-    }
     if(use_int) {
 	int *n_ = INTEGER(n),
 	    *r  = INTEGER(ans);
@@ -266,7 +267,7 @@ SEXP nextn(SEXP n, SEXP f)
 	    else if (n_[i] <= 1)
 		r[i] = 1;
 	    else
-		r[i] = nextn0(n_[i], f_, nf);
+		r[i] = nextn0(n_[i], factors, nf);
 	}
     } else { // use "double" (as R has no int64 ..)
 	double
@@ -279,7 +280,7 @@ SEXP nextn(SEXP n, SEXP f)
 		r[i] = 1;
 	    else {
 		constexpr uint64_t max_dbl_int = 9007199254740992L; // = 2^53
-		uint64_t n_n = nextn0_64((uint64_t)n_[i], f_, nf);
+		uint64_t n_n = nextn0_64((uint64_t)n_[i], factors, nf);
 		if(n_n > max_dbl_int)
 		    warning(_("nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"),
 			    (unsigned long long)n_n);
@@ -287,6 +288,5 @@ SEXP nextn(SEXP n, SEXP f)
 	    }
 	}
     }
-    UNPROTECT(nprot);
     return ans;
 }

@@ -888,7 +888,7 @@ attribute_hidden SEXP R::R_data_class2(SEXP obj)
 	SEXP dim = getAttrib(obj, R_DimSymbol);
 	int n = length(dim);
 	SEXPTYPE t = TYPEOF(obj);
-	SEXP defaultClass;
+	GCStackRoot<> defaultClass;
 
 	switch (n) {
 	case 0:  defaultClass = Type2DefaultClass[t].vector; break;
@@ -910,17 +910,16 @@ attribute_hidden SEXP R::R_data_class2(SEXP obj)
 	 * __FIXME / TODO__ ??
 	 * warning("R_data_class2(<LANGSXP with \"dim\" attribute>) .. please report!");
 	 */
-	int I_mat = (n == 2) ? 1 : 0,
-	    nprot = 2;  /* part1, defaultClass */
-	defaultClass = PROTECT(StringVector::create(2 + I_mat));
-	SEXP part1 = PROTECT(mkChar("array")), part2;
+	int I_mat = (n == 2) ? 1 : 0;
+	defaultClass = StringVector::create(2 + I_mat);
+	GCStackRoot<> part1, part2;
+	part1 = mkChar("array");
 	SET_STRING_ELT(defaultClass, 0, part1);
 	if (n == 2) {
-	    part2 = PROTECT(mkChar("matrix")); nprot++;
+	    part2 = mkChar("matrix");
 	    SET_STRING_ELT(defaultClass, 1, part2);
 	}
 	SET_STRING_ELT(defaultClass, 1+I_mat, lang2str(obj));
-	UNPROTECT(nprot);
 	return defaultClass;
     }
 }

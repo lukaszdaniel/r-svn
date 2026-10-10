@@ -2385,8 +2385,9 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans, x, snr, snc;
-    int nr = 1, nc = 1, nprotect = 1;
+    GCStackRoot<> ans, x;
+    SEXP snr, snc;
+    int nr = 1, nc = 1;
 
     checkArity(op, args);
     x = CAR(args);
@@ -2429,7 +2430,7 @@ attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
    case REALSXP:
    {
 #define mk_REAL_DIAG					\
-       PROTECT(ans = allocMatrix(REALSXP, nr, nc));	\
+       ans = allocMatrix(REALSXP, nr, nc);		\
        double *rx = REAL(x), *ra = REAL(ans);		\
        mk_DIAG(0.0)
 
@@ -2438,7 +2439,7 @@ attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
    }
    case CPLXSXP:
    {
-       PROTECT(ans = allocMatrix(CPLXSXP, nr, nc));
+       ans = allocMatrix(CPLXSXP, nr, nc);
        int nx = LENGTH(x);
        R_xlen_t NR = nr;
        Complex *rx = CXXR_COMPLEX(x), *ra = CXXR_COMPLEX(ans), zero;
@@ -2448,34 +2449,32 @@ attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
    }
    case INTSXP:
    {
-       PROTECT(ans = allocMatrix(INTSXP, nr, nc));
+       ans = allocMatrix(INTSXP, nr, nc);
        int *rx = INTEGER(x), *ra = INTEGER(ans);
        mk_DIAG(0);
        break;
    }
    case LGLSXP:
    {
-       PROTECT(ans = allocMatrix(LGLSXP, nr, nc));
+       ans = allocMatrix(LGLSXP, nr, nc);
        int *rx = LOGICAL(x), *ra = LOGICAL(ans);
        mk_DIAG(0);
        break;
    }
    case RAWSXP:
    {
-       PROTECT(ans = allocMatrix(RAWSXP, nr, nc));
+       ans = allocMatrix(RAWSXP, nr, nc);
        Rbyte *rx = RAW(x), *ra = RAW(ans);
        mk_DIAG((Rbyte) 0);
        break;
    }
    default: {
-       PROTECT(x = coerceVector(x, REALSXP));
-       nprotect++;
+       x = coerceVector(x, REALSXP);
        mk_REAL_DIAG;
      }
    }
 #undef mk_REAL_DIAG
 #undef mk_DIAG
-   UNPROTECT(nprotect);
    return ans;
 }
 

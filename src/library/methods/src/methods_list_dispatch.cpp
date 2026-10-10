@@ -654,12 +654,12 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, bool firstTry,
 			bool evalArgs)
 {
     const char *class_;
-    SEXP arg_slot, arg_sym, method, value = R_NilValue;
-    int nprotect = 0;
+    GCStackRoot<> arg_slot;
+    SEXP arg_sym, method, value = R_NilValue;
     /* check for dispatch turned off inside MethodsListSelect */
     if(isFunction(mlist))
 	return mlist;
-    PROTECT(arg_slot = R_do_slot(mlist, s_argument)); nprotect++;
+    arg_slot = R_do_slot(mlist, s_argument);
     if(arg_slot == R_NilValue) {
 	error(_("object of class \"%s\" used as methods list for function '%s' ( no 'argument' slot)"),
 	      class_string(mlist), CHAR(asChar(fname)));
@@ -687,20 +687,18 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, bool firstTry,
 	    class_ = "missing";
 	else {
 	    /*  get its class */
-	    SEXP arg, class_obj;
-	    PROTECT(arg = R_evalHandleError(arg_sym, ev,
-					    &argEvalCleanup, &cleandata));
-	    nprotect++;
-	    PROTECT(class_obj = R_data_class(arg, TRUE)); nprotect++;
+	    GCStackRoot<> arg, class_obj;
+	    arg = R_evalHandleError(arg_sym, ev,
+						&argEvalCleanup, &cleandata);
+	    class_obj = R_data_class(arg, TRUE);
 	    class_ = CHAR(STRING_ELT(class_obj, 0));
 	}
     }
     else {
 	/* the arg contains the class as a string */
-	SEXP arg;
-	PROTECT(arg = R_evalHandleError(arg_sym, ev, &argEvalCleanup,
-				        &cleandata));
-	nprotect++;
+	GCStackRoot<> arg;
+	arg = R_evalHandleError(arg_sym, ev, &argEvalCleanup,
+					    &cleandata);
 	class_ = CHAR(asChar(arg));
     }
     method = R_find_method(mlist, class_, fname);
@@ -708,7 +706,6 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, bool firstTry,
       if(!firstTry)
 	error(_("no matching method for function '%s' (argument '%s', with class \"%s\")"),
 	      EncodeChar(asChar(fname)), EncodeChar(PRINTNAME(arg_sym)), class_);
-      UNPROTECT(nprotect);
       return(R_NilValue);
     }
     if(value == R_MissingArg) {/* the check put in before calling
@@ -725,7 +722,6 @@ static SEXP do_dispatch(SEXP fname, SEXP ev, SEXP mlist, bool firstTry,
 	   the methods metadata */
 	method = do_dispatch(R_NilValue, ev, method, firstTry, evalArgs);
     }
-    UNPROTECT(nprotect); nprotect = 0;
     return method;
 }
 

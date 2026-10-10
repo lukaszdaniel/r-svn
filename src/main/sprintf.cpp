@@ -34,7 +34,7 @@
 #endif
 
 #include <Localization.h>
-#include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -138,7 +138,7 @@ static void boundspec(char *fmt)
 
 attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    int i, nargs, cnt, v, thislen, nfmt, nprotect = 0;
+    int i, nargs, cnt, v, thislen, nfmt;
     /* fmt2 is a copy of fmt with '*' expanded.
        bit will hold numeric formats and %<w>s, so be quite small. */
     char fmt[MAXLINE+1], fmt2[MAXLINE+10], *fmtp, bit[MAXLINE+1],
@@ -146,7 +146,8 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *formatString;
     size_t n, cur, chunk;
 
-    SEXP format, _this, a[MAXNARGS], ans /* -Wall */ = R_NilValue;
+    GCStackRoot<> format, _this, ans, tmp;
+    GCStackRoot<> a[MAXNARGS];
     int ns, maxlen, lens[MAXNARGS], nthis, nstar, star_arg = 0, nunused;
     bool used[MAXNARGS];
     static R_StringBuffer outbuff = R_StringBuffer();
@@ -288,8 +289,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			used[nstar] = true;
 			if(ns == 0 && TYPEOF(_this) == REALSXP) {
 			    _this = coerceVector(_this, INTSXP);
-			    PROTECT(a[nstar] = _this);
-			    nprotect++;
+			    a[nstar] = _this;
 			}
 			if(TYPEOF(_this) != INTSXP || LENGTH(_this)<1 ||
 			   INTEGER(_this)[ns % LENGTH(_this)] == NA_INTEGER)
@@ -332,7 +332,6 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #define CHECK_this_length						\
 			do {						\
-			    PROTECT(_this);				\
 			    thislen = length(_this);			\
 			    if(thislen == 0)				\
 				error("%s", _("coercion has changed vector length to 0")); \
@@ -341,7 +340,6 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			/* Now let us see if some minimal coercion
 			   would be sensible, but only do so once, for ns = 0: */
 			if(ns == 0) {
-			    SEXP tmp;
 			    bool do_check;
 			    switch(*findspec(fmtp)) {
 			    case 'd':
@@ -364,8 +362,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				    } 
 				    if(exactlyInteger)
 					_this = coerceVector(_this, INTSXP);
-				    PROTECT(a[nthis] = _this);
-				    nprotect++;
+				    a[nthis] = _this;
 				}
 				break;
 			    case 'a':
@@ -378,12 +375,10 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				if(TYPEOF(_this) != REALSXP &&
 				   /* no automatic as.double(<string>) : */
 				   TYPEOF(_this) != STRSXP) {
-				    PROTECT(tmp = lang2(install("as.double"), _this));
+				    tmp = lang2(install("as.double"), _this);
 #define COERCE_THIS_TO_A						\
 				    _this = eval(tmp, env);		\
-				    UNPROTECT(1);			\
-				    PROTECT(a[nthis] = _this);		\
-				    nprotect++;				\
+				    a[nthis] = _this;			\
 				    did_this = true;			\
 				    CHECK_this_length;			\
 				    do_check = (lens[nthis] == maxlen);	\
@@ -401,7 +396,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				    size_t nc = strlen(outputString);
 				    char *z = R_Calloc(nc+1, char);
 				    strcpy(z, outputString);
-				    PROTECT(tmp = lang2(R_AsCharacterSymbol, _this));
+				    tmp = lang2(R_AsCharacterSymbol, _this);
 
 				    COERCE_THIS_TO_A
 				    outputString = (char *) R_AllocStringBuffer(nc + 1,
@@ -505,7 +500,6 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			    break;
 			}
 
-			UNPROTECT(1);
 		    }
 		}
 	    }
@@ -529,8 +523,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 	}  /* end for ( each chunk ) */
 
 	if(ns == 0) { /* may have adjusted maxlen now ... */
-	    PROTECT(ans = StringVector::create(maxlen));
-	    nprotect++;
+	    ans = StringVector::create(maxlen);
 	}
 	SET_STRING_ELT(ans, ns, mkCharCE(outputString,
 					 use_UTF8 ? CE_UTF8 : CE_NATIVE));
@@ -554,7 +547,6 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
-    UNPROTECT(nprotect);
     R_FreeStringBufferL(&outbuff);
     return ans;
 }

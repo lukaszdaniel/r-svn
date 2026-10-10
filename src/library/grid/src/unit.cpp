@@ -1574,11 +1574,12 @@ SEXP validUnits(SEXP units)
     }
     return answer;
 }
-SEXP validData(SEXP data, SEXP validUnits, int n) {
+SEXP validData(SEXP data_, SEXP validUnits, int n) {
+	GCStackRoot<> data(data_);
 	int nData = LENGTH(data);
 	int nUnit = LENGTH(validUnits);
 	int *pValidUnits = INTEGER(validUnits);
-	int dataCopied = 0;
+	bool dataCopied = false;
 
 	if (nData != 1 && nData < n) {
 		error("%s", _("data must be either NULL, have length 1, or match the length of the final unit vector"));
@@ -1587,8 +1588,8 @@ SEXP validData(SEXP data, SEXP validUnits, int n) {
 	for (int i = 0; i < nUnit; i++) {
 		SEXP singleData = VECTOR_ELT(data, i % nData);
 		int singleUnit = pValidUnits[i % nUnit];
-		int unitIsString = isStringUnit(singleUnit);
-		int unitIsGrob = isGrobUnit(singleUnit);
+		bool unitIsString = isStringUnit(singleUnit);
+		bool unitIsGrob = isGrobUnit(singleUnit);
 
 		if (unitIsString && 
                     !Rf_isString(singleData) && 
@@ -1601,28 +1602,27 @@ SEXP validData(SEXP data, SEXP validUnits, int n) {
 			}
 			if (Rf_isString(singleData)) {
 				if (!dataCopied) {
-					data = PROTECT(shallow_duplicate(data));
-					dataCopied = 1;
+					data = shallow_duplicate(data);
+					dataCopied = true;
 				}
-				SEXP fcall = PROTECT(lang2(install("gPath"), singleData));
+				GCStackRoot<> fcall;
+				fcall = lang2(install("gPath"), singleData);
 				if (NoDevices()) {
 					singleData = eval(fcall, R_gridEvalEnv);
 				} else {
 					singleData = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL);
 				}
 				SET_VECTOR_ELT(data, i % nData, singleData);
-				UNPROTECT(1);
 			}
 			if (Rf_inherits(singleData, "gPath")) {
-				SEXP fcall = PROTECT(lang2(install("depth"), singleData));
-				SEXP depth;
+				GCStackRoot<> fcall, depth;
+				fcall = lang2(install("depth"), singleData);
 				 if (NoDevices()) {
-					depth = PROTECT(eval(fcall, R_gridEvalEnv));
+					depth = eval(fcall, R_gridEvalEnv);
 				} else {
-					depth = PROTECT(Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL));
+					depth = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL);
 				}
-				int tooDeep = INTEGER(depth)[0] > 1;
-				UNPROTECT(2);
+				bool tooDeep = INTEGER(depth)[0] > 1;
 				if (tooDeep) {
 					error("%s", _("'gPath' must have depth 1 in 'grobwidth/height' units"));
 				}
@@ -1632,7 +1632,7 @@ SEXP validData(SEXP data, SEXP validUnits, int n) {
 			error("%s", _("non-NULL value supplied for plain unit"));
 		}
 	}
-	UNPROTECT(dataCopied);
+
 	return data;
 }
 void makeSimpleUnit(SEXP values, SEXP unit) {

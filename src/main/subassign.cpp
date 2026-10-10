@@ -2223,9 +2223,7 @@ attribute_hidden SEXP do_subassign3(SEXP call, SEXP op, SEXP args, SEXP env)
 SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 {
     SEXP t;
-    SEXP xS4 = R_NilValue;
-    int nprotect = 0;
-
+    GCStackRoot<> xS4(R_NilValue);
     GCStackRoot<> x(xarg);
     GCStackRoot<> val(value);
 
@@ -2301,7 +2299,6 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
     }
     else {
 	R_xlen_t i, imatch, nx;
-	SEXP names;
 	SEXPTYPE type = VECSXP;
 
 	if (isExpression(x))
@@ -2310,8 +2307,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 	    warning("%s", _("Coercing LHS to a list"));
 	    x = ListVector::coerce(x);
 	}
-	names = PROTECT(getAttrib(x, R_NamesSymbol));
-	nprotect++;
+	GCStackRoot<> names(getAttrib(x, R_NamesSymbol));
 	nx = xlength(x);
 	nlist = PRINTNAME(nlist);
 	if (isNull(val)) {
@@ -2326,10 +2322,10 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 			break;
 		    }
 		if (imatch >= 0) {
-		    SEXP ans, ansnames;
+		    GCStackRoot<> ans, ansnames;
 		    int ii;
-		    PROTECT(ans = allocVector(type, nx - 1));
-		    PROTECT(ansnames = StringVector::create(nx - 1));
+		    ans = allocVector(type, nx - 1);
+		    ansnames = StringVector::create(nx - 1);
 		    for (i = 0, ii = 0; i < nx; i++) {
 			if (i != imatch) {
 			    if (type == VECSXP)
@@ -2341,7 +2337,6 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 		    }
 		    setAttrib(ans, R_NamesSymbol, ansnames);
 		    copyMostAttrib(x, ans);
-		    UNPROTECT(2);
 		    CLEAR_VECTOR(x); // OK since x != ans
 		    x = ans;
 		}
@@ -2371,9 +2366,9 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 		/* We are introducing a new element (=> *no* duplication) */
 		/* Enlarge the list, add the new element */
 		/* and finally, adjust the attributes. */
-		SEXP ans, ansnames;
-		PROTECT(ans = allocVector(VECSXP, nx + 1));
-		PROTECT(ansnames = StringVector::create(nx + 1));
+		GCStackRoot<> ans, ansnames;
+		ans = allocVector(VECSXP, nx + 1);
+		ansnames = StringVector::create(nx + 1);
 		for (i = 0; i < nx; i++)
 		    SET_VECTOR_ELT(ans, i, VECTOR_ELT(x, i));
 		if (isNull(names)) {
@@ -2389,13 +2384,11 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 		SET_STRING_ELT(ansnames, nx,  nlist);
 		setAttrib(ans, R_NamesSymbol, ansnames);
 		copyMostAttrib(x, ans);
-		UNPROTECT(2);
 		CLEAR_VECTOR(x); // OK since x != ans
 		x = ans;
 	    }
 	}
     }
-    UNPROTECT(nprotect);
     if(xS4 != R_NilValue)
 	x = xS4; /* x was an env't, the data slot of xS4 */
     SETTER_CLEAR_NAMED(x);

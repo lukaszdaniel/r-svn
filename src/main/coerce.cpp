@@ -1159,11 +1159,11 @@ SEXP CXXR::VectorBase::coerceVectorImpl(SEXP v_, SEXPTYPE type)
     }
 
     /* code to allow classes to extend ENVSXP, SYMSXP, etc */
-    if(IS_S4_OBJECT(v) && TYPEOF(v) == OBJSXP) {
+    if (IS_S4_OBJECT(v) && TYPEOF(v) == OBJSXP) {
 	SEXP vv = R_getS4DataSlot(v, ANYSXP);
-	if(vv == R_NilValue)
+	if (vv == R_NilValue)
 	  error("%s", _("no method for coercing this S4 class to a vector"));
-	else if(TYPEOF(vv) == type)
+	else if (TYPEOF(vv) == type)
 	  return vv;
 	v = vv;
     }
@@ -1179,7 +1179,7 @@ SEXP CXXR::VectorBase::coerceVectorImpl(SEXP v_, SEXPTYPE type)
 	break;
     case NILSXP:
     case LISTSXP:
-	if(type == LISTSXP) {
+	if (type == LISTSXP) {
 	    return v; // as coercePairList() is also used for LANGSXP
 	}
 	ans = coercePairList(v, type);
@@ -1320,13 +1320,13 @@ attribute_hidden SEXP R::CreateTag(SEXP x)
     return x;
 }
 
-static SEXP asFunction(SEXP x)
+static SEXP asFunction(SEXP x_)
 {
-    SEXP f;
+    SEXP f = R_NilValue;
+    GCStackRoot<> x(x_);
     if (FunctionBase::isA(x)) return x;
 
-    if (MAYBE_REFERENCED(x)) PROTECT(x = duplicate(x));
-    else PROTECT(x);
+    if (MAYBE_REFERENCED(x)) x = duplicate(x);
 
     if (isNull(x) || !isList(x)) {
 	f = mkCLOSXP(R_NilValue, x, R_GlobalEnv);
@@ -1336,20 +1336,20 @@ static SEXP asFunction(SEXP x)
 	SEXP formals = allocList(n - 1);
 	SEXP pf = formals;
 	while(--n) {
-	    if (TAG(x) == R_NilValue) {
+	    if (TAG(x.get()) == R_NilValue) {
 		SET_TAG(pf, CreateTag(CAR(x)));
 		SETCAR(pf, R_MissingArg);
 	    }
 	    else {
 		SETCAR(pf, CAR(x));
-		SET_TAG(pf, TAG(x));
+		SET_TAG(pf, TAG(x.get()));
 	    }
 	    pf = CDR(pf);
-	    x = CDR(x);
+	    x = CDR(x.get());
 	}
 	f = mkCLOSXP(formals, CAR(x), R_GlobalEnv);
     }
-    UNPROTECT(1);
+
     return f;
 }
 
@@ -1407,7 +1407,7 @@ SEXP Rf_asCharacterFactor(SEXP x)
 {
     SEXP ans;
 
-    if( !inherits2(x, "factor") )
+    if (!inherits2(x, "factor"))
 	error("%s", _("attempting to coerce non-factor"));
 
     R_xlen_t n = XLENGTH(x);
@@ -1726,16 +1726,16 @@ attribute_hidden SEXP do_ascall(SEXP call, SEXP op, SEXP args, SEXP rho)
 	int n = length(args);
 	if(n == 0)
 	    errorcall(call, "%s", _("invalid length 0 argument"));
-	SEXP names = PROTECT(getAttrib(args, R_NamesSymbol)), ap;
+	GCStackRoot<> names, ap;
+	names = getAttrib(args, R_NamesSymbol);
 	GCStackRoot<PairList> tl(SEXP_downcast<PairList *>(PairList::makeList(n - 1)));
-	PROTECT(ap = ans = PairList::create<Expression>(R_NilValue, tl));
+	ap = ans = PairList::create<Expression>(R_NilValue, tl);
 	for (int i = 0; i < n; i++) {
 	    SETCAR(ap, VECTOR_ELT(args, i));
 	    if (names != R_NilValue && !StringBlank(STRING_ELT(names, i)))
 		SET_TAG(ap, installTrChar(STRING_ELT(names, i)));
-	    ap = CDR(ap);
+	    ap = CDR(ap.get());
 	}
-	UNPROTECT(2); /* ap, names */
 	break;
     }
     case LISTSXP:
@@ -1792,26 +1792,26 @@ attribute_hidden int R::asLogical2(SEXP x, bool checking, SEXP call)
 
 bool R::asLogicalNoNA(SEXP x, const char *str)
 {
-    int ans = asLogical2(x, /* checking = */ 0, R_NilValue);
+    int ans = asLogical2(x, /* checking = */ false, R_NilValue);
     if (ans == NA_LOGICAL) error(_("'%s' argument must be TRUE or FALSE"), str);
     return ans;
 }
 
 bool R::asLogicalNAFalse(SEXP x)
 {
-    int ans = asLogical2(x, /* checking = */ 0, R_NilValue);
+    int ans = asLogical2(x, /* checking = */ false, R_NilValue);
     return (ans == 1);
 }
 
 int Rf_asLogical(SEXP x)
 {
-    return asLogical2(x, /* checking = */ 0, R_NilValue);
+    return asLogical2(x, /* checking = */ false, R_NilValue);
 }
 
 // private versions
 bool R::asRbool(SEXP x, SEXP call)
 {
-    int ans = asLogical2(x, 1, call);
+    int ans = asLogical2(x, true, call);
     if (ans == NA_LOGICAL)
 	errorcall(call, "%s", _("NA in coercion to boolean"));
     return ans;
@@ -1819,7 +1819,7 @@ bool R::asRbool(SEXP x, SEXP call)
 
 bool R::asBool2(SEXP x, SEXP call)
 {
-    int ans = asLogical2(x, 1, call);
+    int ans = asLogical2(x, true, call);
     if (ans == NA_LOGICAL)
 	errorcall(call, "%s", _("NA in coercion to boolean"));
     return ans;
@@ -1828,7 +1828,7 @@ bool R::asBool2(SEXP x, SEXP call)
 // public version
 Rboolean Rf_asRboolean(SEXP x)
 {
-    int ans = asLogical2(x, 1, R_NilValue);
+    int ans = asLogical2(x, true, R_NilValue);
     if (ans == NA_LOGICAL)
 	error("%s", _("NA in coercion to boolean"));
     return (Rboolean) ans;
@@ -1836,7 +1836,7 @@ Rboolean Rf_asRboolean(SEXP x)
 
 bool Rf_asBool(SEXP x)
 {
-    int ans = asLogical2(x, 1, R_NilValue);
+    int ans = asLogical2(x, true, R_NilValue);
     if (ans == NA_LOGICAL)
 	error("%s", _("NA in coercion to boolean"));
     return (bool) ans;
@@ -2001,13 +2001,12 @@ attribute_hidden SEXP do_typeof(SEXP call, SEXP op, SEXP args, SEXP rho)
 */
 attribute_hidden SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP ans;
     checkArity(op, args);
     check1arg(args, call, "x");
 
     /* These are all builtins, so we do not need to worry about
        evaluating arguments in DispatchOrEval */
-    if(PRIMVAL(op) >= 100 && PRIMVAL(op) < 200 && isObject(CAR(args))) {
+    if (PRIMVAL(op) >= 100 && PRIMVAL(op) < 200 && isObject(CAR(args))) {
 	/* This used CHAR(PRINTNAME(CAR(call))), but that is not
 	   necessarily correct, e.g. when called from lapply() */
 	const char *nm;
@@ -2020,11 +2019,13 @@ attribute_hidden SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
 	/* DispatchOrEval internal generic: is.numeric */
 	/* DispatchOrEval internal generic: is.matrix */
 	/* DispatchOrEval internal generic: is.array */
-	if(DispatchOrEval(call, op, nm, args, rho, &ans, 0, 1))
-	    return(ans);
+	SEXP ans;
+	if (DispatchOrEval(call, op, nm, args, rho, &ans, 0, 1))
+	    return ans;
     }
 
-    PROTECT(ans = LogicalVector::create(1));
+    GCStackRoot<LogicalVector> ans;
+    ans = LogicalVector::create(1);
 
     switch (PRIMVAL(op)) {
     case NILSXP:	/* is.null */
@@ -2162,7 +2163,7 @@ attribute_hidden SEXP do_is(SEXP call, SEXP op, SEXP args, SEXP rho)
     default:
 	errorcall(call, "%s", _("unimplemented predicate"));
     }
-    UNPROTECT(1);
+
     return (ans);
 }
 

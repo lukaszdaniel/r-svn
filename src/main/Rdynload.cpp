@@ -1502,19 +1502,17 @@ attribute_hidden SEXP R_getDllTable(void)
     return ans;
 }
 
-static SEXP createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol *symbol,
+static SEXP createRSymbolObject(SEXP sname_, DL_FUNC f, R_RegisteredNativeSymbol *symbol,
 		    bool withRegistrationInfo)
 {
-    SEXP tmp, klass, sym, names;
+    GCStackRoot<> klass, sym, names, sname(sname_);
     int n = (symbol->type != R_ANY_SYM) ? 4 : 3;
-    int numProtects = 0;
 
-    PROTECT(sym = ListVector::create(n));    numProtects++;
-    PROTECT(names = StringVector::create(n));    numProtects++;
+    sym = ListVector::create(n);
+    names = StringVector::create(n);
 
-    if(!sname || sname == R_NilValue) {
-	PROTECT(sname = mkString(symbol->symbol.call->name));
-	numProtects++;
+    if (!sname || sname == R_NilValue) {
+	sname = mkString(symbol->symbol.call->name);
     }
 
     SET_VECTOR_ELT(sym, 0, sname);
@@ -1535,8 +1533,7 @@ static SEXP createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol 
     SET_STRING_ELT(names, 2, mkChar("dll"));
 
 
-    PROTECT(klass = StringVector::create((symbol->type != R_ANY_SYM ? 2 : 1)));
-    numProtects++;
+    klass = StringVector::create((symbol->type != R_ANY_SYM ? 2 : 1));
     SET_STRING_ELT(klass, LENGTH(klass) - 1, mkChar("NativeSymbolInfo"));
 
     if(n > 3) {
@@ -1568,7 +1565,7 @@ static SEXP createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol 
 		  symbol->type);
 	    break;
 	}
-	SET_VECTOR_ELT(sym, 3, tmp = ScalarInteger(nargs));
+	SET_VECTOR_ELT(sym, 3, ScalarInteger(nargs));
 	SET_STRING_ELT(klass, 0, mkChar(className));
 	SET_STRING_ELT(names, 3, mkChar("numParameters"));
     }
@@ -1576,7 +1573,6 @@ static SEXP createRSymbolObject(SEXP sname, DL_FUNC f, R_RegisteredNativeSymbol 
     setAttrib(sym, R_ClassSymbol, klass);
     setAttrib(sym, R_NamesSymbol, names);
 
-    UNPROTECT(numProtects);
     return sym;
 }
 

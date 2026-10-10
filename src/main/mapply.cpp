@@ -33,7 +33,6 @@
 #endif
 
 #include <CXXR/GCStackRoot.hpp>
-#include <CXXR/ProtectStack.hpp>
 #include <Localization.h>
 #include <Defn.h>
 
@@ -44,13 +43,12 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
-    SEXP f = CAR(args),
-	varyingArgs = CADR(args),   // = 'dots' in R
-	constantArgs = CADDR(args); // = 'MoreArgs' in R
-    int nprot = 0;
+    GCStackRoot<> f(CAR(args)),
+	varyingArgs(CADR(args)),   // = 'dots' in R
+	constantArgs(CADDR(args)), // = 'MoreArgs' in R
+	vnames, mindex, nindex, ans;
     if (TYPEOF(varyingArgs) != VECSXP) { // (rarely, hence checking)
-	varyingArgs = PROTECT(coerceVector(varyingArgs, VECSXP)); // or error
-	nprot++;
+	varyingArgs = coerceVector(varyingArgs, VECSXP); // or error
     }
     int m = length(varyingArgs);
     R_xlen_t *lengths = (R_xlen_t *)  R_alloc(m, sizeof(R_xlen_t)), longest = 0;
@@ -63,29 +61,28 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    static SEXP length_op = NULL;
 	    if (length_op == NULL) length_op = R_Primitive("length");
 	    // DispatchOrEval() needs 'args' to be a pairlist
-	    SEXP ans, tmp2 = PROTECT(list1(tmp1));
-	    if (DispatchOrEval(call, length_op, "length", tmp2, rho, &ans, 0, 1))
+	    GCStackRoot<> tmp2(list1(tmp1));
+	    auto dispatchResult =
+		DispatchOrEval(call, length_op, "length", tmp2, rho, 0, 1);
+	    GCStackRoot<> ans(dispatchResult.second);
+	    if (dispatchResult.first)
 		lengths[i] = (R_xlen_t) (TYPEOF(ans) == REALSXP ?
 					 REAL(ans)[0] : asInteger(ans));
-	    UNPROTECT(1);
 	}
 	if (lengths[i] == 0) zero++;
 	if (lengths[i] > longest) longest = lengths[i];
 	if (zero && longest) {
 	    // warning("%s", _("zero-length input leads to zero-length result"));
-	    SEXP ans = allocVector(VECSXP, 0);
-	    UNPROTECT(nprot);
-	    return ans;
+	    return allocVector(VECSXP, 0);
 	}
     }
 
     R_xlen_t *counters = (R_xlen_t *) R_alloc(m, sizeof(R_xlen_t));
     if (m) memset(counters, 0, m * sizeof(R_xlen_t));
 
-    SEXP vnames = PROTECT(getAttrib(varyingArgs, R_NamesSymbol));
-    SEXP mindex = PROTECT(allocVector(VECSXP, m));
-    SEXP nindex = PROTECT(allocVector(VECSXP, m));
-    nprot += 3;
+    vnames = getAttrib(varyingArgs, R_NamesSymbol);
+    mindex = allocVector(VECSXP, m);
+    nindex = allocVector(VECSXP, m);
     bool named = (vnames != R_NilValue);
 
     /* build a call like
@@ -103,17 +100,16 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
     for (int j = m - 1; j >= 0; j--) {
 	SET_VECTOR_ELT(mindex, j, ScalarInteger(j + 1));
 	SET_VECTOR_ELT(nindex, j, allocVector(realIndx ? REALSXP : INTSXP, 1));
-	SEXP tmp1 = PROTECT(lang3(R_Bracket2Symbol, Dots, VECTOR_ELT(mindex, j)));
-	SEXP tmp2 = PROTECT(lang3(R_Bracket2Symbol, tmp1, VECTOR_ELT(nindex, j)));
+	GCStackRoot<> tmp1(lang3(R_Bracket2Symbol, Dots, VECTOR_ELT(mindex, j)));
+	GCStackRoot<> tmp2(lang3(R_Bracket2Symbol, tmp1, VECTOR_ELT(nindex, j)));
 	fcall = LCONS(tmp2, fcall);
-	UNPROTECT(2);
 	if (named && CHAR(STRING_ELT(vnames, j))[0] != '\0')
 	    SET_TAG(fcall, installTrChar(STRING_ELT(vnames, j)));
     }
 
     fcall = LCONS(f, fcall);
 
-    SEXP ans = PROTECT(allocVector(VECSXP, longest)); nprot++;
+    ans = allocVector(VECSXP, longest);
 
     for (int i = 0; i < longest; i++) {
 	for (int j = 0; j < m; j++) {
@@ -133,6 +129,5 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (counters[j] != lengths[j])
 	    warning("%s", _("longer argument not a multiple of length of shorter"));
 
-    UNPROTECT(nprot);
     return ans;
 }

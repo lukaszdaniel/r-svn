@@ -285,7 +285,7 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
  *  .Call("numeric_deriv", expr, theta, rho, dir = 1., eps = .Machine$double.eps, central=FALSE)
  *  Returns: ans
  */
-SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP centr)
+SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir_, SEXP eps_, SEXP centr)
 {
     if(!isString(theta))
 	error("%s", _("'theta' should be of type character"));
@@ -295,24 +295,20 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
     } else
 	if(!isEnvironment(rho))
 	    error("%s", _("'rho' should be an environment"));
-    int nprot = 3;
+    GCStackRoot<> dir(dir_), rho1, pars, ans, gradient;
     if(TYPEOF(dir) != REALSXP) {
-	PROTECT(dir = coerceVector(dir, REALSXP)); nprot++;
+	dir = coerceVector(dir, REALSXP);
     }
     if(LENGTH(dir) != LENGTH(theta))
 	error("%s", _("'dir' is not a numeric vector of the correct length"));
     bool central = asLogicalNoNA(centr, "central");
-    SEXP rho1 = PROTECT(R_NewEnv(rho, FALSE, 0));
-    nprot++;
-    SEXP
-	pars = PROTECT(allocVector(VECSXP, LENGTH(theta))),
-	ans  = PROTECT(duplicate(eval(expr, rho1)));
+    rho1 = R_NewEnv(rho, FALSE, 0);
+    pars = allocVector(VECSXP, LENGTH(theta));
+    ans = duplicate(eval(expr, rho1));
     double *rDir = REAL(dir),  *res = NULL; // -Wall
 #define CHECK_FN_VAL(_r_, _ANS_) do {					\
     if(!isReal(_ANS_)) {						\
-	SEXP temp = coerceVector(_ANS_, REALSXP);			\
-	UNPROTECT(1);/*: _ANS_ *must* have been the last PROTECT() ! */ \
-	PROTECT(_ANS_ = temp);						\
+	_ANS_ = coerceVector(_ANS_, REALSXP);				\
     }									\
     _r_ = REAL(_ANS_);							\
     for(int i = 0; i < LENGTH(_ANS_); i++) {				\
@@ -340,7 +336,7 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
 	lengthTheta += LENGTH(VECTOR_ELT(pars, i));
     }
 
-    SEXP gradient = PROTECT(allocMatrix(REALSXP, LENGTH(ans), lengthTheta));
+    gradient = allocMatrix(REALSXP, LENGTH(ans), lengthTheta);
     double *grad = REAL(gradient);
     double eps = asReal(eps_); // was hardcoded sqrt(DOUBLE_EPS) { ~= 1.49e-08, typically}
     for(int start = 0, i = 0; i < LENGTH(theta); i++) {
@@ -351,12 +347,13 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
 		xx = fabs(origPar),
 		delta = (xx == 0) ? eps : xx*eps;
 	    pars_i[j] += rDir[i] * delta;
-	    SEXP ans_del = PROTECT(eval(expr, rho1));
+	    GCStackRoot<> ans_del, ans_de2;
+	    ans_del = eval(expr, rho1);
 	    double *rDel = NULL;
 	    CHECK_FN_VAL(rDel, ans_del);
 	    if(central) {
 		pars_i[j] = origPar - rDir[i] * delta;
-		SEXP ans_de2 = PROTECT(eval(expr, rho1));
+		ans_de2 = eval(expr, rho1);
 		double *rD2 = NULL;
 		CHECK_FN_VAL(rD2, ans_de2);
 		for(int k = 0; k < LENGTH(ans); k++) {
@@ -367,11 +364,9 @@ SEXP numeric_deriv(SEXP expr, SEXP theta, SEXP rho, SEXP dir, SEXP eps_, SEXP ce
 		    grad[start + k] = rDir[i] * (rDel[k] - res[k])/delta;
 		}
 	    }
-	    if (central) {UNPROTECT(2);} else {UNPROTECT(1);} // ansDel & possibly ans
 	    pars_i[j] = origPar;
 	}
     }
     setAttrib(ans, install("gradient"), gradient);
-    UNPROTECT(nprot);
     return ans;
 }

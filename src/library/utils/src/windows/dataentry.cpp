@@ -1856,12 +1856,10 @@ SEXP Win_dataviewer(SEXP args)
 {
     SEXP stitle;
     SEXPTYPE type;
-    int i, nprotect;
     DEstruct DE = (DEstruct) malloc(sizeof(destruct));
     if (!DE)
 	error("%s", G_("dataentry: internal memory problem"));
     DE->isEditor = FALSE;
-    nprotect = 0;/* count the PROTECT()s */
     DE->work = CAR(args);
     DE->names = getAttrib(DE->work, R_NamesSymbol);
 
@@ -1884,8 +1882,8 @@ SEXP Win_dataviewer(SEXP args)
     DE->crow = 1;
     DE->colmin = 1;
     DE->rowmin = 1;
-    PROTECT(DE->ssNA_STRING = duplicate(NA_STRING));
-    nprotect++;
+    GCStackRoot<> ssNA_STRING(duplicate(NA_STRING));
+    DE->ssNA_STRING = ssNA_STRING;
     DE->bwidth = 0;
     DE->hwidth = 5;
 
@@ -1893,7 +1891,7 @@ SEXP Win_dataviewer(SEXP args)
     DE->xmaxused = length(DE->work); DE->ymaxused = 0;
     DE->lens = allocVector(INTSXP, DE->xmaxused);
 
-    for (i = 0; i < DE->xmaxused; i++) {
+    for (int i = 0; i < DE->xmaxused; i++) {
 	int len = LENGTH(VECTOR_ELT(DE->work, i));
 	INTEGER(DE->lens)[i] = len;
 	DE->ymaxused = max(len, DE->ymaxused);
@@ -1919,6 +1917,5 @@ SEXP Win_dataviewer(SEXP args)
         free(DE);
         throw;
     }
-    UNPROTECT(nprotect);
     return R_NilValue;
 }

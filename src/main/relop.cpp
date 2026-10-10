@@ -757,11 +757,11 @@ static SEXP raw_relop(RELOP_TYPE code, SEXP s1, SEXP s2)
 }
 
 
-static SEXP bitwiseNot(SEXP a)
+static SEXP bitwiseNot(SEXP a_)
 {
+    GCStackRoot<> a(a_);
     IntVector *ans;
-    unsigned int np = 0;
-    if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
+    if (isReal(a)) {a = IntVector::coerce(a);}
 
     switch(TYPEOF(a)) {
     case INTSXP:
@@ -779,60 +779,63 @@ static SEXP bitwiseNot(SEXP a)
     default:
 	UNIMPLEMENTED_TYPE("bitwNot", a);
     }
-    if (np) UNPROTECT(np);
+
     return ans;
 }
 
-#define BIT(op, name)							\
-    IntVector *ans;							\
-    unsigned int np = 0;						\
-    if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}	\
-    if (isReal(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}	\
-    if (TYPEOF(a) != TYPEOF(b))						\
-	error("%s", _("'a' and 'b' must have the same type"));		\
-    switch(TYPEOF(a)) {							\
-    case INTSXP:							\
-	{								\
-	    R_xlen_t i, ia, ib;						\
-	    R_xlen_t m = XLENGTH(a), n = XLENGTH(b),			\
-		mn = (m && n) ? std::max(m, n) : 0;			\
-	    ans = IntVector::create(mn);				\
-	    int *pans = INTEGER(ans);					\
-	    const int *pa = INTEGER_RO(a), *pb = INTEGER_RO(b);		\
-	    MOD_ITERATE2(mn, m, n, i, ia, ib, {				\
-		    int aa = pa[ia]; int bb = pb[ib];			\
-		    pans[i] = (aa == NA_INTEGER || bb == NA_INTEGER) ?	\
-			NA_INTEGER : aa op bb;				\
-		});							\
-	}								\
-	break;								\
-    default:								\
-	UNIMPLEMENTED_TYPE(name, a);					\
-    }									\
-    if (np) UNPROTECT(np);						\
-    return ans
+template <typename Op>
+static SEXP bitwiseBinary(SEXP a_, SEXP b_, const char *name, Op op)
+{
+    GCStackRoot<> a(a_), b(b_);
+
+    if (isReal(a)) a = IntVector::coerce(a);
+    if (isReal(b)) b = IntVector::coerce(b);
+    if (TYPEOF(a) != TYPEOF(b))
+	error("%s", _("'a' and 'b' must have the same type"));
+    if (TYPEOF(a) != INTSXP)
+	UNIMPLEMENTED_TYPE(name, a);
+
+    R_xlen_t i, ia, ib;
+    R_xlen_t m = XLENGTH(a), n = XLENGTH(b),
+	mn = (m && n) ? std::max(m, n) : 0;
+    IntVector *ans = IntVector::create(mn);
+    int *pans = INTEGER(ans);
+    const int *pa = INTEGER_RO(a), *pb = INTEGER_RO(b);
+    MOD_ITERATE2(mn, m, n, i, ia, ib, {
+	    int aa = pa[ia];
+	    int bb = pb[ib];
+	    pans[i] = (aa == NA_INTEGER || bb == NA_INTEGER)
+		? NA_INTEGER : op(aa, bb);
+	});
+
+    return ans;
+}
+
 
 static SEXP bitwiseAnd(SEXP a, SEXP b)
 {
-    BIT(&, "bitwAnd");
+    return bitwiseBinary(a, b, "bitwAnd",
+			 [](int a, int b) { return a & b; });
 }
 
 static SEXP bitwiseOr(SEXP a, SEXP b)
 {
-    BIT(|, "bitwOr");
+    return bitwiseBinary(a, b, "bitwOr",
+			 [](int a, int b) { return a | b; });
 }
 
 static SEXP bitwiseXor(SEXP a, SEXP b)
 {
-    BIT(^, "bitwXor");
+    return bitwiseBinary(a, b, "bitwXor",
+			 [](int a, int b) { return a ^ b; });
 }
 
-static SEXP bitwiseShiftL(SEXP a, SEXP b)
+static SEXP bitwiseShiftL(SEXP a_, SEXP b_)
 {
+    GCStackRoot<> a(a_), b(b_);
     IntVector *ans;
-    unsigned int np = 0;
-    if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
-    if (!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
+    if (isReal(a)) {a = IntVector::coerce(a);}
+    if (!isInteger(b)) {b = IntVector::coerce(b);}
     if (TYPEOF(a) != TYPEOF(b))
 	error("%s", _("'a' and 'b' must have the same type"));
 
@@ -857,16 +860,16 @@ static SEXP bitwiseShiftL(SEXP a, SEXP b)
     default:
 	UNIMPLEMENTED_TYPE("bitShiftL", a);
     }
-    if (np) UNPROTECT(np);
+
     return ans;
 }
 
-static SEXP bitwiseShiftR(SEXP a, SEXP b)
+static SEXP bitwiseShiftR(SEXP a_, SEXP b_)
 {
+    GCStackRoot<> a(a_), b(b_);
     IntVector *ans;
-    unsigned int np = 0;
-    if (isReal(a)) {a = PROTECT(coerceVector(a, INTSXP)); np++;}
-    if (!isInteger(b)) {b = PROTECT(coerceVector(b, INTSXP)); np++;}
+    if (isReal(a)) {a = IntVector::coerce(a);}
+    if (!isInteger(b)) {b = IntVector::coerce(b);}
     if (TYPEOF(a) != TYPEOF(b))
 	error("%s", _("'a' and 'b' must have the same type"));
 
@@ -891,7 +894,6 @@ static SEXP bitwiseShiftR(SEXP a, SEXP b)
     default:
 	UNIMPLEMENTED_TYPE("bitShiftR", a);
     }
-    if (np) UNPROTECT(np);
     return ans;
 }
 

@@ -81,6 +81,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
+#include <CXXR/LogicalVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/RawVector.hpp>
@@ -233,10 +234,9 @@ static SEXP markBytesOld(SEXP x, bool useBytes, bool haveBytesInput)
     }
     if (!markBytesResultIfOld || !haveBytesInput ||
         !useBytes || IS_ASCII(x) || IS_BYTES(x) || x == NA_STRING)
-
 	return x;
-    else
-	return String::obtain(CHAR(x), LENGTH(x), CE_BYTES);
+
+    return String::obtain(CHAR(x), LENGTH(x), CE_BYTES);
 }
 
 static SEXP mkBytesNew(const char *name, bool haveBytesInput)
@@ -1313,10 +1313,10 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 		setAttrib(ans, R_NamesSymbol, duplicate(nmold));
 	    UNPROTECT(2); /* ans, nmold */
 	} else if (PRIMVAL(op)) { // grepl case
-	    ans = allocVector(LGLSXP, n);
+	    ans = LogicalVector::create(n);
 	    for (i = 0; i < n; i++)  LOGICAL(ans)[i] = NA_LOGICAL;
 	} else {
-	    ans = allocVector(INTSXP, n);
+	    ans = IntVector::create(n);
 	    for (i = 0; i < n; i++)  INTEGER(ans)[i] = NA_INTEGER;
 	}
 	return ans;
@@ -1373,7 +1373,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (rc) reg_report(rc, &reg, spat);
     }
 
-    PROTECT(ind = allocVector(LGLSXP, n));
+    PROTECT(ind = LogicalVector::create(n));
     vmax = vmaxget();
     for (i = 0 ; i < n ; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -1490,7 +1490,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else
 #endif
 	{
-	    ans = allocVector(INTSXP, nmatches);
+	    ans = IntVector::create(nmatches);
 	    j = 0;
 	    for (i = 0 ; i < n ; i++)
 		if (invert ^ LOGICAL(ind)[i])
@@ -1565,7 +1565,7 @@ static R_size_t fgrepraw1(SEXP pat, SEXP text, R_size_t offset) {
 // FIXME:  allow long vectors.
 attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP pat, text, ans, res_head, res_tail;
+    GCStackRoot<> pat, text, ans, res_head, res_tail;
     regex_t reg;
     int nmatches = 0, rc, cflags, eflags = 0;
     int *res_val;
@@ -1604,7 +1604,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isRaw(text))
 	error(_("invalid '%s' argument"), "text");
     if (offset > (R_size_t) LENGTH(text))
-	return allocVector(INTSXP, 0);
+	return IntVector::create(0);
 
     offset--; /* reduce offset to base 0 */
 
@@ -1660,17 +1660,15 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (invert) { /* invert is actually useful here as it
 				 is performing something like strsplit */
 		    R_size_t pos = 0;
-		    SEXP elt, mvec = NULL;
+		    GCStackRoot<> elt, mvec;
 		    int *fmatches = (int*) matches; /* either the minbuffer or an allocated maxibuffer */
-		    int nprotect = 0;
 
 		    if (!nmatches) return text;
 
 		    /* if there are more matches than in the buffer,
 		       we actually need to get them first */
 		    if (nmatches > MAX_MATCHES_MINIBUF) {
-			PROTECT(mvec = allocVector(INTSXP, nmatches));
-			nprotect++;
+			mvec = IntVector::create(nmatches);
 			fmatches = INTEGER(mvec);
 			memcpy(fmatches, matches, sizeof(matches));
 			nmatches = MAX_MATCHES_MINIBUF;
@@ -1685,8 +1683,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 
 		    /* there are always nmatches + 1 pieces (unlike strsplit) */
-		    ans = PROTECT(ListVector::create(nmatches + 1));
-		    nprotect++;
+		    ans = ListVector::create(nmatches + 1);
 		    /* add all pieces before matches */
 		    for (int i = 0; i < nmatches; i++) {
 			R_size_t elt_size = fmatches[i] - 1 - pos;
@@ -1701,19 +1698,17 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		    SET_VECTOR_ELT(ans, nmatches, elt);
 		    if (LENGTH(elt))
 			memcpy(RAW(elt), RAW(text) + LENGTH(text) - LENGTH(elt), LENGTH(elt));
-		    UNPROTECT(nprotect);
 		    return ans;
 		}
 
 		/* value=TRUE is pathetic for fixed=TRUE without
 		   invert as it is just rep(pat, nmatches) */
-		ans = PROTECT(ListVector::create(nmatches));
+		ans = ListVector::create(nmatches);
 		for (int i = 0; i < nmatches; i++)
 		    SET_VECTOR_ELT(ans, i, pat);
-		UNPROTECT(1);
 		return ans;
 	    }
-	    ans = allocVector(INTSXP, nmatches);
+	    ans = IntVector::create(nmatches);
 	    if (nmatches <= MAX_MATCHES_MINIBUF) { /* our min-buffer was enough, great */
 		if (nmatches) memcpy(INTEGER(ans), matches, nmatches * sizeof(int));
 		return ans;
@@ -1766,14 +1761,14 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	    return ans;
 	}
-	return (rc == REG_OK) ? ScalarInteger((int)(ptag.rm_so + 1 + offset)) : allocVector(INTSXP, 0);
+	return (rc == REG_OK) ? ScalarInteger((int)(ptag.rm_so + 1 + offset)) : IntVector::create(0);
     }
 
     /* match all - we use a pairlist of integer arrays to expand the result
        to allow use on big binary strings with many matches (it could be done
        by re-allocating a temp buffer but I chose sequential allocations to
        reduce possible fragmentation) */
-    res_head = res_tail = PROTECT(list1(allocVector(INTSXP, res_alloc)));
+    res_head = res_tail = list1(IntVector::create(res_alloc));
     res_val = INTEGER(CAR(res_tail));
     res_ptr = 0;
     while (1) {
@@ -1785,8 +1780,8 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (res_ptr >= (R_size_t) res_alloc) {
 	    /* double the buffer size, but limit to 32Mb */
 	    if (res_alloc < 33554432) res_alloc <<= 1;
-	    SETCDR(res_tail, list1(allocVector(INTSXP, res_alloc)));
-	    res_tail = CDR(res_tail);
+	    SETCDR(res_tail, list1(IntVector::create(res_alloc)));
+	    res_tail = CDR(res_tail.get());
 	    res_val = INTEGER(CAR(res_tail));
 	    res_ptr = 0;
 	}
@@ -1811,10 +1806,10 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (value) { /* for values we store in fact the absolute start offsets and length in the integer vector */
 	SEXP vec = CAR(res_head);
-	R_size_t entry = 0, cptr = 0, clen = (CDR(res_head) == R_NilValue) ? res_ptr : LENGTH(vec);
+	R_size_t entry = 0, cptr = 0, clen = (CDR(res_head.get()) == R_NilValue) ? res_ptr : LENGTH(vec);
 	R_size_t inv_start = 0; /* 0-based start position of the pieces for invert */
 	res_val = INTEGER(vec);
-	ans = PROTECT(ListVector::create(invert ? (nmatches + 1) : nmatches));
+	ans = ListVector::create(invert ? (nmatches + 1) : nmatches);
 	while (entry < (R_size_t) nmatches) {
 	    if (invert) { /* for invert=TRUE store the current piece up to the match */
 		SEXP rvec = RawVector::create(res_val[cptr] - 1 - inv_start);
@@ -1833,12 +1828,12 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* advance in the elements -- possibly jumping to the next list block */
 	    cptr += 2;
 	    if (cptr >= clen) {
-		res_head = CDR(res_head);
+		res_head = CDR(res_head.get());
 		if (res_head == R_NilValue) break;
 		vec = CAR(res_head);
 		res_val = INTEGER(vec);
 		cptr = 0;
-		clen = (CDR(res_head) == R_NilValue) ? res_ptr : LENGTH(vec);
+		clen = (CDR(res_head.get()) == R_NilValue) ? res_ptr : LENGTH(vec);
 	    }
 	}
 	if (invert) { /* add the last piece after the last match */
@@ -1847,20 +1842,17 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 	    if (LENGTH(lvec))
 		memcpy(RAW(lvec), RAW(text) + inv_start, LENGTH(lvec));
 	}
-	UNPROTECT(1);
     } else { /* if values are not needed, we just collect all the start offsets */
-	ans = allocVector(INTSXP, nmatches);
+	ans = IntVector::create(nmatches);
 	res_val = INTEGER(ans);
 	while (res_head != R_NilValue) {
 	    SEXP vec = CAR(res_head);
-	    R_size_t len = (CDR(res_head) == R_NilValue) ? res_ptr : LENGTH(vec);
+	    R_size_t len = (CDR(res_head.get()) == R_NilValue) ? res_ptr : LENGTH(vec);
 	    if (len) memcpy(res_val, INTEGER(vec), len * sizeof(int));
 	    res_val += len;
-	    res_head = CDR(res_head);
+	    res_head = CDR(res_head.get());
 	}
     }
-    UNPROTECT(1);
-
     tre_regfree(&reg);
 
     return ans;
@@ -2531,8 +2523,8 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
     const char *string = NULL;
     const wchar_t *ws = NULL;
 
-    PROTECT(matchbuf = allocVector(INTSXP, bufsize));
-    PROTECT(matchlenbuf = allocVector(INTSXP, bufsize));
+    PROTECT(matchbuf = IntVector::create(bufsize));
+    PROTECT(matchlenbuf = IntVector::create(bufsize));
 
     if (useBytes) {
 	string = CHAR(sstr);
@@ -2567,13 +2559,13 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
 		/* Reallocate match buffers */
 		int newbufsize = bufsize * 2;
 		SEXP tmp;
-		tmp = allocVector(INTSXP, 2 * bufsize);
+		tmp = IntVector::create(2 * bufsize);
 		for (j = 0; j < bufsize; j++)
 		    INTEGER(tmp)[j] = INTEGER(matchlenbuf)[j];
 		UNPROTECT(1);
 		matchlenbuf = tmp;
 		PROTECT(matchlenbuf);
-		tmp = allocVector(INTSXP, 2 * bufsize);
+		tmp = IntVector::create(2 * bufsize);
 		for (j = 0; j < bufsize; j++)
 		    INTEGER(tmp)[j] = INTEGER(matchbuf)[j];
 		matchbuf = tmp;
@@ -2605,8 +2597,8 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
 	    warning(_("Out-of-memory error in regexp matching for element %d"),
 		    (int) i + 1);
     }
-    PROTECT(ans = allocVector(INTSXP, matchIndex + 1));
-    PROTECT(matchlen = allocVector(INTSXP, matchIndex + 1));
+    PROTECT(ans = IntVector::create(matchIndex + 1));
+    PROTECT(matchlen = IntVector::create(matchIndex + 1));
     /* copy from buffers */
     for (j = 0; j <= matchIndex; j++) {
 	INTEGER(ans)[j] = INTEGER(matchbuf)[j];
@@ -2630,8 +2622,8 @@ static SEXP gregexpr_fixed(const char *pattern, const char *string,
     SEXP ans, matchlen;         /* return vect and its attribute */
     SEXP matchbuf, matchlenbuf; /* buffers for storing multiple matches */
     int bufsize = 1024;         /* starting size for buffers */
-    PROTECT(matchbuf = allocVector(INTSXP, bufsize));
-    PROTECT(matchlenbuf = allocVector(INTSXP, bufsize));
+    PROTECT(matchbuf = IntVector::create(bufsize));
+    PROTECT(matchlenbuf = IntVector::create(bufsize));
     if (!useBytes && use_UTF8)
 	patlen = (int) Rf_utf8towcs(NULL, pattern, 0);
     else if (!useBytes && mbcslocale)
@@ -2663,13 +2655,13 @@ static SEXP gregexpr_fixed(const char *pattern, const char *string,
 		    /* Reallocate match buffers */
 		    int newbufsize = bufsize * 2;
 		    SEXP tmp;
-		    tmp = allocVector(INTSXP, 2 * bufsize);
+		    tmp = IntVector::create(2 * bufsize);
 		    for (j = 0; j < bufsize; j++)
 			INTEGER(tmp)[j] = INTEGER(matchlenbuf)[j];
 		    UNPROTECT(1);
 		    matchlenbuf = tmp;
 		    PROTECT(matchlenbuf);
-		    tmp = allocVector(INTSXP, 2 * bufsize);
+		    tmp = IntVector::create(2 * bufsize);
 		    for (j = 0; j < bufsize; j++)
 			INTEGER(tmp)[j] = INTEGER(matchbuf)[j];
 		    matchbuf = tmp;
@@ -2686,8 +2678,8 @@ static SEXP gregexpr_fixed(const char *pattern, const char *string,
 	}
     }
     ansSize = foundAny ? (matchIndex + 1) : 1;
-    PROTECT(ans = allocVector(INTSXP, ansSize));
-    PROTECT(matchlen = allocVector(INTSXP, ansSize));
+    PROTECT(ans = IntVector::create(ansSize));
+    PROTECT(matchlen = IntVector::create(ansSize));
     /* copy from buffers */
     for (j = 0; j < ansSize; j++) {
 	INTEGER(ans)[j] = INTEGER(matchbuf)[j];
@@ -2797,10 +2789,10 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
     int bufsize = 1024;         /* starting size for buffers */
     int slen = (int) strlen(string);
 
-    capturebuf = allocVector(INTSXP, bufsize*capture_count);
-    capturelenbuf = allocVector(INTSXP, bufsize*capture_count);
-    matchbuf = allocVector(INTSXP, bufsize);
-    matchlenbuf = allocVector(INTSXP, bufsize);
+    capturebuf = IntVector::create(bufsize*capture_count);
+    capturelenbuf = IntVector::create(bufsize*capture_count);
+    matchbuf = IntVector::create(bufsize);
+    matchlenbuf = IntVector::create(bufsize);
 
     while (!foundAll) {
 #ifdef HAVE_PCRE2
@@ -2819,22 +2811,22 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 		/* Reallocate match buffers */
 		int newbufsize = bufsize * 2;
 		SEXP tmp;
-		tmp = allocVector(INTSXP, newbufsize);
+		tmp = IntVector::create(newbufsize);
 		for (int j = 0; j < bufsize; j++) /* or use memcpy */
 		    INTEGER(tmp)[j] = INTEGER(matchlenbuf)[j];
 		matchlenbuf = tmp;
-		tmp = allocVector(INTSXP, newbufsize);
+		tmp = IntVector::create(newbufsize);
 		for (int j = 0; j < bufsize; j++)  /* or use memcpy */
 		    INTEGER(tmp)[j] = INTEGER(matchbuf)[j];
 		matchbuf = tmp;
 		if (capture_count) {
-		    tmp = allocVector(INTSXP, newbufsize*capture_count);
+		    tmp = IntVector::create(newbufsize*capture_count);
 		    for(int j = 0; j < bufsize; j++)
 			for(int i = 0; i < capture_count; i++)
 			    INTEGER(tmp)[j + newbufsize*i] =
 				INTEGER(capturebuf)[j + bufsize*i];
 		    capturebuf = tmp;
-		    tmp = allocVector(INTSXP, newbufsize*capture_count);
+		    tmp = IntVector::create(newbufsize*capture_count);
 		    for(int j = 0; j < bufsize; j++)
 			for(int i = 0; i < capture_count; i++)
 			    INTEGER(tmp)[j + newbufsize*i] =
@@ -2863,9 +2855,9 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	    if (!foundAny) matchIndex = 0;
 	}
     }
-    PROTECT(ans = allocVector(INTSXP, matchIndex + 1));
+    PROTECT(ans = IntVector::create(matchIndex + 1));
     /* Protect in case install("match.length") allocates */
-    PROTECT(matchlen = allocVector(INTSXP, matchIndex + 1));
+    PROTECT(matchlen = IntVector::create(matchIndex + 1));
     setAttrib(ans, install("match.length"), matchlen);
     if(useBytes) {
 	setAttrib(ans, install("index.type"), itype);
@@ -3076,9 +3068,9 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     if (PRIMVAL(op) == 0) { /* regexpr */
 	SEXP matchlen, capture_start, capturelen;
 	int *is, *il;
-	PROTECT(ans = allocVector(INTSXP, n));
+	PROTECT(ans = IntVector::create(n));
 	/* Protect in case install("match.length") allocates */
-	PROTECT(matchlen = allocVector(INTSXP, n));
+	PROTECT(matchlen = IntVector::create(n));
 	setAttrib(ans, install("match.length"), matchlen);
 	if(useBytes) {
 	    setAttrib(ans, install("index.type"), itype);
@@ -3398,8 +3390,8 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		vmaxset(vmax);
 	    }
 	    if(rc == REG_OK) {
-		PROTECT(matchpos = allocVector(INTSXP, nmatch));
-		PROTECT(matchlen = allocVector(INTSXP, nmatch));
+		PROTECT(matchpos = IntVector::create(nmatch));
+		PROTECT(matchlen = IntVector::create(nmatch));
 		for(size_t j = 0; j < nmatch; j++) {
 		    so = pmatch[j].rm_so;
 		    INTEGER(matchpos)[j] = so + 1;
@@ -3452,7 +3444,8 @@ attribute_hidden SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     uint32_t res;
 
     checkArity(op, args);
-    SEXP ans = PROTECT(allocVector(LGLSXP, 4));
+    GCStackRoot<> ans;
+    ans = LogicalVector::create(4);
     int *lans = LOGICAL(ans);
     SEXP nm = StringVector::create(4);
     setAttrib(ans, R_NamesSymbol, nm);
@@ -3467,7 +3460,7 @@ attribute_hidden SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     pcre2_config(PCRE2_CONFIG_STACKRECURSE, &res);
     lans[3] = res;
     SET_STRING_ELT(nm, 3, mkChar("stack"));
-    UNPROTECT(1);
+
     return ans;
 }
 #else
@@ -3476,7 +3469,7 @@ attribute_hidden SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     int res;
 
     checkArity(op, args);
-    SEXP ans = PROTECT(allocVector(LGLSXP, 4));
+    SEXP ans = PROTECT(LogicalVector::create(4));
     int *lans = LOGICAL(ans);
     SEXP nm = StringVector::create(4);
     setAttrib(ans, R_NamesSymbol, nm);

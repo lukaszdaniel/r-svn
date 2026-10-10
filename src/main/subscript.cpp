@@ -915,18 +915,14 @@ static SEXP realSubscript(SEXP s, R_xlen_t ns, R_xlen_t nx, R_xlen_t *stretch,
  * large, then it will be too slow unless ns is very small.
  */
 
-static SEXP stringSubscript(SEXP s, R_xlen_t ns /* = xlength(s) */, R_xlen_t nx /* = xlength(x) */,
-		SEXP names,
+static SEXP stringSubscript(SEXP s_, R_xlen_t ns /* = xlength(s) */, R_xlen_t nx /* = xlength(x) */,
+		SEXP names_,
 		R_xlen_t *stretch, SEXP call, SEXP x, int dim)
 {
     /* product may overflow, so check factors as well. */
     bool usehashing = ( ((ns > 1000 && nx) || (nx > 1000 && ns)) || (ns * nx > 15*nx + ns) );
-    int nprotect = 0;
-    PROTECT(s);
-    PROTECT(names);
-    nprotect += 2;
+    GCStackRoot<> s(s_), names(names_), indx, indexnames, sindx;
 
-    SEXP indx, indexnames = R_NilValue;
     bool canstretch = *stretch > 0;
     *stretch = 0;
     R_xlen_t i, sub,
@@ -944,16 +940,14 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns /* = xlength(s) */, R_xlen_t nx 
 	/* must be internal, so names contains a character vector */
 	/* NB: this does not behave in the same way with respect to ""
 	   and NA names: they will match */
-	PROTECT(indx = match(names, s, 0)); /**** guaranteed to be fresh???*/
-	nprotect++;
+	indx = match(names, s, 0); /**** guaranteed to be fresh???*/
 	/* second pass to correct this */
 	int *pindx = INTEGER(indx);
 	for (i = 0; i < ns; i++)
 	    if(STRING_ELT(s, i) == NA_STRING || !CHAR(STRING_ELT(s, i))[0])
 		pindx[i] = 0;
     } else {
-	PROTECT(indx = IntVector::create(ns));
-	nprotect++;
+	indx = IntVector::create(ns);
 	int *pindx = INTEGER(indx);
 	for (i = 0; i < ns; i++) {
 	    sub = 0;
@@ -971,14 +965,12 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns /* = xlength(s) */, R_xlen_t nx 
     }
 
     int *pindx = INTEGER(indx);
-    SEXP sindx = NULL;
     for (i = 0; i < ns; i++) {
 	sub = pindx[i];
 	if (sub == 0) {
-	    if (sindx == NULL) {
-		sindx = PROTECT(match(s, s, 0));
-		indexnames = PROTECT(allocVector(VECSXP, ns));
-		nprotect += 2;
+	    if (sindx == nullptr) {
+		sindx = match(s, s, 0);
+		indexnames = allocVector(VECSXP, ns);
 		for (int z = 0; z < ns; z++)
 		    SET_VECTOR_ELT(indexnames, z, R_NilValue);
 	    }
@@ -1005,7 +997,6 @@ static SEXP stringSubscript(SEXP s, R_xlen_t ns /* = xlength(s) */, R_xlen_t nx 
 	if (canstretch)
 	    *stretch = extra;
     }
-    UNPROTECT(nprotect);
     return indx;
 }
 

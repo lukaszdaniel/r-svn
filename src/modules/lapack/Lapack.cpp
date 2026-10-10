@@ -29,6 +29,7 @@
 #include <cstdlib> /* for realpath */
 #include <cstring> /* for strstr, strlen */
 #include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -1154,21 +1155,22 @@ static SEXP La_chol2inv(SEXP A, SEXP size, SEXP diag_only)
 	error("%s", _("'size' argument must be a positive integer"));
 	return R_NilValue; /* -Wall */
     } else {
-	SEXP ans, Amat = A; /* -Wall: we initialize here as for the 1x1 case */
-	int m = 1, n = 1, nprot = 0;
+	GCStackRoot<> ans, Amat;
+	Amat = A; /* -Wall: we initialize here as for the 1x1 case */
+	int m = 1, n = 1;
 
 	if (sz == 1 && !isMatrix(A) && isReal(A)) {
 	    /* nothing to do; m = n = 1; ... */
 	} else if (isMatrix(A)) {
 	    SEXP adims = getAttrib(A, R_DimSymbol);
 	    if (TYPEOF(adims) != INTSXP) error("%s", _("non-integer dims"));
-	    Amat = PROTECT(RealVector::coerce(A)); nprot++;
+	    Amat = RealVector::coerce(A);
 	    m = INTEGER(adims)[0]; n = INTEGER(adims)[1];
 	} else error(_("'%s' must be a numeric matrix"), "a");
 
-	if (sz > n) { UNPROTECT(nprot); error(_("'size' cannot exceed ncol(x) = %d"), n); }
-	if (sz > m) { UNPROTECT(nprot); error(_("'size' cannot exceed nrow(x) = %d"), m); }
-	ans = PROTECT(allocMatrix(REALSXP, sz, sz)); nprot++;
+	if (sz > n) { error(_("'size' cannot exceed ncol(x) = %d"), n); }
+	if (sz > m) { error(_("'size' cannot exceed nrow(x) = %d"), m); }
+	ans = allocMatrix(REALSXP, sz, sz);
 	size_t M = m, SZ = sz; // prevent integer overflow in j * M or SZ
 	for (int j = 0; j < sz; j++) {
 	    for (int i = 0; i <= j; i++)
@@ -1181,7 +1183,6 @@ static SEXP La_chol2inv(SEXP A, SEXP size, SEXP diag_only)
 	    F77_CALL(dpotri)("U",      &sz, REAL(ans), &sz, &info FCONE);
 	}
 	if (info != 0) {
-	    UNPROTECT(nprot);
 	    if (info > 0)
 		error(_("element (%d, %d) is zero, so the inverse cannot be computed"),
 		      info, info);
@@ -1189,7 +1190,8 @@ static SEXP La_chol2inv(SEXP A, SEXP size, SEXP diag_only)
 		  -info, only_diag ? "dtrtri" : "dpotri");
 	}
 	if (only_diag) {
-	    SEXP d = PROTECT(RealVector::create(sz)); nprot++;
+	    GCStackRoot<> d;
+	    d = RealVector::create(sz);
 	    BLAS_INT inc = (BLAS_INT) sz;
 	    for (int i = 0; i < sz; i++) {
 		BLAS_INT len = (BLAS_INT) (sz - i);
@@ -1202,7 +1204,7 @@ static SEXP La_chol2inv(SEXP A, SEXP size, SEXP diag_only)
 		for (int i = j+1; i < sz; i++)
 		    REAL(ans)[i + j * SZ] = REAL(ans)[j + i * SZ];
 	}
-	UNPROTECT(nprot);
+
 	return ans;
     }
 }
