@@ -64,6 +64,13 @@ namespace CXXR
         using iterator = T *;
         using value_type = T;
 
+        /** @brief Coerce an R object to the type represented by this vector.
+         */
+        static SEXP coerce(SEXP source)
+        {
+            return VectorBase::coerceVectorImpl(source, ST);
+        }
+
         /** @brief Create a vector, leaving its contents
          *         uninitialized (for POD types) or default
          *         constructed.

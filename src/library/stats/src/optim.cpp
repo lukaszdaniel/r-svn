@@ -24,6 +24,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Defn.h> // for ENSURE_NAMEDMAX
 #include <R_ext/Applic.h>
 
@@ -81,7 +82,7 @@ static double fminfn(int n, double *p, void *ex)
     }
     SETCADR(OS->R_fcall, x);
     s = eval(OS->R_fcall, OS->R_env);
-    s = coerceVector(s, REALSXP);
+    s = RealVector::coerce(s);
     if (LENGTH(s) != 1)
 	error(_("objective function in optim evaluates to length %d not 1"),
 	      LENGTH(s));
@@ -105,7 +106,7 @@ static void fmingr(int n, double *p, double *df, void *ex)
 	}
 	SETCADR(OS->R_gcall, x);
 	s = eval(OS->R_gcall, OS->R_env);
-	s = coerceVector(s, REALSXP);
+	s = RealVector::coerce(s);
 	if(LENGTH(s) != n)
 	    error(_("gradient in optim evaluated to length %d not %d"),
 		  LENGTH(s), n);
@@ -130,7 +131,7 @@ static void fmingr(int n, double *p, double *df, void *ex)
                 }
 		REAL(x)[i] = (p[i] + eps) * (OS->parscale[i]);
 		s = eval(OS->R_fcall, OS->R_env);
-		s = coerceVector(s, REALSXP);
+		s = RealVector::coerce(s);
 		val1 = REAL(s)[0]/(OS->fnscale);
                 if (MAYBE_REFERENCED(x)) {
                     x = duplicate(x);
@@ -138,7 +139,7 @@ static void fmingr(int n, double *p, double *df, void *ex)
                 }
 		REAL(x)[i] = (p[i] - eps) * (OS->parscale[i]);
 		s = eval(OS->R_fcall, OS->R_env);
-		s = coerceVector(s, REALSXP);
+		s = RealVector::coerce(s);
 		val2 = REAL(s)[0]/(OS->fnscale);
 		df[i] = (val1 - val2)/(2 * eps);
 		if(!R_FINITE(df[i]))
@@ -163,7 +164,7 @@ static void fmingr(int n, double *p, double *df, void *ex)
                 }
 		REAL(x)[i] = tmp * (OS->parscale[i]);
 		s = eval(OS->R_fcall, OS->R_env);
-		s = coerceVector(s, REALSXP);
+		s = RealVector::coerce(s);
 		val1 = REAL(s)[0]/(OS->fnscale);
 		tmp = p[i] - eps;
 		if (tmp < OS->lower[i]) {
@@ -176,7 +177,7 @@ static void fmingr(int n, double *p, double *df, void *ex)
                 }
 		REAL(x)[i] = tmp * (OS->parscale[i]);
 		s = eval(OS->R_fcall, OS->R_env);
-		s = coerceVector(s, REALSXP);
+		s = RealVector::coerce(s);
 		val2 = REAL(s)[0]/(OS->fnscale);
 		df[i] = (val1 - val2)/(epsused + eps);
 		if(!R_FINITE(df[i]))
@@ -217,7 +218,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     tn = CHAR(STRING_ELT(method, 0));
     args = CDR(args); options = CAR(args);
     PROTECT(OS->R_fcall = lang2(fn, R_NilValue));
-    par = coerceVector(par, REALSXP);
+    par = RealVector::coerce(par);
     if (MAYBE_REFERENCED(par))
     	par = duplicate(par);
     npar = LENGTH(par);
@@ -228,7 +229,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     tmp = getListElement(options, "parscale");
     if (LENGTH(tmp) != npar)
 	error("%s", _("'parscale' is of the wrong length"));
-    PROTECT(tmp = coerceVector(tmp, REALSXP));
+    PROTECT(tmp = RealVector::coerce(tmp));
     OS->parscale = vect(npar);
     for (i = 0; i < npar; i++) OS->parscale[i] = REAL(tmp)[i];
     UNPROTECT(1);
@@ -303,7 +304,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (LENGTH(ndeps) != npar)
 		error("%s", _("'ndeps' is of the wrong length"));
 	    OS->ndeps = vect(npar);
-	    PROTECT(ndeps = coerceVector(ndeps, REALSXP));
+	    PROTECT(ndeps = RealVector::coerce(ndeps));
 	    for (i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
 	    UNPROTECT(1);
 	}
@@ -328,7 +329,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (LENGTH(ndeps) != npar)
 		error("%s", _("'ndeps' is of the wrong length"));
 	    OS->ndeps = vect(npar);
-	    PROTECT(ndeps = coerceVector(ndeps, REALSXP));
+	    PROTECT(ndeps = RealVector::coerce(ndeps));
 	    for (i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
 	    UNPROTECT(1);
 	}
@@ -358,7 +359,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (LENGTH(ndeps) != npar)
 		error("%s", _("'ndeps' is of the wrong length"));
 	    OS->ndeps = vect(npar);
-	    PROTECT(ndeps = coerceVector(ndeps, REALSXP));
+	    PROTECT(ndeps = RealVector::coerce(ndeps));
 	    for (i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
 	    UNPROTECT(1);
 	}
@@ -422,12 +423,12 @@ SEXP optimhess(SEXP call, SEXP op, SEXP args, SEXP rho)
     tmp = getListElement(options, "parscale");
     if (LENGTH(tmp) != npar)
 	error("%s", _("'parscale' is of the wrong length"));
-    PROTECT(tmp = coerceVector(tmp, REALSXP));
+    PROTECT(tmp = RealVector::coerce(tmp));
     OS->parscale = vect(npar);
     for (i = 0; i < npar; i++) OS->parscale[i] = REAL(tmp)[i];
     UNPROTECT(1);
     PROTECT(OS->R_fcall = lang2(fn, R_NilValue));
-    PROTECT(par = coerceVector(par, REALSXP));
+    PROTECT(par = RealVector::coerce(par));
     if (!isNull(gr)) {
 	if (!isFunction(gr)) error("%s", _("'gr' is not a function"));
 	PROTECT(OS->R_gcall = lang2(gr, R_NilValue));
@@ -437,7 +438,7 @@ SEXP optimhess(SEXP call, SEXP op, SEXP args, SEXP rho)
     ndeps = getListElement(options, "ndeps");
     if (LENGTH(ndeps) != npar) error("%s", _("'ndeps' is of the wrong length"));
     OS->ndeps = vect(npar);
-    PROTECT(ndeps = coerceVector(ndeps, REALSXP));
+    PROTECT(ndeps = RealVector::coerce(ndeps));
     for (i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
     UNPROTECT(1);
     PROTECT(ans = allocMatrix(REALSXP, npar, npar));

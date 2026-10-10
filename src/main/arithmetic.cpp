@@ -1184,7 +1184,7 @@ static SEXP math1_ari(SEXP sa, double (*f)(double), double arg, double res, SEXP
 
     R_xlen_t n = XLENGTH(sa);
     /* coercion can lose the object bit */
-    PROTECT(sa = coerceVector(sa, REALSXP));
+    PROTECT(sa = RealVector::coerce(sa));
     sy = NO_REFERENCES(sa) ? sa : RealVector::create(n);
     const double *a = REAL_RO(sa);
     double *y = REAL(sy);
@@ -1222,7 +1222,7 @@ static SEXP math1(SEXP sa, double (*f)(double), SEXP lcall)
 
     R_xlen_t n = XLENGTH(sa);
     /* coercion can lose the object bit */
-    PROTECT(sa = coerceVector(sa, REALSXP));
+    PROTECT(sa = RealVector::coerce(sa));
     sy = NO_REFERENCES(sa) ? sa : RealVector::create(n);
     const double *a = REAL_RO(sa);
     double *y = REAL(sy);
@@ -1509,8 +1509,8 @@ static SEXP math2(SEXP sa, SEXP sb, double (*f)(double, double),
 	return(sy);					\
     }							\
     n = (na < nb) ? nb : na;				\
-    PROTECT(sa = coerceVector(sa, REALSXP));		\
-    PROTECT(sb = coerceVector(sb, REALSXP));		\
+    PROTECT(sa = RealVector::coerce(sa));		\
+    PROTECT(sb = RealVector::coerce(sb));		\
     PROTECT(sy = RealVector::create(n));		\
     a = REAL_RO(sa);					\
     b = REAL_RO(sb);					\
@@ -1955,9 +1955,9 @@ attribute_hidden SEXP do_log_builtin(SEXP call, SEXP op, SEXP args_, SEXP env)
     n = na;							\
     if (n < nb) n = nb;						\
     if (n < nc) n = nc;						\
-    PROTECT(sa = coerceVector(sa, REALSXP));			\
-    PROTECT(sb = coerceVector(sb, REALSXP));			\
-    PROTECT(sc = coerceVector(sc, REALSXP));			\
+    PROTECT(sa = RealVector::coerce(sa));			\
+    PROTECT(sb = RealVector::coerce(sb));			\
+    PROTECT(sc = RealVector::coerce(sc));			\
     PROTECT(sy = RealVector::create(n));			\
     const double *a = REAL_RO(sa),				\
 	*b = REAL_RO(sb),					\
@@ -2183,10 +2183,10 @@ static SEXP math4(SEXP sa, SEXP sb, SEXP sc, SEXP sd,
     if (n < nb) n = nb;							\
     if (n < nc) n = nc;							\
     if (n < nd) n = nd;							\
-    PROTECT(sa = coerceVector(sa, REALSXP));				\
-    PROTECT(sb = coerceVector(sb, REALSXP));				\
-    PROTECT(sc = coerceVector(sc, REALSXP));				\
-    PROTECT(sd = coerceVector(sd, REALSXP));				\
+    PROTECT(sa = RealVector::coerce(sa));				\
+    PROTECT(sb = RealVector::coerce(sb));				\
+    PROTECT(sc = RealVector::coerce(sc));				\
+    PROTECT(sd = RealVector::coerce(sd));				\
     PROTECT(sy = RealVector::create(n));				\
     const double *a = REAL_RO(sa),					\
 	*b = REAL_RO(sb),						\
@@ -2351,11 +2351,11 @@ static SEXP math5(SEXP sa, SEXP sb, SEXP sc, SEXP sd, SEXP se, double (*f)())
     if (n < nc) n = nc;							\
     if (n < nd) n = nd;							\
     if (n < ne) n = ne;		/* n = max(na,nb,nc,nd,ne) */		\
-    PROTECT(sa = coerceVector(sa, REALSXP));				\
-    PROTECT(sb = coerceVector(sb, REALSXP));				\
-    PROTECT(sc = coerceVector(sc, REALSXP));				\
-    PROTECT(sd = coerceVector(sd, REALSXP));				\
-    PROTECT(se = coerceVector(se, REALSXP));				\
+    PROTECT(sa = RealVector::coerce(sa));				\
+    PROTECT(sb = RealVector::coerce(sb));				\
+    PROTECT(sc = RealVector::coerce(sc));				\
+    PROTECT(sd = RealVector::coerce(sd));				\
+    PROTECT(se = RealVector::coerce(se));				\
     PROTECT(sy = RealVector::create(n));				\
     const double							\
 	*a = REAL_RO(sa),						\

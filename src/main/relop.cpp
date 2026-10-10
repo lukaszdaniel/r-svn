@@ -43,6 +43,9 @@
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <Rmath.h>
@@ -381,36 +384,36 @@ attribute_hidden SEXP do_relop_dflt(SEXP call, SEXP op, SEXP xarg, SEXP yarg)
   if (nx > 0 && ny > 0) {
 
     if (isString(x) || isString(y)) {
-	x = coerceVector(x, STRSXP);
-	y = coerceVector(y, STRSXP);
+	x = StringVector::coerce(x);
+	y = StringVector::coerce(y);
 	val = string_relop(opcode, x, y);
     }
     else if (isComplex(x) || isComplex(y)) {
-	x = coerceVector(x, CPLXSXP);
-	y = coerceVector(y, CPLXSXP);
+	x = ComplexVector::coerce(x);
+	y = ComplexVector::coerce(y);
 	val = complex_relop(opcode, x, y, call);
     }
     else if ((isNumeric(x) || isLogical(x)) && (isNumeric(y) || isLogical(y))) {
         val = numeric_relop(opcode, x, y);
     } // rest of cases only apply when 'x' or 'y' is raw
     else if (isReal(x) || isReal(y)) {
-	x = coerceVector(x, REALSXP);
-	y = coerceVector(y, REALSXP);
+	x = RealVector::coerce(x);
+	y = RealVector::coerce(y);
 	val = numeric_relop(opcode, x, y);
     }
     else if (isInteger(x) || isInteger(y)) {
-	x = coerceVector(x, INTSXP);
-	y = coerceVector(y, INTSXP);
+	x = IntVector::coerce(x);
+	y = IntVector::coerce(y);
 	val = numeric_relop(opcode, x, y);
     }
     else if (isLogical(x) || isLogical(y)) {
-	x = coerceVector(x, LGLSXP);
-	y = coerceVector(y, LGLSXP);
+	x = LogicalVector::coerce(x);
+	y = LogicalVector::coerce(y);
 	val = numeric_relop(opcode, x, y);
     }
     else if (TYPEOF(x) == RAWSXP || TYPEOF(y) == RAWSXP) {
-	x = coerceVector(x, RAWSXP);
-	y = coerceVector(y, RAWSXP);
+	x = RawVector::coerce(x);
+	y = RawVector::coerce(y);
 	val = raw_relop(opcode, x, y);
     } else errorcall(call, "%s", _("comparison of these types is not implemented"));
   } else { // nx == 0 || ny == 0

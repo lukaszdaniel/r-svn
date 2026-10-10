@@ -40,6 +40,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/ListVector.hpp>
@@ -239,7 +240,7 @@ attribute_hidden SEXP do_matrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 SEXP Rf_allocMatrix(SEXPTYPE mode, int nrow, int ncol)
 {
-    SEXP s, t;
+    GCStackRoot<> s, t;
     R_xlen_t n;
 
     if (nrow < 0 || ncol < 0)
@@ -252,12 +253,12 @@ SEXP Rf_allocMatrix(SEXPTYPE mode, int nrow, int ncol)
 	error("%s", _("allocMatrix: too many elements specified"));
 #endif
     n = ((R_xlen_t) nrow) * ncol;
-    PROTECT(s = allocVector(mode, n));
-    PROTECT(t = allocVector(INTSXP, 2));
+    s = allocVector(mode, n);
+    t = IntVector::create(2);
     INTEGER(t)[0] = nrow;
     INTEGER(t)[1] = ncol;
     setAttrib(s, R_DimSymbol, t);
-    UNPROTECT(2);
+
     return s;
 }
 

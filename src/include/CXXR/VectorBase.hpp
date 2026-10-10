@@ -46,6 +46,10 @@ namespace CXXR
     public:
         using size_type = R_xlen_t;
 
+        /** @brief Coerce an R object to the specified vector type.
+         */
+        static SEXP coerceVectorImpl(SEXP source, SEXPTYPE type);
+
         /** @brief Number of elements in the vector.
          *
          * @return The number of elements in the vector.

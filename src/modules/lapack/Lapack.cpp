@@ -32,6 +32,8 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <CXXR/ComplexVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/ListVector.hpp>
@@ -120,13 +122,13 @@ static char La_valid_uplo(const char *uplostr)
 static SEXP La_svd(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP vt)
 {
     if (!isString(jobu)) error(_("'%s' must be a character string"), "jobu");
-    int *xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP)),
+    int *xdims = INTEGER(IntVector::coerce(getAttrib(x, R_DimSymbol))),
 	n = xdims[0], p = xdims[1], nprot = 2;
 
     /* work on a copy of x  */
     double *xvals;
     if (!isReal(x)) {
-	x = PROTECT(coerceVector(x, REALSXP)); nprot++;
+	x = PROTECT(RealVector::coerce(x)); nprot++;
 	xvals = REAL(x);
     } else {
 	xvals = (double *) R_alloc(n * (size_t) p, sizeof(double));
@@ -186,7 +188,7 @@ static SEXP La_rs(SEXP x, SEXP only_values)
     int il = 0, iu = 0, *isuppz;
     /* il and iu are unused if range='a', but clang-21 warns */
 
-    xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(x, R_DimSymbol)));
     n = xdims[0];
     if (n != xdims[1]) error("%s", _("'x' must be a square numeric matrix"));
     bool ov = asLogicalNoNA(only_values, "only.values");
@@ -194,14 +196,14 @@ static SEXP La_rs(SEXP x, SEXP only_values)
 
     /* work on a copy of x, since LAPACK trashes it */
     if (!isReal(x)) {
-	x = coerceVector(x, REALSXP);
+	x = RealVector::coerce(x);
 	rx = REAL(x);
     } else {
 	rx = (double *) R_alloc(n * (size_t) n, sizeof(double));
 	Memcpy(rx, REAL(x), (size_t) n * n);
     }
     PROTECT(x);
-    SEXP values = PROTECT(allocVector(REALSXP, n));
+    SEXP values = PROTECT(RealVector::create(n));
     rvalues = REAL(values);
 
     if (!ov) {
@@ -277,14 +279,14 @@ static SEXP La_rg(SEXP x, SEXP only_values)
     double *work, *wR, *wI, *left, *right, *xvals, tmp;
     char jobVL[2] = "N", jobVR[2] = "N";
 
-    xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(x, R_DimSymbol)));
     n = xdims[0];
     if (n != xdims[1])
 	error("%s", _("'x' must be a square numeric matrix"));
 
     /* work on a copy of x */
     if (!isReal(x)) {
-	x = coerceVector(x, REALSXP);
+	x = RealVector::coerce(x);
 	xvals = REAL(x);
     } else {
 	xvals = (double *) R_alloc(n * (size_t)n, sizeof(double));
@@ -335,7 +337,7 @@ static SEXP La_rg(SEXP x, SEXP only_values)
 	SET_VECTOR_ELT(ret, 0, val);
 	if (vectors) SET_VECTOR_ELT(ret, 1, unscramble(wI, n, right));
     } else {
-	SEXP val = allocVector(REALSXP, n);
+	SEXP val = RealVector::create(n);
 	for (i = 0; i < n; i++) REAL(val)[i] = wR[i];
 	SET_VECTOR_ELT(ret, 0, val);
 	if(vectors) {
@@ -358,16 +360,16 @@ static SEXP La_dlange(SEXP A, SEXP type)
     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "A");
     if (!isString(type)) error(_("'%s' must be a character string"), "type");
     if (!isReal(A)) {
-	A = PROTECT(coerceVector(A, REALSXP)); nprot++;
+	A = PROTECT(RealVector::coerce(A)); nprot++;
     }
 
-    xdims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     m = xdims[0];
     n = xdims[1]; /* m x n  matrix {using Lapack naming convention} */
 
     typNorm[0] = La_norm_type(CHAR(asChar(type)));
 
-    SEXP val = PROTECT(allocVector(REALSXP, 1));
+    SEXP val = PROTECT(RealVector::create(1));
     if(*typNorm == 'I') work = (double *) R_alloc(m, sizeof(double));
     REAL(val)[0] = F77_CALL(dlange)(typNorm, &m, &n, REAL(A), &m, work FCONE);
 
@@ -386,14 +388,14 @@ static SEXP La_dgecon(SEXP A, SEXP norm)
 
     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "A");
     if (!isString(norm)) error(_("'%s' must be a character string"), "norm");
-    A = PROTECT(isReal(A) ? duplicate(A) : coerceVector(A, REALSXP));
+    A = PROTECT(isReal(A) ? duplicate(A) : RealVector::coerce(A));
 
-    xdims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     m = xdims[0]; n = xdims[1];
 
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
-    SEXP val = PROTECT(allocVector(REALSXP, 1));
+    SEXP val = PROTECT(RealVector::create(1));
     work = (double *) R_alloc((*typNorm == 'I' && (size_t) m > 4*(size_t)n) ? m : 4*(size_t)n,
 			      sizeof(double));
     iwork = (int *) R_alloc(m, sizeof(int));
@@ -440,9 +442,9 @@ static SEXP La_dtrcon3(SEXP A, SEXP norm, SEXP uplo)
     if (!isString(uplo)) error(_("'%s' must be a character string"), "uplo");
     if (!isReal(A)) {
 	nprot++;
-	A = PROTECT(coerceVector(A, REALSXP));
+	A = PROTECT(RealVector::coerce(A));
     }
-    xdims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     n = xdims[0];
     if(n != xdims[1]) {
 	UNPROTECT(nprot);
@@ -453,7 +455,7 @@ static SEXP La_dtrcon3(SEXP A, SEXP norm, SEXP uplo)
     uploC  [0] = La_valid_uplo(CHAR(asChar(uplo)));
 
     nprot++;
-    SEXP val = PROTECT(allocVector(REALSXP, 1));
+    SEXP val = PROTECT(RealVector::create(1));
 
     F77_CALL(dtrcon)(typNorm, uploC, "N", &n, REAL(A), &n,
 		     REAL(val),
@@ -476,9 +478,9 @@ static SEXP La_dtrcon(SEXP A, SEXP norm)
     if (!isString(norm)) error(_("'%s' must be a character string"), "norm");
     if (!isReal(A)) {
 	nprot++;
-	A = PROTECT(coerceVector(A, REALSXP));
+	A = PROTECT(RealVector::coerce(A));
     }
-    xdims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     n = xdims[0];
     if(n != xdims[1]) {
 	UNPROTECT(nprot);
@@ -488,7 +490,7 @@ static SEXP La_dtrcon(SEXP A, SEXP norm)
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
     nprot++;
-    SEXP val = PROTECT(allocVector(REALSXP, 1));
+    SEXP val = PROTECT(RealVector::create(1));
 
     F77_CALL(dtrcon)(typNorm, "U", "N", &n, REAL(A), &n,
 		     REAL(val),
@@ -513,13 +515,13 @@ static SEXP La_zlange(SEXP A, SEXP type)
 	error(_("'%s' must be a complex matrix"), "A");
     if (!isString(type)) error(_("'%s' must be a character string"), "type");
 
-    xdims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     m = xdims[0];
     n = xdims[1]; /* m x n  matrix {using Lapack naming convention} */
 
     typNorm[0] = La_norm_type(CHAR(asChar(type)));
 
-    SEXP val = PROTECT(allocVector(REALSXP, 1));
+    SEXP val = PROTECT(RealVector::create(1));
     if(*typNorm == 'I') work = (double *) R_alloc((size_t)m, sizeof(Rcomplex));
     REAL(val)[0] = F77_CALL(zlange)(typNorm, &m, &n, COMPLEX(A), &m, work FCONE);
 
@@ -545,13 +547,13 @@ static SEXP La_zgecon(SEXP A, SEXP norm)
     if (!isString(norm)) error(_("'%s' must be a character string"), "norm");
     if (!(isMatrix(A) && isComplex(A)))
 	error(_("'%s' must be a complex matrix"), "A");
-    dims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    dims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     n = dims[0];
     if(n != dims[1]) error("%s", _("'A' must be a *square* matrix"));
 
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
-    SEXP val = PROTECT(allocVector(REALSXP, 1));
+    SEXP val = PROTECT(RealVector::create(1));
 
     rwork = (double *) R_alloc(2*(size_t)n, sizeof(Rcomplex));
     anorm = F77_CALL(zlange)(typNorm, &n, &n, COMPLEX(A), &n, rwork FCONE);
@@ -600,14 +602,14 @@ static SEXP La_ztrcon(SEXP A, SEXP norm)
     if (!isString(norm)) error(_("'%s' must be a character string"), "norm");
     if (!(isMatrix(A) && isComplex(A)))
 	error(_("'%s' must be a complex matrix"), "A");
-    dims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    dims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     n = dims[0];
     if(n != dims[1])
 	error("%s", _("'A' must be a *square* matrix"));
 
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
-    val = PROTECT(allocVector(REALSXP, 1));
+    val = PROTECT(RealVector::create(1));
 
     F77_CALL(ztrcon)(typNorm, "U", "N", &n, COMPLEX(A), &n,
 		     REAL(val),
@@ -636,7 +638,7 @@ static SEXP La_ztrcon3(SEXP A, SEXP norm, SEXP uplo)
 	error(_("'%s' must be a complex matrix"), "A");
     if (!isString(norm)) error(_("'%s' must be a character string"), "norm");
     if (!isString(uplo)) error(_("'%s' must be a character string"), "uplo");
-    dims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    dims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     n = dims[0];
     if(n != dims[1])
 	error("%s", _("'A' must be a *square* matrix"));
@@ -644,7 +646,7 @@ static SEXP La_ztrcon3(SEXP A, SEXP norm, SEXP uplo)
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
     uploC  [0] = La_valid_uplo(CHAR(asChar(uplo)));
 
-    val = PROTECT(allocVector(REALSXP, 1));
+    val = PROTECT(RealVector::create(1));
 
     F77_CALL(ztrcon)(typNorm, uploC, "N", &n, COMPLEX(A), &n,
 		     REAL(val),
@@ -670,7 +672,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
     SEXP B, Adn, Bdn;
 
     if (!isMatrix(A)) error(_("'%s' must be a complex matrix"), "a");
-    Adims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    Adims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     n = Adims[0];
     if(n == 0) error("%s", _("'a' is 0-dimensional"));
     size_t nl = n;
@@ -679,7 +681,7 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
     Adn = getAttrib(A, R_DimNamesSymbol);
 
     if (isMatrix(Bin)) {
-	Bdims = INTEGER(coerceVector(getAttrib(Bin, R_DimSymbol), INTSXP));
+	Bdims = INTEGER(IntVector::coerce(getAttrib(Bin, R_DimSymbol)));
 	p = Bdims[1];
 	if(p == 0) error("%s", _("no right-hand side in 'b'"));
 	int p2 = Bdims[0];
@@ -703,14 +705,14 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
 	PROTECT(B = ComplexVector::create(n));
 	if (!isNull(Adn)) setAttrib(B, R_NamesSymbol, VECTOR_ELT(Adn, 1));
     }
-    Bin = PROTECT(coerceVector(Bin, CPLXSXP));
+    Bin = PROTECT(ComplexVector::coerce(Bin));
     Memcpy(COMPLEX(B), COMPLEX(Bin), nl * p);
 
     ipiv = (int *) R_alloc(n, sizeof(int));
 
     /* work on a copy of A */
     if(TYPEOF(A) != CPLXSXP) {
-	A = coerceVector(A, CPLXSXP);
+	A = ComplexVector::coerce(A);
 	avals = COMPLEX(A);
     } else {
 	avals = (Rcomplex *) R_alloc(nl * nl, sizeof(Rcomplex));
@@ -760,13 +762,13 @@ static SEXP La_qr_cmplx(SEXP Ain)
     if (!(isMatrix(Ain) && isComplex(Ain)))
 	error(_("'%s' must be a complex matrix"), "a");
     SEXP Adn = getAttrib(Ain, R_DimNamesSymbol);
-    Adims = INTEGER(coerceVector(getAttrib(Ain, R_DimSymbol), INTSXP));
+    Adims = INTEGER(IntVector::coerce(getAttrib(Ain, R_DimSymbol)));
     m = Adims[0]; n = Adims[1];
     SEXP A = PROTECT(allocMatrix(CPLXSXP, m, n));
     Memcpy(COMPLEX(A), COMPLEX(Ain), (size_t)m * n);
     rwork = (double *) R_alloc(2*(size_t)n, sizeof(double));
 
-    SEXP jpvt = PROTECT(allocVector(INTSXP, n));
+    SEXP jpvt = PROTECT(IntVector::create(n));
     for (i = 0; i < n; i++) INTEGER(jpvt)[i] = 0;
     SEXP tau = PROTECT(ComplexVector::create(m < n ? m : n));
     lwork = -1;
@@ -820,11 +822,11 @@ static SEXP qr_coef_cmplx(SEXP Q, SEXP Bin)
     k = LENGTH(tau);
     if (!isMatrix(Bin)) error(_("'%s' must be a complex matrix"), "b");
 
-    if (!isComplex(Bin)) B = PROTECT(coerceVector(Bin, CPLXSXP));
+    if (!isComplex(Bin)) B = PROTECT(ComplexVector::coerce(Bin));
     else B = PROTECT(duplicate(Bin));
 
-    n = INTEGER(coerceVector(getAttrib(qr, R_DimSymbol), INTSXP))[0];
-    Bdims = INTEGER(coerceVector(getAttrib(Bin, R_DimSymbol), INTSXP));
+    n = INTEGER(IntVector::coerce(getAttrib(qr, R_DimSymbol)))[0];
+    Bdims = INTEGER(IntVector::coerce(getAttrib(Bin, R_DimSymbol)));
     if(Bdims[0] != n)
 	error(_("right-hand side should have %d not %d rows"), n, Bdims[0]);
     nrhs = Bdims[1];
@@ -867,10 +869,10 @@ static SEXP qr_qy_cmplx(SEXP Q, SEXP Bin, SEXP trans)
 	error(_("'%s' must be a complex matrix"), "b");
     bool tr = asLogicalNoNA(trans, "trans");
 
-    if (!isReal(Bin)) B = PROTECT(coerceVector(Bin, CPLXSXP));
+    if (!isReal(Bin)) B = PROTECT(ComplexVector::coerce(Bin));
     else B = PROTECT(duplicate(Bin));
-    n = INTEGER(coerceVector(getAttrib(qr, R_DimSymbol), INTSXP))[0];
-    Bdims = INTEGER(coerceVector(getAttrib(B, R_DimSymbol), INTSXP));
+    n = INTEGER(IntVector::coerce(getAttrib(qr, R_DimSymbol)))[0];
+    Bdims = INTEGER(IntVector::coerce(getAttrib(B, R_DimSymbol)));
     if(Bdims[0] != n)
 	error(_("right-hand side should have %d not %d rows"), n, Bdims[0]);
     nrhs = Bdims[1];
@@ -899,7 +901,7 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
 {
 #ifdef HAVE_FORTRAN_DOUBLE_COMPLEX
     if (!isString(jobu)) error(_("'%s' must be a character string"), "jobu");
-    int *xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
+    int *xdims = INTEGER(IntVector::coerce(getAttrib(x, R_DimSymbol)));
     int n = xdims[0], p = xdims[1];
     const char *jz = CHAR(STRING_ELT(jobu, 0));
 
@@ -969,7 +971,7 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
     Rcomplex *work, *rx, tmp;
     double *rwork, *rvalues;
 
-    xdims = INTEGER(coerceVector(getAttrib(xin, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(xin, R_DimSymbol)));
     n = xdims[0];
     if (n != xdims[1]) error("%s", _("'x' must be a square complex matrix"));
     bool ov = asLogicalNoNA(only_values, "only.values");
@@ -978,7 +980,7 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
     SEXP x = PROTECT(allocMatrix(CPLXSXP, n, n));
     rx = COMPLEX(x);
     Memcpy(rx, COMPLEX(xin), (size_t) n * n);
-    SEXP values = PROTECT(allocVector(REALSXP, n));
+    SEXP values = PROTECT(RealVector::create(n));
     rvalues = REAL(values);
 
     rwork = (double *) R_alloc((3*(size_t)n-2) > 1 ? 3*(size_t)n-2 : 1,
@@ -1026,7 +1028,7 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
     char jobVL[2] = "N", jobVR[2] = "N";
     SEXP ret, nm, values, val = R_NilValue;
 
-    xdims = INTEGER(coerceVector(getAttrib(x, R_DimSymbol), INTSXP));
+    xdims = INTEGER(IntVector::coerce(getAttrib(x, R_DimSymbol)));
     n = xdims[0];
     if (n != xdims[1]) error("%s", _("'x' must be a square numeric matrix"));
 
@@ -1083,7 +1085,7 @@ static SEXP La_chol(SEXP A, SEXP pivot, SEXP stol)
 {
     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "a");
 
-    SEXP ans = PROTECT(isReal(A) ? duplicate(A): coerceVector(A, REALSXP));
+    SEXP ans = PROTECT(isReal(A) ? duplicate(A): RealVector::coerce(A));
     SEXP adims = getAttrib(A, R_DimSymbol);
     if (TYPEOF(adims) != INTSXP) error("%s", _("non-integer dims"));
     int m = INTEGER(adims)[0], n = INTEGER(adims)[1];
@@ -1108,7 +1110,7 @@ static SEXP La_chol(SEXP A, SEXP pivot, SEXP stol)
 	}
     } else {
 	double tol = asReal(stol);
-	SEXP piv = PROTECT(allocVector(INTSXP, m));
+	SEXP piv = PROTECT(IntVector::create(m));
 	int *ip = INTEGER(piv);
 	double *work = (double *) R_alloc(2 * (size_t)m, sizeof(double));
 	int rank, info;
@@ -1160,7 +1162,7 @@ static SEXP La_chol2inv(SEXP A, SEXP size, SEXP diag_only)
 	} else if (isMatrix(A)) {
 	    SEXP adims = getAttrib(A, R_DimSymbol);
 	    if (TYPEOF(adims) != INTSXP) error("%s", _("non-integer dims"));
-	    Amat = PROTECT(coerceVector(A, REALSXP)); nprot++;
+	    Amat = PROTECT(RealVector::coerce(A)); nprot++;
 	    m = INTEGER(adims)[0]; n = INTEGER(adims)[1];
 	} else error(_("'%s' must be a numeric matrix"), "a");
 
@@ -1187,7 +1189,7 @@ static SEXP La_chol2inv(SEXP A, SEXP size, SEXP diag_only)
 		  -info, only_diag ? "dtrtri" : "dpotri");
 	}
 	if (only_diag) {
-	    SEXP d = PROTECT(allocVector(REALSXP, sz)); nprot++;
+	    SEXP d = PROTECT(RealVector::create(sz)); nprot++;
 	    BLAS_INT inc = (BLAS_INT) sz;
 	    for (int i = 0; i < sz; i++) {
 		BLAS_INT len = (BLAS_INT) (sz - i);
@@ -1217,7 +1219,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
     if (!(isMatrix(A) &&
 	  (TYPEOF(A) == REALSXP || TYPEOF(A) == INTSXP || TYPEOF(A) == LGLSXP)))
 	error(_("'%s' must be a numeric matrix"), "a");
-    int *Adims = INTEGER(coerceVector(getAttrib(A, R_DimSymbol), INTSXP));
+    int *Adims = INTEGER(IntVector::coerce(getAttrib(A, R_DimSymbol)));
     n = Adims[0];
     if(n == 0) error("%s", _("'a' is 0-dimensional"));
     size_t nl = n;
@@ -1226,7 +1228,7 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
     Adn = getAttrib(A, R_DimNamesSymbol);
 
     if (isMatrix(Bin)) {
-	int *Bdims = INTEGER(coerceVector(getAttrib(Bin, R_DimSymbol), INTSXP));
+	int *Bdims = INTEGER(IntVector::coerce(getAttrib(Bin, R_DimSymbol)));
 	p = Bdims[1];
 	if(p == 0) error("%s", _("no right-hand side in 'b'"));
 	int p2 = Bdims[0];
@@ -1249,17 +1251,17 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
 	if(length(Bin) != n)
 	    error(_("'b' (%d x %d) must be compatible with 'a' (%d x %d)"),
 		  length(Bin), p, n, n);
-	PROTECT(B = allocVector(REALSXP, n));
+	PROTECT(B = RealVector::create(n));
 	if (!isNull(Adn)) setAttrib(B, R_NamesSymbol, VECTOR_ELT(Adn, 1));
     }
-    PROTECT(Bin = coerceVector(Bin, REALSXP));
+    PROTECT(Bin = RealVector::coerce(Bin));
     Memcpy(REAL(B), REAL(Bin), nl * p);
 
     int *ipiv = (int *) R_alloc(n, sizeof(int));
 
     /* work on a copy of A */
     if (!isReal(A)) {
-	A = coerceVector(A, REALSXP);
+	A = RealVector::coerce(A);
 	avals = REAL(A);
     } else {
 	avals = (double *) R_alloc(nl * nl, sizeof(double));
@@ -1299,20 +1301,20 @@ static SEXP La_qr(SEXP Ain)
 {
     if (!isMatrix(Ain)) error(_("'%s' must be a numeric matrix"), "a");
     SEXP Adn = getAttrib(Ain, R_DimNamesSymbol);
-    int *Adims = INTEGER(coerceVector(getAttrib(Ain, R_DimSymbol), INTSXP));
+    int *Adims = INTEGER(IntVector::coerce(getAttrib(Ain, R_DimSymbol)));
     int m = Adims[0],
 	n = Adims[1];
     SEXP A;
     if (!isReal(Ain)) {
-	A = PROTECT(coerceVector(Ain, REALSXP));
+	A = PROTECT(RealVector::coerce(Ain));
     } else {
 	A = PROTECT(allocMatrix(REALSXP, m, n));
 	Memcpy(REAL(A), REAL(Ain), (size_t)m * n);
     }
 
-    SEXP jpvt = PROTECT(allocVector(INTSXP, n));
+    SEXP jpvt = PROTECT(IntVector::create(n));
     for (int i = 0; i < n; i++) INTEGER(jpvt)[i] = 0;
-    SEXP tau = PROTECT(allocVector(REALSXP, m < n ? m : n)); // qraux
+    SEXP tau = PROTECT(RealVector::create(m < n ? m : n)); // qraux
     int info, lwork = -1;
     double tmp;
     F77_CALL(dgeqp3)(&m, &n, REAL(A), &m, INTEGER(jpvt), REAL(tau),
@@ -1355,12 +1357,12 @@ static SEXP qr_coef_real(SEXP Q, SEXP Bin)
 {
     if (!isMatrix(Bin)) error(_("'%s' must be a numeric matrix"), "b");
 
-    SEXP B = PROTECT(isReal(Bin) ? duplicate(Bin) : coerceVector(Bin, REALSXP)),
+    SEXP B = PROTECT(isReal(Bin) ? duplicate(Bin) : RealVector::coerce(Bin)),
 	qr  = VECTOR_ELT(Q, 0), // qr$qr
 	tau = VECTOR_ELT(Q, 2); // qr$qraux
     int k = LENGTH(tau),
-	n =      INTEGER(coerceVector(getAttrib(qr, R_DimSymbol), INTSXP))[0],
-	*Bdims = INTEGER(coerceVector(getAttrib(B,  R_DimSymbol), INTSXP));
+	n =      INTEGER(IntVector::coerce(getAttrib(qr, R_DimSymbol)))[0],
+	*Bdims = INTEGER(IntVector::coerce(getAttrib(B,  R_DimSymbol)));
     if(Bdims[0] != n)
 	error(_("right-hand side should have %d not %d rows"), n, Bdims[0]);
     int nrhs = Bdims[1],
@@ -1398,9 +1400,9 @@ static SEXP qr_qy_real(SEXP Q, SEXP Bin, SEXP trans)
     if (!isMatrix(Bin)) error(_("'%s' must be a numeric matrix"), "b");
     bool tr = asLogicalNoNA(trans, "trans");
 
-    B = PROTECT(isReal(Bin) ? duplicate(Bin) : coerceVector(Bin, REALSXP));
-    n = INTEGER(coerceVector(getAttrib(qr, R_DimSymbol), INTSXP))[0];
-    Bdims = INTEGER(coerceVector(getAttrib(B, R_DimSymbol), INTSXP));
+    B = PROTECT(isReal(Bin) ? duplicate(Bin) : RealVector::coerce(Bin));
+    n = INTEGER(IntVector::coerce(getAttrib(qr, R_DimSymbol)))[0];
+    Bdims = INTEGER(IntVector::coerce(getAttrib(B, R_DimSymbol)));
     if(Bdims[0] != n)
 	error(_("right-hand side should have %d not %d rows"), n, Bdims[0]);
     nrhs = Bdims[1];
@@ -1429,8 +1431,8 @@ static SEXP det_ge_real(SEXP Ain, SEXP logarithm)
     double modulus = 0.0; /* -Wall */
 
     if (!isMatrix(Ain)) error(_("'%s' must be a numeric matrix"), "a");
-    SEXP A = PROTECT(isReal(Ain) ? duplicate(Ain): coerceVector(Ain, REALSXP));
-    int *Adims = INTEGER(coerceVector(getAttrib(Ain, R_DimSymbol), INTSXP));
+    SEXP A = PROTECT(isReal(Ain) ? duplicate(Ain): RealVector::coerce(Ain));
+    int *Adims = INTEGER(IntVector::coerce(getAttrib(Ain, R_DimSymbol)));
     int n = Adims[0];
     if (Adims[1] != n) error("%s", _("'a' must be a square matrix"));
     int *jpvt = (int *) R_alloc(n, sizeof(int));

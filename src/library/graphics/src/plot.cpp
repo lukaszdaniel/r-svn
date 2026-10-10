@@ -32,6 +32,7 @@
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
 #include <Defn.h>   // Rexp10 et al
 #include <Graphics.h>
 #include <Print.h>
@@ -164,7 +165,7 @@ SEXP Rf_FixupLwd(SEXP lwd, double dflt)
     if (n == 0)
 	ans = RealVector::createScalar(dflt);
     else {
-	PROTECT(lwd = coerceVector(lwd, REALSXP));
+	PROTECT(lwd = RealVector::coerce(lwd));
 	n = length(lwd);
 	ans = RealVector::create(n);
 	for (int i = 0; i < n; i++) {
@@ -292,7 +293,7 @@ SEXP Rf_FixupVFont(SEXP vfont) {
 	int typeface, fontindex;
 	int minindex, maxindex=0;/* -Wall*/
 	int i;
-	PROTECT(vf = coerceVector(vfont, INTSXP));
+	PROTECT(vf = IntVector::coerce(vfont));
 	if (length(vf) != 2)
 	    error(_("invalid '%s' value"), "vfont");
 	typeface = INTEGER(vf)[0];
@@ -354,7 +355,7 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
     switch (TYPEOF(spec)) {
     case LANGSXP:
     case SYMSXP:
-	txt = coerceVector(spec, EXPRSXP);
+	txt = ExpressionVector::coerce(spec);
 	break;
     case VECSXP:
 	if (length(spec) == 0) {
@@ -365,9 +366,9 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 	    if (nms == R_NilValue){ /* PR#1939 */
 	       txt = VECTOR_ELT(spec, 0);
 	       if (TYPEOF(txt) == LANGSXP || TYPEOF(txt) == SYMSXP )
-		    txt = coerceVector(txt, EXPRSXP);
+		    txt = ExpressionVector::coerce(txt);
 	       else if (!isExpression(txt))
-		    txt = coerceVector(txt, STRSXP);
+		    txt = StringVector::coerce(txt);
 	    } else {
 	       n = length(nms);
 	       for (i = 0; i < n; i++) {
@@ -387,9 +388,9 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 		else if (streql(CHAR(STRING_ELT(nms, i)), "")) {
 		    txt = VECTOR_ELT(spec, i);
 		    if (TYPEOF(txt) == LANGSXP || TYPEOF(txt) == SYMSXP)
-			txt = coerceVector(txt, EXPRSXP);
+			txt = ExpressionVector::coerce(txt);
 		    else if (!isExpression(txt))
-			txt = coerceVector(txt, STRSXP);
+			txt = StringVector::coerce(txt);
 		}
 		else error("%s", _("invalid graphics parameter"));
 	       }
@@ -401,7 +402,7 @@ static void GetTextArg(SEXP spec, SEXP *ptxt, rcolor *pcol, double *pcex, int *p
 	txt = spec;
 	break;
     default:
-	txt = coerceVector(spec, STRSXP);
+	txt = StringVector::coerce(spec);
 	break;
     }
 
@@ -816,10 +817,10 @@ SEXP C_axis(SEXP args)
 	dolabels = asLogicalNAFalse(lab);
 	lab = R_NilValue;
     } else if (TYPEOF(lab) == LANGSXP || TYPEOF(lab) == SYMSXP) {
-	lab = coerceVector(lab, EXPRSXP);
+	lab = ExpressionVector::coerce(lab);
     } else if (isExpression(lab)) {
     } else {
-	lab = coerceVector(lab, STRSXP);
+	lab = StringVector::coerce(lab);
     }
     PROTECT(lab);
     args = CDR(args);
@@ -883,7 +884,7 @@ SEXP C_axis(SEXP args)
     args = CDR(args);
 
     /* Optional argument: "padj" */
-    SEXP padj = PROTECT(coerceVector(CAR(args), REALSXP));
+    SEXP padj = PROTECT(RealVector::coerce(CAR(args)));
     int npadj = length(padj);
     if (npadj <= 0) error(_("zero-length '%s' specified"), "padj");
     args = CDR(args);
@@ -966,7 +967,7 @@ SEXP C_axis(SEXP args)
     if (create_at) // graphics engine (in ../../../main/plot.c ):
 	at = CreateAtVector(axp, usr, nint, (Rboolean) logflag);
     else
-	at = isReal(at) ? duplicate(at) : coerceVector(at, REALSXP);
+	at = isReal(at) ? duplicate(at) : RealVector::coerce(at);
     PROTECT(at);
     int n = length(at); // to become #{finite 'at'} below
 
@@ -1658,7 +1659,7 @@ static void xypoints(SEXP args, int *n)
 
     if (!isNumeric(CAR(args)))
 	error("%s", _("invalid first argument"));
-    SETCAR(args, coerceVector(CAR(args), REALSXP));
+    SETCAR(args, RealVector::coerce(CAR(args)));
     k = LENGTH(CAR(args));
     *n = k; kmin = k;
     args = CDR(args);
@@ -1666,14 +1667,14 @@ static void xypoints(SEXP args, int *n)
     if (!isNumeric(CAR(args)))
 	error("%s", _("invalid second argument"));
     k = LENGTH(CAR(args));
-    SETCAR(args, coerceVector(CAR(args), REALSXP));
+    SETCAR(args, RealVector::coerce(CAR(args)));
     if (k > *n) *n = k;
     if (k < kmin) kmin = k;
     args = CDR(args);
 
     if (!isNumeric(CAR(args)))
 	error("%s", _("invalid third argument"));
-    SETCAR(args, coerceVector(CAR(args), REALSXP));
+    SETCAR(args, RealVector::coerce(CAR(args)));
     k = LENGTH(CAR(args));
     if (k > *n) *n = k;
     if (k < kmin) kmin = k;
@@ -1681,7 +1682,7 @@ static void xypoints(SEXP args, int *n)
 
     if (!isNumeric(CAR(args)))
 	error("%s", _("invalid fourth argument"));
-    SETCAR(args, coerceVector(CAR(args), REALSXP));
+    SETCAR(args, RealVector::coerce(CAR(args)));
     k = LENGTH(CAR(args));
     if (k > *n) *n = k;
     if (k < kmin) kmin = k;
@@ -1843,8 +1844,8 @@ SEXP C_path(SEXP args)
     args = CDR(args);
     if (length(args) < 2) error("%s", _("too few arguments"));
     /* (x,y) is checked in R via xy.coords() ; no need here : */
-    sx = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
-    sy = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
+    sx = SETCAR(args, RealVector::coerce(CAR(args)));  args = CDR(args);
+    sy = SETCAR(args, RealVector::coerce(CAR(args)));  args = CDR(args);
     nx = LENGTH(sx);
 
     PROTECT(nper = CAR(args)); args = CDR(args);
@@ -2075,8 +2076,8 @@ SEXP C_polygon(SEXP args)
     args = CDR(args);
     if (length(args) < 2) error("%s", _("too few arguments"));
     /* (x,y) is checked in R via xy.coords() ; no need here : */
-    sx = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
-    sy = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
+    sx = SETCAR(args, RealVector::coerce(CAR(args)));  args = CDR(args);
+    sy = SETCAR(args, RealVector::coerce(CAR(args)));  args = CDR(args);
     nx = LENGTH(sx);
 
     PROTECT(col = FixupCol(CAR(args), R_TRANWHITE));	args = CDR(args);
@@ -2156,9 +2157,9 @@ SEXP C_text(SEXP args)
     /* labels */
     txt = CAR(args);
     if (isSymbol(txt) || isLanguage(txt))
-	txt = coerceVector(txt, EXPRSXP);
+	txt = ExpressionVector::coerce(txt);
     else if (!isExpression(txt))
-	txt = coerceVector(txt, STRSXP);
+	txt = StringVector::coerce(txt);
     PROTECT(txt);
     if (length(txt) <= 0)
 	error(_("zero-length '%s' specified"), "labels");
@@ -2192,7 +2193,7 @@ SEXP C_text(SEXP args)
     else error(_("invalid '%s' value"), "adj");
     args = CDR(args);
 
-    PROTECT(pos = coerceVector(CAR(args), INTSXP));
+    PROTECT(pos = IntVector::coerce(CAR(args)));
     npos = length(pos);
     for (i = 0; i < npos; i++)
 	if (INTEGER(pos)[i] < 1 || INTEGER(pos)[i] > 4)
@@ -2433,23 +2434,23 @@ SEXP C_mtext(SEXP args)
     /* Arg1 : text= */
     text = CAR(args);
     if (isSymbol(text) || isLanguage(text))
-	text = coerceVector(text, EXPRSXP);
+	text = ExpressionVector::coerce(text);
     else if (!isExpression(text))
-	text = coerceVector(text, STRSXP);
+	text = StringVector::coerce(text);
     n = ntext = length(text);
     if (ntext <= 0)
 	error(_("zero-length '%s' specified"), "text");
     args = CDR(args);
 
     /* Arg2 : side= */
-    side = coerceVector(CAR(args), INTSXP);
+    side = IntVector::coerce(CAR(args));
     nside = length(side);
     if (nside <= 0) error(_("zero-length '%s' specified"), "side");
     if (n < nside) n = nside;
     args = CDR(args);
 
     /* Arg3 : line= */
-    line = coerceVector(CAR(args), REALSXP);
+    line = RealVector::coerce(CAR(args));
     nline = length(line);
     if (nline <= 0) error(_("zero-length '%s' specified"), "line");
     if (n < nline) n = nline;
@@ -2457,28 +2458,28 @@ SEXP C_mtext(SEXP args)
 
     /* Arg4 : outer= */
     /* outer == NA => outer <- 0 */
-    outer = coerceVector(CAR(args), INTSXP);
+    outer = IntVector::coerce(CAR(args));
     nouter = length(outer);
     if (nouter <= 0) error(_("zero-length '%s' specified"), "outer");
     if (n < nouter) n = nouter;
     args = CDR(args);
 
     /* Arg5 : at= */
-    at = coerceVector(CAR(args), REALSXP);
+    at = RealVector::coerce(CAR(args));
     nat = length(at);
     if (nat <= 0) error(_("zero-length '%s' specified"), "at");
     if (n < nat) n = nat;
     args = CDR(args);
 
     /* Arg6 : adj= */
-    adj = coerceVector(CAR(args), REALSXP);
+    adj = RealVector::coerce(CAR(args));
     nadj = length(adj);
     if (nadj <= 0) error(_("zero-length '%s' specified"), "adj");
     if (n < nadj) n = nadj;
     args = CDR(args);
 
     /* Arg7 : padj= */
-    padj = coerceVector(CAR(args), REALSXP);
+    padj = RealVector::coerce(CAR(args));
     npadj = length(padj);
     if (npadj <= 0) error(_("zero-length '%s' specified"), "padj");
     if (n < npadj) n = npadj;
@@ -2818,23 +2819,23 @@ SEXP C_abline(SEXP args)
     if (length(args) < 5) error("%s", _("too few arguments"));
 
     if ((a = CAR(args)) != R_NilValue)
-	SETCAR(args, a = coerceVector(a, REALSXP));
+	SETCAR(args, a = RealVector::coerce(a));
     args = CDR(args);
 
     if ((b = CAR(args)) != R_NilValue)
-	SETCAR(args, b = coerceVector(b, REALSXP));
+	SETCAR(args, b = RealVector::coerce(b));
     args = CDR(args);
 
     if ((h = CAR(args)) != R_NilValue)
-	SETCAR(args, h = coerceVector(h, REALSXP));
+	SETCAR(args, h = RealVector::coerce(h));
     args = CDR(args);
 
     if ((v = CAR(args)) != R_NilValue)
-	SETCAR(args, v = coerceVector(v, REALSXP));
+	SETCAR(args, v = RealVector::coerce(v));
     args = CDR(args);
 
     if ((untf = CAR(args)) != R_NilValue)
-	SETCAR(args, untf = coerceVector(untf, LGLSXP));
+	SETCAR(args, untf = LogicalVector::coerce(untf));
     args = CDR(args);
 
 
@@ -3363,9 +3364,9 @@ SEXP C_identify(SEXP call, SEXP op, SEXP args, SEXP rho)
 									\
     str = CAR(args);							\
     if (isSymbol(str) || isLanguage(str))				\
-	str = coerceVector(str, EXPRSXP);				\
+	str = ExpressionVector::coerce(str);				\
     else if (!isExpression(str))					\
-	str = coerceVector(str, STRSXP);				\
+	str = StringVector::coerce(str);				\
     PROTECT(str);							\
     args = CDR(args);							\
 									\
@@ -3526,7 +3527,7 @@ SEXP C_dend(SEXP args)
     /* ord = order(x$order) */
     if (length(CAR(args)) != n+1)
 	badargs();
-    PROTECT(xpos = coerceVector(CAR(args), REALSXP));
+    PROTECT(xpos = RealVector::coerce(CAR(args)));
     dnd_xpos = REAL(xpos);
     args = CDR(args);
 
@@ -3737,15 +3738,15 @@ SEXP C_symbols(SEXP args)
     if (length(args) < 7)
 	error("%s", _("too few arguments"));
 
-    PROTECT(x = coerceVector(CAR(args), REALSXP)); args = CDR(args);
-    PROTECT(y = coerceVector(CAR(args), REALSXP)); args = CDR(args);
+    PROTECT(x = RealVector::coerce(CAR(args))); args = CDR(args);
+    PROTECT(y = RealVector::coerce(CAR(args))); args = CDR(args);
     if (!isNumeric(x) || !isNumeric(y) || length(x) <= 0 || LENGTH(x) <= 0)
 	error("%s", _("invalid symbol coordinates"));
 
     type = asInteger(CAR(args)); args = CDR(args);
 
     /* data: */
-    p = PROTECT(coerceVector(CAR(args), REALSXP)); args = CDR(args);
+    p = PROTECT(RealVector::coerce(CAR(args))); args = CDR(args);
     CheckSymbolPar(p, &nr, &nc);
     if (LENGTH(x) != nr || LENGTH(y) != nr)
 	error("%s", _("x/y parameter length mismatch"));
@@ -4017,10 +4018,10 @@ SEXP C_xspline(SEXP args)
 
     if (length(args) < 6) error("%s", _("too few arguments"));
     /* (x,y) is checked in R via xy.coords() ; no need here : */
-    sx = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
-    sy = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
+    sx = SETCAR(args, RealVector::coerce(CAR(args)));  args = CDR(args);
+    sy = SETCAR(args, RealVector::coerce(CAR(args)));  args = CDR(args);
     nx = LENGTH(sx);
-    ss = SETCAR(args, coerceVector(CAR(args), REALSXP));  args = CDR(args);
+    ss = SETCAR(args, RealVector::coerce(CAR(args)));  args = CDR(args);
     bool open = asRboolean(CAR(args)); args = CDR(args);
     bool repEnds = asRboolean(CAR(args)); args = CDR(args);
     bool draw = asRboolean(CAR(args)); args = CDR(args);

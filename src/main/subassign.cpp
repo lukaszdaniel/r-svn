@@ -104,7 +104,10 @@
 #include <CXXR/Promise.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -397,20 +400,20 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch,
 
     case 1013:	/* logical    <- integer    */
 
-	*x = coerceVector(*x, INTSXP);
+	*x = IntVector::coerce(*x);
 	break;
 
     case 1014:	/* logical    <- real	    */
     case 1314:	/* integer    <- real	    */
 
-	*x = coerceVector(*x, REALSXP);
+	*x = RealVector::coerce(*x);
 	break;
 
     case 1015:	/* logical    <- complex    */
     case 1315:	/* integer    <- complex    */
     case 1415:	/* real	      <- complex    */
 
-	*x = coerceVector(*x, CPLXSXP);
+	*x = ComplexVector::coerce(*x);
 	break;
 
     case 1610:	/* character  <- logical    */
@@ -418,7 +421,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch,
     case 1614:	/* character  <- real	    */
     case 1615:	/* character  <- complex    */
 
-	*y = coerceVector(*y, STRSXP);
+	*y = StringVector::coerce(*y);
 	break;
 
     case 1016:	/* logical    <- character  */
@@ -426,7 +429,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch,
     case 1416:	/* real	      <- character  */
     case 1516:	/* complex    <- character  */
 
-	*x = coerceVector(*x, STRSXP);
+	*x = StringVector::coerce(*x);
 	break;
 
     case 1901:  /* vector     <- symbol   */
@@ -448,7 +451,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch,
 
 	if (level == 1) {
 	    /* Coerce the RHS into a list */
-	    *y = coerceVector(*y, VECSXP);
+	    *y = ListVector::coerce(*y);
 	} else {
 	    /* Nothing to do here: duplicate when used (if needed) */
 	    redo_which = false;
@@ -472,7 +475,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch,
     case 1519:  /* complex    <- vector     */
     case 1619:  /* character  <- vector     */
     case 2419:  /* raw        <- vector     */
-	*x = coerceVector(*x, VECSXP);
+	*x = ListVector::coerce(*x);
 	break;
 
     case 1020:  /* logical    <- expression */
@@ -481,7 +484,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch,
     case 1520:  /* complex    <- expression */
     case 1620:  /* character  <- expression */
     case 2420:  /* raw        <- expression */
-	*x = coerceVector(*x, EXPRSXP);
+	*x = ExpressionVector::coerce(*x);
 	break;
 
     case 2001:	/* expression <- symbol	    */
@@ -496,7 +499,7 @@ static int SubassignTypeFix(SEXP *x, SEXP *y, R_xlen_t stretch,
 
 	if (level == 1) {
 	    /* Coerce the RHS into a list */
-	    *y = coerceVector(*y, VECSXP);
+	    *y = ListVector::coerce(*y);
 	} else {
 	    /* Note : No coercion is needed here. */
 	    /* We just insert the RHS into the LHS. */
@@ -2305,7 +2308,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 	    type = EXPRSXP;
 	else if (!isNewList(x)) {
 	    warning("%s", _("Coercing LHS to a list"));
-	    x = coerceVector(x, VECSXP);
+	    x = ListVector::coerce(x);
 	}
 	names = PROTECT(getAttrib(x, R_NamesSymbol));
 	nprotect++;
