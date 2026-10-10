@@ -41,6 +41,11 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/Promise.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ComplexVector.hpp>
+#include <CXXR/LogicalVector.hpp>
+#include <CXXR/RawVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Defn.h>
@@ -293,7 +298,7 @@ static void StringAnswer(SEXP x, struct BindData *data, SEXP call)
 	    StringAnswer(VECTOR_ELT(x, i), data, call);
 	break;
     default:
-	PROTECT(x = coerceVector(x, STRSXP));
+	PROTECT(x = StringVector::coerce(x));
 	for (i = 0; i < XLENGTH(x); i++)
 	    SET_STRING_ELT(data->ans_ptr, data->ans_length++, STRING_ELT(x, i));
 	UNPROTECT(1);
@@ -1363,7 +1368,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	for (t = args; t != R_NilValue; t = CDR(t)) {
 	    u = PRVALUE(CAR(t));
 	    if (isMatrix(u) || length(u) >= lenmin) {
-		u = coerceVector(u, STRSXP);
+		u = StringVector::coerce(u);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (!isMatrix(u)) ? rows : k;
 		xcopyStringWithRecycle(result, u, n, idx, k);
@@ -1413,7 +1418,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	for (t = args; t != R_NilValue; t = CDR(t)) {
 	    u = PRVALUE(CAR(t));
 	    if (isMatrix(u) || length(u) >= lenmin) {
-		u = coerceVector(u, CPLXSXP);
+		u = ComplexVector::coerce(u);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (!isMatrix(u)) ? rows : k;
 		xcopyWithRecycle(COMPLEX(result), COMPLEX(u), n, idx, k);
@@ -1425,7 +1430,7 @@ static SEXP cbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	for (t = args; t != R_NilValue; t = CDR(t)) {
 	    u = PRVALUE(CAR(t));
 	    if (isMatrix(u) || length(u) >= lenmin) {
-		u = coerceVector(u, RAWSXP);
+		u = RawVector::coerce(u);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (!isMatrix(u)) ? rows : k;
 		xcopyWithRecycle(RAW(result), RAW(u), n, idx, k);
@@ -1648,7 +1653,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	for (t = args; t != R_NilValue; t = CDR(t)) {
 	    u = PRVALUE(CAR(t));
 	    if (isMatrix(u) || length(u) >= lenmin) {
-		u = coerceVector(u, STRSXP);
+		u = StringVector::coerce(u);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
 		xfillStringMatrixWithRecycle(result, u, n, rows, idx, cols, k);
@@ -1676,7 +1681,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	for (t = args; t != R_NilValue; t = CDR(t)) {
 	    u = PRVALUE(CAR(t));
 	    if (isMatrix(u) || length(u) >= lenmin) {
-		u = coerceVector(u, RAWSXP);
+		u = RawVector::coerce(u);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
 		xfillMatrixWithRecycle(RAW(result), RAW(u), n, rows, idx,
@@ -1689,7 +1694,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	for (t = args; t != R_NilValue; t = CDR(t)) {
 	    u = PRVALUE(CAR(t));
 	    if (isMatrix(u) || length(u) >= lenmin) {
-		u = coerceVector(u, CPLXSXP);
+		u = ComplexVector::coerce(u);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
 		xfillMatrixWithRecycle(COMPLEX(result), COMPLEX(u), n,
@@ -1702,7 +1707,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	for (t = args; t != R_NilValue; t = CDR(t)) {
 	    u = PRVALUE(CAR(t));
 	    if (isMatrix(u) || length(u) >= lenmin) {
-		u = coerceVector(u, INTSXP);
+		u = IntVector::coerce(u);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
 		xfillMatrixWithRecycle(INTEGER(result), INTEGER(u), n, rows, idx,
@@ -1715,7 +1720,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	for (t = args; t != R_NilValue; t = CDR(t)) {
 	    u = PRVALUE(CAR(t));
 	    if (isMatrix(u) || length(u) >= lenmin) {
-		u = coerceVector(u, LGLSXP);
+		u = LogicalVector::coerce(u);
 		R_xlen_t k = XLENGTH(u);
 		R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
 		xfillMatrixWithRecycle(LOGICAL(result), LOGICAL(u), n, rows, idx,
@@ -1728,7 +1733,7 @@ static SEXP rbind(SEXP call, SEXP args, SEXPTYPE mode, SEXP rho,
 	 for (t = args; t != R_NilValue; t = CDR(t)) {
 	     u = PRVALUE(CAR(t));
 	     if (isMatrix(u) || length(u) >= lenmin) {
-		 u = coerceVector(u, REALSXP);
+		 u = RealVector::coerce(u);
 		 R_xlen_t k = XLENGTH(u);
 		 R_xlen_t idx = (isMatrix(u)) ? nrows(u) : (k > 0);
 		 xfillMatrixWithRecycle(REAL(result), REAL(u), n, rows, idx,

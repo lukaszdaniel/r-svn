@@ -23,6 +23,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Rinternals.h>
 #include <R_ext/Random.h>
 #include <Rmath.h>		/* for lgammafn, rmultinom */
@@ -41,14 +42,12 @@ typedef double (*ran2) (double, double);
 typedef double (*ran3) (double, double, double);
 
 static void fillWithNAs(SEXP x, R_xlen_t n, SEXPTYPE type) {
-    R_xlen_t i;
-
     if (type == INTSXP) {
-        for (i = 0; i < n; i++) {
+        for (R_xlen_t i = 0; i < n; i++) {
             INTEGER(x)[i] = NA_INTEGER;
         }
     } else { /* REALSXP */
-        for (i = 0; i < n; i++) {
+        for (R_xlen_t i = 0; i < n; i++) {
             REAL(x)[i] = NA_REAL;
         }
     }
@@ -100,7 +99,7 @@ static R_INLINE SEXP random1(SEXP sn, SEXP sa, ran1 fn, SEXPTYPE type)
         fillWithNAs(x, n, type);
     } else {
 	bool naflag = false;
-	SEXP a = PROTECT(coerceVector(sa, REALSXP));
+	SEXP a = PROTECT(RealVector::coerce(sa));
 	R_xlen_t i0 = 0;
 	SEXPTYPE use_type = type;
 	GetRNGstate();
@@ -183,8 +182,8 @@ static R_INLINE SEXP random2(SEXP sn, SEXP sa, SEXP sb, ran2 fn, SEXPTYPE type)
     } else {
 	bool naflag = false;
 	SEXP
-	    a = PROTECT(coerceVector(sa, REALSXP)),
-	    b = PROTECT(coerceVector(sb, REALSXP));
+	    a = PROTECT(RealVector::coerce(sa)),
+	    b = PROTECT(RealVector::coerce(sb));
 	R_xlen_t i0 = 0;
 	SEXPTYPE use_type = type;
 	GetRNGstate();
@@ -273,9 +272,9 @@ static R_INLINE SEXP random3(SEXP sn, SEXP sa, SEXP sb, SEXP sc, ran3 fn,
     } else {
 	bool naflag = false;
 	SEXP
-	    a = PROTECT(coerceVector(sa, REALSXP)),
-	    b = PROTECT(coerceVector(sb, REALSXP)),
-	    c = PROTECT(coerceVector(sc, REALSXP));
+	    a = PROTECT(RealVector::coerce(sa)),
+	    b = PROTECT(RealVector::coerce(sb)),
+	    c = PROTECT(RealVector::coerce(sc));
 	R_xlen_t i0 = 0;
 	SEXPTYPE use_type = type;
 	GetRNGstate();
@@ -355,7 +354,7 @@ SEXP do_rmultinom(SEXP sn, SEXP ssize, SEXP prob)
 	error("%s", _("invalid first argument 'n'"));
     if (size == NA_INTEGER || size < 0)
 	error("%s", _("invalid second argument 'size'"));
-    prob = coerceVector(prob, REALSXP);
+    prob = RealVector::coerce(prob);
     k = length(prob);/* k = #{components or classes} = X-vector length */
     if (MAYBE_REFERENCED(prob)) prob = duplicate(prob);/*as `do_sample' -- need this line? */
     PROTECT(prob);

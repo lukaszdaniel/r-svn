@@ -45,6 +45,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
 #include <Defn.h>
@@ -283,7 +284,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	dd->ask = (Rboolean) (ix == 1);/* NA |-> FALSE */
     }
     else if (streql(what, "fig")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 4);
 	if (0.0 <= REAL(value)[0] && REAL(value)[0] < REAL(value)[1] &&
 	    REAL(value)[1] <= 1.0 &&
@@ -311,7 +312,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	else par_error(what);
     }
     else if (streql(what, "fin")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 2);
 	R_DEV_2(defaultFigure) = FALSE;
 	R_DEV_2(fUnits) = INCHES;
@@ -337,7 +338,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	R_DEV__(lheight) = x;
     }
     else if (streql(what, "mai")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 4);
 	nonnegRealCheck(REAL(value)[0], what);
 	nonnegRealCheck(REAL(value)[1], what);
@@ -352,7 +353,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	GReset(dd);
     }
     else if (streql(what, "mar")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 4);
 	nonnegRealCheck(REAL(value)[0], what);
 	nonnegRealCheck(REAL(value)[1], what);
@@ -374,7 +375,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
     }
     else if (streql(what, "mfrow")) {
 	int nrow, ncol;
-	value = coerceVector(value, INTSXP);
+	value = IntVector::coerce(value);
 	lengthCheck(what, value, 2);
 	posIntCheck(INTEGER(value)[0], what);
 	posIntCheck(INTEGER(value)[1], what);
@@ -403,7 +404,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
     }
     else if (streql(what, "mfcol")) {
 	int nrow, ncol;
-	value = coerceVector(value, INTSXP);
+	value = IntVector::coerce(value);
 	lengthCheck(what, value, 2);
 	posIntCheck(INTEGER(value)[0], what);
 	posIntCheck(INTEGER(value)[1], what);
@@ -432,7 +433,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
     }
     else if (streql(what, "mfg")) {
 	int row, col, nrow, ncol, np;
-	PROTECT(value = coerceVector(value, INTSXP));
+	PROTECT(value = IntVector::coerce(value));
 	np = length(value);
 	if(np != 2 && np != 4)
 	    error("%s", _("parameter \"mfg\" has the wrong length"));
@@ -485,7 +486,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
     /* -- */
 
     else if (streql(what, "oma")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 4);
 	nonnegRealCheck(REAL(value)[0], what);
 	nonnegRealCheck(REAL(value)[1], what);
@@ -501,7 +502,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	GReset(dd);
     }
     else if (streql(what, "omd")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 4);
 	BoundsCheck(REAL(value)[0], 0.0, 1.0, what);
 	BoundsCheck(REAL(value)[1], 0.0, 1.0, what);
@@ -517,7 +518,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	GReset(dd);
     }
     else if (streql(what, "omi")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 4);
 	nonnegRealCheck(REAL(value)[0], what);
 	nonnegRealCheck(REAL(value)[1], what);
@@ -535,7 +536,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
     /* -- */
 
     else if (streql(what, "pin")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 2);
 	nonnegRealCheck(REAL(value)[0], what);
 	nonnegRealCheck(REAL(value)[1], what);
@@ -546,7 +547,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
 	GReset(dd);
     }
     else if (streql(what, "plt")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 4);
 	nonnegRealCheck(REAL(value)[0], what);
 	nonnegRealCheck(REAL(value)[1], what);
@@ -577,7 +578,7 @@ static void Specify(const char *what, SEXP value, pGEDevDesc dd)
     }
     /* -- */
     else if (streql(what, "usr")) {
-	value = coerceVector(value, REALSXP);
+	value = RealVector::coerce(value);
 	lengthCheck(what, value, 4);
 	naRealCheck(REAL(value)[0], what);
 	naRealCheck(REAL(value)[1], what);

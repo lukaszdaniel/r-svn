@@ -510,7 +510,7 @@ attribute_hidden SEXP do_length(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    double d = REAL(ans)[0];
 	    if (R_FINITE(d) && d >= 0. && d <= INT_MAX && floor(d) == d) {
                 PROTECT(ans);
-                ans = coerceVector(ans, INTSXP);
+                ans = IntVector::coerce(ans);
                 UNPROTECT(1);
                 return ans;
             }
@@ -645,7 +645,7 @@ attribute_hidden SEXP do_rowscols(SEXP call, SEXP op, SEXP args, SEXP rho)
     dim = CAR(args);
 
     if (!isInteger(dim)) {
-	dim = coerceVector(dim, INTSXP);
+	dim = IntVector::coerce(dim);
     }
     if (LENGTH(dim) != 2)
 	error(_("a matrix-like object is required as argument to '%s'"),
@@ -1858,7 +1858,7 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    error(_("'perm[%d]' does not match a dimension name"), i+1);
 	    }
 	} else {
-	    perm = coerceVector(perm, INTSXP);
+	    perm = IntVector::coerce(perm);
 	    for (i = 0; i < n; i++) pp[i] = INTEGER(perm)[i] - 1;
 	}
     }
@@ -2299,7 +2299,7 @@ attribute_hidden SEXP do_array(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans,
 	dims     = CADR(args),
 	dimnames = CADDR(args);
-    PROTECT(dims = coerceVector(dims, INTSXP));
+    PROTECT(dims = IntVector::coerce(dims));
     bool err;
     R_xlen_t nans = dim2total(dims, &err);
     if(err) error("%s", _("too many elements specified"));
@@ -2469,7 +2469,7 @@ attribute_hidden SEXP do_diag(SEXP call, SEXP op, SEXP args, SEXP rho)
        break;
    }
    default: {
-       x = coerceVector(x, REALSXP);
+       x = RealVector::coerce(x);
        mk_REAL_DIAG;
      }
    }
@@ -2497,8 +2497,8 @@ attribute_hidden SEXP do_backsolve(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "k");
     bool upper = asLogicalNoNA(CAR(args), "upper.tri"); args = CDR(args);
     bool trans = asLogicalNoNA(CAR(args), "transpose");
-    if (TYPEOF(r) != REALSXP) {PROTECT(r = coerceVector(r, REALSXP)); nprot++;}
-    if (TYPEOF(b) != REALSXP) {PROTECT(b = coerceVector(b, REALSXP)); nprot++;}
+    if (TYPEOF(r) != REALSXP) {PROTECT(r = RealVector::coerce(r)); nprot++;}
+    if (TYPEOF(b) != REALSXP) {PROTECT(b = RealVector::coerce(b)); nprot++;}
     double *rr = REAL(r);
 
     /* check for zeros on diagonal of r: only k row/cols are used. */
@@ -2530,7 +2530,7 @@ attribute_hidden SEXP do_maxcol(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP m = CAR(args);
     int method = asInteger(CADR(args));
     int nr = nrows(m), nc = ncols(m), nprot = 1;
-    if (TYPEOF(m) != REALSXP) {PROTECT(m = coerceVector(m, REALSXP)); nprot++;}
+    if (TYPEOF(m) != REALSXP) {PROTECT(m = RealVector::coerce(m)); nprot++;}
     SEXP ans = PROTECT(allocVector(INTSXP, nr));
     R_max_col(REAL(m), &nr, &nc, INTEGER(ans), &method);
     UNPROTECT(nprot);

@@ -177,11 +177,11 @@ SEXP C_filledcontour(SEXP args)
     PrintDefaults(); /* prepare for labelformat */
 
     args = CDR(args);
-    sx = PROTECT(coerceVector(CAR(args), REALSXP));
+    sx = PROTECT(RealVector::coerce(CAR(args)));
     nx = LENGTH(sx);
     args = CDR(args);
 
-    sy = PROTECT(coerceVector(CAR(args), REALSXP));
+    sy = PROTECT(RealVector::coerce(CAR(args)));
     ny = LENGTH(sy);
     args = CDR(args);
     if (nx < 2 || ny < 2) error("%s", _("insufficient 'x' or 'y' values"));
@@ -189,10 +189,10 @@ SEXP C_filledcontour(SEXP args)
     // do it this way as coerceVector can lose dims, e.g. for a list matrix
     sz = CAR(args);
     if (nrows(sz) != nx || ncols(sz) != ny) error("%s", _("dimension mismatch"));
-    sz = PROTECT(coerceVector(sz, REALSXP));
+    sz = PROTECT(RealVector::coerce(sz));
     args = CDR(args);
 
-    sc = PROTECT(coerceVector(CAR(args), REALSXP)); /* levels */
+    sc = PROTECT(RealVector::coerce(CAR(args))); /* levels */
     nc = length(sc);
     args = CDR(args);
 
@@ -280,15 +280,15 @@ SEXP C_image(SEXP args)
 
     args = CDR(args);
 
-    sx = PROTECT(coerceVector(CAR(args), REALSXP));
+    sx = PROTECT(RealVector::coerce(CAR(args)));
     nx = LENGTH(sx);
     args = CDR(args);
 
-    sy = PROTECT(coerceVector(CAR(args), REALSXP));
+    sy = PROTECT(RealVector::coerce(CAR(args)));
     ny = LENGTH(sy);
     args = CDR(args);
 
-    sz = PROTECT(coerceVector(CAR(args), INTSXP));
+    sz = PROTECT(RealVector::coerce(CAR(args)));
     args = CDR(args);
 
     PROTECT(sc = FixupCol(CAR(args), R_TRANWHITE));
@@ -1081,28 +1081,28 @@ SEXP C_persp(SEXP args)
     if (length(args) < 24)  /* 24 plus any inline par()s */
 	error("%s", _("too few parameters"));
 
-    x = coerceVector(CAR(args), REALSXP);
+    x = RealVector::coerce(CAR(args));
     if (length(x) < 2) error(_("invalid '%s' argument"), "x");
     args = CDR(args);
 
-    y = coerceVector(CAR(args), REALSXP);
+    y = RealVector::coerce(CAR(args));
     if (length(y) < 2) error(_("invalid '%s' argument"), "y");
     args = CDR(args);
 
-    z = coerceVector(CAR(args), REALSXP);
+    z = RealVector::coerce(CAR(args));
     if (!isMatrix(z) || nrows(z) != length(x) || ncols(z) != length(y))
 	error(_("invalid '%s' argument"), "z");
     args = CDR(args);
 
-    xlim = coerceVector(CAR(args), REALSXP);
+    xlim = RealVector::coerce(CAR(args));
     if (length(xlim) != 2) error(_("invalid '%s' argument"), "xlim");
     args = CDR(args);
 
-    ylim = coerceVector(CAR(args), REALSXP);
+    ylim = RealVector::coerce(CAR(args));
     if (length(ylim) != 2) error(_("invalid '%s' argument"), "ylim");
     args = CDR(args);
 
-    zlim = coerceVector(CAR(args), REALSXP);
+    zlim = RealVector::coerce(CAR(args));
     if (length(zlim) != 2) error(_("invalid '%s' argument"), "zlim");
     args = CDR(args);
 
@@ -1863,19 +1863,19 @@ SEXP C_contour(SEXP args)
     if (length(args) < 12) error("%s", _("too few arguments"));
     PrintDefaults(); /* prepare for labelformat */
 
-    x = coerceVector(CAR(args), REALSXP);
+    x = RealVector::coerce(CAR(args));
     nx = LENGTH(x);
     args = CDR(args);
 
-    y = coerceVector(CAR(args), REALSXP);
+    y = RealVector::coerce(CAR(args));
     ny = LENGTH(y);
     args = CDR(args);
 
-    z = coerceVector(CAR(args), REALSXP);
+    z = RealVector::coerce(CAR(args));
     args = CDR(args);
 
     /* levels */
-    c = coerceVector(CAR(args), REALSXP);
+    c = RealVector::coerce(CAR(args));
     nc = LENGTH(c);
     args = CDR(args);
 

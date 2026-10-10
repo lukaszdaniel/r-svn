@@ -26,6 +26,9 @@
 
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <R_ext/GraphicsEngine.h>
 
@@ -33,6 +36,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 static char ColBuf[10];
 static char HexDigits[] = "0123456789ABCDEF";
@@ -190,11 +194,11 @@ SEXP hsv(SEXP h, SEXP s, SEXP v, SEXP a)
     double hh, ss, vv, aa, r=0., g=0., b=0.; /* -Wall */
     R_xlen_t i, max, nh, ns, nv, na = 1;
 
-    PROTECT(h = coerceVector(h,REALSXP));
-    PROTECT(s = coerceVector(s,REALSXP));
-    PROTECT(v = coerceVector(v,REALSXP));
+    PROTECT(h = RealVector::coerce(h));
+    PROTECT(s = RealVector::coerce(s));
+    PROTECT(v = RealVector::coerce(v));
     if (!isNull(a)) {
-	a = coerceVector(a, REALSXP);
+	a = RealVector::coerce(a);
 	na = XLENGTH(a);
     }
     PROTECT(a);
@@ -319,11 +323,11 @@ SEXP hcl(SEXP h, SEXP c, SEXP l, SEXP a, SEXP sfixup)
     R_xlen_t nh, nc, nl, na = 1, max, i;
     int ir, ig, ib;
 
-    PROTECT(h = coerceVector(h, REALSXP));
-    PROTECT(c = coerceVector(c, REALSXP));
-    PROTECT(l = coerceVector(l, REALSXP));
+    PROTECT(h = RealVector::coerce(h));
+    PROTECT(c = RealVector::coerce(c));
+    PROTECT(l = RealVector::coerce(l));
     if (!isNull(a)) {
-	a = coerceVector(a, REALSXP);
+	a = RealVector::coerce(a);
 	na = XLENGTH(a);
     }
     PROTECT(a);
@@ -400,15 +404,15 @@ SEXP rgb(SEXP r, SEXP g, SEXP b, SEXP a, SEXP MCV, SEXP nam)
     if(!R_FINITE(mV) || mV == 0.)
 	error(_("invalid '%s' value"), "maxColorValue");
     if(mV == 255.) {
-	PROTECT(r = coerceVector(r, INTSXP));
-	PROTECT(g = coerceVector(g, INTSXP));
-	PROTECT(b = coerceVector(b, INTSXP));
-	if(!isNull(a)) a = coerceVector(a, INTSXP);
+	PROTECT(r = IntVector::coerce(r));
+	PROTECT(g = IntVector::coerce(g));
+	PROTECT(b = IntVector::coerce(b));
+	if(!isNull(a)) a = IntVector::coerce(a);
     } else {
-	PROTECT(r = coerceVector(r, REALSXP));
-	PROTECT(g = coerceVector(g, REALSXP));
-	PROTECT(b = coerceVector(b, REALSXP));
-	if(!isNull(a)) a = coerceVector(a, REALSXP);
+	PROTECT(r = RealVector::coerce(r));
+	PROTECT(g = RealVector::coerce(g));
+	PROTECT(b = RealVector::coerce(b));
+	if(!isNull(a)) a = RealVector::coerce(a);
 	max_1 = (mV == 1.);
     }
     PROTECT(a);
@@ -424,7 +428,7 @@ SEXP rgb(SEXP r, SEXP g, SEXP b, SEXP a, SEXP MCV, SEXP nam)
     if (l_max < nb) l_max = nb;
     if (l_max < na) l_max = na;
 
-    PROTECT(nam = coerceVector(nam, STRSXP));
+    PROTECT(nam = StringVector::coerce(nam));
     if (length(nam) != 0 && length(nam) != l_max)
 	error("%s", _("invalid 'names' vector"));
     SEXP c = PROTECT(allocVector(STRSXP, l_max));
@@ -477,7 +481,7 @@ SEXP gray(SEXP lev, SEXP a)
     double level;
     int i, ilevel, nlev;
 
-    lev  = PROTECT(coerceVector(lev,REALSXP));
+    lev  = PROTECT(RealVector::coerce(lev));
     nlev = LENGTH(lev);
     ans = allocVector(STRSXP, nlev);
     if(!nlev) {
@@ -485,7 +489,7 @@ SEXP gray(SEXP lev, SEXP a)
 	return(ans);
     }
     PROTECT(ans);
-    if(!isNull(a)) a = coerceVector(a,REALSXP); // alpha
+    if(!isNull(a)) a = RealVector::coerce(a); // alpha
     PROTECT(a);
     if(isNull(a)) {
 	for (i = 0; i < nlev; i++) {
@@ -521,7 +525,7 @@ SEXP RGB2hsv(SEXP rgb)
     SEXP dd, ans, names, dmns;
     int n, i, i3;
 
-    rgb = PROTECT(coerceVector(rgb, REALSXP));
+    rgb = PROTECT(RealVector::coerce(rgb));
     if(!isMatrix(rgb)) error("%s", _("rgb is not a matrix (internally)"));
     dd = getAttrib(rgb, R_DimSymbol);
     if(INTEGER(dd)[0] != 3) error("%s", _("rgb must have 3 rows (internally)"));
@@ -561,10 +565,10 @@ SEXP col2rgb(SEXP colors, SEXP alpha)
     case STRSXP:
 	break;
     case REALSXP:
-	colors = coerceVector(colors, INTSXP);
+	colors = IntVector::coerce(colors);
 	break;
     default:
-	colors = coerceVector(colors, STRSXP);
+	colors = StringVector::coerce(colors);
 	break;
     }
     PROTECT(colors);
