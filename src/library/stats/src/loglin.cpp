@@ -17,6 +17,7 @@
 #include <R_ext/Memory.h>
 #include <R_ext/Applic.h>
 #include <R_ext/Error.h>	/* for error */
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
@@ -26,6 +27,7 @@
 
 
 using namespace std;
+using namespace CXXR;
 
 static void collap(int nvar, double *x, double *y, int locy,
 		   int *dim, int *config);
@@ -346,27 +348,27 @@ L50:
     return;
 }
 
-SEXP LogLin(SEXP dtab, SEXP conf, SEXP table, SEXP start, 
+SEXP LogLin(SEXP dtabArg, SEXP confArg, SEXP tableArg, SEXP start,
 	    SEXP snmar, SEXP eps, SEXP iter) 
 {
-    int nvar = length(dtab), 
-	ncon = ncols(conf), 
-	ntab = length(table),
+    int nvar = length(dtabArg),
+	ncon = ncols(confArg),
+	ntab = length(tableArg),
 	nmar = asInteger(snmar), 
 	maxit = asInteger(iter), 
 	nlast, ifault;
     double maxdev = asReal(eps);
 //    if (ncon == 0 || nmar == 0)
 //	Rf_error(_("invalid zero-length input(s): ncon %d, nmar %d"), ncon, nmar);
-    SEXP fit = PROTECT(TYPEOF(start) == REALSXP ? duplicate(start) :
-		       coerceVector(start, REALSXP)),
-	locmar = PROTECT(allocVector(INTSXP, ncon)),
-	marg = PROTECT(allocVector(REALSXP, nmar)),
-	u = PROTECT(allocVector(REALSXP, ntab)),
-	dev = PROTECT(allocVector(REALSXP, maxit));
-    dtab = PROTECT(coerceVector(dtab, INTSXP));
-    conf = PROTECT(coerceVector(conf, INTSXP));
-    table = PROTECT(coerceVector(table, REALSXP));
+    GCStackRoot<> fit(TYPEOF(start) == REALSXP ? duplicate(start) :
+			    coerceVector(start, REALSXP));
+    GCStackRoot<> locmar(allocVector(INTSXP, ncon));
+    GCStackRoot<> marg(allocVector(REALSXP, nmar));
+    GCStackRoot<> u(allocVector(REALSXP, ntab));
+    GCStackRoot<> dev(allocVector(REALSXP, maxit));
+    GCStackRoot<> dtab(coerceVector(dtabArg, INTSXP));
+    GCStackRoot<> conf(coerceVector(confArg, INTSXP));
+    GCStackRoot<> table(coerceVector(tableArg, REALSXP));
     loglin(nvar, INTEGER(dtab), ncon, INTEGER(conf), ntab,
 	   REAL(table), REAL(fit), INTEGER(locmar), nmar, REAL(marg),
 	   ntab, REAL(u), maxdev, maxit, REAL(dev), &nlast, &ifault);
@@ -382,16 +384,14 @@ SEXP LogLin(SEXP dtab, SEXP conf, SEXP table, SEXP start,
 	break;
     }
 
-    SEXP ans = PROTECT(allocVector(VECSXP, 3)), nm;
+    GCStackRoot<> ans(allocVector(VECSXP, 3));
     SET_VECTOR_ELT(ans, 0, fit);
     SET_VECTOR_ELT(ans, 1, dev);
     SET_VECTOR_ELT(ans, 2, ScalarInteger(nlast));
-    nm = allocVector(STRSXP, 3);
+    SEXP nm = allocVector(STRSXP, 3);
     setAttrib(ans, R_NamesSymbol, nm);
     SET_STRING_ELT(nm, 0, mkChar("fit"));
     SET_STRING_ELT(nm, 1, mkChar("dev"));
     SET_STRING_ELT(nm, 2, mkChar("nlast"));
-    UNPROTECT(9);
     return ans;
 }
-

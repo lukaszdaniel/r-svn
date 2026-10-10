@@ -70,6 +70,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <charconv>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
@@ -137,6 +138,72 @@ R_size_t R::R_Decode2Long(char *p, int *ierr)
 /* There is no documented (or enforced) limit on 'w' here,
    so use snprintf */
 #define NB 1000
+static void copyPadded(char *buffer, const char *text, int width)
+{
+    size_t text_len = strlen(text);
+    size_t copy_len = min(text_len, static_cast<size_t>(NB - 1));
+    size_t field_width = width < 0 ?
+	static_cast<size_t>(-static_cast<long long>(width)) :
+	static_cast<size_t>(width);
+    size_t padding = field_width > text_len ? field_width - text_len : 0;
+    padding = min(padding, static_cast<size_t>(NB - 1) - copy_len);
+
+    if (width >= 0) {
+	memset(buffer, ' ', padding);
+	memcpy(buffer + padding, text, copy_len);
+    } else {
+	memcpy(buffer, text, copy_len);
+	memset(buffer + copy_len, ' ', padding);
+    }
+    buffer[min(copy_len + padding, static_cast<size_t>(NB - 1))] = '\0';
+}
+
+static char *appendHexDigits(char *out, unsigned int value,
+			     unsigned int min_digits)
+{
+    static constexpr char digits[] = "0123456789abcdef";
+    unsigned int count = 1;
+    for (unsigned int n = value; n >= 16; n >>= 4)
+	count++;
+    if (count < min_digits)
+	count = min_digits;
+    for (unsigned int i = count; i > 0; i--) {
+	out[i - 1] = digits[value & 0xf];
+	value >>= 4;
+    }
+    return out + count;
+}
+
+static char *appendOctalEscape(char *out, unsigned char value)
+{
+    out[0] = '\\';
+    out[1] = '0' + ((value >> 6) & 0x3);
+    out[2] = '0' + ((value >> 3) & 0x7);
+    out[3] = '0' + (value & 0x7);
+    return out + 4;
+}
+
+static char *replaceDecimalMark(char *buffer, char *replacement,
+				const char *decimal_mark)
+{
+    int width = R::Rstrwid(decimal_mark, static_cast<int>(strlen(decimal_mark)),
+			    CE_NATIVE, 0);
+    if (width != 1)
+	warning("%s", (width > 1) ?
+		_("the decimal mark is more than one character wide; this will become an error") :
+		_("the decimal mark is less than one character wide; this will become an error"));
+
+    char *point = strchr(buffer, '.');
+    if (!point)
+	return buffer;
+    size_t prefix_len = point - buffer;
+    size_t decimal_len = strlen(decimal_mark);
+    memcpy(replacement, buffer, prefix_len);
+    memcpy(replacement + prefix_len, decimal_mark, decimal_len);
+    strcpy(replacement + prefix_len + decimal_len, point + 1);
+    return replacement;
+}
+
 const char *Rf_EncodeLogical(int x, int w)
 {
     /* fast path when 'w' fits exactly */
@@ -148,19 +215,23 @@ const char *Rf_EncodeLogical(int x, int w)
 	if(w == 5) return "FALSE";
     /* general case */
     static char buff[NB];
-    if(x == NA_LOGICAL) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
-    else if(x) snprintf(buff, NB, "%*s", min(w, (NB-1)), "TRUE");
-    else snprintf(buff, NB, "%*s", min(w, (NB-1)), "FALSE");
-    buff[NB-1] = '\0';
+    if(x == NA_LOGICAL) copyPadded(buff, CHAR(R_print.na_string), min(w, NB-1));
+    else if(x) copyPadded(buff, "TRUE", min(w, NB-1));
+    else copyPadded(buff, "FALSE", min(w, NB-1));
     return buff;
 }
 
 const char *Rf_EncodeInteger(int x, int w)
 {
     static char buff[NB];
-    if(x == NA_INTEGER) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
-    else snprintf(buff, NB, "%*d", min(w, (NB-1)), x);
-    buff[NB-1] = '\0';
+    if(x == NA_INTEGER)
+	copyPadded(buff, CHAR(R_print.na_string), min(w, NB-1));
+    else {
+	char digits[32];
+	auto result = std::to_chars(digits, digits + sizeof digits, x);
+	*result.ptr = '\0';
+	copyPadded(buff, digits, min(w, NB-1));
+    }
     return buff;
 }
 
@@ -168,7 +239,14 @@ attribute_hidden
 const char *R::EncodeRaw(Rbyte x, const char * prefix)
 {
     static char buff[10];
-    snprintf(buff, 10, "%s%02x", prefix, x);
+    size_t prefix_len = strlen(prefix);
+    size_t copied_prefix = min(prefix_len, sizeof buff - 1);
+    memcpy(buff, prefix, copied_prefix);
+    char hex[2];
+    appendHexDigits(hex, x, 2);
+    size_t hex_len = min(sizeof hex, sizeof buff - 1 - copied_prefix);
+    memcpy(buff + copied_prefix, hex, hex_len);
+    buff[copied_prefix + hex_len] = '\0';
     return buff;
 }
 
@@ -219,10 +297,10 @@ const char *Rf_EncodeReal0(double x, int w, int d, int e, const char *dec)
     /* IEEE allows signed zeros (yuck!) */
     if (x == 0.0) x = 0.0;
     if (!R_FINITE(x)) {
-	if(ISNA(x)) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
-	else if(ISNAN(x)) snprintf(buff, NB, "%*s", min(w, (NB-1)), "NaN");
-	else if(x > 0) snprintf(buff, NB, "%*s", min(w, (NB-1)), "Inf");
-	else snprintf(buff, NB, "%*s", min(w, (NB-1)), "-Inf");
+	if(ISNA(x)) copyPadded(buff, CHAR(R_print.na_string), min(w, NB-1));
+	else if(ISNAN(x)) copyPadded(buff, "NaN", min(w, NB-1));
+	else if(x > 0) copyPadded(buff, "Inf", min(w, NB-1));
+	else copyPadded(buff, "-Inf", min(w, NB-1));
     }
     else if (e) {
 	if(d) { // '#' flag
@@ -240,18 +318,7 @@ const char *Rf_EncodeReal0(double x, int w, int d, int e, const char *dec)
     buff[NB-1] = '\0';
 
     if (!streql(dec, ".")) { /* replace "." by dec */
-	int len = strwidth(dec); /* 3·14 must work */
-	if (len != 1) warning("%s", (len > 1) ?
-	    _("the decimal mark is more than one character wide; this will become an error") :
-	    _("the decimal mark is less than one character wide; this will become an error"));
-
-	char *p, *q;
-	for(p = buff, q = buff2; *p; p++) {
-	    if(*p == '.') for(const char *r = dec; *r; r++) *q++ = *r;
-	    else *q++ = *p;
-	}
-	*q = '\0';
-	out = buff2;
+	out = replaceDecimalMark(buff, buff2, dec);
     }
 
     return out;
@@ -266,10 +333,10 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
     /* IEEE allows signed zeros (yuck!) */
     if (x == 0.0) x = 0.0;
     if (!R_FINITE(x)) {
-	if(ISNA(x))       snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
-	else if(ISNAN(x)) snprintf(buff, NB, "%*s", min(w, (NB-1)), "NaN");
-	else if(x > 0)    snprintf(buff, NB, "%*s", min(w, (NB-1)), "Inf");
-	else              snprintf(buff, NB, "%*s", min(w, (NB-1)), "-Inf");
+	if(ISNA(x))       copyPadded(buff, CHAR(R_print.na_string), min(w, NB-1));
+	else if(ISNAN(x)) copyPadded(buff, "NaN", min(w, NB-1));
+	else if(x > 0)    copyPadded(buff, "Inf", min(w, NB-1));
+	else              copyPadded(buff, "-Inf", min(w, NB-1));
     }
     else if (e) {
 	if(d) {
@@ -301,18 +368,7 @@ static const char *EncodeRealDrop0(double x, int w, int d, int e, const char *de
     }
 
     if (!streql(dec, ".")) { /* replace "." by dec */
-	int len = strwidth(dec); /* 3·14 must work */
-	if (len != 1) warning("%s", (len > 1) ?
-	    _("the decimal mark is more than one character wide; this will become an error") :
-	    _("the decimal mark is less than one character wide; this will become an error"));
-
-	char *p, *q;
-	for(p = buff, q = buff2; *p; p++) {
-	    if(*p == '.') for(const char *r = dec; *r; r++) *q++ = *r;
-	    else *q++ = *p;
-	}
-	*q = '\0';
-	out = buff2;
+	out = replaceDecimalMark(buff, buff2, dec);
     }
 
     return out;
@@ -336,10 +392,10 @@ const char *R::EncodeReal2(double x, int w, int d, int e)
     /* IEEE allows signed zeros (yuck!) */
     if (x == 0.0) x = 0.0;
     if (!R_FINITE(x)) {
-	if(ISNA(x)) snprintf(buff, NB, "%*s", min(w, (NB-1)), CHAR(R_print.na_string));
-	else if(ISNAN(x)) snprintf(buff, NB, "%*s", min(w, (NB-1)), "NaN");
-	else if(x > 0) snprintf(buff, NB, "%*s", min(w, (NB-1)), "Inf");
-	else snprintf(buff, NB, "%*s", min(w, (NB-1)), "-Inf");
+	if(ISNA(x)) copyPadded(buff, CHAR(R_print.na_string), min(w, NB-1));
+	else if(ISNAN(x)) copyPadded(buff, "NaN", min(w, NB-1));
+	else if(x > 0) copyPadded(buff, "Inf", min(w, NB-1));
+	else copyPadded(buff, "-Inf", min(w, NB-1));
     }
     else if (e) {
 	if(d) {
@@ -370,9 +426,8 @@ const char *Rf_EncodeComplex(Rcomplex x, int wr, int dr, int er, int wi, int di,
     if (x.i == 0.0) x.i = 0.0;
 
     if (ISNA(x.r) || ISNA(x.i)) {
-	snprintf(buff, NB,
-		 "%*s", /* was "%*s%*s", R_print.gap, "", */
-		 min(wr+wi+2, (NB-1)), CHAR(R_print.na_string));
+	copyPadded(buff, CHAR(R_print.na_string),
+		   min(wr+wi+2, NB-1));
     } else {
 	char Re[NB];
 	const char *Im, *tmp;
@@ -574,7 +629,7 @@ attribute_hidden
 const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 {
     int i, cnt;
-    const char *p; char *q, buf[13];
+    const char *p; char *q;
     cetype_t ienc = getCharCE(s);
     bool useUTF8 = (w < 0);
     CXXR::RAllocStack::Scope rscope;
@@ -604,16 +659,16 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 #endif
 	    p = CHAR(s);
 	    cnt = (int) strlen(p);
-	    const char *q;
-	    char *pp = R_alloc(4*cnt+1, 1), *qq = pp, buf[5];
-	    for (q = p; *q; q++) {
-		unsigned char k = (unsigned char) *q;
+	    char *pp = R_alloc(4*cnt+1, 1), *qq = pp;
+	    for (const char *src = p; *src; src++) {
+		unsigned char k = (unsigned char) *src;
 		if (k >= 0x20 && k < 0x80) {
-		    *qq++ = *q;
-		    if (quote && *q == '"') cnt++;
+		    *qq++ = *src;
+		    if (quote && *src == '"') cnt++;
 		} else {
-		    snprintf(buf, 5, "\\x%02x", k);
-		    for(int j = 0; j < 4; j++) *qq++ = buf[j];
+		    *qq++ = '\\';
+		    *qq++ = 'x';
+		    qq = appendHexDigits(qq, k, 2);
 		    cnt += 3;
 		}
 	    }
@@ -678,7 +733,8 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
     if(justify == Rprt_adj_none) b = 0;
     if(b > 0 && justify != Rprt_adj_left) {
 	int b0 = (justify == Rprt_adj_centre) ? b/2 : b;
-	for(i = 0 ; i < b0 ; i++) *q++ = ' ';
+	memset(q, ' ', b0);
+	q += b0;
 	b -= b0;
     }
     if(quote) *q++ = (char) quote;
@@ -740,9 +796,7 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 
 		    default:
 			/* print in octal */
-			// gcc 7 requires cast here
-			snprintf(buf, 5, "\\%03o", (unsigned char)k);
-			for(int j = 0; j < 4; j++) *q++ = buf[j];
+			q = appendOctalEscape(q, (unsigned char)k);
 			break;
 		    }
 		    p++;
@@ -765,20 +819,26 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 # if !defined (__STDC_ISO_10646__) && !defined (Win32)
 			Unicode_warning = TRUE;
 # endif
-			if(k > 0xffff)
-			    snprintf(buf, 13, "\\U{%06x}", k);
-			else
-			    snprintf(buf, 11, "\\u%04x", k);
-			int j = (int) strlen(buf);
-			memcpy(q, buf, j);
-			q += j;
+			if(k > 0xffff) {
+			    *q++ = '\\';
+			    *q++ = 'U';
+			    *q++ = '{';
+			    q = appendHexDigits(q, k, 6);
+			    *q++ = '}';
+			} else {
+			    *q++ = '\\';
+			    *q++ = 'u';
+			    q = appendHexDigits(q, k, 4);
+			}
 			p += res;
 		    }
 		    i += (res - 1);
 		}
 	    } else { /* invalid char */
-		snprintf(q, 5, "\\x%02x", *((unsigned char *)p));
-		q += 4; p++;
+		*q++ = '\\';
+		*q++ = 'x';
+		q = appendHexDigits(q, (unsigned char)*p, 2);
+		p++;
 	    }
 	}
 #ifndef __STDC_ISO_10646__
@@ -817,16 +877,14 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 
 		    default:
 			/* print in octal */
-			snprintf(buf, 5, "\\%03o", (unsigned char) *p);
-			for(int j = 0; j < 4; j++) *q++ = buf[j];
+			q = appendOctalEscape(q, (unsigned char)*p);
 			break;
 		    }
 		p++;
 	    } else {  /* 8 bit char */
 		if(!isprint((int)*p & 0xff)) {
 		    /* print in octal */
-		    snprintf(buf, 5, "\\%03o", (unsigned char) *p);
-		    for(int j = 0; j < 4; j++) *q++ = buf[j];
+		    q = appendOctalEscape(q, (unsigned char)*p);
 		    p++;
 		} else *q++ = *p++;
 	    }
@@ -837,7 +895,8 @@ const char *R::EncodeString(SEXP s, int w, int quote, Rprt_adj justify)
 #endif
     if(quote) *q++ = (char) quote;
     if(b > 0 && justify != Rprt_adj_right) {
-	for(i = 0 ; i < b ; i++) *q++ = ' ';
+	memset(q, ' ', b);
+	q += b;
     }
     *q = '\0';
 

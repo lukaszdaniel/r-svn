@@ -380,7 +380,7 @@ static SEXP ALTREP_UNSERIALIZE_CLASS(SEXP info)
 attribute_hidden SEXP R::ALTREP_UNSERIALIZE_EX(SEXP info, SEXP state, SEXP attr, int objf, int levs)
 {
     if (!valid_altrep_serialized_class(info))
-	error("invalid ALTREP serialized class");
+	error("%s", _("invalid ALTREP serialized class"));
 
     SEXP csym = ALTREP_SERIALIZED_CLASS_CLSSYM(info);
     SEXP psym = ALTREP_SERIALIZED_CLASS_PKGSYM(info);

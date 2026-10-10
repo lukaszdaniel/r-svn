@@ -360,13 +360,14 @@ int R::Rsnprintf_mbcs(char *str, size_t size, const char *format, ...)
 /* Rstrncat: like strncat, but guaranteed not to split multi-byte characters */
 static char *Rstrncat(char *dest, const char *src, size_t n)
 {
-    size_t after;
     size_t before = strlen(dest);
-
-    strncat(dest, src, n);
-
-    after = strlen(dest);
-    if (after - before == n)
+    size_t copied = 0;
+    while (copied < n && src[copied] != '\0') {
+	dest[before + copied] = src[copied];
+	copied++;
+    }
+    dest[before + copied] = '\0';
+    if (copied == n)
 	/* the string may have been truncated, but we cannot know for sure
 	   because str may not be null terminated */
 	mbcsTruncateToValid(dest + before);
@@ -391,9 +392,11 @@ static R_INLINE void RprintTrunc(char *buf, bool truncated)
 {
     if (truncated) {
 	const char *msg = _("[... truncated]");
-	if (strlen(buf) + 1 + strlen(msg) < BUFSIZE) {
-	    strcat(buf, " ");
-	    strcat(buf, msg);
+	size_t buf_len = strlen(buf);
+	size_t msg_len = strlen(msg);
+	if (buf_len + 1 + msg_len < BUFSIZE) {
+	    buf[buf_len++] = ' ';
+	    memcpy(buf + buf_len, msg, msg_len + 1);
 	}
     }
 }
@@ -414,7 +417,7 @@ static SEXP getCurrentCall(void)
 
 void Rf_warning(const char *format, ...)
 {
-    char buf[BUFSIZE], *p;
+    char buf[BUFSIZE];
 
     va_list ap;
     va_start(ap, format);
@@ -424,8 +427,9 @@ void Rf_warning(const char *format, ...)
     psize = min(BUFSIZE, R_WarnLength+1);
     pval = Rvsnprintf_mbcs(buf, psize, format, ap);
     va_end(ap);
-    p = buf + strlen(buf) - 1;
-    if(strlen(buf) > 0 && *p == '\n') *p = '\0';
+    size_t buf_len = strlen(buf);
+    if (buf_len > 0 && buf[buf_len - 1] == '\n')
+	buf[buf_len - 1] = '\0';
     RprintTrunc(buf, (size_t) pval >= psize);
     GCStackRoot<> call(getCurrentCall());
     warningcall(call, "%s", buf);
@@ -540,11 +544,15 @@ static void vwarningcall_dflt(SEXP call, const char *format, va_list ap)
 	    if (R_ShowWarnCalls && call != R_NilValue) {
 		const char *tr =  R_ConciseTraceback(call, 0);
 		size_t nc = strlen(tr);
-		if (nc && nc + (int)strlen(buf) + 8 < BUFSIZE) {
-		    strcat(buf, "\n");
-		    strcat(buf, _("Calls:"));
-		    strcat(buf, " ");
-		    strcat(buf, tr);
+		size_t buf_len = strlen(buf);
+		const char *calls = _("Calls:");
+		size_t calls_len = strlen(calls);
+		if (nc && nc + buf_len + calls_len + 2 < BUFSIZE) {
+		    buf[buf_len++] = '\n';
+		    memcpy(buf + buf_len, calls, calls_len);
+		    buf_len += calls_len;
+		    buf[buf_len++] = ' ';
+		    memcpy(buf + buf_len, tr, nc + 1);
 		}
 	    }
 	    names = CAR(ATTRIB(R_Warnings));
@@ -1594,7 +1602,7 @@ attribute_hidden SEXP do_traceback(SEXP call, SEXP op, SEXP args, SEXP rho)
 static const char *R_ConciseTraceback(SEXP call, int skip)
 {
     static char buf[560];
-    size_t nl;
+    size_t nl, buf_len = 0;
     int ncalls = 0;
     bool too_many = false;
     const char *top = "" /* -Wall */;
@@ -1614,30 +1622,39 @@ static const char *R_ConciseTraceback(SEXP call, int skip)
 		   streql(funstr, "warning") ||
 		   streql(funstr, "suppressWarnings") ||
 		   streql(funstr, ".signalSimpleWarning")) {
-		    buf[0] =  '\0'; ncalls = 0; too_many = false;
+		    buf[0] = '\0';
+		    buf_len = 0;
+		    ncalls = 0;
+		    too_many = false;
 		} else {
 		    ncalls++;
 		    if (too_many) {
 			top = funstr;
-		    } else if (strlen(buf) > (size_t) (R_NShowCalls)) {
-			memmove(buf+4, buf, strlen(buf)+1);
+		    } else if (buf_len > (size_t) (R_NShowCalls)) {
+			memmove(buf+4, buf, buf_len+1);
 			memcpy(buf, "... ", 4);
+			buf_len += 4;
 			too_many = true;
 			top = funstr;
-		    } else if (strlen(buf)) {
+		    } else if (buf_len) {
 			nl = strlen(funstr);
-			memmove(buf+nl+4, buf, strlen(buf)+1);
-			memcpy(buf, funstr, strlen(funstr));
+			memmove(buf+nl+4, buf, buf_len+1);
+			memcpy(buf, funstr, nl);
 			memcpy(buf+nl, " -> ", 4);
+			buf_len += nl + 4;
 		    } else
-			memcpy(buf, funstr, strlen(funstr)+1);
+		    {
+			buf_len = strlen(funstr);
+			memcpy(buf, funstr, buf_len + 1);
+		    }
 		}
 	    }
 	}
     if (too_many && (nl = strlen(top)) < 50) {
-	memmove(buf+nl+1, buf, strlen(buf)+1);
-	memcpy(buf, top, strlen(top));
+	memmove(buf+nl+1, buf, buf_len+1);
+	memcpy(buf, top, nl);
 	memcpy(buf+nl, " ", 1);
+	buf_len += nl + 1;
     }
     /* don't add Calls if it adds no extra information */
     /* However: do we want to include the call in the list if it is a

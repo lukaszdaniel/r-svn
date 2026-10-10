@@ -328,10 +328,12 @@ static SEXP ColumnNames(SEXP x)
 // called from R as  .Externals2(C_modelmatrix, t, data)
 SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP expr, factors, terms, vars, vnames, assign;
-    SEXP xnames, tnames, rnames;
-    SEXP count, contrast, contr1, contr2, nlevs, ordered, columns, x;
-    SEXP variable, var_i;
+    SEXP terms, vars, vnames;
+    GCStackRoot<> expr, factors, assign;
+    GCStackRoot<>  xnames, tnames, rnames;
+    GCStackRoot<> count, contrast, contr1, contr2, nlevs, ordered, columns, x;
+    GCStackRoot<> variable;
+    SEXP var_i;
     int fik, first, i, j, k, kk, ll, n, nc, nterms, nVar;
     int jstart, jnext, indx, rhs_response;
     double dk, dnc;
@@ -356,7 +358,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* variables in the model data frame and the number of model terms. */
 
     nVar = nterms = 0;		/* -Wall */
-    PROTECT(factors = duplicate(getAttrib(terms, install("factors"))));
+    factors = duplicate(getAttrib(terms, install("factors")));
     if (length(factors) == 0) {
 	/* if (intrcept == 0)
 	   error("%s", _("invalid model (zero parameters)."));*/
@@ -392,7 +394,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     nn = n = nrows(VECTOR_ELT(vars, 0));
     /* This could be generated, so need to protect it */
-    PROTECT(rnames = getAttrib(vars, R_RowNamesSymbol));
+    rnames = getAttrib(vars, R_RowNamesSymbol);
 
     /* This section of the code checks the types of the variables
        in the model frame.  Note that it should really only check
@@ -404,10 +406,10 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
        integer (including factor), numeric and complex.
      */
 
-    PROTECT(variable = allocVector(VECSXP, nVar));
-    PROTECT(nlevs = allocVector(INTSXP, nVar));
-    PROTECT(ordered = LogicalVector::create(nVar));
-    PROTECT(columns = allocVector(INTSXP, nVar));
+    variable = allocVector(VECSXP, nVar);
+    nlevs = allocVector(INTSXP, nVar);
+    ordered = LogicalVector::create(nVar);
+    columns = allocVector(INTSXP, nVar);
 
     for (i = 0; i < nVar; i++) {
 	var_i = SET_VECTOR_ELT(variable, i, VECTOR_ELT(vars, i));
@@ -472,10 +474,10 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* the required arguments at call time.  The calls have the following */
     /* form: (contrast.type nlevs contrasts) */
 
-    PROTECT(contr1 = allocVector(VECSXP, nVar));
-    PROTECT(contr2 = allocVector(VECSXP, nVar));
+    contr1 = allocVector(VECSXP, nVar);
+    contr2 = allocVector(VECSXP, nVar);
 
-    PROTECT(expr = allocLang(3));
+    expr = allocLang(3);
     SETCAR(expr, install("contrasts"));
     SETCADDR(expr, LogicalVector::create(1));
 
@@ -496,11 +498,11 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	    SETCADR(expr, VECTOR_ELT(variable, i));
 	    if (k & 1) {
-		LOGICAL(CADDR(expr))[0] = 1;
+		LOGICAL((CADDR)(expr))[0] = 1;
 		SET_VECTOR_ELT(contr1, i, eval(expr, rho));
 	    }
 	    if (k & 2) {
-		LOGICAL(CADDR(expr))[0] = 0;
+		LOGICAL((CADDR)(expr))[0] = 0;
 		SET_VECTOR_ELT(contr2, i, eval(expr, rho));
 	    }
 	}
@@ -527,7 +529,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Note that "count" holds a count of how many columns there are */
     /* for each term in the model and "nc" gives the total column count. */
 
-    PROTECT(count = allocVector(INTSXP, nterms));
+    count = allocVector(INTSXP, nterms);
     if (intrcept)
 	dnc = 1;
     else
@@ -564,7 +566,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* Record which columns of the design matrix are associated */
     /* with which model terms. */
 
-    PROTECT(assign = allocVector(INTSXP, nc));
+    assign = allocVector(INTSXP, nc);
     k = 0;
     if (intrcept) INTEGER(assign)[k++] = 0;
     for (j = 0; j < nterms; j++) {
@@ -578,7 +580,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* Create column labels for the matrix columns. */
 
-    PROTECT(xnames = allocVector(STRSXP, nc));
+    xnames = allocVector(STRSXP, nc);
 
 
     /* Here we loop over the terms in the model and, within each */
@@ -667,7 +669,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* Allocate and compute the design matrix. */
 
-    PROTECT(x = allocMatrix(REALSXP, n, nc));
+    x = allocMatrix(REALSXP, n, nc);
     double *rx = REAL(x);
 
 #if defined(R_MEMORY_PROFILING) && defined(USE_RINTERNALS)
@@ -705,7 +707,6 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    contrast = coerceVector(VECTOR_ELT(contr2, i), REALSXP);
 		    break;
 		}
-		PROTECT(contrast);
 		if (jnext == jstart) {
 		    if (INTEGER(nlevs)[i] > 0) {
 			int adj = isLogical(var_i)?1:0;
@@ -735,17 +736,16 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 			jnext = jnext + (jnext - jstart) * (ncols(var_i) - 1);
 		    }
 		}
-		UNPROTECT(1);
 	    }
 	}
 	jstart = jnext;
     }
-    PROTECT(tnames = allocVector(VECSXP, 2));
+    tnames = allocVector(VECSXP, 2);
     SET_VECTOR_ELT(tnames, 0, rnames);
     SET_VECTOR_ELT(tnames, 1, xnames);
     setAttrib(x, R_DimNamesSymbol, tnames);
     setAttrib(x, install("assign"), assign);
-    UNPROTECT(14);
+
     return x;
 }
 // modelmatrix()

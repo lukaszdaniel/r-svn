@@ -329,7 +329,7 @@ int pureNullUnit(SEXP unit, int index, pGEDevDesc dd) {
  * but this can "pollute" the viewport tree in some cases.
  */
 
-double evaluateGrobUnit(double value, SEXP grob,
+double evaluateGrobUnit(double value, SEXP initialGrob,
 			double vpwidthCM, double vpheightCM,
 			int nullLMode, int nullAMode,
 			/*
@@ -341,17 +341,17 @@ double evaluateGrobUnit(double value, SEXP grob,
 {
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
+    GCStackRoot<> grob(initialGrob);
     LViewportContext vpc;
     R_GE_gcontext gc;
     LTransform transform, savedTransform;
     SEXP currentvp, currentgp;
-    SEXP preFn,  postFn, findGrobFn;
-    SEXP evalFnx = R_NilValue, evalFny = R_NilValue;
-    SEXP R_fcall0, R_fcall1, R_fcall2x, R_fcall2y, R_fcall3;
-    SEXP savedgpar, savedgrob, updatedgrob;
-    SEXP unitx = R_NilValue, unity = R_NilValue;
+    GCStackRoot<> preFn, postFn, findGrobFn;
+    GCStackRoot<> evalFnx(R_NilValue), evalFny(R_NilValue);
+    GCStackRoot<> R_fcall0, R_fcall1, R_fcall2x, R_fcall2y, R_fcall3;
+    GCStackRoot<> savedgpar, savedgrob, updatedgrob;
+    GCStackRoot<> unitx(R_NilValue), unity(R_NilValue);
     double result = 0.0;
-    bool protectedGrob = false;
     /*
      * We are just doing calculations, not drawing, so
      * we don't want anything recorded on the graphics engine DL
@@ -377,35 +377,35 @@ double evaluateGrobUnit(double value, SEXP grob,
     /* 
      * Save the current gpar state and restore it at the end
      */
-    PROTECT(savedgpar = gridStateElement(dd, GSS_GPAR));
+    savedgpar = gridStateElement(dd, GSS_GPAR);
     /*
      * Save the current grob and restore it at the end
      */
-    PROTECT(savedgrob = gridStateElement(dd, GSS_CURRGROB));
+    savedgrob = gridStateElement(dd, GSS_CURRGROB);
     /*
      * Set up for calling R functions 
      */
-    PROTECT(preFn = findFun(install("preDraw"), R_gridEvalEnv));
+    preFn = findFun(install("preDraw"), R_gridEvalEnv);
     switch(evalType) {
     case 0:
     case 1:
-	PROTECT(evalFnx = findFun(install("xDetails"), R_gridEvalEnv));
-	PROTECT(evalFny = findFun(install("yDetails"), R_gridEvalEnv));
+	evalFnx = findFun(install("xDetails"), R_gridEvalEnv);
+	evalFny = findFun(install("yDetails"), R_gridEvalEnv);
 	break;
     case 2:
-	PROTECT(evalFnx = findFun(install("width"), R_gridEvalEnv));
+	evalFnx = findFun(install("width"), R_gridEvalEnv);
 	break;
     case 3:
-	PROTECT(evalFny = findFun(install("height"), R_gridEvalEnv));
+	evalFny = findFun(install("height"), R_gridEvalEnv);
 	break;
     case 4:
-	PROTECT(evalFny = findFun(install("ascentDetails"), R_gridEvalEnv));
+	evalFny = findFun(install("ascentDetails"), R_gridEvalEnv);
         break;
     case 5:
-	PROTECT(evalFny = findFun(install("descentDetails"), R_gridEvalEnv));
+	evalFny = findFun(install("descentDetails"), R_gridEvalEnv);
         break;
     }
-    PROTECT(postFn = findFun(install("postDraw"), R_gridEvalEnv));
+    postFn = findFun(install("postDraw"), R_gridEvalEnv);
     /*
      * If grob is actually a gPath, use it to find an actual grob
      */
@@ -418,28 +418,24 @@ double evaluateGrobUnit(double value, SEXP grob,
 	 * NOTE: assume here that only gPath of depth == 1 are valid
 	 */
 	if (isNull(savedgrob)) {
-	    PROTECT(findGrobFn = findFun(install("findGrobinDL"), 
-					 R_gridEvalEnv));
-	    PROTECT(R_fcall0 = lang2(findGrobFn, 
-				     getListElement(grob, "name")));
-	    PROTECT(grob = Rf_eval_with_gd(R_fcall0, R_gridEvalEnv, dd));
+	    findGrobFn = findFun(
+		install("findGrobinDL"), R_gridEvalEnv);
+	    R_fcall0 = lang2(
+		findGrobFn, getListElement(grob, "name"));
+	    grob = Rf_eval_with_gd(R_fcall0, R_gridEvalEnv, dd);
 	} else {
-	    PROTECT(findGrobFn = findFun(install("findGrobinChildren"), 
-					 R_gridEvalEnv));
-	    PROTECT(R_fcall0 = lang3(findGrobFn, 
-				     getListElement(grob, "name"),
-				     getListElement(savedgrob, "children")));
-	    PROTECT(grob = Rf_eval_with_gd(R_fcall0, R_gridEvalEnv, dd));
+	    findGrobFn = findFun(install("findGrobinChildren"),
+				 R_gridEvalEnv);
+	    R_fcall0 = lang3(findGrobFn,
+			     getListElement(grob, "name"),
+			     getListElement(savedgrob, "children"));
+	    grob = Rf_eval_with_gd(R_fcall0, R_gridEvalEnv, dd);
 	}
-	/*
-	 * Flag to make sure we UNPROTECT these at the end
-	 */
-	protectedGrob = TRUE;
     }
     /* Call preDraw(grob) 
      */
-    PROTECT(R_fcall1 = lang2(preFn, grob));
-    PROTECT(updatedgrob = Rf_eval_with_gd(R_fcall1, R_gridEvalEnv, dd));
+    R_fcall1 = lang2(preFn, grob);
+    updatedgrob = Rf_eval_with_gd(R_fcall1, R_gridEvalEnv, dd);
     /* 
      * The call to preDraw may have pushed viewports and/or
      * enforced gpar settings, SO we need to re-establish the
@@ -472,23 +468,23 @@ double evaluateGrobUnit(double value, SEXP grob,
 	 * is an angle that gets passed to xDetails/yDetails
 	 */
 	{
-	    SEXP val;
-	    PROTECT(val = ScalarReal(value));
-	    PROTECT(R_fcall2x = lang3(evalFnx, updatedgrob, val));
-	    PROTECT(unitx = Rf_eval_with_gd(R_fcall2x, R_gridEvalEnv, dd));
-	    PROTECT(R_fcall2y = lang3(evalFny, updatedgrob, val));
-	    PROTECT(unity = Rf_eval_with_gd(R_fcall2y, R_gridEvalEnv, dd));
+	    GCStackRoot<> val;
+	    val = ScalarReal(value);
+	    R_fcall2x = lang3(evalFnx, updatedgrob, val);
+	    unitx = Rf_eval_with_gd(R_fcall2x, R_gridEvalEnv, dd);
+	    R_fcall2y = lang3(evalFny, updatedgrob, val);
+	    unity = Rf_eval_with_gd(R_fcall2y, R_gridEvalEnv, dd);
 	}
 	break;
     case 2:
-	PROTECT(R_fcall2x = lang2(evalFnx, updatedgrob));
-	PROTECT(unitx = Rf_eval_with_gd(R_fcall2x, R_gridEvalEnv, dd));
+	R_fcall2x = lang2(evalFnx, updatedgrob);
+	unitx = Rf_eval_with_gd(R_fcall2x, R_gridEvalEnv, dd);
 	break;
     case 3:
     case 4:
     case 5:
-	PROTECT(R_fcall2y = lang2(evalFny, updatedgrob));
-	PROTECT(unity = Rf_eval_with_gd(R_fcall2y, R_gridEvalEnv, dd));
+	R_fcall2y = lang2(evalFny, updatedgrob);
+	unity = Rf_eval_with_gd(R_fcall2y, R_gridEvalEnv, dd);
 	break;
     }
     /* 
@@ -560,26 +556,13 @@ double evaluateGrobUnit(double value, SEXP grob,
     }
     /* Call postDraw(grob)
      */
-    PROTECT(R_fcall3 = lang2(postFn, updatedgrob));
+    R_fcall3 = lang2(postFn, updatedgrob);
     Rf_eval_with_gd(R_fcall3, R_gridEvalEnv, dd);
     /* 
      * Restore the saved gpar state and grob
      */
     setGridStateElement(dd, GSS_GPAR, savedgpar);
     setGridStateElement(dd, GSS_CURRGROB, savedgrob);
-    if (protectedGrob) 
-	UNPROTECT(3);
-    switch(evalType) {
-    case 0:
-    case 1:
-	UNPROTECT(14);
-	break;
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-	UNPROTECT(10);
-    }
     /* Return the transformed width
      */
     /*

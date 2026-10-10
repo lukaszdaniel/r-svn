@@ -24,6 +24,7 @@
 
 #include <cfloat>  /* for DBL_MAX */
 #include <R_ext/Boolean.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/RealVector.hpp>
@@ -1065,9 +1066,10 @@ static void PerspAxes(double *x, double *y, double *z,
 
 SEXP C_persp(SEXP args)
 {
-    SEXP x, y, z, xlim, ylim, zlim;
-    SEXP depth, indx;
-    SEXP col, border, xlab, ylab, zlab;
+    GCStackRoot<> x, y, z, xlim, ylim, zlim;
+    GCStackRoot<> depth, indx;
+    GCStackRoot<> col, border;
+    SEXP xlab, ylab, zlab;
     double theta, phi, r, d;
     double ltheta, lphi;
     double expand, xc = 0.0, yc = 0.0, zc = 0.0, xs = 0.0, ys = 0.0, zs = 0.0;
@@ -1079,28 +1081,28 @@ SEXP C_persp(SEXP args)
     if (length(args) < 24)  /* 24 plus any inline par()s */
 	error("%s", _("too few parameters"));
 
-    PROTECT(x = coerceVector(CAR(args), REALSXP));
+    x = coerceVector(CAR(args), REALSXP);
     if (length(x) < 2) error(_("invalid '%s' argument"), "x");
     args = CDR(args);
 
-    PROTECT(y = coerceVector(CAR(args), REALSXP));
+    y = coerceVector(CAR(args), REALSXP);
     if (length(y) < 2) error(_("invalid '%s' argument"), "y");
     args = CDR(args);
 
-    PROTECT(z = coerceVector(CAR(args), REALSXP));
+    z = coerceVector(CAR(args), REALSXP);
     if (!isMatrix(z) || nrows(z) != length(x) || ncols(z) != length(y))
 	error(_("invalid '%s' argument"), "z");
     args = CDR(args);
 
-    PROTECT(xlim = coerceVector(CAR(args), REALSXP));
+    xlim = coerceVector(CAR(args), REALSXP);
     if (length(xlim) != 2) error(_("invalid '%s' argument"), "xlim");
     args = CDR(args);
 
-    PROTECT(ylim = coerceVector(CAR(args), REALSXP));
+    ylim = coerceVector(CAR(args), REALSXP);
     if (length(ylim) != 2) error(_("invalid '%s' argument"), "ylim");
     args = CDR(args);
 
-    PROTECT(zlim = coerceVector(CAR(args), REALSXP));
+    zlim = coerceVector(CAR(args), REALSXP);
     if (length(zlim) != 2) error(_("invalid '%s' argument"), "zlim");
     args = CDR(args);
 
@@ -1172,11 +1174,11 @@ SEXP C_persp(SEXP args)
     GNewPlot(GRecording(call, dd));
 #endif
 
-    PROTECT(col = FixupCol(col, gpptr(dd)->bg));
+    col = FixupCol(col, gpptr(dd)->bg);
     ncol = LENGTH(col);
     if (ncol < 1) error(_("invalid '%s' specification"), "col");
     if(!R_OPAQUE(INTEGER(col)[0])) DoLighting = FALSE;
-    PROTECT(border = FixupCol(border, gpptr(dd)->fg));
+    border = FixupCol(border, gpptr(dd)->fg);
     if (length(border) < 1)
 	error(_("invalid '%s' specification"), "border");
 
@@ -1218,8 +1220,8 @@ SEXP C_persp(SEXP args)
        We order the facets by depth and then draw them back to front.
        This is the "painters" algorithm. */
 
-    PROTECT(depth = allocVector(REALSXP, (nrows(z) - 1)*(ncols(z) - 1)));
-    PROTECT(indx = allocVector(INTSXP, (nrows(z) - 1)*(ncols(z) - 1)));
+    depth = allocVector(REALSXP, (nrows(z) - 1)*(ncols(z) - 1));
+    indx = allocVector(INTSXP, (nrows(z) - 1)*(ncols(z) - 1));
     DepthOrder(REAL(z), REAL(x), REAL(y), nrows(z), ncols(z),
 	       REAL(depth), INTEGER(indx));
 
@@ -1250,17 +1252,14 @@ SEXP C_persp(SEXP args)
     GMode(0, dd);
 
     GRestorePars(dd);
-    UNPROTECT(10);
-
-    PROTECT(x = allocVector(REALSXP, 16));
-    PROTECT(y = allocVector(INTSXP, 2));
+    x = allocVector(REALSXP, 16);
+    y = allocVector(INTSXP, 2);
     for (i = 0; i < 4; i++)
 	for (j = 0; j < 4; j++)
 	    REAL(x)[i + j * 4] = VT[i][j];
     INTEGER(y)[0] = 4;
     INTEGER(y)[1] = 4;
     setAttrib(x, R_DimSymbol, y);
-    UNPROTECT(2);
     return x;
 }
 
@@ -1845,7 +1844,8 @@ SEXP C_contourDef(void)
  */
 SEXP C_contour(SEXP args)
 {
-    SEXP c, x, y, z, vfont, col, rawcol, lty, lwd, labels;
+    GCStackRoot<> c, x, y, z, vfont, col, lty, lwd, labelList;
+    SEXP rawcol, labels;
     int i, j, nx, ny, nc, ncol, nlty, nlwd;
     int ltysave, fontsave = 1 /* -Wall */;
     rcolor colsave;
@@ -1856,7 +1856,6 @@ SEXP C_contour(SEXP args)
     double labcex;
     pGEDevDesc dd = GEcurrentDevice();
     SEXP result = R_NilValue; // FIXME? return info about contourlines drawn
-    SEXP labelList;
 
     GCheckState(dd);
 
@@ -1864,19 +1863,19 @@ SEXP C_contour(SEXP args)
     if (length(args) < 12) error("%s", _("too few arguments"));
     PrintDefaults(); /* prepare for labelformat */
 
-    x = PROTECT(coerceVector(CAR(args), REALSXP));
+    x = coerceVector(CAR(args), REALSXP);
     nx = LENGTH(x);
     args = CDR(args);
 
-    y = PROTECT(coerceVector(CAR(args), REALSXP));
+    y = coerceVector(CAR(args), REALSXP);
     ny = LENGTH(y);
     args = CDR(args);
 
-    z = PROTECT(coerceVector(CAR(args), REALSXP));
+    z = coerceVector(CAR(args), REALSXP);
     args = CDR(args);
 
     /* levels */
-    c = PROTECT(coerceVector(CAR(args), REALSXP));
+    c = coerceVector(CAR(args), REALSXP);
     nc = LENGTH(c);
     args = CDR(args);
 
@@ -1894,7 +1893,7 @@ SEXP C_contour(SEXP args)
     if (method < 1 || method > 3)
 	error(_("invalid '%s' value"), "method");
 
-    PROTECT(vfont = FixupVFont(CAR(args)));
+    vfont = FixupVFont(CAR(args));
     if (!isNull(vfont)) {
 	strncpy(familysave, gpptr(dd)->family, 201);
 	strncpy(gpptr(dd)->family, "Hershey ", 201);
@@ -1905,15 +1904,15 @@ SEXP C_contour(SEXP args)
     args = CDR(args);
 
     rawcol = CAR(args);
-    PROTECT(col = FixupCol(rawcol, R_TRANWHITE));
+    col = FixupCol(rawcol, R_TRANWHITE);
     ncol = length(col);
     args = CDR(args);
 
-    PROTECT(lty = FixupLty(CAR(args), gpptr(dd)->lty));
+    lty = FixupLty(CAR(args), gpptr(dd)->lty);
     nlty = length(lty);
     args = CDR(args);
 
-    PROTECT(lwd = FixupLwd(CAR(args), gpptr(dd)->lwd));
+    lwd = FixupLwd(CAR(args), gpptr(dd)->lwd);
     nlwd = length(lwd);
     args = CDR(args);
 
@@ -1958,7 +1957,6 @@ SEXP C_contour(SEXP args)
 	    warning("%s", _("all z values are equal"));
 	else
 	    warning("%s", _("all z values are NA"));
-	UNPROTECT(8);
 	return R_NilValue;
     }
 
@@ -1987,7 +1985,7 @@ SEXP C_contour(SEXP args)
     colsave = gpptr(dd)->col;
     lwdsave = gpptr(dd)->lwd;
     cexsave = gpptr(dd)->cex;
-    labelList = PROTECT(R_NilValue);
+    labelList = R_NilValue;
 
 
     /* draw contour for levels[i] */
@@ -2007,8 +2005,6 @@ SEXP C_contour(SEXP args)
 	gpptr(dd)->cex = labcex;
 	labelList = contour(x, nx, y, ny, z, REAL(c)[i], labels, i,
 			    drawLabels, method - 1, atom, dd, labelList);
-	UNPROTECT(1); /* labelList */
-	PROTECT(labelList);
     }
     GMode(0, dd);
     gpptr(dd)->lty = ltysave;
@@ -2019,6 +2015,5 @@ SEXP C_contour(SEXP args)
 	strncpy(gpptr(dd)->family, familysave, 201);
 	gpptr(dd)->font = fontsave;
     }
-    UNPROTECT(9); /* x y z c vfont col lty lwd labelList */
     return result;
 }

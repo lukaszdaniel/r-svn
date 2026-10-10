@@ -2415,7 +2415,8 @@ static double ComputeAtValue(double at, double adj,
 
 SEXP C_mtext(SEXP args)
 {
-    SEXP text, side, line, outer, at, adj, padj, cex, col, font, string;
+    GCStackRoot<> text, side, line, outer, at, adj, padj, cex, col, font;
+    SEXP string;
     SEXP rawcol;
     int ntext, nside, nline, nouter, nat, nadj, npadj, ncex, ncol, nfont;
     bool dirtyplot = FALSE, gpnewsave = FALSE, dpnewsave = FALSE;
@@ -2435,21 +2436,20 @@ SEXP C_mtext(SEXP args)
 	text = coerceVector(text, EXPRSXP);
     else if (!isExpression(text))
 	text = coerceVector(text, STRSXP);
-    PROTECT(text);
     n = ntext = length(text);
     if (ntext <= 0)
 	error(_("zero-length '%s' specified"), "text");
     args = CDR(args);
 
     /* Arg2 : side= */
-    PROTECT(side = coerceVector(CAR(args), INTSXP));
+    side = coerceVector(CAR(args), INTSXP);
     nside = length(side);
     if (nside <= 0) error(_("zero-length '%s' specified"), "side");
     if (n < nside) n = nside;
     args = CDR(args);
 
     /* Arg3 : line= */
-    PROTECT(line = coerceVector(CAR(args), REALSXP));
+    line = coerceVector(CAR(args), REALSXP);
     nline = length(line);
     if (nline <= 0) error(_("zero-length '%s' specified"), "line");
     if (n < nline) n = nline;
@@ -2457,35 +2457,35 @@ SEXP C_mtext(SEXP args)
 
     /* Arg4 : outer= */
     /* outer == NA => outer <- 0 */
-    PROTECT(outer = coerceVector(CAR(args), INTSXP));
+    outer = coerceVector(CAR(args), INTSXP);
     nouter = length(outer);
     if (nouter <= 0) error(_("zero-length '%s' specified"), "outer");
     if (n < nouter) n = nouter;
     args = CDR(args);
 
     /* Arg5 : at= */
-    PROTECT(at = coerceVector(CAR(args), REALSXP));
+    at = coerceVector(CAR(args), REALSXP);
     nat = length(at);
     if (nat <= 0) error(_("zero-length '%s' specified"), "at");
     if (n < nat) n = nat;
     args = CDR(args);
 
     /* Arg6 : adj= */
-    PROTECT(adj = coerceVector(CAR(args), REALSXP));
+    adj = coerceVector(CAR(args), REALSXP);
     nadj = length(adj);
     if (nadj <= 0) error(_("zero-length '%s' specified"), "adj");
     if (n < nadj) n = nadj;
     args = CDR(args);
 
     /* Arg7 : padj= */
-    PROTECT(padj = coerceVector(CAR(args), REALSXP));
+    padj = coerceVector(CAR(args), REALSXP);
     npadj = length(padj);
     if (npadj <= 0) error(_("zero-length '%s' specified"), "padj");
     if (n < npadj) n = npadj;
     args = CDR(args);
 
     /* Arg8 : cex */
-    PROTECT(cex = FixupCex(CAR(args), 1.0));
+    cex = FixupCex(CAR(args), 1.0);
     ncex = length(cex);
     if (ncex <= 0) error(_("zero-length '%s' specified"), "cex");
     if (n < ncex) n = ncex;
@@ -2493,14 +2493,14 @@ SEXP C_mtext(SEXP args)
 
     /* Arg9 : col */
     rawcol = CAR(args);
-    PROTECT(col = FixupCol(rawcol, R_TRANWHITE));
+    col = FixupCol(rawcol, R_TRANWHITE);
     ncol = length(col);
     if (ncol <= 0) error(_("zero-length '%s' specified"), "col");
     if (n < ncol) n = ncol;
     args = CDR(args);
 
     /* Arg10 : font */
-    PROTECT(font = FixupFont(CAR(args), NA_INTEGER));
+    font = FixupFont(CAR(args), NA_INTEGER);
     nfont = length(font);
     if (nfont <= 0) error(_("zero-length '%s' specified"), "font");
     if (n < nfont) n = nfont;
@@ -2579,7 +2579,6 @@ SEXP C_mtext(SEXP args)
 	gpptr(dd)->newplot = gpnewsave;
 	dpptr(dd)->newplot = dpnewsave;
     }
-    UNPROTECT(10);
     return R_NilValue;
 } /* C_mtext */
 

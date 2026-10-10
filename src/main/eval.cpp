@@ -616,7 +616,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 	pf_str("\n"); 
     }
 
-    if (strlen(buf)) {
+    if (buf[0] != '\0') {
 	pf_str(buf);
 	pf_str("\n");
     }
@@ -3348,11 +3348,17 @@ static void enterAssignFcnSymbol(SEXP fun, SEXP val)
 static SEXP installAssignFcnSymbol(SEXP fun)
 {
     char buf[ASSIGNBUFSIZ];
+    SEXP printname = PRINTNAME(fun);
+    const char *name = CHAR(printname);
+    size_t name_len = LENGTH(printname);
 
     /* install the symbol */
-    if (strlen(CHAR(PRINTNAME(fun))) + 3 > ASSIGNBUFSIZ)
-	error(_("overlong name in '%s'"), EncodeChar(PRINTNAME(fun)));
-    snprintf(buf, ASSIGNBUFSIZ, "%s<-", CHAR(PRINTNAME(fun)));
+    if (name_len + 3 > ASSIGNBUFSIZ)
+	error(_("overlong name in '%s'"), EncodeChar(printname));
+    memcpy(buf, name, name_len);
+    buf[name_len] = '<';
+    buf[name_len + 1] = '-';
+    buf[name_len + 2] = '\0';
     SEXP val = install(buf);
 
     enterAssignFcnSymbol(fun, val);

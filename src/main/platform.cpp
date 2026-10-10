@@ -1986,6 +1986,29 @@ void R_CleanTempDir(void)
     }
 }
 #else
+static bool concat_path(char *dest, const char *first, const char *separator,
+			const char *second, size_t *length = nullptr)
+{
+    const size_t first_len = strlen(first);
+    const size_t separator_len = strlen(separator);
+    const size_t second_len = strlen(second);
+    if (first_len >= R_PATH_MAX)
+	return false;
+    size_t remaining = R_PATH_MAX - first_len;
+    if (separator_len >= remaining)
+	return false;
+    remaining -= separator_len;
+    if (second_len >= remaining)
+	return false;
+
+    memcpy(dest, first, first_len);
+    memcpy(dest + first_len, separator, separator_len);
+    memcpy(dest + first_len + separator_len, second, second_len + 1);
+    if (length)
+	*length = first_len + separator_len + second_len;
+    return true;
+}
+
 static int R_unlink(const char *name, int recursive, int force)
 {
     R_CheckStack(); // called recursively
@@ -2004,21 +2027,16 @@ static int R_unlink(const char *name, int recursive, int force)
 	struct dirent *de;
 	char p[R_PATH_MAX];
 	int ans = 0;
+	size_t n = strlen(name);
 
 	if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
 	    if ((dir = opendir(name)) != NULL) {
 		while ((de = readdir(dir))) {
 		    if (streql(de->d_name, ".") || streql(de->d_name, ".."))
 			continue;
-		    size_t n = strlen(name);
-		    int pres;
-		    if (name[n] == R_FileSep[0])
-			/* FIXME: do we have to test on Unix? cf filename_buf */
-			pres = snprintf(p, R_PATH_MAX, "%s%s", name, de->d_name);
-		    else
-			pres = snprintf(p, R_PATH_MAX, "%s%s%s", name, R_FileSep,
-				 de->d_name);
-		    if (pres >= R_PATH_MAX)
+		    /* FIXME: do we have to test on Unix? cf filename_buf */
+		    const char *separator = name[n] == R_FileSep[0] ? "" : R_FileSep;
+		    if (!concat_path(p, name, separator, de->d_name))
 			error("%s", _("path too long"));
 		    lstat(p, &sb);
 		    if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
@@ -3073,13 +3091,10 @@ static int do_copy(const char* from, const char* name, const char* to,
     mask = 0777;
 #endif
     /* REprintf("from: %s, name: %s, to: %s\n", from, name, to); */
-    // We use snprintf to compute lengths to pacify GCC 12
-    len = snprintf(NULL, 0, "%s%s", from, name);
-    if (len >= R_PATH_MAX) {
+    if (!concat_path(this_, from, "", name, &len)) {
 	warning("%s", _("over-long path"));
 	return 1;
     }
-    snprintf(this_, len+1, "%s%s", from, name);
     /* Here we want the target not the link */
     stat(this_, &sb);
     if ((sb.st_mode & S_IFDIR) > 0) { /* a directory */
@@ -3088,12 +3103,10 @@ static int do_copy(const char* from, const char* name, const char* to,
 	char p[R_PATH_MAX + 1];
 
 	if (!recursive) return 1;
-	len = snprintf(NULL, 0, "%s%s", to, name);
-	if (len >= R_PATH_MAX) {
+	if (!concat_path(dest, to, "", name, &len)) {
 	    warning("%s", _("over-long path"));
 	    return 1;
 	}
-	snprintf(dest, len+1, "%s%s", to, name);
 	/* If a directory does not have write permission for the user,
 	   we will fail to create files in that directory, so defer
 	   setting mode */
@@ -3114,19 +3127,18 @@ static int do_copy(const char* from, const char* name, const char* to,
 		return 1;
 	    }
 	}
-	strcat(dest, "/");
+	dest[len++] = '/';
+	dest[len] = '\0';
 	if ((dir = opendir(this_)) != NULL) {
 	    depth++;
 	    while ((de = readdir(dir))) {
 		if (streql(de->d_name, ".") || streql(de->d_name, ".."))
 		    continue;
-		len = snprintf(NULL, 0, "%s/%s", name, de->d_name);
-		if (len >= R_PATH_MAX) {
+		if (!concat_path(p, name, "/", de->d_name)) {
 		    warning("%s", _("over-long path"));
 		    closedir(dir);
 		    return 1;
 		}
-		snprintf(p, len+1, "%s/%s", name, de->d_name);
 		nfail += do_copy(from, p, to, over, recursive,
 				 perms, dates, depth);
 	    }
@@ -3141,13 +3153,11 @@ static int do_copy(const char* from, const char* name, const char* to,
 	FILE *fp1 = NULL, *fp2 = NULL;
 
 	nfail = 0;
-	len = snprintf(NULL, 0, "%s%s", to, name);
-	if (len >= R_PATH_MAX) {
+	if (!concat_path(dest, to, "", name)) {
 	    warning("%s", _("over-long path"));
 	    nfail++;
 	    goto copy_error;
 	}
-	snprintf(dest, len+1, "%s%s", to, name);
 	if (over || !R_FileExists(dest)) {
 	    /* REprintf("copying %s to %s\n", this, dest); */
 	    if ((fp1 = R_fopen(this_, "rb")) == NULL ||

@@ -1027,7 +1027,8 @@ static void NewMakeLists(SEXP obj, HashTable *sym_list, HashTable *env_list)
 */
 #define OutVec(fp, obj, accessor, outfunc, methods, d)	                \
 	do {								\
-		for (int cnt = 0; cnt < LENGTH(obj); ++cnt) {		\
+		const int n__ = LENGTH(obj);				\
+		for (int cnt = 0; cnt < n__; ++cnt) {			\
 			methods->OutSpace(fp, 1,d);			\
 			outfunc(fp, accessor(obj, cnt), d);	        \
 			methods->OutNewline(fp, d);                     \
@@ -1076,26 +1077,26 @@ static void NewWriteVec(SEXP s, HashTable *sym_list, HashTable *env_list, FILE *
 	OutVec(fp, s, COMPLEX_ELT, m->OutComplex, m, d);
 	break;
     case STRSXP:
-	do {
-		int cnt;
-		for (cnt = 0; cnt < LENGTH(s); ++cnt) {
-			m->OutSpace(fp, 1, d);
-			OutCHARSXP(fp, STRING_ELT(s, cnt), m, d);
-			m->OutNewline(fp, d);
-		}
-	} while (0);
+	count = LENGTH(s);
+	for (int cnt = 0; cnt < count; ++cnt) {
+	    m->OutSpace(fp, 1, d);
+	    OutCHARSXP(fp, STRING_ELT(s, cnt), m, d);
+	    m->OutNewline(fp, d);
+	}
 	break;
     case VECSXP:
-	for (count = 0; count < LENGTH(s); ++count) {
+	count = LENGTH(s);
+	for (int cnt = 0; cnt < count; ++cnt) {
 	    /* OutSpace(fp, 1); */
-	    NewWriteItem(VECTOR_ELT(s, count), sym_list, env_list, fp, m, d);
+	    NewWriteItem(VECTOR_ELT(s, cnt), sym_list, env_list, fp, m, d);
 	    m->OutNewline(fp, d);
 	}
 	break;
     case EXPRSXP:
-	for (count = 0; count < LENGTH(s); ++count) {
+	count = LENGTH(s);
+	for (int cnt = 0; cnt < count; ++cnt) {
 	    /* OutSpace(fp, 1); */
-	    NewWriteItem(XVECTOR_ELT(s, count), sym_list, env_list, fp, m, d);
+	    NewWriteItem(XVECTOR_ELT(s, cnt), sym_list, env_list, fp, m, d);
 	    m->OutNewline(fp, d);
 	}
 	break;
@@ -1279,10 +1280,8 @@ static SEXP NewReadVec(SEXPTYPE type, HashTable *sym_table, HashTable *env_table
 	InVec(fp, my_vec, SET_COMPLEX_ELT, m->InComplex, length, d);
 	break;
     case STRSXP:
-	do {
-	    for (int cnt = 0; cnt < Rf_length(my_vec); ++cnt)
-		SET_STRING_ELT(my_vec, cnt, InCHARSXP(fp, m, d));
-	} while (0);
+	for (int cnt = 0; cnt < length; ++cnt)
+	    SET_STRING_ELT(my_vec, cnt, InCHARSXP(fp, m, d));
 	break;
     case VECSXP:
 	for (int count = 0; count < length; ++count)
@@ -1470,31 +1469,48 @@ static void OutStringAscii(FILE *fp, const char *x, SaveLoadData *unused)
 {
     size_t nbytes = strlen(x);
     fprintf(fp, "%d ", (int) nbytes);
+    size_t plain_start = 0;
     for (size_t i = 0; i < nbytes; i++) {
+	const char *escape = NULL;
+	size_t escape_len = 0;
+	char octal[4];
 	switch(x[i]) {
-	case '\n': fprintf(fp, "\\n");  break;
-	case '\t': fprintf(fp, "\\t");  break;
-	case '\v': fprintf(fp, "\\v");  break;
-	case '\b': fprintf(fp, "\\b");  break;
-	case '\r': fprintf(fp, "\\r");  break;
-	case '\f': fprintf(fp, "\\f");  break;
-	case '\a': fprintf(fp, "\\a");  break;
-	case '\\': fprintf(fp, "\\\\"); break;
-	case '\?': fprintf(fp, "\\?");  break;
-	case '\'': fprintf(fp, "\\'");  break;
-	case '\"': fprintf(fp, "\\\""); break;
+	case '\n': escape = "\\n"; escape_len = 2; break;
+	case '\t': escape = "\\t"; escape_len = 2; break;
+	case '\v': escape = "\\v"; escape_len = 2; break;
+	case '\b': escape = "\\b"; escape_len = 2; break;
+	case '\r': escape = "\\r"; escape_len = 2; break;
+	case '\f': escape = "\\f"; escape_len = 2; break;
+	case '\a': escape = "\\a"; escape_len = 2; break;
+	case '\\': escape = "\\\\"; escape_len = 2; break;
+	case '\?': escape = "\\?"; escape_len = 2; break;
+	case '\'': escape = "\\'"; escape_len = 2; break;
+	case '\"': escape = "\\\""; escape_len = 2; break;
 	default  :
 	    /* cannot print char in octal mode -> cast to unsigned
 	       char first */
 	    /* actually, since x is signed char and '\?' == 127
 	       is handled above, x[i] > 126 can't happen, but
 	       I'm superstitious...  -pd */
-	    if (x[i] <= 32 || x[i] > 126)
-		fprintf(fp, "\\%03o", (unsigned char) x[i]);
-	    else
-		fputc(x[i], fp);
+	    if (x[i] <= 32 || x[i] > 126) {
+		const unsigned char ch = (unsigned char) x[i];
+		octal[0] = '\\';
+		octal[1] = '0' + ((ch >> 6) & 7);
+		octal[2] = '0' + ((ch >> 3) & 7);
+		octal[3] = '0' + (ch & 7);
+		escape = octal;
+		escape_len = sizeof(octal);
+	    }
+	}
+	if (escape) {
+	    if (i > plain_start)
+		(void) fwrite(x + plain_start, 1, i - plain_start, fp);
+	    (void) fwrite(escape, 1, escape_len, fp);
+	    plain_start = i + 1;
 	}
     }
+    if (nbytes > plain_start)
+	(void) fwrite(x + plain_start, 1, nbytes - plain_start, fp);
 }
 
 static char *InStringAscii(FILE *fp, SaveLoadData *unused)

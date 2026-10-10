@@ -33,6 +33,7 @@
 #include <cmath>
 #include <cfloat>
 #include <R_ext/Minmax.h>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
@@ -102,8 +103,8 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     if(!isNewList(m))
 	error(_("'%s' must be a list"), "m");
 
-    SEXP tmp, conv;
-    PROTECT(tmp = getAttrib(control, R_NamesSymbol));
+    GCStackRoot<> tmp, conv;
+    tmp = getAttrib(control, R_NamesSymbol);
 
     conv = getListElement(control, tmp, "maxiter");
     if(conv == NULL || !isNumeric(conv))
@@ -136,34 +137,39 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
     conv = getListElement(m, tmp, "conv");
     if(conv == NULL || !isFunction(conv))
 	error(_("'%s' absent"), "m$conv()");
-    PROTECT(conv = lang1(conv));
+    conv = lang1(conv);
 
-    SEXP incr = getListElement(m, tmp, "incr");
+    GCStackRoot<> incr;
+    incr = getListElement(m, tmp, "incr");
     if(incr == NULL || !isFunction(incr))
 	error(_("'%s' absent"), "m$incr()");
-    PROTECT(incr = lang1(incr));
+    incr = lang1(incr);
 
-    SEXP deviance = getListElement(m, tmp, "deviance");
+    GCStackRoot<> deviance;
+    deviance = getListElement(m, tmp, "deviance");
     if(deviance == NULL || !isFunction(deviance))
 	error(_("'%s' absent"), "m$deviance()");
-    PROTECT(deviance = lang1(deviance));
+    deviance = lang1(deviance);
 
-    SEXP trace = getListElement(m, tmp, "trace");
+    GCStackRoot<> trace;
+    trace = getListElement(m, tmp, "trace");
     if(trace == NULL || !isFunction(trace))
 	error(_("'%s' absent"), "m$trace()");
-    PROTECT(trace = lang1(trace));
+    trace = lang1(trace);
 
-    SEXP setPars = getListElement(m, tmp, "setPars");
+    GCStackRoot<> setPars;
+    setPars = getListElement(m, tmp, "setPars");
     if(setPars == NULL || !isFunction(setPars))
 	error(_("'%s' absent"), "m$setPars()");
-    PROTECT(setPars);
 
-    SEXP getPars = getListElement(m, tmp, "getPars");
+    GCStackRoot<> getPars;
+    getPars = getListElement(m, tmp, "getPars");
     if(getPars == NULL || !isFunction(getPars))
 	error(_("'%s' absent"), "m$getPars()");
-    PROTECT(getPars = lang1(getPars));
+    getPars = lang1(getPars);
 
-    SEXP pars = PROTECT(eval(getPars, R_GlobalEnv));
+    GCStackRoot<> pars;
+    pars = eval(getPars, R_GlobalEnv);
     int nPars = LENGTH(pars);
 
     double dev = asReal(eval(deviance, R_GlobalEnv));
@@ -171,7 +177,8 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 
     double fac = 1.0;
     bool hasConverged = false;
-    SEXP newPars = PROTECT(allocVector(REALSXP, nPars));
+    GCStackRoot<> newPars;
+    newPars = allocVector(REALSXP, nPars);
     int evaltotCnt = 1;
     double convNew = -1. /* -Wall */;
     int i;
@@ -213,7 +220,8 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 	    break;
 	}
 
-	SEXP newIncr = PROTECT(eval(incr, R_GlobalEnv));
+	GCStackRoot<> newIncr;
+	newIncr = eval(incr, R_GlobalEnv);
 	double
 	    *par   = REAL(pars),
 	    *npar  = REAL(newPars),
@@ -232,13 +240,10 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 	    for(int j = 0; j < nPars; j++)
 		npar[j] = par[j] + fac * nIncr[j];
 
-	    PROTECT(tmp = lang2(setPars, newPars));
+	    tmp = lang2(setPars, newPars);
 	    if (asLogical(eval(tmp, R_GlobalEnv))) { /* singular gradient */
-		UNPROTECT(11);
-
 		NON_CONV_FINIS(1, _("singular gradient"));
 	    }
-	    UNPROTECT(1);
 
 	    double newDev = asReal(eval(deviance, R_GlobalEnv));
 	    if(printEval)
@@ -253,17 +258,14 @@ SEXP nls_iter(SEXP m, SEXP control, SEXP doTraceArg)
 	    } // else
 	    fac /= 2.;
 	}
-	UNPROTECT(1);
 	if(doTrace) eval(trace, R_GlobalEnv);
 	if( fac < minFac ) {
-	    UNPROTECT(9);
 	    NON_CONV_FINIS_2(2,
 			     _("step factor %g reduced below 'minFactor' of %g"),
 			     fac, minFac);
 	}
     }
 
-    UNPROTECT(9);
     if(!hasConverged) {
 	NON_CONV_FINIS_1(3,
 			 _("number of iterations exceeded maximum of %d"),

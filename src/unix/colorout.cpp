@@ -105,16 +105,20 @@ pattern_t *P = NULL;
 
 static inline bool isword(std::string_view b, unsigned int i, unsigned int len) noexcept
 {
-    if (i + len > b.size()) return false;
-    bool is_letter_preceeding = (i > 0) ? isletter(b[i-1]) : false;
-    bool is_letter_following = isletter(b[i+len]);
+    if (i > b.size() || len > b.size() - i) return false;
+    bool is_letter_preceeding =
+        (i > 0) ? isletter(static_cast<unsigned char>(b[i-1])) : false;
+    bool is_letter_following =
+        (i + len < b.size()) &&
+        isletter(static_cast<unsigned char>(b[i+len]));
     return !is_letter_preceeding && !is_letter_following;
 }
 
 static inline bool isdelim(char b) noexcept
 {
     /* not a letter or number */
-    return !(std::isalpha(b) || std::isdigit(b));
+    const auto ch = static_cast<unsigned char>(b);
+    return !(std::isalpha(ch) || std::isdigit(ch));
 }
 
 static bool isnumber(std::string_view b, unsigned int i) noexcept
@@ -130,8 +134,8 @@ static bool isnumber(std::string_view b, unsigned int i) noexcept
     while(i < l){
         if (isdelim(b[i]))
             return true;
-        if(!std::isdigit(b[i]) && b[i] != '.' && b[i] != ',' &&
-                !(b[i] == 'e' && (i + 2) < b.size() && (b[i+1] == '-' || b[i+1] == '+') && std::isdigit(b[i+2])) &&
+        if(!std::isdigit(static_cast<unsigned char>(b[i])) && b[i] != '.' && b[i] != ',' &&
+                !(b[i] == 'e' && (i + 2) < b.size() && (b[i+1] == '-' || b[i+1] == '+') && std::isdigit(static_cast<unsigned char>(b[i+2]))) &&
                 !(b[i-1] == 'e' && (b[i] == '-' || b[i] == '+')))
             return false;
         i++;
@@ -157,22 +161,27 @@ static bool is_zero(std::string_view b, unsigned int i)
 
 static bool isindex(std::string_view b, unsigned int i) noexcept
 {
+    if (i >= b.size()) return false;
     // Element of unnamed list
     if(i > 1 && b[i-2] == '[')
         return false;
 
     if(b[i] == ','){
         i++;
-        if (!(std::isdigit(b[i]) || b[i] == ' '))
+        if (i >= b.size()) return false;
+        if (!(std::isdigit(static_cast<unsigned char>(b[i])) || b[i] == ' '))
             return false;
     }
 
-    while (i < b.size() && (std::isdigit(b[i]) || b[i] == ' '))
+    while (i < b.size() && (std::isdigit(static_cast<unsigned char>(b[i])) || b[i] == ' '))
         ++i;
 
     // Vector or matrix index?
     // Also check that the previous index is a digit
-    return ((b[i] == ']' && std::isdigit(b[i-1])) || (b[i] == ',' && b[i+1] == ']' && std::isdigit(b[i-1])));
+    return i < b.size() && i > 0 &&
+        ((b[i] == ']' && std::isdigit(static_cast<unsigned char>(b[i-1]))) ||
+         (b[i] == ',' && i + 1 < b.size() && b[i+1] == ']' &&
+          std::isdigit(static_cast<unsigned char>(b[i-1]))));
 }
 
 
@@ -535,22 +544,24 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len_, otype
                 /* Strings */
             if(bbuf[i] == '"'){
                 newbuf += crstring;
-                newbuf.push_back(bbuf[i++]);
+                const unsigned int start = i++;
                 while(i < len && bbuf[i] != '\n'){
-                    newbuf.push_back(bbuf[i++]);
+                        ++i;
                     if(i > 2 && bbuf[i-1] == '"' && bbuf[i-2] != '\\')
                         break;
                 }
-                newbuf += crnormal;
+                    newbuf.append(bbuf.data() + start, i - start);
+                    newbuf += crnormal;
                 // Index like [1], [2, 3]
-            } else if((i+1 < len) && bbuf[i] == '[' && (std::isdigit(bbuf[i+1]) || bbuf[i+1] == ',' || bbuf[i+1] == ' ') && isindex(bbuf, i+1)){
-                newbuf += crindex;
-                newbuf.push_back(bbuf[i++]);
-                while(bbuf[i] != ']'){
-                    newbuf.push_back(bbuf[i++]);
-                }
-                newbuf.push_back(bbuf[i++]);
-                newbuf += crnormal;
+                } else if((i+1 < len) && bbuf[i] == '[' && (std::isdigit(static_cast<unsigned char>(bbuf[i+1])) || bbuf[i+1] == ',' || bbuf[i+1] == ' ') && isindex(bbuf, i+1)){
+                    newbuf += crindex;
+                    const unsigned int start = i++;
+                    while(bbuf[i] != ']'){
+                        ++i;
+                    }
+                    ++i;
+                    newbuf.append(bbuf.data() + start, i - start);
+                    newbuf += crnormal;
                 /* NULL */
             } else if((i+3 < len) && (bbuf.compare(i, 4, "NULL") == 0) && isword(bbuf, i, 4)){
                 newbuf += crconst; newbuf += "NULL"; newbuf += crnormal; i += 4;
@@ -564,7 +575,7 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len_, otype
             } else if((i+1 < len) && (bbuf.compare(i, 2, "NA") == 0) && isword(bbuf, i, 2)){
                 newbuf += crconst; newbuf += "NA"; newbuf += crnormal; i += 2;
                 /* Inf or -Inf */
-            } else if((i+3 < len) && (bbuf.compare(i, 3, "Inf") == 0) && !isletter(bbuf[i+3])){
+            } else if((i+3 < len) && (bbuf.compare(i, 3, "Inf") == 0) && !isletter(static_cast<unsigned char>(bbuf[i+3]))){
                 if(i > 0 && bbuf[i-1] == '-'){
                     newbuf.pop_back(); // remove '-'
                     newbuf += crinfinite; newbuf += "-Inf"; newbuf += crnormal;
@@ -576,69 +587,71 @@ attribute_hidden void colorout_R_WriteConsoleEx(const char *buf, int len_, otype
             } else if((i+2 < len) && (bbuf.compare(i, 3, "NaN") == 0) && isword(bbuf, i, 3)){
                 newbuf += crconst; newbuf += "NaN"; newbuf += crnormal; i += 3;
                 /* hexadecimal number */
-            } else if((i+2 < len) && bbuf[i] == '0' && bbuf[i+1] == 'x' && std::isxdigit(bbuf[i+2])){
+            } else if((i+2 < len) && bbuf[i] == '0' && bbuf[i+1] == 'x' && std::isxdigit(static_cast<unsigned char>(bbuf[i+2]))){
                 newbuf += crnumber;
-                newbuf.push_back(bbuf[i++]); // '0'
-                newbuf.push_back(bbuf[i++]); // 'x'
-                while(i < len && std::isxdigit(bbuf[i])){
-                    newbuf.push_back(bbuf[i++]);
+                const unsigned int start = i;
+                i += 2;
+                while(i < len && std::isxdigit(static_cast<unsigned char>(bbuf[i]))){
+                    ++i;
                 }
+                newbuf.append(bbuf.data() + start, i - start);
                 newbuf += crnormal;
                 /* date YYYYxMMxDD or DDxMMxYYYY */
             } else if(isdate(bbuf, i)){
                 newbuf += crdate;
-                for(unsigned int k = 0; k < date_len; k++){
-                    newbuf.push_back(bbuf[i++]);
-                }
+                const unsigned int start = i;
+                i += date_len;
                 /* if time is appended to the date */
-                if(bbuf[i] == ' ' && istime(bbuf, i+1)){
-                    newbuf.push_back(bbuf[i++]); // space
-                    for(unsigned int k = 0; k < time_len; k++){
-                        newbuf.push_back(bbuf[i++]);
-                    }
+                if(i < len && bbuf[i] == ' ' && istime(bbuf, i+1)){
+                    i += time_len + 1;
                 }
+                newbuf.append(bbuf.data() + start, i - start);
                 newbuf += crnormal;
                 /* time */
             } else if(istime(bbuf, i)){
                 newbuf += crdate;
-                for(unsigned int k = 0; k < time_len; k++){
-                    newbuf.push_back(bbuf[i++]);
-                }
+                const unsigned int start = i;
+                i += time_len;
+                newbuf.append(bbuf.data() + start, time_len);
                 newbuf += crnormal;
                 /* positive numbers */
-            } else if(std::isdigit(bbuf[i]) && isnumber(bbuf, i)){
+            } else if(std::isdigit(static_cast<unsigned char>(bbuf[i])) && isnumber(bbuf, i)){
                 if (highlight_zero && is_zero(bbuf, i)){
                     newbuf += crzero;
                 }else{
                     newbuf += crnumber;
                 }
-                while(i < len && (std::isdigit(bbuf[i]) || bbuf[i] == '.')){
-                    newbuf.push_back(bbuf[i++]);
-                    if(bbuf[i] == 'e' && (i + 2) < len && (bbuf[i+1] == '-' || bbuf[i+1] == '+') && std::isdigit(bbuf[i+2])){
-                        newbuf.push_back(bbuf[i++]);
-                        newbuf.push_back(bbuf[i++]);
+                const unsigned int start = i;
+                while(i < len && (std::isdigit(static_cast<unsigned char>(bbuf[i])) || bbuf[i] == '.')){
+                    ++i;
+                    if(i < len && bbuf[i] == 'e' && (i + 2) < len && (bbuf[i+1] == '-' || bbuf[i+1] == '+') && std::isdigit(static_cast<unsigned char>(bbuf[i+2]))){
+                        i += 2;
                     }
                 }
+                newbuf.append(bbuf.data() + start, i - start);
                 newbuf += crnormal;
                 /* negative numbers */
-            } else if((i+1 < len) && bbuf[i] == '-' && std::isdigit(bbuf[i+1]) && isnumber(bbuf, i+1)){
+            } else if((i+1 < len) && bbuf[i] == '-' && std::isdigit(static_cast<unsigned char>(bbuf[i+1])) && isnumber(bbuf, i+1)){
                 if (highlight_zero && is_zero(bbuf, i+1)){
                     newbuf += crzero;
                 }else{
                     newbuf += crnegnum;
                 }
-                newbuf.push_back('-'); i++;
-                while(i < len && (std::isdigit(bbuf[i]) || bbuf[i] == '.')){
-                    newbuf.push_back(bbuf[i++]);
-                    if(bbuf[i] == 'e' && (i + 2) < len && (bbuf[i+1] == '-' || bbuf[i+1] == '+') && std::isdigit(bbuf[i+2])){
-                        newbuf.push_back(bbuf[i++]);
-                        newbuf.push_back(bbuf[i++]);
+                const unsigned int start = i++;
+                while(i < len && (std::isdigit(static_cast<unsigned char>(bbuf[i])) || bbuf[i] == '.')){
+                    ++i;
+                    if(i < len && bbuf[i] == 'e' && (i + 2) < len && (bbuf[i+1] == '-' || bbuf[i+1] == '+') && std::isdigit(static_cast<unsigned char>(bbuf[i+2]))){
+                        i += 2;
                     }
                 }
+                newbuf.append(bbuf.data() + start, i - start);
                 newbuf += crnormal;
                 /* anything else */
             } else {
-                newbuf.push_back(bbuf[i++]);
+                const size_t next = bbuf.find_first_of("\"[NTFI-0123456789", i + 1);
+                const size_t end = next == std::string_view::npos ? len : next;
+                newbuf.append(bbuf.data() + i, end - i);
+                i = end;
             }
         }
 

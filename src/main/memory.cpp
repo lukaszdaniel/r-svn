@@ -926,12 +926,15 @@ bool R::RunFinalizers(void)
     std::list<SEXP> pending_refs;
 
     while (!WeakRef::s_R_weak_refs.empty()) {
-        SEXP s = WeakRef::s_R_weak_refs.back();
-        WeakRef::s_R_weak_refs.pop_back();
+        auto last_ref = WeakRef::s_R_weak_refs.end();
+        --last_ref;
+        SEXP s = *last_ref;
         if (!IS_READY_TO_FINALIZE(s)) {
-            pending_refs.push_front(s);
+            pending_refs.splice(pending_refs.begin(),
+                                WeakRef::s_R_weak_refs, last_ref);
         }
         else {
+            WeakRef::s_R_weak_refs.erase(last_ref);
             size_t savestack;
             GCRoot<> topExp, oldHStack, oldRStack;
             bool oldvis;
