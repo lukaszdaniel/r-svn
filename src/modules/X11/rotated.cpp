@@ -2039,8 +2039,7 @@ static RotatedTextItem
 /*  Create a rotated text item						  */
 /**************************************************************************/
 
-static RotatedTextItem
-*XmbRotCreateTextItem(Display *dpy, XFontSet font,
+static RotatedTextItem *XmbRotCreateTextItem(Display *dpy, XFontSet font,
 		      double angle, const char *text, int align)
 {
     RotatedTextItem *item=NULL;

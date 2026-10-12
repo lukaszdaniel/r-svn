@@ -23,21 +23,17 @@
 #include <config.h>
 #endif
 
-#ifdef STDC_HEADERS
 #include <cstring>
 #include <cstdlib>
-#else
-char *malloc ();
-char *strcpy ();
-#endif
 
 /* Return a newly allocated copy of STR,
    or 0 if out of memory. */
 
 char *strdup(const char *str)
 {
-  char *newstr = (char *) malloc (strlen (str) + 1);
-  if (newstr)
-    strcpy(newstr, str);
-  return newstr;
+    const std::size_t length = std::strlen(str) + 1;
+    char *newstr = new char[length];
+    if (newstr)
+        std::memcpy(newstr, str, length);
+    return newstr;
 }

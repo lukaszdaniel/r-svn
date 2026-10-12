@@ -235,7 +235,7 @@ static int getFilenum(const char *filename) {
    even if the line isn't complete. But this isn't possible if we rely
    on writing all line profiling files first. In addition, while on Unix
    we could use write() (not fprintf) to flush, it is not guaranteed we
-   could do this on Windows with the main thread suspended. 
+   could do this on Windows with the main thread suspended.
 
    With this size hitting the limit is fairly unlikely, but if we do then
    the output file will miss some entries. Maybe writing an overflow marker
@@ -326,14 +326,14 @@ static void pb_int(profbuf *pb, int64_t num)
    Not suitable for re-use. */
 static void pb_dbl(profbuf *pb, double num)
 {
-    char digits[PB_MAX_DBL_DIGITS]; 
+    char digits[PB_MAX_DBL_DIGITS];
     int i, j, negative;
 
     if (!R_FINITE(num)) {
 	if (ISNA(num))
 	    pb_str(pb, "NA");
 	else if (ISNAN(num))
-	    pb_str(pb,  "NaN");
+	    pb_str(pb, "NaN");
 	else if (num > 0)
 	    pb_str(pb, "Inf");
 	else
@@ -385,7 +385,7 @@ static void lineprof(profbuf* pb, SEXP srcref)
 	    pb_int(pb, fnum); /* %d */
 	    pb_str(pb, "#");
 	    pb_int(pb, line); /* %d */
-	    pb_str(pb, " " );
+	    pb_str(pb, " ");
 	}
     }
 }
@@ -613,7 +613,7 @@ static void doprof(int sig)  /* sig is ignored in Windows */
 	pf_int(i); /* %d */
 	pf_str(": ");
 	pf_str(R_Srcfiles[i-1].c_str());
-	pf_str("\n"); 
+	pf_str("\n");
     }
 
     if (buf[0] != '\0') {
@@ -923,16 +923,15 @@ SEXP do_Rprof(SEXP args)
 #endif
 
 #if defined(linux) || defined(__linux__)
-    if (dinterval < 0.01) {
-	dinterval = 0.01;
+constexpr double min_interval = 0.01;
+#else
+constexpr double min_interval = 0.001;
+#endif
+
+    if (dinterval < min_interval) {
+	dinterval = min_interval;
 	warning(_("interval too short for this platform, using '%f'"), dinterval);
     }
-#else
-    if (dinterval < 0.001) {
-	dinterval = 0.001;
-	warning(_("interval too short, using '%f'"), dinterval);
-    }
-#endif
 
     filename = STRING_ELT(filename, 0);
     if (LENGTH(filename))

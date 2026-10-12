@@ -1130,7 +1130,7 @@ R_size_t to_doubles(R_xlen_t n_elem)
 #define SET_ACTIVE_BINDING_BIT(b) ((b)->sxpinfo.gp |= ACTIVE_BINDING_MASK)
 #define LOCK_BINDING(b) do {						\
 	SEXP lb__b__ = b;						\
-	if (! IS_ACTIVE_BINDING(lb__b__)) {				\
+	if (!IS_ACTIVE_BINDING(lb__b__)) {				\
 	    if (TYPEOF(lb__b__) == SYMSXP)				\
 		MARK_NOT_MUTABLE(SYMVALUE(lb__b__));			\
 	    else							\

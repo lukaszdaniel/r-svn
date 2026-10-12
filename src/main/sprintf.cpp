@@ -40,6 +40,8 @@
 #include <Internal.h>
 #include "RBufferUtils.h"
 #include <R_ext/RS.h> /* for R_Calloc/R_Free */
+#include <charconv>
+#include <system_error>
 #ifdef Win32
 #include <trioremap.h>
 #endif
@@ -111,7 +113,8 @@ static int scandigits(char **pp)
 static void boundspec(char *fmt)
 {
     char *p = fmt, *prec, num[16];
-    int width, nc;
+    int width;
+    size_t nc;
 
     if (*p != '%') return;
     for (p++; *p == '-' || *p == '+' || *p == ' ' || *p == '#' || *p == '0'; p++)
@@ -125,7 +128,10 @@ static void boundspec(char *fmt)
     prec = ++p;
     if (scandigits(&p) > MAXLINE) {
 	/* never longer than the digits it replaces */
-	nc = snprintf(num, sizeof(num), "%d", MAXLINE + 1);
+	auto result = std::to_chars(num, num + sizeof(num), MAXLINE + 1);
+	if (result.ec != std::errc{})
+	    error("%s", _("internal error converting format precision"));
+	nc = result.ptr - num;
 	memmove(prec + nc, p, strlen(p) + 1);
 	memcpy(prec, num, nc);
     }
@@ -138,13 +144,13 @@ static void boundspec(char *fmt)
 
 attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    int i, nargs, cnt, v, thislen, nfmt;
+    int nargs, cnt, v, thislen, nfmt;
     /* fmt2 is a copy of fmt with '*' expanded.
        bit will hold numeric formats and %<w>s, so be quite small. */
-    char fmt[MAXLINE+1], fmt2[MAXLINE+10], *fmtp, bit[MAXLINE+1],
+    char fmt[MAXLINE+1], fmt2[MAXLINE+11], *fmtp, bit[MAXLINE+1],
 	*outputString;
     const char *formatString;
-    size_t n, cur, chunk;
+    size_t n, cur, chunk, outputLength;
 
     GCStackRoot<> format, _this, ans, tmp;
     GCStackRoot<> a[MAXNARGS];
@@ -174,7 +180,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("only %d arguments are allowed"), MAXNARGS);
 
     /* record the args for possible coercion and later re-ordering */
-    for(i = 0; i < nargs; i++, args = CDR(args)) {
+    for(int i = 0; i < nargs; i++, args = CDR(args)) {
 	SEXPTYPE t_ai;
 	a[i] = CAR(args);
 	used[i] = false;
@@ -187,11 +193,11 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 
 #define CHECK_maxlen							\
     maxlen = nfmt;							\
-    for(i = 0; i < nargs; i++)						\
+    for(int i = 0; i < nargs; i++)						\
 	if(maxlen < lens[i]) maxlen = lens[i];				\
     if(maxlen % nfmt)							\
 	error("%s", _("arguments cannot be recycled to the same length"));	\
-    for(i = 0; i < nargs; i++)						\
+    for(int i = 0; i < nargs; i++)						\
 	if(maxlen % lens[i])						\
 	    error("%s", _("arguments cannot be recycled to the same length"))
 
@@ -202,9 +208,10 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     /* We do the format analysis a row at a time */
     for(ns = 0; ns < maxlen; ns++) {
 	outputString[0] = '\0';
+	outputLength = 0;
 	use_UTF8 = (getCharCE(STRING_ELT(format, ns % nfmt)) == CE_UTF8);
 	if (!use_UTF8) {
-	    for(i = 0; i < nargs; i++) {
+	    for(int i = 0; i < nargs; i++) {
 		if (!isString(a[i])) continue;
 		if (getCharCE(STRING_ELT(a[i], ns % lens[i])) == CE_UTF8) {
 		    use_UTF8 = true; break;
@@ -318,10 +325,14 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			if (has_star) {
 			    size_t nf; char *p, *q = fmt2;
 			    for (p = fmt; *p; p++)
-				if (*p == '*')
-				    q += snprintf(q, sizeof(fmt2) - (q - fmt2),
-						  "%d", star_arg);
-				else *q++ = *p;
+				if (*p == '*') {
+				    auto result = std::to_chars(
+					q, fmt2 + sizeof(fmt2) - 1, star_arg);
+				    if (result.ec != std::errc{})
+					error(_("'fmt' length exceeds maximal format length %d"),
+					      MAXLINE);
+				    q = result.ptr;
+				} else *q++ = *p;
 			    *q = '\0';
 			    nf = strlen(fmt2);
 			    if (nf > MAXLINE)
@@ -393,15 +404,15 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 			    case 's':
 				if(TYPEOF(_this) != STRSXP) {
 				    /* as.character method might call sprintf() */
-				    size_t nc = strlen(outputString);
+				    size_t nc = outputLength;
 				    char *z = R_Calloc(nc+1, char);
-				    strcpy(z, outputString);
+				    memcpy(z, outputString, nc + 1);
 				    tmp = lang2(R_AsCharacterSymbol, _this);
 
 				    COERCE_THIS_TO_A
 				    outputString = (char *) R_AllocStringBuffer(nc + 1,
 				                                       &outbuff);
-				    strcpy(outputString, z);
+				    memcpy(outputString, z, nc + 1);
 				    R_Free(z);
 				}
 				break;
@@ -508,18 +519,15 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				    /* MBCS-aware version used */
 		                    : Rf_strchr_const(curFormat, '%');
 		chunk = (ch) ? (size_t) (ch - curFormat) : strlen(curFormat);
-		strncpy(bit, curFormat, chunk);
+		memcpy(bit, curFormat, chunk);
 		bit[chunk] = '\0';
 	    }
-	    if(ss) {
-		outputString = (char *) R_AllocStringBuffer(strlen(outputString) +
-						   strlen(ss) + 1, &outbuff);
-		strcat(outputString, ss);
-	    } else {
-		outputString = (char *) R_AllocStringBuffer(strlen(outputString) +
-						   strlen(bit) + 1, &outbuff);
-		strcat(outputString, bit);
-	    }
+	    const char *append = ss ? ss : bit;
+	    size_t appendLength = strlen(append);
+	    outputString = (char *) R_AllocStringBuffer(
+		outputLength + appendLength + 1, &outbuff);
+	    memcpy(outputString + outputLength, append, appendLength + 1);
+	    outputLength += appendLength;
 	}  /* end for ( each chunk ) */
 
 	if(ns == 0) { /* may have adjusted maxlen now ... */
@@ -530,7 +538,7 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
     } /* end for(ns ...) */
 
     nunused = 0;
-    for(i = 0; i < nargs; i++)
+    for(int i = 0; i < nargs; i++)
 	if (!used[i]) nunused++;
     if (nunused > 0) {
 	if (nfmt == 1) {
