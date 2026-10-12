@@ -32,6 +32,9 @@
 #endif
 
 #include <cstring>
+#include <new>
+#include <string>
+#include <vector>
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -49,11 +52,8 @@ using namespace CXXR;
  */
 
 /*
-  This copies the command line arguments to the Rstart
-  structure. The memory is obtained from calloc, etc.
-  since these are permanent and it is not intended that
-  they be modified. This is why they are copied before
-  being processed and removed from the list.
+  This copies the command line arguments so they remain available
+  after being processed and removed from the argument list.
 
   We might store these as a SEXP. I have no strong opinion
   about this.
@@ -63,22 +63,17 @@ using namespace CXXR;
    of them passed to the application.
    These are populated via the routine R_set_command_line_arguments().
 */
-static int    NumCommandLineArgs = 0;
-static char **CommandLineArgs = NULL; // this does not get freed
-
+static std::vector<std::string> s_CommandLineArgs;
 
 void R_set_command_line_arguments(int argc, char **argv)
 {
-    // nothing here is ever freed.
-    NumCommandLineArgs = argc;
-    CommandLineArgs = (char**) calloc((size_t) argc, sizeof(char*));
-    if(CommandLineArgs == NULL)
+    try {
+	s_CommandLineArgs.clear();
+	s_CommandLineArgs.reserve(argc);
+	for (int i = 0; i < argc; i++)
+	    s_CommandLineArgs.push_back(strduplicate(argv[i]));
+    } catch (const std::bad_alloc&) {
 	R_Suicide(_("allocation failure in R_set_command_line_arguments"));
-
-    for (int i = 0; i < argc; i++) {
-	CommandLineArgs[i] = strdup(argv[i]);
-	if(CommandLineArgs[i] == NULL)
-	    R_Suicide(_("allocation failure in R_set_command_line_arguments"));
     }
 }
 
@@ -93,9 +88,9 @@ SEXP do_commandArgs(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
     /* need protection as mkChar allocates */
     GCStackRoot<StringVector> vals;
-    vals = StringVector::create(NumCommandLineArgs);
-    for (int i = 0; i < NumCommandLineArgs; i++)
-	SET_STRING_ELT(vals, i, mkChar(CommandLineArgs[i]));
+    vals = StringVector::create(s_CommandLineArgs.size());
+    for (std::size_t i = 0; i < s_CommandLineArgs.size(); i++)
+	SET_STRING_ELT(vals, i, String::obtain(s_CommandLineArgs[i]));
     return vals;
 }
 

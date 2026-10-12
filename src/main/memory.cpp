@@ -3040,9 +3040,9 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     if (ALTREP(x))
         ALTLIST_SET_ELT(x, i, v);
     else {
-        FIX_REFCNT(x, VECTOR_ELT_0(x, i), v);
         CHECK_OLD_TO_NEW(x, v);
-        SET_VECTOR_ELT_0(x, i, v);
+        ListVector *vec = SEXP_downcast<ListVector *>(x);
+        (*vec)[i].retarget(x, v);
     }
     return v;
 }
@@ -3059,9 +3059,9 @@ SEXP (SET_XVECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
     if (ALTREP(x))
         ALTLIST_SET_ELT(x, i, v);
     else {
-        FIX_REFCNT(x, VECTOR_ELT_0(x, i), v);
         CHECK_OLD_TO_NEW(x, v);
-        SET_VECTOR_ELT_0(x, i, v);
+        ExpressionVector *vec = SEXP_downcast<ExpressionVector *>(x);
+        (*vec)[i].retarget(x, v);
     }
     return v;
 }

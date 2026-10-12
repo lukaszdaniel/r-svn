@@ -182,9 +182,9 @@ namespace CXXR
     void String::visitTable()
     {
         std::erase_if(s_hash_table, [](const auto &entry)
-        {
-            return !entry.second->isMarked();
-        });
+            {
+                return !entry.second->isMarked();
+            });
     }
 
     bool String::isASCII() const
@@ -242,6 +242,11 @@ namespace CXXR
 
         std::string str(name, len);
         return String::obtain(str, encoding);
+    }
+
+    std::string strduplicate(const char *ptr)
+    {
+        return ptr ? ptr : "";
     }
 } // namespace CXXR
 
