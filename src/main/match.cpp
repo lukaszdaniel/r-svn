@@ -1,7 +1,7 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
+ *  Copyright (C) 1998--2026  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
- *  Copyright (C) 1998-2025   The R Core Team.
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
  *
@@ -206,7 +206,8 @@ attribute_hidden SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 {
     bool seendots;
     int i, arg_i = 0;
-    SEXP f, a, b, dots, actuals;
+    SEXP f, a, b, dots;
+    GCStackRoot<> actuals;
 
     actuals = R_NilValue;
     for (f = formals ; f != R_NilValue ; f = CDR(f), arg_i++) {
@@ -227,8 +228,6 @@ attribute_hidden SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
     std::vector<int> fargused(arg_i ? arg_i : 1, 0); // avoid undefined behaviour
 
     for(b = supplied; b != R_NilValue; b = CDR(b)) SET_ARGUSED(b, 0);
-
-    PROTECT(actuals);
 
     /* First pass: exact matches by tag */
     /* Grab matched arguments and check */
@@ -379,7 +378,8 @@ attribute_hidden SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
             /* show bad arguments in call without evaluating them */
 	    SEXP carB = CAR(b);
 	    if (TYPEOF(carB) == PROMSXP) carB = PREXPR(carB);
-	    SEXP unused = PROTECT(CONS(carB, R_NilValue));
+	    GCStackRoot<> unused;
+	    unused = CONS(carB, R_NilValue);
 	    SET_TAG(unused, TAG(b));
 	    SEXP last = unused;
 
@@ -391,15 +391,16 @@ attribute_hidden SEXP R::matchArgs_NR(SEXP formals, SEXP supplied, SEXP call)
 		    last = CDR(last);
 		    SET_TAG(last, TAG(b));
 		}
+	    unsigned long len_u_args = (unsigned long) length(unused);
+	    unused = deparse1line(unused, 0);
 	    errorcall(call /* R_GlobalContext->call */,
 		      n_("unused argument %s",
-			       "unused arguments %s",
-			       (unsigned long) length(unused)),
-		      strchr(CHAR(asChar(deparse1line(unused, FALSE))), '('));
+			       "unused arguments %s", len_u_args),
+		      strchr(CHAR(asChar(unused)), '('));
 	}
     }
-    UNPROTECT(1);
-    return(actuals);
+
+    return actuals;
 }
 
 /* Use matchArgs_RC if the result might escape into R. */

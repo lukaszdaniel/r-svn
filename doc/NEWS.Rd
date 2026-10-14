@@ -148,6 +148,13 @@
       \item \command{R CMD build} now excludes an obsolete
       \file{data/datalist} file when the package uses \samp{LazyData},
       and reports when it added one.
+
+      \item The long-standing environment variable \env{PKG_BUILD_DIR}
+      %% added in Sept 2015
+      to control where \command{R CMD INSTALL} unpacks source tarballs
+      is now documented in the R Internals manual.  This is supplemented by
+      \env{PKG_BUILD_DIR_BARE} to use \env{PKG_BUILD_DIR} as the
+      unpacking directory without adding a random path component.
     }
   }
 
@@ -354,6 +361,10 @@
       calls after drawing a \code{glyphGrob} containing two or more glyphs
       inside a masked \code{viewport}. Thanks to \I{Trevor Davis}' patch
       proposal in \PR{19075}.
+
+      \item Long stringed error messages are now protected from premature
+      garbage collection, fixing \PR{19210}, reported and analyzed by
+      \I{Yuancheng Jiang}.
     }
   }
 }

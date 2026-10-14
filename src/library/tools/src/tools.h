@@ -31,6 +31,7 @@ extern "C"
 SEXP dirchmod(SEXP dr, SEXP gwsxp);
 SEXP Rmd5(SEXP files);
 SEXP Rsha256(SEXP files);
+SEXP Rbase64_encode(SEXP rawvec);
 SEXP check_nonASCII(SEXP text, SEXP ignore_quotes);
 SEXP check_nonASCII2(SEXP text);
 SEXP doTabExpand(SEXP strings, SEXP starts);
