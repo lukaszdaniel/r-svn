@@ -1666,8 +1666,9 @@ attribute_hidden SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP a, r, dims, dimnames, dimnamesnames = R_NilValue,
 	ndimnamesnames, rnames, cnames, dimr, nmdma, nmdmr;
-    int ldim, ncol = 0, nrow = 0;
+    R_xlen_t ncol = 0, nrow = 0;
     R_xlen_t len = 0;
+    R_len_t ldim = 0;
 
     checkArity(op, args);
     a = CAR(args);
@@ -1679,13 +1680,13 @@ attribute_hidden SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	cnames = R_NilValue;
 	switch(ldim) {
 	case 0:
-	    len = nrow = LENGTH(a);
+	    len = nrow = XLENGTH(a);
 	    ncol = 1;
 	    rnames = getAttrib(a, R_NamesSymbol);
 	    dimnames = rnames;/* for isNull() below*/
 	    break;
 	case 1:
-	    len = nrow = LENGTH(a);
+	    len = nrow = XLENGTH(a);
 	    ncol = 1;
 	    dimnames = getAttrib(a, R_DimNamesSymbol);
 	    if (dimnames != R_NilValue) {

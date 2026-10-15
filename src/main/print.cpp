@@ -807,16 +807,14 @@ static void printList(SEXP s, R_PrintData *data)
 
 static void PrintExpression(SEXP s, R_PrintData *data)
 {
-    SEXP u;
-    int i, n;
+    GCStackRoot<> u;
 
-    u = PROTECT(deparse1w(s, false, data->useSource | DEFAULTDEPARSE));
+    u = deparse1w(s, false, data->useSource | DEFAULTDEPARSE);
     R_print = *data; /* Deparsing calls PrintDefaults() */
 
-    n = LENGTH(u);
-    for (i = 0; i < n; i++)
+    int n = LENGTH(u);
+    for (int i = 0; i < n; i++)
 	Rprintf("%s\n", CHAR(STRING_ELT(u, i))); /*translated */
-    UNPROTECT(1); /* u */
 }
 
 static void PrintSpecial(SEXP s, R_PrintData *data)

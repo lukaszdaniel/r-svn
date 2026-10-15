@@ -284,7 +284,7 @@ static void pb_uint(profbuf *pb, uint64_t num)
 	pb->ptr += j;
 	pb->left -= j;
     } else
-	pb->left = 0; 
+	pb->left = 0;
 }
 
 static void pb_int(profbuf *pb, int64_t num)
@@ -856,7 +856,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 	   Solaris has CLOCK_PROF, in -lrt.
 	   FreeBSD only supports CLOCK_{REALTIME,MONOTONIC}
 	   Seems not to be supported at all on macOS.
-	*/ 
+	*/
 	struct itimerval itv;
 	itv.it_interval.tv_sec = interval / 1000000;
 	itv.it_interval.tv_usec =
@@ -3349,7 +3349,7 @@ static SEXP installAssignFcnSymbol(SEXP fun)
     char buf[ASSIGNBUFSIZ];
     SEXP printname = PRINTNAME(fun);
     const char *name = CHAR(printname);
-    size_t name_len = LENGTH(printname);
+    size_t name_len = XLENGTH(printname);
 
     /* install the symbol */
     if (name_len + 3 > ASSIGNBUFSIZ)
@@ -4392,7 +4392,7 @@ static bool R_chooseOpsMethod(SEXP x, SEXP y, SEXP mx, SEXP my,
 	expr = R_ParseString("base::chooseOpsMethod(x, y, mx, my, cl, rev)");
 	R_PreserveObject(expr);
     }
-    
+
     GCStackRoot<> newrho;
     newrho = R_NewEnv(rho, FALSE, 0);
     defineVar(xSym, x, newrho); INCREMENT_NAMED(x);
@@ -7757,13 +7757,14 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	    default: break;
 	    }
 
-	SEXP value = GETSTACK(-1);
+	{
+	GCStackRoot<> value;
+	value = GETSTACK(-1);
 	INCREMENT_NAMED(value);
 	if (!SET_BINDING_VALUE(loc, value)) {
 	    SEXP symbol = GETCONST(constants, sidx);
-	    PROTECT(value);
 	    defineVar(symbol, value, rho);
-	    UNPROTECT(1);
+	}
 	}
 	NEXT();
       }
@@ -7885,10 +7886,10 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
       {
 	SEXPTYPE ftype = CALL_FRAME_FTYPE();
 	if (ftype != SPECIALSXP) {
-	  SEXP h = R_findVar(R_DotsSymbol, rho);
+	  GCStackRoot<> h;
+	  h = R_findVar(R_DotsSymbol, rho);
 	  if (TYPEOF(h) == DOTSXP || h == R_NilValue) {
-	    PROTECT(h);
-	    for (; h != R_NilValue; h = CDR(h)) {
+	    for (; h != R_NilValue; h = CDR(h.get())) {
 	      SEXP val;
 	      if (ftype == BUILTINSXP)
 	        val = eval(CAR(h), rho);
@@ -7897,9 +7898,8 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	      else
 	        val = mkPROMISE(CAR(h), rho);
 	      PUSHCALLARG(val);
-	      SETCALLARG_TAG(TAG(h));
+	      SETCALLARG_TAG(TAG(h.get()));
 	    }
-	    UNPROTECT(1); /* h */
 	  }
 	  else if (h != R_MissingArg)
 	    error("%s", _("'...' used in an incorrect context"));
@@ -8317,7 +8317,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	SEXP fun = CALL_FRAME_FUN();
 	SEXP call = GETCONST(constants, GETOP());
 	SEXP vexpr = GETCONST(constants, GETOP());
-	SEXP args, prom, last;
+	SEXP prom, last;
 	MARK_ASSIGNMENT_CALL(call);
 	if (MAYBE_SHARED(lhs)) {
 	  lhs = shallow_duplicate(lhs);
@@ -8327,19 +8327,23 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	SEXP value = NULL;
 	switch (TYPEOF(fun)) {
 	case BUILTINSXP:
+	  {
 	  /* push RHS value onto arguments with 'value' tag */
 	  PUSHCALLARG(rhs);
 	  SETCALLARG_TAG_SYMBOL(R_valueSym);
 	  /* replace first argument with LHS value */
-	  args = BUILTIN_CALL_FRAME_ARGS();
+	  SEXP args = BUILTIN_CALL_FRAME_ARGS();
 	  SETCAR(args, lhs);
 	  /* make the call */
 	  checkForMissings(args, call);
 	  value = PRIMFUN(fun) (call, fun, args, rho);
+	  }
 	  break;
 	case SPECIALSXP:
+	  {
 	  /* duplicate arguments and protect */
-	  PROTECT(args = duplicate(CDR(call)));
+	  GCStackRoot<> args;
+	  args = duplicate(CDR(call));
 	  /* insert evaluated promise for LHS as first argument */
 	  /* promise won't be captured so don't track references */
 	  prom = R_mkEVPROMISE_NR(R_TmpvalSymbol, lhs);
@@ -8352,9 +8356,10 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	  SETCAR(last, prom);
 	  /* make the call */
 	  value = PRIMFUN(fun) (call, fun, args, rho);
-	  UNPROTECT(1);
+	  }
 	  break;
 	case CLOSXP:
+	  {
 	  /* push evaluated promise for RHS onto arguments with 'value' tag */
 	  /* This need to use a standard EVPROMISE so the reference
 	     from the environment to the RHS value is counted. */
@@ -8363,11 +8368,12 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	  SETCALLARG_TAG_SYMBOL(R_valueSym);
 	  /* replace first argument with evaluated promise for LHS */
 	  /* promise might be captured, so track references */
-	  args = CLOSURE_CALL_FRAME_ARGS();
+	  SEXP args = CLOSURE_CALL_FRAME_ARGS();
 	  prom = R_mkEVPROMISE(R_TmpvalSymbol, lhs);
 	  SETCAR(args, prom);
 	  /* make the call */
 	  value = applyClosure(call, fun, args, rho, R_NilValue, true);
+	  }
 	  break;
 	default: error("%s", _("bad function"));
 	}
@@ -8572,7 +8578,7 @@ attribute_hidden SEXP R::R_bcEncode(SEXP bytes)
 
     R_xlen_t m = (sizeof(BCODE) + sizeof(int) - 1) / sizeof(int);
 
-    R_xlen_t n = LENGTH(bytes);
+    R_xlen_t n = XLENGTH(bytes);
     if (n == 0)
 	return R_NilValue;
     int *ipc = INTEGER(bytes);
@@ -8632,7 +8638,7 @@ attribute_hidden SEXP R::R_bcDecode(SEXP code) {
 
     int m = (sizeof(BCODE) + sizeof(int) - 1) / sizeof(int);
 
-    R_xlen_t n = LENGTH(code) / m;
+    R_xlen_t n = XLENGTH(code) / m;
     BCODE *pc = BCODE_PTR(code);
 
     IntVector *bytes = IntVector::create(n);

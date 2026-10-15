@@ -3137,7 +3137,7 @@ static SEXP appendRawToFile(SEXP file, SEXP bytes)
     }
 #endif
 
-    len = LENGTH(bytes);
+    len = XLENGTH(bytes);
     pos = ftell(fp);
     out = fwrite(RAW(bytes), 1, len, fp);
     fclose(fp);

@@ -2123,7 +2123,7 @@ SEXP termsform(SEXP args)
 	if(length(framenames)) {
 	    GCStackRoot<> rhs;
 	    rhs = installTrChar(STRING_ELT(framenames, 0));
-	    for (R_xlen_t i = 1; i < LENGTH(framenames); i++) {
+	    for (R_xlen_t i = 1; i < XLENGTH(framenames); i++) {
 		rhs = lang3(plusSymbol, rhs,
 				      installTrChar(STRING_ELT(framenames, i)));
 	    }

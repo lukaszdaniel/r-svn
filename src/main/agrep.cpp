@@ -225,7 +225,7 @@ attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 		      REAL(opt_bounds), INTEGER(opt_costs));
 
     /* Matching. */
-    n = LENGTH(vec);
+    n = XLENGTH(vec);
     PROTECT(ind = LogicalVector::create(n));
     nmatches = 0;
     for (i = 0 ; i < n ; i++) {

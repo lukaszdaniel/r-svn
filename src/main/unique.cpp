@@ -1751,7 +1751,7 @@ attribute_hidden SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
     checkArity(op, args);
 
     input = CAR(args);
-    R_xlen_t n_input = LENGTH(input);
+    R_xlen_t n_input = XLENGTH(input);
     target = CADR(args);
     int n_target = LENGTH(target);
 
@@ -2189,9 +2189,8 @@ static int isDuplicated2(SEXP x, int indx, HashData *d)
 static SEXP duplicated2(SEXP x, HashData *d)
 {
     SEXP ans;
-    int n;
 
-    n = LENGTH(x);
+    int n = LENGTH(x);
     HashTableSetup(x, d, NA_INTEGER);
     PROTECT(d->HashTable);
     PROTECT(ans = allocVector(INTSXP, n));

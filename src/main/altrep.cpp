@@ -1148,7 +1148,7 @@ SEXP R_new_altrep(R_altrep_class_t aclass, SEXP data1, SEXP data2)
 {
     SEXP sclass = R_SEXP(aclass);
     SEXPTYPE type = ALTREP_CLASS_BASE_TYPE(sclass);
-    SEXP ans = AltRep::create(data1, data2, sclass); 
+    SEXP ans = AltRep::create(data1, data2, sclass);
     ALTREP_SET_TYPEOF(ans, type);
     // SET_ALTREP_CLASS
     // SETALTREP(ans, 1);

@@ -1506,8 +1506,8 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
    NOTE: all offsets here (in & out) are 0-based !! */
 static R_size_t fgrepraw1(SEXP pat, SEXP text, R_size_t offset) {
     Rbyte *haystack = RAW(text), *needle = RAW(pat);
-    R_size_t n = LENGTH(text);
-    R_size_t ncmp = LENGTH(pat);
+    R_size_t n = XLENGTH(text);
+    R_size_t ncmp = XLENGTH(pat);
     if (n < ncmp)
 	return (R_size_t) -1;
     switch (ncmp) { /* it may be silly but we optimize small needle
@@ -1627,7 +1627,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		    memcpy(ansp, RAW(text), res);
 		    ansp += res;
 		}
-		res += LENGTH(pat);
+		res += XLENGTH(pat);
 		if (res < (R_size_t) LENGTH(text))
 		    memcpy(ansp, RAW(text) + res, LENGTH(text) - res);
 		return ans;
@@ -1654,7 +1654,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (nmatches < MAX_MATCHES_MINIBUF)
 		    matches[nmatches] = (int)(offset + 1);
 		nmatches++;
-		offset += LENGTH(pat);
+		offset += XLENGTH(pat);
 	    }
 	    if (value) {
 		if (invert) { /* invert is actually useful here as it
@@ -1678,7 +1678,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 			    if (offset == (R_size_t) -1)
 				break;
 			    INTEGER(mvec)[nmatches++] = (int)(offset + 1);
-			    offset += LENGTH(pat);
+			    offset += XLENGTH(pat);
 			}
 		    }
 
@@ -1724,7 +1724,7 @@ attribute_hidden SEXP do_grepraw(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (offset == (R_size_t) -1)
 		    break;
 		INTEGER(ans)[nmatches++] = (int)(offset + 1);
-		offset += LENGTH(pat);
+		offset += XLENGTH(pat);
 	    }
 	    return ans;
 	}
