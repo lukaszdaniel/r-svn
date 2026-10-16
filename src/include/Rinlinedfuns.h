@@ -39,7 +39,20 @@
 # define INLINE_FUN
 # define HIDDEN attribute_hidden
 #else
-# define INLINE_FUN R_INLINE
+/* This section is normally only used for versions of gcc which do not
+   support C99 semantics.  __GNUC_STDC_INLINE__ is defined if
+   GCC is following C99 inline semantics by default: we
+   switch R's usage to the older GNU semantics via attributes.
+   Do this even for __GNUC_GNUC_INLINE__ to shut up warnings in 4.2.x.
+   __GNUC_STDC_INLINE__ and __GNUC_GNU_INLINE__ were added in gcc 4.2.0.
+*/
+/* object files will not contain definitions of functions declared
+   "extern inline" in gnu90 inline mode */
+# if defined(__GNUC_STDC_INLINE__) || defined(__GNUC_GNU_INLINE__)
+#  define INLINE_FUN extern __attribute__((gnu_inline)) inline
+# else
+#  define INLINE_FUN extern R_INLINE
+# endif
 # define HIDDEN
 #endif /* ifdef COMPILING_R */
 
