@@ -41,6 +41,10 @@ SEXP getListElement(SEXP list, const char *str)
 	error("%s", _("invalid argument type"));
     SEXP elmt = R_NilValue, names = getAttrib(list, R_NamesSymbol);
 
+    /* an unnamed list has no element called str; STRING_ELT() on the
+       NULL names is unchecked here (Defn.h) and reads off R_NilValue */
+    if (TYPEOF(names) != STRSXP)
+	return R_NilValue;
     for (int i = 0; i < length(list); i++)
 	if (streql(CHAR(STRING_ELT(names, i)), str)) { /* ASCII only */
 	    elmt = VECTOR_ELT(list, i);
