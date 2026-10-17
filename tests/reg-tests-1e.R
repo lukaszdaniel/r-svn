@@ -4008,6 +4008,29 @@ stopifnot(vapply(1:5, function(i) identical(0, print(isoreg(numeric(0))$yc)), NA
 
 
 
+## fisher.test() when the workspace left for the hash tables is < 2 entries
+local({
+    E1 <- tryCid(fisher.test(matrix(c(50000, 9900, 20000, 5000, 10000, 4000), 2)))
+    E2 <- tryCid(fisher.test(matrix(1:6, 2), workspace = 2100))
+    E3 <- tryCid(fisher.test(matrix(1:6, 2), workspace = 2000))
+    stopifnot(inherits(E1, "error"), inherits(E2, "error"), inherits(E3, "error"))
+    if(englishMsgs)
+        stopifnot(grepl("Out of workspace", c(conditionMessage(E1),
+                                              conditionMessage(E2),
+                                              conditionMessage(E3))))
+})
+## segfaulted or gave p-value 0 in R <= 4.6.1
+
+## parse(keep.source = TRUE) after a lexer error in a previous parse
+local({
+    try(parse(text = "#a\n#a\n#a\ny + '\\q'", keep.source = TRUE), silent = TRUE)
+    pd <- getParseData(parse(text = "c#\nc#\n", keep.source = TRUE))
+    stopifnot(identical(pd$parent[pd$token == "COMMENT"],
+                        -pd$id[pd$token == "expr"]))
+})
+## looped forever in R <= 4.6.1
+
+
 ## keep at end
 rbind(last =  proc.time() - .pt,
       total = proc.time())
