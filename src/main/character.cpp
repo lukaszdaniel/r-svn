@@ -1422,37 +1422,28 @@ static R_INLINE int xtable_key_comp(const void *a, const void *b)
 
 namespace
 {
-    template <typename T>
-    void BSEARCH(T *_rc, wchar_t *_key, T *_base, int _nmemb, int (*_comp)(const void *a, const void *b))
+    template <typename T, typename Key, typename Compare>
+    T *BSEARCH(const Key *key, T *base, size_t nmemb, Compare comp)
     {
-        size_t l, u, idx;
-        T *p = NULL;
-        int comp;
-        l = 0;
-        u = _nmemb;
-        _rc = NULL;
-        while (l < u)
-        {
-            idx = (l + u) / 2;
-            p = (_base) + idx;
-            comp = (*_comp)(_key, p);
-            if (comp < 0)
+        size_t l = 0, u = nmemb;
+        while (l < u) {
+            size_t idx = l + (u - l) / 2;
+            T *p = base + idx;
+            int result = comp(key, p);
+            if (result < 0)
                 u = idx;
-            else if (comp > 0)
+            else if (result > 0)
                 l = idx + 1;
             else
-            {
-                _rc = p;
-                break;
-            }
+                return p;
         }
+        return nullptr;
     }
 } // anonymous namespace
 
 attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP old, _new, x, y;
-    R_xlen_t i, n;
     char *cbuf;
     SEXP el;
     cetype_t ienc;
@@ -1462,7 +1453,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
     old = CAR(args); args = CDR(args);
     _new = CAR(args); args = CDR(args);
     x = CAR(args);
-    n = XLENGTH(x);
+    R_xlen_t n = XLENGTH(x);
     if (!isString(old) || LENGTH(old) < 1 || STRING_ELT(old, 0) == NA_STRING)
 	error(_("invalid '%s' argument"), "old");
     if (LENGTH(old) > 1)
@@ -1477,7 +1468,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
      * of them might be mis-represented by translateChar.  But
      * Rf_utf8towcs may not be reliable unless TO_WCS_OK is defined.
      */
-    for (i = 0; i < n; i++) {
+    for (R_xlen_t i = 0; i < n; i++) {
 	SEXP xi = STRING_ELT(x, i);
 	if (IS_UTF8(xi) || (!latin1locale && IS_LATIN1(xi))) use_WC = TRUE;
     }
@@ -1488,7 +1479,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	(!latin1locale && IS_LATIN1(STRING_ELT(_new, 0)))) use_WC = TRUE;
 
     if (mbcslocale || use_WC == TRUE) {
-	int j, nb, nc;
+	int nb = 0, nc = 0;
 	xtable_t *xtable = NULL, *tbl = NULL;
 	int xtable_cnt;
 	struct wtr_spec *trs_cnt, **trs_cnt_ptr;
@@ -1567,7 +1558,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	*trs_old_ptr = trs_old->next;
 	trs_new_ptr = R_Calloc(1, struct wtr_spec *);
 	*trs_new_ptr = trs_new->next;
-	for (i = 0; ; i++) {
+	for (R_xlen_t i = 0; ; i++) {
 	    c_old = wtr_get_next_char_from_spec(trs_old_ptr);
 	    c_new = wtr_get_next_char_from_spec(trs_new_ptr);
 	    if (c_old == '\0')
@@ -1589,7 +1580,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	COMPRESS(xtable, &xtable_cnt, xtable_t, xtable_comp);
 
 	PROTECT(y = StringVector::create(n));
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 	    CXXR::RAllocStack::Scope rscope;
 	    el = STRING_ELT(x,i);
 	    if (el == NA_STRING)
@@ -1611,8 +1602,8 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 						     &cbuff);
 		if (ienc == CE_UTF8) Rf_utf8towcs(wc, xi, nc + 1);
 		else mbstowcs(wc, xi, nc + 1);
-		for (j = 0; j < nc; j++){
-		    BSEARCH(tbl,&wc[j], xtable, xtable_cnt, xtable_key_comp);
+		for (int j = 0; j < nc; j++){
+		    tbl = BSEARCH(&wc[j], xtable, xtable_cnt, xtable_key_comp);
 		    if (tbl) wc[j] = tbl->c_new;
 		}
 		if (ienc == CE_UTF8) {
@@ -1677,7 +1668,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 	n = LENGTH(x);
 	PROTECT(y = StringVector::create(n));
 	CXXR::RAllocStack::Scope rscope;
-	for (i = 0; i < n; i++) {
+	for (R_xlen_t i = 0; i < n; i++) {
 	    if (STRING_ELT(x,i) == NA_STRING)
 		SET_STRING_ELT(y, i, NA_STRING);
 	    else {
