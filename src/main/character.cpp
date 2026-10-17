@@ -1621,9 +1621,13 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
 		    wcstoutf8(cbuf, wc, nb);
 		    SET_STRING_ELT(y, i, mkCharCE(cbuf, CE_UTF8));
 		} else {
-		    nb = (int) wcstombs(NULL, wc, 0);
-		    cbuf = CallocCharBuf(nb);
-		    wcstombs(cbuf, wc, nb + 1);
+		    size_t nbytes = wcstombs(NULL, wc, 0);
+		    if (nbytes == (size_t)-1)
+			error("%s", _("translated string is not representable in the current locale"));
+		    if (nbytes > INT_MAX)
+			error("%s", _("R character strings are limited to 2^31-1 bytes"));
+		    cbuf = CallocCharBuf(nbytes);
+		    wcstombs(cbuf, wc, nbytes + 1);
 		    SET_STRING_ELT(y, i, markKnown(cbuf, el));
 		}
 		R_Free(cbuf);
