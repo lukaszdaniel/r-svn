@@ -3723,11 +3723,14 @@ stopifnot(
 
 
 ## ksmooth(.., x.points = <invalid>) -- PR#19153
+## ksmooth(.., n.points = 0)         -- PR#19219
 x <- 1:11; y <- (x - 5)^2
 L00 <- list(x = numeric(), y = numeric())
 stopifnot(identical(L00, ksmooth(x,y, x.points=NULL)),
           identical(L00, ksmooth(x,y, x.points=rep(NA,999))))
 ## did seg.fault, trying to access x.points[1] from C
+stopifnot(identical(L00, ksmooth(x,y, n.points = 0)))
+## ditto segfaulted in R <= 4.6.1
 
 
 ## malformed ALTREP serialized class metadata
@@ -3945,7 +3948,6 @@ stopifnot(print(abs(pvW/pvX - 1)) <= c(2e-14, 2e-14, 1e-15),
 ## not ok in  R <= 4.6.1
 
 
-
 ## read.dcf() escapes 4-byte sequences above U+10FFFF, which iconv()
 ## passes through but validUTF8() rejects, like other invalid bytes
 local({
@@ -3959,6 +3961,7 @@ local({
 ## gave "????" in R-devel since r90200, and re-encoded the whole field
 ## value for each further continuation line
 
+
 ## iconv(sub = "Unicode") and sub = "c99" never returned on invalid UTF-8 input
 x <- rawToChar(as.raw(c(0x61, 0xc3, 0x28, 0xe2, 0x82))) # "a", a lone lead byte, a truncated sequence
 stopifnot(identical(iconv(x, "UTF-8", "ASCII", sub = "Unicode"), "a<c3>(<e2><82>"),
@@ -3966,13 +3969,44 @@ stopifnot(identical(iconv(x, "UTF-8", "ASCII", sub = "Unicode"), "a<c3>(<e2><82>
           identical(iconv("caf\u00e9", "UTF-8", "ASCII", sub = "Unicode"), "caf<U+00E9>"))
 ## looped forever in R <= 4.6.1
 
-## getParseData doesn't truncate long strings
+
+## getParseData doesn't truncate long strings -- PR#19204
 long_a <- strrep("a", 1200L)
 long_expr <- sprintf("`%1$s`::`%1$s`(`%1$s` = '%1$s', . = function(`%1$s`) 0, .. = .@`%1$s`)", long_a)
 pd <- getParseData(parse(text = long_expr, keep.source = TRUE))
 long_idx <- nchar(pd$text) > 1000L
 stopifnot(sum(long_idx) == 6L,
           grepl("^(STR_CONST|SYMBOL|SLOT)", pd$token[long_idx]))
+## truncated / lost long STR_CONST parts ==> long_idx all FALSE, in R <= 4.6.1
+
+
+## strsplit(perl = TRUE) stepped over an empty match by utf8clen() -- PR#19212
+x <- "\xff"; Encoding(x) <- "bytes"
+y <- "a\xffb"; Encoding(y) <- "bytes"
+stopifnot(identical(strsplit(x, "|",  perl = TRUE, useBytes = TRUE),
+                    strsplit(x, "|",               useBytes = TRUE)),
+          identical(strsplit(y, "x*", perl = TRUE, useBytes = TRUE),
+                    strsplit(y, "x*",              useBytes = TRUE)))
+## heap-buffer-overflow in R 4.4.0 to 4.6.1 (visible under ASan)
+
+
+## nls() when the model evaluates to a zero-column data frame
+local({
+    y <- 1:3
+    E <- tryCid(nls(y ~ data.frame(), start = list(b = 0.5)))
+    stopifnot(inherits(E, "error"))
+    if(englishMsgs)
+        stopifnot(grepl("evaluated to length 0, not 1", conditionMessage(E)))
+})
+## segfaulted in R <= 4.6.1
+
+
+## isoreg() on empty input left 'yc' uninitialized -- PR#19224
+x <- lapply(1:1e4, function(i) 12345.5 + 0); rm(x); invisible(gc()) # free nodes holding junk
+stopifnot(vapply(1:5, function(i) identical(0, print(isoreg(numeric(0))$yc)), NA))
+## returned stale heap contents in R <= 4.6.1
+
+
 
 ## keep at end
 rbind(last =  proc.time() - .pt,

@@ -795,8 +795,10 @@ static SEXP NewWeakRef(SEXP key, SEXP val, SEXP fin, bool onexit)
     }
 
     PROTECT(key);
-    PROTECT(val = MAYBE_REFERENCED(val) ? duplicate(val) : val);
+    /* fin before val: R_MakeWeakRefC() passes a fresh finalizer object,
+       and duplicate(val) below can collect it */
     PROTECT(fin);
+    PROTECT(val = MAYBE_REFERENCED(val) ? duplicate(val) : val);
     WeakRef *w = WeakRef::create();
     if (key != R_NilValue) {
 	/* If the key is R_NilValue we don't register the weak reference.

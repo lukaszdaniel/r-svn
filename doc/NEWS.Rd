@@ -115,6 +115,10 @@
       shortcutting \code{diag(chol2inv(.))}, wished for with a patch and
       reproducible analysis in \PR{19177} by \I{Adam Marstrand}.
 
+      \item Dynamic HTML help pages are postprocessed to link function
+      arguments in the Usage section to their documentation in the
+      Arguments section.
+
     }
   }
 
@@ -365,13 +369,16 @@
       \item Long stringed error messages are now protected from premature
       garbage collection, fixing \PR{19210}, reported and analyzed by
       \I{Yuancheng Jiang}.
+
+      \item \code{strsplit(str, perl=TRUE, bytes=TRUE)} no longer accesses
+      invalid memory in case \code{str} is an invalid UTF-8 string, fixing
+      \PR{19212}, thanks to \I{Kevin Ushey}.
     }
   }
 }
 
 
 \section{\Rlogo Changes in R 4.6.1 patched}{
-
   \subsection{Bug Fixes}{
     \itemize{
       \item In plain-text help (\code{Rd2txt}), paragraphs are again
@@ -448,7 +455,7 @@
 
       Additionally, also by \I{Adam Berkeš}, \code{x <- rep(999,0);
 	ksmooth(x, x, x.points = 1)} no longer writes out of bounds, fixing
-      \PR{19171}.
+      \PR{19171}.  Ditto for \code{ksmooth(x, x, n.points = 0)}, \PR{19219}.
 
       \item \code{besselI(1, 1e11)} and \code{besselK(..)} now signal a
       warning and return \code{NaN} instead of typically segfaulting,
@@ -482,6 +489,9 @@
       \item \code{influence.measures()} inadvertently wasn't updated along
       with \code{dffits()}, \code{dfbetas()}, \code{covratio()}. \PR{19167} by
       \I{Amal Tawfik}.
+
+      \item \code{isoreg(numeric(0))} no longer returns unallocated component
+      \code{yc}, fixing \PR{19224} thanks to \I{Kevin Ushey}.
     }
   }
   \subsection{Bug Fixes (Windows)}{
