@@ -473,6 +473,7 @@ SEXP ARIMA_transPars(SEXP sin, SEXP sarma, SEXP strans)
 	ns = arma[4], i, j, p = mp + ns * msp, q = mq + ns * msq, v;
     double *in = REAL(sin), *params = REAL(sin), *phi, *theta;
     SEXP res, sPhi, sTheta;
+    RAllocStack::Vector<double> paramsStorage;
 
     PROTECT(res = allocVector(VECSXP, 2));
     SET_VECTOR_ELT(res, 0, sPhi = allocVector(REALSXP, p));
@@ -482,11 +483,12 @@ SEXP ARIMA_transPars(SEXP sin, SEXP sarma, SEXP strans)
     if (trans) {
 	int n = mp + mq + msp + msq;
 
-	RAllocStack::Vector<double> params(n);
+	paramsStorage.resize(n);
+	params = paramsStorage.data();
 	for (i = 0; i < n; i++) params[i] = in[i];
-	if (mp > 0) partrans(mp, in, params.data());
+	if (mp > 0) partrans(mp, in, params);
 	v = mp + mq;
-	if (msp > 0) partrans(msp, in + v, params.data() + v);
+	if (msp > 0) partrans(msp, in + v, params + v);
     }
     if (ns > 0) {
 	/* expand out seasonal ARMA models */

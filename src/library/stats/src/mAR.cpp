@@ -169,16 +169,14 @@ static Array make_array(double vec[], int dim[], int ndim)
 
 static Array make_zero_array(int dim[], int ndim)
 {
-    int i;
-    int len;
-    double *vec;
+    int len = 1;
 
-    for (i = 0, len = 1; i < ndim; i++) {
+    for (int i = 0; i < ndim; i++) {
 	len *= dim[i];
     }
 
-    vec = (double *) R_alloc(len, sizeof(double));
-    for (i = 0; i < len; i++) {
+    double *vec = (double *) R_alloc(len, sizeof(double));
+    for (int i = 0; i < len; i++) {
 	vec[i] = 0.0;
     }
 
@@ -434,8 +432,8 @@ static void qr_solve(Array x, Array y, Array coef)
    NB2 We have to copy x to avoid it being overwritten.
 */
 {
-    int i, info = 0, rank, *pivot, n, p;
-    double tol = 1.0E-7, *qraux, *work;
+    int i, info = 0, rank, n, p;
+    double tol = 1.0E-7;
     Array xt, yt, coeft;
 
     assert_(NROW(x) == NROW(y));
@@ -444,9 +442,9 @@ static void qr_solve(Array x, Array y, Array coef)
 
     CXXR::RAllocStack::Scope rscope;
 
-    qraux = (double *) R_alloc(NCOL(x), sizeof(double));
-    pivot = (int *) R_alloc(NCOL(x), sizeof(int));
-    work  = (double *) R_alloc(2*NCOL(x), sizeof(double));
+    double *qraux = (double *) R_alloc(NCOL(x), sizeof(double));
+    int *pivot = (int *) R_alloc(NCOL(x), sizeof(int));
+    double *work  = (double *) R_alloc(2*NCOL(x), sizeof(double));
 
     for (i = 0; i < NCOL(x); i++)
 	pivot[i] = i+1;
@@ -476,8 +474,8 @@ static void qr_solve(Array x, Array y, Array coef)
 static double ldet(Array x)
 /* Log determinant of square matrix */
 {
-    int i, rank, *pivot, n, p;
-    double ll, tol = 1.0E-7, *qraux, *work;
+    int i, rank, n, p;
+    double ll, tol = 1.0E-7;
     Array xtmp;
 
     assert_(DIM_LENGTH(x) == 2); /* is x a matrix? */
@@ -485,9 +483,9 @@ static double ldet(Array x)
 
     CXXR::RAllocStack::Scope rscope;
 
-    qraux = (double *) R_alloc(NCOL(x), sizeof(double));
-    pivot = (int *) R_alloc(NCOL(x), sizeof(int));
-    work  = (double *) R_alloc(2*NCOL(x), sizeof(double));
+    double *qraux = (double *) R_alloc(NCOL(x), sizeof(double));
+    int *pivot = (int *) R_alloc(NCOL(x), sizeof(int));
+    double *work  = (double *) R_alloc(2*NCOL(x), sizeof(double));
 
     xtmp = make_zero_matrix(NROW(x), NCOL(x));
     copy_array(x, xtmp);
@@ -550,11 +548,11 @@ void multi_burg(int *pn, double *x, int *pomax, int *pnser, double *coef,
     int dim1[3];
     double aicmin;
     Array xarr, resid_f, resid_b, resid_f_tmp;
-    Array *A, *B, P, V;
+    Array P, V;
 
     dim1[0] = omax+1; dim1[1] = dim1[2] = nser;
-    A = (Array *) R_alloc(omax+1, sizeof(Array));
-    B = (Array *) R_alloc(omax+1, sizeof(Array));
+    Array *A = (Array *) R_alloc(omax+1, sizeof(Array));
+    Array *B = (Array *) R_alloc(omax+1, sizeof(Array));
     for (i = 0; i <= omax; i++) {
 	A[i] = make_zero_array(dim1, 3);
 	B[i] = make_zero_array(dim1, 3);
@@ -853,11 +851,10 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
 void multi_yw(double *acf, int *pn, int *pomax, int *pnser, double *coef,
 	      double *pacf, double *var, double *aic, int *porder, int *useaic)
 {
-    int i, m;
+    int m;
     int  omax = *pomax, n = *pn, nser=*pnser, order=*porder;
     double aicmin;
     Array acf_array, p_forward, p_back, v_forward, v_back;
-    Array *A, *B;
     int dim[3];
 
     dim[0] = omax+1; dim[1] = dim[2] = nser;
@@ -869,9 +866,9 @@ void multi_yw(double *acf, int *pn, int *pomax, int *pnser, double *coef,
     p_back= make_zero_array(dim, 3);
     v_back= make_zero_array(dim, 3);
 
-    A = (Array *) R_alloc(omax+2, sizeof(Array));
-    B = (Array *) R_alloc(omax+2, sizeof(Array));
-    for (i = 0; i <= omax; i++) {
+    Array *A = (Array *) R_alloc(omax+2, sizeof(Array));
+    Array *B = (Array *) R_alloc(omax+2, sizeof(Array));
+    for (int i = 0; i <= omax; i++) {
 	A[i] = make_zero_array(dim, 3);
 	B[i] = make_zero_array(dim, 3);
     }
@@ -895,7 +892,7 @@ void multi_yw(double *acf, int *pn, int *pomax, int *pnser, double *coef,
     else order = omax;
     *porder = order;
 
-    for (i = 0; i < vector_length(A[order]); i++)
+    for (int i = 0; i < vector_length(A[order]); i++)
 	coef[i] = VECTOR(A[order])[i];
 }
 

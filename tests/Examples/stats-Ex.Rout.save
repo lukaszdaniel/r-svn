@@ -16632,7 +16632,7 @@ attr(,"kind")[[4]]
 > RNGversion("2.7.0")
 Warning in 'RNGkind("Mersenne-Twister", "Inversion", "Rounding", "Buggy BTPE")':
   non-uniform 'Rounding' sampler used
-Warning in RNGkind("Mersenne-Twister", "Inversion", "Rounding", "Buggy BTPE") :
+Warning in 'RNGkind("Mersenne-Twister", "Inversion", "Rounding", "Buggy BTPE")':
   Buggy BTPE algorithm used for rbinom()
 > ## first set the RNG kind, then simulate
 > do.call(RNGkind, attr(sseed, "kind"))
