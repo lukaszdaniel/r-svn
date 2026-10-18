@@ -27,6 +27,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include "grid.h"
 #include "localization.h"
 
@@ -1960,14 +1961,12 @@ static void hullEdge(double *x, double *y, int n,
 		     double *edgex, double *edgey) 
 {
     int i, nh;
-    double *hx, *hy;
     SEXP xin, yin, chullFn, R_fcall, hull;    
     int adjust = 0;
-    double *xkeep, *ykeep;
-    CXXR::RAllocStack::Scope rscope;
+
     /* Remove any NA's because chull() can't cope with them */
-    xkeep = (double *) R_alloc(n, sizeof(double));
-    ykeep = (double *) R_alloc(n, sizeof(double));
+    RAllocStack::Vector<double> xkeep(n);
+    RAllocStack::Vector<double> ykeep(n);
     for (i=0; i<n; i++) {
         if (!R_FINITE(x[i]) || !R_FINITE(y[i])) {
             adjust--;
@@ -1990,8 +1989,8 @@ static void hullEdge(double *x, double *y, int n,
     PROTECT(R_fcall = lang3(chullFn, xin, yin));
     PROTECT(hull = Rf_eval_with_gd(R_fcall, R_gridEvalEnv, NULL));
     nh = LENGTH(hull);
-    hx = (double *) R_alloc(nh, sizeof(double));
-    hy = (double *) R_alloc(nh, sizeof(double));
+    RAllocStack::Vector<double> hx(nh);
+    RAllocStack::Vector<double> hy(nh);
     for (i=0; i<nh; i++) {
 	hx[i] = x[INTEGER(hull)[i] - 1];
 	hy[i] = y[INTEGER(hull)[i] - 1];
@@ -1999,7 +1998,7 @@ static void hullEdge(double *x, double *y, int n,
     /*
      * Find edge of that hull
      */
-    polygonEdge(hx, hy, nh, theta, 
+    polygonEdge(hx.data(), hy.data(), nh, theta, 
 		edgex, edgey);
     UNPROTECT(5);
 }
@@ -2255,7 +2254,6 @@ SEXP L_lineTo(SEXP x, SEXP y, SEXP arrow)
 SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow) 
 {
     int i, j, nx, nl, start=0;
-    double *xx, *yy;
     double xold, yold;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
@@ -2299,9 +2297,8 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
 	 */
 	nx = LENGTH(indices); 
 	/* Convert the x and y values to CM locations */
-	CXXR::RAllocStack::Scope rscope;
-	xx = (double *) R_alloc(nx, sizeof(double));
-	yy = (double *) R_alloc(nx, sizeof(double));
+	RAllocStack::Vector<double> xx(nx);
+	RAllocStack::Vector<double> yy(nx);
 	xold = NA_REAL;
 	yold = NA_REAL;
 	for (i=0; i<nx; i++) {
@@ -2320,7 +2317,7 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
 	    else if ((R_FINITE(xold) && R_FINITE(yold)) &&
 		     !(R_FINITE(xx[i]) && R_FINITE(yy[i]))) {
 	        if (i-start > 1) {
-		    GEPolyline(i-start, xx+start, yy+start, &gc, dd);
+		    GEPolyline(i-start, xx.data()+start, yy.data()+start, &gc, dd);
 		    if (!isNull(arrow)) {
 		        /*
 			 * Can draw an arrow at the start if the points
@@ -2328,7 +2325,7 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
 			 * CANNOT draw an arrow at the end point 
 			 * because we have just broken the line for an NA.
 			 */
-		        arrows(xx+start, yy+start, i-start,
+		        arrows(xx.data()+start, yy.data()+start, i-start,
 			       arrow, j, start == 0, FALSE,
 			       vpc, vpWidthCM, vpHeightCM, &gc, dd);
 		    }
@@ -2336,14 +2333,14 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
 	    }
 	    else if ((R_FINITE(xold) && R_FINITE(yold)) &&
 		     (i == nx-1)) {
-	        GEPolyline(nx-start, xx+start, yy+start, &gc, dd);
+	        GEPolyline(nx-start, xx.data()+start, yy.data()+start, &gc, dd);
 		if (!isNull(arrow)) {
 		    /*
 		     * Can draw an arrow at the start if the points
 		     * include the first point.
 		     * Can draw an arrow at the end point.
 		     */
- 		    arrows(xx+start, yy+start, nx-start, 
+ 		    arrows(xx.data()+start, yy.data()+start, nx-start, 
 			   arrow, j, start == 0, true,
 			   vpc, vpWidthCM, vpHeightCM, &gc, dd);
 		}
@@ -2364,7 +2361,6 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 		 double theta, bool draw, bool trace) 
 {
     int i, j, nx, np, nloc;
-    double *xx, *yy, *ss;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -2431,12 +2427,11 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 	 */
 	nx = LENGTH(indices); 
 	/* Convert the x and y values to CM locations */
-	CXXR::RAllocStack::Scope rscope;
 	if (draw)
 	    GEMode(1, dd);
-	xx = (double *) R_alloc(nx, sizeof(double));
-	yy = (double *) R_alloc(nx, sizeof(double));
-	ss = (double *) R_alloc(nx, sizeof(double));
+	RAllocStack::Vector<double> xx(nx);
+	RAllocStack::Vector<double> yy(nx);
+	RAllocStack::Vector<double> ss(nx);
 	for (j=0; j<nx; j++) {
 	    ss[j] = REAL(s)[(INTEGER(indices)[j] - 1) % LENGTH(s)];
 	    /*
@@ -2467,7 +2462,7 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
 		    error("%s", _("non-finite control point in Xspline"));
 	    }
 	}
-	PROTECT(points = GEXspline(nx, xx, yy, ss,
+	PROTECT(points = GEXspline(nx, xx.data(), yy.data(), ss.data(),
 				   (Rboolean) LOGICAL(o)[0],
 				   (Rboolean) LOGICAL(rep)[0],
 				   (Rboolean) draw, &gc, dd));
@@ -2535,8 +2530,8 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
                  * Update bounds
                  */
                 int j, n = LENGTH(VECTOR_ELT(points, 0));
-                double *pxx = (double *) R_alloc(n, sizeof(double));
-                double *pyy = (double *) R_alloc(n, sizeof(double));
+                RAllocStack::Vector<double> pxx(n);
+                RAllocStack::Vector<double> pyy(n);
                 for (j=0; j<n; j++) {
                     pxx[j] = fromDeviceX(px[j], GE_INCHES, dd);
                     pyy[j] = fromDeviceY(py[j], GE_INCHES, dd);
@@ -2556,7 +2551,7 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
                  * Calculate edgex and edgey for case where this is 
                  * the only xspline
                  */
-                hullEdge(pxx, pyy, n, theta, &edgex, &edgey);
+                hullEdge(pxx.data(), pyy.data(), n, theta, &edgex, &edgey);
             }
         } /* End of trimming-redundant-points code */
 	UNPROTECT(1); /* points */
@@ -2860,7 +2855,6 @@ SEXP L_arrows(SEXP x1, SEXP x2, SEXP xnm1, SEXP xn,
 SEXP L_polygon(SEXP x, SEXP y, SEXP index)
 {
     int i, j, nx, np, start=0;
-    double *xx, *yy;
     double xold, yold;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
@@ -2905,9 +2899,8 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
 	 */
 	nx = LENGTH(indices); 
 	/* Convert the x and y values to CM locations */
-	CXXR::RAllocStack::Scope rscope;
-	xx = (double *) R_alloc(nx + 1, sizeof(double));
-	yy = (double *) R_alloc(nx + 1, sizeof(double));
+	RAllocStack::Vector<double> xx(nx + 1);
+	RAllocStack::Vector<double> yy(nx + 1);
 	xold = NA_REAL;
 	yold = NA_REAL;
 	for (j=0; j<nx; j++) {
@@ -2926,12 +2919,12 @@ SEXP L_polygon(SEXP x, SEXP y, SEXP index)
 	    else if ((R_FINITE(xold) && R_FINITE(yold)) &&
 		     !(R_FINITE(xx[j]) && R_FINITE(yy[j]))) {
 		if (j-start > 1) {
-		    GEPolygon(j-start, xx+start, yy+start, &gc, dd);
+		    GEPolygon(j-start, xx.data()+start, yy.data()+start, &gc, dd);
 		}
 	    }
 	    else if ((R_FINITE(xold) && R_FINITE(yold)) && (j == nx-1)) { 
 		/* last */
-		GEPolygon(nx-start, xx+start, yy+start, &gc, dd);
+		GEPolygon(nx-start, xx.data()+start, yy.data()+start, &gc, dd);
 	    }
 	    xold = xx[j];
 	    yold = yy[j];
@@ -3361,8 +3354,7 @@ SEXP L_rectBounds(SEXP x, SEXP y, SEXP w, SEXP h, SEXP hjust, SEXP vjust,
 
 SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
 {
-    int i, j, k, h, npoly, *nper, ntot;
-    double *xx, *yy;
+    int i, j, k, h, npoly, ntot;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -3406,14 +3398,13 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
     	 * Number of points per polygon
     	 */ 
     	ntot = 0;
-    	nper = (int *) R_alloc(npoly, sizeof(int));
+    	RAllocStack::Vector<int> nper(npoly);
     	for (i=0; i < npoly; i++) {
     		nper[i] = LENGTH(VECTOR_ELT(polyInd, i));
     		ntot = ntot + nper[i];
     	}
-    	CXXR::RAllocStack::Scope rscope;
-    	xx = (double *) R_alloc(ntot, sizeof(double));
-    	yy = (double *) R_alloc(ntot, sizeof(double));
+    	RAllocStack::Vector<double> xx(ntot);
+    	RAllocStack::Vector<double> yy(ntot);
     	k = 0;
     	for (i=0; i < npoly; i++) {
             int *indices = INTEGER(VECTOR_ELT(polyInd, i));
@@ -3435,7 +3426,7 @@ SEXP L_path(SEXP x, SEXP y, SEXP index, SEXP rule)
             }
     	}
     	updateGContext(currentgp, h, &gc, dd, gpIsScalar, &gcCache);
-    	GEPath(xx, yy, npoly, nper, (Rboolean) asBool(rule), &gc, dd);
+    	GEPath(xx.data(), yy.data(), npoly, nper.data(), (Rboolean) asBool(rule), &gc, dd);
     }
     GEMode(0, dd);
     UNPROTECT(1); /* currentgp */
@@ -3481,13 +3472,14 @@ SEXP L_raster(SEXP raster, SEXP x, SEXP y, SEXP w, SEXP h,
     if (n <= 0) {
         error("%s", _("Empty raster"));  
     }
-    CXXR::RAllocStack::Scope rscope;
+    RAllocStack::Vector<unsigned int> imageStorage;
     /* raster is rather inefficient so allow a native representation as
        an integer array which requires no conversion */
     if (inherits(raster, "nativeRaster") && isInteger(raster)) {
 	image = (unsigned int*) INTEGER(raster);
     } else {
-        image = (unsigned int*) R_alloc(n, sizeof(unsigned int));
+        imageStorage.resize(n);
+        image = imageStorage.data();
         for (i=0; i<n; i++) {
             image[i] = RGBpar3(raster, i, R_TRANWHITE);
         }
@@ -3624,7 +3616,6 @@ static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
 		     SEXP rot, SEXP checkOverlap, double theta, bool draw)
 {
     int i, nx, ny;
-    double *xx, *yy;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -3666,9 +3657,7 @@ static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
     ny = unitLength(y);
     if (ny > nx) 
 	nx = ny;
-    CXXR::RAllocStack::Scope rscope;
-    xx = (double *) R_alloc(nx, sizeof(double));
-    yy = (double *) R_alloc(nx, sizeof(double));
+    RAllocStack::Vector<double> xx(nx), yy(nx);
     for (i=0; i<nx; i++) {
         updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
 	/*
@@ -3699,8 +3688,10 @@ static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
 	txt = coerceVector(txt, STRSXP);
     UNPROTECT(1);
     PROTECT(txt);
+    RAllocStack::Vector<LRect> boundsStorage;
     if (overlapChecking || !draw) {
-	bounds = (LRect *) R_alloc(nx, sizeof(LRect));
+	boundsStorage.resize(nx);
+	bounds = boundsStorage.data();
     }
     /* 
      * Check we have any text to draw
@@ -4922,9 +4913,6 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
                        bool draw, bool closed) 
 {
     int i, nx, npch, nss, ncoords, coordIndex;
-    /*    double *xx, *yy;*/
-    double *xx, *yy, *ss;
-    int *ps;
     int pType;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
@@ -4983,9 +4971,7 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
         SET_VECTOR_ELT(currentgp, GP_FILL, mkString("black"));
     }
     /* Convert the x and y values to CM locations */
-    CXXR::RAllocStack::Scope rscope;
-    xx = (double *) R_alloc(nx, sizeof(double));
-    yy = (double *) R_alloc(nx, sizeof(double));
+    RAllocStack::Vector<double> xx(nx), yy(nx);
     for (i=0; i<nx; i++) {
 	updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
 	/*
@@ -5011,7 +4997,7 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
                                        dd);	    
         }
     }
-    ss = (double *) R_alloc(nss, sizeof(double));
+    RAllocStack::Vector<double> ss(nss);
     for (i=0; i < nss; i++) {
         updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
         ss[i] = transformWidthtoINCHES(size, i, vpc, &gc,
@@ -5019,7 +5005,7 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
         if (draw)
             ss[i] = toDeviceWidth(ss[i], GE_INCHES, dd);
     }
-    ps = (int *) R_alloc(npch, sizeof(int));
+    RAllocStack::Vector<int> ps(npch);
     if (isString(pch)) pType = 0;
     else if (isInteger(pch)) pType = 1;
     else if (isReal(pch)) pType = 2;
@@ -5285,14 +5271,14 @@ SEXP L_locator(void) {
 SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
 {
     int i, nx, ny, nloc;
-    double *xx, *yy;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     LViewportContext vpc;
     R_GE_gcontext gc, gcCache;
     LTransform transform;
-    SEXP currentvp, currentgp;
+    SEXP currentvp;
+    GCStackRoot<> currentgp;
     SEXP result = R_NilValue;
     double xmin = DBL_MAX;
     double xmax = -DBL_MAX;
@@ -5307,7 +5293,7 @@ SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
     /* If not drawing (calculating size), NULL gp$fill to avoid 
      * infinite loop when gp$fill is a pattern 
      * (resolving a pattern involves calculating size) */
-    currentgp = PROTECT(duplicate(currentgp));
+    currentgp = duplicate(currentgp);
     setListElement(currentgp, "fill", R_NilValue);
     getViewportTransform(currentvp, dd, 
 			 &vpWidthCM, &vpHeightCM, 
@@ -5319,10 +5305,10 @@ SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
     if (ny > nx) 
 	nx = ny;
     nloc = 0;
-    CXXR::RAllocStack::Scope rscope;
+    RAllocStack::Vector<double> xx, yy;
     if (nx > 0) {
-	xx = (double *) R_alloc(nx, sizeof(double));
-	yy = (double *) R_alloc(nx, sizeof(double));
+	xx.resize(nx);
+	yy.resize(nx);
 	for (i=0; i<nx; i++) {
 	    updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
 	    xx[i] = transformXtoINCHES(x, i, vpc, &gc,
@@ -5348,8 +5334,8 @@ SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
 	}
     }
     if (nloc > 0) {
-	hullEdge(xx, yy, nx, REAL(theta)[0], &edgex, &edgey);
-	result = allocVector(REALSXP, 6);
+	hullEdge(xx.data(), yy.data(), nx, REAL(theta)[0], &edgex, &edgey);
+	result = RealVector::create(6);
 	/*
 	 * Reverse the scale adjustment (zoom factor)
 	 * when calculating physical value to return to user-level
@@ -5367,7 +5353,7 @@ SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
         REAL(result)[5] = ymin / 
             REAL(gridStateElement(dd, GSS_SCALE))[0];
     } 
-    UNPROTECT(1);
+
     return result;
 }
 
@@ -5417,7 +5403,6 @@ SEXP L_stringMetric(SEXP label)
 	txt = coerceVector(txt, STRSXP);
     PROTECT(txt);
     n = LENGTH(txt);
-    CXXR::RAllocStack::Scope rscope;
     PROTECT(ascent = allocVector(REALSXP, n));
     PROTECT(descent = allocVector(REALSXP, n));
     PROTECT(width = allocVector(REALSXP, n));

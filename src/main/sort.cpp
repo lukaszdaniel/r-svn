@@ -37,6 +37,7 @@
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/SEXP_downcast.hpp>
@@ -854,6 +855,7 @@ attribute_hidden SEXP do_psort(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SETCADR(args, coerceVector(p, INTSXP));
     p = CADR(args);
     int nind = LENGTH(p);
+    CXXR::RAllocStack::Scope rscope;
     R_xlen_t *l = (R_xlen_t *) R_alloc(nind, sizeof(R_xlen_t));
     if (TYPEOF(p) == REALSXP) {
 	double *rl = REAL(p);

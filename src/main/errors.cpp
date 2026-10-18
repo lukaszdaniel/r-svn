@@ -37,6 +37,7 @@
 #include <cstdarg>
 #include <R_ext/Minmax.h>
 #include <Localization.h>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCManager.hpp>
 #include <CXXR/Evaluator.hpp>
@@ -1207,8 +1208,8 @@ attribute_hidden SEXP do_gettext(SEXP call, SEXP op, SEXP args, SEXP rho)
     if(isNull(string) || !n) return string;
 
     if(!isString(string)) error(_("invalid '%s' value"), "string");
-
-    const char * domain = determine_domain_gettext(CAR(args), /*up*/TRUE);
+    CXXR::RAllocStack::Scope rscope; // determine_domain_gettext uses R_alloc()
+    const char *domain = determine_domain_gettext(CAR(args), /*up*/TRUE);
 
     if(domain && strlen(domain)) {
 	SEXP ans = PROTECT(StringVector::create(n));
@@ -1297,7 +1298,8 @@ attribute_hidden SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("'%s' must be a character string"), "msg2");
 
 #ifdef ENABLE_NLS
-    const char * domain = determine_domain_gettext(CADDDR(args), /*up*/FALSE);
+    CXXR::RAllocStack::Scope rscope; // determine_domain_gettext uses R_alloc()
+    const char *domain = determine_domain_gettext(CADDDR(args), /*up*/FALSE);
 
     if(domain && strlen(domain)) {
 	/* libintl seems to malfunction if given a message of "" */

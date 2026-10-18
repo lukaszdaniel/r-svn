@@ -826,15 +826,14 @@ static void CScliplines(int n, double *x, double *y,
     double *xx, *yy;
     double x1, y1, x2, y2;
     cliprect cr;
-    CXXR::RAllocStack::Scope rscope;
 
     if (toDevice)
 	getClipRectToDevice(&cr.xl, &cr.yb, &cr.xr, &cr.yt, dd);
     else
 	getClipRect(&cr.xl, &cr.yb, &cr.xr, &cr.yt, dd);
 
-    xx = (double *) R_alloc(n, sizeof(double));
-    yy = (double *) R_alloc(n, sizeof(double));
+    RAllocStack::Vector<double> xxStorage(n), yyStorage(n);
+    xx = xxStorage.data(); yy = yyStorage.data();
     if (xx == NULL || yy == NULL)
 	error("%s", _("out of memory while clipping polyline"));
 
@@ -1112,8 +1111,7 @@ static void reorderVertices(int n, double *x, double *y, pGEDevDesc dd)
         y[0] < ymin || y[0] > ymax) {
         return;
     } else {
-        double *xtemp = (double*) R_alloc(n, sizeof(double));
-        double *ytemp = (double*) R_alloc(n, sizeof(double));
+        RAllocStack::Vector<double> xtemp(n), ytemp(n);
         int i, start = 1;
         for (i=0; i<n; i++) {
             xtemp[i] = x[i];
@@ -1141,17 +1139,14 @@ static void reorderVertices(int n, double *x, double *y, pGEDevDesc dd)
 static void clipPolygon(int n, double *x, double *y,
 			const pGEcontext gc, int toDevice, pGEDevDesc dd)
 {
-    double *xc = NULL, *yc = NULL;
-    CXXR::RAllocStack::Scope rscope;
-
     /* if bg not specified AND need to clip AND device cannot clip
      * then draw as polyline rather than polygon
      * to avoid drawing line along border of clipping region
      * If bg was NA then it has been converted to fully transparent */
     if (R_TRANSPARENT(gc->fill) && !toDevice && gc->patternFill == R_NilValue) {
         double xmin = DBL_MAX, xmax = DBL_MIN, ymin = DBL_MAX, ymax = DBL_MIN;
-	xc = (double*) R_alloc(n + 1, sizeof(double));
-	yc = (double*) R_alloc(n + 1, sizeof(double));
+	RAllocStack::Vector<double> xcStorage(n + 1), ycStorage(n + 1);
+	double *xc = xcStorage.data(), *yc = ycStorage.data();
 	for (int i=0; i<n; i++) {
 	    xc[i] = x[i];
             if (x[i] < xmin) xmin = x[i];
@@ -1172,11 +1167,10 @@ static void clipPolygon(int n, double *x, double *y,
         if (toDevice) {
             /* Device can clip; just clip to (extended) device */
             int npts;
-            xc = yc = 0;		/* -Wall */
-            npts = clipPoly(x, y, n, 0, toDevice, xc, yc, dd);
+            npts = clipPoly(x, y, n, 0, toDevice, nullptr, nullptr, dd);
             if (npts > 1) {
-                xc = (double*) R_alloc(npts, sizeof(double));
-                yc = (double*) R_alloc(npts, sizeof(double));
+                RAllocStack::Vector<double> xcStorage(npts), ycStorage(npts);
+                double *xc = xcStorage.data(), *yc = ycStorage.data();
                 npts = clipPoly(x, y, n, 1, toDevice, xc, yc, dd);
                 dd->dev->polygon(npts, xc, yc, gc, dd->dev);
             }
@@ -1184,8 +1178,8 @@ static void clipPolygon(int n, double *x, double *y,
             /* If must clip, draw separate fill and border */
             double xmin = DBL_MAX, xmax = DBL_MIN, 
                 ymin = DBL_MAX, ymax = DBL_MIN;
-            xc = (double*) R_alloc(n + 1, sizeof(double));
-            yc = (double*) R_alloc(n + 1, sizeof(double));
+            RAllocStack::Vector<double> xcStorage(n + 1), ycStorage(n + 1);
+            double *xc = xcStorage.data(), *yc = ycStorage.data();
             for (int i=0; i<n; i++) {
                 xc[i] = x[i];
                 if (x[i] < xmin) xmin = x[i];
@@ -1199,13 +1193,12 @@ static void clipPolygon(int n, double *x, double *y,
             if (mustClip(xmin, xmax, ymin, ymax, toDevice, dd)) {
                 /* Draw fill */
                 int npts;
-                double *xc2 = NULL, *yc2 = NULL;
                 int origCol = gc->col;
                 gc->col = R_TRANWHITE;
-                npts = clipPoly(x, y, n, 0, toDevice, xc2, yc2, dd);
+                npts = clipPoly(x, y, n, 0, toDevice, nullptr, nullptr, dd);
                 if (npts > 1) {
-                    xc2 = (double*) R_alloc(npts, sizeof(double));
-                    yc2 = (double*) R_alloc(npts, sizeof(double));
+                    RAllocStack::Vector<double> xc2Storage(npts), yc2Storage(npts);
+                    double *xc2 = xc2Storage.data(), *yc2 = yc2Storage.data();
                     npts = clipPoly(x, y, n, 1, toDevice, xc2, yc2, dd);
                     dd->dev->polygon(npts, xc2, yc2, gc, dd->dev);
                 }
@@ -1237,7 +1230,6 @@ void GEPolygon(int n, double *x, double *y, const pGEcontext gc, pGEDevDesc dd)
      * Save (and reset below) the heap pointer to clean up
      * after any R_alloc's done by functions I call.
      */
-    CXXR::RAllocStack::Scope rscope;
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
 	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
@@ -1339,9 +1331,6 @@ static int clipCircleCode(double x, double y, double r,
  */
 void GECircle(double x, double y, double radius, const pGEcontext gc, pGEDevDesc dd)
 {
-    double *xc, *yc;
-    int result;
-
     /* There is no point in trying to plot a circle of zero radius */
     if (radius <= 0.0) return;
 
@@ -1364,7 +1353,7 @@ void GECircle(double x, double y, double radius, const pGEcontext gc, pGEDevDesc
          * If the device can't clip, we have to do all the clipping
          * ourselves.
          */
-        result = clipCircleCode(x, y, radius, dd->dev->canClip, dd);
+        int result = clipCircleCode(x, y, radius, dd->dev->canClip, dd);
 
         switch (result) {
         case -2: /* No clipping;  draw all of circle */
@@ -1402,11 +1391,9 @@ void GECircle(double x, double y, double radius, const pGEcontext gc, pGEDevDesc
             if (dd->dev->canClip) {
                 dd->dev->circle(x, y, radius, gc, dd->dev);
             } else {
-                CXXR::RAllocStack::Scope rscope;
-                xc = (double*)R_alloc(result+1, sizeof(double));
-                yc = (double*)R_alloc(result+1, sizeof(double));
-                convertCircle(x, y, radius, result, xc, yc);
-                GEPolygon(result, xc, yc, gc, dd);
+                RAllocStack::Vector<double> xc(result+1), yc(result+1);
+                convertCircle(x, y, radius, result, xc.data(), yc.data());
+                GEPolygon(result, xc.data(), yc.data(), gc, dd);
             }
         }
     }
@@ -1452,9 +1439,6 @@ static int clipRectCode(double x0, double y0, double x1, double y1,
 void GERect(double x0, double y0, double x1, double y1,
 	    const pGEcontext gc, pGEDevDesc dd)
 {
-    double *xc, *yc;
-    int result;
-
     if (gc->lwd == R_PosInf || gc->lwd < 0.0)
 	error("%s", _("'lwd' must be non-negative and finite"));
     if (ISNAN(gc->lwd) || gc->lty == LTY_BLANK)
@@ -1467,7 +1451,7 @@ void GERect(double x0, double y0, double x1, double y1,
         dd->dev->deviceClip) {
         dd->dev->rect(x0, y0, x1, y1, gc, dd->dev);
     } else {
-        result = clipRectCode(x0, y0, x1, y1, dd->dev->canClip, dd);
+        int result = clipRectCode(x0, y0, x1, y1, dd->dev->canClip, dd);
         switch (result) {
         case 0:  /* rectangle totally clipped; draw nothing */
             break;
@@ -1478,14 +1462,12 @@ void GERect(double x0, double y0, double x1, double y1,
             if (dd->dev->canClip)
                 dd->dev->rect(x0, y0, x1, y1, gc, dd->dev);
             else {
-                CXXR::RAllocStack::Scope rscope;
-                xc = (double*)R_alloc(4, sizeof(double));
-                yc = (double*)R_alloc(4, sizeof(double));
+                RAllocStack::Vector<double> xc(4), yc(4);
                 xc[0] = x0; yc[0] = y0;
                 xc[1] = x0; yc[1] = y1;
                 xc[2] = x1; yc[2] = y1;
                 xc[3] = x1; yc[3] = y0;
-                GEPolygon(4, xc, yc, gc, dd);
+                GEPolygon(4, xc.data(), yc.data(), gc, dd);
             }
         }
     }
@@ -1824,7 +1806,6 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	    double xoff, yoff, hadj;
 	    double sin_rot, cos_rot;/* sin() & cos() of rot{ation} in radians */
 	    double xleft, ybottom;
-	    CXXR::RAllocStack::Scope rscope;
 
 	    enc2 = (gc->fontface == 5) ? CE_SYMBOL : enc;
 	    if(enc2 != CE_SYMBOL)
@@ -1847,7 +1828,8 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	    for(s = str; *s ; s++)
 		if (*s == '\n') n++;
 	    /* Allocate a temporary buffer */
-	    sb = sbuf = (char*) R_alloc(strlen(str) + 1, sizeof(char));
+	    RAllocStack::Vector<char> bufStorage(strlen(str) + 1);
+	    sb = sbuf = bufStorage.data();
 	    i = 0;
 	    sin_rot = DEG2RAD * rot;
 	    cos_rot = cos(sin_rot);
@@ -2052,23 +2034,22 @@ SEXP GEXspline(int n, double *x, double *y, double *s, Rboolean open,
      * Draw polygon or polyline from points
      */
     SEXP result = R_NilValue;
-    double *ipr = dd->dev->ipr, asp = ipr[0]/ipr[1], *ys;
+    double *ipr = dd->dev->ipr, asp = ipr[0]/ipr[1];
     /*
      * Save (and reset below) the heap pointer to clean up
      * after any R_alloc's done by functions I call.
      */
-    CXXR::RAllocStack::Scope rscope;
-    ys = (double *) R_alloc(n, sizeof(double));
+    RAllocStack::Vector<double> ys(n);
     for (int i = 0; i < n; i++) ys[i] = y[i]*asp;
     if (open) {
-      compute_open_spline(n, x, ys, s, repEnds, LOW_PRECISION, dd);
+      compute_open_spline(n, x, ys.data(), s, repEnds, LOW_PRECISION, dd);
       if (draw) {
-	  GEPolyline(npoints, xpoints, ypoints, gc, dd);
+	  GEPolyline(npoints, xpoints.data(), ypoints.data(), gc, dd);
       }
     } else {
-      compute_closed_spline(n, x, ys, s, LOW_PRECISION, dd);
+      compute_closed_spline(n, x, ys.data(), s, LOW_PRECISION, dd);
       if (draw)
-	  GEPolygon(npoints, xpoints, ypoints, gc, dd);
+	  GEPolygon(npoints, xpoints.data(), ypoints.data(), gc, dd);
     }
     if (npoints > 1) {
 	SEXP xpts, ypts;
@@ -2600,14 +2581,14 @@ double GEStrWidth(const char *str, cetype_t enc, const pGEcontext gc, pGEDevDesc
 	    char *sb;
 	    double wdash;
 	    cetype_t enc2;
-	    CXXR::RAllocStack::Scope rscope;
 
 	    enc2 = (gc->fontface == 5) ? CE_SYMBOL : enc;
 	    if(enc2 != CE_SYMBOL)
 		enc2 = (dd->dev->hasTextUTF8 == TRUE) ? CE_UTF8 : CE_NATIVE;
 	    else if(dd->dev->wantSymbolUTF8 == TRUE) enc2 = CE_UTF8;
 
-	    sb = sbuf = (char*) R_alloc(strlen(str) + 1, sizeof(char));
+	    RAllocStack::Vector<char> bufStorage(strlen(str) + 1);
+	    sb = sbuf = bufStorage.data();
 	    for(s = str; ; s++) {
 		if (*s == '\n' || *s == '\0') {
 		    const char *str;
@@ -2719,8 +2700,6 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
         cetype_t enc2;
 	int noMetricInfo;
        
-        CXXR::RAllocStack::Scope rscope;
-
         GEMetricInfo('M', gc, &asc, &dsc, &wid, dd);
         noMetricInfo = (asc == 0 && dsc == 0 && wid == 0) ? 1 : 0;
 
@@ -2734,7 +2713,8 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
         }
 
         /* Put the first line in a string */
-        sb = sbuf = (char*) R_alloc(strlen(str) + 1, sizeof(char));
+        RAllocStack::Vector<char> bufStorage(strlen(str) + 1);
+        sb = sbuf = bufStorage.data();
         s = str;
         while (*s != '\n' && *s != '\0') {
             *sb++ = *s++;

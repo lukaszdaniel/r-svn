@@ -34,7 +34,9 @@
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/RawVector.hpp>
 #include <Defn.h>
@@ -334,7 +336,7 @@ int R::mbrtoint(int *w, const char *s)
 
 attribute_hidden SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP ans, x = CAR(args);
+    SEXP x = CAR(args);
     int tmp, used = 0; /* -Wall */
     R_xlen_t i, j, nc;
 
@@ -347,6 +349,7 @@ attribute_hidden SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *s = CHAR(STRING_ELT(x, 0));
     if (!utf8Valid(s)) return ScalarInteger(NA_INTEGER);
     nc = XLENGTH(STRING_ELT(x, 0)); /* ints will be shorter */
+    CXXR::RAllocStack::Scope rscope;
     int *ians = (int *) R_alloc(nc, sizeof(int));
     for (i = 0, j = 0; i < nc; i++) {
 	used = mbrtoint(&tmp, s);
@@ -355,7 +358,7 @@ attribute_hidden SEXP do_utf8ToInt(SEXP call, SEXP op, SEXP args, SEXP env)
 	s += used;
     }
     if (used < 0) error("%s", _("invalid UTF-8 string"));
-    ans = allocVector(INTSXP, j);
+    SEXP ans = IntVector::create(j);
     if (j) memcpy(INTEGER(ans), ians, sizeof(int) * j);
     return ans;
 }

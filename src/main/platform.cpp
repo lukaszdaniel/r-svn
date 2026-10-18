@@ -368,6 +368,7 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "title");
     if (!isString(pg))
 	error(_("invalid '%s' argument"), "pager");
+    CXXR::RAllocStack::Scope rscope;
     f = (const char**) R_alloc(n, sizeof(char*));
     h = (const char**) R_alloc(n, sizeof(char*));
     for (int i = 0; i < n; i++) {
@@ -623,6 +624,7 @@ attribute_hidden SEXP do_filesymlink(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    wchar_t *from, *to, *p;
 	    struct _stati64 sb;
 	    p = filenameToWchar(STRING_ELT(f1, i%n1), TRUE);
+	    CXXR::RAllocStack::Scope rscope;
 	    from = (wchar_t*) R_alloc(wcslen(p) + 1, sizeof(wchar_t));
 	    wcscpy(from, p);
 	    /* This Windows system call does not accept slashes */
@@ -698,6 +700,7 @@ attribute_hidden SEXP do_filelink(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef Win32
 	    wchar_t *from, *to, *p;
 	    p = filenameToWchar(STRING_ELT(f1, i%n1), TRUE);
+	    CXXR::RAllocStack::Scope rscope;
 	    from = (wchar_t*) R_alloc(wcslen(p) + 1, sizeof(wchar_t));
 	    wcscpy(from, p);
 	    to = filenameToWchar(STRING_ELT(f2, i%n2), TRUE);
@@ -777,6 +780,7 @@ attribute_hidden SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 #ifdef Win32
 	w = filenameToWchar(STRING_ELT(f1, i), TRUE);
+	CXXR::RAllocStack::Scope rscope;
 	from = (wchar_t *) R_alloc(wcslen(w) + 1, sizeof(wchar_t));
 	wcscpy(from, w);
 	w = filenameToWchar(STRING_ELT(f2, i), TRUE);
@@ -1712,6 +1716,7 @@ attribute_hidden SEXP do_listdirs(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (!fullnames) {
 		add_to_ans(&ans, "", &count, &countmax, idx);
 	    } else {
+		CXXR::RAllocStack::Scope rscope;
 		char *dnp = R_alloc(len + 1, 1);
 		if (len)
 		    memcpy(dnp, pb.data, len);
@@ -2987,9 +2992,9 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (int i = 0; i < nfiles; i++) {
 	    if (STRING_ELT(fn, i) != NA_STRING) {
 	    	p = filenameToWchar(STRING_ELT(fn, i), TRUE);
+	    	CXXR::RAllocStack::Scope rscope;
 		/* the +2 defensively for the .\\ copied below */
-		wchar_t *from;
-		from = (wchar_t *) R_alloc(wcslen(p) + 1 + 2, sizeof(wchar_t));
+		wchar_t *from = (wchar_t *) R_alloc(wcslen(p) + 1 + 2, sizeof(wchar_t));
 		wcscpy(from, p);
 		size_t ll = wcslen(from);
 		if (ll) {  // people do pass ""
@@ -2997,6 +3002,7 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    p = from + (ll - 1);
 		    if(*p == L'\\') *p = L'\0';
 		    p = wcsrchr(from, L'\\') ;
+		    CXXR::RAllocStack::Scope rscope;
 		    wchar_t *name = (wchar_t *) R_alloc(ll + 1,
 		                                        sizeof(wchar_t));;
 		    /* move the last element of "from" into "name" */

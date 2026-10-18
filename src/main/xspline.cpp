@@ -41,40 +41,23 @@
 
 static int npoints;
 static int max_points;
-static double *xpoints;
-static double *ypoints;
+static RAllocStack::Vector<double> xpoints;
+static RAllocStack::Vector<double> ypoints;
 
 /************* Code begins here *************/
 
-/* R_allocs or mallocs global arrays */
 // alawys returned true
 static void add_point(double x, double y, pGEDevDesc dd)
 {
     if (npoints >= max_points) {
 	int tmp_n;
-	double *tmp_px;
-	double *tmp_py;
 	tmp_n = max_points + 200;
 	/* too many points, return false */
 	if (tmp_n > MAXNUMPTS) {
 	    error(_("add_point - reached MAXNUMPTS (%d)"),tmp_n);
 	}
-	if (max_points == 0) {
-	    tmp_px = (double *) R_alloc(tmp_n, sizeof(double));
-	    tmp_py = (double *) R_alloc(tmp_n, sizeof(double));
-	} else {
-	    tmp_px = (double *) S_realloc((char *) xpoints,
-					  tmp_n, max_points,
-					  sizeof(double));
-	    tmp_py = (double *) S_realloc((char *) ypoints,
-					  tmp_n, max_points,
-					  sizeof(double));
-	}
-	if (tmp_px == NULL || tmp_py == NULL) {
-	    error("%s", _("insufficient memory to allocate point array"));
-	}
-	xpoints = tmp_px;
-	ypoints = tmp_py;
+	xpoints.resize(tmp_n);
+	ypoints.resize(tmp_n);
 	max_points = tmp_n;
     }
     /* ignore identical points */
@@ -454,8 +437,8 @@ static void compute_open_spline(int n, double *x, double *y, double *s,
 
   max_points = 0;
   npoints = 0;
-  xpoints = NULL;
-  ypoints = NULL;
+  xpoints.clear();
+  ypoints.clear();
 
   if (repEnds && n < 2)
       error("%s", _("there must be at least two control points"));
@@ -519,8 +502,8 @@ static void compute_closed_spline(int n, double *x, double *y, double *s,
 
   max_points = 0;
   npoints = 0;
-  xpoints = NULL;
-  ypoints = NULL;
+  xpoints.clear();
+  ypoints.clear();
 
   if (n < 3)
       error("%s", _("There must be at least three control points"));

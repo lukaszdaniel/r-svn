@@ -26,6 +26,7 @@
 
 #include <R_ext/Minmax.h>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include "ts.h"
 #include "statsR.h" // for getListElement
@@ -80,9 +81,9 @@ SEXP KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
     double *y = REAL(sy), *Z = REAL(sZ), *T = REAL(sT), *V = REAL(sV),
 	*P = REAL(sP), *a = REAL(sa), *Pnew = REAL(sPn), h = asReal(sh);
 
-    double *anew = (double *) R_alloc(p, sizeof(double));
-    double *M = (double *) R_alloc(p, sizeof(double));
-    double *mm = (double *) R_alloc(p * p, sizeof(double));
+    RAllocStack::Vector<double> anew(p);
+    RAllocStack::Vector<double> M(p);
+    RAllocStack::Vector<double> mm(p * p);
     // These are only used if(lop), but avoid -Wall trouble
     SEXP ans = R_NilValue, resid = R_NilValue, states = R_NilValue;
     if(lop) {
@@ -190,7 +191,7 @@ SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
     int n = LENGTH(sy), p = LENGTH(sa);
     double *y = REAL(sy), *Z = REAL(sZ), *a, *P,
 	*T = REAL(sT), *V = REAL(sV), h = asReal(sh), *Pnew;
-    double *at, *rt, *Pt, *gains, *resids, *Mt, *L, gn, *Nt;
+    double *at, gn, *Nt;
     bool var = true;
 
     PROTECT(ssa = duplicate(sa)); a = REAL(ssa);
@@ -208,16 +209,15 @@ SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
     SET_VECTOR_ELT(res, 1, sN = allocVector(REALSXP, n*p*p));
     Nt = REAL(sN);
 
-    double *anew, *mm, *M;
-    anew = (double *) R_alloc(p, sizeof(double));
-    M = (double *) R_alloc(p, sizeof(double));
-    mm = (double *) R_alloc(p * p, sizeof(double));
+    RAllocStack::Vector<double> anew(p);
+    RAllocStack::Vector<double> M(p);
+    RAllocStack::Vector<double> mm(p * p);
 
-    Pt = (double *) R_alloc(n * p * p, sizeof(double));
-    gains = (double *) R_alloc(n, sizeof(double));
-    resids = (double *) R_alloc(n, sizeof(double));
-    Mt = (double *) R_alloc(n * p, sizeof(double));
-    L = (double *) R_alloc(p * p, sizeof(double));
+    RAllocStack::Vector<double> Pt(n * p * p);
+    RAllocStack::Vector<double> gains(n);
+    RAllocStack::Vector<double> resids(n);
+    RAllocStack::Vector<double> Mt(n * p);
+    RAllocStack::Vector<double> L(p * p);
 
     for (int l = 0; l < n; l++) {
 	for (int i = 0; i < p; i++) {
@@ -276,7 +276,7 @@ SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
     }
 
     /* rt stores r_{t-1} */
-    rt = (double *) R_alloc(n * p, sizeof(double));
+    RAllocStack::Vector<double> rt(n * p);
     for (int l = n - 1; l >= 0; l--) {
 	if (!ISNAN(gains[l])) {
 	    gn = 1/gains[l];
@@ -373,11 +373,10 @@ SEXP KalmanFore(SEXP nahead, SEXP mod, SEXP update)
     int  n = asInteger(nahead), p = LENGTH(sa);
     double *Z = REAL(sZ), *a = REAL(sa), *P = REAL(sP), *T = REAL(sT),
 	*V = REAL(sV), h = asReal(sh);
-    double *mm, *anew, *Pnew;
 
-    anew = (double *) R_alloc(p, sizeof(double));
-    Pnew = (double *) R_alloc(p * p, sizeof(double));
-    mm = (double *) R_alloc(p * p, sizeof(double));
+    RAllocStack::Vector<double> anew(p);
+    RAllocStack::Vector<double> Pnew(p * p);
+    RAllocStack::Vector<double> mm(p * p);
     SEXP res, forecasts, se;
     PROTECT(res = allocVector(VECSXP, 2));
     SET_VECTOR_ELT(res, 0, forecasts = allocVector(REALSXP, n));
@@ -483,11 +482,11 @@ SEXP ARIMA_transPars(SEXP sin, SEXP sarma, SEXP strans)
     if (trans) {
 	int n = mp + mq + msp + msq;
 
-	params = (double *) R_alloc(n, sizeof(double));
+	RAllocStack::Vector<double> params(n);
 	for (i = 0; i < n; i++) params[i] = in[i];
-	if (mp > 0) partrans(mp, in, params);
+	if (mp > 0) partrans(mp, in, params.data());
 	v = mp + mq;
-	if (msp > 0) partrans(msp, in + v, params + v);
+	if (msp > 0) partrans(msp, in + v, params.data() + v);
     }
     if (ns > 0) {
 	/* expand out seasonal ARMA models */
@@ -606,14 +605,15 @@ SEXP ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
 	q = LENGTH(sTheta), d = LENGTH(sDelta), r = rd - d;
     double *y = REAL(sy), *a = REAL(sa), *P = REAL(sP), *Pnew = REAL(sPn);
     double *phi = REAL(sPhi), *theta = REAL(sTheta), *delta = REAL(sDelta);
-    double sumlog = 0.0, ssq = 0, *anew, *mm = NULL, *M;
+    double sumlog = 0.0, ssq = 0;
     int nu = 0;
     bool useResid = asBool(giveResid);
     double *rsResid = NULL /* -Wall */;
 
-    anew = (double *) R_alloc(rd, sizeof(double));
-    M = (double *) R_alloc(rd, sizeof(double));
-    if (d > 0) mm = (double *) R_alloc(rd * rd, sizeof(double));
+    RAllocStack::Vector<double> anew(rd);
+    RAllocStack::Vector<double> M(rd);
+    RAllocStack::Vector<double> mm;
+    if (d > 0) mm.resize(rd * rd);
 
     if (useResid) {
 	PROTECT(sResid = allocVector(REALSXP, n));
@@ -748,13 +748,13 @@ SEXP ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
 {
     SEXP res, sResid = R_NilValue;
     double ssq = 0.0, *y = REAL(sy), tmp;
-    double *phi = REAL(sPhi), *theta = REAL(sTheta), *w, *resid;
+    double *phi = REAL(sPhi), *theta = REAL(sTheta), *resid;
     int n = LENGTH(sy), *arma = INTEGER(sarma), p = LENGTH(sPhi),
 	q = LENGTH(sTheta), ncond = asInteger(sncond);
     int ns, nu = 0;
     bool useResid = asBool(giveResid);
 
-    w = (double *) R_alloc(n, sizeof(double));
+    RAllocStack::Vector<double> w(n);
     for (int l = 0; l < n; l++) w[l] = y[l];
     for (int i = 0; i < arma[5]; i++)
 	for (int l = n - 1; l > 0; l--) w[l] -= w[l - 1];
@@ -889,7 +889,7 @@ SEXP getQ0bis(SEXP sPhi, SEXP sTheta, SEXP sTol)
 #define _rrz(j)  rrz [j]
 #endif
 
-    double *ttheta = (double *) R_alloc(q + 1, sizeof(double));
+    RAllocStack::Vector<double> ttheta(q + 1);
     /* Init ttheta = c(1, theta) */
     ttheta[0] = 1.;
     for (i = 1; i < q + 1; ++i) ttheta[i] = theta[i - 1];
@@ -900,7 +900,7 @@ SEXP getQ0bis(SEXP sPhi, SEXP sTheta, SEXP sTol)
 	    sg = PROTECT(allocVector(REALSXP, r2));
 	double *gam = REAL(sgam);
 	double *g = REAL(sg);
-	double *tphi = (double *) R_alloc(p + 1, sizeof(double));
+	RAllocStack::Vector<double> tphi(p + 1);
 	/* Init tphi = c(1, -phi) */
 	tphi[0] = 1.;
 	for (i = 1; i < p + 1; ++i) tphi[i] = -phi[i - 1];
@@ -951,7 +951,7 @@ SEXP getQ0bis(SEXP sPhi, SEXP sTheta, SEXP sTol)
     /* forwardsolve(C1, g) */
     /* C[i,j] = tphi[i-j] */
     /* g[i] = _ttheta(i) */
-	double *rrz = (double *) R_alloc(q, sizeof(double));
+	RAllocStack::Vector<double> rrz(q);
 	if(q > 0) {
 	    for (i = 0; i < q; ++i) {
 		rrz[i] = _ttheta(i);
@@ -1006,12 +1006,11 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
        size_t and get more on a 64-bit system,
        but there seems no practical need. */
     if(r > 350) error("%s", _("maximum supported lag is 350"));
-    double *xnext, *xrow, *rbar, *thetab, *V;
-    xnext = (double *) R_alloc(np, sizeof(double));
-    xrow = (double *) R_alloc(np, sizeof(double));
-    rbar = (double *) R_alloc(nrbar, sizeof(double));
-    thetab = (double *) R_alloc(np, sizeof(double));
-    V = (double *) R_alloc(np, sizeof(double));
+    RAllocStack::Vector<double> xnext(np);
+    RAllocStack::Vector<double> xrow(np);
+    RAllocStack::Vector<double> rbar(nrbar);
+    RAllocStack::Vector<double> thetab(np);
+    RAllocStack::Vector<double> V(np);
     for (ind = 0, j = 0; j < r; j++) {
 	double vj = 0.0;
 	if (j == 0) vj = 1.0; else if (j - 1 < (size_t) q) vj = theta[j - 1];
@@ -1066,7 +1065,7 @@ SEXP getQ0(SEXP sPhi, SEXP sTheta)
 		xnext[npr] = -phii * phij;
 		if (++ind2 >= np) ind2 = 0;
 		xnext[ind2] += 1.0;
-		inclu2(np, xnext, xrow, ynext, P, rbar, thetab);
+		inclu2(np, xnext.data(), xrow.data(), ynext, P, rbar.data(), thetab.data());
 		xnext[ind2] = 0.0;
 		if (i != r - 1) {
 		    xnext[indi++] = 0.0;

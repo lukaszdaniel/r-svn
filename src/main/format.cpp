@@ -61,6 +61,7 @@
 
 #include <cfloat> /* for DBL_EPSILON */
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <Defn.h>
 #include <Rmath.h>
@@ -758,6 +759,7 @@ void Rf_formatComplex(const Rcomplex *x, R_xlen_t n,
     if (iposinf && *wi < 3) *wi = 3;
 
 #else // R >= 4.4.0 : no longer "tricky"
+    CXXR::RAllocStack::Scope rscope;
     double
 	*Re = (double *) R_alloc(n, sizeof(double)),
 	*Im = (double *) R_alloc(n, sizeof(double));
