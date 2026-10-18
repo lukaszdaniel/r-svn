@@ -77,6 +77,7 @@ namespace CXXR
         {
             return &value;
         }
+
         const_pointer address(const_reference value) const noexcept
         {
             return &value;
