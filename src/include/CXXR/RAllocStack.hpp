@@ -38,6 +38,7 @@
 #include <utility>
 #include <vector>
 #include <CXXR/config.hpp>
+#include <CXXR/Allocator.hpp>
 #include <R_ext/Memory.h>
 
 namespace CXXR
@@ -50,6 +51,10 @@ namespace CXXR
     class RAllocStack
     {
     public:
+        /** std::vector using CXXR::Allocator; its lifetime is controlled by the vector. */
+        template <typename T>
+        using Vector = std::vector<T, Allocator<T>>;
+
         /** @brief Schwarz counter.
          *
          * The Schwarz counter (see for example Stephen C. Dewhurst's

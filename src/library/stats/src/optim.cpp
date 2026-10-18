@@ -21,8 +21,6 @@
 #include <config.h>
 #endif
 
-#include <vector>
-#include <CXXR/Allocator.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
@@ -65,11 +63,11 @@ struct opt_struct
     GCRoot<> R_fcall;    /* function */
     GCRoot<> R_gcall;    /* gradient */
     SEXP R_env;      /* where to evaluate the calls */
-    std::vector<double, Allocator<double>> ndeps;   /* tolerances for numerical derivatives */
+    RAllocStack::Vector<double> ndeps;   /* tolerances for numerical derivatives */
     double fnscale;  /* scaling for objective */
-    std::vector<double, Allocator<double>> parscale;/* scaling for parameters */
+    RAllocStack::Vector<double> parscale;/* scaling for parameters */
     int usebounds;
-    std::vector<double, Allocator<double>> lower, upper;
+    RAllocStack::Vector<double> lower, upper;
     SEXP names;	     /* names for par */
 };
 using OptStruct = struct opt_struct *;
@@ -208,7 +206,6 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *tn;
 
     args = CDR(args);
-    CXXR::RAllocStack::Scope rscope;
     opt_struct OS_storage;
     OptStruct OS = &OS_storage;
     OS->usebounds = 0;
@@ -228,7 +225,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (MAYBE_REFERENCED(par))
     	par = duplicate(par);
     npar = LENGTH(par);
-    std::vector<double, Allocator<double>> dpar(npar);
+    RAllocStack::Vector<double> dpar(npar);
     trace = asInteger(getListElement(options, "trace"));
     OS->fnscale = asReal(getListElement(options, "fnscale"));
     tmp = getListElement(options, "parscale");
@@ -263,7 +260,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     if (streql(tn, "Nelder-Mead")) {
 	double alpha, beta, gamm;
-	std::vector<double, Allocator<double>> opar(npar);
+	RAllocStack::Vector<double> opar(npar);
 
 	alpha = asReal(getListElement(options, "alpha"));
 	beta = asReal(getListElement(options, "beta"));
@@ -309,16 +306,16 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    ndeps = RealVector::coerce(ndeps);
 	    for (int i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
 	}
-	int *mask = (int *) R_alloc(npar, sizeof(int));
+	RAllocStack::Vector<int> mask(npar);
 	for (int i = 0; i < npar; i++) mask[i] = 1;
-	vmmin(npar, dpar.data(), &val, fminfn, fmingr, maxit, trace, mask, abstol,
+	vmmin(npar, dpar.data(), &val, fminfn, fmingr, maxit, trace, mask.data(), abstol,
 	      reltol, nREPORT, (void *)OS, &fncount, &grcount, &ifail);
 	for (int i = 0; i < npar; i++)
 	    REAL(par)[i] = dpar[i] * (OS->parscale[i]);
     } else if (streql(tn, "CG")) {
 	int type;
 	GCStackRoot<> ndeps;
-	std::vector<double, Allocator<double>> opar(npar);
+	RAllocStack::Vector<double> opar(npar);
 
 	type = asInteger(getListElement(options, "type"));
 	if (!isNull(gr)) {
@@ -340,7 +337,8 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     } else if (streql(tn, "L-BFGS-B")) {
 	GCStackRoot<> ndeps, smsg;
-	int lmm, *nbd = (int *) R_alloc(npar, sizeof(int));
+	int lmm;
+	RAllocStack::Vector<int> nbd(npar);
 	double factr, pgtol;
 	char msg[60];
 
@@ -374,7 +372,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	}
 	OS->usebounds = 1;
-	lbfgsb(npar, lmm, dpar.data(), OS->lower.data(), OS->upper.data(), nbd, &val, fminfn, fmingr,
+	lbfgsb(npar, lmm, dpar.data(), OS->lower.data(), OS->upper.data(), nbd.data(), &val, fminfn, fmingr,
 	       &ifail, (void *)OS, factr, pgtol, &fncount, &grcount,
 	       maxit, msg, trace, nREPORT);
 	for (int i = 0; i < npar; i++)
@@ -436,11 +434,11 @@ SEXP optimhess(SEXP call, SEXP op, SEXP args, SEXP rho)
     ndeps = RealVector::coerce(ndeps);
     for (int i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
     ans = allocMatrix(REALSXP, npar, npar);
-    std::vector<double, Allocator<double>> dpar(npar);
+    RAllocStack::Vector<double> dpar(npar);
     for (int i = 0; i < npar; i++)
 	dpar[i] = REAL(par)[i] / (OS->parscale[i]);
-    std::vector<double, Allocator<double>> df1(npar);
-    std::vector<double, Allocator<double>> df2(npar);
+    RAllocStack::Vector<double> df1(npar);
+    RAllocStack::Vector<double> df2(npar);
     for (int i = 0; i < npar; i++) {
 	eps = OS->ndeps[i]/(OS->parscale[i]);
 	dpar[i] = dpar[i] + eps;

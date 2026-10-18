@@ -1799,6 +1799,7 @@ static char *SaveFontSpec(SEXP sxp, int offset)
  */
 static char* translateFontFamily(char* family, pX11Desc xd)
 {
+    CXXR::RAllocStack::Scope rscope; // SaveFontSpec uses R_alloc()
     CXXR::GCStackRoot<> graphicsNS, fontdb, fontnames;
     CXXR::GCStackRoot<> x11env;
     int nfonts;

@@ -31,6 +31,7 @@
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
@@ -128,11 +129,13 @@ static SEXP La_svd(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP vt)
 
     /* work on a copy of x  */
     double *xvals;
+    RAllocStack::Vector<double> xvalsStorage;
     if (!isReal(x)) {
 	x = PROTECT(RealVector::coerce(x)); nprot++;
 	xvals = REAL(x);
     } else {
-	xvals = (double *) R_alloc(n * (size_t) p, sizeof(double));
+	xvalsStorage.resize(n * (size_t) p);
+	xvals = xvalsStorage.data();
 	Memcpy(xvals, REAL(x), n * (size_t) p);
     }
 
@@ -144,7 +147,8 @@ static SEXP La_svd(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP vt)
     int ldvt = INTEGER(dims)[0];
     double tmp;
     /* min(n,p) large is implausible, but cast to be sure */
-    int *iwork= (int *) R_alloc(8*(size_t)(n < p ? n : p), sizeof(int));
+    RAllocStack::Vector<int> iworkStorage(8*(size_t)(n < p ? n : p));
+    int *iwork = iworkStorage.data();
 
     /* ask for optimal size of work array */
     const char *ju = CHAR(STRING_ELT(jobu, 0));
@@ -155,7 +159,8 @@ static SEXP La_svd(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP vt)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dgesdd");
     lwork = (int) tmp;
-    double *work = (double *) R_alloc(lwork, sizeof(double));
+    RAllocStack::Vector<double> workStorage(lwork);
+    double *work = workStorage.data();
     F77_CALL(dgesdd)(ju, &n, &p, xvals, &n, REAL(s),
 		     REAL(u), &ldu, REAL(vt), &ldvt,
 		     work, &lwork, iwork, &info FCONE);
@@ -196,11 +201,13 @@ static SEXP La_rs(SEXP x, SEXP only_values)
     if (ov) jobv[0] = 'N'; else jobv[0] = 'V';
 
     /* work on a copy of x, since LAPACK trashes it */
+    RAllocStack::Vector<double> rxStorage;
     if (!isReal(x)) {
 	x = RealVector::coerce(x);
 	rx = REAL(x);
     } else {
-	rx = (double *) R_alloc(n * (size_t) n, sizeof(double));
+	rxStorage.resize(n * (size_t) n);
+	rx = rxStorage.data();
 	Memcpy(rx, REAL(x), (size_t) n * n);
     }
     PROTECT(x);
@@ -211,7 +218,8 @@ static SEXP La_rs(SEXP x, SEXP only_values)
 	z = PROTECT(allocMatrix(REALSXP, n, n));
 	rz = REAL(z);
     }
-    isuppz = (int *) R_alloc(2*(size_t)n, sizeof(int));
+    RAllocStack::Vector<int> isuppzStorage(2*(size_t)n);
+    isuppz = isuppzStorage.data();
     /* ask for optimal size of work arrays */
     lwork = -1; liwork = -1;
     F77_CALL(dsyevr)(jobv, range, uplo, &n, rx, &n,
@@ -223,8 +231,10 @@ static SEXP La_rs(SEXP x, SEXP only_values)
     lwork = (int) tmp;
     liwork = itmp;
 
-    work = (double *) R_alloc(lwork, sizeof(double));
-    iwork = (int *) R_alloc(liwork, sizeof(int));
+    RAllocStack::Vector<double> workStorage(lwork);
+    RAllocStack::Vector<int> iworkStorage(liwork);
+    work = workStorage.data();
+    iwork = iworkStorage.data();
     F77_CALL(dsyevr)(jobv, range, uplo, &n, rx, &n,
 		     &vl, &vu, &il, &iu, &abstol, &m, rvalues,
 		     rz, &n, isuppz,
@@ -286,23 +296,28 @@ static SEXP La_rg(SEXP x, SEXP only_values)
 	error("%s", _("'x' must be a square numeric matrix"));
 
     /* work on a copy of x */
+    RAllocStack::Vector<double> xvalsStorage;
     if (!isReal(x)) {
 	x = RealVector::coerce(x);
 	xvals = REAL(x);
     } else {
-	xvals = (double *) R_alloc(n * (size_t)n, sizeof(double));
+	xvalsStorage.resize(n * (size_t)n);
+	xvals = xvalsStorage.data();
 	Memcpy(xvals, REAL(x), (size_t) n * n);
     }
     PROTECT(x);
 
     bool vectors = !asLogicalNoNA(only_values, "only.values");
     left = right = (double *) 0;
+    RAllocStack::Vector<double> rightStorage;
     if (vectors) {
 	jobVR[0] = 'V';
-	right = (double *) R_alloc(n * (size_t)n, sizeof(double));
+	rightStorage.resize(n * (size_t)n);
+	right = rightStorage.data();
     }
-    wR = (double *) R_alloc(n, sizeof(double));
-    wI = (double *) R_alloc(n, sizeof(double));
+    RAllocStack::Vector<double> wRStorage(n), wIStorage(n);
+    wR = wRStorage.data();
+    wI = wIStorage.data();
     /* ask for optimal size of work array */
     lwork = -1;
     F77_CALL(dgeev)(jobVL, jobVR, &n, xvals, &n, wR, wI,
@@ -310,7 +325,8 @@ static SEXP La_rg(SEXP x, SEXP only_values)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dgeev");
     lwork = (int) tmp;
-    work = (double *) R_alloc(lwork, sizeof(double));
+    RAllocStack::Vector<double> workStorage(lwork);
+    work = workStorage.data();
     F77_CALL(dgeev)(jobVL, jobVR, &n, xvals, &n, wR, wI,
 		    left, &n, right, &n, work, &lwork, &info FCONE FCONE);
     if (info != 0)
@@ -356,6 +372,7 @@ static SEXP La_dlange(SEXP A, SEXP type)
 {
     int *xdims, m, n, nprot = 1;
     double *work = NULL;
+    RAllocStack::Vector<double> workStorage;
     char typNorm[] = {'\0', '\0'};
 
     if (!isMatrix(A)) error(_("'%s' must be a numeric matrix"), "A");
@@ -371,7 +388,10 @@ static SEXP La_dlange(SEXP A, SEXP type)
     typNorm[0] = La_norm_type(CHAR(asChar(type)));
 
     SEXP val = PROTECT(RealVector::create(1));
-    if(*typNorm == 'I') work = (double *) R_alloc(m, sizeof(double));
+    if(*typNorm == 'I') {
+	workStorage.resize(m);
+	work = workStorage.data();
+    }
     REAL(val)[0] = F77_CALL(dlange)(typNorm, &m, &n, REAL(A), &m, work FCONE);
 
     UNPROTECT(nprot);
@@ -397,9 +417,11 @@ static SEXP La_dgecon(SEXP A, SEXP norm)
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
     SEXP val = PROTECT(RealVector::create(1));
-    work = (double *) R_alloc((*typNorm == 'I' && (size_t) m > 4*(size_t)n) ? m : 4*(size_t)n,
-			      sizeof(double));
-    iwork = (int *) R_alloc(m, sizeof(int));
+    RAllocStack::Vector<double> workStorage(
+	(*typNorm == 'I' && (size_t) m > 4*(size_t)n) ? m : 4*(size_t)n);
+    RAllocStack::Vector<int> iworkStorage(m);
+    work = workStorage.data();
+    iwork = iworkStorage.data();
 
     anorm = F77_CALL(dlange)(typNorm, &m, &n, REAL(A), &m, work FCONE);
 
@@ -457,11 +479,13 @@ static SEXP La_dtrcon3(SEXP A, SEXP norm, SEXP uplo)
 
     nprot++;
     SEXP val = PROTECT(RealVector::create(1));
+    RAllocStack::Vector<double> workStorage(3*(size_t)n);
+    RAllocStack::Vector<int> iworkStorage(n);
 
     F77_CALL(dtrcon)(typNorm, uploC, "N", &n, REAL(A), &n,
 		     REAL(val),
-		     /* work : */ (double *) R_alloc(3*(size_t)n, sizeof(double)),
-		     /* iwork: */ (int *)    R_alloc(n, sizeof(int)),
+		     /* work : */ workStorage.data(),
+		     /* iwork: */ iworkStorage.data(),
 		     &info FCONE FCONE FCONE);
     UNPROTECT(nprot);
     if (info) error(_("error [%d] from Lapack 'dtrcon()'"), info);
@@ -492,11 +516,13 @@ static SEXP La_dtrcon(SEXP A, SEXP norm)
 
     nprot++;
     SEXP val = PROTECT(RealVector::create(1));
+    RAllocStack::Vector<double> workStorage(3*(size_t)n);
+    RAllocStack::Vector<int> iworkStorage(n);
 
     F77_CALL(dtrcon)(typNorm, "U", "N", &n, REAL(A), &n,
 		     REAL(val),
-		     /* work : */ (double *) R_alloc(3*(size_t)n, sizeof(double)),
-		     /* iwork: */ (int *)    R_alloc(n, sizeof(int)),
+		     /* work : */ workStorage.data(),
+		     /* iwork: */ iworkStorage.data(),
 		     &info FCONE FCONE FCONE);
     UNPROTECT(nprot);
     if (info) error(_("error code %d from Lapack routine '%s'"), info, "dtrcon()");
@@ -510,6 +536,7 @@ static SEXP La_zlange(SEXP A, SEXP type)
 #ifdef HAVE_FORTRAN_DOUBLE_COMPLEX
     int *xdims, m, n;
     double *work = NULL;
+    RAllocStack::Vector<double> workStorage;
     char typNorm[] = {'\0', '\0'};
 
     if (!(isMatrix(A) && isComplex(A)))
@@ -523,7 +550,10 @@ static SEXP La_zlange(SEXP A, SEXP type)
     typNorm[0] = La_norm_type(CHAR(asChar(type)));
 
     SEXP val = PROTECT(RealVector::create(1));
-    if(*typNorm == 'I') work = (double *) R_alloc((size_t)m, sizeof(Rcomplex));
+    if(*typNorm == 'I') {
+	workStorage.resize(m);
+	work = workStorage.data();
+    }
     REAL(val)[0] = F77_CALL(zlange)(typNorm, &m, &n, COMPLEX(A), &m, work FCONE);
 
     UNPROTECT(1);
@@ -556,15 +586,18 @@ static SEXP La_zgecon(SEXP A, SEXP norm)
 
     SEXP val = PROTECT(RealVector::create(1));
 
-    rwork = (double *) R_alloc(2*(size_t)n, sizeof(Rcomplex));
+    RAllocStack::Vector<double> rworkStorage(2*(size_t)n);
+    rwork = rworkStorage.data();
     anorm = F77_CALL(zlange)(typNorm, &n, &n, COMPLEX(A), &n, rwork FCONE);
 
     /* Compute the LU-decomposition and overwrite 'x' with result;
      * working on a copy of A : */
-    avals = (Rcomplex *) R_alloc((size_t)n * n, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> avalsStorage((size_t)n * n);
+    avals = avalsStorage.data();
     Memcpy(avals, COMPLEX(A), (size_t) n * n);
+    RAllocStack::Vector<int> iworkStorage(n);
     F77_CALL(zgetrf)(&n, &n, avals, &n,
-		     /* iwork: */(int *) R_alloc(n, sizeof(int)),
+		     /* iwork: */iworkStorage.data(),
 		     &info);
     if (info) {
 	if (info < 0) {
@@ -577,9 +610,10 @@ static SEXP La_zgecon(SEXP A, SEXP norm)
 	}
     }
 
+    RAllocStack::Vector<Rcomplex> workStorage(4*(size_t)n);
     F77_CALL(zgecon)(typNorm, &n, avals, &n, &anorm,
 		     /* rcond = */ REAL(val),
-		     /* work : */ (Rcomplex *) R_alloc(4*(size_t)n, sizeof(Rcomplex)),
+		     /* work : */ workStorage.data(),
 		     rwork, &info FCONE);
     UNPROTECT(1);
     if (info) error(_("error code %d from Lapack routine '%s'"), info, "zgecon()");
@@ -611,11 +645,13 @@ static SEXP La_ztrcon(SEXP A, SEXP norm)
     typNorm[0] = La_rcond_type(CHAR(asChar(norm)));
 
     val = PROTECT(RealVector::create(1));
+    RAllocStack::Vector<Rcomplex> workStorage(2*(size_t)n);
+    RAllocStack::Vector<double> rworkStorage(n);
 
     F77_CALL(ztrcon)(typNorm, "U", "N", &n, COMPLEX(A), &n,
 		     REAL(val),
-		     /* work : */ (Rcomplex *) R_alloc(2*(size_t)n, sizeof(Rcomplex)),
-		     /* rwork: */ (double *)   R_alloc(n, sizeof(double)),
+		     /* work : */ workStorage.data(),
+		     /* rwork: */ rworkStorage.data(),
 		     &info FCONE FCONE FCONE);
     UNPROTECT(1);
     if (info) error(_("error code %d from Lapack routine '%s'"), info, "ztrcon()");
@@ -648,11 +684,13 @@ static SEXP La_ztrcon3(SEXP A, SEXP norm, SEXP uplo)
     uploC  [0] = La_valid_uplo(CHAR(asChar(uplo)));
 
     val = PROTECT(RealVector::create(1));
+    RAllocStack::Vector<Rcomplex> workStorage(2*(size_t)n);
+    RAllocStack::Vector<double> rworkStorage(n);
 
     F77_CALL(ztrcon)(typNorm, uploC, "N", &n, COMPLEX(A), &n,
 		     REAL(val),
-		     /* work : */ (Rcomplex *) R_alloc(2*(size_t)n, sizeof(Rcomplex)),
-		     /* rwork: */ (double *)   R_alloc(n, sizeof(double)),
+		     /* work : */ workStorage.data(),
+		     /* rwork: */ rworkStorage.data(),
 		     &info FCONE FCONE FCONE);
     UNPROTECT(1);
     if (info) error(_("error [%d] from Lapack 'ztrcon()'"), info);
@@ -709,14 +747,17 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
     Bin = PROTECT(ComplexVector::coerce(Bin));
     Memcpy(COMPLEX(B), COMPLEX(Bin), nl * p);
 
-    ipiv = (int *) R_alloc(n, sizeof(int));
+    RAllocStack::Vector<int> ipivStorage(n);
+    ipiv = ipivStorage.data();
 
     /* work on a copy of A */
+    RAllocStack::Vector<Rcomplex> avalsStorage;
     if(TYPEOF(A) != CPLXSXP) {
 	A = ComplexVector::coerce(A);
 	avals = COMPLEX(A);
     } else {
-	avals = (Rcomplex *) R_alloc(nl * nl, sizeof(Rcomplex));
+	avalsStorage.resize(nl * nl);
+	avals = avalsStorage.data();
 	Memcpy(avals, COMPLEX(A), nl * nl);
     }
     PROTECT(A);
@@ -735,10 +776,11 @@ static SEXP La_solve_cmplx(SEXP A, SEXP Bin, SEXP tolin)
 	char one[2] = "1";
 	double anorm = F77_CALL(zlange)(one, &n, &n, COMPLEX(A), &n,
 					(double*) NULL FCONE);
-	Rcomplex *work = (Rcomplex *) R_alloc(2*nl, sizeof(Rcomplex));
-	double *rwork = (double *) R_alloc(2*nl, sizeof(double));
+	RAllocStack::Vector<Rcomplex> workStorage(2*nl);
+	RAllocStack::Vector<double> rworkStorage(2*nl);
 	double rcond;
-	F77_CALL(zgecon)(one, &n, avals, &n, &anorm, &rcond, work, rwork,
+	F77_CALL(zgecon)(one, &n, avals, &n, &anorm, &rcond,
+			 workStorage.data(), rworkStorage.data(),
 			 &info FCONE);
 	if (rcond < tol)
 	    error(_("system is computationally singular: reciprocal condition number = %g"),
@@ -767,7 +809,8 @@ static SEXP La_qr_cmplx(SEXP Ain)
     m = Adims[0]; n = Adims[1];
     SEXP A = PROTECT(allocMatrix(CPLXSXP, m, n));
     Memcpy(COMPLEX(A), COMPLEX(Ain), (size_t)m * n);
-    rwork = (double *) R_alloc(2*(size_t)n, sizeof(double));
+    RAllocStack::Vector<double> rworkStorage(2*(size_t)n);
+    rwork = rworkStorage.data();
 
     SEXP jpvt = PROTECT(IntVector::create(n));
     for (i = 0; i < n; i++) INTEGER(jpvt)[i] = 0;
@@ -778,7 +821,8 @@ static SEXP La_qr_cmplx(SEXP Ain)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "zgeqp3");
     lwork = (int) tmp.r;
-    work = (Rcomplex *) R_alloc(lwork, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> workStorage(lwork);
+    work = workStorage.data();
     F77_CALL(zgeqp3)(&m, &n, COMPLEX(A), &m, INTEGER(jpvt), COMPLEX(tau),
 		     work, &lwork, rwork, &info);
     if (info != 0)
@@ -838,7 +882,8 @@ static SEXP qr_coef_cmplx(SEXP Q, SEXP Bin)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr");
     lwork = (int) tmp.r;
-    work = (Rcomplex *) R_alloc(lwork, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> workStorage(lwork);
+    work = workStorage.data();
     F77_CALL(zunmqr)("L", "C", &n, &nrhs, &k,
 		     COMPLEX(qr), &n, COMPLEX(tau), COMPLEX(B), &n,
 		     work, &lwork, &info FCONE FCONE);
@@ -884,7 +929,8 @@ static SEXP qr_qy_cmplx(SEXP Q, SEXP Bin, SEXP trans)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "zunmqr");
     lwork = (int) tmp.r;
-    work = (Rcomplex *) R_alloc(lwork, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> workStorage(lwork);
+    work = workStorage.data();
     F77_CALL(zunmqr)("L", tr ? "C" : "N", &n, &nrhs, &k,
 		     COMPLEX(qr), &n, COMPLEX(tau), COMPLEX(B), &n,
 		     work, &lwork, &info FCONE FCONE);
@@ -912,17 +958,20 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
 	error("%s", _("matrices of 2^31 or more elements are not supported"));
 
     /* work on a copy of x */
-    Rcomplex *xvals = (Rcomplex *) R_alloc(n * (size_t) p, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> xvalsStorage(n * (size_t) p);
+    Rcomplex *xvals = xvalsStorage.data();
     Memcpy(xvals, COMPLEX(x), n * (size_t) p);
 
-    int *iwork= (int *) R_alloc(8*(size_t)(n < p ? n : p), sizeof(int));
+    RAllocStack::Vector<int> iworkStorage(8*(size_t)(n < p ? n : p));
+    int *iwork = iworkStorage.data();
     size_t mn0 = (n < p ? n : p), mn1 = (n > p ? n : p), lrwork;
     if (!streql(jz, "N")) {
 	size_t f1 = 5 * mn1 + 7, f2 = 2 * mn1 + 2 * mn0 + 1;
 	lrwork = (f1 > f2 ? f1 : f2) * mn0;
 	// 7 replaces 5: bug 111 in http://www.netlib.org/lapack/Errata/index2.html
     } else lrwork = 7 * mn0;
-    double *rwork  = (double *) R_alloc(lrwork, sizeof(double));
+    RAllocStack::Vector<double> rworkStorage(lrwork);
+    double *rwork = rworkStorage.data();
     /* ask for optimal size of lwork array */
     int lwork = -1, info;
     Rcomplex tmp;
@@ -939,7 +988,8 @@ static SEXP La_svd_cmplx(SEXP jobu, SEXP x, SEXP s, SEXP u, SEXP v)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "zgesdd");
     lwork = (int) tmp.r;
-    Rcomplex *work = (Rcomplex *) R_alloc(lwork, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> workStorage(lwork);
+    Rcomplex *work = workStorage.data();
     F77_CALL(zgesdd)(jz, &n, &p, xvals, &n, REAL(s),
 		     COMPLEX(u), &ldu, COMPLEX(v), &ldv,
 		     work, &lwork, rwork, iwork, &info FCONE);
@@ -984,8 +1034,9 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
     SEXP values = PROTECT(RealVector::create(n));
     rvalues = REAL(values);
 
-    rwork = (double *) R_alloc((3*(size_t)n-2) > 1 ? 3*(size_t)n-2 : 1,
-			       sizeof(double));
+    RAllocStack::Vector<double> rworkStorage(
+	(3*(size_t)n-2) > 1 ? 3*(size_t)n-2 : 1);
+    rwork = rworkStorage.data();
     /* ask for optimal size of work array */
     lwork = -1;
     F77_CALL(zheev)(jobv, uplo, &n, rx, &n, rvalues, &tmp, &lwork, rwork,
@@ -993,7 +1044,8 @@ static SEXP La_rs_cmplx(SEXP xin, SEXP only_values)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "zheev");
     lwork = (int) tmp.r;
-    work = (Rcomplex *) R_alloc(lwork, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> workStorage(lwork);
+    work = workStorage.data();
     F77_CALL(zheev)(jobv, uplo, &n, rx, &n, rvalues, work, &lwork, rwork,
 		    &info FCONE FCONE);
     if (info != 0)
@@ -1034,7 +1086,8 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
     if (n != xdims[1]) error("%s", _("'x' must be a square numeric matrix"));
 
     /* work on a copy of x */
-    xvals = (Rcomplex *) R_alloc((size_t)n * n, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> xvalsStorage((size_t)n * n);
+    xvals = xvalsStorage.data();
     Memcpy(xvals, COMPLEX(x), (size_t) n * n);
     bool ov = asLogicalNoNA(only_values, "only.values");
     left = right = (Rcomplex *) 0;
@@ -1044,7 +1097,8 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
 	right = COMPLEX(val);
     }
     PROTECT(values = ComplexVector::create(n));
-    rwork = (double *) R_alloc(2*(size_t)n, sizeof(double));
+    RAllocStack::Vector<double> rworkStorage(2*(size_t)n);
+    rwork = rworkStorage.data();
     /* ask for optimal size of work array */
     lwork = -1;
     F77_CALL(zgeev)(jobVL, jobVR, &n, xvals, &n, COMPLEX(values),
@@ -1053,7 +1107,8 @@ static SEXP La_rg_cmplx(SEXP x, SEXP only_values)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "zgeev");
     lwork = (int) tmp.r;
-    work = (Rcomplex *) R_alloc(lwork, sizeof(Rcomplex));
+    RAllocStack::Vector<Rcomplex> workStorage(lwork);
+    work = workStorage.data();
     F77_CALL(zgeev)(jobVL, jobVR, &n, xvals, &n, COMPLEX(values),
 		    left, &n, right, &n, work, &lwork, rwork, &info
 		    FCONE FCONE);
@@ -1113,7 +1168,8 @@ static SEXP La_chol(SEXP A, SEXP pivot, SEXP stol)
 	double tol = asReal(stol);
 	SEXP piv = PROTECT(IntVector::create(m));
 	int *ip = INTEGER(piv);
-	double *work = (double *) R_alloc(2 * (size_t)m, sizeof(double));
+	RAllocStack::Vector<double> workStorage(2 * (size_t)m);
+	double *work = workStorage.data();
 	int rank, info;
 	F77_CALL(dpstrf)("U", &m, REAL(ans), &m, ip, &rank, &tol, work, &info
 			 FCONE);
@@ -1259,14 +1315,17 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
     PROTECT(Bin = RealVector::coerce(Bin));
     Memcpy(REAL(B), REAL(Bin), nl * p);
 
-    int *ipiv = (int *) R_alloc(n, sizeof(int));
+    RAllocStack::Vector<int> ipivStorage(n);
+    int *ipiv = ipivStorage.data();
 
     /* work on a copy of A */
+    RAllocStack::Vector<double> avalsStorage;
     if (!isReal(A)) {
 	A = RealVector::coerce(A);
 	avals = REAL(A);
     } else {
-	avals = (double *) R_alloc(nl * nl, sizeof(double));
+	avalsStorage.resize(nl * nl);
+	avals = avalsStorage.data();
 	Memcpy(avals, REAL(A), nl * nl);
     }
     PROTECT(A);
@@ -1287,8 +1346,9 @@ static SEXP La_solve(SEXP A, SEXP Bin, SEXP tolin)
 	double rcond;
 	double anorm = F77_CALL(dlange)(one, &n, &n, REAL(A), &n,
 					(double*) NULL FCONE);
-	double *work = (double *) R_alloc(4*nl, sizeof(double));
-	F77_CALL(dgecon)(one, &n, avals, &n, &anorm, &rcond, work, ipiv,
+	RAllocStack::Vector<double> workStorage(4*nl);
+	F77_CALL(dgecon)(one, &n, avals, &n, &anorm, &rcond,
+			 workStorage.data(), ipiv,
 			 &info FCONE);
 	if (rcond < tol)
 	    error(_("system is computationally singular: reciprocal condition number = %g"),
@@ -1324,7 +1384,8 @@ static SEXP La_qr(SEXP Ain)
     if (info < 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dgeqp3");
     lwork = (int) tmp;
-    double *work = (double *) R_alloc(lwork, sizeof(double));
+    RAllocStack::Vector<double> workStorage(lwork);
+    double *work = workStorage.data();
     F77_CALL(dgeqp3)(&m, &n, REAL(A), &m, INTEGER(jpvt), REAL(tau),
 		     work, &lwork, &info);
     if (info < 0)
@@ -1376,7 +1437,8 @@ static SEXP qr_coef_real(SEXP Q, SEXP Bin)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr [tmp]");
     lwork = (int) tmp;
-    double *work = (double *) R_alloc(lwork, sizeof(double));
+    RAllocStack::Vector<double> workStorage(lwork);
+    double *work = workStorage.data();
     F77_CALL(dormqr)("L", "T", &n, &nrhs, &k,
 		     REAL(qr), &n, REAL(tau), REAL(B), &n,
 		     work, &lwork, &info FCONE FCONE);
@@ -1415,7 +1477,8 @@ static SEXP qr_qy_real(SEXP Q, SEXP Bin, SEXP trans)
     if (info != 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dormqr");
     lwork = (int) tmp;
-    work = (double *) R_alloc(lwork, sizeof(double));
+    RAllocStack::Vector<double> workStorage(lwork);
+    work = workStorage.data();
     F77_CALL(dormqr)("L", tr ? "T" : "N", &n, &nrhs, &k,
 		     REAL(qr), &n, REAL(tau), REAL(B), &n,
 		     work, &lwork, &info FCONE FCONE);
@@ -1437,7 +1500,8 @@ static SEXP det_ge_real(SEXP Ain, SEXP logarithm)
     int *Adims = INTEGER(IntVector::coerce(getAttrib(Ain, R_DimSymbol)));
     int n = Adims[0];
     if (Adims[1] != n) error("%s", _("'a' must be a square matrix"));
-    int *jpvt = (int *) R_alloc(n, sizeof(int));
+    RAllocStack::Vector<int> jpvtStorage(n);
+    int *jpvt = jpvtStorage.data();
     F77_CALL(dgetrf)(&n, &n, REAL(A), &n, jpvt, &info);
     if (info < 0)
 	error(_("error code %d from Lapack routine '%s'"), info, "dgetrf");

@@ -714,6 +714,7 @@ attribute_hidden SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     xi = CAR(args);
+    CXXR::RAllocStack::Scope rscope;
     // NB: long vectors are not supported for input
     if ( !isInteger(xi) || !(nx = LENGTH(xi)) )
 	error(_("invalid '%s' argument"), "xinds");
@@ -811,6 +812,7 @@ static SEXP intern_getwd(void)
     {
 	DWORD res = GetCurrentDirectoryW(0, NULL);
 	if (res > 0) {
+	    CXXR::RAllocStack::Scope rscope;
 	    wchar_t *wbuf = (wchar_t*)R_alloc(res, sizeof(wchar_t));
 	    DWORD res1 = GetCurrentDirectoryW(res, wbuf);
 	    if (res1 <= 0 || res1 >= res)
@@ -970,6 +972,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
     s = CAR(args);
+    CXXR::RAllocStack::Scope rscope;
     if (TYPEOF(s) != STRSXP)
 	error("%s", _("a character vector argument expected"));
     PROTECT(ans = StringVector::create(n = LENGTH(s)));
@@ -2071,6 +2074,7 @@ int Rf_utf8toAdobeSymbol(char *out, const char *in) {
     int *symbolint;
     const char *s = in;
     const char *p = in;
+    CXXR::RAllocStack::Scope rscope;
     for ( ; *p; p += utf8clen(*p)) nc++;
     symbolint = (int *) R_alloc(nc, sizeof(int));
     for (i = 0, j = 0; i < nc; i++, j++) {
@@ -3015,6 +3019,7 @@ attribute_hidden SEXP do_formatC(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
     SEXP x = CAR(args); args = CDR(args);
+    CXXR::RAllocStack::Scope rscope;
     if (!isVector(x)) error("%s", _("'x' must be a vector"));
     R_xlen_t n = XLENGTH(x);
     const char *type = CHAR(STRING_ELT(CAR(args), 0)); args = CDR(args);

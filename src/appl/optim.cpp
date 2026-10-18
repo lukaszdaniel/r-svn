@@ -21,8 +21,6 @@
 #include <config.h>
 #endif
 
-#include <vector>
-#include <CXXR/Allocator.hpp>
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
@@ -43,11 +41,11 @@ struct opt_struct
     GCRoot<> R_fcall;    /* function */
     GCRoot<> R_gcall;    /* gradient */
     SEXP R_env;      /* where to evaluate the calls */
-    std::vector<double, Allocator<double>> ndeps;   /* tolerances for numerical derivatives */
+    RAllocStack::Vector<double> ndeps;   /* tolerances for numerical derivatives */
     double fnscale;  /* scaling for objective */
-    std::vector<double, Allocator<double>> parscale;/* scaling for parameters */
+    RAllocStack::Vector<double> parscale;/* scaling for parameters */
     int usebounds;
-    std::vector<double, Allocator<double>> lower, upper;
+    RAllocStack::Vector<double> lower, upper;
     SEXP names;	     /* names for par */
 };
 using OptStruct = struct opt_struct *;
@@ -81,19 +79,21 @@ static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 }
 
 
-static double **matrix(int nrh, int nch)
+static RAllocStack::Vector<RAllocStack::Vector<double>> matrix(int nrh, int nch)
 {
-    double **m = (double **) R_alloc((nrh + 1), sizeof(double *));
+    RAllocStack::Vector<RAllocStack::Vector<double>> m;
+    m.reserve(nrh + 1);
     for (int i = 0; i <= nrh; i++)
-	m[i] = (double*) R_alloc((nch + 1), sizeof(double));
+	m.emplace_back(nch + 1);
     return m;
 }
 
-static double **Lmatrix(int n)
+static RAllocStack::Vector<RAllocStack::Vector<double>> Lmatrix(int n)
 {
-    double **m = (double **) R_alloc(n, sizeof(double *));
+    RAllocStack::Vector<RAllocStack::Vector<double>> m;
+    m.reserve(n);
     for (int i = 0; i < n; i++)
-	m[i] = (double *) R_alloc((i + 1), sizeof(double));
+	m.emplace_back(i + 1);
     return m;
 }
 
@@ -114,15 +114,13 @@ void vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
       int *fncount, int *grcount, int *fail)
 {
     bool accpoint, enough;
-    double **B;
     int   count, funcount, gradcount;
     double f, gradproj;
     int   i, j, ilast, iter = 0;
     double s, steplength;
     double D1, D2;
-    int   n, *l;
+    int   n;
 
-    CXXR::RAllocStack::Scope rscope;
     if (maxit <= 0) {
 	*fail = 0;
 	*Fmin = fminfn(n0, b, ex);
@@ -132,14 +130,14 @@ void vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
 
     if (nREPORT <= 0)
 	error("%s", _("REPORT must be > 0 (method = \"BFGS\")"));
-    l = (int *) R_alloc(n0, sizeof(int));
+    RAllocStack::Vector<int> l(n0);
     n = 0;
     for (i = 0; i < n0; i++) if (mask[i]) l[n++] = i;
-    std::vector<double, Allocator<double>> g(n0);
-    std::vector<double, Allocator<double>> t(n);
-    std::vector<double, Allocator<double>> X(n);
-    std::vector<double, Allocator<double>> c(n);
-    B = Lmatrix(n);
+    RAllocStack::Vector<double> g(n0);
+    RAllocStack::Vector<double> t(n);
+    RAllocStack::Vector<double> X(n);
+    RAllocStack::Vector<double> c(n);
+    RAllocStack::Vector<RAllocStack::Vector<double>> B = Lmatrix(n);
     f = fminfn(n0, b, ex);
     if (!R_FINITE(f))
 	error("%s", _("initial value in 'vmmin' is not finite"));
@@ -268,7 +266,6 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
 	   double alpha, double bet, double gamm, int trace,
 	   int *fncount, int maxit)
 {
-    CXXR::RAllocStack::Scope rscope;
     char action[50];
     int C;
     bool calcvert;
@@ -276,7 +273,6 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
     int funcount=0, H, i, j, L=0;
     int n1=0;
     double oldsize;
-    double **P;
     double size, step, temp, trystep;
     char tstr[12]; // allow for 10^8 iters and pacify gcc7
     double VH, VL, VR;
@@ -289,7 +285,7 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
     }
     if (trace)
 	Rprintf("  Nelder-Mead direct search function minimizer\n");
-    P = matrix(n, n+1);
+    RAllocStack::Vector<RAllocStack::Vector<double>> P = matrix(n, n+1);
     *fail = false;
     f = fminfn(n, Bvec, ex);
     if (!R_FINITE(f)) {
@@ -495,9 +491,9 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 	    error("%s", _("unknown type in \"CG\" method of 'optim'"));
 	}
     }
-    std::vector<double, Allocator<double>> c(n);
-    std::vector<double, Allocator<double>> g(n);
-    std::vector<double, Allocator<double>> t(n);
+    RAllocStack::Vector<double> c(n);
+    RAllocStack::Vector<double> g(n);
+    RAllocStack::Vector<double> t(n);
 
     setstep = 1.7;
     *fail = 0;
@@ -645,10 +641,9 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 	    int *fncount, int *grcount, int maxit, char *msg,
 	    int trace, int nREPORT)
 {
-    CXXR::RAllocStack::Scope rscope;
     char task[60];
-    double f, *wa;
-    int tr = -1, iter = 0, *iwa, isave[21];
+    double f;
+    int tr = -1, iter = 0, isave[21];
     isave[12] = 0; // -Wall
 
     if(n == 0) { /* not handled in setulb */
@@ -671,13 +666,13 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
     }
 
     *fail = 0;
-    std::vector<double, Allocator<double>> g(n);
+    RAllocStack::Vector<double> g(n);
     /* this needs to be zeroed for snd in mainlb to be zeroed */
-    wa = (double *) S_alloc(2*m*n+4*n+11*m*m+8*m, sizeof(double));
-    iwa = (int *) R_alloc(3*n, sizeof(int));
+    RAllocStack::Vector<double> wa(2*m*n+4*n+11*m*m+8*m, 0.0);
+    RAllocStack::Vector<int> iwa(3 * n);
     strcpy(task, "START");
     while(1) {
-	setulb(n, m, x, l, u, nbd, &f, g.data(), factr, &pgtol, wa, iwa, task,
+	setulb(n, m, x, l, u, nbd, &f, g.data(), factr, &pgtol, wa.data(), iwa.data(), task,
 	       tr, isave);
 /*	Rprintf("in lbfgsb - %s\n", task);*/
 	if (streqln(task, "FG", 2)) {
@@ -743,8 +738,8 @@ void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
 	*yb = fminfn(n, pb, ex);
 	return;
     }
-    std::vector<double, Allocator<double>> p(n);
-    std::vector<double, Allocator<double>> ptry(n);
+    RAllocStack::Vector<double> p(n);
+    RAllocStack::Vector<double> ptry(n);
     GetRNGstate();
     *yb = fminfn (n, pb, ex);  /* init best system state pb, *yb */
     if (!R_FINITE(*yb)) *yb = big;
