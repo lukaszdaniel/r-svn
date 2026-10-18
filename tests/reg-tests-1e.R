@@ -4037,6 +4037,10 @@ assertErrV(qr.influence(qr = list(1,"a"), res = 0))
 ## segfaulted in R <= 4.6.1
 
 
+## PR#19226: UTF-8 replacement not representable in current locale
+tools::assertError(chartr("a", intToUtf8(256L), "a")) # since LC_ALL=C
+
+
 ## R < 4.6.3: tracing rematched S4 methods mishandled 'tracer', 'exit'
 setGeneric("F", function (x, ...) standardGeneric("F"))
 setMethod(F, sig <- c(x = "ANY"), function (x, y, ...) invisible(NULL))
@@ -4050,6 +4054,13 @@ stopifnot(identical(v, 1L), isRematched(m2),  is(m2, "traceable"))
 trace("F", signature = sig, exit = incV)
 body(m3 <- getMethod(F, sig)); F()
 stopifnot(identical(v, 2L), identical(m2, m3), removeGeneric("F"))
+
+
+## besselY() with large negative non-integer order -- NaN with warning
+assertWarnV(bY <- besselY(1, -2e7 - c(0.5, 0.25)))
+stopifnot(is.nan(bY))
+## segfaulted in R-devel since r90571
+
 
 
 ## keep at end

@@ -26,6 +26,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
@@ -59,7 +60,7 @@ SEXP getListElement(SEXP list, const char *str)
     return elmt;
 }
 
-typedef struct opt_struct
+struct opt_struct
 {
     GCRoot<> R_fcall;    /* function */
     GCRoot<> R_gcall;    /* gradient */
@@ -70,7 +71,8 @@ typedef struct opt_struct
     int usebounds;
     std::vector<double, Allocator<double>> lower, upper;
     SEXP names;	     /* names for par */
-} opt_struct, *OptStruct;
+};
+using OptStruct = struct opt_struct *;
 
 
 
@@ -200,17 +202,16 @@ static void fmingr(int n, double *p, double *df, void *ex)
 SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     GCStackRoot<> par; SEXP fn, gr, method, options, slower, supper;
-    GCStackRoot<> res, tmp;
-    GCStackRoot<> value, counts, conv;
+    GCStackRoot<> tmp;
+    GCStackRoot<> res,value, counts, conv;
     int npar=0, *mask, trace, maxit, fncount = 0, grcount = 0, nREPORT, tmax;
     int ifail = 0;
     double val = 0.0, abstol, reltol, temp;
     const char *tn;
-    opt_struct os;
-    OptStruct OS;
 
     args = CDR(args);
-    OS = &os;
+    CXXR::RAllocStack::Scope rscope;
+    OptStruct OS = (OptStruct) R_alloc(1, sizeof(opt_struct));
     OS->usebounds = 0;
     OS->R_env = rho;
     par = CAR(args);
@@ -400,13 +401,12 @@ SEXP optimhess(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn, gr, options;
     GCStackRoot<> par, tmp, ndeps, ans;
-    opt_struct os;
-    OptStruct OS;
     int npar;
     double eps;
 
     args = CDR(args);
-    OS = &os;
+    CXXR::RAllocStack::Scope rscope;
+    OptStruct OS = (OptStruct) R_alloc(1, sizeof(opt_struct));
     OS->usebounds = 0;
     OS->R_env = rho;
     par = CAR(args);
