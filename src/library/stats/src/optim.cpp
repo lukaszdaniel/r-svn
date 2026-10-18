@@ -59,7 +59,7 @@ SEXP getListElement(SEXP list, const char *str)
 	}
     return elmt;
 }
-
+// keep it aligned with src/appl/optim.cpp
 struct opt_struct
 {
     GCRoot<> R_fcall;    /* function */
@@ -73,8 +73,6 @@ struct opt_struct
     SEXP names;	     /* names for par */
 };
 using OptStruct = struct opt_struct *;
-
-
 
 static double fminfn(int n, double *p, void *ex)
 {
@@ -204,14 +202,15 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
     GCStackRoot<> par; SEXP fn, gr, method, options, slower, supper;
     GCStackRoot<> tmp;
     GCStackRoot<> res,value, counts, conv;
-    int npar=0, *mask, trace, maxit, fncount = 0, grcount = 0, nREPORT, tmax;
+    int npar=0, trace, maxit, fncount = 0, grcount = 0, nREPORT, tmax;
     int ifail = 0;
     double val = 0.0, abstol, reltol, temp;
     const char *tn;
 
     args = CDR(args);
     CXXR::RAllocStack::Scope rscope;
-    OptStruct OS = (OptStruct) R_alloc(1, sizeof(opt_struct));
+    opt_struct OS_storage;
+    OptStruct OS = &OS_storage;
     OS->usebounds = 0;
     OS->R_env = rho;
     par = CAR(args);
@@ -288,7 +287,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	} else {
 	    OS->R_gcall = R_NilValue; /* for balance */
 	}
-	samin (npar, dpar.data(), &val, fminfn, maxit, tmax, temp, trace, (void *)OS);
+	samin(npar, dpar.data(), &val, fminfn, maxit, tmax, temp, trace, (void *)OS);
 	for (int i = 0; i < npar; i++)
 	    REAL(par)[i] = dpar[i] * (OS->parscale[i]);
 	fncount = npar > 0 ? maxit : 1;
@@ -310,7 +309,7 @@ SEXP optim(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    ndeps = RealVector::coerce(ndeps);
 	    for (int i = 0; i < npar; i++) OS->ndeps[i] = REAL(ndeps)[i];
 	}
-	mask = (int *) R_alloc(npar, sizeof(int));
+	int *mask = (int *) R_alloc(npar, sizeof(int));
 	for (int i = 0; i < npar; i++) mask[i] = 1;
 	vmmin(npar, dpar.data(), &val, fminfn, fmingr, maxit, trace, mask, abstol,
 	      reltol, nREPORT, (void *)OS, &fncount, &grcount, &ifail);
@@ -405,8 +404,8 @@ SEXP optimhess(SEXP call, SEXP op, SEXP args, SEXP rho)
     double eps;
 
     args = CDR(args);
-    CXXR::RAllocStack::Scope rscope;
-    OptStruct OS = (OptStruct) R_alloc(1, sizeof(opt_struct));
+    opt_struct OS_storage;
+    OptStruct OS = &OS_storage;
     OS->usebounds = 0;
     OS->R_env = rho;
     par = CAR(args);

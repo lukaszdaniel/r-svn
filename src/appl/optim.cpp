@@ -21,8 +21,12 @@
 #include <config.h>
 #endif
 
+#include <vector>
+#include <CXXR/Allocator.hpp>
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/GCRoot.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/RealVector.hpp>
 #include <Defn.h>
@@ -33,23 +37,20 @@
 using namespace R;
 using namespace CXXR;
 
-static double *vect(int n)
+// keep it aligned with src/library/stats/src/optim.cpp
+struct opt_struct
 {
-    return (double *)R_alloc(n, sizeof(double));
-}
-
-typedef struct opt_struct
-{
-    SEXP R_fcall;    /* function */
-    SEXP R_gcall;    /* gradient */
+    GCRoot<> R_fcall;    /* function */
+    GCRoot<> R_gcall;    /* gradient */
     SEXP R_env;      /* where to evaluate the calls */
-    double* ndeps;   /* tolerances for numerical derivatives */
+    std::vector<double, Allocator<double>> ndeps;   /* tolerances for numerical derivatives */
     double fnscale;  /* scaling for objective */
-    double* parscale;/* scaling for parameters */
+    std::vector<double, Allocator<double>> parscale;/* scaling for parameters */
     int usebounds;
-    double* lower, *upper;
+    std::vector<double, Allocator<double>> lower, upper;
     SEXP names;	     /* names for par */
-} opt_struct, *OptStruct;
+};
+using OptStruct = struct opt_struct *;
 
 static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 {
@@ -66,7 +67,7 @@ static void genptry(int n, double *p, double *ptry, double scale, void *ex)
 	}
 	SETCADR(OS->R_gcall, x);
 	s = eval(OS->R_gcall, OS->R_env);
-	s = coerceVector(s, REALSXP);
+	s = RealVector::coerce(s);
 	if(LENGTH(s) != n)
 	    error(_("candidate point in 'optim' evaluated to length %d not %d"),
 		  LENGTH(s), n);
@@ -113,7 +114,7 @@ void vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
       int *fncount, int *grcount, int *fail)
 {
     bool accpoint, enough;
-    double *g, *t, *X, *c, **B;
+    double **B;
     int   count, funcount, gradcount;
     double f, gradproj;
     int   i, j, ilast, iter = 0;
@@ -121,6 +122,7 @@ void vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
     double D1, D2;
     int   n, *l;
 
+    CXXR::RAllocStack::Scope rscope;
     if (maxit <= 0) {
 	*fail = 0;
 	*Fmin = fminfn(n0, b, ex);
@@ -133,10 +135,10 @@ void vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
     l = (int *) R_alloc(n0, sizeof(int));
     n = 0;
     for (i = 0; i < n0; i++) if (mask[i]) l[n++] = i;
-    g = vect(n0);
-    t = vect(n);
-    X = vect(n);
-    c = vect(n);
+    std::vector<double, Allocator<double>> g(n0);
+    std::vector<double, Allocator<double>> t(n);
+    std::vector<double, Allocator<double>> X(n);
+    std::vector<double, Allocator<double>> c(n);
     B = Lmatrix(n);
     f = fminfn(n0, b, ex);
     if (!R_FINITE(f))
@@ -144,7 +146,7 @@ void vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
     if (trace) Rprintf("initial  value %f \n", f);
     *Fmin = f;
     funcount = gradcount = 1;
-    fmingr(n0, b, g, ex);
+    fmingr(n0, b, g.data(), ex);
     iter++;
     ilast = gradcount;
 
@@ -197,7 +199,7 @@ void vmmin(int n0, double *b, double *Fmin, optimfn fminfn, optimgr fmingr,
 	    }
 	    if (count < n) {/* making progress */
 		*Fmin = f;
-		fmingr(n0, b, g, ex);
+		fmingr(n0, b, g.data(), ex);
 		gradcount++;
 		iter++;
 		D1 = 0.0;
@@ -266,6 +268,7 @@ void nmmin(int n, double *Bvec, double *X, double *Fmin, optimfn fminfn,
 	   double alpha, double bet, double gamm, int trace,
 	   int *fncount, int maxit)
 {
+    CXXR::RAllocStack::Scope rscope;
     char action[50];
     int C;
     bool calcvert;
@@ -469,7 +472,6 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 	   int *fncount, int *grcount, int maxit)
 {
     bool accpoint;
-    double *c, *g, *t;
     int count, cycle, cyclimit;
     double f;
     double G1, G2, G3, gradproj;
@@ -493,7 +495,9 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 	    error("%s", _("unknown type in \"CG\" method of 'optim'"));
 	}
     }
-    c = vect(n); g = vect(n); t = vect(n);
+    std::vector<double, Allocator<double>> c(n);
+    std::vector<double, Allocator<double>> g(n);
+    std::vector<double, Allocator<double>> t(n);
 
     setstep = 1.7;
     *fail = 0;
@@ -535,7 +539,7 @@ void cgmin(int n, double *Bvec, double *X, double *Fmin,
 		    *fail = 1;
 		    return;
 		}
-		fmingr(n, Bvec, g, ex);
+		fmingr(n, Bvec, g.data(), ex);
 		G1 = 0.0;
 		G2 = 0.0;
 		for (i = 0; i < n; i++) {
@@ -641,8 +645,9 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
 	    int *fncount, int *grcount, int maxit, char *msg,
 	    int trace, int nREPORT)
 {
+    CXXR::RAllocStack::Scope rscope;
     char task[60];
-    double f, *g,  *wa;
+    double f, *wa;
     int tr = -1, iter = 0, *iwa, isave[21];
     isave[12] = 0; // -Wall
 
@@ -666,20 +671,20 @@ void lbfgsb(int n, int m, double *x, double *l, double *u, int *nbd,
     }
 
     *fail = 0;
-    g = vect(n);
+    std::vector<double, Allocator<double>> g(n);
     /* this needs to be zeroed for snd in mainlb to be zeroed */
     wa = (double *) S_alloc(2*m*n+4*n+11*m*m+8*m, sizeof(double));
     iwa = (int *) R_alloc(3*n, sizeof(int));
     strcpy(task, "START");
     while(1) {
-	setulb(n, m, x, l, u, nbd, &f, g, factr, &pgtol, wa, iwa, task,
+	setulb(n, m, x, l, u, nbd, &f, g.data(), factr, &pgtol, wa, iwa, task,
 	       tr, isave);
 /*	Rprintf("in lbfgsb - %s\n", task);*/
 	if (streqln(task, "FG", 2)) {
 	    f = fminfn(n, x, ex);
 	    if (!R_FINITE(f))
 		error("%s", _("L-BFGS-B needs finite values of 'fn'"));
-	    fmingr(n, x, g, ex);
+	    fmingr(n, x, g.data(), ex);
 	} else if (streqln(task, "NEW_X", 5)) {
 	    iter++;
 	    if(trace == 1 && (iter % nREPORT == 0)) {
@@ -730,8 +735,6 @@ void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
     long j;
     int k, its, itdoc;
     double t, y, dy, ytry, scale;
-    double *p, *ptry;
-
     /* Above have: if(trace != 0) trace := REPORT control argument = STEPS */
     if (trace < 0)
 	error("%s", _("trace, REPORT must be >= 0 (method = \"SANN\")"));
@@ -740,7 +743,8 @@ void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
 	*yb = fminfn(n, pb, ex);
 	return;
     }
-    p = vect (n); ptry = vect (n);
+    std::vector<double, Allocator<double>> p(n);
+    std::vector<double, Allocator<double>> ptry(n);
     GetRNGstate();
     *yb = fminfn (n, pb, ex);  /* init best system state pb, *yb */
     if (!R_FINITE(*yb)) *yb = big;
@@ -757,8 +761,8 @@ void samin(int n, double *pb, double *yb, optimfn fminfn, int maxit,
 	k = 1;
 	while ((k <= tmax) && (its < maxit))  /* iterate at constant temperature */
 	{
-	    genptry(n, p, ptry, scale * t, ex);  /* generate new candidate point */
-	    ytry = fminfn (n, ptry, ex);
+	    genptry(n, p.data(), ptry.data(), scale * t, ex);  /* generate new candidate point */
+	    ytry = fminfn (n, ptry.data(), ex);
 	    if (!R_FINITE(ytry)) ytry = big;
 	    dy = ytry - y;
 	    if ((dy <= 0.0) || (unif_rand() < exp(-dy/t))) {  /* accept new point? */
