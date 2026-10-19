@@ -440,11 +440,12 @@ static void writelineHelper(ConsoleData p, int fch, int lch,
 	/* Some of the string is visible: */
 	if(mbcslocale) {
 	    int w0;
-	    wchar_t *P = s, *q;
+	    wchar_t *P = s;
 
 	    int nc = (wcslen(s) + 1) * sizeof(wchar_t); /* overkill */
-	    wchar_t *buff = (wchar_t*) R_alloc(nc, sizeof(wchar_t));
-	    q = buff;
+	    CXXR::RAllocStack::Vector<wchar_t> buffStorage(nc);
+	    wchar_t *buff = buffStorage.data();
+	    wchar_t *q = buffStorage.data();
 	    bool leftedge = (FC && (fch == 0));
 	    if(leftedge) fch++;
 	    for (w0 = -FC; w0 < fch && *P; P++) /* should have enough ... */
@@ -893,9 +894,8 @@ static void storekeys(control c, const char *str)
     if (strlen(str) == 0) return; 
     if(isUnicodeWindow(c)) {
 	size_t sz = (strlen(str) + 1) * sizeof(wchar_t);
-	CXXR::RAllocStack::Scope rscope;
-	wchar_t *wcs = (wchar_t*) R_alloc(strlen(str) + 1, sizeof(wchar_t));
-	memset(wcs, 0, sz);
+	CXXR::RAllocStack::Vector<wchar_t> wcsStorage(sz, 0);
+	wchar_t *wcs = wcsStorage.data();
 	mbstowcs(wcs, str, sz-1);
 	for (int i = 0; wcs[i]; i++) storekey(c, wcs[i]);
     } else {

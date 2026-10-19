@@ -256,7 +256,7 @@ SEXP do_sysinfo(SEXP call, SEXP op, SEXP args, SEXP rho)
     char ver[256], buf[1000];
     wchar_t name[MAX_COMPUTERNAME_LENGTH + 1];
     DWORD namelen = MAX_COMPUTERNAME_LENGTH + 1;
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // because of getCurrentUserAndDomain()
     char *uname;
     char *udomain;
 
@@ -758,6 +758,7 @@ SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP paths = CAR(args), el, slash;
     int i, n = LENGTH(paths);
     int fslash = 0;
+    // because of getFinalPathName(), getFinalPathNameW(), R_getFullPathName(), getLongPathNameW()
     CXXR::RAllocStack::Scope rscope;
     GCStackRoot<StringVector> ans;
 

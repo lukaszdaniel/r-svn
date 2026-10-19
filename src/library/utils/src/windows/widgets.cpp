@@ -97,6 +97,7 @@ SEXP Win_selectlist(SEXP args)
 	error(_("invalid '%s' argument"), "preselect");
 
     n = LENGTH(choices);
+    CXXR::RAllocStack::Scope rscope;
     clist = (const char **) R_alloc(n + 1, sizeof(char *));
     for(i = 0; i < n; i++) {
 	clist[i] = translateChar(STRING_ELT(choices, i));
@@ -183,7 +184,8 @@ static int countFilenamesW(const wchar_t *list)
 static SEXP mkCharUTF8(const wchar_t *wc)
 {
     size_t needed = wcstoutf8(NULL, wc, (size_t)INT_MAX + 2) + 1;
-    char *s = R_alloc(needed, 1);
+    CXXR::RAllocStack::Vector<char> sStorage(needed);
+    char *s = sStorage.data();
     wcstoutf8(s, wc, needed);
     return mkCharCE(s, CE_UTF8);
 }

@@ -28,6 +28,7 @@
 #undef FALSE
 #undef TRUE
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/RawVector.hpp>
 #include <Defn.h>
@@ -90,12 +91,14 @@ static SEXP readRegistryKey1(HKEY hkey, const wchar_t *name)
     LONG res;
     DWORD type, size0 = 10000, size = size0;
     BYTE data[10000], *d = data;
+    CXXR::RAllocStack::Vector<BYTE> dStorage;
 
     res = RegQueryValueExW(hkey, name, NULL, &type, d, &size);
     while (res == ERROR_MORE_DATA) {
 	size0 *= 10;
 	size = size0;
-	d = (BYTE *) R_alloc(size0, sizeof(char));
+	dStorage.resize(size0);
+	d = dStorage.data();
 	res = RegQueryValueExW(hkey, name, NULL, &type, d, &size);
     }
     if (res != ERROR_SUCCESS) return ans;
@@ -159,10 +162,9 @@ static SEXP readRegistryKey1(HKEY hkey, const wchar_t *name)
 
 static SEXP readRegistryKey(HKEY hkey, int depth, int view)
 {
-    int k = 0, size0, *indx;
+    int k = 0, *indx;
     SEXP ans, nm, ans0, nm0, tmp, sind;
     DWORD res, nsubkeys, maxsubkeylen, nval, maxvalnamlen, size;
-    wchar_t *name;
     HKEY sub;
     REGSAM acc = KEY_READ;
 
@@ -177,8 +179,9 @@ static SEXP readRegistryKey(HKEY hkey, int depth, int view)
     if (res != ERROR_SUCCESS)
 	error(_("RegQueryInfoKey error code %d: '%s'"), (int) res,
 	      formatError(res));
-    size0 = std::max(maxsubkeylen, maxvalnamlen) + 1;
-    name = (wchar_t *) R_alloc(size0, sizeof(wchar_t));
+    int size0 = std::max(maxsubkeylen, maxvalnamlen) + 1;
+    CXXR::RAllocStack::Vector<wchar_t> nameStorage(size0);
+    wchar_t *name = nameStorage.data();
     PROTECT(ans = allocVector(VECSXP, nval + nsubkeys));
     PROTECT(nm = allocVector(STRSXP, nval+ nsubkeys));
     if (nval > 0) {

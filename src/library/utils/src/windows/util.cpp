@@ -586,6 +586,7 @@ SEXP arrangeWindows(SEXP call, SEXP op, SEXP args, SEXP env)
     windows = CAR(args);
     if (length(windows)) {
 	if (TYPEOF(windows) != VECSXP) error(_("'%s' must be a list"), "windows");
+	CXXR::RAllocStack::Scope rscope;
 	void **handles = (void **) R_alloc(length(windows), sizeof(void *));
 	for (int i = 0; i < length(windows); i++) {
 	    if (TYPEOF(VECTOR_ELT(windows, i)) != EXTPTRSXP)
