@@ -515,6 +515,7 @@ attribute_hidden SEXP do_startsWith(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
 
+    CXXR::RAllocStack::Scope rscope; // translateCharUTF8
     SEXP x = CAR(args), Xfix = CADR(args); // 'prefix' or 'suffix'
     if (!isString(x) || !isString(Xfix))
 	error("%s", _("non-character object(s)"));
@@ -966,7 +967,7 @@ attribute_hidden SEXP do_abbrev(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans = PROTECT(StringVector::create(len));
     bool warn = FALSE;
     for (R_xlen_t i = 0 ; i < len ; i++) {
-	CXXR::RAllocStack::Scope rscope;
+	CXXR::RAllocStack::Scope rscope; // translateCharUTF8
 	SEXP el = STRING_ELT(x, i);
 	if (el  == NA_STRING)
 	    SET_STRING_ELT(ans, i, NA_STRING);
@@ -1450,6 +1451,7 @@ attribute_hidden SEXP do_chartr(SEXP call, SEXP op, SEXP args, SEXP env)
     bool use_WC = FALSE;
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar, translateCharUTF8
     old = CAR(args); args = CDR(args);
     _new = CAR(args); args = CDR(args);
     x = CAR(args);

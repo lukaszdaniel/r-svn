@@ -35,6 +35,7 @@
 
 #include <cerrno>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -476,6 +477,7 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP x, y, sn, sk, prob, sreplace;
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope;
     sn = CAR(args); args = CDR(args);
     sk = CAR(args); args = CDR(args); /* size */
     if (length(sk) != 1)

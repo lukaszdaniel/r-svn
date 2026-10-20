@@ -38,6 +38,7 @@
 #include <CXXR/Complex.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
@@ -1833,6 +1834,7 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* check the permutation */
 
     int i;
+    CXXR::RAllocStack::Scope rscope;
     int *pp = (int *) R_alloc((size_t) n, sizeof(int));
     GCStackRoot<> perm;
     perm = CADR(args);

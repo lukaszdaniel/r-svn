@@ -19,6 +19,7 @@
 
 #include <cctype>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <R.h>
@@ -35,6 +36,7 @@ static SEXP package_dependencies_scan_one(SEXP this_) {
     const char *s;
     char c, *t, *p, q = '\0';
     cetype_t e;
+    CXXR::RAllocStack::Scope rscope;
 
     if(this_ == NA_STRING) {
         return StringVector::create(0);

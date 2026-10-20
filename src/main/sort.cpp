@@ -1517,6 +1517,7 @@ attribute_hidden SEXP do_order(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (args == R_NilValue)
 	return R_NilValue;
 
+    CXXR::RAllocStack::Scope rscope;
     if (isVector(CAR(args)))
 	n = XLENGTH(CAR(args));
     for (ap = args; ap != R_NilValue; ap = CDR(ap), narg++) {
@@ -1582,6 +1583,8 @@ attribute_hidden SEXP do_rank(SEXP call, SEXP op, SEXP args, SEXP rho)
     x = CAR(args);
     if(TYPEOF(x) == RAWSXP && !isObject(x))
 	error("%s", _("raw vectors cannot be sorted"));
+
+    CXXR::RAllocStack::Scope rscope;
     // n := sn := length(x) :
 #ifdef LONG_VECTOR_SUPPORT
     SEXP sn = CADR(args);

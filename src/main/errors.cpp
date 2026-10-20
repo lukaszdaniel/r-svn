@@ -1114,7 +1114,7 @@ NORET void Rf_jump_to_toplevel(void)
 
 #ifdef ENABLE_NLS
 /* Called from do_gettext() and do_ngettext() */
-static const char * determine_domain_gettext(SEXP domain_, bool up)
+static const char *determine_domain_gettext(SEXP domain_, bool up)
 {
     const char *domain = "";
     char *buf; // will be returned

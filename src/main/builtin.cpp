@@ -37,6 +37,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -486,11 +487,11 @@ static void cat_sepwidth(SEXP sep, int *width, int ntot)
 
 static void cat_printsep(SEXP sep, int ntot)
 {
-    const char *sepchar;
     if (sep == R_NilValue || LENGTH(sep) == 0)
 	return;
 
-    sepchar = trChar(STRING_ELT(sep, ntot % LENGTH(sep)));
+    CXXR::RAllocStack::Scope rscope; // trChar
+    const char *sepchar = trChar(STRING_ELT(sep, ntot % LENGTH(sep)));
     Rprintf("%s", sepchar);
     return;
 }
@@ -532,6 +533,7 @@ attribute_hidden SEXP do_cat(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *p = "";
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // trChar
 
     /* Use standard printing defaults */
     PrintDefaults();

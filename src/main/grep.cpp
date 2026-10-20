@@ -78,6 +78,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
@@ -562,6 +563,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     const void *vmax, *vmax2;
     int nwarn = 0;
     bool haveBytesInput;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     checkArity(op, args);
     x = CAR(args); args = CDR(args);
@@ -1279,6 +1281,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     int ov[ovecsize];
 #endif
     bool use_UTF8 = false, use_WC = false;
+    CXXR::RAllocStack::Scope rscope; // trCharUTF82
     const void *vmax;
     int nwarn = 0;
 
@@ -2098,6 +2101,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     bool ascii_patrep = false;
     const wchar_t *wpat = NULL, *wrep = NULL, *ws = NULL;
     const unsigned char *tables = NULL;
+    CXXR::RAllocStack::Scope rscope; // trCharUTF82
 #ifdef HAVE_PCRE2
     uint32_t ovecsize = 10;
     pcre2_code *re = NULL;
@@ -2525,6 +2529,7 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
     int eflags = 0;
     const char *string = NULL;
     const wchar_t *ws = NULL;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP2
 
     PROTECT(matchbuf = IntVector::create(bufsize));
     PROTECT(matchlenbuf = IntVector::create(bufsize));
@@ -2936,6 +2941,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *s = NULL;
     const wchar_t *ws = NULL;
     const unsigned char *tables = NULL /* -Wall */;
+    CXXR::RAllocStack::Scope rscope; // wtransChar2, trCharUTF82, translateCharFP2
 #ifdef HAVE_PCRE2
     pcre2_code *re = NULL;
     pcre2_match_context *mcontext = NULL;
@@ -3293,6 +3299,7 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
     R_xlen_t i, n;
     int so;
     int rc, cflags = REG_EXTENDED;
+    CXXR::RAllocStack::Scope rscope; // wtransChar2, translateCharFP2
 
     checkArity(op, args);
 

@@ -1159,6 +1159,7 @@ attribute_hidden SEXP do_first_min(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_which(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope;
     SEXP v = CAR(args);
     if (!isLogical(v))
 	error("%s", _("argument to 'which' is not logical"));

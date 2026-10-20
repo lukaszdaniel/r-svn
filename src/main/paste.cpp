@@ -42,6 +42,7 @@
 #include <R_ext/Minmax.h>
 #include <Localization.h>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
@@ -609,6 +610,7 @@ attribute_hidden SEXP do_format(SEXP call, SEXP op, SEXP args, SEXP env)
 	    /* This is clumsy, but it saves rewriting and re-testing
 	       this complex code */
 	    SEXP xx = PROTECT(duplicate(x));
+	    CXXR::RAllocStack::Scope rscope;
 	    for (i = 0; i < n; i++) {
 		SEXP x_i = STRING_ELT(xx, i);
 		const char *s;

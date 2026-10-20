@@ -512,8 +512,9 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
     char buf[BUFSIZE], *b = buf;
     int res;
     int usedVasprintf = FALSE;
-    va_list aq;
+    CXXR::RAllocStack::Scope rscope;
 
+    va_list aq;
     va_copy(aq, ap);
     res = Rvsnprintf_mbcs(buf, BUFSIZE, format, aq);
     va_end(aq);
@@ -527,7 +528,6 @@ int dummy_vfprintf(Rconnection con, const char *format, va_list ap)
 	} else usedVasprintf = TRUE;
     }
 #else
-    CXXR::RAllocStack::Scope rscope;
     if(res >= BUFSIZE) { /* res is the desired output length */
 	/* apparently some implementations count short,
 	   <https://unixpapa.com/incnote/stdio.html>
@@ -3713,6 +3713,7 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
     int res = 0, buffree,
 	already = (int) strlen(this_->lastline); // we do not allow longer lines
     SEXP tmp;
+    CXXR::RAllocStack::Scope rscope;
 
     va_list aq;
     va_copy(aq, ap);
@@ -3729,7 +3730,7 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 	res = vsnprintf(p, buffree, format, aq);
     }
     va_end(aq);
-    CXXR::RAllocStack::Scope rscope;
+
     if(res >= buffree) { /* res is the desired output length */
 	size_t sz = res + already + 1;
 	b = R_alloc(sz, sizeof(char));
@@ -5356,6 +5357,7 @@ attribute_hidden SEXP do_writechar(SEXP call, SEXP op, SEXP args, SEXP env)
     bool wasopen = TRUE, usesep, isRaw = FALSE;
     Rconnection con = NULL;
     mbstate_t mb_st;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     checkArity(op, args);
     object = CAR(args);
@@ -6616,14 +6618,14 @@ SEXP R::R_compress1(SEXP in)
     if(TYPEOF(in) != RAWSXP)
 	error("%s", _("R_compress1 requires a raw vector"));
 
+    CXXR::RAllocStack::Scope rscope;
+
     static struct libdeflate_compressor *c = NULL;
     if (c == NULL) {
        c = libdeflate_alloc_compressor(6);
        if(c == NULL)
            error(_("allocation error in '%s' with libdeflate"), "R_compress1");
     }
-
-    CXXR::RAllocStack::Scope rscope;
 
     unsigned int inlen = LENGTH(in);
     size_t outlen = libdeflate_zlib_compress_bound(c, inlen);
@@ -7073,6 +7075,7 @@ attribute_hidden SEXP do_memCompress(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, from;
     int type, res;
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     ans = from = CAR(args);
@@ -7206,6 +7209,7 @@ attribute_hidden SEXP do_memDecompress(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP ans, from;
     int type, subtype = 0;
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     ans = from = CAR(args);

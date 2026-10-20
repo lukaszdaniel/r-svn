@@ -402,6 +402,7 @@ attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(CADR(args)) || LENGTH(CADR(args)) != 1)
 	error("%s", _("wrong type for argument"));
 
+    CXXR::RAllocStack::Scope rscope; // wtransChar
     i = LENGTH(CAR(args));
     if (i == 0) { // full list of environment variables
 #ifdef Win32
@@ -501,6 +502,7 @@ attribute_hidden SEXP do_setenv(SEXP call, SEXP op, SEXP args, SEXP env)
     if(LENGTH(nm) != LENGTH(val))
 	error(_("'%s' and '%s' are of different lengths"), "names", "val");
 
+    CXXR::RAllocStack::Scope rscope; // translateChar
     int i, n = LENGTH(val);
     SEXP ans = PROTECT(allocVector(LGLSXP, n));
 #ifdef HAVE_SETENV
@@ -535,6 +537,7 @@ attribute_hidden SEXP do_unsetenv(SEXP call, SEXP op, SEXP args, SEXP env)
 	error("%s", _("wrong type for argument"));
     int i, n = LENGTH(nm);
 
+    CXXR::RAllocStack::Scope rscope; // translateChar
 #if defined(HAVE_UNSETENV) || defined(HAVE_PUTENV_UNSET) || defined(HAVE_PUTENV_UNSET2)
 #ifdef HAVE_UNSETENV
     for (i = 0; i < n; i++) unsetenv(translateChar(STRING_ELT(nm, i)));

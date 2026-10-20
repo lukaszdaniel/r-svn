@@ -4452,7 +4452,7 @@ namespace
             R_Suicide(_("invalid string was created"));
         }
         else if (actionWhenInvalid > 0) {
-            CXXR::RAllocStack::Scope rscope;
+            CXXR::RAllocStack::Scope rscope; // reEnc3
             const char *native_str;
             const char *from = "";
             if (IS_UTF8(cval))
@@ -4521,7 +4521,7 @@ namespace
                     return;
                 }
                 else if (IS_LATIN1(cval)) {
-                    CXXR::RAllocStack::Scope rscope;
+                    CXXR::RAllocStack::Scope rscope; // wtransChar2
                     const wchar_t *dummy = wtransChar2(cval);
                     if (!dummy)
                         reportInvalidString(cval, actionWhenInvalid);

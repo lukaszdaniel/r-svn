@@ -135,6 +135,7 @@ static void printLogicalMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			       SEXP rl, SEXP cl, const char *rn, const char *cn,
 			       bool print_ij)
 {
+    CXXR::RAllocStack::Scope rscope;
 /* initialization; particularly of row labels, rl= dimnames(.)[[1]] and
  * rn = names(dimnames(.))[1] : */
 #define _PRINT_INIT_rl_rn				\
@@ -250,6 +251,7 @@ static void printRealMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			    SEXP rl, SEXP cl, const char *rn, const char *cn,
 			    bool print_ij)
 {
+    CXXR::RAllocStack::Scope rscope;
     _PRINT_INIT_rl_rn;
     const double *x = REAL_RO(sx) + offset;
     int *d = (int *) R_alloc(c, sizeof(int)),
@@ -267,6 +269,7 @@ static void printComplexMatrix(SEXP sx, int offset, int r_pr, int r, int c,
 			       SEXP rl, SEXP cl, const char *rn, const char *cn,
 			       bool print_ij)
 {
+    CXXR::RAllocStack::Scope rscope;
     _PRINT_INIT_rl_rn;
     const Rcomplex *x = COMPLEX_RO(sx) + offset;
     int *dr = (int *) R_alloc(c, sizeof(int)),

@@ -1284,12 +1284,9 @@ static void Cairo_Path(double *x, double *y,
     }
 }
 
-static cairo_surface_t* createImageSurface(unsigned int *raster, int w, int h)
+static cairo_surface_t *createImageSurface(unsigned int *raster, int w, int h)
 {
-    cairo_surface_t *image;
-    unsigned char *imageData;
-
-    imageData = (unsigned char *) R_alloc(4*w*h, sizeof(unsigned char));
+    unsigned char *imageData = (unsigned char *) R_alloc(4*w*h, sizeof(unsigned char));
     /* The R ABGR needs to be converted to a Cairo ARGB 
      * AND values need to by premultiplied by alpha 
      */
@@ -1306,7 +1303,7 @@ static cairo_surface_t* createImageSurface(unsigned int *raster, int w, int h)
             imageData[i*4 + 0] = R_BLUE(raster[i]);
         }
     }
-    image = cairo_image_surface_create_for_data(imageData, 
+    cairo_surface_t *image = cairo_image_surface_create_for_data(imageData, 
                                                 CAIRO_FORMAT_ARGB32,
                                                 w, h, 
                                                 4*w);
@@ -1321,7 +1318,7 @@ static void Cairo_Raster(unsigned int *raster, int w, int h,
                          const pGEcontext gc, pDevDesc dd)
 {
     int imageWidth, imageHeight;
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // createImageSurface
     cairo_surface_t *image;
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
 

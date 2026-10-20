@@ -351,7 +351,7 @@ attribute_hidden SEXP do_date(SEXP call, SEXP op, SEXP args, SEXP rho)
 // .Internal so manages R_alloc stack used by acopy_string
 attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    const char **f, **h, *t, *pager = NULL /* -Wall */;
+    const char *t, *pager = NULL /* -Wall */;
 
     checkArity(op, args);
     SEXP fn = CAR(args); args = CDR(args);
@@ -369,8 +369,8 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (!isString(pg))
 	error(_("invalid '%s' argument"), "pager");
     CXXR::RAllocStack::Scope rscope;
-    f = (const char**) R_alloc(n, sizeof(char*));
-    h = (const char**) R_alloc(n, sizeof(char*));
+    const char **f = (const char**) R_alloc(n, sizeof(char*));
+    const char **h = (const char**) R_alloc(n, sizeof(char*));
     for (int i = 0; i < n; i++) {
 	SEXP el = STRING_ELT(fn, i);
 	if (!isNull(el) && el != NA_STRING)
@@ -2762,6 +2762,7 @@ attribute_hidden SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 
     checkArity(op, args);
     path = CAR(args);
+    CXXR::RAllocStack::Scope rscope;
     if (!isString(path) || LENGTH(path) != 1)
 	error(_("invalid '%s' argument"), "path");
     if (STRING_ELT(path, 0) == NA_STRING) return ScalarLogical(FALSE);
@@ -2972,6 +2973,8 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
     int nfiles = length(fn);
     GCStackRoot<LogicalVector> ans;
     ans = LogicalVector::create(nfiles);
+    CXXR::RAllocStack::Scope rscope;
+
     if (nfiles > 0) {
 	args = CDR(args);
 	if (!isString(fn))
@@ -2992,7 +2995,7 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 	for (int i = 0; i < nfiles; i++) {
 	    if (STRING_ELT(fn, i) != NA_STRING) {
 	    	p = filenameToWchar(STRING_ELT(fn, i), TRUE);
-	    	CXXR::RAllocStack::Scope rscope;
+
 		/* the +2 defensively for the .\\ copied below */
 		wchar_t *from = (wchar_t *) R_alloc(wcslen(p) + 1 + 2, sizeof(wchar_t));
 		wcscpy(from, p);
@@ -3002,7 +3005,6 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
 		    p = from + (ll - 1);
 		    if(*p == L'\\') *p = L'\0';
 		    p = wcsrchr(from, L'\\') ;
-		    CXXR::RAllocStack::Scope rscope;
 		    wchar_t *name = (wchar_t *) R_alloc(ll + 1,
 		                                        sizeof(wchar_t));;
 		    /* move the last element of "from" into "name" */
