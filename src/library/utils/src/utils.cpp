@@ -149,6 +149,7 @@ SEXP nsl(SEXP hostname)
     SEXP ans = R_NilValue;
     const char *name; char ip[] = "xxx.xxx.xxx.xxx";
     struct hostent *hp;
+    CXXR::RAllocStack::Scope rscope;
 
     if (!isString(hostname) || length(hostname) != 1)
 	error(_("'%s' must be a character vector of length 1"), "hostname");

@@ -119,6 +119,7 @@ static void chmod_one(const char *name, const bool grpwrt)
 /* This is a .Call so manages R_alloc stack */
 SEXP dirchmod(SEXP dr, SEXP gwsxp)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     if(!isString(dr) || LENGTH(dr) != 1)
 	error(_("invalid '%s' argument"), "dir");
     chmod_one(translateChar(STRING_ELT(dr, 0)), asLogical(gwsxp));

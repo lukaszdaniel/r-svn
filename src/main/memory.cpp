@@ -3686,6 +3686,7 @@ static void R_EndMemReporting(void)
 static void R_InitMemReporting(SEXP filename, bool append,
 			       R_size_t threshold)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     if (R_MemReportingOutfile != NULL) R_EndMemReporting();
     R_MemReportingOutfile = RC_fopen(filename, append ? "a" : "w", TRUE);
     if (R_MemReportingOutfile == NULL)

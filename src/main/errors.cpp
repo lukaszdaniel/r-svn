@@ -1319,6 +1319,7 @@ attribute_hidden SEXP do_ngettext(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* bindtextdomain(domain, dirname) */
 attribute_hidden SEXP do_bindtextdomain(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
 #ifdef ENABLE_NLS
     checkArity(op, args);
     if(isNull(CAR(args)) && isNull(CADR(args))) {
@@ -1358,6 +1359,7 @@ NORET attribute_hidden SEXP do_stop(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* error(.) : really doesn't return anything; but all do_foo() must be SEXP */
     SEXP c_call;
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     if(asLogical(CAR(args))) /* find context -> "Error in ..:" */
 	c_call = findCall();
@@ -1381,6 +1383,7 @@ attribute_hidden SEXP do_warning(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP c_call;
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     if(asLogical(CAR(args))) /* find context -> "... in: ..:" */
 	c_call = findCall();
@@ -1899,6 +1902,7 @@ attribute_hidden SEXP do_signalCondition(SEXP call, SEXP op, SEXP args, SEXP rho
     checkArity(op, args);
     SEXP list, cond, msg, ecall;
     GCStackRoot<> oldstack;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     cond = CAR(args);
     msg = CADR(args);
@@ -2027,6 +2031,7 @@ attribute_hidden void R::R_InsertRestartHandlers(RCNTXT *cptr, const char *cname
 attribute_hidden SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     if (TYPEOF(CAR(args)) != STRSXP || LENGTH(CAR(args)) != 1)
 	error("%s", _("bad error message"));
@@ -2040,6 +2045,7 @@ attribute_hidden SEXP do_dfltWarn(SEXP call, SEXP op, SEXP args, SEXP rho)
 NORET attribute_hidden SEXP do_dfltStop(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     if (TYPEOF(CAR(args)) != STRSXP || LENGTH(CAR(args)) != 1)
 	error("%s", _("bad error message"));
@@ -2667,6 +2673,7 @@ static void R_signalCondition(SEXP cond, SEXP call,
 NORET attribute_hidden /* for now */
 void R::R_signalErrorConditionEx(SEXP cond, SEXP call, int exitOnly)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     /* caller must make sure that 'cond' and 'call' are protected. */
     R_signalCondition(cond, call, TRUE, exitOnly);
 
@@ -3008,6 +3015,7 @@ SEXP R::R_makeWarningCondition(SEXP call,
 
 SEXP R::R_makePartialMatchWarningCondition(SEXP call, SEXP input, SEXP target)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     GCStackRoot<> cond;
     cond = R_makeWarningCondition(call, "partialMatchWarning", NULL, 2,
 			       _("partial match of '%s' to '%s'"),

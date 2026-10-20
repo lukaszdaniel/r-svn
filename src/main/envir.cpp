@@ -2462,6 +2462,7 @@ static SEXP gfind(const char *name, SEXP env,
  */
 attribute_hidden SEXP do_mget(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     SEXP ans, env, x, mode, ifnotfound;
     int nvals, nmode, nifnfnd;
 
@@ -3502,6 +3503,7 @@ attribute_hidden SEXP do_as_environment(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP arg = CAR(args), ans;
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
     check1arg(args, call, "x");
     if (isEnvironment(arg))
 	return arg;

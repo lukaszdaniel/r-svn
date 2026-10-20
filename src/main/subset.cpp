@@ -1323,6 +1323,7 @@ attribute_hidden SEXP do_subset3(SEXP call, SEXP op, SEXP args_, SEXP env)
 /* also used in eval.c */
 attribute_hidden SEXP R::R_subset3_dflt(SEXP x_, SEXP input_, SEXP call)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     GCStackRoot<> y;
     GCStackRoot<> input(input_);
     GCStackRoot<> x(x_);

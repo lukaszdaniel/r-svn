@@ -352,6 +352,7 @@ attribute_hidden SEXP do_date(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     const char *t, *pager = NULL /* -Wall */;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     SEXP fn = CAR(args); args = CDR(args);
@@ -368,7 +369,7 @@ attribute_hidden SEXP do_fileshow(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "title");
     if (!isString(pg))
 	error(_("invalid '%s' argument"), "pager");
-    CXXR::RAllocStack::Scope rscope;
+
     const char **f = (const char**) R_alloc(n, sizeof(char*));
     const char **h = (const char**) R_alloc(n, sizeof(char*));
     for (int i = 0; i < n; i++) {
@@ -533,6 +534,7 @@ attribute_hidden SEXP do_fileappend(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
     GCStackRoot<LogicalVector> ans;
     FILE *fp;
     SEXP fn = CAR(args);
@@ -560,6 +562,7 @@ attribute_hidden SEXP do_filecreate(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_fileremove(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
     GCStackRoot<LogicalVector> ans;
     SEXP f = CAR(args);
     if (!isString(f))
@@ -750,6 +753,7 @@ int Rwin_wrename(const wchar_t *from, const wchar_t *to);
 attribute_hidden SEXP do_filerename(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     GCStackRoot<LogicalVector> ans;
+    CXXR::RAllocStack::Scope rscope;
     SEXP f1, f2;
     int i, n1, n2;
     int res;
@@ -1141,6 +1145,7 @@ attribute_hidden SEXP do_direxists(SEXP call, SEXP op, SEXP args, SEXP rho)
 #endif
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateCharFP2
     GCStackRoot<LogicalVector> ans;
     SEXP fn = CAR(args);
     if (!isString(fn))
@@ -1475,6 +1480,7 @@ static
 bool search_setup(R_StringBuffer *pb, SEXP path, R_DIR **dir,
                       size_t *pathlen, bool *added_separator)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharFP2
     if (added_separator)
 	*added_separator = FALSE;
     if (path == NA_STRING)
@@ -1594,6 +1600,7 @@ static void list_files(R_StringBuffer *pb, size_t offset, size_t len, int *count
 attribute_hidden SEXP do_listfiles(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     int countmax = 128;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     checkArity(op, args);
     SEXP d = CAR(args);  args = CDR(args); // d := directory = path
@@ -1763,6 +1770,7 @@ static /*attribute_hidden*/ bool R_WFileExists(const wchar_t *path)
 
 attribute_hidden SEXP do_fileexists(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharFP2
     SEXP file;
     int i, nfile, ic = 16;
     checkArity(op, args);
@@ -1837,6 +1845,7 @@ attribute_hidden SEXP do_fileaccess(SEXP call, SEXP op, SEXP args, SEXP rho)
     int i, n, mode, modemask;
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateCharFP2
     GCStackRoot<IntVector> ans;
     SEXP fn = CAR(args);
     if (!isString(fn))
@@ -2150,6 +2159,7 @@ attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 
 attribute_hidden SEXP do_unlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     int failures = 0;
     bool useglob = FALSE;
     const char *names;
@@ -2428,6 +2438,7 @@ attribute_hidden SEXP do_localeconv(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_pathexpand(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP fn;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP2
     GCStackRoot<StringVector> ans;
     int i, n;
 
@@ -2695,6 +2706,7 @@ attribute_hidden SEXP do_sysgetpid(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* mkdir is defined in <sys/stat.h> */
 attribute_hidden SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
     SEXP path;
     int res, mode, serrno = 0;
     char *p, dir[R_PATH_MAX];
@@ -3217,6 +3229,7 @@ attribute_hidden SEXP do_filecopy(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP fn = CAR(args);
     int nfiles = length(fn);
     GCStackRoot<LogicalVector> ans;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
     ans = LogicalVector::create(nfiles);
     if (nfiles > 0) {
 	args = CDR(args);
@@ -3311,6 +3324,7 @@ attribute_hidden SEXP do_l10n_info(SEXP call, SEXP op, SEXP args, SEXP env)
 
 attribute_hidden SEXP do_syschmod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 #ifdef HAVE_CHMOD
     GCStackRoot<LogicalVector> ans;
     GCStackRoot<> smode;
@@ -3403,6 +3417,7 @@ attribute_hidden SEXP do_sysumask(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_readlink(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateCharFP2
     SEXP paths = CAR(args);
     if(!isString(paths))
 	error(_("invalid '%s' argument"), "paths");
@@ -3495,6 +3510,7 @@ attribute_hidden SEXP do_setFileTime(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP paths;
     GCStackRoot<> times;
     GCStackRoot<LogicalVector> ans;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     paths = CAR(args);
     if (!isString(paths))

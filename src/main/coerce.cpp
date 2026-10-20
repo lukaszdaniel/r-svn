@@ -45,6 +45,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/PairList.hpp>
@@ -2708,6 +2709,7 @@ attribute_hidden SEXP do_isinfinite(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_call(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP rest, evargs, rfun, tmp;
+    CXXR::RAllocStack::Scope rscope;
 
     if (length(args) < 1) errorcall(call, _("'%s' is missing"), "name");
     check1arg(args, call, "name");
@@ -2736,6 +2738,7 @@ attribute_hidden SEXP do_docall(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP c, fun, names, envir;
     int i, n;
     /* RCNTXT *cptr; */
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
 
@@ -2983,6 +2986,7 @@ static int class2type(const char *s)
 
 static SEXP do_unsetS4(SEXP obj, SEXP newClass)
 {
+    CXXR::RAllocStack::Scope rscope;
   // act now, as warning()s may be treated as errors:
   UNSET_S4_OBJECT(obj);
 

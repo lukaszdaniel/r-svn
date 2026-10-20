@@ -906,7 +906,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP tlist = R_NilValue;
     int timeout = 0;
-
+    CXXR::RAllocStack::Scope rscope;
     checkArity(op, args);
     if (!isValidStringF(CAR(args)))
 	error("%s", _("non-empty character argument expected"));
@@ -919,7 +919,7 @@ attribute_hidden SEXP do_system(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     int last_is_amp = 0;
     /* command ending with & is not supported by timeout */
-    CXXR::RAllocStack::Scope rscope;
+
     const char *c = trCharUTF8(STRING_ELT(CAR(args), 0));
     int len = 0;
     for(;*c; c += len) {

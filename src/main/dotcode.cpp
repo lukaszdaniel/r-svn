@@ -370,6 +370,7 @@ static SEXP naokfind(SEXP args, int * len, int *naok, DllReference *dll)
     SEXP s, prev;
     int nargs=0, naokused=0, dupused=0, pkgused=0;
     const char *p;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     *naok = 0;
     *len = 0;
@@ -427,6 +428,7 @@ static void setDLLname(SEXP s, char *DLLname)
 {
     SEXP ss = CAR(s);
     const char *name;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     if(TYPEOF(ss) != STRSXP || length(ss) != 1)
 	error("%s", _("PACKAGE argument must be a single character string"));
@@ -499,6 +501,7 @@ attribute_hidden SEXP do_isloaded(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *sym, *type="", *pkg = "";
     int val = 1, nargs = length(args);
     R_RegisteredNativeSymbol symbol = {R_ANY_SYM, {NULL}, NULL};
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     if (nargs < 1) error("%s", _("no arguments supplied"));
     if (nargs > 3) error("%s", _("too many arguments"));

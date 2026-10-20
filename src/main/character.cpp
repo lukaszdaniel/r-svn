@@ -188,6 +188,7 @@ attribute_hidden
 int R::R_nchar(SEXP string, nchar_type type_,
 	    Rboolean allowNA, Rboolean keepNA, const char* msg_name)
 {
+    CXXR::RAllocStack::Scope rscope;
     if (string == NA_STRING)
 	return keepNA ? NA_INTEGER : 2;
     // else :
@@ -1701,6 +1702,7 @@ attribute_hidden SEXP do_strtrim(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *p; char *q;
     int w0, wsum, k, nb;
     mbstate_t mb_st;
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     /* as.character happens at R level now */

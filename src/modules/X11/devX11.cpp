@@ -3342,6 +3342,7 @@ static SEXP in_do_saveplot(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *fn, *type;
     pGEDevDesc gdd;
     pX11Desc xd;
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     if (!isString(CAR(args)) || LENGTH(CAR(args)) < 1)

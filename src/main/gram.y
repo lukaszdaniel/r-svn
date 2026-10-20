@@ -43,6 +43,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
@@ -2014,6 +2015,7 @@ SEXP R::R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
 /* This one is public, and used in source.c */
 SEXP R_ParseVector(SEXP text, int n, ParseStatus *status, SEXP srcfile)
 {
+    CXXR::RAllocStack::Scope rscope; // R_TextBufferInit
     SEXP rval;
     TextBuffer textb;
     R_TextBufferInit(&textb, text);

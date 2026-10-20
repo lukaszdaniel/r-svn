@@ -24,6 +24,7 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 
 #include "tools.h"
@@ -58,6 +59,7 @@ SEXP Rsha256(SEXP files)
     char out[SHA256_HEX_SIZE + 1];
     FILE *fp;
     unsigned char resblock[SHA256_HASH_SIZE];
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     /* RAW mode: hash of one buffer instead of files */
     if (TYPEOF(files) == RAWSXP) {

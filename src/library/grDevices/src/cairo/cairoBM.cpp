@@ -413,6 +413,7 @@ static bool BMDeviceDriver(pDevDesc dd, int kind, SEXP filename,
     pX11Desc xd;
     int res0 = (res > 0) ? res : 72;
     double dps = ps;
+    CXXR::RAllocStack::Scope rscope; // translateChar, etc
 
     /* allocate new device description */
     if (!(xd = (pX11Desc) calloc(1, sizeof(X11Desc)))) return false;

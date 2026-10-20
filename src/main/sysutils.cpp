@@ -273,6 +273,7 @@ attribute_hidden SEXP do_tempdir(SEXP call, SEXP op, SEXP args, SEXP env)
 
 attribute_hidden SEXP do_tempfile(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
     SEXP  ans, pattern, fileext, tempdir;
     const char *tn, *td, *te;
     char *tm;
@@ -623,6 +624,7 @@ int static R_strieql(const char *a, const char *b)
 /* iconv(x, from, to, sub, mark) */
 attribute_hidden SEXP do_iconv(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     SEXP ans, x = CAR(args), si;
     void * arg_obj = (iconv_t)-1;
     void * latin1_obj = (iconv_t)-1;
@@ -2008,7 +2010,7 @@ next_char:
     *outbuf = '\0';
     Riconv_close(obj);
     if (mustWork && failed) {
-	CXXR::RAllocStack::Scope rscope;
+	CXXR::RAllocStack::Scope rscope; // reEnc
 	const char *native_buf = reEnc(cbuff->data, CE_UTF8, CE_NATIVE, 2);
 
 	/* copy to truncate */

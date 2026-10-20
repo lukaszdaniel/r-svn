@@ -85,6 +85,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 
     SEXP collapse, sep;
     bool recycle_0;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
 /* We need to be careful here.  For example currently Windows 4.1
  * packages are links to 4.0, 4.0.0 uses only 3 args for paste and
@@ -363,6 +364,7 @@ attribute_hidden SEXP do_paste(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_filepath(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     /* Check the arguments */
 

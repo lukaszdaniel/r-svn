@@ -3507,6 +3507,7 @@ SEXP savePlot(SEXP args)
     const char *fn, *tp; char display[550];
     int device;
     pDevDesc dd;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     args = CDR(args); /* skip entry point name */
     device = asInteger(CAR(args));

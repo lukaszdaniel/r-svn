@@ -420,6 +420,7 @@ static void R_pcre2_prepare(const char *pattern, SEXP subject, bool use_UTF8,
                 bool caseless, const unsigned char **tables,
                 pcre2_code **re, pcre2_match_context **mcontext)
 {
+    CXXR::RAllocStack::Scope rscope; // to_native()
     int errcode;
     PCRE2_SIZE erroffset;
     uint32_t options = 0;
@@ -499,6 +500,7 @@ static void R_pcre_prepare(const char *pattern, SEXP subject, bool use_UTF8,
                bool caseless, bool always_study,
                const unsigned char **tables, pcre **re, pcre_extra **re_extra)
 {
+    CXXR::RAllocStack::Scope rscope; // to_native()
     int erroffset;
     const char *errorptr;
     int options = 0;

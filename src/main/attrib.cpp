@@ -927,6 +927,7 @@ attribute_hidden SEXP R::R_data_class2(SEXP obj)
 // class(x)  &  .cache_class(classname, extendsForS3(.)) {called from methods}  & .class2() :
 attribute_hidden SEXP R_do_data_class(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+  CXXR::RAllocStack::Scope rscope;
   checkArity(op, args);
   if (PRIMVAL(op) == 1) { // .cache_class() - typically re-defining existing cache
       check1arg(args, call, "class");
@@ -1478,6 +1479,7 @@ attribute_hidden SEXP do_attr(SEXP call, SEXP op, SEXP args, SEXP env)
     bool exact = false;
     enum { NONE, PARTIAL, PARTIAL2, FULL } match = NONE;
     static SEXP do_attr_formals = NULL;
+    CXXR::RAllocStack::Scope rscope;
 
     if (do_attr_formals == NULL)
 	do_attr_formals = allocFormalsList3(install("x"), install("which"),
@@ -1700,6 +1702,7 @@ void Rf_GetMatrixDimnames(SEXP x, SEXP *rl, SEXP *cl,
 {
     SEXP dimnames = getAttrib(x, R_DimNamesSymbol);
     SEXP nn;
+    CXXR::RAllocStack::Scope rscope;
 
     if (isNull(dimnames)) {
 	*rl = R_NilValue;
@@ -1821,6 +1824,8 @@ int R_has_slot(SEXP obj, SEXP name) {
 */
 /* currently, R_get_slot() ["methods"] is a trivial wrapper for this: */
 SEXP R_do_slot(SEXP obj, SEXP name) {
+
+    CXXR::RAllocStack::Scope rscope;
     R_SLOT_INIT;
     if (name == s_dot_Data)
 	return data_part(obj);
@@ -1903,6 +1908,7 @@ attribute_hidden SEXP do_AT(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP  nlist, object, ans;
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope;
 
     PROTECT(object = eval(CAR(args), env));
 

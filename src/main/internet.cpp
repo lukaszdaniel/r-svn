@@ -34,6 +34,7 @@
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/IntVector.hpp>
@@ -156,6 +157,7 @@ void extR_HTTPDStop(void)
 
 SEXP Rsockconnect(SEXP sport, SEXP shost)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
     if (length(sport) != 1) error(_("invalid '%s' argument"), "socket");
     int port = asInteger(sport);
     char *host[1];
@@ -241,6 +243,7 @@ SEXP Rsocklisten(SEXP ssock)
 
 SEXP Rsockwrite(SEXP ssock, SEXP sstring)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
     if (length(ssock) != 1) error(_("invalid '%s' argument"), "socket");
     int sock = asInteger(ssock), start = 0, end, len;
     char *buf = (char *) translateCharFP(STRING_ELT(sstring, 0)), *abuf[1];

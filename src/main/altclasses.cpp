@@ -34,6 +34,7 @@
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/PairList.hpp>
 #include <CXXR/RAltRep.hpp>
@@ -1328,6 +1329,7 @@ static void mmap_finalize(SEXP eptr)
 static SEXP mmap_file(SEXP file, SEXPTYPE type, bool ptrOK, bool wrtOK,
 		      bool serOK, bool warn)
 {
+    CXXR::RAllocStack::Scope rscope;
     const char *efn = R_ExpandFileName(translateCharFP(STRING_ELT(file, 0)));
     struct stat sb;
 

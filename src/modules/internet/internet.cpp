@@ -36,6 +36,7 @@
 #include <cstdint>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -334,6 +335,7 @@ static SEXP in_do_download(SEXP args)
     char pbuf[30];
     int pc;
 #endif
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     scmd = CAR(args); args = CDR(args);
     if(!isString(scmd) || length(scmd) < 1)

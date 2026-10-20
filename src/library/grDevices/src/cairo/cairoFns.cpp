@@ -1950,6 +1950,7 @@ static void Cairo_MetricInfo(int c, pGEcontext gc,
 			     double* ascent, double* descent,
 			     double* width, pDevDesc dd)
 {
+    CXXR::RAllocStack::Scope rscope; // Rf_utf8ToLatin1AdobeSymbol2utf8
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     cairo_text_extents_t exts;
     char str[16];
@@ -1989,6 +1990,7 @@ static double Cairo_StrWidth(const char *str, pGEcontext gc, pDevDesc dd)
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     cairo_text_extents_t exts;
+    CXXR::RAllocStack::Scope rscope;
 
     const char *textstr;
     if (!utf8Valid(str)) error("%s", _("invalid string in Cairo_StrWidth"));
@@ -2012,6 +2014,7 @@ static void Cairo_Text(double x, double y,
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     const char *textstr;
+    CXXR::RAllocStack::Scope rscope; // Rf_utf8ToLatin1AdobeSymbol2utf8
 
     if (!utf8Valid(str)) error("%s", _("invalid string in Cairo_Text"));
 

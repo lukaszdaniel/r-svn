@@ -114,6 +114,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/BuiltInFunction.hpp>
@@ -1288,6 +1289,7 @@ attribute_hidden SEXP do_asPOSIXct(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_formatPOSIXlt(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope;
     GCStackRoot<> x;
     x = duplicate(CAR(args)); /* maybe coerced in next line */
     valid_POSIXlt(x, 11);

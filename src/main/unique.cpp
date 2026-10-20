@@ -2214,6 +2214,7 @@ attribute_hidden SEXP do_makeunique(SEXP call, SEXP op, SEXP args, SEXP env)
     int n, len, maxlen = 0;
     HashData data = { 0 };
     const char *csep, *ss;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     checkArity(op, args);
     names = CAR(args);

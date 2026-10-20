@@ -557,6 +557,7 @@ std::pair<bool, RObject *> R::usemethod(const char *generic, SEXP obj, SEXP call
 NORET attribute_hidden
 SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     static SEXP do_usemethod_formals = NULL;
     if (do_usemethod_formals == NULL)
 	do_usemethod_formals = allocFormalsList2(install("generic"),
@@ -1277,6 +1278,7 @@ static SEXP dispatchNonGeneric(SEXP name, SEXP env, SEXP fdef)
     /* dispatch the non-generic definition of `name'.  Used to trap
        calls to standardGeneric during the loading of the methods package */
     SEXP value, fun, symbol;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     /* find a non-generic function */
     symbol = installTrChar(asChar(name));
@@ -1323,6 +1325,7 @@ static SEXP get_this_generic(SEXP args);
 
 attribute_hidden SEXP do_standardGeneric(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     SEXP arg, value; R_stdGen_ptr_t ptr = R_get_standardGeneric_ptr();
 
     checkArity(op, args); /* set to -1 */

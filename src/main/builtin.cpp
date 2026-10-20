@@ -752,16 +752,14 @@ attribute_hidden SEXP do_expression(SEXP call, SEXP op, SEXP args, SEXP rho)
 /* vector(mode="logical", length=0) */
 attribute_hidden SEXP do_makevector(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    R_xlen_t len;
-    SEXP s;
-    SEXPTYPE mode;
+    CXXR::RAllocStack::Scope rscope;
     checkArity(op, args);
     if (length(CADR(args)) != 1) error(_("invalid '%s' argument"), "length");
-    len = asVecSize(CADR(args));
+    R_xlen_t len = asVecSize(CADR(args));
     if (len < 0) error(_("invalid '%s' argument"), "length");
-    s = coerceVector(CAR(args), STRSXP);
+    SEXP s = coerceVector(CAR(args), STRSXP);
     if (length(s) != 1) error(_("invalid '%s' argument"), "mode");
-    mode = str2type(CHAR(STRING_ELT(s, 0))); /* ASCII */
+    SEXPTYPE mode = str2type(CHAR(STRING_ELT(s, 0))); /* ASCII */
     if ((int) mode == -1 && streql(CHAR(STRING_ELT(s, 0)), "double"))
 	mode = REALSXP;
     switch (mode) {

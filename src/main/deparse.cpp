@@ -450,6 +450,7 @@ attribute_hidden SEXP do_dput(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden SEXP do_dump(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
     SEXP names = CAR(args),
 	 file = CADR(args);
     if(!inherits(file, "connection"))
@@ -899,6 +900,7 @@ static void deparse2buff(SEXP s, LocalParseData *d)
     attr_type attr = STRUC_ATTR;
     SEXP t;
     int d_opts_in = d->opts, i, n;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     d->fnarg = false;
 
@@ -1607,6 +1609,7 @@ static const char *EncodeNonFiniteComplexElement(Rcomplex x, char* buff)
 }
 
 static void deparse2buf_name(SEXP nv, int i, LocalParseData *d) {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     if (!isNull(nv) && !isNull(STRING_ELT(nv, i))
 	&& *CHAR(STRING_ELT(nv, i))) { /* length test */
 	/* d->opts = SIMPLEDEPARSE; This seems pointless */

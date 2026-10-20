@@ -49,6 +49,7 @@
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -863,6 +864,7 @@ attribute_hidden SEXP do_scan(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char *p, *encoding;
     LocalData data = LocalData();
     data.NAstrings = R_NilValue;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     checkArity(op, args);
 
@@ -1041,6 +1043,7 @@ attribute_hidden SEXP do_readln(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans, prompt;
 
     checkArity(op,args);
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     prompt = CAR(args);
     if (prompt == R_NilValue) {

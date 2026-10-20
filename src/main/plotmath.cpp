@@ -38,6 +38,7 @@
 
 #include <cctype>
 #include <R_ext/Minmax.h>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -568,6 +569,7 @@ static bool NameMatch(SEXP expr, const char *aString)
 
 static bool StringMatch(SEXP expr, const char *aString)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     return streql(translateChar(STRING_ELT(expr, 0)), aString);
 }
 /* Code to determine the ascii code corresponding */
@@ -1175,6 +1177,7 @@ static BBOX RenderNumber(SEXP expr, int draw, mathContext *mc,
 static BBOX RenderString(SEXP expr, int draw, mathContext *mc,
 			 pGEcontext gc, pGEDevDesc dd)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     return RenderStr(translateChar(STRING_ELT(expr, 0)), draw, mc, gc, dd);
 }
 

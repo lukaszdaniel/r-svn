@@ -35,6 +35,7 @@
 
 #include <Localization.h>
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -144,6 +145,7 @@ static void boundspec(char *fmt)
 
 attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     int nargs, cnt, v, thislen, nfmt;
     /* fmt2 is a copy of fmt with '*' expanded.
        bit will hold numeric formats and %<w>s, so be quite small. */

@@ -351,11 +351,11 @@ attribute_hidden R_xlen_t R::get1index(SEXP s, SEXP names, R_xlen_t len, int pok
 	{
 	    const char *symbol_name = CHAR(PRINTNAME(s));
 	    R_xlen_t names_len = xlength(names);
+	    CXXR::RAllocStack::Scope rscope; // translateChar
 	    for (R_xlen_t i = 0; i < names_len; i++)
 		if (STRING_ELT(names, i) != NA_STRING &&
 		    streql(translateChar(STRING_ELT(names, i)),
 			   symbol_name)) {
-		    CXXR::RAllocStack::Scope rscope;
 		    indx = i;
 		    break;
 		}

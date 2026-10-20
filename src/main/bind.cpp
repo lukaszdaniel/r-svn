@@ -1162,6 +1162,7 @@ attribute_hidden SEXP do_bind(SEXP call, SEXP op, SEXP args_, SEXP env)
     GCStackRoot<> method(R_NilValue);
     bool anyS4 = FALSE;
     char buf[512];
+    CXXR::RAllocStack::Scope rscope;
 
     for (SEXP a = CDR(args.get()); a != R_NilValue && method == R_NilValue; a = CDR(a)) {
 	GCStackRoot<> obj;

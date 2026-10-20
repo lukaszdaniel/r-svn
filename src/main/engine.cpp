@@ -1783,6 +1783,7 @@ void GEText(double x, double y, const char * const str, cetype_t enc,
 	    double xc, double yc, double rot,
 	    const pGEcontext gc, pGEDevDesc dd)
 {
+    CXXR::RAllocStack::Scope rscope; // reEnc
     /*
      * If the fontfamily is a Hershey font family, call R_GE_VText
      */
@@ -2562,6 +2563,7 @@ void GEMetricInfo(int c, const pGEcontext gc,
  */
 double GEStrWidth(const char *str, cetype_t enc, const pGEcontext gc, pGEDevDesc dd)
 {
+    CXXR::RAllocStack::Scope rscope; // reEnc
     /*
      * If the fontfamily is a Hershey font family, call R_GE_VStrWidth
      */
@@ -2670,6 +2672,7 @@ void GEStrMetric(const char *str, cetype_t enc, const pGEcontext gc,
                  double *ascent, double *descent, double *width,
                  pGEDevDesc dd)
 {
+    CXXR::RAllocStack::Scope rscope; // reEnc
     /*
      * If the fontfamily is a Hershey font family, call R_GE_VStrHeight
      */

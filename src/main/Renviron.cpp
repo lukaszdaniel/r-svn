@@ -87,6 +87,7 @@ static void Renviron_error(const char *msg)
 # endif
 
 #include <CXXR/RObject.hpp> // for R_Is_Running
+#include <CXXR/RAllocStack.hpp>
 # include <Defn.h>
 # include <Rembedded.h>
 # include <Fileio.h>
@@ -532,6 +533,7 @@ attribute_hidden SEXP do_readEnviron(SEXP call, SEXP op, SEXP args, SEXP env)
 {
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope;
     SEXP x = CAR(args);
     if (!isString(x) || LENGTH(x) != 1)
 	error(_("argument '%s' must be a character string"), "x");

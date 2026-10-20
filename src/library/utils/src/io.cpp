@@ -311,6 +311,7 @@ SEXP countfields(SEXP args)
     LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, false,
 		      false, 0, false,	 false};
     data.NAstrings = R_NilValue;
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
 
@@ -554,6 +555,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     typeInfo.isreal    = true;
     typeInfo.iscomplex = true;
     data.NAstrings = R_NilValue;
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
 
@@ -760,6 +762,7 @@ SEXP menu(SEXP choices)
     LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, false,
 		      false, 0, false, false};
     data.NAstrings = R_NilValue;
+    CXXR::RAllocStack::Scope rscope;
 
 
     if (!isString(choices))
@@ -805,6 +808,7 @@ SEXP readtablehead(SEXP args)
     LocalData data = {NULL, 0, 0, '.', "", NO_COMCHAR, 0, NULL, false,
 		      false, 0, false, false, false};
     data.NAstrings = R_NilValue;
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
 

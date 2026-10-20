@@ -857,6 +857,7 @@ attribute_hidden SEXP do_setwd(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP s = R_NilValue, wd = R_NilValue;	/* -Wall */
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
     if (!isPairList(args) || !isValidString(s = CAR(args)))
 	error("%s", _("character argument expected"));
     if (STRING_ELT(s, 0) == NA_STRING)
@@ -921,6 +922,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char fsp = FILESEP[0];
     const char *pp;
     int n;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     s = CAR(args);
@@ -1032,6 +1034,7 @@ attribute_hidden SEXP do_dirname(SEXP call, SEXP op, SEXP args, SEXP rho)
     const char fsp = FILESEP[0];
     const char *pp;
     int n;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     s = CAR(args);
@@ -1084,6 +1087,7 @@ extern char *realpath(const char *path, char *resolved_path);
 
 attribute_hidden SEXP do_normalizepath(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
     SEXP ans, paths = CAR(args), elp;
     int i, n = LENGTH(paths);
     const char *path;
@@ -1209,6 +1213,7 @@ attribute_hidden SEXP do_encodeString(SEXP call, SEXP op, SEXP args, SEXP rho)
     R_xlen_t i, len;
     int w, quote = 0, justify;
     const char *cs;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     checkArity(op, args);
     x = CAR(args);
@@ -2388,6 +2393,7 @@ attribute_hidden SEXP do_enc2(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ans, el;
     R_xlen_t i;
     bool duped = false;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     checkArity(op, args);
     check1arg(args, call, "x");
@@ -2682,6 +2688,7 @@ attribute_hidden SEXP do_ICUget(SEXP call, SEXP op, SEXP args, SEXP rho)
 attribute_hidden
 int R::Scollate(SEXP a, SEXP b)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     if (!collationLocaleSet) {
 	int errsv = errno;      /* OSX may set errno in the operations below. */
 	collationLocaleSet = 1;
@@ -2774,6 +2781,7 @@ static int Rstrcoll(const char *s1, const char *s2)
 
 int R::Scollate(SEXP a, SEXP b)
 {
+    CXXR::RAllocStack::Scope rscope; // translateCharUTF8
     if(getCharCE(a) == CE_UTF8 || getCharCE(b) == CE_UTF8)
 	return Rstrcoll(translateCharUTF8(a), translateCharUTF8(b));
     else
@@ -2784,6 +2792,7 @@ int R::Scollate(SEXP a, SEXP b)
 attribute_hidden
 int R::Scollate(SEXP a, SEXP b)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     return strcoll(translateChar(a), translateChar(b));
 }
 

@@ -192,21 +192,21 @@ attribute_hidden SEXP do_prmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 static void PrintLanguage(SEXP s, R_PrintData *data)
 {
-    SEXP t = getAttrib(s, R_SrcrefSymbol);
+    CXXR::RAllocStack::Scope rscope; // translateChar
+    GCStackRoot<> t;
+    t = getAttrib(s, R_SrcrefSymbol);
     bool useSrc = (data->useSource && isInteger(t));
     if (useSrc) {
-	PROTECT(t = lang2(R_AsCharacterSymbol, t));
+	t = lang2(R_AsCharacterSymbol, t);
 	t = eval(t, R_BaseEnv);
-	UNPROTECT(1);
     } else {
 	t = deparse1w(s, false, data->useSource | DEFAULTDEPARSE);
 	R_print = *data; /* Deparsing calls PrintDefaults() */
     }
-    PROTECT(t);
+
     for (int i = 0; i < LENGTH(t); i++) {
  	Rprintf("%s\n", translateChar(STRING_ELT(t, i))); // translate: for srcref part (PR#16732)
     }
-    UNPROTECT(1);
 }
 
 static void PrintClosure(SEXP s, R_PrintData *data)
@@ -440,6 +440,7 @@ static void PrintTypeLength(char *buffer, size_t buffer_size,
 
 static void PrintGenericVector(SEXP s, R_PrintData *data)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     R_xlen_t ns = XLENGTH(s), i;
     SEXP names, dims = getAttrib(s, R_DimSymbol);
     if(dims != R_NilValue && length(dims) > 1) {

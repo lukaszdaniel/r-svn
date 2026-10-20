@@ -1610,6 +1610,7 @@ attribute_hidden SEXP do_fifo(SEXP call, SEXP op, SEXP args, SEXP env)
     Rconnection con = NULL;
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
     sfile = CAR(args);
     if(!isString(sfile) || LENGTH(sfile) != 1 ||
        STRING_ELT(sfile, 0) == NA_STRING)
@@ -1778,6 +1779,7 @@ attribute_hidden SEXP do_pipe(SEXP call, SEXP op, SEXP args, SEXP env)
     int ncon;
     cetype_t ienc = CE_NATIVE;
     Rconnection con = NULL;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     scmd = CAR(args);
@@ -2758,6 +2760,7 @@ attribute_hidden SEXP do_gzfile(SEXP call, SEXP op, SEXP args, SEXP env)
     Rconnection con = NULL;
     int type = PRIMVAL(op);
     int subtype = 0;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     sfile = CAR(args);
@@ -3466,6 +3469,7 @@ attribute_hidden SEXP do_rawconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *desc, *open;
     int ncon;
     Rconnection con = NULL;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     sfile = CAR(args);
@@ -3890,6 +3894,7 @@ attribute_hidden SEXP do_textconnection(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *desc, *open;
     int ncon, type;
     Rconnection con = NULL;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     sdesc = CAR(args);
@@ -3974,6 +3979,7 @@ attribute_hidden SEXP do_sockconn(SEXP call, SEXP op, SEXP args, SEXP env)
     bool server;
     Rconnection con = NULL;
     Rservsockconn scon = NULL;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     if (PRIMVAL(op) == 0) { /* socketConnection */
@@ -4056,6 +4062,7 @@ attribute_hidden SEXP do_unz(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *file, *open;
     int ncon;
     Rconnection con = NULL;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     sfile = CAR(args);
@@ -4553,6 +4560,7 @@ attribute_hidden SEXP do_writelines(SEXP call, SEXP op, SEXP args, SEXP env)
     Rconnection con=NULL;
     const char *ssep;
     SEXP text, sep;
+    CXXR::RAllocStack::Scope rscope; // translateChar0
 
     checkArity(op, args);
     text = CAR(args);
@@ -4949,6 +4957,7 @@ attribute_hidden SEXP do_readbin(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_writebin(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateChar0
     SEXP object = CAR(args);
     if(!isVectorAtomic(object))
 	error("%s", _("'x' is not an atomic vector type"));
@@ -5887,6 +5896,7 @@ attribute_hidden SEXP do_url(SEXP call, SEXP op, SEXP args, SEXP env)
 	winmeth = 0;  // 0: "internal", 1: "wininet" (Windows only)
     cetype_t ienc = CE_NATIVE;
     Rconnection con = NULL;
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     checkArity(op, args);
     // --------- description

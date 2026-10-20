@@ -32,6 +32,7 @@
 #include <cstdlib> /* for MB_CUR_MAX */
 #include <cwchar>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <Defn.h> // for asLogicalNoNA(), Rf_mbrtowc()
@@ -76,6 +77,7 @@ SEXP delim_match(SEXP x, SEXP delims)
     int lstart, lend;
     SEXP ans, matchlen;
     mbstate_t mb_st; int used;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     if(!isString(x) || !isString(delims) || (length(delims) != 2))
 	error("%s", _("invalid argument type"));

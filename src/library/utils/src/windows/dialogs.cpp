@@ -26,6 +26,7 @@
 
 #include <windows.h>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/RealVector.hpp>
@@ -77,6 +78,7 @@ SEXP winProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
     const char *title, *label;
     winprogressbar *pbar;
     bool haveLabel;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     args = CDR(args);
     pbar = R_Calloc(1, winprogressbar);
@@ -130,6 +132,7 @@ SEXP setWinProgressBar(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP ptr = CAR(args);
     winprogressbar *pbar;
     double value;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     pbar = (winprogressbar*) R_ExternalPtrAddr(ptr);
     if(!pbar)
@@ -169,6 +172,7 @@ SEXP winDialog(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP message;
     const char * type;
     int res=YES;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     args = CDR(args);
     type = translateChar(STRING_ELT(CAR(args), 0));
@@ -195,6 +199,7 @@ SEXP winDialogString(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP  message, def;
     const char *string;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     args = CDR(args);
     message = CAR(args);
@@ -237,6 +242,7 @@ SEXP winMenuItems(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP mname, ans, ansnames;
     menuItems *items;
     char errmsg[50];
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     args = CDR(args);
 
@@ -276,6 +282,7 @@ SEXP winMenuAdd(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP smenu, sitem;
     int res;
     char errmsg[50];
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     args = CDR(args);
     if (CharacterMode != RGui)
@@ -311,6 +318,7 @@ SEXP winMenuDel(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP smenu, sitem;
     int res;
     char errmsg[50];
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     args = CDR(args);
     if (CharacterMode != RGui)

@@ -1411,6 +1411,7 @@ attribute_hidden void Rstd_loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
     char file[R_PATH_MAX];
     const char *p;
 
+    CXXR::RAllocStack::Scope rscope;
     sfile = CAR(args);
     if (!isString(sfile) || LENGTH(sfile) < 1)
 	errorcall(call, _("invalid '%s' argument"), "file");
@@ -1434,6 +1435,7 @@ attribute_hidden void Rstd_savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
     char file[R_PATH_MAX];
     const char *p;
 
+    CXXR::RAllocStack::Scope rscope;
     sfile = CAR(args);
     if (!isString(sfile) || LENGTH(sfile) < 1)
 	errorcall(call, _("invalid '%s' argument"), "file");

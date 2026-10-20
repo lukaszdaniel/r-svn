@@ -36,6 +36,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/StackChecker.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/FunctionBase.hpp>
 #include <CXXR/ConsCell.hpp>
 #include <CXXR/String.hpp>
@@ -499,6 +500,7 @@ static void check_TRUE_FALSE(SEXP arg, const char *chname) {
 attribute_hidden SEXP do_options(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     SEXP names, value, options;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     /* Locate the options values in the symbol table.
        This will need to change if options are to live in the session

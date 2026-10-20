@@ -425,6 +425,7 @@ static SEXP in_setTitle(const char *title)
 
 SEXP setWindowTitle(SEXP title)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     if(!isString(title)  || LENGTH(title) != 1 ||
        STRING_ELT(title, 0) == NA_STRING)
 	error("%s", _("'title' must be a character string"));
@@ -434,6 +435,7 @@ SEXP setWindowTitle(SEXP title)
 
 SEXP setStatusBar(SEXP text)
 {
+    CXXR::RAllocStack::Scope rscope; // translateChar
     if(!isString(text)  || LENGTH(text) != 1 ||
        STRING_ELT(text, 0) == NA_STRING)
 	error("%s", _("'text' must be a character string"));

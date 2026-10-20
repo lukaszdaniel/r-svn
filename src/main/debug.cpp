@@ -36,6 +36,7 @@
 #include <CXXR/RContext.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <Localization.h>
 #include <Defn.h>
@@ -261,7 +262,8 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 #ifdef R_MEMORY_PROFILING
     SEXP object, previous, ans;
     char buffer[21];
-    bool visible; 
+    bool visible;
+    CXXR::RAllocStack::Scope rscope;
 
     static SEXP do_retracemem_formals = NULL;
     if (do_retracemem_formals == NULL)

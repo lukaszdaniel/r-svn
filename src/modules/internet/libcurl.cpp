@@ -373,6 +373,7 @@ SEXP in_do_curlGetHeaders(SEXP call, SEXP op, SEXP args, SEXP rho)
     error("%s", _("curlGetHeaders is not supported on this platform"));
     return R_NilValue;
 #else
+    CXXR::RAllocStack::Scope rscope;
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
        error(_("invalid '%s' argument"), "url");
     const char *url = translateChar(STRING_ELT(CAR(args), 0));

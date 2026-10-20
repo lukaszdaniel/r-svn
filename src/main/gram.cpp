@@ -111,6 +111,7 @@
 #include <CXXR/Evaluator.hpp>
 #include <CXXR/RContext.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
@@ -1103,16 +1104,16 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   477,   477,   478,   479,   480,   481,   484,   485,   486,
-     489,   490,   493,   494,   495,   496,   497,   499,   500,   502,
-     503,   504,   505,   506,   508,   509,   510,   511,   512,   513,
-     514,   515,   516,   517,   518,   519,   520,   521,   522,   523,
-     524,   525,   526,   527,   528,   529,   530,   532,   533,   534,
-     535,   536,   537,   538,   539,   540,   541,   542,   543,   544,
-     545,   546,   547,   548,   549,   550,   551,   552,   553,   554,
-     558,   561,   564,   568,   569,   570,   571,   572,   573,   576,
-     577,   580,   581,   582,   583,   584,   585,   586,   587,   590,
-     591,   592,   593,   594,   598
+       0,   478,   478,   479,   480,   481,   482,   485,   486,   487,
+     490,   491,   494,   495,   496,   497,   498,   500,   501,   503,
+     504,   505,   506,   507,   509,   510,   511,   512,   513,   514,
+     515,   516,   517,   518,   519,   520,   521,   522,   523,   524,
+     525,   526,   527,   528,   529,   530,   531,   533,   534,   535,
+     536,   537,   538,   539,   540,   541,   542,   543,   544,   545,
+     546,   547,   548,   549,   550,   551,   552,   553,   554,   555,
+     559,   562,   565,   569,   570,   571,   572,   573,   574,   577,
+     578,   581,   582,   583,   584,   585,   586,   587,   588,   591,
+     592,   593,   594,   595,   599
 };
 #endif
 
@@ -4267,6 +4268,7 @@ SEXP R::R_ParseConn(Rconnection con, int n, ParseStatus *status, SEXP srcfile)
 /* This one is public, and used in source.c */
 SEXP R_ParseVector(SEXP text, int n, ParseStatus *status, SEXP srcfile)
 {
+    CXXR::RAllocStack::Scope rscope; // R_TextBufferInit
     SEXP rval;
     TextBuffer textb;
     R_TextBufferInit(&textb, text);

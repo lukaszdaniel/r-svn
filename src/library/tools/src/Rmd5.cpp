@@ -24,6 +24,7 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
@@ -49,6 +50,7 @@ SEXP Rmd5(SEXP files)
     char out[33];
     FILE *fp;
     unsigned char resblock[16];
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     /* RAW mode: hash of one buffer instead of files */
     if (TYPEOF(files) == RAWSXP) {

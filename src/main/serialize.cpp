@@ -3209,6 +3209,7 @@ static bool getFileID(const char *cfile, struct fileid *id)
 attribute_hidden SEXP do_lazyLoadDBflush(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope; // translateCharFP
 
     const char *cfile = translateCharFP(STRING_ELT(CAR(args), 0));
 
@@ -3437,6 +3438,7 @@ attribute_hidden SEXP do_lazyLoadDBfetch(SEXP call, SEXP op, SEXP args, SEXP env
     int compressed;
     bool err = false;
     GCStackRoot<> val;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     checkArity(op, args);
     key = CAR(args); args = CDR(args);

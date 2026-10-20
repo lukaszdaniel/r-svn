@@ -1227,6 +1227,7 @@ attribute_hidden SEXP do_dynload(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     char buf[2 * R_PATH_MAX];
     DllInfo *info;
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op,args);
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)
@@ -1244,6 +1245,7 @@ attribute_hidden SEXP do_dynload(SEXP call, SEXP op, SEXP args, SEXP env)
 attribute_hidden SEXP do_dynunload(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     char buf[2 * R_PATH_MAX];
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op,args);
     if (!isString(CAR(args)) || LENGTH(CAR(args)) != 1)

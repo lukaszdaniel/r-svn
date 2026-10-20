@@ -880,6 +880,7 @@ SEXP do_Rprof(SEXP args)
     int numfiles, bufsize;
     const char *event_arg;
     rpe_type event;
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
 #ifdef BC_PROFILING
     if (s_bc_profiling) {

@@ -42,6 +42,7 @@ using namespace CXXR;
 SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile;
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
     sfile = CAR(args);
@@ -62,6 +63,7 @@ SEXP savehistory(SEXP call, SEXP op, SEXP args, SEXP env)
 SEXP loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP sfile;
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
     sfile = CAR(args);
