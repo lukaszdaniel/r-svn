@@ -295,7 +295,7 @@ SEXP writeClipboard(SEXP text, SEXP sformat)
     char *s;
     const char *p;
     bool success = FALSE, raw = FALSE;
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // wtransChar
 
     int format = asInteger(sformat);
 

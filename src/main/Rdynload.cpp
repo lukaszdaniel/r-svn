@@ -491,6 +491,7 @@ attribute_hidden SEXP Rf_registerRoutines(SEXP sSymbolList) {
     /* PASS 2: allocate all necessary structures and fill them.
        R_registerRoutines() copies all contents so we can use anything
        from the symbol list as-is and any transient allocations as well */
+    CXXR::RAllocStack::Scope rscope;
     R_CMethodDef *cRoutines = n_c ? (R_CMethodDef*) R_alloc(n_c + 1, sizeof(R_CMethodDef)) : NULL;
     R_CallMethodDef *callRoutines = n_call ? (R_CallMethodDef*) R_alloc(n_call + 1, sizeof(R_CallMethodDef)) : NULL;
     R_FortranMethodDef *fortranRoutines = n_f ? (R_FortranMethodDef*) R_alloc(n_f + 1, sizeof(R_FortranMethodDef)) : NULL;

@@ -38,6 +38,7 @@
 
 #include <Localization.h>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/ListVector.hpp>
@@ -115,6 +116,7 @@ static void amatch_regaparams(regaparams_t *params, int patlen,
 
 attribute_hidden SEXP do_agrep(SEXP call, SEXP op, SEXP args, SEXP env)
 {
+    CXXR::RAllocStack::Scope rscope; // wtransChar, translateChar
     SEXP pat, vec, ind, ans;
     SEXP opt_costs, opt_bounds;
     R_xlen_t i, j, n;
@@ -513,6 +515,7 @@ attribute_hidden SEXP do_adist(SEXP call, SEXP op, SEXP args, SEXP env)
     size_t nmatch = 0 /* -Wall */;
 
     int rc, cflags = REG_EXTENDED;
+    CXXR::RAllocStack::Scope rscope; // wtransChar, translateChar
 
     checkArity(op, args);
     x = CAR(args); args = CDR(args);
@@ -752,6 +755,7 @@ attribute_hidden SEXP do_aregexec(SEXP call, SEXP op, SEXP args, SEXP env)
     regamatch_t match;
     int so, patlen;
     int rc, cflags = REG_EXTENDED;
+    CXXR::RAllocStack::Scope rscope; // wtransChar, translateChar
 
     checkArity(op, args);
 

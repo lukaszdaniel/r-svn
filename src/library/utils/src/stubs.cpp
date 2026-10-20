@@ -79,7 +79,7 @@ SEXP loadhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 SEXP addhistory(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     SEXP stamp;
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // wtransChar
 
     args = CDR(args);
     stamp = CAR(args);

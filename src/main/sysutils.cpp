@@ -2196,7 +2196,7 @@ next_char:
     *((wchar_t *) outbuf) = L'\0'; /* terminate wide string */
     if(ttype == NT_FROM_NATIVE) Riconv_close(obj);
     if (mustWork && failed) {
-	CXXR::RAllocStack::Scope rscope;
+	CXXR::RAllocStack::Scope rscope; // reEnc3
 	const char *native_buf = reEnc3(cbuff->data, TO_WCHAR, "", 2);
 
 	/* copy to truncate (and mark as truncated) */

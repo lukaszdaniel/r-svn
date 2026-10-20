@@ -772,6 +772,7 @@ static void getylimits(double *y, pGEDevDesc dd) {
 
 SEXP C_axis(SEXP args)
 {
+    CXXR::RAllocStack::Scope rscope;
     /* axis(side, at, labels, tick, line, pos,
      	    outer, font, lty, lwd, lwd.ticks, col, col.ticks,
 	    hadj, padj, gap.axis, ...)

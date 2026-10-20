@@ -19,6 +19,7 @@
  */
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include "grid.h"
 #include "localization.h"
 
@@ -65,18 +66,16 @@ bool relativeUnit(SEXP unit, int index,
 void findRelWidths(SEXP layout, int *relativeWidths,
 		   pGEDevDesc dd) 
 {
-    int i;
     SEXP widths = layoutWidths(layout);
-    for (i=0; i<layoutNCol(layout); i++) 
+    for (int i=0; i<layoutNCol(layout); i++) 
 	relativeWidths[i] = relativeUnit(widths, i, dd);
 }
 
 void findRelHeights(SEXP layout, int *relativeHeights,
 		   pGEDevDesc dd) 
 {
-    int i;
     SEXP heights = layoutHeights(layout);
-    for (i=0; i<layoutNRow(layout); i++) 
+    for (int i=0; i<layoutNRow(layout); i++) 
 	relativeHeights[i] = relativeUnit(heights, i, dd);
 }
 
@@ -88,9 +87,8 @@ void allocateKnownWidths(SEXP layout,
 			 pGEDevDesc dd,
 			 double *npcWidths, double *widthLeftCM) 
 {
-    int i;
     SEXP widths = layoutWidths(layout);
-    for (i=0; i<layoutNCol(layout); i++) 
+    for (int i=0; i<layoutNCol(layout); i++) 
 	if (!relativeWidths[i]) {
 	    npcWidths[i] = transformWidth(widths, i, parentContext,
 					  parentgc,
@@ -108,9 +106,8 @@ void allocateKnownHeights(SEXP layout,
 			  pGEDevDesc dd,
 			  double *npcHeights, double *heightLeftCM) 
 {
-    int i;
     SEXP heights = layoutHeights(layout);
-    for (i=0; i<layoutNRow(layout); i++) 
+    for (int i=0; i<layoutNRow(layout); i++) 
 	if (!relativeHeights[i]) {
 	    npcHeights[i] = transformHeight(heights, i, parentContext,
 					    parentgc,
@@ -121,28 +118,26 @@ void allocateKnownHeights(SEXP layout,
 }
 
 int colRespected(int col, SEXP layout) {
-    int i;
     int result = 0;
     int respect = layoutRespect(layout);
     int *respectMat = layoutRespectMat(layout);
     if (respect == 1)
 	result = 1;
     else
-	for (i=0; i<layoutNRow(layout); i++)
+	for (int i=0; i<layoutNRow(layout); i++)
 	    if (respectMat[col*layoutNRow(layout) + i] != 0)
 		result = 1;
     return result;
 }
 
 int rowRespected(int row, SEXP layout) {
-    int i;
     int result = 0;
     int respect = layoutRespect(layout);
     int *respectMat = layoutRespectMat(layout);
     if (respect == 1)
 	result = 1;
     else
-	for (i=0; i<layoutNCol(layout); i++)
+	for (int i=0; i<layoutNCol(layout); i++)
 	    if (respectMat[i*layoutNRow(layout) + row] != 0)
 		result = 1;
     return result;
@@ -158,10 +153,9 @@ double totalWidth(SEXP layout, int *relativeWidths,
 		  const pGEcontext parentgc,
 		  pGEDevDesc dd)
 {
-    int i;
     SEXP widths = layoutWidths(layout);
     double totalWidth = 0;
-    for (i=0; i<layoutNCol(layout); i++) 
+    for (int i=0; i<layoutNCol(layout); i++) 
 	if (relativeWidths[i])
 	    totalWidth += transformWidth(widths, i, parentContext, 
 					 parentgc,
@@ -179,10 +173,9 @@ double totalHeight(SEXP layout, int *relativeHeights,
 		   const pGEcontext parentgc,
 		   pGEDevDesc dd)
 {
-    int i;
     SEXP heights = layoutHeights(layout);
     double totalHeight = 0;
-    for (i=0; i<layoutNRow(layout); i++) 
+    for (int i=0; i<layoutNRow(layout); i++) 
 	if (relativeHeights[i])
 	    totalHeight += transformHeight(heights, i, parentContext, 
 					   parentgc,
@@ -203,7 +196,6 @@ void allocateRespected(SEXP layout,
 		       pGEDevDesc dd,
 		       double *npcWidths, double *npcHeights)
 {
-    int i;
     SEXP widths = layoutWidths(layout);
     SEXP heights = layoutHeights(layout);
     int respect = layoutRespect(layout);
@@ -230,7 +222,7 @@ void allocateRespected(SEXP layout,
 	}
 	/* Allocate respected widths 
 	 */
-	for (i=0; i<layoutNCol(layout); i++)
+	for (int i=0; i<layoutNCol(layout); i++)
 	    if (relativeWidths[i])
 		if (colRespected(i, layout)) {
 		    /* 
@@ -251,7 +243,7 @@ void allocateRespected(SEXP layout,
 		}
 	/* Allocate respected heights
 	 */
-	for (i=0; i<layoutNRow(layout); i++)
+	for (int i=0; i<layoutNRow(layout); i++)
 	    if (relativeHeights[i])
 		if (rowRespected(i, layout)) {
 		    /* 
@@ -275,12 +267,11 @@ void setRespectedZero(SEXP layout,
                       int *relativeWidths, int *relativeHeights,
                       double *npcWidths, double *npcHeights)
 {
-    int i;
-    for (i=0; i<layoutNCol(layout); i++)
+    for (int i=0; i<layoutNCol(layout); i++)
         if (relativeWidths[i])
             if (colRespected(i, layout)) 
                 npcWidths[i] = 0;
-    for (i=0; i<layoutNRow(layout); i++)
+    for (int i=0; i<layoutNRow(layout); i++)
         if (relativeHeights[i])
             if (rowRespected(i, layout)) 
                 npcHeights[i] = 0;
@@ -293,10 +284,9 @@ double totalUnrespectedWidth(SEXP layout, int *relativeWidths,
 			     const pGEcontext parentgc,
 			     pGEDevDesc dd)
 {
-    int i;
     SEXP widths = layoutWidths(layout);
     double totalWidth = 0;
-    for (i=0; i<layoutNCol(layout); i++) 
+    for (int i=0; i<layoutNCol(layout); i++) 
 	if (relativeWidths[i])
 	    if (!colRespected(i, layout))
 		totalWidth += transformWidth(widths, i, parentContext, 
@@ -315,10 +305,9 @@ double totalUnrespectedHeight(SEXP layout, int *relativeHeights,
 			      const pGEcontext parentgc,
 			      pGEDevDesc dd)
 {
-    int i;
     SEXP heights = layoutHeights(layout);
     double totalHeight = 0;
-    for (i=0; i<layoutNRow(layout); i++) 
+    for (int i=0; i<layoutNRow(layout); i++) 
 	if (relativeHeights[i])
 	    if (!rowRespected(i, layout))
 		totalHeight += transformHeight(heights, i, parentContext, 
@@ -337,8 +326,7 @@ void setRemainingWidthZero(SEXP layout,
                            int *relativeWidths, 
                            double *npcWidths)
 {
-    int i;
-    for (i=0; i<layoutNCol(layout); i++)
+    for (int i=0; i<layoutNCol(layout); i++)
         if (relativeWidths[i])
             if (!colRespected(i, layout)) 
                 npcWidths[i] = 0;
@@ -351,13 +339,12 @@ void allocateRemainingWidth(SEXP layout, int *relativeWidths,
 			    pGEDevDesc dd,
 			    double *npcWidths)
 {
-    int i;
     SEXP widths = layoutWidths(layout);
     double sumWidth;
     sumWidth = totalUnrespectedWidth(layout, relativeWidths,
 				     parentContext, parentgc, dd);
     if (sumWidth > 0) {
-        for (i=0; i<layoutNCol(layout); i++) 
+        for (int i=0; i<layoutNCol(layout); i++) 
             if (relativeWidths[i])
                 if (!colRespected(i, layout))
                     npcWidths[i] = remainingWidthCM*
@@ -382,8 +369,7 @@ void setRemainingHeightZero(SEXP layout,
                             int *relativeHeights, 
                             double *npcHeights)
 {
-    int i;
-    for (i=0; i<layoutNRow(layout); i++)
+    for (int i=0; i<layoutNRow(layout); i++)
         if (relativeHeights[i])
             if (!rowRespected(i, layout)) 
                 npcHeights[i] = 0;
@@ -396,13 +382,12 @@ void allocateRemainingHeight(SEXP layout, int *relativeHeights,
 			     pGEDevDesc dd,
 			     double *npcHeights)
 {
-    int i;
     SEXP heights = layoutHeights(layout);
     double sumHeight;
     sumHeight = totalUnrespectedHeight(layout, relativeHeights,
 				       parentContext, parentgc, dd);
     if (sumHeight > 0) {
-        for (i=0; i<layoutNRow(layout); i++) 
+        for (int i=0; i<layoutNRow(layout); i++) 
             if (relativeHeights[i])
                 if (!rowRespected(i, layout))
                     npcHeights[i] = remainingHeightCM*
@@ -425,9 +410,8 @@ void allocateRemainingHeight(SEXP layout, int *relativeHeights,
 
 static double sumDims(double dims[], int from, int to)
 {
-    int i;
     double s = 0;
-    for (i = from; i < to + 1; i++)
+    for (int i = from; i < to + 1; i++)
 	s = s + dims[i];
     return s;
 }
@@ -498,7 +482,7 @@ void calcViewportLayout(SEXP viewport,
 			const pGEcontext parentgc,
 			pGEDevDesc dd)
 {
-    int i;
+    CXXR::RAllocStack::Scope rscope;
     SEXP currentWidths, currentHeights;
     SEXP layout = viewportLayout(viewport);
     double *npcWidths = (double *) R_alloc(layoutNCol(layout), sizeof(double));
@@ -577,12 +561,12 @@ void calcViewportLayout(SEXP viewport,
      */
     PROTECT(currentWidths = allocVector(REALSXP, layoutNCol(layout)));
     PROTECT(currentHeights = allocVector(REALSXP, layoutNRow(layout)));
-    for (i=0; i<layoutNCol(layout); i++) {
+    for (int i=0; i<layoutNCol(layout); i++) {
         /* Layout widths are stored in CM
          */
 	REAL(currentWidths)[i] = npcWidths[i];
     }
-    for (i=0; i<layoutNRow(layout); i++) {
+    for (int i=0; i<layoutNRow(layout); i++) {
         /* Layout heights are stored in CM
          */
 	REAL(currentHeights)[i] = npcHeights[i];

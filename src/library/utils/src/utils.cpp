@@ -24,6 +24,7 @@
 #include <cwctype>
 #include <cstring>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <R.h>
@@ -73,6 +74,7 @@ using namespace CXXR;
 #if defined(USE_RI18N_FNS) || (defined(HAVE_ISWCTYPE) && defined(HAVE_WCTYPE))
 SEXP charClass(SEXP x, SEXP scl)
 {
+    CXXR::RAllocStack::Scope rscope; // wtransChar
     int nProtect = 0;
     if (!isString(scl) || length(scl) != 1)
 	error("%s", _("argument 'class' must be a character string"));

@@ -32,8 +32,9 @@
 # include <config.h>
 #endif
 
-#include <CXXR/GCStackRoot.hpp>
 #include <Localization.h>
+#include <CXXR/GCStackRoot.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h>
 
 using namespace R;
@@ -43,6 +44,7 @@ attribute_hidden SEXP do_mapply(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
     checkArity(op, args);
 
+    CXXR::RAllocStack::Scope rscope;
     GCStackRoot<> f(CAR(args)),
 	varyingArgs(CADR(args)),   // = 'dots' in R
 	constantArgs(CADDR(args)), // = 'MoreArgs' in R

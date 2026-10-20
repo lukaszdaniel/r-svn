@@ -1972,7 +1972,7 @@ SEXP C_contour(SEXP args)
     /* the top of the stack, otherwise we run out of */
     /* memory after a sequence of displaylist replays */
 
-    CXXR::RAllocStack::Scope rsope0;
+    CXXR::RAllocStack::Scope rscope;
     ctr_SegDB = (SEGP*)R_alloc(nx*ny, sizeof(SEGP));
 
     for (i = 0; i < nx; i++)

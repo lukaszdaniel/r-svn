@@ -1055,6 +1055,7 @@ SEXP writetable(SEXP call, SEXP op, SEXP args, SEXP env)
     SEXP *levels;
     R_StringBuffer strBuf = R_StringBuffer();
     wt_info wi;
+    CXXR::RAllocStack::Scope rscope;
 
     args = CDR(args);
 

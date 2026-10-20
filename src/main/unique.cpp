@@ -1612,6 +1612,7 @@ attribute_hidden SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
     if (!isString(input) || !isString(target))
 	error("%s", _("argument is not of mode character"));
 
+    CXXR::RAllocStack::Scope rscope;
     int *used = NULL;
     if(no_dups) {
 	used = (int *) R_alloc((size_t) n_target, sizeof(int));

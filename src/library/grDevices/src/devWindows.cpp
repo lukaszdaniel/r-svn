@@ -673,6 +673,7 @@ static char* translateFontFamily(const char* family) {
 
 static void SetFont(pGEcontext gc, double rot, gadesc *xd)
 {
+    CXXR::RAllocStack::Scope rscope; // because of translateFontFamily()->SaveFontSpec()
     int size, face = gc->fontface;
     char* fontfamily;
     double fs = gc->cex * gc->ps;

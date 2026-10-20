@@ -24,6 +24,7 @@
 
 #include <cstring> // for memcpy
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <R_ext/Visibility.h>
@@ -128,13 +129,13 @@ static double evaluate(splPTR sp, double x, int nder)
 }
 
 /* called from	predict.bSpline() and predict.pbSpline() : */
-SEXP
-spline_value(SEXP knots, SEXP coeff, SEXP order, SEXP x, SEXP deriv)
+SEXP spline_value(SEXP knots, SEXP coeff, SEXP order, SEXP x, SEXP deriv)
 {
     SEXP val;
     splPTR sp;
     double *xx, *kk;
     int n, nk;
+    CXXR::RAllocStack::Scope rscope;
 
     PROTECT(knots = coerceVector(knots, REALSXP));
     kk = REAL(knots); nk = length(knots);
@@ -173,11 +174,11 @@ spline_value(SEXP knots, SEXP coeff, SEXP order, SEXP x, SEXP deriv)
 }
 
 /* called from	splineDesign() : */
-SEXP
-spline_basis(SEXP knots, SEXP order, SEXP xvals, SEXP derivs)
+SEXP spline_basis(SEXP knots, SEXP order, SEXP xvals, SEXP derivs)
 {
 /* evaluate the non-zero B-spline basis functions (or their derivatives)
  * at xvals.  */
+    CXXR::RAllocStack::Scope rscope;
 
     PROTECT(knots = coerceVector(knots, REALSXP));
     double *kk = REAL(knots); int nk = length(knots);
