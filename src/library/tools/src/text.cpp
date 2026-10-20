@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2003-2025   The R Core Team.
+ *  Copyright (C) 2003-2026   The R Core Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -307,7 +307,7 @@ SEXP splitString(SEXP string, SEXP delims)
 		if(nthis)
 		    SET_STRING_ELT(out, used++, String::obtain(tmp, nthis, ienc));
 		// put out delimiter
-		SET_STRING_ELT(out, used++, String::obtain(p, 1, CE_NATIVE));
+		SET_STRING_ELT(out, used++, String::obtain(p, 1, ienc));
 		// restart
 		this_ = tmp; nthis = 0;
 	    } else {
