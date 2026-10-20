@@ -22,6 +22,7 @@
 #endif
 
 #include <R_ext/Minmax.h>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include "ts.h"
 #include "localization.h"
@@ -324,6 +325,7 @@ void forkal(Starma G, int d, int il, double *delta, double *y, double *amse,
 /*     invoking this routine will calculate the finite sample predictions */
 /*     and their conditional mean square errors for any arima process. */
 
+    CXXR::RAllocStack::Scope rscope;
     store = (double *) R_alloc(rd, sizeof(double));
     R_Free(G->a); G->a = a = R_Calloc(rd, double);
     R_Free(G->P); G->P = P = R_Calloc(rz, double);

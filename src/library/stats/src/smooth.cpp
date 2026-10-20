@@ -26,6 +26,7 @@
 #include <cstdlib> /* for abs */
 #include <cmath>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <Rinternals.h> /* Arith.h, Boolean.h, Error.h, Memory.h .. */
 #include "statsErr.h"
 
@@ -251,6 +252,7 @@ static int sm_3RSR(double *x, double *y, double *z, double *w, R_xlen_t n,
 #include <Rinternals.h>
 SEXP Rsm(SEXP x, SEXP stype, SEXP send)
 {
+    CXXR::RAllocStack::Scope rscope;
     int iend = asInteger(send), type = asInteger(stype);
     R_xlen_t n = XLENGTH(x);
     SEXP ans = PROTECT(allocVector(VECSXP, 2));

@@ -20,12 +20,12 @@
  */
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include "modreg.h"
 #include "localization.h"
 
 // Large value, to replace { NaN | NA } values with for NA_BIG_alternate_* :
-static double
-BIG_dbl = 8.888888888e307;
+static constexpr double BIG_dbl = 8.888888888e307;
 //          1 3 5 7 9, // ~ < 2^1023 [such that +/- 2*BIG_dbl is still normalized]
 
 enum { NA_BIG_alternate_P = 1, NA_BIG_alternate_M, NA_OMIT, NA_FAIL };
@@ -58,6 +58,7 @@ static void Srunmed(const double* y, double* smo, R_xlen_t n, int bw,
     int imin, ismo, i, j, first, last, band2, kminus, kplus;
 
 
+    CXXR::RAllocStack::Scope rscope;
     double *scrat = (double *) R_alloc(bw, sizeof(double));
     /*was  malloc( (unsigned) bw * sizeof(double));*/
 
@@ -215,6 +216,7 @@ R_xlen_t R_firstNA_dbl(const double x[], R_xlen_t n) {
 // .Call()ed from ../R/runmed.R
 SEXP runmed(SEXP sx, SEXP stype, SEXP sk, SEXP end, SEXP naAct, SEXP printLev)
 {
+    CXXR::RAllocStack::Scope rscope;
     R_xlen_t n = XLENGTH(sx);
     int nprot = 1;
     if (!isReal(sx)) {sx = PROTECT(coerceVector(sx, REALSXP)); nprot++;}

@@ -25,6 +25,7 @@
 */
 
 #include "localization.h"
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <Rmath.h>		/* for imin2 */
@@ -63,6 +64,7 @@ SEXP dpermdist2(SEXP x, SEXP m) {
     SEXP ret;
     int *iscore_b;
     double *dH, *dret;
+    CXXR::RAllocStack::Scope rscope;
 
     n = LENGTH(x);
     iscore_b = INTEGER(x);

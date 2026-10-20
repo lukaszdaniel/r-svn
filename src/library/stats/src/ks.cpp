@@ -25,6 +25,7 @@
 
 #include <cmath>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <Rmath.h>		/* constants */
@@ -254,6 +255,7 @@ static double psmirnov_exact_uniq_lower(double q, int m, int n, int two) {
     else
 	test = psmirnov_exact_test_one;
 
+    CXXR::RAllocStack::Scope rscope;
     double *u = (double *) R_alloc(n + 1, sizeof(double));
     u[0] = 1.;
     for(int j = 1; j <= n; j++) {
@@ -288,6 +290,7 @@ static double psmirnov_exact_uniq_upper(double q, int m, int n, int two) {
     else
 	test = psmirnov_exact_test_one;
 
+    CXXR::RAllocStack::Scope rscope;
     double *u = (double *) R_alloc(n + 1, sizeof(double));
     u[0] = 0.;
     for(int j = 1; j <= n; j++) {
@@ -325,6 +328,7 @@ static double psmirnov_exact_ties_lower(double q, int m, int n, int *z, int two)
     else
 	test = psmirnov_exact_test_one;
 
+    CXXR::RAllocStack::Scope rscope;
     u = (double *) R_alloc(n + 1, sizeof(double));
 
     u[0] = 1.;
@@ -362,6 +366,7 @@ static double psmirnov_exact_ties_upper(double q, int m, int n, int *z, int two)
     else
 	test = psmirnov_exact_test_one;
 
+    CXXR::RAllocStack::Scope rscope;
     u = (double *) R_alloc(n + 1, sizeof(double));
 
     u[0] = 0.;
@@ -509,6 +514,7 @@ static void m_power(double *A, int eA, double *V, int *eV, int m, int n)
 
 SEXP Smirnov_sim(SEXP sr, SEXP sc, SEXP sB, SEXP twosided)
 {
+    CXXR::RAllocStack::Scope rscope;
     sr = PROTECT(coerceVector(sr, INTSXP));
     sc = PROTECT(coerceVector(sc, INTSXP));
     int nr = LENGTH(sr), nc = LENGTH(sc), B = asInteger(sB);

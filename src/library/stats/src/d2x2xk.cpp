@@ -20,6 +20,7 @@
 /* for mantelhaen.test */
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <Rmath.h>
 #include <Rinternals.h>
@@ -28,6 +29,7 @@ static void int_d2x2xk(int K, double *m, double *n, double *t, double *d)
 {
     int l, w, y, z;
     double u, **c;
+    CXXR::RAllocStack::Scope rscope;
 
     c = (double **) R_alloc(K + 1, sizeof(double *));
     l = y = z = 0;

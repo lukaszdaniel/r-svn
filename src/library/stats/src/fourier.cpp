@@ -24,6 +24,7 @@
 #include <cinttypes> // for PRIu64
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/IntVector.hpp>
 #include <Rinternals.h>
 
@@ -44,6 +45,7 @@ SEXP fft(SEXP z, SEXP inverse)
     int *iwork;
     size_t smaxf;
     size_t maxsize = ((size_t) -1) / 4;
+    CXXR::RAllocStack::Scope rscope;
 
     switch (TYPEOF(z)) {
     case INTSXP:
@@ -133,6 +135,7 @@ SEXP mvfft(SEXP z, SEXP inverse)
     int *iwork;
     size_t smaxf;
     size_t maxsize = ((size_t) -1) / 4;
+    CXXR::RAllocStack::Scope rscope;
 
     d = getAttrib(z, R_DimSymbol);
     if (d == R_NilValue || length(d) > 2)

@@ -45,6 +45,7 @@
  */
 
 #include <cmath>
+#include <CXXR/RAllocStack.hpp>
 #include <R_ext/RS.h>	       	/* for Memcpy */
 
 static void swap(int l, int r, double *window, int *outlist, int *nrlist, int print_level)
@@ -386,6 +387,7 @@ static void Trunmed(const double *x,// (n)
 		    int k, /* is odd <= n */
 		    int end_rule, int print_level)
 {
+    CXXR::RAllocStack::Scope rscope;
     int k2 = (k - 1)/2; // always odd  k == 2 * k2 + 1
     double *window = (double *) R_alloc(2*k + 1, sizeof(double));
     int    *nrlist = (int *)    R_alloc(2*k + 1, sizeof(int)),

@@ -35,6 +35,7 @@
 # include <R_ext/Print.h>
 #endif
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 
 static R_INLINE double fsquare(double x)
 {
@@ -130,8 +131,7 @@ static void lowest(double *x, double *y, int n, double *xs, double *ys,
     }
 }
 
-static
-void clowess(double *x, double *y, int n,
+static void clowess(double *x, double *y, int n,
 	     double f, int nsteps, double delta,
 	     double *ys, double *rw, double *res)
 {
@@ -294,6 +294,8 @@ SEXP lowess(SEXP x, SEXP y, SEXP sf, SEXP siter, SEXP sdelta)
     double delta = asReal(sdelta), *rw, *res;
     if (!R_FINITE(delta) || delta < 0) 
 	error("%s", _("'delta' must be finite and > 0"));
+
+    CXXR::RAllocStack::Scope rscope;
     SEXP ans;
     PROTECT(ans = allocVector(REALSXP, nx));
     rw = (double *) R_alloc(nx, sizeof(double));

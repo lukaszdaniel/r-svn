@@ -23,10 +23,11 @@
 #include <config.h>
 #endif
 
-#include <limits.h>
-#include <stdint.h>
-#include <string.h>
+#include <climits>
+#include <cstdint>
+#include <cstring>
 
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <Rmath.h>
 
@@ -203,6 +204,7 @@ double kendall_wrapper(double* arr1, double* arr2, size_t len) {
     }
 
     // Only keep non-NA pairs from arr1 and arr2
+    CXXR::RAllocStack::Scope rscope;
     double *a1 = (double *) R_alloc(n_notNAs, sizeof(double));
     double *a2 = (double *) R_alloc(n_notNAs, sizeof(double));
     int j = 0;

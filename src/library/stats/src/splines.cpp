@@ -47,6 +47,7 @@
 #include <cmath>
 #include "localization.h"
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <R_ext/Applic.h>
 #include <Defn.h> // for R_xlen_t, UNIMPLEMENTED_TYPE
@@ -229,6 +230,7 @@ static void fmm_spline(R_xlen_t n, double *x, double *y, double *b, double *c, d
 
 static void periodic_spline(R_xlen_t n, double *x, double *y, double *b, double *c, double *d)
 {
+    CXXR::RAllocStack::Scope rscope;
     double *e = (double *) R_alloc(n, sizeof(double));
     /* Adjustment for 1-based arrays */
     x--; y--; b--; c--; d--; e--;

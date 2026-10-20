@@ -25,6 +25,7 @@
 #include <cmath>  // for floor
 #include <cstring>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <Rmath.h>		/* uses choose() */
 #include <Rinternals.h>
@@ -33,13 +34,10 @@
 
 static double ***w_init(int m, int n)
 {
-    int i;
-    double ***w;
-
-    w = (double ***) R_alloc(m + 1, sizeof(double **));
+    double ***w = (double ***) R_alloc(m + 1, sizeof(double **));
     if (m+1)
 	memset(w, '\0', (m+1) * sizeof(double**));
-    for (i = 0; i <= m; i++) {
+    for (int i = 0; i <= m; i++) {
 	w[i] = (double**) R_alloc(n + 1, sizeof(double *));
 	if (n+1)
 	    memset(w[i], '\0', (n+1) * sizeof(double*));
@@ -50,7 +48,8 @@ static double ***w_init(int m, int n)
 
 static double cansari(int k, int m, int n, double ***w)
 {
-    int i, l, u;
+    CXXR::RAllocStack::Scope rscope;
+    int l, u;
 
     l = (m + 1) * (m + 1) / 4;
     u = l + m * n / 2;
@@ -62,7 +61,7 @@ static double cansari(int k, int m, int n, double ***w)
 	w[m][n] = (double *) R_alloc(u + 1, sizeof(double));
 	if (u+1)
 	    memset(w[m][n], '\0', (u + 1) * sizeof(double));
-	for (i = 0; i <= u; i++)
+	for (int i = 0; i <= u; i++)
 	    w[m][n][i] = -1;
     }
 
@@ -76,13 +75,14 @@ static double cansari(int k, int m, int n, double ***w)
 		+ cansari(k - (m + n + 1) / 2, m - 1, n, w);
     }
 
-    return(w[m][n][k]);
+    return w[m][n][k];
 }
 
 
 static void pansari(int len, double *Q, double *P, int m, int n)
 {
-    int i, j, l, u;
+    CXXR::RAllocStack::Scope rscope; // w_init
+    int l, u;
     double c, p, q;
     double ***w;
 
@@ -90,7 +90,7 @@ static void pansari(int len, double *Q, double *P, int m, int n)
     l = (m + 1) * (m + 1) / 4;
     u = l + m * n / 2;
     c = choose(m + n, m);
-    for (i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++) {
 	q = floor(Q[i] + 1e-7);
 	if (q < l)
 	    P[i] = 0;
@@ -98,7 +98,7 @@ static void pansari(int len, double *Q, double *P, int m, int n)
 	    P[i] = 1;
 	else {
 	    p = 0;
-	    for (j = l; j <= q; j++) p += cansari(j, m, n, w);
+	    for (int j = l; j <= q; j++) p += cansari(j, m, n, w);
 	    P[i] = p / c;
 	}
     }
@@ -106,7 +106,8 @@ static void pansari(int len, double *Q, double *P, int m, int n)
 
 static void qansari(int len, double *P, double *Q, int m, int n)
 {
-    int i, l, u;
+    CXXR::RAllocStack::Scope rscope; // w_init
+    int l, u;
     double c, p, xi;
     double ***w;
 
@@ -114,7 +115,7 @@ static void qansari(int len, double *P, double *Q, int m, int n)
     l = (m + 1) * (m + 1) / 4;
     u = l + m * n / 2;
     c = choose(m + n, m);
-    for (i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++) {
 	xi = P[i];
 	if(xi < 0 || xi > 1)
 	    error("%s", _("probabilities outside [0,1] in qansari()"));

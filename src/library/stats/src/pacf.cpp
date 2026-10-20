@@ -23,6 +23,7 @@
 
 #include <R_ext/Minmax.h>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include "ts.h"
 #include "localization.h"
@@ -36,6 +37,7 @@ static void dotrans(Starma G, double *raw, double *new_, int trans);
 static void uni_pacf(double *cor, double *p, int nlag)
 {
     double a, b, c, *v, *w;
+    CXXR::RAllocStack::Scope rscope;
 
     v = (double*) R_alloc(nlag, sizeof(double));
     w = (double*) R_alloc(nlag, sizeof(double));
@@ -269,6 +271,7 @@ SEXP arma0_kfore(SEXP pG, SEXP pd, SEXP psd, SEXP nahead)
 
     d = dd + G->ns * asInteger(psd);
 
+    CXXR::RAllocStack::Scope rscope;
     del = (double *) R_alloc(d + 1, sizeof(double));
     del2 = (double *) R_alloc(d + 1, sizeof(double));
     del[0] = 1;

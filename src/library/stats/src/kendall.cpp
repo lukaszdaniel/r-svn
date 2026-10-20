@@ -23,6 +23,7 @@
 #include <cstring>
 #include <cmath> // for floor
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <Rmath.h>
 
@@ -79,6 +80,7 @@ static void pkendall(int len, double *Q, double *P, int n)
     int i, j;
     double p, q;
     double **w;
+    CXXR::RAllocStack::Scope rscope; // ckendall uses R_alloc()
 
     w = (double **) R_alloc(n + 1, sizeof(double *));
     if (n+1)

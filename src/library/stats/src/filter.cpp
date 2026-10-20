@@ -24,6 +24,7 @@
 
 #include <R_ext/Minmax.h>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <Defn.h> // for asLogicalNoNA()
 #include <R.h>
 #include "ts.h"
@@ -111,6 +112,7 @@ SEXP rfilter(SEXP x, SEXP filter, SEXP out)
 /* now allows missing values */
 static void acf0(double *x, int n, int ns, int nl, bool correlation, double *acf)
 {
+    CXXR::RAllocStack::Scope rscope;
     int d1 = nl+1, d2 = ns*d1;
 
     for(int u = 0; u < ns; u++)

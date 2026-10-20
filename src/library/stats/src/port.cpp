@@ -19,6 +19,7 @@
 
 #include <string>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/String.hpp>
 #include "port.h"
 #include "localization.h"
@@ -393,6 +394,7 @@ SEXP port_ivset(SEXP kind, SEXP iv, SEXP v)
 SEXP port_nlminb(SEXP fn, SEXP gr, SEXP hs, SEXP rho,
 		 SEXP lowerb, SEXP upperb, SEXP d, SEXP iv, SEXP v)
 {
+    CXXR::RAllocStack::Scope rscope;
     int i, n = LENGTH(d);
     SEXP xpt;
     SEXP dot_par_symbol = install(".par");
@@ -561,6 +563,7 @@ SEXP eval_check_store(SEXP fcn, SEXP rho, SEXP vv)
 SEXP port_nlsb(SEXP m, SEXP d, SEXP gg, SEXP iv, SEXP v,
 	       SEXP lowerb, SEXP upperb)
 {
+    CXXR::RAllocStack::Scope rscope;
     int *dims = INTEGER(getAttrib(gg, R_DimSymbol));
     int i, n = LENGTH(d), p = LENGTH(d), nd = dims[0];
     SEXP getPars, setPars, resid, gradient,

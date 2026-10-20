@@ -118,39 +118,37 @@ static int vector_length(Array a)
 
 static Array make_array(double vec[], int dim[], int ndim)
 {
-    int d, i, j;
     int len[MAX_DIM_LENGTH + 1];
-    Array a;
 
     assert_(ndim <= MAX_DIM_LENGTH);
 
-    a = init_array();
+    Array a = init_array();
 
     len[ndim] = 1;
-    for (d = ndim; d >= 1; d--) {
+    for (int d = ndim; d >= 1; d--) {
 	len[d-1] = len[d] * dim[ndim - d];
     }
 
-    for (d = 1; d <= ndim; d++) {
+    for (int d = 1; d <= ndim; d++) {
        switch(d) {
 	   case 1:
 	       VECTOR(a) = vec;
 	       break;
 	   case 2:
 	       ARRAY2(a) = (double**) R_alloc(len[2 - 1],sizeof(double*));
-	       for(i = 0, j = 0; i < len[2 - 1]; i++, j+=dim[ndim - 2 + 1]) {
+	       for(int i = 0, j = 0; i < len[2 - 1]; i++, j+=dim[ndim - 2 + 1]) {
 		  ARRAY2(a)[i] = ARRAY1(a) + j;
 	       }
 	       break;
 	   case 3:
 	       ARRAY3(a) = (double***) R_alloc(len[3 - 1],sizeof(double**));
-	       for(i = 0, j = 0; i < len[3 - 1]; i++, j+=dim[ndim - 3 + 1]) {
+	       for(int i = 0, j = 0; i < len[3 - 1]; i++, j+=dim[ndim - 3 + 1]) {
 		  ARRAY3(a)[i] = ARRAY2(a) + j;
 	       }
 	       break;
 	   case 4:
 	       ARRAY4(a) = (double****) R_alloc(len[4 - 1],sizeof(double***));
-	       for(i = 0, j = 0; i < len[4 - 1]; i++, j+=dim[ndim - 4 + 1]) {
+	       for(int i = 0, j = 0; i < len[4 - 1]; i++, j+=dim[ndim - 4 + 1]) {
 		  ARRAY4(a)[i] = ARRAY3(a) + j;
 	       }
 	       break;
@@ -159,7 +157,7 @@ static Array make_array(double vec[], int dim[], int ndim)
        }
     }
 
-    for (i = 0; i < ndim; i++) {
+    for (int i = 0; i < ndim; i++) {
        DIM(a)[i] = dim[i];
     }
     DIM_LENGTH(a) = ndim;
@@ -175,7 +173,7 @@ static Array make_zero_array(int dim[], int ndim)
 	len *= dim[i];
     }
 
-    double *vec = (double *) R_alloc(len, sizeof(double));
+    double *vec = (double *) CXXR_alloc(len, sizeof(double));
     for (int i = 0; i < len; i++) {
 	vec[i] = 0.0;
     }
@@ -186,22 +184,16 @@ static Array make_zero_array(int dim[], int ndim)
 
 static Array make_matrix(double vec[], int nrow, int ncol)
 {
-   int dim[2];
+   int dim[2] = {nrow, ncol};
 
-   dim[0] = nrow;
-   dim[1] = ncol;
    return make_array(vec, dim, 2);
 }
 
 static Array make_zero_matrix(int nrow, int ncol)
 {
-   int dim[2];
-   Array a;
+   int dim[2] = {nrow, ncol};
 
-   dim[0] = nrow;
-   dim[1] = ncol;
-   a = make_zero_array(dim, 2);
-   return a;
+   return make_zero_array(dim, 2);
 }
 
 static Array subarray(Array a, int index)
@@ -211,15 +203,12 @@ static Array subarray(Array a, int index)
       subarray will affect the original array.
 */
 {
-    int i, offset;
-    Array b;
-
-    b = init_array();
+    Array b = init_array();
 
     /* is index in range? */
     assert_( index >= 0 && index < DIM(a)[0] );
 
-    offset = index;
+    int offset = index;
     switch(DIM_LENGTH(a)) {
     /* NB Falling through here */
 	case 4:
@@ -239,7 +228,7 @@ static Array subarray(Array a, int index)
 
     DIM_LENGTH(b) = DIM_LENGTH(a) - 1;
 
-    for (i = 0; i < DIM_LENGTH(b); i++)
+    for (int i = 0; i < DIM_LENGTH(b); i++)
 	DIM(b)[i] = DIM(a)[i+1];
 
     return b;
@@ -282,7 +271,7 @@ static void transpose_matrix(Array mat, Array ans)
     assert_(NCOL(mat) == NROW(ans));
     assert_(NROW(mat) == NCOL(ans));
 
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
 
     tmp = make_zero_matrix(NROW(ans), NCOL(ans));
     for (int i = 0; i < NROW(mat); i++)
@@ -294,26 +283,24 @@ static void transpose_matrix(Array mat, Array ans)
 static void array_op(Array arr1, Array arr2, char op, Array ans)
 /* Element-wise array operations */
 {
-    int i;
-
     assert_(test_array_conform(arr1, arr2));
     assert_(test_array_conform(arr2, ans));
 
     switch (op) {
 	case '*':
-	    for (i = 0; i < vector_length(ans); i++)
+	    for (int i = 0; i < vector_length(ans); i++)
 		VECTOR(ans)[i] = VECTOR(arr1)[i] * VECTOR(arr2)[i];
 	    break;
 	case '+':
-	    for (i = 0; i < vector_length(ans); i++)
+	    for (int i = 0; i < vector_length(ans); i++)
 		VECTOR(ans)[i] = VECTOR(arr1)[i] + VECTOR(arr2)[i];
 	    break;
 	case '/':
-	    for (i = 0; i < vector_length(ans); i++)
+	    for (int i = 0; i < vector_length(ans); i++)
 		VECTOR(ans)[i] = VECTOR(arr1)[i] / VECTOR(arr2)[i];
 	    break;
 	case '-':
-	    for (i = 0; i < vector_length(ans); i++)
+	    for (int i = 0; i < vector_length(ans); i++)
 		VECTOR(ans)[i] = VECTOR(arr1)[i] - VECTOR(arr2)[i];
 	    break;
 	default:
@@ -325,25 +312,23 @@ static void array_op(Array arr1, Array arr2, char op, Array ans)
 static void scalar_op(Array arr, double s, char op, Array ans)
 /* Elementwise scalar operations */
 {
-    int i;
-
     assert_(test_array_conform(arr, ans));
 
     switch (op) {
 	case '*':
-	    for (i = 0; i < vector_length(ans); i++)
+	    for (int i = 0; i < vector_length(ans); i++)
 		VECTOR(ans)[i] = VECTOR(arr)[i] * s;
 	    break;
 	case '+':
-	    for (i = 0; i < vector_length(ans); i++)
+	    for (int i = 0; i < vector_length(ans); i++)
 		VECTOR(ans)[i] = VECTOR(arr)[i] + s;
 	    break;
 	case '/':
-	    for (i = 0; i < vector_length(ans); i++)
+	    for (int i = 0; i < vector_length(ans); i++)
 		VECTOR(ans)[i] = VECTOR(arr)[i] / s;
 	    break;
 	case '-':
-	    for (i = 0; i < vector_length(ans); i++)
+	    for (int i = 0; i < vector_length(ans); i++)
 		VECTOR(ans)[i] = VECTOR(arr)[i] - s;
 	    break;
 	default:
@@ -358,9 +343,8 @@ static void matrix_prod(Array mat1, Array mat2, bool trans1, bool trans2, Array 
     to be transposed. Normal matrix multiplication has trans1 = trans2 = 0.
 */
 {
-    int i,j,k,K1,K2;
+    int K1,K2;
     double m1, m2;
-    Array tmp;
 
     /* Test whether everything is a matrix */
     assert_(DIM_LENGTH(mat1) == 2 &&
@@ -386,17 +370,17 @@ static void matrix_prod(Array mat1, Array mat2, bool trans1, bool trans2, Array 
     }
     assert_(K1 == K2);
 
-    tmp = init_array();
+    Array tmp = init_array();
 
     /* In case ans is the same as mat1 or mat2, we create a temporary
        matrix to hold the answer, then copy it to ans
     */
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
 
     tmp = make_zero_matrix(NROW(ans), NCOL(ans));
-    for (i = 0; i < NROW(tmp); i++) {
-	for (j = 0; j < NCOL(tmp); j++) {
-	    for (k = 0; k < K1; k++) {
+    for (int i = 0; i < NROW(tmp); i++) {
+	for (int j = 0; j < NCOL(tmp); j++) {
+	    for (int k = 0; k < K1; k++) {
 		    m1 = (trans1) ? MATRIX(mat1)[k][i] : MATRIX(mat1)[i][k];
 		    m2 = (trans2) ? MATRIX(mat2)[j][k] : MATRIX(mat2)[k][j];
 		    MATRIX(tmp)[i][j] += m1 * m2;
@@ -408,19 +392,14 @@ static void matrix_prod(Array mat1, Array mat2, bool trans1, bool trans2, Array 
 
 static void set_array_to_zero(Array arr)
 {
-    int i;
-
-    for (i = 0; i < vector_length(arr); i++)
+    for (int i = 0; i < vector_length(arr); i++)
 	VECTOR(arr)[i] = 0.0;
 }
 
 static Array make_identity_matrix(int n)
 {
-    int i;
-    Array a;
-
-    a = make_zero_matrix(n,n);
-    for (i = 0; i < n; i++)
+    Array a = make_zero_matrix(n,n);
+    for (int i = 0; i < n; i++)
 	MATRIX(a)[i][i] = 1.0;
 
     return a;
@@ -440,7 +419,7 @@ static void qr_solve(Array x, Array y, Array coef)
     assert_(NCOL(coef) == NCOL(y));
     assert_(NCOL(x) == NROW(coef));
 
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
 
     double *qraux = (double *) R_alloc(NCOL(x), sizeof(double));
     int *pivot = (int *) R_alloc(NCOL(x), sizeof(int));
@@ -481,7 +460,7 @@ static double ldet(Array x)
     assert_(DIM_LENGTH(x) == 2); /* is x a matrix? */
     assert_(NROW(x) == NCOL(x)); /* is x square? */
 
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
 
     double *qraux = (double *) R_alloc(NCOL(x), sizeof(double));
     int *pivot = (int *) R_alloc(NCOL(x), sizeof(int));
@@ -549,6 +528,7 @@ void multi_burg(int *pn, double *x, int *pomax, int *pnser, double *coef,
     double aicmin;
     Array xarr, resid_f, resid_b, resid_f_tmp;
     Array P, V;
+    CXXR::RAllocStack::Scope rscope; // make_zero_array, make_array, make_zero_matrix, make_matrix
 
     dim1[0] = omax+1; dim1[1] = dim1[2] = nser;
     Array *A = (Array *) R_alloc(omax+1, sizeof(Array));
@@ -619,6 +599,7 @@ static void burg0(int omax, Array resid_f, Array resid_b, Array *A, Array *B,
     Array KA, KB, E;
     Array id, tmp;
 
+    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
     ss_ff = make_zero_matrix(nser, nser);
     ss_fb = make_zero_matrix(nser, nser);
     ss_bb = make_zero_matrix(nser, nser);
@@ -716,6 +697,7 @@ static void burg2(Array ss_ff, Array ss_bb, Array ss_fb, Array E,
     Array e, f, g, h, sg, sh;
     Array theta;
 
+    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
     ss_bf = make_zero_matrix(nser,nser);
     transpose_matrix(ss_fb, ss_bf);
     s = make_zero_matrix(nser, nser);
@@ -858,6 +840,7 @@ void multi_yw(double *acf, int *pn, int *pomax, int *pnser, double *coef,
     int dim[3];
 
     dim[0] = omax+1; dim[1] = dim[2] = nser;
+    CXXR::RAllocStack::Scope rscope; // make_array()/make_zero_array() uses R_alloc()
     acf_array = make_array(acf, dim, 3);
     p_forward = make_array(pacf, dim, 3);
     v_forward = make_array(var, dim, 3);
@@ -905,7 +888,7 @@ static void whittle(Array acf, int nlag, Array *A, Array *B, Array p_forward,
     Array KA, KB;	/* partial correlation coefficient */
     Array id, tmp;
 
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
 
     KA = make_zero_matrix(nser, nser);
     EA = make_zero_matrix(nser, nser);
@@ -949,7 +932,7 @@ static void whittle2(Array acf, Array Aold, Array Bold, int lag,
 
     bool d = streql(direction, "forward");
 
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
 
     beta = make_zero_matrix(nser,nser);
     tmp = make_zero_matrix(nser, nser);

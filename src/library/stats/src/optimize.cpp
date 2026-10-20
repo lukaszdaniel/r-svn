@@ -26,6 +26,7 @@
 #define USE_BASE_R_SUPPORT // for fdhess()
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <cfloat>		/* for DBL_MAX */
 #include <R_ext/Applic.h>	/* for optif9, fdhess */
 #include <R_ext/RS.h>	       	/* for Memcpy */
@@ -714,6 +715,7 @@ SEXP nlm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     int code, i, j, k, itnlim, method, iexp, omsg, msg,
 	n, ndigit, iagflg, iahflg, itncnt;
+    CXXR::RAllocStack::Scope rscope;
 
 
 /* .Internal(
