@@ -24,14 +24,19 @@
 
 #include <cmath>  // for floor
 #include <cstring>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/RealVector.hpp>
 #include <R.h>
 #include <Rmath.h>		/* uses choose() */
 #include <Rinternals.h>
 #include "stats.h"
 #include "localization.h"
 
+using namespace CXXR;
+
+// @note Caller has to manage the R_alloc stack
 static double ***w_init(int m, int n)
 {
     double ***w = (double ***) R_alloc(m + 1, sizeof(double **));
@@ -45,10 +50,9 @@ static double ***w_init(int m, int n)
     return(w);
 }
 
-
+// @note Caller has to manage the R_alloc stack
 static double cansari(int k, int m, int n, double ***w)
 {
-    // CXXR::RAllocStack::Scope rscope;
     int l, u;
 
     l = (m + 1) * (m + 1) / 4;
@@ -78,10 +82,9 @@ static double cansari(int k, int m, int n, double ***w)
     return w[m][n][k];
 }
 
-
+// @note Caller has to manage the R_alloc stack
 static void pansari(int len, double *Q, double *P, int m, int n)
 {
-    // CXXR::RAllocStack::Scope rscope; // w_init
     int l, u;
     double c, p, q;
     double ***w;
@@ -104,9 +107,9 @@ static void pansari(int len, double *Q, double *P, int m, int n)
     }
 }
 
+// @note Caller has to manage the R_alloc stack
 static void qansari(int len, double *P, double *Q, int m, int n)
 {
-    // CXXR::RAllocStack::Scope rscope; // w_init
     int l, u;
     double c, p, xi;
     double ***w;
@@ -136,24 +139,28 @@ static void qansari(int len, double *P, double *Q, int m, int n)
     }
 }
 
-SEXP pAnsari(SEXP q, SEXP sm, SEXP sn)
+SEXP pAnsari(SEXP q_, SEXP sm, SEXP sn)
 {
+    CXXR::RAllocStack::Scope rscope; // pansari
+    GCStackRoot<> p, q(q_);
     int m = asInteger(sm), n = asInteger(sn);
-    q = PROTECT(coerceVector(q, REALSXP));
+    q = RealVector::coerce(q);
     int len = LENGTH(q);
-    SEXP p = PROTECT(allocVector(REALSXP, len));
+    p = RealVector::create(len);
     pansari(len, REAL(q), REAL(p), m, n);
-    UNPROTECT(2);
+
     return p;
 }
 
-SEXP qAnsari(SEXP p, SEXP sm, SEXP sn)
+SEXP qAnsari(SEXP p_, SEXP sm, SEXP sn)
 {
+    CXXR::RAllocStack::Scope rscope; // qansari
+    GCStackRoot<> p(p_), q;
     int m = asInteger(sm), n = asInteger(sn);
-    p = PROTECT(coerceVector(p, REALSXP));
+    p = RealVector::coerce(p);
     int len = LENGTH(p);
-    SEXP q = PROTECT(allocVector(REALSXP, len));
+    q = RealVector::create(len);
     qansari(len, REAL(p), REAL(q), m, n);
-    UNPROTECT(2);
+
     return q;
 }
