@@ -295,7 +295,7 @@ SEXP lowess(SEXP x, SEXP y, SEXP sf, SEXP siter, SEXP sdelta)
     if (!R_FINITE(delta) || delta < 0) 
 	error("%s", _("'delta' must be finite and > 0"));
 
-    CXXR::RAllocStack::Scope rscope;
+    // CXXR::RAllocStack::Scope rscope;
     SEXP ans;
     PROTECT(ans = allocVector(REALSXP, nx));
     rw = (double *) R_alloc(nx, sizeof(double));

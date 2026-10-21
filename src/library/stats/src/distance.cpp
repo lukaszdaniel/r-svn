@@ -280,7 +280,7 @@ SEXP Cdist(SEXP x, SEXP smethod, SEXP attrs, SEXP p)
     int diag = 0;
     R_xlen_t N;
     double rp = asReal(p);
-    CXXR::RAllocStack::Scope rscope; // translateChar
+    // CXXR::RAllocStack::Scope rscope; // translateChar
     N = (R_xlen_t)nr * (nr-1)/2; /* avoid int overflow for N ~ 50,000 */
     PROTECT(ans = allocVector(REALSXP, N));
     if(TYPEOF(x) != REALSXP) x = coerceVector(x, REALSXP);

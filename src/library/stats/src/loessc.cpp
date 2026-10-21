@@ -114,7 +114,7 @@ void loess_raw(double *y, double *x, double *weights, double *robust, int *d,
 {
     int i0 = 0, one = 1, two = 2, nsing, i, k;
     double *hat_matrix, *LL, d0=0.0;
-    CXXR::RAllocStack::Scope rscope;
+    // CXXR::RAllocStack::Scope rscope;
 
     *trL = 0;
 

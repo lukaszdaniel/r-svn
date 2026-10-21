@@ -341,7 +341,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     char *bufp;
     const char *addp;
     R_xlen_t nn;
-    CXXR::RAllocStack::Scope rscope; // translateChar
+    // CXXR::RAllocStack::Scope rscope; // translateChar
 
     args = CDR(args);
 

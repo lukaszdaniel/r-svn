@@ -715,7 +715,7 @@ SEXP nlm(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     int code, i, j, k, itnlim, method, iexp, omsg, msg,
 	n, ndigit, iagflg, iahflg, itncnt;
-    CXXR::RAllocStack::Scope rscope;
+    // CXXR::RAllocStack::Scope rscope;
 
 
 /* .Internal(

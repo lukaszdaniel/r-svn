@@ -528,7 +528,7 @@ void multi_burg(int *pn, double *x, int *pomax, int *pnser, double *coef,
     double aicmin;
     Array xarr, resid_f, resid_b, resid_f_tmp;
     Array P, V;
-    CXXR::RAllocStack::Scope rscope; // make_zero_array, make_array, make_zero_matrix, make_matrix
+    // CXXR::RAllocStack::Scope rscope; // make_zero_array, make_array, make_zero_matrix, make_matrix
 
     dim1[0] = omax+1; dim1[1] = dim1[2] = nser;
     Array *A = (Array *) R_alloc(omax+1, sizeof(Array));
@@ -599,7 +599,7 @@ static void burg0(int omax, Array resid_f, Array resid_b, Array *A, Array *B,
     Array KA, KB, E;
     Array id, tmp;
 
-    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
+    // CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
     ss_ff = make_zero_matrix(nser, nser);
     ss_fb = make_zero_matrix(nser, nser);
     ss_bb = make_zero_matrix(nser, nser);
@@ -697,7 +697,7 @@ static void burg2(Array ss_ff, Array ss_bb, Array ss_fb, Array E,
     Array e, f, g, h, sg, sh;
     Array theta;
 
-    CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
+    // CXXR::RAllocStack::Scope rscope; // make_zero_matrix() uses R_alloc()
     ss_bf = make_zero_matrix(nser,nser);
     transpose_matrix(ss_fb, ss_bf);
     s = make_zero_matrix(nser, nser);
@@ -840,7 +840,7 @@ void multi_yw(double *acf, int *pn, int *pomax, int *pnser, double *coef,
     int dim[3];
 
     dim[0] = omax+1; dim[1] = dim[2] = nser;
-    CXXR::RAllocStack::Scope rscope; // make_array()/make_zero_array() uses R_alloc()
+    // CXXR::RAllocStack::Scope rscope; // make_array()/make_zero_array() uses R_alloc()
     acf_array = make_array(acf, dim, 3);
     p_forward = make_array(pacf, dim, 3);
     v_forward = make_array(var, dim, 3);

@@ -48,7 +48,7 @@ static double ***w_init(int m, int n)
 
 static double cansari(int k, int m, int n, double ***w)
 {
-    CXXR::RAllocStack::Scope rscope;
+    // CXXR::RAllocStack::Scope rscope;
     int l, u;
 
     l = (m + 1) * (m + 1) / 4;
@@ -81,7 +81,7 @@ static double cansari(int k, int m, int n, double ***w)
 
 static void pansari(int len, double *Q, double *P, int m, int n)
 {
-    CXXR::RAllocStack::Scope rscope; // w_init
+    // CXXR::RAllocStack::Scope rscope; // w_init
     int l, u;
     double c, p, q;
     double ***w;
@@ -106,7 +106,7 @@ static void pansari(int len, double *Q, double *P, int m, int n)
 
 static void qansari(int len, double *P, double *Q, int m, int n)
 {
-    CXXR::RAllocStack::Scope rscope; // w_init
+    // CXXR::RAllocStack::Scope rscope; // w_init
     int l, u;
     double c, p, xi;
     double ***w;

@@ -33,7 +33,7 @@ SEXP cutree(SEXP merge, SEXP which)
     int n, k, l, nclust, m1, m2, j, mm = 0;
     bool found_j, *sing;
     int *m_nr, *z, *i_merge, *i_which, *i_ans;
-    CXXR::RAllocStack::Scope rscope;
+    // CXXR::RAllocStack::Scope rscope;
 
     PROTECT(merge = coerceVector(merge, INTSXP)); i_merge = INTEGER(merge);
     PROTECT(which = coerceVector(which, INTSXP)); i_which = INTEGER(which);
