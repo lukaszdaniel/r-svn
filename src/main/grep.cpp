@@ -312,6 +312,7 @@ static void R_pcre_exec_error(int rc, R_xlen_t i)
 #endif
 
 /* returns value allocated on R_alloc stack */
+// @note Caller has to manage the R_alloc stack
 static const char *to_native(const char *str, bool use_UTF8)
 {
     return use_UTF8 ? reEnc(str, CE_UTF8, CE_NATIVE, 1) : str;

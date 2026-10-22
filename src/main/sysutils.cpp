@@ -1850,6 +1850,7 @@ next_char:
     return 0;
 }
 
+// @note Caller has to manage the R_alloc stack
 static const char *copyAndFreeStringBuffer(R_StringBuffer *cbuff)
 {
     size_t res = strlen(cbuff->data) + 1;
@@ -1861,6 +1862,7 @@ static const char *copyAndFreeStringBuffer(R_StringBuffer *cbuff)
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
+// @note Caller has to manage the R_alloc stack
 const char *Rf_translateChar(SEXP x)
 {
     CHECK_CHARSXP(x);
@@ -1875,6 +1877,7 @@ const char *Rf_translateChar(SEXP x)
 
 /* Variant which does not return escaped string (which must work, throwing
    error when conversion fails). Used for file paths, including devices. */
+// @note Caller has to manage the R_alloc stack
 const char *R::translateCharFP(SEXP x)
 {
     CHECK_CHARSXP(x);
@@ -1889,6 +1892,7 @@ const char *R::translateCharFP(SEXP x)
 
 /* Variant which returns NULL (with a warning) when conversion fails,
    used for file paths. */
+// @note Caller has to manage the R_alloc stack
 attribute_hidden
 const char *R::translateCharFP2(SEXP x)
 {
@@ -1935,6 +1939,7 @@ SEXP Rf_installChar(SEXP x)
 
    Use for writeLines/Bin/Char, the first only with useBytes = TRUE.
 */
+// @note Caller has to manage the R_alloc stack
 attribute_hidden const char *R::translateChar0(SEXP x)
 {
     CHECK_CHARSXP(x);
@@ -2037,6 +2042,7 @@ next_char:
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
+// @note Caller has to manage the R_alloc stack
 const char *Rf_translateCharUTF8(SEXP x)
 {
     CHECK_CHARSXP(x);
@@ -2051,6 +2057,7 @@ const char *Rf_translateCharUTF8(SEXP x)
 
 /* Variant which does not return escaped string (which must work, throwing
    error when conversion fails). */
+// @note Caller has to manage the R_alloc stack
 attribute_hidden
 const char *R::trCharUTF8(SEXP x)
 {
@@ -2065,6 +2072,7 @@ const char *R::trCharUTF8(SEXP x)
 }
 
 /* Variant which returns NULL (with a warning) when conversion fails. */
+// @note Caller has to manage the R_alloc stack
 attribute_hidden
 const char *R::trCharUTF82(SEXP x)
 {
@@ -2093,6 +2101,7 @@ static R_INLINE nttype_t wneedsTranslation(SEXP x)
     return NT_FROM_NATIVE;
 }
 
+// @note Caller has to manage the R_alloc stack
 static const wchar_t *wcopyAndFreeStringBuffer(R_StringBuffer *cbuff)
 {
     size_t res = wcslen((wchar_t *) cbuff->data) + 1;
@@ -2102,13 +2111,13 @@ static const wchar_t *wcopyAndFreeStringBuffer(R_StringBuffer *cbuff)
     return p;
 }
 
+// @note Caller has to manage the R_alloc stack
 static const wchar_t *wfromASCII(const char *src, size_t len)
 {
-    size_t i;
     wchar_t *p = (wchar_t *) R_alloc(len + 1, sizeof(wchar_t));
-    for (i = 0; i < len; i++)
+    for (size_t i = 0; i < len; i++)
 	p[i] = (wchar_t) src[i];
-    p[i] = L'\0';
+    p[len] = L'\0';
     return p;
 }
 
@@ -2130,6 +2139,7 @@ static void *latin1_wobj = NULL, *utf8_wobj=NULL;
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
+// @note Caller has to manage the R_alloc stack
 static int translateToWchar(const char *ans, R_StringBuffer *cbuff,
                             nttype_t ttype, int mustWork)
 {
@@ -2229,6 +2239,7 @@ next_char:
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
+// @note Caller has to manage the R_alloc stack
 const wchar_t *R::wtransChar(SEXP x)
 {
     CHECK_CHARSXP(x);
@@ -2242,6 +2253,7 @@ const wchar_t *R::wtransChar(SEXP x)
 }
 
 /* Variant which returns NULL (with a warning) when conversion fails. */
+// @note Caller has to manage the R_alloc stack
 attribute_hidden /* would need to be in an installed header if not hidden */
 const wchar_t *R::wtransChar2(SEXP x)
 {
@@ -2388,6 +2400,7 @@ static int reEncode(const char *x, R_StringBuffer *cbuff,
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
+// @note Caller has to manage the R_alloc stack
 const char *Rf_reEnc(const char *x, cetype_t ce_in, cetype_t ce_out, int subst)
 {
     R_StringBuffer cbuff = R_StringBuffer();
@@ -2421,6 +2434,7 @@ void R::reEnc2(const char *x, char *y, int ny,
 
 /* A version that works with arbitrary iconv encodings, used for getting
    escaped invalid characters for error messages. */
+// @note Caller has to manage the R_alloc stack
 attribute_hidden const char *R::reEnc3(const char *x,
                    const char *fromcode, const char *tocode, int subst)
 {
@@ -2992,6 +3006,7 @@ attribute_hidden SEXP do_glob(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope;
     if (!isString(x = CAR(args)))
 	error(_("invalid '%s' argument"), "paths");
     if (!XLENGTH(x)) return StringVector::create(0);

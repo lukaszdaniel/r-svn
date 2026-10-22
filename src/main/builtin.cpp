@@ -431,6 +431,7 @@ attribute_hidden SEXP do_envirName(SEXP call, SEXP op, SEXP args, SEXP rho)
 # include "rgui_UTF8.h"
 #endif
 /* Uses R_alloc but called by a .Internal.  Result may be R_alloc-ed */
+// @note Caller has to manage the R_alloc stack
 static const char *trChar(SEXP x)
 {
     size_t n = strlen(CHAR(x));

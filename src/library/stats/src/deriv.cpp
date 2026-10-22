@@ -332,7 +332,7 @@ static SEXP simplify(SEXP fun, SEXP arg1, SEXP arg2)
 /* D() implements the "derivative table" : */
 static SEXP D(SEXP expr, SEXP var)
 {
-    // CXXR::RAllocStack::Scope rscope; // translateChar
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
 #define PP_S(F,a1,a2) PP(simplify(F,a1,a2))
 #define PP_S2(F,a1)   PP(simplify(F,a1, R_MissingArg))

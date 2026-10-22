@@ -197,6 +197,7 @@ static void transferChars(unsigned char *p, const char *q)
 }
 
 /* respect encoding override from parser invocation - do_parse */
+// @note Caller has to manage the R_alloc stack
 static const char *translateCharWithOverride(SEXP x)
 {
     if (!IS_LATIN1(x) && !mbcslocale && known_to_be_utf8)
@@ -208,6 +209,7 @@ static const char *translateCharWithOverride(SEXP x)
 	return translateChar(x);
 }
 
+// @note Caller has to manage the R_alloc stack
 attribute_hidden bool R::R_TextBufferInit(TextBuffer *txtb, SEXP text)
 {
     int i, k, l, n;

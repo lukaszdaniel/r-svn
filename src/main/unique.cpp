@@ -1351,6 +1351,7 @@ static SEXP asUTF8(SEXP x)
 {
     R_xlen_t nx = xlength(x);
     SEXP ux = NULL;
+    CXXR::RAllocStack::Scope rscope;
     for(R_xlen_t i = 0; i < nx; i++) {
 	SEXP xi = STRING_ELT(x, i);
 	if ((xi != NA_STRING) && !IS_ASCII(xi) && !IS_UTF8(xi)) {

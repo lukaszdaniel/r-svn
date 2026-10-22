@@ -97,6 +97,7 @@
 #include <new>
 #include <string>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
@@ -771,10 +772,10 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,   204,   204,   205,   206,   209,   210,   211,   212,   213,
-     214,   216,   217,   219,   220,   223,   226,   227,   229,   230,
-     231,   232,   233,   234,   236,   240,   244,   248,   248,   252,
-     254,   255,   257,   257,   262,   262,   267,   267
+       0,   205,   205,   206,   207,   210,   211,   212,   213,   214,
+     215,   217,   218,   220,   221,   224,   227,   228,   230,   231,
+     232,   233,   234,   235,   237,   241,   245,   249,   249,   253,
+     255,   256,   258,   258,   263,   263,   268,   268
 };
 #endif
 
@@ -3122,6 +3123,7 @@ SEXP parseLatex(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif 
 
     ParseErrorMsg[0] = '\0';
+    CXXR::RAllocStack::Scope rscope;
     
     PushState();
 

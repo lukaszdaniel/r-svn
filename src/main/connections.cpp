@@ -5600,6 +5600,7 @@ attribute_hidden SEXP do_pushback(SEXP call, SEXP op, SEXP args, SEXP env)
     char **q;
 
     checkArity(op, args);
+    CXXR::RAllocStack::Scope rscope;
 
     stext = CAR(args);
     if(!isString(stext))

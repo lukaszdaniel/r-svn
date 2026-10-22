@@ -29,6 +29,7 @@
 #include <new>
 #include <string>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
@@ -1169,6 +1170,7 @@ SEXP parseLatex(SEXP call, SEXP op, SEXP args, SEXP env)
 #endif 
 
     ParseErrorMsg[0] = '\0';
+    CXXR::RAllocStack::Scope rscope;
     
     PushState();
 

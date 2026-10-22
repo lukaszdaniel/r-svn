@@ -138,11 +138,6 @@ static void boundspec(char *fmt)
     }
 }
 
-#define TRANSLATE_CHAR(_STR_, _i_)  \
-   ((use_UTF8) ? translateCharUTF8(STRING_ELT(_STR_, _i_))  \
-    : translateChar(STRING_ELT(_STR_, _i_)))
-
-
 attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     CXXR::RAllocStack::Scope rscope; // translateChar
@@ -221,7 +216,8 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
 
-	formatString = TRANSLATE_CHAR(format, ns % nfmt);
+    formatString = ((use_UTF8) ? translateCharUTF8(STRING_ELT(format, ns % nfmt))
+        : translateChar(STRING_ELT(format, ns % nfmt)));
 	n = strlen(formatString);
 	if (n > MAXLINE)
 	    error(_("'fmt' length exceeds maximal format length %d"), MAXLINE);
@@ -497,7 +493,8 @@ attribute_hidden SEXP do_sprintf(SEXP call, SEXP op, SEXP args, SEXP env)
 				error(_("invalid format '%s'; %s"), fmtp,
 				      _("use format %s for character objects"));
 
-			    ss = TRANSLATE_CHAR(_this, ns % thislen);
+                ss = ((use_UTF8) ? translateCharUTF8(STRING_ELT(_this, ns % thislen))
+                    : translateChar(STRING_ELT(_this, ns % thislen)));
 			    if(fmtp[1] != 's') {
 				if(strlen(ss) > MAXLINE)
 				    warning(_("likely truncation of character string to %d characters"),

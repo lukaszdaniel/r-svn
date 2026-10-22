@@ -892,6 +892,7 @@ attribute_hidden SEXP do_basename(SEXP call, SEXP op, SEXP args, SEXP rho)
     SEXP ans, s = R_NilValue;	/* -Wall */
     const char *pp;
     int i, n;
+    CXXR::RAllocStack::Scope rscope;
 
     checkArity(op, args);
     s = CAR(args);
@@ -2144,6 +2145,7 @@ const char* Rf_utf8Toutf8NoPUA(const char *in)
     return result;
 }
 
+// @note Caller has to manage the R_alloc stack
 const char *Rf_utf8ToLatin1AdobeSymbol2utf8(const char *in, Rboolean usePUA)
 {
   const char *latinStr;

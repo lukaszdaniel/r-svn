@@ -341,7 +341,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     char *bufp;
     const char *addp;
     R_xlen_t nn;
-    // CXXR::RAllocStack::Scope rscope; // translateChar
+    CXXR::RAllocStack::Scope rscope; // translateChar
 
     args = CDR(args);
 
@@ -1028,7 +1028,7 @@ static bool Seql2(SEXP a, SEXP b)
 	return false;
     else {
     	CXXR::RAllocStack::Scope rscope; /* discard any memory used by translateCharUTF8 */
-    	return streql(translateCharUTF8(a), translateCharUTF8(b));
+    	return streql(translateCharUTF8(a), translateCharUTF8_AA(b));
     }
 }
 
@@ -1617,9 +1617,9 @@ static SEXP EncodeVars(SEXP formula)
 	    CXXR::RAllocStack::Scope rscope;
 	    for (int i = 0; i < LENGTH(framenames); i++) {
 		/* change in 1.6.0 do not use duplicated names */
-		const char *c = translateChar(STRING_ELT(framenames, i));
+		const char *c = translateChar_AA(STRING_ELT(framenames, i));
 		for (int j = 0; j < i; j++)
-		    if (streql(c, translateChar(STRING_ELT(framenames, j))))
+		    if (streql(c, translateChar_AA(STRING_ELT(framenames, j))))
 			error(_("duplicated name '%s' in data frame using '.'"),
 			      c);
 		term = AllocTermSetBit1(install(c));
@@ -2086,7 +2086,7 @@ SEXP termsform(SEXP args)
 	int i = length(specials);
 	SEXP t, t_ = PROTECT(allocList(i));
 	for (j = 0, t = t_; j < i; j++, t = CDR(t)) {
-	    const char *ss = translateChar(STRING_ELT(specials, j));
+	    const char *ss = translateChar_AA(STRING_ELT(specials, j));
 	    SET_TAG(t, install(ss));
 	    SETCAR(t, allocVector(INTSXP, 0));
 	    R_xlen_t k = 0;

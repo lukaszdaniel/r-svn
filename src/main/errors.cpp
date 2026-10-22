@@ -1114,6 +1114,7 @@ NORET void Rf_jump_to_toplevel(void)
 
 #ifdef ENABLE_NLS
 /* Called from do_gettext() and do_ngettext() */
+// @note Caller has to manage the R_alloc stack
 static const char *determine_domain_gettext(SEXP domain_, bool up)
 {
     const char *domain = "";

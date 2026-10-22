@@ -1990,7 +1990,7 @@ static double Cairo_StrWidth(const char *str, pGEcontext gc, pDevDesc dd)
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     cairo_text_extents_t exts;
-    CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope; // Rf_utf8ToLatin1AdobeSymbol2utf8
 
     const char *textstr;
     if (!utf8Valid(str)) error("%s", _("invalid string in Cairo_StrWidth"));

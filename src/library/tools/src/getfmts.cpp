@@ -37,15 +37,10 @@ using namespace R;
 /*               ^^^ not entirely arbitrary, but strongly linked to allowing %$1 to %$99 !*/
 
 
-#define TRANSLATE_CHAR(_STR_, _i_)  \
-   ((use_UTF8) ? translateCharUTF8(STRING_ELT(_STR_, _i_))  \
-    : translateChar(STRING_ELT(_STR_, _i_)))
-
 SEXP getfmts(SEXP format)
 {
     int cnt, v, nfmt;
     char fmt[MAXLINE+1], bit[MAXLINE+1];
-    const char *formatString;
     size_t n, cur, chunk, maxlen = 0;
 
     int nthis, nstar;
@@ -65,7 +60,8 @@ SEXP getfmts(SEXP format)
         error(_("'%s' must be length 1"), "fmt");
 
     bool use_UTF8 = getCharCE(STRING_ELT(format, 0)) == CE_UTF8;
-    formatString = TRANSLATE_CHAR(format, 0);
+    const char *formatString = ((use_UTF8) ? translateCharUTF8(STRING_ELT(format, 0))
+        : translateChar(STRING_ELT(format, 0)));
     n = strlen(formatString);
     if (n > MAXLINE)
 	error(_("'fmt' length exceeds maximal format length %d"), MAXLINE);
