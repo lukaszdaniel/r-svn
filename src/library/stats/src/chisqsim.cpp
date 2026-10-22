@@ -101,7 +101,7 @@ static void fisher_sim(int nrow, int ncol, const int nrowt[], const int ncolt[],
 
 SEXP Fisher_sim(SEXP sr, SEXP sc, SEXP sB)
 {
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     sr = PROTECT(coerceVector(sr, INTSXP));
     sc = PROTECT(coerceVector(sc, INTSXP));
     int nr = LENGTH(sr), nc = LENGTH(sc), B = asInteger(sB);
@@ -120,7 +120,7 @@ SEXP Fisher_sim(SEXP sr, SEXP sc, SEXP sB)
 
 SEXP chisq_sim(SEXP sr, SEXP sc, SEXP sB, SEXP E)
 {
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     sr = PROTECT(coerceVector(sr, INTSXP));
     sc = PROTECT(coerceVector(sc, INTSXP));
     E = PROTECT(coerceVector(E, REALSXP));

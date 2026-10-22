@@ -71,7 +71,7 @@ void F77_NAME(stl)(double *y, int *n, // n = length(y)
 	  double *trend)  // trend
 // now allocated below: double *work) // of size  5*(n + 2*period)
 {
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     bool use_rw = false;
 
     for (int i = 0; i < *n; ++i) {

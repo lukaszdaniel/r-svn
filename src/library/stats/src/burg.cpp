@@ -25,7 +25,7 @@
 static void burg(int n, double*x, int pmax, double *coefs, double *var1, double *var2)
 {
     double d, phii, *u, *v, *u0, sum;
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
 
     u = (double *) R_alloc(n, sizeof(double));
     v = (double *) R_alloc(n, sizeof(double));

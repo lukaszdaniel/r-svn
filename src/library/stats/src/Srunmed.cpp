@@ -58,7 +58,7 @@ static void Srunmed(const double* y, double* smo, R_xlen_t n, int bw,
     int imin, ismo, i, j, first, last, band2, kminus, kplus;
 
 
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     double *scrat = (double *) R_alloc(bw, sizeof(double));
     /*was  malloc( (unsigned) bw * sizeof(double));*/
 
@@ -216,7 +216,7 @@ R_xlen_t R_firstNA_dbl(const double x[], R_xlen_t n) {
 // .Call()ed from ../R/runmed.R
 SEXP runmed(SEXP sx, SEXP stype, SEXP sk, SEXP end, SEXP naAct, SEXP printLev)
 {
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     R_xlen_t n = XLENGTH(sx);
     int nprot = 1;
     if (!isReal(sx)) {sx = PROTECT(coerceVector(sx, REALSXP)); nprot++;}

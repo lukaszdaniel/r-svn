@@ -85,7 +85,7 @@ SEXP call_dqags(SEXP args)
     epsrel = asReal(CAR(args)); args = CDR(args);
     limit = asInteger(CAR(args)); args = CDR(args);
     lenw = 4 * limit;
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     iwork = (int *) R_alloc((size_t) limit, sizeof(int));
     work = (double *) R_alloc((size_t) lenw, sizeof(double));
 
@@ -129,7 +129,7 @@ SEXP call_dqagi(SEXP args)
     epsrel = asReal(CAR(args)); args = CDR(args);
     limit = asInteger(CAR(args)); args = CDR(args);
     lenw = 4 * limit;
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     iwork = (int *) R_alloc((size_t) limit, sizeof(int));
     work = (double *) R_alloc((size_t) lenw, sizeof(double));
 

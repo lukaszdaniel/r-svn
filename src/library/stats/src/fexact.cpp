@@ -198,7 +198,7 @@ void fexact(int nrow, int ncol, const int table[], int ldtabl,
 	iwkpt = 0,
 	n2_stack = imax2(200, iwkmax/1000); // previously was 200 hard wired
 
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     equiv = (double *) R_alloc(iwkmax / 2, sizeof(double));
 
 #define dwrk (equiv)

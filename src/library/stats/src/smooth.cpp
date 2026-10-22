@@ -252,7 +252,7 @@ static int sm_3RSR(double *x, double *y, double *z, double *w, R_xlen_t n,
 #include <Rinternals.h>
 SEXP Rsm(SEXP x, SEXP stype, SEXP send)
 {
-    // CXXR::RAllocStack::Scope rscope;
+    CXXR::RAllocStack::Scope rscope;
     int iend = asInteger(send), type = asInteger(stype);
     R_xlen_t n = XLENGTH(x);
     SEXP ans = PROTECT(allocVector(VECSXP, 2));
