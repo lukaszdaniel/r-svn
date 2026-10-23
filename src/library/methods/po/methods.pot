@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-10-23 20:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "no direct or inherited method for function '%s' for this call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:590 methods_list_dispatch.cpp:1165
+#: methods_list_dispatch.cpp:590 methods_list_dispatch.cpp:1161
 msgid "invalid object (non-function) used as method"
 msgstr ""
 
@@ -156,86 +156,86 @@ msgid ""
 "dispatch must be an R environment; got an object of class \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:709
+#: methods_list_dispatch.cpp:707
 #, c-format
 msgid "no matching method for function '%s' (argument '%s', with class \"%s\")"
 msgstr ""
 
-#: methods_list_dispatch.cpp:716
+#: methods_list_dispatch.cpp:713
 #, c-format
 msgid ""
 "recursive use of function '%s' in method selection, with no default method"
 msgstr ""
 
-#: methods_list_dispatch.cpp:741
+#: methods_list_dispatch.cpp:737
 #, c-format
 msgid "error in evaluating a 'primitive' next method: %s"
 msgstr ""
 
-#: methods_list_dispatch.cpp:764
+#: methods_list_dispatch.cpp:760
 msgid ""
 "internal error in 'callNextMethod': '.nextMethod' was not assigned in the "
 "frame of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:771
+#: methods_list_dispatch.cpp:767
 msgid ""
 "internal error in 'callNextMethod': '.Generic' was not assigned in the frame "
 "of the method call"
 msgstr ""
 
-#: methods_list_dispatch.cpp:896
+#: methods_list_dispatch.cpp:892
 #, c-format
 msgid "%s must be a single string (got a character vector of length %d)"
 msgstr ""
 
-#: methods_list_dispatch.cpp:900
+#: methods_list_dispatch.cpp:896
 #, c-format
 msgid "%s must be a non-empty string; got an empty string"
 msgstr ""
 
-#: methods_list_dispatch.cpp:904
+#: methods_list_dispatch.cpp:900
 #, c-format
 msgid "%s must be a single string (got an object of class \"%s\")"
 msgstr ""
 
-#: methods_list_dispatch.cpp:938
+#: methods_list_dispatch.cpp:934
 msgid "The internal prefix (e.g., \"C\") for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:940
+#: methods_list_dispatch.cpp:936
 msgid ""
 "The name of the object (e.g,. a class or generic function) to find in the "
 "meta-data"
 msgstr ""
 
-#: methods_list_dispatch.cpp:942
+#: methods_list_dispatch.cpp:938
 msgid "The name of the package for a meta-data object"
 msgstr ""
 
-#: methods_list_dispatch.cpp:989
+#: methods_list_dispatch.cpp:985
 msgid "class should be either a character-string name or a class definition"
 msgstr ""
 
-#: methods_list_dispatch.cpp:1076
+#: methods_list_dispatch.cpp:1072
 #, c-format
 msgid "failed to get the generic for the primitive \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:1083
+#: methods_list_dispatch.cpp:1079
 #, c-format
 msgid ""
 "expected a generic function or a primitive for dispatch, got an object of "
 "class \"%s\""
 msgstr ""
 
-#: methods_list_dispatch.cpp:1095
+#: methods_list_dispatch.cpp:1091
 msgid ""
 "generic seems not to have been initialized for table dispatch---need to have "
 "'.SigArgs' and '.AllMtable' assigned in its environment"
 msgstr ""
 
-#: methods_list_dispatch.cpp:1099
+#: methods_list_dispatch.cpp:1095
 msgid "'.SigArgs' is shorter than '.SigLength' says it should be"
 msgstr ""
 

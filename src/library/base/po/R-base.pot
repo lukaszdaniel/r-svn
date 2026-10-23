@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-10-23 20:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3335,9 +3335,9 @@ msgstr ""
 
 
 #: R/namespace.R: 0
-#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\n  according to the DESCRIPTION file it is\n  %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 
-msgid "package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s"
+msgid "package %s has a license that you need to accept:\n  according to the DESCRIPTION file it is\n  %s"
 msgstr ""
 
 
@@ -3643,13 +3643,6 @@ msgid "this is the \"qr\" method for the generic function solve()"
 msgstr ""
 
 
-#: R/datetime.R: 0
-#. R/datetime.R: sQuote("timedatectl")
-
-msgid "timedatectl"
-msgstr ""
-
-
 #: R/qr.R: 0
 #. R/qr.R: stop("too large a matrix for LINPACK")
 
@@ -3693,7 +3686,7 @@ msgstr ""
 
 
 #: R/datetime.R: 0
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote("timedatectl"))
+#. R/datetime.R: gettext("unable to deduce timezone name from ")
 #. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
 
 msgid "unable to deduce timezone name from"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-10-23 20:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,159 +17,149 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Rmd5.cpp:63 Rsha256.cpp:72
-msgid "argument 'files' must be character"
+#: Rbase64.cpp:97
+#, c-format
+msgid "argument length (%lld) exceeds maximum supported length (%d)"
 msgstr ""
 
-#: Rmd5.cpp:79
-#, c-format
-msgid "md5 failed on file '%ls'"
+#: Rmd5.cpp:65 Rsha256.cpp:74
+msgid "argument 'files' must be character"
 msgstr ""
 
 #: Rmd5.cpp:81
 #, c-format
-msgid "md5 failed on file '%s'"
+msgid "md5 failed on file '%ls'"
 msgstr ""
 
-#: Rsha256.cpp:88
+#: Rmd5.cpp:83
 #, c-format
-msgid "sha256 failed on file '%ls'"
+msgid "md5 failed on file '%s'"
 msgstr ""
 
 #: Rsha256.cpp:90
 #, c-format
+msgid "sha256 failed on file '%ls'"
+msgstr ""
+
+#: Rsha256.cpp:92
+#, c-format
 msgid "sha256 failed on file '%s'"
 msgstr ""
 
-#: getfmts.cpp:57
+#: getfmts.cpp:52
 #, c-format
 msgid "only %d arguments are allowed"
 msgstr ""
 
-#: getfmts.cpp:62
+#: getfmts.cpp:57
 #, c-format
 msgid "'%s' is not a character vector"
 msgstr ""
 
-#: getfmts.cpp:65
+#: getfmts.cpp:60
 #, c-format
 msgid "'%s' must be length 1"
 msgstr ""
 
-#: getfmts.cpp:71
+#: getfmts.cpp:67
 #, c-format
 msgid "'fmt' length exceeds maximal format length %d"
 msgstr ""
 
-#: getfmts.cpp:92
+#: getfmts.cpp:88
 #, c-format
 msgid "unrecognised format specification '%s'"
 msgstr ""
 
-#: getfmts.cpp:132
+#: getfmts.cpp:128
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:2866 gramRd.cpp:3989
-#, c-format
-msgid "Buffer size too large to double safely at line %d"
-msgstr ""
-
-#: gramLatex.cpp:2869 gramRd.cpp:3992
-#, c-format
-msgid "unable to allocate buffer for long string at line %d"
-msgstr ""
-
-#: gramLatex.cpp:3146 gramRd.cpp:4490
+#: gramLatex.cpp:3091 gramRd.cpp:4447
 msgid "unable to allocate in PushState"
 msgstr ""
 
-#: gramLatex.cpp:3188 gramRd.cpp:4561
+#: gramLatex.cpp:3134 gramRd.cpp:4524
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: gramRd.cpp:2590 gramRd.cpp:2593
+#: gramRd.cpp:2583 gramRd.cpp:2586
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr ""
 
-#: gramRd.cpp:3129
+#: gramRd.cpp:3120
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr ""
 
-#: gramRd.cpp:3139
+#: gramRd.cpp:3130
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 
-#: gramRd.cpp:3181
+#: gramRd.cpp:3172
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.cpp:3198 gramRd.cpp:3213
+#: gramRd.cpp:3189 gramRd.cpp:3203
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3242
+#: gramRd.cpp:3230
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr ""
 
-#: gramRd.cpp:3303
+#: gramRd.cpp:3291
 msgid "internal error: inconsistent argument count"
 msgstr ""
 
-#: gramRd.cpp:3388 gramRd.cpp:3392
+#: gramRd.cpp:3376 gramRd.cpp:3380
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.cpp:3411
-#, c-format
-msgid "unable to allocate buffer for long macro at line %d"
-msgstr ""
-
-#: gramRd.cpp:3441
+#: gramRd.cpp:3437
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.cpp:3848
+#: gramRd.cpp:3843
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.cpp:4053
+#: gramRd.cpp:4035
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.cpp:4547
+#: gramRd.cpp:4510
 msgid "'parse_Rd' is not re-entrant"
 msgstr ""
 
-#: gramRd.cpp:4571
+#: gramRd.cpp:4534
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.cpp:4573
+#: gramRd.cpp:4536
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.cpp:4587
+#: gramRd.cpp:4550
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.cpp:4611
+#: gramRd.cpp:4574
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4614
+#: gramRd.cpp:4577
 msgid "bad state"
 msgstr ""
 
-#: gramRd.cpp:4627
+#: gramRd.cpp:4590
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""
@@ -187,7 +177,7 @@ msgstr ""
 msgid "allocation error in remove_dot_segments"
 msgstr ""
 
-#: http.cpp:151 pdscan.cpp:126
+#: http.cpp:151 pdscan.cpp:128
 msgid "non-character argument"
 msgstr ""
 
@@ -195,16 +185,16 @@ msgstr ""
 msgid "path too long"
 msgstr ""
 
-#: install.cpp:123 install.cpp:141 install.cpp:143 install.cpp:145
+#: install.cpp:124 install.cpp:142 install.cpp:144 install.cpp:146
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: install.cpp:180
+#: install.cpp:181
 msgid "write error during file append"
 msgstr ""
 
-#: pdscan.cpp:79
+#: pdscan.cpp:81
 msgid "too many items"
 msgstr ""
 
@@ -216,18 +206,18 @@ msgstr ""
 msgid "psnice() is not supported on this platform"
 msgstr ""
 
-#: text.cpp:81
+#: text.cpp:83
 msgid "invalid argument type"
 msgstr ""
 
-#: text.cpp:170 text.cpp:206 text.cpp:330
+#: text.cpp:172 text.cpp:208 text.cpp:332
 msgid "invalid input"
 msgstr ""
 
-#: text.cpp:237 text.cpp:259
+#: text.cpp:239 text.cpp:261
 msgid "out of memory"
 msgstr ""
 
-#: text.cpp:279 text.cpp:281
+#: text.cpp:281 text.cpp:283
 msgid "first arg must be a single character string"
 msgstr ""

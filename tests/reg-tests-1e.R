@@ -20,6 +20,7 @@ options(nwarnings = 10000, # (rather than just 50)
         width = 99) # instead of 80
 
 onWindows <- .Platform$OS.type == "windows"
+onUnix    <- .Platform$OS.type == "unix"
 englishMsgs <- {
     ## 1. LANGUAGE takes precedence over locale settings:
     if(nzchar(lang <- Sys.getenv("LANGUAGE")))
@@ -3840,6 +3841,22 @@ local({
 ## produced undefined behvaior
 
 
+## available.packages() "subarch" filter (only active in builds with a
+## sub-architecture, as on Windows), now checking distinct Archs entries once
+local({
+    f <- utils:::available_packages_filters_db$subarch
+    db <- cbind(Package = paste0("p", 1:6),
+                Archs = c(NA, "x64", "i386, x64", "i386", "x64", "i386,x64"))
+    r_arch <- .Platform$r_arch
+    keep <- if(!nzchar(r_arch)) 1:6
+            else if(r_arch == "x64") c(1, 2, 3, 5, 6)
+            else if(r_arch == "i386") c(1, 3, 4, 6)
+            else 1
+    stopifnot(identical(f(db), db[keep, , drop = FALSE]))
+})
+## same results as before, which took 15 times as long for CRAN on Windows
+
+
 ## parsing '<lhs> |> <var> => <expr>' left the reduced call unprotected on the
 ## parser stack, so a GC before the enclosing reduction could free it
 ## (found by fuzzing; '=>' is still opt-in, and stays enabled once seen)
@@ -3854,12 +3871,55 @@ stopifnot(identical(e[[1]][[2]], ex))
 ## gave garbage (or a crash) for the LHS of '+' in R <= 4.6.x
 
 
+## available.packages() "CRAN" filter, now linear in the number of duplicates
+local({
+    op <- options(repos = c(CRAN = "https://cran.example.org",
+                            other = "https://other.example.org"))
+    on.exit(options(op))
+    f <- utils:::available_packages_filters_db$CRAN
+    cran <- "https://cran.example.org/src/contrib"
+    x <- "https://x.example.org/src/contrib"
+    y <- "https://y.example.org/src/contrib"
+    db <- cbind(Package = c("a", "a", "b", "b", "c", "a", "d", "d", "e", "e"),
+                Repository = c(cran, x, x, y, x, y, cran, cran, x, cran))
+    stopifnot(identical(f(db), db[c(1, 3, 4, 5, 7, 8, 10), ]))
+    options(repos = c(other = "https://other.example.org"))
+    stopifnot(identical(f(db), db))
+})
+## same results as before, which took seconds for thousands of duplicates
+
+
 ## NULL and negative 'deriv' in predict.smooth.spline() - PR#19190
 ss <- smooth.spline(1:4)
 for(obj in list(ss, ss$fit))
     for(d in list(NULL, -99L))
         assertErrV(predict(obj, x = 1, deriv = d))
 ## These could cause a segfault in R <= 4.6.1
+
+
+## tools:::.remove_stale_dups(), used by available.packages() and
+## write_PACKAGES(latestOnly = TRUE), now ordering all duplicates at once
+local({
+    db <- cbind(Package = c("a", "b", "a", "c", "a", "b", "c", "d", "d"),
+                Version = c("1.0", "0.9", "1.0-1", "2.0", "1.0-1", "0.10",
+                            "2.0.0", "1.0", "1.0"),
+                Repository = paste0("r", 1:9))
+    ## the highest version, and of equal ones the first
+    keep <- c(3, 4, 6, 8)
+    stopifnot(identical(tools:::.remove_stale_dups(db), db[keep, ]))
+    df <- as.data.frame(db)
+    stopifnot(identical(tools:::.remove_stale_dups(df), df[keep, ]))
+    ## more than 100 duplicates, many in the same version
+    n <- 150
+    db <- cbind(Package = rep(paste0("p", 1:n), 3),
+                Version = c(rep("1.0", n), rep(c("1.1", "0.9"), length.out = n),
+                            rep("1.0", n)),
+                Repository = rep(c("A", "B", "C"), each = n))
+    keep <- ifelse(1:n %% 2 == 1, n + 1:n, 1:n)
+    stopifnot(identical(tools:::.remove_stale_dups(db), db[sort(keep), ]),
+              identical(tools:::.remove_stale_dups(db[1:n, ]), db[1:n, ]))
+})
+## same results as before, which looped over the duplicated packages
 
 
 ## format(<utf8>, width = large) -- PR#19188
@@ -3961,11 +4021,10 @@ local({
 ## value for each further continuation line
 
 
-## iconv(sub = "Unicode") and sub = "c99" never returned on invalid UTF-8 input
+## iconv(sub = "Unicode") and sub = "c99" never returned on invalid UTF-8 input -- PR#19207
 x <- rawToChar(as.raw(c(0x61, 0xc3, 0x28, 0xe2, 0x82))) # "a", a lone lead byte, a truncated sequence
 stopifnot(identical(iconv(x, "UTF-8", "ASCII", sub = "Unicode"), "a<c3>(<e2><82>"),
-          identical(iconv(x, "UTF-8", "ASCII", sub = "c99"),     "a<c3>(<e2><82>"),
-          identical(iconv("caf\u00e9", "UTF-8", "ASCII", sub = "Unicode"), "caf<U+00E9>"))
+          identical(iconv(x, "UTF-8", "ASCII", sub = "c99"),     "a<c3>(<e2><82>"))
 ## looped forever in R <= 4.6.1
 
 
@@ -4074,6 +4133,95 @@ stopifnot(inherits(fnf, "functionNotFoundError"),
 assertWarnV(bY <- besselY(1, -2e7 - c(0.5, 0.25)))
 stopifnot(is.nan(bY))
 ## segfaulted in R-devel since r90571
+
+
+## available.packages() "R_version" filter, now comparing each distinct R
+## dependency once
+local({
+    f <- utils:::available_packages_filters_db$R_version
+    db <- cbind(Package = paste0("p", 1:10),
+                Depends = c(NA, "R (>= 2.0)", "R (>= 999.0)", "methods, R(>=3.0)",
+                            "R (>= 2.0), R (< 3.0)", "Rcpp (>= 999.0)",
+                            "R\n    (>= 999.0)", "XR (>= 999.0)",
+                            paste0("R (== ", getRversion(), ")"),
+                            "R (>= 999.0), methods"))
+    stopifnot(identical(f(db), db[c(1, 2, 4, 6, 8, 9), ]),
+              identical(f(db[c(1, 6, 8), ]), db[c(1, 6, 8), ]))
+})
+## same results as before, which took 2-3 times as long for CRAN
+
+
+## unserialize() in ascii format stopped at end of input instead of padding
+x <- strrep("a", 100)
+s <- rawToChar(serialize(x, NULL, ascii = TRUE))
+tc <- textConnection(substr(s, 1, nchar(s) - 50)) # cut inside the string
+r <- tryCatch(unserialize(tc), error = identity); close(tc)
+stopifnot(inherits(r, "error"))
+## silently returned a string padded with EOF bytes in R <= 4.6.2
+
+
+## load() of a hand-crafted RDX2 file whose pairlist chain holds a non-pairlist node
+local({
+    f <- tempfile()
+    writeBraw <- function(obj) writeBin(obj, raw(), endian = "big")
+    ## version 2 header, then a LISTSXP node tagged with the symbol "x",
+    ## with CAR = NULL
+    node <- c(charToRaw("RDX2\nX\n"),
+              writeBraw(c(2L, 0x00040500L, 0x00020300L, 0x402L, 1L, 0x40009L)),
+              writeBraw(1L), charToRaw("x"),
+              writeBraw(0xfeL))
+    ## CDR: an EXTPTRSXP (prot = NULL, tag = ref to "x")
+    writeBin(c(node, writeBraw(c(0x16L, 0xfeL, 0x1ffL))),  f)
+    E1 <- tryCid(load(f, new.env()))
+    ## CDR: a new SYMSXP "y", whose value slot is R_UnboundValue
+    writeBin(c(node, writeBraw(c(1L, 0x40009L, 1L)), charToRaw("y")),  f)
+    E2 <- tryCid(load(f, new.env()))
+    stopifnot(inherits(E1, "error"), inherits(E2, "error"))
+    if(englishMsgs)
+        stopifnot(grepl("not in pair list form", conditionMessage(E1)),
+                  grepl("not in pair list form", conditionMessage(E2)))
+    unlink(f)
+})
+## segfaulted (E1) or looped forever (E2) in R <= 4.6.2
+
+
+## 'delete.response' no longer returning "double" indices
+t1 <- terms(y ~ offset(a) + x + f(w), specials = c("f", "g"))
+a0 <- attributes(t0 <- delete.response(t1))
+stopifnot(identical(a0$response, 0L),
+          is.integer(a0$offset),
+          identical(names(a0$specials), c("f", "g")),
+          is.integer(a0$specials$f),
+          is.null(a0$specials$g))
+##converted indices to double & replaced NULL components of 'specials' with logical() in R <= 4.6.2
+
+
+## scan() stripping a UTF-8 BOM from a first field that fills its buffer
+if (l10n_info()[["UTF-8"]]) {
+    x <- paste0("\ufeff", strrep("a", 8186L)) # 8189 bytes: buffer size - 3
+    stopifnot(identical(scan(text = x, what = "", quiet = TRUE), strrep("a", 8186L)))
+}
+## read 3 bytes past the end of the field buffer in R <= 4.6.1
+
+
+## unzip(*, unzip = "internal") leaks the zip handle on error -- PR#19233
+le <- function(x, n) writeBin(as.integer(x), raw(), size = n, endian = "little")
+entries <- as.raw(c(0x01, 0x00, 0x00, 0xff, 0, 0, 0, 0))
+record <- c(as.raw(c(0x50, 0x4b, 0x06, 0x06)), le(44, 8), le(45, 2), le(45, 2),
+            le(0, 4), le(0, 4), entries, entries, le(0, 8), le(0, 8))
+locator <- c(as.raw(c(0x50, 0x4b, 0x06, 0x07)), le(0, 4), le(4, 8), le(1, 4))
+zipfile <- tempfile(fileext = ".zip")
+writeBin(c(le(0, 4), record, locator), zipfile) # pad: minizip code treats offset 0 as "not found"
+if(dir.exists(dfd <- "/dev/fd")) withAutoprint({
+    nfd <- function() length(list.files(dfd))
+    (n1 <- nfd())
+    for (i in 1:50)
+        tryCatch(unzip(zipfile, list = TRUE, unzip = "internal"), error = function(e) {})
+    (n2 <- nfd())
+    stopifnot(n2 - n1 == 0)
+})          # ^^^^^^^
+unlink(zipfile)
+## n2 - n1 was 50 in R <= 4.6.2
 
 
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-10-23 20:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -433,6 +433,13 @@ msgstr ""
 #. R/contr.poly.R: stop("'degree' must be less than number of unique points")
 
 msgid "'degree' must be less than number of unique points"
+msgstr ""
+
+
+#: R/smspline.R: 0
+#. R/smspline.R: stop("'deriv' must be a non-negative integer")
+
+msgid "'deriv' must be a non-negative integer"
 msgstr ""
 
 
@@ -2098,13 +2105,6 @@ msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr ""
 
 
-#: R/ks.test.R: 0
-#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
-
-msgid "Parameter(s) %s ignored"
-msgstr ""
-
-
 #: R/glm-profile.R: 0
 #. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 
@@ -2810,13 +2810,6 @@ msgstr ""
 #. R/ks.test.R: warning("computation of exact probability failed, returning Monte Carlo approximation")
 
 msgid "computation of exact probability failed, returning Monte Carlo approximation"
-msgstr ""
-
-
-#: R/free1way.R: 0
-#. R/free1way.R: gettextf("computing Newton updated failed in %s", ".NewtonRaphson")
-
-msgid "computing Newton updated failed in %s"
 msgstr ""
 
 
@@ -6221,6 +6214,20 @@ msgid "value of 'epsilon' must be > 0"
 msgstr ""
 
 
+#: R/glm.R: 0
+#. R/glm.R: stop("value of 'tol' must be >= 0")
+
+msgid "value of 'tol' must be >= 0"
+msgstr ""
+
+
+#: R/glm.R: 0
+#. R/glm.R: stop("value of 'wtol' must be >= 0")
+
+msgid "value of 'wtol' must be >= 0"
+msgstr ""
+
+
 #: R/models.R: 0
 #. R/models.R: gettextf("variable '%s' is absent, its contrast will be ignored",     nn)
 
@@ -6263,7 +6270,9 @@ msgid "weights must be non-negative and not all zero"
 msgstr ""
 
 
+#: R/glm.R: 0
 #: R/lm.R: 0
+#. R/glm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 #. R/lm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 
 msgid "weights smaller than tolerance wtol*sum(w) = %g treated as zero"

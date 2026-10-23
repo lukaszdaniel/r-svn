@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-10-23 20:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,125 +26,125 @@ msgstr ""
 msgid "Clipping path ignored (device is appending path)"
 msgstr ""
 
-#: colors.cpp:74
+#: colors.cpp:78
 #, c-format
 msgid "color intensity %s, not in [0,1]"
 msgstr ""
 
-#: colors.cpp:76
+#: colors.cpp:80
 #, c-format
 msgid "color intensity %g, not in [0,1]"
 msgstr ""
 
-#: colors.cpp:83
+#: colors.cpp:87
 #, c-format
 msgid "color intensity %s, not in 0:255"
 msgstr ""
 
-#: colors.cpp:85
+#: colors.cpp:89
 #, c-format
 msgid "color intensity %d, not in 0:255"
 msgstr ""
 
-#: colors.cpp:92
+#: colors.cpp:96
 #, c-format
 msgid "alpha level %s, not in [0,1]"
 msgstr ""
 
-#: colors.cpp:94
+#: colors.cpp:98
 #, c-format
 msgid "alpha level %g, not in [0,1]"
 msgstr ""
 
-#: colors.cpp:101
+#: colors.cpp:105
 #, c-format
 msgid "alpha level %s, not in 0:255"
 msgstr ""
 
-#: colors.cpp:103
+#: colors.cpp:107
 #, c-format
 msgid "alpha level %d, not in 0:255"
 msgstr ""
 
-#: colors.cpp:118
+#: colors.cpp:122
 msgid "inputs must be finite"
 msgstr ""
 
-#: colors.cpp:133
+#: colors.cpp:137
 msgid "bad hsv to rgb color conversion"
 msgstr ""
 
-#: colors.cpp:225 colors.cpp:239
+#: colors.cpp:229 colors.cpp:243
 msgid "invalid hsv color"
 msgstr ""
 
-#: colors.cpp:349 colors.cpp:369
+#: colors.cpp:353 colors.cpp:373
 msgid "invalid hcl color"
 msgstr ""
 
-#: colors.cpp:401 devWindows.cpp:3744 devWindows.cpp:3752 devWindows.cpp:3767
-#: devWindows.cpp:3774 devWindows.cpp:3783 cairo/cairoBM.cpp:628
+#: colors.cpp:405 devWindows.cpp:3746 devWindows.cpp:3754 devWindows.cpp:3769
+#: devWindows.cpp:3776 devWindows.cpp:3785 cairo/cairoBM.cpp:629
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: colors.cpp:429
+#: colors.cpp:433
 msgid "invalid 'names' vector"
 msgstr ""
 
-#: colors.cpp:494 colors.cpp:503
+#: colors.cpp:498 colors.cpp:507
 msgid "invalid gray level, must be in [0,1]."
 msgstr ""
 
-#: colors.cpp:525
+#: colors.cpp:529
 msgid "rgb is not a matrix (internally)"
 msgstr ""
 
-#: colors.cpp:527
+#: colors.cpp:531
 msgid "rgb must have 3 rows (internally)"
 msgstr ""
 
-#: colors.cpp:1344
+#: colors.cpp:1348
 msgid "invalid hex digit in 'color' or 'lty'"
 msgstr ""
 
-#: colors.cpp:1354 colors.cpp:1372
+#: colors.cpp:1358 colors.cpp:1376
 msgid "invalid RGB specification"
 msgstr ""
 
-#: colors.cpp:1408
+#: colors.cpp:1412
 #, c-format
 msgid "invalid color name '%s'"
 msgstr ""
 
-#: colors.cpp:1458 colors.cpp:1467
+#: colors.cpp:1462 colors.cpp:1471
 #, c-format
 msgid "invalid color specification \"%s\""
 msgstr ""
 
-#: colors.cpp:1495
+#: colors.cpp:1499
 msgid "supplied color is neither numeric nor character"
 msgstr ""
 
-#: colors.cpp:1499
+#: colors.cpp:1503
 #, c-format
 msgid "numerical color values must be >= 0, found %d"
 msgstr ""
 
-#: colors.cpp:1510
+#: colors.cpp:1514
 msgid "invalid argument type"
 msgstr ""
 
-#: colors.cpp:1521
+#: colors.cpp:1525
 msgid "unknown palette (need >= 2 colors)"
 msgstr ""
 
-#: colors.cpp:1525 colors.cpp:1547
+#: colors.cpp:1529 colors.cpp:1551
 #, c-format
 msgid "maximum number of colors is %d"
 msgstr ""
 
-#: colors.cpp:1545
+#: colors.cpp:1549
 msgid "requires INTSXP argument"
 msgstr ""
 
@@ -285,11 +285,11 @@ msgstr ""
 msgid "object '.ps.prolog' is not a character vector"
 msgstr ""
 
-#: devPS.cpp:2765 devPS.cpp:7453 devWindows.cpp:802
+#: devPS.cpp:2765 devPS.cpp:7453 devWindows.cpp:803
 msgid "invalid line end"
 msgstr ""
 
-#: devPS.cpp:2784 devPS.cpp:7473 devWindows.cpp:815
+#: devPS.cpp:2784 devPS.cpp:7473 devWindows.cpp:816
 msgid "invalid line join"
 msgstr ""
 
@@ -303,8 +303,8 @@ msgstr ""
 msgid "attempt to use invalid font %d replaced by font 1"
 msgstr ""
 
-#: devPS.cpp:3231 devPS.cpp:6855 devWindows.cpp:1809 devWindows.cpp:1846
-#: devWindows.cpp:1876 devWindows.cpp:1908
+#: devPS.cpp:3231 devPS.cpp:6855 devWindows.cpp:1810 devWindows.cpp:1847
+#: devWindows.cpp:1877 devWindows.cpp:1909
 #, c-format
 msgid "filename too long in '%s' call"
 msgstr ""
@@ -353,7 +353,7 @@ msgstr ""
 msgid "invalid page type '%s' (postscript)"
 msgstr ""
 
-#: devPS.cpp:3612 devWindows.cpp:2341
+#: devPS.cpp:3612 devWindows.cpp:2342
 msgid ""
 "semi-transparency is not supported on this device: reported only once per "
 "page"
@@ -641,7 +641,7 @@ msgid "invalid 'fonts' parameter in %s"
 msgstr ""
 
 #: devPS.cpp:9956 devPS.cpp:10054 devPicTeX.cpp:779 devPicTeX.cpp:784
-#: devWindows.cpp:3824
+#: devWindows.cpp:3826
 #, c-format
 msgid "unable to start %s() device"
 msgstr ""
@@ -798,11 +798,11 @@ msgstr ""
 msgid "failed to load font"
 msgstr ""
 
-#: devQuartz.cpp:3393 devQuartz.cpp:3398 cairo/cairoBM.cpp:605
-#: cairo/cairoBM.cpp:608 cairo/cairoBM.cpp:612 cairo/cairoBM.cpp:616
-#: cairo/cairoBM.cpp:620 cairo/cairoBM.cpp:624 cairo/cairoBM.cpp:635
-#: cairo/cairoBM.cpp:640 cairo/cairoBM.cpp:643 cairo/cairoBM.cpp:647
-#: cairo/cairoBM.cpp:652 cairo/cairoBM.cpp:655
+#: devQuartz.cpp:3393 devQuartz.cpp:3398 cairo/cairoBM.cpp:606
+#: cairo/cairoBM.cpp:609 cairo/cairoBM.cpp:613 cairo/cairoBM.cpp:617
+#: cairo/cairoBM.cpp:621 cairo/cairoBM.cpp:625 cairo/cairoBM.cpp:636
+#: cairo/cairoBM.cpp:641 cairo/cairoBM.cpp:644 cairo/cairoBM.cpp:648
+#: cairo/cairoBM.cpp:653 cairo/cairoBM.cpp:656
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
@@ -850,141 +850,141 @@ msgstr ""
 msgid "font family not found in Windows font database"
 msgstr ""
 
-#: devWindows.cpp:725
+#: devWindows.cpp:726
 msgid "unable to set or substitute a suitable font"
 msgstr ""
 
-#: devWindows.cpp:730
+#: devWindows.cpp:731
 msgid "unable to set font: using Arial"
 msgstr ""
 
-#: devWindows.cpp:1090
+#: devWindows.cpp:1091
 msgid "plot history seems corrupted"
 msgstr ""
 
-#: devWindows.cpp:1097
+#: devWindows.cpp:1098
 msgid "no plot history!"
 msgstr ""
 
-#: devWindows.cpp:1575
+#: devWindows.cpp:1576
 msgid "unable to open window"
 msgstr ""
 
-#: devWindows.cpp:1802
+#: devWindows.cpp:1803
 msgid "unable to open printer"
 msgstr ""
 
-#: devWindows.cpp:1814 devWindows.cpp:1849 devWindows.cpp:1879
+#: devWindows.cpp:1815 devWindows.cpp:1850 devWindows.cpp:1880
 #, c-format
 msgid "'width=%d, height=%d' are unlikely values in pixels"
 msgstr ""
 
-#: devWindows.cpp:1822 devWindows.cpp:1827 devWindows.cpp:1852
-#: devWindows.cpp:1857 devWindows.cpp:1882 devWindows.cpp:1887
+#: devWindows.cpp:1823 devWindows.cpp:1828 devWindows.cpp:1853
+#: devWindows.cpp:1858 devWindows.cpp:1883 devWindows.cpp:1888
 msgid "unable to allocate bitmap"
 msgstr ""
 
-#: devWindows.cpp:1833 devWindows.cpp:1863 devWindows.cpp:2184
+#: devWindows.cpp:1834 devWindows.cpp:1864 devWindows.cpp:2185
 #, c-format
 msgid "unable to open file '%s' for writing"
 msgstr ""
 
-#: devWindows.cpp:1904
+#: devWindows.cpp:1905
 msgid "invalid specification for file name in win.metafile()"
 msgstr ""
 
-#: devWindows.cpp:1919
+#: devWindows.cpp:1920
 #, c-format
 msgid "unable to open metafile '%s' for writing"
 msgstr ""
 
-#: devWindows.cpp:1921
+#: devWindows.cpp:1922
 msgid "unable to open clipboard to write metafile"
 msgstr ""
 
-#: devWindows.cpp:2132
+#: devWindows.cpp:2133
 msgid "Insufficient memory for resize. Killing device"
 msgstr ""
 
-#: devWindows.cpp:2140
+#: devWindows.cpp:2141
 msgid "Insufficient memory for resize. Disabling alpha blending"
 msgstr ""
 
-#: devWindows.cpp:2169
+#: devWindows.cpp:2170
 msgid "a clipboard metafile can store only one figure."
 msgstr ""
 
-#: devWindows.cpp:2175
+#: devWindows.cpp:2176
 #, c-format
 msgid "metafile '%s' could not be created"
 msgstr ""
 
-#: devWindows.cpp:3180 devWindows.cpp:3847
+#: devWindows.cpp:3181 devWindows.cpp:3849
 msgid "R Graphics"
 msgstr ""
 
-#: devWindows.cpp:3193
+#: devWindows.cpp:3194
 msgid "attempt to use the locator after dev.hold()"
 msgstr ""
 
-#: devWindows.cpp:3219
+#: devWindows.cpp:3220
 msgid "graphics device closed during call to locator or identify"
 msgstr ""
 
-#: devWindows.cpp:3319
+#: devWindows.cpp:3320
 msgid "allocation failed in GADeviceDriver"
 msgstr ""
 
-#: devWindows.cpp:3361
+#: devWindows.cpp:3362
 msgid "opening device failed"
 msgstr ""
 
-#: devWindows.cpp:3492
+#: devWindows.cpp:3493
 msgid "option 'windowsTimeouts' should be integer"
 msgstr ""
 
-#: devWindows.cpp:3513
+#: devWindows.cpp:3515
 msgid "invalid device number in 'savePlot'"
 msgstr ""
 
-#: devWindows.cpp:3515
+#: devWindows.cpp:3517
 msgid "invalid device in 'savePlot'"
 msgstr ""
 
-#: devWindows.cpp:3518
+#: devWindows.cpp:3520
 msgid "invalid filename argument in 'savePlot'"
 msgstr ""
 
-#: devWindows.cpp:3523
+#: devWindows.cpp:3525
 msgid "invalid type argument in 'savePlot'"
 msgstr ""
 
-#: devWindows.cpp:3550
+#: devWindows.cpp:3552
 msgid "unknown type in savePlot"
 msgstr ""
 
-#: devWindows.cpp:3595 devWindows.cpp:3637 devWindows.cpp:3662
-#: devWindows.cpp:3689 devWindows.cpp:3710
+#: devWindows.cpp:3597 devWindows.cpp:3639 devWindows.cpp:3664
+#: devWindows.cpp:3691 devWindows.cpp:3712
 msgid "processing of the plot ran out of memory"
 msgstr ""
 
-#: devWindows.cpp:3606
+#: devWindows.cpp:3608
 msgid "Not enough memory to create error message."
 msgstr ""
 
-#: devWindows.cpp:3608
+#: devWindows.cpp:3610
 msgid "Impossible to open "
 msgstr ""
 
-#: devWindows.cpp:3737
+#: devWindows.cpp:3739
 msgid "invalid 'width' or 'height'"
 msgstr ""
 
-#: devWindows.cpp:3933
+#: devWindows.cpp:3935
 msgid "Not enough memory to create buffer for path."
 msgstr ""
 
-#: devWindows.cpp:3974
+#: devWindows.cpp:3976
 msgid "unable to load winCairo.dll: was it built?"
 msgstr ""
 
@@ -1069,7 +1069,7 @@ msgstr ""
 msgid "could not open file '%s'"
 msgstr ""
 
-#: cairo/cairoBM.cpp:671
+#: cairo/cairoBM.cpp:672
 #, c-format
 msgid "unable to start device '%s'"
 msgstr ""
@@ -1110,15 +1110,15 @@ msgstr ""
 msgid "Cairo groups exhausted"
 msgstr ""
 
-#: cairo/cairoFns.cpp:1624 cairo/cairoFns.cpp:1647
+#: cairo/cairoFns.cpp:1621 cairo/cairoFns.cpp:1644
 msgid "invalid string in PangoCairo_Text"
 msgstr ""
 
-#: cairo/cairoFns.cpp:1788
+#: cairo/cairoFns.cpp:1785
 msgid "unable to initialize FontConfig in cairo-ft font selection"
 msgstr ""
 
-#: cairo/cairoFns.cpp:1997
+#: cairo/cairoFns.cpp:1996
 msgid "invalid string in Cairo_StrWidth"
 msgstr ""
 

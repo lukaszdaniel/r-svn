@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-10-23 20:56\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1571,7 +1571,6 @@ msgstr ""
 #: R/tar.R: 0
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 
 msgid "failed to copy %s to %s"
 msgstr ""
@@ -1996,6 +1995,20 @@ msgstr ""
 #. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
 
 msgid "kind '%s' not yet implemented"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: stop("link target is the extraction directory")
+
+msgid "link target is the extraction directory"
+msgstr ""
+
+
+#: R/tar.R: 0
+#. R/tar.R: stop("link target outside extraction directory")
+
+msgid "link target outside extraction directory"
 msgstr ""
 
 

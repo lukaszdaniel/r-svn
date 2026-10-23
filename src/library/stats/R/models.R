@@ -162,19 +162,18 @@ delete.response <- function (termobj)
     a <- attributes(termobj)
     y <- a$response
     if(!is.null(y) && y) {
+        off <- function (i) { if (any(p <- i > y)) i[p] <- i[p]-1L; i }
         termobj[[2L]] <- NULL
-        a$response <- 0
-        a$variables <- a$variables[-(1+y)]
-        a$predvars <- a$predvars[-(1+y)]
+        a$response <- 0L
+        a$variables <- a$variables[-(1L+y)]
+        a$predvars <- a$predvars[-(1L+y)]
         if(length(a$factors))
             a$factors <- a$factors[-y, , drop = FALSE]
         if(length(a$offset))
-            a$offset <- ifelse(a$offset > y, a$offset-1, a$offset)
-        if(length(a$specials))
-            for(i in seq_along(a$specials)) {
-                b <- a$specials[[i]]
-                a$specials[[i]] <- ifelse(b > y, b-1, b)
-            }
+            a$offset <- off(a$offset)
+        for(i in seq_along(a$specials))
+            if(!is.null(b <- a$specials[[i]]))
+                a$specials[[i]] <- off(b)
         attributes(termobj) <- a
     }
     termobj
