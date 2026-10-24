@@ -2200,7 +2200,7 @@ static SEXP RestoreToEnv(SEXP ans, SEXP aenv)
     while (a != R_NilValue) {
 	/* a hand-crafted file can splice any object into the chain */
 	if (TYPEOF(a) != LISTSXP || TYPEOF(TAG(a)) != SYMSXP)
-	    error(_("loaded data is not in pair list form"));
+	    error("%s", _("loaded data is not in pair list form"));
 	a = CDR(a);
 	cnt++;
     }

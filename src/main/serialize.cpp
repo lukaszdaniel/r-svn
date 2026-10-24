@@ -569,10 +569,10 @@ static void InString(R_inpstream_t stream, char *buf, int length)
 		   error: stop here rather than fill the rest of the
 		   string with EOF bytes */
 		if ((c = GetChar(&iss)) == EOF)
-		    error(_("read error"));
+		    error("%s", _("read error"));
 		if (c == '\\') {
 		    if ((c = GetChar(&iss)) == EOF)
-			error(_("read error"));
+			error("%s", _("read error"));
 		    switch(c) {
 		    case 'n' : buf[i] = '\n'; break;
 		    case 't' : buf[i] = '\t'; break;
