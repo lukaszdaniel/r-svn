@@ -736,6 +736,18 @@ AC_DEFUN([AM_INTL_SUBDIR],
     HAVE_WPRINTF=0
   fi
   AC_SUBST([HAVE_WPRINTF])
+  if test "$ac_cv_func_newlocale" = yes; then
+    HAVE_NEWLOCALE=1
+  else
+    HAVE_NEWLOCALE=0
+  fi
+  AC_SUBST([HAVE_NEWLOCALE])
+  if test $gt_localename_enhances_locale_funcs = yes; then
+    ENHANCE_LOCALE_FUNCS=1
+  else
+    ENHANCE_LOCALE_FUNCS=0
+  fi
+  AC_SUBST([ENHANCE_LOCALE_FUNCS])
 
   AM_LANGINFO_CODESET
   gt_LC_MESSAGES

@@ -682,6 +682,8 @@ CATOBJEXT
 USE_INCLUDED_LIBINTL
 BUILD_INCLUDED_LIBINTL
 WOE32DLL
+ENHANCE_LOCALE_FUNCS
+HAVE_NEWLOCALE
 HAVE_WPRINTF
 HAVE_SNPRINTF
 HAVE_ASPRINTF
@@ -27785,7 +27787,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_verb"
-(eval echo $as_me:27788: \"$ac_link\") >&5
+(eval echo $as_me:27790: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -27863,7 +27865,7 @@ _ACEOF
 # flags.
 r_save_CFLAGS=$CFLAGS
 CFLAGS="$CFLAGS $r_cv_prog_c_v"
-(eval echo $as_me:27866: \"$ac_link\") >&5
+(eval echo $as_me:27868: \"$ac_link\") >&5
 r_c_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$r_c_v_output" >&5
 CFLAGS=$r_save_CFLAGS
@@ -59751,6 +59753,18 @@ printf "%s\n" "#define HAVE_DECL_GETC_UNLOCKED $gt_value" >>confdefs.h
     HAVE_WPRINTF=1
   else
     HAVE_WPRINTF=0
+  fi
+
+  if test "$ac_cv_func_newlocale" = yes; then
+    HAVE_NEWLOCALE=1
+  else
+    HAVE_NEWLOCALE=0
+  fi
+
+  if test $gt_localename_enhances_locale_funcs = yes; then
+    ENHANCE_LOCALE_FUNCS=1
+  else
+    ENHANCE_LOCALE_FUNCS=0
   fi
 
 

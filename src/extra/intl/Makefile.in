@@ -18,7 +18,7 @@ HEADERS = \
   gmo.h gettextP.h hash-string.h loadinfo.h plural-exp.h eval-plural.h \
   localcharset.h xsize.h printf-args.h printf-args.c printf-parse.h \
   wprintf-parse.h printf-parse.c vasnprintf.h vasnwprintf.h vasnprintf.c \
-  libgnuintl.h.in lock.h intl-exports.c tsearch.c tsearch.h
+  libgnuintl.in.h lock.h intl-exports.c tsearch.c tsearch.h
 
 SOURCES = \
  bindtextdom.c dcgettext.c dgettext.c gettext.c finddomain.c loadmsgcat.c \
@@ -66,12 +66,14 @@ headers: libgnuintl.h
 	@$(SHELL) $(top_srcdir)/tools/copy-if-change libgnuintl.h \
 	 $(top_builddir)/include/libintl.h
 
-libgnuintl.h: $(srcdir)/libgnuintl.h.in
+libgnuintl.h: $(srcdir)/libgnuintl.in.h
 	@sed -e 's,@''HAVE_POSIX_PRINTF''@,@HAVE_POSIX_PRINTF@,g' \
 	    -e 's,@''HAVE_ASPRINTF''@,@HAVE_ASPRINTF@,g' \
 	    -e 's,@''HAVE_SNPRINTF''@,@HAVE_SNPRINTF@,g' \
 	    -e 's,@''HAVE_WPRINTF''@,@HAVE_WPRINTF@,g' \
-	  < $(srcdir)/libgnuintl.h.in > libgnuintl.h
+	    -e 's,@''HAVE_NEWLOCALE''@,@HAVE_NEWLOCALE@,g' \
+	    -e 's,@''ENHANCE_LOCALE_FUNCS''@,@ENHANCE_LOCALE_FUNCS@,g' \
+	  < $(srcdir)/libgnuintl.in.h > libgnuintl.h
 
 charset.alias: $(srcdir)/config.charset
 	@$(SHELL) $(srcdir)/config.charset '@host@' > t-$@

@@ -24,12 +24,14 @@ OBJECTS = $(SOURCES:.c=.o)
 
 libintl.a: $(OBJECTS)
 
-libgnuintl.h: libgnuintl.h.in
+libgnuintl.h: libgnuintl.in.h
 	sed -e 's,@''HAVE_POSIX_PRINTF''@,1,g' \
 	    -e 's,@''HAVE_ASPRINTF''@,0,g' \
 	    -e 's,@''HAVE_SNPRINTF''@,1,g' \
 	    -e 's,@''HAVE_WPRINTF''@,0,g' \
-	  < libgnuintl.h.in > libgnuintl.h
+	    -e 's,@''HAVE_NEWLOCALE''@,0,g' \
+	    -e 's,@''ENHANCE_LOCALE_FUNCS''@,0,g' \
+	  < libgnuintl.in.h > libgnuintl.h
 
 libintl.h: libgnuintl.h
 	cp libgnuintl.h libintl.h

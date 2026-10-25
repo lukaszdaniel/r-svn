@@ -1,5 +1,5 @@
 /* Implements a string hashing function.
-   Copyright (C) 1995, 1997, 1998, 2000, 2003 Free Software Foundation, Inc.
+   Copyright (C) 1995-2026 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -13,9 +13,10 @@
    Lesser General Public License for more details.
 
    You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, write to the Free
-   Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   License along with the GNU C Library; if not, see
+   <https://www.gnu.org/licenses/>.  */
+
+/* Written by Ulrich Drepper.  */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -29,18 +30,16 @@
    [see Aho/Sethi/Ullman, COMPILERS: Principles, Techniques and Tools,
    1986, 1987 Bell Telephone Laboratories, Inc.]  */
 unsigned long int
-__hash_string (const char *str_param)
+__hash_string (const char *str)
 {
-  unsigned long int hval, g;
-  const char *str = str_param;
-
   /* Compute the hash value for the given string.  */
-  hval = 0;
+  unsigned long int hval = 0;
   while (*str != '\0')
     {
       hval <<= 4;
       hval += (unsigned char) *str++;
-      g = hval & ((unsigned long int) 0xf << (HASHWORDBITS - 4));
+      unsigned long int g =
+	hval & ((unsigned long int) 0xf << (HASHWORDBITS - 4));
       if (g != 0)
 	{
 	  hval ^= g >> (HASHWORDBITS - 8);
