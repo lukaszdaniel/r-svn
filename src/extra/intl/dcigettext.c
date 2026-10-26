@@ -68,6 +68,10 @@ extern int errno;
 #include <string.h>
 #include <wchar.h>
 
+#if defined _WIN32 && !defined __CYGWIN__ // R change
+#include <direct.h> // _getcwd, _wgetcwd
+#endif
+
 #if defined HAVE_UNISTD_H || defined _LIBC
 # include <unistd.h>
 #endif
@@ -240,6 +244,9 @@ struct known_translation_t
   /* Pointer to the string in question.  */
   union
     {
+#ifdef __GNUC__ // R change
+  __extension__ 
+#endif
       char appended[ZERO];  /* used if domain != NULL */
       const char *ptr;      /* used if domain == NULL */
     }
@@ -579,7 +586,7 @@ DCIGETTEXT (const char *domainname, const char *msgid1, const char *msgid2,
 	    }
 	  wdirname_len++;
 
-	  wchar_t *wcwd = wgetcwd (NULL, 0);
+	  wchar_t *wcwd = _wgetcwd (NULL, 0); // R change
 	  if (wcwd == NULL)
 	    /* We cannot get the current working directory.  Don't
 	       signal an error but simply return the default string.  */
@@ -613,7 +620,7 @@ DCIGETTEXT (const char *domainname, const char *msgid1, const char *msgid2,
       if (IS_RELATIVE_FILE_NAME (dirname))
 	{
 	  /* We have a relative path.  Make it absolute now.  */
-	  char *cwd = getcwd (NULL, 0);
+	  char *cwd = _getcwd (NULL, 0); // R change
 	  if (cwd == NULL)
 	    /* We cannot get the current working directory.  Don't
 	       signal an error but simply return the default

@@ -206,6 +206,9 @@ struct binding
   wchar_t *wdirname;
 #endif
   char *codeset;
+#ifdef __GNUC__ // R change
+  __extension__ 
+#endif
   char domainname[FLEXIBLE_ARRAY_MEMBER];
 };
 
