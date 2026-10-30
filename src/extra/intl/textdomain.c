@@ -1,20 +1,20 @@
 /* Implementation of the textdomain(3) function.
-   Copyright (C) 1995-2026 Free Software Foundation, Inc.
+   Copyright (C) 1995-1998, 2000-2003, 2005-2006 Free Software Foundation, Inc.
 
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as published by
-   the Free Software Foundation; either version 2.1 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or modify it
+   under the terms of the GNU Library General Public License as published
+   by the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU Lesser General Public License for more details.
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
 
-   You should have received a copy of the GNU Lesser General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
-
-/* Written by Ulrich Drepper and Bruno Haible.  */
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
+   USA.  */
 
 #ifdef HAVE_CONFIG_H
 # include <config.h>
@@ -32,13 +32,15 @@
 
 /* Handle multi-threaded applications.  */
 #ifdef _LIBC
-# include <libc-lock.h>
+# include <bits/libc-lock.h>
 # define gl_rwlock_define __libc_rwlock_define
 # define gl_rwlock_wrlock __libc_rwlock_wrlock
 # define gl_rwlock_unlock __libc_rwlock_unlock
 #else
-# include "lock.h" // R change
+# include "lock.h"
 #endif
+
+/* @@ end of prolog @@ */
 
 
 /* Names for the libintl functions are a problem.  They must not clash
@@ -54,21 +56,26 @@
 # define TEXTDOMAIN libintl_textdomain
 #endif
 
+/* Lock variable to protect the global data in the gettext implementation.  */
+gl_rwlock_define (extern, _nl_state_lock attribute_hidden)
+
 /* Set the current default message catalog to DOMAINNAME.
    If DOMAINNAME is null, return the current default.
    If DOMAINNAME is "", reset to the default of "messages".  */
 char *
 TEXTDOMAIN (const char *domainname)
 {
+  char *new_domain;
+  char *old_domain;
+
   /* A NULL pointer requests the current setting.  */
   if (domainname == NULL)
     return (char *) _nl_current_default_domain;
 
   gl_rwlock_wrlock (_nl_state_lock);
 
-  char *old_domain = (char *) _nl_current_default_domain;
+  old_domain = (char *) _nl_current_default_domain;
 
-  char *new_domain;
   /* If domain name is the null string set to default domain "messages".  */
   if (domainname[0] == '\0'
       || strcmp (domainname, _nl_default_default_domain) == 0)
@@ -82,10 +89,18 @@ TEXTDOMAIN (const char *domainname)
     new_domain = old_domain;
   else
     {
-      /* If the following strdup fails '_nl_current_default_domain'
+      /* If the following malloc fails `_nl_current_default_domain'
 	 will be NULL.  This value will be returned and so signals we
-	 are out of memory.  */
+	 are out of core.  */
+#if defined _LIBC || defined HAVE_STRDUP
       new_domain = strdup (domainname);
+#else
+      size_t len = strlen (domainname) + 1;
+      new_domain = (char *) malloc (len);
+      if (new_domain != NULL)
+	memcpy (new_domain, domainname, len);
+#endif
+
       if (new_domain != NULL)
 	_nl_current_default_domain = new_domain;
     }

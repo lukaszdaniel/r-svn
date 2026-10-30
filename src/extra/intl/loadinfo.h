@@ -1,20 +1,21 @@
-/* Copyright (C) 1996-2026 Free Software Foundation, Inc.
+/* Copyright (C) 1996-1999, 2000-2003, 2005-2006 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
+   Contributed by Ulrich Drepper <drepper@cygnus.com>, 1996.
 
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as published by
-   the Free Software Foundation; either version 2.1 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or modify it
+   under the terms of the GNU Library General Public License as published
+   by the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU Lesser General Public License for more details.
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
 
-   You should have received a copy of the GNU Lesser General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
-
-/* Written by Ulrich Drepper and Bruno Haible.  */
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
+   USA.  */
 
 #ifndef _LOADINFO_H
 #define _LOADINFO_H	1
@@ -31,8 +32,12 @@
    in gettextP.h.
  */
 
-#ifndef LIBINTL_SHLIB_EXPORTED
-# define LIBINTL_SHLIB_EXPORTED
+#ifndef internal_function
+# define internal_function
+#endif
+
+#ifndef LIBINTL_DLL_EXPORTED
+# define LIBINTL_DLL_EXPORTED
 #endif
 
 /* Tell the compiler when a conditional or integer expression is
@@ -42,7 +47,7 @@
 #endif
 
 /* Separator in PATH like lists of pathnames.  */
-#if (defined _WIN32 && !defined __CYGWIN__) || defined __EMX__ || defined __DJGPP__
+#if ((defined _WIN32 || defined __WIN32__) && !defined __CYGWIN__) || defined __EMX__ || defined __DJGPP__
   /* Win32, OS/2, DOS */
 # define PATH_SEPARATOR ';'
 #else
@@ -59,13 +64,7 @@
 
 struct loaded_l10nfile
 {
-  /* The file name of the localization file.
-     It is set at construction time and then never changed.
-     Exactly one of filename, wfilename is non-NULL.  */
   const char *filename;
-#if defined _WIN32 && !defined __CYGWIN__
-  const wchar_t *wfilename;
-#endif
   int decided;
 
   const void *data;
@@ -113,11 +112,7 @@ extern const char *_nl_normalize_codeset (const char *codeset,
    results from which this lookup result inherits.  */
 extern struct loaded_l10nfile *
 _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
-		    const char *dirlist, size_t dirlist_len,
-#if defined _WIN32 && !defined __CYGWIN__
-		    const wchar_t *wdirlist, size_t wdirlist_len,
-#endif
-		    int mask,
+		    const char *dirlist, size_t dirlist_len, int mask,
 		    const char *language, const char *territory,
 		    const char *codeset, const char *normalized_codeset,
 		    const char *modifier,
@@ -127,7 +122,7 @@ _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
    NAME is not a locale alias (but possibly a real locale name).
    The return value is statically allocated and must not be freed.  */
 /* Part of the libintl ABI only for the sake of the gettext.m4 macro.  */
-extern LIBINTL_SHLIB_EXPORTED const char *_nl_expand_alias (const char *name);
+extern LIBINTL_DLL_EXPORTED const char *_nl_expand_alias (const char *name);
 
 /* Split a locale name NAME into its pieces: language, modifier,
    territory, codeset.

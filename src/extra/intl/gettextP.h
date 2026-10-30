@@ -1,25 +1,25 @@
 /* Header describing internals of libintl library.
-   Copyright (C) 1995-2026 Free Software Foundation, Inc.
+   Copyright (C) 1995-1999, 2000-2007 Free Software Foundation, Inc.
+   Written by Ulrich Drepper <drepper@cygnus.com>, 1995.
 
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Lesser General Public License as published by
-   the Free Software Foundation; either version 2.1 of the License, or
-   (at your option) any later version.
+   This program is free software; you can redistribute it and/or modify it
+   under the terms of the GNU Library General Public License as published
+   by the Free Software Foundation; either version 2, or (at your option)
+   any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU Lesser General Public License for more details.
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
 
-   You should have received a copy of the GNU Lesser General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
-
-/* Written by Ulrich Drepper and Bruno Haible.  */
+   You should have received a copy of the GNU Library General Public
+   License along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
+   USA.  */
 
 #ifndef _GETTEXTP_H
 #define _GETTEXTP_H
 
-#include <stdbool.h>		/* Get bool.  */
 #include <stddef.h>		/* Get size_t.  */
 
 #ifdef _LIBC
@@ -32,14 +32,13 @@
 
 /* Handle multi-threaded applications.  */
 #ifdef _LIBC
-# include <libc-lock.h>
+# include <bits/libc-lock.h>
 # define gl_rwlock_define __libc_rwlock_define
 #else
-# include "lock.h" // R change
+# include "lock.h"
 #endif
 
 #ifdef _LIBC
-struct loaded_domain;
 extern char *__gettext (const char *__msgid);
 extern char *__dgettext (const char *__domainname, const char *__msgid);
 extern char *__dcgettext (const char *__domainname, const char *__msgid,
@@ -51,20 +50,19 @@ extern char *__dngettext (const char *__domainname,
 			  unsigned long int n);
 extern char *__dcngettext (const char *__domainname,
 			   const char *__msgid1, const char *__msgid2,
-			   unsigned long int __n, int __category)
-     attribute_hidden;
+			   unsigned long int __n, int __category);
 extern char *__dcigettext (const char *__domainname,
 			   const char *__msgid1, const char *__msgid2,
 			   int __plural, unsigned long int __n,
-			   int __category) attribute_hidden;
+			   int __category);
 extern char *__textdomain (const char *__domainname);
 extern char *__bindtextdomain (const char *__domainname,
 			       const char *__dirname);
 extern char *__bind_textdomain_codeset (const char *__domainname,
 					const char *__codeset);
-extern void _nl_finddomain_subfreeres (void) attribute_hidden;
-extern void _nl_unload_domain (struct loaded_domain *__domain)
-     attribute_hidden;
+attribute_hidden extern void _nl_finddomain_subfreeres (void) ;
+attribute_hidden extern void _nl_unload_domain (struct loaded_domain *__domain)
+    internal_function;
 #else
 /* Declare the exported libintl_* functions, in a way that allows us to
    call them under their real name.  */
@@ -72,15 +70,29 @@ extern void _nl_unload_domain (struct loaded_domain *__domain)
 # undef _INTL_REDIRECT_MACROS
 # define _INTL_REDIRECT_MACROS
 # include "libgnuintl.h"
+# ifdef IN_LIBGLOCALE
+extern char *gl_dcigettext (const char *__domainname,
+			    const char *__msgid1, const char *__msgid2,
+			    int __plural, unsigned long int __n,
+			    int __category,
+			    const char *__localename, const char *__encoding);
+# else
 extern char *libintl_dcigettext (const char *__domainname,
 				 const char *__msgid1, const char *__msgid2,
 				 int __plural, unsigned long int __n,
 				 int __category);
+# endif
 #endif
 
 #include "loadinfo.h"
 
 #include "gmo.h"		/* Get nls_uint32.  */
+
+/* @@ end of prolog @@ */
+
+#ifndef internal_function
+# define internal_function
+#endif
 
 #ifndef attribute_hidden
 # define attribute_hidden
@@ -102,15 +114,16 @@ extern char *libintl_dcigettext (const char *__domainname,
 # define SWAP(i) bswap_32 (i)
 #else
 static inline nls_uint32
+//# ifdef __cplusplus
 SWAP (nls_uint32 i)
+//# else
+//SWAP (i)
+//     nls_uint32 i;
+//# endif
 {
   return (i << 24) | ((i & 0xff00) << 8) | ((i >> 8) & 0xff00) | (i >> 24);
 }
 #endif
-
-
-/* Lock variable to protect the global data in the gettext implementation.  */
-gl_rwlock_define (extern, _nl_state_lock attribute_hidden)
 
 
 /* In-memory representation of system dependent string.  */
@@ -147,12 +160,12 @@ struct loaded_domain
 {
   /* Pointer to memory containing the .mo file.  */
   const char *data;
-  /* true if the memory is mmap()ed, false if the memory is malloc()ed.  */
-  bool use_mmap;
+  /* 1 if the memory is mmap()ed, 0 if the memory is malloc()ed.  */
+  int use_mmap;
   /* Size of mmap()ed memory.  */
   size_t mmap_size;
-  /* true if the .mo file uses a different endianness than this machine.  */
-  bool must_swap;
+  /* 1 if the .mo file uses a different endianness than this machine.  */
+  int must_swap;
   /* Pointer to additional malloc()ed memory.  */
   void *malloced;
 
@@ -174,8 +187,8 @@ struct loaded_domain
   nls_uint32 hash_size;
   /* Pointer to hash table.  */
   const nls_uint32 *hash_tab;
-  /* true if the hash table uses a different endianness than this machine.  */
-  bool must_swap_hash_tab;
+  /* 1 if the hash table uses a different endianness than this machine.  */
+  int must_swap_hash_tab;
 
   /* Cache of charset conversions of the translated strings.  */
   struct converted_domain *conversions;
@@ -189,10 +202,8 @@ struct loaded_domain
 /* We want to allocate a string at the end of the struct.  But ISO C
    doesn't allow zero sized arrays.  */
 #ifdef __GNUC__
-# define FLEXIBLE_ARRAY_MEMBER 0 // R change
 # define ZERO 0
 #else
-# define FLEXIBLE_ARRAY_MEMBER 1 // R change
 # define ZERO 1
 #endif
 
@@ -202,54 +213,56 @@ struct binding
 {
   struct binding *next;
   char *dirname;
-#if defined _WIN32 && !defined __CYGWIN__
-  wchar_t *wdirname;
-#endif
   char *codeset;
-#ifdef __GNUC__ // R change
+#ifdef __GNUC__
   __extension__ 
 #endif
-  char domainname[FLEXIBLE_ARRAY_MEMBER];
+  char domainname[ZERO];
 };
 
 /* A counter which is incremented each time some previous translations
    become invalid.
    This variable is part of the external ABI of the GNU libintl.  */
-#if defined __KLIBC__ && !defined _LIBC
-# define _nl_msg_cat_cntr libintl_nl_msg_cat_cntr
+#ifdef IN_LIBGLOCALE
+# include <glocale/config.h>
+extern LIBGLOCALE_DLL_EXPORTED int _nl_msg_cat_cntr;
+#else
+extern LIBINTL_DLL_EXPORTED int _nl_msg_cat_cntr;
 #endif
-extern LIBINTL_SHLIB_EXPORTED int _nl_msg_cat_cntr;
 
 #ifndef _LIBC
 extern const char *_nl_language_preferences_default (void);
-extern void gl_locale_name_canonicalize (char *name);
-/* extern const char *gl_locale_name_from_win32_LANGID (LANGID langid); */
-/* extern const char *gl_locale_name_from_win32_LCID (LCID lcid); */
-# define gl_locale_name_posix _nl_locale_name_posix // R change
+# define gl_locale_name_canonicalize _nl_locale_name_canonicalize
+extern void _nl_locale_name_canonicalize (char *name);
+# define gl_locale_name_posix _nl_locale_name_posix
 extern const char *_nl_locale_name_posix (int category,
-					  const char *categoryname); // R change
-extern const char *gl_locale_name_thread_unsafe (int category,
-						 const char *categoryname);
-# define gl_locale_name_default _nl_locale_name_default // R change
-extern const char *_nl_locale_name_default (void); // R change
+					  const char *categoryname);
+# define gl_locale_name_default _nl_locale_name_default
+extern const char *_nl_locale_name_default (void);
+# define gl_locale_name _nl_locale_name
+extern const char *_nl_locale_name (int category, const char *categoryname);
 #endif
 
-struct loaded_l10nfile *_nl_find_domain (const char *__dirname,
-#if defined _WIN32 && !defined __CYGWIN__
-					 const wchar_t *__wdirname,
-#endif
-					 char *__locale,
+struct loaded_l10nfile *_nl_find_domain (const char *__dirname, char *__locale,
 					 const char *__domainname,
 					 struct binding *__domainbinding)
-     attribute_hidden;
+     internal_function;
 void _nl_load_domain (struct loaded_l10nfile *__domain,
 		      struct binding *__domainbinding)
-     attribute_hidden;
+     internal_function;
 
+#ifdef IN_LIBGLOCALE
+char *_nl_find_msg (struct loaded_l10nfile *domain_file,
+		    struct binding *domainbinding, const char *encoding,
+		    const char *msgid,
+		    size_t *lengthp)
+     internal_function;
+#else
 char *_nl_find_msg (struct loaded_l10nfile *domain_file,
 		    struct binding *domainbinding, const char *msgid,
-		    bool convert, size_t *lengthp)
-     attribute_hidden;
+		    int convert, size_t *lengthp)
+     internal_function;
+#endif
 
 /* The internal variables in the standalone libintl.a must have different
    names than the internal variables in GNU libc, otherwise programs
@@ -277,14 +290,11 @@ extern struct binding *_nl_domain_bindings;
 #endif
 
 /* Name of the default text domain.  */
-extern const char _nl_default_default_domain[] attribute_hidden;
+attribute_hidden extern const char _nl_default_default_domain[];
 
 /* Default text domain in which entries for gettext(3) are to be found.  */
-extern const char *_nl_current_default_domain attribute_hidden;
+attribute_hidden extern const char *_nl_current_default_domain;
 
-extern void _nl_log_untranslated (const char *logfilename,
-				  const char *domainname,
-				  const char *msgid1, const char *msgid2,
-				  bool plural);
+/* @@ begin of epilog @@ */
 
 #endif /* gettextP.h  */
