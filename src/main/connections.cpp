@@ -3677,11 +3677,26 @@ static SEXP mkCharLocal(const char *s)
     return mkCharCE(s, ienc);
 }
 
+/* OutTextData[idx] is list(env, data): the environment holding the
+   target binding, and the current character vector.  The vector is
+   anchored here because the binding alone cannot keep it alive: rm()
+   or a rebinding of the name would leave this->data dangling
+   (PR#19228). */
+static SEXP outtext_env(int idx)
+{
+    return VECTOR_ELT(VECTOR_ELT(OutTextData, idx), 0);
+}
+
+static void outtext_set_data(int idx, SEXP data)
+{
+    SET_VECTOR_ELT(VECTOR_ELT(OutTextData, idx), 1, data);
+}
+
 static void outtext_close(Rconnection con)
 {
     Routtextconn this_ = (Routtextconn) con->connprivate;
     int idx = ConnIndex(con);
-    SEXP tmp, env = VECTOR_ELT(OutTextData, idx);
+    SEXP tmp, env = outtext_env(idx);
 
     if(this_->namesymbol && R_existsVarInFrame(env, this_->namesymbol))
 	R_unLockBinding(this_->namesymbol, env);
@@ -3690,6 +3705,7 @@ static void outtext_close(Rconnection con)
 	SET_STRING_ELT(tmp, this_->len - 1, mkCharLocal(this_->lastline));
 	if(this_->namesymbol) defineVar(this_->namesymbol, tmp, env);
 	ENSURE_NAMEDMAX(tmp);
+	outtext_set_data(idx, tmp);
 	this_->data = tmp;
 	UNPROTECT(1);
     }
@@ -3699,12 +3715,7 @@ static void outtext_destroy(Rconnection con)
 {
     Routtextconn this_ = (Routtextconn) con->connprivate;
     int idx = ConnIndex(con);
-    /* OutTextData is preserved, and that implies that the environment
-       we are writing it and hence the character vector is protected.
-       However, this could be quite expensive.
-    */
     SET_VECTOR_ELT(OutTextData, idx, R_NilValue);
-    if(!this_->namesymbol) R_ReleaseObject(this_->data);
     free(this_->lastline); free(this_);
 }
 
@@ -3758,7 +3769,7 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 	q = Rf_strchr(p, '\n');
 	if(q) {
 	    int idx = ConnIndex(con);
-	    SEXP env = VECTOR_ELT(OutTextData, idx);
+	    SEXP env = outtext_env(idx);
 	    *q = '\0';
 	    PROTECT(tmp = xlengthgets(this_->data, ++this_->len));
 	    SET_STRING_ELT(tmp, this_->len - 1, mkCharLocal(p));
@@ -3767,10 +3778,8 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 		    R_unLockBinding(this_->namesymbol, env);
 		defineVar(this_->namesymbol, tmp, env);
 		R_LockBinding(this_->namesymbol, env);
-	    } else {
-		R_ReleaseObject(this_->data);
-		R_PreserveObject(tmp);
 	    }
+	    outtext_set_data(idx, tmp);
 	    this_->data = tmp;
 	    ENSURE_NAMEDMAX(tmp);
 	    UNPROTECT(1);
@@ -3801,38 +3810,37 @@ static int text_vfprintf(Rconnection con, const char *format, va_list ap)
 static void outtext_init(Rconnection con, SEXP stext, const char *mode, int idx)
 {
     Routtextconn this_ = (Routtextconn) con->connprivate;
-    SEXP val;
+    SEXP val, env = outtext_env(idx);
 
     if(stext == R_NilValue) {
 	this_->namesymbol = NULL;
-	    /* create variable pointed to by con->description */
 	val = StringVector::create(0);
-	R_PreserveObject(val);
     } else {
 	this_->namesymbol = install(con->description);
 	if(streql(mode, "w")) {
 	    /* create variable pointed to by con->description */
 	    PROTECT(val = StringVector::create(0));
-	    defineVar(this_->namesymbol, val, VECTOR_ELT(OutTextData, idx));
+	    defineVar(this_->namesymbol, val, env);
 	    /* Not clear if this is needed, but be conservative */
 	    ENSURE_NAMEDMAX(val);
+	    R_LockBinding(this_->namesymbol, env);
 	    UNPROTECT(1);
 	} else {
 	    /* take over existing variable */
-	    val = findVar1(this_->namesymbol, VECTOR_ELT(OutTextData, idx),
-			   STRSXP, FALSE);
+	    val = findVar1(this_->namesymbol, env, STRSXP, FALSE);
 	    if(val == R_UnboundValue) {
 		warning("%s", _("text connection: appending to a non-existent char vector"));
 		PROTECT(val = StringVector::create(0));
-		defineVar(this_->namesymbol, val, VECTOR_ELT(OutTextData, idx));
+		defineVar(this_->namesymbol, val, env);
 		ENSURE_NAMEDMAX(val);
 		UNPROTECT(1);
 	    }
 	    PROTECT(val);
-	    R_LockBinding(this_->namesymbol, VECTOR_ELT(OutTextData, idx));
+	    R_LockBinding(this_->namesymbol, env);
 	    UNPROTECT(1);
 	}
     }
+    outtext_set_data(idx, val);
     this_->len = LENGTH(val);
     this_->data = val;
     this_->lastline[0] = '\0';
@@ -3925,7 +3933,10 @@ attribute_hidden SEXP do_textconnection(SEXP call, SEXP op, SEXP args, SEXP env)
 	    OutTextData = allocVector(VECSXP, NCONNECTIONS);
 	    R_PreserveObject(OutTextData);
 	}
-	SET_VECTOR_ELT(OutTextData, ncon, venv);
+	SEXP slot = PROTECT(allocVector(VECSXP, 2));
+	SET_VECTOR_ELT(slot, 0, venv);
+	SET_VECTOR_ELT(OutTextData, ncon, slot);
+	UNPROTECT(1);
 	if(stext == R_NilValue)
 	    con = Connections[ncon] = newouttext("NULL", stext, open, ncon);
 	else if(isString(stext) && LENGTH(stext) == 1)

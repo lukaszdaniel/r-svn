@@ -1,7 +1,8 @@
 # Translation of po/R.pot to German.
-# Copyright (C) 2005-2025 The R Foundation
+# Copyright (C) 2005-2026 The R Foundation
 # This file is distributed under the same license as the R package.
 # Detlef Steuer <steuer@hsu-hh.de>, 2005-2025.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
@@ -540,9 +541,7 @@ msgid "someone corrupted the random-number generator: re-initializing"
 msgstr ""
 
 msgid "RNGkind: severe deviations from normality for Kinderman-Ramage + Marsaglia-Multicarry"
-msgstr ""
-"RNGkind: erhebliche Abweichungen von Normalität für Kindermann-Ramage + Marsaglia-\n"
-"Multicarry"
+msgstr "RNGkind: erhebliche Abweichungen von Normalität für Kindermann-Ramage + Marsaglia-Multicarry"
 
 msgid "RNGkind: deviations from normality for Ahrens-Dieter + Marsaglia-Multicarry"
 msgstr "RNGkind: Abweichungen von Normalität für Ahrens-Dieter + Marsaglia-Multicarry"
@@ -936,8 +935,8 @@ msgid ""
 "values must be length %d,\n"
 " but FUN(X[[%lld]]) result is length %d"
 msgstr ""
-"Werte müssen die Länge %d,.haben,\n"
-"Ergebnis von FUN(X[[%lld]]) hat .aber Länge %d"
+"Werte müssen die Länge %d haben,\n"
+"  Ergebnis von FUN(X[[%lld]]) hat aber Länge %d"
 
 msgid "Internal error: unexpected SEXPTYPE"
 msgstr ""
@@ -947,8 +946,8 @@ msgid ""
 "values must be type '%s',\n"
 " but FUN(X[[%lld]]) result is type '%s'"
 msgstr ""
-"Werte müssen vom Typ '%s', sein,\n"
-"Ergebnis .von FUN(X[[%lld]]) ist aber Typ '%s'"
+"Werte müssen vom Typ '%s' sein,\n"
+"  Ergebnis von FUN(X[[%lld]]) ist aber Typ '%s'"
 
 #, fuzzy
 msgid "invalid type"
@@ -985,14 +984,14 @@ msgid ""
 "  Use c() or as.vector() instead."
 msgstr ""
 "Recycling-Array mit Länge 1 in Array-Vektor-Rechnungen ist veraltet.\n"
-" Bitte stattdessen c() oder as.vector() nutzen."
+"  Bitte stattdessen c() oder as.vector() nutzen."
 
 msgid ""
 "Recycling array of length 1 in vector-array arithmetic is deprecated.\n"
 "  Use c() or as.vector() instead."
 msgstr ""
 "Recycling-Array der Länge 1 in Vektor-Array-Rechnungen ist veraltet.\n"
-" Bitte stattdessen c() oder as.vector() nutzen."
+"  Bitte stattdessen c() oder as.vector() nutzen."
 
 msgid "non-conformable arrays"
 msgstr "nicht passende Arrays"
@@ -1000,7 +999,7 @@ msgstr "nicht passende Arrays"
 msgid "longer object length is not a multiple of shorter object length"
 msgstr ""
 "Länge des längeren Objektes\n"
-"ist kein Vielfaches der Länge des kürzeren Objektes"
+"  ist kein Vielfaches der Länge des kürzeren Objektes"
 
 msgid "invalid argument to unary operator"
 msgstr "ungültiges Argument für unären Operator"
@@ -1084,9 +1083,8 @@ msgstr "negative Ausdehnung für ein 3D Array"
 msgid "'alloc3DArray': too many elements specified"
 msgstr "'alloc3DArray': zu viele Elemente angegeben"
 
-#, fuzzy
 msgid "'dim' cannot be of length 0"
-msgstr "'dims' kann nicht Länge 0 haben"
+msgstr "'dim' kann nicht Länge 0 haben"
 
 msgid "the dims contain missing values"
 msgstr "das dims Argument enthält fehlende Werte"
@@ -1174,11 +1172,11 @@ msgstr "kann kein Attribut für ein Symbol setzen"
 
 #, fuzzy
 msgid "'name' is not a symbol or a scalar string"
-msgstr "'names' ist keine Zeichenkette"
+msgstr "'name' ist weder Symbol noch Zeichenkette"
 
-#, fuzzy, c-format
+#, c-format
 msgid "cannot set an attribute on a '%s'"
-msgstr "kann kein Attribut für ein Symbol setzen"
+msgstr "kann kein Attribut für ein '%s' setzen"
 
 #, c-format
 msgid "invalid type (%s) for 'names': must be vector or NULL"
@@ -1191,9 +1189,9 @@ msgstr "'names'-Attribut [%lld] muss die gleiche Länge wie der Vektor [%lld] ha
 msgid "names() applied to a non-vector"
 msgstr "names() angewendet auf einen Nicht-Vektor"
 
-#, fuzzy, c-format
+#, c-format
 msgid "invalid time series parameters specified (%d)"
-msgstr "ungültige Zeitreihen Parameter spezifiziert"
+msgstr "ungültige Zeitreihen-Parameter spezifiziert (%d)"
 
 msgid "'tsp' attribute must be numeric"
 msgstr "'tsp' Attribut muss numerisch sein"
@@ -1292,7 +1290,6 @@ msgstr "ungültiger Typ '%s' für den Slot-Namen"
 msgid "'name' must be non-null character string"
 msgstr "'name' muss eine nicht-null Zeichenkette sein"
 
-#, fuzzy
 msgid "'name' must be a scalar string"
 msgstr "'method' muss Zeichenkette sein"
 
@@ -1495,17 +1492,17 @@ msgstr "Anzahl der Zeichen ist in \"bytes\"-Kodierung nicht berechenbar, %s"
 msgid "width is not computable for %s in \"bytes\" encoding"
 msgstr "Breite ist nicht berechenbar für %s, wenn \"bytes\"-Kodierung benutzt wird\""
 
-#, fuzzy, c-format
+#, c-format
 msgid "invalid multibyte string, element %lld"
-msgstr "ungültige multibyte Zeichenkette, Element %ld"
+msgstr "ungültige multibyte Zeichenkette, Element %lld"
 
-#, fuzzy, c-format
+#, c-format
 msgid "number of characters is not computable in \"bytes\" encoding, element %lld"
-msgstr "Anzahl der Zeichen ist in \"bytes\"-Kodierung nicht berechenbar, Element %ld"
+msgstr "Anzahl der Zeichen ist in \"bytes\"-Kodierung nicht berechenbar, Element %lld"
 
-#, fuzzy, c-format
+#, c-format
 msgid "width is not computable in \"bytes\" encoding, element %lld"
-msgstr "Breite ist nicht berechenbar, wenn \"bytes\"-Kodierung benutzt wird, Element %ld"
+msgstr "Breite ist in \"bytes\"-Kodierung nicht berechenbar, Element %lld"
 
 msgid "extracting substrings from a non-character object"
 msgstr "extrahieren von Teilzeichenketten aus einem nicht-character Objekt"
@@ -1651,9 +1648,8 @@ msgstr "'length = %lld' in Umwandlung zu '%s'"
 msgid "'%s' argument must be TRUE or FALSE"
 msgstr "drittes Argument muss 'TRUE' oder 'FALSE' sein"
 
-#, fuzzy
 msgid "NA in coercion to boolean"
-msgstr "NAs durch Umwandlung in Bereich ganzer Zahlen erzeugt"
+msgstr "NA bei Umwandlung nach boolesch"
 
 msgid "type \"single\" unimplemented in R"
 msgstr "Typ \"single\" nicht in R implementiert"
@@ -2447,9 +2443,8 @@ msgstr "'cummax' für komplexe Zahlen nicht definiert"
 msgid "'cummin' not defined for complex numbers"
 msgstr "'cummin' für komplexe Zahlen nicht definiert"
 
-#, fuzzy
 msgid "'cumvar' not defined for complex numbers"
-msgstr "'cummax' für komplexe Zahlen nicht definiert"
+msgstr "'cumvar' für komplexe Zahlen nicht definiert"
 
 msgid "unknown cumxxx function"
 msgstr "unbekannte cumxxx Funktion"
@@ -2884,7 +2879,7 @@ msgid ""
 " to recover"
 msgstr ""
 "%s in Zeile %d aufgetreten\n"
-" benuzten Sie ein Kommando wie\n"
+" benutzen Sie ein Kommando wie\n"
 " x <- edit()\n"
 " zur Wiederherstellung"
 
@@ -3006,9 +3001,8 @@ msgstr "Fill wird ignoriert (Gerät hängt Pfad an)"
 msgid "FillStroke ignored (device is appending path)"
 msgstr "FillStroke wird ignoriert (Gerät hängt Pfad an)"
 
-#, fuzzy
 msgid "Index out of bounds"
-msgstr "Indizierung außerhalb der Grenzen"
+msgstr "Index außerhalb der Grenzen"
 
 #, c-format
 msgid "cannot change value of locked binding for '%s'"
@@ -3051,9 +3045,8 @@ msgstr "Argument zu '%s' ist keine Umgebung"
 msgid "indexing '...' with non-positive index %d"
 msgstr "Indizieren von '...' mit nicht-positivem Index %d"
 
-#, fuzzy
 msgid "bad ... value"
-msgstr "unbrauchbarer Wert"
+msgstr "unbrauchbarer ... Wert"
 
 #, c-format
 msgid "the ... list contains fewer than %d element"
@@ -3134,7 +3127,7 @@ msgstr "zweites Argument muss eine Umgebung sein"
 
 #, c-format
 msgid "first argument to '%s' must be a symbol"
-msgstr "erstes Argument für '%s'  muss ein Symbol sein"
+msgstr "erstes Argument für '%s' muss ein Symbol sein"
 
 #, c-format
 msgid "second argument to '%s' must be an environment"
@@ -3765,7 +3758,7 @@ msgstr "Lesefehler"
 
 #, fuzzy, c-format
 msgid "'%s' is not of type %s"
-msgstr "'%s' ist kein %s"
+msgstr "'%s' ist nicht vom Typ %s"
 
 #, c-format
 msgid "'%s' events not supported in this device"
@@ -4330,9 +4323,7 @@ msgid "argument 'MoreArgs' of 'mapply' is not a list or pairlist"
 msgstr "Argument 'MoreArgs' von 'mapply' weder Liste noch Paarliste"
 
 msgid "longer argument not a multiple of length of shorter"
-msgstr ""
-"Länge des längeren Objektes\n"
-"\tist kein Vielfaches der Länge des kürzeren Objektes"
+msgstr "Längeres Argument ist kein Vielfaches der Länge des kürzeren"
 
 msgid "invalid partial string match"
 msgstr "ungültige Teilzeichenketten-übereinstimmung"
@@ -5337,7 +5328,7 @@ msgstr "zu wenig positive Wahrscheinlichkeiten"
 msgid "cannot take a sample larger than the population when 'replace = FALSE'"
 msgstr ""
 "kann keine Stichprobe größer als die Grundgesamtheit nehmen,\n"
-" wenn 'replace = FALSE'"
+"  wenn 'replace = FALSE'"
 
 msgid "incorrect number of probabilities"
 msgstr "falsche Anzahl von Wahrscheinlichkeiten"
@@ -5352,8 +5343,8 @@ msgid ""
 "argument should be a character vector of length 1\n"
 "all but the first element will be ignored"
 msgstr ""
-"Argument sollte Zeichenkette der Länge 1 sein, nur das erste Element\n"
-"wird benutzt"
+"Argument sollte Zeichenkette der Länge 1 sein;\n"
+"  nur das erste Element wird benutzt"
 
 msgid "argument 'x' must be a raw vector"
 msgstr "Argument 'x' muss ein raw-Vektor sein"
@@ -5750,9 +5741,8 @@ msgstr ""
 msgid "%s -- future R's default 'recycle = TRUE' will recycle 'nvec'"
 msgstr ""
 
-#, fuzzy
 msgid "'nvec' must be a vector of non-negative integers"
-msgstr "'lengths' muss ein Vektor nicht-negativer ganzer Zahlen sein"
+msgstr "'nvec' muss ein Vektor nicht-negativer ganzer Zahlen sein"
 
 msgid "'from' contains NAs"
 msgstr "'from' enthält NAs"
@@ -5864,13 +5854,13 @@ msgstr "Lesen fehlgeschlagen"
 msgid "error reading from ascii connection"
 msgstr "Lesefehler aus ASCII-Verbindung"
 
-#, fuzzy, c-format
+#, c-format
 msgid "unexpected format in ascii connection '%s'"
-msgstr "unerwartetes Format aus ASCII-Verbindung"
+msgstr "unerwartetes Format in ASCII-Verbindung '%s'"
 
-#, fuzzy, c-format
+#, c-format
 msgid "error reading from connection '%s'"
-msgstr "Lesefehler aus Verbindung"
+msgstr "Lesefehler aus Verbindung '%s'"
 
 msgid "only ascii format can be written to text mode connections"
 msgstr "nur ASCII kann in Verbindung im Textmodus geschrieben werden"
@@ -5942,16 +5932,16 @@ msgstr ""
 msgid "NA or infinite index"
 msgstr "NA oder unendlicher Index"
 
-#, fuzzy, c-format
+#, c-format
 msgid "'partial' index %lld outside bounds"
-msgstr "Index %lld außerhalb der Grenzen"
+msgstr "'partial' Index %lld außerhalb der Grenzen"
 
 msgid "NA index"
 msgstr "NA Index"
 
-#, fuzzy, c-format
+#, c-format
 msgid "'partial' index %d outside bounds"
-msgstr "Index %d ist außerhalb der Grenzen"
+msgstr "'partial' Index %d außerhalb der Grenzen"
 
 msgid "invalid ties.method for rank() [should never happen]"
 msgstr "ungültige ties.method für rank() [sollte nie vorkommen]"

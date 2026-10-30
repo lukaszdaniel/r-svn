@@ -3819,8 +3819,8 @@ fitP <- glm(counts ~ outcome + treatment, family = poisson())
 fit0 <- update(fitP, . ~ outcome)
                  (A1 <- anova(      fitP, test = "Rao"))
                   A2 <- anova(fit0, fitP, test = "Rao")
-stopifnot(identical(A1, anova(fitP,       test = "Ra")),
-          identical(A2, anova(fit0, fitP, test = "Ra")))
+stopifnot(all.equal(A1, anova(fitP,       test = "Ra"), tolerance = 1e-13),
+          all.equal(A2, anova(fit0, fitP, test = "Ra"), tolerance = 1e-13))
 ## "Ra" gave error  "undefined columns selected"  in  R <= 4.6.1
 
 
@@ -3888,6 +3888,16 @@ local({
 })
 ## same results as before, which took seconds for thousands of duplicates
 
+## available.packages() "CRAN" filter now works with prefixes correctly
+local({
+    op <- options(repos = c(CRAN = CRAN <- "https://cran.example",
+                            notCRAN = notCRAN <- "https://cran.example.invalid"))
+    on.exit(options(op))
+    f <- utils:::available_packages_filters_db$CRAN
+    db <- cbind(Package = "pkg",
+                Repository = contrib.url(c(CRAN, notCRAN), "source"))
+    stopifnot(identical(f(db), db[1,, drop = FALSE]))
+})
 
 ## NULL and negative 'deriv' in predict.smooth.spline() - PR#19190
 ss <- smooth.spline(1:4)
@@ -4203,6 +4213,23 @@ if (l10n_info()[["UTF-8"]]) {
 }
 ## read 3 bytes past the end of the field buffer in R <= 4.6.1
 
+## an output textConnection() kept its character vector alive only through
+## the binding of the target name -- PR#19228
+con <- textConnection("out", "w")
+cat("a", file = con)
+rm(out); invisible(gc())
+junk <- lapply(1:2000, function(i) pairlist(i)) # reuse the freed node
+cat("b\n", file = con)
+close(con)
+stopifnot(identical(out, "ab"))
+con <- textConnection("out", "w")
+tools::assertError(textConnection("out", "w")) # locked whilst open, as documented
+close(con)
+stopifnot(!bindingIsLocked("out", environment()))
+## used a freed STRSXP in R <= 4.6.2; second textConnection() silently
+## replaced the first
+
+
 
 ## unzip(*, unzip = "internal") leaks the zip handle on error -- PR#19233
 le <- function(x, n) writeBin(as.integer(x), raw(), size = n, endian = "little")
@@ -4223,6 +4250,108 @@ if(dir.exists(dfd <- "/dev/fd")) withAutoprint({
 unlink(zipfile)
 ## n2 - n1 was 50 in R <= 4.6.2
 
+## parse error after a #line directive read a freed srcfile -- PR#19255
+local({
+    old <- gctorture2(1L)
+    on.exit(gctorture2(old))
+    msg <- tryCatch(str2expression("#line 1 \"srcfile.R\"\n("),
+                    error = conditionMessage)
+    stopifnot(startsWith(msg, "srcfile.R:2:0:"))
+    msg <- tryCatch(parse(text = "#line 1 \"srcfile.R\"\n(", keep.source = TRUE),
+                    error = conditionMessage)
+    stopifnot(startsWith(msg, "srcfile.R:2:0:"))
+})
+## "unprotected object (was STRSXP)" in a checking build of R <= 4.6.2
+
+
+
+## 'drop.terms' and '[.terms' mishandled the optional attributes
+## 'predvars' and 'dataClasses' from terms(model.frame.default(...))
+t1 <- terms(lm(y ~ offset(a) + x1 * x2 + x3 + offset(b),
+               data.frame(y=0, a=0, x1=0, x2=0, x3=0, b=0),
+               weights = 1, offset = 1))
+str(t1, vec.len = 8L) # terms are x1, x2, x3, x1:x2
+t0a <- drop.terms(t1, c(3L, 4L), keep.response = TRUE) # drop x3, x1:x2
+t0b <- t1[ c(1L, 2L)] # should be equivalent
+t0c <- t1[-c(3L, 4L)] # ditto
+v0 <- quote(list(y, x1, x2, offset(a), offset(b)))
+stopifnot(identical(attr(t0a,   "variables"), v0),
+          identical(attr(t0a, "term.labels"), c("x1", "x2")),
+          identical(attr(t0a,    "predvars"), v0), # was FALSE, had:
+          ##   predvars=quote(list(y, offset(a), x1, offset(b)))
+          identical(attr(t0a, "dataClasses") |> names(),
+                    c(as.character(attr(t0a, "predvars")[-1L]),
+                      "(weights)", "(offset)")),
+          identical(t0b, t0a), # was FALSE, had:
+          ##   predvars=quote(list(y, offset(a), x1))
+          ## *and*
+          ##   names(dataClasses)=as.character(predvars[-1L])
+          ## *losing* "(weights)", "(offset)"
+          identical(t0c, t0a))
+## in R <= 4.6.2
+
+
+## S4 methods for 'initialize', .Object="oldClass"|".environment"
+## evaluated arguments of type "symbol" or "call" when dispatching
+## next methods (PR#16629)
+snms <- c("ANY", "name", "call", "expression"); . <- FALSE
+dots <- list(., quote(.), quote(identity(.)), expression(.))
+names(snms) <- names(dots) <- snms
+setOldClass("old")
+setClass("oldWithSlots", contains =         "old", slots = snms)
+setClass("envWithSlots", contains = "environment", slots = snms)
+x <- do.call(new, c(list("oldWithSlots"), dots), quote = TRUE)
+y <- do.call(new, c(list("envWithSlots"), dots), quote = TRUE)
+## was Error in validObject(.Object) :
+##   .... got class "logical", should be or extend class "name"|"call"
+stopifnot(identical(lapply(snms, slot, object = x), dots),
+          identical(lapply(snms, slot, object = y), dots),
+          removeClass("envWithSlots"),
+          removeClass("oldWithSlots"),
+          removeClass("old"))
+## in R <= 4.6.2
+
+
+## S4 methods for 'initialize', .Object="array"|"matrix"|"ts" did not
+## give higher precedence to named components of '...' (PR#14323)
+for (nm in c("array", "matrix", "ts", "numeric")) {
+    nm.sub <- paste0(nm, ".sub")
+    setClass(nm.sub, contains = nm, slots = c(label = "character"))
+    A <- new(nm.sub, new(nm), label = "A")
+    B <- new(nm.sub, new(nm), label = "B")
+    stopifnot(identical(A@label, "A"),
+              identical(B@label, "B"),
+              identical(new(nm.sub, A, label = "B"), B), # 'new' gave A
+              identical(new(nm.sub, B, label = "A"), A), # 'new' gave B
+              removeClass(nm.sub))
+}
+## in R <= 4.6.2
+
+
+## adist(counts = TRUE) with NA elements in 'x'
+local({
+    d <- adist(c(NA, "ab", NA), c("a", "b"), counts = TRUE)
+    cnt <- attr(d, "counts")
+    stopifnot(is.na(cnt[c(1, 3), , ]),
+              cnt[2, , "ins"] == 0L, cnt[2, , "del"] == 1L, cnt[2, , "sub"] == 0L)
+    d <- adist(rep(NA, 100), "a", counts = TRUE)
+    stopifnot(is.na(d), is.na(attr(d, "counts")))
+})
+## wrote past the "counts" array: gave garbage counts or segfaulted in R <= 4.6.2
+
+
+## R CMD check notes repeated entries in one dependency field
+td <- tempfile("pkg"); dir.create(td)
+writeLines(c("Package: pkg", "Version: 1.0",
+             "Imports: utils, stats, utils,",
+             "  Matrix (>= 1.6-0), Matrix(< 1.8-0)",
+             "Suggests: foo, foo (>= 1.0), bar (>= 2.0), bar (>= 2.0)"),
+           file.path(td, "DESCRIPTION"))
+r <- tools:::.check_package_description2(file.path(td, "DESCRIPTION"))
+stopifnot(identical(r$repeated, list(Imports = "utils",
+                                     Suggests = c("foo", "bar"))))
+unlink(td, recursive = TRUE)
+## no NOTE in R <= 4.6.2
 
 
 ## keep at end

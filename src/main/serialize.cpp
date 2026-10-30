@@ -2064,7 +2064,10 @@ static SEXP ReadItem_Recursive(int flags, SEXP ref_table, R_inpstream_t stream)
 	    {
 		/* These are all short strings */
 		length = InInteger(stream);
-		if (length < 0)
+		/* Primitive names come from R_FunTab.  An implausible
+		   length from the stream must not become a large
+		   stack allocation. */
+		if (length < 0 || length > 255)
 		    error("%s", _("invalid length"));
 		std::unique_ptr<char[]> tmp = std::make_unique<char[]>(length + 1);
 		R_CheckStack2(length+1);

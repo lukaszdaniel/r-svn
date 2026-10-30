@@ -151,7 +151,12 @@ NORET void R::parseError(SEXP call, int linenum)
     if (linenum) {
 	getParseFilename(filename, sizeof(filename)-2);
 	if (strlen(filename)) strcpy(filename + strlen(filename), ":");
+    }
+    /* The GC keeps the srcfile alive until here; let it go now rather
+       than when the error reaches top level, which a handler may prevent. */
+    R_ParseErrorFile = NULL;
 
+    if (linenum) {
 	switch (len) {
 	case 0:
 	    error("%s%d:%d: %s",

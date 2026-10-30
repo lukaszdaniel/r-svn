@@ -2524,8 +2524,8 @@ attribute_hidden SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     checkArity(op, args);
 
-    ans      = LogicalVector::create(19);
-    ansnames = StringVector::create(19);
+    ans      = LogicalVector::create(20);
+    ansnames = StringVector::create(20);
 
     SET_STRING_ELT(ansnames, i, mkChar("jpeg"));
 #ifdef HAVE_JPEG
@@ -2679,6 +2679,13 @@ attribute_hidden SEXP do_capabilities(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     SET_STRING_ELT(ansnames, i, mkChar("libcurl"));
 #ifdef HAVE_LIBCURL
+    LOGICAL(ans)[i++] = TRUE;
+#else
+    LOGICAL(ans)[i++] = FALSE;
+#endif
+
+    SET_STRING_ELT(ansnames, i, mkChar("zstd"));
+#ifdef HAVE_ZSTD
     LOGICAL(ans)[i++] = TRUE;
 #else
     LOGICAL(ans)[i++] = FALSE;

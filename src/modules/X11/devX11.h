@@ -169,6 +169,9 @@ typedef struct {
 
     double fontscale;
     int holdlevel;
+    bool replaying;
+    bool needsave;
+    char histtitle[128];
 } X11Desc;
 
 typedef X11Desc* pX11Desc;
@@ -178,7 +181,7 @@ typedef X11Desc* pX11Desc;
 X11Desc *Rf_allocX11DeviceDesc(double ps);
 
 bool Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
-		     int maxcube, Rboolean setHandlers);
+		     int maxcube, bool setHandlers);
 
 void Rf_setX11DeviceData(pDevDesc dd, double gamma_fac, pX11Desc xd);
 #endif

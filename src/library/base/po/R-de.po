@@ -1,5 +1,5 @@
 # Translation of src/library/base/po/R-base.pot to German
-# Copyright (C) 2005-2025 The R Foundation
+# Copyright (C) 2005-2026 The R Foundation
 # This file is distributed under the same license as the R package.
 # Detlef Steuer <detlef.steuer@hsu-hh.de>, 2007-2025.
 #
@@ -1769,7 +1769,9 @@ msgstr "Namensraum %s ist importiert von %s und kann deshalb nicht entladen werd
 msgid ""
 "namespace %s is not available and has been replaced\n"
 "by .GlobalEnv when processing object %s"
-msgstr "Namensraum %s ist nicht verfügar und ist durch.GlobalEnv ersetzt worden während Objekt %s verarbeitet wurde"
+msgstr ""
+"Namensraum %s ist nicht verfügar und wurde durch .GlobalEnv ersetzt\n"
+"  während Objekt %s verarbeitet wurde"
 
 #. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "keep.source")
 #. R/namespace.R: gettextf("namespace '%s' is already loaded so argument '%s' will be ignored.",     package, "partial")
@@ -2411,12 +2413,8 @@ msgstr[1] "'by' muss gültige Spalten spezifizieren"
 #. R/namespace.R: ngettext(length(bad), "Function found when exporting methods from the namespace %s which is not S4 generic: %s",     "Functions found when exporting methods from the namespace %s which are not S4 generic: %s")
 msgid "Function found when exporting methods from the namespace %s which is not S4 generic: %s"
 msgid_plural "Functions found when exporting methods from the namespace %s which are not S4 generic: %s"
-msgstr[0] ""
-"Funktion beim Methodenexport des Namensraums %s gefunden, die nicht generisch S4\n"
-"ist: %s"
-msgstr[1] ""
-"Funktionen beim Methodenexport des Namensraums %s gefunden, die nicht generisch S4\n"
-"sind: %s"
+msgstr[0] "Funktion beim Methodenexport des Namensraums %s gefunden, die nicht S4-generisch ist: %s"
+msgstr[1] "Funktionen beim Methodenexport des Namensraums %s gefunden, die nicht S4-generisch sind: %s"
 
 #. R/warnings.R: ngettext(nx, "In '%s':\n extra argument %s will be disregarded",     "In '%s':\n extra arguments %s will be disregarded", domain = "R-base")
 #, fuzzy

@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1998--2024  The R Core Team.
+ *  Copyright (C) 1998--2026  The R Core Team.
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
  *  Copyright (C) 2014 and onwards the Rho Project Authors.
@@ -1095,6 +1095,7 @@ void GCNode::mark(unsigned int max_generation)
     MARK_THRU(R_RestartStack);          /* Available restarts stack */
 
     MARK_THRU(R_Srcref);                /* Current source reference */
+    MARK_THRU(R_ParseErrorFile); /* Source file of the last parse error */
 
     MARK_THRU(R_TrueValue);
     MARK_THRU(R_FalseValue);
@@ -2790,7 +2791,7 @@ const char *(R_CHAR)(SEXP x) {
     CR_ASSERT(x);
     if (TYPEOF(x) != CHARSXP) // Han-Tak proposes to prepend  'x && '
 	error(_("%s() can only be applied to a '%s', not a '%s'"),
-	      "CHAR", "CHARSXP", R_typeToChar(x));
+	      "R_CHAR", "CHARSXP", R_typeToChar(x));
     return (const char *) CHAR(CHK(x));
 }
 
@@ -2900,7 +2901,7 @@ const int *(LOGICAL_RO)(SEXP x) {
     CR_ASSERT(x);
     if (TYPEOF(x) != LGLSXP)
 	error(_("%s() can only be applied to a '%s', not a '%s'"),
-	      "LOGICAL",  "logical", R_typeToChar(x));
+	      "LOGICAL_RO",  "logical", R_typeToChar(x));
     CHKZLN(x, const int);
     return LOGICAL_RO(x);
 }
@@ -2919,7 +2920,7 @@ const int *(INTEGER_RO)(SEXP x) {
     CR_ASSERT(x);
     if (TYPEOF(x) != INTSXP && TYPEOF(x) != LGLSXP)
 	error(_("%s() can only be applied to a '%s', not a '%s'"),
-	      "INTEGER", "integer", R_typeToChar(x));
+	      "INTEGER_RO", "integer", R_typeToChar(x));
     CHKZLN(x, const int);
     return INTEGER_RO(x);
 }
@@ -2937,7 +2938,7 @@ const Rbyte *(RAW_RO)(SEXP x) {
     CR_ASSERT(x);
     if (TYPEOF(x) != RAWSXP)
 	error(_("%s() can only be applied to a '%s', not a '%s'"),
-	      "RAW", "raw", R_typeToChar(x));
+	      "RAW_RO", "raw", R_typeToChar(x));
     CHKZLN(x, const Rbyte);
     return RAW(x);
 }
@@ -2954,7 +2955,7 @@ const double *(REAL_RO)(SEXP x) {
     CR_ASSERT(x);
     if (TYPEOF(x) != REALSXP)
 	error(_("%s() can only be applied to a '%s', not a '%s'"),
-	      "REAL", "numeric", R_typeToChar(x));
+	      "REAL_RO", "numeric", R_typeToChar(x));
     CHKZLN(x, const double);
     return REAL_RO(x);
 }
@@ -2979,7 +2980,7 @@ Complex *(CXXR_COMPLEX)(SEXP x) {
 const Rcomplex *(COMPLEX_RO)(SEXP x) {
     if (TYPEOF(x) != CPLXSXP)
 	error(_("%s() can only be applied to a '%s', not a '%s'"),
-	      "COMPLEX", "complex", R_typeToChar(x));
+	      "COMPLEX_RO", "complex", R_typeToChar(x));
     CHKZLN(x, const Rcomplex);
     return COMPLEX_RO(x);
 }
