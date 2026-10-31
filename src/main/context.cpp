@@ -932,10 +932,12 @@ SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
 {
     GCStackRoot<> result;
 
-    try {
-    result = fun(data);
-    cleanfun(cleandata);
-    } catch (CommandTerminated &ignored_error)
+    try
+    {
+        result = fun(data);
+        cleanfun(cleandata);
+    }
+    catch (CommandTerminated &ignored_error)
     {
     }
 
@@ -959,7 +961,7 @@ SEXP R_MakeUnwindCont(void)
 #ifdef CR_UNWIND_IMPL
     return CONS(R_NilValue, RawVector::create(sizeof(unwind_cont_t)));
 #else
-    return nullptr;
+    return R_NilValue;
 #endif
 }
 
@@ -987,49 +989,49 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
        stack limit before calling fun(), so fun() and cleanfun should
        be written accordingly. */
     if (cont == NULL) {
-	GCStackRoot<> new_cont;
-	new_cont = R_MakeUnwindCont();
-	return R_UnwindProtect(fun, data, cleanfun, cleandata, new_cont);
+        GCStackRoot<> new_cont;
+        new_cont = R_MakeUnwindCont();
+        return R_UnwindProtect(fun, data, cleanfun, cleandata, new_cont);
     }
 #endif
 
     {
-    RCNTXT thiscontext(CTXT_UNWIND, R_NilValue, R_GlobalEnv,
-		 R_BaseEnv, R_NilValue, R_NilValue);
+        RCNTXT thiscontext(CTXT_UNWIND, R_NilValue, R_GlobalEnv,
+            R_BaseEnv, R_NilValue, R_NilValue);
 
-    try
-    {
-        result = fun(data);
+        try
+        {
+            result = fun(data);
 #ifdef CR_UNWIND_IMPL
-        SETCAR(cont, result);
+            SETCAR(cont, result);
 #endif
-    }
-    catch (JMPException &e)
-    {
+        }
+        catch (JMPException &e)
+        {
 #ifdef CR_UNWIND_IMPL
         // We want to intercept the jump to unwind
         // so that R_ContinueUnwind() can be called
         // to continue the unwind process.
-        jump = TRUE;
-        SETCAR(cont, e.value());
-        unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
-        u->jumpmask = e.mask();
-        u->jumptarget = e.context();
+            jump = TRUE;
+            SETCAR(cont, e.value());
+            unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
+            u->jumpmask = e.mask();
+            u->jumptarget = e.context();
 #else
-        cleanfun(cleandata, TRUE);
-        if (e.context() != &thiscontext)
-            throw;
+            cleanfun(cleandata, TRUE);
+            if (e.context() != &thiscontext)
+                throw;
 #endif
-    }
+        }
 
-    endcontext(&thiscontext);
+        endcontext(&thiscontext);
     }
 
 #ifdef CR_UNWIND_IMPL
     cleanfun(cleandata, jump);
 
     if (jump)
-	R_ContinueUnwind(cont);
+        R_ContinueUnwind(cont);
 #else
     cleanfun(cleandata, FALSE);
 #endif
