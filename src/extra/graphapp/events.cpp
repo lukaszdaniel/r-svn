@@ -904,17 +904,19 @@ SEXP wndproc_unwind_fun(void *data)
     return NULL;
 }
 
+struct WndProcUnwindException {};
+
 void wndproc_unwind_clean(void *data, Rboolean jump)
 {
     if (jump)
-        throw 1;
+        throw WndProcUnwindException{};
 }
 
 LRESULT WINAPI wndproc_unwind(WNDPROC proc_real, HWND hwnd, UINT message,
                                WPARAM wParam, LPARAM lParam)
 {
     wndproc_call w;
-    volatile SEXP token;
+    SEXP token;
     bool is_initialized = (R_status() > 0);
 
     if (!is_initialized) {
@@ -936,7 +938,7 @@ LRESULT WINAPI wndproc_unwind(WNDPROC proc_real, HWND hwnd, UINT message,
         s_wndproc_cont_token = saved_token;
         return w.res;
     }
-    catch (...)
+    catch (const WndProcUnwindException &)
     {
         /* long jump */
         s_wndproc_cont_token = token;

@@ -984,24 +984,18 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
     {
     RCNTXT thiscontext(CTXT_UNWIND, R_NilValue, R_GlobalEnv,
 		 R_BaseEnv, R_NilValue, R_NilValue);
+
     try
     {
         result = fun(data);
         SETCAR(cont, result);
-        jump = FALSE;
     }
     catch (JMPException &e)
     {
         // We want to intercept the jump to unwind
         // so that R_ContinueUnwind() can be called
         // to continue the unwind process.
-        // This is a bit of a hack to comply with CR's approach,
-        // but it allows us to handle the unwind in a controlled manner.
-        // Normally, we would have used below code:
-        // if (e.context() != &thiscontext)
-        //     throw;
-        if (e.context() != &thiscontext)
-            jump = TRUE;
+        jump = TRUE;
         SETCAR(cont, e.value());
         unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
         u->jumpmask = e.mask();
@@ -1010,10 +1004,11 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 
     endcontext(&thiscontext);
     }
+
     cleanfun(cleandata, jump);
 
     if (jump)
-	R_ContinueUnwind(cont);	
+	R_ContinueUnwind(cont);
 
     return result;
 }
