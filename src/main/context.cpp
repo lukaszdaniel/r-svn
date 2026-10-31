@@ -944,24 +944,34 @@ SEXP R_ExecWithCleanup(SEXP (*fun)(void *), void *data,
 
 
 /* Unwind-protect mechanism to support C++ stack unwinding. */
-
+// #define CR_UNWIND_IMPL
+#ifdef CR_UNWIND_IMPL
 typedef struct {
     int jumpmask;
     RCNTXT *jumptarget;
 } unwind_cont_t;
 
+#define RAWDATA(x) ((void *) RAW0(x))
+#endif
+
 SEXP R_MakeUnwindCont(void)
 {
+#ifdef CR_UNWIND_IMPL
     return CONS(R_NilValue, RawVector::create(sizeof(unwind_cont_t)));
+#else
+    return nullptr;
+#endif
 }
-
-#define RAWDATA(x) ((void *) RAW0(x))
 
 NORET void R_ContinueUnwind(SEXP cont)
 {
+#ifdef CR_UNWIND_IMPL
     SEXP retval = CAR(cont);
     unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
     R_jumpctxt(u->jumptarget, u->jumpmask, retval);
+#else
+    throw std::runtime_error("R_ContinueUnwind() should never be called in CXXR.");
+#endif
 }
 
 SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
@@ -969,6 +979,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 		     void *cleandata, SEXP cont)
 {
     SEXP result = R_NilValue;
+#ifdef CR_UNWIND_IMPL
     Rboolean jump = FALSE;
 
     /* Allow simple usage with a NULL continuation token. This _could_
@@ -980,6 +991,7 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
 	new_cont = R_MakeUnwindCont();
 	return R_UnwindProtect(fun, data, cleanfun, cleandata, new_cont);
     }
+#endif
 
     {
     RCNTXT thiscontext(CTXT_UNWIND, R_NilValue, R_GlobalEnv,
@@ -988,10 +1000,13 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
     try
     {
         result = fun(data);
+#ifdef CR_UNWIND_IMPL
         SETCAR(cont, result);
+#endif
     }
     catch (JMPException &e)
     {
+#ifdef CR_UNWIND_IMPL
         // We want to intercept the jump to unwind
         // so that R_ContinueUnwind() can be called
         // to continue the unwind process.
@@ -1000,15 +1015,24 @@ SEXP R_UnwindProtect(SEXP (*fun)(void *data), void *data,
         unwind_cont_t *u = (unwind_cont_t *) RAWDATA(CDR(cont));
         u->jumpmask = e.mask();
         u->jumptarget = e.context();
+#else
+        cleanfun(cleandata, TRUE);
+        if (e.context() != &thiscontext)
+            throw;
+#endif
     }
 
     endcontext(&thiscontext);
     }
 
+#ifdef CR_UNWIND_IMPL
     cleanfun(cleandata, jump);
 
     if (jump)
 	R_ContinueUnwind(cont);
+#else
+    cleanfun(cleandata, FALSE);
+#endif
 
     return result;
 }

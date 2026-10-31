@@ -916,7 +916,7 @@ LRESULT WINAPI wndproc_unwind(WNDPROC proc_real, HWND hwnd, UINT message,
                                WPARAM wParam, LPARAM lParam)
 {
     wndproc_call w;
-    SEXP token;
+    SEXP token = R_NilValue;
     bool is_initialized = (R_status() > 0);
 
     if (!is_initialized) {
