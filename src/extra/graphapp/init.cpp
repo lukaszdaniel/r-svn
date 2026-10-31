@@ -33,7 +33,7 @@
  */
 
 PROTECTED char * app_name = (char *) "GraphApp";
-PROTECTED int    app_initialised = 0;
+PROTECTED bool    app_initialised = false;
 PROTECTED HANDLE this_instance = NULL;
 PROTECTED HANDLE prev_instance = NULL;
 
@@ -54,7 +54,7 @@ int initapp(int argc, char **argv)
 {
     if (!app_initialised)
     {
-	app_initialised = 1;
+	app_initialised = true;
 	init_objects();
 	init_events();
 	init_fonts();
@@ -72,7 +72,7 @@ PROTECTED
 void app_cleanup(void)
 {
     if (app_initialised) {
-	app_initialised = 0;
+	app_initialised = false;
 	finish_contexts();
 	finish_objects();
 	finish_events();
@@ -182,9 +182,6 @@ static void getappname(HANDLE Instance)
 /*
  *  The main Windows entry point is the WinMain function.
  */
-
-
-
 void startgraphapp(HINSTANCE Instance, HINSTANCE PrevInstance, int CmdShow)
 {
     /*

@@ -239,15 +239,15 @@ static void handle_char(object obj, int ch)
     }
 }
 
-static int showMDIToolbar = 1;
+static bool showMDIToolbar = true;
 void toolbar_show(void)
 {
-    showMDIToolbar = 1;
+    showMDIToolbar = true;
     sendmessage(hwndFrame,WM_PAINT, (WPARAM) 0, (LPARAM) 0);
 }
 void toolbar_hide(void)
 {
-    showMDIToolbar = 0;
+    showMDIToolbar = false;
     sendmessage(hwndFrame,WM_PAINT, (WPARAM) 0, (LPARAM) 0);
 }
 
@@ -504,7 +504,7 @@ static void handle_context_menu(object obj, HWND hwnd, int x, int y)
  *  the event to the default Windows winprocs.
  */
 static long handle_message(HWND hwnd, UINT message,
-			WPARAM wParam, LONG lParam, int *pass)
+			WPARAM wParam, LONG lParam, bool *pass)
 {
     object obj;
     WPARAM upDown;
@@ -514,7 +514,7 @@ static long handle_message(HWND hwnd, UINT message,
     obj = find_by_handle(hwnd);
 
     if (!obj) { /* Not a library object ... */
-	*pass = 1; /* ... so pass the event. */
+	*pass = true; /* ... so pass the event. */
 	return 0;
     }
 
@@ -832,7 +832,7 @@ static long handle_message(HWND hwnd, UINT message,
 
     /* If we got this far the event must be passed along
      * to the default Windows event handling procedures. */
-    *pass = 1;
+    *pass = true;
     return 0;
 }
 
@@ -855,8 +855,7 @@ static long handle_message(HWND hwnd, UINT message,
    call sites of Windows API calls that may end up calling a window
    procedure. */
 
-#include <setjmp.h>
-#include <stdbool.h>
+#include <exception>
 
 typedef void *SEXP;
 typedef bool Rboolean;
@@ -877,13 +876,6 @@ void R_ContinueUnwind(SEXP cont);
 #ifndef R_NilValue
 #define R_NilValue NULL
 #endif
-
-// Try-catch macros from TryCatch.h
-#define TRY do { jmp_buf jmpbuf; switch(setjmp(jmpbuf)) { case 0: do {
-#define CATCH(x) }while(0); break; case x: do {
-#define CATCH_ }while(0); break; default: do {
-#define ETRY }while(0); } }while(0)
-#define THROW(x) longjmp(*((jmp_buf *)data), x)
 
 static SEXP s_wndproc_cont_token = NULL;
 
@@ -915,7 +907,7 @@ SEXP wndproc_unwind_fun(void *data)
 void wndproc_unwind_clean(void *data, Rboolean jump)
 {
     if (jump)
-        THROW(1);
+        throw 1;
 }
 
 LRESULT WINAPI wndproc_unwind(WNDPROC proc_real, HWND hwnd, UINT message,
@@ -930,7 +922,7 @@ LRESULT WINAPI wndproc_unwind(WNDPROC proc_real, HWND hwnd, UINT message,
 	s_wndproc_cont_token = NULL;
 	return proc_real(hwnd, message, wParam, lParam);
     }
-    TRY
+    try
     {
         w.hwnd = hwnd;
         w.message = message;
@@ -939,18 +931,17 @@ LRESULT WINAPI wndproc_unwind(WNDPROC proc_real, HWND hwnd, UINT message,
         w.proc_real = proc_real;
         SEXP saved_token = s_wndproc_cont_token;
         token = Rf_protect(R_MakeUnwindCont());
-        R_UnwindProtect(wndproc_unwind_fun, &w, wndproc_unwind_clean, jmpbuf, token);
+        R_UnwindProtect(wndproc_unwind_fun, &w, wndproc_unwind_clean, nullptr, token);
         Rf_unprotect(1);
         s_wndproc_cont_token = saved_token;
         return w.res;
     }
-    CATCH_
+    catch (...)
     {
         /* long jump */
         s_wndproc_cont_token = token;
         return 0;
     }
-    ETRY;
 }
 
 /* end of R modification */
@@ -959,7 +950,7 @@ LRESULT WINAPI
 app_win_proc_real(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     long result;
-    int pass = 0;
+    bool pass = false;
 
     result = handle_message(hwnd, message, wParam, lParam, &pass);
     if (pass) {
@@ -984,7 +975,7 @@ LRESULT WINAPI
 app_doc_proc_real(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     long result;
-    int pass = 0;
+    bool pass = false;
     object obj;
     if ((message==WM_MDIACTIVATE) && ((HWND)lParam==hwnd)) {
 	if (MDIToolbar) hide(MDIToolbar);
@@ -1026,7 +1017,7 @@ LRESULT WINAPI
 app_work_proc_real(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     long result;
-    int pass = 0;
+    bool pass = false;
     result = handle_message(hwnd, message, wParam, lParam, &pass);
     if (pass)
 	result = DefFrameProc(hwnd, hwndClient, message, wParam, lParam);
@@ -1383,7 +1374,7 @@ long currenttime(void)
  *  Intercept menu keys, since we don't always have accelerator tables.
  *  Return 1 if doing something which should not go to the winproc, else 0.
  */
-static int TranslateMenuKeys(MSG *msg)
+static bool TranslateMenuKeys(MSG *msg)
 {
     int key = LOWORD(msg->wParam);
 
@@ -1404,10 +1395,10 @@ static int TranslateMenuKeys(MSG *msg)
 	    ((key >= '0') && (key <= '9')))
 	{
 	    if (menus_active && handle_menu_key(key))
-		return 1;
+		return true;
 	}
     }
-    return 0; /* 0 = pass to TranslateMessage and DispatchMessage */
+    return false; /* 0 = pass to TranslateMessage and DispatchMessage */
 }
 
 /*

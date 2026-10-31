@@ -435,7 +435,7 @@ extern HWND hwndClient;
   extern  __declspec(dllimport)
 #endif
   unsigned int localeCP; /* from Defn.h */
-  extern int    app_initialised;
+  extern bool    app_initialised;
   extern char * app_name;
 
   extern HANDLE	this_instance;
