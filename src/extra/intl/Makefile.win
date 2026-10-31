@@ -18,8 +18,8 @@ SOURCES = \
  textdomain.c l10nflist.c explodename.c dcigettext.c \
  dcngettext.c dngettext.c ngettext.c plural.c plural-exp.c langprefs.c \
  localcharset.c localename.c printf.c osdep.c intl-compat.c \
- hash-string.c lock.c printf-args.c tsearch.c version.c \
- intl-exports.c printf-parse.c vasnprintf.c
+ hash-string.c lock.c version.c \
+ intl-exports.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -47,8 +47,7 @@ explodename.o l10nflist.o: loadinfo.h
 dcigettext.o loadmsgcat.o plural.o plural-exp.o: plural-exp.h
 dcigettext.o: eval-plural.h
 localcharset.o: localcharset.h
-printf.o: printf-args.h printf-args.c printf-parse.h wprintf-parse.h xsize.h \
-   printf-parse.c vasnprintf.h vasnwprintf.h vasnprintf.c
+
 
 clean:
 	@$(RM) *.o libgnuintl.h libintl.h
