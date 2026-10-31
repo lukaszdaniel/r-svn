@@ -1,20 +1,19 @@
-/* Copyright (C) 1995-1999, 2000-2006 Free Software Foundation, Inc.
-   Contributed by Ulrich Drepper <drepper@gnu.ai.mit.edu>, 1995.
+/* Copyright (C) 1995-2026 Free Software Foundation, Inc.
 
-   This program is free software; you can redistribute it and/or modify it
-   under the terms of the GNU Library General Public License as published
-   by the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as published by
+   the Free Software Foundation; either version 2.1 of the License, or
+   (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Library General Public License for more details.
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Lesser General Public License for more details.
 
-   You should have received a copy of the GNU Library General Public
-   License along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
-   USA.  */
+   You should have received a copy of the GNU Lesser General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+
+/* Written by Ulrich Drepper and Bruno Haible.  */
 
 /* Tell glibc's <string.h> to provide a prototype for stpcpy().
    This must come before <config.h> because <config.h> may include
@@ -29,12 +28,16 @@
 
 #include <string.h>
 
-#if defined _LIBC || defined HAVE_ARGZ_H
+#if defined _LIBC
 # include <argz.h>
 #endif
 #include <ctype.h>
 #include <sys/types.h>
+#include <stdbool.h>
 #include <stdlib.h>
+#if defined _WIN32 && !defined __CYGWIN__
+# include <wchar.h>
+#endif
 
 #include "loadinfo.h"
 
@@ -60,6 +63,11 @@ static char *stpcpy (char *dest, const char *src);
 # endif
 #endif
 
+#ifdef _LIBC
+# define IS_ABSOLUTE_FILE_NAME(P) ((P)[0] == '/')
+# define IS_RELATIVE_FILE_NAME(P) (! IS_ABSOLUTE_FILE_NAME (P))
+#else
+// # include "filename.h" // R change
 /* Pathname support.
    ISSLASH(C)           tests whether C is a directory separator character.
    IS_ABSOLUTE_PATH(P)  tests whether P is an absolute path.  If it is not,
@@ -77,85 +85,11 @@ static char *stpcpy (char *dest, const char *src);
 # define ISSLASH(C) ((C) == '/')
 # define IS_ABSOLUTE_PATH(P) ISSLASH ((P)[0])
 #endif
-
-/* Define function which are usually not available.  */
-
-#ifdef _LIBC
-# define __argz_count(argz, len) INTUSE(__argz_count) (argz, len)
-#elif defined HAVE_ARGZ_COUNT
-# undef __argz_count
-# define __argz_count argz_count
-#else
-/* Returns the number of strings in ARGZ.  */
-static size_t
-argz_count__ (const char *argz, size_t len)
-{
-  size_t count = 0;
-  while (len > 0)
-    {
-      size_t part_len = strlen (argz);
-      argz += part_len + 1;
-      len -= part_len + 1;
-      count++;
-    }
-  return count;
-}
-# undef __argz_count
-# define __argz_count(argz, len) argz_count__ (argz, len)
-#endif	/* !_LIBC && !HAVE_ARGZ_COUNT */
-
-#ifdef _LIBC
-# define __argz_stringify(argz, len, sep) \
-  INTUSE(__argz_stringify) (argz, len, sep)
-#elif defined HAVE_ARGZ_STRINGIFY
-# undef __argz_stringify
-# define __argz_stringify argz_stringify
-#else
-/* Make '\0' separated arg vector ARGZ printable by converting all the '\0's
-   except the last into the character SEP.  */
-static void
-argz_stringify__ (char *argz, size_t len, int sep)
-{
-  while (len > 0)
-    {
-      size_t part_len = strlen (argz);
-      argz += part_len;
-      len -= part_len + 1;
-      if (len > 0)
-	  *argz++ = (char) sep;
-    }
-}
-# undef __argz_stringify
-# define __argz_stringify(argz, len, sep) argz_stringify__ (argz, len, sep)
-#endif	/* !_LIBC && !HAVE_ARGZ_STRINGIFY */
-
-#ifdef _LIBC
-#elif defined HAVE_ARGZ_NEXT
-# undef __argz_next
-# define __argz_next argz_next
-#else
-static char *
-argz_next__ (char *argz, size_t argz_len, const char *entry)
-{
-  if (entry)
-    {
-      if (entry < argz + argz_len)
-        entry = strchr (entry, '\0') + 1;
-
-      return entry >= argz + argz_len ? NULL : (char *) entry;
-    }
-  else
-    if (argz_len > 0)
-      return argz;
-    else
-      return 0;
-}
-# undef __argz_next
-# define __argz_next(argz, len, entry) argz_next__ (argz, len, entry)
-#endif	/* !_LIBC && !HAVE_ARGZ_NEXT */
-
+# define IS_RELATIVE_FILE_NAME(P) (! IS_ABSOLUTE_PATH (P))
+#endif
 
 /* Return number of bits set in X.  */
+#ifndef ARCH_POP
 static inline int
 pop (int x)
 {
@@ -167,96 +101,175 @@ pop (int x)
 
   return x;
 }
+#endif
 
 
 struct loaded_l10nfile *
 _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
 		    const char *dirlist, size_t dirlist_len,
+#if defined _WIN32 && !defined __CYGWIN__
+		    const wchar_t *wdirlist, size_t wdirlist_len,
+#endif
 		    int mask, const char *language, const char *territory,
 		    const char *codeset, const char *normalized_codeset,
 		    const char *modifier,
 		    const char *filename, int do_allocate)
 {
-  char *abs_filename;
-  struct loaded_l10nfile **lastp;
-  struct loaded_l10nfile *retval;
-  char *cp;
-  size_t dirlist_count;
-  size_t entries;
-  int cnt;
-
   /* If LANGUAGE contains an absolute directory specification, we ignore
-     DIRLIST.  */
-  if (IS_ABSOLUTE_PATH (language))
-    dirlist_len = 0;
+     DIRLIST and WDIRLIST.  */
+  if (!IS_RELATIVE_FILE_NAME (language))
+    {
+      dirlist_len = 0;
+#if defined _WIN32 && !defined __CYGWIN__
+      wdirlist_len = 0;
+#endif
+    }
 
   /* Allocate room for the full file name.  */
-  abs_filename = (char *) malloc (dirlist_len
-				  + strlen (language)
-				  + ((mask & XPG_TERRITORY) != 0
-				     ? strlen (territory) + 1 : 0)
-				  + ((mask & XPG_CODESET) != 0
-				     ? strlen (codeset) + 1 : 0)
-				  + ((mask & XPG_NORM_CODESET) != 0
-				     ? strlen (normalized_codeset) + 1 : 0)
-				  + ((mask & XPG_MODIFIER) != 0
-				     ? strlen (modifier) + 1 : 0)
-				  + 1 + strlen (filename) + 1);
+  char *abs_filename =
+    (char *) malloc (dirlist_len
+		     + strlen (language)
+		     + ((mask & XPG_TERRITORY) != 0
+		        ? strlen (territory) + 1 : 0)
+		     + ((mask & XPG_CODESET) != 0
+		        ? strlen (codeset) + 1 : 0)
+		     + ((mask & XPG_NORM_CODESET) != 0
+		        ? strlen (normalized_codeset) + 1 : 0)
+		     + ((mask & XPG_MODIFIER) != 0
+		        ? strlen (modifier) + 1 : 0)
+		     + 1 + strlen (filename) + 1);
 
   if (abs_filename == NULL)
     return NULL;
 
   /* Construct file name.  */
-  cp = abs_filename;
-  if (dirlist_len > 0)
-    {
-      memcpy (cp, dirlist, dirlist_len);
-      __argz_stringify (cp, dirlist_len, PATH_SEPARATOR);
-      cp += dirlist_len;
-      cp[-1] = '/';
-    }
+  {
+    char *cp;
 
-  cp = stpcpy (cp, language);
+    cp = abs_filename;
+    if (dirlist_len > 0)
+      {
+	memcpy (cp, dirlist, dirlist_len);
+#ifdef _LIBC
+	__argz_stringify (cp, dirlist_len, PATH_SEPARATOR);
+#endif
+	cp += dirlist_len;
+	cp[-1] = '/';
+      }
 
-  if ((mask & XPG_TERRITORY) != 0)
-    {
-      *cp++ = '_';
-      cp = stpcpy (cp, territory);
-    }
-  if ((mask & XPG_CODESET) != 0)
-    {
-      *cp++ = '.';
-      cp = stpcpy (cp, codeset);
-    }
-  if ((mask & XPG_NORM_CODESET) != 0)
-    {
-      *cp++ = '.';
-      cp = stpcpy (cp, normalized_codeset);
-    }
-  if ((mask & XPG_MODIFIER) != 0)
-    {
-      *cp++ = '@';
-      cp = stpcpy (cp, modifier);
-    }
+    cp = stpcpy (cp, language);
 
-  *cp++ = '/';
-  stpcpy (cp, filename);
+    if ((mask & XPG_TERRITORY) != 0)
+      {
+	*cp++ = '_';
+	cp = stpcpy (cp, territory);
+      }
+    if ((mask & XPG_CODESET) != 0)
+      {
+	*cp++ = '.';
+	cp = stpcpy (cp, codeset);
+      }
+    if ((mask & XPG_NORM_CODESET) != 0)
+      {
+	*cp++ = '.';
+	cp = stpcpy (cp, normalized_codeset);
+      }
+    if ((mask & XPG_MODIFIER) != 0)
+      {
+	*cp++ = '@';
+	cp = stpcpy (cp, modifier);
+      }
+
+    *cp++ = '/';
+    stpcpy (cp, filename);
+  }
+
+#if defined _WIN32 && !defined __CYGWIN__
+  /* Construct wide-char file name.  */
+  wchar_t *abs_wfilename;
+  if (wdirlist_len > 0)
+    {
+      /* Since dirlist_len == 0, just concatenate wdirlist and abs_filename.  */
+      /* An upper bound for wcslen (mbstowcs (abs_filename)).  */
+      size_t abs_filename_bound = mbstowcs (NULL, abs_filename, 0);
+      if (abs_filename_bound == (size_t)-1)
+	{
+	  free (abs_filename);
+	  return NULL;
+	}
+
+      /* Allocate and fill abs_wfilename.  */
+      abs_wfilename =
+	(wchar_t *)
+	malloc ((wdirlist_len + abs_filename_bound + 1) * sizeof (wchar_t));
+      if (abs_wfilename == NULL)
+	{
+	  free (abs_filename);
+	  return NULL;
+	}
+      wmemcpy (abs_wfilename, wdirlist, wdirlist_len - 1);
+      abs_wfilename[wdirlist_len - 1] = L'/';
+      if (mbstowcs (abs_wfilename + wdirlist_len, abs_filename,
+		    abs_filename_bound + 1)
+	  > abs_filename_bound)
+	{
+	  free (abs_filename);
+	  free (abs_wfilename);
+	  return NULL;
+	}
+
+      free (abs_filename);
+      abs_filename = NULL;
+    }
+  else
+    abs_wfilename = NULL;
+#endif
 
   /* Look in list of already loaded domains whether it is already
      available.  */
-  lastp = l10nfile_list;
-  for (retval = *l10nfile_list; retval != NULL; retval = retval->next)
-    if (retval->filename != NULL)
+  struct loaded_l10nfile *retval;
+  struct loaded_l10nfile **lastp = l10nfile_list;
+#if defined _WIN32 && !defined __CYGWIN__
+  if (abs_wfilename != NULL)
+    {
+      for (retval = *l10nfile_list; retval != NULL; retval = retval->next)
+	{
+	  if (retval->wfilename != NULL)
+	    {
+	      int compare = wcscmp (retval->wfilename, abs_wfilename);
+	      if (compare == 0)
+		/* We found it!  */
+		break;
+	      if (compare < 0)
+		{
+		  /* It's not in the list, and we have found the place where it
+		     needs to be inserted: at *LASTP.  */
+		  retval = NULL;
+		  break;
+		}
+	    }
+	  lastp = &retval->next;
+	}
+    }
+  else
+#endif
+    for (retval = *l10nfile_list; retval != NULL; retval = retval->next)
       {
-	int compare = strcmp (retval->filename, abs_filename);
-	if (compare == 0)
-	  /* We found it!  */
-	  break;
-	if (compare < 0)
+#if defined _WIN32 && !defined __CYGWIN__
+	if (retval->filename != NULL)
+#endif
 	  {
-	    /* It's not in the list.  */
-	    retval = NULL;
-	    break;
+	    int compare = strcmp (retval->filename, abs_filename);
+	    if (compare == 0)
+	      /* We found it!  */
+	      break;
+	    if (compare < 0)
+	      {
+		/* It's not in the list, and we have found the place where it
+		   needs to be inserted: at *LASTP.  */
+		retval = NULL;
+	        break;
+	      }
 	  }
 	lastp = &retval->next;
       }
@@ -264,10 +277,18 @@ _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
   if (retval != NULL || do_allocate == 0)
     {
       free (abs_filename);
+#if defined _WIN32 && !defined __CYGWIN__
+      free (abs_wfilename);
+#endif
       return retval;
     }
 
+  size_t dirlist_count;
+#ifdef _LIBC
   dirlist_count = (dirlist_len > 0 ? __argz_count (dirlist, dirlist_len) : 1);
+#else
+  dirlist_count = 1;
+#endif
 
   /* Allocate a new loaded_l10nfile.  */
   retval =
@@ -278,10 +299,16 @@ _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
   if (retval == NULL)
     {
       free (abs_filename);
+#if defined _WIN32 && !defined __CYGWIN__
+      free (abs_wfilename);
+#endif
       return NULL;
     }
 
   retval->filename = abs_filename;
+#if defined _WIN32 && !defined __CYGWIN__
+  retval->wfilename = abs_wfilename;
+#endif
 
   /* We set retval->data to NULL here; it is filled in later.
      Setting retval->decided to 1 here means that retval does not
@@ -295,7 +322,7 @@ _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
   retval->next = *lastp;
   *lastp = retval;
 
-  entries = 0;
+  size_t entries = 0;
   /* Recurse to fill the inheritance list of RETVAL.
      If the DIRLIST is a real list (i.e. DIRLIST_COUNT > 1), the RETVAL
      entry does not correspond to a real file; retval->filename contains
@@ -308,16 +335,18 @@ _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
      that the extra bits in the locale name are dropped in this order:
      first the modifier, then the territory, then the codeset, then the
      normalized_codeset.  */
-  for (cnt = dirlist_count > 1 ? mask : mask - 1; cnt >= 0; --cnt)
+  for (int cnt = dirlist_count > 1 ? mask : mask - 1; cnt >= 0; --cnt)
     if ((cnt & ~mask) == 0
 	&& !((cnt & XPG_CODESET) != 0 && (cnt & XPG_NORM_CODESET) != 0))
       {
+#ifdef _LIBC
 	if (dirlist_count > 1)
 	  {
 	    /* Iterate over all elements of the DIRLIST.  */
-	    char *dir = NULL, *nd = (char *) dirlist;
+	    char *dir = NULL;
 
-	    while ((dir = __argz_next (nd, dirlist_len, dir)) != NULL)
+	    while ((dir = __argz_next ((char *) dirlist, dirlist_len, dir))
+		   != NULL)
 	      retval->successor[entries++]
 		= _nl_make_l10nflist (l10nfile_list, dir, strlen (dir) + 1,
 				      cnt, language, territory, codeset,
@@ -325,8 +354,13 @@ _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
 				      1);
 	  }
 	else
+#endif
 	  retval->successor[entries++]
-	    = _nl_make_l10nflist (l10nfile_list, dirlist, dirlist_len,
+	    = _nl_make_l10nflist (l10nfile_list,
+				  dirlist, dirlist_len,
+#if defined _WIN32 && !defined __CYGWIN__
+				  wdirlist, wdirlist_len,
+#endif
 				  cnt, language, territory, codeset,
 				  normalized_codeset, modifier, filename, 1);
       }
@@ -342,33 +376,32 @@ _nl_make_l10nflist (struct loaded_l10nfile **l10nfile_list,
 const char *
 _nl_normalize_codeset (const char *codeset, size_t name_len)
 {
-  int len = 0;
-  int only_digit = 1;
-  char *retval;
-  char *wp;
-  size_t cnt;
+  size_t len = 0;
+  bool only_digit = true;
 
-  for (cnt = 0; cnt < name_len; ++cnt)
+  for (size_t cnt = 0; cnt < name_len; ++cnt)
     if (isalnum ((unsigned char) codeset[cnt]))
       {
 	++len;
 
 	if (isalpha ((unsigned char) codeset[cnt]))
-	  only_digit = 0;
+	  only_digit = false;
       }
 
-  retval = (char *) malloc ((only_digit ? 3 : 0) + len + 1);
+  char *retval = (char *) malloc ((only_digit ? 3 : 0) + len + 1);
 
   if (retval != NULL)
     {
+      char *wp;
+
       if (only_digit)
 	wp = stpcpy (retval, "iso");
       else
 	wp = retval;
 
-      for (cnt = 0; cnt < name_len; ++cnt)
+      for (size_t cnt = 0; cnt < name_len; ++cnt)
 	if (isalpha ((unsigned char) codeset[cnt]))
-	    *wp++ = (char) tolower ((unsigned char) codeset[cnt]);
+	  *wp++ = tolower ((unsigned char) codeset[cnt]);
 	else if (isdigit ((unsigned char) codeset[cnt]))
 	  *wp++ = codeset[cnt];
 
