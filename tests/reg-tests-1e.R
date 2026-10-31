@@ -4354,6 +4354,80 @@ unlink(td, recursive = TRUE)
 ## no NOTE in R <= 4.6.2
 
 
+## x[i] <- v coercing and extending x with check.bounds on -- PR#19111
+local({
+    op <- options(check.bounds = TRUE)
+    on.exit(options(op))
+    x <- c(TRUE, FALSE)
+    gctorture(TRUE)
+    suppressWarnings(x[5] <- 1L)
+    gctorture(FALSE)
+    stopifnot(identical(x, c(1L, 0L, NA, NA, 1L)))
+})
+## gave garbage, an error or a segfault in R <= 4.6.2
+
+
+## readLines() must free its line buffer on error, including after growth.
+## The error cases also exercise the cleanup under leak checkers.
+local({
+    tf <- tempfile()
+    old <- options(warn = 2)
+    for (mode in c("", "rt")) {
+        ## A corrupt gzip stream fails while reading the first line.
+        writeBin(as.raw(c(0x1f, 0x8b, 0x08, 0, 0, 0, 0, 0, 0, 3,
+                          rep(0xaf, 40))), tf)
+        con <- gzfile(tf, mode)
+        stopifnot(inherits(tryCid(readLines(con)), "error"),
+                  identical(isOpen(con), nzchar(mode)))
+        close(con)
+        ## Errors after growth, both during reading and after closing.
+        line <- strrep("a", 8000)
+        writeBin(c(charToRaw(line), as.raw(0), charToRaw("x\n")), tf)
+        con <- file(tf, mode)
+        stopifnot(inherits(tryCid(readLines(con)), "error"),
+                  identical(isOpen(con), nzchar(mode)))
+        close(con)
+        writeChar(line, tf, eos = NULL)
+        con <- file(tf, mode)
+        stopifnot(inherits(tryCid(readLines(con)), "error"),
+                  identical(isOpen(con), nzchar(mode)))
+        close(con)
+    }
+    options(old)
+    unlink(tf)
+})
+## leaked the buffer on errors in R <= 4.6.x
+
+
+## str() missing spaces (" ") after "attr(*, "<....>")="  -- PR#18719 (part 2)
+op <- options(keep.source = TRUE)
+dostr <- function(x) { writeLines(A <- capture.output( str(x) )); A }
+chf <- dostr(lf <- list(frml = formula(ChickWeight)))
+chr <- dostr(lr <- local({B <- BOD[FALSE,]; attr(B,"int") <- 2L; list(ref = B)}))
+chF <- dostr(structure(dostr, foo = function(x) foo))
+stopifnot(exprs = {
+    length(chf) == 3L
+    grepl(" $ frml: Class 'form",chf[2], fixed=TRUE) # 1 space
+    grepl("= <environment:",     chf[3], fixed=TRUE) #   "
+    length(chr) == 6L
+    grepl("\"reference\")= chr", chr[5], fixed=TRUE) # 1 space only (had *2* for a while)
+    grepl(      "\"int\")= int", chr[6], fixed=TRUE)
+    grepl("$ ref: ", chr[2], fixed=TRUE) # space after ':'
+    length(chF) == 6L
+    grepl("\"srcref\")= 'srcref'", chF[c(2,5)], fixed=TRUE)
+    grepl("\"srcfile\")= Classes 'srcfilecopy", chF[c(3,6)], fixed=TRUE)
+    grepl("attr(*, \"foo\")= function", chF[4], fixed=TRUE)
+}) ; options(op)
+## space was missing after '<some>:' and '=' in some cases in R <= 4.6.2
+
+
+
+## grepRaw() with truncated TRE patterns -- PR#18995
+for (p in c("[", "[[:alpha:", "[a-", "(", "(?", "(?#", "\\x", "\\x4", "\\x{4"))
+    tryCatch(grepRaw(p, "abc"), error = function(e) NULL)
+## read past the end of the pattern in R <= 4.6.2 (visible under ASan)
+
+
 ## keep at end
 rbind(last =  proc.time() - .pt,
       total = proc.time())

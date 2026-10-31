@@ -4433,19 +4433,23 @@ int Rconn_printf(Rconnection con, const char *format, ...)
     return res;
 }
 
+typedef struct {
+    Rconnection con; /* NULL unless the connection still needs closing */
+} readLines_data;
+
 /* readLines(con = stdin(), n = 1, ok = TRUE, warn = TRUE) */
 #define BUF_SIZE 1000
 attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     GCStackRoot<> ans(R_NilValue), ans2;
     int c;
-    size_t nbuf, buf_size = BUF_SIZE;
+    size_t nbuf = 0;
     cetype_t oenc = CE_NATIVE;
     Rconnection con = NULL;
     bool wasopen;
-    char *buf;
+    CXXR::RAllocStack::Vector<char> buf(BUF_SIZE);
     const char *encoding;
-    R_xlen_t i, n, nn, nnn, nread;
+    R_xlen_t n, nn, nnn, nread;
 
     checkArity(op, args);
     if(!inherits(CAR(args), "connection"))
@@ -4461,8 +4465,11 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
     encoding = CHAR(STRING_ELT(CAR(args), 0));  args = CDR(args); /* ASCII */
     bool skipNul = asLogicalNoNA(CAR(args), "skipNul");
 
-    wasopen = con->isopen;
+    /* Clean up the current buffer and any connection opened here on error. */
+    readLines_data data = {NULL};
+
     try {
+    wasopen = con->isopen;
     if(!wasopen) {
 	char mode[5];
 	con->UTF8out = TRUE;  /* a request */
@@ -4470,6 +4477,7 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	strcpy(con->mode, "rt");
 	if(!con->open(con)) error("%s", _("cannot open the connection"));
 	strcpy(con->mode, mode);
+	data.con = con;
 	if(!con->canread) error("%s", _("cannot read from this connection"));
     } else {
 	if(!con->canread) error("%s", _("cannot read from this connection"));
@@ -4483,9 +4491,6 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
     else if(streql(encoding, "latin1")) oenc = CE_LATIN1;
     else if(streql(encoding, "bytes")) oenc = CE_BYTES;
 
-    buf = (char *) malloc(buf_size);
-    if(!buf)
-	error("%s", _("cannot allocate buffer in readLines"));
     nn = (n < 0) ? 1000 : n; /* initially allocate space for 1000 lines */
     nnn = (n < 0) ? R_XLEN_T_MAX : n;
     ans = StringVector::create(nn);
@@ -4494,20 +4499,15 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	    double dnn = 2. * (double) nn;
 	    if (dnn > (double) R_XLEN_T_MAX) error("%s", _("too many items"));
 	    ans2 = StringVector::create(2*nn);
-	    for(i = 0; i < nn; i++)
+	    for (R_xlen_t i = 0; i < nn; i++)
 		SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
 	    nn *= 2;
 	    ans = ans2;
 	}
 	nbuf = 0;
 	while((c = Rconn_fgetc(con)) != R_EOF) {
-	    if(nbuf == buf_size-1) {  /* need space for the terminator */
-		buf_size *= 2;
-		char *tmp = (char *) realloc(buf, buf_size);
-		if(!tmp) {
-		    free(buf);
-		    error("%s", _("cannot allocate buffer in readLines"));
-		} else buf = tmp;
+	    if(nbuf == buf.size()-1) {  /* need space for the terminator */
+		buf.resize(buf.size() * 2);
 	    }
 	    if(skipNul && c == '\0') continue;
 	    if(c != '\n')
@@ -4518,26 +4518,25 @@ attribute_hidden SEXP do_readLines(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	buf[nbuf] = '\0';
 	/* Remove UTF-8 BOM */
-	const char *qbuf = buf;
+	const char *qbuf = buf.data();
 	// avoid valgrind warning if < 3 bytes
-	if (nread == 0 && utf8locale && strlen(buf) >= 3 &&
-	    !memcmp(buf, "\xef\xbb\xbf", 3)) qbuf = buf + 3;
+	if (nread == 0 && utf8locale && strlen(buf.data()) >= 3 &&
+	    !memcmp(buf.data(), "\xef\xbb\xbf", 3)) qbuf = buf.data() + 3;
 	SET_STRING_ELT(ans, nread, mkCharCE(qbuf, oenc));
-	if (warn && strlen(buf) < nbuf)
+	if (warn && strlen(buf.data()) < nbuf)
 	    warning(_("line %lld appears to contain an embedded nul"),
 	            (long long)nread + 1);
-	if(c == R_EOF) goto no_more_lines;
+	if (c == R_EOF) break;
     }
-    if(!wasopen) { con->close(con); }
-    free(buf);
-    return ans;
-no_more_lines:
-    if(!wasopen) { con->close(con); }
-    if(nbuf > 0) { /* incomplete last line */
-	if(con->text && !con->blocking &&
+    if (!wasopen) {
+	data.con = NULL; /* do not close again if closing raises an error */
+	con->close(con);
+    }
+    if (c == R_EOF && nbuf > 0) { /* incomplete last line */
+	if (con->text && !con->blocking &&
 	   (!streql(con->connclass, "gzfile"))) {
 	    /* push back the rest */
-	    con_pushback(con, FALSE, buf);
+	    con_pushback(con, FALSE, buf.data());
 	    con->incomplete = TRUE;
 	} else {
 	    nread++;
@@ -4549,15 +4548,17 @@ no_more_lines:
     } catch (...) {
         if (!wasopen)
         {
-            checkClose(con);
+            data.con = NULL; /* do not close again if closing raises an error */
+            con->close(con);
         }
+        /* Closing the connection may itself raise an error. */
+        if (data.con) checkClose(data.con);
         throw;
     }
-    free(buf);
-    if(nread < nnn && !ok)
+    if (nread < nnn && !ok)
 	error("%s", _("too few lines read in readLines"));
     ans2 = StringVector::create(nread);
-    for(i = 0; i < nread; i++)
+    for (R_xlen_t i = 0; i < nread; i++)
 	SET_STRING_ELT(ans2, i, STRING_ELT(ans, i));
 
     return ans2;

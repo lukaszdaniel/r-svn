@@ -131,6 +131,9 @@
       \command{sed} error when the new \option{--package-metadata} linker flag
       is involved; an \samp{s}-command delimiter other than \samp{:} was needed
       (\PR{19060}, thanks to \I{Jeroen Ooms} and \I{Dirk Eddelbuettel}).
+
+      \item \code{libzstd} is required.  For \R 4.7.0 only, this can be
+      circumvented by configuring with \option{--without-libzstd}.
     }
   }
 
@@ -434,8 +437,17 @@
       \item Fix for long-standing bug in Cairo raster output that sometimes
       produced gaps between adjacent filled rectangles (\PR{16721}).
       Thanks to \I{Dave Dixon} for the original report and to \I{Ella
-      Kaye}, \I{George Stagg}, \I{Kevin Ushey}, and \I{Ivan Krylov} for
+	Kaye}, \I{George Stagg}, \I{Kevin Ushey}, and \I{Ivan Krylov} for
       contributions to the fix.
+
+      \item \code{str()}'s output puts a space (\code{" "}) after
+      \code{"<some>:"} and \code{"attr(*, \"<....>\")="} consistently now,
+      addressing \PR{18719} by \I{Dave Slager} and \I{Novica Nakov}.
+      This was achieved by no longer \emph{pre}pending spaces, such that
+      e.g., \code{str(pi)}'s output no longer starts with a space.
+
+      This should have little effect on (\command{R CMD check})s, as
+      \command{R CMD Rdiff} does \emph{not} show such differences.
     }
   }
 }
@@ -746,7 +758,7 @@
       \command{tar} programs do).
 
       \item \code{extSoftVersion()[["zstd"]]} now reports the version of
-      the \command{zstd} compression library if available, thanks to
+      the \code{libzstd} compression library if available, thanks to
       \I{Trevor Davis}' patch proposal in \PR{18914}.
 
       \item New logical \code{option()} \code{quiet}, defaulting to
