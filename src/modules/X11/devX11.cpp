@@ -2738,7 +2738,7 @@ static void X11_HistoryKey(pDevDesc dd, XKeyEvent *xkey)
 	KeySym rawsym = XLookupKeysym(xkey, 0);
 	KeySym lower_ks, upper_ks;
 	XConvertCase(rawsym, &lower_ks, &upper_ks);
-	xkey->state &= ~ControlMask;
+	xkey->state &= ~(ControlMask | LockMask);
 	if (upper_ks != lower_ks)
 	    xkey->state |= ShiftMask;
     }
@@ -2886,7 +2886,7 @@ static void X11_eventHelper(pDevDesc dd, int code)
 		KeySym rawsym = XLookupKeysym(&event.xkey, 0);
 		KeySym lower_ks, upper_ks;
 		XConvertCase(rawsym, &lower_ks, &upper_ks);
-	    	event.xkey.state &= ~ControlMask;
+	    	event.xkey.state &= ~(ControlMask | LockMask);
 	    	if (upper_ks != lower_ks)
 		    event.xkey.state |= ShiftMask;
 	    }
