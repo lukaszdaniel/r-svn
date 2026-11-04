@@ -134,6 +134,11 @@
 
       \item \code{libzstd} is required.  For \R 4.7.0 only, this can be
       circumvented by configuring with \option{--without-libzstd}.
+
+      \item \command{configure} issues a warning if no way is found to
+      determine C dependencies, as without this updating a build is
+      unreliable, for example if \file{Rversion.h} is changed (and it
+      holds the SVN revision).  (Seen with macOS SDK 27.2.)
     }
   }
 
@@ -448,6 +453,11 @@
 
       This should have little effect on (\command{R CMD check})s, as
       \command{R CMD Rdiff} does \emph{not} show such differences.
+
+      \item \code{E <- evalSource(\dots, cache = FALSE)} did not create
+      S4 method tables in \code{E}, so \code{insertSource(E, \dots)} did
+      not trace S4 methods.  Thanks to \I{Takeshi Arabiki} for the
+      report (\PR{15242}).
     }
   }
 }

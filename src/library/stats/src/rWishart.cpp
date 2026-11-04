@@ -24,6 +24,7 @@
 #include <cmath>
 #include <cstring>  // memset, memcpy
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RAllocStack.hpp>
 #include <R.h>
 #include <Rinternals.h>
 #include <Rmath.h>
@@ -74,8 +75,7 @@ static double *std_rWishart_factor(double nu, int p, int upper, double ans[])
  *
  * @return
  */
-SEXP
-rWishart(SEXP ns, SEXP nuP, SEXP scal)
+SEXP rWishart(SEXP ns, SEXP nuP, SEXP scal)
 {
     SEXP ans;
     int *dims = INTEGER(getAttrib(scal, R_DimSymbol)), info,
@@ -85,11 +85,15 @@ rWishart(SEXP ns, SEXP nuP, SEXP scal)
     if (!isMatrix(scal) || !isReal(scal) || dims[0] != dims[1])
 	error("%s", _("'scal' must be a square, real matrix"));
     if (n <= 0) n = 1;
-    // allocate early to avoid memory leaks in R_Callocs below.
     PROTECT(ans = alloc3DArray(REALSXP, dims[0], dims[0], n));
     psqr = dims[0] * dims[0];
-    tmp = R_Calloc(psqr, double);
-    scCp = R_Calloc(psqr, double);
+    /* R_alloc, not R_Calloc: the errors below ('scal' not positive-definite,
+       nu < p in std_rWishart_factor) would leak R_Calloc'd buffers; R_alloc
+       lives on the R heap and is reclaimed when the call returns or an
+       error unwinds */
+    CXXR::RAllocStack::Scope rscope;
+    tmp = (double *) R_alloc(psqr, sizeof(double));
+    scCp = (double *) R_alloc(psqr, sizeof(double));
 
     Memcpy(scCp, REAL(scal), psqr);
     if (psqr)
@@ -115,7 +119,7 @@ rWishart(SEXP ns, SEXP nuP, SEXP scal)
     }
 
     PutRNGstate();
-    R_Free(scCp); R_Free(tmp);
+
     UNPROTECT(1);
     return ans;
 }
