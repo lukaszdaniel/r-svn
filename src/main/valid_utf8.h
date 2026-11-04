@@ -65,24 +65,22 @@ characters is still checked.
 #ifndef VALID_UTF_8
 #define VALID_UTF_8
 
-static int valid_utf8(const char *string, size_t length) // R change int->size_t
+static bool valid_utf8(const char *string, size_t length) // R change int->size_t
 {
-    const unsigned char *p;
+    for (const unsigned char *p = (unsigned char *)string; length-- > 0; p++) {
 
-    for (p = (unsigned char *)string; length-- > 0; p++) {
-	unsigned ab, c, d;
-	c = *p;
+	const unsigned char c = *p;
 	if (c < 128) continue;                /* ASCII character */
-	if (c < 0xc0) return 1;               /* Isolated 10xx xxxx byte */
-	if (c >= 0xfe) return 1;             /* Invalid 0xfe or 0xff bytes */
+	if (c < 0xc0) return false;               /* Isolated 10xx xxxx byte */
+	if (c >= 0xfe) return false;             /* Invalid 0xfe or 0xff bytes */
 
-	ab = utf8_table4[c & 0x3f];     /* Number of additional bytes */
-	if (length < ab) return 1;
+	unsigned char ab = utf8_table4[c & 0x3f];     /* Number of additional bytes */
+	if (length < ab) return false;
 	length -= ab;                         /* Length remaining */
 
 	/* Check top bits in the second byte */
-
-	if (((d = *(++p)) & 0xc0) != 0x80) return 1;
+	unsigned char d = *(++p);
+	if ((d & 0xc0) != 0x80) return false;
 
 	/* For each length, check that the remaining bytes start with
 	   the 0x80 bit set and not the 0x40 bit. Then check for an
@@ -95,16 +93,16 @@ static int valid_utf8(const char *string, size_t length) // R change int->size_t
 	       0x80. Check first byte for for xx00 000x (overlong
 	       sequence). */
 	case 1: 
-	    if ((c & 0x3e) == 0) return 1;
+	    if ((c & 0x3e) == 0) return false;
 	    break;
 
 	    /* 3-byte character. Check third byte for 0x80. Then check
 	       first 2 bytes for 1110 0000, xx0x xxxx (overlong
 	       sequence) or 1110 1101, 1010 xxxx (0xd800 - 0xdfff) */
 	case 2:
-	    if ((*(++p) & 0xc0) != 0x80) return 1;    /* Third byte */
-	    if (c == 0xe0 && (d & 0x20) == 0) return 1;
-	    if (c == 0xed && d >= 0xa0) return 1;
+	    if ((*(++p) & 0xc0) != 0x80) return false;    /* Third byte */
+	    if (c == 0xe0 && (d & 0x20) == 0) return false;
+	    if (c == 0xed && d >= 0xa0) return false;
 	    break;
 
 	    /* 4-byte character. Check 3rd and 4th bytes for
@@ -112,10 +110,10 @@ static int valid_utf8(const char *string, size_t length) // R change int->size_t
 	       xxxx (overlong sequence), then check for a character
 	       greater than 0x0010ffff (f4 8f bf bf) */
 	case 3:
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Third byte */
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Fourth byte */
-	    if (c == 0xf0 && (d & 0x30) == 0) return 1;
-	    if (c > 0xf4 || (c == 0xf4 && d > 0x8f)) return 1;
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Third byte */
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Fourth byte */
+	    if (c == 0xf0 && (d & 0x30) == 0) return false;
+	    if (c > 0xf4 || (c == 0xf4 && d > 0x8f)) return false;
 	    break;
 
 	    /* 5-byte and 6-byte characters are not allowed by RFC
@@ -128,30 +126,30 @@ static int valid_utf8(const char *string, size_t length) // R change int->size_t
 	    /* 5-byte character. Check 3rd, 4th, and 5th bytes for
 	       0x80. Then check for 1111 1000, xx00 0xxx */
 	case 4:
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Third byte */
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Fourth byte */
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Fifth byte */
-	    if (c == 0xf8 && (d & 0x38) == 0) return 1;
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Third byte */
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Fourth byte */
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Fifth byte */
+	    if (c == 0xf8 && (d & 0x38) == 0) return false;
 	    break;
 
 	    /* 6-byte character. Check 3rd-6th bytes for 0x80. Then
 	       check for 1111 1100, xx00 00xx. */
 	case 5:
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Third byte */
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Fourth byte */
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Fifth byte */
-	    if ((*(++p) & 0xc0) != 0x80) return 1;     /* Sixth byte */
-	    if (c == 0xfc && (d & 0x3c) == 0) return 1;
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Third byte */
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Fourth byte */
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Fifth byte */
+	    if ((*(++p) & 0xc0) != 0x80) return false;     /* Sixth byte */
+	    if (c == 0xfc && (d & 0x3c) == 0) return false;
 	    break;
 	}
 
 	/* Character is valid under RFC 2279, but 4-byte and 5-byte
 	   characters are excluded by RFC 3629. The pointer p is
 	   currently at the last byte of the character. */
-	if (ab > 3) return 1;
+	if (ab > 3) return false;
     }
 
-    return 0;
+    return true;
 }
 
 #endif

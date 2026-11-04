@@ -763,18 +763,18 @@ attribute_hidden SEXP do_merge(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     const char *nms[] = {"xi", "yi", "x.alone", "y.alone", ""};
     ans = PROTECT(mkNamed(VECSXP, nms));
-    ansx = allocVector(INTSXP, nans);    SET_VECTOR_ELT(ans, 0, ansx);
-    ansy = allocVector(INTSXP, nans);    SET_VECTOR_ELT(ans, 1, ansy);
+    ansx = IntVector::create(nans);    SET_VECTOR_ELT(ans, 0, ansx);
+    ansy = IntVector::create(nans);    SET_VECTOR_ELT(ans, 1, ansy);
 
     if(all_x) {
-	SEXP x_lone = allocVector(INTSXP, nx_lone);
+	SEXP x_lone = IntVector::create(nx_lone);
 	SET_VECTOR_ELT(ans, 2, x_lone);
 	for (i = 0, ll = 0; i < nx_lone; i++)
 	    INTEGER(x_lone)[ll++] = ix[i];
     }
 
     if(all_y) {
-	SEXP y_lone = allocVector(INTSXP, ny_lone);
+	SEXP y_lone = IntVector::create(ny_lone);
 	SET_VECTOR_ELT(ans, 3, y_lone);
 	for (i = 0, ll = 0; i < ny_lone; i++)
 	    INTEGER(y_lone)[ll++] = iy[i];
@@ -1724,7 +1724,7 @@ bool R::mbcsValid(const char *str)
 #include "valid_utf8.h"
 bool R::utf8Valid(const char *str)
 {
-    return (valid_utf8(str, strlen(str)) == 0);
+    return valid_utf8(str, strlen(str));
 }
 
 /* Number of bytes in the valid UTF-8 character starting at 's', judged
@@ -1735,7 +1735,7 @@ attribute_hidden int R::utf8ValidClen(const char *s)
     for (int i = 1; i < len; i++)
 	if (!s[i])
 	    return 0;
-    return valid_utf8(s, len) == 0 ? len : 0;
+    return valid_utf8(s, len) ? len : 0;
 }
 
 attribute_hidden SEXP do_validUTF8(SEXP call, SEXP op, SEXP args, SEXP rho)
@@ -2870,7 +2870,7 @@ attribute_hidden SEXP do_bincode(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (nB < 2 || nB == NA_INTEGER) error(_("invalid '%s' argument"), "breaks");
 
     SEXP codes;
-    PROTECT(codes = allocVector(INTSXP, n));
+    PROTECT(codes = IntVector::create(n));
     bincode(REAL(x), n, REAL(breaks), nB, INTEGER(codes), sr, sl);
     UNPROTECT(3);
     return codes;
@@ -2936,7 +2936,7 @@ attribute_hidden SEXP do_findinterval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	error(_("invalid '%s' argument"), "rightmost.closed");
     if (si == NA_INTEGER)
     error(_("invalid '%s' argument"), "all.inside"); */
-    SEXP ans = allocVector(INTSXP, nx);
+    SEXP ans = IntVector::create(nx);
     double *rxt = REAL(xt), *rx = REAL(x);
     int ii = 1, mfl;
     if (chkNA)
@@ -3334,7 +3334,7 @@ SEXP do_compareNumericVersion(SEXP call, SEXP op, SEXP args, SEXP env)
 	na = nx > ny ? nx : ny;
     else
 	na = 0;
-    PROTECT(ans = allocVector(INTSXP, na));
+    PROTECT(ans = IntVector::create(na));
     for(i = 0; i < na; i++) {
 	INTEGER(ans)[i] =
 	    compareNumericVersion(VECTOR_ELT(x, i % nx),
