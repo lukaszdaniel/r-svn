@@ -54,13 +54,14 @@
 
 #ifdef HAVE_PNG
 #include "png.h"
-#include <csetjmp>
 #endif
 
 #include <Localization.h>
 #include <R_ext/Error.h>
 
 #ifdef HAVE_PNG
+struct PngWriteError {};
+
 /*
  * Try to save the content of the device 'd' in 'filename' as png.
  * If numbers of colors is less than 256 we use a 'palette' png.
@@ -75,11 +76,7 @@
 NORET static void my_png_error(png_structp png_ptr, png_const_charp msg)
 {
     R_ShowMessage((char *) msg);
-#if PNG_LIBPNG_VER < 10400
-    longjmp(png_ptr->jmpbuf,1);
-#else
-    longjmp(png_jmpbuf(png_ptr),1);
-#endif
+    throw PngWriteError{};
 }
 
 static void my_png_warning(png_structp png_ptr, png_const_charp msg)
@@ -134,17 +131,8 @@ int R_SaveAsPng(void *d, int width, int height,
     /* Set error handling.  REQUIRED if you aren't supplying your own
      * error handling functions in the png_create_write_struct() call.
      */
-#if PNG_LIBPNG_VER < 10400
-    if (setjmp(png_ptr->jmpbuf))
-#else
-    if (setjmp(png_jmpbuf(png_ptr)))
-#endif
+    try
     {
-	/* If we get here, we had a problem writing the file */
-	free(scanline);
-	png_destroy_write_struct(&png_ptr, &info_ptr);
-	return 0;
-    }
     png_set_error_fn(png_ptr, NULL, my_png_error, my_png_warning);
 
     /* I/O initialization functions is REQUIRED */
@@ -286,6 +274,12 @@ int R_SaveAsPng(void *d, int width, int height,
 
     /* It is REQUIRED to call this to finish writing the rest of the file */
     png_write_end(png_ptr, info_ptr);
+    } catch (const PngWriteError&) {
+	/* If we get here, we had a problem writing the file */
+	free(scanline);
+	png_destroy_write_struct(&png_ptr, &info_ptr);
+	return 0;
+    }
 
     /* clean up after the write, and free any memory allocated */
     free(scanline);
@@ -312,16 +306,8 @@ int R_SaveAsPng(void *d, int width, int height,
 #undef HAVE_STDDEF_H
 #undef HAVE_STDLIB_H
 #include <jpeglib.h>
-#include <csetjmp>
 
-/* Here's the extended error handler struct */
-
-struct my_error_mgr {
-    struct jpeg_error_mgr pub;	/* "public" fields */
-    jmp_buf setjmp_buffer;	/* for return to caller */
-};
-
-typedef struct my_error_mgr *my_error_ptr;
+struct JpegWriteError {};
 
 /*
  * Here's the routine that will replace the standard error_exit method:
@@ -329,14 +315,10 @@ typedef struct my_error_mgr *my_error_ptr;
 
 NORET static void my_error_exit(j_common_ptr cinfo)
 {
-    /* cinfo->err really points to a my_error_mgr struct, so coerce pointer */
-    my_error_ptr myerr = (my_error_ptr) cinfo->err;
-
     /* Always display the message. */
     (*cinfo->err->output_message) (cinfo);
 
-    /* Return control to the setjmp point */
-    longjmp(myerr->setjmp_buffer, 1);
+    throw JpegWriteError{};
 }
 
 /* We also replace the output method */
@@ -358,7 +340,7 @@ int R_SaveAsJpeg(void *d, int width, int height,
 		int bgr, int quality, FILE *outfile, int res)
 {
     struct jpeg_compress_struct cinfo;
-    struct my_error_mgr jerr;
+    struct jpeg_error_mgr jerr;
     /* More stuff */
     JSAMPLE *pscanline, *scanline = (JSAMPLE *) calloc(3*width,sizeof(JSAMPLE));
     int i, j;
@@ -381,19 +363,10 @@ int R_SaveAsJpeg(void *d, int width, int height,
      * We set up the normal JPEG error routines, then override error_exit
      * and output_message
      */
-    cinfo.err = jpeg_std_error(&jerr.pub);
-    jerr.pub.error_exit = my_error_exit ;
-    jerr.pub.output_message = my_output_message ;
-    /* Establish the setjmp return context for my_error_exit to use. */
-    if (setjmp(jerr.setjmp_buffer)) {
-	/* If we get here, the JPEG code has signaled an error.
-	 * We need to clean up the JPEG object, close the input file, and return.
-	 */
-	jpeg_destroy_compress(&cinfo);
-	free(scanline);
-	if (outfile) fclose(outfile);
-	return 0;
-    }
+    cinfo.err = jpeg_std_error(&jerr);
+    jerr.error_exit = my_error_exit ;
+    jerr.output_message = my_output_message ;
+    try {
     /* Now we can initialize the JPEG compression object. */
     jpeg_create_compress(&cinfo);
 
@@ -441,7 +414,15 @@ int R_SaveAsJpeg(void *d, int width, int height,
     /* This is an important step since it will release a good deal of memory. */
     free(scanline);
     jpeg_destroy_compress(&cinfo);
-
+    } catch (const JpegWriteError&) {
+	/* If we get here, the JPEG code has signaled an error.
+	 * We need to clean up the JPEG object, close the input file, and return.
+	 */
+	jpeg_destroy_compress(&cinfo);
+	free(scanline);
+	if (outfile) fclose(outfile);
+	return 0;
+    }
 
     /* And we're done! */
     return 1;
