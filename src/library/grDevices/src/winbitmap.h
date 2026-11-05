@@ -16,21 +16,17 @@
  *  along with this program; if not, a copy is available at
  *  https://www.R-project.org/Licenses/
  */
-extern int 
-R_SaveAsPng(void  *d, int width, int height,
+extern int R_SaveAsPng(void  *d, int width, int height,
 	    unsigned int (*gp)(void *, int, int),
 	    int bgr, FILE *fp, unsigned int transparent, int res);
-extern int
-R_SaveAsJpeg(void  *d, int width, int height,
+extern int R_SaveAsJpeg(void  *d, int width, int height,
 	     unsigned int (*gp)(void *, int, int),
 	     int bgr, int quality, FILE *outfile, int res);
-extern int
-R_SaveAsTIFF(void  *d, int width, int height,
+extern int R_SaveAsTIFF(void  *d, int width, int height,
 	     unsigned int (*gp)(void *, int, int),
 	     int bgr, const char *outfile, int res, int compression);
-extern int
-R_SaveAsBmp(void  *d, int width, int height,
+extern int R_SaveAsBmp(void  *d, int width, int height,
 	    unsigned int (*gp)(void *, int, int), int bgr, FILE *fp, int res);
-const char * R_pngVersion(void);
-const char * R_jpegVersion(void);
-const char * R_tiffVersion(void);
+const char *R_pngVersion(void);
+const char *R_jpegVersion(void);
+const char *R_tiffVersion(void);

@@ -81,11 +81,6 @@ SEXP setGraphicsEventEnv(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #ifdef _WIN32
-// FIXME headers
-SEXP bringtotop(SEXP sdev, SEXP sstay);
-SEXP msgwindow(SEXP sdev, SEXP stype);
-
-
 SEXP bringToTop(SEXP sdev, SEXP sstay)
 {
     return bringtotop(sdev, sstay);

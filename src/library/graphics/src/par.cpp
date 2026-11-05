@@ -688,7 +688,7 @@ static SEXP Query(const char *what, pGEDevDesc dd)
     SEXP value;
 
     if (streql(what, "adj")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->adj;
     }
     else if (streql(what, "ann")) {
@@ -707,27 +707,27 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	value = mkString(buf);
     }
     else if (streql(what, "cex")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->cexbase;
     }
     else if (streql(what, "cex.main")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->cexmain;
     }
     else if (streql(what, "cex.lab")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->cexlab;
     }
     else if (streql(what, "cex.sub")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->cexsub;
     }
     else if (streql(what, "cex.axis")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->cexaxis;
     }
     else if (streql(what, "cin")) {
-	value = allocVector(REALSXP, 2);
+	value = RealVector::create(2);
 	REAL(value)[0] = dpptr(dd)->scale * dd->dev->cra[0] * dd->dev->ipr[0];
 	REAL(value)[1] = dpptr(dd)->scale * dd->dev->cra[1] * dd->dev->ipr[1];
     }
@@ -747,20 +747,20 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	value = mkString(col2name(dpptr(dd)->colaxis));
     }
     else if (streql(what, "cra")) {
-	value = allocVector(REALSXP, 2);
+	value = RealVector::create(2);
 	REAL(value)[0] = dpptr(dd)->scale * dd->dev->cra[0];
 	REAL(value)[1] = dpptr(dd)->scale * dd->dev->cra[1];
     }
     else if (streql(what, "crt")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->crt;
     }
     else if (streql(what, "csi")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = GConvertYUnits(1.0, CHARS, INCHES, dd);
     }
     else if (streql(what, "cxy")) {
-	value = allocVector(REALSXP, 2);
+	value = RealVector::create(2);
 	/* == par("cin") / par("pin") : */
 	// prevent overflow in diff(usr): divide & multiply by 2 :
 	REAL(value)[0] = ldexp(
@@ -773,12 +773,12 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	    * (ldexp(dpptr(dd)->usr[3],-1) - ldexp(dpptr(dd)->usr[2],-1)), 1);
     }
     else if (streql(what, "din")) {
-	value = allocVector(REALSXP, 2);
+	value = RealVector::create(2);
 	REAL(value)[0] = GConvertXUnits(1.0, NDC, INCHES, dd);
 	REAL(value)[1] = GConvertYUnits(1.0, NDC, INCHES, dd);
     }
     else if (streql(what, "err")) {
-	value = allocVector(INTSXP, 1);
+	value = IntVector::create(1);
 	INTEGER(value)[0] = dpptr(dd)->err;
     }
     else if (streql(what, "family")) {
@@ -788,96 +788,96 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	value = mkString(col2name(dpptr(dd)->fg));
     }
     else if (streql(what, "fig")) {
-	value = allocVector(REALSXP, 4);
+	value = RealVector::create(4);
 	REAL(value)[0] = dpptr(dd)->fig[0];
 	REAL(value)[1] = dpptr(dd)->fig[1];
 	REAL(value)[2] = dpptr(dd)->fig[2];
 	REAL(value)[3] = dpptr(dd)->fig[3];
     }
     else if (streql(what, "fin")) {
-	value = allocVector(REALSXP, 2);
+	value = RealVector::create(2);
 	REAL(value)[0] = dpptr(dd)->fin[0];
 	REAL(value)[1] = dpptr(dd)->fin[1];
     }
     else if (streql(what, "font")) {
-	value = allocVector(INTSXP, 1);
+	value = IntVector::create(1);
 	INTEGER(value)[0] = dpptr(dd)->font;
     }
     else if (streql(what, "font.main")) {
-	value = allocVector(INTSXP, 1);
+	value = IntVector::create(1);
 	INTEGER(value)[0] = dpptr(dd)->fontmain;
     }
     else if (streql(what, "font.lab")) {
-	value = allocVector(INTSXP, 1);
+	value = IntVector::create(1);
 	INTEGER(value)[0] = dpptr(dd)->fontlab;
     }
     else if (streql(what, "font.sub")) {
-	value = allocVector(INTSXP, 1);
+	value = IntVector::create(1);
 	INTEGER(value)[0] = dpptr(dd)->fontsub;
     }
     else if (streql(what, "font.axis")) {
-	value = allocVector(INTSXP, 1);
+	value = IntVector::create(1);
 	INTEGER(value)[0] = dpptr(dd)->fontaxis;
     }
     else if (streql(what, "lab")) {
-	value = allocVector(INTSXP, 3);
+	value = IntVector::create(3);
 	INTEGER(value)[0] = dpptr(dd)->lab[0];
 	INTEGER(value)[1] = dpptr(dd)->lab[1];
 	INTEGER(value)[2] = dpptr(dd)->lab[2];
     }
     else if (streql(what, "las")) {
-	value = allocVector(INTSXP, 1);
+	value = IntVector::create(1);
 	INTEGER(value)[0] = dpptr(dd)->las;
     }
     else if (streql(what, "lend")) {
 	value = GE_LENDget(dpptr(dd)->lend);
     }
     else if (streql(what, "lheight")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->lheight;
     }
     else if (streql(what, "ljoin")) {
 	value = GE_LJOINget(dpptr(dd)->ljoin);
     }
     else if (streql(what, "lmitre")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->lmitre;
     }
     else if (streql(what, "lty")) {
 	value = GE_LTYget(dpptr(dd)->lty);
     }
     else if (streql(what, "lwd")) {
-	value =	 allocVector(REALSXP, 1);
+	value =	 RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->lwd;
     }
     else if (streql(what, "mai")) {
-	value = allocVector(REALSXP, 4);
+	value = RealVector::create(4);
 	REAL(value)[0] = dpptr(dd)->mai[0];
 	REAL(value)[1] = dpptr(dd)->mai[1];
 	REAL(value)[2] = dpptr(dd)->mai[2];
 	REAL(value)[3] = dpptr(dd)->mai[3];
     }
     else if (streql(what, "mar")) {
-	value = allocVector(REALSXP, 4);
+	value = RealVector::create(4);
 	REAL(value)[0] = dpptr(dd)->mar[0];
 	REAL(value)[1] = dpptr(dd)->mar[1];
 	REAL(value)[2] = dpptr(dd)->mar[2];
 	REAL(value)[3] = dpptr(dd)->mar[3];
     }
     else if (streql(what, "mex")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->mex;
     }
     /* NOTE that if a complex layout has been specified */
     /* then this simple information may not be very useful. */
     else if (streql(what, "mfrow") || streql(what, "mfcol")) {
-	value = allocVector(INTSXP, 2);
+	value = IntVector::create(2);
 	INTEGER(value)[0] = dpptr(dd)->numrows;
 	INTEGER(value)[1] = dpptr(dd)->numcols;
     }
     else if (streql(what, "mfg")) {
 	int row, col;
-	value = allocVector(INTSXP, 4);
+	value = IntVector::create(4);
 	currentFigureLocation(&row, &col, dd);
 	INTEGER(value)[0] = row+1;
 	INTEGER(value)[1] = col+1;
@@ -885,35 +885,35 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	INTEGER(value)[3] = dpptr(dd)->numcols;
     }
     else if (streql(what, "mgp")) {
-	value = allocVector(REALSXP, 3);
+	value = RealVector::create(3);
 	REAL(value)[0] = dpptr(dd)->mgp[0];
 	REAL(value)[1] = dpptr(dd)->mgp[1];
 	REAL(value)[2] = dpptr(dd)->mgp[2];
     }
     else if (streql(what, "mkh")) {
 	/* Unused in R, but settable */
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->mkh;
     }
     else if (streql(what, "new")) {
 	value = LogicalVector::createScalar(dpptr(dd)->newplot);
     }
     else if (streql(what, "oma")) {
-	value = allocVector(REALSXP, 4);
+	value = RealVector::create(4);
 	REAL(value)[0] = dpptr(dd)->oma[0];
 	REAL(value)[1] = dpptr(dd)->oma[1];
 	REAL(value)[2] = dpptr(dd)->oma[2];
 	REAL(value)[3] = dpptr(dd)->oma[3];
     }
     else if (streql(what, "omd")) {
-	value = allocVector(REALSXP, 4);
+	value = RealVector::create(4);
 	REAL(value)[0] = dpptr(dd)->omd[0];
 	REAL(value)[1] = dpptr(dd)->omd[1];
 	REAL(value)[2] = dpptr(dd)->omd[2];
 	REAL(value)[3] = dpptr(dd)->omd[3];
     }
     else if (streql(what, "omi")) {
-	value = allocVector(REALSXP, 4);
+	value = RealVector::create(4);
 	REAL(value)[0] = dpptr(dd)->omi[0];
 	REAL(value)[1] = dpptr(dd)->omi[1];
 	REAL(value)[2] = dpptr(dd)->omi[2];
@@ -948,19 +948,19 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	}
     }
     else if (streql(what, "pin")) {
-	value = allocVector(REALSXP, 2);
+	value = RealVector::create(2);
 	REAL(value)[0] = dpptr(dd)->pin[0];
 	REAL(value)[1] = dpptr(dd)->pin[1];
     }
     else if (streql(what, "plt")) {
-	value = allocVector(REALSXP, 4);
+	value = RealVector::create(4);
 	REAL(value)[0] = dpptr(dd)->plt[0];
 	REAL(value)[1] = dpptr(dd)->plt[1];
 	REAL(value)[2] = dpptr(dd)->plt[2];
 	REAL(value)[3] = dpptr(dd)->plt[3];
     }
     else if (streql(what, "ps")) {
-	value = allocVector(INTSXP, 1);
+	value = IntVector::create(1);
 	/* was reporting unscaled prior to 2.7.0 */
 	INTEGER(value)[0] = (int)(dpptr(dd)->ps * dpptr(dd)->scale);
     }
@@ -971,23 +971,23 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	value = mkString(buf);
     }
     else if (streql(what, "smo")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->smo;
     }
     else if (streql(what, "srt")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->srt;
     }
     else if (streql(what, "tck")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->tck;
     }
     else if (streql(what, "tcl")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dpptr(dd)->tcl;
     }
     else if (streql(what, "usr")) {
-	value = allocVector(REALSXP, 4);
+	value = RealVector::create(4);
 	if (gpptr(dd)->xlog) {
 	    REAL(value)[0] = gpptr(dd)->logusr[0];
 	    REAL(value)[1] = gpptr(dd)->logusr[1];
@@ -1006,7 +1006,7 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	}
     }
     else if (streql(what, "xaxp")) {
-	value = allocVector(REALSXP, 3);
+	value = RealVector::create(3);
 	REAL(value)[0] = dpptr(dd)->xaxp[0];
 	REAL(value)[1] = dpptr(dd)->xaxp[1];
 	REAL(value)[2] = dpptr(dd)->xaxp[2];
@@ -1034,7 +1034,7 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	    LOGICAL(value)[0] = dpptr(dd)->xpd;
     }
     else if (streql(what, "yaxp")) {
-	value = allocVector(REALSXP, 3);
+	value = RealVector::create(3);
 	REAL(value)[0] = dpptr(dd)->yaxp[0];
 	REAL(value)[1] = dpptr(dd)->yaxp[1];
 	REAL(value)[2] = dpptr(dd)->yaxp[2];
@@ -1052,7 +1052,7 @@ static SEXP Query(const char *what, pGEDevDesc dd)
 	value = mkString(buf);
     }
     else if (streql(what, "ylbias")) {
-	value = allocVector(REALSXP, 1);
+	value = RealVector::create(1);
 	REAL(value)[0] = dd->dev->yLineBias;
     }
     else if (streql(what, "ylog")) {
@@ -1084,11 +1084,10 @@ SEXP C_par(SEXP call, SEXP op, SEXP args, SEXP rho)
     nargs = length(args);
     if (isNewList(args)) {
 	SEXP oldnames, newnames, tag, val;
-	int i;
 	PROTECT(newnames = allocVector(STRSXP, nargs));
 	PROTECT(value = allocVector(VECSXP, nargs));
 	oldnames = getAttrib(args, R_NamesSymbol);
-	for (i = 0 ; i < nargs ; i++) {
+	for (int i = 0 ; i < nargs ; i++) {
 	    if (oldnames != R_NilValue)
 		tag = STRING_ELT(oldnames, i);
 	    else

@@ -60,6 +60,8 @@ SEXP devga(SEXP);
 SEXP savePlot(SEXP);
 SEXP bringToTop(SEXP, SEXP);
 SEXP msgWindow(SEXP, SEXP);
+SEXP bringtotop(SEXP sdev, SEXP sstay);
+SEXP msgwindow(SEXP sdev, SEXP stype);
 #endif
 
 SEXP devcap(SEXP args);
@@ -113,4 +115,3 @@ SEXP setMask(SEXP args);
 SEXP defineGroup(SEXP args);
 SEXP useGroup(SEXP args);
 SEXP devUp(SEXP args);
-SEXP stroke(SEXP args);

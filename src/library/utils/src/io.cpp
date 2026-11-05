@@ -92,12 +92,12 @@ typedef struct {
 /* If mode = 0 use for numeric fields where "" is NA
    If mode = 1 use for character fields where "" is verbatim unless
    na.strings includes "" */
-static R_INLINE bool isNAstring(const char *buf, int mode, LocalData *d)
+static R_INLINE bool isNAstring(const char *buf, bool mode, LocalData *d)
 {
-    if(!mode && strlen(buf) == 0) return 1;
+    if(!mode && strlen(buf) == 0) return true;
     for (int i = 0; i < length(d->NAstrings); i++)
-	if (streql(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return 1;
-    return 0;
+	if (streql(CHAR(STRING_ELT(d->NAstrings, i)), buf)) return true;
+    return false;
 }
 
 
@@ -614,7 +614,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
     for (i = 0; i < len; i++) {
 	tmp = CHAR(STRING_ELT(cvec, i));
 	if (!(STRING_ELT(cvec, i) == NA_STRING || strlen(tmp) == 0
-	      || isNAstring(tmp, 1, &data) || isBlankString(tmp)))
+	      || isNAstring(tmp, true, &data) || isBlankString(tmp)))
 	    break;
     }
     if (i < len) { // Found non-NA entry; use it to screen:
@@ -626,7 +626,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (i = 0; i < len; i++) {
 	    tmp = CHAR(STRING_ELT(cvec, i));
 	    if (STRING_ELT(cvec, i) == NA_STRING || strlen(tmp) == 0
-		|| isNAstring(tmp, 1, &data) || isBlankString(tmp))
+		|| isNAstring(tmp, true, &data) || isBlankString(tmp))
 		LOGICAL(rval)[i] = NA_LOGICAL;
 	    else {
 		if (streql(tmp, "F") || streql(tmp, "FALSE"))
@@ -648,7 +648,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (i = 0; i < len; i++) {
 	    tmp = CHAR(STRING_ELT(cvec, i));
 	    if (STRING_ELT(cvec, i) == NA_STRING || strlen(tmp) == 0
-		|| isNAstring(tmp, 1, &data) || isBlankString(tmp))
+		|| isNAstring(tmp, true, &data) || isBlankString(tmp))
 		INTEGER(rval)[i] = NA_INTEGER;
 	    else {
 		INTEGER(rval)[i] = Strtoi(tmp, 10);
@@ -667,7 +667,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (i = 0; i < len; i++) {
 	    tmp = CHAR(STRING_ELT(cvec, i));
 	    if (STRING_ELT(cvec, i) == NA_STRING || strlen(tmp) == 0
-		|| isNAstring(tmp, 1, &data) || isBlankString(tmp))
+		|| isNAstring(tmp, true, &data) || isBlankString(tmp))
 		REAL(rval)[i] = NA_REAL;
 	    else {
 		REAL(rval)[i] = Strtod(tmp, &endp, false, &data, i_exact);
@@ -686,7 +686,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	for (i = 0; i < len; i++) {
 	    tmp = CHAR(STRING_ELT(cvec, i));
 	    if (STRING_ELT(cvec, i) == NA_STRING || strlen(tmp) == 0
-		|| isNAstring(tmp, 1, &data) || isBlankString(tmp))
+		|| isNAstring(tmp, true, &data) || isBlankString(tmp))
 		COMPLEX(rval)[i].r = COMPLEX(rval)[i].i = NA_REAL;
 	    else {
 		COMPLEX(rval)[i] = strtoc(tmp, &endp, false, &data, i_exact);
@@ -705,7 +705,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (asIs) {
 	    PROTECT(rval = duplicate(cvec));
 	    for (i = 0; i < len; i++)
-		if(isNAstring(CHAR(STRING_ELT(rval, i)), 1, &data))
+		if(isNAstring(CHAR(STRING_ELT(rval, i)), true, &data))
 		    SET_STRING_ELT(rval, i, NA_STRING);
 	}
 	else {
@@ -714,7 +714,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (i = 0; i < len; i++) {
 		/* <NA> is never to be a level here */
 		if (STRING_ELT(cvec, i) == NA_STRING) continue;
-		if (LOGICAL(dup)[i] == 0 && !isNAstring(CHAR(STRING_ELT(cvec, i)), 1, &data))
+		if (LOGICAL(dup)[i] == 0 && !isNAstring(CHAR(STRING_ELT(cvec, i)), true, &data))
 		    j++;
 	    }
 
@@ -722,7 +722,7 @@ SEXP typeconvert(SEXP call, SEXP op, SEXP args, SEXP env)
 	    j = 0;
 	    for (i = 0; i < len; i++) {
 		if (STRING_ELT(cvec, i) == NA_STRING) continue;
-		if (LOGICAL(dup)[i] == 0 && !isNAstring(CHAR(STRING_ELT(cvec, i)), 1, &data))
+		if (LOGICAL(dup)[i] == 0 && !isNAstring(CHAR(STRING_ELT(cvec, i)), true, &data))
 		    SET_STRING_ELT(levs, j++, STRING_ELT(cvec, i));
 	    }
 

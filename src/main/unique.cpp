@@ -47,6 +47,7 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/Symbol.hpp>
 #include <CXXR/ExternalPointer.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <Internal.h>
@@ -548,7 +549,7 @@ static void HashTableSetup(SEXP x, HashData *d, R_xlen_t nmax)
     } else
 #endif
     {
-	d->HashTable = allocVector(INTSXP, (R_xlen_t) d->M);
+	d->HashTable = IntVector::create((R_xlen_t) d->M);
 	for (hlen i = 0; i < d->M; i++) HTDATA_INT(d)[i] = NIL;
     }
 }
@@ -1295,7 +1296,7 @@ static SEXP HashLookup(SEXP table, SEXP x, HashData *d)
     R_xlen_t i, n;
 
     n = XLENGTH(x);
-    PROTECT(ans = allocVector(INTSXP, n));
+    PROTECT(ans = IntVector::create(n));
     int *pa = INTEGER0(ans);
 
     switch (TYPEOF(x)) {
@@ -1377,11 +1378,11 @@ SEXP match5(SEXP itable, SEXP ix, int nmatch, SEXP incomp, SEXP env)
 {
     R_xlen_t n = xlength(ix);
     /* handle zero length arguments */
-    if (n == 0) return allocVector(INTSXP, 0);
+    if (n == 0) return IntVector::create(0);
 
     SEXP ans;
     if (length(itable) == 0) {
-	ans = allocVector(INTSXP, n);
+	ans = IntVector::create(n);
 	int *pa = INTEGER0(ans);
 	for (R_xlen_t i = 0; i < n; i++) pa[i] = nmatch;
 	return ans;
@@ -1644,7 +1645,7 @@ attribute_hidden SEXP do_pmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 
     const char **in = (const char **) R_alloc((size_t) n_input,  sizeof(char *));
     const char **tar = (const char **) R_alloc((size_t) n_target, sizeof(char *));
-    PROTECT(ans = allocVector(INTSXP, n_input));
+    PROTECT(ans = IntVector::create(n_input));
     int *ians = INTEGER0(ans);
     if(useBytes) {
 	for(R_xlen_t i = 0; i < n_input; i++) {
@@ -1782,7 +1783,7 @@ attribute_hidden SEXP do_charmatch(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
-    PROTECT(ans = allocVector(INTSXP, n_input));
+    PROTECT(ans = IntVector::create(n_input));
     int *ians = INTEGER0(ans);
 
     CXXR::RAllocStack::Scope rscope;  // prudence: .Internal does this too.
@@ -2129,7 +2130,7 @@ static SEXP rowsum_df(SEXP x, SEXP g, SEXP uniqueg, SEXP snarm, SEXP rn)
 	    UNPROTECT(1);
 	    break;
 	case INTSXP:
-	    PROTECT(col = allocVector(INTSXP, ng));
+	    PROTECT(col = IntVector::create(ng));
 	    Memzero(INTEGER0(col), ng);
 	    for(R_xlen_t j = 0; j < n; j++) {
 		int xj = INTEGER_ELT(xcol, j);
@@ -2195,7 +2196,7 @@ static SEXP duplicated2(SEXP x, HashData *d)
     int n = LENGTH(x);
     HashTableSetup(x, d, NA_INTEGER);
     PROTECT(d->HashTable);
-    PROTECT(ans = allocVector(INTSXP, n));
+    PROTECT(ans = IntVector::create(n));
 
     int *h = HTDATA_INT(d);
     int *v = INTEGER0(ans);
@@ -2289,7 +2290,7 @@ static void HashTableSetup1(SEXP x, HashData *d)
     d->isLong = FALSE;
 #endif
     MKsetup(XLENGTH(x), d, NA_INTEGER);
-    d->HashTable = allocVector(INTSXP, (R_xlen_t) d->M);
+    d->HashTable = IntVector::create((R_xlen_t) d->M);
     for (hlen i = 0; i < d->M; i++) HTDATA_INT(d)[i] = NIL;
 }
 
@@ -2341,7 +2342,7 @@ attribute_hidden SEXP do_sample2(SEXP call, SEXP op, SEXP args, SEXP env)
 		if(!isDuplicated(ans, i, &data)) break;
 	    }
    } else {
-	ans = PROTECT(allocVector(INTSXP, k));
+	ans = PROTECT(IntVector::create(k));
 	int *iy = INTEGER0(ans);
 	HashTableSetup(ans, &data, NA_INTEGER);
 	PROTECT(data.HashTable);
@@ -2519,7 +2520,7 @@ R_hashtab_type R_mkhashtab(int type, int K)
     default: error("%s", _("bad hash table type"));
     }
     SEXP table = PROTECT(allocVector(VECSXP, size));
-    SEXP meta = PROTECT(allocVector(INTSXP, HT_META_SIZE));
+    SEXP meta = PROTECT(IntVector::create(HT_META_SIZE));
     R_hashtab_type val;
     val.cell = R_MakeExternalPtr(NULL, meta, table);
     HT_VALIDATE(val);

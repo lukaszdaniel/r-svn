@@ -366,7 +366,7 @@ SEXP unitData(SEXP unit, int index);
 
 int unitLength(SEXP u);
 
-extern int L_nullLayoutMode;
+// extern int L_nullLayoutMode;
 
 double pureNullUnitValue(SEXP unit, int index);
 
