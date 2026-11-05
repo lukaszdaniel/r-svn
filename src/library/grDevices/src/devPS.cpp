@@ -35,6 +35,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 
 #include <R_ext/Riconv.h>
@@ -57,6 +58,7 @@ extern int errno;
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 static void mbcsToSbcs(const char *in, char *out, const char *encoding, int enc, int silent);
 
@@ -5615,13 +5617,13 @@ static SEXP addShading(SEXP pattern, PDFDesc *pd)
             int maskNum = addShadingSoftMask(pattern, pd);
             if (maskNum >= 0) {
                 addDefnContent(defNum, maskNum, pd);
-                PROTECT(ref = allocVector(INTSXP, 2));
+                PROTECT(ref = IntVector::create(2));
                 INTEGER(ref)[0] = defNum;
                 INTEGER(ref)[1] = maskNum;
                 UNPROTECT(1);
             }
         } else {
-            PROTECT(ref = allocVector(INTSXP, 1));
+            PROTECT(ref = IntVector::create(1));
             INTEGER(ref)[0] = defNum;
             UNPROTECT(1);
         }
@@ -5766,7 +5768,7 @@ static SEXP addTiling(SEXP pattern, PDFDesc *pd)
     int defNum = newTiling(pattern, pd);
 
     if (defNum >= 0) {
-        PROTECT(ref = allocVector(INTSXP, 1));
+        PROTECT(ref = IntVector::create(1));
         INTEGER(ref)[0] = defNum;
         UNPROTECT(1);
     }
@@ -6004,7 +6006,7 @@ static SEXP addMask(SEXP mask, SEXP ref, PDFDesc *pd)
             /* Generate new mask */
             index = newMask(mask, pd);
             if (index >= 0) {
-                PROTECT(newref = allocVector(INTSXP, 1));
+                PROTECT(newref = IntVector::create(1));
                 INTEGER(newref)[0] = index;
                 UNPROTECT(1);
             }
@@ -9620,7 +9622,7 @@ static SEXP PDF_setClipPath(SEXP path, SEXP ref, pDevDesc dd) {
             int index = newPath(path, PDFclipPath, pd);
             if (index >= 0) {
                 PDFwriteClipPath(index, pd);
-                PROTECT(newref = allocVector(INTSXP, 1));
+                PROTECT(newref = IntVector::create(1));
                 INTEGER(newref)[0] = index;
                 UNPROTECT(1);
             }
@@ -9660,7 +9662,7 @@ static SEXP PDF_defineGroup(SEXP source, int op, SEXP destination,
     if (!pd->offline) {
         int index = newGroup(source, op, destination, pd);
         if (index >= 0) {
-            PROTECT(ref = allocVector(INTSXP, 1));
+            PROTECT(ref = IntVector::create(1));
             INTEGER(ref)[0] = index;
             UNPROTECT(1);
         }
@@ -9798,25 +9800,25 @@ static void PDF_fillStroke(SEXP path, int rule,
 static SEXP PDF_capabilities(SEXP capabilities) {
     SEXP patterns, clippingPaths, masks, compositing, transforms, paths, glyphs;
 
-    PROTECT(patterns = allocVector(INTSXP, 3));
+    PROTECT(patterns = IntVector::create(3));
     INTEGER(patterns)[0] = R_GE_linearGradientPattern;
     INTEGER(patterns)[1] = R_GE_radialGradientPattern;
     INTEGER(patterns)[2] = R_GE_tilingPattern;
     SET_VECTOR_ELT(capabilities, R_GE_capability_patterns, patterns);
     UNPROTECT(1);
 
-    PROTECT(clippingPaths = allocVector(INTSXP, 1));
+    PROTECT(clippingPaths = IntVector::create(1));
     INTEGER(clippingPaths)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_clippingPaths, clippingPaths);
     UNPROTECT(1);
 
-    PROTECT(masks = allocVector(INTSXP, 2));
+    PROTECT(masks = IntVector::create(2));
     INTEGER(masks)[0] = R_GE_alphaMask;
     INTEGER(masks)[1] = R_GE_luminanceMask;
     SET_VECTOR_ELT(capabilities, R_GE_capability_masks, masks);
     UNPROTECT(1);
 
-    PROTECT(compositing = allocVector(INTSXP, 11));
+    PROTECT(compositing = IntVector::create(11));
     INTEGER(compositing)[0] = R_GE_compositeMultiply;
     INTEGER(compositing)[1] = R_GE_compositeScreen;
     INTEGER(compositing)[2] = R_GE_compositeOverlay;
@@ -9831,17 +9833,17 @@ static SEXP PDF_capabilities(SEXP capabilities) {
     SET_VECTOR_ELT(capabilities, R_GE_capability_compositing, compositing);
     UNPROTECT(1);
 
-    PROTECT(transforms = allocVector(INTSXP, 1));
+    PROTECT(transforms = IntVector::create(1));
     INTEGER(transforms)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_transformations, transforms);
     UNPROTECT(1);
 
-    PROTECT(paths = allocVector(INTSXP, 1));
+    PROTECT(paths = IntVector::create(1));
     INTEGER(paths)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_paths, paths);
     UNPROTECT(1);
 
-    PROTECT(glyphs = allocVector(INTSXP, 1));
+    PROTECT(glyphs = IntVector::create(1));
     INTEGER(glyphs)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_glyphs, glyphs);
     UNPROTECT(1);

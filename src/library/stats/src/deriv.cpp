@@ -29,6 +29,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/Closure.hpp>
+#include <CXXR/ExpressionVector.hpp>
 #include <Defn.h>  // for deparse1
 #include "localization.h"
 #include "statsErr.h"
@@ -1251,7 +1252,7 @@ SEXP deriv(SEXP args)
 	UNPROTECT(2);
     }
     else {
-	funarg = allocVector(EXPRSXP, 1);
+	funarg = ExpressionVector::create(1);
 	SET_XVECTOR_ELT(funarg, 0, exprlist);
 	/* funarg = lang2(install("expression"), exprlist); */
     }

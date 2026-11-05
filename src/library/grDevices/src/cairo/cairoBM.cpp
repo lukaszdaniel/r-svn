@@ -40,6 +40,7 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 
 #ifdef Win32
 //#define HAVE_PANGOCAIRO 1
@@ -66,6 +67,7 @@
 #undef TRUE
 
 using namespace R;
+using namespace CXXR;
 
 static double RedGamma	 = 1.0;
 static double GreenGamma = 1.0;

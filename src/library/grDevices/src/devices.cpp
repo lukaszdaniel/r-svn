@@ -32,6 +32,7 @@
 #endif
 
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Graphics.h>
 #include <GraphicsBase.h> 
@@ -40,6 +41,7 @@
 #include "localization.h"
 
 using namespace R;
+using namespace CXXR;
 
 #define checkArity_length 			\
     args = CDR(args);		       	       	\
@@ -152,34 +154,34 @@ SEXP devcap(SEXP args)
     args = CDR(args);
     capabilities = CAR(args);
 
-    PROTECT(trans = allocVector(INTSXP, 1));
+    PROTECT(trans = IntVector::create(1));
     INTEGER(trans)[0] = dd->haveTransparency;
     SET_VECTOR_ELT(capabilities, R_GE_capability_semiTransparency, trans);
     UNPROTECT(1);
 
-    PROTECT(transbg = allocVector(INTSXP, 1));
+    PROTECT(transbg = IntVector::create(1));
     INTEGER(transbg)[0] = dd->haveTransparentBg;
     SET_VECTOR_ELT(capabilities, 
                    R_GE_capability_transparentBackground, transbg);
     UNPROTECT(1);
     
     /* These will be NULL if the device does not define them */
-    PROTECT(raster = allocVector(INTSXP, 1));
+    PROTECT(raster = IntVector::create(1));
     INTEGER(raster)[0] = (dd->raster != NULL) ? dd->haveRaster : 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_rasterImage, raster);
     UNPROTECT(1);
-    PROTECT(capture = allocVector(INTSXP, 1));
+    PROTECT(capture = IntVector::create(1));
     INTEGER(capture)[0] = (dd->cap != NULL) ? dd->haveCapture : 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_capture, capture);
     UNPROTECT(1);
-    PROTECT(locator = allocVector(INTSXP, 1));
+    PROTECT(locator = IntVector::create(1));
     INTEGER(locator)[0] = (dd->locator != NULL) ? dd->haveLocator : 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_locator, locator);
     UNPROTECT(1);
 
     /* FIXME:  there should be a way for a device to declare its own
                events, and return information on how to set them */
-    PROTECT(events = allocVector(INTSXP, 5));
+    PROTECT(events = IntVector::create(5));
     INTEGER(events)[0] = (int)(dd->canGenMouseDown);
     INTEGER(events)[1] = (int)(dd->canGenMouseMove);
     INTEGER(events)[2] = (int)(dd->canGenMouseUp);
@@ -189,25 +191,25 @@ SEXP devcap(SEXP args)
     UNPROTECT(1);
 
     /* Make conservative default guesses */
-    PROTECT(patterns = allocVector(INTSXP, 1));
+    PROTECT(patterns = IntVector::create(1));
     INTEGER(patterns)[0] = NA_INTEGER;
     SET_VECTOR_ELT(capabilities, R_GE_capability_patterns, patterns);
     UNPROTECT(1);
 
-    PROTECT(clippaths = allocVector(INTSXP, 1));
+    PROTECT(clippaths = IntVector::create(1));
     INTEGER(clippaths)[0] = NA_INTEGER;
     SET_VECTOR_ELT(capabilities, 
                    R_GE_capability_clippingPaths, clippaths);
     UNPROTECT(1);
 
-    PROTECT(masks = allocVector(INTSXP, 1));
+    PROTECT(masks = IntVector::create(1));
     INTEGER(masks)[0] = NA_INTEGER;
     SET_VECTOR_ELT(capabilities, R_GE_capability_masks, masks);
     UNPROTECT(1);
 
-    PROTECT(compositing = allocVector(INTSXP, 1));
-    PROTECT(transforms = allocVector(INTSXP, 1));
-    PROTECT(paths = allocVector(INTSXP, 1));
+    PROTECT(compositing = IntVector::create(1));
+    PROTECT(transforms = IntVector::create(1));
+    PROTECT(paths = IntVector::create(1));
     if (dd->deviceVersion < R_GE_group) {
         INTEGER(compositing)[0] = 0;
         INTEGER(transforms)[0] = 0;
@@ -222,7 +224,7 @@ SEXP devcap(SEXP args)
     SET_VECTOR_ELT(capabilities, R_GE_capability_paths, paths);
     UNPROTECT(3);
 
-    PROTECT(glyphs = allocVector(INTSXP, 1));
+    PROTECT(glyphs = IntVector::create(1));
     if (dd->deviceVersion < R_GE_glyphs) {
         INTEGER(glyphs)[0] = 0;
     } else {
@@ -231,7 +233,7 @@ SEXP devcap(SEXP args)
     SET_VECTOR_ELT(capabilities, R_GE_capability_glyphs, glyphs);
     UNPROTECT(1);
 
-    PROTECT(variableFonts = allocVector(INTSXP, 1));
+    PROTECT(variableFonts = IntVector::create(1));
     if (dd->deviceVersion < R_GE_fontVar) {
         INTEGER(variableFonts)[0] = 0;
     } else {
@@ -285,7 +287,7 @@ SEXP devcapture(SEXP args)
 		       mkChar(col2name(rint[i])));
     }
 
-    PROTECT(idim = allocVector(INTSXP, 2));
+    PROTECT(idim = IntVector::create(2));
     INTEGER(idim)[0] = nrow;
     INTEGER(idim)[1] = ncol;
     setAttrib(image, R_DimSymbol, idim);

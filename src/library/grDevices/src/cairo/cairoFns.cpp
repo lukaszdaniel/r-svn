@@ -507,7 +507,7 @@ static SEXP CairoSetClipPath(SEXP path, SEXP ref, pX11Desc xd)
             /* Create this clipping path */
             cairo_clippath = CairoCreateClipPath(path, index, xd);
             xd->clippaths[index] = cairo_clippath;
-            PROTECT(newref = allocVector(INTSXP, 1));
+            PROTECT(newref = CXXR::IntVector::create(1));
             INTEGER(newref)[0] = index;
             UNPROTECT(1);
         }
@@ -660,7 +660,7 @@ static SEXP CairoSetMask(SEXP mask, SEXP ref, pX11Desc xd)
                 }
             }
         }
-        newref = PROTECT(allocVector(INTSXP, 1));
+        newref = PROTECT(CXXR::IntVector::create(1));
         INTEGER(newref)[0] = index;
         UNPROTECT(1);
     }
@@ -842,7 +842,7 @@ static SEXP CairoDefineGroup(SEXP src, int op, SEXP dst, pX11Desc xd)
         xd->groups[index] = cairo_group;
     }
 
-    ref = PROTECT(allocVector(INTSXP, 1));
+    ref = PROTECT(CXXR::IntVector::create(1));
     INTEGER(ref)[0] = index;
     UNPROTECT(1);
 
@@ -1442,7 +1442,7 @@ static SEXP Cairo_Cap(pDevDesc dd)
     size = width*height;
 
     /* FIXME: the screen surface reference will leak if allocVector() fails */
-    PROTECT(raster = allocVector(INTSXP, size));
+    PROTECT(raster = CXXR::IntVector::create(size));
 
     /* Copy each byte of screen to an R matrix. 
      * The Cairo RGB24 needs to be converted to an R ABGR32.
@@ -1454,7 +1454,7 @@ static SEXP Cairo_Cap(pDevDesc dd)
     /* Release MY reference to the screen surface (do it here in case anything fails below) */
     cairo_surface_destroy(screen);    
 
-    PROTECT(dim = allocVector(INTSXP, 2));
+    PROTECT(dim = CXXR::IntVector::create(2));
     INTEGER(dim)[0] = height;
     INTEGER(dim)[1] = width;
     setAttrib(raster, R_DimSymbol, dim);
@@ -2087,7 +2087,7 @@ static SEXP Cairo_SetPattern(SEXP pattern, pDevDesc dd)
 {
     pX11Desc xd = (pX11Desc) dd->deviceSpecific;
     SEXP ref;
-    PROTECT(ref = allocVector(INTSXP, 1));
+    PROTECT(ref = CXXR::IntVector::create(1));
     INTEGER(ref)[0] = CairoSetPattern(pattern, xd);
     UNPROTECT(1);
     return ref;
@@ -2332,24 +2332,24 @@ static SEXP Cairo_Capabilities(SEXP capabilities) {
     SEXP patterns, clippingPaths, masks, compositing, transforms, paths, 
         glyphs, variableFonts;
 
-    PROTECT(patterns = allocVector(INTSXP, 3));
+    PROTECT(patterns = CXXR::IntVector::create(3));
     INTEGER(patterns)[0] = R_GE_linearGradientPattern;
     INTEGER(patterns)[1] = R_GE_radialGradientPattern;
     INTEGER(patterns)[2] = R_GE_tilingPattern;
     SET_VECTOR_ELT(capabilities, R_GE_capability_patterns, patterns);
     UNPROTECT(1);
 
-    PROTECT(clippingPaths = allocVector(INTSXP, 1));
+    PROTECT(clippingPaths = CXXR::IntVector::create(1));
     INTEGER(clippingPaths)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_clippingPaths, clippingPaths);
     UNPROTECT(1);
 
-    PROTECT(masks = allocVector(INTSXP, 1));
+    PROTECT(masks = CXXR::IntVector::create(1));
     INTEGER(masks)[0] = R_GE_alphaMask;
     SET_VECTOR_ELT(capabilities, R_GE_capability_masks, masks);
     UNPROTECT(1);
 
-    PROTECT(compositing = allocVector(INTSXP, 25));
+    PROTECT(compositing = CXXR::IntVector::create(25));
     INTEGER(compositing)[0] = R_GE_compositeMultiply;
     INTEGER(compositing)[1] = R_GE_compositeScreen;
     INTEGER(compositing)[2] = R_GE_compositeOverlay;
@@ -2378,22 +2378,22 @@ static SEXP Cairo_Capabilities(SEXP capabilities) {
     SET_VECTOR_ELT(capabilities, R_GE_capability_compositing, compositing);
     UNPROTECT(1);
 
-    PROTECT(transforms = allocVector(INTSXP, 1));
+    PROTECT(transforms = CXXR::IntVector::create(1));
     INTEGER(transforms)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_transformations, transforms);
     UNPROTECT(1);
 
-    PROTECT(paths = allocVector(INTSXP, 1));
+    PROTECT(paths = CXXR::IntVector::create(1));
     INTEGER(paths)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_paths, paths);
     UNPROTECT(1);
 
-    PROTECT(glyphs = allocVector(INTSXP, 1));
+    PROTECT(glyphs = CXXR::IntVector::create(1));
     INTEGER(glyphs)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_glyphs, glyphs);
     UNPROTECT(1);
 
-    PROTECT(variableFonts = allocVector(INTSXP, 1));
+    PROTECT(variableFonts = CXXR::IntVector::create(1));
     INTEGER(variableFonts)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_variableFonts, variableFonts);
     UNPROTECT(1);

@@ -26,8 +26,10 @@
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include "grid.h"
 #include "localization.h"
 
@@ -50,9 +52,9 @@ static bool deviceChanged(double devWidthCM, double devHeightCM,
 			      SEXP currentvp)
 {
     bool result = false;
-    SEXP pvpDevWidthCM, pvpDevHeightCM;
-    PROTECT(pvpDevWidthCM = VECTOR_ELT(currentvp, PVP_DEVWIDTHCM));
-    PROTECT(pvpDevHeightCM = VECTOR_ELT(currentvp, PVP_DEVHEIGHTCM));
+    GCStackRoot<> pvpDevWidthCM, pvpDevHeightCM;
+    pvpDevWidthCM = VECTOR_ELT(currentvp, PVP_DEVWIDTHCM);
+    pvpDevHeightCM = VECTOR_ELT(currentvp, PVP_DEVHEIGHTCM);
     if (fabs(REAL(pvpDevWidthCM)[0] - devWidthCM) > 1e-6) {
 	result = TRUE;
 	REAL(pvpDevWidthCM)[0] = devWidthCM;
@@ -63,7 +65,7 @@ static bool deviceChanged(double devWidthCM, double devHeightCM,
 	REAL(pvpDevHeightCM)[0] = devHeightCM;
 	SET_VECTOR_ELT(currentvp, PVP_DEVHEIGHTCM, pvpDevHeightCM);
     }
-    UNPROTECT(2);
+
     return result;
 }
 
@@ -215,7 +217,7 @@ SEXP doSetViewport(SEXP vp,
          * Record clip rect from parent, just so there are numbers there
          */
         PROTECT(parentClip = viewportClipRect(viewportParent(vp)));
-        PROTECT(currentClip = allocVector(REALSXP, 4));
+        PROTECT(currentClip = RealVector::create(4));
         REAL(currentClip)[0] = REAL(parentClip)[0];
         REAL(currentClip)[1] = REAL(parentClip)[1];
         REAL(currentClip)[2] = REAL(parentClip)[2];
@@ -351,7 +353,7 @@ SEXP doSetViewport(SEXP vp,
         /*
          * Record clip rect for revisiting this viewport
          */
-        PROTECT(currentClip = allocVector(REALSXP, 4));
+        PROTECT(currentClip = RealVector::create(4));
         REAL(currentClip)[0] = xx1;
         REAL(currentClip)[1] = yy1;
         REAL(currentClip)[2] = xx2;
@@ -391,10 +393,10 @@ SEXP doSetViewport(SEXP vp,
     /*
      * Save the current device size
      */
-    PROTECT(widthCM = allocVector(REALSXP, 1));
+    PROTECT(widthCM = RealVector::create(1));
     REAL(widthCM)[0] = devWidthCM;
     SET_VECTOR_ELT(vp, PVP_DEVWIDTHCM, widthCM);
-    PROTECT(heightCM = allocVector(REALSXP, 1));
+    PROTECT(heightCM = RealVector::create(1));
     REAL(heightCM)[0] = devHeightCM;
     SET_VECTOR_ELT(vp, PVP_DEVHEIGHTCM, heightCM);
     UNPROTECT(2);
@@ -507,31 +509,29 @@ SEXP L_setviewport(SEXP invp, SEXP hasParent)
  */
 static bool noChildren(SEXP children) 
 {
-    SEXP result, fcall;
-    PROTECT(fcall = lang2(install("no.children"),
-			  children));
-    PROTECT(result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
-    UNPROTECT(2);
+    GCStackRoot<> result, fcall;
+    fcall = lang2(install("no.children"),
+			  children);
+    result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL);
+
     return asBool(result);
 }
 
 static bool childExists(SEXP name, SEXP children) 
 {
-    SEXP result, fcall;
-    PROTECT(fcall = lang3(install("child.exists"),
-			  name, children));
-    PROTECT(result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
-    UNPROTECT(2);
+    GCStackRoot<> result, fcall;
+    fcall = lang3(install("child.exists"),
+			  name, children);
+    result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL);
     return asBool(result);
 }
 
 static SEXP childList(SEXP children) 
 {
-    SEXP result, fcall;
-    PROTECT(fcall = lang2(install("child.list"),
-			  children));
-    PROTECT(result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL)); 
-    UNPROTECT(2);
+    GCStackRoot<> result, fcall;
+    fcall = lang2(install("child.list"),
+			  children);
+    result = Rf_eval_with_gd(fcall, R_gridEvalEnv, NULL); 
     return result;    
 }
 
@@ -572,8 +572,8 @@ static SEXP findInChildren(SEXP name, SEXP strict, SEXP children, int depth)
     }
     if (!found) {
 	SEXP temp, zeroDepth;
-	PROTECT(temp = allocVector(VECSXP, 2));
-	PROTECT(zeroDepth = allocVector(INTSXP, 1));
+	PROTECT(temp = ListVector::create(2));
+	PROTECT(zeroDepth = IntVector::create(1));
 	INTEGER(zeroDepth)[0] = 0;
 	SET_VECTOR_ELT(temp, 0, zeroDepth);
 	SET_VECTOR_ELT(temp, 1, R_NilValue);
@@ -600,10 +600,10 @@ find.viewport <- function(name, pvp) {
 static SEXP findViewport(SEXP name, SEXP strict, SEXP vp, int depth) 
 {
     SEXP result, zeroDepth, curDepth;
-    PROTECT(result = allocVector(VECSXP, 2));
-    PROTECT(zeroDepth = allocVector(INTSXP, 1));
+    PROTECT(result = ListVector::create(2));
+    PROTECT(zeroDepth = IntVector::create(1));
     INTEGER(zeroDepth)[0] = 0;
-    PROTECT(curDepth = allocVector(INTSXP, 1));
+    PROTECT(curDepth = IntVector::create(1));
     INTEGER(curDepth)[0] = depth;
     /* 
      * If there are no children, we fail
@@ -764,8 +764,8 @@ static SEXP findvppathInChildren(SEXP path, SEXP name,
     }
     if (!found) {
 	SEXP temp, zeroDepth;
-	PROTECT(temp = allocVector(VECSXP, 2));
-	PROTECT(zeroDepth = allocVector(INTSXP, 1));
+	PROTECT(temp = ListVector::create(2));
+	PROTECT(zeroDepth = IntVector::create(1));
 	INTEGER(zeroDepth)[0] = 0;
 	SET_VECTOR_ELT(temp, 0, zeroDepth);
 	SET_VECTOR_ELT(temp, 1, R_NilValue);
@@ -780,10 +780,10 @@ static SEXP findvppath(SEXP path, SEXP name, SEXP strict,
 		       SEXP pathsofar, SEXP vp, int depth) 
 {
     SEXP result, zeroDepth, curDepth;
-    PROTECT(result = allocVector(VECSXP, 2));
-    PROTECT(zeroDepth = allocVector(INTSXP, 1));
+    PROTECT(result = ListVector::create(2));
+    PROTECT(zeroDepth = IntVector::create(1));
     INTEGER(zeroDepth)[0] = 0;
-    PROTECT(curDepth = allocVector(INTSXP, 1));
+    PROTECT(curDepth = IntVector::create(1));
     INTEGER(curDepth)[0] = depth;
     /* 
      * If there are no children, we fail
@@ -1340,7 +1340,6 @@ void getViewportTransform(SEXP currentvp,
 			  double *vpWidthCM, double *vpHeightCM,
 			  LTransform transform, double *rotationAngle) 
 {
-    int i, j;
     double devWidthCM, devHeightCM;
     getDeviceSize((dd), &devWidthCM, &devHeightCM) ;
     if (deviceChanged(devWidthCM, devHeightCM, currentvp)) {
@@ -1348,8 +1347,8 @@ void getViewportTransform(SEXP currentvp,
 	 */
 	calcViewportTransform(currentvp, viewportParent(currentvp), TRUE, dd); 
     }
-    for (i=0; i<3; i++)
-	for (j=0; j<3; j++)
+    for (int i=0; i<3; i++)
+	for (int j=0; j<3; j++)
 	    transform[i][j] = 
 		REAL(viewportTransform(currentvp))[i + 3*j];
     *rotationAngle = REAL(viewportRotation(currentvp))[0];
@@ -1390,7 +1389,6 @@ void getViewportTransform(SEXP currentvp,
  */
 SEXP L_convert(SEXP x, SEXP whatfrom,
 	       SEXP whatto, SEXP unitto) {
-    int i, nx;
     SEXP answer;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
@@ -1425,9 +1423,9 @@ SEXP L_convert(SEXP x, SEXP whatfrom,
 			 transform, &rotationAngle);
     getViewportContext(currentvp, &vpc);
     initGContext(currentgp, &gc, dd, gpIsScalar, &gcCache);
-    nx = unitLength(x);
-    PROTECT(answer = allocVector(REALSXP, nx));
-    for (i=0; i<nx; i++) {
+    int nx = unitLength(x);
+    PROTECT(answer = RealVector::create(nx));
+    for (int i=0; i<nx; i++) {
 	updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
         TOunit = INTEGER(unitto)[i % LENGTH(unitto)];
         FROMaxis = INTEGER(whatfrom)[0];
@@ -1612,9 +1610,9 @@ SEXP L_devLoc(SEXP x, SEXP y, SEXP device) {
     ny = unitLength(y); 
     if (ny > maxn)
 	maxn = ny;
-    PROTECT(devx = allocVector(REALSXP, maxn));
-    PROTECT(devy = allocVector(REALSXP, maxn));
-    PROTECT(result = allocVector(VECSXP, 2));
+    PROTECT(devx = RealVector::create(maxn));
+    PROTECT(devy = RealVector::create(maxn));
+    PROTECT(result = ListVector::create(2));
     for (i=0; i<maxn; i++) {
         transformLocn(x, y, i, vpc, &gc,
                       vpWidthCM, vpHeightCM,
@@ -1662,9 +1660,9 @@ SEXP L_devDim(SEXP x, SEXP y, SEXP device) {
     ny = unitLength(y); 
     if (ny > maxn)
 	maxn = ny;
-    PROTECT(devx = allocVector(REALSXP, maxn));
-    PROTECT(devy = allocVector(REALSXP, maxn));
-    PROTECT(result = allocVector(VECSXP, 2));
+    PROTECT(devx = RealVector::create(maxn));
+    PROTECT(devy = RealVector::create(maxn));
+    PROTECT(result = ListVector::create(2));
     for (i=0; i<maxn; i++) {
         transformDimn(x, y, i, vpc, &gc,
                       vpWidthCM, vpHeightCM,
@@ -1718,7 +1716,7 @@ SEXP L_layoutRegion(SEXP layoutPosRow, SEXP layoutPosCol) {
     /* 
      * The result is a numeric containing left, bottom, width, and height
      */
-    PROTECT(answer = allocVector(REALSXP, 4));
+    PROTECT(answer = RealVector::create(4));
     /* 
      * NOTE:  We are assuming here that calcViewportLocationFromLayout
      * returns the allocated region with a ("left", "bottom") 
@@ -1976,8 +1974,8 @@ static void hullEdge(double *x, double *y, int n,
         }
     }
     n = n + adjust;
-    PROTECT(xin = allocVector(REALSXP, n));
-    PROTECT(yin = allocVector(REALSXP, n));
+    PROTECT(xin = RealVector::create(n));
+    PROTECT(yin = RealVector::create(n));
     for (i=0; i<n; i++) {
         REAL(xin)[i] = xkeep[i];
         REAL(yin)[i] = ykeep[i];
@@ -2253,7 +2251,7 @@ SEXP L_lineTo(SEXP x, SEXP y, SEXP arrow)
  */
 SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow) 
 {
-    int i, j, nx, nl, start=0;
+    int start=0;
     double xold, yold;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
@@ -2286,8 +2284,8 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
     /* 
      * Number of lines 
      */
-    nl = LENGTH(index);
-    for (j=0; j<nl; j++) {
+    int nl = LENGTH(index);
+    for (int j=0; j<nl; j++) {
 	SEXP indices = VECTOR_ELT(index, j);
         updateGContext(currentgp, j, &gc, dd, gpIsScalar, &gcCache);
 	/* 
@@ -2295,13 +2293,13 @@ SEXP L_lines(SEXP x, SEXP y, SEXP index, SEXP arrow)
 	 *
 	 * x and y same length forced in R code 
 	 */
-	nx = LENGTH(indices); 
+	int nx = LENGTH(indices); 
 	/* Convert the x and y values to CM locations */
 	RAllocStack::Vector<double> xx(nx);
 	RAllocStack::Vector<double> yy(nx);
 	xold = NA_REAL;
 	yold = NA_REAL;
-	for (i=0; i<nx; i++) {
+	for (int i=0; i<nx; i++) {
 	    transformLocn(x, y, INTEGER(indices)[i] - 1, vpc, &gc,
 			  vpWidthCM, vpHeightCM,
 			  dd,
@@ -2414,7 +2412,7 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
      * Number of xsplines
      */
     np = LENGTH(index);
-    PROTECT(tracePts = allocVector(VECSXP, np));
+    PROTECT(tracePts = ListVector::create(np));
     nloc = 0;
     for (i=0; i<np; i++) {
 	SEXP indices = VECTOR_ELT(index, i);
@@ -2503,9 +2501,9 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
                 int count = end - start + 1;
                 double *keepXptr, *keepYptr;
                 SEXP keepPoints, keepX, keepY;
-                PROTECT(keepPoints = allocVector(VECSXP, 2));
-                PROTECT(keepX = allocVector(REALSXP, count));
-                PROTECT(keepY = allocVector(REALSXP, count));
+                PROTECT(keepPoints = ListVector::create(2));
+                PROTECT(keepX = RealVector::create(count));
+                PROTECT(keepY = RealVector::create(count));
                 keepXptr = REAL(keepX);
                 keepYptr = REAL(keepY);
                 for (k=start; k<(end + 1); k++) {
@@ -2529,10 +2527,10 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
                 /*
                  * Update bounds
                  */
-                int j, n = LENGTH(VECTOR_ELT(points, 0));
+                int n = LENGTH(VECTOR_ELT(points, 0));
                 RAllocStack::Vector<double> pxx(n);
                 RAllocStack::Vector<double> pyy(n);
-                for (j=0; j<n; j++) {
+                for (int j=0; j<n; j++) {
                     pxx[j] = fromDeviceX(px[j], GE_INCHES, dd);
                     pyy[j] = fromDeviceY(py[j], GE_INCHES, dd);
                     if (R_FINITE(pxx[j]) && R_FINITE(pyy[j])) {
@@ -2560,7 +2558,7 @@ SEXP gridXspline(SEXP x, SEXP y, SEXP s, SEXP o, SEXP a, SEXP rep, SEXP index,
     }
 
     if (!draw && !trace && nloc > 0) {
-	PROTECT(result = allocVector(REALSXP, 4));
+	PROTECT(result = RealVector::create(4));
 	/*
 	 * If there is more than one xspline, just produce edge
 	 * based on bounding rect of all xsplines
@@ -3059,7 +3057,7 @@ static SEXP gridCircle(SEXP x, SEXP y, SEXP r,
 	GEMode(0, dd);
 
     } else if (ncirc > 0) {
-	result = allocVector(REALSXP, 4);
+	result = RealVector::create(4);
 	if (ncirc == 1) {
 	    /*
 	     * Produce edge of actual circle
@@ -3314,7 +3312,7 @@ static SEXP gridRect(SEXP x, SEXP y, SEXP w, SEXP h,
 	GEMode(0, dd);
     }
     if (nrect > 0) {
-	result = allocVector(REALSXP, 4);
+	result = RealVector::create(4);
 	/*
 	 * If there is more than one rect, just produce edge
 	 * based on bounding rect of all rects
@@ -3597,7 +3595,7 @@ SEXP L_cap(void)
                            mkChar(col2name(rint[i])));
         }
 
-        PROTECT(idim = allocVector(INTSXP, 2));
+        PROTECT(idim = IntVector::create(2));
         INTEGER(idim)[0] = nrow;
         INTEGER(idim)[1] = ncol;
         setAttrib(image, R_DimSymbol, idim);
@@ -3809,7 +3807,7 @@ static SEXP gridText(SEXP label, SEXP x, SEXP y, SEXP hjust, SEXP vjust,
 	    GEMode(0, dd);
 	}
 	if (ntxt > 0) {
-	    result = allocVector(REALSXP, 6);
+	    result = RealVector::create(6);
 	    /*
 	     * If there is more than one text, just produce edge
 	     * based on bounding rect of all text
@@ -3869,9 +3867,9 @@ SEXP L_textBounds(SEXP label, SEXP x, SEXP y,
 
 static SEXP symbolCoords(double *x, double *y, int n, pGEDevDesc dd)
 {
-    SEXP result = PROTECT(allocVector(VECSXP, 2));
-    SEXP xs = PROTECT(allocVector(REALSXP, n));
-    SEXP ys = PROTECT(allocVector(REALSXP, n));
+    SEXP result = PROTECT(ListVector::create(2));
+    SEXP xs = PROTECT(RealVector::create(n));
+    SEXP ys = PROTECT(RealVector::create(n));
     int i;
     for (i=0; i<n; i++) {
         REAL(xs)[i] = x[i];
@@ -3997,7 +3995,7 @@ SEXP gridSymbol(double x, double y, int pch, double size,
         result = R_NilValue;
     } else {
         /* Default is a list of one component which is NULL */
-        PROTECT(result = allocVector(VECSXP, numCoords));
+        PROTECT(result = ListVector::create(numCoords));
         SET_VECTOR_ELT(result, 0, R_NilValue);
     }
 
@@ -5038,8 +5036,8 @@ static SEXP gridPoints(SEXP x, SEXP y, SEXP pch, SEXP size,
         for (i=0; i<nx; i++) {
             ncoords += symbolNumCoords(ps[i % npch], closed);
         }
-        PROTECT(result = allocVector(VECSXP, ncoords));
-        PROTECT(resultNames = allocVector(INTSXP, ncoords));
+        PROTECT(result = ListVector::create(ncoords));
+        PROTECT(resultNames = IntVector::create(ncoords));
     }
     coordIndex = 0;
     for (i=0; i<nx; i++)
@@ -5161,7 +5159,7 @@ SEXP L_clip(SEXP x, SEXP y, SEXP w, SEXP h, SEXP hjust, SEXP vjust)
 	     * by THIS clipGrob (NOT to the current
 	     * viewport's previous setting)
 	     */
-	    PROTECT(currentClip = allocVector(REALSXP, 4));
+	    PROTECT(currentClip = RealVector::create(4));
 	    REAL(currentClip)[0] = xx;
 	    REAL(currentClip)[1] = yy;
 	    REAL(currentClip)[2] = xx + ww;
@@ -5236,7 +5234,7 @@ SEXP L_locator(void) {
      */
     pGEDevDesc dd = getDevice();
     GEMode(2, dd);
-    PROTECT(answer = allocVector(REALSXP, 2));
+    PROTECT(answer = RealVector::create(2));
     /*
      * Get a mouse click
      * Fails if user did not click mouse button 1
@@ -5365,7 +5363,6 @@ SEXP L_locnBounds(SEXP x, SEXP y, SEXP theta)
  */
 SEXP L_stringMetric(SEXP label)
 {
-    int i, n;
     double vpWidthCM, vpHeightCM;
     double rotationAngle;
     int gpIsScalar[15] = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -5373,11 +5370,11 @@ SEXP L_stringMetric(SEXP label)
     R_GE_gcontext gc, gcCache;
     LTransform transform;
     SEXP currentvp, currentgp;
-    SEXP txt;
-    SEXP result = R_NilValue;
-    SEXP ascent = R_NilValue;
-    SEXP descent = R_NilValue;
-    SEXP width = R_NilValue;
+    GCStackRoot<> txt;
+    GCStackRoot<> result(R_NilValue);
+    GCStackRoot<> ascent(R_NilValue);
+    GCStackRoot<> descent(R_NilValue);
+    GCStackRoot<> width(R_NilValue);
     double asc, dsc, wid;
     /* Get the current device 
      */
@@ -5401,13 +5398,13 @@ SEXP L_stringMetric(SEXP label)
 	txt = coerceVector(txt, EXPRSXP);
     else if (!isExpression(txt))
 	txt = coerceVector(txt, STRSXP);
-    PROTECT(txt);
-    n = LENGTH(txt);
-    PROTECT(ascent = allocVector(REALSXP, n));
-    PROTECT(descent = allocVector(REALSXP, n));
-    PROTECT(width = allocVector(REALSXP, n));
+
+    int n = LENGTH(txt);
+    ascent = RealVector::create(n);
+    descent = RealVector::create(n);
+    width = RealVector::create(n);
     if (n > 0) {
-	for (i=0; i<n; i++) {
+	for (int i=0; i<n; i++) {
 	    updateGContext(currentgp, i, &gc, dd, gpIsScalar, &gcCache);
             if (isExpression(txt))
                 GEExpressionMetric(VECTOR_ELT(txt, i % LENGTH(txt)), &gc, 
@@ -5430,11 +5427,11 @@ SEXP L_stringMetric(SEXP label)
                 REAL(gridStateElement(dd, GSS_SCALE))[0];
 	}
     }
-    PROTECT(result = allocVector(VECSXP, 3));
+    result = ListVector::create(3);
     SET_VECTOR_ELT(result, 0, ascent);
     SET_VECTOR_ELT(result, 1, descent);
     SET_VECTOR_ELT(result, 2, width);    
-    UNPROTECT(6);
+
     return result;
 }
 

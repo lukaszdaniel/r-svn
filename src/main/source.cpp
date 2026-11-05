@@ -37,6 +37,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/String.hpp>
 #include <CXXR/StringVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
 #include <Localization.h>
 #include <Parse.h> // -> IOStuff.h, Defn.h
 #include <Internal.h>
@@ -223,7 +224,7 @@ attribute_hidden SEXP do_parse(SEXP call, SEXP op, SEXP args, SEXP env)
     bool wasopen = con->isopen;
     int num = asInteger(CAR(args));			args = CDR(args);
     if (num == 0)
-	return(allocVector(EXPRSXP, 0));
+	return ExpressionVector::create(0);
 
     GCStackRoot<> text;
     text = coerceVector(CAR(args), STRSXP);

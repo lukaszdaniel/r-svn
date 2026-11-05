@@ -33,6 +33,7 @@
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <Defn.h>
 #include <Rinternals.h>
 #define R_USE_PROTOTYPES 1
@@ -65,7 +66,7 @@ typedef struct moduleTypes_s {
 } quartz_module_t;
 
 /* list of internally supported output modules */
-const quartz_module_t quartz_modules[] = {
+constexpr quartz_module_t quartz_modules[] = {
     { "",        0,                           QBE_NATIVE  },
     { "native",  0,                           QBE_NATIVE  },
     { "cocoa",   0,                           QBE_COCOA   },
@@ -478,20 +479,20 @@ static void QuartzInitPatterns(QuartzDesc *xd)
     xd->appendingPattern = -1;
 }
 
-static int QuartzGrowPatterns(QuartzDesc *xd)
+static bool QuartzGrowPatterns(QuartzDesc *xd)
 {
     int newMax = 2*xd->numPatterns;
     void *tmp;
     tmp = realloc(xd->gradients, sizeof(QGradientRef) * newMax);
     if (!tmp) { 
         warning("%s", _("Quartz gradients exhausted (failed to increase maxPatterns)"));
-        return 0;
+        return false;
     }
     xd->gradients = (QGradientRef *) tmp;
     tmp = realloc(xd->patterns, sizeof(QPatternRef) * newMax);
     if (!tmp) { 
         warning("%s", _("Quartz patterns exhausted (failed to increase maxPatterns)"));
-        return 0;
+        return false;
     }
     xd->patterns = (QPatternRef *) tmp;
     for (int i = xd->numPatterns; i < newMax; i++) {
@@ -499,7 +500,7 @@ static int QuartzGrowPatterns(QuartzDesc *xd)
         xd->patterns[i] = NULL;
     }
     xd->numPatterns = newMax;
-    return 1;
+    return true;
 }
 
 static void QuartzCleanPatterns(QuartzDesc *xd)
@@ -818,21 +819,21 @@ static void QuartzInitClipPaths(QuartzDesc *xd)
     }
 }
 
-static int QuartzGrowClipPaths(QuartzDesc *xd)
+static bool QuartzGrowClipPaths(QuartzDesc *xd)
 {
     int newMax = 2*xd->numClipPaths;
     void *tmp;
     tmp = realloc(xd->clipPaths, sizeof(QPathRef) * newMax);
     if (!tmp) { 
         warning("%s", _("Quartz clipping paths exhausted (failed to increase maxClipPaths)"));
-        return 0;
+        return false;
     }
     xd->clipPaths = (QPathRef *) tmp;
     for (int i = xd->numClipPaths; i < newMax; i++) {
         xd->clipPaths[i] = NULL;
     }
     xd->numClipPaths = newMax;
-    return 1;
+    return true;
 }
 
 static void QuartzCleanClipPaths(QuartzDesc *xd)
@@ -966,21 +967,21 @@ static void QuartzInitMasks(QuartzDesc *xd)
     xd->currentMask = -1;
 }
 
-static int QuartzGrowMasks(QuartzDesc *xd)
+static bool QuartzGrowMasks(QuartzDesc *xd)
 {
     int newMax = 2*xd->numMasks;
     void *tmp;
     tmp = realloc(xd->masks, sizeof(QMaskRef) * newMax);
     if (!tmp) { 
         warning("%s", _("Quartz masks exhausted (failed to increase maxMasks)"));
-        return 0;
+        return false;
     }
     xd->masks = (QMaskRef *) tmp;
     for (int i = xd->numMasks; i < newMax; i++) {
         xd->masks[i] = NULL;
     }
     xd->numMasks = newMax;
-    return 1;
+    return true;
 }
 
 static void QuartzCleanMasks(QuartzDesc *xd)
@@ -1131,21 +1132,21 @@ static void QuartzInitGroups(QuartzDesc *xd)
     xd->appendingGroup = -1;
 }
 
-static int QuartzGrowGroups(QuartzDesc *xd)
+static bool QuartzGrowGroups(QuartzDesc *xd)
 {
     int newMax = 2*xd->numGroups;
     void *tmp;
     tmp = realloc(xd->groups, sizeof(CGLayerRef) * newMax);
     if (!tmp) { 
         warning("%s", _("Quartz groups exhausted (failed to increase maxGroups)"));
-        return 0;
+        return false;
     }
     xd->groups = (CGLayerRef *) tmp;
     for (int i = xd->numGroups; i < newMax; i++) {
         xd->groups[i] = NULL;
     }
     xd->numGroups = newMax;
-    return 1;
+    return true;
 }
 
 static void QuartzCleanGroups(QuartzDesc *xd)
@@ -1278,7 +1279,7 @@ static SEXP QuartzCreateGroup(SEXP src, int op, SEXP dst,
     xd->appendingType = savedType;
 
     /* Return group index */
-    PROTECT(result = allocVector(INTSXP, 1));
+    PROTECT(result = IntVector::create(1));
     INTEGER(result)[0] = index;
     UNPROTECT(1);
     return result;
@@ -2759,7 +2760,7 @@ static SEXP RQuartz_setPattern(SEXP pattern, pDevDesc dd) {
     DEVSPEC;
     if (!ctx) NOCTXR(R_NilValue);
     SEXP ref;
-    PROTECT(ref = allocVector(INTSXP, 1));
+    PROTECT(ref = IntVector::create(1));
     int index = 0;
     int patternType = R_GE_patternType(pattern);
     if (patternType == R_GE_linearGradientPattern ||
@@ -2816,7 +2817,7 @@ static SEXP RQuartz_setClipPath(SEXP path, SEXP ref, pDevDesc dd) {
         } else {
             /* Create this clipping path */
             xd->clipPaths[index] = QuartzCreateClipPath(path, index, ctx, xd);
-            PROTECT(newref = allocVector(INTSXP, 1));
+            PROTECT(newref = IntVector::create(1));
             INTEGER(newref)[0] = index;
             UNPROTECT(1);
         }
@@ -2875,7 +2876,7 @@ static SEXP RQuartz_setMask(SEXP mask, SEXP ref, pDevDesc dd) {
                 index = QuartzCreateMask(mask, ctx, xd);
             }
         }
-        newref = PROTECT(allocVector(INTSXP, 1));
+        newref = PROTECT(IntVector::create(1));
         INTEGER(newref)[0] = index;
         UNPROTECT(1);
     }
@@ -3069,26 +3070,26 @@ static SEXP RQuartz_capabilities(SEXP capabilities) {
     SEXP patterns, clippingPaths, masks, compositing, transforms, paths,
         glyphs, variableFonts;
 
-    PROTECT(patterns = allocVector(INTSXP, 3));
+    PROTECT(patterns = IntVector::create(3));
     INTEGER(patterns)[0] = R_GE_linearGradientPattern;
     INTEGER(patterns)[1] = R_GE_radialGradientPattern;
     INTEGER(patterns)[2] = R_GE_tilingPattern;
     SET_VECTOR_ELT(capabilities, R_GE_capability_patterns, patterns);
     UNPROTECT(1);
 
-    PROTECT(clippingPaths = allocVector(INTSXP, 1));
+    PROTECT(clippingPaths = IntVector::create(1));
     INTEGER(clippingPaths)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_clippingPaths, clippingPaths);
     UNPROTECT(1);
 
 
-    PROTECT(masks = allocVector(INTSXP, 2));
+    PROTECT(masks = IntVector::create(2));
     INTEGER(masks)[0] = R_GE_luminanceMask;
     INTEGER(masks)[1] = R_GE_alphaMask;
     SET_VECTOR_ELT(capabilities, R_GE_capability_masks, masks);
     UNPROTECT(1);
 
-    PROTECT(compositing = allocVector(INTSXP, 24));
+    PROTECT(compositing = IntVector::create(24));
     INTEGER(compositing)[0] = R_GE_compositeMultiply;
     INTEGER(compositing)[1] = R_GE_compositeScreen;
     INTEGER(compositing)[2] = R_GE_compositeOverlay;
@@ -3116,22 +3117,22 @@ static SEXP RQuartz_capabilities(SEXP capabilities) {
     SET_VECTOR_ELT(capabilities, R_GE_capability_compositing, compositing);
     UNPROTECT(1);
 
-    PROTECT(transforms = allocVector(INTSXP, 1));
+    PROTECT(transforms = IntVector::create(1));
     INTEGER(transforms)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_transformations, transforms);
     UNPROTECT(1);
 
-    PROTECT(paths = allocVector(INTSXP, 1));
+    PROTECT(paths = IntVector::create(1));
     INTEGER(paths)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_paths, paths);
     UNPROTECT(1);
 
-    PROTECT(glyphs = allocVector(INTSXP, 1));
+    PROTECT(glyphs = IntVector::create(1));
     INTEGER(glyphs)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_glyphs, glyphs);
     UNPROTECT(1);
 
-    PROTECT(variableFonts = allocVector(INTSXP, 1));
+    PROTECT(variableFonts = IntVector::create(1));
     INTEGER(variableFonts)[0] = 1;
     SET_VECTOR_ELT(capabilities, R_GE_capability_variableFonts, variableFonts);
     UNPROTECT(1);

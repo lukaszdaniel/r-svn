@@ -27,6 +27,8 @@
 #include <R_ext/Minmax.h>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/RAllocStack.hpp>
+#include <CXXR/RealVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <R.h>
 #include "ts.h"
 #include "statsR.h" // for getListElement
@@ -87,8 +89,8 @@ SEXP KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
     // These are only used if(lop), but avoid -Wall trouble
     SEXP ans = R_NilValue, resid = R_NilValue, states = R_NilValue;
     if(lop) {
-	PROTECT(ans = allocVector(VECSXP, 3));
-	SET_VECTOR_ELT(ans, 1, resid = allocVector(REALSXP, n));
+	PROTECT(ans = ListVector::create(3));
+	SET_VECTOR_ELT(ans, 1, resid = RealVector::create(n));
 	SET_VECTOR_ELT(ans, 2, states = allocMatrix(REALSXP, n, p));
 	SEXP nm = PROTECT(allocVector(STRSXP, 3));
 	SET_STRING_ELT(nm, 0, mkChar("values"));
@@ -161,7 +163,7 @@ SEXP KalmanLike(SEXP sy, SEXP mod, SEXP sUP, SEXP op, SEXP update)
 	}
     }
 
-    SEXP res = PROTECT(allocVector(REALSXP, 2));
+    SEXP res = PROTECT(RealVector::create(2));
     REAL(res)[0] = ssq/nu; REAL(res)[1] = sumlog/nu;
     if(lop) {
 	SET_VECTOR_ELT(ans, 0, res);
@@ -198,7 +200,7 @@ SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
     PROTECT(ssP = duplicate(sP)); P = REAL(ssP);
     PROTECT(ssPn = duplicate(sPn)); Pnew = REAL(ssPn);
 
-    PROTECT(res = allocVector(VECSXP, 2));
+    PROTECT(res = ListVector::create(2));
     SEXP nm = PROTECT(allocVector(STRSXP, 2));
     SET_STRING_ELT(nm, 0, mkChar("smooth"));
     SET_STRING_ELT(nm, 1, mkChar("var"));
@@ -206,7 +208,7 @@ SEXP KalmanSmooth(SEXP sy, SEXP mod, SEXP sUP)
     UNPROTECT(1);
     SET_VECTOR_ELT(res, 0, states = allocMatrix(REALSXP, n, p));
     at = REAL(states);
-    SET_VECTOR_ELT(res, 1, sN = allocVector(REALSXP, n*p*p));
+    SET_VECTOR_ELT(res, 1, sN = RealVector::create(n*p*p));
     Nt = REAL(sN);
 
     RAllocStack::Vector<double> anew(p);
@@ -378,9 +380,9 @@ SEXP KalmanFore(SEXP nahead, SEXP mod, SEXP update)
     RAllocStack::Vector<double> Pnew(p * p);
     RAllocStack::Vector<double> mm(p * p);
     SEXP res, forecasts, se;
-    PROTECT(res = allocVector(VECSXP, 2));
-    SET_VECTOR_ELT(res, 0, forecasts = allocVector(REALSXP, n));
-    SET_VECTOR_ELT(res, 1, se = allocVector(REALSXP, n));
+    PROTECT(res = ListVector::create(2));
+    SET_VECTOR_ELT(res, 0, forecasts = RealVector::create(n));
+    SET_VECTOR_ELT(res, 1, se = RealVector::create(n));
     {
 	SEXP nm = PROTECT(allocVector(STRSXP, 2));
 	SET_STRING_ELT(nm, 0, mkChar("pred"));
@@ -454,7 +456,7 @@ SEXP ARIMA_undoPars(SEXP sin, SEXP sarma)
     int *arma = INTEGER(sarma), mp = arma[0], mq = arma[1], msp = arma[2],
 	v, n = LENGTH(sin);
     double *params, *in = REAL(sin);
-    SEXP res = allocVector(REALSXP, n);
+    SEXP res = RealVector::create(n);
 
     params = REAL(res);
     for (int i = 0; i < n; i++) params[i] = in[i];
@@ -475,9 +477,9 @@ SEXP ARIMA_transPars(SEXP sin, SEXP sarma, SEXP strans)
     SEXP res, sPhi, sTheta;
     RAllocStack::Vector<double> paramsStorage;
 
-    PROTECT(res = allocVector(VECSXP, 2));
-    SET_VECTOR_ELT(res, 0, sPhi = allocVector(REALSXP, p));
-    SET_VECTOR_ELT(res, 1, sTheta = allocVector(REALSXP, q));
+    PROTECT(res = ListVector::create(2));
+    SET_VECTOR_ELT(res, 0, sPhi = RealVector::create(p));
+    SET_VECTOR_ELT(res, 1, sTheta = RealVector::create(q));
     phi = REAL(sPhi);
     theta = REAL(sTheta);
     if (trans) {
@@ -541,7 +543,7 @@ SEXP ARIMA_Invtrans(SEXP in, SEXP sarma)
 {
     int *arma = INTEGER(sarma), mp = arma[0], mq = arma[1], msp = arma[2],
 	v, n = LENGTH(in);
-    SEXP y = allocVector(REALSXP, n);
+    SEXP y = RealVector::create(n);
     double *raw = REAL(in), *new_ = REAL(y);
 
     for (int i = 0; i < n; i++) new_[i] = raw[i];
@@ -618,7 +620,7 @@ SEXP ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
     if (d > 0) mm.resize(rd * rd);
 
     if (useResid) {
-	PROTECT(sResid = allocVector(REALSXP, n));
+	PROTECT(sResid = RealVector::create(n));
 	rsResid = REAL(sResid);
     }
 
@@ -726,8 +728,8 @@ SEXP ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
     }
 
     if (useResid) {
-	PROTECT(res = allocVector(VECSXP, 3));
-	SET_VECTOR_ELT(res, 0, nres = allocVector(REALSXP, 3));
+	PROTECT(res = ListVector::create(3));
+	SET_VECTOR_ELT(res, 0, nres = RealVector::create(3));
 	REAL(nres)[0] = ssq;
 	REAL(nres)[1] = sumlog;
 	REAL(nres)[2] = (double) nu;
@@ -735,7 +737,7 @@ SEXP ARIMA_Like(SEXP sy, SEXP mod, SEXP sUP, SEXP giveResid)
 	UNPROTECT(2);
 	return res;
     } else {
-	nres = allocVector(REALSXP, 3);
+	nres = RealVector::create(3);
 	REAL(nres)[0] = ssq;
 	REAL(nres)[1] = sumlog;
 	REAL(nres)[2] = (double) nu;
@@ -764,7 +766,7 @@ SEXP ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
     for (int i = 0; i < arma[6]; i++)
 	for (int l = n - 1; l >= ns; l--) w[l] -= w[l - ns];
 
-    PROTECT(sResid = allocVector(REALSXP, n));
+    PROTECT(sResid = RealVector::create(n));
     resid = REAL(sResid);
     if (useResid) for (int l = 0; l < ncond; l++) resid[l] = 0;
 
@@ -780,7 +782,7 @@ SEXP ARIMA_CSS(SEXP sy, SEXP sarma, SEXP sPhi, SEXP sTheta,
 	}
     }
     if (useResid) {
-	PROTECT(res = allocVector(VECSXP, 2));
+	PROTECT(res = ListVector::create(2));
 	SET_VECTOR_ELT(res, 0, ScalarReal(ssq / (double) (nu)));
 	SET_VECTOR_ELT(res, 1, sResid);
 	UNPROTECT(2);
@@ -802,7 +804,7 @@ SEXP TSconv(SEXP a, SEXP b)
     na = LENGTH(a);
     nb = LENGTH(b);
     nab = na + nb - 1;
-    PROTECT(ab = allocVector(REALSXP, nab));
+    PROTECT(ab = RealVector::create(nab));
     ra = REAL(a); rb = REAL(b); rab = REAL(ab);
     for (int i = 0; i < nab; i++) rab[i] = 0.0;
     for (int i = 0; i < na; i++)
@@ -899,7 +901,7 @@ SEXP getQ0bis(SEXP sPhi, SEXP sTheta, SEXP sTol)
     if( p > 0 ) {
 	int r2 = std::max(p + q, p + 1);
 	SEXP sgam = PROTECT(allocMatrix(REALSXP, r2, r2)),
-	    sg = PROTECT(allocVector(REALSXP, r2));
+	    sg = PROTECT(RealVector::create(r2));
 	double *gam = REAL(sgam);
 	double *g = REAL(sg);
 	RAllocStack::Vector<double> tphi(p + 1);

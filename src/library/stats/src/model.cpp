@@ -29,7 +29,9 @@
 #include <CXXR/GCRoot.hpp>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/String.hpp>
+#include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Defn.h>
 
 #include "statsR.h"
@@ -122,7 +124,7 @@ SEXP modelframe(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* Assemble the base data frame. */
 
-    data = allocVector(VECSXP, nvars + nactualdots);
+    data = ListVector::create(nvars + nactualdots);
     names = allocVector(STRSXP, nvars + nactualdots);
 
     for (int i = 0; i < nvars; i++) {
@@ -407,7 +409,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
        integer (including factor), numeric and complex.
      */
 
-    variable = allocVector(VECSXP, nVar);
+    variable = ListVector::create(nVar);
     nlevs = allocVector(INTSXP, nVar);
     ordered = LogicalVector::create(nVar);
     columns = allocVector(INTSXP, nVar);
@@ -475,8 +477,8 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
     /* the required arguments at call time.  The calls have the following */
     /* form: (contrast.type nlevs contrasts) */
 
-    contr1 = allocVector(VECSXP, nVar);
-    contr2 = allocVector(VECSXP, nVar);
+    contr1 = ListVector::create(nVar);
+    contr2 = ListVector::create(nVar);
 
     expr = allocLang(3);
     SETCAR(expr, install("contrasts"));
@@ -741,7 +743,7 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
 	jstart = jnext;
     }
-    tnames = allocVector(VECSXP, 2);
+    tnames = ListVector::create(2);
     SET_VECTOR_ELT(tnames, 0, rnames);
     SET_VECTOR_ELT(tnames, 1, xnames);
     setAttrib(x, R_DimNamesSymbol, tnames);
@@ -1932,8 +1934,8 @@ SEXP termsform(SEXP args)
 
     Rprintf(" .. step 3 .. reorder model terms by BitCount():\n");
 #endif
-    SEXP    ord = PROTECT(allocVector(INTSXP, nterm)),
-	pattern = PROTECT(allocVector(VECSXP, nterm));
+    SEXP    ord = PROTECT(IntVector::create(nterm)),
+	pattern = PROTECT(ListVector::create(nterm));
     {
 	SEXP sCounts = PROTECT(allocVector(INTSXP, nterm));
 	int bitmax = 0,
@@ -2067,7 +2069,7 @@ SEXP termsform(SEXP args)
 #endif
 
     if (nterm > 0) { // dimnames("factors") <- ...
-	PROTECT(v = allocVector(VECSXP, 2));
+	PROTECT(v = ListVector::create(2));
 	SET_VECTOR_ELT(v, 0, varnames);
 	SET_VECTOR_ELT(v, 1, termlabs);
 	setAttrib(pattern, R_DimNamesSymbol, v);
