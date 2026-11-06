@@ -415,6 +415,9 @@
       integer to double.  It also replaced \code{NULL} components of
       \code{specials} with \code{logical(0L)}.
 
+      \item \code{delete.response} did not modify optional attribute
+      \code{dataClasses}.
+
       \item When interaction terms or offsets were present,
       \code{drop.terms} and \code{[.terms} could return a \code{terms}
       object with invalid \code{predvars} and \code{dataClasses}
@@ -458,6 +461,9 @@
       S4 method tables in \code{E}, so \code{insertSource(E, \dots)} did
       not trace S4 methods.  Thanks to \I{Takeshi Arabiki} for the
       report (\PR{15242}).
+
+      \item \code{aperm(x, perm)} and \code{t(x)} did not support arrays
+      \code{x} of type \code{"expression"}.
     }
   }
 }
@@ -474,8 +480,14 @@
       \item \command{configure} now reports if \code{zstd} support was found.
     }
   }
+  \subsection{Bug Fixes}{
+    \itemize{
+      \item \code{smooth(*, "S")} now reports a change when the last plateau it splits
+      is unchanged on its right side, so "3RS3R" and "3RSS" are correct now
+      in such cases.  Fixes \PR{19280} reported with patch by \I{Kevin Ushey}.
+    }
+  }
 }
-
 
 \section{\Rlogo Changes in R 4.6.2}{
   \subsection{Bug Fixes}{

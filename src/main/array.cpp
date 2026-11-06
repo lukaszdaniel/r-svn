@@ -1758,6 +1758,12 @@ attribute_hidden SEXP do_transpose(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    SET_VECTOR_ELT(r, i, VECTOR_ELT(a,j));
 	}
 	break;
+    case EXPRSXP:
+	for (i = 0, j = 0; i < len; i++, j += nrow) {
+	    if (j > l_1) j -= l_1;
+	    SET_XVECTOR_ELT(r, i, XVECTOR_ELT(a,j));
+	}
+	break;
     case RAWSXP:
 	for (i = 0, j = 0; i < len; i++, j += nrow) {
 	    if (j > l_1) j -= l_1;
@@ -1968,6 +1974,13 @@ attribute_hidden SEXP do_aperm(SEXP call, SEXP op, SEXP args, SEXP rho)
     case VECSXP:
 	for (lj = 0, li = 0; li < len; li++) {
 	    SET_VECTOR_ELT(r, li, VECTOR_ELT(a, lj));
+	    CLICKJ;
+	}
+	break;
+
+    case EXPRSXP:
+	for (lj = 0, li = 0; li < len; li++) {
+	    SET_XVECTOR_ELT(r, li, XVECTOR_ELT(a, lj));
 	    CLICKJ;
 	}
 	break;
