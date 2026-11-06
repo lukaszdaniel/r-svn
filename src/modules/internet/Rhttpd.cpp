@@ -491,14 +491,13 @@ static SEXP parse_request_body(httpd_conn_t *c) {
 	c->body[c->content_length] = 0; /* the body is guaranteed to have an extra byte for the termination */
 	return parse_query(c->body);
     } else { /* something else - pass it as a raw vector */
-	SEXP res = PROTECT(RawVector::create(c->content_length));
+	GCStackRoot<> res(RawVector::create(c->content_length));
 	if (c->content_length)
 	    memcpy(RAW(res), c->body, c->content_length);
 	if (c->content_type) { /* attach the content type so it can be interpreted */
 	    if (!R_ContentTypeName) R_ContentTypeName = install("content-type");
 	    setAttrib(res, R_ContentTypeName, mkString(c->content_type));
 	}
-	UNPROTECT(1);
 	return res;
     }
 }
@@ -553,9 +552,9 @@ static SEXP handler_for_path(const char *path) {
 	    /* we cache custom_handlers_env so in case it has not been loaded yet, fetch it */
 	    if (!custom_handlers_env) {
 		if (!R_HandlersName) R_HandlersName = install(".httpd.handlers.env");
-		SEXP toolsNS = PROTECT(R_FindNamespace(mkString("tools")));
+		GCStackRoot<> packageName(mkString("tools"));
+		GCStackRoot<> toolsNS(R_FindNamespace(packageName));
 		custom_handlers_env = eval(R_HandlersName, toolsNS);
-		UNPROTECT(1); /* toolsNS */
 	    }
 	    /* we only proceed if .httpd.handlers.env really exists */
 	    if (TYPEOF(custom_handlers_env) == ENVSXP) {
@@ -589,23 +588,24 @@ static void process_request_(void *ptr)
     }
     uri_decode(c->url); /* decode the path part */
     {   /* construct "try(httpd(url, query, body), silent=TRUE)" */
-	SEXP sTrue = PROTECT(ScalarLogical(TRUE));
-	SEXP sBody = PROTECT(parse_request_body(c));
-	SEXP sQuery = PROTECT(query ? parse_query(query) : R_NilValue);
-	SEXP sReqHeaders = PROTECT(c->headers ? collect_buffers(c->headers) : R_NilValue);
-	SEXP sArgs = PROTECT(list4(mkString(c->url), sQuery, sBody, sReqHeaders));
-	SEXP sTry = install("try");
-	SEXP y, x = PROTECT(lang3(sTry,
-				  LCONS(handler_for_path(c->url), sArgs),
-				  sTrue));
-	SET_TAG(CDR(CDR(x)), install("silent"));
+	GCStackRoot<> sTrue(ScalarLogical(TRUE));
+	GCStackRoot<> sBody(parse_request_body(c));
+	GCStackRoot<> sQuery(query ? parse_query(query) : R_NilValue);
+	GCStackRoot<> sReqHeaders(c->headers ? collect_buffers(c->headers) : R_NilValue);
+	GCStackRoot<> url(mkString(c->url));
+	GCStackRoot<> sArgs(list4(url, sQuery, sBody, sReqHeaders));
+	GCStackRoot<> sTry(install("try"));
+	GCStackRoot<> handler(handler_for_path(c->url));
+	GCStackRoot<> handlerCall(LCONS(handler, sArgs));
+	GCStackRoot<> x(lang3(sTry, handlerCall, sTrue));
+	GCStackRoot<> y;
+	SET_TAG(CDR(CDR(x.get())), install("silent"));
 	DBG(printf("eval(try(httpd('%s'),silent=TRUE))\n", c->url));
 
 	/* evaluate the above in the tools namespace */
-	SEXP toolsNS = PROTECT(R_FindNamespace(mkString("tools")));
+	GCStackRoot<> packageName(mkString("tools"));
+	GCStackRoot<> toolsNS(R_FindNamespace(packageName));
 	x = eval(x, toolsNS);
-	UNPROTECT(1); /* toolsNS */
-	PROTECT(x);
 
 	/* the result is expected to have one of the following forms:
 
@@ -644,7 +644,6 @@ static void process_request_(void *ptr)
 	    if (c->method != METHOD_HEAD)
 		send_response(c->sock, s, strlen(s));
 	    c->attr |= CONNECTION_CLOSE; /* force close */
-	    UNPROTECT(7);
 	    return;
 	}
 
@@ -694,7 +693,6 @@ static void process_request_(void *ptr)
 		    long fsz = 0;
 		    if (!f) {
 			send_response(c->sock, "\r\nContent-length: 0\r\n\r\n", 23);
-			UNPROTECT(7);
 			fin_request(c);
 			return;
 		    }
@@ -710,7 +708,6 @@ static void process_request_(void *ptr)
 				size_t rd = (fsz > 32768) ? 32768 : fsz;
 				if (fread(fbuf, 1, rd, f) != rd) {
 				    free(fbuf);
-				    UNPROTECT(7);
 				    c->attr |= CONNECTION_CLOSE;
 				    fclose(f);
 				    return;
@@ -720,14 +717,12 @@ static void process_request_(void *ptr)
 			    }
 			    free(fbuf);
 			} else { /* allocation error - get out */
-			    UNPROTECT(7);
 			    c->attr |= CONNECTION_CLOSE;
 			    fclose(f);
 			    return;
 			}
 		    }
 		    fclose(f);
-		    UNPROTECT(7);
 		    fin_request(c);
 		    return;
 		}
@@ -736,7 +731,6 @@ static void process_request_(void *ptr)
 		send_response(c->sock, buf, strlen(buf));
 		if (c->method != METHOD_HEAD)
 		    send_response(c->sock, cs, strlen(cs));
-		UNPROTECT(7);
 		fin_request(c);
 		return;
 	    }
@@ -763,12 +757,10 @@ static void process_request_(void *ptr)
 		send_response(c->sock, buf, strlen(buf));
 		if (c->method != METHOD_HEAD)
 		    send_response(c->sock, (char*) cs, LENGTH(y));
-		UNPROTECT(7);
 		fin_request(c);
 		return;
 	    }
 	}
-	UNPROTECT(7);
     }
     send_http_response(c, " 500 Invalid response from R\r\nConnection: close\r\nContent-type: text/plain\r\n\r\nServer error: invalid response from R\r\n");
     c->attr |= CONNECTION_CLOSE; /* force close */

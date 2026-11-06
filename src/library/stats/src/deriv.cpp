@@ -28,6 +28,7 @@
 
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/Closure.hpp>
 #include <CXXR/ExpressionVector.hpp>
 #include <Defn.h>  // for deparse1
@@ -162,14 +163,6 @@ static int isUminus(SEXP s)
     else return 0;
 }
 
-/* Pointer protect and return the argument */
-
-static SEXP PP(SEXP s)
-{
-    PROTECT(s);
-    return s;
-}
-
 static SEXP simplify(SEXP fun, SEXP arg1, SEXP arg2)
 {
     SEXP ans;
@@ -200,10 +193,9 @@ static SEXP simplify(SEXP fun, SEXP arg1, SEXP arg2)
 	    else if (isZero(arg1))
 		ans = simplify(MinusSymbol, arg2, R_MissingArg);
 	    else if (isUminus(arg1)) {
-		ans = simplify(MinusSymbol,
-			       PP(simplify(PlusSymbol, CADR(arg1), arg2)),
-			       R_MissingArg);
-		UNPROTECT(1);
+		GCStackRoot<> tmp;
+		tmp = simplify(PlusSymbol, CADR(arg1), arg2);
+		ans = simplify(MinusSymbol, tmp, R_MissingArg);
 	    }
 	    else if (isUminus(arg2))
 		ans = simplify(PlusSymbol, arg1, CADR(arg2));
@@ -219,16 +211,14 @@ static SEXP simplify(SEXP fun, SEXP arg1, SEXP arg2)
 	else if (isOne(arg2))
 	    ans = arg1;
 	else if (isUminus(arg1)) {
-	    ans = simplify(MinusSymbol,
-			   PP(simplify(TimesSymbol, CADR(arg1), arg2)),
-			   R_MissingArg);
-	    UNPROTECT(1);
+	    GCStackRoot<> tmp;
+	    tmp = simplify(TimesSymbol, CADR(arg1), arg2);
+	    ans = simplify(MinusSymbol, tmp, R_MissingArg);
 	}
 	else if (isUminus(arg2)) {
-	    ans = simplify(MinusSymbol,
-			   PP(simplify(TimesSymbol, arg1, CADR(arg2))),
-			   R_MissingArg);
-	    UNPROTECT(1);
+	    GCStackRoot<> tmp;
+	    tmp = simplify(TimesSymbol, arg1, CADR(arg2));
+	    ans = simplify(MinusSymbol, tmp, R_MissingArg);
 	}
 	else
 	    ans = lang3(TimesSymbol, arg1, arg2);
@@ -241,16 +231,14 @@ static SEXP simplify(SEXP fun, SEXP arg1, SEXP arg2)
 	else if (isOne(arg2))
 	    ans = arg1;
 	else if (isUminus(arg1)) {
-	    ans = simplify(MinusSymbol,
-			   PP(simplify(DivideSymbol, CADR(arg1), arg2)),
-			   R_MissingArg);
-	    UNPROTECT(1);
+	    GCStackRoot<> tmp;
+	    tmp = simplify(DivideSymbol, CADR(arg1), arg2);
+	    ans = simplify(MinusSymbol, tmp, R_MissingArg);
 	}
 	else if (isUminus(arg2)) {
-	    ans = simplify(MinusSymbol,
-			   PP(simplify(DivideSymbol, arg1, CADR(arg2))),
-			   R_MissingArg);
-	    UNPROTECT(1);
+	    GCStackRoot<> tmp;
+	    tmp = simplify(DivideSymbol, arg1, CADR(arg2));
+	    ans = simplify(MinusSymbol, tmp, R_MissingArg);
 	}
 	else ans = lang3(DivideSymbol, arg1, arg2);
     }
@@ -335,10 +323,8 @@ static SEXP D(SEXP expr, SEXP var)
 {
     CXXR::RAllocStack::Scope rscope; // translateChar
 
-#define PP_S(F,a1,a2) PP(simplify(F,a1,a2))
-#define PP_S2(F,a1)   PP(simplify(F,a1, R_MissingArg))
 
-    SEXP ans = R_NilValue, expr1, expr2;
+    SEXP ans = R_NilValue;
     switch(TYPEOF(expr)) {
     case LGLSXP:
     case INTSXP:
@@ -362,317 +348,363 @@ static SEXP D(SEXP expr, SEXP var)
 	    if (length(expr) == 2)
 		ans = D(CADR(expr), var);
 	    else {
+		GCStackRoot<> derivative_1(D(CADR(expr), var));
+		GCStackRoot<> derivative_2(D(CADDR(expr), var));
 		ans = simplify(PlusSymbol,
-			       PP(D(CADR(expr), var)),
-			       PP(D(CADDR(expr), var)));
-		UNPROTECT(2);
+			       derivative_1,
+			       derivative_2);
 	    }
 	}
 	else if (CAR(expr) == MinusSymbol) {
 	    if (length(expr) == 2) {
+		GCStackRoot<> derivative(D(CADR(expr), var));
 		ans = simplify(MinusSymbol,
-			       PP(D(CADR(expr), var)),
+			       derivative,
 			       R_MissingArg);
-		UNPROTECT(1);
 	    }
 	    else {
+		GCStackRoot<> derivative_1(D(CADR(expr), var));
+		GCStackRoot<> derivative_2(D(CADDR(expr), var));
 		ans = simplify(MinusSymbol,
-			       PP(D(CADR(expr), var)),
-			       PP(D(CADDR(expr), var)));
-		UNPROTECT(2);
+			       derivative_1,
+			       derivative_2);
 	    }
 	}
 	else if (CAR(expr) == TimesSymbol) {
+	    GCStackRoot<> derivative_1(D(CADR(expr),var));
+	    GCStackRoot<> tmp1(simplify(TimesSymbol, derivative_1, CADDR(expr)));
+	    GCStackRoot<> derivative_2(D(CADDR(expr),var));
+	    GCStackRoot<> tmp2(simplify(TimesSymbol, CADR(expr), derivative_2));
 	    ans = simplify(PlusSymbol,
-			   PP_S(TimesSymbol,PP(D(CADR(expr),var)), CADDR(expr)),
-			   PP_S(TimesSymbol,CADR(expr), PP(D(CADDR(expr),var))));
-	    UNPROTECT(4);
+			   tmp1,
+			   tmp2);
 	}
 	else if (CAR(expr) == DivideSymbol) {
-	    PROTECT(expr1 = D(CADR(expr), var));
-	    PROTECT(expr2 = D(CADDR(expr), var));
+	    GCStackRoot<> expr1, expr2;
+	    expr1 = D(CADR(expr), var);
+	    expr2 = D(CADDR(expr), var);
+	    GCStackRoot<> tmp1(simplify(DivideSymbol, expr1, CADDR(expr)));
+	    GCStackRoot<> times_2(simplify(TimesSymbol, CADR(expr), expr2));
+	    GCStackRoot<> two(Constant(2.));
+	    GCStackRoot<> power(simplify(PowerSymbol, CADDR(expr), two));
+	    GCStackRoot<> tmp2(simplify(DivideSymbol, times_2, power));
 	    ans = simplify(MinusSymbol,
-			   PP_S(DivideSymbol, expr1, CADDR(expr)),
-			   PP_S(DivideSymbol,
-				PP_S(TimesSymbol, CADR(expr), expr2),
-				PP_S(PowerSymbol,CADDR(expr),PP(Constant(2.)))));
-	    UNPROTECT(7);
+			   tmp1,
+			   tmp2);
 	}
 	else if (CAR(expr) == PowerSymbol) {
 	    if (isLogical(CADDR(expr)) || isNumeric(CADDR(expr))) {
+		GCStackRoot<> derivative(D(CADR(expr), var));
+		GCStackRoot<> negative_one(Constant(asReal(CADDR(expr))-1.));
+		GCStackRoot<> power(simplify(PowerSymbol, CADR(expr), negative_one));
+		GCStackRoot<> tmp(simplify(TimesSymbol, derivative, power));
 		ans = simplify(TimesSymbol,
 			       CADDR(expr),
-			       PP_S(TimesSymbol,
-				    PP(D(CADR(expr), var)),
-				    PP_S(PowerSymbol,
-					 CADR(expr),
-					 PP(Constant(asReal(CADDR(expr))-1.)))));
-		UNPROTECT(4);
+			       tmp);
 	    }
 	    else {
+		GCStackRoot<> expr1, expr2;
+		GCStackRoot<> one(Constant(1.0));
+		GCStackRoot<> tmp1(simplify(MinusSymbol, CADDR(expr), one));
+		GCStackRoot<> power(simplify(PowerSymbol, CADR(expr), tmp1));
+		GCStackRoot<> derivative(D(CADR(expr), var));
+		GCStackRoot<> tmp2(simplify(TimesSymbol, CADDR(expr), derivative));
 		expr1 = simplify(TimesSymbol,
-				 PP_S(PowerSymbol,
-				      CADR(expr),
-				      PP_S(MinusSymbol,
-					   CADDR(expr),
-					   PP(Constant(1.0)))),
-				 PP_S(TimesSymbol,
-				      CADDR(expr),
-				      PP(D(CADR(expr), var))));
-		UNPROTECT(5);
-		PROTECT(expr1);
+				 power,
+				 tmp2);
+		GCStackRoot<> power_2(simplify(PowerSymbol, CADR(expr), CADDR(expr)));
+		GCStackRoot<> log(simplify(LogSymbol, CADR(expr), R_MissingArg));
+		GCStackRoot<> tmp3(D(CADDR(expr), var));
+		GCStackRoot<> tmp4(simplify(TimesSymbol, log, tmp3));
 		expr2 = simplify(TimesSymbol,
-				 PP_S(PowerSymbol, CADR(expr), CADDR(expr)),
-				 PP_S(TimesSymbol,
-				      PP_S2(LogSymbol, CADR(expr)),
-				      PP(D(CADDR(expr), var))));
-		UNPROTECT(4);
-		PROTECT(expr2);
+				 power_2,
+				 tmp4);
 		ans = simplify(PlusSymbol, expr1, expr2);
-		UNPROTECT(2);
 	    }
 	}
 	else if (CAR(expr) == ExpSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
 	    ans = simplify(TimesSymbol,
 			   expr,
-			   PP(D(CADR(expr), var)));
-	    UNPROTECT(1);
+			   derivative);
 	}
 	else if (CAR(expr) == LogSymbol) {
 	    if (length(expr) != 2)
 		error("%s", _("only single-argument calls to log() are supported;\n  maybe use log(x,a) = log(x)/log(a)"));
+	    GCStackRoot<> derivative(D(CADR(expr), var));
 	    ans = simplify(DivideSymbol,
-			   PP(D(CADR(expr), var)),
+			   derivative,
 			   CADR(expr));
-	    UNPROTECT(1);
 	}
 	else if (CAR(expr) == CosSymbol) {
+	    GCStackRoot<> tmp1(simplify(SinSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> tmp2(simplify(MinusSymbol, derivative, R_MissingArg));
 	    ans = simplify(TimesSymbol,
-			   PP_S2(SinSymbol, CADR(expr)),
-			   PP_S2(MinusSymbol, PP(D(CADR(expr), var))));
-	    UNPROTECT(3);
+			   tmp1,
+			   tmp2);
 	}
 	else if (CAR(expr) == SinSymbol) {
+	    GCStackRoot<> cos(simplify(CosSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> derivative(D(CADR(expr), var));
 	    ans = simplify(TimesSymbol,
-			   PP_S2(CosSymbol, CADR(expr)),
-			   PP(D(CADR(expr), var)));
-	    UNPROTECT(2);
+			   cos,
+			   derivative);
 	}
 	else if (CAR(expr) == TanSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> cos(simplify(CosSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> two(Constant(2.0));
+	    GCStackRoot<> power(simplify(PowerSymbol, cos, two));
 	    ans = simplify(DivideSymbol,
-			   PP(D(CADR(expr), var)),
-			   PP_S(PowerSymbol,
-				PP_S2(CosSymbol, CADR(expr)),
-				PP(Constant(2.0))));
-	    UNPROTECT(4);
+			   derivative,
+			   power);
 	}
 	else if (CAR(expr) == CoshSymbol) {
+	    GCStackRoot<> sinh(simplify(SinhSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> derivative(D(CADR(expr), var));
 	    ans = simplify(TimesSymbol,
-			   PP_S2(SinhSymbol, CADR(expr)),
-			   PP(D(CADR(expr), var)));
-	    UNPROTECT(2);
+			   sinh,
+			   derivative);
 	}
 	else if (CAR(expr) == SinhSymbol) {
+	    GCStackRoot<> cosh(simplify(CoshSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> derivative(D(CADR(expr), var));
 	    ans = simplify(TimesSymbol,
-			   PP_S2(CoshSymbol, CADR(expr)),
-			   PP(D(CADR(expr), var)));
-		UNPROTECT(2);
+			   cosh,
+			   derivative);
 	}
 	else if (CAR(expr) == TanhSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> cosh(simplify(CoshSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> two(Constant(2.0));
+	    GCStackRoot<> power(simplify(PowerSymbol, cosh, two));
 	    ans = simplify(DivideSymbol,
-			   PP(D(CADR(expr), var)),
-			   PP_S(PowerSymbol,
-				PP_S2(CoshSymbol, CADR(expr)),
-				PP(Constant(2.0))));
-	    UNPROTECT(4);
+			   derivative,
+			   power);
 	}
 	else if (CAR(expr) == SqrtSymbol) {
-	    PROTECT(expr1 = allocLang(3));
+	    GCStackRoot<> expr1;
+	    expr1 = allocLang(3);
 	    SETCAR(expr1, PowerSymbol);
 	    SETCADR(expr1, CADR(expr));
 	    SETCADDR(expr1, Constant(0.5));
 	    ans = D(expr1, var);
-	    UNPROTECT(1);
 	}
 	else if (CAR(expr) == PnormSymbol) {
+	    GCStackRoot<> norm(simplify(DnormSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> derivative(D(CADR(expr), var));
 	    ans = simplify(TimesSymbol,
-			   PP_S2(DnormSymbol, CADR(expr)),
-			   PP(D(CADR(expr), var)));
-	    UNPROTECT(2);
+			   norm,
+			   derivative);
 	}
 	else if (CAR(expr) == DnormSymbol) {
+	    GCStackRoot<> tmp1(simplify(MinusSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> norm(simplify(DnormSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> tmp2(simplify(TimesSymbol, norm, derivative));
 	    ans = simplify(TimesSymbol,
-			   PP_S2(MinusSymbol, CADR(expr)),
-			   PP_S(TimesSymbol,
-				PP_S2(DnormSymbol, CADR(expr)),
-				PP(D(CADR(expr), var))));
-	    UNPROTECT(4);
+			   tmp1,
+			   tmp2);
 	}
 	else if (CAR(expr) == AsinSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> one(Constant(1.));
+	    GCStackRoot<> two(Constant(2.));
+	    GCStackRoot<> power(simplify(PowerSymbol, CADR(expr), two));
+	    GCStackRoot<> tmp1(simplify(MinusSymbol, one, power));
+	    GCStackRoot<> tmp2(simplify(SqrtSymbol, tmp1, R_MissingArg));
 	    ans = simplify(DivideSymbol,
-			   PP(D(CADR(expr), var)),
-			   PP_S(SqrtSymbol,
-				PP_S(MinusSymbol, PP(Constant(1.)),
-				     PP_S(PowerSymbol,CADR(expr),PP(Constant(2.)))),
-				R_MissingArg));
-	    UNPROTECT(6);
+			   derivative,
+			   tmp2);
 	}
 	else if (CAR(expr) == AcosSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> one(Constant(1.));
+	    GCStackRoot<> two(Constant(2.));
+	    GCStackRoot<> power(simplify(PowerSymbol, CADR(expr), two));
+	    GCStackRoot<> tmp1(simplify(MinusSymbol, one, power));
+	    GCStackRoot<> sqrt(simplify(SqrtSymbol, tmp1, R_MissingArg));
+	    GCStackRoot<> tmp2(simplify(DivideSymbol, derivative, sqrt));
 	    ans = simplify(MinusSymbol,
-			   PP_S(DivideSymbol,
-				PP(D(CADR(expr), var)),
-				PP_S(SqrtSymbol,
-				     PP_S(MinusSymbol, PP(Constant(1.)),
-					  PP_S(PowerSymbol,
-					       CADR(expr),PP(Constant(2.)))),
-				     R_MissingArg)), R_MissingArg);
-	    UNPROTECT(7);
+			   tmp2, R_MissingArg);
 	}
 	else if (CAR(expr) == AtanSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> one(Constant(1.));
+	    GCStackRoot<> two(Constant(2.));
+	    GCStackRoot<> power(simplify(PowerSymbol, CADR(expr), two));
+	    GCStackRoot<> denominator(simplify(PlusSymbol, one, power));
 	    ans = simplify(DivideSymbol,
-			   PP(D(CADR(expr), var)),
-			   PP_S(PlusSymbol,PP(Constant(1.)),
-				PP_S(PowerSymbol, CADR(expr),PP(Constant(2.)))));
-	    UNPROTECT(5);
+			   derivative,
+			   denominator);
 	}
 	else if (CAR(expr) == LGammaSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> digamma(simplify(DiGammaSymbol, CADR(expr), R_MissingArg));
 	    ans = simplify(TimesSymbol,
-			   PP(D(CADR(expr), var)),
-			   PP_S2(DiGammaSymbol, CADR(expr)));
-	    UNPROTECT(2);
+			   derivative,
+			   digamma);
 	}
 	else if (CAR(expr) == GammaSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> digamma(simplify(DiGammaSymbol, CADR(expr), R_MissingArg));
+	    GCStackRoot<> tmp(simplify(TimesSymbol, expr, digamma));
 	    ans = simplify(TimesSymbol,
-			   PP(D(CADR(expr), var)),
-			   PP_S(TimesSymbol,
-				expr,
-				PP_S2(DiGammaSymbol, CADR(expr))));
-	    UNPROTECT(3);
+			   derivative,
+			   tmp);
 	}
 	else if (CAR(expr) == DiGammaSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> trigamma(simplify(TriGammaSymbol, CADR(expr), R_MissingArg));
 	    ans = simplify(TimesSymbol,
-			   PP(D(CADR(expr), var)),
-			   PP_S2(TriGammaSymbol, CADR(expr)));
-	    UNPROTECT(2);
+			   derivative,
+			   trigamma);
 	}
 	else if (CAR(expr) == TriGammaSymbol) {
+	    GCStackRoot<> derivative(D(CADR(expr), var));
+	    GCStackRoot<> two(ScalarInteger(2));
+	    GCStackRoot<> psi(simplify(PsiSymbol, CADR(expr), two));
 	    ans = simplify(TimesSymbol,
-			   PP(D(CADR(expr), var)),
-			   PP_S(PsiSymbol, CADR(expr), PP(ScalarInteger(2))));
-	    UNPROTECT(3);
+			   derivative,
+			   psi);
 	}
 	else if (CAR(expr) == PsiSymbol) {
 	    if (length(expr) == 2){
+		GCStackRoot<> derivative(D(CADR(expr), var));
+		GCStackRoot<> one(ScalarInteger(1));
+		GCStackRoot<> psi(simplify(PsiSymbol, CADR(expr), one));
 		ans = simplify(TimesSymbol,
-			       PP(D(CADR(expr), var)),
-			       PP_S(PsiSymbol, CADR(expr), PP(ScalarInteger(1))));
-		UNPROTECT(3);
+			       derivative,
+			       psi);
 	    } else if (TYPEOF(CADDR(expr)) == INTSXP ||
 		       TYPEOF(CADDR(expr)) == REALSXP) {
+		GCStackRoot<> derivative(D(CADR(expr), var));
+		GCStackRoot<> tmp(ScalarInteger(asInteger(CADDR(expr))+1));
+		GCStackRoot<> psi(simplify(PsiSymbol, CADR(expr), tmp));
 		ans = simplify(TimesSymbol,
-			       PP(D(CADR(expr), var)),
-			       PP_S(PsiSymbol,
-				    CADR(expr),
-				    PP(ScalarInteger(asInteger(CADDR(expr))+1))));
-		UNPROTECT(3);
+			       derivative,
+			       psi);
 	    } else {
+		GCStackRoot<> derivative(D(CADR(expr), var));
+		GCStackRoot<> one(ScalarInteger(1));
+		GCStackRoot<> psi(simplify(PsiSymbol, CADR(expr), simplify(PlusSymbol, CADDR(expr),
+					     one)));
 		ans = simplify(TimesSymbol,
-			       PP(D(CADR(expr), var)),
-			       PP_S(PsiSymbol,
-				    CADR(expr),
-				    simplify(PlusSymbol, CADDR(expr),
-					     PP(ScalarInteger(1)))));
-		UNPROTECT(3);
+			       derivative,
+			       psi);
 	    }
 	}
 /* new in R 3.4.0 */
         else if (CAR(expr) == ExpM1Symbol) {
+            GCStackRoot<> exp(simplify(ExpSymbol, CADR(expr), R_MissingArg));
+            GCStackRoot<> derivative(D(CADR(expr), var));
             ans = simplify(TimesSymbol,
-			   PP_S2(ExpSymbol, CADR(expr)),
-                           PP(D(CADR(expr), var)));
-            UNPROTECT(2);
+			   exp,
+                           derivative);
         }
         else if (CAR(expr) == Log1PSymbol) {
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> one(Constant(1.));
+            GCStackRoot<> tmp(simplify(PlusSymbol, one, CADR(expr)));
             ans = simplify(DivideSymbol,
-                           PP(D(CADR(expr), var)),
-                           PP_S(PlusSymbol, PP(Constant(1.)), CADR(expr)));
-            UNPROTECT(3);
+                           derivative,
+                           tmp);
         }
         else if (CAR(expr) == Log2Symbol) {
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> two(Constant(2.));
+            GCStackRoot<> log(simplify(LogSymbol, two, R_MissingArg));
+            GCStackRoot<> tmp(simplify(TimesSymbol, CADR(expr), log));
             ans = simplify(DivideSymbol,
-                           PP(D(CADR(expr), var)),
-                           PP_S(TimesSymbol, CADR(expr),
-				             PP_S2(LogSymbol, PP(Constant(2.)))));
-            UNPROTECT(4);
+                           derivative,
+                           tmp);
         }
         else if (CAR(expr) == Log10Symbol) {
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> ten(Constant(10.));
+            GCStackRoot<> log(simplify(LogSymbol, ten, R_MissingArg));
+            GCStackRoot<> tmp(simplify(TimesSymbol, CADR(expr), log));
             ans = simplify(DivideSymbol,
-                           PP(D(CADR(expr), var)),
-                           PP_S(TimesSymbol, CADR(expr),
-				             PP_S2(LogSymbol, PP(Constant(10.)))));
-            UNPROTECT(4);
+                           derivative,
+                           tmp);
         }
         else if (CAR(expr) == CosPiSymbol) {
+            GCStackRoot<> sin(simplify(SinPiSymbol, CADR(expr), R_MissingArg));
+            GCStackRoot<> tmp(simplify(MinusSymbol, PiSymbol, R_MissingArg));
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> tmp2(simplify(TimesSymbol, tmp, derivative));
             ans = simplify(TimesSymbol,
-                           PP_S2(SinPiSymbol, CADR(expr)),
-                           PP_S(TimesSymbol, PP_S2(MinusSymbol, PiSymbol),
-				             PP(D(CADR(expr), var)) ));
-            UNPROTECT(4);
+                           sin,
+                           tmp2);
         }
         else if (CAR(expr) == SinPiSymbol) {
+            GCStackRoot<> cos(simplify(CosPiSymbol, CADR(expr), R_MissingArg));
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> tmp(simplify(TimesSymbol, PiSymbol, derivative));
             ans = simplify(TimesSymbol,
-                           PP_S2(CosPiSymbol, CADR(expr)),
-                           PP_S(TimesSymbol, PiSymbol,
-                                             PP(D(CADR(expr), var)) ));
-            UNPROTECT(3);
+                           cos,
+                           tmp);
         }
         else if (CAR(expr) == TanPiSymbol) {
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> tmp(simplify(TimesSymbol, PiSymbol, derivative));
+            GCStackRoot<> cos(simplify(CosPiSymbol, CADR(expr), R_MissingArg));
+            GCStackRoot<> two(Constant(2.0));
+            GCStackRoot<> power(simplify(PowerSymbol, cos, two));
             ans = simplify(DivideSymbol,
-                           PP_S(TimesSymbol, PiSymbol, PP(D(CADR(expr), var))),
-			   PP_S(PowerSymbol,
-				PP_S2(CosPiSymbol, CADR(expr)),
-				PP(Constant(2.0))));
-            UNPROTECT(5);
+                           tmp,
+			   power);
         }
         else if (CAR(expr) == LFactorialSymbol) {
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> one(ScalarInteger(1));
+            GCStackRoot<> tmp(simplify(PlusSymbol, CADR(expr), one));
+            GCStackRoot<> digamma(simplify(DiGammaSymbol, tmp, R_MissingArg));
             ans = simplify(TimesSymbol,
-                           PP(D(CADR(expr), var)),
-                           PP_S2(DiGammaSymbol, PP_S(PlusSymbol,
-						     CADR(expr),
-						     PP(ScalarInteger(1)))));
-            UNPROTECT(4);
+                           derivative,
+                           digamma);
         }
         else if (CAR(expr) == FactorialSymbol) {
+            GCStackRoot<> tmp1(D(CADR(expr), var));
+            GCStackRoot<> one(ScalarInteger(1));
+            GCStackRoot<> tmp2(simplify(PlusSymbol, CADR(expr), one));
+            GCStackRoot<> digamma(simplify(DiGammaSymbol, tmp2, R_MissingArg));
+            GCStackRoot<> tmp3(simplify(TimesSymbol, expr, digamma));
             ans = simplify(TimesSymbol,
-                           PP(D(CADR(expr), var)),
-                           PP_S(TimesSymbol,
-                                expr,
-                                PP_S2(DiGammaSymbol, PP_S(PlusSymbol,
-							  CADR(expr),
-							  PP(ScalarInteger(1))))));
-            UNPROTECT(5);
+                           tmp1,
+                           tmp3);
         }
 /* possible future symbols
         else if (CAR(expr) == Log1PExpSymbol) {
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> exp_x(simplify(ExpSymbol, CADR(expr), R_MissingArg));
+            GCStackRoot<> numerator(simplify(TimesSymbol, derivative, exp_x));
+            GCStackRoot<> one(Constant(1.));
+            GCStackRoot<> denominator(simplify(PlusSymbol, one, exp_x));
             ans = simplify(DivideSymbol,
-                           PP_S(TimesSymbol, PP(D(CADR(expr), var)),
-                                PP_S2(ExpSymbol, CADR(expr))),
-                           PP_S(PlusSymbol,PP(Constant(1.)),
-                                PP_S2(ExpSymbol, CADR(expr)) ));
-            UNPROTECT(6);
+                           numerator,
+                           denominator);
         }
         else if (CAR(expr) == Log1MExpSymbol) {
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> negative_derivative(simplify(MinusSymbol, derivative, R_MissingArg));
+            GCStackRoot<> negative_x(simplify(MinusSymbol, CADR(expr), R_MissingArg));
+            GCStackRoot<> exp_negative_x(simplify(ExpSymbol, negative_x, R_MissingArg));
+            GCStackRoot<> numerator(simplify(TimesSymbol, negative_derivative, exp_negative_x));
+            GCStackRoot<> denominator(simplify(ExpM1Symbol, negative_x, R_MissingArg));
             ans = simplify(DivideSymbol,
-                           PP_S(TimesSymbol, PP_S2(MinusSymbol, PP(D(CADR(expr), var))),
-                                PP_S2(ExpSymbol, PP_S2(MinusSymbol, CADR(expr))) ),
-                           PP_S2(ExpM1Symbol, PP_S2(MinusSymbol, CADR(expr))) );
-            UNPROTECT(7);
+                           numerator,
+                           denominator);
         }
         else if (CAR(expr) == Log1PMxSymbol) {
+            GCStackRoot<> derivative(D(CADR(expr), var));
+            GCStackRoot<> negative_derivative(simplify(MinusSymbol, derivative, R_MissingArg));
+            GCStackRoot<> one(Constant(1.));
+            GCStackRoot<> denominator(simplify(PlusSymbol, one, CADR(expr)));
             ans = simplify(DivideSymbol,
-                           PP_S2(MinusSymbol, PP(D(CADR(expr), var))),
-                           PP_S(PlusSymbol,PP(Constant(1.)), CADR(expr)) );
-            UNPROTECT(4);
+                           negative_derivative,
+                           denominator);
         }
 */
 
@@ -688,8 +720,6 @@ static SEXP D(SEXP expr, SEXP var)
     }
     return ans;
 
-#undef PP_S
-#undef PP_S2
 
 } /* D() */
 

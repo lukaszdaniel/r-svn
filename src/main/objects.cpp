@@ -712,10 +712,12 @@ static R_INLINE SEXP getPrimitive(SEXP symbol)
 attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 {
     const char *sb, *sg, *sk;
-    SEXP ans, s, t, klass, method, matchedarg, generic;
-    SEXP nextfun, nextfunSignature;
-    SEXP sysp, formals, newcall;
-    SEXP group, basename;
+    SEXP t, klass, method_, generic_;
+    GCStackRoot<> s, nextfun, matchedarg;
+    SEXP nextfunSignature;
+    SEXP sysp, formals;
+    GCStackRoot<> newcall;
+    SEXP group_, basename;
     SEXP callenv, defenv;
     int i, j;
 
@@ -731,14 +733,15 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     if (cptr == NULL)
 	error("%s", _("'NextMethod' called from outside a function"));
 
-    PROTECT(newcall = shallow_duplicate(cptr->call));
+    newcall = shallow_duplicate(cptr->call);
 
     /* eg get("print.ts")(1) or do.call() */
     if (TYPEOF(CAR(cptr->call)) != SYMSXP)
        error("%s", _("'NextMethod' called from an anonymous function"));
 
-    readS3VarsFromFrame(sysp, &generic, &group, &klass, &method,
+    readS3VarsFromFrame(sysp, &generic_, &group_, &klass, &method_,
 			&callenv, &defenv);
+	GCStackRoot<> generic(generic_), group(group_), method(method_);
 
     /* Find dispatching environments. Promises shouldn't occur, but
        check to be on the safe side.  If the variables are not in the
@@ -764,8 +767,8 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
     }
     /* get formals and actuals; attach the names of the formals to
        the actuals, expanding any ... that occurs */
-    formals = FORMALS(s);
-    PROTECT(matchedarg = patchArgsByActuals(formals, cptr->promargs, cptr->cloenv));
+    formals = FORMALS(s.get());
+    matchedarg = patchArgsByActuals(formals, cptr->promargs, cptr->cloenv);
 
     /*
       Now see if there were any other arguments passed in
@@ -784,8 +787,7 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 		t = ConsCell::convert<PairList>(cc);
 	    }
 	    s = matchmethargs(matchedarg, t);
-	    UNPROTECT(1);
-	    PROTECT(matchedarg = s);
+	    matchedarg = s;
 	    newcall = fixcall(newcall, matchedarg);
 	}
     }
@@ -811,7 +813,6 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	generic = eval(CAR(args), env);
     if (generic == R_NilValue)
 	error("%s", _("generic function not specified"));
-    PROTECT(generic);
 
     if (!isString(generic) || LENGTH(generic) != 1)
 	error("%s", _("invalid generic argument to 'NextMethod'"));
@@ -830,7 +831,6 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (CHAR(STRING_ELT(group, 0))[0] == '\0') basename = generic;
 	else basename = group;
     }
-    PROTECT(group);
 
     nextfun = R_NilValue;
     nextfunSignature = R_NilValue;
@@ -905,9 +905,7 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	    t = install(sg);
 	    nextfun = R_findVar(t, env);
 	    if (TYPEOF(nextfun) == PROMSXP) {
-		PROTECT(nextfun);
 		nextfun = eval(nextfun, env);
-		UNPROTECT(1);
 	    }
 	    if (!FunctionBase::isA(nextfun))
 		error("%s", _("no method to invoke"));
@@ -922,29 +920,29 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
     }
-    PROTECT(nextfun);
-    PROTECT(s = stringSuffix(klass, i));
+    s = stringSuffix(klass, i);
     setAttrib(s, R_PreviousSymbol, klass);
     /* It is possible that if a method was called directly that
 	'method' is unset */
     if (method != R_UnboundValue) {
 	/* for Ops we need `method' to be a vector */
-	PROTECT(method = duplicate(method));
+	method = duplicate(method);
 	for(j = 0; j < LENGTH(method); j++) {
 	    if (strlen(CHAR(STRING_ELT(method,j))))
 		SET_STRING_ELT(method, j,  PRINTNAME(nextfunSignature));
 	}
     } else
-	PROTECT(method = PRINTNAME(nextfunSignature));
+	method = PRINTNAME(nextfunSignature);
 
-    SEXP newvars = PROTECT(createS3Vars(
+    GCStackRoot<> newvars;
+    newvars = createS3Vars(
 	generic,
 	group,
 	s,
 	method,
 	callenv,
 	defenv
-    ));
+    );
 
     SETCAR(newcall, nextfunSignature);
 
@@ -953,9 +951,7 @@ attribute_hidden SEXP do_nextmethod(SEXP call, SEXP op, SEXP args, SEXP env)
        PR#15267 --pd */
     R_GlobalContext->sysparent = callenv;
 
-    ans = applyMethod(newcall, nextfun, matchedarg, env, newvars);
-    UNPROTECT(8);
-    return ans;
+    return applyMethod(newcall, nextfun, matchedarg, env, newvars);
 }
 
 /* primitive */

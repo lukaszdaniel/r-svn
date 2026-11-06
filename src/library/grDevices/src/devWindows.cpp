@@ -38,6 +38,8 @@
 #include <CXXR/RObject.hpp> // for UserBreak
 #include <CXXR/String.hpp>
 #include <CXXR/RealVector.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/ListVector.hpp>
 #include <Defn.h>
 #define R_USE_PROTOTYPES 1
 #include <R_ext/GraphicsEngine.h>
@@ -607,13 +609,12 @@ static void RFontInit()
 }
 
 /* Return a non-relocatable copy of a string */
-
+// @note Caller has to manage the R_alloc stack
 static char *SaveFontSpec(SEXP sxp, int offset)
 {
-    char *s;
     if(!isString(sxp) || length(sxp) <= offset)
 	error("%s", _("invalid font specification"));
-    s = R_alloc(strlen(CHAR(STRING_ELT(sxp, offset)))+1, sizeof(char));
+    char *s = R_alloc(strlen(CHAR(STRING_ELT(sxp, offset)))+1, sizeof(char)); 
     strcpy(s, CHAR(STRING_ELT(sxp, offset)));
     return s;
 }
@@ -627,6 +628,7 @@ static char *SaveFontSpec(SEXP sxp, int offset)
  * OR IF can't find gcontext fontfamily in font database
  * THEN return NULL
  */
+// @note Caller has to manage the R_alloc stack
 static char* translateFontFamily(const char* family) {
     SEXP graphicsNS, fontdb, fontnames;
     GCStackRoot<> windowsenv;
@@ -1102,22 +1104,22 @@ static void grpopupact(control m)
 
 static SEXP NewPlotHistory(int n)
 {
-    SEXP  vDL, class_;
+    GCStackRoot<> vDL, class_;
 
-    PROTECT(vDL = allocVector(VECSXP, 5));
+    vDL = ListVector::create(5);
     for (int i = 0; i < 4; i++)
-	PROTECT(SET_VECTOR_ELT(vDL, i, allocVector(INTSXP, 1)));
-    PROTECT(SET_pHISTORY (allocVector(VECSXP, n)));
+	SET_VECTOR_ELT(vDL, i, IntVector::create(1));
+    SET_pHISTORY (ListVector::create(n));
     pMAGIC = PLOTHISTORYMAGIC;
     pNUMPLOTS = 0;
     pMAXPLOTS = n;
     pCURRENTPOS = -1;
     for (int i = 0; i < n; i++)
 	SET_VECTOR_ELT(pHISTORY, i, R_NilValue);
-    PROTECT(class_ = mkString("SavedPlots"));
+    class_ = mkString("SavedPlots");
     classgets(vDL, class_);
     SETDL;
-    UNPROTECT(7);
+
     return vDL;
 }
 

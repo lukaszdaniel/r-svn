@@ -1940,9 +1940,8 @@ void F77_SUB(rchkusr)(void)
     R_CheckUserInterrupt();
 }
 
-/* Return a copy of a string using memory from R_alloc.
-   NB: caller has to manage R_alloc stack.  Used in platform.c
-*/
+// Return a copy of a string using memory from R_alloc.
+// @note Caller has to manage the R_alloc stack
 char *Rf_acopy_string(const char *in)
 {
     char *out = NULL;

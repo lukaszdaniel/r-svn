@@ -179,6 +179,7 @@ SEXP in_loadRconsole(SEXP sfile)
 }
 
 /* returns R_alloc'd results */
+// @note Caller has to manage the R_alloc stack
 static int getCurrentUserAndDomain(char **user, char **domain)
 {
     bool ok = 0;

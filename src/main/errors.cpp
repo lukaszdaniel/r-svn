@@ -923,13 +923,14 @@ NORET static void errorcall_dflt(SEXP call, const char *format,...)
     va_end(ap);
 }
 
-NORET void Rf_errorcall(SEXP call, const char *format,...)
+NORET void Rf_errorcall(SEXP call_, const char *format,...)
 {
     va_list ap;
+    GCStackRoot<> call(call_);
 
     if (call == R_CurrentExpression)
 	/* behave like error( */
-	call = PROTECT(getCurrentCall()); // unprotected by the jump
+	call = getCurrentCall(); // unprotected by the jump
 
     va_start(ap, format);
     vsignalError(call, format, ap);
@@ -970,7 +971,8 @@ void Rf_error(const char *format, ...)
     va_start(ap, format);
     Rvsnprintf_mbcs(buf, min(BUFSIZE, R_WarnLength), format, ap);
     va_end(ap);
-    SEXP call = PROTECT(getCurrentCall()); // unprotected by the jump
+    GCStackRoot<> call;
+    call = getCurrentCall(); // unprotected by the jump
     errorcall(call, "%s", buf);
 }
 

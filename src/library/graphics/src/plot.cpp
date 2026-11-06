@@ -2139,7 +2139,8 @@ SEXP C_text(SEXP args)
 /* text(xy, labels, adj, pos, offset,
  *	vfont, cex, col, font, ...)
  */
-    SEXP sx, sy, sxy, txt, adj, pos, cex, col, rawcol, font, vfont;
+    SEXP sx, sy, sxy, rawcol;
+    GCStackRoot<> txt, adj, pos, cex, col, font, vfont;
     int i, n, npos, ncex, ncol, nfont, ntxt;
     double adjx = 0, adjy = 0, offset = 0.5;
     double *x, *y;
@@ -2161,12 +2162,11 @@ SEXP C_text(SEXP args)
 	txt = ExpressionVector::coerce(txt);
     else if (!isExpression(txt))
 	txt = StringVector::coerce(txt);
-    PROTECT(txt);
     if (length(txt) <= 0)
 	error(_("zero-length '%s' specified"), "labels");
     args = CDR(args);
 
-    PROTECT(adj = CAR(args));
+    adj = CAR(args);
     if (isNull(adj) || (isNumeric(adj) && length(adj) == 0)) {
 	adjx = gpptr(dd)->adj;
 	adjy = NA_REAL;
@@ -2194,7 +2194,7 @@ SEXP C_text(SEXP args)
     else error(_("invalid '%s' value"), "adj");
     args = CDR(args);
 
-    PROTECT(pos = IntVector::coerce(CAR(args)));
+    pos = IntVector::coerce(CAR(args));
     npos = length(pos);
     for (i = 0; i < npos; i++)
 	if (INTEGER(pos)[i] < 1 || INTEGER(pos)[i] > 4)
@@ -2204,19 +2204,19 @@ SEXP C_text(SEXP args)
     offset = GConvertXUnits(asReal(CAR(args)), CHARS, INCHES, dd);
     args = CDR(args);
 
-    PROTECT(vfont = FixupVFont(CAR(args)));
+    vfont = FixupVFont(CAR(args));
     args = CDR(args);
 
-    PROTECT(cex = FixupCex(CAR(args), 1.0));
+    cex = FixupCex(CAR(args), 1.0);
     ncex = LENGTH(cex);
     args = CDR(args);
 
     rawcol = CAR(args);
-    PROTECT(col = FixupCol(rawcol, R_TRANWHITE));
+    col = FixupCol(rawcol, R_TRANWHITE);
     ncol = LENGTH(col);
     args = CDR(args);
 
-    PROTECT(font = FixupFont(CAR(args), NA_INTEGER));
+    font = FixupFont(CAR(args), NA_INTEGER);
     nfont = LENGTH(font);
     args = CDR(args);
 
@@ -2296,7 +2296,7 @@ SEXP C_text(SEXP args)
     GMode(0, dd);
 
     GRestorePars(dd);
-    UNPROTECT(7);
+
     return R_NilValue;
 }
 
