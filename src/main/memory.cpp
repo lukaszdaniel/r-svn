@@ -304,77 +304,7 @@ static void R_gc_full(bool full = false);
 #define UNMARK_NODE(s) (MARK(s)=0)
 
 
-/* Tuning Constants. Most of these could be made settable from R,
-   within some reasonable constraints at least.  Since there are quite
-   a lot of constants it would probably make sense to put together
-   several "packages" representing different space/speed tradeoffs
-   (e.g. very aggressive freeing and small increments to conserve
-   memory; much less frequent releasing and larger increments to
-   increase speed). */
-
-/* When a level N collection fails to produce at least MinFreeFrac *
-   R_NSize free nodes and MinFreeFrac * R_VSize free vector space, the
-   next collection will be a level N + 1 collection.
-
-   This constant is also used in heap size adjustment as a minimal
-   fraction of the minimal heap size levels that should be available
-   for allocation. */
-static double R_MinFreeFrac = 0.2;
-
-/* When pages are released, a number of free nodes equal to
-   R_MaxKeepFrac times the number of allocated nodes for each class is
-   retained.  Pages not needed to meet this requirement are released.
-   An attempt to release pages is made every R_PageReleaseFreq level 1
-   or level 2 collections. */
-// static double R_MaxKeepFrac = 0.5;
-// static unsigned int R_PageReleaseFreq = 1;
-
-/* The heap size constants R_NSize and R_VSize are used for triggering
-   collections.  The initial values set by defaults or command line
-   arguments are used as minimal values.  After full collections these
-   levels are adjusted up or down, though not below the minimal values
-   or above the maximum values, towards maintain heap occupancy within
-   a specified range.  When the number of nodes in use reaches
-   R_NGrowFrac * R_NSize, the value of R_NSize is incremented by
-   R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize.  When the number of
-   nodes in use falls below R_NShrinkFrac, R_NSize is decremented by
-   R_NShrinkIncrMin + R_NShrinkFrac * R_NSize.  Analogous adjustments
-   are made to R_VSize.
-
-   This mechanism for adjusting the heap size constants is very
-   primitive but hopefully adequate for now.  Some modeling and
-   experimentation would be useful.  We want the heap sizes to get set
-   at levels adequate for the current computations.  The present
-   mechanism uses only the size of the current live heap to provide
-   information about the current needs; since the current live heap
-   size can be very volatile, the adjustment mechanism only makes
-   gradual adjustments.  A more sophisticated strategy would use more
-   of the live heap history.
-
-   Some of the settings can now be adjusted by environment variables.
-*/
-static double R_NGrowFrac = 0.70;
-static double R_NShrinkFrac = 0.30;
-
-static double R_VGrowFrac = 0.70;
-static double R_VShrinkFrac = 0.30;
-
-#ifdef SMALL_MEMORY
-/* On machines with only 32M of memory (or on a classic Mac OS port)
-   it might be a good idea to use settings like these that are more
-   aggressive at keeping memory usage down. */
-static double R_NGrowIncrFrac = 0.0, R_NShrinkIncrFrac = 0.2;
-static unsigned int R_NGrowIncrMin = 50000, R_NShrinkIncrMin = 0;
-static double R_VGrowIncrFrac = 0.0, R_VShrinkIncrFrac = 0.2;
-static unsigned int R_VGrowIncrMin = 100000, R_VShrinkIncrMin = 0;
-#else
-static double R_NGrowIncrFrac = 0.2, R_NShrinkIncrFrac = 0.2;
-static unsigned int R_NGrowIncrMin = 40000, R_NShrinkIncrMin = 0;
-static double R_VGrowIncrFrac = 0.2, R_VShrinkIncrFrac = 0.2;
-static unsigned int R_VGrowIncrMin = 80000, R_VShrinkIncrMin = 0;
-#endif
-
-static void init_gc_grow_settings(void)
+void GCManager::init_gc_grow_settings(void)
 {
     char *arg = getenv("R_GC_MEM_GROW");
     if (arg != NULL) {
@@ -584,125 +514,12 @@ static void DEBUG_CHECK_NODE_COUNTS(const char *where)
         NewCount, OldCount, OldToNewCount,
         NewCount + OldCount + OldToNewCount);
 }
-
-static void DEBUG_GC_SUMMARY(int full_gc)
-{
-    REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
-        MemoryBank::doublesAllocated());
-    unsigned int OldCount = 0;
-    for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++)
-        OldCount += GCNode::s_gencount[gen];
-    REprintf(": %d", OldCount);
-}
 #else
 #define DEBUG_CHECK_NODE_COUNTS(s)
-#define DEBUG_GC_SUMMARY(x)
 #endif /* DEBUG_GC */
-
-#ifdef DEBUG_ADJUST_HEAP
-static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
-{
-    REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
-	     100.0 * node_occup, 100.0 * vect_occup);
-    R_size_t alloc = MemoryBank::doublesAllocated() +
-	sizeof(VectorBase) * MemoryBank::blocksAllocated();
-    REprintf("Total allocation: %lu\n", alloc);
-    REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
-}
-#else
-#define DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup)
-#endif /* DEBUG_ADJUST_HEAP */
 
 /* Page Allocation and Release. */
 
-/* Heap Size Adjustment. */
-namespace
-{
-    R_size_t applyAggressiveGrow(R_size_t change)
-    {
-        static R_size_t last_in_use = 0;
-        static unsigned int adjust_count = 1;
-
-        if (adjust_count < 50) {
-            ++adjust_count;
-
-            /* A decrease in live nodes contributes no predicted growth. */
-            R_size_t R_NodesInUse = GCNode::numNodes();
-            double growth = R_NodesInUse > last_in_use
-                ? (double)(R_NodesInUse - last_in_use) : 0.0;
-
-            /* Try to achieve an occupancy rate of R_NGrowFrac. */
-            double target = ((double)R_NodesInUse + growth) / R_NGrowFrac;
-            last_in_use = R_NodesInUse;
-
-            /* Exclude out-of-range conversion, including a rounded-up
-               SIZE_MAX. */
-            if (target < (double)R_SIZE_T_MAX) {
-                R_size_t next_nsize = (R_size_t)target;
-                if (next_nsize > R_NSize && next_nsize - R_NSize > change)
-                    change = next_nsize - R_NSize;
-            }
-        }
-        return change;
-    }
-} // anonymous namespace
-
-static void AdjustHeapSize(R_size_t size_needed)
-{
-    // Calculate minimum required free nodes and vectors
-    R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
-    R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
-
-    // Calculate required node and vector sizes
-    R_size_t NNeeded = GCNode::numNodes() + R_MinNFree;
-    R_size_t VNeeded = MemoryBank::doublesAllocated() + size_needed + R_MinVFree;
-
-    // Calculate occupancy rates
-    double node_occup = ((double)NNeeded) / R_NSize;
-    double vect_occup = ((double)VNeeded) / R_VSize;
-
-    // Adjust node heap size
-    if (node_occup > R_NGrowFrac) {
-        R_size_t change = (R_size_t)(R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize);
-
-        /* for early adjustments grow more aggressively */
-        change = applyAggressiveGrow(change);
-
-        if (R_NSize <= R_MaxNSize && change <= R_MaxNSize - R_NSize)
-            R_NSize += change;
-    }
-    else if (node_occup < R_NShrinkFrac) {
-        R_NSize -= (R_size_t)(R_NShrinkIncrMin + R_NShrinkIncrFrac * R_NSize);
-
-        if (R_NSize < NNeeded)
-            R_NSize = (NNeeded < R_MaxNSize) ? NNeeded : R_MaxNSize;
-
-        if (R_NSize < orig_R_NSize)
-            R_NSize = orig_R_NSize;
-    }
-
-    // Adjust vector heap size
-    if (vect_occup > 1.0 && VNeeded < R_MaxVSize)
-        R_VSize = VNeeded;
-
-    if (vect_occup > R_VGrowFrac) {
-        R_size_t change = (R_size_t)(R_VGrowIncrMin + R_VGrowIncrFrac * R_VSize);
-
-        if (R_MaxVSize - R_VSize >= change)
-            R_VSize += change;
-    }
-    else if (vect_occup < R_VShrinkFrac) {
-        R_VSize -= (R_size_t)(R_VShrinkIncrMin + R_VShrinkIncrFrac * R_VSize);
-
-        if (R_VSize < VNeeded)
-            R_VSize = VNeeded;
-
-        if (R_VSize < orig_R_VSize)
-            R_VSize = orig_R_VSize;
-    }
-
-    DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup);
-}
 
 
 /* Managing Old-to-New References. */
@@ -750,23 +567,6 @@ static void old_to_new(SEXP x, SEXP y)
 
 #define CHECK_OLD_TO_NEW(x,y) do { if (NODE_IS_OLDER(x, y)) old_to_new(x, y); } while (0)
 #define CHECK_GC_EDGE(x,y) do { (void) CHK(x); (void) CHK(y); } while (0)
-
-
-/* Node Sorting.  SortNodes attempts to improve locality of reference
-   by rearranging the free list to place nodes on the same place page
-   together and order nodes within pages.  This involves a sweep of the
-   heap, so it should not be done too often, but doing it at least
-   occasionally does seem essential.  Sorting on each full colllection is
-   probably sufficient.
-*/
-
-#define SORT_NODES
-#ifdef SORT_NODES
-static void SortNodes(void)
-{
-    MemoryBank::defragment();
-}
-#endif
 
 
 /* Finalization and Weak References */
@@ -1198,60 +998,6 @@ void GCNode::gc(unsigned int num_old_gens_to_collect /* either 0, 1, or 2 */)
     DEBUG_CHECK_NODE_COUNTS("after releasing allocated nodes");
 }
 
-// former RunGenCollect()
-unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_collection)
-{
-    static unsigned int level = 0;
-    unsigned int gens_collected;
-
-    BadObject::s_firstBadObject.clear();
-
-    /* determine number of generations to collect */
-    if (force_full_collection) level = s_num_old_generations;
-
-#ifdef PROTECTCHECK
-    level = s_num_old_generations;
-#endif
-
-    level = genRota(level);
-
-    bool ok = false;
-    while (!ok) {
-        ok = true;
-
-        GCNode::gc(level);
-        gens_collected = level;
-
-        if (level < s_num_old_generations) {
-            if (VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
-                ++level;
-                if (VHEAP_FREE() < size_needed)
-                    ok = false;
-            }
-            else level = 0;
-        }
-        else level = 0;
-    } // end of while loop
-    s_gen_gc_counts[gens_collected]++;
-
-    if (gens_collected > 0)
-    {
-        if (gens_collected == s_num_old_generations) {
-            /**** do some adjustment for intermediate collections? */
-            AdjustHeapSize(size_needed);
-        }
-        DEBUG_CHECK_NODE_COUNTS("after heap adjustment");
-    }
-
-#ifdef SORT_NODES
-    if (gens_collected == s_num_old_generations)
-        SortNodes();
-#endif
-
-    return gens_collected;
-}
-
-
 /* public interface for controlling GC torture settings */
 /* maybe, but in no header, and now hidden */
 attribute_hidden
@@ -1301,7 +1047,7 @@ attribute_hidden SEXP do_gctorture2(SEXP call, SEXP op, SEXP args, SEXP rho)
 }
 
 /* initialize gctorture settings from environment variables */
-static void init_gctorture(void)
+void GCManager::init_gctorture(void)
 {
     const char *arg = getenv("R_GCTORTURE");
     if (arg != NULL) {
@@ -1452,8 +1198,8 @@ static void gc_end_timing(void)
 attribute_hidden void R::InitMemory(void)
 {
     GCManager::setMonitors(gc_start_timing, gc_end_timing);
-    init_gctorture();
-    init_gc_grow_settings();
+    GCManager::init_gctorture();
+    GCManager::init_gc_grow_settings();
 
     const char *arg = getenv("_R_GC_FAIL_ON_ERROR_");
     if (arg != NULL && StringTrue(arg))
@@ -1919,118 +1665,6 @@ attribute_hidden void R::R_check_thread(const char *s)
 attribute_hidden void R::R_check_thread(const char *s) {}
 # endif
 #endif
-
-// former R_gc_internal()
-void GCManager::gc(R_size_t size_needed, bool force_full_collection)
-{
-    R_CHECK_THREAD;
-    if (GCInhibitor::active() || s_gc_is_running) {
-        if (s_gc_is_running)
-            gc_error("*** recursive gc invocation\n");
-
-        // if (!force_full_collection &&
-        //     VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
-        //     force_full_collection = true;
-
-        if (size_needed > VHEAP_FREE()) {
-            R_size_t expand = size_needed - VHEAP_FREE();
-            if (R_VSize + expand > R_MaxVSize)
-                mem_err_heap();
-            R_VSize += expand;
-        }
-
-        s_gc_pending = true;
-        return;
-    }
-    s_gc_pending = false;
-
-    double ncells, vcells, vfrac, nfrac;
-    BadObject bad_object;
-    unsigned int gens_collected = 0;
-
-#ifdef IMMEDIATE_FINALIZERS
-    bool first = true;
-    bool ok = false;
-    while (!ok) {
-        ok = true;
-#endif
-
-        ++s_gc_count;
-
-        R_N_maxused = std::max(R_N_maxused, GCNode::numNodes());
-        R_V_maxused = std::max(R_V_maxused, MemoryBank::doublesAllocated());
-
-        BEGIN_SUSPEND_INTERRUPTS{
-        s_gc_is_running = true;
-        if (s_pre_gc) // gc_start_timing();
-            (*s_pre_gc)();
-        gens_collected = gcGenController(size_needed, force_full_collection);
-        if (s_post_gc) // gc_end_timing();
-            (*s_post_gc)();
-        s_gc_is_running = false;
-        } END_SUSPEND_INTERRUPTS;
-
-        if (R_check_constants > 2 ||
-            (R_check_constants > 1 && gens_collected == GCNode::numOldGenerations()))
-            R_checkConstants(true);
-
-        if (s_os) {
-            REprintf("Garbage collection %d = %d", s_gc_count, s_gen_gc_counts[0]);
-            for (unsigned int i = 0; i < GCNode::numOldGenerations(); i++)
-                REprintf("+%d", s_gen_gc_counts[i + 1]);
-            REprintf(" (level %d) ... ", gens_collected);
-            DEBUG_GC_SUMMARY(gens_collected == GCNode::numOldGenerations());
-
-            ncells = GCNode::numNodes();
-            nfrac = (100.0 * ncells) / R_NSize;
-            /* We try to make this consistent with the results returned by gc */
-            ncells = 0.1 * ceil(10 * ncells * sizeof(RObject) / Mega);
-            REprintf("\n%.1f %s of cons cells used (%d%%)\n",
-                ncells, "Mbytes", (int)(nfrac + 0.5));
-            vcells = MemoryBank::doublesAllocated();
-            vfrac = (100.0 * vcells) / R_VSize;
-            vcells = 0.1 * ceil(10 * vcells * vsfac / Mega);
-            REprintf("%.1f %s of vectors used (%d%%)\n",
-                vcells, "Mbytes", (int)(vfrac + 0.5));
-        }
-
-        if (!BadObject::s_firstBadObject.isEmpty()) {
-            bad_object = BadObject::s_firstBadObject;
-        }
-
-#ifdef IMMEDIATE_FINALIZERS
-        if (first) {
-            first = false;
-            /* Run any eligible finalizers.  The return result of
-               RunFinalizers is true if any finalizers are actually run.
-               There is a small chance that running finalizers here may
-               chew up enough memory to make another immediate collection
-               necessary.  If so, we jump back to the beginning and run
-               the collection, but on this second pass we do not run
-               finalizers. */
-            if (RunFinalizers() && (size_needed > VHEAP_FREE()))
-                ok = false;
-        }
-    } // end of while loop
-#endif
-
-    bad_object.printSummary();
-
-    /* sanity check on logical scalar values */
-    if (R_TrueValue != NULL && LOGICAL(R_TrueValue)[0] != TRUE) {
-        LOGICAL(R_TrueValue)[0] = TRUE;
-        gc_error(_("internal TRUE value has been modified"));
-    }
-    if (R_FalseValue != NULL && LOGICAL(R_FalseValue)[0] != FALSE) {
-        LOGICAL(R_FalseValue)[0] = FALSE;
-        gc_error(_("internal FALSE value has been modified"));
-    }
-    if (R_LogicalNAValue != NULL &&
-        LOGICAL(R_LogicalNAValue)[0] != NA_LOGICAL) {
-        LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
-        gc_error(_("internal logical NA value has been modified"));
-    }
-}
 
 
 attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)

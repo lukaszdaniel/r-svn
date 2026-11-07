@@ -1522,11 +1522,11 @@ attribute_hidden void R::R_init_jit_enabled(void)
 
     /* -1 ... duplicate constants on LDCONST and PUSHCONSTARG, no checking
         0 ... no checking (no duplication for >= 0) [DEFAULT]
-	1 ... check at error, session exit and reclamation
-	2 ... check also at full GC
-	3 ... check also at partial GC
-	4 ... check also at .Call
-	5 ... (very) verbose report on modified constants
+        1 ... check at error, session exit and reclamation
+        2 ... check also at full GC
+        3 ... check also at partial GC
+        4 ... check also at .Call
+        5 ... (very) verbose report on modified constants
     */
     if (R_check_constants <= 1) {
 	char *check = getenv("R_CHECK_CONSTANTS");

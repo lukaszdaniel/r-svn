@@ -227,6 +227,79 @@ namespace CXXR
 #define R_MaxNSize CXXR::GCManager::s_max_node_threshold
 #define R_N_maxused CXXR::GCManager::s_max_node_used
 #define R_V_maxused CXXR::GCManager::s_max_used
+
+        /* Tuning Constants. Most of these could be made settable from R,
+           within some reasonable constraints at least.  Since there are quite
+           a lot of constants it would probably make sense to put together
+           several "packages" representing different space/speed tradeoffs
+           (e.g. very aggressive freeing and small increments to conserve
+           memory; much less frequent releasing and larger increments to
+           increase speed). */
+
+        /* When a level N collection fails to produce at least MinFreeFrac *
+           R_NSize free nodes and MinFreeFrac * R_VSize free vector space, the
+           next collection will be a level N + 1 collection.
+
+           This constant is also used in heap size adjustment as a minimal
+           fraction of the minimal heap size levels that should be available
+           for allocation. */
+        static double s_min_free_frac;
+
+        /* When pages are released, a number of free nodes equal to
+           R_MaxKeepFrac times the number of allocated nodes for each class is
+           retained.  Pages not needed to meet this requirement are released.
+           An attempt to release pages is made every R_PageReleaseFreq level 1
+           or level 2 collections. */
+        // static double R_MaxKeepFrac = 0.5;
+        // static unsigned int R_PageReleaseFreq = 1;
+
+        /* The heap size constants R_NSize and R_VSize are used for triggering
+           collections.  The initial values set by defaults or command line
+           arguments are used as minimal values.  After full collections these
+           levels are adjusted up or down, though not below the minimal values
+           or above the maximum values, towards maintain heap occupancy within
+           a specified range.  When the number of nodes in use reaches
+           R_NGrowFrac * R_NSize, the value of R_NSize is incremented by
+           R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize.  When the number of
+           nodes in use falls below R_NShrinkFrac, R_NSize is decremented by
+           R_NShrinkIncrMin + R_NShrinkFrac * R_NSize.  Analogous adjustments
+           are made to R_VSize.
+
+           This mechanism for adjusting the heap size constants is very
+           primitive but hopefully adequate for now.  Some modeling and
+           experimentation would be useful.  We want the heap sizes to get set
+           at levels adequate for the current computations.  The present
+           mechanism uses only the size of the current live heap to provide
+           information about the current needs; since the current live heap
+           size can be very volatile, the adjustment mechanism only makes
+           gradual adjustments.  A more sophisticated strategy would use more
+           of the live heap history.
+
+           Some of the settings can now be adjusted by environment variables.
+        */
+        static double s_ngrow_frac;
+        static double s_nshrink_frac;
+
+        static double s_vgrow_frac;
+        static double s_vshrink_frac;
+
+        static double s_ngrow_incr_frac, s_nshrink_incr_frac;
+        static unsigned int s_ngrow_incr_min, s_nshrink_incr_min;
+        static double s_vgrow_incr_frac, s_vshrink_incr_frac;
+        static unsigned int s_vgrow_incr_min, s_vshrink_incr_min;
+#define R_MinFreeFrac CXXR::GCManager::s_min_free_frac
+#define R_NGrowFrac CXXR::GCManager::s_ngrow_frac
+#define R_NShrinkFrac CXXR::GCManager::s_nshrink_frac
+#define R_VGrowFrac CXXR::GCManager::s_vgrow_frac
+#define R_VShrinkFrac CXXR::GCManager::s_vshrink_frac
+#define R_NGrowIncrFrac CXXR::GCManager::s_ngrow_incr_frac
+#define R_NShrinkIncrFrac CXXR::GCManager::s_nshrink_incr_frac
+#define R_NGrowIncrMin CXXR::GCManager::s_ngrow_incr_min
+#define R_NShrinkIncrMin CXXR::GCManager::s_nshrink_incr_min
+#define R_VGrowIncrFrac CXXR::GCManager::s_vgrow_incr_frac
+#define R_VShrinkIncrFrac CXXR::GCManager::s_vshrink_incr_frac
+#define R_VGrowIncrMin CXXR::GCManager::s_vgrow_incr_min
+#define R_VShrinkIncrMin CXXR::GCManager::s_vshrink_incr_min
         /* current units for VSize: changes at initialization */
         static unsigned int s_vsfac;
 #define vsfac CXXR::GCManager::s_vsfac
@@ -269,7 +342,7 @@ namespace CXXR
          * s_collect_counts_max[1] Level 1 collections a Level 2 collection
          * will be carried out. Thus, roughly, every s_collect_counts_max[0]-th
          * collection is a Level 1 collection and every
-         * (s_collect_counts_max[0] * s_collect_counts_max[1])-th collection 
+         * (s_collect_counts_max[0] * s_collect_counts_max[1])-th collection
          * is a Level 2 collection.
          *
          * @param num_old_gens_to_collect (<= 2, not checked) This parameter places a
@@ -279,6 +352,11 @@ namespace CXXR
          *          the position in the rota is advanced accordingly.
          */
         static unsigned int genRota(unsigned int num_old_gens_to_collect);
+
+        static void AdjustHeapSize(R_size_t size_needed);
+
+        static void init_gctorture();
+        static void init_gc_grow_settings();
 
         static unsigned int s_inhibitor_count; // Number of GCInhibitor
                                                // objects in existence.

@@ -32,6 +32,7 @@
 #include <algorithm> // for std::fill
 #include <CXXR/MemoryBank.hpp>
 #include <CXXR/GCManager.hpp>
+#include <CXXR/BadObject.hpp>
 #include <Rinterface.h> // for R_Suicide()
 #include <R_ext/Error.h> // for Rf_error
 #include <R_ext/Print.h> // for REprintf
@@ -59,6 +60,29 @@ namespace CXXR
     size_t GCManager::s_min_node_threshold = 0;
     size_t GCManager::s_max_node_threshold = R_SIZE_T_MAX;
     size_t GCManager::s_max_node_used = 0;
+
+    double GCManager::s_min_free_frac = 0.2;
+    double GCManager::s_ngrow_frac = 0.70;
+    double GCManager::s_nshrink_frac = 0.30;
+
+    double GCManager::s_vgrow_frac = 0.70;
+    double GCManager::s_vshrink_frac = 0.30;
+
+#ifdef SMALL_MEMORY
+    /* On machines with only 32M of memory (or on a classic Mac OS port)
+       it might be a good idea to use settings like these that are more
+       aggressive at keeping memory usage down. */
+    double GCManager::s_ngrow_incr_frac = 0.0, GCManager::s_nshrink_incr_frac = 0.2;
+    unsigned int GCManager::s_ngrow_incr_min = 50000, GCManager::s_nshrink_incr_min = 0;
+    double GCManager::s_vgrow_incr_frac = 0.0, GCManager::s_vshrink_incr_frac = 0.2;
+    unsigned int GCManager::s_vgrow_incr_min = 100000, GCManager::s_vshrink_incr_min = 0;
+#else
+    double GCManager::s_ngrow_incr_frac = 0.2, GCManager::s_nshrink_incr_frac = 0.2;
+    unsigned int GCManager::s_ngrow_incr_min = 40000, GCManager::s_nshrink_incr_min = 0;
+    double GCManager::s_vgrow_incr_frac = 0.2, GCManager::s_vshrink_incr_frac = 0.2;
+    unsigned int GCManager::s_vgrow_incr_min = 80000, GCManager::s_vshrink_incr_min = 0;
+#endif
+
     unsigned int GCManager::s_vsfac = 1;
     std::ostream *GCManager::s_os = nullptr;
 
@@ -199,7 +223,7 @@ namespace CXXR
             mem_err_heap();
         return R_VSize * sizeof(VECREC);
     }
-#undef VHEAP_FREE
+// #undef VHEAP_FREE
     void GCManager::enableGC(size_t initial_threshold, size_t initial_node_threshold)
     {
         // Safeguard against cases where R_VSize or R_NSize have already been set up.
@@ -274,6 +298,333 @@ namespace CXXR
         // We've exceeded all thresholds → full collection
         reset_counters(s_collect_counts);
         return s_level = s_num_old_generations;
+    }
+
+// #define DEBUG_GC
+#ifdef DEBUG_GC
+#define NEXT_NODE(s) (s)->m_next
+    static void DEBUG_CHECK_NODE_COUNTS(const char *where)
+    {
+        REprintf("Node counts %s:\n", where);
+        unsigned int NewCount = 0;
+        unsigned int OldCount = 0;
+        unsigned int OldToNewCount = 0;
+        for (const GCNode *s = NEXT_NODE(GCNode::s_New);
+            s != GCNode::s_New.get();
+            s = NEXT_NODE(s)) {
+            NewCount++;
+        }
+        for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
+            for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
+                s != GCNode::s_Old[gen].get();
+                s = NEXT_NODE(s)) {
+                OldCount++;
+                if (gen != NODE_GENERATION(s))
+                    GCManager::gc_error(_("Inconsistent node generation in s_Old\n"));
+                GCNode::OldToNewChecker o2n(gen);
+                s->visitReferents(&o2n);
+            }
+            for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[gen]);
+                s != GCNode::s_OldToNew[gen].get();
+                s = NEXT_NODE(s)) {
+                OldToNewCount++;
+                if (gen != NODE_GENERATION(s))
+                    GCManager::gc_error(_("Inconsistent node generation in s_OldToNew\n"));
+            }
+        }
+        REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
+            NewCount, OldCount, OldToNewCount,
+            NewCount + OldCount + OldToNewCount);
+    }
+    static void DEBUG_GC_SUMMARY(int full_gc)
+    {
+        REprintf("\n%s, VSize = %lu", full_gc ? "Full" : "Minor",
+            MemoryBank::doublesAllocated());
+        unsigned int OldCount = 0;
+        for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++)
+            OldCount += GCNode::s_gencount[gen];
+        REprintf(": %d", OldCount);
+    }
+#else
+#define DEBUG_CHECK_NODE_COUNTS(s)
+#define DEBUG_GC_SUMMARY(x)
+#endif
+
+// #define DEBUG_ADJUST_HEAP
+#ifdef DEBUG_ADJUST_HEAP
+    static void DEBUG_ADJUST_HEAP_PRINT(double node_occup, double vect_occup)
+    {
+        REprintf("Node occupancy: %.0f%%\nVector occupancy: %.0f%%\n",
+            100.0 * node_occup, 100.0 * vect_occup);
+        R_size_t alloc = MemoryBank::doublesAllocated() +
+            sizeof(VectorBase) * MemoryBank::blocksAllocated();
+        REprintf("Total allocation: %lu\n", alloc);
+        REprintf("Ncells %lu\nVcells %lu\n", R_NSize, R_VSize);
+    }
+#else
+#define DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup)
+#endif /* DEBUG_ADJUST_HEAP */
+
+    /* Heap Size Adjustment. */
+    namespace
+    {
+        R_size_t applyAggressiveGrow(R_size_t change)
+        {
+            static R_size_t last_in_use = 0;
+            static unsigned int adjust_count = 1;
+
+            if (adjust_count < 50) {
+                ++adjust_count;
+
+                /* A decrease in live nodes contributes no predicted growth. */
+                R_size_t R_NodesInUse = GCNode::numNodes();
+                double growth = R_NodesInUse > last_in_use
+                    ? (double)(R_NodesInUse - last_in_use) : 0.0;
+
+                /* Try to achieve an occupancy rate of R_NGrowFrac. */
+                double target = ((double)R_NodesInUse + growth) / R_NGrowFrac;
+                last_in_use = R_NodesInUse;
+
+                /* Exclude out-of-range conversion, including a rounded-up
+                   SIZE_MAX. */
+                if (target < (double)R_SIZE_T_MAX) {
+                    R_size_t next_nsize = (R_size_t)target;
+                    if (next_nsize > R_NSize && next_nsize - R_NSize > change)
+                        change = next_nsize - R_NSize;
+                }
+            }
+            return change;
+        }
+    } // anonymous namespace
+
+    void GCManager::AdjustHeapSize(R_size_t size_needed)
+    {
+        // Calculate minimum required free nodes and vectors
+        R_size_t R_MinNFree = (R_size_t)(orig_R_NSize * R_MinFreeFrac);
+        R_size_t R_MinVFree = (R_size_t)(orig_R_VSize * R_MinFreeFrac);
+
+        // Calculate required node and vector sizes
+        R_size_t NNeeded = GCNode::numNodes() + R_MinNFree;
+        R_size_t VNeeded = MemoryBank::doublesAllocated() + size_needed + R_MinVFree;
+
+        // Calculate occupancy rates
+        double node_occup = ((double)NNeeded) / R_NSize;
+        double vect_occup = ((double)VNeeded) / R_VSize;
+
+        // Adjust node heap size
+        if (node_occup > R_NGrowFrac) {
+            R_size_t change = (R_size_t)(R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize);
+
+            /* for early adjustments grow more aggressively */
+            change = applyAggressiveGrow(change);
+
+            if (R_NSize <= R_MaxNSize && change <= R_MaxNSize - R_NSize)
+                R_NSize += change;
+        }
+        else if (node_occup < R_NShrinkFrac) {
+            R_NSize -= (R_size_t)(R_NShrinkIncrMin + R_NShrinkIncrFrac * R_NSize);
+
+            if (R_NSize < NNeeded)
+                R_NSize = (NNeeded < R_MaxNSize) ? NNeeded : R_MaxNSize;
+
+            if (R_NSize < orig_R_NSize)
+                R_NSize = orig_R_NSize;
+        }
+
+        // Adjust vector heap size
+        if (vect_occup > 1.0 && VNeeded < R_MaxVSize)
+            R_VSize = VNeeded;
+
+        if (vect_occup > R_VGrowFrac) {
+            R_size_t change = (R_size_t)(R_VGrowIncrMin + R_VGrowIncrFrac * R_VSize);
+
+            if (R_MaxVSize - R_VSize >= change)
+                R_VSize += change;
+        }
+        else if (vect_occup < R_VShrinkFrac) {
+            R_VSize -= (R_size_t)(R_VShrinkIncrMin + R_VShrinkIncrFrac * R_VSize);
+
+            if (R_VSize < VNeeded)
+                R_VSize = VNeeded;
+
+            if (R_VSize < orig_R_VSize)
+                R_VSize = orig_R_VSize;
+        }
+
+        DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup);
+    }
+
+/* Node Sorting.  MemoryBank::defragment() attempts to improve locality of reference
+   by rearranging the free list to place nodes on the same place page
+   together and order nodes within pages.  This involves a sweep of the
+   heap, so it should not be done too often, but doing it at least
+   occasionally does seem essential.  Sorting on each full colllection is
+   probably sufficient.
+*/
+#define SORT_NODES
+    // former RunGenCollect()
+    unsigned int GCManager::gcGenController(R_size_t size_needed, bool force_full_collection)
+    {
+        static unsigned int level = 0;
+        unsigned int gens_collected;
+
+        BadObject::s_firstBadObject.clear();
+
+        /* determine number of generations to collect */
+        if (force_full_collection) level = s_num_old_generations;
+
+#ifdef PROTECTCHECK
+        level = s_num_old_generations;
+#endif
+
+        level = genRota(level);
+
+        bool ok = false;
+        while (!ok) {
+            ok = true;
+
+            GCNode::gc(level);
+            gens_collected = level;
+
+            if (level < s_num_old_generations) {
+                if (VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize) {
+                    ++level;
+                    if (VHEAP_FREE() < size_needed)
+                        ok = false;
+                }
+                else level = 0;
+            }
+            else level = 0;
+        } // end of while loop
+        s_gen_gc_counts[gens_collected]++;
+
+        if (gens_collected > 0)
+        {
+            if (gens_collected == s_num_old_generations) {
+                /**** do some adjustment for intermediate collections? */
+                AdjustHeapSize(size_needed);
+            }
+            DEBUG_CHECK_NODE_COUNTS("after heap adjustment");
+        }
+
+#ifdef SORT_NODES
+        if (gens_collected == s_num_old_generations)
+            MemoryBank::defragment();
+#endif
+
+        return gens_collected;
+    }
+
+    // former R_gc_internal()
+    void GCManager::gc(R_size_t size_needed, bool force_full_collection)
+    {
+        R_CHECK_THREAD;
+        if (GCInhibitor::active() || s_gc_is_running) {
+            if (s_gc_is_running)
+                gc_error("*** recursive gc invocation\n");
+
+            // if (!force_full_collection &&
+            //     VHEAP_FREE() < size_needed + R_MinFreeFrac * R_VSize)
+            //     force_full_collection = true;
+
+            if (size_needed > VHEAP_FREE()) {
+                R_size_t expand = size_needed - VHEAP_FREE();
+                if (R_VSize + expand > R_MaxVSize)
+                    mem_err_heap();
+                R_VSize += expand;
+            }
+
+            s_gc_pending = true;
+            return;
+        }
+        s_gc_pending = false;
+
+        double ncells, vcells, vfrac, nfrac;
+        BadObject bad_object;
+        unsigned int gens_collected = 0;
+
+#ifdef IMMEDIATE_FINALIZERS
+        bool first = true;
+        bool ok = false;
+        while (!ok) {
+            ok = true;
+#endif
+
+            ++s_gc_count;
+
+            R_N_maxused = std::max(R_N_maxused, GCNode::numNodes());
+            R_V_maxused = std::max(R_V_maxused, MemoryBank::doublesAllocated());
+
+            BEGIN_SUSPEND_INTERRUPTS{
+            s_gc_is_running = true;
+            if (s_pre_gc) // gc_start_timing();
+                (*s_pre_gc)();
+            gens_collected = gcGenController(size_needed, force_full_collection);
+            if (s_post_gc) // gc_end_timing();
+                (*s_post_gc)();
+            s_gc_is_running = false;
+            } END_SUSPEND_INTERRUPTS;
+
+            if (R::R_check_constants > 2 ||
+                (R::R_check_constants > 1 && gens_collected == GCNode::numOldGenerations()))
+                R::R_checkConstants(true);
+
+            if (s_os) {
+                REprintf("Garbage collection %d = %d", s_gc_count, s_gen_gc_counts[0]);
+                for (unsigned int i = 0; i < GCNode::numOldGenerations(); i++)
+                    REprintf("+%d", s_gen_gc_counts[i + 1]);
+                REprintf(" (level %d) ... ", gens_collected);
+                DEBUG_GC_SUMMARY(gens_collected == GCNode::numOldGenerations());
+
+                ncells = GCNode::numNodes();
+                nfrac = (100.0 * ncells) / R_NSize;
+                /* We try to make this consistent with the results returned by gc */
+                ncells = 0.1 * ceil(10 * ncells * sizeof(RObject) / Mega);
+                REprintf("\n%.1f %s of cons cells used (%d%%)\n",
+                    ncells, "Mbytes", (int)(nfrac + 0.5));
+                vcells = MemoryBank::doublesAllocated();
+                vfrac = (100.0 * vcells) / R_VSize;
+                vcells = 0.1 * ceil(10 * vcells * vsfac / Mega);
+                REprintf("%.1f %s of vectors used (%d%%)\n",
+                    vcells, "Mbytes", (int)(vfrac + 0.5));
+            }
+
+            if (!BadObject::s_firstBadObject.isEmpty()) {
+                bad_object = BadObject::s_firstBadObject;
+            }
+
+#ifdef IMMEDIATE_FINALIZERS
+            if (first) {
+                first = false;
+                /* Run any eligible finalizers.  The return result of
+                   RunFinalizers is true if any finalizers are actually run.
+                   There is a small chance that running finalizers here may
+                   chew up enough memory to make another immediate collection
+                   necessary.  If so, we jump back to the beginning and run
+                   the collection, but on this second pass we do not run
+                   finalizers. */
+                if (RunFinalizers() && (size_needed > VHEAP_FREE()))
+                    ok = false;
+            }
+        } // end of while loop
+#endif
+
+        bad_object.printSummary();
+
+        /* sanity check on logical scalar values */
+        if (R_TrueValue != NULL && LOGICAL(R_TrueValue)[0] != TRUE) {
+            LOGICAL(R_TrueValue)[0] = TRUE;
+            gc_error(_("internal TRUE value has been modified"));
+        }
+        if (R_FalseValue != NULL && LOGICAL(R_FalseValue)[0] != FALSE) {
+            LOGICAL(R_FalseValue)[0] = FALSE;
+            gc_error(_("internal FALSE value has been modified"));
+        }
+        if (R_LogicalNAValue != NULL &&
+            LOGICAL(R_LogicalNAValue)[0] != NA_LOGICAL) {
+            LOGICAL(R_LogicalNAValue)[0] = NA_LOGICAL;
+            gc_error(_("internal logical NA value has been modified"));
+        }
     }
 
     std::ostream *GCManager::setReporting(std::ostream *os)
