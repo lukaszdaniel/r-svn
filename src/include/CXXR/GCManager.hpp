@@ -214,15 +214,19 @@ namespace CXXR
         static size_t s_threshold;
         static size_t s_min_threshold;
         static size_t s_max_threshold;
+        static size_t s_max_used;
         static size_t s_node_threshold;
         static size_t s_min_node_threshold;
         static size_t s_max_node_threshold;
+        static size_t s_max_node_used;
 #define R_VSize CXXR::GCManager::s_threshold
 #define orig_R_VSize CXXR::GCManager::s_min_threshold
 #define R_MaxVSize CXXR::GCManager::s_max_threshold
 #define R_NSize CXXR::GCManager::s_node_threshold
 #define orig_R_NSize CXXR::GCManager::s_min_node_threshold
 #define R_MaxNSize CXXR::GCManager::s_max_node_threshold
+#define R_N_maxused CXXR::GCManager::s_max_node_used
+#define R_V_maxused CXXR::GCManager::s_max_used
         /* current units for VSize: changes at initialization */
         static unsigned int s_vsfac;
 #define vsfac CXXR::GCManager::s_vsfac

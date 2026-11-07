@@ -54,9 +54,11 @@ namespace CXXR
     size_t GCManager::s_threshold = R_VSIZE;
     size_t GCManager::s_min_threshold = 0;
     size_t GCManager::s_max_threshold = R_SIZE_T_MAX;
+    size_t GCManager::s_max_used = 0;
     size_t GCManager::s_node_threshold = R_NSIZE;
     size_t GCManager::s_min_node_threshold = 0;
     size_t GCManager::s_max_node_threshold = R_SIZE_T_MAX;
+    size_t GCManager::s_max_node_used = 0;
     unsigned int GCManager::s_vsfac = 1;
     std::ostream *GCManager::s_os = nullptr;
 

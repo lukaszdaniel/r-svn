@@ -494,8 +494,8 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 // static R_size_t orig_R_NSize;
 // static R_size_t orig_R_VSize;
 
-static R_size_t R_N_maxused=0;
-static R_size_t R_V_maxused=0;
+// static R_size_t R_N_maxused=0;
+// static R_size_t R_V_maxused=0;
 
 /* Node Generations. */
 
