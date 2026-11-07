@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 1997--2025  The R Core Team
+ *  Copyright (C) 1997--2026  The R Core Team
  *  Copyright (C) 1995, 1996  Robert Gentleman and Ross Ihaka
  *  Copyright (C) 2003--2018  The R Foundation
  *  Copyright (C) 2008-2014  Andrew R. Runnalls.
@@ -34,9 +34,12 @@
 #endif
 
 #include <cerrno>
+#include <CXXR/GCStackRoot.hpp>
 #include <CXXR/ProtectStack.hpp>
 #include <CXXR/RAllocStack.hpp>
 #include <CXXR/BuiltInFunction.hpp>
+#include <CXXR/IntVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <Localization.h>
 #include <Defn.h>
 #include <R_ext/Itermacros.h>
@@ -49,6 +52,7 @@
 #include <Internal.h>
 
 using namespace R;
+using namespace CXXR;
 
 NORET static void invalid(SEXP call)
 {
@@ -420,11 +424,8 @@ static void walker_ProbSampleReplace(int n, double *p, int *a, int nans, int *an
 static void ProbSampleNoReplace(int n, double *p, int *perm,
 				int nans, int *ans)
 {
-    double rT, mass, totalmass;
-    int i, j, k, n1;
-
     /* Record element identities */
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
 	perm[i] = i + 1;
 
     /* Sort probabilities into descending order */
@@ -432,10 +433,12 @@ static void ProbSampleNoReplace(int n, double *p, int *perm,
     revsort(p, perm, n);
 
     /* Compute the sample */
-    totalmass = 1;
-    for (i = 0, n1 = n-1; i < nans; i++, n1--) {
-	rT = totalmass * unif_rand();
-	mass = 0;
+    int n1 = n-1;
+    double totalmass = 1;
+    for (int i = 0; i < nans; i++, n1--) {
+	double rT = totalmass * unif_rand(),
+	    mass = 0;
+	int j;
 	for (j = 0; j < n1; j++) {
 	    mass += p[j];
 	    if (rT <= mass)
@@ -443,8 +446,8 @@ static void ProbSampleNoReplace(int n, double *p, int *perm,
 	}
 	ans[i] = perm[j];
 	totalmass -= p[j];
-	for (k = j; k < n1; k++) {
-	    p[k] = p[k + 1];
+	for(int k = j; k < n1; k++) {
+	    p   [k] = p   [k + 1];
 	    perm[k] = perm[k + 1];
 	}
     }
@@ -474,20 +477,19 @@ static void FixupProb(double *p, int n, int require_k, bool replace)
 */
 attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP x, y, sn, sk, prob, sreplace;
-
     checkArity(op, args);
     CXXR::RAllocStack::Scope rscope;
-    sn = CAR(args); args = CDR(args);
-    sk = CAR(args); args = CDR(args); /* size */
+    SEXP sn = CAR(args); args = CDR(args);
+    SEXP sk = CAR(args); args = CDR(args); /* size */
     if (length(sk) != 1)
 	error(_("invalid '%s' argument"), "size");
-    sreplace = CAR(args); args = CDR(args);
+    SEXP sreplace = CAR(args); args = CDR(args);
     if (length(sreplace) != 1)
 	 error(_("invalid '%s' argument"), "replace");
     bool replace = asLogicalNoNA(sreplace, "replace");
-    prob = CAR(args);
+    GCStackRoot<> prob(CAR(args));
     GetRNGstate();
+    GCStackRoot<> y; // the result
     if (!isNull(prob)) {
 	int n = asInteger(sn), k = asInteger(sk);
 	if (n == NA_INTEGER || n < 0 || (k > 0 && n == 0))
@@ -496,15 +498,15 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    error(_("invalid '%s' argument"), "size");
 	if (!replace && k > n)
 	    error("%s", _("cannot take a sample larger than the population when 'replace = FALSE'"));
-	PROTECT(y = allocVector(INTSXP, k));
+	y = IntVector::create(k);
 	prob = coerceVector(prob, REALSXP);
 	if (MAYBE_REFERENCED(prob)) prob = duplicate(prob);
-	PROTECT(prob);
 	double *p = REAL(prob);
 	if (length(prob) != n)
 	    error("%s", _("incorrect number of probabilities"));
 	FixupProb(p, n, k, replace);
-	PROTECT(x = allocVector(INTSXP, n));
+	GCStackRoot<> x;
+	x = IntVector::create(n);
 	if (replace) {
 	    int i, nc = 0;
 	    for (i = 0; i < n; i++) if (n * p[i] > 0.1) nc++;
@@ -514,7 +516,6 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 		ProbSampleReplace(n, p, INTEGER(x), k, INTEGER(y));
 	} else
 	    ProbSampleNoReplace(n, p, INTEGER(x), k, INTEGER(y));
-	UNPROTECT(2);
     }
     else {  // uniform sampling
 	double dn = asReal(sn);
@@ -525,7 +526,7 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (!replace && k > dn)
 	    error("%s", _("cannot take a sample larger than the population when 'replace = FALSE'"));
 	if (dn > INT_MAX || k > INT_MAX) {
-	    PROTECT(y = allocVector(REALSXP, k));
+	    y = RealVector::create(k);
 	    if (replace) {
 		double *ry = REAL(y);
 		for (R_xlen_t i = 0; i < k; i++) ry[i] = R_unif_index(dn) + 1;
@@ -536,7 +537,7 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 		double *ry = REAL(y);
 		for (R_xlen_t i = 0; i < n; i++) x[i] = (double) i;
 		for (R_xlen_t i = 0; i < k; i++) {
-		    R_xlen_t j = (R_xlen_t) R_unif_index(n);
+		    R_xlen_t j = (R_xlen_t) R_unif_index((double)n);
 		    ry[i] = x[j] + 1;
 		    x[j] = x[--n];
 		}
@@ -546,7 +547,7 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    }
 	} else {
 	    int n = (int) dn;
-	    PROTECT(y = allocVector(INTSXP, k));
+	    y = IntVector::create(k);
 	    int *iy = INTEGER(y);
 	    /* avoid allocation for a single sample */
 	    if (replace || k < 2) {
@@ -563,6 +564,6 @@ attribute_hidden SEXP do_sample(SEXP call, SEXP op, SEXP args, SEXP rho)
 	}
     }
     PutRNGstate();
-    UNPROTECT(1);
+
     return y;
 }

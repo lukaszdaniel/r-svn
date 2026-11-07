@@ -468,7 +468,8 @@ void PutRNGstate(void)
     int len_seed = RNG_Table[RNG_kind].n_seed;
     int kinds = RNG_kind + 100 * N01_kind + 10000 * Sample_kind + 100000 * Binom_kind;
 
-    SEXP seeds = R_findVarInFrame(R_GlobalEnv, R_SeedsSymbol);
+    GCStackRoot<> seeds;
+    seeds = R_findVarInFrame(R_GlobalEnv, R_SeedsSymbol);
     if (NOT_SHARED(seeds) && ATTRIB(seeds) == R_NilValue &&
 	TYPEOF(seeds) == INTSXP && XLENGTH(seeds) == len_seed + 1) {
 	/* it is safe to reuse the existing .Random.seed vector */
@@ -477,14 +478,13 @@ void PutRNGstate(void)
     }
     else {
 	/* need to allocate a fresh .Random.seed vector */
-	seeds = PROTECT(IntVector::create(len_seed + 1));
+	seeds = IntVector::create(len_seed + 1);
 	INTEGER(seeds)[0] = kinds;
 	copy_seeds_out(seeds, RNG_Table[RNG_kind].i_seed, len_seed);
 
 	/* assign only in the workspace */
 	defineVar(R_SeedsSymbol, seeds, R_GlobalEnv);
 	INCREMENT_NAMED(seeds);
-	UNPROTECT(1);
     }
 }
 
