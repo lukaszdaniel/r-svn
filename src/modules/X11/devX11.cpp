@@ -3340,7 +3340,7 @@ Display *Rf_getX11Display(void)
  Finally, setHandlers controls whether the code establishes handlers for the X errors.
  */
 bool Rf_setX11Display(Display *dpy, double gamma_fac, X_COLORTYPE colormodel,
-		 int maxcube, Rboolean setHandlers)
+		 int maxcube, bool setHandlers)
 {
 /*    static int alreadyDone = 0;
     if(alreadyDone) return true;
