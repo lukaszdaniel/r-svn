@@ -362,6 +362,51 @@ namespace CXXR
         }
     } // anonymous namespace
 
+    void GCManager::adjustNodeHeapSize(R_size_t nodes_needed, double node_occup)
+    {
+        if (node_occup > R_NGrowFrac) {
+            R_size_t change = (R_size_t)(R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize);
+
+            /* for early adjustments grow more aggressively */
+            change = applyAggressiveGrow(change);
+
+            if (R_NSize <= R_MaxNSize && change <= R_MaxNSize - R_NSize)
+                R_NSize += change;
+        }
+        else if (node_occup < R_NShrinkFrac) {
+            R_NSize -= (R_size_t)(R_NShrinkIncrMin + R_NShrinkIncrFrac * R_NSize);
+
+            if (R_NSize < nodes_needed)
+                R_NSize = (nodes_needed < R_MaxNSize) ? nodes_needed : R_MaxNSize;
+
+            if (R_NSize < orig_R_NSize)
+                R_NSize = orig_R_NSize;
+        }
+    }
+
+    void GCManager::adjustVectorHeapSize(R_size_t vectors_needed, double vector_occup)
+    {
+        // Adjust vector heap size
+        if (vector_occup > 1.0 && vectors_needed < R_MaxVSize)
+            R_VSize = vectors_needed;
+
+        if (vector_occup > R_VGrowFrac) {
+            R_size_t change = (R_size_t)(R_VGrowIncrMin + R_VGrowIncrFrac * R_VSize);
+
+            if (change <= R_MaxVSize - R_VSize)
+                R_VSize += change;
+        }
+        else if (vector_occup < R_VShrinkFrac) {
+            R_VSize -= (R_size_t)(R_VShrinkIncrMin + R_VShrinkIncrFrac * R_VSize);
+
+            if (R_VSize < vectors_needed)
+                R_VSize = vectors_needed;
+
+            if (R_VSize < orig_R_VSize)
+                R_VSize = orig_R_VSize;
+        }
+    }
+
     void GCManager::AdjustHeapSize(R_size_t size_needed)
     {
         // Calculate minimum required free nodes and vectors
@@ -376,45 +421,8 @@ namespace CXXR
         double node_occup = ((double)NNeeded) / R_NSize;
         double vect_occup = ((double)VNeeded) / R_VSize;
 
-        // Adjust node heap size
-        if (node_occup > R_NGrowFrac) {
-            R_size_t change = (R_size_t)(R_NGrowIncrMin + R_NGrowIncrFrac * R_NSize);
-
-            /* for early adjustments grow more aggressively */
-            change = applyAggressiveGrow(change);
-
-            if (R_NSize <= R_MaxNSize && change <= R_MaxNSize - R_NSize)
-                R_NSize += change;
-        }
-        else if (node_occup < R_NShrinkFrac) {
-            R_NSize -= (R_size_t)(R_NShrinkIncrMin + R_NShrinkIncrFrac * R_NSize);
-
-            if (R_NSize < NNeeded)
-                R_NSize = (NNeeded < R_MaxNSize) ? NNeeded : R_MaxNSize;
-
-            if (R_NSize < orig_R_NSize)
-                R_NSize = orig_R_NSize;
-        }
-
-        // Adjust vector heap size
-        if (vect_occup > 1.0 && VNeeded < R_MaxVSize)
-            R_VSize = VNeeded;
-
-        if (vect_occup > R_VGrowFrac) {
-            R_size_t change = (R_size_t)(R_VGrowIncrMin + R_VGrowIncrFrac * R_VSize);
-
-            if (R_MaxVSize - R_VSize >= change)
-                R_VSize += change;
-        }
-        else if (vect_occup < R_VShrinkFrac) {
-            R_VSize -= (R_size_t)(R_VShrinkIncrMin + R_VShrinkIncrFrac * R_VSize);
-
-            if (R_VSize < VNeeded)
-                R_VSize = VNeeded;
-
-            if (R_VSize < orig_R_VSize)
-                R_VSize = orig_R_VSize;
-        }
+        adjustNodeHeapSize(NNeeded, node_occup);
+        adjustVectorHeapSize(VNeeded, vect_occup);
 
         DEBUG_ADJUST_HEAP_PRINT(node_occup, vect_occup);
     }

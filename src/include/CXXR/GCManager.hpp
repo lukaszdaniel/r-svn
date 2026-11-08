@@ -196,10 +196,14 @@ namespace CXXR
         static int gc_force_wait();
         static int gc_force_gap();
 
-    public: // private:
-        static constexpr unsigned int s_num_old_generations = 2;
-        static constexpr unsigned int s_collect_counts_max[s_num_old_generations] = { 20 /*LEVEL_0_FREQ*/, 5 /*LEVEL_1_FREQ*/ };
-        static unsigned int s_gen_gc_counts[s_num_old_generations + 1];
+        static void init_gctorture();
+        static void init_gc_grow_settings();
+        static size_t R_GetMaxVSize(void);
+        static bool R_SetMaxVSize(size_t size);
+        static size_t R_GetMaxNSize(void);
+        static bool R_SetMaxNSize(size_t size);
+
+        // These settings remain public for the legacy R macros below.
         static size_t s_threshold;
         static size_t s_min_threshold;
         static size_t s_max_threshold;
@@ -292,6 +296,12 @@ namespace CXXR
         /* current units for VSize: changes at initialization */
         static unsigned int s_vsfac;
 #define vsfac CXXR::GCManager::s_vsfac
+
+    private:
+        static constexpr unsigned int s_num_old_generations = 2;
+        static constexpr unsigned int s_collect_counts_max[s_num_old_generations] = { 20 /*LEVEL_0_FREQ*/, 5 /*LEVEL_1_FREQ*/ };
+        static unsigned int s_gen_gc_counts[s_num_old_generations + 1];
+
         static bool s_gc_fail_on_error;
         static bool s_gc_is_running; // R_in_gc
         static bool s_gc_pending;
@@ -306,17 +316,21 @@ namespace CXXR
 #endif
 
         static void mem_err_heap();
-        static size_t R_GetMaxVSize(void);
-        static bool R_SetMaxVSize(size_t size);
-        static size_t R_GetMaxNSize(void);
-        static bool R_SetMaxNSize(size_t size);
 
         // Callback for CXXR::MemoryBank to cue a garbage collection:
         static size_t cue(size_t bytes_wanted);
 
-        // Detailed control of the garbage collection, in particular
-        // choosing how many generations to collect, is carried out
-        // here.
+        /**
+         * @brief Control how many generations to collect.
+         *
+         * Detailed control of the garbage collection, in particular
+         * choosing how many generations to collect, is carried out
+         * here.
+         *
+         * @param size_needed  what size has been requested.
+         * @param force_full_collection requires a full collection of all generations if true.
+         * @return what number of generations were collected (0, 1, 2).
+         */
         static unsigned int gcGenController(R_size_t size_needed, bool force_full_collection);
 
         /** @brief Choose how many generations to collect according to a rota.
@@ -342,10 +356,36 @@ namespace CXXR
          */
         static unsigned int genRota(unsigned int num_old_gens_to_collect);
 
+        /**
+         * @brief Help function to adjust the heap size after a full collection.
+         *
+         * This function is called after a full collection to adjust the heap
+         * size based on the current usage and the size needed for future
+         * allocations. It ensures that the heap size remains within the specified
+         * minimum and maximum thresholds, and it may increase or decrease the heap
+         * size based on the current usage and the growth/shrinkage fractions.
+         *
+         * @note used in gcGenController() after a full collection.
+         *
+         * @param size_needed what size has been requested.
+         */
         static void AdjustHeapSize(R_size_t size_needed);
 
-        static void init_gctorture();
-        static void init_gc_grow_settings();
+        /**
+         * @brief Help function to adjust the node heap size after a full collection.
+         *
+         * @param nodes_needed what size has been requested.
+         * @param node_occup current occupancy of the node heap.
+         */
+        static void adjustNodeHeapSize(R_size_t nodes_needed, double node_occup);
+
+        /**
+         * @brief Help function to adjust the vector heap size after a full collection.
+         *
+         * @param vectors_needed what size has been requested.
+         * @param vector_occup current occupancy of the vector heap.
+         */
+        static void adjustVectorHeapSize(R_size_t vectors_needed, double vector_occup);
 
         /** @brief Report error encountered during garbage collection.
          *

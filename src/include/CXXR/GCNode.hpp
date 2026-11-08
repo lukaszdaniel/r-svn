@@ -454,7 +454,6 @@ namespace CXXR
 
         static void DEBUG_CHECK_NODE_COUNTS(const char *where);
 
-    // private:
         /** @brief Visitor class used to impose a minimum generation number.
          *
          * This visitor class is used to ensure that a node and its
@@ -512,6 +511,7 @@ namespace CXXR
             unsigned int m_maxgen;
         };
 
+    private:
         /** Marker that counts the number of nodes marked.
          */
         class CountingMarker: public Marker
@@ -574,6 +574,7 @@ namespace CXXR
             t->m_prev = s;
         }
 
+    public:
         /** @brief Transfer a node so as to precede this node.
          *
          * @param s Pointer to node to be moved, which may be in the
@@ -593,9 +594,6 @@ namespace CXXR
             link(prev(), s);
             link(s, this);
         }
-
-        // Clean up static data at end of run:
-        static void cleanup();
 
         /** @brief Initialize the entire memory subsystem.
          *
@@ -628,13 +626,6 @@ namespace CXXR
          */
         static void mark(unsigned int max_generation);
 
-        /** @brief Carry out the sweep phase of garbage collection.
-         *
-         * @param max_generation The cut-off generation number for which
-         *          sweep will not occur.
-         */
-        static void sweep(unsigned int max_generation);
-
         /** @brief Transfer a sublist so as to precede this node.
          *
          * @param beg Pointer to the first node in the sublist to be
@@ -658,6 +649,17 @@ namespace CXXR
             }
         }
 
+    private:
+        /** @brief Carry out the sweep phase of garbage collection.
+         *
+         * @param max_generation The cut-off generation number for which
+         *          sweep will not occur.
+         */
+        static void sweep(unsigned int max_generation);
+
+        // Clean up static data at end of run:
+        static void cleanup();
+
         std::string gpbits() const
         {
             return std::bitset<GP_BITS>(sxpinfo.gp).to_string();
@@ -667,12 +669,15 @@ namespace CXXR
         // allocating arrays of GCNode.
         static void *operator new[](size_t);
 
+    public:
         mutable struct sxpinfo_struct sxpinfo;
         mutable const GCNode *m_next;
         mutable const GCNode *m_prev;
 
+    private:
         static size_t s_num_nodes; // Number of nodes in existence
 
+    public:
         /** @brief The Heap Structure.
          *
          * Nodes for each class/generation combination
@@ -710,6 +715,7 @@ namespace CXXR
 #endif
         static unsigned int s_gencount[1 + GCManager::numOldGenerations()];
 
+    private:
         /** @brief Next generation table.
         *
         * Look-up table used to advance generation number

@@ -306,7 +306,7 @@ static void R_gc_full(bool full = false);
 
 void GCManager::init_gc_grow_settings(void)
 {
-    char *arg = getenv("R_GC_MEM_GROW");
+    const char *arg = getenv("R_GC_MEM_GROW");
     if (arg != NULL) {
 	int which = (int) atof(arg);
 	switch (which) {
