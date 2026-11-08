@@ -79,6 +79,19 @@ namespace CXXR
         --s_num_nodes;
     }
 
+    void GCNode::checkOldToNew(const GCNode *parent, const GCNode *target)
+    {
+        if (parent && target && (parent->generation() > target->generation()))
+        {
+#ifdef EXPEL_OLD_TO_NEW
+            Ager age(parent->generation());
+            age(target);
+#else
+            s_OldToNew[parent->generation()]->splice(parent);
+#endif
+        }
+    }
+
     void GCNode::Ager::operator()(const GCNode *node)
     {
         if (node->generation() < m_mingen) // node is younger than the minimum age required

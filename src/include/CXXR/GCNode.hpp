@@ -446,6 +446,13 @@ namespace CXXR
 
         unsigned int generation() const { return sxpinfo.m_gcgen; }
 
+        /** @brief Managing Old-to-New References.
+         *
+         * @param parent Element that belongs to the older generation.
+         * @param target Element that might belong to the younger generation.
+         */
+        static void checkOldToNew(const GCNode *parent, const GCNode *target);
+
         bool isMarked() const { return sxpinfo.m_mark; }
 
         const GCNode *next() const { return m_next; }

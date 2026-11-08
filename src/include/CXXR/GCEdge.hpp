@@ -168,6 +168,7 @@ namespace CXXR
         void retarget(const GCNode *parent, T *newtarget)
         {
             check_complete_type();
+            GCNode::checkOldToNew(parent, newtarget);
             if (m_target == newtarget)
                 return;
 
@@ -195,10 +196,13 @@ namespace CXXR
         void retarget2(const GCNode *parent, T *newtarget)
         {
             check_complete_type();
+            GCNode::checkOldToNew(parent, newtarget);
             if (m_target == newtarget)
                 return;
+
             T *oldtarget = m_target;
             m_target = newtarget;
+
             if (parent->refCountEnabled())
             {
                 GCNode::incRefCount(newtarget);

@@ -431,7 +431,6 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 #define NODE_GEN_IS_YOUNGER(s,g) \
   (!NODE_IS_MARKED(s) || NODE_GENERATION(s) < (g))
-#define NODE_IS_OLDER(x, y) ((x) && (y) && (NODE_GENERATION(x) > NODE_GENERATION(y)))
 
 
 #define VHEAP_FREE() (R_VSize - MemoryBank::doublesAllocated())
@@ -476,17 +475,6 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
   LINK_NODE(__from__, __from__); \
 } while (0);
 
-/* Managing Old-to-New References. */
-static void old_to_new(SEXP x, SEXP y)
-{
-#ifdef EXPEL_OLD_TO_NEW
-    GCNode::Ager age(NODE_GENERATION(x));
-    age(y);
-#else
-    GCNode::s_OldToNew[NODE_GENERATION(x)]->splice(x);
-#endif
-}
-
 #ifdef COMPUTE_REFCNT_VALUES
 #define FIX_REFCNT_EX(x, old, new_, chkpnd) do {			\
 	SEXP __x__ = (x);						\
@@ -519,7 +507,6 @@ static void old_to_new(SEXP x, SEXP y)
     } while (0)
 #endif
 
-#define CHECK_OLD_TO_NEW(x,y) do { if (NODE_IS_OLDER(x, y)) old_to_new(x, y); } while (0)
 #define CHECK_GC_EDGE(x,y) do { (void) CHK(x); (void) CHK(y); } while (0)
 
 
@@ -2089,7 +2076,6 @@ void R_SetExternalPtrTag(SEXP s, SEXP tag)
     CHKEXTPTRSXP(s);
 
     CHECK_GC_EDGE(s, tag);
-    CHECK_OLD_TO_NEW(s, tag);
     SEXP_downcast<CXXR::ExternalPointer *>(s)->m_tag.retarget(s, tag);
 }
 
@@ -2098,7 +2084,6 @@ void R_SetExternalPtrProtected(SEXP s, SEXP p)
     CHKEXTPTRSXP(s);
 
     CHECK_GC_EDGE(s, p);
-    CHECK_OLD_TO_NEW(s, p);
     SEXP_downcast<CXXR::ExternalPointer *>(s)->m_protege.retarget(s, p);
 }
 
@@ -2185,7 +2170,6 @@ void (R::SET_ATTRIB)(SEXP x, SEXP v) {
 	      R_typeToChar(v));
 
     CHECK_GC_EDGE(x, v);
-    CHECK_OLD_TO_NEW(x, v);
     // x->m_attrib.retarget(x, v);
     PairList *pl = SEXP_downcast<PairList *>(v);
     x->setAttributes(pl);
@@ -2618,14 +2602,12 @@ void (SET_STRING_ELT)(SEXP x, R_xlen_t i, SEXP v) {
 
     if (ALTREP(x)) {
 	CHECK_GC_EDGE(x, v);
-	CHECK_OLD_TO_NEW(x, v);
+	GCNode::checkOldToNew(x, v);
 	ALTSTRING_SET_ELT(x, i, v);
     } else {
-	CHECK_GC_EDGE(x, v);
-	CHECK_OLD_TO_NEW(x, v);
-	SEXP *ps = (SEXP *) STDVEC_DATAPTR(x);
-	FIX_REFCNT(x, ps[i], v);
-	ps[i] = v;
+        CHECK_GC_EDGE(x, v);
+        StringVector *vec = SEXP_downcast<StringVector *>(x);
+        (*vec)[i].retarget(x, SEXP_downcast<String *>(v));
     }
 }
 
@@ -2646,7 +2628,6 @@ SEXP (SET_VECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
         ALTLIST_SET_ELT(x, i, v);
     } else {
         CHECK_GC_EDGE(x, v);
-        CHECK_OLD_TO_NEW(x, v);
         ListVector *vec = SEXP_downcast<ListVector *>(x);
         (*vec)[i].retarget(x, v);
     }
@@ -2666,7 +2647,6 @@ SEXP (SET_XVECTOR_ELT)(SEXP x, R_xlen_t i, SEXP v) {
         ALTLIST_SET_ELT(x, i, v);
     } else {
         CHECK_GC_EDGE(x, v);
-        CHECK_OLD_TO_NEW(x, v);
         ExpressionVector *vec = SEXP_downcast<ExpressionVector *>(x);
         (*vec)[i].retarget(x, v);
     }
@@ -2831,29 +2811,29 @@ attribute_hidden void R::R_try_clear_args_refcnt(SEXP args)
 }
 
 /* WeakRef Object Accessors */
-void R::SET_WEAKREF_KEY(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_key.retarget(x, v); }
-void R::SET_WEAKREF_VALUE(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_value.retarget(x, v); }
-void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_finalizer.retarget(x, v); }
+void R::SET_WEAKREF_KEY(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_key.retarget(x, v); }
+void R::SET_WEAKREF_VALUE(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_value.retarget(x, v); }
+void R::SET_WEAKREF_FINALIZER(SEXP x, SEXP v) { CR_ASSERT(x); CR_WEAKREF_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::WeakRef *>(x)->m_finalizer.retarget(x, v); }
 
 /* S4 Object Accessors */
 SEXP (S4TAG)(SEXP e) { CR_ASSERT(e); CR_S4OBJECT_ASSERT(e); return CHK(S4TAG(CHKCONS(e))); }
-void SET_S4TAG(SEXP x, SEXP v) { CR_ASSERT(x); CR_S4OBJECT_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::S4Object *>(x)->m_tag.retarget(x, v); }
+void SET_S4TAG(SEXP x, SEXP v) { CR_ASSERT(x); CR_S4OBJECT_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::S4Object *>(x)->m_tag.retarget(x, v); }
 
 /* AltRep Accessors */
 SEXP (DATA1)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(DATA1(CHKCONS(e))); }
 SEXP (DATA2)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(DATA2(CHKCONS(e))); }
 SEXP (CLASS)(SEXP e) { CR_ASSERT(e); CR_ALTREP_ASSERT(e); return CHK(CLASS(CHKCONS(e))); }
-void (SET_DATA1)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_data1.retarget(x, v); }
-void (SET_DATA2)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_data2.retarget(x, v); }
-void (SET_CLASS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_altclass.retarget(x, v); }
+void (SET_DATA1)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_data1.retarget(x, v); }
+void (SET_DATA2)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_data2.retarget(x, v); }
+void (SET_CLASS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ALTREP_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::AltRep *>(x)->m_altclass.retarget(x, v); }
 
 /* ByteCode Accessors */
 SEXP (CODE0)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(CODE0(CHKCONS(e))); }
 SEXP (CONSTS)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(CONSTS(CHKCONS(e))); }
 SEXP (EXPR)(SEXP e) { CR_ASSERT(e); CR_BYTECODE_ASSERT(e); return CHK(EXPR(CHKCONS(e))); }
-void (SET_CODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_code.retarget(x, v); }
-void (SET_CONSTS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_constants.retarget(x, v); }
-void (SET_EXPR)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_expression.retarget(x, v); }
+void (SET_CODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_code.retarget(x, v); }
+void (SET_CONSTS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_constants.retarget(x, v); }
+void (SET_EXPR)(SEXP x, SEXP v) { CR_ASSERT(x); CR_BYTECODE_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::ByteCode *>(x)->m_expression.retarget(x, v); }
 
 /* List Accessors */
 SEXP (TAG)(SEXP e) { CR_CONSCELL_ASSERT(e); return CHK(TAG(CHKCONS(e))); }
@@ -2879,7 +2859,6 @@ void (SET_TAG)(SEXP x, SEXP v)
 
     CR_CONSCELL_ASSERT(x);
     CHECK_GC_EDGE(x, v);
-    CHECK_OLD_TO_NEW(x, v);
     SEXP_downcast<ConsCell *>(x)->setTag(v);
 }
 
@@ -2890,7 +2869,6 @@ SEXP (SETCAR)(SEXP x, SEXP y)
 
     CR_CONSCELL_ASSERT(x);
     CHECK_GC_EDGE(x, y);
-    CHECK_OLD_TO_NEW(x, y);
     SEXP_downcast<PairList *>(x)->setCar(y);
 
     return y;
@@ -2908,7 +2886,6 @@ SEXP (SETCDR)(SEXP x, SEXP y)
 #endif
     CR_CONSCELL_ASSERT(x);
     CHECK_GC_EDGE(x, y);
-    CHECK_OLD_TO_NEW(x, y);
     SEXP_downcast<ConsCell *>(x)->setTail(y);
 
     return y;
@@ -2923,7 +2900,6 @@ SEXP (SETCADR)(SEXP x, SEXP y)
     SEXP cell = CDR(x);
 
     CHECK_GC_EDGE(cell, y);
-    CHECK_OLD_TO_NEW(cell, y);
     SEXP_downcast<PairList *>(cell)->setCar(y);
 
     return y;
@@ -2939,7 +2915,6 @@ SEXP (SETCADDR)(SEXP x, SEXP y)
     SEXP cell = CDDR(x);
 
     CHECK_GC_EDGE(cell, y);
-    CHECK_OLD_TO_NEW(cell, y);
     SEXP_downcast<PairList *>(cell)->setCar(y);
 
     return y;
@@ -2956,7 +2931,6 @@ SEXP (SETCADDDR)(SEXP x, SEXP y)
     SEXP cell = CDDDR(x);
 
     CHECK_GC_EDGE(cell, y);
-    CHECK_OLD_TO_NEW(cell, y);
     SEXP_downcast<PairList *>(cell)->setCar(y);
 
     return y;
@@ -2974,7 +2948,6 @@ SEXP (SETCAD4R)(SEXP x, SEXP y)
     SEXP cell = CD4R(x);
 
     CHECK_GC_EDGE(cell, y);
-    CHECK_OLD_TO_NEW(cell, y);
     SEXP_downcast<PairList *>(cell)->setCar(y);
 
     return y;
@@ -3007,11 +2980,11 @@ SEXP R_ClosureBody(SEXP x) { CR_ASSERT(x); return (BODY)(x); }
 SEXP R_ClosureEnv(SEXP x) { CR_ASSERT(x); return (CLOENV)(x); }
 
 attribute_hidden
-void (R::SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_formals.retarget(x, v); }
+void (R::SET_FORMALS)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_formals.retarget(x, v); }
 attribute_hidden
-void (R::SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_body.retarget(x, v); }
+void (R::SET_BODY)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_body.retarget(x, v); }
 attribute_hidden
-void (R::SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_env.retarget(x, v); }
+void (R::SET_CLOENV)(SEXP x, SEXP v) { CR_ASSERT(x); CR_CLOSURE_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::Closure *>(x)->m_env.retarget(x, v); }
 void (R::SET_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_RDEBUG(CHK(x), v); }
 attribute_hidden
 void (R::SET_RSTEP)(SEXP x, int v) { CR_ASSERT(x); SET_RSTEP(CHK(x), v); }
@@ -3038,7 +3011,7 @@ SEXP (R::INTERNAL)(SEXP x) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHKSYMSXP(x); re
 int (R::DDVAL)(SEXP x) { CR_ASSERT(x); CHKSYMSXP(x); return DDVAL(CHK(x)); }
 
 attribute_hidden
-void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Symbol *>(x)->m_pname.retarget(x, v); }
+void (R::SET_PRINTNAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_SYMBOL_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::Symbol *>(x)->m_pname.retarget(x, v); }
 
 attribute_hidden
 void (R::SET_SYMVALUE)(SEXP x, SEXP v)
@@ -3049,7 +3022,6 @@ void (R::SET_SYMVALUE)(SEXP x, SEXP v)
 	return;
 
     CHECK_GC_EDGE(x, v);
-    CHECK_OLD_TO_NEW(x, v);
     SEXP_downcast<CXXR::Symbol *>(x)->m_value.retarget2(x, v);
 }
 
@@ -3059,7 +3031,6 @@ void (R::SET_INTERNAL)(SEXP x, SEXP v) {
     CR_ASSERT(x);
     CR_SYMBOL_ASSERT(x);
     CHECK_GC_EDGE(x, v);
-    CHECK_OLD_TO_NEW(x, v);
     SEXP_downcast<CXXR::Symbol *>(x)->m_internal.retarget(x, v);
 }
 attribute_hidden void (R::SET_DDVAL)(SEXP x, int v) { CR_ASSERT(x); SET_DDVAL(CHK(x), v); }
@@ -3082,7 +3053,7 @@ SEXP R_ParentEnv(SEXP x) { CR_ASSERT(x); return (ENCLOS)(x); }
 int (ENV_RDEBUG)(SEXP x) { CR_ASSERT(x); return ENV_RDEBUG(CHK(x)); }
 void (SET_ENV_RDEBUG)(SEXP x, int v) { CR_ASSERT(x); SET_ENV_RDEBUG(CHK(x), v); }
 //attribute_hidden
-void (R::SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_frame.retarget(x, v); }
+void (R::SET_FRAME)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_frame.retarget(x, v); }
 
 //attribute_hidden
 void (R::SET_ENCLOS)(SEXP x, SEXP v)
@@ -3099,11 +3070,10 @@ void (R::SET_ENCLOS)(SEXP x, SEXP v)
 	    error("%s", _("cycles in parent chains are not allowed"));
 
     CHECK_GC_EDGE(x, v);
-    CHECK_OLD_TO_NEW(x, v);
     SEXP_downcast<CXXR::Environment *>(x)->m_enclos.retarget(x, v);
 }
 
-void (R::SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_hashtab.retarget(x, v); }
+void (R::SET_HASHTAB)(SEXP x, SEXP v) { CR_ASSERT(x); CR_ENVIRONMENT_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::Environment *>(x)->m_hashtab.retarget(x, v); }
 //attribute_hidden
 void (R::SET_ENVFLAGS)(SEXP x, int v) { CR_ASSERT(x); SET_ENVFLAGS(x, v); }
 
@@ -3121,8 +3091,8 @@ bool (R::PROMISE_IS_EVALUATED)(SEXP x)
     return SEXP_downcast<Promise *>(x)->evaluated();
 }
 
-void (R::SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<CXXR::Promise *>(x)->m_env.retarget(x, v); }
-void (R::SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_GC_EDGE(x, v); CHECK_OLD_TO_NEW(x, v); SEXP_downcast<Promise *>(x)->m_expr.retarget(x, v); }
+void (R::SET_PRENV)(SEXP x, SEXP v){ CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<CXXR::Promise *>(x)->m_env.retarget(x, v); }
+void (R::SET_PRCODE)(SEXP x, SEXP v) { CR_ASSERT(x); CR_PROMISE_ASSERT(x); CHECK_GC_EDGE(x, v); SEXP_downcast<Promise *>(x)->m_expr.retarget(x, v); }
 attribute_hidden void (R::SET_PRSEEN)(SEXP x, int v) { CR_ASSERT(x); SET_PRSEEN(CHK(x), v); }
 
 void (R::SET_PRVALUE)(SEXP x, SEXP v)
@@ -3133,7 +3103,6 @@ void (R::SET_PRVALUE)(SEXP x, SEXP v)
 	error(_("expecting a 'PROMSXP', not a '%s'"), R_typeToChar(x));
 
     CHECK_GC_EDGE(x, v);
-    CHECK_OLD_TO_NEW(x, v);
     SEXP_downcast<Promise *>(x)->setValue(v);
 }
 
@@ -3167,7 +3136,7 @@ SEXP (R::SET_CXTAIL)(SEXP x, SEXP v) {
 	error(_("value of 'SET_CXTAIL' must be a char or NULL, not a '%s'"),
 	      R_typeToChar(v));
 #endif
-    /*CHECK_OLD_TO_NEW(x, v); *//* not needed since not properly traced */
+    /*GCNode::checkOldToNew(x, v); *//* not needed since not properly traced */
     x->m_attrib = v;
     return x;
 }
