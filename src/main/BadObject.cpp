@@ -68,8 +68,8 @@ namespace CXXR
                 (void *)m_bad_sexp_type_sexp,
                 m_bad_sexp_type_seen, m_bad_sexp_type_file,
                 m_bad_sexp_type_line);
-            GCManager::gc_error(msg);
 #endif
+            throw std::runtime_error(msg);
         }
     }
 

@@ -148,7 +148,9 @@ namespace CXXR
         for (auto &[key, symbol] : s_symbol_table)
         {
             if (ATTRIB(symbol) != R_NilValue)
-                GCManager::gc_error("****found a symbol with attributes\n");
+            {
+                throw std::runtime_error("Symbol::visitTable(): ****found a symbol with attributes.");
+            }
             if (symbol != R_NilValue)
                 (*v)(symbol);
         }

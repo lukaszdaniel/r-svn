@@ -102,6 +102,47 @@ namespace CXXR
         ++m_marks_applied;
     }
 
+    void GCNode::DEBUG_CHECK_NODE_COUNTS(const char *where)
+    {
+// #define DEBUG_GC
+#ifdef DEBUG_GC
+        REprintf("Node counts %s:\n", where);
+        unsigned int NewCount = 0;
+        unsigned int OldCount = 0;
+        unsigned int OldToNewCount = 0;
+        for (const GCNode *s = NEXT_NODE(GCNode::s_New);
+            s != GCNode::s_New.get();
+            s = NEXT_NODE(s)) {
+            NewCount++;
+        }
+        for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
+            for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
+                s != GCNode::s_Old[gen].get();
+                s = NEXT_NODE(s)) {
+                OldCount++;
+                if (gen != NODE_GENERATION(s))
+                {
+                    throw std::runtime_error("GCNode::DEBUG_CHECK_NODE_COUNTS(): Inconsistent node generation in s_Old.");
+                }
+                GCNode::OldToNewChecker o2n(gen);
+                s->visitReferents(&o2n);
+            }
+            for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[gen]);
+                s != GCNode::s_OldToNew[gen].get();
+                s = NEXT_NODE(s)) {
+                OldToNewCount++;
+                if (gen != NODE_GENERATION(s))
+                {
+                    throw std::runtime_error("GCNode::DEBUG_CHECK_NODE_COUNTS(): Inconsistent node generation in s_OldToNew.");
+                }
+            }
+        }
+        REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
+            NewCount, OldCount, OldToNewCount,
+            NewCount + OldCount + OldToNewCount);
+#endif
+    }
+
 /* This macro should help localize where a FREESXP node is encountered
    in the GC */
 #ifdef PROTECTCHECK

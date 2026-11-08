@@ -452,6 +452,8 @@ namespace CXXR
 
         const GCNode *prev() const { return m_prev; }
 
+        static void DEBUG_CHECK_NODE_COUNTS(const char *where);
+
     // private:
         /** @brief Visitor class used to impose a minimum generation number.
          *

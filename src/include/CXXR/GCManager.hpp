@@ -189,17 +189,6 @@ namespace CXXR
         static bool gc_fail_on_error() { return s_gc_fail_on_error; }
         static void set_gc_fail_on_error(bool status) { s_gc_fail_on_error = status; }
 
-        /** @brief Report error encountered during garbage collection.
-         *
-         * Report error encountered during garbage collection where for detecting
-         * problems it is better to abort, but for debugging (or some production runs,
-         * where external validation of results is possible) it may be preferred to
-         * continue. Configurable via _R_GC_FAIL_ON_ERROR_. Typically these problems
-         * are due to memory corruption.
-         *
-         * @param msg Error message to be displayed.
-         */
-        static void gc_error(const char *msg);
         static bool FORCE_GC();
         static void setTortureParameters(int gap, int wait, bool inhibitor);
         static bool gc_inhibit_release();
@@ -357,6 +346,18 @@ namespace CXXR
 
         static void init_gctorture();
         static void init_gc_grow_settings();
+
+        /** @brief Report error encountered during garbage collection.
+         *
+         * Report error encountered during garbage collection where for detecting
+         * problems it is better to abort, but for debugging (or some production runs,
+         * where external validation of results is possible) it may be preferred to
+         * continue. Configurable via _R_GC_FAIL_ON_ERROR_. Typically these problems
+         * are due to memory corruption.
+         *
+         * @param msg Error message to be displayed.
+         */
+        static void handle_gc_error(const char *msg);
 
         static unsigned int s_inhibitor_count; // Number of GCInhibitor
                                                // objects in existence.

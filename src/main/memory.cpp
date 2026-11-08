@@ -476,52 +476,6 @@ attribute_hidden SEXP do_maxNSize(SEXP call, SEXP op, SEXP args, SEXP rho)
   LINK_NODE(__from__, __from__); \
 } while (0);
 
-/* Node Allocation. */
-
-/* Debugging Routines. */
-
-#ifdef DEBUG_GC
-static void DEBUG_CHECK_NODE_COUNTS(const char *where)
-{
-    REprintf("Node counts %s:\n", where);
-    unsigned int NewCount = 0;
-    unsigned int OldCount = 0;
-    unsigned int OldToNewCount = 0;
-    for (const GCNode *s = NEXT_NODE(GCNode::s_New);
-        s != GCNode::s_New.get();
-        s = NEXT_NODE(s)) {
-        NewCount++;
-    }
-    for (unsigned int gen = 1; gen < GCNode::numGenerations(); gen++) {
-        for (const GCNode *s = NEXT_NODE(GCNode::s_Old[gen]);
-            s != GCNode::s_Old[gen].get();
-            s = NEXT_NODE(s)) {
-            OldCount++;
-            if (gen != NODE_GENERATION(s))
-                GCManager::gc_error(_("Inconsistent node generation in s_Old\n"));
-            GCNode::OldToNewChecker o2n(gen);
-            s->visitReferents(&o2n);
-        }
-        for (const GCNode *s = NEXT_NODE(GCNode::s_OldToNew[gen]);
-            s != GCNode::s_OldToNew[gen].get();
-            s = NEXT_NODE(s)) {
-            OldToNewCount++;
-            if (gen != NODE_GENERATION(s))
-                GCManager::gc_error(_("Inconsistent node generation in s_OldToNew\n"));
-        }
-    }
-    REprintf("New = %d, Old = %d, OldToNew = %d, Total = %d\n",
-        NewCount, OldCount, OldToNewCount,
-        NewCount + OldCount + OldToNewCount);
-}
-#else
-#define DEBUG_CHECK_NODE_COUNTS(s)
-#endif /* DEBUG_GC */
-
-/* Page Allocation and Release. */
-
-
-
 /* Managing Old-to-New References. */
 static void old_to_new(SEXP x, SEXP y)
 {
