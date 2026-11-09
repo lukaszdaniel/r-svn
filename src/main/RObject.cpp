@@ -296,7 +296,7 @@ namespace CXXR
     void RObject::setAttributes(PairList *new_attributes)
     {
         clearAttributes();
-#if CXXR_TRUE // temporarily
+#if CXXR_FALSE
         // TODO: Such retarget is needed here because RObject might be in older
         // generation than the newly assigned new_attributes
         m_attrib.retarget(this, new_attributes);
@@ -308,11 +308,13 @@ namespace CXXR
                 return;
             }
 #else
-        // TODO: Below code results in installation error for package "vctrs".
+        // TODO: Below code resulted in installation error for package "vctrs".
         // Error: Can't bind data because some elements are not named.
         // Error: unable to load R code in package ‘vctrs’
         // This is because vctrs package modifies the attributes
         // after SET_ATTRIB has been called.
+        //
+        // This seems not to be the case anymore,
         while (new_attributes && new_attributes != R_NilValue)
         {
             const Symbol *name = SEXP_downcast<const Symbol *>(new_attributes->tag());
