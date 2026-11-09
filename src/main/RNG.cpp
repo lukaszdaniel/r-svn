@@ -231,8 +231,10 @@ static void FixupSeeds(RNGtype RNG_kind, int initial)
 
     case MERSENNE_TWISTER:
 	if(initial) I1 = 624;
-	 /* No action unless user has corrupted .Random.seed */
-	if(I1 <= 0) I1 = 624;
+	/* No action unless user has corrupted .Random.seed.
+	   I1 is unsigned but MT_genrand() reads it as a signed index,
+	   so test the signed value. */
+	if((int) I1 <= 0) I1 = 624;
 	/* check for all zeroes */
 	for (j = 1; j <= 624; j++)
 	    if(RNG_Table[RNG_kind].i_seed[j] != 0) {
@@ -267,6 +269,7 @@ static void FixupSeeds(RNGtype RNG_kind, int initial)
 	    if (tmp >= m1) allOK = 0;
 	}
 	if(!notallzero || !allOK) Randomize(RNG_kind);
+	notallzero = 0;
 	for (j = 3; j < 6; j++) {
 	    tmp = RNG_Table[RNG_kind].i_seed[j];
 	    if(tmp != 0) notallzero = 1;
@@ -377,6 +380,10 @@ static bool GetRNGkind(SEXP seeds)
 		R_typeToChar(seeds));
 	goto invalid;
     }
+    if (XLENGTH(seeds) == 0) {
+	warning("%s", _("'.Random.seed' has length 0, so ignored"));
+	goto invalid;
+    }
     is = INTEGER(seeds),
 	tmp = is[0];
     /* avoid overflow here: max current value is 110507 */
@@ -409,6 +416,10 @@ static bool GetRNGkind(SEXP seeds)
 	break;
     default:
 	warning("%s", _("'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"));
+	goto invalid;
+    }
+    if (newN01 == USER_NORM && !User_norm_fun) {
+	warning(_("'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"));
 	goto invalid;
     }
     RNG_kind = newRNG; N01_kind = newN01; Sample_kind = newSample; Binom_kind = newBinom;

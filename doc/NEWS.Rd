@@ -464,6 +464,10 @@
       superclasses unnecessarily.  Now validity methods for simple
       superclasses are called with \code{x} as the argument.  Thanks to
       \I{Hervé Pagès} for the report (\PR{17944}).
+
+      \item \code{canCoerce} did not consider an uncached implicit
+      coercion from the object class to a subclass.  Thanks to
+      \I{Hervé Pagès} for the report (\PR{16423}).
     }
   }
 }
@@ -482,9 +486,9 @@
       \item \command{configure} issues a warning if no way is found to
       determine C dependencies, as without this updating a build is
       unreliable, for example if \file{Rversion.h} is changed (and it
-      holds the SVN revision).  (Seen with macOS SDK 27.2.)
+      holds the SVN revision).  (Seen with macOS \abbr{SDK} 27.2.)
 
-      \item The way \command{configure} tests for C and ObjC
+      \item The way \command{configure} tests for C and Objective-C
       \command{make} dependencies is now less fragile and works on macOS 27.2.
     }
   }
