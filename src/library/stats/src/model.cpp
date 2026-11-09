@@ -1801,8 +1801,9 @@ SEXP termsform(SEXP args)
     bool allowDot = asLogicalNAFalse(CAR(a));
 
     // a := attributes(<answer>)
-    a = allocList((specials == R_NilValue) ? 8 : 9);
-    SET_ATTRIB(ans, a);
+    GCStackRoot<> attributes;
+    attributes = allocList((specials == R_NilValue) ? 8 : 9);
+    a = attributes;
 
     /* Step 1: Determine the ``variables'' in the model :
      * ------ Here we create a call of the form list(...).
@@ -2160,9 +2161,10 @@ SEXP termsform(SEXP args)
 
     SETCAR(a, mkString("terms"));
     SET_TAG(a, R_ClassSymbol);
-    SET_OBJECT(ans, 1);
+    // SET_OBJECT(ans, 1);
 
     SETCDR(a, R_NilValue);  /* truncate if necessary */
+    SET_ATTRIB(ans, attributes);
 
     UNPROTECT(4);
     return ans;

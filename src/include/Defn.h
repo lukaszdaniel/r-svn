@@ -569,7 +569,7 @@ void R_check_thread(const char *s);
 
 /* General Cons Cell Attributes */
 SEXP (ATTRIB)(SEXP x); // declared in Rinternals.h
-void SET_ATTRIB(SEXP x, SEXP v); // declared in Rinternals.h
+void SET_ATTRIB(SEXP x, SEXP v);
 int  (MARK)(SEXP x);
 int  (OBJECT)(SEXP x); // declared in Rinternals.h
 int  (NAMED)(SEXP x);
