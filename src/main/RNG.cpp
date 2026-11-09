@@ -366,30 +366,36 @@ static bool GetRNGkind(SEXP seeds)
 	seeds = GetSeedsFromVar();
     if (seeds == R_UnboundValue) return TRUE;
 
+    auto invalid = []() {
+	RNG_kind = RNG_DEFAULT; N01_kind = N01_DEFAULT; Sample_kind = Sample_DEFAULT; Binom_kind = Binom_DEFAULT;
+	Randomize(RNG_kind);
+	PutRNGstate(); // write out to .Random.seed
+	return true;
+    };
+
     RNGtype newRNG;
     N01type newN01;
     Sampletype newSample;
     Binomtype  newBinom;
-    int *is;
-    int tmp;
+
     if (!isInteger(seeds)) {
 	if (seeds == R_MissingArg) /* How can this happen? */
 	    R_MissingArgError(R_SeedsSymbol, R_CurrentExpression,
 			      "getRNGError");
 	warning(_("'.Random.seed' is not an integer vector but of type '%s', so ignored"),
 		R_typeToChar(seeds));
-	goto invalid;
+	return invalid();
     }
     if (XLENGTH(seeds) == 0) {
 	warning("%s", _("'.Random.seed' has length 0, so ignored"));
-	goto invalid;
+	return invalid();
     }
-    is = INTEGER(seeds),
-	tmp = is[0];
+    int *is = INTEGER(seeds);
+	int tmp = is[0];
     /* avoid overflow here: max current value is 110507 */
     if (tmp == NA_INTEGER || tmp < 0 || tmp > 111000) {
 	warning("%s", _("'.Random.seed[1]' is not a valid integer, so ignored"));
-	goto invalid;
+	return invalid();
     }
     newRNG = (RNGtype) (tmp % 100);
     newN01 = (N01type) (tmp % 10000 / 100);
@@ -397,7 +403,7 @@ static bool GetRNGkind(SEXP seeds)
     newBinom  =  (Binomtype) (tmp / 100000);
     if (newN01 > KINDERMAN_RAMAGE || newSample > REJECTION || newBinom > BTPE) {
 	warning("%s", _("'.Random.seed[1]' is not a valid Normal | Sample | Binom type, so ignored"));
-	goto invalid;
+	return invalid();
     }
     switch(newRNG) {
     case WICHMANN_HILL:
@@ -411,25 +417,19 @@ static bool GetRNGkind(SEXP seeds)
     case USER_UNIF:
 	if(!User_unif_fun) {
 	    warning("%s", _("'.Random.seed[1] %% 100 = 5' but no user-supplied generator, so ignored"));
-	    goto invalid;
+	    return invalid();
 	}
 	break;
     default:
 	warning("%s", _("'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"));
-	goto invalid;
+	return invalid();
     }
     if (newN01 == USER_NORM && !User_norm_fun) {
 	warning(_("'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"));
-	goto invalid;
+	return invalid();
     }
     RNG_kind = newRNG; N01_kind = newN01; Sample_kind = newSample; Binom_kind = newBinom;
     return false;
-invalid:
-    RNG_kind = RNG_DEFAULT; N01_kind = N01_DEFAULT; Sample_kind = Sample_DEFAULT; Binom_kind = Binom_DEFAULT;
-
-    Randomize(RNG_kind);
-    PutRNGstate(); // write out to .Random.seed
-    return true;
 }
 
 static void copy_seeds_in(Int32 *i_seed, SEXP seeds, int len_seed)
