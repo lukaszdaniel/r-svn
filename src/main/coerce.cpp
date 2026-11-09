@@ -100,7 +100,6 @@ using namespace CXXR;
   SEXP __x__ = (x); \
   if (ATTRIB(__x__) != R_NilValue) { \
     SET_ATTRIB(__x__, R_NilValue); \
-    if (OBJECT(__x__)) SET_OBJECT(__x__, 0); \
     if (IS_S4_OBJECT(__x__)) UNSET_S4_OBJECT(__x__); \
   } \
 } while (0)

@@ -329,6 +329,9 @@ void Rf_copyMostAttrib(SEXP inp_, SEXP ans_)
 	error("%s", _("attempt to set an attribute on NULL"));
 
     GCStackRoot<> inp(inp_), ans(ans_);
+    // bool is_object = OBJECT(inp);
+    bool is_s4_object = IS_S4_OBJECT(inp);
+
     for (SEXP s = ATTRIB(inp); s != R_NilValue; s = CDR(s)) {
 	if ((TAG(s) != R_NamesSymbol) &&
 	    (TAG(s) != R_DimSymbol) &&
@@ -336,8 +339,8 @@ void Rf_copyMostAttrib(SEXP inp_, SEXP ans_)
 	    installAttrib(ans, TAG(s), CAR(s));
 	}
     }
-    if (OBJECT(inp)) SET_OBJECT(ans, 1);
-    ans->setS4Object(IS_S4_OBJECT(inp));
+    // SET_OBJECT(ans, is_object);
+    ans->setS4Object(is_s4_object);
 }
 
 /* version that does not preserve ts information, for subsetting */
@@ -347,9 +350,8 @@ void R::copyMostAttribNoTs(SEXP inp_, SEXP ans_)
 	error("%s", _("attempt to set an attribute on NULL"));
 
     GCStackRoot<> inp(inp_), ans(ans_);
-    bool is_object = OBJECT(inp);
+    // bool is_object = OBJECT(inp);
     bool is_s4_object = IS_S4_OBJECT(inp);
-
 
     for (SEXP s = ATTRIB(inp); s != R_NilValue; s = CDR(s)) {
 	if ((TAG(s) != R_NamesSymbol) &&
@@ -369,7 +371,7 @@ void R::copyMostAttribNoTs(SEXP inp_, SEXP ans_)
 	    if (!ists) installAttrib(ans, TAG(s), cl);
 	    else if(LENGTH(cl) <= 1) {
 		/* dropping class attribute */
-		is_object = false;
+		// is_object = false;
 		is_s4_object = false;
 	    } else {
 		GCStackRoot<> new_cl;
@@ -382,7 +384,7 @@ void R::copyMostAttribNoTs(SEXP inp_, SEXP ans_)
 	    }
 	}
     }
-    SET_OBJECT(ans, is_object);
+    // SET_OBJECT(ans, is_object);
     ans->setS4Object(is_s4_object);
 }
 
@@ -391,40 +393,9 @@ static SEXP installAttrib(SEXP vec, SEXP name, SEXP val)
     if (vec == R_NilValue)
         return R_NilValue;
 
-    switch (TYPEOF(vec)) {
-    case CHARSXP:
-        error(_("cannot set an attribute on a '%s'"), "CHARSXP");
-        break;
-    case SYMSXP:
-    case BUILTINSXP:
-    case SPECIALSXP:
-        error(_("cannot set an attribute on a '%s'"), R_typeToChar(vec));
-    default:
-        break;
-    }
-
-    /* this does no allocation */
-    SEXP prev = R_NilValue; /* -Wall */
-    for (SEXP s = ATTRIB(vec); s != R_NilValue; s = CDR(s)) {
-        if (TAG(s) == name) {
-            if (MAYBE_REFERENCED(val) && val != CAR(s))
-                val = R_FixupRHS(vec, val);
-            SETCAR(s, val);
-            return val;
-        }
-        prev = s; // record last attribute, if any
-    }
-    /* The usual convention is that the caller protects,
-       but a lot of existing code depends assume that
-       setAttrib/installAttrib protects its arguments */
-    GCStackRoot<> vecrt(vec), namert(name), valrt(val);
-    if (MAYBE_REFERENCED(valrt)) ENSURE_NAMEDMAX(valrt);
-    SEXP s = CXXR_cons(valrt, R_NilValue, namert);
-    if (ATTRIB(vecrt) == R_NilValue) SET_ATTRIB(vecrt, s); else SETCDR(prev, s);
-
-    // GCStackRoot<> vecrt(vec);
-    // vec->setAttribute(static_cast<Symbol *>(name), val);
-    return valrt;
+    GCStackRoot<> vecrt(vec);
+    vec->setAttribute(SEXP_downcast<Symbol *>(name), val);
+    return val;
 }
 
 static SEXP removeAttrib(SEXP vec, SEXP name)
@@ -590,7 +561,7 @@ SEXP Rf_classgets(SEXP vec, SEXP klass)
 	    }
 
 	    installAttrib(vec, R_ClassSymbol, klass);
-	    SET_OBJECT(vec, 1);
+	    // SET_OBJECT(vec, 1);
 
 #ifdef R_classgets_copy_S4
 // not ok -- fails at installation around byte-compiling methods
