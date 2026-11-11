@@ -293,7 +293,8 @@ int Rf_selectDevice(int devNum)
 	gdd = GEcurrentDevice(); /* will start a device if current is null */
 	if (!NoDevices()) /* which it always will be */
 	    if (gdd->dev->activate) gdd->dev->activate(gdd->dev);
-	return devNum;
+	/* not devNum: selecting the null device (0) opened a new one */
+	return R_CurrentDevice;
     }
     else
 	return selectDevice(nextDevice(devNum));
