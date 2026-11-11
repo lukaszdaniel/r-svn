@@ -5847,7 +5847,7 @@ static R_INLINE SEXP getvar(SEXP symbol, SEXP rho,
 #ifdef IMMEDIATE_PROMISE_VALUES
 # define SET_PROMISE_VALUE_FROM_STACKVAL(prom, ubval)  do {		\
 	SEXP value;							\
-	SET_PROMISE_TAG(prom, (SEXPTYPE) ubval.tag);				\
+	SET_PROMISE_TAG(prom, (SEXPTYPE) ubval.tag);			\
 	switch ((ubval).tag) {						\
 	case REALSXP: SET_PROMISE_DVAL(prom, (ubval).u.dval); break;	\
 	case INTSXP: SET_PROMISE_IVAL(prom, (ubval).u.ival); break;	\

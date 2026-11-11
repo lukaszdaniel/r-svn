@@ -28,18 +28,20 @@ Error in 'quint(break)': no loop for break/next, jumping to top level
 > 
 > ## ALTREP support
 > 
-> #x <- 1:1e10
-> #stopifnot(length(x) == 1e+10)
+> x <- 1:1e10
+> stopifnot(length(x) == 1e+10)
 > 
-> #system.time(for (i in 1:1e9) break)
+> system.time(for (i in 1:1e9) break)
+   user  system elapsed 
+  0.001   0.000   0.001 
 > 
-> #tools::assertError(y <- x + 1L)
+> tools::assertError(y <- x + 1L)
 > 
 > x <- rnorm(1e5)
 > y <- x + rnorm(1e5)
 > system.time(lm(y ~ x))
    user  system elapsed 
-  0.029   0.009   0.038 
+  0.004   0.003   0.008 
 > 
 > x <- structure(numeric(1e3), class = "foo")
 > system.time(base::unclass(x))
@@ -50,7 +52,7 @@ Error in 'quint(break)': no loop for break/next, jumping to top level
 > x <- rnorm(1e7)
 > system.time(y <- sort(x))
    user  system elapsed 
-  0.913   0.126   1.042 
+  0.489   0.049   0.541 
 > system.time(sort(y))
    user  system elapsed 
       0       0       0 
@@ -62,7 +64,7 @@ Error in 'quint(break)': no loop for break/next, jumping to top level
 > indx <- seq_along(x)
 > system.time(anyNA(indx))
    user  system elapsed 
-  0.001   0.000   0.000 
+      0       0       0 
 > system.time(sort(indx))
    user  system elapsed 
       0       0       0 
@@ -90,7 +92,7 @@ Error in 'quint(break)': no loop for break/next, jumping to top level
 [1] 1
 > .Internal(refcnt(m))
 [1] 1
-> #stopifnot(max(.Internal(named(m)), .Internal(refcnt(m))) == 1)
+> stopifnot(max(.Internal(named(m)), .Internal(refcnt(m))) == 1)
 > x <- 1:10
 > .Internal(refcnt(x))
 [1] 65535
