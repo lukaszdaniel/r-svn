@@ -3454,26 +3454,13 @@ static SEXP pos2env(int pos, SEXP call)
  */
 attribute_hidden SEXP do_pos2env(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP env, pos;
-    int npos;
     checkArity(op, args);
     check1arg(args, call, "x");
 
-    PROTECT(pos = coerceVector(CAR(args), INTSXP));
-    npos = length(pos);
-    if (npos <= 0)
+    SEXP pos = CAR(args);
+    if (!isNumeric(pos) || XLENGTH(pos) != 1)
 	errorcall(call, _("invalid '%s' argument"), "pos");
-    if (npos == 1)
-	env = pos2env(INTEGER(pos)[0], call);
-    else {
-	PROTECT(env = ListVector::create(npos));
-	for (int i = 0; i < npos; i++) {
-	    SET_VECTOR_ELT(env, i, pos2env(INTEGER(pos)[i], call));
-	}
-	UNPROTECT(1); /* env */
-    }
-    UNPROTECT(1); /* pos */
-    return env;
+    return pos2env(asInteger(pos), call);
 }
 
 static SEXP matchEnvir(SEXP call, const char *what)

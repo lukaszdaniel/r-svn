@@ -122,6 +122,20 @@
       \item The X11 on-screen devices now supports history navigation
       through (customizable) key bindings.
 
+      \item \code{model.matrix.default()} now catches and names an
+      unsuitable factor before calling \code{contrasts<-} (\PR{19148}),
+      and no longer warns about unused elements of \code{contrasts.arg}
+      (\PR{18313}, obviating an all too common workaround using
+      \code{suppressWarnings}).
+
+      \item \code{as.vector} gains methods for classes \code{Date},
+      \code{POSIXct}, and \code{difftime} that call methods for
+      \code{as.list} or \code{as.character} when \code{mode="list"} or
+      \code{"character"}.  The method for class \code{POSIXlt} is
+      changed to do the same and for all other modes work via class
+      \code{POSIXct}, a corollary being that
+      \code{as.vector(., mode="double")} now works as
+      \code{as.double(.)} rather than signalling an error.
     }
   }
 
@@ -183,17 +197,6 @@
 
   \subsection{Bug Fixes}{
     \itemize{
-      \item The internal method of \code{untar()} now checks the whole path
-      of every member, so that a final component of \code{".."} or \code{"~"}
-      can no longer place a link or file outside the extraction directory;
-      rejects hard- and symbolic-link targets restored as file copies,
-      which resolve outside the extraction directory or pass through a
-      symbolic link; applies the \command{umask} to extracted files; also no longer
-      restores \samp{setuid} or \samp{setgid} permission bits.
-      Similarly, the internal method of \code{unzip()} no longer extracts
-      through symbolic links below \code{exdir}, both thanks to \I{Kevin
-      Ushey}'s report and patch in \PR{19229}.
-
       \item For \code{x <-  <large-POSIXlt>}, for some boundary cases
       with \code{x$sec - floor(x$sec)} close to 1, \code{c(x)} could
       become one second ahead of \code{x} in \R 4.6.0;  \I{subassignments}
@@ -420,9 +423,6 @@
       \code{x[seq_len(n)[-j]]} could differ for objects \code{x} with
       \code{n} terms and indices \code{j} in \code{seq_len(n)}.
 
-      \item \code{unzip(., unzip = "internal")} no longer leaks the zip
-      handle on error, thanks to \I{Kevin Ushey}, see \PR{19233}
-
       \item The S4 methods for \code{initialize} with signature
       \code{.Object="oldClass"} or \code{.Object=".environment"}
       evaluated arguments of type \code{"symbol"} or \code{"call"} when
@@ -479,6 +479,14 @@
       \code{is.numeric(x)} is false, as e.g., for \code{"difftime"} objects
       \code{x}.  Rather, \code{str.default()} obeys its default or explicit
       \code{digits.d} argument, fixing \PR{19294}.
+
+      \item Fix for \code{contourLines()} and \code{contour()} with
+      negative z values (\PR{19279}).  Thanks to \I{Kevin Ushey}.
+
+      \item \code{as.environment(x)} and \code{pos.to.env(x)} returned
+      a list rather than an environment for numeric \code{x} of length
+      greater than one.  Now they signal an error.  Thanks to
+      \I{Adam Berkeš} for the report (\PR{19306}).
     }
   }
 }
@@ -505,6 +513,20 @@
   }
   \subsection{Bug Fixes}{
     \itemize{
+      \item \code{unzip(., unzip = "internal")} no longer leaks the zip
+      handle on error, thanks to \I{Kevin Ushey}, see \PR{19233}
+
+      \item The internal method of \code{untar()} now checks the whole path
+      of every member, so that a final component of \code{".."} or \code{"~"}
+      can no longer place a link or file outside the extraction directory;
+      rejects hard- and symbolic-link targets restored as file copies,
+      which resolve outside the extraction directory or pass through a
+      symbolic link; applies the \command{umask} to extracted files; also no longer
+      restores \samp{setuid} or \samp{setgid} permission bits.
+      Similarly, the internal method of \code{unzip()} no longer extracts
+      through symbolic links below \code{exdir}, both thanks to \I{Kevin
+      Ushey}'s report and patch in \PR{19229}.
+
       \item \code{smooth(*, "S")} now reports a change when the last plateau it splits
       is unchanged on its right side, so "3RS3R" and "3RSS" are correct now
       in such cases.  Fixes \PR{19280} reported with patch by \I{Kevin Ushey}.
