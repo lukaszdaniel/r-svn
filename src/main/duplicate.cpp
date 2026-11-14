@@ -123,10 +123,13 @@ attribute_hidden void R::reset_duplicate_counter(void)
 #endif
 
 template <CXXR::RObject::Duplication depth = CXXR::RObject::Duplication::DEEP>
-SEXP CXXR_duplicate(SEXP s)
+SEXP CXXR_duplicate(SEXP s_)
 {
-    if (s == R_NilValue)
+    if (s_ == R_NilValue)
         return R_NilValue;
+
+    GCStackRoot<> s(s_);
+
 #ifdef R_PROFILING
     ++s_duplicate_counter;
 #endif
@@ -187,11 +190,9 @@ SEXP R::Rf_lazy_duplicate(SEXP s) {
     return s;
 }
 
-static SEXP duplicate_child(SEXP s, bool deep) {
-    if (deep)
-	return duplicate1(s, true);
-    else
-	return lazy_duplicate(s);
+static SEXP duplicate_child(SEXP s, bool deep)
+{
+	return deep ? duplicate1(s, true) : s /* was: Rf_lazy_duplicate(s) */;
 }
 
 /*****************/
@@ -287,7 +288,7 @@ static SEXP duplicate1(SEXP s_, bool deep)
 	t = Closure::create();
 	SET_FORMALS(t, FORMALS(s.get()));
 	SET_BODY(t, BODY(s.get()));
-	SET_CLOENV(t, CLOENV(s.get()	));
+	SET_CLOENV(t, CLOENV(s.get()));
 	DUPLICATE_ATTRIB2(t, s, deep);
 	if (NOJIT(s)) SET_NOJIT(t);
 	if (MAYBEJIT(s)) SET_MAYBEJIT(t);
