@@ -75,39 +75,14 @@ using namespace CXXR;
    a small but measurable difference, at least for some cases
    and when (as in R 2.15.x) a for() loop was used.
 */
-#ifdef __APPLE__
-/* it seems macOS builds did not copy >= 2^32 bytes fully */
 #define DUPLICATE_ATOMIC_VECTOR(type, fun, fun_ro, to, from, deep) do {	\
   R_xlen_t __n__ = XLENGTH(from); \
-  PROTECT(from); \
-  PROTECT(to = allocVector(TYPEOF(from), __n__)); \
-  if (__n__ == 1) fun(to)[0] = fun_ro(from)[0]; \
-  else { \
-      R_xlen_t __this; \
-      type *__to = fun(to); \
-      const type *__from = fun_ro(from); \
-      while(__n__ > 0) { \
-	 __this = (__n__ < 1000000) ? __n__ : 1000000; \
-	 memcpy(__to, __from, __this * sizeof(type));  \
-	 __n__ -= __this;  __to += __this; __from += __this; \
-      } \
-  } \
-  DUPLICATE_ATTRIB2(to, from, deep);		 \
-  COPY_TRUELENGTH(to, from); \
-  UNPROTECT(2); \
-} while (0)
-#else
-#define DUPLICATE_ATOMIC_VECTOR(type, fun, fun_ro, to, from, deep) do {	\
-  R_xlen_t __n__ = XLENGTH(from); \
-  PROTECT(from); \
-  PROTECT(to = allocVector(TYPEOF(from), __n__)); \
+  to = allocVector(TYPEOF(from), __n__); \
   if (__n__ == 1) fun(to)[0] = fun_ro(from)[0]; \
   else if (__n__) memcpy(fun(to), fun_ro(from), __n__ * sizeof(type)); \
   DUPLICATE_ATTRIB2(to, from, deep); \
   COPY_TRUELENGTH(to, from); \
-  UNPROTECT(2); \
 } while (0)
-#endif
 
 /* The following macros avoid the cost of going through calls to the
    assignment functions (and duplicate in the case of ATTRIB) when the
@@ -120,12 +95,6 @@ using namespace CXXR;
     to->setS4Object(IS_S4_OBJECT(from));  \
   } \
 } while (0)
-
-#define COPY_TAG(to, from) do { \
-  SEXP __tag__ = TAG(from); \
-  if (__tag__ != R_NilValue) SET_TAG(to, __tag__); \
-} while (0)
-
 
 /* For memory profiling.  */
 /* We want a count of calls to duplicate from outside
@@ -286,7 +255,7 @@ SEXP duplicate_list(SEXP s_, bool deep)
     val = PairList::create<T>(R_NilValue, val);
     for (sp = s, vp = val; sp != R_NilValue; sp = CDR(sp), vp = CDR(vp)) {
 	SETCAR(vp, duplicate_child(CAR(sp), deep));
-	COPY_TAG(vp, sp);
+	if (TAG(sp) != R_NilValue) SET_TAG(vp, TAG(sp));
 	DUPLICATE_ATTRIB2(vp, sp, deep);
     }
 
@@ -294,15 +263,12 @@ SEXP duplicate_list(SEXP s_, bool deep)
 }
 } // anonymous namespace
 
-static SEXP duplicate1(SEXP s, bool deep)
+static SEXP duplicate1(SEXP s_, bool deep)
 {
-    SEXP t;
-    R_xlen_t i, n;
+    GCStackRoot<> t, s(s_);
 
     if (ALTREP(s)) {
-	PROTECT(s); /* the methods should protect, but ... */
 	SEXP ans = ALTREP_DUPLICATE_EX(s, Rboolean(deep));
-	UNPROTECT(1);
 	if (ans != NULL)
 	    return ans;
     }
@@ -318,55 +284,47 @@ static SEXP duplicate1(SEXP s, bool deep)
     case WEAKREFSXP:
 	return s;
     case CLOSXP:
-	PROTECT(s);
-	PROTECT(t = Closure::create());
-	SET_FORMALS(t, FORMALS(s));
-	SET_BODY(t, BODY(s));
-	SET_CLOENV(t, CLOENV(s));
+	t = Closure::create();
+	SET_FORMALS(t, FORMALS(s.get()));
+	SET_BODY(t, BODY(s.get()));
+	SET_CLOENV(t, CLOENV(s.get()	));
 	DUPLICATE_ATTRIB2(t, s, deep);
 	if (NOJIT(s)) SET_NOJIT(t);
 	if (MAYBEJIT(s)) SET_MAYBEJIT(t);
-	UNPROTECT(2);
 	break;
     case LISTSXP:
-	PROTECT(s);
 	t = duplicate_list(s, deep);
-	UNPROTECT(1);
 	break;
     case LANGSXP:
-	PROTECT(s);
-	PROTECT(t = duplicate_list<Expression>(s, deep));
+	t = duplicate_list<Expression>(s, deep);
 	DUPLICATE_ATTRIB2(t, s, deep);
-	UNPROTECT(2);
 	break;
     case DOTSXP:
-	PROTECT(s);
-	PROTECT(t = duplicate_list<DottedArgs>(s, deep));
+	t = duplicate_list<DottedArgs>(s, deep);
 	DUPLICATE_ATTRIB2(t, s, deep);
-	UNPROTECT(2);
 	break;
     case CHARSXP:
 	return s;
 	break;
     case EXPRSXP:
-	n = XLENGTH(s);
-	PROTECT(s);
-	PROTECT(t = ExpressionVector::create(n));
-	for(i = 0 ; i < n ; i++)
+    {
+	R_xlen_t n = XLENGTH(s);
+	t = ExpressionVector::create(n);
+	for(R_xlen_t i = 0 ; i < n ; i++)
 	    SET_XVECTOR_ELT(t, i, duplicate_child(XVECTOR_ELT(s, i), deep));
 	DUPLICATE_ATTRIB2(t, s, deep);
 	COPY_TRUELENGTH(t, s);
-	UNPROTECT(2);
+    }
 	break;
     case VECSXP:
-	n = XLENGTH(s);
-	PROTECT(s);
-	PROTECT(t = ListVector::create(n));
-	for(i = 0 ; i < n ; i++)
+    {
+	R_xlen_t n = XLENGTH(s);
+	t = ListVector::create(n);
+	for(R_xlen_t i = 0 ; i < n ; i++)
 	    SET_VECTOR_ELT(t, i, duplicate_child(VECTOR_ELT(s, i), deep));
 	DUPLICATE_ATTRIB2(t, s, deep);
 	COPY_TRUELENGTH(t, s);
-	UNPROTECT(2);
+    }
 	break;
     case LGLSXP: DUPLICATE_ATOMIC_VECTOR(int, LOGICAL, LOGICAL_RO, t, s, deep); break;
     case INTSXP: DUPLICATE_ATOMIC_VECTOR(int, INTEGER, INTEGER_RO, t, s, deep); break;
@@ -374,28 +332,26 @@ static SEXP duplicate1(SEXP s, bool deep)
     case CPLXSXP: DUPLICATE_ATOMIC_VECTOR(Rcomplex, COMPLEX, COMPLEX_RO, t, s, deep); break;
     case RAWSXP: DUPLICATE_ATOMIC_VECTOR(Rbyte, RAW, RAW_RO, t, s, deep); break;
     case STRSXP:
+    {
 	/* Direct copying and bypassing the write barrier would be OK
 	   since t was just allocated and so it cannot be older than
 	   any of the elements in s. But it does not increment the
 	   reference counts, so use a loop with SET_STRING_ELT. LT */
 	//DUPLICATE_ATOMIC_VECTOR(SEXP, STRING_PTR, STRING_PTR_RO, t, s, deep);
-	n = XLENGTH(s);
-	PROTECT(s);
-	PROTECT(t = StringVector::create(n));
-	for(i = 0 ; i < n ; i++)
+	R_xlen_t n = XLENGTH(s);
+	t = StringVector::create(n);
+	for(R_xlen_t i = 0 ; i < n ; i++)
 	    SET_STRING_ELT(t, i, STRING_ELT(s, i));
 	DUPLICATE_ATTRIB2(t, s, deep);
 	COPY_TRUELENGTH(t, s);
-	UNPROTECT(2);
+    }
 	break;
     case PROMSXP:
 	return s;
 	break;
     case OBJSXP:
-	PROTECT(s);
-	PROTECT(t = R_allocObject());
+	t = R_allocObject();
 	DUPLICATE_ATTRIB2(t, s, deep);
-	UNPROTECT(2);
 	break;
     default:
 	UNIMPLEMENTED_TYPE("duplicate", s);
@@ -452,7 +408,8 @@ void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
     SEXP pt = t;
     if(byrow) {
 	R_xlen_t NR = nr;
-	SEXP tmp = PROTECT(ListVector::create(ns));
+	GCStackRoot<> tmp;
+	tmp = ListVector::create(ns);
 	for (int i = 0; i < nr; i++)
 	    for (int j = 0; j < nc; j++) {
 		SET_VECTOR_ELT(tmp, i + j * NR, duplicate(CAR(pt)));
@@ -463,7 +420,6 @@ void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
 	    SETCAR(s, VECTOR_ELT(tmp, i++));
 	    s = CDR(s);
 	}
-	UNPROTECT(1);
     }
     else {
 	for (int i = 0; i < ns; i++) {
@@ -581,13 +537,12 @@ FILL_ELT_WITH_RECYCLE(Vector, VECTOR_ELT, SET_VECTOR_ELT) /* xfillVectorMatrixWi
 static SEXP duplicate_attr(SEXP x, Rboolean deep)
 {
     if (isVector(x) && XLENGTH(x) >= WRAP_THRESHOLD) {
-	SEXP val = R_tryWrap(x);
+	GCStackRoot<> val;
+	val = R_tryWrap(x);
 	if (val != x) {
 	    if (deep) {
-		PROTECT(val);
 		/* the spine has been duplicated; we could just do the values */
 		SET_ATTRIB(val, duplicate(ATTRIB(val)));
-		UNPROTECT(1); /* val */
 	    }
 	    return val;
 	}
