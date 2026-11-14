@@ -1489,14 +1489,14 @@ static SEXP SimpleListAssign(SEXP call, SEXP x, SEXP s, SEXP y, int ind,
 
     if (stretch) {
 	SEXP t = CAR(s);
-	SEXP yi = PROTECT(allocList((int)(stretch - nx)));
+	GCStackRoot<> yi;
+	yi = allocList((int)(stretch - nx));
 	/* This is general enough for only usage */
 	if(isString(t) && length(t) == stretch - nx) {
 	    SEXP z = yi;
 	    for (int i = 0; i < LENGTH(t); i++, z = CDR(z))
 		SET_TAG(z, installTrChar(STRING_ELT(t, i)));
 	}
-	UNPROTECT(1);
 	PROTECT(x = listAppend(x, yi));
 	nx = (int) stretch;
     }
@@ -2277,7 +2277,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 		    break;
 		}
 		else if (CDR(t) == R_NilValue && val != R_NilValue) {
-		    SETCDR(t, allocSExp(LISTSXP));
+		    SETCDR(t, PairList::create(R_NilValue));
 		    SET_TAG(CDR(t), nlist);
 		    if (MAYBE_REFERENCED(val)) ENSURE_NAMEDMAX(val);
 		    SETCADR(t, val);
@@ -2297,7 +2297,7 @@ SEXP R::R_subassign3_dflt(SEXP call, SEXP xarg, SEXP nlist, SEXP value)
 	INCREMENT_NAMED(val);
     }
     else if (TYPEOF(x) == SYMSXP || /* Used to 'work' in R < 2.8.0 */
-	     Rf_isFunction(x)) {
+	     FunctionBase::isA(x)) {
 	errorNotSubsettable(x);
     }
     else {

@@ -1051,7 +1051,7 @@ static SEXP findVarLocInFrame(SEXP rho, SEXP symbol, bool *canCache)
 	       a user database, or maybe use an active binding
 	       mechanism to allow setting a new value to get back to
 	       the data base. */
-	    tmp = allocSExp(LISTSXP);
+	    tmp = PairList::create(R_NilValue);
 	    SETCAR(tmp, val);
 	    SET_TAG(tmp, symbol);
 	    /* If the database has a canCache method, then call that.
@@ -2785,12 +2785,12 @@ attribute_hidden SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	    for (x = CAR(args); x != R_NilValue; x = CDR(x))
 		if (TAG(x) == R_NilValue)
 		    error("%s", _("all elements of a list must be named"));
-	    PROTECT(s = allocSExp(ENVSXP));
+	    PROTECT(s = Environment::create());
 	    SET_FRAME(s, shallow_duplicate(CAR(args)));
 	} else if (isEnvironment(CAR(args))) {
 	    SEXP p, loadenv = CAR(args);
 
-	    PROTECT(s = allocSExp(ENVSXP));
+	    PROTECT(s = Environment::create());
 	    if (HASHTAB(loadenv) != R_NilValue) {
 		int n = length(HASHTAB(loadenv));
 		for (int i = 0; i < n; i++) {
@@ -2830,7 +2830,7 @@ attribute_hidden SEXP do_attach(SEXP call, SEXP op, SEXP args, SEXP env)
 	R_ObjectTable *tb = (R_ObjectTable*) R_ExternalPtrAddr(CAR(args));
 	if (tb->onAttach)
 	    tb->onAttach(tb);
-	PROTECT(s = allocSExp(ENVSXP));
+	PROTECT(s = Environment::create());
 	SET_HASHTAB(s, CAR(args));
 	setAttrib(s, R_ClassSymbol, getAttrib(HASHTAB(s), R_ClassSymbol));
     }

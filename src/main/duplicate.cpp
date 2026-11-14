@@ -43,6 +43,9 @@
 #include <CXXR/Expression.hpp>
 #include <CXXR/DottedArgs.hpp>
 #include <CXXR/Closure.hpp>
+#include <CXXR/ListVector.hpp>
+#include <CXXR/ExpressionVector.hpp>
+#include <CXXR/StringVector.hpp>
 #include <Defn.h>
 #include <R_ext/RS.h> /* S4 bit */
 
@@ -63,7 +66,7 @@ using namespace CXXR;
  *  the value duplicated.  */
 
 #define COPY_TRUELENGTH(to, from) do {			\
-	if (! GROWABLE_BIT_SET(from))			\
+	if (!GROWABLE_BIT_SET(from))			\
 	    SET_TRUELENGTH(to, XTRUELENGTH(from));	\
     } while (0)
 
@@ -316,7 +319,7 @@ static SEXP duplicate1(SEXP s, bool deep)
 	return s;
     case CLOSXP:
 	PROTECT(s);
-	PROTECT(t = allocSExp(CLOSXP));
+	PROTECT(t = Closure::create());
 	SET_FORMALS(t, FORMALS(s));
 	SET_BODY(t, BODY(s));
 	SET_CLOENV(t, CLOENV(s));
@@ -348,7 +351,7 @@ static SEXP duplicate1(SEXP s, bool deep)
     case EXPRSXP:
 	n = XLENGTH(s);
 	PROTECT(s);
-	PROTECT(t = allocVector(TYPEOF(s), n));
+	PROTECT(t = ExpressionVector::create(n));
 	for(i = 0 ; i < n ; i++)
 	    SET_XVECTOR_ELT(t, i, duplicate_child(XVECTOR_ELT(s, i), deep));
 	DUPLICATE_ATTRIB2(t, s, deep);
@@ -358,7 +361,7 @@ static SEXP duplicate1(SEXP s, bool deep)
     case VECSXP:
 	n = XLENGTH(s);
 	PROTECT(s);
-	PROTECT(t = allocVector(TYPEOF(s), n));
+	PROTECT(t = ListVector::create(n));
 	for(i = 0 ; i < n ; i++)
 	    SET_VECTOR_ELT(t, i, duplicate_child(VECTOR_ELT(s, i), deep));
 	DUPLICATE_ATTRIB2(t, s, deep);
@@ -378,7 +381,7 @@ static SEXP duplicate1(SEXP s, bool deep)
 	//DUPLICATE_ATOMIC_VECTOR(SEXP, STRING_PTR, STRING_PTR_RO, t, s, deep);
 	n = XLENGTH(s);
 	PROTECT(s);
-	PROTECT(t = allocVector(TYPEOF(s), n));
+	PROTECT(t = StringVector::create(n));
 	for(i = 0 ; i < n ; i++)
 	    SET_STRING_ELT(t, i, STRING_ELT(s, i));
 	DUPLICATE_ATTRIB2(t, s, deep);
@@ -449,7 +452,7 @@ void Rf_copyListMatrix(SEXP s, SEXP t, Rboolean byrow)
     SEXP pt = t;
     if(byrow) {
 	R_xlen_t NR = nr;
-	SEXP tmp = PROTECT(allocVector(VECSXP, ns));
+	SEXP tmp = PROTECT(ListVector::create(ns));
 	for (int i = 0; i < nr; i++)
 	    for (int j = 0; j < nc; j++) {
 		SET_VECTOR_ELT(tmp, i + j * NR, duplicate(CAR(pt)));

@@ -1679,7 +1679,7 @@ attribute_hidden SEXP do_math2(SEXP call, SEXP op, SEXP args, SEXP env)
     case 26: return Math2(args, psigamma);
 
     default:
-	error(_("unimplemented real function of %d numeric arguments"), 2);
+	error(n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 2), 2);
     }
     return R_NilValue;			/* never used; to keep -Wall happy */
 }
@@ -2143,9 +2143,9 @@ attribute_hidden SEXP do_math3(SEXP call, SEXP op, SEXP args, SEXP env)
     case 47:  return Math3_2(args, qnbinom_mu);
 
     default:
-	error(_("unimplemented real function of %d numeric arguments"), 3);
+	error(n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 3), 3);
     }
-    return op;			/* never used; to keep -Wall happy */
+    return R_NilValue;			/* never used; to keep -Wall happy */
 } /* do_math3() */
 
 /* Mathematical Functions of Four (Real) Arguments */
@@ -2310,7 +2310,7 @@ attribute_hidden SEXP do_math4(SEXP call, SEXP op, SEXP args, SEXP env)
     case 11: return Math4_2(args, ptukey);
     case 12: return Math4_2(args, qtukey);
     default:
-	error(_("unimplemented real function of %d numeric arguments"), 4);
+	error(n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 4), 4);
     }
     return op;			/* never used; to keep -Wall happy */
 }
@@ -2415,7 +2415,7 @@ attribute_hidden SEXP do_math5(SEXP call, SEXP op, SEXP args, SEXP env)
     case  3: return Math5(args, q...);
 #endif
     default:
-	error(_("unimplemented real function of %d numeric arguments"), 5);
+	error(n_("unimplemented real function of %d numeric argument", "unimplemented real function of %d numeric arguments", 5), 5);
     }
     return op;			/* never used; to keep -Wall happy */
 } /* do_math5() */

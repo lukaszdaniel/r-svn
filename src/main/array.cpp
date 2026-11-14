@@ -264,7 +264,7 @@ SEXP Rf_allocMatrix(SEXPTYPE mode, int nrow, int ncol)
 }
 
 /**
- * Allocate a 3-dimensional array
+ * @brief Allocate a 3-dimensional array
  *
  * @param mode The R mode (e.g. INTSXP)
  * @param nrow number of rows
