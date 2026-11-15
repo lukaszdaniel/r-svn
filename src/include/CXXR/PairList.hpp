@@ -150,7 +150,7 @@ namespace CXXR
         const char *typeName() const override;
 
     protected:
-        // Declared private to ensure that PairList objects are
+        // Declared protected to ensure that PairList objects are
         // allocated only using 'new':
         ~PairList() {}
 

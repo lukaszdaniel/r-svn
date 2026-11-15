@@ -87,7 +87,6 @@ namespace CXXR
         GCEdge() : m_target(nullptr)
         {
             check_complete_type();
-            // GCNode::incRefCount(m_target);
         }
 
         // explicit GCEdge(T* target) is intentionally not defined here.

@@ -165,18 +165,17 @@ namespace CXXR
                 break;
                 FREE_FORWARD_CASE
             default:
-                // Rf_error(_("unexpected type %d in %s"), sexptype(), __func__);
                 BadObject::register_bad_object(this, __FILE__, __LINE__);
             }
         }
         GCNode::detachReferents();
     }
 
-    void RObject::setS4Object(bool on)
-    {
 #ifndef S4_OBJECT_MASK
 #define S4_OBJECT_MASK ((unsigned short)(1<<4))
 #endif
+    void RObject::setS4Object(bool on)
+    {
         if (on)
         {
             sxpinfo.gp |= S4_OBJECT_MASK;
@@ -185,8 +184,14 @@ namespace CXXR
         {
             sxpinfo.gp &= ~S4_OBJECT_MASK;
         }
-#undef S4_OBJECT_MASK
+
     }
+
+    bool RObject::isS4Object() const
+    {
+        return sxpinfo.gp & S4_OBJECT_MASK;
+    }
+#undef S4_OBJECT_MASK
 
     const char *RObject::typeName() const
     {

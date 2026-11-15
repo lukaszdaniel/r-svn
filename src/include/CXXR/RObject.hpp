@@ -176,11 +176,7 @@ namespace CXXR
     class RObject: public GCNode
     {
     public:
-        enum class Duplication
-        {
-            SHALLOW,
-            DEEP
-        };
+        using Duplication = CXXR::Duplication; // from GCEdge<>
 
         /** @brief Get object attributes (const variant).
          *
@@ -389,6 +385,12 @@ namespace CXXR
         {
             return sxpinfo.alt;
         }
+
+        /** @brief Is this an S4 object?
+         *
+         * @return true iff this is an S4 object.
+         */
+        bool isS4Object() const;
 
         /** @brief Set the status of this RObject as an S4 object.
          *
