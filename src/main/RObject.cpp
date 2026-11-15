@@ -71,6 +71,11 @@ namespace CXXR
         m_attrib = R_NilValue;
     }
 
+    RObject *RObject::evaluate(Environment *)
+    {
+        return this;
+    }
+
 #ifdef PROTECTCHECK
 #define FREE_FORWARD_CASE case FREESXP: if (GCManager::gc_inhibit_release()) break;
 #else

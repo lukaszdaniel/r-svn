@@ -32,6 +32,8 @@
 #endif
 
 #include <CXXR/Evaluator.hpp>
+#include <CXXR/StackChecker.hpp>
+#include <CXXR/Environment.hpp>
 #include <CXXR/WeakRef.hpp> // for R_RunPendingFinalizers
 #include <R_ext/Utils.h> // for R_CheckUserInterrupt
 #include <Defn.h> // for R_interrupts_suspended and R_interrupts_pending
@@ -138,6 +140,72 @@ namespace CXXR
         default:
             return false;
         }
+    }
+
+    /* Return value of "e" evaluated in "rho". */
+
+    /* some places, e.g. deparse2buff, call this with a promise and rho = NULL */
+    SEXP Evaluator::evaluate(SEXP e, SEXP rho)
+    {
+        enableResultPrinting(true);
+
+        /* this is needed even for self-evaluating objects or something like
+           'while (TRUE) NULL' will not be interruptable */
+        maybeCheckForUserInterrupts();
+
+        /* handle self-evaluating objects with minimal overhead */
+        if (isSelfEvaluated(e))
+        {
+        /* Make sure constants in expressions are NAMED before being
+           used as values.  Setting NAMED to NAMEDMAX makes sure weird calls
+           to replacement functions won't modify constants in
+           expressions.  */
+            ENSURE_NAMEDMAX(e);
+            return e;
+        }
+
+        bool bcintactivesave = Evaluator::bcActive();
+        Evaluator::enableBCActive(false);
+
+        if (TYPEOF(e) != PROMSXP) // non-environment check only matters for non-Promise objects
+        {
+            if (!rho)
+                Rf_error("'rho' cannot be C NULL: detected in C-level eval");
+            if (!Environment::isA(rho))
+                Rf_error("'rho' must be an environment not %s: detected in C-level eval",
+                    R::R_typeToChar(rho));
+        }
+
+        /* Save the current srcref context. */
+
+        SEXP srcrefsave = R_Srcref;
+
+        /* The use of IncrementStackDepthScope below is necessary because of the
+           possibility of non-local returns from evaluation.  Without this
+           an "expression too complex error" is quite likely. */
+
+        IncrementStackDepthScope scope;
+
+#ifdef Win32
+    /* This is an inlined version of Rwin_fpset (src/gnuwin/extra.c)
+       and resets the precision, rounding and exception modes of a ix86
+       fpu.
+     */
+# if (defined(__i386) || defined(__x86_64))
+        __asm__("fninit");
+# elif defined(__aarch64__)
+        __asm__ volatile("msr fpcr, %0" : : "r"(0LL));
+# else
+        _fpreset();
+# endif
+#endif
+
+        Environment *env = SEXP_downcast<Environment *>(rho);
+        SEXP tmp = e->evaluate(env);
+
+        R_Srcref = srcrefsave;
+        Evaluator::enableBCActive(bcintactivesave);
+        return tmp;
     }
 } // namespace CXXR
 

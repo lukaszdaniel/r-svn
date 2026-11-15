@@ -148,6 +148,7 @@ namespace CXXR
         static void visitRoots(GCNode::const_visitor *v);
 
         // Virtual functions of RObject:
+        RObject *evaluate(Environment *env) override;
         const char *typeName() const override;
 
         static void INCLNK_stack_commit();

@@ -97,7 +97,10 @@ namespace CXXR
          * @return The value of the Promise, i.e. the result of
          * evaluating the value generator.
          */
-        RObject *force();
+        RObject *force()
+        {
+            return evaluate(R_NilValue);
+        }
 
         /** @brief RObject to be evaluated by the Promise.
          *
@@ -164,6 +167,7 @@ namespace CXXR
 
         // Virtual function of RObject:
         const char *typeName() const override;
+        RObject *evaluate(Environment *env) override;
 
     public:
         GCEdge<> m_value;

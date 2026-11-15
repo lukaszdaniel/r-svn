@@ -85,6 +85,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
+        RObject *evaluate(Environment *env) override;
         const char *typeName() const override;
 
     private:

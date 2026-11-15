@@ -1037,30 +1037,31 @@ static void handle_eval_depth_overflow(void)
     R_signalErrorCondition(cond, R_NilValue);
 }
 
-namespace
+namespace CXXR
 {
-    SEXP ByteCode_evaluate(SEXP e, SEXP rho)
+    RObject *ByteCode::evaluate(Environment *env)
     {
-        return ByteCode::interpret(e, rho, true);
+        return ByteCode::interpret(this, env, true);
     }
 
-    SEXP Symbol_evaluate(SEXP e, SEXP rho)
+    RObject *Symbol::evaluate(Environment *env)
     {
+        SEXP e = this;
         SEXP tmp = R_NilValue;
 
         if (e == R_DotsSymbol)
             error("%s", _("'...' used in an incorrect context"));
         if (DDVAL(e))
-            tmp = ddfindVar(e, rho);
+            tmp = ddfindVar(e, env);
         else
-            tmp = R_findVar(e, rho);
+            tmp = R_findVar(e, env);
         if (tmp == Symbol::unboundValue())
-            R_ObjectNotFoundError(e, getLexicalCall(rho), NULL);
+            R_ObjectNotFoundError(e, getLexicalCall(env), NULL);
         else if (tmp == R_MissingArg) {
             /* the error signaled here for a missing ..d matches the one
                signaled in getvar() for byte compiled code, but ...elt()
                signals a slightly different error (see PR18661) */
-            R_MissingArgError(e, getLexicalCall(rho), "evalError");
+            R_MissingArgError(e, getLexicalCall(env), "evalError");
         }
         else if (Promise::isA(tmp)) {
             return SEXP_downcast<Promise *>(tmp)->force();
@@ -1070,10 +1071,10 @@ namespace
         return tmp;
     }
 
-    SEXP Promise_evaluate(SEXP expr, SEXP rho)
+    RObject *Promise::evaluate(Environment *)
     {
-        GCStackRoot<> e(expr);
-        if (expr && !PROMISE_IS_EVALUATED(expr))
+        GCStackRoot<> e(this);
+        if (!PROMISE_IS_EVALUATED(this))
         {
             if (PRSEEN(e) == UNDER_EVALUATION)
                 errorcall(R_GlobalContext->call, "%s",
@@ -1127,10 +1128,10 @@ namespace
            end up getting duplicated if NAMED > 1.) LT */
     }
 
-    SEXP Expression_evaluate(SEXP expr, SEXP rho)
+    RObject *Expression::evaluate(Environment *env)
     {
         GCStackRoot<> tmp(R_NilValue);
-        GCStackRoot<> op, e(expr);
+        GCStackRoot<> op, e(this);
         if (TYPEOF(CAR(e)) == SYMSXP) {
             /* This will throw an error if the function is not found */
             SEXP ecall = e;
@@ -1140,10 +1141,10 @@ namespace
             if (R_GlobalContext != NULL &&
                 (R_GlobalContext->callflag == CTXT_CCODE))
                 ecall = R_GlobalContext->call;
-            op = findFun3(CAR(e), rho, ecall);
+            op = findFun3(CAR(e), env, ecall);
         }
         else
-            op = Evaluator::evaluate(CAR(e), rho);
+            op = Evaluator::evaluate(CAR(e), env);
 
         if (RTRACE(op) && R_current_trace_state()) {
             Rprintf("trace: ");
@@ -1154,7 +1155,7 @@ namespace
             int flag = PRIMPRINT(op.get());
             CXXR::RAllocStack::Scope rscope;
             Evaluator::enableResultPrinting(flag != 1);
-            tmp = PRIMFUN(op.get()) (e, op, CDR(e.get()), rho);
+            tmp = PRIMFUN(op.get()) (e, op, CDR(e.get()), env);
 #ifdef CHECK_VISIBILITY
             if (flag < 2 && Evaluator::resultPrinted() == flag) {
                 const char *nm = PRIMNAME(op);
@@ -1172,7 +1173,7 @@ namespace
             size_t save = R_PPStackTop;
             int flag = PRIMPRINT(op.get());
             CXXR::RAllocStack::Scope rscope;
-            tmp = evalList(CDR(e.get()), rho, e, 0);
+            tmp = evalList(CDR(e.get()), env, e, 0);
             if (flag < 2) Evaluator::enableResultPrinting(flag != 1);
             /* We used to insert a context only if profiling,
                but helps for tracebacks on .C etc. */
@@ -1180,12 +1181,12 @@ namespace
                 SEXP oldref = R_Srcref;
                 RCNTXT cntxt(CTXT_BUILTIN, e, R_BaseEnv, R_BaseEnv, R_NilValue, R_NilValue);
                 R_Srcref = NULL;
-                tmp = PRIMFUN(op.get()) (e, op, tmp, rho);
+                tmp = PRIMFUN(op.get()) (e, op, tmp, env);
                 R_Srcref = oldref;
                 endcontext(&cntxt);
             }
             else {
-                tmp = PRIMFUN(op.get()) (e, op, tmp, rho);
+                tmp = PRIMFUN(op.get()) (e, op, tmp, env);
             }
 #ifdef CHECK_VISIBILITY
             if (flag < 2 && Evaluator::resultPrinted() == flag) {
@@ -1199,8 +1200,8 @@ namespace
         }
         else if (TYPEOF(op) == CLOSXP) {
             GCStackRoot<> pargs;
-            pargs = promiseArgs(CDR(e.get()), rho);
-            tmp = applyClosure(e, op, pargs, rho, R_NilValue, true);
+            pargs = promiseArgs(CDR(e.get()), env);
+            tmp = applyClosure(e, op, pargs, env, R_NilValue, true);
         }
         else
             error("%s", _("attempt to apply non-function"));
@@ -1208,114 +1209,12 @@ namespace
         return tmp;
     }
 
-    SEXP DottedArgs_evaluate(SEXP e, SEXP rho)
+    RObject *DottedArgs::evaluate(Environment *)
     {
         error("%s", _("'...' used in an incorrect context"));
         return R_NilValue;
     }
-} // anonymous namespace
-
-namespace CXXR
-{
-    RObject *Promise::force()
-    {
-        return Promise_evaluate(this, R_NilValue);
-    }
 } // namespace CXXR
-
-/* Return value of "e" evaluated in "rho". */
-
-/* some places, e.g. deparse2buff, call this with a promise and rho = NULL */
-SEXP Evaluator::evaluate(SEXP e, SEXP rho)
-{
-    enableResultPrinting(true);
-
-    /* this is needed even for self-evaluating objects or something like
-       'while (TRUE) NULL' will not be interruptable */
-    maybeCheckForUserInterrupts();
-
-    /* handle self-evaluating objects with minimal overhead */
-    if (isSelfEvaluated(e))
-    {
-    /* Make sure constants in expressions are NAMED before being
-       used as values.  Setting NAMED to NAMEDMAX makes sure weird calls
-       to replacement functions won't modify constants in
-       expressions.  */
-        ENSURE_NAMEDMAX(e);
-        return e;
-    }
-
-    bool bcintactivesave = Evaluator::bcActive();
-    Evaluator::enableBCActive(false);
-
-    if (TYPEOF(e) != PROMSXP) // non-environment check only matters for non-Promise objects
-    {
-        if (!rho)
-            error("'rho' cannot be C NULL: detected in C-level eval");
-        if (!isEnvironment(rho))
-            error("'rho' must be an environment not %s: detected in C-level eval",
-                R_typeToChar(rho));
-    }
-
-    /* Save the current srcref context. */
-
-    SEXP srcrefsave = R_Srcref;
-
-    /* The use of IncrementStackDepthScope below is necessary because of the
-       possibility of non-local returns from evaluation.  Without this
-       an "expression too complex error" is quite likely. */
-
-    IncrementStackDepthScope scope;
-
-    SEXP tmp = R_NilValue;		/* -Wall */
-#ifdef Win32
-    /* This is an inlined version of Rwin_fpset (src/gnuwin/extra.c)
-       and resets the precision, rounding and exception modes of a ix86
-       fpu.
-     */
-# if (defined(__i386) || defined(__x86_64))
-    __asm__("fninit");
-# elif defined(__aarch64__)
-    __asm__ volatile("msr fpcr, %0" : : "r"(0LL));
-# else
-    _fpreset();
-# endif
-#endif
-
-    switch (TYPEOF(e)) {
-    case BCODESXP:
-    {
-        tmp = ByteCode_evaluate(e, rho);
-    }
-    break;
-    case SYMSXP:
-    {
-        tmp = Symbol_evaluate(e, rho);
-    }
-    break;
-    case PROMSXP:
-    {
-        tmp = SEXP_downcast<Promise *>(e)->force();
-    }
-    break;
-    case LANGSXP:
-    {
-        tmp = Expression_evaluate(e, rho);
-    }
-    break;
-    case DOTSXP:
-    {
-        tmp = DottedArgs_evaluate(e, rho);
-    }
-    break;
-    default:
-        UNIMPLEMENTED_TYPE("eval", e);
-    }
-
-    R_Srcref = srcrefsave;
-    Evaluator::enableBCActive(bcintactivesave);
-    return tmp;
-}
 
 SEXP Rf_eval(SEXP e, SEXP rho)
 {

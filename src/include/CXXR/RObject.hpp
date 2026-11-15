@@ -68,6 +68,7 @@ Triplet's translation table:
  */
 namespace CXXR
 {
+    class Environment;
     class PairList;
     class Symbol;
 
@@ -407,6 +408,15 @@ namespace CXXR
          *         within R.
          */
         virtual const char *typeName() const;
+
+        /** @brief Evaluate object in a specified Environment.
+         *
+         * @param env Pointer to the environment in which evaluation
+         *          is to take place.
+         *
+         * @return Pointer to the result of evaluation.
+         */
+        virtual RObject *evaluate(Environment *env);
 
         GCEdge<> m_attrib;
 

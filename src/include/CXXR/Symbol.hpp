@@ -239,6 +239,7 @@ namespace CXXR
 
         // Virtual functions of RObject:
         const char *typeName() const override;
+        RObject *evaluate(Environment *env) override;
 
         /** @brief Visit the Symbol hash table.
          *
