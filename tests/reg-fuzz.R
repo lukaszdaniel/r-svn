@@ -176,6 +176,32 @@ tools::assertError(format(y, "%Y", usetz = TRUE))
 ## overflowed a stack buffer, typically aborting, in R <= 4.6.2
 
 
+## runmed(*, na.action = "na.omit") when the first NA is not x[1] -- PR#19300
+x <- c(1, 5, 2, NA, 8, 3, 9)
+for(i in 1:11)
+  for(alg in c("Stuetzle", "Turlach"))
+    stopifnot(exprs = {
+        identical(c(runmed(x, 3, endrule = "keep", algorithm = alg, na.action = "na.omit")),
+                  c(1, 2, 5, NA, 3, 8, 9))
+        identical(c(runmed(c(1, 2, NA, 4), 1, algorithm = alg, na.action = "na.omit")),
+                  c(1, 2, NA, 4))
+    })
+## used an uninitialized value in place of the one before the first NA, in R <= 4.6.2
+
+
+## plotmath number atoms: the string from asChar() was not protected -- PR#19310
+local({
+    op <- options(scipen = 999) # 1e300 gets 301 digits, a separately malloc'ed CHARSXP
+    pdf(NULL); on.exit({ dev.off(); options(op) })
+    x <- as.expression(rep(1e300, 200))
+    gctorture(TRUE)
+    w <- strwidth(x, "inches")
+    gctorture(FALSE)
+    stopifnot(length(w) == 200L, w > 0, w == w[1])
+})
+## read freed memory (visible under ASan or valgrind) in R <= 4.6.2
+
+
 
 
 ## keep at end
