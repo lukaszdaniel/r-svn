@@ -33,7 +33,7 @@
 #include <config.h>
 #endif
 
-#include <format>
+#include <string>
 #include <CXXR/GCStackRoot.hpp>
 #include <CXXR/RAltRep.hpp>
 #include <CXXR/IntVector.hpp>
@@ -132,7 +132,7 @@ namespace CXXR
             }
             break;
         default:
-            throw std::runtime_error(std::format("AltRep::clone(): cloning not yet implemented for {}.", static_cast<int>(sexptype())));
+            throw std::runtime_error("AltRep::clone(): cloning not yet implemented for " + std::to_string(static_cast<int>(sexptype())) + ".");
         }
         t->cloneAttributes(*this, depth);
         if (!(R::IS_GROWABLE)(source))
