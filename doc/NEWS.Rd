@@ -487,6 +487,48 @@
       a list rather than an environment for numeric \code{x} of length
       greater than one.  Now they signal an error.  Thanks to
       \I{Adam Berkeš} for the report (\PR{19306}).
+
+      \item \code{as(object, name)} signalled an error when
+      \code{class(object)[1]} was not formally defined and
+      \code{class(object)[-1]} contained \code{name}, never searching
+      for a method for \code{coerce} with signature
+      \code{c(from="ANY", to=name)}.  Now it searches and signals an
+      error only on failure.  Thanks to \I{Michael Chirico} for
+      the report (\PR{19023}).
+
+      \item The internal HTTP server (used by the dynamic help system)
+      removes dot segments (\code{/../} and \code{/./}) also when they
+      were percent-encoded and on Windows converts \code{\\} to the
+      \code{/} path separator.  Paths that include \code{\%00} are
+      rejected.
+
+      \item The internal HTTP server accepts request and header lines of
+      up to 16k bytes (previously 1k) so that requests with many cookies
+      no longer fail.  This matters since browsers also send cookies set
+      by any other web application running on \samp{localhost}, as
+      cookies are not specific to a port.
+
+      \item The internal HTTP server no longer decodes \samp{+} as a
+      space in the request path (only in the query string) and no
+      longer removes dot segments from the query string.
+
+      \item The internal HTTP server now handles line endings split
+      across network packets, responds with an error instead of
+      waiting when a request or header line is too long, no longer
+      corrupts request headers over 1k bytes in total and drops
+      requests that were closed by the client before they were
+      complete.
+
+      \item The internal HTTP server now sends 1xx, 204 and 304
+      responses without a body (as required by RFC 9110), skips empty
+      response headers and responds with an error when a handler
+      returns an invalid status code.
+
+      \item The internal HTTP server now rejects requests with ambiguous
+      framing (as required by RFC 9112): \code{Transfer-Encoding} (not
+      supported), invalid or conflicting \code{Content-Length},
+      whitespace before the colon in a header field and more than one
+      \code{Host} header.  Previously such requests could be misread.
     }
   }
 }
@@ -534,6 +576,10 @@
       \item \code{runmed(<has_NA_not_at_pos_1>, na.action = "na.omit")} no
       longer returns a \dQuote{random} smoothed value before the \code{NA},
       fixing \PR{19300}, from the report and patch by \I{Adam Berkeš}.
+
+      \item \code{bessel[IJKY](., nu = <large>)} no longer allocate memory
+      in cases we know the current algorithm will give \code{NaN} with a
+      warning anyway, thanks to \I{Jeroen Ooms}'s \PR{19326}.
     }
   }
 }
