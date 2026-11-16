@@ -1039,11 +1039,6 @@ static void handle_eval_depth_overflow(void)
 
 namespace CXXR
 {
-    RObject *ByteCode::evaluate(Environment *env)
-    {
-        return ByteCode::interpret(this, env, true);
-    }
-
     RObject *Symbol::evaluate(Environment *env)
     {
         SEXP e = this;
@@ -1132,7 +1127,7 @@ namespace CXXR
     {
         GCStackRoot<> tmp(R_NilValue);
         GCStackRoot<> op, e(this);
-        if (TYPEOF(CAR(e)) == SYMSXP) {
+        if (Symbol::isA(CAR(e))) {
             /* This will throw an error if the function is not found */
             SEXP ecall = e;
 
@@ -1198,7 +1193,7 @@ namespace CXXR
 
             check_stack_balance(op, save);
         }
-        else if (TYPEOF(op) == CLOSXP) {
+        else if (Closure::isA(op)) {
             GCStackRoot<> pargs;
             pargs = promiseArgs(CDR(e.get()), env);
             tmp = applyClosure(e, op, pargs, env, R_NilValue, true);
@@ -1207,12 +1202,6 @@ namespace CXXR
             error("%s", _("attempt to apply non-function"));
 
         return tmp;
-    }
-
-    RObject *DottedArgs::evaluate(Environment *)
-    {
-        error("%s", _("'...' used in an incorrect context"));
-        return R_NilValue;
     }
 } // namespace CXXR
 

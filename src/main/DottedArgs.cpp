@@ -27,13 +27,21 @@
  * @brief Class CXXR::DottedArgs.
  */
 
+#include <Localization.h>
 #include <CXXR/DottedArgs.hpp>
+#include <R_ext/Error.h>
 
 namespace CXXR
 {
     DottedArgs *DottedArgs::clone(Duplication depth) const
     {
         return (new DottedArgs(*this, depth));
+    }
+
+    RObject *DottedArgs::evaluate(Environment *)
+    {
+        Rf_error("%s", _("'...' used in an incorrect context"));
+        return R_NilValue;
     }
 
     const char *DottedArgs::typeName() const

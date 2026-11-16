@@ -33,6 +33,7 @@
 
 #include <stdexcept>
 #include <CXXR/ByteCode.hpp>
+#include <CXXR/Environment.hpp>
 #include <Defn.h> // for CODE0, CONSTS, EXPR macros
 
 namespace CXXR
@@ -59,6 +60,13 @@ namespace CXXR
 #ifdef THREADED_CODE
         bcEval_loop(nullptr);
 #endif
+    }
+
+    // ByteCode::interpret() is in eval.cpp
+
+    RObject *ByteCode::evaluate(Environment *env)
+    {
+        return interpret(this, env, true);
     }
 
     const char *ByteCode::typeName() const
