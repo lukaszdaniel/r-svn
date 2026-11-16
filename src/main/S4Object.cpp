@@ -52,6 +52,11 @@ namespace CXXR
             SET_S4_OBJECT(this);
     }
 
+    S4Object *S4Object::clone(Duplication depth) const
+    {
+        return (new S4Object(*this, depth));
+    }
+
     const char *S4Object::typeName() const
     {
         return S4Object::staticTypeName();

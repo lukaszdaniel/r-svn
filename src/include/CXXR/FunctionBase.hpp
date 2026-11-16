@@ -81,6 +81,17 @@ namespace CXXR
         {
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern FunctionBase to be copied.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         */
+        FunctionBase(const FunctionBase &pattern, Duplication depth)
+            : RObject(pattern, depth)
+        {
+        }
+
         // Declared protected to ensure that FunctionBase objects are
         // allocated only using 'new':
         ~FunctionBase() {}

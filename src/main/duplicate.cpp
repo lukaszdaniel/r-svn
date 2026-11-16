@@ -65,49 +65,14 @@ using namespace CXXR;
  *  promises requires that the promises be forced and
  *  the value duplicated.  */
 
-#define COPY_TRUELENGTH(to, from) do {			\
-	if (!GROWABLE_BIT_SET(from))			\
-	    SET_TRUELENGTH(to, XTRUELENGTH(from));	\
-    } while (0)
-
-/* This macro pulls out the common code in copying an atomic vector.
-   The special handling of the scalar case (__n__ == 1) seems to make
-   a small but measurable difference, at least for some cases
-   and when (as in R 2.15.x) a for() loop was used.
-*/
-#define DUPLICATE_ATOMIC_VECTOR(type, fun, fun_ro, to, from, deep) do {	\
-  R_xlen_t __n__ = XLENGTH(from); \
-  to = allocVector(TYPEOF(from), __n__); \
-  if (__n__ == 1) fun(to)[0] = fun_ro(from)[0]; \
-  else if (__n__) memcpy(fun(to), fun_ro(from), __n__ * sizeof(type)); \
-  DUPLICATE_ATTRIB2(to, from, deep); \
-  COPY_TRUELENGTH(to, from); \
-} while (0)
-
-/* The following macros avoid the cost of going through calls to the
-   assignment functions (and duplicate in the case of ATTRIB) when the
-   ATTRIB or TAG value to be stored is R_NilValue, the value the field
-   will have been set to by the allocation function */
-#define DUPLICATE_ATTRIB2(to, from, deep) do { \
-  SEXP __a__ = ATTRIB(from); \
-  if (__a__ != R_NilValue) { \
-      SET_ATTRIB(to, duplicate1(__a__, deep)); \
-    to->setS4Object(IS_S4_OBJECT(from));  \
-  } \
-} while (0)
-
 /* For memory profiling.  */
 /* We want a count of calls to duplicate from outside
    which requires a wrapper function.
-
-   The original duplicate() function is now duplicate1().
 
    I don't see how to make the wrapper go away when R_PROFILING
    is not defined, because we still need to be able to
    optionally rename duplicate() as Rf_duplicate().
 */
-static SEXP duplicate1(SEXP, bool deep);
-
 #ifdef R_PROFILING
 static unsigned long s_duplicate_counter = (unsigned long)-1;
 
@@ -125,15 +90,12 @@ attribute_hidden void R::reset_duplicate_counter(void)
 template <CXXR::RObject::Duplication depth = CXXR::RObject::Duplication::DEEP>
 SEXP CXXR_duplicate(SEXP s_)
 {
-    if (s_ == R_NilValue)
-        return R_NilValue;
-
     GCStackRoot<> s(s_);
 
 #ifdef R_PROFILING
     ++s_duplicate_counter;
 #endif
-    SEXP t = duplicate1(s, bool(depth));
+    SEXP t = RObject::clone(s.get(), depth);
     if (t == R_NilValue)
         return s;
     if (!(FunctionBase::isA(s) || Promise::isA(s) || Environment::isA(s)))
@@ -190,11 +152,6 @@ SEXP R::Rf_lazy_duplicate(SEXP s) {
     return s;
 }
 
-static SEXP duplicate_child(SEXP s, bool deep)
-{
-	return deep ? duplicate1(s, true) : s /* was: Rf_lazy_duplicate(s) */;
-}
-
 /*****************/
 
 /* Detect cycles that would be created by assigning 'child' as a
@@ -239,130 +196,6 @@ attribute_hidden bool R::R_cycle_detected(SEXP s, SEXP child) {
 		return TRUE;
     }
     return FALSE;
-}
-
-namespace {
-template<typename T = PairList>
-SEXP duplicate_list(SEXP s_, bool deep)
-{
-    if (s_ == R_NilValue) return R_NilValue;
-    GCStackRoot<> val, s(s_);
-    SEXP sp, vp;
-
-    val = R_NilValue;
-    for (sp = CDR(s.get()); sp != R_NilValue; sp = CDR(sp))
-	val = PairList::create(R_NilValue, val);
-
-    val = PairList::create<T>(R_NilValue, val);
-    for (sp = s, vp = val; sp != R_NilValue; sp = CDR(sp), vp = CDR(vp)) {
-	SETCAR(vp, duplicate_child(CAR(sp), deep));
-	if (TAG(sp) != R_NilValue) SET_TAG(vp, TAG(sp));
-	DUPLICATE_ATTRIB2(vp, sp, deep);
-    }
-
-    return val;
-}
-} // anonymous namespace
-
-static SEXP duplicate1(SEXP s_, bool deep)
-{
-    GCStackRoot<> t, s(s_);
-
-    if (ALTREP(s)) {
-	SEXP ans = ALTREP_DUPLICATE_EX(s, Rboolean(deep));
-	if (ans != NULL)
-	    return ans;
-    }
-
-    switch (TYPEOF(s)) {
-    case NILSXP:
-    case SYMSXP:
-    case ENVSXP:
-    case SPECIALSXP:
-    case BUILTINSXP:
-    case EXTPTRSXP:
-    case BCODESXP:
-    case WEAKREFSXP:
-	return s;
-    case CLOSXP:
-	t = Closure::create();
-	SET_FORMALS(t, FORMALS(s.get()));
-	SET_BODY(t, BODY(s.get()));
-	SET_CLOENV(t, CLOENV(s.get()));
-	DUPLICATE_ATTRIB2(t, s, deep);
-	if (NOJIT(s)) SET_NOJIT(t);
-	if (MAYBEJIT(s)) SET_MAYBEJIT(t);
-	break;
-    case LISTSXP:
-	t = duplicate_list(s, deep);
-	break;
-    case LANGSXP:
-	t = duplicate_list<Expression>(s, deep);
-	DUPLICATE_ATTRIB2(t, s, deep);
-	break;
-    case DOTSXP:
-	t = duplicate_list<DottedArgs>(s, deep);
-	DUPLICATE_ATTRIB2(t, s, deep);
-	break;
-    case CHARSXP:
-	return s;
-	break;
-    case EXPRSXP:
-    {
-	R_xlen_t n = XLENGTH(s);
-	t = ExpressionVector::create(n);
-	for(R_xlen_t i = 0 ; i < n ; i++)
-	    SET_XVECTOR_ELT(t, i, duplicate_child(XVECTOR_ELT(s, i), deep));
-	DUPLICATE_ATTRIB2(t, s, deep);
-	COPY_TRUELENGTH(t, s);
-    }
-	break;
-    case VECSXP:
-    {
-	R_xlen_t n = XLENGTH(s);
-	t = ListVector::create(n);
-	for(R_xlen_t i = 0 ; i < n ; i++)
-	    SET_VECTOR_ELT(t, i, duplicate_child(VECTOR_ELT(s, i), deep));
-	DUPLICATE_ATTRIB2(t, s, deep);
-	COPY_TRUELENGTH(t, s);
-    }
-	break;
-    case LGLSXP: DUPLICATE_ATOMIC_VECTOR(int, LOGICAL, LOGICAL_RO, t, s, deep); break;
-    case INTSXP: DUPLICATE_ATOMIC_VECTOR(int, INTEGER, INTEGER_RO, t, s, deep); break;
-    case REALSXP: DUPLICATE_ATOMIC_VECTOR(double, REAL, REAL_RO, t, s, deep); break;
-    case CPLXSXP: DUPLICATE_ATOMIC_VECTOR(Rcomplex, COMPLEX, COMPLEX_RO, t, s, deep); break;
-    case RAWSXP: DUPLICATE_ATOMIC_VECTOR(Rbyte, RAW, RAW_RO, t, s, deep); break;
-    case STRSXP:
-    {
-	/* Direct copying and bypassing the write barrier would be OK
-	   since t was just allocated and so it cannot be older than
-	   any of the elements in s. But it does not increment the
-	   reference counts, so use a loop with SET_STRING_ELT. LT */
-	//DUPLICATE_ATOMIC_VECTOR(SEXP, STRING_PTR, STRING_PTR_RO, t, s, deep);
-	R_xlen_t n = XLENGTH(s);
-	t = StringVector::create(n);
-	for(R_xlen_t i = 0 ; i < n ; i++)
-	    SET_STRING_ELT(t, i, STRING_ELT(s, i));
-	DUPLICATE_ATTRIB2(t, s, deep);
-	COPY_TRUELENGTH(t, s);
-    }
-	break;
-    case PROMSXP:
-	return s;
-	break;
-    case OBJSXP:
-	t = R_allocObject();
-	DUPLICATE_ATTRIB2(t, s, deep);
-	break;
-    default:
-	UNIMPLEMENTED_TYPE("duplicate", s);
-	t = s;/* for -Wall */
-    }
-    if(TYPEOF(t) == TYPEOF(s) ) { /* surely it only makes sense in this case*/
-	// SET_OBJECT(t, OBJECT(s));
-	t->setS4Object(IS_S4_OBJECT(s));
-    }
-    return t;
 }
 
 void Rf_copyVector(SEXP s, SEXP t)

@@ -75,6 +75,15 @@ namespace CXXR
             return st == DOTSXP;
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern DottedArgs to be copied.
+         */
+        DottedArgs(const DottedArgs &pattern, Duplication depth)
+            : ConsCell(pattern, depth)
+        {
+        }
+
         /** @brief The name by which this type is known in R.
          *
          * @return The name by which this type is known in R.
@@ -85,6 +94,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
+        DottedArgs *clone(Duplication depth) const override;
         RObject *evaluate(Environment *env) override;
         const char *typeName() const override;
 

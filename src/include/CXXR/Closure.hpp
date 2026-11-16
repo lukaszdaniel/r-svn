@@ -49,6 +49,14 @@ namespace CXXR
     public:
         static Closure *create(SEXP formal_args = R_NilValue, SEXP body = R_NilValue, SEXP env = Environment::global());
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern Closure to be copied.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         */
+        Closure(const Closure &pattern, Duplication depth);
+
         /** @brief Access the formal arguemnts of the Closure.
          *
          * @return Pointer to the formal arguemnts of the Closure.
@@ -134,6 +142,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
+        Closure *clone(Duplication depth) const override;
         const char *typeName() const override;
 
         /** @brief Patrol entry and exit if debugging.

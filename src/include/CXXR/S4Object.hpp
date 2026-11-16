@@ -53,6 +53,18 @@ namespace CXXR
             return new S4Object(is_s4_object);
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern S4Object to be copied.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         */
+        S4Object(const S4Object &pattern, Duplication depth)
+            : RObject(pattern, depth)
+        {
+            m_tag = R_NilValue;
+        }
+
         /**
          * @return a const pointer to the 'tag' of this S4Object
          * element.
@@ -108,6 +120,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
+        S4Object *clone(Duplication depth) const override;
         const char *typeName() const override;
 
     public:

@@ -53,6 +53,30 @@ namespace CXXR
         return ans;
     }
 
+    PairList::PairList(const PairList &pattern, Duplication depth, int)
+        : ConsCell(pattern, depth, 0)
+    {
+    }
+
+    PairList::PairList(const PairList &pattern, Duplication depth)
+        : ConsCell(pattern, depth, 0)
+    {
+        // Clone the tail:
+        PairList *c = this;
+        const PairList *pl = pattern.tail();
+        while (pl && pl != R_NilValue)
+        {
+            c->m_tail = (new PairList(*pl, depth, 0));
+            c = c->tail();
+            pl = pl->tail();
+        }
+    }
+
+    PairList *PairList::clone(Duplication depth) const
+    {
+        return (new PairList(*this, depth));
+    }
+
     const char *PairList::typeName() const
     {
         return staticTypeName();

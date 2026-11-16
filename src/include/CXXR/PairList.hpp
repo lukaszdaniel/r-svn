@@ -70,6 +70,14 @@ namespace CXXR
         {
         }
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern PairList to be copied.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         */
+        PairList(const PairList &pattern, Duplication depth);
+
         /** @brief Create a PairList element on the free store.
          *
          * Unlike the constructor (and contrary to CXXR conventions
@@ -147,6 +155,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
+        PairList *clone(Duplication depth) const override;
         const char *typeName() const override;
 
     protected:
@@ -155,6 +164,12 @@ namespace CXXR
         ~PairList() {}
 
     private:
+        // Tailless copy constructor.  Copies the node without copying
+        // its tail.  Used in implementing the copy constructor
+        // proper.  The third parameter is simply to provide a
+        // distinct signature, and its value is ignored.
+        PairList(const PairList &pattern, Duplication depth, int);
+
         // Not implemented yet.  Declared to prevent
         // compiler-generated versions:
         PairList(const PairList &);

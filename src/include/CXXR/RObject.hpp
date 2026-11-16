@@ -409,6 +409,63 @@ namespace CXXR
          */
         virtual const char *typeName() const;
 
+        /** @brief Copy attributes and object flags from another object.
+         */
+        void cloneAttributes(const RObject &source, Duplication depth);
+
+        /** @brief Return pointer to a copy of this object.
+         *
+         * This function creates a copy of this object, and returns a
+         * pointer to that copy.
+         *
+         * Generally this function (and the copy constructors it
+         * utilises) will attempt to create a 'deep'  or 'shallow' copy of the
+         * object; this follows standard practice within C++, and it
+         * is intended to extend this practice as CXXR development
+         * continues.
+         *
+         * However, if the pattern object contains unclonable
+         * subobjects, then the created copy will at the relevant
+         * places simply contain pointers to those subobjects, i.e. to
+         * that extent the copy is 'shallow'.  This is managed using
+         * the smart pointers defined by GCEdge<>.
+         *
+         * @param depth Indicator whether to perform DEEP or SHALLOW
+         *          copy of the object.
+         *
+         * @return a pointer to a clone of this object.  Returns the original
+         *          object if it cannot be cloned.
+         *
+         * @note Derived classes should exploit the covariant return
+         *          type facility to return a pointer to the type of object
+         *          being cloned.
+         */
+        virtual RObject *clone(Duplication depth) const
+        {
+            return const_cast<RObject *>(this);
+        }
+
+        /** @brief Return a pointer to a copy of an object or the object itself
+         *          if it isn't cloneable.
+         *
+         * @tparam T RObject or a type derived from RObject.
+         *
+         * @param pattern Either a null pointer or a pointer to the
+         *          object to be cloned.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         *
+         * @return Pointer to a clone of \a pattern, or \a pattern
+         *         if \a pattern cannot be cloned or is itself a null pointer.
+         */
+        template <class T>
+        static T *clone(const T *pattern, Duplication depth)
+        {
+            if (pattern == R_NilValue)
+                return R_NilValue;
+            return pattern->clone(depth);
+        }
+
         /** @brief Evaluate object in a specified Environment.
          *
          * @param env Pointer to the environment in which evaluation
@@ -434,6 +491,14 @@ namespace CXXR
          * @param stype Required type of the RObject.
          */
         explicit RObject(SEXPTYPE stype);
+
+        /** @brief Copy constructor.
+         *
+         * @param pattern Object to be copied.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         */
+        RObject(const RObject &pattern, Duplication depth);
 
         // Virtual functions of GCNode:
         void visitReferents(const_visitor *v) const override;

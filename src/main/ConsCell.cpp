@@ -54,6 +54,22 @@ namespace CXXR
         const auto &CDRptr = CDR;
     } // namespace ForceNonInline
 
+    ConsCell::ConsCell(const ConsCell &pattern, Duplication depth)
+        : RObject(pattern, depth),
+          m_car(pattern.m_car, depth)
+    {
+        m_tail = clone(pattern.tail(), depth);
+        m_tag = pattern.m_tag;
+    }
+
+    ConsCell::ConsCell(const ConsCell &pattern, Duplication depth, int)
+        : RObject(pattern, depth),
+          m_car(pattern.m_car, depth)
+    {
+        m_tail = R_NilValue;
+        m_tag = pattern.m_tag;
+    }
+
     RObject *ConsCell::car() const
     {
         if (hasUnexpandedValue())

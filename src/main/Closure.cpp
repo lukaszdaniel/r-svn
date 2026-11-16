@@ -78,6 +78,23 @@ namespace CXXR
         m_env = env;
     }
 
+    Closure::Closure(const Closure &pattern, Duplication depth)
+        : FunctionBase(pattern, depth)
+    {
+        m_formals = pattern.m_formals;
+        m_body = pattern.m_body;
+        m_env = pattern.m_env;
+        if (NOJIT(&pattern))
+            SET_NOJIT(this);
+        if (MAYBEJIT(&pattern))
+            SET_MAYBEJIT(this);
+    }
+
+    Closure *Closure::clone(Duplication depth) const
+    {
+        return (new Closure(*this, depth));
+    }
+
     const char *Closure::typeName() const
     {
         return staticTypeName();

@@ -51,6 +51,11 @@ namespace CXXR
         }
     }
 
+    Expression *Expression::clone(Duplication depth) const
+    {
+        return (new Expression(*this, depth));
+    }
+
     const char *Expression::typeName() const
     {
         return staticTypeName();

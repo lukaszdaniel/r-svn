@@ -91,6 +91,11 @@ namespace CXXR
             bool m_na_last;
         };
 
+        String *clone(Duplication depth) const override
+        {
+            return const_cast<String *>(this);
+        }
+
         /** @brief Number of elements in the vector.
          *
          * @return The number of elements in the vector.

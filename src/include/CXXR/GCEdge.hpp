@@ -101,6 +101,19 @@ namespace CXXR
         //     Foo::Foo() { m_edge = expression_that_might_gc(); ... }
         // which properly initialized the edge prior to doing the allocation.
 
+        /** @brief Copy constructor.
+         *
+         * @param source GCEdge to be copied.  The constructed GCEdge
+         * will point to the same object (if any) as \a source.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         */
+        GCEdge(const GCEdge<T> &source, Duplication depth) : m_target(cloneOrSelf(source.m_target, depth))
+        {
+            check_complete_type();
+            GCNode::incRefCount(m_target);
+        }
+
         ~GCEdge()
         {
             check_complete_type();
@@ -153,6 +166,11 @@ namespace CXXR
         explicit operator bool() const noexcept
         {
             return m_target != nullptr;
+        }
+
+        static T *cloneOrSelf(T *pattern, Duplication depth)
+        {
+            return pattern && depth == Duplication::DEEP ? pattern->clone(depth) : pattern;
         }
 
         /** @brief Redirect the edge to a new target.

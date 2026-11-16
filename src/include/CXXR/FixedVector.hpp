@@ -199,6 +199,7 @@ namespace CXXR
         static const char *staticTypeName();
 
         // Virtual functions of RObject:
+        FixedVector<T, ST> *clone(Duplication depth) const override;
         const char *typeName() const override;
 
     protected:
@@ -273,6 +274,15 @@ namespace CXXR
             sxpinfo.m_ext_allocator = (allocator != nullptr);
             constructElementsIfNeeded();
         }
+
+        /** @brief Copy constructor.
+         *
+         * @param pattern FixedVector to be copied.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         */
+        FixedVector(const FixedVector<T, ST> &pattern, Duplication depth);
+        FixedVector(const FixedVector &) = delete;
 
         FixedVector &operator=(const FixedVector &) = delete;
 
@@ -372,6 +382,26 @@ namespace CXXR
     const char *FixedVector<T, ST>::typeName() const
     {
         return FixedVector<T, ST>::staticTypeName();
+    }
+
+    template <typename T, SEXPTYPE ST>
+    FixedVector<T, ST>::FixedVector(const FixedVector<T, ST> &pattern, Duplication depth)
+        : VectorBase(pattern, depth),
+          m_data(allocate(pattern.size())),
+          m_length(pattern.size()),
+          m_truelength(0)
+    {
+        constructElementsIfNeeded();
+        for (size_type i = 0; i < m_length; ++i)
+            m_data[i] = ElementTraits::duplicate_element(pattern[i], depth);
+        if (!(R::IS_GROWABLE)(const_cast<FixedVector<T, ST> *>(&pattern)))
+            m_truelength = pattern.truelength();
+    }
+
+    template <typename T, SEXPTYPE ST>
+    FixedVector<T, ST> *FixedVector<T, ST>::clone(Duplication depth) const
+    {
+        return new FixedVector<T, ST>(*this, depth);
     }
 
     template <typename T, SEXPTYPE ST>

@@ -31,6 +31,11 @@
 
 namespace CXXR
 {
+    DottedArgs *DottedArgs::clone(Duplication depth) const
+    {
+        return (new DottedArgs(*this, depth));
+    }
+
     const char *DottedArgs::typeName() const
     {
         return staticTypeName();

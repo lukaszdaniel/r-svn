@@ -50,6 +50,17 @@ namespace CXXR
          */
         static SEXP coerceVectorImpl(SEXP source, SEXPTYPE type);
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern VectorBase to be copied.
+         *
+         * @param depth Indicator whether to perform deep or shallow copy.
+         */
+        VectorBase(const VectorBase &pattern, Duplication depth)
+            : RObject(pattern, depth)
+        {
+        }
+
         /** @brief Number of elements in the vector.
          *
          * @return The number of elements in the vector.
@@ -112,6 +123,10 @@ namespace CXXR
         {
             return "(vector type)";
         }
+
+        // Virtual function of RObject, redeclared for covariant
+        // return type:
+        VectorBase *clone(Duplication depth) const override = 0;
 
     protected:
         /**

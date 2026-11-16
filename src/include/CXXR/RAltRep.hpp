@@ -80,6 +80,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
+        RObject *clone(Duplication depth) const override;
         const char *typeName() const override;
 
     public:

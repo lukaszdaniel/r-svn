@@ -71,6 +71,12 @@ namespace CXXR
         m_attrib = R_NilValue;
     }
 
+    RObject::RObject(const RObject &pattern, Duplication depth)
+        : GCNode(pattern.sexptype())
+    {
+        cloneAttributes(pattern, depth);
+    }
+
     RObject *RObject::evaluate(Environment *)
     {
         return this;
@@ -124,6 +130,13 @@ namespace CXXR
                 BadObject::register_bad_object(this, __FILE__, __LINE__);
             }
         }
+    }
+
+    void RObject::cloneAttributes(const RObject &source, Duplication depth)
+    {
+        m_attrib = RObject::clone(source.m_attrib.get(), depth);
+        sxpinfo.obj = source.sxpinfo.obj;
+        setS4Object(source.isS4Object());
     }
 
     void RObject::detachReferents()
@@ -212,7 +225,7 @@ namespace CXXR
     {
         if (m_attrib != R_NilValue)
         {
-            m_attrib.retarget(this, R_NilValue);
+            m_attrib = R_NilValue;
             sxpinfo.obj = 0;
         }
     }

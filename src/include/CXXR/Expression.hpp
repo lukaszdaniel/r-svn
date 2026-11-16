@@ -68,6 +68,15 @@ namespace CXXR
 
         Expression(RObject *function, std::initializer_list<RObject *> unnamed_args);
 
+        /** @brief Copy constructor.
+         *
+         * @param pattern Expression to be copied.
+         */
+        Expression(const Expression &pattern, Duplication depth)
+            : ConsCell(pattern, depth)
+        {
+        }
+
         /** @brief Is an RObject an Expression?
          *
          * @param obj Pointer to RObject to be tested.  This may be a
@@ -96,6 +105,7 @@ namespace CXXR
         }
 
         // Virtual functions of RObject:
+        Expression *clone(Duplication depth) const override;
         RObject *evaluate(Environment *env) override;
         const char *typeName() const override;
 
