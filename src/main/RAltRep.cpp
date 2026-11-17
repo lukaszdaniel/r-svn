@@ -72,40 +72,40 @@ namespace CXXR
     {
         GCStackRoot<const AltRep> thisroot(this);
         SEXP source = const_cast<AltRep *>(this);
-        SEXP ans = R::ALTREP_DUPLICATE_EX(source, Rboolean(depth == Duplication::DEEP));
+        RObject *ans = R::ALTREP_DUPLICATE_EX(source, Rboolean(depth == Duplication::DEEP));
         if (ans)
         {
-            return SEXP_downcast<RObject *>(ans);
+            return ans;
         }
 
         R_xlen_t sz = XLENGTH(source);
-        GCStackRoot<RObject> t;
+        GCStackRoot<VectorBase> t;
         switch (sexptype())
         {
         case LGLSXP:
             t = LogicalVector::create(sz);
             if (sz)
-                memcpy(LOGICAL(t), LOGICAL_RO(source), sz * sizeof(int));
+                memcpy(t->data(), R::ALTVEC_DATAPTR_RO(source), sz * sizeof(int));
             break;
         case INTSXP:
             t = IntVector::create(sz);
             if (sz)
-                memcpy(INTEGER(t), INTEGER_RO(source), sz * sizeof(int));
+                memcpy(t->data(), R::ALTVEC_DATAPTR_RO(source), sz * sizeof(int));
             break;
         case REALSXP:
             t = RealVector::create(sz);
             if (sz)
-                memcpy(REAL(t), REAL_RO(source), sz * sizeof(double));
+                memcpy(t->data(), R::ALTVEC_DATAPTR_RO(source), sz * sizeof(double));
             break;
         case CPLXSXP:
             t = ComplexVector::create(sz);
             if (sz)
-                memcpy(COMPLEX(t), COMPLEX_RO(source), sz * sizeof(Rcomplex));
+                memcpy(t->data(), R::ALTVEC_DATAPTR_RO(source), sz * sizeof(Rcomplex));
             break;
         case RAWSXP:
             t = RawVector::create(sz);
             if (sz)
-                memcpy(RAW(t), RAW_RO(source), sz * sizeof(Rbyte));
+                memcpy(t->data(), R::ALTVEC_DATAPTR_RO(source), sz * sizeof(Rbyte));
             break;
         case STRSXP:
             t = StringVector::create(sz);
