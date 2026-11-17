@@ -888,7 +888,9 @@ void GCNode::mark(unsigned int max_generation)
                 {
                     {
                         VectorBase *vec = SEXP_downcast<VectorBase *>(const_cast<GCNode *>(s));
-                        if (IS_GROWABLE(vec))
+                        /* For a CHARSXP the growable bit is the 'cached' mark and
+                           TRUELENGTH may hold a hash value. */
+                        if (TYPEOF(vec) != CHARSXP && IS_GROWABLE(vec))
                             SET_STDVEC_LENGTH(vec, XTRUELENGTH(vec));
                     }
 

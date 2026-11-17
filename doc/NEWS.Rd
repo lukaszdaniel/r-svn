@@ -136,6 +136,10 @@
       \code{POSIXct}, a corollary being that
       \code{as.vector(., mode="double")} now works as
       \code{as.double(.)} rather than signalling an error.
+
+      \item \code{getNamespaceVersion()} and \code{getNamespaceName()} now
+      return an unnamed string, as suggested by \I{Pavel Krivitsky} on
+      R-devel.
     }
   }
 
@@ -496,11 +500,11 @@
       error only on failure.  Thanks to \I{Michael Chirico} for
       the report (\PR{19023}).
 
-      \item The internal HTTP server (used by the dynamic help system)
-      removes dot segments (\code{/../} and \code{/./}) also when they
-      were percent-encoded and on Windows converts \code{\\} to the
-      \code{/} path separator.  Paths that include \code{\%00} are
-      rejected.
+      \item \code{cacheMetaData(attach = FALSE)} uncached S4 generic
+      functions before S4 methods, causing error on unload for packages
+      defining methods for a \emph{group} generic function, when the
+      package defining the group generic function was not attached.
+      Thanks to \I{Michael Chirico} for the report (\PR{19079}).
 
       \item The internal HTTP server accepts request and header lines of
       up to 16k bytes (previously 1k) so that requests with many cookies
@@ -580,6 +584,11 @@
       \item \code{bessel[IJKY](., nu = <large>)} no longer allocate memory
       in cases we know the current algorithm will give \code{NaN} with a
       warning anyway, thanks to \I{Jeroen Ooms}'s \PR{19326}.
+
+      \item The internal HTTP server removes dot segments (\code{/../}
+      and \code{/./}) also when they were percent-encoded.  On Windows,
+      converts \code{\\} to the \code{/} path separator.  Paths that
+      include \code{\%00} are rejected.
     }
   }
 }
