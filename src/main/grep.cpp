@@ -83,6 +83,7 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <CXXR/BuiltInFunction.hpp>
 #include <CXXR/IntVector.hpp>
 #include <CXXR/LogicalVector.hpp>
+#include <CXXR/RealVector.hpp>
 #include <CXXR/StringVector.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/RawVector.hpp>
@@ -565,7 +566,8 @@ static void R_pcre_prepare(const char *pattern, SEXP subject, bool use_UTF8,
 
 attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP args0 = args, ans, tok, x;
+    SEXP args0 = args, x;
+    GCStackRoot<> ans, tok;
     R_xlen_t i, itok, len, tlen;
     size_t j, ntok;
     bool fixed_opt, perl_opt, useBytes;
@@ -597,7 +599,6 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 
     /* treat split = NULL as split = "" */
     if (!tlen) { tlen = 1; SETCADR(args0, tok = mkString("")); }
-    PROTECT(tok);
 
     haveBytesInput = (have_bytes(tok, tlen) || have_bytes(x, len));
     if (!useBytes)
@@ -614,7 +615,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     /* group by token for efficiency with PCRE/TRE versions */
-    PROTECT(ans = ListVector::create(len));
+    ans = ListVector::create(len);
     vmax = vmaxget();
     for (itok = 0; itok < tlen; itok++) {
 	SEXP this_ = STRING_ELT(tok, itok);
@@ -629,7 +630,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 	} else if (!CHAR(this_)[0]) { /* empty */
 	    vmax2 = vmaxget();
 	    for (i = itok; i < len; i += tlen) {
-		SEXP t;
+		GCStackRoot<StringVector> t;
 		if (STRING_ELT(x, i) == NA_STRING) {
 		    SET_VECTOR_ELT(ans, i, ScalarString(NA_STRING));
 		    continue;
@@ -669,18 +670,18 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 			for (ntok = 0; *p; p += used, ntok++)
 			    used = utf8clen(*p);
 			p = buf;
-			PROTECT(t = StringVector::create(ntok));
+			t = StringVector::create(ntok);
 			for (j = 0; j < ntok; j++, p += used) {
 			    used = utf8clen(*p);
 			    memcpy(bf, p, used); bf[used] = '\0';
 			    SET_STRING_ELT(t, j, mkCharCE(bf, CE_UTF8));
 			}
 		    } else if ((nt = mbstowcs(NULL, buf, 0)) < 0) {
-			PROTECT(t = ScalarString(NA_STRING));
+			t = StringVector::createScalar(String::NA());
 		    } else {
 			ntok = nt;
 			mbs_init(&mb_st);
-			PROTECT(t = StringVector::create(ntok));
+			t = StringVector::create(ntok);
 			for (j = 0; j < ntok; j++, p += used) {
 			    /* This is valid as we have already checked */
 			    used = mbrtowc(NULL, p, R_MB_CUR_MAX, &mb_st);
@@ -693,7 +694,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		       single-byte locale and not marked as UTF-8 */
 		    char bf[2];
 		    ntok = strlen(buf);
-		    PROTECT(t = StringVector::create(ntok));
+		    t = StringVector::create(ntok);
 		    bf[1] = '\0';
 		    if(useBytes) {
 			for (j = 0; j < ntok; j++) {
@@ -708,7 +709,6 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    }
 		}
 		SET_VECTOR_ELT(ans, i, t);
-		UNPROTECT(1);
 		vmaxset(vmax2);
 	    }
 	} else if (fixed_opt) {
@@ -1159,7 +1159,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if (getAttrib(x, R_NamesSymbol) != R_NilValue)
 	namesgets(ans, getAttrib(x, R_NamesSymbol));
-    UNPROTECT(1);
+
     R_Free(pt); R_Free(wpt);
 #ifdef HAVE_PCRE2
     if (tables) free((void *)tables);
@@ -1167,7 +1167,7 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 #else
     if (tables) pcre_free((void *)tables);
 #endif
-    UNPROTECT(1); /* tok */
+
     return ans;
 }
 
@@ -1275,7 +1275,9 @@ static int fgrep_one_bytes(const char *pat, size_t patlen, const char *target,
 
 attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP pat, text, ind, ans;
+    SEXP pat, text;
+    GCStackRoot<LogicalVector> ind;
+    GCStackRoot<VectorBase> ans;
     regex_t reg;
     R_xlen_t i, j, n;
     int nmatches = 0, rc;
@@ -1325,12 +1327,12 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
     n = XLENGTH(text);
     if (STRING_ELT(pat, 0) == NA_STRING) {
 	if (value_opt) {
-	    SEXP nmold = PROTECT(getAttrib(text, R_NamesSymbol));
-	    PROTECT(ans = StringVector::create(n));
+	    GCStackRoot<> nmold;
+	    nmold = getAttrib(text, R_NamesSymbol);
+	    ans = StringVector::create(n);
 	    for (i = 0; i < n; i++)  SET_STRING_ELT(ans, i, NA_STRING);
 	    if (!isNull(nmold))
 		setAttrib(ans, R_NamesSymbol, duplicate(nmold));
-	    UNPROTECT(2); /* ans, nmold */
 	} else if (PRIMVAL(op)) { // grepl case
 	    ans = LogicalVector::create(n);
 	    for (i = 0; i < n; i++)  LOGICAL(ans)[i] = NA_LOGICAL;
@@ -1392,7 +1394,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (rc) reg_report(rc, &reg, spat);
     }
 
-    PROTECT(ind = LogicalVector::create(n));
+    ind = LogicalVector::create(n);
     vmax = vmaxget();
     for (i = 0 ; i < n ; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -1480,13 +1482,14 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	tre_regfree(&reg);
 
     if (PRIMVAL(op)) {/* grepl case */
-	UNPROTECT(1); /* ind */
 	return ind;
     }
 
     if (value_opt) {
-	SEXP nmold = PROTECT(getAttrib(text, R_NamesSymbol)), nm;
-	PROTECT(ans = StringVector::create(nmatches));
+	GCStackRoot<> nmold;
+	SEXP nm;
+	nmold = getAttrib(text, R_NamesSymbol);
+	ans = StringVector::create(nmatches);
 	for (i = 0, j = 0; i < n ; i++)
 	    if (invert ^ LOGICAL(ind)[i])
 		SET_STRING_ELT(ans, j++, STRING_ELT(text, i));
@@ -1498,11 +1501,10 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 		    SET_STRING_ELT(nm, j++, STRING_ELT(nmold, i));
 	    setAttrib(ans, R_NamesSymbol, nm);
 	}
-	UNPROTECT(2); /* ans, nmold */
     } else {
 #ifdef LONG_VECTOR_SUPPORT
 	if (n > INT_MAX) {
-	    ans = allocVector(REALSXP, nmatches);
+	    ans = RealVector::create(nmatches);
 	    j = 0;
 	    for (i = 0 ; i < n ; i++)
 		if (invert ^ LOGICAL(ind)[i]) REAL(ans)[j++] = (double)(i + 1);
@@ -1516,7 +1518,7 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 		    INTEGER(ans)[j++] = (int) (i + 1);
 	}
     }
-    UNPROTECT(1); /* ind */
+
     return ans;
 }
 
@@ -2102,7 +2104,8 @@ static void wsub_buffer_expand(double needed, int *nns, wchar_t **cbuf, wchar_t 
 
 attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP pat, rep, text, ans;
+    SEXP pat, rep, text;
+    GCStackRoot<StringVector> ans;
     regex_t reg;
     regmatch_t regmatch[10];
     R_xlen_t i, n;
@@ -2163,7 +2166,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     n = XLENGTH(text);
     /* This contradicts the code below that has NA matching NA */
     if (STRING_ELT(pat, 0) == NA_STRING) {
-	PROTECT(ans = StringVector::create(n));
+	ans = StringVector::create(n);
 	for (i = 0; i < n; i++)  SET_STRING_ELT(ans, i, NA_STRING);
 
 	goto exit_gsub;
@@ -2243,7 +2246,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
-    PROTECT(ans = StringVector::create(n));
+    ans = StringVector::create(n);
     vmax = vmaxget();
     for (i = 0 ; i < n ; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -2518,7 +2521,7 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
   exit_gsub: 
     SHALLOW_DUPLICATE_ATTRIB(ans, text);
     /* This also copied the class, if any */
-    UNPROTECT(1);
+
     return ans;
 }
 
@@ -2538,16 +2541,16 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
     int matchIndex = -1, j, st, foundAll = 0, foundAny = 0;
     size_t len, offset = 0;
     regmatch_t regmatch[10];
-    SEXP ans, matchlen;         /* Return vect and its attribute */
-    SEXP matchbuf, matchlenbuf; /* Buffers for storing multiple matches */
+    GCStackRoot<IntVector> ans, matchlen;         /* Return vect and its attribute */
+    GCStackRoot<IntVector> matchbuf, matchlenbuf; /* Buffers for storing multiple matches */
     int bufsize = 1024;         /* Starting size for buffers */
     int eflags = 0;
     const char *string = NULL;
     const wchar_t *ws = NULL;
     CXXR::RAllocStack::Scope rscope; // translateCharFP2
 
-    PROTECT(matchbuf = IntVector::create(bufsize));
-    PROTECT(matchlenbuf = IntVector::create(bufsize));
+    matchbuf = IntVector::create(bufsize);
+    matchlenbuf = IntVector::create(bufsize);
 
     if (useBytes) {
 	string = CHAR(sstr);
@@ -2559,7 +2562,6 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
 	    if ((*nwarn)++ < NWARN)
 		warning(_("input string %lld is invalid in this locale"),
 		        (long long)i+1);
-	    UNPROTECT(2);
 	    return gregexpr_BadStringAns();
 	}
 	len = strlen(string);
@@ -2568,7 +2570,6 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
 	if (!ws) {
 	    if ((*nwarn)++ < NWARN)
 		warning(_("input string %lld is invalid"), (long long)i+1);
-	    UNPROTECT(2);
 	    return gregexpr_BadStringAns();
 	}
 	len = wcslen(ws);
@@ -2583,20 +2584,15 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
 	    if ((matchIndex + 1) == bufsize) {
 		/* Reallocate match buffers */
 		int newbufsize = bufsize * 2;
-		SEXP tmp;
+		IntVector *tmp;
 		tmp = IntVector::create(2 * bufsize);
 		for (j = 0; j < bufsize; j++)
 		    INTEGER(tmp)[j] = INTEGER(matchlenbuf)[j];
-		UNPROTECT(1);
 		matchlenbuf = tmp;
-		PROTECT(matchlenbuf);
 		tmp = IntVector::create(2 * bufsize);
 		for (j = 0; j < bufsize; j++)
 		    INTEGER(tmp)[j] = INTEGER(matchbuf)[j];
 		matchbuf = tmp;
-		UNPROTECT(2);
-		PROTECT(matchbuf);
-		PROTECT(matchlenbuf);
 		bufsize = newbufsize;
 	    }
 	    matchIndex++;
@@ -2622,8 +2618,8 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
 	    warning(_("Out-of-memory error in regexp matching for element %d"),
 		    (int) i + 1);
     }
-    PROTECT(ans = IntVector::create(matchIndex + 1));
-    PROTECT(matchlen = IntVector::create(matchIndex + 1));
+    ans = IntVector::create(matchIndex + 1);
+    matchlen = IntVector::create(matchIndex + 1);
     /* copy from buffers */
     for (j = 0; j <= matchIndex; j++) {
 	INTEGER(ans)[j] = INTEGER(matchbuf)[j];
@@ -2634,7 +2630,7 @@ static SEXP gregexpr_Regexc(const regex_t *reg, SEXP sstr, int useBytes, int use
 	setAttrib(ans, install("index.type"), itype);
 	setAttrib(ans, install("useBytes"), R_TrueValue);
     }
-    UNPROTECT(4);
+
     return ans;
 }
 
@@ -2644,11 +2640,11 @@ static SEXP gregexpr_fixed(const char *pattern, const char *string,
     int patlen, matchIndex, st = 0, foundAll = 0, foundAny = 0, j,
 	ansSize, nb = 0;
     size_t curpos = 0, slen;
-    SEXP ans, matchlen;         /* return vect and its attribute */
-    SEXP matchbuf, matchlenbuf; /* buffers for storing multiple matches */
+    GCStackRoot<IntVector> ans, matchlen;         /* return vect and its attribute */
+    GCStackRoot<IntVector> matchbuf, matchlenbuf; /* buffers for storing multiple matches */
     int bufsize = 1024;         /* starting size for buffers */
-    PROTECT(matchbuf = IntVector::create(bufsize));
-    PROTECT(matchlenbuf = IntVector::create(bufsize));
+    matchbuf = IntVector::create(bufsize);
+    matchlenbuf = IntVector::create(bufsize);
     if (!useBytes && use_UTF8)
 	patlen = (int) Rf_utf8towcs(NULL, pattern, 0);
     else if (!useBytes && mbcslocale)
@@ -2679,20 +2675,15 @@ static SEXP gregexpr_fixed(const char *pattern, const char *string,
 		if ((matchIndex + 1) == bufsize) {
 		    /* Reallocate match buffers */
 		    int newbufsize = bufsize * 2;
-		    SEXP tmp;
+		    IntVector *tmp;
 		    tmp = IntVector::create(2 * bufsize);
 		    for (j = 0; j < bufsize; j++)
 			INTEGER(tmp)[j] = INTEGER(matchlenbuf)[j];
-		    UNPROTECT(1);
 		    matchlenbuf = tmp;
-		    PROTECT(matchlenbuf);
 		    tmp = IntVector::create(2 * bufsize);
 		    for (j = 0; j < bufsize; j++)
 			INTEGER(tmp)[j] = INTEGER(matchbuf)[j];
 		    matchbuf = tmp;
-		    UNPROTECT(2);
-		    PROTECT(matchbuf);
-		    PROTECT(matchlenbuf);
 		    bufsize = newbufsize;
 		}
 		matchIndex++;
@@ -2703,8 +2694,8 @@ static SEXP gregexpr_fixed(const char *pattern, const char *string,
 	}
     }
     ansSize = foundAny ? (matchIndex + 1) : 1;
-    PROTECT(ans = IntVector::create(ansSize));
-    PROTECT(matchlen = IntVector::create(ansSize));
+    ans = IntVector::create(ansSize);
+    matchlen = IntVector::create(ansSize);
     /* copy from buffers */
     for (j = 0; j < ansSize; j++) {
 	INTEGER(ans)[j] = INTEGER(matchbuf)[j];
@@ -2715,7 +2706,7 @@ static SEXP gregexpr_fixed(const char *pattern, const char *string,
 	setAttrib(ans, install("index.type"), itype);
 	setAttrib(ans, install("useBytes"), R_TrueValue);
     }
-    UNPROTECT(4);
+
     return ans;
 }
 
@@ -2808,9 +2799,9 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 {
     bool foundAll = false, foundAny = false;
     int matchIndex = -1, start = 0;
-    SEXP ans, matchlen;         /* return vect and its attribute */
-    GCStackRoot<> capturebuf, capturelenbuf;
-    GCStackRoot<> matchbuf, matchlenbuf; /* buffers for storing multiple matches */
+    GCStackRoot<IntVector> ans, matchlen;         /* return vect and its attribute */
+    GCStackRoot<IntVector> capturebuf, capturelenbuf;
+    GCStackRoot<IntVector> matchbuf, matchlenbuf; /* buffers for storing multiple matches */
     int bufsize = 1024;         /* starting size for buffers */
     int slen = (int) strlen(string);
 
@@ -2835,7 +2826,7 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	    if ((matchIndex + 1) == bufsize) {
 		/* Reallocate match buffers */
 		int newbufsize = bufsize * 2;
-		SEXP tmp;
+		IntVector *tmp;
 		tmp = IntVector::create(newbufsize);
 		for (int j = 0; j < bufsize; j++) /* or use memcpy */
 		    INTEGER(tmp)[j] = INTEGER(matchlenbuf)[j];
@@ -2880,15 +2871,15 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	    if (!foundAny) matchIndex = 0;
 	}
     }
-    PROTECT(ans = IntVector::create(matchIndex + 1));
+    ans = IntVector::create(matchIndex + 1);
     /* Protect in case install("match.length") allocates */
-    PROTECT(matchlen = IntVector::create(matchIndex + 1));
+    matchlen = IntVector::create(matchIndex + 1);
     setAttrib(ans, install("match.length"), matchlen);
     if(useBytes) {
 	setAttrib(ans, install("index.type"), itype);
 	setAttrib(ans, install("useBytes"), R_TrueValue);
     }
-    UNPROTECT(1);
+
     if (foundAny) {
 	for (int j = 0; j <= matchIndex; j++) {
 	    INTEGER(ans)[j] = INTEGER(matchbuf)[j];
@@ -2922,33 +2913,34 @@ static SEXP R_pcre_gregexpr(const char *pattern, const char *string,
 	setAttrib(ans, install("capture.length"), capturelen);
 	setAttrib(ans, install("capture.names"), capture_names);
     }
-    UNPROTECT(1); /* ans */
+
     return ans;
 }
 
 static SEXP gregexpr_NAInputAns(void)
 {
-    SEXP ans, matchlen;
-    PROTECT(ans = IntVector::createScalar(R_NaInt));
-    PROTECT(matchlen = IntVector::createScalar(R_NaInt));
+    GCStackRoot<IntVector> ans, matchlen;
+    ans = IntVector::createScalar(R_NaInt);
+    matchlen = IntVector::createScalar(R_NaInt);
     setAttrib(ans, install("match.length"), matchlen);
-    UNPROTECT(2);
+
     return ans;
 }
 
 static SEXP gregexpr_BadStringAns(void)
 {
-    SEXP ans, matchlen;
-    PROTECT(ans = IntVector::createScalar(-1));
-    PROTECT(matchlen = IntVector::createScalar(-1));
+    GCStackRoot<IntVector> ans, matchlen;
+    ans = IntVector::createScalar(-1);
+    matchlen = IntVector::createScalar(-1);
     setAttrib(ans, install("match.length"), matchlen);
-    UNPROTECT(2);
     return ans;
 }
 
 attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP pat, text, ans, itype;
+    SEXP pat, text;
+    GCStackRoot<VectorBase> ans;
+    GCStackRoot<StringVector> itype;
     regex_t reg;
     regmatch_t regmatch[10];
     R_xlen_t i, n;
@@ -2974,7 +2966,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     char *name_table;
     const void *vmax;
     int info_code, ovector_size = 0; /* -Wall */
-    SEXP capture_names = R_NilValue;
+    GCStackRoot<StringVector> capture_names;
     int nwarn = 0;
 
     checkArity(op, args);
@@ -3003,7 +2995,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     n = XLENGTH(text);
     if (!useBytes) 
 	useBytes = have_bytes(pat, 1) || have_bytes(text, n);
-    PROTECT(itype = ScalarString(mkChar(useBytes ? "bytes" : "chars")));
+    itype = StringVector::createScalar(String::obtain(useBytes ? "bytes" : "chars"));
 
     if (!useBytes) 
 	useBytes = only_ascii(pat, 1) && only_ascii(text, n);
@@ -3071,15 +3063,14 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	ovector_size = (capture_count + 1) * 3;
 	ovector = (int *) malloc(ovector_size*sizeof(int));
 #endif
-	SEXP thisname;
-	PROTECT(capture_names = StringVector::create((int) capture_count));
+	GCStackRoot<String> thisname;
+	capture_names = StringVector::create((int) capture_count);
 	for(i = 0; i < name_count; i++) {
-	    char *entry = name_table + name_entry_size * i;
-	    PROTECT(thisname = mkChar(entry + 2));
+	    const char *entry = name_table + name_entry_size * i;
+	    thisname = String::obtain(entry + 2);
 	    int capture_num = ((unsigned char)entry[0]<<8)
 	                     + (unsigned char)entry[1] - 1;
 	    SET_STRING_ELT(capture_names, capture_num, thisname);
-	    UNPROTECT(1);
 	}
     } else {
 	int cflags = REG_EXTENDED;
@@ -3092,31 +3083,31 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     }
 
     if (PRIMVAL(op) == 0) { /* regexpr */
-	SEXP matchlen, capture_start, capturelen;
+	GCStackRoot<IntVector> matchlen;
+	GCStackRoot<> capture_start, capturelen;
 	int *is, *il;
-	PROTECT(ans = IntVector::create(n));
+	ans = IntVector::create(n);
 	/* Protect in case install("match.length") allocates */
-	PROTECT(matchlen = IntVector::create(n));
+	matchlen = IntVector::create(n);
 	setAttrib(ans, install("match.length"), matchlen);
 	if(useBytes) {
 	    setAttrib(ans, install("index.type"), itype);
 	    setAttrib(ans, install("useBytes"), R_TrueValue);
 	}
-	UNPROTECT(1);
+
 	if (perl_opt && capture_count) {
 	    if (n > INT_MAX) error("%s", _("too long a vector"));
 	    int nn = (int) n;
-	    SEXP dmn;
-	    PROTECT(dmn = ListVector::create(2));
+	    GCStackRoot<ListVector> dmn;
+	    dmn = ListVector::create(2);
 	    SET_VECTOR_ELT(dmn, 1, capture_names);
-	    PROTECT(capture_start = allocMatrix(INTSXP, nn, (int) capture_count));
+	    capture_start = allocMatrix(INTSXP, nn, (int) capture_count);
 	    setAttrib(capture_start, R_DimNamesSymbol, dmn);
 	    setAttrib(ans, install("capture.start"), capture_start);
-	    PROTECT(capturelen = allocMatrix(INTSXP, nn, (int) capture_count));
+	    capturelen = allocMatrix(INTSXP, nn, (int) capture_count);
 	    setAttrib(capturelen, R_DimNamesSymbol, dmn);
 	    setAttrib(ans, install("capture.length"), capturelen);
 	    setAttrib(ans, install("capture.names"), capture_names);
-	    UNPROTECT(3);
 	    is = INTEGER(capture_start);
 	    il = INTEGER(capturelen);
 	    // initiialization needed for NA inputs: PR#16484
@@ -3220,7 +3211,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     } else {
 	SEXP elt;
-	PROTECT(ans = ListVector::create(n));
+	ans = ListVector::create(n);
 	vmax = vmaxget();
 	for (i = 0 ; i < n ; i++) {
 //	    if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
@@ -3291,18 +3282,20 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	pcre_free((void *)tables);
 	free(ovector);
 #endif
-	UNPROTECT(1);
     } else
 	tre_regfree(&reg);
 
-    UNPROTECT(2);
     return ans;
 }
 
 // .Internal(regexec(pattern, text, ignore.case, fixed, useBytes)) :
 attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 {
-    SEXP pat, text, ans, matchpos, matchlen, itype;
+    SEXP pat, text;
+    GCStackRoot<> ans;
+    GCStackRoot<VectorBase> matchpos;
+    GCStackRoot<IntVector> matchlen;
+    GCStackRoot<StringVector> itype;
     bool opt_icase, opt_fixed, useBytes;
 
     bool use_WC = false;
@@ -3348,7 +3341,7 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 
     if(!useBytes) 
 	useBytes = have_bytes(pat, 1) || have_bytes(text, n);
-    PROTECT(itype = ScalarString(mkChar(useBytes ? "bytes" : "chars")));
+    itype = StringVector::createScalar(String::obtain(useBytes ? "bytes" : "chars"));
 
     if(!useBytes) 
 	useBytes = only_ascii(pat, 1) && only_ascii(text, n);
@@ -3384,17 +3377,16 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 
     pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
 
-    PROTECT(ans = ListVector::create(n));
+    ans = ListVector::create(n);
 
     for(i = 0; i < n; i++) {
 //	if ((i+1) % NINTERRUPT == 0) R_CheckUserInterrupt();
 	if(STRING_ELT(text, i) == NA_STRING) {
-	    PROTECT(matchpos = ScalarInteger(NA_INTEGER));
+	    matchpos = StringVector::createScalar(String::NA());
 	    SEXP s_match_length = install("match.length");
 	    setAttrib(matchpos, s_match_length ,
 		      ScalarInteger(NA_INTEGER));
 	    SET_VECTOR_ELT(ans, i, matchpos);
-	    UNPROTECT(1);
 	} else {
 	    vmax = vmaxget();
 	    if(useBytes)
@@ -3417,8 +3409,8 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		vmaxset(vmax);
 	    }
 	    if(rc == REG_OK) {
-		PROTECT(matchpos = IntVector::create(nmatch));
-		PROTECT(matchlen = IntVector::create(nmatch));
+		matchpos = IntVector::create(nmatch);
+		matchlen = IntVector::create(nmatch);
 		for(size_t j = 0; j < nmatch; j++) {
 		    so = pmatch[j].rm_so;
 		    INTEGER(matchpos)[j] = so + 1;
@@ -3430,7 +3422,6 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		    setAttrib(matchpos, install("useBytes"), R_TrueValue);
 		}
 		SET_VECTOR_ELT(ans, i, matchpos);
-		UNPROTECT(2);
 	    } else {
 		/* No match (or could there be an error?). */
 		/* Alternatively, could return nmatch -1 values.
@@ -3439,15 +3430,14 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		if (rc == REG_ESPACE)
 		    warning(_("Out-of-memory error in regexp matching for element %d"),
 			    (int) i + 1);
-		PROTECT(matchpos = ScalarInteger(-1));
-		PROTECT(matchlen = ScalarInteger(-1));
+		matchpos = IntVector::createScalar(-1);
+		matchlen = IntVector::createScalar(-1);
 		setAttrib(matchpos, install("match.length"), matchlen);
 		if(useBytes) {
 		    setAttrib(matchpos, install("index.type"), itype);
 		    setAttrib(matchpos, install("useBytes"), R_TrueValue);
 		}
 		SET_VECTOR_ELT(ans, i, matchpos);
-		UNPROTECT(2);
 	    }
 	}
     }
@@ -3455,8 +3445,6 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
     free(pmatch);
 
     tre_regfree(&reg);
-
-    UNPROTECT(2);
 
     return ans;
 }
@@ -3496,7 +3484,8 @@ attribute_hidden SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     int res;
 
     checkArity(op, args);
-    SEXP ans = PROTECT(LogicalVector::create(4));
+    GCStackRoot<LogicalVector> ans;
+    ans = LogicalVector::create(4);
     int *lans = LOGICAL(ans);
     SEXP nm = StringVector::create(4);
     setAttrib(ans, R_NamesSymbol, nm);
@@ -3514,7 +3503,7 @@ attribute_hidden SEXP do_pcre_config(SEXP call, SEXP op, SEXP args, SEXP env)
     lans[2] = res;
     pcre_config(PCRE_CONFIG_STACKRECURSE, &res); lans[3] = res;
     SET_STRING_ELT(nm, 3, mkChar("stack"));
-    UNPROTECT(1);
+
     return ans;
 }
 #endif
