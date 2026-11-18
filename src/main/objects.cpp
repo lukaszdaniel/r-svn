@@ -108,7 +108,7 @@ static SEXP GetObject(RCNTXT *cptr)
 	s = CAR(cptr->promargs);
 
     if (TYPEOF(s) == PROMSXP) {
-	if (! PROMISE_IS_EVALUATED(s))
+	if (!PROMISE_IS_EVALUATED(s))
 	    s = eval(s, R_BaseEnv);
 	else
 	    s = PRVALUE(s);
@@ -568,7 +568,7 @@ SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	errorcall(call, "%s", _("there must be a 'generic' argument"));
     // else
     SEXP generic = PROTECT(eval(CAR(argList), env));
-    if(!isString(generic) || LENGTH(generic) != 1)
+    if (!isString(generic) || LENGTH(generic) != 1)
 	errorcall(call, "%s", _("'generic' argument must be a character string"));
 
     /* get environments needed for dispatching.
@@ -605,7 +605,7 @@ SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	char cl[CLLEN] = {0};
 	SEXP klass = PROTECT(R_data_class2(obj));
 	int nclass = length(klass);
-	if(!nclass)
+	if (!nclass)
 	    errorcall(call, _("illegal class of length 0 when using method for '%s'"),
 		      translateChar(STRING_ELT(generic, 0)));
 	const char *c_name = translateChar(STRING_ELT(klass, 0));
@@ -615,7 +615,7 @@ SEXP do_usemethod(SEXP call, SEXP op, SEXP args, SEXP env)
 	    size_t cl_count = 3; // 3 : "c(" + \0
 	    strcpy(cl, "c('");
 	    for (int i = 0; i < nclass; i++) {
-		if(i > 0) {
+		if (i > 0) {
 		    c_name = translateChar(STRING_ELT(klass, i));
 		    cl_count += 4; // "', '"
 		    if (cl_count < CLLEN) strcat(cl, "', '");

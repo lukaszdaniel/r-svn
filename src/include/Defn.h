@@ -2142,7 +2142,7 @@ SEXP R_SerializeInfo(R_inpstream_t ips);
 void get_current_mem(size_t *,size_t *,size_t *); /* from memory.c */
 unsigned long get_duplicate_counter(void);  /* from duplicate.c */
 void reset_duplicate_counter(void);  /* from duplicate.c */
-void BindDomain(char *); /* from main.c */
+void BindDomain(const char *); /* from main.c */
 extern bool LoadInitFile;  /* from startup.c, uses in sys-*.c */
 
 // Unix and Windows versions

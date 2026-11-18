@@ -2894,7 +2894,7 @@ static Rboolean clp_open(Rconnection con)
 	/* copy the clipboard contents now */
 #ifdef Win32
 	HGLOBAL hglb;
-	wchar_t *wpc;
+	const wchar_t *wpc;
 	if(GA_clipboardhastext() &&
 	   OpenClipboard(NULL) &&
 	   (hglb = GetClipboardData(CF_UNICODETEXT)) &&
@@ -3055,7 +3055,8 @@ static size_t clp_write(const void *ptr, size_t size, size_t nitems,
 #ifdef Win32
     /* clipboard requires CRLF termination, copy by wchar_t */
     int i;
-    wchar_t wc, *p = (wchar_t *) ptr, *q = (wchar_t *) (this_->buff + this_->pos);
+    wchar_t wc, *q = (wchar_t *) (this_->buff + this_->pos);
+    const wchar_t *p = (const wchar_t *) ptr;
 
     for(i = 0; i < len; i += sizeof(wchar_t)) {
 	if(this_->pos >= this_->len) break;
@@ -6871,7 +6872,7 @@ attribute_hidden SEXP do_sockselect(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if (!conn->isopen)
 		error("%s", _("connection is not open"));
 	    INTEGER(insockfd)[i] = scp->fd;
-	    if (! LOGICAL(write)[i] && scp->pstart < scp->pend) {
+	    if (!LOGICAL(write)[i] && scp->pstart < scp->pend) {
 		LOGICAL(val)[i] = TRUE;
 		immediate = TRUE;
 	    }
@@ -6894,7 +6895,7 @@ attribute_hidden SEXP do_sockselect(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (nsock > fdlim && !immediate)
 	error("%s", _("too many file descriptors for select()"));
 #endif
-    if (! immediate)
+    if (!immediate)
 	Rsockselect(nsock, INTEGER(insockfd), LOGICAL(val), LOGICAL(write),
 		    timeout);
 

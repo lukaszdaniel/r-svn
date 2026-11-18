@@ -310,7 +310,7 @@ attribute_hidden SEXP do_envirgets(SEXP call, SEXP op, SEXP args, SEXP rho)
 	if (isNull(env))
 	    error("%s", _("use of NULL environment is defunct"));
 	if (MAYBE_SHARED(s) ||
-	   ((! IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(s)))
+	   ((!IS_ASSIGNMENT_CALL(call)) && MAYBE_REFERENCED(s)))
 	    /* this copies but does not duplicate args or code */
 	    s = duplicate(s);
 	if (TYPEOF(BODY(s)) == BCODESXP)

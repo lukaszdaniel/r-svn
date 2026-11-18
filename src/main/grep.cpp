@@ -132,7 +132,7 @@ static pcre_jit_stack *jit_stack = NULL; // allocated at first use.
 static int jit_stack_size(void)
 {
     int stmax = JIT_STACK_MAX;
-    char *p = getenv("R_PCRE_JIT_STACK_MAXSIZE");
+    const char *p = getenv("R_PCRE_JIT_STACK_MAXSIZE");
     if (p) {
 	char *endp;
 	double xdouble = R_strtod(p, &endp);
@@ -2963,7 +2963,7 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
     int *ovector = NULL, name_count, name_entry_size, capture_count;
 #endif
     bool use_UTF8 = false, use_WC = false;
-    char *name_table;
+    const char *name_table;
     const void *vmax;
     int info_code, ovector_size = 0; /* -Wall */
     GCStackRoot<StringVector> capture_names;

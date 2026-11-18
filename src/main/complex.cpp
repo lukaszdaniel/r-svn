@@ -1217,7 +1217,7 @@ static bool fxshft(int l2, double *zr, double *zi)
 	    if (hypot(tr - otr, ti - oti) >= hypot(*zr, *zi) * 0.5) {
 		pasd = false;
 	    }
-	    else if (! pasd) {
+	    else if (!pasd) {
 		pasd = true;
 	    }
 	    else {

@@ -4759,7 +4759,7 @@ static int SkipSpace(void)
 		c = R_EOF;
 		break;
 	    }
-	    if(! Ri18n_iswctype(wc, blankwct) ) break;
+	    if (!Ri18n_iswctype(wc, blankwct)) break;
 	    for (int i = 1; i < clen; i++) c = xxgetc();
 	}
 	return c;
@@ -4781,9 +4781,9 @@ static int SkipSpace(void)
 		break;
 	    }
 #if defined(USE_RI18N_FNS)
-	    if(! Ri18n_iswctype(wc, blankwct) ) break;
+	    if (!Ri18n_iswctype(wc, blankwct)) break;
 #else
-	    if(! iswblank(wc) ) break;
+	    if (!iswblank(wc)) break;
 #endif
 	    for (int i = 1; i < clen; i++) c = xxgetc();
 	}
@@ -6679,7 +6679,7 @@ static void growID( int target ){
 
 static bool checkForPlaceholder(SEXP placeholder, SEXP arg)
 {
-    if (! HavePlaceholder)
+    if (!HavePlaceholder)
     	return false;
     else if (arg == placeholder)
 	return true;

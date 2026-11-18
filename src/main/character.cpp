@@ -1394,7 +1394,7 @@ static R_INLINE int xtable_comp(const void *a, const void *b)
 
 static R_INLINE int xtable_key_comp(const void *a, const void *b)
 {
-    return *((wchar_t *)a) - ((xtable_t *)b)->c_old;
+    return *((const wchar_t *)a) - ((xtable_t *)b)->c_old;
 }
 
 #define ISORT(_base,_num,_TYPE,_comp)                          \

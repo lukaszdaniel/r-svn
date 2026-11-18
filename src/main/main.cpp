@@ -777,7 +777,7 @@ static void R_LoadProfile(FILE *fparg, SEXP env)
 
 int R_SignalHandlers = 1;  /* Exposed in R_interface.h */
 
-attribute_hidden void R::BindDomain(char *R_Home)
+attribute_hidden void R::BindDomain(const char *R_Home)
 {
 #ifdef ENABLE_NLS
     char *localedir = NULL;
@@ -785,7 +785,7 @@ attribute_hidden void R::BindDomain(char *R_Home)
     setlocale(LC_MESSAGES,"");
 # endif
     textdomain(PACKAGE);
-    char *p = getenv("R_TRANSLATIONS");
+    const char *p = getenv("R_TRANSLATIONS");
     if (p) Rasprintf_malloc(&localedir, "%s", p);
     else Rasprintf_malloc(&localedir, "%s/library/translations", R_Home);
     if (!localedir)
@@ -871,7 +871,7 @@ void setup_Rmainloop(void)
 
 #ifdef Win32
     {
-	char *p = getenv("_R_WIN_CHECK_INVALID_PARAMETERS_");
+	const char *p = getenv("_R_WIN_CHECK_INVALID_PARAMETERS_");
 	if (p && StringTrue(p))
 	    _set_invalid_parameter_handler(invalid_parameter_handler_abort);
 	else if (p && streql(p, "watson"))
@@ -927,7 +927,7 @@ void setup_Rmainloop(void)
 #ifdef Win32
     {
 	char allbuf[1000]; /* Windows' locales can be very long */
-	char *p, *lcall;
+	const char *p, *lcall;
 
 	p = getenv("LC_ALL");
 	if(p) {
@@ -1476,7 +1476,7 @@ attribute_hidden SEXP do_browser(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     /* trap non-interactive debugger invocation */
     if (!R_Interactive) {
-        char *p = getenv("_R_CHECK_BROWSER_NONINTERACTIVE_");
+        const char *p = getenv("_R_CHECK_BROWSER_NONINTERACTIVE_");
         if (p != NULL && StringTrue(p))
             error("%s", _("non-interactive browser() -- left over from debugging?"));
     }

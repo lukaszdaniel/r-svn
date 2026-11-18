@@ -1380,7 +1380,7 @@ attribute_hidden void R::R_init_jit_enabled(void)
     Evaluator::evaluate(Symbol::obtain(".ArgsEnv"), Environment::base());
 
     int val = 3; /* turn JIT on by default */
-    char *enable = getenv("R_ENABLE_JIT");
+    const char *enable = getenv("R_ENABLE_JIT");
     if (enable != NULL)
 	val = atoi(enable);
     if (val) {
@@ -1390,7 +1390,7 @@ attribute_hidden void R::R_init_jit_enabled(void)
     R_jit_enabled = val;
 
     if (R_compile_pkgs <= 0) {
-	char *compile = getenv("_R_COMPILE_PKGS_");
+	const char *compile = getenv("_R_COMPILE_PKGS_");
 	if (compile != NULL) {
 	    int val = atoi(compile);
 	    if (val > 0)
@@ -1401,7 +1401,7 @@ attribute_hidden void R::R_init_jit_enabled(void)
     }
 
     if (ByteCode::ByteCodeEnabled()) {
-	char *disable = getenv("R_DISABLE_BYTECODE");
+	const char *disable = getenv("R_DISABLE_BYTECODE");
 	if (disable != NULL) {
 	    int val = atoi(disable);
 	    ByteCode::disableByteCode(val > 0);
@@ -1417,7 +1417,7 @@ attribute_hidden void R::R_init_jit_enabled(void)
         5 ... (very) verbose report on modified constants
     */
     if (R_check_constants <= 1) {
-	char *check = getenv("R_CHECK_CONSTANTS");
+	const char *check = getenv("R_CHECK_CONSTANTS");
 	if (check != NULL)
 	    R_check_constants = atoi(check);
     }
@@ -1490,7 +1490,7 @@ static R_INLINE bool R_CheckJIT(SEXP fun)
 	int dflt = R_jit_enabled == 1 ?
 	    STRATEGY_NO_SMALL : STRATEGY_TOP_SMALL_MAYBE;
 	int val = dflt;
-	char *valstr = getenv("R_JIT_STRATEGY");
+	const char *valstr = getenv("R_JIT_STRATEGY");
 	if (valstr != NULL)
 	    val = atoi(valstr);
 	if (val < 0 || val > 4)
@@ -2603,7 +2603,7 @@ static R_INLINE bool asLogicalNoNA2(SEXP s, SEXP call)
     }
 
     if (cond == NA_LOGICAL) {
-	char *msg = len ? (isLogical(s) ?
+	const char *msg = len ? (isLogical(s) ?
 			   _("missing value where TRUE/FALSE needed") :
 			   _("argument is not interpretable as logical")) :
 	    _("argument is of length zero");
@@ -8855,7 +8855,7 @@ attribute_hidden SEXP do_bcversion(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 /* neither of these functions call R_ExpandFileName -- the caller
    should do that if it wants to */
-const char *R_CompiledFileName(char *fname, char *buf, size_t bsize)
+const char *R_CompiledFileName(const char *fname, char *buf, size_t bsize)
 {
     /* find the base name and the extension */
     const char *basename = Rf_strrchr_const(fname, FILESEP[0]);
@@ -8883,7 +8883,7 @@ const char *R_CompiledFileName(char *fname, char *buf, size_t bsize)
     }
 }
 
-FILE *R_OpenCompiledFile(char *fname, char *buf, size_t bsize)
+FILE *R_OpenCompiledFile(const char *fname, char *buf, size_t bsize)
 {
     const char *cname = R_CompiledFileName(fname, buf, bsize);
 

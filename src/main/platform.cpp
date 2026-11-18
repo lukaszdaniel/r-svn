@@ -2742,7 +2742,7 @@ attribute_hidden SEXP do_dircreate(SEXP call, SEXP op, SEXP args, SEXP env)
 	    struct stat sb;
 	    res = stat(dir, &sb);
 	    if (res == 0) {
-		if (! S_ISDIR (sb.st_mode)) {
+		if (!S_ISDIR (sb.st_mode)) {
 		    /* file already exists but is not a directory */
 		    res = -1;
 		    serrno = ENOTDIR;
