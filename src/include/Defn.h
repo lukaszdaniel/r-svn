@@ -2110,6 +2110,8 @@ size_t wcstoutf8(char *s, const wchar_t *wc, size_t n);
 
 const wchar_t *wtransChar(SEXP x); /* from sysutils.c */
 const char *reEnc3(const char *x, const char *fromcode, const char *tocode, int subst);
+const char *reEnc4(const char *x, size_t length, const char *fromcode,
+		      const char *tocode, int subst);
 
 #define mbs_init(x) memset(x, 0, sizeof(mbstate_t))
 // size_t Rf_mbrtowc(wchar_t *wc, const char *s, size_t n, mbstate_t *ps); // used in graphapp
