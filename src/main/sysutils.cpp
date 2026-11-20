@@ -461,28 +461,28 @@ attribute_hidden SEXP do_getenv(SEXP call, SEXP op, SEXP args, SEXP env)
 }
 
 #ifdef Win32
-static int Rwputenv(const wchar_t *nm, const wchar_t *val)
+static bool Rwputenv(const wchar_t *nm, const wchar_t *val)
 {
     wchar_t *buf;
     buf = (wchar_t *) malloc((wcslen(nm) + wcslen(val) + 2) * sizeof(wchar_t));
-    if(!buf) return 1;
+    if(!buf) return true;
     /* previously wsprintfW, which had a limit of 1024 chars */
     wcscpy(buf, nm); wcscat(buf, L"="); wcscat(buf, val);
-    if(_wputenv(buf)) return 1;
+    if(_wputenv(buf)) return true;
     /* no free here: storage remains in use */
-    return 0;
+    return false;
 }
 #elif !defined(HAVE_SETENV) && defined(HAVE_PUTENV)
-static int Rputenv(const char *nm, const char *val)
+static bool Rputenv(const char *nm, const char *val)
 {
     char *buf;
     size_t sz = (strlen(nm) + strlen(val) + 2) * sizeof(char);
     buf = (char *) malloc(sz);
-    if(!buf) return 1;
+    if(!buf) return true;
     snprintf(buf, sz, "%s=%s", nm, val);
-    if(putenv(buf)) return 1;
+    if(putenv(buf)) return true;
     /* no free here: storage remains in use */
-    return 0;
+    return false;
 }
 #endif
 
@@ -1725,7 +1725,7 @@ static void *latin1_obj = NULL, *utf8_obj=NULL, *ucsmb_obj=NULL,
 
 /* Translates string in "ans" to native encoding returning it in string
    buffer "cbuff". */
-static int translateToNative(const char *ans, R_StringBuffer *cbuff,
+static bool translateToNative(const char *ans, R_StringBuffer *cbuff,
 			     nttype_t ttype, int mustWork)
 {
     if (ttype == NT_NONE)
@@ -1841,13 +1841,13 @@ next_char:
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to native encoding"),
 		    err_buff);
-	    return 1;
+	    return true;
 	} else {
 	    R_FreeStringBuffer(cbuff);
 	    error(_("unable to translate '%s' to native encoding"), err_buff);
 	}
     }
-    return 0;
+    return false;
 }
 
 // @note Caller has to manage the R_alloc stack
@@ -1960,7 +1960,7 @@ static R_INLINE nttype_t needsTranslationUTF8(SEXP x)
 
 /* Translates string in "ans" to UTF-8 returning it in string
    buffer "cbuff". */
-static int translateToUTF8(const char *ans, R_StringBuffer *cbuff,
+static bool translateToUTF8(const char *ans, R_StringBuffer *cbuff,
 			     nttype_t ttype, int mustWork)
 {
     if (ttype == NT_NONE)
@@ -2031,13 +2031,13 @@ next_char:
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to UTF-8"),
 		    err_buff);
-	    return 1;
+	    return true;
 	} else {
 	    R_FreeStringBuffer(cbuff);
 	    error(_("unable to translate '%s' to UTF-8"), err_buff);
 	}
     }
-    return 0;
+    return false;
 }
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
@@ -2140,7 +2140,7 @@ static void *latin1_wobj = NULL, *utf8_wobj=NULL;
 /* This may return a R_alloc-ed result, so the caller has to manage the
    R_alloc stack */
 // @note Caller has to manage the R_alloc stack
-static int translateToWchar(const char *ans, R_StringBuffer *cbuff,
+static bool translateToWchar(const char *ans, R_StringBuffer *cbuff,
                             nttype_t ttype, int mustWork)
 {
     void * obj;
@@ -2229,14 +2229,14 @@ next_char:
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to a wide string"),
 	              err_buff);
-	    return 1;
+	    return true;
 	} else {
 	    R_FreeStringBuffer(cbuff);
 	    error(_("unable to translate '%s' to a wide string"),
 	          err_buff);
 	}
     }
-    return 0;
+    return false;
 }
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
@@ -2272,7 +2272,7 @@ const wchar_t *R::wtransChar2(SEXP x)
 	return wcopyAndFreeStringBuffer(&cbuff);
 }
 
-static int reEncodeIconv(const char *x, size_t length, R_StringBuffer *cbuff,
+static bool reEncodeIconv(const char *x, size_t length, R_StringBuffer *cbuff,
                          const char *fromcode, const char *tocode, int subst)
 {
     void *obj;
@@ -2282,7 +2282,7 @@ static int reEncodeIconv(const char *x, size_t length, R_StringBuffer *cbuff,
     bool fromWchar = streql(fromcode, TO_WCHAR);
 
     obj = Riconv_open(tocode, fromcode);
-    if(obj == (void *)(-1)) return 1;
+    if(obj == (void *)(-1)) return true;
     R_AllocStringBuffer(0, cbuff);
 top_of_loop:
     inbuf = x;
@@ -2347,34 +2347,34 @@ next_char:
     }
     Riconv_close(obj);
     *outbuf = '\0';
-    return 0;
+    return false;
 }
 
 #include <R_ext/GraphicsEngine.h>
 
 /* returns 1 when no conversion is needed and in case of error, 0 otherwise */
-static int reEncode(const char *x, R_StringBuffer *cbuff,
+static bool reEncode(const char *x, R_StringBuffer *cbuff,
                     cetype_t ce_in, cetype_t ce_out, int subst)
 {
     char *tocode = NULL, *fromcode = NULL;
 
     /* We can only encode from Symbol to UTF-8 */
     if(ce_in == ce_out || ce_out == CE_SYMBOL ||
-       ce_in == CE_ANY || ce_out == CE_ANY) return 1;
+       ce_in == CE_ANY || ce_out == CE_ANY) return true;
     if(ce_in == CE_SYMBOL) {
 	if(ce_out == CE_UTF8) {
 	    size_t nc = 3*strlen(x)+1; /* all in BMP */
 	    R_AllocStringBuffer(nc, cbuff);
 	    Rf_AdobeSymbol2utf8(cbuff->data, x, cbuff->bufsize, TRUE);
-	    return 0;
-	} else return 1;
+	    return false;
+	} else return true;
     }
 
-    if(strIsASCII(x)) return 1;
-    if(utf8locale && ce_in == CE_NATIVE && ce_out == CE_UTF8) return 1;
-    if(utf8locale && ce_out == CE_NATIVE && ce_in == CE_UTF8) return 1;
-    if(latin1locale && ce_in == CE_NATIVE && ce_out == CE_LATIN1) return 1;
-    if(latin1locale && ce_out == CE_NATIVE && ce_in == CE_LATIN1) return 1;
+    if(strIsASCII(x)) return true;
+    if(utf8locale && ce_in == CE_NATIVE && ce_out == CE_UTF8) return true;
+    if(utf8locale && ce_out == CE_NATIVE && ce_in == CE_UTF8) return true;
+    if(latin1locale && ce_in == CE_NATIVE && ce_out == CE_LATIN1) return true;
+    if(latin1locale && ce_out == CE_NATIVE && ce_in == CE_LATIN1) return true;
 
     switch(ce_in) {
     case CE_NATIVE: fromcode = (char*) ""; break;
@@ -2384,14 +2384,14 @@ static int reEncode(const char *x, R_StringBuffer *cbuff,
     case CE_LATIN1: fromcode = (char*) "latin1"; break;
 #endif
     case CE_UTF8:   fromcode = (char*) "UTF-8"; break;
-    default: return 1;
+    default: return true;
     }
 
     switch(ce_out) {
     case CE_NATIVE: tocode = (char*) ""; break;
     case CE_LATIN1: tocode = (char*) "latin1"; break; /* ?? CP1252 */
     case CE_UTF8:   tocode = (char*) "UTF-8"; break;
-    default: return 1;
+    default: return true;
     }
 
     return reEncodeIconv(x, strlen(x), cbuff, fromcode, tocode, subst);
