@@ -242,7 +242,6 @@ local({
 
 ## 'next' as a call argument in a byte-compiled while()/repeat loop jumps back
 ## by longjmp, which skipped every check for interrupts and time limits
-if (FALSE) { # disabled for now
 local({
     f <- compiler::cmpfun(function() {
         i <- 0L
@@ -254,7 +253,7 @@ local({
               identical(conditionMessage(E),
                         gettext("reached elapsed time limit", domain="R")))
 })
-}
+
 ## ran all 1e8 iterations without checking in R <= 4.6.2
 
 

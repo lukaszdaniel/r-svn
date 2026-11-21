@@ -38,6 +38,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include <cmath>
 #include <cerrno>
 #include <array>
@@ -5475,8 +5476,14 @@ static struct { void *addr; int argc; const char *instname; } opinfo[OPCOUNT];
     goto loop; \
     op_##name
 
-#define BEGIN_MACHINE NEXT(); init: { which = 0; loop: switch(which++)
-#define LASTOP } return R_NilValue
+#define BEGIN_MACHINE for (;;) {	\
+    try {				\
+	INITIALIZE_MACHINE();		\
+	NEXT();				\
+    init: {				\
+	which = 0;			\
+    loop: switch(which++)
+#define LASTOP } } if (ploc == nullptr) return R_NilValue; } catch (JMPException &e) { handle_loop_jump(e); } }
 #define INITIALIZE_MACHINE()			\
     do {					\
 	static bool s_loop_initialized = false;	\
@@ -5497,11 +5504,11 @@ typedef int BCODE;
 #define OP(name,argc) case name##_OP
 
 #ifdef BC_PROFILING
-#define BEGIN_MACHINE  for (;;) { R_BCpc = currentpc = pc; s_current_opcode = *pc; switch(*pc++)
+#define BEGIN_MACHINE  for (;;) { R_BCpc = currentpc = pc; s_current_opcode = *pc; try { switch(*pc++)
 #else
-#define BEGIN_MACHINE  for (;;) { R_BCpc = currentpc = pc; switch(*pc++)
+#define BEGIN_MACHINE  for (;;) { R_BCpc = currentpc = pc; try { switch(*pc++)
 #endif
-#define LASTOP  default: error("%s", _("bad opcode")); break; }
+#define LASTOP  default: error("%s", _("bad opcode")); break; } if (ploc == nullptr) return R_NilValue; } catch (JMPException &e) { handle_loop_jump(e); } }
 #define INITIALIZE_MACHINE()
 
 #define NEXT() continue
@@ -5584,19 +5591,6 @@ static R_INLINE SEXP BINDING_VALUE(SEXP loc)
    new variable is defined in an intervening frame. Some mechanism for
    invalidating the cache would be needed. This is certainly possible,
    but finding an efficient mechanism does not seem to be easy.   LT */
-
-/* Both mechanisms implemented here make use of the stack to hold
-   cache information.  This is not a problem except for "safe" for()
-   loops using the STARTLOOPCNTXT instruction to run the body in a
-   separate bcEval call.  Since this approach expects loop setup
-   information to be passed on the stack from the outer bcEval call to
-   an inner one the inner one cannot put things on the stack. For now,
-   bcEval takes an additional argument that disables the cache in
-   calls via STARTLOOPCNTXT for all "safe" loops. It would be better
-   to deal with this in some other way, for example by having a
-   specific STARTFORLOOPCNTXT instruction that deals with transferring
-   the information in some other way. For now disabling the cache is
-   an expedient solution. LT */
 
 #define USE_BINDING_CACHE
 # ifdef USE_BINDING_CACHE
@@ -6144,27 +6138,6 @@ static void bc_check_sigint(void)
 	    s_evalcount = 0;			\
 	}					\
     } while (0)
-
-static void loopWithContext(SEXP code, SEXP rho)
-{
-    RCNTXT cntxt(CTXT_LOOP, R_NilValue, rho, R_BaseEnv, R_NilValue, R_NilValue);
-
-    while (true)
-    {
-        try
-        {
-            ByteCode::interpret(code, rho, false);
-            break;
-        }
-        catch (JMPException &e)
-        {
-            if (e.context() != &cntxt)
-                throw;
-            if (e.mask() == CTXT_BREAK)
-                break;
-        }
-    }
-}
 
 static R_INLINE R_xlen_t bcStackIndex(R_bcstack_t *s)
 {
@@ -7152,6 +7125,38 @@ struct CXXR::bcEval_locals {
     BCODE *pc;
 };
 
+struct bcEval_loop_context {
+    std::unique_ptr<RCNTXT> context;
+    struct bcEval_locals locals;
+    struct bcEval_globals globals;
+    BCODE *break_pc;
+    bool is_for_loop;
+};
+
+struct bcEval_loop_context_stack {
+    std::vector<std::unique_ptr<bcEval_loop_context>> contexts;
+
+    bcEval_loop_context &push(const struct bcEval_locals &locals,
+                              BCODE *break_pc, bool is_for_loop, SEXP rho)
+    {
+        std::unique_ptr<bcEval_loop_context> frame(
+            new bcEval_loop_context);
+        frame->locals = locals;
+        frame->break_pc = break_pc;
+        frame->is_for_loop = is_for_loop;
+        frame->context.reset(new RCNTXT(CTXT_LOOP, R_NilValue, rho,
+                                        R_BaseEnv, R_NilValue, R_NilValue));
+        contexts.push_back(std::move(frame));
+        return *contexts.back();
+    }
+
+    ~bcEval_loop_context_stack()
+    {
+        while (!contexts.empty())
+            contexts.pop_back();
+    }
+};
+
 #define SAVE_BCEVAL_LOCALS(loc) do {		\
 	(loc)->body = body;			\
 	(loc)->rho = rho;			\
@@ -7328,17 +7333,50 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
   int which = 0;
 #endif
 
-  INITIALIZE_MACHINE();
-
-  locals = *ploc;
-
-  RESTORE_BCEVAL_LOCALS(&locals);
-
   currentpc = NULL;
   oldbcpc = R_BCpc;
 
   static int s_evalcount = 0;
-  BC_CHECK_SIGINT();
+  if (ploc != nullptr) {
+      locals = *ploc;
+      RESTORE_BCEVAL_LOCALS(&locals);
+      BC_CHECK_SIGINT();
+  }
+#ifndef THREADED_CODE
+  else
+      return R_NilValue;
+#endif
+
+  struct bcEval_loop_context_stack loop_contexts;
+  auto handle_loop_jump = [&](JMPException &e) {
+      size_t target = loop_contexts.contexts.size();
+      while (target > 0) {
+          --target;
+          if (loop_contexts.contexts[target]->context.get() == e.context())
+              break;
+      }
+      if (loop_contexts.contexts.empty() ||
+          loop_contexts.contexts[target]->context.get() != e.context())
+          throw;
+
+      while (loop_contexts.contexts.size() > target + 1)
+          loop_contexts.contexts.pop_back();
+
+      bcEval_loop_context &frame = *loop_contexts.contexts.back();
+      if (e.mask() != CTXT_NEXT && e.mask() != CTXT_BREAK)
+          throw;
+
+      restore_bcEval_globals(&frame.globals);
+      if (e.mask() == CTXT_NEXT) {
+          if (!frame.is_for_loop)
+              BC_CHECK_SIGINT();
+          RESTORE_BCEVAL_LOCALS(&frame.locals);
+      }
+      else {
+          frame.locals.pc = frame.break_pc;
+          RESTORE_BCEVAL_LOCALS(&frame.locals);
+      }
+  };
 
   BEGIN_MACHINE {
     OP(BCMISMATCH, 0): error("%s", _("byte code version mismatch"));
@@ -7375,15 +7413,41 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
     OP(PRINTVALUE, 0): PrintValue(BCNPOP()); NEXT();
     OP(STARTLOOPCNTXT, 2):
       {
-	SKIP_OP(); // skip dummy operand - needed to keep the same number (2) of arguments needed by STARTLOOPCNTXT
-	SEXP code = GETCONST(constants, GETOP());
-	loopWithContext(code, rho);
+	bool is_for_loop = GETOP();
+	int break_offset = GETOP();
+	BCODE *break_pc = codebase + break_offset;
+	struct bcEval_locals outer;
+	SAVE_BCEVAL_LOCALS(&outer);
+	bcEval_loop_context &frame =
+	    loop_contexts.push(outer, break_pc, is_for_loop, rho);
+	if (is_for_loop) {
+	    R_bcstack_t *oldtop = R_BCNodeStackTop;
+	    /* duplicate the for loop state data on the top of the stack */
+	    R_bcstack_t *loopdata = oldtop - FOR_LOOP_STATE_SIZE;
+	    BCNSTACKCHECK(FOR_LOOP_STATE_SIZE);
+	    for (int i = 0; i < FOR_LOOP_STATE_SIZE; i++)
+		ByteCode::s_nodestack->push_node(loopdata[i]);
+	    SET_FOR_LOOP_BCPROT_OFFSET(R_BCProtTop);
+	    INCLNK_stack(R_BCNodeStackTopSize);
+	}
+	save_bcEval_globals(&frame.globals);
 	NEXT();
+	/* context, offsets on stack, to be popped by ENDLOOPCNTXT */
       }
     OP(ENDLOOPCNTXT, 1):
       {
-	SKIP_OP(); // skip dummy operand - needed to keep the same number (1) of arguments needed by ENDLOOPCNTXT
-	return R_NilValue;
+	bool is_for_loop = GETOP();
+	bcEval_loop_context &frame = *loop_contexts.contexts.back();
+	restore_bcEval_globals(&frame.globals);
+	if (is_for_loop) {
+	    size_t offset = GET_FOR_LOOP_BCPROT_OFFSET();
+	    ByteCode::DECLNK_stack(offset);
+
+	    /* remove the duplicated for loop state data */
+	    CXXR_POP(FOR_LOOP_STATE_SIZE);
+	}
+	loop_contexts.contexts.pop_back();
+	NEXT();
       }
     OP(DOLOOPNEXT, 0):
       {
@@ -8460,7 +8524,6 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	  NEXT();
       }
     LASTOP;
-  }
   return R_NilValue;
 }
 
