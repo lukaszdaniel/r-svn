@@ -283,8 +283,8 @@ if (UTF8) {
                 stop(paste0(rep_len(0:9, 110), collapse=""), call.=call.)
             capt_err_msg(f())
         }
-        ## trailing newline adds 1
-        stopifnot(nchar(short_error(call.=FALSE)) == 101L)
+        ## trailing newline adds 1 byte
+        stopifnot(nchar(short_error(call.=FALSE), type="bytes") == 101L)
     }
 
     ## PrintGenericVector truncations
