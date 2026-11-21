@@ -7351,7 +7351,6 @@ static void inlineBytecodeClosureCall(SEXP call, SEXP fun, SEXP args,
     call_frame->call_context = &cntxt;
     INCREMENT_EVAL_DEPTH();
     Evaluator::enableResultPrinting(true);
-    R_Srcref = getAttrib(fun, R_SrcrefSymbol);
 
     struct bcEval_locals locals = bcode_setup_locals(BODY(fun), newrho,
                                                       useCache);
