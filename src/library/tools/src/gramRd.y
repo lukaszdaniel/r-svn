@@ -389,6 +389,7 @@ RLikeArg:	goRLike Arg			{ xxpopMode($1); $$ = $2; }
 
 RLikeArg2:	'{' goRLike2 ArgItems '}'	{ xxpopMode($2); $$ = $3; }
 	|	'{' goRLike2 '}'		{ xxpopMode($2); $$ = xxnewlist(NULL); }
+	|	'{' goRLike2 ArgItems error END_OF_INPUT { xxpopMode($2); $$ = $3; }
 
 VerbatimArg:	goVerbatim Arg		 	{ xxpopMode($1); $$ = $2; }
 
@@ -398,6 +399,7 @@ VerbatimArg1:	goVerbatim1 Arg			{ xxpopMode($1); $$ = $2; }
 
 VerbatimArg2:   '{' goVerbatim2 ArgItems '}'    { xxpopMode($2); $$ = $3; }
 	|	'{' goVerbatim2 '}'		{ xxpopMode($2); $$ = xxnewlist(NULL); }
+	|	'{' goVerbatim2 ArgItems error END_OF_INPUT { xxpopMode($2); $$ = $3; }
 
 IfDefTarget:	goLatexLike TEXT	{ xxpopMode($1); $$ = xxnewlist(PROTECT(xxtag($2, TEXT, &@$)));
 						  UNPROTECT(1); }
@@ -428,6 +430,7 @@ Arg:		'{' ArgItems  '}'		{ $$ = $2; }
 	|	'{' ArgItems error END_OF_INPUT { $$ = $2; }
 
 Option:		'[' Item ']'			{ $$ = $2; }	
+	|	'[' Item error END_OF_INPUT	{ $$ = $2; }
 
 %%
 
@@ -914,6 +917,7 @@ static int (*ptr_getc)(void);
 static std::vector<int> pushback(PUSHBACK_BUFSIZE);
 static size_t npush;
 static int macrolevel;
+static int macroline, macrobyte, macrorepeats;
 static int prevpos = 0;
 static int prevlines[PUSHBACK_BUFSIZE];
 static int prevcols[PUSHBACK_BUFSIZE];
@@ -946,6 +950,13 @@ static int xxgetc(void)
     	    	macrolevel++;
     	    	if (macrolevel > 1000) 
     	    	    error("%s", _("macros nested too deeply: infinite recursion?"));
+    	    	if (parseState.xxlineno != macroline || parseState.xxbyteno != macrobyte) {
+    	    	    macroline = parseState.xxlineno;
+    	    	    macrobyte = parseState.xxbyteno;
+    	    	    macrorepeats = 0;
+    	    	} else if (++macrorepeats > 1000) {
+    	    	    error("%s", _("macros nested too deeply: infinite recursion?"));
+    	    	}
     	    } else if (c == END_MACRO) macrolevel--;
     	} else  c = ptr_getc();
     } while (c == START_MACRO || c == END_MACRO);
@@ -1094,6 +1105,7 @@ static SEXP ParseRd(ParseStatus *status, SEXP srcfile, bool fragment, SEXP macro
     npush = 0;
     pushback.resize(PUSHBACK_BUFSIZE);
     macrolevel = 0;
+    macroline = macrobyte = macrorepeats = 0;
 
     parseState.xxmode = LATEXLIKE; 
     parseState.xxitemType = UNKNOWN;
@@ -1594,6 +1606,7 @@ static int mkText(int c)
     	    }
     	    xxungetc(lookahead);
     	    if (isalpha(lookahead)) goto stop;
+    	    break;
     	case ']':
     	    if (parseState.xxmode == INOPTION) goto stop;
             break;

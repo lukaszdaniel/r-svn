@@ -204,6 +204,13 @@ local({
 ## read freed memory (visible under ASan or valgrind) in R <= 4.6.2
 
 
+## parse_Rd() with a user macro whose expansion ends by calling itself -- PR#19348
+for (txt in c("\\newcommand{\\foo}{\\foo}\\foo", "\\newcommand{\\foo}{x\\foo}\\foo",
+              "\\newcommand{\\foo}{\\bar}\\newcommand{\\bar}{\\foo}\\foo"))
+    assertErrV(tools::parse_Rd(textConnection(txt), fragment = TRUE))
+## never returned in R <= 4.6.2
+
+
 ## gregexpr() with strings that cannot be converted to wide characters -- PR#19301
 local({
     n <- 30000 # 2n exceeds the default protect stack size
@@ -255,6 +262,24 @@ local({
 })
 
 ## ran all 1e8 iterations without checking in R <= 4.6.2
+
+
+## parse_Rd() with an unterminated \Sexpr{}, [option] or second verbatim argument -- PR#19346
+for (txt in c("\\Sexpr{x", "\\name{x}\n\\Sexpr{", "\\Sexpr[results=rd]{1 +",
+              "\\Sexpr[results=rd", "\\link[pkg", "\\eqn{a}{b", "\\figure{a}{b",
+              "\\name{x}\n\\description{Uses \\link[stats{lm} internally.}\n\\value{y}"))
+    assertWarnV(tools::parse_Rd(textConnection(txt),
+                                fragment = !startsWith(txt, "\\name")))
+## never returned (some cases using unbounded memory) in R <= 4.6.2
+
+
+## parse_Rd() with a backslash before a non-letter in an [option] -- PR#19346
+for (txt in c("\\link[=foo\\_bar]{x}", "\\link[a\\1]{x}"))
+    stopifnot(identical(paste(as.character(tools::parse_Rd(textConnection(txt),
+                                                           fragment = TRUE)),
+                              collapse = ""),
+                        paste0(txt, "\n")))
+## never returned in R <= 4.6.2
 
 
 ## invalid encodings in serialized data
@@ -332,6 +357,68 @@ stopifnot(length(u) == 97L, identical(nchar(u), c(p, 0:1, rep(1L, 94))),
           identical(unique(substring(v, 2L,n1)),
                     setEnc(strrep("\xe9", n), "latin1")))
 ## times were around 1 sec each, in R <= 4.6.2
+
+
+## gray() with zero-length alpha, as rgb(), hsv() and hcl() -- PR#19350
+stopifnot(identical(grey(0.5, numeric()), character()),
+          identical(grey(rep(0.5, 1e6), alpha = logical()), character()),
+          identical(grey(0.5, numeric()), rgb(0.5, 0.5, 0.5, numeric())),
+          identical(grey(c(0, 1), 0.5), c("#00000080", "#FFFFFF80")))
+## read past the empty alpha vector and seg.faulted in R <= 4.6.2
+
+
+## ppr() with a zero-length, negative or too large 'nterms' -- PR#19341
+local({
+    msg1 <- gettext("'nterms' must be a positive integer", domain = "R-stats")
+    msg2 <- gettext("'max.terms' must be at least 'nterms'", domain = "R-stats")
+    for(nt in list(NULL, integer(0), -1e6)) {
+        E <- tryCid(ppr(dist ~ speed, data = cars, nterms = nt, max.terms = 2))
+        stopifnot(inherits(E, "error"), identical(conditionMessage(E), msg1))
+    }
+    E <- tryCid(ppr(dist ~ speed, data = cars, nterms = 3, max.terms = 2))
+    stopifnot(inherits(E, "error"), identical(conditionMessage(E), msg2))
+    fit <- ppr(dist ~ speed, data = cars, nterms = 1, max.terms = 2)
+    stopifnot(fit$mu == 1, fit$ml == 2) # valid input unchanged
+})
+## Fortran read an empty 'nterms' as a scalar, and a negative one made it prune
+## terms past zero: both segfaulted; 'nterms > max.terms' gave a garbage fit;
+## in R <= 4.6.2
+
+
+## unserialize() of an attribute list with a non-symbol tag -- PR#19354
+s <- serialize(structure(1:4, dim = c(2L, 2L)), NULL, xdr = TRUE)
+tag <- c(as.raw(c(0,0,0,1, 0,4,0,9, 0,0,0,3)), charToRaw("dim"))
+i <- grepRaw(tag, s, fixed = TRUE)
+stopifnot(length(i) == 1L)
+for (newtag in list(as.raw(c(0,0,0,0xfe)),            # NULL
+                    as.raw(c(0,0,0,0x0d, 0,0,0,1, 0,0,0,7)))) # 7L
+    assertErrV(unserialize(c(s[seq_len(i - 1L)], newtag, s[-seq_len(i + 14L)])))
+s[i + 3L] <- as.raw(0xfe) # SYMSXP -> NILSXP, "dim" read as the value
+assertErrV(unserialize(s))
+## returned an object whose attributes() crashed R in R <= 4.6.2
+
+
+## unserialize() of a 'dim' inconsistent with the length -- PR#19354
+s <- serialize(structure(1:4, dim = c(2L, 2L)), NULL, xdr = TRUE)
+i <- grepRaw(as.raw(c(0,0,0,0x0d, 0,0,0,2, 0,0,0,2, 0,0,0,2)), s, fixed = TRUE)
+stopifnot(length(i) == 1L)
+for (d in list(c(3L, 2L), c(NA, 2L), c(-2L, -2L))) {
+    s[i + 8:15] <- writeBin(d, raw(), endian = "big")
+    assertErrV(unserialize(s))
+}
+## gave a matrix whose print() crashed R in R <= 4.6.2
+
+
+## unserialize() of a '...' list not ending in NULL -- PR#19354
+s <- serialize(1:10, NULL) # an ALTREP: (info, state, attributes)
+i <- grepRaw(as.raw(c(0,0,0,0xee)), s, fixed = TRUE)[1L]
+s[i + 3L] <- as.raw(0x11) # ALTREP_SXP -> DOTSXP with CDR the state
+assertErrV(unserialize(s))
+stopifnot(identical(unserialize(serialize(quote(f(x, y = 2)), NULL)),
+                    quote(f(x, y = 2))))
+x <- .Internal(wrap_meta(c(1L, 5L, 9L), 1L, TRUE)) # state is a dotted pair
+stopifnot(identical(unserialize(serialize(x, NULL)), x))
+## returned a dotted pair whose names() crashed R in R <= 4.6.2
 
 
 

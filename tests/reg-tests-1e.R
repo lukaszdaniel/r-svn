@@ -4492,6 +4492,21 @@ stopifnot(length(cl) == 1L,
 tools::assertWarning(contourLines(matrix(-1, 3, 3)), verbose = TRUE)
 
 
+## toupper(), encodeString() and strsplit(perl = TRUE) on long strings -- PR#19338
+x <- intToUtf8(rep(0xe9, 2e5)) # marked UTF-8 in any locale
+system.time(toupper(x))      # 1 s or so in R 4.6.2
+system.time(encodeString(x)) # ditto
+y <- strrep("a,", 2e5)
+system.time(sy <- strsplit(y, ",", perl = TRUE)) # ditto
+##  0.003 or so after fixing; were quadratic in the number of characters or pieces
+stopifnot(identical(sy, strsplit(y, ",", fixed = TRUE)))
+for (b in list(0xc3, c(0xe2, 0x82), c(0xf0, 0x9f, 0x98))) { # truncated: still invalid
+    s <- rawToChar(as.raw(c(0x61, b)))
+    Encoding(s) <- "UTF-8"
+    assertErrV(toupper(s))
+}
+
+
 ## as.environment(x), pos.to.env(x) for numeric 'x' (PR#19306)
 x <- c(-1L, -1L) # length(x) >= 2
 tools::assertError(as.environment(x)) # returned list
@@ -4506,6 +4521,18 @@ msg <- tryCmsg(socketSelect(list(s), timeout = 0))
 close(s)
 stopifnot(is.character(msg), !englishMsgs || grepl("not open", msg))
 ## used an uninitialized file descriptor, possibly segfaulting, in R <= 4.6.2
+
+
+## Serializing a wrapper around an ALTREP object incremented the wrapped
+## object's reference count for good, so after its data had been
+## accessed, later access signalled "REFCNT on locked WRAPPER data"
+x <- rnorm(100)
+y <- .Internal(wrap_meta(.Internal(wrap_meta(x, 0L, FALSE)), 0L, FALSE))
+s <- sum(y)
+z <- unserialize(serialize(y, NULL))
+stopifnot(identical(sum(y), s), identical(y * 2, x * 2),
+          identical(z, y))
+## failed in R 4.6.2
 
 
 ## as(object, name) for informally defined class(object)[1L],
@@ -4553,6 +4580,17 @@ for (y in c(-x, x))
               identical(s(  to = y, length.out = 1L, by = 0L), y))
 ## had some FALSE from computing -x[1L] - 1 and casting -x[2L] to int
 ## in R <= 4.6.2
+
+
+## bw.SJ() & co, with a small 'nb', for points 'nb' bins apart -- PR#19351
+local({
+    x <- rep(c(0.024, 1.024), 10)
+    cnt <- function(x, nb) stats:::bw_pair_cnts(x, nb, length(x) > nb/2)[[2]]
+    stopifnot(sum(cnt(x, 41L)) == choose(20, 2), # in C
+              sum(cnt(rep(x, 3), 41L)) == choose(60, 2), # binned in R
+              is.finite(bw.SJ(x, nb = 41)))
+})
+## wrote past the end of the counts (C) or dropped points (R), in R <= 4.6.2
 
 
 
