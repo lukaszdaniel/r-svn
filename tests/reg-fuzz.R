@@ -260,7 +260,6 @@ local({
               identical(conditionMessage(E),
                         gettext("reached elapsed time limit", domain="R")))
 })
-
 ## ran all 1e8 iterations without checking in R <= 4.6.2
 
 

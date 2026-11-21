@@ -797,7 +797,7 @@ static void R_InitProfiling(SEXP filename, bool append, double dinterval,
 # ifdef HAVE_PTHREAD
     R_profiled_thread = pthread_self();
 # else
-    error(_("profiling requires 'pthread' support"));
+    error("%s", _("profiling requires 'pthread' support"));
 # endif
 
 # if defined(__APPLE__)
@@ -7181,10 +7181,12 @@ struct CXXR::R_bcFrame {
     struct bcEval_globals globals;
     struct bcEval_locals locals;
     GCRoot<> promise;
+    RCNTXT *call_context;
 };
 
 #define BCFRAME_LOCALS() (&(R_BCFrame->locals))
 #define BCFRAME_GLOBALS() (&(R_BCFrame->globals))
+#define BCFRAME_CNTXT() (R_BCFrame->call_context)
 #define BCFRAME_PROMISE() (R_BCFrame->promise)
 #define SET_BCFRAME_PROMISE(val) (R_BCFrame->promise = (val))
 
@@ -7196,12 +7198,15 @@ static R_INLINE R_bcFrame_type *PUSH_BCFRAME()
     save_bcEval_globals(&(rec->globals));
     /* modify saved stack top to the value before pushing the frame */
     rec->globals.oldntop = oldtop; // must come after save_bcEval_globals!!
+    rec->call_context = nullptr;
     return rec;
 }
 
 static R_INLINE R_bcstack_t POP_BCFRAME()
 {
-    R_bcstack_t val = R_BCNodeStackTop[-1];
+    R_bcstack_t val = R_BCFrame->call_context != nullptr
+        ? BCFRAME_CNTXT()->returnValue
+        : R_BCNodeStackTop[-1];
     restore_bcEval_globals(BCFRAME_GLOBALS());
     return val;
 }
@@ -7298,6 +7303,96 @@ static R_INLINE void finish_force_promise(void)
 	NEXT();							\
     } while (0)
 
+static R_INLINE void finish_inline_closure_call(SEXP newrho, SEXP args,
+                                                SEXP call,
+                                                R_bcstack_t unboxed_val)
+{
+    if (unboxed_val.tag) {
+#ifdef ADJUST_ENVIR_REFCNTS
+        R_CleanupEnvir(newrho, R_NilValue);
+        unpromiseArgs(args);
+#endif
+        POP_CALL_FRAME(R_NilValue); /**** maybe unboxed version?*/
+        R_BCNodeStackTop[-1] = unboxed_val;
+    }
+    else {
+        SEXP value = unboxed_val.u.sxpval;
+#ifdef ADJUST_ENVIR_REFCNTS
+        bool is_getter_call =
+            (CADR(call) == R_TmpvalSymbol &&
+             !R_isReplaceSymbol(CAR(call)));
+        R_CleanupEnvir(newrho, value);
+        if (is_getter_call && MAYBE_REFERENCED(value))
+            value = shallow_duplicate(value);
+        unpromiseArgs(args);
+#endif
+#ifdef SUPPORT_TAILCALL
+        /**** this could try to stay in the same bcEval, but don't
+              bother for now */
+        value = handle_exec_continuation(value);
+#endif
+        POP_CALL_FRAME(value);
+    }
+}
+
+static void inlineBytecodeClosureCall(SEXP call, SEXP fun, SEXP args,
+                                      SEXP rho, bool useCache,
+                                      const struct bcEval_locals &caller)
+{
+    GCStackRoot<> newrho;
+    newrho = make_applyClosure_env(call, fun, args, rho, R_NilValue);
+
+    R_bcstack_t unboxed_val;
+    {
+    RCNTXT cntxt(CTXT_RETURN, call, newrho, rho, args, fun);
+    R_bcFrame_type *call_frame = PUSH_BCFRAME();
+    R_BCFrame = call_frame;
+    call_frame->locals = caller;
+    call_frame->call_context = &cntxt;
+    INCREMENT_EVAL_DEPTH();
+    Evaluator::enableResultPrinting(true);
+    R_Srcref = getAttrib(fun, R_SrcrefSymbol);
+
+    struct bcEval_locals locals = bcode_setup_locals(BODY(fun), newrho,
+                                                      useCache);
+    bool redo = false;
+    bool evaluate = true;
+    do
+    {
+        redo = false;
+        try
+        {
+            if (evaluate)
+            {
+                evaluate = false;
+                ByteCode::bcEval_loop(&locals);
+            }
+            R_Srcref = cntxt.srcref;
+            RCNTXT::maybeRunOnExit(&cntxt); // so that RCNTXT destructor doesn't run it
+            endcontext(&cntxt);
+        }
+        catch (JMPException &e)
+        {
+            if (e.context() != &cntxt)
+                throw;
+            // A forced-promise frame may still be active after unwinding.
+            R_BCFrame = call_frame;
+            redo = true;
+            cntxt.returnValue = SEXP_TO_STACKVAL(e.value());
+        }
+    } while (redo);
+
+    unboxed_val = POP_BCFRAME();
+    }
+
+    finish_inline_closure_call(newrho, args, call, unboxed_val);
+}
+
+#define INLINE_CLOSURE_CALL_OK(fun)					\
+    (!ByteCode::ByteCodeDisabled() && TYPEOF(BODY(fun)) == BCODESXP &&	\
+     R_BCVersionOK(BODY(fun)) && !RDEBUG(fun) && !RSTEP(fun) &&		\
+     !RDEBUG(rho) && R_GlobalContext->callflag != CTXT_GENERIC)
+
 SEXP ByteCode::interpret(SEXP body, SEXP rho, bool useCache)
 {
   /* check version and allow bytecode to be disabled for testing */
@@ -7320,13 +7415,14 @@ SEXP ByteCode::interpret(SEXP body, SEXP rho, bool useCache)
 
 SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 {
-  struct bcEval_locals locals;
-  SEXP body, rho;
-  R_bcconsts_t constants;
-  BCODE *pc, *codebase;
-  R_binding_cache_t vcache;
-  bool smallcache;
-  bool useCache;
+  struct bcEval_locals locals = { 0 };
+  SEXP body = R_NilValue, rho = R_NilValue;
+  R_bcconsts_t constants = R_NilValue;
+  BCODE *pc = nullptr;
+  BCODE *codebase = nullptr;
+  R_binding_cache_t vcache = nullptr;
+  bool smallcache = false;
+  bool useCache = false;
   BCODE *currentpc = NULL;
   void *oldbcpc = NULL;
 #ifndef BC_PROFILING
@@ -7386,8 +7482,13 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	  SEXP retvalue = GETSTACK(-1);
 	  return retvalue;
       }
-      else
+      else if (BCFRAME_CNTXT() != NULL) {
+          BCFRAME_CNTXT()->returnValue = R_BCNodeStackTop[-1];
+          R_BCpc = oldbcpc;
+          return R_NilValue;
+      } else {
 	  DO_GETVAR_FORCE_PROMISE_RETURN();
+      }
     OP(GOTO, 1):
       {
 	int label = GETOP();
@@ -7900,7 +8001,15 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	  break;
 	case CLOSXP:
 	  args = CLOSURE_CALL_FRAME_ARGS();
-	  value = applyClosure(call, fun, args, rho, R_NilValue, true);
+	  if (INLINE_CLOSURE_CALL_OK(fun)) {
+	      struct bcEval_locals caller;
+	      SAVE_BCEVAL_LOCALS(&caller);
+	      inlineBytecodeClosureCall(call, fun, args, rho, useCache, caller);
+	      NEXT();
+	      /* return cleanup is in DO_INLINE_CLOSURE_CALL_RETURN */
+	  }
+	  else
+	      value = applyClosure(call, fun, args, rho, R_NilValue, true);
 	  break;
 	default: error("%s", _("bad function"));
 	}
