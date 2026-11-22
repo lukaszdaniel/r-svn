@@ -513,14 +513,14 @@ attribute_hidden SEXP do_rep_len(SEXP call, SEXP op, SEXP args, SEXP rho)
  * -----  nt == length(times) ;  if (nt == 1)  'times' is *not* accessed  */
 static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 {
-    SEXP a;
+    GCStackRoot<> a;
     R_xlen_t lx = xlength(x);
     R_xlen_t i, j, k, k2, k3, sum;
 
     // faster code for common special case
     if (each == 1 && nt == 1) return rep3(x, lx, len);
 
-    PROTECT(a = allocVector(TYPEOF(x), len));
+    a = allocVector(TYPEOF(x), len);
 
 #define R4_SWITCH_LOOP(itimes)						\
     switch (TYPEOF(x)) {						\
@@ -530,7 +530,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    for(j = 0, sum = 0; j < each; j++) sum += (R_xlen_t) itimes[k++]; \
 	    for(k3 = 0; k3 < sum; k3++) {				\
 		LOGICAL(a)[k2++] = LOGICAL(x)[i];			\
-		if(k2 == len) goto done;				\
+		if(k2 == len) return a;					\
 	    }								\
 	}								\
 	break;								\
@@ -540,7 +540,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    for(j = 0, sum = 0; j < each; j++) sum += (R_xlen_t) itimes[k++]; \
 	    for(k3 = 0; k3 < sum; k3++) {				\
 		INTEGER(a)[k2++] = INTEGER(x)[i];			\
-		if(k2 == len) goto done;				\
+		if(k2 == len) return a;					\
 	    }								\
 	}								\
 	break;								\
@@ -550,7 +550,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    for(j = 0, sum = 0; j < each; j++) sum += (R_xlen_t) itimes[k++]; \
 	    for(k3 = 0; k3 < sum; k3++) {				\
 		REAL(a)[k2++] = REAL(x)[i];				\
-		if(k2 == len) goto done;				\
+		if(k2 == len) return a;					\
 	    }								\
 	}								\
 	break;								\
@@ -560,7 +560,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    for(j = 0, sum = 0; j < each; j++) sum += (R_xlen_t) itimes[k++]; \
 	    for(k3 = 0; k3 < sum; k3++) {				\
 		COMPLEX(a)[k2++] = COMPLEX(x)[i];			\
-		if(k2 == len) goto done;				\
+		if(k2 == len) return a;					\
 	    }								\
 	}								\
 	break;								\
@@ -570,7 +570,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    for(j = 0, sum = 0; j < each; j++) sum += (R_xlen_t) itimes[k++]; \
 	    for(k3 = 0; k3 < sum; k3++) {				\
 		SET_STRING_ELT(a, k2++, STRING_ELT(x, i));		\
-		if(k2 == len) goto done;				\
+		if(k2 == len) return a;					\
 	    }								\
 	}								\
 	break;								\
@@ -581,7 +581,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    SEXP elt = lazy_duplicate(VECTOR_ELT(x, i));		\
 	    for(k3 = 0; k3 < sum; k3++) {				\
 		SET_VECTOR_ELT(a, k2++, elt);				\
-		if(k2 == len) goto done;				\
+		if(k2 == len) return a;					\
 	    }								\
 	}								\
 	break;								\
@@ -592,7 +592,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    SEXP elt = lazy_duplicate(XVECTOR_ELT(x, i));		\
 	    for(k3 = 0; k3 < sum; k3++) {				\
 		SET_XVECTOR_ELT(a, k2++, elt);				\
-		if(k2 == len) goto done;				\
+		if(k2 == len) return a;					\
 	    }								\
 	}								\
 	break;								\
@@ -602,7 +602,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	    for(j = 0, sum = 0; j < each; j++) sum += (R_xlen_t) itimes[k++]; \
 	    for(k3 = 0; k3 < sum; k3++) {				\
 		RAW(a)[k2++] = RAW(x)[i];				\
-		if(k2 == len) goto done;				\
+		if(k2 == len) return a;					\
 	    }								\
 	}								\
 	break;								\
@@ -669,8 +669,7 @@ static SEXP rep4(SEXP x, SEXP times, R_xlen_t len, R_xlen_t each, R_xlen_t nt)
 	R4_SWITCH_LOOP(REAL(times))
 	else
 	    R4_SWITCH_LOOP(INTEGER(times))
-		done:
-	    UNPROTECT(1);
+
     return a;
 }
 #undef R4_SWITCH_LOOP
@@ -850,8 +849,9 @@ attribute_hidden SEXP do_rep(SEXP call, SEXP op, SEXP args_, SEXP rho)
  */
 #define FEPS 1e-10
 /* to match seq.default */
-attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
+attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args_, SEXP rho)
 {
+    GCStackRoot<> args(args_);
     SEXP ans = R_NilValue /* -Wall */, from, to, by, len, along;
     R_xlen_t i, lout = NA_INTEGER;
     bool One = (length(args) == 1); // *before* messing with args ..
@@ -869,12 +869,12 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	do_seq_formals = allocFormalsList6(install("from"), install("to"),
 					   install("by"), install("length.out"),
 					   install("along.with"), R_DotsSymbol);
-    PROTECT(args = matchArgs_NR(do_seq_formals, args, call));
+    args = matchArgs_NR(do_seq_formals, args, call);
 
-    from = CAR(args); args = CDR(args);
-    to   = CAR(args); args = CDR(args);
-    by   = CAR(args); args = CDR(args);
-    len  = CAR(args); args = CDR(args);
+    from = CAR(args); args = CDR(args.get());
+    to   = CAR(args); args = CDR(args.get());
+    by   = CAR(args); args = CDR(args.get());
+    len  = CAR(args); args = CDR(args.get());
     along= CAR(args);
     bool
 	miss_from = (from == R_MissingArg),
@@ -891,7 +891,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    ans = seq_colon(1.0, (double)lf, call);
 	else
 	    ans = allocVector(INTSXP, 0);
-	goto done;
+	return ans;
     }
     if(along != R_MissingArg) {
 	lout = xlength(along);
@@ -933,13 +933,13 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    double del = rto - rfrom;
 	    if(del == 0.0 && rto == 0.0) {
 		ans = to; // is *not* missing in this case
-		goto done;
+		return ans;
 	    }
 	    double rby = asReal(by);
 	    if((rby ==  1. && del > 0.) ||
 	       (rby == -1. && del < 0.)) { // --> treat as if missing (return integer)
 		ans = seq_colon(rfrom, rto, call);
-		goto done;
+		return ans;
 	    }
 	    bool finite_del = (R_FINITE(del) != 0);
 	    double n = (finite_del)
@@ -948,14 +948,14 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    if(!R_FINITE(n)) {
 		if(del == 0.0 && rby == 0.0) {
 		    ans = miss_from ? ScalarReal(rfrom) : from;
-		    goto done;
+		    return ans;
 		} else
 		    errorcall(call, "%s", _("invalid '(to - from)/by'"));
 	    }
 	    // inherited from seq.default() but "fudgy"
 	    if(finite_del && fabs(del)/fmax2(fabs(rto), fabs(rfrom)) < 100 * DBL_EPSILON) {
 		ans = miss_from ? ScalarReal(rfrom) : from;
-		goto done;
+		return ans;
 	    }
 #ifdef LONG_VECTOR_SUPPORT
 	    if(n > 100 * (double) INT_MAX)
@@ -1015,7 +1015,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	double del = rto - rfrom;
 	if(fabs(del) == n) {
 	    ans = seq_colon(rfrom, rto, call);
-	    goto done;
+	    return ans;
 	}
 	bool finite_del = 0; /* -Wall */
 	double rby = 0.0; /* -Wall */
@@ -1066,7 +1066,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	double n = (double)(lout - 1), rto = rfrom + n*rby;
 	if(fabs(rby) == 1.0 && fabs(rto - rfrom) == n) {
 	    ans = seq_colon(rfrom, rto, call);
-	    goto done;
+	    return ans;
 	}
 	// avoid undefined behaviour by testing range before converting.
 	if(rfrom <= INT_MAX && rfrom > INT_MIN &&
@@ -1091,7 +1091,7 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
 	double n = (double)(lout - 1), rfrom = rto - n*rby;
 	if(fabs(rby) == 1.0 && fabs(rto - rfrom) == n) {
 	    ans = seq_colon(rfrom, rto, call);
-	    goto done;
+	    return ans;
 	}
 	if(rfrom <= INT_MAX && rfrom > INT_MIN &&
 	   rto   <= INT_MAX && rto   > INT_MIN &&
@@ -1111,8 +1111,6 @@ attribute_hidden SEXP do_seq(SEXP call, SEXP op, SEXP args, SEXP rho)
     } else
 	errorcall(call, "%s", _("too many arguments"));
 
-done:
-    UNPROTECT(1);
     return ans;
 } // do_seq()
 

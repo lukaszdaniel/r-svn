@@ -1050,19 +1050,20 @@ static SEXP coerceVectorList(SEXP v, SEXPTYPE type)
 	PROTECT(rval = StringVector::create(n));
 	rval->maybeTraceMemory(v);
 	for (R_xlen_t i = 0; i < n;  i++) {
-	    if (isString(VECTOR_ELT(v, i)) && xlength(VECTOR_ELT(v, i)) == 1)
-		SET_STRING_ELT(rval, i, STRING_ELT(VECTOR_ELT(v, i), 0));
+	    SEXP elt = (TYPEOF(v) == EXPRSXP) ? XVECTOR_ELT(v, i) : VECTOR_ELT(v, i);
+	    if (isString(elt) && xlength(elt) == 1)
+		SET_STRING_ELT(rval, i, STRING_ELT(elt, 0));
 #if 0
 	    /* this will make as.character(list(s)) not backquote
 	     * non-syntactic name s. It is not entirely clear that
 	     * that is really desirable though....
 	     */
-	    else if (isSymbol(VECTOR_ELT(v, i)))
-		SET_STRING_ELT(rval, i, PRINTNAME(VECTOR_ELT(v, i)));
+	    else if (isSymbol(elt))
+		SET_STRING_ELT(rval, i, PRINTNAME(elt));
 #endif
 	    else
 		SET_STRING_ELT(rval, i,
-			       STRING_ELT(deparse1line_ex(VECTOR_ELT(v, i), false, NICE_NAMES),
+			       STRING_ELT(deparse1line_ex(elt, false, NICE_NAMES),
 					  0));
 	}
     }

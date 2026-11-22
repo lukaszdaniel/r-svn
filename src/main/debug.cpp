@@ -58,7 +58,7 @@ attribute_hidden SEXP do_debug(SEXP call, SEXP op, SEXP args, SEXP rho)
     }
     find_char_fun
 
-    if (!Rf_isFunction(CAR(args)))
+    if (!FunctionBase::isA(CAR(args)))
 	error("%s", _("argument must be a function"));
     switch(PRIMVAL(op)) {
     case 0: // debug()
@@ -86,7 +86,7 @@ attribute_hidden SEXP do_trace(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     find_char_fun
 
-    if (!Rf_isFunction(CAR(args)))
+    if (!FunctionBase::isA(CAR(args)))
 	    errorcall(call, _("'%s' argument must be a function"), "what");
 
     switch(PRIMVAL(op)) {
@@ -142,13 +142,12 @@ bool R::R_current_trace_state(void) { return GET_TRACE_STATE; }
 
 attribute_hidden SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP object;
     char buffer[21];
 
     checkArity(op, args);
     check1arg(args, call, "x");
 
-    object = CAR(args);
+    SEXP object = CAR(args);
     if (FunctionBase::isA(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
@@ -169,12 +168,10 @@ attribute_hidden SEXP do_tracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 
 attribute_hidden SEXP do_untracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
-    SEXP object;
-
     checkArity(op, args);
     check1arg(args, call, "x");
 
-    object=CAR(args);
+    SEXP object = CAR(args);
     if (FunctionBase::isA(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
@@ -260,7 +257,7 @@ void RObject::traceMemory(const RObject *src1, const RObject *src2,
 attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 {
 #ifdef R_MEMORY_PROFILING
-    SEXP object, previous, ans;
+    SEXP ans;
     char buffer[21];
     bool visible;
     CXXR::RAllocStack::Scope rscope;
@@ -272,15 +269,15 @@ attribute_hidden SEXP do_retracemem(SEXP call, SEXP op, SEXP args, SEXP rho)
 
     GCStackRoot<> argList;
     argList =  matchArgs_NR(do_retracemem_formals, args, call);
-    object = CAR(argList);
-    previous = CADR(argList.get());
+    SEXP object = CAR(argList);
+    SEXP previous = CADR(argList.get());
 
     if (object == R_MissingArg)
         object = R_NilValue;
     if (previous == R_MissingArg)
         previous = R_NilValue;
 
-    if (Rf_isFunction(object))
+    if (FunctionBase::isA(object))
 	errorcall(call, "%s", _("argument must not be a function"));
 
     if (!isNull(previous) && (!isString(previous) || LENGTH(previous) != 1))
