@@ -92,7 +92,7 @@ namespace CXXR
         // the environment env.  However, if called with a null
         // pointer for bcode, it initialises the opcode despatch
         // table(s).
-        static SEXP interpret(SEXP body, SEXP rho, bool useCache);
+        static SEXP interpret(SEXP body, SEXP rho);
 #define bcEval CXXR::ByteCode::interpret
 
         /** @brief Is an RObject a ByteCode?

@@ -1854,7 +1854,7 @@ static bool R_compileAndExecute(SEXP call, SEXP rho)
     R_jit_enabled = old_enabled;
 
     if (TYPEOF(code) == BCODESXP) {
-	bcEval(code, rho, true);
+	bcEval(code, rho);
 	ans = true;
     }
 
@@ -7121,7 +7121,6 @@ struct CXXR::bcEval_locals {
     // local variables
     R_binding_cache_t vcache;
     bool smallcache;
-    bool m_useCache;
     BCODE *pc;
 };
 
@@ -7161,7 +7160,6 @@ struct bcEval_loop_context_stack {
 	(loc)->body = body;			\
 	(loc)->rho = rho;			\
 	(loc)->vcache = vcache;			\
-	(loc)->m_useCache = useCache;		\
 	(loc)->smallcache = smallcache;		\
 	(loc)->pc = pc;				\
     } while (0)
@@ -7171,7 +7169,6 @@ struct bcEval_loop_context_stack {
 	codebase = BCCODE(body);		\
 	constants = BCCONSTS(body);		\
 	rho = (loc)->rho;			\
-	useCache = (loc)->m_useCache;		\
 	vcache = (loc)->vcache;			\
 	smallcache = (loc)->smallcache;		\
 	pc = (loc)->pc;				\
@@ -7181,7 +7178,7 @@ struct CXXR::R_bcFrame {
     struct bcEval_globals globals;
     struct bcEval_locals locals;
     GCRoot<> promise;
-    RCNTXT *call_context;
+    RCNTXT *call_context; // NULL means this is a promise frame
 };
 
 #define BCFRAME_LOCALS() (&(R_BCFrame->locals))
@@ -7220,13 +7217,12 @@ struct vcache_info
     }
 };
 
-static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
+static R_INLINE struct vcache_info setup_vcache(SEXP body)
 {
     R_binding_cache_t vcache = NULL;
     bool smallcache = true;
 
 #ifdef USE_BINDING_CACHE
-    if (useCache) {
     R_xlen_t n = BCCONSTS_LEN(body);
 # ifdef CACHE_MAX
     if (n > CACHE_MAX) {
@@ -7248,41 +7244,38 @@ static R_INLINE struct vcache_info setup_vcache(SEXP body, bool useCache)
     vcache = ListVector::create(n);
     BCNPUSH(vcache);
 # endif
-    }
-    else smallcache = false;
 #endif
     ByteCode::protectAll();
 
     return vcache_info(vcache, smallcache);
 }
 
-static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho, bool useCache)
+static R_INLINE struct bcEval_locals bcode_setup_locals(SEXP body, SEXP rho)
 {
     struct bcEval_locals loc;
     loc.body = body;
     loc.rho = rho;
     loc.pc = BCCODE(body) + 1; /* pop off version */
-    loc.m_useCache = useCache;
-    struct vcache_info vcinfo = setup_vcache(body, useCache);
+    struct vcache_info vcinfo = setup_vcache(body);
     loc.vcache = vcinfo.vcache;
     loc.smallcache = vcinfo.smallcache;
     R_BCbody = body; //**** move this somewhere else?
     return loc;
 }
 
-static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom, bool useCache)
+static R_INLINE struct bcEval_locals setup_bcframe_prom(SEXP prom)
 {
     SET_PRSEEN(prom, UNDER_EVALUATION);
     R_BCFrame = PUSH_BCFRAME();
     INCREMENT_EVAL_DEPTH();
     SET_BCFRAME_PROMISE(prom);
     Evaluator::enableResultPrinting(true);
-    return bcode_setup_locals(PRCODE(prom), PRENV(prom), useCache);
+    return bcode_setup_locals(PRCODE(prom), PRENV(prom));
 }
 
 #define START_BCFRAME_PROM(prom) do {				\
 	struct bcEval_locals locals =				\
-	    setup_bcframe_prom(prom, useCache);			\
+	    setup_bcframe_prom(prom);				\
 	SAVE_BCEVAL_LOCALS(BCFRAME_LOCALS());			\
 	RESTORE_BCEVAL_LOCALS(&locals);				\
     } while (0)
@@ -7304,8 +7297,7 @@ static R_INLINE void finish_force_promise(void)
     } while (0)
 
 static R_INLINE void finish_inline_closure_call(SEXP newrho, SEXP args,
-                                                SEXP call,
-                                                R_bcstack_t unboxed_val)
+                                                SEXP call, R_bcstack_t unboxed_val)
 {
     if (unboxed_val.tag) {
 #ifdef ADJUST_ENVIR_REFCNTS
@@ -7336,7 +7328,7 @@ static R_INLINE void finish_inline_closure_call(SEXP newrho, SEXP args,
 }
 
 static void inlineBytecodeClosureCall(SEXP call, SEXP fun, SEXP args,
-                                      SEXP rho, bool useCache,
+                                      SEXP rho,
                                       const struct bcEval_locals &caller)
 {
     GCStackRoot<> newrho;
@@ -7352,8 +7344,7 @@ static void inlineBytecodeClosureCall(SEXP call, SEXP fun, SEXP args,
     INCREMENT_EVAL_DEPTH();
     Evaluator::enableResultPrinting(true);
 
-    struct bcEval_locals locals = bcode_setup_locals(BODY(fun), newrho,
-                                                      useCache);
+    struct bcEval_locals locals = bcode_setup_locals(BODY(fun), newrho);
     bool redo = false;
     bool evaluate = true;
     do
@@ -7392,7 +7383,7 @@ static void inlineBytecodeClosureCall(SEXP call, SEXP fun, SEXP args,
      R_BCVersionOK(BODY(fun)) && !RDEBUG(fun) && !RSTEP(fun) &&		\
      !RDEBUG(rho) && R_GlobalContext->callflag != CTXT_GENERIC)
 
-SEXP ByteCode::interpret(SEXP body, SEXP rho, bool useCache)
+SEXP ByteCode::interpret(SEXP body, SEXP rho)
 {
   /* check version and allow bytecode to be disabled for testing */
   if (ByteCode::ByteCodeDisabled() || !R_BCVersionOK(body))
@@ -7406,7 +7397,7 @@ SEXP ByteCode::interpret(SEXP body, SEXP rho, bool useCache)
 
   R_BCFrame = NULL;
 
-  struct bcEval_locals locals = bcode_setup_locals(body, rho, useCache);
+  struct bcEval_locals locals = bcode_setup_locals(body, rho);
   SEXP value = bcEval_loop(&locals);
   restore_bcEval_globals(&globals);
   return value;
@@ -7421,7 +7412,6 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
   BCODE *codebase = nullptr;
   R_binding_cache_t vcache = nullptr;
   bool smallcache = false;
-  bool useCache = false;
   BCODE *currentpc = NULL;
   void *oldbcpc = NULL;
 #ifndef BC_PROFILING
@@ -7911,7 +7901,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	    break;
 	case BUILTINSXP:
 	    if (TYPEOF(code) == BCODESXP)
-		PUSHCALLARG(bcEval(code, rho, true));
+		PUSHCALLARG(bcEval(code, rho));
 	    else
 		/* uncommon but possible, the compiler may decide not
 		   to compile an argument expression */
@@ -8003,7 +7993,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	  if (INLINE_CLOSURE_CALL_OK(fun)) {
 	      struct bcEval_locals caller;
 	      SAVE_BCEVAL_LOCALS(&caller);
-	      inlineBytecodeClosureCall(call, fun, args, rho, useCache, caller);
+	      inlineBytecodeClosureCall(call, fun, args, rho, caller);
 	      NEXT();
 	      /* return cleanup is in DO_INLINE_CLOSURE_CALL_RETURN */
 	  }

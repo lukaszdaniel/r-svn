@@ -66,7 +66,7 @@ namespace CXXR
 
     RObject *ByteCode::evaluate(Environment *env)
     {
-        return interpret(this, env, true);
+        return interpret(this, env);
     }
 
     const char *ByteCode::typeName() const
