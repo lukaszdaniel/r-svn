@@ -7133,7 +7133,7 @@ struct bcEval_loop_context {
 };
 
 struct bcEval_loop_context_stack {
-    std::vector<std::unique_ptr<bcEval_loop_context>> contexts;
+    std::vector<std::unique_ptr<bcEval_loop_context>> m_contexts;
 
     bcEval_loop_context &push(const struct bcEval_locals &locals,
                               BCODE *break_pc, bool is_for_loop, SEXP rho)
@@ -7145,14 +7145,14 @@ struct bcEval_loop_context_stack {
         frame->is_for_loop = is_for_loop;
         frame->context.reset(new RCNTXT(CTXT_LOOP, R_NilValue, rho,
                                         R_BaseEnv, R_NilValue, R_NilValue));
-        contexts.push_back(std::move(frame));
-        return *contexts.back();
+        m_contexts.push_back(std::move(frame));
+        return *m_contexts.back();
     }
 
     ~bcEval_loop_context_stack()
     {
-        while (!contexts.empty())
-            contexts.pop_back();
+        while (!m_contexts.empty())
+            m_contexts.pop_back();
     }
 };
 
@@ -7434,20 +7434,20 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 
   struct bcEval_loop_context_stack loop_contexts;
   auto handle_loop_jump = [&](JMPException &e) {
-      size_t target = loop_contexts.contexts.size();
+      size_t target = loop_contexts.m_contexts.size();
       while (target > 0) {
           --target;
-          if (loop_contexts.contexts[target]->context.get() == e.context())
+          if (loop_contexts.m_contexts[target]->context.get() == e.context())
               break;
       }
-      if (loop_contexts.contexts.empty() ||
-          loop_contexts.contexts[target]->context.get() != e.context())
+      if (loop_contexts.m_contexts.empty() ||
+          loop_contexts.m_contexts[target]->context.get() != e.context())
           throw;
 
-      while (loop_contexts.contexts.size() > target + 1)
-          loop_contexts.contexts.pop_back();
+      while (loop_contexts.m_contexts.size() > target + 1)
+          loop_contexts.m_contexts.pop_back();
 
-      bcEval_loop_context &frame = *loop_contexts.contexts.back();
+      bcEval_loop_context &frame = *loop_contexts.m_contexts.back();
       if (e.mask() != CTXT_NEXT && e.mask() != CTXT_BREAK)
           throw;
 
@@ -7527,7 +7527,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
     OP(ENDLOOPCNTXT, 1):
       {
 	bool is_for_loop = GETOP();
-	bcEval_loop_context &frame = *loop_contexts.contexts.back();
+	bcEval_loop_context &frame = *loop_contexts.m_contexts.back();
 	restore_bcEval_globals(&frame.globals);
 	if (is_for_loop) {
 	    size_t offset = GET_FOR_LOOP_BCPROT_OFFSET();
@@ -7536,7 +7536,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	    /* remove the duplicated for loop state data */
 	    CXXR_POP(FOR_LOOP_STATE_SIZE);
 	}
-	loop_contexts.contexts.pop_back();
+	loop_contexts.m_contexts.pop_back();
 	NEXT();
       }
     OP(DOLOOPNEXT, 0):
