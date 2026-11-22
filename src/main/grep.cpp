@@ -183,18 +183,16 @@ NORET static void reg_report(int rc, regex_t *reg, const char *pat)
 static SEXP mkCharWLenASCII(const wchar_t *wc, int nc, bool maybe_ascii)
 {
     if (maybe_ascii) {
-	char *xi = R_Calloc(nc, char);
+	CXXR::RAllocStack::Vector<char> xi(nc);
 	for(int i = 0; i < nc ; i++) {
 	    unsigned int u = (unsigned int) wc[i];
 	    if (u > 127) {
-		R_Free(xi);
 		return mkCharWLenASCII(wc, nc, FALSE);
 	    }
 	    xi[i] = (char) u;
 	}
-	String *ans = String::obtain(xi, nc, CE_UTF8);
-	R_Free(xi);
-	return ans;
+
+	return String::obtain(xi.data(), nc, CE_UTF8);
     }
 
     /* possibly not ASCII */
@@ -208,11 +206,9 @@ static SEXP mkCharWLenASCII(const wchar_t *wc, int nc, bool maybe_ascii)
     nb = wcstoutf8(NULL, wc, (size_t)INT_MAX+2);
     if (nb-1 > INT_MAX)
 	error("%s", _("R character strings are limited to 2^31-1 bytes"));
-    char *xi = R_Calloc(nb, char);
-    nb = wcstoutf8(xi, wc, nb);
-    String *ans = String::obtain(xi, int(nb-1), CE_UTF8);
-    R_Free(xi);
-    return ans;
+    CXXR::RAllocStack::Vector<char> xi(nb);
+    nb = wcstoutf8(xi.data(), wc, nb);
+    return String::obtain(xi.data(), int(nb-1), CE_UTF8);
 }
 
 static SEXP markBytesOld(SEXP x, bool useBytes, bool haveBytesInput)
@@ -883,12 +879,12 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		    int rc;
 #ifdef HAVE_PCRE2
 		    while((rc = pcre2_match(re, (PCRE2_SPTR) bufp,
-		                            buflen - (size_t)(bufp - buf),
+		                            PCRE2_ZERO_TERMINATED,
 					    0, eflag, mdata, mcontext)) >= 0) {
 			ovector = pcre2_get_ovector_pointer(mdata);
 #else
 		    while((rc = pcre_exec(re_pcre, re_pe, bufp,
-					  (int) (buflen - (size_t)(bufp - buf)),
+					  (int) strlen(bufp),
 					  0, 0, ovector, ovecsize)) >= 0) {
 #endif
 			/* Empty matches get the next char, so move by one. */
@@ -913,11 +909,11 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		for (j = 0; j < ntok; j++) {
 #ifdef HAVE_PCRE2
 		    int rc = pcre2_match(re, (PCRE2_SPTR) bufp,
-				       buflen - (size_t)(bufp - buf),
+				       PCRE2_ZERO_TERMINATED,
 		                       0, eflag, mdata, mcontext);
 #else
 		    int rc = pcre_exec(re_pcre, re_pe, bufp,
-				       (int) (buflen - (size_t)(bufp - buf)), 0, 0,
+				       (int) strlen(bufp), 0, 0,
 				       ovector, ovecsize);
 #endif
 		    R_pcre_exec_error(rc, i);
@@ -3303,7 +3299,6 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
     bool use_WC = false;
     const char *s, *t;
     const wchar_t *ws, *wt;
-    const void *vmax = NULL;
 
     regex_t reg;
     size_t nmatch;
@@ -3390,7 +3385,7 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		      ScalarInteger(NA_INTEGER));
 	    SET_VECTOR_ELT(ans, i, matchpos);
 	} else {
-	    vmax = vmaxget();
+	    CXXR::RAllocStack::Scope rscope;
 	    if(useBytes)
 		rc = tre_regexecb(&reg, CHAR(STRING_ELT(text, i)),
 				  nmatch, pmatch, 0);
@@ -3400,7 +3395,6 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 		    error(_("input string %lld is invalid in this locale"),
 		          (long long)i + 1);
 		rc = tre_regwexec(&reg, wt, nmatch, pmatch, 0);
-		vmaxset(vmax);
 	    } else {
 		t = translateCharFP2(STRING_ELT(text, i));
 		if (!t || (mbcslocale && !mbcsValid(t)))
@@ -3408,7 +3402,6 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 			  (long long)i + 1);
 		rc = tre_regexec(&reg, t,
 				 nmatch, pmatch, 0);
-		vmaxset(vmax);
 	    }
 	    if(rc == REG_OK) {
 		matchpos = IntVector::create(nmatch);
