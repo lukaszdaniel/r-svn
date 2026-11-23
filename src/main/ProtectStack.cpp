@@ -51,7 +51,11 @@ namespace CXXR
         const auto &Reprotectptr = R_Reprotect;
     } // namespace ForceNonInline
 
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+    std::vector<std::pair<RObject *, RCNTXT *>> ProtectStack::s_stack;
+#else
     std::vector<SEXP> ProtectStack::s_stack;
+#endif
     size_t ProtectStack::s_reserved_capacity = 0;
     ProtectStack::Scope *ProtectStack::s_innermost_scope = nullptr;
 
@@ -85,7 +89,11 @@ namespace CXXR
     {
         auto it = std::find_if(ProtectStack::s_stack.rbegin(),
             ProtectStack::s_stack.rend(),
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+            [&](const auto &entry) { return entry.first == node; });
+#else
             [&](SEXP q) { return q == node; });
+#endif
         if (it == ProtectStack::s_stack.rend())
             return std::pair(false, 0);
 
@@ -147,7 +155,11 @@ namespace CXXR
         if (size() + PP_REDZONE_SIZE >= reservedCapacity())
             R_signal_protect_error();
 
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+        s_stack.push_back(std::make_pair(s, R_GlobalContext));
+#else
         s_stack.push_back(s);
+#endif
         return s_stack.size() - 1;
     }
 
@@ -164,6 +176,15 @@ namespace CXXR
             throw std::logic_error("ProtectStack::unprotect: too many unprotects in this scope.");
 #endif
 
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+        for (unsigned int i = 0; i < count; ++i)
+        {
+            if (s_stack[sz - 1 - i].second != R_GlobalContext)
+            {
+                throw std::logic_error("ProtectStack::unprotect: not in same context as the corresponding call of protect().");
+            }
+        }
+#endif
         s_stack.resize(sz - count);
     }
 
@@ -172,8 +193,13 @@ namespace CXXR
     void ProtectStack::unprotectPtr(SEXP s)
     {
         R_CHECK_THREAD;
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+        auto rit = std::find_if(s_stack.rbegin(), s_stack.rend(),
+            [&](const auto &entry) { return s == entry.first; });
+#else
         auto rit = std::find_if(s_stack.rbegin(), s_stack.rend(),
             [&](SEXP q) { return s == q; });
+#endif
         if (rit == s_stack.rend())
             throw std::invalid_argument("ProtectStack::unprotectPtr: pointer not found.");
 
@@ -183,6 +209,11 @@ namespace CXXR
         if (s_innermost_scope &&
             static_cast<std::size_t>(it - s_stack.begin()) < s_innermost_scope->startSize())
             throw std::logic_error("ProtectStack::unprotectPtr: pointer protected outside this scope.");
+#endif
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+        const auto index = static_cast<std::size_t>(it - s_stack.begin());
+        if (s_stack[index].second != R_GlobalContext)
+            throw std::logic_error("ProtectStack::unprotectPtr: not in same context as the corresponding call of protect().");
 #endif
         s_stack.erase(it);
     }
@@ -204,14 +235,25 @@ namespace CXXR
         if (s_innermost_scope && i < s_innermost_scope->startSize())
             throw std::logic_error("ProtectStack::reprotect: pointer protected outside this scope.");
 #endif
+
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+        if (s_stack[i].second != R_GlobalContext)
+            throw std::logic_error("ProtectStack::reprotect: not in same context as the corresponding call of protect().");
+        s_stack[i] = std::make_pair(s, R_GlobalContext);
+#else
         s_stack[i] = s;
+#endif
     }
 
     void ProtectStack::visitRoots(GCNode::const_visitor *v)
     {
         for (auto &el : s_stack)
         {
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+            if (el.first != R_NilValue) (*v)(el.first);
+#else
             if (el != R_NilValue) (*v)(el);
+#endif
         }
     }
 } // namespace CXXR

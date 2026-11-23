@@ -1662,7 +1662,11 @@ SEXP R_CollectFromIndex(PROTECT_INDEX i)
     res = ListVector::create(top - i);
     while (i < top)
     {
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+	SET_VECTOR_ELT(res, j++, R_PPStack[--top].first);
+#else
 	SET_VECTOR_ELT(res, j++, R_PPStack[--top]);
+#endif
     }
     ProtectStack::restoreSize(top); /* this includes the protect we used above */
     return res;

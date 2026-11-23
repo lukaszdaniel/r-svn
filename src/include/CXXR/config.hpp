@@ -71,6 +71,13 @@
  */
 // #define NDEBUG
 
+/** @def CXXR_CHECK_PROTECT_CONTEXT_MATCH
+ *
+ * Record the evaluation context for each pointer protection stack entry
+ * and check that it is removed in the same context.
+ */
+// #define CXXR_CHECK_PROTECT_CONTEXT_MATCH
+
 
 /* PROVENANCE_TRACKING is *not yet* controlled by the
  * --enable-provenance-tracking option to configure, and will be

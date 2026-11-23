@@ -39,7 +39,11 @@
 #include <cstddef>
 #include <utility>
 #include <vector>
+#include <CXXR/config.hpp>
 #include <CXXR/NodeStack.hpp>
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+#include <CXXR/Evaluator.hpp>
+#endif
 
 namespace CXXR
 {
@@ -206,7 +210,11 @@ namespace CXXR
         static void initialize(std::size_t initial_capacity = 50000);
 
     private:
+#ifdef CXXR_CHECK_PROTECT_CONTEXT_MATCH
+        static std::vector<std::pair<RObject *, Evaluator::RContext *>> s_stack;
+#else
         static std::vector<RObject *> s_stack;
+#endif
         static std::size_t s_reserved_capacity;
 
 #define R_PPStack CXXR::ProtectStack::s_stack
