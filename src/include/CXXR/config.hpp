@@ -99,6 +99,36 @@
  */
 // #define RARE_GC
 
+/** @def CXXR_USE_SKEW_HEAP
+ *
+ * Use a skew heap for CXXR::CellPool free-cell management.
+ */
+// #define CXXR_USE_SKEW_HEAP
+
+/** @def DEBUG_RELEASE_MEM
+ *
+ * Enable diagnostic logging for CXXR memory release operations.
+ */
+// #define DEBUG_RELEASE_MEM
+
+/** @def EXPEL_OLD_TO_NEW
+ *
+ * Enable the experimental old-to-new-object write barrier check.
+ */
+// #define EXPEL_OLD_TO_NEW
+
+/** @def GC_TORTURE
+ *
+ * Enable additional garbage-collector stress checks.
+ */
+// #define GC_TORTURE
+
+/** @def NO_CELLPOOLS
+ *
+ * Disable CXXR cell pools and allocate nodes through the memory bank.
+ */
+// #define NO_CELLPOOLS
+
 
 #ifdef __GNUC__
 #  ifdef __i386__
