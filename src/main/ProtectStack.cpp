@@ -31,6 +31,12 @@
 #include <algorithm>
 #include <stdexcept>
 #include <CXXR/ProtectStack.hpp>
+#include <CXXR/RContext.hpp>
+#include <Localization.h>
+#include <R_ext/Error.h>
+#include <Defn.h> // for R_CHECK_THREAD
+
+#define PP_REDZONE_SIZE 1000L
 
 namespace CXXR
 {
@@ -63,8 +69,9 @@ namespace CXXR
         }
         s_initialized = true;
 
-        s_stack.reserve(initial_capacity);
-        s_reserved_capacity = initial_capacity;
+        // ProtectStack plus a red zone to avoid stack overflow
+        s_stack.reserve(initial_capacity + PP_REDZONE_SIZE);
+        s_reserved_capacity = initial_capacity + PP_REDZONE_SIZE;
     }
 
     void ProtectStack::restoreSize(size_t new_size)
@@ -84,6 +91,123 @@ namespace CXXR
 
         unsigned int index = R_PPStackTop - 1 - (it - ProtectStack::s_stack.rbegin());
         return std::pair(true, index);
+    }
+
+    /* "protect" push a single argument onto R_PPStack */
+
+    /* In handling a stack overflow we have to be careful not to use
+       PROTECT. error("protect(): stack overflow") would call deparse1,
+       which uses PROTECT and segfaults.*/
+
+    /* However, the traceback creation in the normal error handler also
+       does a PROTECT, as does the jumping code, at least if there are
+       cleanup expressions to handle on the way out.  So for the moment
+       we'll allocate a slightly larger PP stack and only enable the added
+       red zone during handling of a stack overflow error.  LT */
+
+    NORET void ProtectStack::R_signal_protect_error(void)
+    {
+        size_t oldpps = size();
+        const size_t R_RealPPStackSize = reservedCapacity();
+
+        RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+            R_NilValue, R_NilValue);
+
+        try {
+        /* condition is pre-allocated and protected with R_PreserveObject */
+            SEXP cond = R::R_getProtectStackOverflowError();
+
+            if (size() < R_RealPPStackSize) {
+                s_stack.resize(R_RealPPStackSize);
+                /* allow calling handlers */
+                R::R_signalErrorCondition(cond, R_NilValue);
+            }
+
+            /* calling handlers at this point might produce a C stack
+               overflow/SEGFAULT so treat them as failed and skip them */
+            R::R_signalErrorConditionEx(cond, R_NilValue, TRUE);
+        }
+        catch (...) {
+            s_stack.resize(oldpps);
+            throw;
+        }
+        endcontext(&cntxt); /* not reached */
+    }
+
+    NORET void ProtectStack::R_signal_unprotect_error(void)
+    {
+        error(n_("unprotect(): only %td protected item",
+            "unprotect(): only %td protected items", R_PPStackTop),
+            R_PPStackTop);
+    }
+
+    unsigned int ProtectStack::protect_(SEXP s)
+    {
+        R_CHECK_THREAD;
+        if (size() + PP_REDZONE_SIZE >= reservedCapacity())
+            R_signal_protect_error();
+
+        s_stack.push_back(s);
+        return R_PPStackTop - 1;
+    }
+
+        /* "unprotect" pop argument list from top of R_PPStack */
+
+    void ProtectStack::unprotect_(unsigned int l)
+    {
+        R_CHECK_THREAD;
+        if (R_PPStackTop < l)
+            R_signal_unprotect_error();
+#ifndef NDEBUG
+        size_t sz = s_stack.size();
+        if (s_innermost_scope && sz - l < s_innermost_scope->startSize())
+            throw std::logic_error("ProtectStack::unprotect: too many unprotects in this scope.");
+#endif
+
+        while (l--)
+        {
+            s_stack.pop_back();
+        }
+    }
+
+    /* "Rf_unprotect_ptr" remove pointer from somewhere in R_PPStack */
+
+    void ProtectStack::unprotectPtr(SEXP s)
+    {
+        R_CHECK_THREAD;
+        auto rit = std::find_if(s_stack.rbegin(), s_stack.rend(),
+            [&](SEXP q) { return s == q; });
+        if (rit == s_stack.rend())
+            throw std::invalid_argument("ProtectStack::unprotectPtr: pointer not found.");
+
+        // See Josuttis p.267 for the need for -1.
+        auto it = rit.base() - 1;
+#ifndef NDEBUG
+        if (s_innermost_scope &&
+            static_cast<std::size_t>(it - s_stack.begin()) < s_innermost_scope->startSize())
+            throw std::logic_error("ProtectStack::unprotectPtr: pointer protected outside this scope.");
+#endif
+        s_stack.erase(it);
+    }
+
+    NORET void ProtectStack::R_signal_reprotect_error(PROTECT_INDEX i)
+    {
+        error(n_("R_Reprotect: only %td protected item, can't reprotect index %d",
+            "R_Reprotect: only %td protected items, can't reprotect index %d",
+            R_PPStackTop),
+            R_PPStackTop, i);
+    }
+
+    void ProtectStack::reprotect(SEXP s, PROTECT_INDEX i)
+    {
+        R_CHECK_THREAD;
+        if (i >= R_PPStackTop)
+            R_signal_reprotect_error(i);
+#ifndef NDEBUG
+        if (s_innermost_scope && i < s_innermost_scope->startSize())
+            throw std::logic_error("ProtectStack::reprotect: pointer protected outside this scope.");
+#endif
+        R_PPStack[i] = s;
     }
 } // namespace CXXR
 
