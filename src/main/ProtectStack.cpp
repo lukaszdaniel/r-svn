@@ -148,26 +148,23 @@ namespace CXXR
             R_signal_protect_error();
 
         s_stack.push_back(s);
-        return R_PPStackTop - 1;
+        return s_stack.size() - 1;
     }
 
         /* "unprotect" pop argument list from top of R_PPStack */
 
-    void ProtectStack::unprotect_(unsigned int l)
+    void ProtectStack::unprotect_(unsigned int count)
     {
         R_CHECK_THREAD;
-        if (R_PPStackTop < l)
+        size_t sz = s_stack.size();
+        if (sz < count)
             R_signal_unprotect_error();
 #ifndef NDEBUG
-        size_t sz = s_stack.size();
-        if (s_innermost_scope && sz - l < s_innermost_scope->startSize())
+        if (s_innermost_scope && sz - count < s_innermost_scope->startSize())
             throw std::logic_error("ProtectStack::unprotect: too many unprotects in this scope.");
 #endif
 
-        while (l--)
-        {
-            s_stack.pop_back();
-        }
+        s_stack.resize(sz - count);
     }
 
     /* "Rf_unprotect_ptr" remove pointer from somewhere in R_PPStack */
@@ -201,13 +198,21 @@ namespace CXXR
     void ProtectStack::reprotect(SEXP s, PROTECT_INDEX i)
     {
         R_CHECK_THREAD;
-        if (i >= R_PPStackTop)
+        if (i >= s_stack.size())
             R_signal_reprotect_error(i);
 #ifndef NDEBUG
         if (s_innermost_scope && i < s_innermost_scope->startSize())
             throw std::logic_error("ProtectStack::reprotect: pointer protected outside this scope.");
 #endif
-        R_PPStack[i] = s;
+        s_stack[i] = s;
+    }
+
+    void ProtectStack::visitRoots(GCNode::const_visitor *v)
+    {
+        for (auto &el : s_stack)
+        {
+            if (el != R_NilValue) (*v)(el);
+        }
     }
 } // namespace CXXR
 

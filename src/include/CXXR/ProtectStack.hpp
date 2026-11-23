@@ -201,13 +201,7 @@ namespace CXXR
          *
          * @param v Pointer to the const_visitor object.
          */
-        static void visitRoots(GCNode::const_visitor *v)
-        {
-            for (auto &el : s_stack)
-            {
-                if (el != R_NilValue) (*v)(el);
-            }
-        }
+        static void visitRoots(GCNode::const_visitor *v);
 
         static void initialize(std::size_t initial_capacity = 50000);
 
