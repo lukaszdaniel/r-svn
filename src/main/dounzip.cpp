@@ -323,13 +323,12 @@ static int zipunzip(const char *zipname, const char *dest, int nfiles, const cha
     unzFile uf;
     GCStackRoot<> names;
     names = *pnames;
-    RCNTXT cntxt;
 
     uf = unzOpen64(zipname);
     if (!uf) return 1;
     /* extract_one() raises an R error when an output file cannot be opened.
        => make sure we unwind at unzClose() below and don't leak with this context: */
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     try {
     if (nfiles == 0) { /* all files */
@@ -383,8 +382,7 @@ static SEXP ziplist(const char *zipname)
     /* allocVector() below raises an R error when the entry count read
        from the central directory is not a usable length.
        => open context, also covering explicit errors here. */
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     try {
     unz_global_info64 gi;

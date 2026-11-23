@@ -1657,11 +1657,10 @@ attribute_hidden SEXP do_memoryprofile(SEXP call, SEXP op, SEXP args, SEXP env)
 
 NORET void ProtectStack::R_signal_protect_error(void)
 {
-    RCNTXT cntxt;
     size_t oldpps = size();
     const size_t R_RealPPStackSize = reservedCapacity();
 
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
         R_NilValue, R_NilValue);
 
     try {

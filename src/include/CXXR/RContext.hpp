@@ -148,8 +148,38 @@ namespace CXXR
 #define CTXT_BUILTIN RCNTXT::Type::BUILTIN
 #define CTXT_UNWIND RCNTXT::Type::UNWIND
 
+        /** @brief Initialize a context with default top-level state.
+         *
+         * This constructor initializes the context fields but does not
+         * add the context to the current Evaluator's context chain.
+         */
         RContext();
+
+        /** @brief Create and activate a context.
+         *
+         * The new context is initialized from the supplied call and
+         * environment information, then added to the current Evaluator's
+         * context chain. Its destructor removes it from that chain and
+         * restores the saved evaluator state.
+         *
+         * @param flags The type of context being created.
+         * @param syscall The R call associated with the context, or
+         *        R_NilValue if there is no associated call.
+         * @param env The environment associated with the context.
+         * @param sysp The parent environment of the context.
+         * @param promargs The promises supplied to the called closure,
+         *        or R_NilValue if there are none.
+         * @param callfun The function associated with the call, or
+         *        R_NilValue if there is no associated function.
+         */
         RContext(Type flags, SEXP syscall, SEXP env, SEXP sysp, SEXP promargs, SEXP callfun);
+
+        /** @brief Run pending exit handlers and restore evaluator state.
+         *
+         * The context is removed from the current Evaluator's context
+         * chain. Exceptions raised while running exit handlers are
+         * suppressed during destruction.
+         */
         ~RContext();
         RContext *nextcontext; /* The next context up the chain */
         Type callflag;         /* The context "type" */
@@ -179,11 +209,42 @@ namespace CXXR
         int jumpmask;            /* associated LONGJMP argument */
         bool m_restart;          /* TRUE if restart bit is set */
 
+        /** @brief Restore handler state and run a context's exit handlers.
+         *
+         * Exit handlers are run only when the context has an environment
+         * and pending on.exit expressions.
+         *
+         * @param cptr The context whose exit handlers may be run; must
+         *        not be null.
+         * @param intermediate_jump True when handlers are being run
+         *        before an intermediate jump rather than after reaching
+         *        its target context.
+         */
         static void maybeRunOnExit(RContext *cptr, bool intermediate_jump = false);
+
+        /** @brief Evaluate this context's pending on.exit expressions.
+         *
+         * @param intermediate_jump True when handlers are being run
+         *        before an intermediate jump; this marks the context's
+         *        return value as undefined and checks for sufficient
+         *        stack space before evaluating the handlers.
+         */
         void runOnExit(bool intermediate_jump = false);
 
+        /** @brief Visit return values held by active contexts.
+         *
+         * This allows the garbage collector to visit values retained in
+         * context return slots while on.exit handlers are being run.
+         *
+         * @param v The visitor to apply to those values.
+         */
         static void visitValues(GCNode::const_visitor *v);
 
+        /** @brief Get the name corresponding to this context's type.
+         *
+         * @return The name of the context type, or "UNKNOWN" if the type
+         *         is not recognized.
+         */
         constexpr std::string_view namedType() const
         {
             switch (callflag)
@@ -253,7 +314,18 @@ namespace CXXR
 #define R_GlobalContext CXXR::Evaluator::RContext::innermost()
 #define R_ExitContext CXXR::Evaluator::RContext::s_exit_context
     private:
+        /** @brief Copy construction is disabled.
+         *
+         * Contexts represent positions in an Evaluator's active context
+         * chain and must not be copied.
+         */
         RContext(RContext &) = delete;
+
+        /** @brief Copy assignment is disabled.
+         *
+         * Contexts represent positions in an Evaluator's active context
+         * chain and must not be assigned.
+         */
         RContext &operator=(const RContext &) = delete;
     };
 

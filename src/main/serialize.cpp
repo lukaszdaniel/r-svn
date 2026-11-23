@@ -2430,8 +2430,7 @@ SEXP R_Unserialize(R_inpstream_t stream)
     /* Read the actual object back */
     ref_table = MakeReadRefTable();
 
-    RCNTXT cntxt;
-    begincontext(&cntxt, CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
+    RCNTXT cntxt(CTXT_CCODE, R_NilValue, R_BaseEnv, R_BaseEnv,
 		 R_NilValue, R_NilValue);
     try
     {

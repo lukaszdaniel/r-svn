@@ -3885,8 +3885,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
     if (isLanguage(expr) || isSymbol(expr) || isByteCode(expr)) { */
     if (TYPEOF(expr) == LANGSXP || TYPEOF(expr) == SYMSXP || isByteCode(expr))
     {
-    RCNTXT cntxt(CTXT_RETURN, R_GlobalContext->call,
-	             env, rho, args, op);
+    RCNTXT cntxt(CTXT_RETURN, R_GlobalContext->call, env, rho, args, op);
     try
     {
         expr = eval(expr, env);
@@ -3903,8 +3902,7 @@ attribute_hidden SEXP do_eval(SEXP call, SEXP op, SEXP args, SEXP rho)
 	SEXP srcrefs = getBlockSrcrefs(expr);
 	tmp = R_NilValue;
     {
-    RCNTXT cntxt(CTXT_RETURN, R_GlobalContext->call,
-	             env, rho, args, op);
+    RCNTXT cntxt(CTXT_RETURN, R_GlobalContext->call, env, rho, args, op);
     try
     {
         int n = LENGTH(expr);
