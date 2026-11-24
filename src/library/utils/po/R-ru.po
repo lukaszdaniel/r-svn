@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-04-01 17:07+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -413,6 +413,10 @@ msgstr "Введите пункт из меню или 0 для выхода"
 #. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel\n")
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "Введите одну или более цифр, разделенных пробелами, и затем ENTER или 0 для отмены"
+
+#. R/data.R: gettextf("File '%s' has unequal number of fields", file)
+msgid "File '%s' has unequal number of fields"
+msgstr ""
 
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 msgid "Filter '%s' is not available."
@@ -978,7 +982,6 @@ msgstr "каждый пакет зависит по меньшей мере от
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 msgid "failed to copy %s to %s"
 msgstr "не удалось скопировать %s в %s"
 
@@ -1229,6 +1232,14 @@ msgstr "неправильное значение %s: %s"
 #. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
 msgid "kind '%s' not yet implemented"
 msgstr "'%s' еще не реализован"
+
+#. R/tar.R: stop("link target is the extraction directory")
+msgid "link target is the extraction directory"
+msgstr ""
+
+#. R/tar.R: stop("link target outside extraction directory")
+msgid "link target outside extraction directory"
+msgstr ""
 
 #. R/menu.R: stop("menu() cannot be used non-interactively")
 msgid "menu() cannot be used non-interactively"

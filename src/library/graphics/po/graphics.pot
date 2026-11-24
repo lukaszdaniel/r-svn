@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-10-23 20:55+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,26 +168,26 @@ msgstr ""
 msgid "\"%s\" is not a graphical parameter"
 msgstr ""
 
-#: par.cpp:1112
+#: par.cpp:1111
 #, c-format
 msgid "argument %d does not name a graphical parameter"
 msgstr ""
 
-#: par.cpp:1120
+#: par.cpp:1119
 msgid "invalid argument passed to par()"
 msgstr ""
 
-#: par.cpp:1164
+#: par.cpp:1163
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr ""
 
-#: par.cpp:1170
+#: par.cpp:1169
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr ""
 
-#: par.cpp:1172
+#: par.cpp:1171
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr ""
@@ -212,8 +212,8 @@ msgstr ""
 msgid "invalid font specification"
 msgstr ""
 
-#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2194
-#: plot.cpp:2201 plot.cpp:3223 plot.cpp:3382 plot3d.cpp:1163 plot3d.cpp:1167
+#: plot.cpp:284 plot.cpp:298 plot.cpp:478 plot.cpp:483 plot.cpp:2198
+#: plot.cpp:2205 plot.cpp:3227 plot.cpp:3386 plot3d.cpp:1163 plot3d.cpp:1167
 #: plot3d.cpp:1169 plot3d.cpp:1894
 #, c-format
 msgid "invalid '%s' value"
@@ -271,9 +271,9 @@ msgid "invalid type for axis labels"
 msgstr ""
 
 #: plot.cpp:788 plot.cpp:1395 plot.cpp:1707 plot.cpp:1772 plot.cpp:1846
-#: plot.cpp:1910 plot.cpp:1983 plot.cpp:2078 plot.cpp:2154 plot.cpp:2433
-#: plot.cpp:2605 plot.cpp:2820 plot.cpp:3364 plot.cpp:3507 plot.cpp:3578
-#: plot.cpp:3740 plot.cpp:4020 plot3d.cpp:1863
+#: plot.cpp:1910 plot.cpp:1987 plot.cpp:2082 plot.cpp:2159 plot.cpp:2437
+#: plot.cpp:2609 plot.cpp:2824 plot.cpp:3368 plot.cpp:3511 plot.cpp:3582
+#: plot.cpp:3744 plot.cpp:4024 plot3d.cpp:1863
 msgid "too few arguments"
 msgstr ""
 
@@ -287,9 +287,9 @@ msgstr ""
 msgid "'%s' must be of length 1"
 msgstr ""
 
-#: plot.cpp:890 plot.cpp:2166 plot.cpp:2443 plot.cpp:2449 plot.cpp:2456
-#: plot.cpp:2464 plot.cpp:2471 plot.cpp:2478 plot.cpp:2485 plot.cpp:2492
-#: plot.cpp:2500 plot.cpp:2507 plot.cpp:3226
+#: plot.cpp:890 plot.cpp:2170 plot.cpp:2447 plot.cpp:2453 plot.cpp:2460
+#: plot.cpp:2468 plot.cpp:2475 plot.cpp:2482 plot.cpp:2489 plot.cpp:2496
+#: plot.cpp:2504 plot.cpp:2511 plot.cpp:3230
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr ""
@@ -357,149 +357,149 @@ msgstr ""
 msgid "Empty raster"
 msgstr ""
 
-#: plot.cpp:1996
-msgid "invalid arrow head length"
-msgstr ""
-
-#: plot.cpp:2001
-msgid "invalid arrow head angle"
-msgstr ""
-
-#: plot.cpp:2006
-msgid "invalid arrow head specification"
-msgstr ""
-
-#: plot.cpp:2240
-msgid "no coordinates were supplied"
-msgstr ""
-
-#: plot.cpp:2861
-msgid "invalid a=, b= specification"
-msgstr ""
-
-#: plot.cpp:2870
-msgid "'a' and 'b' must be finite"
-msgstr ""
-
-#: plot.cpp:3006 plot.cpp:4111 plot.cpp:4114 plot.cpp:4117 plot.cpp:4120
-#: plot.cpp:4140 plot.cpp:4144 plot.cpp:4147 plot.cpp:4167 plot.cpp:4171
-#: plot.cpp:4174 plot3d.cpp:1085 plot3d.cpp:1089 plot3d.cpp:1094
-#: plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:171 stem.cpp:172
-#: stem.cpp:174 stem.cpp:175
+#: plot.cpp:1940 plot.cpp:1942 plot.cpp:3010 plot.cpp:4115 plot.cpp:4118
+#: plot.cpp:4121 plot.cpp:4124 plot.cpp:4144 plot.cpp:4148 plot.cpp:4151
+#: plot.cpp:4171 plot.cpp:4175 plot.cpp:4178 plot3d.cpp:1085 plot3d.cpp:1089
+#: plot3d.cpp:1094 plot3d.cpp:1098 plot3d.cpp:1102 plot3d.cpp:1106 stem.cpp:171
+#: stem.cpp:172 stem.cpp:174 stem.cpp:175
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
 
-#: plot.cpp:3078 plot.cpp:3219
+#: plot.cpp:2000
+msgid "invalid arrow head length"
+msgstr ""
+
+#: plot.cpp:2005
+msgid "invalid arrow head angle"
+msgstr ""
+
+#: plot.cpp:2010
+msgid "invalid arrow head specification"
+msgstr ""
+
+#: plot.cpp:2244
+msgid "no coordinates were supplied"
+msgstr ""
+
+#: plot.cpp:2865
+msgid "invalid a=, b= specification"
+msgstr ""
+
+#: plot.cpp:2874
+msgid "'a' and 'b' must be finite"
+msgstr ""
+
+#: plot.cpp:3082 plot.cpp:3223
 #, c-format
 msgid "invalid number of points in %s"
 msgstr ""
 
-#: plot.cpp:3083
+#: plot.cpp:3087
 msgid "invalid plot type"
 msgstr ""
 
-#: plot.cpp:3221
+#: plot.cpp:3225
 msgid "incorrect argument type"
 msgstr ""
 
-#: plot.cpp:3229
+#: plot.cpp:3233
 msgid "different argument lengths"
 msgstr ""
 
-#: plot.cpp:3231
+#: plot.cpp:3235
 msgid "more 'labels' than points"
 msgstr ""
 
-#: plot.cpp:3283
+#: plot.cpp:3287
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr ""
 
-#: plot.cpp:3289
+#: plot.cpp:3293
 msgid "warning: nearest point already identified\n"
 msgstr ""
 
-#: plot.cpp:3375
+#: plot.cpp:3379
 msgid "invalid units"
 msgstr ""
 
-#: plot.cpp:3490
+#: plot.cpp:3494
 msgid "invalid dendrogram input"
 msgstr ""
 
-#: plot.cpp:3723
+#: plot.cpp:3727
 msgid "invalid symbol parameter vector"
 msgstr ""
 
-#: plot.cpp:3745
+#: plot.cpp:3749
 msgid "invalid symbol coordinates"
 msgstr ""
 
-#: plot.cpp:3753
+#: plot.cpp:3757
 msgid "x/y parameter length mismatch"
 msgstr ""
 
-#: plot.cpp:3772
+#: plot.cpp:3776
 msgid "invalid circles data"
 msgstr ""
 
-#: plot.cpp:3774 plot.cpp:3795 plot.cpp:3820 plot.cpp:3851
+#: plot.cpp:3778 plot.cpp:3799 plot.cpp:3824 plot.cpp:3855
 msgid "invalid symbol parameter"
 msgstr ""
 
-#: plot.cpp:3793
+#: plot.cpp:3797
 msgid "invalid squares data"
 msgstr ""
 
-#: plot.cpp:3818
+#: plot.cpp:3822
 msgid "invalid rectangles data (need 2 columns)"
 msgstr ""
 
-#: plot.cpp:3849
+#: plot.cpp:3853
 msgid "invalid stars data"
 msgstr ""
 
-#: plot.cpp:3891
+#: plot.cpp:3895
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr ""
 
-#: plot.cpp:3894
+#: plot.cpp:3898
 #, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr ""
 
-#: plot.cpp:3897
+#: plot.cpp:3901
 #, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr ""
 
-#: plot.cpp:3900
+#: plot.cpp:3904
 msgid "invalid 'thermometers[, 1:2]'"
 msgstr ""
 
-#: plot.cpp:3939
+#: plot.cpp:3943
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr ""
 
-#: plot.cpp:3948
+#: plot.cpp:3952
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr ""
 
-#: plot.cpp:3950
+#: plot.cpp:3954
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr ""
 
-#: plot.cpp:3996
+#: plot.cpp:4000
 msgid "invalid symbol type"
 msgstr ""
 
-#: plot.cpp:4033 plot.cpp:4035 plot.cpp:4040 plot.cpp:4042
+#: plot.cpp:4037 plot.cpp:4039 plot.cpp:4044 plot.cpp:4046
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr ""
 
-#: plot.cpp:4059
+#: plot.cpp:4063
 msgid "unable to allocate memory (in xspline)"
 msgstr ""
 

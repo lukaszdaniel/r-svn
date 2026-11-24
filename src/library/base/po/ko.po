@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 14:56+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -486,6 +486,15 @@ msgstr "벡터 메모리가 모두 사용되었습니다 (한계에 도달했나
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+msgid "internal logical NA value has been modified"
+msgstr ""
+
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr "unif_rand: %d는 구현되지 않은 난수발생기의 종류입니다"
@@ -511,6 +520,10 @@ msgstr "RNG_Init: %d는 구현되지 않은 난수발생기의 종류입니다"
 msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
 msgstr "'.Random.seed'는 정수형 벡터가 아니라 타입 '%s'이므로 무시되어집니다"
 
+#, fuzzy
+msgid "'.Random.seed' has length 0, so ignored"
+msgstr "'.Random.seed'는 잘못된 길이를 가지고 있습니다"
+
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr "'.Random.seed[1]'는 유효한 정수가 아니므로 무시됩니다"
 
@@ -525,6 +538,10 @@ msgstr "'.Random.seed[1] = 5' 이자만 사용자에 의하여 제공된 생성�
 #, fuzzy, c-format
 msgid "'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"
 msgstr "'.Random.seed[1]'는 올바른 난수생성 발생기의 종류가 아니므로 무시되어집니다"
+
+#, fuzzy
+msgid "'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"
+msgstr "'.Random.seed[1] = 5' 이자만 사용자에 의하여 제공된 생성기가 아니므로 무시되어집니다"
 
 msgid "'.Random.seed' has wrong length"
 msgstr "'.Random.seed'는 잘못된 길이를 가지고 있습니다"
@@ -787,6 +804,10 @@ msgid "unknown encoding: %d"
 msgstr "알수없는 인코딩입니다: %d"
 
 #, fuzzy
+msgid "invalid string length"
+msgstr "유효하지 않은 길이입니다"
+
+#, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "변수명들은 최대 %d 바이트까지 허용됩니다"
 
@@ -839,11 +860,17 @@ msgstr "'realpr' 내에 메모리 할당 에러입니다"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "이 로케일에서 입력문자열 y[%d]는 유효하지 않습니다"
 
+msgid "invalid compact_intseq serialized state"
+msgstr ""
+
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
 
 msgid "method should only handle unexpanded vectors"
+msgstr ""
+
+msgid "invalid compact_realseq serialized state"
 msgstr ""
 
 #, c-format
@@ -852,6 +879,10 @@ msgstr ""
 
 msgid "result would be too long a vector"
 msgstr "결과적으로 너무 긴 벡터일 것입니다"
+
+#, fuzzy
+msgid "invalid deferred string serialized state"
+msgstr "유효하지 않은 부분문자열 인자들입니다"
 
 msgid "unsupported type for deferred string coercion"
 msgstr ""
@@ -863,6 +894,10 @@ msgstr "아직까지는 지원되지 않는 긴 벡터들입니다: %s:%d"
 #, fuzzy
 msgid "object has been unmapped"
 msgstr "객체 '%s'를 찾을 수 없습니다"
+
+#, fuzzy
+msgid "invalid mmap serialized state"
+msgstr "그래픽 상태가 올바르지 않습니다"
 
 msgid "memory mapping failed; returning vector of length zero"
 msgstr ""
@@ -885,6 +920,10 @@ msgstr "타입 '%s'는 지원되지 않습니다"
 msgid "not a memory-mapped object"
 msgstr ""
 
+#, fuzzy
+msgid "invalid wrapper serialized state"
+msgstr "그래픽 상태가 올바르지 않습니다"
+
 msgid "unsupported type"
 msgstr "지원되지 않는 타입입니다"
 
@@ -894,6 +933,9 @@ msgstr ""
 #, fuzzy
 msgid "no_na must be 0 or +1"
 msgstr "'onOff'는 반드시 TRUE 또는 FALSE이어야 합니다"
+
+msgid "invalid ALTREP serialized class"
+msgstr ""
 
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
@@ -1011,9 +1053,10 @@ msgstr "1개의 인수를 받는 실수형 함수이나 구현되지 않았습�
 msgid "unimplemented complex function"
 msgstr "구현되지 않은 복소함수입니다"
 
-#, c-format
-msgid "unimplemented real function of %d numeric arguments"
-msgstr "%d개의 수치형 인수를 가지는 실수형함수이나 구현되지 않았습니다"
+#, fuzzy, c-format
+msgid "unimplemented real function of %d numeric argument"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "%d개의 수치형 인수를 가지는 실수형함수이나 구현되지 않았습니다"
 
 msgid "matchArg returned something weird"
 msgstr ""
@@ -1555,12 +1598,19 @@ msgstr "유효하지 않은 UTF-8 문자열 'new'입니다"
 msgid "invalid multibyte string 'new'"
 msgstr "유효하지 않은 멀티바이트 문자열 'new'입니다"
 
+#, fuzzy
+msgid "'old' expands to too many characters"
+msgstr "너무 적은 문자들을 기록했습니다"
+
 msgid "'old' is longer than 'new'"
 msgstr "'old'의 길이가 'new'의 길이보다 깁니다"
 
 #, fuzzy, c-format
 msgid "invalid input multibyte string %lld"
 msgstr "유효하지 않은 멀티바이트 문자열 %lld가 입력되었습니다"
+
+msgid "translated string is not representable in the current locale"
+msgstr ""
 
 msgid "strtrim() requires a character vector"
 msgstr "strtrim()는 문자형 벡터를 필요로 합니다"
@@ -2023,6 +2073,10 @@ msgid "'%s' is not a %s"
 msgstr "fifo '%s'가 준비되어 있지 않습니다"
 
 #, fuzzy, c-format
+msgid "internal gzcon connection is not a %s"
+msgstr "커넥션이 열려 있지 않습니다"
+
+#, fuzzy, c-format
 msgid "internal connection is not a %s"
 msgstr "커넥션이 열려 있지 않습니다"
 
@@ -2102,9 +2156,6 @@ msgstr ""
 
 msgid "cannot read from this connection"
 msgstr "이 커넥션으로부터 읽을수 없습니다"
-
-msgid "cannot allocate buffer in readLines"
-msgstr "readLines내에서 버퍼를 할당할 수 없습니다"
 
 msgid "too many items"
 msgstr "항목들이 너무 많습니다"
@@ -2753,6 +2804,14 @@ msgstr ""
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
+
+#, c-format
+msgid "cannot extract '%s' through a symbolic link"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "cannot create directory '%s': %s"
+msgstr "디렉토리 '%s'를 만들 수 없습니다. 그 이유는 '%s'입니다"
 
 #, c-format
 msgid " not overwriting file '%s"
@@ -3497,10 +3556,6 @@ msgstr "이 플랫폼에서는 curlGetHeaders를 사용할 수 없습니다."
 
 #, c-format
 msgid "interval too short for this platform, using '%f'"
-msgstr ""
-
-#, c-format
-msgid "interval too short, using '%f'"
 msgstr ""
 
 msgid "R profiling is not available on this system"
@@ -4337,12 +4392,6 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-msgid "Inconsistent node generation in s_Old\n"
-msgstr ""
-
-msgid "Inconsistent node generation in s_OldToNew\n"
-msgstr ""
-
 msgid "can only weakly reference/finalize reference objects"
 msgstr ""
 
@@ -4376,31 +4425,6 @@ msgstr "길이가 0인 유효하지 않은 인자입니다"
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "벡터할당에 유효한 타입/길이 (%s/%lld)가 아닙니다"
-
-msgid "internal TRUE value has been modified"
-msgstr ""
-
-msgid "internal FALSE value has been modified"
-msgstr ""
-
-msgid "internal logical NA value has been modified"
-msgstr ""
-
-msgid "R_signal_protect_error() is no-op in CXXR"
-msgstr ""
-
-#, c-format
-msgid "unprotect(): only %td protected item"
-msgid_plural "unprotect(): only %td protected items"
-msgstr[0] ""
-
-msgid "unprotect_ptr: pointer not found"
-msgstr "unprotect_ptr: 포인터를 찾을 수 없습니다"
-
-#, c-format
-msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
-msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
-msgstr[0] ""
 
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
@@ -4854,6 +4878,10 @@ msgid "invalid value %d for '%s' argument"
 msgstr "'%s'의 값이 유효하지 않습니다"
 
 msgid "'decimal.mark' must be a string of one character"
+msgstr ""
+
+#, c-format
+msgid "final maximal string length = %.0f is too large"
 msgstr ""
 
 msgid "Impossible mode ( x )"
@@ -5816,6 +5844,18 @@ msgid ""
 "perhaps long vector from 64-bit version of R?"
 msgstr ""
 
+#, fuzzy
+msgid "invalid attribute list"
+msgstr "인자 목록이 유효하지 않습니다"
+
+#, fuzzy
+msgid "invalid 'dim' attribute"
+msgstr "유효하지 않은 'mode' 인자입니다"
+
+#, fuzzy
+msgid "invalid call or '...' list"
+msgstr "'%s'의 값이 유효하지 않습니다"
+
 msgid "this version of R cannot read class references"
 msgstr "이 버전의 R은 클래스 레퍼런스를 읽을 수 없습니다"
 
@@ -5829,6 +5869,10 @@ msgstr "ReadItem: 알 수 없는 타입 %i입니다. 아마도 R의 이후버전
 #, fuzzy
 msgid "invalid length of encoding name"
 msgstr "슬롯이름의 유형 또는 길이가 잘못되었습니다"
+
+#, fuzzy
+msgid "embedded nul in encoding name"
+msgstr "문자열에 nul이 포함되어 있습니다: '%s'"
 
 #, c-format
 msgid "cannot read unreleased workspace version %d written by experimental R %d.%d.%d"
@@ -5977,6 +6021,10 @@ msgstr ""
 #, c-format
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr ""
+
+#, fuzzy
+msgid "internal error converting format precision"
+msgstr "'do_sys'에서 내부오류가 발생했습니다"
 
 #, c-format
 msgid "only %d arguments are allowed"
@@ -6266,8 +6314,20 @@ msgstr ""
 msgid "(subscript) logical subscript too long"
 msgstr ""
 
+#, fuzzy
+msgid "object length is not a multiple of subscript length"
+msgstr "두 객체의 길이가 서로 배수관계에 있지 않습니다"
+
+#, fuzzy, c-format
+msgid "length of dimension %d is not a multiple of logical subscript length"
+msgstr "두 객체의 길이가 서로 배수관계에 있지 않습니다"
+
 msgid "only 0's may be mixed with negative subscripts"
 msgstr ""
+
+#, fuzzy
+msgid "subscript too large"
+msgstr "32 비트의 R에서는 너무 큰 첨자입니다"
 
 msgid "subscript too large for 32-bit R"
 msgstr "32 비트의 R에서는 너무 큰 첨자입니다"
@@ -6742,9 +6802,6 @@ msgstr ""
 
 #, c-format
 msgid "add_point - reached MAXNUMPTS (%d)"
-msgstr ""
-
-msgid "insufficient memory to allocate point array"
 msgstr ""
 
 msgid "there must be at least two control points"
@@ -7390,6 +7447,10 @@ msgstr "'size'는 행의 개수 %d를 초과할 수 없습니다."
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr ""
 
+#, c-format
+msgid "besselI(x, nu): nu=%g > max_alpha_i (= %g): too large for bessel_i() algorithm"
+msgstr ""
+
 msgid "bessel_i allocation error"
 msgstr ""
 
@@ -7402,7 +7463,7 @@ msgid "bessel_i(%g,nu=%g): precision lost in result\n"
 msgstr ""
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g too large for bessel_j() algorithm"
+msgid "besselJ(x, nu): nu=%g > max_alpha_j (= %g): too large for bessel_j() algorithm"
 msgstr ""
 
 msgid "bessel_j allocation error"
@@ -7417,7 +7478,7 @@ msgid "bessel_j(%g,nu=%g): precision lost in result\n"
 msgstr ""
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g > 1e7; too large for bessel_j() algorithm"
+msgid "besselK(x, nu): |nu|=%g > max_alpha_k (= %g): too large for bessel_k() algorithm"
 msgstr ""
 
 msgid "bessel_k allocation error"
@@ -7432,7 +7493,7 @@ msgid "bessel_k(%g,nu=%g): precision lost in result\n"
 msgstr ""
 
 #, c-format
-msgid "besselY(x, nu): nu=%g too large for bessel_y() algorithm"
+msgid "besselY(x, nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
 msgstr ""
 
 msgid "bessel_y allocation error"
@@ -7445,6 +7506,10 @@ msgstr ""
 #, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_y(%g,nu=%g): 결과가 정밀하지 않습니다\n"
+
+#, c-format
+msgid "besselY(x, -nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
+msgstr ""
 
 #, c-format
 msgid "'k' (%.2f) must be integer, rounded to %.0f"
@@ -7654,6 +7719,12 @@ msgstr "zip 파일로부터 추출중 쓰기 에러가 발생했습니다"
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "경고: 파일들의 목록에서 오로지 첫번째 것만을 편집합니다."
 
+#~ msgid "cannot allocate buffer in readLines"
+#~ msgstr "readLines내에서 버퍼를 할당할 수 없습니다"
+
+#~ msgid "unprotect_ptr: pointer not found"
+#~ msgstr "unprotect_ptr: 포인터를 찾을 수 없습니다"
+
 #~ msgid "length-0 dimension vector is invalid"
 #~ msgstr "차원벡터의 길이가 0인 것은 유효하지 않습니다"
 
@@ -7714,9 +7785,6 @@ msgstr "경고: 파일들의 목록에서 오로지 첫번째 것만을 편집�
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "'EXPR'이 없습니다"
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "유효하지 않은 'mode' 인자입니다"
 
 #~ msgid "'name' is missing"
 #~ msgstr "'name'이 없습니다"
@@ -7794,10 +7862,6 @@ msgstr "경고: 파일들의 목록에서 오로지 첫번째 것만을 편집�
 #, fuzzy
 #~ msgid "memory exhausted"
 #~ msgstr "메모리가 모두 사용되었습니다 (한계에 도달했나요?)"
-
-#, c-format
-#~ msgid "invalid value for '%s'"
-#~ msgstr "'%s'의 값이 유효하지 않습니다"
 
 #~ msgid "'mode' must be of length at least one"
 #~ msgstr "'mode'의 길이는 반드시 최소한 1이상이어야 합니다"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-10-23 20:56\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -663,6 +663,13 @@ msgstr ""
 #. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel\n")
 
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
+msgstr ""
+
+
+#: R/data.R: 0
+#. R/data.R: gettextf("File '%s' has unequal number of fields", file)
+
+msgid "File '%s' has unequal number of fields"
 msgstr ""
 
 

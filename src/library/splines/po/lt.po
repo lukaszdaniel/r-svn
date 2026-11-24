@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: splines 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2026-10-23 20:55+0200\n"
 "PO-Revision-Date: 2025-07-06 15:47+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -19,16 +19,13 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: splines.cpp:147
 msgid "'ord' must be a positive integer"
 msgstr "'ord' turi būti teigiamas sveikasis skaičius"
 
-#: splines.cpp:215
 #, c-format
 msgid "derivs = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs = %d >= ord = %d, bet turėtų būti {0,..,ord-1}"
 
-#: splines.cpp:218
 #, c-format
 msgid "derivs[%d] = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs[%d] = %d >= ord = %d, bet turėtų būti {0,..,ord-1}"

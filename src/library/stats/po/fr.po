@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.0.4\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-07-25 10:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 15:59+0200\n"
 "Last-Translator: Philippe Grosjean <phgrosjean@sciviews.org>\n"
 "Language-Team: French <R-core@r-project.org>\n"
@@ -19,210 +19,163 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: Srunmed.cpp:65
 msgid "bandwidth/span of running medians is larger than n"
 msgstr "largeur de fenêtre de médiane mobile supérieure à n"
 
-#: Srunmed.cpp:265
 #, fuzzy, c-format
 msgid "runmed(x, .., na.action=\"na.fail\"): have NAs starting at x[%lld]"
 msgstr "runmed(x, .., na.action=\"na.fail\") : des valeurs manquantes se trouvent à x[%lld]"
 
-#: Srunmed.cpp:268
 msgid "runmed(): invalid 'na.action'"
 msgstr "runmed() : 'na.action' incorrecte"
 
-#: Srunmed.cpp:279
 msgid "long vectors are not supported for algorithm = \"Turlach\""
 msgstr ""
 
-#: Srunmed.cpp:318
 #, c-format
 msgid "na_action logic error (%d), please report!"
 msgstr "na_action erreur logique (%d), veuillez rapporter l’erreur, s’il-vous-plait !"
 
-#: ansari.cpp:120
 msgid "probabilities outside [0,1] in qansari()"
 msgstr "probabilités en dehors de [0,1] dans qansari()"
 
-#: approx.cpp:111
 msgid "approx(): invalid f value"
 msgstr "approx() : valeur f incorrecte"
 
-#: approx.cpp:114
 msgid "approx(): invalid interpolation method"
 msgstr "approx() : méthode d'interpolation incorrecte"
 
-#: approx.cpp:121
 msgid "approx(): attempted to interpolate NA values"
 msgstr "approx() : tentative d'interpolation de valeurs NA"
 
-#: approx.cpp:125
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr "approx(x,y, .., na.rm=FALSE) : valeurs manquantes sur l’axe x non autorisées"
 
-#: arima.cpp:77 arima.cpp:187 arima.cpp:371 arima.cpp:602 optim.cpp:40
 msgid "invalid argument type"
 msgstr "type d'argument incorrect"
 
-#: arima.cpp:438 arima.cpp:525 pacf.cpp:319 pacf.cpp:358
 msgid "can only transform 100 pars in arima0"
 msgstr "impossible de transformer plus de 100 pars dans arima0"
 
-#: arima.cpp:1008
 msgid "maximum supported lag is 350"
 msgstr "décalage maximum supporté de 350"
 
-#: bandwidths.cpp:122
 #, c-format
 msgid "non-finite x[%d] in bandwidth calculation"
 msgstr "valeurs infinies x[%d] dans le calcul de largeur de bande"
 
-#: bandwidths.cpp:128
 #, fuzzy
 msgid "data are constant in bandwidth calculation"
 msgstr "données constantes dans le calcul de la largeur de bande"
 
-#: complete_cases.cpp:35
 #, c-format
 msgid "invalid 'type' (%s) of argument"
 msgstr "'type' (%s) de l'argument incorrect"
 
-#: complete_cases.cpp:49
 msgid "not all arguments have the same length"
 msgstr "les arguments n'ont pas tous la même taille"
 
-#: complete_cases.cpp:123
 msgid "no input has determined the number of cases"
 msgstr "aucune entrée n'a déterminé le nombre de cas"
 
-#: cov.cpp:549
 msgid "missing observations in cov/cor"
 msgstr "observations manquantes dans cov / cor"
 
-#: cov.cpp:621
 msgid ""
 "Calling var(x) on a factor x is defunct.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:623
 msgid ""
 "Calling var(x) on a factor x is deprecated and will become an error.\n"
 "  Use something like 'all(duplicated(x)[-1L])' to test for a constant vector."
 msgstr ""
 
-#: cov.cpp:628
 msgid "'x' is NULL"
 msgstr "'x' est 'NULL'"
 
-#: cov.cpp:660 cov.cpp:666
 msgid "incompatible dimensions"
 msgstr "dimensions incompatibles"
 
-#: cov.cpp:685 cov.cpp:726 cov.cpp:759
 msgid "no complete element pairs"
 msgstr "paires d'éléments incomplètes"
 
-#: cov.cpp:698
 msgid "invalid 'use' (computational method)"
 msgstr "'use' incorrect (méthode de calcul)"
 
-#: cov.cpp:701
 msgid "'x' is empty"
 msgstr "'x' est vide"
 
-#: cov.cpp:795
 msgid "the standard deviation is zero"
 msgstr "l'écart type est nul"
 
-#: deriv.cpp:157
 msgid "invalid form in unary minus check"
 msgstr "forme incorrecte dans la vérification d'un moins unaire"
 
-#: deriv.cpp:441
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:679
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr "La fonction '%s' n'est pas dans la table des dérivées"
 
-#: deriv.cpp:786
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr "l’expression ne peut pas être de type '%s'"
 
-#: deriv.cpp:789
 msgid "variable must be a character string"
 msgstr "la variable doit être une chaîne de caractères"
 
-#: deriv.cpp:791
 msgid "only the first element is used as variable name"
 msgstr "seul le premier élément est utilisé comme nom de variable"
 
-#: deriv.cpp:804
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr "expression incorrecte dans '%s'"
 
-#: deriv.cpp:866
 #, fuzzy
 msgid "too many variables"
 msgstr "trop de variables"
 
-#: deriv.cpp:1079 model.cpp:106
 msgid "invalid variable names"
 msgstr "noms des variables incorrects"
 
-#: deriv.cpp:1087 deriv.cpp:1089
 msgid "invalid tag"
 msgstr "marque (tag) incorrecte"
 
-#: distance.cpp:154
 msgid "treating non-finite values as NA"
 msgstr "valeurs infinies traitées comme NA"
 
-#: distance.cpp:227
 msgid "distance(): invalid p"
 msgstr "distance() : p incorrect"
 
-#: distance.cpp:231
 msgid "distance(): invalid distance"
 msgstr "distance() : distance incorrecte"
 
-#: distn.cpp:40
 msgid "NaNs produced"
 msgstr "Production de NaN"
 
-#: distn.cpp:41
 msgid "Non-numeric argument to mathematical function"
 msgstr "Argument non numérique pour une fonction mathématique"
 
-#: family.cpp:47
 #, c-format
 msgid "Value %g out of range (0, 1)"
 msgstr "Valeur %g hors de l'intervalle (0, 1)"
 
-#: family.cpp:65 family.cpp:79 family.cpp:98
 #, c-format
 msgid "Argument %s must be a nonempty numeric vector"
 msgstr "L'argument %s doit être un vecteur numérique non vide"
 
-#: family.cpp:131 family.cpp:134
 #, c-format
 msgid "argument %s must be a numeric vector of length 1 or length %d"
 msgstr "l'argument %s doit être un vecteur numérique de longueur 1 ou %d"
 
-#: fexact.cpp:277
 #, c-format
 msgid "integer overflow would happen in 'mult * ldkey' = %g"
 msgstr "un dépassement de pile vers le haut dans un calcul d’entiers va apparaître dans 'mult * ldkey' = %g"
 
-#: fexact.cpp:656
 #, c-format
 msgid ""
 "FEXACT error 6.  LDKEY=%d is too small for this problem,\n"
@@ -233,14 +186,12 @@ msgstr ""
 "  (ii := key2[itp=%d] = %d, ldstp=%d)\n"
 "Essayez d’augmenter la taille de l’environnement de travail et peut-être aussi 'mult'"
 
-#: fexact.cpp:1041
 #, c-format
 msgid ""
 "FEXACT[f3xact()] error: hash key %.0g > INT_MAX, kyy=%d, it[i (= nco = %d)]= %d.\n"
 "Rather set 'simulate.p.value=TRUE'\n"
 msgstr ""
 
-#: fexact.cpp:1074
 #, c-format
 msgid ""
 "FEXACT error 30.  Stack length exceeded in f3xact,\n"
@@ -251,7 +202,6 @@ msgstr ""
 "  (ldst=%d, key=%d, ipn=%d, itp=%d, ist[ii=%d]=%d).\n"
 "Augmentez la taille de l’environnement de travail ou considérez d’utiliser 'simulate.p.value=TRUE'"
 
-#: fexact.cpp:1407
 #, c-format
 msgid ""
 "FEXACT error 6 (f5xact).  LDKEY=%d is too small for this problem: kval=%d.\n"
@@ -260,7 +210,6 @@ msgstr ""
 "FEXACT erreur 6 (f5xact).  LDKEY=%d est trop petit pour ce problème : kval=%d.\n"
 "Essayez d’augmenter la taille de l’environnement de travail."
 
-#: fexact.cpp:1420
 #, c-format
 msgid ""
 "FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
@@ -271,11 +220,9 @@ msgstr ""
 "  (kval=%d, itop-ldstp=%d).\n"
 "Augmentez la taille de l’environnement de travail ou considérez l’utilisation de 'simulate.p.value=TRUE’."
 
-#: fexact.cpp:1448
 msgid "integer overflow in exact computation"
 msgstr ""
 
-#: fexact.cpp:1460
 #, c-format
 msgid ""
 "FEXACT error 7(%s). LDSTP=%d is too small for this problem,\n"
@@ -286,565 +233,443 @@ msgstr ""
 "  (pastp=%g, ipn_0:=ipoin[itp=%d]=%d, stp[ipn_0]=%g).\n"
 "Augmentez la taille de l’environnement de travail ou considérez l’utilisation de ‘simulate.p.value=TRUE’."
 
-#: fexact.cpp:1809
 #, c-format
 msgid ""
 "FEXACT error %d.\n"
 "%s"
 msgstr ""
 
-#: filter.cpp:40 filter.cpp:43 filter.cpp:92 massdist.cpp:41 model.cpp:370
-#: model.cpp:378 optim.cpp:216
+#, c-format
+msgid ""
+"Fexact(): matrix is too large, %lld > INT_MAX\n"
+"Rather set 'simulate.p.value=TRUE'\n"
+msgstr ""
+
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument '%s' incorrect"
 
-#: fourier.cpp:57 fourier.cpp:152
 msgid "non-numeric argument"
 msgstr "argument non numérique"
 
-#: fourier.cpp:75 fourier.cpp:93 fourier.cpp:166
 msgid "fft factorization error"
 msgstr "erreur de factorisation fft"
 
-#: fourier.cpp:78 fourier.cpp:102 fourier.cpp:169
 msgid "fft too large"
 msgstr ""
 
-#: fourier.cpp:138
 msgid "vector-valued (multivariate) series required"
 msgstr "série multivariée requise"
 
-#: fourier.cpp:208
 #, c-format
 msgid "nextn() found no solution < %d = INT_MAX (the maximal integer); pass '0+ n' instead of 'n'"
 msgstr "nextn() n’a pas trouvé de solution < %d = INT_MAX (le plus grand entier) ; passer '0 + n' à la place de 'n'"
 
-#: fourier.cpp:219
 #, fuzzy, c-format
 msgid "nextn<64>() found no solution < %llu = UINT64_MAX (the maximal integer)"
 msgstr "nextn<64>() n’a pas trouvé de solution < %llu = UINT64_MAX (le plus grand entier)"
 
-#: fourier.cpp:235
 msgid "no factors"
 msgstr "pas de variables facteur"
 
-#: fourier.cpp:236
 msgid "too many factors"
 msgstr "trop de facteurs"
 
-#: fourier.cpp:239
 msgid "invalid factors"
 msgstr "variables facteur incorrectes"
 
-#: fourier.cpp:243
 msgid "'n' must have typeof(.) \"integer\" or \"double\""
 msgstr "'n' doit avoir typeof(.) \"integer\" ou \"double\""
 
-#: fourier.cpp:284
 #, fuzzy, c-format
 msgid "nextn() = %llu > 2^53 may not be exactly representable in R (as \"double\")"
 msgstr "nextn() = %<PRIu64> > 2^53 peut ne pas être représentable exactement en R (comme \"double\")"
 
-#: integrate.cpp:55
 msgid "evaluation of function gave a result of wrong length"
 msgstr ""
 
-#: integrate.cpp:59
 msgid "evaluation of function gave a result of wrong type"
 msgstr ""
 
-#: integrate.cpp:63
 #, fuzzy
 msgid "non-finite function value"
 msgstr "différences finies ayant des valeurs infinies [%d]"
 
-#: integrate.cpp:79 integrate.cpp:81 integrate.cpp:123
 #, fuzzy, c-format
 msgid "'%s' must be of length 1"
 msgstr "'%s' doit être de longueur unitaire"
 
-#: isoreg.cpp:57
 #, c-format
 msgid "non-finite sum(y) == %g is not allowed"
 msgstr ""
 
-#: ks.cpp:516
 msgid "Smirnov statistic only defined for two groups"
 msgstr ""
 
-#: ks.cpp:521
 msgid "Sample size too large"
 msgstr ""
 
-#: ksmooth.cpp:69
 msgid "only 2500 rows are allowed for sm.method=\"spline\""
 msgstr "seulement 2500 lignes autorisées pour sm.method=\"spline\""
 
-#: line.cpp:149
 #, fuzzy
 msgid "insufficient observations"
 msgstr "valeur manquante dans les %d dernières observations"
 
-#: lm.cpp:55
 msgid "'x' is not a matrix"
 msgstr "'x' n'est pas une matrice"
 
-#: lm.cpp:60
 #, fuzzy, c-format
 msgid "dimensions of 'x' (%d,%d) and 'y' (%lld) do not match"
 msgstr "les dimensions de 'x' (%d,%d) et de 'y' (%lld) ne correspondent pas"
 
-#: lm.cpp:75 lm.cpp:79
 #, c-format
 msgid "NA/NaN/Inf in '%s'"
 msgstr "NA/NaN/Inf dans '%s'"
 
-#: loessc.cpp:240
 msgid "span is too small"
 msgstr "fenêtre trop étroite"
 
-#: loessc.cpp:255
 #, fuzzy, c-format
 msgid "workspace required (%.0f) is too large probably because of setting 'se = TRUE'."
 msgstr " probablement à cause de l’argument 'se = TRUE'"
 
-#: loessc.cpp:256
 #, fuzzy, c-format
 msgid "workspace required (%.0f) is too large."
 msgstr "environnement de travail requis (%.0f) trop large %s."
 
-#: loglin.cpp:43
 #, fuzzy
 msgid "no variables"
 msgstr "variables incorrectes"
 
-#: loglin.cpp:376
 msgid "this should not happen"
 msgstr "ceci ne devrait pas se produire"
 
-#: loglin.cpp:378
 msgid "algorithm did not converge"
 msgstr "l'algorithme n'a pas convergé"
 
-#: loglin.cpp:380
 msgid "incorrect specification of 'table' or 'start'"
 msgstr "spécification de 'table' ou 'start' incorrecte"
 
-#: lowess.cpp:286 lowess.cpp:288
 #, fuzzy
 msgid "invalid input"
 msgstr "marque (tag) incorrecte"
 
-#: lowess.cpp:290
 msgid "'f' must be finite and > 0"
 msgstr "'f' doit être fini et > 0"
 
-#: lowess.cpp:293
 msgid "'iter' must be finite and >= 0"
 msgstr "'iter' doit être fini et >= 0"
 
-#: lowess.cpp:296
 msgid "'delta' must be finite and > 0"
 msgstr "'delta' doit être fini et > 0"
 
-#: mAR.cpp:88
 #, fuzzy
 msgid "assert failed in src/library/stats/src/mAR.cpp"
 msgstr "une assertion a échoué dans src/library/ts/src/carray.c"
 
-#: mAR.cpp:464
 msgid "Singular matrix in qr_solve"
 msgstr "Matrice singulière dans qr_solve"
 
-#: mAR.cpp:504
 msgid "Singular matrix in ldet"
 msgstr "Matrice singulière dans ldet"
 
-#: mAR.cpp:689
 msgid "Invalid vmethod"
 msgstr "La vmethod est incorrecte"
 
-#: mAR.cpp:825
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr "L’algorithme de Burg n'a pas trouvé la corrélation partielle"
 
-#: model.cpp:104
 msgid "invalid variables"
 msgstr "variables incorrectes"
 
-#: model.cpp:108 model.cpp:113
 msgid "number of variables != number of variable names"
 msgstr "le nombre de variables n'est pas égal au nombre de noms de variables"
 
-#: model.cpp:111
 msgid "invalid extra variables"
 msgstr "variables supplémentaires incorrectes"
 
-#: model.cpp:115
 msgid "invalid extra variable names"
 msgstr "noms de variables supplémentaires incorrects"
 
-#: model.cpp:136
 #, c-format
 msgid "overlong names in '%s'"
 msgstr "noms trop longs dans '%s'"
 
-#: model.cpp:161
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr "type (%s) incorrect pour la variable '%s'"
 
-#: model.cpp:167
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr "les longueurs des variables diffèrent (trouvé pour '%s')"
 
-#: model.cpp:217
 msgid "invalid result from na.action"
 msgstr "résultat incorrect de na.action"
 
-#: model.cpp:389
 msgid "invalid model frame"
 msgstr "trame de modèle incorrecte"
 
-#: model.cpp:391
 msgid "do not know how many cases"
 msgstr "nombre de cas inconnu"
 
-#: model.cpp:415
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr "les longueurs des variables diffèrent (trouvé pour la variable %d)"
 
-#: model.cpp:419 model.cpp:426
 #, c-format
 msgid "variable %d has no levels"
 msgstr "la variable %d n'a pas de niveaux"
 
-#: model.cpp:537
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr "la réponse est apparue dans le membre de droite et y a été éliminée"
 
-#: model.cpp:557
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr "le terme %d nécessite %.0g colonnes"
 
-#: model.cpp:561
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr "la matrice nécessite %.0g colonnes"
 
-#: model.cpp:572
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr "problème avec le terme %d dans model.matrix : aucune colonne n'est assignée"
 
-#: model.cpp:621 model.cpp:626 model.cpp:632 model.cpp:643 model.cpp:649
-#: model.cpp:655
 msgid "term names will be truncated"
 msgstr "les noms des termes seront tronqués"
 
-#: model.cpp:635
 msgid "complex variables are not currently allowed in model matrices"
 msgstr "les variables complexes ne sont pas encore acceptées dans les matrices de modèle"
 
-#: model.cpp:659
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr "les variables de type '%s' ne sont pas autorisées dans des matrices de modèle"
 
-#: model.cpp:881
 msgid "invalid formula in 'update'"
 msgstr "formule incorrecte dans 'update'"
 
-#: model.cpp:915
 msgid "formula expected"
 msgstr "formule attendue"
 
-#: model.cpp:1081
 msgid "invalid term in model formula"
 msgstr "terme incorrect dans la formule de modèle"
 
-#: model.cpp:1172
 msgid "invalid model formula"
 msgstr "formule de modèle incorrecte"
 
-#: model.cpp:1204 model.cpp:1511
 msgid "invalid power in formula"
 msgstr "puissance incorrecte dans la formule"
 
-#: model.cpp:1253 model.cpp:1688
 #, fuzzy, c-format
 msgid "invalid model formula in '%s'"
 msgstr "formule de modèle incorrecte"
 
-#: model.cpp:1296
 #, c-format
 msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
 msgstr ""
 
-#: model.cpp:1622
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr "nom dupliqué '%s' dans le data frame utilisant '.'"
 
-#: model.cpp:1764
 msgid "argument is not a valid model"
 msgstr "l'argument n'est pas un modèle valide"
 
-#: model.cpp:1774
 msgid "'specials' must be NULL or a character vector"
 msgstr "'specials' doit être NULL ou un vecteur de chaîne de caractères"
 
-#: model.cpp:1785
 msgid "'data' argument is of the wrong type"
 msgstr "l'argument 'data' est d'un mauvais type"
 
-#: model.cpp:1853
 #, c-format
 msgid "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should no longer happen!"
 msgstr "'varlist' a changé (de nvar=%d) à %d après EncodeVars() -- ceci ne devrait plus se produire !"
 
-#: model.cpp:2135
 msgid "'.' in formula and no 'data' argument"
 msgstr "'.' dans la formule et pas d'argument 'data'"
 
-#: monoSpl.cpp:38 monoSpl.cpp:74
 #, fuzzy, c-format
 msgid "'%s' must be at least %d"
 msgstr "n doit valoir deux ou plus"
 
-#: monoSpl.cpp:71
 #, fuzzy, c-format
 msgid "'%s' must be numeric"
 msgstr "L'argument m doit être numérique"
 
-#: monoSpl.cpp:76
 #, fuzzy, c-format
 msgid "'%s' must be numeric vector one shorter than m[]"
 msgstr "L'argument Sx doit être un vecteur numérique plus court que m[] d'un élément"
 
-#: nls.cpp:101 nls.cpp:103 port.cpp:576
 #, fuzzy, c-format
 msgid "'%s' must be a list"
 msgstr "'m' doit être une liste"
 
-#: nls.cpp:110 nls.cpp:115 nls.cpp:120 nls.cpp:125 nls.cpp:130 nls.cpp:138
-#: nls.cpp:143 nls.cpp:148 nls.cpp:153 nls.cpp:158 nls.cpp:163
 #, c-format
 msgid "'%s' absent"
 msgstr "'%s' absent"
 
-#: nls.cpp:239
+#, fuzzy, c-format
+msgid "'%s' evaluated to length %d, not %d"
+msgstr "le gradient dans optim est évalué à une longueur %d différente de %d"
+
 msgid "singular gradient"
 msgstr "gradient singulier"
 
-#: nls.cpp:261
 #, c-format
 msgid "step factor %g reduced below 'minFactor' of %g"
 msgstr "le pas %g est devenu inférieur à 'minFactor' de %g"
 
-#: nls.cpp:269
 #, c-format
 msgid "number of iterations exceeded maximum of %d"
 msgstr "le nombre d'itérations a dépassé le maximum de %d"
 
-#: nls.cpp:273
 msgid "converged"
 msgstr "convergence obtenue"
 
-#: nls.cpp:289
 msgid "'theta' should be of type character"
 msgstr "'theta' doit être de type caractère"
 
-#: nls.cpp:291 port.cpp:402
 msgid "use of NULL environment is defunct"
 msgstr "l'utilisation de l'environnement NULL n'est plus autorisée"
 
-#: nls.cpp:295
 msgid "'rho' should be an environment"
 msgstr "'rho' doit être un environnement"
 
-#: nls.cpp:301
 msgid "'dir' is not a numeric vector of the correct length"
 msgstr "'dir' n'est pas un vecteur numérique de longueur correcte"
 
-#: nls.cpp:318
 msgid "Missing value or an infinity produced when evaluating the model"
 msgstr "Valeur manquante ou infinie obtenue au cours du calcul du modèle"
 
-#: nls.cpp:331
 #, c-format
 msgid "variable '%s' is integer, not numeric"
 msgstr "la variable '%s' est une valeur entière, non un nombre à virgule flottante"
 
-#: nls.cpp:333
 #, c-format
 msgid "variable '%s' is not numeric"
 msgstr "la variable '%s' n'est pas numérique"
 
-#: optim.cpp:79 optim.cpp:103
 msgid "non-finite value supplied by optim"
 msgstr "valeur non-finie fournie par optim"
 
-#: optim.cpp:86
 #, c-format
 msgid "objective function in optim evaluates to length %d not 1"
 msgstr "la fonction objective dans optim est évaluée à une longueur %d différente de 1"
 
-#: optim.cpp:110
 #, c-format
 msgid "gradient in optim evaluated to length %d not %d"
 msgstr "le gradient dans optim est évalué à une longueur %d différente de %d"
 
-#: optim.cpp:145 optim.cpp:183
 #, c-format
 msgid "non-finite finite-difference value [%d]"
 msgstr "différences finies ayant des valeurs infinies [%d]"
 
-#: optim.cpp:212 optim.cpp:418
 msgid "'fn' is not a function"
 msgstr "'fn' n'est pas une fonction"
 
-#: optim.cpp:230 optim.cpp:424
 msgid "'parscale' is of the wrong length"
 msgstr "'parscale' est de la mauvaise longueur"
 
-#: optim.cpp:259
 msgid "'maxit' is not an integer"
 msgstr "'maxit n'est pas un entier"
 
-#: optim.cpp:279
 msgid "'tmax' is not a positive integer"
 msgstr "'tmax' n'est pas un entier positif"
 
-#: optim.cpp:281 optim.cpp:298 optim.cpp:323 optim.cpp:353 optim.cpp:432
 msgid "'gr' is not a function"
 msgstr "'gr' n'est pas une fonction"
 
-#: optim.cpp:304 optim.cpp:329 optim.cpp:359 optim.cpp:438
 msgid "'ndeps' is of the wrong length"
 msgstr "'ndeps' est de la mauvaise longueur"
 
-#: optim.cpp:389
 msgid "unknown 'method'"
 msgstr "'method' inconnue"
 
-#: optimize.cpp:217 optimize.cpp:307 optimize.cpp:529
 msgid "NA replaced by maximum positive value"
 msgstr "NA remplacé par la valeur maximale positive"
 
-#: optimize.cpp:226 optimize.cpp:316 optimize.cpp:538
 msgid "-Inf replaced by maximally negative value"
 msgstr "-Inf remplacé par la valeur négative la plus large possible"
 
-#: optimize.cpp:229 optimize.cpp:319 optimize.cpp:541
 #, fuzzy, c-format
 msgid "%s replaced by maximum positive value"
 msgstr "%s remplacé par la valeur maximale positive"
 
-#: optimize.cpp:239
 msgid "invalid function value in 'optimize'"
 msgstr "valeur de fonction incorrecte dans 'optimize'"
 
-#: optimize.cpp:255 optimize.cpp:348 optimize.cpp:734
 msgid "attempt to minimize non-function"
 msgstr "tentative de minimisation d'un objet qui n'est pas une fonction"
 
-#: optimize.cpp:262 optimize.cpp:269 optimize.cpp:278 optimize.cpp:353
-#: optimize.cpp:358 optimize.cpp:374 pacf.cpp:460
 #, c-format
 msgid "invalid '%s' value"
 msgstr "valeur '%s' incorrecte"
 
-#: optimize.cpp:271 optimize.cpp:359
 msgid "'xmin' not less than 'xmax'"
 msgstr "'xmin' n'est pas plus petit que 'xmax'"
 
-#: optimize.cpp:329
 msgid "invalid function value in 'zeroin'"
 msgstr "valeur de fonction incorrecte dans 'zeroin'"
 
-#: optimize.cpp:364 optimize.cpp:369
 #, c-format
 msgid "NA value for '%s' is not allowed"
 msgstr "Une valeur NA n'est pas autorisée pour '%s'"
 
-#: optimize.cpp:379
 msgid "'maxiter' must be positive"
 msgstr "'maxiter' doit être positif"
 
-#: optimize.cpp:521
 msgid "non-finite value supplied by 'nlm'"
 msgstr "valeur non finie fournie par 'nlm'"
 
-#: optimize.cpp:561
 msgid "invalid function value in 'nlm' optimizer"
 msgstr "valeur de fonction incorrecte dans l'optimisateur 'nlm'"
 
-#: optimize.cpp:573 optimize.cpp:588
 msgid "function value caching for optimization is seriously confused"
 msgstr "le cache de valeur de fonction pour l'optimisation est sérieusement perturbé"
 
-#: optimize.cpp:603
 msgid "numeric parameter expected"
 msgstr "paramètre numérique attendu"
 
-#: optimize.cpp:607
 msgid "conflicting parameter lengths"
 msgstr "conflit de taille des paramètres"
 
-#: optimize.cpp:611
 msgid "invalid parameter length"
 msgstr "taille de paramètre incorrecte"
 
-#: optimize.cpp:620 optimize.cpp:627 optimize.cpp:634
 msgid "missing value in parameter"
 msgstr "valeur manquante dans le paramètre"
 
-#: optimize.cpp:639
 msgid "invalid parameter type"
 msgstr "type incorrect de paramètre"
 
-#: optimize.cpp:650
 msgid "non-positive number of parameters in nlm"
 msgstr "nombre de paramètres nul ou négatif dans nlm"
 
-#: optimize.cpp:652
 msgid "nlm is inefficient for 1-d problems"
 msgstr "nlm est inefficace pour les problèmes 1-d"
 
-#: optimize.cpp:654
 msgid "invalid gradient tolerance in nlm"
 msgstr "tolérance de gradient incorrecte dans nlm"
 
-#: optimize.cpp:656
 msgid "invalid iteration limit in nlm"
 msgstr "limite d'itération incorrecte dans nlm"
 
-#: optimize.cpp:658
 msgid "minimization function has no good digits in nlm"
 msgstr "la fonction de minimisation n'a pas des nombres acceptables dans nlm"
 
-#: optimize.cpp:660
 msgid "no analytic gradient to check in nlm!"
 msgstr "pas de gradient analytique à vérifier dans nlm !"
 
-#: optimize.cpp:662
 msgid "no analytic Hessian to check in nlm!"
 msgstr "pas de Hessien analytique à vérifier dans nlm !"
 
-#: optimize.cpp:664
 msgid "probable coding error in analytic gradient"
 msgstr "erreur d'encodage probable dans le gradient analytique"
 
-#: optimize.cpp:666
 msgid "probable coding error in analytic Hessian"
 msgstr "erreur d'encodage probable dans le Hessien analytique"
 
-#: optimize.cpp:668
 #, c-format
 msgid ""
 "*** unknown error message (msg = %d) in nlm()\n"
@@ -853,23 +678,18 @@ msgstr ""
 "*** message d'erreur inconnu (msg = %d) dans nlm()\n"
 "*** ne devrait pas se produire !"
 
-#: optimize.cpp:679
 msgid "Relative gradient close to zero.\n"
 msgstr "Gradient relatif proche de zéro.\n"
 
-#: optimize.cpp:680 optimize.cpp:684
 msgid "Current iterate is probably solution.\n"
 msgstr "L'itération courante est probablement la solution.\n"
 
-#: optimize.cpp:683
 msgid "Successive iterates within tolerance.\n"
 msgstr "Itération successsives à l'intérieur du seuil de tolérance.\n"
 
-#: optimize.cpp:687
 msgid "Last global step failed to locate a point lower than x.\n"
 msgstr "Le dernier pas global n'a pas pu localiser un point plus bas que x.\n"
 
-#: optimize.cpp:688
 msgid ""
 "Either x is an approximate local minimum of the function,\n"
 "the function is too non-linear for this algorithm,\n"
@@ -879,11 +699,9 @@ msgstr ""
 "soit la fonction est trop non linéaire pour cet algorithme,\n"
 "soit steptol est trop large.\n"
 
-#: optimize.cpp:693
 msgid "Iteration limit exceeded.  Algorithm failed.\n"
 msgstr "Limite d'itérations dépassée. L'algorithme a échoué.\n"
 
-#: optimize.cpp:696
 msgid ""
 "Maximum step size exceeded 5 consecutive times.\n"
 "Either the function is unbounded below,\n"
@@ -897,185 +715,145 @@ msgstr ""
 "vers le haut dans une direction,\n"
 "soit stepmx est trop petit.\n"
 
-#: optimize.cpp:757 optimize.cpp:762 optimize.cpp:766 optimize.cpp:770
-#: optimize.cpp:774 optimize.cpp:778 optimize.cpp:783
 msgid "invalid NA value in parameter"
 msgstr "valeur NA incorrecte dans le paramètre"
 
-#: optimize.cpp:812
 msgid "hessian supplied is of the wrong length or mode, so ignored"
 msgstr "le Hessien fourni est de la mauvaise longueur ou mode, et est ignoré"
 
-#: optimize.cpp:816
 msgid "gradient supplied is of the wrong length or mode, so ignored"
 msgstr "le gradient fourni est de mauvaise longueur ou mode, et est ignoré"
 
-#: pacf.cpp:82
 msgid "bad Starma struct"
 msgstr "la Starma struct est incorrecte"
 
-#: pacf.cpp:228
 #, c-format
 msgid "starma error code %d"
 msgstr "code d'erreur starma %d"
 
-#: pacf.cpp:288
 #, c-format
 msgid "forkal error code %d"
 msgstr "code d'erreur forkal %d"
 
-#: permdist.cpp:122 permdist.cpp:127 permdist.cpp:198 permdist.cpp:202
+msgid "overflow error; cannot compute exact distribution"
+msgstr ""
+
 msgid "overflow error: cannot compute exact distribution"
 msgstr ""
 
-#: port.cpp:149
 #, c-format
 msgid "Rf_divset: alg = %d must be 1, 2, 3, or 4"
 msgstr "Rf_divset : alg = %d doit être 1, 2, 3, ou 4"
 
-#: port.cpp:165
 msgid "port algorithms 3 or higher are not supported"
 msgstr "les algorithmes port 3 ou plus ne sont pas supportés"
 
-#: port.cpp:339
 #, c-format
 msgid "gradient function must return a numeric vector of length %d"
 msgstr "la fonction de gradient doit renvoyer un vecteur numérique de longueur %d"
 
-#: port.cpp:342
 msgid "NA/NaN gradient evaluation"
 msgstr ""
 
-#: port.cpp:350
 #, c-format
 msgid "Hessian function must return a square numeric matrix of order %d"
 msgstr "La function Hessian doit renvoyer une matrice carrée numérique d'ordre %d"
 
-#: port.cpp:355
 msgid "NA/NaN Hessian evaluation"
 msgstr ""
 
-#: port.cpp:405
 #, fuzzy, c-format
 msgid "'%s' must be an environment"
 msgstr "'rho' doit être un environnement"
 
-#: port.cpp:407 port.cpp:575
 #, fuzzy
 msgid "'d' must be a nonempty numeric (double) vector"
 msgstr "'d' doit être un vecteur numérique de doubles non vide"
 
-#: port.cpp:409
 msgid "When Hessian defined must also have gradient defined"
 msgstr "Quand Hessian est défini, un gradient doit l'être aussi"
 
-#: port.cpp:412
 #, fuzzy, c-format
 msgid "environment 'rho' must contain a numeric (double) vector '.par' of length %d"
 msgstr "l'environnement 'rho' doit contenir un vecteur numérique (double) '.par' de longueur %d"
 
-#: port.cpp:426
 #, fuzzy
 msgid "'lower' and 'upper' must be numeric (double) vectors"
 msgstr "'lower' et 'upper' doivent tous deux être des vecteurs numériques (doubles)"
 
-#: port.cpp:441
 #, fuzzy
 msgid "NA/NaN function evaluation"
 msgstr "valeur de fonction incorrecte dans 'zeroin'"
 
-#: port.cpp:484
 msgid "'getElement' applies only to named lists"
 msgstr "'getElement' n'est applicable que pour des listes nommées"
 
-#: port.cpp:507
 #, fuzzy, c-format
 msgid "'%s' not found"
 msgstr "%s$%s() introuvable"
 
-#: port.cpp:521
 #, c-format
 msgid "'gradient' must be a numeric matrix of dimension (%d,%d)"
 msgstr "'gradient' doit être une matrice numérique de dimension (%d, %d)"
 
-#: port.cpp:542
 #, c-format
 msgid "fcn produced mode %d, length %d - wanted mode %d, length %d"
 msgstr "'fcn' a produit un mode %d de longueur %d - il fallait un mode %d de longueur %d"
 
-#: port.cpp:555
 msgid "invalid type for eval_check_store"
 msgstr "type incorrect pour 'eval_check_store'"
 
-#: port.cpp:596
 msgid "'lowerb' and 'upperb' must be numeric vectors"
 msgstr "'lowerb' et 'upperb' doivent tous deux être des vecteurs numériques"
 
-#: prho.cpp:158
 msgid "invalid sample size 'n' in C routine prho(n,s,*)"
 msgstr "taille 'n' non autorisée pour l'échantillon dans la fonction C prho(n,s,*)"
 
-#: rWishart.cpp:53
 msgid "inconsistent degrees of freedom and dimension"
 msgstr "degrés de liberté et dimension incohérents"
 
-#: rWishart.cpp:86
 msgid "'scal' must be a square, real matrix"
 msgstr "'scal' doit être une matrice carrée de réels"
 
-#: rWishart.cpp:99
 msgid "'scal' matrix is not positive-definite"
 msgstr "la matrice 'scal' n'est pas définie et positive"
 
-#: random.cpp:55 random.cpp:139 random.cpp:219 random.cpp:309
 msgid "NAs produced"
 msgstr "Production de NAs"
 
-#: random.cpp:62 random.cpp:68 random.cpp:74 random.cpp:89 random.cpp:169
-#: random.cpp:258 random.cpp:396
 msgid "invalid arguments"
 msgstr "arguments incorrects"
 
-#: random.cpp:335
 msgid "NA in probability vector"
 msgstr "NA dans un vecteur de probabilités"
 
-#: random.cpp:337
 msgid "negative probability"
 msgstr "probabilité négative"
 
-#: random.cpp:343
 msgid "no positive probabilities"
 msgstr "pas de probabilités positives"
 
-#: random.cpp:355
 msgid "invalid first argument 'n'"
 msgstr "premier argument 'n' incorrect"
 
-#: random.cpp:357
 msgid "invalid second argument 'size'"
 msgstr "second argument 'size' incorrect"
 
-#: rcont.cpp:80
 #, c-format
 msgid "rcont2 [%d,%d]: exp underflow to 0; algorithm failure"
 msgstr "rcont2 [%d,%d] : exp provoque un dépassement mémoire vers le bas à 0 ; l'algorithme a échoué"
 
-#: smooth.cpp:102
 #, c-format
 msgid "invalid end-rule for running median of 3: %d"
 msgstr "règle finale incorrecte pour une médiane mobile de 3 : %d"
 
-#: splines.cpp:368
 msgid "inputs of different lengths"
 msgstr ""
 
-#: starma.cpp:357
 #, c-format
 msgid "missing value in last %d observations"
 msgstr "valeur manquante dans les %d dernières observations"
 
-#: swilk.cpp:209
 #, fuzzy, c-format
 msgid "ifault=%d. This should not happen"
 msgstr "ceci ne devrait pas se produire"

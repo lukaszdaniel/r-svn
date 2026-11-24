@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:02+0200\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -74,10 +74,20 @@ msgstr "'%s'不可能有'%s'状态"
 msgid "'%s' must be a character string"
 msgstr "'sep'必需是字符串"
 
+#. R/models.R: gettextf("'%s' must be an object of class \"%s\"", "termobj",     "terms")
+#, fuzzy
+msgid "'%s' must be an object of class \"%s\""
+msgstr "'termobj'必需是类别为%s的对象"
+
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 #, fuzzy
 msgid "'%s' must be numeric in [0, 1]"
 msgstr "'sig.level'必需是在[0, 1] 里的数值"
+
+#. R/models.R: gettextf("'%s' must be numeric or NULL", "dropx")
+#, fuzzy
+msgid "'%s' must be numeric or NULL"
+msgstr "'y'必需是数值向量"
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 msgid "'A' must be an array or table"
@@ -269,6 +279,11 @@ msgstr "'degree'至少为一"
 msgid "'degree' must be less than number of unique points"
 msgstr "'degree'必需小于唯一数据点的数目"
 
+#. R/smspline.R: stop("'deriv' must be a non-negative integer")
+#, fuzzy
+msgid "'deriv' must be a non-negative integer"
+msgstr "'x'必需是非负的整数"
+
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 msgid "'deriv' must be between 0 and 3"
 msgstr "'deriv'必需在零和三之间"
@@ -446,6 +461,11 @@ msgstr ""
 msgid "'margins' must be a numeric vector of length 2"
 msgstr "'margins'必需是长度为二的数值向量"
 
+#. R/ppr.R: stop("'max.terms' must be at least 'nterms'")
+#, fuzzy
+msgid "'max.terms' must be at least 'nterms'"
+msgstr "'lag.max'至少必需为零"
+
 #. R/mlm.R: stop("'mlm' objects with weights are not supported")
 msgid "'mlm' objects with weights are not supported"
 msgstr "目前不支持带权数的'mlm'对象"
@@ -513,6 +533,11 @@ msgstr "'nknots'必需是数值(在{1,..,n}中)"
 #. R/ppr.R: stop("'nterms' is missing with no default")
 msgid "'nterms' is missing with no default"
 msgstr "缺失'nterms'的值，也缺失默認值"
+
+#. R/ppr.R: stop("'nterms' must be a positive integer")
+#, fuzzy
+msgid "'nterms' must be a positive integer"
+msgstr "'n'必需是大于等于'x'的正整数"
 
 #. R/aov.R: stop("'object' does not include an error 'qr' component")
 msgid "'object' does not include an error 'qr' component"
@@ -719,10 +744,6 @@ msgstr "'cutpoints'相互必需不同，但实际上是 ="
 #, fuzzy
 msgid "'termlabels' must be a character vector"
 msgstr "'termlabels'必需是长度至少为一的字节向量"
-
-#. R/models.R: gettextf("'termobj' must be a object of class %s", dQuote("terms"))
-msgid "'termobj' must be a object of class %s"
-msgstr "'termobj'必需是类别为%s的对象"
 
 #. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
 msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
@@ -1229,11 +1250,6 @@ msgstr "PCA只适用于数值变量"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr ""
 
-#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
-#, fuzzy
-msgid "Parameter(s) %s ignored"
-msgstr "拟合参数"
-
 #. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 msgid "Parameter:"
 msgstr ""
@@ -1612,6 +1628,11 @@ msgstr "没有这样的参数名"
 msgid "cannot rescale a constant/zero column to unit variance"
 msgstr "不能将常数的列/全部为零的列的方差重新调整为一"
 
+#. R/models.R: gettextf("cannot set contrasts for variable '%s'", namD[i])
+#, fuzzy
+msgid "cannot set contrasts for variable '%s'"
+msgstr "'cor=TRUE'不能和常数变量同时使用"
+
 #. R/family.R: stop("cannot simulate from non-integer prior.weights")
 msgid "cannot simulate from non-integer prior.weights"
 msgstr "无法用非整数的prior.weights进行模拟"
@@ -1654,15 +1675,12 @@ msgstr "'contrast.obj'的列必需设定成对比(总和为零)"
 msgid "computation of exact probability failed, returning Monte Carlo approximation"
 msgstr ""
 
-#. R/free1way.R: gettextf("computing Newton updated failed in %s", ".NewtonRaphson")
-msgid "computing Newton updated failed in %s"
-msgstr ""
-
 #. R/contrast.R: stop("contrasts apply only to factors")
 msgid "contrasts apply only to factors"
 msgstr "对比只适用于因子"
 
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
+#. R/models.R: gettext("contrasts can be applied only to factors with 2 or more levels")
 msgid "contrasts can be applied only to factors with 2 or more levels"
 msgstr "对比只适用于有两个或多于两个水平的因子"
 
@@ -2228,6 +2246,7 @@ msgstr "响应类型无效"
 #. R/density.R: gettextf("invalid value of %s", "length(x)")
 #. R/filter.R: gettextf("invalid value of %s", "NROW(x)")
 #. R/filter.R: gettextf("invalid value of %s", "length(filter)")
+#. R/kmeans.R: gettextf("invalid value of %s", "'trace'")
 #, fuzzy
 msgid "invalid value of %s"
 msgstr "'n'的值无效"
@@ -3703,9 +3722,15 @@ msgstr "用重量作为形状参数"
 msgid "value of 'epsilon' must be > 0"
 msgstr "'epsilon'的值必需大于零"
 
-#. R/models.R: gettextf("variable '%s' is absent, its contrast will be ignored",     nn)
-msgid "variable '%s' is absent, its contrast will be ignored"
-msgstr "没有变量'%s'，因此它的对比忽略不用"
+#. R/glm.R: stop("value of 'tol' must be >= 0")
+#, fuzzy
+msgid "value of 'tol' must be >= 0"
+msgstr "'epsilon'的值必需大于零"
+
+#. R/glm.R: stop("value of 'wtol' must be >= 0")
+#, fuzzy
+msgid "value of 'wtol' must be >= 0"
+msgstr "'epsilon'的值必需大于零"
 
 #. R/models.R: gettextf("variable '%s' is not a factor", nm)
 msgid "variable '%s' is not a factor"
@@ -3727,6 +3752,7 @@ msgstr "不支持加权多层aov()拟合"
 msgid "weights must be non-negative and not all zero"
 msgstr "权数必需为非负值，而且不能全部都为零"
 
+#. R/glm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 #. R/lm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 msgid "weights smaller than tolerance wtol*sum(w) = %g treated as zero"
 msgstr ""
@@ -3950,6 +3976,13 @@ msgstr[0] "模型里上范围没有这些词条%s"
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "从组合拟合中用%d/%d行"
+
+#, fuzzy
+#~ msgid "Parameter(s) %s ignored"
+#~ msgstr "拟合参数"
+
+#~ msgid "variable '%s' is absent, its contrast will be ignored"
+#~ msgstr "没有变量'%s'，因此它的对比忽略不用"
 
 #, fuzzy
 #~ msgid "'%s' is not implemented yet"

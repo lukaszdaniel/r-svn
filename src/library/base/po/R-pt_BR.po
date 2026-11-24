@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.3.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-10-23 20:55\n"
 "PO-Revision-Date: 2025-07-06 14:50+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: http://www.feferraz.net/br/P/Projeto_Traducao_R_Portugues\n"
@@ -2028,12 +2028,12 @@ msgstr "pacote %s tem uma licença que você precisa aceitar depois de visualiz�
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr "pacote %s tem uma licença que você precisa aceitar em uma sessão interativa"
 
-#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\n  according to the DESCRIPTION file it is\n  %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
-"according to the DESCRIPTION file it is\n"
-"%s"
+"  according to the DESCRIPTION file it is\n"
+"  %s"
 msgstr "pacote %s tem uma licença que você precisa aceitar depois de visualizá-la"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
@@ -2217,10 +2217,6 @@ msgstr "não há nenhum pacote chamado %s"
 msgid "this is the \"qr\" method for the generic function solve()"
 msgstr "esse é o método \"qr\" para a função genérica solve()"
 
-#. R/datetime.R: sQuote("timedatectl")
-msgid "timedatectl"
-msgstr ""
-
 #. R/qr.R: stop("too large a matrix for LINPACK")
 msgid "too large a matrix for LINPACK"
 msgstr "matriz grande demais para LINPACK"
@@ -2245,7 +2241,7 @@ msgstr "matriz triangular deve ser quadrada"
 msgid "trimmed means are not defined for complex data"
 msgstr "médias aparadas não são definidas para dados complexos"
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote("timedatectl"))
+#. R/datetime.R: gettext("unable to deduce timezone name from ")
 #. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
 msgid "unable to deduce timezone name from"
 msgstr "impossível deduzir fuso horário de"

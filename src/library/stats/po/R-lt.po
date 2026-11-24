@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stats 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -68,10 +68,20 @@ msgstr "'%s' negali būti '%s' tipo"
 msgid "'%s' must be a character string"
 msgstr "'sep' turi būti simbolių eilutė"
 
+#. R/models.R: gettextf("'%s' must be an object of class \"%s\"", "termobj",     "terms")
+#, fuzzy
+msgid "'%s' must be an object of class \"%s\""
+msgstr "'termobj' turi būti klasės %s objektas"
+
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 #, fuzzy
 msgid "'%s' must be numeric in [0, 1]"
 msgstr "'sig.level' turi būti skaitinis [0,1]"
+
+#. R/models.R: gettextf("'%s' must be numeric or NULL", "dropx")
+#, fuzzy
+msgid "'%s' must be numeric or NULL"
+msgstr "'y' turi būti skaitinis vektorius"
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 msgid "'A' must be an array or table"
@@ -261,6 +271,11 @@ msgstr "'degree' turi būti mažiausiai 1"
 msgid "'degree' must be less than number of unique points"
 msgstr "'degree' turi būti mažesnis negu unikalių taškų skaičius"
 
+#. R/smspline.R: stop("'deriv' must be a non-negative integer")
+#, fuzzy
+msgid "'deriv' must be a non-negative integer"
+msgstr "'x' turi būti neneigiamas ir sveikasis skaičius"
+
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 msgid "'deriv' must be between 0 and 3"
 msgstr "'deriv' turi būti tarp 0 ir 3"
@@ -435,6 +450,11 @@ msgstr "'margin' turi turėti vardus ar skaičius atitinkančius 'table'"
 msgid "'margins' must be a numeric vector of length 2"
 msgstr "'margins' turi būti ilgio 2 skaitinis vektorius"
 
+#. R/ppr.R: stop("'max.terms' must be at least 'nterms'")
+#, fuzzy
+msgid "'max.terms' must be at least 'nterms'"
+msgstr "'lag.max' turi būti mažiausiai 0"
+
 #. R/mlm.R: stop("'mlm' objects with weights are not supported")
 msgid "'mlm' objects with weights are not supported"
 msgstr "'mlm' objektai su svoriais nėra palaikomi"
@@ -503,6 +523,11 @@ msgstr "'nknots' turi būti skaitinis ({1,..,n})"
 #. R/ppr.R: stop("'nterms' is missing with no default")
 msgid "'nterms' is missing with no default"
 msgstr "'nterms' yra trūkstamas ir nenumatytasis"
+
+#. R/ppr.R: stop("'nterms' must be a positive integer")
+#, fuzzy
+msgid "'nterms' must be a positive integer"
+msgstr "'n' turi būti teigiamas sveikasis skaičius >= 'x'"
 
 #. R/aov.R: stop("'object' does not include an error 'qr' component")
 msgid "'object' does not include an error 'qr' component"
@@ -706,10 +731,6 @@ msgstr "'cutpoints' turi būti unikalus, bet yra ="
 #, fuzzy
 msgid "'termlabels' must be a character vector"
 msgstr "'termlabels' turi būti tekstinis vektorius, kurio ilgis bent 1"
-
-#. R/models.R: gettextf("'termobj' must be a object of class %s", dQuote("terms"))
-msgid "'termobj' must be a object of class %s"
-msgstr "'termobj' turi būti klasės %s objektas"
 
 #. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
 msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
@@ -1212,10 +1233,6 @@ msgstr "PCA taikoma tik skaitiniams kintamiesiems"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Puslapis [%d,%d]: i =%s; j =%s"
 
-#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
-msgid "Parameter(s) %s ignored"
-msgstr ""
-
 #. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 msgid "Parameter:"
 msgstr ""
@@ -1593,6 +1610,11 @@ msgstr "nepavyko atpažinti parametro vardo"
 msgid "cannot rescale a constant/zero column to unit variance"
 msgstr "negalima keisti konstantos/nulinio stulpelio į vieneto dispersiją"
 
+#. R/models.R: gettextf("cannot set contrasts for variable '%s'", namD[i])
+#, fuzzy
+msgid "cannot set contrasts for variable '%s'"
+msgstr "negalima naudoti 'cor = TRUE' su pastoviu kintamuoju"
+
 #. R/family.R: stop("cannot simulate from non-integer prior.weights")
 msgid "cannot simulate from non-integer prior.weights"
 msgstr "nepavyko simuliuoti iš nesveikųjų skaičiaus prior.weights"
@@ -1635,15 +1657,12 @@ msgstr "'contrast.obj' stulpelis turi apibrėžti kontrastą (suma lygi nuliui)"
 msgid "computation of exact probability failed, returning Monte Carlo approximation"
 msgstr ""
 
-#. R/free1way.R: gettextf("computing Newton updated failed in %s", ".NewtonRaphson")
-msgid "computing Newton updated failed in %s"
-msgstr ""
-
 #. R/contrast.R: stop("contrasts apply only to factors")
 msgid "contrasts apply only to factors"
 msgstr "kontrastai taikomi tik faktoriams"
 
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
+#. R/models.R: gettext("contrasts can be applied only to factors with 2 or more levels")
 msgid "contrasts can be applied only to factors with 2 or more levels"
 msgstr "kontrastai gali būti taikomi tik faktoriams su 2 ar daugiau lygių"
 
@@ -2201,6 +2220,7 @@ msgstr "neteisingas atsakymo tipas"
 #. R/density.R: gettextf("invalid value of %s", "length(x)")
 #. R/filter.R: gettextf("invalid value of %s", "NROW(x)")
 #. R/filter.R: gettextf("invalid value of %s", "length(filter)")
+#. R/kmeans.R: gettextf("invalid value of %s", "'trace'")
 msgid "invalid value of %s"
 msgstr "neleistina %s reikšmė"
 
@@ -3662,9 +3682,15 @@ msgstr "naudojant svorius kaip formos parametrus"
 msgid "value of 'epsilon' must be > 0"
 msgstr "'epsilon' reikšmė turi būti > 0"
 
-#. R/models.R: gettextf("variable '%s' is absent, its contrast will be ignored",     nn)
-msgid "variable '%s' is absent, its contrast will be ignored"
-msgstr "kintamojo '%s' nėra, jo kontrastas bus ignoruojamas"
+#. R/glm.R: stop("value of 'tol' must be >= 0")
+#, fuzzy
+msgid "value of 'tol' must be >= 0"
+msgstr "'epsilon' reikšmė turi būti > 0"
+
+#. R/glm.R: stop("value of 'wtol' must be >= 0")
+#, fuzzy
+msgid "value of 'wtol' must be >= 0"
+msgstr "'epsilon' reikšmė turi būti > 0"
 
 #. R/models.R: gettextf("variable '%s' is not a factor", nm)
 msgid "variable '%s' is not a factor"
@@ -3686,6 +3712,7 @@ msgstr "svoriai nepalaikomi daugiapakopiame aov()"
 msgid "weights must be non-negative and not all zero"
 msgstr "svoriai turi būti neneigiami ir ne visi nuliniai"
 
+#. R/glm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 #. R/lm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 msgid "weights smaller than tolerance wtol*sum(w) = %g treated as zero"
 msgstr ""
@@ -3959,6 +3986,9 @@ msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "naudojant %d/%d eilutę iš kompleksinio parinkimo"
 msgstr[1] "naudojant %d/%d eilutes iš kompleksinio parinkimo"
 msgstr[2] "naudojant %d/%d eilučių iš kompleksinio parinkimo"
+
+#~ msgid "variable '%s' is absent, its contrast will be ignored"
+#~ msgstr "kintamojo '%s' nėra, jo kontrastas bus ignoruojamas"
 
 #, fuzzy
 #~ msgid "'%s' is not implemented yet"

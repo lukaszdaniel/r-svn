@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: utils 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -411,6 +411,10 @@ msgstr "Iš meniu įveskite elementą arba 0, kad išeitumėte"
 #. R/widgets.R: gettext("Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel\n")
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "Įveskite vieną ar daugiau skaičių, atskirtų tarpais, tada ENTER arba 0, kad atšauktumėte"
+
+#. R/data.R: gettextf("File '%s' has unequal number of fields", file)
+msgid "File '%s' has unequal number of fields"
+msgstr ""
 
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 msgid "Filter '%s' is not available."
@@ -977,7 +981,6 @@ msgstr "kiekvienas paketas priklauso vienas nuo kito"
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 msgid "failed to copy %s to %s"
 msgstr "nepavyko nukopijuoti %s į %s"
 
@@ -1236,6 +1239,14 @@ msgstr "neleistina %s reikšmė: %s"
 #. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
 msgid "kind '%s' not yet implemented"
 msgstr "'%s' rūšis dar neįgyvendinta"
+
+#. R/tar.R: stop("link target is the extraction directory")
+msgid "link target is the extraction directory"
+msgstr ""
+
+#. R/tar.R: stop("link target outside extraction directory")
+msgid "link target outside extraction directory"
+msgstr ""
 
 #. R/menu.R: stop("menu() cannot be used non-interactively")
 msgid "menu() cannot be used non-interactively"

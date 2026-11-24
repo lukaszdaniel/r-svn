@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-07-25 10:43+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -305,7 +305,7 @@ msgid "Save script"
 msgstr ""
 
 #: src/gnuwin32/editor.cpp:825 src/gnuwin32/pager.cpp:462
-#: src/library/grDevices/src/devWindows.cpp:1606
+#: src/library/grDevices/src/devWindows.cpp:1609
 msgid "Return focus to Console"
 msgstr ""
 
@@ -314,13 +314,13 @@ msgid "Print script"
 msgstr ""
 
 #: src/gnuwin32/editor.cpp:830 src/gnuwin32/pager.cpp:457
-#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1600
+#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1603
 msgid "Print"
 msgstr ""
 
 #: src/gnuwin32/editor.cpp:848 src/gnuwin32/pager.cpp:478
 #: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1818
-#: src/library/grDevices/src/devWindows.cpp:1638
+#: src/library/grDevices/src/devWindows.cpp:1641
 msgid "File"
 msgstr ""
 
@@ -343,8 +343,8 @@ msgid "Save as..."
 msgstr ""
 
 #: src/gnuwin32/editor.cpp:858 src/gnuwin32/pager.cpp:481
-#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1659
-#: src/library/grDevices/src/devWindows.cpp:1701
+#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1662
+#: src/library/grDevices/src/devWindows.cpp:1704
 msgid "Print..."
 msgstr ""
 
@@ -399,7 +399,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/gnuwin32/extra.cpp:1134
+#: src/gnuwin32/extra.cpp:1136
 msgid "Select file"
 msgstr ""
 
@@ -429,7 +429,7 @@ msgstr ""
 
 #: src/gnuwin32/pager.cpp:321 src/gnuwin32/rui.cpp:931
 #: src/library/utils/src/windows/dataentry.cpp:1731
-#: src/library/grDevices/src/devWindows.cpp:1698
+#: src/library/grDevices/src/devWindows.cpp:1701
 msgid "Stay on top"
 msgstr ""
 
@@ -830,12 +830,12 @@ msgstr ""
 #: src/extra/graphapp/dialogs.cpp:705 src/extra/graphapp/dialogs.cpp:723
 #: src/extra/graphapp/dialogs.cpp:729 src/extra/graphapp/dialogs.cpp:865
 #: src/extra/graphapp/dialogs.cpp:879 src/extra/graphapp/dialogs.cpp:885
-#: src/library/utils/src/windows/widgets.cpp:136
+#: src/library/utils/src/windows/widgets.cpp:137
 msgid "Cancel"
 msgstr ""
 
 #: src/extra/graphapp/dialogs.cpp:725 src/extra/graphapp/dialogs.cpp:881
-#: src/library/utils/src/windows/widgets.cpp:135
+#: src/library/utils/src/windows/widgets.cpp:136
 msgid "OK"
 msgstr ""
 
@@ -881,9 +881,9 @@ msgid "Unable to start the print job"
 msgstr ""
 
 #: src/library/utils/src/windows/dataentry.cpp:245
-#: src/library/utils/src/windows/dataentry.cpp:1869
-#: src/library/utils/src/windows/dataentry.cpp:1872
-#: src/library/utils/src/windows/dataentry.cpp:1902
+#: src/library/utils/src/windows/dataentry.cpp:1867
+#: src/library/utils/src/windows/dataentry.cpp:1870
+#: src/library/utils/src/windows/dataentry.cpp:1900
 msgid "invalid argument"
 msgstr ""
 
@@ -896,7 +896,7 @@ msgid "Data Editor"
 msgstr ""
 
 #: src/library/utils/src/windows/dataentry.cpp:350
-#: src/library/utils/src/windows/dataentry.cpp:1862
+#: src/library/utils/src/windows/dataentry.cpp:1861
 msgid "dataentry: internal memory problem"
 msgstr ""
 
@@ -1001,188 +1001,188 @@ msgstr ""
 msgid "Data editor"
 msgstr ""
 
-#: src/library/utils/src/windows/dataentry.cpp:1909
+#: src/library/utils/src/windows/dataentry.cpp:1907
 msgid "unable to start data viewer"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:950
+#: src/library/grDevices/src/devWindows.cpp:953
 msgid "Portable network graphics file"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:953
+#: src/library/grDevices/src/devWindows.cpp:956
 msgid "Windows bitmap file"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:956
+#: src/library/grDevices/src/devWindows.cpp:959
 msgid "TIFF file"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:959
+#: src/library/grDevices/src/devWindows.cpp:962
 msgid "Jpeg file"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:980
+#: src/library/grDevices/src/devWindows.cpp:983
 msgid "Postscript file"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:991
+#: src/library/grDevices/src/devWindows.cpp:994
 msgid "PDF file"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1003
+#: src/library/grDevices/src/devWindows.cpp:1006
 msgid "Enhanced metafiles"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1006
-#: src/library/grDevices/src/devWindows.cpp:3540
+#: src/library/grDevices/src/devWindows.cpp:1009
+#: src/library/grDevices/src/devWindows.cpp:3544
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1216
+#: src/library/grDevices/src/devWindows.cpp:1219
 msgid "No plot to replace!"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1266
+#: src/library/grDevices/src/devWindows.cpp:1269
 msgid "Variable name"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1275
+#: src/library/grDevices/src/devWindows.cpp:1278
 msgid "Variable doesn't contain any plots!"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1288
+#: src/library/grDevices/src/devWindows.cpp:1291
 msgid "Name of variable to save to"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1594
+#: src/library/grDevices/src/devWindows.cpp:1597
 msgid "Copy to the clipboard as a metafile"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1612
-#: src/library/grDevices/src/devWindows.cpp:1623
+#: src/library/grDevices/src/devWindows.cpp:1615
+#: src/library/grDevices/src/devWindows.cpp:1626
 msgid "Stop locator"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1622
-#: src/library/grDevices/src/devWindows.cpp:1626
+#: src/library/grDevices/src/devWindows.cpp:1625
+#: src/library/grDevices/src/devWindows.cpp:1629
 msgid "Stop"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1628
+#: src/library/grDevices/src/devWindows.cpp:1631
 msgid "Continue"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1632
+#: src/library/grDevices/src/devWindows.cpp:1635
 msgid "Next"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1633
+#: src/library/grDevices/src/devWindows.cpp:1636
 msgid "Next plot"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1639
+#: src/library/grDevices/src/devWindows.cpp:1642
 msgid "Save as"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1648
-#: src/library/grDevices/src/devWindows.cpp:1650
-#: src/library/grDevices/src/devWindows.cpp:1652
+#: src/library/grDevices/src/devWindows.cpp:1651
+#: src/library/grDevices/src/devWindows.cpp:1653
+#: src/library/grDevices/src/devWindows.cpp:1655
 #, c-format
 msgid "%s quality..."
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1654
+#: src/library/grDevices/src/devWindows.cpp:1657
 msgid "Copy to the clipboard"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1655
+#: src/library/grDevices/src/devWindows.cpp:1658
 msgid "as a Bitmap\tCTRL+C"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1656
+#: src/library/grDevices/src/devWindows.cpp:1659
 msgid "as a Metafile\tCTRL+W"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1661
+#: src/library/grDevices/src/devWindows.cpp:1664
 msgid "close Device"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1662
+#: src/library/grDevices/src/devWindows.cpp:1665
 msgid "History"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1663
+#: src/library/grDevices/src/devWindows.cpp:1666
 msgid "Recording"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1666
+#: src/library/grDevices/src/devWindows.cpp:1669
 msgid "Add\tINS"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1667
+#: src/library/grDevices/src/devWindows.cpp:1670
 msgid "Replace"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1669
+#: src/library/grDevices/src/devWindows.cpp:1672
 msgid "Previous\tPgUp"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1670
+#: src/library/grDevices/src/devWindows.cpp:1673
 msgid "Next\tPgDown"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1672
+#: src/library/grDevices/src/devWindows.cpp:1675
 msgid "Save to variable..."
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1673
+#: src/library/grDevices/src/devWindows.cpp:1676
 msgid "Get from variable..."
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1675
+#: src/library/grDevices/src/devWindows.cpp:1678
 msgid "Clear history"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1676
+#: src/library/grDevices/src/devWindows.cpp:1679
 msgid "Resize"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1677
+#: src/library/grDevices/src/devWindows.cpp:1680
 msgid "R mode"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1679
+#: src/library/grDevices/src/devWindows.cpp:1682
 msgid "Fit to window"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1681
+#: src/library/grDevices/src/devWindows.cpp:1684
 msgid "Fixed size"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1688
+#: src/library/grDevices/src/devWindows.cpp:1691
 msgid "Copy as metafile"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1690
+#: src/library/grDevices/src/devWindows.cpp:1693
 msgid "Copy as bitmap"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1693
+#: src/library/grDevices/src/devWindows.cpp:1696
 msgid "Save as metafile..."
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:1695
+#: src/library/grDevices/src/devWindows.cpp:1698
 msgid "Save as postscript..."
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:3205
+#: src/library/grDevices/src/devWindows.cpp:3208
 msgid "Locator is active"
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:3858
+#: src/library/grDevices/src/devWindows.cpp:3862
 msgid "Waiting to confirm page change..."
 msgstr ""
 
-#: src/library/grDevices/src/devWindows.cpp:3870
+#: src/library/grDevices/src/devWindows.cpp:3874
 msgid "Click or hit ENTER for next page"
 msgstr ""

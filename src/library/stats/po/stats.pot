@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-10-23 20:56+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,15 +59,15 @@ msgstr ""
 msgid "approx(x,y, .., na.rm=FALSE): NA values in x are not allowed"
 msgstr ""
 
-#: arima.cpp:78 arima.cpp:188 arima.cpp:371 arima.cpp:603 optim.cpp:46
+#: arima.cpp:80 arima.cpp:190 arima.cpp:373 arima.cpp:605 optim.cpp:46
 msgid "invalid argument type"
 msgstr ""
 
-#: arima.cpp:437 arima.cpp:526 pacf.cpp:322 pacf.cpp:361
+#: arima.cpp:439 arima.cpp:528 pacf.cpp:322 pacf.cpp:361
 msgid "can only transform 100 pars in arima0"
 msgstr ""
 
-#: arima.cpp:1010
+#: arima.cpp:1012
 msgid "maximum supported lag is 350"
 msgstr ""
 
@@ -133,48 +133,48 @@ msgstr ""
 msgid "the standard deviation is zero"
 msgstr ""
 
-#: deriv.cpp:157
+#: deriv.cpp:159
 msgid "invalid form in unary minus check"
 msgstr ""
 
-#: deriv.cpp:442
+#: deriv.cpp:433
 msgid ""
 "only single-argument calls to log() are supported;\n"
 "  maybe use log(x,a) = log(x)/log(a)"
 msgstr ""
 
-#: deriv.cpp:680
+#: deriv.cpp:713
 #, c-format
 msgid "Function '%s' is not in the derivatives table"
 msgstr ""
 
-#: deriv.cpp:787
+#: deriv.cpp:818
 #, c-format
 msgid "expression must not be type '%s'"
 msgstr ""
 
-#: deriv.cpp:790
+#: deriv.cpp:821
 msgid "variable must be a character string"
 msgstr ""
 
-#: deriv.cpp:792
+#: deriv.cpp:823
 msgid "only the first element is used as variable name"
 msgstr ""
 
-#: deriv.cpp:805
+#: deriv.cpp:836
 #, c-format
 msgid "invalid expression in '%s'"
 msgstr ""
 
-#: deriv.cpp:867
+#: deriv.cpp:898
 msgid "too many variables"
 msgstr ""
 
-#: deriv.cpp:1080 model.cpp:106
+#: deriv.cpp:1111 model.cpp:108
 msgid "invalid variable names"
 msgstr ""
 
-#: deriv.cpp:1088 deriv.cpp:1090
+#: deriv.cpp:1119 deriv.cpp:1121
 msgid "invalid tag"
 msgstr ""
 
@@ -283,8 +283,8 @@ msgid ""
 "Rather set 'simulate.p.value=TRUE'\n"
 msgstr ""
 
-#: filter.cpp:41 filter.cpp:44 filter.cpp:93 massdist.cpp:41 model.cpp:373
-#: model.cpp:381 optim.cpp:220
+#: filter.cpp:41 filter.cpp:44 filter.cpp:93 massdist.cpp:41 model.cpp:375
+#: model.cpp:383 optim.cpp:220
 #, c-format
 msgid "invalid '%s' argument"
 msgstr ""
@@ -459,147 +459,147 @@ msgstr ""
 msgid "Burg's algorithm failed to find partial correlation"
 msgstr ""
 
-#: model.cpp:104
+#: model.cpp:106
 msgid "invalid variables"
 msgstr ""
 
-#: model.cpp:108 model.cpp:113
+#: model.cpp:110 model.cpp:115
 msgid "number of variables != number of variable names"
 msgstr ""
 
-#: model.cpp:111
+#: model.cpp:113
 msgid "invalid extra variables"
 msgstr ""
 
-#: model.cpp:115
+#: model.cpp:117
 msgid "invalid extra variable names"
 msgstr ""
 
-#: model.cpp:136
+#: model.cpp:138
 #, c-format
 msgid "overlong names in '%s'"
 msgstr ""
 
-#: model.cpp:161
+#: model.cpp:163
 #, c-format
 msgid "invalid type (%s) for variable '%s'"
 msgstr ""
 
-#: model.cpp:167
+#: model.cpp:169
 #, c-format
 msgid "variable lengths differ (found for '%s')"
 msgstr ""
 
-#: model.cpp:217
+#: model.cpp:219
 msgid "invalid result from na.action"
 msgstr ""
 
-#: model.cpp:392
+#: model.cpp:394
 msgid "invalid model frame"
 msgstr ""
 
-#: model.cpp:394
+#: model.cpp:396
 msgid "do not know how many cases"
 msgstr ""
 
-#: model.cpp:418
+#: model.cpp:420
 #, c-format
 msgid "variable lengths differ (found for variable %d)"
 msgstr ""
 
-#: model.cpp:422 model.cpp:429
+#: model.cpp:424 model.cpp:431
 #, c-format
 msgid "variable %d has no levels"
 msgstr ""
 
-#: model.cpp:540
+#: model.cpp:542
 msgid "the response appeared on the right-hand side and was dropped"
 msgstr ""
 
-#: model.cpp:560
+#: model.cpp:562
 #, c-format
 msgid "term %d would require %.0g columns"
 msgstr ""
 
-#: model.cpp:564
+#: model.cpp:566
 #, c-format
 msgid "matrix would require %.0g columns"
 msgstr ""
 
-#: model.cpp:575
+#: model.cpp:577
 #, c-format
 msgid "problem with term %d in model.matrix: no columns are assigned"
 msgstr ""
 
-#: model.cpp:624 model.cpp:629 model.cpp:635 model.cpp:646 model.cpp:652
-#: model.cpp:658
+#: model.cpp:615 model.cpp:631 model.cpp:636 model.cpp:642 model.cpp:653
+#: model.cpp:659 model.cpp:665
 msgid "term names will be truncated"
 msgstr ""
 
-#: model.cpp:638
+#: model.cpp:645
 msgid "complex variables are not currently allowed in model matrices"
 msgstr ""
 
-#: model.cpp:662
+#: model.cpp:669
 #, c-format
 msgid "variables of type '%s' are not allowed in model matrices"
 msgstr ""
 
-#: model.cpp:882
+#: model.cpp:889
 msgid "invalid formula in 'update'"
 msgstr ""
 
-#: model.cpp:916
+#: model.cpp:923
 msgid "formula expected"
 msgstr ""
 
-#: model.cpp:1082
+#: model.cpp:1089
 msgid "invalid term in model formula"
 msgstr ""
 
-#: model.cpp:1173
+#: model.cpp:1180
 msgid "invalid model formula"
 msgstr ""
 
-#: model.cpp:1205 model.cpp:1512
+#: model.cpp:1212 model.cpp:1519
 msgid "invalid power in formula"
 msgstr ""
 
-#: model.cpp:1254 model.cpp:1689
+#: model.cpp:1261 model.cpp:1696
 #, c-format
 msgid "invalid model formula in '%s'"
 msgstr ""
 
-#: model.cpp:1297
+#: model.cpp:1304
 #, c-format
 msgid "AllocT..Bit1(%s): Need to increment nwords to %d. Should not happen!\n"
 msgstr ""
 
-#: model.cpp:1623
+#: model.cpp:1630
 #, c-format
 msgid "duplicated name '%s' in data frame using '.'"
 msgstr ""
 
-#: model.cpp:1765
+#: model.cpp:1772
 msgid "argument is not a valid model"
 msgstr ""
 
-#: model.cpp:1775
+#: model.cpp:1782
 msgid "'specials' must be NULL or a character vector"
 msgstr ""
 
-#: model.cpp:1786
+#: model.cpp:1793
 msgid "'data' argument is of the wrong type"
 msgstr ""
 
-#: model.cpp:1854
+#: model.cpp:1862
 #, c-format
 msgid ""
 "'varlist' has changed (from nvar=%d) to new %d after EncodeVars() -- should "
 "no longer happen!"
 msgstr ""
 
-#: model.cpp:2136
+#: model.cpp:2144
 msgid "'.' in formula and no 'data' argument"
 msgstr ""
 
@@ -1005,7 +1005,7 @@ msgstr ""
 msgid "invalid sample size 'n' in C routine prho(n,s,*)"
 msgstr ""
 
-#: rWishart.cpp:53
+#: rWishart.cpp:54
 msgid "inconsistent degrees of freedom and dimension"
 msgstr ""
 
@@ -1013,7 +1013,7 @@ msgstr ""
 msgid "'scal' must be a square, real matrix"
 msgstr ""
 
-#: rWishart.cpp:99
+#: rWishart.cpp:103
 msgid "'scal' matrix is not positive-definite"
 msgstr ""
 

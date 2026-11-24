@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-12-27 18:28\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -363,34 +363,6 @@ msgstr ""
 #. R/packageName.R: gettextf("Created a package name, %s, when none found", sQuote(pkg))
 
 msgid "Created a package name, %s, when none found"
-msgstr ""
-
-
-#: R/Methods.R: 0
-#. R/Methods.R: gettextf("Creating a generic function for %s from %s in %s\n    (from the saved implicit definition)",     sQuote(name), sQuote(package), thisPName)
-
-msgid "Creating a generic function for %s from %s in %s\n    (from the saved implicit definition)"
-msgstr ""
-
-
-#: R/Methods.R: 0
-#. R/Methods.R: gettextf("Creating a generic function for %s from package %s in %s",     sQuote(f), sQuote(fdef@package), thisPName)
-
-msgid "Creating a generic function for %s from package %s in %s"
-msgstr ""
-
-
-#: R/Methods.R: 0
-#. R/Methods.R: gettextf("Creating a generic function from function %s in %s",     sQuote(f), thisPName)
-
-msgid "Creating a generic function from function %s in %s"
-msgstr ""
-
-
-#: R/Methods.R: 0
-#. R/Methods.R: gettextf("Creating a new generic function for %s in %s", sQuote(name),     thisPName)
-
-msgid "Creating a new generic function for %s in %s"
 msgstr ""
 
 
@@ -914,9 +886,9 @@ msgstr ""
 
 
 #: R/trace.R: 0
-#. R/trace.R: gettextf("cannot find an environment corresponding to package name '%s\"",     package)
+#. R/trace.R: gettextf("cannot find an environment corresponding to package name \"%s\"",     package)
 
-msgid "cannot find an environment corresponding to package name '%s\""
+msgid "cannot find an environment corresponding to package name \"%s\""
 msgstr ""
 
 
@@ -1169,6 +1141,20 @@ msgstr ""
 #. R/RClassUtils.R: gettextf("conflicting definition of data part: .Data = %s, superclass implies %s",     dQuote(elNamed(properties, ".Data")), dQuote(dataPartClass))
 
 msgid "conflicting definition of data part: .Data = %s, superclass implies %s"
+msgstr ""
+
+
+#: R/Methods.R: 0
+#. R/Methods.R: gettextf("creating formal generic function '%s' in global environment",     name)
+
+msgid "creating formal generic function '%s' in global environment"
+msgstr ""
+
+
+#: R/Methods.R: 0
+#. R/Methods.R: gettextf("creating formal generic function '%s' in package '%s'",     name, thisPackage)
+
+msgid "creating formal generic function '%s' in package '%s'"
 msgstr ""
 
 
@@ -1425,6 +1411,13 @@ msgid "if the 'def' argument is supplied, it must be a function that calls stand
 msgstr ""
 
 
+#: R/Methods.R: 0
+#. R/Methods.R: gettextf("ignoring implicit definition in package '%s'", package)
+
+msgid "ignoring implicit definition in package '%s'"
+msgstr ""
+
+
 #: R/RMethodUtils.R: 0
 #. R/RMethodUtils.R: gettextf("in changing formal arguments in %s, some of the old names are not in fact arguments: %s",     msg, paste0("\"", old[is.na(match(old, names(dlist)))], "\"",         collapse = ", "))
 
@@ -1674,6 +1667,13 @@ msgstr ""
 #. R/RMethodUtils.R: gettextf("invalid value from generic function %s, class %s, expected %s",     sQuote(fname), dQuote(class(object)), paste(dQuote(classes),         collapse = " or "))
 
 msgid "invalid value from generic function %s, class %s, expected %s"
+msgstr ""
+
+
+#: R/as.R: 0
+#. R/as.R: gettextf("is(%s, \"%s\") is TRUE but '%s' implies otherwise",     "object", Class, "ext")
+
+msgid "is(%s, \"%s\") is TRUE but '%s' implies otherwise"
 msgstr ""
 
 
@@ -1996,13 +1996,6 @@ msgstr ""
 #. R/Methods.R: gettextf("no generic function found for '%s'", f)
 
 msgid "no generic function found for '%s'"
-msgstr ""
-
-
-#: R/Methods.R: 0
-#. R/Methods.R: gettextf("no generic version of %s on package %s is allowed;\n   a new generic will be assigned for %s",     sQuote(name), sQuote(package), thisPName)
-
-msgid "no generic version of %s on package %s is allowed;\n   a new generic will be assigned for %s"
 msgstr ""
 
 
@@ -2696,6 +2689,13 @@ msgstr ""
 #. R/refClass.R: gettextf("unnamed arguments to $new() must be objects from a reference class; got an object of class %s",     dQuote(class(super)))
 
 msgid "unnamed arguments to $new() must be objects from a reference class; got an object of class %s"
+msgstr ""
+
+
+#: R/Methods.R: 0
+#. R/Methods.R: gettextf("using implicit definition in package '%s'", package)
+
+msgid "using implicit definition in package '%s'"
 msgstr ""
 
 

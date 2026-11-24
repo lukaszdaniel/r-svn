@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -42,22 +42,6 @@ msgstr "'--as-cran' 會把 '--extra-arch' 關了"
 msgid "'--multiarch' specified with only one usable sub-architecture"
 msgstr "'--multiarch' 只設定了一個可以用的子架構結構"
 
-#. R/QC.R: gettextf("'::' or ':::' import not declared from: %s", sQuote(xx))
-msgid "'::' or ':::' import not declared from: %s"
-msgstr "'::' 或 ':::' 匯入沒有被宣告: %s"
-
-#. R/QC.R: gettext("'::' or ':::' imports not declared from:")
-msgid "'::' or ':::' imports not declared from:"
-msgstr "'::' 或 ':::' 匯入沒有被宣告："
-
-#. R/QC.R: gettextf("':::' call which should be '::': %s", sQuote(xx))
-msgid "':::' call which should be '::': %s"
-msgstr "':::' 呼叫應該是 '::'：%s"
-
-#. R/QC.R: gettext("':::' calls which should be '::':")
-msgid "':::' calls which should be '::':"
-msgstr "':::' 呼叫應該是 '::'："
-
 #. R/md5.R: stop("'bytes' must be a raw vector")
 #. R/sha256.R: stop("'bytes' must be a raw vector")
 #, fuzzy
@@ -68,16 +52,12 @@ msgstr "'text' 必須是字元向量"
 msgid "'cleanup' exists but is not executable -- see the 'R Installation and Administration Manual'"
 msgstr "有 'cleanup' 但它不是可執行檔 -- 請參考 'R 安裝和管理手冊 '"
 
-#. R/QC.R: gettextf("'data(package=)' call not declared from: %s", sQuote(xx))
-msgid "'data(package=)' call not declared from: %s"
-msgstr "'data(package=)' 呼叫沒有被宣告: %s"
-
-#. R/QC.R: gettext("'data(package=)' calls not declared from:")
-msgid "'data(package=)' calls not declared from:"
-msgstr "'data(package=)' 呼叫沒有被宣告："
-
 #. R/testing.R: warning("'diff' is not available so useDiff = FALSE will be used")
 msgid "'diff' is not available so useDiff = FALSE will be used"
+msgstr ""
+
+#. R/utils.R: stop("'file' and 'x' are mutually exclusive")
+msgid "'file' and 'x' are mutually exclusive"
 msgstr ""
 
 #. R/md5.R: stop("'files' and 'bytes' are mutually exclusive")
@@ -93,38 +73,6 @@ msgstr "不存在 '%s' 這個測試"
 #. R/sign.R: stop("'keyring' must be specified if 'use.default.keyring=FALSE'")
 msgid "'keyring' must be specified if 'use.default.keyring=FALSE'"
 msgstr ""
-
-#. R/QC.R: gettextf("'library' or 'require' call not declared from: %s",     sQuote(xx))
-msgid "'library' or 'require' call not declared from: %s"
-msgstr "'library' 或 'require' 呼叫沒有被宣告: %s"
-
-#. R/QC.R: gettextf("'library' or 'require' call to %s in package code.",     sQuote(xx))
-msgid "'library' or 'require' call to %s in package code."
-msgstr "'library' 或 'require' 於套件原始碼中對於 %s 的呼叫。"
-
-#. R/QC.R: gettextf("'library' or 'require' call to %s which was already attached by Depends.",     sQuote(xx))
-msgid "'library' or 'require' call to %s which was already attached by Depends."
-msgstr "'library' 或 'require' 對於 %s 的呼叫已照依存性附加。"
-
-#. R/QC.R: gettext("'library' or 'require' calls in package code:")
-msgid "'library' or 'require' calls in package code:"
-msgstr "'library' 或 'require' 於套件原始碼中的呼叫："
-
-#. R/QC.R: gettext("'library' or 'require' calls not declared from:")
-msgid "'library' or 'require' calls not declared from:"
-msgstr "'library' 或 'require' 呼叫沒有被宣告："
-
-#. R/QC.R: gettext("'library' or 'require' calls to packages already attached by Depends:")
-msgid "'library' or 'require' calls to packages already attached by Depends:"
-msgstr "'library' 或 'require' 對於套件的呼叫已照依存性附加："
-
-#. R/QC.R: gettextf("'loadNamespace' or 'requireNamespace' call not declared from: %s",     sQuote(xx))
-msgid "'loadNamespace' or 'requireNamespace' call not declared from: %s"
-msgstr "'loadNamespace' 或 'requireNamespace' 呼叫沒有被宣告: %s"
-
-#. R/QC.R: gettext("'loadNamespace' or 'requireNamespace' calls not declared from:")
-msgid "'loadNamespace' or 'requireNamespace' calls not declared from:"
-msgstr "'loadNamespace' 或 'requireNamespace' 呼叫沒有被宣告："
 
 #. R/Rd.R: stop("'macros' must be TRUE or must specify existing macros")
 msgid "'macros' must be TRUE or must specify existing macros"
@@ -149,6 +97,11 @@ msgstr "'text' 必須是字元向量"
 #. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'",     call. = FALSE)
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
 msgstr "'type' 值必須在 'txt'，'html'，'latex' 或 'example' 取一個"
+
+#. R/utils.R: stop("'x' must be a raw vector or a (scalar) character string")
+#, fuzzy
+msgid "'x' must be a raw vector or a (scalar) character string"
+msgstr "'x' 必須是單字串"
 
 #. R/htmltools.R: sprintf("* Package: %s", p)
 #. R/htmltools.R: sprintf("* Package: %s", basename(d))
@@ -204,6 +157,14 @@ msgstr ""
 
 #. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>")
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
+msgstr ""
+
+#. R/QC.R: gettext("Adding so many packages to the search path is excessive and importing selectively is preferable.")
+msgid "Adding so many packages to the search path is excessive and importing selectively is preferable."
+msgstr ""
+
+#. R/QC.R: gettext("All declared Imports should be used.")
+msgid "All declared Imports should be used."
 msgstr ""
 
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
@@ -393,6 +354,10 @@ msgstr "使用手冊物件 '%s' 裡的資料 codoc 配合錯誤："
 #, fuzzy
 msgid "Data with usage in Rd file '%s' but not in code:"
 msgstr "資料的使用方法在使用手冊物件 '%s' 裡有記錄但不在編碼裡："
+
+#. R/QC.R: gettext("Depends includes the non-default packages:")
+msgid "Depends includes the non-default packages:"
+msgstr ""
 
 #. R/QC.R: gettextf("Deprecated license: %s", paste(y, collapse = " "))
 msgid "Deprecated license: %s"
@@ -601,9 +566,21 @@ msgstr "求值 %s 時取得警告，但同時也有錯誤"
 msgid "Help pages:"
 msgstr "說明頁面："
 
+#. R/QC.R: gettext("Importing from so many packages makes the package vulnerable to any of them becoming unavailable.  Move as many as possible to Suggests and use conditionally.")
+msgid "Importing from so many packages makes the package vulnerable to any of them becoming unavailable.  Move as many as possible to Suggests and use conditionally."
+msgstr ""
+
+#. R/QC.R: gettextf("Imports includes %d non-default packages.", ly)
+msgid "Imports includes %d non-default packages."
+msgstr ""
+
 #. R/Vignettes.R: gettextf("In '%s' vignettes '%s' and '%s' have the same vignette name",     basename(dirname(dir)), orig, dup)
 msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
 msgstr "'%s' 簡介裡 '%s' 和 '%s' 的名稱是一樣的"
+
+#. R/QC.R: gettext("Including base/recommended package(s):")
+msgid "Including base/recommended package(s):"
+msgstr ""
 
 #. R/license.R: stop("Input must be character")
 #, fuzzy
@@ -753,22 +730,6 @@ msgstr "引數名稱配合錯誤："
 msgid "Missing link(s) in Rd file '%s':"
 msgstr "使用手冊物件 '%s' 缺少聯結："
 
-#. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
-msgid "Missing object imported by a ':::' call: %s"
-msgstr "由 ':::' 呼叫匯入的缺少物件：%s"
-
-#. R/QC.R: gettext("Missing objects imported by ':::' calls:")
-msgid "Missing objects imported by ':::' calls:"
-msgstr "由 ':::' 呼叫匯入的缺少物件："
-
-#. R/QC.R: gettextf("Missing or unexported object: %s", sQuote(xx))
-msgid "Missing or unexported object: %s"
-msgstr "缺少或未匯出的物件：%s"
-
-#. R/QC.R: gettext("Missing or unexported objects:")
-msgid "Missing or unexported objects:"
-msgstr "缺少或未匯出的物件："
-
 #. R/QC.R: message("NB: need Internet access to use CRAN incoming checks")
 msgid "NB: need Internet access to use CRAN incoming checks"
 msgstr "注：需要上網才能用 CRAN 傳入檢查"
@@ -785,14 +746,6 @@ msgstr "註解"
 #, fuzzy
 msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
 msgstr "這看起來好像是梱綁軟體 -- 已經不存在了"
-
-#. R/QC.R: gettextf("Namespace in Imports field not imported from: %s",     sQuote(xx))
-msgid "Namespace in Imports field not imported from: %s"
-msgstr "匯入欄位中的命名空間未被匯入自：%s"
-
-#. R/QC.R: gettext("Namespaces in Imports field not imported from:")
-msgid "Namespaces in Imports field not imported from:"
-msgstr "匯入欄位中的命名空間未被匯入自："
 
 #. R/dynamicHelp.R: gettextf("No NEWS found for package %s", mono(pkg))
 #, fuzzy
@@ -916,10 +869,6 @@ msgstr "程式套件脫離函式不應該呼叫 %s 。"
 msgid "Package has no 'Version' field"
 msgstr "套件沒有 'Version' 欄位"
 
-#. R/QC.R: gettextf("Package in Depends field not imported from: %s", sQuote(xx))
-msgid "Package in Depends field not imported from: %s"
-msgstr "依存欄位中的套件未被匯入自：%s"
-
 #. R/QC.R: gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.",     sQuote("lib"), sQuote("pkg"))
 msgid "Package startup functions should have two arguments with names starting with %s and %s, respectively."
 msgstr "程式套件啟動函式需要有兩個名稱分別為 %s 和 %s 的引數"
@@ -936,13 +885,17 @@ msgstr "程式套件啟動函式不應該變更搜尋路徑"
 msgid "Package startup functions should use %s to generate messages."
 msgstr "程式套件啟動函式應該用 %s 來產生訊息"
 
-#. R/QC.R: gettext("Packages in Depends field not imported from:")
-msgid "Packages in Depends field not imported from:"
-msgstr "依存欄位中的套件未被匯入自："
-
 #. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
 msgid "Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R."
 msgstr "R 必須知道帶 'base'，'recommended' 或 'defunct-base' 優先權的套件。"
+
+#. R/QC.R: gettext("Please remove these calls from your code.")
+msgid "Please remove these calls from your code."
+msgstr ""
+
+#. R/QC.R: gettext("Please use :: or requireNamespace() instead.")
+msgid "Please use :: or requireNamespace() instead."
+msgstr ""
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
@@ -999,6 +952,11 @@ msgstr "Rd 巨集套件 %s 尚未安裝。"
 #. R/Rd.R: stop("Rd object required")
 msgid "Rd object required"
 msgstr "需要 Rd 物件"
+
+#. R/QC.R: gettext("RdMacros packages must be contained in the DESCRIPTION Imports/Depends entries.")
+#, fuzzy
+msgid "RdMacros packages must be contained in the DESCRIPTION Imports/Depends entries."
+msgstr "簡介依存(%s 條目)必須包含在 DESCRIPTION 檔案裡的 Depends/Suggests/Imports 條目中。"
 
 #. R/QC.R: gettextf("Record: %d Field(s): %s", pos, vapply(pos, function(p) paste(nms[ind[p,     ]], collapse = ", "), ""))
 msgid "Record: %d Field(s): %s"
@@ -1067,10 +1025,19 @@ msgstr "參見 '%2$s' 裡的 %1$s 章節"
 msgid "See section 'Cross-references' in the 'Writing R Extensions' manual."
 msgstr "請參考 '如何寫 R 附加軟體' 說明書中 '交叉參照' 這一段。"
 
+#. R/QC.R: gettext("See section 'Suggested packages' in the 'Writing R Extensions' manual.")
+#, fuzzy
+msgid "See section 'Suggested packages' in the 'Writing R Extensions' manual."
+msgstr "請參考 '如何寫 R 附加軟體' 說明書中 '交叉參照' 這一段。"
+
 #. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
 #. R/QC.R: gettextf("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
 msgid "See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
 msgstr "請參考 '如何寫 R 附加軟體' 說明書中關於 DESCRIPTION 檔案的資訊。"
+
+#. R/QC.R: gettext("See the note in ?`:::` about the use of this operator.")
+msgid "See the note in ?`:::` about the use of this operator."
+msgstr ""
 
 #. R/mailtools.R: sprintf("Sending email failed!\nThe unsent msg can be found in file %s.",     sQuote(filename))
 msgid ""
@@ -1123,6 +1090,10 @@ msgstr "不能對預設 JSS 式樣進行修改"
 msgid "The package 'dir' argument must be of length 1"
 msgstr "套件 'dir' 的引數長度必須為一"
 
+#. R/QC.R: gettext("There are ::: calls to the package's namespace in its code.  A package almost never needs to use ::: for its own objects:")
+msgid "There are ::: calls to the package's namespace in its code.  A package almost never needs to use ::: for its own objects:"
+msgstr ""
+
 #. R/packages.R: stop("There is no binary type for this build of R.")
 msgid "There is no binary type for this build of R."
 msgstr ""
@@ -1131,9 +1102,19 @@ msgstr ""
 msgid "These fields must have ASCII values."
 msgstr "這些欄位必須要有 ASCII 值。"
 
+#. R/QC.R: gettext("These packages need to be imported from (in the NAMESPACE file) for when this namespace is loaded but not attached.")
+msgid "These packages need to be imported from (in the NAMESPACE file) for when this namespace is loaded but not attached."
+msgstr ""
+
 #. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).")
 msgid "This field must contain one or more packages (and no version requirement)."
 msgstr "此欄位必須包含一或多個套件 (且不需版本號碼)。"
+
+#. R/QC.R: gettextf("  URI: %s\n    From: %s", y[, 1L], y[, 2L])
+msgid ""
+"URI: %s\n"
+"    From: %s"
+msgstr ""
 
 #. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 msgid "URL %s was not found"
@@ -1142,14 +1123,6 @@ msgstr "找不到 %s 這個 URL"
 #. R/update_packages.R: message("Unable to update existing PACKAGES file. Calling write_PACKAGES directly.")
 msgid "Unable to update existing PACKAGES file. Calling write_PACKAGES directly."
 msgstr ""
-
-#. R/QC.R: gettextf("Unavailable namespace imported from by a ':::' call: %s",     sQuote(xx))
-msgid "Unavailable namespace imported from by a ':::' call: %s"
-msgstr "由 ':::' 呼叫匯入的不可使用命名空間：%s"
-
-#. R/QC.R: gettext("Unavailable namespaces imported from by ':::' calls:")
-msgid "Unavailable namespaces imported from by ':::' calls:"
-msgstr "由 ':::' 呼叫匯入的不可使用命名空間："
 
 #. R/QC.R: gettextf("Undocumented %s:", tag)
 msgid "Undocumented %s:"
@@ -1175,14 +1148,6 @@ msgstr "未公開的編碼物件："
 #. R/QC.R: gettext("Undocumented data sets:")
 msgid "Undocumented data sets:"
 msgstr "未公開的資料集："
-
-#. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
-msgid "Unexported object imported by a ':::' call: %s"
-msgstr "由 ':::' 呼叫匯入的未匯出物件：%s"
-
-#. R/QC.R: gettext("Unexported objects imported by ':::' calls:")
-msgid "Unexported objects imported by ':::' calls:"
-msgstr "由 ':::' 呼叫匯入的未匯出物件："
 
 #. R/QC.R: gettext("Unknown encoding")
 msgid "Unknown encoding"
@@ -1336,6 +1301,10 @@ msgstr "因為影像安裝無法檢查 R 編碼"
 #. R/admin.R: gettextf("cannot copy '%s' to '%s'", output, outVignetteDir)
 msgid "cannot copy '%s' to '%s'"
 msgstr "無法將 '%s' 拷貝到 '%s'"
+
+#. R/install.R: stop("cannot create PKG_BUILD_DIR")
+msgid "cannot create PKG_BUILD_DIR"
+msgstr ""
 
 #. R/admin.R: gettextf("cannot create directory '%s'", buildDir)
 msgid "cannot create directory '%s'"
@@ -1535,6 +1504,10 @@ msgstr "產生除錯符號(%s)"
 #. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "R_DISABLE_HTTPD 的設定關閉了 httpd 伺服器"
+
+#. R/QC.R: gettextf("  iD: %s\t(from: %s)", unlist(y[, 1L]), vapply(y[,     2L], paste, "", collapse = ", "))
+msgid "iD: %s\t(from: %s)"
+msgstr ""
 
 #. R/utils.R: gettext("inferior call failed")
 msgid "inferior call failed"
@@ -1948,6 +1921,58 @@ msgid_plural ""
 "  Run R CMD build with --no-build-vignettes to prevent rebuilding."
 msgstr[0] "以 --no-build-vignettes 執行 R 命令組建以避免重新組建。"
 
+#. R/QC.R: ngettext(length(xx), "'::' or ':::' import not declared from:",     "'::' or ':::' imports not declared from:")
+#, fuzzy
+msgid "'::' or ':::' import not declared from:"
+msgid_plural "'::' or ':::' imports not declared from:"
+msgstr[0] "'::' 或 ':::' 匯入沒有被宣告："
+
+#. R/QC.R: ngettext(length(xx), "':::' call which should be '::':", "':::' calls which should be '::':")
+#, fuzzy
+msgid "':::' call which should be '::':"
+msgid_plural "':::' calls which should be '::':"
+msgstr[0] "':::' 呼叫應該是 '::'："
+
+#. R/QC.R: ngettext(length(xx), "'LinkingTo' for %s is unused as it has no 'include' directory",     "'LinkingTo' for %s are unused as they have no 'include' directory")
+msgid "'LinkingTo' for %s is unused as it has no 'include' directory"
+msgid_plural "'LinkingTo' for %s are unused as they have no 'include' directory"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(xx), "'data(package=)' call not declared from:",     "'data(package=)' calls not declared from:")
+#, fuzzy
+msgid "'data(package=)' call not declared from:"
+msgid_plural "'data(package=)' calls not declared from:"
+msgstr[0] "'data(package=)' 呼叫沒有被宣告："
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code:",     "'library' or 'require' calls in package code:")
+#, fuzzy
+msgid "'library' or 'require' call in package code:"
+msgid_plural "'library' or 'require' calls in package code:"
+msgstr[0] "'library' 或 'require' 於套件原始碼中的呼叫："
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call not declared from:",     "'library' or 'require' calls not declared from:")
+#, fuzzy
+msgid "'library' or 'require' call not declared from:"
+msgid_plural "'library' or 'require' calls not declared from:"
+msgstr[0] "'library' 或 'require' 呼叫沒有被宣告："
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call to package already attached by Depends:",     "'library' or 'require' calls to packages already attached by Depends:")
+#, fuzzy
+msgid "'library' or 'require' call to package already attached by Depends:"
+msgid_plural "'library' or 'require' calls to packages already attached by Depends:"
+msgstr[0] "'library' 或 'require' 對於套件的呼叫已照依存性附加："
+
+#. R/QC.R: ngettext(length(xx), "'loadNamespace' or 'requireNamespace' call not declared from:",     "'loadNamespace' or 'requireNamespace' calls not declared from:")
+#, fuzzy
+msgid "'loadNamespace' or 'requireNamespace' call not declared from:"
+msgid_plural "'loadNamespace' or 'requireNamespace' calls not declared from:"
+msgstr[0] "'loadNamespace' 或 'requireNamespace' 呼叫沒有被宣告："
+
+#. R/QC.R: ngettext(length(xx), "Base package in Suggests/Enhances imported in NAMESPACE:",     "Base packages in Suggests/Enhances imported in NAMESPACE:")
+msgid "Base package in Suggests/Enhances imported in NAMESPACE:"
+msgid_plural "Base packages in Suggests/Enhances imported in NAMESPACE:"
+msgstr[0] ""
+
 #. R/toHTML.R: ngettext(len, "Corresponding BibTeX entry:", "Corresponding BibTeX entries:")
 msgid "Corresponding BibTeX entry:"
 msgid_plural "Corresponding BibTeX entries:"
@@ -1956,6 +1981,11 @@ msgstr[0] "相關的 BibTeX 條目："
 #. R/update_packages.R: ngettext(length(notokinds), "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs",     "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs",     domain = "R-tools")
 msgid "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs"
 msgid_plural "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(x), "File which contains pragma(s) suppressing diagnostics:",     "Files which contain pragma(s) suppressing diagnostics:")
+msgid "File which contains pragma(s) suppressing diagnostics:"
+msgid_plural "Files which contain pragma(s) suppressing diagnostics:"
 msgstr[0] ""
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Final updated PACKAGES db contains %d entry",     "Final updated PACKAGES db contains %d entries", domain = "R-tools")
@@ -2020,6 +2050,26 @@ msgid "Found the deprecated function:"
 msgid_plural "Found the deprecated functions:"
 msgstr[0] "出現了不推薦使用的功能："
 
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid DOI:",     "Found the following (possibly) invalid DOIs:")
+msgid "Found the following (possibly) invalid DOI:"
+msgid_plural "Found the following (possibly) invalid DOIs:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(NROW(y), "Found the following (possibly) invalid ORCID iD:",     "Found the following (possibly) invalid ORCID iDs:")
+msgid "Found the following (possibly) invalid ORCID iD:"
+msgid_plural "Found the following (possibly) invalid ORCID iDs:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:",     "Found the following (possibly) invalid URLs:")
+msgid "Found the following (possibly) invalid URL:"
+msgid_plural "Found the following (possibly) invalid URLs:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(NROW(y), "Found the following (possibly) invalid file URI:",     "Found the following (possibly) invalid file URIs:")
+msgid "Found the following (possibly) invalid file URI:"
+msgid_plural "Found the following (possibly) invalid file URIs:"
+msgstr[0] ""
+
 #. R/QC.R: ngettext(length(x$devices), "Found the platform-specific device:",     "Found the platform-specific devices:")
 msgid "Found the platform-specific device:"
 msgid_plural "Found the platform-specific devices:"
@@ -2034,6 +2084,29 @@ msgstr[0] "沒有方法的同屬函式在 %s: %s"
 msgid "Help on topic '%s' was found in the following package:"
 msgid_plural "Help on topic '%s' was found in the following packages:"
 msgstr[0] "在以下這些程式套件裡找到了關於 '%s' 主題的說明:"
+
+#. R/QC.R: ngettext(length(xx), "Missing object imported by a ':::' call:",     "Missing objects imported by ':::' calls:")
+#, fuzzy
+msgid "Missing object imported by a ':::' call:"
+msgid_plural "Missing objects imported by ':::' calls:"
+msgstr[0] "由 ':::' 呼叫匯入的缺少物件：%s"
+
+#. R/QC.R: ngettext(length(xx), "Missing or unexported object:", "Missing or unexported objects:")
+#, fuzzy
+msgid "Missing or unexported object:"
+msgid_plural "Missing or unexported objects:"
+msgstr[0] "缺少或未匯出的物件："
+
+#. R/QC.R: ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Depends entries:",     "Namespace dependencies missing from DESCRIPTION Imports/Depends entries:")
+msgid "Namespace dependency missing from DESCRIPTION Imports/Depends entries:"
+msgid_plural "Namespace dependencies missing from DESCRIPTION Imports/Depends entries:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(xx), "Namespace in Imports field not imported from:",     "Namespaces in Imports field not imported from:")
+#, fuzzy
+msgid "Namespace in Imports field not imported from:"
+msgid_plural "Namespaces in Imports field not imported from:"
+msgstr[0] "匯入欄位中的命名空間未被匯入自："
 
 #. R/QC.R: ngettext(n, "Note: found %d marked Latin-1 string", "Note: found %d marked Latin-1 strings")
 msgid "Note: found %d marked Latin-1 string"
@@ -2056,10 +2129,68 @@ msgid "Package %s does not have a registered vignette engine"
 msgid_plural "None of packages %s have registered vignette engines"
 msgstr[0] "沒有任何一個套件 %s 有已註冊的簡介引擎"
 
+#. R/QC.R: ngettext(length(y), "Package has a FOSS license but eventually depends on the following package which may restrict use:",     "Package has a FOSS license but eventually depends on the following packages which may restrict use:")
+msgid "Package has a FOSS license but eventually depends on the following package which may restrict use:"
+msgid_plural "Package has a FOSS license but eventually depends on the following packages which may restrict use:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(y), "Package has a FOSS license but eventually depends on the following package which restricts use:",     "Package has a FOSS license but eventually depends on the following packages which restrict use:")
+msgid "Package has a FOSS license but eventually depends on the following package which restricts use:"
+msgid_plural "Package has a FOSS license but eventually depends on the following packages which restrict use:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(xx), "Package in Depends field not imported from:",     "Packages in Depends field not imported from:")
+#, fuzzy
+msgid "Package in Depends field not imported from:"
+msgid_plural "Packages in Depends field not imported from:"
+msgstr[0] "依存欄位中的套件未被匯入自："
+
+#. R/QC.R: ngettext(length(bad), "Package in Depends/Imports which should probably only be in LinkingTo:",     "Packages in Depends/Imports which should probably only be in LinkingTo:")
+msgid "Package in Depends/Imports which should probably only be in LinkingTo:"
+msgid_plural "Packages in Depends/Imports which should probably only be in LinkingTo:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(xx), "Package listed in more than one of Depends, Imports, Suggests, Enhances:",     "Packages listed in more than one of Depends, Imports, Suggests, Enhances:")
+msgid "Package listed in more than one of Depends, Imports, Suggests, Enhances:"
+msgid_plural "Packages listed in more than one of Depends, Imports, Suggests, Enhances:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(pkgs), "Package listed more than once in %s: %s",     "Packages listed more than once in %s: %s")
+msgid "Package listed more than once in %s: %s"
+msgid_plural "Packages listed more than once in %s: %s"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(bad), "Package required and available but unsuitable version:",     "Packages required and available but unsuitable versions:")
+msgid "Package required and available but unsuitable version:"
+msgid_plural "Packages required and available but unsuitable versions:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(bad), "Package required but not available:",     "Packages required but not available:")
+msgid "Package required but not available:"
+msgid_plural "Packages required but not available:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(bad), "Package suggested but not available for checking:",     "Packages suggested but not available for checking:")
+#, fuzzy
+msgid "Package suggested but not available for checking:"
+msgid_plural "Packages suggested but not available for checking:"
+msgstr[0] "沒有可用來檢查 Rd xrefs 的程式套件：%s"
+
+#. R/QC.R: ngettext(length(bad), "Package suggested but not available:",     "Packages suggested but not available:")
+#, fuzzy
+msgid "Package suggested but not available:"
+msgid_plural "Packages suggested but not available:"
+msgstr[0] "用了 'methods' 這個套件卻沒有被宣告"
+
 #. R/QC.R: ngettext(length(y), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
 msgid "Package unavailable to check Rd xrefs: %s"
 msgid_plural "Packages unavailable to check Rd xrefs: %s"
 msgstr[0] "沒有可用來檢查 Rd xrefs 的程式套件：%s"
+
+#. R/QC.R: ngettext(length(bad), "Package which this enhances but not available for checking:",     "Packages which this enhances but not available for checking:")
+msgid "Package which this enhances but not available for checking:"
+msgid_plural "Packages which this enhances but not available for checking:"
+msgstr[0] ""
 
 #. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
 #, fuzzy
@@ -2072,14 +2203,35 @@ msgid "Processed %d entry from package tarballs."
 msgid_plural "Processed %d entries from package tarballs."
 msgstr[0] ""
 
+#. R/QC.R: ngettext(length(bad), "RdMacros package not required:", "RdMacros packages not required:")
+#, fuzzy
+msgid "RdMacros package not required:"
+msgid_plural "RdMacros packages not required:"
+msgstr[0] "Rd 巨集套件 %s 尚未安裝。"
+
 #. R/check.R: ngettext(length(fail), "Required field missing or empty:", "Required fields missing or empty:")
 msgid "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
 msgstr[0] "所需要的欄位缺少或為空值:"
 
+#. R/QC.R: ngettext(length(bad), "Requires (indirectly) orphaned package:",     "Requires (indirectly) orphaned packages:")
+msgid "Requires (indirectly) orphaned package:"
+msgid_plural "Requires (indirectly) orphaned packages:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(bad), "Requires orphaned package:", "Requires orphaned packages:")
+msgid "Requires orphaned package:"
+msgid_plural "Requires orphaned packages:"
+msgstr[0] ""
+
 #. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:",     "SUMMARY: processing the following files failed:")
 msgid "SUMMARY: processing the following file failed:"
 msgid_plural "SUMMARY: processing the following files failed:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(bad), "Suggests orphaned package:", "Suggests orphaned packages:")
+msgid "Suggests orphaned package:"
+msgid_plural "Suggests orphaned packages:"
 msgstr[0] ""
 
 #. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.",     "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
@@ -2087,11 +2239,28 @@ msgid "Tarballs found for %d of %d existing PACKAGES entry."
 msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
 msgstr[0] ""
 
+#. R/QC.R: ngettext(length(y), "The Description field contains the following (possibly) invalid arXiv id:",     "The Description field contains the following (possibly) invalid arXiv ids:")
+msgid "The Description field contains the following (possibly) invalid arXiv id:"
+msgid_plural "The Description field contains the following (possibly) invalid arXiv ids:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(xx), "Unavailable namespace imported from by a ':::' call:",     "Unavailable namespaces imported from by ':::' calls:")
+#, fuzzy
+msgid "Unavailable namespace imported from by a ':::' call:"
+msgid_plural "Unavailable namespaces imported from by ':::' calls:"
+msgstr[0] "由 ':::' 呼叫匯入的不可使用命名空間：%s"
+
 #. R/QC.R: ngettext(length(y), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs")
 #, fuzzy
 msgid "Undeclared package %s in Rd xrefs"
 msgid_plural "Undeclared packages %s in Rd xrefs"
 msgstr[0] "Rd xrefs 裡包含了不知來源的程式套件 %s"
+
+#. R/QC.R: ngettext(length(xxx), "Unexported object imported by a ':::' call:",     "Unexported objects imported by ':::' calls:")
+#, fuzzy
+msgid "Unexported object imported by a ':::' call:"
+msgid_plural "Unexported objects imported by ':::' calls:"
+msgstr[0] "由 ':::' 呼叫匯入的未匯出物件：%s"
 
 #. R/QC.R: ngettext(length(y), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
 msgid "Unknown package %s in Rd xrefs"
@@ -2116,6 +2285,43 @@ msgid_plural ""
 "Detected PACKAGES file with %d entries at %s"
 msgstr[0] ""
 
+#. R/QC.R: ngettext(length(y), "Uses the non-portable package:", "Uses the non-portable packages:")
+msgid "Uses the non-portable package:"
+msgid_plural "Uses the non-portable packages:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(y), "Uses the superseded package:", "Uses the superseded packages:")
+msgid "Uses the superseded package:"
+msgid_plural "Uses the superseded packages:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(xx), "Versioned 'LinkingTo' value for %s is only usable in R >= 3.0.2",     "Versioned 'LinkingTo' values for %s are only usable in R >= 3.0.2")
+msgid "Versioned 'LinkingTo' value for %s is only usable in R >= 3.0.2"
+msgid_plural "Versioned 'LinkingTo' values for %s are only usable in R >= 3.0.2"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(bad), "Vignette dependency not required:", "Vignette dependencies not required:")
+#, fuzzy
+msgid "Vignette dependency not required:"
+msgid_plural "Vignette dependencies not required:"
+msgstr[0] "簡介引擎 %s 尚未註冊"
+
+#. R/QC.R: ngettext(length(bad), "Vignette dependency required without any vignettes:",     "Vignette dependencies required without any vignettes:")
+msgid "Vignette dependency required without any vignettes:"
+msgid_plural "Vignette dependencies required without any vignettes:"
+msgstr[0] ""
+
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package not declared:",     "VignetteBuilder packages not declared:")
+#, fuzzy
+msgid "VignetteBuilder package not declared:"
+msgid_plural "VignetteBuilder packages not declared:"
+msgstr[0] "尚未指定簡介引擎"
+
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package required for checking but not installed:",     "VignetteBuilder packages required for checking but not installed:")
+msgid "VignetteBuilder package required for checking but not installed:"
+msgid_plural "VignetteBuilder packages required for checking but not installed:"
+msgstr[0] ""
+
 #. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:")
 msgid "Warning in file %s:"
 msgid_plural "Warnings in file %s:"
@@ -2137,10 +2343,54 @@ msgid "object %s is created by more than one data call"
 msgid_plural "objects %s are created by more than one data call"
 msgstr[0] "不能用多個資料呼叫來產生物件 %s"
 
+#. R/QC.R: ngettext(length(bad), "problem found in ", "problems found in ")
+msgid "problem found in "
+msgid_plural "problems found in "
+msgstr[0] ""
+
 #. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s")
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "無法重新編碼 %s 行 %s"
+
+#~ msgid "'::' or ':::' import not declared from: %s"
+#~ msgstr "'::' 或 ':::' 匯入沒有被宣告: %s"
+
+#~ msgid "':::' call which should be '::': %s"
+#~ msgstr "':::' 呼叫應該是 '::'：%s"
+
+#~ msgid "'data(package=)' call not declared from: %s"
+#~ msgstr "'data(package=)' 呼叫沒有被宣告: %s"
+
+#~ msgid "'library' or 'require' call not declared from: %s"
+#~ msgstr "'library' 或 'require' 呼叫沒有被宣告: %s"
+
+#~ msgid "'library' or 'require' call to %s in package code."
+#~ msgstr "'library' 或 'require' 於套件原始碼中對於 %s 的呼叫。"
+
+#~ msgid "'library' or 'require' call to %s which was already attached by Depends."
+#~ msgstr "'library' 或 'require' 對於 %s 的呼叫已照依存性附加。"
+
+#~ msgid "'loadNamespace' or 'requireNamespace' call not declared from: %s"
+#~ msgstr "'loadNamespace' 或 'requireNamespace' 呼叫沒有被宣告: %s"
+
+#~ msgid "Missing objects imported by ':::' calls:"
+#~ msgstr "由 ':::' 呼叫匯入的缺少物件："
+
+#~ msgid "Missing or unexported object: %s"
+#~ msgstr "缺少或未匯出的物件：%s"
+
+#~ msgid "Namespace in Imports field not imported from: %s"
+#~ msgstr "匯入欄位中的命名空間未被匯入自：%s"
+
+#~ msgid "Package in Depends field not imported from: %s"
+#~ msgstr "依存欄位中的套件未被匯入自：%s"
+
+#~ msgid "Unavailable namespaces imported from by ':::' calls:"
+#~ msgstr "由 ':::' 呼叫匯入的不可使用命名空間："
+
+#~ msgid "Unexported objects imported by ':::' calls:"
+#~ msgstr "由 ':::' 呼叫匯入的未匯出物件："
 
 #~ msgid "Unknown encoding with non-ASCII data: converting to ASCII"
 #~ msgstr "不明帶非 ASCII 資料的編碼: 轉換為 ASCII"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 17:27+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 15:15+0200\n"
 "Last-Translator: Robert Castelo <robert.castelo@upf.edu>\n"
 "Language-Team: none\n"
@@ -19,591 +19,445 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: base.cpp:43
 msgid "no base graphics system is registered"
 msgstr "no hi ha cap sistema gràfic base registrat"
 
-#: base.cpp:310
 msgid "Incompatible graphics state"
 msgstr "Estat dels gràfics incompatible"
 
-#: base.cpp:353
 msgid "event 'GE_ScalePS' requires a single numeric (double) value"
 msgstr ""
 
-#: base.cpp:382 base.cpp:389 base.cpp:397
 msgid "the base graphics system is not registered"
 msgstr "el sistema de gràfics base no està registrat"
 
-#: graphics.cpp:292
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "unitats incorrectes especificades a «%s»"
 
-#: graphics.cpp:1806 graphics.cpp:1828
 msgid "attempt to plot on null device"
 msgstr "s'ha intentat dibuixar en un dispositiu nul"
 
-#: graphics.cpp:1858
 msgid "outer margins too large (figure region too small)"
 msgstr "marges exteriors massa grans (regió de la figura massa petita)"
 
-#: graphics.cpp:1860
 msgid "figure region too large"
 msgstr "la regió de la figura és massa gran"
 
-#: graphics.cpp:1862
 msgid "figure margins too large"
 msgstr "marges de la figura massa grans"
 
-#: graphics.cpp:1864
 msgid "plot region too large"
 msgstr "la regió del gràfic és massa gran"
 
-#: graphics.cpp:1932
 #, c-format
 msgid "nonfinite axis=%d limits [GScale(%g,%g,..); log=%s] -- corrected now"
 msgstr "límits no finits de l'eix=%d [GScale(%g,%g,..); log=%s] -- corregit ara"
 
-#: graphics.cpp:2009
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "l'estil d'eix «%c» no està implementat"
 
-#: graphics.cpp:2253
 msgid "no graphics device is active"
 msgstr "no hi ha cap dispositiu gràfic actiu"
 
-#: graphics.cpp:2448
 msgid "plot.new has not been called yet"
 msgstr "«plot.new» encara no s'ha cridat"
 
-#: graphics.cpp:2450
 msgid "invalid graphics state"
 msgstr "l'estat dels gràfics no és vàlid"
 
-#: graphics.cpp:2604
 msgid "graphics device closed during call to locator or identify"
 msgstr "dispositiu gràfic tancat durant la crida al localitzador o a identificador"
 
-#: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "No hi ha cap dispositiu gràfic actiu"
 
-#: graphics.cpp:2887
 msgid "unable to allocate memory (in GPolygon)"
 msgstr ""
 
-#: graphics.cpp:2921
 msgid "unable to allocate memory (in GPolyline)"
 msgstr ""
 
-#: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "la fletxa de longitud zero és d'angle indeterminat i per això s'omet"
 
-#: graphics.cpp:3184
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\") = «%c» no vàlid; no s'ha dibuixat cap «box()»"
 
-#: graphics.cpp:3201
 #, fuzzy, c-format
 msgid "invalid argument to '%s'"
 msgstr "argument no vàlid per a GBox"
 
-#: graphics.cpp:3408
 msgid "metric information not available for this device"
 msgstr "la informació mètrica no està disponible per a aquest dispositiu"
 
-#: par-common.cpp:150
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "l'argument gràfic «family» té una longitud màxima de 200 bytes"
 
-#: par.cpp:167
 #, c-format
 msgid "invalid value specified for graphical parameter \"%s\""
 msgstr "s'ha especificat un valor no vàlid per a l'argument gràfic «%s»"
 
-#: par.cpp:174
 #, c-format
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "l'argument gràfic «%s» té una longitud incorrecta"
 
-#: par.cpp:266 par.cpp:673
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "no es pot establir l'argument gràfic «%s»"
 
-#: par.cpp:438
 msgid "parameter \"mfg\" has the wrong length"
 msgstr "l'argument «mfg» té una longitud incorrecta"
 
-#: par.cpp:446
 msgid "parameter \"i\" in \"mfg\" is out of range"
 msgstr "l'argument «i» a «mfg» està fora de rang"
 
-#: par.cpp:448
 msgid "parameter \"j\" in \"mfg\" is out of range"
 msgstr "l'argument «j» a «mfg» està fora de rang"
 
-#: par.cpp:453
 msgid "value of 'nr' in \"mfg\" is wrong and will be ignored"
 msgstr "el valor de «nr» a «mfg» és incorrecte i s'ignorarà"
 
-#: par.cpp:455
 msgid "value of 'nc' in \"mfg\" is wrong and will be ignored"
 msgstr "el valor de «nc» a «mfg» és incorrecte i s'ignorarà"
 
-#: par.cpp:482
 msgid "calling par(new=TRUE) with no plot"
 msgstr "cridant par(new=TRUE) sense cap gràfic"
 
-#: par.cpp:665 par.cpp:1061
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "l'argument gràfic «%s» és obsolet"
 
-#: par.cpp:669 par.cpp:1065
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "«%s» no és un argument gràfic"
 
-#: par.cpp:1111
 #, c-format
 msgid "argument %d does not name a graphical parameter"
 msgstr "l'argument %d no anomena un paràmetre gràfic"
 
-#: par.cpp:1119
 msgid "invalid argument passed to par()"
 msgstr "s'ha passat un argument no vàlid a par()"
 
-#: par.cpp:1163
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "hi ha massa files a la disposició, límit %d"
 
-#: par.cpp:1169
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "hi ha massa columnes a la disposició, límit %d"
 
-#: par.cpp:1171
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "hi ha massa cel·les a la disposició, límit %d"
 
-#: plot.cpp:49 plot3d.cpp:44
 msgid "invalid type passed to graphics function"
 msgstr ""
 
-#: plot.cpp:72
 msgid "invalid color specification"
 msgstr "especificació de color no vàlida"
 
-#: plot.cpp:138
 msgid "only NA allowed in logical plotting symbol"
 msgstr "només el NA està permès en un símbol gràfic de tipus lògic"
 
-#: plot.cpp:140
 msgid "invalid plotting symbol"
 msgstr "el símbol gràfic no és vàlid"
 
-#: plot.cpp:227
 msgid "invalid font specification"
 msgstr "especificació de tipus de lletra no vàlida"
 
-#: plot.cpp:285 plot.cpp:299 plot.cpp:479 plot.cpp:484 plot.cpp:2194
-#: plot.cpp:2201 plot.cpp:3224 plot.cpp:3383 plot3d.cpp:1161 plot3d.cpp:1165
-#: plot3d.cpp:1167 plot3d.cpp:1895
 #, c-format
 msgid "invalid '%s' value"
 msgstr "el valor «%s» no és vàlid"
 
-#: plot.cpp:302
 #, c-format
 msgid "invalid 'vfont' value [typeface %d]"
 msgstr "el valor «vfont» no és vàlid [typeface %d]"
 
-#: plot.cpp:326
 #, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr "el valor «vfont» no és vàlid [typeface = %d, fontindex = %d]"
 
-#: plot.cpp:396
 msgid "invalid graphics parameter"
 msgstr "argument gràfic no vàlid"
 
-#: plot.cpp:475
 msgid "at least 3 arguments required"
 msgstr "es requereixen almenys 3 arguments"
 
-#: plot.cpp:489
 msgid "\"log=\" specification must be character"
 msgstr "l'especificació «log=» ha de ser de tipus caràcter"
 
-#: plot.cpp:506
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr "especificació «log=%s» no vàlida"
 
-#: plot.cpp:522
 msgid "NAs not allowed in 'xlim'"
 msgstr "No es permeten els NAs a «xlim»"
 
-#: plot.cpp:528
 msgid "need finite 'xlim' values"
 msgstr "es necessiten valors «xlim» finits"
 
-#: plot.cpp:534
 msgid "NAs not allowed in 'ylim'"
 msgstr "els NAs no estan permesos a «ylim»"
 
-#: plot.cpp:540
 msgid "need finite 'ylim' values"
 msgstr "es necessiten valors «ylim» finits"
 
-#: plot.cpp:546
 msgid "Logarithmic axis must have positive limits"
 msgstr "L'eix logarítmic ha de tenir límits positius"
 
-#: plot.cpp:700
 msgid "invalid type for axis labels"
 msgstr "tipus no vàlid per a les etiquetes dels eixos"
 
-#: plot.cpp:788 plot.cpp:1395 plot.cpp:1707 plot.cpp:1772 plot.cpp:1846
-#: plot.cpp:1910 plot.cpp:1983 plot.cpp:2078 plot.cpp:2154 plot.cpp:2432
-#: plot.cpp:2606 plot.cpp:2821 plot.cpp:3365 plot.cpp:3508 plot.cpp:3579
-#: plot.cpp:3741 plot.cpp:4021 plot3d.cpp:1864
 msgid "too few arguments"
 msgstr "massa pocs arguments"
 
-#: plot.cpp:799
 #, c-format
 msgid "invalid axis number %d"
 msgstr "el número d'eix %d no és vàlid"
 
-#: plot.cpp:883 plot.cpp:895
 #, fuzzy, c-format
 msgid "'%s' must be of length 1"
 msgstr "«hadj» ha de ser de longitud 1"
 
-#: plot.cpp:890 plot.cpp:2166 plot.cpp:2443 plot.cpp:2449 plot.cpp:2456
-#: plot.cpp:2464 plot.cpp:2471 plot.cpp:2478 plot.cpp:2485 plot.cpp:2492
-#: plot.cpp:2500 plot.cpp:2507 plot.cpp:3227
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "s'ha especificat «%s» de longitud zero"
 
-#: plot.cpp:925
 msgid "'gap.axis' must be NA or a finite number"
 msgstr "'gap.axis' ha de ser NA o un nombre finit"
 
-#: plot.cpp:983
 msgid "'labels' is supplied and not 'at'"
 msgstr "s'ha proporcionat «labels» i no «at»"
 
-#: plot.cpp:987
 #, c-format
 msgid "'at' and 'labels' lengths differ, %d != %d"
 msgstr "les longituds d'«at» i de «labels» difereixen, %d != %d"
 
-#: plot.cpp:1007
 msgid "no locations are finite"
 msgstr "cap ubicació és finita"
 
-#: plot.cpp:1411
 msgid "invalid plotting structure"
 msgstr "estructura de gràfic no vàlida"
 
-#: plot.cpp:1413
 #, c-format
 msgid "'x' and 'y' lengths differ in %s()"
 msgstr "les longituds d'«x» i d'«y» difereixen en %s()"
 
-#: plot.cpp:1619
 #, c-format
 msgid "invalid plot type '%c'"
 msgstr "el tipus de gràfic «%c» no és vàlid"
 
-#: plot.cpp:1662
 msgid "invalid first argument"
 msgstr "el primer argument no és vàlid"
 
-#: plot.cpp:1669
 msgid "invalid second argument"
 msgstr "segon argument no vàlid"
 
-#: plot.cpp:1677
 msgid "invalid third argument"
 msgstr "tercer argument no vàlid"
 
-#: plot.cpp:1685
 msgid "invalid fourth argument"
 msgstr "quart argument no vàlid"
 
-#: plot.cpp:1693
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "no es poden barrejar coordenades de longitud zero i de longitud diferent de zero"
 
-#: plot.cpp:1875
 msgid "unable to allocate memory (in GPath)"
 msgstr ""
 
-#: plot.cpp:1881
 msgid "invalid 'x' or 'y' (in 'GPath')"
 msgstr ""
 
-#: plot.cpp:1915
 msgid "Empty raster"
 msgstr "Ràster buit"
 
-#: plot.cpp:1996
-msgid "invalid arrow head length"
-msgstr "la longitud del cap de la fletxa no és vàlida"
-
-#: plot.cpp:2001
-msgid "invalid arrow head angle"
-msgstr "l'angle del cap de fletxa no és vàlid"
-
-#: plot.cpp:2006
-msgid "invalid arrow head specification"
-msgstr "especificació del cap de la fletxa no vàlida"
-
-#: plot.cpp:2240
-msgid "no coordinates were supplied"
-msgstr "no s'han proporcionat coordenades"
-
-#: plot.cpp:2862
-msgid "invalid a=, b= specification"
-msgstr "especificació a=, b= no vàlida"
-
-#: plot.cpp:2871
-msgid "'a' and 'b' must be finite"
-msgstr "«a» i «b» han de ser finits"
-
-#: plot.cpp:3007 plot.cpp:4112 plot.cpp:4115 plot.cpp:4118 plot.cpp:4121
-#: plot.cpp:4141 plot.cpp:4145 plot.cpp:4148 plot.cpp:4168 plot.cpp:4172
-#: plot.cpp:4175 plot3d.cpp:1083 plot3d.cpp:1087 plot3d.cpp:1092
-#: plot3d.cpp:1096 plot3d.cpp:1100 plot3d.cpp:1104 stem.cpp:171 stem.cpp:172
-#: stem.cpp:174 stem.cpp:175
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "argument «%s» no vàlid"
 
-#: plot.cpp:3079 plot.cpp:3220
+msgid "invalid arrow head length"
+msgstr "la longitud del cap de la fletxa no és vàlida"
+
+msgid "invalid arrow head angle"
+msgstr "l'angle del cap de fletxa no és vàlid"
+
+msgid "invalid arrow head specification"
+msgstr "especificació del cap de la fletxa no vàlida"
+
+msgid "no coordinates were supplied"
+msgstr "no s'han proporcionat coordenades"
+
+msgid "invalid a=, b= specification"
+msgstr "especificació a=, b= no vàlida"
+
+msgid "'a' and 'b' must be finite"
+msgstr "«a» i «b» han de ser finits"
+
 #, c-format
 msgid "invalid number of points in %s"
 msgstr "el nombre de punts a %s no és vàlid"
 
-#: plot.cpp:3084
 msgid "invalid plot type"
 msgstr "tipus de gràfic no vàlid"
 
-#: plot.cpp:3222
 msgid "incorrect argument type"
 msgstr "tipus d'argument incorrecte"
 
-#: plot.cpp:3230
 msgid "different argument lengths"
 msgstr "longituds d'arguments diferents"
 
-#: plot.cpp:3232
 msgid "more 'labels' than points"
 msgstr "més «labels» que punts"
 
-#: plot.cpp:3284
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr "avís: no hi ha cap punt dins de %.2f polzades\n"
 
-#: plot.cpp:3290
 msgid "warning: nearest point already identified\n"
 msgstr "avís: el punt més proper ja s'ha identificat\n"
 
-#: plot.cpp:3376
 msgid "invalid units"
 msgstr "unitats no vàlides"
 
-#: plot.cpp:3491
 msgid "invalid dendrogram input"
 msgstr "l'entrada del dendrogram no és vàlida"
 
-#: plot.cpp:3724
 msgid "invalid symbol parameter vector"
 msgstr "el vector d'arguments de símbol no és vàlid"
 
-#: plot.cpp:3746
 msgid "invalid symbol coordinates"
 msgstr "coordenades de símbol no vàlides"
 
-#: plot.cpp:3754
 #, fuzzy
 msgid "x/y parameter length mismatch"
 msgstr "la longitud d'x/y/argument no coincideix"
 
-#: plot.cpp:3773
 msgid "invalid circles data"
 msgstr "dades no vàlides per als cercles"
 
-#: plot.cpp:3775 plot.cpp:3796 plot.cpp:3821 plot.cpp:3852
 msgid "invalid symbol parameter"
 msgstr "argument de símbol no vàlid"
 
-#: plot.cpp:3794
 msgid "invalid squares data"
 msgstr "dades no vàlides per als quadrats"
 
-#: plot.cpp:3819
 msgid "invalid rectangles data (need 2 columns)"
 msgstr "dades no vàlides per als rectangles (calen 2 columnes)"
 
-#: plot.cpp:3850
 msgid "invalid stars data"
 msgstr "dades no vàlides per les estrelles"
 
-#: plot.cpp:3892
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "dades no vàlides per als termòmetres (calen 3 o 4 columnes)"
 
-#: plot.cpp:3895
 #, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "«thermometers[, %s]» no vàlid"
 
-#: plot.cpp:3898
 #, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "'thermometers[, %s]' no és entre [0,1] -- pot semblar divertit"
 
-#: plot.cpp:3901
 msgid "invalid 'thermometers[, 1:2]'"
 msgstr "«thermometers[, 1:2]» no vàlid"
 
-#: plot.cpp:3940
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr "dades «boxplots» no vàlides (es necessiten 5 columnes)"
 
-#: plot.cpp:3949
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr "«boxplots[, 5]» fora de [0,1] -- pot semblar divertit"
 
-#: plot.cpp:3951
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr "«boxplots[, 1:4]» no vàlid"
 
-#: plot.cpp:3997
 msgid "invalid symbol type"
 msgstr "tipus de símbol no vàlid"
 
-#: plot.cpp:4034 plot.cpp:4036 plot.cpp:4041 plot.cpp:4043
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "longitud incorrecta per a l'argument «%s»"
 
-#: plot.cpp:4060
 msgid "unable to allocate memory (in xspline)"
 msgstr ""
 
-#: plot3d.cpp:186 plot3d.cpp:1921
 msgid "insufficient 'x' or 'y' values"
 msgstr "valors «x» o «y» insuficients"
 
-#: plot3d.cpp:190 plot3d.cpp:1924
 msgid "dimension mismatch"
 msgstr "les dimension no coincideixen"
 
-#: plot3d.cpp:198
 msgid "no contour values"
 msgstr "sense valors de contorn"
 
-#: plot3d.cpp:214
 msgid "invalid x / y values or limits"
 msgstr "valors o límits x / y no vàlids"
 
-#: plot3d.cpp:215
 msgid "invalid contour levels: must be strictly increasing"
 msgstr "nivells de contorn no vàlids: han de ser estrictament creixents"
 
-#: plot3d.cpp:1047 plot3d.cpp:1060
 msgid "Axis orientation not calculated"
 msgstr "Orientació dels eixos no calculada"
 
-#: plot3d.cpp:1080
 msgid "too few parameters"
 msgstr "massa pocs arguments"
 
-#: plot3d.cpp:1110
 msgid "invalid 'x' limits"
 msgstr "límits d'«x» no vàlids"
 
-#: plot3d.cpp:1112
 msgid "invalid 'y' limits"
 msgstr "límits d'«y» no vàlids"
 
-#: plot3d.cpp:1114
 msgid "invalid 'z' limits"
 msgstr "límits de «z» no vàlids"
 
-#: plot3d.cpp:1135 plot3d.cpp:1137 plot3d.cpp:1139
 #, fuzzy, c-format
 msgid "'%s' must be a character vector of length 1"
 msgstr "«xlab» ha de ser un vector de caràcters de longitud 1"
 
-#: plot3d.cpp:1159
 msgid "invalid viewing parameters"
 msgstr "arguments de visualització no vàlids"
 
-#: plot3d.cpp:1177 plot3d.cpp:1181
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "especificació «%s» no vàlida"
 
-#: plot3d.cpp:1518
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour(): circular/long seglist -- establiu %s > %d?"
 
-#: plot3d.cpp:1927
 msgid "no 'levels'"
 msgstr "sense «levels»"
 
-#: plot3d.cpp:1931
 msgid "missing 'x' values"
 msgstr "manquen valors d'«x»"
 
-#: plot3d.cpp:1933
 msgid "increasing 'x' values expected"
 msgstr "s'esperen valors «x» creixents"
 
-#: plot3d.cpp:1938
 msgid "missing 'y' values"
 msgstr "manquen els valors d'«y»"
 
-#: plot3d.cpp:1940
 msgid "increasing 'y' values expected"
 msgstr "s'esperaven valors d'«y» creixents"
 
-#: plot3d.cpp:1945
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr "valors de nivell no finits: levels[%d] = %g"
 
-#: plot3d.cpp:1958
 msgid "all z values are equal"
 msgstr "tots els valors z són iguals"
 
-#: plot3d.cpp:1960
 msgid "all z values are NA"
 msgstr "tots els valors z són NA"
 
-#: stem.cpp:122
 msgid ""
 "  The decimal point is at the |\n"
 "\n"
 msgstr ""
 
-#: stem.cpp:126
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the right of the |\n"
@@ -614,7 +468,6 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: stem.cpp:128
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
@@ -625,17 +478,14 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: stem.cpp:165
 #, fuzzy
 msgid "invalid input"
 msgstr "unitats no vàlides"
 
-#: stem.cpp:168
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "el vector llarg «%s» no està suportat"
 
-#: stem.cpp:204
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
 

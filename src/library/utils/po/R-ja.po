@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: RjpWiki Message Translation Team <mokada@md.tsukuba.ac.jp>\n"
@@ -416,6 +416,10 @@ msgstr "メニューから項目を入力するか、0 を入力して終了し�
 #, fuzzy
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "スペースで区切られた 1 つ以上の数を入力するか、キャンセルするには空白行を入力してください"
+
+#. R/data.R: gettextf("File '%s' has unequal number of fields", file)
+msgid "File '%s' has unequal number of fields"
+msgstr ""
 
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 msgid "Filter '%s' is not available."
@@ -986,7 +990,6 @@ msgstr "どのパッケージも少なくとも1つの他のパッケージに�
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 msgid "failed to copy %s to %s"
 msgstr "%s を %s へコピーするのに失敗しました"
 
@@ -1246,6 +1249,14 @@ msgstr "%s に対する不正な値: %s"
 #. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
 msgid "kind '%s' not yet implemented"
 msgstr "種類 '%s' は未だ実装されていません"
+
+#. R/tar.R: stop("link target is the extraction directory")
+msgid "link target is the extraction directory"
+msgstr ""
+
+#. R/tar.R: stop("link target outside extraction directory")
+msgid "link target outside extraction directory"
+msgstr ""
 
 #. R/menu.R: stop("menu() cannot be used non-interactively")
 msgid "menu() cannot be used non-interactively"

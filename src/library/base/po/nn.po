@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 14:58+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -487,6 +487,15 @@ msgstr "ikkje nok vektorminne (nådde grensa?)"
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+msgid "internal logical NA value has been modified"
+msgstr ""
+
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr "unif_rand: RND-typen «%d» er ikkje implementert"
@@ -513,6 +522,10 @@ msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
 msgstr ".Random.seed er ikkje ein heiltalsvektor, men av typen «%s»"
 
 #, fuzzy
+msgid "'.Random.seed' has length 0, so ignored"
+msgstr ".Random.seed har feil lengd"
+
+#, fuzzy
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr ".Random.seed[1] er ikkje eit gyldig heiltal"
 
@@ -527,6 +540,10 @@ msgstr ".Random.seed[1] er 5, men ingen generator er oppgjeven"
 #, fuzzy, c-format
 msgid "'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"
 msgstr ".Random.seed[1] er ikkje ein gyldig RNG-type (kode)"
+
+#, fuzzy
+msgid "'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"
+msgstr ".Random.seed[1] er 5, men ingen generator er oppgjeven"
 
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
@@ -794,6 +811,10 @@ msgid "unknown encoding: %d"
 msgstr "ukjend koding: %d"
 
 #, fuzzy
+msgid "invalid string length"
+msgstr "ugyldig lengd"
+
+#, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "variabelnamn må vera mindre enn %d byte"
 
@@ -847,11 +868,17 @@ msgstr "minnereserveringsfeil i realpr"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "innteksten «%d» er ugyldig i dette lokalet"
 
+msgid "invalid compact_intseq serialized state"
+msgstr ""
+
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
 
 msgid "method should only handle unexpanded vectors"
+msgstr ""
+
+msgid "invalid compact_realseq serialized state"
 msgstr ""
 
 #, c-format
@@ -860,6 +887,10 @@ msgstr ""
 
 msgid "result would be too long a vector"
 msgstr "resultatet ville vera ein lang vektor"
+
+#, fuzzy
+msgid "invalid deferred string serialized state"
+msgstr "ugyldig(e) delstreng-argument"
 
 msgid "unsupported type for deferred string coercion"
 msgstr ""
@@ -871,6 +902,10 @@ msgstr "typen «%s» er ikkje støtta"
 #, fuzzy
 msgid "object has been unmapped"
 msgstr "fann ikkje objektet «%s»"
+
+#, fuzzy
+msgid "invalid mmap serialized state"
+msgstr "ugyldig grafikktilstand"
 
 msgid "memory mapping failed; returning vector of length zero"
 msgstr ""
@@ -893,6 +928,10 @@ msgstr "typen «%s» er ikkje støtta"
 msgid "not a memory-mapped object"
 msgstr ""
 
+#, fuzzy
+msgid "invalid wrapper serialized state"
+msgstr "ugyldig parameterlengd"
+
 msgid "unsupported type"
 msgstr "ikkje-støtta type"
 
@@ -902,6 +941,9 @@ msgstr ""
 #, fuzzy
 msgid "no_na must be 0 or +1"
 msgstr "«all.x» må vera TRUE eller FALSE"
+
+msgid "invalid ALTREP serialized class"
+msgstr ""
 
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
@@ -1021,9 +1063,11 @@ msgstr "ikkje-implementert reell funksjon med 1 argument"
 msgid "unimplemented complex function"
 msgstr "ikkje-implementert kompleks funksjon"
 
-#, c-format
-msgid "unimplemented real function of %d numeric arguments"
-msgstr "ikkje-implementert reell funksjon med %d numeriske argument"
+#, fuzzy, c-format
+msgid "unimplemented real function of %d numeric argument"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "ikkje-implementert reell funksjon med %d numeriske argument"
+msgstr[1] "ikkje-implementert reell funksjon med %d numeriske argument"
 
 msgid "matchArg returned something weird"
 msgstr ""
@@ -1576,12 +1620,19 @@ msgstr "ugyldig UTF-8-streng: «new»"
 msgid "invalid multibyte string 'new'"
 msgstr "ugyldig multibyte-streng: «new»"
 
+#, fuzzy
+msgid "'old' expands to too many characters"
+msgstr "skreiv for få teikn"
+
 msgid "'old' is longer than 'new'"
 msgstr "«old» er lengre enn «new»"
 
 #, fuzzy, c-format
 msgid "invalid input multibyte string %lld"
 msgstr "ugyldig multibyte-inntekst %lld"
+
+msgid "translated string is not representable in the current locale"
+msgstr ""
 
 msgid "strtrim() requires a character vector"
 msgstr "strtrim() tek berre ein teiknvektor"
@@ -2052,6 +2103,10 @@ msgid "'%s' is not a %s"
 msgstr "fifo-en «%s» er ikkje klar"
 
 #, fuzzy, c-format
+msgid "internal gzcon connection is not a %s"
+msgstr "sambandet er ikkje ope"
+
+#, fuzzy, c-format
 msgid "internal connection is not a %s"
 msgstr "sambandet er ikkje ope"
 
@@ -2136,9 +2191,6 @@ msgstr "feil ved skriving til samband"
 
 msgid "cannot read from this connection"
 msgstr "klarte ikkje lesa frå dette sambandet"
-
-msgid "cannot allocate buffer in readLines"
-msgstr "klarte ikkje reservera buffer i readLines"
 
 #, fuzzy
 msgid "too many items"
@@ -2808,6 +2860,14 @@ msgstr ""
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
+
+#, c-format
+msgid "cannot extract '%s' through a symbolic link"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "cannot create directory '%s': %s"
+msgstr "kan ikkje oppretta mappa «%s», av grunnen «%s»"
 
 #, c-format
 msgid " not overwriting file '%s"
@@ -3571,10 +3631,6 @@ msgstr "nsl() er ikkje støtta på denne plattforma"
 
 #, c-format
 msgid "interval too short for this platform, using '%f'"
-msgstr ""
-
-#, c-format
-msgid "interval too short, using '%f'"
 msgstr ""
 
 msgid "R profiling is not available on this system"
@@ -4437,12 +4493,6 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-msgid "Inconsistent node generation in s_Old\n"
-msgstr ""
-
-msgid "Inconsistent node generation in s_OldToNew\n"
-msgstr ""
-
 msgid "can only weakly reference/finalize reference objects"
 msgstr "kan berre svakt referera/finalisera referanseobjekt"
 
@@ -4476,33 +4526,6 @@ msgstr "ugyldig argument av lengd 0"
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "ugyldig type/lengd (%s/%lld) ved vektorreservering"
-
-msgid "internal TRUE value has been modified"
-msgstr ""
-
-msgid "internal FALSE value has been modified"
-msgstr ""
-
-msgid "internal logical NA value has been modified"
-msgstr ""
-
-msgid "R_signal_protect_error() is no-op in CXXR"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "unprotect(): only %td protected item"
-msgid_plural "unprotect(): only %td protected items"
-msgstr[0] "unprotect(): berre %d verna objekt"
-msgstr[1] "unprotect(): berre %d verna objekt"
-
-msgid "unprotect_ptr: pointer not found"
-msgstr "unprotect_ptr: fann ikkje peikar"
-
-#, fuzzy, c-format
-msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
-msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
-msgstr[0] "unprotect(): berre %d verna objekt"
-msgstr[1] "unprotect(): berre %d verna objekt"
 
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
@@ -4969,6 +4992,10 @@ msgstr "ugyldig verdi for «%s»"
 #, fuzzy
 msgid "'decimal.mark' must be a string of one character"
 msgstr "«dec» må vera eitt teikn"
+
+#, c-format
+msgid "final maximal string length = %.0f is too large"
+msgstr ""
 
 msgid "Impossible mode ( x )"
 msgstr "umogleg modus (x)"
@@ -5963,6 +5990,18 @@ msgid ""
 "perhaps long vector from 64-bit version of R?"
 msgstr ""
 
+#, fuzzy
+msgid "invalid attribute list"
+msgstr "ugyldig argumentliste"
+
+#, fuzzy
+msgid "invalid 'dim' attribute"
+msgstr "ugyldig «modus»-argument"
+
+#, fuzzy
+msgid "invalid call or '...' list"
+msgstr "ugyldig verdi for «%s»"
+
 msgid "this version of R cannot read class references"
 msgstr "denne versjonen av R kan ikkje lesa klassereferansar"
 
@@ -5976,6 +6015,10 @@ msgstr "ReadItem: kjend type %i, kanskje skriven av ein seinare versjon av R"
 #, fuzzy
 msgid "invalid length of encoding name"
 msgstr "ugyldig type eller lengd på slot-namn"
+
+#, fuzzy
+msgid "embedded nul in encoding name"
+msgstr "nul inni streng: «%s»"
 
 #, c-format
 msgid "cannot read unreleased workspace version %d written by experimental R %d.%d.%d"
@@ -6129,6 +6172,10 @@ msgstr "datalegnda er ikkje eit multiplum av splittvariabelen"
 #, fuzzy, c-format
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "strenglengd til resultatstrengen er %d, som er større enn maksverdien %d"
+
+#, fuzzy
+msgid "internal error converting format precision"
+msgstr "intern feil i «do_sys»"
 
 #, c-format
 msgid "only %d arguments are allowed"
@@ -6421,8 +6468,20 @@ msgstr ""
 msgid "(subscript) logical subscript too long"
 msgstr "(subscript) logisk indeks for lang"
 
+#, fuzzy
+msgid "object length is not a multiple of subscript length"
+msgstr "lengda til det lengste objektet er ikkje eit multiplum av lengda til det kortaste"
+
+#, fuzzy, c-format
+msgid "length of dimension %d is not a multiple of logical subscript length"
+msgstr "talet på element å byta ut er ikkje eit multiplum av ubytingslengda"
+
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "berre 0-verdiar kan blandast med negative indeksar"
+
+#, fuzzy
+msgid "subscript too large"
+msgstr "indeksen ligg utanfor grensene"
 
 msgid "subscript too large for 32-bit R"
 msgstr ""
@@ -6920,9 +6979,6 @@ msgstr ""
 #, c-format
 msgid "add_point - reached MAXNUMPTS (%d)"
 msgstr "add_point – nådde MAXNUMPTS (%d)"
-
-msgid "insufficient memory to allocate point array"
-msgstr "ikkje nok minne for å reservera punktarray"
 
 #, fuzzy
 msgid "there must be at least two control points"
@@ -7587,6 +7643,10 @@ msgstr "«size» kan ikkje vera større enn nrow(x) = %d"
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr "elementet (%d, %d) er null, så inversen kan ikkje reknast ut"
 
+#, c-format
+msgid "besselI(x, nu): nu=%g > max_alpha_i (= %g): too large for bessel_i() algorithm"
+msgstr ""
+
 msgid "bessel_i allocation error"
 msgstr "bessel_i-reserveringsfeil"
 
@@ -7599,7 +7659,7 @@ msgid "bessel_i(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_i(%g,nu=%g): tapt presisjon i resultatet\n"
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g too large for bessel_j() algorithm"
+msgid "besselJ(x, nu): nu=%g > max_alpha_j (= %g): too large for bessel_j() algorithm"
 msgstr ""
 
 msgid "bessel_j allocation error"
@@ -7614,7 +7674,7 @@ msgid "bessel_j(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_j(%g,nu=%g): tapt presisjon i resultat\n"
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g > 1e7; too large for bessel_j() algorithm"
+msgid "besselK(x, nu): |nu|=%g > max_alpha_k (= %g): too large for bessel_k() algorithm"
 msgstr ""
 
 msgid "bessel_k allocation error"
@@ -7629,7 +7689,7 @@ msgid "bessel_k(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_k(%g,nu=%g): tapt presisjon i resultat\n"
 
 #, c-format
-msgid "besselY(x, nu): nu=%g too large for bessel_y() algorithm"
+msgid "besselY(x, nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
 msgstr ""
 
 msgid "bessel_y allocation error"
@@ -7642,6 +7702,10 @@ msgstr "bessel_y(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Argument utanfor gyld
 #, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_y(%g,nu=%g): tapt presisjon i resultat\n"
+
+#, c-format
+msgid "besselY(x, -nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
+msgstr ""
 
 #, c-format
 msgid "'k' (%.2f) must be integer, rounded to %.0f"
@@ -7848,6 +7912,27 @@ msgstr "skrivefeil ved utpakking av zip-fil"
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "ÅTVARING: Redigerer berre den første i lista over filer"
 
+#~ msgid "cannot allocate buffer in readLines"
+#~ msgstr "klarte ikkje reservera buffer i readLines"
+
+#, fuzzy, c-format
+#~ msgid "unprotect(): only %td protected item"
+#~ msgid_plural "unprotect(): only %td protected items"
+#~ msgstr[0] "unprotect(): berre %d verna objekt"
+#~ msgstr[1] "unprotect(): berre %d verna objekt"
+
+#~ msgid "unprotect_ptr: pointer not found"
+#~ msgstr "unprotect_ptr: fann ikkje peikar"
+
+#, fuzzy, c-format
+#~ msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
+#~ msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
+#~ msgstr[0] "unprotect(): berre %d verna objekt"
+#~ msgstr[1] "unprotect(): berre %d verna objekt"
+
+#~ msgid "insufficient memory to allocate point array"
+#~ msgstr "ikkje nok minne for å reservera punktarray"
+
 #~ msgid "length-0 dimension vector is invalid"
 #~ msgstr "dimensjonsvektoren kan ikkje ha lengd 0"
 
@@ -7911,9 +7996,6 @@ msgstr "ÅTVARING: Redigerer berre den første i lista over filer"
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "«EXPR» manglar"
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "ugyldig «modus»-argument"
 
 #~ msgid "'name' is missing"
 #~ msgstr "«name» manglar"
@@ -7991,10 +8073,6 @@ msgstr "ÅTVARING: Redigerer berre den første i lista over filer"
 #, fuzzy
 #~ msgid "memory exhausted"
 #~ msgstr "ikkje nok minne (nådde grensa?)"
-
-#, c-format
-#~ msgid "invalid value for '%s'"
-#~ msgstr "ugyldig verdi for «%s»"
 
 #~ msgid "'mode' must be of length at least one"
 #~ msgstr "«mode» må ha minst eitt element"

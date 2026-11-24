@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-10-23 20:55+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,19 +25,19 @@ msgstr ""
 msgid "updateGContext must only be called after initGContext"
 msgstr ""
 
-#: grid.cpp:206
+#: grid.cpp:208
 msgid "Turning clipping on or off within a (clipping) path is no honoured"
 msgstr ""
 
-#: grid.cpp:248
+#: grid.cpp:250
 msgid "cannot clip to rotated viewport"
 msgstr ""
 
-#: grid.cpp:463
+#: grid.cpp:465
 msgid "Clipping paths within a (clipping) path are not honoured"
 msgstr ""
 
-#: grid.cpp:482
+#: grid.cpp:484
 msgid "Masks within a (clipping) path are not honoured"
 msgstr ""
 
@@ -54,57 +54,57 @@ msgstr ""
 msgid "attempt to plot on null device"
 msgstr ""
 
-#: grid.cpp:1717
+#: grid.cpp:1715
 msgid "there is no layout defined"
 msgstr ""
 
-#: grid.cpp:1939
+#: grid.cpp:1937
 msgid "polygon edge not found (zero-width or zero-height?)"
 msgstr ""
 
-#: grid.cpp:1948
+#: grid.cpp:1946
 msgid "polygon edge not found"
 msgstr ""
 
-#: grid.cpp:2098
+#: grid.cpp:2096
 msgid "require at least two points to draw arrow"
 msgstr ""
 
-#: grid.cpp:2462
+#: grid.cpp:2460
 msgid "non-finite control point in Xspline"
 msgstr ""
 
-#: grid.cpp:3424
+#: grid.cpp:3422
 msgid "non-finite x or y in graphics path"
 msgstr ""
 
-#: grid.cpp:3473
+#: grid.cpp:3471
 msgid "Empty raster"
 msgstr ""
 
-#: grid.cpp:4014
+#: grid.cpp:4012
 msgid "use of negative pch with symbol font is invalid"
 msgstr ""
 
-#: grid.cpp:4020 grid.cpp:4076
+#: grid.cpp:4018 grid.cpp:4074
 msgid "Coordinates for text pch not yet supported"
 msgstr ""
 
-#: grid.cpp:4081
+#: grid.cpp:4079
 #, c-format
 msgid "pch value '%d' is invalid in this locale"
 msgstr ""
 
-#: grid.cpp:4902
+#: grid.cpp:4900
 #, c-format
 msgid "unimplemented pch value '%d'"
 msgstr ""
 
-#: grid.cpp:5055
+#: grid.cpp:5053
 msgid "invalid plotting symbol"
 msgstr ""
 
-#: grid.cpp:5173
+#: grid.cpp:5171
 msgid "unable to clip to rotated rectangle"
 msgstr ""
 

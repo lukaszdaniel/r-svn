@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 14:47+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -485,6 +485,15 @@ msgstr "向量内存用完了(达到了极限?)"
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+msgid "internal logical NA value has been modified"
+msgstr ""
+
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr "unif_rand: RNG类型%d目前没有实现"
@@ -510,6 +519,10 @@ msgstr "RNG_Init: RNG类型%d目前没有实现"
 msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
 msgstr "'.Random.seed'不是整数向量，而是类型为“%s”，因此被忽略"
 
+#, fuzzy
+msgid "'.Random.seed' has length 0, so ignored"
+msgstr "'.Random.seed'的长度有误"
+
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr "'.Random.seed[1]' 不是一个有效的整数，因此被忽略"
 
@@ -524,6 +537,10 @@ msgstr "'.Random.seed[1] = 5'，但没有用户提供的生成器，因此被忽
 #, fuzzy, c-format
 msgid "'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"
 msgstr "'.Random.seed[1]' 不是有效的RNG kind ，因此被忽略"
+
+#, fuzzy
+msgid "'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"
+msgstr "'.Random.seed[1] = 5'，但没有用户提供的生成器，因此被忽略"
 
 msgid "'.Random.seed' has wrong length"
 msgstr "'.Random.seed'的长度有误"
@@ -782,6 +799,10 @@ msgid "unknown encoding: %d"
 msgstr "不支持'%d'这个编码"
 
 #, fuzzy
+msgid "invalid string length"
+msgstr "长度无效"
+
+#, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "变量名限制于%d字节"
 
@@ -834,11 +855,17 @@ msgstr "'realpr'内存分配错误"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "输入的字符串y[%d]不适用于此语言环境"
 
+msgid "invalid compact_intseq serialized state"
+msgstr ""
+
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
 
 msgid "method should only handle unexpanded vectors"
+msgstr ""
+
+msgid "invalid compact_realseq serialized state"
 msgstr ""
 
 #, c-format
@@ -847,6 +874,10 @@ msgstr ""
 
 msgid "result would be too long a vector"
 msgstr "答案向量会太长"
+
+#, fuzzy
+msgid "invalid deferred string serialized state"
+msgstr "子字符串参数无效"
 
 msgid "unsupported type for deferred string coercion"
 msgstr ""
@@ -858,6 +889,10 @@ msgstr "现在还没有支持长向量：%s:%d"
 #, fuzzy
 msgid "object has been unmapped"
 msgstr "找不到对象'%s'"
+
+#, fuzzy
+msgid "invalid mmap serialized state"
+msgstr "图形狀態无效"
 
 msgid "memory mapping failed; returning vector of length zero"
 msgstr ""
@@ -880,6 +915,10 @@ msgstr "不支持'%s'这一类型"
 msgid "not a memory-mapped object"
 msgstr ""
 
+#, fuzzy
+msgid "invalid wrapper serialized state"
+msgstr "上部序列向量的长度无效"
+
 msgid "unsupported type"
 msgstr "不支持这一类型"
 
@@ -889,6 +928,9 @@ msgstr ""
 #, fuzzy
 msgid "no_na must be 0 or +1"
 msgstr "'onOff'必需是TRUE或FALSE"
+
+msgid "invalid ALTREP serialized class"
+msgstr ""
 
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
@@ -1010,9 +1052,10 @@ msgstr "一参数的实数函数目前还没有实现"
 msgid "unimplemented complex function"
 msgstr "目前没有实现复数功能"
 
-#, c-format
-msgid "unimplemented real function of %d numeric arguments"
-msgstr "%d数值参数的实数函数目前没有实现"
+#, fuzzy, c-format
+msgid "unimplemented real function of %d numeric argument"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "%d数值参数的实数函数目前没有实现"
 
 msgid "matchArg returned something weird"
 msgstr ""
@@ -1554,12 +1597,19 @@ msgstr "UTF-8字符串'new'有错误"
 msgid "invalid multibyte string 'new'"
 msgstr "多字节字符串'new'有错误"
 
+#, fuzzy
+msgid "'old' expands to too many characters"
+msgstr "写了的字符数目太小"
+
 msgid "'old' is longer than 'new'"
 msgstr "'old'比'new'要长"
 
 #, fuzzy, c-format
 msgid "invalid input multibyte string %lld"
 msgstr "输入的多字节字符串%lld有错误"
+
+msgid "translated string is not representable in the current locale"
+msgstr ""
 
 msgid "strtrim() requires a character vector"
 msgstr "strtrim()需要字符向量"
@@ -2021,6 +2071,10 @@ msgstr "原始链结分配失败"
 msgid "'%s' is not a %s"
 msgstr "“%s”不是一个 %s"
 
+#, fuzzy, c-format
+msgid "internal gzcon connection is not a %s"
+msgstr "内部连接不是 %s"
+
 #, c-format
 msgid "internal connection is not a %s"
 msgstr "内部连接不是 %s"
@@ -2103,9 +2157,6 @@ msgstr "链结书写发生了错误"
 
 msgid "cannot read from this connection"
 msgstr "无法从此链结读取"
-
-msgid "cannot allocate buffer in readLines"
-msgstr "无法给readLines分配缓冲区"
 
 msgid "too many items"
 msgstr "项目太多"
@@ -2761,6 +2812,14 @@ msgstr ""
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
+
+#, c-format
+msgid "cannot extract '%s' through a symbolic link"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "cannot create directory '%s': %s"
+msgstr "由于'%2$s'的原因，无法建立'%1$s'文件目录"
 
 #, c-format
 msgid " not overwriting file '%s"
@@ -3506,10 +3565,6 @@ msgstr "本平台不支持nsl()"
 
 #, c-format
 msgid "interval too short for this platform, using '%f'"
-msgstr ""
-
-#, c-format
-msgid "interval too short, using '%f'"
 msgstr ""
 
 msgid "R profiling is not available on this system"
@@ -4359,12 +4414,6 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-msgid "Inconsistent node generation in s_Old\n"
-msgstr ""
-
-msgid "Inconsistent node generation in s_OldToNew\n"
-msgstr ""
-
 msgid "can only weakly reference/finalize reference objects"
 msgstr "只能微弱引用或定局引用对象"
 
@@ -4398,31 +4447,6 @@ msgstr "长度为零的参数是无效的"
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "向量分配的类型/长度(%s/%d)无效"
-
-msgid "internal TRUE value has been modified"
-msgstr ""
-
-msgid "internal FALSE value has been modified"
-msgstr ""
-
-msgid "internal logical NA value has been modified"
-msgstr ""
-
-msgid "R_signal_protect_error() is no-op in CXXR"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "unprotect(): only %td protected item"
-msgid_plural "unprotect(): only %td protected items"
-msgstr[0] "unprotect():只有%d个保护项"
-
-msgid "unprotect_ptr: pointer not found"
-msgstr "unprotect_ptr: 找不到指针"
-
-#, fuzzy, c-format
-msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
-msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
-msgstr[0] "R_Reprotect:只有%d个保护项, 不能重新保护索引%d"
 
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
@@ -4882,6 +4906,10 @@ msgstr "'%s'的值无效"
 #, fuzzy
 msgid "'decimal.mark' must be a string of one character"
 msgstr "'dec'必需为单节字符"
+
+#, c-format
+msgid "final maximal string length = %.0f is too large"
+msgstr ""
 
 msgid "Impossible mode ( x )"
 msgstr "不可能出现这种状态(x)"
@@ -5850,6 +5878,18 @@ msgstr ""
 "负序列化的向量长度：\n"
 "也许向量是从64位版本的R来的？"
 
+#, fuzzy
+msgid "invalid attribute list"
+msgstr "参数列表无效"
+
+#, fuzzy
+msgid "invalid 'dim' attribute"
+msgstr "'mode'参数无效"
+
+#, fuzzy
+msgid "invalid call or '...' list"
+msgstr "'%s'的值无效"
+
 msgid "this version of R cannot read class references"
 msgstr "本R版本无法读取类别引用"
 
@@ -5863,6 +5903,10 @@ msgstr "ReadItem: 不存在%i 这一类型，可能是因为由新的R版本所�
 #, fuzzy
 msgid "invalid length of encoding name"
 msgstr "名称类型的类别或长度无效"
+
+#, fuzzy
+msgid "embedded nul in encoding name"
+msgstr "字符串里嵌入了nul：'%s'"
 
 #, c-format
 msgid "cannot read unreleased workspace version %d written by experimental R %d.%d.%d"
@@ -6014,6 +6058,10 @@ msgstr "数据长度不是分割变量的倍数"
 #, c-format
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "所需要的字符串长度%d大于最大限度%d"
+
+#, fuzzy
+msgid "internal error converting format precision"
+msgstr "'do_sys'里发生了内部错误"
 
 #, c-format
 msgid "only %d arguments are allowed"
@@ -6305,8 +6353,20 @@ msgstr ""
 msgid "(subscript) logical subscript too long"
 msgstr "(下标)逻辑下标太长"
 
+#, fuzzy
+msgid "object length is not a multiple of subscript length"
+msgstr "长的对象长度不是短的对象长度的整倍数"
+
+#, fuzzy, c-format
+msgid "length of dimension %d is not a multiple of logical subscript length"
+msgstr "被替换的项目不是替换值长度的倍数"
+
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "只有负下标里才能有零"
+
+#, fuzzy
+msgid "subscript too large"
+msgstr "标过大，因为是32位的R"
 
 msgid "subscript too large for 32-bit R"
 msgstr "标过大，因为是32位的R"
@@ -6789,9 +6849,6 @@ msgstr ""
 #, c-format
 msgid "add_point - reached MAXNUMPTS (%d)"
 msgstr "add_point-达到了MAXNUMPTS所设定的值(%d)"
-
-msgid "insufficient memory to allocate point array"
-msgstr "没有足够的内存以分配给数点排列"
 
 msgid "there must be at least two control points"
 msgstr "至少得有两个控制点"
@@ -7447,6 +7504,10 @@ msgstr "'size'不能超过nrow(x)=%d"
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr "元素(%d,%d)为零, 因此无法求逆"
 
+#, c-format
+msgid "besselI(x, nu): nu=%g > max_alpha_i (= %g): too large for bessel_i() algorithm"
+msgstr ""
+
 msgid "bessel_i allocation error"
 msgstr "bessel_i分配错误"
 
@@ -7459,7 +7520,7 @@ msgid "bessel_i(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_i(%g,nu=%g): 结果的精确度有损害\n"
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g too large for bessel_j() algorithm"
+msgid "besselJ(x, nu): nu=%g > max_alpha_j (= %g): too large for bessel_j() algorithm"
 msgstr ""
 
 msgid "bessel_j allocation error"
@@ -7474,7 +7535,7 @@ msgid "bessel_j(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_j(%g,nu=%g): 结果的精确度有损害\n"
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g > 1e7; too large for bessel_j() algorithm"
+msgid "besselK(x, nu): |nu|=%g > max_alpha_k (= %g): too large for bessel_k() algorithm"
 msgstr ""
 
 msgid "bessel_k allocation error"
@@ -7489,7 +7550,7 @@ msgid "bessel_k(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_k(%g,nu=%g): 结果的精确度有损害\n"
 
 #, c-format
-msgid "besselY(x, nu): nu=%g too large for bessel_y() algorithm"
+msgid "besselY(x, nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
 msgstr ""
 
 msgid "bessel_y allocation error"
@@ -7502,6 +7563,10 @@ msgstr "bessel_y(%g): ncalc (=%ld)!= nb (=%ld); alpha=%g. 参数在范围外?\n"
 #, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_y(%g,nu=%g): 结果的精确度有损害\n"
+
+#, c-format
+msgid "besselY(x, -nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
+msgstr ""
 
 #, c-format
 msgid "'k' (%.2f) must be integer, rounded to %.0f"
@@ -7706,6 +7771,25 @@ msgstr "提取zip文件时出现了写入错误"
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "警告: 只修改文件列表中的第一个元素"
 
+#~ msgid "cannot allocate buffer in readLines"
+#~ msgstr "无法给readLines分配缓冲区"
+
+#, fuzzy, c-format
+#~ msgid "unprotect(): only %td protected item"
+#~ msgid_plural "unprotect(): only %td protected items"
+#~ msgstr[0] "unprotect():只有%d个保护项"
+
+#~ msgid "unprotect_ptr: pointer not found"
+#~ msgstr "unprotect_ptr: 找不到指针"
+
+#, fuzzy, c-format
+#~ msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
+#~ msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
+#~ msgstr[0] "R_Reprotect:只有%d个保护项, 不能重新保护索引%d"
+
+#~ msgid "insufficient memory to allocate point array"
+#~ msgstr "没有足够的内存以分配给数点排列"
+
 #~ msgid "length-0 dimension vector is invalid"
 #~ msgstr "不能有零长度的大小向量"
 
@@ -7766,9 +7850,6 @@ msgstr "警告: 只修改文件列表中的第一个元素"
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "缺少'EXPR'"
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "'mode'参数无效"
 
 #~ msgid "'name' is missing"
 #~ msgstr "缺少'name'"
@@ -7843,10 +7924,6 @@ msgstr "警告: 只修改文件列表中的第一个元素"
 #, fuzzy
 #~ msgid "memory exhausted"
 #~ msgstr "内存用完了(达到了极限?)"
-
-#, c-format
-#~ msgid "invalid value for '%s'"
-#~ msgstr "'%s'的值无效"
 
 #~ msgid "'mode' must be of length at least one"
 #~ msgstr "'mode'的长度至少需要是一"

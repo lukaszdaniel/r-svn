@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:01+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -73,10 +73,20 @@ msgstr "'%1$s'는 모드 '%2$s'가 될 수 없습니다"
 msgid "'%s' must be a character string"
 msgstr "'sep'은 반드시 문자열이어야 합니다"
 
+#. R/models.R: gettextf("'%s' must be an object of class \"%s\"", "termobj",     "terms")
+#, fuzzy
+msgid "'%s' must be an object of class \"%s\""
+msgstr "'termobj'은 반드시 클래스 %s인 객체이어야 합니다"
+
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 #, fuzzy
 msgid "'%s' must be numeric in [0, 1]"
 msgstr "'sig.level'은 반드시 [0, 1]내에 있는 숫자이어야 합니다"
+
+#. R/models.R: gettextf("'%s' must be numeric or NULL", "dropx")
+#, fuzzy
+msgid "'%s' must be numeric or NULL"
+msgstr "'y'는 반드시 수치형 벡터이어야 합니다"
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 msgid "'A' must be an array or table"
@@ -267,6 +277,11 @@ msgstr "'degree'는 반드시 적어도 1이어야 합니다"
 msgid "'degree' must be less than number of unique points"
 msgstr "'degree'의 값은 반드시 고유한 값을 가지는 포인트들의 개수보다 적어야 합니다"
 
+#. R/smspline.R: stop("'deriv' must be a non-negative integer")
+#, fuzzy
+msgid "'deriv' must be a non-negative integer"
+msgstr "'x'는 반드시 음의 값을 가지지 않는 정수이어야 합니다"
+
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 msgid "'deriv' must be between 0 and 3"
 msgstr "'deriv'는 반드시 0과 3사이에 있어야 합니다"
@@ -443,6 +458,11 @@ msgstr ""
 msgid "'margins' must be a numeric vector of length 2"
 msgstr "'margins'는 반드시 길이가 2인 수치형 벡터이어야 합니다"
 
+#. R/ppr.R: stop("'max.terms' must be at least 'nterms'")
+#, fuzzy
+msgid "'max.terms' must be at least 'nterms'"
+msgstr "'lag.max'는 반드시 적어도 0이어야 합니다"
+
 #. R/mlm.R: stop("'mlm' objects with weights are not supported")
 msgid "'mlm' objects with weights are not supported"
 msgstr "weights와 함께 사용된 'mlm' 객체들은 지원되지 않습니다"
@@ -510,6 +530,11 @@ msgstr "'nknots'는 반드시 {1,..,n)내에 있는 수치형이어야 합니다
 #. R/ppr.R: stop("'nterms' is missing with no default")
 msgid "'nterms' is missing with no default"
 msgstr "'nterms'은 기본값 없이 누락되었습니다"
+
+#. R/ppr.R: stop("'nterms' must be a positive integer")
+#, fuzzy
+msgid "'nterms' must be a positive integer"
+msgstr "'n'은 반드시 'x'보다 크거나 같은 양의 정수이어야 합니다"
 
 #. R/aov.R: stop("'object' does not include an error 'qr' component")
 msgid "'object' does not include an error 'qr' component"
@@ -713,10 +738,6 @@ msgstr "'cutpoints'는 반드시 고유해야 하는데 다음과 같습니다 =
 #, fuzzy
 msgid "'termlabels' must be a character vector"
 msgstr "'termlabels'는 반드시 적어도 길이가 1인 문자형 벡터이어야 합니다"
-
-#. R/models.R: gettextf("'termobj' must be a object of class %s", dQuote("terms"))
-msgid "'termobj' must be a object of class %s"
-msgstr "'termobj'은 반드시 클래스 %s인 객체이어야 합니다"
 
 #. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
 msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
@@ -1219,10 +1240,6 @@ msgstr ""
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr ""
 
-#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
-msgid "Parameter(s) %s ignored"
-msgstr ""
-
 #. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 msgid "Parameter:"
 msgstr ""
@@ -1601,6 +1618,11 @@ msgstr "파라미터명을 인식할 수 없습니다"
 msgid "cannot rescale a constant/zero column to unit variance"
 msgstr ""
 
+#. R/models.R: gettextf("cannot set contrasts for variable '%s'", namD[i])
+#, fuzzy
+msgid "cannot set contrasts for variable '%s'"
+msgstr "'cor = TRUE'는 상수를 가지는 변수와 함께 사용할 수 없습니다"
+
 #. R/family.R: stop("cannot simulate from non-integer prior.weights")
 msgid "cannot simulate from non-integer prior.weights"
 msgstr "정수가 아닌 prior.weights로부터 simulate 할 수 없습니다"
@@ -1643,15 +1665,12 @@ msgstr "'contrast.obj'의 열들은 반드시 합계가 0이 되도록 contrast�
 msgid "computation of exact probability failed, returning Monte Carlo approximation"
 msgstr ""
 
-#. R/free1way.R: gettextf("computing Newton updated failed in %s", ".NewtonRaphson")
-msgid "computing Newton updated failed in %s"
-msgstr ""
-
 #. R/contrast.R: stop("contrasts apply only to factors")
 msgid "contrasts apply only to factors"
 msgstr "contrasts는 요인들에만 적용합니다"
 
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
+#. R/models.R: gettext("contrasts can be applied only to factors with 2 or more levels")
 msgid "contrasts can be applied only to factors with 2 or more levels"
 msgstr "contrasts는 오로지 2 또는 그 이상의 level들을 가진 요인들에만 적용할 수 있습니다"
 
@@ -2212,6 +2231,7 @@ msgstr "종속변수 타입이 유효하지 않습니다"
 #. R/density.R: gettextf("invalid value of %s", "length(x)")
 #. R/filter.R: gettextf("invalid value of %s", "NROW(x)")
 #. R/filter.R: gettextf("invalid value of %s", "length(filter)")
+#. R/kmeans.R: gettextf("invalid value of %s", "'trace'")
 msgid "invalid value of %s"
 msgstr "%s의 값이 올바르지 않습니다."
 
@@ -3674,9 +3694,15 @@ msgstr "shape 파라미터로서 weight를 사용합니다"
 msgid "value of 'epsilon' must be > 0"
 msgstr "'epsilon'의 값은 반드시 0보다 커야 합니다"
 
-#. R/models.R: gettextf("variable '%s' is absent, its contrast will be ignored",     nn)
-msgid "variable '%s' is absent, its contrast will be ignored"
-msgstr "변수 '%s'가 없으므로 이에 대한 contrast는 무시될 것입니다"
+#. R/glm.R: stop("value of 'tol' must be >= 0")
+#, fuzzy
+msgid "value of 'tol' must be >= 0"
+msgstr "'epsilon'의 값은 반드시 0보다 커야 합니다"
+
+#. R/glm.R: stop("value of 'wtol' must be >= 0")
+#, fuzzy
+msgid "value of 'wtol' must be >= 0"
+msgstr "'epsilon'의 값은 반드시 0보다 커야 합니다"
 
 #. R/models.R: gettextf("variable '%s' is not a factor", nm)
 msgid "variable '%s' is not a factor"
@@ -3698,6 +3724,7 @@ msgstr "weights는 multistratum aov() 적합에 지원되지 않습니다"
 msgid "weights must be non-negative and not all zero"
 msgstr "weights는 반드시 음의 값을 가지지 않으며, 모두 0이어서는 안됩니다"
 
+#. R/glm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 #. R/lm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 msgid "weights smaller than tolerance wtol*sum(w) = %g treated as zero"
 msgstr ""
@@ -3913,6 +3940,9 @@ msgstr[0] "upper scope는 모델에는 포함되어 있지 않은 항 %s를 가�
 msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] ""
+
+#~ msgid "variable '%s' is absent, its contrast will be ignored"
+#~ msgstr "변수 '%s'가 없으므로 이에 대한 contrast는 무시될 것입니다"
 
 #, fuzzy
 #~ msgid "'%s' is not implemented yet"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:13+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: \n"
@@ -414,6 +414,10 @@ msgstr "메뉴로부터 해당항목을 누르거나, 종료하려면 0을 입�
 #, fuzzy
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "하나 또는 그 이상의 숫자를 공백을 이용하여 입력하거나, 취소를 하고자 한다면 빈 라인을 입력해주세요"
+
+#. R/data.R: gettextf("File '%s' has unequal number of fields", file)
+msgid "File '%s' has unequal number of fields"
+msgstr ""
 
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 msgid "Filter '%s' is not available."
@@ -977,7 +981,6 @@ msgstr "모든 패키지는 최소한 한 개이상의 다른 패키지들과 �
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 msgid "failed to copy %s to %s"
 msgstr "%s를 %s로 복사하는데 실패했습니다"
 
@@ -1237,6 +1240,14 @@ msgstr "%1$s에 대한 값이 올바르지 않습니다: %2$s"
 #. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
 msgid "kind '%s' not yet implemented"
 msgstr "유형 '%s'는 아직 구현되지 않았습니다"
+
+#. R/tar.R: stop("link target is the extraction directory")
+msgid "link target is the extraction directory"
+msgstr ""
+
+#. R/tar.R: stop("link target outside extraction directory")
+msgid "link target outside extraction directory"
+msgstr ""
 
 #. R/menu.R: stop("menu() cannot be used non-interactively")
 msgid "menu() cannot be used non-interactively"

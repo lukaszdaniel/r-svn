@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 16:06+0200\n"
 "Last-Translator: Patricia loto <patricia.andrea.loto@gmail.com>\n"
 "Language-Team: none\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+#, fuzzy, c-format
+msgid "argument length (%lld) exceeds maximum supported length (%d)"
+msgstr "La longitud de 'fmt' excede la longitud máxima de %d"
 
 msgid "argument 'files' must be character"
 msgstr "el argumento 'files' debe ser de carácter"
@@ -61,14 +65,6 @@ msgstr "La especificación del formato de %s es irreconocible"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "Al menos, un asterisco es soportado en la especificación de cada conversión"
 
-#, c-format
-msgid "Buffer size too large to double safely at line %d"
-msgstr ""
-
-#, c-format
-msgid "unable to allocate buffer for long string at line %d"
-msgstr "no se puede asignar búfer para la cadena larga en la línea %d"
-
 msgid "unable to allocate in PushState"
 msgstr ""
 
@@ -104,10 +100,6 @@ msgstr ""
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "nueva línea dentro de la cadena entrecomillada en %s:%d"
-
-#, c-format
-msgid "unable to allocate buffer for long macro at line %d"
-msgstr "no fue posible asignar búfer para la macro larga en la línea %d"
 
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "macros con anidamiento demasiado profundo: ¿recursión infinita?"
@@ -185,3 +177,11 @@ msgstr ""
 
 msgid "first arg must be a single character string"
 msgstr ""
+
+#, c-format
+#~ msgid "unable to allocate buffer for long string at line %d"
+#~ msgstr "no se puede asignar búfer para la cadena larga en la línea %d"
+
+#, c-format
+#~ msgid "unable to allocate buffer for long macro at line %d"
+#~ msgstr "no fue posible asignar búfer para la macro larga en la línea %d"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-07-25 10:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2026-06-23 16:44+0000\n"
 "Last-Translator: Abdulrahman Alswaji <alswajiab@gmail.com>\n"
 "Language-Team: none\n"
@@ -12,6 +12,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Weblate 5.11.4\n"
+
+#. R/unix/png.R: gettextf("%s is unavailable; trying %s", paste0("type = \"",     type, "\""), "\"Xlib\"")
+#, fuzzy
+msgid "%s is unavailable; trying %s"
+msgstr "type = \"cairo\" غير متاح. تجري محاولة استخدام \"Xlib\""
 
 #. R/pictex.R: gettextf("'%s' is deprecated.\n", "pictex")
 msgid "'%s' is deprecated."
@@ -533,7 +538,7 @@ msgstr "مواصفة خط X11 غير صالحة:"
 msgid "invalid arguments in '%s' (must be font names)"
 msgstr "وسائط غير صالحة في '%s' (يجب أن تكون أسماء خطوط)"
 
-#. R/postscript.R: gettextf("invalid arguments in '%s' (need named args)", deparse(sys.call(sys.parent())))
+#. R/postscript.R: gettextf("invalid arguments in '%s' (need named args)", deparse1(sys.call(sys.parent())))
 #. R/postscript.R: gettextf("invalid arguments in '%s' (need named args)", "postscriptFonts")
 #. R/postscript.R: gettextf("invalid arguments in '%s' (need named args)", "pdfFonts")
 msgid "invalid arguments in '%s' (need named args)"
@@ -706,18 +711,6 @@ msgstr "الفهرس خارج النطاق"
 msgid "svg: Cairo-based devices are not available for this platform"
 msgstr "svg: الأجهزة المعتمدة على Cairo غير متاحة لهذا النظام"
 
-#. R/unix/png.R: warning("type = \"cairo\" is unavailable. trying \"Xlib\"")
-msgid "type = \"cairo\" is unavailable. trying \"Xlib\""
-msgstr "type = \"cairo\" غير متاح. تجري محاولة استخدام \"Xlib\""
-
-#. R/unix/png.R: warning("type = \"cairo-png\" is unavailable. trying \"Xlib\"")
-msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
-msgstr "type = \"cairo-png\" غير متاح. تجري محاولة استخدام \"Xlib\""
-
-#. R/unix/png.R: warning("type = \"quartz\" is unavailable. trying \"Xlib\"")
-msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
-msgstr "type = \"quartz\" غير متاح. تجري محاولة استخدام \"Xlib\""
-
 #. R/postscript.R: gettextf("unknown family '%s'", family)
 msgid "unknown family '%s'"
 msgstr "عائلة غير معروفة '%s'"
@@ -772,6 +765,12 @@ msgstr[2] "اسما الوسيطين %s غير صالحين في '%s'"
 msgstr[3] "أسماء الوسائط %s غير صالحة في '%s'"
 msgstr[4] "أسماء الوسائط %s غير صالحة في '%s'"
 msgstr[5] "اسم الوسيط %s غير صالح في '%s'"
+
+#~ msgid "type = \"cairo-png\" is unavailable. trying \"Xlib\""
+#~ msgstr "type = \"cairo-png\" غير متاح. تجري محاولة استخدام \"Xlib\""
+
+#~ msgid "type = \"quartz\" is unavailable. trying \"Xlib\""
+#~ msgstr "type = \"quartz\" غير متاح. تجري محاولة استخدام \"Xlib\""
 
 #~ msgid "invalid 'filename'"
 #~ msgstr "'filename' غير صالح"

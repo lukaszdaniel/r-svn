@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.15.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-10-23 20:55\n"
 "PO-Revision-Date: 2025-07-06 14:50+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -2098,12 +2098,12 @@ msgstr "Pakken %s har lisensvilkår som du må godta etter at du har lese"
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr "pakken %s har lisensvilkår som du må godta i ei interaktiv økt"
 
-#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\n  according to the DESCRIPTION file it is\n  %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
-"according to the DESCRIPTION file it is\n"
-"%s"
+"  according to the DESCRIPTION file it is\n"
+"  %s"
 msgstr "Pakken %s har lisensvilkår som du må godta etter at du har lese"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
@@ -2295,10 +2295,6 @@ msgstr "det finst ingen «%s»-pakke"
 msgid "this is the \"qr\" method for the generic function solve()"
 msgstr "dette er «qr»-metoden for den generiske funksjonen «solve»"
 
-#. R/datetime.R: sQuote("timedatectl")
-msgid "timedatectl"
-msgstr ""
-
 #. R/qr.R: stop("too large a matrix for LINPACK")
 msgid "too large a matrix for LINPACK"
 msgstr ""
@@ -2325,7 +2321,7 @@ msgstr "trekantmatrise må vera kvadratisk"
 msgid "trimmed means are not defined for complex data"
 msgstr "trimma snitt er ikkje definerte for komplekse tal"
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote("timedatectl"))
+#. R/datetime.R: gettext("unable to deduce timezone name from ")
 #. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
 msgid "unable to deduce timezone name from"
 msgstr ""

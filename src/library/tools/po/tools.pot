@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-10-23 20:56+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,91 +75,91 @@ msgstr ""
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr ""
 
-#: gramLatex.cpp:3091 gramRd.cpp:4447
+#: gramLatex.cpp:3091 gramRd.cpp:4492
 msgid "unable to allocate in PushState"
 msgstr ""
 
-#: gramLatex.cpp:3134 gramRd.cpp:4524
+#: gramLatex.cpp:3134 gramRd.cpp:4569
 #, c-format
 msgid "invalid '%s' value"
 msgstr ""
 
-#: gramRd.cpp:2583 gramRd.cpp:2586
+#: gramRd.cpp:2604 gramRd.cpp:2607
 #, c-format
 msgid "bad markup (extra space?) at %s:%d:%d"
 msgstr ""
 
-#: gramRd.cpp:3120
+#: gramRd.cpp:3153
 #, c-format
 msgid "Macro '%s' previously defined."
 msgstr ""
 
-#: gramRd.cpp:3130
+#: gramRd.cpp:3163
 msgid "At most 4 arguments are allowed for user defined macros."
 msgstr ""
 
-#: gramRd.cpp:3172
+#: gramRd.cpp:3205
 #, c-format
 msgid "No macro definition for '%s'."
 msgstr ""
 
-#: gramRd.cpp:3189 gramRd.cpp:3203
+#: gramRd.cpp:3222 gramRd.cpp:3236
 msgid "internal error: invalid argument to xxusermacro"
 msgstr ""
 
-#: gramRd.cpp:3230
+#: gramRd.cpp:3263
 #, c-format
 msgid "Not enough arguments passed to user macro '%s'"
 msgstr ""
 
-#: gramRd.cpp:3291
+#: gramRd.cpp:3324
 msgid "internal error: inconsistent argument count"
 msgstr ""
 
-#: gramRd.cpp:3376 gramRd.cpp:3380
+#: gramRd.cpp:3409 gramRd.cpp:3413
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr ""
 
-#: gramRd.cpp:3437
+#: gramRd.cpp:3471 gramRd.cpp:3477
 msgid "macros nested too deeply: infinite recursion?"
 msgstr ""
 
-#: gramRd.cpp:3843
+#: gramRd.cpp:3885
 #, c-format
 msgid "Unable to find macro %s"
 msgstr ""
 
-#: gramRd.cpp:4035
+#: gramRd.cpp:4079
 #, c-format
 msgid "Unexpected end of input (in %c quoted string opened at %s:%d:%d)"
 msgstr ""
 
-#: gramRd.cpp:4510
+#: gramRd.cpp:4555
 msgid "'parse_Rd' is not re-entrant"
 msgstr ""
 
-#: gramRd.cpp:4534
+#: gramRd.cpp:4579
 msgid "cannot open the connection"
 msgstr ""
 
-#: gramRd.cpp:4536
+#: gramRd.cpp:4581
 msgid "cannot read from this connection"
 msgstr ""
 
-#: gramRd.cpp:4550
+#: gramRd.cpp:4595
 msgid "invalid Rd file"
 msgstr ""
 
-#: gramRd.cpp:4574
+#: gramRd.cpp:4619
 msgid "'deparseRd' only supports deparsing character elements"
 msgstr ""
 
-#: gramRd.cpp:4577
+#: gramRd.cpp:4622
 msgid "bad state"
 msgstr ""
 
-#: gramRd.cpp:4590
+#: gramRd.cpp:4635
 #, c-format
 msgid "bad text mode %d in 'deparseRd'"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.7.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-10-23 20:56\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,10 +104,24 @@ msgid "'%s' must be a character string"
 msgstr ""
 
 
+#: R/models.R: 0
+#. R/models.R: gettextf("'%s' must be an object of class \"%s\"", "termobj",     "terms")
+
+msgid "'%s' must be an object of class \"%s\""
+msgstr ""
+
+
 #: R/power.R: 0
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 
 msgid "'%s' must be numeric in [0, 1]"
+msgstr ""
+
+
+#: R/models.R: 0
+#. R/models.R: gettextf("'%s' must be numeric or NULL", "dropx")
+
+msgid "'%s' must be numeric or NULL"
 msgstr ""
 
 
@@ -752,6 +766,13 @@ msgid "'margins' must be a numeric vector of length 2"
 msgstr ""
 
 
+#: R/ppr.R: 0
+#. R/ppr.R: stop("'max.terms' must be at least 'nterms'")
+
+msgid "'max.terms' must be at least 'nterms'"
+msgstr ""
+
+
 #: R/mlm.R: 0
 #. R/mlm.R: stop("'mlm' objects with weights are not supported")
 
@@ -869,6 +890,13 @@ msgstr ""
 #. R/ppr.R: stop("'nterms' is missing with no default")
 
 msgid "'nterms' is missing with no default"
+msgstr ""
+
+
+#: R/ppr.R: 0
+#. R/ppr.R: stop("'nterms' must be a positive integer")
+
+msgid "'nterms' must be a positive integer"
 msgstr ""
 
 
@@ -1220,13 +1248,6 @@ msgstr ""
 #. R/models.R: stop("'termlabels' must be a character vector")
 
 msgid "'termlabels' must be a character vector"
-msgstr ""
-
-
-#: R/models.R: 0
-#. R/models.R: gettextf("'termobj' must be a object of class %s", dQuote("terms"))
-
-msgid "'termobj' must be a object of class %s"
 msgstr ""
 
 
@@ -2741,6 +2762,13 @@ msgid "cannot rescale a constant/zero column to unit variance"
 msgstr ""
 
 
+#: R/models.R: 0
+#. R/models.R: gettextf("cannot set contrasts for variable '%s'", namD[i])
+
+msgid "cannot set contrasts for variable '%s'"
+msgstr ""
+
+
 #: R/family.R: 0
 #. R/family.R: stop("cannot simulate from non-integer prior.weights")
 
@@ -2821,7 +2849,9 @@ msgstr ""
 
 
 #: R/contrast.R: 0
+#: R/models.R: 0
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
+#. R/models.R: gettext("contrasts can be applied only to factors with 2 or more levels")
 
 msgid "contrasts can be applied only to factors with 2 or more levels"
 msgstr ""
@@ -3740,10 +3770,12 @@ msgstr ""
 #: R/cmdscale.R: 0
 #: R/density.R: 0
 #: R/filter.R: 0
+#: R/kmeans.R: 0
 #. R/cmdscale.R: gettextf("invalid value of %s", "'n'")
 #. R/density.R: gettextf("invalid value of %s", "length(x)")
 #. R/filter.R: gettextf("invalid value of %s", "NROW(x)")
 #. R/filter.R: gettextf("invalid value of %s", "length(filter)")
+#. R/kmeans.R: gettextf("invalid value of %s", "'trace'")
 
 msgid "invalid value of %s"
 msgstr ""
@@ -6225,13 +6257,6 @@ msgstr ""
 #. R/glm.R: stop("value of 'wtol' must be >= 0")
 
 msgid "value of 'wtol' must be >= 0"
-msgstr ""
-
-
-#: R/models.R: 0
-#. R/models.R: gettextf("variable '%s' is absent, its contrast will be ignored",     nn)
-
-msgid "variable '%s' is absent, its contrast will be ignored"
 msgstr ""
 
 

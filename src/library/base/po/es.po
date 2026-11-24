@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-04-01 16:52+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Spanish <pabloemilio.verde@uni-duesseldorf.de>\n"
@@ -490,6 +490,15 @@ msgstr "la memoria vectorial está agotada (se alcanzó el límite?)"
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+msgid "internal logical NA value has been modified"
+msgstr ""
+
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr "unif_rand: tipo RNG %d no implementado"
@@ -515,6 +524,10 @@ msgstr "RNG_Init: tipo RNG %d no implementado"
 msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
 msgstr "'.Random.seed' no es un vector de números enteros pero es de tipo '%s', así que se ha ignorado"
 
+#, fuzzy
+msgid "'.Random.seed' has length 0, so ignored"
+msgstr "'.Random.seed' tiene una longitud errónea"
+
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr ".Random.seed[1] no es un entero válido, así que se ha ignorado"
 
@@ -529,6 +542,10 @@ msgstr "'.Random.seed[1] = 5' pero el usuario no ha especificado un generador, a
 #, fuzzy, c-format
 msgid "'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"
 msgstr "'.Random.seed[1]' no es un tipo RNG válido así que se ha ignorado"
+
+#, fuzzy
+msgid "'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"
+msgstr "'.Random.seed[1] = 5' pero el usuario no ha especificado un generador, así que se ha ignorado"
 
 msgid "'.Random.seed' has wrong length"
 msgstr "'.Random.seed' tiene una longitud errónea"
@@ -793,6 +810,10 @@ msgid "unknown encoding: %d"
 msgstr "codificación '%s' no soportada"
 
 #, fuzzy
+msgid "invalid string length"
+msgstr "longitud no válida"
+
+#, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "nombres de variables se limitan a %d bytes"
 
@@ -845,11 +866,17 @@ msgstr "error de asignación de memoria en realpr"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "la cadena de entrada y[%d] es inválida en esta localización"
 
+msgid "invalid compact_intseq serialized state"
+msgstr ""
+
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
 
 msgid "method should only handle unexpanded vectors"
+msgstr ""
+
+msgid "invalid compact_realseq serialized state"
 msgstr ""
 
 #, c-format
@@ -858,6 +885,10 @@ msgstr ""
 
 msgid "result would be too long a vector"
 msgstr "el resultado seria un vector muy largo"
+
+#, fuzzy
+msgid "invalid deferred string serialized state"
+msgstr "argumento(s) string no válido"
 
 msgid "unsupported type for deferred string coercion"
 msgstr ""
@@ -869,6 +900,10 @@ msgstr "el tipo '%s' no es soportado"
 #, fuzzy
 msgid "object has been unmapped"
 msgstr "objeto '%s' no encontrado"
+
+#, fuzzy
+msgid "invalid mmap serialized state"
+msgstr "estado gráfico inválido"
 
 msgid "memory mapping failed; returning vector of length zero"
 msgstr ""
@@ -891,6 +926,10 @@ msgstr "el tipo '%s' no es soportado"
 msgid "not a memory-mapped object"
 msgstr ""
 
+#, fuzzy
+msgid "invalid wrapper serialized state"
+msgstr "tamańo de parámetro inválido"
+
 msgid "unsupported type"
 msgstr "tipo no soportado"
 
@@ -900,6 +939,9 @@ msgstr ""
 #, fuzzy
 msgid "no_na must be 0 or +1"
 msgstr "'all.x' debe ser TRUE o FALSE"
+
+msgid "invalid ALTREP serialized class"
+msgstr ""
 
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
@@ -1021,9 +1063,11 @@ msgstr "función real de 1 argumento no implementada"
 msgid "unimplemented complex function"
 msgstr "operación compleja no implementada"
 
-#, c-format
-msgid "unimplemented real function of %d numeric arguments"
-msgstr "función real de %d argumentos numéricos no implementada"
+#, fuzzy, c-format
+msgid "unimplemented real function of %d numeric argument"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "función real de %d argumentos numéricos no implementada"
+msgstr[1] "función real de %d argumentos numéricos no implementada"
 
 msgid "matchArg returned something weird"
 msgstr ""
@@ -1578,12 +1622,19 @@ msgstr "string UTF-8 no válido 'new'"
 msgid "invalid multibyte string 'new'"
 msgstr "string multibyte 'new' inválida"
 
+#, fuzzy
+msgid "'old' expands to too many characters"
+msgstr "muy pocos caracteres escritos"
+
 msgid "'old' is longer than 'new'"
 msgstr "'old' es más largo que 'new'"
 
 #, fuzzy, c-format
 msgid "invalid input multibyte string %lld"
 msgstr "string multibyte %lld de entrada inválida"
+
+msgid "translated string is not representable in the current locale"
+msgstr ""
 
 msgid "strtrim() requires a character vector"
 msgstr "strtrim() requiere un vector de caracteres"
@@ -2053,6 +2104,10 @@ msgid "'%s' is not a %s"
 msgstr "fifo '%s' no está listo"
 
 #, fuzzy, c-format
+msgid "internal gzcon connection is not a %s"
+msgstr "la conexión no está abierta"
+
+#, fuzzy, c-format
 msgid "internal connection is not a %s"
 msgstr "la conexión no está abierta"
 
@@ -2137,9 +2192,6 @@ msgstr "error al escribir en una conexión"
 
 msgid "cannot read from this connection"
 msgstr "no se puede leer desde esta conexión"
-
-msgid "cannot allocate buffer in readLines"
-msgstr "no se puede asignar buffer en readLines"
 
 #, fuzzy
 msgid "too many items"
@@ -2811,6 +2863,14 @@ msgstr ""
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
+
+#, c-format
+msgid "cannot extract '%s' through a symbolic link"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "cannot create directory '%s': %s"
+msgstr "no fue posible crear directorio '%s', motivo: '%s'"
 
 #, c-format
 msgid " not overwriting file '%s"
@@ -3581,10 +3641,6 @@ msgstr "esta plataforma no soporta nsl()"
 #, c-format
 msgid "interval too short for this platform, using '%f'"
 msgstr "Intervalo demasiado corto para esta plataforma, usando '%f'"
-
-#, c-format
-msgid "interval too short, using '%f'"
-msgstr "Intervalo demasiado corto, usando '%f'"
 
 msgid "R profiling is not available on this system"
 msgstr "'R profiling' no disponible en este sistema"
@@ -4456,12 +4512,6 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-msgid "Inconsistent node generation in s_Old\n"
-msgstr ""
-
-msgid "Inconsistent node generation in s_OldToNew\n"
-msgstr ""
-
 msgid "can only weakly reference/finalize reference objects"
 msgstr "puede sólo referenciar/finalizar debilmente objetos de referencia"
 
@@ -4495,33 +4545,6 @@ msgstr "longitud 0 del argumento inválida"
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "tipo/longitud no válido (%s/%lld) en la asignación del vector"
-
-msgid "internal TRUE value has been modified"
-msgstr ""
-
-msgid "internal FALSE value has been modified"
-msgstr ""
-
-msgid "internal logical NA value has been modified"
-msgstr ""
-
-msgid "R_signal_protect_error() is no-op in CXXR"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "unprotect(): only %td protected item"
-msgid_plural "unprotect(): only %td protected items"
-msgstr[0] "unprotect(): solo %d elemento protegido"
-msgstr[1] "unprotect(): solo %d elementos protegidos"
-
-msgid "unprotect_ptr: pointer not found"
-msgstr "unprotect_ptr: no se encontró el puntero"
-
-#, fuzzy, c-format
-msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
-msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
-msgstr[0] "R_Reprotect: solo %d elemento protegido, no puede re-proteger índice %d"
-msgstr[1] "unprotect(): solo %d elementos protegidos, no puede re-proteger índice %d"
 
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
@@ -4996,6 +5019,10 @@ msgstr "valor inválido para '%s'"
 #, fuzzy
 msgid "'decimal.mark' must be a string of one character"
 msgstr "'dec' debe ser un carácter único"
+
+#, c-format
+msgid "final maximal string length = %.0f is too large"
+msgstr ""
 
 msgid "Impossible mode ( x )"
 msgstr "modo imposible (x)"
@@ -6009,6 +6036,18 @@ msgstr ""
 "longitud del vector serializado negativa:\n"
 "¿quizás un vector largo de la versión de 64 bits de R?"
 
+#, fuzzy
+msgid "invalid attribute list"
+msgstr "argumento de lista inválido"
+
+#, fuzzy
+msgid "invalid 'dim' attribute"
+msgstr "argumento 'mode' no válido"
+
+#, fuzzy
+msgid "invalid call or '...' list"
+msgstr "valor inválido para '%s'"
+
 msgid "this version of R cannot read class references"
 msgstr "esta versión de R no puede leer referencias de clases"
 
@@ -6022,6 +6061,10 @@ msgstr "ReadItem: tipo desconocido en %i, tal vez escrito con una versión poste
 #, fuzzy
 msgid "invalid length of encoding name"
 msgstr "tipo o longitud inválido para el nombre de slot"
+
+#, fuzzy
+msgid "embedded nul in encoding name"
+msgstr "nul incrustado en la cadena: '%s' \""
 
 #, c-format
 msgid "cannot read unreleased workspace version %d written by experimental R %d.%d.%d"
@@ -6177,6 +6220,10 @@ msgstr "largo de datos no es múltiplo de la variable de separación"
 #, fuzzy, c-format
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "requerido como resultado longitud de la cadena %d es > máxima %d"
+
+#, fuzzy
+msgid "internal error converting format precision"
+msgstr "error interno en 'do_sys'"
 
 #, fuzzy, c-format
 msgid "only %d arguments are allowed"
@@ -6472,8 +6519,20 @@ msgstr ""
 msgid "(subscript) logical subscript too long"
 msgstr "(subscript) subscrito lógico muy largo"
 
+#, fuzzy
+msgid "object length is not a multiple of subscript length"
+msgstr "longitud de objeto mayor no es múltiplo de la longitud de uno menor"
+
+#, fuzzy, c-format
+msgid "length of dimension %d is not a multiple of logical subscript length"
+msgstr "número de elementos para sustituir no es un múltiplo de la longitud del reemplazo"
+
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "solamente 0's pueden ser mezclados con subscritos negativos"
+
+#, fuzzy
+msgid "subscript too large"
+msgstr "subíndice muy largo para R de 32-bit"
 
 msgid "subscript too large for 32-bit R"
 msgstr "subíndice muy largo para R de 32-bit"
@@ -6980,9 +7039,6 @@ msgstr ""
 #, c-format
 msgid "add_point - reached MAXNUMPTS (%d)"
 msgstr "add_point - alcanzó MAXNUMPTS (%d)"
-
-msgid "insufficient memory to allocate point array"
-msgstr "memoria insuficiente para asignar un punto al arreglo"
 
 #, fuzzy
 msgid "there must be at least two control points"
@@ -7654,6 +7710,10 @@ msgstr "'size' no puede exceder nrow(x) = %d"
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr "elemento (%d, %d) es cero, por lo tanto la inversa no puede ser calculada"
 
+#, fuzzy, c-format
+msgid "besselI(x, nu): nu=%g > max_alpha_i (= %g): too large for bessel_i() algorithm"
+msgstr "besselJ(x, nu): nu=%g muy grande para el algoritmo bessel_j()"
+
 msgid "bessel_i allocation error"
 msgstr "error de asignación bessel_i"
 
@@ -7665,8 +7725,8 @@ msgstr "bessel_i(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Argumento fuera de l�
 msgid "bessel_i(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_i(%g,nu=%g): precisión perdida en resultado\n"
 
-#, c-format
-msgid "besselJ(x, nu): nu=%g too large for bessel_j() algorithm"
+#, fuzzy, c-format
+msgid "besselJ(x, nu): nu=%g > max_alpha_j (= %g): too large for bessel_j() algorithm"
 msgstr "besselJ(x, nu): nu=%g muy grande para el algoritmo bessel_j()"
 
 msgid "bessel_j allocation error"
@@ -7680,9 +7740,9 @@ msgstr "bessel_j(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Argumento fuera de l�
 msgid "bessel_j(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_j(%g,nu=%g): precisión perdida en resultado\n"
 
-#, c-format
-msgid "besselJ(x, nu): nu=%g > 1e7; too large for bessel_j() algorithm"
-msgstr ""
+#, fuzzy, c-format
+msgid "besselK(x, nu): |nu|=%g > max_alpha_k (= %g): too large for bessel_k() algorithm"
+msgstr "besselJ(x, nu): nu=%g muy grande para el algoritmo bessel_j()"
 
 msgid "bessel_k allocation error"
 msgstr "error de asignación en bessel_k"
@@ -7695,8 +7755,8 @@ msgstr "bessel_k(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Argumento fuera de l�
 msgid "bessel_k(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_k(%g,nu=%g): precisión perdida en resultado\n"
 
-#, c-format
-msgid "besselY(x, nu): nu=%g too large for bessel_y() algorithm"
+#, fuzzy, c-format
+msgid "besselY(x, nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
 msgstr "besselY(x, nu): nu=%g muy grande para el algoritmo bessel_y()"
 
 msgid "bessel_y allocation error"
@@ -7709,6 +7769,10 @@ msgstr "bessel_y(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Argumento fuera de l�
 #, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_y(%g,nu=%g): precisión perdida en resultado\n"
+
+#, fuzzy, c-format
+msgid "besselY(x, -nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
+msgstr "besselY(x, nu): nu=%g muy grande para el algoritmo bessel_y()"
 
 #, c-format
 msgid "'k' (%.2f) must be integer, rounded to %.0f"
@@ -7915,6 +7979,31 @@ msgstr "error de escritura al extraer del archivo zip"
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "ATENCIÓN: Solamente editando el primero de los archivos de lista"
 
+#~ msgid "cannot allocate buffer in readLines"
+#~ msgstr "no se puede asignar buffer en readLines"
+
+#, c-format
+#~ msgid "interval too short, using '%f'"
+#~ msgstr "Intervalo demasiado corto, usando '%f'"
+
+#, fuzzy, c-format
+#~ msgid "unprotect(): only %td protected item"
+#~ msgid_plural "unprotect(): only %td protected items"
+#~ msgstr[0] "unprotect(): solo %d elemento protegido"
+#~ msgstr[1] "unprotect(): solo %d elementos protegidos"
+
+#~ msgid "unprotect_ptr: pointer not found"
+#~ msgstr "unprotect_ptr: no se encontró el puntero"
+
+#, fuzzy, c-format
+#~ msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
+#~ msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
+#~ msgstr[0] "R_Reprotect: solo %d elemento protegido, no puede re-proteger índice %d"
+#~ msgstr[1] "unprotect(): solo %d elementos protegidos, no puede re-proteger índice %d"
+
+#~ msgid "insufficient memory to allocate point array"
+#~ msgstr "memoria insuficiente para asignar un punto al arreglo"
+
 #~ msgid "length-0 dimension vector is invalid"
 #~ msgstr "vector de dimensión de longitud 0 es inválido"
 
@@ -7976,9 +8065,6 @@ msgstr "ATENCIÓN: Solamente editando el primero de los archivos de lista"
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "'EXPR' esta perdida"
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "argumento 'mode' no válido"
 
 #~ msgid "'name' is missing"
 #~ msgstr "nombre esta perdido"
@@ -8056,10 +8142,6 @@ msgstr "ATENCIÓN: Solamente editando el primero de los archivos de lista"
 #, fuzzy
 #~ msgid "memory exhausted"
 #~ msgstr "la memoria está agotada (se alcanzó el límite?)"
-
-#, c-format
-#~ msgid "invalid value for '%s'"
-#~ msgstr "valor inválido para '%s'"
 
 #, fuzzy
 #~ msgid "'mode' must be of length at least one"

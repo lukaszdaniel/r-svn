@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: none\n"
@@ -75,10 +75,20 @@ msgstr "«%s» no pot ser del mode «%s»"
 msgid "'%s' must be a character string"
 msgstr "«%s» ha de ser una cadena de caràcters"
 
+#. R/models.R: gettextf("'%s' must be an object of class \"%s\"", "termobj",     "terms")
+#, fuzzy
+msgid "'%s' must be an object of class \"%s\""
+msgstr "'termobj' ha de ser un objecte de la classe %s"
+
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 #, fuzzy
 msgid "'%s' must be numeric in [0, 1]"
 msgstr "«%s» ha de ser numèric a [0, 1]"
+
+#. R/models.R: gettextf("'%s' must be numeric or NULL", "dropx")
+#, fuzzy
+msgid "'%s' must be numeric or NULL"
+msgstr "«y» ha de ser un vector numèric"
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 msgid "'A' must be an array or table"
@@ -295,6 +305,11 @@ msgstr "«degree» ha de ser com a mínim 1"
 msgid "'degree' must be less than number of unique points"
 msgstr "«grau» ha de ser inferior al nombre de punts únics"
 
+#. R/smspline.R: stop("'deriv' must be a non-negative integer")
+#, fuzzy
+msgid "'deriv' must be a non-negative integer"
+msgstr "«x» ha de ser no negatiu i enter"
+
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 #, fuzzy
 msgid "'deriv' must be between 0 and 3"
@@ -501,6 +516,11 @@ msgstr "«margin» ha de contenir noms o números corresponents a «table»"
 msgid "'margins' must be a numeric vector of length 2"
 msgstr "«margins» ha de ser un vector numèric de longitud 2"
 
+#. R/ppr.R: stop("'max.terms' must be at least 'nterms'")
+#, fuzzy
+msgid "'max.terms' must be at least 'nterms'"
+msgstr "«lag.max» ha de ser com a mínim 0"
+
 #. R/mlm.R: stop("'mlm' objects with weights are not supported")
 #, fuzzy
 msgid "'mlm' objects with weights are not supported"
@@ -582,6 +602,11 @@ msgstr "«nknots» ha de ser numèric (en {1,..,n})"
 #, fuzzy
 msgid "'nterms' is missing with no default"
 msgstr "Manca «nterms» sense predeterminat"
+
+#. R/ppr.R: stop("'nterms' must be a positive integer")
+#, fuzzy
+msgid "'nterms' must be a positive integer"
+msgstr "«n» ha de ser un enter positiu >= «x»"
 
 #. R/aov.R: stop("'object' does not include an error 'qr' component")
 msgid "'object' does not include an error 'qr' component"
@@ -815,11 +840,6 @@ msgstr "'punts de tall' han de ser únics, però són ="
 #, fuzzy
 msgid "'termlabels' must be a character vector"
 msgstr "«termlabels» ha de ser un vector de caràcters de longitud com a mínim un"
-
-#. R/models.R: gettextf("'termobj' must be a object of class %s", dQuote("terms"))
-#, fuzzy
-msgid "'termobj' must be a object of class %s"
-msgstr "'termobj' ha de ser un objecte de la classe %s"
 
 #. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
 msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
@@ -1396,11 +1416,6 @@ msgstr "PCA només s'aplica a variables numèriques"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Pàgina [%d,%d]: i =%s; j =%s"
 
-#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
-#, fuzzy
-msgid "Parameter(s) %s ignored"
-msgstr "Paràmetres"
-
 #. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 #, fuzzy
 msgid "Parameter:"
@@ -1834,6 +1849,11 @@ msgstr "no es pot reconèixer el nom de l'argument"
 msgid "cannot rescale a constant/zero column to unit variance"
 msgstr "no s'ha pogut reescalar una columna constant/zero a la variància de la unitat"
 
+#. R/models.R: gettextf("cannot set contrasts for variable '%s'", namD[i])
+#, fuzzy
+msgid "cannot set contrasts for variable '%s'"
+msgstr "no es pot usar «cor = CERT» amb una variable constant"
+
 #. R/family.R: stop("cannot simulate from non-integer prior.weights")
 #, fuzzy
 msgid "cannot simulate from non-integer prior.weights"
@@ -1883,16 +1903,13 @@ msgstr "les columnes de «contrast.obj» han de definir un contrast (han de suma
 msgid "computation of exact probability failed, returning Monte Carlo approximation"
 msgstr "Ha fallat el càlcul de la probabilitat exacta, retornant l'aproximació de Monte Carlo"
 
-#. R/free1way.R: gettextf("computing Newton updated failed in %s", ".NewtonRaphson")
-msgid "computing Newton updated failed in %s"
-msgstr ""
-
 #. R/contrast.R: stop("contrasts apply only to factors")
 #, fuzzy
 msgid "contrasts apply only to factors"
 msgstr "els contrastos només s'apliquen a factors"
 
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
+#. R/models.R: gettext("contrasts can be applied only to factors with 2 or more levels")
 #, fuzzy
 msgid "contrasts can be applied only to factors with 2 or more levels"
 msgstr "els contrastos només es poden aplicar a factors amb 2 o més nivells"
@@ -2524,6 +2541,7 @@ msgstr "tipus de resposta no vàlid"
 #. R/density.R: gettextf("invalid value of %s", "length(x)")
 #. R/filter.R: gettextf("invalid value of %s", "NROW(x)")
 #. R/filter.R: gettextf("invalid value of %s", "length(filter)")
+#. R/kmeans.R: gettextf("invalid value of %s", "'trace'")
 msgid "invalid value of %s"
 msgstr "valor no vàlid de %s"
 
@@ -4188,10 +4206,15 @@ msgstr "utilitzar pesos com a arguments de forma"
 msgid "value of 'epsilon' must be > 0"
 msgstr "el valor d'«epsilon» ha de ser > 0"
 
-#. R/models.R: gettextf("variable '%s' is absent, its contrast will be ignored",     nn)
+#. R/glm.R: stop("value of 'tol' must be >= 0")
 #, fuzzy
-msgid "variable '%s' is absent, its contrast will be ignored"
-msgstr "la variable «%s» és absent, el seu contrast s'ignorarà"
+msgid "value of 'tol' must be >= 0"
+msgstr "el valor d'«epsilon» ha de ser > 0"
+
+#. R/glm.R: stop("value of 'wtol' must be >= 0")
+#, fuzzy
+msgid "value of 'wtol' must be >= 0"
+msgstr "el valor d'«epsilon» ha de ser > 0"
 
 #. R/models.R: gettextf("variable '%s' is not a factor", nm)
 #, fuzzy
@@ -4217,6 +4240,7 @@ msgstr "els pesos no estan suportats en un ajust aov() multistratum"
 msgid "weights must be non-negative and not all zero"
 msgstr "els pesos han de ser no negatius i no tot zero"
 
+#. R/glm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 #. R/lm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 msgid "weights smaller than tolerance wtol*sum(w) = %g treated as zero"
 msgstr ""
@@ -4491,6 +4515,14 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "utilitzant la fila %d/%d d'un ajust combinat"
 msgstr[1] "utilitzant les files %d/%d d'un ajust combinat"
+
+#, fuzzy
+#~ msgid "Parameter(s) %s ignored"
+#~ msgstr "Paràmetres"
+
+#, fuzzy
+#~ msgid "variable '%s' is absent, its contrast will be ignored"
+#~ msgstr "la variable «%s» és absent, el seu contrast s'ignorarà"
 
 #, fuzzy
 #~ msgid "'%s' is not implemented yet"

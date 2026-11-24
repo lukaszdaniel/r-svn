@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-10-23 20:55\n"
 "PO-Revision-Date: 2025-07-06 14:48+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -2031,12 +2031,12 @@ msgstr "套件 %s 的使用許可證要求您在看完後接受它"
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr "套件 %s 的使用許可要求您先透過交談式作業階段時接受它"
 
-#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\n  according to the DESCRIPTION file it is\n  %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
-"according to the DESCRIPTION file it is\n"
-"%s"
+"  according to the DESCRIPTION file it is\n"
+"  %s"
 msgstr "套件 %s 的使用許可證要求您在看完後接受它"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
@@ -2221,10 +2221,6 @@ msgstr "不存在叫 %s 這個名稱的套件"
 msgid "this is the \"qr\" method for the generic function solve()"
 msgstr "泛型函式 solve()有\"qr\" 方法"
 
-#. R/datetime.R: sQuote("timedatectl")
-msgid "timedatectl"
-msgstr ""
-
 #. R/qr.R: stop("too large a matrix for LINPACK")
 msgid "too large a matrix for LINPACK"
 msgstr "矩陣對 LINPACK 來說太大了"
@@ -2249,7 +2245,7 @@ msgstr "三角矩陣必須的正方形的"
 msgid "trimmed means are not defined for complex data"
 msgstr "複數資料不能算切尾平平均值"
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote("timedatectl"))
+#. R/datetime.R: gettext("unable to deduce timezone name from ")
 #. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
 msgid "unable to deduce timezone name from"
 msgstr "無法推論時區名稱自"

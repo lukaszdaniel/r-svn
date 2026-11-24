@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: Shun Wang <shuonwang@gmail.com>\n"
 "Language-Team: Chinese\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+#, fuzzy, c-format
+msgid "argument length (%lld) exceeds maximum supported length (%d)"
+msgstr "“fmt”长度超过最大格式长度 %d"
 
 msgid "argument 'files' must be character"
 msgstr "参数'files'必需是字符"
@@ -61,14 +65,6 @@ msgstr "没有这样的格式设定'%s'"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "每一个转换设置最多只支持一个星'*'"
 
-#, c-format
-msgid "Buffer size too large to double safely at line %d"
-msgstr ""
-
-#, c-format
-msgid "unable to allocate buffer for long string at line %d"
-msgstr "无法为%d行的长字串分配缓冲区"
-
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "无法为%d行的长字串分配缓冲区"
@@ -105,10 +101,6 @@ msgstr ""
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "出现了换行内引号的字符串在%s:%d"
-
-#, c-format
-msgid "unable to allocate buffer for long macro at line %d"
-msgstr "无法为在第%d行的长宏分配缓冲区"
 
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "宏嵌套过深：无限递归？"
@@ -187,3 +179,11 @@ msgstr "内存不足"
 
 msgid "first arg must be a single character string"
 msgstr ""
+
+#, c-format
+#~ msgid "unable to allocate buffer for long string at line %d"
+#~ msgstr "无法为%d行的长字串分配缓冲区"
+
+#, c-format
+#~ msgid "unable to allocate buffer for long macro at line %d"
+#~ msgstr "无法为在第%d行的长宏分配缓冲区"

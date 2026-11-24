@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 16:09+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -19,6 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+#, fuzzy, c-format
+msgid "argument length (%lld) exceeds maximum supported length (%d)"
+msgstr "'fmt' 的長度超過了最大格式長度 %d"
 
 msgid "argument 'files' must be character"
 msgstr "引數 'files' 必須是字元"
@@ -62,14 +66,6 @@ msgstr "不明的格式設定 '%s'"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "每一個轉換設定最多只支援一個星 '*'"
 
-#, c-format
-msgid "Buffer size too large to double safely at line %d"
-msgstr ""
-
-#, c-format
-msgid "unable to allocate buffer for long string at line %d"
-msgstr "無法為 %d 列的長字串指派緩衝區"
-
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "無法為 %d 列的長字串指派緩衝區"
@@ -106,10 +102,6 @@ msgstr ""
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "出現了換列內引號的字串在 %s:%d"
-
-#, c-format
-msgid "unable to allocate buffer for long macro at line %d"
-msgstr "無法為在第 %d 列的長巨集指派緩衝區"
 
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "巨集巢狀過深：無限遞迴？"
@@ -188,3 +180,11 @@ msgstr "記憶體不足"
 
 msgid "first arg must be a single character string"
 msgstr ""
+
+#, c-format
+#~ msgid "unable to allocate buffer for long string at line %d"
+#~ msgstr "無法為 %d 列的長字串指派緩衝區"
+
+#, c-format
+#~ msgid "unable to allocate buffer for long macro at line %d"
+#~ msgstr "無法為在第 %d 列的長巨集指派緩衝區"

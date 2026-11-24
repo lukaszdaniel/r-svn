@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:14+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -418,6 +418,10 @@ msgstr "從菜單中選一項，或選 0 退離"
 #, fuzzy
 msgid "Enter one or more numbers separated by spaces and then ENTER, or 0 to cancel"
 msgstr "請輸入一個或多個由空格分開的數字，或輸入空列來好取消"
+
+#. R/data.R: gettextf("File '%s' has unequal number of fields", file)
+msgid "File '%s' has unequal number of fields"
+msgstr ""
 
 #. R/aspell.R: gettextf("Filter '%s' is not available.", filter_name)
 msgid "Filter '%s' is not available."
@@ -981,7 +985,6 @@ msgstr "每個程式套件至少依賴其他另外一個程式字"
 
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(name2), sQuote(fname))
 #. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(fname))
-#. R/tar.R: gettextf("failed to copy %s to %s", sQuote(from), sQuote(name))
 msgid "failed to copy %s to %s"
 msgstr "無法把 %s 拷貝到 %s"
 
@@ -1241,6 +1244,14 @@ msgstr "%s 的值不對: %s"
 #. R/databrowser.R: gettextf("kind '%s' not yet implemented", kind)
 msgid "kind '%s' not yet implemented"
 msgstr "'%s' 此一類別還沒有被實作"
+
+#. R/tar.R: stop("link target is the extraction directory")
+msgid "link target is the extraction directory"
+msgstr ""
+
+#. R/tar.R: stop("link target outside extraction directory")
+msgid "link target outside extraction directory"
+msgstr ""
 
 #. R/menu.R: stop("menu() cannot be used non-interactively")
 msgid "menu() cannot be used non-interactively"

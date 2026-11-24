@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: RGUi\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-07-25 10:43+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 15:05+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
@@ -19,32 +19,19 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: src/gnuwin32/console.cpp:1185 src/gnuwin32/console.cpp:1227
-#: src/gnuwin32/console.cpp:1755 src/gnuwin32/editor.cpp:162
-#: src/gnuwin32/editor.cpp:169 src/gnuwin32/editor.cpp:191
-#: src/gnuwin32/editor.cpp:198 src/gnuwin32/editor.cpp:209
-#: src/gnuwin32/editor.cpp:284 src/gnuwin32/editor.cpp:297
-#: src/gnuwin32/editor.cpp:370 src/gnuwin32/editor.cpp:585
-#: src/gnuwin32/preferences.cpp:317
 msgid "Not enough memory"
 msgstr "Ikke nok hukommelse"
 
-#: src/gnuwin32/console.cpp:1274 src/gnuwin32/console.cpp:1278
 msgid "Insufficient memory: text not copied to the clipboard"
 msgstr "Utilstrækkelig hukommelse: Tekst blev ikke kopieret til udklipsholderen"
 
-#: src/gnuwin32/console.cpp:1316 src/extra/graphapp/clipboard.cpp:53
-#: src/extra/graphapp/clipboard.cpp:79
 msgid "Unable to open the clipboard"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/gnuwin32/console.cpp:2122
 msgid "Insufficient memory. Please close the console"
 msgstr "Utilstrækkelig hukommelse. Luk venligst konsollen"
 
 # engelsk fejl, ekstra mellemrum.
-#: src/gnuwin32/console.cpp:2177 src/gnuwin32/console.cpp:2231
-#: src/gnuwin32/preferences.cpp:351
 #, c-format
 msgid ""
 "Font %s-%d-%d  not found.\n"
@@ -53,23 +40,18 @@ msgstr ""
 "Skrifttype %s-%d-%d blev ikke fundet.\n"
 "Bruger systemskrifttype"
 
-#: src/gnuwin32/console.cpp:2334
 msgid "Save selection to"
 msgstr "Gem markering til"
 
-#: src/gnuwin32/console.cpp:2336
 msgid "Save console contents to"
 msgstr "Gem konsolindhold til"
 
-#: src/gnuwin32/console.cpp:2443
 msgid "Scrolling.\n"
 msgstr "Rulle.\n"
 
-#: src/gnuwin32/console.cpp:2444
 msgid "  Keyboard: PgUp, PgDown, Ctrl+Arrows, Ctrl+Home, Ctrl+End,\n"
 msgstr "  Tastatur: PgUp, PgDown, Ctrl+pile, Ctrl+Home, Ctrl+End,\n"
 
-#: src/gnuwin32/console.cpp:2445
 msgid ""
 "  Mouse: use the scrollbar(s).\n"
 "\n"
@@ -77,91 +59,69 @@ msgstr ""
 "  Mus: Brug rullebjælkerne.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2446
 msgid "Editing.\n"
 msgstr "Redigere.\n"
 
-#: src/gnuwin32/console.cpp:2447
 msgid "  Moving the cursor: \n"
 msgstr "  Flytning af markøren: \n"
 
-#: src/gnuwin32/console.cpp:2448
 msgid "     Left arrow or Ctrl+B: move backward one character;\n"
 msgstr "     Venstre pil eller Ctrl+B: Flyt et tegn tilbage;\n"
 
-#: src/gnuwin32/console.cpp:2449
 msgid "     Right arrow or Ctrl+F: move forward one character;\n"
 msgstr "     Højre pil eller Ctrl+F: Flyt et tegn fremad;\n"
 
-#: src/gnuwin32/console.cpp:2450
 msgid "     Home or Ctrl+A: go to beginning of line;\n"
 msgstr "     Home eller Ctrl+A: Gå til begyndelsen af linjen;\n"
 
-#: src/gnuwin32/console.cpp:2451
 msgid "     End or Ctrl+E: go to end of line;\n"
 msgstr "     End eller Ctrl+E: Gå til slutningen af linjen;\n"
 
-#: src/gnuwin32/console.cpp:2452
 msgid "  History: Up and Down Arrows, Ctrl+P, Ctrl+N\n"
 msgstr "  Historik: Pilene op og ned, Ctrl+P, Ctrl+N\n"
 
-#: src/gnuwin32/console.cpp:2453
 msgid "  Deleting:\n"
 msgstr "  Slette:\n"
 
-#: src/gnuwin32/console.cpp:2454
 msgid "     Del or Ctrl+D: delete current character or selection;\n"
 msgstr "     Del eller Ctrl+D: Slet aktuelt tegn eller markering;\n"
 
-#: src/gnuwin32/console.cpp:2455
 msgid "     Backspace: delete preceding character;\n"
 msgstr "     Slet tilbage: Slet foregående tegn;\n"
 
-#: src/gnuwin32/console.cpp:2456
 msgid "     Ctrl+Del or Ctrl+K: delete text from current character to end of line.\n"
 msgstr "     Ctrl+Del eller Ctrl+K: Slet tekst fra aktuel tegn til slutningen af linjen.\n"
 
-#: src/gnuwin32/console.cpp:2457
 msgid "     Ctrl+U: delete all text from current line.\n"
 msgstr "     Ctrl+U: Slet al tekst fra aktuel linje.\n"
 
-#: src/gnuwin32/console.cpp:2458
 msgid "  Copy and paste.\n"
 msgstr "  Kopier og indsæt.\n"
 
-#: src/gnuwin32/console.cpp:2459
 msgid "     Use the mouse (with the left button held down) to mark (select) text.\n"
 msgstr "     Brug musen (med den venstre tast nede) til at markere (vælge) tekst.\n"
 
-#: src/gnuwin32/console.cpp:2460
 msgid "     Use Shift+Del (or Ctrl+C) to copy the marked text to the clipboard and\n"
 msgstr "     Brug Skift+Del (eller Ctrl+C) til at kopiere den markerede tekst til udklipsholderen og\n"
 
-#: src/gnuwin32/console.cpp:2461
 msgid "     Shift+Ins (or Ctrl+V or Ctrl+Y) to paste the content of the clipboard (if any)  \n"
 msgstr "     Skift+Ins (eller Ctrl+V eller Ctrl+Y) til at indsætte indholdet af udklipsholderen (hvis der er noget)  \n"
 
-#: src/gnuwin32/console.cpp:2462
 msgid "     to the console, Ctrl+X first copy then paste\n"
 msgstr "     til konsollen, Ctrl+X først kopier så indsæt\n"
 
-#: src/gnuwin32/console.cpp:2463
 msgid "  Misc:\n"
 msgstr "  Div.:\n"
 
-#: src/gnuwin32/console.cpp:2464
 msgid "     Ctrl+L: Clear the console.\n"
 msgstr "     Ctrl+L: Ryd konsollen.\n"
 
-#: src/gnuwin32/console.cpp:2465
 msgid "     Ctrl+O or INS: Toggle overwrite mode: initially off.\n"
 msgstr "     Ctrl+O eller INS: Skift tilstand for overskrivning: Som start slukket.\n"
 
-#: src/gnuwin32/console.cpp:2466
 msgid "     Ctrl+T: Interchange current char with one to the left.\n"
 msgstr "     Ctrl+T: Udveksl aktuelt tegn med tegnet til venstre.\n"
 
-#: src/gnuwin32/console.cpp:2467
 msgid ""
 "\n"
 "Note: Console is updated only when some input is required.\n"
@@ -169,7 +129,6 @@ msgstr ""
 "\n"
 "Bemærk: Konsol opdateres kun når inddata er krævet..\n"
 
-#: src/gnuwin32/console.cpp:2468
 msgid ""
 "  Use Ctrl+W to toggle this feature off/on.\n"
 "\n"
@@ -177,7 +136,6 @@ msgstr ""
 "  Brug Ctrl+W til at tænde og slukke denne funktion..\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2469
 msgid ""
 "Use ESC to stop the interpreter.\n"
 "\n"
@@ -185,7 +143,6 @@ msgstr ""
 "Brug ESC til at stoppe fortolkeren.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2470
 msgid ""
 "TAB starts completion of the current word.\n"
 "\n"
@@ -193,273 +150,186 @@ msgstr ""
 "TAB påbegynder færdiggørelse af det aktuelle ord.\n"
 "\n"
 
-#: src/gnuwin32/console.cpp:2471
 msgid "Standard Windows hotkeys can be used to switch to the\n"
 msgstr "Standardgenvejstaster for Windows kan bruges til at skifte til\n"
 
-#: src/gnuwin32/console.cpp:2472
 msgid "graphics device (Ctrl+Tab or Ctrl+F6 in MDI, Alt+Tab in SDI)"
 msgstr "den grafiske enhed (Ctrl+Tab eller Ctrl+F6 i MDI, Alt+Tab i SDI)"
 
-#: src/gnuwin32/editor.cpp:99 src/gnuwin32/editor.cpp:101
 msgid "R Editor"
 msgstr "Redigeringsprogrammet R"
 
-#: src/gnuwin32/editor.cpp:178
 #, c-format
 msgid "unable to open file %s for reading"
 msgstr "kan ikke åbne fil %s for læsning"
 
-#: src/gnuwin32/editor.cpp:219
 #, c-format
 msgid "Could not read from file '%s'"
 msgstr "Kunne ikke læse fra fil »%s«"
 
-#: src/gnuwin32/editor.cpp:252
 #, c-format
 msgid "Could not save file '%s'"
 msgstr "Kunne ikke gemme fil »%s«"
 
-#: src/gnuwin32/editor.cpp:272
 msgid "Save script as"
 msgstr "Gem skript som"
 
-#: src/gnuwin32/editor.cpp:481 src/gnuwin32/editor.cpp:813
-#: src/gnuwin32/pager.cpp:442 src/gnuwin32/rui.cpp:1150
 msgid "Open script"
 msgstr "Åbn skript"
 
-#: src/gnuwin32/editor.cpp:617 src/gnuwin32/pager.cpp:196
-#: src/gnuwin32/pager.cpp:216
 msgid "No RGui console to paste to"
 msgstr "Ingen RGui-konsol at indsætte til"
 
-#: src/gnuwin32/editor.cpp:719
 msgid "R EDITOR\n"
 msgstr "REDIGERINGSPROGRAM FOR R\n"
 
-#: src/gnuwin32/editor.cpp:721
 msgid "A standard text editor for editing and running R code.\n"
 msgstr "Et standard tekstredigeringsprogram for redigering og kørsel af R-kode.\n"
 
-#: src/gnuwin32/editor.cpp:723
 msgid "RUNNING COMMANDS\n"
 msgstr "KØRE KOMMANDOER\n"
 
-#: src/gnuwin32/editor.cpp:724
 msgid "To run a line or section of R code, select the code and either\n"
 msgstr "For at køre en linje eller afsnit af R-kode, så vælg koden og enten\n"
 
-#: src/gnuwin32/editor.cpp:725
 msgid "     Press Ctrl-R\n"
 msgstr "     Tryk Ctrl-R\n"
 
-#: src/gnuwin32/editor.cpp:726
 msgid "     Select \"Run line or selection\" from the \"Edit\" menu\n"
 msgstr "     Vælg »Kør linje eller markering« fra menuen »Rediger«\n"
 
-#: src/gnuwin32/editor.cpp:727
 msgid "     Press the \"Run line or selection\" icon on the toolbar\n"
 msgstr "     Tryk på ikonet »Kør linje eller markering« på værktøjsbjælken\n"
 
-#: src/gnuwin32/editor.cpp:728
 msgid "This will copy the selected commands to the console and evaluate them.\n"
 msgstr "Dette vil kopiere de valgte kommandoer til konsollen og evaluere dem.\n"
 
-#: src/gnuwin32/editor.cpp:729
 msgid "If there is no selection, this will just run the current line and advance\n"
 msgstr "Hvis der ikke er en markering, vil dette bare køre den aktuelle linje og fortsætte\n"
 
-#: src/gnuwin32/editor.cpp:730
 msgid "the cursor by one line.\n"
 msgstr "markøren med en linje.\n"
 
-#: src/gnuwin32/editor.cpp:742 src/gnuwin32/editor.cpp:821
-#: src/gnuwin32/editor.cpp:879
 msgid "Run line or selection"
 msgstr "Kør linje eller markering"
 
-#: src/gnuwin32/editor.cpp:744 src/gnuwin32/editor.cpp:864
 msgid "Undo"
 msgstr "Fortryd"
 
-#: src/gnuwin32/editor.cpp:746 src/gnuwin32/editor.cpp:867
 msgid "Cut"
 msgstr "Klip"
 
-#: src/gnuwin32/editor.cpp:747 src/gnuwin32/editor.cpp:869
-#: src/gnuwin32/pager.cpp:316 src/gnuwin32/pager.cpp:489
-#: src/gnuwin32/rui.cpp:921 src/gnuwin32/rui.cpp:1162 src/gnuwin32/rui.cpp:1218
 msgid "Copy"
 msgstr "Kopier"
 
-#: src/gnuwin32/editor.cpp:748 src/gnuwin32/editor.cpp:871
-#: src/gnuwin32/rui.cpp:922 src/gnuwin32/rui.cpp:1166 src/gnuwin32/rui.cpp:1219
 msgid "Paste"
 msgstr "Indsæt"
 
-#: src/gnuwin32/editor.cpp:749 src/gnuwin32/editor.cpp:873
 msgid "Delete"
 msgstr "Slet"
 
-#: src/gnuwin32/editor.cpp:751 src/gnuwin32/editor.cpp:875
-#: src/gnuwin32/pager.cpp:319 src/gnuwin32/pager.cpp:495
-#: src/gnuwin32/rui.cpp:928 src/gnuwin32/rui.cpp:1223
 msgid "Select all"
 msgstr "Vælg alle"
 
-#: src/gnuwin32/editor.cpp:817
 msgid "Save script"
 msgstr "Gem skript"
 
-#: src/gnuwin32/editor.cpp:825 src/gnuwin32/pager.cpp:462
-#: src/library/grDevices/src/devWindows.cpp:1606
 msgid "Return focus to Console"
 msgstr "Returner fokus til konsollen"
 
-#: src/gnuwin32/editor.cpp:828
 msgid "Print script"
 msgstr "Udskriv skript"
 
-#: src/gnuwin32/editor.cpp:830 src/gnuwin32/pager.cpp:457
-#: src/gnuwin32/rui.cpp:1178 src/library/grDevices/src/devWindows.cpp:1600
 msgid "Print"
 msgstr "Udskriv"
 
-#: src/gnuwin32/editor.cpp:848 src/gnuwin32/pager.cpp:478
-#: src/gnuwin32/rui.cpp:1196 src/library/utils/src/windows/dataentry.cpp:1818
-#: src/library/grDevices/src/devWindows.cpp:1638
 msgid "File"
 msgstr "Fil"
 
-#: src/gnuwin32/editor.cpp:849 src/gnuwin32/pager.cpp:479
-#: src/gnuwin32/rui.cpp:1198
 msgid "New script"
 msgstr "Nyt skript"
 
-#: src/gnuwin32/editor.cpp:851 src/gnuwin32/pager.cpp:480
-#: src/gnuwin32/rui.cpp:1199
 msgid "Open script..."
 msgstr "Åbn skript..."
 
-#: src/gnuwin32/editor.cpp:853
 msgid "Save"
 msgstr "Gem"
 
-#: src/gnuwin32/editor.cpp:855
 msgid "Save as..."
 msgstr "Gem som..."
 
-#: src/gnuwin32/editor.cpp:858 src/gnuwin32/pager.cpp:481
-#: src/gnuwin32/rui.cpp:1212 src/library/grDevices/src/devWindows.cpp:1659
-#: src/library/grDevices/src/devWindows.cpp:1701
 msgid "Print..."
 msgstr "Udskriv..."
 
-#: src/gnuwin32/editor.cpp:861
 msgid "Close script"
 msgstr "Luk skript"
 
-#: src/gnuwin32/editor.cpp:863 src/gnuwin32/pager.cpp:488
-#: src/gnuwin32/rui.cpp:1217 src/library/utils/src/windows/dataentry.cpp:1824
 msgid "Edit"
 msgstr "Rediger"
 
-#: src/gnuwin32/editor.cpp:877 src/gnuwin32/rui.cpp:1224
 msgid "Clear console"
 msgstr "Ryd konsol"
 
-#: src/gnuwin32/editor.cpp:881
 msgid "Run all"
 msgstr "Kør alle"
 
-#: src/gnuwin32/editor.cpp:884
 msgid "Find..."
 msgstr "Søg..."
 
-#: src/gnuwin32/editor.cpp:886
 msgid "Replace..."
 msgstr "Erstat..."
 
-#: src/gnuwin32/editor.cpp:889 src/gnuwin32/rui.cpp:1228
 msgid "GUI preferences..."
 msgstr "Indstillinger for grafisk brugerflade..."
 
-#: src/gnuwin32/editor.cpp:901 src/gnuwin32/rui.cpp:1260
-#: src/library/utils/src/windows/dataentry.cpp:1725
-#: src/library/utils/src/windows/dataentry.cpp:1835
 msgid "Help"
 msgstr "Hjælp"
 
-#: src/gnuwin32/editor.cpp:902
 msgid "Editor"
 msgstr "Redigering"
 
-#: src/gnuwin32/editor.cpp:958
 msgid "Maximum number of editors reached"
 msgstr "Det maksimale antal redigeringer er nået"
 
-#: src/gnuwin32/editor.cpp:963
 msgid "Unable to create editor window"
 msgstr "Kunne ikke oprette redigeringsvindue"
 
-#: src/gnuwin32/editor.cpp:971
 msgid "Untitled"
 msgstr "Uden titel"
 
-#: src/gnuwin32/extra.cpp:1134
 msgid "Select file"
 msgstr "Vælg fil"
 
-#: src/gnuwin32/pager.cpp:80 src/gnuwin32/pager.cpp:96
 msgid "Error opening file"
 msgstr "Fejl ved åbning af fil"
 
-#: src/gnuwin32/pager.cpp:85 src/gnuwin32/pager.cpp:103
-#: src/gnuwin32/pager.cpp:113
 msgid "Insufficient memory to display file in internal pager"
 msgstr "Utilstrækkelig hukommelse til at vise fil i intern tekstfremviser"
 
-#: src/gnuwin32/pager.cpp:188 src/gnuwin32/pager.cpp:200
-#: src/gnuwin32/pager.cpp:220 src/gnuwin32/rui.cpp:294 src/gnuwin32/rui.cpp:321
 msgid "No selection"
 msgstr "Ingen markering"
 
-#: src/gnuwin32/pager.cpp:317 src/gnuwin32/pager.cpp:447
-#: src/gnuwin32/pager.cpp:491
 msgid "Paste to console"
 msgstr "Indsæt i konsol"
 
-#: src/gnuwin32/pager.cpp:318 src/gnuwin32/pager.cpp:452
-#: src/gnuwin32/pager.cpp:493
 msgid "Paste commands to console"
 msgstr "Indsæt kommandoer i konsol"
 
-#: src/gnuwin32/pager.cpp:321 src/gnuwin32/rui.cpp:931
-#: src/library/utils/src/windows/dataentry.cpp:1731
-#: src/library/grDevices/src/devWindows.cpp:1698
 msgid "Stay on top"
 msgstr "Forbliv øverst"
 
-#: src/gnuwin32/pager.cpp:323 src/gnuwin32/pager.cpp:486
-#: src/library/utils/src/windows/dataentry.cpp:1733
-#: src/library/utils/src/windows/dataentry.cpp:1820
 msgid "Close"
 msgstr "Luk"
 
-#: src/gnuwin32/pager.cpp:483 src/gnuwin32/rui.cpp:1213
 msgid "Save to File..."
 msgstr "Gem til fil..."
 
-#: src/gnuwin32/pager.cpp:498 src/gnuwin32/rui.cpp:1230
 msgid "View"
 msgstr "Vis"
 
-#: src/gnuwin32/pager.cpp:530
 msgid "Unable to create pager window"
 msgstr "Kan ikke oprette fremviservindue"
 
-#: src/gnuwin32/preferences.cpp:312
 msgid ""
 "The overall console properties cannot be changed\n"
 "on a running console.\n"
@@ -471,7 +341,6 @@ msgstr ""
 "\n"
 "Gem indstillingerne og genstart Rgui for at bruge dem.\n"
 
-#: src/gnuwin32/preferences.cpp:319
 msgid ""
 "The language for menus cannot be changed on a\n"
 " running console.\n"
@@ -483,11 +352,9 @@ msgstr ""
 "\n"
 "Gem indstillingerne og genstart Rgui for at de træder i kraft.\n"
 
-#: src/gnuwin32/preferences.cpp:389
 msgid "Changes in pager size will not apply to any open pagers"
 msgstr "Ændringer i fremviserstørrelse vil ikke træde i kraft for åbne fremvisere"
 
-#: src/gnuwin32/preferences.cpp:395
 msgid ""
 "Do not change pager type if any pager is open\n"
 "Proceed?"
@@ -495,486 +362,360 @@ msgstr ""
 "Ændr ikke fremvisertype hvis en fremviser er åben\n"
 "Fortsæt?"
 
-#: src/gnuwin32/preferences.cpp:429
 msgid "Select directory for file 'Rconsole'"
 msgstr "Vælg mappe for filen »Rconsole«"
 
-#: src/gnuwin32/preferences.cpp:524
 msgid "Select 'Rconsole' file"
 msgstr "Vælg »Rconsole-fil«"
 
-#: src/gnuwin32/preferences.cpp:712
 #, c-format
 msgid "Ignored '%s' at line %d of file %s"
 msgstr "Ignorerede »%s« på linje %d i filen %s"
 
-#: src/gnuwin32/preferences.cpp:813
 msgid "Rgui Configuration Editor"
 msgstr "Konfigurationsredigering for Rgui"
 
-#: src/gnuwin32/rui.cpp:209
 msgid "Select file to source"
 msgstr "Vælg fil til kilde"
 
-#: src/gnuwin32/rui.cpp:227
 msgid "Select image to load"
 msgstr "Vælg billede at indlæse"
 
-#: src/gnuwin32/rui.cpp:237
 msgid "Save image in"
 msgstr "Gem billede i"
 
-#: src/gnuwin32/rui.cpp:249
 msgid "Load history from"
 msgstr "Indlæs historik fra"
 
-#: src/gnuwin32/rui.cpp:256
 msgid "Save history in"
 msgstr "Gem historik i"
 
-#: src/gnuwin32/rui.cpp:303 src/gnuwin32/rui.cpp:312
 msgid "No text available"
 msgstr "Ingen tekst tilgængelig"
 
-#: src/gnuwin32/rui.cpp:358
 msgid "Name of data frame or matrix"
 msgstr "Navn på dataramme eller matrix"
 
-#: src/gnuwin32/rui.cpp:365
 #, c-format
 msgid "'%s' cannot be found"
 msgstr "»%s« kan ikke findes"
 
-#: src/gnuwin32/rui.cpp:510
 msgid "Are you sure?"
 msgstr "Er du sikker?"
 
-#: src/gnuwin32/rui.cpp:605
 msgid "Help on"
 msgstr "Hjælp til"
 
-#: src/gnuwin32/rui.cpp:661
 msgid "Search help"
 msgstr "Søgehjælp"
 
-#: src/gnuwin32/rui.cpp:675
 msgid "Search for words in help list archives and documentation"
 msgstr "Søg efter ord i arkiver og dokumentation for hjælpelister"
 
-#: src/gnuwin32/rui.cpp:690
 msgid "Apropos"
 msgstr "Apropos"
 
-#: src/gnuwin32/rui.cpp:917
 msgid "Can only drag-and-drop .R, .RData and .rda files"
 msgstr "Kan kun trække og slippe .R-, .RData- og .rda-filer"
 
-#: src/gnuwin32/rui.cpp:923 src/gnuwin32/rui.cpp:1220
 msgid "Paste commands only"
 msgstr "Indsæt kun kommandoer"
 
-#: src/gnuwin32/rui.cpp:924 src/gnuwin32/rui.cpp:1170
 msgid "Copy and paste"
 msgstr "Kopier og indsæt"
 
-#: src/gnuwin32/rui.cpp:926
 msgid "Clear window"
 msgstr "Ryd vindue"
 
-#: src/gnuwin32/rui.cpp:930 src/gnuwin32/rui.cpp:1243
 msgid "Buffered output"
 msgstr "Mellemlagrede uddata"
 
-#: src/gnuwin32/rui.cpp:970
 msgid "Packages"
 msgstr "Pakker"
 
-#: src/gnuwin32/rui.cpp:971
 msgid "Load package..."
 msgstr "Indlæs pakke..."
 
-#: src/gnuwin32/rui.cpp:973
 msgid "Set CRAN mirror..."
 msgstr "Angiv CRAN-spejl..."
 
-#: src/gnuwin32/rui.cpp:975
 msgid "Select repositories..."
 msgstr "Vælg arkiver..."
 
-#: src/gnuwin32/rui.cpp:977
 msgid "Install package(s)..."
 msgstr "Installer pakker..."
 
-#: src/gnuwin32/rui.cpp:979
 msgid "Update packages..."
 msgstr "Opdater pakker..."
 
-#: src/gnuwin32/rui.cpp:982
 #, fuzzy
 msgid "Install package(s) from local files..."
 msgstr "Installer pakker fra lokale zip-filer..."
 
-#: src/gnuwin32/rui.cpp:1006
 msgid "FAQ on R"
 msgstr "OSS på R"
 
-#: src/gnuwin32/rui.cpp:1008
 msgid "FAQ on R for &Windows"
 msgstr "OSS på R for &Vinduer"
 
-#: src/gnuwin32/rui.cpp:1014 src/gnuwin32/rui.cpp:1017
 msgid "Manuals (in PDF)"
 msgstr "Manualer (i PDF)"
 
-#: src/gnuwin32/rui.cpp:1047
 msgid "R functions (text)..."
 msgstr "R-funktioner (tekst)..."
 
-#: src/gnuwin32/rui.cpp:1049
 msgid "Html help"
 msgstr "Html-hjælp"
 
-#: src/gnuwin32/rui.cpp:1051
 msgid "Search help..."
 msgstr "Søg i hjælp..."
 
-#: src/gnuwin32/rui.cpp:1056
 msgid "Apropos..."
 msgstr "Apropos..."
 
-#: src/gnuwin32/rui.cpp:1058
 msgid "R Project home page"
 msgstr "R-projektets hjemmeside"
 
-#: src/gnuwin32/rui.cpp:1059
 msgid "CRAN home page"
 msgstr "CRAN's hjemmeside"
 
-#: src/gnuwin32/rui.cpp:1061
 msgid "About"
 msgstr "Om"
 
-#: src/gnuwin32/rui.cpp:1070 src/extra/graphapp/gmenus.cpp:52
 msgid "Windows"
 msgstr "Vinduer"
 
-#: src/gnuwin32/rui.cpp:1071 src/extra/graphapp/gmenus.cpp:53
 msgid "Cascade"
 msgstr "Kaskade"
 
 # engelsk fejl Hvorfor stort H og V
-#: src/gnuwin32/rui.cpp:1072 src/extra/graphapp/gmenus.cpp:54
 msgid "Tile &Horizontally"
 msgstr "Felt &Vandret"
 
-#: src/gnuwin32/rui.cpp:1073 src/extra/graphapp/gmenus.cpp:55
 msgid "Tile &Vertically"
 msgstr "Felt &Lodret"
 
-#: src/gnuwin32/rui.cpp:1074
 msgid "Minimize group"
 msgstr "Minimer gruppe"
 
-#: src/gnuwin32/rui.cpp:1075
 msgid "Restore group"
 msgstr "Gendan gruppe"
 
-#: src/gnuwin32/rui.cpp:1154
 msgid "Load workspace"
 msgstr "Indlæs arbejdsrum"
 
-#: src/gnuwin32/rui.cpp:1158
 msgid "Save workspace"
 msgstr "Gem arbejdsrum"
 
-#: src/gnuwin32/rui.cpp:1174
 msgid "Stop current computation"
 msgstr "Stop aktuel beregning"
 
-#: src/gnuwin32/rui.cpp:1197
 msgid "Source R code..."
 msgstr "Kilde-R-kode..."
 
-#: src/gnuwin32/rui.cpp:1200
 msgid "Display file(s)..."
 msgstr "Vis filer..."
 
-#: src/gnuwin32/rui.cpp:1202
 msgid "Load Workspace..."
 msgstr "Indlæs arbejdsrum..."
 
-#: src/gnuwin32/rui.cpp:1203
 msgid "Save Workspace..."
 msgstr "Gem arbejdsrum..."
 
-#: src/gnuwin32/rui.cpp:1205
 msgid "Load History..."
 msgstr "Indlæs historik..."
 
-#: src/gnuwin32/rui.cpp:1207
 msgid "Save History..."
 msgstr "Gem historik..."
 
-#: src/gnuwin32/rui.cpp:1210
 msgid "Change dir..."
 msgstr "Ændr mappe..."
 
-#: src/gnuwin32/rui.cpp:1215
 msgid "Exit"
 msgstr "Afslut"
 
-#: src/gnuwin32/rui.cpp:1222
 msgid "Copy and Paste"
 msgstr "Kopier og indsæt"
 
-#: src/gnuwin32/rui.cpp:1226
 msgid "Data editor..."
 msgstr "Redigeringsprogram for data..."
 
-#: src/gnuwin32/rui.cpp:1231
 msgid "Toolbar"
 msgstr "Værktøjsbjælke"
 
-#: src/gnuwin32/rui.cpp:1232
 msgid "Statusbar"
 msgstr "Statusbjælke"
 
-#: src/gnuwin32/rui.cpp:1236
 msgid "Misc"
 msgstr "Diverse"
 
-#: src/gnuwin32/rui.cpp:1237
 msgid "Stop current computation           \tESC"
 msgstr "Stop aktuel beregning              \tESC"
 
-#: src/gnuwin32/rui.cpp:1239
 msgid "Stop all computations"
 msgstr "Stop alle beregninger"
 
-#: src/gnuwin32/rui.cpp:1241
 msgid "Break to debugger"
 msgstr "Afbryd til fejlsøgning"
 
-#: src/gnuwin32/rui.cpp:1244
 msgid "Word completion"
 msgstr "Ordfuldførelse"
 
-#: src/gnuwin32/rui.cpp:1246
 msgid "Filename completion"
 msgstr "Filnavnsfuldførelse"
 
-#: src/gnuwin32/rui.cpp:1253
 msgid "List objects"
 msgstr "Vis objekter"
 
-#: src/gnuwin32/rui.cpp:1254
 msgid "Remove all objects"
 msgstr "Fjern alle objekter"
 
-#: src/gnuwin32/rui.cpp:1255
 msgid "List search &path"
 msgstr "Vis søge&sti"
 
-#: src/gnuwin32/rui.cpp:1261
 msgid "Console"
 msgstr "Konsol"
 
-#: src/gnuwin32/rui.cpp:1322
 msgid "'mname' is limited to 1000 bytes"
 msgstr "»mname« er begrænset til 1.000 byte"
 
-#: src/gnuwin32/rui.cpp:1367
 #, c-format
 msgid "menu %s does not exist"
 msgstr "menu %s findes ikke"
 
-#: src/gnuwin32/rui.cpp:1418
 msgid "'menu' is limited to 500 bytes"
 msgstr "»menu« er begrænset til 500 byte"
 
-#: src/gnuwin32/rui.cpp:1429
 msgid "base menu does not exist"
 msgstr "basemenu findes ikke"
 
-#: src/gnuwin32/rui.cpp:1444
 msgid "failed to allocate menu"
 msgstr "kunne ikke allokere menu"
 
-#: src/gnuwin32/rui.cpp:1461 src/gnuwin32/rui.cpp:1585
 msgid "menu + item is limited to 1000 bytes"
 msgstr "menu + punkt er begrænset til 1.000 byte"
 
-#: src/gnuwin32/rui.cpp:1469 src/gnuwin32/rui.cpp:1552
 msgid "menu does not exist"
 msgstr "menu findes ikke"
 
-#: src/gnuwin32/rui.cpp:1487 src/gnuwin32/rui.cpp:1510
-#: src/gnuwin32/rui.cpp:1515
 msgid "failed to allocate char storage"
 msgstr "kunne ikke allokere tegnlager"
 
 # engelsk fejl menuitem -> menu item
-#: src/gnuwin32/rui.cpp:1523
 msgid "failed to allocate menuitem"
 msgstr "kunne ikke allokere menuitem"
 
-#: src/gnuwin32/rui.cpp:1575
 msgid "menu not found"
 msgstr "menu ikke fundet"
 
-#: src/gnuwin32/rui.cpp:1593
 msgid "menu or item does not exist"
 msgstr "menu eller punkt findes ikke"
 
-#: src/gnuwin32/system.cpp:608
 msgid "Save workspace image?"
 msgstr "Gem arbejdsrumsbillede?"
 
-#: src/extra/graphapp/clipboard.cpp:69 src/extra/graphapp/clipboard.cpp:73
 msgid "Insufficient memory: cell not copied to the clipboard"
 msgstr "Utilstrækkelig hukommelse: Celle ikke kopieret til udklipsholderen"
 
-#: src/extra/graphapp/dialogs.cpp:144 src/extra/graphapp/dialogs.cpp:161
-#: src/extra/graphapp/dialogs.cpp:178
 msgid "Question"
 msgstr "Spørgsmål"
 
-#: src/extra/graphapp/dialogs.cpp:249
 msgid " Change working directory to:"
 msgstr " Ændr arbejdsmappe til:"
 
-#: src/extra/graphapp/dialogs.cpp:251
 #, c-format
 msgid "Unable to set '%s' as working directory"
 msgstr "Kan ikke angive »%s« som arbejdsmappe"
 
-#: src/extra/graphapp/dialogs.cpp:705 src/extra/graphapp/dialogs.cpp:723
-#: src/extra/graphapp/dialogs.cpp:729 src/extra/graphapp/dialogs.cpp:865
-#: src/extra/graphapp/dialogs.cpp:879 src/extra/graphapp/dialogs.cpp:885
-#: src/library/utils/src/windows/widgets.cpp:136
 msgid "Cancel"
 msgstr "Afbryd"
 
-#: src/extra/graphapp/dialogs.cpp:725 src/extra/graphapp/dialogs.cpp:881
-#: src/library/utils/src/windows/widgets.cpp:135
 msgid "OK"
 msgstr "O.k."
 
-#: src/extra/graphapp/dialogs.cpp:873
 msgid "User"
 msgstr "Bruger"
 
-#: src/extra/graphapp/dialogs.cpp:874
 msgid "Password"
 msgstr "Adgangskode"
 
-#: src/extra/graphapp/dialogs.cpp:1060 src/extra/graphapp/dialogs.cpp:1066
 #, c-format
 msgid "\"%s\" not found"
 msgstr "»%s« ikke fundet"
 
-#: src/extra/graphapp/gmenus.cpp:56
 msgid "Arrange Icons"
 msgstr "Arrangere ikoner"
 
-#: src/extra/graphapp/metafile.cpp:55
 #, fuzzy
 msgid "Unable to save metafile to the clipboard"
 msgstr "Kan ikke åbne udklipsholderen"
 
-#: src/extra/graphapp/metafile.cpp:117
 #, fuzzy
 msgid "Unable to create metafile"
 msgstr "Kunne ikke oprette redigeringsvindue"
 
-#: src/extra/graphapp/metafile.cpp:122
 #, fuzzy
 msgid "Insufficient memory to create metafile"
 msgstr "Utilstrækkelig hukommelse. Luk venligst konsollen"
 
-#: src/extra/graphapp/printer.cpp:110
 #, fuzzy
 msgid "Unable to choose printer"
 msgstr "Kan ikke oprette fremviservindue"
 
-#: src/extra/graphapp/printer.cpp:138
 #, fuzzy
 msgid "Insufficient memory for new printer"
 msgstr "Utilstrækkelig hukommelse til at vise fil i intern tekstfremviser"
 
-#: src/extra/graphapp/printer.cpp:174
 #, fuzzy
 msgid "Unable to start the print job"
 msgstr "Kan ikke oprette fremviservindue"
 
-#: src/library/utils/src/windows/dataentry.cpp:245
-#: src/library/utils/src/windows/dataentry.cpp:1869
-#: src/library/utils/src/windows/dataentry.cpp:1872
-#: src/library/utils/src/windows/dataentry.cpp:1902
 msgid "invalid argument"
 msgstr "ugyldig argument"
 
-#: src/library/utils/src/windows/dataentry.cpp:289
 msgid "invalid type for value"
 msgstr "ugyldig type for værdi"
 
-#: src/library/utils/src/windows/dataentry.cpp:300
 msgid "Data Editor"
 msgstr "Dataredigeringsprogram"
 
-#: src/library/utils/src/windows/dataentry.cpp:350
-#: src/library/utils/src/windows/dataentry.cpp:1862
 msgid "dataentry: internal memory problem"
 msgstr "datapost: Internt hukommelsesproblem"
 
-#: src/library/utils/src/windows/dataentry.cpp:653
-#: src/library/utils/src/windows/dataentry.cpp:1249
 msgid "dataentry: internal memory error"
 msgstr "datapost: Intern hukommelsesfejl"
 
-#: src/library/utils/src/windows/dataentry.cpp:776
-#: src/library/utils/src/windows/dataentry.cpp:788
 msgid "internal type error in dataentry"
 msgstr "intern typefejl i datapost"
 
-#: src/library/utils/src/windows/dataentry.cpp:879
 msgid "dataentry: parse error on string"
 msgstr "datapost: Fortolk fejl på streng"
 
-#: src/library/utils/src/windows/dataentry.cpp:1024
 msgid "dataentry: expression too long"
 msgstr "datapost: Udtryk er for langt"
 
-#: src/library/utils/src/windows/dataentry.cpp:1499
 msgid "column names cannot be blank"
 msgstr "kolonnenavne kan ikke være tomme"
 
-#: src/library/utils/src/windows/dataentry.cpp:1545
 msgid "Variable editor"
 msgstr "Redigeringsprogram for variabler"
 
-#: src/library/utils/src/windows/dataentry.cpp:1550
 msgid "variable name"
 msgstr "variabelnavn"
 
-#: src/library/utils/src/windows/dataentry.cpp:1552
 msgid "type"
 msgstr "type"
 
-#: src/library/utils/src/windows/dataentry.cpp:1667
 msgid "Cell width(s)"
 msgstr "Cellebredder"
 
-#: src/library/utils/src/windows/dataentry.cpp:1673
 msgid "Cell width"
 msgstr "Cellebredde"
 
-#: src/library/utils/src/windows/dataentry.cpp:1676
 msgid "variable"
 msgstr "variabel"
 
 # engelsk fejl, spørg om maks 80 tegn.
-#: src/library/utils/src/windows/dataentry.cpp:1719
 msgid ""
 "Navigation.\n"
 "  Keyboard: cursor keys move selection\n"
@@ -1016,222 +757,164 @@ msgstr ""
 "  Højrekliksmenu for kopier, indsæt, automatisk størrelse på aktuelt valgt kolonne\n"
 "\n"
 
-#: src/library/utils/src/windows/dataentry.cpp:1727
 msgid "Copy selected cell"
 msgstr "Kopier valgt celle"
 
-#: src/library/utils/src/windows/dataentry.cpp:1728
 msgid "Paste to selected cell"
 msgstr "Indsæt til valgt celle"
 
-#: src/library/utils/src/windows/dataentry.cpp:1729
 msgid "Autosize column"
 msgstr "Automatisk størrelse på kolonne"
 
-#: src/library/utils/src/windows/dataentry.cpp:1825
 msgid "Copy  \tCTRL+C"
 msgstr "Kopier  \tCTRL+C"
 
-#: src/library/utils/src/windows/dataentry.cpp:1827
 msgid "Paste \tCTRL+V"
 msgstr "Indsæt \tCTRL+V"
 
-#: src/library/utils/src/windows/dataentry.cpp:1829
 msgid "Delete\tDEL"
 msgstr "Slet\tDEL"
 
-#: src/library/utils/src/windows/dataentry.cpp:1832
 msgid "Cell widths ..."
 msgstr "Cellebredder..."
 
-#: src/library/utils/src/windows/dataentry.cpp:1836
 msgid "Data editor"
 msgstr "Redigeringsprogram for data"
 
-#: src/library/utils/src/windows/dataentry.cpp:1909
 #, fuzzy
 msgid "unable to start data viewer"
 msgstr "Kan ikke oprette fremviservindue"
 
-#: src/library/grDevices/src/devWindows.cpp:950
 msgid "Portable network graphics file"
 msgstr "Portable network graphics-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:953
 msgid "Windows bitmap file"
 msgstr "Windows bitmap-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:956
 msgid "TIFF file"
 msgstr "TIFF-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:959
 msgid "Jpeg file"
 msgstr "Jpeg-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:980
 msgid "Postscript file"
 msgstr "Postscript-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:991
 msgid "PDF file"
 msgstr "PDF-fil"
 
-#: src/library/grDevices/src/devWindows.cpp:1003
 msgid "Enhanced metafiles"
 msgstr "Forbedrede metafiler"
 
-#: src/library/grDevices/src/devWindows.cpp:1006
-#: src/library/grDevices/src/devWindows.cpp:3540
 msgid "file path selected is too long: only 512 bytes are allowed"
 msgstr "den valgte filsti er for langt: Kun 512 byte er tilladt"
 
-#: src/library/grDevices/src/devWindows.cpp:1216
 msgid "No plot to replace!"
 msgstr "Intet plot at erstatte!"
 
-#: src/library/grDevices/src/devWindows.cpp:1266
 msgid "Variable name"
 msgstr "Variabelnavn"
 
-#: src/library/grDevices/src/devWindows.cpp:1275
 msgid "Variable doesn't contain any plots!"
 msgstr "Variabel indeholder ingen plot!"
 
-#: src/library/grDevices/src/devWindows.cpp:1288
 msgid "Name of variable to save to"
 msgstr "Navn på variabel at gemme til"
 
-#: src/library/grDevices/src/devWindows.cpp:1594
 msgid "Copy to the clipboard as a metafile"
 msgstr "Kopier til udklipsholderen som en metafil"
 
-#: src/library/grDevices/src/devWindows.cpp:1612
-#: src/library/grDevices/src/devWindows.cpp:1623
 msgid "Stop locator"
 msgstr "Stop lokalisering"
 
-#: src/library/grDevices/src/devWindows.cpp:1622
-#: src/library/grDevices/src/devWindows.cpp:1626
 msgid "Stop"
 msgstr "Stop"
 
-#: src/library/grDevices/src/devWindows.cpp:1628
 msgid "Continue"
 msgstr "Fortsæt"
 
-#: src/library/grDevices/src/devWindows.cpp:1632
 msgid "Next"
 msgstr "Næste"
 
-#: src/library/grDevices/src/devWindows.cpp:1633
 msgid "Next plot"
 msgstr "Næste plot"
 
-#: src/library/grDevices/src/devWindows.cpp:1639
 msgid "Save as"
 msgstr "Gem som"
 
-#: src/library/grDevices/src/devWindows.cpp:1648
-#: src/library/grDevices/src/devWindows.cpp:1650
-#: src/library/grDevices/src/devWindows.cpp:1652
 #, c-format
 msgid "%s quality..."
 msgstr "%s kvalitet..."
 
-#: src/library/grDevices/src/devWindows.cpp:1654
 msgid "Copy to the clipboard"
 msgstr "Kopier til udklipsholderen"
 
-#: src/library/grDevices/src/devWindows.cpp:1655
 msgid "as a Bitmap\tCTRL+C"
 msgstr "som en bitmap\tCTRL+C"
 
-#: src/library/grDevices/src/devWindows.cpp:1656
 msgid "as a Metafile\tCTRL+W"
 msgstr "som en metafil\tCTRL+W"
 
-#: src/library/grDevices/src/devWindows.cpp:1661
 msgid "close Device"
 msgstr "luk enhed"
 
-#: src/library/grDevices/src/devWindows.cpp:1662
 msgid "History"
 msgstr "Historik"
 
-#: src/library/grDevices/src/devWindows.cpp:1663
 msgid "Recording"
 msgstr "Optager"
 
-#: src/library/grDevices/src/devWindows.cpp:1666
 msgid "Add\tINS"
 msgstr "Tilføj\tINS"
 
-#: src/library/grDevices/src/devWindows.cpp:1667
 msgid "Replace"
 msgstr "Erstat"
 
-#: src/library/grDevices/src/devWindows.cpp:1669
 msgid "Previous\tPgUp"
 msgstr "Forrige\tPgUp"
 
-#: src/library/grDevices/src/devWindows.cpp:1670
 msgid "Next\tPgDown"
 msgstr "Næste\tPgDown"
 
-#: src/library/grDevices/src/devWindows.cpp:1672
 msgid "Save to variable..."
 msgstr "Gem til variabel..."
 
-#: src/library/grDevices/src/devWindows.cpp:1673
 msgid "Get from variable..."
 msgstr "Hent fra variabel..."
 
-#: src/library/grDevices/src/devWindows.cpp:1675
 msgid "Clear history"
 msgstr "Ryd historik"
 
-#: src/library/grDevices/src/devWindows.cpp:1676
 msgid "Resize"
 msgstr "Ændr størrelse"
 
-#: src/library/grDevices/src/devWindows.cpp:1677
 msgid "R mode"
 msgstr "R-tilstand"
 
-#: src/library/grDevices/src/devWindows.cpp:1679
 msgid "Fit to window"
 msgstr "Tilpas til vindue"
 
-#: src/library/grDevices/src/devWindows.cpp:1681
 msgid "Fixed size"
 msgstr "Fast størrelse"
 
-#: src/library/grDevices/src/devWindows.cpp:1688
 msgid "Copy as metafile"
 msgstr "Kopier som metafil"
 
-#: src/library/grDevices/src/devWindows.cpp:1690
 msgid "Copy as bitmap"
 msgstr "Kopier som bitmap"
 
-#: src/library/grDevices/src/devWindows.cpp:1693
 msgid "Save as metafile..."
 msgstr "Gem som metafil..."
 
-#: src/library/grDevices/src/devWindows.cpp:1695
 msgid "Save as postscript..."
 msgstr "Gem som postscript..."
 
-#: src/library/grDevices/src/devWindows.cpp:3205
 msgid "Locator is active"
 msgstr "Lokalisering er aktiv"
 
-#: src/library/grDevices/src/devWindows.cpp:3858
 msgid "Waiting to confirm page change..."
 msgstr "Venter på at bekræfte sideændring..."
 
-#: src/library/grDevices/src/devWindows.cpp:3870
 msgid "Click or hit ENTER for next page"
 msgstr "Klik eller tryk på RETUR for næste side"
 

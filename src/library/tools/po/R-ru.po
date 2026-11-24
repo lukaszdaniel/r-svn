@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.4.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-04-01 17:06+0200\n"
 "Last-Translator: Ivan Krylov <ikrylov@disroot.org>\n"
 "Language-Team: Russian\n"
@@ -43,22 +43,6 @@ msgstr "'--as-cran' выключает '--extra-arch'"
 msgid "'--multiarch' specified with only one usable sub-architecture"
 msgstr "'--multiarch' определен только для одной используемой субархитектуры"
 
-#. R/QC.R: gettextf("'::' or ':::' import not declared from: %s", sQuote(xx))
-msgid "'::' or ':::' import not declared from: %s"
-msgstr "'::' или ':::' импорт не определен из: %s"
-
-#. R/QC.R: gettext("'::' or ':::' imports not declared from:")
-msgid "'::' or ':::' imports not declared from:"
-msgstr "не объявлен импорт '::' или ':::' из:"
-
-#. R/QC.R: gettextf("':::' call which should be '::': %s", sQuote(xx))
-msgid "':::' call which should be '::': %s"
-msgstr "':::' вызов должен быть '::': %s"
-
-#. R/QC.R: gettext("':::' calls which should be '::':")
-msgid "':::' calls which should be '::':"
-msgstr "':::' вызовы должны быть '::':"
-
 #. R/md5.R: stop("'bytes' must be a raw vector")
 #. R/sha256.R: stop("'bytes' must be a raw vector")
 #, fuzzy
@@ -69,17 +53,13 @@ msgstr "'text' должен быть текстовым вектором"
 msgid "'cleanup' exists but is not executable -- see the 'R Installation and Administration Manual'"
 msgstr "'cleanup' есть, но его невозможно выполнить  -- смотрите 'R Installation and Adminstration Manual'"
 
-#. R/QC.R: gettextf("'data(package=)' call not declared from: %s", sQuote(xx))
-msgid "'data(package=)' call not declared from: %s"
-msgstr "вызов 'data(package=)' не объявлен: %s"
-
-#. R/QC.R: gettext("'data(package=)' calls not declared from:")
-msgid "'data(package=)' calls not declared from:"
-msgstr "'data(package=)' не объявлены в:"
-
 #. R/testing.R: warning("'diff' is not available so useDiff = FALSE will be used")
 msgid "'diff' is not available so useDiff = FALSE will be used"
 msgstr "не могу запустить 'diff', так что использую useDiff = FALSE"
+
+#. R/utils.R: stop("'file' and 'x' are mutually exclusive")
+msgid "'file' and 'x' are mutually exclusive"
+msgstr ""
 
 #. R/md5.R: stop("'files' and 'bytes' are mutually exclusive")
 #. R/sha256.R: stop("'files' and 'bytes' are mutually exclusive")
@@ -94,38 +74,6 @@ msgstr "тест '%s' недоступен"
 #. R/sign.R: stop("'keyring' must be specified if 'use.default.keyring=FALSE'")
 msgid "'keyring' must be specified if 'use.default.keyring=FALSE'"
 msgstr ""
-
-#. R/QC.R: gettextf("'library' or 'require' call not declared from: %s",     sQuote(xx))
-msgid "'library' or 'require' call not declared from: %s"
-msgstr "не объявлен вызов 'library' или 'require' из %s"
-
-#. R/QC.R: gettextf("'library' or 'require' call to %s in package code.",     sQuote(xx))
-msgid "'library' or 'require' call to %s in package code."
-msgstr "'library' или 'require' вызывает %s в коде пакета."
-
-#. R/QC.R: gettextf("'library' or 'require' call to %s which was already attached by Depends.",     sQuote(xx))
-msgid "'library' or 'require' call to %s which was already attached by Depends."
-msgstr "'library' или 'require' вызывает %s, уже присоединенный из Depends."
-
-#. R/QC.R: gettext("'library' or 'require' calls in package code:")
-msgid "'library' or 'require' calls in package code:"
-msgstr "'library' или 'require' вызовы в коде пакета:"
-
-#. R/QC.R: gettext("'library' or 'require' calls not declared from:")
-msgid "'library' or 'require' calls not declared from:"
-msgstr "не объявлены вызовы 'library' или 'require' из:"
-
-#. R/QC.R: gettext("'library' or 'require' calls to packages already attached by Depends:")
-msgid "'library' or 'require' calls to packages already attached by Depends:"
-msgstr "'library' или 'require' вызывает пакеты, уже присоединенные из Depends:"
-
-#. R/QC.R: gettextf("'loadNamespace' or 'requireNamespace' call not declared from: %s",     sQuote(xx))
-msgid "'loadNamespace' or 'requireNamespace' call not declared from: %s"
-msgstr "вызов 'loadNamespace' или 'requireNamespace' не определены из: %s"
-
-#. R/QC.R: gettext("'loadNamespace' or 'requireNamespace' calls not declared from:")
-msgid "'loadNamespace' or 'requireNamespace' calls not declared from:"
-msgstr "вызовы 'loadNamespace' или 'requireNamespace' не определены из:"
 
 #. R/Rd.R: stop("'macros' must be TRUE or must specify existing macros")
 msgid "'macros' must be TRUE or must specify existing macros"
@@ -150,6 +98,11 @@ msgstr "'text' должен быть текстовым вектором"
 #. R/Rd2pdf.R: stop("'type' must be one of 'txt', 'html', 'latex' or 'example'",     call. = FALSE)
 msgid "'type' must be one of 'txt', 'html', 'latex' or 'example'"
 msgstr "'type' должен быть одним из 'txt', 'html', 'latex' или 'example'"
+
+#. R/utils.R: stop("'x' must be a raw vector or a (scalar) character string")
+#, fuzzy
+msgid "'x' must be a raw vector or a (scalar) character string"
+msgstr "аргумент 'x' должен быть текстовой строкой"
 
 #. R/htmltools.R: sprintf("* Package: %s", p)
 #. R/htmltools.R: sprintf("* Package: %s", basename(d))
@@ -206,6 +159,14 @@ msgstr "<p>Чтобы увидеть результат в браузере, у�
 #. R/code2html.R: gettext("<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>")
 msgid "<p>To view output in the browser, the <a href='https://CRAN.R-project.org/package=knitr'>knitr</a> package must be installed.</p>"
 msgstr "<p>Чтобы увидеть результат в браузере, установите пакет <a href='https://CRAN.R-project.org/package=knitr'>knitr</a>.</p>"
+
+#. R/QC.R: gettext("Adding so many packages to the search path is excessive and importing selectively is preferable.")
+msgid "Adding so many packages to the search path is excessive and importing selectively is preferable."
+msgstr ""
+
+#. R/QC.R: gettext("All declared Imports should be used.")
+msgid "All declared Imports should be used."
+msgstr ""
 
 #. R/update_packages.R: message("All existing entry MD5sums match tarballs.")
 msgid "All existing entry MD5sums match tarballs."
@@ -387,6 +348,10 @@ msgstr "Несоответствия структуры данных в Rd фа�
 #. R/QC.R: gettextf("Data with usage in Rd file '%s' but not in code:",     fname)
 msgid "Data with usage in Rd file '%s' but not in code:"
 msgstr "Данные использованы в Rd файле '%s', но не в коде:"
+
+#. R/QC.R: gettext("Depends includes the non-default packages:")
+msgid "Depends includes the non-default packages:"
+msgstr ""
 
 #. R/QC.R: gettextf("Deprecated license: %s", paste(y, collapse = " "))
 msgid "Deprecated license: %s"
@@ -586,9 +551,21 @@ msgstr "Получил предупреждение, проверяя %s, но �
 msgid "Help pages:"
 msgstr "Страницы помощи:"
 
+#. R/QC.R: gettext("Importing from so many packages makes the package vulnerable to any of them becoming unavailable.  Move as many as possible to Suggests and use conditionally.")
+msgid "Importing from so many packages makes the package vulnerable to any of them becoming unavailable.  Move as many as possible to Suggests and use conditionally."
+msgstr ""
+
+#. R/QC.R: gettextf("Imports includes %d non-default packages.", ly)
+msgid "Imports includes %d non-default packages."
+msgstr ""
+
 #. R/Vignettes.R: gettextf("In '%s' vignettes '%s' and '%s' have the same vignette name",     basename(dirname(dir)), orig, dup)
 msgid "In '%s' vignettes '%s' and '%s' have the same vignette name"
 msgstr "Среди миниатюр '%s' '%s' и '%s' имеют одинаковые имена"
+
+#. R/QC.R: gettext("Including base/recommended package(s):")
+msgid "Including base/recommended package(s):"
+msgstr ""
 
 #. R/license.R: stop("Input must be character")
 #, fuzzy
@@ -735,22 +712,6 @@ msgstr "Несоответствия в именах аргументов:"
 msgid "Missing link(s) in Rd file '%s':"
 msgstr "Пропущенная ссылка или ссылки с в Rd файле '%s':"
 
-#. R/QC.R: gettextf("Missing object imported by a ':::' call: %s", sQuote(xx))
-msgid "Missing object imported by a ':::' call: %s"
-msgstr "Пропущенный объект загружен вызовом ':::': %s"
-
-#. R/QC.R: gettext("Missing objects imported by ':::' calls:")
-msgid "Missing objects imported by ':::' calls:"
-msgstr "Пропущенные объекты включены вызовами ':::':"
-
-#. R/QC.R: gettextf("Missing or unexported object: %s", sQuote(xx))
-msgid "Missing or unexported object: %s"
-msgstr "Пропущенный или неэкспортированный объект: %s"
-
-#. R/QC.R: gettext("Missing or unexported objects:")
-msgid "Missing or unexported objects:"
-msgstr "Пропущенные или неэкспортированные объекты:"
-
 #. R/QC.R: message("NB: need Internet access to use CRAN incoming checks")
 msgid "NB: need Internet access to use CRAN incoming checks"
 msgstr "NB: для проверок приходящего в CRAN нужен доступ в Интернет"
@@ -766,14 +727,6 @@ msgstr "ЗАМЕЧАНИЕ"
 #. R/install.R: gettextf("NOTE: Skipping installation-time patch %s which seems to be already applied.\n",     purl)
 msgid "NOTE: Skipping installation-time patch %s which seems to be already applied."
 msgstr ""
-
-#. R/QC.R: gettextf("Namespace in Imports field not imported from: %s",     sQuote(xx))
-msgid "Namespace in Imports field not imported from: %s"
-msgstr "Пространство имен в поле Imports не включено из: %s"
-
-#. R/QC.R: gettext("Namespaces in Imports field not imported from:")
-msgid "Namespaces in Imports field not imported from:"
-msgstr "Пространства имен в поле imports не включены из:"
 
 #. R/dynamicHelp.R: gettextf("No NEWS found for package %s", mono(pkg))
 msgid "No NEWS found for package %s"
@@ -895,10 +848,6 @@ msgstr "Функции отсоединения пакета не должны �
 msgid "Package has no 'Version' field"
 msgstr "У пакета нет поля 'Version'"
 
-#. R/QC.R: gettextf("Package in Depends field not imported from: %s", sQuote(xx))
-msgid "Package in Depends field not imported from: %s"
-msgstr "Пакет в поле Depends не включен из: %s"
-
 #. R/QC.R: gettextf("Package startup functions should have two arguments with names starting with %s and %s, respectively.",     sQuote("lib"), sQuote("pkg"))
 msgid "Package startup functions should have two arguments with names starting with %s and %s, respectively."
 msgstr "Стартовые функции пакета должны иметь два аргумента с именами, начинающимися с %s и %s, соответственно."
@@ -915,13 +864,17 @@ msgstr "Стартовые функции пакета не должны мен�
 msgid "Package startup functions should use %s to generate messages."
 msgstr "Стартовые функции пакета должны использовать %s для создания сообщений."
 
-#. R/QC.R: gettext("Packages in Depends field not imported from:")
-msgid "Packages in Depends field not imported from:"
-msgstr "Пакеты в поле Depends не включены из:"
-
 #. R/QC.R: gettextf("Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R.")
 msgid "Packages with priorities 'base' or 'recommended' or 'defunct-base' must already be known to R."
 msgstr "Пакеты с привилегиями 'base' или 'recommended' или 'defunct-base' должны быть уже известны R."
+
+#. R/QC.R: gettext("Please remove these calls from your code.")
+msgid "Please remove these calls from your code."
+msgstr ""
+
+#. R/QC.R: gettext("Please use :: or requireNamespace() instead.")
+msgid "Please use :: or requireNamespace() instead."
+msgstr ""
 
 #. R/CRANtools.R: sprintf("Processing %s ...", m)
 #. R/htmltools.R: sprintf("Processing %s ...", f)
@@ -977,6 +930,11 @@ msgstr "Rd макропакет '%s' не инсталлирован."
 #. R/Rd.R: stop("Rd object required")
 msgid "Rd object required"
 msgstr "Нужен Rd объект"
+
+#. R/QC.R: gettext("RdMacros packages must be contained in the DESCRIPTION Imports/Depends entries.")
+#, fuzzy
+msgid "RdMacros packages must be contained in the DESCRIPTION Imports/Depends entries."
+msgstr "Зависимости очерка (%s элементы) должны содержаться в пунктах 'Depends/Suggests/Imports' файла DESCRIPTION."
 
 #. R/QC.R: gettextf("Record: %d Field(s): %s", pos, vapply(pos, function(p) paste(nms[ind[p,     ]], collapse = ", "), ""))
 msgid "Record: %d Field(s): %s"
@@ -1043,10 +1001,19 @@ msgstr "См. раздел %s в '%s'."
 msgid "See section 'Cross-references' in the 'Writing R Extensions' manual."
 msgstr "См. раздел 'Cross-references' руководства 'Writing R Extensions'."
 
+#. R/QC.R: gettext("See section 'Suggested packages' in the 'Writing R Extensions' manual.")
+#, fuzzy
+msgid "See section 'Suggested packages' in the 'Writing R Extensions' manual."
+msgstr "См. раздел 'Cross-references' руководства 'Writing R Extensions'."
+
 #. R/QC.R: gettext("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
 #. R/QC.R: gettextf("See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual.")
 msgid "See section 'The DESCRIPTION file' in the 'Writing R Extensions' manual."
 msgstr "См. раздел 'The DESCRIPTION file' руководства 'Writing R Extensions'."
+
+#. R/QC.R: gettext("See the note in ?`:::` about the use of this operator.")
+msgid "See the note in ?`:::` about the use of this operator."
+msgstr ""
 
 #. R/mailtools.R: sprintf("Sending email failed!\nThe unsent msg can be found in file %s.",     sQuote(filename))
 msgid ""
@@ -1100,6 +1067,10 @@ msgstr "Исходную библиотеку стиля JSS нельзя изм
 msgid "The package 'dir' argument must be of length 1"
 msgstr "Аргумент директории пакета 'dir' должен быть единичной длины"
 
+#. R/QC.R: gettext("There are ::: calls to the package's namespace in its code.  A package almost never needs to use ::: for its own objects:")
+msgid "There are ::: calls to the package's namespace in its code.  A package almost never needs to use ::: for its own objects:"
+msgstr ""
+
 #. R/packages.R: stop("There is no binary type for this build of R.")
 msgid "There is no binary type for this build of R."
 msgstr ""
@@ -1108,9 +1079,19 @@ msgstr ""
 msgid "These fields must have ASCII values."
 msgstr "Эти поля должны иметь ASCII-значения."
 
+#. R/QC.R: gettext("These packages need to be imported from (in the NAMESPACE file) for when this namespace is loaded but not attached.")
+msgid "These packages need to be imported from (in the NAMESPACE file) for when this namespace is loaded but not attached."
+msgstr ""
+
 #. R/QC.R: gettextf("This field must contain one or more packages (and no version requirement).")
 msgid "This field must contain one or more packages (and no version requirement)."
 msgstr "Это поле должно включать один или больше пакет (и не включать требования версии)."
+
+#. R/QC.R: gettextf("  URI: %s\n    From: %s", y[, 1L], y[, 2L])
+msgid ""
+"URI: %s\n"
+"    From: %s"
+msgstr ""
 
 #. R/dynamicHelp.R: gettextf("URL %s was not found", mono(path))
 msgid "URL %s was not found"
@@ -1119,14 +1100,6 @@ msgstr "URL %s не найден"
 #. R/update_packages.R: message("Unable to update existing PACKAGES file. Calling write_PACKAGES directly.")
 msgid "Unable to update existing PACKAGES file. Calling write_PACKAGES directly."
 msgstr "Не могу обновить имеющийся файл PACKAGES. Приступаю к записи _PACKAGES напрямую."
-
-#. R/QC.R: gettextf("Unavailable namespace imported from by a ':::' call: %s",     sQuote(xx))
-msgid "Unavailable namespace imported from by a ':::' call: %s"
-msgstr "Недоступные пространства имен загружены вызовом ':::': %s"
-
-#. R/QC.R: gettext("Unavailable namespaces imported from by ':::' calls:")
-msgid "Unavailable namespaces imported from by ':::' calls:"
-msgstr "Недоступные пространства имен загружены вызовами ':::':"
 
 #. R/QC.R: gettextf("Undocumented %s:", tag)
 msgid "Undocumented %s:"
@@ -1151,14 +1124,6 @@ msgstr "Недокументированные объекты кода:"
 #. R/QC.R: gettext("Undocumented data sets:")
 msgid "Undocumented data sets:"
 msgstr "Недокументированные данные:"
-
-#. R/QC.R: gettextf("Unexported object imported by a ':::' call: %s", sQuote(xxx))
-msgid "Unexported object imported by a ':::' call: %s"
-msgstr "Неэкспортированный объект загружен вызовом ':::': %s"
-
-#. R/QC.R: gettext("Unexported objects imported by ':::' calls:")
-msgid "Unexported objects imported by ':::' calls:"
-msgstr "Неэкспортированный объект загружен вызовами ':::':"
 
 #. R/QC.R: gettext("Unknown encoding")
 msgid "Unknown encoding"
@@ -1312,6 +1277,10 @@ msgstr "не могу проверить код R, установленный к
 #. R/admin.R: gettextf("cannot copy '%s' to '%s'", output, outVignetteDir)
 msgid "cannot copy '%s' to '%s'"
 msgstr "не могу скопировать '%s' в '%s'"
+
+#. R/install.R: stop("cannot create PKG_BUILD_DIR")
+msgid "cannot create PKG_BUILD_DIR"
+msgstr ""
 
 #. R/admin.R: gettextf("cannot create directory '%s'", buildDir)
 msgid "cannot create directory '%s'"
@@ -1510,6 +1479,10 @@ msgstr "создаю символы отладки (%s)"
 #. R/dynamicHelp.R: warning("httpd server disabled by R_DISABLE_HTTPD", immediate. = TRUE)
 msgid "httpd server disabled by R_DISABLE_HTTPD"
 msgstr "сервер httpd отключен через R_DISABLE_HTTPD"
+
+#. R/QC.R: gettextf("  iD: %s\t(from: %s)", unlist(y[, 1L]), vapply(y[,     2L], paste, "", collapse = ", "))
+msgid "iD: %s\t(from: %s)"
+msgstr ""
 
 #. R/utils.R: gettext("inferior call failed")
 msgid "inferior call failed"
@@ -1933,6 +1906,76 @@ msgstr[0] "Запустите R CMD build с опцией --no-build-vignettes, 
 msgstr[1] "Запустите R CMD build с опцией --no-build-vignettes, чтобы предотвратить создание очерков заново."
 msgstr[2] "Запустите R CMD build с опцией --no-build-vignettes, чтобы предотвратить создание очерков заново."
 
+#. R/QC.R: ngettext(length(xx), "'::' or ':::' import not declared from:",     "'::' or ':::' imports not declared from:")
+#, fuzzy
+msgid "'::' or ':::' import not declared from:"
+msgid_plural "'::' or ':::' imports not declared from:"
+msgstr[0] "не объявлен импорт '::' или ':::' из:"
+msgstr[1] "не объявлен импорт '::' или ':::' из:"
+msgstr[2] "не объявлен импорт '::' или ':::' из:"
+
+#. R/QC.R: ngettext(length(xx), "':::' call which should be '::':", "':::' calls which should be '::':")
+#, fuzzy
+msgid "':::' call which should be '::':"
+msgid_plural "':::' calls which should be '::':"
+msgstr[0] "':::' вызовы должны быть '::':"
+msgstr[1] "':::' вызовы должны быть '::':"
+msgstr[2] "':::' вызовы должны быть '::':"
+
+#. R/QC.R: ngettext(length(xx), "'LinkingTo' for %s is unused as it has no 'include' directory",     "'LinkingTo' for %s are unused as they have no 'include' directory")
+msgid "'LinkingTo' for %s is unused as it has no 'include' directory"
+msgid_plural "'LinkingTo' for %s are unused as they have no 'include' directory"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(xx), "'data(package=)' call not declared from:",     "'data(package=)' calls not declared from:")
+#, fuzzy
+msgid "'data(package=)' call not declared from:"
+msgid_plural "'data(package=)' calls not declared from:"
+msgstr[0] "'data(package=)' не объявлены в:"
+msgstr[1] "'data(package=)' не объявлены в:"
+msgstr[2] "'data(package=)' не объявлены в:"
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call in package code:",     "'library' or 'require' calls in package code:")
+#, fuzzy
+msgid "'library' or 'require' call in package code:"
+msgid_plural "'library' or 'require' calls in package code:"
+msgstr[0] "'library' или 'require' вызовы в коде пакета:"
+msgstr[1] "'library' или 'require' вызовы в коде пакета:"
+msgstr[2] "'library' или 'require' вызовы в коде пакета:"
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call not declared from:",     "'library' or 'require' calls not declared from:")
+#, fuzzy
+msgid "'library' or 'require' call not declared from:"
+msgid_plural "'library' or 'require' calls not declared from:"
+msgstr[0] "не объявлены вызовы 'library' или 'require' из:"
+msgstr[1] "не объявлены вызовы 'library' или 'require' из:"
+msgstr[2] "не объявлены вызовы 'library' или 'require' из:"
+
+#. R/QC.R: ngettext(length(xx), "'library' or 'require' call to package already attached by Depends:",     "'library' or 'require' calls to packages already attached by Depends:")
+#, fuzzy
+msgid "'library' or 'require' call to package already attached by Depends:"
+msgid_plural "'library' or 'require' calls to packages already attached by Depends:"
+msgstr[0] "'library' или 'require' вызывает пакеты, уже присоединенные из Depends:"
+msgstr[1] "'library' или 'require' вызывает пакеты, уже присоединенные из Depends:"
+msgstr[2] "'library' или 'require' вызывает пакеты, уже присоединенные из Depends:"
+
+#. R/QC.R: ngettext(length(xx), "'loadNamespace' or 'requireNamespace' call not declared from:",     "'loadNamespace' or 'requireNamespace' calls not declared from:")
+#, fuzzy
+msgid "'loadNamespace' or 'requireNamespace' call not declared from:"
+msgid_plural "'loadNamespace' or 'requireNamespace' calls not declared from:"
+msgstr[0] "вызовы 'loadNamespace' или 'requireNamespace' не определены из:"
+msgstr[1] "вызовы 'loadNamespace' или 'requireNamespace' не определены из:"
+msgstr[2] "вызовы 'loadNamespace' или 'requireNamespace' не определены из:"
+
+#. R/QC.R: ngettext(length(xx), "Base package in Suggests/Enhances imported in NAMESPACE:",     "Base packages in Suggests/Enhances imported in NAMESPACE:")
+msgid "Base package in Suggests/Enhances imported in NAMESPACE:"
+msgid_plural "Base packages in Suggests/Enhances imported in NAMESPACE:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/toHTML.R: ngettext(len, "Corresponding BibTeX entry:", "Corresponding BibTeX entries:")
 msgid "Corresponding BibTeX entry:"
 msgid_plural "Corresponding BibTeX entries:"
@@ -1943,6 +1986,13 @@ msgstr[2] "Соответствующие записи BibTeX:"
 #. R/update_packages.R: ngettext(length(notokinds), "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs",     "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs",     domain = "R-tools")
 msgid "Detected %d MD5sum mismatch between existing PACKAGES file and tarballs"
 msgid_plural "Detected %d MD5sum mismatches between existing PACKAGES file and tarballs"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(x), "File which contains pragma(s) suppressing diagnostics:",     "Files which contain pragma(s) suppressing diagnostics:")
+msgid "File which contains pragma(s) suppressing diagnostics:"
+msgid_plural "Files which contain pragma(s) suppressing diagnostics:"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -2034,6 +2084,34 @@ msgstr[0] "Нашел не рекомендованную функцию:"
 msgstr[1] "Нашел не рекомендованные функции:"
 msgstr[2] "Нашел не рекомендованные функции:"
 
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid DOI:",     "Found the following (possibly) invalid DOIs:")
+msgid "Found the following (possibly) invalid DOI:"
+msgid_plural "Found the following (possibly) invalid DOIs:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(NROW(y), "Found the following (possibly) invalid ORCID iD:",     "Found the following (possibly) invalid ORCID iDs:")
+msgid "Found the following (possibly) invalid ORCID iD:"
+msgid_plural "Found the following (possibly) invalid ORCID iDs:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(y), "Found the following (possibly) invalid URL:",     "Found the following (possibly) invalid URLs:")
+msgid "Found the following (possibly) invalid URL:"
+msgid_plural "Found the following (possibly) invalid URLs:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(NROW(y), "Found the following (possibly) invalid file URI:",     "Found the following (possibly) invalid file URIs:")
+msgid "Found the following (possibly) invalid file URI:"
+msgid_plural "Found the following (possibly) invalid file URIs:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/QC.R: ngettext(length(x$devices), "Found the platform-specific device:",     "Found the platform-specific devices:")
 msgid "Found the platform-specific device:"
 msgid_plural "Found the platform-specific devices:"
@@ -2054,6 +2132,37 @@ msgid_plural "Help on topic '%s' was found in the following packages:"
 msgstr[0] "Помощь по теме '%s' была найдена в следующем пакете:"
 msgstr[1] "Помощь по теме '%s' была найдена в следующих пакетах:"
 msgstr[2] "Помощь по теме '%s' была найдена в следующих пакетах:"
+
+#. R/QC.R: ngettext(length(xx), "Missing object imported by a ':::' call:",     "Missing objects imported by ':::' calls:")
+#, fuzzy
+msgid "Missing object imported by a ':::' call:"
+msgid_plural "Missing objects imported by ':::' calls:"
+msgstr[0] "Пропущенный объект загружен вызовом ':::': %s"
+msgstr[1] "Пропущенный объект загружен вызовом ':::': %s"
+msgstr[2] "Пропущенный объект загружен вызовом ':::': %s"
+
+#. R/QC.R: ngettext(length(xx), "Missing or unexported object:", "Missing or unexported objects:")
+#, fuzzy
+msgid "Missing or unexported object:"
+msgid_plural "Missing or unexported objects:"
+msgstr[0] "Пропущенные или неэкспортированные объекты:"
+msgstr[1] "Пропущенные или неэкспортированные объекты:"
+msgstr[2] "Пропущенные или неэкспортированные объекты:"
+
+#. R/QC.R: ngettext(length(bad), "Namespace dependency missing from DESCRIPTION Imports/Depends entries:",     "Namespace dependencies missing from DESCRIPTION Imports/Depends entries:")
+msgid "Namespace dependency missing from DESCRIPTION Imports/Depends entries:"
+msgid_plural "Namespace dependencies missing from DESCRIPTION Imports/Depends entries:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(xx), "Namespace in Imports field not imported from:",     "Namespaces in Imports field not imported from:")
+#, fuzzy
+msgid "Namespace in Imports field not imported from:"
+msgid_plural "Namespaces in Imports field not imported from:"
+msgstr[0] "Пространства имен в поле imports не включены из:"
+msgstr[1] "Пространства имен в поле imports не включены из:"
+msgstr[2] "Пространства имен в поле imports не включены из:"
 
 #. R/QC.R: ngettext(n, "Note: found %d marked Latin-1 string", "Note: found %d marked Latin-1 strings")
 msgid "Note: found %d marked Latin-1 string"
@@ -2084,12 +2193,96 @@ msgstr[0] "Ни один из пакетов %s не имеет зарегист
 msgstr[1] "Ни один из пакетов %s не имеет зарегистрированных движков очерков"
 msgstr[2] "Ни один из пакетов %s не имеет зарегистрированных движков очерков"
 
+#. R/QC.R: ngettext(length(y), "Package has a FOSS license but eventually depends on the following package which may restrict use:",     "Package has a FOSS license but eventually depends on the following packages which may restrict use:")
+msgid "Package has a FOSS license but eventually depends on the following package which may restrict use:"
+msgid_plural "Package has a FOSS license but eventually depends on the following packages which may restrict use:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(y), "Package has a FOSS license but eventually depends on the following package which restricts use:",     "Package has a FOSS license but eventually depends on the following packages which restrict use:")
+msgid "Package has a FOSS license but eventually depends on the following package which restricts use:"
+msgid_plural "Package has a FOSS license but eventually depends on the following packages which restrict use:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(xx), "Package in Depends field not imported from:",     "Packages in Depends field not imported from:")
+#, fuzzy
+msgid "Package in Depends field not imported from:"
+msgid_plural "Packages in Depends field not imported from:"
+msgstr[0] "Пакеты в поле Depends не включены из:"
+msgstr[1] "Пакеты в поле Depends не включены из:"
+msgstr[2] "Пакеты в поле Depends не включены из:"
+
+#. R/QC.R: ngettext(length(bad), "Package in Depends/Imports which should probably only be in LinkingTo:",     "Packages in Depends/Imports which should probably only be in LinkingTo:")
+msgid "Package in Depends/Imports which should probably only be in LinkingTo:"
+msgid_plural "Packages in Depends/Imports which should probably only be in LinkingTo:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(xx), "Package listed in more than one of Depends, Imports, Suggests, Enhances:",     "Packages listed in more than one of Depends, Imports, Suggests, Enhances:")
+msgid "Package listed in more than one of Depends, Imports, Suggests, Enhances:"
+msgid_plural "Packages listed in more than one of Depends, Imports, Suggests, Enhances:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(pkgs), "Package listed more than once in %s: %s",     "Packages listed more than once in %s: %s")
+#, fuzzy
+msgid "Package listed more than once in %s: %s"
+msgid_plural "Packages listed more than once in %s: %s"
+msgstr[0] "Нашел больше одного"
+msgstr[1] "Нашел больше одного"
+msgstr[2] "Нашел больше одного"
+
+#. R/QC.R: ngettext(length(bad), "Package required and available but unsuitable version:",     "Packages required and available but unsuitable versions:")
+#, fuzzy
+msgid "Package required and available but unsuitable version:"
+msgid_plural "Packages required and available but unsuitable versions:"
+msgstr[0] "Пакет требуется и доступен, но неподходящих версий:"
+msgstr[1] "Пакет требуется и доступен, но неподходящих версий:"
+msgstr[2] "Пакет требуется и доступен, но неподходящих версий:"
+
+#. R/QC.R: ngettext(length(bad), "Package required but not available:",     "Packages required but not available:")
+#, fuzzy
+msgid "Package required but not available:"
+msgid_plural "Packages required but not available:"
+msgstr[0] "Пакет требуется, но недоступен:"
+msgstr[1] "Пакет требуется, но недоступен:"
+msgstr[2] "Пакет требуется, но недоступен:"
+
+#. R/QC.R: ngettext(length(bad), "Package suggested but not available for checking:",     "Packages suggested but not available for checking:")
+#, fuzzy
+msgid "Package suggested but not available for checking:"
+msgid_plural "Packages suggested but not available for checking:"
+msgstr[0] "Пакет требуется, но недоступен для выдачи:"
+msgstr[1] "Пакет требуется, но недоступен для выдачи:"
+msgstr[2] "Пакет требуется, но недоступен для выдачи:"
+
+#. R/QC.R: ngettext(length(bad), "Package suggested but not available:",     "Packages suggested but not available:")
+#, fuzzy
+msgid "Package suggested but not available:"
+msgid_plural "Packages suggested but not available:"
+msgstr[0] "Пакет требуется, но недоступен для выдачи:"
+msgstr[1] "Пакет требуется, но недоступен для выдачи:"
+msgstr[2] "Пакет требуется, но недоступен для выдачи:"
+
 #. R/QC.R: ngettext(length(y), "Package unavailable to check Rd xrefs: %s",     "Packages unavailable to check Rd xrefs: %s")
 msgid "Package unavailable to check Rd xrefs: %s"
 msgid_plural "Packages unavailable to check Rd xrefs: %s"
 msgstr[0] "Пакет недоступен для проверки Rd xrefs: %s"
 msgstr[1] "Пакеты недоступны для проверки Rd xrefs: %s"
 msgstr[2] "Пакеты недоступны для проверки Rd xrefs: %s"
+
+#. R/QC.R: ngettext(length(bad), "Package which this enhances but not available for checking:",     "Packages which this enhances but not available for checking:")
+#, fuzzy
+msgid "Package which this enhances but not available for checking:"
+msgid_plural "Packages which this enhances but not available for checking:"
+msgstr[0] "Пакет, который это усиливает, недоступен для выдачи:"
+msgstr[1] "Пакет, который это усиливает, недоступен для выдачи:"
+msgstr[2] "Пакет, который это усиливает, недоступен для выдачи:"
 
 #. R/QC.R: ngettext(length(x$bad_closures), "Possibly missing '()' after 'return' in the following function:",     "Possibly missing '()' after 'return' in the following functions:")
 msgid "Possibly missing '()' after 'return' in the following function:"
@@ -2105,12 +2298,34 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+#. R/QC.R: ngettext(length(bad), "RdMacros package not required:", "RdMacros packages not required:")
+#, fuzzy
+msgid "RdMacros package not required:"
+msgid_plural "RdMacros packages not required:"
+msgstr[0] "Rd макропакет '%s' не инсталлирован."
+msgstr[1] "Rd макропакет '%s' не инсталлирован."
+msgstr[2] "Rd макропакет '%s' не инсталлирован."
+
 #. R/check.R: ngettext(length(fail), "Required field missing or empty:", "Required fields missing or empty:")
 msgid "Required field missing or empty:"
 msgid_plural "Required fields missing or empty:"
 msgstr[0] "Требуемое поле пропущено или пусто:"
 msgstr[1] "Требуемые поля пропущены или пусты:"
 msgstr[2] "Требуемые поля пропущены или пусты:"
+
+#. R/QC.R: ngettext(length(bad), "Requires (indirectly) orphaned package:",     "Requires (indirectly) orphaned packages:")
+msgid "Requires (indirectly) orphaned package:"
+msgid_plural "Requires (indirectly) orphaned packages:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(bad), "Requires orphaned package:", "Requires orphaned packages:")
+msgid "Requires orphaned package:"
+msgid_plural "Requires orphaned packages:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #. R/Vignettes.R: ngettext(length(fails), "SUMMARY: processing the following file failed:",     "SUMMARY: processing the following files failed:")
 msgid "SUMMARY: processing the following file failed:"
@@ -2119,6 +2334,13 @@ msgstr[0] "РЕЗУЛЬТАТ: обработка следующих файло�
 msgstr[1] "РЕЗУЛЬТАТ: обработка следующих файлов не удалась:"
 msgstr[2] "РЕЗУЛЬТАТ: обработка следующих файлов не удалась:"
 
+#. R/QC.R: ngettext(length(bad), "Suggests orphaned package:", "Suggests orphaned packages:")
+msgid "Suggests orphaned package:"
+msgid_plural "Suggests orphaned packages:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/update_packages.R: ngettext(nrow(retdat), "Tarballs found for %d of %d existing PACKAGES entry.",     "Tarballs found for %d of %d existing PACKAGES entries.",     domain = "R-tools")
 msgid "Tarballs found for %d of %d existing PACKAGES entry."
 msgid_plural "Tarballs found for %d of %d existing PACKAGES entries."
@@ -2126,12 +2348,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
+#. R/QC.R: ngettext(length(y), "The Description field contains the following (possibly) invalid arXiv id:",     "The Description field contains the following (possibly) invalid arXiv ids:")
+msgid "The Description field contains the following (possibly) invalid arXiv id:"
+msgid_plural "The Description field contains the following (possibly) invalid arXiv ids:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(xx), "Unavailable namespace imported from by a ':::' call:",     "Unavailable namespaces imported from by ':::' calls:")
+#, fuzzy
+msgid "Unavailable namespace imported from by a ':::' call:"
+msgid_plural "Unavailable namespaces imported from by ':::' calls:"
+msgstr[0] "Недоступные пространства имен загружены вызовом ':::': %s"
+msgstr[1] "Недоступные пространства имен загружены вызовом ':::': %s"
+msgstr[2] "Недоступные пространства имен загружены вызовом ':::': %s"
+
 #. R/QC.R: ngettext(length(y), "Undeclared package %s in Rd xrefs", "Undeclared packages %s in Rd xrefs")
 msgid "Undeclared package %s in Rd xrefs"
 msgid_plural "Undeclared packages %s in Rd xrefs"
 msgstr[0] "Незадекларированные пакеты %s в Rd xrefs"
 msgstr[1] "Незадекларированные пакеты %s в Rd xrefs"
 msgstr[2] "Незадекларированные пакеты %s в Rd xrefs"
+
+#. R/QC.R: ngettext(length(xxx), "Unexported object imported by a ':::' call:",     "Unexported objects imported by ':::' calls:")
+#, fuzzy
+msgid "Unexported object imported by a ':::' call:"
+msgid_plural "Unexported objects imported by ':::' calls:"
+msgstr[0] "Неэкспортированный объект загружен вызовом ':::': %s"
+msgstr[1] "Неэкспортированный объект загружен вызовом ':::': %s"
+msgstr[2] "Неэкспортированный объект загружен вызовом ':::': %s"
 
 #. R/QC.R: ngettext(length(y), "Unknown package %s in Rd xrefs", "Unknown packages %s in Rd xrefs")
 msgid "Unknown package %s in Rd xrefs"
@@ -2164,6 +2409,59 @@ msgstr[0] "Обновляю [strict mode текущего репозитория
 msgstr[1] "Обновляю [strict mode текущего репозитория:"
 msgstr[2] "Обновляю [strict mode текущего репозитория:"
 
+#. R/QC.R: ngettext(length(y), "Uses the non-portable package:", "Uses the non-portable packages:")
+#, fuzzy
+msgid "Uses the non-portable package:"
+msgid_plural "Uses the non-portable packages:"
+msgstr[0] "Это имя базового пакета."
+msgstr[1] "Это имя базового пакета."
+msgstr[2] "Это имя базового пакета."
+
+#. R/QC.R: ngettext(length(y), "Uses the superseded package:", "Uses the superseded packages:")
+msgid "Uses the superseded package:"
+msgid_plural "Uses the superseded packages:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(xx), "Versioned 'LinkingTo' value for %s is only usable in R >= 3.0.2",     "Versioned 'LinkingTo' values for %s are only usable in R >= 3.0.2")
+msgid "Versioned 'LinkingTo' value for %s is only usable in R >= 3.0.2"
+msgid_plural "Versioned 'LinkingTo' values for %s are only usable in R >= 3.0.2"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#. R/QC.R: ngettext(length(bad), "Vignette dependency not required:", "Vignette dependencies not required:")
+#, fuzzy
+msgid "Vignette dependency not required:"
+msgid_plural "Vignette dependencies not required:"
+msgstr[0] "Зависимости очерка не требуются: %s"
+msgstr[1] "Зависимости очерка не требуются: %s"
+msgstr[2] "Зависимости очерка не требуются: %s"
+
+#. R/QC.R: ngettext(length(bad), "Vignette dependency required without any vignettes:",     "Vignette dependencies required without any vignettes:")
+#, fuzzy
+msgid "Vignette dependency required without any vignettes:"
+msgid_plural "Vignette dependencies required without any vignettes:"
+msgstr[0] "Зависимости очерка не требуются: %s"
+msgstr[1] "Зависимости очерка не требуются: %s"
+msgstr[2] "Зависимости очерка не требуются: %s"
+
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package not declared:",     "VignetteBuilder packages not declared:")
+#, fuzzy
+msgid "VignetteBuilder package not declared:"
+msgid_plural "VignetteBuilder packages not declared:"
+msgstr[0] "Не определен движок очерка"
+msgstr[1] "Не определен движок очерка"
+msgstr[2] "Не определен движок очерка"
+
+#. R/QC.R: ngettext(length(bad), "VignetteBuilder package required for checking but not installed:",     "VignetteBuilder packages required for checking but not installed:")
+msgid "VignetteBuilder package required for checking but not installed:"
+msgid_plural "VignetteBuilder packages required for checking but not installed:"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/QC.R: ngettext(len, "Warning in file %s:", "Warnings in file %s:")
 msgid "Warning in file %s:"
 msgid_plural "Warnings in file %s:"
@@ -2195,12 +2493,58 @@ msgstr[0] "объект %s создан больше чем за один выз
 msgstr[1] "объекты %s созданы больше чем за один вызов данных"
 msgstr[2] "объекты %s созданы больше чем за один вызов данных"
 
+#. R/QC.R: ngettext(length(bad), "problem found in ", "problems found in ")
+msgid "problem found in "
+msgid_plural "problems found in "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. R/admin.R: ngettext(length(bad2), "unable to re-encode %s line %s", "unable to re-encode %s lines %s")
 msgid "unable to re-encode %s line %s"
 msgid_plural "unable to re-encode %s lines %s"
 msgstr[0] "не могу перекодировать %s строку %s"
 msgstr[1] "не могу перекодировать %s строки %s"
 msgstr[2] "не могу перекодировать %s строки %s"
+
+#~ msgid "'::' or ':::' import not declared from: %s"
+#~ msgstr "'::' или ':::' импорт не определен из: %s"
+
+#~ msgid "':::' call which should be '::': %s"
+#~ msgstr "':::' вызов должен быть '::': %s"
+
+#~ msgid "'data(package=)' call not declared from: %s"
+#~ msgstr "вызов 'data(package=)' не объявлен: %s"
+
+#~ msgid "'library' or 'require' call not declared from: %s"
+#~ msgstr "не объявлен вызов 'library' или 'require' из %s"
+
+#~ msgid "'library' or 'require' call to %s in package code."
+#~ msgstr "'library' или 'require' вызывает %s в коде пакета."
+
+#~ msgid "'library' or 'require' call to %s which was already attached by Depends."
+#~ msgstr "'library' или 'require' вызывает %s, уже присоединенный из Depends."
+
+#~ msgid "'loadNamespace' or 'requireNamespace' call not declared from: %s"
+#~ msgstr "вызов 'loadNamespace' или 'requireNamespace' не определены из: %s"
+
+#~ msgid "Missing objects imported by ':::' calls:"
+#~ msgstr "Пропущенные объекты включены вызовами ':::':"
+
+#~ msgid "Missing or unexported object: %s"
+#~ msgstr "Пропущенный или неэкспортированный объект: %s"
+
+#~ msgid "Namespace in Imports field not imported from: %s"
+#~ msgstr "Пространство имен в поле Imports не включено из: %s"
+
+#~ msgid "Package in Depends field not imported from: %s"
+#~ msgstr "Пакет в поле Depends не включен из: %s"
+
+#~ msgid "Unavailable namespaces imported from by ':::' calls:"
+#~ msgstr "Недоступные пространства имен загружены вызовами ':::':"
+
+#~ msgid "Unexported objects imported by ':::' calls:"
+#~ msgstr "Неэкспортированный объект загружен вызовами ':::':"
 
 #~ msgid "Unknown encoding with non-ASCII data: converting to ASCII"
 #~ msgstr "Неизвестная кодировка с не-ASCII данными: конвертирую в ASCII"
@@ -2513,9 +2857,6 @@ msgstr[2] "не могу перекодировать %s строки %s"
 #~ msgid ". The following files exists in directory"
 #~ msgstr ". Следующие файлы есть в папке"
 
-#~ msgid "Located more than one"
-#~ msgstr "Нашел больше одного"
-
 #~ msgid "Vignette"
 #~ msgstr "Миниатюра"
 
@@ -2614,9 +2955,6 @@ msgstr[2] "не могу перекодировать %s строки %s"
 
 #~ msgid "Invalid package name."
 #~ msgstr "Неправильное имя пакета."
-
-#~ msgid "This is the name of a base package."
-#~ msgstr "Это имя базового пакета."
 
 #~ msgid "This name was used for a base package and is remapped by library()."
 #~ msgstr "Это имя использовано базовым пакетом и связано заново посредством library()."
@@ -2818,14 +3156,8 @@ msgstr[2] "не могу перекодировать %s строки %s"
 #~ "выполнение Stangle в очерке '%s' не удалось с диагностикой:\n"
 #~ "%s"
 
-#~ msgid "Packages required but not available:"
-#~ msgstr "Пакет требуется, но недоступен:"
-
 #~ msgid "Package required but not available: %s"
 #~ msgstr "Пакет требуется, но недоступен: %s"
-
-#~ msgid "Packages required and available but unsuitable versions:"
-#~ msgstr "Пакет требуется и доступен, но неподходящих версий:"
 
 #~ msgid "Package required and available but unsuitable version: %s"
 #~ msgstr "Пакет требуется и доступен, но неподходящей версии:"
@@ -2833,20 +3165,11 @@ msgstr[2] "не могу перекодировать %s строки %s"
 #~ msgid "Former standard packages required but now defunct:"
 #~ msgstr "Бывший стандартный пакет требуется, который сейчас вышел из употребления:"
 
-#~ msgid "Packages suggested but not available for checking:"
-#~ msgstr "Пакет требуется, но недоступен для выдачи:"
-
 #~ msgid "Package suggested but not available for checking: %s"
 #~ msgstr "Пакет требуется, но недоступен  для выдачи:"
 
-#~ msgid "Packages which this enhances but not available for checking:"
-#~ msgstr "Пакет, который это усиливает, недоступен для выдачи:"
-
 #~ msgid "Package which this enhances but not available for checking: %s"
 #~ msgstr "Пакет, который это усиливает, недоступен для выдачи: %s"
-
-#~ msgid "Vignette dependencies not required: %s"
-#~ msgstr "Зависимости очерка не требуются: %s"
 
 #~ msgid "Namespace dependencies not required:"
 #~ msgstr "Определения пространства имен не требуются:"

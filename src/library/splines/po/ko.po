@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2025-02-02 12:23+0100\n"
+"POT-Creation-Date: 2026-10-23 20:55+0200\n"
 "PO-Revision-Date: 2025-07-06 15:47+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -20,16 +20,13 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: splines.cpp:147
 msgid "'ord' must be a positive integer"
 msgstr "'ord'는 반드시 양의 정수이어야 합니다."
 
-#: splines.cpp:215
 #, c-format
 msgid "derivs = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs = %d >= ord = %d 이지만, {0,..,ord-1} 내에 있어야 합니다."
 
-#: splines.cpp:218
 #, c-format
 msgid "derivs[%d] = %d >= ord = %d, but should be in {0,..,ord-1}"
 msgstr "derivs[%d] = %d >= ord = %d 이지만, {0,..,ord-1} 내에 있어야 합니다."

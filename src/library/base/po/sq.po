@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.2.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 14:47+0200\n"
 "Last-Translator: Krye Kuzhinieri <sundley.12345@gmail.com>\n"
 "Language-Team: Albanian <https://translate.rx.studio/projects/r-project/base-c/sq/>\n"
@@ -469,6 +469,15 @@ msgstr ""
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+msgid "internal logical NA value has been modified"
+msgstr ""
+
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr ""
@@ -494,6 +503,9 @@ msgstr ""
 msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
 msgstr ""
 
+msgid "'.Random.seed' has length 0, so ignored"
+msgstr ""
+
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr ""
 
@@ -506,6 +518,9 @@ msgstr ""
 
 #, c-format
 msgid "'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"
+msgstr ""
+
+msgid "'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"
 msgstr ""
 
 msgid "'.Random.seed' has wrong length"
@@ -760,6 +775,10 @@ msgstr ""
 msgid "unknown encoding: %d"
 msgstr ""
 
+#, fuzzy
+msgid "invalid string length"
+msgstr "Argumenti i dytë duhet të jetë listë"
+
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr ""
 
@@ -813,6 +832,9 @@ msgstr ""
 msgid "input string y[%d] is invalid in this locale"
 msgstr ""
 
+msgid "invalid compact_intseq serialized state"
+msgstr ""
+
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
@@ -820,11 +842,17 @@ msgstr ""
 msgid "method should only handle unexpanded vectors"
 msgstr ""
 
+msgid "invalid compact_realseq serialized state"
+msgstr ""
+
 #, c-format
 msgid "compact sequences with increment %f not supported yet"
 msgstr ""
 
 msgid "result would be too long a vector"
+msgstr ""
+
+msgid "invalid deferred string serialized state"
 msgstr ""
 
 msgid "unsupported type for deferred string coercion"
@@ -835,6 +863,9 @@ msgid "mmap for %s not supported yet"
 msgstr "Në vend të saj përdor '%s'."
 
 msgid "object has been unmapped"
+msgstr ""
+
+msgid "invalid mmap serialized state"
 msgstr ""
 
 msgid "memory mapping failed; returning vector of length zero"
@@ -857,6 +888,9 @@ msgstr "Në vend të saj përdor '%s'."
 msgid "not a memory-mapped object"
 msgstr ""
 
+msgid "invalid wrapper serialized state"
+msgstr ""
+
 msgid "unsupported type"
 msgstr ""
 
@@ -864,6 +898,9 @@ msgid "srt must be -2, -1, 0, or +1, +2, or NA"
 msgstr ""
 
 msgid "no_na must be 0 or +1"
+msgstr ""
+
+msgid "invalid ALTREP serialized class"
 msgstr ""
 
 #, c-format
@@ -977,8 +1014,10 @@ msgid "unimplemented complex function"
 msgstr ""
 
 #, c-format
-msgid "unimplemented real function of %d numeric arguments"
-msgstr ""
+msgid "unimplemented real function of %d numeric argument"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "matchArg returned something weird"
 msgstr ""
@@ -1520,11 +1559,17 @@ msgstr ""
 msgid "invalid multibyte string 'new'"
 msgstr ""
 
+msgid "'old' expands to too many characters"
+msgstr ""
+
 msgid "'old' is longer than 'new'"
 msgstr ""
 
 #, c-format
 msgid "invalid input multibyte string %lld"
+msgstr ""
+
+msgid "translated string is not representable in the current locale"
 msgstr ""
 
 msgid "strtrim() requires a character vector"
@@ -1985,6 +2030,10 @@ msgid "'%s' is not a %s"
 msgstr "'%s' nuk është zgjedhje e saktë"
 
 #, c-format
+msgid "internal gzcon connection is not a %s"
+msgstr ""
+
+#, c-format
 msgid "internal connection is not a %s"
 msgstr ""
 
@@ -2061,9 +2110,6 @@ msgid "Error writing to connection"
 msgstr ""
 
 msgid "cannot read from this connection"
-msgstr ""
-
-msgid "cannot allocate buffer in readLines"
 msgstr ""
 
 msgid "too many items"
@@ -2700,6 +2746,14 @@ msgstr ""
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
+
+#, c-format
+msgid "cannot extract '%s' through a symbolic link"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "cannot create directory '%s': %s"
+msgstr "'dim' nuk mund të ketë gjatësi 0"
 
 #, c-format
 msgid " not overwriting file '%s"
@@ -3430,10 +3484,6 @@ msgstr "Në vend të saj përdor '%s'."
 
 #, c-format
 msgid "interval too short for this platform, using '%f'"
-msgstr ""
-
-#, c-format
-msgid "interval too short, using '%f'"
 msgstr ""
 
 #, fuzzy
@@ -4253,12 +4303,6 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-msgid "Inconsistent node generation in s_Old\n"
-msgstr ""
-
-msgid "Inconsistent node generation in s_OldToNew\n"
-msgstr ""
-
 msgid "can only weakly reference/finalize reference objects"
 msgstr ""
 
@@ -4293,33 +4337,6 @@ msgstr "Argumenti i dytë duhet të jetë listë"
 #, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr ""
-
-msgid "internal TRUE value has been modified"
-msgstr ""
-
-msgid "internal FALSE value has been modified"
-msgstr ""
-
-msgid "internal logical NA value has been modified"
-msgstr ""
-
-msgid "R_signal_protect_error() is no-op in CXXR"
-msgstr ""
-
-#, c-format
-msgid "unprotect(): only %td protected item"
-msgid_plural "unprotect(): only %td protected items"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "unprotect_ptr: pointer not found"
-msgstr ""
-
-#, c-format
-msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
-msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
-msgstr[0] ""
-msgstr[1] ""
 
 #, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
@@ -4773,6 +4790,10 @@ msgstr ""
 #, fuzzy
 msgid "'decimal.mark' must be a string of one character"
 msgstr "'normal.kind' duhet të jetë varg karakteresh të gjatësisë 1"
+
+#, c-format
+msgid "final maximal string length = %.0f is too large"
+msgstr ""
 
 msgid "Impossible mode ( x )"
 msgstr ""
@@ -5724,6 +5745,18 @@ msgid ""
 "perhaps long vector from 64-bit version of R?"
 msgstr ""
 
+#, fuzzy
+msgid "invalid attribute list"
+msgstr "Argumenti i dytë duhet të jetë listë"
+
+#, fuzzy
+msgid "invalid 'dim' attribute"
+msgstr "Argumenti i dytë duhet të jetë listë"
+
+#, fuzzy
+msgid "invalid call or '...' list"
+msgstr "Argumenti i dytë duhet të jetë listë"
+
 msgid "this version of R cannot read class references"
 msgstr ""
 
@@ -5735,6 +5768,9 @@ msgid "ReadItem: unknown type %i, perhaps written by later version of R"
 msgstr ""
 
 msgid "invalid length of encoding name"
+msgstr ""
+
+msgid "embedded nul in encoding name"
 msgstr ""
 
 #, c-format
@@ -5885,6 +5921,9 @@ msgstr ""
 
 #, c-format
 msgid "required resulting string length %d is greater than maximal %d"
+msgstr ""
+
+msgid "internal error converting format precision"
 msgstr ""
 
 #, fuzzy, c-format
@@ -6170,7 +6209,17 @@ msgstr ""
 msgid "(subscript) logical subscript too long"
 msgstr ""
 
+msgid "object length is not a multiple of subscript length"
+msgstr ""
+
+#, c-format
+msgid "length of dimension %d is not a multiple of logical subscript length"
+msgstr ""
+
 msgid "only 0's may be mixed with negative subscripts"
+msgstr ""
+
+msgid "subscript too large"
 msgstr ""
 
 msgid "subscript too large for 32-bit R"
@@ -6626,9 +6675,6 @@ msgstr ""
 
 #, c-format
 msgid "add_point - reached MAXNUMPTS (%d)"
-msgstr ""
-
-msgid "insufficient memory to allocate point array"
 msgstr ""
 
 msgid "there must be at least two control points"
@@ -7254,6 +7300,10 @@ msgstr ""
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr ""
 
+#, c-format
+msgid "besselI(x, nu): nu=%g > max_alpha_i (= %g): too large for bessel_i() algorithm"
+msgstr ""
+
 msgid "bessel_i allocation error"
 msgstr ""
 
@@ -7266,7 +7316,7 @@ msgid "bessel_i(%g,nu=%g): precision lost in result\n"
 msgstr ""
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g too large for bessel_j() algorithm"
+msgid "besselJ(x, nu): nu=%g > max_alpha_j (= %g): too large for bessel_j() algorithm"
 msgstr ""
 
 msgid "bessel_j allocation error"
@@ -7281,7 +7331,7 @@ msgid "bessel_j(%g,nu=%g): precision lost in result\n"
 msgstr ""
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g > 1e7; too large for bessel_j() algorithm"
+msgid "besselK(x, nu): |nu|=%g > max_alpha_k (= %g): too large for bessel_k() algorithm"
 msgstr ""
 
 msgid "bessel_k allocation error"
@@ -7296,7 +7346,7 @@ msgid "bessel_k(%g,nu=%g): precision lost in result\n"
 msgstr ""
 
 #, c-format
-msgid "besselY(x, nu): nu=%g too large for bessel_y() algorithm"
+msgid "besselY(x, nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
 msgstr ""
 
 msgid "bessel_y allocation error"
@@ -7308,6 +7358,10 @@ msgstr ""
 
 #, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result\n"
+msgstr ""
+
+#, c-format
+msgid "besselY(x, -nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
 msgstr ""
 
 #, c-format

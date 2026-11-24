@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 3.5.1\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-05-26 17:27+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 15:30+0200\n"
 "Last-Translator: Wei-Lun Chao <bluebat@member.fsf.org>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -20,591 +20,445 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: base.cpp:43
 msgid "no base graphics system is registered"
 msgstr "無任何已登記的基本繪圖系統"
 
-#: base.cpp:310
 msgid "Incompatible graphics state"
 msgstr "繪圖狀態不相容"
 
-#: base.cpp:353
 msgid "event 'GE_ScalePS' requires a single numeric (double) value"
 msgstr ""
 
-#: base.cpp:382 base.cpp:389 base.cpp:397
 msgid "the base graphics system is not registered"
 msgstr "基本繪圖系統尚未登記"
 
-#: graphics.cpp:292
 #, c-format
 msgid "bad units specified in '%s'"
 msgstr "在 '%s' 中指定了不當的單位"
 
-#: graphics.cpp:1806 graphics.cpp:1828
 msgid "attempt to plot on null device"
 msgstr "試圖於空虛裝置上繪圖"
 
-#: graphics.cpp:1858
 msgid "outer margins too large (figure region too small)"
 msgstr "外側版邊太大 (圖表區域太小)"
 
-#: graphics.cpp:1860
 msgid "figure region too large"
 msgstr "圖表區域太大"
 
-#: graphics.cpp:1862
 msgid "figure margins too large"
 msgstr "圖表邊距太大"
 
-#: graphics.cpp:1864
 msgid "plot region too large"
 msgstr "繪圖區域太大"
 
-#: graphics.cpp:1932
 #, fuzzy, c-format
 msgid "nonfinite axis=%d limits [GScale(%g,%g,..); log=%s] -- corrected now"
 msgstr "座標範圍不能無限大 [GScale(%g,%g,%d, .); log=%d]"
 
-#: graphics.cpp:2009
 #, c-format
 msgid "axis style \"%c\" unimplemented"
 msgstr "座標形式 \"%c\" 尚未實作"
 
-#: graphics.cpp:2253
 msgid "no graphics device is active"
 msgstr "沒有現用的繪圖裝置"
 
-#: graphics.cpp:2448
 msgid "plot.new has not been called yet"
 msgstr "plot.new 還沒有被呼叫"
 
-#: graphics.cpp:2450
 msgid "invalid graphics state"
 msgstr "繪圖狀態不正確"
 
-#: graphics.cpp:2604
 msgid "graphics device closed during call to locator or identify"
 msgstr "繪圖裝置於呼叫定位器或識別時關閉"
 
-#: graphics.cpp:2654
 msgid "No graphics device is active"
 msgstr "沒有現用的繪圖裝置"
 
-#: graphics.cpp:2887
 msgid "unable to allocate memory (in GPolygon)"
 msgstr ""
 
-#: graphics.cpp:2921
 msgid "unable to allocate memory (in GPolyline)"
 msgstr ""
 
-#: graphics.cpp:3103
 msgid "zero-length arrow is of indeterminate angle and so skipped"
 msgstr "零長度箭頭的角度不定，因此忽略不用"
 
-#: graphics.cpp:3184
 #, c-format
 msgid "invalid par(\"bty\") = '%c'; no box() drawn"
 msgstr "par(\"bty\")='%c' 不正確; 取消繪製 box()"
 
-#: graphics.cpp:3201
 #, fuzzy, c-format
 msgid "invalid argument to '%s'"
 msgstr "GBox 引數不正確"
 
-#: graphics.cpp:3408
 msgid "metric information not available for this device"
 msgstr "無法取得這個裝置的度量資訊"
 
-#: par-common.cpp:150
 msgid "graphical parameter 'family' has a maximum length of 200 bytes"
 msgstr "繪圖參數 'family' 具有最大為 200 位元組的長度"
 
-#: par.cpp:167
 #, c-format
 msgid "invalid value specified for graphical parameter \"%s\""
 msgstr "繪圖參數 \"%s\" 的設定值不正確"
 
-#: par.cpp:174
 #, c-format
 msgid "graphical parameter \"%s\" has the wrong length"
 msgstr "繪圖參數 \"%s\" 的長度不正確"
 
-#: par.cpp:266 par.cpp:673
 #, c-format
 msgid "graphical parameter \"%s\" cannot be set"
 msgstr "無法設定繪圖參數 \"%s\""
 
-#: par.cpp:438
 msgid "parameter \"mfg\" has the wrong length"
 msgstr "參數 \"mfg\" 的長度不正確"
 
-#: par.cpp:446
 msgid "parameter \"i\" in \"mfg\" is out of range"
 msgstr "\"mfg\" 中的參數 \"i\" 超出範圍"
 
-#: par.cpp:448
 msgid "parameter \"j\" in \"mfg\" is out of range"
 msgstr "\"mfg\" 中的參數 \"j\" 超出範圍"
 
-#: par.cpp:453
 msgid "value of 'nr' in \"mfg\" is wrong and will be ignored"
 msgstr "\"mfg\" 中的 nr 值不正確，忽略不用"
 
-#: par.cpp:455
 msgid "value of 'nc' in \"mfg\" is wrong and will be ignored"
 msgstr "\"mfg\" 中的 nc 值不正確，忽略不用"
 
-#: par.cpp:482
 msgid "calling par(new=TRUE) with no plot"
 msgstr "呼叫 par(new=TRUE) 而不繪圖"
 
-#: par.cpp:665 par.cpp:1061
 #, c-format
 msgid "graphical parameter \"%s\" is obsolete"
 msgstr "繪圖參數 \"%s\" 已過時"
 
-#: par.cpp:669 par.cpp:1065
 #, c-format
 msgid "\"%s\" is not a graphical parameter"
 msgstr "\"%s\" 不是一個繪圖參數"
 
-#: par.cpp:1111
 #, fuzzy, c-format
 msgid "argument %d does not name a graphical parameter"
 msgstr "\"%s\" 不是一個繪圖參數"
 
-#: par.cpp:1119
 msgid "invalid argument passed to par()"
 msgstr "傳給 par() 的引數無效"
 
-#: par.cpp:1163
 #, c-format
 msgid "too many rows in layout, limit %d"
 msgstr "layout 中的列數太多, 極值為 %d"
 
-#: par.cpp:1169
 #, c-format
 msgid "too many columns in layout, limit %d"
 msgstr "layout 中的行數太多, 極值為 %d"
 
-#: par.cpp:1171
 #, c-format
 msgid "too many cells in layout, limit %d"
 msgstr "layout 中的元素太多, 極值為 %d"
 
-#: plot.cpp:49 plot3d.cpp:44
 msgid "invalid type passed to graphics function"
 msgstr ""
 
-#: plot.cpp:72
 msgid "invalid color specification"
 msgstr "顏色設定不正確"
 
-#: plot.cpp:138
 msgid "only NA allowed in logical plotting symbol"
 msgstr "邏輯繪圖符號中只允許用 NA"
 
-#: plot.cpp:140
 msgid "invalid plotting symbol"
 msgstr "繪圖符號不正確"
 
-#: plot.cpp:227
 msgid "invalid font specification"
 msgstr "字型設定不正確"
 
-#: plot.cpp:285 plot.cpp:299 plot.cpp:479 plot.cpp:484 plot.cpp:2194
-#: plot.cpp:2201 plot.cpp:3224 plot.cpp:3383 plot3d.cpp:1161 plot3d.cpp:1165
-#: plot3d.cpp:1167 plot3d.cpp:1895
 #, c-format
 msgid "invalid '%s' value"
 msgstr "'%s' 值不正確"
 
-#: plot.cpp:302
 #, c-format
 msgid "invalid 'vfont' value [typeface %d]"
 msgstr "'vfont' 值不正確 [typeface %d]"
 
-#: plot.cpp:326
 #, c-format
 msgid "invalid 'vfont' value [typeface = %d, fontindex = %d]"
 msgstr "無效的 'vfont' 值 [typeface = %d, fontindex = %d]"
 
-#: plot.cpp:396
 msgid "invalid graphics parameter"
 msgstr "繪圖參數不正確"
 
-#: plot.cpp:475
 msgid "at least 3 arguments required"
 msgstr "至少需要三個引數"
 
-#: plot.cpp:489
 msgid "\"log=\" specification must be character"
 msgstr "\"log=\" 必須設定成字元"
 
-#: plot.cpp:506
 #, c-format
 msgid "invalid \"log=%s\" specification"
 msgstr "\"log=%s\" 設定不正確"
 
-#: plot.cpp:522
 msgid "NAs not allowed in 'xlim'"
 msgstr "'xlim' 中不允許 NA"
 
-#: plot.cpp:528
 msgid "need finite 'xlim' values"
 msgstr "'xlim' 值必須是有限的"
 
-#: plot.cpp:534
 msgid "NAs not allowed in 'ylim'"
 msgstr "'ylim' 中不允許 NA"
 
-#: plot.cpp:540
 msgid "need finite 'ylim' values"
 msgstr "'ylim' 值必須是有限的"
 
-#: plot.cpp:546
 msgid "Logarithmic axis must have positive limits"
 msgstr "對數座標不能有負的極值"
 
-#: plot.cpp:700
 msgid "invalid type for axis labels"
 msgstr "座標標記類型不正確"
 
-#: plot.cpp:788 plot.cpp:1395 plot.cpp:1707 plot.cpp:1772 plot.cpp:1846
-#: plot.cpp:1910 plot.cpp:1983 plot.cpp:2078 plot.cpp:2154 plot.cpp:2432
-#: plot.cpp:2606 plot.cpp:2821 plot.cpp:3365 plot.cpp:3508 plot.cpp:3579
-#: plot.cpp:3741 plot.cpp:4021 plot3d.cpp:1864
 msgid "too few arguments"
 msgstr "引數數目太少"
 
-#: plot.cpp:799
 #, c-format
 msgid "invalid axis number %d"
 msgstr "座標數目 %d 不正確"
 
-#: plot.cpp:883 plot.cpp:895
 #, fuzzy, c-format
 msgid "'%s' must be of length 1"
 msgstr "'hadj' 的長度必須是 1"
 
-#: plot.cpp:890 plot.cpp:2166 plot.cpp:2443 plot.cpp:2449 plot.cpp:2456
-#: plot.cpp:2464 plot.cpp:2471 plot.cpp:2478 plot.cpp:2485 plot.cpp:2492
-#: plot.cpp:2500 plot.cpp:2507 plot.cpp:3227
 #, c-format
 msgid "zero-length '%s' specified"
 msgstr "'%s' 的長度不能設成零"
 
-#: plot.cpp:925
 msgid "'gap.axis' must be NA or a finite number"
 msgstr ""
 
-#: plot.cpp:983
 msgid "'labels' is supplied and not 'at'"
 msgstr "'labels' 已提供而非 'at'"
 
-#: plot.cpp:987
 #, c-format
 msgid "'at' and 'labels' lengths differ, %d != %d"
 msgstr "'at' 和 'labels' 長度不同，%d != %d"
 
-#: plot.cpp:1007
 msgid "no locations are finite"
 msgstr "不存在有限的位置"
 
-#: plot.cpp:1411
 msgid "invalid plotting structure"
 msgstr "繪圖結構不正確"
 
-#: plot.cpp:1413
 #, c-format
 msgid "'x' and 'y' lengths differ in %s()"
 msgstr "%s() 中的 'x' 和 'y' 的長度不一樣"
 
-#: plot.cpp:1619
 #, c-format
 msgid "invalid plot type '%c'"
 msgstr "繪圖類型 '%c' 不正確"
 
-#: plot.cpp:1662
 msgid "invalid first argument"
 msgstr "第一個引數不正確"
 
-#: plot.cpp:1669
 msgid "invalid second argument"
 msgstr "第二個引數不正確"
 
-#: plot.cpp:1677
 msgid "invalid third argument"
 msgstr "第三個引數不正確"
 
-#: plot.cpp:1685
 msgid "invalid fourth argument"
 msgstr "第四個引數不正確"
 
-#: plot.cpp:1693
 msgid "cannot mix zero-length and non-zero-length coordinates"
 msgstr "無法將長度為零與非零的座標混合"
 
-#: plot.cpp:1875
 msgid "unable to allocate memory (in GPath)"
 msgstr ""
 
-#: plot.cpp:1881
 msgid "invalid 'x' or 'y' (in 'GPath')"
 msgstr ""
 
-#: plot.cpp:1915
 msgid "Empty raster"
 msgstr "空的柵格"
 
-#: plot.cpp:1996
-msgid "invalid arrow head length"
-msgstr "箭頭長度不正確"
-
-#: plot.cpp:2001
-msgid "invalid arrow head angle"
-msgstr "箭頭角度不正確"
-
-#: plot.cpp:2006
-msgid "invalid arrow head specification"
-msgstr "箭頭設定不正確"
-
-#: plot.cpp:2240
-msgid "no coordinates were supplied"
-msgstr "沒有提供座標"
-
-#: plot.cpp:2862
-msgid "invalid a=, b= specification"
-msgstr "a=, b= 設定不正確"
-
-#: plot.cpp:2871
-msgid "'a' and 'b' must be finite"
-msgstr "'a' 和 'b' 的值必須是有限的"
-
-#: plot.cpp:3007 plot.cpp:4112 plot.cpp:4115 plot.cpp:4118 plot.cpp:4121
-#: plot.cpp:4141 plot.cpp:4145 plot.cpp:4148 plot.cpp:4168 plot.cpp:4172
-#: plot.cpp:4175 plot3d.cpp:1083 plot3d.cpp:1087 plot3d.cpp:1092
-#: plot3d.cpp:1096 plot3d.cpp:1100 plot3d.cpp:1104 stem.cpp:171 stem.cpp:172
-#: stem.cpp:174 stem.cpp:175
 #, c-format
 msgid "invalid '%s' argument"
 msgstr "'%s' 引數不正確"
 
-#: plot.cpp:3079 plot.cpp:3220
+msgid "invalid arrow head length"
+msgstr "箭頭長度不正確"
+
+msgid "invalid arrow head angle"
+msgstr "箭頭角度不正確"
+
+msgid "invalid arrow head specification"
+msgstr "箭頭設定不正確"
+
+msgid "no coordinates were supplied"
+msgstr "沒有提供座標"
+
+msgid "invalid a=, b= specification"
+msgstr "a=, b= 設定不正確"
+
+msgid "'a' and 'b' must be finite"
+msgstr "'a' 和 'b' 的值必須是有限的"
+
 #, c-format
 msgid "invalid number of points in %s"
 msgstr "%s 之中點的數目不正確"
 
-#: plot.cpp:3084
 msgid "invalid plot type"
 msgstr "繪圖類型不正確"
 
-#: plot.cpp:3222
 msgid "incorrect argument type"
 msgstr "引數類型不正確"
 
-#: plot.cpp:3230
 msgid "different argument lengths"
 msgstr "引數長度不一樣"
 
-#: plot.cpp:3232
 msgid "more 'labels' than points"
 msgstr "'labels' 數量比點更多"
 
-#: plot.cpp:3284
 #, c-format
 msgid "warning: no point within %.2f inches\n"
 msgstr "警告：沒有在 %.2f 英吋之內的點\n"
 
-#: plot.cpp:3290
 msgid "warning: nearest point already identified\n"
 msgstr "警告: 已經找到了最近的點\n"
 
-#: plot.cpp:3376
 msgid "invalid units"
 msgstr "單位不正確"
 
-#: plot.cpp:3491
 msgid "invalid dendrogram input"
 msgstr "樹狀圖輸入不正確"
 
-#: plot.cpp:3724
 msgid "invalid symbol parameter vector"
 msgstr "符號參數向量不正確"
 
-#: plot.cpp:3746
 msgid "invalid symbol coordinates"
 msgstr "符號座標不正確"
 
-#: plot.cpp:3754
 #, fuzzy
 msgid "x/y parameter length mismatch"
 msgstr "x/y/ 參數長度不相符"
 
-#: plot.cpp:3773
 msgid "invalid circles data"
 msgstr "圓形資料不正確"
 
-#: plot.cpp:3775 plot.cpp:3796 plot.cpp:3821 plot.cpp:3852
 msgid "invalid symbol parameter"
 msgstr "符號參數不正確"
 
-#: plot.cpp:3794
 msgid "invalid squares data"
 msgstr "正方形資料不正確"
 
-#: plot.cpp:3819
 msgid "invalid rectangles data (need 2 columns)"
 msgstr "長方形資料不正確 (需要兩欄)"
 
-#: plot.cpp:3850
 msgid "invalid stars data"
 msgstr "星形資料不正確"
 
-#: plot.cpp:3892
 msgid "invalid thermometers data (need 3 or 4 columns)"
 msgstr "溫度計資料不正確 (需要三或四欄)"
 
-#: plot.cpp:3895
 #, c-format
 msgid "invalid 'thermometers[, %s]'"
 msgstr "thermometers[, %s] 不正確"
 
-#: plot.cpp:3898
 #, c-format
 msgid "'thermometers[, %s]' not in [0,1] -- may look funny"
 msgstr "thermometers[, %s] 在 [0,1] 範圍外 -- 看起來會有點奇怪"
 
-#: plot.cpp:3901
 msgid "invalid 'thermometers[, 1:2]'"
 msgstr "thermometers[, 1:2] 不正確"
 
-#: plot.cpp:3940
 msgid "invalid 'boxplots' data (need 5 columns)"
 msgstr "boxplots 資料不正確 (需要五欄)"
 
-#: plot.cpp:3949
 msgid "'boxplots[, 5]' outside [0,1] -- may look funny"
 msgstr "boxplots[, 5] 在 [0,1] 範圍外 -- 看起來會有點奇怪"
 
-#: plot.cpp:3951
 msgid "invalid 'boxplots[, 1:4]'"
 msgstr "boxplots[, 1:4] 不正確"
 
-#: plot.cpp:3997
 msgid "invalid symbol type"
 msgstr "符號類型不正確"
 
-#: plot.cpp:4034 plot.cpp:4036 plot.cpp:4041 plot.cpp:4043
 #, c-format
 msgid "incorrect length for '%s' argument"
 msgstr "'%s' 引數的長度不正確"
 
-#: plot.cpp:4060
 msgid "unable to allocate memory (in xspline)"
 msgstr ""
 
-#: plot3d.cpp:186 plot3d.cpp:1921
 msgid "insufficient 'x' or 'y' values"
 msgstr "'x' 或 'y' 值大小不足"
 
-#: plot3d.cpp:190 plot3d.cpp:1924
 msgid "dimension mismatch"
 msgstr "維度不相符"
 
-#: plot3d.cpp:198
 msgid "no contour values"
 msgstr "無等高值"
 
-#: plot3d.cpp:214
 msgid "invalid x / y values or limits"
 msgstr "x / y 的值或極值不正確"
 
-#: plot3d.cpp:215
 msgid "invalid contour levels: must be strictly increasing"
 msgstr "等高層級不正確: 必須嚴格地增加"
 
-#: plot3d.cpp:1047 plot3d.cpp:1060
 msgid "Axis orientation not calculated"
 msgstr "無法計算座標方位"
 
-#: plot3d.cpp:1080
 msgid "too few parameters"
 msgstr "參數太少"
 
-#: plot3d.cpp:1110
 msgid "invalid 'x' limits"
 msgstr "'x' 極值不正確"
 
-#: plot3d.cpp:1112
 msgid "invalid 'y' limits"
 msgstr "'y' 極值不正確"
 
-#: plot3d.cpp:1114
 msgid "invalid 'z' limits"
 msgstr "'z' 極值不正確"
 
-#: plot3d.cpp:1135 plot3d.cpp:1137 plot3d.cpp:1139
 #, fuzzy, c-format
 msgid "'%s' must be a character vector of length 1"
 msgstr "'xlab' 必須是長度為 1 的字元向量"
 
-#: plot3d.cpp:1159
 msgid "invalid viewing parameters"
 msgstr "檢視參數不正確"
 
-#: plot3d.cpp:1177 plot3d.cpp:1181
 #, c-format
 msgid "invalid '%s' specification"
 msgstr "'%s' 設定不正確"
 
-#: plot3d.cpp:1518
 #, c-format
 msgid "contour(): circular/long seglist -- set %s > %d?"
 msgstr "contour()：環/長 seglist -- set %s > %d？"
 
-#: plot3d.cpp:1927
 msgid "no 'levels'"
 msgstr ""
 
-#: plot3d.cpp:1931
 msgid "missing 'x' values"
 msgstr "缺少 'x' 值"
 
-#: plot3d.cpp:1933
 msgid "increasing 'x' values expected"
 msgstr "'x' 值應加大"
 
-#: plot3d.cpp:1938
 msgid "missing 'y' values"
 msgstr "缺少 'y' 值"
 
-#: plot3d.cpp:1940
 msgid "increasing 'y' values expected"
 msgstr "'y' 值應加大"
 
-#: plot3d.cpp:1945
 #, c-format
 msgid "non-finite level values: levels[%d] = %g"
 msgstr ""
 
-#: plot3d.cpp:1958
 msgid "all z values are equal"
 msgstr "所有的 z 值都一樣"
 
-#: plot3d.cpp:1960
 msgid "all z values are NA"
 msgstr "所有的 z 值都是 NA"
 
-#: stem.cpp:122
 msgid ""
 "  The decimal point is at the |\n"
 "\n"
 msgstr ""
 
-#: stem.cpp:126
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the right of the |\n"
@@ -614,7 +468,6 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
-#: stem.cpp:128
 #, c-format
 msgid ""
 "  The decimal point is %d digit to the left of the |\n"
@@ -624,17 +477,14 @@ msgid_plural ""
 "\n"
 msgstr[0] ""
 
-#: stem.cpp:165
 #, fuzzy
 msgid "invalid input"
 msgstr "單位不正確"
 
-#: stem.cpp:168
 #, c-format
 msgid "long vector '%s' is not supported"
 msgstr "不支援長向量 %s"
 
-#: stem.cpp:204
 msgid "count for a bin exceeds INT_MAX"
 msgstr ""
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 14:56+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: R-core <R-core@R-project.org>\n"
@@ -489,6 +489,15 @@ msgstr "ベクトルのメモリを使い切りました (上限に達した？)
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+msgid "internal logical NA value has been modified"
+msgstr ""
+
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr "unif_rand: 種類 %d の RNG は実装されていません"
@@ -514,6 +523,10 @@ msgstr "RNG_Init: RNG kind %d は未実装です"
 msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
 msgstr "'.Random.seed' が整数ベクトルではなくタイプ '%s' になっているため、無視されました"
 
+#, fuzzy
+msgid "'.Random.seed' has length 0, so ignored"
+msgstr "'.Random.seed' の長さが不正です"
+
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr "'.Random.seed[1]' が有効な整数値ではないため、無視されました"
 
@@ -528,6 +541,10 @@ msgstr "'.Random.seed[1] = 5' ですが、ユーザ定義の乱数発生器が�
 #, fuzzy, c-format
 msgid "'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"
 msgstr "'.Random.seed[1]' が有効な種類の RNGではないため、無視されました"
+
+#, fuzzy
+msgid "'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"
+msgstr "'.Random.seed[1] = 5' ですが、ユーザ定義の乱数発生器がないため、無視されました"
 
 msgid "'.Random.seed' has wrong length"
 msgstr "'.Random.seed' の長さが不正です"
@@ -792,6 +809,10 @@ msgid "unknown encoding: %d"
 msgstr "未知のエンコーディングです: %d"
 
 #, fuzzy
+msgid "invalid string length"
+msgstr "長さが不正です"
+
+#, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "変数名は %d バイトが上限です"
 
@@ -844,11 +865,17 @@ msgstr "'realpr' 中でメモリ確保に失敗しました"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "入力文字列 y[%d] はこのロケールでは不適切です"
 
+msgid "invalid compact_intseq serialized state"
+msgstr ""
+
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
 
 msgid "method should only handle unexpanded vectors"
+msgstr ""
+
+msgid "invalid compact_realseq serialized state"
 msgstr ""
 
 #, c-format
@@ -857,6 +884,10 @@ msgstr ""
 
 msgid "result would be too long a vector"
 msgstr "結果のベクトルが長すぎます"
+
+#, fuzzy
+msgid "invalid deferred string serialized state"
+msgstr "部分文字列引数が不正です"
 
 msgid "unsupported type for deferred string coercion"
 msgstr ""
@@ -868,6 +899,10 @@ msgstr "長いベクトルはまだサポートされていません: %s:%d"
 #, fuzzy
 msgid "object has been unmapped"
 msgstr "オブジェクト '%s' がありません"
+
+#, fuzzy
+msgid "invalid mmap serialized state"
+msgstr "グラフィックスの状態が不正です"
 
 msgid "memory mapping failed; returning vector of length zero"
 msgstr ""
@@ -890,6 +925,10 @@ msgstr "'%s' という型はサポートされていません"
 msgid "not a memory-mapped object"
 msgstr ""
 
+#, fuzzy
+msgid "invalid wrapper serialized state"
+msgstr "不正なシリアル化されたベクトル長の上部"
+
 msgid "unsupported type"
 msgstr "サポートされていないタイプです"
 
@@ -899,6 +938,9 @@ msgstr ""
 #, fuzzy
 msgid "no_na must be 0 or +1"
 msgstr "'onOff' は TRUE または FALSE でなければなりません"
+
+msgid "invalid ALTREP serialized class"
+msgstr ""
 
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
@@ -1016,9 +1058,10 @@ msgstr "1 個の引数を持つ未実装の数値関数"
 msgid "unimplemented complex function"
 msgstr "未実装の複素関数です"
 
-#, c-format
-msgid "unimplemented real function of %d numeric arguments"
-msgstr "%d 個の数値引数を持つ未実装の数値関数"
+#, fuzzy, c-format
+msgid "unimplemented real function of %d numeric argument"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "%d 個の数値引数を持つ未実装の数値関数"
 
 msgid "matchArg returned something weird"
 msgstr ""
@@ -1566,12 +1609,19 @@ msgstr "'new' は不正な UTF-8 文字列です"
 msgid "invalid multibyte string 'new'"
 msgstr "'new' は不正なマルチバイト文字です"
 
+#, fuzzy
+msgid "'old' expands to too many characters"
+msgstr "書かれた文字が短すぎます"
+
 msgid "'old' is longer than 'new'"
 msgstr "'old' が 'new' より長いです"
 
 #, fuzzy, c-format
 msgid "invalid input multibyte string %lld"
 msgstr "不正なマルチバイト文字列入力 %lld です"
+
+msgid "translated string is not representable in the current locale"
+msgstr ""
 
 msgid "strtrim() requires a character vector"
 msgstr "strtrim() 関数は文字ベクトルを要求します"
@@ -2037,6 +2087,10 @@ msgid "'%s' is not a %s"
 msgstr "fifo '%s' は準備ができていません"
 
 #, fuzzy, c-format
+msgid "internal gzcon connection is not a %s"
+msgstr "コネクションは開かれていません"
+
+#, fuzzy, c-format
 msgid "internal connection is not a %s"
 msgstr "コネクションは開かれていません"
 
@@ -2118,9 +2172,6 @@ msgstr "コネクションへの書き込みエラーが発生しました"
 
 msgid "cannot read from this connection"
 msgstr "このコネクションから読み込みできません"
-
-msgid "cannot allocate buffer in readLines"
-msgstr "readLines にバッファを割り当てることができません"
 
 msgid "too many items"
 msgstr "項目の数が多すぎます"
@@ -2773,6 +2824,14 @@ msgstr ""
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
+
+#, c-format
+msgid "cannot extract '%s' through a symbolic link"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "cannot create directory '%s': %s"
+msgstr "ディレクトリ '%s' を作成できません、理由は '%s' です"
 
 #, c-format
 msgid " not overwriting file '%s"
@@ -3520,10 +3579,6 @@ msgstr " このプラットフォームでは nsl() 関数はサポートされ�
 
 #, c-format
 msgid "interval too short for this platform, using '%f'"
-msgstr ""
-
-#, c-format
-msgid "interval too short, using '%f'"
 msgstr ""
 
 msgid "R profiling is not available on this system"
@@ -4368,12 +4423,6 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-msgid "Inconsistent node generation in s_Old\n"
-msgstr ""
-
-msgid "Inconsistent node generation in s_OldToNew\n"
-msgstr ""
-
 msgid "can only weakly reference/finalize reference objects"
 msgstr "参照オブジェクトは曖昧にしか参照・完結できません"
 
@@ -4407,31 +4456,6 @@ msgstr "長さが 0 の引数は不正です"
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "ベクトル割り当てにおいて、型か長さ (%s か %lld) が不正です"
-
-msgid "internal TRUE value has been modified"
-msgstr ""
-
-msgid "internal FALSE value has been modified"
-msgstr ""
-
-msgid "internal logical NA value has been modified"
-msgstr ""
-
-msgid "R_signal_protect_error() is no-op in CXXR"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "unprotect(): only %td protected item"
-msgid_plural "unprotect(): only %td protected items"
-msgstr[0] "unprotect(): %d 個だけの保護された項目"
-
-msgid "unprotect_ptr: pointer not found"
-msgstr "unprotect_ptr: ポインターがありません"
-
-#, fuzzy, c-format
-msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
-msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
-msgstr[0] "R_Reprotect: %d 個だけの保護された項目です、インデックス %d を再プロテクトできません"
 
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
@@ -4890,6 +4914,10 @@ msgstr "'%s' の値が不正です"
 #, fuzzy
 msgid "'decimal.mark' must be a string of one character"
 msgstr "'dec' は一文字でなければなりません"
+
+#, c-format
+msgid "final maximal string length = %.0f is too large"
+msgstr ""
 
 msgid "Impossible mode ( x )"
 msgstr "不可能なモード (x) です"
@@ -5857,6 +5885,18 @@ msgstr ""
 "負のシリアル化ベクトル長:\n"
 "おそらく R の 64 ビット版からのロングベクトル?"
 
+#, fuzzy
+msgid "invalid attribute list"
+msgstr "引数リストが不正です"
+
+#, fuzzy
+msgid "invalid 'dim' attribute"
+msgstr "'mode' 引数が不正です"
+
+#, fuzzy
+msgid "invalid call or '...' list"
+msgstr "'%s' の値が不正です"
+
 msgid "this version of R cannot read class references"
 msgstr "このバージョンの R ではクラス参照は読めません"
 
@@ -5870,6 +5910,10 @@ msgstr "ReadItem: 恐らく R の後のバージョンによって書かれた�
 #, fuzzy
 msgid "invalid length of encoding name"
 msgstr "スロット名の型または長さが不正です"
+
+#, fuzzy
+msgid "embedded nul in encoding name"
+msgstr "文字列の中に nul が埋め込まれています: '%s'"
 
 #, c-format
 msgid "cannot read unreleased workspace version %d written by experimental R %d.%d.%d"
@@ -6021,6 +6065,10 @@ msgstr "データの長さが分割変数の倍数ではありません"
 #, c-format
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "要求された結果の文字列長 %d が上限 %d を超えています"
+
+#, fuzzy
+msgid "internal error converting format precision"
+msgstr "'do_sys' で内部エラーが起きました"
 
 #, c-format
 msgid "only %d arguments are allowed"
@@ -6312,8 +6360,20 @@ msgstr ""
 msgid "(subscript) logical subscript too long"
 msgstr "(subscript) 論理値添え字が長すぎます"
 
+#, fuzzy
+msgid "object length is not a multiple of subscript length"
+msgstr "長いオブジェクトの長さが短いオブジェクトの長さの倍数になっていません"
+
+#, fuzzy, c-format
+msgid "length of dimension %d is not a multiple of logical subscript length"
+msgstr "置き換えるべき項目数が、置き換える数の倍数ではありませんでした"
+
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "負の添字と混在できるのは 0 という添字だけです"
+
+#, fuzzy
+msgid "subscript too large"
+msgstr "添え字が 32-bit R に対しては大きすぎます"
 
 msgid "subscript too large for 32-bit R"
 msgstr "添え字が 32-bit R に対しては大きすぎます"
@@ -6797,9 +6857,6 @@ msgstr ""
 #, c-format
 msgid "add_point - reached MAXNUMPTS (%d)"
 msgstr "add_point - MAXNUMPTS (%d) に到達しました"
-
-msgid "insufficient memory to allocate point array"
-msgstr "点配列に対して十分なメモリを割り当てられません"
 
 msgid "there must be at least two control points"
 msgstr "少なくとも二つの制御点が必要です"
@@ -7458,6 +7515,10 @@ msgstr "'size' は行数 nrow(x) = %d を超えることはできません"
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr "要素 (%d, %d) が 0 であるため、逆数が計算できません"
 
+#, c-format
+msgid "besselI(x, nu): nu=%g > max_alpha_i (= %g): too large for bessel_i() algorithm"
+msgstr ""
+
 msgid "bessel_i allocation error"
 msgstr "bessel_i で割り当てエラーがありました"
 
@@ -7470,7 +7531,7 @@ msgid "bessel_i(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_i(%g,nu=%g): 結果の精度が失われました \n"
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g too large for bessel_j() algorithm"
+msgid "besselJ(x, nu): nu=%g > max_alpha_j (= %g): too large for bessel_j() algorithm"
 msgstr ""
 
 msgid "bessel_j allocation error"
@@ -7485,7 +7546,7 @@ msgid "bessel_j(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_j(%g,nu=%g): 結果の精度が失われました \n"
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g > 1e7; too large for bessel_j() algorithm"
+msgid "besselK(x, nu): |nu|=%g > max_alpha_k (= %g): too large for bessel_k() algorithm"
 msgstr ""
 
 msgid "bessel_k allocation error"
@@ -7500,7 +7561,7 @@ msgid "bessel_k(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_k(%g,nu=%g): 結果の精度が失われました \n"
 
 #, c-format
-msgid "besselY(x, nu): nu=%g too large for bessel_y() algorithm"
+msgid "besselY(x, nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
 msgstr ""
 
 msgid "bessel_y allocation error"
@@ -7513,6 +7574,10 @@ msgstr "bessel_y(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. 引数が範囲外？
 #, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_y(%g,nu=%g): 結果の精度が失われました \n"
+
+#, c-format
+msgid "besselY(x, -nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
+msgstr ""
 
 #, c-format
 msgid "'k' (%.2f) must be integer, rounded to %.0f"
@@ -7719,6 +7784,25 @@ msgstr "zip ファイルから抽出中に書き込みエラーが生じまし�
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "警告: ファイルリストの最初のみを編集します"
 
+#~ msgid "cannot allocate buffer in readLines"
+#~ msgstr "readLines にバッファを割り当てることができません"
+
+#, fuzzy, c-format
+#~ msgid "unprotect(): only %td protected item"
+#~ msgid_plural "unprotect(): only %td protected items"
+#~ msgstr[0] "unprotect(): %d 個だけの保護された項目"
+
+#~ msgid "unprotect_ptr: pointer not found"
+#~ msgstr "unprotect_ptr: ポインターがありません"
+
+#, fuzzy, c-format
+#~ msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
+#~ msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
+#~ msgstr[0] "R_Reprotect: %d 個だけの保護された項目です、インデックス %d を再プロテクトできません"
+
+#~ msgid "insufficient memory to allocate point array"
+#~ msgstr "点配列に対して十分なメモリを割り当てられません"
+
 #~ msgid "length-0 dimension vector is invalid"
 #~ msgstr "長さ 0 の次元のベクトルは無効です"
 
@@ -7779,9 +7863,6 @@ msgstr "警告: ファイルリストの最初のみを編集します"
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "'EXPR' がありません"
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "'mode' 引数が不正です"
 
 #~ msgid "'name' is missing"
 #~ msgstr "'name' が見つかりません"
@@ -7860,10 +7941,6 @@ msgstr "警告: ファイルリストの最初のみを編集します"
 #, fuzzy
 #~ msgid "memory exhausted"
 #~ msgstr "メモリが尽きました (限界に達したかも？)"
-
-#, c-format
-#~ msgid "invalid value for '%s'"
-#~ msgstr "'%s' の値が不正です"
 
 #~ msgid "'mode' must be of length at least one"
 #~ msgstr "'mode' の長さは 1 以上でなくてはなりません"

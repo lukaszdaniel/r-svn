@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-3.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-10-23 20:55\n"
 "PO-Revision-Date: 2025-07-06 15:03+0200\n"
 "Last-Translator: Chel Hee Lee <gnustats@gmail.com>\n"
 "Language-Team: \n"
@@ -2015,12 +2015,12 @@ msgstr "패키지 %s는 당신이 보고 확인을 해야할 라이센스를 가
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr "패키지 %s는 대화형 세션에서 당신이 수락해야할 라이센스를 가지고 있습니다"
 
-#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\n  according to the DESCRIPTION file it is\n  %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
-"according to the DESCRIPTION file it is\n"
-"%s"
+"  according to the DESCRIPTION file it is\n"
+"  %s"
 msgstr "패키지 %s는 당신이 보고 확인을 해야할 라이센스를 가지고 있습니다"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
@@ -2201,10 +2201,6 @@ msgstr "%s이라고 불리는 패키지가 없습니다"
 msgid "this is the \"qr\" method for the generic function solve()"
 msgstr "제네릭 함수 solve()에 대한 \"qr\" 메소드입니다"
 
-#. R/datetime.R: sQuote("timedatectl")
-msgid "timedatectl"
-msgstr ""
-
 #. R/qr.R: stop("too large a matrix for LINPACK")
 msgid "too large a matrix for LINPACK"
 msgstr "LINPACK에 너무 큰 행렬입니다"
@@ -2229,7 +2225,7 @@ msgstr "triangular matrix는 반드시 정방이어야 합니다"
 msgid "trimmed means are not defined for complex data"
 msgstr "복소수형 데이터에 사용할 수 있는 절삭평균(trimmed means)는 정의되지 않았습니다."
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote("timedatectl"))
+#. R/datetime.R: gettext("unable to deduce timezone name from ")
 #. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
 msgid "unable to deduce timezone name from"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R-4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-11-24 17:40\n"
 "PO-Revision-Date: 2025-07-06 16:00+0200\n"
 "Last-Translator: Detlef Steuer <steuer@hsu-hh.de>\n"
 "Language-Team: R Core <r-core@r-project.org>\n"
@@ -72,9 +72,19 @@ msgstr "'%s' kann nicht von Modus '%s' sein"
 msgid "'%s' must be a character string"
 msgstr "'%s' muss eine Zeichenkette sein"
 
+#. R/models.R: gettextf("'%s' must be an object of class \"%s\"", "termobj",     "terms")
+#, fuzzy
+msgid "'%s' must be an object of class \"%s\""
+msgstr "'termobj' muss ein Objekt aus der Klasse %s sein"
+
 #. R/power.R: gettextf("'%s' must be numeric in [0, 1]", deparse1(substitute(x)))
 msgid "'%s' must be numeric in [0, 1]"
 msgstr "'%s' muss numerisch aus [0, 1] sein"
+
+#. R/models.R: gettextf("'%s' must be numeric or NULL", "dropx")
+#, fuzzy
+msgid "'%s' must be numeric or NULL"
+msgstr "'y' muss ein numerischer Vektor sein"
 
 #. R/addmargins.R: stop("'A' must be an array or table")
 msgid "'A' must be an array or table"
@@ -263,6 +273,11 @@ msgstr "'degree' muss mindestens 1 sein"
 msgid "'degree' must be less than number of unique points"
 msgstr "'degree' muss kleiner sein, als die Zahl der verschiedenen Punkte"
 
+#. R/smspline.R: stop("'deriv' must be a non-negative integer")
+#, fuzzy
+msgid "'deriv' must be a non-negative integer"
+msgstr "'x' muss nicht-negativ und ganzzahlig sein"
+
 #. R/splinefun.R: stop("'deriv' must be between 0 and 3")
 msgid "'deriv' must be between 0 and 3"
 msgstr "'deriv' muss zwischen 0 und 3 liegen"
@@ -437,6 +452,11 @@ msgstr "'margin' muss Namen oder Zahlen enthalten, die mit 'table' korrespondier
 msgid "'margins' must be a numeric vector of length 2"
 msgstr "'margins' muss ein numerischer Vektor der Länge 2 sein"
 
+#. R/ppr.R: stop("'max.terms' must be at least 'nterms'")
+#, fuzzy
+msgid "'max.terms' must be at least 'nterms'"
+msgstr "'lag.max' muss mindestens 0 sein"
+
 #. R/mlm.R: stop("'mlm' objects with weights are not supported")
 msgid "'mlm' objects with weights are not supported"
 msgstr "Gewichtete 'mlm' Objekte werden nicht unterstützt"
@@ -505,6 +525,11 @@ msgstr "'nknots' muss numerisch aus {1,.., n} sein"
 #. R/ppr.R: stop("'nterms' is missing with no default")
 msgid "'nterms' is missing with no default"
 msgstr "'nterm' fehlt ohne Standardwert"
+
+#. R/ppr.R: stop("'nterms' must be a positive integer")
+#, fuzzy
+msgid "'nterms' must be a positive integer"
+msgstr "'n' muss eine positive, ganze Zahl >= 'x' sein"
 
 #. R/aov.R: stop("'object' does not include an error 'qr' component")
 msgid "'object' does not include an error 'qr' component"
@@ -708,10 +733,6 @@ msgstr "'cutpoints' müssen eindeutig sein, aber sind ="
 #, fuzzy
 msgid "'termlabels' must be a character vector"
 msgstr "'termlabels' muss ein Zeichenkettenvektor mit Länge >= 1 sein"
-
-#. R/models.R: gettextf("'termobj' must be a object of class %s", dQuote("terms"))
-msgid "'termobj' must be a object of class %s"
-msgstr "'termobj' muss ein Objekt aus der Klasse %s sein"
 
 #. R/approx.R: stop("'ties' is not \"ordered\", a function, or list(<string>, <function>)")
 msgid "'ties' is not \"ordered\", a function, or list(<string>, <function>)"
@@ -1213,11 +1234,6 @@ msgstr "PCA kann nur auf numerische Variablen angewendet werden"
 msgid "Page [%d,%d]: i =%s; j =%s"
 msgstr "Seite [%d,%d]: i=%s; j=%s"
 
-#. R/ks.test.R: gettextf("Parameter(s) %s ignored", paste(names(args), collapse = ", "))
-#, fuzzy
-msgid "Parameter(s) %s ignored"
-msgstr "Parameter(s)"
-
 #. R/glm-profile.R: gettext("\nParameter: ", domain = "R-stats")
 msgid "Parameter:"
 msgstr "Parameter:"
@@ -1592,6 +1608,11 @@ msgstr "kann Parameternamen nicht erkennen"
 msgid "cannot rescale a constant/zero column to unit variance"
 msgstr "kann eine konstante bzw. Null-Spalte nicht auf Varianz 1 skalieren"
 
+#. R/models.R: gettextf("cannot set contrasts for variable '%s'", namD[i])
+#, fuzzy
+msgid "cannot set contrasts for variable '%s'"
+msgstr "kann 'cor=TRUE' mit einer konstanten Variablen nicht nutzen"
+
 #. R/family.R: stop("cannot simulate from non-integer prior.weights")
 msgid "cannot simulate from non-integer prior.weights"
 msgstr "kann keine Simulationen mit nicht ganzzahligen prior.weights durchführen"
@@ -1633,15 +1654,12 @@ msgstr "Spalten eines 'contrast.obj' muss einen Kontrast definieren (Summe = 0)"
 msgid "computation of exact probability failed, returning Monte Carlo approximation"
 msgstr "Berechnung der exakten Wahrscheinlichkeit fehlgeschlagen, gebe Monte-Carlo Approximation zurück"
 
-#. R/free1way.R: gettextf("computing Newton updated failed in %s", ".NewtonRaphson")
-msgid "computing Newton updated failed in %s"
-msgstr ""
-
 #. R/contrast.R: stop("contrasts apply only to factors")
 msgid "contrasts apply only to factors"
 msgstr "Kontraste arbeiten nur auf Faktoren"
 
 #. R/contrast.R: stop("contrasts can be applied only to factors with 2 or more levels")
+#. R/models.R: gettext("contrasts can be applied only to factors with 2 or more levels")
 msgid "contrasts can be applied only to factors with 2 or more levels"
 msgstr "Kontraste können nur auf Faktoren mit 2 oder mehr Stufen angewendet werden"
 
@@ -2194,6 +2212,7 @@ msgstr "unzulässiger Zielgrößentyp"
 #. R/density.R: gettextf("invalid value of %s", "length(x)")
 #. R/filter.R: gettextf("invalid value of %s", "NROW(x)")
 #. R/filter.R: gettextf("invalid value of %s", "length(filter)")
+#. R/kmeans.R: gettextf("invalid value of %s", "'trace'")
 msgid "invalid value of %s"
 msgstr "unzulässige Wert für %s"
 
@@ -3653,9 +3672,15 @@ msgstr "nutze Gewichte als Gestaltparameter"
 msgid "value of 'epsilon' must be > 0"
 msgstr "Wert von 'epsilon' muss > 0 sein"
 
-#. R/models.R: gettextf("variable '%s' is absent, its contrast will be ignored",     nn)
-msgid "variable '%s' is absent, its contrast will be ignored"
-msgstr "Variable '%s' fehlt, ihre Kontraste werden ignoriert"
+#. R/glm.R: stop("value of 'tol' must be >= 0")
+#, fuzzy
+msgid "value of 'tol' must be >= 0"
+msgstr "Wert von 'epsilon' muss > 0 sein"
+
+#. R/glm.R: stop("value of 'wtol' must be >= 0")
+#, fuzzy
+msgid "value of 'wtol' must be >= 0"
+msgstr "Wert von 'epsilon' muss > 0 sein"
 
 #. R/models.R: gettextf("variable '%s' is not a factor", nm)
 msgid "variable '%s' is not a factor"
@@ -3677,6 +3702,7 @@ msgstr "Gewichte werden in einer multistratum ANOVA-Anpassung nicht unterstützt
 msgid "weights must be non-negative and not all zero"
 msgstr "Gewichte müssen nicht-negativ und nicht alle Null sein"
 
+#. R/glm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 #. R/lm.R: gettextf("weights smaller than tolerance wtol*sum(w) = %g treated as zero",     wtol.sw)
 msgid "weights smaller than tolerance wtol*sum(w) = %g treated as zero"
 msgstr ""
@@ -3921,6 +3947,13 @@ msgid "using the %d/%d row from a combined fit"
 msgid_plural "using the %d/%d rows from a combined fit"
 msgstr[0] "benutze %d/%d Zeile aus einem kombinierten Fit"
 msgstr[1] "benutze %d/%d Zeilen aus einem kombinierten Fit"
+
+#, fuzzy
+#~ msgid "Parameter(s) %s ignored"
+#~ msgstr "Parameter(s)"
+
+#~ msgid "variable '%s' is absent, its contrast will be ignored"
+#~ msgstr "Variable '%s' fehlt, ihre Kontraste werden ignoriert"
 
 #, fuzzy
 #~ msgid "'%s' is not implemented yet"

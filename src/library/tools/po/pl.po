@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.5.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
 "Language-Team: Łukasz Daniel <lukasz.daniel@gmail.com>\n"
@@ -14,6 +14,10 @@ msgstr ""
 "na-Revision-Date: 2012-05-29 07:55+0100\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 3.6\n"
+
+#, fuzzy, c-format
+msgid "argument length (%lld) exceeds maximum supported length (%d)"
+msgstr "długość 'fmt' przekracza maksymalną długość %d formatu"
 
 msgid "argument 'files' must be character"
 msgstr "argument 'files' musi być tekstem"
@@ -57,14 +61,6 @@ msgstr "nierozpoznane określenie '%s' formatu"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "co najwyżej jedna gwiazdka '*' jest wspierana w każdym określeniu zamiany"
 
-#, c-format
-msgid "Buffer size too large to double safely at line %d"
-msgstr ""
-
-#, c-format
-msgid "unable to allocate buffer for long string at line %d"
-msgstr "nie można przydzielić bufora dla długiego tekstu w linii %d"
-
 msgid "unable to allocate in PushState"
 msgstr "nie można przydzielić bloku pamięci w PushState"
 
@@ -100,10 +96,6 @@ msgstr "błąd wewnętrzny: niezgodna liczba argumentów"
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "nowa linia wewnątrz cytowanego ciągu znaków w %s:%d"
-
-#, c-format
-msgid "unable to allocate buffer for long macro at line %d"
-msgstr "nie można przydzielić bufora dla długiego makra w linii %d"
 
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "makra są zagnieżdżone zbyt głęboko: nieskończona rekurencja?"
@@ -181,3 +173,11 @@ msgstr "zabrakło pamięci"
 
 msgid "first arg must be a single character string"
 msgstr "pierwszy argument musi być pojedynczym ciągiem znaków"
+
+#, c-format
+#~ msgid "unable to allocate buffer for long string at line %d"
+#~ msgstr "nie można przydzielić bufora dla długiego tekstu w linii %d"
+
+#, c-format
+#~ msgid "unable to allocate buffer for long macro at line %d"
+#~ msgstr "nie można przydzielić bufora dla długiego makra w linii %d"

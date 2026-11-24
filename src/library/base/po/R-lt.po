@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38\n"
+"POT-Creation-Date: 2026-10-23 20:55\n"
 "PO-Revision-Date: 2025-07-06 14:52+0200\n"
 "Last-Translator: <r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com>\n"
 "Language-Team: Lithuanian\n"
@@ -2026,12 +2026,12 @@ msgstr "pakete %s yra licencija, su kuria turite sutikti po peržiūros"
 msgid "package %s has a license that you need to accept in an interactive session"
 msgstr "pakete %s yra licencija, su kuria turite sutikti interaktyvioje sesijoje"
 
-#. R/namespace.R: gettextf("package %s has a license that you need to accept:\naccording to the DESCRIPTION file it is\n%s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
+#. R/namespace.R: gettextf("package %s has a license that you need to accept:\n  according to the DESCRIPTION file it is\n  %s",     sQuote(pkg), pkgInfo$DESCRIPTION["License"])
 #, fuzzy
 msgid ""
 "package %s has a license that you need to accept:\n"
-"according to the DESCRIPTION file it is\n"
-"%s"
+"  according to the DESCRIPTION file it is\n"
+"  %s"
 msgstr "pakete %s yra licencija, su kuria turite sutikti po peržiūros"
 
 #. R/namespace.R: gettextf("package %s has no 'NAMESPACE' file", sQuote(package))
@@ -2215,10 +2215,6 @@ msgstr "nėra paketo iškviesto %s"
 msgid "this is the \"qr\" method for the generic function solve()"
 msgstr "tai yra \"qr\" metodas bendrinei funkcijai solve()"
 
-#. R/datetime.R: sQuote("timedatectl")
-msgid "timedatectl"
-msgstr ""
-
 #. R/qr.R: stop("too large a matrix for LINPACK")
 msgid "too large a matrix for LINPACK"
 msgstr "per didelė matrica LINPACK"
@@ -2243,7 +2239,7 @@ msgstr "trikampė matrica turi būti kvadratinė"
 msgid "trimmed means are not defined for complex data"
 msgstr "apkarpytos priemonės nėra apibrėžtos sudėtingiems duomenims"
 
-#. R/datetime.R: message("unable to deduce timezone name from ", sQuote("timedatectl"))
+#. R/datetime.R: gettext("unable to deduce timezone name from ")
 #. R/datetime.R: message("unable to deduce timezone name from ", sQuote(lt))
 msgid "unable to deduce timezone name from"
 msgstr "negalima nustatyti laiko juostos pavadinimo iš"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: R 2.13.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 14:47+0200\n"
 "Last-Translator: Michael Chirico <michaelchirico4@gmail.com>\n"
 "Language-Team: Turkish <muratalk@gmail.com>\n"
@@ -489,6 +489,15 @@ msgstr "vektör belleği bitti (limite erişildi?)"
 msgid "vector memory limit of %0.1f %s reached, see mem.maxVSize()"
 msgstr ""
 
+msgid "internal TRUE value has been modified"
+msgstr ""
+
+msgid "internal FALSE value has been modified"
+msgstr ""
+
+msgid "internal logical NA value has been modified"
+msgstr ""
+
 #, c-format
 msgid "unif_rand: unimplemented RNG kind %d"
 msgstr "unif_rand: tanımlanmamış RNG çeşidi %d"
@@ -515,6 +524,10 @@ msgid "'.Random.seed' is not an integer vector but of type '%s', so ignored"
 msgstr ".Random.seed '%s' tipinde ancak bir tamsayı vektörü değil"
 
 #, fuzzy
+msgid "'.Random.seed' has length 0, so ignored"
+msgstr ".Random.seed yanlış uzunlukta"
+
+#, fuzzy
 msgid "'.Random.seed[1]' is not a valid integer, so ignored"
 msgstr ".Random.seed[1] geçerli bir tamsayı değil"
 
@@ -529,6 +542,10 @@ msgstr ".Random.seed[1] = 5"
 #, fuzzy, c-format
 msgid "'.Random.seed[1] %% 100' is not a valid RNG kind so ignored"
 msgstr ".Random.seed[1] geçerli bir rassal sayı üreteci çeşidi değil (kod)"
+
+#, fuzzy
+msgid "'.Random.seed[1]' specifies a user-supplied normal generator but none is loaded, so ignored"
+msgstr ".Random.seed[1] = 5"
 
 #, fuzzy
 msgid "'.Random.seed' has wrong length"
@@ -795,6 +812,10 @@ msgid "unknown encoding: %d"
 msgstr "bilinmeyen kodlama: %d"
 
 #, fuzzy
+msgid "invalid string length"
+msgstr "geçersiz uzunluk"
+
+#, fuzzy
 msgid "R character strings are limited to 2^31-1 bytes"
 msgstr "değişken isimleri %d karakterle sınırlıdır"
 
@@ -848,11 +869,17 @@ msgstr "realpr de bellek ayırma hatası"
 msgid "input string y[%d] is invalid in this locale"
 msgstr "giriş dizesi %d bu yerelde geçersiz"
 
+msgid "invalid compact_intseq serialized state"
+msgstr ""
+
 #, c-format
 msgid "compact sequences with increment %d not supported yet"
 msgstr ""
 
 msgid "method should only handle unexpanded vectors"
+msgstr ""
+
+msgid "invalid compact_realseq serialized state"
 msgstr ""
 
 #, c-format
@@ -861,6 +888,10 @@ msgstr ""
 
 msgid "result would be too long a vector"
 msgstr "sonuç çok uzun bir vektör olacak"
+
+#, fuzzy
+msgid "invalid deferred string serialized state"
+msgstr "geçersiz altmetin argümanı/argümanları"
 
 msgid "unsupported type for deferred string coercion"
 msgstr ""
@@ -872,6 +903,10 @@ msgstr "tip '%s' desteklenmiyor"
 #, fuzzy
 msgid "object has been unmapped"
 msgstr "'%s' nesnesi bulunamadı"
+
+#, fuzzy
+msgid "invalid mmap serialized state"
+msgstr "geçersiz grafik durumu"
 
 msgid "memory mapping failed; returning vector of length zero"
 msgstr ""
@@ -894,6 +929,10 @@ msgstr "tip '%s' desteklenmiyor"
 msgid "not a memory-mapped object"
 msgstr ""
 
+#, fuzzy
+msgid "invalid wrapper serialized state"
+msgstr "geçersiz parametre uzunluğu"
+
 msgid "unsupported type"
 msgstr "desteklenmeyen tip"
 
@@ -903,6 +942,9 @@ msgstr ""
 #, fuzzy
 msgid "no_na must be 0 or +1"
 msgstr "'all.x' TRUE veya FALSE olmalı"
+
+msgid "invalid ALTREP serialized class"
+msgstr ""
 
 #, c-format
 msgid "cannot unserialize ALTVEC object of class '%s' from package '%s'; returning length zero vector"
@@ -1022,9 +1064,10 @@ msgstr "1 argümanın tanımlanmamış gerçek fonksiyonu"
 msgid "unimplemented complex function"
 msgstr "tanımlanmamış (uygulanamayan) kompleks fonksiyon"
 
-#, c-format
-msgid "unimplemented real function of %d numeric arguments"
-msgstr "%d sayısal argümanın tanımlanmamış gerçek fonksiyonu"
+#, fuzzy, c-format
+msgid "unimplemented real function of %d numeric argument"
+msgid_plural "unimplemented real function of %d numeric arguments"
+msgstr[0] "%d sayısal argümanın tanımlanmamış gerçek fonksiyonu"
 
 msgid "matchArg returned something weird"
 msgstr ""
@@ -1575,12 +1618,19 @@ msgstr "geçersiz UTF-8 dizesi 'new'"
 msgid "invalid multibyte string 'new'"
 msgstr "geçersiz çokbaytlı dize 'new'"
 
+#, fuzzy
+msgid "'old' expands to too many characters"
+msgstr "çok az karakter yazıldı"
+
 msgid "'old' is longer than 'new'"
 msgstr "'old' 'new' den daha uzun"
 
 #, fuzzy, c-format
 msgid "invalid input multibyte string %lld"
 msgstr "çokbaytlı dize geçersiz girişi %lld"
+
+msgid "translated string is not representable in the current locale"
+msgstr ""
 
 msgid "strtrim() requires a character vector"
 msgstr "strtrim() bir karakter verktörü gerektirir"
@@ -2051,6 +2101,10 @@ msgid "'%s' is not a %s"
 msgstr "fifo '%s' hazır değil"
 
 #, fuzzy, c-format
+msgid "internal gzcon connection is not a %s"
+msgstr "bağlantı açık değil"
+
+#, fuzzy, c-format
 msgid "internal connection is not a %s"
 msgstr "bağlantı açık değil"
 
@@ -2135,9 +2189,6 @@ msgstr "bağlantıya yazılırken hata"
 
 msgid "cannot read from this connection"
 msgstr "bu bağlantıdan okunamıyor"
-
-msgid "cannot allocate buffer in readLines"
-msgstr "readLines içinde önbellek ayrılamıyor"
 
 #, fuzzy
 msgid "too many items"
@@ -2808,6 +2859,14 @@ msgstr ""
 #, c-format
 msgid "skipped \"../\" path component(s) in '%s'"
 msgstr ""
+
+#, c-format
+msgid "cannot extract '%s' through a symbolic link"
+msgstr ""
+
+#, fuzzy, c-format
+msgid "cannot create directory '%s': %s"
+msgstr "'%s' dizini oluşturulamıyor, sebep: '%s'"
 
 #, c-format
 msgid " not overwriting file '%s"
@@ -3570,10 +3629,6 @@ msgstr "nsl() bu platformda desteklenmiyor"
 
 #, c-format
 msgid "interval too short for this platform, using '%f'"
-msgstr ""
-
-#, c-format
-msgid "interval too short, using '%f'"
 msgstr ""
 
 msgid "R profiling is not available on this system"
@@ -4431,12 +4486,6 @@ msgstr ""
 msgid "a limit lower than current usage, so ignored"
 msgstr ""
 
-msgid "Inconsistent node generation in s_Old\n"
-msgstr ""
-
-msgid "Inconsistent node generation in s_OldToNew\n"
-msgstr ""
-
 msgid "can only weakly reference/finalize reference objects"
 msgstr "referans nesneler sadece zayıf referanslık/sonlandırma olabilir"
 
@@ -4470,31 +4519,6 @@ msgstr "geçersiz 0 uzunluktaki argüman"
 #, fuzzy, c-format
 msgid "invalid type/length (%s/%lld) in vector allocation"
 msgstr "vektör ayırmasında geçersiz tip/uzunluk (%s/%lld)"
-
-msgid "internal TRUE value has been modified"
-msgstr ""
-
-msgid "internal FALSE value has been modified"
-msgstr ""
-
-msgid "internal logical NA value has been modified"
-msgstr ""
-
-msgid "R_signal_protect_error() is no-op in CXXR"
-msgstr ""
-
-#, fuzzy, c-format
-msgid "unprotect(): only %td protected item"
-msgid_plural "unprotect(): only %td protected items"
-msgstr[0] "unprotect(): sadece %d korunmuş öğe var"
-
-msgid "unprotect_ptr: pointer not found"
-msgstr "uprotect_prt: işaretçi bulunamadı"
-
-#, fuzzy, c-format
-msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
-msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
-msgstr[0] "unprotect(): sadece %d korunmuş öğe var"
 
 #, fuzzy, c-format
 msgid "'R_Calloc' could not allocate memory (%llu of %llu bytes)"
@@ -4959,6 +4983,10 @@ msgstr "'%s' için geçersiz değer"
 #, fuzzy
 msgid "'decimal.mark' must be a string of one character"
 msgstr "'dec' tek bir karakter olmalıdır"
+
+#, c-format
+msgid "final maximal string length = %.0f is too large"
+msgstr ""
 
 msgid "Impossible mode ( x )"
 msgstr "İmkansız mod ( x )"
@@ -5944,6 +5972,18 @@ msgid ""
 "perhaps long vector from 64-bit version of R?"
 msgstr ""
 
+#, fuzzy
+msgid "invalid attribute list"
+msgstr "geçersiz argüman listesi"
+
+#, fuzzy
+msgid "invalid 'dim' attribute"
+msgstr "geçersiz 'mode' argümanı"
+
+#, fuzzy
+msgid "invalid call or '...' list"
+msgstr "'%s' için geçersiz değer"
+
 msgid "this version of R cannot read class references"
 msgstr "R'nin bu sürümü sınıf referanslarını okuyamaz"
 
@@ -5957,6 +5997,10 @@ msgstr "ReadItem: bilinmeyen tip %i, R'nin yeni bir sürümüyle yazılmış ola
 #, fuzzy
 msgid "invalid length of encoding name"
 msgstr "slot ismi için geçersiz tip yada uzunluk"
+
+#, fuzzy
+msgid "embedded nul in encoding name"
+msgstr "'%s' dizesi gömülü nul"
 
 #, c-format
 msgid "cannot read unreleased workspace version %d written by experimental R %d.%d.%d"
@@ -6110,6 +6154,10 @@ msgstr "veri uzunluğu bölünmüş değişkenin bir katı değil"
 #, fuzzy, c-format
 msgid "required resulting string length %d is greater than maximal %d"
 msgstr "gerekli sonuç dizesi uzunluğu %d > maksimum uzunluk %d'den"
+
+#, fuzzy
+msgid "internal error converting format precision"
+msgstr "'do_sys'de iç hata"
 
 #, c-format
 msgid "only %d arguments are allowed"
@@ -6401,8 +6449,20 @@ msgstr ""
 msgid "(subscript) logical subscript too long"
 msgstr "(altindis) mantıksal altindiz çok uzun"
 
+#, fuzzy
+msgid "object length is not a multiple of subscript length"
+msgstr "uzun olan nesne uzunluğu kısa olan nesne uzunluğunun bir katı değil"
+
+#, fuzzy, c-format
+msgid "length of dimension %d is not a multiple of logical subscript length"
+msgstr "değiştirilecek öğelerin sayısı değiştirme uzunluğunun bir katı değil"
+
 msgid "only 0's may be mixed with negative subscripts"
 msgstr "negatif altindislerle sadece 0'lar karıştırılabilir"
+
+#, fuzzy
+msgid "subscript too large"
+msgstr "altindis sınırlar dışında"
 
 msgid "subscript too large for 32-bit R"
 msgstr ""
@@ -6899,9 +6959,6 @@ msgstr ""
 #, c-format
 msgid "add_point - reached MAXNUMPTS (%d)"
 msgstr "add_point - MAXNUMPTS (%d)'a erişildi"
-
-msgid "insufficient memory to allocate point array"
-msgstr "işaretçi dizisini ayırmak için yetersiz bellek"
 
 #, fuzzy
 msgid "there must be at least two control points"
@@ -7562,6 +7619,10 @@ msgstr "'size' nrow(x) = %d i geçemez"
 msgid "element (%d, %d) is zero, so the inverse cannot be computed"
 msgstr "öğe (%d, %d) sıfıra eşit, tersi hesaplanamaz"
 
+#, c-format
+msgid "besselI(x, nu): nu=%g > max_alpha_i (= %g): too large for bessel_i() algorithm"
+msgstr ""
+
 msgid "bessel_i allocation error"
 msgstr "bessel_i bellek ayırma hatası"
 
@@ -7574,7 +7635,7 @@ msgid "bessel_i(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_i(%g,nu=%g): sonuçta hassasiyet kayboldu\n"
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g too large for bessel_j() algorithm"
+msgid "besselJ(x, nu): nu=%g > max_alpha_j (= %g): too large for bessel_j() algorithm"
 msgstr ""
 
 msgid "bessel_j allocation error"
@@ -7589,7 +7650,7 @@ msgid "bessel_j(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_j(%g,nu=%g): sonuçta hassasiyet kayboldu\n"
 
 #, c-format
-msgid "besselJ(x, nu): nu=%g > 1e7; too large for bessel_j() algorithm"
+msgid "besselK(x, nu): |nu|=%g > max_alpha_k (= %g): too large for bessel_k() algorithm"
 msgstr ""
 
 msgid "bessel_k allocation error"
@@ -7604,7 +7665,7 @@ msgid "bessel_k(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_k(%g,nu=%g): sonuçta hassasiyet kayboldu\n"
 
 #, c-format
-msgid "besselY(x, nu): nu=%g too large for bessel_y() algorithm"
+msgid "besselY(x, nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
 msgstr ""
 
 msgid "bessel_y allocation error"
@@ -7617,6 +7678,10 @@ msgstr "bessel_y(%g): ncalc (=%ld) != nb (=%ld); alpha=%g. Argüman sınırlar d
 #, c-format
 msgid "bessel_y(%g,nu=%g): precision lost in result\n"
 msgstr "bessel_y(%g,nu=%g): sonuçta hassasiyet kayboldu\n"
+
+#, c-format
+msgid "besselY(x, -nu): nu=%g > %g =: max_alpha_y, too large for bessel_y() algorithm"
+msgstr ""
 
 #, c-format
 msgid "'k' (%.2f) must be integer, rounded to %.0f"
@@ -7823,6 +7888,25 @@ msgstr "zip dosyasından çıkarırken yazma hatası"
 msgid "WARNING: Only editing the first in the list of files"
 msgstr "UYARI: Dosya listesinde sadece ilk öğe düzenleniyor"
 
+#~ msgid "cannot allocate buffer in readLines"
+#~ msgstr "readLines içinde önbellek ayrılamıyor"
+
+#, fuzzy, c-format
+#~ msgid "unprotect(): only %td protected item"
+#~ msgid_plural "unprotect(): only %td protected items"
+#~ msgstr[0] "unprotect(): sadece %d korunmuş öğe var"
+
+#~ msgid "unprotect_ptr: pointer not found"
+#~ msgstr "uprotect_prt: işaretçi bulunamadı"
+
+#, fuzzy, c-format
+#~ msgid "R_Reprotect: only %td protected item, can't reprotect index %d"
+#~ msgid_plural "R_Reprotect: only %td protected items, can't reprotect index %d"
+#~ msgstr[0] "unprotect(): sadece %d korunmuş öğe var"
+
+#~ msgid "insufficient memory to allocate point array"
+#~ msgstr "işaretçi dizisini ayırmak için yetersiz bellek"
+
 #~ msgid "length-0 dimension vector is invalid"
 #~ msgstr "0-uzunluk boyut vektörü geçersiz"
 
@@ -7880,9 +7964,6 @@ msgstr "UYARI: Dosya listesinde sadece ilk öğe düzenleniyor"
 
 #~ msgid "'EXPR' is missing"
 #~ msgstr "'EXPR' eksik"
-
-#~ msgid "invalid 'mode' argument"
-#~ msgstr "geçersiz 'mode' argümanı"
 
 #~ msgid "'name' is missing"
 #~ msgstr "'name' eksik"
@@ -7960,10 +8041,6 @@ msgstr "UYARI: Dosya listesinde sadece ilk öğe düzenleniyor"
 #, fuzzy
 #~ msgid "memory exhausted"
 #~ msgstr "bellek tükendi (limite erişildi?)"
-
-#, c-format
-#~ msgid "invalid value for '%s'"
-#~ msgstr "'%s' için geçersiz değer"
 
 #~ msgid "'mode' must be of length at least one"
 #~ msgstr "'mode' uzunluğu en az bir olmalıdır"

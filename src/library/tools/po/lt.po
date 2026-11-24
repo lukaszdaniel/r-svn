@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tools 4.1.0\n"
 "Report-Msgid-Bugs-To: bugs.r-project.org\n"
-"POT-Creation-Date: 2026-09-03 17:38+0200\n"
+"POT-Creation-Date: 2026-11-24 17:40+0100\n"
 "PO-Revision-Date: 2025-07-06 16:07+0200\n"
 "Last-Translator: r.zakauskas@gmail.com;gabriele.dauksaite@gmail.com\n"
 "Language-Team: Lithuanian\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.6\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+
+#, fuzzy, c-format
+msgid "argument length (%lld) exceeds maximum supported length (%d)"
+msgstr "'fmt' ilgis viršija maksimalų formato ilgį %d"
 
 msgid "argument 'files' must be character"
 msgstr "argumentas 'files' turi būti simbolis"
@@ -60,14 +64,6 @@ msgstr "neatpažinto formato specifikacija '%s'"
 msgid "at most one asterisk '*' is supported in each conversion specification"
 msgstr "ne daugiau kaip viena žvaigždutė '*' yra palaikoma kiekvienoje konvertavimo specifikacijoje"
 
-#, c-format
-msgid "Buffer size too large to double safely at line %d"
-msgstr ""
-
-#, c-format
-msgid "unable to allocate buffer for long string at line %d"
-msgstr "nepavyko priskirti buferio ilgoms eilutėms eilutėje %d"
-
 #, fuzzy
 msgid "unable to allocate in PushState"
 msgstr "nepavyko priskirti buferio ilgoms eilutėms eilutėje %d"
@@ -104,10 +100,6 @@ msgstr ""
 #, c-format
 msgid "newline within quoted string at %s:%d"
 msgstr "nauja eilutė cituojamoje eilutėje ties %s:%d"
-
-#, c-format
-msgid "unable to allocate buffer for long macro at line %d"
-msgstr "nepavyko priskirti buferio ilgoms makrokomandoms eilutėje %d"
 
 msgid "macros nested too deeply: infinite recursion?"
 msgstr "makrokomandos įdėtos per giliai: begalinė rekursija?"
@@ -186,3 +178,11 @@ msgstr "trūksta atminties"
 
 msgid "first arg must be a single character string"
 msgstr ""
+
+#, c-format
+#~ msgid "unable to allocate buffer for long string at line %d"
+#~ msgstr "nepavyko priskirti buferio ilgoms eilutėms eilutėje %d"
+
+#, c-format
+#~ msgid "unable to allocate buffer for long macro at line %d"
+#~ msgstr "nepavyko priskirti buferio ilgoms makrokomandoms eilutėje %d"
