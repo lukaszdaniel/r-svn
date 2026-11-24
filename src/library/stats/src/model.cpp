@@ -603,12 +603,17 @@ SEXP modelmatrix(SEXP call, SEXP op, SEXP args, SEXP rho)
 	    first = 1;
 	    indx = kk;
 	    bufp = &buf[0];
+	    buf[0] = '\0'; // the checks below use strlen(buf)
 	    for (i = 0; i < nVar; i++) {
 		ll = INTEGER(factors)[i + j * nVar];
 		if (ll) {
 		    var_i = VECTOR_ELT(variable, i);
-		    if (!first)
-			bufp = AppendString(bufp, ":");
+		    if (!first) {
+			if (strlen(buf) + 1 < BUFSIZE)
+			    bufp = AppendString(bufp, ":");
+			else
+			    warning("%s", _("term names will be truncated"));
+		    }
 		    first = 0;
 		    if (isFactor(var_i) || isLogical(var_i)) {
 			if (ll == 1) {
@@ -2037,9 +2042,9 @@ SEXP termsform(SEXP args)
 #endif
 	for (int i = 1; i <= nvar; i++) {
 	    if (GetBit(CAR(call), i)) {
-		if (l > 0)
-		    l += 1;
-		l += (int) strlen(CHAR(STRING_ELT(varnames, i - 1)));
+		/* + 1 for the ':' before the next variable; not conditional
+		   on l > 0, as the empty symbol has a zero-length name */
+		l += strlen(CHAR(STRING_ELT(varnames, i - 1))) + 1;
 	    }
 	}
 #ifdef DEBUG_terms

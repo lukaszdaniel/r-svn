@@ -3976,19 +3976,21 @@ static void yyerror(const char *s)
 			 s1 + sizeof yyunexpected - 1, CHAR(STRING_ELT(yylval, 0)));
 	}
     	if (expecting) {
+	    size_t len = strlen(ParseErrorMsg);
  	    translated = FALSE;
     	    for (int i = 0; yytname_translations[i]; i += 2) {
     	    	if (streql(expecting + sizeof yyexpecting - 1, yytname_translations[i])) {
-    	    	    strcat(ParseErrorMsg, _(yyexpecting));
-    	    	    strcat(ParseErrorMsg, i/2 < YYENGLISH ? _(yytname_translations[i+1])
-    	    	                    : yytname_translations[i+1]);
+    	    	    snprintf(ParseErrorMsg + len, PARSE_ERROR_SIZE - len, "%s%s",
+			     _(yyexpecting),
+			     i/2 < YYENGLISH ? _(yytname_translations[i+1])
+			     : yytname_translations[i+1]);
     	    	    translated = TRUE;
 		    break;
 		}
 	    }
 	    if (!translated) {
-	    	strcat(ParseErrorMsg, _(yyexpecting));
-	    	strcat(ParseErrorMsg, expecting + sizeof yyexpecting - 1);
+	    	snprintf(ParseErrorMsg + len, PARSE_ERROR_SIZE - len, "%s%s",
+			 _(yyexpecting), expecting + sizeof yyexpecting - 1);
 	    }
 	}
     } else if (streqln(s, yyunknown, sizeof yyunknown-1)) {
@@ -3999,7 +4001,7 @@ static void yyerror(const char *s)
     }
     filename = findVar(install("filename"), SrcFile);
     if (isString(filename) && LENGTH(filename))
-    	strncpy(ParseErrorFilename, CHAR(STRING_ELT(filename, 0)), PARSE_ERROR_SIZE - 1);
+    	snprintf(ParseErrorFilename, PARSE_ERROR_SIZE, "%s", CHAR(STRING_ELT(filename, 0)));
     else
         ParseErrorFilename[0] = '\0';
     if (wCalls) {

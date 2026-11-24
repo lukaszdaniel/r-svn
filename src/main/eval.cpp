@@ -8115,6 +8115,7 @@ SEXP ByteCode::bcEval_loop(struct bcEval_locals *ploc)
 	SEXP value = BINDING_VALUE(cell);
 	R_varloc_t loc;
 	if (value == R_UnboundValue ||
+	    value == R_MissingArg ||
 	    TYPEOF(value) == PROMSXP) {
 	    value = EnsureLocal(symbol, rho, &loc);
 	    if (loc.cell == NULL)

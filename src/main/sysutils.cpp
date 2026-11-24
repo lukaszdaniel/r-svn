@@ -1723,8 +1723,31 @@ static R_INLINE nttype_t needsTranslation(SEXP x)
 static void *latin1_obj = NULL, *utf8_obj=NULL, *ucsmb_obj=NULL,
     *ucsutf8_obj=NULL;
 
+/* Copy a translated string into a fixed-size message buffer, truncating
+   long ones, so that the string buffer can be released before the
+   message is signalled. */
+static void truncateForMessage(char dest[256], const char *src)
+{
+    if (strlen(src) > 255) {
+	strncpy(dest, src, 252);
+	dest[252] = '\0';
+	mbcsTruncateToValid(dest);
+	strcat(dest, "...");
+    } else {
+	strcpy(dest, src);
+    }
+}
+
+static bool reEncode(const char *x, R_StringBuffer *cbuff,
+		    cetype_t ce_in, cetype_t ce_out, int subst);
+static bool reEncodeIconv(const char *x, size_t length, R_StringBuffer *cbuff,
+			 const char *fromcode, const char *tocode, int subst);
+
 /* Translates string in "ans" to native encoding returning it in string
-   buffer "cbuff". */
+   buffer "cbuff".  Returns non-zero if some of it could not be translated
+   (and was escaped instead); with mustWork == 2 that is also warned about,
+   with mustWork == 1 it is an error.  In both of those cases the buffer
+   has been released before the condition is signalled. */
 static bool translateToNative(const char *ans, R_StringBuffer *cbuff,
 			     nttype_t ttype, int mustWork)
 {
@@ -1828,26 +1851,20 @@ next_char:
     }
     *outbuf = '\0';
     if (mustWork && failed) {
-	/* copy to truncate and in case of error prevent memory leak */
+	/* Release the buffer before signalling: options(warn = 2) turns
+	   the warning into an error, and the unwind would leak it. */
 	char err_buff[256];
-	if (strlen(cbuff->data) > 255) {
-	    strncpy(err_buff, cbuff->data, 252);
-	    err_buff[252] = '\0';
-	    mbcsTruncateToValid(err_buff);
-	    strcat(err_buff, "...");
-	} else
-	    strcpy(err_buff, cbuff->data);
-
+	truncateForMessage(err_buff, cbuff->data);
+	R_FreeStringBuffer(cbuff);
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to native encoding"),
 		    err_buff);
 	    return true;
 	} else {
-	    R_FreeStringBuffer(cbuff);
 	    error(_("unable to translate '%s' to native encoding"), err_buff);
 	}
     }
-    return false;
+    return failed;
 }
 
 // @note Caller has to manage the R_alloc stack
@@ -1902,11 +1919,9 @@ const char *R::translateCharFP2(SEXP x)
     if (t == NT_NONE) return ans;
 
     R_StringBuffer cbuff = R_StringBuffer();
-    if (translateToNative(ans, &cbuff, t, 2)) {
-	R_FreeStringBuffer(&cbuff);
-	return NULL;
-    } else
-	return copyAndFreeStringBuffer(&cbuff);
+    if (translateToNative(ans, &cbuff, t, 2))
+	return NULL; /* buffer already released */
+    return copyAndFreeStringBuffer(&cbuff);
 }
 
 SEXP Rf_installTrChar(SEXP x)
@@ -1917,11 +1932,18 @@ SEXP Rf_installTrChar(SEXP x)
 
     R_StringBuffer cbuff = R_StringBuffer();
     // For back-compatibility this allows installing
-    // symbols with escapes, with a warning.
-    translateToNative(CHAR(x), &cbuff, t, 2);
+    // symbols with escapes, with a warning.  The warning is signalled
+    // once the buffer has been released, as options(warn = 2) makes it
+    // an error.
+    bool failed = translateToNative(CHAR(x), &cbuff, t, 0);
+    char err_buff[256];
+    if (failed)
+	truncateForMessage(err_buff, cbuff.data);
 
     SEXP Sans = install(cbuff.data);
     R_FreeStringBuffer(&cbuff);
+    if (failed)
+	warning(_("unable to translate '%s' to native encoding"), err_buff);
     return Sans;
 }
 
@@ -1959,7 +1981,7 @@ static R_INLINE nttype_t needsTranslationUTF8(SEXP x)
 }
 
 /* Translates string in "ans" to UTF-8 returning it in string
-   buffer "cbuff". */
+   buffer "cbuff".  Return value and mustWork as for translateToNative(). */
 static bool translateToUTF8(const char *ans, R_StringBuffer *cbuff,
 			     nttype_t ttype, int mustWork)
 {
@@ -2015,29 +2037,28 @@ next_char:
     *outbuf = '\0';
     Riconv_close(obj);
     if (mustWork && failed) {
-	CXXR::RAllocStack::Scope rscope; // reEnc
-	const char *native_buf = reEnc(cbuff->data, CE_UTF8, CE_NATIVE, 2);
-
-	/* copy to truncate */
+	/* Escape the string for the message into a second buffer rather
+	   than R_alloc() it with reEnc(): an allocation error there would
+	   unwind past both buffers.  Release them before signalling, as
+	   options(warn = 2) turns the warning into an error. */
+	R_StringBuffer ebuff = R_StringBuffer();
 	char err_buff[256];
-	if (strlen(native_buf) > 255) {
-	    strncpy(err_buff, native_buf, 252);
-	    err_buff[252] = '\0';
-	    mbcsTruncateToValid(err_buff);
-	    strcat(err_buff, "...");
-	} else
-	    strcpy(err_buff, native_buf);
+	if (reEncode(cbuff->data, &ebuff, CE_UTF8, CE_NATIVE, 2))
+	    truncateForMessage(err_buff, cbuff->data);
+	else
+	    truncateForMessage(err_buff, ebuff.data);
+	R_FreeStringBuffer(&ebuff);
+	R_FreeStringBuffer(cbuff);
 
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to UTF-8"),
 		    err_buff);
 	    return true;
 	} else {
-	    R_FreeStringBuffer(cbuff);
 	    error(_("unable to translate '%s' to UTF-8"), err_buff);
 	}
     }
-    return false;
+    return failed;
 }
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
@@ -2082,11 +2103,9 @@ const char *R::trCharUTF82(SEXP x)
     if (t == NT_NONE) return ans;
 
     R_StringBuffer cbuff = R_StringBuffer();
-    if (translateToUTF8(ans, &cbuff, t, 2)) {
-	R_FreeStringBuffer(&cbuff);
-	return NULL;
-    }  else
-	return copyAndFreeStringBuffer(&cbuff);
+    if (translateToUTF8(ans, &cbuff, t, 2))
+	return NULL; /* buffer already released */
+    return copyAndFreeStringBuffer(&cbuff);
 }
 
 /* Decides type of translation needed to get wchar_t*. */
@@ -2137,9 +2156,8 @@ static void *latin1_wobj = NULL, *utf8_wobj=NULL;
    NB: that wchar_t is UCS-4 is an assumption, but not easy to avoid.
 */
 
-/* This may return a R_alloc-ed result, so the caller has to manage the
-   R_alloc stack */
-// @note Caller has to manage the R_alloc stack
+/* Translates string in "ans" to wchar_t returning it in string
+   buffer "cbuff".  Return value and mustWork as for translateToNative(). */
 static bool translateToWchar(const char *ans, R_StringBuffer *cbuff,
                             nttype_t ttype, int mustWork)
 {
@@ -2211,32 +2229,28 @@ next_char:
     *((wchar_t *) outbuf) = L'\0'; /* terminate wide string */
     if(ttype == NT_FROM_NATIVE) Riconv_close(obj);
     if (mustWork && failed) {
-	CXXR::RAllocStack::Scope rscope; // reEnc3
-	const char *native_buf = reEnc4(cbuff->data,
-					(size_t) (outbuf - cbuff->data),
-					TO_WCHAR, "", 2);
-
-	/* copy to truncate (and mark as truncated) */
+	/* As in translateToUTF8(): no R_alloc() while the buffers are
+	   live, and release them before signalling. */
+	R_StringBuffer ebuff = R_StringBuffer();
 	char err_buff[256];
-	if (strlen(native_buf) > 255) {
-	    strncpy(err_buff, native_buf, 252);
-	    err_buff[252] = '\0';
-	    mbcsTruncateToValid(err_buff);
-	    strcat(err_buff, "...");
-	} else
-	    strcpy(err_buff, native_buf);
+	if (reEncodeIconv(cbuff->data, (size_t) (outbuf - cbuff->data),
+			  &ebuff, TO_WCHAR, "", 2))
+	    truncateForMessage(err_buff, cbuff->data);
+	else
+	    truncateForMessage(err_buff, ebuff.data);
+	R_FreeStringBuffer(&ebuff);
+	R_FreeStringBuffer(cbuff);
 
 	if (mustWork == 2) {
 	    warning(_("unable to translate '%s' to a wide string"),
 	              err_buff);
 	    return true;
 	} else {
-	    R_FreeStringBuffer(cbuff);
 	    error(_("unable to translate '%s' to a wide string"),
 	          err_buff);
 	}
     }
-    return false;
+    return failed;
 }
 
 /* This may return a R_alloc-ed result, so the caller has to manage the
@@ -2265,11 +2279,9 @@ const wchar_t *R::wtransChar2(SEXP x)
 	return wfromASCII(CHAR(x), LENGTH(x));
 
     R_StringBuffer cbuff = R_StringBuffer();
-    if (translateToWchar(CHAR(x), &cbuff, t, 2)) {
-	R_FreeStringBuffer(&cbuff);
-	return NULL;
-    } else
-	return wcopyAndFreeStringBuffer(&cbuff);
+    if (translateToWchar(CHAR(x), &cbuff, t, 2))
+	return NULL; /* buffer already released */
+    return wcopyAndFreeStringBuffer(&cbuff);
 }
 
 static bool reEncodeIconv(const char *x, size_t length, R_StringBuffer *cbuff,

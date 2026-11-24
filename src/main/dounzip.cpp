@@ -35,7 +35,6 @@
 
 #define HAVE_BZIP2
 
-#define R_USE_SIGNALS 1
 #ifdef Win32
 #include <windows.h>
 #endif

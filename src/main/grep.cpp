@@ -87,6 +87,8 @@ As from R 4.1.0 we translate latin1 strings in a non-latin1-locale to UTF-8.
 #include <CXXR/StringVector.hpp>
 #include <CXXR/ListVector.hpp>
 #include <CXXR/RawVector.hpp>
+#include <CXXR/RContext.hpp>
+#include <CXXR/JMPException.hpp>
 #include <Defn.h>
 #include <Internal.h>
 #include <R_ext/RS.h>  /* for R_Calloc/R_Free */
@@ -547,7 +549,71 @@ static void R_pcre_prepare(const char *pattern, SEXP subject, bool use_UTF8,
 }
 #endif
 
-// FIXME: Protect PCRE/PCRE2 data via contexts (as well as other data).
+/* The compiled pattern is malloc()ed, and the matching loops of the
+   regex functions below signal warnings about untranslatable input
+   strings, which options(warn = 2) turns into errors (gsub() and
+   regexec() raise errors there themselves).  The context carries the
+   call so that getCurrentCall() still finds it for the warnings when
+   the .Internal is not reached from byte code. */
+struct regex_cleanup_info {
+    regex_cleanup_info(bool fixed_opt_, bool perl_opt_, regex_t *reg_,
+		       const unsigned char *tables_
+#ifdef HAVE_PCRE2
+		       , pcre2_code *re_, pcre2_match_data *mdata_,
+		       pcre2_match_context *mcontext_
+#else
+		       , pcre *re_pcre_, pcre_extra *re_pe_, int *ovector_
+#endif
+		       )
+	: fixed_opt(fixed_opt_), perl_opt(perl_opt_), reg(reg_),
+	  tables(tables_)
+#ifdef HAVE_PCRE2
+	  , re(re_), mdata(mdata_), mcontext(mcontext_)
+#else
+	  , re_pcre(re_pcre_), re_pe(re_pe_), ovector(ovector_)
+#endif
+	{}
+
+    bool fixed_opt, perl_opt;
+    regex_t *reg;
+    const unsigned char *tables;
+#ifdef HAVE_PCRE2
+    pcre2_code *re;
+    pcre2_match_data *mdata;
+    pcre2_match_context *mcontext;
+#else
+    pcre *re_pcre;
+    pcre_extra *re_pe;
+    int *ovector;
+#endif
+};
+
+static void regex_cleanup(void *data)
+{
+    regex_cleanup_info *ci = (regex_cleanup_info *) data;
+
+    if (ci->fixed_opt)
+	return;
+    if (ci->perl_opt) {
+#ifdef HAVE_PCRE2
+	pcre2_match_data_free(ci->mdata);
+	pcre2_code_free(ci->re);
+	pcre2_match_context_free(ci->mcontext);
+	if (ci->tables)
+	    /* new PCRE2 will have pcre2_maketables_free() */
+	    free((void *) ci->tables);
+#else
+	if (ci->re_pe)
+	    pcre_free_study(ci->re_pe);
+	pcre_free(ci->re_pcre);
+	pcre_free((void *) ci->tables);
+	free(ci->ovector);
+#endif
+    } else {
+	tre_regfree(ci->reg);
+    }
+}
+
 // FIXME: Do not rebuild locale tables repeatedly.
 // FIXME: There is no documented way to free locale tables with PCRE2.
 //        Using free() would not work on Windows if PCRE2 is dynamically
@@ -840,6 +906,17 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 	    R_pcre_prepare(split, x, use_UTF8, false, true, &tables, &re_pcre,
 	                 &re_pe);
 #endif
+#ifdef HAVE_PCRE2
+	    regex_cleanup_info ci(false, true, NULL, tables, re, mdata,
+				  mcontext);
+#else
+	    regex_cleanup_info ci(false, true, NULL, tables, re_pcre, re_pe,
+				  NULL);
+#endif
+	    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+			 R_NilValue, R_NilValue);
+	    bool cleanup_done = false;
+	    try {
 	    vmax2 = vmaxget();
 	    for (i = itok; i < len; i += tlen) {
 		SEXP t;
@@ -947,14 +1024,19 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		vmaxset(vmax2);
 	    }
-#ifdef HAVE_PCRE2
-	    pcre2_match_data_free(mdata);
-	    pcre2_code_free(re);
-	    pcre2_match_context_free(mcontext);
-#else
-	    if(re_pe) pcre_free_study(re_pe);
-	    pcre_free(re_pcre);
-#endif
+	    /* The tables are released after the token loop. */
+	    ci.tables = NULL;
+	    }
+	    catch (JMPException &e) {
+		regex_cleanup(&ci);
+		tables = NULL;
+		if (e.context() != &cntxt)
+		    throw;
+		cleanup_done = true;
+	    }
+	    endcontext(&cntxt);
+	    if (!cleanup_done)
+		regex_cleanup(&ci);
 	} else if (!useBytes && use_UTF8) { /* ERE in wchar_t */
 	    regex_t reg;
 	    regmatch_t regmatch[1];
@@ -974,6 +1056,11 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		error(_("'split' string %lld is invalid"), (long long)itok+1);
 	    if ((rc = tre_regwcomp(&reg, wsplit, cflags)))
 		reg_report(rc, &reg, translateChar(STRING_ELT(tok, itok)));
+	    regex_cleanup_info ci(false, false, &reg, NULL, NULL, NULL, NULL);
+	    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+			 R_NilValue, R_NilValue);
+	    bool cleanup_done = false;
+	    try {
 	    bool ascii_split = IS_ASCII(STRING_ELT(tok, itok));
 
 	    vmax2 = vmaxget();
@@ -1033,7 +1120,16 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 				                   (ascii_split && ascii_xi)));
 		vmaxset(vmax2);
 	    }
-	    tre_regfree(&reg);
+	    }
+	    catch (JMPException &e) {
+		regex_cleanup(&ci);
+		if (e.context() != &cntxt)
+		    throw;
+		cleanup_done = true;
+	    }
+	    endcontext(&cntxt);
+	    if (!cleanup_done)
+		regex_cleanup(&ci);
 	} else { /* ERE in normal chars -- single byte */
 	         /* previously used also with MBCS */
 	    regex_t reg;
@@ -1063,6 +1159,12 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 
 	    if(rc) reg_report(rc, &reg, split);
 
+	    regex_cleanup_info ci(false, false, &reg, NULL, NULL, NULL, NULL);
+	    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+			 R_NilValue, R_NilValue);
+
+	    bool cleanup_done = false;
+	    try {
 	    vmax2 = vmaxget();
 	    for (i = itok; i < len; i += tlen) {
 		SEXP t;
@@ -1151,7 +1253,16 @@ attribute_hidden SEXP do_strsplit(SEXP call, SEXP op, SEXP args, SEXP env)
 		}
 		vmaxset(vmax2);
 	    }
-	    tre_regfree(&reg);
+	    }
+	    catch (JMPException &e) {
+		regex_cleanup(&ci);
+		if (e.context() != &cntxt)
+		    throw;
+		cleanup_done = true;
+	    }
+	    endcontext(&cntxt);
+	    if (!cleanup_done)
+		regex_cleanup(&ci);
 	}
 	vmaxset(vmax);
     }
@@ -1393,6 +1504,18 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (rc) reg_report(rc, &reg, spat);
     }
 
+#ifdef HAVE_PCRE2
+    regex_cleanup_info ci(fixed_opt, perl_opt, &reg, tables, re, mdata,
+			  mcontext);
+#else
+    regex_cleanup_info ci(fixed_opt, perl_opt, &reg, tables, re_pcre, re_pe,
+			  NULL);
+#endif
+    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
+
+    bool cleanup_done = false;
+    try {
     ind = LogicalVector::create(n);
     vmax = vmaxget();
     for (i = 0 ; i < n ; i++) {
@@ -1462,23 +1585,16 @@ attribute_hidden SEXP do_grep(SEXP call, SEXP op, SEXP args, SEXP env)
 	vmaxset(vmax);
 	if (invert ^ LOGICAL(ind)[i]) nmatches++;
     }
-
-    if (fixed_opt);
-    else if (perl_opt) {
-#ifdef HAVE_PCRE2
-	pcre2_match_data_free(mdata);
-	pcre2_code_free(re);
-	pcre2_match_context_free(mcontext);
-	if (tables)
-	    /* new PCRE2 will have pcre2_maketables_free() */
-	    free((void *)tables);
-#else
-	if (re_pe) pcre_free_study(re_pe);
-	pcre_free(re_pcre);
-	pcre_free((unsigned char *) tables);
-#endif
-    } else
-	tre_regfree(&reg);
+    }
+    catch (JMPException &e) {
+	regex_cleanup(&ci);
+	if (e.context() != &cntxt)
+	    throw;
+	cleanup_done = true;
+    }
+    endcontext(&cntxt);
+    if (!cleanup_done)
+	regex_cleanup(&ci);
 
     if (PRIMVAL(op)) {/* grepl case */
 	return ind;
@@ -2166,8 +2282,9 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
     if (STRING_ELT(pat, 0) == NA_STRING) {
 	ans = StringVector::create(n);
 	for (i = 0; i < n; i++)  SET_STRING_ELT(ans, i, NA_STRING);
-
-	goto exit_gsub;
+	SHALLOW_DUPLICATE_ATTRIB(ans, text);
+	/* This also copied the class, if any */
+	return ans;
     }
     haveBytesInput = (have_bytes(pat, 1) || have_bytes(rep, 1) ||
                      have_bytes(text, n));
@@ -2244,6 +2361,18 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
     }
 
+#ifdef HAVE_PCRE2
+    regex_cleanup_info ci(fixed_opt, perl_opt, &reg, tables, re, mdata,
+			  mcontext);
+#else
+    regex_cleanup_info ci(fixed_opt, perl_opt, &reg, tables, re_pcre, re_pe,
+			  NULL);
+#endif
+    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
+
+    bool cleanup_done = false;
+    try {
     ans = StringVector::create(n);
     vmax = vmaxget();
     for (i = 0 ; i < n ; i++) {
@@ -2499,24 +2628,16 @@ attribute_hidden SEXP do_gsub(SEXP call, SEXP op, SEXP args, SEXP env)
 	}
 	vmaxset(vmax);
     }
-
-    if (fixed_opt) ;
-    else if (perl_opt) {
-#ifdef HAVE_PCRE2
-	pcre2_match_data_free(mdata);
-	pcre2_code_free(re);
-	pcre2_match_context_free(mcontext);
-	if (tables)
-	    /* new PCRE2 will have pcre2_maketables_free() */
-	    free((void *)tables);
-#else
-	if (re_pe) pcre_free_study(re_pe);
-	pcre_free(re_pcre);
-	pcre_free((unsigned char *) tables);
-#endif
-    } else tre_regfree(&reg);
-
-  exit_gsub: 
+    }
+    catch (JMPException &e) {
+	regex_cleanup(&ci);
+	if (e.context() != &cntxt)
+	    throw;
+	cleanup_done = true;
+    }
+    endcontext(&cntxt);
+    if (!cleanup_done)
+	regex_cleanup(&ci);
     SHALLOW_DUPLICATE_ATTRIB(ans, text);
     /* This also copied the class, if any */
 
@@ -3080,6 +3201,18 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	if (rc) reg_report(rc, &reg, spat);
     }
 
+#ifdef HAVE_PCRE2
+    regex_cleanup_info ci(fixed_opt, perl_opt, &reg, tables, re, mdata,
+			  mcontext);
+#else
+    regex_cleanup_info ci(fixed_opt, perl_opt, &reg, tables, re_pcre, re_pe,
+			  ovector);
+#endif
+    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
+
+    bool cleanup_done = false;
+    try {
     if (PRIMVAL(op) == 0) { /* regexpr */
 	GCStackRoot<IntVector> matchlen;
 	GCStackRoot<> capture_start, capturelen;
@@ -3264,24 +3397,16 @@ attribute_hidden SEXP do_regexpr(SEXP call, SEXP op, SEXP args, SEXP env)
 	    vmaxset(vmax);
 	}
     }
-
-    if (fixed_opt) ;
-    else if (perl_opt) {
-#ifdef HAVE_PCRE2
-	pcre2_match_data_free(mdata);
-	pcre2_code_free(re);
-	pcre2_match_context_free(mcontext);
-	if (tables)
-	    /* new PCRE2 will have pcre2_maketables_free() */
-	    free((void *)tables);
-#else
-	if (re_pe) pcre_free_study(re_pe);
-	pcre_free(re_pcre);
-	pcre_free((void *)tables);
-	free(ovector);
-#endif
-    } else
-	tre_regfree(&reg);
+    }
+    catch (JMPException &e) {
+	regex_cleanup(&ci);
+	if (e.context() != &cntxt)
+	    throw;
+	cleanup_done = true;
+    }
+    endcontext(&cntxt);
+    if (!cleanup_done)
+	regex_cleanup(&ci);
 
     return ans;
 }
@@ -3370,9 +3495,16 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	error(_("regcomp error: '%s'"), errbuf);
     }
 
+    regex_cleanup_info ci(false, false, &reg, NULL, NULL, NULL, NULL);
+    RCNTXT cntxt(CTXT_CCODE, call, R_BaseEnv, R_BaseEnv,
+		 R_NilValue, R_NilValue);
+
+    bool cleanup_done = false;
+    try {
     nmatch = reg.re_nsub + 1;
 
-    pmatch = (regmatch_t *) malloc(nmatch * sizeof(regmatch_t));
+    /* R_alloc()ed so that it is released on an error unwind as well */
+    pmatch = (regmatch_t *) R_alloc(nmatch, sizeof(regmatch_t));
 
     ans = ListVector::create(n);
 
@@ -3436,10 +3568,16 @@ attribute_hidden SEXP do_regexec(SEXP call, SEXP op, SEXP args, SEXP env)
 	    }
 	}
     }
-
-    free(pmatch);
-
-    tre_regfree(&reg);
+    }
+    catch (JMPException &e) {
+	regex_cleanup(&ci);
+	if (e.context() != &cntxt)
+	    throw;
+	cleanup_done = true;
+    }
+    endcontext(&cntxt);
+    if (!cleanup_done)
+	regex_cleanup(&ci);
 
     return ans;
 }
