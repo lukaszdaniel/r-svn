@@ -4524,8 +4524,8 @@ static void mbcsToSbcs(const char *in, char *out, const char *encoding,
 	    int clen = utf8clen(*i_buf);
 	    wchar_t wc;
 	    int res =
-		(int) utf8toucs(&wc, i_buf); // gives -1 for a conversion error
-	    if (res != -1) {
+		(int) utf8toucs(&wc, i_buf); // negative for a conversion error
+	    if (res > 0) {
 		R_wchar_t ucs = wc;
 		R_CheckStack2(clen + 1);
 	    std::unique_ptr<char[]> tmp = std::make_unique<char[]>(clen + 1);
@@ -5801,6 +5801,7 @@ static SEXP addPattern(SEXP pattern, PDFDesc *pd)
     return ref;
 }
 
+#if 0
 static int countPatterns(PDFDesc *pd) 
 {
     int count = 0;
@@ -5812,6 +5813,7 @@ static int countPatterns(PDFDesc *pd)
     }
     return count;
 }
+#endif
 
 /***********************************************************************
  * Stuff for (clipping) paths
@@ -7867,7 +7869,7 @@ static int PDFwriteResourceDictionary(int objOffset, bool endpage,
 static void PDF_endfile(PDFDesc *pd)
 {
     int startxref, tempnobj, nfonts, cidnfonts, firstencobj;
-    int nraster, nmask, npattern;
+    int nraster, nmask, ndefn;
 
     /* object 3 lists all the pages */
 
@@ -7883,13 +7885,13 @@ static void PDF_endfile(PDFDesc *pd)
 
     /* Object 4 is the standard resources dict for each page */
 
-    /* Count how many images and masks and patterns */
+    /* Count how many images and masks and definitions */
     nraster = pd->numRasters;
     nmask = pd->numMasks;
-    npattern = countPatterns(pd);
+    ndefn = pd->numDefns;
 
-    if(pd->nobjs + nraster + nmask + npattern + 500 >= pd->max_nobjs) {
-	int new_ =  pd->nobjs + nraster + nmask + npattern + 500;
+    if(pd->nobjs + nraster + nmask + ndefn + 500 >= pd->max_nobjs) {
+	int new_ =  pd->nobjs + nraster + nmask + ndefn + 500;
 	void *tmp = realloc(pd->pos, new_ * sizeof(int));
 	if(!tmp)
 	    error("%s", _("unable to increase object limit: please shutdown the pdf device"));
