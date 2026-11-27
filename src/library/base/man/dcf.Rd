@@ -1,6 +1,6 @@
 % File src/library/base/man/dcf.Rd
 % Part of the R package, https://www.R-project.org
-% Copyright 1995-2017 R Core Team
+% Copyright 1995-2026 R Core Team
 % Distributed under GPL 2 or later
 
 \name{dcf}
@@ -9,7 +9,7 @@
 \alias{write.dcf}
 \description{
   Reads or writes an \R object from/to a file in Debian Control File
-  format.
+  (\acronym{DCF}) format.
 }
 \usage{
 read.dcf(file, fields = NULL, all = FALSE, keep.white = NULL)
@@ -59,8 +59,10 @@ write.dcf(x, file = "", append = FALSE, useBytes = FALSE,
     \item A database consists of one or more records, each with one or
     more named fields.  Not every record must contain each field.
     Fields may appear more than once in a record.
-    \item Regular lines start with a non-whitespace character.
-    \item Regular lines are of form \code{tag:value}, i.e., have a name
+    \item Lines starting with \samp{#} are comment lines and are ignored.
+    \item Regular lines start with a non-whitespace character
+    other than \samp{#}.
+    \item Regular lines are of the form \samp{tag:value}, i.e., have a name
     tag and a value for the field, separated by \samp{:} (only the first
     \samp{:} counts).  The value can be empty (i.e., whitespace only).
     \item Lines starting with whitespace are continuation lines (to the
@@ -74,16 +76,12 @@ write.dcf(x, file = "", append = FALSE, useBytes = FALSE,
     length limit was approximately 8191 bytes per line.
   }
 
-  DCF files are required to be encoded in UTF-8.  \code{read.dcf}
-  therefore returns values in UTF-8 (non-ASCII values being marked as
-  such), and \code{write.dcf} converts values with a declared encoding
-  (such as \code{"latin1"}) to UTF-8 and always writes UTF-8, regardless
-  of the session's locale.  Any bytes which are not valid UTF-8 are not
-  dropped but preserved visually by escaping them as \samp{<xx>} (where
-  \code{xx} is the byte in hexadecimal), as done by
-  \code{\link{iconv}(sub = "byte")}.  As a consequence, the
-  \samp{Encoding} field of a \file{DESCRIPTION} file is no longer used to
-  re-encode the other fields.
+  As from \R 4.7.0, DCF files are required to be encoded in UTF-8.
+  \code{read.dcf} therefore returns values in UTF-8 (non-ASCII values
+  being marked as such) and \code{write.dcf} converts values to UTF-8,
+  regardless of the session's locale.  Any bytes which are not valid
+  UTF-8 are preserved using hex codes (\samp{<xx>}), as done by
+  \code{\link{iconv}(sub = "byte")}.
 
   \code{write.dcf} does not write \code{NA} fields.
 }

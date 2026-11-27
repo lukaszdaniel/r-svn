@@ -8,18 +8,15 @@
 \section{\Rlogo Changes in R-devel}{
   \subsection{Significant User-Visible Changes}{
     \itemize{
-      \item \code{read.dcf()} and \code{write.dcf()} now treat \abbr{DCF}
-      files (such as package \file{DESCRIPTION} and repository
-      \file{PACKAGES} files) as \abbr{UTF-8}, as required by the Debian
-      control file format.  \code{read.dcf()} returns values in
-      \abbr{UTF-8} and \code{write.dcf()} always writes \abbr{UTF-8}
-      regardless of the session locale; bytes which are not valid
-      \abbr{UTF-8} are preserved by escaping them as \samp{<xx>} rather
-      than being re-encoded via a \samp{Encoding} field.  As a
-      consequence, the \code{useBytes} argument of \code{write.dcf()} is
-      ignored, and non-\abbr{UTF-8} \file{DESCRIPTION} files (e.g. those
-      declaring \samp{Encoding: latin1}) are no longer re-encoded on
-      reading.
+      \item \acronym{DCF} files such as package \file{DESCRIPTION} and
+      repository \file{PACKAGES} files are now treated as \abbr{UTF-8},
+      as required by the Debian control file format.  \code{read.dcf()}
+      and \code{write.dcf()} substitute bytes which are not valid
+      \abbr{UTF-8} by hex codes (\samp{<xx>}).  The \code{useBytes}
+      argument of \code{write.dcf()} is ignored.  An \samp{Encoding}
+      field in the \file{DESCRIPTION} file is no longer used to
+      re-encode the other fields when installing the package.
+      %(\code{packageDescription()} currently still re-encodes.)
 
       \item Fixing \code{rbinom()}, see \PR{19049} below, to reproduce
       old results needs \code{RNGkind()} to get a new \code{binom.kind}
@@ -202,7 +199,7 @@
 
       \item \command{R CMD check} now \samp{NOTE}s packages listed more
       than once in a dependency field other than to give a version
-      range, e.g., \samp{Imports: utils, stats, utils}.
+      range, e.g., \samp{Imports: utils, stats, utils} (\PR{19256}).
     }
   }
 
@@ -236,6 +233,15 @@
       they are effectively unused.\cr
       \cr
       For details, see \code{deprecated?methods}.
+
+      \item Passing a name (rather than a character string) as
+      \code{component} to \code{model.extract()}, as in
+      \code{model.extract(\var{mf}, weights)}, is deprecated.  The warning
+      recommends \code{model.response()}, \code{model.weights()} or
+      \code{model.offset()} for those three components;
+      \code{model.extract(\var{mf}, "weights")} now also uses
+      \code{model.weights()}.
+      (\PR{19366}, with analysis and patch by \I{Ashish Tiwari})
     }
   }
 
@@ -588,7 +594,7 @@
       for the report.
 
       \item More explanation and examples on row/column creation via
-      subassignments such as \code{<data.frame>$newcol[i] <- val},
+      \I{subassignments} such as \code{<data.frame>$newcol[i] <- val},
       along the report and discussions in \PR{18364}, notably by \I{Gabe
 	Becker} and \I{Suharto Anggono}.
 
@@ -610,6 +616,11 @@
       \code{c(0x1p-1024, 0x1p-1074)} are correctly parsed now (instead of
       \dQuote{underflowing} to \code{0}). Thanks to \I{Kevin Ushey}'s
       report and patch in \PR{19342}.
+
+      \item \code{strptime(x, format)} again sets a missing month also at
+      the beginning of year, when possible, e.g., from \code{"\%Y \%U \%w"}.
+      In such cases, it no longer warns when inferring non-\code{NA}
+      date-times.
     }
   }
 }
@@ -637,7 +648,7 @@
   \subsection{Bug Fixes}{
     \itemize{
       \item \code{unzip(., unzip = "internal")} no longer leaks the zip
-      handle on error, thanks to \I{Kevin Ushey}, see \PR{19233}
+      handle on error, thanks to \I{Kevin Ushey}, see \PR{19233}.
 
       \item The internal method of \code{untar()} now checks the whole path
       of every member, so that a final component of \code{".."} or \code{"~"}
@@ -666,6 +677,10 @@
       and \code{/./}) also when they were percent-encoded.  On Windows,
       converts \code{\\} to the \code{/} path separator.  Paths that
       include \code{\%00} are rejected.
+
+      \item \code{[dpq]wilcox(*, m, n)} no longer re-use hashed values when
+      (vector) \code{m} or \code{n} is decreasing, fixing \PR{19375}
+      reported with patch by \I{Tasuku Kobayashi}.
     }
   }
 }
@@ -950,7 +965,7 @@
 
       \item \code{read.dcf()} now recognizes lines starting with
       \samp{#} as comment lines.  By \I{Dirk Eddelbuettel}, \I{Laurent
-      Gatto} and \I{Hugo Gruson}.
+      Gatto} and \I{Hugo Gruson} (\PR{18903}).
 
       \item \code{tcltk::tclVersion()} now only optionally includes the
       \sQuote{patch level}, as Tcl full versions can be of the form

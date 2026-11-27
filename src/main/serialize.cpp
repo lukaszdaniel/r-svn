@@ -950,6 +950,7 @@ static void OutStringVec(R_outpstream_t stream, SEXP s, HashTable *ref_table)
 
 #include <rpc/types.h>
 #include <rpc/xdr.h>
+// rpc/types.h #defines FALSE to 0.  CXXR needs to stop that:
 #undef TRUE
 #undef FALSE
 #define CHUNK_SIZE 8096
