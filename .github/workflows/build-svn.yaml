@@ -56,7 +56,7 @@ jobs:
 
     - name: Print failed tests
       if: failure()
-      run: tail -n100 tests/*.fail tests/Examples/*.fail
+      run: tail -n100 tests/*.fail tests/Examples/*.fail tests/lattice.Rcheck/00check.log
 
   linux:
     name: Linux
